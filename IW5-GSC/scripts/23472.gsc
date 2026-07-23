@@ -7,26 +7,26 @@ init() {
   precacherumble("stinger_lock_rumble");
 
   foreach(var_1 in level.players) {}
-  var_1 _id_5BA2();
+  var_1 clearirtarget();
 
   foreach(var_1 in level.players) {
-    var_1 thread _id_5BA7();
-    var_1 thread _id_5BA8();
+    var_1 thread stingerfirednotify();
+    var_1 thread stingertoggleloop();
   }
 }
 
-_id_5BA2() {
-  if(!isDefined(self._id_5BA3)) {
-    self._id_5BA3 = spawnStruct();
+clearirtarget() {
+  if(!isDefined(self.stinger)) {
+    self.stinger = spawnStruct();
   }
-  self._id_5BA3.stingerlockstarttime = 0;
-  self._id_5BA3._id_5BA4 = 0;
-  self._id_5BA3._id_5BA5 = 0;
-  self._id_5BA3.stingertarget = undefined;
+  self.stinger.stingerlockstarttime = 0;
+  self.stinger.stingerlockstarted = 0;
+  self.stinger.stingerlockfinalized = 0;
+  self.stinger.stingertarget = undefined;
   self notify("stinger_irt_cleartarget");
   self notify("stop_lockon_sound");
   self notify("stop_locked_sound");
-  self._id_5BA3._id_5BA6 = undefined;
+  self.stinger.stingerlocksound = undefined;
   self stoprumble("stinger_lock_rumble");
   self weaponlockfree();
   self weaponlocktargettooclose(0);
@@ -35,7 +35,7 @@ _id_5BA2() {
   self stoplocalsound("javelin_clu_aquiring_lock");
 }
 
-_id_5BA7() {
+stingerfirednotify() {
   for(;;) {
     self waittill("weapon_fired");
     var_0 = self getcurrentweapon();
@@ -47,24 +47,24 @@ _id_5BA7() {
   }
 }
 
-_id_5BA8() {
+stingertoggleloop() {
   self endon("death");
 
   for(;;) {
-    while(!_id_5BAD()) {
+    while(!playerstingerads()) {
       wait 0.05;
     }
-    thread _id_5BA9();
+    thread stingerirtloop();
 
-    while(_id_5BAD()) {
+    while(playerstingerads()) {
       wait 0.05;
     }
     self notify("stinger_IRT_off");
-    _id_5BA2();
+    clearirtarget();
   }
 }
 
-_id_5BA9() {
+stingerirtloop() {
   self endon("death");
   self endon("stinger_IRT_off");
   var_0 = 1150;
@@ -72,53 +72,53 @@ _id_5BA9() {
   for(;;) {
     wait 0.05;
 
-    if(self._id_5BA3._id_5BA5) {
-      if(!_id_55A1(self._id_5BA3.stingertarget)) {
-        _id_5BA2();
+    if(self.stinger.stingerlockfinalized) {
+      if(!isstillvalidtarget(self.stinger.stingertarget)) {
+        clearirtarget();
         continue;
       }
 
-      thread _id_55A3("javelin_clu_lock", 0.75);
-      _id_5BAE(self._id_5BA3.stingertarget);
+      thread looplocallocksound("javelin_clu_lock", 0.75);
+      settargettooclose(self.stinger.stingertarget);
       continue;
     }
 
-    if(self._id_5BA3._id_5BA4) {
-      if(!_id_55A1(self._id_5BA3.stingertarget)) {
-        _id_5BA2();
+    if(self.stinger.stingerlockstarted) {
+      if(!isstillvalidtarget(self.stinger.stingertarget)) {
+        clearirtarget();
         continue;
       }
 
-      var_1 = gettime() - self._id_5BA3.stingerlockstarttime;
+      var_1 = gettime() - self.stinger.stingerlockstarttime;
 
       if(var_1 < var_0) {
         continue;
       }
       self notify("stop_lockon_sound");
-      self._id_5BA3._id_5BA5 = 1;
-      self weaponlockfinalize(self._id_5BA3.stingertarget);
-      _id_5BAE(self._id_5BA3.stingertarget);
+      self.stinger.stingerlockfinalized = 1;
+      self weaponlockfinalize(self.stinger.stingertarget);
+      settargettooclose(self.stinger.stingertarget);
       continue;
     }
 
-    var_2 = _id_5BAA();
+    var_2 = getbeststingertarget();
 
     if(!isDefined(var_2)) {
       continue;
     }
-    self._id_5BA3.stingertarget = var_2;
-    self._id_5BA3.stingerlockstarttime = gettime();
-    self._id_5BA3._id_5BA4 = 1;
+    self.stinger.stingertarget = var_2;
+    self.stinger.stingerlockstarttime = gettime();
+    self.stinger.stingerlockstarted = 1;
     thread looplocalseeksound("javelin_clu_aquiring_lock", 0.6);
   }
 }
 
-_id_5BAA() {
+getbeststingertarget() {
   var_0 = target_getarray();
   var_1 = [];
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
-    if(_id_5BAB(var_0[var_2])) {
+    if(insidestingerreticlenolock(var_0[var_2])) {
       var_1[var_1.size] = var_0[var_2];
     }
   }
@@ -133,28 +133,28 @@ _id_5BAA() {
   return var_3;
 }
 
-_id_5BAB(var_0) {
+insidestingerreticlenolock(var_0) {
   return target_isincircle(var_0, self, 65, 60);
 }
 
-_id_5BAC(var_0) {
+insidestingerreticlelocked(var_0) {
   return target_isincircle(var_0, self, 65, 75);
 }
 
-_id_55A1(var_0) {
+isstillvalidtarget(var_0) {
   if(!isDefined(var_0)) {
     return 0;
   }
   if(!target_istarget(var_0)) {
     return 0;
   }
-  if(!_id_5BAC(var_0)) {
+  if(!insidestingerreticlelocked(var_0)) {
     return 0;
   }
   return 1;
 }
 
-_id_5BAD() {
+playerstingerads() {
   var_0 = self getcurrentweapon();
 
   if(var_0 != "stinger") {
@@ -166,7 +166,7 @@ _id_5BAD() {
   return 0;
 }
 
-_id_5BAE(var_0) {
+settargettooclose(var_0) {
   var_1 = 1000;
 
   if(!isDefined(var_0)) {
@@ -175,10 +175,10 @@ _id_5BAE(var_0) {
   var_2 = distance2d(self.origin, var_0.origin);
 
   if(var_2 < var_1) {
-    self._id_5BA3._id_5BAF = 1;
+    self.stinger.targettoclose = 1;
     self weaponlocktargettooclose(1);
   } else {
-    self._id_5BA3._id_5BAF = 0;
+    self.stinger.targettoclose = 0;
     self weaponlocktargettooclose(0);
   }
 }
@@ -194,14 +194,14 @@ looplocalseeksound(var_0, var_1) {
   }
 }
 
-_id_55A3(var_0, var_1) {
+looplocallocksound(var_0, var_1) {
   self endon("stop_locked_sound");
   self endon("death");
 
-  if(isDefined(self._id_5BA3._id_5BA6)) {
+  if(isDefined(self.stinger.stingerlocksound)) {
     return;
   }
-  self._id_5BA3._id_5BA6 = 1;
+  self.stinger.stingerlocksound = 1;
 
   for(;;) {
     self playlocalsound(var_0);
@@ -214,5 +214,5 @@ _id_55A3(var_0, var_1) {
     self stoprumble("stinger_lock_rumble");
   }
 
-  self._id_5BA3._id_5BA6 = undefined;
+  self.stinger.stingerlocksound = undefined;
 }

@@ -4,25 +4,25 @@
 **************************************/
 
 main() {
-  level._id_41A5 = 1;
-  level._id_41A6 = getEnt("sea", "targetname");
-  level._id_41A7 = spawn("script_origin", level._id_41A6.origin);
-  level._id_41A7.offset = level._id_41A6.origin * -1;
-  level._id_41A7._id_41A8 = "sway2";
-  level._id_41A9 = spawn("script_origin", level._id_41A6.origin);
-  level._id_41A9.offset = level._id_41A7.offset;
-  level._id_41A6 linkTo(level._id_41A9);
-  level._id_41AA = getEnt("sea_foam", "targetname");
+  level._sea_scale = 1;
+  level.sea_model = getEnt("sea", "targetname");
+  level._sea_org = spawn("script_origin", level.sea_model.origin);
+  level._sea_org.offset = level.sea_model.origin * -1;
+  level._sea_org.sway = "sway2";
+  level._sea_link = spawn("script_origin", level.sea_model.origin);
+  level._sea_link.offset = level._sea_org.offset;
+  level.sea_model linkTo(level._sea_link);
+  level.sea_foam = getEnt("sea_foam", "targetname");
 
-  if(isDefined(level._id_41AA)) {
-    level._id_41AA linkTo(level._id_41A9);
-    level._id_41AA hide();
+  if(isDefined(level.sea_foam)) {
+    level.sea_foam linkTo(level._sea_link);
+    level.sea_foam hide();
   }
 
-  level._id_41AB = getEnt("sea_black", "targetname");
+  level.sea_black = getEnt("sea_black", "targetname");
 
-  if(isDefined(level._id_41AB)) {
-    level._id_41AB linkTo(level._id_41A9);
+  if(isDefined(level.sea_black)) {
+    level.sea_black linkTo(level._sea_link);
   }
   common_scripts\utility::flag_init("_sea_waves");
   common_scripts\utility::flag_init("_sea_viewbob");
@@ -32,28 +32,28 @@ main() {
   var_0 = getEntArray("boat_sway", "script_noteworthy");
 
   if(isDefined(var_0)) {
-    common_scripts\utility::array_thread(var_0, ::_id_41B8, level._id_41A7);
+    common_scripts\utility::array_thread(var_0, ::sea_objectbob, level._sea_org);
   }
-  thread _id_41AC();
+  thread sea_logic();
   return;
 }
 
-_id_41AC() {
+sea_logic() {
   wait 0.05;
   var_0 = getmapsundirection();
   setsundirection(var_0);
-  level._id_41AD = vectortoangles(var_0);
-  level._id_41AE = level._id_41AD;
-  level._id_41A7 thread _id_41BD();
-  level._id_41A7 thread _id_41C0();
-  level._id_41A7 thread _id_41CA();
+  level.lite_settings = vectortoangles(var_0);
+  level.new_lite_settings = level.lite_settings;
+  level._sea_org thread sea_bob();
+  level._sea_org thread sea_waves();
+  level._sea_org thread sea_viewbob();
 }
 
-_id_41AF(var_0, var_1) {
+sea_objectbob_precalc(var_0, var_1) {
   self.waittime = randomfloatrange(0.5, 1);
 
-  if(isDefined(self._id_41B0)) {
-    self.scale = self._id_41B0;
+  if(isDefined(self.setscale)) {
+    self.scale = self.setscale;
   } else {
     self.scale = randomfloatrange(2, 3);
   }
@@ -62,15 +62,15 @@ _id_41AF(var_0, var_1) {
 
   switch (var_1) {
     case "sway1":
-      var_2 = self._id_41B1;
+      var_2 = self.sway1max;
       break;
     case "sway2":
-      var_2 = self._id_41B2;
+      var_2 = self.sway2max;
       break;
   }
 
-  if(self._id_41B3) {
-    var_4 = var_0._id_41B4[0] * self._id_41B5 * self.scale + var_0._id_41B4[2] * self._id_41B6 * self.scale;
+  if(self.axial) {
+    var_4 = var_0.rotation[0] * self.pratio * self.scale + var_0.rotation[2] * self.rratio * self.scale;
 
     if(var_2 < abs(var_4)) {
       if(var_4 < 1) {
@@ -81,13 +81,13 @@ _id_41AF(var_0, var_1) {
     } else {
       var_3 = var_4;
     }
-    self._id_41B7 = (self.angles[0], self.angles[1], var_3);
+    self.ang = (self.angles[0], self.angles[1], var_3);
   } else {
-    self._id_41B7 = var_0._id_41B4 * self.scale;
+    self.ang = var_0.rotation * self.scale;
   }
 }
 
-_id_41B8(var_0) {
+sea_objectbob(var_0) {
   if(isDefined(self.targetname)) {
     var_1 = getEntArray(self.targetname, "target");
 
@@ -100,11 +100,11 @@ _id_41B8(var_0) {
   var_4 = var_3[0].origin;
   var_5 = undefined;
   var_6 = spawn("script_origin", (0, 0, 0));
-  var_6._id_41B3 = 0;
+  var_6.axial = 0;
 
   if(isDefined(var_3[1])) {
     var_5 = var_3[1].origin;
-    var_6._id_41B3 = 1;
+    var_6.axial = 1;
   } else {
     var_7 = anglestoup(var_3[0].angles);
     var_7 = var_7 * 10;
@@ -113,27 +113,27 @@ _id_41B8(var_0) {
 
   var_6.origin = var_4;
   var_6.angles = vectortoangles(var_5 - var_4);
-  var_6._id_41B5 = 1;
-  var_6._id_41B6 = 1;
-  var_6._id_41B1 = 100;
-  var_6._id_41B2 = 100;
-  var_6._id_41B0 = undefined;
+  var_6.pratio = 1;
+  var_6.rratio = 1;
+  var_6.sway1max = 100;
+  var_6.sway2max = 100;
+  var_6.setscale = undefined;
 
-  if(isDefined(var_3[0]._id_164F)) {
-    var_8 = strtok(var_3[0]._id_164F, ":;, ");
+  if(isDefined(var_3[0].script_parameters)) {
+    var_8 = strtok(var_3[0].script_parameters, ":;, ");
 
     for(var_2 = 0; var_2 < var_8.size; var_2++) {
       switch (var_8[var_2]) {
         case "axial":
-          var_6._id_41B3 = 1;
+          var_6.axial = 1;
           break;
         case "sway1":
           var_2++;
-          var_6._id_41B1 = int(var_8[var_2]);
+          var_6.sway1max = int(var_8[var_2]);
           break;
         case "sway2":
           var_2++;
-          var_6._id_41B2 = int(var_8[var_2]);
+          var_6.sway2max = int(var_8[var_2]);
           break;
         case "setscale":
           var_2++;
@@ -143,16 +143,16 @@ _id_41B8(var_0) {
             var_9 = int(var_8[var_2]);
             var_2++;
             var_10 = int(var_8[var_2]);
-            var_6._id_41B0 = randomfloatrange(var_9, var_10);
+            var_6.setscale = randomfloatrange(var_9, var_10);
           } else {
-            var_6._id_41B0 = int(var_8[var_2]);
+            var_6.setscale = int(var_8[var_2]);
           }
           break;
       }
     }
   }
 
-  if(var_6._id_41B3) {
+  if(var_6.axial) {
     var_11 = undefined;
     var_12 = (0, 360, 0);
 
@@ -161,186 +161,186 @@ _id_41B8(var_0) {
     } else {
       var_11 = vectortoangles(var_5 - var_4);
     }
-    var_6._id_41B6 = vectordot(anglestoright(var_11), anglestoright(var_12));
-    var_6._id_41B5 = vectordot(anglestoright(var_11), anglesToForward(var_12));
+    var_6.rratio = vectordot(anglestoright(var_11), anglestoright(var_12));
+    var_6.pratio = vectordot(anglestoright(var_11), anglesToForward(var_12));
   }
 
-  self._id_41B9 = var_6;
+  self.link = var_6;
   self notify("got_link");
 
   for(var_2 = 0; var_2 < var_3.size; var_2++) {
-    var_3[var_2] thread _id_41BC(var_6, var_0);
+    var_3[var_2] thread sea_objectbob_findparent(var_6, var_0);
   }
   wait 0.05;
   self linkTo(var_6);
 
-  if(isDefined(self._id_164F)) {}
+  if(isDefined(self.script_parameters)) {}
 
-  thread _id_41BA(var_0, var_6);
+  thread sea_objectbob_logic(var_0, var_6);
 }
 
-_id_41BA(var_0, var_1) {
+sea_objectbob_logic(var_0, var_1) {
   for(;;) {
-    if(var_0._id_41A8 == "sway2") {
+    if(var_0.sway == "sway2") {
       var_0 waittill("sway1");
     }
-    var_1 _id_41AF(var_0, "sway1");
+    var_1 sea_objectbob_precalc(var_0, "sway1");
     var_1 notify("precalcdone1");
 
     if(!isDefined(var_1.parent)) {
       wait(var_1.waittime);
     }
-    var_1 rotateTo(var_1._id_41B7, var_0.time, var_0.time * 0.5, var_0.time * 0.5);
+    var_1 rotateTo(var_1.ang, var_0.time, var_0.time * 0.5, var_0.time * 0.5);
 
-    if(var_0._id_41A8 == "sway1") {
+    if(var_0.sway == "sway1") {
       var_0 waittill("sway2");
     }
-    var_1 _id_41AF(var_0, "sway2");
+    var_1 sea_objectbob_precalc(var_0, "sway2");
     var_1 notify("precalcdone2");
 
     if(!isDefined(var_1.parent)) {
       wait(var_1.waittime);
     }
-    var_1 rotateTo(var_1._id_41B7, var_0.time, var_0.time * 0.5, var_0.time * 0.5);
+    var_1 rotateTo(var_1.ang, var_0.time, var_0.time * 0.5, var_0.time * 0.5);
   }
 }
 
-_id_41BB(var_0) {
+sea_objectbob_follow(var_0) {
   for(;;) {
     self moveTo(var_0.origin, 0.1);
     wait 0.1;
   }
 }
 
-_id_41BC(var_0, var_1) {
+sea_objectbob_findparent(var_0, var_1) {
   if(!isDefined(self.target)) {
     return;
   }
   var_0.parent = getEnt(self.target, "targetname");
 
-  if(!isDefined(var_0.parent._id_41B9)) {
+  if(!isDefined(var_0.parent.link)) {
     var_0.parent waittill("got_link");
   }
-  var_2 = var_0.parent._id_41B9;
+  var_2 = var_0.parent.link;
   var_3 = var_0.origin;
   var_4 = spawn("script_origin", var_2.origin);
   var_4.angles = var_2.angles;
   var_5 = spawn("script_origin", var_0.origin);
   var_5.angles = var_0.angles;
   var_5 linkTo(var_4);
-  var_0 thread _id_41BB(var_5);
+  var_0 thread sea_objectbob_follow(var_5);
 
   for(;;) {
     var_2 waittill("precalcdone1");
     wait(var_2.waittime - 0.05);
-    var_4 rotateTo(var_2._id_41B7, var_1.time, var_1.time * 0.5, var_1.time * 0.5);
+    var_4 rotateTo(var_2.ang, var_1.time, var_1.time * 0.5, var_1.time * 0.5);
     var_2 waittill("precalcdone2");
     wait(var_2.waittime - 0.05);
-    var_4 rotateTo(var_2._id_41B7, var_1.time, var_1.time * 0.5, var_1.time * 0.5);
+    var_4 rotateTo(var_2.ang, var_1.time, var_1.time * 0.5, var_1.time * 0.5);
   }
 }
 
-_id_41BD() {
+sea_bob() {
   self endon("manual_override");
   common_scripts\utility::flag_wait("_sea_bob");
-  thread _id_41BF();
+  thread sea_bob_reset();
   wait 0.05;
 
   for(;;) {
     var_0 = 0;
     var_1 = 0;
-    var_2 = randomfloatrange(2, 4) * level._id_41A5;
+    var_2 = randomfloatrange(2, 4) * level._sea_scale;
     self.time = randomfloatrange(3, 4);
-    self._id_41B4 = (var_1, var_0, var_2);
-    self._id_41A8 = "sway1";
+    self.rotation = (var_1, var_0, var_2);
+    self.sway = "sway1";
     self notify("sway1");
 
     if(common_scripts\utility::flag("_sea_bob")) {
-      level._id_41A9 rotateTo(self._id_41B4, self.time, self.time * 0.5, self.time * 0.5);
+      level._sea_link rotateTo(self.rotation, self.time, self.time * 0.5, self.time * 0.5);
     }
-    self rotateTo(self._id_41B4, self.time, self.time * 0.5, self.time * 0.5);
+    self rotateTo(self.rotation, self.time, self.time * 0.5, self.time * 0.5);
     wait(self.time);
-    self._id_41B4 = self._id_41B4 * -1;
-    self._id_41A8 = "sway2";
+    self.rotation = self.rotation * -1;
+    self.sway = "sway2";
     self notify("sway2");
 
     if(common_scripts\utility::flag("_sea_bob")) {
-      level._id_41A9 rotateTo(self._id_41B4, self.time, self.time * 0.5, self.time * 0.5);
+      level._sea_link rotateTo(self.rotation, self.time, self.time * 0.5, self.time * 0.5);
     }
-    self rotateTo(self._id_41B4, self.time, self.time * 0.5, self.time * 0.5);
+    self rotateTo(self.rotation, self.time, self.time * 0.5, self.time * 0.5);
     wait(self.time);
   }
 }
 
-_id_41BE() {
+sea_bob_reset_loop() {
   self endon("manual_override");
   common_scripts\utility::flag_wait("_sea_bob");
-  thread _id_41BF();
+  thread sea_bob_reset();
 }
 
-_id_41BF() {
+sea_bob_reset() {
   self endon("manual_override");
   level waittill("_sea_bob");
-  thread _id_41BE();
+  thread sea_bob_reset_loop();
   level endon("_sea_bob");
   var_0 = 1.5;
   var_1 = (0, 0, 0);
-  level._id_41A9 rotateTo(var_1, var_0, var_0 * 0.5, var_0 * 0.5);
+  level._sea_link rotateTo(var_1, var_0, var_0 * 0.5, var_0 * 0.5);
   wait(var_0);
   wait 0.05;
-  level._id_41AE = level._id_41AD;
-  level._id_41A9.angles = (0, 0, 0);
+  level.new_lite_settings = level.lite_settings;
+  level._sea_link.angles = (0, 0, 0);
 }
 
-_id_41C0() {
-  var_0 = _id_41C7();
+sea_waves() {
+  var_0 = sea_waves_setup();
 
   if(!isDefined(var_0)) {
     return;
   }
-  self._id_41C1 = [];
+  self.oldwaves = [];
 
   for(;;) {
     common_scripts\utility::flag_wait("_sea_waves");
     self waittill("sway1");
-    thread _id_41C2(var_0, "right");
+    thread sea_waves_fx(var_0, "right");
     common_scripts\utility::flag_wait("_sea_waves");
     self waittill("sway2");
-    thread _id_41C2(var_0, "left");
+    thread sea_waves_fx(var_0, "left");
   }
 }
 
-_id_41C2(var_0, var_1) {
+sea_waves_fx(var_0, var_1) {
   wait(self.time * 0.5);
   var_2 = 2;
-  var_3 = common_scripts\utility::random(_id_41C4(var_0[var_1], var_2));
+  var_3 = common_scripts\utility::random(sea_closestwavearray(var_0[var_1], var_2));
 
-  if(!isDefined(self._id_41C1[var_1])) {
-    self._id_41C1[var_1] = var_3;
+  if(!isDefined(self.oldwaves[var_1])) {
+    self.oldwaves[var_1] = var_3;
   }
-  while(self._id_41C1[var_1] == var_3) {
+  while(self.oldwaves[var_1] == var_3) {
     wait 0.05;
-    var_3 = common_scripts\utility::random(_id_41C4(var_0[var_1], var_2));
+    var_3 = common_scripts\utility::random(sea_closestwavearray(var_0[var_1], var_2));
   }
 
-  self._id_41C1[var_1] = var_3;
-  var_3 thread _id_41C3();
+  self.oldwaves[var_1] = var_3;
+  var_3 thread sea_waves_fx2();
   thread common_scripts\utility::play_sound_in_space("elm_wave_crash_ext", var_3.origin);
 }
 
-_id_41C3() {
+sea_waves_fx2() {
   wait(randomfloat(0.15));
   common_scripts\utility::exploder(self.exploder.v["exploder"]);
 }
 
-_id_41C4(var_0, var_1) {
+sea_closestwavearray(var_0, var_1) {
   var_2 = [];
 
   for(var_3 = 0; var_3 < var_0.size; var_3++) {
-    var_0[var_3]._id_41C5 = distancesquared(var_0[var_3].origin, level.player.origin);
+    var_0[var_3]._sea_dist = distancesquared(var_0[var_3].origin, level.player.origin);
   }
   for(var_3 = 0; var_3 < var_0.size; var_3++) {
-    var_2 = _id_41C6(var_2, var_0[var_3]);
+    var_2 = sea_closestwavelogic(var_2, var_0[var_3]);
   }
   var_4 = [];
 
@@ -350,26 +350,26 @@ _id_41C4(var_0, var_1) {
   return var_4;
 }
 
-_id_41C6(var_0, var_1) {
+sea_closestwavelogic(var_0, var_1) {
   if(!var_0.size) {
     var_0[0] = var_1;
     return var_0;
   }
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
-    if(var_0[var_2]._id_41C5 > var_1._id_41C5) {
-      var_0 = maps\_utility::_id_2673(var_0, var_1, var_2);
+    if(var_0[var_2]._sea_dist > var_1._sea_dist) {
+      var_0 = maps\_utility::array_insert(var_0, var_1, var_2);
       break;
     }
   }
 
   if(var_2 == var_0.size) {
-    var_0 = maps\_utility::_id_0BC3(var_0, var_1);
+    var_0 = maps\_utility::array_add(var_0, var_1);
   }
   return var_0;
 }
 
-_id_41C7() {
+sea_waves_setup() {
   var_0 = common_scripts\utility::getStructArray("wave_fx", "targetname");
   var_1 = common_scripts\utility::getStruct("wave_fx_center", "targetname");
 
@@ -397,13 +397,13 @@ _id_41C7() {
     var_4["left"][var_4["left"].size] = var_0[var_5];
   }
 
-  var_6 = level._id_41C8;
+  var_6 = level._waves_exploders;
 
   for(var_5 = 0; var_5 < var_6.size; var_5++) {
     var_6[var_5].origin = var_6[var_5].v["origin"];
   }
   for(var_5 = 0; var_5 < var_4["right"].size; var_5++) {
-    var_7 = maps\_utility::_id_0AE9(var_4["right"][var_5].origin, var_6, 64);
+    var_7 = maps\_utility::getclosest(var_4["right"][var_5].origin, var_6, 64);
     var_6 = common_scripts\utility::array_remove(var_6, var_7);
 
     if(isDefined(var_4["right"][var_5].angles)) {
@@ -413,7 +413,7 @@ _id_41C7() {
   }
 
   for(var_5 = 0; var_5 < var_4["left"].size; var_5++) {
-    var_7 = maps\_utility::_id_0AE9(var_4["left"][var_5].origin, var_6, 64);
+    var_7 = maps\_utility::getclosest(var_4["left"][var_5].origin, var_6, 64);
     var_6 = common_scripts\utility::array_remove(var_6, var_7);
 
     if(isDefined(var_4["left"][var_5].angles)) {
@@ -425,21 +425,21 @@ _id_41C7() {
   return var_4;
 }
 
-_id_41C9() {
+sea_litebob() {
   for(;;) {
     wait 0.2;
     var_0 = self.angles * 2;
     var_0 = (var_0[0], var_0[1], var_0[2]);
-    var_1 = level._id_41AE;
-    level._id_41AE = combineangles(var_0, level._id_41AD);
-    var_2 = level._id_41AE;
+    var_1 = level.new_lite_settings;
+    level.new_lite_settings = combineangles(var_0, level.lite_settings);
+    var_2 = level.new_lite_settings;
     var_3 = anglesToForward(var_1);
     var_4 = anglesToForward(var_2);
     lerpsundirection(var_3, var_4, 0.2);
   }
 }
 
-_id_41CA() {
+sea_viewbob() {
   for(;;) {
     common_scripts\utility::flag_wait("_sea_viewbob");
     level.player playersetgroundreferenceent(self);

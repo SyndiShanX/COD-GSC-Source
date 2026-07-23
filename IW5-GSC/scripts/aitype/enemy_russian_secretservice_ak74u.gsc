@@ -25,10 +25,10 @@ main() {
 
   switch (codescripts\character::get_random_character(2)) {
     case 0:
-      _id_5891::main();
+      character/character_fso_vest_nopacks::main();
       break;
     case 1:
-      _id_5892::main();
+      character/character_fso_vest_nopacks_alt::main();
       break;
   }
 }
@@ -38,8 +38,8 @@ spawner() {
 }
 
 precache() {
-  _id_5891::precache();
-  _id_5892::precache();
+  character/character_fso_vest_nopacks::precache();
+  character/character_fso_vest_nopacks_alt::precache();
   precacheitem("ak74u");
   precacheitem("fnfiveseven");
   precacheitem("fraggrenade");

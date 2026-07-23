@@ -3,63 +3,63 @@
  * Script: scripts\1378.gsc
 **************************************/
 
-_id_42AB() {
-  _id_42AC();
+stealth_corpse_system_main() {
+  stealth_corpse_system_init();
 }
 
-_id_42AC() {
+stealth_corpse_system_init() {
   common_scripts\utility::flag_init("_stealth_found_corpse");
-  level._id_0B6E._id_41ED._id_4250 = spawnStruct();
-  level._id_0B6E._id_41ED._id_4250._id_4295 = undefined;
-  level._id_0B6E._id_41ED._id_4250._id_42AD = [];
-  _id_42AF();
-  level._id_0B6E._id_41ED._id_4250._id_42AE = 6;
-  _id_42B3();
-  _id_42B1();
-  level._id_0B6E._id_41D0._id_4250 = spawnStruct();
+  level._stealth.logic.corpse = spawnStruct();
+  level._stealth.logic.corpse.last_pos = undefined;
+  level._stealth.logic.corpse.distances = [];
+  stealth_corpse_default_distances();
+  level._stealth.logic.corpse.corpse_height = 6;
+  stealth_corpse_default_forget_time();
+  stealth_corpse_default_reset_time();
+  level._stealth.behavior.corpse = spawnStruct();
 }
 
-_id_42AF() {
+stealth_corpse_default_distances() {
   var_0 = [];
   var_0["player_dist"] = 1500;
   var_0["sight_dist"] = 1500;
   var_0["detect_dist"] = 256;
   var_0["found_dist"] = 96;
   var_0["found_dog_dist"] = 50;
-  _id_42B0(var_0);
+  stealth_corpse_set_distances(var_0);
 }
 
-_id_42B0(var_0) {
+stealth_corpse_set_distances(var_0) {
   foreach(var_3, var_2 in var_0) {}
-  level._id_0B6E._id_41ED._id_4250._id_42AD[var_3] = var_2;
+  level._stealth.logic.corpse.distances[var_3] = var_2;
 
-  level._id_0B6E._id_41ED._id_4250._id_4298 = squared(level._id_0B6E._id_41ED._id_4250._id_42AD["player_dist"]);
-  level._id_0B6E._id_41ED._id_4250._id_429E = squared(level._id_0B6E._id_41ED._id_4250._id_42AD["sight_dist"]);
-  level._id_0B6E._id_41ED._id_4250._id_429F = squared(level._id_0B6E._id_41ED._id_4250._id_42AD["detect_dist"]);
-  level._id_0B6E._id_41ED._id_4250._id_429B = squared(level._id_0B6E._id_41ED._id_4250._id_42AD["found_dist"]);
-  level._id_0B6E._id_41ED._id_4250._id_429C = squared(level._id_0B6E._id_41ED._id_4250._id_42AD["found_dog_dist"]);
+  level._stealth.logic.corpse.player_distsqrd = squared(level._stealth.logic.corpse.distances["player_dist"]);
+  level._stealth.logic.corpse.sight_distsqrd = squared(level._stealth.logic.corpse.distances["sight_dist"]);
+  level._stealth.logic.corpse.detect_distsqrd = squared(level._stealth.logic.corpse.distances["detect_dist"]);
+  level._stealth.logic.corpse.found_distsqrd = squared(level._stealth.logic.corpse.distances["found_dist"]);
+  level._stealth.logic.corpse.found_dog_distsqrd = squared(level._stealth.logic.corpse.distances["found_dog_dist"]);
 }
 
-_id_42B1() {
-  _id_42B2(30);
+stealth_corpse_default_reset_time() {
+  stealth_corpse_set_reset_time(30);
 }
 
-_id_42B2(var_0) {
-  level._id_0B6E._id_41ED._id_4250._id_42A4 = var_0;
+stealth_corpse_set_reset_time(var_0) {
+  level._stealth.logic.corpse.reset_time = var_0;
 }
 
-_id_42B3() {
-  _id_42B4(60);
+stealth_corpse_default_forget_time() {
+  stealth_corpse_set_forget_time(60);
 }
 
-_id_42B4(var_0) {
-  level._id_0B6E._id_41ED._id_4250._id_42B5 = var_0;
+stealth_corpse_set_forget_time(var_0) {
+  level._stealth.logic.corpse.forget_time = var_0;
 }
 
-_id_42B6(var_0) {
-  level._id_0B6E._id_41ED._id_4250._id_42AA = var_0;
+stealth_corpse_set_collect_func(var_0) {
+  level._stealth.logic.corpse.collect_func = var_0;
 }
 
-_id_42B7() {
-  level._id_0B6E._id_41ED._id_4250._id_42AA = undefined;
+stealth_corpse_default_collect_func() {
+  level._stealth.logic.corpse.collect_func = undefined;
 }

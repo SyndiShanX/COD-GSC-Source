@@ -9,31 +9,31 @@ main() {
   level.friendlyfire["enemy_kill_points"] = 250;
   level.friendlyfire["friend_kill_points"] = -650;
   level.friendlyfire["point_loss_interval"] = 1.25;
-  level.player._id_1FE1 = 0;
+  level.player.participation = 0;
   level.friendlyfiredisabled = 0;
   level.friendlyfiredisabledfordestructible = 0;
   setdvarifuninitialized("friendlyfire_dev_disabled", "0");
   common_scripts\utility::flag_init("friendly_fire_warning");
-  thread _id_1FE3();
+  thread turretdoshootanims();
   thread _id_1FED();
 }
 
-_id_1FE3() {}
+turretdoshootanims() {}
 
-_id_1FE4(var_0) {
+postpainfunc(var_0) {
   if(!isDefined(var_0)) {
     return;
   }
   if(!isDefined(var_0.team)) {
     var_0.team = "allies";
   }
-  if(isDefined(level._id_17D3)) {
+  if(isDefined(level.no_friendly_fire_penalty)) {
     return;
   }
   level endon("mission failed");
-  level thread _id_1FF3(var_0);
-  level thread _id_1FF4(var_0);
-  level thread _id_1FF5(var_0);
+  level thread notifydamage(var_0);
+  level thread notifydamagenotdone(var_0);
+  level thread notifydeath(var_0);
 
   for(;;) {
     if(!isDefined(var_0)) {
@@ -62,7 +62,7 @@ _id_1FE4(var_0) {
     if(!isDefined(var_6)) {
       var_6 = var_0.damageweapon;
     }
-    if(isDefined(level._id_01DC)) {
+    if(isDefined(level.friendlyfire_destructible_attacker)) {
       if(isDefined(var_2.damageowner)) {
         var_7 = 1;
         var_2 = var_2.damageowner;
@@ -109,12 +109,12 @@ _id_1FE4(var_0) {
 
     if(!var_10 && !var_11) {
       if(var_12) {
-        level.player._id_1FE1 = level.player._id_1FE1 + level.friendlyfire["enemy_kill_points"];
+        level.player.participation = level.player.participation + level.friendlyfire["enemy_kill_points"];
         _id_1FEC();
         return;
       }
     } else {
-      if(isDefined(var_0._id_17D3)) {
+      if(isDefined(var_0.no_friendly_fire_penalty)) {
         continue;
       }
       if(var_5 == "MOD_PROJECTILE_SPLASH" && isDefined(level._id_1FE5)) {
@@ -125,12 +125,12 @@ _id_1FE4(var_0) {
       }
       if(var_12) {
         if(isDefined(var_0._id_1FE6)) {
-          level.player._id_1FE1 = level.player._id_1FE1 + var_0._id_1FE6;
+          level.player.participation = level.player.participation + var_0._id_1FE6;
         } else {
-          level.player._id_1FE1 = level.player._id_1FE1 + level.friendlyfire["friend_kill_points"];
+          level.player.participation = level.player.participation + level.friendlyfire["friend_kill_points"];
         }
       } else {
-        level.player._id_1FE1 = level.player._id_1FE1 - var_1;
+        level.player.participation = level.player.participation - var_1;
       }
       _id_1FEC();
 
@@ -154,13 +154,13 @@ _id_1FE4(var_0) {
 
 _id_1FE8(var_0) {
   if(isDefined(level._id_1FE9) && level._id_1FE9) {
-    level thread _id_1FF0(var_0);
+    level thread turretdoshoot(var_0);
     return;
   }
 
   var_1 = level.friendlyfiredisabledfordestructible;
 
-  if(isDefined(level._id_01DC) && var_0) {
+  if(isDefined(level.friendlyfire_destructible_attacker) && var_0) {
     var_1 = 0;
   }
   if(var_1) {
@@ -169,8 +169,8 @@ _id_1FE8(var_0) {
   if(level.friendlyfiredisabled == 1) {
     return;
   }
-  if(level.player._id_1FE1 <= level.friendlyfire["min_participation"]) {
-    level thread _id_1FF0(var_0);
+  if(level.player.participation <= level.friendlyfire["min_participation"]) {
+    level thread turretdoshoot(var_0);
   }
 }
 
@@ -194,18 +194,18 @@ _id_1FEB() {
 
   if(var_0 < 4500) {
     return 1;
-  } else if(var_0 - level._id_1C2B < 4500) {
+  } else if(var_0 - level.lastautosavetime < 4500) {
     return 1;
   }
   return 0;
 }
 
 _id_1FEC() {
-  if(level.player._id_1FE1 > level.friendlyfire["max_participation"]) {
-    level.player._id_1FE1 = level.friendlyfire["max_participation"];
+  if(level.player.participation > level.friendlyfire["max_participation"]) {
+    level.player.participation = level.friendlyfire["max_participation"];
   }
-  if(level.player._id_1FE1 < level.friendlyfire["min_participation"]) {
-    level.player._id_1FE1 = level.friendlyfire["min_participation"];
+  if(level.player.participation < level.friendlyfire["min_participation"]) {
+    level.player.participation = level.friendlyfire["min_participation"];
   }
 }
 
@@ -213,24 +213,24 @@ _id_1FED() {
   level endon("mission failed");
 
   for(;;) {
-    if(level.player._id_1FE1 > 0) {
-      level.player._id_1FE1--;
-    } else if(level.player._id_1FE1 < 0) {
-      level.player._id_1FE1++;
+    if(level.player.participation > 0) {
+      level.player.participation--;
+    } else if(level.player.participation < 0) {
+      level.player.participation++;
     }
     wait(level.friendlyfire["point_loss_interval"]);
   }
 }
 
-_id_1FEE() {
+turretdoaimanims() {
   level.friendlyfiredisabled = 0;
 }
 
-_id_1FEF() {
+preplacedpostscriptfunc() {
   level.friendlyfiredisabled = 1;
 }
 
-_id_1FF0(var_0) {
+turretdoshoot(var_0) {
   if(!isDefined(var_0)) {
     var_0 = 0;
   }
@@ -256,28 +256,28 @@ _id_1FF0(var_0) {
   waittillframeend;
   setsaveddvar("hud_missionFailed", 1);
 
-  if(isDefined(level.player._id_1EF4)) {
+  if(isDefined(level.player.failingmission)) {
     return;
   }
   if(var_0) {
     setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_CIVILIAN_KILLED");
-  } else if(isDefined(level._id_1FF1)) {
-    setDvar("ui_deadquote", level._id_1FF1);
-  } else if(level._id_0BA2 == "british") {
+  } else if(isDefined(level.custom_friendly_fire_message)) {
+    setDvar("ui_deadquote", level.custom_friendly_fire_message);
+  } else if(level.campaign == "british") {
     setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_BRITISH");
-  } else if(level._id_0BA2 == "russian") {
+  } else if(level.campaign == "russian") {
     setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN");
   } else {
     setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
   }
-  if(isDefined(level._id_1FF2)) {
-    thread maps\_load::_id_1EF6(level._id_1FF2, 64, 64, 0);
+  if(isDefined(level.custom_friendly_fire_shader)) {
+    thread maps\_load::special_death_indicator_hudelement(level.custom_friendly_fire_shader, 64, 64, 0);
   }
   reconspatialevent(level.player.origin, "script_friendlyfire: civilian %d", var_0);
-  maps\_utility::_id_1826();
+  maps\_utility::missionfailedwrapper();
 }
 
-_id_1FF3(var_0) {
+notifydamage(var_0) {
   level endon("mission failed");
   var_0 endon("death");
 
@@ -297,16 +297,16 @@ _id_1FF3(var_0) {
   }
 }
 
-_id_1FF4(var_0) {
+notifydamagenotdone(var_0) {
   level endon("mission failed");
   var_0 waittill("damage_notdone", var_1, var_2, var_3, var_4, var_5);
   var_0 notify("friendlyfire_notify", -1, var_2, undefined, undefined, var_5);
 }
 
-_id_1FF5(var_0) {
+notifydeath(var_0) {
   level endon("mission failed");
   var_0 waittill("death", var_1, var_2, var_3);
   var_0 notify("friendlyfire_notify", -1, var_1, undefined, undefined, var_2, var_3);
 }
 
-_id_1FF6(var_0) {}
+detectfriendlyfireonentity(var_0) {}

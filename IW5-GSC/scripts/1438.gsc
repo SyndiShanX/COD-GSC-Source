@@ -8,10 +8,10 @@ main() {
   setdvarifuninitialized("debug_vehicleplayerhealth", "off");
   setdvarifuninitialized("player_vehicle_dismountable", "off");
   precacheshader("tank_shell");
-  level._id_43D3 = 0;
+  level.playeronvehicle = 0;
 }
 
-_id_43D4(var_0) {
+vehicle_wait(var_0) {
   if(!isDefined(var_0)) {
     var_0 = 0;
   } else if(var_0) {
@@ -34,9 +34,9 @@ _id_43D4(var_0) {
     var_1 = self getvehicleowner();
 
     if(isDefined(var_1) && isPlayer(var_1)) {
-      thread _id_43DA();
+      thread vehicle_enter();
     } else {
-      thread _id_43D5();
+      thread vehicle_exit();
     }
     if(var_0) {
       break;
@@ -46,43 +46,43 @@ _id_43D4(var_0) {
   }
 }
 
-_id_43D5() {
-  level._id_43D3 = 0;
-  level._id_284F = level._id_2A51;
+vehicle_exit() {
+  level.playeronvehicle = 0;
+  level.playervehicle = level.playervehiclenone;
   level notify("player exited vehicle");
 
-  if(isDefined(level.player._id_43D6)) {
-    level.player.threatbias = level.player._id_43D6;
-    level.player._id_43D6 = undefined;
+  if(isDefined(level.player.oldthreatbias)) {
+    level.player.threatbias = level.player.oldthreatbias;
+    level.player.oldthreatbias = undefined;
   }
 
-  if(isDefined(level._id_43D7)) {
-    level._id_43D7 destroy();
+  if(isDefined(level.vehiclehud)) {
+    level.vehiclehud destroy();
   }
-  if(isDefined(level._id_43D8)) {
-    level._id_43D8 destroy();
+  if(isDefined(level.vehiclehud2)) {
+    level.vehiclehud2 destroy();
   }
-  if(isDefined(level._id_43D9)) {
-    level._id_43D9 destroy();
+  if(isDefined(level.vehiclefireicon)) {
+    level.vehiclefireicon destroy();
   }
 }
 
-_id_43DA() {
-  level._id_43D3 = 1;
-  level._id_284F = self;
-  thread _id_43DF();
+vehicle_enter() {
+  level.playeronvehicle = 1;
+  level.playervehicle = self;
+  thread vehicle_ridehandle();
 }
 
-_id_43DB() {
-  _id_43DD();
+setup_vehicle_tank() {
+  vehicle_givehealth();
 }
 
-_id_43DC() {
-  _id_43DD();
+setup_vehicle_other() {
+  vehicle_givehealth();
 }
 
-_id_43DD() {
-  var_0 = maps\_utility::_id_229D();
+vehicle_givehealth() {
+  var_0 = maps\_utility::getdifficulty();
 
   if(var_0 == "easy") {
     self.health = 3000;
@@ -95,14 +95,14 @@ _id_43DD() {
   } else {
     self.health = 2000;
   }
-  if(isDefined(self._id_163B)) {
-    self.health = self.health + self._id_163B;
-    self._id_29A1 = self.health;
+  if(isDefined(self.healthbuffer)) {
+    self.health = self.health + self.healthbuffer;
+    self.currenthealth = self.health;
     self.maxhealth = self.health;
   }
 }
 
-_id_43DE() {
+protect_player() {
   level endon("player exited vehicle");
   self endon("death");
 
@@ -115,14 +115,14 @@ _id_43DE() {
   }
 }
 
-_id_43DF() {
+vehicle_ridehandle() {
   level endon("player exited vehicle");
   self endon("no_regen_health");
   self endon("death");
-  thread _id_43E2();
-  self._id_43E0 = self.health;
+  thread vehicle_kill_player_ondeath();
+  self.maximumhealth = self.health;
 
-  switch (maps\_utility::_id_229D()) {
+  switch (maps\_utility::getdifficulty()) {
     case "gimp":
       var_0 = 100;
       var_1 = 2700;
@@ -161,30 +161,30 @@ _id_43DF() {
     }
   }
 
-  thread _id_43E3();
+  thread vehicle_damageset();
   var_3 = gettime();
 
   for(;;) {
-    if(self._id_43E1) {
+    if(self.damaged) {
       if(getDvar("debug_vehicleplayerhealth") != "off") {
-        iprintlnbold("playervehicles health: ", self.health - self._id_163B);
+        iprintlnbold("playervehicles health: ", self.health - self.healthbuffer);
       }
-      self._id_43E1 = 0;
+      self.damaged = 0;
       var_2 = gettime() + var_1;
     }
 
     var_4 = gettime();
 
-    if(self.health < self._id_43E0 && var_4 > var_2 && var_4 > var_3) {
-      if(self.health + var_0 > self._id_43E0) {
-        self.health = self._id_43E0;
+    if(self.health < self.maximumhealth && var_4 > var_2 && var_4 > var_3) {
+      if(self.health + var_0 > self.maximumhealth) {
+        self.health = self.maximumhealth;
       } else {
         self.health = self.health + var_0;
       }
       var_3 = gettime() + 250;
 
       if(getDvar("debug_vehicleplayerhealth") != "off") {
-        iprintlnbold("playervehicles health: ", self.health - self._id_163B);
+        iprintlnbold("playervehicles health: ", self.health - self.healthbuffer);
       }
     }
 
@@ -192,7 +192,7 @@ _id_43DF() {
   }
 }
 
-_id_43E2() {
+vehicle_kill_player_ondeath() {
   level endon("player exited vehicle");
   self waittill("death");
   level.player enablehealthshield(0);
@@ -206,17 +206,17 @@ _id_43E2() {
   level.player enablehealthshield(1);
 }
 
-_id_43E3() {
-  self._id_43E1 = 0;
+vehicle_damageset() {
+  self.damaged = 0;
   self endon("death");
 
   for(;;) {
     self waittill("damage", var_0);
-    self._id_43E1 = 1;
+    self.damaged = 1;
   }
 }
 
-_id_43E4() {
+vehicle_reloadsound() {
   for(;;) {
     self waittill("turret_fire");
     wait 0.5;
@@ -224,7 +224,7 @@ _id_43E4() {
   }
 }
 
-_id_43E5() {
+vehicle_hud_tank_fireicon() {
   if(getDvar("player_vehicle_dismountable") != "off") {
     return;
   }
@@ -232,36 +232,36 @@ _id_43E5() {
   level.player endon("death");
   self endon("death");
 
-  if(isDefined(level._id_43D9)) {
-    level._id_43D9 destroy();
+  if(isDefined(level.vehiclefireicon)) {
+    level.vehiclefireicon destroy();
   }
-  level._id_43D9 = newhudelem();
-  level._id_43D9.x = -32;
-  level._id_43D9.y = -64;
-  level._id_43D9.alignx = "center";
-  level._id_43D9.aligny = "middle";
-  level._id_43D9.horzalign = "right";
-  level._id_43D9.vertalign = "bottom";
-  level._id_43D9 setshader("tank_shell", 64, 64);
+  level.vehiclefireicon = newhudelem();
+  level.vehiclefireicon.x = -32;
+  level.vehiclefireicon.y = -64;
+  level.vehiclefireicon.alignx = "center";
+  level.vehiclefireicon.aligny = "middle";
+  level.vehiclefireicon.horzalign = "right";
+  level.vehiclefireicon.vertalign = "bottom";
+  level.vehiclefireicon setshader("tank_shell", 64, 64);
   var_0 = 1;
-  level._id_43D9.alpha = var_0;
+  level.vehiclefireicon.alpha = var_0;
 
   for(;;) {
     if(var_0) {
       if(!self isturretready()) {
         var_0 = 0;
-        level._id_43D9.alpha = var_0;
+        level.vehiclefireicon.alpha = var_0;
       }
     } else if(self isturretready()) {
       var_0 = 1;
-      level._id_43D9.alpha = var_0;
+      level.vehiclefireicon.alpha = var_0;
     }
 
     wait 0.05;
   }
 }
 
-_id_2334() {
+healthoverlay() {
   self endon("death");
   var_0 = newhudelem();
   var_0.x = 0;
@@ -272,12 +272,12 @@ _id_2334() {
   var_0.horzalign = "fullscreen";
   var_0.vertalign = "fullscreen";
   var_0.alpha = 0;
-  var_1 = self.health - self._id_163B;
+  var_1 = self.health - self.healthbuffer;
   var_2 = 0;
   var_3 = 0.3;
 
   for(;;) {
-    var_4 = (self.health - self._id_163B) / var_1;
+    var_4 = (self.health - self.healthbuffer) / var_1;
     var_5 = 0.5 + 0.5 * var_4;
 
     if(var_4 < 0.75 || var_2) {
@@ -294,7 +294,7 @@ _id_2334() {
       var_0 fadeovertime(var_5 * 0.3);
       var_0.alpha = var_6 * 0.3;
       wait(var_5 * 0.3);
-      var_4 = (self.health - self._id_163B) / var_1;
+      var_4 = (self.health - self.healthbuffer) / var_1;
       var_5 = 0.3 + 0.7 * var_4;
 
       if(var_4 > 0.9) {

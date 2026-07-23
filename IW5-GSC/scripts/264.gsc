@@ -9,83 +9,83 @@ main(var_0) {
   if(!getdvarint("noder")) {
     return;
   }
-  level._id_1B42 = [];
-  level._id_0C59["generic"]["node_cover_left"][0] = % cornercrl_reloada;
-  level._id_0C59["generic"]["node_cover_left"][1] = % cornercrl_look_fast;
-  level._id_0C59["generic"]["node_cover_left"][2] = % corner_standl_grenade_b;
-  level._id_0C59["generic"]["node_cover_left"][3] = % corner_standl_flinch;
-  level._id_0C59["generic"]["node_cover_left"][4] = % corner_standl_look_idle;
-  level._id_0C59["generic"]["node_cover_left"][5] = % corner_standl_look_2_alert;
-  level._id_0C59["generic"]["node_cover_right"][0] = % cornercrr_reloada;
-  level._id_0C59["generic"]["node_cover_right"][1] = % corner_standr_grenade_b;
-  level._id_0C59["generic"]["node_cover_right"][2] = % corner_standr_flinch;
-  level._id_0C59["generic"]["node_cover_right"][3] = % corner_standr_look_idle;
-  level._id_0C59["generic"]["node_cover_right"][4] = % corner_standr_look_2_alert;
-  level._id_0C59["generic"]["node_cover_crouch"][0] = % covercrouch_hide_idle;
-  level._id_0C59["generic"]["node_cover_crouch"][1] = % covercrouch_twitch_1;
-  level._id_0C59["generic"]["node_cover_crouch"][2] = % covercrouch_hide_2_aim;
-  level._id_0C59["generic"]["node_cover_crouch"][3] = % covercrouch_hide_2_aim;
-  level._id_0C59["generic"]["node_cover_crouch"][4] = % covercrouch_hide_2_aim;
-  level._id_0C59["generic"]["node_cover_crouch"][5] = % covercrouch_hide_look;
-  level._id_0C59["generic"]["node_cover_crouch_window"][0] = % covercrouch_hide_idle;
-  level._id_0C59["generic"]["node_cover_crouch_window"][1] = % covercrouch_twitch_1;
-  level._id_0C59["generic"]["node_cover_crouch_window"][2] = % covercrouch_hide_2_aim;
-  level._id_0C59["generic"]["node_cover_crouch_window"][3] = % covercrouch_hide_2_aim;
-  level._id_0C59["generic"]["node_cover_crouch_window"][4] = % covercrouch_hide_2_aim;
-  level._id_0C59["generic"]["node_cover_crouch_window"][5] = % covercrouch_hide_look;
-  level._id_0C59["generic"]["node_cover_prone"][0] = % crouch_2_prone_firing;
-  level._id_0C59["generic"]["node_cover_prone"][1] = % prone_2_crouch;
-  level._id_0C59["generic"]["node_cover_prone"][2] = % prone_reload;
-  level._id_0C59["generic"]["node_cover_stand"][0] = % coverstand_reloada;
-  level._id_0C59["generic"]["node_concealment_crouch"][0] = % covercrouch_hide_idle;
-  level._id_0C59["generic"]["node_concealment_crouch"][1] = % covercrouch_twitch_1;
-  level._id_0C59["generic"]["node_concealment_crouch"][2] = % covercrouch_hide_2_aim;
-  level._id_0C59["generic"]["node_concealment_crouch"][3] = % covercrouch_hide_2_aim;
-  level._id_0C59["generic"]["node_concealment_crouch"][4] = % covercrouch_hide_2_aim;
-  level._id_0C59["generic"]["node_concealment_crouch"][5] = % covercrouch_hide_look;
-  level._id_0C59["generic"]["node_concealment_prone"][0] = % crouch_2_prone_firing;
-  level._id_0C59["generic"]["node_concealment_prone"][1] = % prone_2_crouch;
-  level._id_0C59["generic"]["node_concealment_prone"][2] = % prone_reload;
-  level._id_0C59["generic"]["node_concealment_stand"][0] = % coverstand_reloada;
-  level._id_1B43 = [];
-  level._id_1B43["node_cover_left"] = (0, 90, 0);
-  level._id_1B43["node_cover_right"] = (0, -90, 0);
-  level._id_1B43["node_pathnode"] = (0, 0, 0);
-  level._id_1B43["node_cover_crouch"] = (0, 0, 0);
-  level._id_1B43["node_cover_crouch_window"] = (0, 0, 0);
-  level._id_1B43["node_cover_prone"] = (0, 0, 0);
-  level._id_1B43["node_cover_stand"] = (0, 0, 0);
-  level._id_1B43["node_concealment_crouch"] = (0, 0, 0);
-  level._id_1B43["node_concealment_prone"] = (0, 0, 0);
-  level._id_1B43["node_concealment_stand"] = (0, 0, 0);
-  level._id_1B44 = 0;
-  level._id_1B45 = [];
+  level.drone_paths = [];
+  level.scr_anim["generic"]["node_cover_left"][0] = % cornercrl_reloada;
+  level.scr_anim["generic"]["node_cover_left"][1] = % cornercrl_look_fast;
+  level.scr_anim["generic"]["node_cover_left"][2] = % corner_standl_grenade_b;
+  level.scr_anim["generic"]["node_cover_left"][3] = % corner_standl_flinch;
+  level.scr_anim["generic"]["node_cover_left"][4] = % corner_standl_look_idle;
+  level.scr_anim["generic"]["node_cover_left"][5] = % corner_standl_look_2_alert;
+  level.scr_anim["generic"]["node_cover_right"][0] = % cornercrr_reloada;
+  level.scr_anim["generic"]["node_cover_right"][1] = % corner_standr_grenade_b;
+  level.scr_anim["generic"]["node_cover_right"][2] = % corner_standr_flinch;
+  level.scr_anim["generic"]["node_cover_right"][3] = % corner_standr_look_idle;
+  level.scr_anim["generic"]["node_cover_right"][4] = % corner_standr_look_2_alert;
+  level.scr_anim["generic"]["node_cover_crouch"][0] = % covercrouch_hide_idle;
+  level.scr_anim["generic"]["node_cover_crouch"][1] = % covercrouch_twitch_1;
+  level.scr_anim["generic"]["node_cover_crouch"][2] = % covercrouch_hide_2_aim;
+  level.scr_anim["generic"]["node_cover_crouch"][3] = % covercrouch_hide_2_aim;
+  level.scr_anim["generic"]["node_cover_crouch"][4] = % covercrouch_hide_2_aim;
+  level.scr_anim["generic"]["node_cover_crouch"][5] = % covercrouch_hide_look;
+  level.scr_anim["generic"]["node_cover_crouch_window"][0] = % covercrouch_hide_idle;
+  level.scr_anim["generic"]["node_cover_crouch_window"][1] = % covercrouch_twitch_1;
+  level.scr_anim["generic"]["node_cover_crouch_window"][2] = % covercrouch_hide_2_aim;
+  level.scr_anim["generic"]["node_cover_crouch_window"][3] = % covercrouch_hide_2_aim;
+  level.scr_anim["generic"]["node_cover_crouch_window"][4] = % covercrouch_hide_2_aim;
+  level.scr_anim["generic"]["node_cover_crouch_window"][5] = % covercrouch_hide_look;
+  level.scr_anim["generic"]["node_cover_prone"][0] = % crouch_2_prone_firing;
+  level.scr_anim["generic"]["node_cover_prone"][1] = % prone_2_crouch;
+  level.scr_anim["generic"]["node_cover_prone"][2] = % prone_reload;
+  level.scr_anim["generic"]["node_cover_stand"][0] = % coverstand_reloada;
+  level.scr_anim["generic"]["node_concealment_crouch"][0] = % covercrouch_hide_idle;
+  level.scr_anim["generic"]["node_concealment_crouch"][1] = % covercrouch_twitch_1;
+  level.scr_anim["generic"]["node_concealment_crouch"][2] = % covercrouch_hide_2_aim;
+  level.scr_anim["generic"]["node_concealment_crouch"][3] = % covercrouch_hide_2_aim;
+  level.scr_anim["generic"]["node_concealment_crouch"][4] = % covercrouch_hide_2_aim;
+  level.scr_anim["generic"]["node_concealment_crouch"][5] = % covercrouch_hide_look;
+  level.scr_anim["generic"]["node_concealment_prone"][0] = % crouch_2_prone_firing;
+  level.scr_anim["generic"]["node_concealment_prone"][1] = % prone_2_crouch;
+  level.scr_anim["generic"]["node_concealment_prone"][2] = % prone_reload;
+  level.scr_anim["generic"]["node_concealment_stand"][0] = % coverstand_reloada;
+  level.node_offset = [];
+  level.node_offset["node_cover_left"] = (0, 90, 0);
+  level.node_offset["node_cover_right"] = (0, -90, 0);
+  level.node_offset["node_pathnode"] = (0, 0, 0);
+  level.node_offset["node_cover_crouch"] = (0, 0, 0);
+  level.node_offset["node_cover_crouch_window"] = (0, 0, 0);
+  level.node_offset["node_cover_prone"] = (0, 0, 0);
+  level.node_offset["node_cover_stand"] = (0, 0, 0);
+  level.node_offset["node_concealment_crouch"] = (0, 0, 0);
+  level.node_offset["node_concealment_prone"] = (0, 0, 0);
+  level.node_offset["node_concealment_stand"] = (0, 0, 0);
+  level.noder_node_delete = 0;
+  level.dronestruct = [];
   var_1 = getspawnerarray();
-  level._id_1B46 = 0;
-  level._id_1B47 = [];
+  level.dummyguy_index_max = 0;
+  level.dummyguy = [];
 
   if(var_1.size) {
     var_2 = var_1[0];
-    var_2 maps\_spawner::_id_1B48();
+    var_2 maps\_spawner::dronespawner_init();
 
     for(var_3 = 0; var_3 < 20; var_3++) {
-      level._id_1B47[var_3] = maps\_spawner::_id_1B49(var_2);
-      level._id_1B47[var_3] notsolid();
-      level._id_1B47[var_3] hide();
-      level._id_1B47[var_3]._id_11E5 = 1;
-      level._id_1B47[var_3]._id_1B4A = var_3;
-      level._id_1B4B[var_3] = spawn("script_origin", (0, 0, 0));
-      level._id_1B4B[var_3]._id_1B4B = 1;
-      level._id_1B46++;
+      level.dummyguy[var_3] = maps\_spawner::spawner_dronespawn(var_2);
+      level.dummyguy[var_3] notsolid();
+      level.dummyguy[var_3] hide();
+      level.dummyguy[var_3].dontdonotetracks = 1;
+      level.dummyguy[var_3].dummyguyindex = var_3;
+      level.dummynode[var_3] = spawn("script_origin", (0, 0, 0));
+      level.dummynode[var_3].dummynode = 1;
+      level.dummyguy_index_max++;
     }
   }
 
-  level._id_1B4C = 0;
+  level.dummyguy_index = 0;
   maps\_anim::init();
   var_4 = getEntArray();
 
   foreach(var_6 in var_4) {
-    if(isDefined(var_6.classname) && var_6.classname == "player" || isDefined(var_6._id_11E5) || isDefined(var_6._id_1B4B)) {
+    if(isDefined(var_6.classname) && var_6.classname == "player" || isDefined(var_6.dontdonotetracks) || isDefined(var_6.dummynode)) {
       continue;
     }
     if(isDefined(var_6)) {
@@ -94,91 +94,91 @@ main(var_0) {
   }
 
   var_4 = undefined;
-  level._id_1B4D = 64;
-  level._id_1B4E = [];
-  level._id_1B4F = "node_pathnode";
-  level._id_1B50 = [];
-  level._id_1B51 = (0, 0, 32);
-  level._id_1B52 = 0;
-  level._id_1B53 = 256;
-  level._id_1B54 = undefined;
-  level._id_1B55 = 0;
-  level._id_1B56 = 1;
-  _id_1B66("node_pathnode", undefined);
-  _id_1B66("node_cover_crouch");
-  _id_1B66("node_cover_crouch_window");
-  _id_1B66("node_cover_left", -1);
-  _id_1B66("node_cover_right", 1);
-  _id_1B66("node_cover_prone");
-  _id_1B66("node_cover_stand");
-  _id_1B66("node_concealment_crouch");
-  _id_1B66("node_concealment_prone");
-  _id_1B66("node_concealment_stand");
+  level.place_node_radius = 64;
+  level.place_node_group = [];
+  level.painter_startgroup = "node_pathnode";
+  level.placed_nodes = [];
+  level.noder_heightoffset = (0, 0, 32);
+  level.wall_look = 0;
+  level.node_grid = 256;
+  level.coliding_node = undefined;
+  level.node_select_locked = 0;
+  level.node_animation_preview = 1;
+  add_node_type("node_pathnode", undefined);
+  add_node_type("node_cover_crouch");
+  add_node_type("node_cover_crouch_window");
+  add_node_type("node_cover_left", -1);
+  add_node_type("node_cover_right", 1);
+  add_node_type("node_cover_prone");
+  add_node_type("node_cover_stand");
+  add_node_type("node_concealment_crouch");
+  add_node_type("node_concealment_prone");
+  add_node_type("node_concealment_stand");
   thread hack_start();
-  thread _id_1B2C();
-  thread _id_1B59();
+  thread hud_init();
+  thread noder_init();
   common_scripts\utility::flag_wait("user_hud_active");
-  thread _id_1B93();
-  thread _id_1BAF();
-  level._id_1B42 = [];
+  thread draw_selected_node_name();
+  thread manage_nearnodes();
+  level.drone_paths = [];
   var_8 = getallnodes();
 
   if(var_8.size) {
-    level.player setOrigin(maps\_utility::_id_0AE9(level.player.origin, var_8).origin);
+    level.player setOrigin(maps\_utility::getclosest(level.player.origin, var_8).origin);
   }
   for(;;) {
     wait 0.05;
-    level._id_1B57 = _id_1B57();
-    _id_1B75(1);
+    level.player_view_trace = player_view_trace();
+    place_node_place(1);
   }
 }
 
 hack_start() {
   common_scripts\utility::flag_init("user_alive");
 
-  while(!isDefined(_id_1B78())) {
+  while(!isDefined(get_mp_player())) {
     wait 0.05;
   }
   wait 0.05;
-  level._id_1B58 = _id_1B78();
-  level._id_1B58 takeallweapons();
-  level._id_1B58 allowcrouch(0);
-  level._id_1B58 allowjump(0);
-  level._id_1B58 allowprone(0);
+  level.noder_player = get_mp_player();
+  level.noder_player takeallweapons();
+  level.noder_player allowcrouch(0);
+  level.noder_player allowjump(0);
+  level.noder_player allowprone(0);
   common_scripts\utility::flag_set("user_alive");
 }
 
-_id_1B59() {
-  level._id_1B5A = spawn("script_model", (0, 0, 0));
+noder_init() {
+  level.preview_node = spawn("script_model", (0, 0, 0));
   precachemodel("node_preview");
-  level._id_1B5A setModel("node_preview");
-  level._id_1B5A notsolid();
-  level._id_1B5B = spawn("script_model", (0, 0, 0));
-  level._id_1B5B setModel("node_select");
-  level._id_1B5B notsolid();
-  level._id_1B5B hide();
-  level._id_1B5C = undefined;
-  _id_1B3B(level._id_1B4F);
-  level._id_1B4F = undefined;
-  _id_1B41();
+  level.preview_node setModel("node_preview");
+  level.preview_node notsolid();
+  level.selector_model = spawn("script_model", (0, 0, 0));
+  level.selector_model setModel("node_select");
+  level.selector_model notsolid();
+  level.selector_model hide();
+  level.selected_node = undefined;
+  setcurrentgroup(level.painter_startgroup);
+  level.painter_startgroup = undefined;
+  playerinit();
 }
 
-_id_1B5D() {
-  level._id_1B5E["helppm"]._id_1B32 setvalue(level._id_1B50.size);
+hud_update_placed_model_count() {
+  level.hud_noder["helppm"].description setvalue(level.placed_nodes.size);
   var_0 = 256;
 
-  if(level._id_1B50.size < var_0) {
-    level._id_1B5E["helppm"]._id_1B32.color = (1, 1, 1);
+  if(level.placed_nodes.size < var_0) {
+    level.hud_noder["helppm"].description.color = (1, 1, 1);
     return;
   }
 
   var_1 = 1;
-  var_2 = 1 - (level._id_1B50.size - var_0) / var_0;
+  var_2 = 1 - (level.placed_nodes.size - var_0) / var_0;
   var_3 = var_2;
-  level._id_1B5E["helppm"]._id_1B32.color = (var_1, var_2, var_3);
+  level.hud_noder["helppm"].description.color = (var_1, var_2, var_3);
 }
 
-_id_1B30(var_0, var_1, var_2, var_3, var_4) {
+controler_hud_add(var_0, var_1, var_2, var_3, var_4) {
   var_5 = 520;
   var_6 = 120;
   var_7 = 18;
@@ -186,22 +186,22 @@ _id_1B30(var_0, var_1, var_2, var_3, var_4) {
   var_9 = 20;
   var_10 = 1.4;
 
-  if(!isDefined(level._id_1B5E) || !isDefined(level._id_1B5E[var_0])) {
-    level._id_1B5E[var_0] = _id_1B34();
-    var_11 = _id_1B34();
+  if(!isDefined(level.hud_noder) || !isDefined(level.hud_noder[var_0])) {
+    level.hud_noder[var_0] = _newhudelem();
+    var_11 = _newhudelem();
   } else {
-    var_11 = level._id_1B5E[var_0]._id_1B32;
+    var_11 = level.hud_noder[var_0].description;
   }
-  level._id_1B5E[var_0].location = 0;
-  level._id_1B5E[var_0].alignx = "right";
-  level._id_1B5E[var_0].aligny = "middle";
-  level._id_1B5E[var_0].foreground = 1;
-  level._id_1B5E[var_0].fontscale = 1.5;
-  level._id_1B5E[var_0].sort = 20;
-  level._id_1B5E[var_0].alpha = var_8;
-  level._id_1B5E[var_0].x = var_5 + var_9;
-  level._id_1B5E[var_0].y = var_6 + var_1 * var_7;
-  level._id_1B5E[var_0] _id_1B36(var_2);
+  level.hud_noder[var_0].location = 0;
+  level.hud_noder[var_0].alignx = "right";
+  level.hud_noder[var_0].aligny = "middle";
+  level.hud_noder[var_0].foreground = 1;
+  level.hud_noder[var_0].fontscale = 1.5;
+  level.hud_noder[var_0].sort = 20;
+  level.hud_noder[var_0].alpha = var_8;
+  level.hud_noder[var_0].x = var_5 + var_9;
+  level.hud_noder[var_0].y = var_6 + var_1 * var_7;
+  level.hud_noder[var_0] _settext(var_2);
   var_11.location = 0;
   var_11.alignx = "left";
   var_11.aligny = "middle";
@@ -216,12 +216,12 @@ _id_1B30(var_0, var_1, var_2, var_3, var_4) {
     var_11 setvalue(var_4);
   }
   if(isDefined(var_3)) {
-    var_11 _id_1B36(var_3);
+    var_11 _settext(var_3);
   }
-  level._id_1B5E[var_0]._id_1B32 = var_11;
+  level.hud_noder[var_0].description = var_11;
 }
 
-_id_1B2C() {
+hud_init() {
   common_scripts\utility::flag_init("user_hud_active");
   common_scripts\utility::flag_wait("user_alive");
   var_0 = 17;
@@ -233,7 +233,7 @@ _id_1B2C() {
   var_6 = var_5;
 
   for(var_7 = 0; var_7 < var_0; var_7++) {
-    var_1[var_7] = _id_1B34();
+    var_1[var_7] = _newhudelem();
     var_1[var_7].location = 0;
     var_1[var_7].alignx = "left";
     var_1[var_7].aligny = "middle";
@@ -248,7 +248,7 @@ _id_1B2C() {
     }
     var_1[var_7].x = 0;
     var_1[var_7].y = var_4;
-    var_1[var_7] _id_1B36(".");
+    var_1[var_7] _settext(".");
 
     if(var_7 == var_3) {
       var_5 = var_5 * -1;
@@ -257,8 +257,8 @@ _id_1B2C() {
     var_4 = var_4 - var_2;
   }
 
-  level._id_1B5F = var_1;
-  var_8 = _id_1B34();
+  level.group_hudelems = var_1;
+  var_8 = _newhudelem();
   var_8.location = 0;
   var_8.alignx = "left";
   var_8.aligny = "bottom";
@@ -268,9 +268,9 @@ _id_1B2C() {
   var_8.alpha = 1;
   var_8.x = 320;
   var_8.y = 244;
-  var_8 _id_1B36(".");
-  level._id_1B2E = var_8;
-  var_8 = _id_1B34();
+  var_8 _settext(".");
+  level.crosshair = var_8;
+  var_8 = _newhudelem();
   var_8.location = 0;
   var_8.alignx = "center";
   var_8.aligny = "bottom";
@@ -281,8 +281,8 @@ _id_1B2C() {
   var_8.x = 320;
   var_8.y = 244;
   var_8 setvalue(0);
-  level._id_1B2F = var_8;
-  var_9 = _id_1B34();
+  level.crosshair_value = var_8;
+  var_9 = _newhudelem();
   var_9.location = 0;
   var_9.alignx = "center";
   var_9.aligny = "bottom";
@@ -292,9 +292,9 @@ _id_1B2C() {
   var_9.alpha = 1;
   var_9.x = 320;
   var_9.y = 300;
-  var_9 _id_1B36("");
-  level._id_1B60 = var_9;
-  var_10 = _id_1B34();
+  var_9 _settext("");
+  level.selection_lock_indicator = var_9;
+  var_10 = _newhudelem();
   var_10.location = 0;
   var_10.alignx = "center";
   var_10.aligny = "bottom";
@@ -304,8 +304,8 @@ _id_1B2C() {
   var_10.alpha = 1;
   var_10.x = 320;
   var_10.y = 300;
-  var_10 _id_1B36("");
-  level._id_1B61 = var_10;
+  var_10 _settext("");
+  level.node_animation_preview_indicator = var_10;
   var_11 = 550;
   var_12 = 120;
   var_13 = 18;
@@ -313,35 +313,35 @@ _id_1B2C() {
   var_15 = 0.8;
   var_16 = 20;
   var_17 = 1.4;
-  _id_1B30("helppm", 1, "^5Placed Nodes: ", undefined, level._id_1B50.size);
-  _id_1B30("gridsize", 2, "^5Grid Size: ", undefined, level._id_1B53);
-  _id_1B30("helpxy", 6, "^4X/^3Y: ", undefined, level._id_1B4D);
-  _id_1B30("helpab", 7, "^2A/^1B^7: ", "-");
-  _id_1B30("helplsrs", 8, "^8L^7/R Stick: ", "-");
-  _id_1B30("helplbrb", 9, "^8L^7/R Shoulder: ", "-");
-  _id_1B30("helpdpu", 10, "^8DPad U/^7D: ", "-");
-  _id_1B30("helpdpl", 11, "^8DPad L/^7R: ", "-");
-  _id_1B30("helpF", 17, "^8W: ", "-");
-  level._id_1B5E["helpF"].x = var_11 - 450;
-  level._id_1B5E["helpF"]._id_1B32.x = var_11 - 450;
-  _id_1B9A();
+  controler_hud_add("helppm", 1, "^5Placed Nodes: ", undefined, level.placed_nodes.size);
+  controler_hud_add("gridsize", 2, "^5Grid Size: ", undefined, level.node_grid);
+  controler_hud_add("helpxy", 6, "^4X/^3Y: ", undefined, level.place_node_radius);
+  controler_hud_add("helpab", 7, "^2A/^1B^7: ", "-");
+  controler_hud_add("helplsrs", 8, "^8L^7/R Stick: ", "-");
+  controler_hud_add("helplbrb", 9, "^8L^7/R Shoulder: ", "-");
+  controler_hud_add("helpdpu", 10, "^8DPad U/^7D: ", "-");
+  controler_hud_add("helpdpl", 11, "^8DPad L/^7R: ", "-");
+  controler_hud_add("helpF", 17, "^8W: ", "-");
+  level.hud_noder["helpF"].x = var_11 - 450;
+  level.hud_noder["helpF"].description.x = var_11 - 450;
+  hint_buttons_main();
   common_scripts\utility::flag_set("user_hud_active");
 }
 
-_id_1B62(var_0, var_1) {
-  level._id_1B5E[var_0]._id_1B32 _id_1B36(var_1);
+controler_hud_update_text(var_0, var_1) {
+  level.hud_noder[var_0].description _settext(var_1);
 }
 
-_id_1B63(var_0, var_1) {
-  level._id_1B5E[var_0] _id_1B36(var_1);
+controler_hud_update_button(var_0, var_1) {
+  level.hud_noder[var_0] _settext(var_1);
 }
 
-_id_1B3B(var_0) {
+setcurrentgroup(var_0) {
   common_scripts\utility::flag_wait("user_hud_active");
-  level._id_1B64 = var_0;
-  var_1 = getarraykeys(level._id_1B4E);
+  level.place_node_current_group = var_0;
+  var_1 = getarraykeys(level.place_node_group);
   var_2 = 0;
-  var_3 = int(level._id_1B5F.size / 2);
+  var_3 = int(level.group_hudelems.size / 2);
 
   for(var_4 = 0; var_4 < var_1.size; var_4++) {
     if(var_1[var_4] == var_0) {
@@ -350,40 +350,40 @@ _id_1B3B(var_0) {
     }
   }
 
-  for(var_4 = 0; var_4 < level._id_1B5F.size; var_4++) {
-    level._id_1B5F[var_4] clearalltextafterhudelem();
+  for(var_4 = 0; var_4 < level.group_hudelems.size; var_4++) {
+    level.group_hudelems[var_4] clearalltextafterhudelem();
   }
-  level._id_1B5F[var_3] _id_1B36("^3" + _id_1B7F(var_1[var_2]));
+  level.group_hudelems[var_3] _settext("^3" + gettext_nonode(var_1[var_2]));
 
-  for(var_4 = 1; var_4 < level._id_1B5F.size - var_3; var_4++) {
+  for(var_4 = 1; var_4 < level.group_hudelems.size - var_3; var_4++) {
     if(var_2 - var_4 < 0) {
-      level._id_1B5F[var_3 + var_4] _id_1B36("-- --");
+      level.group_hudelems[var_3 + var_4] _settext("-- --");
       continue;
     }
 
-    level._id_1B5F[var_3 + var_4] _id_1B36(_id_1B7F(var_1[var_2 - var_4]));
+    level.group_hudelems[var_3 + var_4] _settext(gettext_nonode(var_1[var_2 - var_4]));
   }
 
-  for(var_4 = 1; var_4 < level._id_1B5F.size - var_3; var_4++) {
+  for(var_4 = 1; var_4 < level.group_hudelems.size - var_3; var_4++) {
     if(var_2 + var_4 > var_1.size - 1) {
-      level._id_1B5F[var_3 - var_4] _id_1B36("-- --");
+      level.group_hudelems[var_3 - var_4] _settext("-- --");
       continue;
     }
 
-    level._id_1B5F[var_3 - var_4] _id_1B36(_id_1B7F(var_1[var_2 + var_4]));
+    level.group_hudelems[var_3 - var_4] _settext(gettext_nonode(var_1[var_2 + var_4]));
   }
 
-  var_0 = _id_1B72();
-  level._id_1B53 = var_0._id_1B65;
-  _id_1B89();
+  var_0 = getcurrent_groupstruct();
+  level.node_grid = var_0.grid_size;
+  hud_update_gridsize();
 }
 
-_id_1B38() {
+setgroup_up() {
   var_0 = undefined;
-  var_1 = getarraykeys(level._id_1B4E);
+  var_1 = getarraykeys(level.place_node_group);
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(var_1[var_2] == level._id_1B64) {
+    if(var_1[var_2] == level.place_node_current_group) {
       var_0 = var_2 + 1;
       break;
     }
@@ -392,15 +392,15 @@ _id_1B38() {
   if(var_0 == var_1.size) {
     var_0 = 0;
   }
-  _id_1B3B(var_1[var_0]);
+  setcurrentgroup(var_1[var_0]);
 }
 
-_id_1B39() {
+setgroup_down() {
   var_0 = undefined;
-  var_1 = getarraykeys(level._id_1B4E);
+  var_1 = getarraykeys(level.place_node_group);
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(var_1[var_2] == level._id_1B64) {
+    if(var_1[var_2] == level.place_node_current_group) {
       var_0 = var_2 - 1;
       break;
     }
@@ -409,10 +409,10 @@ _id_1B39() {
   if(var_0 < 0) {
     var_0 = var_1.size - 1;
   }
-  _id_1B3B(var_1[var_0]);
+  setcurrentgroup(var_1[var_0]);
 }
 
-_id_1B66(var_0, var_1, var_2) {
+add_node_type(var_0, var_1, var_2) {
   if(!isDefined(var_1)) {
     var_1 = 0;
   }
@@ -421,38 +421,38 @@ _id_1B66(var_0, var_1, var_2) {
   }
   precachemodel(var_0);
 
-  if(!isDefined(level._id_1B4E[var_0])) {
+  if(!isDefined(level.place_node_group[var_0])) {
     var_3 = spawnStruct();
-    var_3._id_1B67 = var_1;
-    var_3._id_1B65 = var_2;
-    level._id_1B4E[var_0] = var_3;
+    var_3.wall_snap_direction = var_1;
+    var_3.grid_size = var_2;
+    level.place_node_group[var_0] = var_3;
   }
 
-  level._id_1B4E[var_0].model = var_0;
+  level.place_node_group[var_0].model = var_0;
 }
 
-_id_1B41() {
-  level._id_1B68 = 950;
+playerinit() {
+  level.noder_max = 950;
   common_scripts\utility::flag_wait("user_hud_active");
-  level._id_1B58 takeallweapons();
-  level._id_1B69 = [];
-  level._id_1B6A = [];
-  level._id_1B58 thread _id_1B6D();
-  level._id_1B58 thread _id_1B6B();
-  _id_1B96();
-  _id_1B70(::_id_1BA5, ::_id_1BA6, "BUTTON_LSTICK");
+  level.noder_player takeallweapons();
+  level.button_modifier_func = [];
+  level.button_func = [];
+  level.noder_player thread button_monitor();
+  level.noder_player thread button_modifier();
+  set_button_funcs_main();
+  add_button_modifier_func(::set_button_funcs_quick_select, ::set_button_funcs_quick_select_release, "BUTTON_LSTICK");
 }
 
-_id_1B6B() {
+button_modifier() {
   for(;;) {
-    foreach(var_2, var_1 in level._id_1B69) {
+    foreach(var_2, var_1 in level.button_modifier_func) {
       if(self buttonPressed(var_2)) {
-        [[level._id_1B69[var_2]]]();
+        [[level.button_modifier_func[var_2]]]();
 
         while(self buttonPressed(var_2)) {
           wait 0.05;
         }
-        [[level._id_1B6C[var_2]]]();
+        [[level.button_modifier_release_func[var_2]]]();
         wait 0.05;
       }
     }
@@ -461,13 +461,13 @@ _id_1B6B() {
   }
 }
 
-_id_1B6D() {
+button_monitor() {
   for(;;) {
-    foreach(var_2, var_1 in level._id_1B6A) {
+    foreach(var_2, var_1 in level.button_func) {
       if(self buttonPressed(var_2)) {
-        [[level._id_1B6A[var_2]]]();
+        [[level.button_func[var_2]]]();
 
-        if(!level._id_1B6E[var_2]) {
+        if(!level.button_func_isflow[var_2]) {
           while(self buttonPressed(var_2)) {
             wait 0.05;
           }
@@ -481,41 +481,41 @@ _id_1B6D() {
   }
 }
 
-_id_1B6F(var_0, var_1, var_2) {
+add_button_func(var_0, var_1, var_2) {
   var_3 = [];
-  level._id_1B6A[var_2] = var_0;
-  level._id_1B6E[var_2] = var_1;
+  level.button_func[var_2] = var_0;
+  level.button_func_isflow[var_2] = var_1;
 }
 
-_id_1B70(var_0, var_1, var_2) {
-  level._id_1B69[var_2] = var_0;
-  level._id_1B6C[var_2] = var_1;
+add_button_modifier_func(var_0, var_1, var_2) {
+  level.button_modifier_func[var_2] = var_0;
+  level.button_modifier_release_func[var_2] = var_1;
 }
 
-_id_1B71() {
+deleteme() {
   self delete();
 }
 
-_id_1B72() {
-  return level._id_1B4E[level._id_1B64];
+getcurrent_groupstruct() {
+  return level.place_node_group[level.place_node_current_group];
 }
 
-_id_1B73(var_0) {
-  var_1 = level._id_1B57;
+get_wall_offset(var_0) {
+  var_1 = level.player_view_trace;
   var_2 = var_1["position"];
   var_3 = 16 * vectorNormalize(var_1["normal"]);
   var_4 = var_2 + var_3;
-  var_5 = _id_1B74(var_4, var_0);
+  var_5 = find_corner_snap(var_4, var_0);
 
   if(isDefined(var_5)) {
     var_4 = var_5;
   }
-  return _id_1B82(var_4) + level._id_1B51;
+  return groundpos_loc(var_4) + level.noder_heightoffset;
 }
 
-_id_1B74(var_0, var_1) {
-  var_2 = _id_1B72();
-  var_3 = var_2._id_1B67;
+find_corner_snap(var_0, var_1) {
+  var_2 = getcurrent_groupstruct();
+  var_3 = var_2.wall_snap_direction;
 
   if(var_3 == 0) {
     return;
@@ -529,7 +529,7 @@ _id_1B74(var_0, var_1) {
     var_4 = var_5;
     var_0 = var_4;
     var_9 = var_8 * var_6 * var_3 * vectorNormalize(anglestoright(var_1));
-    var_10 = _id_1B80(var_0, var_0 + var_9, 0);
+    var_10 = bullettrace_but_not_nodes(var_0, var_0 + var_9, 0);
     var_0 = var_0 + var_10["fraction"] * var_9;
 
     if(var_10["fraction"] < 1) {
@@ -538,7 +538,7 @@ _id_1B74(var_0, var_1) {
 
     var_4 = var_0;
     var_11 = 32 * vectorNormalize(anglesToForward(var_1));
-    var_10 = _id_1B80(var_0, var_0 + var_11, 0);
+    var_10 = bullettrace_but_not_nodes(var_0, var_0 + var_11, 0);
     var_12 = var_10["fraction"];
 
     if(var_10["fraction"] == 1) {
@@ -552,7 +552,7 @@ _id_1B74(var_0, var_1) {
 
     var_4 = var_0;
     var_13 = var_9 * -1 - var_7;
-    var_10 = _id_1B80(var_0, var_0 + var_13, 0);
+    var_10 = bullettrace_but_not_nodes(var_0, var_0 + var_13, 0);
     var_0 = var_0 + var_10["fraction"] * var_13;
 
     if(var_10["fraction"] > 0.99) {
@@ -562,7 +562,7 @@ _id_1B74(var_0, var_1) {
     var_14 = var_0;
     var_15 = var_14 + var_7 * -1 + var_11 * var_12 * -1;
     var_16 = var_15 + var_7 * 0.9;
-    var_10 = _id_1B80(var_16, var_16 + var_11 * 0.5, 0);
+    var_10 = bullettrace_but_not_nodes(var_16, var_16 + var_11 * 0.5, 0);
 
     if(var_10["fraction"] < 1) {
       var_15 = var_10["position"] - var_11 * 0.5 + var_7 * -0.9;
@@ -573,50 +573,50 @@ _id_1B74(var_0, var_1) {
   return undefined;
 }
 
-_id_1B75(var_0) {
+place_node_place(var_0) {
   if(!isDefined(var_0)) {
     var_0 = 0;
   }
-  var_1 = level._id_1B57;
+  var_1 = level.player_view_trace;
   var_2 = common_scripts\utility::flat_angle(level.player getplayerangles());
-  var_3 = var_1["position"] + level._id_1B51;
+  var_3 = var_1["position"] + level.noder_heightoffset;
 
-  if(var_1["fraction"] == 1 || level._id_1B50.size > level._id_1B68) {
-    level._id_1B5A hide();
+  if(var_1["fraction"] == 1 || level.placed_nodes.size > level.noder_max) {
+    level.preview_node hide();
     return;
   }
 
-  if(_id_1B7E()) {
-    level._id_1B5A dontinterpolate();
+  if(is_player_looking_at_a_wall()) {
+    level.preview_node dontinterpolate();
     var_2 = vectortoangles(-1 * var_1["normal"]);
-    var_3 = _id_1B73(var_2);
-  } else if(level._id_1B53) {
-    level._id_1B5A dontinterpolate();
-    var_3 = _id_1B83(var_3);
-    _id_1B85(var_3, var_0);
+    var_3 = get_wall_offset(var_2);
+  } else if(level.node_grid) {
+    level.preview_node dontinterpolate();
+    var_3 = get_snapped_origin(var_3);
+    draw_grid(var_3, var_0);
     var_2 = (0, 0, 0);
   }
 
-  if(_id_1B87(var_3)) {
-    level._id_1B5A hide();
-    _id_1B91();
+  if(node_is_invalid(var_3)) {
+    level.preview_node hide();
+    select_coliding_node();
     return;
-  } else if(_id_1B88(var_3)) {
-    _id_1B91();
+  } else if(node_is_touching(var_3)) {
+    select_coliding_node();
   } else {
-    _id_1B92();
-    level._id_1B5A show();
+    unselect_node();
+    level.preview_node show();
   }
 
-  _id_1BAE(var_3);
-  _id_1B76(var_3, var_2, var_0);
+  draw_lines_to_connectible_nodes(var_3);
+  place_node_here(var_3, var_2, var_0);
 }
 
-_id_1B76(var_0, var_1, var_2) {
-  var_3 = _id_1B72();
+place_node_here(var_0, var_1, var_2) {
+  var_3 = getcurrent_groupstruct();
 
   if(var_2) {
-    var_4 = level._id_1B5A;
+    var_4 = level.preview_node;
     var_4.origin = var_0;
   } else {
     var_4 = spawn("script_model", var_0);
@@ -632,36 +632,36 @@ _id_1B76(var_0, var_1, var_2) {
     var_4.angles = (0, 0, 0);
   }
   if(!var_2) {
-    _id_1B8F(var_4);
-    level._id_1B50[level._id_1B50.size] = var_4;
+    place_new_dummy_guy_and_animate_at_node(var_4);
+    level.placed_nodes[level.placed_nodes.size] = var_4;
   }
 
-  _id_1B5D();
+  hud_update_placed_model_count();
 }
 
-_id_1B77() {
-  var_0 = common_scripts\utility::flat_angle(level._id_1B58 getplayerangles());
-  var_1 = _id_1B82(level._id_1B58.origin + (0, 0, 16)) + level._id_1B51;
+place_node_place_at_feet() {
+  var_0 = common_scripts\utility::flat_angle(level.noder_player getplayerangles());
+  var_1 = groundpos_loc(level.noder_player.origin + (0, 0, 16)) + level.noder_heightoffset;
 
-  if(_id_1B87(var_1)) {
+  if(node_is_invalid(var_1)) {
     return;
   }
-  _id_1B76(var_1, var_0, 0);
-  _id_1B5D();
+  place_node_here(var_1, var_0, 0);
+  hud_update_placed_model_count();
 }
 
-_id_1B78() {
+get_mp_player() {
   return getEntArray("player", "classname")[0];
 }
 
-_id_1B79() {
+place_node_erase() {
   var_0 = undefined;
 
-  if(isDefined(level._id_1B5C)) {
-    var_0 = level._id_1B5C;
+  if(isDefined(level.selected_node)) {
+    var_0 = level.selected_node;
   }
-  if(isDefined(level._id_1B57["entity"])) {
-    var_0 = level._id_1B57["entity"];
+  if(isDefined(level.player_view_trace["entity"])) {
+    var_0 = level.player_view_trace["entity"];
 
     if(!issubstr(var_0.model, "node_")) {
       var_0 = undefined;
@@ -671,35 +671,35 @@ _id_1B79() {
   if(!isDefined(var_0)) {
     return;
   }
-  level._id_1B7A = common_scripts\utility::array_remove(level._id_1B7A, var_0);
-  level._id_1B50 = common_scripts\utility::array_remove(level._id_1B50, var_0);
+  level.near_nodes = common_scripts\utility::array_remove(level.near_nodes, var_0);
+  level.placed_nodes = common_scripts\utility::array_remove(level.placed_nodes, var_0);
 
-  if(isDefined(var_0._id_1B7B)) {
-    var_0._id_1B7B hide();
-    var_0._id_1B7B._id_1B7C = 1;
+  if(isDefined(var_0.has_dummy_guy)) {
+    var_0.has_dummy_guy hide();
+    var_0.has_dummy_guy.is_hidden = 1;
   }
 
   var_0 delete();
-  level._id_1B44 = 1;
-  _id_1B5D();
+  level.noder_node_delete = 1;
+  hud_update_placed_model_count();
 }
 
-_id_1B7D() {}
+dump_nodes() {}
 
-_id_1B57() {
+player_view_trace() {
   var_0 = 2000;
-  var_1 = level._id_1B58 getEye();
-  return bulletTrace(var_1, var_1 + anglesToForward(level._id_1B58 getplayerangles()) * var_0, 0, level._id_1B5A);
+  var_1 = level.noder_player getEye();
+  return bulletTrace(var_1, var_1 + anglesToForward(level.noder_player getplayerangles()) * var_0, 0, level.preview_node);
 }
 
-_id_1B7E() {
-  if(!isDefined(level._id_1B57["normal"])) {
+is_player_looking_at_a_wall() {
+  if(!isDefined(level.player_view_trace["normal"])) {
     return 0;
   }
-  if(_id_1B81(level._id_1B57)) {
+  if(traces_hitting_node(level.player_view_trace)) {
     return 0;
   }
-  var_0 = vectortoangles(level._id_1B57["normal"]);
+  var_0 = vectortoangles(level.player_view_trace["normal"]);
   var_1 = common_scripts\utility::flat_angle(var_0);
 
   if(vectordot(anglesToForward(var_1), anglesToForward(var_0)) == 1) {
@@ -709,7 +709,7 @@ _id_1B7E() {
   }
 }
 
-_id_1B7F(var_0) {
+gettext_nonode(var_0) {
   var_1 = "";
 
   for(var_2 = 5; var_2 < var_0.size; var_2++) {
@@ -718,34 +718,34 @@ _id_1B7F(var_0) {
   return var_1;
 }
 
-_id_1B80(var_0, var_1, var_2, var_3) {
+bullettrace_but_not_nodes(var_0, var_1, var_2, var_3) {
   var_4 = bulletTrace(var_0, var_1, var_2, var_3);
 
-  if(_id_1B81(var_4)) {
+  if(traces_hitting_node(var_4)) {
     var_4 = bulletTrace(var_0, var_1, var_2, var_4["entity"]);
   }
   return var_4;
 }
 
-_id_1B81(var_0) {
+traces_hitting_node(var_0) {
   return isDefined(var_0["entity"]) && isDefined(var_0["entity"].model) && issubstr(var_0["entity"].model, "node_");
 }
 
-_id_1B82(var_0, var_1) {
+groundpos_loc(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = -100000;
   }
-  return _id_1B80(var_0, var_0 + (0, 0, var_1), 0, self)["position"];
+  return bullettrace_but_not_nodes(var_0, var_0 + (0, 0, var_1), 0, self)["position"];
 }
 
-_id_1B83(var_0) {
-  var_1 = level._id_1B53;
-  var_2 = _id_1B84(var_0[0], var_1);
-  var_3 = _id_1B84(var_0[1], var_1);
-  return _id_1B82((var_2, var_3, var_0[2] + 32)) + level._id_1B51;
+get_snapped_origin(var_0) {
+  var_1 = level.node_grid;
+  var_2 = snap_number_to_nearest_grid(var_0[0], var_1);
+  var_3 = snap_number_to_nearest_grid(var_0[1], var_1);
+  return groundpos_loc((var_2, var_3, var_0[2] + 32)) + level.noder_heightoffset;
 }
 
-_id_1B84(var_0, var_1) {
+snap_number_to_nearest_grid(var_0, var_1) {
   var_2 = var_0 / var_1;
   var_3 = int(var_2);
   var_4 = var_2 - var_3;
@@ -758,11 +758,11 @@ _id_1B84(var_0, var_1) {
   return var_3 * var_1;
 }
 
-_id_1B85(var_0, var_1) {
+draw_grid(var_0, var_1) {
   var_2 = 1;
   var_3 = (0, 1, 0);
-  var_0 = _id_1B82(var_0);
-  var_4 = var_0 + (0, 0, level._id_1B53);
+  var_0 = groundpos_loc(var_0);
+  var_4 = var_0 + (0, 0, level.node_grid);
 
   for(var_5 = var_2 * -1; var_5 < var_2 + 1; var_5++) {
     for(var_6 = var_2 * -1; var_6 < var_2 + 1; var_6++) {
@@ -773,18 +773,18 @@ _id_1B85(var_0, var_1) {
   }
 }
 
-_id_1B86(var_0, var_1, var_2, var_3) {
-  var_4 = level._id_1B53 * -2;
-  var_0 = _id_1B82(var_0, var_4);
-  var_1 = _id_1B82(var_1, var_4);
+groundpos_line(var_0, var_1, var_2, var_3) {
+  var_4 = level.node_grid * -2;
+  var_0 = groundpos_loc(var_0, var_4);
+  var_1 = groundpos_loc(var_1, var_4);
 }
 
-_id_1B87(var_0) {
+node_is_invalid(var_0) {
   var_1 = 0;
   var_2 = 68;
   var_3 = undefined;
 
-  foreach(var_5 in level._id_1B50) {
+  foreach(var_5 in level.placed_nodes) {
     var_6 = distance(var_0, var_5.origin);
 
     if(var_6 < 32) {
@@ -802,7 +802,7 @@ _id_1B87(var_0) {
   if(!isDefined(var_3)) {
     return 0;
   }
-  level._id_1B54 = var_3;
+  level.coliding_node = var_3;
 
   if(var_1 >= 2) {
     return 1;
@@ -810,10 +810,10 @@ _id_1B87(var_0) {
   return 0;
 }
 
-_id_1B88(var_0) {
-  foreach(var_2 in level._id_1B50) {
+node_is_touching(var_0) {
+  foreach(var_2 in level.placed_nodes) {
     if(distance(var_0, var_2.origin) < 32) {
-      level._id_1B54 = var_2;
+      level.coliding_node = var_2;
       return 1;
     }
   }
@@ -821,329 +821,329 @@ _id_1B88(var_0) {
   return 0;
 }
 
-_id_1B89() {
+hud_update_gridsize() {
   var_0 = "^7";
 
-  if(level._id_1B53 != 0) {
+  if(level.node_grid != 0) {
     var_0 = "^1";
   }
-  level._id_1B5E["gridsize"]._id_1B32 _id_1B36(var_0 + level._id_1B53);
+  level.hud_noder["gridsize"].description _settext(var_0 + level.node_grid);
 }
 
-_id_1B8A() {
-  if(!level._id_1B53) {
-    level._id_1B53 = 64;
+grid_up() {
+  if(!level.node_grid) {
+    level.node_grid = 64;
   }
-  level._id_1B53 = level._id_1B53 * 2;
+  level.node_grid = level.node_grid * 2;
 
-  if(level._id_1B53 > 256) {
-    level._id_1B53 = 256;
+  if(level.node_grid > 256) {
+    level.node_grid = 256;
   }
-  _id_1B89();
+  hud_update_gridsize();
 }
 
-_id_1B8B() {
-  if(!level._id_1B53) {
+grid_down() {
+  if(!level.node_grid) {
     return;
   }
-  level._id_1B53 = level._id_1B53 * 0.5;
+  level.node_grid = level.node_grid * 0.5;
 
-  if(level._id_1B53 < 64) {
-    level._id_1B53 = 0;
+  if(level.node_grid < 64) {
+    level.node_grid = 0;
   }
-  _id_1B89();
+  hud_update_gridsize();
 }
 
-_id_1B8C() {
-  if(level._id_1B53 == 256) {
-    level._id_1B53 = 0;
+grid_toggle() {
+  if(level.node_grid == 256) {
+    level.node_grid = 0;
   } else {
-    level._id_1B53 = 256;
+    level.node_grid = 256;
   }
-  _id_1B89();
+  hud_update_gridsize();
 }
 
-_id_1B8D(var_0) {
-  _id_1B8E(var_0["entity"]);
+select_traced_node(var_0) {
+  select_node(var_0["entity"]);
 }
 
-_id_1B8E(var_0) {
-  if(level._id_1B55 && isDefined(level._id_1B5C)) {
+select_node(var_0) {
+  if(level.node_select_locked && isDefined(level.selected_node)) {
     return;
   }
-  _id_1B8F(var_0);
-  level._id_1B5B dontinterpolate();
-  level._id_1B5B.origin = var_0.origin;
-  level._id_1B5B.angles = var_0.angles;
-  level._id_1B5B show();
-  level._id_1B5C = var_0;
+  place_new_dummy_guy_and_animate_at_node(var_0);
+  level.selector_model dontinterpolate();
+  level.selector_model.origin = var_0.origin;
+  level.selector_model.angles = var_0.angles;
+  level.selector_model show();
+  level.selected_node = var_0;
 }
 
-_id_1B8F(var_0) {
-  if(!level._id_1B47.size || isDefined(var_0._id_1B7B) || !_id_1BAA(var_0)) {
+place_new_dummy_guy_and_animate_at_node(var_0) {
+  if(!level.dummyguy.size || isDefined(var_0.has_dummy_guy) || !node_has_animations(var_0)) {
     return;
   }
-  var_1 = _id_1BA9();
+  var_1 = fifo_dummyguy();
 
-  if(isDefined(var_1._id_1B90)) {
-    var_1._id_1B90._id_1B7B = undefined;
+  if(isDefined(var_1.lastnode)) {
+    var_1.lastnode.has_dummy_guy = undefined;
   }
-  var_1 thread _id_1BA8(var_0);
+  var_1 thread animate_dummyguy_at_node(var_0);
 }
 
-_id_1B91() {
-  _id_1B8E(level._id_1B54);
+select_coliding_node() {
+  select_node(level.coliding_node);
 }
 
-_id_1B92() {
-  if(level._id_1B55 && isDefined(level._id_1B5C)) {
+unselect_node() {
+  if(level.node_select_locked && isDefined(level.selected_node)) {
     return;
   }
-  level._id_1B5B hide();
-  level._id_1B5C = undefined;
+  level.selector_model hide();
+  level.selected_node = undefined;
 }
 
-_id_1B93() {
+draw_selected_node_name() {
   for(;;) {
-    if(!isDefined(level._id_1B5C)) {
+    if(!isDefined(level.selected_node)) {
       wait 0.05;
       continue;
     }
 
-    var_0 = level._id_1B5C.model;
+    var_0 = level.selected_node.model;
     var_1 = anglestoright(level.player getplayerangles()) * var_0.size * -3;
-    thread maps\_utility::_id_1B94(var_0, level._id_1B5C.origin + var_1, 0.05);
+    thread maps\_utility::debug_message(var_0, level.selected_node.origin + var_1, 0.05);
     wait 0.05;
   }
 }
 
-_id_1B95() {
-  if(level._id_1B55) {
-    level._id_1B60 _id_1B36("");
-    level._id_1B55 = 0;
+toggle_select_lock() {
+  if(level.node_select_locked) {
+    level.selection_lock_indicator _settext("");
+    level.node_select_locked = 0;
   } else {
-    level._id_1B60 _id_1B36("^1Selection Lock On");
-    level._id_1B55 = 1;
+    level.selection_lock_indicator _settext("^1Selection Lock On");
+    level.node_select_locked = 1;
   }
 }
 
-_id_1B96() {
-  _id_1B97();
-  _id_1B6F(::_id_1B7D, 0, "w");
-  _id_1B6F(::_id_1B79, 0, "BUTTON_LSHLDR");
-  _id_1B6F(::_id_1B75, 0, "BUTTON_RSHLDR");
-  _id_1B6F(::_id_1B77, 0, "BUTTON_RSTICK");
-  _id_1B6F(::_id_1B39, 0, "BUTTON_X");
-  _id_1B6F(::_id_1B38, 0, "BUTTON_Y");
-  _id_1B6F(::_id_1B39, 0, "DPAD_UP");
-  _id_1B6F(::_id_1B38, 0, "DPAD_DOWN");
-  _id_1B6F(::_id_1B8C, 0, "BUTTON_A");
-  _id_1B6F(::_id_1BAB, 0, "BUTTON_B");
+set_button_funcs_main() {
+  clear_all_button_funcs();
+  add_button_func(::dump_nodes, 0, "w");
+  add_button_func(::place_node_erase, 0, "BUTTON_LSHLDR");
+  add_button_func(::place_node_place, 0, "BUTTON_RSHLDR");
+  add_button_func(::place_node_place_at_feet, 0, "BUTTON_RSTICK");
+  add_button_func(::setgroup_down, 0, "BUTTON_X");
+  add_button_func(::setgroup_up, 0, "BUTTON_Y");
+  add_button_func(::setgroup_down, 0, "DPAD_UP");
+  add_button_func(::setgroup_up, 0, "DPAD_DOWN");
+  add_button_func(::grid_toggle, 0, "BUTTON_A");
+  add_button_func(::toggle_animation_preview, 0, "BUTTON_B");
 }
 
-_id_1B97() {
-  level._id_1B6A = [];
-  level._id_1B6E = [];
+clear_all_button_funcs() {
+  level.button_func = [];
+  level.button_func_isflow = [];
 }
 
-_id_1B98() {
-  _id_1B97();
-  _id_1B6F(::_id_1B7D, 0, "w");
-  _id_1B6F(::_id_1BA3, 0, "BUTTON_LSHLDR");
-  _id_1B6F(::_id_1BA4, 0, "BUTTON_RSHLDR");
-  _id_1B6F(::_id_1B9C, 0, "BUTTON_LTRIG");
-  _id_1B6F(::_id_1B9C, 0, "BUTTON_RTRIG");
-  _id_1B6F(::_id_1B9C, 0, "BUTTON_RSTICK");
-  _id_1B6F(::_id_1B9D, 0, "BUTTON_X");
-  _id_1B6F(::_id_1B9E, 0, "BUTTON_Y");
-  _id_1B6F(::_id_1BA2, 0, "DPAD_UP");
-  _id_1B6F(::_id_1BA1, 0, "DPAD_DOWN");
-  _id_1B6F(::_id_1BA0, 0, "DPAD_RGIHT");
-  _id_1B6F(::_id_1B9F, 0, "BUTTON_A");
-  _id_1B6F(::_id_1B9B, 0, "BUTTON_B");
+set_button_funcs_quickselect() {
+  clear_all_button_funcs();
+  add_button_func(::dump_nodes, 0, "w");
+  add_button_func(::select_node_cover_left, 0, "BUTTON_LSHLDR");
+  add_button_func(::select_node_cover_right, 0, "BUTTON_RSHLDR");
+  add_button_func(::select_node_pathnode, 0, "BUTTON_LTRIG");
+  add_button_func(::select_node_pathnode, 0, "BUTTON_RTRIG");
+  add_button_func(::select_node_pathnode, 0, "BUTTON_RSTICK");
+  add_button_func(::select_node_cover_crouch_window, 0, "BUTTON_X");
+  add_button_func(::select_node_cover_prone, 0, "BUTTON_Y");
+  add_button_func(::select_node_concealment_stand, 0, "DPAD_UP");
+  add_button_func(::select_node_concealment_prone, 0, "DPAD_DOWN");
+  add_button_func(::select_node_concealment_crouch, 0, "DPAD_RGIHT");
+  add_button_func(::select_node_cover_stand, 0, "BUTTON_A");
+  add_button_func(::select_node_cover_crouch, 0, "BUTTON_B");
 }
 
-_id_1B99() {
-  _id_1B62("helpxy", "^4Cover Crouch Window ^7/ ^3Prone");
-  _id_1B62("helpab", "^2Cover Stand ^7/ ^1Crouch");
-  _id_1B62("helplsrs", "^8 - ^7/ Pathnode");
-  _id_1B62("helplbrb", "^8Cover Left ^7/ Right");
-  _id_1B62("helpdpl", "^8Conceal - ^7/ Crouch");
-  _id_1B62("helpdpu", "^8Conceal Stand ^7/ Prone");
+hint_buttons_quick_modifier() {
+  controler_hud_update_text("helpxy", "^4Cover Crouch Window ^7/ ^3Prone");
+  controler_hud_update_text("helpab", "^2Cover Stand ^7/ ^1Crouch");
+  controler_hud_update_text("helplsrs", "^8 - ^7/ Pathnode");
+  controler_hud_update_text("helplbrb", "^8Cover Left ^7/ Right");
+  controler_hud_update_text("helpdpl", "^8Conceal - ^7/ Crouch");
+  controler_hud_update_text("helpdpu", "^8Conceal Stand ^7/ Prone");
 }
 
-_id_1B9A() {
-  _id_1B62("helpxy", "^4Node Type Up ^7/ ^3Down");
-  _id_1B62("helpab", "^2Toggle Grid ^7/ ^1Anim Preview ");
-  _id_1B62("helplsrs", "^8Quick Pick ^7/ Place at Player");
-  _id_1B62("helplbrb", "^8Remove ^7/ Place");
-  _id_1B62("helpdpl", "^8- ^7/ -");
-  _id_1B62("helpdpu", "^8Node Type Up ^7/ Down");
+hint_buttons_main() {
+  controler_hud_update_text("helpxy", "^4Node Type Up ^7/ ^3Down");
+  controler_hud_update_text("helpab", "^2Toggle Grid ^7/ ^1Anim Preview ");
+  controler_hud_update_text("helplsrs", "^8Quick Pick ^7/ Place at Player");
+  controler_hud_update_text("helplbrb", "^8Remove ^7/ Place");
+  controler_hud_update_text("helpdpl", "^8- ^7/ -");
+  controler_hud_update_text("helpdpu", "^8Node Type Up ^7/ Down");
   var_0 = "( dump ) ^3map_source / xenon_export/" + level.script + "_nodedump.map";
-  _id_1B62("helpF", var_0);
+  controler_hud_update_text("helpF", var_0);
 }
 
-_id_1B9B() {
-  _id_1B3B("node_cover_crouch");
+select_node_cover_crouch() {
+  setcurrentgroup("node_cover_crouch");
 }
 
-_id_1B9C() {
-  _id_1B3B("node_pathnode");
+select_node_pathnode() {
+  setcurrentgroup("node_pathnode");
 }
 
-_id_1B9D() {
-  _id_1B3B("node_cover_crouch_window");
+select_node_cover_crouch_window() {
+  setcurrentgroup("node_cover_crouch_window");
 }
 
-_id_1B9E() {
-  _id_1B3B("node_cover_prone");
+select_node_cover_prone() {
+  setcurrentgroup("node_cover_prone");
 }
 
-_id_1B9F() {
-  _id_1B3B("node_cover_stand");
+select_node_cover_stand() {
+  setcurrentgroup("node_cover_stand");
 }
 
-_id_1BA0() {
-  _id_1B3B("node_concealment_crouch");
+select_node_concealment_crouch() {
+  setcurrentgroup("node_concealment_crouch");
 }
 
-_id_1BA1() {
-  _id_1B3B("node_concealment_prone");
+select_node_concealment_prone() {
+  setcurrentgroup("node_concealment_prone");
 }
 
-_id_1BA2() {
-  _id_1B3B("node_concealment_stand");
+select_node_concealment_stand() {
+  setcurrentgroup("node_concealment_stand");
 }
 
-_id_1BA3() {
-  _id_1B3B("node_cover_left");
+select_node_cover_left() {
+  setcurrentgroup("node_cover_left");
 }
 
-_id_1BA4() {
-  _id_1B3B("node_cover_right");
+select_node_cover_right() {
+  setcurrentgroup("node_cover_right");
 }
 
-_id_1BA5() {
-  _id_1B97();
-  _id_1B98();
-  _id_1B99();
+set_button_funcs_quick_select() {
+  clear_all_button_funcs();
+  set_button_funcs_quickselect();
+  hint_buttons_quick_modifier();
 }
 
-_id_1BA6() {
-  _id_1B96();
-  _id_1B9A();
+set_button_funcs_quick_select_release() {
+  set_button_funcs_main();
+  hint_buttons_main();
 }
 
-_id_1B34() {
-  if(!isDefined(level._id_1BA7)) {
-    level._id_1BA7 = [];
+_newhudelem() {
+  if(!isDefined(level.noder_elems)) {
+    level.noder_elems = [];
   }
   var_0 = newhudelem();
-  level._id_1BA7[level._id_1BA7.size] = var_0;
+  level.noder_elems[level.noder_elems.size] = var_0;
   return var_0;
 }
 
-_id_1B36(var_0) {
-  self._id_1B37 = var_0;
+_settext(var_0) {
+  self.realtext = var_0;
 
-  foreach(var_2 in level._id_1BA7) {
-    if(isDefined(var_2._id_1B37)) {
-      var_2 settext(var_2._id_1B37);
+  foreach(var_2 in level.noder_elems) {
+    if(isDefined(var_2.realtext)) {
+      var_2 settext(var_2.realtext);
     }
   }
 }
 
-_id_1BA8(var_0) {
+animate_dummyguy_at_node(var_0) {
   var_1 = var_0.origin + (0, 0, -32);
-  var_2 = var_0.angles + level._id_1B43[var_0.model];
-  var_0._id_1B7B = self;
-  self._id_1B90 = var_0;
-  level._id_1B4B[self._id_1B4A] notify("stop_loop");
-  level._id_1B4B[self._id_1B4A].origin = var_1;
-  level._id_1B4B[self._id_1B4A].angles = var_2;
-  level._id_1B4B[self._id_1B4A] dontinterpolate();
+  var_2 = var_0.angles + level.node_offset[var_0.model];
+  var_0.has_dummy_guy = self;
+  self.lastnode = var_0;
+  level.dummynode[self.dummyguyindex] notify("stop_loop");
+  level.dummynode[self.dummyguyindex].origin = var_1;
+  level.dummynode[self.dummyguyindex].angles = var_2;
+  level.dummynode[self.dummyguyindex] dontinterpolate();
   self dontinterpolate();
   self show();
-  self._id_1B7C = 0;
-  level._id_1B4B[self._id_1B4A] maps\_anim::_id_11C8(self, var_0.model);
+  self.is_hidden = 0;
+  level.dummynode[self.dummyguyindex] maps\_anim::anim_generic_loop(self, var_0.model);
 }
 
-_id_1BA9() {
-  level._id_1B4C++;
+fifo_dummyguy() {
+  level.dummyguy_index++;
 
-  if(level._id_1B4C == level._id_1B46) {
-    level._id_1B4C = 0;
+  if(level.dummyguy_index == level.dummyguy_index_max) {
+    level.dummyguy_index = 0;
   }
-  var_0 = level._id_1B47[level._id_1B4C];
+  var_0 = level.dummyguy[level.dummyguy_index];
   return var_0;
 }
 
-_id_1BAA(var_0) {
-  if(isDefined(level._id_0C59["generic"][var_0.model])) {
+node_has_animations(var_0) {
+  if(isDefined(level.scr_anim["generic"][var_0.model])) {
     return 1;
   }
   return 0;
 }
 
-_id_1BAB() {
-  if(level._id_1B56) {
-    level._id_1B61 _id_1B36("^1Anim Preview Off");
-    level._id_1B56 = 0;
-    _id_1BAC();
+toggle_animation_preview() {
+  if(level.node_animation_preview) {
+    level.node_animation_preview_indicator _settext("^1Anim Preview Off");
+    level.node_animation_preview = 0;
+    hide_all_dummyguys();
   } else {
-    level._id_1B61 _id_1B36("");
-    level._id_1B56 = 1;
-    _id_1BAD();
+    level.node_animation_preview_indicator _settext("");
+    level.node_animation_preview = 1;
+    show_all_dummyguys();
   }
 }
 
-_id_1BAC() {
-  foreach(var_1 in level._id_1B47) {
-    if(!isDefined(var_1._id_1B7C) || !var_1._id_1B7C) {
+hide_all_dummyguys() {
+  foreach(var_1 in level.dummyguy) {
+    if(!isDefined(var_1.is_hidden) || !var_1.is_hidden) {
       var_1 hide();
     }
   }
 }
 
-_id_1BAD() {
-  foreach(var_1 in level._id_1B47) {
-    if(!isDefined(var_1._id_1B7C) || !var_1._id_1B7C) {
+show_all_dummyguys() {
+  foreach(var_1 in level.dummyguy) {
+    if(!isDefined(var_1.is_hidden) || !var_1.is_hidden) {
       var_1 show();
     }
   }
 }
 
-_id_1BAE(var_0) {
-  foreach(var_2 in level._id_1B7A) {
+draw_lines_to_connectible_nodes(var_0) {
+  foreach(var_2 in level.near_nodes) {
     if(!isDefined(var_2.classname)) {
       continue;
     }
   }
 }
 
-_id_1BAF() {
+manage_nearnodes() {
   level endon("dump_nodes");
-  level._id_1B7A = [];
+  level.near_nodes = [];
   var_0 = getallnodes();
   var_1 = 0;
   var_2 = 1000;
   var_3 = [];
-  level._id_1BB0 = 0;
+  level.nearnodes_time = 0;
   wait 0.05;
 
   for(;;) {
     var_4 = var_0;
 
-    foreach(var_6 in level._id_1B50) {}
+    foreach(var_6 in level.placed_nodes) {}
     var_4[var_4.size] = var_6;
 
-    var_8 = level._id_1B50.size;
+    var_8 = level.placed_nodes.size;
 
     foreach(var_6 in var_4) {
       var_3[var_3.size] = var_6;
       var_1++;
 
-      if(level._id_1B50.size != var_8) {
+      if(level.placed_nodes.size != var_8) {
         var_3 = [];
         var_1 = 0;
         break;
@@ -1152,8 +1152,8 @@ _id_1BAF() {
       if(var_1 > var_2) {
         var_10 = [];
 
-        foreach(var_12 in level._id_1B7A) {
-          if(distancesquared((level._id_1B5A.origin[0], level._id_1B5A.origin[1], 0), (var_12.origin[0], var_12.origin[1], 0)) <= 65536) {
+        foreach(var_12 in level.near_nodes) {
+          if(distancesquared((level.preview_node.origin[0], level.preview_node.origin[1], 0), (var_12.origin[0], var_12.origin[1], 0)) <= 65536) {
             var_10[var_10.size] = var_12;
           }
         }
@@ -1161,20 +1161,20 @@ _id_1BAF() {
         var_14 = [];
 
         foreach(var_16 in var_3) {
-          if(distancesquared((level._id_1B5A.origin[0], level._id_1B5A.origin[1], 0), (var_16.origin[0], var_16.origin[1], 0)) <= 65536) {
+          if(distancesquared((level.preview_node.origin[0], level.preview_node.origin[1], 0), (var_16.origin[0], var_16.origin[1], 0)) <= 65536) {
             var_14[var_14.size] = var_16;
           }
         }
 
-        level._id_1B7A = maps\_utility::_id_1843(var_14, var_10);
+        level.near_nodes = maps\_utility::array_merge(var_14, var_10);
         var_3 = [];
         var_1 = 0;
         wait 0.05;
         waittillframeend;
       }
 
-      if(level._id_1B44) {
-        level._id_1B44 = 0;
+      if(level.noder_node_delete) {
+        level.noder_node_delete = 0;
         var_3 = [];
         var_1 = 0;
         break;

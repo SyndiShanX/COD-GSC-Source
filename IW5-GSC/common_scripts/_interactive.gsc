@@ -191,9 +191,9 @@ industrial_curtain_ondamage() {
 
     var_3 = var_3 + ("_" + var_2);
 
-    if(isDefined(self._id_164F)) {
-      if(isDefined(level._interactive_anims["curtain_industrial"][var_3 + "_" + self._id_164F])) {
-        var_3 = var_3 + ("_" + self._id_164F);
+    if(isDefined(self.script_parameters)) {
+      if(isDefined(level._interactive_anims["curtain_industrial"][var_3 + "_" + self.script_parameters])) {
+        var_3 = var_3 + ("_" + self.script_parameters);
       }
     }
 

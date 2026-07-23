@@ -4,163 +4,163 @@
 **************************************/
 
 main() {
-  if(isDefined(self._id_10EF)) {
+  if(isDefined(self.no_ai)) {
     return;
   }
-  if(isDefined(self._id_0CB3)) {
+  if(isDefined(self.onsnowmobile)) {
     animscripts\snowmobile::main();
     return;
   }
 
-  if(isDefined(self._id_10A5)) {
-    if(isDefined(self._id_10A5["combat"])) {
-      [[self._id_10A5["combat"]]]();
+  if(isDefined(self.custom_animscript_table)) {
+    if(isDefined(self.custom_animscript_table["combat"])) {
+      [[self.custom_animscript_table["combat"]]]();
       return;
     }
   }
 
   self endon("killanimscript");
   [[self.defaultexception["exposed"]]]();
-  animscripts\utility::_id_0D15("combat");
-  self.a._id_10DF = undefined;
+  animscripts\utility::initialize("combat");
+  self.a.arrivaltype = undefined;
 
   if(isDefined(self.node) && self.node.type == "Ambush" && self nearnode(self.node)) {
-    self._id_0CF1 = self.node;
+    self.ambushnode = self.node;
   }
-  _id_1107();
-  _id_1105();
-  animscripts\stop::_id_10F5();
-  _id_1109();
-  _id_111D();
+  transitiontocombat();
+  do_friendly_fire_reaction();
+  animscripts\stop::specialidleloop();
+  setup();
+  exposedcombatmainloop();
   self notify("stop_deciding_how_to_shoot");
 }
 
 end_script() {
-  self._id_0CF1 = undefined;
+  self.ambushnode = undefined;
 }
 
 #using_animtree("generic_human");
 
-_id_1105() {
+do_friendly_fire_reaction() {
   if(self.team != "allies") {
     return;
   }
-  if(self ismovesuppressed() && self.prevscript == "move" && self.a._id_0D26 == "stand" && !isDefined(self._id_1106)) {
+  if(self ismovesuppressed() && self.prevscript == "move" && self.a.pose == "stand" && !isDefined(self.disablefriendlyfirereaction)) {
     if(isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) < squared(128)) {
       return;
     }
     self animmode("zonly_physics");
-    self setflaggedanimknoballrestart("react", %surprise_stop_v1, %root, 1, 0.2, self._id_10F7);
-    animscripts\shared::_id_0C51("react");
+    self setflaggedanimknoballrestart("react", %surprise_stop_v1, %root, 1, 0.2, self.animplaybackrate);
+    animscripts\shared::donotetracks("react");
   }
 }
 
-_id_1107() {
-  if(isDefined(self._id_10F6) || isDefined(self._id_0C89)) {
+transitiontocombat() {
+  if(isDefined(self.specialidleanim) || isDefined(self.customidleanimset)) {
     return;
   }
   if(isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) < 262144) {
     return;
   }
-  if(self.prevscript == "stop" && !animscripts\utility::_id_0C98() && self.a._id_0D26 == "stand") {
+  if(self.prevscript == "stop" && !animscripts\utility::iscqbwalking() && self.a.pose == "stand") {
     self animmode("zonly_physics");
-    self setflaggedanimknoballrestart("transition", %casual_stand_idle_trans_out, %root, 1, 0.2, 1.2 * self._id_10F7);
-    animscripts\shared::_id_0C51("transition");
+    self setflaggedanimknoballrestart("transition", %casual_stand_idle_trans_out, %root, 1, 0.2, 1.2 * self.animplaybackrate);
+    animscripts\shared::donotetracks("transition");
   }
 }
 
-_id_1108() {
-  if(self.a._id_0D26 == "stand") {
-    animscripts\animset::_id_0C94();
-  } else if(self.a._id_0D26 == "crouch") {
-    animscripts\animset::_id_0C99();
-  } else if(self.a._id_0D26 == "prone") {
-    animscripts\animset::_id_0C9C();
+setup_anim_array() {
+  if(self.a.pose == "stand") {
+    animscripts\animset::set_animarray_standing();
+  } else if(self.a.pose == "crouch") {
+    animscripts\animset::set_animarray_crouching();
+  } else if(self.a.pose == "prone") {
+    animscripts\animset::set_animarray_prone();
   } else {}
 }
 
-_id_1109() {
-  if(animscripts\utility::_id_0C95() && self isstanceallowed("stand")) {
-    _id_113F("stand");
+setup() {
+  if(animscripts\utility::usingsidearm() && self isstanceallowed("stand")) {
+    transitionto("stand");
   }
-  _id_1108();
-  _id_110E();
-  thread _id_110D();
-  self._id_110A = 0.0;
+  setup_anim_array();
+  set_aim_and_turn_limits();
+  thread stopshortly();
+  self.previouspitchdelta = 0.0;
   self clearanim(%root, 0.2);
-  animscripts\combat_utility::_id_110B(0.2);
-  thread animscripts\combat_utility::_id_0F78();
-  self.a._id_110C = "aim";
-  _id_1142();
+  animscripts\combat_utility::setupaim(0.2);
+  thread animscripts\combat_utility::aimidlethread();
+  self.a.meleestate = "aim";
+  delaystandardmelee();
 }
 
-_id_110D() {
+stopshortly() {
   self endon("killanimscript");
   wait 0.2;
-  self.a._id_0D2B = "stop";
+  self.a.movement = "stop";
 }
 
-_id_110E() {
+set_aim_and_turn_limits() {
   self setdefaultaimlimits();
 
-  if(self.a._id_0D26 == "stand") {
+  if(self.a.pose == "stand") {
     self.upaimlimit = 60;
     self.downaimlimit = -60;
   }
 
-  self._id_0F72 = self._id_110F;
+  self.turnthreshold = self.defaultturnthreshold;
 }
 
-_id_1110() {
-  thread animscripts\track::_id_0CA9();
-  thread _id_115E();
-  thread animscripts\shoot_behavior::_id_0CD7("normal");
-  thread _id_1128();
-  _id_1127();
+setupexposedcombatloop() {
+  thread animscripts\track::trackshootentorpos();
+  thread reacquirewhennecessary();
+  thread animscripts\shoot_behavior::decidewhatandhowtoshoot("normal");
+  thread watchshootentvelocity();
+  resetgiveuponenemytime();
 
-  if(isDefined(self.a._id_1111)) {
-    animscripts\weaponlist::_id_0CD0();
-    self.a._id_1111 = undefined;
+  if(isDefined(self.a.magicreloadwhenreachenemy)) {
+    animscripts\weaponlist::refillclip();
+    self.a.magicreloadwhenreachenemy = undefined;
   }
 
-  self.a._id_1112 = gettime() + randomintrange(500, 1500);
+  self.a.dontcrouchtime = gettime() + randomintrange(500, 1500);
 }
 
-_id_1113(var_0) {
-  if(animscripts\utility::_id_0BB6() && (var_0 < 262144 || self.a.rockets < 1)) {
-    if(self.a._id_0D26 != "stand" && self.a._id_0D26 != "crouch") {
-      _id_113F("crouch");
+exposedcombatstopusingrpgcheck(var_0) {
+  if(animscripts\utility::usingrocketlauncher() && (var_0 < 262144 || self.a.rockets < 1)) {
+    if(self.a.pose != "stand" && self.a.pose != "crouch") {
+      transitionto("crouch");
     }
-    if(self.a._id_0D26 == "stand") {
-      animscripts\shared::_id_0F87(%rpg_stand_throw);
+    if(self.a.pose == "stand") {
+      animscripts\shared::throwdownweapon(%rpg_stand_throw);
     } else {
-      animscripts\shared::_id_0F87(%rpg_crouch_throw);
+      animscripts\shared::throwdownweapon(%rpg_crouch_throw);
     }
     self clearanim(%root, 0.2);
-    animscripts\combat_utility::_id_0F85();
-    _id_1108();
-    animscripts\combat_utility::_id_1114();
+    animscripts\combat_utility::endfireandanimidlethread();
+    setup_anim_array();
+    animscripts\combat_utility::startfireandaimidlethread();
     return 1;
   }
 
   return 0;
 }
 
-_id_1115(var_0) {
-  if(self.a._id_0D26 != "stand" && self isstanceallowed("stand")) {
+exposedcombatcheckstance(var_0) {
+  if(self.a.pose != "stand" && self isstanceallowed("stand")) {
     if(var_0 < 81225) {
-      _id_113F("stand");
+      transitionto("stand");
       return 1;
     }
 
-    if(_id_1120()) {
+    if(standifmakesenemyvisible()) {
       return 1;
     }
   }
 
-  if(var_0 > 262144 && self.a._id_0D26 != "crouch" && self isstanceallowed("crouch") && !animscripts\utility::_id_0C95() && !isDefined(self._id_0C96) && gettime() >= self.a._id_1112 && lengthsquared(self._id_0D81) < 10000) {
-    if(!isDefined(self._id_0CB1) || sighttracepassed(self.origin + (0, 0, 36), self._id_0CB1, 0, undefined)) {
-      _id_113F("crouch");
+  if(var_0 > 262144 && self.a.pose != "crouch" && self isstanceallowed("crouch") && !animscripts\utility::usingsidearm() && !isDefined(self.heat) && gettime() >= self.a.dontcrouchtime && lengthsquared(self.shootentvelocity) < 10000) {
+    if(!isDefined(self.shootpos) || sighttracepassed(self.origin + (0, 0, 36), self.shootpos, 0, undefined)) {
+      transitionto("crouch");
       return 1;
     }
   }
@@ -168,34 +168,34 @@ _id_1115(var_0) {
   return 0;
 }
 
-_id_1116(var_0) {
-  if(!animscripts\utility::_id_0C95()) {
-    if(isDefined(self._id_1117) && self.a._id_0D26 == "stand") {
-      if(_id_1150()) {
+exposedcombatcheckreloadorusepistol(var_0) {
+  if(!animscripts\utility::usingsidearm()) {
+    if(isDefined(self.forcesidearm) && self.a.pose == "stand") {
+      if(tryusingsidearm()) {
         return 1;
       }
     }
 
     if(animscripts\combat_utility::issniper() && var_0 < 167772.0) {
-      if(_id_1150()) {
+      if(tryusingsidearm()) {
         return 1;
       }
     }
   }
 
-  if(animscripts\combat_utility::_id_0F08(0)) {
-    if(!animscripts\utility::_id_0C95() && common_scripts\utility::cointoss() && !animscripts\utility::_id_0BB6() && animscripts\utility::_id_1118() && var_0 < 167772.0 && self isstanceallowed("stand")) {
-      if(self.a._id_0D26 != "stand") {
-        _id_113F("stand");
+  if(animscripts\combat_utility::needtoreload(0)) {
+    if(!animscripts\utility::usingsidearm() && common_scripts\utility::cointoss() && !animscripts\utility::usingrocketlauncher() && animscripts\utility::usingprimary() && var_0 < 167772.0 && self isstanceallowed("stand")) {
+      if(self.a.pose != "stand") {
+        transitionto("stand");
         return 1;
       }
 
-      if(_id_1150()) {
+      if(tryusingsidearm()) {
         return 1;
       }
     }
 
-    if(_id_1144(0)) {
+    if(exposedreload(0)) {
       return 1;
     }
   }
@@ -203,30 +203,30 @@ _id_1116(var_0) {
   return 0;
 }
 
-_id_1119(var_0) {
-  if(animscripts\utility::_id_0C95() && self.a._id_0D26 == "stand" && !isDefined(self._id_1117)) {
+exposedcombatcheckputawaypistol(var_0) {
+  if(animscripts\utility::usingsidearm() && self.a.pose == "stand" && !isDefined(self.forcesidearm)) {
     if(var_0 > 262144 || self.combatmode == "ambush_nodes_only" && (!isDefined(self.enemy) || !self cansee(self.enemy))) {
-      _id_1159(%pistol_stand_switch);
+      switchtolastweapon(%pistol_stand_switch);
     }
   }
 }
 
-_id_111A() {
-  if(isDefined(self._id_0C96) && self nearclaimnodeandangle()) {
+exposedcombatpositionadjust() {
+  if(isDefined(self.heat) && self nearclaimnodeandangle()) {
     self safeteleport(self.nodeoffsetpos, self.node.angles);
   }
 }
 
-_id_111B() {
-  if(_id_1121()) {
+exposedcombatneedtoturn() {
+  if(needtoturn()) {
     var_0 = 0.25;
 
-    if(isDefined(self._id_0CAB) && !issentient(self._id_0CAB)) {
+    if(isDefined(self.shootent) && !issentient(self.shootent)) {
       var_0 = 1.5;
     }
-    var_1 = animscripts\shared::_id_111C(var_0);
+    var_1 = animscripts\shared::getpredictedaimyawtoshootentorpos(var_0);
 
-    if(_id_0F73(var_1)) {
+    if(turntofacerelativeyaw(var_1)) {
       return 1;
     }
   }
@@ -234,27 +234,27 @@ _id_111B() {
   return 0;
 }
 
-_id_111D() {
+exposedcombatmainloop() {
   self endon("killanimscript");
   self endon("combat_restart");
-  _id_1110();
+  setupexposedcombatloop();
   self animmode("zonly_physics", 0);
   self orientmode("face angle", self.angles[1]);
 
   for(;;) {
-    if(animscripts\utility::_id_0BB6()) {
-      self._id_0D45 = undefined;
+    if(animscripts\utility::usingrocketlauncher()) {
+      self.deathfunction = undefined;
     }
-    animscripts\utility::_id_0A69();
+    animscripts\utility::isincombat();
 
-    if(_id_1122()) {
+    if(waitforstancechange()) {
       continue;
     }
-    _id_1141();
-    _id_111A();
+    trymelee();
+    exposedcombatpositionadjust();
 
-    if(!isDefined(self._id_0CB1)) {
-      _id_1123();
+    if(!isDefined(self.shootpos)) {
+      cantseeenemybehavior();
 
       if(!isDefined(self.enemy)) {
         var_0 = 1;
@@ -262,40 +262,40 @@ _id_111D() {
       continue;
     }
 
-    _id_1127();
-    var_1 = lengthsquared(self.origin - self._id_0CB1);
+    resetgiveuponenemytime();
+    var_1 = lengthsquared(self.origin - self.shootpos);
 
-    if(_id_1113(var_1)) {
+    if(exposedcombatstopusingrpgcheck(var_1)) {
       continue;
     }
-    if(_id_111B()) {
+    if(exposedcombatneedtoturn()) {
       continue;
     }
-    if(_id_10E7()) {
+    if(considerthrowgrenade()) {
       continue;
     }
-    if(_id_1116(var_1)) {
+    if(exposedcombatcheckreloadorusepistol(var_1)) {
       continue;
     }
-    if(animscripts\utility::_id_0BB6() && self.a._id_0D26 != "crouch" && randomfloat(1) > 0.65) {
-      self._id_0D45 = ::_id_115D;
+    if(animscripts\utility::usingrocketlauncher() && self.a.pose != "crouch" && randomfloat(1) > 0.65) {
+      self.deathfunction = ::rpgdeath;
     }
-    _id_1119(var_1);
+    exposedcombatcheckputawaypistol(var_1);
 
-    if(_id_1115(var_1)) {
+    if(exposedcombatcheckstance(var_1)) {
       continue;
     }
-    if(animscripts\combat_utility::_id_10E4()) {
-      _id_1136();
-      animscripts\combat_utility::_id_111E();
+    if(animscripts\combat_utility::aimedatshootentorpos()) {
+      shootuntilneedtoturn();
+      animscripts\combat_utility::hidefireshowaimidle();
       continue;
     }
 
-    _id_111F();
+    exposedwait();
   }
 }
 
-_id_111F() {
+exposedwait() {
   if(!isDefined(self.enemy) || !self cansee(self.enemy)) {
     self endon("enemy");
     self endon("shoot_behavior_change");
@@ -306,18 +306,18 @@ _id_111F() {
   }
 }
 
-_id_1120() {
+standifmakesenemyvisible() {
   if(isDefined(self.enemy) && (!self cansee(self.enemy) || !self canshootenemy()) && sighttracepassed(self.origin + (0, 0, 64), self.enemy getshootatpos(), 0, undefined)) {
-    self.a._id_1112 = gettime() + 3000;
-    _id_113F("stand");
+    self.a.dontcrouchtime = gettime() + 3000;
+    transitionto("stand");
     return 1;
   }
 
   return 0;
 }
 
-_id_1121() {
-  var_0 = self._id_0CB1;
+needtoturn() {
+  var_0 = self.shootpos;
 
   if(!isDefined(var_0)) {
     return 0;
@@ -333,18 +333,18 @@ _id_1121() {
     }
   }
 
-  return animscripts\utility::_id_0D61(var_1) > self._id_0F72;
+  return animscripts\utility::absangleclamp180(var_1) > self.turnthreshold;
 }
 
-_id_1122() {
-  var_0 = self.a._id_0D26;
+waitforstancechange() {
+  var_0 = self.a.pose;
 
-  if(isDefined(self.a._id_0D29)) {
+  if(isDefined(self.a.onback)) {
     wait 0.1;
     return 1;
   }
 
-  if(var_0 == "stand" && isDefined(self._id_0C96)) {
+  if(var_0 == "stand" && isDefined(self.heat)) {
     return 0;
   }
   if(!self isstanceallowed(var_0)) {
@@ -354,10 +354,10 @@ _id_1122() {
       var_1 = "stand";
     }
     if(self isstanceallowed(var_1)) {
-      if(var_0 == "stand" && animscripts\utility::_id_0C95()) {
+      if(var_0 == "stand" && animscripts\utility::usingsidearm()) {
         return 0;
       }
-      _id_113F(var_1);
+      transitionto(var_1);
       return 1;
     }
   }
@@ -365,28 +365,28 @@ _id_1122() {
   return 0;
 }
 
-_id_1123() {
-  if(self.a._id_0D26 != "stand" && self isstanceallowed("stand") && _id_1120()) {
+cantseeenemybehavior() {
+  if(self.a.pose != "stand" && self isstanceallowed("stand") && standifmakesenemyvisible()) {
     return 1;
   }
   var_0 = gettime();
-  self.a._id_1112 = var_0 + 1500;
+  self.a.dontcrouchtime = var_0 + 1500;
 
-  if(isDefined(self._id_1124) && isDefined(self._id_1124.forward)) {
-    var_1 = angleclamp180(self.angles[1] - vectortoyaw(self._id_1124.forward));
+  if(isDefined(self.group) && isDefined(self.group.forward)) {
+    var_1 = angleclamp180(self.angles[1] - vectortoyaw(self.group.forward));
 
-    if(_id_0F73(var_1)) {
+    if(turntofacerelativeyaw(var_1)) {
       return 1;
     }
   }
 
-  if(isDefined(self.node) && isDefined(anim._id_0CBD[self.node.type])) {
+  if(isDefined(self.node) && isDefined(anim.iscombatscriptnode[self.node.type])) {
     var_1 = angleclamp180(self.angles[1] - self.node.angles[1]);
 
-    if(_id_0F73(var_1)) {
+    if(turntofacerelativeyaw(var_1)) {
       return 1;
     }
-  } else if(isDefined(self.enemy) && self seerecently(self.enemy, 2) || var_0 > self.a._id_1019 + 1200) {
+  } else if(isDefined(self.enemy) && self seerecently(self.enemy, 2) || var_0 > self.a.scriptstarttime + 1200) {
     var_1 = undefined;
     var_2 = self getanglestolikelyenemypath();
 
@@ -399,118 +399,118 @@ _id_1123() {
       var_1 = angleclamp180(self.angles[1] - var_2[1]);
     }
 
-    if(isDefined(var_1) && _id_0F73(var_1)) {
+    if(isDefined(var_1) && turntofacerelativeyaw(var_1)) {
       return 1;
     }
-  } else if(isDefined(self._id_0C96) && self nearclaimnode()) {
+  } else if(isDefined(self.heat) && self nearclaimnode()) {
     var_1 = angleclamp180(self.angles[1] - self.node.angles[1]);
 
-    if(_id_0F73(var_1)) {
+    if(turntofacerelativeyaw(var_1)) {
       return 1;
     }
   }
 
-  if(_id_10E7()) {
+  if(considerthrowgrenade()) {
     return 1;
   }
-  var_3 = self.a._id_1125 < var_0;
+  var_3 = self.a.nextgiveuponenemytime < var_0;
   var_4 = 0;
 
   if(var_3) {
     var_4 = 0.99999;
   }
-  if(_id_1144(var_4)) {
+  if(exposedreload(var_4)) {
     return 1;
   }
-  if(var_3 && animscripts\utility::_id_0C95()) {
-    if(_id_1159(%pistol_stand_switch)) {
+  if(var_3 && animscripts\utility::usingsidearm()) {
+    if(switchtolastweapon(%pistol_stand_switch)) {
       return 1;
     }
   }
 
-  _id_1126();
+  cantseeenemywait();
   return 1;
 }
 
-_id_1126() {
+cantseeenemywait() {
   self endon("shoot_behavior_change");
   wait(0.4 + randomfloat(0.4));
   self waittill("do_slow_things");
 }
 
-_id_1127() {
-  self.a._id_1125 = gettime() + randomintrange(2000, 4000);
+resetgiveuponenemytime() {
+  self.a.nextgiveuponenemytime = gettime() + randomintrange(2000, 4000);
 }
 
-_id_0F73(var_0) {
-  if(var_0 < 0 - self._id_0F72) {
-    if(self.a._id_0D26 == "prone") {
-      animscripts\cover_prone::_id_10B0("crouch");
-      animscripts\animset::_id_0C99();
+turntofacerelativeyaw(var_0) {
+  if(var_0 < 0 - self.turnthreshold) {
+    if(self.a.pose == "prone") {
+      animscripts\cover_prone::proneto("crouch");
+      animscripts\animset::set_animarray_crouching();
     }
 
-    _id_112E("left", 0 - var_0);
-    maps\_gameskill::_id_0F89();
+    doturn("left", 0 - var_0);
+    maps\_gameskill::didsomethingotherthanshooting();
     return 1;
   }
 
-  if(var_0 > self._id_0F72) {
-    if(self.a._id_0D26 == "prone") {
-      animscripts\cover_prone::_id_10B0("crouch");
-      animscripts\animset::_id_0C99();
+  if(var_0 > self.turnthreshold) {
+    if(self.a.pose == "prone") {
+      animscripts\cover_prone::proneto("crouch");
+      animscripts\animset::set_animarray_crouching();
     }
 
-    _id_112E("right", var_0);
-    maps\_gameskill::_id_0F89();
+    doturn("right", var_0);
+    maps\_gameskill::didsomethingotherthanshooting();
     return 1;
   }
 
   return 0;
 }
 
-_id_1128() {
+watchshootentvelocity() {
   self endon("killanimscript");
-  self._id_0D81 = (0, 0, 0);
+  self.shootentvelocity = (0, 0, 0);
   var_0 = undefined;
   var_1 = self.origin;
   var_2 = 0.15;
 
   for(;;) {
-    if(isDefined(self._id_0CAB) && isDefined(var_0) && self._id_0CAB == var_0) {
-      var_3 = self._id_0CAB.origin;
-      self._id_0D81 = (var_3 - var_1) * (1 / var_2);
+    if(isDefined(self.shootent) && isDefined(var_0) && self.shootent == var_0) {
+      var_3 = self.shootent.origin;
+      self.shootentvelocity = (var_3 - var_1) * (1 / var_2);
       var_1 = var_3;
     } else {
-      if(isDefined(self._id_0CAB)) {
-        var_1 = self._id_0CAB.origin;
+      if(isDefined(self.shootent)) {
+        var_1 = self.shootent.origin;
       } else {
         var_1 = self.origin;
       }
-      var_0 = self._id_0CAB;
-      self._id_0D81 = (0, 0, 0);
+      var_0 = self.shootent;
+      self.shootentvelocity = (0, 0, 0);
     }
 
     wait(var_2);
   }
 }
 
-_id_1129() {
+shouldswapshotgun() {
   return 0;
 }
 
-_id_112A(var_0) {
+donotetrackswithendon(var_0) {
   self endon("killanimscript");
-  animscripts\shared::_id_0C51(var_0);
+  animscripts\shared::donotetracks(var_0);
 }
 
-_id_112B() {
+faceenemyimmediately() {
   self endon("killanimscript");
   self notify("facing_enemy_immediately");
   self endon("facing_enemy_immediately");
   var_0 = 5;
 
   for(;;) {
-    var_1 = 0 - animscripts\utility::_id_0D5C();
+    var_1 = 0 - animscripts\utility::getyawtoenemy();
 
     if(abs(var_1) < 2) {
       break;
@@ -527,29 +527,29 @@ _id_112B() {
   self notify("can_stop_turning");
 }
 
-_id_112C(var_0) {
+isdeltaallowed(var_0) {
   var_1 = getmovedelta(var_0, 0, 1);
   var_2 = self localtoworldcoords(var_1);
   return self isingoal(var_2) && self maymovetopoint(var_2);
 }
 
-_id_112D(var_0) {
+isanimdeltaingoal(var_0) {
   var_1 = getmovedelta(var_0, 0, 1);
   var_2 = self localtoworldcoords(var_1);
   return self isingoal(var_2);
 }
 
-_id_112E(var_0, var_1) {
-  var_2 = isDefined(self._id_0CB1);
+doturn(var_0, var_1) {
+  var_2 = isDefined(self.shootpos);
   var_3 = 1;
   var_4 = 0.2;
-  var_5 = isDefined(self.enemy) && !isDefined(self._id_0F3D) && self seerecently(self.enemy, 2) && distancesquared(self.enemy.origin, self.origin) < 262144;
+  var_5 = isDefined(self.enemy) && !isDefined(self.turntomatchnode) && self seerecently(self.enemy, 2) && distancesquared(self.enemy.origin, self.origin) < 262144;
 
-  if(self.a._id_1019 + 500 > gettime()) {
+  if(self.a.scriptstarttime + 500 > gettime()) {
     var_4 = 0.25;
 
     if(var_5) {
-      thread _id_112B();
+      thread faceenemyimmediately();
     }
   } else if(var_5) {
     var_6 = 1.0 - distance(self.enemy.origin, self.origin) / 512;
@@ -576,62 +576,62 @@ _id_112E(var_0, var_1) {
     var_7 = 45;
   }
   var_8 = "turn_" + var_0 + "_" + var_7;
-  var_9 = animscripts\utility::_id_0D4D(var_8);
+  var_9 = animscripts\utility::animarray(var_8);
 
-  if(isDefined(self._id_0F3D)) {
+  if(isDefined(self.turntomatchnode)) {
     self animmode("angle deltas", 0);
-  } else if(isDefined(self.node) && isDefined(anim._id_112F[self.node.type]) && distancesquared(self.origin, self.node.origin) < 256) {
+  } else if(isDefined(self.node) && isDefined(anim.iscombatpathnode[self.node.type]) && distancesquared(self.origin, self.node.origin) < 256) {
     self animmode("angle deltas", 0);
-  } else if(_id_112D(var_9)) {
+  } else if(isanimdeltaingoal(var_9)) {
     self animmode("zonly_physics", 0);
   } else {
     self animmode("angle deltas", 0);
   }
   self setanimknoball(%exposed_aiming, %body, 1, var_4);
 
-  if(!isDefined(self._id_0F3D)) {
-    _id_1133(var_4);
+  if(!isDefined(self.turntomatchnode)) {
+    turningaimingon(var_4);
   }
   self setanimlimited(%turn, 1, var_4);
 
-  if(isDefined(self._id_0C96)) {
+  if(isDefined(self.heat)) {
     var_3 = min(1.0, var_3);
-  } else if(isDefined(self._id_0F3D)) {
+  } else if(isDefined(self.turntomatchnode)) {
     var_3 = max(1.5, var_3);
   }
   self setflaggedanimknoblimitedrestart("turn", var_9, 1, var_4, var_3);
   self notify("turning");
 
-  if(var_2 && !isDefined(self._id_0F3D) && !isDefined(self._id_0C96)) {
-    thread _id_1135();
+  if(var_2 && !isDefined(self.turntomatchnode) && !isDefined(self.heat)) {
+    thread shootwhileturning();
   }
-  _id_1131();
+  doturnnotetracks();
   self setanimlimited(%turn, 0, 0.2);
 
-  if(!isDefined(self._id_0F3D)) {
-    _id_1134(0.2);
+  if(!isDefined(self.turntomatchnode)) {
+    turningaimingoff(0.2);
   }
-  if(!isDefined(self._id_0F3D)) {
+  if(!isDefined(self.turntomatchnode)) {
     self clearanim(%turn, 0.2);
     self setanimknob(%exposed_aiming, 1, 0.2, 1);
   } else {
     self clearanim(%exposed_modern, 0.3);
   }
-  if(isDefined(self._id_1130)) {
-    self._id_1130 = undefined;
-    thread _id_112B();
+  if(isDefined(self.turnlastresort)) {
+    self.turnlastresort = undefined;
+    thread faceenemyimmediately();
   }
 
   self animmode("zonly_physics", 0);
   self notify("done turning");
 }
 
-_id_1131() {
+doturnnotetracks() {
   self endon("can_stop_turning");
-  animscripts\shared::_id_0C51("turn");
+  animscripts\shared::donotetracks("turn");
 }
 
-_id_1132() {
+makesureturnworks() {
   self endon("killanimscript");
   self endon("done turning");
   var_0 = self.angles[1];
@@ -639,51 +639,51 @@ _id_1132() {
 
   if(self.angles[1] == var_0) {
     self notify("turning_isnt_working");
-    self._id_1130 = 1;
+    self.turnlastresort = 1;
   }
 }
 
-_id_1133(var_0) {
-  self setanimlimited(animscripts\utility::_id_0D4D("straight_level"), 0, var_0);
+turningaimingon(var_0) {
+  self setanimlimited(animscripts\utility::animarray("straight_level"), 0, var_0);
   self setanim(%add_idle, 0, var_0);
 
-  if(!animscripts\utility::_id_0C97()) {
+  if(!animscripts\utility::weapon_pump_action_shotgun()) {
     self clearanim(%add_fire, 0.2);
   }
 }
 
-_id_1134(var_0) {
-  self setanimlimited(animscripts\utility::_id_0D4D("straight_level"), 1, var_0);
+turningaimingoff(var_0) {
+  self setanimlimited(animscripts\utility::animarray("straight_level"), 1, var_0);
   self setanim(%add_idle, 1, var_0);
 }
 
-_id_1135() {
+shootwhileturning() {
   self endon("killanimscript");
   self endon("done turning");
 
-  if(animscripts\utility::_id_0BB6()) {
+  if(animscripts\utility::usingrocketlauncher()) {
     return;
   }
-  animscripts\combat_utility::_id_0F06();
+  animscripts\combat_utility::shootuntilshootbehaviorchange();
   self clearanim(%add_fire, 0.2);
 }
 
-_id_1136() {
-  thread _id_1137();
+shootuntilneedtoturn() {
+  thread watchforneedtoturnortimeout();
   self endon("need_to_turn");
-  thread _id_1140();
-  animscripts\combat_utility::_id_0F06();
+  thread keeptryingtomelee();
+  animscripts\combat_utility::shootuntilshootbehaviorchange();
   self notify("stop_watching_for_need_to_turn");
   self notify("stop_trying_to_melee");
 }
 
-_id_1137() {
+watchforneedtoturnortimeout() {
   self endon("killanimscript");
   self endon("stop_watching_for_need_to_turn");
   var_0 = gettime() + 4000 + randomint(2000);
 
   for(;;) {
-    if(gettime() > var_0 || _id_1121()) {
+    if(gettime() > var_0 || needtoturn()) {
       self notify("need_to_turn");
       break;
     }
@@ -692,56 +692,56 @@ _id_1137() {
   }
 }
 
-_id_10E7() {
-  if(!animscripts\combat_utility::_id_1138()) {
+considerthrowgrenade() {
+  if(!animscripts\combat_utility::mygrenadecooldownelapsed()) {
     return 0;
   }
-  if(isDefined(anim._id_0F38) && isalive(level.player)) {
-    if(_id_113B(level.player, 200)) {
+  if(isDefined(anim.throwgrenadeatplayerasap) && isalive(level.player)) {
+    if(tryexposedthrowgrenade(level.player, 200)) {
       return 1;
     }
   }
 
-  if(isDefined(self.enemy) && _id_113B(self.enemy, self._id_1139)) {
+  if(isDefined(self.enemy) && tryexposedthrowgrenade(self.enemy, self.minexposedgrenadedist)) {
     return 1;
   }
-  self.a._id_113A = gettime() + 500;
+  self.a.nextgrenadetrytime = gettime() + 500;
   return 0;
 }
 
-_id_113B(var_0, var_1) {
+tryexposedthrowgrenade(var_0, var_1) {
   var_2 = 0;
 
-  if(isDefined(self._id_0F9F) || isDefined(var_0._id_0FA0)) {
+  if(isDefined(self.dontevershoot) || isDefined(var_0.dontattackme)) {
     return 0;
   }
-  if(!isDefined(self.a._id_0C6D["exposed_grenade"])) {
+  if(!isDefined(self.a.array["exposed_grenade"])) {
     return 0;
   }
   var_3 = var_0.origin;
 
   if(!self cansee(var_0)) {
-    if(isDefined(self.enemy) && var_0 == self.enemy && isDefined(self._id_0CB1)) {
-      var_3 = self._id_0CB1;
+    if(isDefined(self.enemy) && var_0 == self.enemy && isDefined(self.shootpos)) {
+      var_3 = self.shootpos;
     }
   }
 
   if(!self cansee(var_0)) {
     var_1 = 100;
   }
-  if(distancesquared(self.origin, var_3) > var_1 * var_1 && self.a._id_0D26 == self.a._id_113C) {
-    animscripts\combat_utility::_id_1093(var_0);
+  if(distancesquared(self.origin, var_3) > var_1 * var_1 && self.a.pose == self.a.grenadethrowpose) {
+    animscripts\combat_utility::setactivegrenadetimer(var_0);
 
-    if(!animscripts\combat_utility::_id_113D(var_0)) {
+    if(!animscripts\combat_utility::grenadecooldownelapsed(var_0)) {
       return 0;
     }
-    var_4 = animscripts\utility::_id_113E(var_3);
+    var_4 = animscripts\utility::getyawtospot(var_3);
 
     if(abs(var_4) < 60) {
       var_5 = [];
 
-      foreach(var_7 in self.a._id_0C6D["exposed_grenade"]) {
-        if(_id_112C(var_7)) {
+      foreach(var_7 in self.a.array["exposed_grenade"]) {
+        if(isdeltaallowed(var_7)) {
           var_5[var_5.size] = var_7;
         }
       }
@@ -749,41 +749,41 @@ _id_113B(var_0, var_1) {
       if(var_5.size > 0) {
         self setanim(%exposed_aiming, 0, 0.1);
         self animmode("zonly_physics");
-        animscripts\track::_id_0CC4(0, 0);
-        var_2 = animscripts\combat_utility::_id_0FA1(var_0, var_5[randomint(var_5.size)]);
+        animscripts\track::setanimaimweight(0, 0);
+        var_2 = animscripts\combat_utility::trygrenade(var_0, var_5[randomint(var_5.size)]);
         self setanim(%exposed_aiming, 1, 0.1);
 
         if(var_2) {
-          animscripts\track::_id_0CC4(1, 0.5);
+          animscripts\track::setanimaimweight(1, 0.5);
         } else {
-          animscripts\track::_id_0CC4(1, 0);
+          animscripts\track::setanimaimweight(1, 0);
         }
       }
     }
   }
 
   if(var_2) {
-    maps\_gameskill::_id_0F89();
+    maps\_gameskill::didsomethingotherthanshooting();
   }
   return var_2;
 }
 
-_id_113F(var_0) {
-  if(var_0 == self.a._id_0D26) {
+transitionto(var_0) {
+  if(var_0 == self.a.pose) {
     return;
   }
-  var_1 = self.a._id_0D26 + "_2_" + var_0;
+  var_1 = self.a.pose + "_2_" + var_0;
 
-  if(!isDefined(self.a._id_0C6D)) {
+  if(!isDefined(self.a.array)) {
     return;
   }
-  var_2 = self.a._id_0C6D[var_1];
+  var_2 = self.a.array[var_1];
 
   if(!isDefined(var_2)) {
     return;
   }
   self clearanim(%root, 0.3);
-  animscripts\combat_utility::_id_0F85();
+  animscripts\combat_utility::endfireandanimidlethread();
 
   if(var_0 == "stand") {
     var_3 = 2;
@@ -799,14 +799,14 @@ _id_113F(var_0) {
   if(var_5 < 0.2) {
     var_5 = 0.2;
   }
-  animscripts\notetracks::_id_0D4F(var_5, "trans");
-  self.a._id_0D26 = var_0;
-  _id_1108();
-  animscripts\combat_utility::_id_1114();
-  maps\_gameskill::_id_0F89();
+  animscripts\notetracks::donotetracksfortime(var_5, "trans");
+  self.a.pose = var_0;
+  setup_anim_array();
+  animscripts\combat_utility::startfireandaimidlethread();
+  maps\_gameskill::didsomethingotherthanshooting();
 }
 
-_id_1140() {
+keeptryingtomelee() {
   self endon("killanimscript");
   self endon("stop_trying_to_melee");
   self endon("done turning");
@@ -823,95 +823,95 @@ _id_1140() {
         var_0 = 10000;
       }
       if(distancesquared(self.enemy.origin, self.origin) < var_0) {
-        _id_1141();
+        trymelee();
       }
     }
   }
 }
 
-_id_1141() {
-  animscripts\melee::_id_1009();
+trymelee() {
+  animscripts\melee::melee_tryexecuting();
 }
 
-_id_1142() {
-  if(isDefined(self._id_1143)) {
+delaystandardmelee() {
+  if(isDefined(self.nomeleechargedelay)) {
     return;
   }
   if(isPlayer(self.enemy)) {
     return;
   }
-  animscripts\melee::_id_1021(self.enemy);
+  animscripts\melee::melee_standard_delaystandardcharge(self.enemy);
 }
 
-_id_1144(var_0) {
-  if(animscripts\combat_utility::_id_0F08(var_0)) {
-    self.a._id_1145 = 1;
-    animscripts\combat_utility::_id_0F85();
+exposedreload(var_0) {
+  if(animscripts\combat_utility::needtoreload(var_0)) {
+    self.a.exposedreloading = 1;
+    animscripts\combat_utility::endfireandanimidlethread();
     var_1 = undefined;
 
-    if(isDefined(self._id_1146)) {
-      var_1 = self[[self._id_1146]]();
+    if(isDefined(self.specialreloadanimfunc)) {
+      var_1 = self[[self.specialreloadanimfunc]]();
       self.keepclaimednode = 1;
     } else {
-      var_1 = animscripts\utility::_id_0CA8("reload");
+      var_1 = animscripts\utility::animarraypickrandom("reload");
 
-      if(self.a._id_0D26 == "stand" && animscripts\utility::_id_0F8D("reload_crouchhide") && common_scripts\utility::cointoss()) {
-        var_1 = animscripts\utility::_id_0CA8("reload_crouchhide");
+      if(self.a.pose == "stand" && animscripts\utility::animarrayanyexist("reload_crouchhide") && common_scripts\utility::cointoss()) {
+        var_1 = animscripts\utility::animarraypickrandom("reload_crouchhide");
       }
     }
 
-    thread _id_1140();
-    self._id_1147 = 0;
+    thread keeptryingtomelee();
+    self.finishedreload = 0;
 
     if(weaponclass(self.weapon) == "pistol") {
       self orientmode("face default");
     }
-    _id_1148(var_1, var_0 > 0.05);
+    doreloadanim(var_1, var_0 > 0.05);
     self notify("abort_reload");
     self orientmode("face current");
 
-    if(self._id_1147) {
-      animscripts\weaponlist::_id_0CD0();
+    if(self.finishedreload) {
+      animscripts\weaponlist::refillclip();
     }
     self clearanim(%reload, 0.2);
     self.keepclaimednode = 0;
     self notify("stop_trying_to_melee");
-    self.a._id_1145 = 0;
-    self._id_1147 = undefined;
-    maps\_gameskill::_id_0F89();
-    animscripts\combat_utility::_id_1114();
+    self.a.exposedreloading = 0;
+    self.finishedreload = undefined;
+    maps\_gameskill::didsomethingotherthanshooting();
+    animscripts\combat_utility::startfireandaimidlethread();
     return 1;
   }
 
   return 0;
 }
 
-_id_1148(var_0, var_1) {
+doreloadanim(var_0, var_1) {
   self endon("abort_reload");
 
   if(var_1) {
-    thread _id_1149();
+    thread abortreloadwhencanshoot();
   }
   var_2 = 1;
 
-  if(!animscripts\utility::_id_0C95() && !animscripts\utility::_id_0CEA(self.weapon) && isDefined(self.enemy) && self cansee(self.enemy) && distancesquared(self.enemy.origin, self.origin) < 1048576) {
+  if(!animscripts\utility::usingsidearm() && !animscripts\utility::isshotgun(self.weapon) && isDefined(self.enemy) && self cansee(self.enemy) && distancesquared(self.enemy.origin, self.origin) < 1048576) {
     var_2 = 1.2;
   }
-  var_3 = "reload_" + animscripts\combat_utility::_id_0FF4();
+  var_3 = "reload_" + animscripts\combat_utility::getuniqueflagnameindex();
   self clearanim(%root, 0.2);
   self setflaggedanimrestart(var_3, var_0, 1, 0.2, var_2);
-  thread _id_114A("abort_reload", var_3);
+  thread notifyonstartaim("abort_reload", var_3);
   self endon("start_aim");
-  animscripts\shared::_id_0C51(var_3);
-  self._id_1147 = 1;
+  animscripts\shared::donotetracks(var_3);
+  self.finishedreload = 1;
 }
 
-_id_1149() {
+abortreloadwhencanshoot() {
   self endon("abort_reload");
   self endon("killanimscript");
 
   for(;;) {
-    if(isDefined(self._id_0CAB) && self cansee(self._id_0CAB)) {
+    if(isDefined(self.shootent) && self cansee(self.shootent)) {
       break;
     }
 
@@ -921,125 +921,125 @@ _id_1149() {
   self notify("abort_reload");
 }
 
-_id_114A(var_0, var_1) {
+notifyonstartaim(var_0, var_1) {
   self endon(var_0);
   self waittillmatch(var_1, "start_aim");
-  self._id_1147 = 1;
+  self.finishedreload = 1;
   self notify("start_aim");
 }
 
-_id_10EB(var_0) {
+finishnotetracks(var_0) {
   self endon("killanimscript");
-  animscripts\shared::_id_0C51(var_0);
+  animscripts\shared::donotetracks(var_0);
 }
 
-_id_114B() {
-  maps\_mgturret::_id_114C();
-  animscripts\weaponlist::_id_0CD0();
-  self.a._id_114D = 0;
+drop_turret() {
+  maps\_mgturret::dropturret();
+  animscripts\weaponlist::refillclip();
+  self.a.needstorechamber = 0;
   self notify("dropped_gun");
-  maps\_mgturret::_id_114E();
+  maps\_mgturret::restoredefaults();
 }
 
-_id_114F() {
-  _id_114B();
+exception_exposed_mg42_portable() {
+  drop_turret();
 }
 
-_id_1150() {
-  if(isDefined(self.secondaryweapon) && animscripts\utility::_id_0CEA(self.secondaryweapon)) {
+tryusingsidearm() {
+  if(isDefined(self.secondaryweapon) && animscripts\utility::isshotgun(self.secondaryweapon)) {
     return 0;
   }
-  if(isDefined(self._id_1151)) {
+  if(isDefined(self.no_pistol_switch)) {
     return 0;
   }
-  self.a._id_0D26 = "stand";
-  _id_1152(%pistol_stand_pullout);
+  self.a.pose = "stand";
+  switchtosidearm(%pistol_stand_pullout);
   return 1;
 }
 
-_id_1152(var_0) {
+switchtosidearm(var_0) {
   self endon("killanimscript");
-  thread animscripts\combat_utility::_id_1153();
-  animscripts\combat_utility::_id_0F85();
-  self._id_1154 = var_0;
-  self setflaggedanimknoballrestart("weapon swap", var_0, %body, 1, 0.2, animscripts\combat_utility::_id_0F7B());
-  _id_1155("weapon swap", ::_id_1158, "end_weapon_swap");
-  self clearanim(self._id_1154, 0.2);
+  thread animscripts\combat_utility::putgunbackinhandonkillanimscript();
+  animscripts\combat_utility::endfireandanimidlethread();
+  self.swapanim = var_0;
+  self setflaggedanimknoballrestart("weapon swap", var_0, %body, 1, 0.2, animscripts\combat_utility::fasteranimspeed());
+  donotetrackspostcallbackwithendon("weapon swap", ::handlepickup, "end_weapon_swap");
+  self clearanim(self.swapanim, 0.2);
   self notify("facing_enemy_immediately");
   self notify("switched_to_sidearm");
-  maps\_gameskill::_id_0F89();
+  maps\_gameskill::didsomethingotherthanshooting();
 }
 
-_id_1155(var_0, var_1, var_2) {
+donotetrackspostcallbackwithendon(var_0, var_1, var_2) {
   self endon(var_2);
-  animscripts\notetracks::_id_1156(var_0, var_1);
+  animscripts\notetracks::donotetrackspostcallback(var_0, var_1);
 }
 
-_id_1157(var_0) {
+faceenemydelay(var_0) {
   self endon("killanimscript");
   wait(var_0);
-  _id_112B();
+  faceenemyimmediately();
 }
 
-_id_1158(var_0) {
+handlepickup(var_0) {
   if(var_0 == "pistol_pickup") {
-    self clearanim(animscripts\utility::_id_0D4D("straight_level"), 0);
-    animscripts\animset::_id_0C94();
-    thread _id_1157(0.25);
+    self clearanim(animscripts\utility::animarray("straight_level"), 0);
+    animscripts\animset::set_animarray_standing();
+    thread faceenemydelay(0.25);
   } else if(var_0 == "start_aim") {
-    animscripts\combat_utility::_id_1114();
+    animscripts\combat_utility::startfireandaimidlethread();
 
-    if(_id_1121()) {
+    if(needtoturn()) {
       self notify("end_weapon_swap");
     }
   }
 }
 
-_id_1159(var_0, var_1) {
+switchtolastweapon(var_0, var_1) {
   self endon("killanimscript");
 
-  if(animscripts\utility::_id_0CEA(self.primaryweapon) && (isDefined(self._id_0FFE) && !self._id_0FFE) && self._id_1005 == animscripts\utility::_id_115A()) {
+  if(animscripts\utility::isshotgun(self.primaryweapon) && (isDefined(self.wantshotgun) && !self.wantshotgun) && self.lastweapon == animscripts\utility::getaiprimaryweapon()) {
     return 0;
   }
-  animscripts\combat_utility::_id_0F85();
-  self._id_1154 = var_0;
+  animscripts\combat_utility::endfireandanimidlethread();
+  self.swapanim = var_0;
   self setflaggedanimknoballrestart("weapon swap", var_0, %body, 1, 0.1, 1);
 
   if(isDefined(var_1)) {
-    _id_1155("weapon swap", ::_id_115C, "end_weapon_swap");
+    donotetrackspostcallbackwithendon("weapon swap", ::handlecleanupputaway, "end_weapon_swap");
   } else {
-    _id_1155("weapon swap", ::_id_115B, "end_weapon_swap");
+    donotetrackspostcallbackwithendon("weapon swap", ::handleputaway, "end_weapon_swap");
   }
-  self clearanim(self._id_1154, 0.2);
+  self clearanim(self.swapanim, 0.2);
   self notify("switched_to_lastweapon");
-  maps\_gameskill::_id_0F89();
+  maps\_gameskill::didsomethingotherthanshooting();
   return 1;
 }
 
-_id_115B(var_0) {
+handleputaway(var_0) {
   if(var_0 == "pistol_putaway") {
-    self clearanim(animscripts\utility::_id_0D4D("straight_level"), 0);
-    animscripts\animset::_id_0C94();
-    thread animscripts\combat_utility::_id_1153();
+    self clearanim(animscripts\utility::animarray("straight_level"), 0);
+    animscripts\animset::set_animarray_standing();
+    thread animscripts\combat_utility::putgunbackinhandonkillanimscript();
   } else if(var_0 == "start_aim") {
-    animscripts\combat_utility::_id_1114();
+    animscripts\combat_utility::startfireandaimidlethread();
 
-    if(_id_1121()) {
+    if(needtoturn()) {
       self notify("end_weapon_swap");
     }
   }
 }
 
-_id_115C(var_0) {
+handlecleanupputaway(var_0) {
   if(var_0 == "pistol_putaway") {
-    thread animscripts\combat_utility::_id_1153();
+    thread animscripts\combat_utility::putgunbackinhandonkillanimscript();
   } else if(issubstr(var_0, "anim_gunhand")) {
     self notify("end_weapon_swap");
   }
 }
 
-_id_115D() {
-  if(!animscripts\utility::_id_0BB6() || self._id_0CD1 == 0) {
+rpgdeath() {
+  if(!animscripts\utility::usingrocketlauncher() || self.bulletsinclip == 0) {
     return 0;
   }
   if(randomfloat(1) > 0.5) {
@@ -1047,14 +1047,14 @@ _id_115D() {
   } else {
     self setflaggedanimknoball("deathanim", %rpg_stand_death_stagger, %root, 1, 0.05, 1);
   }
-  animscripts\shared::_id_0C51("deathanim");
-  animscripts\shared::_id_0D73();
+  animscripts\shared::donotetracks("deathanim");
+  animscripts\shared::dropallaiweapons();
   return;
 }
 
-_id_115E() {
+reacquirewhennecessary() {
   self endon("killanimscript");
-  self.a._id_1145 = 0;
+  self.a.exposedreloading = 0;
 
   for(;;) {
     wait 0.2;
@@ -1065,61 +1065,61 @@ _id_115E() {
       }
     }
 
-    _id_115F();
+    tryexposedreacquire();
   }
 }
 
-_id_115F() {
+tryexposedreacquire() {
   if(self.fixednode) {
     return;
   }
   if(!isDefined(self.enemy)) {
-    self._id_1160 = 0;
+    self.reacquire_state = 0;
     return;
   }
 
   if(gettime() < self.teammovewaittime) {
-    self._id_1160 = 0;
+    self.reacquire_state = 0;
     return;
   }
 
-  if(isDefined(self._id_1161) && self._id_1161 != self.enemy) {
-    self._id_1160 = 0;
-    self._id_1161 = undefined;
+  if(isDefined(self.prevenemy) && self.prevenemy != self.enemy) {
+    self.reacquire_state = 0;
+    self.prevenemy = undefined;
     return;
   }
 
-  self._id_1161 = self.enemy;
+  self.prevenemy = self.enemy;
 
   if(self cansee(self.enemy) && self canshootenemy()) {
-    self._id_1160 = 0;
+    self.reacquire_state = 0;
     return;
   }
 
-  if(isDefined(self._id_1147) && !self._id_1147) {
-    self._id_1160 = 0;
+  if(isDefined(self.finishedreload) && !self.finishedreload) {
+    self.reacquire_state = 0;
     return;
   }
 
-  if(!isDefined(self._id_4411) || !self._id_4411) {
+  if(!isDefined(self.reacquire_without_facing) || !self.reacquire_without_facing) {
     var_0 = vectorNormalize(self.enemy.origin - self.origin);
     var_1 = anglesToForward(self.angles);
 
     if(vectordot(var_0, var_1) < 0.5) {
-      self._id_1160 = 0;
+      self.reacquire_state = 0;
       return;
     }
   }
 
-  if(self.a._id_1145 && animscripts\combat_utility::_id_0F08(0.25) && self.enemy.health > self.enemy.maxhealth * 0.5) {
-    self._id_1160 = 0;
+  if(self.a.exposedreloading && animscripts\combat_utility::needtoreload(0.25) && self.enemy.health > self.enemy.maxhealth * 0.5) {
+    self.reacquire_state = 0;
     return;
   }
 
-  if(animscripts\combat_utility::_id_0F34() && self._id_1160 < 3) {
-    self._id_1160 = 3;
+  if(animscripts\combat_utility::shouldhelpadvancingteammate() && self.reacquire_state < 3) {
+    self.reacquire_state = 3;
   }
-  switch (self._id_1160) {
+  switch (self.reacquire_state) {
     case 0:
       if(self reacquirestep(32)) {
         return;
@@ -1127,21 +1127,21 @@ _id_115F() {
       break;
     case 1:
       if(self reacquirestep(64)) {
-        self._id_1160 = 0;
+        self.reacquire_state = 0;
         return;
       }
 
       break;
     case 2:
       if(self reacquirestep(96)) {
-        self._id_1160 = 0;
+        self.reacquire_state = 0;
         return;
       }
 
       break;
     case 3:
-      if(animscripts\combat_utility::_id_0F35(0)) {
-        self._id_1160 = 0;
+      if(animscripts\combat_utility::tryrunningtoenemy(0)) {
+        self.reacquire_state = 0;
         return;
       }
 
@@ -1152,13 +1152,13 @@ _id_115F() {
       }
       break;
     default:
-      if(self._id_1160 > 15) {
-        self._id_1160 = 0;
+      if(self.reacquire_state > 15) {
+        self.reacquire_state = 0;
         return;
       }
 
       break;
   }
 
-  self._id_1160++;
+  self.reacquire_state++;
 }

@@ -5,11 +5,11 @@
 
 main() {
   self setModel("body_fso_vest_d");
-  codescripts\character::attachhead("alias_fso_heads", _id_5890::main());
+  codescripts\character::attachhead("alias_fso_heads", xmodelalias/alias_fso_heads::main());
   self.voice = "russian";
 }
 
 precache() {
   precachemodel("body_fso_vest_d");
-  codescripts\character::precachemodelarray(_id_5890::main());
+  codescripts\character::precachemodelarray(xmodelalias/alias_fso_heads::main());
 }

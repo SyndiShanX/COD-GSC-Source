@@ -22,7 +22,7 @@ main() {
   }
 
   self.weapon = "pecheneg";
-  _id_05C5::main();
+  character/character_sp_juggernaut::main();
 }
 
 spawner() {
@@ -30,10 +30,10 @@ spawner() {
 }
 
 precache() {
-  _id_05C5::precache();
+  character/character_sp_juggernaut::precache();
   precacheitem("pecheneg");
   precacheitem("beretta");
   precacheitem("beretta");
   precacheitem("fraggrenade");
-  _id_05C6::main();
+  maps/_juggernaut::main();
 }

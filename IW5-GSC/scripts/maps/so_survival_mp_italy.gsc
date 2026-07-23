@@ -10,12 +10,12 @@ main() {
   maps\createart\mp_italy_art::main();
   maps\mp\mp_italy_fx::main();
   maps\createfx\mp_italy_fx::main();
-  maps\_so_survival::_id_3F65();
+  maps\_so_survival::survival_preload();
   maps\_load::main();
   maps\_utility::set_vision_set("mp_italy", 0);
-  maps\_so_survival::_id_3F66();
+  maps\_so_survival::survival_postload();
   maps\_compass::setupminimap("compass_map_mp_italy");
-  maps\_so_survival::_id_3F67();
+  maps\_so_survival::survival_init();
   delete_stupid_curtains();
 }
 

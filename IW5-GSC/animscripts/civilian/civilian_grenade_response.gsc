@@ -4,5 +4,5 @@
 **************************************************************/
 
 main() {
-  animscripts\civilian::_id_400A();
+  animscripts\civilian::cover();
 }

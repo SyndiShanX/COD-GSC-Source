@@ -9,8 +9,8 @@ main() {
   if(isDefined(self.type) && self.type == "dog") {
     return;
   }
-  self._id_247C = "crouch";
-  animscripts\utility::_id_247B();
+  self.desired_anim_pose = "crouch";
+  animscripts\utility::updateanimpose();
   self endon("killanimscript");
   self traversemode("noclip");
   var_0 = % ladder_climbup;
@@ -19,8 +19,8 @@ main() {
   self orientmode("face angle", var_2.angles[1]);
   var_3 = 1;
 
-  if(isDefined(self._id_0FC6)) {
-    var_3 = self._id_0FC6;
+  if(isDefined(self.moveplaybackrate)) {
+    var_3 = self.moveplaybackrate;
   }
   self setflaggedanimknoballrestart("climbanim", var_0, %body, 1, 0.1, var_3);
   var_4 = getmovedelta(var_1, 0, 1);
@@ -32,12 +32,12 @@ main() {
 
   if(var_9 > 0) {
     self.allowpain = 1;
-    animscripts\notetracks::_id_0D4F(var_9, "climbanim");
+    animscripts\notetracks::donotetracksfortime(var_9, "climbanim");
     self setflaggedanimknoballrestart("climbanim", var_1, %body, 1, 0.1, var_3);
-    animscripts\shared::_id_0C51("climbanim");
+    animscripts\shared::donotetracks("climbanim");
   }
 
   self traversemode("gravity");
-  self.a._id_0D2B = "run";
-  self.a._id_0D26 = "crouch";
+  self.a.movement = "run";
+  self.a.pose = "crouch";
 }

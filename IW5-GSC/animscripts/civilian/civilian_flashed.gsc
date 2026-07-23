@@ -3,15 +3,15 @@
  * Script: animscripts\civilian\civilian_flashed.gsc
 *****************************************************/
 
-_id_400E() {
-  return anim._id_400F[randomint(anim._id_400F.size)];
+get_flashed_anim() {
+  return anim.civilianflashedarray[randomint(anim.civilianflashedarray.size)];
 }
 
 main() {
-  var_0 = maps\_utility::_id_2094();
+  var_0 = maps\_utility::flashbanggettimeleftsec();
 
   if(var_0 <= 0) {
     return;
   }
-  animscripts\flashed::_id_2096(_id_400E(), var_0);
+  animscripts\flashed::turrettimer(get_flashed_anim(), var_0);
 }

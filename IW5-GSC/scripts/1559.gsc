@@ -3,7 +3,7 @@
  * Script: scripts\1559.gsc
 **************************************/
 
-_id_3CD8() {
+airstrike_preload() {
   precachelocationselector("map_artillery_selector");
   precacheitem("killstreak_precision_airstrike_sp");
   precacheitem("killstreak_stealth_airstrike_sp");
@@ -56,8 +56,8 @@ _id_3CD8() {
   level.artillerydangercenters = [];
 }
 
-_id_3CD9(var_0) {
-  if(isDefined(self._id_3B10) && self._id_3B10) {
+try_use_airstrike(var_0) {
+  if(isDefined(self.using_uav) && self.using_uav) {
     return 0;
   }
   if(!isDefined(var_0)) {
@@ -79,16 +79,16 @@ _id_3CD9(var_0) {
       break;
   }
 
-  var_1 = _id_3CDB(var_0);
+  var_1 = airstrike_location_select(var_0);
 
   if(!isDefined(var_1)) {
     return 0;
   }
-  thread _id_3CDE(var_0, var_1.location, var_1._id_3CDA);
+  thread finish_using_airstrike(var_0, var_1.location, var_1.directionyaw);
   return 1;
 }
 
-_id_3CDB(var_0) {
+airstrike_location_select(var_0) {
   var_1 = 0;
 
   if(var_0 == "precision" || var_0 == "stealth") {
@@ -103,9 +103,9 @@ _id_3CDB(var_0) {
   self.selectinglocation = 1;
   self setblurforplayer(4.0, 0.3);
   thread waitforairstrikecancel();
-  thread _id_3CDC("cancel_location");
-  thread _id_3CDC("death");
-  thread _id_3CDC("disconnect");
+  thread endselectionon("cancel_location");
+  thread endselectionon("death");
+  thread endselectionon("disconnect");
   self endon("stop_location_selection");
   self waittill("confirm_location", var_3, var_4);
 
@@ -122,8 +122,8 @@ _id_3CDB(var_0) {
 
   var_5 = spawnStruct();
   var_5.location = var_3;
-  var_5._id_3CDA = var_4;
-  maps\_utility::delaythread(0.05, ::_id_3CDD);
+  var_5.directionyaw = var_4;
+  maps\_utility::delaythread(0.05, ::stopairstrikelocationselection);
   return var_5;
 }
 
@@ -132,26 +132,26 @@ waitforairstrikecancel() {
   self setblurforplayer(0, 0.3);
 }
 
-_id_3CDC(var_0) {
+endselectionon(var_0) {
   self endon("stop_location_selection");
   self waittill(var_0);
-  thread _id_3CDD();
+  thread stopairstrikelocationselection();
 }
 
-_id_3CDD() {
+stopairstrikelocationselection() {
   self setblurforplayer(0, 0.3);
   self endlocationselection();
   self.selectinglocation = undefined;
   self notify("stop_location_selection");
 }
 
-_id_3CDE(var_0, var_1, var_2) {
+finish_using_airstrike(var_0, var_1, var_2) {
   var_3 = bulletTrace(level.mapcenter + (0, 0, 1000000.0), level.mapcenter, 0, undefined);
   var_1 = (var_1[0], var_1[1], var_3["position"][2] - 514);
-  thread _id_3CDF(var_0, var_1, var_2, self, self.team);
+  thread do_airstrike(var_0, var_1, var_2, self, self.team);
 }
 
-_id_3CDF(var_0, var_1, var_2, var_3, var_4) {
+do_airstrike(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_0)) {
     var_0 = "default";
   }
@@ -298,7 +298,7 @@ getexplodedistance(var_0) {
   return var_4;
 }
 
-_id_3CE0(var_0, var_1, var_2) {
+airstrike_spawn_fake_plane(var_0, var_1, var_2) {
   var_3 = "vehicle_mig29_desert";
   var_4 = "compass_objpoint_airstrike_friendly";
   var_5 = "compass_objpoint_airstrike_busy";
@@ -331,7 +331,7 @@ doplanestrike(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_9 = 150;
   var_10 = var_2 + ((randomfloat(2) - 1) * var_8, (randomfloat(2) - 1) * var_8, 0);
   var_11 = var_3 + ((randomfloat(2) - 1) * var_9, (randomfloat(2) - 1) * var_9, 0);
-  var_12 = _id_3CE0(var_7, var_0, var_10);
+  var_12 = airstrike_spawn_fake_plane(var_7, var_0, var_10);
   var_12 playLoopSound("veh_mig29_dist_loop");
   var_12.angles = var_6;
   var_13 = anglesToForward(var_6);
@@ -401,7 +401,7 @@ radiusartilleryshellshock(var_0, var_1, var_2, var_3) {
       continue;
     }
     var_8 = var_7 / var_1;
-    var_9 = maps\_utility::_id_281D(var_8, var_3, var_2);
+    var_9 = maps\_utility::linear_interpolate(var_8, var_3, var_2);
     var_5 thread artilleryshellshock("default", var_9);
   }
 }
@@ -482,7 +482,7 @@ dobomberstrike(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_8 = 150;
   var_9 = var_2 + ((randomfloat(2) - 1) * var_7, (randomfloat(2) - 1) * var_7, 0);
   var_10 = var_3 + ((randomfloat(2) - 1) * var_8, (randomfloat(2) - 1) * var_8, 0);
-  var_11 = _id_3CE0("stealth", var_0, var_9);
+  var_11 = airstrike_spawn_fake_plane("stealth", var_0, var_9);
   var_11 playLoopSound("veh_b2_dist_loop");
   var_11 setModel("vehicle_b2_bomber");
   var_11.angles = var_6;

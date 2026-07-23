@@ -22,7 +22,7 @@ main() {
   }
 
   self.weapon = "none";
-  _id_05C1::main();
+  character/character_so_regular_smg::main();
 }
 
 spawner() {
@@ -30,7 +30,7 @@ spawner() {
 }
 
 precache() {
-  _id_05C1::precache();
+  character/character_so_regular_smg::precache();
   precacheitem("fraggrenade");
-  _id_05C2::main();
+  maps/_rambo::main();
 }

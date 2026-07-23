@@ -6,24 +6,24 @@
 main() {
   level.wave_table = "sp/so_survival/tier_dlc_1.csv";
   level.loadout_table = "sp/so_survival/tier_dlc_1.csv";
-  _id_061C::_id_3D56("easy", "actor_enemy_so_easy_v2");
+  maps/_so_survival_ai::ai_type_add_override_class("easy", "actor_enemy_so_easy_v2");
   maps\so_survival_mp_boardwalk_precache::main();
   maps\mp\mp_boardwalk_precache::main();
   maps\createart\mp_boardwalk_art::main();
   maps\mp\mp_boardwalk_fx::main();
   maps\createfx\mp_boardwalk_fx::main();
-  maps\_so_survival::_id_3F65();
+  maps\_so_survival::survival_preload();
   maps\_load::main();
   ambientplay("ambient_mp_boardwalk");
   maps\_utility::set_vision_set("mp_boardwalk", 0);
-  maps\_so_survival::_id_3F66();
+  maps\_so_survival::survival_postload();
   maps\_compass::setupminimap("compass_map_mp_boardwalk");
-  maps\_so_survival::_id_3F67();
+  maps\_so_survival::survival_init();
   level thread rotate_sign();
   level thread balloons();
   level thread carnival_games();
   level thread setup_carnival_items();
-  level thread _id_0618::_id_6F52();
+  level thread maps/_so_survival_code::break_glass();
 }
 
 setup_carnival_items() {

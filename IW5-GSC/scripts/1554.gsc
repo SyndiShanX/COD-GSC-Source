@@ -3,119 +3,119 @@
  * Script: scripts\1554.gsc
 **************************************/
 
-_id_3C49() {
-  if(!isDefined(level._id_3BD4)) {
-    level._id_3BD4 = [];
+setup_remote_missile_target() {
+  if(!isDefined(level.remote_missile_targets)) {
+    level.remote_missile_targets = [];
   }
-  level._id_3BD4[self.unique_id] = self;
+  level.remote_missile_targets[self.unique_id] = self;
 
-  if(isDefined(level._id_3BD8._id_3C3B) && !isDefined(level._id_3BDD)) {
+  if(isDefined(level.uav_struct.draw_red_boxes) && !isDefined(level.uav_is_destroyed)) {
     level endon("draw_target_end");
 
-    while(isDefined(level._id_3C4A) && level._id_3C4A == gettime()) {
+    while(isDefined(level.setup_remote_missile_target_last_add_time) && level.setup_remote_missile_target_last_add_time == gettime()) {
       wait 0.05;
     }
-    level._id_3C4A = gettime();
+    level.setup_remote_missile_target_last_add_time = gettime();
 
     if(isalive(self)) {
-      maps\_remotemissile::_id_3C3C();
+      maps\_remotemissile::draw_target();
     }
   }
 
   self waittill("death");
-  level._id_3BD4[self.unique_id] = undefined;
+  level.remote_missile_targets[self.unique_id] = undefined;
 
   if(!isDefined(self)) {
     return;
   }
-  if(isDefined(self._id_3C3D)) {
-    self._id_3C3D = undefined;
+  if(isDefined(self.has_target_shader)) {
+    self.has_target_shader = undefined;
     target_remove(self);
   }
 }
 
-_id_3C19() {
+player_uav_rig() {
   if(isDefined(level.uavrig)) {
     return level.uavrig;
   }
-  var_0 = maps\_remotemissile::_id_3C29();
+  var_0 = maps\_remotemissile::get_current_uav_rig();
   return var_0;
 }
 
-_id_3C4B(var_0) {
+create_uav_rigs(var_0) {
   foreach(var_2 in level.players) {
     var_3 = common_scripts\utility::spawn_tag_origin();
     var_3.origin = self.origin;
-    var_3._id_3C2C = self;
-    var_3 thread maps\_remotemissile::_id_3C47(var_0, var_2);
-    var_2 _id_3C4C(var_3);
-    var_2 thread maps\_remotemissile::_id_3C45();
+    var_3.uav = self;
+    var_3 thread maps\_remotemissile::run_rig_function_when_player_uses_uav(var_0, var_2);
+    var_2 add_player_rig(var_3);
+    var_2 thread maps\_remotemissile::cycle_uav_rigs();
   }
 }
 
-_id_3C4C(var_0) {
-  if(!isDefined(self._id_3BF0)) {
-    self._id_3BF0 = [];
+add_player_rig(var_0) {
+  if(!isDefined(self.uav_rigs)) {
+    self.uav_rigs = [];
   }
-  self._id_3BF0[self._id_3BF0.size] = var_0;
+  self.uav_rigs[self.uav_rigs.size] = var_0;
 }
 
-_id_3C4D() {
+give_player_remote_missiles() {
   self giveweapon("remote_missile_detonator");
-  self._id_1FB6 = 4;
-  thread _id_3BEC();
+  self.remotemissile_actionslot = 4;
+  thread remotemissile_with_autoreloading();
   common_scripts\utility::flag_clear("predator_missile_launch_allowed");
-  self setactionslot(self._id_1FB6, "weapon", "remote_missile_detonator");
+  self setactionslot(self.remotemissile_actionslot, "weapon", "remote_missile_detonator");
 }
 
-_id_3C4E() {
+remotemissile_reload() {
   level endon("stop_uav_reload");
   level endon("special_op_terminated");
 
   if(common_scripts\utility::flag("uav_reloading")) {
-    if(isDefined(level._id_3BDD)) {
+    if(isDefined(level.uav_is_destroyed)) {
       return;
     }
-    maps\_remotemissile::_id_3BE9();
+    maps\_remotemissile::remove_uav_weapon();
 
     if(common_scripts\utility::flag("uav_collecting_stats")) {
       level waittill("uav_collecting_stats");
-      maps\_remotemissile::_id_3BFC();
+      maps\_remotemissile::play_kills_dialogue();
     }
 
-    if(isDefined(level._id_3BDD)) {
+    if(isDefined(level.uav_is_destroyed)) {
       return;
     }
-    level._id_3BF3 = undefined;
+    level.uav_user = undefined;
 
     if(common_scripts\utility::flag("uav_reloading")) {
       level waittill("uav_reloading");
     }
-    if(isDefined(level._id_3BDD)) {
+    if(isDefined(level.uav_is_destroyed)) {
       return;
     }
     if(!common_scripts\utility::flag("uav_enabled")) {
       return;
     }
-    if(self getweaponammoclip(self._id_3BE8) < 1) {
-      maps\_remotemissile::_id_3BE6();
+    if(self getweaponammoclip(self.uav_weaponname) < 1) {
+      maps\_remotemissile::disable_uav();
       return;
     }
 
-    maps\_remotemissile::_id_3BE7();
-    thread maps\_remotemissile::_id_3BFF("uav_online");
-    thread maps\_remotemissile::_id_3BFA();
+    maps\_remotemissile::restore_uav_weapon();
+    thread maps\_remotemissile::remotemissile_radio("uav_online");
+    thread maps\_remotemissile::remotemissile_radio_reminder();
   }
 }
 
-_id_3BEC() {
-  maps\_remotemissile::_id_3BF8(::_id_3C4E);
+remotemissile_with_autoreloading() {
+  maps\_remotemissile::remotemissile_player_input(::remotemissile_reload);
 }
 
-_id_3C4F() {
-  maps\_remotemissile::_id_3BF8();
+remotemissile_no_autoreload() {
+  maps\_remotemissile::remotemissile_player_input();
 }
 
-_id_3C1A() {
-  return isDefined(level._id_3C50);
+remotemissile_move_player() {
+  return isDefined(level.remotemissile_temp_move_player);
 }

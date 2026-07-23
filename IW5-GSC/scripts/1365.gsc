@@ -3,151 +3,151 @@
  * Script: scripts\1365.gsc
 **************************************/
 
-_id_416B() {
+init_overheat() {
   precacheshader("hud_temperature_gauge");
 }
 
-_id_416C(var_0) {
-  if(isDefined(self._id_3C98)) {
+overheat_enable(var_0) {
+  if(isDefined(self.overheat)) {
     return;
   }
-  self._id_3C98 = spawnStruct();
-  self._id_3C98._id_416D = 1;
-  self._id_3C98.overheated = 0;
-  self._id_3C98._id_416E = 114;
-  self._id_3C98._id_416F = 1.0;
-  self._id_3C98._id_4170 = 1.0;
-  self._id_3C98._id_4171 = 2.0;
-  self._id_3C98._id_4172 = 0.2;
-  self._id_3C98._id_4173 = 0.1;
-  self._id_3C98._id_4174 = 2.0;
-  thread _id_417A();
-  thread _id_4178(var_0);
+  self.overheat = spawnStruct();
+  self.overheat.turret_heat_status = 1;
+  self.overheat.overheated = 0;
+  self.overheat.turret_heat_max = 114;
+  self.overheat.turret_heat_rate = 1.0;
+  self.overheat.turret_cool_rate = 1.0;
+  self.overheat.overheat_time = 2.0;
+  self.overheat.overheat_flash_time = 0.2;
+  self.overheat.overheat_flash_time_increment = 0.1;
+  self.overheat.gun_usage_delay_after_overheat = 2.0;
+  thread create_hud();
+  thread status_meter_update(var_0);
 }
 
-_id_4175() {
+overheat_disable() {
   self notify("disable_overheat");
-  level._id_1C4F = undefined;
+  level.savehere = undefined;
   waittillframeend;
 
-  if(isDefined(self._id_3C98._id_4176)) {
-    self._id_3C98._id_4176 destroy();
+  if(isDefined(self.overheat.overheat_bg)) {
+    self.overheat.overheat_bg destroy();
   }
-  if(isDefined(self._id_3C98._id_4177)) {
-    self._id_3C98._id_4177 destroy();
+  if(isDefined(self.overheat.overheat_status)) {
+    self.overheat.overheat_status destroy();
   }
-  self._id_3C98 = undefined;
+  self.overheat = undefined;
 }
 
-_id_4178(var_0) {
+status_meter_update(var_0) {
   self endon("disable_overheat");
 
   for(;;) {
-    if(self._id_3C98._id_416D >= self._id_3C98._id_416E) {
+    if(self.overheat.turret_heat_status >= self.overheat.turret_heat_max) {
       wait 0.05;
       continue;
     }
 
-    if(self attackButtonPressed() && !self._id_3C98.overheated) {
-      self._id_3C98._id_416D = self._id_3C98._id_416D + self._id_3C98._id_416F;
+    if(self attackButtonPressed() && !self.overheat.overheated) {
+      self.overheat.turret_heat_status = self.overheat.turret_heat_status + self.overheat.turret_heat_rate;
     } else {
-      self._id_3C98._id_416D = self._id_3C98._id_416D - self._id_3C98._id_4170;
+      self.overheat.turret_heat_status = self.overheat.turret_heat_status - self.overheat.turret_cool_rate;
     }
-    self._id_3C98._id_416D = clamp(self._id_3C98._id_416D, 1, self._id_3C98._id_416E);
-    _id_4179();
+    self.overheat.turret_heat_status = clamp(self.overheat.turret_heat_status, 1, self.overheat.turret_heat_max);
+    update_overheat_meter();
     thread overheated(var_0);
     wait 0.05;
   }
 }
 
-_id_4179() {
-  self._id_3C98._id_4177 scaleovertime(0.05, 10, int(self._id_3C98._id_416D));
-  thread _id_417B(self._id_3C98._id_416D, 0.05);
+update_overheat_meter() {
+  self.overheat.overheat_status scaleovertime(0.05, 10, int(self.overheat.turret_heat_status));
+  thread overheat_setcolor(self.overheat.turret_heat_status, 0.05);
 }
 
-_id_417A() {
+create_hud() {
   self endon("disable_overheat");
   var_0 = 0;
 
-  if(maps\_utility::_id_12C1()) {
+  if(maps\_utility::is_coop()) {
     var_0 = 70;
   }
   var_1 = -10;
   var_2 = -152 + var_0;
 
-  if(!isDefined(self._id_3C98._id_4176)) {
-    self._id_3C98._id_4176 = newclienthudelem(self);
-    self._id_3C98._id_4176.alignx = "right";
-    self._id_3C98._id_4176.aligny = "bottom";
-    self._id_3C98._id_4176.horzalign = "right";
-    self._id_3C98._id_4176.vertalign = "bottom";
-    self._id_3C98._id_4176.x = 2;
-    self._id_3C98._id_4176.y = -120 + var_0;
-    self._id_3C98._id_4176 setshader("hud_temperature_gauge", 35, 150);
-    self._id_3C98._id_4176.sort = 4;
+  if(!isDefined(self.overheat.overheat_bg)) {
+    self.overheat.overheat_bg = newclienthudelem(self);
+    self.overheat.overheat_bg.alignx = "right";
+    self.overheat.overheat_bg.aligny = "bottom";
+    self.overheat.overheat_bg.horzalign = "right";
+    self.overheat.overheat_bg.vertalign = "bottom";
+    self.overheat.overheat_bg.x = 2;
+    self.overheat.overheat_bg.y = -120 + var_0;
+    self.overheat.overheat_bg setshader("hud_temperature_gauge", 35, 150);
+    self.overheat.overheat_bg.sort = 4;
   }
 
-  if(!isDefined(self._id_3C98._id_4177)) {
-    self._id_3C98._id_4177 = newclienthudelem(self);
-    self._id_3C98._id_4177.alignx = "right";
-    self._id_3C98._id_4177.aligny = "bottom";
-    self._id_3C98._id_4177.horzalign = "right";
-    self._id_3C98._id_4177.vertalign = "bottom";
-    self._id_3C98._id_4177.x = var_1;
-    self._id_3C98._id_4177.y = var_2;
-    self._id_3C98._id_4177 setshader("white", 10, 1);
-    self._id_3C98._id_4177.color = (1, 0.9, 0);
-    self._id_3C98._id_4177.alpha = 1;
-    self._id_3C98._id_4177.sort = 1;
+  if(!isDefined(self.overheat.overheat_status)) {
+    self.overheat.overheat_status = newclienthudelem(self);
+    self.overheat.overheat_status.alignx = "right";
+    self.overheat.overheat_status.aligny = "bottom";
+    self.overheat.overheat_status.horzalign = "right";
+    self.overheat.overheat_status.vertalign = "bottom";
+    self.overheat.overheat_status.x = var_1;
+    self.overheat.overheat_status.y = var_2;
+    self.overheat.overheat_status setshader("white", 10, 1);
+    self.overheat.overheat_status.color = (1, 0.9, 0);
+    self.overheat.overheat_status.alpha = 1;
+    self.overheat.overheat_status.sort = 1;
   }
 }
 
 overheated(var_0) {
   self endon("disable_overheat");
 
-  if(self._id_3C98._id_416D < self._id_3C98._id_416E) {
+  if(self.overheat.turret_heat_status < self.overheat.turret_heat_max) {
     return;
   }
-  if(self._id_3C98.overheated) {
+  if(self.overheat.overheated) {
     return;
   }
-  self._id_3C98.overheated = 1;
-  level._id_1C4F = 0;
+  self.overheat.overheated = 1;
+  level.savehere = 0;
   thread maps\_utility::play_sound_on_entity("smokegrenade_explode_default");
-  self._id_3C98._id_416D = self._id_3C98._id_416E;
+  self.overheat.turret_heat_status = self.overheat.turret_heat_max;
 
   if(isDefined(var_0.mgturret)) {
     var_0.mgturret[0] turretfiredisable();
   }
   var_1 = gettime();
-  var_2 = self._id_3C98._id_4172;
+  var_2 = self.overheat.overheat_flash_time;
 
   for(;;) {
-    self._id_3C98._id_4177 fadeovertime(var_2);
-    self._id_3C98._id_4177.alpha = 0.2;
+    self.overheat.overheat_status fadeovertime(var_2);
+    self.overheat.overheat_status.alpha = 0.2;
     wait(var_2);
-    self._id_3C98._id_4177 fadeovertime(var_2);
-    self._id_3C98._id_4177.alpha = 1.0;
+    self.overheat.overheat_status fadeovertime(var_2);
+    self.overheat.overheat_status.alpha = 1.0;
     wait(var_2);
-    var_2 = var_2 + self._id_3C98._id_4173;
+    var_2 = var_2 + self.overheat.overheat_flash_time_increment;
 
-    if(gettime() - var_1 >= self._id_3C98._id_4171 * 1000) {
+    if(gettime() - var_1 >= self.overheat.overheat_time * 1000) {
       break;
     }
   }
 
-  self._id_3C98._id_4177.alpha = 1.0;
-  self._id_3C98._id_416D = self._id_3C98._id_416D - self._id_3C98._id_4170;
-  wait(self._id_3C98._id_4174);
+  self.overheat.overheat_status.alpha = 1.0;
+  self.overheat.turret_heat_status = self.overheat.turret_heat_status - self.overheat.turret_cool_rate;
+  wait(self.overheat.gun_usage_delay_after_overheat);
 
   if(isDefined(var_0.mgturret)) {
     var_0.mgturret[0] turretfireenable();
   }
-  level._id_1C4F = undefined;
-  self._id_3C98.overheated = 0;
+  level.savehere = undefined;
+  self.overheat.overheated = 0;
 }
 
-_id_417B(var_0, var_1) {
+overheat_setcolor(var_0, var_1) {
   self endon("disable_overheat");
   var_2 = [];
   var_2[0] = 1.0;
@@ -166,8 +166,8 @@ _id_417B(var_0, var_1) {
   var_5[1] = var_2[1];
   var_5[2] = var_2[2];
   var_6 = 0;
-  var_7 = self._id_3C98._id_416E / 2;
-  var_8 = self._id_3C98._id_416E;
+  var_7 = self.overheat.turret_heat_max / 2;
+  var_8 = self.overheat.turret_heat_max;
   var_9 = undefined;
   var_10 = undefined;
   var_11 = undefined;
@@ -191,9 +191,9 @@ _id_417B(var_0, var_1) {
   }
 
   if(isDefined(var_1)) {
-    self._id_3C98._id_4177 fadeovertime(var_1);
+    self.overheat.overheat_status fadeovertime(var_1);
   }
-  if(isDefined(self._id_3C98._id_4177.color)) {
-    self._id_3C98._id_4177.color = (var_5[0], var_5[1], var_5[2]);
+  if(isDefined(self.overheat.overheat_status.color)) {
+    self.overheat.overheat_status.color = (var_5[0], var_5[1], var_5[2]);
   }
 }

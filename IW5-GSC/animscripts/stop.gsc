@@ -6,17 +6,17 @@
 #using_animtree("generic_human");
 
 main() {
-  if(isDefined(self._id_10EF)) {
+  if(isDefined(self.no_ai)) {
     return;
   }
-  if(isDefined(self._id_0CB3)) {
+  if(isDefined(self.onsnowmobile)) {
     animscripts\snowmobile::main();
     return;
   }
 
-  if(isDefined(self._id_10A5)) {
-    if(isDefined(self._id_10A5["stop"])) {
-      [[self._id_10A5["stop"]]]();
+  if(isDefined(self.custom_animscript_table)) {
+    if(isDefined(self.custom_animscript_table["stop"])) {
+      [[self.custom_animscript_table["stop"]]]();
       return;
     }
   }
@@ -24,16 +24,16 @@ main() {
   self notify("stopScript");
   self endon("killanimscript");
   [[self.defaultexception["stop_immediate"]]]();
-  thread _id_1104();
-  animscripts\utility::_id_0D15("stop");
-  _id_10F5();
-  animscripts\utility::_id_10F0();
-  thread _id_10F3();
-  thread animscripts\reactions::_id_0F20();
-  var_0 = isDefined(self._id_0C89);
+  thread delayedexception();
+  animscripts\utility::initialize("stop");
+  specialidleloop();
+  animscripts\utility::randomizeidleset();
+  thread setlaststoppedtime();
+  thread animscripts\reactions::reactionscheckloop();
+  var_0 = isDefined(self.customidleanimset);
 
   if(!var_0) {
-    if(self.a._id_0EE4["right"] == "none" && self.a._id_0EE4["left"] == "none") {
+    if(self.a.weaponpos["right"] == "none" && self.a.weaponpos["left"] == "none") {
       var_0 = 1;
     } else if(angleclamp180(self getmuzzleangle()[0]) > 20) {
       var_0 = 1;
@@ -41,57 +41,57 @@ main() {
   }
 
   for(;;) {
-    var_1 = _id_10F8();
+    var_1 = getdesiredidlepose();
 
     if(var_1 == "prone") {
       var_0 = 1;
-      _id_1102();
+      pronestill();
       continue;
     }
 
-    if(self.a._id_0D26 != var_1) {
+    if(self.a.pose != var_1) {
       self clearanim(%root, 0.3);
       var_0 = 0;
     }
 
-    animscripts\setposemovement::_id_10F1(var_1, "stop");
+    animscripts\setposemovement::setposemovement(var_1, "stop");
 
     if(!var_0) {
-      _id_10F9(var_1, self.a._id_10F2);
+      transitiontoidle(var_1, self.a.idleset);
       var_0 = 1;
       continue;
     }
 
-    _id_10FB(var_1, self.a._id_10F2);
+    playidle(var_1, self.a.idleset);
   }
 }
 
-_id_10F3() {
+setlaststoppedtime() {
   self endon("death");
   self waittill("killanimscript");
-  self._id_10F4 = gettime();
+  self.laststoppedtime = gettime();
 }
 
-_id_10F5() {
+specialidleloop() {
   self endon("stop_specialidle");
 
-  if(isDefined(self._id_10F6)) {
-    var_0 = self._id_10F6;
-    self._id_10F6 = undefined;
+  if(isDefined(self.specialidleanim)) {
+    var_0 = self.specialidleanim;
+    self.specialidleanim = undefined;
     self notify("clearing_specialIdleAnim");
     self animmode("gravity");
     self orientmode("face current");
     self clearanim(%root, 0.2);
 
     for(;;) {
-      self setflaggedanimrestart("special_idle", var_0[randomint(var_0.size)], 1, 0.2, self._id_10F7);
+      self setflaggedanimrestart("special_idle", var_0[randomint(var_0.size)], 1, 0.2, self.animplaybackrate);
       self waittillmatch("special_idle", "end");
     }
   }
 }
 
-_id_10F8() {
-  var_0 = animscripts\utility::_id_0BEE();
+getdesiredidlepose() {
+  var_0 = animscripts\utility::getclaimednode();
 
   if(isDefined(var_0)) {
     var_1 = var_0.angles[1];
@@ -101,78 +101,78 @@ _id_10F8() {
     var_2 = "node was undefined";
   }
 
-  animscripts\face::_id_0C45(anim._id_0C3D);
-  var_3 = animscripts\utility::_id_10AF();
+  animscripts\face::setidleface(anim.alertface);
+  var_3 = animscripts\utility::choosepose();
 
   if(var_2 == "Cover Stand" || var_2 == "Conceal Stand") {
-    var_3 = animscripts\utility::_id_10AF("stand");
+    var_3 = animscripts\utility::choosepose("stand");
   } else if(var_2 == "Cover Crouch" || var_2 == "Conceal Crouch") {
-    var_3 = animscripts\utility::_id_10AF("crouch");
+    var_3 = animscripts\utility::choosepose("crouch");
   } else if(var_2 == "Cover Prone" || var_2 == "Conceal Prone") {
-    var_3 = animscripts\utility::_id_10AF("prone");
+    var_3 = animscripts\utility::choosepose("prone");
   }
   return var_3;
 }
 
-_id_10F9(var_0, var_1) {
-  if(animscripts\utility::_id_0C98() && self.a._id_0D26 == "stand") {
+transitiontoidle(var_0, var_1) {
+  if(animscripts\utility::iscqbwalking() && self.a.pose == "stand") {
     var_0 = "stand_cqb";
   }
-  if(isDefined(anim._id_10FA[var_0])) {
-    var_2 = anim._id_10FA[var_0]["in"];
-    self setflaggedanimknoballrestart("idle_transition", var_2, %body, 1, 0.2, self._id_10F7);
-    animscripts\shared::_id_0C51("idle_transition");
+  if(isDefined(anim.idleanimtransition[var_0])) {
+    var_2 = anim.idleanimtransition[var_0]["in"];
+    self setflaggedanimknoballrestart("idle_transition", var_2, %body, 1, 0.2, self.animplaybackrate);
+    animscripts\shared::donotetracks("idle_transition");
   }
 }
 
-_id_10FB(var_0, var_1) {
-  if(animscripts\utility::_id_0C98() && self.a._id_0D26 == "stand") {
+playidle(var_0, var_1) {
+  if(animscripts\utility::iscqbwalking() && self.a.pose == "stand") {
     var_0 = "stand_cqb";
   }
   var_2 = undefined;
 
-  if(isDefined(self._id_0C89) && isDefined(self._id_0C89[var_0])) {
-    var_3 = self._id_0C89[var_0];
+  if(isDefined(self.customidleanimset) && isDefined(self.customidleanimset[var_0])) {
+    var_3 = self.customidleanimset[var_0];
     var_4 = var_0 + "_add";
 
-    if(isDefined(self._id_0C89[var_4])) {
-      var_2 = self._id_0C89[var_4];
+    if(isDefined(self.customidleanimset[var_4])) {
+      var_2 = self.customidleanimset[var_4];
     }
-  } else if(isDefined(anim._id_10FC) && (var_0 == "stand" || var_0 == "stand_cqb") && isDefined(self._id_10FD) && self._id_10FD == 1) {
-    var_3 = animscripts\utility::_id_10FF(anim._id_10FC["stand"][0], anim._id_10FE["stand"][0]);
+  } else if(isDefined(anim.readyanimarray) && (var_0 == "stand" || var_0 == "stand_cqb") && isDefined(self.busereadyidle) && self.busereadyidle == 1) {
+    var_3 = animscripts\utility::anim_array(anim.readyanimarray["stand"][0], anim.readyanimweights["stand"][0]);
   } else {
-    var_1 = var_1 % anim._id_1100[var_0].size;
-    var_3 = animscripts\utility::_id_10FF(anim._id_1100[var_0][var_1], anim._id_1101[var_0][var_1]);
+    var_1 = var_1 % anim.idleanimarray[var_0].size;
+    var_3 = animscripts\utility::anim_array(anim.idleanimarray[var_0][var_1], anim.idleanimweights[var_0][var_1]);
   }
 
   var_5 = 0.2;
 
-  if(gettime() == self.a._id_1019) {
+  if(gettime() == self.a.scriptstarttime) {
     var_5 = 0.5;
   }
   if(isDefined(var_2)) {
     self setanimknoball(var_3, %body, 1, var_5, 1);
     self setanim(%add_idle);
-    self setflaggedanimknoballrestart("idle", var_2, %add_idle, 1, var_5, self._id_10F7);
+    self setflaggedanimknoballrestart("idle", var_2, %add_idle, 1, var_5, self.animplaybackrate);
   } else {
-    self setflaggedanimknoballrestart("idle", var_3, %body, 1, var_5, self._id_10F7);
+    self setflaggedanimknoballrestart("idle", var_3, %body, 1, var_5, self.animplaybackrate);
   }
-  animscripts\shared::_id_0C51("idle");
+  animscripts\shared::donotetracks("idle");
 }
 
-_id_1102() {
-  if(self.a._id_0D26 != "prone") {
+pronestill() {
+  if(self.a.pose != "prone") {
     var_0["stand_2_prone"] = % stand_2_prone;
     var_0["crouch_2_prone"] = % crouch_2_prone;
-    var_1 = var_0[self.a._id_0D26 + "_2_prone"];
+    var_1 = var_0[self.a.pose + "_2_prone"];
     self setflaggedanimknoballrestart("trans", var_1, %body, 1, 0.2, 1.0);
-    animscripts\shared::_id_0C51("trans");
-    self.a._id_0D2B = "stop";
+    animscripts\shared::donotetracks("trans");
+    self.a.movement = "stop";
     self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_modern, %prone_legs_up);
     return;
   }
 
-  thread _id_1103();
+  thread updatepronethread();
 
   if(randomint(10) < 3) {
     var_2 = [];
@@ -192,17 +192,17 @@ _id_1102() {
   self notify("kill UpdateProneThread");
 }
 
-_id_1103() {
+updatepronethread() {
   self endon("killanimscript");
   self endon("kill UpdateProneThread");
 
   for(;;) {
-    animscripts\cover_prone::_id_10E2(0.1);
+    animscripts\cover_prone::updatepronewrapper(0.1);
     wait 0.1;
   }
 }
 
-_id_1104() {
+delayedexception() {
   self endon("killanimscript");
   wait 0.05;
   [[self.defaultexception["stop"]]]();

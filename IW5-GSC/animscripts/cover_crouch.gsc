@@ -5,11 +5,11 @@
 
 main() {
   self endon("killanimscript");
-  animscripts\utility::_id_0D15("cover_crouch");
-  animscripts\cover_wall::_id_0F76("crouch");
+  animscripts\utility::initialize("cover_crouch");
+  animscripts\cover_wall::cover_wall_think("crouch");
 }
 
 end_script() {
-  self._id_0CAC = undefined;
+  self.covercrouchlean_aimmode = undefined;
   animscripts\cover_behavior::end_script("crouch");
 }

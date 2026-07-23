@@ -5,22 +5,22 @@
 
 #using_animtree("generic_human");
 
-_id_1075() {
-  animscripts\run::_id_0FFD();
+movecqb() {
+  animscripts\run::changeweaponstandrun();
 
-  if(self.a._id_0D26 != "stand") {
+  if(self.a.pose != "stand") {
     self clearanim(%root, 0.2);
 
-    if(self.a._id_0D26 == "prone") {
-      animscripts\utility::_id_0F7D(1);
+    if(self.a.pose == "prone") {
+      animscripts\utility::exitpronewrapper(1);
     }
-    self.a._id_0D26 = "stand";
+    self.a.pose = "stand";
   }
 
-  self.a._id_0D2B = self.movemode;
-  thread _id_1079();
-  var_0 = _id_1076();
-  var_1 = self._id_0FC6;
+  self.a.movement = self.movemode;
+  thread cqbtracking();
+  var_0 = determinecqbanim();
+  var_1 = self.moveplaybackrate;
 
   if(self.movemode == "walk") {
     var_1 = var_1 * 0.6;
@@ -31,15 +31,15 @@ _id_1075() {
     var_2 = 0.1;
   }
   self setflaggedanimknoball("runanim", var_0, %walk_and_run_loops, 1, var_2, var_1, 1);
-  animscripts\run::_id_0FF7(%walk_backward, %walk_left, %walk_right);
-  thread animscripts\run::_id_0FF8("cqb");
-  animscripts\notetracks::_id_0D4F(0.2, "runanim");
-  thread animscripts\run::_id_0FE5();
+  animscripts\run::setmovenonforwardanims(%walk_backward, %walk_left, %walk_right);
+  thread animscripts\run::setcombatstandmoveanimweights("cqb");
+  animscripts\notetracks::donotetracksfortime(0.2, "runanim");
+  thread animscripts\run::stopshootwhilemovingthreads();
 }
 
-_id_1076() {
-  if(isDefined(self._id_0C88) && isDefined(self._id_0C88["cqb"])) {
-    return animscripts\run::_id_0FC2();
+determinecqbanim() {
+  if(isDefined(self.custommoveanimset) && isDefined(self.custommoveanimset["cqb"])) {
+    return animscripts\run::getrunanim();
   }
   if(self.stairsstate == "up") {
     return % traverse_stair_run;
@@ -50,7 +50,7 @@ _id_1076() {
   if(self.movemode == "walk") {
     return % walk_cqb_f;
   }
-  var_0 = animscripts\utility::_id_1078(self.a._id_1077, 2);
+  var_0 = animscripts\utility::getrandomintfromseed(self.a.runloopcount, 2);
 
   if(var_0 == 0) {
     return % run_cqb_f_search_v1;
@@ -58,30 +58,30 @@ _id_1076() {
   return % run_cqb_f_search_v2;
 }
 
-_id_1079() {
-  if(animscripts\move::_id_0FDE()) {
-    animscripts\run::_id_0FE3();
+cqbtracking() {
+  if(animscripts\move::mayshootwhilemoving()) {
+    animscripts\run::runshootwhilemovingthreads();
   }
-  animscripts\run::_id_0FE1();
+  animscripts\run::faceenemyaimtracking();
 }
 
-_id_107A() {
-  level._id_107B = [];
+setupcqbpointsofinterest() {
+  level.cqbpointsofinterest = [];
   var_0 = getEntArray("cqb_point_of_interest", "targetname");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    level._id_107B[var_1] = var_0[var_1].origin;
+    level.cqbpointsofinterest[var_1] = var_0[var_1].origin;
     var_0[var_1] delete();
   }
 }
 
-_id_107C() {
-  if(isDefined(anim._id_107D)) {
+findcqbpointsofinterest() {
+  if(isDefined(anim.findingcqbpointsofinterest)) {
     return;
   }
-  anim._id_107D = 1;
+  anim.findingcqbpointsofinterest = 1;
 
-  if(!level._id_107B.size) {
+  if(!level.cqbpointsofinterest.size) {
     return;
   }
   for(;;) {
@@ -89,8 +89,8 @@ _id_107C() {
     var_1 = 0;
 
     foreach(var_3 in var_0) {
-      if(isalive(var_3) && var_3 animscripts\utility::_id_0C98() && !isDefined(var_3._id_107E)) {
-        var_4 = var_3.a._id_0D2B != "stop";
+      if(isalive(var_3) && var_3 animscripts\utility::iscqbwalking() && !isDefined(var_3.disable_cqb_points_of_interest)) {
+        var_4 = var_3.a.movement != "stop";
         var_5 = (var_3.origin[0], var_3.origin[1], var_3 getshootatpos()[2]);
         var_6 = var_5;
         var_7 = anglesToForward(var_3.angles);
@@ -103,8 +103,8 @@ _id_107C() {
         var_9 = -1;
         var_10 = 1048576;
 
-        for(var_11 = 0; var_11 < level._id_107B.size; var_11++) {
-          var_12 = level._id_107B[var_11];
+        for(var_11 = 0; var_11 < level.cqbpointsofinterest.size; var_11++) {
+          var_12 = level.cqbpointsofinterest[var_11];
           var_13 = distancesquared(var_12, var_6);
 
           if(var_13 < var_10) {
@@ -129,9 +129,9 @@ _id_107C() {
         }
 
         if(var_9 < 0) {
-          var_3._id_0CB9 = undefined;
+          var_3.cqb_point_of_interest = undefined;
         } else {
-          var_3._id_0CB9 = level._id_107B[var_9];
+          var_3.cqb_point_of_interest = level.cqbpointsofinterest[var_9];
         }
         wait 0.05;
         var_1 = 1;

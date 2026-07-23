@@ -4,8 +4,8 @@
 *****************************************/
 
 main() {
-  if(!isDefined(level._id_4D68)) {
-    level._id_4D68 = 1;
+  if(!isDefined(level.trainer_version)) {
+    level.trainer_version = 1;
   }
   precachestring(&"SO_DELTACAMP_OBJ_V1");
   precachestring(&"SO_DELTACAMP_OBJ_V2");
@@ -18,34 +18,34 @@ main() {
   precachestring(&"SO_DELTACAMP_SCOREBOARD_FINAL_TIME");
   precachestring(&"SO_DELTACAMP_DEAD_QUOTE_ALLY_HURT");
   precachemodel("com_folding_chair");
-  maps\_specialops::_id_188B();
-  maps\_utility::_id_1F1B(::_id_4D94);
-  maps\_utility::_id_1E74("start_assault", ::_id_4D94);
-  _id_4D69::main();
-  _id_0358::main();
-  _id_0359::main();
+  maps\_specialops::so_hud_stars_precache();
+  maps\_utility::default_start(::start_mission);
+  maps\_utility::add_start("start_assault", ::start_mission);
+  maps/createart/so_deltacamp_art::main();
+  maps/so_deltacamp_fx::main();
+  maps/so_deltacamp_precache::main();
   maps\so_deltacamp_anim::main();
   maps\_load::main();
   maps\_compass::setupminimap("compass_map_so_deltacamp");
   setsaveddvar("compassmaxrange", "1200");
   thread maps\so_deltacamp_amb::main();
-  maps\_audio::_id_1719();
-  _id_4D6D();
+  maps\_audio::aud_disable_deathsdoor_audio();
+  init_level_flags();
   maps\_utility::set_vision_set("so_deltacamp", 0);
-  _id_4DB6();
-  _id_4D6E();
-  level._id_1865 = 1;
-  thread maps\_specialops::_id_1802(level._id_4D6B, level._id_4D6A);
-  thread maps\_specialops::_id_17F3(undefined, 0);
-  thread maps\_specialops::_id_17F5("fade_challenge_out", 1);
-  thread _id_4DB5();
+  setup_level_hud();
+  setup_gameplay();
+  level.challenge_time_force_on = 1;
+  thread maps\_specialops::enable_challenge_timer(level.challenge_flag_start, level.challenge_flag_complete);
+  thread maps\_specialops::fade_challenge_in(undefined, 0);
+  thread maps\_specialops::fade_challenge_out("fade_challenge_out", 1);
+  thread setup_all_player_hud();
 
-  if(level._id_4D68 == 2) {
-    thread maps\_specialops::_id_17EF(level._id_4D6C, "all_players_reached_end", "any");
+  if(level.trainer_version == 2) {
+    thread maps\_specialops::enable_triggered_complete(level.challenge_trig_complete_noteworthy, "all_players_reached_end", "any");
   }
 }
 
-_id_4D6D() {
+init_level_flags() {
   common_scripts\utility::flag_init("course_start_open_gate");
   common_scripts\utility::flag_init("course_targets_finished");
   common_scripts\utility::flag_init("all_players_reached_end");
@@ -92,186 +92,186 @@ _id_4D6D() {
   common_scripts\utility::flag_init("target_group_root_v2_08_cleared");
 }
 
-_id_4D6E() {
-  _id_4D8F();
+setup_gameplay() {
+  init_stat_vars();
   var_0 = ["target_group_root_v1_02", "target_group_root_v1_03", "target_group_root_v1_04", "target_group_root_v1_05", "target_group_root_v1_06", "target_group_root_v1_07", "target_group_root_v1_08", "target_group_root_v1_09"];
   var_1 = ["target_group_root_v2_01", "target_group_root_v2_02", "target_group_root_v2_03", "target_group_root_v2_04", "target_group_root_v2_05", "target_group_root_v2_06", "target_group_root_v2_07", "target_group_root_v2_08"];
 
-  if(level._id_4D68 == 1) {
-    _id_4D6F("v2_only");
-    _id_4D6F("v2_coop_only");
+  if(level.trainer_version == 1) {
+    delete_ents("v2_only");
+    delete_ents("v2_coop_only");
 
-    if(!maps\_utility::_id_12C1()) {
-      _id_4D6F("v1_coop_only");
+    if(!maps\_utility::is_coop()) {
+      delete_ents("v1_coop_only");
     }
-    level._id_4D6B = "so_training_deltacamp_start_v1";
-    level._id_4D6A = "so_training_deltacamp_complete_v1";
-    thread _id_4D95(var_0, var_1);
-  } else if(level._id_4D68 == 2) {
-    _id_4D6F("v1_only");
-    _id_4D6F("v1_coop_only");
+    level.challenge_flag_start = "so_training_deltacamp_start_v1";
+    level.challenge_flag_complete = "so_training_deltacamp_complete_v1";
+    thread course_think(var_0, var_1);
+  } else if(level.trainer_version == 2) {
+    delete_ents("v1_only");
+    delete_ents("v1_coop_only");
 
-    if(!maps\_utility::_id_12C1()) {
-      _id_4D6F("v2_coop_only");
+    if(!maps\_utility::is_coop()) {
+      delete_ents("v2_coop_only");
     }
-    _id_4D72();
-    _id_4D73();
-    level._id_4D6B = "so_training_deltacamp_start_v2";
-    level._id_4D6A = "so_training_deltacamp_complete_v2";
-    level._id_4D6C = "trig_level_end_v2";
-    thread _id_4D95(var_1, var_0);
+    doors_adjust_for_version_2();
+    setup_breach();
+    level.challenge_flag_start = "so_training_deltacamp_start_v2";
+    level.challenge_flag_complete = "so_training_deltacamp_complete_v2";
+    level.challenge_trig_complete_noteworthy = "trig_level_end_v2";
+    thread course_think(var_1, var_0);
   }
 
-  thread _id_4D71();
-  thread _id_4D7C();
-  thread _id_4D7E();
-  thread _id_4D7F();
-  thread _id_4D85();
-  thread _id_3F71();
+  thread on_mission_success();
+  thread setup_fail_triggers();
+  thread objective_think();
+  thread setup_dialog();
+  thread setup_allies();
+  thread setup_players();
   thread _id_004B();
-  level._id_16BC = 1;
-  level._id_16BD = ::_id_16C2;
+  level.custom_eog_no_defaults = 1;
+  level.eog_summary_callback = ::custom_eog_summary;
   common_scripts\utility::trigger_off("trig_mission_end_slide", "targetname");
 }
 
-_id_4D6F(var_0) {
+delete_ents(var_0) {
   var_1 = getEntArray(var_0, "script_noteworthy");
   common_scripts\utility::array_call(var_1, ::delete);
 }
 
-_id_4D70(var_0, var_1) {
+on_flag_set_up_slide(var_0, var_1) {
   common_scripts\utility::flag_wait(var_0);
   common_scripts\utility::trigger_on(var_1, "targetname");
 }
 
-_id_4D71() {
+on_mission_success() {
   level endon("special_op_terminated");
 
-  if(level._id_4D68 == 1) {
+  if(level.trainer_version == 1) {
     common_scripts\utility::flag_wait("course_targets_finished");
-  } else if(level._id_4D68 == 2) {
+  } else if(level.trainer_version == 2) {
     common_scripts\utility::flag_wait("all_players_reached_end");
   }
-  common_scripts\utility::flag_set(level._id_4D6A);
+  common_scripts\utility::flag_set(level.challenge_flag_complete);
   wait 1.0;
   common_scripts\utility::flag_set("fade_challenge_out");
 }
 
-_id_4D72() {
+doors_adjust_for_version_2() {
   var_0 = getEntArray("door_ent", "targetname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2._id_2961)) {
-      var_2._id_2961 = var_2._id_2961 * -1;
+    if(isDefined(var_2.script_goalyaw)) {
+      var_2.script_goalyaw = var_2.script_goalyaw * -1;
     }
   }
 
   foreach(var_2 in var_0) {
-    if(var_2 _id_4DBF("door_before", ";")) {
-      var_2 _id_4DC0("door_before", "door_after", ";");
+    if(var_2 has_script_parameter("door_before", ";")) {
+      var_2 replace_script_parameter("door_before", "door_after", ";");
       continue;
     }
 
-    if(var_2 _id_4DBF("door_after", ";")) {
-      var_2 _id_4DC0("door_after", "door_before", ";");
+    if(var_2 has_script_parameter("door_after", ";")) {
+      var_2 replace_script_parameter("door_after", "door_before", ";");
     }
   }
 }
 
 _id_004B() {
   var_0 = getEntArray("destructible_vehicle", "targetname");
-  common_scripts\utility::array_thread(var_0, maps\_vehicle::_id_2A12);
+  common_scripts\utility::array_thread(var_0, maps\_vehicle::godon);
 }
 
-_id_4D73() {
-  if(!maps\_utility::_id_12C1()) {
-    level.player thread animscripts\combat_utility::_id_20DE();
+setup_breach() {
+  if(!maps\_utility::is_coop()) {
+    level.player thread animscripts\combat_utility::watchreloading();
   }
-  level._id_4D1A = 1;
-  level._id_4D34 = "viewhands_player_delta";
-  _id_4D78::_id_4CBC();
-  level._id_4BC4 = 2.0;
-  _id_4D78::_id_4D36(::_id_4D79);
+  level.breach_no_auto_reload = 1;
+  level.slowmo_viewhands = "viewhands_player_delta";
+  maps/_slowmo_breach::slowmo_breach_init();
+  level.slomobreachduration = 2.0;
+  maps/_slowmo_breach::add_breach_func(::on_breach);
   level._effect["breach_door"] = loadfx("explosions/breach_door_metal");
   level._effect["breach_room"] = loadfx("explosions/breach_room_cheap");
-  thread _id_4010();
+  thread breach_think();
 }
 
-_id_4D79(var_0) {
-  if(!isDefined(level._id_4D7A)) {
-    level._id_4D7A = 0;
+on_breach(var_0) {
+  if(!isDefined(level.so_trainer_breach_count)) {
+    level.so_trainer_breach_count = 0;
   }
-  level._id_4D7A++;
+  level.so_trainer_breach_count++;
 
-  if(level._id_4D7A == 1) {
-    common_scripts\utility::flag_set(level._id_4D6B);
-  } else if(level._id_4D7A == 2) {
+  if(level.so_trainer_breach_count == 1) {
+    common_scripts\utility::flag_set(level.challenge_flag_start);
+  } else if(level.so_trainer_breach_count == 2) {
     common_scripts\utility::flag_set("breach_second_room_started");
   }
 }
 
-_id_4010() {
+breach_think() {
   var_0 = common_scripts\utility::getStruct("breach_hint_01", "targetname");
-  level._id_4D74 = spawn("script_model", var_0.origin);
-  level._id_4D74 setModel("mil_frame_charge_obj");
-  level._id_4D74.angles = var_0.angles;
-  level._id_4D75 = spawn("script_model", var_0.origin);
-  level._id_4D75 setModel("mil_frame_charge");
-  level._id_4D75.angles = var_0.angles;
+  level.breach_charge01_highlight = spawn("script_model", var_0.origin);
+  level.breach_charge01_highlight setModel("mil_frame_charge_obj");
+  level.breach_charge01_highlight.angles = var_0.angles;
+  level.breach_charge01 = spawn("script_model", var_0.origin);
+  level.breach_charge01 setModel("mil_frame_charge");
+  level.breach_charge01.angles = var_0.angles;
   var_1 = getEntArray("trigger_use_breach", "classname");
   var_2 = undefined;
 
   foreach(var_4 in var_1) {
-    if(isDefined(var_4._id_4CCE) && var_4._id_4CCE == 2) {
+    if(isDefined(var_4.script_slowmo_breach) && var_4.script_slowmo_breach == 2) {
       var_2 = var_4;
     }
   }
 
   var_2 common_scripts\utility::trigger_off();
   level waittill("breaching");
-  level._id_4D74 delete();
-  level._id_4D75 delete();
+  level.breach_charge01_highlight delete();
+  level.breach_charge01 delete();
   common_scripts\utility::flag_wait("target_group_root_v2_03_cleared");
   var_2 common_scripts\utility::trigger_on();
   var_0 = common_scripts\utility::getStruct("breach_hint_02", "targetname");
-  level._id_4D76 = spawn("script_model", var_0.origin);
-  level._id_4D76 setModel("mil_frame_charge_obj");
-  level._id_4D76.angles = var_0.angles;
-  level._id_4D77 = spawn("script_model", var_0.origin);
-  level._id_4D77 setModel("mil_frame_charge");
-  level._id_4D77.angles = var_0.angles;
+  level.breach_charge02_highlight = spawn("script_model", var_0.origin);
+  level.breach_charge02_highlight setModel("mil_frame_charge_obj");
+  level.breach_charge02_highlight.angles = var_0.angles;
+  level.breach_charge02 = spawn("script_model", var_0.origin);
+  level.breach_charge02 setModel("mil_frame_charge");
+  level.breach_charge02.angles = var_0.angles;
   level waittill("breaching");
-  level._id_4D76 delete();
-  level._id_4D77 delete();
+  level.breach_charge02_highlight delete();
+  level.breach_charge02 delete();
 }
 
-_id_4D7C() {
+setup_fail_triggers() {
   level endon("special_op_terminated");
   level endon("missionfailed");
   var_0 = getEntArray("trig_player_left_bridge", "targetname");
 
   foreach(var_2 in var_0) {}
-  var_2 childthread _id_4D7D();
+  var_2 childthread on_trigger_player_left_bridge();
 }
 
-_id_4D7D() {
+on_trigger_player_left_bridge() {
   self waittill("trigger");
-  level._id_16CE = gettime();
-  maps\_specialops::_id_183F("@SO_DELTACAMP_DEAD_QUOTE_PLAYER_LEFT_BRIDGE");
-  thread maps\_utility::_id_1826();
+  level.challenge_end_time = gettime();
+  maps\_specialops::so_force_deadquote("@SO_DELTACAMP_DEAD_QUOTE_PLAYER_LEFT_BRIDGE");
+  thread maps\_utility::missionfailedwrapper();
 }
 
-_id_4D7E() {
+objective_think() {
   var_0 = undefined;
   var_1 = undefined;
   var_2 = undefined;
 
-  if(level._id_4D68 == 1) {
-    var_0 = maps\_utility::_id_2816("stay_sharp");
+  if(level.trainer_version == 1) {
+    var_0 = maps\_utility::obj("stay_sharp");
     var_1 = &"SO_DELTACAMP_OBJ_V1";
     var_2 = common_scripts\utility::getStruct("obj_start_pos_v1", "targetname").origin;
-  } else if(level._id_4D68 == 2) {
-    var_0 = maps\_utility::_id_2816("breach_and_clear");
+  } else if(level.trainer_version == 2) {
+    var_0 = maps\_utility::obj("breach_and_clear");
     var_1 = &"SO_DELTACAMP_OBJ_V2";
     var_2 = common_scripts\utility::getStruct("obj_start_pos_v2", "targetname").origin;
   }
@@ -279,41 +279,41 @@ _id_4D7E() {
   objective_add(var_0, "active", var_1);
   objective_current(var_0);
   objective_position(var_0, var_2);
-  common_scripts\utility::flag_wait(level._id_4D6B);
+  common_scripts\utility::flag_wait(level.challenge_flag_start);
   objective_position(var_0, (0, 0, 0));
-  common_scripts\utility::flag_wait(level._id_4D6A);
-  maps\_utility::_id_2727(var_0);
+  common_scripts\utility::flag_wait(level.challenge_flag_complete);
+  maps\_utility::objective_complete(var_0);
 }
 
-_id_4D7F() {
-  thread _id_4D80();
-  thread _id_4D81();
-  thread _id_4D82();
-  thread _id_4D84();
+setup_dialog() {
+  thread dialog_intro();
+  thread dialog_weapons_hidden();
+  thread dialog_civilians();
+  thread dialog_course();
 }
 
-_id_4D80() {
-  level endon(level._id_4D6B);
+dialog_intro() {
+  level endon(level.challenge_flag_start);
 
-  while(!isDefined(level._id_45C4)) {
+  while(!isDefined(level.truck)) {
     wait 0.05;
   }
-  level._id_45C4 endon("death");
+  level.truck endon("death");
   wait 0.5;
   var_0 = common_scripts\utility::getStruct("truck_speaker", "script_noteworthy");
 
-  if(level._id_4D68 == 1) {
-    if(!maps\_utility::_id_12C1()) {
-      level._id_45C4 maps\_utility::_id_168C("so_deltacamp_trk_youreup");
+  if(level.trainer_version == 1) {
+    if(!maps\_utility::is_coop()) {
+      level.truck maps\_utility::dialogue_queue("so_deltacamp_trk_youreup");
     } else {
-      level._id_45C4 maps\_utility::_id_168C("so_deltacamp_trk_startingarea");
+      level.truck maps\_utility::dialogue_queue("so_deltacamp_trk_startingarea");
     }
-  } else if(level._id_4D68 == 2) {
+  } else if(level.trainer_version == 2) {
     _id_0084("so_trainer2_trk_breach", var_0);
   }
   wait(randomfloatrange(8.0, 11.0));
 
-  if(!maps\_utility::_id_12C1()) {
+  if(!maps\_utility::is_coop()) {
     _id_0084("so_deltacamp_trk_yourgo", var_0);
   } else {
     _id_0084("so_deltacamp_trk_whenever", var_0);
@@ -324,7 +324,7 @@ _id_0084(var_0, var_1) {
   _id_0048();
 
   if(!isDefined(var_1)) {
-    var_1 = maps\_utility::_id_0AE9(level.player.origin, level.speakers);
+    var_1 = maps\_utility::getclosest(level.player.origin, level.speakers);
   }
   level._id_0047 = var_1;
   var_1 playSound(var_0, "speaker_sound_interrupt", 1);
@@ -336,17 +336,17 @@ _id_0048() {
   }
 }
 
-_id_4D81() {
-  level endon(level._id_4D6B);
-  common_scripts\utility::array_thread(level.players, ::_id_4D83);
+dialog_weapons_hidden() {
+  level endon(level.challenge_flag_start);
+  common_scripts\utility::array_thread(level.players, ::on_player_weapon_change);
   level waittill("weapon_hidden_collected");
   var_0 = common_scripts\utility::getStruct("speaker_truck", "script_noteworthy");
   _id_0048();
   _id_0084("so_deltacamp_trk_owntoys", var_0);
 }
 
-_id_4D82() {
-  level endon(level._id_4D6A);
+dialog_civilians() {
+  level endon(level.challenge_flag_complete);
   level endon("missionfailed");
   level endon("special_op_terminated");
   var_0 = 0;
@@ -371,8 +371,8 @@ _id_4D82() {
   }
 }
 
-_id_4D83() {
-  level endon(level._id_4D6B);
+on_player_weapon_change() {
+  level endon(level.challenge_flag_start);
   level endon("weapon_hidden_collected");
 
   for(;;) {
@@ -385,10 +385,10 @@ _id_4D83() {
   }
 }
 
-_id_4D84() {
+dialog_course() {
   level endon("missionfailed");
 
-  if(level._id_4D68 == 1) {
+  if(level.trainer_version == 1) {
     common_scripts\utility::flag_wait("target_group_root_v1_02_popped");
     _id_0084("so_deltacamp_trk_tangos");
     common_scripts\utility::flag_wait("target_group_root_v1_03_popped");
@@ -412,25 +412,25 @@ _id_4D84() {
     common_scripts\utility::flag_wait("target_group_root_v1_09_cleared");
     wait 0.5;
 
-    if(!isDefined(level._id_45C0)) {
+    if(!isDefined(level.sandman)) {
       return;
     }
-    level._id_45C0 endon("death");
+    level.sandman endon("death");
     _id_0048();
-    level._id_45C0 maps\_utility::_id_168C("so_deltacamp_snd_thanks");
-    common_scripts\utility::flag_wait(level._id_4D6A);
-    var_0 = level.player._id_1890;
+    level.sandman maps\_utility::dialogue_queue("so_deltacamp_snd_thanks");
+    common_scripts\utility::flag_wait(level.challenge_flag_complete);
+    var_0 = level.player.so_hud_star_count;
     wait 1.0;
     _id_0048();
 
     if(var_0 > 1) {
-      level._id_45C0 maps\_utility::_id_168C("so_deltacamp_snd_nicelydone");
+      level.sandman maps\_utility::dialogue_queue("so_deltacamp_snd_nicelydone");
       return;
     }
 
-    level._id_45C0 maps\_utility::_id_168C("so_deltacamp_snd_nogood");
+    level.sandman maps\_utility::dialogue_queue("so_deltacamp_snd_nogood");
     return;
-  } else if(level._id_4D68 == 2) {
+  } else if(level.trainer_version == 2) {
     common_scripts\utility::flag_wait("target_group_root_v2_01_cleared");
     wait 0.5;
     thread _id_0084("so_trainer2_trk_roomclear");
@@ -442,7 +442,7 @@ _id_4D84() {
     thread _id_0084("so_trainer2_trk_sniper");
     common_scripts\utility::flag_wait("target_group_root_v2_03_cleared");
     thread _id_0084("so_deltacamp_trk_bridgeclear");
-    maps\_utility::_id_262C("trig_v2_breach_dialog_02");
+    maps\_utility::trigger_wait_targetname("trig_v2_breach_dialog_02");
     thread _id_0084("so_trainer2_trk_anothercharge");
     common_scripts\utility::flag_wait("target_group_root_v2_04_cleared");
     wait 0.5;
@@ -459,8 +459,8 @@ _id_4D84() {
     thread _id_0084("so_trainer2_trk_lastgroup");
     common_scripts\utility::flag_wait("target_group_root_v2_08_cleared");
     thread _id_0084("so_deltacamp_trk_sprinttofinish");
-    common_scripts\utility::flag_wait(level._id_4D6A);
-    var_0 = level.player._id_1890;
+    common_scripts\utility::flag_wait(level.challenge_flag_complete);
+    var_0 = level.player.so_hud_star_count;
     wait 1.0;
 
     if(var_0 > 1) {
@@ -473,61 +473,61 @@ _id_4D84() {
   }
 }
 
-_id_4D85() {
-  maps\_utility::_id_265A("allies");
+setup_allies() {
+  maps\_utility::battlechatter_off("allies");
 
-  if(level._id_4D68 == 1) {
+  if(level.trainer_version == 1) {
     var_0 = getEnt("sandman", "targetname");
-    level._id_45C0 = var_0 maps\_utility::_id_166F(1);
-    level._id_45C0 thread _id_4D89();
-    level._id_45C0 thread _id_4D88();
-    level._id_45C0._id_1901 = 1;
-    level._id_45C0.allowdeath = 1;
-    level._id_45C0.drawoncompass = 0;
-    level._id_45C0.health = 1;
-    level._id_45C0 maps\_utility::_id_24F5();
-    level._id_45C0._id_1032 = "generic";
+    level.sandman = var_0 maps\_utility::spawn_ai(1);
+    level.sandman thread on_damage_ally_fail();
+    level.sandman thread look_at_players();
+    level.sandman.so_no_mission_over_delete = 1;
+    level.sandman.allowdeath = 1;
+    level.sandman.drawoncompass = 0;
+    level.sandman.health = 1;
+    level.sandman maps\_utility::gun_remove();
+    level.sandman.animname = "generic";
     var_1 = getEnt("ent_sandman_scene", "targetname");
-    var_1 thread maps\_anim::_id_124E(level._id_45C0, "sandman_idle", "end_idle");
+    var_1 thread maps\_anim::anim_loop_solo(level.sandman, "sandman_idle", "end_idle");
   }
 
   var_0 = getEnt("truck", "targetname");
-  level._id_45C4 = var_0 maps\_utility::_id_166F(1);
-  level._id_45C4 thread _id_4D89();
-  level._id_45C4 thread _id_4D88();
-  level._id_45C4.allowdeath = 1;
-  level._id_45C4.drawoncompass = 0;
-  level._id_45C4.health = 1;
-  level._id_45C4 maps\_utility::_id_24F5();
-  level._id_45C4._id_1032 = "generic";
+  level.truck = var_0 maps\_utility::spawn_ai(1);
+  level.truck thread on_damage_ally_fail();
+  level.truck thread look_at_players();
+  level.truck.allowdeath = 1;
+  level.truck.drawoncompass = 0;
+  level.truck.health = 1;
+  level.truck maps\_utility::gun_remove();
+  level.truck.animname = "generic";
 
-  if(level._id_4D68 == 1) {
+  if(level.trainer_version == 1) {
     var_2 = common_scripts\utility::getStruct("loc_truck_look_at_v1_start", "targetname");
-    var_2 thread maps\_anim::_id_124E(level._id_45C4, "truck_idle", "end_idle");
-    level._id_45C4 thread _id_4D87(var_2);
-  } else if(level._id_4D68 == 2) {
+    var_2 thread maps\_anim::anim_loop_solo(level.truck, "truck_idle", "end_idle");
+    level.truck thread update_truck_loc(var_2);
+  } else if(level.trainer_version == 2) {
     var_3 = common_scripts\utility::getStruct("loc_truck_look_at_bridge", "targetname");
-    var_3 thread maps\_anim::_id_124E(level._id_45C4, "truck_idle", "end_idle");
+    var_3 thread maps\_anim::anim_loop_solo(level.truck, "truck_idle", "end_idle");
   }
 
   var_0 = getEnt("grinch", "targetname");
-  level._id_4D86 = var_0 maps\_utility::_id_166F(1);
-  level._id_4D86 thread _id_4D89();
-  level._id_4D86 thread _id_4D88();
-  level._id_4D86.allowdeath = 1;
-  level._id_4D86.drawoncompass = 0;
-  level._id_4D86.health = 1;
-  level._id_4D86 maps\_utility::_id_24F5();
-  level._id_4D86._id_1032 = "generic";
+  level.grinch = var_0 maps\_utility::spawn_ai(1);
+  level.grinch thread on_damage_ally_fail();
+  level.grinch thread look_at_players();
+  level.grinch.allowdeath = 1;
+  level.grinch.drawoncompass = 0;
+  level.grinch.health = 1;
+  level.grinch maps\_utility::gun_remove();
+  level.grinch.animname = "generic";
   var_1 = getEnt("ent_grinch_scene", "targetname");
-  var_1 thread maps\_anim::_id_124E(level._id_4D86, "grinch_idle", "end_idle");
-  var_4 = spawn("script_model", level._id_4D86.origin);
+  var_1 thread maps\_anim::anim_loop_solo(level.grinch, "grinch_idle", "end_idle");
+  var_4 = spawn("script_model", level.grinch.origin);
   var_4 setModel("com_folding_chair");
-  var_4.angles = level._id_4D86.angles + (0, 0, 0);
-  level._id_4D86 thread common_scripts\utility::delete_on_death(var_4);
+  var_4.angles = level.grinch.angles + (0, 0, 0);
+  level.grinch thread common_scripts\utility::delete_on_death(var_4);
 }
 
-_id_4D87(var_0) {
+update_truck_loc(var_0) {
   level endon("special_op_terminated");
   common_scripts\utility::flag_wait("duck_shoot_targets_pop");
 
@@ -550,15 +550,15 @@ _id_4D87(var_0) {
 
   var_0 notify("end_idle");
   var_5 = common_scripts\utility::getStruct("loc_truck_look_at_bridge", "targetname");
-  var_5 thread maps\_anim::_id_124E(self, "truck_idle", "end_idle");
+  var_5 thread maps\_anim::anim_loop_solo(self, "truck_idle", "end_idle");
 }
 
-_id_4D88() {
+look_at_players() {
   level endon("special_op_terminated");
   var_0 = undefined;
 
   for(;;) {
-    var_1 = maps\_utility::_id_2608(self.origin);
+    var_1 = maps\_utility::get_closest_player(self.origin);
 
     if(!isDefined(var_0) || var_0 != var_1) {
       var_0 = var_1;
@@ -569,57 +569,57 @@ _id_4D88() {
   }
 }
 
-_id_4D89() {
+on_damage_ally_fail() {
   level endon("special_op_terminated");
 
   for(;;) {
     common_scripts\utility::waittill_any("damage", "death");
-    level._id_16CE = gettime();
-    maps\_specialops::_id_183F("@SO_DELTACAMP_DEAD_QUOTE_ALLY_HURT");
-    thread maps\_utility::_id_1826();
+    level.challenge_end_time = gettime();
+    maps\_specialops::so_force_deadquote("@SO_DELTACAMP_DEAD_QUOTE_ALLY_HURT");
+    thread maps\_utility::missionfailedwrapper();
     break;
   }
 }
 
-_id_3F71() {
+setup_players() {
   foreach(var_3, var_1 in level.players) {
-    var_1 _id_4D8E();
+    var_1 give_max_ammo();
 
-    if(level._id_4D68 == 2) {
+    if(level.trainer_version == 2) {
       var_2 = common_scripts\utility::getStruct("struct_start_pos_player" + (var_3 + 1) + "_v2", "targetname");
-      var_1 _id_4D8D(var_2);
+      var_1 coop_teleport_player(var_2);
     }
   }
 }
 
-_id_4D8A() {
-  if(level._id_4D68 == 1) {
-    maps\_specialops::_id_188C(level._id_4D6B, "course_targets_finished", -1, 40, 28);
-  } else if(level._id_4D68 == 2) {
-    maps\_specialops::_id_188C(level._id_4D6B, "all_players_reached_end", -1, 45, 33);
+setup_player_hud() {
+  if(level.trainer_version == 1) {
+    maps\_specialops::so_hud_stars_init(level.challenge_flag_start, "course_targets_finished", -1, 40, 28);
+  } else if(level.trainer_version == 2) {
+    maps\_specialops::so_hud_stars_init(level.challenge_flag_start, "all_players_reached_end", -1, 45, 33);
   }
-  thread maps\_specialops::_id_1808(3, &"SO_DELTACAMP_CIV_COUNT", "ui_civ_count");
+  thread maps\_specialops::enable_challenge_counter(3, &"SO_DELTACAMP_CIV_COUNT", "ui_civ_count");
 }
 
-_id_4D8B() {
+catch_civilian_hits() {
   level endon("special_op_terminated");
 
   for(;;) {
     level waittill("civilian_killed", var_0);
-    var_0 notify("ui_civ_count", var_0._id_4D8C);
+    var_0 notify("ui_civ_count", var_0.civs_hit);
 
-    if(level._id_4D8C == 1) {
-      maps\_specialops::_id_1891("veteran");
+    if(level.civs_hit == 1) {
+      maps\_specialops::so_hud_stars_remove("veteran");
       continue;
     }
 
-    if(level._id_4D8C == 2) {
-      maps\_specialops::_id_1891("hardened");
+    if(level.civs_hit == 2) {
+      maps\_specialops::so_hud_stars_remove("hardened");
     }
   }
 }
 
-_id_4D8D(var_0) {
+coop_teleport_player(var_0) {
   self setOrigin(var_0.origin);
 
   if(isDefined(var_0.angles)) {
@@ -627,102 +627,102 @@ _id_4D8D(var_0) {
   }
 }
 
-_id_4D8E() {
+give_max_ammo() {
   var_0 = self getweaponslistprimaries();
 
   foreach(var_2 in var_0) {}
   self givemaxammo(var_2);
 }
 
-_id_4D8F() {
-  level._id_4D8C = 0;
+init_stat_vars() {
+  level.civs_hit = 0;
 
   foreach(var_1 in level.players) {}
-  var_1._id_4D8C = 0;
+  var_1.civs_hit = 0;
 }
 
-_id_4D90() {
-  level._id_4D91 = _id_4DC1("gate_enter_v1");
-  level._id_4D91._id_4D92 = 80;
+setup_gates() {
+  level.gate_enter_v1 = make_door_from_prefab("gate_enter_v1");
+  level.gate_enter_v1.openangles = 80;
 
-  if(level._id_4D68 == 1) {
-    level._id_4D91 thread _id_4042("course_start_open_gate", 0);
-  } else if(level._id_4D68 == 2) {
-    level._id_4D91 thread _id_4042(undefined, 1, 1);
+  if(level.trainer_version == 1) {
+    level.gate_enter_v1 thread door_open("course_start_open_gate", 0);
+  } else if(level.trainer_version == 2) {
+    level.gate_enter_v1 thread door_open(undefined, 1, 1);
   }
-  level._id_4D93 = _id_4DC1("gate_enter_v2");
-  level._id_4D93._id_4D92 = 80;
+  level.gate_enter_v2 = make_door_from_prefab("gate_enter_v2");
+  level.gate_enter_v2.openangles = 80;
 
-  if(level._id_4D68 == 1) {
-    level._id_4D93 thread _id_4042("course_targets_finished", 1);
+  if(level.trainer_version == 1) {
+    level.gate_enter_v2 thread door_open("course_targets_finished", 1);
   }
 }
 
-_id_4D94() {
-  if(level._id_4D68 == 1) {
-    maps\_utility::_id_25EE("course_start_open_gate", 1.0);
+start_mission() {
+  if(level.trainer_version == 1) {
+    maps\_utility::flag_set_delayed("course_start_open_gate", 1.0);
   } else {
     common_scripts\utility::flag_set("course_start_open_gate");
   }
 }
 
-_id_4D95(var_0, var_1) {
-  if(isDefined(level._id_4D6C)) {
-    common_scripts\utility::trigger_off(level._id_4D6C, "script_noteworthy");
+course_think(var_0, var_1) {
+  if(isDefined(level.challenge_trig_complete_noteworthy)) {
+    common_scripts\utility::trigger_off(level.challenge_trig_complete_noteworthy, "script_noteworthy");
   }
-  _id_4DA1(var_1);
-  _id_4D9A(var_0);
+  course_delete(var_1);
+  course_target_setup(var_0);
   wait 1.0;
-  common_scripts\utility::flag_wait(level._id_4D6B);
+  common_scripts\utility::flag_wait(level.challenge_flag_start);
 
-  foreach(var_4, var_3 in level._id_4D96) {
-    if(isDefined(var_3._id_4D97)) {
-      var_3._id_4D97 common_scripts\utility::trigger_on();
-      var_3._id_4D97 waittill("trigger");
+  foreach(var_4, var_3 in level.group_structs) {
+    if(isDefined(var_3.trig_required)) {
+      var_3.trig_required common_scripts\utility::trigger_on();
+      var_3.trig_required waittill("trigger");
     }
 
-    if(isDefined(var_3._id_1692)) {
-      common_scripts\utility::flag_wait(var_3._id_1692);
+    if(isDefined(var_3.script_flag)) {
+      common_scripts\utility::flag_wait(var_3.script_flag);
     }
     if(isDefined(var_3.script_delay)) {
       wait(var_3.script_delay);
     }
     common_scripts\utility::flag_set(var_3.targetname + "_popped");
-    maps\_utility::_id_1F09(var_3._id_4D98, "open");
-    maps\_utility::_id_1F09(var_3.targets, "pop_up");
+    maps\_utility::array_notify(var_3.doors_before, "open");
+    maps\_utility::array_notify(var_3.targets, "pop_up");
     var_3 waittill("all_targets_down");
     common_scripts\utility::flag_set(var_3.targetname + "_cleared");
-    maps\_utility::_id_1F09(var_3._id_4D99, "open");
-    thread _id_4DBA();
+    maps\_utility::array_notify(var_3.doors_after, "open");
+    thread hud_area_cleared();
   }
 
   common_scripts\utility::flag_set("course_targets_finished");
 
-  if(isDefined(level._id_4D6C)) {
-    common_scripts\utility::trigger_on(level._id_4D6C, "script_noteworthy");
+  if(isDefined(level.challenge_trig_complete_noteworthy)) {
+    common_scripts\utility::trigger_on(level.challenge_trig_complete_noteworthy, "script_noteworthy");
   }
 }
 
-_id_4D9A(var_0) {
-  level._id_4D9B = getEntArray("target_rail_start_point", "targetname");
-  level._id_4D9C = getEntArray("target_rail_path_start_point", "targetname");
+course_target_setup(var_0) {
+  level.target_rail_start_points = getEntArray("target_rail_start_point", "targetname");
+  level.target_rail_path_start_points = getEntArray("target_rail_path_start_point", "targetname");
   level.speakers = getEntArray("speakers", "targetname");
-  level._id_4D96 = [];
-  level._id_4D9D = getEntArray("melee_clip", "targetname");
-  common_scripts\utility::array_thread(level._id_4D9D, maps\_utility::_id_27C5);
+  level.group_structs = [];
+  level.melee_clips = getEntArray("melee_clip", "targetname");
+  common_scripts\utility::array_thread(level.melee_clips, maps\_utility::hide_entity);
 
   foreach(var_2 in var_0) {
     var_3 = common_scripts\utility::get_target_ent(var_2);
-    level._id_4D96[level._id_4D96.size] = var_3;
+    level.group_structs[level.group_structs.size] = var_3;
   }
 
-  foreach(var_3 in level._id_4D96) {
-    var_3._id_4D98 = [];
-    var_3._id_4D99 = [];
+  foreach(var_3 in level.group_structs) {
+    var_3.doors_before = [];
+    var_3.doors_after = [];
     var_3.targets = [];
-    var_3._id_4D9E = [];
-    var_3._id_4D9F = [];
-    var_3._id_4DA0 = 0;
+    var_3.targets_friendly = [];
+    var_3.targets_enemy = [];
+    var_3.targets_enemy_killed = 0;
     var_6 = var_3 common_scripts\utility::get_linked_ents();
 
     foreach(var_8 in var_6) {
@@ -730,60 +730,60 @@ _id_4D9A(var_0) {
         continue;
       }
       if(var_8.code_classname == "script_brushmodel") {
-        if(!maps\_utility::_id_12C1() && var_8 _id_4DBF("coop_only", ";")) {
-          var_8 _id_4DA2();
+        if(!maps\_utility::is_coop() && var_8 has_script_parameter("coop_only", ";")) {
+          var_8 target_delete();
           continue;
         }
 
         if(isDefined(var_8.script_noteworthy) && issubstr(var_8.script_noteworthy, "target_")) {
           if(var_8.script_noteworthy == "target_enemy") {
-            var_3._id_4D9F[var_3._id_4D9F.size] = var_8;
+            var_3.targets_enemy[var_3.targets_enemy.size] = var_8;
           } else if(var_8.script_noteworthy == "target_friendly") {
-            var_3._id_4D9E[var_3._id_4D9E.size] = var_8;
+            var_3.targets_friendly[var_3.targets_friendly.size] = var_8;
           } else {
             continue;
           }
-          var_8 thread _id_4DA3(var_3, strtok(var_8.script_noteworthy, "_")[1]);
+          var_8 thread target_think(var_3, strtok(var_8.script_noteworthy, "_")[1]);
           var_3.targets[var_3.targets.size] = var_8;
 
-          if(var_8 _id_4DBF("invisible", ";")) {
+          if(var_8 has_script_parameter("invisible", ";")) {
             _id_0049(var_8);
           }
           continue;
         }
 
-        if(var_8 _id_4DBF("door", ";")) {
-          if(var_8 _id_4DBF("door_before", ";")) {
-            var_3._id_4D98[var_3._id_4D98.size] = var_8;
-          } else if(var_8 _id_4DBF("door_after", ";")) {
-            var_3._id_4D99[var_3._id_4D99.size] = var_8;
+        if(var_8 has_script_parameter("door", ";")) {
+          if(var_8 has_script_parameter("door_before", ";")) {
+            var_3.doors_before[var_3.doors_before.size] = var_8;
+          } else if(var_8 has_script_parameter("door_after", ";")) {
+            var_3.doors_after[var_3.doors_after.size] = var_8;
           } else {
             continue;
           }
-          var_8 thread _id_4DB4();
+          var_8 thread door_think();
         }
       }
 
       if(var_8.code_classname == "script_model") {
-        if(var_8 _id_4DBF("door", ";")) {
-          if(var_8 _id_4DBF("door_before", ";")) {
-            var_3._id_4D98[var_3._id_4D98.size] = var_8;
-          } else if(var_8 _id_4DBF("door_after", ";")) {
-            var_3._id_4D99[var_3._id_4D99.size] = var_8;
+        if(var_8 has_script_parameter("door", ";")) {
+          if(var_8 has_script_parameter("door_before", ";")) {
+            var_3.doors_before[var_3.doors_before.size] = var_8;
+          } else if(var_8 has_script_parameter("door_after", ";")) {
+            var_3.doors_after[var_3.doors_after.size] = var_8;
           } else {
             continue;
           }
-          var_8 thread _id_4DB4();
+          var_8 thread door_think();
         }
       }
 
       if(var_8.code_classname == "trigger_multiple" && isDefined(var_8.classname)) {
-        if(var_8.classname == "trigger_multiple_flag_set" && isDefined(var_8._id_1692) && common_scripts\utility::flag_exist(var_8._id_1692)) {
-          var_3._id_1692 = var_8._id_1692;
+        if(var_8.classname == "trigger_multiple_flag_set" && isDefined(var_8.script_flag) && common_scripts\utility::flag_exist(var_8.script_flag)) {
+          var_3.script_flag = var_8.script_flag;
           continue;
         } else if(var_8.classname == "trigger_multiple") {
-          var_3._id_4D97 = var_8;
-          var_3._id_4D97 common_scripts\utility::trigger_off();
+          var_3.trig_required = var_8;
+          var_3.trig_required common_scripts\utility::trigger_off();
           continue;
         }
       }
@@ -791,7 +791,7 @@ _id_4D9A(var_0) {
   }
 }
 
-_id_4DA1(var_0) {
+course_delete(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {
@@ -807,13 +807,13 @@ _id_4DA1(var_0) {
         continue;
       }
       if(var_9.code_classname == "script_brushmodel") {
-        if(var_9 _id_4DBF("door", ";")) {
+        if(var_9 has_script_parameter("door", ";")) {
           continue;
         }
       }
 
       if(var_9.code_classname == "script_model") {
-        if(var_9 _id_4DBF("door", ";")) {
+        if(var_9 has_script_parameter("door", ";")) {
           continue;
         }
       }
@@ -824,16 +824,16 @@ _id_4DA1(var_0) {
 }
 
 _id_0049(var_0) {
-  var_0 maps\_utility::_id_27C5();
-  var_0._id_035A maps\_utility::_id_27C5();
+  var_0 maps\_utility::hide_entity();
+  var_0.target_model maps\_utility::hide_entity();
 }
 
 _id_004A(var_0) {
-  var_0 maps\_utility::_id_27C6();
-  var_0._id_035A maps\_utility::_id_27C6();
+  var_0 maps\_utility::show_entity();
+  var_0.target_model maps\_utility::show_entity();
 }
 
-_id_4DA2() {
+target_delete() {
   var_0 = [];
   var_0[var_0.size] = self;
   var_1 = getEntArray(self.target, "targetname");
@@ -848,59 +848,59 @@ _id_4DA2() {
   common_scripts\utility::array_call(var_0, ::delete);
 }
 
-_id_4DA3(var_0, var_1) {
-  self._id_4DA4 = undefined;
+target_think(var_0, var_1) {
+  self.meleeonly = undefined;
   var_2 = getEntArray(self.target, "targetname");
 
   foreach(var_4 in var_2) {
     if(var_4.classname == "script_origin") {
-      self._id_4DA5 = var_4;
+      self.orgent = var_4;
       continue;
     } else if(var_4.classname == "script_model") {
-      self._id_035A = var_4;
+      self.target_model = var_4;
       continue;
     }
   }
 
-  self linkTo(self._id_4DA5);
-  var_6 = getEnt(self._id_4DA5.target, "targetname");
+  self linkTo(self.orgent);
+  var_6 = getEnt(self.orgent.target, "targetname");
   var_6 hide();
   var_6 notsolid();
   var_6 linkTo(self);
-  self._id_035A linkTo(self._id_4DA5);
+  self.target_model linkTo(self.orgent);
 
-  if(_id_4DBF("reverse", ";")) {
-    self._id_4DA5 rotatepitch(90, 0.25);
-  } else if(_id_4DBF("sideways_right", ";")) {
-    self._id_4DA5 rotateYaw(-180, 0.35);
-  } else if(_id_4DBF("sideways_left", ";")) {
-    self._id_4DA5 rotateYaw(180, 0.35);
-  } else if(_id_4DBF("vertical", ";")) {
-    self._id_4DA5 moveTo(self._id_4DA5.origin - (0, 0, 36), 0.25);
+  if(has_script_parameter("reverse", ";")) {
+    self.orgent rotatepitch(90, 0.25);
+  } else if(has_script_parameter("sideways_right", ";")) {
+    self.orgent rotateYaw(-180, 0.35);
+  } else if(has_script_parameter("sideways_left", ";")) {
+    self.orgent rotateYaw(180, 0.35);
+  } else if(has_script_parameter("vertical", ";")) {
+    self.orgent moveTo(self.orgent.origin - (0, 0, 36), 0.25);
   } else {
-    self._id_4DA5 rotatepitch(-90, 0.25);
+    self.orgent rotatepitch(-90, 0.25);
   }
-  if(_id_4DBF("use_rail", ";")) {
-    self._id_4DA6 = undefined;
-    self._id_4DA7 = undefined;
-    self._id_4DA8 = undefined;
-    self._id_4DA7 = maps\_utility::_id_0AE9(self._id_4DA5.origin, level._id_4D9B, 10);
-    self._id_4DA8 = getEnt(self._id_4DA7.target, "targetname");
-    self._id_4DA6 = [];
-    self._id_4DA6[0] = self._id_4DA7;
-    self._id_4DA6[1] = self._id_4DA8;
+  if(has_script_parameter("use_rail", ";")) {
+    self.lateralmovementorgs = undefined;
+    self.lateralstartposition = undefined;
+    self.lateralendposition = undefined;
+    self.lateralstartposition = maps\_utility::getclosest(self.orgent.origin, level.target_rail_start_points, 10);
+    self.lateralendposition = getEnt(self.lateralstartposition.target, "targetname");
+    self.lateralmovementorgs = [];
+    self.lateralmovementorgs[0] = self.lateralstartposition;
+    self.lateralmovementorgs[1] = self.lateralendposition;
 
-    foreach(var_8 in self._id_4DA6) {}
+    foreach(var_8 in self.lateralmovementorgs) {}
 
-    _id_4DB3();
+    target_lateral_reset_start_pos();
   }
 
-  if(_id_4DBF("use_rail_path", ";")) {
-    self._id_4DA9 = [];
-    var_10 = maps\_utility::_id_0AE9(self._id_4DA5.origin, level._id_4D9C, 10);
+  if(has_script_parameter("use_rail_path", ";")) {
+    self.move_orgs = [];
+    var_10 = maps\_utility::getclosest(self.orgent.origin, level.target_rail_path_start_points, 10);
 
     while(isDefined(var_10)) {
-      self._id_4DA9[self._id_4DA9.size] = var_10;
+      self.move_orgs[self.move_orgs.size] = var_10;
 
       if(isDefined(var_10.target)) {
         var_10 = var_10 common_scripts\utility::get_target_ent();
@@ -914,61 +914,61 @@ _id_4DA3(var_0, var_1) {
   for(;;) {
     self waittill("pop_up");
 
-    if(_id_4DBF("breach", ";")) {
-      level._id_4BB1++;
+    if(has_script_parameter("breach", ";")) {
+      level.breachenemies_active++;
     }
     if(isDefined(self.script_delay)) {
       wait(self.script_delay);
     }
-    _id_4DAC();
+    so_player_tooclose_wait();
 
-    if(_id_4DBF("invisible", ";")) {
+    if(has_script_parameter("invisible", ";")) {
       _id_004A(self);
     }
-    if(_id_4DBF("melee", ";")) {
-      var_11 = maps\_utility::_id_0AE9(self.origin, level._id_4D9D, 120);
-      self._id_4DA4 = 1;
-      self._id_4DAA = var_11;
-      self._id_4DAA maps\_utility::_id_27C6();
+    if(has_script_parameter("melee", ";")) {
+      var_11 = maps\_utility::getclosest(self.origin, level.melee_clips, 120);
+      self.meleeonly = 1;
+      self.melee_clip = var_11;
+      self.melee_clip maps\_utility::show_entity();
     }
 
     var_12 = 0.25;
 
-    if(!_id_4DBF("breach", ";")) {
+    if(!has_script_parameter("breach", ";")) {
       wait(randomfloatrange(0, 0.2));
     } else {
       var_12 = 0.05;
     }
     self solid();
     self playSound("target_up_metal");
-    self._id_035A setCanDamage(1);
+    self.target_model setCanDamage(1);
 
-    if(_id_4DBF("dog_bark", ";")) {
-      thread _id_4DAE();
+    if(has_script_parameter("dog_bark", ";")) {
+      thread target_play_dog_bark();
     }
     if(var_1 != "friendly") {
       var_6 enableaimassist();
     }
-    if(_id_4DBF("reverse", ";")) {
-      self._id_4DA5 rotatepitch(-90, var_12);
-    } else if(_id_4DBF("sideways_right", ";")) {
-      self._id_4DA5 rotateYaw(180, var_12);
-    } else if(_id_4DBF("sideways_left", ";")) {
-      self._id_4DA5 rotateYaw(-180, var_12);
-    } else if(_id_4DBF("vertical", ";")) {
-      self._id_4DA5 moveTo(self._id_4DA5.origin + (0, 0, 36), var_12);
+    if(has_script_parameter("reverse", ";")) {
+      self.orgent rotatepitch(-90, var_12);
+    } else if(has_script_parameter("sideways_right", ";")) {
+      self.orgent rotateYaw(180, var_12);
+    } else if(has_script_parameter("sideways_left", ";")) {
+      self.orgent rotateYaw(-180, var_12);
+    } else if(has_script_parameter("vertical", ";")) {
+      self.orgent moveTo(self.orgent.origin + (0, 0, 36), var_12);
     } else {
-      self._id_4DA5 rotatepitch(90, var_12);
+      self.orgent rotatepitch(90, var_12);
     }
     wait(var_12);
 
-    if(isDefined(self._id_4DA7)) {
-      thread _id_4DAD();
-    } else if(isDefined(self._id_4DA9) && self._id_4DA9.size) {
-      thread _id_4DAF();
+    if(isDefined(self.lateralstartposition)) {
+      thread target_lateral_movement();
+    } else if(isDefined(self.move_orgs) && self.move_orgs.size) {
+      thread target_path_movement();
     }
     for(;;) {
-      self._id_035A waittill("damage", var_13, var_14, var_15, var_16, var_17, var_18, var_19, var_20, var_21, var_22);
+      self.target_model waittill("damage", var_13, var_14, var_15, var_16, var_17, var_18, var_19, var_20, var_21, var_22);
 
       if(!isDefined(var_14)) {
         continue;
@@ -980,7 +980,7 @@ _id_4DA3(var_0, var_1) {
         continue;
       }
       if(isPlayer(var_14)) {
-        if(isDefined(self._id_4DA4)) {
+        if(isDefined(self.meleeonly)) {
           if(var_17 != "MOD_MELEE") {
             continue;
           }
@@ -989,23 +989,23 @@ _id_4DA3(var_0, var_1) {
         self playSound("target_metal_hit");
 
         if(var_1 == "friendly") {
-          thread _id_4DBB();
-          var_23 = maps\_utility::_id_0AE9(var_14.origin, level.speakers);
+          thread hud_civilian_hit();
+          var_23 = maps\_utility::getclosest(var_14.origin, level.speakers);
           var_23 playSound("target_mistake_buzzer");
-          var_14._id_4D8C++;
-          level._id_4D8C++;
+          var_14.civs_hit++;
+          level.civs_hit++;
           level notify("civilian_killed", var_14);
         } else {
-          var_14 maps\_player_stats::_id_0A34(self, var_17, var_22);
+          var_14 maps\_player_stats::register_kill(self, var_17, var_22);
           var_14 notify("ui_kill_count", var_14.stats["kills"]);
           level notify("target_killed");
 
-          if(_id_4DBF("breach", ";")) {
-            level._id_4BB1--;
+          if(has_script_parameter("breach", ";")) {
+            level.breachenemies_active--;
           }
-          var_0._id_4DA0++;
+          var_0.targets_enemy_killed++;
 
-          if(var_0._id_4DA0 >= var_0._id_4D9F.size) {
+          if(var_0.targets_enemy_killed >= var_0.targets_enemy.size) {
             var_0 notify("all_targets_down");
           }
         }
@@ -1017,8 +1017,8 @@ _id_4DA3(var_0, var_1) {
       }
     }
 
-    if(isDefined(self._id_4DA4)) {
-      self._id_4DAA maps\_utility::_id_27C5();
+    if(isDefined(self.meleeonly)) {
+      self.melee_clip maps\_utility::hide_entity();
     }
     self notify("hit");
     self notify("target_going_back_down");
@@ -1026,30 +1026,30 @@ _id_4DA3(var_0, var_1) {
     var_6 disableaimassist();
     self notsolid();
 
-    if(isDefined(self._id_4DA5._id_4DAB)) {
-      self._id_4DA5.origin = self._id_4DA5._id_4DAB;
+    if(isDefined(self.orgent.drop_origin)) {
+      self.orgent.origin = self.orgent.drop_origin;
     }
-    if(_id_4DBF("reverse", ";")) {
-      self._id_4DA5 rotatepitch(90, 0.25);
-    } else if(_id_4DBF("sideways_right", ";")) {
-      self._id_4DA5 rotateYaw(-180, 0.35);
-    } else if(_id_4DBF("sideways_left", ";")) {
-      self._id_4DA5 rotateYaw(180, 0.35);
-    } else if(_id_4DBF("vertical", ";")) {
-      self._id_4DA5 moveTo(self._id_4DA5.origin - (0, 0, 36), 0.25);
+    if(has_script_parameter("reverse", ";")) {
+      self.orgent rotatepitch(90, 0.25);
+    } else if(has_script_parameter("sideways_right", ";")) {
+      self.orgent rotateYaw(-180, 0.35);
+    } else if(has_script_parameter("sideways_left", ";")) {
+      self.orgent rotateYaw(180, 0.35);
+    } else if(has_script_parameter("vertical", ";")) {
+      self.orgent moveTo(self.orgent.origin - (0, 0, 36), 0.25);
     } else {
-      self._id_4DA5 rotatepitch(-90, 0.25);
+      self.orgent rotatepitch(-90, 0.25);
     }
-    self._id_035A setCanDamage(0);
+    self.target_model setCanDamage(0);
     wait 0.25;
   }
 }
 
-_id_4DAC() {
+so_player_tooclose_wait() {
   var_0 = self.origin;
   var_1 = undefined;
 
-  if(_id_4DBF("melee", ";")) {
+  if(has_script_parameter("melee", ";")) {
     var_0 = (-5723, 2547, -49);
     var_1 = 2520;
   }
@@ -1079,31 +1079,31 @@ _id_4DAC() {
   }
 }
 
-_id_4DAD() {
+target_lateral_movement() {
   var_0 = spawn("script_origin", (0, 0, 0));
-  var_0.angles = self._id_4DA5.angles;
-  var_0.origin = self._id_4DA5.origin;
-  self._id_4DA5 thread _id_4DB2(var_0);
+  var_0.angles = self.orgent.angles;
+  var_0.origin = self.orgent.origin;
+  self.orgent thread target_move_with_dummy(var_0);
   var_0 endon("deleted_because_player_was_too_close");
   var_0 endon("death");
 
   foreach(var_2 in level.players) {}
-  var_0 thread _id_4DB1(var_2);
+  var_0 thread delete_when_player_too_close(var_2);
 
-  thread _id_4DB0(var_0);
-  var_4 = common_scripts\utility::ter_op(isDefined(self._id_2AFE), self._id_2AFE, 1);
-  var_5 = distance(self._id_4DA6[0].origin, self._id_4DA6[1].origin);
+  thread dummy_delete_when_target_goes_back_down(var_0);
+  var_4 = common_scripts\utility::ter_op(isDefined(self.script_speed), self.script_speed, 1);
+  var_5 = distance(self.lateralmovementorgs[0].origin, self.lateralmovementorgs[1].origin);
   var_6 = var_5 / (12.0 * var_4);
 
   for(;;) {
-    var_0 moveTo(self._id_4DA8.origin, var_6);
+    var_0 moveTo(self.lateralendposition.origin, var_6);
     wait(var_6);
-    var_0 moveTo(self._id_4DA7.origin, var_6);
+    var_0 moveTo(self.lateralstartposition.origin, var_6);
     wait(var_6);
   }
 }
 
-_id_4DAE() {
+target_play_dog_bark() {
   level endon("special_op_terminated");
   self endon("target_going_back_down");
 
@@ -1114,42 +1114,42 @@ _id_4DAE() {
   }
 }
 
-_id_4DAF() {
+target_path_movement() {
   var_0 = spawn("script_origin", (0, 0, 0));
-  var_0.angles = self._id_4DA5.angles;
-  var_0.origin = self._id_4DA5.origin;
+  var_0.angles = self.orgent.angles;
+  var_0.origin = self.orgent.origin;
 
-  if(_id_4DBF("bounce", ";")) {
-    self._id_4DA5 thread _id_4DB2(var_0, 8, 2.0);
+  if(has_script_parameter("bounce", ";")) {
+    self.orgent thread target_move_with_dummy(var_0, 8, 2.0);
   } else {
-    self._id_4DA5 thread _id_4DB2(var_0, 0, 0.0);
+    self.orgent thread target_move_with_dummy(var_0, 0, 0.0);
   }
   var_0 endon("deleted_because_player_was_too_close");
   var_0 endon("death");
 
   foreach(var_2 in level.players) {}
-  var_0 thread _id_4DB1(var_2);
+  var_0 thread delete_when_player_too_close(var_2);
 
-  thread _id_4DB0(var_0);
+  thread dummy_delete_when_target_goes_back_down(var_0);
 
-  for(var_4 = 0; var_4 < self._id_4DA9.size - 1; var_4++) {
-    var_5 = common_scripts\utility::ter_op(isDefined(self._id_2AFE), self._id_2AFE, 1);
-    var_6 = distance(self._id_4DA9[var_4].origin, self._id_4DA9[var_4 + 1].origin);
+  for(var_4 = 0; var_4 < self.move_orgs.size - 1; var_4++) {
+    var_5 = common_scripts\utility::ter_op(isDefined(self.script_speed), self.script_speed, 1);
+    var_6 = distance(self.move_orgs[var_4].origin, self.move_orgs[var_4 + 1].origin);
     var_7 = var_6 / (12.0 * var_5);
-    var_0 moveTo(self._id_4DA9[var_4 + 1].origin, var_7);
+    var_0 moveTo(self.move_orgs[var_4 + 1].origin, var_7);
     wait(var_7);
   }
 
   var_0 delete();
 }
 
-_id_4DB0(var_0) {
+dummy_delete_when_target_goes_back_down(var_0) {
   var_0 endon("death");
   self waittill("target_going_back_down");
   var_0 delete();
 }
 
-_id_4DB1(var_0) {
+delete_when_player_too_close(var_0) {
   self endon("death");
   var_1 = 128;
   var_2 = var_1 * var_1;
@@ -1166,7 +1166,7 @@ _id_4DB1(var_0) {
   self delete();
 }
 
-_id_4DB2(var_0, var_1, var_2) {
+target_move_with_dummy(var_0, var_1, var_2) {
   var_0 endon("death");
   var_3 = 1;
   var_4 = 0;
@@ -1197,56 +1197,56 @@ _id_4DB2(var_0, var_1, var_2) {
       }
     }
 
-    self._id_4DAB = var_0.origin;
+    self.drop_origin = var_0.origin;
     self.origin = var_0.origin + (0, 0, var_5);
   }
 }
 
-_id_4DB3() {
-  if(self._id_4DA6[0] _id_4DBF("force_start_here", ";")) {
-    self._id_4DA7 = self._id_4DA6[0];
-    self._id_4DA8 = self._id_4DA6[1];
-  } else if(self._id_4DA6[1] _id_4DBF("force_start_here", ";")) {
-    self._id_4DA7 = self._id_4DA6[1];
-    self._id_4DA8 = self._id_4DA6[0];
+target_lateral_reset_start_pos() {
+  if(self.lateralmovementorgs[0] has_script_parameter("force_start_here", ";")) {
+    self.lateralstartposition = self.lateralmovementorgs[0];
+    self.lateralendposition = self.lateralmovementorgs[1];
+  } else if(self.lateralmovementorgs[1] has_script_parameter("force_start_here", ";")) {
+    self.lateralstartposition = self.lateralmovementorgs[1];
+    self.lateralendposition = self.lateralmovementorgs[0];
   } else if(common_scripts\utility::cointoss()) {
-    self._id_4DA7 = self._id_4DA6[0];
-    self._id_4DA8 = self._id_4DA6[1];
+    self.lateralstartposition = self.lateralmovementorgs[0];
+    self.lateralendposition = self.lateralmovementorgs[1];
   } else {
-    self._id_4DA7 = self._id_4DA6[1];
-    self._id_4DA8 = self._id_4DA6[0];
+    self.lateralstartposition = self.lateralmovementorgs[1];
+    self.lateralendposition = self.lateralmovementorgs[0];
   }
 
-  self._id_4DA5 moveTo(self._id_4DA7.origin, 0.1);
+  self.orgent moveTo(self.lateralstartposition.origin, 0.1);
 }
 
-_id_4DB4() {
+door_think() {
   var_0 = -90;
 
-  if(isDefined(self._id_2961)) {
-    var_0 = self._id_2961;
+  if(isDefined(self.script_goalyaw)) {
+    var_0 = self.script_goalyaw;
   }
   self waittill("open");
   self rotateYaw(var_0, 0.5, 0.2, 0.1);
 }
 
-_id_4DB5() {
+setup_all_player_hud() {
   foreach(var_1 in level.players) {}
-  var_1 _id_4D8A();
+  var_1 setup_player_hud();
 
-  thread _id_4D8B();
+  thread catch_civilian_hits();
 }
 
-_id_4DB6() {
-  level._id_4DB7 = 0;
-  level._id_4DB8 = 1;
+setup_level_hud() {
+  level.splash_count = 0;
+  level.splash_counted = 1;
 }
 
-_id_4DB9(var_0) {
-  level._id_4DB7++;
-  var_1 = level._id_4DB7;
+msg_splash(var_0) {
+  level.splash_count++;
+  var_1 = level.splash_count;
 
-  if(level._id_4DB7 - level._id_4DB8 > 0) {
+  if(level.splash_count - level.splash_counted > 0) {
     level waittill("pre_display_splash" + var_1);
   }
   if(common_scripts\utility::flag("special_op_terminated")) {
@@ -1259,15 +1259,15 @@ _id_4DB9(var_0) {
     var_2 = &"SO_DELTACAMP_AREA_CLEARED";
   }
 
-  var_3 = maps\_specialops::_id_16B6(2, 0, var_2);
+  var_3 = maps\_specialops::so_create_hud_item(2, 0, var_2);
   var_3.alignx = "center";
   var_3.horzalign = "center";
   var_3.fontscale = 2;
 
   if(var_0 == "civilian_hit") {
-    var_3 maps\_specialops::_id_16AC();
+    var_3 maps\_specialops::set_hud_red();
   } else {
-    var_3 maps\_specialops::_id_185F();
+    var_3 maps\_specialops::set_hud_yellow();
   }
   wait 0.2;
   var_4 = 1;
@@ -1277,23 +1277,23 @@ _id_4DB9(var_0) {
   var_3.fontscale = 0.5;
   wait(var_4 * 0.75);
   level notify("pre_display_splash" + (var_1 + 1));
-  level._id_4DB8++;
+  level.splash_counted++;
   wait(var_4 * 0.25);
   var_3 destroy();
 }
 
-_id_4DBA() {
+hud_area_cleared() {
   wait 0.05;
-  _id_4DB9("area_cleared");
+  msg_splash("area_cleared");
 }
 
-_id_4DBB() {
-  _id_4DB9("civilian_hit");
+hud_civilian_hit() {
+  msg_splash("civilian_hit");
 }
 
-_id_16C2() {
-  var_0 = level._id_16CE - level._id_16CF;
-  var_1 = maps\_utility::_id_16D0(var_0 / 1000, 1);
+custom_eog_summary() {
+  var_0 = level.challenge_end_time - level.challenge_start_time;
+  var_1 = maps\_utility::convert_to_time_string(var_0 / 1000, 1);
   var_2 = 50000;
   var_3 = int(max(var_2 - var_0, 0));
   var_4 = int(var_3 / var_2 * 8000);
@@ -1302,94 +1302,94 @@ _id_16C2() {
   foreach(var_7 in level.players) {}
   var_5 = var_5 + 100 * var_7.stats["kills"];
 
-  var_9 = level._id_4D8C * -500;
+  var_9 = level.civs_hit * -500;
   var_10 = int(max(var_4 + var_5 + var_9, 0));
 
   foreach(var_7 in level.players) {
-    var_7._id_1969 = var_7._id_1890;
+    var_7.forcedgameskill = var_7.so_hud_star_count;
 
-    if(level._id_4D68 == 2) {
-      if(var_1 == "0:33.0" && var_7._id_1969 < 3) {
+    if(level.trainer_version == 2) {
+      if(var_1 == "0:33.0" && var_7.forcedgameskill < 3) {
         var_1 = "0:33.1";
       }
     }
 
     var_12 = var_7.stats["kills"];
-    var_13 = var_7._id_4D8C;
+    var_13 = var_7.civs_hit;
 
-    if(maps\_utility::_id_12C1()) {
-      var_14 = maps\_utility::_id_133A(var_7).stats["kills"];
-      var_15 = maps\_utility::_id_133A(var_7)._id_4D8C;
+    if(maps\_utility::is_coop()) {
+      var_14 = maps\_utility::get_other_player(var_7).stats["kills"];
+      var_15 = maps\_utility::get_other_player(var_7).civs_hit;
 
-      if(isDefined(level._id_16C9) && level._id_16C9 == 1) {
+      if(isDefined(level.missionfailed) && level.missionfailed == 1) {
         setDvar("ui_hide_hint", 0);
-        var_7 maps\_utility::_id_16C7("", "@SPECIAL_OPS_PERFORMANCE_YOU", "@SPECIAL_OPS_PERFORMANCE_PARTNER");
-        var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_FINISH_TIME", var_1, var_1);
-        var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_ENEMIES_HIT", var_12, var_14);
-        var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_CIVS_HIT", var_13, var_15);
+        var_7 maps\_utility::add_custom_eog_summary_line("", "@SPECIAL_OPS_PERFORMANCE_YOU", "@SPECIAL_OPS_PERFORMANCE_PARTNER");
+        var_7 maps\_utility::add_custom_eog_summary_line("@SO_DELTACAMP_SCOREBOARD_FINISH_TIME", var_1, var_1);
+        var_7 maps\_utility::add_custom_eog_summary_line("@SO_DELTACAMP_SCOREBOARD_ENEMIES_HIT", var_12, var_14);
+        var_7 maps\_utility::add_custom_eog_summary_line("@SO_DELTACAMP_SCOREBOARD_CIVS_HIT", var_13, var_15);
       } else {
         setDvar("ui_hide_hint", 1);
-        var_7 maps\_utility::_id_16C7("", "@SPECIAL_OPS_PERFORMANCE_YOU", "@SPECIAL_OPS_PERFORMANCE_PARTNER", "@SPECIAL_OPS_UI_SCORE");
-        var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_FINISH_TIME", var_1, var_1, var_4);
-        var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_ENEMIES_HIT", var_12, var_14, var_5);
-        var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_CIVS_HIT", var_13, var_15, var_9);
-        var_7 maps\_utility::_id_16C8();
+        var_7 maps\_utility::add_custom_eog_summary_line("", "@SPECIAL_OPS_PERFORMANCE_YOU", "@SPECIAL_OPS_PERFORMANCE_PARTNER", "@SPECIAL_OPS_UI_SCORE");
+        var_7 maps\_utility::add_custom_eog_summary_line("@SO_DELTACAMP_SCOREBOARD_FINISH_TIME", var_1, var_1, var_4);
+        var_7 maps\_utility::add_custom_eog_summary_line("@SO_DELTACAMP_SCOREBOARD_ENEMIES_HIT", var_12, var_14, var_5);
+        var_7 maps\_utility::add_custom_eog_summary_line("@SO_DELTACAMP_SCOREBOARD_CIVS_HIT", var_13, var_15, var_9);
+        var_7 maps\_utility::add_custom_eog_summary_line_blank();
 
-        if(!var_7 _id_4DBC()) {
-          var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_MEDAL_NEXT_TIME", var_7 _id_4DBD());
+        if(!var_7 completed_all_difficulties()) {
+          var_7 maps\_utility::add_custom_eog_summary_line("@SO_DELTACAMP_SCOREBOARD_MEDAL_NEXT_TIME", var_7 get_next_medal_time_string());
 
           if(!issplitscreen()) {
-            var_7 maps\_utility::_id_16C8();
+            var_7 maps\_utility::add_custom_eog_summary_line_blank();
           }
         }
 
-        var_7 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_TEAM_SCORE", var_10);
+        var_7 maps\_utility::add_custom_eog_summary_line("@SPECIAL_OPS_UI_TEAM_SCORE", var_10);
       }
-    } else if(isDefined(level._id_16C9) && level._id_16C9 == 1) {
+    } else if(isDefined(level.missionfailed) && level.missionfailed == 1) {
       setDvar("ui_hide_hint", 0);
-      var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_FINISH_TIME", var_1);
-      var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_ENEMIES_HIT", var_12);
-      var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_CIVS_HIT", var_13);
+      var_7 maps\_utility::add_custom_eog_summary_line("@SO_DELTACAMP_SCOREBOARD_FINISH_TIME", var_1);
+      var_7 maps\_utility::add_custom_eog_summary_line("@SO_DELTACAMP_SCOREBOARD_ENEMIES_HIT", var_12);
+      var_7 maps\_utility::add_custom_eog_summary_line("@SO_DELTACAMP_SCOREBOARD_CIVS_HIT", var_13);
     } else {
       setDvar("ui_hide_hint", 1);
-      var_7 maps\_utility::_id_16C7("", "@SPECIAL_OPS_PERFORMANCE_YOU", "@SPECIAL_OPS_UI_SCORE");
-      var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_FINISH_TIME", var_1, var_4);
-      var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_ENEMIES_HIT", var_12, var_5);
-      var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_CIVS_HIT", var_13, var_9);
-      var_7 maps\_utility::_id_16C8();
+      var_7 maps\_utility::add_custom_eog_summary_line("", "@SPECIAL_OPS_PERFORMANCE_YOU", "@SPECIAL_OPS_UI_SCORE");
+      var_7 maps\_utility::add_custom_eog_summary_line("@SO_DELTACAMP_SCOREBOARD_FINISH_TIME", var_1, var_4);
+      var_7 maps\_utility::add_custom_eog_summary_line("@SO_DELTACAMP_SCOREBOARD_ENEMIES_HIT", var_12, var_5);
+      var_7 maps\_utility::add_custom_eog_summary_line("@SO_DELTACAMP_SCOREBOARD_CIVS_HIT", var_13, var_9);
+      var_7 maps\_utility::add_custom_eog_summary_line_blank();
 
-      if(!var_7 _id_4DBC()) {
-        var_7 maps\_utility::_id_16C7("@SO_DELTACAMP_SCOREBOARD_MEDAL_NEXT_TIME", var_7 _id_4DBD());
+      if(!var_7 completed_all_difficulties()) {
+        var_7 maps\_utility::add_custom_eog_summary_line("@SO_DELTACAMP_SCOREBOARD_MEDAL_NEXT_TIME", var_7 get_next_medal_time_string());
 
         if(!issplitscreen()) {
-          var_7 maps\_utility::_id_16C8();
+          var_7 maps\_utility::add_custom_eog_summary_line_blank();
         }
       }
 
-      var_7 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_SCORE_FINAL", var_10);
+      var_7 maps\_utility::add_custom_eog_summary_line("@SPECIAL_OPS_UI_SCORE_FINAL", var_10);
     }
 
-    if(!isDefined(level._id_16C9) || level._id_16C9 == 0) {
-      var_7 maps\_specialops::_id_17FB(var_0);
-      var_7 maps\_specialops::_id_17FE(var_10);
+    if(!isDefined(level.missionfailed) || level.missionfailed == 0) {
+      var_7 maps\_specialops::override_summary_time(var_0);
+      var_7 maps\_specialops::override_summary_score(var_10);
     }
   }
 }
 
-_id_4DBC() {
-  var_0 = maps\_specialops::_id_1888();
+completed_all_difficulties() {
+  var_0 = maps\_specialops::get_previously_completed_difficulty();
 
-  if(isDefined(self._id_1969)) {
-    var_0 = int(max(var_0, self._id_1969 + 1));
+  if(isDefined(self.forcedgameskill)) {
+    var_0 = int(max(var_0, self.forcedgameskill + 1));
   }
   return var_0 == 4;
 }
 
-_id_4DBD() {
-  var_0 = _id_4DBE();
+get_next_medal_time_string() {
+  var_0 = get_next_medal();
   var_1 = 0;
 
-  if(level._id_4D68 == 1) {
+  if(level.trainer_version == 1) {
     switch (var_0) {
       case 2:
         var_1 = 40;
@@ -1401,7 +1401,7 @@ _id_4DBD() {
         var_1 = 28;
         break;
     }
-  } else if(level._id_4D68 == 2) {
+  } else if(level.trainer_version == 2) {
     switch (var_0) {
       case 2:
         var_1 = 45;
@@ -1415,31 +1415,31 @@ _id_4DBD() {
     }
   }
 
-  return maps\_utility::_id_16D0(var_1, 1);
+  return maps\_utility::convert_to_time_string(var_1, 1);
 }
 
-_id_4DBE() {
-  var_0 = maps\_specialops::_id_1888();
+get_next_medal() {
+  var_0 = maps\_specialops::get_previously_completed_difficulty();
 
-  if(isDefined(self._id_1969)) {
-    var_0 = int(max(var_0, self._id_1969 + 1));
+  if(isDefined(self.forcedgameskill)) {
+    var_0 = int(max(var_0, self.forcedgameskill + 1));
   }
   return var_0;
 }
 
-_id_4DBF(var_0, var_1) {
-  if(!isDefined(self) || !isDefined(self._id_164F)) {
+has_script_parameter(var_0, var_1) {
+  if(!isDefined(self) || !isDefined(self.script_parameters)) {
     return 0;
   }
-  var_2 = strtok(self._id_164F, var_1);
-  return maps\_utility::_id_0AD1(var_2, var_0);
+  var_2 = strtok(self.script_parameters, var_1);
+  return maps\_utility::array_contains(var_2, var_0);
 }
 
-_id_4DC0(var_0, var_1, var_2) {
-  if(!isDefined(self) || !isDefined(self._id_164F)) {
+replace_script_parameter(var_0, var_1, var_2) {
+  if(!isDefined(self) || !isDefined(self.script_parameters)) {
     return 0;
   }
-  var_3 = strtok(self._id_164F, var_2);
+  var_3 = strtok(self.script_parameters, var_2);
   var_4 = "";
 
   foreach(var_6 in var_3) {
@@ -1454,10 +1454,10 @@ _id_4DC0(var_0, var_1, var_2) {
     var_4 = var_4 + var_6;
   }
 
-  self._id_164F = var_4;
+  self.script_parameters = var_4;
 }
 
-_id_4DC1(var_0) {
+make_door_from_prefab(var_0) {
   var_1 = getEntArray(var_0, "targetname");
   var_2 = undefined;
   var_3 = [];
@@ -1498,11 +1498,11 @@ _id_4DC1(var_0) {
   var_14 linkTo(var_2);
 
   var_16 = var_2;
-  var_16._id_4DC2 = var_4;
+  var_16.brushes = var_4;
 
   if(isDefined(var_6)) {
     var_6 unlink();
-    var_16._id_4DC3 = var_6;
+    var_16.blocker = var_6;
   }
 
   if(isDefined(var_5)) {
@@ -1511,18 +1511,18 @@ _id_4DC1(var_0) {
   return var_16;
 }
 
-_id_4042(var_0, var_1, var_2) {
-  if(isDefined(self._id_288A)) {
-    while(isDefined(self._id_288A)) {
+door_open(var_0, var_1, var_2) {
+  if(isDefined(self.moving)) {
+    while(isDefined(self.moving)) {
       wait 0.05;
     }
   }
 
-  self._id_288A = 1;
+  self.moving = 1;
   var_3 = 90;
 
-  if(isDefined(self._id_4D92)) {
-    var_3 = self._id_4D92;
+  if(isDefined(self.openangles)) {
+    var_3 = self.openangles;
   }
   if(isDefined(var_0)) {
     common_scripts\utility::flag_wait(var_0);
@@ -1535,29 +1535,29 @@ _id_4042(var_0, var_1, var_2) {
   } else {
     self rotateTo(self.angles + (0, var_3, 0), 4, 1.5, 1.5);
   }
-  if(isDefined(self._id_4DC3)) {
-    self._id_4DC3 maps\_utility::_id_27C5();
+  if(isDefined(self.blocker)) {
+    self.blocker maps\_utility::hide_entity();
   }
   if(!isDefined(var_2) || var_2 == 0) {
     thread maps\_utility::play_sound_on_entity("scn_training_fence_open");
   }
-  common_scripts\utility::array_call(self._id_4DC2, ::notsolid);
+  common_scripts\utility::array_call(self.brushes, ::notsolid);
   wait(var_4);
-  self._id_288A = undefined;
+  self.moving = undefined;
 }
 
-_id_4DC4(var_0, var_1) {
-  if(isDefined(self._id_288A)) {
-    while(isDefined(self._id_288A)) {
+door_close(var_0, var_1) {
+  if(isDefined(self.moving)) {
+    while(isDefined(self.moving)) {
       wait 0.05;
     }
   }
 
-  self._id_288A = 1;
+  self.moving = 1;
   var_2 = -90;
 
-  if(isDefined(self._id_4DC5)) {
-    var_2 = self._id_4DC5;
+  if(isDefined(self.closeangles)) {
+    var_2 = self.closeangles;
   }
   if(isDefined(var_0)) {
     common_scripts\utility::flag_wait(var_0);
@@ -1570,11 +1570,11 @@ _id_4DC4(var_0, var_1) {
   } else {
     self rotateTo(self.angles + (0, var_2, 0), 2, 0.5, 0.5);
   }
-  if(isDefined(self._id_4DC3)) {
-    self._id_4DC3 maps\_utility::_id_27C6();
+  if(isDefined(self.blocker)) {
+    self.blocker maps\_utility::show_entity();
   }
   thread maps\_utility::play_sound_on_entity("scn_training_fence_close");
-  common_scripts\utility::array_call(self._id_4DC2, ::solid);
+  common_scripts\utility::array_call(self.brushes, ::solid);
   wait(var_3);
-  self._id_288A = undefined;
+  self.moving = undefined;
 }

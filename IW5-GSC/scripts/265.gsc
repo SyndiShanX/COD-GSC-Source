@@ -10,24 +10,24 @@ main(var_0) {
     return;
   }
   if(!getdvarint("painter")) {
-    common_scripts\utility::array_thread(var_1, ::_id_1BB3);
+    common_scripts\utility::array_thread(var_1, ::painter_clean_me);
     return;
   }
 
-  _id_1BC4(var_0);
+  painter_initvars(var_0);
   var_2 = [];
-  var_3 = _id_1BC3(var_1);
+  var_3 = get_painter_groups(var_1);
 
   foreach(var_5 in var_3) {}
-  _id_1BBC(var_5);
+  setup_painter_group(var_5);
 
-  thread _id_1BD4();
-  common_scripts\utility::array_thread(level._id_1BB1, ::_id_1BB4);
-  level._id_1BB2 = 1;
+  thread painter_init();
+  common_scripts\utility::array_thread(level.spam_model_group, ::default_undefined);
+  level.stop_load = 1;
   level waittill("forever");
 }
 
-_id_1BB3() {
+painter_clean_me() {
   if(isDefined(self.target)) {
     var_0 = getEnt(self.target, "targetname");
     var_0 delete();
@@ -36,34 +36,34 @@ _id_1BB3() {
   self delete();
 }
 
-_id_1BB4() {
-  if(!isDefined(self._id_1BB5)) {
-    self._id_1BB5 = 0;
+default_undefined() {
+  if(!isDefined(self.bposedstyle)) {
+    self.bposedstyle = 0;
   }
-  if(!isDefined(self._id_1BB6)) {
-    self._id_1BB6 = 0;
+  if(!isDefined(self.borienttoplayeryrot)) {
+    self.borienttoplayeryrot = 0;
   }
-  if(!isDefined(self._id_1BB7)) {
-    self._id_1BB7 = 0;
+  if(!isDefined(self.btreeorient)) {
+    self.btreeorient = 0;
   }
-  if(!isDefined(self._id_1BB8)) {
-    self._id_1BB8 = 0;
+  if(!isDefined(self.bfacade)) {
+    self.bfacade = 0;
   }
-  if(!isDefined(self._id_1BB9)) {
-    self._id_1BB9 = 32;
+  if(!isDefined(self.density)) {
+    self.density = 32;
   }
   if(!isDefined(self.radius)) {
     self.radius = 84;
   }
-  if(!isDefined(self._id_1BBA)) {
-    self._id_1BBA = 1000;
+  if(!isDefined(self.maxdist)) {
+    self.maxdist = 1000;
   }
-  if(!isDefined(self._id_1BBB)) {
-    self._id_1BBB = [];
+  if(!isDefined(self.angleoffset)) {
+    self.angleoffset = [];
   }
 }
 
-_id_1BBC(var_0) {
+setup_painter_group(var_0) {
   var_1 = 100000001;
   var_2 = var_0;
   var_3 = undefined;
@@ -76,20 +76,20 @@ _id_1BBC(var_0) {
   var_10 = undefined;
 
   foreach(var_12 in var_0) {
-    var_10 = _id_1BC1(var_12);
-    var_7 = _id_1BC2(var_12);
-    var_13 = isDefined(var_12._id_164F) && var_12._id_164F == "use_prefab_model";
+    var_10 = get_angle_offset(var_12);
+    var_7 = get_height_offset(var_12);
+    var_13 = isDefined(var_12.script_parameters) && var_12.script_parameters == "use_prefab_model";
 
     if(isDefined(var_12.radius)) {
       var_5 = var_12.radius;
     }
-    if(isDefined(var_12._id_1BBD) && var_12._id_1BBD) {
+    if(isDefined(var_12.script_painter_treeorient) && var_12.script_painter_treeorient) {
       var_3 = 1;
     }
-    if(isDefined(var_12._id_1BBE) && var_12._id_1BBE) {
-      var_6 = var_12._id_1BBE;
+    if(isDefined(var_12.script_painter_maxdist) && var_12.script_painter_maxdist) {
+      var_6 = var_12.script_painter_maxdist;
     }
-    if(isDefined(var_12._id_1BBF) && var_12._id_1BBF) {
+    if(isDefined(var_12.script_painter_facade) && var_12.script_painter_facade) {
       var_4 = 1;
     }
     foreach(var_15 in var_2) {
@@ -106,11 +106,11 @@ _id_1BBC(var_0) {
     if(var_1 == 100000001) {
       var_1 = undefined;
     }
-    _id_1BD7(var_12._id_1BC0, var_12.model, var_3, var_4, var_1, var_5, var_6, var_7, var_8, var_9, var_10, var_13);
+    add_spammodel(var_12.script_paintergroup, var_12.model, var_3, var_4, var_1, var_5, var_6, var_7, var_8, var_9, var_10, var_13);
   }
 }
 
-_id_1BC1(var_0) {
+get_angle_offset(var_0) {
   if(!isDefined(var_0.target)) {
     return undefined;
   }
@@ -118,7 +118,7 @@ _id_1BC1(var_0) {
   return var_1.angles - var_0.angles;
 }
 
-_id_1BC2(var_0) {
+get_height_offset(var_0) {
   if(!isDefined(var_0.target)) {
     return undefined;
   }
@@ -128,16 +128,16 @@ _id_1BC2(var_0) {
   return var_2;
 }
 
-_id_1BC3(var_0) {
+get_painter_groups(var_0) {
   var_1 = [];
   var_2 = "";
 
   foreach(var_4 in var_0) {
-    if(!isDefined(var_4._id_1BC0)) {
-      var_4._id_1BC0 = var_4.model;
+    if(!isDefined(var_4.script_paintergroup)) {
+      var_4.script_paintergroup = var_4.model;
     }
-    var_2 = var_4._id_1BC0;
-    level._id_1B4F = var_2;
+    var_2 = var_4.script_paintergroup;
+    level.painter_startgroup = var_2;
 
     if(!isDefined(var_1[var_2]) || !var_1[var_2].size) {
       var_1[var_2] = [];
@@ -148,27 +148,27 @@ _id_1BC3(var_0) {
   return var_1;
 }
 
-_id_1BC4(var_0) {
-  level._id_1ADE = 0;
-  level._id_1BB5 = 0;
-  level._id_1BB6 = 0;
-  level._id_1BC5 = 16;
-  level._id_1BC6 = 0;
-  level._id_1BB1 = [];
-  level._id_1BC7 = [];
-  level._id_1BC8 = 0.1;
-  level._id_1BC9 = 31;
-  level._id_1BCA = 1000;
-  level._id_1BCB = [];
-  level._id_1BCC = 0;
-  level._id_1BCD = 0;
-  level._id_1BCE = 0;
-  level._id_1BCF = 0;
-  level._id_1BD0 = 0;
-  level._id_1BD1 = ::_id_1BD7;
+painter_initvars(var_0) {
+  level._clearalltextafterhudelem = 0;
+  level.bposedstyle = 0;
+  level.borienttoplayeryrot = 0;
+  level.spam_density_scale = 16;
+  level.spaming_models = 0;
+  level.spam_model_group = [];
+  level.spamed_models = [];
+  level.spam_models_flowrate = 0.1;
+  level.spam_model_radius = 31;
+  level.spam_maxdist = 1000;
+  level.previewmodels = [];
+  level.spam_models_iscustomrotation = 0;
+  level.spam_models_iscustomheight = 0;
+  level.spam_models_customheight = 0;
+  level.spam_model_circlescale_lasttime = 0;
+  level.spam_model_circlescale_accumtime = 0;
+  level.paintadd = ::add_spammodel;
   level.timelimitoverride = 1;
   thread hack_start(var_0);
-  thread _id_1B2C();
+  thread hud_init();
 }
 
 hack_start(var_0) {
@@ -181,49 +181,49 @@ hack_start(var_0) {
   while(!isDefined(get_player())) {
     wait 0.05;
   }
-  level._id_1BD3 = get_player();
+  level.painter_player = get_player();
   wait 0.05;
   var_1 = "team_marinesopfor";
   var_2 = "autoassign";
-  level._id_1BD3 notify("menuresponse", var_1, var_2);
+  level.painter_player notify("menuresponse", var_1, var_2);
   wait 0.05;
   var_1 = "changeclass_offline";
   var_2 = "offline_class1_mp, 0";
-  level._id_1BD3 notify("menuresponse", var_1, var_2);
-  level._id_1BD3 openpopupmenu(var_0);
+  level.painter_player notify("menuresponse", var_1, var_2);
+  level.painter_player openpopupmenu(var_0);
   wait 0.05;
-  level._id_1BD3 closepopupmenu();
+  level.painter_player closepopupmenu();
   common_scripts\utility::flag_set("user_alive");
 }
 
-_id_1BD4() {
+painter_init() {
   common_scripts\utility::array_call(getEntArray("script_model", "classname"), ::delete);
-  _id_1B3B(level._id_1B4F);
-  level._id_1B4F = undefined;
-  _id_1B41();
+  setcurrentgroup(level.painter_startgroup);
+  level.painter_startgroup = undefined;
+  playerinit();
 }
 
-_id_1B5D() {
-  level._id_1B31["helppm"]._id_1B32 setvalue(level._id_1BC7.size);
+hud_update_placed_model_count() {
+  level.hud_controler["helppm"].description setvalue(level.spamed_models.size);
   var_0 = 256;
 
-  if(level._id_1BC7.size < var_0) {
-    level._id_1B31["helppm"]._id_1B32.color = (1, 1, 1);
+  if(level.spamed_models.size < var_0) {
+    level.hud_controler["helppm"].description.color = (1, 1, 1);
     return;
   }
 
   var_1 = 1;
-  var_2 = 1 - (level._id_1BC7.size - var_0) / var_0;
+  var_2 = 1 - (level.spamed_models.size - var_0) / var_0;
   var_3 = var_2;
-  level._id_1B31["helppm"]._id_1B32.color = (var_1, var_2, var_3);
+  level.hud_controler["helppm"].description.color = (var_1, var_2, var_3);
 }
 
-_id_1B2C() {
+hud_init() {
   common_scripts\utility::flag_init("user_hud_active");
   common_scripts\utility::flag_wait("user_alive");
   var_0 = 7;
 
-  if(_id_1BF3()) {
+  if(is_mp()) {
     var_0 = 7;
   }
   var_1 = [];
@@ -234,7 +234,7 @@ _id_1B2C() {
   var_6 = var_5;
 
   for(var_7 = 0; var_7 < var_0; var_7++) {
-    var_1[var_7] = _id_1B34();
+    var_1[var_7] = _newhudelem();
     var_1[var_7].location = 0;
     var_1[var_7].alignx = "left";
     var_1[var_7].aligny = "middle";
@@ -249,7 +249,7 @@ _id_1B2C() {
     }
     var_1[var_7].x = 20;
     var_1[var_7].y = var_4;
-    var_1[var_7] _id_1B36(".");
+    var_1[var_7] _settext(".");
 
     if(var_7 == var_3) {
       var_5 = var_5 * -1;
@@ -258,8 +258,8 @@ _id_1B2C() {
     var_4 = var_4 - var_2;
   }
 
-  level._id_1B2D = var_1;
-  var_8 = _id_1B34();
+  level.spam_group_hudelems = var_1;
+  var_8 = _newhudelem();
   var_8.location = 0;
   var_8.alignx = "center";
   var_8.aligny = "bottom";
@@ -269,9 +269,9 @@ _id_1B2C() {
   var_8.alpha = 1;
   var_8.x = 320;
   var_8.y = 244;
-  var_8 _id_1B36(".");
-  level._id_1B2E = var_8;
-  var_8 = _id_1B34();
+  var_8 _settext(".");
+  level.crosshair = var_8;
+  var_8 = _newhudelem();
   var_8.location = 0;
   var_8.alignx = "center";
   var_8.aligny = "bottom";
@@ -282,56 +282,56 @@ _id_1B2C() {
   var_8.x = 320;
   var_8.y = 244;
   var_8 setvalue(0);
-  level._id_1B2F = var_8;
-  _id_1B30("helppm", 1, "^5Placed Models: ", undefined, level._id_1BC7.size);
-  _id_1B30("helpdensity", 2, "^5Spacing: ", undefined, level._id_1BC5);
-  _id_1B30("helpradius", 3, "^5Radius: ", undefined, level._id_1BC9);
-  _id_1B30("helpxy", 6, "^4X / ^3Y: ", undefined, level._id_1BC9);
-  _id_1B30("helpab", 7, "^2A / ^1B^7: ", " - ");
-  _id_1B30("helplsrs", 8, "^8L^7 / R Stick: ", " - ");
-  _id_1B30("helplbrb", 9, "^8L^7 / R Shoulder: ", " - ");
-  _id_1B30("helpdpu", 10, "^8DPad U / ^7D: ", " - ");
-  _id_1B30("helpdpl", 11, "^8DPad L / ^7R: ", " - ");
-  _id_1B30("helpF", 17, "^8F: ^7( dump ) ^3map_source/" + level.script + "_modeldump.map", "");
-  _id_1B9A();
+  level.crosshair_value = var_8;
+  controler_hud_add("helppm", 1, "^5Placed Models: ", undefined, level.spamed_models.size);
+  controler_hud_add("helpdensity", 2, "^5Spacing: ", undefined, level.spam_density_scale);
+  controler_hud_add("helpradius", 3, "^5Radius: ", undefined, level.spam_model_radius);
+  controler_hud_add("helpxy", 6, "^4X / ^3Y: ", undefined, level.spam_model_radius);
+  controler_hud_add("helpab", 7, "^2A / ^1B^7: ", " - ");
+  controler_hud_add("helplsrs", 8, "^8L^7 / R Stick: ", " - ");
+  controler_hud_add("helplbrb", 9, "^8L^7 / R Shoulder: ", " - ");
+  controler_hud_add("helpdpu", 10, "^8DPad U / ^7D: ", " - ");
+  controler_hud_add("helpdpl", 11, "^8DPad L / ^7R: ", " - ");
+  controler_hud_add("helpF", 17, "^8F: ^7( dump ) ^3map_source/" + level.script + "_modeldump.map", "");
+  hint_buttons_main();
   common_scripts\utility::flag_set("user_hud_active");
 }
 
-_id_1B9A() {
-  _id_1B62("helpxy", "^4Select Set Up ^7 / ^3Down");
-  _id_1B62("helpab", "^2Spacing Down ^7 / ^1up ");
-  _id_1B62("helplsrs", "^8Radius Down ^7 / Up");
-  _id_1B62("helplbrb", "^8Remove ^7 / Place");
-  _id_1B62("helpdpl", "^8zOffset Clear ^7 / Set");
-  _id_1B62("helpdpu", "^8Rotation Clear ^7 / Set");
+hint_buttons_main() {
+  controler_hud_update_text("helpxy", "^4Select Set Up ^7 / ^3Down");
+  controler_hud_update_text("helpab", "^2Spacing Down ^7 / ^1up ");
+  controler_hud_update_text("helplsrs", "^8Radius Down ^7 / Up");
+  controler_hud_update_text("helplbrb", "^8Remove ^7 / Place");
+  controler_hud_update_text("helpdpl", "^8zOffset Clear ^7 / Set");
+  controler_hud_update_text("helpdpu", "^8Rotation Clear ^7 / Set");
 }
 
-_id_1BD5() {
-  _id_1B62("helpxy", "^4 - ^7 / ^3 - ");
-  _id_1B62("helpab", "^2Height Down ^7 / ^1Up ");
-  _id_1B62("helplsrs", "^8 - ^7 / - ");
-  _id_1B62("helplbrb", "^8 - ^7 / - ");
-  _id_1B62("helpdpl", "^8 - ^7 / Set");
-  _id_1B62("helpdpu", "^8 - ^7 / - ");
-  _id_1B62("helpF", " - ");
+hint_buttons_zoffset() {
+  controler_hud_update_text("helpxy", "^4 - ^7 / ^3 - ");
+  controler_hud_update_text("helpab", "^2Height Down ^7 / ^1Up ");
+  controler_hud_update_text("helplsrs", "^8 - ^7 / - ");
+  controler_hud_update_text("helplbrb", "^8 - ^7 / - ");
+  controler_hud_update_text("helpdpl", "^8 - ^7 / Set");
+  controler_hud_update_text("helpdpu", "^8 - ^7 / - ");
+  controler_hud_update_text("helpF", " - ");
 }
 
-_id_1BD6() {
-  _id_1B62("helpxy", "^4 - ^7 / ^3 - ");
-  _id_1B62("helpab", "^2RotateOther Up ^7 / ^1Down ");
-  _id_1B62("helplsrs", "^8 - ^7 / - ");
-  _id_1B62("helplbrb", "^8 - ^7 / - ");
-  _id_1B62("helpdpl", "^8 - ^7 / - ");
-  _id_1B62("helpdpu", "^8Set ^7 / - ");
-  _id_1B62("helpF", " - ");
+hint_buttons_rotation() {
+  controler_hud_update_text("helpxy", "^4 - ^7 / ^3 - ");
+  controler_hud_update_text("helpab", "^2RotateOther Up ^7 / ^1Down ");
+  controler_hud_update_text("helplsrs", "^8 - ^7 / - ");
+  controler_hud_update_text("helplbrb", "^8 - ^7 / - ");
+  controler_hud_update_text("helpdpl", "^8 - ^7 / - ");
+  controler_hud_update_text("helpdpu", "^8Set ^7 / - ");
+  controler_hud_update_text("helpF", " - ");
 }
 
-_id_1B3B(var_0) {
+setcurrentgroup(var_0) {
   common_scripts\utility::flag_wait("user_hud_active");
-  level._id_1B3C = var_0;
-  var_1 = getarraykeys(level._id_1BB1);
+  level.spam_model_current_group = var_0;
+  var_1 = getarraykeys(level.spam_model_group);
   var_2 = 0;
-  var_3 = int(level._id_1B2D.size / 2);
+  var_3 = int(level.spam_group_hudelems.size / 2);
 
   for(var_4 = 0; var_4 < var_1.size; var_4++) {
     if(var_1[var_4] == var_0) {
@@ -340,42 +340,42 @@ _id_1B3B(var_0) {
     }
   }
 
-  level._id_1B2D[var_3] _id_1B36(var_1[var_2]);
+  level.spam_group_hudelems[var_3] _settext(var_1[var_2]);
 
-  for(var_4 = 1; var_4 < level._id_1B2D.size - var_3; var_4++) {
+  for(var_4 = 1; var_4 < level.spam_group_hudelems.size - var_3; var_4++) {
     if(var_2 - var_4 < 0) {
-      level._id_1B2D[var_3 + var_4] _id_1B36(".");
+      level.spam_group_hudelems[var_3 + var_4] _settext(".");
       continue;
     }
 
-    level._id_1B2D[var_3 + var_4] _id_1B36(var_1[var_2 - var_4]);
+    level.spam_group_hudelems[var_3 + var_4] _settext(var_1[var_2 - var_4]);
   }
 
-  for(var_4 = 1; var_4 < level._id_1B2D.size - var_3; var_4++) {
+  for(var_4 = 1; var_4 < level.spam_group_hudelems.size - var_3; var_4++) {
     if(var_2 + var_4 > var_1.size - 1) {
-      level._id_1B2D[var_3 - var_4] _id_1B36(".");
+      level.spam_group_hudelems[var_3 - var_4] _settext(".");
       continue;
     }
 
-    level._id_1B2D[var_3 - var_4] _id_1B36(var_1[var_2 + var_4]);
+    level.spam_group_hudelems[var_3 - var_4] _settext(var_1[var_2 + var_4]);
   }
 
-  var_0 = _id_1B72();
-  level._id_1BB6 = var_0._id_1BB6;
-  level._id_1BB5 = var_0._id_1BB5;
-  level._id_1BCA = var_0._id_1BBA;
-  level._id_1BC9 = var_0.radius;
-  level._id_1B31["helpradius"]._id_1B32 setvalue(level._id_1BC9);
-  level._id_1BC5 = var_0._id_1BB9;
-  level._id_1B31["helpdensity"]._id_1B32 setvalue(level._id_1BC5);
+  var_0 = getcurrent_groupstruct();
+  level.borienttoplayeryrot = var_0.borienttoplayeryrot;
+  level.bposedstyle = var_0.bposedstyle;
+  level.spam_maxdist = var_0.maxdist;
+  level.spam_model_radius = var_0.radius;
+  level.hud_controler["helpradius"].description setvalue(level.spam_model_radius);
+  level.spam_density_scale = var_0.density;
+  level.hud_controler["helpdensity"].description setvalue(level.spam_density_scale);
 }
 
-_id_1B38() {
+setgroup_up() {
   var_0 = undefined;
-  var_1 = getarraykeys(level._id_1BB1);
+  var_1 = getarraykeys(level.spam_model_group);
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(var_1[var_2] == level._id_1B3C) {
+    if(var_1[var_2] == level.spam_model_current_group) {
       var_0 = var_2 + 1;
       break;
     }
@@ -384,19 +384,19 @@ _id_1B38() {
   if(var_0 == var_1.size) {
     return;
   }
-  _id_1B3B(var_1[var_0]);
+  setcurrentgroup(var_1[var_0]);
 
-  while(level._id_1BD3 buttonPressed("BUTTON_Y")) {
+  while(level.painter_player buttonPressed("BUTTON_Y")) {
     wait 0.05;
   }
 }
 
-_id_1B39() {
+setgroup_down() {
   var_0 = undefined;
-  var_1 = getarraykeys(level._id_1BB1);
+  var_1 = getarraykeys(level.spam_model_group);
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(var_1[var_2] == level._id_1B3C) {
+    if(var_1[var_2] == level.spam_model_current_group) {
       var_0 = var_2 - 1;
       break;
     }
@@ -405,121 +405,121 @@ _id_1B39() {
   if(var_0 < 0) {
     return;
   }
-  _id_1B3B(var_1[var_0]);
+  setcurrentgroup(var_1[var_0]);
 
-  while(level._id_1BD3 buttonPressed("BUTTON_X")) {
+  while(level.painter_player buttonPressed("BUTTON_X")) {
     wait 0.05;
   }
 }
 
-_id_1BD7(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
-  if(!isDefined(level._id_1BB1[var_0])) {
+add_spammodel(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  if(!isDefined(level.spam_model_group[var_0])) {
     var_12 = spawnStruct();
-    level._id_1BB1[var_0] = var_12;
-    level._id_1BB1[var_0]._id_1BD8 = [];
+    level.spam_model_group[var_0] = var_12;
+    level.spam_model_group[var_0].models = [];
   }
 
   if(!isDefined(var_10)) {
     var_10 = (0, 0, 0);
   }
-  level._id_1BB1[var_0]._id_1BB8 = var_3;
-  level._id_1BB1[var_0]._id_1BB7 = var_2;
-  level._id_1BB1[var_0]._id_1BB9 = var_4;
-  level._id_1BB1[var_0].radius = var_5;
-  level._id_1BB1[var_0]._id_1BBA = var_6;
-  level._id_1BB1[var_0]._id_1BB5 = var_8;
-  level._id_1BB1[var_0]._id_1BB6 = var_9;
+  level.spam_model_group[var_0].bfacade = var_3;
+  level.spam_model_group[var_0].btreeorient = var_2;
+  level.spam_model_group[var_0].density = var_4;
+  level.spam_model_group[var_0].radius = var_5;
+  level.spam_model_group[var_0].maxdist = var_6;
+  level.spam_model_group[var_0].bposedstyle = var_8;
+  level.spam_model_group[var_0].borienttoplayeryrot = var_9;
 
-  if(!isDefined(level._id_1BB1[var_0]._id_1BBB)) {
-    level._id_1BB1[var_0]._id_1BBB = [];
+  if(!isDefined(level.spam_model_group[var_0].angleoffset)) {
+    level.spam_model_group[var_0].angleoffset = [];
   }
-  level._id_1BB1[var_0]._id_1BBB[var_1] = var_10;
+  level.spam_model_group[var_0].angleoffset[var_1] = var_10;
 
-  if(!isDefined(level._id_1BB1[var_0]._id_1BD9)) {
-    level._id_1BB1[var_0]._id_1BD9 = [];
+  if(!isDefined(level.spam_model_group[var_0].heightoffset)) {
+    level.spam_model_group[var_0].heightoffset = [];
   }
-  level._id_1BB1[var_0]._id_1BD9[var_1] = var_7;
+  level.spam_model_group[var_0].heightoffset[var_1] = var_7;
 
-  if(!isDefined(level._id_1BB1[var_0]._id_1BDA)) {
-    level._id_1BB1[var_0]._id_1BDA = [];
+  if(!isDefined(level.spam_model_group[var_0].modelusesprefab)) {
+    level.spam_model_group[var_0].modelusesprefab = [];
   }
-  level._id_1BB1[var_0]._id_1BDA[var_1] = var_11;
-  level._id_1BB1[var_0]._id_1BD8[level._id_1BB1[var_0]._id_1BD8.size] = var_1;
+  level.spam_model_group[var_0].modelusesprefab[var_1] = var_11;
+  level.spam_model_group[var_0].models[level.spam_model_group[var_0].models.size] = var_1;
 }
 
-_id_1B41() {
-  level._id_1BDB = 700;
-  level._id_1BD3 takeallweapons();
+playerinit() {
+  level.painter_max = 700;
+  level.painter_player takeallweapons();
   common_scripts\utility::flag_wait("user_hud_active");
 
   for(;;) {
-    var_0 = _id_1B57();
-    _id_1BE7(var_0);
+    var_0 = player_view_trace();
+    draw_placement_circle(var_0);
 
-    if(level._id_1BD3 buttonPressed("f")) {
-      _id_1BF2();
+    if(level.painter_player buttonPressed("f")) {
+      dump_models();
     }
-    if(level._id_1BD3 buttonPressed("DPAD_UP")) {
-      _id_1BE1(var_0, "DPAD_UP");
-    } else if(level._id_1BD3 buttonPressed("DPAD_DOWN")) {
-      _id_1BE0();
-    } else if(level._id_1BD3 buttonPressed("DPAD_RIGHT")) {
-      _id_1BDD(var_0, "DPAD_RIGHT");
-    } else if(level._id_1BD3 buttonPressed("DPAD_LEFT")) {
-      _id_1BDC();
-    } else if(level._id_1BD3 buttonPressed("BUTTON_X")) {
-      _id_1B39();
-    } else if(level._id_1BD3 buttonPressed("BUTTON_Y")) {
-      _id_1B38();
-    } else if(level._id_1BD3 buttonPressed("BUTTON_LSTICK")) {
-      _id_1BE5(var_0, -1);
-    } else if(level._id_1BD3 buttonPressed("BUTTON_RSTICK")) {
-      _id_1BE5(var_0, 1);
-    } else if(level._id_1BD3 buttonPressed("BUTTON_A")) {
-      _id_1BE6(var_0, -1);
-    } else if(level._id_1BD3 buttonPressed("BUTTON_B")) {
-      _id_1BE6(var_0, 1);
+    if(level.painter_player buttonPressed("DPAD_UP")) {
+      customrotation_mode(var_0, "DPAD_UP");
+    } else if(level.painter_player buttonPressed("DPAD_DOWN")) {
+      customrotation_mode_off();
+    } else if(level.painter_player buttonPressed("DPAD_RIGHT")) {
+      customheight_mode(var_0, "DPAD_RIGHT");
+    } else if(level.painter_player buttonPressed("DPAD_LEFT")) {
+      customheight_mode_off();
+    } else if(level.painter_player buttonPressed("BUTTON_X")) {
+      setgroup_down();
+    } else if(level.painter_player buttonPressed("BUTTON_Y")) {
+      setgroup_up();
+    } else if(level.painter_player buttonPressed("BUTTON_LSTICK")) {
+      spam_model_circlescale(var_0, -1);
+    } else if(level.painter_player buttonPressed("BUTTON_RSTICK")) {
+      spam_model_circlescale(var_0, 1);
+    } else if(level.painter_player buttonPressed("BUTTON_A")) {
+      spam_model_densityscale(var_0, -1);
+    } else if(level.painter_player buttonPressed("BUTTON_B")) {
+      spam_model_densityscale(var_0, 1);
     } else {
-      if(level._id_1BD3 buttonPressed("BUTTON_LSHLDR")) {
-        _id_1BF1(var_0);
+      if(level.painter_player buttonPressed("BUTTON_LSHLDR")) {
+        spam_model_erase(var_0);
       }
-      if(level._id_1BD3 buttonPressed("BUTTON_RSHLDR")) {
-        thread _id_1BEA(var_0);
+      if(level.painter_player buttonPressed("BUTTON_RSHLDR")) {
+        thread spam_model_place(var_0);
       }
     }
 
     level notify("clear_previews");
     wait 0.05;
-    _id_1B5D();
+    hud_update_placed_model_count();
   }
 }
 
-_id_1BDC() {
-  level._id_1BCD = 0;
-  _id_1B9A();
+customheight_mode_off() {
+  level.spam_models_iscustomheight = 0;
+  hint_buttons_main();
 }
 
-_id_1BDD(var_0, var_1) {
+customheight_mode(var_0, var_1) {
   if(var_0["fraction"] == 1) {
     return;
   }
-  while(level._id_1BD3 buttonPressed(var_1)) {
+  while(level.painter_player buttonPressed(var_1)) {
     wait 0.05;
   }
-  level._id_1BCD = 1;
-  _id_1BD5();
+  level.spam_models_iscustomheight = 1;
+  hint_buttons_zoffset();
   var_2 = [];
-  var_2 = _id_1BEC(var_0, 0, 1);
+  var_2 = spam_models_atcircle(var_0, 0, 1);
   var_3 = 2;
   var_4 = 1;
   var_5 = var_0["position"];
 
-  while(!level._id_1BD3 buttonPressed(var_1)) {
-    var_6 = level._id_1BCE;
+  while(!level.painter_player buttonPressed(var_1)) {
+    var_6 = level.spam_models_customheight;
 
-    if(level._id_1BD3 buttonPressed("BUTTON_A")) {
+    if(level.painter_player buttonPressed("BUTTON_A")) {
       var_4 = -1;
-    } else if(level._id_1BD3 buttonPressed("BUTTON_B")) {
+    } else if(level.painter_player buttonPressed("BUTTON_B")) {
       var_4 = 1;
     } else {
       var_4 = 0;
@@ -529,51 +529,51 @@ _id_1BDD(var_0, var_1) {
     if(var_6 == 0) {
       var_6 = var_6 + var_4 * var_3;
     }
-    level._id_1BCE = var_6;
-    common_scripts\utility::array_thread(var_2, ::_id_1BDE, var_0);
-    _id_1BE7(var_0, (1, 1, 1));
+    level.spam_models_customheight = var_6;
+    common_scripts\utility::array_thread(var_2, ::customheight_mode_offsetmodels, var_0);
+    draw_placement_circle(var_0, (1, 1, 1));
     wait 0.05;
   }
 
-  common_scripts\utility::array_thread(var_2, ::_id_1B71);
-  _id_1B9A();
+  common_scripts\utility::array_thread(var_2, ::deleteme);
+  hint_buttons_main();
 
-  while(level._id_1BD3 buttonPressed(var_1)) {
+  while(level.painter_player buttonPressed(var_1)) {
     wait 0.05;
   }
 }
 
-_id_1BDE(var_0) {
-  self.origin = self._id_1BDF + var_0["normal"] * level._id_1BCE;
+customheight_mode_offsetmodels(var_0) {
+  self.origin = self.orgorg + var_0["normal"] * level.spam_models_customheight;
 }
 
-_id_1BE0() {
-  level._id_1BCC = 0;
-  _id_1B9A();
+customrotation_mode_off() {
+  level.spam_models_iscustomrotation = 0;
+  hint_buttons_main();
 }
 
-_id_1BE1(var_0, var_1) {
+customrotation_mode(var_0, var_1) {
   if(var_0["fraction"] == 1) {
     return;
   }
-  while(level._id_1BD3 buttonPressed(var_1)) {
+  while(level.painter_player buttonPressed(var_1)) {
     wait 0.05;
   }
-  _id_1BD6();
-  level._id_1BCC = 1;
-  level._id_1BE2 = level._id_1BD3 getplayerangles();
+  hint_buttons_rotation();
+  level.spam_models_iscustomrotation = 1;
+  level.spam_models_customrotation = level.painter_player getplayerangles();
   var_2 = [];
-  var_2 = _id_1BEC(var_0, 1, 1);
+  var_2 = spam_models_atcircle(var_0, 1, 1);
   var_3 = 0;
   var_4 = 1;
   var_5 = 0;
 
-  while(!level._id_1BD3 buttonPressed(var_1)) {
+  while(!level.painter_player buttonPressed(var_1)) {
     var_5 = 0;
 
-    if(level._id_1BD3 buttonPressed("BUTTON_A")) {
+    if(level.painter_player buttonPressed("BUTTON_A")) {
       var_5 = -1;
-    } else if(level._id_1BD3 buttonPressed("BUTTON_B")) {
+    } else if(level.painter_player buttonPressed("BUTTON_B")) {
       var_5 = 1;
     }
     var_3 = var_3 + var_5 * var_4;
@@ -584,82 +584,82 @@ _id_1BE1(var_0, var_1) {
     if(var_3 < 0) {
       var_3 = 359;
     }
-    _id_1BE7(var_0, (0, 0, 1));
-    level._id_1BE2 = level._id_1BD3 getplayerangles();
-    level._id_1BE2 = level._id_1BE2 + (0, 0, var_3);
+    draw_placement_circle(var_0, (0, 0, 1));
+    level.spam_models_customrotation = level.painter_player getplayerangles();
+    level.spam_models_customrotation = level.spam_models_customrotation + (0, 0, var_3);
 
     for(var_6 = 0; var_6 < var_2.size; var_6++) {
-      var_2[var_6].angles = level._id_1BE2;
+      var_2[var_6].angles = level.spam_models_customrotation;
     }
     wait 0.05;
   }
 
-  _id_1B9A();
+  hint_buttons_main();
 
-  while(level._id_1BD3 buttonPressed(var_1)) {
+  while(level.painter_player buttonPressed(var_1)) {
     wait 0.05;
   }
   for(var_6 = 0; var_6 < var_2.size; var_6++) {
-    var_2[var_6] thread _id_1B71();
+    var_2[var_6] thread deleteme();
   }
 }
 
-_id_1B71() {
+deleteme() {
   self delete();
 }
 
-_id_1BE3() {
+spam_model_clearcondition() {
   self endon("death");
   level waittill("clear_previews");
-  level._id_1BCB = common_scripts\utility::array_remove(level._id_1BCB, self);
+  level.previewmodels = common_scripts\utility::array_remove(level.previewmodels, self);
   self delete();
 }
 
-_id_1BE4() {
+crosshair_fadetopoint() {
   level notify("crosshair_fadetopoint");
   level endon("crosshair_fadetopoint");
   wait 2;
-  level._id_1B2F.alpha = 0;
-  level._id_1B2E.alpha = 1;
+  level.crosshair_value.alpha = 0;
+  level.crosshair.alpha = 1;
 }
 
-_id_1BE5(var_0, var_1) {
-  if(gettime() - level._id_1BCF > 60) {
-    level._id_1BD0 = 0;
+spam_model_circlescale(var_0, var_1) {
+  if(gettime() - level.spam_model_circlescale_lasttime > 60) {
+    level.spam_model_circlescale_accumtime = 0;
   }
-  level._id_1BD0 = level._id_1BD0 + 0.05;
+  level.spam_model_circlescale_accumtime = level.spam_model_circlescale_accumtime + 0.05;
 
-  if(level._id_1BD0 < 0.5) {
+  if(level.spam_model_circlescale_accumtime < 0.5) {
     var_2 = 2;
   } else {
-    var_2 = level._id_1BD0 / 0.3;
+    var_2 = level.spam_model_circlescale_accumtime / 0.3;
   }
-  var_3 = level._id_1BC9;
+  var_3 = level.spam_model_radius;
   var_3 = var_3 + var_1 * var_2;
 
   if(var_3 > 0) {
-    level._id_1BC9 = var_3;
+    level.spam_model_radius = var_3;
   }
-  level._id_1B31["helpradius"]._id_1B32 setvalue(level._id_1BC9);
-  level._id_1BCF = gettime();
+  level.hud_controler["helpradius"].description setvalue(level.spam_model_radius);
+  level.spam_model_circlescale_lasttime = gettime();
 }
 
-_id_1BE6(var_0, var_1) {
+spam_model_densityscale(var_0, var_1) {
   var_2 = 2;
-  var_3 = level._id_1BC5;
+  var_3 = level.spam_density_scale;
   var_3 = var_3 + var_1 * var_2;
 
   if(var_3 > 0) {
-    level._id_1BC5 = var_3;
+    level.spam_density_scale = var_3;
   }
-  level._id_1B2F.alpha = 1;
-  level._id_1B2E.alpha = 0;
-  level._id_1B2F setvalue(level._id_1BC5);
-  level._id_1B31["helpdensity"]._id_1B32 setvalue(level._id_1BC5);
-  thread _id_1BE4();
+  level.crosshair_value.alpha = 1;
+  level.crosshair.alpha = 0;
+  level.crosshair_value setvalue(level.spam_density_scale);
+  level.hud_controler["helpdensity"].description setvalue(level.spam_density_scale);
+  thread crosshair_fadetopoint();
 }
 
-_id_1BE7(var_0, var_1) {
+draw_placement_circle(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = (0, 1, 0);
   }
@@ -668,86 +668,86 @@ _id_1BE7(var_0, var_1) {
   }
   var_2 = vectortoangles(var_0["normal"]);
   var_3 = var_0["position"];
-  var_4 = level._id_1BC9;
-  _id_1BF0(var_3, var_4, var_2, var_1, 40, level._id_1BC9);
+  var_4 = level.spam_model_radius;
+  plot_circle(var_3, var_4, var_2, var_1, 40, level.spam_model_radius);
 
-  if(level._id_1BCC) {
-    draw_axis(var_3, level._id_1BE2);
+  if(level.spam_models_iscustomrotation) {
+    draw_axis(var_3, level.spam_models_customrotation);
   }
-  if(level._id_1BCD) {
-    common_scripts\utility::draw_arrow(var_3, var_3 + var_0["normal"] * level._id_1BCE, (1, 1, 1));
+  if(level.spam_models_iscustomheight) {
+    common_scripts\utility::draw_arrow(var_3, var_3 + var_0["normal"] * level.spam_models_customheight, (1, 1, 1));
   }
 }
 
-_id_1B57() {
-  var_0 = level._id_1BCA;
-  var_1 = level._id_1BD3 getEye();
-  return bulletTrace(var_1, var_1 + anglesToForward(level._id_1BD3 getplayerangles()) * var_0, 0, self);
+player_view_trace() {
+  var_0 = level.spam_maxdist;
+  var_1 = level.painter_player getEye();
+  return bulletTrace(var_1, var_1 + anglesToForward(level.painter_player getplayerangles()) * var_0, 0, self);
 }
 
-_id_1BE8() {
-  self addyaw(level._id_1BD3 getplayerangles()[1] - common_scripts\utility::flat_angle(self.angles)[1]);
+orienttoplayeryrot() {
+  self addyaw(level.painter_player getplayerangles()[1] - common_scripts\utility::flat_angle(self.angles)[1]);
 }
 
-_id_1B72() {
-  return level._id_1BB1[level._id_1B3C];
+getcurrent_groupstruct() {
+  return level.spam_model_group[level.spam_model_current_group];
 }
 
-_id_1BE9() {
-  var_0 = _id_1B72();
+orient_model() {
+  var_0 = getcurrent_groupstruct();
 
-  if(level._id_1BCC) {
-    self.angles = level._id_1BE2;
+  if(level.spam_models_iscustomrotation) {
+    self.angles = level.spam_models_customrotation;
     return;
   }
 
-  if(level._id_1BB5) {
-    self.angles = level._id_1BD3 getplayerangles();
+  if(level.bposedstyle) {
+    self.angles = level.painter_player getplayerangles();
   }
-  if(level._id_1BB6) {
-    _id_1BE8();
+  if(level.borienttoplayeryrot) {
+    orienttoplayeryrot();
   }
-  if(var_0._id_1BB7) {
+  if(var_0.btreeorient) {
     self.angles = common_scripts\utility::flat_angle(self.angles);
   }
-  if(!level._id_1BB6 && !level._id_1BB5) {
+  if(!level.borienttoplayeryrot && !level.bposedstyle) {
     self addyaw(randomint(360));
   }
-  if(var_0._id_1BB8) {
-    self.angles = common_scripts\utility::flat_angle(vectortoangles(self.origin - level._id_1BD3 getEye()));
+  if(var_0.bfacade) {
+    self.angles = common_scripts\utility::flat_angle(vectortoangles(self.origin - level.painter_player getEye()));
     self addyaw(90);
   }
 
-  self addroll(var_0._id_1BBB[self.model][0]);
-  self addpitch(var_0._id_1BBB[self.model][1]);
-  self addyaw(var_0._id_1BBB[self.model][2]);
+  self addroll(var_0.angleoffset[self.model][0]);
+  self addpitch(var_0.angleoffset[self.model][1]);
+  self addyaw(var_0.angleoffset[self.model][2]);
 }
 
-_id_1BEA(var_0) {
-  if(level._id_1BC6) {
+spam_model_place(var_0) {
+  if(level.spaming_models) {
     return;
   }
-  if(var_0["fraction"] == 1 && !level._id_1BB5) {
+  if(var_0["fraction"] == 1 && !level.bposedstyle) {
     return;
   }
-  level._id_1BC6 = 1;
-  var_1 = _id_1BEC(var_0, 1);
-  level._id_1BC7 = common_scripts\utility::array_combine(level._id_1BC7, var_1);
-  level._id_1BC6 = 0;
+  level.spaming_models = 1;
+  var_1 = spam_models_atcircle(var_0, 1);
+  level.spamed_models = common_scripts\utility::array_combine(level.spamed_models, var_1);
+  level.spaming_models = 0;
 }
 
-_id_1BEB() {
-  var_0 = level._id_1BB1[level._id_1B3C]._id_1BD8;
+getrandom_spammodel() {
+  var_0 = level.spam_model_group[level.spam_model_current_group].models;
   return var_0[randomint(var_0.size)];
 }
 
-_id_1BEC(var_0, var_1, var_2) {
+spam_models_atcircle(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     var_2 = 0;
   }
   var_3 = [];
-  var_4 = level._id_1BC5;
-  var_5 = level._id_1BC9;
+  var_4 = level.spam_density_scale;
+  var_5 = level.spam_model_radius;
   var_6 = int(var_5 / var_4) * 2;
   var_7 = 0;
   var_8 = var_0["position"];
@@ -765,22 +765,22 @@ _id_1BEC(var_0, var_1, var_2) {
   var_12 = var_12 + var_11 * var_4;
   var_13 = var_12;
 
-  if(var_6 == 0 || level._id_1BB5) {
+  if(var_6 == 0 || level.bposedstyle) {
     if(!var_2) {
-      if(_id_1BED(var_8)) {
+      if(is_too_dense(var_8)) {
         return var_3;
       }
     }
 
     if(!var_2) {
-      if(level._id_1BC7.size + var_3.size > level._id_1BDB) {
+      if(level.spamed_models.size + var_3.size > level.painter_max) {
         return var_3;
       }
     }
 
-    var_14 = _id_1BEB();
-    var_3[0] = _id_1BEE(var_0, var_14);
-    var_3[0] _id_1BE9();
+    var_14 = getrandom_spammodel();
+    var_3[0] = spam_modelattrace(var_0, var_14);
+    var_3[0] orient_model();
     return var_3;
   }
 
@@ -789,7 +789,7 @@ _id_1BEC(var_0, var_1, var_2) {
   for(var_16 = var_7; var_16 < var_6; var_16++) {
     for(var_17 = var_7; var_17 < var_6; var_17++) {
       if(!var_2) {
-        if(level._id_1BC7.size + var_3.size > level._id_1BDB) {
+        if(level.spamed_models.size + var_3.size > level.painter_max) {
           return var_3;
         }
       }
@@ -801,17 +801,17 @@ _id_1BEC(var_0, var_1, var_2) {
       if(distance(var_13, var_8) > var_5) {
         continue;
       }
-      var_15 = _id_1BEF(var_13, var_9, level._id_1BC9);
+      var_15 = contour_point(var_13, var_9, level.spam_model_radius);
 
       if(var_15["fraction"] == 1) {
         continue;
       }
-      if(_id_1BED(var_15["position"])) {
+      if(is_too_dense(var_15["position"])) {
         continue;
       }
-      var_14 = _id_1BEB();
-      var_18 = _id_1BEE(var_15, var_14);
-      var_18 _id_1BE9();
+      var_14 = getrandom_spammodel();
+      var_18 = spam_modelattrace(var_15, var_14);
+      var_18 orient_model();
       var_3[var_3.size] = var_18;
     }
   }
@@ -819,9 +819,9 @@ _id_1BEC(var_0, var_1, var_2) {
   return var_3;
 }
 
-_id_1BED(var_0) {
-  for(var_1 = level._id_1BC7.size - 1; var_1 >= 0; var_1--) {
-    if(distance(level._id_1BC7[var_1]._id_1BDF, var_0) < level._id_1BC5 - 1) {
+is_too_dense(var_0) {
+  for(var_1 = level.spamed_models.size - 1; var_1 >= 0; var_1--) {
+    if(distance(level.spamed_models[var_1].orgorg, var_0) < level.spam_density_scale - 1) {
       return 1;
     }
   }
@@ -833,39 +833,39 @@ get_player() {
   return getEntArray("player", "classname")[0];
 }
 
-_id_1BEE(var_0, var_1) {
-  var_2 = spawn("script_model", level._id_1BD3.origin);
+spam_modelattrace(var_0, var_1) {
+  var_2 = spawn("script_model", level.painter_player.origin);
   var_2 setModel(var_1);
   var_2 notsolid();
   var_2.origin = var_0["position"];
   var_2.angles = vectortoangles(var_0["normal"]);
   var_2 addpitch(90);
-  var_2._id_1BDF = var_2.origin;
-  var_3 = _id_1B72();
+  var_2.orgorg = var_2.origin;
+  var_3 = getcurrent_groupstruct();
 
-  if(level._id_1BCD) {
-    var_2.origin = var_2.origin + var_0["normal"] * level._id_1BCE;
+  if(level.spam_models_iscustomheight) {
+    var_2.origin = var_2.origin + var_0["normal"] * level.spam_models_customheight;
   }
-  var_3 = _id_1B72();
+  var_3 = getcurrent_groupstruct();
 
-  if(isDefined(var_3._id_1BD9[var_1])) {
-    var_2.origin = var_2.origin + var_0["normal"] * var_3._id_1BD9[var_1];
+  if(isDefined(var_3.heightoffset[var_1])) {
+    var_2.origin = var_2.origin + var_0["normal"] * var_3.heightoffset[var_1];
   }
-  if(isDefined(var_3._id_1BDA[var_1])) {
-    var_2._id_1BDA = var_3._id_1BDA[var_1];
+  if(isDefined(var_3.modelusesprefab[var_1])) {
+    var_2.modelusesprefab = var_3.modelusesprefab[var_1];
   }
   return var_2;
 }
 
-_id_1BEF(var_0, var_1, var_2) {
+contour_point(var_0, var_1, var_2) {
   var_3 = var_2;
   var_4 = anglesToForward(var_1);
   var_5 = var_0 + var_4 * var_3;
   var_6 = var_0 + var_4 * -1 * var_3;
-  return bulletTrace(var_5, var_6, 0, level._id_1BD3);
+  return bulletTrace(var_5, var_6, 0, level.painter_player);
 }
 
-_id_1BF0(var_0, var_1, var_2, var_3, var_4, var_5) {
+plot_circle(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(var_3)) {
     var_3 = (0, 1, 0);
   }
@@ -882,7 +882,7 @@ _id_1BF0(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   for(var_10 = 0; var_10 < var_4; var_10++) {
     var_11 = var_0 + anglestoup(var_2 + (0, 0, var_9)) * var_1;
-    var_12 = _id_1BEF(var_11, var_2, level._id_1BC9);
+    var_12 = contour_point(var_11, var_2, level.spam_model_radius);
 
     if(var_12["fraction"] != 1) {
       var_8[var_8.size] = var_12["position"];
@@ -894,28 +894,28 @@ _id_1BF0(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_8 = [];
 }
 
-_id_1BF1(var_0) {
+spam_model_erase(var_0) {
   var_1 = var_0["position"];
   var_2 = [];
   var_3 = [];
 
-  for(var_4 = 0; var_4 < level._id_1BC7.size; var_4++) {
-    if(distance(level._id_1BC7[var_4]._id_1BDF, var_1) > level._id_1BC9) {
-      var_2[var_2.size] = level._id_1BC7[var_4];
+  for(var_4 = 0; var_4 < level.spamed_models.size; var_4++) {
+    if(distance(level.spamed_models[var_4].orgorg, var_1) > level.spam_model_radius) {
+      var_2[var_2.size] = level.spamed_models[var_4];
       continue;
     }
 
-    var_3[var_3.size] = level._id_1BC7[var_4];
+    var_3[var_3.size] = level.spamed_models[var_4];
   }
 
-  level._id_1BC7 = var_2;
+  level.spamed_models = var_2;
 
   for(var_4 = 0; var_4 < var_3.size; var_4++) {
     var_3[var_4] delete();
   }
 }
 
-_id_1BF2() {}
+dump_models() {}
 
 draw_axis(var_0, var_1) {
   var_2 = 32;
@@ -924,33 +924,33 @@ draw_axis(var_0, var_1) {
   var_5 = var_2 * anglestoup(var_1);
 }
 
-_id_1B34() {
-  if(!isDefined(level._id_1B35)) {
-    level._id_1B35 = [];
+_newhudelem() {
+  if(!isDefined(level.scripted_elems)) {
+    level.scripted_elems = [];
   }
   var_0 = newhudelem();
-  level._id_1B35[level._id_1B35.size] = var_0;
+  level.scripted_elems[level.scripted_elems.size] = var_0;
   return var_0;
 }
 
-_id_1B36(var_0) {
-  self._id_1B37 = var_0;
+_settext(var_0) {
+  self.realtext = var_0;
   self settext("_");
-  thread _id_1ADE();
+  thread _clearalltextafterhudelem();
   var_1 = 0;
 
-  foreach(var_3 in level._id_1B35) {
-    if(isDefined(var_3._id_1B37)) {
-      var_1 = var_1 + var_3._id_1B37.size;
-      var_3 settext(var_3._id_1B37);
+  foreach(var_3 in level.scripted_elems) {
+    if(isDefined(var_3.realtext)) {
+      var_1 = var_1 + var_3.realtext.size;
+      var_3 settext(var_3.realtext);
     }
   }
 }
 
-_id_1B30(var_0, var_1, var_2, var_3, var_4) {
+controler_hud_add(var_0, var_1, var_2, var_3, var_4) {
   var_5 = 520;
 
-  if(_id_1BF3()) {
+  if(is_mp()) {
     var_5 = 630;
   }
   var_6 = 120;
@@ -962,23 +962,23 @@ _id_1B30(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_2)) {
     var_2 = "";
   }
-  if(!isDefined(level._id_1B31) || !isDefined(level._id_1B31[var_0])) {
-    level._id_1B31[var_0] = _id_1B34();
-    var_11 = _id_1B34();
+  if(!isDefined(level.hud_controler) || !isDefined(level.hud_controler[var_0])) {
+    level.hud_controler[var_0] = _newhudelem();
+    var_11 = _newhudelem();
   } else {
-    var_11 = level._id_1B31[var_0]._id_1B32;
+    var_11 = level.hud_controler[var_0].description;
   }
-  level._id_1B31[var_0].location = 0;
-  level._id_1B31[var_0].alignx = "right";
-  level._id_1B31[var_0].aligny = "middle";
-  level._id_1B31[var_0].foreground = 1;
-  level._id_1B31[var_0].fontscale = 1.5;
-  level._id_1B31[var_0].sort = 20;
-  level._id_1B31[var_0].alpha = var_8;
-  level._id_1B31[var_0].x = var_5 + var_9;
-  level._id_1B31[var_0].y = var_6 + var_1 * var_7;
-  level._id_1B31[var_0] _id_1B36(var_2);
-  level._id_1B31[var_0]._id_1B33 = var_2;
+  level.hud_controler[var_0].location = 0;
+  level.hud_controler[var_0].alignx = "right";
+  level.hud_controler[var_0].aligny = "middle";
+  level.hud_controler[var_0].foreground = 1;
+  level.hud_controler[var_0].fontscale = 1.5;
+  level.hud_controler[var_0].sort = 20;
+  level.hud_controler[var_0].alpha = var_8;
+  level.hud_controler[var_0].x = var_5 + var_9;
+  level.hud_controler[var_0].y = var_6 + var_1 * var_7;
+  level.hud_controler[var_0] _settext(var_2);
+  level.hud_controler[var_0].base_button_text = var_2;
   var_11.location = 0;
   var_11.alignx = "left";
   var_11.aligny = "middle";
@@ -993,34 +993,34 @@ _id_1B30(var_0, var_1, var_2, var_3, var_4) {
     var_11 setvalue(var_4);
   }
   if(isDefined(var_3)) {
-    var_11 _id_1B36(var_3);
+    var_11 _settext(var_3);
   }
-  level._id_1B31[var_0]._id_1B32 = var_11;
+  level.hud_controler[var_0].description = var_11;
 }
 
-_id_1B62(var_0, var_1) {
-  if(_id_1BF3()) {
-    level._id_1B31[var_0] _id_1B36(level._id_1B31[var_0]._id_1B33 + var_1);
-    level._id_1B31[var_0]._id_1B32 _id_1B36("");
+controler_hud_update_text(var_0, var_1) {
+  if(is_mp()) {
+    level.hud_controler[var_0] _settext(level.hud_controler[var_0].base_button_text + var_1);
+    level.hud_controler[var_0].description _settext("");
   } else {
-    level._id_1B31[var_0]._id_1B32 _id_1B36(var_1);
+    level.hud_controler[var_0].description _settext(var_1);
   }
 }
 
-_id_1B63(var_0, var_1) {
-  level._id_1B31[var_0] _id_1B36(var_1);
+controler_hud_update_button(var_0, var_1) {
+  level.hud_controler[var_0] _settext(var_1);
 }
 
-_id_1ADE() {
-  if(level._id_1ADE) {
+_clearalltextafterhudelem() {
+  if(level._clearalltextafterhudelem) {
     return;
   }
-  level._id_1ADE = 1;
+  level._clearalltextafterhudelem = 1;
   self clearalltextafterhudelem();
   wait 0.05;
-  level._id_1ADE = 0;
+  level._clearalltextafterhudelem = 0;
 }
 
-_id_1BF3() {
+is_mp() {
   return issubstr(level.script, "mp_");
 }

@@ -25,11 +25,11 @@ _id_3F33() {
     }
 
     var_5 = spawnStruct();
-    var_5._id_3D4A = var_3;
-    var_5._id_160B = var_4;
+    var_5.repeating = var_3;
+    var_5.ref = var_4;
     var_5.name = _id_3F58(var_4);
-    var_5._id_189B = _id_3F59(var_4);
-    var_5._id_3F34 = _id_3F5A(var_4);
+    var_5.desc = _id_3F59(var_4);
+    var_5.splash = _id_3F5A(var_4);
     var_5.icon = _id_3F5B(var_4);
     var_5._id_3F35 = _id_3F5C(var_4);
     var_5.xp = _id_3F5D(var_4);
@@ -47,8 +47,8 @@ _id_3F33() {
 _id_3F3A() {
   level._id_3F3B = _id_3F33();
   common_scripts\utility::flag_init("challenge_monitor_busy");
-  maps\_utility::_id_1A5A("axis", ::_id_3F48);
-  maps\_utility::_id_1A5A("axis", ::_id_3F46);
+  maps\_utility::add_global_spawn_function("axis", ::_id_3F48);
+  maps\_utility::add_global_spawn_function("axis", ::_id_3F46);
 
   foreach(var_1 in level.players) {}
   var_1 thread _id_3F3C();
@@ -58,12 +58,12 @@ _id_3F3C() {
   wait 0.05;
 
   for(var_0 = 0; var_0 < 5; var_0++) {
-    maps\_specialops::_id_18A0(var_0, "");
-    maps\_specialops::_id_18A1(var_0, 0);
-    maps\_specialops::_id_18A2(var_0, 0);
+    maps\_specialops::surhud_challenge_label(var_0, "");
+    maps\_specialops::surhud_challenge_progress(var_0, 0);
+    maps\_specialops::surhud_challenge_reward(var_0, 0);
   }
 
-  maps\_specialops::_id_18A5("challenge");
+  maps\_specialops::surhud_disable("challenge");
   common_scripts\utility::flag_wait("start_survival");
 
   for(;;) {
@@ -74,19 +74,19 @@ _id_3F3C() {
         continue;
       }
       if(var_3._id_3F39 == 0) {
-        if(level._id_17F6 >= var_3._id_3F38) {
+        if(level.current_wave >= var_3._id_3F38) {
           var_1[var_1.size] = var_3;
         }
         continue;
       }
 
-      if(level._id_17F6 >= var_3._id_3F38 && level._id_17F6 <= var_3._id_3F39) {
+      if(level.current_wave >= var_3._id_3F38 && level.current_wave <= var_3._id_3F39) {
         var_1[var_1.size] = var_3;
       }
     }
 
     var_5 = 0;
-    var_1 = maps\_utility::_id_0B53(var_1);
+    var_1 = maps\_utility::array_randomize(var_1);
     self._id_3F3D = [];
     self._id_3F3E = [];
 
@@ -95,15 +95,15 @@ _id_3F3C() {
         break;
       }
 
-      self._id_3F3D[var_7._id_160B] = spawnStruct();
-      self._id_3F3D[var_7._id_160B].index = var_5;
-      self._id_3F3D[var_7._id_160B].struct = var_7;
-      self._id_3F3E[var_7._id_160B] = 0;
-      self thread[[var_7.func]](var_7._id_160B);
+      self._id_3F3D[var_7.ref] = spawnStruct();
+      self._id_3F3D[var_7.ref].index = var_5;
+      self._id_3F3D[var_7.ref].struct = var_7;
+      self._id_3F3E[var_7.ref] = 0;
+      self thread[[var_7.func]](var_7.ref);
       var_5++;
     }
 
-    maps\_specialops::_id_189E("challenge");
+    maps\_specialops::surhud_animate("challenge");
     level waittill("wave_ended");
     level waittill("wave_started");
     self notify("challenge_reset");
@@ -163,7 +163,7 @@ _id_3F40(var_0) {
     self._id_3F3D[var_0]._id_3F42 = 0;
     self._id_3F3D[var_0]._id_3F41++;
     var_8 = self._id_3F3D[var_0]._id_3F41 * _id_3F5D(var_0);
-    maps\_utility::_id_12BE(var_0, var_8);
+    maps\_utility::givexp(var_0, var_8);
     thread _id_3F54(var_0, var_8);
 
     while(common_scripts\utility::flag("challenge_monitor_busy")) {
@@ -301,7 +301,7 @@ _id_3F50(var_0) {
     while(self._id_3F3D[var_0]._id_3F42 == 0) {
       common_scripts\utility::waittill_any_timeout(var_3, var_0);
     }
-    if(level._id_3F51) {
+    if(level.survival_wave_intermission) {
       level waittill("wave_started");
       wait(var_3);
     }
@@ -316,7 +316,7 @@ _id_3F50(var_0) {
 }
 
 _id_3F52(var_0, var_1) {
-  maps\_specialops::_id_18A0(var_0, _id_3F58(var_1));
+  maps\_specialops::surhud_challenge_label(var_0, _id_3F58(var_1));
   thread _id_3F53(var_1);
 }
 
@@ -325,13 +325,13 @@ _id_3F53(var_0) {
   var_2 = self._id_3F3D[var_0]._id_3F42;
   var_3 = self._id_3F3D[var_0]._id_3F41 + 1;
   var_4 = _id_3F5C(var_0);
-  maps\_specialops::_id_18A2(var_1, _id_3F5D(var_0) * var_3);
-  maps\_specialops::_id_18A1(var_1, int(var_2 / var_4 * 100) / 100);
+  maps\_specialops::surhud_challenge_reward(var_1, _id_3F5D(var_0) * var_3);
+  maps\_specialops::surhud_challenge_progress(var_1, int(var_2 / var_4 * 100) / 100);
 }
 
 _id_3F54(var_0, var_1) {
-  if(isDefined(self._id_12C6) && self._id_12C6) {
-    while(self._id_12C6) {
+  if(isDefined(self.doingnotify) && self.doingnotify) {
+    while(self.doingnotify) {
       wait 0.05;
     }
   }
@@ -340,23 +340,23 @@ _id_3F54(var_0, var_1) {
   var_2.duration = 2.5;
   var_2.sound = "survival_bonus_splash";
   var_2.type = "wave";
-  var_2._id_3E1D = "hudbig";
-  var_2._id_3E31 = 1;
-  var_2._id_3E2E = 1;
-  var_2._id_3E34 = 1;
-  var_2._id_15E0 = 1;
-  var_2._id_3E33 = 1;
-  var_2._id_3E20 = (0.85, 0.35, 0.15);
-  var_2._id_3E21 = (0.95, 0.95, 0.9);
-  var_2._id_3E1B = _id_3F5A(var_0);
-  var_2._id_3E1C = var_1;
+  var_2.title_font = "hudbig";
+  var_2.playsoundlocally = 1;
+  var_2.zoomin = 1;
+  var_2.zoomout = 1;
+  var_2.fadein = 1;
+  var_2.fadeout = 1;
+  var_2.title_glowcolor = (0.85, 0.35, 0.15);
+  var_2.title_color = (0.95, 0.95, 0.9);
+  var_2.title = _id_3F5A(var_0);
+  var_2.title_set_value = var_1;
 
   if(issplitscreen()) {
-    var_2._id_3E1F = 1;
+    var_2.title_basefontscale = 1;
   } else {
-    var_2._id_3E1F = 1.1;
+    var_2.title_basefontscale = 1.1;
   }
-  _id_0618::_id_3E14(var_2);
+  maps/_so_survival_code::splash_notify_message(var_2);
 }
 
 _id_3F55(var_0) {
@@ -365,7 +365,7 @@ _id_3F55(var_0) {
 
 _id_3F56(var_0) {
   if(_id_3F55(var_0)) {
-    return level._id_3F3B[var_0]._id_3D4A;
+    return level._id_3F3B[var_0].repeating;
   }
   return tablelookup("sp/survival_challenge.csv", 1, var_0, 0);
 }
@@ -383,14 +383,14 @@ _id_3F58(var_0) {
 
 _id_3F59(var_0) {
   if(_id_3F55(var_0)) {
-    return level._id_3F3B[var_0]._id_189B;
+    return level._id_3F3B[var_0].desc;
   }
   return tablelookup("sp/survival_challenge.csv", 1, var_0, 3);
 }
 
 _id_3F5A(var_0) {
   if(_id_3F55(var_0)) {
-    return level._id_3F3B[var_0]._id_3F34;
+    return level._id_3F3B[var_0].splash;
   }
   return tablelookupistring("sp/survival_challenge.csv", 1, var_0, 4);
 }

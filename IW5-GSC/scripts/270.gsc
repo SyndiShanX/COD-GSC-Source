@@ -4,23 +4,23 @@
 **************************************/
 
 main() {
-  level._id_1C2B = 0;
+  level.lastautosavetime = 0;
   common_scripts\utility::flag_init("game_saving");
   common_scripts\utility::flag_init("can_save");
   common_scripts\utility::flag_set("can_save");
   common_scripts\utility::flag_init("disable_autosaves");
 
-  if(!isDefined(level._id_1C2C)) {
-    level._id_1C2C = [];
+  if(!isDefined(level._extra_autosave_checks)) {
+    level._extra_autosave_checks = [];
   }
-  level._id_1C2D = ::_id_1C2D;
+  level.autosave_proximity_threat_func = ::autosave_proximity_threat_func;
 }
 
-_id_1C2E() {
+getdescription() {
   return &"AUTOSAVE_AUTOSAVE";
 }
 
-_id_1C2F(var_0) {
+getnames(var_0) {
   if(var_0 == 0) {
     var_1 = &"AUTOSAVE_GAME";
   } else {
@@ -29,13 +29,13 @@ _id_1C2F(var_0) {
   return var_1;
 }
 
-_id_1C30() {
+beginningoflevelsave() {
   level waittill("finished final intro screen fadein");
 
-  if(level._id_16C9) {
+  if(level.missionfailed) {
     return;
   }
-  if(maps\_arcademode::_id_09C5()) {
+  if(maps\_arcademode::arcademode_complete()) {
     return;
   }
   if(common_scripts\utility::flag("game_saving")) {
@@ -48,69 +48,69 @@ _id_1C30() {
   common_scripts\utility::flag_clear("game_saving");
 }
 
-_id_1C31(var_0) {
+trigger_autosave_stealth(var_0) {
   var_0 waittill("trigger");
-  maps\_utility::_id_1C32();
+  maps\_utility::autosave_stealth();
 }
 
-_id_1C33(var_0) {
+trigger_autosave_tactical(var_0) {
   var_0 waittill("trigger");
-  maps\_utility::_id_1C34();
+  maps\_utility::autosave_tactical();
 }
 
-_id_1C35(var_0) {
-  if(!isDefined(var_0._id_1C36)) {
-    var_0._id_1C36 = 0;
+trigger_autosave(var_0) {
+  if(!isDefined(var_0.script_autosave)) {
+    var_0.script_autosave = 0;
   }
-  _id_1C37(var_0);
+  autosaves_think(var_0);
 }
 
-_id_1C37(var_0) {
-  var_1 = _id_1C2F(var_0._id_1C36);
+autosaves_think(var_0) {
+  var_1 = getnames(var_0.script_autosave);
 
   if(!isDefined(var_1)) {
     return;
   }
   var_0 waittill("trigger");
-  var_2 = var_0._id_1C36;
+  var_2 = var_0.script_autosave;
   var_3 = "levelshots / autosave / autosave_" + level.script + var_2;
-  _id_1C45(var_2, var_1, var_3);
-  thread maps\_quotes::_id_18A8();
+  tryautosave(var_2, var_1, var_3);
+  thread maps\_quotes::setdeadquote();
 
   if(isDefined(var_0)) {
     var_0 delete();
   }
 }
 
-_id_1C38(var_0) {
-  if(maps\_utility::_id_1C39()) {
+autosavenamethink(var_0) {
+  if(maps\_utility::is_no_game_start()) {
     return;
   }
   var_0 waittill("trigger");
 
-  if(isDefined(level._id_1C3A)) {
-    if(![[level._id_1C3A]]()) {
+  if(isDefined(level.customautosavecheck)) {
+    if(![[level.customautosavecheck]]()) {
       return;
     }
   }
 
-  var_1 = var_0._id_1C3B;
-  maps\_utility::_id_1425(var_1);
+  var_1 = var_0.script_autosavename;
+  maps\_utility::autosave_by_name(var_1);
   var_0 delete();
 }
 
-_id_1C3C(var_0) {
+trigger_autosave_immediate(var_0) {
   var_0 waittill("trigger");
 }
 
-_id_1C3D(var_0, var_1) {
+autosaveprint(var_0, var_1) {
   if(isDefined(var_1)) {
     return;
   }
   return;
 }
 
-_id_1C3E(var_0) {
+autosave_timeout(var_0) {
   level endon("trying_new_autosave");
   level endon("autosave_complete");
   wait(var_0);
@@ -118,29 +118,29 @@ _id_1C3E(var_0) {
   level notify("autosave_timeout");
 }
 
-_id_1C3F() {
+_autosave_game_now_nochecks() {
   var_0 = "levelshots / autosave / autosave_" + level.script + "start";
   savegame("levelstart", &"AUTOSAVE_LEVELSTART", var_0, 1);
-  _id_1C59(0);
+  autosave_recon(0);
 }
 
-_id_1C40() {
+_autosave_game_now_notrestart() {
   var_0 = "levelshots / autosave / autosave_" + level.script + "start";
 
   if(getdvarint("g_reloading") == 0) {
     savegame("levelstart", &"AUTOSAVE_LEVELSTART", var_0, 1);
-    _id_1C59(0);
+    autosave_recon(0);
   }
 }
 
-_id_1C41(var_0) {
-  if(isDefined(level._id_16C9) && level._id_16C9) {
+_autosave_game_now(var_0) {
+  if(isDefined(level.missionfailed) && level.missionfailed) {
     return;
   }
   if(common_scripts\utility::flag("game_saving")) {
     return 0;
   }
-  if(maps\_arcademode::_id_09C5()) {
+  if(maps\_arcademode::arcademode_complete()) {
     return 0;
   }
   for(var_1 = 0; var_1 < level.players.size; var_1++) {
@@ -152,7 +152,7 @@ _id_1C41(var_0) {
   }
 
   var_3 = "save_now";
-  var_4 = _id_1C2E();
+  var_4 = getdescription();
 
   if(isDefined(var_0)) {
     var_5 = savegamenocommit(var_3, var_4, "$default", 1);
@@ -162,14 +162,14 @@ _id_1C41(var_0) {
   wait 0.05;
 
   if(issaverecentlyloaded()) {
-    level._id_1C2B = gettime();
+    level.lastautosavetime = gettime();
     return 0;
   }
 
   if(var_5 < 0) {
     return 0;
   }
-  if(!_id_1C44()) {
+  if(!try_to_autosave_now()) {
     return 0;
   }
   common_scripts\utility::flag_set("game_saving");
@@ -179,11 +179,11 @@ _id_1C41(var_0) {
   if(!commitwouldbevalid(var_5)) {
     return 0;
   }
-  if(_id_1C44()) {
+  if(try_to_autosave_now()) {
     if(!isDefined(var_0)) {
-      thread maps\_arcademode::_id_09D3();
+      thread maps\_arcademode::arcademode_checkpoint_print();
     }
-    _id_1C59(var_5);
+    autosave_recon(var_5);
     commitsave(var_5);
     setDvar("ui_grenade_death", "0");
   }
@@ -191,19 +191,19 @@ _id_1C41(var_0) {
   return 1;
 }
 
-_id_1C42(var_0) {
+autosave_now_trigger(var_0) {
   var_0 waittill("trigger");
-  maps\_utility::_id_1C43();
+  maps\_utility::autosave_now();
 }
 
-_id_1C44() {
+try_to_autosave_now() {
   if(!issavesuccessful()) {
     return 0;
   }
   for(var_0 = 0; var_0 < level.players.size; var_0++) {
     var_1 = level.players[var_0];
 
-    if(!var_1 _id_1C55()) {
+    if(!var_1 autosavehealthcheck()) {
       return 0;
     }
   }
@@ -214,22 +214,22 @@ _id_1C44() {
   return 1;
 }
 
-_id_1C45(var_0, var_1, var_2, var_3, var_4, var_5) {
+tryautosave(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(common_scripts\utility::flag("disable_autosaves")) {
     return 0;
   }
   level endon("nextmission");
   level.player endon("death");
 
-  if(maps\_utility::_id_12C1()) {
-    level._id_1337 endon("death");
+  if(maps\_utility::is_coop()) {
+    level.player2 endon("death");
   }
   level notify("trying_new_autosave");
 
   if(common_scripts\utility::flag("game_saving")) {
     return 0;
   }
-  if(isDefined(level._id_195A)) {
+  if(isDefined(level.nextmission)) {
     return 0;
   }
   var_6 = 1.25;
@@ -247,11 +247,11 @@ _id_1C45(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_4 = 0;
   }
   common_scripts\utility::flag_set("game_saving");
-  var_8 = _id_1C2E();
+  var_8 = getdescription();
   var_9 = gettime();
 
   for(;;) {
-    if(_id_1C49(undefined, var_4)) {
+    if(autosavecheck(undefined, var_4)) {
       var_10 = savegamenocommit(var_0, var_8, var_2, var_5);
 
       if(var_10 < 0) {
@@ -261,21 +261,21 @@ _id_1C45(var_0, var_1, var_2, var_3, var_4, var_5) {
       wait 0.05;
 
       if(issaverecentlyloaded()) {
-        level._id_1C2B = gettime();
+        level.lastautosavetime = gettime();
         break;
       }
 
       wait(var_6);
 
-      if(_id_1C47()) {
+      if(extra_autosave_checks_failed()) {
         continue;
       }
-      if(!_id_1C49(undefined, var_4)) {
+      if(!autosavecheck(undefined, var_4)) {
         continue;
       }
       wait(var_7);
 
-      if(!_id_1C48()) {
+      if(!autosavecheck_not_picky()) {
         continue;
       }
       if(isDefined(var_3)) {
@@ -293,10 +293,10 @@ _id_1C45(var_0, var_1, var_2, var_3, var_4, var_5) {
         return 0;
       }
 
-      thread maps\_arcademode::_id_09D3();
-      _id_1C59(var_10);
+      thread maps\_arcademode::arcademode_checkpoint_print();
+      autosave_recon(var_10);
       commitsave(var_10);
-      level._id_1C46 = gettime();
+      level.lastsavetime = gettime();
       setDvar("ui_grenade_death", "0");
       break;
     }
@@ -308,10 +308,10 @@ _id_1C45(var_0, var_1, var_2, var_3, var_4, var_5) {
   return 1;
 }
 
-_id_1C47() {
-  foreach(var_1 in level._id_1C2C) {
+extra_autosave_checks_failed() {
+  foreach(var_1 in level._extra_autosave_checks) {
     if(![[var_1["func"]]]()) {
-      _id_1C3D("autosave failed: " + var_1["msg"]);
+      autosaveprint("autosave failed: " + var_1["msg"]);
       return 1;
     }
   }
@@ -319,31 +319,31 @@ _id_1C47() {
   return 0;
 }
 
-_id_1C48() {
-  return _id_1C49(0, 0);
+autosavecheck_not_picky() {
+  return autosavecheck(0, 0);
 }
 
-_id_1C49(var_0, var_1) {
-  if(isDefined(level._id_1C4A)) {
-    return [[level._id_1C4A]]();
+autosavecheck(var_0, var_1) {
+  if(isDefined(level.autosave_check_override)) {
+    return [[level.autosave_check_override]]();
   }
-  if(isDefined(level._id_1C4B) && ![[level._id_1C4B]]()) {
+  if(isDefined(level.special_autosavecondition) && ![[level.special_autosavecondition]]()) {
     return 0;
   }
-  if(level._id_16C9) {
+  if(level.missionfailed) {
     return 0;
   }
-  if(maps\_arcademode::_id_09C5()) {
+  if(maps\_arcademode::arcademode_complete()) {
     return 0;
   }
   if(!isDefined(var_0)) {
-    var_0 = level._id_1C4C;
+    var_0 = level.dopickyautosavechecks;
   }
   if(!isDefined(var_1)) {
     var_1 = 0;
   }
   if(var_1) {
-    if(![[level._id_1C4D["_autosave_stealthcheck"]]]()) {
+    if(![[level.global_callbacks["_autosave_stealthcheck"]]]()) {
       return 0;
     }
   }
@@ -351,16 +351,16 @@ _id_1C49(var_0, var_1) {
   for(var_2 = 0; var_2 < level.players.size; var_2++) {
     var_3 = level.players[var_2];
 
-    if(!var_3 _id_1C55()) {
+    if(!var_3 autosavehealthcheck()) {
       return 0;
     }
-    if(var_0 && !var_3 _id_1C54()) {
+    if(var_0 && !var_3 autosaveammocheck()) {
       return 0;
     }
   }
 
-  if(level._id_1C4E) {
-    if(!_id_1C56(var_0)) {
+  if(level.autosave_threat_check_enabled) {
+    if(!autosavethreatcheck(var_0)) {
       return 0;
     }
   }
@@ -368,59 +368,59 @@ _id_1C49(var_0, var_1) {
   for(var_2 = 0; var_2 < level.players.size; var_2++) {
     var_3 = level.players[var_2];
 
-    if(!var_3 _id_1C51(var_0)) {
+    if(!var_3 autosaveplayercheck(var_0)) {
       return 0;
     }
   }
 
-  if(isDefined(level._id_1C4F) && !level._id_1C4F) {
+  if(isDefined(level.savehere) && !level.savehere) {
     return 0;
   }
-  if(isDefined(level._id_1C50) && !level._id_1C50) {
+  if(isDefined(level.cansave) && !level.cansave) {
     return 0;
   }
   if(!issavesuccessful()) {
-    _id_1C3D("autosave failed: save call was unsuccessful");
+    autosaveprint("autosave failed: save call was unsuccessful");
     return 0;
   }
 
   return 1;
 }
 
-_id_1C51(var_0) {
-  if(isDefined(level._id_1C52) && level._id_1C52 == self) {
+autosaveplayercheck(var_0) {
+  if(isDefined(level.ac130gunner) && level.ac130gunner == self) {
     return 1;
   }
   if(self ismeleeing() && var_0) {
-    _id_1C3D("autosave failed:player is meleeing");
+    autosaveprint("autosave failed:player is meleeing");
     return 0;
   }
 
   if(self isthrowinggrenade() && var_0) {
-    _id_1C3D("autosave failed:player is throwing a grenade");
+    autosaveprint("autosave failed:player is throwing a grenade");
     return 0;
   }
 
   if(self isfiring() && var_0) {
-    _id_1C3D("autosave failed:player is firing");
+    autosaveprint("autosave failed:player is firing");
     return 0;
   }
 
-  if(isDefined(self._id_1C53) && self._id_1C53) {
-    _id_1C3D("autosave failed:player is in shellshock");
+  if(isDefined(self.shellshocked) && self.shellshocked) {
+    autosaveprint("autosave failed:player is in shellshock");
     return 0;
   }
 
   if(common_scripts\utility::isflashed()) {
-    _id_1C3D("autosave failed:player is flashbanged");
+    autosaveprint("autosave failed:player is flashbanged");
     return 0;
   }
 
   return 1;
 }
 
-_id_1C54() {
-  if(isDefined(level._id_1C52) && level._id_1C52 == self) {
+autosaveammocheck() {
+  if(isDefined(level.ac130gunner) && level.ac130gunner == self) {
     return 1;
   }
   var_0 = self getweaponslistprimaries();
@@ -433,15 +433,15 @@ _id_1C54() {
     }
   }
 
-  _id_1C3D("autosave failed: ammo too low");
+  autosaveprint("autosave failed: ammo too low");
   return 0;
 }
 
-_id_1C55() {
-  if(isDefined(level._id_1C52) && level._id_1C52 == self) {
+autosavehealthcheck() {
+  if(isDefined(level.ac130gunner) && level.ac130gunner == self) {
     return 1;
   }
-  if(maps\_utility::_id_133C("laststand_downed") && maps\_utility::_id_1008("laststand_downed")) {
+  if(maps\_utility::ent_flag_exist("laststand_downed") && maps\_utility::ent_flag("laststand_downed")) {
     return 0;
   }
   var_0 = self.health / self.maxhealth;
@@ -452,14 +452,14 @@ _id_1C55() {
   if(common_scripts\utility::flag("_radiation_poisoning")) {
     return 0;
   }
-  if(maps\_utility::_id_1008("player_has_red_flashing_overlay")) {
+  if(maps\_utility::ent_flag("player_has_red_flashing_overlay")) {
     return 0;
   }
   return 1;
 }
 
-_id_1C56(var_0) {
-  if(isDefined(level._id_1C52) && level._id_1C52 == self) {
+autosavethreatcheck(var_0) {
+  if(isDefined(level.ac130gunner) && level.ac130gunner == self) {
     return 1;
   }
   var_1 = getaispeciesarray("bad_guys", "all");
@@ -481,10 +481,10 @@ _id_1C56(var_0) {
       continue;
     }
 
-    if(isDefined(var_3._id_100C) && isDefined(var_3._id_100C.target) && isPlayer(var_3._id_100C.target)) {
+    if(isDefined(var_3.melee) && isDefined(var_3.melee.target) && isPlayer(var_3.melee.target)) {
       return 0;
     }
-    var_7 = [[level._id_1C2D]](var_3);
+    var_7 = [[level.autosave_proximity_threat_func]](var_3);
 
     if(var_7 == "return_even_if_low_accuracy") {
       return 0;
@@ -498,18 +498,18 @@ _id_1C56(var_0) {
     if(var_7 == "none") {
       continue;
     }
-    if(var_3.a._id_0AA7 > gettime() - 500) {
-      if(var_0 || var_3 animscripts\utility::_id_0CE3(0) && var_3 canshootenemy(0)) {
+    if(var_3.a.lastshoottime > gettime() - 500) {
+      if(var_0 || var_3 animscripts\utility::canseeenemy(0) && var_3 canshootenemy(0)) {
         return 0;
       }
     }
 
-    if(isDefined(var_3.a._id_0F78) && var_3 animscripts\utility::_id_0CE3(0) && var_3 canshootenemy(0)) {
+    if(isDefined(var_3.a.aimidlethread) && var_3 animscripts\utility::canseeenemy(0) && var_3 canshootenemy(0)) {
       return 0;
     }
   }
 
-  if(maps\_utility::_id_1C57()) {
+  if(maps\_utility::player_is_near_live_grenade()) {
     return 0;
   }
   var_9 = getEntArray("destructible", "classname");
@@ -528,7 +528,7 @@ _id_1C56(var_0) {
   return 1;
 }
 
-_id_1C58() {
+enemy_is_a_threat() {
   if(self.finalaccuracy >= 0.021) {
     return 1;
   }
@@ -541,7 +541,7 @@ _id_1C58() {
   return 0;
 }
 
-_id_1C2D(var_0) {
+autosave_proximity_threat_func(var_0) {
   foreach(var_2 in level.players) {
     var_3 = distance(var_0.origin, var_2.origin);
 
@@ -557,16 +557,16 @@ _id_1C2D(var_0) {
   return "none";
 }
 
-_id_1C59(var_0) {
-  if(!maps\_utility::_id_1451()) {
+autosave_recon(var_0) {
+  if(!maps\_utility::is_default_start()) {
     return;
   }
-  var_1 = maps\_utility_code::_id_1454();
+  var_1 = maps\_utility_code::get_leveltime();
   var_2 = var_1;
 
-  if(isDefined(level._id_1C5A)) {
-    var_2 = var_1 - level._id_1C5A;
+  if(isDefined(level.recon_checkpoint_lasttime)) {
+    var_2 = var_1 - level.recon_checkpoint_lasttime;
   }
-  level._id_1C5A = var_1;
+  level.recon_checkpoint_lasttime = var_1;
   reconevent("script_checkpoint: id %d, leveltime %d, deltatime %d", var_0, var_1, var_2);
 }

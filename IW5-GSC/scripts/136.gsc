@@ -3,7 +3,7 @@
  * Script: scripts\136.gsc
 **************************************/
 
-_id_15BF(var_0, var_1) {
+audio_presets_vehicles(var_0, var_1) {
   switch (var_0) {
     case "nymn_player_hind":
       var_1["speed"] = [["hind_move", ["pitch", "player_hind_move_pitch"], ["volume", "player_hind_move_volume"]], ["hind_hover", ["pitch", "player_hind_hover_pitch"], ["volume", "player_hind_hover_volume"]], ["updaterate", 0.2], ["smooth_up", 0.3], ["smooth_down", 0.03], ["range", 1.0, 40.0]];
@@ -52,7 +52,7 @@ _id_15BF(var_0, var_1) {
   return var_1;
 }
 
-_id_15C0(var_0, var_1) {
+audio_presets_vehicle_maps(var_0, var_1) {
   switch (var_0) {
     case "so_jeep_idle_pitch":
       var_1 = [[0.0, 0.5], [0.02, 0.65], [0.1, 0.75], [0.2, 0.85], [1.0, 1.0]];

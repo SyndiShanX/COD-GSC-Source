@@ -11,13 +11,13 @@ main() {
   maps\createart\mp_qadeem_art::main();
   maps\mp\mp_qadeem_fx::main();
   maps\createfx\mp_qadeem_fx::main();
-  maps\_so_survival::_id_3F65();
+  maps\_so_survival::survival_preload();
   maps\_load::main();
   ambientplay("ambient_mp_qadeem");
   maps\_utility::set_vision_set("mp_qadeem", 0);
-  maps\_so_survival::_id_3F66();
+  maps\_so_survival::survival_postload();
   maps\_compass::setupminimap("compass_map_mp_qadeem");
-  maps\_so_survival::_id_3F67();
+  maps\_so_survival::survival_init();
   thread spawn_blocker_collision((1464, 2004, 428), (0, 0, 0));
   thread spawn_blocker_collision((1464, 2004, 458), (0, 0, 0));
   thread spawn_blocker_collision((1464, 2004, 488), (0, 0, 0));
@@ -30,7 +30,7 @@ main() {
   thread spawn_blocker_collision((1464, 2103, 428), (0, 0, 0));
   thread spawn_blocker_collision((1464, 2103, 458), (0, 0, 0));
   thread spawn_blocker_collision((1464, 2103, 488), (0, 0, 0));
-  level._id_1456._id_16FD = 1;
+  level._audio.filter_disabled = 1;
 }
 
 spawn_blocker_collision(var_0, var_1) {
@@ -38,5 +38,5 @@ spawn_blocker_collision(var_0, var_1) {
   var_2 setModel("tag_origin");
   var_2.origin = var_0;
   var_2.angles = var_1 + (0, 90, 0);
-  var_2 clonebrushmodeltoscriptmodel(level._id_3BB1[0]);
+  var_2 clonebrushmodeltoscriptmodel(level.airdropcratecollisionboxes[0]);
 }

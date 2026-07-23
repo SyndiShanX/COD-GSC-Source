@@ -9,23 +9,23 @@ main() {
   maps\hijack_aud::main();
   maps\hijack_anim::main();
   maps\hijack_precache::main();
-  _id_56FB();
-  _id_5A62();
-  _id_5A64();
-  maps\_utility::_id_26A9("airplane");
-  maps\_utility::_id_1E74("airplane", maps\hijack_airplane::_id_5A5E);
-  maps\_utility::_id_1E74("debate", maps\hijack_airplane::_id_5A5F);
-  maps\_utility::_id_1E74("pre_zero_g", maps\hijack_airplane::_id_5A60);
-  maps\_utility::_id_1E74("lower_level_combat", maps\hijack_airplane::_id_5A61);
-  maps\_utility::_id_1E74("crash", maps\hijack_crash::_id_5A15);
-  maps\_utility::_id_1E74("tarmac", maps\hijack_tarmac::_id_59D6);
-  maps\_utility::_id_1E74("tarmac_2", maps\hijack_tarmac::_id_59DA);
-  maps\_utility::_id_1E74("post_tarmac", maps\hijack_script_2b::_id_59C1);
-  maps\_utility::_id_1E74("end_scene", maps\hijack_script_2c::_id_5998);
-  _id_1109();
+  level_precache();
+  level_init_flags();
+  level_init_assets();
+  maps\_utility::set_default_start("airplane");
+  maps\_utility::add_start("airplane", maps\hijack_airplane::start_airplane);
+  maps\_utility::add_start("debate", maps\hijack_airplane::start_debate);
+  maps\_utility::add_start("pre_zero_g", maps\hijack_airplane::start_pre_zero_g);
+  maps\_utility::add_start("lower_level_combat", maps\hijack_airplane::start_lower_level_combat);
+  maps\_utility::add_start("crash", maps\hijack_crash::start_crash);
+  maps\_utility::add_start("tarmac", maps\hijack_tarmac::start_tarmac);
+  maps\_utility::add_start("tarmac_2", maps\hijack_tarmac::start_tarmac_2);
+  maps\_utility::add_start("post_tarmac", maps\hijack_script_2b::start_post_tarmac);
+  maps\_utility::add_start("end_scene", maps\hijack_script_2c::start_end_scene);
+  setup();
 }
 
-_id_56FB() {
+level_precache() {
   precacheitem("flash_grenade");
   precacheitem("armory_grenade");
   precacheitem("rpg_straight");
@@ -40,10 +40,10 @@ _id_56FB() {
   precachemodel("viewhands_player_fso");
 }
 
-_id_5A62() {
-  maps\hijack_airplane::_id_5A63();
-  maps\hijack_crash::_id_5A18();
-  maps\hijack_tarmac::_id_59DC();
+level_init_flags() {
+  maps\hijack_airplane::airplane_init_flags();
+  maps\hijack_crash::crash_init_flags();
+  maps\hijack_tarmac::tarmac_init_flags();
   common_scripts\utility::flag_init("stop_rocking");
   common_scripts\utility::flag_init("stop_turbulence");
   common_scripts\utility::flag_init("in_flight");
@@ -56,11 +56,11 @@ _id_5A62() {
   common_scripts\utility::flag_init("endguys_dead");
 }
 
-_id_5A64() {
-  maps\hijack_tarmac::_id_59DD();
+level_init_assets() {
+  maps\hijack_tarmac::tarmac_init_assets();
 }
 
-_id_1109() {
+setup() {
   maps\_load::main();
   precacheshellshock("hijack_airplane");
   precacheshellshock("hijack_minor");
@@ -74,15 +74,15 @@ _id_1109() {
   precacherumble("hijack_plane_low");
   precacherumble("hijack_plane_medium");
   precacherumble("hijack_plane_large");
-  maps\_utility::_id_265A("axis");
-  maps\_utility::_id_265A("allies");
+  maps\_utility::battlechatter_off("axis");
+  maps\_utility::battlechatter_off("allies");
   thread maps\_utility::set_vision_set("hijack_airplane", 1);
-  level._id_5A65 = getEnt("player_debate_trigger", "script_noteworthy");
-  level._id_5A65 common_scripts\utility::trigger_off();
-  level._id_5A66 = getEnt("player_debate_trigger_b", "script_noteworthy");
-  level._id_5A66 common_scripts\utility::trigger_off();
-  level._id_5A67 = getEnt("debate_laptop_off", "targetname");
-  level._id_5A67 hide();
+  level.debate_trigger = getEnt("player_debate_trigger", "script_noteworthy");
+  level.debate_trigger common_scripts\utility::trigger_off();
+  level.debate_trigger_b = getEnt("player_debate_trigger_b", "script_noteworthy");
+  level.debate_trigger_b common_scripts\utility::trigger_off();
+  level.debate_laptop_off = getEnt("debate_laptop_off", "targetname");
+  level.debate_laptop_off hide();
 
   if(getDvar("airmasks") == "") {
     setDvar("airmasks", "1");
@@ -92,78 +92,78 @@ _id_1109() {
   level.friendlyfire["enemy_kill_points"] = 3;
   level.friendlyfire["friend_kill_points"] = -1000;
   level.player setweaponammostock("fnfiveseven", 60);
-  level._id_5A68 = getDvar("phys_gravity");
-  level._id_5A69 = getDvar("phys_gravity_ragdoll");
-  level._id_5A6A = getDvar("phys_gravityChangeWakeupRadius");
-  level._id_5A6B = getDvar("ragdoll_max_life");
-  level._id_5A6C = (-14, 114, 0);
-  level._id_5960 = getEnt("org_view_roll", "targetname");
-  level.player playersetgroundreferenceent(level._id_5960);
-  level._id_5961 = [];
-  level._id_5961 = maps\_utility::_id_0BC3(level._id_5961, level._id_5960);
-  level._id_5A6D = getEntArray("conf_light_off", "targetname");
-  common_scripts\utility::array_call(level._id_5A6D, ::hide);
-  common_scripts\utility::array_call(level._id_5A6D, ::notsolid);
+  level.orig_phys_gravity = getDvar("phys_gravity");
+  level.orig_ragdoll_gravity = getDvar("phys_gravity_ragdoll");
+  level.orig_wakeupradius = getDvar("phys_gravityChangeWakeupRadius");
+  level.orig_ragdoll_life = getDvar("ragdoll_max_life");
+  level.orig_sundirection = (-14, 114, 0);
+  level.org_view_roll = getEnt("org_view_roll", "targetname");
+  level.player playersetgroundreferenceent(level.org_view_roll);
+  level.arollers = [];
+  level.arollers = maps\_utility::array_add(level.arollers, level.org_view_roll);
+  level.conf_lights_off = getEntArray("conf_light_off", "targetname");
+  common_scripts\utility::array_call(level.conf_lights_off, ::hide);
+  common_scripts\utility::array_call(level.conf_lights_off, ::notsolid);
   var_0 = getEntArray("airmask", "targetname");
-  common_scripts\utility::array_thread(var_0, maps\hijack_code::_id_5969);
-  level._id_5A6E = getEntArray("seatbelt_signs", "targetname");
-  common_scripts\utility::array_call(level._id_5A6E, ::hide);
-  maps\_treadfx::_id_28EF("script_vehicle_mi17_woodland_landing", "snow");
-  maps\_treadfx::_id_28EF("script_vehicle_mi17_woodland_landing", "ice");
-  maps\_treadfx::_id_28EF("script_vehicle_mi17_woodland_landing", "slush");
+  common_scripts\utility::array_thread(var_0, maps\hijack_code::airmask_setup);
+  level.seatbeltsigns = getEntArray("seatbelt_signs", "targetname");
+  common_scripts\utility::array_call(level.seatbeltsigns, ::hide);
+  maps\_treadfx::setvehiclefx("script_vehicle_mi17_woodland_landing", "snow");
+  maps\_treadfx::setvehiclefx("script_vehicle_mi17_woodland_landing", "ice");
+  maps\_treadfx::setvehiclefx("script_vehicle_mi17_woodland_landing", "slush");
   var_1 = getEnt("commander", "script_noteworthy");
-  var_1 maps\_utility::add_spawn_function(::_id_5A80);
+  var_1 maps\_utility::add_spawn_function(::setup_commander);
   var_2 = getEnt("commander_tarmac", "script_noteworthy");
-  var_2 maps\_utility::add_spawn_function(::_id_5A80);
+  var_2 maps\_utility::add_spawn_function(::setup_commander);
   var_3 = getEnt("advisor", "script_noteworthy");
-  var_3 maps\_utility::add_spawn_function(::_id_5A81);
+  var_3 maps\_utility::add_spawn_function(::setup_advisor);
   var_4 = getEnt("advisor_tarmac", "script_noteworthy");
-  var_4 maps\_utility::add_spawn_function(::_id_5A81);
+  var_4 maps\_utility::add_spawn_function(::setup_advisor);
   var_5 = getEnt("president", "script_noteworthy");
-  var_5 maps\_utility::add_spawn_function(::_id_5A82);
+  var_5 maps\_utility::add_spawn_function(::setup_president);
   var_6 = getEnt("president_tarmac", "script_noteworthy");
-  var_6 maps\_utility::add_spawn_function(::_id_5A82);
+  var_6 maps\_utility::add_spawn_function(::setup_president);
   var_7 = getEnt("find_daughter_pre_crash", "targetname");
-  var_7 maps\_utility::add_spawn_function(::_id_59E1);
+  var_7 maps\_utility::add_spawn_function(::setup_daughter);
   var_8 = getEnt("hero_agent_01", "script_noteworthy");
-  var_8 maps\_utility::add_spawn_function(::_id_5A85);
+  var_8 maps\_utility::add_spawn_function(::setup_hero_agent_01);
   var_9 = getEnt("zerog_agent_01", "script_noteworthy");
-  var_9 maps\_utility::add_spawn_function(::_id_5A86);
+  var_9 maps\_utility::add_spawn_function(::setup_zerog_agent_01);
   var_10 = getEnt("zerog_agent_02", "script_noteworthy");
-  var_10 maps\_utility::add_spawn_function(::_id_5A88);
+  var_10 maps\_utility::add_spawn_function(::setup_zerog_agent_02);
   var_11 = getEnt("crash_agent_1", "script_noteworthy");
-  var_11 maps\_utility::add_spawn_function(::_id_5A8A);
-  maps\_utility::_id_27CA("pre_zerog_terrorists", ::_id_5A8C);
-  maps\_utility::_id_27CB("terrorists", maps\hijack_code::_id_45E4);
-  level._id_5976 = getEntArray("hijack_crash_plane_model", "targetname");
-  thread _id_5A8D();
-  thread _id_5A77();
-  thread _id_5A75();
-  thread _id_5A7A();
-  thread _id_5A76();
-  thread _id_5A6F();
-  thread _id_5A93();
-  thread _id_5A70();
-  thread _id_5A72();
-  thread _id_5A73();
-  thread _id_5A74();
+  var_11 maps\_utility::add_spawn_function(::setup_crash_agent_1);
+  maps\_utility::array_spawn_function_targetname("pre_zerog_terrorists", ::temp_bullet_shield);
+  maps\_utility::array_spawn_function_noteworthy("terrorists", maps\hijack_code::no_grenades);
+  level.crash_models = getEntArray("hijack_crash_plane_model", "targetname");
+  thread manage_tail_models();
+  thread setup_volumetric_lights();
+  thread setup_object_mass();
+  thread no_grenade_death_hack();
+  thread setup_tarmac_triggers();
+  thread setup_hijack_specific_lights();
+  thread setup_end_heli_interior();
+  thread pause_inflight_fx();
+  thread pause_tarmac_fx();
+  thread pause_fuselage_fire_fx();
+  thread pause_wreckage_interior_fx();
   thread maps\_shg_fx::_id_445E(400, "fx_crash_trench_fire");
   thread maps\_shg_fx::_id_445E(410, "fx_hangar_combat_area");
   thread maps\_shg_fx::_id_445E(420, "fx_final_area");
 }
 
-_id_5A6F() {
+setup_hijack_specific_lights() {
   var_0 = getEnt("hjk_red_light_pulsing0", "targetname");
   var_1 = getEnt("hjk_red_light_pulsing1", "targetname");
   var_2 = getEnt("hjk_red_light_pulsing2", "targetname");
   var_3 = getEnt("hjk_red_light_pulsing3", "targetname");
-  var_0 thread maps\hijack_code::_id_5970(0);
-  var_1 thread maps\hijack_code::_id_5970(1);
-  var_2 thread maps\hijack_code::_id_5970(2);
-  var_3 thread maps\hijack_code::_id_5970(3);
+  var_0 thread maps\hijack_code::hjk_red_light_pulsing(0);
+  var_1 thread maps\hijack_code::hjk_red_light_pulsing(1);
+  var_2 thread maps\hijack_code::hjk_red_light_pulsing(2);
+  var_3 thread maps\hijack_code::hjk_red_light_pulsing(3);
 }
 
-_id_5A17() {
+setup_cloud_tunnel() {
   var_0 = getEnt("cloud_tunnel", "targetname");
   var_1 = common_scripts\utility::getfx("cloud_tunnel");
   var_2 = spawn("script_model", var_0.origin);
@@ -181,22 +181,22 @@ _id_5A17() {
   }
 }
 
-_id_5A70() {
+pause_inflight_fx() {
   var_0 = [];
-  var_0 = maps\_utility::_id_2695("window_volumetric");
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("conference_room_smoke"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("banner_fire"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("hijack_potlight_volumetric"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("hijack_iris_volumetric"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("aircraft_light_white_blink"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("aircraft_light_wingtip_green"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("aircraft_light_wingtip_red"));
+  var_0 = maps\_utility::getfxarraybyid("window_volumetric");
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("conference_room_smoke"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("banner_fire"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("hijack_potlight_volumetric"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("hijack_iris_volumetric"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("aircraft_light_white_blink"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("aircraft_light_wingtip_green"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("aircraft_light_wingtip_red"));
   level waittill("volumetrics_setup");
 
   for(;;) {
     common_scripts\utility::flag_wait("pause_inflight_fx");
 
-    foreach(var_2 in level._id_5A71) {
+    foreach(var_2 in level.volumetric_window_fx_ents) {
       stopFXOnTag(common_scripts\utility::getfx("window_volumetric"), var_2, "tag_origin");
       stopFXOnTag(common_scripts\utility::getfx("window_volumetric_open"), var_2, "tag_origin");
     }
@@ -207,28 +207,28 @@ _id_5A70() {
     common_scripts\utility::flag_waitopen("pause_inflight_fx");
 
     foreach(var_5 in var_0) {}
-    var_5 maps\_utility::_id_1655();
+    var_5 maps\_utility::restarteffect();
   }
 }
 
-_id_5A72() {
+pause_tarmac_fx() {
   var_0 = [];
-  var_0 = maps\_utility::_id_2695("after_math_embers");
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("horizon_fireglow"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("interior_ceiling_smoke"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("interior_ceiling_smoke2"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("interior_ceiling_smoke3"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("hijack_firelp_med_pm"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("firelp_large_pm_nolight"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("hijack_megafire"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("fire_trail_60"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("firelp_med_pm_nolight"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("banner_fire"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("banner_fire_nodrip"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("firelp_small_pm_nolight"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("powerline_runner_cheap_hijack"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("field_fire_distant2"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("plane_gash_volumetric"));
+  var_0 = maps\_utility::getfxarraybyid("after_math_embers");
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("horizon_fireglow"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("interior_ceiling_smoke"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("interior_ceiling_smoke2"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("interior_ceiling_smoke3"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("hijack_firelp_med_pm"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("firelp_large_pm_nolight"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("hijack_megafire"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("fire_trail_60"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("firelp_med_pm_nolight"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("banner_fire"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("banner_fire_nodrip"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("firelp_small_pm_nolight"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("powerline_runner_cheap_hijack"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("field_fire_distant2"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("plane_gash_volumetric"));
   level waittill("volumetrics_setup");
 
   for(;;) {
@@ -240,25 +240,25 @@ _id_5A72() {
     common_scripts\utility::flag_waitopen("pause_tarmac_fx");
 
     foreach(var_2 in var_0) {}
-    var_2 maps\_utility::_id_1655();
+    var_2 maps\_utility::restarteffect();
   }
 }
 
-_id_5A73() {
+pause_fuselage_fire_fx() {
   var_0 = [];
-  var_0 = maps\_utility::_id_2695("banner_fire");
+  var_0 = maps\_utility::getfxarraybyid("banner_fire");
   var_1 = [];
-  var_1 = maps\_utility::_id_2695("airplane_crash_embers");
-  var_1 = common_scripts\utility::array_combine(var_1, maps\_utility::_id_2695("hijack_firelp_huge_pm_nolight"));
-  var_1 = common_scripts\utility::array_combine(var_1, maps\_utility::_id_2695("trench_glow"));
-  var_1 = common_scripts\utility::array_combine(var_1, maps\_utility::_id_2695("fire_trail_60"));
+  var_1 = maps\_utility::getfxarraybyid("airplane_crash_embers");
+  var_1 = common_scripts\utility::array_combine(var_1, maps\_utility::getfxarraybyid("hijack_firelp_huge_pm_nolight"));
+  var_1 = common_scripts\utility::array_combine(var_1, maps\_utility::getfxarraybyid("trench_glow"));
+  var_1 = common_scripts\utility::array_combine(var_1, maps\_utility::getfxarraybyid("fire_trail_60"));
   level waittill("volumetrics_setup");
 
   for(;;) {
     common_scripts\utility::flag_wait("pause_fuselage_fire_fx");
 
     foreach(var_3 in var_0) {}
-    var_3 maps\_utility::_id_1655();
+    var_3 maps\_utility::restarteffect();
 
     foreach(var_3 in var_1) {}
     var_3 common_scripts\utility::pauseeffect();
@@ -269,25 +269,25 @@ _id_5A73() {
     var_3 common_scripts\utility::pauseeffect();
 
     foreach(var_3 in var_1) {}
-    var_3 maps\_utility::_id_1655();
+    var_3 maps\_utility::restarteffect();
   }
 }
 
-_id_5A74() {
+pause_wreckage_interior_fx() {
   var_0 = [];
   var_1 = [];
-  var_1 = maps\_utility::_id_2695("powerline_runner");
-  var_1 = common_scripts\utility::array_combine(var_1, maps\_utility::_id_2695("powerline_runner_cheap"));
-  var_1 = common_scripts\utility::array_combine(var_1, maps\_utility::_id_2695("interior_ceiling_smoke"));
-  var_1 = common_scripts\utility::array_combine(var_1, maps\_utility::_id_2695("interior_ceiling_smoke2"));
-  var_1 = common_scripts\utility::array_combine(var_1, maps\_utility::_id_2695("interior_ceiling_smoke3"));
+  var_1 = maps\_utility::getfxarraybyid("powerline_runner");
+  var_1 = common_scripts\utility::array_combine(var_1, maps\_utility::getfxarraybyid("powerline_runner_cheap"));
+  var_1 = common_scripts\utility::array_combine(var_1, maps\_utility::getfxarraybyid("interior_ceiling_smoke"));
+  var_1 = common_scripts\utility::array_combine(var_1, maps\_utility::getfxarraybyid("interior_ceiling_smoke2"));
+  var_1 = common_scripts\utility::array_combine(var_1, maps\_utility::getfxarraybyid("interior_ceiling_smoke3"));
   level waittill("volumetrics_setup");
 
   for(;;) {
     common_scripts\utility::flag_wait("pause_wreckage_interior_fx");
 
     foreach(var_3 in var_0) {}
-    var_3 maps\_utility::_id_1655();
+    var_3 maps\_utility::restarteffect();
 
     foreach(var_3 in var_1) {}
     var_3 common_scripts\utility::pauseeffect();
@@ -298,37 +298,37 @@ _id_5A74() {
     var_3 common_scripts\utility::pauseeffect();
 
     foreach(var_3 in var_1) {}
-    var_3 maps\_utility::_id_1655();
+    var_3 maps\_utility::restarteffect();
   }
 }
 
-_id_5A75() {
-  level._id_5967 = [];
-  level._id_5967["trash_cup_short1"] = 1;
-  level._id_5967["hjk_vodka_glass"] = 0.5;
-  level._id_5967["hjk_vodka_glass_lrg"] = 0.5;
-  level._id_5967["trash_bottle_whisky"] = 0.5;
-  level._id_5967["cs_coffeemug02_static"] = 0.1;
-  level._id_5967["ma_salt_shaker_1"] = 0.1;
-  level._id_5967["ma_restaurant_plate_01"] = 5;
-  level._id_5967["hjk_ashtray"] = 5;
-  level._id_5967["hjk_napkin_1"] = 5;
-  level._id_5967["hjk_napkin_2"] = 5;
-  level._id_5967["newspaper_folded_static"] = 5;
-  level._id_5967["cs_vodkabottle01"] = 3;
-  level._id_5967["trash_bottle_wine"] = 3;
-  level._id_5967["hjk_metal_pitcher"] = 6;
-  level._id_5967["bo_p_glo_beer_bottle01_world"] = 3;
-  level._id_5967["hjk_laptop_closed"] = 1;
-  level._id_5967["ap_luggage02"] = 1;
-  level._id_5967["ap_luggage03"] = 1;
-  level._id_5967["me_banana"] = 0.5;
-  level._id_5967["me_fruit_orange"] = 0.5;
-  level._id_5967["me_fruit_mango_green"] = 0.5;
-  level._id_5967["me_fruit_mango_redorange"] = 0.5;
+setup_object_mass() {
+  level.objectmass = [];
+  level.objectmass["trash_cup_short1"] = 1;
+  level.objectmass["hjk_vodka_glass"] = 0.5;
+  level.objectmass["hjk_vodka_glass_lrg"] = 0.5;
+  level.objectmass["trash_bottle_whisky"] = 0.5;
+  level.objectmass["cs_coffeemug02_static"] = 0.1;
+  level.objectmass["ma_salt_shaker_1"] = 0.1;
+  level.objectmass["ma_restaurant_plate_01"] = 5;
+  level.objectmass["hjk_ashtray"] = 5;
+  level.objectmass["hjk_napkin_1"] = 5;
+  level.objectmass["hjk_napkin_2"] = 5;
+  level.objectmass["newspaper_folded_static"] = 5;
+  level.objectmass["cs_vodkabottle01"] = 3;
+  level.objectmass["trash_bottle_wine"] = 3;
+  level.objectmass["hjk_metal_pitcher"] = 6;
+  level.objectmass["bo_p_glo_beer_bottle01_world"] = 3;
+  level.objectmass["hjk_laptop_closed"] = 1;
+  level.objectmass["ap_luggage02"] = 1;
+  level.objectmass["ap_luggage03"] = 1;
+  level.objectmass["me_banana"] = 0.5;
+  level.objectmass["me_fruit_orange"] = 0.5;
+  level.objectmass["me_fruit_mango_green"] = 0.5;
+  level.objectmass["me_fruit_mango_redorange"] = 0.5;
 }
 
-_id_5A76() {
+setup_tarmac_triggers() {
   var_0 = getEntArray("disable_during_crash", "script_noteworthy");
   var_1 = getEnt("tarmac_backtrack_trigger", "script_noteworthy");
 
@@ -345,13 +345,13 @@ _id_5A76() {
   var_1 common_scripts\utility::trigger_on();
 }
 
-_id_5A77() {
+setup_volumetric_lights() {
   wait 0.1;
-  level._id_5A78 = [];
-  level._id_5A71 = [];
-  level._id_5A79 = getEntArray("god_ray_emitter", "targetname");
+  level.volumetric_window_fx = [];
+  level.volumetric_window_fx_ents = [];
+  level.godrays = getEntArray("god_ray_emitter", "targetname");
 
-  foreach(var_1 in level._id_5A79) {
+  foreach(var_1 in level.godrays) {
     var_2 = common_scripts\utility::spawn_tag_origin();
     var_2.origin = var_1.origin;
     var_2.angles = var_1.angles;
@@ -364,189 +364,189 @@ _id_5A77() {
     var_3 = common_scripts\utility::spawn_tag_origin();
     var_3.origin = var_2.origin;
     var_2 linkTo(var_3);
-    level._id_5A71[level._id_5A71.size] = var_2;
-    level._id_5A78[level._id_5A78.size] = var_3;
+    level.volumetric_window_fx_ents[level.volumetric_window_fx_ents.size] = var_2;
+    level.volumetric_window_fx[level.volumetric_window_fx.size] = var_3;
   }
 
-  level._id_5961 = common_scripts\utility::array_combine(level._id_5961, level._id_5A78);
+  level.arollers = common_scripts\utility::array_combine(level.arollers, level.volumetric_window_fx);
   level notify("volumetrics_setup");
 }
 
-_id_5A7A() {
+no_grenade_death_hack() {
   for(;;) {
-    anim._id_0D6C = gettime() + 300000;
+    anim.nextcornergrenadedeathtime = gettime() + 300000;
     wait 60;
   }
 }
 
-_id_5A7B() {
+setup_common_hijack_features() {
   self.ignoreme = 1;
   self.ignoreall = 1;
-  maps\_utility::_id_0D04();
-  maps\hijack_code::_id_45E4();
-  maps\_utility::_id_1058(1);
+  maps\_utility::magic_bullet_shield();
+  maps\hijack_code::no_grenades();
+  maps\_utility::setflashbangimmunity(1);
 }
 
-_id_5A7C() {
+player_damage_to_friendlies() {
   self endon("death");
 
   for(;;) {
     self waittill("damage", var_0, var_1);
 
     if(var_1 == level.player) {
-      if(isDefined(self._id_0D04)) {
-        maps\_utility::_id_1902();
+      if(isDefined(self.magic_bullet_shield)) {
+        maps\_utility::stop_magic_bullet_shield();
         self.allowdeath = 1;
 
-        if(self != level._id_58BA) {
-          self._id_0D45 = _id_5A7E();
+        if(self != level.president) {
+          self.deathfunction = agent_death();
           continue;
         }
 
-        self._id_0D45 = _id_5A7D();
+        self.deathfunction = civilian_death();
       }
     }
   }
 }
 
-_id_5A7D() {
+civilian_death() {
   setDvar("ui_deadquote", &"HIJACK_MISSIONFAIL_PRESIDENT");
-  thread maps\_utility::_id_1826();
+  thread maps\_utility::missionfailedwrapper();
 }
 
-_id_5A7E() {
+agent_death() {
   setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
-  thread maps\_utility::_id_1826();
+  thread maps\_utility::missionfailedwrapper();
 }
 
-_id_5A7F() {
-  thread _id_5A7B();
-  self._id_1032 = "generic";
-  maps\_utility::_id_24F5();
+setup_generic_script_guy() {
+  thread setup_common_hijack_features();
+  self.animname = "generic";
+  maps\_utility::gun_remove();
 }
 
-_id_5A80() {
-  thread _id_5A7B();
-  level._id_58D2 = self;
-  level._id_58D2._id_59C3 = 1;
-  level._id_58D2._id_1032 = "commander";
+setup_commander() {
+  thread setup_common_hijack_features();
+  level.commander = self;
+  level.commander.notarget = 1;
+  level.commander.animname = "commander";
 }
 
-_id_59E1() {
-  thread _id_5A7B();
-  level._id_59E0 = self;
-  self._id_1032 = "daughter";
+setup_daughter() {
+  thread setup_common_hijack_features();
+  level.daughter = self;
+  self.animname = "daughter";
 }
 
-_id_5A81() {
-  thread _id_5A7B();
-  level._id_58C6 = self;
-  level._id_58C6._id_59C3 = 1;
-  level._id_58C6._id_1032 = "advisor";
-  level._id_58C6 maps\_utility::_id_24F5();
+setup_advisor() {
+  thread setup_common_hijack_features();
+  level.advisor = self;
+  level.advisor.notarget = 1;
+  level.advisor.animname = "advisor";
+  level.advisor maps\_utility::gun_remove();
 }
 
-_id_5A82() {
-  thread _id_5A7B();
-  level._id_58BA = self;
-  level._id_58BA._id_59C3 = 1;
-  level._id_58BA._id_1032 = "president";
-  level._id_58BA._id_408A = 1;
-  level._id_58BA maps\hijack_anim::_id_5A83();
+setup_president() {
+  thread setup_common_hijack_features();
+  level.president = self;
+  level.president.notarget = 1;
+  level.president.animname = "president";
+  level.president.force_civilian_stand_run = 1;
+  level.president maps\hijack_anim::president_setup_anims();
   wait 0.1;
-  level._id_58BA notify("disable_combat_state_check");
-  self._id_10C3 = maps\hijack_anim::_id_5A84;
-  level._id_58BA thread _id_5A7C();
+  level.president notify("disable_combat_state_check");
+  self.pathturnanimoverridefunc = maps\hijack_anim::president_setup_turn_anims_override;
+  level.president thread player_damage_to_friendlies();
 }
 
-_id_5A85() {
-  thread _id_5A7B();
-  level._id_58CB = self;
-  level._id_58CB thread _id_5A7C();
+setup_hero_agent_01() {
+  thread setup_common_hijack_features();
+  level.hero_agent_01 = self;
+  level.hero_agent_01 thread player_damage_to_friendlies();
 }
 
-_id_5A86() {
-  thread _id_5A7B();
-  level._id_5A87 = self;
-  self._id_1032 = "agent1";
+setup_zerog_agent_01() {
+  thread setup_common_hijack_features();
+  level.zerog_agent_01 = self;
+  self.animname = "agent1";
   self.fixednode = 1;
   self.goalradius = 16;
-  maps\_utility::_id_109B();
+  maps\_utility::enable_cqbwalk();
   self.ignoresuppression = 1;
-  self._id_20AF = 0.1;
+  self.baseaccuracy = 0.1;
 }
 
-_id_5A88() {
-  thread _id_5A7B();
-  level._id_5A89 = self;
-  self._id_1032 = "agent2";
+setup_zerog_agent_02() {
+  thread setup_common_hijack_features();
+  level.zerog_agent_02 = self;
+  self.animname = "agent2";
   self.fixednode = 1;
   self.goalradius = 16;
-  maps\_utility::_id_109B();
+  maps\_utility::enable_cqbwalk();
   self.ignoresuppression = 1;
-  self._id_20AF = 0.1;
+  self.baseaccuracy = 0.1;
 }
 
-_id_5A8A() {
-  thread _id_5A7B();
-  level._id_5A8B = self;
-  maps\_utility::_id_13A4("c");
-  self._id_1032 = "crash_agent1";
-  self._id_59C3 = 1;
+setup_crash_agent_1() {
+  thread setup_common_hijack_features();
+  level.crash_agent_1 = self;
+  maps\_utility::set_force_color("c");
+  self.animname = "crash_agent1";
+  self.notarget = 1;
 }
 
-_id_5A8C() {
-  thread maps\_utility::_id_0D04();
+temp_bullet_shield() {
+  thread maps\_utility::magic_bullet_shield();
 }
 
-_id_5A8D() {
+manage_tail_models() {
   level endon("planecrash_approaching");
-  _id_5A8E();
+  hide_tail_models();
 
   for(;;) {
     common_scripts\utility::flag_clear("show_crash_model");
     common_scripts\utility::flag_wait("show_crash_model");
-    _id_5A8F();
+    show_tail_models();
     common_scripts\utility::flag_clear("hide_crash_model");
     common_scripts\utility::flag_wait("hide_crash_model");
-    _id_5A8E();
+    hide_tail_models();
   }
 }
 
-_id_5A8E() {
-  common_scripts\utility::array_call(level._id_5976, ::hide);
-  common_scripts\utility::array_call(level._id_5976, ::notsolid);
+hide_tail_models() {
+  common_scripts\utility::array_call(level.crash_models, ::hide);
+  common_scripts\utility::array_call(level.crash_models, ::notsolid);
 }
 
-_id_5A8F() {
-  common_scripts\utility::array_call(level._id_5976, ::show);
+show_tail_models() {
+  common_scripts\utility::array_call(level.crash_models, ::show);
 
-  if(!isDefined(level._id_5A90)) {
+  if(!isDefined(level.setup_crash_models)) {
     var_0 = common_scripts\utility::getStruct("hijack_plane_crash_model_origin", "targetname");
 
-    foreach(var_2 in level._id_5976) {}
+    foreach(var_2 in level.crash_models) {}
     var_2.origin = var_0.origin;
 
-    level._id_5A90 = 1;
+    level.setup_crash_models = 1;
   }
 
-  common_scripts\utility::array_call(level._id_5976, ::solid);
+  common_scripts\utility::array_call(level.crash_models, ::solid);
 }
 
-_id_5A91() {
+setup_turbines() {
   var_0 = getEntArray("turbine", "targetname");
 
   foreach(var_2 in var_0) {}
-  var_2 thread _id_5A92();
+  var_2 thread turbine_anim();
 }
 
-_id_5A92() {
-  var_0 = maps\_utility::_id_1287("turbines");
+turbine_anim() {
+  var_0 = maps\_utility::spawn_anim_model("turbines");
   var_0.origin = self.origin;
   var_0.angles = self.angles;
-  var_0 maps\_anim::_id_11CF(var_0, "engine_turbine_spin");
+  var_0 maps\_anim::anim_first_frame_solo(var_0, "engine_turbine_spin");
   self linkTo(var_0, "J_prop_1");
-  var_0 thread maps\_anim::_id_124E(var_0, "engine_turbine_spin_loop", "kill_turbines");
+  var_0 thread maps\_anim::anim_loop_solo(var_0, "engine_turbine_spin_loop", "kill_turbines");
   common_scripts\utility::flag_wait("stop_phones");
   var_0 notify("kill_turbines");
   waittillframeend;
@@ -554,17 +554,17 @@ _id_5A92() {
   self delete();
 }
 
-_id_5A93() {
+setup_end_heli_interior() {
   var_0 = common_scripts\utility::getStruct("heli_end_node", "targetname");
-  level._id_59A4 = getEntArray("heli_interior", "targetname");
+  level.heli_interior = getEntArray("heli_interior", "targetname");
 
-  foreach(var_2 in level._id_59A4) {
+  foreach(var_2 in level.heli_interior) {
     var_2 hide();
     var_2 notsolid();
   }
 
-  level._id_59A5 = getEntArray("hijack_blurcard_ending", "targetname");
+  level.end_cards = getEntArray("hijack_blurcard_ending", "targetname");
 
-  foreach(var_5 in level._id_59A5) {}
+  foreach(var_5 in level.end_cards) {}
   var_5 hide();
 }

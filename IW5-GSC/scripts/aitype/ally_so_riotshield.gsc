@@ -25,10 +25,10 @@ main() {
 
   switch (codescripts\character::get_random_character(2)) {
     case 0:
-      _id_0609::main();
+      character/character_gign_paris_smg::main();
       break;
     case 1:
-      _id_060A::main();
+      character/character_gign_paris_assault::main();
       break;
   }
 }
@@ -38,8 +38,8 @@ spawner() {
 }
 
 precache() {
-  _id_0609::precache();
-  _id_060A::precache();
+  character/character_gign_paris_smg::precache();
+  character/character_gign_paris_assault::precache();
   precacheitem("iw5_riotshield_so");
-  _id_05C8::_id_3AD6();
+  maps/_riotshield::init_riotshield();
 }

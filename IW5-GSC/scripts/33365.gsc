@@ -13,11 +13,11 @@ main() {
   var_0.maxopacity = 0.91;
   var_0.transitiontime = 0;
   var_0.sunfogenabled = 0;
-  var_0._id_1AF0 = 0.692;
-  var_0._id_1AF1 = 0.734;
-  var_0._id_1AF2 = 0.791;
-  var_0._id_1AF3 = (-0.0355, -0.939, 0.34);
-  var_0._id_1AF4 = 25;
-  var_0._id_1AF5 = 75;
-  var_0._id_1AF6 = 3.07;
+  var_0.sunred = 0.692;
+  var_0.sungreen = 0.734;
+  var_0.sunblue = 0.791;
+  var_0.sundir = (-0.0355, -0.939, 0.34);
+  var_0.sunbeginfadeangle = 25;
+  var_0.sunendfadeangle = 75;
+  var_0.normalfogscale = 3.07;
 }

@@ -4,12 +4,12 @@
 **************************************/
 
 main() {
-  _id_5B4B();
+  precache_createfx_fx();
   precache_scripted_fx();
   precache_audio_fx();
 }
 
-_id_5B4B() {
+precache_createfx_fx() {
   level._effect["firelp_small_cheap_mp"] = loadfx("fire/firelp_small_cheap_mp");
   level._effect["firelp_small_cheap_mp_nodistortion"] = loadfx("fire/firelp_small_cheap_mp_nodistortion");
   level._effect["godray_intro_window"] = loadfx("misc/godray_intro_window");

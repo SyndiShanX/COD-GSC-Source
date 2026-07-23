@@ -7,12 +7,12 @@
 
 main() {
   if(self.type == "dog") {
-    animscripts\traverse\shared::_id_0176("wallhop", 5);
+    animscripts\traverse\shared::dog_long_jump("wallhop", 5);
     return;
   }
 
-  self._id_247C = "stand";
-  animscripts\utility::_id_247B();
+  self.desired_anim_pose = "stand";
+  animscripts\utility::updateanimpose();
   self endon("killanimscript");
   self traversemode("nogravity");
   self traversemode("noclip");
@@ -21,5 +21,5 @@ main() {
   self setflaggedanimknoballrestart("jumpanim", %jump_across_72, %body, 1, 0.1, 1);
   self waittillmatch("jumpanim", "gravity on");
   self traversemode("gravity");
-  animscripts\shared::_id_0C51("jumpanim");
+  animscripts\shared::donotetracks("jumpanim");
 }

@@ -3,19 +3,19 @@
  * Script: animscripts\face.gsc
 **************************************/
 
-_id_0C3A() {
-  if(!anim._id_0C3B) {
+initcharacterface() {
+  if(!anim.usefacialanims) {
     return;
   }
-  if(!isDefined(self.a._id_0C3C)) {
-    self.a._id_0C3C = 0;
-    self.a._id_0C3E = anim._id_0C3D;
-    self._id_0C3F = [];
-    self._id_0C40 = 0;
+  if(!isDefined(self.a.currentdialogimportance)) {
+    self.a.currentdialogimportance = 0;
+    self.a.idleface = anim.alertface;
+    self.facewaiting = [];
+    self.facelastnotifynum = 0;
   }
 }
 
-_id_0C41(var_0) {
+saygenericdialogue(var_0) {
   var_1 = undefined;
 
   switch (self.voice) {
@@ -27,11 +27,11 @@ _id_0C41(var_0) {
     case "delta":
     case "american":
       var_2 = "friendly";
-      var_3 = anim._id_0C42;
+      var_3 = anim.numfriendlyvoices;
       break;
     default:
       var_2 = "enemy";
-      var_3 = anim._id_0C43;
+      var_3 = anim.numenemyvoices;
   }
 
   var_1 = 1 + self getentitynumber() % var_3;
@@ -58,56 +58,56 @@ _id_0C41(var_0) {
   }
 
   var_6 = "generic_" + var_0 + "_" + var_2;
-  thread _id_0C49(var_4, var_6, var_5);
+  thread playfacethread(var_4, var_6, var_5);
 }
 
-_id_0C44(var_0) {
-  animscripts\battlechatter::_id_0ABF();
-  self.a._id_0C3E = var_0;
+setidlefacedelayed(var_0) {
+  animscripts\battlechatter::playbattlechatter();
+  self.a.idleface = var_0;
 }
 
-_id_0C45(var_0) {
-  if(!anim._id_0C3B) {
+setidleface(var_0) {
+  if(!anim.usefacialanims) {
     return;
   }
-  animscripts\battlechatter::_id_0ABF();
-  self.a._id_0C3E = var_0;
-  _id_0C48();
+  animscripts\battlechatter::playbattlechatter();
+  self.a.idleface = var_0;
+  playidleface();
 }
 
-_id_0C46(var_0, var_1, var_2, var_3, var_4, var_5) {
-  thread _id_0C49(var_0, var_1, var_2, var_3, var_4, var_5);
+sayspecificdialogue(var_0, var_1, var_2, var_3, var_4, var_5) {
+  thread playfacethread(var_0, var_1, var_2, var_3, var_4, var_5);
 }
 
-_id_0C47(var_0) {
+chooseanimfromset(var_0) {
   return;
 }
 
-_id_0C48() {
+playidleface() {
   return;
 }
 
-_id_0C49(var_0, var_1, var_2, var_3, var_4, var_5) {
-  self.a._id_0C4A = 1;
-  self.a._id_0C4B = 1;
+playfacethread(var_0, var_1, var_2, var_3, var_4, var_5) {
+  self.a.facialanimdone = 1;
+  self.a.facialsounddone = 1;
 
   if(isDefined(var_3)) {
     if(isDefined(var_1)) {
       self playsoundatviewheight(var_1, "animscript facesound" + var_3, 1);
-      thread _id_0C52(var_3);
+      thread waitforfacesound(var_3);
     }
   } else {
     self playsoundatviewheight(var_1);
   }
-  if(!anim._id_0C3B) {
+  if(!anim.usefacialanims) {
     return;
   }
-  _id_0C3A();
+  initcharacterface();
 
   if(!isDefined(var_0) && !isDefined(var_1)) {
     if(isDefined(var_3)) {
       wait 0;
-      self._id_0C4C = "failed";
+      self.faceresult = "failed";
       self notify(var_3);
     }
   } else {
@@ -127,108 +127,108 @@ _id_0C49(var_0, var_1, var_2, var_3, var_4, var_5) {
       }
     }
 
-    if(var_2 <= self.a._id_0C3C && (isDefined(var_4) && var_4 == "wait")) {
-      var_6 = self._id_0C3F.size;
-      var_7 = self._id_0C40 + 1;
-      self._id_0C3F[var_6]["facialanim"] = var_0;
-      self._id_0C3F[var_6]["soundAlias"] = var_1;
-      self._id_0C3F[var_6]["importance"] = var_2;
-      self._id_0C3F[var_6]["notifyString"] = var_3;
-      self._id_0C3F[var_6]["waitOrNot"] = var_4;
-      self._id_0C3F[var_6]["timeToWait"] = var_5;
-      self._id_0C3F[var_6]["notifyNum"] = var_7;
-      thread _id_0C53("animscript face stop waiting " + self._id_0C3F[var_6]["notifyNum"], "Face done waiting", "Face done waiting");
+    if(var_2 <= self.a.currentdialogimportance && (isDefined(var_4) && var_4 == "wait")) {
+      var_6 = self.facewaiting.size;
+      var_7 = self.facelastnotifynum + 1;
+      self.facewaiting[var_6]["facialanim"] = var_0;
+      self.facewaiting[var_6]["soundAlias"] = var_1;
+      self.facewaiting[var_6]["importance"] = var_2;
+      self.facewaiting[var_6]["notifyString"] = var_3;
+      self.facewaiting[var_6]["waitOrNot"] = var_4;
+      self.facewaiting[var_6]["timeToWait"] = var_5;
+      self.facewaiting[var_6]["notifyNum"] = var_7;
+      thread playface_waitfornotify("animscript face stop waiting " + self.facewaiting[var_6]["notifyNum"], "Face done waiting", "Face done waiting");
 
       if(isDefined(var_5)) {
-        thread _id_0C54(var_5, "Face done waiting", "Face done waiting");
+        thread playface_waitfortime(var_5, "Face done waiting", "Face done waiting");
       }
       self waittill("Face done waiting");
       var_6 = undefined;
 
-      for(var_8 = 0; var_8 < self._id_0C3F.size; var_8++) {
-        if(self._id_0C3F[var_8]["notifyNum"] == var_7) {
+      for(var_8 = 0; var_8 < self.facewaiting.size; var_8++) {
+        if(self.facewaiting[var_8]["notifyNum"] == var_7) {
           var_6 = var_8;
           break;
         }
       }
 
-      if(self.a._id_0C4D == "notify") {
-        _id_0C49(self._id_0C3F[var_6]["facialanim"], self._id_0C3F[var_6]["soundAlias"], self._id_0C3F[var_6]["importance"], self._id_0C3F[var_6]["notifyString"]);
+      if(self.a.facewaitforresult == "notify") {
+        playfacethread(self.facewaiting[var_6]["facialanim"], self.facewaiting[var_6]["soundAlias"], self.facewaiting[var_6]["importance"], self.facewaiting[var_6]["notifyString"]);
       } else if(isDefined(var_3)) {
-        self._id_0C4C = "failed";
+        self.faceresult = "failed";
         self notify(var_3);
       }
 
-      for(var_8 = var_6 + 1; var_8 < self._id_0C3F.size; var_8++) {
-        self._id_0C3F[var_8 - 1]["facialanim"] = self._id_0C3F[var_8]["facialanim"];
-        self._id_0C3F[var_8 - 1]["soundAlias"] = self._id_0C3F[var_8]["soundAlias"];
-        self._id_0C3F[var_8 - 1]["importance"] = self._id_0C3F[var_8]["importance"];
-        self._id_0C3F[var_8 - 1]["notifyString"] = self._id_0C3F[var_8]["notifyString"];
-        self._id_0C3F[var_8 - 1]["waitOrNot"] = self._id_0C3F[var_8]["waitOrNot"];
-        self._id_0C3F[var_8 - 1]["timeToWait"] = self._id_0C3F[var_8]["timeToWait"];
-        self._id_0C3F[var_8 - 1]["notifyNum"] = self._id_0C3F[var_8]["notifyNum"];
+      for(var_8 = var_6 + 1; var_8 < self.facewaiting.size; var_8++) {
+        self.facewaiting[var_8 - 1]["facialanim"] = self.facewaiting[var_8]["facialanim"];
+        self.facewaiting[var_8 - 1]["soundAlias"] = self.facewaiting[var_8]["soundAlias"];
+        self.facewaiting[var_8 - 1]["importance"] = self.facewaiting[var_8]["importance"];
+        self.facewaiting[var_8 - 1]["notifyString"] = self.facewaiting[var_8]["notifyString"];
+        self.facewaiting[var_8 - 1]["waitOrNot"] = self.facewaiting[var_8]["waitOrNot"];
+        self.facewaiting[var_8 - 1]["timeToWait"] = self.facewaiting[var_8]["timeToWait"];
+        self.facewaiting[var_8 - 1]["notifyNum"] = self.facewaiting[var_8]["notifyNum"];
       }
 
-      self._id_0C3F[self._id_0C3F.size - 1] = undefined;
+      self.facewaiting[self.facewaiting.size - 1] = undefined;
     } else {
-      if(var_2 >= self.a._id_0C3C) {
+      if(var_2 >= self.a.currentdialogimportance) {
         self notify("end current face");
         self endon("end current face");
 
         if(isDefined(var_3)) {
-          if(isDefined(self.a._id_0C4E)) {
-            self._id_0C4C = "interrupted";
-            self notify(self.a._id_0C4E);
+          if(isDefined(self.a.currentdialognotifystring)) {
+            self.faceresult = "interrupted";
+            self notify(self.a.currentdialognotifystring);
           }
         }
 
-        self.a._id_0C3C = var_2;
-        self.a._id_0C4F = var_1;
-        self.a._id_0C4E = var_3;
-        self.a._id_0C4A = 1;
-        self.a._id_0C4B = 1;
+        self.a.currentdialogimportance = var_2;
+        self.a.currentdialogsound = var_1;
+        self.a.currentdialognotifystring = var_3;
+        self.a.facialanimdone = 1;
+        self.a.facialsounddone = 1;
 
         if(isDefined(var_0)) {
           self setflaggedanimknobrestart("animscript faceanim", var_0, 1, 0.1, 1);
-          self.a._id_0C4A = 0;
-          thread _id_0C50();
+          self.a.facialanimdone = 0;
+          thread waitforfacialanim();
         }
 
         if(isDefined(var_1)) {
           self playsoundatviewheight(var_1, "animscript facesound", 1);
-          self.a._id_0C4B = 0;
-          thread _id_0C52();
+          self.a.facialsounddone = 0;
+          thread waitforfacesound();
         }
 
-        while(!self.a._id_0C4A || !self.a._id_0C4B) {
+        while(!self.a.facialanimdone || !self.a.facialsounddone) {
           self waittill("animscript facedone");
         }
-        self.a._id_0C3C = 0;
-        self.a._id_0C4F = undefined;
-        self.a._id_0C4E = undefined;
+        self.a.currentdialogimportance = 0;
+        self.a.currentdialogsound = undefined;
+        self.a.currentdialognotifystring = undefined;
 
         if(isDefined(var_3)) {
-          self._id_0C4C = "finished";
+          self.faceresult = "finished";
           self notify(var_3);
         }
 
-        if(isDefined(self._id_0C3F) && self._id_0C3F.size > 0) {
+        if(isDefined(self.facewaiting) && self.facewaiting.size > 0) {
           var_9 = 0;
           var_10 = 1;
 
-          for(var_8 = 0; var_8 < self._id_0C3F.size; var_8++) {
-            if(self._id_0C3F[var_8]["importance"] > var_9) {
-              var_9 = self._id_0C3F[var_8]["importance"];
+          for(var_8 = 0; var_8 < self.facewaiting.size; var_8++) {
+            if(self.facewaiting[var_8]["importance"] > var_9) {
+              var_9 = self.facewaiting[var_8]["importance"];
               var_10 = var_8;
             }
           }
 
-          self notify("animscript face stop waiting " + self._id_0C3F[var_10]["notifyNum"]);
+          self notify("animscript face stop waiting " + self.facewaiting[var_10]["notifyNum"]);
           return;
         }
 
         if(isai(self)) {
-          _id_0C48();
+          playidleface();
           return;
         }
 
@@ -237,44 +237,44 @@ _id_0C49(var_0, var_1, var_2, var_3, var_4, var_5) {
       }
 
       if(isDefined(var_3)) {
-        self._id_0C4C = "failed";
+        self.faceresult = "failed";
         self notify(var_3);
       }
     }
   }
 }
 
-_id_0C50() {
+waitforfacialanim() {
   self endon("death");
   self endon("end current face");
-  animscripts\shared::_id_0C51("animscript faceanim");
-  self.a._id_0C4A = 1;
+  animscripts\shared::donotetracks("animscript faceanim");
+  self.a.facialanimdone = 1;
   self notify("animscript facedone");
 }
 
-_id_0C52(var_0) {
+waitforfacesound(var_0) {
   self endon("death");
   self waittill("animscript facesound" + var_0);
   self notify(var_0);
 }
 
-_id_0C53(var_0, var_1, var_2) {
+playface_waitfornotify(var_0, var_1, var_2) {
   self endon("death");
   self endon(var_2);
   self waittill(var_0);
-  self.a._id_0C4D = "notify";
+  self.a.facewaitforresult = "notify";
   self notify(var_1);
 }
 
-_id_0C54(var_0, var_1, var_2) {
+playface_waitfortime(var_0, var_1, var_2) {
   self endon("death");
   self endon(var_2);
   wait(var_0);
-  self.a._id_0C4D = "time";
+  self.a.facewaitforresult = "time";
   self notify(var_1);
 }
 
-_id_0C55() {
-  anim._id_0C42 = 8;
-  anim._id_0C43 = 8;
+initlevelface() {
+  anim.numfriendlyvoices = 8;
+  anim.numenemyvoices = 8;
 }

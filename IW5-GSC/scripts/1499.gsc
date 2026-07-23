@@ -5,11 +5,11 @@
 
 main() {
   self setModel("body_chemwar_russian_assault_dd");
-  codescripts\character::attachhead("alias_chemwar_russian_heads_so", _id_05D9::main());
+  codescripts\character::attachhead("alias_chemwar_russian_heads_so", xmodelalias/alias_chemwar_russian_heads_so::main());
   self.voice = "russian";
 }
 
 precache() {
   precachemodel("body_chemwar_russian_assault_dd");
-  codescripts\character::precachemodelarray(_id_05D9::main());
+  codescripts\character::precachemodelarray(xmodelalias/alias_chemwar_russian_heads_so::main());
 }

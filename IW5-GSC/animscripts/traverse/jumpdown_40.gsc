@@ -5,16 +5,16 @@
 
 main() {
   if(self.type == "dog") {
-    animscripts\traverse\shared::_id_3FF8(3, 1.0);
+    animscripts\traverse\shared::dog_jump_down(3, 1.0);
   } else {
-    _id_4003();
+    low_wall_human();
   }
 }
 
 #using_animtree("generic_human");
 
-_id_4003() {
+low_wall_human() {
   var_0 = [];
   var_0["traverseAnim"] = % traverse_jumpdown_40;
-  animscripts\traverse\shared::_id_3FEB(var_0);
+  animscripts\traverse\shared::dotraverse(var_0);
 }

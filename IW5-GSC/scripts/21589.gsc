@@ -4,11 +4,11 @@
 **************************************/
 
 main() {
-  maps\_stealth_visibility_system::_id_42E6();
-  _id_541B::_id_5419();
-  _id_0562::_id_42AB();
-  _id_541C::main();
-  level._id_1C4D["_autosave_stealthcheck"] = maps\_stealth_shared_utilities::_id_4212;
-  level._id_1C4D["_patrol_endon_spotted_flag"] = maps\_stealth_shared_utilities::_id_4214;
-  level._id_1C4D["_spawner_stealth_default"] = maps\_stealth_shared_utilities::_id_4217;
+  maps\_stealth_visibility_system::stealth_visibility_system_main();
+  maps/_stealth_behavior_system::stealth_behavior_system_main();
+  maps/_stealth_corpse_system::stealth_corpse_system_main();
+  maps/_stealth_anims::main();
+  level.global_callbacks["_autosave_stealthcheck"] = maps\_stealth_shared_utilities::_autosave_stealthcheck;
+  level.global_callbacks["_patrol_endon_spotted_flag"] = maps\_stealth_shared_utilities::_patrol_endon_spotted_flag;
+  level.global_callbacks["_spawner_stealth_default"] = maps\_stealth_shared_utilities::_spawner_stealth_default;
 }

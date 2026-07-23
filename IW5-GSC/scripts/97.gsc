@@ -17,7 +17,7 @@ init() {
   precacheshader("gradient_fadein");
   precacheshader("white");
   level.maxrank = int(tablelookup("sp/rankTable.csv", 0, "maxrank", 1));
-  level._id_01DA = int(tablelookup("sp/rankTable.csv", 0, level.maxrank, 7));
+  level.maxxp = int(tablelookup("sp/rankTable.csv", 0, level.maxrank, 7));
   var_0 = 0;
 
   for(var_0 = 0; var_0 <= level.maxrank; var_0++) {
@@ -34,38 +34,38 @@ init() {
     var_1++;
   }
 
-  maps\_missions::_id_12B5();
+  maps\_missions::buildchallengeinfo();
 }
 
-_id_12CC() {
-  _id_12D6();
+xp_init() {
+  xp_setup();
 
   foreach(var_1 in level.players) {
-    var_1 thread _id_12CD();
+    var_1 thread xp_player_init();
     var_1 thread maps\_missions::updatechallenges();
   }
 }
 
-_id_12CD() {
-  if(!isDefined(self._id_12CE)) {
-    self._id_12CE["rankxp"] = self getplayerdata("experience");
-    self._id_12CE["rank"] = getrankforxp(self._id_12CE["rankxp"]);
+xp_player_init() {
+  if(!isDefined(self.summary)) {
+    self.summary["rankxp"] = self getplayerdata("experience");
+    self.summary["rank"] = getrankforxp(self.summary["rankxp"]);
   }
 
   update_rank_into_profile();
-  self._id_12CF = 0;
-  self._id_12D0 = newclienthudelem(self);
-  self._id_12D0.horzalign = "center";
-  self._id_12D0.vertalign = "middle";
-  self._id_12D0.alignx = "center";
-  self._id_12D0.aligny = "middle";
-  self._id_12D0.x = 0;
-  self._id_12D0.y = -60;
-  self._id_12D0.font = "hudbig";
-  self._id_12D0.fontscale = 0.75;
-  self._id_12D0.archived = 0;
-  self._id_12D0.color = (0.75, 1, 0.75);
-  self._id_12D0 fontpulseinit();
+  self.rankupdatetotal = 0;
+  self.hud_rankscroreupdate = newclienthudelem(self);
+  self.hud_rankscroreupdate.horzalign = "center";
+  self.hud_rankscroreupdate.vertalign = "middle";
+  self.hud_rankscroreupdate.alignx = "center";
+  self.hud_rankscroreupdate.aligny = "middle";
+  self.hud_rankscroreupdate.x = 0;
+  self.hud_rankscroreupdate.y = -60;
+  self.hud_rankscroreupdate.font = "hudbig";
+  self.hud_rankscroreupdate.fontscale = 0.75;
+  self.hud_rankscroreupdate.archived = 0;
+  self.hud_rankscroreupdate.color = (0.75, 1, 0.75);
+  self.hud_rankscroreupdate fontpulseinit();
 }
 
 update_rank_into_profile() {
@@ -76,23 +76,23 @@ update_rank_into_profile() {
   self setlocalplayerprofiledata("percentCompleteSO", var_3);
 }
 
-_id_12D1(var_0) {
+xp_bar_client_elem(var_0) {
   var_1 = newclienthudelem(var_0);
-  var_1.x = _id_12D2() / 2 * -1;
+  var_1.x = hud_width_format() / 2 * -1;
   var_1.y = 0;
   var_1.sort = 5;
   var_1.horzalign = "center_adjustable";
   var_1.vertalign = "bottom_adjustable";
   var_1.alignx = "left";
   var_1.aligny = "bottom";
-  var_1 setshader("gradient_fadein", _id_12D5(), 4);
+  var_1 setshader("gradient_fadein", get_xpbarwidth(), 4);
   var_1.color = (1, 0.8, 0.4);
   var_1.alpha = 0.65;
   var_1.foreground = 1;
   return var_1;
 }
 
-_id_12D2() {
+hud_width_format() {
   if(issplitscreen()) {
     return 726;
   } else {
@@ -100,24 +100,24 @@ _id_12D2() {
   }
 }
 
-_id_12D3() {
-  if(!_id_12D5()) {
-    self._id_12D4.alpha = 0;
+xpbar_update() {
+  if(!get_xpbarwidth()) {
+    self.hud_xpbar.alpha = 0;
   } else {
-    self._id_12D4.alpha = 0.65;
+    self.hud_xpbar.alpha = 0.65;
   }
-  self._id_12D4 setshader("gradient_fadein", _id_12D5(), 4);
+  self.hud_xpbar setshader("gradient_fadein", get_xpbarwidth(), 4);
 }
 
-_id_12D5() {
-  var_0 = int(tablelookup("sp/rankTable.csv", 0, self._id_12CE["rank"], 3));
-  var_1 = int(self._id_12CE["rankxp"] - int(tablelookup("sp/rankTable.csv", 0, self._id_12CE["rank"], 2)));
-  var_2 = _id_12D2();
+get_xpbarwidth() {
+  var_0 = int(tablelookup("sp/rankTable.csv", 0, self.summary["rank"], 3));
+  var_1 = int(self.summary["rankxp"] - int(tablelookup("sp/rankTable.csv", 0, self.summary["rank"], 2)));
+  var_2 = hud_width_format();
   var_3 = int(var_2 * (var_1 / var_0));
   return var_3;
 }
 
-_id_12D6() {
+xp_setup() {
   if(!isDefined(level.scoreinfo) || !isDefined(level.scoreinfo.size)) {
     level.scoreinfo = [];
   }
@@ -135,48 +135,48 @@ _id_12D6() {
   level notify("rank_score_info_defaults_set");
 }
 
-_id_12D9() {
+givexp_think() {
   self waittill("death", var_0, var_1, var_2);
 
-  if(isDefined(var_0) && isDefined(var_0.classname) && var_0.classname == "worldspawn" && isDefined(self._id_0D7A)) {
-    var_0 = self._id_0D7A;
+  if(isDefined(var_0) && isDefined(var_0.classname) && var_0.classname == "worldspawn" && isDefined(self.last_dmg_player)) {
+    var_0 = self.last_dmg_player;
   }
-  _id_12DA(var_0);
+  givexp_helper(var_0);
 }
 
-_id_12DA(var_0) {
+givexp_helper(var_0) {
   if(!isDefined(var_0)) {
     return;
   }
   if(isai(var_0) && var_0 isbadguy()) {
     return;
   }
-  if(_id_12DF(var_0)) {
+  if(is_special_targetname_attacker(var_0)) {
     if(isDefined(var_0.attacker)) {
-      thread _id_12DA(var_0.attacker);
+      thread givexp_helper(var_0.attacker);
       return;
     }
 
     if(isDefined(var_0.damageowner)) {
-      thread _id_12DA(var_0.damageowner);
+      thread givexp_helper(var_0.damageowner);
       return;
     }
   }
 
   if(isPlayer(var_0)) {
-    if(isDefined(level._id_12DB)) {
-      var_0 thread[[level._id_12DB]](self);
+    if(isDefined(level.givexp_kill_func)) {
+      var_0 thread[[level.givexp_kill_func]](self);
     } else {
-      var_0 thread maps\_utility::_id_12BE("kill");
+      var_0 thread maps\_utility::givexp("kill");
     }
   }
 
-  if(maps\_utility::_id_12DC()) {
+  if(maps\_utility::is_survival()) {
     if(isai(var_0) && !var_0 isbadguy() && isDefined(var_0.owner) && isPlayer(var_0.owner)) {
-      if(isDefined(level._id_12DB)) {
-        var_0.owner thread[[level._id_12DB]](self);
+      if(isDefined(level.givexp_kill_func)) {
+        var_0.owner thread[[level.givexp_kill_func]](self);
       } else {
-        var_0.owner thread maps\_utility::_id_12BE("kill");
+        var_0.owner thread maps\_utility::givexp("kill");
       }
     }
   }
@@ -184,21 +184,21 @@ _id_12DA(var_0) {
   if(!isPlayer(var_0) && !isai(var_0)) {
     return;
   }
-  if(!var_0 isbadguy() && isDefined(self._id_12DD) && self._id_12DD.size) {
-    for(var_1 = 0; var_1 < self._id_12DD.size; var_1++) {
-      if(isPlayer(self._id_12DD[var_1]) && self._id_12DD[var_1] != var_0) {
-        if(isDefined(self._id_12DE)) {
-          self._id_12DD[var_1] thread maps\_utility::_id_12BE("assist", self._id_12DE);
+  if(!var_0 isbadguy() && isDefined(self.attacker_list) && self.attacker_list.size) {
+    for(var_1 = 0; var_1 < self.attacker_list.size; var_1++) {
+      if(isPlayer(self.attacker_list[var_1]) && self.attacker_list[var_1] != var_0) {
+        if(isDefined(self.kill_assist_xp)) {
+          self.attacker_list[var_1] thread maps\_utility::givexp("assist", self.kill_assist_xp);
           continue;
         }
 
-        self._id_12DD[var_1] thread maps\_utility::_id_12BE("assist");
+        self.attacker_list[var_1] thread maps\_utility::givexp("assist");
       }
     }
   }
 }
 
-_id_12DF(var_0) {
+is_special_targetname_attacker(var_0) {
   if(!isDefined(var_0.targetname)) {
     return 0;
   }
@@ -211,14 +211,14 @@ _id_12DF(var_0) {
   return 0;
 }
 
-_id_12E0() {
-  thread _id_12D9();
-  self._id_12DD = [];
-  self._id_12E1 = 0;
-  maps\_utility::_id_12E2(::_id_12E3);
+ai_xp_init() {
+  thread givexp_think();
+  self.attacker_list = [];
+  self.last_attacked = 0;
+  maps\_utility::add_damage_function(::xp_took_damage);
 }
 
-_id_12E3(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+xp_took_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isDefined(var_1)) {
     return;
   }
@@ -226,22 +226,22 @@ _id_12E3(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     return;
   }
   var_7 = gettime();
-  var_8 = var_7 - self._id_12E1;
+  var_8 = var_7 - self.last_attacked;
 
   if(var_8 <= 10000) {
-    self._id_12DD = common_scripts\utility::array_remove(self._id_12DD, var_1);
-    self._id_12DD[self._id_12DD.size] = var_1;
-    self._id_12E1 = gettime();
+    self.attacker_list = common_scripts\utility::array_remove(self.attacker_list, var_1);
+    self.attacker_list[self.attacker_list.size] = var_1;
+    self.last_attacked = gettime();
     return;
   }
 
-  self._id_12DD = [];
-  self._id_12DD[0] = var_1;
-  self._id_12E1 = gettime();
+  self.attacker_list = [];
+  self.attacker_list[0] = var_1;
+  self.last_attacked = gettime();
 }
 
-_id_12E4(var_0, var_1) {
-  if(!isDefined(level._id_12E5) || !level._id_12E5) {
+updateplayerscore(var_0, var_1) {
+  if(!isDefined(level.xp_enable) || !level.xp_enable) {
     return;
   }
   if(!isDefined(var_1)) {
@@ -260,44 +260,44 @@ _id_12E4(var_0, var_1) {
     }
   }
 
-  thread _id_12E6(var_1);
-  self._id_12CE["rankxp"] = self._id_12CE["rankxp"] + var_1;
+  thread print_score_increment(var_1);
+  self.summary["rankxp"] = self.summary["rankxp"] + var_1;
 
   if(updaterank()) {
     thread updaterankannouncehud();
     update_rank_into_profile();
   }
 
-  if(self._id_12CE["rankxp"] <= level._id_01DA) {
-    self setplayerdata("experience", self._id_12CE["rankxp"]);
+  if(self.summary["rankxp"] <= level.maxxp) {
+    self setplayerdata("experience", self.summary["rankxp"]);
   }
-  if(self._id_12CE["rankxp"] > level._id_01DA) {
-    self setplayerdata("experience", level._id_01DA);
+  if(self.summary["rankxp"] > level.maxxp) {
+    self setplayerdata("experience", level.maxxp);
   }
   waittillframeend;
   self notify("xp_updated", var_0);
 }
 
-_id_12E6(var_0) {
+print_score_increment(var_0) {
   self notify("update_xp");
   self endon("update_xp");
-  self._id_12CF = self._id_12CF + var_0;
-  self._id_12D0.label = &"SCRIPT_PLUS";
-  self._id_12D0 setvalue(self._id_12CF);
-  self._id_12D0.alpha = 0.75;
-  self._id_12D0 thread fontpulse(self);
-  self._id_12D0.x = 0;
-  self._id_12D0.y = -60;
+  self.rankupdatetotal = self.rankupdatetotal + var_0;
+  self.hud_rankscroreupdate.label = &"SCRIPT_PLUS";
+  self.hud_rankscroreupdate setvalue(self.rankupdatetotal);
+  self.hud_rankscroreupdate.alpha = 0.75;
+  self.hud_rankscroreupdate thread fontpulse(self);
+  self.hud_rankscroreupdate.x = 0;
+  self.hud_rankscroreupdate.y = -60;
   wait 1;
-  self._id_12D0 fadeovertime(0.2);
-  self._id_12D0.alpha = 0;
-  self._id_12D0 moveovertime(0.2);
-  self._id_12D0.x = -240;
-  self._id_12D0.y = 160;
+  self.hud_rankscroreupdate fadeovertime(0.2);
+  self.hud_rankscroreupdate.alpha = 0;
+  self.hud_rankscroreupdate moveovertime(0.2);
+  self.hud_rankscroreupdate.x = -240;
+  self.hud_rankscroreupdate.y = 160;
   wait 0.5;
-  self._id_12D0.x = 0;
-  self._id_12D0.y = -60;
-  self._id_12CF = 0;
+  self.hud_rankscroreupdate.x = 0;
+  self.hud_rankscroreupdate.y = -60;
+  self.rankupdatetotal = 0;
 }
 
 fontpulseinit() {
@@ -326,14 +326,14 @@ fontpulse(var_0) {
 updaterank() {
   var_0 = getrank();
 
-  if(var_0 == self._id_12CE["rank"]) {
+  if(var_0 == self.summary["rank"]) {
     return 0;
   }
-  var_1 = self._id_12CE["rank"];
-  var_2 = self._id_12CE["rank"];
+  var_1 = self.summary["rank"];
+  var_2 = self.summary["rank"];
 
-  for(self._id_12CE["rank"] = var_0; var_2 <= var_0; var_2++) {
-    self._id_12EE = 1;
+  for(self.summary["rank"] = var_0; var_2 <= var_0; var_2++) {
+    self.setpromotion = 1;
   }
   return 1;
 }
@@ -343,18 +343,18 @@ updaterankannouncehud() {
   self notify("update_rank");
   self endon("update_rank");
   self notify("reset_outcome");
-  var_0 = getrankinfofull(self._id_12CE["rank"]);
+  var_0 = getrankinfofull(self.summary["rank"]);
   var_1 = spawnStruct();
   var_1.titletext = &"RANK_PROMOTED";
-  var_1.iconname = getrankinfoicon(self._id_12CE["rank"]);
+  var_1.iconname = getrankinfoicon(self.summary["rank"]);
   var_1.sound = "sp_level_up";
   var_1.duration = 4.0;
-  var_2 = level.ranktable[self._id_12CE["rank"]][1];
+  var_2 = level.ranktable[self.summary["rank"]][1];
   var_3 = int(var_2[var_2.size - 1]);
   var_1.notifytext = var_0;
 
   if(common_scripts\utility::flag_exist("special_op_final_xp_given") && common_scripts\utility::flag("special_op_final_xp_given")) {
-    level._id_12F5 = int(max(0, var_1.duration - 2));
+    level.eog_summary_delay = int(max(0, var_1.duration - 2));
   }
   thread notifymessage(var_1);
 
@@ -368,7 +368,7 @@ notifymessage(var_0) {
   self endon("disconnect");
   var_1 = 4;
 
-  while(self._id_12C6 && var_1 > 0) {
+  while(self.doingnotify && var_1 > 0) {
     var_1 = var_1 - 0.5;
     wait 0.5;
   }
@@ -472,7 +472,7 @@ actionnotify(var_0) {
 
 shownotifymessage(var_0) {
   self endon("disconnect");
-  self._id_12C6 = 1;
+  self.doingnotify = 1;
   waitrequirevisibility(0);
 
   if(isDefined(var_0.duration)) {
@@ -514,7 +514,7 @@ shownotifymessage(var_0) {
     } else {
       self.notifytext.label = &"";
     }
-    if(isDefined(var_0.textlabel) && !isDefined(var_0._id_12F4)) {
+    if(isDefined(var_0.textlabel) && !isDefined(var_0.textisstring)) {
       self.notifytext setvalue(var_0.notifytext);
     } else {
       self.notifytext settext(var_0.notifytext);
@@ -553,7 +553,7 @@ shownotifymessage(var_0) {
     waitrequirevisibility(var_1);
   }
   self notify("notifyMessageDone");
-  self._id_12C6 = 0;
+  self.doingnotify = 0;
 }
 
 resetoncancel() {
@@ -565,7 +565,7 @@ resetoncancel() {
   self.notifytitle.alpha = 0;
   self.notifytext.alpha = 0;
   self.notifyicon.alpha = 0;
-  self._id_12C6 = 0;
+  self.doingnotify = 0;
 }
 
 waitrequirevisibility(var_0) {
@@ -638,8 +638,8 @@ getrankinfoicon(var_0) {
 }
 
 getrank() {
-  var_0 = self._id_12CE["rankxp"];
-  var_1 = self._id_12CE["rank"];
+  var_0 = self.summary["rankxp"];
+  var_1 = self.summary["rank"];
 
   if(var_0 < getrankinfominxp(var_1) + getrankinfoxpamt(var_1)) {
     return var_1;

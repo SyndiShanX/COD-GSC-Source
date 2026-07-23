@@ -3,32 +3,32 @@
  * Script: scripts\maps\hijack_tarmac.gsc
 ******************************************/
 
-_id_59D6() {
-  level._id_58D2 = maps\hijack_code::_id_594A("commander_tarmac");
+start_tarmac() {
+  level.commander = maps\hijack_code::spawn_ally("commander_tarmac");
   waittillframeend;
   var_0 = getnode("commander_pre_ramp_node", "targetname");
-  level._id_58D2 maps\_utility::_id_27A1(var_0);
+  level.commander maps\_utility::teleport_ai(var_0);
   var_1 = common_scripts\utility::getStruct("player_start_tarmac", "targetname");
   level.player setOrigin(var_1.origin);
   level.player setplayerangles(var_1.angles);
-  maps\hijack_crash::_id_59D7();
+  maps\hijack_crash::remove_all_weapons_post_crash();
   maps\_compass::setupminimap("compass_map_hijack_tarmac", "tarmac_minimap_corner");
   setsaveddvar("compassmaxrange", 3500);
-  thread _id_5A04();
+  thread tarmac_carnage();
   maps\_audio::aud_send_msg("start_tarmac");
   common_scripts\utility::flag_set("stop_managing_crash_player");
   common_scripts\utility::flag_set("player_on_feet_post_crash");
   common_scripts\utility::flag_set("commander_finished_wake_up_anim");
-  thread _id_599A();
+  thread main_script_thread();
   var_2 = common_scripts\utility::getStruct("agent_helps_player_origin", "targetname");
-  thread maps\hijack_crash::_id_59D8();
+  thread maps\hijack_crash::animated_telephone();
 }
 
-_id_59D9(var_0, var_1) {
+commander_lookat(var_0, var_1) {
   self endon("death");
 
   for(;;) {
-    var_2 = distance(self.origin, level._id_58D2.origin);
+    var_2 = distance(self.origin, level.commander.origin);
 
     if(var_2 < var_0) {
       break;
@@ -37,22 +37,22 @@ _id_59D9(var_0, var_1) {
     wait 0.1;
   }
 
-  level._id_58D2 setlookatentity(self);
+  level.commander setlookatentity(self);
   level notify("commander_looks_at_something");
   level endon("commander_looks_at_something");
   wait(var_1);
-  level._id_58D2 setlookatentity();
+  level.commander setlookatentity();
 }
 
-_id_59DA() {
-  level._id_58D2 = maps\hijack_code::_id_594A("commander_tarmac");
+start_tarmac_2() {
+  level.commander = maps\hijack_code::spawn_ally("commander_tarmac");
   waittillframeend;
   var_0 = common_scripts\utility::getStruct("player_start_tarmac_2", "targetname");
   level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
   maps\_compass::setupminimap("compass_map_hijack_tarmac", "tarmac_minimap_corner");
   setsaveddvar("compassmaxrange", 3500);
-  thread _id_5A04();
+  thread tarmac_carnage();
   maps\_audio::aud_send_msg("start_tarmac_2");
   common_scripts\utility::flag_set("stop_managing_crash_player");
   common_scripts\utility::flag_set("player_on_feet_post_crash");
@@ -65,14 +65,14 @@ _id_59DA() {
   common_scripts\utility::flag_set("move_commander_to_flare_node");
   common_scripts\utility::flag_set("start_flare_event");
   common_scripts\utility::flag_set("fx_crash_trench_fire");
-  thread _id_599A();
+  thread main_script_thread();
   common_scripts\utility::flag_set("commander_finished_wake_up_anim");
-  level._id_59DB = 0.6;
+  level.tarmac_player_move_speed = 0.6;
   waittillframeend;
   level notify("start_commander_wake_up_anim");
 }
 
-_id_59DC() {
+tarmac_init_flags() {
   common_scripts\utility::flag_init("player_on_feet_post_crash");
   common_scripts\utility::flag_init("commander_started_ramp_anim");
   common_scripts\utility::flag_init("commander_reached_flare_node");
@@ -89,7 +89,7 @@ _id_59DC() {
   common_scripts\utility::flag_init("heli_landed");
 }
 
-_id_59DD() {
+tarmac_init_assets() {
   precachemodel("vehicle_mi17_woodland_landing_door");
   precachemodel("vehicle_mi17_woodland_landing_door_obj");
   precachemodel("com_blackhawk_spotlight_on_mg_setup");
@@ -98,131 +98,131 @@ _id_59DD() {
   precachemodel("hjk_seat_cover_sml");
 }
 
-_id_59DE() {
+tarmac_objectives() {
   common_scripts\utility::flag_wait("player_on_feet_post_crash");
-  objective_add(maps\_utility::_id_2816("follow_commander"), "current", &"HIJACK_OBJ_COMMANDER", level._id_58D2.origin);
-  objective_onentity(maps\_utility::_id_2816("follow_commander"), level._id_58D2, (0, 0, 70));
+  objective_add(maps\_utility::obj("follow_commander"), "current", &"HIJACK_OBJ_COMMANDER", level.commander.origin);
+  objective_onentity(maps\_utility::obj("follow_commander"), level.commander, (0, 0, 70));
   common_scripts\utility::flag_wait("player_entered_end_area");
-  maps\_utility::_id_2727(maps\_utility::_id_2816("follow_commander"));
+  maps\_utility::objective_complete(maps\_utility::obj("follow_commander"));
   var_0 = common_scripts\utility::getStruct("find_pres_obj", "targetname");
-  objective_add(maps\_utility::_id_2816("find_president"), "current", &"HIJACK_OBJ_PRESIDENT_END", var_0.origin);
+  objective_add(maps\_utility::obj("find_president"), "current", &"HIJACK_OBJ_PRESIDENT_END", var_0.origin);
   common_scripts\utility::flag_wait_or_timeout("player_near_pres", 15);
-  objective_position(maps\_utility::_id_2816("find_president"), (0, 0, 0));
+  objective_position(maps\_utility::obj("find_president"), (0, 0, 0));
   common_scripts\utility::flag_wait_all("guys_ready_for_door", "heli_landed");
-  objective_position(maps\_utility::_id_2816("find_president"), level._id_5943 gettagorigin("tag_handle_objective") + (0, 0, -1));
+  objective_position(maps\_utility::obj("find_president"), level.makarov_heli gettagorigin("tag_handle_objective") + (0, 0, -1));
   level waittill("door_used");
-  objective_state(maps\_utility::_id_2816("find_president"), "failed");
+  objective_state(maps\_utility::obj("find_president"), "failed");
 }
 
-_id_59DF() {
+exit_plane_scene() {
   var_0 = common_scripts\utility::getStruct("post_crash_scene_origin", "targetname");
-  var_1 = maps\_utility::_id_272F("postcrash_agent1", 1);
-  var_1._id_1032 = "plane_exit_agent1";
-  var_1 maps\_utility::_id_24F5();
-  var_2 = maps\_utility::_id_272F("postcrash_agent2", 1);
-  var_2._id_1032 = "plane_exit_agent2";
-  level._id_59E0 = maps\_utility::_id_272F("daughter_tarmac");
-  level._id_59E0 maps\hijack::_id_59E1();
-  var_3 = maps\_utility::_id_1287("daughter_blanket");
+  var_1 = maps\_utility::spawn_targetname("postcrash_agent1", 1);
+  var_1.animname = "plane_exit_agent1";
+  var_1 maps\_utility::gun_remove();
+  var_2 = maps\_utility::spawn_targetname("postcrash_agent2", 1);
+  var_2.animname = "plane_exit_agent2";
+  level.daughter = maps\_utility::spawn_targetname("daughter_tarmac");
+  level.daughter maps\hijack::setup_daughter();
+  var_3 = maps\_utility::spawn_anim_model("daughter_blanket");
   var_3 startusingheroonlylighting();
-  var_0 thread maps\_anim::_id_11CF(var_1, "secure_daughter");
-  var_0 thread maps\_anim::_id_11CF(var_2, "secure_daughter");
-  var_0 thread maps\_anim::_id_11CF(level._id_59E0, "secure_daughter");
-  var_0 thread maps\_anim::_id_11CF(var_3, "secure_daughter");
+  var_0 thread maps\_anim::anim_first_frame_solo(var_1, "secure_daughter");
+  var_0 thread maps\_anim::anim_first_frame_solo(var_2, "secure_daughter");
+  var_0 thread maps\_anim::anim_first_frame_solo(level.daughter, "secure_daughter");
+  var_0 thread maps\_anim::anim_first_frame_solo(var_3, "secure_daughter");
 
-  if(level._id_1F19 != "tarmac") {
+  if(level.start_point != "tarmac") {
     level waittill("start_commander_wake_up_anim");
   }
   var_4 = getEnt("crashed_plane_engine", "targetname");
-  var_4._id_1032 = "engine";
-  var_4 maps\_anim::_id_1244();
-  var_4 thread maps\_anim::_id_1246(var_4, "engine_spin_slow");
+  var_4.animname = "engine";
+  var_4 maps\_anim::setanimtree();
+  var_4 thread maps\_anim::anim_single_solo(var_4, "engine_spin_slow");
   common_scripts\utility::flag_wait("commander_finished_wake_up_anim");
 
-  if(level._id_1F19 != "tarmac_2") {
-    var_0 thread maps\_anim::_id_124E(level._id_58D2, "exit_top_idle", "stop_top_loop");
+  if(level.start_point != "tarmac_2") {
+    var_0 thread maps\_anim::anim_loop_solo(level.commander, "exit_top_idle", "stop_top_loop");
   }
   common_scripts\utility::flag_wait_any("player_exit_plane_1", "start_commander_ramp_anim");
   common_scripts\utility::flag_set("commander_started_ramp_anim");
   var_0 notify("stop_top_loop");
 
-  if(level._id_1F19 != "tarmac_2") {
-    level._id_58D2._id_240A = "metal";
-    var_0 maps\_anim::_id_1246(level._id_58D2, "exit_down_ramp");
-    var_0 thread maps\_anim::_id_124E(level._id_58D2, "exit_bottom_idle", "stop_bottom_loop");
+  if(level.start_point != "tarmac_2") {
+    level.commander.lastgroundtype = "metal";
+    var_0 maps\_anim::anim_single_solo(level.commander, "exit_down_ramp");
+    var_0 thread maps\_anim::anim_loop_solo(level.commander, "exit_bottom_idle", "stop_bottom_loop");
   }
 
   common_scripts\utility::flag_wait("player_exit_plane_3");
   var_0 notify("stop_bottom_loop");
   var_5 = getEnt("engine_outside", "targetname");
-  var_5._id_1032 = "engine";
-  var_5 maps\_anim::_id_1244();
-  var_5 thread maps\_anim::_id_1246(var_5, "engine_spin_slow");
-  var_1._id_240A = "snow";
-  var_2._id_240A = "snow";
-  level._id_59E0._id_240A = "snow";
-  var_1 thread _id_5A0B(var_0, "secure_daughter", "secure_daughter_loop");
-  var_2 thread _id_5A0B(var_0, "secure_daughter", "secure_daughter_loop");
-  level._id_59E0 thread _id_5A0B(var_0, "secure_daughter", "secure_daughter_loop");
-  var_3 thread _id_5A0B(var_0, "secure_daughter", "secure_daughter_loop");
+  var_5.animname = "engine";
+  var_5 maps\_anim::setanimtree();
+  var_5 thread maps\_anim::anim_single_solo(var_5, "engine_spin_slow");
+  var_1.lastgroundtype = "snow";
+  var_2.lastgroundtype = "snow";
+  level.daughter.lastgroundtype = "snow";
+  var_1 thread play_anim_and_loop(var_0, "secure_daughter", "secure_daughter_loop");
+  var_2 thread play_anim_and_loop(var_0, "secure_daughter", "secure_daughter_loop");
+  level.daughter thread play_anim_and_loop(var_0, "secure_daughter", "secure_daughter_loop");
+  var_3 thread play_anim_and_loop(var_0, "secure_daughter", "secure_daughter_loop");
 
-  if(level._id_1F19 != "tarmac_2") {
-    thread _id_59E2(var_1, var_2);
-    level._id_58D2._id_240A = "snow";
-    var_0 maps\_anim::_id_1246(level._id_58D2, "secure_daughter");
-    thread _id_59ED();
+  if(level.start_point != "tarmac_2") {
+    thread agent_secure_daughter_vo(var_1, var_2);
+    level.commander.lastgroundtype = "snow";
+    var_0 maps\_anim::anim_single_solo(level.commander, "secure_daughter");
+    thread tarmac_commander_vo();
   }
 
-  level._id_58D2 maps\_utility::_id_109E();
-  level._id_58D2.ignoreall = 0;
-  level._id_58D2._id_59C3 = 0;
-  level._id_58D2 thread _id_59E9();
+  level.commander maps\_utility::disable_cqbwalk();
+  level.commander.ignoreall = 0;
+  level.commander.notarget = 0;
+  level.commander thread commander_tarmac_moves();
   common_scripts\utility::flag_wait("entered_post_tarmac_area");
   var_1 delete();
   var_2 delete();
-  level._id_59E0 maps\_utility::_id_1902();
-  level._id_59E0 delete();
+  level.daughter maps\_utility::stop_magic_bullet_shield();
+  level.daughter delete();
   common_scripts\utility::flag_set("commander_ready_for_heli");
 }
 
-_id_59E2(var_0, var_1) {
+agent_secure_daughter_vo(var_0, var_1) {
   wait 0.5;
-  var_0 maps\_utility::_id_168C("hijack_fso1_howdidthey");
+  var_0 maps\_utility::dialogue_queue("hijack_fso1_howdidthey");
   wait 0.5;
-  var_1 maps\_utility::_id_168C("hijack_fso2_theyknew2");
+  var_1 maps\_utility::dialogue_queue("hijack_fso2_theyknew2");
 }
 
-_id_59E3() {
+commander_keep_up_with_player() {
   level endon("entered_post_tarmac_area");
   level endon("stop_monitoring_commander_speed");
   wait 0.2;
 
   for(;;) {
-    var_0 = _id_59E5();
+    var_0 = distance_commander_to_player();
 
     if(var_0 > 120) {
-      if(level._id_58D2 _id_59E6()) {
+      if(level.commander needs_to_catch_up()) {
         if(var_0 > 240) {
-          level._id_58D2._id_0FC6 = level._id_59E4 + 0.27;
+          level.commander.moveplaybackrate = level.commander_base_move_speed + 0.27;
         } else {
-          level._id_58D2._id_0FC6 = level._id_59E4 + 0.16;
+          level.commander.moveplaybackrate = level.commander_base_move_speed + 0.16;
         }
       }
     } else {
-      level._id_58D2._id_0FC6 = level._id_59E4;
-      _id_59C4(level._id_59DB);
+      level.commander.moveplaybackrate = level.commander_base_move_speed;
+      set_player_move_and_jump_speed(level.tarmac_player_move_speed);
     }
 
     wait 1.0;
   }
 }
 
-_id_59E5() {
-  var_0 = level.player.origin - level._id_58D2.origin;
+distance_commander_to_player() {
+  var_0 = level.player.origin - level.commander.origin;
   return length(var_0);
 }
 
-_id_59E6() {
+needs_to_catch_up() {
   var_0 = level.player.origin - self.origin;
   var_0 = vectorNormalize(var_0);
   var_1 = vectorNormalize(self.goalpos - self.origin);
@@ -234,26 +234,26 @@ _id_59E6() {
   return 1;
 }
 
-_id_59E7() {
+commander_nag_if_stopped() {
   for(;;) {
-    if(_id_59E8() == 0) {
+    if(commander_velocity() == 0) {
       var_0 = 1;
       var_1 = 5 + randomint(2);
 
       for(var_2 = 0; var_2 < var_1 && var_0; var_2++) {
         wait 2;
-        var_0 = _id_59E8() == 0;
+        var_0 = commander_velocity() == 0;
       }
 
       if(var_0) {
         var_3 = randomint(3);
 
         if(var_3 == 0) {
-          level._id_58D2 maps\_utility::_id_168C("hijack_cmd_keepmoving2");
+          level.commander maps\_utility::dialogue_queue("hijack_cmd_keepmoving2");
         } else if(var_3 == 1) {
-          level._id_58D2 maps\_utility::_id_168C("hijack_cmd_comeon");
+          level.commander maps\_utility::dialogue_queue("hijack_cmd_comeon");
         } else if(var_3 == 2) {
-          level._id_58D2 maps\_utility::_id_168C("hijack_cmd_letsgo");
+          level.commander maps\_utility::dialogue_queue("hijack_cmd_letsgo");
         }
       }
     }
@@ -262,146 +262,146 @@ _id_59E7() {
   }
 }
 
-_id_59E8() {
-  var_0 = level._id_58D2.origin;
+commander_velocity() {
+  var_0 = level.commander.origin;
   wait 0.05;
-  var_1 = level._id_58D2.origin;
+  var_1 = level.commander.origin;
   var_2 = distance(var_0, var_1);
   return var_2;
 }
 
-_id_59E9() {
+commander_tarmac_moves() {
   level endon("entered_post_tarmac_area");
-  level._id_59E4 = 1.1;
-  level._id_58D2._id_0FC6 = level._id_59E4;
-  level._id_58D2 maps\_utility::_id_26F7("injured_run");
-  thread _id_59E3();
-  childthread _id_59E7();
+  level.commander_base_move_speed = 1.1;
+  level.commander.moveplaybackrate = level.commander_base_move_speed;
+  level.commander maps\_utility::set_run_anim("injured_run");
+  thread commander_keep_up_with_player();
+  childthread commander_nag_if_stopped();
   var_0 = getnode("commander_tarmac_node_1", "targetname");
-  thread _id_59EA(var_0);
+  thread set_goal_and_idle(var_0);
   common_scripts\utility::flag_wait("move_commander_to_flare_node");
   self notify("stop_relaxed_idle");
-  maps\_utility::_id_1414();
-  _id_59EB();
+  maps\_utility::anim_stopanimscripted();
+  tarmac_flare_event();
   var_1 = getnode("commander_tarmac_node_3", "targetname");
-  thread _id_59EA(var_1);
+  thread set_goal_and_idle(var_1);
   common_scripts\utility::flag_wait_all("commander_finished_engine_react_anim");
   var_2 = common_scripts\utility::getStruct("post_crash_scene_origin", "targetname");
   self notify("stop_relaxed_idle");
-  maps\_utility::_id_1414();
-  var_2 maps\_anim::_id_124A(level._id_58D2, "heli_wave");
-  level._id_58D2 thread maps\_anim::_id_124E(level._id_58D2, "heli_wait");
+  maps\_utility::anim_stopanimscripted();
+  var_2 maps\_anim::anim_reach_solo(level.commander, "heli_wave");
+  level.commander thread maps\_anim::anim_loop_solo(level.commander, "heli_wait");
   common_scripts\utility::flag_set("commander_ready_for_heli");
-  level._id_5943 maps\_utility::_id_1654("start_commander_anim");
-  level._id_58D2 notify("stop_loop");
-  var_2 maps\_anim::_id_1246(level._id_58D2, "heli_wave");
+  level.makarov_heli maps\_utility::ent_flag_wait("start_commander_anim");
+  level.commander notify("stop_loop");
+  var_2 maps\_anim::anim_single_solo(level.commander, "heli_wave");
   var_3 = getnode("commander_tarmac_node_4", "targetname");
-  thread _id_59EA(var_3);
+  thread set_goal_and_idle(var_3);
   self notify("stop_relaxed_idle");
   var_4 = getnode("commander_tarmac_node_5", "targetname");
   self setgoalnode(var_4);
   level waittill("commander_react_to_combat");
   level notify("stop_monitoring_commander_speed");
-  animscripts\animset::_id_0C87();
-  maps\_utility::_id_140C();
-  maps\_utility::_id_26FC();
-  self._id_0FC6 = 1.0;
+  animscripts\animset::clear_custom_animset();
+  maps\_utility::clear_run_anim();
+  maps\_utility::clear_generic_idle_anim();
+  self.moveplaybackrate = 1.0;
 }
 
-_id_59EA(var_0) {
+set_goal_and_idle(var_0) {
   self notify("stop_relaxed_idle");
-  maps\_utility::_id_1414();
+  maps\_utility::anim_stopanimscripted();
   self setgoalnode(var_0);
-  self._id_117F = 1;
+  self.disablearrivals = 1;
   self.goalradius = 16;
   self endon("stop_relaxed_idle");
-  maps\_utility::_id_26FC();
+  maps\_utility::clear_generic_idle_anim();
   self waittill("goal");
   waittillframeend;
-  maps\_anim::_id_124E(self, "relaxed_idle", "stop_relaxed_idle");
+  maps\_anim::anim_loop_solo(self, "relaxed_idle", "stop_relaxed_idle");
 }
 
-_id_59EB() {
-  thread _id_59EC();
+tarmac_flare_event() {
+  thread commander_wait_for_trigger();
   var_0 = common_scripts\utility::getStruct("post_crash_scene_origin", "targetname");
-  var_0 maps\_anim::_id_124A(level._id_58D2, "flare_reaction");
-  level._id_58D2 thread maps\_anim::_id_124E(level._id_58D2, "relaxed_idle");
+  var_0 maps\_anim::anim_reach_solo(level.commander, "flare_reaction");
+  level.commander thread maps\_anim::anim_loop_solo(level.commander, "relaxed_idle");
   common_scripts\utility::flag_wait("start_flare_event");
 
   if(!common_scripts\utility::flag("commander_finished_engine_react_anim")) {
     maps\_audio::aud_send_msg("flare_gun");
-    level._id_58D2 notify("stop_loop");
-    level._id_58D2._id_240A = "snow";
+    level.commander notify("stop_loop");
+    level.commander.lastgroundtype = "snow";
     common_scripts\utility::flag_set("commander_started_flare_anim");
-    var_0 thread maps\_anim::_id_1246(level._id_58D2, "flare_reaction");
-    thread maps\_flare::_id_409C("tarmac_flare");
-    level._id_58D2 waittillmatch("single anim", "end");
+    var_0 thread maps\_anim::anim_single_solo(level.commander, "flare_reaction");
+    thread maps\_flare::flare_from_targetname("tarmac_flare");
+    level.commander waittillmatch("single anim", "end");
     common_scripts\utility::flag_set("commander_finished_flare_anim");
   }
 }
 
-_id_59EC() {
+commander_wait_for_trigger() {
   var_0 = getEnt("commander_flare_vo_trigger", "targetname");
   var_0 waittill("trigger");
 
   if(!common_scripts\utility::flag("start_engine_explosion")) {
-    level.player maps\_utility::_id_11F4("hijack_fso4_sendingflare");
+    level.player maps\_utility::radio_dialogue("hijack_fso4_sendingflare");
   }
 }
 
-_id_59ED() {
+tarmac_commander_vo() {
   wait 1.8;
-  level._id_58D2 maps\_utility::_id_168C("hijack_cmd_evacontheway");
+  level.commander maps\_utility::dialogue_queue("hijack_cmd_evacontheway");
   wait 1;
-  level._id_58D2 maps\_utility::_id_168C("hijack_cmd_team4report");
+  level.commander maps\_utility::dialogue_queue("hijack_cmd_team4report");
   wait 0.2;
-  level.player maps\_utility::_id_11F4("hijack_fso4_wounded");
+  level.player maps\_utility::radio_dialogue("hijack_fso4_wounded");
   wait 0.2;
 
   if(!common_scripts\utility::flag("start_flare_event")) {
-    level._id_58D2 maps\_utility::_id_168C("hijack_cmd_securearea");
+    level.commander maps\_utility::dialogue_queue("hijack_cmd_securearea");
   }
 }
 
-_id_59EE() {
+tarmac_background_chatter() {
   level endon("stop_drunk_walk");
   common_scripts\utility::flag_wait("start_engine_explosion");
   wait 6;
-  level._id_59EF = spawn("script_origin", level.player.origin);
-  level._id_59EF linkTo(level.player);
-  level._id_59EF._id_1046 = 1;
+  level.tarmac_radio_org = spawn("script_origin", level.player.origin);
+  level.tarmac_radio_org linkTo(level.player);
+  level.tarmac_radio_org.linked = 1;
   var_0 = randomfloatrange(0, 5);
-  maps\hijack_code::_id_5956("hijack_fso1_confirmation", level._id_59EF);
-  maps\hijack_code::_id_5956("hijack_rt1_onsceneinten", level._id_59EF);
+  maps\hijack_code::background_chatter("hijack_fso1_confirmation", level.tarmac_radio_org);
+  maps\hijack_code::background_chatter("hijack_rt1_onsceneinten", level.tarmac_radio_org);
   wait(var_0);
-  maps\hijack_code::_id_5956("hijack_fso2_cordonoff", level._id_59EF);
+  maps\hijack_code::background_chatter("hijack_fso2_cordonoff", level.tarmac_radio_org);
   wait(var_0);
-  maps\hijack_code::_id_5956("hijack_fso3_leakingfuel", level._id_59EF);
+  maps\hijack_code::background_chatter("hijack_fso3_leakingfuel", level.tarmac_radio_org);
   wait(var_0);
-  maps\hijack_code::_id_5956("hijack_rt1_blackbox", level._id_59EF);
+  maps\hijack_code::background_chatter("hijack_rt1_blackbox", level.tarmac_radio_org);
   wait 0.4;
-  maps\hijack_code::_id_5956("hijack_fso3_blackbox", level._id_59EF);
+  maps\hijack_code::background_chatter("hijack_fso3_blackbox", level.tarmac_radio_org);
   wait(var_0);
-  maps\hijack_code::_id_5956("hijack_fso2_medical", level._id_59EF);
+  maps\hijack_code::background_chatter("hijack_fso2_medical", level.tarmac_radio_org);
   wait(var_0);
-  maps\hijack_code::_id_5956("hijack_fso1_satcom", level._id_59EF);
+  maps\hijack_code::background_chatter("hijack_fso1_satcom", level.tarmac_radio_org);
   wait(var_0);
-  maps\hijack_code::_id_5956("hijack_fso3_cockpit", level._id_59EF);
+  maps\hijack_code::background_chatter("hijack_fso3_cockpit", level.tarmac_radio_org);
   wait(var_0);
-  maps\hijack_code::_id_5956("hijack_fso2_tailsection", level._id_59EF);
+  maps\hijack_code::background_chatter("hijack_fso2_tailsection", level.tarmac_radio_org);
 }
 
-_id_59F0() {
-  if(level._id_1F19 == "tarmac") {
+try_start_heart_beat() {
+  if(level.start_point == "tarmac") {
     common_scripts\utility::flag_wait("player_exit_plane_2");
   }
-  if(level._id_1F19 == "tarmac_2") {
+  if(level.start_point == "tarmac_2") {
     common_scripts\utility::flag_wait("start_engine_explosion");
   }
-  thread maps\hijack_drunk_player::_id_5988();
+  thread maps\hijack_drunk_player::start_player_heartbeat();
 }
 
-_id_59F1() {
+watch_player_jump() {
   level endon("player_exit_plane_4");
   notifyoncommand("playerjump", "+gostand");
   notifyoncommand("playerjump", "+moveup");
@@ -415,33 +415,33 @@ _id_59F1() {
   }
 }
 
-_id_59C4(var_0) {
+set_player_move_and_jump_speed(var_0) {
   level.player setmovespeedscale(var_0);
-  setsaveddvar("jump_height", level._id_59C2 * var_0);
+  setsaveddvar("jump_height", level.player_original_jump_height * var_0);
 }
 
-_id_59F2() {
+tarmac_events() {
   common_scripts\utility::flag_wait("stop_managing_crash_player");
-  level._id_59C2 = getdvarfloat("jump_height");
+  level.player_original_jump_height = getdvarfloat("jump_height");
 
-  if(level._id_1F19 != "tarmac_2") {
-    thread _id_59F7();
+  if(level.start_point != "tarmac_2") {
+    thread post_crash_plane_shake();
   }
-  thread _id_59FA();
-  thread _id_59EE();
+  thread post_crash_explosions();
+  thread tarmac_background_chatter();
 
-  if(level._id_1F19 != "tarmac" && level._id_1F19 != "tarmac_2") {
+  if(level.start_point != "tarmac" && level.start_point != "tarmac_2") {
     wait 3.5;
   }
   thread maps\hijack_drunk_player::main();
-  thread _id_59F0();
-  thread _id_5A00();
-  _id_59C4(0.2);
+  thread try_start_heart_beat();
+  thread player_breathing_sound();
+  set_player_move_and_jump_speed(0.2);
 
   if(!common_scripts\utility::flag("player_exit_plane_4")) {
-    thread _id_59F1();
+    thread watch_player_jump();
   }
-  thread maps\hijack_drunk_player::_id_5985();
+  thread maps\hijack_drunk_player::aftermath_style_walking();
   common_scripts\utility::flag_set("start_doing_aftermath_walk");
   common_scripts\utility::flag_wait("player_on_feet_post_crash");
   setsaveddvar("player_sprintSpeedScale", 1.1);
@@ -450,29 +450,29 @@ _id_59F2() {
   wait 0.1;
   common_scripts\utility::flag_wait("player_exit_plane_1");
 
-  if(level._id_1F19 != "tarmac_2") {
+  if(level.start_point != "tarmac_2") {
     wait 3;
   }
-  _id_59C4(0.24);
+  set_player_move_and_jump_speed(0.24);
   common_scripts\utility::flag_wait("player_exit_plane_3");
-  _id_59C4(0.35);
-  level._id_598D = 2.5;
-  thread _id_59F3();
+  set_player_move_and_jump_speed(0.35);
+  level.unsteady_scale = 2.5;
+  thread enable_weapons_after_time();
 
-  if(isDefined(level._id_59EF)) {
-    level._id_59EF._id_1B71 = 1;
+  if(isDefined(level.tarmac_radio_org)) {
+    level.tarmac_radio_org.deleteme = 1;
   }
   common_scripts\utility::flag_wait("player_exit_plane_4");
-  thread _id_59F4();
-  level._id_598D = 1.0;
+  thread blend_player_move_speed();
+  level.unsteady_scale = 1.0;
   setsaveddvar("player_sprintSpeedScale", 1.3);
   level.player allowjump(1);
 
-  if(level._id_1F19 != "tarmac_2") {
-    level._id_1C4C = 0;
-    thread maps\_utility::_id_1425("exit_airplane");
+  if(level.start_point != "tarmac_2") {
+    level.dopickyautosavechecks = 0;
+    thread maps\_utility::autosave_by_name("exit_airplane");
     wait 2;
-    level._id_1C4C = 1;
+    level.dopickyautosavechecks = 1;
   }
 
   common_scripts\utility::flag_wait("entered_post_tarmac_area");
@@ -485,46 +485,46 @@ _id_59F2() {
   level notify("stop_heart");
 }
 
-_id_59F3() {
+enable_weapons_after_time() {
   wait 11;
   level.player enableweapons();
 }
 
-_id_59F4() {
-  if(level._id_1F19 == "tarmac_2") {
-    level._id_59DB = 0.8;
-    _id_59C4(level._id_59DB);
+blend_player_move_speed() {
+  if(level.start_point == "tarmac_2") {
+    level.tarmac_player_move_speed = 0.8;
+    set_player_move_and_jump_speed(level.tarmac_player_move_speed);
   } else {
-    level._id_59DB = 0.35;
+    level.tarmac_player_move_speed = 0.35;
 
-    while(level._id_59DB < 0.8) {
-      level._id_59DB = level._id_59DB + 0.05;
-      _id_59C4(level._id_59DB);
+    while(level.tarmac_player_move_speed < 0.8) {
+      level.tarmac_player_move_speed = level.tarmac_player_move_speed + 0.05;
+      set_player_move_and_jump_speed(level.tarmac_player_move_speed);
       wait 0.5;
     }
   }
 }
 
-_id_59F5() {
+stop_random_blur() {
   level notify("not_random_blur");
 }
 
-_id_59F6() {
-  thread maps\hijack_drunk_player::_id_51E6();
+restart_random_blur() {
+  thread maps\hijack_drunk_player::player_random_blur();
 }
 
-_id_59F7() {
-  thread _id_59F8();
+post_crash_plane_shake() {
+  thread post_crash_plane_props();
   common_scripts\utility::flag_wait("commander_started_ramp_anim");
-  _id_59F5();
+  stop_random_blur();
   maps\_audio::aud_send_msg("tarmac_shift");
   earthquake(0.3, 5.5, level.player.origin, 80000);
   level.player playRumbleOnEntity("hijack_plane_medium");
   wait 3.5;
-  _id_59F6();
+  restart_random_blur();
 }
 
-_id_59F8() {
+post_crash_plane_props() {
   var_0 = common_scripts\utility::getStruct("post_crash_scene_origin", "targetname");
   var_1 = getEnt("cab2_med_door1", "targetname");
   var_2 = getEnt("cab2_med_door2", "targetname");
@@ -556,95 +556,95 @@ _id_59F8() {
   var_28 = getEnt("post_crash_airplane_crate_2", "targetname");
   var_29 = getEnt("post_crash_pipe_small", "targetname");
   var_30 = getEnt("post_crash_pipe_large", "targetname");
-  var_1 thread _id_59F9(var_0, "post_crash_locker1");
-  var_2 thread _id_59F9(var_0, "post_crash_locker2");
-  var_3 thread _id_59F9(var_0, "post_crash_locker3");
-  var_4 thread _id_59F9(var_0, "post_crash_locker4");
-  var_5 thread _id_59F9(var_0, "post_crash_locker6");
-  var_6 thread _id_59F9(var_0, "post_crash_locker7");
-  var_7 thread _id_59F9(var_0, "post_crash_locker8");
-  var_8 thread _id_59F9(var_0, "post_crash_locker9");
-  var_9 thread _id_59F9(var_0, "post_crash_locker5");
-  var_10 thread _id_59F9(var_0, "post_crash_locker11");
-  var_11 thread _id_59F9(var_0, "post_crash_locker14");
-  var_12 thread _id_59F9(var_0, "post_crash_locker16");
-  var_13 thread _id_59F9(var_0, "post_crash_locker12");
-  var_14 thread _id_59F9(var_0, "post_crash_locker15");
-  var_15 thread _id_59F9(var_0, "post_crash_locker17");
-  var_16 thread _id_59F9(var_0, "post_crash_locker10");
-  var_17 thread _id_59F9(var_0, "post_crash_locker13");
-  var_20 thread _id_59F9(var_0, "post_crash_locker18");
-  var_21 thread _id_59F9(var_0, "post_crash_locker20");
-  var_22 thread _id_59F9(var_0, "post_crash_locker19");
-  var_23 thread _id_59F9(var_0, "post_crash_locker21");
-  var_18 thread _id_59F9(var_0, "post_crash_drawer1");
-  var_19 thread _id_59F9(var_0, "post_crash_drawer2");
-  var_24 thread _id_59F9(var_0, "post_crash_ladder");
-  var_25 thread _id_59F9(var_0, "post_crash_ladder", "J_prop_2");
-  var_26 thread _id_59F9(var_0, "post_crash_tire");
-  var_27 thread _id_59F9(var_0, "post_crash_crate");
-  var_28 thread _id_59F9(var_0, "post_crash_crate", "J_prop_2");
-  var_29 thread _id_59F9(var_0, "post_crash_pipe_small");
-  var_30 thread _id_59F9(var_0, "post_crash_pipe_large");
+  var_1 thread post_crash_prop_anim(var_0, "post_crash_locker1");
+  var_2 thread post_crash_prop_anim(var_0, "post_crash_locker2");
+  var_3 thread post_crash_prop_anim(var_0, "post_crash_locker3");
+  var_4 thread post_crash_prop_anim(var_0, "post_crash_locker4");
+  var_5 thread post_crash_prop_anim(var_0, "post_crash_locker6");
+  var_6 thread post_crash_prop_anim(var_0, "post_crash_locker7");
+  var_7 thread post_crash_prop_anim(var_0, "post_crash_locker8");
+  var_8 thread post_crash_prop_anim(var_0, "post_crash_locker9");
+  var_9 thread post_crash_prop_anim(var_0, "post_crash_locker5");
+  var_10 thread post_crash_prop_anim(var_0, "post_crash_locker11");
+  var_11 thread post_crash_prop_anim(var_0, "post_crash_locker14");
+  var_12 thread post_crash_prop_anim(var_0, "post_crash_locker16");
+  var_13 thread post_crash_prop_anim(var_0, "post_crash_locker12");
+  var_14 thread post_crash_prop_anim(var_0, "post_crash_locker15");
+  var_15 thread post_crash_prop_anim(var_0, "post_crash_locker17");
+  var_16 thread post_crash_prop_anim(var_0, "post_crash_locker10");
+  var_17 thread post_crash_prop_anim(var_0, "post_crash_locker13");
+  var_20 thread post_crash_prop_anim(var_0, "post_crash_locker18");
+  var_21 thread post_crash_prop_anim(var_0, "post_crash_locker20");
+  var_22 thread post_crash_prop_anim(var_0, "post_crash_locker19");
+  var_23 thread post_crash_prop_anim(var_0, "post_crash_locker21");
+  var_18 thread post_crash_prop_anim(var_0, "post_crash_drawer1");
+  var_19 thread post_crash_prop_anim(var_0, "post_crash_drawer2");
+  var_24 thread post_crash_prop_anim(var_0, "post_crash_ladder");
+  var_25 thread post_crash_prop_anim(var_0, "post_crash_ladder", "J_prop_2");
+  var_26 thread post_crash_prop_anim(var_0, "post_crash_tire");
+  var_27 thread post_crash_prop_anim(var_0, "post_crash_crate");
+  var_28 thread post_crash_prop_anim(var_0, "post_crash_crate", "J_prop_2");
+  var_29 thread post_crash_prop_anim(var_0, "post_crash_pipe_small");
+  var_30 thread post_crash_prop_anim(var_0, "post_crash_pipe_large");
 }
 
-_id_59F9(var_0, var_1, var_2) {
+post_crash_prop_anim(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     var_2 = "J_prop_1";
   }
-  var_3 = maps\_utility::_id_1287("post_crash_prop");
+  var_3 = maps\_utility::spawn_anim_model("post_crash_prop");
   waittillframeend;
-  var_0 thread maps\_anim::_id_11CF(var_3, var_1);
+  var_0 thread maps\_anim::anim_first_frame_solo(var_3, var_1);
   self linkTo(var_3, var_2);
   common_scripts\utility::flag_wait("commander_started_ramp_anim");
-  var_0 maps\_anim::_id_1246(var_3, var_1);
+  var_0 maps\_anim::anim_single_solo(var_3, var_1);
   waittillframeend;
   var_3 delete();
 }
 
-_id_59FA() {
-  thread _id_59FB();
-  thread _id_592D();
-  thread _id_59FE();
+post_crash_explosions() {
+  thread distant_explosion();
+  thread engine_explosion();
+  thread tail_random_explosions();
 }
 
-_id_59FB() {
+distant_explosion() {
   common_scripts\utility::flag_wait("distant_explosion");
   maps\_audio::aud_send_msg("wreck_exit_expl");
   common_scripts\utility::exploder("distant_exp");
 }
 
-_id_592D() {
+engine_explosion() {
   var_0 = getEnt("crashed_plane_engine", "targetname");
   var_1 = getEnt("crashed_plane_engine_destroyed", "targetname");
   var_1 hide();
   common_scripts\utility::flag_wait("start_engine_explosion");
   wait 1;
   maps\_audio::aud_send_msg("engine_explosion");
-  _id_59F5();
+  stop_random_blur();
   common_scripts\utility::exploder("engine_exp");
   common_scripts\utility::exploder("engine_exp_fire");
   wait 0.1;
-  thread _id_59FD(var_0);
+  thread player_engine_explosion_react(var_0);
   var_0 hide();
   var_1 show();
-  thread _id_59FC();
+  thread commander_engine_explosion_react();
   wait 2.0;
-  _id_59F6();
+  restart_random_blur();
   common_scripts\utility::flag_set("spawn_makarov_heli");
 }
 
-_id_59FC() {
+commander_engine_explosion_react() {
   if(!common_scripts\utility::flag("commander_started_flare_anim") || common_scripts\utility::flag("commander_finished_flare_anim")) {
-    level._id_58D2 notify("stop_loop");
-    level._id_58D2 maps\_anim::_id_1246(level._id_58D2, "engine_stumble");
+    level.commander notify("stop_loop");
+    level.commander maps\_anim::anim_single_solo(level.commander, "engine_stumble");
   } else {
     common_scripts\utility::flag_wait("commander_finished_flare_anim");
   }
   common_scripts\utility::flag_set("commander_finished_engine_react_anim");
 }
 
-_id_59FD(var_0) {
+player_engine_explosion_react(var_0) {
   level.player maps\_utility::dirteffect(var_0.origin);
   level.player shellshock("hijack_engine_explosion", 1);
   level.player dodamage(level.player.health - 1, var_0.origin);
@@ -655,28 +655,28 @@ _id_59FD(var_0) {
   var_3 = var_0.origin - level.player.origin;
   var_4 = vectortoangles(var_3);
   var_2.angles = var_4;
-  var_1.angles = level._id_5258.angles;
+  var_1.angles = level.ground_ref_ent.angles;
   var_1 linkTo(var_2);
-  level._id_27A4 = 1;
+  level.custom_linkto_slide = 1;
   var_5 = -1.0 * anglesToForward(var_2.angles);
   level.player setvelocity(var_5 * 400);
-  level._id_595D = 1;
-  level.player maps\hijack_code::_id_595C();
+  level.custom_linkto_slide_allow_prone = 1;
+  level.player maps\hijack_code::hjk_beginsliding();
   level.player playersetgroundreferenceent(var_1);
   var_2 rotatepitch(-25, 0.2, 0, 0.15);
   wait 0.1;
-  level.player maps\hijack_code::_id_595E();
-  level._id_595D = undefined;
+  level.player maps\hijack_code::hjk_endsliding();
+  level.custom_linkto_slide_allow_prone = undefined;
   wait 0.6;
   var_2 rotatepitch(25, 0.8, 0.4, 0.1);
   wait 0.8;
-  var_1 rotateTo(level._id_5258.angles, 0.5, 0.4, 0.1);
+  var_1 rotateTo(level.ground_ref_ent.angles, 0.5, 0.4, 0.1);
   wait 0.5;
-  level._id_5258.angles = var_1.angles;
-  level.player playersetgroundreferenceent(level._id_5258);
+  level.ground_ref_ent.angles = var_1.angles;
+  level.player playersetgroundreferenceent(level.ground_ref_ent);
 }
 
-_id_59FE() {
+tail_random_explosions() {
   level endon("entered_post_tarmac_area");
   common_scripts\utility::flag_wait("player_exit_plane_4");
 
@@ -688,11 +688,11 @@ _id_59FE() {
   }
 }
 
-_id_59FF() {
+tail_final_explosion() {
   common_scripts\utility::flag_wait("tail_explosion");
   maps\_audio::aud_send_msg("tail_explosion");
   level notify("big_tail_exp");
-  _id_59F5();
+  stop_random_blur();
   common_scripts\utility::exploder("final_tail_exp");
   earthquake(0.5, 2.0, (8815.42, 7106.38, 273.014), 80000);
   level.player shellshock("hijack_tail_explosion", 1);
@@ -701,10 +701,10 @@ _id_59FF() {
   common_scripts\utility::exploder("tail_exp_fire_2");
   common_scripts\utility::exploder("tail_exp_fire_3");
   common_scripts\utility::exploder("tail_exp_fire_4");
-  _id_59F6();
+  restart_random_blur();
 }
 
-_id_5A00() {
+player_breathing_sound() {
   while(!common_scripts\utility::flag("entered_post_tarmac_area")) {
     level.player maps\_utility::play_sound_on_entity("breathing_hurt_start");
     wait(randomfloatrange(2, 5));
@@ -713,90 +713,90 @@ _id_5A00() {
   level.player maps\_utility::play_sound_on_entity("breathing_better");
 }
 
-_id_5999() {
+tarmac_dead_allies() {
   wait 1;
-  level._id_5A01 = maps\_utility::_id_272C("dead_secret_service");
-  level._id_5A02 = maps\_utility::_id_272C("dead_secret_service_no_weapon");
+  level.secret_service_dead = maps\_utility::array_spawn_targetname("dead_secret_service");
+  level.secret_service_dead_no_weapons = maps\_utility::array_spawn_targetname("dead_secret_service_no_weapon");
 
-  foreach(var_1 in level._id_5A02) {}
-  var_1 maps\_utility::_id_24F5();
+  foreach(var_1 in level.secret_service_dead_no_weapons) {}
+  var_1 maps\_utility::gun_remove();
 
-  level._id_5A01 = common_scripts\utility::array_combine(level._id_5A01, level._id_5A02);
+  level.secret_service_dead = common_scripts\utility::array_combine(level.secret_service_dead, level.secret_service_dead_no_weapons);
 
-  foreach(var_1 in level._id_5A01) {
-    var_1._id_0D16 = 1;
+  foreach(var_1 in level.secret_service_dead) {
+    var_1.no_pain_sound = 1;
     var_1.diequietly = 1;
     var_1.delete_on_death = 0;
     var_1 kill();
   }
 }
 
-_id_599A() {
+main_script_thread() {
   common_scripts\utility::flag_set("pause_inflight_fx");
   common_scripts\utility::flag_clear("pause_tarmac_fx");
   thread maps\_blizzard_hijack::_id_567C(3);
   thread maps\_blizzard_hijack::_id_5692();
-  maps\_utility::_id_265A("axis");
+  maps\_utility::battlechatter_off("axis");
   common_scripts\utility::flag_init("stop_aftermath_player");
-  thread _id_5A03();
-  thread _id_59DF();
-  thread _id_59DE();
-  thread _id_59F2();
-  thread _id_5943();
+  thread tarmac_fail_conditions();
+  thread exit_plane_scene();
+  thread tarmac_objectives();
+  thread tarmac_events();
+  thread makarov_heli();
   thread maps\hijack_script_2b::main();
 }
 
-_id_5A03() {
+tarmac_fail_conditions() {
   common_scripts\utility::flag_wait("tarmac_level_fail");
   setDvar("ui_deadquote", &"HIJACK_FAIL_TARMAC");
   level notify("mission failed");
-  maps\_utility::_id_1826();
+  maps\_utility::missionfailedwrapper();
 }
 
-_id_5A04() {
-  _id_5999();
+tarmac_carnage() {
+  tarmac_dead_allies();
   wait 1;
   var_0 = common_scripts\utility::getStruct("post_crash_scene_origin", "targetname");
-  thread _id_5A05(var_0);
-  thread _id_5A06(var_0);
-  thread _id_5A07(var_0);
+  thread fso_idlers(var_0);
+  thread fso_check_deadguy(var_0);
+  thread fso_scout_and_terrorist(var_0);
   wait 1;
-  thread _id_5A08();
-  thread _id_5A09(var_0);
-  thread _id_5A0A(var_0);
+  thread fso_engine_react();
+  thread fso_tail_explosion_react(var_0);
+  thread fso_trapped_agent(var_0);
   wait 1;
   var_1 = getaiarray();
 
   foreach(var_3 in var_1) {
     if(!isenemyteam(var_3.team, level.player.team)) {
-      var_3 thread maps\hijack_code::_id_5951();
+      var_3 thread maps\hijack_code::cold_breath_hijack();
     }
   }
 }
 
-_id_5A05(var_0) {
-  var_1[0] = maps\_utility::_id_272F("FSO_idlers_0");
-  var_1[1] = maps\_utility::_id_272F("FSO_idlers_1");
-  var_1[2] = maps\_utility::_id_272F("FSO_idlers_2");
-  var_1[2] maps\_utility::_id_2611();
-  var_1[0] thread maps\hijack_code::_id_5951();
-  var_1[1] thread maps\hijack_code::_id_5951();
-  var_1[2] thread maps\hijack_code::_id_5951();
+fso_idlers(var_0) {
+  var_1[0] = maps\_utility::spawn_targetname("FSO_idlers_0");
+  var_1[1] = maps\_utility::spawn_targetname("FSO_idlers_1");
+  var_1[2] = maps\_utility::spawn_targetname("FSO_idlers_2");
+  var_1[2] maps\_utility::deletable_magic_bullet_shield();
+  var_1[0] thread maps\hijack_code::cold_breath_hijack();
+  var_1[1] thread maps\hijack_code::cold_breath_hijack();
+  var_1[2] thread maps\hijack_code::cold_breath_hijack();
 
   foreach(var_3 in var_1) {
-    var_3._id_1032 = "generic";
+    var_3.animname = "generic";
 
     if(var_3.weapon != "none") {
-      var_3 maps\_utility::_id_24F5();
+      var_3 maps\_utility::gun_remove();
     }
   }
 
-  var_0 thread maps\_anim::_id_124E(var_1[0], "injured_hands_on_knees");
-  var_0 thread maps\_anim::_id_124E(var_1[1], "injured_on_back");
-  var_0 thread maps\_anim::_id_124E(var_1[2], "injured_leg_loop");
+  var_0 thread maps\_anim::anim_loop_solo(var_1[0], "injured_hands_on_knees");
+  var_0 thread maps\_anim::anim_loop_solo(var_1[1], "injured_on_back");
+  var_0 thread maps\_anim::anim_loop_solo(var_1[2], "injured_leg_loop");
   common_scripts\utility::flag_wait("fso_arm_vo");
   wait 0.5;
-  var_1[1] maps\_utility::_id_168C("hijack_fso1_myarm");
+  var_1[1] maps\_utility::dialogue_queue("hijack_fso1_myarm");
   common_scripts\utility::flag_wait("entered_post_tarmac_area");
 
   if(isDefined(var_1[0])) {
@@ -807,54 +807,54 @@ _id_5A05(var_0) {
   }
 }
 
-_id_5A06(var_0) {
+fso_check_deadguy(var_0) {
   var_1 = [];
-  var_1[0] = maps\_utility::_id_272F("FSO_check_deadguy_agent");
-  var_1[1] = maps\_utility::_id_272F("FSO_check_deadguy_hijacker");
+  var_1[0] = maps\_utility::spawn_targetname("FSO_check_deadguy_agent");
+  var_1[1] = maps\_utility::spawn_targetname("FSO_check_deadguy_hijacker");
   var_1[1].ignoreall = 1;
   var_1[1].ignoreme = 1;
-  var_1[1] maps\_utility::_id_24F5();
-  var_1[0] thread maps\hijack_code::_id_5951();
-  var_1[0] thread _id_59D9(400, 3.0);
-  var_1[0]._id_1032 = "checkguy";
-  var_1[1]._id_1032 = "deadguy";
-  var_0 thread maps\_anim::_id_11BF(var_1, "checkdeadguy_start");
+  var_1[1] maps\_utility::gun_remove();
+  var_1[0] thread maps\hijack_code::cold_breath_hijack();
+  var_1[0] thread commander_lookat(400, 3.0);
+  var_1[0].animname = "checkguy";
+  var_1[1].animname = "deadguy";
+  var_0 thread maps\_anim::anim_first_frame(var_1, "checkdeadguy_start");
   common_scripts\utility::flag_wait("start_checkdeadguy_anim");
-  var_0 maps\_anim::_id_11DD(var_1, "checkdeadguy_start");
-  var_0 thread maps\_anim::_id_11D6(var_1, "checkdeadguy_loop");
+  var_0 maps\_anim::anim_single(var_1, "checkdeadguy_start");
+  var_0 thread maps\_anim::anim_loop(var_1, "checkdeadguy_loop");
   common_scripts\utility::flag_wait("entered_post_tarmac_area");
   var_1[0] delete();
   var_1[1] delete();
 }
 
-_id_5A07(var_0) {
-  var_1 = maps\_utility::_id_272F("FSO_scout");
-  var_2 = maps\_utility::_id_272F("buried_hijacker");
+fso_scout_and_terrorist(var_0) {
+  var_1 = maps\_utility::spawn_targetname("FSO_scout");
+  var_2 = maps\_utility::spawn_targetname("buried_hijacker");
   var_1.ignoreall = 1;
   var_1.ignoreme = 1;
   var_2.ignoreall = 1;
   var_2.ignoreme = 1;
-  var_2 maps\_utility::_id_24F5();
-  var_2 thread maps\hijack_code::_id_5951();
-  var_1 thread maps\hijack_code::_id_5951();
-  var_1._id_1032 = "generic";
-  var_2._id_1032 = "generic";
-  var_2 thread _id_59D9(400, 3.0);
-  var_0 thread maps\_anim::_id_11CF(var_1, "scout_finds_buried_hijacker");
-  var_0 thread maps\_anim::_id_11CF(var_2, "buried_hijacker");
-  var_3 = maps\_utility::_id_1287("plane_seats");
+  var_2 maps\_utility::gun_remove();
+  var_2 thread maps\hijack_code::cold_breath_hijack();
+  var_1 thread maps\hijack_code::cold_breath_hijack();
+  var_1.animname = "generic";
+  var_2.animname = "generic";
+  var_2 thread commander_lookat(400, 3.0);
+  var_0 thread maps\_anim::anim_first_frame_solo(var_1, "scout_finds_buried_hijacker");
+  var_0 thread maps\_anim::anim_first_frame_solo(var_2, "buried_hijacker");
+  var_3 = maps\_utility::spawn_anim_model("plane_seats");
   waittillframeend;
-  var_0 thread maps\_anim::_id_11CF(var_3, "buried_prop");
+  var_0 thread maps\_anim::anim_first_frame_solo(var_3, "buried_prop");
   var_3 attach("hjk_seat_cover_sml", "J_prop_1");
   common_scripts\utility::flag_wait("move_commander_to_flare_node");
   wait 2;
-  var_1._id_240A = "snow";
-  var_0 thread maps\_anim::_id_1246(var_1, "scout_finds_buried_hijacker");
-  var_0 thread maps\_anim::_id_1246(var_2, "buried_hijacker");
-  var_0 thread maps\_anim::_id_1246(var_3, "buried_prop");
+  var_1.lastgroundtype = "snow";
+  var_0 thread maps\_anim::anim_single_solo(var_1, "scout_finds_buried_hijacker");
+  var_0 thread maps\_anim::anim_single_solo(var_2, "buried_hijacker");
+  var_0 thread maps\_anim::anim_single_solo(var_3, "buried_prop");
   var_2 waittillmatch("single anim", "die");
-  thread maps\_anim::_id_127B(var_2, "buried_hijacker", 0.0);
-  thread maps\_anim::_id_127B(var_3, "buried_prop", 0.0);
+  thread maps\_anim::anim_set_rate_single(var_2, "buried_hijacker", 0.0);
+  thread maps\_anim::anim_set_rate_single(var_3, "buried_prop", 0.0);
   var_2 notify("stop personal effect");
   var_2.team = "neutral";
   var_1 setgoalpos(var_1.origin);
@@ -863,220 +863,220 @@ _id_5A07(var_0) {
   var_1 delete();
 }
 
-_id_5A08() {
-  var_0[0] = maps\_utility::_id_272F("FSO_engine_react_0");
-  var_0[1] = maps\_utility::_id_272F("FSO_engine_react_1");
-  var_0[2] = maps\_utility::_id_272F("FSO_engine_react_2");
-  var_0[0] thread maps\hijack_code::_id_5951();
-  var_0[1] thread maps\hijack_code::_id_5951();
-  var_0[2] thread maps\hijack_code::_id_5951();
+fso_engine_react() {
+  var_0[0] = maps\_utility::spawn_targetname("FSO_engine_react_0");
+  var_0[1] = maps\_utility::spawn_targetname("FSO_engine_react_1");
+  var_0[2] = maps\_utility::spawn_targetname("FSO_engine_react_2");
+  var_0[0] thread maps\hijack_code::cold_breath_hijack();
+  var_0[1] thread maps\hijack_code::cold_breath_hijack();
+  var_0[2] thread maps\hijack_code::cold_breath_hijack();
   var_1 = common_scripts\utility::getStruct("temp_exp_anim_origin", "targetname");
 
   foreach(var_3 in var_0) {
-    var_3._id_1032 = "generic";
+    var_3.animname = "generic";
 
     if(var_3.weapon != "none") {
-      var_3 maps\_utility::_id_24F5();
+      var_3 maps\_utility::gun_remove();
     }
   }
 
   var_0[2] delete();
-  var_1 thread maps\_anim::_id_11CF(var_0[0], "drag_from_engine_agent1");
-  var_1 thread maps\_anim::_id_11CF(var_0[1], "drag_from_engine_agent2");
+  var_1 thread maps\_anim::anim_first_frame_solo(var_0[0], "drag_from_engine_agent1");
+  var_1 thread maps\_anim::anim_first_frame_solo(var_0[1], "drag_from_engine_agent2");
   common_scripts\utility::flag_wait("start_exp_anims");
-  var_1 thread maps\_anim::_id_1246(var_0[0], "drag_from_engine_agent1");
-  var_1 thread maps\_anim::_id_1246(var_0[1], "drag_from_engine_agent2");
+  var_1 thread maps\_anim::anim_single_solo(var_0[0], "drag_from_engine_agent1");
+  var_1 thread maps\_anim::anim_single_solo(var_0[1], "drag_from_engine_agent2");
   var_0[0] waittillmatch("single anim", "end");
-  var_1 thread maps\_anim::_id_124E(var_0[0], "drag_from_engine_agent1_loop");
-  var_1 thread maps\_anim::_id_124E(var_0[1], "drag_from_engine_agent2_loop");
+  var_1 thread maps\_anim::anim_loop_solo(var_0[0], "drag_from_engine_agent1_loop");
+  var_1 thread maps\_anim::anim_loop_solo(var_0[1], "drag_from_engine_agent2_loop");
 }
 
-_id_5A09(var_0) {
-  var_1[0] = maps\_utility::_id_272F("FSO_tail_react_0");
-  var_1[1] = maps\_utility::_id_272F("FSO_tail_react_1");
-  var_1[0] maps\_utility::_id_2611();
-  var_1[0] thread maps\hijack_code::_id_5951();
-  var_1[1] thread maps\hijack_code::_id_5951();
+fso_tail_explosion_react(var_0) {
+  var_1[0] = maps\_utility::spawn_targetname("FSO_tail_react_0");
+  var_1[1] = maps\_utility::spawn_targetname("FSO_tail_react_1");
+  var_1[0] maps\_utility::deletable_magic_bullet_shield();
+  var_1[0] thread maps\hijack_code::cold_breath_hijack();
+  var_1[1] thread maps\hijack_code::cold_breath_hijack();
 
   foreach(var_3 in var_1) {
-    var_3._id_1032 = "generic";
+    var_3.animname = "generic";
 
     if(var_3.weapon != "none") {
-      var_3 maps\_utility::_id_24F5();
+      var_3 maps\_utility::gun_remove();
     }
   }
 
-  var_0 thread maps\_anim::_id_124E(var_1[0], "reach_to_explosion_agent1_loop_start", "stop_tail_exp_loop");
-  var_0 thread maps\_anim::_id_124E(var_1[1], "reach_to_explosion_agent2_loop_start", "stop_tail_exp_loop");
+  var_0 thread maps\_anim::anim_loop_solo(var_1[0], "reach_to_explosion_agent1_loop_start", "stop_tail_exp_loop");
+  var_0 thread maps\_anim::anim_loop_solo(var_1[1], "reach_to_explosion_agent2_loop_start", "stop_tail_exp_loop");
   common_scripts\utility::flag_wait("start_tail_exp_anims");
   var_0 notify("stop_tail_exp_loop");
-  var_0 thread maps\_anim::_id_1246(var_1[0], "reach_to_explosion_agent1");
-  var_0 thread maps\_anim::_id_1246(var_1[1], "reach_to_explosion_agent2");
+  var_0 thread maps\_anim::anim_single_solo(var_1[0], "reach_to_explosion_agent1");
+  var_0 thread maps\_anim::anim_single_solo(var_1[1], "reach_to_explosion_agent2");
   var_1[0] waittillmatch("single anim", "explosion_reaction_2");
   common_scripts\utility::flag_set("tail_explosion");
   wait 2;
-  var_1[0] maps\_utility::_id_168C("hijack_fso1_injuredman");
+  var_1[0] maps\_utility::dialogue_queue("hijack_fso1_injuredman");
   var_1[0] waittillmatch("single anim", "end");
-  var_0 thread maps\_anim::_id_124E(var_1[0], "reach_to_explosion_agent1_loop_end");
-  var_0 thread maps\_anim::_id_124E(var_1[1], "reach_to_explosion_agent2_loop_end");
+  var_0 thread maps\_anim::anim_loop_solo(var_1[0], "reach_to_explosion_agent1_loop_end");
+  var_0 thread maps\_anim::anim_loop_solo(var_1[1], "reach_to_explosion_agent2_loop_end");
 }
 
-_id_5A0A(var_0) {
-  var_1[0] = maps\_utility::_id_272F("FSO_trapped_agent_0");
-  var_1[1] = maps\_utility::_id_272F("FSO_trapped_agent_1");
-  var_1[2] = maps\_utility::_id_272F("FSO_trapped_agent_2");
-  var_1[0] thread maps\hijack_code::_id_5951();
-  var_1[1] thread maps\hijack_code::_id_5951();
-  var_1[2] thread maps\hijack_code::_id_5951();
+fso_trapped_agent(var_0) {
+  var_1[0] = maps\_utility::spawn_targetname("FSO_trapped_agent_0");
+  var_1[1] = maps\_utility::spawn_targetname("FSO_trapped_agent_1");
+  var_1[2] = maps\_utility::spawn_targetname("FSO_trapped_agent_2");
+  var_1[0] thread maps\hijack_code::cold_breath_hijack();
+  var_1[1] thread maps\hijack_code::cold_breath_hijack();
+  var_1[2] thread maps\hijack_code::cold_breath_hijack();
 
   foreach(var_3 in var_1) {
-    var_3._id_1032 = "generic";
+    var_3.animname = "generic";
 
     if(var_3.weapon != "none") {
-      var_3 maps\_utility::_id_24F5();
+      var_3 maps\_utility::gun_remove();
     }
   }
 
-  var_0 thread maps\_anim::_id_11CF(var_1[0], "samaritan_start");
-  var_0 thread maps\_anim::_id_11CF(var_1[1], "limping_agent_start");
-  var_0 thread maps\_anim::_id_11CF(var_1[2], "trapped_agent_start");
-  var_5 = maps\_utility::_id_1287("metal_beam");
+  var_0 thread maps\_anim::anim_first_frame_solo(var_1[0], "samaritan_start");
+  var_0 thread maps\_anim::anim_first_frame_solo(var_1[1], "limping_agent_start");
+  var_0 thread maps\_anim::anim_first_frame_solo(var_1[2], "trapped_agent_start");
+  var_5 = maps\_utility::spawn_anim_model("metal_beam");
   waittillframeend;
-  var_0 thread maps\_anim::_id_11CF(var_5, "trapped_prop");
+  var_0 thread maps\_anim::anim_first_frame_solo(var_5, "trapped_prop");
   var_5 attach("hjk_plane_debris_02", "J_prop_1");
   common_scripts\utility::flag_wait("start_trapped_anims");
-  var_1[0]._id_240A = "snow";
-  var_1[0] thread _id_5A0B(var_0, "samaritan_start", "samaritan_loop");
-  var_1[1] thread _id_5A0B(var_0, "limping_agent_start", "limping_agent_loop");
-  var_1[2] thread _id_5A0B(var_0, "trapped_agent_start", "trapped_agent_loop");
-  var_0 thread maps\_anim::_id_1246(var_5, "trapped_prop");
+  var_1[0].lastgroundtype = "snow";
+  var_1[0] thread play_anim_and_loop(var_0, "samaritan_start", "samaritan_loop");
+  var_1[1] thread play_anim_and_loop(var_0, "limping_agent_start", "limping_agent_loop");
+  var_1[2] thread play_anim_and_loop(var_0, "trapped_agent_start", "trapped_agent_loop");
+  var_0 thread maps\_anim::anim_single_solo(var_5, "trapped_prop");
   wait 8;
-  var_1[2] maps\_utility::_id_168C("hijack_fso3_helpme");
+  var_1[2] maps\_utility::dialogue_queue("hijack_fso3_helpme");
   wait 2;
-  var_1[0] maps\_utility::_id_168C("hijack_fso1_agentdown");
+  var_1[0] maps\_utility::dialogue_queue("hijack_fso1_agentdown");
   wait 8;
-  var_1[0] maps\_utility::_id_168C("hijack_fso2_medical");
+  var_1[0] maps\_utility::dialogue_queue("hijack_fso2_medical");
 }
 
-_id_5A0B(var_0, var_1, var_2) {
-  var_0 maps\_anim::_id_1246(self, var_1);
+play_anim_and_loop(var_0, var_1, var_2) {
+  var_0 maps\_anim::anim_single_solo(self, var_1);
 
   if(isDefined(self)) {
-    var_0 maps\_anim::_id_124E(self, var_2);
+    var_0 maps\_anim::anim_loop_solo(self, var_2);
   }
 }
 
-_id_5943() {
+makarov_heli() {
   level endon("kill_heli_1");
   common_scripts\utility::flag_wait("spawn_makarov_heli");
-  level._id_5943 = maps\_vehicle::_id_2881("makarov_heli");
-  level._id_59A9 = spawn("script_model", level._id_5943.origin);
-  level._id_59A9 setModel("vehicle_mi17_woodland_landing_door");
-  level._id_59A9.angles = level._id_5943.angles;
-  level._id_59A9 linkTo(level._id_5943);
+  level.makarov_heli = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("makarov_heli");
+  level.makarov_heli_door = spawn("script_model", level.makarov_heli.origin);
+  level.makarov_heli_door setModel("vehicle_mi17_woodland_landing_door");
+  level.makarov_heli_door.angles = level.makarov_heli.angles;
+  level.makarov_heli_door linkTo(level.makarov_heli);
   var_0 = 1.6;
 
-  if(level._id_1F19 == "post_tarmac" || level._id_1F19 == "end_scene") {
+  if(level.start_point == "post_tarmac" || level.start_point == "end_scene") {
     var_0 = 0.0;
   }
-  level._id_5943 thread _id_5A0D(var_0);
-  level._id_5943 thread _id_5A0C();
-  level._id_5943 maps\_utility::_id_1402("makarov_heli_reached_end");
-  level._id_5943 maps\_utility::_id_1402("start_commander_anim");
-  level._id_5943 maps\_utility::_id_1402("makarov_heli_disable_spotlight");
-  level._id_5943 maps\_utility::_id_1402("heli_start_flyaway");
-  level._id_5943 maps\_utility::_id_1402("heli_end_flyaway");
-  level._id_5943 maps\_utility::_id_1402("heli_start_approach");
-  level._id_5943 maps\_utility::_id_1402("heli_end_approach");
-  thread maps\hijack_aud::_id_5942();
+  level.makarov_heli thread setup_spotlight(var_0);
+  level.makarov_heli thread manage_spotlight_targets();
+  level.makarov_heli maps\_utility::ent_flag_init("makarov_heli_reached_end");
+  level.makarov_heli maps\_utility::ent_flag_init("start_commander_anim");
+  level.makarov_heli maps\_utility::ent_flag_init("makarov_heli_disable_spotlight");
+  level.makarov_heli maps\_utility::ent_flag_init("heli_start_flyaway");
+  level.makarov_heli maps\_utility::ent_flag_init("heli_end_flyaway");
+  level.makarov_heli maps\_utility::ent_flag_init("heli_start_approach");
+  level.makarov_heli maps\_utility::ent_flag_init("heli_end_approach");
+  thread maps\hijack_aud::loop_chopper_makarov_flyover();
 
-  if(level._id_1F19 != "post_tarmac" && level._id_1F19 != "end_scene") {
+  if(level.start_point != "post_tarmac" && level.start_point != "end_scene") {
     common_scripts\utility::flag_wait("commander_finished_engine_react_anim");
     wait 0.25;
-    level._id_58D2 maps\_utility::_id_168C("hijack_cmd_evacchoppers");
+    level.commander maps\_utility::dialogue_queue("hijack_cmd_evacchoppers");
   }
 
-  if(level._id_1F19 == "end_scene") {
+  if(level.start_point == "end_scene") {
     return;
   }
   common_scripts\utility::flag_wait("move_heli_to_hover_point");
-  level._id_5943 maps\_utility::_id_2698();
+  level.makarov_heli maps\_utility::vehicle_detachfrompath();
   var_1 = common_scripts\utility::getStruct("heli_fly_away", "targetname");
-  level._id_5943 setgoalyaw(var_1.angles[1]);
-  level._id_5943 settargetyaw(var_1.angles[1]);
-  level._id_5943 setvehgoalpos(var_1.origin, 1);
-  level._id_5943 common_scripts\utility::waittill_any("near_goal", "goal");
-  level._id_5943 thread maps\_vehicle::_id_26A1(var_1);
-  level._id_5943 maps\_utility::_id_1654("heli_end_flyaway");
+  level.makarov_heli setgoalyaw(var_1.angles[1]);
+  level.makarov_heli settargetyaw(var_1.angles[1]);
+  level.makarov_heli setvehgoalpos(var_1.origin, 1);
+  level.makarov_heli common_scripts\utility::waittill_any("near_goal", "goal");
+  level.makarov_heli thread maps\_vehicle::vehicle_paths(var_1);
+  level.makarov_heli maps\_utility::ent_flag_wait("heli_end_flyaway");
   level notify("stop_spotlight_fx");
-  level._id_5943 maps\_utility::_id_2698();
+  level.makarov_heli maps\_utility::vehicle_detachfrompath();
   var_2 = common_scripts\utility::getStruct("heli_approach", "targetname");
-  level._id_5943 setgoalyaw(var_2.angles[1]);
-  level._id_5943 settargetyaw(var_2.angles[1]);
-  level._id_5943 setvehgoalpos(var_2.origin, 1);
-  level._id_5943 common_scripts\utility::waittill_any("near_goal", "goal");
-  thread _id_599C();
+  level.makarov_heli setgoalyaw(var_2.angles[1]);
+  level.makarov_heli settargetyaw(var_2.angles[1]);
+  level.makarov_heli setvehgoalpos(var_2.origin, 1);
+  level.makarov_heli common_scripts\utility::waittill_any("near_goal", "goal");
+  thread makarov_heli_2();
 }
 
-_id_599C() {
+makarov_heli_2() {
   common_scripts\utility::flag_wait("heli_start_approach");
   maps\_audio::aud_send_msg("end_heli_approach");
   level notify("kill_heli_1");
-  level._id_5943._id_2891 thread _id_5275("heli_spotlight", "tag_flash", level._id_5943);
+  level.makarov_heli.spotlight thread spot_light("heli_spotlight", "tag_flash", level.makarov_heli);
   var_0 = common_scripts\utility::getStruct("heli_approach", "targetname");
-  level._id_5943 thread maps\_vehicle::_id_26A1(var_0);
-  level._id_5943 maps\_utility::_id_1654("heli_end_approach");
-  level._id_5943 maps\_utility::_id_2698();
+  level.makarov_heli thread maps\_vehicle::vehicle_paths(var_0);
+  level.makarov_heli maps\_utility::ent_flag_wait("heli_end_approach");
+  level.makarov_heli maps\_utility::vehicle_detachfrompath();
   var_1 = common_scripts\utility::getStruct("heli_start_descent", "targetname");
-  level._id_5943 setgoalyaw(var_1.angles[1]);
-  level._id_5943 settargetyaw(var_1.angles[1]);
-  level._id_5943 setvehgoalpos(var_1.origin, 1);
-  level._id_5943 sethoverparams(175, 40, 20);
-  level._id_5943 thread maps\hijack_script_2c::_id_59BE();
+  level.makarov_heli setgoalyaw(var_1.angles[1]);
+  level.makarov_heli settargetyaw(var_1.angles[1]);
+  level.makarov_heli setvehgoalpos(var_1.origin, 1);
+  level.makarov_heli sethoverparams(175, 40, 20);
+  level.makarov_heli thread maps\hijack_script_2c::spotlight_monitor_end();
   common_scripts\utility::flag_wait("start_heli_descent");
-  level._id_5943 thread maps\hijack_script_2c::_id_59BC();
+  level.makarov_heli thread maps\hijack_script_2c::heli_lands();
   var_2 = common_scripts\utility::getStruct("heli_start_descent", "targetname");
-  level._id_5943 thread maps\_vehicle::_id_26A1(var_2);
+  level.makarov_heli thread maps\_vehicle::vehicle_paths(var_2);
 }
 
-_id_5A0C() {
-  level._id_5943 thread _id_5A12();
+manage_spotlight_targets() {
+  level.makarov_heli thread spotlight_monitor_flyover();
   common_scripts\utility::flag_wait("start_spotlight_random_targeting");
-  level._id_5943 thread _id_5A13();
+  level.makarov_heli thread spotlight_monitor_random_targets();
 }
 
-_id_5A0D(var_0) {
-  self._id_2891 = spawnturret("misc_turret", self gettagorigin("tag_turret"), "heli_spotlight");
-  self._id_2891 setmode("manual");
-  self._id_2891 setModel("com_blackhawk_spotlight_on_mg_setup");
-  self._id_2891 linkTo(self, "tag_turret");
-  self._id_2891 makeunusable();
+setup_spotlight(var_0) {
+  self.spotlight = spawnturret("misc_turret", self gettagorigin("tag_turret"), "heli_spotlight");
+  self.spotlight setmode("manual");
+  self.spotlight setModel("com_blackhawk_spotlight_on_mg_setup");
+  self.spotlight linkTo(self, "tag_turret");
+  self.spotlight makeunusable();
 
   if(isDefined(var_0)) {
     wait(var_0);
   }
-  self._id_2891 thread _id_5275("heli_spotlight", "tag_flash", self);
+  self.spotlight thread spot_light("heli_spotlight", "tag_flash", self);
 }
 
-_id_5275(var_0, var_1, var_2) {
+spot_light(var_0, var_1, var_2) {
   var_3 = spawnStruct();
-  var_3._id_536B = common_scripts\utility::getfx(var_0);
+  var_3.effect_id = common_scripts\utility::getfx(var_0);
   var_3.entity = self;
-  self._id_5275 = var_3;
-  var_3._id_536A = var_1;
-  playFXOnTag(var_3._id_536B, var_3.entity, var_3._id_536A);
-  thread _id_536E(var_2);
+  self.spot_light = var_3;
+  var_3.tag_name = var_1;
+  playFXOnTag(var_3.effect_id, var_3.entity, var_3.tag_name);
+  thread spot_light_death(var_2);
   level waittill("stop_spotlight_fx");
 
   if(isDefined(var_3.entity)) {
-    stopFXOnTag(var_3._id_536B, var_3.entity, var_3._id_536A);
+    stopFXOnTag(var_3.effect_id, var_3.entity, var_3.tag_name);
     wait 0.05;
-    var_3._id_5A0E = common_scripts\utility::getfx(var_0 + "_off");
-    playFXOnTag(var_3._id_5A0E, var_3.entity, var_3._id_536A);
+    var_3.effect_id_off = common_scripts\utility::getfx(var_0 + "_off");
+    playFXOnTag(var_3.effect_id_off, var_3.entity, var_3.tag_name);
   }
 }
 
-_id_536E(var_0) {
+spot_light_death(var_0) {
   self endon("death");
 
   if(isDefined(var_0)) {
@@ -1085,56 +1085,56 @@ _id_536E(var_0) {
   self delete();
 }
 
-_id_5A0F() {
+update_spotlight_targets() {
   for(;;) {
     var_0 = anglesToForward(self.angles * (0, 1, 0) + (40, -25, 0));
-    self._id_5A10.origin = self gettagorigin("tag_turret") + var_0 * 100;
+    self.spotlight_target_right.origin = self gettagorigin("tag_turret") + var_0 * 100;
     var_1 = anglesToForward(self.angles * (0, 1, 0) + (40, 25, 0));
-    self._id_5A11.origin = self gettagorigin("tag_turret") + var_1 * 100;
+    self.spotlight_target_left.origin = self gettagorigin("tag_turret") + var_1 * 100;
     wait 0.05;
   }
 }
 
-_id_5A12() {
+spotlight_monitor_flyover() {
   self endon("death");
   self endon("start_random_spotlight_targets");
   self endon("shine_spotlight_on_president");
   var_0 = getEnt("tail_spotlight_target_1", "targetname");
-  self._id_2891 settargetentity(var_0);
+  self.spotlight settargetentity(var_0);
   wait 4;
   var_1 = getEnt("tail_spotlight_target_2", "targetname");
   var_2 = spawn("script_origin", var_1.origin);
-  self._id_2891 settargetentity(var_2);
-  var_2 thread maps\hijack_script_2c::_id_59BD(var_1);
+  self.spotlight settargetentity(var_2);
+  var_2 thread maps\hijack_script_2c::move_around_target(var_1);
   wait 4;
   var_3 = getEnt("ring_spotlight_target", "targetname");
-  self._id_2891 settargetentity(var_3);
+  self.spotlight settargetentity(var_3);
   common_scripts\utility::flag_wait("commander_ready_for_heli");
-  self._id_2891 settargetentity(level._id_58D2);
+  self.spotlight settargetentity(level.commander);
   wait 4;
   common_scripts\utility::flag_set("start_spotlight_random_targeting");
 }
 
-_id_5A13() {
+spotlight_monitor_random_targets() {
   self endon("death");
   self endon("shine_spotlight_on_president");
   self notify("start_random_spotlight_targets");
-  self._id_5A10 = spawn("script_origin", self.origin);
-  self._id_5A11 = spawn("script_origin", self.origin);
-  childthread _id_5A0F();
+  self.spotlight_target_right = spawn("script_origin", self.origin);
+  self.spotlight_target_left = spawn("script_origin", self.origin);
+  childthread update_spotlight_targets();
 
   for(;;) {
-    self._id_2891 settargetentity(self._id_5A10);
+    self.spotlight settargetentity(self.spotlight_target_right);
     wait 2;
-    self._id_2891 settargetentity(self._id_5A11);
+    self.spotlight settargetentity(self.spotlight_target_left);
     wait 2;
   }
 }
 
-_id_5A14() {}
+setup_vehicle_light_types() {}
 
-_id_59C7() {
-  maps\_vehicle::_id_2B17();
+turn_on_headlights() {
+  maps\_vehicle::vehicle_lights_on();
   self waittill("death");
-  maps\_vehicle::_id_2B18("all");
+  maps\_vehicle::vehicle_lights_off("all");
 }

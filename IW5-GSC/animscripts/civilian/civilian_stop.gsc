@@ -4,5 +4,5 @@
 **************************************************/
 
 main() {
-  animscripts\civilian::_id_400D();
+  animscripts\civilian::stop();
 }

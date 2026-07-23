@@ -17,8 +17,8 @@ _id_4531(var_0) {
 
 _id_4532() {
   self waittill("death");
-  self._id_4533 delete();
-  self._id_4533 = undefined;
+  self.origin delete();
+  self.origin = undefined;
 }
 
 _id_4534() {
@@ -26,27 +26,27 @@ _id_4534() {
     return;
   }
   self endon("death");
-  level._id_4483 endon("death");
-  self._id_4533 = common_scripts\utility::spawn_tag_origin();
+  level.player_hind endon("death");
+  self.origin = common_scripts\utility::spawn_tag_origin();
   thread _id_4532();
-  var_0 = self._id_4533;
-  var_0.origin = level._id_4483.origin;
+  var_0 = self.origin;
+  var_0.origin = level.player_hind.origin;
   var_1 = 0;
-  self._id_4535["around_dangle"] = 6.0;
-  self._id_4535["around_radius"] = 120;
-  self._id_4535["target"] = var_0;
-  self._id_4535["aimspeed"] = 80;
+  self.main_turret["around_dangle"] = 6.0;
+  self.main_turret["around_radius"] = 120;
+  self.main_turret["target"] = var_0;
+  self.main_turret["aimspeed"] = 80;
 
   for(;;) {
     var_2 = 0.5 * (level.player getEye() + level.player.origin);
     var_3 = var_2 - self.origin;
     var_3 = vectorNormalize(var_3);
-    var_4 = maps\_shg_common::_id_1684(var_3, (0, 0, 1));
+    var_4 = maps\_shg_common::vectorcross(var_3, (0, 0, 1));
     var_5 = cos(var_1);
     var_6 = sin(var_1);
     var_7 = var_5 * var_4 + var_6 * (0, 0, 1);
-    var_0.origin = var_2 + self._id_4535["around_radius"] * var_7;
-    var_1 = var_1 + self._id_4535["around_dangle"];
+    var_0.origin = var_2 + self.main_turret["around_radius"] * var_7;
+    var_1 = var_1 + self.main_turret["around_dangle"];
 
     if(var_1 > 360) {
       var_1 = var_1 - 360;
@@ -59,17 +59,17 @@ _id_4536() {
   if(!isDefined(self)) {
     return;
   }
-  self._id_4535["target"] = level.player;
-  self._id_4535["mintimebtnfires"] = 0.1;
-  self._id_4535["maxtimebtnfires"] = 0.5;
-  self._id_4535["aimspeed"] = 80;
-  self._id_4535["aimcount"] = 120;
-  self._id_4535["sweepspeed"] = 10;
-  self._id_4535["sweepcount"] = 0;
-  self._id_4535["delay"] = 0.0;
-  self._id_4535["delayrange"] = 0.1;
-  self._id_4535["burst"] = 0.5;
-  self._id_4535["burstrange"] = 1.5;
+  self.main_turret["target"] = level.player;
+  self.main_turret["mintimebtnfires"] = 0.1;
+  self.main_turret["maxtimebtnfires"] = 0.5;
+  self.main_turret["aimspeed"] = 80;
+  self.main_turret["aimcount"] = 120;
+  self.main_turret["sweepspeed"] = 10;
+  self.main_turret["sweepcount"] = 0;
+  self.main_turret["delay"] = 0.0;
+  self.main_turret["delayrange"] = 0.1;
+  self.main_turret["burst"] = 0.5;
+  self.main_turret["burstrange"] = 1.5;
   self notify("turretstatechange");
 }
 
@@ -77,12 +77,12 @@ _id_4537() {
   if(!isDefined(self)) {
     return;
   }
-  self._id_4535["delay"] = 120.0;
-  self._id_4535["delayrange"] = 0.1;
-  self._id_4535["burst"] = 0.0;
-  self._id_4535["burstrange"] = 0.0;
-  self._id_4535["mintimebtnfires"] = 10000;
-  self._id_4535["maxtimebtnfires"] = 10000;
+  self.main_turret["delay"] = 120.0;
+  self.main_turret["delayrange"] = 0.1;
+  self.main_turret["burst"] = 0.0;
+  self.main_turret["burstrange"] = 0.0;
+  self.main_turret["mintimebtnfires"] = 10000;
+  self.main_turret["maxtimebtnfires"] = 10000;
   self notify("turretstatechange");
 }
 
@@ -94,7 +94,7 @@ _id_4538() {
   thread _id_453C();
 
   for(;;) {
-    var_0 = randomfloatrange(self._id_4535["mintimebtnfires"], self._id_4535["maxtimebtnfires"]);
+    var_0 = randomfloatrange(self.main_turret["mintimebtnfires"], self.main_turret["maxtimebtnfires"]);
     wait(var_0);
     self._id_44D4 = 1;
     self waittill("turretstatechange");
@@ -119,10 +119,10 @@ _id_4539() {
         thread _id_453E();
       }
 
-      var_2 = self._id_4535["burst"] + randomfloat(self._id_4535["burstrange"]);
+      var_2 = self.main_turret["burst"] + randomfloat(self.main_turret["burstrange"]);
       thread _id_453F(var_2);
       self waittill("turretstatechange");
-      var_2 = self._id_4535["delay"] + randomfloat(self._id_4535["delayrange"]);
+      var_2 = self.main_turret["delay"] + randomfloat(self.main_turret["delayrange"]);
       var_0 = gettime() + int(var_2 * 1000);
       continue;
     }
@@ -142,32 +142,32 @@ _id_453A() {
   if(!isDefined(self)) {
     return;
   }
-  self._id_4535["mintimebtnfires"] = 0.5;
-  self._id_4535["maxtimebtnfires"] = 4;
-  self._id_4535["aimspeed"] = 40;
-  self._id_4535["aimcount"] = 120;
-  self._id_4535["sweepspeed"] = 10;
-  self._id_4535["sweepcount"] = 60;
-  self._id_4535["state"] = "aiming";
-  self._id_4535["oldstate"] = "xxxx";
-  self._id_4535["delay"] = 0.2;
-  self._id_4535["delayrange"] = 0.5;
-  self._id_4535["burst"] = 0.5;
-  self._id_4535["burstrange"] = 1.5;
-  self._id_4535["target"] = level.player;
+  self.main_turret["mintimebtnfires"] = 0.5;
+  self.main_turret["maxtimebtnfires"] = 4;
+  self.main_turret["aimspeed"] = 40;
+  self.main_turret["aimcount"] = 120;
+  self.main_turret["sweepspeed"] = 10;
+  self.main_turret["sweepcount"] = 60;
+  self.main_turret["state"] = "aiming";
+  self.main_turret["oldstate"] = "xxxx";
+  self.main_turret["delay"] = 0.2;
+  self.main_turret["delayrange"] = 0.5;
+  self.main_turret["burst"] = 0.5;
+  self.main_turret["burstrange"] = 1.5;
+  self.main_turret["target"] = level.player;
 }
 
 _id_453B(var_0) {
   if(!isDefined(self)) {
     return;
   }
-  self._id_4535["state"] = var_0;
+  self.main_turret["state"] = var_0;
 }
 
 _id_453C() {
   self endon("stop_ai");
 
-  if(!isDefined(self._id_4535)) {
+  if(!isDefined(self.main_turret)) {
     return;
   }
   self endon("death");
@@ -179,14 +179,14 @@ _id_453C() {
   for(;;) {
     self setturrettargetvec(var_1);
 
-    if(self._id_4535["oldstate"] != self._id_4535["state"]) {
+    if(self.main_turret["oldstate"] != self.main_turret["state"]) {
       var_2 = 0;
-      self._id_4535["oldstate"] = self._id_4535["state"];
+      self.main_turret["oldstate"] = self.main_turret["state"];
     }
 
     var_2++;
 
-    if(self._id_4535["state"] == "sweeping") {
+    if(self.main_turret["state"] == "sweeping") {
       var_5 = distance(level.player.origin, self.origin);
       var_0 = anglesToForward(self.angles);
       var_6 = self.origin + var_5 * var_0;
@@ -194,20 +194,20 @@ _id_453C() {
       var_5 = distance(var_6, var_1);
       var_7 = vectorNormalize(var_7);
 
-      if(var_5 > self._id_4535["aimspeed"]) {
-        var_5 = self._id_4535["aimspeed"];
+      if(var_5 > self.main_turret["aimspeed"]) {
+        var_5 = self.main_turret["aimspeed"];
       }
       var_1 = var_1 + var_5 * var_7;
 
-      if(var_2 > self._id_4535["sweepcount"]) {
+      if(var_2 > self.main_turret["sweepcount"]) {
         var_2 = 0;
-        self._id_4535["state"] = "aiming";
+        self.main_turret["state"] = "aiming";
       }
-    } else if(self._id_4535["state"] == "aiming") {
-      var_8 = self._id_4535["target"];
+    } else if(self.main_turret["state"] == "aiming") {
+      var_8 = self.main_turret["target"];
 
       if(!isDefined(var_8) || isai(var_8) && !isalive(var_8)) {
-        self._id_4535["state"] = "idle";
+        self.main_turret["state"] = "idle";
         continue;
       }
 
@@ -220,14 +220,14 @@ _id_453C() {
       var_5 = distance(var_6, var_1);
       var_7 = vectorNormalize(var_7);
 
-      if(var_5 > self._id_4535["aimspeed"]) {
-        var_5 = self._id_4535["aimspeed"];
+      if(var_5 > self.main_turret["aimspeed"]) {
+        var_5 = self.main_turret["aimspeed"];
       }
       var_1 = var_1 + var_5 * var_7;
 
-      if(var_2 > self._id_4535["aimcount"]) {
+      if(var_2 > self.main_turret["aimcount"]) {
         var_2 = 0;
-        self._id_4535["state"] = "sweeping";
+        self.main_turret["state"] = "sweeping";
       }
     } else {
       var_0 = anglesToForward(self.angles);

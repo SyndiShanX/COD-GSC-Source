@@ -7,7 +7,7 @@ main() {
   self endon("killanimscript");
   var_0 = self getnegotiationstartnode();
   self orientmode("face angle", var_0.angles[1]);
-  var_1 = var_0._id_1EFA - var_0.origin[2];
+  var_1 = var_0.traverse_height - var_0.origin[2];
   var_2 = var_1;
   var_3 = 6;
   var_4 = (0, 0, var_2 / var_3);

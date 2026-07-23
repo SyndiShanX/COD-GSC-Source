@@ -4,11 +4,11 @@
 **************************************/
 
 main() {
-  _id_5B4B();
+  precache_createfx_fx();
   precache_scripted_fx();
 }
 
-_id_5B4B() {
+precache_createfx_fx() {
   level._effect["light_godray_bloom_a"] = loadfx("maps/mp_overwatch/light_godray_bloom_a");
   level._effect["light_godray_bloom_b"] = loadfx("maps/mp_overwatch/light_godray_bloom_b");
   level._effect["wall_fire_mp2"] = loadfx("fire/wall_fire_mp2");

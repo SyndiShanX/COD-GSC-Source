@@ -3,15 +3,15 @@
  * Script: scripts\1357.gsc
 **************************************/
 
-_id_40A4(var_0, var_1) {
-  maps\_vehicle::_id_2A12();
-  maps\_vehicle_aianim::_id_2574(maps\_vehicle_aianim::_id_25C7(), 3);
+ride_setup(var_0, var_1) {
+  maps\_vehicle::godon();
+  maps\_vehicle_aianim::getout_rigspawn(maps\_vehicle_aianim::getanimatemodel(), 3);
 
   if(!isDefined(var_1)) {
     var_1 = level.players;
   }
   foreach(var_3 in var_1) {}
-  thread _id_40A5(var_3, 3);
+  thread attach_player(var_3, 3);
 
   var_5 = 95;
 
@@ -19,12 +19,12 @@ _id_40A4(var_0, var_1) {
     var_5 = var_0.speed;
   }
   self setairresistance(30);
-  self vehicle_setspeed(var_5, 40, level._id_28F3);
-  maps\_vehicle::_id_26A1(var_0);
+  self vehicle_setspeed(var_5, 40, level.heli_default_decel);
+  maps\_vehicle::vehicle_paths(var_0);
 }
 
-_id_40A5(var_0, var_1, var_2) {
-  var_0 thread _id_40A7(self);
+attach_player(var_0, var_1, var_2) {
+  var_0 thread player_in_heli(self);
 
   if(getDvar("fastrope_arms") == "") {
     setDvar("fastrope_arms", "0");
@@ -34,31 +34,31 @@ _id_40A5(var_0, var_1, var_2) {
   }
   var_3 = undefined;
 
-  for(var_4 = 0; var_4 < self._id_0A39.size; var_4++) {
-    if(self._id_0A39[var_4]._id_2252 == var_1) {
-      var_3 = self._id_0A39[var_4];
-      var_3._id_224F = 1;
-      var_3._id_254E = 1;
+  for(var_4 = 0; var_4 < self.riders.size; var_4++) {
+    if(self.riders[var_4].vehicle_position == var_1) {
+      var_3 = self.riders[var_4];
+      var_3.drone_delete_on_unload = 1;
+      var_3.playerpiggyback = 1;
       break;
     }
   }
 
-  var_5 = maps\_vehicle_aianim::_id_2534(self, var_1);
+  var_5 = maps\_vehicle_aianim::anim_pos(self, var_1);
   var_3 notify("newanim");
   var_3 detachall();
   var_3 setModel("fastrope_arms");
-  var_3 useanimtree(var_5._id_2AA4);
-  thread maps\_vehicle_aianim::_id_2549(var_3, var_1);
+  var_3 useanimtree(var_5.player_animtree);
+  thread maps\_vehicle_aianim::guy_idle(var_3, var_1);
   wait 0.1;
 
-  if(isDefined(level._id_40A6)) {
+  if(isDefined(level.little_bird)) {
     var_0 playerlinkTo(var_3, "tag_player", 0.35, 120, 28, 30, 30, 0);
   } else {
     var_0 playerlinkTo(var_3, "tag_player", 0.35, 60, 28, 30, 30, 0);
   }
   var_0 freezecontrols(0);
   var_3 hide();
-  var_6 = getanimlength(var_5._id_257C);
+  var_6 = getanimlength(var_5.getout);
   var_6 = var_6 - var_2;
   self waittill("unloading");
 
@@ -73,10 +73,10 @@ _id_40A5(var_0, var_1, var_2) {
   level notify("stop_draw_hud_on_death");
 }
 
-_id_40A7(var_0) {
+player_in_heli(var_0) {
   setsaveddvar("g_friendlyNameDist", 0);
   setsaveddvar("g_friendlyfireDist", 0);
-  maps\_utility::_id_2785();
+  maps\_utility::hide_player_model();
   self allowsprint(0);
   self allowprone(0);
   self allowstand(0);
@@ -87,7 +87,7 @@ _id_40A7(var_0) {
   var_0 waittill("unloading");
   self notify("stop_quake");
   wait 6;
-  maps\_utility::_id_1425("on_the_ground");
+  maps\_utility::autosave_by_name("on_the_ground");
   self allowprone(0);
   self allowstand(1);
   self allowcrouch(0);
@@ -98,7 +98,7 @@ _id_40A7(var_0) {
   self.ignoreme = 0;
   self allowsprint(1);
   wait 4;
-  maps\_utility::_id_2786();
+  maps\_utility::show_player_model();
 
   if(self == level.player) {
     for(var_1 = 0; var_1 < 24; var_1++) {
@@ -111,15 +111,15 @@ _id_40A7(var_0) {
   setsaveddvar("g_friendlyfireDist", 128);
 }
 
-_id_40A8(var_0, var_1, var_2) {
+player_heli_ropeanimoverride_idle(var_0, var_1, var_2) {
   self endon("unloading");
 
   for(;;) {
-    maps\_vehicle_aianim::_id_259E(var_0, var_1, var_2);
+    maps\_vehicle_aianim::animontag(var_0, var_1, var_2);
   }
 }
 
-_id_40A9(var_0, var_1) {
+ride_start(var_0, var_1) {
   var_2 = "heli_ride_in";
   var_3 = getEntArray(var_2, "targetname");
 
@@ -132,9 +132,9 @@ _id_40A9(var_0, var_1) {
   var_3 = var_3[0];
 
   if(isDefined(var_1)) {
-    maps\_vehicle::_id_2AF5(level._id_2AF1._id_250B, var_1);
+    maps\_vehicle::vehicle_spawn_group_limit_riders(level.gag_heliride_spawner.script_vehicleride, var_1);
   }
-  var_4 = maps\_vehicle::_id_211F(level._id_2AF1);
-  var_4 thread _id_40A4(var_3, var_0);
+  var_4 = maps\_vehicle::vehicle_spawn(level.gag_heliride_spawner);
+  var_4 thread ride_setup(var_3, var_0);
   return var_4;
 }

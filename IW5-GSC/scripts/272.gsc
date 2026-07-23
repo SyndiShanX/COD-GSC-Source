@@ -3,44 +3,44 @@
  * Script: scripts\272.gsc
 **************************************/
 
-_id_1C5B() {
-  if(!isDefined(level._id_1C5C)) {
-    _id_1C65();
+init_loadout() {
+  if(!isDefined(level.dodgeloadout)) {
+    give_loadout();
   }
-  level._id_0A82 = 1;
+  level.loadoutcomplete = 1;
   level notify("loadout complete");
 }
 
-_id_1C5D() {
+setdefaultactionslot() {
   self setactionslot(1, "");
   self setactionslot(2, "");
   self setactionslot(3, "altMode");
   self setactionslot(4, "");
 }
 
-_id_1C5E() {
-  _id_1C5D();
+init_player() {
+  setdefaultactionslot();
   self takeallweapons();
 }
 
-_id_1C5F() {
-  level._id_1C60 = level.player;
-  level._id_1C61 = level._id_1337;
+char_switcher() {
+  level.coop_player1 = level.player;
+  level.coop_player2 = level.player2;
 
-  if(isDefined(level._id_1C62) && level._id_1C62) {
-    if(maps\_utility::_id_12C1()) {
+  if(isDefined(level.character_switched) && level.character_switched) {
+    if(maps\_utility::is_coop()) {
       foreach(var_1 in level.players) {}
-      var_1 _id_1C5E();
+      var_1 init_player();
 
-      level._id_1C60 = level._id_1337;
-      level._id_1C61 = level.player;
-      level._id_1C62 = 1;
+      level.coop_player1 = level.player2;
+      level.coop_player2 = level.player;
+      level.character_switched = 1;
       return 1;
     } else {
-      level.player _id_1C5E();
-      level._id_1C60 = undefined;
-      level._id_1C61 = level.player;
-      level._id_1C62 = 1;
+      level.player init_player();
+      level.coop_player1 = undefined;
+      level.coop_player2 = level.player;
+      level.character_switched = 1;
       return 1;
     }
   }
@@ -48,48 +48,48 @@ _id_1C5F() {
   return 0;
 }
 
-_id_1C63() {
-  if(isDefined(level._id_1C64)) {
-    return level._id_1C64;
+get_loadout() {
+  if(isDefined(level.loadout)) {
+    return level.loadout;
   }
   return level.script;
 }
 
-_id_1C65(var_0) {
-  var_1 = _id_1C63();
+give_loadout(var_0) {
+  var_1 = get_loadout();
 
   if(!isDefined(var_0)) {
     var_0 = 0;
   }
-  level._id_1C66 = var_0;
+  level.character_selected = var_0;
   var_2 = [];
-  level.player _id_1C5D();
+  level.player setdefaultactionslot();
 
-  if(maps\_utility::_id_12C1()) {
-    level._id_1337 _id_1C5D();
+  if(maps\_utility::is_coop()) {
+    level.player2 setdefaultactionslot();
   }
   if(!isDefined(game["expectedlevel"])) {
     game["expectedlevel"] = "";
   }
-  if(!isDefined(level._id_0BA2)) {
-    level._id_0BA2 = "american";
+  if(!isDefined(level.campaign)) {
+    level.campaign = "american";
   }
   if(common_scripts\utility::string_starts_with(level.script, "pmc_")) {
     level.player setviewmodel("viewmodel_base_viewhands");
 
-    if(maps\_utility::_id_12C1()) {
+    if(maps\_utility::is_coop()) {
       precachemodel("weapon_parabolic_knife");
-      level.player maps\_utility::_id_1C67(::_id_1CA0);
-      level._id_1337 maps\_utility::_id_1C67(::_id_1CA0);
-      level._id_1337 setviewmodel("viewmodel_base_viewhands");
+      level.player maps\_utility::setmodelfunc(::so_body_player_ranger);
+      level.player2 maps\_utility::setmodelfunc(::so_body_player_ranger);
+      level.player2 setviewmodel("viewmodel_base_viewhands");
     }
 
-    level._id_0BA2 = "american";
+    level.campaign = "american";
     return;
   }
 
-  if(maps\_utility::_id_0A36()) {
-    _id_1C6D(var_0);
+  if(maps\_utility::is_specialop()) {
+    give_loadout_specialops(var_0);
     return;
   }
 
@@ -111,11 +111,11 @@ _id_1C65(var_0) {
     level.player setoffhandsecondaryclass("flash");
     level.player switchtoweapon("mp5_silencer_eotech");
     level.player setviewmodel("viewhands_sas");
-    level._id_0BA2 = "british";
+    level.campaign = "british";
     return;
   } else if(var_1 == "innocent") {
     level.player setviewmodel("viewhands_sas");
-    level._id_0BA2 = "british";
+    level.campaign = "british";
 
     if(!isDefined(game["previous_map"])) {
       level.player giveweapon("mp5_silencer_eotech");
@@ -126,7 +126,7 @@ _id_1C65(var_0) {
       level.player switchtoweapon("mp5_silencer_eotech");
     } else {
       level.player setoffhandsecondaryclass("flash");
-      _id_1C7C("london", 1);
+      restoreplayerweaponstatepersistent("london", 1);
     }
 
     return;
@@ -138,18 +138,18 @@ _id_1C65(var_0) {
     level.player setoffhandsecondaryclass("flash");
     level.player switchtoweapon("m4m203_acog_payback");
     level.player setviewmodel("viewhands_delta");
-    level._id_0BA2 = "delta";
+    level.campaign = "delta";
     return;
   } else if(var_1 == "prague") {
-    level._id_1C68 = "rsass_hybrid_silenced";
-    level.player giveweapon(level._id_1C68);
+    level.default_weapon = "rsass_hybrid_silenced";
+    level.player giveweapon(level.default_weapon);
     level.player giveweapon("usp_silencer");
     level.player giveweapon("fraggrenade");
     level.player giveweapon("flash_grenade");
     level.player setoffhandsecondaryclass("flash");
-    level.player switchtoweapon(level._id_1C68);
+    level.player switchtoweapon(level.default_weapon);
     level.player setviewmodel("viewhands_yuri_europe");
-    level._id_0BA2 = "delta";
+    level.campaign = "delta";
     return;
   } else if(var_1 == "warlord") {
     level.player giveweapon("m14ebr_scoped_silenced_warlord");
@@ -159,19 +159,19 @@ _id_1C65(var_0) {
     level.player setoffhandsecondaryclass("flash");
     level.player switchtoweapon("m14ebr_scoped_silenced_warlord");
     level.player setviewmodel("viewhands_yuri");
-    level._id_0BA2 = "american";
+    level.campaign = "american";
     return;
   } else if(var_1 == "castle") {
-    level._id_1C69 = "mp5_silencer_reflex_castle";
-    level._id_1C6A = "p99_tactical_silencer";
-    level.player giveweapon(level._id_1C69);
-    level.player giveweapon(level._id_1C6A);
+    level.castle_main_weapon = "mp5_silencer_reflex_castle";
+    level.castle_side_weapon = "p99_tactical_silencer";
+    level.player giveweapon(level.castle_main_weapon);
+    level.player giveweapon(level.castle_side_weapon);
     level.player giveweapon("fraggrenade");
     level.player giveweapon("flash_grenade");
     level.player setoffhandsecondaryclass("flash");
-    level.player switchtoweapon(level._id_1C69);
+    level.player switchtoweapon(level.castle_main_weapon);
     level.player setviewmodel("viewhands_yuri_europe");
-    level._id_0BA2 = "american";
+    level.campaign = "american";
     return;
   } else if(var_1 == "berlin") {
     level.player giveweapon("m14ebr_scope");
@@ -181,7 +181,7 @@ _id_1C65(var_0) {
     level.player giveweapon("ninebang_grenade");
     level.player switchtoweapon("acr_hybrid_berlin");
     level.player setviewmodel("viewhands_delta");
-    level._id_0BA2 = "delta";
+    level.campaign = "delta";
     return;
   } else if(var_1 == "paris_a") {
     level.player giveweapon("scar_h_acog");
@@ -191,7 +191,7 @@ _id_1C65(var_0) {
     level.player giveweapon("ninebang_grenade");
     level.player switchtoweapon("scar_h_acog");
     level.player setviewmodel("viewhands_delta");
-    level._id_0BA2 = "delta";
+    level.campaign = "delta";
     return;
   } else if(var_1 == "paris_b") {
     level.player giveweapon("scar_h_acog");
@@ -201,7 +201,7 @@ _id_1C65(var_0) {
     level.player giveweapon("ninebang_grenade");
     level.player switchtoweapon("scar_h_acog");
     level.player setviewmodel("viewhands_delta");
-    level._id_0BA2 = "delta";
+    level.campaign = "delta";
     return;
   } else if(var_1 == "paris_ac130") {
     level.player setviewmodel("viewhands_delta");
@@ -212,7 +212,7 @@ _id_1C65(var_0) {
     level.player setoffhandsecondaryclass("flash");
     level.player giveweapon("flash_grenade");
     level.player switchtoweapon("m4m203_reflex");
-    level._id_0BA2 = "delta";
+    level.campaign = "delta";
     return;
   } else if(var_1 == "ny_manhattan") {
     level.player giveweapon("m4_hybrid_grunt_optim");
@@ -222,7 +222,7 @@ _id_1C65(var_0) {
     level.player setoffhandsecondaryclass("flash");
     level.player switchtoweapon("m4_hybrid_grunt_optim");
     level.player setviewmodel("viewhands_delta_shg");
-    level._id_0BA2 = "delta";
+    level.campaign = "delta";
     return;
   } else if(var_1 == "ny_harbor") {
     level.player giveweapon("mp5_silencer_reflex");
@@ -234,19 +234,19 @@ _id_1C65(var_0) {
     level.player setoffhandsecondaryclass("flash");
     level.player switchtoweapon("mp5_silencer_reflex");
     level.player setviewmodel("viewhands_udt");
-    level._id_0BA2 = "delta";
+    level.campaign = "delta";
     return;
   } else if(var_1 == "dubai") {
-    level._id_1C6B = "pecheneg_fastreload";
-    level.player giveweapon(level._id_1C6B);
-    level.player givemaxammo(level._id_1C6B);
+    level.dubai_main_weapon = "pecheneg_fastreload";
+    level.player giveweapon(level.dubai_main_weapon);
+    level.player givemaxammo(level.dubai_main_weapon);
     level.player giveweapon("m4m203_acog");
     level.player giveweapon("fraggrenade");
     level.player giveweapon("flash_grenade");
     level.player setoffhandsecondaryclass("flash");
-    level.player switchtoweapon(level._id_1C6B);
+    level.player switchtoweapon(level.dubai_main_weapon);
     level.player setviewmodel("viewhands_juggernaut_ally");
-    level._id_0BA2 = "american";
+    level.campaign = "american";
     return;
   } else if(var_1 == "payback") {
     level.player giveweapon("m4m203_acog_payback");
@@ -256,13 +256,13 @@ _id_1C65(var_0) {
     level.player giveweapon("flash_grenade");
     level.player switchtoweapon("m4m203_acog_payback");
     level.player setviewmodel("viewhands_yuri");
-    level._id_0BA2 = "delta";
+    level.campaign = "delta";
     return;
   } else if(var_1 == "hijack") {
     level.player giveweapon("fnfiveseven");
     level.player switchtoweapon("fnfiveseven");
     level.player setviewmodel("viewhands_fso");
-    level._id_0BA2 = "american";
+    level.campaign = "american";
     return;
   } else if(var_1 == "prague_escape") {
     level.player giveweapon("deserteagle");
@@ -272,7 +272,7 @@ _id_1C65(var_0) {
     level.player setoffhandsecondaryclass("flash");
     level.player switchtoweapon("m4m203_reflex");
     level.player setviewmodel("viewhands_yuri_europe");
-    level._id_0BA2 = "delta";
+    level.campaign = "delta";
     return;
   } else if(var_1 == "intro") {
     level.player giveweapon("ak47_reflex");
@@ -285,112 +285,112 @@ _id_1C65(var_0) {
     level.player setoffhandsecondaryclass("flash");
     level.player switchtoweapon("ak47_reflex");
     level.player setviewmodel("viewhands_yuri");
-    level._id_0BA2 = "american";
+    level.campaign = "american";
     return;
   } else if(var_1 == "rescue") {
-    level._id_1C68 = "acr_hybrid_silenced";
-    level.player giveweapon(level._id_1C68);
-    level.player givemaxammo(level._id_1C68);
+    level.default_weapon = "acr_hybrid_silenced";
+    level.player giveweapon(level.default_weapon);
+    level.player givemaxammo(level.default_weapon);
     level.player giveweapon("usp");
     level.player givemaxammo("usp");
     level.player giveweapon("fraggrenade");
     level.player giveweapon("flash_grenade");
     level.player setoffhandprimaryclass("frag");
     level.player setoffhandsecondaryclass("flash");
-    level.player switchtoweapon(level._id_1C68);
+    level.player switchtoweapon(level.default_weapon);
     level.player setviewmodel("viewmodel_base_viewhands");
-    level._id_0BA2 = "american";
+    level.campaign = "american";
     return;
   } else if(var_1 == "rescue_2") {
-    level._id_1C68 = "g36c_reflex";
-    level.player giveweapon(level._id_1C68);
-    level.player givemaxammo(level._id_1C68);
+    level.default_weapon = "g36c_reflex";
+    level.player giveweapon(level.default_weapon);
+    level.player givemaxammo(level.default_weapon);
     level.player giveweapon("m4_grunt_acog");
     level.player givemaxammo("m4_grunt_acog");
     level.player giveweapon("fraggrenade");
     level.player giveweapon("flash_grenade");
     level.player setoffhandprimaryclass("frag");
     level.player setoffhandsecondaryclass("flash");
-    level.player switchtoweapon(level._id_1C68);
+    level.player switchtoweapon(level.default_weapon);
     level.player setviewmodel("viewhands_yuri_europe");
-    level._id_0BA2 = "american";
+    level.campaign = "american";
     return;
   } else if(var_1 == "innocent") {
-    level._id_0BA2 = "british";
+    level.campaign = "british";
     return;
   }
 
   if(issubstr(var_1, "firingrange")) {
     return;
   }
-  level._id_1C6C = 1;
-  _id_1C79();
+  level.testmap = 1;
+  give_default_loadout();
 }
 
-_id_1C6D(var_0) {
-  var_1 = _id_1C63();
+give_loadout_specialops(var_0) {
+  var_1 = get_loadout();
 
   if(var_1 == "so_nyse_ny_manhattan") {
-    level._id_1338 = "delta";
+    level.so_campaign = "delta";
 
     foreach(var_6, var_3 in level.players) {
-      _id_1C8B(var_6);
+      so_player_num(var_6);
       var_4 = "m4_hybrid_grunt_optim";
       var_5 = "xm25";
-      _id_1C94(var_4);
-      _id_1C94(var_5);
-      _id_1C90(var_4);
-      _id_1C94("fraggrenade");
-      _id_1C94("flash_grenade");
-      _id_1C8F("flash");
-      _id_1C9C(var_6);
+      so_player_giveweapon(var_4);
+      so_player_giveweapon(var_5);
+      so_player_set_switchtoweapon(var_4);
+      so_player_giveweapon("fraggrenade");
+      so_player_giveweapon("flash_grenade");
+      so_player_set_setoffhandsecondaryclass("flash");
+      so_player_setup_body(var_6);
     }
 
-    _id_1C99();
+    so_players_give_loadout();
     return;
   }
 
   if(var_1 == "so_stealth_warlord") {
-    level._id_1338 = "delta";
-    level._id_1AB1 = level._id_1C6E;
+    level.so_campaign = "delta";
+    level.coop_incap_weapon = level.so_warlord_secondary;
 
     foreach(var_6, var_3 in level.players) {
-      _id_1C8B(var_6);
-      _id_1C94(level._id_1C6F);
-      _id_1C94(level._id_1C6E);
-      _id_1C90(level._id_1C6F);
-      _id_1C94("fraggrenade");
-      _id_1C94("flash_grenade");
-      _id_1C8F("flash");
-      _id_1C9C(var_6);
+      so_player_num(var_6);
+      so_player_giveweapon(level.so_warlord_primary);
+      so_player_giveweapon(level.so_warlord_secondary);
+      so_player_set_switchtoweapon(level.so_warlord_primary);
+      so_player_giveweapon("fraggrenade");
+      so_player_giveweapon("flash_grenade");
+      so_player_set_setoffhandsecondaryclass("flash");
+      so_player_setup_body(var_6);
     }
 
-    _id_1C99();
+    so_players_give_loadout();
     return;
   }
 
   if(var_1 == "so_littlebird_payback") {
-    level._id_1338 = "delta";
+    level.so_campaign = "delta";
 
     foreach(var_6, var_3 in level.players) {
-      _id_1C8B(var_6);
-      _id_1C94(level._id_1C70);
-      _id_1C94(level._id_1C71);
-      _id_1C90(level._id_1C70);
-      _id_1C94("fraggrenade");
-      _id_1C94("flash_grenade");
-      _id_1C8F("flash");
-      _id_1C9C(var_6);
+      so_player_num(var_6);
+      so_player_giveweapon(level.so_payback_primary);
+      so_player_giveweapon(level.so_payback_secondary);
+      so_player_set_switchtoweapon(level.so_payback_primary);
+      so_player_giveweapon("fraggrenade");
+      so_player_giveweapon("flash_grenade");
+      so_player_set_setoffhandsecondaryclass("flash");
+      so_player_setup_body(var_6);
     }
 
-    _id_1C99();
+    so_players_give_loadout();
     return;
   }
 
   if(var_1 == "so_ied_berlin") {
-    level._id_1338 = "delta";
+    level.so_campaign = "delta";
 
-    if(maps\_utility::_id_12C1()) {
+    if(maps\_utility::is_coop()) {
       if(getDvar("coop_start") == "so_char_host") {
         var_9 = 0;
         var_10 = 1;
@@ -403,357 +403,357 @@ _id_1C6D(var_0) {
       var_10 = 1;
     }
 
-    _id_1C8B(var_9);
-    _id_1C94("fraggrenade");
-    _id_1C94("flash_grenade");
-    _id_1C8F("flash");
-    _id_1C94("sa80lmg_fastreload_reflex");
-    _id_1C94("m320");
-    _id_1C90("sa80lmg_fastreload_reflex");
-    _id_1C9C(var_9);
-    _id_1C8B(var_10);
-    _id_1C94("fraggrenade");
-    _id_1C94("semtex_grenade");
-    _id_1C8F("semtex_grenade");
-    _id_1C94("barrett");
-    _id_1C94("scar_h_thermal_silencer");
-    _id_1C90("barrett");
-    _id_1C9C(var_10);
-    _id_1C99();
+    so_player_num(var_9);
+    so_player_giveweapon("fraggrenade");
+    so_player_giveweapon("flash_grenade");
+    so_player_set_setoffhandsecondaryclass("flash");
+    so_player_giveweapon("sa80lmg_fastreload_reflex");
+    so_player_giveweapon("m320");
+    so_player_set_switchtoweapon("sa80lmg_fastreload_reflex");
+    so_player_setup_body(var_9);
+    so_player_num(var_10);
+    so_player_giveweapon("fraggrenade");
+    so_player_giveweapon("semtex_grenade");
+    so_player_set_setoffhandsecondaryclass("semtex_grenade");
+    so_player_giveweapon("barrett");
+    so_player_giveweapon("scar_h_thermal_silencer");
+    so_player_set_switchtoweapon("barrett");
+    so_player_setup_body(var_10);
+    so_players_give_loadout();
     return;
   }
 
   if(var_1 == "so_assault_rescue_2") {
     var_11 = "m4_grunt_acog";
-    level._id_1338 = "delta";
+    level.so_campaign = "delta";
 
     foreach(var_6, var_3 in level.players) {
-      _id_1C8B(var_6);
-      _id_1C94(var_11);
-      _id_1C8D(var_11);
-      _id_1C94("g36c_reflex");
-      _id_1C8D("g36c_reflex");
-      _id_1C94("fraggrenade");
-      _id_1C94("flash_grenade");
-      _id_1C8F("flash");
-      _id_1C9C(var_6);
-      _id_1C90(var_11);
+      so_player_num(var_6);
+      so_player_giveweapon(var_11);
+      so_player_set_maxammo(var_11);
+      so_player_giveweapon("g36c_reflex");
+      so_player_set_maxammo("g36c_reflex");
+      so_player_giveweapon("fraggrenade");
+      so_player_giveweapon("flash_grenade");
+      so_player_set_setoffhandsecondaryclass("flash");
+      so_player_setup_body(var_6);
+      so_player_set_switchtoweapon(var_11);
     }
 
-    _id_1C99();
+    so_players_give_loadout();
     return;
   }
 
   if(var_1 == "so_heliswitch_berlin") {
-    level._id_1338 = "delta";
+    level.so_campaign = "delta";
 
     foreach(var_6, var_3 in level.players) {
-      _id_1C8B(var_6);
-      _id_1C94(level._id_1C72);
-      _id_1C94(level._id_1C73);
-      _id_1C90(level._id_1C72);
-      _id_1C94("fraggrenade");
-      _id_1C8F("flash");
-      _id_1C94("flash_grenade");
-      _id_1C9C(var_6);
+      so_player_num(var_6);
+      so_player_giveweapon(level.primary_weapon);
+      so_player_giveweapon(level.secondary_weapon);
+      so_player_set_switchtoweapon(level.primary_weapon);
+      so_player_giveweapon("fraggrenade");
+      so_player_set_setoffhandsecondaryclass("flash");
+      so_player_giveweapon("flash_grenade");
+      so_player_setup_body(var_6);
     }
 
-    _id_1C99();
+    so_players_give_loadout();
     return;
   }
 
   if(var_1 == "so_killspree_paris_a") {
-    level._id_1338 = "ranger";
-    _id_1C8B(0);
-    _id_1C94("fraggrenade");
-    _id_1C94("flash_grenade");
-    _id_1C8F("flash");
-    _id_1C94("pecheneg_so_fastreload");
-    _id_1C94("m320");
-    _id_1C90("pecheneg_so_fastreload");
-    _id_1C9C(0);
-    _id_1C8B(1);
-    _id_1C94("fraggrenade");
-    _id_1C94("flash_grenade");
-    _id_1C8F("flash");
-    _id_1C94("pecheneg_so_fastreload");
-    _id_1C94("m320");
-    _id_1C90("m320");
-    _id_1C9C(1);
-    _id_1C99();
+    level.so_campaign = "ranger";
+    so_player_num(0);
+    so_player_giveweapon("fraggrenade");
+    so_player_giveweapon("flash_grenade");
+    so_player_set_setoffhandsecondaryclass("flash");
+    so_player_giveweapon("pecheneg_so_fastreload");
+    so_player_giveweapon("m320");
+    so_player_set_switchtoweapon("pecheneg_so_fastreload");
+    so_player_setup_body(0);
+    so_player_num(1);
+    so_player_giveweapon("fraggrenade");
+    so_player_giveweapon("flash_grenade");
+    so_player_set_setoffhandsecondaryclass("flash");
+    so_player_giveweapon("pecheneg_so_fastreload");
+    so_player_giveweapon("m320");
+    so_player_set_switchtoweapon("m320");
+    so_player_setup_body(1);
+    so_players_give_loadout();
     return;
   }
 
   if(var_1 == "so_zodiac2_ny_harbor") {
-    level._id_1338 = "delta";
+    level.so_campaign = "delta";
 
     foreach(var_6, var_3 in level.players) {
-      _id_1C8B(var_6);
-      _id_1C94(level._id_1C72);
-      _id_1C94(level._id_1C73);
-      _id_1C90(level._id_1C72);
-      _id_1C94("fraggrenade");
-      _id_1C8F("flash");
-      _id_1C94("flash_grenade");
-      _id_1C9C(var_6);
+      so_player_num(var_6);
+      so_player_giveweapon(level.primary_weapon);
+      so_player_giveweapon(level.secondary_weapon);
+      so_player_set_switchtoweapon(level.primary_weapon);
+      so_player_giveweapon("fraggrenade");
+      so_player_set_setoffhandsecondaryclass("flash");
+      so_player_giveweapon("flash_grenade");
+      so_player_setup_body(var_6);
     }
 
-    _id_1C99();
+    so_players_give_loadout();
     return;
   }
 
   if(var_1 == "so_jeep_paris_b") {
-    level._id_1338 = "delta";
+    level.so_campaign = "delta";
 
     foreach(var_6, var_3 in level.players) {
-      _id_1C8B(var_6);
+      so_player_num(var_6);
       var_4 = "m320";
       var_5 = "scar_h_grenadier_reflex";
-      _id_1C94(var_4);
-      _id_1C94(var_5);
-      _id_1C90(var_4);
-      _id_1C94("fraggrenade");
-      _id_1C94("flash_grenade");
-      _id_1C8F("flash");
-      _id_1C9C(var_6);
+      so_player_giveweapon(var_4);
+      so_player_giveweapon(var_5);
+      so_player_set_switchtoweapon(var_4);
+      so_player_giveweapon("fraggrenade");
+      so_player_giveweapon("flash_grenade");
+      so_player_set_setoffhandsecondaryclass("flash");
+      so_player_setup_body(var_6);
     }
 
-    _id_1C99();
+    so_players_give_loadout();
     return;
   }
 
   if(var_1 == "so_ac130_paris_ac130") {
-    level._id_1338 = "delta";
+    level.so_campaign = "delta";
 
     foreach(var_6, var_3 in level.players) {
-      _id_1C8B(var_6);
+      so_player_num(var_6);
       var_4 = "m4m203_reflex";
       var_5 = "fnfiveseven";
-      _id_1C94(var_4);
-      _id_1C94(var_5);
-      _id_1C90(var_4);
-      _id_1C94("fraggrenade");
-      _id_1C94("flash_grenade");
-      _id_1C9C(var_6);
+      so_player_giveweapon(var_4);
+      so_player_giveweapon(var_5);
+      so_player_set_switchtoweapon(var_4);
+      so_player_giveweapon("fraggrenade");
+      so_player_giveweapon("flash_grenade");
+      so_player_setup_body(var_6);
     }
 
-    _id_1C99();
+    so_players_give_loadout();
     return;
   }
 
   if(var_1 == "so_stealth_prague") {
-    level._id_1338 = "sas";
-    level._id_1336 = 1;
-    level._id_1AB1 = "usp_silencer";
+    level.so_campaign = "sas";
+    level.so_stealth = 1;
+    level.coop_incap_weapon = "usp_silencer";
 
     foreach(var_6, var_3 in level.players) {
-      _id_1C8B(var_6);
+      so_player_num(var_6);
       var_4 = "rsass_silenced";
       var_5 = "usp_silencer";
-      _id_1C94(var_4);
-      _id_1C94(var_5);
-      _id_1C90(var_4);
-      _id_1C94("fraggrenade");
-      _id_1C94("flash_grenade");
-      _id_1C8F("flash");
-      _id_1C9C(var_6);
+      so_player_giveweapon(var_4);
+      so_player_giveweapon(var_5);
+      so_player_set_switchtoweapon(var_4);
+      so_player_giveweapon("fraggrenade");
+      so_player_giveweapon("flash_grenade");
+      so_player_set_setoffhandsecondaryclass("flash");
+      so_player_setup_body(var_6);
     }
 
-    _id_1C99();
+    so_players_give_loadout();
     return;
   }
 
   if(var_1 == "so_stealth_london") {
-    level._id_1338 = "sas";
+    level.so_campaign = "sas";
 
     foreach(var_6, var_3 in level.players) {
-      _id_1C8B(var_6);
+      so_player_num(var_6);
       var_4 = "mp5_silencer_eotech";
       var_5 = "usp_silencer";
-      _id_1C94(var_4);
-      _id_1C94(var_5);
-      _id_1C90(var_4);
-      _id_1C94("fraggrenade");
-      _id_1C94("flash_grenade");
-      _id_1C8F("flash");
-      _id_1C9C(var_6);
+      so_player_giveweapon(var_4);
+      so_player_giveweapon(var_5);
+      so_player_set_switchtoweapon(var_4);
+      so_player_giveweapon("fraggrenade");
+      so_player_giveweapon("flash_grenade");
+      so_player_set_setoffhandsecondaryclass("flash");
+      so_player_setup_body(var_6);
     }
 
-    _id_1C99();
+    so_players_give_loadout();
     return;
   }
 
   if(var_1 == "so_timetrial_london") {
-    level._id_1338 = "sas";
+    level.so_campaign = "sas";
 
     foreach(var_6, var_3 in level.players) {
-      _id_1C8B(var_6);
+      so_player_num(var_6);
       var_4 = "mp5";
       var_5 = "spas12_silencer";
-      _id_1C94(var_4);
-      _id_1C94(var_5);
-      _id_1C90(var_4);
-      _id_1C94("fraggrenade");
-      _id_1C94("flash_grenade");
-      _id_1C8F("flash");
-      _id_1C9C(var_6);
+      so_player_giveweapon(var_4);
+      so_player_giveweapon(var_5);
+      so_player_set_switchtoweapon(var_4);
+      so_player_giveweapon("fraggrenade");
+      so_player_giveweapon("flash_grenade");
+      so_player_set_setoffhandsecondaryclass("flash");
+      so_player_setup_body(var_6);
     }
 
-    _id_1C99();
+    so_players_give_loadout();
     return;
   }
 
   if(var_1 == "so_assaultmine") {
-    level._id_1338 = "delta";
+    level.so_campaign = "delta";
 
     foreach(var_6, var_3 in level.players) {
-      _id_1C8B(var_6);
+      so_player_num(var_6);
       var_4 = "rsass";
       var_5 = "acr_hybrid";
-      _id_1C94(var_4);
-      _id_1C94(var_5);
-      _id_1C90(var_4);
-      _id_1C94("fraggrenade");
-      _id_1C94("flash_grenade");
-      _id_1C8F("flash");
-      _id_1C9C(var_6);
+      so_player_giveweapon(var_4);
+      so_player_giveweapon(var_5);
+      so_player_set_switchtoweapon(var_4);
+      so_player_giveweapon("fraggrenade");
+      so_player_giveweapon("flash_grenade");
+      so_player_set_setoffhandsecondaryclass("flash");
+      so_player_setup_body(var_6);
     }
 
-    _id_1C99();
+    so_players_give_loadout();
     return;
   }
 
   if(var_1 == "so_deltacamp") {
-    level._id_1338 = "delta";
+    level.so_campaign = "delta";
 
     foreach(var_6, var_3 in level.players) {
-      _id_1C8B(var_6);
+      so_player_num(var_6);
       var_4 = "acr";
       var_5 = "usp";
-      _id_1C94(var_4);
-      _id_1C94(var_5);
-      _id_1C90(var_4);
-      _id_1C9C(var_6);
+      so_player_giveweapon(var_4);
+      so_player_giveweapon(var_5);
+      so_player_set_switchtoweapon(var_4);
+      so_player_setup_body(var_6);
     }
 
-    _id_1C99();
+    so_players_give_loadout();
     return;
   }
 
   if(var_1 == "so_trainer2_so_deltacamp") {
-    level._id_1338 = "delta";
+    level.so_campaign = "delta";
 
     foreach(var_6, var_3 in level.players) {
-      _id_1C8B(var_6);
+      so_player_num(var_6);
       var_4 = "mp5";
       var_5 = "usp";
-      _id_1C94(var_4);
-      _id_1C94(var_5);
-      _id_1C90(var_4);
-      _id_1C9C(var_6);
+      so_player_giveweapon(var_4);
+      so_player_giveweapon(var_5);
+      so_player_set_switchtoweapon(var_4);
+      so_player_setup_body(var_6);
     }
 
-    _id_1C99();
+    so_players_give_loadout();
     return;
   }
 
   if(var_1 == "so_milehigh_hijack") {
-    level._id_1338 = "hijack";
+    level.so_campaign = "hijack";
 
     for(var_6 = 0; var_6 < level.players.size; var_6++) {
-      _id_1C8B(var_6);
-      _id_1C94("flash_grenade");
-      _id_1C8F("flash");
-      _id_1C94("ak47");
-      _id_1C94("fnfiveseven");
-      _id_1C90("ak47");
-      _id_1C9C(var_6);
+      so_player_num(var_6);
+      so_player_giveweapon("flash_grenade");
+      so_player_set_setoffhandsecondaryclass("flash");
+      so_player_giveweapon("ak47");
+      so_player_giveweapon("fnfiveseven");
+      so_player_set_switchtoweapon("ak47");
+      so_player_setup_body(var_6);
     }
 
-    _id_1C99();
+    so_players_give_loadout();
     return;
   }
 
   if(var_1 == "so_rescue_hijack") {
-    level._id_1338 = "fso";
-    level._id_1AB1 = "usp_silencer_so";
+    level.so_campaign = "fso";
+    level.coop_incap_weapon = "usp_silencer_so";
 
     foreach(var_6, var_3 in level.players) {
-      _id_1C8B(var_6);
-      _id_1C94("fraggrenade");
-      _id_1C94("usp_silencer_so");
-      _id_1C90("usp_silencer_so");
-      _id_1C9C(var_6);
+      so_player_num(var_6);
+      so_player_giveweapon("fraggrenade");
+      so_player_giveweapon("usp_silencer_so");
+      so_player_set_switchtoweapon("usp_silencer_so");
+      so_player_setup_body(var_6);
     }
 
-    _id_1C99();
+    so_players_give_loadout();
     return;
   }
 
   if(var_1 == "so_javelin_hamburg") {
-    level._id_1338 = "delta";
+    level.so_campaign = "delta";
 
     foreach(var_6, var_3 in level.players) {
-      _id_1C8B(var_6);
+      so_player_num(var_6);
       var_4 = "javelin";
       var_5 = "scar_h_acog";
-      _id_1C94(var_4);
-      _id_1C94(var_5);
-      _id_1C90(var_4);
-      _id_1C94("fraggrenade");
-      _id_1C94("flash_grenade");
-      _id_1C9C(var_6);
+      so_player_giveweapon(var_4);
+      so_player_giveweapon(var_5);
+      so_player_set_switchtoweapon(var_4);
+      so_player_giveweapon("fraggrenade");
+      so_player_giveweapon("flash_grenade");
+      so_player_setup_body(var_6);
     }
 
-    _id_1C99();
+    so_players_give_loadout();
     return;
   }
 
   if(var_1 == "so_assassin_payback") {
-    level._id_1338 = "delta";
-    _id_1C8B(0);
-    _id_1C94(level._id_1C74);
-    _id_1C94(level._id_1C75);
-    _id_1C90(level._id_1C74);
-    _id_1C94("fraggrenade");
-    _id_1C94("flash_grenade");
-    _id_1C9C(0);
-    _id_1C8B(1);
-    _id_1C94(level._id_1C76);
-    _id_1C94(level._id_1C77);
-    _id_1C90(level._id_1C76);
-    _id_1C94("fraggrenade");
-    _id_1C94("flash_grenade");
-    _id_1C9C(1);
-    _id_1C99();
+    level.so_campaign = "delta";
+    so_player_num(0);
+    so_player_giveweapon(level.sniper_primary);
+    so_player_giveweapon(level.sniper_secondary);
+    so_player_set_switchtoweapon(level.sniper_primary);
+    so_player_giveweapon("fraggrenade");
+    so_player_giveweapon("flash_grenade");
+    so_player_setup_body(0);
+    so_player_num(1);
+    so_player_giveweapon(level.heavy_primary);
+    so_player_giveweapon(level.heavy_secondary);
+    so_player_set_switchtoweapon(level.heavy_primary);
+    so_player_giveweapon("fraggrenade");
+    so_player_giveweapon("flash_grenade");
+    so_player_setup_body(1);
+    so_players_give_loadout();
     return;
   }
 
-  if(maps\_utility::_id_12DC()) {
-    level._id_1338 = "delta";
-    level._id_1AB1 = "fnfiveseven_mp";
-    _id_1C79();
+  if(maps\_utility::is_survival()) {
+    level.so_campaign = "delta";
+    level.coop_incap_weapon = "fnfiveseven_mp";
+    give_default_loadout();
     return;
   }
 
-  level._id_1C6C = 1;
-  level._id_1338 = "ranger";
-  _id_1C79();
+  level.testmap = 1;
+  level.so_campaign = "ranger";
+  give_default_loadout();
 }
 
-_id_1C78(var_0) {
+possible_precache(var_0) {
   foreach(var_2 in var_0) {}
   precacheitem(var_2);
 }
 
-_id_1C79() {
-  if(maps\_utility::_id_12C1() || maps\_utility::_id_12DC()) {
-    var_0 = _id_1C5F();
+give_default_loadout() {
+  if(maps\_utility::is_coop() || maps\_utility::is_survival()) {
+    var_0 = char_switcher();
 
     foreach(var_3, var_2 in level.players) {}
-    _id_1C7A(var_3);
+    give_default_loadout_coop(var_3);
 
-    _id_1C99();
+    so_players_give_loadout();
     return;
   }
 
@@ -761,7 +761,7 @@ _id_1C79() {
   level.player setoffhandsecondaryclass("flash");
   level.player giveweapon("flash_grenade");
 
-  if(maps\_utility::_id_0A36()) {
+  if(maps\_utility::is_specialop()) {
     level.player giveweapon("m1014");
   }
   level.player giveweapon("mp5");
@@ -769,23 +769,23 @@ _id_1C79() {
   level.player setviewmodel("viewmodel_base_viewhands");
 }
 
-_id_1C7A(var_0) {
-  _id_1C8B(var_0);
-  _id_1C94("fraggrenade");
-  _id_1C94("flash_grenade");
-  _id_1C8F("flash");
-  _id_1C94("mp5");
-  _id_1C94("m1014");
+give_default_loadout_coop(var_0) {
+  so_player_num(var_0);
+  so_player_giveweapon("fraggrenade");
+  so_player_giveweapon("flash_grenade");
+  so_player_set_setoffhandsecondaryclass("flash");
+  so_player_giveweapon("mp5");
+  so_player_giveweapon("m1014");
 
   if(var_0 == 0) {
-    _id_1C90("mp5");
+    so_player_set_switchtoweapon("mp5");
   } else {
-    _id_1C90("m1014");
+    so_player_set_switchtoweapon("m1014");
   }
-  _id_1C9C(var_0);
+  so_player_setup_body(var_0);
 }
 
-_id_1C7B(var_0, var_1) {
+saveplayerweaponstatepersistent(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = 0;
   }
@@ -814,7 +814,7 @@ _id_1C7B(var_0, var_1) {
   }
 }
 
-_id_1C7C(var_0, var_1) {
+restoreplayerweaponstatepersistent(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = 0;
   }
@@ -829,8 +829,8 @@ _id_1C7C(var_0, var_1) {
   for(var_2 = 0; var_2 < game["weaponstates"][var_0]["list"].size; var_2++) {
     var_3 = game["weaponstates"][var_0]["list"][var_2]["name"];
 
-    if(isDefined(level._id_1C7D)) {
-      if(!isDefined(level._id_1C7D[var_3])) {
+    if(isDefined(level.legit_weapons)) {
+      if(!isDefined(level.legit_weapons[var_3])) {
         continue;
       }
     }
@@ -850,15 +850,15 @@ _id_1C7C(var_0, var_1) {
     }
   }
 
-  if(isDefined(level._id_1C7D)) {
+  if(isDefined(level.legit_weapons)) {
     var_3 = game["weaponstates"][var_0]["offhand"];
 
-    if(isDefined(level._id_1C7D[var_3])) {
+    if(isDefined(level.legit_weapons[var_3])) {
       level.player switchtooffhand(var_3);
     }
     var_3 = game["weaponstates"][var_0]["current"];
 
-    if(isDefined(level._id_1C7D[var_3])) {
+    if(isDefined(level.legit_weapons[var_3])) {
       level.player switchtoweapon(var_3);
     }
   } else {
@@ -869,7 +869,7 @@ _id_1C7C(var_0, var_1) {
   return 1;
 }
 
-_id_1C7E() {
+sniper_escape_initial_secondary_weapon_loadout() {
   level.player giveweapon("claymore");
   level.player giveweapon("c4");
 
@@ -889,7 +889,7 @@ _id_1C7E() {
   level.player setviewmodel("viewhands_marine_sniper");
 }
 
-_id_1C7F() {
+set_legit_weapons_for_sniper_escape() {
   var_0 = [];
   var_0 = [];
   var_0["mp5"] = 1;
@@ -897,18 +897,18 @@ _id_1C7F() {
   var_0["ak47"] = 1;
   var_0["g3"] = 1;
   var_0["usp"] = 1;
-  var_0[level._id_1C80] = 1;
+  var_0[level.sniperescape_main_weapon] = 1;
   var_0["dragunov"] = 1;
   var_0["winchester1200"] = 1;
   var_0["beretta"] = 1;
   var_0["rpd"] = 1;
   var_0["rpg"] = 1;
-  level._id_1C7D = var_0;
+  level.legit_weapons = var_0;
 }
 
-_id_1C81() {
+set_legit_weapons_for_favela_escape() {
   var_0 = [];
-  var_0[level._id_1C82] = 1;
+  var_0[level.favela_escape_main_weapon] = 1;
   var_0["beretta"] = 1;
   var_0["glock"] = 1;
   var_0["uzi"] = 1;
@@ -939,12 +939,12 @@ _id_1C81() {
   var_0["m240_reflex"] = 1;
   var_0["rpg"] = 1;
   var_0["m79"] = 1;
-  level._id_1C7D = var_0;
+  level.legit_weapons = var_0;
 }
 
-_id_1C83() {
+set_legit_weapons_for_dc_whitehouse() {
   var_0 = [];
-  var_0[level._id_1C84] = 1;
+  var_0[level.dc_whitehouse_main_weapon] = 1;
   var_0["beretta"] = 1;
   var_0["glock"] = 1;
   var_0["uzi"] = 1;
@@ -975,16 +975,16 @@ _id_1C83() {
   var_0["m240_reflex"] = 1;
   var_0["rpg"] = 1;
   var_0["m79"] = 1;
-  level._id_1C7D = var_0;
+  level.legit_weapons = var_0;
 }
 
-_id_1C85() {
+max_ammo_on_legit_sniper_escape_weapon() {
   var_0 = level.player getweaponslistall();
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = var_0[var_1];
 
-    if(!isDefined(level._id_1C7D[var_2])) {
+    if(!isDefined(level.legit_weapons[var_2])) {
       continue;
     }
     if(var_2 == "rpg") {
@@ -994,7 +994,7 @@ _id_1C85() {
   }
 }
 
-_id_1C86() {
+force_player_to_use_legit_sniper_escape_weapon() {
   var_0 = level.player getweaponslistall();
   var_1 = [];
   var_2 = 0;
@@ -1003,7 +1003,7 @@ _id_1C86() {
     var_4 = var_0[var_3];
     var_1[var_4] = 1;
 
-    if(isDefined(level._id_1C7D[var_4])) {
+    if(isDefined(level.legit_weapons[var_4])) {
       var_2++;
       continue;
     }
@@ -1019,19 +1019,19 @@ _id_1C86() {
     level.player switchtoweapon("ak47");
   }
 
-  if(!isDefined(var_1[level._id_1C80]) && !isDefined(var_1["dragunov"])) {
-    level.player giveweapon(level._id_1C80);
-    level.player switchtoweapon(level._id_1C80);
+  if(!isDefined(var_1[level.sniperescape_main_weapon]) && !isDefined(var_1["dragunov"])) {
+    level.player giveweapon(level.sniperescape_main_weapon);
+    level.player switchtoweapon(level.sniperescape_main_weapon);
   }
 }
 
-_id_1C87() {
-  maps\_gameskill::_id_17D1();
+coop_gamesetup_menu() {
+  maps\_gameskill::setglobaldifficulty();
 
   foreach(var_2, var_1 in level.players) {}
-  var_1 maps\_gameskill::_id_17D2();
+  var_1 maps\_gameskill::setdifficulty();
 
-  level._id_1C62 = 0;
+  level.character_switched = 0;
   common_scripts\utility::flag_init("character_selected");
   var_3 = "";
   var_4 = [];
@@ -1048,187 +1048,187 @@ _id_1C87() {
   var_9 = strtok(var_8, " ");
 
   foreach(var_6 in var_9) {
-    if(maps\_utility::_id_12C1() && var_6 == level.script) {
+    if(maps\_utility::is_coop() && var_6 == level.script) {
       var_11 = getDvar("ui_ac130_pilot_num");
 
       if(isDefined(var_11) && var_11 != "0") {
-        level._id_1C62 = 1;
+        level.character_switched = 1;
       }
       common_scripts\utility::flag_set("character_selected");
     }
   }
 }
 
-_id_1C88() {
-  if(level._id_1C89 == "so_char_host") {
+coop_gamesetup_ac130() {
+  if(level.specops_character_selector == "so_char_host") {
     return level.players[0];
   }
-  if(level._id_1C89 == "so_char_client") {
+  if(level.specops_character_selector == "so_char_client") {
     return level.players[1];
   }
   return level.players[0];
 }
 
-_id_1C8A() {
+give_default_loadout_specialops() {
   foreach(var_2, var_1 in level.players) {
-    _id_1C8B(var_2);
-    _id_1C94("fraggrenade");
-    _id_1C94("flash_grenade");
-    _id_1C8F("flash");
-    _id_1C94("mp5");
-    _id_1C94("m1014");
-    _id_1C90("mp5");
-    _id_1C9C(var_2);
+    so_player_num(var_2);
+    so_player_giveweapon("fraggrenade");
+    so_player_giveweapon("flash_grenade");
+    so_player_set_setoffhandsecondaryclass("flash");
+    so_player_giveweapon("mp5");
+    so_player_giveweapon("m1014");
+    so_player_set_switchtoweapon("mp5");
+    so_player_setup_body(var_2);
   }
 
-  _id_1C99();
+  so_players_give_loadout();
 }
 
-_id_1C8B(var_0) {
-  level._id_1C8B = var_0;
-  level._id_1C8C[var_0] = [];
+so_player_num(var_0) {
+  level.so_player_num = var_0;
+  level.so_player_add_player_giveweapon[var_0] = [];
 
-  if(!isDefined(level._id_1C8D)) {
-    level._id_1C8D = [];
+  if(!isDefined(level.so_player_set_maxammo)) {
+    level.so_player_set_maxammo = [];
   }
-  if(!isDefined(level._id_1C8E)) {
-    level._id_1C8E = [];
+  if(!isDefined(level.so_player_set_setviewmodel)) {
+    level.so_player_set_setviewmodel = [];
   }
-  if(!isDefined(level._id_1C8C)) {
-    level._id_1C8C = [];
+  if(!isDefined(level.so_player_add_player_giveweapon)) {
+    level.so_player_add_player_giveweapon = [];
   }
-  if(!isDefined(level._id_1C8F)) {
-    level._id_1C8F = [];
+  if(!isDefined(level.so_player_set_setoffhandsecondaryclass)) {
+    level.so_player_set_setoffhandsecondaryclass = [];
   }
-  if(!isDefined(level._id_1C90)) {
-    level._id_1C90 = [];
+  if(!isDefined(level.so_player_set_switchtoweapon)) {
+    level.so_player_set_switchtoweapon = [];
   }
-  if(!isDefined(level._id_1C91)) {
-    level._id_1C91 = [];
+  if(!isDefined(level.so_player_setmodelfunc)) {
+    level.so_player_setmodelfunc = [];
   }
-  if(!isDefined(level._id_1C92)) {
-    level._id_1C92 = [];
+  if(!isDefined(level.so_player_setmodelfunc_precache)) {
+    level.so_player_setmodelfunc_precache = [];
   }
-  if(!isDefined(level._id_1C93)) {
-    level._id_1C93 = [];
+  if(!isDefined(level.so_player_setactionslot)) {
+    level.so_player_setactionslot = [];
   }
-  level._id_1C8D[var_0] = [];
-  level._id_1C8F[var_0] = [];
-  level._id_1C8C[var_0] = [];
+  level.so_player_set_maxammo[var_0] = [];
+  level.so_player_set_setoffhandsecondaryclass[var_0] = [];
+  level.so_player_add_player_giveweapon[var_0] = [];
 }
 
-_id_1C94(var_0) {
-  var_1 = level._id_1C8B;
+so_player_giveweapon(var_0) {
+  var_1 = level.so_player_num;
 
-  if(!level._id_1C66) {
+  if(!level.character_selected) {
     precacheitem(var_0);
   }
-  level._id_1C8C[var_1][var_0] = 1;
+  level.so_player_add_player_giveweapon[var_1][var_0] = 1;
 }
 
-_id_1C8D(var_0) {
-  var_1 = level._id_1C8B;
-  level._id_1C8D[var_1][var_0] = 1;
+so_player_set_maxammo(var_0) {
+  var_1 = level.so_player_num;
+  level.so_player_set_maxammo[var_1][var_0] = 1;
 }
 
-_id_1C8F(var_0) {
-  var_1 = level._id_1C8B;
-  level._id_1C8F[var_1] = var_0;
+so_player_set_setoffhandsecondaryclass(var_0) {
+  var_1 = level.so_player_num;
+  level.so_player_set_setoffhandsecondaryclass[var_1] = var_0;
 }
 
-_id_1C90(var_0) {
-  var_1 = level._id_1C8B;
-  level._id_1C90[var_1] = var_0;
+so_player_set_switchtoweapon(var_0) {
+  var_1 = level.so_player_num;
+  level.so_player_set_switchtoweapon[var_1] = var_0;
 }
 
-_id_1C8E(var_0) {
-  var_1 = level._id_1C8B;
+so_player_set_setviewmodel(var_0) {
+  var_1 = level.so_player_num;
 
-  if(!level._id_1C66) {
+  if(!level.character_selected) {
     precachemodel(var_0);
   }
-  level._id_1C8E[var_1] = var_0;
+  level.so_player_set_setviewmodel[var_1] = var_0;
 }
 
-_id_1C91(var_0, var_1) {
-  var_2 = level._id_1C8B;
-  level._id_1C91[var_2] = var_0;
+so_player_setmodelfunc(var_0, var_1) {
+  var_2 = level.so_player_num;
+  level.so_player_setmodelfunc[var_2] = var_0;
 
-  if(!level._id_1C66) {
+  if(!level.character_selected) {
     [[var_1]]();
   }
 }
 
-_id_1C93(var_0, var_1, var_2) {
-  var_3 = level._id_1C8B;
+so_player_setactionslot(var_0, var_1, var_2) {
+  var_3 = level.so_player_num;
   var_4 = spawnStruct();
   var_4.slot = var_0;
-  var_4._id_1C95 = var_1;
+  var_4.parm1 = var_1;
 
   if(isDefined(var_2)) {
-    var_4._id_1C96 = var_2;
+    var_4.parm2 = var_2;
   }
-  if(isDefined(level._id_1C93[var_3])) {
-    var_5 = level._id_1C93[var_3].size;
+  if(isDefined(level.so_player_setactionslot[var_3])) {
+    var_5 = level.so_player_setactionslot[var_3].size;
   } else {
     var_5 = 0;
   }
-  level._id_1C93[var_3][var_5] = var_4;
+  level.so_player_setactionslot[var_3][var_5] = var_4;
 }
 
 #using_animtree("multiplayer");
 
-_id_1C97(var_0) {
+so_player_give_loadout(var_0) {
   var_1 = self;
 
-  if(isDefined(level._id_1C91[var_0])) {
-    var_1 maps\_utility::_id_1C67(level._id_1C91[var_0]);
+  if(isDefined(level.so_player_setmodelfunc[var_0])) {
+    var_1 maps\_utility::setmodelfunc(level.so_player_setmodelfunc[var_0]);
     var_1 setanim(%code, 1, 0);
   }
 
-  var_2 = getarraykeys(level._id_1C8C[var_0]);
+  var_2 = getarraykeys(level.so_player_add_player_giveweapon[var_0]);
 
   foreach(var_4 in var_2) {
     var_1 giveweapon(var_4);
 
-    if(isDefined(level._id_1C8D[var_0][var_4])) {
+    if(isDefined(level.so_player_set_maxammo[var_0][var_4])) {
       var_1 givemaxammo(var_4);
     }
   }
 
-  if(isDefined(level._id_1C8F[var_0])) {
+  if(isDefined(level.so_player_set_setoffhandsecondaryclass[var_0])) {
     var_1 setoffhandsecondaryclass("flash");
   }
-  if(isDefined(level._id_1C93[var_0])) {
-    var_1 _id_1C98(var_0);
+  if(isDefined(level.so_player_setactionslot[var_0])) {
+    var_1 so_players_give_action(var_0);
   }
-  if(isDefined(level._id_1C90[var_0])) {
-    var_1 switchtoweapon(level._id_1C90[var_0]);
+  if(isDefined(level.so_player_set_switchtoweapon[var_0])) {
+    var_1 switchtoweapon(level.so_player_set_switchtoweapon[var_0]);
   }
-  if(isDefined(level._id_1C8E[var_0])) {
-    var_1 setviewmodel(level._id_1C8E[var_0]);
+  if(isDefined(level.so_player_set_setviewmodel[var_0])) {
+    var_1 setviewmodel(level.so_player_set_setviewmodel[var_0]);
   }
 }
 
-_id_1C98(var_0) {
+so_players_give_action(var_0) {
   var_1 = self;
 
-  foreach(var_3 in level._id_1C93[var_0]) {
-    if(isDefined(var_3._id_1C96)) {
-      var_1 setactionslot(var_3.slot, var_3._id_1C95, var_3._id_1C96);
+  foreach(var_3 in level.so_player_setactionslot[var_0]) {
+    if(isDefined(var_3.parm2)) {
+      var_1 setactionslot(var_3.slot, var_3.parm1, var_3.parm2);
       continue;
     }
 
-    var_1 setactionslot(var_3.slot, var_3._id_1C95);
+    var_1 setactionslot(var_3.slot, var_3.parm1);
   }
 }
 
-_id_1C99() {
+so_players_give_loadout() {
   foreach(var_2, var_1 in level.players) {}
-  var_1 _id_1C97(var_2);
+  var_1 so_player_give_loadout(var_2);
 }
 
-_id_1C9A(var_0) {
+updatemodel(var_0) {
   self notify("newupdatemodel");
 
   if(!isDefined(var_0)) {
@@ -1237,9 +1237,9 @@ _id_1C9A(var_0) {
     return;
   }
 
-  self._id_1C9B = var_0;
+  self.last_modelfunc = var_0;
 
-  if(isDefined(self._id_1B7C) && self._id_1B7C) {
+  if(isDefined(self.is_hidden) && self.is_hidden) {
     return;
   }
   self endon("newupdatemodel");
@@ -1252,43 +1252,43 @@ _id_1C9A(var_0) {
   }
 }
 
-_id_1C9C(var_0) {
-  _id_1C8E(_id_1C9F());
+so_player_setup_body(var_0) {
+  so_player_set_setviewmodel(so_player_get_hands());
 
-  if(maps\_utility::_id_12C1() || maps\_utility::_id_12DC()) {
-    _id_1C91(_id_1C9D(var_0), _id_1C9E(var_0));
+  if(maps\_utility::is_coop() || maps\_utility::is_survival()) {
+    so_player_setmodelfunc(so_player_get_bodyfunc(var_0), so_player_get_bodyfunc_precache(var_0));
   }
 }
 
-_id_1C9D(var_0) {
-  switch (level._id_1338) {
+so_player_get_bodyfunc(var_0) {
+  switch (level.so_campaign) {
     case "ranger":
-      return::_id_1CA0;
+      return::so_body_player_ranger;
     case "seal":
-      return::_id_1CA1;
+      return::so_body_player_seal;
     case "arctic":
-      return::_id_1CA2;
+      return::so_body_player_arctic;
     case "woodland":
-      return::_id_1CA3;
+      return::so_body_player_woodland;
     case "desert":
-      return::_id_1CA4;
+      return::so_body_player_desert;
     case "ghillie":
-      return::_id_1CA5;
+      return::so_body_player_ghillie;
     case "delta":
-      return::_id_1CA6;
+      return::so_body_player_delta;
     case "sas":
-      return::_id_1CA7;
+      return::so_body_player_sas;
     case "hijack":
       if(var_0 == 0) {
-        return::_id_1CA8;
+        return::so_body_player_hijack_1;
       } else {
-        return::_id_1CA9;
+        return::so_body_player_hijack_2;
       }
     case "fso":
       if(var_0 == 0) {
-        return::_id_1CAA;
+        return::so_body_player_fso_1;
       } else {
-        return::_id_1CAB;
+        return::so_body_player_fso_2;
       }
     default:
   }
@@ -1296,43 +1296,43 @@ _id_1C9D(var_0) {
   return;
 }
 
-_id_1C9E(var_0) {
-  switch (level._id_1338) {
+so_player_get_bodyfunc_precache(var_0) {
+  switch (level.so_campaign) {
     case "ranger":
-      return::_id_1CAC;
+      return::so_body_player_ranger_precache;
     case "seal":
-      return::_id_1CAD;
+      return::so_body_player_seal_precache;
     case "arctic":
-      return::_id_1CAE;
+      return::so_body_player_arctic_precache;
     case "woodland":
-      return::_id_1CAF;
+      return::so_body_player_woodland_precache;
     case "desert":
-      return::_id_1CB0;
+      return::so_body_player_desert_precache;
     case "ghillie":
-      return::_id_1CB1;
+      return::so_body_player_ghillie_precache;
     case "delta":
-      return::_id_1CB2;
+      return::so_body_player_delta_precache;
     case "sas":
-      return::_id_1CB3;
+      return::so_body_player_sas_precache;
     case "hijack":
       if(var_0 == 0) {
-        return::_id_1CB4;
+        return::so_body_player_hijack_precache_1;
       } else {
-        return::_id_1CB5;
+        return::so_body_player_hijack_precache_2;
       }
     case "fso":
       if(var_0 == 0) {
-        return::_id_1CB6;
+        return::so_body_player_fso_precache_1;
       } else {
-        return::_id_1CB7;
+        return::so_body_player_fso_precache_2;
       }
   }
 
   return;
 }
 
-_id_1C9F() {
-  switch (level._id_1338) {
+so_player_get_hands() {
+  switch (level.so_campaign) {
     case "ranger":
       return "viewmodel_base_viewhands";
     case "seal":
@@ -1356,120 +1356,120 @@ _id_1C9F() {
   }
 }
 
-_id_1CA0() {
+so_body_player_ranger() {
   self setModel("coop_body_us_army");
   self attach("coop_head_us_army", "", 1);
 }
 
-_id_1CA1() {
+so_body_player_seal() {
   self setModel("coop_body_seal_udt");
   self attach("coop_head_seal_udt", "", 1);
 }
 
-_id_1CA2() {
+so_body_player_arctic() {
   self setModel("coop_body_tf141_arctic");
   self attach("coop_head_tf141_arctic", "", 1);
 }
 
-_id_1CA3() {
+so_body_player_woodland() {
   self setModel("coop_body_tf141_forest");
   self attach("coop_head_tf141_forest", "", 1);
 }
 
-_id_1CA4() {
+so_body_player_desert() {
   self setModel("coop_body_tf141_desert");
   self attach("coop_head_tf141_desert", "", 1);
 }
 
-_id_1CA5() {
+so_body_player_ghillie() {
   self setModel("coop_body_ghillie_forest");
   self attach("coop_head_ghillie_forest", "", 1);
 }
 
-_id_1CA6() {
+so_body_player_delta() {
   self setModel("mp_body_delta_elite_assault_bb");
   self attach("head_delta_elite_a", "", 1);
 }
 
-_id_1CA7() {
+so_body_player_sas() {
   self setModel("body_mp_sas_urban_specops");
 }
 
-_id_1CA8() {
+so_body_player_hijack_1() {
   self setModel("mp_body_henchmen_assault_d");
   self attach("head_henchmen_a", "", 1);
 }
 
-_id_1CA9() {
+so_body_player_hijack_2() {
   self setModel("mp_body_henchmen_shotgun_a");
   self attach("head_henchmen_c", "", 1);
 }
 
-_id_1CAA() {
+so_body_player_fso_1() {
   self setModel("mp_body_fso_vest_c_dirty");
   self attach("head_fso_e_dirty", "", 1);
 }
 
-_id_1CAB() {
+so_body_player_fso_2() {
   self setModel("mp_body_fso_vest_d_dirty");
   self attach("head_fso_d_dirty", "", 1);
 }
 
-_id_1CAC() {
+so_body_player_ranger_precache() {
   precachemodel("coop_body_us_army");
   precachemodel("coop_head_us_army");
 }
 
-_id_1CAD() {
+so_body_player_seal_precache() {
   precachemodel("coop_body_seal_udt");
   precachemodel("coop_head_seal_udt");
 }
 
-_id_1CAE() {
+so_body_player_arctic_precache() {
   precachemodel("coop_body_tf141_arctic");
   precachemodel("coop_head_tf141_arctic");
 }
 
-_id_1CAF() {
+so_body_player_woodland_precache() {
   precachemodel("coop_body_tf141_forest");
   precachemodel("coop_head_tf141_forest");
 }
 
-_id_1CB0() {
+so_body_player_desert_precache() {
   precachemodel("coop_body_tf141_desert");
   precachemodel("coop_head_tf141_desert");
 }
 
-_id_1CB1() {
+so_body_player_ghillie_precache() {
   precachemodel("coop_body_ghillie_forest");
   precachemodel("coop_head_ghillie_forest");
 }
 
-_id_1CB2() {
+so_body_player_delta_precache() {
   precachemodel("mp_body_delta_elite_assault_bb");
   precachemodel("head_delta_elite_a");
 }
 
-_id_1CB3() {
+so_body_player_sas_precache() {
   precachemodel("body_mp_sas_urban_specops");
 }
 
-_id_1CB4() {
+so_body_player_hijack_precache_1() {
   precachemodel("mp_body_henchmen_assault_d");
   precachemodel("head_henchmen_a");
 }
 
-_id_1CB5() {
+so_body_player_hijack_precache_2() {
   precachemodel("mp_body_henchmen_shotgun_a");
   precachemodel("head_henchmen_c");
 }
 
-_id_1CB6() {
+so_body_player_fso_precache_1() {
   precachemodel("mp_body_fso_vest_c_dirty");
   precachemodel("head_fso_e_dirty");
 }
 
-_id_1CB7() {
+so_body_player_fso_precache_2() {
   precachemodel("mp_body_fso_vest_d_dirty");
   precachemodel("head_fso_d_dirty");
 }

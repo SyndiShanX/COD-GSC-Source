@@ -3,8 +3,8 @@
  * Script: scripts\1369.gsc
 **************************************/
 
-_id_4218() {
-  _id_42FB();
+stealth_default() {
+  stealth_plugin_basic();
 
   if(isPlayer(self)) {
     return;
@@ -12,275 +12,275 @@ _id_4218() {
   switch (self.team) {
     case "team3":
     case "axis":
-      _id_4301();
-      _id_4302();
-      _id_4308();
-      _id_4311();
+      stealth_plugin_threat();
+      stealth_enable_seek_player_on_spotted();
+      stealth_plugin_corpse();
+      stealth_plugin_event_all();
       break;
     case "allies":
-      _id_4317();
-      _id_431A();
-      _id_431D();
+      stealth_plugin_aicolor();
+      stealth_plugin_accuracy();
+      stealth_plugin_smart_stance();
   }
 }
 
-_id_42FA(var_0, var_1) {
-  level._id_2190[var_0] = var_1;
+stealth_set_default_stealth_function(var_0, var_1) {
+  level.stealth_default_func[var_0] = var_1;
 }
 
-_id_42FB(var_0) {
+stealth_plugin_basic(var_0) {
   if(isPlayer(self)) {
-    _id_055E::_id_4219();
+    maps/_stealth_visibility_friendly::stealth_visibility_friendly_main();
     return;
   }
 
-  if(!isDefined(self._id_0B6E) || !isDefined(self._id_0B6E._id_423A._id_42FC)) {
+  if(!isDefined(self._stealth) || !isDefined(self._stealth.plugins.basic)) {
     switch (self.team) {
       case "allies":
-        _id_055E::_id_4219();
-        _id_055F::_id_4235();
+        maps/_stealth_visibility_friendly::stealth_visibility_friendly_main();
+        maps/_stealth_behavior_friendly::stealth_behavior_friendly_main();
         break;
       case "team3":
       case "axis":
-        _id_055D::_id_4268();
-        _id_0560::_id_4281();
+        maps/_stealth_visibility_enemy::stealth_visibility_enemy_main();
+        maps/_stealth_behavior_enemy::stealth_behavior_enemy_main();
         break;
     }
   }
 
   if(isDefined(var_0)) {
-    _id_42FD(var_0);
+    stealth_basic_states_custom(var_0);
   }
-  self._id_0B6E._id_423A._id_42FC = 1;
+  self._stealth.plugins.basic = 1;
 }
 
-_id_42FD(var_0) {
+stealth_basic_states_custom(var_0) {
   switch (self.team) {
     case "allies":
-      _id_055F::_id_423B(var_0);
+      maps/_stealth_behavior_friendly::friendly_custom_state_behavior(var_0);
       break;
     case "team3":
     case "axis":
-      _id_0560::_id_4287(var_0);
+      maps/_stealth_behavior_enemy::enemy_custom_state_behavior(var_0);
       break;
   }
 }
 
-_id_42FE() {
+stealth_basic_states_default() {
   switch (self.team) {
     case "allies":
-      _id_055F::_id_423C();
+      maps/_stealth_behavior_friendly::friendly_default_state_behavior();
       break;
     case "team3":
     case "axis":
-      _id_0560::_id_4288();
+      maps/_stealth_behavior_enemy::enemy_default_state_behavior();
       break;
   }
 }
 
-_id_42FF(var_0) {
-  _id_055D::_id_427F(var_0);
+stealth_pre_spotted_function_custom(var_0) {
+  maps/_stealth_visibility_enemy::enemy_alert_level_set_pre_spotted_func(var_0);
 }
 
-_id_4300() {
-  _id_055D::_id_4280();
+stealth_pre_spotted_function_default() {
+  maps/_stealth_visibility_enemy::enemy_alert_level_default_pre_spotted_func();
 }
 
-_id_4301(var_0) {
-  if(!isDefined(self._id_0B6E._id_423A._id_0AD9)) {
-    maps\_stealth_threat_enemy::_id_4249();
+stealth_plugin_threat(var_0) {
+  if(!isDefined(self._stealth.plugins.threat)) {
+    maps\_stealth_threat_enemy::stealth_threat_enemy_main();
   }
   if(isDefined(var_0)) {
-    _id_4305(var_0);
+    stealth_threat_behavior_replace(var_0);
   }
 }
 
-_id_4302() {
-  self._id_4259 = 0;
+stealth_enable_seek_player_on_spotted() {
+  self.script_stealth_dontseek = 0;
 }
 
-_id_4303() {
-  self._id_4259 = 1;
+stealth_disable_seek_player_on_spotted() {
+  self.script_stealth_dontseek = 1;
 }
 
-_id_4304(var_0, var_1) {
+stealth_threat_behavior_custom(var_0, var_1) {
   if(isDefined(var_0)) {
-    maps\_stealth_threat_enemy::_id_4261(var_0);
+    maps\_stealth_threat_enemy::enemy_set_threat_behavior(var_0);
   }
   if(isDefined(var_1)) {
-    maps\_stealth_threat_enemy::_id_4266(var_1);
+    maps\_stealth_threat_enemy::enemy_set_threat_anim_behavior(var_1);
   }
 }
 
-_id_4305(var_0, var_1) {
+stealth_threat_behavior_replace(var_0, var_1) {
   var_2 = "threat";
   var_3 = "warning";
   var_4 = 1;
   var_5 = var_3 + var_4;
 
   if(isDefined(var_0)) {
-    while(isDefined(self._id_0B6E._id_41D0._id_41D1[var_2][var_5])) {
+    while(isDefined(self._stealth.behavior.ai_functions[var_2][var_5])) {
       if(!isDefined(var_0[var_5])) {
-        var_0[var_5] = maps\_stealth_shared_utilities::_id_41D2(var_2, var_5);
+        var_0[var_5] = maps\_stealth_shared_utilities::ai_get_behavior_function(var_2, var_5);
       }
       var_4++;
       var_5 = var_3 + var_4;
     }
   }
 
-  _id_4304(var_0, var_1);
+  stealth_threat_behavior_custom(var_0, var_1);
 }
 
-_id_4306() {
+stealth_threat_behavior_default_no_warnings() {
   var_0 = [];
-  _id_4304(var_0);
+  stealth_threat_behavior_custom(var_0);
 }
 
-_id_4307() {
-  maps\_stealth_threat_enemy::_id_425E();
-  maps\_stealth_threat_enemy::_id_4267();
+stealth_threat_behavior_default() {
+  maps\_stealth_threat_enemy::enemy_default_threat_behavior();
+  maps\_stealth_threat_enemy::enemy_default_threat_anim_behavior();
 }
 
-_id_42F5(var_0) {
-  level._id_0B6E._id_41ED._id_4272 = var_0;
+stealth_alert_level_duration(var_0) {
+  level._stealth.logic.min_alert_level_duration = var_0;
 }
 
-_id_4308(var_0) {
-  if(!isDefined(self._id_0B6E._id_423A._id_4250)) {
-    _id_0561::_id_428A();
+stealth_plugin_corpse(var_0) {
+  if(!isDefined(self._stealth.plugins.corpse)) {
+    maps/_stealth_corpse_enemy::stealth_corpse_enemy_main();
   }
   if(isDefined(var_0)) {
-    _id_4309(var_0);
+    stealth_corpse_behavior_custom(var_0);
   }
 }
 
-_id_4309(var_0) {
-  _id_0561::_id_42A8(var_0);
+stealth_corpse_behavior_custom(var_0) {
+  maps/_stealth_corpse_enemy::enemy_custom_corpse_behavior(var_0);
 }
 
-_id_430A() {
-  _id_0561::_id_42A7();
+stealth_corpse_behavior_default() {
+  maps/_stealth_corpse_enemy::enemy_default_corpse_behavior();
 }
 
-_id_430B() {
-  _id_0562::_id_42B3();
+stealth_corpse_forget_time_default() {
+  maps/_stealth_corpse_system::stealth_corpse_default_forget_time();
 }
 
-_id_430C(var_0) {
-  _id_0562::_id_42B4(var_0);
+stealth_corpse_forget_time_custom(var_0) {
+  maps/_stealth_corpse_system::stealth_corpse_set_forget_time(var_0);
 }
 
-_id_430D() {
-  _id_0562::_id_42B1();
+stealth_corpse_reset_time_default() {
+  maps/_stealth_corpse_system::stealth_corpse_default_reset_time();
 }
 
-_id_430E(var_0) {
-  _id_0562::_id_42B2(var_0);
+stealth_corpse_reset_time_custom(var_0) {
+  maps/_stealth_corpse_system::stealth_corpse_set_reset_time(var_0);
 }
 
-_id_430F(var_0) {
-  _id_0562::_id_42B6(var_0);
+stealth_corpse_collect_func(var_0) {
+  maps/_stealth_corpse_system::stealth_corpse_set_collect_func(var_0);
 }
 
-_id_4310() {
-  _id_0562::_id_42B7();
+stealth_corpse_reset_collect_func() {
+  maps/_stealth_corpse_system::stealth_corpse_default_collect_func();
 }
 
-_id_4311(var_0) {
-  _id_4312();
-  _id_0563::_id_42C0();
+stealth_plugin_event_all(var_0) {
+  stealth_plugin_event_main();
+  maps/_stealth_event_enemy::stealth_event_mod_all();
 
   if(isDefined(var_0)) {
     foreach(var_3, var_2 in var_0) {}
-    _id_0563::_id_42C1(var_3, var_2);
+    maps/_stealth_event_enemy::stealth_event_mod(var_3, var_2);
   }
 }
 
-_id_4312() {
-  if(!isDefined(self._id_0B6E._id_423A._id_0EFE)) {
-    _id_0563::_id_42B8();
+stealth_plugin_event_main() {
+  if(!isDefined(self._stealth.plugins.event)) {
+    maps/_stealth_event_enemy::stealth_event_enemy_main();
   }
 }
 
-_id_4313(var_0, var_1) {
-  _id_4312();
-  _id_0563::_id_42C1("heard_scream", var_0, var_1);
+stealth_plugin_event_heard_scream(var_0, var_1) {
+  stealth_plugin_event_main();
+  maps/_stealth_event_enemy::stealth_event_mod("heard_scream", var_0, var_1);
 }
 
-_id_4314(var_0, var_1) {
-  _id_4312();
-  _id_0563::_id_42C1("doFlashBanged", var_0, var_1);
+stealth_plugin_event_flashbang(var_0, var_1) {
+  stealth_plugin_event_main();
+  maps/_stealth_event_enemy::stealth_event_mod("doFlashBanged", var_0, var_1);
 }
 
-_id_4315(var_0, var_1) {
-  _id_4312();
-  _id_0563::_id_42C1("explode", var_0, var_1);
+stealth_plugin_event_explosion(var_0, var_1) {
+  stealth_plugin_event_main();
+  maps/_stealth_event_enemy::stealth_event_mod("explode", var_0, var_1);
 }
 
-_id_4316(var_0, var_1, var_2, var_3) {
-  _id_4312();
-  _id_0563::_id_42C1(var_0, var_1, var_2, var_3);
+stealth_plugin_event_custom(var_0, var_1, var_2, var_3) {
+  stealth_plugin_event_main();
+  maps/_stealth_event_enemy::stealth_event_mod(var_0, var_1, var_2, var_3);
 }
 
-_id_4317(var_0) {
-  if(!isDefined(self._id_0B6E._id_423A._id_42C8)) {
-    _id_0564::_id_42C5();
-  }
-  if(isDefined(var_0)) {
-    _id_4318(var_0);
-  }
-}
-
-_id_4318(var_0) {
-  _id_0564::_id_42C9(var_0);
-}
-
-_id_4319() {
-  _id_0564::_id_42CA();
-}
-
-_id_431A(var_0) {
-  if(!isDefined(self._id_0B6E._id_423A._id_42D1)) {
-    _id_0565::_id_42CB();
+stealth_plugin_aicolor(var_0) {
+  if(!isDefined(self._stealth.plugins.color_system)) {
+    maps/_stealth_color_friendly::stealth_color_friendly_main();
   }
   if(isDefined(var_0)) {
-    _id_431B(var_0);
+    stealth_color_state_custom(var_0);
   }
 }
 
-_id_431B(var_0) {
-  _id_0565::_id_42D2(var_0);
+stealth_color_state_custom(var_0) {
+  maps/_stealth_color_friendly::friendly_custom_color_behavior(var_0);
 }
 
-_id_431C() {
-  _id_0565::_id_42D3();
+stealth_color_state_default() {
+  maps/_stealth_color_friendly::friendly_default_color_behavior();
 }
 
-_id_431D() {
-  _id_0566::_id_42D4();
+stealth_plugin_accuracy(var_0) {
+  if(!isDefined(self._stealth.plugins.accaracy_mod)) {
+    maps/_stealth_accuracy_friendly::stealth_accuracy_friendly_main();
+  }
+  if(isDefined(var_0)) {
+    stealth_accuracy_state_custom(var_0);
+  }
 }
 
-_id_431E() {
-  maps\_utility::_id_13DC("_stealth_stance_handler");
+stealth_accuracy_state_custom(var_0) {
+  maps/_stealth_accuracy_friendly::friendly_custom_acc_behavior(var_0);
 }
 
-_id_431F() {
-  maps\_utility::_id_13DE("_stealth_stance_handler");
+stealth_accuracy_state_default() {
+  maps/_stealth_accuracy_friendly::friendly_default_acc_behavior();
 }
 
-_id_4320() {
+stealth_plugin_smart_stance() {
+  maps/_stealth_smartstance_friendly::stealth_smartstance_friendly_main();
+}
+
+enable_stealth_smart_stance() {
+  maps\_utility::ent_flag_set("_stealth_stance_handler");
+}
+
+disable_stealth_smart_stance() {
+  maps\_utility::ent_flag_clear("_stealth_stance_handler");
+}
+
+stealth_enemy_waittill_alert() {
   waittillframeend;
-  maps\_utility::_id_13DB("_stealth_normal");
+  maps\_utility::ent_flag_waitopen("_stealth_normal");
 }
 
-_id_4213() {
-  var_0 = level._id_0B6E._id_1124.groups;
+stealth_is_everything_normal() {
+  var_0 = level._stealth.group.groups;
 
   foreach(var_7, var_2 in var_0) {
-    var_3 = maps\_stealth_shared_utilities::_id_41E1(var_7);
+    var_3 = maps\_stealth_shared_utilities::group_get_ai_in_group(var_7);
 
     foreach(var_5 in var_3) {
-      if(!var_5 maps\_utility::_id_1008("_stealth_normal")) {
+      if(!var_5 maps\_utility::ent_flag("_stealth_normal")) {
         return 0;
       }
     }
@@ -289,73 +289,73 @@ _id_4213() {
   return 1;
 }
 
-_id_4321() {
-  _id_4320();
+stealth_enemy_endon_alert() {
+  stealth_enemy_waittill_alert();
   waittillframeend;
   self notify("stealth_enemy_endon_alert");
 }
 
-_id_4322(var_0, var_1) {
-  thread maps\_stealth_shared_utilities::_id_420F(var_0, var_1);
+stealth_event_handler(var_0, var_1) {
+  thread maps\_stealth_shared_utilities::event_awareness_main(var_0, var_1);
 }
 
-_id_4323(var_0, var_1) {
-  maps\_stealth_visibility_system::_id_42F7(var_0, var_1);
+stealth_detect_ranges_set(var_0, var_1) {
+  maps\_stealth_visibility_system::system_set_detect_ranges(var_0, var_1);
 }
 
-_id_4324() {
-  maps\_stealth_visibility_system::_id_42F6();
+stealth_detect_ranges_default() {
+  maps\_stealth_visibility_system::system_default_detect_ranges();
 }
 
-_id_4325(var_0) {
-  _id_0562::_id_42B0(var_0);
+stealth_corpse_ranges_custom(var_0) {
+  maps/_stealth_corpse_system::stealth_corpse_set_distances(var_0);
 }
 
-_id_4326() {
-  _id_0562::_id_42AF();
+stealth_corpse_ranges_default() {
+  maps/_stealth_corpse_system::stealth_corpse_default_distances();
 }
 
-_id_4327(var_0) {
-  var_1 = level._id_0B6E._id_41ED._id_4220;
-  maps\_stealth_visibility_system::_id_42F9(var_0);
-  maps\_stealth_visibility_system::_id_42E8(var_1);
+stealth_ai_event_dist_custom(var_0) {
+  var_1 = level._stealth.logic.detection_level;
+  maps\_stealth_visibility_system::system_set_event_distances(var_0);
+  maps\_stealth_visibility_system::system_event_change(var_1);
 }
 
-_id_4328() {
-  var_0 = level._id_0B6E._id_41ED._id_4220;
-  maps\_stealth_visibility_system::_id_42F8();
-  maps\_stealth_visibility_system::_id_42E8(var_0);
+stealth_ai_event_dist_default() {
+  var_0 = level._stealth.logic.detection_level;
+  maps\_stealth_visibility_system::system_default_event_distances();
+  maps\_stealth_visibility_system::system_event_change(var_0);
 }
 
-_id_4329(var_0, var_1) {
-  _id_055E::_id_4234(var_0, var_1);
+stealth_friendly_movespeed_scale_set(var_0, var_1) {
+  maps/_stealth_visibility_friendly::friendly_set_movespeed_scale(var_0, var_1);
 }
 
-_id_432A() {
-  _id_055E::_id_4233();
+stealth_friendly_movespeed_scale_default() {
+  maps/_stealth_visibility_friendly::friendly_default_movespeed_scale();
 }
 
-_id_432B(var_0, var_1, var_2) {
-  _id_0566::_id_42E5(var_0, var_1, var_2);
+stealth_friendly_stance_handler_distances_set(var_0, var_1, var_2) {
+  maps/_stealth_smartstance_friendly::friendly_set_stance_handler_distances(var_0, var_1, var_2);
 }
 
-_id_432C() {
-  _id_0566::_id_42E4();
+stealth_friendly_stance_handler_distances_default() {
+  maps/_stealth_smartstance_friendly::friendly_default_stance_handler_distances();
 }
 
-_id_432D(var_0) {
-  maps\_stealth_shared_utilities::_id_420C(var_0);
+stealth_ai_clear_custom_idle_and_react(var_0) {
+  maps\_stealth_shared_utilities::ai_clear_custom_animation_reaction_and_idle(var_0);
 }
 
-_id_432E() {
-  maps\_stealth_shared_utilities::_id_420B();
+stealth_ai_clear_custom_react() {
+  maps\_stealth_shared_utilities::ai_clear_custom_animation_reaction();
 }
 
-_id_432F(var_0, var_1, var_2, var_3, var_4) {
+stealth_ai_idle_and_react(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_4)) {}
 
-  var_0 _id_4336();
-  var_5 = var_0 maps\_stealth_shared_utilities::_id_41DB("_stealth_spotted");
+  var_0 stealth_insure_enabled();
+  var_5 = var_0 maps\_stealth_shared_utilities::group_get_flagname("_stealth_spotted");
 
   if(common_scripts\utility::flag(var_5)) {
     return;
@@ -364,187 +364,187 @@ _id_432F(var_0, var_1, var_2, var_3, var_4) {
   var_0.allowdeath = 1;
 
   if(!isDefined(var_4)) {
-    thread maps\_anim::_id_11CD(var_0, "gravity", var_1, var_3);
+    thread maps\_anim::anim_generic_custom_animmode_loop(var_0, "gravity", var_1, var_3);
   } else {
-    thread maps\_anim::_id_11C8(var_0, var_1, var_3);
+    thread maps\_anim::anim_generic_loop(var_0, var_1, var_3);
   }
-  var_0 maps\_stealth_shared_utilities::_id_420D(self, var_2, var_3, var_6);
-  maps\_utility::_id_09C9(maps\_utility::_id_09CA, "stop_idle_proc");
-  maps\_utility::_id_1DB1(::_id_432D);
-  thread _id_4330();
+  var_0 maps\_stealth_shared_utilities::ai_set_custom_animation_reaction(self, var_2, var_3, var_6);
+  maps\_utility::add_wait(maps\_utility::waittill_msg, "stop_idle_proc");
+  maps\_utility::add_func(::stealth_ai_clear_custom_idle_and_react);
+  thread do_wait_thread();
 }
 
-_id_4330() {
+do_wait_thread() {
   self endon("death");
-  maps\_utility::_id_275B();
+  maps\_utility::do_wait();
 }
 
-_id_4331(var_0, var_1, var_2) {
-  var_0 _id_4336();
-  var_0 maps\_stealth_shared_utilities::_id_420D(self, var_1, var_2, "stop_loop");
+stealth_ai_react(var_0, var_1, var_2) {
+  var_0 stealth_insure_enabled();
+  var_0 maps\_stealth_shared_utilities::ai_set_custom_animation_reaction(self, var_1, var_2, "stop_loop");
 }
 
-_id_4332(var_0, var_1, var_2, var_3, var_4) {
-  var_0 _id_4336();
-  thread _id_4333(var_0, var_1, var_2, var_3, var_4);
+stealth_ai_reach_idle_and_react(var_0, var_1, var_2, var_3, var_4) {
+  var_0 stealth_insure_enabled();
+  thread stealth_ai_reach_idle_and_react_proc(var_0, var_1, var_2, var_3, var_4);
 }
 
-_id_4333(var_0, var_1, var_2, var_3, var_4) {
-  var_0 _id_4336();
-  var_0 thread _id_4321();
+stealth_ai_reach_idle_and_react_proc(var_0, var_1, var_2, var_3, var_4) {
+  var_0 stealth_insure_enabled();
+  var_0 thread stealth_enemy_endon_alert();
   var_0 endon("stealth_enemy_endon_alert");
   var_0 endon("death");
-  maps\_anim::_id_11C4(var_0, var_1, var_4);
-  _id_432F(var_0, var_2, var_3, var_4);
+  maps\_anim::anim_generic_reach(var_0, var_1, var_4);
+  stealth_ai_idle_and_react(var_0, var_2, var_3, var_4);
 }
 
-_id_4334(var_0, var_1, var_2, var_3, var_4) {
-  var_0 _id_4336();
-  thread _id_4335(var_0, var_1, var_2, var_3, var_4);
+stealth_ai_reach_and_arrive_idle_and_react(var_0, var_1, var_2, var_3, var_4) {
+  var_0 stealth_insure_enabled();
+  thread stealth_ai_reach_and_arrive_idle_and_react_proc(var_0, var_1, var_2, var_3, var_4);
 }
 
-_id_4335(var_0, var_1, var_2, var_3, var_4) {
-  var_0 _id_4336();
-  var_0 thread _id_4321();
+stealth_ai_reach_and_arrive_idle_and_react_proc(var_0, var_1, var_2, var_3, var_4) {
+  var_0 stealth_insure_enabled();
+  var_0 thread stealth_enemy_endon_alert();
   var_0 endon("stealth_enemy_endon_alert");
   var_0 endon("death");
-  maps\_anim::_id_11C5(var_0, var_1, var_4);
-  _id_432F(var_0, var_2, var_3, var_4);
+  maps\_anim::anim_generic_reach_and_arrive(var_0, var_1, var_4);
+  stealth_ai_idle_and_react(var_0, var_2, var_3, var_4);
 }
 
-_id_4336() {}
+stealth_insure_enabled() {}
 
-_id_4337() {
-  return maps\_stealth_shared_utilities::_id_41DE("_stealth_spotted");
+stealth_group_return_groups_with_spotted_flag() {
+  return maps\_stealth_shared_utilities::group_return_groups_with_flag_set("_stealth_spotted");
 }
 
-_id_4338() {
-  return maps\_stealth_shared_utilities::_id_41DE("_stealth_event");
+stealth_group_return_groups_with_event_flag() {
+  return maps\_stealth_shared_utilities::group_return_groups_with_flag_set("_stealth_event");
 }
 
-_id_4339() {
-  return maps\_stealth_shared_utilities::_id_41DE("_stealth_found_corpse");
+stealth_group_return_groups_with_corpse_flag() {
+  return maps\_stealth_shared_utilities::group_return_groups_with_flag_set("_stealth_found_corpse");
 }
 
-_id_433A() {
-  return maps\_stealth_shared_utilities::_id_41DF("_stealth_spotted");
+stealth_group_return_ai_with_spotted_flag() {
+  return maps\_stealth_shared_utilities::group_return_ai_with_flag_set("_stealth_spotted");
 }
 
-_id_433B() {
-  return maps\_stealth_shared_utilities::_id_41DF("_stealth_event");
+stealth_group_return_ai_with_event_flag() {
+  return maps\_stealth_shared_utilities::group_return_ai_with_flag_set("_stealth_event");
 }
 
-_id_433C() {
-  return maps\_stealth_shared_utilities::_id_41DF("_stealth_found_corpse");
+stealth_group_return_ai_with_corpse_flag() {
+  return maps\_stealth_shared_utilities::group_return_ai_with_flag_set("_stealth_found_corpse");
 }
 
-_id_4208() {
-  var_0 = maps\_stealth_shared_utilities::_id_41DB("_stealth_spotted");
+stealth_group_spotted_flag() {
+  var_0 = maps\_stealth_shared_utilities::group_get_flagname("_stealth_spotted");
   return common_scripts\utility::flag(var_0);
 }
 
-_id_4271() {
-  var_0 = maps\_stealth_shared_utilities::_id_41DB("_stealth_found_corpse");
+stealth_group_corpse_flag() {
+  var_0 = maps\_stealth_shared_utilities::group_get_flagname("_stealth_found_corpse");
   return common_scripts\utility::flag(var_0);
 }
 
-_id_41CC() {
-  var_0 = maps\_stealth_shared_utilities::_id_41DB("_stealth_spotted");
+stealth_group_spotted_flag_wait() {
+  var_0 = maps\_stealth_shared_utilities::group_get_flagname("_stealth_spotted");
   common_scripts\utility::flag_wait(var_0);
 }
 
-_id_428D() {
-  var_0 = maps\_stealth_shared_utilities::_id_41DB("_stealth_found_corpse");
+stealth_group_corpse_flag_wait() {
+  var_0 = maps\_stealth_shared_utilities::group_get_flagname("_stealth_found_corpse");
   common_scripts\utility::flag_wait(var_0);
 }
 
-_id_41CD() {
-  var_0 = maps\_stealth_shared_utilities::_id_41DB("_stealth_spotted");
+stealth_group_spotted_flag_waitopen() {
+  var_0 = maps\_stealth_shared_utilities::group_get_flagname("_stealth_spotted");
   return common_scripts\utility::flag_waitopen(var_0);
 }
 
-_id_4292() {
-  var_0 = maps\_stealth_shared_utilities::_id_41DB("_stealth_found_corpse");
+stealth_group_corpse_flag_waitopen() {
+  var_0 = maps\_stealth_shared_utilities::group_get_flagname("_stealth_found_corpse");
   return common_scripts\utility::flag_waitopen(var_0);
 }
 
-_id_4215() {
-  return maps\_stealth_shared_utilities::_id_41DB("_stealth_spotted");
+stealth_get_group_spotted_flag() {
+  return maps\_stealth_shared_utilities::group_get_flagname("_stealth_spotted");
 }
 
-_id_4216() {
-  return maps\_stealth_shared_utilities::_id_41DB("_stealth_found_corpse");
+stealth_get_group_corpse_flag() {
+  return maps\_stealth_shared_utilities::group_get_flagname("_stealth_found_corpse");
 }
 
-_id_433D(var_0) {
-  _id_433F(var_0);
+stealth_set_group(var_0) {
+  stealth_set_group_proc(var_0);
 }
 
-_id_433E() {
-  _id_433F("default");
+stealth_set_group_default() {
+  stealth_set_group_proc("default");
 }
 
-_id_433F(var_0) {
-  if(isDefined(self._id_204F)) {
-    level._id_0B6E._id_1124.groups[self._id_204F] = common_scripts\utility::array_remove(level._id_0B6E._id_1124.groups[self._id_204F], self);
+stealth_set_group_proc(var_0) {
+  if(isDefined(self.script_stealthgroup)) {
+    level._stealth.group.groups[self.script_stealthgroup] = common_scripts\utility::array_remove(level._stealth.group.groups[self.script_stealthgroup], self);
   }
-  self._id_204F = maps\_utility::string(var_0);
+  self.script_stealthgroup = maps\_utility::string(var_0);
 
-  if(isDefined(self._id_0B6E._id_423A._id_42FC)) {
-    maps\_stealth_shared_utilities::_id_41D9("_stealth_spotted");
-    maps\_stealth_shared_utilities::_id_41D9("_stealth_event");
-    maps\_stealth_shared_utilities::_id_41D9("_stealth_found_corpse");
-    maps\_stealth_shared_utilities::_id_41DA();
+  if(isDefined(self._stealth.plugins.basic)) {
+    maps\_stealth_shared_utilities::group_flag_init("_stealth_spotted");
+    maps\_stealth_shared_utilities::group_flag_init("_stealth_event");
+    maps\_stealth_shared_utilities::group_flag_init("_stealth_found_corpse");
+    maps\_stealth_shared_utilities::group_add_to_global_list();
   }
 }
 
-_id_4340() {
-  return self._id_204F;
+stealth_get_group() {
+  return self.script_stealthgroup;
 }
 
-_id_4341() {
+enable_stealth_system() {
   common_scripts\utility::flag_set("_stealth_enabled");
   var_0 = getaispeciesarray("all", "all");
 
   foreach(var_3, var_2 in var_0) {}
-  var_2 _id_4343();
+  var_2 enable_stealth_for_ai();
 
   foreach(var_5 in level.players) {}
-  var_5 _id_055E::_id_421A();
+  var_5 maps/_stealth_visibility_friendly::friendly_visibility_logic();
 
-  maps\_stealth_visibility_system::_id_42E8("hidden");
+  maps\_stealth_visibility_system::system_event_change("hidden");
 }
 
-_id_4342() {
+disable_stealth_system() {
   common_scripts\utility::flag_clear("_stealth_enabled");
   var_0 = getaispeciesarray("all", "all");
 
   foreach(var_3, var_2 in var_0) {}
-  var_2 _id_4344();
+  var_2 disable_stealth_for_ai();
 
   foreach(var_5 in level.players) {
     var_5.maxvisibledist = 8192;
 
-    if(var_5 maps\_utility::_id_133C("_stealth_enabled")) {
-      var_5 maps\_utility::_id_13DE("_stealth_enabled");
+    if(var_5 maps\_utility::ent_flag_exist("_stealth_enabled")) {
+      var_5 maps\_utility::ent_flag_clear("_stealth_enabled");
     }
   }
 
-  maps\_stealth_visibility_system::_id_42E8("spotted");
+  maps\_stealth_visibility_system::system_event_change("spotted");
 }
 
-_id_4343() {
-  if(maps\_utility::_id_133C("_stealth_enabled")) {
-    maps\_utility::_id_13DC("_stealth_enabled");
+enable_stealth_for_ai() {
+  if(maps\_utility::ent_flag_exist("_stealth_enabled")) {
+    maps\_utility::ent_flag_set("_stealth_enabled");
   }
   if(self.team == "allies") {
-    _id_055E::_id_421A();
+    maps/_stealth_visibility_friendly::friendly_visibility_logic();
   }
 }
 
-_id_4344() {
-  if(maps\_utility::_id_133C("_stealth_enabled")) {
-    maps\_utility::_id_13DE("_stealth_enabled");
+disable_stealth_for_ai() {
+  if(maps\_utility::ent_flag_exist("_stealth_enabled")) {
+    maps\_utility::ent_flag_clear("_stealth_enabled");
   }
   self.maxvisibledist = 8192;
 }

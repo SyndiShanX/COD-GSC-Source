@@ -6,8 +6,8 @@
 #using_animtree("generic_human");
 
 main() {
-  self._id_247C = "crouch";
-  animscripts\utility::_id_247B();
+  self.desired_anim_pose = "crouch";
+  animscripts\utility::updateanimpose();
   self endon("killanimscript");
   self traversemode("nogravity");
   self traversemode("noclip");
@@ -17,6 +17,6 @@ main() {
   self playSound("dive_wall");
   self waittillmatch("diveanim", "gravity on");
   self traversemode("gravity");
-  animscripts\shared::_id_0C51("diveanim");
-  self.a._id_0D2B = "run";
+  animscripts\shared::donotetracks("diveanim");
+  self.a.movement = "run";
 }

@@ -3,51 +3,51 @@
  * Script: scripts\maps\hijack_crash.gsc
 *****************************************/
 
-_id_5A15() {
+start_crash() {
   level.player giveweapon("fnfiveseven");
   level.player switchtoweapon("fnfiveseven");
   maps\_compass::setupminimap("compass_map_dcemp_static", "crash_minimap_corner");
   setsaveddvar("compassmaxrange", 50000);
   common_scripts\utility::flag_set("show_crash_model");
-  level._id_58C4 = getEnt("intro_door3", "targetname");
-  level._id_58C4 movey(50, 0.1);
-  level._id_58D2 = maps\hijack_code::_id_594A("commander");
-  level._id_58BA = maps\hijack_code::_id_594A("president");
-  level._id_58CB = maps\hijack_code::_id_594A("hero_agent_01");
-  level._id_58C6 = maps\hijack_code::_id_594A("advisor", "end_scene_advisor");
-  level._id_59E0 = maps\_utility::_id_272F("find_daughter_pre_crash");
-  level._id_58CB maps\_utility::_id_123B();
-  level._id_58D2 maps\_utility::_id_13A4("c");
-  level._id_58D2 maps\_utility::_id_2686();
-  level._id_5A16 = common_scripts\utility::getStruct("cargo_room_anim_struct", "targetname");
+  level.door3 = getEnt("intro_door3", "targetname");
+  level.door3 movey(50, 0.1);
+  level.commander = maps\hijack_code::spawn_ally("commander");
+  level.president = maps\hijack_code::spawn_ally("president");
+  level.hero_agent_01 = maps\hijack_code::spawn_ally("hero_agent_01");
+  level.advisor = maps\hijack_code::spawn_ally("advisor", "end_scene_advisor");
+  level.daughter = maps\_utility::spawn_targetname("find_daughter_pre_crash");
+  level.hero_agent_01 maps\_utility::disable_ai_color();
+  level.commander maps\_utility::set_force_color("c");
+  level.commander maps\_utility::enable_ai_color();
+  level.daughter_struct = common_scripts\utility::getStruct("cargo_room_anim_struct", "targetname");
   var_0 = [];
-  var_0[0] = level._id_58BA;
-  var_0[1] = level._id_59E0;
-  level._id_5A16 thread maps\_anim::_id_11D6(var_0, "post_find_loop");
+  var_0[0] = level.president;
+  var_0[1] = level.daughter;
+  level.daughter_struct thread maps\_anim::anim_loop(var_0, "post_find_loop");
   common_scripts\utility::flag_set("find_daughter_moment_finished");
   maps\_audio::aud_send_msg("cargo_room_zone_off");
-  level._id_5A16 thread maps\_anim::_id_124E(level._id_58D2, "find_daughter_commander_loop");
+  level.daughter_struct thread maps\_anim::anim_loop_solo(level.commander, "find_daughter_commander_loop");
   var_1 = common_scripts\utility::getStruct("player_start_crash", "targetname");
   level.player setOrigin(var_1.origin);
   level.player setplayerangles(var_1.angles);
   level.player giveweapon("fnfiveseven");
   level.player switchtoweapon("fnfiveseven");
   var_2 = getnode("hero_agent_crash_node", "targetname");
-  level._id_58CB maps\_utility::_id_27A1(var_2);
-  level._id_58CB setgoalnode(var_2);
-  thread _id_5A20();
-  thread maps\hijack_crash_fx::_id_5980();
-  thread maps\hijack_crash_fx::_id_597F();
-  thread _id_5A1E();
-  thread _id_5A1A();
-  thread maps\hijack::_id_5A17();
-  thread _id_5A19();
+  level.hero_agent_01 maps\_utility::teleport_ai(var_2);
+  level.hero_agent_01 setgoalnode(var_2);
+  thread setup_jump_to_rollers();
+  thread maps\hijack_crash_fx::handle_crash_lights();
+  thread maps\hijack_crash_fx::pre_sled_light();
+  thread open_cargo_door();
+  thread pre_plane_crash();
+  thread maps\hijack::setup_cloud_tunnel();
+  thread crash_objectives();
   main();
   level waittill("crash_teleport");
-  level._id_5A16 notify("stop_loop");
+  level.daughter_struct notify("stop_loop");
 }
 
-_id_5A18() {
+crash_init_flags() {
   common_scripts\utility::flag_init("stop_managing_crash_player");
   common_scripts\utility::flag_init("crash_throw_player");
   common_scripts\utility::flag_init("hero_agent_ready_for_crash");
@@ -56,34 +56,34 @@ _id_5A18() {
   common_scripts\utility::flag_init("tower_is_down");
 }
 
-_id_5A19() {
-  objective_add(maps\_utility::_id_2816("escape_pod"), "current", &"HIJACK_OBJ_ESCAPE_HATCH", level._id_58CB.origin);
-  objective_onentity(maps\_utility::_id_2816("escape_pod"), level._id_58CB, (0, 0, 70));
+crash_objectives() {
+  objective_add(maps\_utility::obj("escape_pod"), "current", &"HIJACK_OBJ_ESCAPE_HATCH", level.hero_agent_01.origin);
+  objective_onentity(maps\_utility::obj("escape_pod"), level.hero_agent_01, (0, 0, 70));
   level waittill("crash_teleport");
-  objective_state(maps\_utility::_id_2816("escape_pod"), "failed");
+  objective_state(maps\_utility::obj("escape_pod"), "failed");
 }
 
-_id_5A1A() {
+pre_plane_crash() {
   maps\_audio::aud_send_msg("approaching_ground");
-  thread maps\_utility::_id_1425("pre_crash");
-  thread maps\hijack_code::_id_5953();
-  thread maps\hijack_airplane::_id_5A1B();
+  thread maps\_utility::autosave_by_name("pre_crash");
+  thread maps\hijack_code::plane_rumbling();
+  thread maps\hijack_airplane::stop_combat();
   common_scripts\utility::flag_wait("player_is_in_crash_room");
-  thread _id_5A5A();
+  thread enemy_pre_crash_chatter();
   common_scripts\utility::flag_wait("player_is_in_end_room");
 }
 
-_id_5A1C() {
-  level._id_58D2 endon("start_crash_anim");
-  level._id_5A16 notify("stop_loop");
-  level._id_58D2 stopanimScripted();
+commander_pre_crash_door_anim() {
+  level.commander endon("start_crash_anim");
+  level.daughter_struct notify("stop_loop");
+  level.commander stopanimScripted();
   var_0 = common_scripts\utility::getStruct("cargo_room_anim_struct", "targetname");
-  var_0 maps\_anim::_id_124A(level._id_58D2, "door1");
-  var_0 maps\_anim::_id_1246(level._id_58D2, "door1");
-  level._id_58D2 thread maps\_anim::_id_124E(level._id_58D2, "corner_standL_alert_twitch04", "stop_door_loop");
+  var_0 maps\_anim::anim_reach_solo(level.commander, "door1");
+  var_0 maps\_anim::anim_single_solo(level.commander, "door1");
+  level.commander thread maps\_anim::anim_loop_solo(level.commander, "corner_standL_alert_twitch04", "stop_door_loop");
 }
 
-_id_5A1D() {
+crash_room_door_blocker() {
   var_0 = getEnt("crash_door_blocker_2", "targetname");
   var_0 notsolid();
   common_scripts\utility::flag_wait_any("start_plane_crash_aisle_1", "start_plane_crash_aisle_2");
@@ -92,50 +92,50 @@ _id_5A1D() {
 
 #using_animtree("animated_props");
 
-_id_5A1E() {
-  foreach(var_1 in level._id_5976) {
-    var_1._id_1032 = "generic";
+open_cargo_door() {
+  foreach(var_1 in level.crash_models) {
+    var_1.animname = "generic";
     var_1 useanimtree(#animtree);
   }
 
   var_3 = getEnt("hijack_crash_model_props", "script_noteworthy");
-  var_3 thread maps\_anim::_id_124E(var_3, "hijack_pre_plane_crash_compartments", "stop loop");
+  var_3 thread maps\_anim::anim_loop_solo(var_3, "hijack_pre_plane_crash_compartments", "stop loop");
   var_4 = getEnt("hijack_crash_model_front_interior", "script_noteworthy");
   maps\_audio::aud_send_msg("pre_crash_door");
-  var_4 maps\_anim::_id_1246(var_4, "hijack_pre_plane_crash_door");
+  var_4 maps\_anim::anim_single_solo(var_4, "hijack_pre_plane_crash_door");
   var_5 = getEnt("crash_door_blocker", "targetname");
   var_5 notsolid();
-  thread _id_5A1D();
+  thread crash_room_door_blocker();
   common_scripts\utility::flag_wait("player_is_in_crash_room");
   var_5 solid();
-  var_4 maps\_anim::_id_1246(var_4, "hijack_pre_plane_crash_door_close");
+  var_4 maps\_anim::anim_single_solo(var_4, "hijack_pre_plane_crash_door_close");
 }
 
-_id_5A1F() {
+start_plane_crash() {
   thread main();
 }
 
-_id_5A20() {
-  level._id_5960 = getEnt("org_view_roll", "targetname");
-  level.player playersetgroundreferenceent(level._id_5960);
-  level._id_5961 = [];
-  level._id_5961 = maps\_utility::_id_0BC3(level._id_5961, level._id_5960);
-  thread maps\hijack_code::_id_5953();
-  common_scripts\utility::array_thread(level._id_5961, maps\hijack_code::_id_5958, -10, 1, 0, 0);
+setup_jump_to_rollers() {
+  level.org_view_roll = getEnt("org_view_roll", "targetname");
+  level.player playersetgroundreferenceent(level.org_view_roll);
+  level.arollers = [];
+  level.arollers = maps\_utility::array_add(level.arollers, level.org_view_roll);
+  thread maps\hijack_code::plane_rumbling();
+  common_scripts\utility::array_thread(level.arollers, maps\hijack_code::rotate_rollers_roll, -10, 1, 0, 0);
   wait 1;
-  common_scripts\utility::array_thread(level._id_5961, maps\hijack_code::_id_5958, 20, 1.5, 0, 0);
+  common_scripts\utility::array_thread(level.arollers, maps\hijack_code::rotate_rollers_roll, 20, 1.5, 0, 0);
   wait 1.5;
-  common_scripts\utility::array_thread(level._id_5961, maps\hijack_code::_id_5958, -10, 1, 0, 0);
+  common_scripts\utility::array_thread(level.arollers, maps\hijack_code::rotate_rollers_roll, -10, 1, 0, 0);
   level waittill("planecrash_approaching");
 }
 
 main() {
-  thread _id_5A46();
-  thread maps\hijack_crash_fx::_id_5974();
-  level._id_58CB _id_5A2A(level._id_5976[0]);
+  thread handle_crash_enemies();
+  thread maps\hijack_crash_fx::handle_crash_fx();
+  level.hero_agent_01 hero_agent_prepare_for_crash(level.crash_models[0]);
   common_scripts\utility::flag_wait_any("start_plane_crash_aisle_1", "start_plane_crash_aisle_2");
-  thread maps\hijack_airplane::_id_5A21();
-  level._id_5A22 = 0;
+  thread maps\hijack_airplane::airplane_cleanup();
+  level.using_aisle_1 = 0;
   var_0 = "tag_player1_rotate";
   var_1 = common_scripts\utility::getStruct("struct_aisle2_front", "targetname");
   var_2 = common_scripts\utility::getStruct("struct_aisle2_back", "targetname");
@@ -143,65 +143,65 @@ main() {
   var_4 = common_scripts\utility::getStruct("struct_aisle2_right", "targetname");
 
   if(common_scripts\utility::flag("start_plane_crash_aisle_1")) {
-    level._id_5A22 = 1;
+    level.using_aisle_1 = 1;
   }
-  maps\_utility::delaythread(0.75, ::_id_5A2D, 0.05);
-  var_5 = level._id_5976;
+  maps\_utility::delaythread(0.75, ::quickfade, 0.05);
+  var_5 = level.crash_models;
   var_6 = 0;
 
   foreach(var_8 in var_5) {
-    level._id_5976[var_6] = spawn("script_model", (0, 0, 0));
-    level._id_5976[var_6] setModel(var_5[var_6].model);
-    level._id_5976[var_6]._id_1032 = "generic";
-    level._id_5976[var_6] useanimtree(#animtree);
+    level.crash_models[var_6] = spawn("script_model", (0, 0, 0));
+    level.crash_models[var_6] setModel(var_5[var_6].model);
+    level.crash_models[var_6].animname = "generic";
+    level.crash_models[var_6] useanimtree(#animtree);
 
     if(isDefined(var_8.script_noteworthy)) {
-      level._id_5976[var_6].script_noteworthy = var_8.script_noteworthy + "_new";
+      level.crash_models[var_6].script_noteworthy = var_8.script_noteworthy + "_new";
     }
     var_6++;
   }
 
   var_5[0] useanimtree(#animtree);
-  var_5[0]._id_1032 = "generic";
-  _id_5A2F(level._id_5976);
+  var_5[0].animname = "generic";
+  plane_crash_anim_firstframe(level.crash_models);
   var_10 = common_scripts\utility::spawn_tag_origin();
   var_0 = "tag_player1_rotate";
 
-  if(!level._id_5A22) {}
+  if(!level.using_aisle_1) {}
 
-  _id_5A25(var_5[0], var_0);
-  var_10 linkTo(level._id_5976[0], var_0, (0, 0, 0), (0, 0, 0));
-  level._id_5A23 = var_10;
+  calculate_plane_movement_limits(var_5[0], var_0);
+  var_10 linkTo(level.crash_models[0], var_0, (0, 0, 0), (0, 0, 0));
+  level.groundent = var_10;
   level.player playersetgroundreferenceent(var_10);
-  level._id_5A24 = var_0;
+  level.attach_tag = var_0;
   level notify("planecrash_approaching");
   level notify("crash_lights_out");
-  _id_5A2B();
-  level._id_58CB.ignoreall = 1;
-  thread _id_5A4A();
+  wait_for_agents_to_align_for_crash();
+  level.hero_agent_01.ignoreall = 1;
+  thread handle_crash_sunlight();
   earthquake(0.3, 1.2, level.player.origin, 200000);
-  thread _id_5A2D(0.05);
+  thread quickfade(0.05);
   common_scripts\utility::flag_clear("in_flight");
   wait 0.05;
   var_11 = (var_1.origin[0] - level.player.origin[0]) / (var_1.origin[0] - var_2.origin[0]);
   var_11 = clamp(var_11, 0.0, 1.0);
   var_12 = (var_3.origin[1] - level.player.origin[1]) / (var_3.origin[1] - var_4.origin[1]);
   var_12 = clamp(var_12, 0.0, 1.0);
-  _id_5A43(var_5[1], level._id_5976[1]);
+  teleport_crash_ents(var_5[1], level.crash_models[1]);
   maps\_compass::setupminimap("compass_map_dcemp_static", "crash_minimap_corner");
   setsaveddvar("compassmaxrange", 50000);
   level.player playrumblelooponentity("hijack_plane_medium");
-  level._id_58CB thread _id_5A44();
-  level._id_58D2 thread _id_5A45();
+  level.hero_agent_01 thread handle_hero_agent_crash();
+  level.commander thread handle_commander_crash();
   level notify("crash_teleport");
-  thread _id_5A30(level._id_5976);
-  thread _id_5A36(level._id_5976[0], var_11, var_12, level._id_5A22);
-  thread _id_5A53(level._id_5976[0]);
+  thread plane_crash_anim(level.crash_models);
+  thread crash_manage_player_position_new(level.crash_models[0], var_11, var_12, level.using_aisle_1);
+  thread crash_hit_throw_player(level.crash_models[0]);
   common_scripts\utility::flag_wait("stop_managing_crash_player");
-  _id_5A35();
+  transition_to_tarmac();
 }
 
-_id_5A25(var_0, var_1) {
+calculate_plane_movement_limits(var_0, var_1) {
   var_2 = % hijack_plane_crash_player_move_forward;
   var_3 = % hijack_plane_crash_player_move_right;
   var_4 = common_scripts\utility::spawn_tag_origin();
@@ -211,84 +211,84 @@ _id_5A25(var_0, var_1) {
   waittillframeend;
   var_0 setanimtime(var_2, 1.0);
   waittillframeend;
-  level._id_5A26 = var_0 gettagorigin(var_1);
+  level.fwd_point = var_0 gettagorigin(var_1);
   var_0 setanimtime(var_2, 0.0);
   waittillframeend;
-  level._id_5A27 = var_0 gettagorigin(var_1);
+  level.back_point = var_0 gettagorigin(var_1);
   var_0 setanimtime(var_3, 1.0);
   waittillframeend;
-  level._id_5A28 = var_0 gettagorigin(var_1);
+  level.right_point = var_0 gettagorigin(var_1);
   var_0 setanimtime(var_3, 0.0);
   waittillframeend;
-  level._id_5A29 = var_0 gettagorigin(var_1);
+  level.left_point = var_0 gettagorigin(var_1);
 }
 
-_id_5A2A(var_0) {
-  level._id_58CB._id_1032 = "generic";
-  level._id_58CB._id_117F = 1;
-  level._id_58CB._id_1199 = 1;
-  var_0 maps\_anim::_id_124A(level._id_58CB, "planecrash_agent1", "tag_agent");
+hero_agent_prepare_for_crash(var_0) {
+  level.hero_agent_01.animname = "generic";
+  level.hero_agent_01.disablearrivals = 1;
+  level.hero_agent_01.disableexits = 1;
+  var_0 maps\_anim::anim_reach_solo(level.hero_agent_01, "planecrash_agent1", "tag_agent");
   common_scripts\utility::flag_set("hero_agent_ready_for_crash");
 }
 
-_id_5A2B() {}
+wait_for_agents_to_align_for_crash() {}
 
-_id_5A2C(var_0) {
+pre_crash_radio_vo(var_0) {
   var_0 waittillmatch("single anim", "vo_line");
-  maps\_utility::_id_11F4("hijack_plt_brace");
+  maps\_utility::radio_dialogue("hijack_plt_brace");
 }
 
-_id_5A2D(var_0) {
-  maps\hijack_code::_id_09FA(var_0);
-  maps\hijack_code::_id_17CC(0.05);
+quickfade(var_0) {
+  maps\hijack_code::fade_out(var_0);
+  maps\hijack_code::fade_in(0.05);
 }
 
-_id_5A2E() {
+thread_spin() {
   for(;;) {
     var_0 = 0;
     wait 0.05;
   }
 }
 
-_id_5A2F(var_0) {
+plane_crash_anim_firstframe(var_0) {
   var_1 = common_scripts\utility::getStruct("hijack_crash_align", "targetname");
 
   foreach(var_3 in var_0) {}
-  var_3._id_1032 = "generic";
+  var_3.animname = "generic";
 
-  var_1 maps\_anim::_id_11BF(var_0, "hijack_plane_crash_anim");
+  var_1 maps\_anim::anim_first_frame(var_0, "hijack_plane_crash_anim");
 }
 
-_id_5A30(var_0) {
+plane_crash_anim(var_0) {
   maps\_audio::aud_send_msg("crash_sequence");
   level notify("crash_anim_start");
   var_1 = common_scripts\utility::getStruct("hijack_crash_align", "targetname");
-  level thread maps\_utility::_id_1424("luggage_falls_out", 15.5);
-  var_1 thread _id_5A34();
-  thread _id_5A2C(var_0[0]);
-  thread _id_5A52(var_0[0]);
+  level thread maps\_utility::notify_delay("luggage_falls_out", 15.5);
+  var_1 thread plane_crash_trees();
+  thread pre_crash_radio_vo(var_0[0]);
+  thread crash_hit_ground_thread(var_0[0]);
   maps\_audio::aud_send_msg("suitcase_prop_sound_impact", var_0[0]);
-  var_2 = maps\_utility::_id_1287("crash_tower", (0, 0, 0));
-  var_3 = maps\_utility::_id_1287("crash_tower_lights", (0, 0, 0));
+  var_2 = maps\_utility::spawn_anim_model("crash_tower", (0, 0, 0));
+  var_3 = maps\_utility::spawn_anim_model("crash_tower_lights", (0, 0, 0));
   var_4[0] = var_2;
   var_4[1] = var_3;
-  var_1 thread maps\_anim::_id_11DD(var_4, "hijack_plane_crash_anim");
-  var_3 thread _id_5A31();
-  thread _id_5A32(var_0[0]);
-  var_5 = maps\_utility::_id_1287("crash_engine_1", (0, 0, 0));
-  var_0 = maps\_utility::_id_0BC3(var_0, var_5);
-  thread _id_5A33(var_5);
-  var_1 maps\_anim::_id_11DD(var_0, "hijack_plane_crash_anim");
+  var_1 thread maps\_anim::anim_single(var_4, "hijack_plane_crash_anim");
+  var_3 thread tower_light_flicker();
+  thread plane_crash_audio_messages(var_0[0]);
+  var_5 = maps\_utility::spawn_anim_model("crash_engine_1", (0, 0, 0));
+  var_0 = maps\_utility::array_add(var_0, var_5);
+  thread handle_engine_swap(var_5);
+  var_1 maps\_anim::anim_single(var_0, "hijack_plane_crash_anim");
   level notify("crash_done");
   common_scripts\utility::flag_set("stop_managing_crash_player");
   waittillframeend;
-  maps\_utility::_id_135B(level._id_5976);
+  maps\_utility::array_delete(level.crash_models);
 }
 
-_id_5A31() {
+tower_light_flicker() {
   level waittill("tail_hits_tower");
   wait 0.3;
-  thread maps\_utility::_id_25EE("tower_is_down", 2.0);
+  thread maps\_utility::flag_set_delayed("tower_is_down", 2.0);
   self hide();
   wait 0.15;
   self show();
@@ -305,77 +305,77 @@ _id_5A31() {
   self delete();
 }
 
-_id_5A32(var_0) {
-  level._id_5907 = common_scripts\utility::spawn_tag_origin();
-  level._id_5907 linkTo(var_0, "FX_R_Wing", (0, 0, 0), (0, 0, 0));
-  level._id_5909 = common_scripts\utility::spawn_tag_origin();
-  level._id_5909 linkTo(var_0, "J_Break_Chunk", (0, 0, 0), (0, 0, 0));
+plane_crash_audio_messages(var_0) {
+  level.crash_explosion_origin = common_scripts\utility::spawn_tag_origin();
+  level.crash_explosion_origin linkTo(var_0, "FX_R_Wing", (0, 0, 0), (0, 0, 0));
+  level.crash_breakaway_chunk = common_scripts\utility::spawn_tag_origin();
+  level.crash_breakaway_chunk linkTo(var_0, "J_Break_Chunk", (0, 0, 0), (0, 0, 0));
   level waittill("crash_impact");
   wait 0.5;
   maps\_audio::aud_send_msg("crash_chunk_breaks_away");
   wait 1.0;
   maps\_audio::aud_send_msg("crash_explosion");
   common_scripts\utility::flag_wait("crash_throw_player");
-  level._id_5907 delete();
-  level._id_5909 delete();
+  level.crash_explosion_origin delete();
+  level.crash_breakaway_chunk delete();
 }
 
-_id_5A33(var_0) {
+handle_engine_swap(var_0) {
   var_0 waittillmatch("single anim", "engine_fire");
-  var_0 setModel(level._id_1F90["crash_engine_2"]);
+  var_0 setModel(level.scr_model["crash_engine_2"]);
 }
 
-_id_5A34() {
-  var_0 = maps\_utility::_id_1287("pine_tree_lg");
-  var_1 = maps\_utility::_id_1287("pine_tree_lg");
-  var_2 = maps\_utility::_id_1287("pine_tree_sm");
-  var_3 = maps\_utility::_id_1287("pine_tree_sm");
-  var_4 = maps\_utility::_id_1287("pine_tree_lg");
-  var_5 = maps\_utility::_id_1287("pine_tree_sm");
-  thread maps\_anim::_id_1246(var_0, "crash_tree_1");
-  thread maps\_anim::_id_1246(var_1, "crash_tree_2");
-  thread maps\_anim::_id_1246(var_2, "crash_tree_3");
-  thread maps\_anim::_id_1246(var_3, "crash_tree_4");
-  thread maps\_anim::_id_1246(var_4, "crash_tree_5");
-  thread maps\_anim::_id_1246(var_5, "crash_tree_6");
+plane_crash_trees() {
+  var_0 = maps\_utility::spawn_anim_model("pine_tree_lg");
+  var_1 = maps\_utility::spawn_anim_model("pine_tree_lg");
+  var_2 = maps\_utility::spawn_anim_model("pine_tree_sm");
+  var_3 = maps\_utility::spawn_anim_model("pine_tree_sm");
+  var_4 = maps\_utility::spawn_anim_model("pine_tree_lg");
+  var_5 = maps\_utility::spawn_anim_model("pine_tree_sm");
+  thread maps\_anim::anim_single_solo(var_0, "crash_tree_1");
+  thread maps\_anim::anim_single_solo(var_1, "crash_tree_2");
+  thread maps\_anim::anim_single_solo(var_2, "crash_tree_3");
+  thread maps\_anim::anim_single_solo(var_3, "crash_tree_4");
+  thread maps\_anim::anim_single_solo(var_4, "crash_tree_5");
+  thread maps\_anim::anim_single_solo(var_5, "crash_tree_6");
   common_scripts\utility::flag_wait("crash_throw_player");
 }
 
-_id_5A35() {
+transition_to_tarmac() {
   level notify("stop_rumbling");
-  level._id_58D2 notify("stop_loop");
-  level._id_58D2 stopanimScripted();
-  thread maps\hijack_tarmac::_id_5A04();
+  level.commander notify("stop_loop");
+  level.commander stopanimScripted();
+  thread maps\hijack_tarmac::tarmac_carnage();
   level.player setweaponammostock("fnfiveseven", 60);
-  maps\hijack_tarmac::_id_599A();
+  maps\hijack_tarmac::main_script_thread();
 }
 
-_id_5A36(var_0, var_1, var_2, var_3) {
-  thread _id_5A3E();
+crash_manage_player_position_new(var_0, var_1, var_2, var_3) {
+  thread manage_player_movement_limits();
   var_4 = "tag_player1_rotate";
   var_5 = % hijack_plane_crash_player_move_forward;
   var_6 = % hijack_plane_crash_player_move_back;
   var_7 = % hijack_plane_crash_player_move_left;
   var_8 = % hijack_plane_crash_player_move_right;
-  level._id_5A37 = [];
-  level._id_5A37[0]["left"] = 0.3;
-  level._id_5A37[0]["right"] = 0.4;
-  level._id_5A37[0]["front"] = 1.0;
-  level._id_5A37[0]["back"] = 0.45;
-  level._id_5A37[1]["left"] = 0.7;
-  level._id_5A37[1]["right"] = 0.79;
-  level._id_5A37[1]["front"] = 1.0;
-  level._id_5A37[1]["back"] = 0.3;
-  level._id_5A38 = [];
-  level._id_5A38[0]["back"] = 0.84;
-  level._id_5A38[0]["front"] = 0.9;
-  level._id_5A38[0]["left"] = 0.15;
-  level._id_5A38[0]["right"] = 1.0;
-  level._id_5A38[1]["back"] = 0.55;
-  level._id_5A38[1]["front"] = 0.6;
-  level._id_5A38[1]["left"] = 0.1;
-  level._id_5A38[1]["right"] = 1.0;
-  _id_5A3D(var_1, var_2);
+  level.fwd_aisle_ranges = [];
+  level.fwd_aisle_ranges[0]["left"] = 0.3;
+  level.fwd_aisle_ranges[0]["right"] = 0.4;
+  level.fwd_aisle_ranges[0]["front"] = 1.0;
+  level.fwd_aisle_ranges[0]["back"] = 0.45;
+  level.fwd_aisle_ranges[1]["left"] = 0.7;
+  level.fwd_aisle_ranges[1]["right"] = 0.79;
+  level.fwd_aisle_ranges[1]["front"] = 1.0;
+  level.fwd_aisle_ranges[1]["back"] = 0.3;
+  level.side_aisle_ranges = [];
+  level.side_aisle_ranges[0]["back"] = 0.84;
+  level.side_aisle_ranges[0]["front"] = 0.9;
+  level.side_aisle_ranges[0]["left"] = 0.15;
+  level.side_aisle_ranges[0]["right"] = 1.0;
+  level.side_aisle_ranges[1]["back"] = 0.55;
+  level.side_aisle_ranges[1]["front"] = 0.6;
+  level.side_aisle_ranges[1]["left"] = 0.1;
+  level.side_aisle_ranges[1]["right"] = 1.0;
+  find_player_aisles(var_1, var_2);
   var_9 = var_5;
   var_10 = var_5;
   var_0 setanim(var_9, 1, 0, 0);
@@ -384,13 +384,13 @@ _id_5A36(var_0, var_1, var_2, var_3) {
   var_12 = var_8;
   var_0 setanim(var_11, 1, 0, 0);
   var_0 setanimtime(var_11, var_2);
-  level.player playerlinktodelta(level._id_5A23, "tag_origin", 0.0, 180, 180, 70, 70, 1);
+  level.player playerlinktodelta(level.groundent, "tag_origin", 0.0, 180, 180, 70, 70, 1);
   var_13 = 0;
   var_14 = 0;
   var_15 = 0;
   var_16 = 1;
-  level._id_5A39 = 0;
-  level._id_5A3A = gettime();
+  level.pushing_at_edge_time = 0;
+  level.pushing_at_edge_measure_time = gettime();
 
   while(!common_scripts\utility::flag("stop_managing_crash_player")) {
     if(!common_scripts\utility::flag("crash_throw_player")) {
@@ -404,8 +404,8 @@ _id_5A36(var_0, var_1, var_2, var_3) {
       var_19 = vectortoangles(var_17);
       var_20 = level.player getplayerangles();
 
-      if(isDefined(level._id_5A23)) {
-        var_20 = combineangles(level._id_5A23.angles, var_20);
+      if(isDefined(level.groundent)) {
+        var_20 = combineangles(level.groundent.angles, var_20);
       }
       var_21 = combineangles(var_20, var_19);
       var_22 = vectorNormalize(anglesToForward(var_21));
@@ -451,20 +451,20 @@ _id_5A36(var_0, var_1, var_2, var_3) {
       var_42 = 1.0;
       var_43 = 1.0;
 
-      if(level._id_5A3B != -1) {
-        var_40 = 1.0 - level._id_5A37[level._id_5A3B]["back"];
-        var_41 = level._id_5A37[level._id_5A3B]["front"];
+      if(level.current_fwd_aisle != -1) {
+        var_40 = 1.0 - level.fwd_aisle_ranges[level.current_fwd_aisle]["back"];
+        var_41 = level.fwd_aisle_ranges[level.current_fwd_aisle]["front"];
       } else {
-        var_40 = 1.0 - level._id_5A38[level._id_5A3C]["back"];
-        var_41 = level._id_5A38[level._id_5A3C]["front"];
+        var_40 = 1.0 - level.side_aisle_ranges[level.current_side_aisle]["back"];
+        var_41 = level.side_aisle_ranges[level.current_side_aisle]["front"];
       }
 
-      if(level._id_5A3C != -1) {
-        var_42 = 1.0 - level._id_5A38[level._id_5A3C]["left"];
-        var_43 = level._id_5A38[level._id_5A3C]["right"];
+      if(level.current_side_aisle != -1) {
+        var_42 = 1.0 - level.side_aisle_ranges[level.current_side_aisle]["left"];
+        var_43 = level.side_aisle_ranges[level.current_side_aisle]["right"];
       } else {
-        var_43 = level._id_5A37[level._id_5A3B]["right"];
-        var_42 = 1.0 - level._id_5A37[level._id_5A3B]["left"];
+        var_43 = level.fwd_aisle_ranges[level.current_fwd_aisle]["right"];
+        var_42 = 1.0 - level.fwd_aisle_ranges[level.current_fwd_aisle]["left"];
       }
 
       if(var_10 == var_6) {
@@ -536,16 +536,16 @@ _id_5A36(var_0, var_1, var_2, var_3) {
       var_14 = 1;
 
       if(var_27 < 0 && var_9 == var_6 && var_0 getanimtime(var_9) > 0.99) {
-        level._id_5A39 = level._id_5A39 + (gettime() - level._id_5A3A);
+        level.pushing_at_edge_time = level.pushing_at_edge_time + (gettime() - level.pushing_at_edge_measure_time);
 
-        if(level._id_5A39 > 1000) {
-          thread _id_5A49();
+        if(level.pushing_at_edge_time > 1000) {
+          thread player_falls_out();
           return;
         }
       } else {
         var_47 = 0;
       }
-      level._id_5A3A = gettime();
+      level.pushing_at_edge_measure_time = gettime();
       wait 0.05;
       var_48 = var_0 getanimtime(var_9);
 
@@ -557,7 +557,7 @@ _id_5A36(var_0, var_1, var_2, var_3) {
       if(var_11 == var_7) {
         var_49 = 1.0 - var_49;
       }
-      _id_5A3D(var_48, var_49);
+      find_player_aisles(var_48, var_49);
       continue;
     }
 
@@ -587,16 +587,16 @@ _id_5A36(var_0, var_1, var_2, var_3) {
   }
 }
 
-_id_5A3D(var_0, var_1) {
-  level._id_5A3B = -1;
+find_player_aisles(var_0, var_1) {
+  level.current_fwd_aisle = -1;
   var_2 = -1;
   var_3 = 1.0;
 
-  for(var_4 = 0; var_4 < level._id_5A37.size; var_4++) {
-    var_5 = abs(var_1 - 0.5 * (level._id_5A37[var_4]["left"] + level._id_5A37[var_4]["right"]));
+  for(var_4 = 0; var_4 < level.fwd_aisle_ranges.size; var_4++) {
+    var_5 = abs(var_1 - 0.5 * (level.fwd_aisle_ranges[var_4]["left"] + level.fwd_aisle_ranges[var_4]["right"]));
 
-    if(var_1 >= level._id_5A37[var_4]["left"] && var_1 <= level._id_5A37[var_4]["right"]) {
-      level._id_5A3B = var_4;
+    if(var_1 >= level.fwd_aisle_ranges[var_4]["left"] && var_1 <= level.fwd_aisle_ranges[var_4]["right"]) {
+      level.current_fwd_aisle = var_4;
       break;
     }
 
@@ -606,15 +606,15 @@ _id_5A3D(var_0, var_1) {
     }
   }
 
-  level._id_5A3C = -1;
+  level.current_side_aisle = -1;
   var_6 = -1;
   var_7 = 1.0;
 
-  for(var_4 = 0; var_4 < level._id_5A38.size; var_4++) {
-    var_5 = abs(var_0 - 0.5 * (level._id_5A38[var_4]["back"] + level._id_5A38[var_4]["front"]));
+  for(var_4 = 0; var_4 < level.side_aisle_ranges.size; var_4++) {
+    var_5 = abs(var_0 - 0.5 * (level.side_aisle_ranges[var_4]["back"] + level.side_aisle_ranges[var_4]["front"]));
 
-    if(var_0 >= level._id_5A38[var_4]["back"] && var_0 <= level._id_5A38[var_4]["front"]) {
-      level._id_5A3C = var_4;
+    if(var_0 >= level.side_aisle_ranges[var_4]["back"] && var_0 <= level.side_aisle_ranges[var_4]["front"]) {
+      level.current_side_aisle = var_4;
       break;
     }
 
@@ -624,60 +624,60 @@ _id_5A3D(var_0, var_1) {
     }
   }
 
-  if(level._id_5A3B == -1 && level._id_5A3C == -1) {
+  if(level.current_fwd_aisle == -1 && level.current_side_aisle == -1) {
     if(var_7 < var_3) {
-      level._id_5A3C = var_6;
+      level.current_side_aisle = var_6;
     } else {
-      level._id_5A3B = var_2;
+      level.current_fwd_aisle = var_2;
     }
   }
 }
 
-_id_5A3E() {
-  thread _id_5A3F();
-  thread _id_5A40();
+manage_player_movement_limits() {
+  thread handle_left_aisle_limit();
+  thread handle_right_aisle_limit();
 }
 
-_id_5A3F() {
+handle_left_aisle_limit() {
   level waittill("luggage_falls_out");
-  level._id_5A37[1]["back"] = 0.0;
+  level.fwd_aisle_ranges[1]["back"] = 0.0;
 }
 
-_id_5A40() {
+handle_right_aisle_limit() {
   level waittill("agent_falls_out");
-  level._id_5A37[0]["back"] = 0.0;
+  level.fwd_aisle_ranges[0]["back"] = 0.0;
 }
 
-_id_5A41(var_0, var_1) {
-  if(!isDefined(level._id_5A42)) {
-    level._id_5A42 = common_scripts\utility::spawn_tag_origin();
+teleport_to_crashmodel(var_0, var_1) {
+  if(!isDefined(level.helper)) {
+    level.helper = common_scripts\utility::spawn_tag_origin();
   }
-  level._id_5A42.origin = var_0 gettagorigin("J_Mid_Section");
-  var_2 = level._id_5A42 maps\_shg_common::_id_1683(self.origin);
-  level._id_5A42.origin = var_1 gettagorigin("J_Mid_Section");
-  var_3 = level._id_5A42 localtoworldcoords(var_2);
+  level.helper.origin = var_0 gettagorigin("J_Mid_Section");
+  var_2 = level.helper maps\_shg_common::worldtolocalcoords(self.origin);
+  level.helper.origin = var_1 gettagorigin("J_Mid_Section");
+  var_3 = level.helper localtoworldcoords(var_2);
 
   if(isai(self)) {
     self forceteleport(var_3, self.angles);
   } else if(isPlayer(self)) {
-    level._id_5A42.origin = var_3;
-    level._id_5A42.angles = self getplayerangles();
-    maps\_utility::_id_1FDF(level._id_5A42);
+    level.helper.origin = var_3;
+    level.helper.angles = self getplayerangles();
+    maps\_utility::teleport_player(level.helper);
   } else {
     self.origin = var_3;
   }
 }
 
-_id_5A43(var_0, var_1) {
-  level.player _id_5A41(var_0, var_1);
-  level._id_58CB _id_5A41(var_0, var_1);
-  level._id_58CB linkTo(var_1, "tag_agent", (0, 0, 0), (0, 0, 0));
-  level._id_58D2 _id_5A41(var_0, var_1);
-  level._id_58D2 linkTo(var_1, "J_Mid_Section");
+teleport_crash_ents(var_0, var_1) {
+  level.player teleport_to_crashmodel(var_0, var_1);
+  level.hero_agent_01 teleport_to_crashmodel(var_0, var_1);
+  level.hero_agent_01 linkTo(var_1, "tag_agent", (0, 0, 0), (0, 0, 0));
+  level.commander teleport_to_crashmodel(var_0, var_1);
+  level.commander linkTo(var_1, "J_Mid_Section");
   var_2 = getEntArray("sled_attach_ents", "targetname");
 
   foreach(var_4 in var_2) {
-    var_4 _id_5A41(var_0, var_1);
+    var_4 teleport_to_crashmodel(var_0, var_1);
     var_4 setModel("tag_origin");
     var_4 linkTo(var_1, "J_Mid_Section");
   }
@@ -685,49 +685,49 @@ _id_5A43(var_0, var_1) {
   var_6 = getEntArray("tail_attach_ents", "targetname");
 
   foreach(var_4 in var_6) {
-    var_4 _id_5A41(var_0, var_1);
+    var_4 teleport_to_crashmodel(var_0, var_1);
     var_4 setModel("tag_origin");
     var_4 linkTo(var_1, "J_Tail_Sled");
   }
 }
 
-_id_5A44() {
+handle_hero_agent_crash() {
   self.ignoreall = 1;
-  self._id_1032 = "generic";
-  maps\_audio::aud_send_msg("agent_scream", level._id_58CB);
-  level thread maps\_utility::_id_1424("agent_falls_out", 19.5);
-  level._id_5976[0] maps\_anim::_id_1246(self, "planecrash_agent1", "tag_agent");
+  self.animname = "generic";
+  maps\_audio::aud_send_msg("agent_scream", level.hero_agent_01);
+  level thread maps\_utility::notify_delay("agent_falls_out", 19.5);
+  level.crash_models[0] maps\_anim::anim_single_solo(self, "planecrash_agent1", "tag_agent");
 
-  if(isDefined(self._id_0D04) && self._id_0D04) {
-    maps\_utility::_id_1902();
+  if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
+    maps\_utility::stop_magic_bullet_shield();
   }
-  self._id_0D45 = undefined;
+  self.deathfunction = undefined;
   waittillframeend;
   self kill();
 }
 
-_id_5A45() {
-  level._id_58D2 notify("stop_door_loop");
+handle_commander_crash() {
+  level.commander notify("stop_door_loop");
 }
 
-_id_5A46() {
+handle_crash_enemies() {
   level waittill("crash_teleport");
-  thread _id_5A47(getEnt("planecrash_enemy1", "targetname"), "planecrash_enemy1");
-  thread _id_5A47(getEnt("planecrash_enemy2", "targetname"), "planecrash_enemy2");
-  thread _id_5A47(getEnt("planecrash_enemy3", "targetname"), "planecrash_enemy3");
-  thread _id_5A47(getEnt("planecrash_enemy4", "targetname"), "planecrash_enemy4");
-  thread _id_5A47(getEnt("planecrash_enemy5", "targetname"), "planecrash_enemy5");
-  thread _id_5A47(getEnt("planecrash_enemy6", "targetname"), "planecrash_enemy6");
+  thread tail_enemy_spawn(getEnt("planecrash_enemy1", "targetname"), "planecrash_enemy1");
+  thread tail_enemy_spawn(getEnt("planecrash_enemy2", "targetname"), "planecrash_enemy2");
+  thread tail_enemy_spawn(getEnt("planecrash_enemy3", "targetname"), "planecrash_enemy3");
+  thread tail_enemy_spawn(getEnt("planecrash_enemy4", "targetname"), "planecrash_enemy4");
+  thread tail_enemy_spawn(getEnt("planecrash_enemy5", "targetname"), "planecrash_enemy5");
+  thread tail_enemy_spawn(getEnt("planecrash_enemy6", "targetname"), "planecrash_enemy6");
 }
 
-_id_5A47(var_0, var_1) {
-  var_2 = var_0 maps\_utility::_id_166F();
+tail_enemy_spawn(var_0, var_1) {
+  var_2 = var_0 maps\_utility::spawn_ai();
   var_2.ignoreall = 1;
-  var_2 linkTo(level._id_5976[0], "tag_enemy", (0, 0, 0), (0, 0, 0));
-  var_2._id_240B = 1;
-  level._id_5976[0] thread maps\_anim::_id_11C1(var_2, var_1, "tag_enemy");
+  var_2 linkTo(level.crash_models[0], "tag_enemy", (0, 0, 0), (0, 0, 0));
+  var_2.dontshootstraight = 1;
+  level.crash_models[0] thread maps\_anim::anim_generic(var_2, var_1, "tag_enemy");
   var_2.allowdeath = 1;
-  var_2._id_0EC6 = 1;
+  var_2.noragdoll = 1;
   level waittill("crash_done");
 
   if(isDefined(var_2)) {
@@ -735,78 +735,78 @@ _id_5A47(var_0, var_1) {
   }
 }
 
-_id_5A48(var_0, var_1) {
+shell_shock(var_0, var_1) {
   self shellshock(var_0, var_1);
 }
 
-_id_5A49() {
-  var_0 = maps\_utility::_id_1287("player_rig", level.player.origin);
+player_falls_out() {
+  var_0 = maps\_utility::spawn_anim_model("player_rig", level.player.origin);
   var_0.angles = level.player.angles;
-  var_0 maps\_anim::_id_1244();
+  var_0 maps\_anim::setanimtree();
   level.player disableweapons();
   level.player setstance("stand");
   level.player allowcrouch(0);
-  level.player maps\_utility::delaythread(0.75, ::_id_5A48, "hijack_airplane", 3.0);
+  level.player maps\_utility::delaythread(0.75, ::shell_shock, "hijack_airplane", 3.0);
   maps\_audio::aud_send_msg("crash_death");
-  var_0 linkTo(level._id_5976[0], level._id_5A24, (0, 0, 0), (0, 180, 0));
+  var_0 linkTo(level.crash_models[0], level.attach_tag, (0, 0, 0), (0, 180, 0));
   level.player playerlinktoabsolute(var_0, "tag_player");
   level.player playersetgroundreferenceent(undefined);
-  var_1 = getanimlength(var_0 maps\_utility::_id_1281("crash_fall_out"));
-  level._id_5976[0] thread maps\_anim::_id_1246(var_0, "crash_fall_out", level._id_5A24);
+  var_1 = getanimlength(var_0 maps\_utility::getanim("crash_fall_out"));
+  level.crash_models[0] thread maps\_anim::anim_single_solo(var_0, "crash_fall_out", level.attach_tag);
   wait(var_1 - 0.5);
   setDvar("ui_deadquote", &"HIJACK_FELL_OUT_OF_PLANE");
   level notify("mission failed");
-  maps\_utility::_id_1826();
+  maps\_utility::missionfailedwrapper();
 }
 
-_id_5A4A() {
+handle_crash_sunlight() {
   setsunlight(0, 0, 0);
   level waittill("crash_impact");
   setsaveddvar("sm_sunSampleSizeNear", 2.5);
   enableforcedsunshadows();
   resetsunlight();
-  thread _id_5A4B();
-  thread _id_5A51();
+  thread sunlight_flicker();
+  thread sunlight_direction_lerp();
   common_scripts\utility::flag_wait("crash_throw_player");
   disableforcedsunshadows();
   setsaveddvar("sm_sunSampleSizeNear", 0.25);
 }
 
-_id_5A4B() {
+sunlight_flicker() {
   wait 0.5;
   var_0 = (0, 0, 0);
-  thread _id_5A4F();
+  thread sunlight_flicker_lifetime_values();
 
   while(!common_scripts\utility::flag("stop_sun_crash_lerp")) {
-    var_1 = randomfloatrange(level._id_5A4D, level._id_5A4C);
+    var_1 = randomfloatrange(level.crash_light_scale_min, level.crash_light_scale_max);
     wait(randomfloatrange(0.1, 0.3));
-    var_0 = level._id_5A4E * var_1;
+    var_0 = level.crash_light_val_base * var_1;
     setsunlight(var_0[0], var_0[1], var_0[2]);
   }
 
   var_2 = (0.878431, 0.443137, 0.121569);
-  _id_5A50(var_0, var_2, 0.5);
+  sun_lerp_value(var_0, var_2, 0.5);
 }
 
-_id_5A4F() {
+sunlight_flicker_lifetime_values() {
   var_0 = (0.878431, 0.443137, 0.121569);
   var_1 = (0.965, 0.847, 0.584);
   var_2 = 1.2;
   var_3 = 3.0;
   var_4 = 0.9;
   var_5 = 0.98;
-  level._id_5A4E = var_0;
-  level._id_5A4D = var_2;
-  level._id_5A4C = var_3;
+  level.crash_light_val_base = var_0;
+  level.crash_light_scale_min = var_2;
+  level.crash_light_scale_max = var_3;
   var_6 = 13;
   var_7 = var_6;
 
   while(var_7 > 0) {
     var_8 = (var_6 - var_7) / var_6;
     var_8 = var_8 * var_8;
-    level._id_5A4E = vectorlerp(var_0, var_1, var_8);
-    level._id_5A4D = maps\_utility::_id_281D(var_8, var_2, var_4);
-    level._id_5A4C = maps\_utility::_id_281D(var_8, var_3, var_5);
+    level.crash_light_val_base = vectorlerp(var_0, var_1, var_8);
+    level.crash_light_scale_min = maps\_utility::linear_interpolate(var_8, var_2, var_4);
+    level.crash_light_scale_max = maps\_utility::linear_interpolate(var_8, var_3, var_5);
     var_7 = var_7 - 0.1;
     wait 0.1;
   }
@@ -814,7 +814,7 @@ _id_5A4F() {
   common_scripts\utility::flag_set("stop_sun_crash_lerp");
 }
 
-_id_5A50(var_0, var_1, var_2) {
+sun_lerp_value(var_0, var_1, var_2) {
   var_3 = var_2;
   var_4 = 0;
 
@@ -826,7 +826,7 @@ _id_5A50(var_0, var_1, var_2) {
   }
 }
 
-_id_5A51() {
+sunlight_direction_lerp() {
   var_0 = (-5, -90, 0);
   var_1 = -5;
   var_2 = -120;
@@ -844,22 +844,22 @@ _id_5A51() {
   }
 }
 
-_id_5A52(var_0) {
+crash_hit_ground_thread(var_0) {
   var_0 waittillmatch("single anim", "hit_ground");
   level notify("crash_impact");
   level notify("crash_stop_pre_sled_lights");
-  thread _id_5A59();
+  thread handle_runner_lights();
   level.player stoprumble("hijack_plane_medium");
   earthquake(0.7, 1.2, level.player.origin, 200000);
   level.player disableweapons();
   wait 0.5;
   level.player playrumblelooponentity("hijack_plane_large");
-  thread maps\hijack_code::_id_5953();
+  thread maps\hijack_code::plane_rumbling();
   wait 1.5;
   level.player enableweapons();
 }
 
-_id_5A53(var_0) {
+crash_hit_throw_player(var_0) {
   var_0 waittillmatch("single anim", "hit_stop");
   common_scripts\utility::flag_set("crash_throw_player");
   level notify("crash_stop_flashing_lights");
@@ -869,26 +869,26 @@ _id_5A53(var_0) {
   var_1 = common_scripts\utility::getStruct("player_crash_end_lookat", "targetname");
   var_2 = getEnt("crash_player_dest_2", "script_noteworthy");
 
-  if(level._id_5A22) {
+  if(level.using_aisle_1) {
     var_2 = getEnt("crash_player_dest_1", "script_noteworthy");
   }
   var_3 = vectortoangles(var_1.origin - var_2.origin);
   var_3 = (0, var_3[1], 0);
-  _id_59D7();
+  remove_all_weapons_post_crash();
   var_4 = common_scripts\utility::spawn_tag_origin();
-  var_4.origin = var_0 gettagorigin(level._id_5A24);
-  var_4.angles = var_0 gettagangles(level._id_5A24) + (10, 180, 0);
-  var_4 linkTo(level._id_5A23);
+  var_4.origin = var_0 gettagorigin(level.attach_tag);
+  var_4.angles = var_0 gettagangles(level.attach_tag) + (10, 180, 0);
+  var_4 linkTo(level.groundent);
   level.player playerlinktoblend(var_4, "tag_origin", 0.1, 0, 0);
   wait 0.1;
 
-  if(isDefined(level._id_58D2)) {
-    level._id_58D2 maps\_utility::_id_1902();
-    level._id_58D2 delete();
-    level._id_58D2 = maps\hijack_code::_id_594A("commander_tarmac", "tarmac_commander_tarmac");
+  if(isDefined(level.commander)) {
+    level.commander maps\_utility::stop_magic_bullet_shield();
+    level.commander delete();
+    level.commander = maps\hijack_code::spawn_ally("commander_tarmac", "tarmac_commander_tarmac");
     var_5 = getnode("commander_pre_ramp_node", "targetname");
-    level._id_58D2 maps\_utility::_id_27A1(var_5);
-    level._id_58D2 hide();
+    level.commander maps\_utility::teleport_ai(var_5);
+    level.commander hide();
   }
 
   level.player shellshock("hijack_airplane", 2.5);
@@ -897,7 +897,7 @@ _id_5A53(var_0) {
   var_0 waittillmatch("single anim", "hit_end");
   common_scripts\utility::flag_set("stop_managing_crash_player");
   level.player playRumbleOnEntity("damage_heavy");
-  thread maps\hijack_code::_id_09FA(0.05);
+  thread maps\hijack_code::fade_out(0.05);
   wait 0.2;
   level notify("crash_sequence_done");
   setsaveddvar("compass", 0);
@@ -911,49 +911,49 @@ _id_5A53(var_0) {
   setsaveddvar("ammoCounterHide", 0);
   setsaveddvar("actionSlotsHide", 0);
   level.player disableslowaim();
-  level._id_58D2 show();
+  level.commander show();
   level.player allowcrouch(0);
   maps\_compass::setupminimap("compass_map_hijack_tarmac", "tarmac_minimap_corner");
   setsaveddvar("compassmaxrange", 3500);
-  thread maps\hijack_code::_id_17CC(3.0);
-  thread _id_5A58();
+  thread maps\hijack_code::fade_in(3.0);
+  thread post_crash_background_chatter();
   var_6 = common_scripts\utility::getStruct("agent_helps_player_origin", "targetname");
-  thread _id_5A54(var_6);
-  thread _id_5A55(var_6);
-  thread _id_59D8();
+  thread player_wake_up(var_6);
+  thread commander_wake_up(var_6);
+  thread animated_telephone();
 }
 
-_id_59D7() {
+remove_all_weapons_post_crash() {
   level.player disableweapons();
 }
 
-_id_59D8() {
+animated_telephone() {
   var_0 = common_scripts\utility::getStruct("agent_helps_player_origin", "targetname");
   var_1 = getEnt("post_crash_phone", "targetname");
-  var_1._id_1032 = "post_crash_telephone";
-  var_1 maps\_anim::_id_1244();
-  var_0 thread maps\_anim::_id_1246(var_1, "telephone_swing");
+  var_1.animname = "post_crash_telephone";
+  var_1 maps\_anim::setanimtree();
+  var_0 thread maps\_anim::anim_single_solo(var_1, "telephone_swing");
 }
 
-_id_5A54(var_0) {
-  var_1 = maps\_utility::_id_1287("player_rig", level.player.origin);
+player_wake_up(var_0) {
+  var_1 = maps\_utility::spawn_anim_model("player_rig", level.player.origin);
   level.player playerlinktodelta(var_1, "tag_player", 1.0, 10, 10, 10, 10, 1);
-  thread _id_5A57();
+  thread player_blur();
   level.player enableslowaim();
-  var_0 maps\_anim::_id_1246(var_1, "help_player_up");
+  var_0 maps\_anim::anim_single_solo(var_1, "help_player_up");
   level.player unlink();
   var_1 delete();
-  thread _id_5A56();
+  thread slowly_restore_aim_speed();
   common_scripts\utility::flag_set("player_on_feet_post_crash");
 }
 
-_id_5A55(var_0) {
+commander_wake_up(var_0) {
   level notify("start_commander_wake_up_anim");
-  var_0 maps\_anim::_id_1246(level._id_58D2, "help_player_up");
+  var_0 maps\_anim::anim_single_solo(level.commander, "help_player_up");
   common_scripts\utility::flag_set("commander_finished_wake_up_anim");
 }
 
-_id_5A56() {
+slowly_restore_aim_speed() {
   var_0 = 0.4;
   level.player enableslowaim(0.2, 0.2);
   wait(var_0);
@@ -974,7 +974,7 @@ _id_5A56() {
   level.player disableslowaim();
 }
 
-_id_5A57() {
+player_blur() {
   setblur(9, 1);
   wait 1;
   setblur(0, 1);
@@ -987,7 +987,7 @@ _id_5A57() {
   wait 2.5;
   setblur(0, 1.5);
   wait 0.5;
-  var_0 = level._id_1436;
+  var_0 = level.dofdefault;
   var_1 = [];
   var_1["nearStart"] = 0.1;
   var_1["nearEnd"] = 0.2;
@@ -995,53 +995,53 @@ _id_5A57() {
   var_1["farStart"] = 50;
   var_1["farEnd"] = 100;
   var_1["farBlur"] = 5;
-  maps\_utility::_id_27C0(var_0, var_1, 2.5);
+  maps\_utility::blend_dof(var_0, var_1, 2.5);
   common_scripts\utility::flag_wait("player_on_feet_post_crash");
-  maps\_utility::_id_27C0(var_1, var_0, 5);
+  maps\_utility::blend_dof(var_1, var_0, 5);
 }
 
-_id_5A58() {
+post_crash_background_chatter() {
   level endon("player_exit_plane_3");
-  level._id_59EF = spawn("script_origin", level.player.origin);
-  level._id_59EF linkTo(level.player);
-  level._id_59EF._id_1046 = 1;
+  level.tarmac_radio_org = spawn("script_origin", level.player.origin);
+  level.tarmac_radio_org linkTo(level.player);
+  level.tarmac_radio_org.linked = 1;
   var_0 = 1.75;
   var_1 = 3.0;
-  maps\hijack_code::_id_5956("hijack_rt1_stillinarea", level._id_59EF);
+  maps\hijack_code::background_chatter("hijack_rt1_stillinarea", level.tarmac_radio_org);
   wait(randomfloatrange(var_0, var_1));
-  maps\hijack_code::_id_5956("hijack_rt2_command", level._id_59EF);
+  maps\hijack_code::background_chatter("hijack_rt2_command", level.tarmac_radio_org);
   wait(randomfloatrange(var_0, var_1));
-  maps\hijack_code::_id_5956("hijack_rt3_scrambling", level._id_59EF);
+  maps\hijack_code::background_chatter("hijack_rt3_scrambling", level.tarmac_radio_org);
   wait(randomfloatrange(var_0, var_1));
-  maps\hijack_code::_id_5956("hijack_rt1_clearing", level._id_59EF);
+  maps\hijack_code::background_chatter("hijack_rt1_clearing", level.tarmac_radio_org);
   wait(randomfloatrange(var_0, var_1));
-  maps\hijack_code::_id_5956("hijack_rt2_neutralized", level._id_59EF);
+  maps\hijack_code::background_chatter("hijack_rt2_neutralized", level.tarmac_radio_org);
   wait(randomfloatrange(var_0 - 1, var_1 - 1));
-  maps\hijack_code::_id_5956("hijack_rt3_wounded", level._id_59EF);
+  maps\hijack_code::background_chatter("hijack_rt3_wounded", level.tarmac_radio_org);
   wait(randomfloatrange(var_0 - 1, var_1 - 1));
-  maps\hijack_code::_id_5956("hijack_rt1_verifylocation", level._id_59EF);
+  maps\hijack_code::background_chatter("hijack_rt1_verifylocation", level.tarmac_radio_org);
   wait(randomfloatrange(var_0 - 1, var_1 - 1));
-  maps\hijack_code::_id_5956("hijack_rt2_hamburg", level._id_59EF);
+  maps\hijack_code::background_chatter("hijack_rt2_hamburg", level.tarmac_radio_org);
   wait(randomfloatrange(var_0 - 1, var_1 - 1));
-  maps\hijack_code::_id_5956("hijack_fso1_flightpath", level._id_59EF);
+  maps\hijack_code::background_chatter("hijack_fso1_flightpath", level.tarmac_radio_org);
 }
 
-_id_5A59() {
+handle_runner_lights() {
   var_0 = getEnt("hijack_crash_model_front_interior_new", "script_noteworthy");
   var_1 = getEnt("hijack_crash_model_rear_interior_new", "script_noteworthy");
-  _id_5A5C(0, var_0, "plane_crash_lights_on_front", "plane_crash_lights_off_front");
-  _id_5A5C(0, var_1, "plane_crash_lights_on_rear", "plane_crash_lights_off_rear");
+  runner_lights_seton(0, var_0, "plane_crash_lights_on_front", "plane_crash_lights_off_front");
+  runner_lights_seton(0, var_1, "plane_crash_lights_on_rear", "plane_crash_lights_off_rear");
   wait 2.0;
-  thread _id_5A5B(var_0, "stop_front_flicker", "plane_crash_lights_on_front", "plane_crash_lights_off_front");
+  thread flicker_model(var_0, "stop_front_flicker", "plane_crash_lights_on_front", "plane_crash_lights_off_front");
   wait 3.0;
-  _id_5A5C(0, var_1, "plane_crash_lights_on_rear", "plane_crash_lights_off_rear");
+  runner_lights_seton(0, var_1, "plane_crash_lights_on_rear", "plane_crash_lights_off_rear");
   common_scripts\utility::flag_wait("crash_throw_player");
   level notify("stop_front_flicker");
-  _id_5A5C(0, var_0, "plane_crash_lights_on_front", "plane_crash_lights_off_front");
-  _id_5A5C(0, var_1, "plane_crash_lights_on_rear", "plane_crash_lights_off_rear");
+  runner_lights_seton(0, var_0, "plane_crash_lights_on_front", "plane_crash_lights_off_front");
+  runner_lights_seton(0, var_1, "plane_crash_lights_on_rear", "plane_crash_lights_off_rear");
 }
 
-_id_5A5A() {
+enemy_pre_crash_chatter() {
   level endon("crash_teleport");
   var_0 = getEnt("crash_battlechatter_origin", "script_noteworthy");
 
@@ -1051,21 +1051,21 @@ _id_5A5A() {
   }
 }
 
-_id_5A5B(var_0, var_1, var_2, var_3) {
+flicker_model(var_0, var_1, var_2, var_3) {
   level endon(var_1);
 
   for(;;) {
-    _id_5A5C(1, var_0, var_2, var_3);
+    runner_lights_seton(1, var_0, var_2, var_3);
     wait(randomfloatrange(0.05, 0.5));
-    _id_5A5C(0, var_0, var_2, var_3);
+    runner_lights_seton(0, var_0, var_2, var_3);
     wait(randomfloatrange(0.05, 0.2));
   }
 }
 
-_id_5A5C(var_0, var_1, var_2, var_3) {
+runner_lights_seton(var_0, var_1, var_2, var_3) {
   if(var_0) {
-    var_1 setModel(level._id_1F90[var_2]);
+    var_1 setModel(level.scr_model[var_2]);
   } else {
-    var_1 setModel(level._id_1F90[var_3]);
+    var_1 setModel(level.scr_model[var_3]);
   }
 }

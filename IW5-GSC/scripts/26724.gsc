@@ -3,32 +3,32 @@
  * Script: scripts\26724.gsc
 **************************************/
 
-_id_49DB(var_0, var_1, var_2) {
-  if(!isDefined(level._id_49DC)) {
-    thread _id_49EE();
+ge_createeventmanager(var_0, var_1, var_2) {
+  if(!isDefined(level._gameeventmanagers)) {
+    thread _ge_processthread();
   }
   var_3 = spawnStruct();
-  level._id_49DC[var_0] = var_3;
-  var_3._id_49DD = var_1;
+  level._gameeventmanagers[var_0] = var_3;
+  var_3.availablecost = var_1;
 
   if(isarray(var_1)) {
     for(var_4 = 0; var_4 < var_1.size; var_4++) {
-      var_3._id_49DE[var_4] = 0;
+      var_3.currentactivecost[var_4] = 0;
     }
   } else {
-    var_3._id_49DE = 0;
+    var_3.currentactivecost = 0;
   }
-  var_3._id_49DF = spawnStruct();
-  var_3._id_49E0 = spawnStruct();
-  var_3._id_49E1 = var_2;
+  var_3.waiting = spawnStruct();
+  var_3.active = spawnStruct();
+  var_3.classes = var_2;
   var_3.index = 0;
 }
 
-_id_49E2(var_0, var_1) {
+_ge_countevents(var_0, var_1) {
   var_2 = 0;
 
-  if(isDefined(var_0) && isDefined(var_0._id_49E3)) {
-    for(var_0 = var_0._id_49E3; isDefined(var_0); var_0 = var_0._id_49E4) {
+  if(isDefined(var_0) && isDefined(var_0.head)) {
+    for(var_0 = var_0.head; isDefined(var_0); var_0 = var_0._next) {
       if(!isDefined(var_1) || var_0.class == var_1) {
         var_2++;
       }
@@ -38,181 +38,181 @@ _id_49E2(var_0, var_1) {
   return var_2;
 }
 
-_id_49E5() {}
+ge_initdebugging() {}
 
-_id_49E6(var_0, var_1) {
+_ge_canafford(var_0, var_1) {
   if(var_0.priority >= 100) {
     return 1;
   }
-  if(isarray(var_1._id_49DD)) {
-    for(var_2 = 0; var_2 < var_1._id_49DD.size; var_2++) {
-      if(var_0._id_3EC1[var_2] + var_1._id_49DE[var_2] > var_1._id_49DD[var_2]) {
+  if(isarray(var_1.availablecost)) {
+    for(var_2 = 0; var_2 < var_1.availablecost.size; var_2++) {
+      if(var_0._id_3EC1[var_2] + var_1.currentactivecost[var_2] > var_1.availablecost[var_2]) {
         return 0;
       }
     }
-  } else if(var_0._id_3EC1 + var_1._id_49DE > var_1._id_49DD) {
+  } else if(var_0._id_3EC1 + var_1.currentactivecost > var_1.availablecost) {
     return 0;
   }
   return 1;
 }
 
-_id_49E7(var_0, var_1) {
-  if(isarray(var_1._id_49DD)) {
-    for(var_2 = 0; var_2 < var_1._id_49DD.size; var_2++) {
-      var_1._id_49DE[var_2] = var_1._id_49DE[var_2] + var_0._id_3EC1[var_2];
+_ge_addcosttoactive(var_0, var_1) {
+  if(isarray(var_1.availablecost)) {
+    for(var_2 = 0; var_2 < var_1.availablecost.size; var_2++) {
+      var_1.currentactivecost[var_2] = var_1.currentactivecost[var_2] + var_0._id_3EC1[var_2];
     }
   } else {
-    var_1._id_49DE = var_1._id_49DE + var_0._id_3EC1;
+    var_1.currentactivecost = var_1.currentactivecost + var_0._id_3EC1;
   }
 }
 
-_id_49E8(var_0, var_1) {
-  if(isarray(var_1._id_49DD)) {
-    for(var_2 = 0; var_2 < var_1._id_49DD.size; var_2++) {
-      var_1._id_49DE[var_2] = var_1._id_49DE[var_2] - var_0._id_3EC1[var_2];
+_ge_subtractcosttoactive(var_0, var_1) {
+  if(isarray(var_1.availablecost)) {
+    for(var_2 = 0; var_2 < var_1.availablecost.size; var_2++) {
+      var_1.currentactivecost[var_2] = var_1.currentactivecost[var_2] - var_0._id_3EC1[var_2];
     }
   } else {
-    var_1._id_49DE = var_1._id_49DE - var_0._id_3EC1;
+    var_1.currentactivecost = var_1.currentactivecost - var_0._id_3EC1;
   }
 }
 
-_id_49E9(var_0, var_1) {
-  if(isDefined(var_1._id_49DF._id_49E3)) {
-    var_2 = var_1._id_49DF._id_49E3;
+_ge_processmanager(var_0, var_1) {
+  if(isDefined(var_1.waiting.head)) {
+    var_2 = var_1.waiting.head;
 
-    if(_id_49E6(var_2, var_1)) {
-      var_1._id_49DF._id_49E3 = var_2._id_49E4;
+    if(_ge_canafford(var_2, var_1)) {
+      var_1.waiting.head = var_2._next;
 
-      if(isDefined(var_1._id_49DF._id_49E3)) {
-        var_1._id_49DF._id_49E3._id_49EA = undefined;
+      if(isDefined(var_1.waiting.head)) {
+        var_1.waiting.head._prev = undefined;
       } else {
-        var_1._id_49DF._id_49EB = undefined;
+        var_1.waiting.tail = undefined;
       }
-      var_2._id_49E4 = undefined;
+      var_2._next = undefined;
 
-      if(isDefined(var_1._id_49E0._id_49EB)) {
-        var_1._id_49E0._id_49EB._id_49E4 = var_2;
-        var_2._id_49EA = var_1._id_49E0._id_49EB;
-        var_1._id_49E0._id_49EB = var_2;
+      if(isDefined(var_1.active.tail)) {
+        var_1.active.tail._next = var_2;
+        var_2._prev = var_1.active.tail;
+        var_1.active.tail = var_2;
       } else {
-        var_1._id_49E0._id_49E3 = var_2;
-        var_1._id_49E0._id_49EB = var_2;
+        var_1.active.head = var_2;
+        var_1.active.tail = var_2;
       }
 
-      var_2._id_49EC = 1;
-      _id_49E7(var_2, var_1);
+      var_2._active = 1;
+      _ge_addcosttoactive(var_2, var_1);
 
-      if(isDefined(var_2._id_49ED)) {
-        thread[[var_2._id_49ED]](var_2);
+      if(isDefined(var_2.activate_cb)) {
+        thread[[var_2.activate_cb]](var_2);
       }
     }
   }
 }
 
-_id_49EE() {
+_ge_processthread() {
   for(;;) {
-    if(isDefined(level._id_49DC)) {
-      foreach(var_2, var_1 in level._id_49DC) {}
-      _id_49E9(var_2, var_1);
+    if(isDefined(level._gameeventmanagers)) {
+      foreach(var_2, var_1 in level._gameeventmanagers) {}
+      _ge_processmanager(var_2, var_1);
     }
 
     wait 0.05;
   }
 }
 
-_id_49EF(var_0, var_1, var_2) {
+ge_createevent(var_0, var_1, var_2) {
   var_3 = spawnStruct();
   var_3.priority = var_1;
   var_3.class = var_2;
   var_3._id_3EC1 = var_0;
-  var_3._id_49EC = 0;
+  var_3._active = 0;
   return var_3;
 }
 
-_id_49F0(var_0, var_1) {
-  var_2 = level._id_49DC[var_0];
-  var_1._id_49F1 = var_2;
-  var_1._id_49F2 = var_2.index;
+ge_addevent(var_0, var_1) {
+  var_2 = level._gameeventmanagers[var_0];
+  var_1._mgr = var_2;
+  var_1.id = var_2.index;
   var_2.index++;
-  var_7 = var_2._id_49DF._id_49E3;
+  var_7 = var_2.waiting.head;
   var_8 = undefined;
 
   while(isDefined(var_7)) {
     if(var_1.priority > var_7.priority) {
       if(isDefined(var_8)) {
-        var_8._id_49E4 = var_1;
-        var_1._id_49EA = var_8;
+        var_8._next = var_1;
+        var_1._prev = var_8;
       } else {
-        var_2._id_49DF._id_49E3 = var_1;
+        var_2.waiting.head = var_1;
       }
-      var_1._id_49E4 = var_7;
-      var_7._id_49EA = var_1;
+      var_1._next = var_7;
+      var_7._prev = var_1;
       break;
     } else {
       var_8 = var_7;
-      var_7 = var_7._id_49E4;
+      var_7 = var_7._next;
     }
   }
 
   if(!isDefined(var_7)) {
     if(isDefined(var_8)) {
-      var_8._id_49E4 = var_1;
-      var_1._id_49EA = var_8;
+      var_8._next = var_1;
+      var_1._prev = var_8;
     } else {
-      var_2._id_49DF._id_49E3 = var_1;
+      var_2.waiting.head = var_1;
     }
   }
 
-  if(!isDefined(var_1._id_49E4)) {
-    var_2._id_49DF._id_49EB = var_1;
+  if(!isDefined(var_1._next)) {
+    var_2.waiting.tail = var_1;
   }
 }
 
-_id_49F3(var_0, var_1) {
-  var_2 = var_1._id_49EA;
-  var_3 = var_1._id_49E4;
+_ge_removeevent(var_0, var_1) {
+  var_2 = var_1._prev;
+  var_3 = var_1._next;
 
   if(isDefined(var_2)) {
-    var_2._id_49E4 = var_3;
+    var_2._next = var_3;
   } else {
-    var_0._id_49E3 = var_1._id_49E4;
+    var_0.head = var_1._next;
   }
   if(isDefined(var_3)) {
-    var_3._id_49EA = var_2;
+    var_3._prev = var_2;
   } else {
-    var_0._id_49EB = var_1._id_49EA;
+    var_0.tail = var_1._prev;
   }
-  var_1._id_49EA = undefined;
-  var_1._id_49E4 = undefined;
-  var_1._id_49EC = -1;
+  var_1._prev = undefined;
+  var_1._next = undefined;
+  var_1._active = -1;
 }
 
-_id_49F4(var_0, var_1, var_2) {
-  if(var_2 && isDefined(var_1._id_49F5)) {
-    [[var_1._id_49F5]](var_1);
+_ge_removeactiveevent(var_0, var_1, var_2) {
+  if(var_2 && isDefined(var_1.kill_cb)) {
+    [[var_1.kill_cb]](var_1);
   }
-  _id_49E8(var_1, var_0);
-  _id_49F3(var_0._id_49E0, var_1);
+  _ge_subtractcosttoactive(var_1, var_0);
+  _ge_removeevent(var_0.active, var_1);
   var_1 notify("killed");
 }
 
-_id_49F6(var_0, var_1, var_2) {
-  if(var_2 && isDefined(var_1._id_49F7)) {
-    [[var_1._id_49F7]](var_1);
+_ge_removewaitingevent(var_0, var_1, var_2) {
+  if(var_2 && isDefined(var_1.cancel_cb)) {
+    [[var_1.cancel_cb]](var_1);
   }
-  _id_49F3(var_0._id_49DF, var_1);
+  _ge_removeevent(var_0.waiting, var_1);
 }
 
-_id_49F8(var_0, var_1) {
-  var_2 = level._id_49DC[var_0];
+ge_flushevents(var_0, var_1) {
+  var_2 = level._gameeventmanagers[var_0];
 
-  for(var_3 = var_2._id_49DF._id_49E3; isDefined(var_3); var_3 = var_4) {
-    var_4 = var_3._id_49E4;
+  for(var_3 = var_2.waiting.head; isDefined(var_3); var_3 = var_4) {
+    var_4 = var_3._next;
 
     if(isarray(var_1)) {
       foreach(var_6 in var_1) {
         if(var_3.class == var_6) {
-          _id_49F6(var_2, var_3, 1);
+          _ge_removewaitingevent(var_2, var_3, 1);
           break;
         }
       }
@@ -221,17 +221,17 @@ _id_49F8(var_0, var_1) {
     }
 
     if(var_3.class == var_1) {
-      _id_49F6(var_2, var_3, 1);
+      _ge_removewaitingevent(var_2, var_3, 1);
     }
   }
 
-  for(var_3 = var_2._id_49E0._id_49E3; isDefined(var_3); var_3 = var_4) {
-    var_4 = var_3._id_49E4;
+  for(var_3 = var_2.active.head; isDefined(var_3); var_3 = var_4) {
+    var_4 = var_3._next;
 
     if(isarray(var_1)) {
       foreach(var_6 in var_1) {
         if(var_3.class == var_6) {
-          _id_49F4(var_2, var_3, 1);
+          _ge_removeactiveevent(var_2, var_3, 1);
           break;
         }
       }
@@ -240,57 +240,57 @@ _id_49F8(var_0, var_1) {
     }
 
     if(var_3.class == var_1) {
-      _id_49F4(var_2, var_3, 1);
+      _ge_removeactiveevent(var_2, var_3, 1);
     }
   }
 }
 
-_id_49F9(var_0, var_1) {
+ge_eventfinished(var_0, var_1) {
   if(isDefined(var_1)) {
     wait(var_1);
   }
   if(!isDefined(var_0)) {
     return;
   }
-  if(var_0._id_49EC < 0) {
+  if(var_0._active < 0) {
     return;
   }
-  var_2 = var_0._id_49F1;
+  var_2 = var_0._mgr;
 
-  if(var_0._id_49EC) {
-    _id_49F4(var_2, var_0, 0);
+  if(var_0._active) {
+    _ge_removeactiveevent(var_2, var_0, 0);
   } else {
-    _id_49F6(var_2, var_0, 0);
+    _ge_removewaitingevent(var_2, var_0, 0);
   }
 }
 
-_id_49FA(var_0, var_1) {
+ge_findnexteventbyname(var_0, var_1) {
   if(isDefined(var_0)) {
     while(isDefined(var_0)) {
       if(isDefined(var_0.name) && var_0.name == var_1) {
         break;
       }
 
-      var_0 = var_0._id_49E4;
+      var_0 = var_0._next;
     }
   }
 
   return var_0;
 }
 
-_id_49FB(var_0, var_1) {
-  var_2 = level._id_49DC[var_0];
-  var_3 = var_2._id_49DF._id_49E3;
-  return _id_49FA(var_3, var_1);
+ge_findwaitingeventbyname(var_0, var_1) {
+  var_2 = level._gameeventmanagers[var_0];
+  var_3 = var_2.waiting.head;
+  return ge_findnexteventbyname(var_3, var_1);
 }
 
-_id_49FC(var_0, var_1) {
-  var_2 = level._id_49DC[var_0];
-  var_3 = var_2._id_49E0._id_49E3;
-  return _id_49FA(var_3, var_1);
+ge_findactiveeventbyname(var_0, var_1) {
+  var_2 = level._gameeventmanagers[var_0];
+  var_3 = var_2.active.head;
+  return ge_findnexteventbyname(var_3, var_1);
 }
 
-_id_49FD(var_0, var_1) {
+_ge_counteventsbyname(var_0, var_1) {
   var_2 = 0;
 
   if(isDefined(var_0)) {
@@ -298,36 +298,36 @@ _id_49FD(var_0, var_1) {
       if(isDefined(var_0.name) && var_0.name == var_1) {
         var_2++;
       }
-      var_0 = var_0._id_49E4;
+      var_0 = var_0._next;
     }
   }
 
   return var_2;
 }
 
-_id_49FE(var_0, var_1) {
-  var_2 = level._id_49DC[var_0];
-  var_3 = var_2._id_49DF._id_49E3;
-  return _id_49FD(var_3, var_1);
+ge_countwaitingeventbyname(var_0, var_1) {
+  var_2 = level._gameeventmanagers[var_0];
+  var_3 = var_2.waiting.head;
+  return _ge_counteventsbyname(var_3, var_1);
 }
 
-_id_49FF(var_0, var_1) {
-  var_2 = level._id_49DC[var_0];
-  var_3 = var_2._id_49E0._id_49E3;
-  return _id_49FD(var_3, var_1);
+ge_countactiveeventbyname(var_0, var_1) {
+  var_2 = level._gameeventmanagers[var_0];
+  var_3 = var_2.active.head;
+  return _ge_counteventsbyname(var_3, var_1);
 }
 
-_id_4A00(var_0, var_1, var_2, var_3, var_4) {
+ge_addeffect(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_1)) {
     var_1 = -1;
   }
-  var_5 = _id_4A03(var_2, var_3, var_4);
-  var_5._id_4A01 = var_0;
-  var_5._id_4A02 = var_1;
+  var_5 = _ge_addeffectevent(var_2, var_3, var_4);
+  var_5.fxname = var_0;
+  var_5.lifetime = var_1;
   return var_5;
 }
 
-_id_4A03(var_0, var_1, var_2) {
+_ge_addeffectevent(var_0, var_1, var_2) {
   if(!isDefined(var_0)) {
     var_0 = 100;
   }
@@ -337,32 +337,32 @@ _id_4A03(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     var_2 = 1;
   }
-  var_3 = _id_49EF(var_0, var_1, var_2);
-  var_3._id_49ED = ::_id_4A04;
-  var_3._id_49F7 = ::_id_4A05;
-  var_3._id_49F5 = ::_id_4A06;
-  _id_49F0("fx", var_3);
+  var_3 = ge_createevent(var_0, var_1, var_2);
+  var_3.activate_cb = ::_ge_activateeffect;
+  var_3.cancel_cb = ::_ge_canceleffect;
+  var_3.kill_cb = ::_ge_killeffect;
+  ge_addevent("fx", var_3);
   return var_3;
 }
 
-_id_4A04(var_0) {
+_ge_activateeffect(var_0) {
   var_0 endon("killed");
 }
 
-_id_4A05(var_0) {}
+_ge_canceleffect(var_0) {}
 
-_id_4A06(var_0) {}
+_ge_killeffect(var_0) {}
 
-_id_4A07(var_0, var_1, var_2, var_3, var_4) {
+ge_addexploder(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_1)) {
     var_1 = -1;
   }
-  var_5 = _id_4A09(var_2, var_3, var_4);
-  var_5._id_4A08 = var_0;
-  var_5._id_4A02 = var_1;
+  var_5 = _ge_addexploderevent(var_2, var_3, var_4);
+  var_5.fxnid = var_0;
+  var_5.lifetime = var_1;
 }
 
-_id_4A09(var_0, var_1, var_2) {
+_ge_addexploderevent(var_0, var_1, var_2) {
   if(!isDefined(var_0)) {
     var_0 = 100;
   }
@@ -372,77 +372,77 @@ _id_4A09(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     var_2 = 1;
   }
-  var_3 = _id_49EF(var_0, var_1, var_2);
-  var_3._id_49ED = ::_id_4A0A;
-  var_3._id_49F5 = ::_id_4A0C;
-  _id_49F0("fx", var_3);
+  var_3 = ge_createevent(var_0, var_1, var_2);
+  var_3.activate_cb = ::_ge_activateexploder;
+  var_3.kill_cb = ::_ge_killexploder;
+  ge_addevent("fx", var_3);
   return var_3;
 }
 
-_id_4A0A(var_0) {
+_ge_activateexploder(var_0) {
   var_0 endon("killed");
-  common_scripts\utility::exploder(var_0._id_4A0B);
+  common_scripts\utility::exploder(var_0.fxid);
 
-  if(isDefined(var_0._id_4A02)) {
-    if(var_0._id_4A02 == 0) {
-      _id_49F9("fx", var_0);
-    } else if(var_0._id_4A02 > 0) {
-      wait(var_0._id_4A02);
-      _id_49F9("fx", var_0);
+  if(isDefined(var_0.lifetime)) {
+    if(var_0.lifetime == 0) {
+      ge_eventfinished("fx", var_0);
+    } else if(var_0.lifetime > 0) {
+      wait(var_0.lifetime);
+      ge_eventfinished("fx", var_0);
     }
   }
 }
 
-_id_4A0C(var_0) {}
+_ge_killexploder(var_0) {}
 
-_id_4A0D(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  var_8 = _id_49EF(var_4, var_5, var_6);
-  var_8._id_4A0E = var_1;
-  var_8._id_4A0F = var_2;
-  var_8._id_4A10 = var_3;
-  var_8._id_49ED = ::_id_4A13;
-  var_8._id_49F7 = ::_id_4A14;
-  var_8._id_49F5 = ::_id_4A15;
+ge_addnotify(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  var_8 = ge_createevent(var_4, var_5, var_6);
+  var_8.activate_msg = var_1;
+  var_8.cancel_msg = var_2;
+  var_8.kill_msg = var_3;
+  var_8.activate_cb = ::_ge_activatenotify;
+  var_8.cancel_cb = ::_ge_cancelnotify;
+  var_8.kill_cb = ::_ge_killnotify;
   var_8.name = var_7;
-  _id_49F0(var_0, var_8);
+  ge_addevent(var_0, var_8);
   return var_8;
 }
 
-_id_4A11(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  var_8 = _id_4A0D(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7);
+ge_addnotifywait(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  var_8 = ge_addnotify(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7);
   var_8 waittill(var_1);
   return var_8;
 }
 
-_id_4A12(var_0, var_1) {
+_ge_notify(var_0, var_1) {
   var_0 notify(var_1);
 
-  if(isDefined(var_0._id_14B9)) {
-    var_0._id_14B9 notify(var_1);
+  if(isDefined(var_0.ent)) {
+    var_0.ent notify(var_1);
   }
 }
 
-_id_4A13(var_0) {
-  _id_4A12(var_0, var_0._id_4A0E);
+_ge_activatenotify(var_0) {
+  _ge_notify(var_0, var_0.activate_msg);
 }
 
-_id_4A14(var_0) {
-  _id_4A12(var_0, var_0._id_4A0F);
+_ge_cancelnotify(var_0) {
+  _ge_notify(var_0, var_0.cancel_msg);
 }
 
-_id_4A15(var_0) {
-  _id_4A12(var_0, var_0._id_4A10);
+_ge_killnotify(var_0) {
+  _ge_notify(var_0, var_0.kill_msg);
 }
 
-_id_4A16(var_0, var_1, var_2, var_3, var_4, var_5) {
-  return _id_4A0D("fx", var_0, var_1, var_2, var_3, var_4, var_5);
+ge_addfxnotify(var_0, var_1, var_2, var_3, var_4, var_5) {
+  return ge_addnotify("fx", var_0, var_1, var_2, var_3, var_4, var_5);
 }
 
-_id_4A17(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  return _id_4A11("fx", var_0, var_1, var_2, var_3, var_4, var_5, var_6);
+ge_addfxnotifywait(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  return ge_addnotifywait("fx", var_0, var_1, var_2, var_3, var_4, var_5, var_6);
 }
 
-_id_4A18(var_0, var_1, var_2, var_3) {
-  var_4 = _id_49EF(var_1, var_2, var_3);
-  _id_49F0(var_0, var_4);
+ge_addalways(var_0, var_1, var_2, var_3) {
+  var_4 = ge_createevent(var_1, var_2, var_3);
+  ge_addevent(var_0, var_4);
 }

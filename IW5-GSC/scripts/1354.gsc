@@ -10,32 +10,32 @@ main(var_0, var_1) {
   level._effect["flare_runner_intro"] = loadfx("misc/flare_start");
   level._effect["flare_runner"] = loadfx("misc/flare");
   level._effect["flare_runner_fizzout"] = loadfx("misc/flare_end");
-  maps\_vehicle::_id_2AC2("flare", var_0, var_1, "script_vehicle");
-  maps\_vehicle::_id_2AD2(::_id_2B1D);
-  maps\_vehicle::_id_2ACE(9999);
+  maps\_vehicle::build_template("flare", var_0, var_1, "script_vehicle");
+  maps\_vehicle::build_localinit(::init_local);
+  maps\_vehicle::build_life(9999);
 }
 
-_id_2B1D() {}
+init_local() {}
 
-_id_408E(var_0, var_1, var_2, var_3) {
+merge_suncolor(var_0, var_1, var_2, var_3) {
   wait(var_0);
   var_1 = var_1 * 20;
   var_4 = [];
 
   for(var_5 = 0; var_5 < var_1; var_5++) {
     var_6 = var_5 / var_1;
-    level._id_408F = var_6;
+    level.thedif = var_6;
     var_7 = [];
 
     for(var_8 = 0; var_8 < 3; var_8++) {
       var_7[var_8] = var_3[var_8] * var_6 + var_2[var_8] * (1 - var_6);
     }
-    level._id_4090 = (var_7[0], var_7[1], var_7[2]);
+    level.sun_color = (var_7[0], var_7[1], var_7[2]);
     wait 0.05;
   }
 }
 
-_id_4091(var_0, var_1, var_2, var_3, var_4) {
+merge_sunsingledvar(var_0, var_1, var_2, var_3, var_4) {
   setsaveddvar(var_0, var_3);
   wait(var_1);
   var_2 = var_2 * 20;
@@ -43,7 +43,7 @@ _id_4091(var_0, var_1, var_2, var_3, var_4) {
 
   for(var_6 = 0; var_6 < var_2; var_6++) {
     var_7 = var_6 / var_2;
-    level._id_408F = var_7;
+    level.thedif = var_7;
     var_8 = var_4 * var_7 + var_3 * (1 - var_7);
     setsaveddvar(var_0, var_8);
     wait 0.05;
@@ -52,45 +52,45 @@ _id_4091(var_0, var_1, var_2, var_3, var_4) {
   setsaveddvar(var_0, var_4);
 }
 
-_id_4092(var_0, var_1, var_2, var_3) {
+merge_sunbrightness(var_0, var_1, var_2, var_3) {
   wait(var_0);
   var_1 = var_1 * 20;
   var_4 = [];
 
   for(var_5 = 0; var_5 < var_1; var_5++) {
     var_6 = var_5 / var_1;
-    level._id_408F = var_6;
+    level.thedif = var_6;
     var_7 = var_3 * var_6 + var_2 * (1 - var_6);
-    level._id_4093 = var_7;
+    level.sun_brightness = var_7;
     wait 0.05;
   }
 
-  level._id_4093 = var_3;
+  level.sun_brightness = var_3;
 }
 
-_id_4094() {
+combine_sunlight_and_brightness() {
   level endon("stop_combining_sunlight_and_brightness");
   wait 0.05;
 
   for(;;) {
-    var_0 = level._id_4093;
+    var_0 = level.sun_brightness;
 
     if(var_0 > 1) {
       var_0 = var_0 + randomfloat(0.2);
     }
-    var_1 = level._id_4090 * var_0;
+    var_1 = level.sun_color * var_0;
     setsunlight(var_1[0], var_1[1], var_1[2]);
     wait 0.05;
   }
 }
 
-_id_4095() {
-  thread maps\_vehicle::_id_1FA6(self);
+flare_path() {
+  thread maps\_vehicle::gopath(self);
   common_scripts\utility::flag_wait("flare_stop_setting_sundir");
   self delete();
 }
 
-_id_4096() {
+flare_initial_fx() {
   var_0 = spawn("script_model", (0, 0, 0));
   var_0 setModel("tag_origin");
   var_0 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
@@ -99,16 +99,16 @@ _id_4096() {
   var_0 delete();
 }
 
-_id_4097() {
+flare_explodes() {
   common_scripts\utility::flag_set("flare_start_setting_sundir");
-  level._id_4093 = 1;
-  level._id_4098 = (0.8, 0.4, 0.4);
-  level._id_4099 = getmapsunlight();
-  level._id_4090 = level._id_4099;
-  thread _id_4091("sm_sunSampleSizeNear", 0, 0.25, 0.25, 1);
-  thread _id_4094();
-  thread _id_408E(0, 0.25, level._id_4099, level._id_4098);
-  thread _id_4092(0, 0.25, 1, 3);
+  level.sun_brightness = 1;
+  level.red_suncolor = (0.8, 0.4, 0.4);
+  level.original_suncolor = getmapsunlight();
+  level.sun_color = level.original_suncolor;
+  thread merge_sunsingledvar("sm_sunSampleSizeNear", 0, 0.25, 0.25, 1);
+  thread combine_sunlight_and_brightness();
+  thread merge_suncolor(0, 0.25, level.original_suncolor, level.red_suncolor);
+  thread merge_sunbrightness(0, 0.25, 1, 3);
   var_0 = spawn("script_model", (0, 0, 0));
   var_0 setModel("tag_origin");
   var_0 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
@@ -117,15 +117,15 @@ _id_4097() {
   var_0 delete();
 }
 
-_id_409A() {
+flare_burns_out() {
   var_0 = spawn("script_model", (0, 0, 0));
   var_0 setModel("tag_origin");
   var_0 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   playFXOnTag(level._effect["flare_runner_fizzout"], var_0, "tag_origin");
-  thread _id_4091("sm_sunSampleSizeNear", 0, 1, 1, 0.25);
-  thread _id_4092(0, 1, 3, 0);
-  thread _id_408E(0, 1, level._id_4098, level._id_4099);
-  thread _id_4092(1, 1, 0, 1);
+  thread merge_sunsingledvar("sm_sunSampleSizeNear", 0, 1, 1, 0.25);
+  thread merge_sunbrightness(0, 1, 3, 0);
+  thread merge_suncolor(0, 1, level.red_suncolor, level.original_suncolor);
+  thread merge_sunbrightness(1, 1, 0, 1);
   var_0 delete();
   wait 1;
   common_scripts\utility::flag_set("flare_stop_setting_sundir");
@@ -137,31 +137,31 @@ _id_409A() {
   common_scripts\utility::flag_set("flare_complete");
 }
 
-_id_285A() {
-  _id_4096();
-  _id_4097();
-  _id_409A();
+flare_fx() {
+  flare_initial_fx();
+  flare_explodes();
+  flare_burns_out();
 }
 
-_id_409B(var_0) {
+flag_flare(var_0) {
   if(!isDefined(level.flag[var_0])) {
     common_scripts\utility::flag_init(var_0);
     return;
   }
 }
 
-_id_409C(var_0) {
-  var_1 = maps\_vehicle::_id_2A99(var_0);
-  _id_409B("flare_in_use");
-  _id_409B("flare_complete");
-  _id_409B("flare_stop_setting_sundir");
-  _id_409B("flare_start_setting_sundir");
+flare_from_targetname(var_0) {
+  var_1 = maps\_vehicle::spawn_vehicle_from_targetname(var_0);
+  flag_flare("flare_in_use");
+  flag_flare("flare_complete");
+  flag_flare("flare_stop_setting_sundir");
+  flag_flare("flare_start_setting_sundir");
   common_scripts\utility::flag_waitopen("flare_in_use");
   common_scripts\utility::flag_set("flare_in_use");
   resetsunlight();
   resetsundirection();
-  var_1 thread _id_4095();
-  var_1 thread _id_285A();
+  var_1 thread flare_path();
+  var_1 thread flare_fx();
   var_2 = getmapsundirection();
   var_3 = var_2;
   var_4 = var_3 * -100;

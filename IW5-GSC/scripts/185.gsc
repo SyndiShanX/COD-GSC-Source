@@ -3,33 +3,33 @@
  * Script: scripts\185.gsc
 **************************************/
 
-_id_1944(var_0, var_1) {
-  if(!isDefined(var_0) || !isDefined(level._id_1945[var_0])) {
-    _id_1947(var_1);
+setup_new_eq_settings(var_0, var_1) {
+  if(!isDefined(var_0) || !isDefined(level.ambient_eq[var_0])) {
+    deactivate_index(var_1);
     return 0;
   }
 
-  if(level._id_1708[var_1] == var_0) {
+  if(level.eq_track[var_1] == var_0) {
     return 0;
   }
-  level._id_1708[var_1] = var_0;
-  _id_1946(var_0, var_1);
+  level.eq_track[var_1] = var_0;
+  use_eq_settings(var_0, var_1);
   return 1;
 }
 
-_id_1946(var_0, var_1) {
-  if(level.player maps\_utility::_id_1008("player_has_red_flashing_overlay")) {
+use_eq_settings(var_0, var_1) {
+  if(level.player maps\_utility::ent_flag("player_has_red_flashing_overlay")) {
     return;
   }
-  maps\_audio::_id_1570(var_0, var_1);
+  maps\_audio::aud_set_filter(var_0, var_1);
 }
 
-_id_1947(var_0) {
-  level._id_1708[var_0] = "";
+deactivate_index(var_0) {
+  level.eq_track[var_0] = "";
   level.player deactivateeq(var_0);
 }
 
-_id_1948(var_0, var_1) {
+blend_to_eq_track(var_0, var_1) {
   var_2 = 1.0;
 
   if(isDefined(var_1)) {
@@ -47,35 +47,35 @@ _id_1948(var_0, var_1) {
   level.player seteqlerp(1, var_0);
 }
 
-_id_1949(var_0) {
-  if(level.player maps\_utility::_id_1008("player_has_red_flashing_overlay")) {
+use_reverb_settings(var_0) {
+  if(level.player maps\_utility::ent_flag("player_has_red_flashing_overlay")) {
     return;
   }
-  maps\_audio_reverb::_id_1465(var_0);
+  maps\_audio_reverb::rvb_start_preset(var_0);
 }
 
-_id_194A() {
-  maps\_audio_reverb::_id_146B();
+deactivate_reverb() {
+  maps\_audio_reverb::rvb_deactive_reverb();
 }
 
-_id_194B(var_0, var_1, var_2) {
-  maps\_audio::_id_1466("ambientDelay called, this is deprecated! Use new preset string tables.");
+ambientdelay(var_0, var_1, var_2) {
+  maps\_audio::aud_print_warning("ambientDelay called, this is deprecated! Use new preset string tables.");
 }
 
-_id_194C(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  maps\_audio::_id_1466("ambientEvent called, this is deprecated! Use new preset string tables.");
+ambientevent(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  maps\_audio::aud_print_warning("ambientEvent called, this is deprecated! Use new preset string tables.");
 }
 
-_id_194D(var_0) {
-  maps\_audio::_id_1466("ambientEventStart called, this is deprecated! Use maps_utility::set_ambient( track, fade_ ).");
-  maps\_utility::_id_194E(var_0);
+ambienteventstart(var_0) {
+  maps\_audio::aud_print_warning("ambientEventStart called, this is deprecated! Use maps_utility::set_ambient( track, fade_ ).");
+  maps\_utility::set_ambient(var_0);
 }
 
-_id_194F(var_0) {
-  maps\_audio::_id_1466("start_ambient_event called, this is deprecated! Use maps_utility::set_ambient( track, fade_ ).");
-  maps\_utility::_id_194E(var_0);
+start_ambient_event(var_0) {
+  maps\_audio::aud_print_warning("start_ambient_event called, this is deprecated! Use maps_utility::set_ambient( track, fade_ ).");
+  maps\_utility::set_ambient(var_0);
 }
 
-_id_1950(var_0, var_1, var_2, var_3) {
-  maps\_utility::_id_1951(var_0, var_1, var_3, var_2);
+get_progess(var_0, var_1, var_2, var_3) {
+  maps\_utility::get_progress(var_0, var_1, var_3, var_2);
 }

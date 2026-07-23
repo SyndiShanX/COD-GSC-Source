@@ -3,10 +3,10 @@
  * Script: animscripts\combat_say.gsc
 **************************************/
 
-_id_3FDA() {
-  animscripts\battlechatter::_id_0ABF();
+generic_combat() {
+  animscripts\battlechatter::playbattlechatter();
 }
 
-_id_3FDB(var_0) {
-  animscripts\battlechatter::_id_0ABF();
+specific_combat(var_0) {
+  animscripts\battlechatter::playbattlechatter();
 }

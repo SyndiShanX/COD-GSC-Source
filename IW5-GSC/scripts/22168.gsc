@@ -29,7 +29,7 @@ _id_5670() {
   var_1 = 0;
 
   for(;;) {
-    if(!maps\_utility::_id_12C1() && level._id_5671 == 6) {
+    if(!maps\_utility::is_coop() && level._id_5671 == 6) {
       if(!var_1) {
         var_1 = 1;
         playFXOnTag(level._effect["particle_fog2"], var_0, "tag_origin");
@@ -49,10 +49,10 @@ _id_5670() {
 
 _id_5672() {
   for(;;) {
-    if(maps\_utility::_id_12C1()) {
+    if(maps\_utility::is_coop()) {
       playfxontagforclients(level._effect["blizzard_main"], self, "tag_origin", self);
     } else {
-      playFX(level._effect["blizzard_main"], maps\_utility::_id_1277(self.origin) + (0, 0, 86));
+      playFX(level._effect["blizzard_main"], maps\_utility::groundpos(self.origin) + (0, 0, 86));
     }
     wait(level._id_566C);
   }
@@ -226,7 +226,7 @@ _id_5683(var_0, var_1) {
   if(isDefined(var_1)) {
     wait(var_1);
   }
-  maps\_utility::_id_27D3("payback_heavy_75", var_0);
+  maps\_utility::vision_set_changes("payback_heavy_75", var_0);
 }
 
 _id_5684(var_0) {
@@ -521,7 +521,7 @@ _id_5695() {
     common_scripts\utility::flag_waitopen("pause_blizzard_ground_fx");
 
     foreach(var_2 in var_0) {}
-    var_2 maps\_utility::_id_1655();
+    var_2 maps\_utility::restarteffect();
   }
 }
 

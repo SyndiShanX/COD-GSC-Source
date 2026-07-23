@@ -3,10 +3,10 @@
  * Script: animscripts\door.gsc
 **************************************/
 
-_id_1088() {
+doorenterexitcheck() {
   self endon("killanimscript");
 
-  if(isDefined(self._id_1089)) {
+  if(isDefined(self.disabledoorbehavior)) {
     return;
   }
   for(;;) {
@@ -22,9 +22,9 @@ _id_1088() {
   var_1 = var_0.type == "Door Interior" || self comparenodedirtopathdir(var_0);
 
   if(var_1) {
-    _id_10A1(var_0);
+    doorenter(var_0);
   } else {
-    _id_10A4(var_0);
+    doorexit(var_0);
   }
   for(;;) {
     var_2 = self getdoorpathnode();
@@ -36,42 +36,42 @@ _id_1088() {
     wait 0.2;
   }
 
-  thread _id_1088();
+  thread doorenterexitcheck();
 }
 
-_id_108A() {
+teamflashbangimmune() {
   self endon("killanimscript");
-  self._id_108B = 1;
+  self.teamflashbangimmunity = 1;
   wait 5;
-  self._id_108B = undefined;
+  self.teamflashbangimmunity = undefined;
 }
 
 #using_animtree("generic_human");
 
-_id_108C(var_0) {
-  thread _id_108A();
+dodoorgrenadethrow(var_0) {
+  thread teamflashbangimmune();
 
   if(self.grenadeweapon == "flash_grenade") {
     self notify("flashbang_thrown");
   }
   self orientmode("face current");
-  var_0._id_108D = gettime() + 5000;
-  self._id_108E = gettime() + 100000;
+  var_0.nextdoorgrenadetime = gettime() + 5000;
+  self.minindoortime = gettime() + 100000;
   self notify("move_interrupt");
-  self._id_0FC9 = undefined;
+  self.update_move_anim_type = undefined;
   self clearanim(%combatrun, 0.2);
-  self.a._id_0D2B = "stop";
+  self.a.movement = "stop";
   self waittill("done_grenade_throw");
   self orientmode("face default");
-  self._id_108E = gettime() + 5000;
-  self.grenadeweapon = self._id_108F;
-  self._id_108F = undefined;
-  animscripts\run::_id_0FE2();
-  thread animscripts\move::_id_1090();
-  thread animscripts\move::_id_1091(1);
+  self.minindoortime = gettime() + 5000;
+  self.grenadeweapon = self.oldgrenadeweapon;
+  self.oldgrenadeweapon = undefined;
+  animscripts\run::endfaceenemyaimtracking();
+  thread animscripts\move::pathchangecheck();
+  thread animscripts\move::restartmoveloop(1);
 }
 
-_id_1092(var_0, var_1, var_2, var_3, var_4) {
+doorenter_trygrenade(var_0, var_1, var_2, var_3, var_4) {
   var_5 = 0;
   var_6 = 3;
   var_7 = undefined;
@@ -101,11 +101,11 @@ _id_1092(var_0, var_1, var_2, var_3, var_4) {
     if(isDefined(self.grenade) || !isDefined(self.enemy)) {
       return;
     }
-    if(_id_10A0(var_0, var_8)) {
+    if(onsamesideofdoor(var_0, var_8)) {
       return;
     }
-    if(!self seerecently(self.enemy, 0.2) && self.a._id_0D26 == "stand" && _id_109F(self.enemy.origin - var_0.origin, 360000, 16384)) {
-      if(isDefined(var_0._id_108D) && var_0._id_108D > gettime()) {
+    if(!self seerecently(self.enemy, 0.2) && self.a.pose == "stand" && distance2dandheightcheck(self.enemy.origin - var_0.origin, 360000, 16384)) {
+      if(isDefined(var_0.nextdoorgrenadetime) && var_0.nextdoorgrenadetime > gettime()) {
         return;
       }
       if(self canshootenemy()) {
@@ -119,9 +119,9 @@ _id_1092(var_0, var_1, var_2, var_3, var_4) {
       if(vectordot(var_12, var_8) < 0) {
         return;
       }
-      self._id_108F = self.grenadeweapon;
+      self.oldgrenadeweapon = self.grenadeweapon;
       self.grenadeweapon = var_1;
-      animscripts\combat_utility::_id_1093(self.enemy);
+      animscripts\combat_utility::setactivegrenadetimer(self.enemy);
 
       if(!var_5) {
         var_14 = var_9 + var_8 * 100;
@@ -133,8 +133,8 @@ _id_1092(var_0, var_1, var_2, var_3, var_4) {
 
       var_5 = 1;
 
-      if(animscripts\combat_utility::_id_1095(self.enemy, var_10, var_7, animscripts\combat_utility::_id_1094(var_7), 1, 0, 1)) {
-        _id_108C(var_0);
+      if(animscripts\combat_utility::trygrenadethrow(self.enemy, var_10, var_7, animscripts\combat_utility::getgrenadethrowoffset(var_7), 1, 0, 1)) {
+        dodoorgrenadethrow(var_0);
         return;
       }
     }
@@ -149,64 +149,64 @@ _id_1092(var_0, var_1, var_2, var_3, var_4) {
   }
 }
 
-_id_1096() {
+indoorcqbtogglecheck() {
   self endon("killanimscript");
 
-  if(isDefined(self._id_1089)) {
+  if(isDefined(self.disabledoorbehavior)) {
     return;
   }
-  self._id_1097 = 0;
+  self.isindoor = 0;
 
   for(;;) {
     if(self isindoor() && !self.doingambush) {
-      _id_1098();
-    } else if(!isDefined(self._id_108E) || self._id_108E < gettime()) {
-      self._id_108E = undefined;
-      _id_109C();
+      doorenter_enable_cqbwalk();
+    } else if(!isDefined(self.minindoortime) || self.minindoortime < gettime()) {
+      self.minindoortime = undefined;
+      doorexit_disable_cqbwalk();
     }
 
     wait 0.2;
   }
 }
 
-_id_1098() {
-  if(!isDefined(self._id_1099) && !self.doingambush) {
-    self._id_1097 = 1;
+doorenter_enable_cqbwalk() {
+  if(!isDefined(self.neverenablecqb) && !self.doingambush) {
+    self.isindoor = 1;
 
-    if(!isDefined(self._id_109A) || !self._id_109A) {
-      maps\_utility::_id_109B(1);
+    if(!isDefined(self.cqbwalking) || !self.cqbwalking) {
+      maps\_utility::enable_cqbwalk(1);
     }
   }
 }
 
-_id_109C() {
-  if(!isDefined(self._id_109D)) {
-    self._id_1097 = 0;
+doorexit_disable_cqbwalk() {
+  if(!isDefined(self.cqbenabled)) {
+    self.isindoor = 0;
 
-    if(isDefined(self._id_109A) && self._id_109A) {
-      maps\_utility::_id_109E();
+    if(isDefined(self.cqbwalking) && self.cqbwalking) {
+      maps\_utility::disable_cqbwalk();
     }
   }
 }
 
-_id_109F(var_0, var_1, var_2) {
+distance2dandheightcheck(var_0, var_1, var_2) {
   return var_0[0] * var_0[0] + var_0[1] * var_0[1] < var_1 && var_0[2] * var_0[2] < var_2;
 }
 
-_id_10A0(var_0, var_1) {
+onsamesideofdoor(var_0, var_1) {
   var_2 = var_0.origin - self.origin;
   var_3 = var_0.origin - self.enemy.origin;
   return vectordot(var_2, var_1) * vectordot(var_3, var_1) > 0;
 }
 
-_id_10A1(var_0) {
+doorenter(var_0) {
   for(;;) {
-    if(isDefined(self._id_10A2) && (self._id_10A2 == 0 || self._id_10A2 < randomfloat(1))) {
+    if(isDefined(self.doorfragchance) && (self.doorfragchance == 0 || self.doorfragchance < randomfloat(1))) {
       break;
     }
 
-    if(_id_109F(self.origin - var_0.origin, 562500, 25600)) {
-      _id_1092(var_0, "fraggrenade", 0, 302500, 0.3);
+    if(distance2dandheightcheck(self.origin - var_0.origin, 562500, 25600)) {
+      doorenter_trygrenade(var_0, "fraggrenade", 0, 302500, 0.3);
       var_0 = self getdoorpathnode();
 
       if(!isDefined(var_0)) {
@@ -219,14 +219,14 @@ _id_10A1(var_0) {
   }
 
   for(;;) {
-    if(_id_109F(self.origin - var_0.origin, 36864, 6400)) {
-      _id_1098();
-      self._id_108E = gettime() + 6000;
+    if(distance2dandheightcheck(self.origin - var_0.origin, 36864, 6400)) {
+      doorenter_enable_cqbwalk();
+      self.minindoortime = gettime() + 6000;
 
-      if(isDefined(self._id_10A3) && (self._id_10A3 == 0 || self._id_10A3 < randomfloat(1))) {
+      if(isDefined(self.doorflashchance) && (self.doorflashchance == 0 || self.doorflashchance < randomfloat(1))) {
         return;
       }
-      _id_1092(var_0, "flash_grenade", 1, 4096, 0.2);
+      doorenter_trygrenade(var_0, "flash_grenade", 1, 4096, 0.2);
       return;
     }
 
@@ -234,9 +234,9 @@ _id_10A1(var_0) {
   }
 }
 
-_id_10A4(var_0) {
+doorexit(var_0) {
   for(;;) {
-    if(!self._id_1097 || distancesquared(self.origin, var_0.origin) < 1024) {
+    if(!self.isindoor || distancesquared(self.origin, var_0.origin) < 1024) {
       return;
     }
     wait 0.1;

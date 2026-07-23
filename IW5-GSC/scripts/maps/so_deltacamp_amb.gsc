@@ -4,8 +4,8 @@
 *********************************************/
 
 main() {
-  maps\_audio::_id_173F();
-  maps\_audio::_id_156E("default");
-  maps\_audio::_id_1735();
-  thread maps\_utility::_id_194E("so_deltacamp_ext");
+  maps\_audio::aud_use_string_tables();
+  maps\_audio::aud_set_occlusion("default");
+  maps\_audio::aud_set_timescale();
+  thread maps\_utility::set_ambient("so_deltacamp_ext");
 }

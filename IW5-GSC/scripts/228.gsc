@@ -4,18 +4,18 @@
 **************************************/
 
 main() {
-  if(isDefined(level._id_1A52)) {
+  if(isDefined(level.laststand_initialized)) {
     return;
   }
-  level._id_1A52 = 1;
+  level.laststand_initialized = 1;
   common_scripts\utility::flag_init("laststand_on");
 
   foreach(var_1 in level.players) {
-    var_1 maps\_utility::_id_1402("laststand_downed");
-    var_1 maps\_utility::_id_1402("laststand_pause_bleedout_timer");
-    var_1 maps\_utility::_id_1402("laststand_proc_running");
-    var_1._id_132B = spawnStruct();
-    var_1._id_132B._id_1A53 = 0;
+    var_1 maps\_utility::ent_flag_init("laststand_downed");
+    var_1 maps\_utility::ent_flag_init("laststand_pause_bleedout_timer");
+    var_1 maps\_utility::ent_flag_init("laststand_proc_running");
+    var_1.laststand_info = spawnStruct();
+    var_1.laststand_info.type_getup_lives = 0;
   }
 
   precachestring(&"SCRIPT_COOP_BLEEDING_OUT_PARTNER");
@@ -26,186 +26,186 @@ main() {
   precacheshellshock("laststand_getup");
   precacheitem("fnfiveseven");
   common_scripts\utility::flag_set("laststand_on");
-  level._id_1A54 = 75;
+  level.revive_hud_base_offset = 75;
 
   if(!issplitscreen()) {
-    level._id_1A54 = 120;
+    level.revive_hud_base_offset = 120;
   }
-  level._id_1A55 = 15;
-  level._id_1A56 = 30;
-  level._id_1A57 = [];
-  thread _id_1A58();
+  level.revive_bar_offset = 15;
+  level.revive_bar_getup_offset = 30;
+  level.laststand_hud_elements = [];
+  thread laststand_on_load_finished();
 }
 
-_id_1A58() {
+laststand_on_load_finished() {
   level waittill("load_finished");
 
-  if(_id_1AB9() == 2) {
+  if(laststand_get_type() == 2) {
     precacheshader("specialty_self_revive");
   }
-  thread _id_1A59();
+  thread laststand_global_spawn_funcs();
 
   if(common_scripts\utility::flag_exist("slamzoom_finished") && !common_scripts\utility::flag("slamzoom_finished")) {
     common_scripts\utility::flag_wait("slamzoom_finished");
   }
-  thread _id_1A6B("laststand_player_state_changed");
-  thread _id_1A63();
-  thread _id_1A80();
-  thread _id_1A88();
-  thread _id_1AC2();
+  thread laststand_notify_on_player_state_changes("laststand_player_state_changed");
+  thread laststand_downed_player_manager();
+  thread laststand_coop_hud_manager();
+  thread laststand_getup_hud_init();
+  thread laststand_on_mission_end();
 }
 
-_id_1A59() {
-  if(_id_1AB9() == 2) {
-    maps\_utility::_id_1A5A("axis", ::_id_1AB4);
+laststand_global_spawn_funcs() {
+  if(laststand_get_type() == 2) {
+    maps\_utility::add_global_spawn_function("axis", ::ai_laststand_on_death);
   }
 }
 
-_id_1A5B() {
-  if(!maps\_utility::_id_1A5C()) {
+player_laststand_proc() {
+  if(!maps\_utility::laststand_enabled()) {
     return;
   }
-  if(maps\_utility::_id_1008("laststand_proc_running")) {
+  if(maps\_utility::ent_flag("laststand_proc_running")) {
     return;
   }
-  if(!isDefined(self._id_1A5D)) {
-    self._id_1A5D = self.maxhealth;
+  if(!isDefined(self.original_maxhealth)) {
+    self.original_maxhealth = self.maxhealth;
   }
   if(!common_scripts\utility::flag("laststand_on")) {
     return;
   }
   level endon("laststand_on");
-  thread _id_1A62();
+  thread player_laststand_proc_ended();
 
   switch (level.gameskill) {
     case 1:
     case 0:
-      self._id_132B._id_132D = 120;
-      level._id_132E = 0.5;
-      level._id_1A5E = 0.25;
+      self.laststand_info.bleedout_time_default = 120;
+      level.laststand_stage2_multiplier = 0.5;
+      level.laststand_stage3_multiplier = 0.25;
       break;
     case 2:
-      self._id_132B._id_132D = 90;
-      level._id_132E = 0.66;
-      level._id_1A5E = 0.33;
+      self.laststand_info.bleedout_time_default = 90;
+      level.laststand_stage2_multiplier = 0.66;
+      level.laststand_stage3_multiplier = 0.33;
       break;
     case 3:
-      self._id_132B._id_132D = 60;
-      level._id_132E = 0.5;
-      level._id_1A5E = 0.25;
+      self.laststand_info.bleedout_time_default = 60;
+      level.laststand_stage2_multiplier = 0.5;
+      level.laststand_stage3_multiplier = 0.25;
       break;
   }
 
-  maps\_utility::_id_13DC("laststand_proc_running");
+  maps\_utility::ent_flag_set("laststand_proc_running");
   self enabledeathshield(1);
-  maps\_utility::_id_13DE("laststand_downed");
-  maps\_utility::_id_13DE("laststand_pause_bleedout_timer");
+  maps\_utility::ent_flag_clear("laststand_downed");
+  maps\_utility::ent_flag_clear("laststand_pause_bleedout_timer");
   self endon("death");
   var_0 = self.unique_id;
 
   for(;;) {
     self waittill("deathshield", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 
-    if(isDefined(self._id_1A5F) && self._id_1A5F) {
+    if(isDefined(self.saved_by_armor) && self.saved_by_armor) {
       continue;
     }
-    if(maps\_utility::_id_1008("laststand_downed")) {
+    if(maps\_utility::ent_flag("laststand_downed")) {
       continue;
     }
-    if(isDefined(self._id_1A60) && gettime() - self._id_1A60 <= 1750.0) {
+    if(isDefined(self.laststand_revive_time) && gettime() - self.laststand_revive_time <= 1750.0) {
       continue;
     }
     var_11 = [];
     var_11["damage"] = var_1;
     var_11["player"] = self;
 
-    if(maps\_utility::_id_12C1() && _id_1ABC()) {
-      var_12 = maps\_utility::_id_133A(self);
+    if(maps\_utility::is_coop() && laststand_downing_will_fail()) {
+      var_12 = maps\_utility::get_other_player(self);
 
-      if(var_12 maps\_utility::_id_1008("laststand_downed")) {
-        self._id_1886 = [];
-        self._id_1886["attacker"] = var_2;
-        self._id_1886["cause"] = var_5;
-        self._id_1886["weapon_name"] = var_10;
+      if(var_12 maps\_utility::ent_flag("laststand_downed")) {
+        self.coop_death_reason = [];
+        self.coop_death_reason["attacker"] = var_2;
+        self.coop_death_reason["cause"] = var_5;
+        self.coop_death_reason["weapon_name"] = var_10;
       }
     }
 
-    if(!maps\_utility::_id_12C1()) {
-      self._id_1886 = [];
-      self._id_1886["attacker"] = var_2;
-      self._id_1886["cause"] = var_5;
-      self._id_1886["weapon_name"] = var_10;
+    if(!maps\_utility::is_coop()) {
+      self.coop_death_reason = [];
+      self.coop_death_reason["attacker"] = var_2;
+      self.coop_death_reason["cause"] = var_5;
+      self.coop_death_reason["weapon_name"] = var_10;
     }
 
-    level._id_1A61[self.unique_id] = var_11;
-    _id_1AC0(var_2, var_5);
+    level.down_player_requests[self.unique_id] = var_11;
+    try_crush_player(var_2, var_5);
     level notify("request_player_downed");
   }
 }
 
-_id_1A62() {
+player_laststand_proc_ended() {
   self endon("death");
   common_scripts\utility::flag_waitopen("laststand_on");
-  maps\_utility::_id_13DE("laststand_proc_running");
+  maps\_utility::ent_flag_clear("laststand_proc_running");
   self enabledeathshield(0);
 }
 
-_id_1A63() {
-  if(maps\_utility::_id_12C1()) {
-    thread _id_1A67();
+laststand_downed_player_manager() {
+  if(maps\_utility::is_coop()) {
+    thread laststand_revive_ents_manager();
   }
-  level._id_1A64 = 0;
+  level.laststand_recent_player_downed_time = 0;
 
   for(;;) {
-    level._id_1A61 = [];
+    level.down_player_requests = [];
     level waittill("request_player_downed");
     waittillframeend;
     var_0 = gettime();
 
-    if(var_0 < level._id_1A64 + level._id_1A65 * 1000) {
+    if(var_0 < level.laststand_recent_player_downed_time + level.player_downed_death_buffer_time * 1000) {
       continue;
     }
-    level._id_1A64 = var_0;
+    level.laststand_recent_player_downed_time = var_0;
     var_1 = 0;
     var_2 = undefined;
-    level._id_1A61 = maps\_utility::_id_0B53(level._id_1A61);
+    level.down_player_requests = maps\_utility::array_randomize(level.down_player_requests);
 
-    foreach(var_5, var_4 in level._id_1A61) {
+    foreach(var_5, var_4 in level.down_player_requests) {
       if(var_4["damage"] >= var_1) {
         var_2 = var_4["player"];
       }
     }
 
-    var_2 thread _id_1A6D();
-    thread maps\_gameskill::_id_1A66();
+    var_2 thread player_laststand_force_down();
+    thread maps\_gameskill::resetskill();
   }
 }
 
-_id_1A67() {
-  if(!maps\_utility::_id_12C1()) {
+laststand_revive_ents_manager() {
+  if(!maps\_utility::is_coop()) {
     return;
   }
-  level._id_1A68 = getdvarint("player_useradius");
+  level.default_use_radius = getdvarint("player_useradius");
   level endon("special_op_terminated");
-  level._id_1A69 = [];
+  level.revive_ents = [];
 
   foreach(var_1 in level.players) {
     var_2 = spawn("script_model", var_1.origin + (0, 0, 28));
     var_2 setModel("tag_origin");
     var_2 linkTo(var_1, "tag_origin", (0, 0, 28), (0, 0, 0));
     var_2 setHintString(&"SCRIPT_COOP_REVIVE");
-    level._id_1A69[var_1.unique_id] = var_2;
-    var_1 thread _id_1A6E();
+    level.revive_ents[var_1.unique_id] = var_2;
+    var_1 thread player_laststand_on_revive();
   }
 
   for(;;) {
     level waittill("laststand_player_state_changed");
 
     foreach(var_1 in level.players) {}
-    var_1 _id_1AC6(maps\_utility::_id_1A43(var_1));
+    var_1 revive_set_use_target_state(maps\_utility::is_player_down(var_1));
 
-    if(maps\_utility::_id_1A6A().size == level.players.size) {
-      setsaveddvar("player_useradius", level._id_1A68);
+    if(maps\_utility::get_players_healthy().size == level.players.size) {
+      setsaveddvar("player_useradius", level.default_use_radius);
       continue;
     }
 
@@ -213,7 +213,7 @@ _id_1A67() {
   }
 }
 
-_id_1A6B(var_0) {
+laststand_notify_on_player_state_changes(var_0) {
   level endon("special_op_terminated");
 
   foreach(var_2 in level.players) {}
@@ -221,78 +221,78 @@ _id_1A6B(var_0) {
 
   for(;;) {
     foreach(var_2 in level.players) {}
-    var_2 thread _id_1A6C("laststand_downed", var_0);
+    var_2 thread notify_on_ent_flag_change("laststand_downed", var_0);
 
     level waittill(var_0);
   }
 }
 
-_id_1A6C(var_0, var_1) {
+notify_on_ent_flag_change(var_0, var_1) {
   level endon("special_op_terminated");
   level endon(var_1);
   self endon("death");
 
-  if(maps\_utility::_id_1008(var_0)) {
-    maps\_utility::_id_13DB(var_0);
+  if(maps\_utility::ent_flag(var_0)) {
+    maps\_utility::ent_flag_waitopen(var_0);
   } else {
-    maps\_utility::_id_1654(var_0);
+    maps\_utility::ent_flag_wait(var_0);
   }
   level notify(var_1);
 }
 
-_id_1A6D() {
+player_laststand_force_down() {
   if(!isalive(self)) {
     return;
   }
   level endon("special_op_terminated");
   self endon("death");
-  _id_1A95();
+  player_laststand_set_down_attributes();
 
-  if(maps\_utility::_id_12C1()) {
-    thread _id_1A76();
-    thread _id_1A8E();
-    thread _id_1A8F();
+  if(maps\_utility::is_coop()) {
+    thread player_laststand_downed_dialogue();
+    thread player_laststand_on_downed_hud_update();
+    thread player_laststand_downed_icon();
   }
 
-  maps\_utility::_id_09C9(maps\_utility::_id_13DB, "laststand_downed");
-  maps\_utility::_id_09C9(maps\_utility::_id_09CA, "coop_bled_out");
-  maps\_utility::_id_09CB();
+  maps\_utility::add_wait(maps\_utility::ent_flag_waitopen, "laststand_downed");
+  maps\_utility::add_wait(maps\_utility::waittill_msg, "coop_bled_out");
+  maps\_utility::do_wait_any();
   self notify("end_func_player_laststand_downed_icon");
 
-  if(maps\_utility::_id_1008("laststand_downed")) {
-    _id_1ABF();
+  if(maps\_utility::ent_flag("laststand_downed")) {
+    player_laststand_kill();
   } else {
-    _id_1A97();
+    player_laststand_set_original_attributes();
   }
 }
 
-_id_1A6E() {
+player_laststand_on_revive() {
   self endon("death");
   level endon("special_op_terminated");
-  var_0 = _id_1AC7();
+  var_0 = player_get_revive_ent();
   var_1 = 0;
 
   for(;;) {
     var_0 waittill("trigger", var_2);
 
-    if(maps\_utility::_id_1A43(var_2)) {
+    if(maps\_utility::is_player_down(var_2)) {
       continue;
     }
-    self._id_1A6F = var_2;
+    self.laststand_savior = var_2;
 
-    if(maps\_utility::_id_1A43(self) && var_2 _id_1A71(self)) {
-      _id_1A74(1, var_2, self);
-      level._id_1A64 = 0;
+    if(maps\_utility::is_player_down(self) && var_2 player_laststand_is_reviving(self)) {
+      laststand_freeze_players(1, var_2, self);
+      level.laststand_recent_player_downed_time = 0;
       wait 0.1;
 
-      if(!maps\_utility::_id_1A43(self) || !var_2 _id_1A71(self)) {
-        var_2 _id_1A73(self);
+      if(!maps\_utility::is_player_down(self) || !var_2 player_laststand_is_reviving(self)) {
+        var_2 player_laststand_revive_buddy_cleanup(self);
         continue;
       }
 
-      level._id_1A70 = [];
-      level._id_1A70["p1"] = maps\_hud_util::createclientprogressbar(level.player, level._id_1A54 + level._id_1A55);
-      level._id_1A70["p2"] = maps\_hud_util::createclientprogressbar(level._id_1337, level._id_1A54 + level._id_1A55);
+      level.bars = [];
+      level.bars["p1"] = maps\_hud_util::createclientprogressbar(level.player, level.revive_hud_base_offset + level.revive_bar_offset);
+      level.bars["p2"] = maps\_hud_util::createclientprogressbar(level.player2, level.revive_hud_base_offset + level.revive_bar_offset);
       var_3 = randomfloat(1) > 0.33;
 
       if(var_3) {
@@ -301,65 +301,65 @@ _id_1A6E() {
       var_1 = 0;
       var_4 = 1.5;
 
-      while(maps\_utility::_id_1A43(self) && !maps\_utility::_id_1A43(var_2) && var_2 _id_1A71(self)) {
-        maps\_utility::_id_13DC("laststand_pause_bleedout_timer");
+      while(maps\_utility::is_player_down(self) && !maps\_utility::is_player_down(var_2) && var_2 player_laststand_is_reviving(self)) {
+        maps\_utility::ent_flag_set("laststand_pause_bleedout_timer");
 
-        foreach(var_6 in level._id_1A70) {}
+        foreach(var_6 in level.bars) {}
         var_6 maps\_hud_util::updatebar(var_1 / var_4);
 
         wait 0.05;
         var_1 = var_1 + 0.05;
 
-        if(maps\_utility::_id_1A43(self) && var_1 > var_4) {
+        if(maps\_utility::is_player_down(self) && var_1 > var_4) {
           if(!var_3) {
             var_2 notify("so_revived");
           }
           var_2 notify("so_revive_success");
-          _id_1A72();
+          player_laststand_revive_self();
           break;
         }
       }
 
-      var_2 _id_1A73(self);
+      var_2 player_laststand_revive_buddy_cleanup(self);
     }
   }
 }
 
-_id_1A71(var_0) {
+player_laststand_is_reviving(var_0) {
   if(!self useButtonPressed()) {
     return 0;
   }
-  if(isDefined(var_0._id_1A6F) && var_0._id_1A6F == self) {
+  if(isDefined(var_0.laststand_savior) && var_0.laststand_savior == self) {
     return 1;
   }
   return 0;
 }
 
-_id_1A72() {
-  self._id_1A60 = gettime();
-  _id_1AB6();
-  maps\_utility::_id_13DE("laststand_downed");
-  self._id_1886 = undefined;
-  thread maps\_gameskill::_id_1A66();
+player_laststand_revive_self() {
+  self.laststand_revive_time = gettime();
+  player_dying_effect_remove();
+  maps\_utility::ent_flag_clear("laststand_downed");
+  self.coop_death_reason = undefined;
+  thread maps\_gameskill::resetskill();
   self notify("revived");
 }
 
-_id_1A73(var_0) {
+player_laststand_revive_buddy_cleanup(var_0) {
   level notify("revive_bars_killed");
-  _id_1AC3();
+  revive_hud_cleanup_bars();
 
   if(isDefined(var_0) && isalive(var_0)) {
-    var_0._id_1A6F = undefined;
-    var_0 maps\_utility::_id_13DE("laststand_pause_bleedout_timer");
+    var_0.laststand_savior = undefined;
+    var_0 maps\_utility::ent_flag_clear("laststand_pause_bleedout_timer");
   }
 
   if(isDefined(self) && isalive(self)) {
-    _id_1A74(0, self, var_0);
+    laststand_freeze_players(0, self, var_0);
   }
 }
 
-_id_1A74(var_0, var_1, var_2) {
-  var_2 = maps\_utility::_id_133A(self);
+laststand_freeze_players(var_0, var_1, var_2) {
+  var_2 = maps\_utility::get_other_player(self);
 
   if(var_0) {
     var_1 freezecontrols(1);
@@ -373,22 +373,22 @@ _id_1A74(var_0, var_1, var_2) {
     var_1 enableweaponswitch();
     var_2 freezecontrols(0);
 
-    if(!maps\_utility::_id_1A75(var_2)) {
+    if(!maps\_utility::is_player_down_and_out(var_2)) {
       var_2 enableweapons();
     }
   }
 }
 
-_id_1A76() {
+player_laststand_downed_dialogue() {
   self endon("death");
   self endon("revived");
   level endon("special_op_terminated");
   wait 1.0;
   self notify("so_downed");
-  thread _id_1A77(0.05);
+  thread player_laststand_downed_nag_button(0.05);
 }
 
-_id_1A77(var_0) {
+player_laststand_downed_nag_button(var_0) {
   self endon("death");
   self endon("revived");
   level endon("special_op_terminated");
@@ -399,61 +399,61 @@ _id_1A77(var_0) {
   self notifyonplayercommand("nag", "weapnext");
 
   for(;;) {
-    if(!_id_1A7E()) {
+    if(!can_show_nag_prompt()) {
       wait 0.05;
       continue;
     }
 
-    if(_id_1A79()) {
-      thread _id_1A7B();
-      thread _id_1A7D();
+    if(nag_should_draw_hud()) {
+      thread nag_prompt_show();
+      thread nag_prompt_cancel();
     }
 
-    var_1 = common_scripts\utility::waittill_any_timeout(level._id_1A33, "nag", "nag_cancel");
+    var_1 = common_scripts\utility::waittill_any_timeout(level.coop_revive_nag_hud_refreshtime, "nag", "nag_cancel");
 
     if(var_1 == "nag") {
-      self._id_1A78 = gettime();
-      thread _id_1AC9();
-      thread maps\_specialops_battlechatter::_id_1329();
+      self.lastrevivenagbuttonpresstime = gettime();
+      thread player_downed_hud_toggle_blinkstate();
+      thread maps\_specialops_battlechatter::play_revive_nag();
     }
 
     wait 0.05;
   }
 }
 
-_id_1A79() {
-  var_0 = level._id_1A33 * 1000;
+nag_should_draw_hud() {
+  var_0 = level.coop_revive_nag_hud_refreshtime * 1000;
 
-  if(isDefined(self) && isDefined(self._id_1A7A)) {
+  if(isDefined(self) && isDefined(self.nag_hud_on)) {
     return 0;
-  } else if(!isDefined(self._id_1A78)) {
+  } else if(!isDefined(self.lastrevivenagbuttonpresstime)) {
     return 1;
-  } else if(gettime() - self._id_1A78 < var_0) {
+  } else if(gettime() - self.lastrevivenagbuttonpresstime < var_0) {
     return 0;
   }
   return 1;
 }
 
-_id_1A7B() {
+nag_prompt_show() {
   if(!isDefined(self)) {
     return;
   }
-  self._id_1A7A = 1;
+  self.nag_hud_on = 1;
   var_0 = 0.05;
   var_1 = &"SPECIAL_OPS_REVIVE_NAG_HINT";
-  var_2 = _id_1A7C();
+  var_2 = get_nag_hud();
   var_2.alpha = 0;
   var_2 settext(var_1);
   var_2 fadeovertime(var_0);
   var_2.alpha = 1;
-  _id_1AC4();
-  self._id_1A7A = undefined;
+  waittill_disable_nag();
+  self.nag_hud_on = undefined;
   var_2 fadeovertime(var_0);
   var_2.alpha = 0;
   var_2 common_scripts\utility::delaycall(var_0 + 0.05, ::destroy);
 }
 
-_id_1A7C() {
+get_nag_hud() {
   var_0 = newclienthudelem(self);
   var_0.x = 0;
   var_0.y = 50;
@@ -472,169 +472,169 @@ _id_1A7C() {
   return var_0;
 }
 
-_id_1A7D() {
+nag_prompt_cancel() {
   self endon("nag");
 
-  while(maps\_utility::_id_1A43(self) && _id_1A7E()) {
+  while(maps\_utility::is_player_down(self) && can_show_nag_prompt()) {
     wait 0.05;
   }
   self notify("nag_cancel");
 }
 
-_id_1A7E() {
-  if(isDefined(level._id_1A7F) && level._id_1A7F) {
+can_show_nag_prompt() {
+  if(isDefined(level.hide_nag_prompt) && level.hide_nag_prompt) {
     return 0;
   }
-  var_0 = maps\_utility::_id_133A(self);
+  var_0 = maps\_utility::get_other_player(self);
 
-  if(var_0 _id_1A71(self)) {
+  if(var_0 player_laststand_is_reviving(self)) {
     return 0;
   }
-  if(!maps\_specialops_battlechatter::_id_132F()) {
+  if(!maps\_specialops_battlechatter::can_say_current_nag_event_type()) {
     return 0;
   }
   return 1;
 }
 
-_id_1A80() {
-  if(!maps\_utility::_id_12C1()) {
+laststand_coop_hud_manager() {
+  if(!maps\_utility::is_coop()) {
     return;
   }
   level endon("special_op_terminated");
   var_0 = [];
 
   foreach(var_2 in level.players) {}
-  var_0[var_2.unique_id] = maps\_utility::_id_1A43(var_2);
+  var_0[var_2.unique_id] = maps\_utility::is_player_down(var_2);
 
-  _id_1A85();
+  laststand_coop_hud_create();
 
   for(;;) {
     level waittill("laststand_player_state_changed");
     waittillframeend;
 
     foreach(var_2 in level.players) {
-      var_5 = maps\_utility::_id_133A(var_2);
-      var_6 = var_2 _id_1A87(var_0);
-      var_7 = var_5 _id_1A87(var_0);
+      var_5 = maps\_utility::get_other_player(var_2);
+      var_6 = var_2 player_laststand_changed_state(var_0);
+      var_7 = var_5 player_laststand_changed_state(var_0);
 
       if(var_6) {
-        if(maps\_utility::_id_1A43(var_2)) {
-          var_2._id_1A81.alpha = 0;
-          var_2._id_1A82.alpha = 0;
-          var_2._id_1A83 thread maps\_specialops::_id_1851();
-          var_2._id_1A84 thread maps\_specialops::_id_1851();
-          var_2._id_1A83.alpha = 1;
-          var_2._id_1A84.alpha = 1;
-          var_2._id_1A83 thread maps\_specialops::_id_1848();
-          var_2._id_1A84 thread maps\_specialops::_id_1848();
-        } else if(maps\_utility::_id_1A43(var_5)) {
-          var_2._id_1A83.alpha = 0;
-          var_2._id_1A84.alpha = 0;
-          var_2._id_1A81 thread maps\_specialops::_id_1851();
-          var_2._id_1A82 thread maps\_specialops::_id_1851();
-          var_2._id_1A81.alpha = 1;
-          var_2._id_1A82.alpha = 1;
-          var_2._id_1A81 thread maps\_specialops::_id_1848();
-          var_2._id_1A82 thread maps\_specialops::_id_1848();
+        if(maps\_utility::is_player_down(var_2)) {
+          var_2.revive_text_friend.alpha = 0;
+          var_2.revive_timer_friend.alpha = 0;
+          var_2.revive_text_local thread maps\_specialops::so_hud_pulse_stop();
+          var_2.revive_timer_local thread maps\_specialops::so_hud_pulse_stop();
+          var_2.revive_text_local.alpha = 1;
+          var_2.revive_timer_local.alpha = 1;
+          var_2.revive_text_local thread maps\_specialops::so_hud_pulse_create();
+          var_2.revive_timer_local thread maps\_specialops::so_hud_pulse_create();
+        } else if(maps\_utility::is_player_down(var_5)) {
+          var_2.revive_text_local.alpha = 0;
+          var_2.revive_timer_local.alpha = 0;
+          var_2.revive_text_friend thread maps\_specialops::so_hud_pulse_stop();
+          var_2.revive_timer_friend thread maps\_specialops::so_hud_pulse_stop();
+          var_2.revive_text_friend.alpha = 1;
+          var_2.revive_timer_friend.alpha = 1;
+          var_2.revive_text_friend thread maps\_specialops::so_hud_pulse_create();
+          var_2.revive_timer_friend thread maps\_specialops::so_hud_pulse_create();
         } else {
-          var_2 _id_1A86();
+          var_2 player_laststand_hud_hide();
         }
       }
 
       if(var_7) {
-        if(!maps\_utility::_id_1A43(var_2)) {
-          if(maps\_utility::_id_1A43(var_5)) {
-            var_2._id_1A83.alpha = 0;
-            var_2._id_1A84.alpha = 0;
-            var_2._id_1A81 thread maps\_specialops::_id_1851();
-            var_2._id_1A82 thread maps\_specialops::_id_1851();
-            var_2._id_1A81.alpha = 1;
-            var_2._id_1A82.alpha = 1;
-            var_2._id_1A81 thread maps\_specialops::_id_1848();
-            var_2._id_1A82 thread maps\_specialops::_id_1848();
+        if(!maps\_utility::is_player_down(var_2)) {
+          if(maps\_utility::is_player_down(var_5)) {
+            var_2.revive_text_local.alpha = 0;
+            var_2.revive_timer_local.alpha = 0;
+            var_2.revive_text_friend thread maps\_specialops::so_hud_pulse_stop();
+            var_2.revive_timer_friend thread maps\_specialops::so_hud_pulse_stop();
+            var_2.revive_text_friend.alpha = 1;
+            var_2.revive_timer_friend.alpha = 1;
+            var_2.revive_text_friend thread maps\_specialops::so_hud_pulse_create();
+            var_2.revive_timer_friend thread maps\_specialops::so_hud_pulse_create();
             continue;
           }
 
-          var_2 _id_1A86();
+          var_2 player_laststand_hud_hide();
         }
       }
     }
 
     foreach(var_2 in level.players) {}
-    var_0[var_2.unique_id] = maps\_utility::_id_1A43(var_2);
+    var_0[var_2.unique_id] = maps\_utility::is_player_down(var_2);
   }
 }
 
-_id_1A85() {
+laststand_coop_hud_create() {
   foreach(var_1 in level.players) {
-    var_1._id_1A83 = var_1 maps\_hud_util::createserverclientfontstring("hudsmall", 1.0);
-    var_1._id_1A83 maps\_hud_util::setpoint("CENTER", undefined, 0, level._id_1A54);
-    var_1._id_1A83 settext(&"SCRIPT_COOP_BLEEDING_OUT");
-    var_1._id_1A81 = var_1 maps\_hud_util::createserverclientfontstring("hudsmall", 1.0);
-    var_1._id_1A81 maps\_hud_util::setpoint("CENTER", undefined, 0, level._id_1A54);
-    var_1._id_1A81 settext(&"SCRIPT_COOP_BLEEDING_OUT_PARTNER");
-    var_1._id_1A84 = var_1 maps\_hud_util::createclienttimer("hudsmall", 1.2);
-    var_1._id_1A84 maps\_hud_util::setpoint("CENTER", undefined, 0, level._id_1A54 + level._id_1A55);
-    var_1._id_1A82 = var_1 maps\_hud_util::createclienttimer("hudsmall", 1.2);
-    var_1._id_1A82 maps\_hud_util::setpoint("CENTER", undefined, 0, level._id_1A54 + level._id_1A55);
-    var_1 _id_1A86();
-    level._id_1A57[level._id_1A57.size] = var_1._id_1A83;
-    level._id_1A57[level._id_1A57.size] = var_1._id_1A81;
-    level._id_1A57[level._id_1A57.size] = var_1._id_1A84;
-    level._id_1A57[level._id_1A57.size] = var_1._id_1A82;
+    var_1.revive_text_local = var_1 maps\_hud_util::createserverclientfontstring("hudsmall", 1.0);
+    var_1.revive_text_local maps\_hud_util::setpoint("CENTER", undefined, 0, level.revive_hud_base_offset);
+    var_1.revive_text_local settext(&"SCRIPT_COOP_BLEEDING_OUT");
+    var_1.revive_text_friend = var_1 maps\_hud_util::createserverclientfontstring("hudsmall", 1.0);
+    var_1.revive_text_friend maps\_hud_util::setpoint("CENTER", undefined, 0, level.revive_hud_base_offset);
+    var_1.revive_text_friend settext(&"SCRIPT_COOP_BLEEDING_OUT_PARTNER");
+    var_1.revive_timer_local = var_1 maps\_hud_util::createclienttimer("hudsmall", 1.2);
+    var_1.revive_timer_local maps\_hud_util::setpoint("CENTER", undefined, 0, level.revive_hud_base_offset + level.revive_bar_offset);
+    var_1.revive_timer_friend = var_1 maps\_hud_util::createclienttimer("hudsmall", 1.2);
+    var_1.revive_timer_friend maps\_hud_util::setpoint("CENTER", undefined, 0, level.revive_hud_base_offset + level.revive_bar_offset);
+    var_1 player_laststand_hud_hide();
+    level.laststand_hud_elements[level.laststand_hud_elements.size] = var_1.revive_text_local;
+    level.laststand_hud_elements[level.laststand_hud_elements.size] = var_1.revive_text_friend;
+    level.laststand_hud_elements[level.laststand_hud_elements.size] = var_1.revive_timer_local;
+    level.laststand_hud_elements[level.laststand_hud_elements.size] = var_1.revive_timer_friend;
   }
 }
 
-_id_1A86() {
-  self._id_1A83.alpha = 0;
-  self._id_1A81.alpha = 0;
-  self._id_1A84.alpha = 0;
-  self._id_1A82.alpha = 0;
+player_laststand_hud_hide() {
+  self.revive_text_local.alpha = 0;
+  self.revive_text_friend.alpha = 0;
+  self.revive_timer_local.alpha = 0;
+  self.revive_timer_friend.alpha = 0;
 }
 
-_id_1A87(var_0) {
-  var_1 = maps\_utility::_id_1A43(self);
+player_laststand_changed_state(var_0) {
+  var_1 = maps\_utility::is_player_down(self);
   var_2 = var_0[self.unique_id];
   return var_1 != var_2;
 }
 
-_id_1A88() {
-  if(_id_1AB9() != 2) {
+laststand_getup_hud_init() {
+  if(laststand_get_type() != 2) {
     return;
   }
   foreach(var_1 in level.players) {}
-  var_1._id_1A89 = 0;
+  var_1.laststand_getup_fast = 0;
 
-  _id_1A8A();
+  laststand_revive_bar_getup_create();
 }
 
-_id_1A8A() {
+laststand_revive_bar_getup_create() {
   foreach(var_1 in level.players) {
-    var_2 = level._id_1A54 + level._id_1A56;
-    var_1._id_1A8B = maps\_hud_util::createclientprogressbar(var_1, var_2, "white", "black", 130, 12);
-    var_1 _id_1AAE(0.5);
-    level._id_1A57[level._id_1A57.size] = var_1._id_1A8B;
-    var_1._id_1A8C = newclienthudelem(var_1);
-    var_1._id_1A8C.hidden = 0;
-    var_1._id_1A8C.elemtype = "icon";
-    var_1._id_1A8C.hidewheninmenu = 1;
-    var_1._id_1A8C.archived = 0;
-    var_1._id_1A8C.x = -93.0;
-    var_1._id_1A8C.y = var_2;
-    var_1._id_1A8C.alignx = "center";
-    var_1._id_1A8C.aligny = "middle";
-    var_1._id_1A8C.horzalign = "center";
-    var_1._id_1A8C.vertalign = "middle";
-    var_1._id_1A8C.children = [];
-    var_1._id_1A8C.elemtype = "icon";
-    var_1._id_1A8C setshader("specialty_self_revive", 28, 28);
-    level._id_1A57[level._id_1A57.size] = var_1._id_1A8C;
-    var_1._id_1A8B maps\_hud_util::hidebar(1);
-    var_1._id_1A8C.alpha = 0.0;
+    var_2 = level.revive_hud_base_offset + level.revive_bar_getup_offset;
+    var_1.revive_bar_getup = maps\_hud_util::createclientprogressbar(var_1, var_2, "white", "black", 130, 12);
+    var_1 player_laststand_getup_bar_set_fill(0.5);
+    level.laststand_hud_elements[level.laststand_hud_elements.size] = var_1.revive_bar_getup;
+    var_1.revive_bar_getup_icon = newclienthudelem(var_1);
+    var_1.revive_bar_getup_icon.hidden = 0;
+    var_1.revive_bar_getup_icon.elemtype = "icon";
+    var_1.revive_bar_getup_icon.hidewheninmenu = 1;
+    var_1.revive_bar_getup_icon.archived = 0;
+    var_1.revive_bar_getup_icon.x = -93.0;
+    var_1.revive_bar_getup_icon.y = var_2;
+    var_1.revive_bar_getup_icon.alignx = "center";
+    var_1.revive_bar_getup_icon.aligny = "middle";
+    var_1.revive_bar_getup_icon.horzalign = "center";
+    var_1.revive_bar_getup_icon.vertalign = "middle";
+    var_1.revive_bar_getup_icon.children = [];
+    var_1.revive_bar_getup_icon.elemtype = "icon";
+    var_1.revive_bar_getup_icon setshader("specialty_self_revive", 28, 28);
+    level.laststand_hud_elements[level.laststand_hud_elements.size] = var_1.revive_bar_getup_icon;
+    var_1.revive_bar_getup maps\_hud_util::hidebar(1);
+    var_1.revive_bar_getup_icon.alpha = 0.0;
   }
 }
 
-_id_1A8E() {
+player_laststand_on_downed_hud_update() {
   self endon("end_func_player_laststand_downed_icon");
   self endon("death");
   self endon("revived");
@@ -642,25 +642,25 @@ _id_1A8E() {
 
   foreach(var_1 in level.players) {
     if(var_1 == self) {
-      var_1._id_1A84 settimer(self._id_132B._id_132D - 1);
+      var_1.revive_timer_local settimer(self.laststand_info.bleedout_time_default - 1);
       continue;
     }
 
-    var_1._id_1A82 settimer(self._id_132B._id_132D - 1);
+    var_1.revive_timer_friend settimer(self.laststand_info.bleedout_time_default - 1);
   }
 
-  thread _id_1A90(self._id_132B._id_132D);
-  var_3 = self._id_132B._id_132D;
+  thread player_laststand_countdown_timer(self.laststand_info.bleedout_time_default);
+  var_3 = self.laststand_info.bleedout_time_default;
 
   foreach(var_1 in level.players) {
     if(var_1 == self) {
-      var_1._id_1A83.color = self._id_1A83.color;
-      var_1._id_1A84.color = self._id_1A83.color;
+      var_1.revive_text_local.color = self.revive_text_local.color;
+      var_1.revive_timer_local.color = self.revive_text_local.color;
       continue;
     }
 
-    var_1._id_1A81.color = var_1._id_1A83.color;
-    var_1._id_1A82.color = var_1._id_1A83.color;
+    var_1.revive_text_friend.color = var_1.revive_text_local.color;
+    var_1.revive_timer_friend.color = var_1.revive_text_local.color;
   }
 
   waittillframeend;
@@ -668,26 +668,26 @@ _id_1A8E() {
   while(var_3) {
     foreach(var_1 in level.players) {
       if(var_1 == self) {
-        var_7 = var_1._id_1A83;
-        var_8 = var_1._id_1A84;
+        var_7 = var_1.revive_text_local;
+        var_8 = var_1.revive_timer_local;
       } else {
-        var_7 = var_1._id_1A81;
-        var_8 = var_1._id_1A82;
+        var_7 = var_1.revive_text_friend;
+        var_8 = var_1.revive_timer_friend;
       }
 
       var_9 = var_7.color;
-      var_10 = _id_1A91(self._id_132B._id_132C, self._id_132B._id_132D, 0, var_1 == self);
+      var_10 = get_coop_downed_hud_color(self.laststand_info.bleedout_time, self.laststand_info.bleedout_time_default, 0, var_1 == self);
       var_7.color = var_10;
       var_8.color = var_10;
 
       if(distance(var_10, var_9) > 0.001) {
-        if(distance(var_10, var_1._id_1A39) <= 0.001) {
-          var_7._id_184B = 1;
-          var_8._id_184B = 1;
+        if(distance(var_10, var_1.coop_icon_color_dying) <= 0.001) {
+          var_7.pulse_loop = 1;
+          var_8.pulse_loop = 1;
         }
 
-        var_7 thread maps\_specialops::_id_1848();
-        var_8 thread maps\_specialops::_id_1848();
+        var_7 thread maps\_specialops::so_hud_pulse_create();
+        var_8 thread maps\_specialops::so_hud_pulse_create();
       }
     }
 
@@ -696,59 +696,59 @@ _id_1A8E() {
   }
 }
 
-_id_1A8F() {
+player_laststand_downed_icon() {
   self endon("end_func_player_laststand_downed_icon");
   self endon("death");
   self endon("revived");
   level endon("special_op_terminated");
   waittillframeend;
-  var_0 = maps\_utility::_id_133A(self);
-  var_0 maps\_coop::_id_1A4D();
+  var_0 = maps\_utility::get_other_player(self);
+  var_0 maps\_coop::friendlyhudicon_downed();
 
-  while(self._id_132B._id_132C > 0) {
-    maps\_utility::_id_13DB("laststand_pause_bleedout_timer");
-    var_0 maps\_coop::_id_1A4E(_id_1A91(self._id_132B._id_132C, self._id_132B._id_132D));
+  while(self.laststand_info.bleedout_time > 0) {
+    maps\_utility::ent_flag_waitopen("laststand_pause_bleedout_timer");
+    var_0 maps\_coop::friendlyhudicon_update(get_coop_downed_hud_color(self.laststand_info.bleedout_time, self.laststand_info.bleedout_time_default));
     wait 0.05;
   }
 }
 
-_id_1A90(var_0) {
+player_laststand_countdown_timer(var_0) {
   self endon("death");
   self endon("revived");
   level endon("special_op_terminated");
 
-  for(self._id_132B._id_132C = var_0; self._id_132B._id_132C > 0; self._id_132B._id_132C = self._id_132B._id_132C - 0.05) {
-    if(maps\_utility::_id_1008("laststand_pause_bleedout_timer")) {
+  for(self.laststand_info.bleedout_time = var_0; self.laststand_info.bleedout_time > 0; self.laststand_info.bleedout_time = self.laststand_info.bleedout_time - 0.05) {
+    if(maps\_utility::ent_flag("laststand_pause_bleedout_timer")) {
       foreach(var_2 in level.players) {
         if(var_2 == self) {
-          var_2._id_1A84.alpha = 0;
+          var_2.revive_timer_local.alpha = 0;
           continue;
         }
 
-        var_2._id_1A82.alpha = 0;
+        var_2.revive_timer_friend.alpha = 0;
       }
 
-      maps\_utility::_id_13DB("laststand_pause_bleedout_timer");
+      maps\_utility::ent_flag_waitopen("laststand_pause_bleedout_timer");
 
-      if(self._id_132B._id_132C >= 1) {
+      if(self.laststand_info.bleedout_time >= 1) {
         foreach(var_2 in level.players) {
           if(var_2 == self) {
-            var_2._id_1A84 settimer(self._id_132B._id_132C - 1);
+            var_2.revive_timer_local settimer(self.laststand_info.bleedout_time - 1);
             continue;
           }
 
-          var_2._id_1A82 settimer(self._id_132B._id_132C - 1);
+          var_2.revive_timer_friend settimer(self.laststand_info.bleedout_time - 1);
         }
       }
     } else {
       foreach(var_2 in level.players) {
         if(var_2 == self) {
-          var_2._id_1A84.alpha = 1;
+          var_2.revive_timer_local.alpha = 1;
           continue;
         }
 
-        if(!maps\_utility::_id_1A43(var_2)) {
-          var_2._id_1A82.alpha = 1;
+        if(!maps\_utility::is_player_down(var_2)) {
+          var_2.revive_timer_friend.alpha = 1;
         }
       }
     }
@@ -756,44 +756,44 @@ _id_1A90(var_0) {
     wait 0.05;
   }
 
-  self._id_132B._id_132C = 0;
-  maps\_specialops::_id_183F("@DEADQUOTE_SO_BLED_OUT", "ui_bled_out");
-  thread maps\_specialops::_id_1879();
+  self.laststand_info.bleedout_time = 0;
+  maps\_specialops::so_force_deadquote("@DEADQUOTE_SO_BLED_OUT", "ui_bled_out");
+  thread maps\_specialops::so_dialog_mission_failed_bleedout();
   self notify("coop_bled_out");
 }
 
-_id_1A91(var_0, var_1, var_2, var_3) {
+get_coop_downed_hud_color(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3) && var_3) {
     var_4 = self;
   } else {
-    var_4 = maps\_utility::_id_133A(self);
+    var_4 = maps\_utility::get_other_player(self);
   }
   if(!isDefined(var_2)) {
     var_2 = 1;
   }
-  if(var_2 && _id_1A93()) {
-    if(self._id_1A92 == 1) {
-      return var_4._id_1A3A;
+  if(var_2 && coop_downed_hud_should_blink()) {
+    if(self.blinkstate == 1) {
+      return var_4.coop_icon_color_blink;
     }
   }
 
-  if(var_0 < var_1 * level._id_1A5E) {
-    return var_4._id_1A39;
+  if(var_0 < var_1 * level.laststand_stage3_multiplier) {
+    return var_4.coop_icon_color_dying;
   }
-  if(var_0 < var_1 * level._id_132E) {
-    return var_4._id_1A38;
+  if(var_0 < var_1 * level.laststand_stage2_multiplier) {
+    return var_4.coop_icon_color_damage;
   }
-  return var_4._id_1A36;
+  return var_4.coop_icon_color_downed;
 }
 
-_id_1A93() {
-  var_0 = maps\_utility::_id_133A(self);
+coop_downed_hud_should_blink() {
+  var_0 = maps\_utility::get_other_player(self);
 
-  if(var_0 _id_1A71(self)) {
+  if(var_0 player_laststand_is_reviving(self)) {
     return 0;
   }
-  if(isDefined(self._id_1A78)) {
-    if(gettime() - self._id_1A78 < level._id_1A31 * 1000) {
+  if(isDefined(self.lastrevivenagbuttonpresstime)) {
+    if(gettime() - self.lastrevivenagbuttonpresstime < level.coop_icon_blinktime * 1000) {
       return 1;
     }
   }
@@ -801,9 +801,9 @@ _id_1A93() {
   return 0;
 }
 
-_id_1A94() {
-  if(isDefined(level._id_1A57)) {
-    foreach(var_1 in level._id_1A57) {
+laststand_hud_destroy() {
+  if(isDefined(level.laststand_hud_elements)) {
+    foreach(var_1 in level.laststand_hud_elements) {
       if(isDefined(var_1)) {
         var_1 notify("destroying");
         var_1 maps\_hud_util::destroyelem();
@@ -811,55 +811,55 @@ _id_1A94() {
     }
   }
 
-  level._id_1A57 = undefined;
+  level.laststand_hud_elements = undefined;
 }
 
-_id_1A95() {
+player_laststand_set_down_attributes() {
   self endon("death");
   self notify("player_downed");
   self.ignorerandombulletdamage = 1;
   self enableinvulnerability();
-  maps\_utility::_id_13DC("laststand_downed");
+  maps\_utility::ent_flag_set("laststand_downed");
   self.laststand = 1;
   self.health = 2;
-  self.maxhealth = self._id_1A5D;
+  self.maxhealth = self.original_maxhealth;
   self.ignoreme = 1;
   self disableusability();
   self disableweaponswitch();
   self disableoffhandweapons();
   self disableweapons();
 
-  if(!isDefined(self._id_023C)) {
-    self._id_023C = 1;
+  if(!isDefined(self.laststand_down_count)) {
+    self.laststand_down_count = 1;
   } else {
-    self._id_023C++;
+    self.laststand_down_count++;
   }
-  if(isDefined(self._id_1A96)) {
+  if(isDefined(self.placingsentry)) {
     self notify("sentry_placement_canceled");
   }
-  thread _id_1AA0();
+  thread player_laststand_kill_by_vehicle();
 
-  if(_id_1ABC()) {
-    _id_1ABF();
+  if(laststand_downing_will_fail()) {
+    player_laststand_kill();
   } else {
-    thread _id_1AA2();
+    thread player_laststand_set_down_part1();
   }
 }
 
-_id_1A97() {
+player_laststand_set_original_attributes() {
   self.ignorerandombulletdamage = 0;
-  maps\_utility::_id_13DE("laststand_downed");
+  maps\_utility::ent_flag_clear("laststand_downed");
   self.laststand = 0;
-  self._id_1A98 = undefined;
-  self._id_1A99 = undefined;
+  self.achieve_downed_kills = undefined;
+  self.down_part2_proc_ran = undefined;
 
-  if(maps\_utility::_id_12C1()) {
-    var_0 = maps\_utility::_id_133A(self);
-    var_0 maps\_coop::_id_1A4B();
+  if(maps\_utility::is_coop()) {
+    var_0 = maps\_utility::get_other_player(self);
+    var_0 maps\_coop::friendlyhudicon_normal();
   }
 
   self disableweapons();
-  _id_1A9A();
+  remove_pistol_if_extra();
   self.health = self.maxhealth;
   self.ignoreme = 0;
   self setstance("stand");
@@ -872,28 +872,28 @@ _id_1A97() {
   self disableinvulnerability();
 }
 
-_id_1A9A() {
-  if(isDefined(self._id_1A9B)) {
-    self takeweapon(self._id_1A9B);
-    self._id_1A9B = undefined;
+remove_pistol_if_extra() {
+  if(isDefined(self.forced_pistol)) {
+    self takeweapon(self.forced_pistol);
+    self.forced_pistol = undefined;
   }
 
-  if(isDefined(self._id_1A9C)) {
-    self setweaponammoclip(self._id_1A9C, self._id_1A9D);
-    self setweaponammostock(self._id_1A9C, self._id_1A9E);
+  if(isDefined(self.preincap_pistol)) {
+    self setweaponammoclip(self.preincap_pistol, self.preincap_pistol_clip);
+    self setweaponammostock(self.preincap_pistol, self.preincap_pistol_stock);
   }
 
-  if(_id_1AC5(self._id_1A9F)) {
-    self switchtoweapon(self._id_1A9F);
+  if(player_can_restore_weapon(self.preincap_weapon)) {
+    self switchtoweapon(self.preincap_weapon);
   } else {
     var_0 = self getweaponslistprimaries();
     self switchtoweapon(var_0[0]);
   }
 
-  self._id_1A9F = undefined;
+  self.preincap_weapon = undefined;
 }
 
-_id_1AA0() {
+player_laststand_kill_by_vehicle() {
   self endon("revived");
   self endon("death");
   level endon("special_op_terminated");
@@ -908,7 +908,7 @@ _id_1AA0() {
     var_0 = vehicle_getarray();
 
     foreach(var_2 in var_0) {
-      if(isDefined(var_2._id_1AA1) && var_2._id_1AA1) {
+      if(isDefined(var_2.dont_crush_player) && var_2.dont_crush_player) {
         continue;
       }
       var_3 = var_2 vehicle_getspeed();
@@ -917,7 +917,7 @@ _id_1AA0() {
         continue;
       }
       if(self istouching(var_2)) {
-        var_2 maps\_specialops::_id_1885(self, "MOD_CRUSH");
+        var_2 maps\_specialops::so_crush_player(self, "MOD_CRUSH");
         return;
       }
     }
@@ -926,30 +926,30 @@ _id_1AA0() {
   }
 }
 
-_id_1AA2() {
+player_laststand_set_down_part1() {
   self endon("revived");
   self endon("death");
   level endon("special_op_terminated");
 
-  if(_id_1AB9() != 2) {
+  if(laststand_get_type() != 2) {
     wait 0.3;
   }
-  thread _id_1AB0();
+  thread player_laststand_force_switch_to_pistol();
 
-  if(_id_1AB9() == 2) {
-    if(_id_1ABD() > 0) {
-      if(!isDefined(self._id_1AA3)) {
-        self._id_1AA3 = 1;
+  if(laststand_get_type() == 2) {
+    if(get_lives_remaining() > 0) {
+      if(!isDefined(self.laststand_count)) {
+        self.laststand_count = 1;
       } else {
-        self._id_1AA3++;
+        self.laststand_count++;
       }
-      if(self._id_1AA3 <= 9999) {
-        thread _id_1AA4();
+      if(self.laststand_count <= 9999) {
+        thread player_laststand_getup_sequence();
         self waittill("laststand_getup_failed");
       }
 
-      if(!maps\_utility::_id_12C1() || maps\_utility::_id_1A75(maps\_utility::_id_133A(self))) {
-        _id_1ABF();
+      if(!maps\_utility::is_coop() || maps\_utility::is_player_down_and_out(maps\_utility::get_other_player(self))) {
+        player_laststand_kill();
         return;
       }
     } else {
@@ -958,48 +958,48 @@ _id_1AA2() {
   } else {
     wait 0.25;
     self disableinvulnerability();
-    thread _id_1AB3();
+    thread player_laststand_down_draw_attention();
     self waittill("damage");
   }
 
-  thread _id_1AAF();
+  thread player_laststand_set_down_part2();
 }
 
-_id_1AA4() {
+player_laststand_getup_sequence() {
   self endon("revived");
   self endon("death");
   self endon("laststand_getup_failed");
   level endon("special_op_terminated");
-  thread _id_1AA6();
-  thread _id_1AAA();
-  thread _id_1AAB();
-  thread _id_1AAC();
-  thread _id_1AB7();
-  thread _id_1AA9();
-  var_0 = (self._id_1AA3 - 1) * 0.0;
+  thread player_laststand_getup_sequence_clean_up();
+  thread player_laststand_getup_sequence_catch_kills();
+  thread player_laststand_getup_sequence_catch_damage();
+  thread player_laststand_getup_sequence_bad_place();
+  thread player_laststand_effect();
+  thread player_laststand_getup_sequence_ignore();
+  var_0 = (self.laststand_count - 1) * 0.0;
   var_1 = max(0.5 - var_0, 0.2);
-  _id_1AAE(var_1);
-  self._id_1A8B maps\_hud_util::hidebar(0);
-  self._id_1A8C.alpha = 1.0;
+  player_laststand_getup_bar_set_fill(var_1);
+  self.revive_bar_getup maps\_hud_util::hidebar(0);
+  self.revive_bar_getup_icon.alpha = 1.0;
   wait 2.0;
   self disableinvulnerability();
-  self._id_1AA5 = gettime();
+  self.last_damage_time = gettime();
 
   for(;;) {
     var_2 = 0;
 
-    if(isDefined(self._id_1A89) && self._id_1A89) {
+    if(isDefined(self.laststand_getup_fast) && self.laststand_getup_fast) {
       var_2 = 1;
-    } else if(gettime() - self._id_1AA5 > 3000.0) {
+    } else if(gettime() - self.last_damage_time > 3000.0) {
       var_2 = 1;
     }
     var_3 = common_scripts\utility::ter_op(var_2, 0.01, 0.0025);
-    _id_1AAD(var_3);
+    player_laststand_getup_bar_adjust(var_3);
     wait 0.05;
   }
 }
 
-_id_1AA6() {
+player_laststand_getup_sequence_clean_up() {
   level endon("special_op_terminated");
   self endon("death");
   var_0 = common_scripts\utility::waittill_any_return("player_down_and_out", "revived");
@@ -1007,25 +1007,25 @@ _id_1AA6() {
   if(isDefined(var_0) && var_0 == "player_down_and_out") {
     self.ignoreme = 1;
   }
-  _id_1ABE(0);
-  thread _id_1AA8(0.5);
-  self._id_1A89 = 0;
+  update_lives_remaining(0);
+  thread player_laststand_getup_sequence_clean_up_delayed(0.5);
+  self.laststand_getup_fast = 0;
 
-  if(isDefined(self._id_1AA7)) {
-    badplace_delete(self._id_1AA7);
-    self._id_1AA7 = undefined;
+  if(isDefined(self.laststand_badplace)) {
+    badplace_delete(self.laststand_badplace);
+    self.laststand_badplace = undefined;
   }
 }
 
-_id_1AA8(var_0) {
+player_laststand_getup_sequence_clean_up_delayed(var_0) {
   level endon("special_op_terminated");
   self endon("player_downed");
   wait(var_0);
-  self._id_1A8B maps\_hud_util::hidebar(1);
-  self._id_1A8C.alpha = 0.0;
+  self.revive_bar_getup maps\_hud_util::hidebar(1);
+  self.revive_bar_getup_icon.alpha = 0.0;
 }
 
-_id_1AA9() {
+player_laststand_getup_sequence_ignore() {
   self endon("revived");
   self endon("death");
   self endon("laststand_getup_failed");
@@ -1035,7 +1035,7 @@ _id_1AA9() {
   self.ignoreme = 0;
 }
 
-_id_1AAA() {
+player_laststand_getup_sequence_catch_kills() {
   self endon("revived");
   self endon("death");
   self endon("laststand_getup_failed");
@@ -1043,11 +1043,11 @@ _id_1AAA() {
 
   for(;;) {
     self waittill("revive_kill");
-    _id_1AAD(1.0);
+    player_laststand_getup_bar_adjust(1.0);
   }
 }
 
-_id_1AAB() {
+player_laststand_getup_sequence_catch_damage() {
   self endon("revived");
   self endon("death");
   self endon("laststand_getup_failed");
@@ -1055,95 +1055,95 @@ _id_1AAB() {
 
   for(;;) {
     common_scripts\utility::waittill_any("damage", "deathshield");
-    _id_1AAD(-0.1);
-    self._id_1AA5 = gettime();
+    player_laststand_getup_bar_adjust(-0.1);
+    self.last_damage_time = gettime();
     wait 0.2;
   }
 }
 
-_id_1AAC() {
+player_laststand_getup_sequence_bad_place() {
   self endon("revived");
   self endon("death");
   self endon("laststand_getup_failed");
   level endon("special_op_terminated");
-  self._id_1AA7 = self.unique_id + "_ls_badplace";
+  self.laststand_badplace = self.unique_id + "_ls_badplace";
 
   for(;;) {
-    badplace_cylinder(self._id_1AA7, 90.0, self.origin, 120, 120, "axis");
+    badplace_cylinder(self.laststand_badplace, 90.0, self.origin, 120, 120, "axis");
     wait 90.0;
-    badplace_delete(self._id_1AA7);
+    badplace_delete(self.laststand_badplace);
   }
 }
 
-_id_1AAD(var_0) {
+player_laststand_getup_bar_adjust(var_0) {
   var_0 = clamp(var_0, -1.0, 1.0);
-  var_1 = clamp(self._id_1A8B.bar.frac + var_0, 0.0, 1.0);
-  _id_1AAE(var_1);
+  var_1 = clamp(self.revive_bar_getup.bar.frac + var_0, 0.0, 1.0);
+  player_laststand_getup_bar_set_fill(var_1);
 
   if(var_1 == 1.0) {
-    _id_1A72();
+    player_laststand_revive_self();
   } else if(var_1 == 0.0) {
     self notify("laststand_getup_failed");
   }
 }
 
-_id_1AAE(var_0) {
+player_laststand_getup_bar_set_fill(var_0) {
   var_1 = (1, 0.4, 0.4);
   var_2 = (1, 0, 0);
-  self._id_1A8B.bar.color = vectorlerp(var_2, var_1, var_0);
-  self._id_1A8B maps\_hud_util::updatebar(var_0);
+  self.revive_bar_getup.bar.color = vectorlerp(var_2, var_1, var_0);
+  self.revive_bar_getup maps\_hud_util::updatebar(var_0);
 }
 
-_id_1AAF() {
-  self._id_1A99 = 1;
+player_laststand_set_down_part2() {
+  self.down_part2_proc_ran = 1;
   self notify("player_down_and_out");
   self disableweapons();
-  thread _id_1AB5();
+  thread player_dying_effect();
   self.ignoreme = 1;
   self.ignorerandombulletdamage = 1;
   self enableinvulnerability();
 }
 
-_id_1AB0() {
-  self._id_1A9F = self getcurrentweapon();
-  var_0 = _id_1AC1();
-  self._id_1A9C = undefined;
-  self._id_1A9E = 0;
-  self._id_1A9D = 0;
+player_laststand_force_switch_to_pistol() {
+  self.preincap_weapon = self getcurrentweapon();
+  var_0 = player_laststand_check_for_pistol();
+  self.preincap_pistol = undefined;
+  self.preincap_pistol_stock = 0;
+  self.preincap_pistol_clip = 0;
   var_1 = undefined;
 
   if(isDefined(var_0)) {
-    self._id_1A9C = var_0;
-    self._id_1A9E = self getweaponammostock(var_0);
-    self._id_1A9D = self getweaponammoclip(var_0);
+    self.preincap_pistol = var_0;
+    self.preincap_pistol_stock = self getweaponammostock(var_0);
+    self.preincap_pistol_clip = self getweaponammoclip(var_0);
     var_1 = var_0;
-  } else if(isDefined(level._id_1AB1)) {
-    var_2 = isDefined(level._id_1AB1) && self hasweapon(level._id_1AB1);
+  } else if(isDefined(level.coop_incap_weapon)) {
+    var_2 = isDefined(level.coop_incap_weapon) && self hasweapon(level.coop_incap_weapon);
 
     if(!var_2) {
-      self._id_1A9B = level._id_1AB1;
-      self giveweapon(level._id_1AB1);
+      self.forced_pistol = level.coop_incap_weapon;
+      self giveweapon(level.coop_incap_weapon);
     } else {
-      self._id_1A9C = level._id_1AB1;
-      self._id_1A9E = self getweaponammostock(var_0);
-      self._id_1A9D = self getweaponammoclip(var_0);
+      self.preincap_pistol = level.coop_incap_weapon;
+      self.preincap_pistol_stock = self getweaponammostock(var_0);
+      self.preincap_pistol_clip = self getweaponammoclip(var_0);
     }
 
-    var_1 = level._id_1AB1;
+    var_1 = level.coop_incap_weapon;
   } else {
     var_1 = "fnfiveseven";
-    self._id_1A9B = var_1;
+    self.forced_pistol = var_1;
     self giveweapon(var_1);
   }
 
   self setweaponammoclip(var_1, weaponclipsize(var_1));
   self setweaponammostock(var_1, weaponmaxammo(var_1));
-  thread _id_1AB2();
+  thread player_laststand_on_reload_fill_stock();
   self switchtoweapon(var_1);
   self enableweapons();
 }
 
-_id_1AB2() {
+player_laststand_on_reload_fill_stock() {
   level endon("special_op_terminated");
   self endon("death");
   self endon("player_down_and_out");
@@ -1158,7 +1158,7 @@ _id_1AB2() {
   }
 }
 
-_id_1AB3() {
+player_laststand_down_draw_attention() {
   self endon("death");
   self endon("revived");
   self endon("damage");
@@ -1166,19 +1166,19 @@ _id_1AB3() {
   notifyoncommand("draw_attention", "+attack_akimbo_accessible");
   common_scripts\utility::waittill_any_timeout(4, "draw_attention", "player_down_and_out");
 
-  if(maps\_utility::_id_1A75(self)) {
+  if(maps\_utility::is_player_down_and_out(self)) {
     return;
   }
   self.ignoreme = 0;
   self.ignorerandombulletdamage = 0;
 }
 
-_id_1AB4() {
+ai_laststand_on_death() {
   level endon("special_op_terminated");
   self waittill("death", var_0, var_1, var_2);
   var_3 = 0;
 
-  if(isDefined(var_0) && isalive(var_0) && isPlayer(var_0) && maps\_utility::_id_1A43(var_0)) {
+  if(isDefined(var_0) && isalive(var_0) && isPlayer(var_0) && maps\_utility::is_player_down(var_0)) {
     if(isDefined(var_2) && weaponclass(var_2) == "pistol") {
       var_3 = 1;
     } else if(isDefined(var_1) && var_1 == "MOD_MELEE") {
@@ -1191,36 +1191,36 @@ _id_1AB4() {
   }
 }
 
-_id_1AB5() {
+player_dying_effect() {
   self endon("death");
   self endon("revived");
 
-  if(!maps\_utility::_id_133C("laststand_dying_effect")) {
-    maps\_utility::_id_1402("laststand_dying_effect");
-  } else if(maps\_utility::_id_1008("laststand_dying_effect")) {
+  if(!maps\_utility::ent_flag_exist("laststand_dying_effect")) {
+    maps\_utility::ent_flag_init("laststand_dying_effect");
+  } else if(maps\_utility::ent_flag("laststand_dying_effect")) {
     return;
   }
-  maps\_utility::_id_13DC("laststand_dying_effect");
-  _id_1AB8("default", 60, 1);
+  maps\_utility::ent_flag_set("laststand_dying_effect");
+  player_shock_effect("default", 60, 1);
 }
 
-_id_1AB6() {
-  if(maps\_utility::_id_133C("laststand_dying_effect")) {
-    maps\_utility::_id_13DE("laststand_dying_effect");
+player_dying_effect_remove() {
+  if(maps\_utility::ent_flag_exist("laststand_dying_effect")) {
+    maps\_utility::ent_flag_clear("laststand_dying_effect");
   }
   self stopshellshock();
 }
 
-_id_1AB7() {
+player_laststand_effect() {
   self endon("death");
   self endon("revived");
   self endon("player_down_and_out");
   self notify("laststand_effect");
   self endon("laststand_effect");
-  _id_1AB8("laststand_getup", 60, 1);
+  player_shock_effect("laststand_getup", 60, 1);
 }
 
-_id_1AB8(var_0, var_1, var_2, var_3) {
+player_shock_effect(var_0, var_1, var_2, var_3) {
   self endon("death");
   level endon("special_op_terminated");
 
@@ -1244,66 +1244,66 @@ _id_1AB8(var_0, var_1, var_2, var_3) {
   }
 }
 
-_id_1AB9() {
-  var_0 = isDefined(level._id_1ABA) && level._id_1ABA == 0 || level._id_1ABA == 1 || level._id_1ABA == 2;
+laststand_get_type() {
+  var_0 = isDefined(level.laststand_type) && level.laststand_type == 0 || level.laststand_type == 1 || level.laststand_type == 2;
 
   if(var_0) {
-    return level._id_1ABA;
+    return level.laststand_type;
   } else {
     return 0;
   }
 }
 
-_id_1ABB() {
-  return _id_1AB9() == 2 && _id_1ABD() > 0;
+laststand_can_pick_self_up() {
+  return laststand_get_type() == 2 && get_lives_remaining() > 0;
 }
 
-_id_1ABC() {
-  if(maps\_utility::_id_12C1()) {
-    var_0 = maps\_utility::_id_133A(self);
-    var_1 = maps\_utility::_id_1A43(var_0) && !var_0 _id_1ABB() || maps\_utility::_id_1A75(var_0);
+laststand_downing_will_fail() {
+  if(maps\_utility::is_coop()) {
+    var_0 = maps\_utility::get_other_player(self);
+    var_1 = maps\_utility::is_player_down(var_0) && !var_0 laststand_can_pick_self_up() || maps\_utility::is_player_down_and_out(var_0);
 
-    if(var_1 && !_id_1ABB()) {
+    if(var_1 && !laststand_can_pick_self_up()) {
       return 1;
     }
     return 0;
   } else {
-    if(!_id_1ABB()) {
+    if(!laststand_can_pick_self_up()) {
       return 1;
     }
     return 0;
   }
 }
 
-_id_1ABD() {
-  if(_id_1AB9() == 2 && isDefined(self._id_132B._id_1A53)) {
-    return max(0, self._id_132B._id_1A53);
+get_lives_remaining() {
+  if(laststand_get_type() == 2 && isDefined(self.laststand_info.type_getup_lives)) {
+    return max(0, self.laststand_info.type_getup_lives);
   }
   return 0;
 }
 
-_id_1ABE(var_0) {
+update_lives_remaining(var_0) {
   var_0 = common_scripts\utility::ter_op(isDefined(var_0), var_0, 0);
-  self._id_132B._id_1A53 = max(0, common_scripts\utility::ter_op(var_0, self._id_132B._id_1A53 + 1, self._id_132B._id_1A53 - 1));
+  self.laststand_info.type_getup_lives = max(0, common_scripts\utility::ter_op(var_0, self.laststand_info.type_getup_lives + 1, self.laststand_info.type_getup_lives - 1));
   self notify("laststand_lives_updated");
 }
 
-_id_1ABF() {
+player_laststand_kill() {
   level endon("special_op_terminated");
-  thread _id_1AB6();
+  thread player_dying_effect_remove();
   self enabledeathshield(0);
   self disableinvulnerability();
   self enablehealthshield(0);
-  self._id_1A98 = undefined;
+  self.achieve_downed_kills = undefined;
   waittillframeend;
   self kill();
 }
 
-_id_1AC0(var_0, var_1) {
+try_crush_player(var_0, var_1) {
   if(!isDefined(var_0)) {
     return;
   }
-  if(isDefined(var_0._id_1AA1) && var_0._id_1AA1) {
+  if(isDefined(var_0.dont_crush_player) && var_0.dont_crush_player) {
     return;
   }
   if(!isDefined(var_1)) {
@@ -1323,10 +1323,10 @@ _id_1AC0(var_0, var_1) {
   if(common_scripts\utility::flag("special_op_terminated")) {
     return;
   }
-  var_0 maps\_specialops::_id_1885(self, var_1);
+  var_0 maps\_specialops::so_crush_player(self, var_1);
 }
 
-_id_1AC1(var_0) {
+player_laststand_check_for_pistol(var_0) {
   var_1 = self getweaponslistprimaries();
 
   if(isDefined(var_0)) {
@@ -1351,32 +1351,32 @@ _id_1AC1(var_0) {
   return undefined;
 }
 
-_id_1AC2() {
+laststand_on_mission_end() {
   level waittill("special_op_terminated");
-  _id_1AC8();
-  _id_1AC3();
-  _id_1A94();
+  revive_destroy_use_targets();
+  revive_hud_cleanup_bars();
+  laststand_hud_destroy();
 }
 
-_id_1AC3() {
-  if(isDefined(level._id_1A70)) {
-    foreach(var_1 in level._id_1A70) {
+revive_hud_cleanup_bars() {
+  if(isDefined(level.bars)) {
+    foreach(var_1 in level.bars) {
       if(isDefined(var_1)) {
         var_1 notify("destroying");
         var_1 maps\_hud_util::destroyelem();
       }
     }
 
-    level._id_1A70 = undefined;
+    level.bars = undefined;
   }
 }
 
-_id_1AC4() {
+waittill_disable_nag() {
   level endon("special_op_terminated");
   common_scripts\utility::waittill_any("nag", "nag_cancel", "death", "revived");
 }
 
-_id_1AC5(var_0) {
+player_can_restore_weapon(var_0) {
   if(!isDefined(var_0)) {
     return 0;
   }
@@ -1389,8 +1389,8 @@ _id_1AC5(var_0) {
   return 1;
 }
 
-_id_1AC6(var_0) {
-  var_1 = _id_1AC7();
+revive_set_use_target_state(var_0) {
+  var_1 = player_get_revive_ent();
 
   if(var_0) {
     var_1 makeusable();
@@ -1400,32 +1400,32 @@ _id_1AC6(var_0) {
   return var_1;
 }
 
-_id_1AC7() {
-  return level._id_1A69[self.unique_id];
+player_get_revive_ent() {
+  return level.revive_ents[self.unique_id];
 }
 
-_id_1AC8() {
-  if(isDefined(level._id_1A69)) {
-    foreach(var_1 in level._id_1A69) {}
+revive_destroy_use_targets() {
+  if(isDefined(level.revive_ents)) {
+    foreach(var_1 in level.revive_ents) {}
     var_1 delete();
   }
 }
 
-_id_1AC9() {
+player_downed_hud_toggle_blinkstate() {
   self notify("player_downed_hud_blinkstate");
   self endon("player_downed_hud_blinkstate");
   self endon("death");
   self endon("revived");
-  self._id_1A92 = 1;
+  self.blinkstate = 1;
 
   for(;;) {
-    wait(level._id_1A32);
+    wait(level.coop_icon_blinkcrement);
 
-    if(self._id_1A92 == 1) {
-      self._id_1A92 = 0;
+    if(self.blinkstate == 1) {
+      self.blinkstate = 0;
       continue;
     }
 
-    self._id_1A92 = 1;
+    self.blinkstate = 1;
   }
 }

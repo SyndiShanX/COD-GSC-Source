@@ -12,56 +12,56 @@ main() {
 
   foreach(var_2, var_1 in level.players) {
     var_1.radiation = spawnStruct();
-    var_1.radiation._id_4192 = 0;
-    var_1.radiation._id_4193 = 0;
-    var_1 maps\_utility::_id_1402("_radiation_poisoning");
+    var_1.radiation.super_dose = 0;
+    var_1.radiation.inside = 0;
+    var_1 maps\_utility::ent_flag_init("_radiation_poisoning");
   }
 
-  common_scripts\utility::run_thread_on_targetname("radiation", ::_id_4194);
-  common_scripts\utility::run_thread_on_targetname("super_radiation", ::_id_4197);
-  common_scripts\utility::array_thread(level.players, ::_id_4198);
-  common_scripts\utility::array_thread(level.players, ::_id_41A0);
-  common_scripts\utility::array_thread(level.players, ::_id_419B);
-  common_scripts\utility::array_thread(level.players, ::_id_41A2);
-  common_scripts\utility::array_thread(level.players, ::_id_419C);
-  common_scripts\utility::array_thread(level.players, ::_id_419D);
-  common_scripts\utility::array_thread(level.players, ::_id_41A4);
+  common_scripts\utility::run_thread_on_targetname("radiation", ::updateradiationtriggers);
+  common_scripts\utility::run_thread_on_targetname("super_radiation", ::super_radiation_trigger);
+  common_scripts\utility::array_thread(level.players, ::updateradiationdosage);
+  common_scripts\utility::array_thread(level.players, ::updateradiationdosimeter);
+  common_scripts\utility::array_thread(level.players, ::updateradiationshock);
+  common_scripts\utility::array_thread(level.players, ::updateradiationblackout);
+  common_scripts\utility::array_thread(level.players, ::updateradiationsound);
+  common_scripts\utility::array_thread(level.players, ::updateradiationflag);
+  common_scripts\utility::array_thread(level.players, ::first_radiation_dialogue);
 }
 
-_id_4194() {
-  self._id_0A6B = 0;
+updateradiationtriggers() {
+  self.members = 0;
 
   for(;;) {
     self waittill("trigger", var_0);
-    thread _id_4195(var_0);
+    thread updateradiationtrigger_perplayer(var_0);
   }
 }
 
-_id_4195(var_0) {
-  if(var_0.radiation._id_4193) {
+updateradiationtrigger_perplayer(var_0) {
+  if(var_0.radiation.inside) {
     return;
   }
-  var_0.radiation._id_4193 = 1;
-  var_0.radiation._id_4196[var_0.radiation._id_4196.size] = self;
+  var_0.radiation.inside = 1;
+  var_0.radiation.triggers[var_0.radiation.triggers.size] = self;
 
   while(var_0 istouching(self)) {
     wait 0.05;
   }
-  var_0.radiation._id_4193 = 0;
-  var_0.radiation._id_4196 = common_scripts\utility::array_remove(var_0.radiation._id_4196, self);
+  var_0.radiation.inside = 0;
+  var_0.radiation.triggers = common_scripts\utility::array_remove(var_0.radiation.triggers, self);
 }
 
-_id_4197() {
+super_radiation_trigger() {
   self waittill("trigger", var_0);
-  var_0.radiation._id_4192 = 1;
+  var_0.radiation.super_dose = 1;
 }
 
-_id_4198() {
-  self.radiation._id_4196 = [];
-  self.radiation._id_1E43 = 0;
-  self.radiation._id_4199 = 0;
-  self.radiation._id_2203 = 0;
-  self.radiation._id_419A = 0;
+updateradiationdosage() {
+  self.radiation.triggers = [];
+  self.radiation.rate = 0;
+  self.radiation.ratepercent = 0;
+  self.radiation.total = 0;
+  self.radiation.totalpercent = 0;
   var_0 = 1;
   var_1 = 0;
   var_2 = 1100000 / (60 * var_0);
@@ -71,8 +71,8 @@ _id_4198() {
   for(;;) {
     var_5 = [];
 
-    for(var_6 = 0; var_6 < self.radiation._id_4196.size; var_6++) {
-      var_7 = self.radiation._id_4196[var_6];
+    for(var_6 = 0; var_6 < self.radiation.triggers.size; var_6++) {
+      var_7 = self.radiation.triggers[var_6];
       var_8 = distance(self.origin, var_7.origin) - 15;
       var_5[var_6] = var_2 - var_2 / var_7.radius * var_8;
     }
@@ -88,56 +88,56 @@ _id_4198() {
     if(var_9 > var_2) {
       var_9 = var_2;
     }
-    self.radiation._id_1E43 = var_9;
-    self.radiation._id_4199 = (var_9 - var_1) / var_4 * 100;
+    self.radiation.rate = var_9;
+    self.radiation.ratepercent = (var_9 - var_1) / var_4 * 100;
 
-    if(self.radiation._id_4192) {
+    if(self.radiation.super_dose) {
       var_9 = var_2;
-      self.radiation._id_4199 = 100;
+      self.radiation.ratepercent = 100;
     }
 
-    if(self.radiation._id_4199 > 25) {
-      self.radiation._id_2203 = self.radiation._id_2203 + var_9;
-      self.radiation._id_419A = self.radiation._id_2203 / var_3 * 100;
-    } else if(self.radiation._id_4199 < 1 && self.radiation._id_2203 > 0) {
-      self.radiation._id_2203 = self.radiation._id_2203 - 1500;
+    if(self.radiation.ratepercent > 25) {
+      self.radiation.total = self.radiation.total + var_9;
+      self.radiation.totalpercent = self.radiation.total / var_3 * 100;
+    } else if(self.radiation.ratepercent < 1 && self.radiation.total > 0) {
+      self.radiation.total = self.radiation.total - 1500;
 
-      if(self.radiation._id_2203 < 0) {
-        self.radiation._id_2203 = 0;
+      if(self.radiation.total < 0) {
+        self.radiation.total = 0;
       }
-      self.radiation._id_419A = self.radiation._id_2203 / var_3 * 100;
+      self.radiation.totalpercent = self.radiation.total / var_3 * 100;
     }
 
     wait(var_0);
   }
 }
 
-_id_419B() {
+updateradiationshock() {
   var_0 = 1;
 
   for(;;) {
-    if(self.radiation._id_4199 >= 75) {
+    if(self.radiation.ratepercent >= 75) {
       self shellshock("radiation_high", 5);
-    } else if(self.radiation._id_4199 >= 50) {
+    } else if(self.radiation.ratepercent >= 50) {
       self shellshock("radiation_med", 5);
-    } else if(self.radiation._id_4199 > 25) {
+    } else if(self.radiation.ratepercent > 25) {
       self shellshock("radiation_low", 5);
     }
     wait(var_0);
   }
 }
 
-_id_419C() {
-  thread _id_419E();
+updateradiationsound() {
+  thread playradiationsound();
 
   for(;;) {
-    if(self.radiation._id_4199 >= 75) {
+    if(self.radiation.ratepercent >= 75) {
       self.radiation.sound = "item_geigercouner_level4";
-    } else if(self.radiation._id_4199 >= 50) {
+    } else if(self.radiation.ratepercent >= 50) {
       self.radiation.sound = "item_geigercouner_level3";
-    } else if(self.radiation._id_4199 >= 25) {
+    } else if(self.radiation.ratepercent >= 25) {
       self.radiation.sound = "item_geigercouner_level2";
-    } else if(self.radiation._id_4199 > 0) {
+    } else if(self.radiation.ratepercent > 0) {
       self.radiation.sound = "item_geigercouner_level1";
     } else {
       self.radiation.sound = "none";
@@ -146,18 +146,18 @@ _id_419C() {
   }
 }
 
-_id_419D() {
+updateradiationflag() {
   for(;;) {
-    if(self.radiation._id_4199 > 25) {
-      maps\_utility::_id_13DC("_radiation_poisoning");
+    if(self.radiation.ratepercent > 25) {
+      maps\_utility::ent_flag_set("_radiation_poisoning");
     } else {
-      maps\_utility::_id_13DE("_radiation_poisoning");
+      maps\_utility::ent_flag_clear("_radiation_poisoning");
     }
     wait 0.05;
   }
 }
 
-_id_419E() {
+playradiationsound() {
   wait 0.05;
   var_0 = spawn("script_origin", (0, 0, 0));
   var_0.origin = self.origin;
@@ -179,7 +179,7 @@ _id_419E() {
   }
 }
 
-_id_419F() {
+updateradiationratepercent() {
   var_0 = 0.05;
   var_1 = newclienthudelem(self);
   var_1.fontscale = 1.2;
@@ -190,12 +190,12 @@ _id_419F() {
   var_1.alpha = 0;
 
   for(;;) {
-    var_1.label = self.radiation._id_4199;
+    var_1.label = self.radiation.ratepercent;
     wait(var_0);
   }
 }
 
-_id_41A0() {
+updateradiationdosimeter() {
   var_0 = 0.028;
   var_1 = 100;
   var_2 = 1;
@@ -208,29 +208,29 @@ _id_41A0() {
   var_5.alpha = 0;
   var_5.alignx = "right";
   var_5.label = &"SCOUTSNIPER_MRHR";
-  var_5 thread _id_41A1(self);
+  var_5 thread updateradiationdosimetercolor(self);
 
   for(;;) {
-    if(self.radiation._id_1E43 <= var_0) {
+    if(self.radiation.rate <= var_0) {
       var_6 = randomfloatrange(-0.001, 0.001);
       var_5 setvalue(var_0 + var_6);
-    } else if(self.radiation._id_1E43 > var_1) {
+    } else if(self.radiation.rate > var_1) {
       var_5 setvalue(var_1);
     } else {
-      var_5 setvalue(self.radiation._id_1E43);
+      var_5 setvalue(self.radiation.rate);
     }
     wait(var_2);
   }
 }
 
-_id_41A1(var_0) {
+updateradiationdosimetercolor(var_0) {
   var_1 = 0.05;
 
   for(;;) {
     var_2 = 1;
     var_3 = 0.13;
 
-    while(var_0.radiation._id_1E43 >= 100) {
+    while(var_0.radiation.rate >= 100) {
       if(var_2 <= 0 || var_2 >= 1) {
         var_3 = var_3 * -1;
       }
@@ -251,7 +251,7 @@ _id_41A1(var_0) {
   }
 }
 
-_id_41A2() {
+updateradiationblackout() {
   level endon("special_op_terminated");
   self endon("death");
   var_0 = newclienthudelem(self);
@@ -272,9 +272,9 @@ _id_41A2() {
   var_7 = 0;
 
   for(;;) {
-    while(self.radiation._id_419A > 25 && self.radiation._id_4199 > 25) {
+    while(self.radiation.totalpercent > 25 && self.radiation.ratepercent > 25) {
       var_8 = var_6 - var_5;
-      var_7 = (self.radiation._id_419A - var_5) / var_8;
+      var_7 = (self.radiation.totalpercent - var_5) / var_8;
 
       if(var_7 < 0) {
         var_7 = 0;
@@ -310,15 +310,15 @@ _id_41A2() {
   }
 
   var_0 fadeinblackout(2, 1, 6, self);
-  thread _id_41A3();
+  thread radiation_kill();
 }
 
-_id_41A3() {
-  self._id_1EEB = 1;
-  self._id_0ECC = 1;
-  self._id_1937 = 1;
+radiation_kill() {
+  self.specialdamage = 1;
+  self.specialdeath = 1;
+  self.radiationdeath = 1;
 
-  if(!maps\_utility::_id_1887()) {
+  if(!maps\_utility::kill_wrapper()) {
     return;
   }
   waittillframeend;
@@ -340,17 +340,17 @@ fadeoutblackout(var_0, var_1, var_2, var_3) {
   wait(var_0);
 }
 
-_id_41A4() {
+first_radiation_dialogue() {
   self endon("death");
 
   for(;;) {
-    maps\_utility::_id_1654("_radiation_poisoning");
+    maps\_utility::ent_flag_wait("_radiation_poisoning");
 
     if(level.script == "scoutsniper" || level.script == "co_scoutsniper") {
-      level thread maps\_utility::_id_1255(maps\_utility::_id_11F4, "scoutsniper_mcm_youdaft");
+      level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_youdaft");
     }
     level notify("radiation_warning");
-    maps\_utility::_id_13DB("_radiation_poisoning");
+    maps\_utility::ent_flag_waitopen("_radiation_poisoning");
     wait 10;
   }
 }

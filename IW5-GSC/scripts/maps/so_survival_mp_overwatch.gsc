@@ -6,18 +6,18 @@
 main() {
   level.wave_table = "sp/so_survival/tier_dlc_1.csv";
   level.loadout_table = "sp/so_survival/tier_dlc_1.csv";
-  _id_061C::_id_3D56("easy", "actor_enemy_so_easy_v2");
+  maps/_so_survival_ai::ai_type_add_override_class("easy", "actor_enemy_so_easy_v2");
   maps\mp\mp_overwatch_precache::main();
   maps\createart\mp_overwatch_art::main();
   maps\mp\mp_overwatch_fx::main();
   maps\createfx\mp_overwatch_fx::main();
-  maps\_so_survival::_id_3F65();
+  maps\_so_survival::survival_preload();
   maps\_load::main();
   ambientplay("ambient_mp_overwatch");
   maps\_utility::set_vision_set("mp_overwatch", 0);
-  maps\_so_survival::_id_3F66();
+  maps\_so_survival::survival_postload();
   maps\_compass::setupminimap("compass_map_mp_overwatch");
-  maps\_so_survival::_id_3F67();
+  maps\_so_survival::survival_init();
   move_up_ac130_by(3000);
 }
 

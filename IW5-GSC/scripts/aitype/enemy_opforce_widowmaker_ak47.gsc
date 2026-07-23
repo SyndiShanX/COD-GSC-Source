@@ -22,7 +22,7 @@ main() {
   }
 
   self.weapon = "ak47";
-  _id_4957::main();
+  character/character_russian_naval_assault::main();
 }
 
 spawner() {
@@ -30,7 +30,7 @@ spawner() {
 }
 
 precache() {
-  _id_4957::precache();
+  character/character_russian_naval_assault::precache();
   precacheitem("ak47");
   precacheitem("glock");
   precacheitem("fraggrenade");

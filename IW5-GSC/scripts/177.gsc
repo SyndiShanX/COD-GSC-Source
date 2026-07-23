@@ -3,23 +3,23 @@
  * Script: scripts\177.gsc
 **************************************/
 
-_id_15B4() {
+whiz_init() {
   setsaveddvar("snd_newWhizby", 1);
-  level._id_1456._id_15B5 = spawnStruct();
-  level._id_1456._id_15B5._id_1458 = 0;
+  level._audio.whiz = spawnStruct();
+  level._audio.whiz.use_string_table_presets = 0;
 }
 
-_id_15B6() {
-  level._id_1456._id_15B5._id_1458 = 1;
+whiz_use_string_table() {
+  level._audio.whiz.use_string_table_presets = 1;
 }
 
-_id_15B7(var_0) {
+whiz_set_preset(var_0) {
   var_1 = [];
 
-  if(level._id_1456._id_15B5._id_1458) {
-    var_1 = _id_15BD(var_0);
+  if(level._audio.whiz.use_string_table_presets) {
+    var_1 = whizx_get_stringtable_preset(var_0);
   } else {
-    var_1 = maps\_audio::_id_15B8(var_0, var_1);
+    var_1 = maps\_audio::audio_presets_whizby(var_0, var_1);
   }
   var_1["name"] = var_0;
   var_2 = var_1["probability"];
@@ -32,30 +32,30 @@ _id_15B7(var_0) {
   level.player setwhizbyoffset(var_5);
 }
 
-_id_15B9(var_0, var_1, var_2) {
+whiz_set_probabilities(var_0, var_1, var_2) {
   level.player setwhizbyprobabilities(var_0, var_1, var_2);
 }
 
-_id_15BA(var_0, var_1, var_2) {
+whiz_set_spreads(var_0, var_1, var_2) {
   level.player setwhizbyspreads(var_0, var_1, var_2);
 }
 
-_id_15BB(var_0, var_1, var_2) {
+whiz_set_radii(var_0, var_1, var_2) {
   level.player setwhizbyradii(var_0, var_1, var_2);
 }
 
-_id_15BC(var_0) {
+whiz_set_offset(var_0) {
   level.player setwhizbyoffset(var_0);
 }
 
-_id_15BD(var_0) {
+whizx_get_stringtable_preset(var_0) {
   var_1 = "soundtables/common_whizby.csv";
   var_2 = [];
-  var_2 = _id_15BE(var_1, var_0);
+  var_2 = whizx_get_mix_preset_from_stringtable_internal(var_1, var_0);
   return var_2;
 }
 
-_id_15BE(var_0, var_1) {
+whizx_get_mix_preset_from_stringtable_internal(var_0, var_1) {
   var_2 = [];
   var_3 = "";
   var_4 = "";

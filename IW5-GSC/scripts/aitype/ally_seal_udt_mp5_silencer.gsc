@@ -25,10 +25,10 @@ main() {
 
   switch (codescripts\character::get_random_character(2)) {
     case 0:
-      _id_4958::main();
+      character/character_seal_udt_assault_a::main();
       break;
     case 1:
-      _id_4959::main();
+      character/character_seal_udt_smg::main();
       break;
   }
 }
@@ -38,8 +38,8 @@ spawner() {
 }
 
 precache() {
-  _id_4958::precache();
-  _id_4959::precache();
+  character/character_seal_udt_assault_a::precache();
+  character/character_seal_udt_smg::precache();
   precacheitem("mp5_silencer");
   precacheitem("usp_silencer");
   precacheitem("fraggrenade");

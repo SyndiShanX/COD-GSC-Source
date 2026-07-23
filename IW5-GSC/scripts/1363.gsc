@@ -4,10 +4,10 @@
 **************************************/
 
 main(var_0, var_1, var_2, var_3, var_4, var_5) {
-  level thread _id_410B(var_0, var_1, var_2, var_3, var_4, var_5);
+  level thread internalmain(var_0, var_1, var_2, var_3, var_4, var_5);
 }
 
-_id_410B(var_0, var_1, var_2, var_3, var_4, var_5) {
+internalmain(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(var_0)) {
     var_0 = 12;
   } else if(var_0 < 7) {
@@ -45,7 +45,7 @@ _id_410B(var_0, var_1, var_2, var_3, var_4, var_5) {
     level.player shellshock(var_6, var_0);
 
     if(!isDefined(var_4)) {
-      level.player thread _id_410C(var_0);
+      level.player thread playerhitable(var_0);
     }
     wait 1.5;
     level.player allowstand(1);
@@ -53,12 +53,12 @@ _id_410B(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 }
 
-_id_410C(var_0) {
-  self._id_1C53 = 1;
+playerhitable(var_0) {
+  self.shellshocked = 1;
   self.ignoreme = 1;
   self notify("player is shell shocked");
   self endon("player is shell shocked");
   wait(var_0 - 1);
-  self._id_1C53 = 0;
+  self.shellshocked = 0;
   self.ignoreme = 0;
 }

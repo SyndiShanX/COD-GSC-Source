@@ -3,14 +3,14 @@
  * Script: scripts\maps\payback_sandstorm_code.gsc
 ***************************************************/
 
-_id_6485() {
-  if(!isDefined(level._id_6485)) {
-    level._id_6485 = 0;
+debug_no_heroes() {
+  if(!isDefined(level.debug_no_heroes)) {
+    level.debug_no_heroes = 0;
   }
-  return level._id_6485;
+  return level.debug_no_heroes;
 }
 
-_id_5C02() {
+sandstorm_skybox_hide() {
   var_0 = getEntArray("sandstorm_sky", "targetname");
 
   foreach(var_2 in var_0) {}
@@ -22,7 +22,7 @@ _id_5C02() {
   var_2 show();
 }
 
-_id_5C03() {
+sandstorm_skybox_show() {
   var_0 = getEntArray("sandstorm_sky", "targetname");
 
   foreach(var_2 in var_0) {}
@@ -34,7 +34,7 @@ _id_5C03() {
   var_2 hide();
 }
 
-_id_6486(var_0, var_1, var_2) {
+set_sandstorm_level(var_0, var_1, var_2) {
   if(isDefined(level._id_6487) && level._id_6487) {
     return;
   }
@@ -50,7 +50,7 @@ _id_6486(var_0, var_1, var_2) {
     case "medium":
       _id_5698::_id_567D(var_1);
       wait 5;
-      maps\payback_util::_id_6488(3);
+      maps\payback_util::sandstorm_fx(3);
       break;
     case "hard":
       _id_5698::_id_567E(var_1);
@@ -64,7 +64,7 @@ _id_6486(var_0, var_1, var_2) {
       } else {
         _id_5698::_id_567F(var_1);
       }
-      maps\payback_util::_id_6488(0);
+      maps\payback_util::sandstorm_fx(0);
       setsaveddvar("r_fog_depthhack_scale", 0.5);
       break;
     case "aftermath":
@@ -76,17 +76,17 @@ _id_6486(var_0, var_1, var_2) {
   }
 }
 
-_id_6489() {
+handle_vehicle_lights() {
   self endon("sandstorm_vehicle_delete");
-  maps\_vehicle::_id_2B17();
+  maps\_vehicle::vehicle_lights_on();
   self waittill("death");
-  maps\_vehicle::_id_2B18("all");
+  maps\_vehicle::vehicle_lights_off("all");
 }
 
-_id_5387(var_0) {
+attachflashlight(var_0) {
   var_1 = "TAG_INHAND";
-  self._id_5386 = spawn("script_model", self.origin);
-  var_2 = self._id_5386;
+  self.flashlight = spawn("script_model", self.origin);
+  var_2 = self.flashlight;
   var_2.owner = self;
   var_2.origin = self gettagorigin(var_1);
   var_2.angles = self gettagangles(var_1);
@@ -95,13 +95,13 @@ _id_5387(var_0) {
   var_3 = "tag_light";
   var_4 = level._effect["lights_flashlight_sandstorm"];
   playFXOnTag(var_4, var_2, var_3);
-  thread _id_538A(var_0, var_4, var_2, var_3);
+  thread remove_flashlight_on_alert(var_0, var_4, var_2, var_3);
   common_scripts\utility::waittill_any("death", "remove_flashlight");
   wait 0.1;
   var_2 delete();
 }
 
-_id_538A(var_0, var_1, var_2, var_3) {
+remove_flashlight_on_alert(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("remove_flashlight");
 
@@ -114,24 +114,24 @@ _id_538A(var_0, var_1, var_2, var_3) {
   }
 }
 
-_id_648A() {
+flashlight_on_guy() {
   if(isDefined(self)) {
-    self._id_648B = "tag_weapon_right";
-    self._id_648C = level._effect["lights_flashlight_sandstorm_offset"];
-    playFXOnTag(self._id_648C, self, self._id_648B);
-    thread _id_648E();
+    self.flashlight_tag = "tag_weapon_right";
+    self.flashlight_effect = level._effect["lights_flashlight_sandstorm_offset"];
+    playFXOnTag(self.flashlight_effect, self, self.flashlight_tag);
+    thread flashlight_off_on_death();
   }
 }
 
-_id_648D() {
-  if(isDefined(self) && isDefined(self._id_648B) && isDefined(self._id_648C)) {
-    stopFXOnTag(self._id_648C, self, self._id_648B);
-    self._id_648C = undefined;
-    self._id_648B = undefined;
+flashlight_off_guy() {
+  if(isDefined(self) && isDefined(self.flashlight_tag) && isDefined(self.flashlight_effect)) {
+    stopFXOnTag(self.flashlight_effect, self, self.flashlight_tag);
+    self.flashlight_effect = undefined;
+    self.flashlight_tag = undefined;
   }
 }
 
-_id_648E() {
+flashlight_off_on_death() {
   self notify("flashlight_off_on_death");
   self endon("flashlight_off_on_death");
   common_scripts\utility::waittill_any("death", "flashlight_off_delayed");
@@ -141,5 +141,5 @@ _id_648E() {
   } else {
     wait 0.75;
   }
-  _id_648D();
+  flashlight_off_guy();
 }

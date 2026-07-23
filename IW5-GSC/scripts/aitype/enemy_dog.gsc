@@ -22,7 +22,7 @@ main() {
   }
 
   self.weapon = "dog_bite";
-  _id_060E::main();
+  character/character_sp_german_sheperd_dog::main();
 }
 
 spawner() {
@@ -30,9 +30,9 @@ spawner() {
 }
 
 precache() {
-  _id_060E::precache();
+  character/character_sp_german_sheperd_dog::precache();
   precacheitem("dog_bite");
   precacheitem("dog_bite");
   precacheitem("fraggrenade");
-  animscripts\dog\dog_init::_id_3AF2();
+  animscripts\dog\dog_init::initdoganimations();
 }

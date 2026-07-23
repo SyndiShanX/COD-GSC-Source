@@ -3,17 +3,17 @@
  * Script: scripts\104.gsc
 **************************************/
 
-_id_1477() {
-  level._id_1456._id_1478 = spawnStruct();
-  level._id_1456._id_1478._id_1479 = spawnStruct();
-  level._id_1456._id_1478._id_1479._id_147A = _id_148A();
-  level._id_1456._id_1478._id_1479.prev = _id_148A();
-  level._id_1456._id_1478._id_147C = spawnStruct();
-  level._id_1456._id_1478._id_147C._id_147A = _id_148A();
-  level._id_1456._id_1478._id_147C.prev = _id_148A();
+sm_init() {
+  level._audio.stream = spawnStruct();
+  level._audio.stream.music = spawnStruct();
+  level._audio.stream.music.curr = smx_create_struct();
+  level._audio.stream.music.prev = smx_create_struct();
+  level._audio.stream.ambience = spawnStruct();
+  level._audio.stream.ambience.curr = smx_create_struct();
+  level._audio.stream.ambience.prev = smx_create_struct();
 }
 
-_id_147D(var_0, var_1, var_2, var_3, var_4) {
+sm_start_preset(var_0, var_1, var_2, var_3, var_4) {
   var_5 = 1.0;
 
   if(isDefined(var_1)) {
@@ -24,12 +24,12 @@ _id_147D(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_4)) {
     var_6 = max(var_4, 0);
   }
-  _id_1489(level._id_1456._id_1478._id_147C.prev, level._id_1456._id_1478._id_147C._id_147A.name, level._id_1456._id_1478._id_147C._id_147A._id_147F, level._id_1456._id_1478._id_147C._id_147A._id_147E);
-  _id_1489(level._id_1456._id_1478._id_147C._id_147A, var_0, var_6, var_5);
+  smx_set_values_for_struct(level._audio.stream.ambience.prev, level._audio.stream.ambience.curr.name, level._audio.stream.ambience.curr.vol, level._audio.stream.ambience.curr.fade);
+  smx_set_values_for_struct(level._audio.stream.ambience.curr, var_0, var_6, var_5);
   ambientplay(var_0, var_5, var_6);
 }
 
-_id_1480(var_0, var_1, var_2, var_3, var_4) {
+sm_start_music(var_0, var_1, var_2, var_3, var_4) {
   var_5 = 1.0;
 
   if(isDefined(var_1)) {
@@ -45,8 +45,8 @@ _id_1480(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_3)) {
     var_7 = max(var_3, 0);
   }
-  _id_1489(level._id_1456._id_1478._id_1479.prev, level._id_1456._id_1478._id_1479._id_147A.name, level._id_1456._id_1478._id_1479._id_147A._id_147F, level._id_1456._id_1478._id_1479._id_147A._id_147E);
-  _id_1489(level._id_1456._id_1478._id_1479._id_147A, var_0, var_7, var_5);
+  smx_set_values_for_struct(level._audio.stream.music.prev, level._audio.stream.music.curr.name, level._audio.stream.music.curr.vol, level._audio.stream.music.curr.fade);
+  smx_set_values_for_struct(level._audio.stream.music.curr, var_0, var_7, var_5);
 
   if(isDefined(var_4)) {
     musicstop(var_6, var_4);
@@ -56,39 +56,39 @@ _id_1480(var_0, var_1, var_2, var_3, var_4) {
   }
 }
 
-_id_1481(var_0, var_1) {
+sm_stop_ambient_alias(var_0, var_1) {
   if(var_0 != "none") {
     var_2 = 1.0;
 
     if(isDefined(var_1)) {
       var_2 = max(var_1, 0);
     }
-    if(level._id_1456._id_1478._id_147C._id_147A.name == var_0) {
-      level._id_1456._id_1478._id_147C._id_147A = level._id_1456._id_1478._id_147C.prev;
-      _id_148B(level._id_1456._id_1478._id_147C.prev);
-    } else if(level._id_1456._id_1478._id_147C.prev.name == var_0) {
-      _id_148B(level._id_1456._id_1478._id_147C.prev);
+    if(level._audio.stream.ambience.curr.name == var_0) {
+      level._audio.stream.ambience.curr = level._audio.stream.ambience.prev;
+      smx_clear_struct(level._audio.stream.ambience.prev);
+    } else if(level._audio.stream.ambience.prev.name == var_0) {
+      smx_clear_struct(level._audio.stream.ambience.prev);
     }
     ambientstop(var_2, var_0);
   }
 }
 
-_id_1482(var_0, var_1) {
+sm_stop_music_alias(var_0, var_1) {
   var_2 = 1.0;
 
   if(isDefined(var_1)) {
     var_2 = max(var_1, 0);
   }
-  if(level._id_1456._id_1478._id_1479._id_147A.name == var_0) {
-    level._id_1456._id_1478._id_1479._id_147A = level._id_1456._id_1478._id_1479.prev;
-    _id_148B(level._id_1456._id_1478._id_1479.prev);
-  } else if(level._id_1456._id_1478._id_147C.prev.name == var_0) {
-    _id_148B(level._id_1456._id_1478._id_1479.prev);
+  if(level._audio.stream.music.curr.name == var_0) {
+    level._audio.stream.music.curr = level._audio.stream.music.prev;
+    smx_clear_struct(level._audio.stream.music.prev);
+  } else if(level._audio.stream.ambience.prev.name == var_0) {
+    smx_clear_struct(level._audio.stream.music.prev);
   }
   musicstop(var_2, var_0);
 }
 
-_id_1483(var_0) {
+sm_stop_ambience(var_0) {
   var_1 = 1.0;
 
   if(isDefined(var_0)) {
@@ -97,31 +97,31 @@ _id_1483(var_0) {
   ambientstop(var_1);
 }
 
-_id_1484(var_0) {
+sm_stop_music(var_0) {
   var_1 = 1.0;
 
   if(isDefined(var_0)) {
     var_1 = var_0;
   }
-  _id_148B(level._id_1456._id_1478._id_1479._id_147A);
-  _id_148B(level._id_1456._id_1478._id_1479.prev);
+  smx_clear_struct(level._audio.stream.music.curr);
+  smx_clear_struct(level._audio.stream.music.prev);
   musicstop(var_1);
 }
 
-_id_1485(var_0) {
+sm_mix_ambience(var_0) {
   var_1 = 0.009;
 
   if(var_0.size == 1) {
-    _id_1489(level._id_1456._id_1478._id_147C._id_147A, var_0[0]._id_1486, var_0[0]._id_147F, var_0[0]._id_147E);
+    smx_set_values_for_struct(level._audio.stream.ambience.curr, var_0[0].alias, var_0[0].vol, var_0[0].fade);
   } else if(var_0.size == 2) {
-    _id_1489(level._id_1456._id_1478._id_147C.prev, var_0[0]._id_1486, var_0[0]._id_147F, var_0[0]._id_147E);
-    _id_1489(level._id_1456._id_1478._id_147C._id_147A, var_0[1]._id_1486, var_0[1]._id_147F, var_0[1]._id_147E);
+    smx_set_values_for_struct(level._audio.stream.ambience.prev, var_0[0].alias, var_0[0].vol, var_0[0].fade);
+    smx_set_values_for_struct(level._audio.stream.ambience.curr, var_0[1].alias, var_0[1].vol, var_0[1].fade);
   }
 
   for(var_6 = 0; var_6 < var_0.size; var_6++) {
-    var_7 = var_0[var_6]._id_1486;
-    var_8 = max(var_0[var_6]._id_147F, 0);
-    var_9 = clamp(var_0[var_6]._id_147E, 0, 1);
+    var_7 = var_0[var_6].alias;
+    var_8 = max(var_0[var_6].vol, 0);
+    var_9 = clamp(var_0[var_6].fade, 0, 1);
 
     if(var_7 != "none") {
       if(var_8 < var_1) {
@@ -134,30 +134,30 @@ _id_1485(var_0) {
   }
 }
 
-_id_1487() {
-  return level._id_1456._id_1478._id_147C._id_147A.name;
+sm_get_current_ambience_name() {
+  return level._audio.stream.ambience.curr.name;
 }
 
-_id_1488() {
-  return level._id_1456._id_1478._id_1479._id_147A.name;
+sm_get_current_music_name() {
+  return level._audio.stream.music.curr.name;
 }
 
-_id_1489(var_0, var_1, var_2, var_3) {
+smx_set_values_for_struct(var_0, var_1, var_2, var_3) {
   var_0.name = var_1;
-  var_0._id_147F = var_2;
-  var_0._id_147E = var_3;
+  var_0.vol = var_2;
+  var_0.fade = var_3;
 }
 
-_id_148A() {
+smx_create_struct() {
   var_0 = spawnStruct();
   var_0.name = "";
-  var_0._id_147F = 0.0;
-  var_0._id_147E = 0.0;
+  var_0.vol = 0.0;
+  var_0.fade = 0.0;
   return var_0;
 }
 
-_id_148B(var_0) {
+smx_clear_struct(var_0) {
   var_0.name = "";
-  var_0._id_147F = 0.0;
-  var_0._id_147E = 0.0;
+  var_0.vol = 0.0;
+  var_0.fade = 0.0;
 }

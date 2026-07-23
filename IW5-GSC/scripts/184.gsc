@@ -4,10 +4,10 @@
 **************************************/
 
 main() {
-  thread _id_18A8();
+  thread setdeadquote();
 }
 
-_id_18A8() {
+setdeadquote() {
   level endon("mine death");
   level notify("new_quote_string");
   level endon("new_quote_string");
@@ -15,7 +15,7 @@ _id_18A8() {
   if(isalive(level.player)) {
     level.player waittill("death");
   }
-  if(!level._id_16C9) {
+  if(!level.missionfailed) {
     var_0 = int(tablelookup("sp/deathQuoteTable.csv", 1, "size", 0));
     var_1 = randomint(var_0);
 
@@ -24,7 +24,7 @@ _id_18A8() {
         setDvar("ui_deadquote_index", "0");
       }
       var_1 = getdvarint("ui_deadquote_index");
-      setDvar("ui_deadquote", _id_18A9(var_1));
+      setDvar("ui_deadquote", lookupdeathquote(var_1));
       var_1++;
 
       if(var_1 > var_0 - 1) {
@@ -32,12 +32,12 @@ _id_18A8() {
       }
       setDvar("ui_deadquote_index", var_1);
     } else {
-      setDvar("ui_deadquote", _id_18A9(var_1));
+      setDvar("ui_deadquote", lookupdeathquote(var_1));
     }
   }
 }
 
-_id_18A9(var_0) {
+lookupdeathquote(var_0) {
   var_1 = tablelookup("sp/deathQuoteTable.csv", 0, var_0, 1);
 
   if(tolower(var_1[0]) != tolower("@")) {
@@ -46,19 +46,19 @@ _id_18A9(var_0) {
   return var_1;
 }
 
-_id_18AA() {
+setdeadquote_so() {
   level notify("new_quote_string");
   var_0 = [];
-  var_0 = _id_18AD();
-  var_0 = maps\_utility::_id_0B53(var_0);
+  var_0 = so_builddeadquote();
+  var_0 = maps\_utility::array_randomize(var_0);
   var_1 = randomint(var_0.size);
 
-  if(!maps\_utility::_id_18AB()) {
+  if(!maps\_utility::is_coop_online()) {
     var_2 = var_0.size > 1;
     var_3 = var_1;
 
     while(var_2) {
-      if(_id_18AC(var_0[var_1])) {
+      if(deadquote_recently_used(var_0[var_1])) {
         var_1++;
 
         if(var_1 >= var_0.size) {
@@ -80,30 +80,30 @@ _id_18AA() {
 
   switch (var_0[var_1]) {
     case "@DEADQUOTE_SO_ICON_PARTNER":
-      maps\_specialops_code::_id_17ED("ui_icon_partner");
+      maps\_specialops_code::so_special_failure_hint_reset_dvars("ui_icon_partner");
       break;
     case "@DEADQUOTE_SO_ICON_OBJ":
-      maps\_specialops_code::_id_17ED("ui_icon_obj");
+      maps\_specialops_code::so_special_failure_hint_reset_dvars("ui_icon_obj");
       break;
     case "@DEADQUOTE_SO_ICON_OBJ_OFFSCREEN":
-      maps\_specialops_code::_id_17ED("ui_icon_obj_offscreen");
+      maps\_specialops_code::so_special_failure_hint_reset_dvars("ui_icon_obj_offscreen");
       break;
     case "@DEADQUOTE_SO_STAR_RANKINGS":
-      maps\_specialops_code::_id_17ED("ui_icon_stars");
+      maps\_specialops_code::so_special_failure_hint_reset_dvars("ui_icon_stars");
       break;
     case "@DEADQUOTE_SO_CLAYMORE_ENEMIES_SHOOT":
     case "@DEADQUOTE_SO_CLAYMORE_POINT_ENEMY":
-      maps\_specialops_code::_id_17ED("ui_icon_claymore");
+      maps\_specialops_code::so_special_failure_hint_reset_dvars("ui_icon_claymore");
       break;
     case "@DEADQUOTE_SO_STEALTH_STAY_LOW":
-      maps\_specialops_code::_id_17ED("ui_icon_stealth_stance");
+      maps\_specialops_code::so_special_failure_hint_reset_dvars("ui_icon_stealth_stance");
       break;
   }
 
   setDvar("ui_deadquote", var_0[var_1]);
 }
 
-_id_18AC(var_0) {
+deadquote_recently_used(var_0) {
   if(var_0 == getDvar("ui_deadquote_v1")) {
     return 1;
   }
@@ -116,9 +116,9 @@ _id_18AC(var_0) {
   return 0;
 }
 
-_id_18AD() {
-  if(_id_18AE()) {
-    return level._id_1840;
+so_builddeadquote() {
+  if(should_use_custom_deadquotes()) {
+    return level.so_deadquotes;
   }
   var_0 = [];
   var_0[var_0.size] = "@DEADQUOTE_SO_TOGGLE_WEAP_ALT_MODE";
@@ -126,7 +126,7 @@ _id_18AD() {
   var_0[var_0.size] = "@DEADQUOTE_SO_THROW_FLASHBANG";
   var_0[var_0.size] = "@DEADQUOTE_SO_GRENADES_ROLL";
 
-  if(!maps\_utility::_id_12DC()) {
+  if(!maps\_utility::is_survival()) {
     var_0[var_0.size] = "@DEADQUOTE_SO_TRY_NEW_DIFFICULTY";
     var_0[var_0.size] = "@DEADQUOTE_SO_BEAT_BEST_TIME";
     var_0[var_0.size] = "@DEADQUOTE_SO_SEARCH_FOR_WEAPONS";
@@ -147,10 +147,10 @@ _id_18AD() {
     var_0[var_0.size] = "@DEADQUOTE_SO_SURVIVAL_KILL_CHEMICAL_ENEMIES";
   }
 
-  if(isDefined(self._id_1862) && self._id_1862 != "none") {
+  if(isDefined(self.so_infohud_toggle_state) && self.so_infohud_toggle_state != "none") {
     var_0[var_0.size] = "@DEADQUOTE_SO_TOGGLE_TIMER";
   }
-  if(maps\_utility::_id_12C1()) {
+  if(maps\_utility::is_coop()) {
     var_0[var_0.size] = "@DEADQUOTE_SO_CRAWL_TO_TEAMMATE";
     var_0[var_0.size] = "@DEADQUOTE_SO_STAY_NEAR_TEAMMATE";
     var_0[var_0.size] = "@DEADQUOTE_SO_FRIENDLY_FIRE_HINT";
@@ -160,12 +160,12 @@ _id_18AD() {
   return var_0;
 }
 
-_id_18AE() {
-  if(!isDefined(level._id_1840)) {
+should_use_custom_deadquotes() {
+  if(!isDefined(level.so_deadquotes)) {
     return 0;
   }
-  if(level._id_1840.size <= 0) {
+  if(level.so_deadquotes.size <= 0) {
     return 0;
   }
-  return level._id_17E0 >= randomfloat(1.0);
+  return level.so_deadquotes_chance >= randomfloat(1.0);
 }

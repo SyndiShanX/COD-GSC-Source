@@ -7,7 +7,7 @@ main() {
   if(!isDefined(level.global_fx)) {
     level.global_fx = [];
   }
-  level._id_1BF8 = [];
+  level._global_fx_ents = [];
   var_0 = randomfloatrange(-20, -15);
   global_fx("barrel_fireFX_origin", "global_barrel_fire", "fire/firelp_barrel_pm", var_0, "fire_barrel_small");
   global_fx("ch_streetlight_02_FX_origin", "ch_streetlight_02_FX", "misc/lighthaze", var_0);
@@ -42,7 +42,7 @@ main() {
 
 global_fx(var_0, var_1, var_2, var_3, var_4, var_5) {
   level.global_fx[var_0] = var_1;
-  var_6 = maps\_utility::_id_1BF9(var_0, "targetname");
+  var_6 = maps\_utility::getstructarray_delete(var_0, "targetname");
 
   if(!isDefined(var_6)) {
     return;
@@ -58,10 +58,10 @@ global_fx(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
     var_9 = var_6[var_7].script_noteworthy;
 
-    if(!isDefined(level._id_1BF8[var_9])) {
-      level._id_1BF8[var_9] = [];
+    if(!isDefined(level._global_fx_ents[var_9])) {
+      level._global_fx_ents[var_9] = [];
     }
-    level._id_1BF8[var_9][level._id_1BF8[var_9].size] = var_8;
+    level._global_fx_ents[var_9][level._global_fx_ents[var_9].size] = var_8;
   }
 }
 

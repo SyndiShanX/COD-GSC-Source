@@ -4,72 +4,72 @@
 **************************************/
 
 main() {
-  if(isDefined(self._id_10A5)) {
-    if(isDefined(self._id_10A5["move"])) {
-      [[self._id_10A5["move"]]]();
+  if(isDefined(self.custom_animscript_table)) {
+    if(isDefined(self.custom_animscript_table["move"])) {
+      [[self.custom_animscript_table["move"]]]();
       return;
     }
   }
 
   self endon("killanimscript");
   [[self.defaultexception["move"]]]();
-  _id_10AC();
-  _id_10AE();
-  animscripts\utility::_id_0D15("move");
-  var_0 = _id_10B1();
+  moveinit();
+  getupifprone();
+  animscripts\utility::initialize("move");
+  var_0 = waspreviouslyincover();
 
-  if(var_0 && isDefined(self._id_0F74)) {
-    _id_10D9();
-    _id_10DB();
-  } else if(isDefined(self._id_0AAF) && self._id_0AAF) {
-    _id_10B2(var_0);
-    animscripts\battlechatter::_id_0ABF();
+  if(var_0 && isDefined(self.shufflemove)) {
+    movecovertocover();
+    movecovertocoverfinish();
+  } else if(isDefined(self.battlechatter) && self.battlechatter) {
+    movestartbattlechatter(var_0);
+    animscripts\battlechatter::playbattlechatter();
   }
 
-  thread _id_10BD();
-  thread _id_1090();
-  thread _id_10CB();
-  animscripts\cover_arrival::_id_10A6();
-  self._id_10A7 = undefined;
-  self._id_10A8 = undefined;
-  thread _id_10BC();
-  thread animscripts\cover_arrival::_id_10A9(1);
-  self._id_0FE4 = undefined;
-  self._id_0FD2 = undefined;
-  self._id_0FC8 = undefined;
-  _id_10B3(1);
+  thread stairscheck();
+  thread pathchangecheck();
+  thread animdodgeobstacle();
+  animscripts\cover_arrival::startmovetransition();
+  self.doingreacquirestep = undefined;
+  self.ignorepathchange = undefined;
+  thread startthreadstorunwhilemoving();
+  thread animscripts\cover_arrival::setupapproachnode(1);
+  self.shoot_while_moving_thread = undefined;
+  self.aim_while_moving_thread = undefined;
+  self.runngun = undefined;
+  movemainloop(1);
 }
 
 end_script() {
-  if(isDefined(self._id_108F)) {
-    self.grenadeweapon = self._id_108F;
-    self._id_108F = undefined;
+  if(isDefined(self.oldgrenadeweapon)) {
+    self.grenadeweapon = self.oldgrenadeweapon;
+    self.oldgrenadeweapon = undefined;
   }
 
-  self._id_108B = undefined;
-  self._id_108E = undefined;
-  self._id_10A8 = undefined;
-  self._id_0F74 = undefined;
-  self._id_0F75 = undefined;
-  self._id_0FC8 = undefined;
-  self._id_0FCF = undefined;
-  self._id_0FD1 = undefined;
-  self._id_10AA = undefined;
-  self._id_10AB = undefined;
+  self.teamflashbangimmunity = undefined;
+  self.minindoortime = undefined;
+  self.ignorepathchange = undefined;
+  self.shufflemove = undefined;
+  self.shufflenode = undefined;
+  self.runngun = undefined;
+  self.reactingtobullet = undefined;
+  self.requestreacttobullet = undefined;
+  self.currentdodgeanim = undefined;
+  self.moveloopoverridefunc = undefined;
 }
 
-_id_10AC() {
-  self._id_0FCF = undefined;
-  self._id_0FD1 = undefined;
-  self._id_0FC9 = undefined;
-  self._id_0FF5 = undefined;
-  self._id_0FCB = 0;
-  self._id_10AD = undefined;
+moveinit() {
+  self.reactingtobullet = undefined;
+  self.requestreacttobullet = undefined;
+  self.update_move_anim_type = undefined;
+  self.update_move_front_bias = undefined;
+  self.runngunweight = 0;
+  self.arrivalstartdist = undefined;
 }
 
-_id_10AE() {
-  if(self.a._id_0D26 == "prone") {
-    var_0 = animscripts\utility::_id_10AF("stand");
+getupifprone() {
+  if(self.a.pose == "prone") {
+    var_0 = animscripts\utility::choosepose("stand");
 
     if(var_0 != "prone") {
       self orientmode("face current");
@@ -79,14 +79,14 @@ _id_10AE() {
       if(isDefined(self.grenade)) {
         var_1 = 2;
       }
-      animscripts\cover_prone::_id_10B0(var_0, var_1);
+      animscripts\cover_prone::proneto(var_0, var_1);
       self animmode("none", 0);
       self orientmode("face default");
     }
   }
 }
 
-_id_10B1() {
+waspreviouslyincover() {
   switch (self.prevscript) {
     case "concealment_stand":
     case "concealment_prone":
@@ -106,231 +106,231 @@ _id_10B1() {
   return 0;
 }
 
-_id_10B2(var_0) {
+movestartbattlechatter(var_0) {
   if(self.movemode == "run") {
-    animscripts\battlechatter_ai::_id_0B2A(var_0);
+    animscripts\battlechatter_ai::evaluatemoveevent(var_0);
   }
 }
 
-_id_10B3(var_0) {
-  _id_10B6(var_0);
+movemainloop(var_0) {
+  movemainloopinternal(var_0);
   self notify("abort_reload");
 }
 
-_id_10B4(var_0) {
-  if(var_0 != self._id_10B5) {
-    if(isDefined(self._id_0C88) && isDefined(self._id_0C88[var_0])) {
-      self.a._id_0CA6 = self._id_0C88[var_0];
+changemovemode(var_0) {
+  if(var_0 != self.prevmovemode) {
+    if(isDefined(self.custommoveanimset) && isDefined(self.custommoveanimset[var_0])) {
+      self.a.moveanimset = self.custommoveanimset[var_0];
     } else {
-      self.a._id_0CA6 = anim._id_0C65._id_0C66[var_0];
+      self.a.moveanimset = anim.animsets.move[var_0];
 
       if((self.combatmode == "ambush" || self.combatmode == "ambush_nodes_only") && (isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) > squared(100))) {
-        self._id_0FE0 = 1;
-        animscripts\animset::_id_0CA5();
+        self.sidesteprate = 1;
+        animscripts\animset::set_ambush_sidestep_anims();
       } else {
-        self._id_0FE0 = 1.35;
+        self.sidesteprate = 1.35;
       }
     }
 
-    self._id_10B5 = var_0;
+    self.prevmovemode = var_0;
   }
 }
 
 #using_animtree("generic_human");
 
-_id_10B6(var_0) {
+movemainloopinternal(var_0) {
   self endon("killanimscript");
   self endon("move_interrupt");
   var_1 = self getanimtime(%walk_and_run_loops);
-  self.a._id_1077 = randomint(10000);
-  self._id_10B5 = "none";
-  self._id_10B7 = undefined;
+  self.a.runloopcount = randomint(10000);
+  self.prevmovemode = "none";
+  self.moveloopcleanupfunc = undefined;
 
   for(;;) {
     var_2 = self getanimtime(%walk_and_run_loops);
 
     if(var_2 < var_1) {
-      self.a._id_1077++;
+      self.a.runloopcount++;
     }
     var_1 = var_2;
-    _id_10B4(self.movemode);
-    _id_10B8(self.movemode);
+    changemovemode(self.movemode);
+    movemainloopprocess(self.movemode);
 
-    if(isDefined(self._id_10B7)) {
-      self[[self._id_10B7]]();
-      self._id_10B7 = undefined;
+    if(isDefined(self.moveloopcleanupfunc)) {
+      self[[self.moveloopcleanupfunc]]();
+      self.moveloopcleanupfunc = undefined;
     }
 
     self notify("abort_reload");
   }
 }
 
-_id_10B8(var_0) {
+movemainloopprocess(var_0) {
   self endon("move_loop_restart");
-  animscripts\face::_id_0C44(anim._id_0C3D);
+  animscripts\face::setidlefacedelayed(anim.alertface);
 
-  if(isDefined(self._id_10AB)) {
-    self[[self._id_10AB]]();
-  } else if(animscripts\utility::_id_0CB2()) {
-    animscripts\cqb::_id_1075();
+  if(isDefined(self.moveloopoverridefunc)) {
+    self[[self.moveloopoverridefunc]]();
+  } else if(animscripts\utility::shouldcqb()) {
+    animscripts\cqb::movecqb();
   } else if(var_0 == "run") {
-    animscripts\run::_id_0FB9();
+    animscripts\run::moverun();
   } else {
-    animscripts\walk::_id_107F();
+    animscripts\walk::movewalk();
   }
-  self._id_0FD1 = undefined;
+  self.requestreacttobullet = undefined;
 }
 
-_id_0FDE() {
+mayshootwhilemoving() {
   if(self.weapon == "none") {
     return 0;
   }
   var_0 = weaponclass(self.weapon);
 
-  if(!animscripts\utility::_id_0EE3()) {
+  if(!animscripts\utility::usingriflelikeweapon()) {
     return 0;
   }
   if(animscripts\combat_utility::issniper()) {
-    if(!animscripts\utility::_id_0C98() && self.facemotion) {
+    if(!animscripts\utility::iscqbwalking() && self.facemotion) {
       return 0;
     }
   }
 
-  if(isDefined(self._id_0FF1)) {
+  if(isDefined(self.dontshootwhilemoving)) {
     return 0;
   }
   return 1;
 }
 
-_id_0FE8() {
+shootwhilemoving() {
   self endon("killanimscript");
   self notify("doing_shootWhileMoving");
   self endon("doing_shootWhileMoving");
 
-  if(isDefined(self._id_0C82) && isDefined(self._id_0C82["fire"])) {
-    self.a._id_0C6D["fire"] = self._id_0C82["fire"];
+  if(isDefined(self.combatstandanims) && isDefined(self.combatstandanims["fire"])) {
+    self.a.array["fire"] = self.combatstandanims["fire"];
   } else {
-    self.a._id_0C6D["fire"] = % exposed_shoot_auto_v3;
+    self.a.array["fire"] = % exposed_shoot_auto_v3;
   }
-  if(isDefined(self.weapon) && animscripts\utility::_id_0C97()) {
-    self.a._id_0C6D["single"] = animscripts\utility::_id_0C6D(%shotgun_stand_fire_1a, %shotgun_stand_fire_1b);
+  if(isDefined(self.weapon) && animscripts\utility::weapon_pump_action_shotgun()) {
+    self.a.array["single"] = animscripts\utility::array(%shotgun_stand_fire_1a, %shotgun_stand_fire_1b);
   } else {
-    self.a._id_0C6D["single"] = animscripts\utility::_id_0C6D(%exposed_shoot_semi1);
+    self.a.array["single"] = animscripts\utility::array(%exposed_shoot_semi1);
   }
-  self.a._id_0C6D["burst2"] = % exposed_shoot_burst3;
-  self.a._id_0C6D["burst3"] = % exposed_shoot_burst3;
-  self.a._id_0C6D["burst4"] = % exposed_shoot_burst4;
-  self.a._id_0C6D["burst5"] = % exposed_shoot_burst5;
-  self.a._id_0C6D["burst6"] = % exposed_shoot_burst6;
-  self.a._id_0C6D["semi2"] = % exposed_shoot_semi2;
-  self.a._id_0C6D["semi3"] = % exposed_shoot_semi3;
-  self.a._id_0C6D["semi4"] = % exposed_shoot_semi4;
-  self.a._id_0C6D["semi5"] = % exposed_shoot_semi5;
+  self.a.array["burst2"] = % exposed_shoot_burst3;
+  self.a.array["burst3"] = % exposed_shoot_burst3;
+  self.a.array["burst4"] = % exposed_shoot_burst4;
+  self.a.array["burst5"] = % exposed_shoot_burst5;
+  self.a.array["burst6"] = % exposed_shoot_burst6;
+  self.a.array["semi2"] = % exposed_shoot_semi2;
+  self.a.array["semi3"] = % exposed_shoot_semi3;
+  self.a.array["semi4"] = % exposed_shoot_semi4;
+  self.a.array["semi5"] = % exposed_shoot_semi5;
 
   for(;;) {
-    if(!self._id_0CD1) {
-      if(animscripts\utility::_id_10B9()) {
-        self._id_10BA = 0;
-        animscripts\combat_utility::_id_10BB();
+    if(!self.bulletsinclip) {
+      if(animscripts\utility::iscqbwalkingorfacingenemy()) {
+        self.ammocheattime = 0;
+        animscripts\combat_utility::cheatammoifnecessary();
       }
 
-      if(!self._id_0CD1) {
+      if(!self.bulletsinclip) {
         wait 0.5;
         continue;
       }
     }
 
-    animscripts\combat_utility::_id_0F06();
+    animscripts\combat_utility::shootuntilshootbehaviorchange();
     self clearanim(%exposed_aiming, 0.2);
   }
 }
 
-_id_10BC() {
+startthreadstorunwhilemoving() {
   self endon("killanimscript");
   wait 0.05;
-  thread _id_10D4();
-  thread _id_10D2();
-  thread animscripts\door::_id_1096();
-  thread animscripts\door::_id_1088();
+  thread bulletwhizbycheck_whilemoving();
+  thread meleeattackcheck_whilemoving();
+  thread animscripts\door::indoorcqbtogglecheck();
+  thread animscripts\door::doorenterexitcheck();
 }
 
-_id_10BD() {
+stairscheck() {
   self endon("killanimscript");
-  self._id_10BE = self.stairsstate;
+  self.prevstairsstate = self.stairsstate;
 
   for(;;) {
     wait 0.05;
 
-    if(self._id_10BE != self.stairsstate) {
-      if(!isDefined(self._id_10A8) || self.stairsstate != "none") {
+    if(self.prevstairsstate != self.stairsstate) {
+      if(!isDefined(self.ignorepathchange) || self.stairsstate != "none") {
         self notify("move_loop_restart");
       }
     }
 
-    self._id_10BE = self.stairsstate;
+    self.prevstairsstate = self.stairsstate;
   }
 }
 
-_id_1091(var_0) {
+restartmoveloop(var_0) {
   self endon("killanimscript");
 
   if(!var_0) {
-    animscripts\cover_arrival::_id_10A6();
+    animscripts\cover_arrival::startmovetransition();
   }
-  self._id_10A8 = undefined;
+  self.ignorepathchange = undefined;
   self clearanim(%root, 0.1);
   self orientmode("face default");
   self animmode("none", 0);
   self.requestarrivalnotify = 1;
-  _id_10B3(!var_0);
+  movemainloop(!var_0);
 }
 
-_id_1090() {
+pathchangecheck() {
   self endon("killanimscript");
   self endon("move_interrupt");
-  self._id_10A8 = 1;
+  self.ignorepathchange = 1;
 
   for(;;) {
     self waittill("path_changed", var_0, var_1);
 
-    if(isDefined(self._id_10A8) || isDefined(self._id_10BF)) {
+    if(isDefined(self.ignorepathchange) || isDefined(self.noturnanims)) {
       continue;
     }
     if(!self.facemotion || abs(self getmotionangle()) > 15) {
       continue;
     }
-    if(self.a._id_0D2B != "run" && self.a._id_0D2B != "walk") {
+    if(self.a.movement != "run" && self.a.movement != "walk") {
       continue;
     }
-    if(self.a._id_0D26 != "stand") {
+    if(self.a.pose != "stand") {
       continue;
     }
     self notify("stop_move_anim_update");
-    self._id_0FC9 = undefined;
+    self.update_move_anim_type = undefined;
     var_2 = angleclamp180(self.angles[1] - vectortoyaw(var_1));
-    var_3 = _id_10C2(var_2);
+    var_3 = pathchange_getturnanim(var_2);
 
     if(isDefined(var_3)) {
-      self._id_10C0 = var_3;
-      self._id_10C1 = gettime();
-      self._id_10AB = ::_id_10C5;
+      self.turnanim = var_3;
+      self.turntime = gettime();
+      self.moveloopoverridefunc = ::pathchange_doturnanim;
       self notify("move_loop_restart");
-      animscripts\run::_id_0FE2();
+      animscripts\run::endfaceenemyaimtracking();
     }
   }
 }
 
-_id_10C2(var_0) {
-  if(isDefined(self._id_10C3)) {
-    return [[self._id_10C3]](var_0);
+pathchange_getturnanim(var_0) {
+  if(isDefined(self.pathturnanimoverridefunc)) {
+    return [[self.pathturnanimoverridefunc]](var_0);
   }
   var_1 = undefined;
   var_2 = undefined;
 
-  if(animscripts\utility::_id_0CB2() || self.movemode == "walk") {
-    var_3 = anim._id_0C9F;
+  if(animscripts\utility::shouldcqb() || self.movemode == "walk") {
+    var_3 = anim.cqbturnanims;
   } else {
-    var_3 = anim._id_0C9E;
+    var_3 = anim.runturnanims;
   }
   if(var_0 < -30) {
     if(var_0 > -60) {
@@ -381,13 +381,13 @@ _id_10C2(var_0) {
   }
 
   if(isDefined(var_1)) {
-    if(_id_10C4(var_1)) {
+    if(pathchange_candoturnanim(var_1)) {
       return var_1;
     }
   }
 
   if(isDefined(var_2)) {
-    if(_id_10C4(var_2)) {
+    if(pathchange_candoturnanim(var_2)) {
       return var_2;
     }
   }
@@ -395,7 +395,7 @@ _id_10C2(var_0) {
   return undefined;
 }
 
-_id_10C4(var_0) {
+pathchange_candoturnanim(var_0) {
   if(!isDefined(self.pathgoalpos)) {
     return 0;
   }
@@ -404,7 +404,7 @@ _id_10C4(var_0) {
   var_3 = getmovedelta(var_0, 0, var_2);
   var_4 = self localtoworldcoords(var_3);
 
-  if(isDefined(self._id_10AD) && squared(self._id_10AD) > distancesquared(self.pathgoalpos, var_4)) {
+  if(isDefined(self.arrivalstartdist) && squared(self.arrivalstartdist) > distancesquared(self.pathgoalpos, var_4)) {
     return 0;
   }
   var_3 = getmovedelta(var_0, 0, 1);
@@ -413,69 +413,69 @@ _id_10C4(var_0) {
   return self maymovefrompointtopoint(var_4, var_5, 1, 1);
 }
 
-_id_10C5() {
+pathchange_doturnanim() {
   self endon("killanimscript");
-  self._id_10AB = undefined;
-  var_0 = self._id_10C0;
+  self.moveloopoverridefunc = undefined;
+  var_0 = self.turnanim;
 
-  if(gettime() > self._id_10C1 + 50) {
+  if(gettime() > self.turntime + 50) {
     return;
   }
   self animmode("zonly_physics", 0);
   self clearanim(%body, 0.1);
-  self._id_10B7 = ::_id_10C8;
-  self._id_10A8 = 1;
+  self.moveloopcleanupfunc = ::pathchange_cleanupturnanim;
+  self.ignorepathchange = 1;
   var_1 = 0.05;
 
-  if(isDefined(self._id_10C6)) {
-    var_1 = isDefined(self._id_10C6);
+  if(isDefined(self.pathturnanimblendtime)) {
+    var_1 = isDefined(self.pathturnanimblendtime);
   }
-  self setflaggedanimrestart("turnAnim", var_0, 1, var_1, self._id_0FC6);
+  self setflaggedanimrestart("turnAnim", var_0, 1, var_1, self.moveplaybackrate);
   self orientmode("face current");
-  animscripts\shared::_id_0C51("turnAnim");
-  self._id_10A8 = undefined;
+  animscripts\shared::donotetracks("turnAnim");
+  self.ignorepathchange = undefined;
   self orientmode("face motion");
   self animmode("none", 0);
-  animscripts\shared::_id_0C51("turnAnim");
+  animscripts\shared::donotetracks("turnAnim");
 }
 
-_id_10C7() {
-  self._id_10AB = undefined;
+pathchange_domovetransition() {
+  self.moveloopoverridefunc = undefined;
 
-  if(gettime() > self._id_10C1 + 50) {
+  if(gettime() > self.turntime + 50) {
     return;
   }
-  self._id_10B7 = ::_id_10C8;
-  animscripts\cover_arrival::_id_10A6();
+  self.moveloopcleanupfunc = ::pathchange_cleanupturnanim;
+  animscripts\cover_arrival::startmovetransition();
 }
 
-_id_10C8() {
-  self._id_10A8 = undefined;
+pathchange_cleanupturnanim() {
+  self.ignorepathchange = undefined;
   self orientmode("face default");
   self clearanim(%root, 0.1);
   self animmode("none", 0);
 }
 
-_id_10C9() {
+dodgemoveloopoverride() {
   self pushplayer(1);
   self animmode("zonly_physics", 0);
   self clearanim(%body, 0.2);
-  self setflaggedanimrestart("dodgeAnim", self._id_10AA, 1, 0.2, 1);
-  animscripts\shared::_id_0C51("dodgeAnim");
+  self setflaggedanimrestart("dodgeAnim", self.currentdodgeanim, 1, 0.2, 1);
+  animscripts\shared::donotetracks("dodgeAnim");
   self animmode("none", 0);
   self orientmode("face default");
 
-  if(animhasnotetrack(self._id_10AA, "code_move")) {
-    animscripts\shared::_id_0C51("dodgeAnim");
+  if(animhasnotetrack(self.currentdodgeanim, "code_move")) {
+    animscripts\shared::donotetracks("dodgeAnim");
   }
   self clearanim(%civilian_dodge, 0.2);
   self pushplayer(0);
-  self._id_10AA = undefined;
-  self._id_10AB = undefined;
+  self.currentdodgeanim = undefined;
+  self.moveloopoverridefunc = undefined;
   return 1;
 }
 
-_id_10CA(var_0, var_1) {
+trydodgewithanim(var_0, var_1) {
   var_2 = (self.lookaheaddir[1], -1 * self.lookaheaddir[0], 0);
   var_3 = self.lookaheaddir * var_1[0];
   var_4 = var_2 * var_1[1];
@@ -483,8 +483,8 @@ _id_10CA(var_0, var_1) {
   self pushplayer(1);
 
   if(self maymovetopoint(var_5)) {
-    self._id_10AA = var_0;
-    self._id_10AB = ::_id_10C9;
+    self.currentdodgeanim = var_0;
+    self.moveloopoverridefunc = ::dodgemoveloopoverride;
     self notify("move_loop_restart");
     return 1;
   }
@@ -493,8 +493,8 @@ _id_10CA(var_0, var_1) {
   return 0;
 }
 
-_id_10CB() {
-  if(!isDefined(self._id_10CC) || !isDefined(self._id_10CD)) {
+animdodgeobstacle() {
+  if(!isDefined(self.dodgeleftanim) || !isDefined(self.dodgerightanim)) {
     return;
   }
   self endon("killanimscript");
@@ -503,7 +503,7 @@ _id_10CB() {
   for(;;) {
     self waittill("path_need_dodge", var_0, var_1);
 
-    if(animscripts\utility::_id_0A69()) {
+    if(animscripts\utility::isincombat()) {
       self.nododgemove = 0;
       return;
     }
@@ -514,14 +514,14 @@ _id_10CB() {
     var_2 = vectorNormalize(var_1 - self.origin);
 
     if(self.lookaheaddir[0] * var_2[1] - var_2[0] * self.lookaheaddir[1] > 0) {
-      if(!_id_10CA(self._id_10CD, self._id_10CE)) {
-        _id_10CA(self._id_10CC, self._id_10CF);
+      if(!trydodgewithanim(self.dodgerightanim, self.dodgerightanimoffset)) {
+        trydodgewithanim(self.dodgeleftanim, self.dodgeleftanimoffset);
       }
-    } else if(!_id_10CA(self._id_10CC, self._id_10CF)) {
-      _id_10CA(self._id_10CD, self._id_10CE);
+    } else if(!trydodgewithanim(self.dodgeleftanim, self.dodgeleftanimoffset)) {
+      trydodgewithanim(self.dodgerightanim, self.dodgerightanimoffset);
     }
-    if(isDefined(self._id_10AA)) {
-      wait(getanimlength(self._id_10AA));
+    if(isDefined(self.currentdodgeanim)) {
+      wait(getanimlength(self.currentdodgeanim));
       continue;
     }
 
@@ -529,40 +529,40 @@ _id_10CB() {
   }
 }
 
-_id_10D0(var_0, var_1) {
+setdodgeanims(var_0, var_1) {
   self.nododgemove = 1;
-  self._id_10CC = var_0;
-  self._id_10CD = var_1;
+  self.dodgeleftanim = var_0;
+  self.dodgerightanim = var_1;
   var_2 = 1;
 
   if(animhasnotetrack(var_0, "code_move")) {
     var_2 = getnotetracktimes(var_0, "code_move")[0];
   }
-  self._id_10CF = getmovedelta(var_0, 0, var_2);
+  self.dodgeleftanimoffset = getmovedelta(var_0, 0, var_2);
   var_2 = 1;
 
   if(animhasnotetrack(var_1, "code_move")) {
     var_2 = getnotetracktimes(var_1, "code_move")[0];
   }
-  self._id_10CE = getmovedelta(var_1, 0, var_2);
+  self.dodgerightanimoffset = getmovedelta(var_1, 0, var_2);
   self.interval = 80;
 }
 
-_id_10D1() {
+cleardodgeanims() {
   self.nododgemove = 0;
-  self._id_10CC = undefined;
-  self._id_10CD = undefined;
-  self._id_10CF = undefined;
-  self._id_10CE = undefined;
+  self.dodgeleftanim = undefined;
+  self.dodgerightanim = undefined;
+  self.dodgeleftanimoffset = undefined;
+  self.dodgerightanimoffset = undefined;
 }
 
-_id_10D2() {
+meleeattackcheck_whilemoving() {
   self endon("killanimscript");
 
   for(;;) {
-    if(isDefined(self.enemy) && (isai(self.enemy) || isDefined(self._id_10D3))) {
+    if(isDefined(self.enemy) && (isai(self.enemy) || isDefined(self.meleeplayerwhilemoving))) {
       if(abs(self getmotionangle()) <= 135) {
-        animscripts\melee::_id_1009();
+        animscripts\melee::melee_tryexecuting();
       }
     }
 
@@ -570,24 +570,24 @@ _id_10D2() {
   }
 }
 
-_id_10D4() {
+bulletwhizbycheck_whilemoving() {
   self endon("killanimscript");
 
-  if(isDefined(self._id_0EEE)) {
+  if(isDefined(self.disablebulletwhizbyreaction)) {
     return;
   }
   for(;;) {
     self waittill("bulletwhizby", var_0);
 
-    if(self.movemode != "run" || !self.facemotion || self.a._id_0D26 != "stand" || isDefined(self._id_0FCF)) {
+    if(self.movemode != "run" || !self.facemotion || self.a.pose != "stand" || isDefined(self.reactingtobullet)) {
       continue;
     }
     if(self.stairsstate != "none") {
       continue;
     }
     if(!isDefined(self.enemy) && !self.ignoreall && isDefined(var_0.team) && isenemyteam(self.team, var_0.team)) {
-      self._id_0F24 = var_0;
-      self animcustom(animscripts\reactions::_id_0F23);
+      self.whizbyenemy = var_0;
+      self animcustom(animscripts\reactions::bulletwhizbyreaction);
       continue;
     }
 
@@ -599,13 +599,13 @@ _id_10D4() {
       continue;
     }
 
-    self._id_0FD1 = gettime();
+    self.requestreacttobullet = gettime();
     self notify("move_loop_restart");
-    animscripts\run::_id_0FE2();
+    animscripts\run::endfaceenemyaimtracking();
   }
 }
 
-_id_10D5(var_0, var_1) {
+get_shuffle_to_corner_start_anim(var_0, var_1) {
   if(var_1.type == "Cover Left") {
     return % cornercrl_alert_2_shuffle;
   } else if(var_1.type == "Cover Right") {
@@ -617,15 +617,15 @@ _id_10D5(var_0, var_1) {
   }
 }
 
-_id_10D6(var_0, var_1, var_2) {
+setup_shuffle_anim_array(var_0, var_1, var_2) {
   var_3 = [];
 
   if(var_2.type == "Cover Left") {
-    var_3["shuffle_start"] = _id_10D5(var_0, var_1);
+    var_3["shuffle_start"] = get_shuffle_to_corner_start_anim(var_0, var_1);
     var_3["shuffle"] = % covercrouch_shufflel;
     var_3["shuffle_end"] = % cornercrl_shuffle_2_alert;
   } else if(var_2.type == "Cover Right") {
-    var_3["shuffle_start"] = _id_10D5(var_0, var_1);
+    var_3["shuffle_start"] = get_shuffle_to_corner_start_anim(var_0, var_1);
     var_3["shuffle"] = % covercrouch_shuffler;
     var_3["shuffle_end"] = % cornercrr_shuffle_2_alert;
   } else if(var_2.type == "Cover Stand" && var_1.type == var_2.type) {
@@ -639,7 +639,7 @@ _id_10D6(var_0, var_1, var_2) {
       var_3["shuffle_end"] = % coverstand_shuffler_2_hide;
     }
   } else if(var_0) {
-    var_3["shuffle_start"] = _id_10D5(var_0, var_1);
+    var_3["shuffle_start"] = get_shuffle_to_corner_start_anim(var_0, var_1);
     var_3["shuffle"] = % covercrouch_shufflel;
 
     if(var_2.type == "Cover Stand") {
@@ -648,7 +648,7 @@ _id_10D6(var_0, var_1, var_2) {
       var_3["shuffle_end"] = % covercrouch_shufflel_2_hide;
     }
   } else {
-    var_3["shuffle_start"] = _id_10D5(var_0, var_1);
+    var_3["shuffle_start"] = get_shuffle_to_corner_start_anim(var_0, var_1);
     var_3["shuffle"] = % covercrouch_shuffler;
 
     if(var_2.type == "Cover Stand") {
@@ -658,34 +658,34 @@ _id_10D6(var_0, var_1, var_2) {
     }
   }
 
-  self.a._id_0C6D = var_3;
+  self.a.array = var_3;
 }
 
-_id_10D7(var_0, var_1) {
-  if(self.a._id_0D26 == "stand" && (var_1.type != "Cover Stand" || var_0.type != "Cover Stand")) {
-    self.a._id_0D26 = "crouch";
+movecovertocover_checkstartpose(var_0, var_1) {
+  if(self.a.pose == "stand" && (var_1.type != "Cover Stand" || var_0.type != "Cover Stand")) {
+    self.a.pose = "crouch";
     return 0;
   }
 
   return 1;
 }
 
-_id_10D8(var_0) {
-  if(self.a._id_0D26 == "crouch" && var_0.type == "Cover Stand") {
-    self.a._id_0D26 = "stand";
+movecovertocover_checkendpose(var_0) {
+  if(self.a.pose == "crouch" && var_0.type == "Cover Stand") {
+    self.a.pose = "stand";
     return 0;
   }
 
   return 1;
 }
 
-_id_10D9() {
+movecovertocover() {
   self endon("killanimscript");
   self endon("goal_changed");
-  var_0 = self._id_0F75;
-  self._id_0F74 = undefined;
-  self._id_0F75 = undefined;
-  self._id_10DA = 1;
+  var_0 = self.shufflenode;
+  self.shufflemove = undefined;
+  self.shufflenode = undefined;
+  self.shufflemoveinterrupted = 1;
 
   if(!isDefined(self.prevnode)) {
     return;
@@ -704,20 +704,20 @@ _id_10D9() {
   var_4 = anglesToForward(var_2.angles);
   var_5 = var_4[0] * var_3[1] - var_4[1] * var_3[0] > 0;
 
-  if(_id_10DC(var_5, var_1, var_2)) {
+  if(movedoorsidetoside(var_5, var_1, var_2)) {
     return;
   }
-  if(_id_10D7(var_1, var_2)) {
+  if(movecovertocover_checkstartpose(var_1, var_2)) {
     var_6 = 0.1;
   } else {
     var_6 = 0.4;
   }
-  _id_10D6(var_5, var_1, var_2);
+  setup_shuffle_anim_array(var_5, var_1, var_2);
   self animmode("zonly_physics", 0);
   self clearanim(%body, var_6);
-  var_7 = animscripts\utility::_id_0D4D("shuffle_start");
-  var_8 = animscripts\utility::_id_0D4D("shuffle");
-  var_9 = animscripts\utility::_id_0D4D("shuffle_end");
+  var_7 = animscripts\utility::animarray("shuffle_start");
+  var_8 = animscripts\utility::animarray("shuffle");
+  var_9 = animscripts\utility::animarray("shuffle_end");
 
   if(animhasnotetrack(var_7, "finish")) {
     var_10 = getnotetracktimes(var_7, "finish")[0];
@@ -730,9 +730,9 @@ _id_10D9() {
   var_14 = distance(self.origin, var_2.origin);
 
   if(var_14 > var_11) {
-    self orientmode("face angle", animscripts\utility::_id_0F41(var_1));
+    self orientmode("face angle", animscripts\utility::getnodeforwardyaw(var_1));
     self setflaggedanimrestart("shuffle_start", var_7, 1, var_6);
-    animscripts\shared::_id_0C51("shuffle_start");
+    animscripts\shared::donotetracks("shuffle_start");
     self clearanim(var_7, 0.2);
     var_14 = var_14 - var_11;
     var_6 = 0.2;
@@ -750,7 +750,7 @@ _id_10D9() {
   var_17 = var_16 * (var_14 / var_12) * 0.9;
   var_17 = floor(var_17 * 20) * 0.05;
   self setflaggedanim("shuffle", var_8, 1, var_6);
-  animscripts\notetracks::_id_0D4F(var_17, "shuffle");
+  animscripts\notetracks::donotetracksfortime(var_17, "shuffle");
 
   for(var_18 = 0; var_18 < 2; var_18++) {
     var_14 = distance(self.origin, var_2.origin);
@@ -769,29 +769,29 @@ _id_10D9() {
       break;
     }
 
-    animscripts\notetracks::_id_0D4F(var_17, "shuffle");
+    animscripts\notetracks::donotetracksfortime(var_17, "shuffle");
   }
 
   if(var_15) {
-    if(_id_10D8(var_2)) {
+    if(movecovertocover_checkendpose(var_2)) {
       var_6 = 0.2;
     } else {
       var_6 = 0.4;
     }
     self clearanim(var_8, var_6);
     self setflaggedanim("shuffle_end", var_9, 1, var_6);
-    animscripts\shared::_id_0C51("shuffle_end");
+    animscripts\shared::donotetracks("shuffle_end");
   }
 
   self safeteleport(var_2.origin);
   self animmode("normal");
-  self._id_10DA = undefined;
+  self.shufflemoveinterrupted = undefined;
 }
 
-_id_10DB() {
-  if(isDefined(self._id_10DA)) {
+movecovertocoverfinish() {
+  if(isDefined(self.shufflemoveinterrupted)) {
     self clearanim(%cover_shuffle, 0.2);
-    self._id_10DA = undefined;
+    self.shufflemoveinterrupted = undefined;
     self animmode("none", 0);
     self orientmode("face default");
   } else {
@@ -800,7 +800,7 @@ _id_10DB() {
   }
 }
 
-_id_10DC(var_0, var_1, var_2) {
+movedoorsidetoside(var_0, var_1, var_2) {
   var_3 = undefined;
 
   if(var_1.type == "Cover Right" && var_2.type == "Cover Left" && !var_0) {
@@ -814,7 +814,7 @@ _id_10DC(var_0, var_1, var_2) {
   self animmode("zonly_physics", 0);
   self orientmode("face current");
   self setflaggedanimrestart("sideToSide", var_3, 1, 0.2);
-  animscripts\shared::_id_0C51("sideToSide", ::_id_10DD);
+  animscripts\shared::donotetracks("sideToSide", ::handlesidetosidenotetracks);
   var_4 = self getanimtime(var_3);
   var_5 = var_2.origin - var_1.origin;
   var_5 = vectorNormalize((var_5[0], var_5[1], 0));
@@ -828,25 +828,25 @@ _id_10DC(var_0, var_1, var_2) {
     var_10 = (var_9 - var_4) * getanimlength(var_3);
     var_11 = int(ceil(var_10 / 0.05));
     var_12 = var_5 * var_8 / var_11;
-    thread _id_10DE(var_12, var_11);
+    thread slidefortime(var_12, var_11);
   }
 
-  animscripts\shared::_id_0C51("sideToSide");
+  animscripts\shared::donotetracks("sideToSide");
   self safeteleport(var_2.origin);
   self animmode("none");
   self orientmode("face default");
-  self._id_10DA = undefined;
+  self.shufflemoveinterrupted = undefined;
   wait 0.2;
   return 1;
 }
 
-_id_10DD(var_0) {
+handlesidetosidenotetracks(var_0) {
   if(var_0 == "slide_start") {
     return 1;
   }
 }
 
-_id_10DE(var_0, var_1) {
+slidefortime(var_0, var_1) {
   self endon("killanimscript");
   self endon("goal_changed");
 
@@ -857,18 +857,18 @@ _id_10DE(var_0, var_1) {
   }
 }
 
-_id_0FBE(var_0, var_1) {
+movestandmoveoverride(var_0, var_1) {
   self endon("movemode");
   self clearanim(%combatrun, 0.6);
-  self setanimknoball(%combatrun, %body, 1, 0.5, self._id_0FC6);
+  self setanimknoball(%combatrun, %body, 1, 0.5, self.moveplaybackrate);
 
-  if(isDefined(self._id_0FD1) && gettime() - self._id_0FD1 < 100 && isDefined(self._id_0FD4) && randomfloat(1) < self.a._id_0FDD) {
-    animscripts\run::_id_0FD3();
+  if(isDefined(self.requestreacttobullet) && gettime() - self.requestreacttobullet < 100 && isDefined(self.run_overridebulletreact) && randomfloat(1) < self.a.reacttobulletchance) {
+    animscripts\run::customrunningreacttobullets();
     return;
   }
 
   if(isarray(var_0)) {
-    if(isDefined(self._id_0FBD)) {
+    if(isDefined(self.run_override_weights)) {
       var_2 = common_scripts\utility::choose_from_weighted_array(var_0, var_1);
     } else {
       var_2 = var_0[randomint(var_0.size)];
@@ -877,5 +877,5 @@ _id_0FBE(var_0, var_1) {
     var_2 = var_0;
   }
   self setflaggedanimknob("moveanim", var_2, 1, 0.2);
-  animscripts\shared::_id_0C51("moveanim");
+  animscripts\shared::donotetracks("moveanim");
 }

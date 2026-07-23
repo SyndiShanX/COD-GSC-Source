@@ -3,20 +3,20 @@
  * Script: scripts\1560.gsc
 **************************************/
 
-_id_3E0E() {
-  level._id_11BB["inv_hqr_fivenotenkills"] = "inv_hqr_fivenotenkills";
-  level._id_11BB["inv_hqr_tenmoreconfirms"] = "inv_hqr_tenmoreconfirms";
-  level._id_11BB["inv_hqr_tenpluskia"] = "inv_hqr_tenpluskia";
-  level._id_11BB["inv_hqr_fiveplus"] = "inv_hqr_fiveplus";
-  level._id_11BB["inv_hqr_another5plus"] = "inv_hqr_another5plus";
-  level._id_11BB["inv_hqr_morethanfive"] = "inv_hqr_morethanfive";
-  level._id_11BB["inv_hqr_yougotem"] = "inv_hqr_yougotem";
-  level._id_11BB["inv_hqr_goodkills"] = "inv_hqr_goodkills";
-  level._id_11BB["inv_hqr_directhit"] = "inv_hqr_directhit";
-  level._id_11BB["inv_hqr_hesdown"] = "inv_hqr_hesdown";
+remotemissile_infantry_kills_dialogue_setup() {
+  level.scr_radio["inv_hqr_fivenotenkills"] = "inv_hqr_fivenotenkills";
+  level.scr_radio["inv_hqr_tenmoreconfirms"] = "inv_hqr_tenmoreconfirms";
+  level.scr_radio["inv_hqr_tenpluskia"] = "inv_hqr_tenpluskia";
+  level.scr_radio["inv_hqr_fiveplus"] = "inv_hqr_fiveplus";
+  level.scr_radio["inv_hqr_another5plus"] = "inv_hqr_another5plus";
+  level.scr_radio["inv_hqr_morethanfive"] = "inv_hqr_morethanfive";
+  level.scr_radio["inv_hqr_yougotem"] = "inv_hqr_yougotem";
+  level.scr_radio["inv_hqr_goodkills"] = "inv_hqr_goodkills";
+  level.scr_radio["inv_hqr_directhit"] = "inv_hqr_directhit";
+  level.scr_radio["inv_hqr_hesdown"] = "inv_hqr_hesdown";
 }
 
-_id_3E0F() {
+remotemissile_infantry_kills_dialogue() {
   var_0 = [];
   var_0[var_0.size] = "inv_hqr_tenpluskia";
   var_0[var_0.size] = "inv_hqr_tenmoreconfirms";
@@ -29,31 +29,31 @@ _id_3E0F() {
   var_3 = 0;
   var_4 = 0;
   var_5 = 0;
-  level._id_3E10 = 0;
+  level.enemies_killed = 0;
   var_6 = 0;
 
   for(;;) {
     level waittill("remote_missile_exploded");
-    var_7 = level._id_3E10;
+    var_7 = level.enemies_killed;
     wait 0.1;
 
-    if(isDefined(level._id_3BF5["ai"])) {
-      var_6 = level._id_3BF5["ai"];
+    if(isDefined(level.uav_killstats["ai"])) {
+      var_6 = level.uav_killstats["ai"];
     }
     if(var_6 == 0) {
       continue;
     }
     wait 0.5;
 
-    if(isDefined(level._id_3BDD)) {
+    if(isDefined(level.uav_is_destroyed)) {
       return;
     }
     if(var_6 == 1) {
       if(var_4) {
-        maps\_utility::_id_11F4("inv_hqr_yougotem");
+        maps\_utility::radio_dialogue("inv_hqr_yougotem");
         var_4 = 0;
       } else {
-        maps\_utility::_id_11F4("inv_hqr_hesdown");
+        maps\_utility::radio_dialogue("inv_hqr_hesdown");
         var_4 = 1;
       }
 
@@ -61,7 +61,7 @@ _id_3E0F() {
     }
 
     if(var_6 >= 10) {
-      maps\_utility::_id_11F4(var_0[var_1]);
+      maps\_utility::radio_dialogue(var_0[var_1]);
       var_1++;
 
       if(var_1 >= var_0.size) {
@@ -71,7 +71,7 @@ _id_3E0F() {
     }
 
     if(var_6 >= 5) {
-      maps\_utility::_id_11F4(var_2[var_3]);
+      maps\_utility::radio_dialogue(var_2[var_3]);
       var_3++;
 
       if(var_3 >= var_2.size) {
@@ -80,10 +80,10 @@ _id_3E0F() {
       continue;
     } else {
       if(var_5) {
-        maps\_utility::_id_11F4("inv_hqr_goodkills");
+        maps\_utility::radio_dialogue("inv_hqr_goodkills");
         var_5 = 0;
       } else {
-        maps\_utility::_id_11F4("inv_hqr_directhit");
+        maps\_utility::radio_dialogue("inv_hqr_directhit");
         var_5 = 1;
       }
 
@@ -92,49 +92,49 @@ _id_3E0F() {
   }
 }
 
-_id_3E11() {
-  level._id_3C2C = maps\_vehicle::_id_2A99("remotemissile_uav");
+remotemissile_uav() {
+  level.uav = maps\_vehicle::spawn_vehicle_from_targetname("remotemissile_uav");
   var_0 = getvehiclenode("vnode_remotemissile_uav_start", "targetname");
-  level._id_3C2C attachpath(var_0);
-  maps\_vehicle::_id_1FA6(level._id_3C2C);
-  level._id_3C2C playLoopSound("uav_engine_loop");
-  level.uavrig = spawn("script_model", level._id_3C2C.origin);
+  level.uav attachpath(var_0);
+  maps\_vehicle::gopath(level.uav);
+  level.uav playLoopSound("uav_engine_loop");
+  level.uavrig = spawn("script_model", level.uav.origin);
   level.uavrig setModel("tag_origin");
-  level thread _id_3E12();
+  level thread uav_rig_aiming();
 }
 
-_id_3E12() {
-  level._id_3C2C endon("death");
+uav_rig_aiming() {
+  level.uav endon("death");
   var_0 = common_scripts\utility::getStructArray("uav_focus_point", "targetname");
 
   for(;;) {
     var_1 = level.player.origin;
 
-    if(isDefined(level._id_3BF3)) {
-      var_1 = level._id_3BF3.origin;
+    if(isDefined(level.uav_user)) {
+      var_1 = level.uav_user.origin;
     }
-    var_2 = maps\_utility::_id_0AE9(var_1, var_0);
+    var_2 = maps\_utility::getclosest(var_1, var_0);
     var_3 = var_2.origin;
-    var_4 = vectortoangles(var_3 - level._id_3C2C.origin);
-    level.uavrig moveTo(level._id_3C2C.origin, 0.1, 0, 0);
+    var_4 = vectortoangles(var_3 - level.uav.origin);
+    level.uavrig moveTo(level.uav.origin, 0.1, 0, 0);
     level.uavrig rotateTo(var_4, 0.1, 0, 0);
     wait 0.05;
   }
 }
 
-_id_3E13() {
+ai_remote_missile_fof_outline() {
   if(!isai(self)) {
     return;
   }
-  if(isDefined(self._id_0EF1)) {
+  if(isDefined(self.ridingvehicle)) {
     self endon("death");
     self waittill("jumpedout");
   }
 
-  _id_0612::_id_3C49();
+  maps/_remotemissile_utility::setup_remote_missile_target();
 }
 
-_id_3E14(var_0) {
+splash_notify_message(var_0) {
   self endon("death");
 
   if(!isDefined(var_0.type)) {
@@ -142,154 +142,154 @@ _id_3E14(var_0) {
   }
   var_1 = var_0.duration;
   var_2 = 0.15;
-  self._id_12C6 = 1;
-  self._id_3E15 transitionreset();
-  self._id_3E16 transitionreset();
-  self._id_3E17 transitionreset();
-  self._id_3E18 transitionreset();
-  self._id_3E19 transitionreset();
-  self._id_3E1A transitionreset();
-  self._id_3CEE transitionreset();
-  self._id_3CED transitionreset();
+  self.doingnotify = 1;
+  self.splashtitle transitionreset();
+  self.splashdesc transitionreset();
+  self.splashdesc1 transitionreset();
+  self.splashdesc2 transitionreset();
+  self.splashdesc3 transitionreset();
+  self.splashdesc4 transitionreset();
+  self.splashhint transitionreset();
+  self.splashicon transitionreset();
   wait 0.05;
   setsaveddvar("cg_drawBreathHint", "0");
   var_3 = [];
-  var_3[var_3.size] = self._id_3E15;
-  self._id_3E15.label = var_0._id_3E1B;
+  var_3[var_3.size] = self.splashtitle;
+  self.splashtitle.label = var_0.title;
 
-  if(isDefined(var_0._id_3E1C)) {
-    self._id_3E15 setvalue(var_0._id_3E1C);
+  if(isDefined(var_0.title_set_value)) {
+    self.splashtitle setvalue(var_0.title_set_value);
   }
-  self._id_3E15 setpulsefx(int(5 * var_1), int(var_1 * 1000), 1000);
-  var_4 = self._id_3E15.font;
+  self.splashtitle setpulsefx(int(5 * var_1), int(var_1 * 1000), 1000);
+  var_4 = self.splashtitle.font;
 
-  if(isDefined(var_0._id_3E1D)) {
-    self._id_3E15.font = var_0._id_3E1D;
+  if(isDefined(var_0.title_font)) {
+    self.splashtitle.font = var_0.title_font;
   }
-  var_5 = var_0._id_3E1B;
+  var_5 = var_0.title;
 
-  if(isDefined(var_0._id_3E1E)) {
-    self._id_3E15.label = var_0._id_3E1E;
+  if(isDefined(var_0.title_label)) {
+    self.splashtitle.label = var_0.title_label;
   }
-  var_6 = self._id_3E15.basefontscale;
+  var_6 = self.splashtitle.basefontscale;
 
-  if(isDefined(var_0._id_3E1F)) {
-    self._id_3E15.basefontscale = var_0._id_3E1F;
+  if(isDefined(var_0.title_basefontscale)) {
+    self.splashtitle.basefontscale = var_0.title_basefontscale;
   }
-  var_7 = self._id_3E15.glowcolor;
-  var_8 = self._id_3E15.glowalpha;
+  var_7 = self.splashtitle.glowcolor;
+  var_8 = self.splashtitle.glowalpha;
 
-  if(isDefined(var_0._id_3E20)) {
-    self._id_3E15.glowcolor = var_0._id_3E20;
-    self._id_3E15.glowalpha = 1.0;
-  }
-
-  var_9 = self._id_3E15.color;
-
-  if(isDefined(var_0._id_3E21)) {
-    var_9 = var_0._id_3E21;
-    self._id_3E15.color = var_0._id_3E21;
+  if(isDefined(var_0.title_glowcolor)) {
+    self.splashtitle.glowcolor = var_0.title_glowcolor;
+    self.splashtitle.glowalpha = 1.0;
   }
 
-  var_10 = self._id_3CED.shader;
+  var_9 = self.splashtitle.color;
+
+  if(isDefined(var_0.title_color)) {
+    var_9 = var_0.title_color;
+    self.splashtitle.color = var_0.title_color;
+  }
+
+  var_10 = self.splashicon.shader;
 
   if(isDefined(var_0.icon) && var_0.icon != "") {
-    var_3[var_3.size] = self._id_3CED;
-    self._id_3CED.shader = var_0.icon;
+    var_3[var_3.size] = self.splashicon;
+    self.splashicon.shader = var_0.icon;
   }
 
   var_11 = undefined;
   var_12 = undefined;
 
-  if(isDefined(var_0._id_189B) && (!isstring(var_0._id_189B) || var_0._id_189B != "")) {
-    var_3[var_3.size] = self._id_3E16;
-    self._id_3E16.label = var_0._id_189B;
+  if(isDefined(var_0.desc) && (!isstring(var_0.desc) || var_0.desc != "")) {
+    var_3[var_3.size] = self.splashdesc;
+    self.splashdesc.label = var_0.desc;
 
-    if(isDefined(var_0._id_3E22)) {
-      self._id_3E16 setvalue(var_0._id_3E22);
+    if(isDefined(var_0.desc_set_value)) {
+      self.splashdesc setvalue(var_0.desc_set_value);
     }
-    var_11 = self._id_3E16.font;
+    var_11 = self.splashdesc.font;
 
-    if(isDefined(var_0._id_3E23)) {
-      self._id_3E16.font = var_0._id_3E23;
+    if(isDefined(var_0.desc_font)) {
+      self.splashdesc.font = var_0.desc_font;
     }
-    var_12 = self._id_3E16.basefontscale;
+    var_12 = self.splashdesc.basefontscale;
 
-    if(isDefined(var_0._id_3E24)) {
-      self._id_3E16.basefontscale = var_0._id_3E24;
+    if(isDefined(var_0.desc_basefontscale)) {
+      self.splashdesc.basefontscale = var_0.desc_basefontscale;
     }
-    if(isDefined(var_0._id_3E25) && (!isstring(var_0._id_3E25) || var_0._id_3E25 != "")) {
-      var_3[var_3.size] = self._id_3E17;
-      self._id_3E17.label = var_0._id_3E25;
-      self._id_3E17.font = self._id_3E16.font;
+    if(isDefined(var_0.desc1) && (!isstring(var_0.desc1) || var_0.desc1 != "")) {
+      var_3[var_3.size] = self.splashdesc1;
+      self.splashdesc1.label = var_0.desc1;
+      self.splashdesc1.font = self.splashdesc.font;
 
-      if(isDefined(var_0._id_3E26)) {
-        self._id_3E17 setvalue(var_0._id_3E26);
+      if(isDefined(var_0.desc1_set_value)) {
+        self.splashdesc1 setvalue(var_0.desc1_set_value);
       }
     }
 
-    if(isDefined(var_0._id_3E27) && (!isstring(var_0._id_3E27) || var_0._id_3E27 != "")) {
-      var_3[var_3.size] = self._id_3E18;
-      self._id_3E18.label = var_0._id_3E27;
-      self._id_3E18.font = self._id_3E16.font;
+    if(isDefined(var_0.desc2) && (!isstring(var_0.desc2) || var_0.desc2 != "")) {
+      var_3[var_3.size] = self.splashdesc2;
+      self.splashdesc2.label = var_0.desc2;
+      self.splashdesc2.font = self.splashdesc.font;
 
-      if(isDefined(var_0._id_3E28)) {
-        self._id_3E18 setvalue(var_0._id_3E28);
+      if(isDefined(var_0.desc2_set_value)) {
+        self.splashdesc2 setvalue(var_0.desc2_set_value);
       }
     }
 
-    if(isDefined(var_0._id_3E29) && (!isstring(var_0._id_3E29) || var_0._id_3E29 != "")) {
-      var_3[var_3.size] = self._id_3E19;
-      self._id_3E19.label = var_0._id_3E29;
-      self._id_3E19.font = self._id_3E16.font;
+    if(isDefined(var_0.desc3) && (!isstring(var_0.desc3) || var_0.desc3 != "")) {
+      var_3[var_3.size] = self.splashdesc3;
+      self.splashdesc3.label = var_0.desc3;
+      self.splashdesc3.font = self.splashdesc.font;
 
-      if(isDefined(var_0._id_3E2A)) {
-        self._id_3E19 setvalue(var_0._id_3E2A);
+      if(isDefined(var_0.desc3_set_value)) {
+        self.splashdesc3 setvalue(var_0.desc3_set_value);
       }
     }
 
-    if(isDefined(var_0._id_3E2B) && (!isstring(var_0._id_3E2B) || var_0._id_3E2B != "")) {
-      var_3[var_3.size] = self._id_3E1A;
-      self._id_3E1A.label = var_0._id_3E2B;
-      self._id_3E1A.font = self._id_3E16.font;
+    if(isDefined(var_0.desc4) && (!isstring(var_0.desc4) || var_0.desc4 != "")) {
+      var_3[var_3.size] = self.splashdesc4;
+      self.splashdesc4.label = var_0.desc4;
+      self.splashdesc4.font = self.splashdesc.font;
 
-      if(isDefined(var_0._id_3E2C)) {
-        self._id_3E1A setvalue(var_0._id_3E2C);
+      if(isDefined(var_0.desc4_set_value)) {
+        self.splashdesc4 setvalue(var_0.desc4_set_value);
       }
     }
   }
 
-  if(isDefined(var_0._id_27BB) && (!isstring(var_0._id_27BB) || var_0._id_27BB != "")) {
-    var_3[var_3.size] = self._id_3CEE;
-    self._id_3CEE.label = var_0._id_27BB;
+  if(isDefined(var_0.hint) && (!isstring(var_0.hint) || var_0.hint != "")) {
+    var_3[var_3.size] = self.splashhint;
+    self.splashhint.label = var_0.hint;
 
-    if(isDefined(var_0._id_3E2D)) {
-      self._id_3CEE.label = var_0._id_3E2D;
+    if(isDefined(var_0.hintlabel)) {
+      self.splashhint.label = var_0.hintlabel;
     }
   }
 
-  if(isDefined(var_0._id_15E0)) {
+  if(isDefined(var_0.fadein)) {
     foreach(var_14 in var_3) {}
     var_14 transitionfadein(var_2);
   }
 
-  if(isDefined(var_0._id_3E2E)) {
+  if(isDefined(var_0.zoomin)) {
     foreach(var_14 in var_3) {}
     var_14 transitionzoomin(var_2);
   }
 
-  if(isDefined(var_0._id_3E2F)) {
+  if(isDefined(var_0.slidein)) {
     foreach(var_14 in var_3) {}
-    var_14 transitionslidein(var_2, var_0._id_3E2F);
+    var_14 transitionslidein(var_2, var_0.slidein);
   }
 
-  if(isDefined(var_0._id_3E30)) {
+  if(isDefined(var_0.pulsefxin)) {
     foreach(var_14 in var_3) {}
     var_14 transitionpulsefxin(var_2, var_1);
   }
 
   if(isDefined(var_0.sound)) {
-    if(isDefined(var_0._id_3E31)) {
+    if(isDefined(var_0.playsoundlocally)) {
       self playlocalsound(var_0.sound);
     } else {
       foreach(var_23 in level.players) {}
@@ -297,46 +297,46 @@ _id_3E14(var_0) {
     }
   }
 
-  if(isDefined(var_0._id_3E32)) {
-    maps\_utility::_id_25E4(var_0._id_3E32, var_1);
+  if(isDefined(var_0.abortflag)) {
+    maps\_utility::ent_flag_wait_or_timeout(var_0.abortflag, var_1);
   } else {
     wait(var_1);
   }
-  if(isDefined(var_0._id_3E33)) {
+  if(isDefined(var_0.fadeout)) {
     foreach(var_14 in var_3) {}
     var_14 transitionfadeout(var_2);
   }
 
-  if(isDefined(var_0._id_3E34)) {
+  if(isDefined(var_0.zoomout)) {
     foreach(var_14 in var_3) {}
     var_14 transitionzoomout(var_2);
   }
 
-  if(isDefined(var_0._id_3E35)) {
+  if(isDefined(var_0.slideout)) {
     foreach(var_14 in var_3) {}
-    var_14 transitionslideout(var_2, var_0._id_3E35);
+    var_14 transitionslideout(var_2, var_0.slideout);
   }
 
   wait(var_2);
   setsaveddvar("cg_drawBreathHint", "1");
-  self._id_3E15.font = var_4;
-  self._id_3E15.label = var_5;
-  self._id_3E15.basefontscale = var_6;
-  self._id_3E15.glowcolor = var_7;
-  self._id_3E15.glowalpha = var_8;
-  self._id_3E15.color = var_9;
-  self._id_3CED.shader = var_10;
+  self.splashtitle.font = var_4;
+  self.splashtitle.label = var_5;
+  self.splashtitle.basefontscale = var_6;
+  self.splashtitle.glowcolor = var_7;
+  self.splashtitle.glowalpha = var_8;
+  self.splashtitle.color = var_9;
+  self.splashicon.shader = var_10;
 
   if(isDefined(var_11)) {
-    self._id_3E16.font = var_11;
+    self.splashdesc.font = var_11;
   }
   if(isDefined(var_12)) {
-    self._id_3E16.basefontscale = var_12;
+    self.splashdesc.basefontscale = var_12;
   }
-  self._id_12C6 = 0;
+  self.doingnotify = 0;
 }
 
-_id_3E36() {
+player_reward_splash_init() {
   var_0 = 15;
 
   if(issplitscreen()) {
@@ -386,67 +386,67 @@ _id_3E36() {
     var_17 = "BOTTOM";
   }
 
-  var_18 = _id_3E37(var_1, var_2);
+  var_18 = createfontstring_mp(var_1, var_2);
   var_18 maps\_hud_util::setpoint(var_16, undefined, var_4, var_3);
   var_18.glowcolor = (0.3, 0.6, 0.3);
   var_18.glowalpha = 1;
   var_18.hidewheninmenu = 1;
   var_18.archived = 0;
   var_18.alpha = 0;
-  self._id_3E15 = var_18;
+  self.splashtitle = var_18;
   var_18 = undefined;
-  var_18 = _id_3E37(var_5, var_6);
-  var_18 maps\_hud_util::setparent(self._id_3E15);
+  var_18 = createfontstring_mp(var_5, var_6);
+  var_18 maps\_hud_util::setparent(self.splashtitle);
   var_18 maps\_hud_util::setpoint(var_16, var_17, var_8, var_7);
   var_18.glowcolor = (0, 0, 0);
   var_18.glowalpha = 0;
   var_18.hidewheninmenu = 1;
   var_18.archived = 0;
   var_18.alpha = 0;
-  self._id_3E16 = var_18;
+  self.splashdesc = var_18;
   var_18 = undefined;
-  var_18 = _id_3E37(var_5, var_6);
-  var_18 maps\_hud_util::setparent(self._id_3E15);
+  var_18 = createfontstring_mp(var_5, var_6);
+  var_18 maps\_hud_util::setparent(self.splashtitle);
   var_18 maps\_hud_util::setpoint(var_16, var_17, var_8, var_7 + 1 * var_0);
   var_18.glowcolor = (0, 0, 0);
   var_18.glowalpha = 0;
   var_18.hidewheninmenu = 1;
   var_18.archived = 0;
   var_18.alpha = 0;
-  self._id_3E17 = var_18;
+  self.splashdesc1 = var_18;
   var_18 = undefined;
-  var_18 = _id_3E37(var_5, var_6);
-  var_18 maps\_hud_util::setparent(self._id_3E15);
+  var_18 = createfontstring_mp(var_5, var_6);
+  var_18 maps\_hud_util::setparent(self.splashtitle);
   var_18 maps\_hud_util::setpoint(var_16, var_17, var_8, var_7 + 2 * var_0);
   var_18.glowcolor = (0, 0, 0);
   var_18.glowalpha = 0;
   var_18.hidewheninmenu = 1;
   var_18.archived = 0;
   var_18.alpha = 0;
-  self._id_3E18 = var_18;
+  self.splashdesc2 = var_18;
   var_18 = undefined;
-  var_18 = _id_3E37(var_5, var_6);
-  var_18 maps\_hud_util::setparent(self._id_3E15);
+  var_18 = createfontstring_mp(var_5, var_6);
+  var_18 maps\_hud_util::setparent(self.splashtitle);
   var_18 maps\_hud_util::setpoint(var_16, var_17, var_8, var_7 + 3 * var_0);
   var_18.glowcolor = (0, 0, 0);
   var_18.glowalpha = 0;
   var_18.hidewheninmenu = 1;
   var_18.archived = 0;
   var_18.alpha = 0;
-  self._id_3E19 = var_18;
+  self.splashdesc3 = var_18;
   var_18 = undefined;
-  var_18 = _id_3E37(var_5, var_6);
-  var_18 maps\_hud_util::setparent(self._id_3E15);
+  var_18 = createfontstring_mp(var_5, var_6);
+  var_18 maps\_hud_util::setparent(self.splashtitle);
   var_18 maps\_hud_util::setpoint(var_16, var_17, var_8, var_7 + 4 * var_0);
   var_18.glowcolor = (0, 0, 0);
   var_18.glowalpha = 0;
   var_18.hidewheninmenu = 1;
   var_18.archived = 0;
   var_18.alpha = 0;
-  self._id_3E1A = var_18;
+  self.splashdesc4 = var_18;
   var_18 = undefined;
-  var_18 = _id_3E37("hudbig", 0.75);
-  var_18 maps\_hud_util::setparent(self._id_3E16);
+  var_18 = createfontstring_mp("hudbig", 0.75);
+  var_18 maps\_hud_util::setparent(self.splashdesc);
   var_18 maps\_hud_util::setpoint(var_16, var_17, var_12, var_11);
   var_18.glowcolor = (0, 0, 0);
   var_18.glowalpha = 0;
@@ -454,18 +454,18 @@ _id_3E36() {
   var_18.archived = 0;
   var_18.alpha = 0;
   var_18.color = (0.75, 1, 0.75);
-  self._id_3CEE = var_18;
+  self.splashhint = var_18;
   var_18 = undefined;
-  var_18 = _id_3E38("white", var_13, var_13);
-  var_18 maps\_hud_util::setparent(self._id_3E15);
-  var_18 _id_0614::setpoint(var_16, var_17, var_15, var_14);
+  var_18 = createicon_mp("white", var_13, var_13);
+  var_18 maps\_hud_util::setparent(self.splashtitle);
+  var_18 maps/_sp_airdrop::setpoint(var_16, var_17, var_15, var_14);
   var_18.hidewheninmenu = 1;
   var_18.archived = 0;
   var_18.alpha = 0;
-  self._id_3CED = var_18;
+  self.splashicon = var_18;
 }
 
-_id_3E37(var_0, var_1) {
+createfontstring_mp(var_0, var_1) {
   var_2 = newclienthudelem(self);
   var_2.hidden = 0;
   var_2.elemtype = "font";
@@ -483,7 +483,7 @@ _id_3E37(var_0, var_1) {
   return var_2;
 }
 
-_id_3E38(var_0, var_1, var_2) {
+createicon_mp(var_0, var_1, var_2) {
   var_3 = newclienthudelem(self);
   var_3.elemtype = "icon";
   var_3.x = 0;
@@ -506,8 +506,8 @@ _id_3E38(var_0, var_1, var_2) {
   return var_3;
 }
 
-_id_3E39(var_0) {
-  var_1 = gettime() + _id_3E43(var_0);
+waittill_players_ready_for_splash(var_0) {
+  var_1 = gettime() + milliseconds(var_0);
 
   for(;;) {
     if(gettime() >= var_1) {
@@ -517,7 +517,7 @@ _id_3E39(var_0) {
     var_2 = 0;
 
     foreach(var_4 in level.players) {
-      if(var_4._id_12C6 || var_4._id_3B10) {
+      if(var_4.doingnotify || var_4.using_uav) {
         var_2 = 1;
         break;
       }
@@ -654,7 +654,7 @@ transitionfadeout(var_0) {
   self.alpha = 0;
 }
 
-_id_3E3A(var_0) {
+get_spawners_by_classname(var_0) {
   var_1 = getEntArray(var_0, "classname");
   var_2 = [];
 
@@ -667,7 +667,7 @@ _id_3E3A(var_0) {
   return var_2;
 }
 
-_id_3DCA(var_0) {
+get_spawners_by_targetname(var_0) {
   var_1 = getspawnerarray();
   var_2 = [];
 
@@ -680,13 +680,13 @@ _id_3DCA(var_0) {
   return var_2;
 }
 
-_id_3DBE(var_0, var_1, var_2) {
+get_furthest_from_these(var_0, var_1, var_2) {
   var_2 = common_scripts\utility::ter_op(isDefined(var_2), var_2, 1);
   var_2 = max(1, var_2);
 
   while(var_0.size > var_2) {
     foreach(var_4 in var_1) {
-      var_5 = maps\_utility::_id_0AE9(var_4.origin, var_0);
+      var_5 = maps\_utility::getclosest(var_4.origin, var_0);
 
       if(var_0.size > var_2) {
         var_0 = common_scripts\utility::array_remove(var_0, var_5);
@@ -694,7 +694,7 @@ _id_3DBE(var_0, var_1, var_2) {
       }
 
       var_5 = var_0[0];
-      thread _id_0610::_id_3B9A(var_5.origin, (1, 1, 1));
+      thread maps/_squad_enemies::draw_debug_marker(var_5.origin, (1, 1, 1));
       break;
     }
   }
@@ -702,7 +702,7 @@ _id_3DBE(var_0, var_1, var_2) {
   return var_0[randomint(var_0.size)];
 }
 
-_id_3E3B(var_0) {
+throw_grenade_at_player(var_0) {
   self endon("death");
   var_0 endon("stopped camping");
 
@@ -712,40 +712,40 @@ _id_3E3B(var_0) {
     self.grenadeweapon = "fraggrenade";
   }
   self.grenadeammo = 2;
-  self._id_20B5 = 1;
+  self.script_forcegrenade = 1;
   wait 8;
-  self._id_20B5 = 0;
+  self.script_forcegrenade = 0;
   self.grenadeweapon = "fraggrenade";
 }
 
-_id_3DC8() {
+clear_from_boss_array_when_dead() {
   self waittill("death");
   var_0 = [];
 
-  foreach(var_2 in level._id_3D64) {
+  foreach(var_2 in level.bosses) {
     if(isDefined(var_2) && (!isDefined(self) || self != var_2)) {
       var_0[var_0.size] = var_2;
     }
   }
 
-  level._id_3D64 = var_0;
+  level.bosses = var_0;
 }
 
-_id_3E3C() {
+clear_from_special_ai_array_when_dead() {
   self waittill("death");
   var_0 = [];
 
-  foreach(var_2 in level._id_3D71) {
+  foreach(var_2 in level.special_ai) {
     if(isalive(var_2)) {
       var_0[var_0.size] = var_2;
     }
   }
 
-  level._id_3D71 = var_0;
+  level.special_ai = var_0;
 }
 
-_id_0A32() {
-  if(isDefined(self._id_0A33) && self._id_0A33) {
+was_headshot() {
+  if(isDefined(self.died_of_headshot) && self.died_of_headshot) {
     return 1;
   }
   if(!isDefined(self.damagelocation)) {
@@ -754,33 +754,33 @@ _id_0A32() {
   return self.damagelocation == "helmet" || self.damagelocation == "head" || self.damagelocation == "neck";
 }
 
-_id_3DCB(var_0, var_1, var_2) {
+chopper_spawn_from_targetname_and_drive(var_0, var_1, var_2) {
   var_3 = "passed start struct without targetname: " + var_0;
-  var_2._id_3D0B = 1;
-  var_4 = _id_3DE1(var_0, var_1);
-  var_4._id_3D0A = var_2;
-  var_4 thread maps\_vehicle::_id_26A1(var_2);
+  var_2.in_use = 1;
+  var_4 = chopper_spawn_from_targetname(var_0, var_1);
+  var_4.loc_current = var_2;
+  var_4 thread maps\_vehicle::vehicle_paths(var_2);
   return var_4;
 }
 
-_id_3DE1(var_0, var_1) {
+chopper_spawn_from_targetname(var_0, var_1) {
   var_2 = getEnt(var_0, "targetname");
-  var_3 = _id_061C::_id_3DFA(var_0);
+  var_3 = maps/_so_survival_ai::get_ai_health(var_0);
 
   if(isDefined(var_3)) {
-    var_2._id_2189 = var_3;
+    var_2.script_startinghealth = var_3;
   }
-  while(isDefined(var_2._id_2973)) {
+  while(isDefined(var_2.vehicle_spawned_thisframe)) {
     wait 0.05;
   }
   if(isDefined(var_1)) {
     var_2.origin = var_1;
   }
-  var_4 = maps\_vehicle::_id_2A99(var_0);
+  var_4 = maps\_vehicle::spawn_vehicle_from_targetname(var_0);
   return var_4;
 }
 
-_id_3DCD(var_0, var_1) {
+chopper_spawn_pilot_from_targetname(var_0, var_1) {
   var_2 = getspawnerarray();
   var_3 = undefined;
 
@@ -790,24 +790,24 @@ _id_3DCD(var_0, var_1) {
     }
   }
 
-  var_6 = _id_3DCE(var_3, var_1, 1);
+  var_6 = chopper_spawn_passenger(var_3, var_1, 1);
   var_6.health = 9999;
   return var_6;
 }
 
-_id_3DCE(var_0, var_1, var_2) {
+chopper_spawn_passenger(var_0, var_1, var_2) {
   var_3 = undefined;
 
   for(;;) {
     var_0.count = 1;
 
     if(isDefined(var_2) && var_2) {
-      var_3 = maps\_utility::_id_212D(var_0);
+      var_3 = maps\_utility::dronespawn(var_0);
       break;
     } else {
-      var_3 = var_0 maps\_utility::_id_166F(1);
+      var_3 = var_0 maps\_utility::spawn_ai(1);
 
-      if(!maps\_utility::_id_13AF(var_3)) {
+      if(!maps\_utility::spawn_failed(var_3)) {
         break;
       }
     }
@@ -816,25 +816,25 @@ _id_3DCE(var_0, var_1, var_2) {
   }
 
   if(isDefined(var_1)) {
-    var_3._id_2511 = var_1;
+    var_3.forced_startingposition = var_1;
   }
-  maps\_utility::_id_2683(var_3);
+  maps\_utility::guy_enter_vehicle(var_3);
   return var_3;
 }
 
-_id_3DCC() {
+chopper_drop_smoke_at_unloading() {
   self endon("death");
   self waittill("unloading");
   var_0 = self.origin - vectorNormalize(anglesToForward(self.angles)) * 145;
-  var_1 = maps\_utility::_id_1277(var_0);
+  var_1 = maps\_utility::groundpos(var_0);
   magicgrenademanual("smoke_grenade_fast", var_1, (0, 0, -1), 0);
 }
 
-_id_3E3D(var_0, var_1, var_2) {
+chopper_wait_for_cloest_open_path_start(var_0, var_1, var_2) {
   var_3 = undefined;
 
   for(;;) {
-    var_3 = _id_3E3E(var_0, var_1, var_2);
+    var_3 = chopper_closest_open_path_start(var_0, var_1, var_2);
 
     if(isDefined(var_3)) {
       break;
@@ -846,32 +846,32 @@ _id_3E3D(var_0, var_1, var_2) {
   return var_3;
 }
 
-_id_3E3E(var_0, var_1, var_2) {
+chopper_closest_open_path_start(var_0, var_1, var_2) {
   var_3 = common_scripts\utility::getStructArray(var_1, "targetname");
   var_4 = undefined;
   var_5 = undefined;
   var_6 = undefined;
 
   foreach(var_8 in var_3) {
-    if(isDefined(var_8._id_3D0B)) {
+    if(isDefined(var_8.in_use)) {
       continue;
     }
     var_9 = var_8;
 
     switch (var_2) {
       case "script_unload":
-        while(!isDefined(var_9._id_2954)) {
+        while(!isDefined(var_9.script_unload)) {
           var_9 = common_scripts\utility::getStruct(var_9.target, "targetname");
         }
-        if(!isDefined(var_9._id_2954)) {
+        if(!isDefined(var_9.script_unload)) {
           continue;
         }
         break;
       case "script_stopnode":
-        while(!isDefined(var_9._id_295D)) {
+        while(!isDefined(var_9.script_stopnode)) {
           var_9 = common_scripts\utility::getStruct(var_9.target, "targetname");
         }
-        if(!isDefined(var_9._id_295D)) {
+        if(!isDefined(var_9.script_stopnode)) {
           continue;
         }
         break;
@@ -898,7 +898,7 @@ _id_3E3E(var_0, var_1, var_2) {
   return var_4;
 }
 
-_id_3E3F() {
+highest_player_rank() {
   var_0 = getEntArray();
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
@@ -908,40 +908,40 @@ _id_3E3F() {
   }
 }
 
-_id_3D24(var_0) {
+precache_loadout_item(var_0) {
   if(isDefined(var_0) && var_0 != "") {
     precacheitem(var_0);
   }
 }
 
-_id_3E40(var_0, var_1, var_2) {
+int_capped(var_0, var_1, var_2) {
   return int(max(var_1, min(var_2, var_0)));
 }
 
-_id_3E41(var_0, var_1, var_2) {
+float_capped(var_0, var_1, var_2) {
   return max(var_1, min(var_2, var_0));
 }
 
-_id_3E42() {
+delete_on_load() {
   var_0 = getEntArray("delete", "targetname");
 
   foreach(var_2 in var_0) {}
   var_2 delete();
 }
 
-_id_3E43(var_0) {
+milliseconds(var_0) {
   return var_0 * 1000;
 }
 
-_id_3E44(var_0) {
+seconds(var_0) {
   return var_0 / 1000;
 }
 
-_id_3E45() {
+random_player_origin() {
   return level.players[randomint(level.players.size)].origin;
 }
 
-_id_3D31() {
+highest_player_rank() {
   var_0 = -1;
 
   foreach(var_2 in level.players) {
@@ -955,7 +955,7 @@ _id_3D31() {
   return var_0;
 }
 
-_id_3D82() {
+ent_linked_delete() {
   self endon("death");
   self unlink();
   wait 0.05;
@@ -965,7 +965,7 @@ _id_3D82() {
   }
 }
 
-_id_3DA5(var_0, var_1, var_2) {
+so_survival_kill_ai(var_0, var_1, var_2) {
   if(isDefined(var_0)) {
     if(isDefined(var_1) && isDefined(var_2)) {
       self notify("death", var_0, var_1, var_2);
@@ -978,14 +978,14 @@ _id_3DA5(var_0, var_1, var_2) {
   }
 }
 
-_id_6F52() {
+break_glass() {
   var_0 = common_scripts\utility::getStructArray("struct_break_glass", "targetname");
 
   foreach(var_2 in var_0) {}
   glassradiusdamage(var_2.origin, 64, 100, 99);
 }
 
-_id_3E46() {
+so_survival_validate_entities() {
   var_0 = getEntArray("armory_script_brushmodel", "targetname");
 
   foreach(var_2 in var_0) {}
@@ -1003,32 +1003,32 @@ _id_3E46() {
   var_7 = common_scripts\utility::array_combine(var_7, common_scripts\utility::getStructArray("follower", "script_noteworthy"));
 
   foreach(var_9 in var_7) {}
-  var_9 _id_3E48(var_4, var_5, var_6);
+  var_9 so_survival_validate_entity(var_4, var_5, var_6);
 
   foreach(var_2 in var_0) {}
   var_2 solid();
 
   wait 2.0;
 
-  if(isDefined(level._id_3E47) && level._id_3E47.size) {
-    foreach(var_14 in level._id_3E47) {}
+  if(isDefined(level.debug_survival_error_msgs) && level.debug_survival_error_msgs.size) {
+    foreach(var_14 in level.debug_survival_error_msgs) {}
   }
 }
 
-_id_3E48(var_0, var_1, var_2) {
-  if(!isDefined(level._id_3E47)) {
-    level._id_3E47 = [];
+so_survival_validate_entity(var_0, var_1, var_2) {
+  if(!isDefined(level.debug_survival_error_msgs)) {
+    level.debug_survival_error_msgs = [];
   }
-  if(!isDefined(level._id_3E49)) {
-    level._id_3E49 = [];
+  if(!isDefined(level.debug_survival_error_locs)) {
+    level.debug_survival_error_locs = [];
   }
   var_3 = self.origin + var_0 + (0, 0, var_1);
   var_4 = self.origin + var_0;
   var_5 = physicstrace(var_3, var_4);
 
   if(distance(var_5, var_4) > 0.1) {
-    level._id_3E47[level._id_3E47.size] = "Error: Survival Entity may be in solid at: " + self.origin;
-    level._id_3E49[level._id_3E49.size] = self.origin;
+    level.debug_survival_error_msgs[level.debug_survival_error_msgs.size] = "Error: Survival Entity may be in solid at: " + self.origin;
+    level.debug_survival_error_locs[level.debug_survival_error_locs.size] = self.origin;
     return;
   }
 
@@ -1037,20 +1037,20 @@ _id_3E48(var_0, var_1, var_2) {
   var_5 = physicstrace(var_3, var_4);
 
   if(distance(var_5, var_4) < 0.1) {
-    level._id_3E47[level._id_3E47.size] = "Error: Survival Entity floating or under floor: " + self.origin;
-    level._id_3E49[level._id_3E49.size] = self.origin;
+    level.debug_survival_error_msgs[level.debug_survival_error_msgs.size] = "Error: Survival Entity floating or under floor: " + self.origin;
+    level.debug_survival_error_locs[level.debug_survival_error_locs.size] = self.origin;
     return;
   }
 }
 
-_id_3E4A() {
-  if(!isDefined(level._id_3E49) || !level._id_3E49.size) {
+so_survival_display_entity_error_3d() {
+  if(!isDefined(level.debug_survival_error_locs) || !level.debug_survival_error_locs.size) {
     return;
   }
   level endon("special_op_terminated");
 
   for(;;) {
-    foreach(var_1 in level._id_3E49) {}
+    foreach(var_1 in level.debug_survival_error_locs) {}
 
     wait 10.0;
   }

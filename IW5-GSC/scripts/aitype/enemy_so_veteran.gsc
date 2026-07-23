@@ -22,7 +22,7 @@ main() {
   }
 
   self.weapon = "none";
-  _id_05C4::main();
+  character/character_so_veteran_ar::main();
 }
 
 spawner() {
@@ -30,6 +30,6 @@ spawner() {
 }
 
 precache() {
-  _id_05C4::precache();
+  character/character_so_veteran_ar::precache();
   precacheitem("fraggrenade");
 }

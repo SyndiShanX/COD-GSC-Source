@@ -6,5 +6,5 @@
 main() {
   level.tweakfile = 1;
   level.player = getEntArray("player", "classname")[0];
-  _id_4CB9::main();
+  maps/createart/so_deltacamp_fog::main();
 }

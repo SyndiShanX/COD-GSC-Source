@@ -3,133 +3,133 @@
  * Script: scripts\1366.gsc
 **************************************/
 
-_id_417C(var_0, var_1) {
-  if(!isDefined(level._id_417D)) {
-    level._id_417D = [];
+prop_notetrack_exist(var_0, var_1) {
+  if(!isDefined(level.prop_notetracks)) {
+    level.prop_notetracks = [];
   }
-  if(!isDefined(level._id_417D[var_0])) {
-    level._id_417D[var_0] = [];
+  if(!isDefined(level.prop_notetracks[var_0])) {
+    level.prop_notetracks[var_0] = [];
   }
-  if(isDefined(level._id_417D[var_0][var_1])) {
+  if(isDefined(level.prop_notetracks[var_0][var_1])) {
     return 1;
   }
-  level._id_417D[var_0][var_1] = 1;
+  level.prop_notetracks[var_0][var_1] = 1;
   return 0;
 }
 
-_id_417E(var_0) {
-  if(_id_417C(var_0, "add_smoking_notetracks")) {
+add_smoking_notetracks(var_0) {
+  if(prop_notetrack_exist(var_0, "add_smoking_notetracks")) {
     return;
   }
-  maps\_anim::_id_1264(var_0, "attach cig", ::_id_4187);
-  maps\_anim::_id_1264(var_0, "detach cig", ::_id_4189);
-  maps\_anim::_id_1264(var_0, "puff", ::_id_418E);
-  maps\_anim::_id_1264(var_0, "exhale", ::_id_418F);
+  maps\_anim::addnotetrack_customfunction(var_0, "attach cig", ::attach_cig);
+  maps\_anim::addnotetrack_customfunction(var_0, "detach cig", ::detach_cig);
+  maps\_anim::addnotetrack_customfunction(var_0, "puff", ::smoke_puff);
+  maps\_anim::addnotetrack_customfunction(var_0, "exhale", ::smoke_exhale);
   level._effect["cigar_glow"] = loadfx("fire/cigar_glow_far");
   level._effect["cigar_glow_puff"] = loadfx("fire/cigar_glow_puff");
   level._effect["cigar_smoke_puff"] = loadfx("smoke/cigarsmoke_puff_far");
   level._effect["cigar_exhale"] = loadfx("smoke/cigarsmoke_exhale_far");
-  level._id_1F90["cigar"] = "prop_price_cigar";
+  level.scr_model["cigar"] = "prop_price_cigar";
 }
 
-_id_417F(var_0) {
-  if(isDefined(var_0._id_4180)) {
-    var_0._id_4180 delete();
+detach_idle_clip(var_0) {
+  if(isDefined(var_0.clip)) {
+    var_0.clip delete();
   }
 }
 
-_id_4181(var_0) {
-  if(_id_417C(var_0, "add_cellphone_notetracks")) {
+add_sit_load_ak_notetracks(var_0) {
+  if(prop_notetrack_exist(var_0, "add_cellphone_notetracks")) {
     return;
   }
-  maps\_anim::_id_1264(var_0, "attach clip left", ::_id_4182);
-  maps\_anim::_id_1264(var_0, "detach clip left", ::_id_417F);
-  level._id_1F90["clip"] = "weapon_ak47_clip";
+  maps\_anim::addnotetrack_customfunction(var_0, "attach clip left", ::attach_clip);
+  maps\_anim::addnotetrack_customfunction(var_0, "detach clip left", ::detach_idle_clip);
+  level.scr_model["clip"] = "weapon_ak47_clip";
 }
 
-_id_4182(var_0) {
+attach_clip(var_0) {
   var_0 notify("new_prop_rotation");
   var_1 = spawn("script_model", (0, 0, 0));
   var_1 linkTo(var_0, "tag_inhand", (0, 0, 0), (0, 0, 0));
-  var_1 setModel(maps\_utility::_id_274A("clip"));
-  var_0._id_4180 = var_1;
-  thread _id_418A(var_1, var_0);
+  var_1 setModel(maps\_utility::getmodel("clip"));
+  var_0.clip = var_1;
+  thread prop_delete(var_1, var_0);
 }
 
-_id_4183(var_0) {
-  if(_id_417C(var_0, "add_cellphone_notetracks")) {
+add_cellphone_notetracks(var_0) {
+  if(prop_notetrack_exist(var_0, "add_cellphone_notetracks")) {
     return;
   }
-  maps\_anim::_id_1264(var_0, "attach phone", ::_id_4184);
-  maps\_anim::_id_1264(var_0, "detach phone", ::_id_4186);
-  level._id_1F90["cellphone"] = "com_cellphone_off";
+  maps\_anim::addnotetrack_customfunction(var_0, "attach phone", ::attach_phone);
+  maps\_anim::addnotetrack_customfunction(var_0, "detach phone", ::detach_phone);
+  level.scr_model["cellphone"] = "com_cellphone_off";
 }
 
-_id_4184(var_0) {
+attach_phone(var_0) {
   var_0 notify("new_phone_rotation");
   var_1 = spawn("script_model", (0, 0, 0));
   var_1 linkTo(var_0, "tag_inhand", (0, 0, 0), (0, 0, 0));
-  var_1 setModel(maps\_utility::_id_274A("cellphone"));
-  var_0._id_4185 = var_1;
-  thread _id_418A(var_1, var_0);
+  var_1 setModel(maps\_utility::getmodel("cellphone"));
+  var_0.phone = var_1;
+  thread prop_delete(var_1, var_0);
 }
 
-_id_4186(var_0) {
-  if(isDefined(var_0._id_4185)) {
-    var_0._id_4185 delete();
+detach_phone(var_0) {
+  if(isDefined(var_0.phone)) {
+    var_0.phone delete();
   }
 }
 
-_id_4187(var_0) {
+attach_cig(var_0) {
   var_0 notify("new_cigar_rotation");
   var_1 = spawn("script_model", (0, 0, 0));
   var_1 linkTo(var_0, "tag_inhand", (0, 0, 0), (0, 0, 0));
-  var_1 setModel(maps\_utility::_id_274A("cigar"));
+  var_1 setModel(maps\_utility::getmodel("cigar"));
   playFXOnTag(common_scripts\utility::getfx("cigar_glow"), var_1, "tag_cigarglow");
-  var_0._id_4188 = var_1;
-  thread _id_418B(var_1, var_0);
+  var_0.cigar = var_1;
+  thread prop_delete_cig(var_1, var_0);
 }
 
-_id_4189(var_0) {
-  if(isDefined(var_0._id_4188)) {
-    var_0._id_4188 thread _id_418C();
+detach_cig(var_0) {
+  if(isDefined(var_0.cigar)) {
+    var_0.cigar thread prop_cig_throw();
   }
 }
 
-_id_418A(var_0, var_1) {
+prop_delete(var_0, var_1) {
   var_1 notify("new_prop_rotation" + var_0.model);
   var_1 endon("new_prop_rotation" + var_0.model);
   var_0 endon("death");
-  var_1 maps\_utility::_id_275A("new_prop_rotation" + var_0.model);
-  var_0 maps\_utility::_id_275A("death");
-  maps\_utility::_id_09C9(maps\_utility::_id_09CA, "stop_loop");
-  var_1 maps\_utility::_id_09C9(maps\_utility::_id_09CA, "death");
-  maps\_utility::_id_09CB();
+  var_1 maps\_utility::add_endon("new_prop_rotation" + var_0.model);
+  var_0 maps\_utility::add_endon("death");
+  maps\_utility::add_wait(maps\_utility::waittill_msg, "stop_loop");
+  var_1 maps\_utility::add_wait(maps\_utility::waittill_msg, "death");
+  maps\_utility::do_wait_any();
   var_0 delete();
 }
 
-_id_418B(var_0, var_1) {
+prop_delete_cig(var_0, var_1) {
   var_1 notify("new_prop_rotation" + var_0.model);
   var_1 endon("new_prop_rotation" + var_0.model);
   var_0 endon("death");
-  var_1 maps\_utility::_id_275A("new_prop_rotation" + var_0.model);
-  var_0 maps\_utility::_id_275A("death");
-  maps\_utility::_id_09C9(maps\_utility::_id_09CA, "stop_loop");
-  var_1 maps\_utility::_id_09C9(maps\_utility::_id_09CA, "death");
-  maps\_utility::_id_09CB();
-  var_0 thread _id_418C();
+  var_1 maps\_utility::add_endon("new_prop_rotation" + var_0.model);
+  var_0 maps\_utility::add_endon("death");
+  maps\_utility::add_wait(maps\_utility::waittill_msg, "stop_loop");
+  var_1 maps\_utility::add_wait(maps\_utility::waittill_msg, "death");
+  maps\_utility::do_wait_any();
+  var_0 thread prop_cig_throw();
 }
 
-_id_418C() {
+prop_cig_throw() {
   self endon("death");
 
   if(!isDefined(self)) {
     return;
   }
-  if(isDefined(self._id_418D) && self._id_418D) {
+  if(isDefined(self.cig_throwing) && self.cig_throwing) {
     return;
   }
-  self._id_418D = 1;
+  self.cig_throwing = 1;
   stopFXOnTag(common_scripts\utility::getfx("cigar_glow"), self, "tag_cigarglow");
   var_0 = 3;
   var_1 = anglesToForward(self.angles);
@@ -140,25 +140,25 @@ _id_418C() {
   self delete();
 }
 
-_id_418E(var_0) {
-  if(!isDefined(var_0._id_4188)) {
+smoke_puff(var_0) {
+  if(!isDefined(var_0.cigar)) {
     return;
   }
   var_0 endon("death");
-  var_0._id_4188 endon("death");
-  playFXOnTag(common_scripts\utility::getfx("cigar_glow_puff"), var_0._id_4188, "tag_cigarglow");
+  var_0.cigar endon("death");
+  playFXOnTag(common_scripts\utility::getfx("cigar_glow_puff"), var_0.cigar, "tag_cigarglow");
   wait 1;
   playFXOnTag(common_scripts\utility::getfx("cigar_smoke_puff"), var_0, "tag_eye");
 }
 
-_id_418F(var_0) {
-  if(!isDefined(var_0._id_4188)) {
+smoke_exhale(var_0) {
+  if(!isDefined(var_0.cigar)) {
     return;
   }
   playFXOnTag(common_scripts\utility::getfx("cigar_exhale"), var_0, "tag_eye");
 }
 
-_id_4190() {
+ghillie_leaves() {
   var_0 = [];
   var_0[var_0.size] = "J_MainRoot";
   var_0[var_0.size] = "J_CoatFront_LE";
@@ -199,6 +199,6 @@ _id_4190() {
   }
 }
 
-_id_4191() {
-  _id_4187(self);
+attach_cig_self() {
+  attach_cig(self);
 }

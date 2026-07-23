@@ -3,58 +3,58 @@
  * Script: scripts\1379.gsc
 **************************************/
 
-_id_42B8() {
-  thread _id_42B9();
-  self._id_0B6E._id_423A._id_0EFE = 1;
+stealth_event_enemy_main() {
+  thread enemy_event_loop();
+  self._stealth.plugins.event = 1;
 }
 
-_id_42B9() {
+enemy_event_loop() {
   self endon("death");
   self endon("pain_death");
 
   for(;;) {
     self waittill("event_awareness", var_0);
 
-    if(!maps\_utility::_id_1008("_stealth_enabled")) {
+    if(!maps\_utility::ent_flag("_stealth_enabled")) {
       continue;
     }
-    if(maps\_stealth_utility::_id_4208()) {
+    if(maps\_stealth_utility::stealth_group_spotted_flag()) {
       continue;
     }
-    var_1 = self._id_0B6E._id_41D0._id_41D1["event"];
+    var_1 = self._stealth.behavior.ai_functions["event"];
 
     if(!isDefined(var_1[var_0])) {
       continue;
     }
-    thread _id_42BA(var_0);
+    thread enemy_event_reaction_wrapper(var_0);
   }
 }
 
-_id_42BA(var_0) {
-  var_1 = maps\_stealth_shared_utilities::_id_41DB("_stealth_spotted");
+enemy_event_reaction_wrapper(var_0) {
+  var_1 = maps\_stealth_shared_utilities::group_get_flagname("_stealth_spotted");
   self endon("_stealth_enemy_alert_level_change");
   level endon(var_1);
   self endon("death");
   waittillframeend;
   self endon("enemy_awareness_reaction");
-  maps\_stealth_shared_utilities::_id_41EB();
-  maps\_stealth_shared_utilities::_id_41F0();
-  maps\_stealth_shared_utilities::_id_41EF();
-  var_2 = self._id_0B6E._id_41D0._id_41D1["event"][var_0];
+  maps\_stealth_shared_utilities::enemy_reaction_state_alert();
+  maps\_stealth_shared_utilities::enemy_find_original_goal();
+  maps\_stealth_shared_utilities::enemy_stop_current_behavior();
+  var_2 = self._stealth.behavior.ai_functions["event"][var_0];
   self[[var_2]](var_0);
-  maps\_stealth_threat_enemy::_id_4264("reset");
+  maps\_stealth_threat_enemy::enemy_alert_level_change("reset");
 }
 
-_id_42BB(var_0) {
-  var_1 = self._id_0B6E._id_41ED._id_0EFE._id_4276[var_0];
+enemy_event_reaction_heard_scream(var_0) {
+  var_1 = self._stealth.logic.event.awareness_param[var_0];
   wait 0.05;
-  maps\_utility::_id_13DB("_stealth_behavior_reaction_anim_in_progress");
-  var_2 = maps\_stealth_shared_utilities::_id_41F3(var_1, 300, 40);
-  _id_42BF(var_2);
+  maps\_utility::ent_flag_waitopen("_stealth_behavior_reaction_anim_in_progress");
+  var_2 = maps\_stealth_shared_utilities::enemy_find_free_pathnode_near(var_1, 300, 40);
+  enemy_investigate_position(var_2);
 }
 
-_id_42BC(var_0) {
-  var_1 = self._id_0B6E._id_41ED._id_0EFE._id_4276[var_0];
+enemy_event_reaction_flashbang(var_0) {
+  var_1 = self._stealth.logic.event.awareness_param[var_0];
 
   if(common_scripts\utility::isflashed() && self.script == "<custom>") {
     wait 0.05;
@@ -66,35 +66,35 @@ _id_42BC(var_0) {
   if(self.script == "flashed") {
     self waittill("stop_flashbang_effect");
   }
-  var_2 = maps\_stealth_shared_utilities::_id_41F3(var_1, 300, 40);
+  var_2 = maps\_stealth_shared_utilities::enemy_find_free_pathnode_near(var_1, 300, 40);
 
   if(isDefined(var_2)) {
-    thread maps\_stealth_shared_utilities::_id_41F4();
-    thread maps\_stealth_shared_utilities::_id_41FA(var_1);
+    thread maps\_stealth_shared_utilities::enemy_announce_wtf();
+    thread maps\_stealth_shared_utilities::enemy_announce_spotted_bring_group(var_1);
   }
 
-  _id_42BF(var_2);
+  enemy_investigate_position(var_2);
 }
 
-_id_42BD(var_0) {
-  var_1 = self._id_0B6E._id_41ED._id_0EFE._id_4276[var_0];
+enemy_event_reaction_explosion(var_0) {
+  var_1 = self._stealth.logic.event.awareness_param[var_0];
   wait 0.05;
-  maps\_utility::_id_13DB("_stealth_behavior_reaction_anim_in_progress");
-  var_2 = maps\_stealth_shared_utilities::_id_41F3(var_1, 300, 40);
-  thread maps\_stealth_shared_utilities::_id_41F4();
-  _id_42BF(var_2);
+  maps\_utility::ent_flag_waitopen("_stealth_behavior_reaction_anim_in_progress");
+  var_2 = maps\_stealth_shared_utilities::enemy_find_free_pathnode_near(var_1, 300, 40);
+  thread maps\_stealth_shared_utilities::enemy_announce_wtf();
+  enemy_investigate_position(var_2);
 }
 
-_id_42BE(var_0) {
+enemy_event_reaction_nothing(var_0) {
   return;
 }
 
-_id_42BF(var_0, var_1) {
+enemy_investigate_position(var_0, var_1) {
   if(isDefined(var_0)) {
     wait(randomfloat(1));
-    thread maps\_stealth_shared_utilities::_id_41F2(var_0, var_1);
-    self._id_117F = 0;
-    self._id_1199 = 0;
+    thread maps\_stealth_shared_utilities::enemy_runto_and_lookaround(var_0, var_1);
+    self.disablearrivals = 0;
+    self.disableexits = 0;
     self waittill("goal");
     wait(randomfloatrange(15, 25));
   } else {
@@ -102,15 +102,15 @@ _id_42BF(var_0, var_1) {
   }
 }
 
-_id_42C0() {
-  _id_42C1("heard_scream");
-  _id_42C1("doFlashBanged");
-  _id_42C1("explode");
+stealth_event_mod_all() {
+  stealth_event_mod("heard_scream");
+  stealth_event_mod("doFlashBanged");
+  stealth_event_mod("explode");
 }
 
-_id_42C1(var_0, var_1, var_2, var_3) {
-  var_4 = _id_42C2();
-  var_5 = _id_42C4();
+stealth_event_mod(var_0, var_1, var_2, var_3) {
+  var_4 = stealth_event_defaults();
+  var_5 = stealth_event_anim_defaults();
 
   if(!isDefined(var_1)) {
     var_1 = var_4[var_0];
@@ -119,11 +119,11 @@ _id_42C1(var_0, var_1, var_2, var_3) {
     var_2 = var_5[var_0];
   }
   if(!isDefined(var_3)) {
-    var_3 = _id_42C3(var_0);
+    var_3 = stealth_event_listener_defaults(var_0);
   }
-  maps\_stealth_shared_utilities::_id_41CF("event", var_0, var_1);
-  maps\_stealth_shared_utilities::_id_41CF("animation", var_0, var_2);
-  thread _id_055D::_id_4279(var_0);
+  maps\_stealth_shared_utilities::ai_create_behavior_function("event", var_0, var_1);
+  maps\_stealth_shared_utilities::ai_create_behavior_function("animation", var_0, var_2);
+  thread maps/_stealth_visibility_enemy::enemy_event_awareness(var_0);
 
   if(var_3) {
     self addaieventlistener(var_0);
@@ -135,22 +135,22 @@ _id_42C1(var_0, var_1, var_2, var_3) {
   }
 }
 
-_id_42C2() {
+stealth_event_defaults() {
   var_0 = [];
 
   if(self.type == "dog") {
-    var_0["heard_scream"] = ::_id_42BE;
-    var_0["doFlashBanged"] = ::_id_42BE;
+    var_0["heard_scream"] = ::enemy_event_reaction_nothing;
+    var_0["doFlashBanged"] = ::enemy_event_reaction_nothing;
   } else {
-    var_0["heard_scream"] = ::_id_42BB;
-    var_0["doFlashBanged"] = ::_id_42BC;
+    var_0["heard_scream"] = ::enemy_event_reaction_heard_scream;
+    var_0["doFlashBanged"] = ::enemy_event_reaction_flashbang;
   }
 
-  var_0["explode"] = ::_id_42BD;
+  var_0["explode"] = ::enemy_event_reaction_explosion;
   return var_0;
 }
 
-_id_42C3(var_0) {
+stealth_event_listener_defaults(var_0) {
   switch (var_0) {
     case "heard_scream":
       return 0;
@@ -163,16 +163,16 @@ _id_42C3(var_0) {
   }
 }
 
-_id_42C4() {
+stealth_event_anim_defaults() {
   var_0 = [];
-  var_0["doFlashBanged"] = _id_055B::_id_423F;
+  var_0["doFlashBanged"] = maps/_stealth_animation_funcs::enemy_animation_nothing;
 
   if(self.type == "dog") {
-    var_0["heard_scream"] = _id_055B::_id_4241;
-    var_0["explode"] = _id_055B::_id_4242;
+    var_0["heard_scream"] = maps/_stealth_animation_funcs::dog_animation_generic;
+    var_0["explode"] = maps/_stealth_animation_funcs::dog_animation_wakeup_fast;
   } else {
-    var_0["heard_scream"] = _id_055B::_id_4240;
-    var_0["explode"] = _id_055B::_id_4240;
+    var_0["heard_scream"] = maps/_stealth_animation_funcs::enemy_animation_generic;
+    var_0["explode"] = maps/_stealth_animation_funcs::enemy_animation_generic;
   }
 
   return var_0;

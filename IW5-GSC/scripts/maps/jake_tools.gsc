@@ -3,7 +3,7 @@
  * Script: scripts\maps\jake_tools.gsc
 ***************************************/
 
-_id_4840(var_0, var_1) {
+create_overlay_element(var_0, var_1) {
   var_2 = newhudelem();
   var_2.x = 0;
   var_2.y = 0;
@@ -18,7 +18,7 @@ _id_4840(var_0, var_1) {
   return var_2;
 }
 
-_id_4841() {
+hide_geo() {
   self hide();
   self notsolid();
 
@@ -27,7 +27,7 @@ _id_4841() {
   }
 }
 
-_id_4842(var_0) {
+hideall(var_0) {
   if(!isDefined(var_0)) {
     var_0 = getEntArray("hide", "script_noteworthy");
   }
@@ -63,7 +63,7 @@ _id_4842(var_0) {
   }
 }
 
-_id_4843(var_0, var_1) {
+ai_notify(var_0, var_1) {
   self endon("death");
   var_1 = int(var_1 * 1000);
   var_2 = gettime();
@@ -78,7 +78,7 @@ _id_4843(var_0, var_1) {
   self notify("ai_notify_complete");
 }
 
-_id_4844(var_0) {
+get_all_ents_in_chain(var_0) {
   var_1 = [];
   var_2 = self;
   var_3 = 0;
@@ -114,12 +114,12 @@ _id_4844(var_0) {
   }
 }
 
-_id_4845(var_0, var_1) {
+wait_for_level_notify_or_timeout(var_0, var_1) {
   level endon(var_0);
   wait(var_1);
 }
 
-_id_4846(var_0, var_1, var_2) {
+get_ai_within_radius(var_0, var_1, var_2) {
   if(isDefined(var_2)) {
     var_3 = getaiarray(var_2);
   } else {
@@ -129,28 +129,28 @@ _id_4846(var_0, var_1, var_2) {
 
   for(var_5 = 0; var_5 < var_3.size; var_5++) {
     if(distance(var_1, self.origin) <= var_0) {
-      maps\_utility::_id_0BC3(var_4, var_3[var_5]);
+      maps\_utility::array_add(var_4, var_3[var_5]);
     }
   }
 
   return var_4;
 }
 
-_id_4847(var_0) {
+ai_stun(var_0) {
   self endon("death");
 
-  if(isDefined(self) && isalive(self) && maps\_utility::_id_27E2()) {
-    maps\_utility::_id_23BB(var_0);
+  if(isDefined(self) && isalive(self) && maps\_utility::flashbangisactive()) {
+    maps\_utility::flashbangstart(var_0);
   }
 }
 
-_id_4848(var_0) {
+start_teleport(var_0) {
   self forceteleport(var_0.origin, var_0.angles);
   self setgoalpos(self.origin);
   self setgoalnode(var_0);
 }
 
-_id_4357(var_0, var_1) {
+waittill_player_in_range(var_0, var_1) {
   for(;;) {
     if(distance(var_0, level.player.origin) <= var_1) {
       break;
@@ -160,7 +160,7 @@ _id_4357(var_0, var_1) {
   }
 }
 
-_id_4849(var_0, var_1) {
+vehicle_go_to_end_and_delete(var_0, var_1) {
   var_2 = getvehiclenode(var_0, "targetname");
   var_3 = "";
 
@@ -177,7 +177,7 @@ _id_4849(var_0, var_1) {
   var_4 = spawnVehicle(var_3, "plane", "truck", var_2.origin, var_2.angles);
 
   if(var_1 == "truck") {
-    var_4 _id_484A();
+    var_4 truck_headlights_on();
   }
   var_4 attachpath(var_2);
   var_4 startpath();
@@ -186,25 +186,25 @@ _id_4849(var_0, var_1) {
   var_4 delete();
 }
 
-_id_484A() {
+truck_headlights_on() {
   playFXOnTag(level._effect["headlight_truck"], self, "tag_headlight_left");
   playFXOnTag(level._effect["headlight_truck"], self, "tag_headlight_right");
 }
 
-_id_484B(var_0, var_1) {
+set_goalvolume(var_0, var_1) {
   self endon("death");
 
   if(isDefined(var_0)) {
     var_1 = getEnt(var_0, "targetname");
   }
   var_2 = getnode(var_1.target, "targetname");
-  self._id_484C = var_1;
+  self.goalvolume = var_1;
   self setgoalnode(var_2);
   self.goalradius = var_2.radius;
   self setgoalvolume(var_1);
 }
 
-_id_484D(var_0) {
+waittill_touching_entity(var_0) {
   self endon("death");
 
   while(!self istouching(var_0)) {
@@ -212,13 +212,13 @@ _id_484D(var_0) {
   }
 }
 
-_id_484E() {
+reset_goalvolume() {
   self endon("death");
   self setgoalpos(self.origin);
-  self._id_484C = undefined;
+  self.goalvolume = undefined;
 }
 
-_id_484F(var_0, var_1, var_2, var_3) {
+print3dthread(var_0, var_1, var_2, var_3) {
   self endon("death");
 
   if(!isDefined(var_2)) {
@@ -244,18 +244,18 @@ _id_484F(var_0, var_1, var_2, var_3) {
   }
 }
 
-_id_4850() {
+smoke_detect() {
   self endon("smoke_has_been_thrown");
-  self._id_4851 = 0;
+  self.smokethrown = 0;
 
-  while(self._id_4851 == 0) {
+  while(self.smokethrown == 0) {
     wait 0.05;
     var_0 = getEntArray("grenade", "classname");
 
     for(var_1 = 0; var_1 < var_0.size; var_1++) {
       if(var_0[var_1].model == "projectile_us_smoke_grenade") {
         if(var_0[var_1] istouching(self)) {
-          self._id_4851 = 1;
+          self.smokethrown = 1;
           self notify("smoke_has_been_thrown");
         }
       }
@@ -263,25 +263,25 @@ _id_4850() {
   }
 }
 
-_id_4852(var_0) {
+dialogue_execute(var_0) {
   self endon("death");
-  maps\_utility::_id_168C(var_0);
+  maps\_utility::dialogue_queue(var_0);
 }
 
-_id_4853(var_0) {
+trigarraywait(var_0) {
   var_1 = getEntArray(var_0, "targetname");
 
   if(var_1.size == 1) {
-    _id_4855(var_0);
+    trigwait(var_0);
   } else {
     for(var_2 = 0; var_2 < var_1.size; var_2++) {
-      var_1[var_2] thread _id_4854(var_1);
+      var_1[var_2] thread trigarraywait2(var_1);
     }
     var_1[0] waittill("trigger");
   }
 }
 
-_id_4854(var_0) {
+trigarraywait2(var_0) {
   self waittill("trigger");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
@@ -290,13 +290,13 @@ _id_4854(var_0) {
   }
 }
 
-_id_4855(var_0) {
+trigwait(var_0) {
   var_1 = getEnt(var_0, "targetname");
   var_1 waittill("trigger");
   var_1 common_scripts\utility::trigger_off();
 }
 
-_id_4856(var_0, var_1, var_2) {
+triggersenable(var_0, var_1, var_2) {
   var_3 = getEntArray(var_0, var_1);
 
   if(var_2 == 1) {
@@ -306,153 +306,153 @@ _id_4856(var_0, var_1, var_2) {
   }
 }
 
-_id_4857(var_0) {
+triggeractivate(var_0) {
   var_1 = getEnt(var_0, "targetname");
   var_1 notify("trigger", level.player);
   var_1 common_scripts\utility::trigger_off();
 }
 
-_id_4858() {}
+aa_ai_functions() {}
 
-_id_4859(var_0) {
+look_at_position(var_0) {
   var_1 = vectortoangles(self.origin - var_0.origin);
   self setpotentialthreat(var_1[1]);
 }
 
-_id_485A(var_0) {
-  if(!isDefined(self._id_485B)) {
-    self._id_485B = self.threatbias;
+set_threatbias(var_0) {
+  if(!isDefined(self.old_threatbias)) {
+    self.old_threatbias = self.threatbias;
   }
   self.threatbias = var_0;
 }
 
-_id_485C() {
-  if(isDefined(self._id_485B)) {
-    self.threatbias = self._id_485B;
+reset_threatbias() {
+  if(isDefined(self.old_threatbias)) {
+    self.threatbias = self.old_threatbias;
   }
-  self._id_485B = undefined;
+  self.old_threatbias = undefined;
 }
 
-_id_485D(var_0) {
-  if(!isDefined(self._id_2802)) {
-    self._id_2802 = self.walkdist;
+set_walkdist(var_0) {
+  if(!isDefined(self.old_walkdist)) {
+    self.old_walkdist = self.walkdist;
   }
   self.walkdist = var_0;
 }
 
-_id_485E() {
-  if(isDefined(self._id_2802)) {
-    self.walkdist = self._id_2802;
+reset_walkdist() {
+  if(isDefined(self.old_walkdist)) {
+    self.walkdist = self.old_walkdist;
   }
-  self._id_2802 = undefined;
+  self.old_walkdist = undefined;
 }
 
-_id_485F(var_0) {
-  self._id_4860 = self.health;
+set_health(var_0) {
+  self.old_health = self.health;
   self.health = var_0;
 }
 
-_id_4861() {
-  if(isDefined(self._id_4860)) {
-    self.health = self._id_4860;
+reset_health() {
+  if(isDefined(self.old_health)) {
+    self.health = self.old_health;
   }
 }
 
-_id_4862(var_0) {
-  if(!isDefined(self._id_404B)) {
-    self._id_404B = self._id_1032;
+set_animname(var_0) {
+  if(!isDefined(self.old_animname)) {
+    self.old_animname = self.animname;
   }
-  self._id_1032 = var_0;
+  self.animname = var_0;
 }
 
-_id_4863() {
-  if(isDefined(self._id_404B)) {
-    self._id_1032 = self._id_404B;
+reset_animname() {
+  if(isDefined(self.old_animname)) {
+    self.animname = self.old_animname;
   }
-  self._id_404B = undefined;
+  self.old_animname = undefined;
 }
 
-_id_4864(var_0) {
-  if(!isDefined(self._id_4865)) {
-    self._id_4865 = self.maxsightdistsqrd;
+set_maxsightdistsqrd(var_0) {
+  if(!isDefined(self.old_maxsightdistsqrd)) {
+    self.old_maxsightdistsqrd = self.maxsightdistsqrd;
   }
   self.maxsightdistsqrd = var_0;
 }
 
-_id_4866() {
-  if(isDefined(self._id_4865)) {
-    self.maxsightdistsqrd = self._id_4865;
+reset_maxsightdistsqrd() {
+  if(isDefined(self.old_maxsightdistsqrd)) {
+    self.maxsightdistsqrd = self.old_maxsightdistsqrd;
   }
-  self._id_4865 = undefined;
+  self.old_maxsightdistsqrd = undefined;
 }
 
-_id_4867(var_0) {
+set_threatbiasgroup(var_0) {
   if(!threatbiasgroupexists(var_0)) {}
 
-  if(!isDefined(self._id_4868)) {
-    self._id_4868 = self._id_4869;
+  if(!isDefined(self.old_threatbiasgroupname)) {
+    self.old_threatbiasgroupname = self.threatbiasgroupname;
   }
-  self._id_4869 = var_0;
+  self.threatbiasgroupname = var_0;
   self setthreatbiasgroup(var_0);
 }
 
-_id_486A() {
-  if(isDefined(self._id_4868)) {
-    self._id_4869 = self._id_4868;
-    self setthreatbiasgroup(self._id_4868);
+reset_threatbiasgroup() {
+  if(isDefined(self.old_threatbiasgroupname)) {
+    self.threatbiasgroupname = self.old_threatbiasgroupname;
+    self setthreatbiasgroup(self.old_threatbiasgroupname);
 
-    if(!threatbiasgroupexists(self._id_4868)) {}
+    if(!threatbiasgroupexists(self.old_threatbiasgroupname)) {}
   } else {
-    self._id_4869 = undefined;
+    self.threatbiasgroupname = undefined;
     self setthreatbiasgroup();
   }
 
-  self._id_4868 = undefined;
+  self.old_threatbiasgroupname = undefined;
 }
 
-_id_486B(var_0) {
-  if(!isDefined(self._id_4048)) {
-    self._id_4048 = self.goalradius;
+setgoalradius(var_0) {
+  if(!isDefined(self.old_goalradius)) {
+    self.old_goalradius = self.goalradius;
   }
   self.goalradius = var_0;
 }
 
-_id_486C() {
-  if(isDefined(self._id_4048)) {
-    self.goalradius = self._id_4048;
+resetgoalradius() {
+  if(isDefined(self.old_goalradius)) {
+    self.goalradius = self.old_goalradius;
   }
-  self._id_4048 = undefined;
+  self.old_goalradius = undefined;
 }
 
-_id_486D(var_0) {
-  if(!isDefined(self._id_2071)) {
-    self._id_2071 = self.interval;
+setinterval(var_0) {
+  if(!isDefined(self.old_interval)) {
+    self.old_interval = self.interval;
   }
   self.interval = var_0;
 }
 
-_id_486E() {
-  if(isDefined(self._id_2071)) {
-    self.interval = self._id_2071;
+resetinterval() {
+  if(isDefined(self.old_interval)) {
+    self.interval = self.old_interval;
   }
-  self._id_2071 = undefined;
+  self.old_interval = undefined;
 }
 
-_id_486F(var_0) {
-  if(!isDefined(self._id_42D0)) {
-    self._id_42D0 = self._id_20AF;
+set_accuracy(var_0) {
+  if(!isDefined(self.old_accuracy)) {
+    self.old_accuracy = self.baseaccuracy;
   }
-  self._id_20AF = var_0;
+  self.baseaccuracy = var_0;
 }
 
-_id_4870() {
-  if(isDefined(self._id_42D0)) {
-    self._id_20AF = self._id_42D0;
+reset_accuracy() {
+  if(isDefined(self.old_accuracy)) {
+    self.baseaccuracy = self.old_accuracy;
   }
-  self._id_42D0 = undefined;
+  self.old_accuracy = undefined;
 }
 
-_id_4871(var_0) {
+get_closest_ally(var_0) {
   var_1 = undefined;
 
   if(!isDefined(var_0)) {
@@ -460,20 +460,20 @@ _id_4871(var_0) {
   } else {
     var_2 = var_0 getorigin();
   }
-  if(isDefined(level._id_4872)) {
-    var_1 = maps\_utility::_id_2288(var_2, "allies", level._id_4872);
+  if(isDefined(level.excludedai)) {
+    var_1 = maps\_utility::get_closest_ai_exclude(var_2, "allies", level.excludedai);
   } else {
-    var_1 = maps\_utility::_id_1EE9(var_2, "allies");
+    var_1 = maps\_utility::get_closest_ai(var_2, "allies");
   }
   return var_1;
 }
 
-_id_4873() {
-  var_0 = maps\_utility::_id_1EE9(level.player getorigin(), "axis");
+get_closest_axis() {
+  var_0 = maps\_utility::get_closest_ai(level.player getorigin(), "axis");
   return var_0;
 }
 
-_id_4874(var_0, var_1) {
+groupwarp(var_0, var_1) {
   var_2 = getnodearray(var_1, "targetname");
 
   for(var_3 = 0; var_3 < var_0.size; var_3++) {
@@ -483,7 +483,7 @@ _id_4874(var_0, var_1) {
   }
 }
 
-_id_4875(var_0, var_1, var_2) {
+getaiarraytouchingvolume(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     var_2 = getEnt(var_1, "targetname");
   }
@@ -503,10 +503,10 @@ _id_4875(var_0, var_1, var_2) {
   return var_4;
 }
 
-_id_4876(var_0, var_1, var_2, var_3) {
+npcdelete(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_3)) {
     var_3 = [];
-    var_3[0] = level._id_4877;
+    var_3[0] = level.price;
   }
 
   var_4 = getEnt(var_0, "targetname");
@@ -531,7 +531,7 @@ _id_4876(var_0, var_1, var_2, var_3) {
 
   for(var_6 = 0; var_6 < var_5.size; var_6++) {
     if(var_5[var_6] istouching(var_4)) {
-      var_5[var_6] _id_487F(0);
+      var_5[var_6] invulnerable(0);
 
       if(var_2 == 1) {
         var_5[var_6] kill((0, 0, 0));
@@ -543,7 +543,7 @@ _id_4876(var_0, var_1, var_2, var_3) {
   }
 }
 
-_id_4878(var_0, var_1) {
+getdudefromarray(var_0, var_1) {
   var_2 = undefined;
 
   for(var_3 = 0; var_3 < var_0.size; var_3++) {
@@ -555,7 +555,7 @@ _id_4878(var_0, var_1) {
   return var_2;
 }
 
-_id_4879(var_0, var_1) {
+getdudesfromarray(var_0, var_1) {
   var_2 = [];
 
   if(isDefined(var_1)) {
@@ -573,16 +573,16 @@ _id_4879(var_0, var_1) {
   }
 }
 
-_id_487A(var_0) {
+gotonode(var_0) {
   self endon("death");
   var_1 = getnode(var_0, "targetname");
-  _id_486B(var_1.radius);
+  setgoalradius(var_1.radius);
   self setgoalnode(var_1);
   self waittill("goal");
-  _id_486C();
+  resetgoalradius();
 }
 
-_id_487B(var_0) {
+gotonodeanddelete(var_0) {
   if(!isDefined(self)) {
     return;
   }
@@ -592,12 +592,12 @@ _id_487B(var_0) {
   self endon("death");
   var_1 = getnode(var_0, "targetname");
   self setgoalnode(var_1);
-  _id_486B(var_1.radius);
+  setgoalradius(var_1.radius);
   self waittill("goal");
   self delete();
 }
 
-_id_487C(var_0) {
+gotonodeandwait(var_0) {
   if(!isDefined(self)) {
     return;
   }
@@ -607,24 +607,24 @@ _id_487C(var_0) {
   self endon("death");
   var_1 = getnode(var_0, "targetname");
   self setgoalnode(var_1);
-  _id_486B(var_1.radius);
+  setgoalradius(var_1.radius);
   self waittill("goal");
-  _id_4862("guy");
+  set_animname("guy");
   self waittill("stop_waiting_at_node");
-  _id_486C();
+  resetgoalradius();
 }
 
-_id_487D(var_0) {
+forcetonode(var_0) {
   self endon("death");
   var_1 = getnode(var_0, "targetname");
   self pushplayer(1);
   self setgoalnode(var_1);
   self waittill("goal");
   self pushplayer(0);
-  _id_486C();
+  resetgoalradius();
 }
 
-_id_487E(var_0) {
+setposture(var_0) {
   if(var_0 == "all") {
     self allowedstances("stand", "crouch", "prone");
   } else {
@@ -632,18 +632,18 @@ _id_487E(var_0) {
   }
 }
 
-_id_487F(var_0) {
+invulnerable(var_0) {
   if(var_0 == 0) {
-    if(isDefined(self._id_0D04)) {
-      maps\_utility::_id_1902();
+    if(isDefined(self.magic_bullet_shield)) {
+      maps\_utility::stop_magic_bullet_shield();
     }
-  } else if(!isDefined(self._id_0D04)) {
-    thread maps\_utility::_id_0D04();
+  } else if(!isDefined(self.magic_bullet_shield)) {
+    thread maps\_utility::magic_bullet_shield();
   }
-  self.a._id_0D11 = var_0;
+  self.a.disablepain = var_0;
 }
 
-_id_4880() {
+killentity() {
   self endon("death");
 
   if(!isDefined(self)) {
@@ -653,11 +653,11 @@ _id_4880() {
     return;
   }
   self.allowdeath = 1;
-  _id_487F(0);
+  invulnerable(0);
   self kill();
 }
 
-_id_4881(var_0) {
+gotovolume(var_0) {
   self endon("death");
   var_1 = getEnt(var_0, "targetname");
   var_2 = getnode(var_1.target, "targetname");
@@ -666,11 +666,11 @@ _id_4881(var_0) {
   self.goalradius = var_2.radius;
 }
 
-_id_4882() {}
+aa_spawning_functions() {}
 
-_id_4883() {}
+aa_door_functions() {}
 
-_id_4042(var_0, var_1, var_2) {
+door_open(var_0, var_1, var_2) {
   if(!isDefined(var_1)) {
     var_1 = 1;
   }
@@ -689,23 +689,23 @@ _id_4042(var_0, var_1, var_2) {
 
   switch (var_0) {
     case "explosive":
-      thread _id_4046();
-      _id_4045(var_2);
+      thread door_fall_over();
+      door_connectpaths(var_2);
       self playSound(level.scr_sound["snd_breach_wooden_door"]);
       earthquake(0.4, 1, self.origin, 1000);
-      radiusdamage(self.origin, 56, level._id_4044, level._id_4043);
+      radiusdamage(self.origin, 56, level.maxdetpackdamage, level.mindetpackdamage);
       break;
     case "kicked":
       self rotateYaw(-175, 0.5);
-      _id_4045(var_2);
+      door_connectpaths(var_2);
       break;
     case "kicked_down":
-      thread _id_4046();
-      _id_4045(var_2);
+      thread door_fall_over();
+      door_connectpaths(var_2);
       break;
     default:
       self rotateYaw(-175, 0.5);
-      _id_4045();
+      door_connectpaths();
       break;
   }
 
@@ -713,7 +713,7 @@ _id_4042(var_0, var_1, var_2) {
   common_scripts\utility::exploder(var_5);
 }
 
-_id_4045(var_0) {
+door_connectpaths(var_0) {
   if(self.classname == "script_brushmodel") {
     self connectpaths();
   } else {
@@ -724,7 +724,7 @@ _id_4045(var_0) {
   }
 }
 
-_id_4046() {
+door_fall_over() {
   var_0 = anglesToForward(self.angles);
   var_1 = (var_0[0] * 20, var_0[1] * 20, var_0[2] * 20);
   self moveTo(self.origin + var_1, 0.5, 0, 0.5);

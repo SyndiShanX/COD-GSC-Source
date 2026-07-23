@@ -61,13 +61,13 @@ soundfxdelete(var_0) {
   self delete();
 }
 
-_id_1E51(var_0, var_1, var_2) {
+rainfx(var_0, var_1, var_2) {
   var_3 = spawn("script_origin", (0, 0, 0));
   var_3.origin = var_2;
-  var_3 thread _id_1E52(var_0, var_1);
+  var_3 thread rainloop(var_0, var_1);
 }
 
-_id_1E52(var_0, var_1) {
+rainloop(var_0, var_1) {
   self endon("death");
   var_2 = spawn("sound_blend", (0, 0, 0));
   var_2.origin = self.origin;
@@ -152,11 +152,11 @@ blenddelete(var_0) {
   var_0 delete();
 }
 
-_id_1E54(var_0) {
+watersheeting(var_0) {
   var_1 = 3;
 
-  if(isDefined(var_0._id_1662)) {
-    var_1 = var_0._id_1662;
+  if(isDefined(var_0.script_duration)) {
+    var_1 = var_0.script_duration;
   }
   for(;;) {
     var_0 waittill("trigger", var_2);

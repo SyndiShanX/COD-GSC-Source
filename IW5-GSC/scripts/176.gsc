@@ -3,23 +3,23 @@
  * Script: scripts\176.gsc
 **************************************/
 
-_id_15A1() {
-  if(!isDefined(level._id_1456)) {
-    level._id_1456 = spawnStruct();
+mus_init() {
+  if(!isDefined(level._audio)) {
+    level._audio = spawnStruct();
   }
-  level._id_1456._id_1479 = spawnStruct();
-  level._id_1456._id_1479._id_15A2 = [];
-  level._id_1456._id_1479._id_15A3 = "";
-  level._id_1456._id_1479._id_15A4 = "";
-  level._id_1456._id_1479._id_15A5 = 0;
-  level._id_1456._id_1479._id_15A6 = [[0.0, 0.5], [0.9, 1.0], [1.0, 1.0]];
-  thread _id_15B1();
+  level._audio.music = spawnStruct();
+  level._audio.music.cue_cash = [];
+  level._audio.music.curr_cue_name = "";
+  level._audio.music.prev_cue_name = "";
+  level._audio.music.enable_auto_mix = 0;
+  level._audio.music.env_threat_to_vol = [[0.0, 0.5], [0.9, 1.0], [1.0, 1.0]];
+  thread musx_monitor_game_vars();
 }
 
-_id_15A7(var_0, var_1, var_2, var_3, var_4) {
+mus_play(var_0, var_1, var_2, var_3, var_4) {
   var_5 = undefined;
-  var_6 = _id_15AA();
-  var_7 = _id_15AB(var_0);
+  var_6 = mus_get_playing_cue_preset();
+  var_7 = musx_construct_cue(var_0);
   var_8 = var_7["fade_in_time"];
 
   if(isDefined(var_1)) {
@@ -42,38 +42,38 @@ _id_15A7(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_3)) {
     var_10 = var_3;
   }
-  _id_15AC(var_7["name"], var_8, var_9, var_10, var_4);
+  musx_start_cue(var_7["name"], var_8, var_9, var_10, var_4);
 }
 
-_id_15A8(var_0) {
+mus_stop(var_0) {
   var_1 = 3.0;
 
-  if(_id_15A9()) {
-    var_2 = _id_15AF(level._id_1456._id_1479._id_15A3);
+  if(mus_is_playing()) {
+    var_2 = musx_get_cashed_cue(level._audio.music.curr_cue_name);
     var_1 = var_2["fade_out_time"];
   }
 
   if(isDefined(var_0)) {
     var_1 = var_0;
   }
-  _id_15AD(var_1);
+  musx_stop_all_music(var_1);
 }
 
-_id_15A9() {
-  return isDefined(level._id_1456._id_1479._id_15A3) && level._id_1456._id_1479._id_15A3 != "";
+mus_is_playing() {
+  return isDefined(level._audio.music.curr_cue_name) && level._audio.music.curr_cue_name != "";
 }
 
-_id_15AA() {
+mus_get_playing_cue_preset() {
   var_0 = undefined;
 
-  if(_id_15A9()) {
-    var_0 = _id_15AF(level._id_1456._id_1479._id_15A3);
+  if(mus_is_playing()) {
+    var_0 = musx_get_cashed_cue(level._audio.music.curr_cue_name);
   }
   return var_0;
 }
 
-_id_15AB(var_0) {
-  var_1 = _id_15AF(var_0);
+musx_construct_cue(var_0) {
+  var_1 = musx_get_cashed_cue(var_0);
 
   if(!isDefined(var_1)) {
     var_1 = [];
@@ -83,62 +83,62 @@ _id_15AB(var_0) {
     var_1["fade_out_time"] = 1.5;
     var_1["auto_mix"] = 0;
     var_1["name"] = var_0;
-    _id_15B0(var_1);
+    musx_cash_cue(var_1);
   }
 
   return var_1;
 }
 
-_id_15AC(var_0, var_1, var_2, var_3, var_4) {
+musx_start_cue(var_0, var_1, var_2, var_3, var_4) {
   var_5 = 0;
 
   if(isDefined(var_4)) {
     var_5 = var_4;
   }
-  if(var_0 == level._id_1456._id_1479._id_15A3 && !var_5) {
+  if(var_0 == level._audio.music.curr_cue_name && !var_5) {
     return;
   } else {
-    var_6 = level._id_1456._id_1479._id_15A4;
-    var_7 = level._id_1456._id_1479._id_15A3;
-    level._id_1456._id_1479._id_15A4 = level._id_1456._id_1479._id_15A3;
-    level._id_1456._id_1479._id_15A3 = var_0;
-    var_8 = _id_15AF(level._id_1456._id_1479._id_15A3);
-    var_9 = _id_15AF(level._id_1456._id_1479._id_15A4);
+    var_6 = level._audio.music.prev_cue_name;
+    var_7 = level._audio.music.curr_cue_name;
+    level._audio.music.prev_cue_name = level._audio.music.curr_cue_name;
+    level._audio.music.curr_cue_name = var_0;
+    var_8 = musx_get_cashed_cue(level._audio.music.curr_cue_name);
+    var_9 = musx_get_cashed_cue(level._audio.music.prev_cue_name);
     var_10 = undefined;
 
     if(isDefined(var_9)) {
       var_10 = var_9["alias"];
     }
-    maps\_audio_stream_manager::_id_1480(var_8["alias"], var_1, var_2, var_3, var_10);
+    maps\_audio_stream_manager::sm_start_music(var_8["alias"], var_1, var_2, var_3, var_10);
   }
 }
 
-_id_15AD(var_0) {
-  maps\_audio_stream_manager::_id_1484(var_0);
+musx_stop_all_music(var_0) {
+  maps\_audio_stream_manager::sm_stop_music(var_0);
 }
 
-_id_15AE() {
-  return level._id_1456._id_1479._id_15A5;
+musx_get_auto_mix() {
+  return level._audio.music.enable_auto_mix;
 }
 
-_id_15AF(var_0) {
-  return level._id_1456._id_1479._id_15A2[var_0];
+musx_get_cashed_cue(var_0) {
+  return level._audio.music.cue_cash[var_0];
 }
 
-_id_15B0(var_0) {
-  level._id_1456._id_1479._id_15A2[var_0["name"]] = var_0;
+musx_cash_cue(var_0) {
+  level._audio.music.cue_cash[var_0["name"]] = var_0;
 }
 
-_id_15B1() {
-  if(_id_15AE()) {
+musx_monitor_game_vars() {
+  if(musx_get_auto_mix()) {
     var_0 = 1.0;
 
     for(;;) {
       wait(var_0);
 
-      if(_id_15AE()) {
-        var_1 = maps\_audio::_id_15B2();
-        var_2 = maps\_audio::_id_15B3(var_1, level._id_1456._id_1479._id_15A6);
+      if(musx_get_auto_mix()) {
+        var_1 = maps\_audio::aud_get_threat_level();
+        var_2 = maps\_audio::aud_map(var_1, level._audio.music.env_threat_to_vol);
       }
     }
   }

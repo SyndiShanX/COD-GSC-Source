@@ -3,35 +3,35 @@
  * Script: scripts\800.gsc
 **************************************/
 
-_id_5974() {
+handle_crash_fx() {
   level waittill("crash_teleport");
-  thread _id_5978();
-  thread _id_5979();
-  thread _id_597A();
-  thread _id_597B();
-  thread _id_597C();
-  thread _id_5977();
+  thread handle_sled_fx();
+  thread handle_wing_fx();
+  thread handle_engine_fx();
+  thread handle_tail_fx();
+  thread handle_tail_impact_fx();
+  thread handle_volumetric_fx();
   level waittill("crash_impact");
-  thread _id_5975();
+  thread handle_paper_explosions();
   level waittill("crash_throw_player");
 }
 
-_id_5975() {
+handle_paper_explosions() {
   var_0 = getEntArray("sled_paper_explosion", "script_noteworthy");
 
   foreach(var_2 in var_0) {
     var_3 = common_scripts\utility::getfx("hijack_paper_explosion");
     playFXOnTag(var_3, var_2, "tag_origin");
-    var_2 thread _id_5982(var_3, "sled_scrape_stop");
+    var_2 thread stop_fx_on_notify(var_3, "sled_scrape_stop");
   }
 
-  level._id_5976[0] waittillmatch("single anim", "paper_start");
-  playFXOnTag(common_scripts\utility::getfx("hijack_crash_papers"), level._id_5976[0], "J_Mid_Section");
-  level._id_5976[0] waittillmatch("single anim", "paper_stop");
-  stopFXOnTag(common_scripts\utility::getfx("hijack_crash_papers"), level._id_5976[0], "J_Mid_Section");
+  level.crash_models[0] waittillmatch("single anim", "paper_start");
+  playFXOnTag(common_scripts\utility::getfx("hijack_crash_papers"), level.crash_models[0], "J_Mid_Section");
+  level.crash_models[0] waittillmatch("single anim", "paper_stop");
+  stopFXOnTag(common_scripts\utility::getfx("hijack_crash_papers"), level.crash_models[0], "J_Mid_Section");
 }
 
-_id_5977() {
+handle_volumetric_fx() {
   level waittill("crash_impact");
   wait 1;
   var_0 = getEntArray("crash_window_volseq1", "script_noteworthy");
@@ -39,7 +39,7 @@ _id_5977() {
   foreach(var_2 in var_0) {
     var_3 = common_scripts\utility::getfx("hijack_crash_window_volumetric");
     playFXOnTag(var_3, var_2, "tag_origin");
-    var_2 thread _id_5982(var_3, "sled_scrape_stop");
+    var_2 thread stop_fx_on_notify(var_3, "sled_scrape_stop");
   }
 
   wait 0.1;
@@ -48,7 +48,7 @@ _id_5977() {
   foreach(var_2 in var_0) {
     var_3 = common_scripts\utility::getfx("hijack_crash_window_volumetric");
     playFXOnTag(var_3, var_2, "tag_origin");
-    var_2 thread _id_5982(var_3, "sled_scrape_stop");
+    var_2 thread stop_fx_on_notify(var_3, "sled_scrape_stop");
   }
 
   wait 0.1;
@@ -57,7 +57,7 @@ _id_5977() {
   foreach(var_2 in var_0) {
     var_3 = common_scripts\utility::getfx("hijack_crash_window_volumetric");
     playFXOnTag(var_3, var_2, "tag_origin");
-    var_2 thread _id_5982(var_3, "sled_scrape_stop");
+    var_2 thread stop_fx_on_notify(var_3, "sled_scrape_stop");
   }
 
   wait 0.3;
@@ -68,7 +68,7 @@ _id_5977() {
   foreach(var_2 in var_0) {
     var_3 = common_scripts\utility::getfx("hijack_crash_window_volumetric");
     playFXOnTag(var_3, var_2, "tag_origin");
-    var_2 thread _id_5982(var_3, "sled_scrape_stop");
+    var_2 thread stop_fx_on_notify(var_3, "sled_scrape_stop");
   }
 
   wait 0.1;
@@ -77,13 +77,13 @@ _id_5977() {
   foreach(var_2 in var_0) {
     var_3 = common_scripts\utility::getfx("hijack_crash_window_volumetric");
     playFXOnTag(var_3, var_2, "tag_origin");
-    var_2 thread _id_5982(var_3, "sled_scrape_stop");
+    var_2 thread stop_fx_on_notify(var_3, "sled_scrape_stop");
   }
 }
 
-_id_5978() {
-  level._id_5976[0] waittillmatch("single anim", "split");
-  var_0 = level._id_5976[0];
+handle_sled_fx() {
+  level.crash_models[0] waittillmatch("single anim", "split");
+  var_0 = level.crash_models[0];
   var_1 = common_scripts\utility::getfx("fuselage_break_sparks1");
   playFXOnTag(var_1, var_0, "FX_Mid_Break_1");
   playFXOnTag(var_1, var_0, "FX_Mid_Break_2");
@@ -93,27 +93,27 @@ _id_5978() {
   foreach(var_4 in var_2) {
     var_5 = common_scripts\utility::getfx("fuselage_scrape");
     playFXOnTag(var_5, var_4, "tag_origin");
-    var_4 thread _id_5982(var_5, "sled_scrape_stop");
+    var_4 thread stop_fx_on_notify(var_5, "sled_scrape_stop");
   }
 }
 
-_id_5979() {
+handle_wing_fx() {
   level waittill("crash_impact");
   wait 1;
-  playFXOnTag(common_scripts\utility::getfx("wing_fuel_explosion"), level._id_5976[0], "FX_R_Wing");
-  level._id_5976[0] thread _id_5982(common_scripts\utility::getfx("wing_fuel_explosion"), "sled_scrape_stop");
+  playFXOnTag(common_scripts\utility::getfx("wing_fuel_explosion"), level.crash_models[0], "FX_R_Wing");
+  level.crash_models[0] thread stop_fx_on_notify(common_scripts\utility::getfx("wing_fuel_explosion"), "sled_scrape_stop");
 }
 
-_id_597A() {
+handle_engine_fx() {
   wait 6.733;
   playFXOnTag(common_scripts\utility::getfx("engine_explosion"), getEnt("engine_explosion", "script_noteworthy"), "tag_origin");
-  level._id_5976[0] waittillmatch("single anim", "engine_fire");
-  playFXOnTag(common_scripts\utility::getfx("hijack_engine_trail"), level._id_5976[0], "J_rwing_engine");
-  var_0 = level._id_5976[0] gettagorigin("J_rwing_engine");
+  level.crash_models[0] waittillmatch("single anim", "engine_fire");
+  playFXOnTag(common_scripts\utility::getfx("hijack_engine_trail"), level.crash_models[0], "J_rwing_engine");
+  var_0 = level.crash_models[0] gettagorigin("J_rwing_engine");
   playFX(common_scripts\utility::getfx("hijack_engine_split"), var_0);
 }
 
-_id_597B() {
+handle_tail_fx() {
   var_0 = common_scripts\utility::getfx("smoke_geotrail_debris");
   var_1 = common_scripts\utility::getfx("reaper_explosion");
   var_2 = common_scripts\utility::getfx("hijack_engine_split");
@@ -128,7 +128,7 @@ _id_597B() {
   playFX(var_3, var_4.origin);
   wait 0.2667;
   var_4 = getEnt("tail_wing_impact3", "script_noteworthy");
-  var_5 = level._id_5976[0] gettagorigin("J_RFin_tip2");
+  var_5 = level.crash_models[0] gettagorigin("J_RFin_tip2");
   playFX(var_1, var_5);
   level.player thread maps\_utility::play_sound_on_entity("hijk_explosion_lfe");
   wait 1.7333;
@@ -142,12 +142,12 @@ _id_597B() {
   level notify("tail_hits_tower");
 }
 
-_id_597C() {
+handle_tail_impact_fx() {
   var_0 = getEnt("tail_impact1", "script_noteworthy");
   wait 18.5;
   playFX(common_scripts\utility::getfx("hijack_tail_impact"), var_0.origin);
-  playFXOnTag(common_scripts\utility::getfx("hijack_tail_trail"), level._id_5976[0], "J_Tail_Sled");
-  level._id_5976[0] thread _id_5982(common_scripts\utility::getfx("hijack_tail_trail"), "sled_scrape_stop");
+  playFXOnTag(common_scripts\utility::getfx("hijack_tail_trail"), level.crash_models[0], "J_Tail_Sled");
+  level.crash_models[0] thread stop_fx_on_notify(common_scripts\utility::getfx("hijack_tail_trail"), "sled_scrape_stop");
   var_0 = getEnt("tail_impact2", "script_noteworthy");
   wait 1.3;
   playFX(common_scripts\utility::getfx("hijack_tail_impact"), var_0.origin);
@@ -156,7 +156,7 @@ _id_597C() {
   playFX(common_scripts\utility::getfx("hijack_tail_spray"), var_0.origin);
 }
 
-_id_597D() {
+fluorescentflicker() {
   level endon("stop_flicker");
 
   for(;;) {
@@ -165,36 +165,36 @@ _id_597D() {
   }
 }
 
-_id_597E() {
+handle_pre_sled_lights() {
   common_scripts\utility::flag_wait("turn_on_crash_sled_lights");
-  thread _id_597F();
+  thread pre_sled_light();
 }
 
-_id_597F() {
+pre_sled_light() {
   var_0 = getEntArray("sled_fill_light", "script_noteworthy");
 
   foreach(var_2 in var_0) {
     var_3 = common_scripts\utility::getfx("hijack_fxlight_default_med_dim");
     playFXOnTag(var_3, var_2, "tag_origin");
-    var_2 thread _id_5982(var_3, "crash_stop_pre_sled_lights");
+    var_2 thread stop_fx_on_notify(var_3, "crash_stop_pre_sled_lights");
   }
 }
 
-_id_5980() {
+handle_crash_lights() {
   var_0 = getEntArray("sled_emergency_light_fx", "script_noteworthy");
   var_1 = common_scripts\utility::getfx("hijack_fx_light_red_blink");
 
   foreach(var_3 in var_0) {
     playFXOnTag(var_1, var_3, "tag_origin");
-    var_3 thread _id_5982(var_1, "crash_impact");
+    var_3 thread stop_fx_on_notify(var_1, "crash_impact");
   }
 
-  thread _id_5981();
+  thread sled_emergency_light_post_impact_flicker();
   var_5 = getEnt("sled_emergency_spotlight_fx", "script_noteworthy");
   level waittill("crash_sequence_done");
 }
 
-_id_5981() {
+sled_emergency_light_post_impact_flicker() {
   level waittill("crash_impact");
   wait 2.0;
   var_0 = getEntArray("sled_emergency_light_fx", "script_noteworthy");
@@ -202,17 +202,17 @@ _id_5981() {
 
   foreach(var_3 in var_0) {
     playFXOnTag(var_1, var_3, "tag_origin");
-    var_3 thread _id_5982(var_1, "crash_throw_player");
+    var_3 thread stop_fx_on_notify(var_1, "crash_throw_player");
   }
 }
 
-_id_5982(var_0, var_1) {
+stop_fx_on_notify(var_0, var_1) {
   level waittill(var_1);
   stopFXOnTag(var_0, self, "tag_origin");
 }
 
-_id_5983(var_0) {
-  var_0.a._id_0AA7 = gettime();
+custom_fire_fx(var_0) {
+  var_0.a.lastshoottime = gettime();
   var_0 thread maps\_utility::play_sound_on_tag("weap_ak47_fire_npc", "tag_flash");
   playFXOnTag(common_scripts\utility::getfx("ak47_flash_wv_hijack_crash"), var_0, "tag_flash");
   var_1 = var_0 gettagorigin("tag_weapon");

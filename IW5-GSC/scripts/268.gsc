@@ -21,7 +21,7 @@ watchgrenadeusage() {
   thread watchc4detonation();
   thread watchc4altdetonation();
   thread watchclaymores();
-  thread _id_1C01();
+  thread begin_semtex_grenade_tracking();
 
   for(;;) {
     self waittill("grenade_pullback", var_0);
@@ -33,7 +33,7 @@ watchgrenadeusage() {
     }
 
     if(var_0 == "smoke_grenade_american") {
-      _id_1BFF();
+      beginsmokegrenadetracking();
       continue;
     }
 
@@ -41,40 +41,40 @@ watchgrenadeusage() {
   }
 }
 
-_id_1BFF() {
+beginsmokegrenadetracking() {
   self waittill("grenade_fire", var_0, var_1);
 
-  if(!isDefined(level._id_1C00)) {
-    level._id_1C00 = 0;
+  if(!isDefined(level.smokegrenades)) {
+    level.smokegrenades = 0;
   }
-  var_0 thread _id_1C08();
+  var_0 thread smoke_grenade_death();
 }
 
-_id_1C01() {
+begin_semtex_grenade_tracking() {
   for(;;) {
     self waittill("grenade_fire", var_0, var_1);
 
     if(var_1 == "semtex_grenade") {
-      thread _id_1C02(var_0);
-      var_0 thread _id_1C04(self);
+      thread track_semtex_grenade(var_0);
+      var_0 thread semtex_sticky_handle(self);
     }
   }
 }
 
-_id_1C02(var_0) {
+track_semtex_grenade(var_0) {
   self.throwinggrenade = 0;
 
-  if(!isDefined(level._id_1C03)) {
-    level._id_1C03 = 1;
+  if(!isDefined(level.thrown_semtex_grenades)) {
+    level.thrown_semtex_grenades = 1;
   } else {
-    level._id_1C03++;
+    level.thrown_semtex_grenades++;
   }
   var_0 waittill("death");
   waittillframeend;
-  level._id_1C03--;
+  level.thrown_semtex_grenades--;
 }
 
-_id_1C04(var_0) {
+semtex_sticky_handle(var_0) {
   self waittill("missile_stuck", var_1);
 
   if(!isDefined(var_1)) {
@@ -83,24 +83,24 @@ _id_1C04(var_0) {
   if(var_1.code_classname != "script_vehicle") {
     return;
   }
-  var_1._id_1C05 = 1;
+  var_1.has_semtex_on_it = 1;
   self waittill("explode");
 
   if(!isDefined(var_1) || !isalive(var_1)) {
     return;
   }
-  if(var_1 maps\_vehicle::_id_1C06() || var_1 maps\_vehicle::_id_1C07(var_0)) {
-    var_1._id_1C05 = undefined;
+  if(var_1 maps\_vehicle::is_godmode() || var_1 maps\_vehicle::attacker_isonmyteam(var_0)) {
+    var_1.has_semtex_on_it = undefined;
     return;
   }
 
   var_1 kill(var_1.origin, var_0);
 }
 
-_id_1C08() {
-  level._id_1C00++;
+smoke_grenade_death() {
+  level.smokegrenades++;
   wait 50;
-  level._id_1C00--;
+  level.smokegrenades--;
 }
 
 begingrenadetracking() {
@@ -110,7 +110,7 @@ begingrenadetracking() {
   if(var_1 == "fraggrenade") {
     var_0 thread maps\_utility::grenade_earthquake();
   } else if(var_1 == "ninebang_grenade") {
-    self._id_1C0B = 1;
+    self.threw_ninebang = 1;
   }
   self.throwinggrenade = 0;
 }
@@ -133,7 +133,7 @@ watchc4() {
       var_0.owner = self;
       var_0 thread c4damage();
       thread c4death(var_0);
-      var_0 thread _id_1C1D();
+      var_0 thread playc4effects();
     }
   }
 }
@@ -154,18 +154,18 @@ watchclaymores() {
       var_0.owner = self;
       var_0 thread c4damage();
       var_0 thread claymoredetonation();
-      var_0 thread _id_1C1E();
-      var_0 thread _id_1C11(self.team);
+      var_0 thread playclaymoreeffects();
+      var_0 thread claymoremakesentient(self.team);
     }
   }
 }
 
-_id_1C11(var_0) {
+claymoremakesentient(var_0) {
   self endon("death");
   wait 1;
 
-  if(isDefined(level._id_1C12)) {
-    self thread[[level._id_1C12]](var_0);
+  if(isDefined(level.claymoresentientfunc)) {
+    self thread[[level.claymoresentientfunc]](var_0);
     return;
   }
 
@@ -180,19 +180,19 @@ claymoredetonation() {
   self waittill("missile_stuck");
   var_0 = 192;
 
-  if(isDefined(self._id_1C14)) {
-    var_0 = self._id_1C14;
+  if(isDefined(self.detonateradius)) {
+    var_0 = self.detonateradius;
   }
   var_1 = spawn("trigger_radius", self.origin + (0, 0, 0 - var_0), 9, var_0, var_0 * 2);
   thread deleteondeath(var_1);
 
-  if(!isDefined(level._id_1C15)) {
-    level._id_1C15 = [];
+  if(!isDefined(level.claymores)) {
+    level.claymores = [];
   }
-  level._id_1C15 = maps\_utility::_id_0BC3(level._id_1C15, self);
+  level.claymores = maps\_utility::array_add(level.claymores, self);
 
-  if(!maps\_utility::_id_0A36() && level._id_1C15.size > 15) {
-    level._id_1C15[0] delete();
+  if(!maps\_utility::is_specialop() && level.claymores.size > 15) {
+    level.claymores[0] delete();
   }
   for(;;) {
     var_1 waittill("trigger", var_2);
@@ -219,7 +219,7 @@ claymoredetonation() {
 
 deleteondeath(var_0) {
   self waittill("death");
-  level._id_1C15 = maps\_utility::array_remove_nokeys(level._id_1C15, self);
+  level.claymores = maps\_utility::array_remove_nokeys(level.claymores, self);
   wait 0.05;
 
   if(isDefined(var_0)) {
@@ -320,19 +320,19 @@ saydamaged(var_0, var_1) {
   }
 }
 
-_id_1C1D() {
+playc4effects() {
   self endon("death");
   self waittill("missile_stuck");
   playFXOnTag(common_scripts\utility::getfx("c4_light_blink"), self, "tag_fx");
 }
 
-_id_1C1E() {
+playclaymoreeffects() {
   self endon("death");
   self waittill("missile_stuck");
   playFXOnTag(common_scripts\utility::getfx("claymore_laser"), self, "tag_fx");
 }
 
-_id_1C1F(var_0) {
+clearfxondeath(var_0) {
   self waittill("death");
   var_0 delete();
 }

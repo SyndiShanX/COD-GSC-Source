@@ -4,12 +4,12 @@
 **************************************/
 
 main() {
-  codescripts\character::setmodelfromarray(_id_05D6::main());
-  codescripts\character::attachhead("alias_russian_naval_heads", _id_05D7::main());
+  codescripts\character::setmodelfromarray(xmodelalias/alias_so_russian_naval_bodies::main());
+  codescripts\character::attachhead("alias_russian_naval_heads", xmodelalias/alias_russian_naval_heads::main());
   self.voice = "russian";
 }
 
 precache() {
-  codescripts\character::precachemodelarray(_id_05D6::main());
-  codescripts\character::precachemodelarray(_id_05D7::main());
+  codescripts\character::precachemodelarray(xmodelalias/alias_so_russian_naval_bodies::main());
+  codescripts\character::precachemodelarray(xmodelalias/alias_russian_naval_heads::main());
 }

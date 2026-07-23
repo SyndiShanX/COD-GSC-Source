@@ -6,7 +6,7 @@
 main() {
   common_scripts\utility::flag_init("coop_game");
 
-  if(!maps\_utility::_id_12C1()) {
+  if(!maps\_utility::is_coop()) {
     return;
   }
   common_scripts\utility::flag_set("coop_game");
@@ -19,203 +19,203 @@ main() {
   precacheshader("hint_health");
   precacheshader("coop_player_location");
   precacheshader("coop_player_location_fire");
-  level._id_1A31 = 7;
-  level._id_1A32 = 0.375;
-  level._id_1A33 = 20;
+  level.coop_icon_blinktime = 7;
+  level.coop_icon_blinkcrement = 0.375;
+  level.coop_revive_nag_hud_refreshtime = 20;
 
   foreach(var_1 in level.players) {
-    var_1._id_01D1 = var_1 getlocalplayerprofiledata("colorBlind");
-    var_1 thread _id_1A34(var_1._id_01D1);
-    var_1 thread _id_1A44();
+    var_1.colorblind = var_1 getlocalplayerprofiledata("colorBlind");
+    var_1 thread initialize_colors(var_1.colorblind);
+    var_1 thread friendly_hud_init();
   }
 }
 
-_id_1A34(var_0) {
+initialize_colors(var_0) {
   if(var_0) {
     var_1 = (0.35, 1, 1);
     var_2 = (1, 0.65, 0.2);
     var_3 = (1, 1, 1);
-    self._id_1A35 = var_1;
-    self._id_1A36 = var_2;
-    self._id_1A37 = var_1;
-    self._id_1A38 = var_3;
-    self._id_1A39 = var_2;
-    self._id_1A3A = var_3;
+    self.coop_icon_color_normal = var_1;
+    self.coop_icon_color_downed = var_2;
+    self.coop_icon_color_shoot = var_1;
+    self.coop_icon_color_damage = var_3;
+    self.coop_icon_color_dying = var_2;
+    self.coop_icon_color_blink = var_3;
   } else {
     var_4 = (0.635, 0.929, 0.604);
     var_5 = (1, 1, 0.2);
     var_2 = (1, 0.65, 0.2);
     var_6 = (1, 0.2, 0.2);
     var_3 = (1, 1, 1);
-    self._id_1A35 = var_4;
-    self._id_1A36 = var_5;
-    self._id_1A37 = var_4;
-    self._id_1A38 = var_2;
-    self._id_1A39 = var_6;
-    self._id_1A3A = var_3;
+    self.coop_icon_color_normal = var_4;
+    self.coop_icon_color_downed = var_5;
+    self.coop_icon_color_shoot = var_4;
+    self.coop_icon_color_damage = var_2;
+    self.coop_icon_color_dying = var_6;
+    self.coop_icon_color_blink = var_3;
   }
 }
 
-_id_1A3B(var_0, var_1, var_2) {
-  if(isDefined(self._id_1A3C)) {
+rebuild_friendly_icon(var_0, var_1, var_2) {
+  if(isDefined(self.nofriendlyhudicon)) {
     return;
   }
-  if(!isDefined(self._id_1A3D) || self._id_1A3D._id_1A3E != var_1) {
-    _id_1A3F(var_1);
+  if(!isDefined(self.friendlyicon) || self.friendlyicon.material != var_1) {
+    create_fresh_friendly_icon(var_1);
   }
-  self._id_1A3D.color = var_0;
+  self.friendlyicon.color = var_0;
 
   if(isDefined(var_2) && var_2) {
-    self._id_1A3D setwaypointedgestyle_rotatingicon();
+    self.friendlyicon setwaypointedgestyle_rotatingicon();
   }
 }
 
-_id_1A3F(var_0) {
-  if(isDefined(self._id_1A3D)) {
-    self._id_1A3D destroy();
+create_fresh_friendly_icon(var_0) {
+  if(isDefined(self.friendlyicon)) {
+    self.friendlyicon destroy();
   }
-  self._id_1A3D = newclienthudelem(self);
-  self._id_1A3D setshader(var_0, 1, 1);
-  self._id_1A3D setwaypoint(1, 1, 0);
-  self._id_1A3D setwaypointiconoffscreenonly();
-  self._id_1A3D settargetEnt(maps\_utility::_id_133A(self));
-  self._id_1A3D._id_1A3E = var_0;
-  self._id_1A3D.hidewheninmenu = 1;
+  self.friendlyicon = newclienthudelem(self);
+  self.friendlyicon setshader(var_0, 1, 1);
+  self.friendlyicon setwaypoint(1, 1, 0);
+  self.friendlyicon setwaypointiconoffscreenonly();
+  self.friendlyicon settargetEnt(maps\_utility::get_other_player(self));
+  self.friendlyicon.material = var_0;
+  self.friendlyicon.hidewheninmenu = 1;
 
   if(common_scripts\utility::flag("coop_show_constant_icon")) {
-    self._id_1A3D.alpha = 1.0;
+    self.friendlyicon.alpha = 1.0;
   } else {
-    self._id_1A3D.alpha = 0.0;
+    self.friendlyicon.alpha = 0.0;
   }
 }
 
-_id_1A40() {
+friendly_hud_icon_blink_on_fire() {
   self endon("death");
 
   for(;;) {
     self waittill("weapon_fired");
-    var_0 = maps\_utility::_id_133A(self);
-    var_0 thread _id_1A42(var_0._id_1A37, "coop_player_location_fire", 1);
+    var_0 = maps\_utility::get_other_player(self);
+    var_0 thread friendly_hud_icon_flash(var_0.coop_icon_color_shoot, "coop_player_location_fire", 1);
   }
 }
 
-_id_1A41() {
+friendly_hud_icon_blink_on_damage() {
   self endon("death");
 
   for(;;) {
     self waittill("damage");
-    var_0 = maps\_utility::_id_133A(self);
-    var_0 thread _id_1A42(var_0._id_1A38, "coop_player_location", 1);
+    var_0 = maps\_utility::get_other_player(self);
+    var_0 thread friendly_hud_icon_flash(var_0.coop_icon_color_damage, "coop_player_location", 1);
   }
 }
 
-_id_1A42(var_0, var_1, var_2) {
-  if(isDefined(self._id_1A3C)) {
+friendly_hud_icon_flash(var_0, var_1, var_2) {
+  if(isDefined(self.nofriendlyhudicon)) {
     return;
   }
   self endon("death");
   self notify("flash_color_thread");
   self endon("flash_color_thread");
-  var_3 = maps\_utility::_id_133A(self);
+  var_3 = maps\_utility::get_other_player(self);
 
-  if(maps\_utility::_id_1A43(var_3)) {
+  if(maps\_utility::is_player_down(var_3)) {
     return;
   }
-  _id_1A3B(var_0, var_1, var_2);
+  rebuild_friendly_icon(var_0, var_1, var_2);
   wait 0.5;
-  var_1 = _id_1A4F();
-  var_4 = _id_1A50();
-  _id_1A3B(self._id_1A35, var_1, var_4);
+  var_1 = friendlyhudicon_currentmaterial();
+  var_4 = friendlyhudicon_rotating();
+  rebuild_friendly_icon(self.coop_icon_color_normal, var_1, var_4);
 }
 
-_id_1A44() {
+friendly_hud_init() {
   level endon("special_op_terminated");
-  _id_1A4B();
-  thread _id_1A40();
-  thread _id_1A41();
-  thread _id_1A51();
-  thread _id_1A45();
+  friendlyhudicon_normal();
+  thread friendly_hud_icon_blink_on_fire();
+  thread friendly_hud_icon_blink_on_damage();
+  thread monitor_color_blind_toggle();
+  thread friendly_hud_destroy_on_mission_end();
 
-  if(isDefined(self._id_1A3C)) {
+  if(isDefined(self.nofriendlyhudicon)) {
     return;
   }
-  self._id_1A3D.alpha = 0.0;
+  self.friendlyicon.alpha = 0.0;
 
   for(;;) {
     common_scripts\utility::flag_wait("coop_show_constant_icon");
-    self._id_1A3D.alpha = 1.0;
+    self.friendlyicon.alpha = 1.0;
     common_scripts\utility::flag_waitopen("coop_show_constant_icon");
-    self._id_1A3D.alpha = 0.0;
+    self.friendlyicon.alpha = 0.0;
   }
 }
 
-_id_1A45() {
+friendly_hud_destroy_on_mission_end() {
   level waittill("special_op_terminated");
 
   foreach(var_1 in level.players) {}
-  var_1 _id_1A46();
+  var_1 player_friendly_hud_destroy();
 }
 
-_id_1A46() {
-  if(isDefined(self._id_1A3D)) {
-    self._id_1A3D destroy();
+player_friendly_hud_destroy() {
+  if(isDefined(self.friendlyicon)) {
+    self.friendlyicon destroy();
   }
 }
 
-_id_1A47() {
+friendlyhudicon_hideall() {
   common_scripts\utility::flag_clear("coop_show_constant_icon");
 }
 
-_id_1A48() {
+friendlyhudicon_showall() {
   common_scripts\utility::flag_set("coop_show_constant_icon");
 }
 
-_id_1A49() {
-  self._id_1A3C = 1;
-  _id_1A46();
+friendlyhudicon_disable() {
+  self.nofriendlyhudicon = 1;
+  player_friendly_hud_destroy();
 }
 
-_id_1A4A() {
-  self._id_1A3C = undefined;
+friendlyhudicon_enable() {
+  self.nofriendlyhudicon = undefined;
 
-  if(!isDefined(self._id_1A3D)) {
-    _id_1A4B();
+  if(!isDefined(self.friendlyicon)) {
+    friendlyhudicon_normal();
   }
 }
 
-_id_1A4B() {
+friendlyhudicon_normal() {
   if(!common_scripts\utility::flag("coop_game")) {
     return;
   }
-  self._id_1A4C = "ICON_STATE_NORMAL";
-  var_0 = _id_1A4F();
-  var_1 = _id_1A50();
-  _id_1A3B(self._id_1A35, var_0, var_1);
+  self.coop_icon_state = "ICON_STATE_NORMAL";
+  var_0 = friendlyhudicon_currentmaterial();
+  var_1 = friendlyhudicon_rotating();
+  rebuild_friendly_icon(self.coop_icon_color_normal, var_0, var_1);
 }
 
-_id_1A4D() {
+friendlyhudicon_downed() {
   if(!common_scripts\utility::flag("coop_game")) {
     return;
   }
-  self._id_1A4C = "ICON_STATE_DOWNED";
-  var_0 = _id_1A4F();
-  var_1 = _id_1A50();
-  _id_1A3B(self._id_1A36, var_0, var_1);
+  self.coop_icon_state = "ICON_STATE_DOWNED";
+  var_0 = friendlyhudicon_currentmaterial();
+  var_1 = friendlyhudicon_rotating();
+  rebuild_friendly_icon(self.coop_icon_color_downed, var_0, var_1);
 }
 
-_id_1A4E(var_0) {
+friendlyhudicon_update(var_0) {
   if(!common_scripts\utility::flag("coop_game")) {
     return;
   }
-  var_1 = _id_1A4F();
-  var_2 = _id_1A50();
-  _id_1A3B(var_0, var_1, var_2);
+  var_1 = friendlyhudicon_currentmaterial();
+  var_2 = friendlyhudicon_rotating();
+  rebuild_friendly_icon(var_0, var_1, var_2);
 }
 
-_id_1A4F() {
+friendlyhudicon_currentmaterial() {
   var_0 = "coop_player_location";
 
-  switch (self._id_1A4C) {
+  switch (self.coop_icon_state) {
     case "ICON_STATE_NORMAL":
       var_0 = "coop_player_location";
       break;
@@ -229,10 +229,10 @@ _id_1A4F() {
   return var_0;
 }
 
-_id_1A50() {
+friendlyhudicon_rotating() {
   var_0 = 0;
 
-  switch (self._id_1A4C) {
+  switch (self.coop_icon_state) {
     case "ICON_STATE_NORMAL":
       var_0 = 1;
       break;
@@ -246,18 +246,18 @@ _id_1A50() {
   return var_0;
 }
 
-_id_1A51() {
+monitor_color_blind_toggle() {
   for(;;) {
-    if(self getlocalplayerprofiledata("colorBlind") != self._id_01D1) {
-      self._id_01D1 = self getlocalplayerprofiledata("colorBlind");
-      _id_1A34(self._id_01D1);
+    if(self getlocalplayerprofiledata("colorBlind") != self.colorblind) {
+      self.colorblind = self getlocalplayerprofiledata("colorBlind");
+      initialize_colors(self.colorblind);
 
-      switch (self._id_1A4C) {
+      switch (self.coop_icon_state) {
         case "ICON_STATE_NORMAL":
-          _id_1A4B();
+          friendlyhudicon_normal();
           break;
         case "ICON_STATE_DOWNED":
-          _id_1A4D();
+          friendlyhudicon_downed();
           break;
       }
     }

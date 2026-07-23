@@ -4,7 +4,7 @@
 *****************************************************************/
 
 init() {
-  if(maps\_utility::_id_12C1()) {
-    level._id_019F = 0;
+  if(maps\_utility::is_coop()) {
+    level.no_slowmo = 0;
   }
 }

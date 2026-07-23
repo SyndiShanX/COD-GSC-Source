@@ -8,7 +8,7 @@
 main() {
   self endon("killanimscript");
 
-  if(isDefined(self.a._id_0D55)) {
+  if(isDefined(self.a.nodeath)) {
     wait 1.1;
     var_0 = self getdroptofloorposition();
 
@@ -34,5 +34,5 @@ main() {
   }
   self clearanim(%root, 0.2);
   self setflaggedanimrestart("dog_anim", %german_shepherd_death_front, 1, 0.2, 1);
-  animscripts\shared::_id_0C51("dog_anim");
+  animscripts\shared::donotetracks("dog_anim");
 }

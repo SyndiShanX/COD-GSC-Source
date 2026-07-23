@@ -3,154 +3,154 @@
  * Script: scripts\358.gsc
 **************************************/
 
-_id_1FF7() {
+initglobals() {
   if(getDvar("debug_drones") == "") {
     setDvar("debug_drones", "0");
   }
-  if(!isDefined(level._id_1FF8)) {
-    level._id_1FF9 = 200;
+  if(!isDefined(level.lookahead_value)) {
+    level.drone_lookahead_value = 200;
   }
-  if(!isDefined(level._id_1FFA)) {
-    level._id_1FFA = [];
+  if(!isDefined(level.max_drones)) {
+    level.max_drones = [];
   }
-  if(!isDefined(level._id_1FFA["allies"])) {
-    level._id_1FFA["allies"] = 99999;
+  if(!isDefined(level.max_drones["allies"])) {
+    level.max_drones["allies"] = 99999;
   }
-  if(!isDefined(level._id_1FFA["axis"])) {
-    level._id_1FFA["axis"] = 99999;
+  if(!isDefined(level.max_drones["axis"])) {
+    level.max_drones["axis"] = 99999;
   }
-  if(!isDefined(level._id_1FFA["team3"])) {
-    level._id_1FFA["team3"] = 99999;
+  if(!isDefined(level.max_drones["team3"])) {
+    level.max_drones["team3"] = 99999;
   }
-  if(!isDefined(level._id_1FFA["neutral"])) {
-    level._id_1FFA["neutral"] = 99999;
+  if(!isDefined(level.max_drones["neutral"])) {
+    level.max_drones["neutral"] = 99999;
   }
-  if(!isDefined(level._id_1FFB)) {
-    level._id_1FFB = [];
+  if(!isDefined(level.drones)) {
+    level.drones = [];
   }
-  if(!isDefined(level._id_1FFB["allies"])) {
-    level._id_1FFB["allies"] = maps\_utility::_id_1FFC();
+  if(!isDefined(level.drones["allies"])) {
+    level.drones["allies"] = maps\_utility::struct_arrayspawn();
   }
-  if(!isDefined(level._id_1FFB["axis"])) {
-    level._id_1FFB["axis"] = maps\_utility::_id_1FFC();
+  if(!isDefined(level.drones["axis"])) {
+    level.drones["axis"] = maps\_utility::struct_arrayspawn();
   }
-  if(!isDefined(level._id_1FFB["team3"])) {
-    level._id_1FFB["team3"] = maps\_utility::_id_1FFC();
+  if(!isDefined(level.drones["team3"])) {
+    level.drones["team3"] = maps\_utility::struct_arrayspawn();
   }
-  if(!isDefined(level._id_1FFB["neutral"])) {
-    level._id_1FFB["neutral"] = maps\_utility::_id_1FFC();
+  if(!isDefined(level.drones["neutral"])) {
+    level.drones["neutral"] = maps\_utility::struct_arrayspawn();
   }
-  level._id_1FFD = ::_id_2003;
+  level.drone_spawn_func = ::drone_init;
 }
 
 #using_animtree("generic_human");
 
-_id_1FFE() {
+drone_give_soul() {
   self useanimtree(#animtree);
   self startusingheroonlylighting();
 
-  if(isDefined(self._id_1FFF)) {
-    self._id_0FC6 = self._id_1FFF;
+  if(isDefined(self.script_moveplaybackrate)) {
+    self.moveplaybackrate = self.script_moveplaybackrate;
   } else {
-    self._id_0FC6 = 1;
+    self.moveplaybackrate = 1;
   }
   if(self.team == "allies") {
-    maps\_names::_id_12A4();
+    maps\_names::get_name();
     self setlookattext(self.name, &"");
   }
 
-  if(isDefined(level._id_2000)) {
-    self thread[[level._id_2000]]();
+  if(isDefined(level.dronecallbackthread)) {
+    self thread[[level.dronecallbackthread]]();
   }
-  if(!isDefined(self._id_2001)) {
-    level thread maps\_friendlyfire::_id_1FE4(self);
+  if(!isDefined(self.script_friendly_fire_disable)) {
+    level thread maps\_friendlyfire::postpainfunc(self);
   }
-  if(!isDefined(level._id_2002)) {
+  if(!isDefined(level.ai_dont_glow_in_thermal)) {
     self thermaldrawenable();
   }
 }
 
-_id_2003() {
-  if(level._id_1FFB[self.team]._id_0C6D.size >= level._id_1FFA[self.team]) {
+drone_init() {
+  if(level.drones[self.team].array.size >= level.max_drones[self.team]) {
     self delete();
     return;
   }
 
-  thread _id_2007(self);
+  thread drone_array_handling(self);
   level notify("new_drone");
   self setCanDamage(1);
-  _id_1FFE();
+  drone_give_soul();
 
-  if(isDefined(self._id_2004)) {
+  if(isDefined(self.script_drone_override)) {
     return;
   }
-  thread _id_200B();
+  thread drone_death_thread();
 
   if(isDefined(self.target)) {
-    if(!isDefined(self._id_2005)) {
-      thread _id_2043();
+    if(!isDefined(self.script_moveoverride)) {
+      thread drone_move();
     } else {
       thread _id_203C();
     }
   }
 
-  if(isDefined(self._id_2006) && self._id_2006 == 0) {
+  if(isDefined(self.script_looping) && self.script_looping == 0) {
     return;
   }
-  thread _id_2015();
+  thread drone_idle();
 }
 
-_id_2007(var_0) {
-  maps\_utility::_id_2008(level._id_1FFB[var_0.team], var_0);
+drone_array_handling(var_0) {
+  maps\_utility::structarray_add(level.drones[var_0.team], var_0);
   var_1 = var_0.team;
   var_0 waittill("death");
 
-  if(isDefined(var_0) && isDefined(var_0._id_13B8)) {
-    maps\_utility::_id_2009(level._id_1FFB[var_1], var_0._id_13B8);
+  if(isDefined(var_0) && isDefined(var_0.struct_array_index)) {
+    maps\_utility::structarray_remove_index(level.drones[var_1], var_0.struct_array_index);
   } else {
-    maps\_utility::_id_200A(level._id_1FFB[var_1]);
+    maps\_utility::structarray_remove_undefined(level.drones[var_1]);
   }
 }
 
-_id_200B() {
-  _id_2010();
+drone_death_thread() {
+  drone_wait_for_death();
 
   if(!isDefined(self)) {
     return;
   }
   var_0 = "stand";
 
-  if(isDefined(self._id_200C) && isDefined(level._id_200D[self.team][self._id_200C]) && isDefined(level._id_200D[self.team][self._id_200C]["death"])) {
-    var_0 = self._id_200C;
+  if(isDefined(self.animset) && isDefined(level.drone_anims[self.team][self.animset]) && isDefined(level.drone_anims[self.team][self.animset]["death"])) {
+    var_0 = self.animset;
   }
-  var_1 = level._id_200D[self.team][var_0]["death"];
+  var_1 = level.drone_anims[self.team][var_0]["death"];
 
-  if(isDefined(self._id_0D50)) {
-    var_1 = self._id_0D50;
+  if(isDefined(self.deathanim)) {
+    var_1 = self.deathanim;
   }
   self notify("death");
 
-  if(isDefined(level._id_200E)) {
-    self thread[[level._id_200E]](var_1);
+  if(isDefined(level.drone_death_handler)) {
+    self thread[[level.drone_death_handler]](var_1);
     return;
   }
 
-  if(!(isDefined(self._id_0EC6) && isDefined(self._id_0EC3))) {
-    if(isDefined(self._id_0EC6)) {
-      _id_2013(var_1, "deathplant");
-    } else if(isDefined(self._id_0EC3)) {
+  if(!(isDefined(self.noragdoll) && isDefined(self.skipdeathanim))) {
+    if(isDefined(self.noragdoll)) {
+      drone_play_scripted_anim(var_1, "deathplant");
+    } else if(isDefined(self.skipdeathanim)) {
       self startragdoll();
-      _id_2013(var_1, "deathplant");
+      drone_play_scripted_anim(var_1, "deathplant");
     } else {
-      _id_2013(var_1, "deathplant");
+      drone_play_scripted_anim(var_1, "deathplant");
       self startragdoll();
     }
   }
 
   self notsolid();
-  thread _id_2011(2);
+  thread drone_thermal_draw_disable(2);
 
-  if(isDefined(self) && isDefined(self._id_200F)) {
+  if(isDefined(self) && isDefined(self.nocorpsedelete)) {
     return;
   }
   wait 10;
@@ -163,7 +163,7 @@ _id_200B() {
   }
 }
 
-_id_2010() {
+drone_wait_for_death() {
   self endon("death");
 
   while(isDefined(self)) {
@@ -180,7 +180,7 @@ _id_2010() {
   }
 }
 
-_id_2011(var_0) {
+drone_thermal_draw_disable(var_0) {
   wait(var_0);
 
   if(isDefined(self)) {
@@ -188,13 +188,13 @@ _id_2011(var_0) {
   }
 }
 
-_id_2012(var_0, var_1) {
+drone_play_looping_anim(var_0, var_1) {
   self clearanim(%body, 0.2);
   self stopanimScripted();
   self setflaggedanimknoballrestart("drone_anim", var_0, %body, 1, 0.2, var_1);
 }
 
-_id_2013(var_0, var_1) {
+drone_play_scripted_anim(var_0, var_1) {
   self clearanim(%body, 0.2);
   self stopanimScripted();
   var_2 = "normal";
@@ -207,7 +207,7 @@ _id_2013(var_0, var_1) {
   self waittillmatch("drone_anim", "end");
 }
 
-_id_2014() {
+drone_drop_real_weapon_on_death() {
   if(!isDefined(self)) {
     return;
   }
@@ -229,28 +229,28 @@ _id_2014() {
   }
 }
 
-_id_2015(var_0, var_1) {
-  if(isDefined(self._id_2016)) {
-    [[self._id_2017]]();
-  } else if(isDefined(var_0) && isDefined(var_0["script_noteworthy"]) && isDefined(level._id_200D[self.team][var_0["script_noteworthy"]])) {
+drone_idle(var_0, var_1) {
+  if(isDefined(self.drone_idle_custom)) {
+    [[self.drone_idle_override]]();
+  } else if(isDefined(var_0) && isDefined(var_0["script_noteworthy"]) && isDefined(level.drone_anims[self.team][var_0["script_noteworthy"]])) {
     thread _id_2036(var_0["script_noteworthy"], var_0, var_1);
   } else {
-    if(isDefined(self._id_2018)) {
-      _id_2012(self._id_2018, 1);
+    if(isDefined(self.idleanim)) {
+      drone_play_looping_anim(self.idleanim, 1);
       return;
     }
 
-    _id_2012(level._id_200D[self.team]["stand"]["idle"], 1);
+    drone_play_looping_anim(level.drone_anims[self.team]["stand"]["idle"], 1);
   }
 }
 
 _id_2035(var_0, var_1) {
   var_2 = var_1["script_noteworthy"];
 
-  if(!isDefined(level._id_200D[self.team][var_2]["arrival"])) {
+  if(!isDefined(level.drone_anims[self.team][var_2]["arrival"])) {
     return var_0;
   }
-  var_3 = getmovedelta(level._id_200D[self.team][var_2]["arrival"], 0, 1);
+  var_3 = getmovedelta(level.drone_anims[self.team][var_2]["arrival"], 0, 1);
   var_3 = length(var_3);
   var_0 = var_0 - var_3;
   return var_0;
@@ -259,7 +259,7 @@ _id_2035(var_0, var_1) {
 _id_2036(var_0, var_1, var_2) {
   self endon("death");
   self endon("stop_drone_fighting");
-  self._id_200C = var_0;
+  self.animset = var_0;
   self._id_2037 = undefined;
   var_3 = randomintrange(1, 4);
 
@@ -288,12 +288,12 @@ _id_2036(var_0, var_1, var_2) {
   if(var_0 == "coverprone") {
     self moveTo(self.origin + (0, 0, 8), 0.05);
   }
-  self._id_0EC6 = 1;
-  var_4 = level._id_200D[self.team][var_0];
-  self._id_0D50 = var_4["death"];
+  self.noragdoll = 1;
+  var_4 = level.drone_anims[self.team][var_0];
+  self.deathanim = var_4["death"];
 
   while(isDefined(self)) {
-    _id_2013(var_4["idle"][randomint(var_4["idle"].size)]);
+    drone_play_scripted_anim(var_4["idle"][randomint(var_4["idle"].size)]);
 
     if(common_scripts\utility::cointoss() && !isDefined(self.ignoreall)) {
       var_5 = 1;
@@ -308,15 +308,15 @@ _id_2036(var_0, var_1, var_2) {
         var_6 = 0;
       }
       if(var_6 == 1) {
-        _id_2013(var_4["hide_2_aim"]);
+        drone_play_scripted_anim(var_4["hide_2_aim"]);
         wait(getanimlength(var_4["hide_2_aim"]) - 0.5);
       }
 
       if(isDefined(var_4["fire"])) {
         if(var_0 == "coverprone" && var_6 == 1) {
-          thread _id_2012(var_4["fire_exposed"], 1);
+          thread drone_play_looping_anim(var_4["fire_exposed"], 1);
         } else {
-          thread _id_2012(var_4["fire"], 1);
+          thread drone_play_looping_anim(var_4["fire"], 1);
         }
         _id_2038();
       } else {
@@ -330,9 +330,9 @@ _id_2036(var_0, var_1, var_2) {
       }
 
       if(var_6 == 1) {
-        _id_2013(var_4["aim_2_hide"]);
+        drone_play_scripted_anim(var_4["aim_2_hide"]);
       }
-      _id_2013(var_4["reload"]);
+      drone_play_scripted_anim(var_4["reload"]);
     }
   }
 }
@@ -402,17 +402,17 @@ _id_203B(var_0) {
 _id_203C() {
   self endon("death");
   self waittill("move");
-  thread _id_2043();
+  thread drone_move();
 }
 
 _id_203D() {
   if(!isDefined(self.target)) {
     return;
   }
-  if(isDefined(level._id_1B42[self.target])) {
+  if(isDefined(level.drone_paths[self.target])) {
     return;
   }
-  level._id_1B42[self.target] = 1;
+  level.drone_paths[self.target] = 1;
   var_0 = self.target;
   var_1 = common_scripts\utility::getStruct(var_0, "targetname");
 
@@ -540,25 +540,25 @@ _id_203E(var_0) {
   return var_6;
 }
 
-_id_2043() {
+drone_move() {
   self endon("death");
   self endon("drone_stop");
   wait 0.05;
-  var_0 = _id_204A(self.target, self.origin);
-  var_1 = level._id_200D[self.team]["stand"]["run"];
+  var_0 = getpatharray(self.target, self.origin);
+  var_1 = level.drone_anims[self.team]["stand"]["run"];
 
-  if(isDefined(self._id_2044)) {
-    var_1 = self._id_2044;
+  if(isDefined(self.runanim)) {
+    var_1 = self.runanim;
   }
   var_2 = _id_203E(var_1);
   var_3 = var_2._id_2041;
   var_4 = var_2._id_2040;
 
-  if(isDefined(self._id_2045)) {
-    var_2 = [[self._id_2045]]();
+  if(isDefined(self.drone_move_callback)) {
+    var_2 = [[self.drone_move_callback]]();
 
     if(isDefined(var_2)) {
-      var_1 = var_2._id_2044;
+      var_1 = var_2.runanim;
       var_3 = var_2._id_2041;
       var_4 = var_2._id_2040;
     }
@@ -567,13 +567,13 @@ _id_2043() {
   }
 
   if(!var_4) {
-    thread _id_2049(var_3);
+    thread drone_move_z(var_3);
   }
-  _id_2012(var_1, self._id_0FC6);
+  drone_play_looping_anim(var_1, self.moveplaybackrate);
   var_5 = 0.5;
   var_6 = 0;
-  self._id_2046 = 1;
-  self._id_2047 = var_0[var_6];
+  self.started_moving = 1;
+  self.cur_node = var_0[var_6];
 
   for(;;) {
     if(!isDefined(var_0[var_6])) {
@@ -588,17 +588,17 @@ _id_2043() {
       break;
     }
 
-    var_10 = var_9 + level._id_1FF9;
+    var_10 = var_9 + level.drone_lookahead_value;
 
     while(var_10 > var_0[var_6]["dist"]) {
       var_10 = var_10 - var_0[var_6]["dist"];
       var_6++;
-      self._id_2047 = var_0[var_6];
+      self.cur_node = var_0[var_6];
 
       if(!isDefined(var_0[var_6]["dist"])) {
         self rotateTo(vectortoangles(var_0[var_0.size - 1]["vec"]), var_5);
         var_11 = distance(self.origin, var_0[var_0.size - 1]["origin"]);
-        var_12 = var_11 / (var_3 * self._id_0FC6);
+        var_12 = var_11 / (var_3 * self.moveplaybackrate);
         var_13 = var_0[var_0.size - 1]["origin"] + (0, 0, 100);
         var_14 = var_0[var_0.size - 1]["origin"] - (0, 0, 100);
         var_15 = physicstrace(var_13, var_14);
@@ -611,39 +611,39 @@ _id_2043() {
         self moveTo(var_15, var_12);
         wait(var_12);
         self notify("goal");
-        thread _id_204D();
-        thread _id_2015(var_0[var_0.size - 1], var_15);
+        thread check_delete();
+        thread drone_idle(var_0[var_0.size - 1], var_15);
         return;
       }
 
       if(!isDefined(var_0[var_6])) {
         self notify("goal");
-        thread _id_2015();
+        thread drone_idle();
         return;
       }
     }
 
-    if(isDefined(self._id_2045)) {
-      var_2 = [[self._id_2045]]();
+    if(isDefined(self.drone_move_callback)) {
+      var_2 = [[self.drone_move_callback]]();
 
       if(isDefined(var_2)) {
-        var_1 = var_2._id_2044;
+        var_1 = var_2.runanim;
 
-        if(var_2._id_2044 != var_1) {
+        if(var_2.runanim != var_1) {
           var_3 = var_2._id_2041;
           var_4 = var_2._id_2040;
 
           if(!var_4) {
-            thread _id_2049(var_3);
+            thread drone_move_z(var_3);
           } else {
             self notify("drone_move_z");
           }
-          _id_2012(var_1, self._id_0FC6);
+          drone_play_looping_anim(var_1, self.moveplaybackrate);
         }
       }
     }
 
-    self._id_2047 = var_0[var_6];
+    self.cur_node = var_0[var_6];
     var_16 = var_0[var_6]["vec"] * var_10;
     var_16 = var_16 + var_0[var_6]["origin"];
     var_17 = var_16;
@@ -652,16 +652,16 @@ _id_2043() {
     var_17 = physicstrace(var_13, var_14);
 
     if(!var_4) {
-      self._id_2048 = var_17;
+      self.drone_look_ahead_point = var_17;
     }
     if(getDvar("debug_drones") == "1") {
       thread common_scripts\utility::draw_line_for_time(var_13, var_14, 1, 1, 1, var_5);
-      thread _id_204C(var_17, 1, 0, 0, 16, var_5);
+      thread draw_point(var_17, 1, 0, 0, 16, var_5);
     }
 
     var_18 = vectortoangles(var_17 - self.origin);
     self rotateTo((0, var_18[1], 0), var_5);
-    var_19 = var_3 * var_5 * self._id_0FC6;
+    var_19 = var_3 * var_5 * self.moveplaybackrate;
     var_20 = vectorNormalize(var_17 - self.origin);
     var_16 = var_20 * var_19;
     var_16 = var_16 + self.origin;
@@ -673,10 +673,10 @@ _id_2043() {
     wait(var_5);
   }
 
-  thread _id_2015();
+  thread drone_idle();
 }
 
-_id_2049(var_0) {
+drone_move_z(var_0) {
   self endon("death");
   self endon("drone_stop");
   self notify("drone_move_z");
@@ -684,9 +684,9 @@ _id_2049(var_0) {
   var_1 = 0.05;
 
   for(;;) {
-    if(isDefined(self._id_2048) && var_0 > 0) {
-      var_2 = self._id_2048[2] - self.origin[2];
-      var_3 = distance2d(self._id_2048, self.origin);
+    if(isDefined(self.drone_look_ahead_point) && var_0 > 0) {
+      var_2 = self.drone_look_ahead_point[2] - self.origin[2];
+      var_3 = distance2d(self.drone_look_ahead_point, self.origin);
       var_4 = var_3 / var_0;
 
       if(var_4 > 0 && var_2 != 0) {
@@ -705,16 +705,16 @@ _id_2049(var_0) {
   }
 }
 
-_id_204A(var_0, var_1) {
+getpatharray(var_0, var_1) {
   var_2 = 1;
   var_3 = [];
   var_3[0]["origin"] = var_1;
   var_3[0]["dist"] = 0;
   var_4 = undefined;
   var_4 = var_0;
-  var_5["entity"] = maps\_spawner::_id_1411;
-  var_5["node"] = maps\_spawner::_id_1410;
-  var_5["struct"] = maps\_spawner::_id_140F;
+  var_5["entity"] = maps\_spawner::get_target_ents;
+  var_5["node"] = maps\_spawner::get_target_nodes;
+  var_5["struct"] = maps\_spawner::get_target_structs;
   var_6 = undefined;
   var_7 = [[var_5["entity"]]](var_4);
   var_8 = [[var_5["node"]]](var_4);
@@ -734,8 +734,8 @@ _id_204A(var_0, var_1) {
     var_13 = var_12.origin;
 
     if(isDefined(var_12.radius)) {
-      if(!isDefined(self._id_204B)) {
-        self._id_204B = -1 + randomfloat(2);
+      if(!isDefined(self.dronerunoffset)) {
+        self.dronerunoffset = -1 + randomfloat(2);
       }
       if(!isDefined(var_12.angles)) {
         var_12.angles = (0, 0, 0);
@@ -743,7 +743,7 @@ _id_204A(var_0, var_1) {
       var_14 = anglesToForward(var_12.angles);
       var_15 = anglestoright(var_12.angles);
       var_16 = anglestoup(var_12.angles);
-      var_17 = (0, self._id_204B * var_12.radius, 0);
+      var_17 = (0, self.dronerunoffset * var_12.radius, 0);
       var_13 = var_13 + var_14 * var_17[0];
       var_13 = var_13 + var_15 * var_17[1];
       var_13 = var_13 + var_16 * var_17[2];
@@ -752,7 +752,7 @@ _id_204A(var_0, var_1) {
     var_3[var_10]["origin"] = var_13;
     var_3[var_10]["target"] = var_12.target;
 
-    if(isDefined(self._id_164F) && self._id_164F == "use_last_node_angles" && isDefined(var_12.angles)) {
+    if(isDefined(self.script_parameters) && self.script_parameters == "use_last_node_angles" && isDefined(var_12.angles)) {
       var_3[var_10]["angles"] = var_12.angles;
     }
     if(isDefined(var_12.script_noteworthy)) {
@@ -774,7 +774,7 @@ _id_204A(var_0, var_1) {
     var_4 = var_12.target;
   }
 
-  if(isDefined(self._id_164F) && self._id_164F == "use_last_node_angles" && isDefined(var_3[var_10]["angles"])) {
+  if(isDefined(self.script_parameters) && self.script_parameters == "use_last_node_angles" && isDefined(var_3[var_10]["angles"])) {
     var_3[var_10]["vec"] = anglesToForward(var_3[var_10]["angles"]);
   } else {
     var_3[var_10]["vec"] = var_3[var_10 - 1]["vec"];
@@ -783,7 +783,7 @@ _id_204A(var_0, var_1) {
   return var_3;
 }
 
-_id_204C(var_0, var_1, var_2, var_3, var_4, var_5) {
+draw_point(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = var_0 + (var_4, 0, 0);
   var_7 = var_0 - (var_4, 0, 0);
   thread common_scripts\utility::draw_line_for_time(var_6, var_7, var_1, var_2, var_3, var_5);
@@ -795,7 +795,7 @@ _id_204C(var_0, var_1, var_2, var_3, var_4, var_5) {
   thread common_scripts\utility::draw_line_for_time(var_6, var_7, var_1, var_2, var_3, var_5);
 }
 
-_id_204D() {
+check_delete() {
   if(!isDefined(self)) {
     return;
   }

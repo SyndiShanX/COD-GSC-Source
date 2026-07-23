@@ -3,11 +3,11 @@
  * Script: scripts\1557.gsc
 **************************************/
 
-_id_3C51() {}
+perks_preload() {}
 
-_id_3C52() {}
+perks_init() {}
 
-_id_3C53(var_0) {
+give_perk(var_0) {
   if(self hasperk(var_0, 1)) {
     return 1;
   }
@@ -15,25 +15,25 @@ _id_3C53(var_0) {
 
   switch (var_0) {
     case "specialty_stalker":
-      thread _id_3C61();
+      thread give_perk_stalker();
       break;
     case "specialty_longersprint":
-      thread _id_3C57();
+      thread give_perk_longersprint();
       break;
     case "specialty_fastreload":
-      thread _id_3C59();
+      thread give_perk_fastreload();
       break;
     case "specialty_quickdraw":
-      thread _id_3C5B();
+      thread give_perk_quickdraw();
       break;
     case "specialty_detectexplosive":
-      thread _id_3C5D();
+      thread give_perk_detectexplosive();
       break;
     case "specialty_bulletaccuracy":
-      thread _id_3C5F();
+      thread give_perk_bulletaccuracy();
       break;
     default:
-      thread _id_3C55();
+      thread give_perk_dummy();
       break;
   }
 
@@ -41,97 +41,97 @@ _id_3C53(var_0) {
   return 1;
 }
 
-_id_3C54(var_0) {
+take_perk(var_0) {
   if(!self hasperk(var_0, 1)) {
     return;
   }
   switch (var_0) {
     case "specialty_stalker":
-      thread _id_3C62();
+      thread take_perk_stalker();
       break;
     case "specialty_longersprint":
-      thread _id_3C58();
+      thread take_perk_longersprint();
       break;
     case "specialty_fastreload":
-      thread _id_3C5A();
+      thread take_perk_fastreload();
       break;
     case "specialty_quickdraw":
-      thread _id_3C5C();
+      thread take_perk_quickdraw();
       break;
     case "specialty_detectexplosive":
-      thread _id_3C5E();
+      thread take_perk_detectexplosive();
       break;
     case "specialty_bulletaccuracy":
-      thread _id_3C60();
+      thread take_perk_bulletaccuracy();
       break;
     default:
-      thread _id_3C56();
+      thread take_perk_dummy();
       break;
   }
 
   self notify("take_perk", var_0);
 }
 
-_id_3C55() {}
+give_perk_dummy() {}
 
-_id_3C56() {}
+take_perk_dummy() {}
 
-_id_3C57() {
+give_perk_longersprint() {
   self setperk("specialty_longersprint", 1, 0);
 }
 
-_id_3C58() {
+take_perk_longersprint() {
   self unsetperk("specialty_longersprint", 1);
 }
 
-_id_3C59() {
+give_perk_fastreload() {
   self setperk("specialty_fastreload", 1, 0);
 }
 
-_id_3C5A() {
+take_perk_fastreload() {
   self unsetperk("specialty_fastreload", 1);
 }
 
-_id_3C5B() {
+give_perk_quickdraw() {
   self setperk("specialty_quickdraw", 1, 0);
 }
 
-_id_3C5C() {
+take_perk_quickdraw() {
   self unsetperk("specialty_quickdraw", 1);
 }
 
-_id_3C5D() {
+give_perk_detectexplosive() {
   self setperk("specialty_detectexplosive", 1, 0);
 }
 
-_id_3C5E() {
+take_perk_detectexplosive() {
   self unsetperk("specialty_detectexplosive", 1);
 }
 
-_id_3C5F() {
+give_perk_bulletaccuracy() {
   self setperk("specialty_bulletaccuracy", 1, 0);
 }
 
-_id_3C60() {
+take_perk_bulletaccuracy() {
   self unsetperk("specialty_bulletaccuracy", 1);
 }
 
-_id_3C61() {
+give_perk_stalker() {
   self setperk("specialty_stalker", 1, 0);
 }
 
-_id_3C62() {
+take_perk_stalker() {
   self unsetperk("specialty_stalker", 1);
 }
 
-_id_3C63() {
+perk_hud() {
   common_scripts\utility::flag_init("HUD_giving_perk");
   common_scripts\utility::flag_init("HUD_taking_perk");
-  thread _id_3C64();
-  thread _id_3C65();
+  thread update_on_give_perk();
+  thread update_on_take_perk();
 }
 
-_id_3C64() {
+update_on_give_perk() {
   self endon("death");
 
   for(;;) {
@@ -146,7 +146,7 @@ _id_3C64() {
   }
 }
 
-_id_3C65() {
+update_on_take_perk() {
   self endon("death");
 
   for(;;) {

@@ -4,76 +4,76 @@
 **************************************/
 
 main() {
-  if(maps\_utility::_id_1E25()) {
+  if(maps\_utility::is_iw4_map_sp()) {
     return;
   }
   precachestring(&"SCRIPT_INTELLIGENCE_OF_FOURTYSIX");
   precachestring(&"SCRIPT_INTELLIGENCE_PREV_FOUND");
-  level._id_1E26 = _id_1E32();
-  setDvar("ui_level_cheatpoints", level._id_1E26.size);
-  level._id_1E27 = 0;
-  setDvar("ui_level_player_cheatpoints", level._id_1E27);
-  level._id_1E28 = _id_1E34();
-  _id_1E2D();
+  level.intel_items = create_array_of_intel_items();
+  setDvar("ui_level_cheatpoints", level.intel_items.size);
+  level.intel_counter = 0;
+  setDvar("ui_level_player_cheatpoints", level.intel_counter);
+  level.table_origins = create_array_of_origins_from_table();
+  initialize_intel();
 
-  if(maps\_utility::_id_0A36()) {
-    _id_1E29();
+  if(maps\_utility::is_specialop()) {
+    remove_all_intel();
     return;
   }
 
-  _id_1E2F();
+  intel_think();
   wait 0.05;
 }
 
-_id_1E29() {
-  foreach(var_2, var_1 in level._id_1E26) {
-    if(!isDefined(var_1._id_1E2A)) {
-      var_1 _id_1E2B();
+remove_all_intel() {
+  foreach(var_2, var_1 in level.intel_items) {
+    if(!isDefined(var_1.removed)) {
+      var_1 remove_intel_item();
     }
   }
 }
 
-_id_1E2B() {
-  self._id_1E2A = 1;
+remove_intel_item() {
+  self.removed = 1;
   self.item hide();
   self.item notsolid();
   common_scripts\utility::trigger_off();
-  level._id_1E27++;
-  setDvar("ui_level_player_cheatpoints", level._id_1E27);
+  level.intel_counter++;
+  setDvar("ui_level_player_cheatpoints", level.intel_counter);
   self notify("end_trigger_thread");
 }
 
-_id_1E2D() {
-  foreach(var_3, var_1 in level._id_1E26) {
+initialize_intel() {
+  foreach(var_3, var_1 in level.intel_items) {
     var_2 = var_1.origin;
-    var_1._id_1E2E = _id_1E3C(var_2);
+    var_1.num = get_nums_from_origins(var_2);
   }
 }
 
-_id_1E2F() {
-  foreach(var_2, var_1 in level._id_1E26) {
-    if(var_1 _id_1E31()) {
-      var_1 _id_1E2B();
+intel_think() {
+  foreach(var_2, var_1 in level.intel_items) {
+    if(var_1 check_item_found()) {
+      var_1 remove_intel_item();
       continue;
     }
 
-    var_1 thread _id_1E35();
-    var_1 thread _id_1E30();
+    var_1 thread wait_for_pickup();
+    var_1 thread poll_for_found();
   }
 }
 
-_id_1E30() {
+poll_for_found() {
   self endon("end_loop_thread");
 
-  while(!_id_1E31()) {
+  while(!check_item_found()) {
     wait 0.1;
   }
-  _id_1E2B();
+  remove_intel_item();
 }
 
-_id_1E31() {
+check_item_found() {
   foreach(var_1 in level.players) {
-    if(!var_1 getplayerintelisfound(self._id_1E2E)) {
+    if(!var_1 getplayerintelisfound(self.num)) {
       return 0;
     }
   }
@@ -81,18 +81,18 @@ _id_1E31() {
   return 1;
 }
 
-_id_1E32() {
+create_array_of_intel_items() {
   var_0 = getEntArray("intelligence_item", "targetname");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1].item = getEnt(var_0[var_1].target, "targetname");
-    var_0[var_1]._id_1E33 = 0;
+    var_0[var_1].found = 0;
   }
 
   return var_0;
 }
 
-_id_1E34() {
+create_array_of_origins_from_table() {
   var_0 = [];
 
   for(var_1 = 1; var_1 <= 64; var_1++) {
@@ -114,7 +114,7 @@ _id_1E34() {
   return var_0;
 }
 
-_id_1E35() {
+wait_for_pickup() {
   self endon("end_trigger_thread");
 
   if(self.classname == "trigger_use") {
@@ -124,31 +124,31 @@ _id_1E35() {
 
   self waittill("trigger", var_0);
   self notify("end_loop_thread");
-  _id_1E38(var_0);
-  _id_1E36();
+  intel_feedback(var_0);
+  save_intel_for_all_players();
   updategamerprofileall();
   waittillframeend;
-  _id_1E2B();
+  remove_intel_item();
 }
 
-_id_1E36() {
+save_intel_for_all_players() {
   foreach(var_1 in level.players) {
-    if(var_1 getplayerintelisfound(self._id_1E2E)) {
+    if(var_1 getplayerintelisfound(self.num)) {
       continue;
     }
-    var_1 setplayerintelfound(self._id_1E2E);
+    var_1 setplayerintelfound(self.num);
   }
 
-  logstring("found intel item " + self._id_1E2E);
-  maps\_endmission::_id_195E();
+  logstring("found intel item " + self.num);
+  maps\_endmission::updatesppercent();
 }
 
-_id_1E37() {
+give_point() {
   var_0 = self getlocalplayerprofiledata("cheatPoints");
   self setlocalplayerprofiledata("cheatPoints", var_0 + 1);
 }
 
-_id_1E38(var_0) {
+intel_feedback(var_0) {
   self.item hide();
   self.item notsolid();
   level thread common_scripts\utility::play_sound_in_space("intelligence_pickup", self.item.origin);
@@ -157,37 +157,37 @@ _id_1E38(var_0) {
   var_3 = var_1 + var_2 / 1000;
 
   foreach(var_5 in level.players) {
-    if(var_0 != var_5 && var_5 getplayerintelisfound(self._id_1E2E)) {
+    if(var_0 != var_5 && var_5 getplayerintelisfound(self.num)) {
       continue;
     }
     var_6 = var_5 maps\_hud_util::createserverclientfontstring("objective", 1.5);
     var_6.glowcolor = (0.7, 0.7, 0.3);
     var_6.glowalpha = 1;
-    var_6 _id_1E3A();
+    var_6 setup_hud_elem();
     var_6.y = -60;
     var_6 setpulsefx(60, var_1, var_2);
     var_7 = 0;
 
-    if(var_0 == var_5 && var_5 getplayerintelisfound(self._id_1E2E)) {
+    if(var_0 == var_5 && var_5 getplayerintelisfound(self.num)) {
       var_6.label = &"SCRIPT_INTELLIGENCE_PREV_FOUND";
     } else {
       var_6.label = &"SCRIPT_INTELLIGENCE_OF_FOURTYSIX";
-      var_5 _id_1E37();
+      var_5 give_point();
       var_7 = var_5 getlocalplayerprofiledata("cheatPoints");
       var_6 setvalue(var_7);
     }
 
     if(var_7 >= 22) {
-      var_5 maps\_utility::_id_1E39("INFORMANT");
+      var_5 maps\_utility::player_giveachievement_wrapper("INFORMANT");
     }
     if(var_7 == 46) {
-      var_5 maps\_utility::_id_1E39("SCOUT_LEADER");
+      var_5 maps\_utility::player_giveachievement_wrapper("SCOUT_LEADER");
     }
     var_6 common_scripts\utility::delaycall(var_3, ::destroy);
   }
 }
 
-_id_1E3A() {
+setup_hud_elem() {
   self.color = (1, 1, 1);
   self.alpha = 1;
   self.x = 0;
@@ -198,7 +198,7 @@ _id_1E3A() {
   self.foreground = 1;
 }
 
-_id_1E3B() {
+assert_if_identical_origins() {
   var_0 = [];
 
   for(var_1 = 1; var_1 < 65; var_1++) {
@@ -233,12 +233,12 @@ _id_1E3B() {
   }
 }
 
-_id_1E3C(var_0) {
-  for(var_1 = 1; var_1 < level._id_1E28.size + 1; var_1++) {
-    if(!isDefined(level._id_1E28[var_1])) {
+get_nums_from_origins(var_0) {
+  for(var_1 = 1; var_1 < level.table_origins.size + 1; var_1++) {
+    if(!isDefined(level.table_origins[var_1])) {
       continue;
     }
-    if(distancesquared(var_0, level._id_1E28[var_1]) < squared(75)) {
+    if(distancesquared(var_0, level.table_origins[var_1]) < squared(75)) {
       return var_1;
     }
   }

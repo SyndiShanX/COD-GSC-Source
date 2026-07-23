@@ -5,8 +5,8 @@
 
 main() {
   self endon("killanimscript");
-  animscripts\utility::_id_0D15("cover_stand");
-  animscripts\cover_wall::_id_0F76("stand");
+  animscripts\utility::initialize("cover_stand");
+  animscripts\cover_wall::cover_wall_think("stand");
 }
 
 end_script() {

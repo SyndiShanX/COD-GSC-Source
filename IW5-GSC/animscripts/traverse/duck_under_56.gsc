@@ -6,8 +6,8 @@
 #using_animtree("generic_human");
 
 main() {
-  self._id_247C = "stand";
-  animscripts\utility::_id_247B();
+  self.desired_anim_pose = "stand";
+  animscripts\utility::updateanimpose();
   self endon("killanimscript");
   self traversemode("nogravity");
   self traversemode("noclip");
@@ -16,5 +16,5 @@ main() {
   self setflaggedanimknoballrestart("jumpanim", %gulag_pipe_traverse, %body, 1, 0.1, 1);
   self waittillmatch("jumpanim", "finish");
   self traversemode("gravity");
-  animscripts\shared::_id_0C51("jumpanim");
+  animscripts\shared::donotetracks("jumpanim");
 }

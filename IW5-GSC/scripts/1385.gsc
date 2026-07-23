@@ -7,15 +7,15 @@ main() {
   var_0 = getEntArray("treeburst", "script_noteworthy");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    var_0[var_1] thread _id_435F();
+    var_0[var_1] thread treeburst();
   }
 }
 
-_id_435F() {
+treeburst() {
   self waittill("treeburst");
 
-  if(isDefined(self._id_4360)) {
-    var_0 = self._id_4360;
+  if(isDefined(self.script_falldirection)) {
+    var_0 = self.script_falldirection;
   } else {
     var_0 = randomint(360);
   }
@@ -77,7 +77,7 @@ drawline(var_0, var_1, var_2, var_3) {
   }
 }
 
-_id_4361(var_0, var_1, var_2) {
+draworigin(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     var_2 = 1;
   }

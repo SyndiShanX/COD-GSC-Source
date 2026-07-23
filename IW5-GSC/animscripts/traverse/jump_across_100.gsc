@@ -7,12 +7,12 @@
 
 main() {
   if(self.type == "dog") {
-    animscripts\traverse\shared::_id_0176("window_40", 20);
+    animscripts\traverse\shared::dog_long_jump("window_40", 20);
     return;
   }
 
-  self._id_247C = "stand";
-  animscripts\utility::_id_247B();
+  self.desired_anim_pose = "stand";
+  animscripts\utility::updateanimpose();
   self endon("killanimscript");
   self traversemode("nogravity");
   self traversemode("noclip");
@@ -24,5 +24,5 @@ main() {
   var_1[2] = % jump_across_100_stumble;
   var_2 = var_1[randomint(var_1.size)];
   self setflaggedanimknoballrestart("jumpanim", var_2, %body, 1, 0.1, 1);
-  animscripts\shared::_id_0C51("jumpanim");
+  animscripts\shared::donotetracks("jumpanim");
 }

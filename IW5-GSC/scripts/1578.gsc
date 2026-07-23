@@ -114,7 +114,7 @@ _id_444A(var_0, var_1) {
       if(isDefined(var_1) && var_4.v["type"] == var_1) {
         continue;
       }
-      var_4 maps\_utility::_id_1655();
+      var_4 maps\_utility::restarteffect();
     }
   }
 }

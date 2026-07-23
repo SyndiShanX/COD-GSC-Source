@@ -5,169 +5,169 @@
 
 main() {
   animscripts\init::main();
-  _id_407F();
+  civilian_init();
 }
 
 #using_animtree("generic_human");
 
-_id_407F() {
+civilian_init() {
   self.allowdeath = 1;
-  self._id_117F = 1;
-  self._id_1199 = 1;
-  self._id_1099 = 1;
-  self._id_241B = 1;
+  self.disablearrivals = 1;
+  self.disableexits = 1;
+  self.neverenablecqb = 1;
+  self.alwaysrunforward = 1;
   self orientmode("face default");
   self.combatmode = "no_cover";
   self pushplayer(0);
-  self.a._id_0FDD = 1;
+  self.a.reacttobulletchance = 1;
 
-  if(!isDefined(level._id_4080)) {
-    level._id_4080 = 1;
-    level._id_0C59["default_civilian"]["run_combat"][0] = % civilian_run_upright;
-    level._id_0C59["default_civilian"]["run_hunched_combat"][0] = % civilian_run_hunched_a;
-    level._id_0C59["default_civilian"]["run_hunched_combat"][1] = % civilian_run_hunched_c;
-    level._id_0C59["default_civilian"]["run_hunched_combat"][2] = % civilian_run_hunched_flinch;
-    level._id_0C59["default_civilian"]["run_noncombat"][0] = % civilian_walk_cool;
+  if(!isDefined(level.initialized_civilian_animations)) {
+    level.initialized_civilian_animations = 1;
+    level.scr_anim["default_civilian"]["run_combat"][0] = % civilian_run_upright;
+    level.scr_anim["default_civilian"]["run_hunched_combat"][0] = % civilian_run_hunched_a;
+    level.scr_anim["default_civilian"]["run_hunched_combat"][1] = % civilian_run_hunched_c;
+    level.scr_anim["default_civilian"]["run_hunched_combat"][2] = % civilian_run_hunched_flinch;
+    level.scr_anim["default_civilian"]["run_noncombat"][0] = % civilian_walk_cool;
     var_0 = [];
     var_0[0] = 3;
     var_0[1] = 3;
     var_0[2] = 1;
-    level._id_0C59["default_civilian"]["run_hunched_weights"] = common_scripts\utility::get_cumulative_weights(var_0);
+    level.scr_anim["default_civilian"]["run_hunched_weights"] = common_scripts\utility::get_cumulative_weights(var_0);
     var_0 = [];
     var_0[0] = 1;
-    level._id_0C59["default_civilian"]["run_weights"] = common_scripts\utility::get_cumulative_weights(var_0);
-    level._id_0C59["default_civilian"]["idle_noncombat"][0] = % unarmed_cowerstand_idle;
-    level._id_0C59["default_civilian"]["idle_combat"][0] = % casual_crouch_v2_idle;
-    level._id_0C59["default_civilian"]["idle_combat"][1] = % unarmed_cowercrouch_idle_duck;
-    anim._id_400F[0] = % unarmed_cowerstand_react;
-    anim._id_400F[1] = % unarmed_cowercrouch_react_a;
-    anim._id_400F[2] = % unarmed_cowercrouch_react_b;
+    level.scr_anim["default_civilian"]["run_weights"] = common_scripts\utility::get_cumulative_weights(var_0);
+    level.scr_anim["default_civilian"]["idle_noncombat"][0] = % unarmed_cowerstand_idle;
+    level.scr_anim["default_civilian"]["idle_combat"][0] = % casual_crouch_v2_idle;
+    level.scr_anim["default_civilian"]["idle_combat"][1] = % unarmed_cowercrouch_idle_duck;
+    anim.civilianflashedarray[0] = % unarmed_cowerstand_react;
+    anim.civilianflashedarray[1] = % unarmed_cowercrouch_react_a;
+    anim.civilianflashedarray[2] = % unarmed_cowercrouch_react_b;
   }
 
   var_1 = undefined;
 
-  if(isDefined(self._id_4081)) {
-    self._id_1032 = self._id_4081;
-    _id_4083(self._id_4081);
+  if(isDefined(self.civilian_walk_animation)) {
+    self.animname = self.civilian_walk_animation;
+    attachprops(self.civilian_walk_animation);
     self.alertlevel = "noncombat";
-    _id_4088();
+    startnoncombat();
   } else {
-    self._id_1032 = "default_civilian";
+    self.animname = "default_civilian";
     self.alertlevel = "alert";
-    _id_4089();
+    startcombat();
   }
 
-  thread _id_408C();
+  thread checkcombatstate();
   self.dropweapon = 0;
-  animscripts\shared::_id_23C8();
-  self._id_4082 = 0;
+  animscripts\shared::dropaiweapon();
+  self.saved = 0;
 }
 
-_id_4083(var_0) {
-  if(isDefined(self._id_4084)) {
+attachprops(var_0) {
+  if(isDefined(self.hasattachedprops)) {
     return;
   }
-  _id_4087();
-  var_1 = anim._id_4085[var_0];
+  initcivilianprops();
+  var_1 = anim.civilianprops[var_0];
 
   if(isDefined(var_1)) {
     self attach(var_1, "tag_inhand", 1);
-    self._id_4084 = 1;
+    self.hasattachedprops = 1;
   }
 }
 
-_id_4086(var_0) {
-  if(isDefined(self._id_4084)) {
-    self._id_4084 = undefined;
-    self detach(anim._id_4085[var_0], "tag_inhand");
+detachprops(var_0) {
+  if(isDefined(self.hasattachedprops)) {
+    self.hasattachedprops = undefined;
+    self detach(anim.civilianprops[var_0], "tag_inhand");
   }
 }
 
-_id_4087() {
-  if(isDefined(anim._id_4085)) {
+initcivilianprops() {
+  if(isDefined(anim.civilianprops)) {
     return;
   }
-  anim._id_4085 = [];
-  anim._id_4085["civilian_briefcase_walk"] = "com_metal_briefcase";
-  anim._id_4085["civilian_crazy_walk"] = "electronics_pda";
-  anim._id_4085["civilian_cellphone_walk"] = "com_cellphone_on";
-  anim._id_4085["sit_lunch_A"] = "com_cellphone_on";
-  anim._id_4085["civilian_soda_walk"] = "ma_cup_single_closed";
-  anim._id_4085["civilian_paper_walk"] = "paper_memo";
-  anim._id_4085["civilian_coffee_walk"] = "cs_coffeemug02";
-  anim._id_4085["civilian_pda_walk"] = "electronics_pda";
-  anim._id_4085["reading1"] = "open_book";
-  anim._id_4085["reading2"] = "open_book";
-  anim._id_4085["texting_stand"] = "electronics_pda";
-  anim._id_4085["texting_sit"] = "electronics_pda";
-  anim._id_4085["smoking1"] = "prop_cigarette";
-  anim._id_4085["smoking2"] = "prop_cigarette";
+  anim.civilianprops = [];
+  anim.civilianprops["civilian_briefcase_walk"] = "com_metal_briefcase";
+  anim.civilianprops["civilian_crazy_walk"] = "electronics_pda";
+  anim.civilianprops["civilian_cellphone_walk"] = "com_cellphone_on";
+  anim.civilianprops["sit_lunch_A"] = "com_cellphone_on";
+  anim.civilianprops["civilian_soda_walk"] = "ma_cup_single_closed";
+  anim.civilianprops["civilian_paper_walk"] = "paper_memo";
+  anim.civilianprops["civilian_coffee_walk"] = "cs_coffeemug02";
+  anim.civilianprops["civilian_pda_walk"] = "electronics_pda";
+  anim.civilianprops["reading1"] = "open_book";
+  anim.civilianprops["reading2"] = "open_book";
+  anim.civilianprops["texting_stand"] = "electronics_pda";
+  anim.civilianprops["texting_sit"] = "electronics_pda";
+  anim.civilianprops["smoking1"] = "prop_cigarette";
+  anim.civilianprops["smoking2"] = "prop_cigarette";
 }
 
-_id_4088() {
+startnoncombat() {
   self.turnrate = 0.2;
 
-  if(isDefined(self._id_4081)) {
+  if(isDefined(self.civilian_walk_animation)) {
     var_0 = % civilian_briefcase_walk_dodge_l;
     var_1 = % civilian_briefcase_walk_dodge_r;
 
-    if(isDefined(level._id_0C59[self._id_1032]["dodge_left"])) {
-      var_0 = level._id_0C59[self._id_1032]["dodge_left"];
+    if(isDefined(level.scr_anim[self.animname]["dodge_left"])) {
+      var_0 = level.scr_anim[self.animname]["dodge_left"];
     }
-    if(isDefined(level._id_0C59[self._id_1032]["dodge_right"])) {
-      var_1 = level._id_0C59[self._id_1032]["dodge_right"];
+    if(isDefined(level.scr_anim[self.animname]["dodge_right"])) {
+      var_1 = level.scr_anim[self.animname]["dodge_right"];
     }
-    animscripts\move::_id_10D0(var_0, var_1);
+    animscripts\move::setdodgeanims(var_0, var_1);
   }
 
-  if(isDefined(level._id_0C59[self._id_1032]["turn_left_90"])) {
-    self._id_10C3 = animscripts\civilian\civilian_move::_id_407C;
-    self._id_10C6 = 0.1;
-    maps\_utility::_id_2722();
+  if(isDefined(level.scr_anim[self.animname]["turn_left_90"])) {
+    self.pathturnanimoverridefunc = animscripts\civilian\civilian_move::civilian_noncombatmoveturn;
+    self.pathturnanimblendtime = 0.1;
+    maps\_utility::enable_turnanims();
   } else {
-    maps\_utility::_id_2721();
+    maps\_utility::disable_turnanims();
   }
-  self._id_0FBC = level._id_0C59[self._id_1032]["run_noncombat"];
-  self._id_1081 = self._id_0FBC;
-  self._id_0FD4 = undefined;
+  self.run_overrideanim = level.scr_anim[self.animname]["run_noncombat"];
+  self.walk_overrideanim = self.run_overrideanim;
+  self.run_overridebulletreact = undefined;
 
-  if(self._id_1032 == "default_civilian") {
-    self._id_0FBD = level._id_0C59[self._id_1032]["run_weights_noncombat"];
-    self._id_1082 = self._id_0FBD;
+  if(self.animname == "default_civilian") {
+    self.run_override_weights = level.scr_anim[self.animname]["run_weights_noncombat"];
+    self.walk_override_weights = self.run_override_weights;
   }
 }
 
-_id_4089() {
+startcombat() {
   self notify("combat");
-  animscripts\move::_id_10D1();
-  self._id_10C6 = undefined;
-  maps\_utility::_id_2722();
+  animscripts\move::cleardodgeanims();
+  self.pathturnanimblendtime = undefined;
+  maps\_utility::enable_turnanims();
   self.turnrate = 0.3;
   var_0 = randomint(3) < 1;
 
-  if(isDefined(self._id_408A)) {
+  if(isDefined(self.force_civilian_stand_run)) {
     var_0 = 1;
-  } else if(isDefined(self._id_408B)) {
+  } else if(isDefined(self.force_civilian_hunched_run)) {
     var_0 = 0;
   }
   if(var_0) {
-    self._id_10C3 = animscripts\civilian\civilian_move::_id_407D;
-    self._id_0FBC = level._id_0C59["default_civilian"]["run_combat"];
-    self._id_0FBD = level._id_0C59["default_civilian"]["run_weights"];
+    self.pathturnanimoverridefunc = animscripts\civilian\civilian_move::civilian_combatmoveturn;
+    self.run_overrideanim = level.scr_anim["default_civilian"]["run_combat"];
+    self.run_override_weights = level.scr_anim["default_civilian"]["run_weights"];
   } else {
-    self._id_10C3 = animscripts\civilian\civilian_move::_id_407E;
-    self._id_0FBC = level._id_0C59["default_civilian"]["run_hunched_combat"];
-    self._id_0FBD = level._id_0C59["default_civilian"]["run_hunched_weights"];
+    self.pathturnanimoverridefunc = animscripts\civilian\civilian_move::civilian_combathunchedmoveturn;
+    self.run_overrideanim = level.scr_anim["default_civilian"]["run_hunched_combat"];
+    self.run_override_weights = level.scr_anim["default_civilian"]["run_hunched_weights"];
   }
 
-  self._id_0FD4 = [];
-  self._id_0FD4[0] = % run_react_stumble;
-  self._id_1081 = self._id_0FBC;
-  self._id_1082 = self._id_0FBD;
-  _id_4086(self._id_4081);
+  self.run_overridebulletreact = [];
+  self.run_overridebulletreact[0] = % run_react_stumble;
+  self.walk_overrideanim = self.run_overrideanim;
+  self.walk_override_weights = self.run_override_weights;
+  detachprops(self.civilian_walk_animation);
 }
 
-_id_408C() {
+checkcombatstate() {
   self endon("death");
   self endon("disable_combat_state_check");
   var_0 = self.alertlevelint > 1;
@@ -176,9 +176,9 @@ _id_408C() {
     var_1 = self.alertlevelint > 1;
 
     if(var_0 && !var_1) {
-      _id_4088();
+      startnoncombat();
     } else if(!var_0 && var_1) {
-      _id_4089();
+      startcombat();
     }
     var_0 = var_1;
     wait 0.05;

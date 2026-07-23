@@ -56,8 +56,8 @@ watchplayerenterwater() {
     if(!isalive(var_0)) {
       continue;
     }
-    if(!isDefined(var_0._id_1E8A)) {
-      var_0._id_1E8A = 1;
+    if(!isDefined(var_0.inwater)) {
+      var_0.inwater = 1;
       var_0 thread playerunderwater(self);
     }
   }
@@ -80,7 +80,7 @@ clearwatervarsonspawn(var_0) {
     level waittill("player_spawned", var_1);
 
     if(!var_1 istouching(var_0)) {
-      var_1._id_1E8A = undefined;
+      var_1.inwater = undefined;
       var_1 stopshellshock();
     }
   }

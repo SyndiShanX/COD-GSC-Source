@@ -4,7 +4,7 @@
 **************************************/
 
 setupminimap(var_0, var_1) {
-  level._id_1E6A = var_0;
+  level.minimap_image = var_0;
 
   if(!isDefined(level._loadstarted) && !isDefined(var_1)) {}
 
@@ -58,13 +58,13 @@ setupminimap(var_0, var_1) {
     var_10 = var_10 - var_16;
   }
 
-  level._id_1E6C = [];
-  level._id_1E6C["top"] = var_9[1];
-  level._id_1E6C["left"] = var_10[0];
-  level._id_1E6C["bottom"] = var_10[1];
-  level._id_1E6C["right"] = var_9[0];
-  level._id_1E6D = level._id_1E6C["right"] - level._id_1E6C["left"];
-  level._id_1E6E = level._id_1E6C["top"] - level._id_1E6C["bottom"];
+  level.map_extents = [];
+  level.map_extents["top"] = var_9[1];
+  level.map_extents["left"] = var_10[0];
+  level.map_extents["bottom"] = var_10[1];
+  level.map_extents["right"] = var_9[0];
+  level.map_width = level.map_extents["right"] - level.map_extents["left"];
+  level.map_height = level.map_extents["top"] - level.map_extents["bottom"];
   level.mapsize = vectordot(var_9 - var_10, var_7);
   setminimap(var_0, var_9[0], var_9[1], var_10[0], var_10[1]);
 }

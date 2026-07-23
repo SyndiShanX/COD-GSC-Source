@@ -93,7 +93,7 @@ chaos_entities_place() {
     var_2 = getweaponmodel(var_9);
     var_3 = common_scripts\utility::spawn_tag_origin();
     var_3.origin = var_1 + (0, 0, 48);
-    var_3._id_5C39 = var_9;
+    var_3.weapon_name = var_9;
     var_3.trigger = spawn("trigger_radius", var_3.origin, 0, 48, 48);
     var_4 = (8, 0, 0);
     var_5 = (0, 0, 0);
@@ -328,86 +328,86 @@ chaos_weapon_collect() {
   for(;;) {
     self.trigger waittill("trigger", var_0);
 
-    if(isPlayer(var_0) && !maps\_utility::_id_1A43(var_0)) {
+    if(isPlayer(var_0) && !maps\_utility::is_player_down(var_0)) {
       var_0 maps\_so_survival_chaos::chaoseventpopup(self.display_name, (1, 1, 1));
     }
-    if(!isPlayer(var_0) || maps\_utility::_id_1A43(var_0) || !var_0 useButtonPressed()) {
+    if(!isPlayer(var_0) || maps\_utility::is_player_down(var_0) || !var_0 useButtonPressed()) {
       continue;
     }
     var_1 = 0;
     var_2 = 0;
 
-    if(!var_0 hasweapon(self._id_5C39) && self._id_5C39 != "claymore") {
+    if(!var_0 hasweapon(self.weapon_name) && self.weapon_name != "claymore") {
       var_3 = var_0 getweaponslistprimaries();
 
       foreach(var_5 in var_3) {
-        if(isDefined(level._id_1AB1) && var_5 == level._id_1AB1 || weaponclass(var_5) == "item" || weaponclass(var_5) == "none" || weaponinventorytype(var_5) == "altmode") {
+        if(isDefined(level.coop_incap_weapon) && var_5 == level.coop_incap_weapon || weaponclass(var_5) == "item" || weaponclass(var_5) == "none" || weaponinventorytype(var_5) == "altmode") {
           continue;
         }
         var_0 takeweapon(var_5);
       }
 
-      var_0 maps\_so_survival_chaos::chaos_give_weapon(self._id_5C39);
+      var_0 maps\_so_survival_chaos::chaos_give_weapon(self.weapon_name);
       var_1 = 1;
 
       if(!isDefined(var_0.weapon_already_used)) {
         var_0.weapon_already_used = [];
       }
-      if(!isDefined(var_0.weapon_already_used[self._id_5C39])) {
+      if(!isDefined(var_0.weapon_already_used[self.weapon_name])) {
         maps\_so_survival_chaos::chaos_score_event_raise("new_weapon_collect");
         var_2 = 1;
-        var_0.weapon_already_used[self._id_5C39] = 1;
-        var_0._id_18D3["new_weapon_collected"]++;
+        var_0.weapon_already_used[self.weapon_name] = 1;
+        var_0.game_performance["new_weapon_collected"]++;
       } else {
         maps\_so_survival_chaos::chaos_score_event_raise("old_weapon_collect");
       }
     } else {
       var_7 = 0;
 
-      if(self._id_5C39 == "claymore" || self._id_5C39 == "c4") {
-        if(!var_0 hasweapon(self._id_5C39)) {
-          var_0 giveweapon(self._id_5C39);
+      if(self.weapon_name == "claymore" || self.weapon_name == "c4") {
+        if(!var_0 hasweapon(self.weapon_name)) {
+          var_0 giveweapon(self.weapon_name);
           var_7 = 1;
         } else {
-          var_7 = var_0 getweaponammoclip(self._id_5C39) + 1;
+          var_7 = var_0 getweaponammoclip(self.weapon_name) + 1;
         }
       } else {
-        var_7 = weaponclipsize(self._id_5C39);
+        var_7 = weaponclipsize(self.weapon_name);
       }
-      if(issubstr(self._id_5C39, "akimbo")) {
-        var_0 setweaponammoclip(self._id_5C39, var_7, "left");
-        var_0 setweaponammoclip(self._id_5C39, var_7, "right");
+      if(issubstr(self.weapon_name, "akimbo")) {
+        var_0 setweaponammoclip(self.weapon_name, var_7, "left");
+        var_0 setweaponammoclip(self.weapon_name, var_7, "right");
       } else {
-        var_0 setweaponammoclip(self._id_5C39, var_7);
+        var_0 setweaponammoclip(self.weapon_name, var_7);
       }
       var_8 = 0;
 
-      if(var_0 getweaponammostock(self._id_5C39) < weaponmaxammo(self._id_5C39)) {
+      if(var_0 getweaponammostock(self.weapon_name) < weaponmaxammo(self.weapon_name)) {
         var_8 = 1;
       }
-      var_9 = weaponaltweaponname(self._id_5C39);
+      var_9 = weaponaltweaponname(self.weapon_name);
 
       if(var_9 != "none" && var_0 getweaponammostock(var_9) < weaponmaxammo(var_9)) {
         var_8 = 1;
       }
-      if(self._id_5C39 == "flash_grenade" || self._id_5C39 == "claymore" || self._id_5C39 == "c4") {
+      if(self.weapon_name == "flash_grenade" || self.weapon_name == "claymore" || self.weapon_name == "c4") {
         var_8 = 1;
         maps\_so_survival_chaos::chaos_score_event_raise("old_weapon_collect");
       }
 
       if(var_8) {
-        if(self._id_5C39 != "claymore" && self._id_5C39 != "c4") {
-          var_0 setweaponammostock(self._id_5C39, weaponmaxammo(self._id_5C39));
+        if(self.weapon_name != "claymore" && self.weapon_name != "c4") {
+          var_0 setweaponammostock(self.weapon_name, weaponmaxammo(self.weapon_name));
         }
-        var_9 = weaponaltweaponname(self._id_5C39);
+        var_9 = weaponaltweaponname(self.weapon_name);
 
         if(var_9 != "none") {
           var_0 setweaponammostock(var_9, weaponmaxammo(var_9));
         }
         maps\_so_survival_chaos::chaos_score_event_raise("weapon_ammo");
 
-        if(self._id_5C39 != "flash_grenade" && self._id_5C39 != "claymore" && self._id_5C39 != "c4") {
-          var_0 switchtoweapon(self._id_5C39);
+        if(self.weapon_name != "flash_grenade" && self.weapon_name != "claymore" && self.weapon_name != "c4") {
+          var_0 switchtoweapon(self.weapon_name);
         }
         var_1 = 1;
       }
@@ -429,17 +429,17 @@ chaos_weapon_collect() {
       }
       wait 25;
 
-      if(self._id_5C39 == "flash_grenade" || self._id_5C39 == "claymore" || self._id_5C39 == "c4") {
-        if(self._id_5C39 == "claymore" || self._id_5C39 == "c4") {
-          var_13 = weaponclipsize(self._id_5C39) - 5;
+      if(self.weapon_name == "flash_grenade" || self.weapon_name == "claymore" || self.weapon_name == "c4") {
+        if(self.weapon_name == "claymore" || self.weapon_name == "c4") {
+          var_13 = weaponclipsize(self.weapon_name) - 5;
         } else {
-          var_13 = weaponclipsize(self._id_5C39);
+          var_13 = weaponclipsize(self.weapon_name);
         }
         for(;;) {
           var_14 = 0;
 
           foreach(var_11 in level.players) {
-            if(var_11 getammocount(self._id_5C39) < var_13) {
+            if(var_11 getammocount(self.weapon_name) < var_13) {
               var_14 = 1;
             }
           }
@@ -456,7 +456,7 @@ chaos_weapon_collect() {
           var_17 = 0;
 
           foreach(var_11 in level.players) {
-            if(var_11 hasweapon(self._id_5C39)) {
+            if(var_11 hasweapon(self.weapon_name)) {
               var_17 = 1;
             }
           }

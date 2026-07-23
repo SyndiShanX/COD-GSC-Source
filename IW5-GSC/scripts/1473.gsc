@@ -5,11 +5,11 @@
 
 main() {
   self setModel("body_russian_military_smg_a_airborne");
-  codescripts\character::attachhead("alias_so_regular_smg_heads", _id_05C0::main());
+  codescripts\character::attachhead("alias_so_regular_smg_heads", xmodelalias/alias_so_regular_smg_heads::main());
   self.voice = "russian";
 }
 
 precache() {
   precachemodel("body_russian_military_smg_a_airborne");
-  codescripts\character::precachemodelarray(_id_05C0::main());
+  codescripts\character::precachemodelarray(xmodelalias/alias_so_regular_smg_heads::main());
 }

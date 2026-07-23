@@ -22,7 +22,7 @@ main() {
   }
 
   self.weapon = "m14ebr";
-  _id_5FA2::main();
+  character/character_hero_delta_grinch::main();
 }
 
 spawner() {
@@ -30,7 +30,7 @@ spawner() {
 }
 
 precache() {
-  _id_5FA2::precache();
+  character/character_hero_delta_grinch::precache();
   precacheitem("m14ebr");
   precacheitem("usp_silencer");
   precacheitem("usp_silencer");

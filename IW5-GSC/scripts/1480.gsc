@@ -3,58 +3,58 @@
  * Script: scripts\1480.gsc
 **************************************/
 
-_id_3AD6() {
-  if(isDefined(level._id_3AD7)) {
+init_riotshield() {
+  if(isDefined(level.riotshield_initialized)) {
     return;
   }
-  level._id_3AD7 = 1;
+  level.riotshield_initialized = 1;
   level._effect["riot_shield_dmg"] = loadfx("misc/riot_shield_dmg");
 
-  if(maps\_utility::_id_0A36()) {
+  if(maps\_utility::is_specialop()) {
     var_0 = [];
 
-    if(!maps\_utility::_id_12DC()) {
+    if(!maps\_utility::is_survival()) {
       var_0[var_0.size] = "@DEADQUOTE_RIOTSHIELD_USE_EXPLOSIVE";
     }
     var_0[var_0.size] = "@DEADQUOTE_RIOTSHIELD_OUT_FLANK";
     var_0[var_0.size] = "@DEADQUOTE_RIOTSHIELD_DONT_CHARGE";
-    maps\_specialops::_id_1842(var_0);
+    maps\_specialops::so_include_deadquote_array(var_0);
   }
 
-  if(!isDefined(level._id_2106)) {
-    level._id_2106 = [];
+  if(!isDefined(level.subclass_spawn_functions)) {
+    level.subclass_spawn_functions = [];
   }
-  level._id_2106["riotshield"] = ::_id_3AD8;
-  animscripts\riotshield\riotshield::_id_3AB4();
+  level.subclass_spawn_functions["riotshield"] = ::subclass_riotshield;
+  animscripts\riotshield\riotshield::init_riotshield_ai_anims();
 }
 
-_id_3AD8() {
-  animscripts\riotshield\riotshield::_id_3AB8();
+subclass_riotshield() {
+  animscripts\riotshield\riotshield::init_riotshield_ai();
 }
 
-_id_3ACC() {
-  animscripts\riotshield\riotshield::_id_3ACC();
+riotshield_sprint_on() {
+  animscripts\riotshield\riotshield::riotshield_sprint_on();
 }
 
-_id_3ACD() {
-  animscripts\riotshield\riotshield::_id_3ACD();
+riotshield_fastwalk_on() {
+  animscripts\riotshield\riotshield::riotshield_fastwalk_on();
 }
 
-_id_3ACE() {
-  animscripts\riotshield\riotshield::_id_3ACE();
+riotshield_sprint_off() {
+  animscripts\riotshield\riotshield::riotshield_sprint_off();
 }
 
-_id_3ACF() {
-  animscripts\riotshield\riotshield::_id_3ACF();
+riotshield_fastwalk_off() {
+  animscripts\riotshield\riotshield::riotshield_fastwalk_off();
 }
 
-_id_3AD9() {
+riotshield_flee() {
   if(self.subclass != "riotshield") {
     return;
   }
   self.combatmode = "cover";
   self.goalradius = 2048;
-  animscripts\riotshield\riotshield::_id_3AD1();
+  animscripts\riotshield\riotshield::riotshield_init_flee();
   var_0 = self findbestcovernode();
 
   if(isDefined(var_0)) {
@@ -62,7 +62,7 @@ _id_3AD9() {
   }
 }
 
-_id_3ADA(var_0, var_1, var_2) {
+group_create(var_0, var_1, var_2) {
   var_3 = [];
 
   foreach(var_5 in var_0) {
@@ -75,55 +75,55 @@ _id_3ADA(var_0, var_1, var_2) {
   var_7 = spawnStruct();
 
   foreach(var_5 in var_3) {
-    if(isDefined(var_5._id_1124) && isDefined(var_5._id_1124._id_1F41)) {
-      var_5._id_1124._id_1F41 = common_scripts\utility::array_remove(var_5._id_1124._id_1F41, var_5);
+    if(isDefined(var_5.group) && isDefined(var_5.group.ai_array)) {
+      var_5.group.ai_array = common_scripts\utility::array_remove(var_5.group.ai_array, var_5);
     }
-    var_5._id_1124 = var_7;
+    var_5.group = var_7;
   }
 
-  var_7._id_1F41 = var_3;
-  var_7._id_3ADB = 1;
-  var_7._id_3ADC = 50;
-  var_7 thread _id_3AE1();
+  var_7.ai_array = var_3;
+  var_7.fleethreshold = 1;
+  var_7.spacing = 50;
+  var_7 thread group_check_deaths();
   return var_7;
 }
 
-_id_3ADD(var_0, var_1) {
-  self._id_1F41 = maps\_utility::_id_1361(self._id_1F41);
+group_initialize_formation(var_0, var_1) {
+  self.ai_array = maps\_utility::array_removedead(self.ai_array);
   self.forward = var_0;
 
   if(isDefined(var_1)) {
-    self._id_3ADC = var_1;
+    self.spacing = var_1;
   }
-  foreach(var_3 in self._id_1F41) {
+  foreach(var_3 in self.ai_array) {
     var_3.goalradius = 25;
     var_3.pathenemyfightdist = 128;
     var_3.pathenemylookahead = 128;
   }
 
-  _id_3AE0();
-  thread _id_3AE5();
+  group_sort_by_closest_match();
+  thread check_group_facing_forward();
 }
 
-_id_3ADE() {
+group_resort_on_deaths() {
   self endon("break_group");
 
-  if(self._id_1F41.size == 0) {
+  if(self.ai_array.size == 0) {
     return;
   }
-  while(self._id_1F41.size) {
-    maps\_utility::_id_2635(self._id_1F41, 1);
+  while(self.ai_array.size) {
+    maps\_utility::waittill_dead(self.ai_array, 1);
 
-    if(self._id_3ADF != "stopped") {
+    if(self.group_move_mode != "stopped") {
       self waittill("goal");
     }
-    self._id_1F41 = maps\_utility::_id_1361(self._id_1F41);
-    _id_3AE0();
+    self.ai_array = maps\_utility::array_removedead(self.ai_array);
+    group_sort_by_closest_match();
   }
 }
 
-_id_3AE0(var_0) {
-  if(self._id_1F41.size == 0) {
+group_sort_by_closest_match(var_0) {
+  if(self.ai_array.size == 0) {
     return;
   }
   if(isDefined(var_0)) {
@@ -131,15 +131,15 @@ _id_3AE0(var_0) {
   } else {
     var_0 = self.forward;
   }
-  var_1 = _id_3AED();
+  var_1 = group_center();
   var_2 = (self.forward[1], -1 * self.forward[0], 0);
-  var_3 = var_2 * self._id_3ADC;
-  var_4 = _id_3AE2(var_1, var_3);
+  var_3 = var_2 * self.spacing;
+  var_4 = group_left_corner(var_1, var_3);
   var_5 = [];
 
-  for(var_6 = 0; var_6 < self._id_1F41.size; var_6++) {
-    if(isDefined(self._id_1F41[var_6])) {
-      var_5[var_6] = vectordot(var_4 - self._id_1F41[var_6].origin, var_2);
+  for(var_6 = 0; var_6 < self.ai_array.size; var_6++) {
+    if(isDefined(self.ai_array[var_6])) {
+      var_5[var_6] = vectordot(var_4 - self.ai_array[var_6].origin, var_2);
       continue;
     }
 
@@ -148,7 +148,7 @@ _id_3AE0(var_0) {
 
   for(var_6 = 1; var_6 < var_5.size; var_6++) {
     var_7 = var_5[var_6];
-    var_8 = self._id_1F41[var_6];
+    var_8 = self.ai_array[var_6];
 
     for(var_9 = var_6 - 1; var_9 >= 0; var_9--) {
       if(var_7 < var_5[var_9]) {
@@ -156,22 +156,22 @@ _id_3AE0(var_0) {
       }
 
       var_5[var_9 + 1] = var_5[var_9];
-      self._id_1F41[var_9 + 1] = self._id_1F41[var_9];
+      self.ai_array[var_9 + 1] = self.ai_array[var_9];
     }
 
     var_5[var_9 + 1] = var_7;
-    self._id_1F41[var_9 + 1] = var_8;
+    self.ai_array[var_9 + 1] = var_8;
   }
 }
 
-_id_3AE1() {
+group_check_deaths() {
   for(;;) {
-    if(self._id_3ADB > 0) {
-      self._id_1F41 = maps\_utility::_id_1361(self._id_1F41);
+    if(self.fleethreshold > 0) {
+      self.ai_array = maps\_utility::array_removedead(self.ai_array);
 
-      if(self._id_1F41.size <= self._id_3ADB) {
-        foreach(var_1 in self._id_1F41) {}
-        var_1 _id_3AD9();
+      if(self.ai_array.size <= self.fleethreshold) {
+        foreach(var_1 in self.ai_array) {}
+        var_1 riotshield_flee();
 
         self notify("break_group");
         break;
@@ -182,13 +182,13 @@ _id_3AE1() {
   }
 }
 
-_id_3AE2(var_0, var_1) {
-  return var_0 - (self._id_1F41.size - 1) / 2 * var_1;
+group_left_corner(var_0, var_1) {
+  return var_0 - (self.ai_array.size - 1) / 2 * var_1;
 }
 
-_id_3AE3(var_0, var_1) {
+group_move(var_0, var_1) {
   self notify("new_goal_set");
-  self._id_3ADF = "moving";
+  self.group_move_mode = "moving";
 
   if(isDefined(var_1)) {
     self.forward = var_1;
@@ -196,11 +196,11 @@ _id_3AE3(var_0, var_1) {
     var_1 = self.forward;
   }
   var_2 = (var_1[1], -1 * var_1[0], 0);
-  var_3 = var_2 * self._id_3ADC;
-  var_4 = _id_3AE2(var_0, var_3);
+  var_3 = var_2 * self.spacing;
+  var_4 = group_left_corner(var_0, var_3);
 
-  for(var_5 = 0; var_5 < self._id_1F41.size; var_5++) {
-    var_6 = self._id_1F41[var_5];
+  for(var_5 = 0; var_5 < self.ai_array.size; var_5++) {
+    var_6 = self.ai_array[var_5];
 
     if(isDefined(var_6)) {
       var_6 setgoalpos(var_4);
@@ -208,17 +208,17 @@ _id_3AE3(var_0, var_1) {
     var_4 = var_4 + var_3;
   }
 
-  thread _id_3AE4();
+  thread check_group_at_goal();
 }
 
-_id_3AE4() {
+check_group_at_goal() {
   self endon("new_goal_set");
 
   for(;;) {
     wait 0.5;
     var_0 = 0;
 
-    foreach(var_2 in self._id_1F41) {
+    foreach(var_2 in self.ai_array) {
       if(isDefined(var_2) && isalive(var_2)) {
         var_0++;
       }
@@ -226,8 +226,8 @@ _id_3AE4() {
 
     var_4 = 0;
 
-    for(var_5 = 0; var_5 < self._id_1F41.size; var_5++) {
-      var_2 = self._id_1F41[var_5];
+    for(var_5 = 0; var_5 < self.ai_array.size; var_5++) {
+      var_2 = self.ai_array[var_5];
 
       if(isDefined(var_2)) {
         var_6 = max(45, var_2.goalradius);
@@ -240,19 +240,19 @@ _id_3AE4() {
 
     if(var_4 == var_0) {
       self notify("goal");
-      self._id_3ADF = "stopped";
+      self.group_move_mode = "stopped";
     }
   }
 }
 
-_id_3AE5() {
+check_group_facing_forward() {
   self endon("break_group");
 
   for(;;) {
     wait 0.5;
     var_0 = 0;
 
-    foreach(var_2 in self._id_1F41) {
+    foreach(var_2 in self.ai_array) {
       if(isDefined(var_2) && isalive(var_2)) {
         var_0++;
       }
@@ -261,8 +261,8 @@ _id_3AE5() {
     var_4 = 0;
     var_5 = vectortoyaw(self.forward);
 
-    for(var_6 = 0; var_6 < self._id_1F41.size; var_6++) {
-      var_2 = self._id_1F41[var_6];
+    for(var_6 = 0; var_6 < self.ai_array.size; var_6++) {
+      var_2 = self.ai_array[var_6];
 
       if(isDefined(var_2)) {
         if(abs(var_2.angles[1] - var_5) < 45) {
@@ -277,43 +277,43 @@ _id_3AE5() {
   }
 }
 
-_id_3AE6() {
-  foreach(var_1 in self._id_1F41) {
+group_sprint_on() {
+  foreach(var_1 in self.ai_array) {
     if(isalive(var_1)) {
-      var_1 _id_3ACC();
+      var_1 riotshield_sprint_on();
     }
   }
 }
 
-_id_3AE7() {
-  foreach(var_1 in self._id_1F41) {
+group_fastwalk_on() {
+  foreach(var_1 in self.ai_array) {
     if(isalive(var_1)) {
-      var_1 _id_3ACD();
+      var_1 riotshield_fastwalk_on();
     }
   }
 }
 
-_id_3AE8() {
-  foreach(var_1 in self._id_1F41) {
+group_sprint_off() {
+  foreach(var_1 in self.ai_array) {
     if(isalive(var_1)) {
-      var_1 _id_3ACE();
+      var_1 riotshield_sprint_off();
     }
   }
 }
 
-_id_3AE9() {
-  foreach(var_1 in self._id_1F41) {
+group_fastwalk_off() {
+  foreach(var_1 in self.ai_array) {
     if(isalive(var_1)) {
-      var_1 _id_3ACF();
+      var_1 riotshield_fastwalk_off();
     }
   }
 }
 
-_id_3AEA(var_0) {
+group_lock_angles(var_0) {
   self.forward = var_0;
   var_1 = vectortoyaw(var_0);
 
-  foreach(var_3 in self._id_1F41) {
+  foreach(var_3 in self.ai_array) {
     if(!isDefined(var_3)) {
       continue;
     }
@@ -327,8 +327,8 @@ _id_3AEA(var_0) {
   wait 0.1;
 }
 
-_id_3AEB() {
-  foreach(var_1 in self._id_1F41) {
+group_unlock_angles() {
+  foreach(var_1 in self.ai_array) {
     if(!isDefined(var_1)) {
       continue;
     }
@@ -337,10 +337,10 @@ _id_3AEB() {
   }
 }
 
-_id_3AEC() {
-  _id_3AEB();
+group_free_combat() {
+  group_unlock_angles();
 
-  foreach(var_1 in self._id_1F41) {
+  foreach(var_1 in self.ai_array) {
     if(!isDefined(var_1)) {
       continue;
     }
@@ -350,11 +350,11 @@ _id_3AEC() {
   }
 }
 
-_id_3AED() {
+group_center() {
   var_0 = (0, 0, 0);
   var_1 = 0;
 
-  foreach(var_3 in self._id_1F41) {
+  foreach(var_3 in self.ai_array) {
     if(isDefined(var_3)) {
       var_0 = var_0 + var_3.origin;
       var_1++;

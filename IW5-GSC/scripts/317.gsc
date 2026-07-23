@@ -4,27 +4,27 @@
 **************************************/
 
 main() {
-  if(!isDefined(level._id_1DC1)) {
-    level._id_1DC1 = 0.2;
+  if(!isDefined(level.windstrength)) {
+    level.windstrength = 0.2;
   }
-  level._id_1DC2["awning"] = 1.0;
-  level._id_1DC2["palm"] = 1.0;
-  level._id_1DC3 = level._id_1DC1 - 0.5;
-  level._id_1DC4 = level._id_1DC1 + 0.2;
+  level.animrate["awning"] = 1.0;
+  level.animrate["palm"] = 1.0;
+  level.animweightmin = level.windstrength - 0.5;
+  level.animweightmax = level.windstrength + 0.2;
 
-  if(level._id_1DC3 < 0.1) {
-    level._id_1DC3 = 0.1;
+  if(level.animweightmin < 0.1) {
+    level.animweightmin = 0.1;
   }
-  if(level._id_1DC4 > 1.0) {
-    level._id_1DC4 = 1.0;
+  if(level.animweightmax > 1.0) {
+    level.animweightmax = 1.0;
   }
   level.inc = 0;
-  _id_1DD1();
-  _id_1DD3();
-  thread _id_1DC8();
+  awninganims();
+  palmtree_anims();
+  thread new_style_shutters();
   common_scripts\utility::array_levelthread(getEntArray("wire", "targetname"), ::wirewander);
-  common_scripts\utility::array_levelthread(getEntArray("awning", "targetname"), ::_id_1DD2);
-  common_scripts\utility::array_levelthread(getEntArray("palm", "targetname"), ::_id_1DD4);
+  common_scripts\utility::array_levelthread(getEntArray("awning", "targetname"), ::awningwander);
+  common_scripts\utility::array_levelthread(getEntArray("palm", "targetname"), ::palmtrees);
   var_0 = [];
   var_1 = getEntArray("shutter_left", "targetname");
   var_0 = common_scripts\utility::array_combine(var_0, var_1);
@@ -47,7 +47,7 @@ main() {
   var_1 = common_scripts\utility::array_combine(var_0, var_5);
 
   foreach(var_3 in var_1) {
-    var_3 thread _id_1DCF();
+    var_3 thread shuttersound();
     var_3.startyaw = var_3.angles[1];
   }
 
@@ -74,7 +74,7 @@ windcontroller() {
   }
 }
 
-_id_1DC8() {
+new_style_shutters() {
   var_0 = getEntArray("shutter", "targetname");
 
   foreach(var_2 in var_0) {
@@ -82,25 +82,25 @@ _id_1DC8() {
     var_4 = spawn("script_origin", var_2.origin);
     var_4.angles = var_3.angles;
     var_4.startyaw = var_4.angles[1];
-    var_2._id_1DC9 = var_4;
+    var_2.pivot = var_4;
     var_2 linkTo(var_4);
     var_4 addyaw(randomfloatrange(-90, 90));
-    var_2 thread _id_1DCF();
+    var_2 thread shuttersound();
   }
 
   level endon("stop_shutters");
   var_6 = "left";
 
   for(;;) {
-    common_scripts\utility::array_levelthread(var_0, ::_id_1DCA, var_6);
+    common_scripts\utility::array_levelthread(var_0, ::shutterwander, var_6);
     level waittill("wind blows", var_6);
   }
 }
 
-_id_1DCA(var_0, var_1) {
+shutterwander(var_0, var_1) {
   level endon("stop_shutters");
   level endon("wind blows");
-  var_2 = var_0._id_1DC9;
+  var_2 = var_0.pivot;
   var_3 = randomint(3) + 1;
   var_4 = 1;
 
@@ -110,11 +110,11 @@ _id_1DCA(var_0, var_1) {
   var_5 = 80;
   var_6 = 80;
 
-  if(isDefined(var_0._id_1DCB)) {
-    var_6 = var_0._id_1DCB;
+  if(isDefined(var_0.script_max_left_angle)) {
+    var_6 = var_0.script_max_left_angle;
   }
-  if(isDefined(var_0._id_1DCC)) {
-    var_5 = var_0._id_1DCC;
+  if(isDefined(var_0.script_max_right_angle)) {
+    var_5 = var_0.script_max_right_angle;
   }
   for(;;) {
     var_0 notify("shutterSound");
@@ -221,7 +221,7 @@ shutterwanderright(var_0, var_1) {
   }
 }
 
-_id_1DCF() {
+shuttersound() {
   for(;;) {
     self waittill("shutterSound");
     self waittill("sounddone");
@@ -253,41 +253,41 @@ wirewander(var_0) {
   }
 }
 
-_id_1DD1() {}
+awninganims() {}
 
-_id_1DD2(var_0) {}
+awningwander(var_0) {}
 
-_id_1DD3() {
+palmtree_anims() {
   return;
 }
 
 #using_animtree("animated_props");
 
-_id_1DD4(var_0) {
+palmtrees(var_0) {
   var_0 useanimtree(#animtree);
 
   switch (var_0.model) {
     case "tree_desertpalm01":
-      var_0._id_1032 = "tree_desertpalm01";
+      var_0.animname = "tree_desertpalm01";
       break;
     case "tree_desertpalm02":
-      var_0._id_1032 = "tree_desertpalm02";
+      var_0.animname = "tree_desertpalm02";
       break;
     case "tree_desertpalm03":
-      var_0._id_1032 = "tree_desertpalm03";
+      var_0.animname = "tree_desertpalm03";
       break;
   }
 
-  if(!isDefined(var_0._id_1032)) {
+  if(!isDefined(var_0.animname)) {
     return;
   }
   wait(randomfloat(2));
 
   for(;;) {
-    var_1 = level._id_1DC3 + randomfloat(level._id_1DC4 - level._id_1DC3);
+    var_1 = level.animweightmin + randomfloat(level.animweightmax - level.animweightmin);
     var_2 = 4;
-    var_0 setanim(level._id_0C59[var_0._id_1032]["wind"][0], var_1, var_2, level._id_1DC2["palm"]);
-    var_0 setanim(level._id_0C59[var_0._id_1032]["wind"][1], 1 - var_1, var_2, level._id_1DC2["palm"]);
+    var_0 setanim(level.scr_anim[var_0.animname]["wind"][0], var_1, var_2, level.animrate["palm"]);
+    var_0 setanim(level.scr_anim[var_0.animname]["wind"][1], 1 - var_1, var_2, level.animrate["palm"]);
     wait(1 + randomfloat(3));
   }
 }

@@ -22,7 +22,7 @@ main() {
   }
 
   self.weapon = "m4_grunt";
-  _id_5FA3::main();
+  character/character_hero_delta_truck::main();
 }
 
 spawner() {
@@ -30,7 +30,7 @@ spawner() {
 }
 
 precache() {
-  _id_5FA3::precache();
+  character/character_hero_delta_truck::precache();
   precacheitem("m4_grunt");
   precacheitem("deserteagle");
   precacheitem("fraggrenade");

@@ -3,18 +3,18 @@
  * Script: scripts\138.gsc
 **************************************/
 
-_id_163F(var_0) {
+is_light_entity(var_0) {
   return var_0.classname == "light_spot" || var_0.classname == "light_omni" || var_0.classname == "light";
 }
 
-_id_1640(var_0, var_1, var_2, var_3) {
+flickerlight(var_0, var_1, var_2, var_3) {
   self endon("kill_flicker");
   var_4 = var_0;
   var_5 = 0.0;
-  maps\_utility::_id_1402("stop_flicker");
+  maps\_utility::ent_flag_init("stop_flicker");
 
   for(;;) {
-    if(maps\_utility::_id_1008("stop_flicker")) {
+    if(maps\_utility::ent_flag("stop_flicker")) {
       wait 0.05;
       continue;
     }
@@ -30,14 +30,14 @@ _id_1640(var_0, var_1, var_2, var_3) {
     if(var_5 == 0) {
       var_5 = var_5 + 0.0000001;
     }
-    for(var_7 = (var_6 - var_4) * (1 / var_5); var_5 > 0 && !maps\_utility::_id_1008("stop_flicker"); var_5 = var_5 - 0.05) {
+    for(var_7 = (var_6 - var_4) * (1 / var_5); var_5 > 0 && !maps\_utility::ent_flag("stop_flicker"); var_5 = var_5 - 0.05) {
       self setlightcolor(var_4 + var_7 * var_5);
       wait 0.05;
     }
   }
 }
 
-_id_1641(var_0) {
+kill_flicker_when_damaged(var_0) {
   var_1 = getEntArray(var_0, "script_noteworthy");
   var_2 = undefined;
   var_3 = 100000000.0;
@@ -59,7 +59,7 @@ _id_1641(var_0) {
   }
 }
 
-_id_1642() {
+generic_pulsing() {
   if(getDvar("r_reflectionProbeGenerate") == "1") {
     self setlightintensity(0);
     return;
@@ -99,7 +99,7 @@ _id_1642() {
   }
 }
 
-_id_1643() {
+generic_double_strobe() {
   if(getDvar("r_reflectionProbeGenerate") == "1") {
     self setlightintensity(0);
     return;
@@ -117,7 +117,7 @@ _id_1643() {
     var_7 = getEntArray(self.script_noteworthy, "targetname");
 
     for(var_8 = 0; var_8 < var_7.size; var_8++) {
-      if(_id_163F(var_7[var_8])) {
+      if(is_light_entity(var_7[var_8])) {
         var_5 = 1;
         var_6[var_6.size] = var_7[var_8];
       }
@@ -166,10 +166,10 @@ _id_1643() {
   }
 }
 
-_id_1644(var_0) {
+getclosests_flickering_model(var_0) {
   var_1 = getEntArray("light_flicker_model", "targetname");
   var_2 = [];
-  var_3 = maps\_utility::_id_0AE9(var_0, var_1);
+  var_3 = maps\_utility::getclosest(var_0, var_1);
 
   if(isDefined(var_3)) {
     var_2[0] = var_3;
@@ -177,7 +177,7 @@ _id_1644(var_0) {
   return var_2;
 }
 
-_id_1645() {
+generic_flickering() {
   if(getDvar("r_reflectionProbeGenerate") == "1") {
     self setlightintensity(0);
     return;
@@ -185,84 +185,84 @@ _id_1645() {
 
   self endon("stop_dynamic_light_behavior");
   self endon("death");
-  self._id_1646 = 0;
-  self._id_1647 = undefined;
-  self._id_1648 = undefined;
-  self._id_1649 = 0;
-  self._id_164A = [];
-  self._id_164B = undefined;
-  self._id_164C = [];
+  self.linked_models = 0;
+  self.lit_models = undefined;
+  self.unlit_models = undefined;
+  self.linked_lights = 0;
+  self.linked_light_ents = [];
+  self.linked_prefab_ents = undefined;
+  self.linked_things = [];
 
   if(isDefined(self.script_linkto)) {
-    self._id_164B = common_scripts\utility::get_linked_ents();
+    self.linked_prefab_ents = common_scripts\utility::get_linked_ents();
 
-    foreach(var_1 in self._id_164B) {
+    foreach(var_1 in self.linked_prefab_ents) {
       if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy == "on") {
-        if(!isDefined(self._id_1647)) {
-          self._id_1647[0] = var_1;
+        if(!isDefined(self.lit_models)) {
+          self.lit_models[0] = var_1;
         } else {
-          self._id_1647[self._id_1647.size] = var_1;
+          self.lit_models[self.lit_models.size] = var_1;
         }
         continue;
       }
 
       if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy == "off") {
-        if(!isDefined(self._id_1648)) {
-          self._id_1648[0] = var_1;
+        if(!isDefined(self.unlit_models)) {
+          self.unlit_models[0] = var_1;
         } else {
-          self._id_1648[self._id_1648.size] = var_1;
+          self.unlit_models[self.unlit_models.size] = var_1;
         }
-        self._id_164D = var_1;
+        self.unlit_model = var_1;
         continue;
       }
 
-      if(_id_163F(var_1)) {
-        self._id_1649 = 1;
-        self._id_164A[self._id_164A.size] = var_1;
+      if(is_light_entity(var_1)) {
+        self.linked_lights = 1;
+        self.linked_light_ents[self.linked_light_ents.size] = var_1;
       }
     }
 
-    self._id_1646 = 1;
+    self.linked_models = 1;
   }
 
   if(isDefined(self.script_noteworthy)) {
-    self._id_164C = getEntArray(self.script_noteworthy, "targetname");
+    self.linked_things = getEntArray(self.script_noteworthy, "targetname");
   }
-  if(!self._id_164C.size && !isDefined(self._id_164B)) {
-    self._id_164C = _id_1644(self.origin);
+  if(!self.linked_things.size && !isDefined(self.linked_prefab_ents)) {
+    self.linked_things = getclosests_flickering_model(self.origin);
   }
-  for(var_3 = 0; var_3 < self._id_164C.size; var_3++) {
-    if(_id_163F(self._id_164C[var_3])) {
-      self._id_1649 = 1;
-      self._id_164A[self._id_164A.size] = self._id_164C[var_3];
+  for(var_3 = 0; var_3 < self.linked_things.size; var_3++) {
+    if(is_light_entity(self.linked_things[var_3])) {
+      self.linked_lights = 1;
+      self.linked_light_ents[self.linked_light_ents.size] = self.linked_things[var_3];
     }
 
-    if(self._id_164C[var_3].classname == "script_model") {
-      var_4 = self._id_164C[var_3];
+    if(self.linked_things[var_3].classname == "script_model") {
+      var_4 = self.linked_things[var_3];
 
-      if(!isDefined(self._id_1647)) {
-        self._id_1647[0] = var_4;
+      if(!isDefined(self.lit_models)) {
+        self.lit_models[0] = var_4;
       } else {
-        self._id_1647[self._id_1647.size] = var_4;
+        self.lit_models[self.lit_models.size] = var_4;
       }
-      if(!isDefined(self._id_1648)) {
-        self._id_1648[0] = getEnt(var_4.target, "targetname");
+      if(!isDefined(self.unlit_models)) {
+        self.unlit_models[0] = getEnt(var_4.target, "targetname");
       } else {
-        self._id_1648[self._id_1648.size] = getEnt(var_4.target, "targetname");
+        self.unlit_models[self.unlit_models.size] = getEnt(var_4.target, "targetname");
       }
-      self._id_1646 = 1;
+      self.linked_models = 1;
     }
   }
 
-  if(isDefined(self._id_1647)) {
-    foreach(var_4 in self._id_1647) {
+  if(isDefined(self.lit_models)) {
+    foreach(var_4 in self.lit_models) {
       if(isDefined(var_4) && isDefined(var_4.script_fxid)) {
-        var_4._id_164E = common_scripts\utility::createoneshoteffect(var_4.script_fxid);
+        var_4.effect = common_scripts\utility::createoneshoteffect(var_4.script_fxid);
         var_6 = (0, 0, 0);
         var_7 = (0, 0, 0);
 
-        if(isDefined(var_4._id_164F)) {
-          var_8 = strtok(var_4._id_164F, ", ");
+        if(isDefined(var_4.script_parameters)) {
+          var_8 = strtok(var_4.script_parameters, ", ");
 
           if(var_8.size < 3) {} else if(var_8.size == 6) {
             var_9 = float(var_8[0]);
@@ -281,92 +281,92 @@ _id_1645() {
           }
         }
 
-        var_4._id_164E.v["origin"] = var_4.origin + var_6;
-        var_4._id_164E.v["angles"] = var_4.angles + var_7;
+        var_4.effect.v["origin"] = var_4.origin + var_6;
+        var_4.effect.v["angles"] = var_4.angles + var_7;
       }
     }
   }
 
-  thread _id_1650();
-  thread _id_1656();
+  thread generic_flicker_msg_watcher();
+  thread generic_flicker();
 }
 
-_id_1650() {
-  maps\_utility::_id_1402("flicker_on");
+generic_flicker_msg_watcher() {
+  maps\_utility::ent_flag_init("flicker_on");
 
-  if(isDefined(self._id_1651) && self._id_1651 != "nil") {
+  if(isDefined(self.script_light_startnotify) && self.script_light_startnotify != "nil") {
     for(;;) {
-      level waittill(self._id_1651);
-      maps\_utility::_id_13DC("flicker_on");
+      level waittill(self.script_light_startnotify);
+      maps\_utility::ent_flag_set("flicker_on");
 
-      if(isDefined(self._id_1652) && self._id_1652 != "nil") {
-        level waittill(self._id_1652);
-        maps\_utility::_id_13DE("flicker_on");
+      if(isDefined(self.script_light_stopnotify) && self.script_light_stopnotify != "nil") {
+        level waittill(self.script_light_stopnotify);
+        maps\_utility::ent_flag_clear("flicker_on");
       }
     }
   } else {
-    maps\_utility::_id_13DC("flicker_on");
+    maps\_utility::ent_flag_set("flicker_on");
   }
 }
 
-_id_1653() {
+generic_flicker_pause() {
   var_0 = self getlightintensity();
 
-  if(!maps\_utility::_id_1008("flicker_on")) {
-    if(self._id_1646) {
-      if(isDefined(self._id_1647)) {
-        foreach(var_2 in self._id_1647) {
+  if(!maps\_utility::ent_flag("flicker_on")) {
+    if(self.linked_models) {
+      if(isDefined(self.lit_models)) {
+        foreach(var_2 in self.lit_models) {
           var_2 hide();
 
-          if(isDefined(var_2._id_164E)) {
-            var_2._id_164E common_scripts\utility::pauseeffect();
+          if(isDefined(var_2.effect)) {
+            var_2.effect common_scripts\utility::pauseeffect();
           }
         }
       }
 
-      if(isDefined(self._id_1648)) {
-        foreach(var_5 in self._id_1648) {}
+      if(isDefined(self.unlit_models)) {
+        foreach(var_5 in self.unlit_models) {}
         var_5 show();
       }
     }
 
     self setlightintensity(0);
 
-    if(self._id_1649) {
-      for(var_7 = 0; var_7 < self._id_164A.size; var_7++) {
-        self._id_164A[var_7] setlightintensity(0);
+    if(self.linked_lights) {
+      for(var_7 = 0; var_7 < self.linked_light_ents.size; var_7++) {
+        self.linked_light_ents[var_7] setlightintensity(0);
       }
     }
 
-    maps\_utility::_id_1654("flicker_on");
+    maps\_utility::ent_flag_wait("flicker_on");
     self setlightintensity(var_0);
 
-    if(self._id_1649) {
-      for(var_7 = 0; var_7 < self._id_164A.size; var_7++) {
-        self._id_164A[var_7] setlightintensity(var_0);
+    if(self.linked_lights) {
+      for(var_7 = 0; var_7 < self.linked_light_ents.size; var_7++) {
+        self.linked_light_ents[var_7] setlightintensity(var_0);
       }
     }
 
-    if(self._id_1646) {
-      if(isDefined(self._id_1647)) {
-        foreach(var_2 in self._id_1647) {
+    if(self.linked_models) {
+      if(isDefined(self.lit_models)) {
+        foreach(var_2 in self.lit_models) {
           var_2 show();
 
-          if(isDefined(var_2._id_164E)) {
-            var_2._id_164E maps\_utility::_id_1655();
+          if(isDefined(var_2.effect)) {
+            var_2.effect maps\_utility::restarteffect();
           }
         }
       }
 
-      if(isDefined(self._id_1648)) {
-        foreach(var_5 in self._id_1648) {}
+      if(isDefined(self.unlit_models)) {
+        foreach(var_5 in self.unlit_models) {}
         var_5 hide();
       }
     }
   }
 }
 
-_id_1656() {
+generic_flicker() {
   self endon("stop_dynamic_light_behavior");
   self endon("death");
   var_0 = 0.2;
@@ -377,45 +377,45 @@ _id_1656() {
   var_5 = 0;
 
   while(isDefined(self)) {
-    _id_1653();
+    generic_flicker_pause();
 
     for(var_5 = randomintrange(1, 10); var_5; var_5--) {
-      _id_1653();
+      generic_flicker_pause();
       wait(randomfloatrange(0.05, 0.1));
 
       if(var_4 > 0.2) {
         var_4 = randomfloatrange(0, 0.3);
 
-        if(self._id_1646) {
-          foreach(var_7 in self._id_1647) {
+        if(self.linked_models) {
+          foreach(var_7 in self.lit_models) {
             var_7 hide();
 
-            if(isDefined(var_7._id_164E)) {
-              var_7._id_164E common_scripts\utility::pauseeffect();
+            if(isDefined(var_7.effect)) {
+              var_7.effect common_scripts\utility::pauseeffect();
             }
           }
         }
 
-        if(isDefined(self._id_1648)) {
-          foreach(var_10 in self._id_1648) {}
+        if(isDefined(self.unlit_models)) {
+          foreach(var_10 in self.unlit_models) {}
           var_10 show();
         }
       } else {
         var_4 = var_2;
 
-        if(self._id_1646) {
-          if(isDefined(self._id_1647)) {
-            foreach(var_7 in self._id_1647) {
+        if(self.linked_models) {
+          if(isDefined(self.lit_models)) {
+            foreach(var_7 in self.lit_models) {
               var_7 show();
 
-              if(isDefined(var_7._id_164E)) {
-                var_7._id_164E maps\_utility::_id_1655();
+              if(isDefined(var_7.effect)) {
+                var_7.effect maps\_utility::restarteffect();
               }
             }
           }
 
-          if(isDefined(self._id_1648)) {
-            foreach(var_10 in self._id_1648) {
+          if(isDefined(self.unlit_models)) {
+            foreach(var_10 in self.unlit_models) {
               var_10 hide();
               maps\_audio::aud_send_msg("light_flicker_on", var_10);
             }
@@ -425,35 +425,35 @@ _id_1656() {
 
       self setlightintensity(var_4);
 
-      if(self._id_1649) {
-        for(var_16 = 0; var_16 < self._id_164A.size; var_16++) {
-          self._id_164A[var_16] setlightintensity(var_4);
+      if(self.linked_lights) {
+        for(var_16 = 0; var_16 < self.linked_light_ents.size; var_16++) {
+          self.linked_light_ents[var_16] setlightintensity(var_4);
         }
       }
     }
 
-    _id_1653();
+    generic_flicker_pause();
     self setlightintensity(var_2);
 
-    if(self._id_1649) {
-      for(var_16 = 0; var_16 < self._id_164A.size; var_16++) {
-        self._id_164A[var_16] setlightintensity(var_2);
+    if(self.linked_lights) {
+      for(var_16 = 0; var_16 < self.linked_light_ents.size; var_16++) {
+        self.linked_light_ents[var_16] setlightintensity(var_2);
       }
     }
 
-    if(self._id_1646) {
-      if(isDefined(self._id_1647)) {
-        foreach(var_7 in self._id_1647) {
+    if(self.linked_models) {
+      if(isDefined(self.lit_models)) {
+        foreach(var_7 in self.lit_models) {
           var_7 show();
 
-          if(isDefined(var_7._id_164E)) {
-            var_7._id_164E maps\_utility::_id_1655();
+          if(isDefined(var_7.effect)) {
+            var_7.effect maps\_utility::restarteffect();
           }
         }
       }
 
-      if(isDefined(self._id_1648)) {
-        foreach(var_10 in self._id_1648) {}
+      if(isDefined(self.unlit_models)) {
+        foreach(var_10 in self.unlit_models) {}
         var_10 hide();
       }
     }
@@ -462,13 +462,13 @@ _id_1656() {
   }
 }
 
-_id_1658() {
+generic_spot() {
   for(;;) {
     level common_scripts\utility::waitframe();
   }
 }
 
-_id_1659(var_0, var_1) {
+flickerlightintensity(var_0, var_1) {
   var_2 = self getlightintensity();
   var_3 = 0;
   var_4 = var_2;
@@ -491,7 +491,7 @@ _id_1659(var_0, var_1) {
   }
 }
 
-_id_165A() {
+burning_trash_fire() {
   var_0 = self getlightintensity();
   var_1 = var_0;
 
@@ -510,7 +510,7 @@ _id_165A() {
   }
 }
 
-_id_165B(var_0, var_1, var_2, var_3) {
+strobelight(var_0, var_1, var_2, var_3) {
   var_4 = 360 / var_2;
   var_5 = 0;
 
@@ -531,17 +531,17 @@ _id_165B(var_0, var_1, var_2, var_3) {
   }
 }
 
-_id_165C(var_0, var_1, var_2, var_3) {
+changelightcolorto(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_2)) {
     var_2 = 0;
   }
   if(!isDefined(var_3)) {
     var_3 = 0;
   }
-  thread _id_165D(var_0, var_1, var_2, var_3);
+  thread changelightcolortoworkerthread(var_0, var_1, var_2, var_3);
 }
 
-_id_165D(var_0, var_1, var_2, var_3) {
+changelightcolortoworkerthread(var_0, var_1, var_2, var_3) {
   var_4 = self getlightcolor();
   var_5 = 1 / (var_1 * 2 - (var_2 + var_3));
   var_6 = 0;
@@ -574,12 +574,12 @@ _id_165D(var_0, var_1, var_2, var_3) {
   self setlightcolor(var_0);
 }
 
-_id_165E() {
-  thread _id_165F();
-  thread _id_1660();
+television() {
+  thread tv_changes_intensity();
+  thread tv_changes_color();
 }
 
-_id_165F() {
+tv_changes_intensity() {
   self endon("light_off");
   var_0 = self getlightintensity();
   var_1 = var_0;
@@ -599,7 +599,7 @@ _id_165F() {
   }
 }
 
-_id_1660() {
+tv_changes_color() {
   self endon("light_off");
   var_0 = 0.5;
   var_1 = 0.5;
@@ -632,41 +632,41 @@ _id_1660() {
   }
 }
 
-_id_1661(var_0) {
+sun_shadow_trigger(var_0) {
   var_1 = 1;
 
-  if(isDefined(var_0._id_1662)) {
-    var_1 = var_0._id_1662;
+  if(isDefined(var_0.script_duration)) {
+    var_1 = var_0.script_duration;
   }
   for(;;) {
     var_0 waittill("trigger", var_2);
-    var_0 _id_1663(var_1);
+    var_0 set_sun_shadow_params(var_1);
   }
 }
 
-_id_1663(var_0) {
+set_sun_shadow_params(var_0) {
   var_1 = getdvarint("sm_sunenable", 1);
   var_2 = getdvarfloat("sm_sunshadowscale", 1.0);
   var_3 = getdvarint("sm_spotlimit", 4);
   var_4 = getdvarfloat("sm_sunsamplesizenear", 0.25);
   var_5 = getdvarfloat("sm_qualityspotshadow", 1.0);
 
-  if(isDefined(self._id_1664)) {
-    var_1 = self._id_1664;
+  if(isDefined(self.script_sunenable)) {
+    var_1 = self.script_sunenable;
   }
-  if(isDefined(self._id_1665)) {
-    var_2 = self._id_1665;
+  if(isDefined(self.script_sunshadowscale)) {
+    var_2 = self.script_sunshadowscale;
   }
-  if(isDefined(self._id_1666)) {
-    var_3 = self._id_1666;
+  if(isDefined(self.script_spotlimit)) {
+    var_3 = self.script_spotlimit;
   }
-  if(isDefined(self._id_1667)) {
-    var_4 = self._id_1667;
+  if(isDefined(self.script_sunsamplesizenear)) {
+    var_4 = self.script_sunsamplesizenear;
   }
   var_4 = min(max(0.016, var_4), 32);
 
-  if(isDefined(self._id_1668)) {
-    var_5 = self._id_1668;
+  if(isDefined(self.script_qualityspotshadow)) {
+    var_5 = self.script_qualityspotshadow;
   }
   var_6 = getdvarint("sm_sunenable", 1);
   var_7 = getdvarfloat("sm_sunshadowscale", 1.0);
@@ -676,10 +676,10 @@ _id_1663(var_0) {
   setsaveddvar("sm_sunshadowscale", var_2);
   setsaveddvar("sm_spotlimit", var_3);
   setsaveddvar("sm_qualityspotshadow", var_5);
-  _id_1669(var_4, var_0);
+  lerp_sunsamplesizenear_overtime(var_4, var_0);
 }
 
-_id_1669(var_0, var_1) {
+lerp_sunsamplesizenear_overtime(var_0, var_1) {
   level notify("changing_sunsamplesizenear");
   level endon("changing_sunsamplesizenear");
   var_2 = getdvarfloat("sm_sunSampleSizeNear", 0.25);

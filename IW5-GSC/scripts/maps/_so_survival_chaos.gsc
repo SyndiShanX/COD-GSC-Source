@@ -192,7 +192,7 @@ add_chaos_killstreak(var_0) {
 
   if(issubstr(var_0, "bonus_")) {
     var_1 = "airdrop_marker_mp";
-    var_2 = _id_0611::_id_3CFD;
+    var_2 = maps/_sp_killstreaks::sp_killstreak_carepackage_main;
     var_10 = "SP_KILLSTREAKS_REWARDNAME_AIRDROP";
     var_3 = "UK_1mc_achieve_carepackage";
     var_4 = "UK_1mc_use_carepackage";
@@ -233,18 +233,18 @@ add_chaos_killstreak(var_0) {
   var_12 = spawnStruct();
   var_12.streaktype = var_0;
   var_12.weaponname = var_1;
-  var_12._id_3CE9 = var_2;
-  var_12._id_3CEA = var_10;
-  var_12._id_3CEB = var_3;
-  var_12._id_3CEC = var_4;
-  var_12._id_3CED = var_5;
-  var_12._id_3CEE = var_6;
-  var_12._id_3BC5 = var_7;
-  var_12._id_3BC6 = var_8;
-  var_12._id_3BBE = var_9;
+  var_12.streakfunc = var_2;
+  var_12.menurewarddesc = var_10;
+  var_12.achievevo = var_3;
+  var_12.usevo = var_4;
+  var_12.splashicon = var_5;
+  var_12.splashhint = var_6;
+  var_12.crateicon = var_7;
+  var_12.cratehint = var_8;
+  var_12.crateopenfunc = var_9;
   var_12.cratehudstring = var_11;
-  level._id_3CE3._id_3CE4[var_0] = var_12;
-  _id_0611::_id_3CEF(var_3, var_4);
+  level.ks.killstreaktypes[var_0] = var_12;
+  maps/_sp_killstreaks::add_killstreak_radio_dialogue(var_3, var_4);
 }
 
 chaos_init() {
@@ -258,21 +258,21 @@ chaos_init() {
   thread chaos_timer_create(120, "start_survival", "win_survival");
   thread chaos_music_intro();
   thread maps\_so_survival_chaos_entities::chaos_entities_place();
-  level._id_16BD = ::chaos_eog_summary;
+  level.eog_summary_callback = ::chaos_eog_summary;
   level.start_combo_decay = 0;
   level.timer_started = 0;
   level.player_currently_getting_perk = 0;
-  level._id_3BBA = 0;
+  level.airdropcratetimeout = 0;
   level.freeze_combo_meter = 0;
-  level._id_1312 = 0;
-  var_0 = _id_0611::_id_3BC4("sentry");
+  level.so_player_chatter_enabled = 0;
+  var_0 = maps/_sp_killstreaks::get_sp_killstreak_info("sentry");
   var_0.cratehudstring = &"SO_SURVIVAL_CHAOS_BONUS_SENTRY";
-  var_0._id_3BC5 = "chaos_bonus_sentry_gun";
-  var_0._id_3CE9 = ::chaos_killstreak_autosentry_main;
-  level._id_3CE3._id_3CE4["sentry"] = var_0;
+  var_0.crateicon = "chaos_bonus_sentry_gun";
+  var_0.streakfunc = ::chaos_killstreak_autosentry_main;
+  level.ks.killstreaktypes["sentry"] = var_0;
   level.grnd_fx["smoke"] = loadfx("smoke/airdrop_flare_mp_effect_now");
-  level._id_3D47 = [];
-  level._id_3D47 = chaos_wave_populate();
+  level.survival_wave = [];
+  level.survival_wave = chaos_wave_populate();
   level.focus_on_player = 0;
 }
 
@@ -282,38 +282,38 @@ chaos_wave_populate() {
   var_2 = [];
 
   for(var_3 = var_0; var_3 <= var_1; var_3++) {
-    var_4 = _id_061C::_id_3E02(var_3);
+    var_4 = maps/_so_survival_ai::get_wave_number_by_index(var_3);
 
     if(!isDefined(var_4) || var_4 == 0) {
       continue;
     }
     var_5 = spawnStruct();
-    var_5._id_3D4A = var_3;
-    var_5._id_1E2E = var_4;
-    var_5._id_3D4B = _id_061C::_id_3E03(var_4);
-    var_5._id_3D4C = _id_061C::_id_3E04(var_4);
-    var_5._id_3D4D = _id_061C::_id_3E05(var_4);
-    var_5._id_3D4E = _id_061C::_id_3E06(var_4);
-    var_5._id_3D4F = _id_061C::_id_3E00(var_4);
-    var_5._id_3D50 = _id_061C::_id_3E08(var_4);
-    var_5._id_3D51 = _id_061C::_id_3E09(var_4);
-    var_5._id_3D52 = _id_061C::_id_3E0C(var_4);
-    var_5._id_3D53 = _id_061C::_id_3E0D(var_4);
-    var_5._id_3D54 = _id_061C::_id_3E0A(var_4);
-    var_6 = _id_061C::_id_3E0B(var_4);
+    var_5.repeating = var_3;
+    var_5.num = var_4;
+    var_5._id_3D4B = maps/_so_survival_ai::get_squad_type(var_4);
+    var_5._id_3D4C = maps/_so_survival_ai::get_squad_array(var_4);
+    var_5._id_3D4D = maps/_so_survival_ai::get_special_ai(var_4);
+    var_5._id_3D4E = maps/_so_survival_ai::get_special_ai_quantity(var_4);
+    var_5._id_3D4F = maps/_so_survival_ai::get_wave_boss_delay(var_4);
+    var_5._id_3D50 = maps/_so_survival_ai::get_bosses_ai(var_4);
+    var_5._id_3D51 = maps/_so_survival_ai::get_bosses_nonai(var_4);
+    var_5._id_3D52 = maps/_so_survival_ai::get_dog_type(var_4);
+    var_5._id_3D53 = maps/_so_survival_ai::get_dog_quantity(var_4);
+    var_5._id_3D54 = maps/_so_survival_ai::is_repeating(var_4);
+    var_6 = maps/_so_survival_ai::get_armory_unlocked(var_4);
 
     if(isDefined(var_6) && var_6.size) {
-      if(!isDefined(level._id_3D55)) {
-        level._id_3D55 = [];
+      if(!isDefined(level.armory_unlock)) {
+        level.armory_unlock = [];
       }
       foreach(var_8 in var_6) {}
-      level._id_3D55[var_8] = var_4;
+      level.armory_unlock[var_8] = var_4;
     }
 
     var_2[var_4] = var_5;
 
     if(var_5._id_3D54) {
-      level._id_3D45[level._id_3D45.size] = var_5;
+      level.survival_repeat_wave[level.survival_repeat_wave.size] = var_5;
     }
   }
 
@@ -342,7 +342,7 @@ chaos_players_setup() {
     var_1 thread listen_for_sentry_notification();
     var_1 thread listen_for_laststand_notification();
 
-    if(maps\_utility::_id_12C1()) {
+    if(maps\_utility::is_coop()) {
       var_1 thread wait_for_revive_teammate();
     }
     var_1.num_perk_obtained = 0;
@@ -352,8 +352,8 @@ chaos_players_setup() {
     var_1.recentlongshotcount = 0;
     var_1.recentrocketkillcount = 0;
     var_1.justopencrate = 0;
-    var_1._id_3B21 = 1;
-    var_1._id_132B._id_1A53 = level.map_specific_starting_lives_remaining - 1;
+    var_1.dogs_dont_instant_kill = 1;
+    var_1.laststand_info.type_getup_lives = level.map_specific_starting_lives_remaining - 1;
     var_1.action_streak = [];
     var_1.hud_chaoseventpopup = var_1 createchaoseventpopup();
     var_1.hud_chaosscorepopup = var_1 createchaosscorepopup();
@@ -396,39 +396,39 @@ listen_for_laststand_notification() {
 }
 
 chaos_players_performance() {
-  while(!isDefined(level.player._id_18D3)) {
+  while(!isDefined(level.player.game_performance)) {
     wait 0.05;
   }
   foreach(var_1 in level.players) {
-    var_1._id_18D3["headshot"] = 0;
-    var_1._id_18D3["knife_kill"] = 0;
-    var_1._id_18D3["long_shot"] = 0;
-    var_1._id_18D3["triple_kill"] = 0;
-    var_1._id_18D3["quad_kill"] = 0;
-    var_1._id_18D3["multi_kill"] = 0;
-    var_1._id_18D3["new_weapon_collected"] = 0;
-    var_1._id_18D3["comboscoremax"] = 0;
-    var_1._id_18D3["combomultmax"] = 0;
-    var_1._id_18D3["explosive_jug"] = 0;
-    var_1._id_18D3["triple_headshot"] = 0;
-    var_1._id_18D3["triple_knife_kill"] = 0;
-    var_1._id_18D3["triple_long_shot"] = 0;
-    var_1._id_18D3["massive_explosion"] = 0;
-    var_1._id_18D3["riot_shield_jug"] = 0;
-    var_1._id_18D3["regular_jug"] = 0;
-    var_1._id_18D3["grenade_kill"] = 0;
-    var_1._id_18D3["chemical_kill"] = 0;
-    var_1._id_18D3["elite_kill"] = 0;
-    var_1._id_18D3["veteran_kill"] = 0;
-    var_1._id_18D3["execution"] = 0;
-    var_1._id_18D3["hardened_kill"] = 0;
-    var_1._id_18D3["explosive_dog"] = 0;
-    var_1._id_18D3["martyrdom_kill"] = 0;
-    var_1._id_18D3["explosive_kill"] = 0;
-    var_1._id_18D3["regular_kill"] = 0;
-    var_1._id_18D3["regular_dog"] = 0;
-    var_1._id_18D3["easy_kill"] = 0;
-    var_1._id_18D3["chopper_kill"] = 0;
+    var_1.game_performance["headshot"] = 0;
+    var_1.game_performance["knife_kill"] = 0;
+    var_1.game_performance["long_shot"] = 0;
+    var_1.game_performance["triple_kill"] = 0;
+    var_1.game_performance["quad_kill"] = 0;
+    var_1.game_performance["multi_kill"] = 0;
+    var_1.game_performance["new_weapon_collected"] = 0;
+    var_1.game_performance["comboscoremax"] = 0;
+    var_1.game_performance["combomultmax"] = 0;
+    var_1.game_performance["explosive_jug"] = 0;
+    var_1.game_performance["triple_headshot"] = 0;
+    var_1.game_performance["triple_knife_kill"] = 0;
+    var_1.game_performance["triple_long_shot"] = 0;
+    var_1.game_performance["massive_explosion"] = 0;
+    var_1.game_performance["riot_shield_jug"] = 0;
+    var_1.game_performance["regular_jug"] = 0;
+    var_1.game_performance["grenade_kill"] = 0;
+    var_1.game_performance["chemical_kill"] = 0;
+    var_1.game_performance["elite_kill"] = 0;
+    var_1.game_performance["veteran_kill"] = 0;
+    var_1.game_performance["execution"] = 0;
+    var_1.game_performance["hardened_kill"] = 0;
+    var_1.game_performance["explosive_dog"] = 0;
+    var_1.game_performance["martyrdom_kill"] = 0;
+    var_1.game_performance["explosive_kill"] = 0;
+    var_1.game_performance["regular_kill"] = 0;
+    var_1.game_performance["regular_dog"] = 0;
+    var_1.game_performance["easy_kill"] = 0;
+    var_1.game_performance["chopper_kill"] = 0;
   }
 }
 
@@ -553,41 +553,41 @@ chaos_wave() {
   }
 
   level thread updateweaponheadiconforplayer();
-  level._id_3C68["sentry_minigun"].health = 4000;
+  level.sentry_settings["sentry_minigun"].health = 4000;
 
   if(issplitscreen()) {
-    level._id_1A55 = -60;
+    level.revive_bar_offset = -60;
   } else {
-    level._id_1A55 = 10;
+    level.revive_bar_offset = 10;
   }
-  maps\_so_survival::_id_3F80();
-  thread maps\_so_survival::_id_3FB6();
-  maps\_so_survival::_id_3F70();
+  maps\_so_survival::survival_waves_setup();
+  thread maps\_so_survival::intro_music();
+  maps\_so_survival::waittill_survival_start();
 
   if(!common_scripts\utility::flag("start_survival")) {
     common_scripts\utility::flag_set("start_survival");
   }
-  level notify("wave_started", level._id_17F6);
+  level notify("wave_started", level.current_wave);
   level.before_first_wave = 0;
   setsaveddvar("bg_viewKickScale", "0.2");
-  level thread maps\_so_survival::_id_3F82();
+  level thread maps\_so_survival::delayed_enemy_ping();
 
   foreach(var_3 in level.players) {
-    var_3._id_3FC9.icon thread chaos_perk_icon_destroy_on_mode_end();
+    var_3.perk_icon_hud.icon thread chaos_perk_icon_destroy_on_mode_end();
     var_3 thread wait_and_display_lives_left_hud();
   }
 
   var_8 = 0;
 
-  if(!isDefined(level._id_3BAF)) {
-    level._id_3BAF = [];
+  if(!isDefined(level.crates_on_ground)) {
+    level.crates_on_ground = [];
   }
   for(;;) {
-    var_9 = "wave_" + level._id_17F6;
+    var_9 = "wave_" + level.current_wave;
 
-    if(isDefined(level.chaos_drop_items[var_9]) && level._id_3BAF.size < 4) {
-      if(maps\_utility::_id_12C1()) {
-        var_10 = 4 - level._id_3BAF.size;
+    if(isDefined(level.chaos_drop_items[var_9]) && level.crates_on_ground.size < 4) {
+      if(maps\_utility::is_coop()) {
+        var_10 = 4 - level.crates_on_ground.size;
 
         if(var_10 > 1) {
           thread chaos_package_drop(2, level.player.origin);
@@ -599,17 +599,17 @@ chaos_wave() {
       }
     }
 
-    if(isDefined(level._id_3B70.size) && level._id_3B70.size >= 3) {}
+    if(isDefined(level.leaders.size) && level.leaders.size >= 3) {}
 
-    var_11 = _id_061C::_id_3E04(level._id_17F6);
+    var_11 = maps/_so_survival_ai::get_squad_array(level.current_wave);
 
     if(var_11[0] == 0) {
-      level._id_17F6--;
-      var_11 = _id_061C::_id_3E04(level._id_17F6);
+      level.current_wave--;
+      var_11 = maps/_so_survival_ai::get_squad_array(level.current_wave);
     }
 
     var_12 = 0;
-    var_13 = _id_061C::_id_3E03(level._id_17F6);
+    var_13 = maps/_so_survival_ai::get_squad_type(level.current_wave);
     level.regular_ai_spawned_in = 0;
 
     foreach(var_15 in var_11) {
@@ -618,86 +618,86 @@ chaos_wave() {
       }
     }
 
-    level._id_3D71 = [];
-    var_17 = _id_061C::_id_3E05(level._id_17F6);
+    level.special_ai = [];
+    var_17 = maps/_so_survival_ai::get_special_ai(level.current_wave);
 
     if(isDefined(var_17)) {
       foreach(var_19 in var_17) {
         if(issubstr(var_19, "dog")) {
-          thread chaos_spawn_dogs(var_19, _id_061C::_id_3E0D(level._id_17F6), level._id_17F6);
+          thread chaos_spawn_dogs(var_19, maps/_so_survival_ai::get_dog_quantity(level.current_wave), level.current_wave);
           var_20 = undefined;
 
-          if(_id_061C::_id_3E0D(level._id_17F6) > 1) {
+          if(maps/_so_survival_ai::get_dog_quantity(level.current_wave) > 1) {
             var_20 = "so_hq_enemy_intel_dogs";
           } else {
             var_20 = "so_hq_enemy_intel_dog";
           }
-          maps\_utility::_id_11F4(var_20);
+          maps\_utility::radio_dialogue(var_20);
           continue;
         }
 
-        var_21 = _id_061C::_id_3E07(level._id_17F6, var_19);
+        var_21 = maps/_so_survival_ai::get_special_ai_type_quantity(level.current_wave, var_19);
 
         if(isDefined(var_21) && var_21 > 0) {
-          var_22 = maps\_so_survival::_id_3F8C(var_19, var_21);
+          var_22 = maps\_so_survival::spawn_special_ai(var_19, var_21);
         }
       }
     }
 
-    if(isDefined(level._id_3D71)) {}
+    if(isDefined(level.special_ai)) {}
 
-    if(maps\_so_survival::_id_3F8F(level._id_17F6)) {
-      thread maps\_so_survival::_id_3F90();
+    if(maps\_so_survival::wave_has_boss(level.current_wave)) {
+      thread maps\_so_survival::spawn_boss();
     }
     wait 3.0;
     common_scripts\utility::flag_set("aggressive_mode");
-    _id_0610::_id_3B72(0, _id_061C::_id_3D79);
-    var_24 = getaiarray("axis").size + _id_061C::_id_3DC3();
+    maps/_squad_enemies::squad_disband(0, maps/_so_survival_ai::default_squad_leader);
+    var_24 = getaiarray("axis").size + maps/_so_survival_ai::dog_get_count();
 
     if(isDefined(level.map_specific_ai_size[var_9])) {
       var_8 = level.map_specific_ai_size[var_9];
     }
     while(var_24 > var_8) {
       level common_scripts\utility::waittill_any_timeout(1.0, "axis_died");
-      var_24 = getaiarray("axis").size + _id_061C::_id_3DC3();
+      var_24 = getaiarray("axis").size + maps/_so_survival_ai::dog_get_count();
     }
 
-    var_25 = level._id_17F6 + 1;
+    var_25 = level.current_wave + 1;
     var_26 = 0;
     var_27 = [];
-    var_27 = _id_061C::_id_3E04(var_25);
+    var_27 = maps/_so_survival_ai::get_squad_array(var_25);
 
     foreach(var_29 in var_27) {}
     var_26 = var_26 + var_29;
 
-    var_31 = _id_061C::_id_3E05(var_25);
+    var_31 = maps/_so_survival_ai::get_special_ai(var_25);
 
     if(isDefined(var_31)) {
       foreach(var_33 in var_31) {
         if(issubstr(var_33, "dog")) {
-          var_26 = var_26 + _id_061C::_id_3E0D(var_25);
+          var_26 = var_26 + maps/_so_survival_ai::get_dog_quantity(var_25);
           continue;
         }
 
-        var_26 = var_26 + _id_061C::_id_3E07(var_25, var_33);
+        var_26 = var_26 + maps/_so_survival_ai::get_special_ai_type_quantity(var_25, var_33);
       }
     }
 
-    if(maps\_so_survival::_id_3F8F(var_25)) {
-      if(isDefined(_id_061C::_id_3E08(var_25))) {
-        var_26 = var_26 + _id_061C::_id_3E08(var_25).size;
+    if(maps\_so_survival::wave_has_boss(var_25)) {
+      if(isDefined(maps/_so_survival_ai::get_bosses_ai(var_25))) {
+        var_26 = var_26 + maps/_so_survival_ai::get_bosses_ai(var_25).size;
       }
-      if(isDefined(_id_061C::_id_3E09(var_25))) {
-        var_26 = var_26 + _id_061C::_id_3E09(var_25).size;
+      if(isDefined(maps/_so_survival_ai::get_bosses_nonai(var_25))) {
+        var_26 = var_26 + maps/_so_survival_ai::get_bosses_nonai(var_25).size;
       }
     }
 
-    var_24 = getaiarray("axis").size + _id_061C::_id_3DC3();
+    var_24 = getaiarray("axis").size + maps/_so_survival_ai::dog_get_count();
 
     if(var_24 + var_26 > 25) {
       while(var_24 + var_26 > 25) {
         level common_scripts\utility::waittill_any_timeout(1.0, "axis_died");
-        var_24 = getaiarray("axis").size + _id_061C::_id_3DC3();
+        var_24 = getaiarray("axis").size + maps/_so_survival_ai::dog_get_count();
       }
     }
 
@@ -710,19 +710,19 @@ chaos_wave() {
       }
     }
 
-    level._id_3B85 = _id_061C::_id_3D72;
-    level._id_3D48 = _id_061C::_id_3D72;
+    level.squad_leader_behavior_func = maps/_so_survival_ai::default_ai;
+    level.special_ai_behavior_func = maps/_so_survival_ai::default_ai;
 
-    if(maps\_so_survival::_id_3F8F(level._id_17F6)) {
+    if(maps\_so_survival::wave_has_boss(level.current_wave)) {
       common_scripts\utility::flag_wait("bosses_spawned");
     }
     if(common_scripts\utility::flag("boss_music")) {
       level notify("end_boss_music");
       common_scripts\utility::flag_clear("boss_music");
-      maps\_utility::_id_1427(3);
+      maps\_utility::music_stop(3);
     }
 
-    level._id_17F6++;
+    level.current_wave++;
   }
 }
 
@@ -733,36 +733,36 @@ chaos_spawn_dogs(var_0, var_1, var_2) {
   if(!isDefined(var_0) || var_0 == "" || !isDefined(var_1) || !var_1) {
     return;
   }
-  level._id_3DBB = [];
+  level.dogs = [];
   var_3 = [];
 
   foreach(var_5 in level.players) {}
   var_3[var_3.size] = var_5;
 
   var_7 = getEntArray("dog_spawner", "targetname")[0];
-  level._id_3DBC = isDefined(var_0) && var_0 == "dog_splode";
-  var_7 maps\_utility::add_spawn_function(_id_061C::_id_3DC0);
-  var_7 maps\_utility::add_spawn_function(_id_061C::_id_3DC2);
-  var_7 maps\_utility::add_spawn_function(_id_061C::_id_3DC1);
+  level.dogs_attach_c4 = isDefined(var_0) && var_0 == "dog_splode";
+  var_7 maps\_utility::add_spawn_function(maps/_so_survival_ai::dog_setup);
+  var_7 maps\_utility::add_spawn_function(maps/_so_survival_ai::dog_seek_player);
+  var_7 maps\_utility::add_spawn_function(maps/_so_survival_ai::dog_register_death);
 
   for(var_8 = 0; var_8 < var_1; var_8++) {
-    var_9 = _id_0618::_id_3DBE(level._id_3DBD, var_3, 4);
+    var_9 = maps/_so_survival_code::get_furthest_from_these(level.wave_spawn_locs, var_3, 4);
     var_7.count = 1;
     var_7.origin = var_9.origin;
     var_7.angles = var_9.angles;
     var_10 = int((40 + randomint(10)) / var_1);
-    level._id_3DBF = 1;
-    var_11 = var_7 maps\_utility::_id_166F();
+    level.survival_dog_spawning = 1;
+    var_11 = var_7 maps\_utility::spawn_ai();
 
     if(isDefined(var_11)) {
-      var_11._id_3D5D = _id_061C::_id_3DF4(var_0);
+      var_11.ai_type = maps/_so_survival_ai::get_wave_number_by_index(var_0);
       var_11 setthreatbiasgroup("dogs");
-      var_11[[level._id_3B89]]();
+      var_11[[level.attributes_func]]();
       var_11.canclimbladders = 0;
-      level._id_3DBB[level._id_3DBB.size] = var_11;
+      level.dogs[level.dogs.size] = var_11;
     }
 
-    level._id_3DBF = undefined;
+    level.survival_dog_spawning = undefined;
 
     if(!common_scripts\utility::flag("aggressive_mode")) {
       common_scripts\utility::waittill_any_timeout(var_10, "aggressive_mode");
@@ -775,22 +775,22 @@ chaos_spawn_wave(var_0, var_1, var_2) {
   level endon("special_op_terminated");
 
   for(var_0 = int(var_0); var_0; var_0--) {
-    var_3 = spawn_chaos_squad(level._id_3DBD, maps\_so_survival::_id_3F8B("leader"), maps\_so_survival::_id_3F8B("follower"), var_1 - 1);
+    var_3 = spawn_chaos_squad(level.wave_spawn_locs, maps\_so_survival::get_class("leader"), maps\_so_survival::get_class("follower"), var_1 - 1);
 
     foreach(var_5 in var_3) {
       var_5.chaos_squad_type = var_2;
       var_5 setthreatbiasgroup("axis");
-      var_5 thread _id_061C::_id_3DE9();
+      var_5 thread maps/_so_survival_ai::setup_ai_weapon();
     }
   }
 
-  return level._id_3B70.size;
+  return level.leaders.size;
 }
 
 spawn_chaos_squad(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
 
-  if(maps\_utility::_id_12C1()) {
+  if(maps\_utility::is_coop()) {
     if(level.focus_on_player == 0) {
       var_4 = level.players[0];
       level.focus_on_player = 1;
@@ -837,17 +837,17 @@ spawn_chaos_squad(var_0, var_1, var_2, var_3) {
   var_16 = [];
   var_16[var_16.size] = level.player;
 
-  if(maps\_utility::_id_12C1()) {
+  if(maps\_utility::is_coop()) {
     var_16[var_16.size] = level.players[1];
   }
-  foreach(var_18 in level._id_3B70) {}
+  foreach(var_18 in level.leaders) {}
   var_16[var_16.size] = var_18;
 
   var_20 = undefined;
 
   while(var_15.size > 1) {
     foreach(var_22 in var_16) {
-      var_20 = maps\_utility::_id_0AE9(var_22.origin, var_15);
+      var_20 = maps\_utility::getclosest(var_22.origin, var_15);
       var_15 = common_scripts\utility::array_remove(var_15, var_20);
 
       if(var_15.size == 1) {
@@ -873,7 +873,7 @@ spawn_chaos_squad(var_0, var_1, var_2, var_3) {
 
   common_scripts\utility::flag_set("squad_spawning");
   var_28 = [];
-  var_28 = _id_0610::_id_3B81(var_24, var_1, var_2, var_3);
+  var_28 = maps/_squad_enemies::spawn_enemy_group(var_24, var_1, var_2, var_3);
   level.regular_ai_spawned_in = level.regular_ai_spawned_in + (var_3 + 1);
   common_scripts\utility::flag_clear("squad_spawning");
   wait 0.05;
@@ -909,17 +909,17 @@ chaos_package_drop(var_0, var_1) {
     var_2 = var_2 - 1;
   }
 
-  var_9 = "wave_" + level._id_17F6;
+  var_9 = "wave_" + level.current_wave;
 
   for(var_5 = 0; var_5 < var_0; var_5++) {
     level thread generatesmokefx(level.drop_location_sorted[var_5]);
   }
-  level _id_3BA9(var_0, level.player, level.drop_location_sorted[0], randomfloat(360), undefined, var_9);
+  level sp_airdrop_do_flyby(var_0, level.player, level.drop_location_sorted[0], randomfloat(360), undefined, var_9);
 }
 
-_id_3BA9(var_0, var_1, var_2, var_3, var_4, var_5) {
+sp_airdrop_do_flyby(var_0, var_1, var_2, var_3, var_4, var_5) {
   level endon("special_op_terminated");
-  var_6 = _id_0614::getflyheightoffset(var_2);
+  var_6 = maps/_sp_airdrop::getflyheightoffset(var_2);
 
   if(!isDefined(var_4)) {
     var_4 = 0;
@@ -932,20 +932,20 @@ _id_3BA9(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7 = var_2 * (1, 1, 0) + (0, 0, var_6);
   var_8 = chaos_getpathstart(var_7, var_3);
   var_9 = chaos_getpathend(var_7, var_3);
-  var_10 = _id_0614::_id_3BAA(var_1, var_8, var_7);
+  var_10 = maps/_sp_airdrop::sp_airdrop_heli_setup(var_1, var_8, var_7);
   var_10 endon("death");
 
-  if(maps\_utility::_id_12C1()) {
-    maps\_utility::_id_11F4("chaos_cps_inbound");
+  if(maps\_utility::is_coop()) {
+    maps\_utility::radio_dialogue("chaos_cps_inbound");
   } else {
-    maps\_utility::_id_11F4("chaos_cp_inbound");
+    maps\_utility::radio_dialogue("chaos_cp_inbound");
   }
   level.drop_item_used = [];
 
   for(var_11 = 0; var_11 < var_0; var_11++) {
     if(var_11 > 0) {
       var_3 = randomfloat(360);
-      var_6 = _id_0614::getflyheightoffset(level.drop_location_sorted[var_11]);
+      var_6 = maps/_sp_airdrop::getflyheightoffset(level.drop_location_sorted[var_11]);
 
       if(!isDefined(var_4)) {
         var_4 = 0;
@@ -966,7 +966,7 @@ _id_3BA9(var_0, var_1, var_2, var_3, var_4, var_5) {
       }
     }
 
-    var_10 thread _id_3BAB(var_12, level.drop_location_sorted[var_11], var_6, 0, undefined, var_8);
+    var_10 thread sp_airdrop_drop_the_crate(var_12, level.drop_location_sorted[var_11], var_6, 0, undefined, var_8);
     wait 1;
 
     while(var_10 vehicle_getspeed() > 5) {
@@ -997,7 +997,7 @@ _id_3BA9(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
 
     if(isDefined(var_13)) {
-      maps\_utility::_id_11F4(var_13);
+      maps\_utility::radio_dialogue(var_13);
     }
   }
 
@@ -1013,7 +1013,7 @@ _id_3BA9(var_0, var_1, var_2, var_3, var_4, var_5) {
 chaos_score_event_raise(var_0, var_1) {
   if(level.timer_started == 0) {
     level notify("Start timer");
-    level._id_16CF = gettime();
+    level.challenge_start_time = gettime();
     level.timer_started = 1;
   }
 
@@ -1128,7 +1128,7 @@ chaos_combo_on_end(var_0, var_1) {
 
     foreach(var_8 in level.players) {
       var_8 clearperks();
-      var_8._id_3FC9.icon.alpha = 0;
+      var_8.perk_icon_hud.icon.alpha = 0;
       var_8.perk_icon_hud_2.icon.alpha = 0;
       var_8.perk_icon_hud_3.icon.alpha = 0;
       var_8.perk_icon_hud_4.icon.alpha = 0;
@@ -1156,11 +1156,11 @@ chaos_running_score_update(var_0, var_1) {
   level.chaos_score = level.chaos_score + var_2;
 
   foreach(var_4 in level.players) {
-    if(var_2 > var_4._id_18D3["comboscoremax"]) {
-      var_4._id_18D3["comboscoremax"] = var_2;
+    if(var_2 > var_4.game_performance["comboscoremax"]) {
+      var_4.game_performance["comboscoremax"] = var_2;
     }
-    if(var_1 > var_4._id_18D3["combomultmax"]) {
-      var_4._id_18D3["combomultmax"] = var_1;
+    if(var_1 > var_4.game_performance["combomultmax"]) {
+      var_4.game_performance["combomultmax"] = var_1;
     }
     if(isDefined(var_4.chaos_score_hud)) {
       var_4.chaos_score_hud settext(format_good_looking_score(level.chaos_score));
@@ -1169,9 +1169,9 @@ chaos_running_score_update(var_0, var_1) {
 }
 
 chaos_score_event_creators() {
-  maps\_utility::_id_1A5A("axis", ::chaos_score_on_ai_damage);
-  maps\_utility::_id_1A5A("axis", ::chaos_score_on_ai_flashed);
-  maps\_utility::_id_1A5A("axis", ::chaos_score_on_ai_death);
+  maps\_utility::add_global_spawn_function("axis", ::chaos_score_on_ai_damage);
+  maps\_utility::add_global_spawn_function("axis", ::chaos_score_on_ai_flashed);
+  maps\_utility::add_global_spawn_function("axis", ::chaos_score_on_ai_death);
 }
 
 chaos_score_on_ai_damage() {
@@ -1240,8 +1240,8 @@ chaos_score_on_ai_death() {
       }
       chaos_score_event_raise("kill_explosive");
 
-      if(!maps\_utility::_id_12C1()) {
-        level.player._id_18D3["explosive_kill"]++;
+      if(!maps\_utility::is_coop()) {
+        level.player.game_performance["explosive_kill"]++;
       }
       return;
     }
@@ -1252,33 +1252,33 @@ chaos_score_on_ai_death() {
   }
   var_3 = chaos_get_ai_type_ref() + "_kill";
 
-  if(isDefined(self.a) && isDefined(self.a._id_0D69)) {
+  if(isDefined(self.a) && isDefined(self.a.doinglongdeath)) {
     var_3 = "kill_execution";
-    var_0._id_18D3["execution"]++;
-  } else if(maps\_player_stats::_id_0A32()) {
+    var_0.game_performance["execution"]++;
+  } else if(maps\_player_stats::was_headshot()) {
     var_3 = "kill_headshot";
-    var_0._id_18D3["headshot"]++;
+    var_0.game_performance["headshot"]++;
   } else if(isDefined(var_1)) {
     if(var_1 == "MOD_MELEE") {
       var_3 = "kill_knife";
-      var_0._id_18D3["knife_kill"]++;
+      var_0.game_performance["knife_kill"]++;
     } else if(var_1 == "MOD_EXPLOSIVE") {
       var_3 = "kill_explosive";
-      var_0._id_18D3["explosive_kill"]++;
+      var_0.game_performance["explosive_kill"]++;
     } else if(var_1 == "MOD_PROJECTILE_SPLASH") {
       var_3 = "kill_rocket";
     } else if(var_1 == "MOD_GRENADE_SPLASH" || var_1 == "MOD_GRENADE") {
       if(var_2 == "fraggrenade") {
         var_3 = "kill_grenade";
-        var_0._id_18D3["grenade_kill"]++;
+        var_0.game_performance["grenade_kill"]++;
       } else if(var_2 == "claymore") {
         var_3 = "kill_explosive";
-        var_0._id_18D3["explosive_kill"]++;
+        var_0.game_performance["explosive_kill"]++;
       }
     } else if(var_1 == "MOD_PISTOL_BULLET" || var_1 == "MOD_RIFLE_BULLET") {
       if(distancesquared(self.origin, var_0.origin) > 262144) {
         var_3 = "kill_longshot";
-        var_0._id_18D3["long_shot"]++;
+        var_0.game_performance["long_shot"]++;
       }
     }
   }
@@ -1306,44 +1306,44 @@ chaos_score_on_ai_death() {
     var_3 = chaos_get_ai_type_ref() + "_kill";
 
     if(issubstr(var_3, "explosive")) {
-      var_0._id_18D3["explosive_jug"]++;
+      var_0.game_performance["explosive_jug"]++;
     } else if(issubstr(var_3, "riotshield")) {
-      var_0._id_18D3["riot_shield_jug"]++;
+      var_0.game_performance["riot_shield_jug"]++;
     } else if(issubstr(var_3, "regular")) {
-      var_0._id_18D3["regular_jug"]++;
+      var_0.game_performance["regular_jug"]++;
     }
   }
 
   if(var_4 == "chopper") {
     var_3 = "chopper_kill";
-    var_0._id_18D3["chopper_kill"]++;
+    var_0.game_performance["chopper_kill"]++;
   }
 
   if(var_4 == "martyrdom" && var_3 != "kill_headshot") {
     var_3 = "martyrdom_kill";
-    var_0._id_18D3["martyrdom_kill"]++;
+    var_0.game_performance["martyrdom_kill"]++;
   }
 
   if(var_3 == "easy_kill") {
-    var_0._id_18D3["easy_kill"]++;
+    var_0.game_performance["easy_kill"]++;
   } else if(var_3 == "regular_kill") {
-    var_0._id_18D3["regular_kill"]++;
+    var_0.game_performance["regular_kill"]++;
   } else if(var_3 == "hardened_kill") {
-    var_0._id_18D3["hardened_kill"]++;
+    var_0.game_performance["hardened_kill"]++;
   } else if(var_3 == "veteran_kill") {
-    var_0._id_18D3["veteran_kill"]++;
+    var_0.game_performance["veteran_kill"]++;
   } else if(var_3 == "elite_kill") {
-    var_0._id_18D3["elite_kill"]++;
+    var_0.game_performance["elite_kill"]++;
   } else if(var_3 == "elite_kill") {
-    var_0._id_18D3["elite_kill"]++;
+    var_0.game_performance["elite_kill"]++;
   } else if(var_3 == "chemical_kill") {
-    var_0._id_18D3["chemical_kill"]++;
+    var_0.game_performance["chemical_kill"]++;
   } else if(var_3 == "martyrdom_kill") {
-    var_0._id_18D3["martyrdom_kill"]++;
+    var_0.game_performance["martyrdom_kill"]++;
   } else if(var_3 == "dog_reg_kill") {
-    var_0._id_18D3["regular_dog"]++;
+    var_0.game_performance["regular_dog"]++;
   } else if(var_3 == "dog_splode_kill") {
-    var_0._id_18D3["explosive_dog"]++;
+    var_0.game_performance["explosive_dog"]++;
   }
   chaos_score_event_raise(var_3);
 }
@@ -1366,7 +1366,7 @@ multirocketkills(var_0) {
   if(var_0 > 10) {
     thread chaos_combo_splash(&"SO_SURVIVAL_CHAOS_SPLASH_DEMO_MAN", "cm_bp_kills_explosion");
     chaos_score_event_raise("massive_explosion");
-    self._id_18D3["massive_explosion"]++;
+    self.game_performance["massive_explosion"]++;
   }
 }
 
@@ -1388,7 +1388,7 @@ multilongshots(var_0) {
   if(var_0 >= 3) {
     thread chaos_combo_splash(&"SO_SURVIVAL_CHAOS_SPLASH_LONG_SHOOTER", "cm_bp_kills_3longshot");
     chaos_score_event_raise("longshot_triple");
-    self._id_18D3["triple_long_shot"]++;
+    self.game_performance["triple_long_shot"]++;
   }
 }
 
@@ -1410,7 +1410,7 @@ multiheadshots(var_0) {
   if(var_0 >= 3) {
     thread chaos_combo_splash(&"SO_SURVIVAL_CHAOS_SPLASH_HEAD_HUNTER", "cm_bp_kills_3headshot");
     chaos_score_event_raise("headshot_triple");
-    self._id_18D3["triple_headshot"]++;
+    self.game_performance["triple_headshot"]++;
   }
 }
 
@@ -1432,7 +1432,7 @@ multiknifekills(var_0) {
   if(var_0 >= 3) {
     thread chaos_combo_splash(&"SO_SURVIVAL_CHAOS_SPLASH_SLASHER", "cm_bp_kills_3knife");
     chaos_score_event_raise("knife_triple");
-    self._id_18D3["triple_knife_kill"]++;
+    self.game_performance["triple_knife_kill"]++;
   }
 }
 
@@ -1454,15 +1454,15 @@ multikill(var_0) {
   if(var_0 == 3) {
     thread chaos_combo_splash(&"SO_SURVIVAL_CHAOS_SPLASH_TRIPLE_KILL", "cm_bp_kills_triple");
     chaos_score_event_raise("kill_triple");
-    self._id_18D3["triple_kill"]++;
+    self.game_performance["triple_kill"]++;
   } else if(var_0 == 4) {
     thread chaos_combo_splash(&"SO_SURVIVAL_CHAOS_SPLASH_QUAD_KILL", "cm_bp_kills_quad");
     chaos_score_event_raise("kill_quad");
-    self._id_18D3["quad_kill"]++;
+    self.game_performance["quad_kill"]++;
   } else if(var_0 > 4) {
     thread chaos_combo_splash(&"SO_SURVIVAL_CHAOS_SPLASH_MULTI_KILL", "cm_bp_kills_multiple");
     chaos_score_event_raise("kill_multi");
-    self._id_18D3["multi_kill"]++;
+    self.game_performance["multi_kill"]++;
   }
 }
 
@@ -1494,15 +1494,15 @@ play_time_related_vo(var_0) {
 
   if(var_1 > 0) {
     wait(var_1);
-    level thread maps\_utility::_id_11F4("chaos_time_almostup");
+    level thread maps\_utility::radio_dialogue("chaos_time_almostup");
   }
 
   wait(var_2);
-  level thread maps\_utility::_id_11F4("chaos_30sec_left", 2.0);
+  level thread maps\_utility::radio_dialogue("chaos_30sec_left", 2.0);
   wait(var_3);
-  level thread maps\_utility::_id_11F4("chaos_10sec_left", 2.0);
+  level thread maps\_utility::radio_dialogue("chaos_10sec_left", 2.0);
   wait 10;
-  level thread maps\_utility::_id_11F4("chaos_keep_combo");
+  level thread maps\_utility::radio_dialogue("chaos_keep_combo");
 }
 
 chaos_timer_player_setup(var_0, var_1, var_2) {
@@ -1524,7 +1524,7 @@ chaos_timer_update(var_0, var_1, var_2, var_3) {
   level common_scripts\utility::waittill_notify_or_timeout("Start timer", 10);
 
   if(level.timer_started == 0) {
-    level._id_16CF = gettime();
+    level.challenge_start_time = gettime();
     level.timer_started = 1;
   }
 
@@ -1577,8 +1577,8 @@ chaos_timer_reached_zero(var_0, var_1, var_2) {
 sp_killstreak_bonus_freezemeter_crateopen() {
   level endon("special_op_terminated");
 
-  if(_id_0611::_id_3CF4("sentry")) {
-    _id_0611::_id_3CF2("sentry");
+  if(maps/_sp_killstreaks::has_killstreak("sentry")) {
+    maps/_sp_killstreaks::take_sp_killstreak("sentry");
   }
   self giveweapon("chaos_freeze_meter");
   self setactionslot(4, "weapon", "chaos_freeze_meter");
@@ -1594,7 +1594,7 @@ wait_for_meter_freeze_activiation() {
   for(;;) {
     self waittill("freeze_combo_meter");
 
-    if(self._id_132B._id_1A53 == 0 && (isDefined(self.laststand) && self.laststand == 1)) {
+    if(self.laststand_info.type_getup_lives == 0 && (isDefined(self.laststand) && self.laststand == 1)) {
       continue;
     }
     self takeweapon("chaos_freeze_meter");
@@ -1630,7 +1630,7 @@ execute_combo_freeze() {
 sp_killstreak_bonus_multiplier_crateopen() {
   level.chaos_combo_count = level.chaos_combo_count + 10;
   chaos_score_event_raise("bonus_multiplier");
-  level thread maps\_utility::_id_11F4("chaos_pickup_multiplier");
+  level thread maps\_utility::radio_dialogue("chaos_pickup_multiplier");
 
   if(level.player_currently_getting_perk == 1) {
     level waittill("proceed_with_next_perk");
@@ -1654,13 +1654,13 @@ sp_killstreak_bonus_multiplier_crateopen() {
 
 sp_killstreak_bonus_laststand_crateopen() {
   var_0 = 0;
-  self._id_132B._id_1A53 = self._id_132B._id_1A53 + 1;
+  self.laststand_info.type_getup_lives = self.laststand_info.type_getup_lives + 1;
   thread radio_dialogue_to_player(self, "chaos_pickup_laststand");
 
   if(isDefined(self.laststand) && self.laststand == 1) {
     return;
   }
-  update_lives_left_hud(self._id_132B._id_1A53);
+  update_lives_left_hud(self.laststand_info.type_getup_lives);
   return;
 }
 
@@ -1672,7 +1672,7 @@ sp_killstreak_bonus_time_crateopen() {
   foreach(var_2 in level.players) {
     if(isDefined(var_2.chaos_timer)) {
       var_2.chaos_timer.fontscale = 1;
-      var_2.chaos_timer maps\_specialops::_id_185D();
+      var_2.chaos_timer maps\_specialops::set_hud_white();
       thread chaos_timer_update(var_2.chaos_timer, var_0, undefined, "win_survival");
     }
 
@@ -1682,7 +1682,7 @@ sp_killstreak_bonus_time_crateopen() {
   }
 
   level thread update_level_chaos_timer();
-  level thread maps\_utility::_id_11F4("chaos_pickup_time");
+  level thread maps\_utility::radio_dialogue("chaos_pickup_time");
   level thread play_time_related_vo(var_0);
   level notify("Start timer");
 }
@@ -1699,23 +1699,23 @@ chaos_give_perk(var_0) {
 
   switch (var_0) {
     case "specialty_stalker":
-      thread _id_0615::_id_3C61();
+      thread maps/_so_survival_perks::give_perk_stalker();
       break;
     case "specialty_longersprint":
-      thread _id_0615::_id_3C57();
+      thread maps/_so_survival_perks::give_perk_longersprint();
       break;
     case "specialty_fastreload":
-      thread _id_0615::_id_3C59();
+      thread maps/_so_survival_perks::give_perk_fastreload();
       break;
     case "specialty_quickdraw":
-      thread _id_0615::_id_3C5B();
+      thread maps/_so_survival_perks::give_perk_quickdraw();
       thread chaos_give_perk_fastoffhand();
       break;
     case "specialty_detectexplosive":
-      thread _id_0615::_id_3C5D();
+      thread maps/_so_survival_perks::give_perk_detectexplosive();
       break;
     case "specialty_bulletaccuracy":
-      thread _id_0615::_id_3C5F();
+      thread maps/_so_survival_perks::give_perk_bulletaccuracy();
       break;
     case "specialty_armorvest":
       self setperk("specialty_armorvest", 1, 0);
@@ -1725,7 +1725,7 @@ chaos_give_perk(var_0) {
       self setmovespeedscale(1.25);
       break;
     default:
-      thread _id_0615::_id_3C55();
+      thread maps/_so_survival_perks::give_perk_dummy();
       break;
   }
 
@@ -1757,7 +1757,7 @@ unsetjuiced() {
 }
 
 chaos_eog_summary() {
-  var_0 = int(min(level._id_16CE - level._id_16CF, 86400000));
+  var_0 = int(min(level.challenge_end_time - level.challenge_start_time, 86400000));
   var_1 = int(var_0 % 1000 / 100);
   var_2 = int(var_0 / 1000) % 60;
   var_3 = int(var_0 / 60000) % 60;
@@ -1776,44 +1776,44 @@ chaos_eog_summary() {
   chaos_clear_eog_summary_dvar();
 
   foreach(var_7 in level.players) {
-    var_8 = var_7._id_18D3["kill"];
-    var_9 = maps\_so_survival::_id_3F6A(var_7, "kill");
-    var_10 = var_7._id_18D3["headshot"];
-    var_11 = maps\_so_survival::_id_3F6A(var_7, "headshot");
-    var_12 = var_7._id_18D3["knife_kill"];
-    var_13 = maps\_so_survival::_id_3F6A(var_7, "knife_kill");
-    var_14 = var_7._id_18D3["comboscoremax"];
-    var_15 = var_7._id_18D3["combomultmax"];
-    var_16 = var_7._id_18D3["long_shot"];
-    var_17 = var_7._id_18D3["triple_kill"];
-    var_18 = var_7._id_18D3["quad_kill"];
-    var_19 = var_7._id_18D3["multi_kill"];
-    var_20 = var_7._id_18D3["new_weapon_collected"];
-    var_21 = var_7._id_18D3["massive_explosion"];
-    var_22 = var_7._id_18D3["triple_long_shot"];
-    var_23 = var_7._id_18D3["triple_headshot"];
-    var_24 = var_7._id_18D3["triple_knife_kill"];
-    var_25 = var_7._id_18D3["explosive_kill"];
-    var_26 = var_7._id_18D3["execution"];
-    var_27 = var_7._id_18D3["grenade_kill"];
-    var_28 = var_7._id_18D3["explosive_jug"];
-    var_29 = var_7._id_18D3["riot_shield_jug"];
-    var_30 = var_7._id_18D3["regular_jug"];
-    var_31 = var_7._id_18D3["easy_kill"];
-    var_32 = var_7._id_18D3["regular_kill"];
-    var_33 = var_7._id_18D3["hardened_kill"];
-    var_34 = var_7._id_18D3["veteran_kill"];
-    var_35 = var_7._id_18D3["elite_kill"];
-    var_36 = var_7._id_18D3["chemical_kill"];
-    var_37 = var_7._id_18D3["martyrdom_kill"];
-    var_38 = var_7._id_18D3["regular_dog"];
-    var_39 = var_7._id_18D3["explosive_dog"];
-    var_40 = var_7._id_18D3["chopper_kill"];
+    var_8 = var_7.game_performance["kill"];
+    var_9 = maps\_so_survival::other_player_performance(var_7, "kill");
+    var_10 = var_7.game_performance["headshot"];
+    var_11 = maps\_so_survival::other_player_performance(var_7, "headshot");
+    var_12 = var_7.game_performance["knife_kill"];
+    var_13 = maps\_so_survival::other_player_performance(var_7, "knife_kill");
+    var_14 = var_7.game_performance["comboscoremax"];
+    var_15 = var_7.game_performance["combomultmax"];
+    var_16 = var_7.game_performance["long_shot"];
+    var_17 = var_7.game_performance["triple_kill"];
+    var_18 = var_7.game_performance["quad_kill"];
+    var_19 = var_7.game_performance["multi_kill"];
+    var_20 = var_7.game_performance["new_weapon_collected"];
+    var_21 = var_7.game_performance["massive_explosion"];
+    var_22 = var_7.game_performance["triple_long_shot"];
+    var_23 = var_7.game_performance["triple_headshot"];
+    var_24 = var_7.game_performance["triple_knife_kill"];
+    var_25 = var_7.game_performance["explosive_kill"];
+    var_26 = var_7.game_performance["execution"];
+    var_27 = var_7.game_performance["grenade_kill"];
+    var_28 = var_7.game_performance["explosive_jug"];
+    var_29 = var_7.game_performance["riot_shield_jug"];
+    var_30 = var_7.game_performance["regular_jug"];
+    var_31 = var_7.game_performance["easy_kill"];
+    var_32 = var_7.game_performance["regular_kill"];
+    var_33 = var_7.game_performance["hardened_kill"];
+    var_34 = var_7.game_performance["veteran_kill"];
+    var_35 = var_7.game_performance["elite_kill"];
+    var_36 = var_7.game_performance["chemical_kill"];
+    var_37 = var_7.game_performance["martyrdom_kill"];
+    var_38 = var_7.game_performance["regular_dog"];
+    var_39 = var_7.game_performance["explosive_dog"];
+    var_40 = var_7.game_performance["chopper_kill"];
     setDvar("ui_hide_hint", 1);
     var_41 = 0;
     var_42 = 4;
 
-    if(maps\_utility::_id_12C1()) {
+    if(maps\_utility::is_coop()) {
       var_7 chaos_add_custom_eog_summary_line("", "@SPECIAL_OPS_PERFORMANCE_YOU", "@SPECIAL_OPS_PERFORMANCE_PARTNER");
       var_7 chaos_add_custom_eog_summary_line("@SO_SURVIVAL_PERFORMANCE_KILLS", var_8, var_9);
       var_7 chaos_add_custom_eog_summary_line("", "", "");
@@ -1988,20 +1988,20 @@ chaos_clear_eog_summary_dvar() {
 }
 
 chaos_add_custom_eog_summary_line(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(self._id_1992)) {
-    self._id_1992 = 0;
+  if(!isDefined(self.eog_line)) {
+    self.eog_line = 0;
   }
   var_5 = undefined;
 
   if(isDefined(var_4)) {
     var_5 = var_4;
 
-    if(var_4 > self._id_1992) {
-      self._id_1992 = var_4;
+    if(var_4 > self.eog_line) {
+      self.eog_line = var_4;
     }
   } else {
-    self._id_1992++;
-    var_5 = self._id_1992;
+    self.eog_line++;
+    var_5 = self.eog_line;
   }
 
   chaos_set_custom_eog_summary(var_5, 1, var_0);
@@ -2029,7 +2029,7 @@ chaos_set_custom_eog_summary(var_0, var_1, var_2) {
   if(level.players.size > 1) {
     if(self == level.player) {
       var_5 = "ui_eog_r" + var_3 + "c" + var_4 + "_player1";
-    } else if(self == level._id_1337) {
+    } else if(self == level.player2) {
       var_5 = "ui_eog_r" + var_3 + "c" + var_4 + "_player2";
     } else {}
   } else {
@@ -2039,32 +2039,32 @@ chaos_set_custom_eog_summary(var_0, var_1, var_2) {
 }
 
 chaos_add_custom_eog_summary_line_blank() {
-  if(!isDefined(self._id_1992)) {
-    self._id_1992 = 0;
+  if(!isDefined(self.eog_line)) {
+    self.eog_line = 0;
   }
-  self._id_1992++;
+  self.eog_line++;
 }
 
 radio_dialogue_to_player(var_0, var_1, var_2) {
-  if(!isDefined(level._id_26B0)) {
+  if(!isDefined(level.player_radio_emitter)) {
     var_3 = spawn("script_origin", (0, 0, 0));
     var_3 linkTo(level.player, "", (0, 0, 0), (0, 0, 0));
-    level._id_26B0 = var_3;
+    level.player_radio_emitter = var_3;
   }
 
-  maps\_utility::_id_16EA();
+  maps\_utility::bcs_scripted_dialogue_start();
   var_4 = 0;
 
   if(!isDefined(var_2)) {
-    var_4 = level._id_26B0 maps\_utility::_id_1255(::chaos_play_sound_to_player, var_0, level._id_11BB[var_1], undefined, 1);
+    var_4 = level.player_radio_emitter maps\_utility::function_stack(::chaos_play_sound_to_player, var_0, level.scr_radio[var_1], undefined, 1);
   } else {
-    var_4 = level._id_26B0 maps\_utility::_id_1257(var_2, ::chaos_play_sound_to_player, var_0, level._id_11BB[var_1], undefined, 1);
+    var_4 = level.player_radio_emitter maps\_utility::function_stack_timeout(var_2, ::chaos_play_sound_to_player, var_0, level.scr_radio[var_1], undefined, 1);
   }
   return var_4;
 }
 
 chaos_play_sound_to_player(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(maps\_utility::_id_2625()) {
+  if(maps\_utility::is_dead_sentient()) {
     return;
   }
   if(!isDefined(var_0)) {
@@ -2074,7 +2074,7 @@ chaos_play_sound_to_player(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_0 playlocalsound(var_1, "sounddone", 0);
 
   if(isDefined(var_3)) {
-    if(!isDefined(maps\_utility_code::_id_13EC(var_0))) {
+    if(!isDefined(maps\_utility_code::wait_for_sounddone_or_death(var_0))) {
       var_0 stopsounds();
     }
     wait 0.05;
@@ -2169,7 +2169,7 @@ manage_lives_left_hud() {
   for(;;) {
     self waittill("player_downed");
 
-    if(isDefined(self._id_132B._id_1A53) && self._id_132B._id_1A53 > 0) {
+    if(isDefined(self.laststand_info.type_getup_lives) && self.laststand_info.type_getup_lives > 0) {
       thread radio_dialogue_to_player(self, "chaos_get_onekill", 1.0);
     }
     self.live_1_hud_icon.icon.alpha = 0.0;
@@ -2179,17 +2179,17 @@ manage_lives_left_hud() {
     self.live_5_hud_icon.icon.alpha = 0.0;
     self waittill("revived");
     self disableinvulnerability();
-    maps\_so_survival::_id_3F74("armor_1");
+    maps\_so_survival::give_player_armor("armor_1");
 
-    if(isDefined(self._id_132B._id_1A53) && self._id_132B._id_1A53 - 1 > 0) {
-      var_0 = self._id_132B._id_1A53 - 1;
+    if(isDefined(self.laststand_info.type_getup_lives) && self.laststand_info.type_getup_lives - 1 > 0) {
+      var_0 = self.laststand_info.type_getup_lives - 1;
       wait 0.5;
       update_lives_left_hud(var_0);
       continue;
     }
 
     var_1 = spawnStruct();
-    var_1._id_3E1B = &"SO_SURVIVAL_CHAOS_SPLASH_FINAL_STAND";
+    var_1.title = &"SO_SURVIVAL_CHAOS_SPLASH_FINAL_STAND";
     var_1.duration = 1.5;
     var_1.sound = "cm_bp_laststand_lastlife";
     thread player_combo_splash(var_1);
@@ -2279,15 +2279,15 @@ chaos_combo_player_create_hud() {
   self.chaos_score_hud.color = (1, 1, 0);
   self.chaos_score_hud.glowalpha = 0.25;
   self.chaos_score_hud.glowcolor = (0.2, 0.2, 0.2);
-  self.chaos_score_hud._id_184E = 1.25;
-  self.chaos_score_hud._id_184F = 1.65;
-  self.chaos_score_hud maps\_specialops_code::_id_1849();
+  self.chaos_score_hud.pulse_scale_normal = 1.25;
+  self.chaos_score_hud.pulse_scale_big = 1.65;
+  self.chaos_score_hud maps\_specialops_code::so_hud_pulse_init();
   self.chaos_score_hud.hidewheninmenu = 1;
   level.chaos_combo_all_hud_elems[level.chaos_combo_all_hud_elems.size] = self.chaos_score_hud;
   self.chaos_score_info_hud = maps\_hud_util::createserverclientfontstring("hudbig", 1.0);
   self.chaos_score_info_hud maps\_hud_util::setpoint("RIGHT", "TOP RIGHT", undefined, 25);
   self.chaos_score_info_hud settext("0");
-  self.chaos_score_info_hud maps\_specialops_code::_id_1849();
+  self.chaos_score_info_hud maps\_specialops_code::so_hud_pulse_init();
   self.chaos_score_info_hud.hidewheninmenu = 1;
   self.chaos_score_info_hud.alpha = 0.0;
   level.chaos_combo_all_hud_elems[level.chaos_combo_all_hud_elems.size] = self.chaos_score_info_hud;
@@ -2333,10 +2333,10 @@ chaos_combo_player_create_hud() {
   self.chaos_combo_hud_multiply.color = (1, 1, 0);
   self.chaos_combo_hud_multiply.glowcolor = (0, 0, 0);
   self.chaos_combo_hud_multiply.glowalpha = 0.8;
-  self.chaos_combo_hud_multiply._id_184E = 1.25;
-  self.chaos_combo_hud_multiply._id_184F = 2.0;
-  self.chaos_combo_hud_multiply._id_184D = 0.3;
-  self.chaos_combo_hud_multiply maps\_specialops_code::_id_1849();
+  self.chaos_combo_hud_multiply.pulse_scale_normal = 1.25;
+  self.chaos_combo_hud_multiply.pulse_scale_big = 2.0;
+  self.chaos_combo_hud_multiply.pulse_time = 0.3;
+  self.chaos_combo_hud_multiply maps\_specialops_code::so_hud_pulse_init();
   self.chaos_combo_hud_multiply.hidewheninmenu = 1;
   level.chaos_combo_all_hud_elems[level.chaos_combo_all_hud_elems.size] = self.chaos_combo_hud_multiply;
   self.chaos_combo_hud_score = maps\_hud_util::createserverclientfontstring("hudbig", 1.0);
@@ -2404,7 +2404,7 @@ chaos_combo_display_update(var_0, var_1, var_2, var_3, var_4) {
     var_7.chaos_score_hud settext(format_good_looking_score(var_5));
 
     if(isDefined(var_4) && var_4) {
-      var_7.chaos_combo_hud_multiply thread maps\_specialops::_id_1848();
+      var_7.chaos_combo_hud_multiply thread maps\_specialops::so_hud_pulse_create();
     }
   }
 }
@@ -2453,9 +2453,9 @@ chaos_combo_action_display_clear() {
 recreate_last_stand_hud() {
   common_scripts\utility::waitframe();
 
-  if(!isDefined(level.player._id_1A8B)) {
-    level._id_1A57 = [];
-    maps\_laststand::_id_1A8A();
+  if(!isDefined(level.player.revive_bar_getup)) {
+    level.laststand_hud_elements = [];
+    maps\_laststand::laststand_revive_bar_getup_create();
   }
 }
 
@@ -2502,11 +2502,11 @@ chaos_score_hud_player_update(var_0) {
   self.chaos_score_info_hud settext(var_0 + "X COMBO!");
   self.chaos_score_info_hud maps\_hud_util::setpoint("LEFT", "CENTER", undefined, -25);
   self.chaos_score_info_hud maps\_hud_util::setpoint("RIGHT", "TOP RIGHT", undefined, 25, 0.5);
-  self.chaos_score_info_hud maps\_specialops::_id_1848();
+  self.chaos_score_info_hud maps\_specialops::so_hud_pulse_create();
   self.chaos_score_info_hud fadeovertime(0.5);
   self.chaos_score_info_hud.alpha = 0.0;
   self.chaos_score_hud settext(level.chaos_score);
-  self.chaos_score_hud thread maps\_specialops::_id_1848();
+  self.chaos_score_hud thread maps\_specialops::so_hud_pulse_create();
 }
 
 chaos_timer_destroy(var_0) {
@@ -2585,14 +2585,14 @@ chaos_timer_update_flash(var_0, var_1, var_2) {
 
   for(var_5 = 0; var_5 < var_4; var_5++) {
     var_0.fontscale = 1.2;
-    var_0 maps\_specialops::_id_16AC();
+    var_0 maps\_specialops::set_hud_red();
     wait 0.5;
     var_0.fontscale = 1;
-    var_0 maps\_specialops::_id_185F();
+    var_0 maps\_specialops::set_hud_yellow();
     wait 0.5;
   }
 
-  var_0 maps\_specialops::_id_16AC();
+  var_0 maps\_specialops::set_hud_red();
   level thread set_player_time_up_vision();
 }
 
@@ -2605,7 +2605,7 @@ chaos_timer_update_color(var_0, var_1, var_2) {
   if(var_3 > 0) {
     wait(var_3);
   }
-  var_0 maps\_specialops::_id_185F();
+  var_0 maps\_specialops::set_hud_yellow();
 }
 
 chaos_timer_update_sound(var_0, var_1) {
@@ -2929,7 +2929,7 @@ destroyiconsondeath() {
   self endon("destroyIconsOnDeath");
   self waittill("death");
 
-  foreach(var_1 in self._id_3BCC) {}
+  foreach(var_1 in self.crateworldicon) {}
   var_1 destroy();
 }
 
@@ -2984,15 +2984,15 @@ updateheadiconorigin() {
 perk_hud_popup_icon() {
   self endon("death");
   self.perk_hud_popup_icon = spawnStruct();
-  self.perk_hud_popup_icon._id_3FCA = -30;
+  self.perk_hud_popup_icon.pos_x = -30;
 
   if(issplitscreen()) {
-    self.perk_hud_popup_icon._id_3FCB = 2 + (self == level.player) * 27;
+    self.perk_hud_popup_icon.pos_y = 2 + (self == level.player) * 27;
   } else {
-    self.perk_hud_popup_icon._id_3FCB = 86;
+    self.perk_hud_popup_icon.pos_y = 86;
   }
-  self.perk_hud_popup_icon._id_3FCC = 28;
-  self.perk_hud_popup_icon.icon = chaos_special_item_hudelem(self.perk_hud_popup_icon._id_3FCA, self.perk_hud_popup_icon._id_3FCB);
+  self.perk_hud_popup_icon.icon_size = 28;
+  self.perk_hud_popup_icon.icon = chaos_special_item_hudelem(self.perk_hud_popup_icon.pos_x, self.perk_hud_popup_icon.pos_y);
   self.perk_hud_popup_icon.icon.color = (1, 1, 1);
   self.perk_hud_popup_icon.icon.alpha = 1.0;
   self.perk_hud_popup_icon.icon.children = [];
@@ -3019,25 +3019,25 @@ perk_hud_popup_icon() {
     } else if(var_0 == "specialty_armorvest") {
       var_2 = "chaos_specialty_armorvest";
     } else {
-      var_2 = level._id_3D68["airsupport"][var_0].icon;
+      var_2 = level.armory["airsupport"][var_0].icon;
     }
-    self.perk_hud_popup_icon.icon setshader(var_2, self.perk_hud_popup_icon._id_3FCC, self.perk_hud_popup_icon._id_3FCC);
+    self.perk_hud_popup_icon.icon setshader(var_2, self.perk_hud_popup_icon.icon_size, self.perk_hud_popup_icon.icon_size);
     self.perk_hud_popup_icon.icon.alpha = 0.85;
 
     if(issplitscreen()) {
-      self.perk_hud_popup_icon.icon maps\_hud_util::setpoint("LEFT", "CENTER", self.perk_hud_popup_icon._id_3FCA - 150, self.perk_hud_popup_icon._id_3FCB + 80);
+      self.perk_hud_popup_icon.icon maps\_hud_util::setpoint("LEFT", "CENTER", self.perk_hud_popup_icon.pos_x - 150, self.perk_hud_popup_icon.pos_y + 80);
     } else {
-      self.perk_hud_popup_icon.icon maps\_hud_util::setpoint("LEFT", "CENTER", self.perk_hud_popup_icon._id_3FCA - 50, self.perk_hud_popup_icon._id_3FCB + 30);
+      self.perk_hud_popup_icon.icon maps\_hud_util::setpoint("LEFT", "CENTER", self.perk_hud_popup_icon.pos_x - 50, self.perk_hud_popup_icon.pos_y + 30);
     }
     wait 0.2;
 
     if(issplitscreen()) {
-      self.perk_hud_popup_icon.icon setshader(var_2, self.perk_hud_popup_icon._id_3FCC * 2, self.perk_hud_popup_icon._id_3FCC * 2);
+      self.perk_hud_popup_icon.icon setshader(var_2, self.perk_hud_popup_icon.icon_size * 2, self.perk_hud_popup_icon.icon_size * 2);
     } else {
-      self.perk_hud_popup_icon.icon setshader(var_2, self.perk_hud_popup_icon._id_3FCC * 3, self.perk_hud_popup_icon._id_3FCC * 3);
+      self.perk_hud_popup_icon.icon setshader(var_2, self.perk_hud_popup_icon.icon_size * 3, self.perk_hud_popup_icon.icon_size * 3);
     }
     wait 0.45;
-    self.perk_hud_popup_icon.icon setshader(var_2, self.perk_hud_popup_icon._id_3FCC, self.perk_hud_popup_icon._id_3FCC);
+    self.perk_hud_popup_icon.icon setshader(var_2, self.perk_hud_popup_icon.icon_size, self.perk_hud_popup_icon.icon_size);
 
     if(issplitscreen()) {
       self.perk_hud_popup_icon.icon maps\_hud_util::setpoint("LEFT", "BOTTOM LEFT", 241 - self.num_perk_obtained * 30 + level.perk_offset + (self != level.player) * 100, -8, 0.35);
@@ -3056,8 +3056,8 @@ perk_hud_popup_icon() {
     level.player_currently_getting_perk = 0;
     level notify("proceed_with_next_perk");
 
-    if(!maps\_utility::_id_1A43(self)) {
-      update_lives_left_hud(self._id_132B._id_1A53, 1);
+    if(!maps\_utility::is_player_down(self)) {
+      update_lives_left_hud(self.laststand_info.type_getup_lives, 1);
     }
   }
 }
@@ -3065,120 +3065,120 @@ perk_hud_popup_icon() {
 live_1_hud_icon() {
   self endon("death");
   self.live_1_hud_icon = spawnStruct();
-  self.live_1_hud_icon._id_3FCA = -75;
+  self.live_1_hud_icon.pos_x = -75;
 
   if(issplitscreen()) {
-    self.live_1_hud_icon._id_3FCB = 2 + (self == level.player) * 27;
+    self.live_1_hud_icon.pos_y = 2 + (self == level.player) * 27;
   } else {
-    self.live_1_hud_icon._id_3FCB = 86;
+    self.live_1_hud_icon.pos_y = 86;
   }
-  self.live_1_hud_icon._id_3FCC = 28;
-  self.live_1_hud_icon.icon = chaos_special_item_hudelem(self.live_1_hud_icon._id_3FCA, self.live_1_hud_icon._id_3FCB);
+  self.live_1_hud_icon.icon_size = 28;
+  self.live_1_hud_icon.icon = chaos_special_item_hudelem(self.live_1_hud_icon.pos_x, self.live_1_hud_icon.pos_y);
   self.live_1_hud_icon.icon.color = (1, 1, 1);
   self.live_1_hud_icon.icon.alpha = 0.0;
   self.live_1_hud_icon.icon.children = [];
   self.live_1_hud_icon.icon maps\_hud_util::setparent(level.uiparent);
   self.live_1_hud_icon.icon thread chaos_perk_icon_destroy_on_mode_end();
-  self.live_1_hud_icon.icon setshader("specialty_self_revive", self.live_1_hud_icon._id_3FCC, self.live_1_hud_icon._id_3FCC);
-  self.live_1_hud_icon.icon maps\_hud_util::setpoint("LEFT", "TOP", self.live_1_hud_icon._id_3FCA, self.live_1_hud_icon._id_3FCB - 55);
+  self.live_1_hud_icon.icon setshader("specialty_self_revive", self.live_1_hud_icon.icon_size, self.live_1_hud_icon.icon_size);
+  self.live_1_hud_icon.icon maps\_hud_util::setpoint("LEFT", "TOP", self.live_1_hud_icon.pos_x, self.live_1_hud_icon.pos_y - 55);
 }
 
 live_2_hud_icon() {
   self endon("death");
   self.live_2_hud_icon = spawnStruct();
-  self.live_2_hud_icon._id_3FCA = -45;
+  self.live_2_hud_icon.pos_x = -45;
 
   if(issplitscreen()) {
-    self.live_2_hud_icon._id_3FCB = 2 + (self == level.player) * 27;
+    self.live_2_hud_icon.pos_y = 2 + (self == level.player) * 27;
   } else {
-    self.live_2_hud_icon._id_3FCB = 86;
+    self.live_2_hud_icon.pos_y = 86;
   }
-  self.live_2_hud_icon._id_3FCC = 28;
-  self.live_2_hud_icon.icon = chaos_special_item_hudelem(self.live_2_hud_icon._id_3FCA, self.live_2_hud_icon._id_3FCB);
+  self.live_2_hud_icon.icon_size = 28;
+  self.live_2_hud_icon.icon = chaos_special_item_hudelem(self.live_2_hud_icon.pos_x, self.live_2_hud_icon.pos_y);
   self.live_2_hud_icon.icon.color = (1, 1, 1);
   self.live_2_hud_icon.icon.alpha = 0.0;
   self.live_2_hud_icon.icon.children = [];
   self.live_2_hud_icon.icon maps\_hud_util::setparent(level.uiparent);
   self.live_2_hud_icon.icon thread chaos_perk_icon_destroy_on_mode_end();
-  self.live_2_hud_icon.icon setshader("specialty_self_revive", self.live_2_hud_icon._id_3FCC, self.live_2_hud_icon._id_3FCC);
-  self.live_2_hud_icon.icon maps\_hud_util::setpoint("LEFT", "TOP", self.live_2_hud_icon._id_3FCA, self.live_2_hud_icon._id_3FCB - 55);
+  self.live_2_hud_icon.icon setshader("specialty_self_revive", self.live_2_hud_icon.icon_size, self.live_2_hud_icon.icon_size);
+  self.live_2_hud_icon.icon maps\_hud_util::setpoint("LEFT", "TOP", self.live_2_hud_icon.pos_x, self.live_2_hud_icon.pos_y - 55);
 }
 
 live_3_hud_icon() {
   self endon("death");
   self.live_3_hud_icon = spawnStruct();
-  self.live_3_hud_icon._id_3FCA = -15;
+  self.live_3_hud_icon.pos_x = -15;
 
   if(issplitscreen()) {
-    self.live_3_hud_icon._id_3FCB = 2 + (self == level.player) * 27;
+    self.live_3_hud_icon.pos_y = 2 + (self == level.player) * 27;
   } else {
-    self.live_3_hud_icon._id_3FCB = 86;
+    self.live_3_hud_icon.pos_y = 86;
   }
-  self.live_3_hud_icon._id_3FCC = 28;
-  self.live_3_hud_icon.icon = chaos_special_item_hudelem(self.live_3_hud_icon._id_3FCA, self.live_3_hud_icon._id_3FCB);
+  self.live_3_hud_icon.icon_size = 28;
+  self.live_3_hud_icon.icon = chaos_special_item_hudelem(self.live_3_hud_icon.pos_x, self.live_3_hud_icon.pos_y);
   self.live_3_hud_icon.icon.color = (1, 1, 1);
   self.live_3_hud_icon.icon.alpha = 0.0;
   self.live_3_hud_icon.icon.children = [];
   self.live_3_hud_icon.icon maps\_hud_util::setparent(level.uiparent);
   self.live_3_hud_icon.icon thread chaos_perk_icon_destroy_on_mode_end();
-  self.live_3_hud_icon.icon setshader("specialty_self_revive", self.live_3_hud_icon._id_3FCC, self.live_3_hud_icon._id_3FCC);
-  self.live_3_hud_icon.icon maps\_hud_util::setpoint("LEFT", "TOP", self.live_3_hud_icon._id_3FCA, self.live_3_hud_icon._id_3FCB - 55);
+  self.live_3_hud_icon.icon setshader("specialty_self_revive", self.live_3_hud_icon.icon_size, self.live_3_hud_icon.icon_size);
+  self.live_3_hud_icon.icon maps\_hud_util::setpoint("LEFT", "TOP", self.live_3_hud_icon.pos_x, self.live_3_hud_icon.pos_y - 55);
 }
 
 live_4_hud_icon() {
   self endon("death");
   self.live_4_hud_icon = spawnStruct();
-  self.live_4_hud_icon._id_3FCA = 15;
+  self.live_4_hud_icon.pos_x = 15;
 
   if(issplitscreen()) {
-    self.live_4_hud_icon._id_3FCB = 2 + (self == level.player) * 27;
+    self.live_4_hud_icon.pos_y = 2 + (self == level.player) * 27;
   } else {
-    self.live_4_hud_icon._id_3FCB = 86;
+    self.live_4_hud_icon.pos_y = 86;
   }
-  self.live_4_hud_icon._id_3FCC = 28;
-  self.live_4_hud_icon.icon = chaos_special_item_hudelem(self.live_4_hud_icon._id_3FCA, self.live_4_hud_icon._id_3FCB);
+  self.live_4_hud_icon.icon_size = 28;
+  self.live_4_hud_icon.icon = chaos_special_item_hudelem(self.live_4_hud_icon.pos_x, self.live_4_hud_icon.pos_y);
   self.live_4_hud_icon.icon.color = (1, 1, 1);
   self.live_4_hud_icon.icon.alpha = 0.0;
   self.live_4_hud_icon.icon.children = [];
   self.live_4_hud_icon.icon maps\_hud_util::setparent(level.uiparent);
   self.live_4_hud_icon.icon thread chaos_perk_icon_destroy_on_mode_end();
-  self.live_4_hud_icon.icon setshader("specialty_self_revive", self.live_4_hud_icon._id_3FCC, self.live_4_hud_icon._id_3FCC);
-  self.live_4_hud_icon.icon maps\_hud_util::setpoint("LEFT", "TOP", self.live_4_hud_icon._id_3FCA, self.live_4_hud_icon._id_3FCB - 55);
+  self.live_4_hud_icon.icon setshader("specialty_self_revive", self.live_4_hud_icon.icon_size, self.live_4_hud_icon.icon_size);
+  self.live_4_hud_icon.icon maps\_hud_util::setpoint("LEFT", "TOP", self.live_4_hud_icon.pos_x, self.live_4_hud_icon.pos_y - 55);
 }
 
 live_5_hud_icon() {
   self endon("death");
   self.live_5_hud_icon = spawnStruct();
-  self.live_5_hud_icon._id_3FCA = 45;
+  self.live_5_hud_icon.pos_x = 45;
 
   if(issplitscreen()) {
-    self.live_5_hud_icon._id_3FCB = 2 + (self == level.player) * 27;
+    self.live_5_hud_icon.pos_y = 2 + (self == level.player) * 27;
   } else {
-    self.live_5_hud_icon._id_3FCB = 86;
+    self.live_5_hud_icon.pos_y = 86;
   }
-  self.live_5_hud_icon._id_3FCC = 28;
-  self.live_5_hud_icon.icon = chaos_special_item_hudelem(self.live_5_hud_icon._id_3FCA, self.live_5_hud_icon._id_3FCB);
+  self.live_5_hud_icon.icon_size = 28;
+  self.live_5_hud_icon.icon = chaos_special_item_hudelem(self.live_5_hud_icon.pos_x, self.live_5_hud_icon.pos_y);
   self.live_5_hud_icon.icon.color = (1, 1, 1);
   self.live_5_hud_icon.icon.alpha = 0.0;
   self.live_5_hud_icon.icon.children = [];
   self.live_5_hud_icon.icon maps\_hud_util::setparent(level.uiparent);
   self.live_5_hud_icon.icon thread chaos_perk_icon_destroy_on_mode_end();
-  self.live_5_hud_icon.icon setshader("specialty_self_revive", self.live_5_hud_icon._id_3FCC, self.live_5_hud_icon._id_3FCC);
-  self.live_5_hud_icon.icon maps\_hud_util::setpoint("LEFT", "TOP", self.live_5_hud_icon._id_3FCA, self.live_5_hud_icon._id_3FCB - 55);
+  self.live_5_hud_icon.icon setshader("specialty_self_revive", self.live_5_hud_icon.icon_size, self.live_5_hud_icon.icon_size);
+  self.live_5_hud_icon.icon maps\_hud_util::setpoint("LEFT", "TOP", self.live_5_hud_icon.pos_x, self.live_5_hud_icon.pos_y - 55);
 }
 
 hud_weapon_icon() {
   self endon("death");
   self.hud_weapon_icon = spawnStruct();
-  self.hud_weapon_icon._id_3FCA = 0;
+  self.hud_weapon_icon.pos_x = 0;
 
   if(issplitscreen()) {
-    self.hud_weapon_icon._id_3FCB = -122 + (self == level.player) * 27;
+    self.hud_weapon_icon.pos_y = -122 + (self == level.player) * 27;
   } else {
-    self.hud_weapon_icon._id_3FCB = -14;
+    self.hud_weapon_icon.pos_y = -14;
   }
-  self.hud_weapon_icon._id_3FCC = 28;
-  self.hud_weapon_icon.icon = chaos_special_item_hudelem(self.hud_weapon_icon._id_3FCA, self.hud_weapon_icon._id_3FCB);
+  self.hud_weapon_icon.icon_size = 28;
+  self.hud_weapon_icon.icon = chaos_special_item_hudelem(self.hud_weapon_icon.pos_x, self.hud_weapon_icon.pos_y);
   self.hud_weapon_icon.icon.color = (1, 1, 1);
   self.hud_weapon_icon.icon.alpha = 0.0;
   self.hud_weapon_icon.icon thread chaos_perk_icon_destroy_on_mode_end();
@@ -3207,15 +3207,15 @@ weapon_icon_fadeaway() {
 perk_hud_2() {
   self endon("death");
   self.perk_icon_hud_2 = spawnStruct();
-  self.perk_icon_hud_2._id_3FCA = -168 + level.perk_offset;
+  self.perk_icon_hud_2.pos_x = -168 + level.perk_offset;
 
   if(issplitscreen()) {
-    self.perk_icon_hud_2._id_3FCB = 112 + (self == level.player) * 27;
+    self.perk_icon_hud_2.pos_y = 112 + (self == level.player) * 27;
   } else {
-    self.perk_icon_hud_2._id_3FCB = 196;
+    self.perk_icon_hud_2.pos_y = 196;
   }
-  self.perk_icon_hud_2._id_3FCC = 28;
-  self.perk_icon_hud_2.icon = chaos_special_item_hudelem(self.perk_icon_hud_2._id_3FCA, self.perk_icon_hud_2._id_3FCB);
+  self.perk_icon_hud_2.icon_size = 28;
+  self.perk_icon_hud_2.icon = chaos_special_item_hudelem(self.perk_icon_hud_2.pos_x, self.perk_icon_hud_2.pos_y);
   self.perk_icon_hud_2.icon.color = (1, 1, 1);
   self.perk_icon_hud_2.icon.alpha = 0.0;
   self.perk_icon_hud_2.icon thread chaos_perk_icon_destroy_on_mode_end();
@@ -3228,9 +3228,9 @@ perk_hud_2() {
     } else if(var_0 == "specialty_armorvest") {
       var_1 = "chaos_specialty_armorvest";
     } else {
-      var_1 = level._id_3D68["airsupport"][var_0].icon;
+      var_1 = level.armory["airsupport"][var_0].icon;
     }
-    self.perk_icon_hud_2.icon setshader(var_1, self.perk_icon_hud_2._id_3FCC, self.perk_icon_hud_2._id_3FCC);
+    self.perk_icon_hud_2.icon setshader(var_1, self.perk_icon_hud_2.icon_size, self.perk_icon_hud_2.icon_size);
     self.perk_icon_hud_2.icon.alpha = 0.85;
   }
 }
@@ -3238,15 +3238,15 @@ perk_hud_2() {
 perk_hud_3() {
   self endon("death");
   self.perk_icon_hud_3 = spawnStruct();
-  self.perk_icon_hud_3._id_3FCA = -198 + level.perk_offset;
+  self.perk_icon_hud_3.pos_x = -198 + level.perk_offset;
 
   if(issplitscreen()) {
-    self.perk_icon_hud_3._id_3FCB = 112 + (self == level.player) * 27;
+    self.perk_icon_hud_3.pos_y = 112 + (self == level.player) * 27;
   } else {
-    self.perk_icon_hud_3._id_3FCB = 196;
+    self.perk_icon_hud_3.pos_y = 196;
   }
-  self.perk_icon_hud_3._id_3FCC = 28;
-  self.perk_icon_hud_3.icon = chaos_special_item_hudelem(self.perk_icon_hud_3._id_3FCA, self.perk_icon_hud_3._id_3FCB);
+  self.perk_icon_hud_3.icon_size = 28;
+  self.perk_icon_hud_3.icon = chaos_special_item_hudelem(self.perk_icon_hud_3.pos_x, self.perk_icon_hud_3.pos_y);
   self.perk_icon_hud_3.icon.color = (1, 1, 1);
   self.perk_icon_hud_3.icon.alpha = 0.0;
   self.perk_icon_hud_3.icon thread chaos_perk_icon_destroy_on_mode_end();
@@ -3259,9 +3259,9 @@ perk_hud_3() {
     } else if(var_0 == "specialty_armorvest") {
       var_1 = "chaos_specialty_armorvest";
     } else {
-      var_1 = level._id_3D68["airsupport"][var_0].icon;
+      var_1 = level.armory["airsupport"][var_0].icon;
     }
-    self.perk_icon_hud_3.icon setshader(var_1, self.perk_icon_hud_3._id_3FCC, self.perk_icon_hud_3._id_3FCC);
+    self.perk_icon_hud_3.icon setshader(var_1, self.perk_icon_hud_3.icon_size, self.perk_icon_hud_3.icon_size);
     self.perk_icon_hud_3.icon.alpha = 0.85;
   }
 }
@@ -3269,15 +3269,15 @@ perk_hud_3() {
 perk_hud_4() {
   self endon("death");
   self.perk_icon_hud_4 = spawnStruct();
-  self.perk_icon_hud_4._id_3FCA = -228 + level.perk_offset;
+  self.perk_icon_hud_4.pos_x = -228 + level.perk_offset;
 
   if(issplitscreen()) {
-    self.perk_icon_hud_4._id_3FCB = 112 + (self == level.player) * 27;
+    self.perk_icon_hud_4.pos_y = 112 + (self == level.player) * 27;
   } else {
-    self.perk_icon_hud_4._id_3FCB = 196;
+    self.perk_icon_hud_4.pos_y = 196;
   }
-  self.perk_icon_hud_4._id_3FCC = 28;
-  self.perk_icon_hud_4.icon = chaos_special_item_hudelem(self.perk_icon_hud_4._id_3FCA, self.perk_icon_hud_4._id_3FCB);
+  self.perk_icon_hud_4.icon_size = 28;
+  self.perk_icon_hud_4.icon = chaos_special_item_hudelem(self.perk_icon_hud_4.pos_x, self.perk_icon_hud_4.pos_y);
   self.perk_icon_hud_4.icon.color = (1, 1, 1);
   self.perk_icon_hud_4.icon.alpha = 0.0;
   self.perk_icon_hud_4.icon thread chaos_perk_icon_destroy_on_mode_end();
@@ -3290,9 +3290,9 @@ perk_hud_4() {
     } else if(var_0 == "specialty_armorvest") {
       var_1 = "chaos_specialty_armorvest";
     } else {
-      var_1 = level._id_3D68["airsupport"][var_0].icon;
+      var_1 = level.armory["airsupport"][var_0].icon;
     }
-    self.perk_icon_hud_4.icon setshader(var_1, self.perk_icon_hud_4._id_3FCC, self.perk_icon_hud_4._id_3FCC);
+    self.perk_icon_hud_4.icon setshader(var_1, self.perk_icon_hud_4.icon_size, self.perk_icon_hud_4.icon_size);
     self.perk_icon_hud_4.icon.alpha = 0.85;
   }
 }
@@ -3300,15 +3300,15 @@ perk_hud_4() {
 perk_hud_5() {
   self endon("death");
   self.perk_icon_hud_5 = spawnStruct();
-  self.perk_icon_hud_5._id_3FCA = -258 + level.perk_offset;
+  self.perk_icon_hud_5.pos_x = -258 + level.perk_offset;
 
   if(issplitscreen()) {
-    self.perk_icon_hud_5._id_3FCB = 112 + (self == level.player) * 27;
+    self.perk_icon_hud_5.pos_y = 112 + (self == level.player) * 27;
   } else {
-    self.perk_icon_hud_5._id_3FCB = 196;
+    self.perk_icon_hud_5.pos_y = 196;
   }
-  self.perk_icon_hud_5._id_3FCC = 28;
-  self.perk_icon_hud_5.icon = chaos_special_item_hudelem(self.perk_icon_hud_5._id_3FCA, self.perk_icon_hud_5._id_3FCB);
+  self.perk_icon_hud_5.icon_size = 28;
+  self.perk_icon_hud_5.icon = chaos_special_item_hudelem(self.perk_icon_hud_5.pos_x, self.perk_icon_hud_5.pos_y);
   self.perk_icon_hud_5.icon.color = (1, 1, 1);
   self.perk_icon_hud_5.icon.alpha = 0.0;
   self.perk_icon_hud_5.icon thread chaos_perk_icon_destroy_on_mode_end();
@@ -3321,9 +3321,9 @@ perk_hud_5() {
     } else if(var_0 == "specialty_armorvest") {
       var_1 = "chaos_specialty_armorvest";
     } else {
-      var_1 = level._id_3D68["airsupport"][var_0].icon;
+      var_1 = level.armory["airsupport"][var_0].icon;
     }
-    self.perk_icon_hud_5.icon setshader(var_1, self.perk_icon_hud_5._id_3FCC, self.perk_icon_hud_5._id_3FCC);
+    self.perk_icon_hud_5.icon setshader(var_1, self.perk_icon_hud_5.icon_size, self.perk_icon_hud_5.icon_size);
     self.perk_icon_hud_5.icon.alpha = 0.85;
   }
 }
@@ -3331,15 +3331,15 @@ perk_hud_5() {
 perk_hud_6() {
   self endon("death");
   self.perk_icon_hud_6 = spawnStruct();
-  self.perk_icon_hud_6._id_3FCA = -288 + level.perk_offset;
+  self.perk_icon_hud_6.pos_x = -288 + level.perk_offset;
 
   if(issplitscreen()) {
-    self.perk_icon_hud_6._id_3FCB = 112 + (self == level.player) * 27;
+    self.perk_icon_hud_6.pos_y = 112 + (self == level.player) * 27;
   } else {
-    self.perk_icon_hud_6._id_3FCB = 196;
+    self.perk_icon_hud_6.pos_y = 196;
   }
-  self.perk_icon_hud_6._id_3FCC = 28;
-  self.perk_icon_hud_6.icon = chaos_special_item_hudelem(self.perk_icon_hud_6._id_3FCA, self.perk_icon_hud_6._id_3FCB);
+  self.perk_icon_hud_6.icon_size = 28;
+  self.perk_icon_hud_6.icon = chaos_special_item_hudelem(self.perk_icon_hud_6.pos_x, self.perk_icon_hud_6.pos_y);
   self.perk_icon_hud_6.icon.color = (1, 1, 1);
   self.perk_icon_hud_6.icon.alpha = 0.0;
   self.perk_icon_hud_6.icon thread chaos_perk_icon_destroy_on_mode_end();
@@ -3352,9 +3352,9 @@ perk_hud_6() {
     } else if(var_0 == "specialty_armorvest") {
       var_1 = "chaos_specialty_armorvest";
     } else {
-      var_1 = level._id_3D68["airsupport"][var_0].icon;
+      var_1 = level.armory["airsupport"][var_0].icon;
     }
-    self.perk_icon_hud_6.icon setshader(var_1, self.perk_icon_hud_6._id_3FCC, self.perk_icon_hud_6._id_3FCC);
+    self.perk_icon_hud_6.icon setshader(var_1, self.perk_icon_hud_6.icon_size, self.perk_icon_hud_6.icon_size);
     self.perk_icon_hud_6.icon.alpha = 0.85;
   }
 }
@@ -3362,15 +3362,15 @@ perk_hud_6() {
 perk_hud_7() {
   self endon("death");
   self.perk_icon_hud_7 = spawnStruct();
-  self.perk_icon_hud_7._id_3FCA = -318 + level.perk_offset;
+  self.perk_icon_hud_7.pos_x = -318 + level.perk_offset;
 
   if(issplitscreen()) {
-    self.perk_icon_hud_7._id_3FCB = 112 + (self == level.player) * 27;
+    self.perk_icon_hud_7.pos_y = 112 + (self == level.player) * 27;
   } else {
-    self.perk_icon_hud_7._id_3FCB = 196;
+    self.perk_icon_hud_7.pos_y = 196;
   }
-  self.perk_icon_hud_7._id_3FCC = 28;
-  self.perk_icon_hud_7.icon = chaos_special_item_hudelem(self.perk_icon_hud_7._id_3FCA, self.perk_icon_hud_7._id_3FCB);
+  self.perk_icon_hud_7.icon_size = 28;
+  self.perk_icon_hud_7.icon = chaos_special_item_hudelem(self.perk_icon_hud_7.pos_x, self.perk_icon_hud_7.pos_y);
   self.perk_icon_hud_7.icon.color = (1, 1, 1);
   self.perk_icon_hud_7.icon.alpha = 0.0;
   self.perk_icon_hud_7.icon thread chaos_perk_icon_destroy_on_mode_end();
@@ -3383,9 +3383,9 @@ perk_hud_7() {
     } else if(var_0 == "specialty_armorvest") {
       var_1 = "chaos_specialty_armorvest";
     } else {
-      var_1 = level._id_3D68["airsupport"][var_0].icon;
+      var_1 = level.armory["airsupport"][var_0].icon;
     }
-    self.perk_icon_hud_7.icon setshader(var_1, self.perk_icon_hud_7._id_3FCC, self.perk_icon_hud_7._id_3FCC);
+    self.perk_icon_hud_7.icon setshader(var_1, self.perk_icon_hud_7.icon_size, self.perk_icon_hud_7.icon_size);
     self.perk_icon_hud_7.icon.alpha = 0.85;
   }
 }
@@ -3556,7 +3556,7 @@ chaoseventpopupfinalize(var_0, var_1, var_2, var_3) {
   self.hud_chaoseventpopup.alpha = 0;
   self notify("PopComplete");
 
-  if(isDefined(self._id_1A96)) {
+  if(isDefined(self.placingsentry)) {
     self notify("sentry_notification", &"SENTRY_PLACE");
   }
 }
@@ -3570,7 +3570,7 @@ chaoseventpopupterminate() {
 
 chaos_combo_splash(var_0, var_1) {
   var_2 = spawnStruct();
-  var_2._id_3E1B = var_0;
+  var_2.title = var_0;
   var_2.duration = 1.5;
   thread chaos_splash_radio(var_1);
   player_combo_splash(var_2);
@@ -3614,8 +3614,8 @@ chaos_splash_radio(var_0) {
 }
 
 player_combo_splash(var_0) {
-  if(isDefined(self._id_12C6) && self._id_12C6) {
-    while(self._id_12C6) {
+  if(isDefined(self.doingnotify) && self.doingnotify) {
+    while(self.doingnotify) {
       wait 0.05;
     }
   }
@@ -3623,26 +3623,26 @@ player_combo_splash(var_0) {
   if(!isDefined(var_0.duration)) {
     var_0.duration = 1.5;
   }
-  var_0._id_3E20 = (0, 0, 0);
-  var_0._id_3E21 = (0.95, 0.95, 0);
+  var_0.title_glowcolor = (0, 0, 0);
+  var_0.title_color = (0.95, 0.95, 0);
   var_0.type = "wave";
-  var_0._id_3E1D = "hudbig";
-  var_0._id_3E31 = 1;
-  var_0._id_3E2E = 1;
-  var_0._id_3E34 = 1;
-  var_0._id_15E0 = 1;
-  var_0._id_3E33 = 1;
+  var_0.title_font = "hudbig";
+  var_0.playsoundlocally = 1;
+  var_0.zoomin = 1;
+  var_0.zoomout = 1;
+  var_0.fadein = 1;
+  var_0.fadeout = 1;
 
   if(issplitscreen()) {
-    var_0._id_3E1F = 1;
-    var_0._id_3E24 = 1.2;
+    var_0.title_basefontscale = 1;
+    var_0.desc_basefontscale = 1.2;
     thread turn_lives_hud_back_after_splash(var_0.duration);
   } else {
-    var_0._id_3E1F = 1.1;
-    var_0._id_3E24 = 1.2;
+    var_0.title_basefontscale = 1.1;
+    var_0.desc_basefontscale = 1.2;
   }
 
-  _id_0618::_id_3E14(var_0);
+  maps/_so_survival_code::splash_notify_message(var_0);
 }
 
 turn_lives_hud_back_after_splash(var_0) {
@@ -3659,7 +3659,7 @@ turn_lives_hud_back_after_splash(var_0) {
   }
 
   wait(var_0 + 0.5);
-  update_lives_left_hud(self._id_132B._id_1A53);
+  update_lives_left_hud(self.laststand_info.type_getup_lives);
 }
 
 chaos_killstreak_autosentry_main(var_0) {
@@ -3685,29 +3685,29 @@ chaos_sentry_cancel_notify() {
   self endon("sentry_placement_finished");
   self waittill("controller_sentry_cancel");
 
-  if(!isDefined(self._id_00D3) || !self._id_00D3) {
+  if(!isDefined(self.carrying_pickedup_sentry) || !self.carrying_pickedup_sentry) {
     self notify("sentry_placement_canceled");
   }
 }
 
 chaos_post_killstreak_weapon_switchback() {
-  if(maps\_utility::_id_1A43(self)) {
+  if(maps\_utility::is_player_down(self)) {
     return;
   }
-  if(isDefined(self._id_3CE3._id_3CF6)) {
-    if(self._id_3CE3._id_3CF6 == "none") {
+  if(isDefined(self.ks.lastweaponused)) {
+    if(self.ks.lastweaponused == "none") {
       var_0 = self getweaponslistprimaries();
       self switchtoweapon(var_0[0]);
     } else {
-      self switchtoweapon(self._id_3CE3._id_3CF6);
+      self switchtoweapon(self.ks.lastweaponused);
     }
   }
 }
 
-_id_3BAB(var_0, var_1, var_2, var_3, var_4, var_5) {
+sp_airdrop_drop_the_crate(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = [];
   self.owner endon("disconnect");
-  var_6 = _id_3BAC(self.owner, var_0, var_5);
+  var_6 = sp_create_airdrop_crate(self.owner, var_0, var_5);
   var_6 linkTo(self, "tag_ground", (32, 0, 5), (0, 0, 0));
   var_6.angles = (0, 0, 0);
   var_6 show();
@@ -3715,11 +3715,11 @@ _id_3BAB(var_0, var_1, var_2, var_3, var_4, var_5) {
   self waittill("drop_crate");
   var_6 unlink();
   var_6 physicslaunchserver((0, 0, 0), (randomint(5), randomint(5), randomint(5)));
-  var_6 thread _id_3BB7();
-  var_6 thread _id_00D2(var_1, 64);
+  var_6 thread sp_airdrop_crate_physics_waiter();
+  var_6 thread sp_airdrop_crate_damage_enemies_on_fall(var_1, 64);
 }
 
-_id_3BAC(var_0, var_1, var_2) {
+sp_create_airdrop_crate(var_0, var_1, var_2) {
   var_3 = spawn("script_model", var_2);
   var_3.inuse = 0;
   var_3.curprogress = 0;
@@ -3734,32 +3734,32 @@ _id_3BAC(var_0, var_1, var_2) {
   var_3.cratetype = var_1;
   var_3.targetname = "care_package";
   var_3 setModel("com_plasticcase_taskforce141");
-  var_3 _id_3BB4();
-  var_3.collision thread _id_3BB6(var_3);
-  var_3._id_3BAD = spawn("script_model", var_2);
-  var_3._id_3BAD setModel("com_plasticcase_friendly");
-  var_3._id_3BAD common_scripts\utility::delaycall(0.25, ::linkto, var_3, "tag_origin", (0, 0, 0), (0, 0, 0));
-  var_3 thread _id_3BB5(var_0);
-  level._id_3B9F++;
+  var_3 sp_airdrop_crate_attach_collision();
+  var_3.collision thread sp_airdrop_crate_unlink_collision(var_3);
+  var_3.basemodel = spawn("script_model", var_2);
+  var_3.basemodel setModel("com_plasticcase_friendly");
+  var_3.basemodel common_scripts\utility::delaycall(0.25, ::linkto, var_3, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_3 thread sp_airdrop_crate_delete_on_owner_death(var_0);
+  level.numairdropcrates++;
   return var_3;
 }
 
-_id_3BAE() {
-  if(isDefined(level._id_3BAF) && level._id_3BAF.size) {
-    level._id_3BAF = common_scripts\utility::array_remove(level._id_3BAF, self);
-    level._id_3B9F--;
+sp_delete_airdrop_crate() {
+  if(isDefined(level.crates_on_ground) && level.crates_on_ground.size) {
+    level.crates_on_ground = common_scripts\utility::array_remove(level.crates_on_ground, self);
+    level.numairdropcrates--;
   }
 
   if(isDefined(self)) {
     if(isDefined(self.care_package_trigger)) {
       self.care_package_trigger delete();
     }
-    self._id_3BAD delete();
+    self.basemodel delete();
     self delete();
   }
 }
 
-_id_3BB0() {
+sp_airdrop_setup_crate_collisions() {
   var_0 = getEntArray("airdrop_crate_collision", "targetname");
 
   foreach(var_2 in var_0) {
@@ -3767,14 +3767,14 @@ _id_3BB0() {
     var_2 notsolid();
   }
 
-  level._id_3BB1 = var_0;
+  level.airdropcratecollisionboxes = var_0;
 }
 
-_id_3BB2() {
+sp_airdrop_get_free_sbmodel_collision() {
   var_0 = undefined;
 
-  foreach(var_2 in level._id_3BB1) {
-    if(!isDefined(var_2._id_3BB3)) {
+  foreach(var_2 in level.airdropcratecollisionboxes) {
+    if(!isDefined(var_2.isinuse)) {
       var_0 = var_2;
       break;
     }
@@ -3783,17 +3783,17 @@ _id_3BB2() {
   return var_0;
 }
 
-_id_3BB4() {
-  var_0 = _id_3BB2();
+sp_airdrop_crate_attach_collision() {
+  var_0 = sp_airdrop_get_free_sbmodel_collision();
   var_0.origin = self.origin;
   var_0.angles = self.angles;
   var_0 solid();
   var_0 linkTo(self);
-  var_0._id_3BB3 = 1;
+  var_0.isinuse = 1;
   self.collision = var_0;
 }
 
-_id_00D2(var_0, var_1) {
+sp_airdrop_crate_damage_enemies_on_fall(var_0, var_1) {
   while(isDefined(self) && distancesquared(self.origin, var_0) > 1024) {
     wait 0.05;
   }
@@ -3814,49 +3814,49 @@ _id_00D2(var_0, var_1) {
   }
 }
 
-_id_3BB5(var_0) {
+sp_airdrop_crate_delete_on_owner_death(var_0) {
   var_0 waittill("death");
-  _id_3BAE();
+  sp_delete_airdrop_crate();
 }
 
 sp_airdrop_crate_delete_when_owner_pickups_one_crate() {
   self endon("death");
   level waittill("delete_all_crates");
-  _id_3BAE();
+  sp_delete_airdrop_crate();
 }
 
-_id_3BB6(var_0) {
+sp_airdrop_crate_unlink_collision(var_0) {
   var_0 waittill("death");
   self unlink();
   self connectpaths();
   self notsolid();
-  self._id_3BB3 = undefined;
+  self.isinuse = undefined;
 }
 
-_id_3BB7() {
+sp_airdrop_crate_physics_waiter() {
   self waittill("physics_finished");
-  self._id_3BB8 = gettime();
+  self.crate_num = gettime();
 
-  if(!isDefined(level._id_3BAF)) {
-    level._id_3BAF = [];
+  if(!isDefined(level.crates_on_ground)) {
+    level.crates_on_ground = [];
   }
-  level._id_3BAF[level._id_3BAF.size] = self;
+  level.crates_on_ground[level.crates_on_ground.size] = self;
 
-  if(level._id_3BAF.size > 4) {
-    level._id_3BAF[0] _id_3BAE();
-    level._id_3BAF[1] _id_3BAE();
+  if(level.crates_on_ground.size > 4) {
+    level.crates_on_ground[0] sp_delete_airdrop_crate();
+    level.crates_on_ground[1] sp_delete_airdrop_crate();
   }
 
-  thread _id_3BBB();
-  level thread _id_3BB9(self, self.owner);
+  thread sp_airdrop_crate_think();
+  level thread sp_airdrop_crate_timeout(self, self.owner);
 }
 
-_id_3BB9(var_0, var_1) {
+sp_airdrop_crate_timeout(var_0, var_1) {
   var_0 endon("death");
   var_2 = 120;
 
-  if(isDefined(level._id_3BBA)) {
-    var_2 = level._id_3BBA;
+  if(isDefined(level.airdropcratetimeout)) {
+    var_2 = level.airdropcratetimeout;
   }
   if(var_2 <= 0) {
     return;
@@ -3866,46 +3866,46 @@ _id_3BB9(var_0, var_1) {
   while(var_0.curprogress != 0) {
     wait 1;
   }
-  var_0 _id_3BAE();
+  var_0 sp_delete_airdrop_crate();
 }
 
-_id_3BBB() {
+sp_airdrop_crate_think() {
   self endon("death");
-  _id_3BC3();
+  sp_airdrop_crate_setup_for_use();
   var_0 = spawn("trigger_radius", self.origin, 0, 50, 50);
   var_0 enablelinkTo();
   var_0 linkTo(self);
   var_0.radius = self;
   var_0.owner = self;
   self.care_package_trigger = var_0;
-  var_0 thread cratetriggerthink(self._id_3BBD.cratehudstring);
-  thread _id_3BCE();
+  var_0 thread cratetriggerthink(self.killstreakinfo.cratehudstring);
+  thread sp_airdrop_teammate_capture_think();
 
-  if(isDefined(level._id_3BBC)) {
-    self thread[[level._id_3BBC]]();
+  if(isDefined(level.sp_airdrop_crate_custom_thread)) {
+    self thread[[level.sp_airdrop_crate_custom_thread]]();
   }
   for(;;) {
     self waittill("captured", var_1);
 
     if(isDefined(self.owner) && var_1 != self.owner) {
-      thread _id_3BC0(var_1);
+      thread sp_airdrop_crate_hijack_notify(var_1);
     }
     if(isPlayer(var_1)) {
       var_2 = var_1;
       var_2 playlocalsound("cm_use_carepackage");
 
-      if(isDefined(self._id_3BBD._id_3BBE)) {
-        if(issubstr(self._id_3BBD.streaktype, "specialty_")) {
-          var_2 thread chaos_give_perk(self._id_3BBD.streaktype);
+      if(isDefined(self.killstreakinfo.crateopenfunc)) {
+        if(issubstr(self.killstreakinfo.streaktype, "specialty_")) {
+          var_2 thread chaos_give_perk(self.killstreakinfo.streaktype);
         } else {
-          var_2 thread[[self._id_3BBD._id_3BBE]]();
+          var_2 thread[[self.killstreakinfo.crateopenfunc]]();
         }
       } else {
-        var_2 thread _id_0611::_id_3BBF(self.cratetype);
+        var_2 thread maps/_sp_killstreaks::give_sp_killstreak(self.cratetype);
       }
     }
 
-    _id_3BAE();
+    sp_delete_airdrop_crate();
   }
 }
 
@@ -3919,7 +3919,7 @@ cratetriggerthink(var_0) {
     self waittill("trigger", var_3);
     var_3 chaoseventpopup(var_0, (1, 1, 1));
 
-    if(!isPlayer(var_3) || var_3 _id_0611::isusingremote() || !var_3 useButtonPressed()) {
+    if(!isPlayer(var_3) || var_3 maps/_sp_killstreaks::isusingremote() || !var_3 useButtonPressed()) {
       continue;
     }
     if(isDefined(var_3.justopencrate) && var_3.justopencrate == 1) {
@@ -3955,35 +3955,35 @@ resetjustopencrateflag() {
   self.justopencrate = 0;
 }
 
-_id_3BC0(var_0) {
+sp_airdrop_crate_hijack_notify(var_0) {
   self notify("hijacked", var_0);
 
   if(!isPlayer(self.owner)) {
     return;
   }
   if(var_0.team == self.owner.team) {
-    if(isDefined(level._id_3BC1)) {
-      self.owner thread[[level._id_3BC1]](var_0);
+    if(isDefined(level.sp_airdrop_crate_friendly_hijack_thread)) {
+      self.owner thread[[level.sp_airdrop_crate_friendly_hijack_thread]](var_0);
     }
-  } else if(isDefined(level._id_3BC2)) {
-    self.owner thread[[level._id_3BC2]](var_0);
+  } else if(isDefined(level.sp_airdrop_crate_enemy_hijack_thread)) {
+    self.owner thread[[level.sp_airdrop_crate_enemy_hijack_thread]](var_0);
   }
 }
 
-_id_3BC3() {
+sp_airdrop_crate_setup_for_use() {
   self.collision disconnectPaths();
-  var_0 = _id_0611::_id_3BC4(self.cratetype);
-  self._id_3BBD = var_0;
-  _id_3BCB(var_0._id_3BC5, (0, 0, 12), 256, 256);
+  var_0 = maps/_sp_killstreaks::get_sp_killstreak_info(self.cratetype);
+  self.killstreakinfo = var_0;
+  sp_crate_world_icon(var_0.crateicon, (0, 0, 12), 256, 256);
   self setCursorHint("HINT_NOICON");
   self makeusable();
 
-  if(isDefined(level._id_3BC7) && level._id_3BC7) {
-    thread _id_3BC8();
+  if(isDefined(level.airdropcrateunstuck) && level.airdropcrateunstuck) {
+    thread sp_airdrop_unstuck_think();
   }
 }
 
-_id_3BC8() {
+sp_airdrop_unstuck_think() {
   self endon("death");
   self endon("captured");
   wait 2;
@@ -4011,23 +4011,23 @@ _id_3BC8() {
   }
 }
 
-_id_3BC9() {
+sp_airdrop_get_crate_obj_id() {
   var_0 = undefined;
 
-  if(!isDefined(level._id_3BCA)) {
-    var_0 = level._id_3B9E;
+  if(!isDefined(level.lastusedkillstreakcrateobjid)) {
+    var_0 = level.startingkillstreakcrateobjid;
   } else {
-    var_0 = level._id_3BCA + 1;
+    var_0 = level.lastusedkillstreakcrateobjid + 1;
   }
-  if(var_0 > level._id_3B9E + 7) {
-    var_0 = level._id_3B9E;
+  if(var_0 > level.startingkillstreakcrateobjid + 7) {
+    var_0 = level.startingkillstreakcrateobjid;
   }
-  level._id_3BCA = var_0;
+  level.lastusedkillstreakcrateobjid = var_0;
   return var_0;
 }
 
-_id_3BCB(var_0, var_1, var_2, var_3) {
-  self._id_3BCC = [];
+sp_crate_world_icon(var_0, var_1, var_2, var_3) {
+  self.crateworldicon = [];
 
   foreach(var_5 in level.players) {
     var_6 = var_5 chaos_special_item_hudelem(20, 20);
@@ -4041,20 +4041,20 @@ _id_3BCB(var_0, var_1, var_2, var_3) {
     var_6 setshader(var_0, var_2, var_3);
     var_6 setwaypoint(0, 1, 0);
     var_6 thread keeppositioned(self, var_1, var_0);
-    self._id_3BCC[self._id_3BCC.size] = var_6;
+    self.crateworldicon[self.crateworldicon.size] = var_6;
   }
 
   thread destroyiconsondeath();
 }
 
-_id_3BCE() {
+sp_airdrop_teammate_capture_think() {
   while(isDefined(self)) {
     self waittill("trigger", var_0);
 
     if(isDefined(self.owner) && var_0 == self.owner) {
       continue;
     }
-    if(!_id_3BCF(var_0)) {
+    if(!sp_use_hold_think(var_0)) {
       continue;
     }
     self notify("captured", var_0);
@@ -4062,23 +4062,23 @@ _id_3BCE() {
   }
 }
 
-_id_3BCF(var_0, var_1) {
+sp_use_hold_think(var_0, var_1) {
   var_0 freezecontrols(1);
   var_0 common_scripts\utility::_disableweapon();
   self.curprogress = 0;
   self.inuse = 1;
   self.userate = 0;
 
-  if(isDefined(level._id_3BD0)) {
-    self.usetime = level._id_3BD0;
+  if(isDefined(level.airdropcrateusetime)) {
+    self.usetime = level.airdropcrateusetime;
   } else if(isDefined(var_1)) {
     self.usetime = var_1;
   } else {
     self.usetime = 3000;
   }
   if(self.usetime > 0) {
-    var_0 thread _id_3BD2(self);
-    var_2 = _id_3BD1(var_0);
+    var_0 thread sp_personal_use_bar(self);
+    var_2 = sp_use_hold_think_loop(var_0);
   } else {
     var_2 = 1;
   }
@@ -4095,7 +4095,7 @@ _id_3BCF(var_0, var_1) {
   return var_2;
 }
 
-_id_3BD1(var_0) {
+sp_use_hold_think_loop(var_0) {
   while(isDefined(self) && isalive(var_0) && var_0 useButtonPressed() && self.curprogress < self.usetime) {
     self.curprogress = self.curprogress + 50 * self.userate;
 
@@ -4113,7 +4113,7 @@ _id_3BD1(var_0) {
   return 0;
 }
 
-_id_3BD2(var_0) {
+sp_personal_use_bar(var_0) {
   self endon("disconnect");
   var_1 = createprimaryprogressbar(-25);
   var_2 = createprimaryprogressbartext(-25);
@@ -4150,21 +4150,21 @@ wait_and_display_lives_left_hud() {
   if(issplitscreen()) {
     wait 2.5;
   }
-  update_lives_left_hud(self._id_132B._id_1A53);
+  update_lives_left_hud(self.laststand_info.type_getup_lives);
 }
 
 player_have_max_lives() {
   var_0 = 0;
   var_1 = 0;
 
-  foreach(var_3 in level._id_3BAF) {
+  foreach(var_3 in level.crates_on_ground) {
     if(var_3.cratetype == "bonus_laststand") {
       var_1 = var_1 + 1;
     }
   }
 
   foreach(var_6 in level.players) {
-    if(var_6._id_132B._id_1A53 + var_1 == 5) {
+    if(var_6.laststand_info.type_getup_lives + var_1 == 5) {
       var_0 = 1;
     }
   }
@@ -4197,7 +4197,7 @@ chaos_give_weapon(var_0) {
     return 0;
   }
   self giveweapon(var_0);
-  _id_0626::_id_3F01(var_0);
+  maps/_so_survival_armory::give_ammo_max(var_0);
   self switchtoweapon(var_0);
   return 1;
 }
@@ -4223,14 +4223,14 @@ chaos_give_armor(var_0) {
   if(!isDefined(var_0) || var_0 == "") {
     return 0;
   }
-  _id_0626::_id_3F1A("armor", int(var_0));
+  maps/_so_survival_armory::give_armor_amount("armor", int(var_0));
   return 1;
 }
 
 chaos_player_infinite_laststand() {
   for(;;) {
     self waittill("revived");
-    maps\_laststand::_id_1ABE(1);
+    maps\_laststand::update_lives_remaining(1);
   }
 }
 
@@ -4240,15 +4240,15 @@ chaos_player_infinite_ammo_pistol() {
   for(;;) {
     common_scripts\utility::waittill_either("reload", "weapon_change");
 
-    if(isDefined(level._id_1AB1) && self hasweapon(level._id_1AB1)) {
-      self setweaponammostock(level._id_1AB1, weaponmaxammo(level._id_1AB1));
+    if(isDefined(level.coop_incap_weapon) && self hasweapon(level.coop_incap_weapon)) {
+      self setweaponammostock(level.coop_incap_weapon, weaponmaxammo(level.coop_incap_weapon));
     }
   }
 }
 
 chaos_music_intro() {
   wait 2;
-  maps\_utility::_id_142B("music_intro_cm");
+  maps\_utility::musicplaywrapper("music_intro_cm");
 }
 
 startcombodecayontimer() {
@@ -4266,17 +4266,17 @@ chaos_hud_survival_remove() {
   thread chaos_wave_hud_hide();
   wait 0.05;
   waittillframeend;
-  common_scripts\utility::array_thread(level.players, maps\_specialops::_id_18A5, "credits");
-  common_scripts\utility::array_thread(level.players, maps\_specialops::_id_18A5, "challenge");
-  level._id_12E5 = 0;
+  common_scripts\utility::array_thread(level.players, maps\_specialops::surhud_disable, "credits");
+  common_scripts\utility::array_thread(level.players, maps\_specialops::surhud_disable, "challenge");
+  level.xp_enable = 0;
 }
 
 chaos_wave_hud_hide() {
   self endon("death");
   level waittill("wave_started", var_0);
   waittillframeend;
-  common_scripts\utility::array_thread(level.players, maps\_specialops::_id_18A5, "wave");
-  common_scripts\utility::array_thread(level.players, maps\_specialops::_id_18A6, "surHUD_wave", 0);
+  common_scripts\utility::array_thread(level.players, maps\_specialops::surhud_disable, "wave");
+  common_scripts\utility::array_thread(level.players, maps\_specialops::_setplayerdata_single, "surHUD_wave", 0);
 }
 
 wait_for_revive_teammate() {
@@ -4337,8 +4337,8 @@ chaos_dog_tags_spawn(var_0, var_1) {
   if(var_1 == 1) {
     chaos_score_event_raise("dogtag", "cm_redtag_pickup");
     var_5 = 200;
-    var_6 = var_4._id_3F16["points"];
-    var_4 _id_0626::_id_3F1A("armor", var_5 + var_6);
+    var_6 = var_4.armor["points"];
+    var_4 maps/_so_survival_armory::give_armor_amount("armor", var_5 + var_6);
     var_4 thread radio_dialogue_to_player(var_4, "chaos_pickup_armor");
   } else {
     chaos_score_event_raise("dogtag");
@@ -4390,7 +4390,7 @@ chaos_dog_tags_flicker(var_0, var_1) {
 }
 
 chaos_ai_setup() {
-  maps\_utility::_id_1A5A("axis", ::chaos_on_ai_spawn);
+  maps\_utility::add_global_spawn_function("axis", ::chaos_on_ai_spawn);
 }
 
 chaos_on_ai_spawn() {
@@ -4427,9 +4427,9 @@ chaos_armories_disable() {
       continue;
     }
     var_4 makeunusable();
-    var_4 maps\_utility::_id_27C5();
-    var_4._id_3ECA maps\_utility::_id_27C5();
-    var_4._id_3ECB maps\_utility::_id_27C5();
+    var_4 maps\_utility::hide_entity();
+    var_4._id_3ECA maps\_utility::hide_entity();
+    var_4._id_3ECB maps\_utility::hide_entity();
   }
 
   var_6 = getEntArray("armory_script_brushmodel", "targetname");
@@ -4451,11 +4451,11 @@ chaos_score_update(var_0, var_1) {
   level.chaos_score = level.chaos_score + var_2;
 
   foreach(var_5 in level.players) {
-    if(var_2 > var_5._id_18D3["comboscoremax"]) {
-      var_5._id_18D3["comboscoremax"] = var_2;
+    if(var_2 > var_5.game_performance["comboscoremax"]) {
+      var_5.game_performance["comboscoremax"] = var_2;
     }
-    if(var_1 > var_5._id_18D3["combomultmax"]) {
-      var_5._id_18D3["combomultmax"] = var_1;
+    if(var_1 > var_5.game_performance["combomultmax"]) {
+      var_5.game_performance["combomultmax"] = var_1;
     }
     if(isDefined(var_5.chaos_score_hud)) {
       var_5.chaos_score_hud settext(var_3);
@@ -4470,8 +4470,8 @@ sound_wait_for_bank() {
 }
 
 chaos_get_ai_type_ref() {
-  if(isDefined(self._id_3D5D)) {
-    return self._id_3D5D._id_160B;
+  if(isDefined(self.ai_type)) {
+    return self.ai_type.ref;
   }
   if(isDefined(self.chaos_squad_type)) {
     return self.chaos_squad_type;
@@ -4502,7 +4502,7 @@ chaos_timer_update_vo(var_0, var_1) {
     if(var_2 > 0) {
       wait(var_2);
     }
-    maps\_utility::_id_142B("music_timeout_cm");
+    maps\_utility::musicplaywrapper("music_timeout_cm");
   }
 }
 
@@ -4518,11 +4518,11 @@ sp_killstreak_bonus_score_crateopen() {
 }
 
 chaos_killstreaks_init_done() {
-  return isDefined(level._id_3CE3) && isDefined(level._id_3CE3._id_3BA1);
+  return isDefined(level.ks) && isDefined(level.ks.globalinitdone);
 }
 
 chaos_killstreak_exists(var_0) {
-  foreach(var_3, var_2 in level._id_3CE3._id_3CE4) {
+  foreach(var_3, var_2 in level.ks.killstreaktypes) {
     if(var_3 == var_0) {
       return 1;
     }
@@ -4611,6 +4611,6 @@ chaos_perk_radio(var_0) {
   }
 
   if(isDefined(var_1)) {
-    maps\_utility::_id_11F4(var_1);
+    maps\_utility::radio_dialogue(var_1);
   }
 }

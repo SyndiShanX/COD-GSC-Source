@@ -25,13 +25,13 @@ main() {
 
   switch (codescripts\character::get_random_character(4)) {
     case 0:
-      _id_060B::main();
+      character/character_delta_elite_assault_aa::main();
       break;
     case 1:
-      _id_060C::main();
+      character/character_delta_elite_assault_ab::main();
       break;
     case 2:
-      _id_060D::main();
+      character/character_delta_elite_assault_ba::main();
       break;
     case 3:
       _id_06B9::main();
@@ -44,9 +44,9 @@ spawner() {
 }
 
 precache() {
-  _id_060B::precache();
-  _id_060C::precache();
-  _id_060D::precache();
+  character/character_delta_elite_assault_aa::precache();
+  character/character_delta_elite_assault_ab::precache();
+  character/character_delta_elite_assault_ba::precache();
   _id_06B9::precache();
   precacheitem("fraggrenade");
 }

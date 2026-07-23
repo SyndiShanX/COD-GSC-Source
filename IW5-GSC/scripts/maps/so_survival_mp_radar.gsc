@@ -10,13 +10,13 @@ main() {
   maps\createart\mp_radar_art::main();
   maps\mp\mp_radar_fx::main();
   maps\createfx\mp_radar_fx::main();
-  maps\_so_survival::_id_3F65();
+  maps\_so_survival::survival_preload();
   maps\_load::main();
   ambientplay("ambient_mp_radar");
   maps\_utility::set_vision_set("mp_radar", 0);
-  maps\_so_survival::_id_3F66();
+  maps\_so_survival::survival_postload();
   maps\_compass::setupminimap("compass_map_mp_radar");
-  maps\_so_survival::_id_3F67();
+  maps\_so_survival::survival_init();
   thread killtrigger((-5451, 3761, 1374), 28, 16);
   thread killtrigger((-5450, 3606, 1392), 28, 16);
   thread killtrigger((-5452, 3712, 1380), 28, 16);
@@ -50,6 +50,6 @@ killtrigger(var_0, var_1, var_2) {
     if(!isPlayer(var_4)) {
       continue;
     }
-    var_4 maps\_utility::_id_1887();
+    var_4 maps\_utility::kill_wrapper();
   }
 }

@@ -31,14 +31,14 @@ main(var_0, var_1, var_2, var_3, var_4) {
     var_10 = var_3;
   }
   for(var_11 = 0; var_11 < var_5.size; var_11++) {
-    var_5[var_11] thread _id_409D(var_6, var_7, var_8, var_10, var_9);
+    var_5[var_11] thread floater_think(var_6, var_7, var_8, var_10, var_9);
   }
 }
 
-_id_409D(var_0, var_1, var_2, var_3, var_4) {
-  self._id_298F = var_0;
+floater_think(var_0, var_1, var_2, var_3, var_4) {
+  self.range = var_0;
   self.time = 1 / var_1;
-  self._id_409E = self.time * 0.25;
+  self.acc = self.time * 0.25;
   var_5 = self getorigin();
   var_6 = 360 / var_2;
   var_7 = distance(var_5, var_4);
@@ -46,44 +46,44 @@ _id_409D(var_0, var_1, var_2, var_3, var_4) {
   var_9 = sin(var_8);
 
   if(cos(var_8) < 0) {
-    self._id_298F = -1 * self._id_298F;
+    self.range = -1 * self.range;
   }
   var_10 = spawn("script_origin", var_5);
   self linkTo(var_10);
   var_11 = vectortoangles(var_5 - var_4);
-  self._id_409F = var_10.angles;
+  self.nangles = var_10.angles;
   var_10.angles = var_10.angles + (var_3, var_3 * 0.25, var_11[2]);
-  self._id_40A0 = var_10.angles;
-  thread _id_40A2(var_9, var_10);
-  thread _id_40A1(var_9, var_10);
+  self.rangles = var_10.angles;
+  thread floater_move(var_9, var_10);
+  thread floater_bob(var_9, var_10);
 }
 
-_id_40A1(var_0, var_1) {
+floater_bob(var_0, var_1) {
   self endon("death");
   self endon("stop_float_script");
-  wait(_id_40A3(self.time * var_0));
+  wait(abval(self.time * var_0));
 
   for(;;) {
-    self._id_40A0 = self._id_40A0 * -1;
-    var_1 rotateTo(self._id_40A0, self.time, self._id_409E, self._id_409E);
+    self.rangles = self.rangles * -1;
+    var_1 rotateTo(self.rangles, self.time, self.acc, self.acc);
     var_1 waittill("rotatedone");
   }
 }
 
-_id_40A2(var_0, var_1) {
+floater_move(var_0, var_1) {
   self endon("death");
   self endon("stop_float_script");
-  wait(_id_40A3(self.time * var_0));
-  var_1 movez(self._id_298F * 0.5, self.time * 0.5, self._id_409E, self._id_409E);
+  wait(abval(self.time * var_0));
+  var_1 movez(self.range * 0.5, self.time * 0.5, self.acc, self.acc);
 
   for(;;) {
     var_1 waittill("movedone");
-    self._id_298F = -1 * self._id_298F;
-    var_1 movez(self._id_298F, self.time, self._id_409E, self._id_409E);
+    self.range = -1 * self.range;
+    var_1 movez(self.range, self.time, self.acc, self.acc);
   }
 }
 
-_id_40A3(var_0) {
+abval(var_0) {
   if(var_0 < 0) {
     return -1 * var_0;
   } else {

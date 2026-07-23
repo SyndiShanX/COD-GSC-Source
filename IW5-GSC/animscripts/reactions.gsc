@@ -5,38 +5,38 @@
 
 main() {
   self endon("killanimscript");
-  animscripts\utility::_id_0D15("reactions");
-  _id_0F2C();
+  animscripts\utility::initialize("reactions");
+  newenemysurprisedreaction();
 }
 
 #using_animtree("generic_human");
 
-_id_0F1C() {
-  anim._id_0F1D = [];
-  anim._id_0F1D[anim._id_0F1D.size] = % run_react_duck;
-  anim._id_0F1D[anim._id_0F1D.size] = % run_react_flinch;
-  anim._id_0F1D[anim._id_0F1D.size] = % run_react_stumble;
-  anim._id_0F1E = 0;
-  anim._id_0F1F = [];
-  anim._id_0F1F["cover_stand"] = animscripts\utility::_id_0C6D(%stand_cover_reaction_a, %stand_cover_reaction_b);
-  anim._id_0F1F["cover_crouch"] = animscripts\utility::_id_0C6D(%crouch_cover_reaction_a, %crouch_cover_reaction_b);
-  anim._id_0F1F["cover_left"] = animscripts\utility::_id_0C6D(%cornerstndl_react_a);
-  anim._id_0F1F["cover_right"] = animscripts\utility::_id_0C6D(%cornerstndr_react_a);
+initreactionanims() {
+  anim.runningreacttobullets = [];
+  anim.runningreacttobullets[anim.runningreacttobullets.size] = % run_react_duck;
+  anim.runningreacttobullets[anim.runningreacttobullets.size] = % run_react_flinch;
+  anim.runningreacttobullets[anim.runningreacttobullets.size] = % run_react_stumble;
+  anim.lastrunningreactanim = 0;
+  anim.coverreactions = [];
+  anim.coverreactions["cover_stand"] = animscripts\utility::array(%stand_cover_reaction_a, %stand_cover_reaction_b);
+  anim.coverreactions["cover_crouch"] = animscripts\utility::array(%crouch_cover_reaction_a, %crouch_cover_reaction_b);
+  anim.coverreactions["cover_left"] = animscripts\utility::array(%cornerstndl_react_a);
+  anim.coverreactions["cover_right"] = animscripts\utility::array(%cornerstndr_react_a);
 }
 
-_id_0F20() {
-  thread _id_0F27();
+reactionscheckloop() {
+  thread bulletwhizbycheckloop();
 }
 
-_id_0F21() {
-  return !isDefined(self._id_0F22) || gettime() - self._id_0F22 > 2000;
+canreactagain() {
+  return !isDefined(self.lastreacttime) || gettime() - self.lastreacttime > 2000;
 }
 
-_id_0F23() {
+bulletwhizbyreaction() {
   self endon("killanimscript");
-  self._id_0F22 = gettime();
-  self.a._id_0D2B = "stop";
-  var_0 = isDefined(self._id_0F24) && distancesquared(self.origin, self._id_0F24.origin) < 160000;
+  self.lastreacttime = gettime();
+  self.a.movement = "stop";
+  var_0 = isDefined(self.whizbyenemy) && distancesquared(self.origin, self.whizbyenemy.origin) < 160000;
   self animmode("gravity");
   self orientmode("face current");
 
@@ -55,55 +55,55 @@ _id_0F23() {
       var_3 = 0.2 + randomfloat(0.5);
     }
     self setflaggedanimknobrestart("reactanim", var_2, 1, 0.1, 1);
-    animscripts\notetracks::_id_0D4F(var_3, "reactanim");
+    animscripts\notetracks::donotetracksfortime(var_3, "reactanim");
     self clearanim(%root, 0.1);
 
-    if(!var_0 && self.stairsstate == "none" && !isDefined(self._id_0F25)) {
+    if(!var_0 && self.stairsstate == "none" && !isDefined(self.disable_dive_whizby_react)) {
       var_4 = 1 + randomfloat(0.2);
-      var_5 = animscripts\utility::_id_0F26(%exposed_dive_grenade_b, %exposed_dive_grenade_f);
+      var_5 = animscripts\utility::randomanimoftwo(%exposed_dive_grenade_b, %exposed_dive_grenade_f);
       self setflaggedanimknobrestart("dive", var_5, 1, 0.1, var_4);
-      animscripts\shared::_id_0C51("dive");
+      animscripts\shared::donotetracks("dive");
     }
   } else {
     wait(randomfloat(0.2));
     var_4 = 1.2 + randomfloat(0.3);
 
-    if(self.a._id_0D26 == "stand") {
+    if(self.a.pose == "stand") {
       self clearanim(%root, 0.1);
       self setflaggedanimknobrestart("crouch", %exposed_stand_2_crouch, 1, 0.1, var_4);
-      animscripts\shared::_id_0C51("crouch");
+      animscripts\shared::donotetracks("crouch");
     }
 
     var_6 = anglesToForward(self.angles);
 
-    if(isDefined(self._id_0F24)) {
-      var_7 = vectorNormalize(self._id_0F24.origin - self.origin);
+    if(isDefined(self.whizbyenemy)) {
+      var_7 = vectorNormalize(self.whizbyenemy.origin - self.origin);
     } else {
       var_7 = var_6;
     }
     if(vectordot(var_7, var_6) > 0) {
-      var_8 = animscripts\utility::_id_0F26(%exposed_crouch_idle_twitch_v2, %exposed_crouch_idle_twitch_v3);
+      var_8 = animscripts\utility::randomanimoftwo(%exposed_crouch_idle_twitch_v2, %exposed_crouch_idle_twitch_v3);
       self clearanim(%root, 0.1);
       self setflaggedanimknobrestart("twitch", var_8, 1, 0.1, 1);
-      animscripts\shared::_id_0C51("twitch");
+      animscripts\shared::donotetracks("twitch");
     } else {
-      var_9 = animscripts\utility::_id_0F26(%exposed_crouch_turn_180_left, %exposed_crouch_turn_180_right);
+      var_9 = animscripts\utility::randomanimoftwo(%exposed_crouch_turn_180_left, %exposed_crouch_turn_180_right);
       self clearanim(%root, 0.1);
       self setflaggedanimknobrestart("turn", var_9, 1, 0.1, 1);
-      animscripts\shared::_id_0C51("turn");
+      animscripts\shared::donotetracks("turn");
     }
   }
 
   self clearanim(%root, 0.1);
-  self._id_0F24 = undefined;
+  self.whizbyenemy = undefined;
   self animmode("normal");
   self orientmode("face default");
 }
 
-_id_0F27() {
+bulletwhizbycheckloop() {
   self endon("killanimscript");
 
-  if(isDefined(self._id_0EEE)) {
+  if(isDefined(self.disablebulletwhizbyreaction)) {
     return;
   }
   for(;;) {
@@ -112,37 +112,37 @@ _id_0F27() {
     if(!isDefined(var_0.team) || self.team == var_0.team) {
       continue;
     }
-    if(isDefined(self._id_0CAF) || isDefined(self._id_0CF1)) {
+    if(isDefined(self.covernode) || isDefined(self.ambushnode)) {
       continue;
     }
-    if(self.a._id_0D26 != "stand") {
+    if(self.a.pose != "stand") {
       continue;
     }
-    if(!_id_0F21()) {
+    if(!canreactagain()) {
       continue;
     }
-    self._id_0F24 = var_0;
-    self animcustom(::_id_0F23);
+    self.whizbyenemy = var_0;
+    self animcustom(::bulletwhizbyreaction);
   }
 }
 
-_id_0F28() {
+clearlookatthread() {
   self endon("killanimscript");
   wait 0.3;
   self setlookatentity();
 }
 
-_id_0F29() {
+getnewenemyreactionanim() {
   var_0 = undefined;
 
-  if(self nearclaimnodeandangle() && isDefined(anim._id_0F1F[self.prevscript])) {
+  if(self nearclaimnodeandangle() && isDefined(anim.coverreactions[self.prevscript])) {
     var_1 = anglesToForward(self.node.angles);
     var_2 = vectorNormalize(self.reactiontargetpos - self.origin);
 
     if(vectordot(var_1, var_2) < -0.5) {
       self orientmode("face current");
-      var_3 = randomint(anim._id_0F1F[self.prevscript].size);
-      var_0 = anim._id_0F1F[self.prevscript][var_3];
+      var_3 = randomint(anim.coverreactions[self.prevscript].size);
+      var_0 = anim.coverreactions[self.prevscript][var_3];
     }
   }
 
@@ -156,7 +156,7 @@ _id_0F29() {
     } else {
       self orientmode("face point", self.reactiontargetpos);
     }
-    if(self.a._id_0D26 == "crouch") {
+    if(self.a.pose == "crouch") {
       var_2 = vectorNormalize(self.reactiontargetpos - self.origin);
       var_5 = anglesToForward(self.angles);
 
@@ -173,60 +173,60 @@ _id_0F29() {
   return var_0;
 }
 
-_id_0F2A() {
+stealthnewenemyreactanim() {
   self clearanim(%root, 0.2);
 
   if(randomint(4) < 3) {
     self orientmode("face enemy");
     self setflaggedanimknobrestart("reactanim", %exposed_idle_reactb, 1, 0.2, 1);
     var_0 = getanimlength(%exposed_idle_reactb);
-    animscripts\notetracks::_id_0D4F(var_0 * 0.8, "reactanim");
+    animscripts\notetracks::donotetracksfortime(var_0 * 0.8, "reactanim");
     self orientmode("face current");
   } else {
     self orientmode("face enemy");
     self setflaggedanimknobrestart("reactanim", %exposed_backpedal, 1, 0.2, 1);
     var_0 = getanimlength(%exposed_backpedal);
-    animscripts\notetracks::_id_0D4F(var_0 * 0.8, "reactanim");
+    animscripts\notetracks::donotetracksfortime(var_0 * 0.8, "reactanim");
     self orientmode("face current");
     self clearanim(%root, 0.2);
     self setflaggedanimknobrestart("reactanim", %exposed_backpedal_v2, 1, 0.2, 1);
-    animscripts\shared::_id_0C51("reactanim");
+    animscripts\shared::donotetracks("reactanim");
   }
 }
 
-_id_0F2B() {
+newenemyreactionanim() {
   self endon("death");
   self endon("endNewEnemyReactionAnim");
-  self._id_0F22 = gettime();
-  self.a._id_0D2B = "stop";
+  self.lastreacttime = gettime();
+  self.a.movement = "stop";
 
-  if(isDefined(self._id_0B6E) && self.alertlevel != "combat") {
-    _id_0F2A();
+  if(isDefined(self._stealth) && self.alertlevel != "combat") {
+    stealthnewenemyreactanim();
   } else {
-    var_0 = _id_0F29();
+    var_0 = getnewenemyreactionanim();
     self clearanim(%root, 0.2);
     self setflaggedanimknobrestart("reactanim", var_0, 1, 0.2, 1);
-    animscripts\shared::_id_0C51("reactanim");
+    animscripts\shared::donotetracks("reactanim");
   }
 
   self notify("newEnemyReactionDone");
 }
 
-_id_0F2C() {
+newenemysurprisedreaction() {
   self endon("death");
 
-  if(isDefined(self._id_0F2D)) {
+  if(isDefined(self.disablereactionanims)) {
     return;
   }
-  if(!_id_0F21()) {
+  if(!canreactagain()) {
     return;
   }
-  if(self.a._id_0D26 == "prone" || isDefined(self.a._id_0D29)) {
+  if(self.a.pose == "prone" || isDefined(self.a.onback)) {
     return;
   }
   self animmode("gravity");
 
   if(isDefined(self.enemy)) {
-    _id_0F2B();
+    newenemyreactionanim();
   }
 }

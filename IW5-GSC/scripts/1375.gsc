@@ -3,80 +3,80 @@
  * Script: scripts\1375.gsc
 **************************************/
 
-_id_4235() {
-  _id_4232();
-  var_0 = self._id_0B6E._id_41D0._id_41D1["state"]["hidden"];
-  thread maps\_stealth_shared_utilities::_id_41CE(var_0, "friendly_behavior");
-  var_0 = self._id_0B6E._id_41D0._id_41D1["state"]["spotted"];
-  thread maps\_stealth_shared_utilities::_id_41CB(var_0, "friendly_behavior");
+stealth_behavior_friendly_main() {
+  friendly_init();
+  var_0 = self._stealth.behavior.ai_functions["state"]["hidden"];
+  thread maps\_stealth_shared_utilities::ai_message_handler_hidden(var_0, "friendly_behavior");
+  var_0 = self._stealth.behavior.ai_functions["state"]["spotted"];
+  thread maps\_stealth_shared_utilities::ai_message_handler_spotted(var_0, "friendly_behavior");
 }
 
-_id_4236() {
-  thread maps\_utility::_id_0D72(0);
-  self._id_0B6E._id_41D0._id_4237 = self.grenadeammo;
+friendly_state_hidden() {
+  thread maps\_utility::set_battlechatter(0);
+  self._stealth.behavior.oldgrenadeammo = self.grenadeammo;
   self.grenadeammo = 0;
-  self._id_1117 = undefined;
+  self.forcesidearm = undefined;
   self.ignoreme = 1;
 }
 
-_id_4238() {
-  thread maps\_utility::_id_0D72(1);
+friendly_state_spotted() {
+  thread maps\_utility::set_battlechatter(1);
 
-  if(isDefined(self._id_0B6E._id_41D0._id_4237)) {
-    self.grenadeammo = self._id_0B6E._id_41D0._id_4237;
+  if(isDefined(self._stealth.behavior.oldgrenadeammo)) {
+    self.grenadeammo = self._stealth.behavior.oldgrenadeammo;
   } else {
     self.grenadeammo = 3;
   }
   self.ignoreme = 0;
   self pushplayer(0);
-  maps\_utility::_id_109E();
-  thread _id_4239();
+  maps\_utility::disable_cqbwalk();
+  thread friendly_spotted_getup_from_prone();
   self allowedstances("prone", "crouch", "stand");
-  maps\_utility::_id_1414();
+  maps\_utility::anim_stopanimscripted();
 }
 
-_id_4239(var_0) {
+friendly_spotted_getup_from_prone(var_0) {
   self endon("death");
 
-  if(self._id_0B6E._id_41ED.stance != "prone") {
+  if(self._stealth.logic.stance != "prone") {
     return;
   }
-  maps\_utility::_id_13DC("_stealth_custom_anim");
+  maps\_utility::ent_flag_set("_stealth_custom_anim");
   var_1 = "_stealth_prone_2_run_roll";
 
   if(isDefined(var_0)) {
     self orientmode("face angle", var_0[1] + 20);
   }
-  thread maps\_anim::_id_11CC(self, "gravity", var_1);
-  var_2 = getanimlength(maps\_utility::_id_26EC(var_1));
+  thread maps\_anim::anim_generic_custom_animmode(self, "gravity", var_1);
+  var_2 = getanimlength(maps\_utility::getanim_generic(var_1));
   wait(var_2 - 0.2);
   self notify("stop_animmode");
-  maps\_utility::_id_13DE("_stealth_custom_anim");
+  maps\_utility::ent_flag_clear("_stealth_custom_anim");
 }
 
-_id_4232() {
-  maps\_utility::_id_1402("_stealth_custom_anim");
-  maps\_utility::_id_1402("_stealth_override_goalpos");
-  self._id_0B6E._id_41D0 = spawnStruct();
-  self._id_0B6E._id_41D0._id_41D1 = [];
-  _id_423C();
-  self._id_0B6E._id_423A = spawnStruct();
-  thread maps\_stealth_shared_utilities::_id_41E3();
+friendly_init() {
+  maps\_utility::ent_flag_init("_stealth_custom_anim");
+  maps\_utility::ent_flag_init("_stealth_override_goalpos");
+  self._stealth.behavior = spawnStruct();
+  self._stealth.behavior.ai_functions = [];
+  friendly_default_state_behavior();
+  self._stealth.plugins = spawnStruct();
+  thread maps\_stealth_shared_utilities::ai_stealth_pause_handler();
 }
 
-_id_423B(var_0) {
+friendly_custom_state_behavior(var_0) {
   foreach(var_3, var_2 in var_0) {}
-  maps\_stealth_shared_utilities::_id_41CF("state", var_3, var_2);
+  maps\_stealth_shared_utilities::ai_create_behavior_function("state", var_3, var_2);
 
-  var_4 = self._id_0B6E._id_41D0._id_41D1["state"]["hidden"];
-  thread maps\_stealth_shared_utilities::_id_41CE(var_4, "friendly_behavior");
-  var_4 = self._id_0B6E._id_41D0._id_41D1["state"]["spotted"];
-  thread maps\_stealth_shared_utilities::_id_41CB(var_4, "friendly_behavior");
+  var_4 = self._stealth.behavior.ai_functions["state"]["hidden"];
+  thread maps\_stealth_shared_utilities::ai_message_handler_hidden(var_4, "friendly_behavior");
+  var_4 = self._stealth.behavior.ai_functions["state"]["spotted"];
+  thread maps\_stealth_shared_utilities::ai_message_handler_spotted(var_4, "friendly_behavior");
 }
 
-_id_423C() {
+friendly_default_state_behavior() {
   var_0 = [];
-  var_0["hidden"] = ::_id_4236;
-  var_0["spotted"] = ::_id_4238;
-  _id_423B(var_0);
+  var_0["hidden"] = ::friendly_state_hidden;
+  var_0["spotted"] = ::friendly_state_spotted;
+  friendly_custom_state_behavior(var_0);
 }

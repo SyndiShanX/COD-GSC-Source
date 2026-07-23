@@ -5,92 +5,92 @@
 
 main(var_0) {
   self endon("killanimscript");
-  animscripts\utility::_id_0D15("technical");
+  animscripts\utility::initialize("technical");
 
   if(!isDefined(var_0)) {
     return;
   }
-  self.a._id_0D19 = "technical";
+  self.a.special = "technical";
 
   if(isDefined(var_0.script_delay_min)) {
     var_1 = var_0.script_delay_min;
   } else {
-    var_1 = maps\_mgturret::_id_2277("delay");
+    var_1 = maps\_mgturret::burst_fire_settings("delay");
   }
   if(isDefined(var_0.script_delay_max)) {
     var_2 = var_0.script_delay_max - var_1;
   } else {
-    var_2 = maps\_mgturret::_id_2277("delay_range");
+    var_2 = maps\_mgturret::burst_fire_settings("delay_range");
   }
-  if(isDefined(var_0._id_2279)) {
-    var_3 = var_0._id_2279;
+  if(isDefined(var_0.script_burst_min)) {
+    var_3 = var_0.script_burst_min;
   } else {
-    var_3 = maps\_mgturret::_id_2277("burst");
+    var_3 = maps\_mgturret::burst_fire_settings("burst");
   }
-  if(isDefined(var_0._id_227A)) {
-    var_4 = var_0._id_227A - var_3;
+  if(isDefined(var_0.script_burst_max)) {
+    var_4 = var_0.script_burst_max - var_3;
   } else {
-    var_4 = maps\_mgturret::_id_2277("burst_range");
+    var_4 = maps\_mgturret::burst_fire_settings("burst_range");
   }
   var_5 = gettime();
   var_6 = "start";
-  animscripts\shared::_id_0C9B(self.weapon, "none");
+  animscripts\shared::placeweaponon(self.weapon, "none");
   var_0 show();
-  self.a._id_20AD = ::_id_6479;
+  self.a.postscriptfunc = ::preplacedpostscriptfunc;
   var_0 notify("stop_burst_fire_unmanned");
-  var_0._id_488B = 0;
-  thread _id_6476(var_0);
-  self setturretanim(self._id_4888);
-  self setanimknobrestart(self._id_4888, 1, 0.2, 1);
-  self setanimknoblimitedrestart(self._id_48B8);
-  self setanimknoblimitedrestart(self._id_48B4);
+  var_0.dofiring = 0;
+  thread firecontroller(var_0);
+  self setturretanim(self.primaryturretanim);
+  self setanimknobrestart(self.primaryturretanim, 1, 0.2, 1);
+  self setanimknoblimitedrestart(self.additiveturretidle);
+  self setanimknoblimitedrestart(self.additiveturretfire);
   var_0 endon("death");
 
   for(;;) {
-    if(var_0._id_488B) {
-      thread _id_227C(var_0);
-      _id_6475(randomfloatrange(var_3, var_3 + var_4), var_0);
+    if(var_0.dofiring) {
+      thread doshoot(var_0);
+      waittimeoruntilturretstatechange(randomfloatrange(var_3, var_3 + var_4), var_0);
       var_0 notify("turretstatechange");
 
-      if(var_0._id_488B) {
-        thread _id_48B6(var_0);
+      if(var_0.dofiring) {
+        thread doaim(var_0);
         wait(randomfloatrange(var_1, var_1 + var_2));
       }
 
       continue;
     }
 
-    thread _id_48B6(var_0);
+    thread doaim(var_0);
     var_0 waittill("turretstatechange");
   }
 }
 
-_id_6475(var_0, var_1) {
+waittimeoruntilturretstatechange(var_0, var_1) {
   var_1 endon("turretstatechange");
   wait(var_0);
 }
 
-_id_6476(var_0) {
+firecontroller(var_0) {
   self endon("killanimscript");
   var_1 = cos(15);
 
   for(;;) {
     while(isDefined(self.enemy)) {
       if(_id_6860(var_0, var_1)) {
-        if(!var_0._id_488B) {
-          var_0._id_488B = 1;
+        if(!var_0.dofiring) {
+          var_0.dofiring = 1;
           var_0 notify("turretstatechange");
         }
-      } else if(var_0._id_488B) {
-        var_0._id_488B = 0;
+      } else if(var_0.dofiring) {
+        var_0.dofiring = 0;
         var_0 notify("turretstatechange");
       }
 
       wait 0.05;
     }
 
-    if(var_0._id_488B) {
-      var_0._id_488B = 0;
+    if(var_0.dofiring) {
+      var_0.dofiring = 0;
       var_0 notify("turretstatechange");
     }
 
@@ -128,7 +128,7 @@ _id_6861(var_0, var_1) {
   return 0;
 }
 
-_id_2282(var_0, var_1) {
+turrettimer(var_0, var_1) {
   if(var_0 <= 0) {
     return;
   }
@@ -138,12 +138,12 @@ _id_2282(var_0, var_1) {
   var_1 notify("turretstatechange");
 }
 
-_id_20AD(var_0) {
+postscriptfunc(var_0) {
   if(var_0 == "pain") {
     if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 4096) {
-      self.a._id_20FA hide();
-      animscripts\shared::_id_0C9B(self.weapon, "right");
-      self.a._id_20AD = ::_id_6478;
+      self.a.usingturret hide();
+      animscripts\shared::placeweaponon(self.weapon, "right");
+      self.a.postscriptfunc = ::postpainfunc;
       return;
     } else {
       self stopuseturret();
@@ -155,43 +155,43 @@ _id_20AD(var_0) {
     return;
   }
 
-  self.a._id_20FA delete();
-  self.a._id_20FA = undefined;
-  animscripts\shared::_id_0C9B(self.weapon, "right");
+  self.a.usingturret delete();
+  self.a.usingturret = undefined;
+  animscripts\shared::placeweaponon(self.weapon, "right");
 }
 
-_id_6478(var_0) {
+postpainfunc(var_0) {
   if(!isDefined(self.node) || distancesquared(self.origin, self.node.origin) > 4096) {
     self stopuseturret();
-    self.a._id_20FA delete();
-    self.a._id_20FA = undefined;
+    self.a.usingturret delete();
+    self.a.usingturret = undefined;
 
     if(isDefined(self.weapon) && self.weapon != "none") {
-      animscripts\shared::_id_0C9B(self.weapon, "right");
+      animscripts\shared::placeweaponon(self.weapon, "right");
     }
   } else if(var_0 != "saw") {
-    self.a._id_20FA delete();
+    self.a.usingturret delete();
   }
 }
 
-_id_6479(var_0) {
-  animscripts\shared::_id_0C9B(self.weapon, "right");
+preplacedpostscriptfunc(var_0) {
+  animscripts\shared::placeweaponon(self.weapon, "right");
 }
 
 #using_animtree("generic_human");
 
-_id_227C(var_0) {
+doshoot(var_0) {
   self setanim(%additive_saw_idle, 0, 0.1);
   self setanim(%additive_saw_fire, 1, 0.1);
-  _id_647A(var_0);
+  turretdoshoot(var_0);
 }
 
-_id_48B6(var_0) {
+doaim(var_0) {
   self setanim(%additive_saw_idle, 1, 0.1);
   self setanim(%additive_saw_fire, 0, 0.1);
 }
 
-_id_647A(var_0) {
+turretdoshoot(var_0) {
   self endon("killanimscript");
   var_0 endon("turretstatechange");
   var_0 endon("death");
@@ -204,12 +204,12 @@ _id_647A(var_0) {
 
 #using_animtree("mg42");
 
-_id_647B() {
+turretdoshootanims() {
   self setanim(%additive_saw_idle, 0, 0.1);
   self setanim(%additive_saw_fire, 1, 0.1);
 }
 
-_id_647C() {
+turretdoaimanims() {
   self setanim(%additive_saw_idle, 1, 0.1);
   self setanim(%additive_saw_fire, 0, 0.1);
 }

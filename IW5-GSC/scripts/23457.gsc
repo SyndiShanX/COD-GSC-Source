@@ -4,12 +4,12 @@
 **************************************/
 
 main() {
-  codescripts\character::setmodelfromarray(_id_5B9F::main());
-  codescripts\character::attachhead("alias_hamburg_hostage_heads", _id_5BA0::main());
+  codescripts\character::setmodelfromarray(xmodelalias/alias_hamburg_hostage_bodies::main());
+  codescripts\character::attachhead("alias_hamburg_hostage_heads", xmodelalias/alias_hamburg_hostage_heads::main());
   self.voice = "russian";
 }
 
 precache() {
-  codescripts\character::precachemodelarray(_id_5B9F::main());
-  codescripts\character::precachemodelarray(_id_5BA0::main());
+  codescripts\character::precachemodelarray(xmodelalias/alias_hamburg_hostage_bodies::main());
+  codescripts\character::precachemodelarray(xmodelalias/alias_hamburg_hostage_heads::main());
 }

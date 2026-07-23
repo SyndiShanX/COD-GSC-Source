@@ -8,42 +8,42 @@
 main() {
   self endon("killanimscript");
   self endon("abort_approach");
-  var_0 = self._id_1162;
-  var_1 = anim._id_1164[self._id_1163][var_0];
+  var_0 = self.approachnumber;
+  var_1 = anim.covertrans[self.approachtype][var_0];
 
-  if(!isDefined(self._id_0C96)) {
-    thread _id_116A();
+  if(!isDefined(self.heat)) {
+    thread abortapproachifthreatened();
   }
   self clearanim(%body, 0.2);
-  self setflaggedanimrestart("coverArrival", var_1, 1, 0.2, self._id_1165);
-  animscripts\shared::_id_0C51("coverArrival", ::_id_1168);
-  var_2 = anim._id_1166[self._id_1163];
+  self setflaggedanimrestart("coverArrival", var_1, 1, 0.2, self.movetransitionrate);
+  animscripts\shared::donotetracks("coverArrival", ::handlestartaim);
+  var_2 = anim.arrivalendstance[self.approachtype];
 
   if(isDefined(var_2)) {
-    self.a._id_0D26 = var_2;
+    self.a.pose = var_2;
   }
-  self.a._id_0D2B = "stop";
-  self.a._id_10DF = self._id_1163;
+  self.a.movement = "stop";
+  self.a.arrivaltype = self.approachtype;
   self clearanim(%root, 0.3);
-  self._id_1167 = undefined;
+  self.lastapproachaborttime = undefined;
 }
 
-_id_1168(var_0) {
+handlestartaim(var_0) {
   if(var_0 == "start_aim") {
-    if(self.a._id_0D26 == "stand") {
-      animscripts\animset::_id_0C94();
-    } else if(self.a._id_0D26 == "crouch") {
-      animscripts\animset::_id_0C99();
+    if(self.a.pose == "stand") {
+      animscripts\animset::set_animarray_standing();
+    } else if(self.a.pose == "crouch") {
+      animscripts\animset::set_animarray_crouching();
     } else {}
 
-    animscripts\combat::_id_110E();
-    self._id_110A = 0.0;
-    animscripts\combat_utility::_id_110B(0);
-    thread animscripts\track::_id_0CA9();
+    animscripts\combat::set_aim_and_turn_limits();
+    self.previouspitchdelta = 0.0;
+    animscripts\combat_utility::setupaim(0);
+    thread animscripts\track::trackshootentorpos();
   }
 }
 
-_id_1169() {
+isthreatenedbyenemy() {
   if(!isDefined(self.node)) {
     return 0;
   }
@@ -53,17 +53,17 @@ _id_1169() {
   return 0;
 }
 
-_id_116A() {
+abortapproachifthreatened() {
   self endon("killanimscript");
 
   for(;;) {
     if(!isDefined(self.node)) {
       return;
     }
-    if(_id_1169()) {
+    if(isthreatenedbyenemy()) {
       self clearanim(%root, 0.3);
       self notify("abort_approach");
-      self._id_1167 = gettime();
+      self.lastapproachaborttime = gettime();
       return;
     }
 
@@ -71,8 +71,8 @@ _id_116A() {
   }
 }
 
-_id_116B(var_0) {
-  if(isDefined(self._id_0C96)) {
+getnodestanceyawoffset(var_0) {
+  if(isDefined(self.heat)) {
     return 0;
   }
   if(var_0 == "left" || var_0 == "left_crouch") {
@@ -83,11 +83,11 @@ _id_116B(var_0) {
   return 0;
 }
 
-_id_116C(var_0) {
-  if(!animscripts\utility::_id_0F79()) {
+canusesawapproach(var_0) {
+  if(!animscripts\utility::usingmg()) {
     return 0;
   }
-  if(!isDefined(var_0._id_0F7A)) {
+  if(!isDefined(var_0.turretinfo)) {
     return 0;
   }
   if(var_0.type != "Cover Stand" && var_0.type != "Cover Prone" && var_0.type != "Cover Crouch") {
@@ -96,14 +96,14 @@ _id_116C(var_0) {
   if(isDefined(self.enemy) && distancesquared(self.enemy.origin, var_0.origin) < 65536) {
     return 0;
   }
-  if(animscripts\utility::_id_116D() > 40 || animscripts\utility::_id_116D() < -40) {
+  if(animscripts\utility::getnodeyawtoenemy() > 40 || animscripts\utility::getnodeyawtoenemy() < -40) {
     return 0;
   }
   return 1;
 }
 
-_id_116E(var_0) {
-  if(_id_116C(var_0)) {
+determinenodeapproachtype(var_0) {
+  if(canusesawapproach(var_0)) {
     if(var_0.type == "Cover Stand") {
       return "stand_saw";
     }
@@ -114,26 +114,26 @@ _id_116E(var_0) {
     }
   }
 
-  if(!isDefined(anim._id_116F[var_0.type])) {
+  if(!isDefined(anim.approach_types[var_0.type])) {
     return;
   }
-  if(isDefined(var_0._id_1170)) {
-    var_1 = var_0._id_1170;
+  if(isDefined(var_0.arrivalstance)) {
+    var_1 = var_0.arrivalstance;
   } else {
     var_1 = var_0 gethighestnodestance();
   }
   if(var_1 == "prone") {
     var_1 = "crouch";
   }
-  var_2 = anim._id_116F[var_0.type][var_1];
+  var_2 = anim.approach_types[var_0.type][var_1];
 
-  if(_id_11B2() && var_2 == "exposed") {
+  if(use_readystand() && var_2 == "exposed") {
     var_2 = "exposed_ready";
   }
-  if(animscripts\utility::_id_0CB2()) {
+  if(animscripts\utility::shouldcqb()) {
     var_3 = var_2 + "_cqb";
 
-    if(isDefined(anim._id_1164[var_3])) {
+    if(isDefined(anim.covertrans[var_3])) {
       var_2 = var_3;
     }
   }
@@ -141,8 +141,8 @@ _id_116E(var_0) {
   return var_2;
 }
 
-_id_1171(var_0) {
-  if(_id_116C(var_0)) {
+determinenodeexittype(var_0) {
+  if(canusesawapproach(var_0)) {
     if(var_0.type == "Cover Stand") {
       return "stand_saw";
     }
@@ -153,26 +153,26 @@ _id_1171(var_0) {
     }
   }
 
-  if(!isDefined(anim._id_116F[var_0.type])) {
+  if(!isDefined(anim.approach_types[var_0.type])) {
     return;
   }
-  if(isDefined(anim._id_1172[var_0.type]) && anim._id_1172[var_0.type] != self.a._id_0D26) {
+  if(isDefined(anim.requiredexitstance[var_0.type]) && anim.requiredexitstance[var_0.type] != self.a.pose) {
     return;
   }
-  var_1 = self.a._id_0D26;
+  var_1 = self.a.pose;
 
   if(var_1 == "prone") {
     var_1 = "crouch";
   }
-  var_2 = anim._id_116F[var_0.type][var_1];
+  var_2 = anim.approach_types[var_0.type][var_1];
 
-  if(_id_11B2() && var_2 == "exposed") {
+  if(use_readystand() && var_2 == "exposed") {
     var_2 = "exposed_ready";
   }
-  if(animscripts\utility::_id_0CB2()) {
+  if(animscripts\utility::shouldcqb()) {
     var_3 = var_2 + "_cqb";
 
-    if(isDefined(anim._id_1173[var_3])) {
+    if(isDefined(anim.coverexit[var_3])) {
       var_2 = var_3;
     }
   }
@@ -180,12 +180,12 @@ _id_1171(var_0) {
   return var_2;
 }
 
-_id_1174(var_0) {
-  if(isDefined(self._id_0C96)) {
+determineexposedapproachtype(var_0) {
+  if(isDefined(self.heat)) {
     return "heat";
   }
-  if(isDefined(var_0._id_1170)) {
-    var_1 = var_0._id_1170;
+  if(isDefined(var_0.arrivalstance)) {
+    var_1 = var_0.arrivalstance;
   } else {
     var_1 = var_0 gethighestnodestance();
   }
@@ -197,55 +197,55 @@ _id_1174(var_0) {
   } else {
     var_2 = "exposed";
   }
-  if(var_2 == "exposed" && _id_11B2()) {
+  if(var_2 == "exposed" && use_readystand()) {
     var_2 = var_2 + "_ready";
   }
-  if(animscripts\utility::_id_0CB2()) {
+  if(animscripts\utility::shouldcqb()) {
     return var_2 + "_cqb";
   }
   return var_2;
 }
 
-_id_1175(var_0) {
+getmaxdirectionsandexcludedirfromapproachtype(var_0) {
   var_1 = spawnStruct();
 
-  if(isDefined(var_0) && isDefined(anim._id_1176[var_0.type])) {
-    var_1._id_1176 = anim._id_1176[var_0.type];
-    var_1._id_1177 = anim._id_1177[var_0.type];
+  if(isDefined(var_0) && isDefined(anim.maxdirections[var_0.type])) {
+    var_1.maxdirections = anim.maxdirections[var_0.type];
+    var_1.excludedir = anim.excludedir[var_0.type];
   } else {
-    var_1._id_1176 = 9;
-    var_1._id_1177 = -1;
+    var_1.maxdirections = 9;
+    var_1.excludedir = -1;
   }
 
   return var_1;
 }
 
-_id_1178(var_0) {
+shouldapproachtoexposed(var_0) {
   if(!isDefined(self.enemy)) {
     return 0;
   }
-  if(animscripts\combat_utility::_id_0F08(0.5)) {
+  if(animscripts\combat_utility::needtoreload(0.5)) {
     return 0;
   }
-  if(animscripts\utility::_id_0F4C()) {
+  if(animscripts\utility::issuppressedwrapper()) {
     return 0;
   }
-  if(isDefined(anim._id_1179[var_0])) {
+  if(isDefined(anim.exposedtransition[var_0])) {
     return 0;
   }
   if(var_0 == "left_crouch" || var_0 == "right_crouch") {
     return 0;
   }
-  return animscripts\utility::_id_117A(self.enemy getshootatpos(), self.node);
+  return animscripts\utility::canseepointfromexposedatnode(self.enemy getshootatpos(), self.node);
 }
 
-_id_117B(var_0, var_1) {
+calculatenodeoffsetfromanimationdelta(var_0, var_1) {
   var_2 = anglestoright(var_0);
   var_3 = anglesToForward(var_0);
   return var_3 * var_1[0] + var_2 * (0 - var_1[1]);
 }
 
-_id_117C() {
+getapproachent() {
   if(isDefined(self.scriptedarrivalent)) {
     return self.scriptedarrivalent;
   }
@@ -255,21 +255,21 @@ _id_117C() {
   return undefined;
 }
 
-_id_117D(var_0, var_1) {
+getapproachpoint(var_0, var_1) {
   if(var_1 == "stand_saw") {
-    var_2 = (var_0._id_0F7A.origin[0], var_0._id_0F7A.origin[1], var_0.origin[2]);
-    var_3 = anglesToForward((0, var_0._id_0F7A.angles[1], 0));
-    var_4 = anglestoright((0, var_0._id_0F7A.angles[1], 0));
+    var_2 = (var_0.turretinfo.origin[0], var_0.turretinfo.origin[1], var_0.origin[2]);
+    var_3 = anglesToForward((0, var_0.turretinfo.angles[1], 0));
+    var_4 = anglestoright((0, var_0.turretinfo.angles[1], 0));
     var_2 = var_2 + var_3 * -32.545 - var_4 * 6.899;
   } else if(var_1 == "crouch_saw") {
-    var_2 = (var_0._id_0F7A.origin[0], var_0._id_0F7A.origin[1], var_0.origin[2]);
-    var_3 = anglesToForward((0, var_0._id_0F7A.angles[1], 0));
-    var_4 = anglestoright((0, var_0._id_0F7A.angles[1], 0));
+    var_2 = (var_0.turretinfo.origin[0], var_0.turretinfo.origin[1], var_0.origin[2]);
+    var_3 = anglesToForward((0, var_0.turretinfo.angles[1], 0));
+    var_4 = anglestoright((0, var_0.turretinfo.angles[1], 0));
     var_2 = var_2 + var_3 * -32.545 - var_4 * 6.899;
   } else if(var_1 == "prone_saw") {
-    var_2 = (var_0._id_0F7A.origin[0], var_0._id_0F7A.origin[1], var_0.origin[2]);
-    var_3 = anglesToForward((0, var_0._id_0F7A.angles[1], 0));
-    var_4 = anglestoright((0, var_0._id_0F7A.angles[1], 0));
+    var_2 = (var_0.turretinfo.origin[0], var_0.turretinfo.origin[1], var_0.origin[2]);
+    var_3 = anglesToForward((0, var_0.turretinfo.angles[1], 0));
+    var_4 = anglestoright((0, var_0.turretinfo.angles[1], 0));
     var_2 = var_2 + var_3 * -37.36 - var_4 * 13.279;
   } else if(isDefined(self.scriptedarrivalent)) {
     var_2 = self.goalpos;
@@ -279,90 +279,90 @@ _id_117D(var_0, var_1) {
   return var_2;
 }
 
-_id_117E() {
+checkapproachpreconditions() {
   if(isDefined(self getnegotiationstartnode())) {
     return 0;
   }
-  if(isDefined(self._id_117F) && self._id_117F) {
+  if(isDefined(self.disablearrivals) && self.disablearrivals) {
     return 0;
   }
   return 1;
 }
 
-_id_1180(var_0, var_1, var_2) {
-  if(isDefined(anim._id_1179[var_0])) {
+checkapproachconditions(var_0, var_1, var_2) {
+  if(isDefined(anim.exposedtransition[var_0])) {
     return 0;
   }
   if(var_0 == "stand" || var_0 == "crouch") {
-    if(animscripts\utility::_id_0D61(vectortoyaw(var_1) - var_2.angles[1] + 180) < 60) {
+    if(animscripts\utility::absangleclamp180(vectortoyaw(var_1) - var_2.angles[1] + 180) < 60) {
       return 0;
     }
   }
 
-  if(_id_1169() || isDefined(self._id_1167) && self._id_1167 + 500 > gettime()) {
+  if(isthreatenedbyenemy() || isDefined(self.lastapproachaborttime) && self.lastapproachaborttime + 500 > gettime()) {
     return 0;
   }
   return 1;
 }
 
-_id_10A9(var_0) {
+setupapproachnode(var_0) {
   self endon("killanimscript");
 
-  if(isDefined(self._id_0C96)) {
-    thread _id_118B();
+  if(isDefined(self.heat)) {
+    thread dolastminuteexposedapproachwrapper();
     return;
   }
 
   if(var_0) {
     self.requestarrivalnotify = 1;
   }
-  self.a._id_10DF = undefined;
-  thread _id_118B();
+  self.a.arrivaltype = undefined;
+  thread dolastminuteexposedapproachwrapper();
   self waittill("cover_approach", var_1);
 
-  if(!_id_117E()) {
+  if(!checkapproachpreconditions()) {
     return;
   }
-  thread _id_10A9(0);
+  thread setupapproachnode(0);
   var_2 = "exposed";
   var_3 = self.pathgoalpos;
   var_4 = vectortoyaw(var_1);
   var_5 = var_4;
-  var_6 = _id_117C();
+  var_6 = getapproachent();
 
   if(isDefined(var_6)) {
-    var_2 = _id_116E(var_6);
+    var_2 = determinenodeapproachtype(var_6);
 
     if(isDefined(var_2) && var_2 != "exposed") {
-      var_3 = _id_117D(var_6, var_2);
+      var_3 = getapproachpoint(var_6, var_2);
       var_4 = var_6.angles[1];
-      var_5 = animscripts\utility::_id_0F41(var_6);
+      var_5 = animscripts\utility::getnodeforwardyaw(var_6);
     }
-  } else if(_id_11B2()) {
-    if(animscripts\utility::_id_0CB2()) {
+  } else if(use_readystand()) {
+    if(animscripts\utility::shouldcqb()) {
       var_2 = "exposed_ready_cqb";
     } else {
       var_2 = "exposed_ready";
     }
   }
 
-  if(!_id_1180(var_2, var_1, var_6)) {
+  if(!checkapproachconditions(var_2, var_1, var_6)) {
     return;
   }
-  _id_1183(var_2, var_3, var_4, var_5, var_1);
+  startcoverapproach(var_2, var_3, var_4, var_5, var_1);
 }
 
-_id_1181(var_0, var_1, var_2, var_3, var_4) {
-  if(isDefined(self._id_117F) && self._id_117F) {
+coverapproachlastminutecheck(var_0, var_1, var_2, var_3, var_4) {
+  if(isDefined(self.disablearrivals) && self.disablearrivals) {
     return 0;
   }
   if(abs(self getmotionangle()) > 45 && isDefined(self.enemy) && vectordot(anglesToForward(self.angles), vectorNormalize(self.enemy.origin - self.origin)) > 0.8) {
     return 0;
   }
-  if(self.a._id_0D26 != "stand" || self.a._id_0D2B != "run" && !animscripts\utility::_id_10B9()) {
+  if(self.a.pose != "stand" || self.a.movement != "run" && !animscripts\utility::iscqbwalkingorfacingenemy()) {
     return 0;
   }
-  if(animscripts\utility::_id_0D61(var_4 - self.angles[1]) > 30) {
+  if(animscripts\utility::absangleclamp180(var_4 - self.angles[1]) > 30) {
     if(isDefined(self.enemy) && self cansee(self.enemy) && distancesquared(self.origin, self.enemy.origin) < 65536) {
       if(vectordot(anglesToForward(self.angles), self.enemy.origin - self.origin) > 0) {
         return 0;
@@ -370,19 +370,19 @@ _id_1181(var_0, var_1, var_2, var_3, var_4) {
     }
   }
 
-  if(!_id_11B1(var_0, var_1, var_2, var_3, 0)) {
+  if(!checkcoverenterpos(var_0, var_1, var_2, var_3, 0)) {
     return 0;
   }
   return 1;
 }
 
-_id_1182(var_0, var_1) {
+approachwaittillclose(var_0, var_1) {
   if(!isDefined(var_0)) {
     return;
   }
   for(;;) {
     if(!isDefined(self.pathgoalpos)) {
-      _id_1197();
+      waitforpathgoalpos();
     }
     var_2 = distance(self.origin, self.pathgoalpos);
 
@@ -399,98 +399,98 @@ _id_1182(var_0, var_1) {
   }
 }
 
-_id_1183(var_0, var_1, var_2, var_3, var_4) {
+startcoverapproach(var_0, var_1, var_2, var_3, var_4) {
   self endon("killanimscript");
   self endon("cover_approach");
-  var_5 = _id_117C();
-  var_6 = _id_1175(var_5);
-  var_7 = var_6._id_1176;
-  var_8 = var_6._id_1177;
+  var_5 = getapproachent();
+  var_6 = getmaxdirectionsandexcludedirfromapproachtype(var_5);
+  var_7 = var_6.maxdirections;
+  var_8 = var_6.excludedir;
   var_9 = vectordot(var_4, anglesToForward(var_5.angles)) >= 0;
-  var_6 = _id_1189(var_1, var_3, var_0, var_4, var_7, var_8, var_9);
+  var_6 = checkarrivalenterpositions(var_1, var_3, var_0, var_4, var_7, var_8, var_9);
 
-  if(var_6._id_1162 < 0) {
+  if(var_6.approachnumber < 0) {
     return;
   }
-  var_10 = var_6._id_1162;
+  var_10 = var_6.approachnumber;
 
-  if(level._id_1184 && var_10 <= 6 && var_9) {
+  if(level.newarrivals && var_10 <= 6 && var_9) {
     self endon("goal_changed");
-    self._id_10AD = anim._id_1185[var_0];
-    _id_1182(var_5, self._id_10AD);
+    self.arrivalstartdist = anim.covertranslongestdist[var_0];
+    approachwaittillclose(var_5, self.arrivalstartdist);
     var_11 = vectorNormalize(var_1 - self.origin);
-    var_6 = _id_1189(var_1, var_3, var_0, var_11, var_7, var_8, var_9);
-    self._id_10AD = length(anim._id_1186[var_0][var_10]);
-    _id_1182(var_5, self._id_10AD);
+    var_6 = checkarrivalenterpositions(var_1, var_3, var_0, var_11, var_7, var_8, var_9);
+    self.arrivalstartdist = length(anim.covertransdist[var_0][var_10]);
+    approachwaittillclose(var_5, self.arrivalstartdist);
 
     if(!self maymovetopoint(var_1)) {
-      self._id_10AD = undefined;
+      self.arrivalstartdist = undefined;
       return;
     }
 
-    if(var_6._id_1162 < 0) {
-      self._id_10AD = undefined;
+    if(var_6.approachnumber < 0) {
+      self.arrivalstartdist = undefined;
       return;
     }
 
-    var_10 = var_6._id_1162;
-    var_12 = var_3 - anim._id_1187[var_0][var_10];
+    var_10 = var_6.approachnumber;
+    var_12 = var_3 - anim.covertransangles[var_0][var_10];
   } else {
-    self setruntopos(self._id_1188);
+    self setruntopos(self.coverenterpos);
     self waittill("runto_arrived");
-    var_12 = var_3 - anim._id_1187[var_0][var_10];
+    var_12 = var_3 - anim.covertransangles[var_0][var_10];
 
-    if(!_id_1181(var_1, var_3, var_0, var_10, var_12)) {
+    if(!coverapproachlastminutecheck(var_1, var_3, var_0, var_10, var_12)) {
       return;
     }
   }
 
-  self._id_1162 = var_10;
-  self._id_1163 = var_0;
-  self._id_10AD = undefined;
-  self startcoverarrival(self._id_1188, var_12);
+  self.approachnumber = var_10;
+  self.approachtype = var_0;
+  self.arrivalstartdist = undefined;
+  self startcoverarrival(self.coverenterpos, var_12);
 }
 
-_id_1189(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+checkarrivalenterpositions(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = spawnStruct();
-  _id_11A8(var_7, var_2, 1, var_1, var_3, var_4, var_5);
-  _id_11AA(var_7, var_4);
+  calculatenodetransitionangles(var_7, var_2, 1, var_1, var_3, var_4, var_5);
+  sortnodetransitionangles(var_7, var_4);
   var_8 = spawnStruct();
   var_9 = (0, 0, 0);
-  var_8._id_1162 = -1;
+  var_8.approachnumber = -1;
   var_10 = 2;
 
   for(var_11 = 1; var_11 <= var_10; var_11++) {
-    var_8._id_1162 = var_7._id_118A[var_11];
+    var_8.approachnumber = var_7.transindex[var_11];
 
-    if(!_id_11B1(var_0, var_1, var_2, var_8._id_1162, var_6)) {
+    if(!checkcoverenterpos(var_0, var_1, var_2, var_8.approachnumber, var_6)) {
       continue;
     }
     break;
   }
 
   if(var_11 > var_10) {
-    var_8._id_1162 = -1;
+    var_8.approachnumber = -1;
     return var_8;
   }
 
   var_12 = distancesquared(var_0, self.origin);
-  var_13 = distancesquared(var_0, self._id_1188);
+  var_13 = distancesquared(var_0, self.coverenterpos);
 
   if(var_12 < var_13 * 2 * 2) {
     if(var_12 < var_13) {
-      var_8._id_1162 = -1;
+      var_8.approachnumber = -1;
       return var_8;
     }
 
-    if(!level._id_1184 || !var_6) {
-      var_14 = vectorNormalize(self._id_1188 - self.origin);
-      var_15 = var_1 - anim._id_1187[var_2][var_8._id_1162];
+    if(!level.newarrivals || !var_6) {
+      var_14 = vectorNormalize(self.coverenterpos - self.origin);
+      var_15 = var_1 - anim.covertransangles[var_2][var_8.approachnumber];
       var_16 = anglesToForward((0, var_15, 0));
       var_17 = vectordot(var_14, var_16);
 
       if(var_17 < 0.707) {
-        var_8._id_1162 = -1;
+        var_8.approachnumber = -1;
         return var_8;
       }
     }
@@ -499,20 +499,20 @@ _id_1189(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   return var_8;
 }
 
-_id_118B() {
+dolastminuteexposedapproachwrapper() {
   self endon("killanimscript");
   self endon("move_interrupt");
   self notify("doing_last_minute_exposed_approach");
   self endon("doing_last_minute_exposed_approach");
-  thread _id_118C();
+  thread watchgoalchanged();
 
   for(;;) {
-    _id_1192();
+    dolastminuteexposedapproach();
 
     for(;;) {
       common_scripts\utility::waittill_any("goal_changed", "goal_changed_previous_frame");
 
-      if(isDefined(self._id_1188) && isDefined(self.pathgoalpos) && distance2d(self._id_1188, self.pathgoalpos) < 1) {
+      if(isDefined(self.coverenterpos) && isDefined(self.pathgoalpos) && distance2d(self.coverenterpos, self.pathgoalpos) < 1) {
         continue;
       }
       break;
@@ -520,7 +520,7 @@ _id_118B() {
   }
 }
 
-_id_118C() {
+watchgoalchanged() {
   self endon("killanimscript");
   self endon("doing_last_minute_exposed_approach");
 
@@ -531,27 +531,27 @@ _id_118C() {
   }
 }
 
-_id_118D(var_0, var_1) {
+exposedapproachconditioncheck(var_0, var_1) {
   if(!isDefined(self.pathgoalpos)) {
     return 0;
   }
-  if(isDefined(self._id_117F) && self._id_117F) {
+  if(isDefined(self.disablearrivals) && self.disablearrivals) {
     return 0;
   }
-  if(isDefined(self._id_118E)) {
-    if(!self[[self._id_118E]](var_0)) {
+  if(isDefined(self.approachconditioncheckfunc)) {
+    if(!self[[self.approachconditioncheckfunc]](var_0)) {
       return 0;
     }
   } else {
     if(!self.facemotion && (!isDefined(var_0) || var_0.type == "Path")) {
       return 0;
     }
-    if(self.a._id_0D26 != "stand") {
+    if(self.a.pose != "stand") {
       return 0;
     }
   }
 
-  if(_id_1169() || isDefined(self._id_1167) && self._id_1167 + 500 > gettime()) {
+  if(isthreatenedbyenemy() || isDefined(self.lastapproachaborttime) && self.lastapproachaborttime + 500 > gettime()) {
     return 0;
   }
   if(!self maymovetopoint(self.pathgoalpos)) {
@@ -560,26 +560,26 @@ _id_118D(var_0, var_1) {
   return 1;
 }
 
-_id_118F() {
+exposedapproachwaittillclose() {
   for(;;) {
     if(!isDefined(self.pathgoalpos)) {
-      _id_1197();
+      waitforpathgoalpos();
     }
-    var_0 = _id_117C();
+    var_0 = getapproachent();
 
-    if(isDefined(var_0) && !isDefined(self._id_0C96)) {
+    if(isDefined(var_0) && !isDefined(self.heat)) {
       var_1 = var_0.origin;
     } else {
       var_1 = self.pathgoalpos;
     }
     var_2 = distance(self.origin, var_1);
-    var_3 = anim._id_1190;
+    var_3 = anim.longestexposedapproachdist;
 
     if(var_2 <= var_3 + 8) {
       break;
     }
 
-    var_4 = (var_2 - anim._id_1190) / 250 - 0.1;
+    var_4 = (var_2 - anim.longestexposedapproachdist) / 250 - 0.1;
 
     if(var_4 < 0) {
       break;
@@ -592,11 +592,11 @@ _id_118F() {
   }
 }
 
-_id_1191(var_0) {
+faceenemyatendofapproach(var_0) {
   if(!isDefined(self.enemy)) {
     return 0;
   }
-  if(isDefined(self._id_0C96) && isDefined(var_0)) {
+  if(isDefined(self.heat) && isDefined(var_0)) {
     return 0;
   }
   if(self.combatmode == "cover" && issentient(self.enemy) && gettime() - self lastknowntime(self.enemy) > 15000) {
@@ -605,14 +605,14 @@ _id_1191(var_0) {
   return sighttracepassed(self.enemy getshootatpos(), self.pathgoalpos + (0, 0, 60), 0, undefined);
 }
 
-_id_1192() {
+dolastminuteexposedapproach() {
   self endon("goal_changed");
   self endon("move_interrupt");
 
   if(isDefined(self getnegotiationstartnode())) {
     return;
   }
-  _id_118F();
+  exposedapproachwaittillclose();
 
   if(isDefined(self.grenade) && isDefined(self.grenade.activator) && self.grenade.activator == self) {
     return;
@@ -620,44 +620,44 @@ _id_1192() {
   var_0 = "exposed";
   var_1 = 1;
 
-  if(isDefined(self._id_1193)) {
-    var_0 = self[[self._id_1193]]();
-  } else if(_id_11B2()) {
-    if(animscripts\utility::_id_0CB2()) {
+  if(isDefined(self.approachtypefunc)) {
+    var_0 = self[[self.approachtypefunc]]();
+  } else if(use_readystand()) {
+    if(animscripts\utility::shouldcqb()) {
       var_0 = "exposed_ready_cqb";
     } else {
       var_0 = "exposed_ready";
     }
-  } else if(animscripts\utility::_id_0CB2()) {
+  } else if(animscripts\utility::shouldcqb()) {
     var_0 = "exposed_cqb";
-  } else if(isDefined(self._id_0C96)) {
+  } else if(isDefined(self.heat)) {
     var_0 = "heat";
     var_1 = 4096;
   }
 
-  var_2 = _id_117C();
+  var_2 = getapproachent();
 
-  if(isDefined(var_2) && isDefined(self.pathgoalpos) && !isDefined(self._id_1194)) {
+  if(isDefined(var_2) && isDefined(self.pathgoalpos) && !isDefined(self.disablecoverarrivalsonly)) {
     var_3 = distancesquared(self.pathgoalpos, var_2.origin) < var_1;
   } else {
     var_3 = 0;
   }
   if(var_3) {
-    var_0 = _id_1174(var_2);
+    var_0 = determineexposedapproachtype(var_2);
   }
   var_4 = vectorNormalize(self.pathgoalpos - self.origin);
   var_5 = vectortoyaw(var_4);
 
-  if(isDefined(self._id_1195)) {
+  if(isDefined(self.faceenemyarrival)) {
     var_5 = self.angles[1];
-  } else if(_id_1191(var_2)) {
+  } else if(faceenemyatendofapproach(var_2)) {
     var_5 = vectortoyaw(self.enemy.origin - self.pathgoalpos);
   } else {
     var_6 = isDefined(var_2) && var_3;
-    var_6 = var_6 && var_2.type != "Path" && (var_2.type != "Ambush" || !animscripts\utility::_id_0CBC());
+    var_6 = var_6 && var_2.type != "Path" && (var_2.type != "Ambush" || !animscripts\utility::recentlysawenemy());
 
     if(var_6) {
-      var_5 = animscripts\utility::_id_0F41(var_2);
+      var_5 = animscripts\utility::getnodeforwardyaw(var_2);
     } else {
       var_7 = self getanglestolikelyenemypath();
 
@@ -668,29 +668,29 @@ _id_1192() {
   }
 
   var_8 = spawnStruct();
-  _id_11A8(var_8, var_0, 1, var_5, var_4, 9, -1);
+  calculatenodetransitionangles(var_8, var_0, 1, var_5, var_4, 9, -1);
   var_9 = 1;
 
   for(var_10 = 2; var_10 <= 9; var_10++) {
-    if(var_8._id_1196[var_10] > var_8._id_1196[var_9]) {
+    if(var_8.transitions[var_10] > var_8.transitions[var_9]) {
       var_9 = var_10;
     }
   }
 
-  self._id_1162 = var_8._id_118A[var_9];
-  self._id_1163 = var_0;
-  var_11 = anim._id_1164[var_0][self._id_1162];
-  var_12 = length(anim._id_1186[var_0][self._id_1162]);
+  self.approachnumber = var_8.transindex[var_9];
+  self.approachtype = var_0;
+  var_11 = anim.covertrans[var_0][self.approachnumber];
+  var_12 = length(anim.covertransdist[var_0][self.approachnumber]);
   var_13 = var_12 + 8;
   var_13 = var_13 * var_13;
 
   while(isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) > var_13) {
     wait 0.05;
   }
-  if(isDefined(self._id_10AD) && self._id_10AD < var_12 + 8) {
+  if(isDefined(self.arrivalstartdist) && self.arrivalstartdist < var_12 + 8) {
     return;
   }
-  if(!_id_118D(var_2, var_3)) {
+  if(!exposedapproachconditioncheck(var_2, var_3)) {
     return;
   }
   var_14 = distance(self.origin, self.pathgoalpos);
@@ -700,17 +700,17 @@ _id_1192() {
   }
   var_15 = vectortoyaw(self.pathgoalpos - self.origin);
 
-  if(isDefined(self._id_0C96) && var_3) {
-    var_16 = var_5 - anim._id_1187[var_0][self._id_1162];
-    var_17 = _id_11AE(self.pathgoalpos, var_5, var_0, self._id_1162);
+  if(isDefined(self.heat) && var_3) {
+    var_16 = var_5 - anim.covertransangles[var_0][self.approachnumber];
+    var_17 = getarrivalstartpos(self.pathgoalpos, var_5, var_0, self.approachnumber);
   } else if(var_12 > 0) {
-    var_18 = anim._id_1186[var_0][self._id_1162];
+    var_18 = anim.covertransdist[var_0][self.approachnumber];
     var_19 = atan(var_18[1] / var_18[0]);
 
-    if(!isDefined(self._id_1195) || self.facemotion) {
+    if(!isDefined(self.faceenemyarrival) || self.facemotion) {
       var_16 = var_15 - var_19;
 
-      if(animscripts\utility::_id_0D61(var_16 - self.angles[1]) > 30) {
+      if(animscripts\utility::absangleclamp180(var_16 - self.angles[1]) > 30) {
         return;
       }
     } else {
@@ -726,7 +726,7 @@ _id_1192() {
   self startcoverarrival(var_17, var_16);
 }
 
-_id_1197() {
+waitforpathgoalpos() {
   for(;;) {
     if(isDefined(self.pathgoalpos)) {
       return;
@@ -735,23 +735,23 @@ _id_1197() {
   }
 }
 
-_id_1198() {
+startmovetransitionpreconditions() {
   if(!isDefined(self.pathgoalpos)) {
     return 0;
   }
   if(!self shouldfacemotion()) {
     return 0;
   }
-  if(self.a._id_0D26 == "prone") {
+  if(self.a.pose == "prone") {
     return 0;
   }
-  if(isDefined(self._id_1199) && self._id_1199) {
+  if(isDefined(self.disableexits) && self.disableexits) {
     return 0;
   }
   if(self.stairsstate != "none") {
     return 0;
   }
-  if(!self isstanceallowed("stand") && !isDefined(self._id_0C96)) {
+  if(!self isstanceallowed("stand") && !isDefined(self.heat)) {
     return 0;
   }
   if(distancesquared(self.origin, self.pathgoalpos) < 10000) {
@@ -760,21 +760,21 @@ _id_1198() {
   return 1;
 }
 
-_id_119A(var_0, var_1) {
+startmovetransitionconditions(var_0, var_1) {
   if(!isDefined(var_0)) {
     return 0;
   }
-  if(var_0 == "exposed" || isDefined(self._id_0C96)) {
-    if(self.a._id_0D26 != "stand" && self.a._id_0D26 != "crouch") {
+  if(var_0 == "exposed" || isDefined(self.heat)) {
+    if(self.a.pose != "stand" && self.a.pose != "crouch") {
       return 0;
     }
-    if(self.a._id_0D2B != "stop") {
+    if(self.a.movement != "stop") {
       return 0;
     }
   }
 
-  if(!isDefined(self._id_0C96) && isDefined(self.enemy) && vectordot(self.lookaheaddir, self.enemy.origin - self.origin) < 0) {
-    if(animscripts\utility::_id_0F4A() && distancesquared(self.origin, self.enemy.origin) < 90000) {
+  if(!isDefined(self.heat) && isDefined(self.enemy) && vectordot(self.lookaheaddir, self.enemy.origin - self.origin) < 0) {
+    if(animscripts\utility::canseeenemyfromexposed() && distancesquared(self.origin, self.enemy.origin) < 90000) {
       return 0;
     }
   }
@@ -782,10 +782,10 @@ _id_119A(var_0, var_1) {
   return 1;
 }
 
-_id_119B() {
+getexitnode() {
   var_0 = undefined;
 
-  if(!isDefined(self._id_0C96)) {
+  if(!isDefined(self.heat)) {
     var_1 = 400;
   } else {
     var_1 = 4096;
@@ -795,47 +795,47 @@ _id_119B() {
   } else if(isDefined(self.prevnode) && distancesquared(self.origin, self.prevnode.origin) < var_1) {
     var_0 = self.prevnode;
   }
-  if(isDefined(var_0) && isDefined(self._id_0C96) && animscripts\utility::_id_0D61(self.angles[1] - var_0.angles[1]) > 30) {
+  if(isDefined(var_0) && isDefined(self.heat) && animscripts\utility::absangleclamp180(self.angles[1] - var_0.angles[1]) > 30) {
     return undefined;
   }
   return var_0;
 }
 
-_id_119C() {
-  if(!isDefined(self._id_119D)) {
+custommovetransitionfunc() {
+  if(!isDefined(self.startmovetransitionanim)) {
     return;
   }
   self animmode("zonly_physics", 0);
   self orientmode("face current");
-  self setflaggedanimknoballrestart("move", self._id_119D, %root, 1);
+  self setflaggedanimknoballrestart("move", self.startmovetransitionanim, %root, 1);
 
-  if(animhasnotetrack(self._id_119D, "code_move")) {
-    animscripts\shared::_id_0C51("move");
+  if(animhasnotetrack(self.startmovetransitionanim, "code_move")) {
+    animscripts\shared::donotetracks("move");
     self orientmode("face motion");
     self animmode("none", 0);
   }
 
-  animscripts\shared::_id_0C51("move");
+  animscripts\shared::donotetracks("move");
 }
 
-_id_119E(var_0) {
-  if(self.a._id_0D26 == "stand") {
+determinenonnodeexittype(var_0) {
+  if(self.a.pose == "stand") {
     var_0 = "exposed";
   } else {
     var_0 = "exposed_crouch";
   }
-  if(_id_11B2()) {
+  if(use_readystand()) {
     var_0 = "exposed_ready";
   }
-  if(animscripts\utility::_id_0CB2()) {
+  if(animscripts\utility::shouldcqb()) {
     var_0 = var_0 + "_cqb";
-  } else if(isDefined(self._id_0C96)) {
+  } else if(isDefined(self.heat)) {
     var_0 = "heat";
   }
   return var_0;
 }
 
-_id_119F(var_0, var_1) {
+determineheatcoverexittype(var_0, var_1) {
   if(var_0.type == "Cover Right") {
     var_1 = "heat_right";
   } else if(var_0.type == "Cover Left") {
@@ -844,17 +844,17 @@ _id_119F(var_0, var_1) {
   return var_1;
 }
 
-_id_10A6() {
-  if(isDefined(self._id_11A0)) {
-    var_0 = self._id_11A0;
+startmovetransition() {
+  if(isDefined(self.custommovetransition)) {
+    var_0 = self.custommovetransition;
 
-    if(!isDefined(self._id_11A1)) {
-      self._id_11A0 = undefined;
+    if(!isDefined(self.permanentcustommovetransition)) {
+      self.custommovetransition = undefined;
     }
     [[var_0]]();
 
-    if(!isDefined(self._id_11A1)) {
-      self._id_119D = undefined;
+    if(!isDefined(self.permanentcustommovetransition)) {
+      self.startmovetransitionanim = undefined;
     }
     self clearanim(%root, 0.2);
     self orientmode("face default");
@@ -864,53 +864,53 @@ _id_10A6() {
 
   self endon("killanimscript");
 
-  if(!_id_1198()) {
+  if(!startmovetransitionpreconditions()) {
     return;
   }
   var_1 = self.origin;
   var_2 = self.angles[1];
   var_3 = "exposed";
   var_4 = 0;
-  var_5 = _id_119B();
+  var_5 = getexitnode();
 
   if(isDefined(var_5)) {
-    var_6 = _id_1171(var_5);
+    var_6 = determinenodeexittype(var_5);
 
     if(isDefined(var_6)) {
       var_3 = var_6;
       var_4 = 1;
 
-      if(isDefined(self._id_0C96)) {
-        var_3 = _id_119F(var_5, var_3);
+      if(isDefined(self.heat)) {
+        var_3 = determineheatcoverexittype(var_5, var_3);
       }
-      if(!isDefined(anim._id_1179[var_3]) && var_3 != "stand_saw" && var_3 != "crouch_saw") {
-        var_7 = animscripts\utility::_id_0D61(self.angles[1] - animscripts\utility::_id_0F41(var_5));
+      if(!isDefined(anim.exposedtransition[var_3]) && var_3 != "stand_saw" && var_3 != "crouch_saw") {
+        var_7 = animscripts\utility::absangleclamp180(self.angles[1] - animscripts\utility::getnodeforwardyaw(var_5));
 
         if(var_7 < 5) {
-          if(!isDefined(self._id_0C96)) {
+          if(!isDefined(self.heat)) {
             var_1 = var_5.origin;
           }
-          var_2 = animscripts\utility::_id_0F41(var_5);
+          var_2 = animscripts\utility::getnodeforwardyaw(var_5);
         }
       }
     }
   }
 
-  if(!_id_119A(var_3, var_5)) {
+  if(!startmovetransitionconditions(var_3, var_5)) {
     return;
   }
-  var_8 = isDefined(anim._id_1179[var_3]);
+  var_8 = isDefined(anim.exposedtransition[var_3]);
 
   if(!var_4) {
-    var_3 = _id_119E();
+    var_3 = determinenonnodeexittype();
   }
   var_9 = (-1 * self.lookaheaddir[0], -1 * self.lookaheaddir[1], 0);
-  var_10 = _id_1175(var_5);
-  var_11 = var_10._id_1176;
-  var_12 = var_10._id_1177;
+  var_10 = getmaxdirectionsandexcludedirfromapproachtype(var_5);
+  var_11 = var_10.maxdirections;
+  var_12 = var_10.excludedir;
   var_13 = spawnStruct();
-  _id_11A8(var_13, var_3, 0, var_2, var_9, var_11, var_12);
-  _id_11AA(var_13, var_11);
+  calculatenodetransitionangles(var_13, var_3, 0, var_2, var_9, var_11, var_12);
+  sortnodetransitionangles(var_13, var_11);
   var_14 = -1;
   var_15 = 3;
 
@@ -918,9 +918,9 @@ _id_10A6() {
     var_15 = 1;
   }
   for(var_16 = 1; var_16 <= var_15; var_16++) {
-    var_14 = var_13._id_118A[var_16];
+    var_14 = var_13.transindex[var_16];
 
-    if(_id_11AB(var_1, var_2, var_3, var_8, var_14)) {
+    if(checkcoverexitpos(var_1, var_2, var_3, var_8, var_14)) {
       break;
     }
   }
@@ -928,56 +928,56 @@ _id_10A6() {
   if(var_16 > var_15) {
     return;
   }
-  var_17 = distancesquared(self.origin, self._id_11A2) * 1.25 * 1.25;
+  var_17 = distancesquared(self.origin, self.coverexitpos) * 1.25 * 1.25;
 
   if(distancesquared(self.origin, self.pathgoalpos) < var_17) {
     return;
   }
-  _id_11A4(var_3, var_14);
+  docoverexitanimation(var_3, var_14);
 }
 
-_id_11A3(var_0) {
+str(var_0) {
   if(!isDefined(var_0)) {
     return "{undefined}";
   }
   return var_0;
 }
 
-_id_11A4(var_0, var_1) {
-  var_2 = anim._id_1173[var_0][var_1];
+docoverexitanimation(var_0, var_1) {
+  var_2 = anim.coverexit[var_0][var_1];
   var_3 = vectortoangles(self.lookaheaddir);
 
-  if(self.a._id_0D26 == "prone") {
+  if(self.a.pose == "prone") {
     return;
   }
   var_5 = 0.2;
   self animmode("zonly_physics", 0);
   self orientmode("face angle", self.angles[1]);
-  self setflaggedanimknoballrestart("coverexit", var_2, %body, 1, var_5, self._id_1165);
-  animscripts\shared::_id_0C51("coverexit");
-  self.a._id_0D26 = "stand";
-  self.a._id_0D2B = "run";
-  self._id_10A8 = undefined;
+  self setflaggedanimknoballrestart("coverexit", var_2, %body, 1, var_5, self.movetransitionrate);
+  animscripts\shared::donotetracks("coverexit");
+  self.a.pose = "stand";
+  self.a.movement = "run";
+  self.ignorepathchange = undefined;
   self orientmode("face motion");
   self animmode("none", 0);
-  _id_11A5("coverexit");
+  finishcoverexitnotetracks("coverexit");
   self clearanim(%root, 0.2);
   self orientmode("face default");
   self animmode("normal", 0);
 }
 
-_id_11A5(var_0) {
+finishcoverexitnotetracks(var_0) {
   self endon("move_loop_restart");
-  animscripts\shared::_id_0C51(var_0);
+  animscripts\shared::donotetracks(var_0);
 }
 
-_id_11A6(var_0, var_1, var_2, var_3) {
+drawvec(var_0, var_1, var_2, var_3) {
   for(var_4 = 0; var_4 < var_2 * 100; var_4++) {
     wait 0.05;
   }
 }
 
-_id_11A7(var_0) {
+drawapproachvec(var_0) {
   self endon("killanimscript");
 
   for(;;) {
@@ -989,62 +989,62 @@ _id_11A7(var_0) {
   }
 }
 
-_id_11A8(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  var_0._id_1196 = [];
-  var_0._id_118A = [];
+calculatenodetransitionangles(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_0.transitions = [];
+  var_0.transindex = [];
   var_7 = undefined;
   var_8 = 1;
   var_9 = 0;
 
   if(var_2) {
-    var_7 = anim._id_1187[var_1];
+    var_7 = anim.covertransangles[var_1];
     var_8 = -1;
     var_9 = 0;
   } else {
-    var_7 = anim._id_11A9[var_1];
+    var_7 = anim.coverexitangles[var_1];
     var_8 = 1;
     var_9 = 180;
   }
 
   for(var_10 = 1; var_10 <= var_5; var_10++) {
-    var_0._id_118A[var_10] = var_10;
+    var_0.transindex[var_10] = var_10;
 
     if(var_10 == 5 || var_10 == var_6 || !isDefined(var_7[var_10])) {
-      var_0._id_1196[var_10] = -1.0003;
+      var_0.transitions[var_10] = -1.0003;
       continue;
     }
 
     var_11 = (0, var_3 + var_8 * var_7[var_10] + var_9, 0);
     var_12 = vectorNormalize(anglesToForward(var_11));
-    var_0._id_1196[var_10] = vectordot(var_4, var_12);
+    var_0.transitions[var_10] = vectordot(var_4, var_12);
   }
 }
 
-_id_11AA(var_0, var_1) {
+sortnodetransitionangles(var_0, var_1) {
   for(var_2 = 2; var_2 <= var_1; var_2++) {
-    var_3 = var_0._id_1196[var_0._id_118A[var_2]];
-    var_4 = var_0._id_118A[var_2];
+    var_3 = var_0.transitions[var_0.transindex[var_2]];
+    var_4 = var_0.transindex[var_2];
 
     for(var_5 = var_2 - 1; var_5 >= 1; var_5--) {
-      if(var_3 < var_0._id_1196[var_0._id_118A[var_5]]) {
+      if(var_3 < var_0.transitions[var_0.transindex[var_5]]) {
         break;
       }
 
-      var_0._id_118A[var_5 + 1] = var_0._id_118A[var_5];
+      var_0.transindex[var_5 + 1] = var_0.transindex[var_5];
     }
 
-    var_0._id_118A[var_5 + 1] = var_4;
+    var_0.transindex[var_5 + 1] = var_4;
   }
 }
 
-_id_11AB(var_0, var_1, var_2, var_3, var_4) {
+checkcoverexitpos(var_0, var_1, var_2, var_3, var_4) {
   var_5 = (0, var_1, 0);
   var_6 = anglesToForward(var_5);
   var_7 = anglestoright(var_5);
-  var_8 = var_6 * anim._id_11AC[var_2][var_4][0];
-  var_9 = var_7 * anim._id_11AC[var_2][var_4][1];
+  var_8 = var_6 * anim.coverexitdist[var_2][var_4][0];
+  var_9 = var_7 * anim.coverexitdist[var_2][var_4][1];
   var_10 = var_0 + var_8 - var_9;
-  self._id_11A2 = var_10;
+  self.coverexitpos = var_10;
 
   if(!var_3 && !self checkcoverexitposwithpath(var_10)) {
     return 0;
@@ -1055,71 +1055,71 @@ _id_11AB(var_0, var_1, var_2, var_3, var_4) {
   if(var_4 <= 6 || var_3) {
     return 1;
   }
-  var_8 = var_6 * anim._id_11AD[var_2][var_4][0];
-  var_9 = var_7 * anim._id_11AD[var_2][var_4][1];
+  var_8 = var_6 * anim.coverexitpostdist[var_2][var_4][0];
+  var_9 = var_7 * anim.coverexitpostdist[var_2][var_4][1];
   var_11 = var_10 + var_8 - var_9;
-  self._id_11A2 = var_11;
+  self.coverexitpos = var_11;
   return self maymovefrompointtopoint(var_10, var_11);
 }
 
-_id_11AE(var_0, var_1, var_2, var_3) {
-  var_4 = (0, var_1 - anim._id_1187[var_2][var_3], 0);
+getarrivalstartpos(var_0, var_1, var_2, var_3) {
+  var_4 = (0, var_1 - anim.covertransangles[var_2][var_3], 0);
   var_5 = anglesToForward(var_4);
   var_6 = anglestoright(var_4);
-  var_7 = var_5 * anim._id_1186[var_2][var_3][0];
-  var_8 = var_6 * anim._id_1186[var_2][var_3][1];
+  var_7 = var_5 * anim.covertransdist[var_2][var_3][0];
+  var_8 = var_6 * anim.covertransdist[var_2][var_3][1];
   return var_0 - var_7 + var_8;
 }
 
-_id_11AF(var_0, var_1, var_2, var_3) {
-  var_4 = (0, var_1 - anim._id_1187[var_2][var_3], 0);
+getarrivalprestartpos(var_0, var_1, var_2, var_3) {
+  var_4 = (0, var_1 - anim.covertransangles[var_2][var_3], 0);
   var_5 = anglesToForward(var_4);
   var_6 = anglestoright(var_4);
-  var_7 = var_5 * anim._id_11B0[var_2][var_3][0];
-  var_8 = var_6 * anim._id_11B0[var_2][var_3][1];
+  var_7 = var_5 * anim.covertranspredist[var_2][var_3][0];
+  var_8 = var_6 * anim.covertranspredist[var_2][var_3][1];
   return var_0 - var_7 + var_8;
 }
 
-_id_11B1(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = _id_11AE(var_0, var_1, var_2, var_3);
-  self._id_1188 = var_5;
+checkcoverenterpos(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = getarrivalstartpos(var_0, var_1, var_2, var_3);
+  self.coverenterpos = var_5;
 
-  if(level._id_1184 && var_3 <= 6 && var_4) {
+  if(level.newarrivals && var_3 <= 6 && var_4) {
     return 1;
   }
   if(!self maymovefrompointtopoint(var_5, var_0)) {
     return 0;
   }
-  if(var_3 <= 6 || isDefined(anim._id_1179[var_2])) {
+  if(var_3 <= 6 || isDefined(anim.exposedtransition[var_2])) {
     return 1;
   }
-  var_6 = _id_11AF(var_5, var_1, var_2, var_3);
-  self._id_1188 = var_6;
+  var_6 = getarrivalprestartpos(var_5, var_1, var_2, var_3);
+  self.coverenterpos = var_6;
   return self maymovefrompointtopoint(var_6, var_5);
 }
 
-_id_11B2() {
-  if(!isDefined(anim._id_11B3)) {
+use_readystand() {
+  if(!isDefined(anim.readystand_anims_inited)) {
     return 0;
   }
-  if(!anim._id_11B3) {
+  if(!anim.readystand_anims_inited) {
     return 0;
   }
-  if(!isDefined(self._id_10FD)) {
+  if(!isDefined(self.busereadyidle)) {
     return 0;
   }
-  if(!self._id_10FD) {
+  if(!self.busereadyidle) {
     return 0;
   }
   return 1;
 }
 
-_id_11B4() {
+debug_arrivals_on_actor() {
   return 0;
 }
 
-_id_11B5(var_0) {
-  if(!_id_11B4()) {
+debug_arrival(var_0) {
+  if(!debug_arrivals_on_actor()) {
     return;
   }
 }

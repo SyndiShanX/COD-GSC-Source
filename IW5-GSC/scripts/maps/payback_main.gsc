@@ -10,8 +10,8 @@ main() {
   _id_6847();
   _id_6848();
   maps\payback_anim::_id_683B();
-  maps\_utility::add_hint_string("Payback_Dont_Abandon_Mission", &"PAYBACK_DONT_ABANDON_MISSION", maps\payback_1_script_a::_id_6807);
-  maps\_utility::add_hint_string("chopper_zoom_hint", &"REMOTE_CHOPPER_GUNNER_ZOOM_HINT", maps\payback_1_script_d::_id_65EC);
+  maps\_utility::add_hint_string("Payback_Dont_Abandon_Mission", &"PAYBACK_DONT_ABANDON_MISSION", maps\payback_1_script_a::hasplayerreturnedtocompound);
+  maps\_utility::add_hint_string("chopper_zoom_hint", &"REMOTE_CHOPPER_GUNNER_ZOOM_HINT", maps\payback_1_script_d::should_break_available);
   level.cosine = [];
   level.cosine["5"] = cos(5);
   level.cosine["10"] = cos(10);
@@ -24,20 +24,20 @@ main() {
   level.cosine["45"] = cos(45);
   level.cosine["55"] = cos(55);
   maps\_utility::define_loadout("payback");
-  maps\_utility::_id_2821("payback");
+  maps\_utility::define_introscreen("payback");
   maps\_drone_ai::init();
   maps\_breach::main();
   _id_6843::main();
   maps\_load::main();
-  _id_6526::main("tag_flash");
-  maps\payback_sandstorm_code::_id_5C02();
+  maps/_flare::main("tag_flash");
+  maps\payback_sandstorm_code::sandstorm_skybox_hide();
   level._id_6844 = 1;
-  maps\_load::_id_1F5C("viewhands_player_yuri");
+  maps\_load::set_player_viewhand_model("viewhands_player_yuri");
   common_scripts\utility::flag_set("payback_stealth_ready");
   maps\payback_anim::main();
 
   if(!isDefined(level._id_6845)) {
-    _id_663D::_id_4CBC();
+    _id_663D::slowmo_breach_init();
   }
   common_scripts\utility::trigger_off("breach_save_trig_1", "targetname");
   common_scripts\utility::trigger_off("breach_save_trig_2", "targetname");
@@ -57,28 +57,28 @@ main() {
   var_7 setlightintensity(0);
   var_8 = getEnt("street_light_gate", "targetname");
   var_8 setlightintensity(0);
-  maps\payback_util::_id_64AB();
+  maps\payback_util::setup_spawn_funcs();
   maps\_utility::vision_set_fog_changes("payback", 0);
   var_9 = getEnt("price", "script_noteworthy");
-  var_9 maps\_utility::add_spawn_function(::_id_5296);
+  var_9 maps\_utility::add_spawn_function(::setup_price);
   var_10 = getEnt("soap", "script_noteworthy");
-  var_10 maps\_utility::add_spawn_function(::_id_684A);
+  var_10 maps\_utility::add_spawn_function(::setup_soap);
   var_11 = getEnt("nikolai", "script_noteworthy");
-  var_11 maps\_utility::add_spawn_function(::_id_684C);
+  var_11 maps\_utility::add_spawn_function(::setup_nikolai);
   var_12 = getEnt("hannibal", "script_noteworthy");
   var_12 maps\_utility::add_spawn_function(::_id_684E);
   var_13 = getEnt("barracus", "script_noteworthy");
   var_13 maps\_utility::add_spawn_function(::_id_684F);
   var_14 = getEnt("murdock", "script_noteworthy");
   var_14 maps\_utility::add_spawn_function(::_id_6850);
-  level._id_139C = ::_id_6849;
+  level.friendly_startup_thread = ::assign_friendlies;
   _id_6846();
   var_15 = getEntArray("tv_trigger", "targetname");
 
   foreach(var_17 in var_15) {}
-  var_17 thread maps\payback_util::_id_64F7(var_17.script_noteworthy, var_17._id_164F);
+  var_17 thread maps\payback_util::tv_trigger_wait_enter(var_17.script_noteworthy, var_17.script_parameters);
 
-  thread maps\payback_env_code::_id_6764();
+  thread maps\payback_env_code::pip_test_init();
   var_19 = getEntArray("construction_roof_blocker_volume", "targetname");
   var_19[var_19.size] = getEnt("construction_roof_blocker_volume_during_anim", "targetname");
 
@@ -96,20 +96,20 @@ main() {
 }
 
 _id_6846() {
-  objective_add(maps\_utility::_id_2816("obj_kruger"), "invisible", &"PAYBACK_OBJ_KRUGER");
-  objective_add(maps\_utility::_id_2816("obj_primary_lz"), "invisible", &"PAYBACK_OBJ_PRIMARY_LZ");
-  objective_add(maps\_utility::_id_2816("obj_secondary_lz"), "invisible", &"PAYBACK_OBJ_SECONDARY_LZ");
-  objective_add(maps\_utility::_id_2816("obj_find_chopper"), "invisible", &"PAYBACK_OBJ_FIND_CHOPPER");
-  objective_add(maps\_utility::_id_2816("obj_rescue"), "invisible", &"PAYBACK_OBJ_RESCUE");
+  objective_add(maps\_utility::obj("obj_kruger"), "invisible", &"PAYBACK_OBJ_KRUGER");
+  objective_add(maps\_utility::obj("obj_primary_lz"), "invisible", &"PAYBACK_OBJ_PRIMARY_LZ");
+  objective_add(maps\_utility::obj("obj_secondary_lz"), "invisible", &"PAYBACK_OBJ_SECONDARY_LZ");
+  objective_add(maps\_utility::obj("obj_find_chopper"), "invisible", &"PAYBACK_OBJ_FIND_CHOPPER");
+  objective_add(maps\_utility::obj("obj_rescue"), "invisible", &"PAYBACK_OBJ_RESCUE");
 }
 
 _id_6847() {
   common_scripts\utility::flag_init("payback_stealth_ready");
   maps\payback_compound::_id_6842();
-  maps\payback_1_script_e::_id_663B();
-  maps\payback_streets_const::_id_66FC();
-  maps\payback_streets::_id_6698();
-  maps\payback_rescue::_id_650B();
+  maps\payback_1_script_e::kruger_interrogation_init();
+  maps\payback_streets_const::init_construction_flags();
+  maps\payback_streets::init_flags_streets();
+  maps\payback_rescue::init_flags_rescue();
 }
 
 _id_6848() {
@@ -226,30 +226,30 @@ _id_6848() {
     precachemodel("fullbody_soap_africa_assault_a_sandstorm");
   }
 
-  maps\_treadfx::_id_28F1("script_vehicle_payback_hind", "treadfx/Heli_sand_pb");
+  maps\_treadfx::setallvehiclefx("script_vehicle_payback_hind", "treadfx/Heli_sand_pb");
 }
 
-_id_6849() {
+assign_friendlies() {
   self endon("death");
 
   if(isDefined(self.script_noteworthy)) {
     switch (self.script_noteworthy) {
       case "hannibal":
-        if(!isDefined(level._id_6493) && !isalive(level._id_6493)) {
+        if(!isDefined(level.hannibal) && !isalive(level.hannibal)) {
           _id_684E();
           return;
         }
 
         break;
       case "murdock":
-        if(!isDefined(level._id_6491) && !isalive(level._id_6491)) {
+        if(!isDefined(level.murdock) && !isalive(level.murdock)) {
           _id_6850();
           return;
         }
 
         break;
       case "barracus":
-        if(!isDefined(level._id_6492) && !isalive(level._id_6492)) {
+        if(!isDefined(level.barracus) && !isalive(level.barracus)) {
           _id_684F();
           return;
         }
@@ -259,23 +259,23 @@ _id_6849() {
   }
 
   for(;;) {
-    if(!isDefined(level._id_6493) && !isalive(level._id_6493)) {
-      level._id_6493 = self;
+    if(!isDefined(level.hannibal) && !isalive(level.hannibal)) {
+      level.hannibal = self;
       self.script_noteworthy = "hannibal";
-      self._id_1032 = "hannibal";
-      _id_6851();
+      self.animname = "hannibal";
+      turretdoshootanims();
       level notify("hannibal_spawned");
       return;
-    } else if(!isDefined(level._id_6491) && !isalive(level._id_6491)) {
-      level._id_6491 = self;
+    } else if(!isDefined(level.murdock) && !isalive(level.murdock)) {
+      level.murdock = self;
       self.script_noteworthy = "murdock";
-      _id_6851();
+      turretdoshootanims();
       level notify("murdock_spawned");
       return;
-    } else if(!isDefined(level._id_6492) && !isalive(level._id_6492)) {
-      level._id_6492 = self;
+    } else if(!isDefined(level.barracus) && !isalive(level.barracus)) {
+      level.barracus = self;
       self.script_noteworthy = "barracus";
-      _id_6851();
+      turretdoshootanims();
       level notify("barracus_spawned");
       return;
     }
@@ -288,43 +288,43 @@ _id_6849() {
   }
 }
 
-_id_5296() {
-  level._id_4877 = self;
-  level._id_4877 maps\_utility::_id_0D04();
-  level._id_4877._id_1032 = "price";
-  level._id_4877 thread maps\_utility::_id_26C7();
-  level._id_4877.voice = "taskforce";
-  level._id_4877._id_0AB4 = "TF";
-  level._id_4877 _id_6852();
-  level._id_4877._id_20AF = 0.5;
+setup_price() {
+  level.price = self;
+  level.price maps\_utility::magic_bullet_shield();
+  level.price.animname = "price";
+  level.price thread maps\_utility::make_hero();
+  level.price.voice = "taskforce";
+  level.price.countryid = "TF";
+  level.price turretdoaimanims();
+  level.price.baseaccuracy = 0.5;
 }
 
-_id_684A() {
-  level._id_54E0 = self;
-  level._id_54E0 maps\_utility::_id_0D04();
-  level._id_54E0._id_1032 = "soap";
-  level._id_54E0._id_0D0D = 1;
-  level._id_54E0.voice = "taskforce";
-  level._id_54E0._id_0AB4 = "TF";
-  level._id_54E0 _id_6852();
-  level._id_54E0._id_20AF = 0.5;
+setup_soap() {
+  level.soap = self;
+  level.soap maps\_utility::magic_bullet_shield();
+  level.soap.animname = "soap";
+  level.soap.disable_sniper_glint = 1;
+  level.soap.voice = "taskforce";
+  level.soap.countryid = "TF";
+  level.soap turretdoaimanims();
+  level.soap.baseaccuracy = 0.5;
 }
 
 _id_684B() {
-  level._id_663E = self;
-  level._id_663E maps\_utility::_id_0D04();
-  level._id_663E._id_1032 = "kruger";
-  level._id_663E._id_59C3 = 1;
+  level.kruger = self;
+  level.kruger maps\_utility::magic_bullet_shield();
+  level.kruger.animname = "kruger";
+  level.kruger.notarget = 1;
 }
 
-_id_684C() {
-  level._id_64A5 = self;
-  level._id_64A5.ignoreall = 1;
-  level._id_64A5._id_59C3 = 1;
-  level._id_64A5 maps\_utility::_id_0D04();
-  level._id_64A5._id_1032 = "nikolai";
-  level._id_64A5.ignoreme = 1;
-  level._id_64A5._id_20AF = 0.5;
+setup_nikolai() {
+  level.nikolai = self;
+  level.nikolai.ignoreall = 1;
+  level.nikolai.notarget = 1;
+  level.nikolai maps\_utility::magic_bullet_shield();
+  level.nikolai.animname = "nikolai";
+  level.nikolai.ignoreme = 1;
+  level.nikolai.baseaccuracy = 0.5;
 }
 
 _id_684D(var_0, var_1) {
@@ -332,44 +332,44 @@ _id_684D(var_0, var_1) {
 
   foreach(var_4 in var_2) {
     if(isspawner(var_4)) {
-      var_4 maps\_utility::_id_26BD(var_1);
+      var_4 maps\_utility::remove_spawn_function(var_1);
     }
   }
 }
 
 _id_684E() {
-  level._id_6493 = self;
-  _id_6851();
-  self._id_1032 = "hannibal";
+  level.hannibal = self;
+  turretdoshootanims();
+  self.animname = "hannibal";
   _id_684D("hannibal", ::_id_684E);
   level notify(self.script_noteworthy + "_spawned");
 }
 
 _id_684F() {
-  level._id_6492 = self;
-  _id_6851();
+  level.barracus = self;
+  turretdoshootanims();
   _id_684D("barracus", ::_id_684F);
   level notify(self.script_noteworthy + "_spawned");
 }
 
 _id_6850() {
-  level._id_6491 = self;
-  _id_6851();
+  level.murdock = self;
+  turretdoshootanims();
   _id_684D("murdock", ::_id_6850);
   level notify(self.script_noteworthy + "_spawned");
 }
 
-_id_6851() {
-  thread maps\_utility::_id_139E();
-  _id_6852();
-  self._id_20AF = 0.5;
+turretdoshootanims() {
+  thread maps\_utility::replace_on_death();
+  turretdoaimanims();
+  self.baseaccuracy = 0.5;
 }
 
-_id_6852() {}
+turretdoaimanims() {}
 
 _id_6853() {
-  if(isDefined(self._id_134B)) {
-    maps\_utility::_id_13A4(self._id_134B);
+  if(isDefined(self.script_forcecolor)) {
+    maps\_utility::set_force_color(self.script_forcecolor);
     self.fixednode = 1;
   }
 }

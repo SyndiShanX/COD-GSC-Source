@@ -5,28 +5,28 @@
 
 #using_animtree("generic_human");
 
-_id_400A() {
+cover() {
   self endon("killanimscript");
   self clearanim(%root, 0.2);
 
-  if(animscripts\utility::_id_0A69()) {
+  if(animscripts\utility::isincombat()) {
     var_0 = "idle_combat";
   } else {
     var_0 = "idle_noncombat";
   }
   var_1 = undefined;
 
-  if(isDefined(self._id_1032) && isDefined(level._id_0C59[self._id_1032])) {
-    var_1 = level._id_0C59[self._id_1032][var_0];
+  if(isDefined(self.animname) && isDefined(level.scr_anim[self.animname])) {
+    var_1 = level.scr_anim[self.animname][var_0];
   }
   if(!isDefined(var_1)) {
-    if(!isDefined(level._id_0C59["default_civilian"])) {
+    if(!isDefined(level.scr_anim["default_civilian"])) {
       return;
     }
-    var_1 = level._id_0C59["default_civilian"][var_0];
+    var_1 = level.scr_anim["default_civilian"][var_0];
   }
 
-  thread _id_400B();
+  thread move_check();
 
   for(;;) {
     self setflaggedanimknoball("idle", common_scripts\utility::random(var_1), %root, 1, 0.2, 1);
@@ -34,18 +34,18 @@ _id_400A() {
   }
 }
 
-_id_400B() {
+move_check() {
   self endon("killanimscript");
 
-  while(!isDefined(self._id_400C)) {
+  while(!isDefined(self.champion)) {
     wait 1;
   }
 }
 
-_id_400D() {
-  _id_400A();
+stop() {
+  cover();
 }
 
-_id_400E() {
-  return anim._id_400F[randomint(anim._id_400F.size)];
+get_flashed_anim() {
+  return anim.civilianflashedarray[randomint(anim.civilianflashedarray.size)];
 }

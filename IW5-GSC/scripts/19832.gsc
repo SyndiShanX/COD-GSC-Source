@@ -3,16 +3,16 @@
  * Script: scripts\19832.gsc
 **************************************/
 
-_id_4CBC() {
-  level._id_4CBD = 0;
-  level._id_4BC4 = 3.5;
-  level._id_4BB1 = 0;
-  level._id_4CBE = 0;
-  level._id_4BCA = undefined;
-  level._id_4BB2 = 0;
-  level._id_4CBF = [];
-  level._id_4CC0 = 0;
-  _id_4D67();
+slowmo_breach_init() {
+  level.last_player_damage = 0;
+  level.slomobreachduration = 3.5;
+  level.breachenemies_active = 0;
+  level.breachignoreenemy_count = 0;
+  level.player_one_already_breached = undefined;
+  level.breachenemies_alive = 0;
+  level.has_special_breach_anim = [];
+  level.breach_passive_time = 0;
+  slomo_sound_scale_setup();
   setdvarifuninitialized("breach_debug", "0");
   setdvarifuninitialized("breach_requires_friendlies_in_position", "1");
   setdvarifuninitialized("hostage_missionfail", "0");
@@ -32,334 +32,334 @@ _id_4CBC() {
   precachestring(&"SCRIPT_MISSIONFAIL_HOSTAGEEXECUTED");
   precachestring(&"SCRIPT_MISSIONFAIL_HOSTAGEEXECUTED_USEMULTIDOOR");
   precachestring(&"SCRIPT_BREACH_RELOADING");
-  level._id_4CC1 = [];
+  level._slowmo_functions = [];
   level._effect["breach_door"] = loadfx("explosions/breach_door");
   level._effect["breach_room"] = loadfx("explosions/breach_room");
   level._effect["breach_room_residual"] = loadfx("explosions/breach_room_residual");
   level._effect["breach_knife_execution"] = loadfx("impacts/flesh_hit_knife");
-  _id_4443();
-  _id_4444();
-  _id_4CCC();
-  _id_4CCA();
-  _id_4CCF();
+  script_models();
+  player_animations();
+  friendly_animations();
+  breach_anims();
+  create_slowmo_breaches_from_entities();
   var_0 = getEntArray("trigger_multiple_breachIcon", "classname");
-  common_scripts\utility::array_thread(var_0, ::_id_4CE1);
+  common_scripts\utility::array_thread(var_0, ::icon_trigger_setup);
   var_1 = getEntArray("breach_solid_delete", "targetname");
   common_scripts\utility::array_call(var_1, ::connectpaths);
-  common_scripts\utility::array_thread(var_1, maps\_utility::_id_2705);
+  common_scripts\utility::array_thread(var_1, maps\_utility::self_delete);
   var_1 = getEntArray("breach_delete", "targetname");
-  common_scripts\utility::array_thread(var_1, maps\_utility::_id_2705);
+  common_scripts\utility::array_thread(var_1, maps\_utility::self_delete);
   var_2 = getEntArray("breach_fx", "targetname");
-  common_scripts\utility::array_thread(var_2, ::_id_4CCD);
-  level._id_4CBF["aa12"] = 1;
-  level._id_4CBF["aa12_reflex"] = 1;
-  level._id_4CBF["aa12_hb"] = 1;
-  level._id_4CBF["aug_reflex"] = 1;
-  level._id_4CBF["aug_scope"] = 1;
-  level._id_4CBF["barrett"] = 1;
-  level._id_4CBF["beretta"] = 1;
-  level._id_4CBF["beretta393"] = 1;
-  level._id_4CBF["cheytac_silencer"] = 1;
-  level._id_4CBF["fal"] = 1;
-  level._id_4CBF["fal_acog"] = 1;
-  level._id_4CBF["fal_reflex"] = 1;
-  level._id_4CBF["fal_shotgun"] = 1;
-  level._id_4CBF["fal_shotgun_attach"] = 1;
-  level._id_4CBF["famas"] = 1;
-  level._id_4CBF["famas_arctic"] = 1;
-  level._id_4CBF["famas_arctic_eotech"] = 1;
-  level._id_4CBF["famas_arctic_reflex"] = 1;
-  level._id_4CBF["famas_mp2"] = 1;
-  level._id_4CBF["famas_shotgun"] = 1;
-  level._id_4CBF["famas_shotgun_attach"] = 1;
-  level._id_4CBF["famas_woodland"] = 1;
-  level._id_4CBF["famas_woodland_eotech"] = 1;
-  level._id_4CBF["famas_woodland_acog"] = 1;
-  level._id_4CBF["famas_woodland_reflex"] = 1;
-  level._id_4CBF["famas_woodland_shotgun"] = 1;
-  level._id_4CBF["famas_woodland_shotgun_attach"] = 1;
-  level._id_4CBF["fn2000"] = 1;
-  level._id_4CBF["fn2000_acog"] = 1;
-  level._id_4CBF["fn2000_eotech"] = 1;
-  level._id_4CBF["fn2000_reflex"] = 1;
-  level._id_4CBF["fn2000_scope"] = 1;
-  level._id_4CBF["fn2000_shotgun"] = 1;
-  level._id_4CBF["fn2000_shotgun_attach"] = 1;
-  level._id_4CBF["fn2000_silencer"] = 1;
-  level._id_4CBF["fn2000_thermal"] = 1;
-  level._id_4CBF["glock"] = 1;
-  level._id_4CBF["kriss"] = 1;
-  level._id_4CBF["kriss_reflex"] = 1;
-  level._id_4CBF["kriss_eotech"] = 1;
-  level._id_4CBF["kriss_acog_silencer"] = 1;
-  level._id_4CBF["m1014"] = 1;
-  level._id_4CBF["m14_scoped"] = 1;
-  level._id_4CBF["m14_scoped_arctic"] = 1;
-  level._id_4CBF["m14_scoped_ghil"] = 1;
-  level._id_4CBF["m14_scoped_silencer"] = 1;
-  level._id_4CBF["m14_scoped_silencer_woodland"] = 1;
-  level._id_4CBF["m14_scoped_woodland"] = 1;
-  level._id_4CBF["m14ebr"] = 1;
-  level._id_4CBF["m14ebr_thermal"] = 1;
-  level._id_4CBF["m203"] = 1;
-  level._id_4CBF["m16_acog"] = 1;
-  level._id_4CBF["m16_basic"] = 1;
-  level._id_4CBF["m16_grenadier"] = 1;
-  level._id_4CBF["m16_reflex"] = 1;
-  level._id_4CBF["m16_silencer"] = 1;
-  level._id_4CBF["m21_baseasset"] = 1;
-  level._id_4CBF["m21_scoped_arctic_silenced"] = 1;
-  level._id_4CBF["mp5"] = 1;
-  level._id_4CBF["mp5_arctic"] = 1;
-  level._id_4CBF["mp5_arctic_reflex"] = 1;
-  level._id_4CBF["mp5_eotech"] = 1;
-  level._id_4CBF["mp5_reflex"] = 1;
-  level._id_4CBF["mp5_silencer"] = 1;
-  level._id_4CBF["mp5_silencer_reflex"] = 1;
-  level._id_4CBF["ranger"] = 1;
-  level._id_4CBF["striker"] = 1;
-  level._id_4CBF["striker_reflex"] = 1;
-  level._id_4CBF["striker_woodland"] = 1;
-  level._id_4CBF["striker_woodland_reflex"] = 1;
-  level._id_4CBF["tavor_acog"] = 1;
-  level._id_4CBF["tavor_digital_acog"] = 1;
-  level._id_4CBF["tavor_digital_eotech"] = 1;
-  level._id_4CBF["tavor_digital_mars"] = 1;
-  level._id_4CBF["tavor_digital_reflex"] = 1;
-  level._id_4CBF["tavor_eotech"] = 1;
-  level._id_4CBF["tavor_mars"] = 1;
-  level._id_4CBF["tavor_reflex"] = 1;
-  level._id_4CBF["tavor_woodland_acog"] = 1;
-  level._id_4CBF["tavor_woodland_eotech"] = 1;
-  level._id_4CBF["tavor_woodland_mars"] = 1;
-  level._id_4CBF["tavor_woodland_reflex"] = 1;
-  level._id_4CBF["tmp"] = 1;
-  level._id_4CBF["tmp_reflex"] = 1;
-  level._id_4CBF["tmp_silencer"] = 1;
-  level._id_4CBF["ump45"] = 1;
-  level._id_4CBF["ump45_acog"] = 1;
-  level._id_4CBF["ump45_arctic"] = 1;
-  level._id_4CBF["ump45_arctic_acog"] = 1;
-  level._id_4CBF["ump45_arctic_reflex"] = 1;
-  level._id_4CBF["ump45_reflex"] = 1;
-  level._id_4CBF["ump45_silencer"] = 1;
-  level._id_4CBF["ump45_eotech"] = 1;
-  level._id_4CBF["wa2000"] = 1;
-  level._id_4CBF["wa2000_thermal"] = 1;
-  level._id_4CBF["g36c"] = 1;
-  level._id_4CBF["g36c_acog"] = 1;
-  level._id_4CBF["g36c_reflex"] = 1;
-  level._id_4CBF["g36c_grenadier"] = 1;
-  level._id_4CBF["pecheneg"] = 1;
-  level._id_4CBF["pecheneg_reflex"] = 1;
-  level._id_4CBF["gl_g36c"] = 1;
-  level._id_4CBF["m240"] = 1;
-  level._id_4CBF["m240_reflex"] = 1;
-  level._id_4CBF["m240_acog"] = 1;
-  level._id_4CBF["m4_grenadier"] = 1;
-  level._id_4CBF["m4_grunt"] = 1;
-  level._id_4CBF["m4_grunt_acog"] = 1;
-  level._id_4CBF["m4_grunt_reflex"] = 1;
-  level._id_4CBF["m4_shotgun"] = 1;
-  level._id_4CBF["m4_shotgun_attach"] = 1;
-  level._id_4CBF["m4_silencer"] = 1;
-  level._id_4CBF["m4_silencer_acog"] = 1;
-  level._id_4CBF["alt_m4m203_acog"] = 1;
-  level._id_4CBF["m4m203_acog"] = 1;
-  level._id_4CBF["alt_m4m203_acog_payback"] = 1;
-  level._id_4CBF["m4m203_acog_payback"] = 1;
-  level._id_4CBF["m4m203_reflex"] = 1;
-  level._id_4CBF["m4m203_reflex_arctic"] = 1;
-  level._id_4CBF["m4m203_silencer"] = 1;
-  level._id_4CBF["m4m203_silencer_reflex"] = 1;
-  level._id_4CBF["m4m203_eotech"] = 1;
-  level._id_4CBF["scar_h"] = 1;
-  level._id_4CBF["scar_h_fgrip"] = 1;
-  level._id_4CBF["scar_h_acog"] = 1;
-  level._id_4CBF["scar_h_grenadier"] = 1;
-  level._id_4CBF["scar_h_reflex"] = 1;
-  level._id_4CBF["scar_h_shotgun"] = 1;
-  level._id_4CBF["scar_h_shotgun_attach"] = 1;
-  level._id_4CBF["scar_h_silencer"] = 1;
-  level._id_4CBF["scar_h_thermal_silencer"] = 1;
-  level._id_4CBF["scar_h_thermal"] = 1;
-  level._id_4CBF["scar_h_m203"] = 1;
-  level._id_4CBF["m203_m4"] = 1;
-  level._id_4CBF["m203_m4_acog"] = 1;
-  level._id_4CBF["m203_m4_eotech"] = 1;
-  level._id_4CBF["m203_m4_reflex"] = 1;
-  level._id_4CBF["m203_m4_silencer"] = 1;
-  level._id_4CBF["m203_m4_silencer_reflex"] = 1;
-  level._id_4CBF["m203_m4_reflex_arctic"] = 1;
-  level._id_4CBF["coltanaconda"] = 1;
-  level._id_4CBF["deserteagle"] = 1;
-  level._id_4CBF["pp2000"] = 1;
-  level._id_4CBF["pp2000_reflex"] = 1;
-  level._id_4CBF["pp2000_silencer"] = 1;
-  level._id_4CBF["pp2000_thermal"] = 1;
-  level._id_4CBF["ak47"] = 1;
-  level._id_4CBF["ak47_acog"] = 1;
-  level._id_4CBF["ak47_arctic"] = 1;
-  level._id_4CBF["ak47_arctic_acog"] = 1;
-  level._id_4CBF["ak47_arctic_eotech"] = 1;
-  level._id_4CBF["ak47_arctic_grenadier"] = 1;
-  level._id_4CBF["ak47_arctic_reflex"] = 1;
-  level._id_4CBF["ak47_desert"] = 1;
-  level._id_4CBF["ak47_desert_acog"] = 1;
-  level._id_4CBF["ak47_desert_eotech"] = 1;
-  level._id_4CBF["ak47_desert_grenadier"] = 1;
-  level._id_4CBF["ak47_desert_reflex"] = 1;
-  level._id_4CBF["ak47_digital"] = 1;
-  level._id_4CBF["ak47_digital_acog"] = 1;
-  level._id_4CBF["ak47_digital_eotech"] = 1;
-  level._id_4CBF["ak47_digital_grenadier"] = 1;
-  level._id_4CBF["ak47_digital_reflex"] = 1;
-  level._id_4CBF["ak47_eotech"] = 1;
-  level._id_4CBF["ak47_fall"] = 1;
-  level._id_4CBF["ak47_fall_acog"] = 1;
-  level._id_4CBF["ak47_fall_eotech"] = 1;
-  level._id_4CBF["ak47_fall_grenadier"] = 1;
-  level._id_4CBF["ak47_fall_reflex"] = 1;
-  level._id_4CBF["ak47_grenadier"] = 1;
-  level._id_4CBF["ak47_reflex"] = 1;
-  level._id_4CBF["ak47_shotgun"] = 1;
-  level._id_4CBF["ak47_shotgun_attach"] = 1;
-  level._id_4CBF["ak47_silencer"] = 1;
-  level._id_4CBF["ak47_thermal"] = 1;
-  level._id_4CBF["ak47_woodland"] = 1;
-  level._id_4CBF["ak47_woodland_acog"] = 1;
-  level._id_4CBF["ak47_woodland_eotech"] = 1;
-  level._id_4CBF["ak47_woodland_grenadier"] = 1;
-  level._id_4CBF["ak47_woodland_reflex"] = 1;
-  level._id_4CBF["gl_ak47"] = 1;
-  level._id_4CBF["gl_ak47_arctic"] = 1;
-  level._id_4CBF["masada"] = 1;
-  level._id_4CBF["masada_acog"] = 1;
-  level._id_4CBF["masada_dcburn_mt_black_off"] = 1;
-  level._id_4CBF["masada_dcburn_mt_black_on"] = 1;
-  level._id_4CBF["masada_digital"] = 1;
-  level._id_4CBF["masada_digital_acog"] = 1;
-  level._id_4CBF["masada_digital_eotech"] = 1;
-  level._id_4CBF["masada_digital_grenadier_eotech"] = 1;
-  level._id_4CBF["gl_masada_digital_eotech"] = 1;
-  level._id_4CBF["masada_digital_reflex"] = 1;
-  level._id_4CBF["masada_eotech"] = 1;
-  level._id_4CBF["masada_grenadier_acog"] = 1;
-  level._id_4CBF["masada_reflex"] = 1;
-  level._id_4CBF["masada_silencer_motion_tracker_off"] = 1;
-  level._id_4CBF["masada_silencer_motion_tracker_on"] = 1;
-  level._id_4CBF["masada_silencer_mt_black_off"] = 1;
-  level._id_4CBF["masada_silencer_mt_black_on"] = 1;
-  level._id_4CBF["masada_silencer_mt_camo_off"] = 1;
-  level._id_4CBF["masada_silencer_mt_camo_on"] = 1;
-  level._id_4CBF["masada_silencer_mt_dust_off"] = 1;
-  level._id_4CBF["masada_silencer_mt_dust_on"] = 1;
-  level._id_4CBF["uzi"] = 1;
-  level._id_4CBF["uzi_sd"] = 1;
-  level._id_4CBF["uzi_silencer"] = 1;
-  level._id_4CBF["uzi_akimbo"] = 1;
-  level._id_4CBF["p90"] = 1;
-  level._id_4CBF["p90_acog"] = 1;
-  level._id_4CBF["p90_eotech"] = 1;
-  level._id_4CBF["p90_reflex"] = 1;
-  level._id_4CBF["p90_silencer"] = 1;
-  level._id_4CBF["p90_arctic"] = 1;
-  level._id_4CBF["p90_arctic_acog"] = 1;
-  level._id_4CBF["p90_arctic_eotech"] = 1;
-  level._id_4CBF["p90_arctic_reflex"] = 1;
-  level._id_4CBF["rpd"] = 1;
-  level._id_4CBF["rpd_acog"] = 1;
-  level._id_4CBF["rpd_grip"] = 1;
-  level._id_4CBF["rpd_reflex"] = 1;
-  level._id_4CBF["sa80"] = 1;
-  level._id_4CBF["sa80_scope"] = 1;
-  level._id_4CBF["sa80lmg"] = 1;
-  level._id_4CBF["sa80lmg_reflex"] = 1;
-  level._id_4CBF["sa80lmg_scope"] = 1;
-  level._id_4CBF["at4"] = 1;
-  level._id_4CBF["at4_straight"] = 1;
-  level._id_4CBF["model1887"] = 1;
-  level._id_4CBF["usp"] = 1;
-  level._id_4CBF["usp_airport"] = 1;
-  level._id_4CBF["usp_silencer"] = 1;
-  level._id_4CBF["dragunov"] = 1;
-  level._id_4CBF["dragunov_arctic"] = 1;
-  level._id_4CBF["dragunov_desert"] = 1;
-  level._id_4CBF["dragunov_fall"] = 1;
-  level._id_4CBF["dragunov_woodland"] = 1;
-  level._id_4CBF["mg4"] = 1;
-  level._id_4CBF["mg4_acog"] = 1;
-  level._id_4CBF["mg4_arctic"] = 1;
-  level._id_4CBF["mg4_arctic_reflex"] = 1;
-  level._id_4CBF["mg4_arctic_thermal"] = 1;
-  level._id_4CBF["mg4_reflex"] = 1;
-  level._id_4CBF["mg4_thermal"] = 1;
-  level._id_4CBF["spas12"] = 1;
-  level._id_4CBF["spas12_arctic"] = 1;
-  level._id_4CBF["spas12_arctic_eotech"] = 1;
-  level._id_4CBF["spas12_arctic_grip"] = 1;
-  level._id_4CBF["spas12_arctic_heartbeat"] = 1;
-  level._id_4CBF["spas12_arctic_heartbeat_attach"] = 1;
-  level._id_4CBF["spas12_arctic_reflex"] = 1;
-  level._id_4CBF["spas12_eotech"] = 1;
-  level._id_4CBF["spas12_grip"] = 1;
-  level._id_4CBF["spas12_heartbeat"] = 1;
-  level._id_4CBF["spas12_heartbeat_attach"] = 1;
-  level._id_4CBF["spas12_reflex"] = 1;
-  level._id_4CBF["spas12_silencer"] = 1;
-  level._id_4CBF["paw20_eotech"] = 1;
-  level._id_4CBF["acr_hybrid"] = 1;
-  level._id_4CBF["acr_hybrid_silenced"] = 1;
-  level._id_4CBF["alt_acr_hybrid"] = 1;
-  level._id_4CBF["alt_acr_hybrid_silenced"] = 1;
-  level._id_4CBF["p99"] = 1;
-  level._id_4CBF["rsass"] = 1;
-  level._id_4CBF["fnfiveseven"] = 1;
-  level._id_4CBF["pp90m1"] = 1;
-  level._id_4CBF["pp90m1_acog"] = 1;
-  level._id_4CBF["pp90m1_eotech"] = 1;
-  level._id_4CBF["pp90m1_reflex"] = 1;
-  level._id_4CBF["pp90m1_silencer"] = 1;
+  common_scripts\utility::array_thread(var_2, ::breach_fx_setup);
+  level.has_special_breach_anim["aa12"] = 1;
+  level.has_special_breach_anim["aa12_reflex"] = 1;
+  level.has_special_breach_anim["aa12_hb"] = 1;
+  level.has_special_breach_anim["aug_reflex"] = 1;
+  level.has_special_breach_anim["aug_scope"] = 1;
+  level.has_special_breach_anim["barrett"] = 1;
+  level.has_special_breach_anim["beretta"] = 1;
+  level.has_special_breach_anim["beretta393"] = 1;
+  level.has_special_breach_anim["cheytac_silencer"] = 1;
+  level.has_special_breach_anim["fal"] = 1;
+  level.has_special_breach_anim["fal_acog"] = 1;
+  level.has_special_breach_anim["fal_reflex"] = 1;
+  level.has_special_breach_anim["fal_shotgun"] = 1;
+  level.has_special_breach_anim["fal_shotgun_attach"] = 1;
+  level.has_special_breach_anim["famas"] = 1;
+  level.has_special_breach_anim["famas_arctic"] = 1;
+  level.has_special_breach_anim["famas_arctic_eotech"] = 1;
+  level.has_special_breach_anim["famas_arctic_reflex"] = 1;
+  level.has_special_breach_anim["famas_mp2"] = 1;
+  level.has_special_breach_anim["famas_shotgun"] = 1;
+  level.has_special_breach_anim["famas_shotgun_attach"] = 1;
+  level.has_special_breach_anim["famas_woodland"] = 1;
+  level.has_special_breach_anim["famas_woodland_eotech"] = 1;
+  level.has_special_breach_anim["famas_woodland_acog"] = 1;
+  level.has_special_breach_anim["famas_woodland_reflex"] = 1;
+  level.has_special_breach_anim["famas_woodland_shotgun"] = 1;
+  level.has_special_breach_anim["famas_woodland_shotgun_attach"] = 1;
+  level.has_special_breach_anim["fn2000"] = 1;
+  level.has_special_breach_anim["fn2000_acog"] = 1;
+  level.has_special_breach_anim["fn2000_eotech"] = 1;
+  level.has_special_breach_anim["fn2000_reflex"] = 1;
+  level.has_special_breach_anim["fn2000_scope"] = 1;
+  level.has_special_breach_anim["fn2000_shotgun"] = 1;
+  level.has_special_breach_anim["fn2000_shotgun_attach"] = 1;
+  level.has_special_breach_anim["fn2000_silencer"] = 1;
+  level.has_special_breach_anim["fn2000_thermal"] = 1;
+  level.has_special_breach_anim["glock"] = 1;
+  level.has_special_breach_anim["kriss"] = 1;
+  level.has_special_breach_anim["kriss_reflex"] = 1;
+  level.has_special_breach_anim["kriss_eotech"] = 1;
+  level.has_special_breach_anim["kriss_acog_silencer"] = 1;
+  level.has_special_breach_anim["m1014"] = 1;
+  level.has_special_breach_anim["m14_scoped"] = 1;
+  level.has_special_breach_anim["m14_scoped_arctic"] = 1;
+  level.has_special_breach_anim["m14_scoped_ghil"] = 1;
+  level.has_special_breach_anim["m14_scoped_silencer"] = 1;
+  level.has_special_breach_anim["m14_scoped_silencer_woodland"] = 1;
+  level.has_special_breach_anim["m14_scoped_woodland"] = 1;
+  level.has_special_breach_anim["m14ebr"] = 1;
+  level.has_special_breach_anim["m14ebr_thermal"] = 1;
+  level.has_special_breach_anim["m203"] = 1;
+  level.has_special_breach_anim["m16_acog"] = 1;
+  level.has_special_breach_anim["m16_basic"] = 1;
+  level.has_special_breach_anim["m16_grenadier"] = 1;
+  level.has_special_breach_anim["m16_reflex"] = 1;
+  level.has_special_breach_anim["m16_silencer"] = 1;
+  level.has_special_breach_anim["m21_baseasset"] = 1;
+  level.has_special_breach_anim["m21_scoped_arctic_silenced"] = 1;
+  level.has_special_breach_anim["mp5"] = 1;
+  level.has_special_breach_anim["mp5_arctic"] = 1;
+  level.has_special_breach_anim["mp5_arctic_reflex"] = 1;
+  level.has_special_breach_anim["mp5_eotech"] = 1;
+  level.has_special_breach_anim["mp5_reflex"] = 1;
+  level.has_special_breach_anim["mp5_silencer"] = 1;
+  level.has_special_breach_anim["mp5_silencer_reflex"] = 1;
+  level.has_special_breach_anim["ranger"] = 1;
+  level.has_special_breach_anim["striker"] = 1;
+  level.has_special_breach_anim["striker_reflex"] = 1;
+  level.has_special_breach_anim["striker_woodland"] = 1;
+  level.has_special_breach_anim["striker_woodland_reflex"] = 1;
+  level.has_special_breach_anim["tavor_acog"] = 1;
+  level.has_special_breach_anim["tavor_digital_acog"] = 1;
+  level.has_special_breach_anim["tavor_digital_eotech"] = 1;
+  level.has_special_breach_anim["tavor_digital_mars"] = 1;
+  level.has_special_breach_anim["tavor_digital_reflex"] = 1;
+  level.has_special_breach_anim["tavor_eotech"] = 1;
+  level.has_special_breach_anim["tavor_mars"] = 1;
+  level.has_special_breach_anim["tavor_reflex"] = 1;
+  level.has_special_breach_anim["tavor_woodland_acog"] = 1;
+  level.has_special_breach_anim["tavor_woodland_eotech"] = 1;
+  level.has_special_breach_anim["tavor_woodland_mars"] = 1;
+  level.has_special_breach_anim["tavor_woodland_reflex"] = 1;
+  level.has_special_breach_anim["tmp"] = 1;
+  level.has_special_breach_anim["tmp_reflex"] = 1;
+  level.has_special_breach_anim["tmp_silencer"] = 1;
+  level.has_special_breach_anim["ump45"] = 1;
+  level.has_special_breach_anim["ump45_acog"] = 1;
+  level.has_special_breach_anim["ump45_arctic"] = 1;
+  level.has_special_breach_anim["ump45_arctic_acog"] = 1;
+  level.has_special_breach_anim["ump45_arctic_reflex"] = 1;
+  level.has_special_breach_anim["ump45_reflex"] = 1;
+  level.has_special_breach_anim["ump45_silencer"] = 1;
+  level.has_special_breach_anim["ump45_eotech"] = 1;
+  level.has_special_breach_anim["wa2000"] = 1;
+  level.has_special_breach_anim["wa2000_thermal"] = 1;
+  level.has_special_breach_anim["g36c"] = 1;
+  level.has_special_breach_anim["g36c_acog"] = 1;
+  level.has_special_breach_anim["g36c_reflex"] = 1;
+  level.has_special_breach_anim["g36c_grenadier"] = 1;
+  level.has_special_breach_anim["pecheneg"] = 1;
+  level.has_special_breach_anim["pecheneg_reflex"] = 1;
+  level.has_special_breach_anim["gl_g36c"] = 1;
+  level.has_special_breach_anim["m240"] = 1;
+  level.has_special_breach_anim["m240_reflex"] = 1;
+  level.has_special_breach_anim["m240_acog"] = 1;
+  level.has_special_breach_anim["m4_grenadier"] = 1;
+  level.has_special_breach_anim["m4_grunt"] = 1;
+  level.has_special_breach_anim["m4_grunt_acog"] = 1;
+  level.has_special_breach_anim["m4_grunt_reflex"] = 1;
+  level.has_special_breach_anim["m4_shotgun"] = 1;
+  level.has_special_breach_anim["m4_shotgun_attach"] = 1;
+  level.has_special_breach_anim["m4_silencer"] = 1;
+  level.has_special_breach_anim["m4_silencer_acog"] = 1;
+  level.has_special_breach_anim["alt_m4m203_acog"] = 1;
+  level.has_special_breach_anim["m4m203_acog"] = 1;
+  level.has_special_breach_anim["alt_m4m203_acog_payback"] = 1;
+  level.has_special_breach_anim["m4m203_acog_payback"] = 1;
+  level.has_special_breach_anim["m4m203_reflex"] = 1;
+  level.has_special_breach_anim["m4m203_reflex_arctic"] = 1;
+  level.has_special_breach_anim["m4m203_silencer"] = 1;
+  level.has_special_breach_anim["m4m203_silencer_reflex"] = 1;
+  level.has_special_breach_anim["m4m203_eotech"] = 1;
+  level.has_special_breach_anim["scar_h"] = 1;
+  level.has_special_breach_anim["scar_h_fgrip"] = 1;
+  level.has_special_breach_anim["scar_h_acog"] = 1;
+  level.has_special_breach_anim["scar_h_grenadier"] = 1;
+  level.has_special_breach_anim["scar_h_reflex"] = 1;
+  level.has_special_breach_anim["scar_h_shotgun"] = 1;
+  level.has_special_breach_anim["scar_h_shotgun_attach"] = 1;
+  level.has_special_breach_anim["scar_h_silencer"] = 1;
+  level.has_special_breach_anim["scar_h_thermal_silencer"] = 1;
+  level.has_special_breach_anim["scar_h_thermal"] = 1;
+  level.has_special_breach_anim["scar_h_m203"] = 1;
+  level.has_special_breach_anim["m203_m4"] = 1;
+  level.has_special_breach_anim["m203_m4_acog"] = 1;
+  level.has_special_breach_anim["m203_m4_eotech"] = 1;
+  level.has_special_breach_anim["m203_m4_reflex"] = 1;
+  level.has_special_breach_anim["m203_m4_silencer"] = 1;
+  level.has_special_breach_anim["m203_m4_silencer_reflex"] = 1;
+  level.has_special_breach_anim["m203_m4_reflex_arctic"] = 1;
+  level.has_special_breach_anim["coltanaconda"] = 1;
+  level.has_special_breach_anim["deserteagle"] = 1;
+  level.has_special_breach_anim["pp2000"] = 1;
+  level.has_special_breach_anim["pp2000_reflex"] = 1;
+  level.has_special_breach_anim["pp2000_silencer"] = 1;
+  level.has_special_breach_anim["pp2000_thermal"] = 1;
+  level.has_special_breach_anim["ak47"] = 1;
+  level.has_special_breach_anim["ak47_acog"] = 1;
+  level.has_special_breach_anim["ak47_arctic"] = 1;
+  level.has_special_breach_anim["ak47_arctic_acog"] = 1;
+  level.has_special_breach_anim["ak47_arctic_eotech"] = 1;
+  level.has_special_breach_anim["ak47_arctic_grenadier"] = 1;
+  level.has_special_breach_anim["ak47_arctic_reflex"] = 1;
+  level.has_special_breach_anim["ak47_desert"] = 1;
+  level.has_special_breach_anim["ak47_desert_acog"] = 1;
+  level.has_special_breach_anim["ak47_desert_eotech"] = 1;
+  level.has_special_breach_anim["ak47_desert_grenadier"] = 1;
+  level.has_special_breach_anim["ak47_desert_reflex"] = 1;
+  level.has_special_breach_anim["ak47_digital"] = 1;
+  level.has_special_breach_anim["ak47_digital_acog"] = 1;
+  level.has_special_breach_anim["ak47_digital_eotech"] = 1;
+  level.has_special_breach_anim["ak47_digital_grenadier"] = 1;
+  level.has_special_breach_anim["ak47_digital_reflex"] = 1;
+  level.has_special_breach_anim["ak47_eotech"] = 1;
+  level.has_special_breach_anim["ak47_fall"] = 1;
+  level.has_special_breach_anim["ak47_fall_acog"] = 1;
+  level.has_special_breach_anim["ak47_fall_eotech"] = 1;
+  level.has_special_breach_anim["ak47_fall_grenadier"] = 1;
+  level.has_special_breach_anim["ak47_fall_reflex"] = 1;
+  level.has_special_breach_anim["ak47_grenadier"] = 1;
+  level.has_special_breach_anim["ak47_reflex"] = 1;
+  level.has_special_breach_anim["ak47_shotgun"] = 1;
+  level.has_special_breach_anim["ak47_shotgun_attach"] = 1;
+  level.has_special_breach_anim["ak47_silencer"] = 1;
+  level.has_special_breach_anim["ak47_thermal"] = 1;
+  level.has_special_breach_anim["ak47_woodland"] = 1;
+  level.has_special_breach_anim["ak47_woodland_acog"] = 1;
+  level.has_special_breach_anim["ak47_woodland_eotech"] = 1;
+  level.has_special_breach_anim["ak47_woodland_grenadier"] = 1;
+  level.has_special_breach_anim["ak47_woodland_reflex"] = 1;
+  level.has_special_breach_anim["gl_ak47"] = 1;
+  level.has_special_breach_anim["gl_ak47_arctic"] = 1;
+  level.has_special_breach_anim["masada"] = 1;
+  level.has_special_breach_anim["masada_acog"] = 1;
+  level.has_special_breach_anim["masada_dcburn_mt_black_off"] = 1;
+  level.has_special_breach_anim["masada_dcburn_mt_black_on"] = 1;
+  level.has_special_breach_anim["masada_digital"] = 1;
+  level.has_special_breach_anim["masada_digital_acog"] = 1;
+  level.has_special_breach_anim["masada_digital_eotech"] = 1;
+  level.has_special_breach_anim["masada_digital_grenadier_eotech"] = 1;
+  level.has_special_breach_anim["gl_masada_digital_eotech"] = 1;
+  level.has_special_breach_anim["masada_digital_reflex"] = 1;
+  level.has_special_breach_anim["masada_eotech"] = 1;
+  level.has_special_breach_anim["masada_grenadier_acog"] = 1;
+  level.has_special_breach_anim["masada_reflex"] = 1;
+  level.has_special_breach_anim["masada_silencer_motion_tracker_off"] = 1;
+  level.has_special_breach_anim["masada_silencer_motion_tracker_on"] = 1;
+  level.has_special_breach_anim["masada_silencer_mt_black_off"] = 1;
+  level.has_special_breach_anim["masada_silencer_mt_black_on"] = 1;
+  level.has_special_breach_anim["masada_silencer_mt_camo_off"] = 1;
+  level.has_special_breach_anim["masada_silencer_mt_camo_on"] = 1;
+  level.has_special_breach_anim["masada_silencer_mt_dust_off"] = 1;
+  level.has_special_breach_anim["masada_silencer_mt_dust_on"] = 1;
+  level.has_special_breach_anim["uzi"] = 1;
+  level.has_special_breach_anim["uzi_sd"] = 1;
+  level.has_special_breach_anim["uzi_silencer"] = 1;
+  level.has_special_breach_anim["uzi_akimbo"] = 1;
+  level.has_special_breach_anim["p90"] = 1;
+  level.has_special_breach_anim["p90_acog"] = 1;
+  level.has_special_breach_anim["p90_eotech"] = 1;
+  level.has_special_breach_anim["p90_reflex"] = 1;
+  level.has_special_breach_anim["p90_silencer"] = 1;
+  level.has_special_breach_anim["p90_arctic"] = 1;
+  level.has_special_breach_anim["p90_arctic_acog"] = 1;
+  level.has_special_breach_anim["p90_arctic_eotech"] = 1;
+  level.has_special_breach_anim["p90_arctic_reflex"] = 1;
+  level.has_special_breach_anim["rpd"] = 1;
+  level.has_special_breach_anim["rpd_acog"] = 1;
+  level.has_special_breach_anim["rpd_grip"] = 1;
+  level.has_special_breach_anim["rpd_reflex"] = 1;
+  level.has_special_breach_anim["sa80"] = 1;
+  level.has_special_breach_anim["sa80_scope"] = 1;
+  level.has_special_breach_anim["sa80lmg"] = 1;
+  level.has_special_breach_anim["sa80lmg_reflex"] = 1;
+  level.has_special_breach_anim["sa80lmg_scope"] = 1;
+  level.has_special_breach_anim["at4"] = 1;
+  level.has_special_breach_anim["at4_straight"] = 1;
+  level.has_special_breach_anim["model1887"] = 1;
+  level.has_special_breach_anim["usp"] = 1;
+  level.has_special_breach_anim["usp_airport"] = 1;
+  level.has_special_breach_anim["usp_silencer"] = 1;
+  level.has_special_breach_anim["dragunov"] = 1;
+  level.has_special_breach_anim["dragunov_arctic"] = 1;
+  level.has_special_breach_anim["dragunov_desert"] = 1;
+  level.has_special_breach_anim["dragunov_fall"] = 1;
+  level.has_special_breach_anim["dragunov_woodland"] = 1;
+  level.has_special_breach_anim["mg4"] = 1;
+  level.has_special_breach_anim["mg4_acog"] = 1;
+  level.has_special_breach_anim["mg4_arctic"] = 1;
+  level.has_special_breach_anim["mg4_arctic_reflex"] = 1;
+  level.has_special_breach_anim["mg4_arctic_thermal"] = 1;
+  level.has_special_breach_anim["mg4_reflex"] = 1;
+  level.has_special_breach_anim["mg4_thermal"] = 1;
+  level.has_special_breach_anim["spas12"] = 1;
+  level.has_special_breach_anim["spas12_arctic"] = 1;
+  level.has_special_breach_anim["spas12_arctic_eotech"] = 1;
+  level.has_special_breach_anim["spas12_arctic_grip"] = 1;
+  level.has_special_breach_anim["spas12_arctic_heartbeat"] = 1;
+  level.has_special_breach_anim["spas12_arctic_heartbeat_attach"] = 1;
+  level.has_special_breach_anim["spas12_arctic_reflex"] = 1;
+  level.has_special_breach_anim["spas12_eotech"] = 1;
+  level.has_special_breach_anim["spas12_grip"] = 1;
+  level.has_special_breach_anim["spas12_heartbeat"] = 1;
+  level.has_special_breach_anim["spas12_heartbeat_attach"] = 1;
+  level.has_special_breach_anim["spas12_reflex"] = 1;
+  level.has_special_breach_anim["spas12_silencer"] = 1;
+  level.has_special_breach_anim["paw20_eotech"] = 1;
+  level.has_special_breach_anim["acr_hybrid"] = 1;
+  level.has_special_breach_anim["acr_hybrid_silenced"] = 1;
+  level.has_special_breach_anim["alt_acr_hybrid"] = 1;
+  level.has_special_breach_anim["alt_acr_hybrid_silenced"] = 1;
+  level.has_special_breach_anim["p99"] = 1;
+  level.has_special_breach_anim["rsass"] = 1;
+  level.has_special_breach_anim["fnfiveseven"] = 1;
+  level.has_special_breach_anim["pp90m1"] = 1;
+  level.has_special_breach_anim["pp90m1_acog"] = 1;
+  level.has_special_breach_anim["pp90m1_eotech"] = 1;
+  level.has_special_breach_anim["pp90m1_reflex"] = 1;
+  level.has_special_breach_anim["pp90m1_silencer"] = 1;
   common_scripts\utility::flag_init("breaching_on");
   common_scripts\utility::flag_init("no_mercy");
 }
 
-_id_4CC2() {
+check_missing_animation() {
   if(!isDefined(self.animation)) {
     return;
   }
-  if(_id_4D51() && self.script_noteworthy == "manhandled") {
+  if(will_be_manhandled() && self.script_noteworthy == "manhandled") {
     var_0 = getEnt(self.target, "targetname");
-    level._id_4CC3[self.export] = var_0;
+    level.manhandled_spawners[self.export] = var_0;
   }
 
-  var_1 = self._id_164F;
+  var_1 = self.script_parameters;
 
   if(isDefined(var_1)) {
-    level._id_4CC4[var_1] = 1;
+    level.missing_animation_parameters[var_1] = 1;
   }
-  level._id_4CC5[self.animation] = 1;
+  level.missing_animations[self.animation] = 1;
 }
 
-_id_4CC6(var_0, var_1, var_2) {
-  if(!isDefined(level._id_0C59["generic"][var_0])) {
+is_breach_anim_loop_setup(var_0, var_1, var_2) {
+  if(!isDefined(level.scr_anim["generic"][var_0])) {
     return 0;
   }
-  if(!isDefined(level._id_0C59["generic"][var_0][var_1])) {
-    return 0;
-  }
-  return 1;
-}
-
-_id_4CC7(var_0, var_1) {
-  if(!isDefined(level._id_0C59["generic"][var_0])) {
+  if(!isDefined(level.scr_anim["generic"][var_0][var_1])) {
     return 0;
   }
   return 1;
 }
 
-_id_4CC8() {
-  if(!level._id_4CC5.size) {
+is_breach_anim_single_setup(var_0, var_1) {
+  if(!isDefined(level.scr_anim["generic"][var_0])) {
+    return 0;
+  }
+  return 1;
+}
+
+dump_missing_anims() {
+  if(!level.missing_animations.size) {
     return;
   }
   var_0 = [];
@@ -377,24 +377,24 @@ _id_4CC8() {
   var_0[var_0.size] = "_manhandled_prepare";
   var_1 = [];
 
-  foreach(var_7, var_3 in level._id_4CC4) {
+  foreach(var_7, var_3 in level.missing_animation_parameters) {
     foreach(var_5 in var_0) {}
     var_1[var_1.size] = var_5 + var_7;
   }
 
   var_0 = common_scripts\utility::array_combine(var_0, var_1);
 
-  foreach(var_17, var_3 in level._id_4CC5) {
+  foreach(var_17, var_3 in level.missing_animations) {
     var_9 = 0;
 
-    if(isDefined(level._id_4CC9["generic"][var_17])) {
-      if(isarray(level._id_4CC9["generic"][var_17])) {
-        foreach(var_12, var_11 in level._id_4CC9["generic"][var_17]) {
-          if(!_id_4CC6(var_17, var_12, var_11)) {
+    if(isDefined(level.scr_stub["generic"][var_17])) {
+      if(isarray(level.scr_stub["generic"][var_17])) {
+        foreach(var_12, var_11 in level.scr_stub["generic"][var_17]) {
+          if(!is_breach_anim_loop_setup(var_17, var_12, var_11)) {
             var_9 = 1;
           }
         }
-      } else if(!_id_4CC7(var_17, level._id_4CC9["generic"][var_17])) {
+      } else if(!is_breach_anim_single_setup(var_17, level.scr_stub["generic"][var_17])) {
         var_9 = 1;
       }
     }
@@ -402,12 +402,12 @@ _id_4CC8() {
     foreach(var_5 in var_0) {
       var_14 = var_17 + var_5;
 
-      if(!isDefined(level._id_4CC9["generic"][var_14])) {
+      if(!isDefined(level.scr_stub["generic"][var_14])) {
         continue;
       }
-      if(isarray(level._id_4CC9["generic"][var_14])) {
-        foreach(var_12, var_11 in level._id_4CC9["generic"][var_14]) {
-          if(!_id_4CC6(var_14, var_12, var_11)) {
+      if(isarray(level.scr_stub["generic"][var_14])) {
+        foreach(var_12, var_11 in level.scr_stub["generic"][var_14]) {
+          if(!is_breach_anim_loop_setup(var_14, var_12, var_11)) {
             var_9 = 1;
           }
         }
@@ -415,168 +415,168 @@ _id_4CC8() {
         continue;
       }
 
-      if(!_id_4CC7(var_14, level._id_4CC9["generic"][var_14])) {
+      if(!is_breach_anim_single_setup(var_14, level.scr_stub["generic"][var_14])) {
         var_9 = 1;
       }
     }
 
     if(var_9) {
-      level._id_4CC5[var_17] = undefined;
+      level.missing_animations[var_17] = undefined;
     }
   }
 
-  level._id_4CC4 = undefined;
-  level._id_4CC5 = undefined;
+  level.missing_animation_parameters = undefined;
+  level.missing_animations = undefined;
 }
 
 #using_animtree("generic_human");
 
-_id_4CCA() {
-  level._id_4CCB = [];
-  maps\_anim::_id_1261("generic", "attach knife right", "weapon_parabolic_knife", "TAG_INHAND");
-  maps\_anim::_id_1262("generic", "detach knife right", "weapon_parabolic_knife", "TAG_INHAND", "breach_react_knife_charge");
-  level._id_4CC9["generic"]["takedown_room2B_soldier"] = "takedown_room2B_soldier";
-  level._id_4CC9["generic"]["takedown_room2B_soldier_idle"][0] = "takedown_room2B_soldier_idle";
-  level._id_4CC9["generic"]["takedown_room1Alt_soldier"] = "takedown_room1Alt_soldier";
-  level._id_4CC9["generic"]["takedown_room1Alt_soldier_idle"][0] = "takedown_room1Alt_soldier_idle";
-  level._id_4CC9["generic"]["takedown_room2A_soldier"] = "takedown_room2A_soldier";
-  level._id_4CC9["generic"]["takedown_room2A_soldier_idle"][0] = "takedown_room2A_soldier_end_idle";
-  level._id_4CC9["generic"]["takedown_room1B_soldier"] = "takedown_room1B_soldier";
-  level._id_4CC9["generic"]["takedown_room1B_soldier_idle"][0] = "takedown_room1B_soldier_idle";
-  level._id_4CC9["generic"]["takedown_room1A_soldier"] = "takedown_room1A_soldier";
-  level._id_4CC9["generic"]["takedown_room1A_soldier_idle"][0] = "takedown_room1A_soldier_idle";
-  level._id_4CC9["generic"]["hostage_chair_twitch2"] = "hostage_chair_twitch2";
-  level._id_4CC9["generic"]["hostage_chair_twitch2_idle"][0] = "hostage_chair_idle";
-  level._id_4CC9["generic"]["hostage_chair_twitch"] = "hostage_chair_twitch";
-  level._id_4CC9["generic"]["hostage_chair_twitch_idle"][0] = "hostage_chair_idle";
-  _id_4D62("hostage_chair_twitch2", ::_id_4D41);
-  _id_4D62("hostage_chair_twitch", ::_id_4D41);
-  level._id_4CC9["generic"]["execution_shield_soldier"] = "execution_shield_soldier";
-  level._id_4CC9["generic"]["execution_shield_hostage"] = "execution_shield_hostage";
-  level._id_4CC9["generic"]["execution_shield_hostage_death"] = "execution_shield_hostage_death";
-  level._id_4CC9["generic"]["execution_shield_hostage_survives"] = "execution_shield_hostage_survives";
-  level._id_4CC9["generic"]["execution_shield_hostage_idle"][0] = "hostage_knees_idle";
-  _id_4D62("execution_shield_soldier", ::_id_4D3B);
-  _id_4D62("execution_shield_hostage", ::_id_4D3E);
-  level._id_4CC9["generic"]["execution_knife_soldier"] = "execution_knife_soldier";
-  level._id_4CC9["generic"]["execution_knife_hostage"] = "execution_knife_hostage";
-  level._id_4CC9["generic"]["execution_knife_hostage_death"] = "execution_knife_hostage_death";
-  level._id_4CC9["generic"]["execution_knife_hostage_idle"][0] = "hostage_knees_idle";
-  level._id_4CC9["generic"]["execution_knife_hostage_manhandled"] = "takedown_room2B_hostageA";
-  level._id_4CC9["generic"]["execution_knife_hostage_manhandled_idle"][0] = "takedown_room2B_hostageA_idle";
-  _id_4D62("execution_knife_hostage", ::_id_4D3E);
-  _id_4D62("execution_knife_soldier", ::_id_4D3A);
-  level._id_4CC9["generic"]["execution_knife2_soldier"] = "execution_knife2_soldier";
-  level._id_4CC9["generic"]["execution_knife2_hostage"] = "execution_knife2_hostage";
-  level._id_4CC9["generic"]["execution_knife2_hostage_death"] = "execution_knife2_hostage_death";
-  level._id_4CC9["generic"]["execution_knife2_hostage_idle"][0] = "hostage_stand_idle";
-  _id_4D62("execution_knife2_hostage", ::_id_4D3E);
-  _id_4D62("execution_knife2_soldier", ::_id_4D3A);
-  level._id_4CC9["generic"]["execution_onknees_soldier"] = "execution_onknees_soldier";
-  level._id_4CC9["generic"]["execution_onknees_hostage"] = "execution_onknees_hostage";
-  level._id_4CC9["generic"]["execution_onknees_hostage_idle"][0] = "execution_onknees_hostage_survives";
-  level._id_4CC9["generic"]["execution_onknees_hostage_death"] = "execution_onknees_hostage_death";
-  level._id_4CC9["generic"]["execution_onknees_hostage_manhandled_guarded"] = "takedown_room1A_hostageB";
-  level._id_4CC9["generic"]["execution_onknees_hostage_manhandled_guarded_idle"][0] = "takedown_room1A_hostageB_idle";
-  _id_4D62("execution_onknees_soldier", ::_id_4D3B);
-  _id_4D62("execution_onknees_hostage", ::_id_4D3E);
-  level._id_4CC9["generic"]["execution_onknees2_soldier"] = "execution_onknees2_soldier";
-  level._id_4CC9["generic"]["execution_onknees2_hostage"] = "execution_onknees2_hostage";
-  level._id_4CC9["generic"]["execution_onknees2_hostage_survives"] = "execution_onknees2_hostage_survives";
-  level._id_4CC9["generic"]["execution_onknees2_hostage_death"] = "execution_onknees2_hostage_death";
-  level._id_4CC9["generic"]["execution_onknees2_hostage_manhandled_guarded"] = "takedown_room2B_hostageB";
-  level._id_4CC9["generic"]["execution_onknees2_hostage_manhandled_guarded_idle"][0] = "takedown_room2B_hostageB_idle";
-  level._id_4CC9["generic"]["execution_onknees2_hostage_manhandled_guarded_prepare_idleV2"][0] = "takedown_room2A_hostageB_start_idle";
-  level._id_4CC9["generic"]["execution_onknees2_hostage_manhandled_guardedV2"] = "takedown_room2A_hostageB";
-  level._id_4CC9["generic"]["execution_onknees2_hostage_manhandled_guarded_idleV2"][0] = "takedown_room2A_hostageB_end_idle";
-  _id_4D62("execution_onknees2_soldier", ::_id_4D3B);
-  _id_4D62("execution_onknees2_hostage", ::_id_4D43);
-  level._id_4CC9["generic"]["execution_slamwall_soldier"] = "execution_slamwall_soldier";
-  level._id_4CC9["generic"]["execution_slamwall_hostage"] = "execution_slamwall_hostage";
-  level._id_4CC9["generic"]["execution_slamwall_hostage_idle"][0] = "hostage_stand_idle";
-  level._id_4CC9["generic"]["execution_slamwall_hostage_death"] = "execution_slamwall_hostage_death";
-  level._id_4CC9["generic"]["execution_slamwall_hostage_manhandled_prepare"] = "takedown_room2A_hostageA_flee";
-  level._id_4CC9["generic"]["execution_slamwall_hostage_manhandled_prepare_idle"][0] = "takedown_room2A_hostageA_hide_idle";
-  level._id_4CC9["generic"]["execution_slamwall_hostage_manhandled"] = "takedown_room2A_hostageA";
-  level._id_4CC9["generic"]["execution_slamwall_hostage_manhandled_idle"][0] = "takedown_room2A_hostageA_end_idle";
-  _id_4D62("execution_slamwall_soldier", ::_id_4D3B);
-  _id_4D62("execution_slamwall_hostage", ::_id_4D3E);
-  level._id_4CC9["generic"]["execution_fightback_guy1_03"] = "execution_fightback_guy1_03";
-  level._id_4CC9["generic"]["execution_fightback_guy2_03"] = "execution_fightback_guy2_03";
-  level._id_4CC9["generic"]["execution_fightback_guy2_03_death"] = "execution_fightback_guy2_03_death";
-  level._id_4CC9["generic"]["execution_fightback_guy2_03_survives"] = "execution_fightback_guy2_03_survives";
-  _id_4D62("execution_fightback_guy1_03", ::_id_4D3B);
-  _id_4D62("execution_fightback_guy2_03", ::_id_4D43);
-  level._id_4CC9["generic"]["patrol_bored_react"] = "patrol_bored_react_walkstop";
-  level._id_4CC9["generic"]["exposed_idle_react"] = "exposed_idle_reactA";
-  level._id_4CC9["generic"]["chess_surprise"] = "parabolic_chessgame_surprise_b";
-  level._id_4CC9["generic"]["breach_chair_reaction_v1"] = "breach_chair_reaction_v1";
-  level._id_4CC9["generic"]["patrol_bored_react_walkstop"] = "patrol_bored_react_walkstop";
-  level._id_4CC9["generic"]["exposed_idle_reactA"] = "exposed_idle_reactA";
-  level._id_4CC9["generic"]["hostage_stand_react_front"] = "hostage_stand_react_front";
-  level._id_4CC9["generic"]["hostage_stand_react_front_idle"][0] = "hostage_stand_idle";
-  level._id_4CC9["generic"]["hostage_stand_react_front_manhandled"] = "takedown_room1Alt_hostage";
-  level._id_4CC9["generic"]["hostage_stand_react_front_manhandled_idle"][0] = "takedown_room1Alt_hostage_idle";
-  level._id_4CC9["generic"]["death_explosion_stand_B_v3"] = "death_explosion_stand_B_v3";
-  level._id_4CC9["generic"]["breach_stackL_approach"] = "breach_stackL_approach";
-  level._id_4CC9["generic"]["react_stand_2_run_R45"] = "react_stand_2_run_R45";
-  level._id_4CCB["death_explosion_stand_B_v3"] = 1;
-  _id_4D62("hostage_stand_react_front", ::_id_4D40);
-  level._id_4CC9["generic"]["hostage_stand_fall"] = "hostage_stand_fall";
-  level._id_4CC9["generic"]["hostage_stand_fall_idle"][0] = "hostage_knees_idle";
-  level._id_4CC9["generic"]["hostage_stand_fall_idle"][1] = "hostage_knees_twitch";
-  level._id_4CC9["generic"]["hostage_stand_fall_manhandled"] = "takedown_room1A_hostageA";
-  level._id_4CC9["generic"]["hostage_stand_fall_manhandled_idle"][0] = "takedown_room1A_hostageA_idle";
-  level._id_4CC9["generic"]["hostage_stand_fall_manhandledV2"] = "takedown_room1B_hostage";
-  level._id_4CC9["generic"]["hostage_stand_fall_manhandled_idleV2"][0] = "takedown_room1B_hostage_idle";
-  _id_4D62("hostage_stand_fall", ::_id_4D40);
-  level._id_4CC9["generic"]["breach_react_knife_idle"] = "breach_react_knife_idle";
-  level._id_4CC9["generic"]["breach_react_knife_charge"] = "breach_react_knife_charge";
-  level._id_4CC9["generic"]["breach_react_knife_charge_death"] = "death_shotgun_back_v1";
-  _id_4D62("breach_react_knife_charge", ::_id_4D45);
-  level._id_4CC9["generic"]["breach_react_blowback_v1"] = "breach_react_blowback_v1";
-  level._id_4CC9["generic"]["breach_react_blowback_v2"] = "breach_react_blowback_v1";
-  level._id_4CC9["generic"]["breach_react_blowback_v3"] = "breach_react_blowback_v1";
-  level._id_4CC9["generic"]["dying_crawl_back"] = "dying_crawl_back";
-  _id_4D62("breach_react_blowback_v1", ::_id_4D3D);
-  _id_4D62("breach_react_blowback_v2", ::_id_4D3D);
-  level._id_4CC9["generic"]["breach_react_desk_v1"] = "breach_react_desk_v1";
-  level._id_4CC9["generic"]["breach_react_desk_v2"] = "breach_react_desk_v2";
-  level._id_4CC9["generic"]["breach_react_desk_v3"] = "breach_react_desk_v3";
-  level._id_4CC9["generic"]["breach_react_desk_v4"] = "breach_react_desk_v4";
-  level._id_4CC9["generic"]["breach_react_desk_v5"] = "breach_react_desk_v5";
-  level._id_4CC9["generic"]["breach_react_desk_v6"] = "breach_react_desk_v6";
-  level._id_4CC9["generic"]["breach_react_desk_v7"] = "breach_react_desk_v7";
-  _id_4D62("breach_react_desk_v7", ::_id_4D4A);
-  level._id_4CC9["generic"]["breach_react_push_guy1"] = "breach_react_push_guy1";
-  level._id_4CC9["generic"]["breach_react_push_guy2"] = "breach_react_push_guy2";
-  level._id_4CC9["generic"]["breach_react_guntoss_v1_guy1"] = "breach_react_guntoss_v1_guy1";
-  level._id_4CC9["generic"]["breach_react_guntoss_v1_guy2"] = "breach_react_guntoss_v1_guy2";
-  level._id_4CC9["generic"]["breach_react_guntoss_v2_guy1"] = "breach_react_guntoss_v2_guy1";
-  level._id_4CC9["generic"]["breach_react_guntoss_v2_guy2"] = "breach_react_guntoss_v2_guy2";
-  level._id_4CC9["generic"]["breach_chair_hide_reaction_v1"] = "breach_chair_hide_reaction_v1";
-  level._id_4CC9["generic"]["breach_chair_hide_reaction_v1_death"] = "covercrouch_death_1";
-  level._id_4CC9["generic"]["breach_chair_hide_reaction_v1_death2"] = "covercrouch_death_2";
-  level._id_4CC9["generic"]["breach_chair_hide_reaction_v2"] = "breach_chair_hide_reaction_v2";
-  level._id_4CC9["generic"]["breach_chair_hide_reaction_v2_death"] = "breach_chair_hide_reaction_death_v2";
-  _id_4D62("breach_chair_hide_reaction_v1", ::_id_4D47);
-  _id_4D62("breach_chair_hide_reaction_v2", ::_id_4D48);
-  level._id_4CC9["generic"]["execution_fightback_guy1_02"] = "execution_fightback_guy1_02";
-  level._id_4CC9["generic"]["execution_fightback_guy2_02"] = "execution_fightback_guy2_02";
-  level._id_0C59["generic"]["hostage_knees_loop"][0] = % hostage_knees_idle;
-  level._id_0C59["generic"]["hostage_knees_loop"][1] = % hostage_knees_twitch;
+breach_anims() {
+  level.breach_death_anims = [];
+  maps\_anim::addnotetrack_attach("generic", "attach knife right", "weapon_parabolic_knife", "TAG_INHAND");
+  maps\_anim::addnotetrack_detach("generic", "detach knife right", "weapon_parabolic_knife", "TAG_INHAND", "breach_react_knife_charge");
+  level.scr_stub["generic"]["takedown_room2B_soldier"] = "takedown_room2B_soldier";
+  level.scr_stub["generic"]["takedown_room2B_soldier_idle"][0] = "takedown_room2B_soldier_idle";
+  level.scr_stub["generic"]["takedown_room1Alt_soldier"] = "takedown_room1Alt_soldier";
+  level.scr_stub["generic"]["takedown_room1Alt_soldier_idle"][0] = "takedown_room1Alt_soldier_idle";
+  level.scr_stub["generic"]["takedown_room2A_soldier"] = "takedown_room2A_soldier";
+  level.scr_stub["generic"]["takedown_room2A_soldier_idle"][0] = "takedown_room2A_soldier_end_idle";
+  level.scr_stub["generic"]["takedown_room1B_soldier"] = "takedown_room1B_soldier";
+  level.scr_stub["generic"]["takedown_room1B_soldier_idle"][0] = "takedown_room1B_soldier_idle";
+  level.scr_stub["generic"]["takedown_room1A_soldier"] = "takedown_room1A_soldier";
+  level.scr_stub["generic"]["takedown_room1A_soldier_idle"][0] = "takedown_room1A_soldier_idle";
+  level.scr_stub["generic"]["hostage_chair_twitch2"] = "hostage_chair_twitch2";
+  level.scr_stub["generic"]["hostage_chair_twitch2_idle"][0] = "hostage_chair_idle";
+  level.scr_stub["generic"]["hostage_chair_twitch"] = "hostage_chair_twitch";
+  level.scr_stub["generic"]["hostage_chair_twitch_idle"][0] = "hostage_chair_idle";
+  add_slowmo_breach_custom_function("hostage_chair_twitch2", ::_slomo_breach_c4_hostage);
+  add_slowmo_breach_custom_function("hostage_chair_twitch", ::_slomo_breach_c4_hostage);
+  level.scr_stub["generic"]["execution_shield_soldier"] = "execution_shield_soldier";
+  level.scr_stub["generic"]["execution_shield_hostage"] = "execution_shield_hostage";
+  level.scr_stub["generic"]["execution_shield_hostage_death"] = "execution_shield_hostage_death";
+  level.scr_stub["generic"]["execution_shield_hostage_survives"] = "execution_shield_hostage_survives";
+  level.scr_stub["generic"]["execution_shield_hostage_idle"][0] = "hostage_knees_idle";
+  add_slowmo_breach_custom_function("execution_shield_soldier", ::_slomo_breach_executioner_pistol);
+  add_slowmo_breach_custom_function("execution_shield_hostage", ::_slomo_breach_executed_guy);
+  level.scr_stub["generic"]["execution_knife_soldier"] = "execution_knife_soldier";
+  level.scr_stub["generic"]["execution_knife_hostage"] = "execution_knife_hostage";
+  level.scr_stub["generic"]["execution_knife_hostage_death"] = "execution_knife_hostage_death";
+  level.scr_stub["generic"]["execution_knife_hostage_idle"][0] = "hostage_knees_idle";
+  level.scr_stub["generic"]["execution_knife_hostage_manhandled"] = "takedown_room2B_hostageA";
+  level.scr_stub["generic"]["execution_knife_hostage_manhandled_idle"][0] = "takedown_room2B_hostageA_idle";
+  add_slowmo_breach_custom_function("execution_knife_hostage", ::_slomo_breach_executed_guy);
+  add_slowmo_breach_custom_function("execution_knife_soldier", ::_slomo_breach_executioner_knife);
+  level.scr_stub["generic"]["execution_knife2_soldier"] = "execution_knife2_soldier";
+  level.scr_stub["generic"]["execution_knife2_hostage"] = "execution_knife2_hostage";
+  level.scr_stub["generic"]["execution_knife2_hostage_death"] = "execution_knife2_hostage_death";
+  level.scr_stub["generic"]["execution_knife2_hostage_idle"][0] = "hostage_stand_idle";
+  add_slowmo_breach_custom_function("execution_knife2_hostage", ::_slomo_breach_executed_guy);
+  add_slowmo_breach_custom_function("execution_knife2_soldier", ::_slomo_breach_executioner_knife);
+  level.scr_stub["generic"]["execution_onknees_soldier"] = "execution_onknees_soldier";
+  level.scr_stub["generic"]["execution_onknees_hostage"] = "execution_onknees_hostage";
+  level.scr_stub["generic"]["execution_onknees_hostage_idle"][0] = "execution_onknees_hostage_survives";
+  level.scr_stub["generic"]["execution_onknees_hostage_death"] = "execution_onknees_hostage_death";
+  level.scr_stub["generic"]["execution_onknees_hostage_manhandled_guarded"] = "takedown_room1A_hostageB";
+  level.scr_stub["generic"]["execution_onknees_hostage_manhandled_guarded_idle"][0] = "takedown_room1A_hostageB_idle";
+  add_slowmo_breach_custom_function("execution_onknees_soldier", ::_slomo_breach_executioner_pistol);
+  add_slowmo_breach_custom_function("execution_onknees_hostage", ::_slomo_breach_executed_guy);
+  level.scr_stub["generic"]["execution_onknees2_soldier"] = "execution_onknees2_soldier";
+  level.scr_stub["generic"]["execution_onknees2_hostage"] = "execution_onknees2_hostage";
+  level.scr_stub["generic"]["execution_onknees2_hostage_survives"] = "execution_onknees2_hostage_survives";
+  level.scr_stub["generic"]["execution_onknees2_hostage_death"] = "execution_onknees2_hostage_death";
+  level.scr_stub["generic"]["execution_onknees2_hostage_manhandled_guarded"] = "takedown_room2B_hostageB";
+  level.scr_stub["generic"]["execution_onknees2_hostage_manhandled_guarded_idle"][0] = "takedown_room2B_hostageB_idle";
+  level.scr_stub["generic"]["execution_onknees2_hostage_manhandled_guarded_prepare_idleV2"][0] = "takedown_room2A_hostageB_start_idle";
+  level.scr_stub["generic"]["execution_onknees2_hostage_manhandled_guardedV2"] = "takedown_room2A_hostageB";
+  level.scr_stub["generic"]["execution_onknees2_hostage_manhandled_guarded_idleV2"][0] = "takedown_room2A_hostageB_end_idle";
+  add_slowmo_breach_custom_function("execution_onknees2_soldier", ::_slomo_breach_executioner_pistol);
+  add_slowmo_breach_custom_function("execution_onknees2_hostage", ::_slomo_breach_executed_guy_pushed_to_floor);
+  level.scr_stub["generic"]["execution_slamwall_soldier"] = "execution_slamwall_soldier";
+  level.scr_stub["generic"]["execution_slamwall_hostage"] = "execution_slamwall_hostage";
+  level.scr_stub["generic"]["execution_slamwall_hostage_idle"][0] = "hostage_stand_idle";
+  level.scr_stub["generic"]["execution_slamwall_hostage_death"] = "execution_slamwall_hostage_death";
+  level.scr_stub["generic"]["execution_slamwall_hostage_manhandled_prepare"] = "takedown_room2A_hostageA_flee";
+  level.scr_stub["generic"]["execution_slamwall_hostage_manhandled_prepare_idle"][0] = "takedown_room2A_hostageA_hide_idle";
+  level.scr_stub["generic"]["execution_slamwall_hostage_manhandled"] = "takedown_room2A_hostageA";
+  level.scr_stub["generic"]["execution_slamwall_hostage_manhandled_idle"][0] = "takedown_room2A_hostageA_end_idle";
+  add_slowmo_breach_custom_function("execution_slamwall_soldier", ::_slomo_breach_executioner_pistol);
+  add_slowmo_breach_custom_function("execution_slamwall_hostage", ::_slomo_breach_executed_guy);
+  level.scr_stub["generic"]["execution_fightback_guy1_03"] = "execution_fightback_guy1_03";
+  level.scr_stub["generic"]["execution_fightback_guy2_03"] = "execution_fightback_guy2_03";
+  level.scr_stub["generic"]["execution_fightback_guy2_03_death"] = "execution_fightback_guy2_03_death";
+  level.scr_stub["generic"]["execution_fightback_guy2_03_survives"] = "execution_fightback_guy2_03_survives";
+  add_slowmo_breach_custom_function("execution_fightback_guy1_03", ::_slomo_breach_executioner_pistol);
+  add_slowmo_breach_custom_function("execution_fightback_guy2_03", ::_slomo_breach_executed_guy_pushed_to_floor);
+  level.scr_stub["generic"]["patrol_bored_react"] = "patrol_bored_react_walkstop";
+  level.scr_stub["generic"]["exposed_idle_react"] = "exposed_idle_reactA";
+  level.scr_stub["generic"]["chess_surprise"] = "parabolic_chessgame_surprise_b";
+  level.scr_stub["generic"]["breach_chair_reaction_v1"] = "breach_chair_reaction_v1";
+  level.scr_stub["generic"]["patrol_bored_react_walkstop"] = "patrol_bored_react_walkstop";
+  level.scr_stub["generic"]["exposed_idle_reactA"] = "exposed_idle_reactA";
+  level.scr_stub["generic"]["hostage_stand_react_front"] = "hostage_stand_react_front";
+  level.scr_stub["generic"]["hostage_stand_react_front_idle"][0] = "hostage_stand_idle";
+  level.scr_stub["generic"]["hostage_stand_react_front_manhandled"] = "takedown_room1Alt_hostage";
+  level.scr_stub["generic"]["hostage_stand_react_front_manhandled_idle"][0] = "takedown_room1Alt_hostage_idle";
+  level.scr_stub["generic"]["death_explosion_stand_B_v3"] = "death_explosion_stand_B_v3";
+  level.scr_stub["generic"]["breach_stackL_approach"] = "breach_stackL_approach";
+  level.scr_stub["generic"]["react_stand_2_run_R45"] = "react_stand_2_run_R45";
+  level.breach_death_anims["death_explosion_stand_B_v3"] = 1;
+  add_slowmo_breach_custom_function("hostage_stand_react_front", ::_slomo_breach_hostage_react);
+  level.scr_stub["generic"]["hostage_stand_fall"] = "hostage_stand_fall";
+  level.scr_stub["generic"]["hostage_stand_fall_idle"][0] = "hostage_knees_idle";
+  level.scr_stub["generic"]["hostage_stand_fall_idle"][1] = "hostage_knees_twitch";
+  level.scr_stub["generic"]["hostage_stand_fall_manhandled"] = "takedown_room1A_hostageA";
+  level.scr_stub["generic"]["hostage_stand_fall_manhandled_idle"][0] = "takedown_room1A_hostageA_idle";
+  level.scr_stub["generic"]["hostage_stand_fall_manhandledV2"] = "takedown_room1B_hostage";
+  level.scr_stub["generic"]["hostage_stand_fall_manhandled_idleV2"][0] = "takedown_room1B_hostage_idle";
+  add_slowmo_breach_custom_function("hostage_stand_fall", ::_slomo_breach_hostage_react);
+  level.scr_stub["generic"]["breach_react_knife_idle"] = "breach_react_knife_idle";
+  level.scr_stub["generic"]["breach_react_knife_charge"] = "breach_react_knife_charge";
+  level.scr_stub["generic"]["breach_react_knife_charge_death"] = "death_shotgun_back_v1";
+  add_slowmo_breach_custom_function("breach_react_knife_charge", ::_slomo_breach_knife_charger);
+  level.scr_stub["generic"]["breach_react_blowback_v1"] = "breach_react_blowback_v1";
+  level.scr_stub["generic"]["breach_react_blowback_v2"] = "breach_react_blowback_v1";
+  level.scr_stub["generic"]["breach_react_blowback_v3"] = "breach_react_blowback_v1";
+  level.scr_stub["generic"]["dying_crawl_back"] = "dying_crawl_back";
+  add_slowmo_breach_custom_function("breach_react_blowback_v1", ::_slomo_breach_blowback_guy);
+  add_slowmo_breach_custom_function("breach_react_blowback_v2", ::_slomo_breach_blowback_guy);
+  level.scr_stub["generic"]["breach_react_desk_v1"] = "breach_react_desk_v1";
+  level.scr_stub["generic"]["breach_react_desk_v2"] = "breach_react_desk_v2";
+  level.scr_stub["generic"]["breach_react_desk_v3"] = "breach_react_desk_v3";
+  level.scr_stub["generic"]["breach_react_desk_v4"] = "breach_react_desk_v4";
+  level.scr_stub["generic"]["breach_react_desk_v5"] = "breach_react_desk_v5";
+  level.scr_stub["generic"]["breach_react_desk_v6"] = "breach_react_desk_v6";
+  level.scr_stub["generic"]["breach_react_desk_v7"] = "breach_react_desk_v7";
+  add_slowmo_breach_custom_function("breach_react_desk_v7", ::_slomo_breach_desk_guy);
+  level.scr_stub["generic"]["breach_react_push_guy1"] = "breach_react_push_guy1";
+  level.scr_stub["generic"]["breach_react_push_guy2"] = "breach_react_push_guy2";
+  level.scr_stub["generic"]["breach_react_guntoss_v1_guy1"] = "breach_react_guntoss_v1_guy1";
+  level.scr_stub["generic"]["breach_react_guntoss_v1_guy2"] = "breach_react_guntoss_v1_guy2";
+  level.scr_stub["generic"]["breach_react_guntoss_v2_guy1"] = "breach_react_guntoss_v2_guy1";
+  level.scr_stub["generic"]["breach_react_guntoss_v2_guy2"] = "breach_react_guntoss_v2_guy2";
+  level.scr_stub["generic"]["breach_chair_hide_reaction_v1"] = "breach_chair_hide_reaction_v1";
+  level.scr_stub["generic"]["breach_chair_hide_reaction_v1_death"] = "covercrouch_death_1";
+  level.scr_stub["generic"]["breach_chair_hide_reaction_v1_death2"] = "covercrouch_death_2";
+  level.scr_stub["generic"]["breach_chair_hide_reaction_v2"] = "breach_chair_hide_reaction_v2";
+  level.scr_stub["generic"]["breach_chair_hide_reaction_v2_death"] = "breach_chair_hide_reaction_death_v2";
+  add_slowmo_breach_custom_function("breach_chair_hide_reaction_v1", ::_slomo_breach_chair_guy_normal);
+  add_slowmo_breach_custom_function("breach_chair_hide_reaction_v2", ::_slomo_breach_chair_guy_animated);
+  level.scr_stub["generic"]["execution_fightback_guy1_02"] = "execution_fightback_guy1_02";
+  level.scr_stub["generic"]["execution_fightback_guy2_02"] = "execution_fightback_guy2_02";
+  level.scr_anim["generic"]["hostage_knees_loop"][0] = % hostage_knees_idle;
+  level.scr_anim["generic"]["hostage_knees_loop"][1] = % hostage_knees_twitch;
 }
 
-_id_4CCC() {
-  level._id_0C59["generic"]["breach_friend_idle_01"][0] = % breach_flash_r1_idle;
-  level._id_0C59["generic"]["breach_friend_enter_01"] = % breach_flash_r1_enter;
-  level._id_0C59["generic"]["breach_friend_idle_02"][0] = % breach_flash_r2_idle;
-  level._id_0C59["generic"]["breach_friend_enter_02"] = % breach_flash_r2_enter;
+friendly_animations() {
+  level.scr_anim["generic"]["breach_friend_idle_01"][0] = % breach_flash_r1_idle;
+  level.scr_anim["generic"]["breach_friend_enter_01"] = % breach_flash_r1_enter;
+  level.scr_anim["generic"]["breach_friend_idle_02"][0] = % breach_flash_r2_idle;
+  level.scr_anim["generic"]["breach_friend_enter_02"] = % breach_flash_r2_enter;
 }
 
-_id_4CCD() {
+breach_fx_setup() {
   var_0 = self.script_fxid;
-  var_1 = self._id_4CCE;
+  var_1 = self.script_slowmo_breach;
   var_2 = common_scripts\utility::createexploder(var_0);
   var_2.v["origin"] = self.origin;
   var_2.v["angles"] = self.angles;
@@ -586,7 +586,7 @@ _id_4CCD() {
   var_2.v["soundalias"] = "nil";
 }
 
-_id_4CCF() {
+create_slowmo_breaches_from_entities() {
   var_0 = [];
   var_1 = getEntArray("breach_left_org", "targetname");
   var_2 = getEntArray("breach_right_org", "targetname");
@@ -603,14 +603,14 @@ _id_4CCF() {
   var_13 = getEntArray("trigger_multiple_breachIcon", "classname");
   var_14 = getEntArray("trigger_use_breach", "classname");
   var_15 = getEntArray("breach_damage_trigger", "targetname");
-  level._id_4CC9 = undefined;
+  level.scr_stub = undefined;
 
   foreach(var_17 in var_1) {
-    var_18 = var_17._id_4CCE;
+    var_18 = var_17.script_slowmo_breach;
     var_19 = "wood";
 
-    if(isDefined(var_17._id_4CD0)) {
-      switch (var_17._id_4CD0) {
+    if(isDefined(var_17.script_slowmo_breach_doortype)) {
+      switch (var_17.script_slowmo_breach_doortype) {
         case "payback_wood":
         case "caves_wood":
         case "estate_wood_backwards":
@@ -618,112 +618,112 @@ _id_4CCF() {
         case "wood":
         case "metal":
         case "none":
-          var_19 = var_17._id_4CD0;
+          var_19 = var_17.script_slowmo_breach_doortype;
           break;
         default:
       }
     }
 
     var_20 = spawnStruct();
-    var_20._id_4CD1 = var_17;
-    var_20._id_4CD2 = var_19;
-    var_20._id_222D = [];
-    var_20._id_222D["enemy"] = [];
-    var_20._id_222D["hostage"] = [];
-    var_20._id_222D["friendlyenemy"] = [];
-    var_20._id_222D["friendlyhostage"] = [];
-    var_20._id_222D["coopenemy"] = [];
-    var_20._id_222D["coophostage"] = [];
-    var_20._id_4CD3 = [];
-    var_20._id_4CD4 = [];
+    var_20.left_post = var_17;
+    var_20.doortype = var_19;
+    var_20.spawners = [];
+    var_20.spawners["enemy"] = [];
+    var_20.spawners["hostage"] = [];
+    var_20.spawners["friendlyenemy"] = [];
+    var_20.spawners["friendlyhostage"] = [];
+    var_20.spawners["coopenemy"] = [];
+    var_20.spawners["coophostage"] = [];
+    var_20.lookat_triggers = [];
+    var_20.path_solids = [];
     var_20.enabled = 1;
-    var_20._id_4CD5 = [];
-    var_20._id_4CD6 = [];
-    var_20._id_4CD7 = undefined;
-    var_20._id_4CD8 = [];
+    var_20.door_volume = [];
+    var_20.room_volume = [];
+    var_20.safe_volume = undefined;
+    var_20.friendly_anim_ent = [];
     var_0[var_18] = var_20;
   }
 
   foreach(var_17 in var_2) {
-    var_18 = var_17._id_4CCE;
-    var_0[var_18]._id_4CD9 = var_17;
+    var_18 = var_17.script_slowmo_breach;
+    var_0[var_18].right_post = var_17;
     var_23 = spawn("script_origin", var_17.origin);
     var_23.angles = var_17.angles;
     var_20 = spawnStruct();
     var_20.entity = var_23;
-    var_20._id_13FE = -90;
-    var_20 maps\_utility::_id_18B9();
-    var_0[var_18]._id_4CD8 = var_23;
+    var_20.yaw = -90;
+    var_20 maps\_utility::flashbanggettimeleftsec();
+    var_0[var_18].friendly_anim_ent = var_23;
   }
 
   foreach(var_26 in var_3) {}
-  var_0 = var_26 _id_4CE3(var_0, "enemy");
+  var_0 = var_26 breach_spawner_setup(var_0, "enemy");
 
   foreach(var_26 in var_4) {}
-  var_0 = var_26 _id_4CE3(var_0, "hostage");
+  var_0 = var_26 breach_spawner_setup(var_0, "hostage");
 
   foreach(var_26 in var_5) {}
-  var_0 = var_26 _id_4CE3(var_0, "friendlyenemy");
+  var_0 = var_26 breach_spawner_setup(var_0, "friendlyenemy");
 
   foreach(var_26 in var_6) {}
-  var_0 = var_26 _id_4CE3(var_0, "friendlyhostage");
+  var_0 = var_26 breach_spawner_setup(var_0, "friendlyhostage");
 
   foreach(var_26 in var_7) {}
-  var_0 = var_26 _id_4CE3(var_0, "coopenemy");
+  var_0 = var_26 breach_spawner_setup(var_0, "coopenemy");
 
   foreach(var_26 in var_8) {}
-  var_0 = var_26 _id_4CE3(var_0, "coophostage");
+  var_0 = var_26 breach_spawner_setup(var_0, "coophostage");
 
   foreach(var_39 in var_13) {
-    var_18 = var_39._id_4CCE;
-    var_0[var_18]._id_4CD3[var_0[var_18]._id_4CD3.size] = var_39;
+    var_18 = var_39.script_slowmo_breach;
+    var_0[var_18].lookat_triggers[var_0[var_18].lookat_triggers.size] = var_39;
     var_40 = getEnt(var_39.target, "targetname");
-    var_39._id_4CDA = var_40.origin;
+    var_39.breach_origin = var_40.origin;
     var_41 = getEnt(var_40.target, "targetname");
-    var_41._id_4014 = 0;
-    var_0[var_18]._id_4CD6 = var_41;
-    var_40 thread _id_4CE2(var_39, var_18, var_41);
-    var_42 = var_41._id_1692;
+    var_41.breached = 0;
+    var_0[var_18].room_volume = var_41;
+    var_40 thread breach_icon_think(var_39, var_18, var_41);
+    var_42 = var_41.script_flag;
     common_scripts\utility::flag_init(var_42);
   }
 
   foreach(var_39 in var_14) {
     var_39 useTriggerRequireLookAt();
-    var_18 = var_39._id_4CCE;
+    var_18 = var_39.script_slowmo_breach;
     var_0[var_18].trigger = var_39;
 
-    if(isDefined(var_39._id_4CDB)) {
-      var_39 thread _id_4D1F();
+    if(isDefined(var_39.script_breachgroup)) {
+      var_39 thread breach_group_trigger_think();
     }
   }
 
   foreach(var_47 in var_10) {
-    var_18 = var_47._id_4CCE;
-    var_0[var_18]._id_4CD5 = var_47;
+    var_18 = var_47.script_slowmo_breach;
+    var_0[var_18].door_volume = var_47;
   }
 
   foreach(var_47 in var_11) {
-    var_18 = var_47._id_4CCE;
-    var_0[var_18]._id_4CD7 = var_47;
+    var_18 = var_47.script_slowmo_breach;
+    var_0[var_18].safe_volume = var_47;
   }
 
   foreach(var_52 in var_9) {
-    var_18 = var_52._id_4CCE;
-    var_0[var_18]._id_4CD4[var_0[var_18]._id_4CD4.size] = var_52;
+    var_18 = var_52.script_slowmo_breach;
+    var_0[var_18].path_solids[var_0[var_18].path_solids.size] = var_52;
   }
 
   foreach(var_18, var_55 in var_0) {}
-  level thread _id_4CE5(var_55, var_18);
+  level thread slowmo_breach_think(var_55, var_18);
 
   foreach(var_39 in var_15) {
-    var_18 = var_39._id_4CCE;
-    var_39 thread _id_4CE0(var_18);
+    var_18 = var_39.script_slowmo_breach;
+    var_39 thread slowmo_breach_damage_trigger_think(var_18);
   }
 
-  level._id_4CDC = var_0;
+  level.breach_groups = var_0;
 }
 
-_id_4CDD(var_0, var_1, var_2, var_3, var_4) {
+objective_breach(var_0, var_1, var_2, var_3, var_4) {
   objective_setpointertextoverride(var_0, &"SCRIPT_WAYPOINT_BREACH");
   objective_position(var_0, (0, 0, 0));
   var_5 = [];
@@ -743,7 +743,7 @@ _id_4CDD(var_0, var_1, var_2, var_3, var_4) {
   var_6 = 0;
 
   foreach(var_8 in var_5) {
-    var_9 = level._id_4CDC[var_8]._id_4CD1;
+    var_9 = level.breach_groups[var_8].left_post;
 
     if(!isDefined(var_9)) {
       return;
@@ -755,16 +755,16 @@ _id_4CDD(var_0, var_1, var_2, var_3, var_4) {
   }
 }
 
-_id_4CDE(var_0) {
+assign_script_breachgroup_to_ents(var_0) {
   foreach(var_2 in var_0) {
     var_3 = 0;
 
-    foreach(var_9, var_5 in level._id_4CDC) {
-      foreach(var_7 in var_5._id_4CD3) {
-        if(distance(var_2.origin, var_7._id_4CDA) > 80) {
+    foreach(var_9, var_5 in level.breach_groups) {
+      foreach(var_7 in var_5.lookat_triggers) {
+        if(distance(var_2.origin, var_7.breach_origin) > 80) {
           continue;
         }
-        var_2._id_4CCE = var_9;
+        var_2.script_slowmo_breach = var_9;
         var_3 = 1;
         break;
       }
@@ -776,20 +776,20 @@ _id_4CDE(var_0) {
   }
 }
 
-_id_4CDF(var_0) {
+get_breach_indices_from_ents(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {}
-  var_1[var_1.size] = var_3._id_4CCE;
+  var_1[var_1.size] = var_3.script_slowmo_breach;
 
   return var_1;
 }
 
-_id_4CE0(var_0) {
+slowmo_breach_damage_trigger_think(var_0) {
   level waittill("breaching_number_" + var_0);
   wait 3;
   var_1 = getaiarray();
-  var_1 = maps\_utility::_id_1843(var_1, level.players);
+  var_1 = maps\_utility::array_merge(var_1, level.players);
 
   foreach(var_3 in var_1) {
     if(var_3 istouching(self)) {
@@ -801,13 +801,13 @@ _id_4CE0(var_0) {
   self delete();
 }
 
-_id_4CE1() {
-  self._id_1692 = "breach_door_icon_" + self._id_4CCE;
-  level thread maps\_load::_id_1F0F(self);
+icon_trigger_setup() {
+  self.script_flag = "breach_door_icon_" + self.script_slowmo_breach;
+  level thread maps\_load::trigger_looking(self);
 }
 
-_id_4CE2(var_0, var_1, var_2) {
-  thread _id_4D50(var_2);
+breach_icon_think(var_0, var_1, var_2) {
+  thread breach_debug_display_animnames(var_2);
   var_3 = newhudelem();
   var_3 setshader("breach_icon", 1, 1);
   var_3.alpha = 0;
@@ -823,29 +823,29 @@ _id_4CE2(var_0, var_1, var_2) {
   var_5 = "breach_door_icon_" + var_1;
   common_scripts\utility::flag_wait(var_5);
 
-  while(!var_2._id_4014) {
+  while(!var_2.breached) {
     wait 0.05;
   }
   var_3 destroy();
   var_4 delete();
 }
 
-_id_4CE3(var_0, var_1) {
-  var_2 = self._id_4CCE;
+breach_spawner_setup(var_0, var_1) {
+  var_2 = self.script_slowmo_breach;
   var_3 = 0;
 
-  if(isDefined(self._id_4CE4)) {
+  if(isDefined(self.script_slowmo_breach_spawners)) {
     if(var_1 == "enemy" || var_1 == "hostage") {
-      var_3 = self._id_4CE4;
+      var_3 = self.script_slowmo_breach_spawners;
     }
   }
 
-  if(!isDefined(var_0[var_2]._id_222D[var_1][var_3])) {
-    var_0[var_2]._id_222D[var_1][var_3] = [];
+  if(!isDefined(var_0[var_2].spawners[var_1][var_3])) {
+    var_0[var_2].spawners[var_1][var_3] = [];
   }
-  var_4 = var_0[var_2]._id_222D[var_1][var_3];
+  var_4 = var_0[var_2].spawners[var_1][var_3];
   var_4[var_4.size] = self;
-  var_0[var_2]._id_222D[var_1][var_3] = var_4;
+  var_0[var_2].spawners[var_1][var_3] = var_4;
 
   if(var_0.size) {
     return var_0;
@@ -854,51 +854,51 @@ _id_4CE3(var_0, var_1) {
   }
 }
 
-_id_4CE5(var_0, var_1) {
-  var_2 = var_0._id_4CD1;
-  var_3 = var_0._id_4CD9;
-  var_4 = var_0._id_222D["enemy"];
-  var_5 = var_0._id_222D["hostage"];
+slowmo_breach_think(var_0, var_1) {
+  var_2 = var_0.left_post;
+  var_3 = var_0.right_post;
+  var_4 = var_0.spawners["enemy"];
+  var_5 = var_0.spawners["hostage"];
   var_6 = var_0.trigger;
-  var_7 = var_0._id_4CD4;
-  var_8 = var_0._id_4CD5;
-  var_9 = var_0._id_4CD6;
+  var_7 = var_0.path_solids;
+  var_8 = var_0.door_volume;
+  var_9 = var_0.room_volume;
   var_10 = [];
   var_11 = [];
   var_12 = [];
   var_13 = [];
 
-  if(isDefined(var_0._id_222D["friendlyenemy"][0])) {
-    var_10 = var_0._id_222D["friendlyenemy"][0];
-    var_0._id_222D["friendlyenemy"] = var_10;
+  if(isDefined(var_0.spawners["friendlyenemy"][0])) {
+    var_10 = var_0.spawners["friendlyenemy"][0];
+    var_0.spawners["friendlyenemy"] = var_10;
   }
 
-  if(isDefined(var_0._id_222D["friendlyhostage"][0])) {
-    var_11 = var_0._id_222D["friendlyhostage"][0];
-    var_0._id_222D["friendlyhostage"] = var_11;
+  if(isDefined(var_0.spawners["friendlyhostage"][0])) {
+    var_11 = var_0.spawners["friendlyhostage"][0];
+    var_0.spawners["friendlyhostage"] = var_11;
   }
 
-  if(isDefined(var_0._id_222D["coopenemy"][0])) {
-    var_12 = var_0._id_222D["coopenemy"][0];
-    var_0._id_222D["coopenemy"] = var_12;
+  if(isDefined(var_0.spawners["coopenemy"][0])) {
+    var_12 = var_0.spawners["coopenemy"][0];
+    var_0.spawners["coopenemy"] = var_12;
   }
 
-  if(isDefined(var_0._id_222D["coophostage"][0])) {
-    var_13 = var_0._id_222D["coophostage"][0];
-    var_0._id_222D["coophostage"] = var_13;
+  if(isDefined(var_0.spawners["coophostage"][0])) {
+    var_13 = var_0.spawners["coophostage"][0];
+    var_0.spawners["coophostage"] = var_13;
   }
 
   var_14 = spawnStruct();
   var_14.entity = var_2;
   var_14.forward = 5;
   var_14.right = 6;
-  var_14._id_13FE = -90;
-  var_14 maps\_utility::_id_18B9();
+  var_14.yaw = -90;
+  var_14 maps\_utility::flashbanggettimeleftsec();
   var_14 = spawnStruct();
   var_14.entity = var_3;
   var_14.right = -2;
-  var_14._id_13FE = 90;
-  var_14 maps\_utility::_id_18B9();
+  var_14.yaw = 90;
+  var_14 maps\_utility::flashbanggettimeleftsec();
   var_15 = [];
 
   foreach(var_18, var_17 in var_4) {}
@@ -922,24 +922,24 @@ _id_4CE5(var_0, var_1) {
     }
   }
 
-  var_0._id_222D["enemy"] = var_4;
-  var_0._id_222D["hostage"] = var_5;
-  common_scripts\utility::array_thread(var_4, maps\_utility::add_spawn_function, ::_id_4D25);
-  common_scripts\utility::array_thread(var_5, maps\_utility::add_spawn_function, ::_id_4D2A);
-  common_scripts\utility::array_thread(var_10, maps\_utility::add_spawn_function, ::_id_4D25);
-  common_scripts\utility::array_thread(var_11, maps\_utility::add_spawn_function, ::_id_4D2A);
-  common_scripts\utility::array_thread(var_12, maps\_utility::add_spawn_function, ::_id_4D25);
-  common_scripts\utility::array_thread(var_13, maps\_utility::add_spawn_function, ::_id_4D2A);
+  var_0.spawners["enemy"] = var_4;
+  var_0.spawners["hostage"] = var_5;
+  common_scripts\utility::array_thread(var_4, maps\_utility::add_spawn_function, ::breach_enemy_spawner_think);
+  common_scripts\utility::array_thread(var_5, maps\_utility::add_spawn_function, ::breach_hostage_spawner_think);
+  common_scripts\utility::array_thread(var_10, maps\_utility::add_spawn_function, ::breach_enemy_spawner_think);
+  common_scripts\utility::array_thread(var_11, maps\_utility::add_spawn_function, ::breach_hostage_spawner_think);
+  common_scripts\utility::array_thread(var_12, maps\_utility::add_spawn_function, ::breach_enemy_spawner_think);
+  common_scripts\utility::array_thread(var_13, maps\_utility::add_spawn_function, ::breach_hostage_spawner_think);
   var_6 setHintString(&"SCRIPT_PLATFORM_BREACH_ACTIVATE");
 
-  if(!isDefined(level._id_4CE6)) {
-    level._id_4CE6 = [];
+  if(!isDefined(level.breach_use_triggers)) {
+    level.breach_use_triggers = [];
   }
-  level._id_4CE6 = maps\_utility::_id_0BC3(level._id_4CE6, var_6);
+  level.breach_use_triggers = maps\_utility::array_add(level.breach_use_triggers, var_6);
   var_21 = "breach_door_charge";
   var_22 = undefined;
 
-  switch (var_0._id_4CD2) {
+  switch (var_0.doortype) {
     case "metal":
       var_22 = "breach_door_model_metal";
       break;
@@ -964,41 +964,41 @@ _id_4CE5(var_0, var_1) {
       break;
   }
 
-  var_23 = maps\_utility::_id_1287(var_22);
+  var_23 = maps\_utility::spawn_anim_model(var_22);
 
-  if(var_0._id_4CD2 == "none" || var_0._id_4CD2 == "estate_wood_backwards") {
+  if(var_0.doortype == "none" || var_0.doortype == "estate_wood_backwards") {
     var_23 hide();
   }
-  level._id_4CE7 = [];
-  level._id_4CE7[var_1] = var_23;
-  var_24 = maps\_utility::_id_1287(var_21);
-  var_24 maps\_utility::_id_2807();
-  var_2._id_4CE8 = [];
-  var_2 _id_4D04("active_breacher_rig");
-  var_25 = var_2._id_4CE8["active_breacher_rig"];
+  level.breach_doors = [];
+  level.breach_doors[var_1] = var_23;
+  var_24 = maps\_utility::spawn_anim_model(var_21);
+  var_24 maps\_utility::hide_notsolid();
+  var_2.scene_models = [];
+  var_2 add_scene_model("active_breacher_rig");
+  var_25 = var_2.scene_models["active_breacher_rig"];
   var_25 hide();
   var_26 = undefined;
 
-  if(maps\_utility::_id_12C1()) {
-    var_2 _id_4D03();
-    var_26 = var_2._id_4CE8["passive_breacher_rig"];
+  if(maps\_utility::is_coop()) {
+    var_2 add_coop_scene_models();
+    var_26 = var_2.scene_models["passive_breacher_rig"];
     var_26 hide();
   }
 
-  var_2._id_4CAD = var_23;
-  var_2._id_4CE9 = var_24;
-  var_2._id_4CEA = var_3;
-  var_2._id_4CEB = var_1;
-  var_2 maps\_anim::_id_11CF(var_23, "breach");
-  var_2 maps\_anim::_id_11CF(var_24, "breach");
-  var_2 maps\_anim::_id_11CF(var_25, "breach_player_anim");
+  var_2.door = var_23;
+  var_2.charge = var_24;
+  var_2.post = var_3;
+  var_2.breach_index = var_1;
+  var_2 maps\_anim::anim_first_frame_solo(var_23, "breach");
+  var_2 maps\_anim::anim_first_frame_solo(var_24, "breach");
+  var_2 maps\_anim::anim_first_frame_solo(var_25, "breach_player_anim");
 
-  if(maps\_utility::_id_12C1()) {
-    var_2 maps\_anim::_id_11CF(var_26, "breach_player_anim");
+  if(maps\_utility::is_coop()) {
+    var_2 maps\_anim::anim_first_frame_solo(var_26, "breach_player_anim");
   }
-  var_2 _id_4CF1(var_0);
+  var_2 wait_for_breach_or_deletion(var_0);
 
-  foreach(var_28 in var_2._id_4CE8) {}
+  foreach(var_28 in var_2.scene_models) {}
   var_28 delete();
 
   if(isDefined(var_6)) {
@@ -1018,22 +1018,22 @@ _id_4CE5(var_0, var_1) {
   }
 }
 
-_id_4CEC(var_0) {
-  if(!isDefined(level._id_4CED)) {
+breach_should_be_skipped(var_0) {
+  if(!isDefined(level.skip_breach)) {
     return 0;
   }
-  if(!isDefined(level._id_4CED[var_0])) {
+  if(!isDefined(level.skip_breach[var_0])) {
     return 0;
   }
   return 1;
 }
 
-_id_4CEE(var_0, var_1) {
+coop_player_touching_valid_door_volume(var_0, var_1) {
   var_2 = [];
   var_2[0] = var_0;
 
-  if(isDefined(var_0._id_4CDB)) {
-    var_2 = _id_4CEF(var_0._id_4CDB);
+  if(isDefined(var_0.script_breachgroup)) {
+    var_2 = get_door_volumes_from_breachgroup(var_0.script_breachgroup);
   }
   foreach(var_4 in var_2) {
     if(var_1 istouching(var_4)) {
@@ -1044,12 +1044,12 @@ _id_4CEE(var_0, var_1) {
   return 0;
 }
 
-_id_4CEF(var_0) {
+get_door_volumes_from_breachgroup(var_0) {
   var_1 = [];
   var_2 = getEntArray("breach_door_volume", "targetname");
 
   foreach(var_4 in var_2) {
-    if(isDefined(var_4._id_4CDB) && var_4._id_4CDB == var_0) {
+    if(isDefined(var_4.script_breachgroup) && var_4.script_breachgroup == var_0) {
       var_1[var_1.size] = var_4;
     }
   }
@@ -1057,14 +1057,14 @@ _id_4CEF(var_0) {
   return var_1;
 }
 
-_id_4CF0(var_0, var_1, var_2) {
-  if(maps\_utility::_id_12C1()) {
-    var_3 = maps\_utility::_id_133A(var_0);
+breach_participants_ready_to_proceed(var_0, var_1, var_2) {
+  if(maps\_utility::is_coop()) {
+    var_3 = maps\_utility::get_other_player(var_0);
 
-    if(var_3 maps\_utility::_id_133C("laststand_downed") && var_3 maps\_utility::_id_1008("laststand_downed")) {
+    if(var_3 maps\_utility::ent_flag_exist("laststand_downed") && var_3 maps\_utility::ent_flag("laststand_downed")) {
       return 0;
     }
-    if(_id_4CEE(var_2, var_3)) {
+    if(coop_player_touching_valid_door_volume(var_2, var_3)) {
       return 1;
     } else {
       return 0;
@@ -1074,12 +1074,12 @@ _id_4CF0(var_0, var_1, var_2) {
   if(var_1.size == 0) {
     return 1;
   }
-  if(!_id_4CFC(var_2)) {
+  if(!room_has_multiple_doors(var_2)) {
     return 1;
   }
-  if(!_id_4D02(var_2, 1)) {
+  if(!breach_friendlies_ready_at_other_door(var_2, 1)) {
     if(getDvar("breach_requires_friendlies_in_position") == "1") {
-      if(!_id_4CF3(var_1, var_2)) {
+      if(!breachfriendlies_can_teleport(var_1, var_2)) {
         return 0;
       }
     }
@@ -1088,20 +1088,20 @@ _id_4CF0(var_0, var_1, var_2) {
   return 1;
 }
 
-_id_4CF1(var_0) {
+wait_for_breach_or_deletion(var_0) {
   var_1 = var_0.trigger;
 
   if(!isDefined(var_1)) {
     return;
   }
-  var_2 = var_0._id_4CD5;
+  var_2 = var_0.door_volume;
   var_1 endon("death");
 
   for(;;) {
     var_1 waittill("trigger", var_3, var_4);
 
-    if(gettime() == level._id_4CC0) {
-      var_4 = level._id_4CF2;
+    if(gettime() == level.breach_passive_time) {
+      var_4 = level.breach_passive_player;
     }
     var_5 = isDefined(var_4);
 
@@ -1109,61 +1109,61 @@ _id_4CF1(var_0) {
       return;
     }
     if(isalive(var_3) && !var_5) {
-      if(_id_4D65()) {
+      if(breach_failed_to_start()) {
         continue;
       }
     }
 
-    if(isDefined(var_0._id_4CD7) && !maps\_utility::_id_0A36()) {
+    if(isDefined(var_0.safe_volume) && !maps\_utility::is_specialop()) {
       if(isPlayer(var_3) && isalive(var_3)) {
-        var_6 = var_0._id_4CD7 maps\_utility::_id_2789("axis");
+        var_6 = var_0.safe_volume maps\_utility::get_ai_touching_volume("axis");
 
         if(var_6.size) {
-          thread _id_4CF6();
+          thread breach_too_many_enemies_hint();
           continue;
         }
       }
     }
 
-    var_7 = _id_4D1D(var_2);
+    var_7 = get_available_breachfriendlies(var_2);
 
     if(isPlayer(var_3) && isalive(var_3)) {
-      if(_id_4CEC(var_1._id_4CCE)) {
+      if(breach_should_be_skipped(var_1.script_slowmo_breach)) {
         break;
       }
 
-      if(_id_4CF0(var_3, var_7, var_2)) {
-        if(_id_4D0F(var_0, var_3)) {
+      if(breach_participants_ready_to_proceed(var_3, var_7, var_2)) {
+        if(player_breach(var_0, var_3)) {
           break;
         }
       } else {
-        thread _id_4CF5();
+        thread breach_friendly_hint();
       }
       continue;
     }
 
     if(var_7.size) {
-      _id_4D07(var_0, var_7);
+      friendlies_breach(var_0, var_7);
       break;
     } else {
-      _id_4D06(var_0);
+      breachless_door_opens(var_0);
       break;
     }
   }
 }
 
-_id_4CF3(var_0, var_1) {
+breachfriendlies_can_teleport(var_0, var_1) {
   var_2 = 0;
-  var_3 = _id_4D09(var_1);
+  var_3 = get_player_volume(var_1);
 
   foreach(var_5 in var_0) {
     if(isDefined(var_3)) {
-      if(var_5 _id_4D0B(var_3)) {
+      if(var_5 goalpos_within_volume(var_3)) {
         continue;
       }
     }
 
-    if(!var_5 _id_4CF4()) {
+    if(!var_5 friendly_can_teleport()) {
       continue;
     }
     var_2++;
@@ -1175,8 +1175,8 @@ _id_4CF3(var_0, var_1) {
   return 0;
 }
 
-_id_4CF4() {
-  if(maps\_utility::_id_0B20(self)) {
+friendly_can_teleport() {
+  if(maps\_utility::player_can_see_ai(self)) {
     return 0;
   }
   if(distance(level.player.origin, self.origin) < 96) {
@@ -1185,36 +1185,36 @@ _id_4CF4() {
   return 1;
 }
 
-_id_4CF5() {
-  if(maps\_utility::_id_12C1()) {
-    thread _id_4CFA(&"SCRIPT_BREACH_NEED_PLAYER");
+breach_friendly_hint() {
+  if(maps\_utility::is_coop()) {
+    thread breach_hint_create(&"SCRIPT_BREACH_NEED_PLAYER");
   } else {
-    thread _id_4CFA(&"SCRIPT_BREACH_NEED_FRIENDLY");
+    thread breach_hint_create(&"SCRIPT_BREACH_NEED_FRIENDLY");
   }
 }
 
-_id_4CF6() {
-  thread _id_4CFA(&"SCRIPT_BREACH_TOO_MANY_ENEMIES");
+breach_too_many_enemies_hint() {
+  thread breach_hint_create(&"SCRIPT_BREACH_TOO_MANY_ENEMIES");
 }
 
-_id_4CF7() {
-  thread _id_4CFA(&"SCRIPT_BREACH_RELOADING");
+breach_reloading_hint() {
+  thread breach_hint_create(&"SCRIPT_BREACH_RELOADING");
 }
 
-_id_4CF8() {
-  thread _id_4CFA(&"SCRIPT_BREACH_ILLEGAL_WEAPON");
+breach_bad_weapon_hint() {
+  thread breach_hint_create(&"SCRIPT_BREACH_ILLEGAL_WEAPON");
 }
 
-_id_4CF9() {
-  if(maps\_utility::_id_12C1()) {
-    thread _id_4CFA(&"SCRIPT_BREACH_PARTNER_NOT_READY");
+breach_not_ready_hint() {
+  if(maps\_utility::is_coop()) {
+    thread breach_hint_create(&"SCRIPT_BREACH_PARTNER_NOT_READY");
     return;
   }
 
-  thread _id_4CFA(&"SCRIPT_BREACH_YOU_NOT_READY");
+  thread breach_hint_create(&"SCRIPT_BREACH_YOU_NOT_READY");
 }
 
-_id_4CFA(var_0) {
+breach_hint_create(var_0) {
   level notify("breach_hint_cleanup");
   level endon("breach_hint_cleanup");
   var_1 = 20;
@@ -1222,74 +1222,74 @@ _id_4CFA(var_0) {
   if(issplitscreen()) {
     var_1 = -23;
   }
-  thread maps\_utility::_id_27BB(var_0, 3, var_1);
-  thread _id_4CFB();
+  thread maps\_utility::hint(var_0, 3, var_1);
+  thread breach_hint_cleanup();
 }
 
-_id_4CFB() {
+breach_hint_cleanup() {
   level notify("breach_hint_cleanup");
   level endon("breach_hint_cleanup");
 
-  foreach(var_1 in level._id_4CE6) {
+  foreach(var_1 in level.breach_use_triggers) {
     if(isDefined(var_1)) {
       var_1 setHintString("");
     }
   }
 
   level common_scripts\utility::waittill_notify_or_timeout("breaching", 3);
-  maps\_utility::_id_27BD();
+  maps\_utility::hint_fade();
 
-  foreach(var_1 in level._id_4CE6) {
+  foreach(var_1 in level.breach_use_triggers) {
     if(isDefined(var_1)) {
       var_1 setHintString(&"SCRIPT_PLATFORM_BREACH_ACTIVATE");
     }
   }
 }
 
-_id_4CFC(var_0) {
-  if(isDefined(var_0._id_4CDB)) {
+room_has_multiple_doors(var_0) {
+  if(isDefined(var_0.script_breachgroup)) {
     return 1;
   }
   return 0;
 }
 
-_id_4CFD() {
-  if(!isDefined(level._id_4CFE)) {
+breach_friendlies_take_grenades() {
+  if(!isDefined(level.breachfriendlies)) {
     return;
   }
-  level._id_4CFF = 1;
+  level.breachfriendlies_grenades_empty = 1;
 
-  foreach(var_1 in level._id_4CFE) {
-    var_1._id_4D00 = var_1.grenadeammo;
+  foreach(var_1 in level.breachfriendlies) {
+    var_1.grenadeammo_prebreach = var_1.grenadeammo;
     var_1.grenadeammo = 0;
   }
 }
 
-_id_4D01() {
-  if(!isDefined(level._id_4CFE)) {
+breach_friendlies_restore_grenades() {
+  if(!isDefined(level.breachfriendlies)) {
     return;
   }
-  if(!isDefined(level._id_4CFF)) {
+  if(!isDefined(level.breachfriendlies_grenades_empty)) {
     return;
   }
-  foreach(var_1 in level._id_4CFE) {
-    var_1.grenadeammo = var_1._id_4D00;
-    var_1._id_4D00 = undefined;
+  foreach(var_1 in level.breachfriendlies) {
+    var_1.grenadeammo = var_1.grenadeammo_prebreach;
+    var_1.grenadeammo_prebreach = undefined;
   }
 
-  level._id_4CFF = undefined;
+  level.breachfriendlies_grenades_empty = undefined;
 }
 
-_id_4D02(var_0, var_1) {
-  var_2 = var_0._id_4CDB;
-  var_3 = _id_4CEF(var_0._id_4CDB);
+breach_friendlies_ready_at_other_door(var_0, var_1) {
+  var_2 = var_0.script_breachgroup;
+  var_3 = get_door_volumes_from_breachgroup(var_0.script_breachgroup);
   var_3 = common_scripts\utility::array_remove(var_3, var_0);
   var_4 = var_3[0];
 
-  foreach(var_6 in level._id_4CFE) {
+  foreach(var_6 in level.breachfriendlies) {
     if(isDefined(var_1) && var_1) {
-      if(var_6 _id_4D0B(var_4)) {
-        if(var_6 _id_4CF4()) {
+      if(var_6 goalpos_within_volume(var_4)) {
+        if(var_6 friendly_can_teleport()) {
           return 1;
         }
       }
@@ -1303,60 +1303,60 @@ _id_4D02(var_0, var_1) {
   return 0;
 }
 
-_id_4D03() {
-  _id_4D04("passive_breacher_rig");
-  _id_4D04("active_breacher_3rd_person");
-  _id_4D04("passive_breacher_3rd_person");
+add_coop_scene_models() {
+  add_scene_model("passive_breacher_rig");
+  add_scene_model("active_breacher_3rd_person");
+  add_scene_model("passive_breacher_3rd_person");
 }
 
-_id_4D04(var_0) {
-  self._id_4CE8[var_0] = maps\_utility::_id_1287(var_0);
-  self._id_4CE8[var_0] hide();
+add_scene_model(var_0) {
+  self.scene_models[var_0] = maps\_utility::spawn_anim_model(var_0);
+  self.scene_models[var_0] hide();
 }
 
-_id_4D05(var_0, var_1) {
-  var_1._id_4014 = 1;
-  var_2 = _id_4D1E(var_0._id_4CDB);
+set_room_to_breached(var_0, var_1) {
+  var_1.breached = 1;
+  var_2 = get_breach_notify(var_0.script_breachgroup);
 
-  if(isDefined(var_0._id_4CDB)) {
+  if(isDefined(var_0.script_breachgroup)) {
     level notify(var_2);
   }
   var_1 notify("breached");
   var_0 common_scripts\utility::trigger_off();
 }
 
-_id_4D06(var_0) {
+breachless_door_opens(var_0) {
   var_1 = var_0.trigger;
-  var_2 = var_0._id_4CD6;
-  var_3 = var_0._id_4CD4;
-  var_4 = self._id_4CAD;
-  var_5 = self._id_4CE9;
-  _id_4D05(var_1, var_2);
+  var_2 = var_0.room_volume;
+  var_3 = var_0.path_solids;
+  var_4 = self.door;
+  var_5 = self.charge;
+  set_room_to_breached(var_1, var_2);
   common_scripts\utility::array_call(var_3, ::connectpaths);
-  common_scripts\utility::array_thread(var_3, maps\_utility::_id_2705);
+  common_scripts\utility::array_thread(var_3, maps\_utility::self_delete);
   var_6 = spawnStruct();
   var_6.entity = var_4;
   var_6.forward = 4;
   var_6.right = 10;
-  var_6._id_13FE = -170;
-  var_6 maps\_utility::_id_18B9();
+  var_6.yaw = -170;
+  var_6 maps\_utility::flashbanggettimeleftsec();
   var_5 delete();
 
-  if(!maps\_utility::_id_12C1()) {
+  if(!maps\_utility::is_coop()) {
     return;
   }
-  while(!var_2._id_4014) {
+  while(!var_2.breached) {
     wait 0.05;
   }
   var_7 = undefined;
   var_8 = undefined;
 
-  if(var_0._id_222D["coopenemy"].size) {
-    var_7 = var_0._id_222D["coopenemy"];
-    var_8 = var_0._id_222D["coophostage"];
+  if(var_0.spawners["coopenemy"].size) {
+    var_7 = var_0.spawners["coopenemy"];
+    var_8 = var_0.spawners["coophostage"];
   } else {
-    var_7 = var_0._id_222D["enemy"];
-    var_8 = var_0._id_222D["hostage"];
+    var_7 = var_0.spawners["enemy"];
+    var_8 = var_0.spawners["hostage"];
   }
 
   if(var_7.size) {
@@ -1367,24 +1367,24 @@ _id_4D06(var_0) {
   }
 }
 
-_id_4D07(var_0, var_1) {
+friendlies_breach(var_0, var_1) {
   var_2 = var_0.trigger;
-  var_3 = var_0._id_4CD5;
-  var_4 = var_0._id_4CD6;
-  var_5 = var_0._id_222D["enemy"];
-  var_6 = var_0._id_222D["hostage"];
-  var_7 = var_0._id_222D["friendlyenemy"];
-  var_8 = var_0._id_222D["friendlyhostage"];
-  var_9 = var_0._id_4CD4;
-  var_10 = self._id_4CE9;
-  var_11 = self._id_4CE8["active_breacher_rig"];
-  _id_4D05(var_2, var_4);
-  var_12 = var_0._id_4CD8;
-  var_13 = _id_4D09(var_3);
+  var_3 = var_0.door_volume;
+  var_4 = var_0.room_volume;
+  var_5 = var_0.spawners["enemy"];
+  var_6 = var_0.spawners["hostage"];
+  var_7 = var_0.spawners["friendlyenemy"];
+  var_8 = var_0.spawners["friendlyhostage"];
+  var_9 = var_0.path_solids;
+  var_10 = self.charge;
+  var_11 = self.scene_models["active_breacher_rig"];
+  set_room_to_breached(var_2, var_4);
+  var_12 = var_0.friendly_anim_ent;
+  var_13 = get_player_volume(var_3);
   var_14 = getDvar("breach_requires_friendlies_in_position") == "1";
 
   if(!var_14) {
-    if(isDefined(var_13) && _id_4D02(var_13)) {
+    if(isDefined(var_13) && breach_friendlies_ready_at_other_door(var_13)) {
       foreach(var_16 in var_1) {
         if(!var_16 istouching(var_3)) {
           var_1 = common_scripts\utility::array_remove(var_1, var_16);
@@ -1396,41 +1396,41 @@ _id_4D07(var_0, var_1) {
   }
 
   if(var_14) {
-    var_18 = maps\_utility::_id_0AE9(var_12.origin, var_1);
+    var_18 = maps\_utility::getclosest(var_12.origin, var_1);
   } else {
-    var_18 = _id_4D0A(var_12.origin, var_3, var_1, var_13);
+    var_18 = get_teleport_optimized_breachfriendly(var_12.origin, var_3, var_1, var_13);
   }
   var_1 = common_scripts\utility::array_remove(var_1, var_18);
 
   if(var_7.size) {
-    level._id_4D08 = maps\_utility::_id_272B(var_7, 1);
+    level.breachenemies = maps\_utility::array_spawn(var_7, 1);
   }
   if(var_8.size) {
     common_scripts\utility::array_call(var_8, ::stalingradspawn);
   }
   common_scripts\utility::array_call(var_9, ::connectpaths);
-  common_scripts\utility::array_thread(var_9, maps\_utility::_id_2705);
-  var_18 thread _id_4D1B(1, var_12, var_4);
+  common_scripts\utility::array_thread(var_9, maps\_utility::self_delete);
+  var_18 thread friendly_breach(1, var_12, var_4);
 
   if(var_1.size) {
     if(var_14) {
-      var_19 = maps\_utility::_id_0AE9(var_12.origin, var_1);
+      var_19 = maps\_utility::getclosest(var_12.origin, var_1);
     } else {
-      var_19 = _id_4D0A(var_12.origin, var_3, var_1, var_13);
+      var_19 = get_teleport_optimized_breachfriendly(var_12.origin, var_3, var_1, var_13);
     }
     if(isDefined(var_19)) {
-      var_19 thread _id_4D1B(2, var_12, var_4);
+      var_19 thread friendly_breach(2, var_12, var_4);
     } else {}
   }
 
   wait 1;
-  _id_4CFD();
-  maps\_anim::_id_1246(var_11, "breach_player_anim");
+  breach_friendlies_take_grenades();
+  maps\_anim::anim_single_solo(var_11, "breach_player_anim");
 }
 
-_id_4D09(var_0) {
+get_player_volume(var_0) {
   var_1 = undefined;
-  var_2 = _id_4D0D(var_0);
+  var_2 = get_grouped_doorvolumes(var_0);
 
   foreach(var_4 in var_2) {
     if(level.player istouching(var_4)) {
@@ -1442,17 +1442,17 @@ _id_4D09(var_0) {
   return var_1;
 }
 
-_id_4D0A(var_0, var_1, var_2, var_3) {
+get_teleport_optimized_breachfriendly(var_0, var_1, var_2, var_3) {
   var_4 = [];
 
   foreach(var_6 in var_2) {
     if(isDefined(var_3)) {
-      if(var_6 _id_4D0B(var_3)) {
+      if(var_6 goalpos_within_volume(var_3)) {
         continue;
       }
     }
 
-    if(!var_6 _id_4CF4()) {
+    if(!var_6 friendly_can_teleport()) {
       continue;
     }
     var_4[var_4.size] = var_6;
@@ -1461,11 +1461,11 @@ _id_4D0A(var_0, var_1, var_2, var_3) {
   if(!var_4.size) {
     return undefined;
   }
-  var_4 = maps\_utility::_id_0AEC(var_0, var_4);
+  var_4 = maps\_utility::get_array_of_closest(var_0, var_4);
   var_8 = var_4[0];
 
   foreach(var_6 in var_4) {
-    if(var_6 _id_4D0B(var_1)) {
+    if(var_6 goalpos_within_volume(var_1)) {
       var_8 = var_6;
       break;
     }
@@ -1474,9 +1474,9 @@ _id_4D0A(var_0, var_1, var_2, var_3) {
   return var_8;
 }
 
-_id_4D0B(var_0) {
+goalpos_within_volume(var_0) {
   if(isDefined(self.goalpos)) {
-    if(_id_4D0C(self.goalpos + (0, 0, 40), var_0)) {
+    if(origin_within_volume(self.goalpos + (0, 0, 40), var_0)) {
       return 1;
     }
   }
@@ -1484,7 +1484,7 @@ _id_4D0B(var_0) {
   return 0;
 }
 
-_id_4D0C(var_0, var_1) {
+origin_within_volume(var_0, var_1) {
   var_2 = spawn("script_origin", var_0);
   var_3 = 0;
 
@@ -1495,23 +1495,23 @@ _id_4D0C(var_0, var_1) {
   return var_3;
 }
 
-_id_4D0D(var_0) {
+get_grouped_doorvolumes(var_0) {
   var_1 = [];
   var_1[0] = var_0;
 
-  if(isDefined(var_0._id_4CDB)) {
-    foreach(var_3 in level._id_4CDC) {
-      if(!isDefined(var_3._id_4CD5)) {
+  if(isDefined(var_0.script_breachgroup)) {
+    foreach(var_3 in level.breach_groups) {
+      if(!isDefined(var_3.door_volume)) {
         continue;
       }
-      if(var_3._id_4CD5 == var_0) {
+      if(var_3.door_volume == var_0) {
         continue;
       }
-      if(!isDefined(var_3._id_4CD5._id_4CDB)) {
+      if(!isDefined(var_3.door_volume.script_breachgroup)) {
         continue;
       }
-      if(isDefined(var_3._id_4CD5._id_4CDB) && var_3._id_4CD5._id_4CDB == var_0._id_4CDB) {
-        var_1[var_1.size] = var_3._id_4CD5;
+      if(isDefined(var_3.door_volume.script_breachgroup) && var_3.door_volume.script_breachgroup == var_0.script_breachgroup) {
+        var_1[var_1.size] = var_3.door_volume;
       }
     }
   }
@@ -1519,7 +1519,7 @@ _id_4D0D(var_0) {
   return var_1;
 }
 
-_id_4D0E(var_0, var_1) {
+sort_breachers(var_0, var_1) {
   var_2 = var_1["active"];
   var_3 = anglestoright(self.angles);
   var_4 = vectorNormalize(var_2.origin - var_0.trigger.origin);
@@ -1533,25 +1533,25 @@ _id_4D0E(var_0, var_1) {
   return var_1;
 }
 
-_id_4D0F(var_0, var_1) {
+player_breach(var_0, var_1) {
   var_2 = [];
   var_2["active"] = var_1;
-  var_3 = self._id_4CE8["active_breacher_rig"];
+  var_3 = self.scene_models["active_breacher_rig"];
   var_4 = 0;
   var_5 = undefined;
 
-  if(maps\_utility::_id_12C1()) {
-    var_2["passive"] = maps\_utility::_id_133A(var_2["active"]);
-    var_5 = self._id_4CE8["passive_breacher_rig"];
-    var_6 = _id_4D4C(var_2["passive"]);
+  if(maps\_utility::is_coop()) {
+    var_2["passive"] = maps\_utility::get_other_player(var_2["active"]);
+    var_5 = self.scene_models["passive_breacher_rig"];
+    var_6 = breach_near_player(var_2["passive"]);
 
     if(var_6 == var_0) {
       var_4 = 1;
-      var_6._id_4CD6._id_4D10 = 1;
-      var_2 = _id_4D0E(var_0, var_2);
+      var_6.room_volume.has_passive_breacher = 1;
+      var_2 = sort_breachers(var_0, var_2);
     } else {
-      level._id_4CF2 = var_2["passive"];
-      level._id_4CC0 = gettime();
+      level.breach_passive_player = var_2["passive"];
+      level.breach_passive_time = gettime();
       var_6.trigger notify("trigger", var_2["passive"], "passive");
     }
   }
@@ -1562,7 +1562,7 @@ _id_4D0F(var_0, var_1) {
     var_2["passive"] disableweapons();
   }
   foreach(var_1 in var_2) {
-    if(!isDefined(level._id_4D11)) {
+    if(!isDefined(level.slowmo_breach_disable_stancemod)) {
       var_1 enableinvulnerability();
       var_1 disableweaponswitch();
       var_1 disableoffhandweapons();
@@ -1574,91 +1574,91 @@ _id_4D0F(var_0, var_1) {
 
     var_1 common_scripts\utility::_disableusability();
 
-    if(!isDefined(var_1._id_4D12)) {
-      var_1._id_4D12 = var_1 getcurrentweapon();
+    if(!isDefined(var_1.prebreachcurrentweapon)) {
+      var_1.prebreachcurrentweapon = var_1 getcurrentweapon();
     }
   }
 
   level notify("breaching");
-  level notify("breaching_number_" + self._id_4CCE);
+  level notify("breaching_number_" + self.script_slowmo_breach);
   setsaveddvar("objectiveHide", 1);
-  var_9 = var_0._id_4CD6;
-  _id_4D05(var_0.trigger, var_9);
+  var_9 = var_0.room_volume;
+  set_room_to_breached(var_0.trigger, var_9);
   var_10 = undefined;
-  var_11 = isDefined(level._id_4CBF[var_2["active"]._id_4D12]);
+  var_11 = isDefined(level.has_special_breach_anim[var_2["active"].prebreachcurrentweapon]);
 
   if(var_11) {
-    level._id_4D13 = 2.25;
-    _id_4D33();
+    level.slowmo_breach_start_delay = 2.25;
+    set_door_charge_anim_special();
     var_10 = 0.5;
   } else {
-    level._id_4D13 = 2.15;
-    _id_4D32();
+    level.slowmo_breach_start_delay = 2.15;
+    set_door_charge_anim_normal();
     var_10 = 0.2;
   }
 
-  var_2["active"] thread _id_4D15(var_10);
+  var_2["active"] thread play_detpack_plant_sound(var_10);
 
-  if(maps\_utility::_id_12C1()) {
-    if(!isDefined(level._id_4BCA)) {
-      level._id_4BB2 = 0;
-      level._id_4BB1 = 0;
-      level._id_4BCA = 1;
+  if(maps\_utility::is_coop()) {
+    if(!isDefined(level.player_one_already_breached)) {
+      level.breachenemies_alive = 0;
+      level.breachenemies_active = 0;
+      level.player_one_already_breached = 1;
     }
   } else {
-    level._id_4BB2 = 0;
-    level._id_4BB1 = 0;
+    level.breachenemies_alive = 0;
+    level.breachenemies_active = 0;
   }
 
-  var_12 = var_0._id_222D["enemy"];
+  var_12 = var_0.spawners["enemy"];
   common_scripts\utility::array_call(var_12, ::stalingradspawn);
-  var_13 = var_0._id_222D["hostage"];
+  var_13 = var_0.spawners["hostage"];
   common_scripts\utility::array_call(var_13, ::stalingradspawn);
   var_2["active"] playerlinktoblend(var_3, "tag_player", 0.2, 0.1, 0.1);
 
-  if(isDefined(var_2["active"]._id_4D14)) {
-    thread maps\_utility::_id_2788(0.2, var_3, "tag_player", 45, 45, 90, 45);
+  if(isDefined(var_2["active"].dont_unlink_after_breach)) {
+    thread maps\_utility::open_up_fov(0.2, var_3, "tag_player", 45, 45, 90, 45);
   }
   if(var_4) {
     var_2["passive"] playerlinktoblend(var_5, "tag_player", 0.2, 0.1, 0.1);
 
-    if(isDefined(var_2["passive"]._id_4D14)) {
-      thread maps\_utility::_id_2788(0.2, var_5, "tag_player", 45, 45, 90, 45);
+    if(isDefined(var_2["passive"].dont_unlink_after_breach)) {
+      thread maps\_utility::open_up_fov(0.2, var_5, "tag_player", 45, 45, 90, 45);
     }
   }
 
-  var_2["active"] thread _id_4D17();
+  var_2["active"] thread take_prebreach_weapons();
 
   if(!var_11) {
     wait 0.05;
   }
-  var_14 = self._id_4CE9;
-  thread maps\_anim::_id_1246(var_14, "breach");
+  var_14 = self.charge;
+  thread maps\_anim::anim_single_solo(var_14, "breach");
   var_14 show();
-  var_2["active"] thread _id_4D18();
+  var_2["active"] thread restore_prebreach_weapons();
   var_15 = 0;
 
   if(var_4) {
-    thread maps\_anim::_id_1246(var_5, "breach_player_anim");
-    var_2["passive"]._id_1032 = "passive_breacher_3rd_person";
-    var_2["passive"] thread maps\_anim::_id_1246(var_2["passive"], "breach_player_anim");
-    var_2["passive"] thread _id_4D19();
-    var_2["passive"] thread _id_4D18();
-    var_2["active"]._id_1032 = "active_breacher_3rd_person";
-    var_2["active"] thread maps\_anim::_id_1246(var_2["active"], "breach_player_anim");
+    thread maps\_anim::anim_single_solo(var_5, "breach_player_anim");
+    var_2["passive"].animname = "passive_breacher_3rd_person";
+    var_2["passive"] thread maps\_anim::anim_single_solo(var_2["passive"], "breach_player_anim");
+    var_2["passive"] thread enable_passive_weapons();
+    var_2["passive"] thread restore_prebreach_weapons();
+    var_2["active"].animname = "active_breacher_3rd_person";
+    var_2["active"] thread maps\_anim::anim_single_solo(var_2["active"], "breach_player_anim");
   }
 
-  maps\_anim::_id_1246(var_3, "breach_player_anim");
+  maps\_anim::anim_single_solo(var_3, "breach_player_anim");
   level notify("sp_slowmo_breachanim_done");
-  thread _id_4D16(var_9);
-  var_16 = var_0._id_4CD4;
+  thread flag_set_when_room_cleared(var_9);
+  var_16 = var_0.path_solids;
   common_scripts\utility::array_call(var_16, ::connectpaths);
-  common_scripts\utility::array_thread(var_16, maps\_utility::_id_2705);
+  common_scripts\utility::array_thread(var_16, maps\_utility::self_delete);
 
   foreach(var_1 in var_2) {
-    if(isDefined(var_1._id_4D14)) {
+    if(isDefined(var_1.dont_unlink_after_breach)) {
       var_15 = 1;
-      _id_4D59();
+      special_gulag_adjustment();
     } else {
       var_1 unlink();
     }
@@ -1671,7 +1671,7 @@ _id_4D0F(var_0, var_1) {
   var_2["active"] disablebreaching();
 
   foreach(var_1 in var_2) {
-    if(!isDefined(level._id_4D11)) {
+    if(!isDefined(level.slowmo_breach_disable_stancemod)) {
       var_1 disableinvulnerability();
       var_1 enableweaponswitch();
       var_1 enableoffhandweapons();
@@ -1687,40 +1687,40 @@ _id_4D0F(var_0, var_1) {
   return 1;
 }
 
-_id_4D15(var_0) {
+play_detpack_plant_sound(var_0) {
   self endon("death");
   wait(var_0);
   self playSound("detpack_wall_plant");
 }
 
-_id_4D16(var_0) {
-  var_1 = var_0._id_1692;
+flag_set_when_room_cleared(var_0) {
+  var_1 = var_0.script_flag;
   level endon(var_1);
-  var_2 = var_0 maps\_utility::_id_2789("bad_guys");
-  maps\_utility::_id_2635(var_2);
+  var_2 = var_0 maps\_utility::get_ai_touching_volume("bad_guys");
+  maps\_utility::waittill_dead(var_2);
   level notify("breach_room_has_been_cleared");
-  level._id_4D08 = undefined;
+  level.breachenemies = undefined;
   common_scripts\utility::flag_set(var_1);
 }
 
-_id_4D17() {
+take_prebreach_weapons() {
   self giveweapon("usp_scripted");
   self switchtoweaponimmediate("usp_scripted");
 
-  if(isDefined(level._id_4CBF[self._id_4D12])) {
-    self switchtoweaponimmediate(self._id_4D12);
+  if(isDefined(level.has_special_breach_anim[self.prebreachcurrentweapon])) {
+    self switchtoweaponimmediate(self.prebreachcurrentweapon);
   }
 }
 
-_id_4D18() {
+restore_prebreach_weapons() {
   wait 0.5;
   self takeweapon("usp_scripted");
 
-  if(isDefined(self._id_4D12)) {
-    var_0 = self._id_4D12;
+  if(isDefined(self.prebreachcurrentweapon)) {
+    var_0 = self.prebreachcurrentweapon;
     self switchtoweapon(var_0);
 
-    if(_id_4BBE(var_0)) {
+    if(should_topoff_breach_weapon(var_0)) {
       var_1 = weaponclipsize(var_0);
 
       if(self getweaponammoclip(var_0) < var_1) {
@@ -1728,33 +1728,33 @@ _id_4D18() {
       }
     }
 
-    self._id_4D12 = undefined;
+    self.prebreachcurrentweapon = undefined;
   }
 }
 
-_id_4D19() {
+enable_passive_weapons() {
   wait 2.2;
   self enableweapons();
 }
 
-_id_4BBE(var_0) {
+should_topoff_breach_weapon(var_0) {
   if(level.gameskill > 1) {
     return 0;
   }
-  if(isDefined(level._id_4D1A)) {
-    return !level._id_4D1A;
+  if(isDefined(level.breach_no_auto_reload)) {
+    return !level.breach_no_auto_reload;
   }
-  if(!isDefined(self._id_4D12)) {
+  if(!isDefined(self.prebreachcurrentweapon)) {
     return 0;
   }
-  if(var_0 != self._id_4D12) {
+  if(var_0 != self.prebreachcurrentweapon) {
     return 0;
   }
   return 1;
 }
 
-_id_4D1B(var_0, var_1, var_2) {
-  var_3 = var_2._id_1692;
+friendly_breach(var_0, var_1, var_2) {
+  var_3 = var_2.script_flag;
 
   if(var_0 == 2) {
     var_4 = "breach_friend_idle_02";
@@ -1764,33 +1764,33 @@ _id_4D1B(var_0, var_1, var_2) {
     var_5 = "breach_friend_enter_01";
   }
 
-  self._id_402B = 1;
+  self.breaching = 1;
   var_6 = 1;
 
-  if(!isDefined(self._id_0D04)) {
+  if(!isDefined(self.magic_bullet_shield)) {
     var_6 = 0;
-    thread maps\_utility::_id_0D04();
+    thread maps\_utility::magic_bullet_shield();
   }
 
   wait 0.5;
   self forceteleport(var_1.origin, var_1.angles);
-  var_1 thread maps\_anim::_id_11C8(self, var_4, "stop_idle");
+  var_1 thread maps\_anim::anim_generic_loop(self, var_4, "stop_idle");
   self setgoalpos(self.origin);
   wait 3;
-  thread _id_4D1C(var_0);
+  thread friendlies_shoot_while_breaching(var_0);
   var_1 notify("stop_idle");
-  var_1 maps\_anim::_id_11C1(self, var_5);
+  var_1 maps\_anim::anim_generic(self, var_5);
   self setgoalpos(self.origin);
   level notify("friendlies_finished_breach");
   common_scripts\utility::flag_wait(var_3);
 
   if(!var_6) {
-    maps\_utility::_id_1902();
+    maps\_utility::stop_magic_bullet_shield();
   }
-  self._id_402B = undefined;
+  self.breaching = undefined;
 }
 
-_id_4D1C(var_0) {
+friendlies_shoot_while_breaching(var_0) {
   if(var_0 == 1) {
     wait 1;
   } else {
@@ -1799,19 +1799,19 @@ _id_4D1C(var_0) {
   level endon("friendlies_finished_breach");
   level endon("breach_room_has_been_cleared");
 
-  while(!isDefined(level._id_4D08)) {
+  while(!isDefined(level.breachenemies)) {
     wait 0.05;
   }
-  while(isDefined(level._id_4D08) && level._id_4D08.size) {
+  while(isDefined(level.breachenemies) && level.breachenemies.size) {
     wait 0.05;
 
-    if(!isDefined(level._id_4D08)) {
+    if(!isDefined(level.breachenemies)) {
       break;
     }
 
-    level._id_4D08 = maps\_utility::_id_1228(level._id_4D08);
+    level.breachenemies = maps\_utility::remove_dead_from_array(level.breachenemies);
 
-    foreach(var_2 in level._id_4D08) {
+    foreach(var_2 in level.breachenemies) {
       if(!isalive(var_2) || !isDefined(var_2)) {
         continue;
       }
@@ -1828,17 +1828,17 @@ _id_4D1C(var_0) {
   }
 }
 
-_id_4D1D(var_0) {
+get_available_breachfriendlies(var_0) {
   var_1 = [];
 
-  if(!isDefined(level._id_4CFE)) {
+  if(!isDefined(level.breachfriendlies)) {
     return var_1;
   }
-  var_1 = maps\_utility::_id_1361(level._id_4CFE);
+  var_1 = maps\_utility::array_removedead(level.breachfriendlies);
   var_2 = getDvar("breach_requires_friendlies_in_position") == "1";
 
   foreach(var_4 in var_1) {
-    if(isDefined(var_4._id_402B) && var_4._id_402B == 1) {
+    if(isDefined(var_4.breaching) && var_4.breaching == 1) {
       var_1 = common_scripts\utility::array_remove(var_1, var_4);
       continue;
     }
@@ -1852,34 +1852,34 @@ _id_4D1D(var_0) {
   return var_1;
 }
 
-_id_4D1E(var_0) {
+get_breach_notify(var_0) {
   if(!isDefined(var_0)) {
     var_0 = "none";
   }
   return "A door in breach group " + var_0 + " has been activated.";
 }
 
-_id_4D1F() {
-  var_0 = self._id_4CDB;
-  var_1 = _id_4D1E(var_0);
+breach_group_trigger_think() {
+  var_0 = self.script_breachgroup;
+  var_1 = get_breach_notify(var_0);
   level waittill(var_1);
   waittillframeend;
   self notify("trigger");
 }
 
-_id_4BCE() {
-  if(isDefined(level._id_4BCF)) {
-    self setmovespeedscale(level._id_4BCF);
+slowmo_player_cleanup() {
+  if(isDefined(level.playerspeed)) {
+    self setmovespeedscale(level.playerspeed);
   } else {
     self setmovespeedscale(1);
   }
 }
 
-_id_4BC3(var_0) {
-  if(isDefined(level._id_402B) && level._id_402B == 1) {
+slowmo_begins(var_0) {
+  if(isDefined(level.breaching) && level.breaching == 1) {
     return;
   }
-  level._id_402B = 1;
+  level.breaching = 1;
   common_scripts\utility::flag_set("breaching_on");
   level notify("slowmo_go");
   level endon("slowmo_go");
@@ -1887,58 +1887,58 @@ _id_4BC3(var_0) {
   var_2 = 0.75;
   var_3 = 0.2;
 
-  if(isDefined(level._id_4BC5)) {
-    var_3 = level._id_4BC5;
+  if(isDefined(level.slomobreachplayerspeed)) {
+    var_3 = level.slomobreachplayerspeed;
   }
   var_4 = level.player;
   var_5 = undefined;
 
-  if(maps\_utility::_id_12C1()) {
-    var_5 = maps\_utility::_id_133A(var_4);
+  if(maps\_utility::is_coop()) {
+    var_5 = maps\_utility::get_other_player(var_4);
   }
   var_4 thread maps\_utility::play_sound_on_entity("slomo_whoosh");
-  var_4 thread _id_4BCB();
-  thread _id_4D23(var_1 * 2, var_2 / 2);
-  thread _id_4D22();
+  var_4 thread player_heartbeat();
+  thread slomo_breach_vision_change(var_1 * 2, var_2 / 2);
+  thread slomo_difficulty_dvars();
   common_scripts\utility::flag_clear("can_save");
-  maps\_utility::_id_2771();
-  var_4 thread _id_4D20();
+  maps\_utility::slowmo_start();
+  var_4 thread set_breaching_variable();
 
   if(isDefined(var_5)) {
-    var_5 thread _id_4D20();
+    var_5 thread set_breaching_variable();
   }
   var_4 allowmelee(0);
 
   if(isDefined(var_5)) {
     var_5 allowmelee(0);
   }
-  maps\_utility::_id_2772(0.25);
-  maps\_utility::_id_2774(var_1);
-  maps\_utility::_id_2775();
+  maps\_utility::slowmo_setspeed_slow(0.25);
+  maps\_utility::slowmo_setlerptime_in(var_1);
+  maps\_utility::slowmo_lerp_in();
   var_4 setmovespeedscale(var_3);
 
   if(isDefined(var_5)) {
     var_5 setmovespeedscale(var_3);
   }
   var_6 = gettime();
-  var_7 = var_6 + level._id_4BC4 * 1000;
+  var_7 = var_6 + level.slomobreachduration * 1000;
 
-  if(!maps\_utility::_id_12C1()) {
-    var_4 thread _id_4BCC();
+  if(!maps\_utility::is_coop()) {
+    var_4 thread catch_weapon_switch();
   }
-  var_4 thread _id_4BCD();
+  var_4 thread catch_mission_failed();
 
   if(isDefined(var_5)) {
-    var_5 thread _id_4BCD();
+    var_5 thread catch_mission_failed();
   }
   var_8 = 500;
   var_9 = 1000;
 
   for(;;) {
-    if(isDefined(level._id_4BC6)) {
-      if(!level._id_4BC6) {
-        if(isDefined(level._id_4BC7)) {
-          var_2 = level._id_4BC7;
+    if(isDefined(level.forced_slowmo_breach_slowdown)) {
+      if(!level.forced_slowmo_breach_slowdown) {
+        if(isDefined(level.forced_slowmo_breach_lerpout)) {
+          var_2 = level.forced_slowmo_breach_lerpout;
         }
         break;
       }
@@ -1951,26 +1951,26 @@ _id_4BC3(var_0) {
       break;
     }
 
-    if(level._id_4BB1 <= 0 && level._id_4CBE == 0) {
+    if(level.breachenemies_active <= 0 && level.breachignoreenemy_count == 0) {
       var_2 = 1.15;
       break;
     }
 
-    if(!maps\_utility::_id_12C1()) {
-      if(var_4._id_23B4 >= var_6 + var_8) {
+    if(!maps\_utility::is_coop()) {
+      if(var_4.lastreloadstarttime >= var_6 + var_8) {
         break;
       }
 
-      if(var_4._id_4BC8 && gettime() - var_6 > var_9) {
+      if(var_4.switchedweapons && gettime() - var_6 > var_9) {
         break;
       }
     }
 
-    if(maps\_utility::_id_0A36() && common_scripts\utility::flag("special_op_terminated")) {
+    if(maps\_utility::is_specialop() && common_scripts\utility::flag("special_op_terminated")) {
       break;
     }
 
-    if(var_4._id_4BC9 || maps\_utility::_id_12C1() && var_5._id_4BC9) {
+    if(var_4.breach_missionfailed || maps\_utility::is_coop() && var_5.breach_missionfailed) {
       var_2 = 0.5;
       break;
     }
@@ -1981,59 +1981,59 @@ _id_4BC3(var_0) {
   level notify("slowmo_breach_ending", var_2);
   level notify("stop_player_heartbeat");
   var_4 thread maps\_utility::play_sound_on_entity("slomo_whoosh");
-  maps\_utility::_id_0A16(var_2);
-  maps\_utility::_id_0A17();
+  maps\_utility::slowmo_setlerptime_out(var_2);
+  maps\_utility::slowmo_lerp_out();
   var_4 allowmelee(1);
 
   if(isDefined(var_5)) {
     var_5 allowmelee(1);
   }
-  var_4 maps\_utility::delaythread(var_2, ::_id_4D21);
+  var_4 maps\_utility::delaythread(var_2, ::clear_breaching_variable);
 
   if(isDefined(var_5)) {
-    var_5 maps\_utility::delaythread(var_2, ::_id_4D21);
+    var_5 maps\_utility::delaythread(var_2, ::clear_breaching_variable);
   }
-  maps\_utility::_id_0A18();
+  maps\_utility::slowmo_end();
   common_scripts\utility::flag_set("can_save");
-  level._id_4BCA = undefined;
-  var_4 _id_4BCE();
+  level.player_one_already_breached = undefined;
+  var_4 slowmo_player_cleanup();
 
   if(isDefined(var_5)) {
-    var_5 _id_4BCE();
+    var_5 slowmo_player_cleanup();
   }
   level notify("slomo_breach_over");
-  level._id_402B = 0;
+  level.breaching = 0;
   common_scripts\utility::flag_clear("breaching_on");
   setsaveddvar("objectiveHide", 0);
 }
 
-_id_4D20() {
+set_breaching_variable() {
   self endon("clear_breaching_variable");
-  self._id_2262 = 1;
-  self._id_2263 = 0;
-  self._id_2261 = undefined;
+  self.isbreaching = 1;
+  self.breaching_shots_fired = 0;
+  self.achieve_slowmo_breach_kills = undefined;
   var_0 = self getcurrentweaponclipammo();
   self notifyonplayercommand("player_shot_fired", "+attack");
   self notifyonplayercommand("player_shot_fired", "+attack_akimbo_accessible");
 
-  while(isDefined(self._id_2262)) {
+  while(isDefined(self.isbreaching)) {
     self waittill("player_shot_fired");
-    self._id_2263 = var_0 - self getcurrentweaponclipammo();
+    self.breaching_shots_fired = var_0 - self getcurrentweaponclipammo();
     wait 0.05;
 
     while(self isfiring()) {
-      self._id_2263 = var_0 - self getcurrentweaponclipammo();
+      self.breaching_shots_fired = var_0 - self getcurrentweaponclipammo();
       wait 0.05;
     }
   }
 }
 
-_id_4D21() {
-  self._id_2262 = undefined;
-  thread maps\_utility::_id_1424("clear_breaching_variable", 0.25);
+clear_breaching_variable() {
+  self.isbreaching = undefined;
+  thread maps\_utility::notify_delay("clear_breaching_variable", 0.25);
 }
 
-_id_4D22() {
+slomo_difficulty_dvars() {
   var_0 = getDvar("bg_viewKickScale");
   var_1 = getDvar("bg_viewKickMax");
   setsaveddvar("bg_viewKickScale", 0.3);
@@ -2046,8 +2046,8 @@ _id_4D22() {
   setsaveddvar("bullet_penetration_damage", 1);
 }
 
-_id_4D23(var_0, var_1) {
-  if(!isDefined(level._id_4D24)) {
+slomo_breach_vision_change(var_0, var_1) {
+  if(!isDefined(level.slomobasevision)) {
     return;
   }
   visionsetnaked("slomo_breach", var_0);
@@ -2057,10 +2057,10 @@ _id_4D23(var_0, var_1) {
     var_1 = var_2;
   }
   wait 1;
-  visionsetnaked(level._id_4D24, var_1);
+  visionsetnaked(level.slomobasevision, var_1);
 }
 
-_id_4BCB() {
+player_heartbeat() {
   level endon("stop_player_heartbeat");
 
   for(;;) {
@@ -2069,59 +2069,59 @@ _id_4BCB() {
   }
 }
 
-_id_4BCC() {
+catch_weapon_switch() {
   level endon("slowmo_breach_ending");
-  self._id_4BC8 = 0;
+  self.switchedweapons = 0;
   common_scripts\utility::waittill_any("weapon_switch_started", "night_vision_on", "night_vision_off");
-  self._id_4BC8 = 1;
+  self.switchedweapons = 1;
 }
 
-_id_4BCD() {
+catch_mission_failed() {
   level endon("slowmo_breach_ending");
-  self._id_4BC9 = 0;
+  self.breach_missionfailed = 0;
   level waittill("mission failed");
-  self._id_4BC9 = 1;
+  self.breach_missionfailed = 1;
 }
 
-_id_4D25() {
+breach_enemy_spawner_think() {
   var_0 = self.spawner;
   self endon("death");
-  maps\_utility::_id_12E2(::_id_4D28);
-  thread _id_4D29();
-  thread _id_4BEB();
-  level thread _id_4BD0(self);
+  maps\_utility::add_damage_function(::record_last_player_damage);
+  thread breach_enemy_ignored_by_friendlies();
+  thread breach_enemy_ragdoll_on_death();
+  level thread breach_enemy_track_status(self);
 
-  if(isDefined(self._id_164F) && common_scripts\utility::string_starts_with(self._id_164F, "reference")) {
-    var_0 = getEnt(self._id_164F, "targetname");
+  if(isDefined(self.script_parameters) && common_scripts\utility::string_starts_with(self.script_parameters, "reference")) {
+    var_0 = getEnt(self.script_parameters, "targetname");
   }
-  self._id_4D26 = var_0;
-  var_0 maps\_anim::_id_11C0(self, self.animation);
+  self.reference = var_0;
+  var_0 maps\_anim::anim_generic_first_frame(self, self.animation);
 
-  if(isDefined(level._id_4CC1[self.animation])) {
-    var_1 = level._id_4CC1[self.animation];
+  if(isDefined(level._slowmo_functions[self.animation])) {
+    var_1 = level._slowmo_functions[self.animation];
     self thread[[var_1]]();
   }
 
   self.grenadeammo = 0;
   self.allowdeath = 1;
   self.health = 10;
-  self._id_20AF = 5000;
+  self.baseaccuracy = 5000;
 
-  if(isDefined(self._id_4D27)) {
-    self.threatbias = self._id_4D27;
+  if(isDefined(self.script_threatbias)) {
+    self.threatbias = self.script_threatbias;
   }
-  if(isDefined(level._id_4CCB[self.animation])) {
-    self._id_0EC3 = 1;
+  if(isDefined(level.breach_death_anims[self.animation])) {
+    self.skipdeathanim = 1;
   }
-  wait(level._id_4D13);
+  wait(level.slowmo_breach_start_delay);
   maps\_utility::script_delay();
   self notify("starting_breach_reaction");
   level notify("breach_enemy_anims");
-  var_0 maps\_anim::_id_11C1(self, self.animation);
+  var_0 maps\_anim::anim_generic(self, self.animation);
   self notify("finished_breach_start_anim");
 }
 
-_id_4D28(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+record_last_player_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isalive(var_1)) {
     return;
   }
@@ -2131,10 +2131,10 @@ _id_4D28(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!self isbadguy()) {
     return;
   }
-  level._id_4CBD = gettime();
+  level.last_player_damage = gettime();
 }
 
-_id_4D29() {
+breach_enemy_ignored_by_friendlies() {
   self endon("death");
 
   if(!common_scripts\utility::flag("no_mercy")) {
@@ -2147,52 +2147,52 @@ _id_4D29() {
   }
 }
 
-_id_4BEB() {
+breach_enemy_ragdoll_on_death() {
   self endon("breach_enemy_cancel_ragdoll_death");
-  self._id_0EC0 = 1;
+  self.ragdoll_immediate = 1;
   var_0 = common_scripts\utility::waittill_any_return("death", "finished_breach_start_anim");
 
   if(var_0 == "finished_breach_start_anim") {
-    self._id_0EC0 = undefined;
+    self.ragdoll_immediate = undefined;
   }
 }
 
-_id_4BEC() {
+breach_enemy_cancel_ragdoll() {
   self notify("breach_enemy_cancel_ragdoll_death");
-  self._id_0EC0 = undefined;
+  self.ragdoll_immediate = undefined;
 }
 
-_id_4BD0(var_0) {
-  level._id_4BB1++;
+breach_enemy_track_status(var_0) {
+  level.breachenemies_active++;
   var_1 = spawnStruct();
   var_1.enemy = var_0;
-  var_1 thread _id_4BD2(var_0);
-  var_1 thread _id_4BD3(var_0);
-  var_1 thread _id_4BD4(var_0);
-  var_1 thread _id_4BD5();
+  var_1 thread breach_enemy_waitfor_death(var_0);
+  var_1 thread breach_enemy_waitfor_death_counter(var_0);
+  var_1 thread breach_enemy_catch_exceptions(var_0);
+  var_1 thread breach_enemy_waitfor_breach_ending();
   var_1 waittill("breach_status_change", var_2);
-  level._id_4BB1--;
+  level.breachenemies_active--;
   var_1 = undefined;
 }
 
-_id_4BD2(var_0) {
+breach_enemy_waitfor_death(var_0) {
   self endon("breach_status_change");
   var_0 waittill("death");
   self notify("breach_status_change", "death");
 }
 
-_id_4BD3(var_0) {
-  level._id_4BB2++;
+breach_enemy_waitfor_death_counter(var_0) {
+  level.breachenemies_alive++;
   var_0 waittill("death");
-  level._id_4BB2--;
+  level.breachenemies_alive--;
 
-  if(level._id_4BB2 <= 0) {
-    _id_4D01();
+  if(level.breachenemies_alive <= 0) {
+    breach_friendlies_restore_grenades();
   }
   level notify("breach_all_enemies_dead");
 }
 
-_id_4BD4(var_0) {
+breach_enemy_catch_exceptions(var_0) {
   self endon("breach_status_change");
 
   while(isalive(var_0)) {
@@ -2201,48 +2201,48 @@ _id_4BD4(var_0) {
   self notify("breach_status_change", "exception");
 }
 
-_id_4BD5() {
+breach_enemy_waitfor_breach_ending() {
   self endon("breach_status_change");
   level waittill("slowmo_breach_ending");
   self notify("breach_status_change", "breach_ending");
 }
 
-_id_4D2A() {
+breach_hostage_spawner_think() {
   self endon("death");
-  self._id_4D2B = 0;
+  self.breachfinished = 0;
   var_0 = self.spawner;
-  self._id_4D26 = var_0;
+  self.reference = var_0;
   self endon("cancel_breach_behavior");
-  thread _id_4D2F();
-  maps\_anim::_id_11C0(self, self.animation);
+  thread hostage_mission_fail();
+  maps\_anim::anim_generic_first_frame(self, self.animation);
   self.health = 10;
-  self._id_17D3 = 1;
+  self.no_friendly_fire_penalty = 1;
   self.ignorerandombulletdamage = 1;
-  wait(level._id_4D13);
+  wait(level.slowmo_breach_start_delay);
 
-  if(isDefined(level._id_4CC1[self.animation])) {
-    var_1 = level._id_4CC1[self.animation];
+  if(isDefined(level._slowmo_functions[self.animation])) {
+    var_1 = level._slowmo_functions[self.animation];
     self thread[[var_1]]();
   }
 
   self.allowdeath = 1;
-  var_0 maps\_anim::_id_11C1(self, self.animation);
+  var_0 maps\_anim::anim_generic(self, self.animation);
   self notify("finished_breach_start_anim");
 
-  if(isDefined(self._id_4D2C)) {
+  if(isDefined(self.skipendingidle)) {
     return;
   }
-  if(_id_4D61(self.animation + "_idle")) {
-    thread maps\_anim::_id_11C8(self, self.animation + "_idle", "stop_idle");
+  if(anim_exists(self.animation + "_idle")) {
+    thread maps\_anim::anim_generic_loop(self, self.animation + "_idle", "stop_idle");
   } else {
     var_2 = "hostage_knees_loop";
-    thread maps\_anim::_id_11C8(self, var_2, "stop_idle");
+    thread maps\_anim::anim_generic_loop(self, var_2, "stop_idle");
   }
 
-  self._id_4D2B = 1;
+  self.breachfinished = 1;
 }
 
-_id_4D2D() {
+hostage_health_regen() {
   var_0 = self.health;
   self endon("death");
   self endon("saved");
@@ -2261,19 +2261,19 @@ _id_4D2D() {
   }
 }
 
-_id_4D2E(var_0) {
-  return level._id_4CDC[var_0]._id_4CD6;
+get_room_volume_from_slomo_breach_number(var_0) {
+  return level.breach_groups[var_0].room_volume;
 }
 
-_id_4D2F() {
-  if(maps\_utility::_id_0A36()) {
+hostage_mission_fail() {
+  if(maps\_utility::is_specialop()) {
     level endon("special_op_terminated");
   }
   level endon("mission failed");
   var_0 = self.health;
   var_1 = 0;
-  thread _id_4D2D();
-  var_2 = _id_4D2E(self._id_4CCE);
+  thread hostage_health_regen();
+  var_2 = get_room_volume_from_slomo_breach_number(self.script_slowmo_breach);
 
   if(getDvar("hostage_missionfail") == "0") {
     return;
@@ -2286,48 +2286,48 @@ _id_4D2F() {
         level notify("player_shot_a_hostage");
         waittillframeend;
 
-        if(level._id_4CBD == gettime()) {
-          _id_4D30(&"SCRIPT_MISSIONFAIL_KILLEDHOSTAGE", "@SCRIPT_MISSIONFAIL_KILLEDHOSTAGE");
+        if(level.last_player_damage == gettime()) {
+          breach_set_deadquote(&"SCRIPT_MISSIONFAIL_KILLEDHOSTAGE", "@SCRIPT_MISSIONFAIL_KILLEDHOSTAGE");
         } else {
-          _id_4D30(&"SCRIPT_MISSIONFAIL_KILLEDHOSTAGE", "@SCRIPT_MISSIONFAIL_KILLEDHOSTAGE");
+          breach_set_deadquote(&"SCRIPT_MISSIONFAIL_KILLEDHOSTAGE", "@SCRIPT_MISSIONFAIL_KILLEDHOSTAGE");
         }
         var_1 = 1;
       } else if(isDefined(var_3.team) && var_3.team == "allies" && !isPlayer(var_3)) {
-        _id_4D30(&"SCRIPT_MISSIONFAIL_HOSTAGEEXECUTED", "@SCRIPT_MISSIONFAIL_HOSTAGEEXECUTED");
+        breach_set_deadquote(&"SCRIPT_MISSIONFAIL_HOSTAGEEXECUTED", "@SCRIPT_MISSIONFAIL_HOSTAGEEXECUTED");
         var_1 = 1;
       } else {
-        if(_id_4D31(var_2)) {
-          _id_4D30(&"SCRIPT_MISSIONFAIL_HOSTAGEEXECUTED_USEMULTIDOOR", "@SCRIPT_MISSIONFAIL_HOSTAGEEXECUTED_USEMULTIDOOR");
+        if(coop_breached_from_same_door_in_a_muliti_door_room(var_2)) {
+          breach_set_deadquote(&"SCRIPT_MISSIONFAIL_HOSTAGEEXECUTED_USEMULTIDOOR", "@SCRIPT_MISSIONFAIL_HOSTAGEEXECUTED_USEMULTIDOOR");
         } else {
-          _id_4D30(&"SCRIPT_MISSIONFAIL_HOSTAGEEXECUTED", "@SCRIPT_MISSIONFAIL_HOSTAGEEXECUTED");
+          breach_set_deadquote(&"SCRIPT_MISSIONFAIL_HOSTAGEEXECUTED", "@SCRIPT_MISSIONFAIL_HOSTAGEEXECUTED");
         }
         var_1 = 1;
       }
     }
 
     if(var_1 == 1) {
-      thread maps\_utility::_id_1826();
+      thread maps\_utility::missionfailedwrapper();
       level notify("mission failed");
     }
   }
 }
 
-_id_4D30(var_0, var_1) {
-  if(maps\_utility::_id_0A36()) {
-    maps\_specialops::_id_183F(var_1);
+breach_set_deadquote(var_0, var_1) {
+  if(maps\_utility::is_specialop()) {
+    maps\_specialops::so_force_deadquote(var_1);
   } else {
     setDvar("ui_deadquote", var_0);
   }
 }
 
-_id_4D31(var_0) {
-  if(!maps\_utility::_id_0A36()) {
+coop_breached_from_same_door_in_a_muliti_door_room(var_0) {
+  if(!maps\_utility::is_specialop()) {
     return 0;
   }
-  if(!maps\_utility::_id_12C1()) {
+  if(!maps\_utility::is_coop()) {
     return 0;
   }
-  if(isDefined(var_0._id_4D10)) {
+  if(isDefined(var_0.has_passive_breacher)) {
     return 1;
   } else {
     return 0;
@@ -2336,83 +2336,83 @@ _id_4D31(var_0) {
 
 #using_animtree("script_model");
 
-_id_4443() {
-  level._id_0C59["breach_door_model"]["breach"] = % breach_player_door_v2;
-  level._id_1245["breach_door_model"] = #animtree;
-  level._id_1F90["breach_door_model"] = "com_door_01_handleright";
-  level._id_0C59["breach_door_hinge"]["breach"] = % breach_player_door_hinge_v1;
-  level._id_1245["breach_door_hinge"] = #animtree;
-  level._id_1F90["breach_door_hinge"] = "com_door_piece_hinge";
-  level._id_0C59["breach_door_model_metal"]["breach"] = % breach_player_door_v2;
-  level._id_1245["breach_door_model_metal"] = #animtree;
-  level._id_1F90["breach_door_model_metal"] = "breach_door_metal_right";
-  level._id_0C59["breach_door_hinge_metal"]["breach"] = % breach_player_door_metal;
-  level._id_1245["breach_door_hinge_metal"] = #animtree;
-  level._id_1F90["breach_door_hinge_metal"] = "breach_door_metal_right_dst";
-  level._id_0C59["breach_door_charge"]["breach"] = % breach_player_frame_charge_v3;
-  level._id_1245["breach_door_charge"] = #animtree;
-  level._id_1F90["breach_door_charge"] = "mil_frame_charge";
-  level._id_1245["desk"] = #animtree;
-  level._id_0C59["desk"]["breach_react_desk_v7_desk"] = % breach_react_desk_v7_desk;
-  level._id_1245["chair"] = #animtree;
-  level._id_0C59["chair"]["breach_chair_hide_reaction_v2_chair"] = % breach_chair_hide_reaction_v2_chair;
-  level._id_0C59["chair"]["breach_chair_hide_reaction_death_v2_chair"] = % breach_chair_hide_reaction_death_v2_chair;
+script_models() {
+  level.scr_anim["breach_door_model"]["breach"] = % breach_player_door_v2;
+  level.scr_animtree["breach_door_model"] = #animtree;
+  level.scr_model["breach_door_model"] = "com_door_01_handleright";
+  level.scr_anim["breach_door_hinge"]["breach"] = % breach_player_door_hinge_v1;
+  level.scr_animtree["breach_door_hinge"] = #animtree;
+  level.scr_model["breach_door_hinge"] = "com_door_piece_hinge";
+  level.scr_anim["breach_door_model_metal"]["breach"] = % breach_player_door_v2;
+  level.scr_animtree["breach_door_model_metal"] = #animtree;
+  level.scr_model["breach_door_model_metal"] = "breach_door_metal_right";
+  level.scr_anim["breach_door_hinge_metal"]["breach"] = % breach_player_door_metal;
+  level.scr_animtree["breach_door_hinge_metal"] = #animtree;
+  level.scr_model["breach_door_hinge_metal"] = "breach_door_metal_right_dst";
+  level.scr_anim["breach_door_charge"]["breach"] = % breach_player_frame_charge_v3;
+  level.scr_animtree["breach_door_charge"] = #animtree;
+  level.scr_model["breach_door_charge"] = "mil_frame_charge";
+  level.scr_animtree["desk"] = #animtree;
+  level.scr_anim["desk"]["breach_react_desk_v7_desk"] = % breach_react_desk_v7_desk;
+  level.scr_animtree["chair"] = #animtree;
+  level.scr_anim["chair"]["breach_chair_hide_reaction_v2_chair"] = % breach_chair_hide_reaction_v2_chair;
+  level.scr_anim["chair"]["breach_chair_hide_reaction_death_v2_chair"] = % breach_chair_hide_reaction_death_v2_chair;
 }
 
-_id_4D32() {
-  level._id_0C59["breach_door_charge"]["breach"] = % breach_player_frame_charge_v3;
+set_door_charge_anim_normal() {
+  level.scr_anim["breach_door_charge"]["breach"] = % breach_player_frame_charge_v3;
 }
 
-_id_4D33() {
-  level._id_0C59["breach_door_charge"]["breach"] = % breach_player_frame_charge;
+set_door_charge_anim_special() {
+  level.scr_anim["breach_door_charge"]["breach"] = % breach_player_frame_charge;
 }
 
 #using_animtree("multiplayer");
 
-_id_4444() {
-  if(!isDefined(level._id_4D34)) {
-    level._id_4D34 = "viewhands_player_sas_woodland";
+player_animations() {
+  if(!isDefined(level.slowmo_viewhands)) {
+    level.slowmo_viewhands = "viewhands_player_sas_woodland";
   }
-  level._id_1245["active_breacher_rig"] = #animtree;
-  level._id_1F90["active_breacher_rig"] = level._id_4D34;
-  level._id_0C59["active_breacher_rig"]["breach_player_anim"] = % breach_coop_player_1;
+  level.scr_animtree["active_breacher_rig"] = #animtree;
+  level.scr_model["active_breacher_rig"] = level.slowmo_viewhands;
+  level.scr_anim["active_breacher_rig"]["breach_player_anim"] = % breach_coop_player_1;
 
-  if(maps\_utility::_id_12C1()) {
-    level._id_0C59["active_breacher_rig"]["breach_player_anim"] = % breach_coop_player_1;
-    level._id_1245["active_breacher_3rd_person"] = #animtree;
-    level._id_1F90["active_breacher_3rd_person"] = level._id_4D34;
-    level._id_0C59["active_breacher_3rd_person"]["breach_player_anim"] = % breach_coop_player_1_3rdperson;
-    level._id_0C59["active_breacher_3rd_person"]["root"] = % code;
-    level._id_1245["passive_breacher_rig"] = #animtree;
-    level._id_1F90["passive_breacher_rig"] = level._id_4D34;
-    level._id_0C59["passive_breacher_rig"]["breach_player_anim"] = % breach_coop_player_2;
-    level._id_1245["passive_breacher_3rd_person"] = #animtree;
-    level._id_1F90["passive_breacher_3rd_person"] = level._id_4D34;
-    level._id_0C59["passive_breacher_3rd_person"]["breach_player_anim"] = % breach_coop_player_2_3rdperson;
-    level._id_0C59["passive_breacher_3rd_person"]["root"] = % code;
+  if(maps\_utility::is_coop()) {
+    level.scr_anim["active_breacher_rig"]["breach_player_anim"] = % breach_coop_player_1;
+    level.scr_animtree["active_breacher_3rd_person"] = #animtree;
+    level.scr_model["active_breacher_3rd_person"] = level.slowmo_viewhands;
+    level.scr_anim["active_breacher_3rd_person"]["breach_player_anim"] = % breach_coop_player_1_3rdperson;
+    level.scr_anim["active_breacher_3rd_person"]["root"] = % code;
+    level.scr_animtree["passive_breacher_rig"] = #animtree;
+    level.scr_model["passive_breacher_rig"] = level.slowmo_viewhands;
+    level.scr_anim["passive_breacher_rig"]["breach_player_anim"] = % breach_coop_player_2;
+    level.scr_animtree["passive_breacher_3rd_person"] = #animtree;
+    level.scr_model["passive_breacher_3rd_person"] = level.slowmo_viewhands;
+    level.scr_anim["passive_breacher_3rd_person"]["breach_player_anim"] = % breach_coop_player_2_3rdperson;
+    level.scr_anim["passive_breacher_3rd_person"]["root"] = % code;
   }
 
-  level._id_4D35 = [];
-  _id_4D36(::_id_4D38);
-  maps\_anim::_id_1264("active_breacher_rig", "explode", ::_id_4D37);
-  maps\_anim::_id_1264("active_breacher_rig", "slowmo", ::_id_4BC3);
+  level._slowmo_breach_funcs = [];
+  add_breach_func(::breach_explosion);
+  maps\_anim::addnotetrack_customfunction("active_breacher_rig", "explode", ::breach_functions);
+  maps\_anim::addnotetrack_customfunction("active_breacher_rig", "slowmo", ::slowmo_begins);
 }
 
-_id_4D36(var_0) {
-  level._id_4D35[level._id_4D35.size] = var_0;
+add_breach_func(var_0) {
+  level._slowmo_breach_funcs[level._slowmo_breach_funcs.size] = var_0;
 }
 
-_id_4D37(var_0) {
-  foreach(var_2 in level._id_4D35) {}
+breach_functions(var_0) {
+  foreach(var_2 in level._slowmo_breach_funcs) {}
   thread[[var_2]](var_0);
 }
 
-_id_4D38(var_0) {
-  var_1 = level._id_4CDC[self._id_4CEB];
+breach_explosion(var_0) {
+  var_1 = level.breach_groups[self.breach_index];
   var_2 = undefined;
   var_3 = undefined;
 
-  switch (var_1._id_4CD2) {
+  switch (var_1.doortype) {
     case "wood":
       var_2 = "detpack_explo_wood";
       var_3 = "breach_door_hinge";
@@ -2445,26 +2445,26 @@ _id_4D38(var_0) {
   }
 
   if(isDefined(var_2)) {
-    thread common_scripts\utility::play_sound_in_space(var_2, self._id_4CE9.origin);
+    thread common_scripts\utility::play_sound_in_space(var_2, self.charge.origin);
   }
-  common_scripts\utility::exploder("breach_" + self._id_4CEB);
-  thread _id_4D39(self._id_4CE9.origin);
-  self._id_4CE9 delete();
+  common_scripts\utility::exploder("breach_" + self.breach_index);
+  thread breach_rumble(self.charge.origin);
+  self.charge delete();
   level notify("breach_explosion");
 
   if(isDefined(var_3)) {
-    var_4 = maps\_utility::_id_1287(var_3);
-    self._id_4CEA thread maps\_anim::_id_1246(var_4, "breach");
+    var_4 = maps\_utility::spawn_anim_model(var_3);
+    self.post thread maps\_anim::anim_single_solo(var_4, "breach");
   }
 
   wait 0.05;
 
-  if(isDefined(self._id_4CAD)) {
-    self._id_4CAD delete();
+  if(isDefined(self.door)) {
+    self.door delete();
   }
 }
 
-_id_4D39(var_0) {
+breach_rumble(var_0) {
   var_1 = spawn("script_origin", var_0);
   var_1.origin = var_0;
   var_1 playRumbleOnEntity("grenade_rumble");
@@ -2472,81 +2472,81 @@ _id_4D39(var_0) {
   var_1 delete();
 }
 
-_id_4D3A() {
+_slomo_breach_executioner_knife() {
   self endon("death");
   self.dodamagetoall = 1;
-  thread _id_4D46();
+  thread knife_guy_cleanup();
 }
 
-_id_4D3B() {
+_slomo_breach_executioner_pistol() {
   self endon("death");
   self.dodamagetoall = 1;
-  thread _id_4D3C();
+  thread _slomo_breach_pistol_guy();
 }
 
-_id_4D3C() {
-  animscripts\notetracks::_id_23F2();
+_slomo_breach_pistol_guy() {
+  animscripts\notetracks::notetrackpistolpickup();
 }
 
-_id_4D3D() {
+_slomo_breach_blowback_guy() {
   self endon("death");
 
   if(!common_scripts\utility::flag("no_mercy")) {
     self.ignoreme = 1;
   }
-  self._id_0D41 = 1;
-  maps\_utility::_id_263F("bodyfall large");
+  self.forcelongdeath = 1;
+  maps\_utility::waittill_notetrack_or_damage("bodyfall large");
   self waittill("finished_breach_start_anim");
   self dodamage(self.health - 1, self.origin);
 }
 
-_id_4D3E() {
+_slomo_breach_executed_guy() {
   if(self.animation == "execution_knife_hostage" || self.animation == "execution_knife2_hostage") {
-    thread _id_4D42();
+    thread _slomo_breach_knife_hostage_death();
   }
-  if(_id_4D51()) {
-    thread _id_4D55();
+  if(will_be_manhandled()) {
+    thread get_manhandled();
   }
-  self._id_4D2C = 1;
+  self.skipendingidle = 1;
   self endon("death");
-  maps\_utility::_id_2739(self.animation + "_death");
+  maps\_utility::set_generic_deathanim(self.animation + "_death");
   self waittill("finished_breach_start_anim");
 
-  if(isDefined(self._id_4D3F)) {
+  if(isDefined(self.manhandled)) {
     return;
   }
-  if(_id_4D61(self.animation + "_survives")) {
-    self._id_4D26 maps\_anim::_id_11C1(self, self.animation + "_survives");
+  if(anim_exists(self.animation + "_survives")) {
+    self.reference maps\_anim::anim_generic(self, self.animation + "_survives");
   }
-  thread maps\_anim::_id_11C8(self, self.animation + "_idle", "stop_idle");
-  self._id_4D2B = 1;
+  thread maps\_anim::anim_generic_loop(self, self.animation + "_idle", "stop_idle");
+  self.breachfinished = 1;
 }
 
-_id_4D40() {
-  if(_id_4D51()) {
-    thread _id_4D55();
+_slomo_breach_hostage_react() {
+  if(will_be_manhandled()) {
+    thread get_manhandled();
   }
-  self._id_4D2C = 1;
+  self.skipendingidle = 1;
   self waittill("finished_breach_start_anim");
 
-  if(isDefined(self._id_4D3F)) {
+  if(isDefined(self.manhandled)) {
     return;
   }
-  if(_id_4D61(self.animation + "_idle")) {
-    thread maps\_anim::_id_11C8(self, self.animation + "_idle", "stop_idle");
+  if(anim_exists(self.animation + "_idle")) {
+    thread maps\_anim::anim_generic_loop(self, self.animation + "_idle", "stop_idle");
   }
-  self._id_4D2B = 1;
+  self.breachfinished = 1;
 }
 
-_id_4D41() {
-  var_0 = spawn("script_model", self._id_4D26.origin);
+_slomo_breach_c4_hostage() {
+  var_0 = spawn("script_model", self.reference.origin);
   var_0 setModel("com_restaurantchair_2");
-  var_0.angles = self._id_4D26.angles + (0, 90, 0);
-  var_0.origin = self._id_4D26.origin;
+  var_0.angles = self.reference.angles + (0, 90, 0);
+  var_0.origin = self.reference.origin;
 }
 
-_id_4D42() {
-  var_0 = maps\_utility::_id_1EE9(self.origin, "bad_guys");
+_slomo_breach_knife_hostage_death() {
+  var_0 = maps\_utility::get_closest_ai(self.origin, "bad_guys");
   self waittill("finished_breach_start_anim");
 
   if(isDefined(var_0) && isalive(var_0)) {
@@ -2556,47 +2556,47 @@ _id_4D42() {
   }
 }
 
-_id_4D43() {
-  self._id_4D2C = 1;
+_slomo_breach_executed_guy_pushed_to_floor() {
+  self.skipendingidle = 1;
   self endon("death");
 
-  if(_id_4D51()) {
-    thread _id_4D55();
+  if(will_be_manhandled()) {
+    thread get_manhandled();
   }
   self waittillmatch("single anim", "bodyfall large");
-  maps\_utility::_id_2739(self.animation + "_death");
+  maps\_utility::set_generic_deathanim(self.animation + "_death");
   self waittill("finished_breach_start_anim");
-  maps\_anim::_id_11C1(self, self.animation + "_survives");
+  maps\_anim::anim_generic(self, self.animation + "_survives");
 
-  if(isDefined(self._id_4D3F)) {
+  if(isDefined(self.manhandled)) {
     return;
   }
-  thread maps\_anim::_id_11C8(self, "hostage_knees_loop", "stop_idle");
-  self._id_4D2B = 1;
+  thread maps\_anim::anim_generic_loop(self, "hostage_knees_loop", "stop_idle");
+  self.breachfinished = 1;
 }
 
-_id_4D44() {
-  self._id_4D2C = 1;
+_slomo_breach_fightback_guy() {
+  self.skipendingidle = 1;
   self endon("death");
   self waittill("finished_breach_start_anim");
-  maps\_utility::_id_2739(self.animation + "_death");
-  maps\_anim::_id_11C1(self, self.animation + "_survives");
-  thread maps\_anim::_id_11C8(self, "hostage_knees_loop", "stop_idle");
-  self._id_4D2B = 1;
+  maps\_utility::set_generic_deathanim(self.animation + "_death");
+  maps\_anim::anim_generic(self, self.animation + "_survives");
+  thread maps\_anim::anim_generic_loop(self, "hostage_knees_loop", "stop_idle");
+  self.breachfinished = 1;
 }
 
-_id_4D45() {
+_slomo_breach_knife_charger() {
   self endon("death");
-  _id_4BEC();
-  maps\_utility::_id_2739(self.animation + "_death");
+  breach_enemy_cancel_ragdoll();
+  maps\_utility::set_generic_deathanim(self.animation + "_death");
   self waittillmatch("single anim", "stab");
   wait 0.1;
-  thread _id_4BEA();
+  thread knife_guy_stabs_player();
   self waittill("finished_breach_start_anim");
 }
 
-_id_4BEA() {
-  var_0 = maps\_utility::_id_2608(self.origin);
+knife_guy_stabs_player() {
+  var_0 = maps\_utility::get_closest_player(self.origin);
   var_1 = distance(var_0.origin, self.origin);
 
   if(var_1 <= 50) {
@@ -2606,11 +2606,11 @@ _id_4BEA() {
     var_0 enabledeathshield(0);
     waittillframeend;
     var_0 dodamage(var_0.health + 50000, self gettagorigin("tag_weapon_right"), self);
-    var_0._id_4BC9 = 1;
+    var_0.breach_missionfailed = 1;
   }
 }
 
-_id_4D46() {
+knife_guy_cleanup() {
   wait 0.5;
   common_scripts\utility::waittill_either("damage", "finished_breach_start_anim");
 
@@ -2619,89 +2619,89 @@ _id_4D46() {
   }
 }
 
-_id_4D47() {
+_slomo_breach_chair_guy_normal() {
   self endon("death");
-  _id_4BEC();
+  breach_enemy_cancel_ragdoll();
   var_0 = randomintrange(1, 3);
 
   if(common_scripts\utility::cointoss()) {
-    maps\_utility::_id_2739(self.animation + "_death");
+    maps\_utility::set_generic_deathanim(self.animation + "_death");
   } else {
-    maps\_utility::_id_2739(self.animation + "_death2");
+    maps\_utility::set_generic_deathanim(self.animation + "_death2");
   }
 }
 
-_id_4D48() {
+_slomo_breach_chair_guy_animated() {
   self endon("death");
-  _id_4BEC();
-  maps\_utility::_id_2739(self.animation + "_death");
-  thread _id_4D49();
+  breach_enemy_cancel_ragdoll();
+  maps\_utility::set_generic_deathanim(self.animation + "_death");
+  thread chair_animate();
   self waittill("finished_breach_start_anim");
-  thread _id_4D47();
+  thread _slomo_breach_chair_guy_normal();
 }
 
-_id_4D49() {
-  var_0 = spawn("script_model", self._id_4D26.origin);
+chair_animate() {
+  var_0 = spawn("script_model", self.reference.origin);
   var_0 setModel("furniture_chair_metal01");
-  var_0._id_1032 = "chair";
-  var_0 maps\_utility::_id_2629();
-  var_0._id_4D26 = spawn("script_origin", self._id_4D26.origin);
-  var_0._id_4D26.angles = self._id_4D26.angles;
+  var_0.animname = "chair";
+  var_0 maps\_utility::assign_animtree();
+  var_0.reference = spawn("script_origin", self.reference.origin);
+  var_0.reference.angles = self.reference.angles;
   self waittill("starting_breach_reaction");
-  var_0._id_4D26 thread maps\_anim::_id_1246(var_0, "breach_chair_hide_reaction_v2_chair");
+  var_0.reference thread maps\_anim::anim_single_solo(var_0, "breach_chair_hide_reaction_v2_chair");
   self endon("finished_breach_start_anim");
 
   if(isalive(self)) {
     self waittill("death");
-    var_0._id_4D26 thread maps\_anim::_id_1246(var_0, "breach_chair_hide_reaction_death_v2_chair");
+    var_0.reference thread maps\_anim::anim_single_solo(var_0, "breach_chair_hide_reaction_death_v2_chair");
   }
 }
 
-_id_4D4A() {
+_slomo_breach_desk_guy() {
   self endon("death");
-  thread _id_4D4B();
+  thread desk_animate();
   self waittill("finished_breach_start_anim");
 }
 
-_id_4D4B() {
-  var_0 = spawn("script_model", self._id_4D26.origin);
+desk_animate() {
+  var_0 = spawn("script_model", self.reference.origin);
   var_0 setModel("furniture_long_desk_animate");
-  var_0._id_1032 = "desk";
-  var_0 maps\_utility::_id_2629();
-  var_0._id_4D26 = spawn("script_origin", self._id_4D26.origin);
-  var_0._id_4D26.angles = self._id_4D26.angles;
+  var_0.animname = "desk";
+  var_0 maps\_utility::assign_animtree();
+  var_0.reference = spawn("script_origin", self.reference.origin);
+  var_0.reference.angles = self.reference.angles;
   self waittill("starting_breach_reaction");
-  var_0._id_4D26 thread maps\_anim::_id_1246(var_0, "breach_react_desk_v7_desk");
+  var_0.reference thread maps\_anim::anim_single_solo(var_0, "breach_react_desk_v7_desk");
 }
 
-_id_4D4C(var_0) {
-  foreach(var_2 in level._id_4CDC) {
-    if(var_0 istouching(var_2._id_4CD5)) {
+breach_near_player(var_0) {
+  foreach(var_2 in level.breach_groups) {
+    if(var_0 istouching(var_2.door_volume)) {
       return var_2;
     }
   }
 }
 
-_id_4D4D() {
-  var_0 = getarraykeys(level._id_4CDC);
+get_breach_groups() {
+  var_0 = getarraykeys(level.breach_groups);
   return var_0;
 }
 
-_id_4D4E(var_0) {
-  level._id_4CDC[var_0].enabled = 0;
+make_empty_breach(var_0) {
+  level.breach_groups[var_0].enabled = 0;
 }
 
-_id_4D4F(var_0) {
-  level._id_4CDC[var_0].trigger delete();
-  var_1 = level._id_4CDC[var_0]._id_4CD4;
+delete_breach(var_0) {
+  level.breach_groups[var_0].trigger delete();
+  var_1 = level.breach_groups[var_0].path_solids;
   common_scripts\utility::array_call(var_1, ::connectpaths);
-  common_scripts\utility::array_thread(var_1, maps\_utility::_id_2705);
+  common_scripts\utility::array_thread(var_1, maps\_utility::self_delete);
 
-  foreach(var_3 in level._id_4CDC[var_0]._id_4CD3) {}
+  foreach(var_3 in level.breach_groups[var_0].lookat_triggers) {}
   var_3 delete();
 }
 
-_id_4D50(var_0) {
+breach_debug_display_animnames(var_0) {
   if(!isDefined(self)) {
     return;
   }
@@ -2714,7 +2714,7 @@ _id_4D50(var_0) {
   var_2 = [];
   var_3 = getEntArray("breach_enemy_spawner", "targetname");
   var_4 = getEntArray("breach_hostage_spawner", "targetname");
-  var_2 = maps\_utility::_id_1843(var_3, var_4);
+  var_2 = maps\_utility::array_merge(var_3, var_4);
 
   foreach(var_6 in var_2) {
     if(!var_6 istouching(var_0)) {
@@ -2722,12 +2722,12 @@ _id_4D50(var_0) {
     }
   }
 
-  while(!var_0._id_4014) {
+  while(!var_0.breached) {
     var_8 = var_1;
 
     foreach(var_6 in var_2) {
       if(isDefined(var_6.animation)) {
-        thread maps\_utility::_id_1B94(var_6.animation, var_8, 1);
+        thread maps\_utility::debug_message(var_6.animation, var_8, 1);
         var_8 = var_8 - (0, 0, 10);
       }
     }
@@ -2736,11 +2736,11 @@ _id_4D50(var_0) {
   }
 }
 
-_id_4D51() {
-  if(maps\_utility::_id_12C1()) {
+will_be_manhandled() {
+  if(maps\_utility::is_coop()) {
     return 0;
   }
-  if(isDefined(level._id_4D52) && level._id_4D52 == 0) {
+  if(isDefined(level.hostagemanhandle) && level.hostagemanhandle == 0) {
     return 0;
   }
   if(isDefined(self.script_noteworthy)) {
@@ -2749,21 +2749,21 @@ _id_4D51() {
   return 0;
 }
 
-_id_4D53() {
-  if(level._id_4BB2 > 0) {
+manhandler_hold() {
+  if(level.breachenemies_alive > 0) {
     return 1;
   }
-  if(!self._id_4D54) {
+  if(!self.startmanhandling) {
     return 1;
   }
   return 0;
 }
 
-_id_4D55() {
+get_manhandled() {
   self endon("death");
-  self._id_4D3F = 1;
-  self._id_4D56 = 0;
-  self._id_4D54 = 0;
+  self.manhandled = 1;
+  self.readytobemanhandled = 0;
+  self.startmanhandling = 0;
   var_0 = undefined;
 
   if(self.script_noteworthy == "manhandled") {
@@ -2776,8 +2776,8 @@ _id_4D55() {
   var_5 = undefined;
   var_6 = "";
 
-  if(isDefined(self._id_164F)) {
-    var_6 = self._id_164F;
+  if(isDefined(self.script_parameters)) {
+    var_6 = self.script_parameters;
   }
   switch (self.script_noteworthy) {
     case "manhandled":
@@ -2792,17 +2792,17 @@ _id_4D55() {
   var_2 = var_4 + "_prepare" + var_6;
   var_3 = var_4 + "_prepare_idle" + var_6;
   var_4 = var_4 + var_6;
-  _id_4D60(var_4);
-  _id_4D60(var_5);
+  assert_if_anim_not_defined(var_4);
+  assert_if_anim_not_defined(var_5);
 
   if(self.script_noteworthy == "manhandled") {
-    var_1 = var_0 maps\_utility::_id_166F(1);
+    var_1 = var_0 maps\_utility::spawn_ai(1);
     var_1 hide();
-    self._id_4D26 maps\_anim::_id_11C0(var_1, var_1.animation);
+    self.reference maps\_anim::anim_generic_first_frame(var_1, var_1.animation);
     var_1 pushplayer(1);
-    level._id_4D57 = var_1;
-    var_1._id_4D58 = 0;
-    var_1 thread _id_4D5F();
+    level.manhandler = var_1;
+    var_1.readytomanhandle = 0;
+    var_1 thread manhandler_think();
   }
 
   wait 1;
@@ -2812,39 +2812,39 @@ _id_4D55() {
   }
   self waittill("finished_breach_start_anim");
 
-  if(_id_4D61(var_2)) {
-    self._id_4D26 maps\_anim::_id_11C1(self, var_2);
+  if(anim_exists(var_2)) {
+    self.reference maps\_anim::anim_generic(self, var_2);
   }
-  if(_id_4D61(var_3)) {
-    self._id_4D26 thread maps\_anim::_id_11C8(self, var_3, "stop_idle");
+  if(anim_exists(var_3)) {
+    self.reference thread maps\_anim::anim_generic_loop(self, var_3, "stop_idle");
   } else {
     var_3 = undefined;
   }
-  self._id_4D56 = 1;
+  self.readytobemanhandled = 1;
 
   if(isDefined(var_3)) {
-    while(_id_4D53()) {
+    while(manhandler_hold()) {
       wait 0.05;
     }
   }
 
-  self._id_4D26 notify("stop_idle");
+  self.reference notify("stop_idle");
   self notify("stop_idle");
 
   if(self.script_noteworthy == "manhandled") {
-    self._id_4D26 thread maps\_anim::_id_11C1(var_1, var_1.animation);
+    self.reference thread maps\_anim::anim_generic(var_1, var_1.animation);
   }
-  self._id_4D26 maps\_anim::_id_11C1(self, var_4);
+  self.reference maps\_anim::anim_generic(self, var_4);
 
-  if(isDefined(var_1) && isDefined(level._id_0C59["generic"][var_1.animation + "_idle"])) {
-    self._id_4D26 thread maps\_anim::_id_11C8(var_1, var_1.animation + "_idle", "stop_idle");
+  if(isDefined(var_1) && isDefined(level.scr_anim["generic"][var_1.animation + "_idle"])) {
+    self.reference thread maps\_anim::anim_generic_loop(var_1, var_1.animation + "_idle", "stop_idle");
   }
-  if(isDefined(level._id_0C59["generic"][var_5])) {
-    self._id_4D26 thread maps\_anim::_id_11C8(self, var_5, "stop_idle");
+  if(isDefined(level.scr_anim["generic"][var_5])) {
+    self.reference thread maps\_anim::anim_generic_loop(self, var_5, "stop_idle");
   }
 }
 
-_id_4D59() {
+special_gulag_adjustment() {
   var_0 = level.player getplayerangles();
   var_0 = (0, var_0[1], 0);
   var_1 = anglesToForward(var_0);
@@ -2857,19 +2857,19 @@ _id_4D59() {
   var_3 moveTo(var_3.origin + var_1 * 32 + var_2 * -14, var_4, var_4 * 0.4, var_4 * 0.4);
   wait(var_4);
   level.player setmovespeedscale(0.5);
-  thread _id_4D5B();
+  thread player_slows_down();
   level.player unlink();
-  level._id_4D5A thread _id_4D5D();
-  level._id_4D5A thread _id_4D5C();
+  level.price_breach_ent thread price_breach_ent_rotatesto_player();
+  level.price_breach_ent thread price_breach_ent_movesto_player();
 }
 
-_id_4D5B() {
+player_slows_down() {
   wait 0.25;
-  var_0 = level maps\_utility::_id_27C1(::_id_4D5E, 0.5, 0);
+  var_0 = level maps\_utility::create_blend(::player_loses_speedscale, 0.5, 0);
   var_0.time = 1.5;
 }
 
-_id_4D5C() {
+price_breach_ent_movesto_player() {
   self endon("stop_following_player");
   wait 1.5;
 
@@ -2879,15 +2879,15 @@ _id_4D5C() {
   }
 }
 
-_id_4D5D() {
+price_breach_ent_rotatesto_player() {
   self endon("stop_following_player");
   var_0 = spawn("script_origin", (0, 0, 0));
 
   for(;;) {
     var_1 = level.player.origin;
-    var_1 = maps\_utility::_id_27A7(var_1, 0);
+    var_1 = maps\_utility::set_z(var_1, 0);
     var_2 = self.origin;
-    var_2 = maps\_utility::_id_27A7(var_2, 0);
+    var_2 = maps\_utility::set_z(var_2, 0);
     var_3 = vectortoangles(var_1 - var_2);
     var_4 = anglesToForward(var_3);
     var_5 = anglesToForward(self.angles);
@@ -2910,18 +2910,18 @@ _id_4D5D() {
   }
 }
 
-_id_4D5E(var_0, var_1, var_2) {
+player_loses_speedscale(var_0, var_1, var_2) {
   level.player setmovespeedscale(var_1 * (1 - var_0) + var_2 * var_0);
 }
 
-_id_4D5F() {
+manhandler_think() {
   level endon("mission failed");
 
   if(getDvar("hostage_missionfail") == "1") {
     level endon("player_shot_a_hostage");
   }
-  thread maps\_utility::_id_0D04();
-  maps\_utility::_id_1058(1);
+  thread maps\_utility::magic_bullet_shield();
+  maps\_utility::setflashbangimmunity(1);
 
   if(!common_scripts\utility::flag("no_mercy")) {
     self.ignoreme = 1;
@@ -2932,12 +2932,12 @@ _id_4D5F() {
   var_1 = getaispeciesarray("neutral", "civilian");
 
   foreach(var_3 in var_1) {
-    if(!isDefined(var_3._id_4D56)) {
+    if(!isDefined(var_3.readytobemanhandled)) {
       continue;
     }
-    if(isDefined(var_3._id_4CCE) && var_3._id_4CCE == self._id_4CCE) {
+    if(isDefined(var_3.script_slowmo_breach) && var_3.script_slowmo_breach == self.script_slowmo_breach) {
       if(isDefined(var_3.script_noteworthy) && issubstr(var_3.script_noteworthy, "manhandled")) {
-        var_0 = maps\_utility::_id_0BC3(var_0, var_3);
+        var_0 = maps\_utility::array_add(var_0, var_3);
       }
     }
   }
@@ -2949,7 +2949,7 @@ _id_4D5F() {
     wait 0.05;
 
     foreach(var_3 in var_6) {
-      if(!isDefined(var_3) || var_3._id_4D56 == 1) {
+      if(!isDefined(var_3) || var_3.readytobemanhandled == 1) {
         var_6 = common_scripts\utility::array_remove(var_6, var_3);
         var_5--;
       }
@@ -2958,52 +2958,52 @@ _id_4D5F() {
 
   foreach(var_3 in var_0) {
     if(isDefined(var_3)) {
-      var_3._id_4D54 = 1;
+      var_3.startmanhandling = 1;
     }
   }
 }
 
-_id_4D60(var_0) {}
+assert_if_anim_not_defined(var_0) {}
 
-_id_4D61(var_0) {
-  if(isDefined(level._id_0C59["generic"][var_0])) {
+anim_exists(var_0) {
+  if(isDefined(level.scr_anim["generic"][var_0])) {
     return 1;
   } else {
     return 0;
   }
 }
 
-_id_4D62(var_0, var_1) {
-  level._id_4CC1[var_0] = var_1;
+add_slowmo_breach_custom_function(var_0, var_1) {
+  level._slowmo_functions[var_0] = var_1;
 }
 
-_id_4D63() {
+add_slowmo_breacher() {
   if(!isDefined(self)) {
     return;
   }
-  if(!isDefined(level._id_4CFE)) {
-    level._id_4CFE = [];
-    level._id_4CFE[0] = self;
-  } else if(maps\_utility::is_in_array(level._id_4CFE, self)) {
+  if(!isDefined(level.breachfriendlies)) {
+    level.breachfriendlies = [];
+    level.breachfriendlies[0] = self;
+  } else if(maps\_utility::is_in_array(level.breachfriendlies, self)) {
     return;
   } else {
-    level._id_4CFE = maps\_utility::_id_0BC3(level._id_4CFE, self);
+    level.breachfriendlies = maps\_utility::array_add(level.breachfriendlies, self);
   }
 }
 
-_id_4D64() {
+remove_slowmo_breacher() {
   if(!isDefined(self)) {
     return;
   }
-  if(!isDefined(level._id_4CFE)) {
+  if(!isDefined(level.breachfriendlies)) {
     return;
   }
-  if(maps\_utility::is_in_array(level._id_4CFE, self)) {
-    level._id_4CFE = common_scripts\utility::array_remove(level._id_4CFE, self);
+  if(maps\_utility::is_in_array(level.breachfriendlies, self)) {
+    level.breachfriendlies = common_scripts\utility::array_remove(level.breachfriendlies, self);
   }
 }
 
-_id_4D65() {
+breach_failed_to_start() {
   var_0 = [];
   var_0[var_0.size] = ::ismeleeing;
   var_0[var_0.size] = ::isswitchingweapon;
@@ -3011,18 +3011,18 @@ _id_4D65() {
 
   foreach(var_2 in level.players) {
     if(var_2 isreloading()) {
-      thread _id_4CF7();
+      thread breach_reloading_hint();
       return 1;
     }
 
-    if(var_2 _id_4D66()) {
-      thread _id_4CF8();
+    if(var_2 using_illegal_breach_weapon()) {
+      thread breach_bad_weapon_hint();
       return 1;
     }
 
     foreach(var_4 in var_0) {
       if(var_2 call[[var_4]]()) {
-        thread _id_4CF9();
+        thread breach_not_ready_hint();
         return 1;
       }
     }
@@ -3031,7 +3031,7 @@ _id_4D65() {
   return 0;
 }
 
-_id_4D66() {
+using_illegal_breach_weapon() {
   var_0 = [];
   var_0["riotshield"] = 1;
   var_0["claymore"] = 1;
@@ -3041,7 +3041,7 @@ _id_4D66() {
   return isDefined(var_0[var_1]);
 }
 
-_id_4D67() {
+slomo_sound_scale_setup() {
   soundsettimescalefactor("Music", 0);
   soundsettimescalefactor("Menu", 0);
   soundsettimescalefactor("local3", 0.0);

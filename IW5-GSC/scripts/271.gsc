@@ -3,7 +3,7 @@
  * Script: scripts\271.gsc
 **************************************/
 
-_id_199A() {
+debugchains() {
   var_0 = getallnodes();
   var_1 = 0;
   var_2 = [];
@@ -26,7 +26,7 @@ _id_199A() {
       var_5 = getaiarray("allies");
 
       for(var_3 = 0; var_3 < var_5.size; var_3++) {
-        var_6 = var_5[var_3] animscripts\utility::_id_0BEE();
+        var_6 = var_5[var_3] animscripts\utility::getclaimednode();
 
         if(isDefined(var_6)) {}
       }
@@ -36,19 +36,19 @@ _id_199A() {
   }
 }
 
-_id_199B(var_0) {
+debug_enemypos(var_0) {
   var_1 = getaiarray();
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     if(var_1[var_2] getentitynumber() != var_0) {
       continue;
     }
-    var_1[var_2] thread _id_199D();
+    var_1[var_2] thread debug_enemyposproc();
     break;
   }
 }
 
-_id_199C(var_0) {
+debug_stopenemypos(var_0) {
   var_1 = getaiarray();
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
@@ -60,7 +60,7 @@ _id_199C(var_0) {
   }
 }
 
-_id_199D() {
+debug_enemyposproc() {
   self endon("death");
   self endon("stop_drawing_enemy_pos");
 
@@ -69,14 +69,14 @@ _id_199D() {
 
     if(isalive(self.enemy)) {}
 
-    if(!animscripts\utility::_id_0F8C()) {
+    if(!animscripts\utility::hasenemysightpos()) {
       continue;
     }
-    var_0 = animscripts\utility::_id_0CEE();
+    var_0 = animscripts\utility::getenemysightpos();
   }
 }
 
-_id_199E() {
+debug_enemyposreplay() {
   var_0 = getaiarray();
   var_1 = undefined;
 
@@ -88,7 +88,7 @@ _id_199E() {
     }
     if(isDefined(var_1.lastenemysightpos)) {}
 
-    if(isDefined(var_1._id_199F)) {
+    if(isDefined(var_1.goodshootpos)) {
       if(var_1 isbadguy()) {
         var_3 = (1, 0, 0);
       } else {
@@ -112,7 +112,7 @@ _id_199E() {
         }
       }
 
-      common_scripts\utility::draw_arrow(var_4, var_1._id_199F, var_3);
+      common_scripts\utility::draw_arrow(var_4, var_1.goodshootpos, var_3);
     }
   }
 
@@ -126,27 +126,27 @@ _id_199E() {
 
   if(isDefined(var_1.lastenemysightpos)) {}
 
-  if(isalive(var_1._id_19A0)) {}
+  if(isalive(var_1.goodenemy)) {}
 
-  if(!var_1 animscripts\utility::_id_0F8C()) {
+  if(!var_1 animscripts\utility::hasenemysightpos()) {
     return;
   }
-  var_6 = var_1 animscripts\utility::_id_0CEE();
+  var_6 = var_1 animscripts\utility::getenemysightpos();
 
-  if(isDefined(var_1._id_199F)) {
+  if(isDefined(var_1.goodshootpos)) {
     return;
   }
 }
 
-_id_19A1(var_0) {}
+drawenttag(var_0) {}
 
-_id_19A2(var_0, var_1, var_2) {
+drawtag(var_0, var_1, var_2) {
   var_3 = self gettagorigin(var_0);
   var_4 = self gettagangles(var_0);
-  _id_19A6(var_3, var_4, var_1, var_2);
+  drawarrow(var_3, var_4, var_1, var_2);
 }
 
-_id_19A3(var_0) {
+draworgforever(var_0) {
   var_1 = undefined;
   var_2 = undefined;
 
@@ -156,26 +156,26 @@ _id_19A3(var_0) {
       var_2 = self.angles;
     }
 
-    _id_19A6(var_1, var_2, var_0);
+    drawarrow(var_1, var_2, var_0);
     wait 0.05;
   }
 }
 
-_id_19A4(var_0, var_1) {
+drawarrowforever(var_0, var_1) {
   for(;;) {
-    _id_19A6(var_0, var_1);
+    drawarrow(var_0, var_1);
     wait 0.05;
   }
 }
 
-_id_19A5() {
+draworiginforever() {
   while(isDefined(self)) {
-    _id_19A6(self.origin, self.angles);
+    drawarrow(self.origin, self.angles);
     wait 0.05;
   }
 }
 
-_id_19A6(var_0, var_1, var_2, var_3) {
+drawarrow(var_0, var_1, var_2, var_3) {
   var_4 = 10;
   var_5 = anglesToForward(var_1);
   var_6 = var_5 * var_4;
@@ -201,7 +201,7 @@ _id_19A6(var_0, var_1, var_2, var_3) {
   }
 }
 
-_id_19A7(var_0, var_1) {
+drawforwardforever(var_0, var_1) {
   if(!isDefined(var_0)) {
     var_0 = 100;
   }
@@ -217,35 +217,35 @@ _id_19A7(var_0, var_1) {
   }
 }
 
-_id_19A8() {
+drawplayerviewforever() {
   for(;;) {
-    _id_19A6(level.player.origin, level.player getplayerangles(), (1, 1, 1));
+    drawarrow(level.player.origin, level.player getplayerangles(), (1, 1, 1));
     wait 0.05;
   }
 }
 
-_id_19A9(var_0, var_1) {
+drawtagforever(var_0, var_1) {
   for(;;) {
     if(!isDefined(self)) {
       return;
     }
-    _id_19A2(var_0, var_1);
+    drawtag(var_0, var_1);
     wait 0.05;
   }
 }
 
-_id_19AA(var_0, var_1) {
+drawtagtrails(var_0, var_1) {
   for(;;) {
     if(!isDefined(self.origin)) {
       break;
     }
 
-    _id_19A2(var_0, var_1, 1000);
+    drawtag(var_0, var_1, 1000);
     wait 0.05;
   }
 }
 
-_id_19AB(var_0, var_1) {
+dragtaguntildeath(var_0, var_1) {
   self endon("death");
 
   for(;;) {
@@ -257,22 +257,22 @@ _id_19AB(var_0, var_1) {
       break;
     }
 
-    _id_19A2(var_0, var_1);
+    drawtag(var_0, var_1);
     wait 0.05;
   }
 }
 
-_id_19AC(var_0, var_1) {
+viewtag(var_0, var_1) {
   if(var_0 == "ai") {
     var_2 = getaiarray();
 
     for(var_3 = 0; var_3 < var_2.size; var_3++) {
-      var_2[var_3] _id_19A2(var_1);
+      var_2[var_3] drawtag(var_1);
     }
   }
 }
 
-_id_19AD() {
+debug_corner() {
   level.player.ignoreme = 1;
   var_0 = getallnodes();
   var_1 = [];
@@ -291,12 +291,12 @@ _id_19AD() {
   for(var_2 = 0; var_2 < var_3.size; var_2++) {
     var_3[var_2] delete();
   }
-  level._id_19AE = getspawnerarray();
-  level._id_19AF = [];
-  level._id_19B0 = [];
+  level.debugspawners = getspawnerarray();
+  level.activenodes = [];
+  level.completednodes = [];
 
-  for(var_2 = 0; var_2 < level._id_19AE.size; var_2++) {
-    level._id_19AE[var_2].targetname = "blah";
+  for(var_2 = 0; var_2 < level.debugspawners.size; var_2++) {
+    level.debugspawners[var_2].targetname = "blah";
   }
   var_4 = 0;
 
@@ -305,7 +305,7 @@ _id_19AD() {
       break;
     }
 
-    var_1[var_2] thread _id_19B1();
+    var_1[var_2] thread covertest();
     var_4++;
   }
 
@@ -318,27 +318,27 @@ _id_19AD() {
     if(var_4 >= var_1.size) {
       var_4 = 0;
     }
-    var_1[var_4] thread _id_19B1();
+    var_1[var_4] thread covertest();
     var_4++;
   }
 }
 
-_id_19B1() {
-  _id_19B2();
+covertest() {
+  coversetupanim();
 }
 
-_id_19B2() {
+coversetupanim() {
   var_0 = undefined;
   var_1 = undefined;
 
   for(;;) {
-    for(var_2 = 0; var_2 < level._id_19AE.size; var_2++) {
+    for(var_2 = 0; var_2 < level.debugspawners.size; var_2++) {
       wait 0.05;
-      var_1 = level._id_19AE[var_2];
+      var_1 = level.debugspawners[var_2];
       var_3 = 0;
 
-      for(var_4 = 0; var_4 < level._id_19AF.size; var_4++) {
-        if(distance(level._id_19AF[var_4].origin, self.origin) > 250) {
+      for(var_4 = 0; var_4 < level.activenodes.size; var_4++) {
+        if(distance(level.activenodes[var_4].origin, self.origin) > 250) {
           continue;
         }
         var_3 = 1;
@@ -350,8 +350,8 @@ _id_19B2() {
       }
       var_5 = 0;
 
-      for(var_4 = 0; var_4 < level._id_19B0.size; var_4++) {
-        if(level._id_19B0[var_4] != self) {
+      for(var_4 = 0; var_4 < level.completednodes.size; var_4++) {
+        if(level.completednodes[var_4] != self) {
           continue;
         }
         var_5 = 1;
@@ -361,14 +361,14 @@ _id_19B2() {
       if(var_5) {
         continue;
       }
-      level._id_19AF[level._id_19AF.size] = self;
+      level.activenodes[level.activenodes.size] = self;
       var_1.origin = self.origin;
       var_1.angles = self.angles;
       var_1.count = 1;
       var_0 = var_1 stalingradspawn();
 
-      if(maps\_utility::_id_13AF(var_0)) {
-        _id_19B4(self);
+      if(maps\_utility::spawn_failed(var_0)) {
+        removeactivespawner(self);
         continue;
       }
 
@@ -386,36 +386,36 @@ _id_19B2() {
     var_0.ignoreme = 1;
     var_0.team = "neutral";
     var_0 setgoalpos(var_0.origin);
-    thread _id_19B5(self.origin);
-    var_0 thread maps\_utility::_id_19B3();
-    thread _id_19B6(var_0);
+    thread createline(self.origin);
+    var_0 thread maps\_utility::debugorigin();
+    thread createlineconstantly(var_0);
     var_0 waittill("death");
   }
 
-  _id_19B4(self);
-  level._id_19B0[level._id_19B0.size] = self;
+  removeactivespawner(self);
+  level.completednodes[level.completednodes.size] = self;
 }
 
-_id_19B4(var_0) {
+removeactivespawner(var_0) {
   var_1 = [];
 
-  for(var_2 = 0; var_2 < level._id_19AF.size; var_2++) {
-    if(level._id_19AF[var_2] == var_0) {
+  for(var_2 = 0; var_2 < level.activenodes.size; var_2++) {
+    if(level.activenodes[var_2] == var_0) {
       continue;
     }
-    var_1[var_1.size] = level._id_19AF[var_2];
+    var_1[var_1.size] = level.activenodes[var_2];
   }
 
-  level._id_19AF = var_1;
+  level.activenodes = var_1;
 }
 
-_id_19B5(var_0) {
+createline(var_0) {
   for(;;) {
     wait 0.05;
   }
 }
 
-_id_19B6(var_0) {
+createlineconstantly(var_0) {
   var_1 = undefined;
 
   while(isalive(var_0)) {
@@ -428,43 +428,43 @@ _id_19B6(var_0) {
   }
 }
 
-_id_19B7() {
+debugmisstime() {
   self notify("stopdebugmisstime");
   self endon("stopdebugmisstime");
   self endon("death");
 
   for(;;) {
-    if(self.a._id_19B8 <= 0) {} else {}
+    if(self.a.misstime <= 0) {} else {}
 
     wait 0.05;
   }
 }
 
-_id_19B9() {
+debugmisstimeoff() {
   self notify("stopdebugmisstime");
 }
 
-_id_19BA(var_0, var_1) {}
+setemptydvar(var_0, var_1) {}
 
-_id_19BB(var_0) {}
+debugjump(var_0) {}
 
-_id_19BC() {}
+debugdvars() {}
 
-_id_19BD() {}
+remove_reflection_objects() {}
 
-_id_19BE() {}
+create_reflection_objects() {}
 
-_id_19BF() {}
+create_reflection_object() {}
 
-_id_19C0() {}
+debug_reflection() {}
 
-_id_19C1() {}
+debug_reflection_buttons() {}
 
-_id_19C2() {}
+remove_fxlighting_object() {}
 
-_id_19C3() {}
+create_fxlighting_object() {}
 
-_id_19C4() {
+play_fxlighting_fx() {
   self endon("death");
 
   for(;;) {
@@ -473,11 +473,11 @@ _id_19C4() {
   }
 }
 
-_id_19C5() {}
+debug_fxlighting() {}
 
-_id_19C6() {}
+debug_fxlighting_buttons() {}
 
-_id_19C7() {
+showdebugtrace() {
   var_0 = undefined;
   var_1 = undefined;
   var_0 = (15.1859, -12.2822, 4.071);
@@ -489,7 +489,7 @@ _id_19C7() {
     var_3 = var_1;
 
     if(!isDefined(var_0)) {
-      var_2 = level._id_19C8;
+      var_2 = level.tracestart;
     }
     if(!isDefined(var_1)) {
       var_3 = level.player getEye();
@@ -500,7 +500,7 @@ _id_19C7() {
 
 hatmodel() {}
 
-_id_19C9() {
+debug_character_count() {
   var_0 = newhudelem();
   var_0.alignx = "left";
   var_0.aligny = "middle";
@@ -574,23 +574,23 @@ _id_19C9() {
   }
 }
 
-_id_19CA() {
+nuke() {
   if(!self.damageshield) {
     self kill((0, 0, -500), level.player, level.player);
   }
 }
 
-_id_19CB() {}
+debug_nuke() {}
 
-_id_19CC() {}
+debug_misstime() {}
 
-_id_19CD() {
+camera() {
   wait 0.05;
   var_0 = getEntArray("camera", "targetname");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = getEnt(var_0[var_1].target, "targetname");
-    var_0[var_1]._id_19CE = var_2.origin;
+    var_0[var_1].origin2 = var_2.origin;
     var_0[var_1].angles = vectortoangles(var_2.origin - var_0[var_1].origin);
   }
 
@@ -598,7 +598,7 @@ _id_19CD() {
     var_3 = getaiarray("axis");
 
     if(!var_3.size) {
-      _id_19CF();
+      freeplayer();
       wait 0.5;
       continue;
     }
@@ -616,7 +616,7 @@ _id_19CD() {
     }
 
     if(!var_4.size) {
-      _id_19CF();
+      freeplayer();
       wait 0.5;
       continue;
     }
@@ -625,7 +625,7 @@ _id_19CD() {
 
     for(var_1 = 0; var_1 < var_4.size; var_1++) {
       var_7 = var_4[var_1];
-      var_8 = var_7._id_19CE;
+      var_8 = var_7.origin2;
       var_9 = var_7.origin;
       var_10 = vectortoangles((var_9[0], var_9[1], var_9[2]) - (var_8[0], var_8[1], var_8[2]));
       var_11 = (0, var_10[1], 0);
@@ -640,7 +640,7 @@ _id_19CD() {
     }
 
     if(!var_6.size) {
-      _id_19CF();
+      freeplayer();
       wait 0.5;
       continue;
     }
@@ -658,20 +658,20 @@ _id_19CD() {
       var_14 = var_16;
     }
 
-    _id_19D0(var_15);
+    setplayertocamera(var_15);
     wait 3;
   }
 }
 
-_id_19CF() {
+freeplayer() {
   setDvar("cl_freemove", "0");
 }
 
-_id_19D0(var_0) {
+setplayertocamera(var_0) {
   setDvar("cl_freemove", "2");
 }
 
-_id_19D1() {
+anglescheck() {
   for(;;) {
     if(getDvar("angles", "0") == "1") {
       setDvar("angles", "0");
@@ -680,20 +680,20 @@ _id_19D1() {
   }
 }
 
-_id_19D2() {
-  if(!isDefined(level._id_19D3)) {
-    level._id_19D3 = 5;
+dolly() {
+  if(!isDefined(level.dollytime)) {
+    level.dollytime = 5;
   }
   setDvar("dolly", "");
-  thread _id_19D4();
-  thread _id_19D5();
-  thread _id_19D6();
+  thread dollystart();
+  thread dollyend();
+  thread dollygo();
 }
 
-_id_19D4() {
+dollystart() {
   for(;;) {
     if(getDvar("dolly") == "start") {
-      level._id_19D4 = level.player.origin;
+      level.dollystart = level.player.origin;
       setDvar("dolly", "");
     }
 
@@ -701,10 +701,10 @@ _id_19D4() {
   }
 }
 
-_id_19D5() {
+dollyend() {
   for(;;) {
     if(getDvar("dolly") == "end") {
-      level._id_19D5 = level.player.origin;
+      level.dollyend = level.player.origin;
       setDvar("dolly", "");
     }
 
@@ -712,86 +712,86 @@ _id_19D5() {
   }
 }
 
-_id_19D6() {
+dollygo() {
   for(;;) {
     wait 1;
 
     if(getDvar("dolly") == "go") {
       setDvar("dolly", "");
 
-      if(!isDefined(level._id_19D4)) {
+      if(!isDefined(level.dollystart)) {
         continue;
       }
-      if(!isDefined(level._id_19D5)) {
+      if(!isDefined(level.dollyend)) {
         continue;
       }
       var_0 = spawn("script_origin", (0, 0, 0));
-      var_0.origin = level._id_19D4;
+      var_0.origin = level.dollystart;
       level.player setOrigin(var_0.origin);
       level.player linkTo(var_0);
-      var_0 moveTo(level._id_19D5, level._id_19D3);
-      wait(level._id_19D3);
+      var_0 moveTo(level.dollyend, level.dollytime);
+      wait(level.dollytime);
       var_0 delete();
     }
   }
 }
 
-_id_19D7() {
+deathspawnerpreview() {
   waittillframeend;
 
   for(var_0 = 0; var_0 < 50; var_0++) {
-    if(!isDefined(level._id_19D8[var_0])) {
+    if(!isDefined(level.deathspawnerents[var_0])) {
       continue;
     }
-    var_1 = level._id_19D8[var_0];
+    var_1 = level.deathspawnerents[var_0];
 
     for(var_2 = 0; var_2 < var_1.size; var_2++) {
       var_3 = var_1[var_2];
 
-      if(isDefined(var_3._id_19D9)) {
+      if(isDefined(var_3.truecount)) {
         continue;
       }
     }
   }
 }
 
-_id_19DA() {}
+lastsightposwatch() {}
 
-_id_19DB() {
+watchminimap() {
   precacheitem("defaultweapon");
 
   for(;;) {
-    _id_19DC();
+    updateminimapsetting();
     wait 0.25;
   }
 }
 
-_id_19DC() {
+updateminimapsetting() {
   var_0 = getdvarfloat("scr_requiredMapAspectRatio", 1);
 
-  if(!isDefined(level._id_19DD)) {
+  if(!isDefined(level.minimapcornertargetname)) {
     setDvar("scr_minimap_corner_targetname", "minimap_corner");
-    level._id_19DD = "minimap_corner";
+    level.minimapcornertargetname = "minimap_corner";
   }
 
-  if(!isDefined(level._id_19DE)) {
+  if(!isDefined(level.minimapheight)) {
     setDvar("scr_minimap_height", "0");
-    level._id_19DE = 0;
+    level.minimapheight = 0;
   }
 
   var_1 = getdvarfloat("scr_minimap_height");
   var_2 = getDvar("scr_minimap_corner_targetname");
 
-  if(var_1 != level._id_19DE || var_2 != level._id_19DD) {
-    if(isDefined(level._id_19DF)) {
-      level._id_19E0 unlink();
-      level._id_19DF delete();
+  if(var_1 != level.minimapheight || var_2 != level.minimapcornertargetname) {
+    if(isDefined(level.minimaporigin)) {
+      level.minimapplayer unlink();
+      level.minimaporigin delete();
       level notify("end_draw_map_bounds");
     }
 
     if(var_1 > 0) {
-      level._id_19DE = var_1;
-      level._id_19DD = var_2;
+      level.minimapheight = var_1;
+      level.minimapcornertargetname = var_2;
       var_3 = level.player;
       var_4 = getEntArray(var_2, "targetname");
 
@@ -872,26 +872,26 @@ _id_19DC() {
         var_9.angles = (90, getnorthyaw(), 0);
         var_3 giveweapon("defaultweapon");
         setsaveddvar("cg_fov", var_20);
-        level._id_19E0 = var_3;
-        level._id_19DF = var_9;
-        thread _id_19E4(var_5, var_7, var_6);
+        level.minimapplayer = var_3;
+        level.minimaporigin = var_9;
+        thread drawminimapbounds(var_5, var_7, var_6);
       } else {}
     }
   }
 }
 
-_id_19E1() {
+getchains() {
   var_0 = [];
   var_0 = getEntArray("minimap_line", "script_noteworthy");
   var_1 = [];
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
-    var_1[var_2] = var_0[var_2] _id_19E2();
+    var_1[var_2] = var_0[var_2] getchain();
   }
   return var_1;
 }
 
-_id_19E2() {
+getchain() {
   var_0 = [];
   var_1 = self;
 
@@ -922,7 +922,7 @@ vecscale(var_0, var_1) {
   return (var_0[0] * var_1, var_0[1] * var_1, var_0[2] * var_1);
 }
 
-_id_19E4(var_0, var_1, var_2) {
+drawminimapbounds(var_0, var_1, var_2) {
   level notify("end_draw_map_bounds");
   level endon("end_draw_map_bounds");
   var_3 = var_0[2] - var_2[2];
@@ -943,7 +943,7 @@ _id_19E4(var_0, var_1, var_2) {
   var_14 = var_2 - var_9;
   var_15 = vecscale(var_1 + var_2, 0.5) + vecscale(var_10, 0.51);
   var_16 = var_4 * 0.003;
-  var_17 = _id_19E1();
+  var_17 = getchains();
 
   for(;;) {
     common_scripts\utility::array_levelthread(var_17, common_scripts\utility::plot_points);
@@ -951,7 +951,7 @@ _id_19E4(var_0, var_1, var_2) {
   }
 }
 
-_id_19E5(var_0) {
+islookingatorigin(var_0) {
   var_1 = vectorNormalize(var_0 - self getshootatpos());
   var_2 = vectorNormalize(var_0 - (0, 0, 24) - self getshootatpos());
   var_3 = vectordot(var_1, var_2);
@@ -965,7 +965,7 @@ _id_19E5(var_0) {
   }
 }
 
-_id_19E6() {
+debug_colornodes() {
   wait 0.05;
   var_0 = getaiarray();
   var_1 = [];
@@ -976,74 +976,74 @@ _id_19E6() {
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_3 = var_0[var_2];
 
-    if(!isDefined(var_3._id_134D)) {
+    if(!isDefined(var_3.currentcolorcode)) {
       continue;
     }
-    var_1[var_3.team][var_3._id_134D] = 1;
+    var_1[var_3.team][var_3.currentcolorcode] = 1;
     var_4 = (1, 1, 1);
 
-    if(isDefined(var_3._id_134B)) {
-      var_4 = level._id_19E7[var_3._id_134B];
+    if(isDefined(var_3.script_forcecolor)) {
+      var_4 = level.color_debug[var_3.script_forcecolor];
     }
     if(var_3.team == "axis") {
       continue;
     }
-    var_3 _id_19EB();
+    var_3 try_to_draw_line_to_node();
   }
 
-  _id_19E8(var_1, "allies");
-  _id_19E8(var_1, "axis");
+  draw_colornodes(var_1, "allies");
+  draw_colornodes(var_1, "axis");
 }
 
-_id_19E8(var_0, var_1) {
+draw_colornodes(var_0, var_1) {
   var_2 = getarraykeys(var_0[var_1]);
 
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
     var_4 = (1, 1, 1);
-    var_4 = level._id_19E7[getsubstr(var_2[var_3], 0, 1)];
+    var_4 = level.color_debug[getsubstr(var_2[var_3], 0, 1)];
 
-    if(isDefined(level._id_19E9[var_1][var_2[var_3]])) {
-      var_5 = level._id_19E9[var_1][var_2[var_3]];
+    if(isDefined(level.colornodes_debug_array[var_1][var_2[var_3]])) {
+      var_5 = level.colornodes_debug_array[var_1][var_2[var_3]];
 
       for(var_6 = 0; var_6 < var_5.size; var_6++) {}
     }
   }
 }
 
-_id_19EA() {
+get_team_substr() {
   if(self.team == "allies") {
-    if(!isDefined(self.node._id_1341)) {
+    if(!isDefined(self.node.script_color_allies)) {
       return;
     }
-    return self.node._id_1341;
+    return self.node.script_color_allies;
   }
 
   if(self.team == "axis") {
-    if(!isDefined(self.node._id_1342)) {
+    if(!isDefined(self.node.script_color_axis)) {
       return;
     }
-    return self.node._id_1342;
+    return self.node.script_color_axis;
   }
 }
 
-_id_19EB() {
+try_to_draw_line_to_node() {
   if(!isDefined(self.node)) {
     return;
   }
-  if(!isDefined(self._id_134B)) {
+  if(!isDefined(self.script_forcecolor)) {
     return;
   }
-  var_0 = _id_19EA();
+  var_0 = get_team_substr();
 
   if(!isDefined(var_0)) {
     return;
   }
-  if(!issubstr(var_0, self._id_134B)) {
+  if(!issubstr(var_0, self.script_forcecolor)) {
     return;
   }
 }
 
-_id_19EC() {
+fogcheck() {
   if(getDvar("depth_close") == "") {
     setDvar("depth_close", "0");
   }
@@ -1055,14 +1055,14 @@ _id_19EC() {
   setexpfog(var_0, var_1, 1, 1, 1, 1, 0);
 }
 
-_id_19ED() {
-  level._id_19EE = gettime();
-  thread _id_19EF();
+debugthreat() {
+  level.last_threat_debug = gettime();
+  thread debugthreatcalc();
 }
 
-_id_19EF() {}
+debugthreatcalc() {}
 
-_id_19F0(var_0, var_1) {
+displaythreat(var_0, var_1) {
   if(self.team == var_0.team) {
     return;
   }
@@ -1103,19 +1103,19 @@ _id_19F0(var_0, var_1) {
   }
 }
 
-_id_19F1() {
-  level._id_13CA = [];
-  level._id_19F2 = [];
+debugcolorfriendlies() {
+  level.debug_color_friendlies = [];
+  level.debug_color_huds = [];
 
   for(;;) {
     level waittill("updated_color_friendlies");
-    _id_19F3();
+    draw_color_friendlies();
   }
 }
 
-_id_19F3() {
+draw_color_friendlies() {
   level endon("updated_color_friendlies");
-  var_0 = getarraykeys(level._id_13CA);
+  var_0 = getarraykeys(level.debug_color_friendlies);
   var_1 = [];
   var_2 = [];
   var_2[var_2.size] = "r";
@@ -1125,20 +1125,20 @@ _id_19F3() {
   var_2[var_2.size] = "c";
   var_2[var_2.size] = "b";
   var_2[var_2.size] = "p";
-  var_3 = maps\_utility::_id_19F4();
+  var_3 = maps\_utility::get_script_palette();
 
   for(var_4 = 0; var_4 < var_2.size; var_4++) {
     var_1[var_2[var_4]] = 0;
   }
   for(var_4 = 0; var_4 < var_0.size; var_4++) {
-    var_5 = level._id_13CA[var_0[var_4]];
+    var_5 = level.debug_color_friendlies[var_0[var_4]];
     var_1[var_5]++;
   }
 
-  for(var_4 = 0; var_4 < level._id_19F2.size; var_4++) {
-    level._id_19F2[var_4] destroy();
+  for(var_4 = 0; var_4 < level.debug_color_huds.size; var_4++) {
+    level.debug_color_huds[var_4] destroy();
   }
-  level._id_19F2 = [];
+  level.debug_color_huds = [];
   var_6 = 15;
   var_7 = 365;
   var_8 = 25;
@@ -1157,14 +1157,14 @@ _id_19F3() {
       var_11.aligny = "bottom";
       var_11.alpha = 1;
       var_11.color = var_3[var_2[var_4]];
-      level._id_19F2[level._id_19F2.size] = var_11;
+      level.debug_color_huds[level.debug_color_huds.size] = var_11;
     }
 
     var_7 = var_7 + var_9;
   }
 }
 
-_id_19F5() {
+playernode() {
   for(;;) {
     if(isDefined(level.player.node)) {}
 
@@ -1172,27 +1172,27 @@ _id_19F5() {
   }
 }
 
-_id_19F6() {
-  if(isalive(self._id_1350)) {
+drawusers() {
+  if(isalive(self.color_user)) {
     return;
   }
 }
 
-_id_19F7() {
+debuggoalpos() {
   for(;;) {
     var_0 = getaiarray();
-    common_scripts\utility::array_thread(var_0, ::_id_19F8);
+    common_scripts\utility::array_thread(var_0, ::view_goal_pos);
     wait 0.05;
   }
 }
 
-_id_19F8() {
+view_goal_pos() {
   if(!isDefined(self.goalpos)) {
     return;
   }
 }
 
-_id_19F9() {
+colordebug() {
   wait 0.5;
   var_0 = [];
   var_0[var_0.size] = "r";
@@ -1205,10 +1205,10 @@ _id_19F9() {
 
   for(;;) {
     for(var_1 = 0; var_1 < var_0.size; var_1++) {
-      var_2 = level._id_1346["allies"][var_0[var_1]];
+      var_2 = level.currentcolorforced["allies"][var_0[var_1]];
 
       if(isDefined(var_2)) {
-        _id_19FA(var_2);
+        draw_colored_nodes(var_2);
       }
     }
 
@@ -1216,30 +1216,30 @@ _id_19F9() {
   }
 }
 
-_id_19FA(var_0) {
-  var_1 = level._id_133E["allies"][var_0];
-  common_scripts\utility::array_thread(var_1, ::_id_19F6);
+draw_colored_nodes(var_0) {
+  var_1 = level.arrays_of_colorcoded_nodes["allies"][var_0];
+  common_scripts\utility::array_thread(var_1, ::drawusers);
 }
 
-_id_19FB() {
-  level._id_11E8 = [];
-  level._id_19FC = [];
+init_animsounds() {
+  level.animsounds = [];
+  level.animsound_aliases = [];
   waittillframeend;
   waittillframeend;
-  var_0 = getarraykeys(level._id_11B6);
+  var_0 = getarraykeys(level.scr_notetrack);
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    _id_19FD(var_0[var_1]);
+    init_notetracks_for_animname(var_0[var_1]);
   }
-  var_0 = getarraykeys(level._id_11B9);
+  var_0 = getarraykeys(level.scr_animsound);
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    _id_19FE(var_0[var_1]);
+    init_animsounds_for_animname(var_0[var_1]);
   }
 }
 
-_id_19FD(var_0) {
-  foreach(var_10, var_2 in level._id_11B6[var_0]) {
+init_notetracks_for_animname(var_0) {
+  foreach(var_10, var_2 in level.scr_notetrack[var_0]) {
     foreach(var_9, var_4 in var_2) {
       foreach(var_6 in var_4) {
         var_7 = var_6["sound"];
@@ -1247,28 +1247,28 @@ _id_19FD(var_0) {
         if(!isDefined(var_7)) {
           continue;
         }
-        level._id_19FC[var_0][var_10][var_9]["soundalias"] = var_7;
+        level.animsound_aliases[var_0][var_10][var_9]["soundalias"] = var_7;
 
         if(isDefined(var_6["created_by_animSound"])) {
-          level._id_19FC[var_0][var_10][var_9]["created_by_animSound"] = 1;
+          level.animsound_aliases[var_0][var_10][var_9]["created_by_animSound"] = 1;
         }
       }
     }
   }
 }
 
-_id_19FE(var_0) {
-  var_1 = getarraykeys(level._id_11B9[var_0]);
+init_animsounds_for_animname(var_0) {
+  var_1 = getarraykeys(level.scr_animsound[var_0]);
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_3 = var_1[var_2];
-    var_4 = level._id_11B9[var_0][var_3];
-    level._id_19FC[var_0][var_3]["#" + var_3]["soundalias"] = var_4;
-    level._id_19FC[var_0][var_3]["#" + var_3]["created_by_animSound"] = 1;
+    var_4 = level.scr_animsound[var_0][var_3];
+    level.animsound_aliases[var_0][var_3]["#" + var_3]["soundalias"] = var_4;
+    level.animsound_aliases[var_0][var_3]["#" + var_3]["created_by_animSound"] = 1;
   }
 }
 
-_id_19FF(var_0, var_1, var_2) {
+add_hud_line(var_0, var_1, var_2) {
   var_3 = newhudelem();
   var_3.alignx = "left";
   var_3.aligny = "middle";
@@ -1277,51 +1277,51 @@ _id_19FF(var_0, var_1, var_2) {
   var_3.alpha = 1;
   var_3.fontscale = 1;
   var_3.label = var_2;
-  level._id_1A00[level._id_1A00.size] = var_3;
+  level.animsound_hud_extralines[level.animsound_hud_extralines.size] = var_3;
   return var_3;
 }
 
-_id_1A01() {}
+debug_animsound() {}
 
-_id_1A02() {
-  var_0 = level._id_1A03;
-  var_1 = var_0._id_11E8;
+draw_animsounds_in_hud() {
+  var_0 = level.animsound_tagged;
+  var_1 = var_0.animsounds;
   var_2 = "generic";
 
-  if(isDefined(var_0._id_1032)) {
-    var_2 = var_0._id_1032;
+  if(isDefined(var_0.animname)) {
+    var_2 = var_0.animname;
   }
-  level._id_1A04.label = "Actor: " + var_2;
+  level.animsound_hud_animname.label = "Actor: " + var_2;
 
   if(level.player buttonPressed("f12")) {
-    if(!level._id_1A05) {
-      level._id_1A06 = !level._id_1A06;
-      level._id_1A05 = 1;
+    if(!level.animsound_locked_pressed) {
+      level.animsound_locked = !level.animsound_locked;
+      level.animsound_locked_pressed = 1;
     }
   } else {
-    level._id_1A05 = 0;
+    level.animsound_locked_pressed = 0;
   }
   if(level.player buttonPressed("UPARROW")) {
-    if(level._id_1A07 != "up") {
-      level._id_1A08--;
+    if(level.animsound_input != "up") {
+      level.animsound_selected--;
     }
-    level._id_1A07 = "up";
+    level.animsound_input = "up";
   } else if(level.player buttonPressed("DOWNARROW")) {
-    if(level._id_1A07 != "down") {
-      level._id_1A08++;
+    if(level.animsound_input != "down") {
+      level.animsound_selected++;
     }
-    level._id_1A07 = "down";
+    level.animsound_input = "down";
   } else {
-    level._id_1A07 = "none";
+    level.animsound_input = "none";
   }
-  for(var_3 = 0; var_3 < level._id_11E7; var_3++) {
-    var_4 = level._id_1A09[var_3];
+  for(var_3 = 0; var_3 < level.animsound_hudlimit; var_3++) {
+    var_4 = level.animsound_hud[var_3];
     var_4.label = "";
     var_4.color = (1, 1, 1);
-    var_4 = level._id_1A0A[var_3];
+    var_4 = level.animsound_hud_timer[var_3];
     var_4.label = "";
     var_4.color = (1, 1, 1);
-    var_4 = level._id_1A0B[var_3];
+    var_4 = level.animsound_hud_alias[var_3];
     var_4.label = "";
     var_4.color = (1, 1, 1);
   }
@@ -1338,129 +1338,129 @@ _id_1A02() {
   if(var_6 == -1) {
     return;
   }
-  if(level._id_1A08 > var_6) {
-    level._id_1A08 = var_6;
+  if(level.animsound_selected > var_6) {
+    level.animsound_selected = var_6;
   }
-  if(level._id_1A08 < 0) {
-    level._id_1A08 = 0;
+  if(level.animsound_selected < 0) {
+    level.animsound_selected = 0;
   }
   for(;;) {
-    if(isDefined(var_1[level._id_1A08])) {
+    if(isDefined(var_1[level.animsound_selected])) {
       break;
     }
 
-    level._id_1A08--;
+    level.animsound_selected--;
 
-    if(level._id_1A08 < 0) {
-      level._id_1A08 = var_6;
+    if(level.animsound_selected < 0) {
+      level.animsound_selected = var_6;
     }
   }
 
-  level._id_1A0C.label = "Anim: " + var_1[level._id_1A08]._id_11EB;
-  level._id_1A09[level._id_1A08].color = (1, 1, 0);
-  level._id_1A0A[level._id_1A08].color = (1, 1, 0);
-  level._id_1A0B[level._id_1A08].color = (1, 1, 0);
+  level.animsound_hud_anime.label = "Anim: " + var_1[level.animsound_selected].anime;
+  level.animsound_hud[level.animsound_selected].color = (1, 1, 0);
+  level.animsound_hud_timer[level.animsound_selected].color = (1, 1, 0);
+  level.animsound_hud_alias[level.animsound_selected].color = (1, 1, 0);
   var_7 = gettime();
 
   for(var_3 = 0; var_3 < var_5.size; var_3++) {
     var_8 = var_5[var_3];
     var_9 = var_1[var_8];
-    var_4 = level._id_1A09[var_8];
-    var_10 = _id_1A0D(var_9);
-    var_4.label = var_8 + 1 + ". " + var_9._id_11EC;
-    var_4 = level._id_1A0A[var_8];
-    var_4.label = int((var_7 - (var_9._id_11E9 - 60000)) * 0.001);
+    var_4 = level.animsound_hud[var_8];
+    var_10 = get_alias_from_stored(var_9);
+    var_4.label = var_8 + 1 + ". " + var_9.notetrack;
+    var_4 = level.animsound_hud_timer[var_8];
+    var_4.label = int((var_7 - (var_9.end_time - 60000)) * 0.001);
 
     if(isDefined(var_10)) {
-      var_4 = level._id_1A0B[var_8];
+      var_4 = level.animsound_hud_alias[var_8];
       var_4.label = var_10;
 
-      if(!_id_1A0E(var_9._id_1032, var_9._id_11EB, var_9._id_11EC)) {
+      if(!is_from_animsound(var_9.animname, var_9.anime, var_9.notetrack)) {
         var_4.color = (0.7, 0.7, 0.7);
       }
     }
   }
 
   if(level.player buttonPressed("del")) {
-    var_9 = var_1[level._id_1A08];
-    var_10 = _id_1A0D(var_9);
+    var_9 = var_1[level.animsound_selected];
+    var_10 = get_alias_from_stored(var_9);
 
     if(!isDefined(var_10)) {
       return;
     }
-    if(!_id_1A0E(var_9._id_1032, var_9._id_11EB, var_9._id_11EC)) {
+    if(!is_from_animsound(var_9.animname, var_9.anime, var_9.notetrack)) {
       return;
     }
-    level._id_19FC[var_9._id_1032][var_9._id_11EB][var_9._id_11EC] = undefined;
-    _id_1A14();
+    level.animsound_aliases[var_9.animname][var_9.anime][var_9.notetrack] = undefined;
+    debug_animsoundsave();
   }
 }
 
-_id_1A0D(var_0) {
-  if(!isDefined(level._id_19FC[var_0._id_1032])) {
+get_alias_from_stored(var_0) {
+  if(!isDefined(level.animsound_aliases[var_0.animname])) {
     return;
   }
-  if(!isDefined(level._id_19FC[var_0._id_1032][var_0._id_11EB])) {
+  if(!isDefined(level.animsound_aliases[var_0.animname][var_0.anime])) {
     return;
   }
-  if(!isDefined(level._id_19FC[var_0._id_1032][var_0._id_11EB][var_0._id_11EC])) {
+  if(!isDefined(level.animsound_aliases[var_0.animname][var_0.anime][var_0.notetrack])) {
     return;
   }
-  return level._id_19FC[var_0._id_1032][var_0._id_11EB][var_0._id_11EC]["soundalias"];
+  return level.animsound_aliases[var_0.animname][var_0.anime][var_0.notetrack]["soundalias"];
 }
 
-_id_1A0E(var_0, var_1, var_2) {
-  return isDefined(level._id_19FC[var_0][var_1][var_2]["created_by_animSound"]);
+is_from_animsound(var_0, var_1, var_2) {
+  return isDefined(level.animsound_aliases[var_0][var_1][var_2]["created_by_animSound"]);
 }
 
-_id_1A0F() {
+display_animsound() {
   if(distance(level.player.origin, self.origin) > 1500) {
     return;
   }
-  level._id_1A10[level._id_1A10.size] = self;
+  level.animsounds_thisframe[level.animsounds_thisframe.size] = self;
 }
 
-_id_1A11(var_0) {}
+debug_animsoundtag(var_0) {}
 
-_id_1A12() {}
+debug_animsoundtagselected() {}
 
-_id_1A13(var_0, var_1) {
-  if(!isDefined(level._id_1A03)) {
+tag_sound(var_0, var_1) {
+  if(!isDefined(level.animsound_tagged)) {
     return;
   }
-  if(!isDefined(level._id_1A03._id_11E8[var_1])) {
+  if(!isDefined(level.animsound_tagged.animsounds[var_1])) {
     return;
   }
-  var_2 = level._id_1A03._id_11E8[var_1];
-  var_3 = _id_1A0D(var_2);
+  var_2 = level.animsound_tagged.animsounds[var_1];
+  var_3 = get_alias_from_stored(var_2);
 
-  if(!isDefined(var_3) || _id_1A0E(var_2._id_1032, var_2._id_11EB, var_2._id_11EC)) {
-    level._id_19FC[var_2._id_1032][var_2._id_11EB][var_2._id_11EC]["soundalias"] = var_0;
-    level._id_19FC[var_2._id_1032][var_2._id_11EB][var_2._id_11EC]["created_by_animSound"] = 1;
-    _id_1A14();
+  if(!isDefined(var_3) || is_from_animsound(var_2.animname, var_2.anime, var_2.notetrack)) {
+    level.animsound_aliases[var_2.animname][var_2.anime][var_2.notetrack]["soundalias"] = var_0;
+    level.animsound_aliases[var_2.animname][var_2.anime][var_2.notetrack]["created_by_animSound"] = 1;
+    debug_animsoundsave();
   }
 }
 
-_id_1A14() {}
+debug_animsoundsave() {}
 
-_id_1A15(var_0) {
+print_aliases_to_file(var_0) {
   var_1 = "";
-  var_2 = getarraykeys(level._id_19FC);
+  var_2 = getarraykeys(level.animsound_aliases);
 
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
-    var_4 = getarraykeys(level._id_19FC[var_2[var_3]]);
+    var_4 = getarraykeys(level.animsound_aliases[var_2[var_3]]);
 
     for(var_5 = 0; var_5 < var_4.size; var_5++) {
       var_6 = var_4[var_5];
-      var_7 = getarraykeys(level._id_19FC[var_2[var_3]][var_6]);
+      var_7 = getarraykeys(level.animsound_aliases[var_2[var_3]][var_6]);
 
       for(var_8 = 0; var_8 < var_7.size; var_8++) {
         var_9 = var_7[var_8];
 
-        if(!_id_1A0E(var_2[var_3], var_6, var_9)) {
+        if(!is_from_animsound(var_2[var_3], var_6, var_9)) {
           continue;
         }
-        var_10 = level._id_19FC[var_2[var_3]][var_6][var_9]["soundalias"];
+        var_10 = level.animsound_aliases[var_2[var_3]][var_6][var_9]["soundalias"];
 
         if(var_9 == "#" + var_6) {
           continue;
@@ -1470,7 +1470,7 @@ _id_1A15(var_0) {
   }
 }
 
-_id_1A16(var_0) {
+tostr(var_0) {
   var_1 = "\"";
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
@@ -1487,7 +1487,7 @@ _id_1A16(var_0) {
   return var_1;
 }
 
-_id_1A17(var_0, var_1, var_2, var_3, var_4, var_5) {
+linedraw(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(var_2)) {
     var_2 = (1, 1, 1);
   }
@@ -1504,103 +1504,103 @@ _id_1A17(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 }
 
-_id_1A18(var_0, var_1, var_2) {
+print3ddraw(var_0, var_1, var_2) {
   for(;;) {
     wait 0.05;
   }
 }
 
-_id_1A19() {
+complete_me() {
   if(getDvar("credits_active") == "1") {
     wait 7;
     setDvar("credits_active", "0");
-    maps\_endmission::_id_198E();
+    maps\_endmission::credits_end();
     return;
   }
 
   wait 7;
-  maps\_utility::_id_195A();
+  maps\_utility::nextmission();
 }
 
-_id_1A1A(var_0) {}
+find_new_chase_target(var_0) {}
 
-_id_1A1B(var_0) {
-  if(!isDefined(level._id_1A1C)) {
-    level._id_1A1C = -1;
+chasecam(var_0) {
+  if(!isDefined(level.chase_cam_last_num)) {
+    level.chase_cam_last_num = -1;
   }
-  if(level._id_1A1C == var_0) {
+  if(level.chase_cam_last_num == var_0) {
     return;
   }
-  _id_1A1A(var_0);
+  find_new_chase_target(var_0);
 
-  if(!isDefined(level._id_1A1D)) {
+  if(!isDefined(level.chase_cam_target)) {
     return;
   }
-  level._id_1A1C = var_0;
+  level.chase_cam_last_num = var_0;
 
-  if(!isDefined(level._id_1A1E)) {
-    level._id_1A1E = level._id_1A1D common_scripts\utility::spawn_tag_origin();
+  if(!isDefined(level.chase_cam_ent)) {
+    level.chase_cam_ent = level.chase_cam_target common_scripts\utility::spawn_tag_origin();
   }
-  thread _id_1A1F(level._id_1A1D);
+  thread chasecam_onent(level.chase_cam_target);
 }
 
-_id_1A1F(var_0) {
+chasecam_onent(var_0) {
   level notify("new_chasecam");
   level endon("new_chasecam");
   var_0 endon("death");
   level.player unlink();
-  level.player playerlinktoblend(level._id_1A1E, "tag_origin", 2, 0.5, 0.5);
+  level.player playerlinktoblend(level.chase_cam_ent, "tag_origin", 2, 0.5, 0.5);
   wait 2;
-  level.player playerlinktodelta(level._id_1A1E, "tag_origin", 1, 180, 180, 180, 180);
+  level.player playerlinktodelta(level.chase_cam_ent, "tag_origin", 1, 180, 180, 180, 180);
 
   for(;;) {
     wait 0.2;
 
-    if(!isDefined(level._id_1A1D)) {
+    if(!isDefined(level.chase_cam_target)) {
       return;
     }
-    var_1 = level._id_1A1D.origin;
-    var_2 = level._id_1A1D.angles;
+    var_1 = level.chase_cam_target.origin;
+    var_2 = level.chase_cam_target.angles;
     var_3 = anglesToForward(var_2);
     var_3 = var_3 * 200;
     var_1 = var_1 + var_3;
     var_2 = level.player getplayerangles();
     var_3 = anglesToForward(var_2);
     var_3 = var_3 * -200;
-    level._id_1A1E moveTo(var_1 + var_3, 0.2);
+    level.chase_cam_ent moveTo(var_1 + var_3, 0.2);
   }
 }
 
-_id_1A20() {
+viewfx() {
   foreach(var_1 in level.createfxent) {
     if(isDefined(var_1.looper)) {}
   }
 }
 
-_id_1A21(var_0, var_1) {}
+add_key(var_0, var_1) {}
 
-_id_1A22(var_0) {
-  if(!isDefined(level._id_1A23)) {
-    level._id_1A23 = 9500;
+print_vehicle_info(var_0) {
+  if(!isDefined(level.vnum)) {
+    level.vnum = 9500;
   }
-  level._id_1A23++;
+  level.vnum++;
   var_1 = "bridge_helpers";
-  _id_1A21("origin", self.origin[0] + " " + self.origin[1] + " " + self.origin[2]);
-  _id_1A21("angles", self.angles[0] + " " + self.angles[1] + " " + self.angles[2]);
-  _id_1A21("targetname", "helper_model");
-  _id_1A21("model", self.model);
-  _id_1A21("classname", "script_model");
-  _id_1A21("spawnflags", "4");
-  _id_1A21("_color", "0.443137 0.443137 1.000000");
+  add_key("origin", self.origin[0] + " " + self.origin[1] + " " + self.origin[2]);
+  add_key("angles", self.angles[0] + " " + self.angles[1] + " " + self.angles[2]);
+  add_key("targetname", "helper_model");
+  add_key("model", self.model);
+  add_key("classname", "script_model");
+  add_key("spawnflags", "4");
+  add_key("_color", "0.443137 0.443137 1.000000");
 
   if(isDefined(var_0)) {
-    _id_1A21("script_noteworthy", var_0);
+    add_key("script_noteworthy", var_0);
   }
 }
 
-_id_1A24(var_0) {}
+draw_dot_for_ent(var_0) {}
 
-_id_1A25() {
+draw_dot_for_guy() {
   var_0 = level.player getplayerangles();
   var_1 = anglesToForward(var_0);
   var_2 = level.player getEye();

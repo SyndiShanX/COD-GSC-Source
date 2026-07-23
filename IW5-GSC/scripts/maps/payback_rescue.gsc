@@ -3,34 +3,34 @@
  * Script: scripts\maps\payback_rescue.gsc
 *******************************************/
 
-_id_6505() {
-  maps\payback_util::_id_594A("soap");
-  maps\payback_util::_id_594A("price");
-  maps\payback_util::_id_594A("nikolai");
+start_spawn_key_actors() {
+  maps\payback_util::spawn_ally("soap");
+  maps\payback_util::spawn_ally("price");
+  maps\payback_util::spawn_ally("nikolai");
   maps\payback_util::move_player_to_start();
 }
 
-_id_6506() {
+start_s3_rescue() {
   maps\_audio::aud_send_msg("s3_rescue");
-  _id_6505();
-  maps\payback_sandstorm_code::_id_5C03();
+  start_spawn_key_actors();
+  maps\payback_sandstorm_code::sandstorm_skybox_show();
   common_scripts\utility::exploder(6000);
-  objective_state(maps\_utility::_id_2816("obj_kruger"), "done");
-  objective_state(maps\_utility::_id_2816("obj_secondary_lz"), "done");
-  objective_state(maps\_utility::_id_2816("obj_find_chopper"), "current");
+  objective_state(maps\_utility::obj("obj_kruger"), "done");
+  objective_state(maps\_utility::obj("obj_secondary_lz"), "done");
+  objective_state(maps\_utility::obj("obj_find_chopper"), "current");
   maps\payback_env_code::_id_6507("s3_rescue");
-  thread maps\payback_sandstorm_code::_id_6486("extreme", 0.051);
+  thread maps\payback_sandstorm_code::set_sandstorm_level("extreme", 0.051);
   thread _id_5698::_id_5682(5);
-  maps\payback_sandstorm::_id_6508();
-  maps\payback_util::_id_64D4();
+  maps\payback_sandstorm::moroccan_lamp_thread();
+  maps\payback_util::chopper_init_fog_brushes();
   maps\_compass::setupminimap("compass_map_payback_sandstorm", "sandstorm_minimap_corner");
-  thread _id_650E();
+  thread rescue_thread();
 
-  if(!maps\_utility::_id_0A36()) {
+  if(!maps\_utility::is_specialop()) {
     maps\payback_fx_sp::_id_6504();
   }
   wait 2;
-  thread maps\payback_sandstorm::_id_6509();
+  thread maps\payback_sandstorm::lighten_sandstorm();
   setsunflareposition((343.8, 313.993, 0));
   var_0 = getEnt("sslight_01", "targetname");
   var_0 setlightintensity(7);
@@ -39,36 +39,36 @@ _id_6506() {
   var_1 setlightintensity(3);
 }
 
-_id_650A() {
+start_s3_escape() {
   maps\_audio::aud_send_msg("s3_escape");
-  _id_6505();
-  maps\payback_sandstorm_code::_id_5C03();
+  start_spawn_key_actors();
+  maps\payback_sandstorm_code::sandstorm_skybox_show();
   common_scripts\utility::exploder(6000);
-  _id_650C();
-  objective_state(maps\_utility::_id_2816("obj_kruger"), "done");
-  objective_state(maps\_utility::_id_2816("obj_secondary_lz"), "done");
-  objective_state(maps\_utility::_id_2816("obj_find_chopper"), "done");
-  objective_state(maps\_utility::_id_2816("obj_rescue"), "current");
+  rescue_init();
+  objective_state(maps\_utility::obj("obj_kruger"), "done");
+  objective_state(maps\_utility::obj("obj_secondary_lz"), "done");
+  objective_state(maps\_utility::obj("obj_find_chopper"), "done");
+  objective_state(maps\_utility::obj("obj_rescue"), "current");
   maps\payback_env_code::_id_6507("s3_escape");
-  thread maps\payback_sandstorm_code::_id_6486("extreme", 0.051);
-  maps\payback_sandstorm::_id_6508();
+  thread maps\payback_sandstorm_code::set_sandstorm_level("extreme", 0.051);
+  maps\payback_sandstorm::moroccan_lamp_thread();
   maps\_compass::setupminimap("compass_map_payback_sandstorm", "sandstorm_minimap_corner");
-  thread _id_650F();
-  maps\payback_util::_id_64D4();
-  _id_6578();
-  _id_657D(1);
-  thread _id_6562();
-  thread _id_651C();
+  thread minimap_change_watcher();
+  maps\payback_util::chopper_init_fog_brushes();
+  rescue_spawn_initial();
+  rescue_contain_player_enable(1);
+  thread rescue_carry_nikolai_setup();
+  thread rescue_advance_to_chopper();
 
-  if(!maps\_utility::_id_0A36()) {
+  if(!maps\_utility::is_specialop()) {
     maps\payback_fx_sp::_id_6504();
   }
   wait 2;
-  thread maps\payback_sandstorm::_id_6509();
+  thread maps\payback_sandstorm::lighten_sandstorm();
   setsunflareposition((343.8, 313.993, 0));
 }
 
-_id_650B() {
+init_flags_rescue() {
   common_scripts\utility::flag_init("rescue_c4_aborted");
   common_scripts\utility::flag_init("carry_warn");
   common_scripts\utility::flag_init("carry_kill");
@@ -85,105 +85,105 @@ _id_650B() {
   common_scripts\utility::flag_init("wait_to_move_follow_technical");
 }
 
-_id_650C() {
-  if(!isDefined(level._id_650C)) {
-    _id_657D(0);
+rescue_init() {
+  if(!isDefined(level.rescue_init)) {
+    rescue_contain_player_enable(0);
     var_0 = getEntArray("rescue_escape_trigger", "script_noteworthy");
 
     foreach(var_2 in var_0) {}
     var_2 common_scripts\utility::trigger_off();
 
     var_4 = getEntArray("rescue_trigger_rpg", "targetname");
-    common_scripts\utility::array_thread(var_4, ::_id_6580);
-    level thread maps\payback_util::_id_64D6("rescue_begin");
-    level thread maps\payback_util::_id_64D6("rescue_allies_at_chopper");
-    level thread maps\payback_util::_id_64D6("rescue_player_warn");
-    level thread maps\payback_util::_id_64D6("rescue_trigger_drone_wake");
-    level thread maps\payback_util::_id_64D6("rescue_escape_dialogue");
-    level thread maps\payback_util::_id_64D6("rescue_kill_nikolai");
-    level thread maps\payback_util::_id_64D6("run_objective_spot_2");
-    level thread maps\payback_util::_id_64D6("run_objective_spot_3");
-    level thread maps\payback_util::_id_64D6("start_player_slide");
-    level thread maps\payback_util::_id_64D6("start_flare");
-    level thread maps\payback_util::_id_64D6("run_objective_spot_jeep");
-    level thread maps\payback_util::_id_64D6("jeep_escape_rpg_1");
-    level thread maps\payback_util::_id_64D6("jeep_escape_rpg_2");
-    level thread maps\payback_util::_id_64D6("jeep_escape_rpg_3");
-    level thread maps\payback_util::_id_64D6("price_check_anim_ref_2");
-    level thread maps\payback_util::_id_64D6("price_check_anim_ref_3");
-    level thread maps\payback_util::_id_64D6("price_check_anim_ref_4");
-    level thread maps\payback_util::_id_64D6("soap_check_anim_ref_2");
-    level thread maps\payback_util::_id_64D6("soap_check_anim_ref_3");
-    level thread maps\payback_util::_id_64D6("soap_check_anim_ref_4");
-    level thread maps\payback_util::_id_64D6("soap_check_anim_ref_5");
-    level thread maps\payback_util::_id_64D6("final_technicals");
-    level thread maps\payback_util::_id_64D6("ridge_contain");
-    level thread maps\payback_util::_id_64D6("winning");
+    common_scripts\utility::array_thread(var_4, ::rescue_trigger_fire_rpg);
+    level thread maps\payback_util::notify_on_trigger("rescue_begin");
+    level thread maps\payback_util::notify_on_trigger("rescue_allies_at_chopper");
+    level thread maps\payback_util::notify_on_trigger("rescue_player_warn");
+    level thread maps\payback_util::notify_on_trigger("rescue_trigger_drone_wake");
+    level thread maps\payback_util::notify_on_trigger("rescue_escape_dialogue");
+    level thread maps\payback_util::notify_on_trigger("rescue_kill_nikolai");
+    level thread maps\payback_util::notify_on_trigger("run_objective_spot_2");
+    level thread maps\payback_util::notify_on_trigger("run_objective_spot_3");
+    level thread maps\payback_util::notify_on_trigger("start_player_slide");
+    level thread maps\payback_util::notify_on_trigger("start_flare");
+    level thread maps\payback_util::notify_on_trigger("run_objective_spot_jeep");
+    level thread maps\payback_util::notify_on_trigger("jeep_escape_rpg_1");
+    level thread maps\payback_util::notify_on_trigger("jeep_escape_rpg_2");
+    level thread maps\payback_util::notify_on_trigger("jeep_escape_rpg_3");
+    level thread maps\payback_util::notify_on_trigger("price_check_anim_ref_2");
+    level thread maps\payback_util::notify_on_trigger("price_check_anim_ref_3");
+    level thread maps\payback_util::notify_on_trigger("price_check_anim_ref_4");
+    level thread maps\payback_util::notify_on_trigger("soap_check_anim_ref_2");
+    level thread maps\payback_util::notify_on_trigger("soap_check_anim_ref_3");
+    level thread maps\payback_util::notify_on_trigger("soap_check_anim_ref_4");
+    level thread maps\payback_util::notify_on_trigger("soap_check_anim_ref_5");
+    level thread maps\payback_util::notify_on_trigger("final_technicals");
+    level thread maps\payback_util::notify_on_trigger("ridge_contain");
+    level thread maps\payback_util::notify_on_trigger("winning");
     var_5 = getEnt("jeep_flare", "targetname");
     var_5 setlightintensity(0);
 
-    if(!isDefined(level._id_64A5)) {
-      maps\payback_util::_id_594A("nikolai", "s3_rescue_nikolai");
-      level._id_64A5.ignoreall = 1;
+    if(!isDefined(level.nikolai)) {
+      maps\payback_util::spawn_ally("nikolai", "s3_rescue_nikolai");
+      level.nikolai.ignoreall = 1;
     }
 
-    level._id_650D = common_scripts\utility::getStruct("chopper_rescue_reference", "targetname");
-    level thread _id_6520();
-    level._id_650C = 1;
-    thread _id_651D();
-    thread _id_6514();
+    level.chopper_rescue_ref = common_scripts\utility::getStruct("chopper_rescue_reference", "targetname");
+    level thread rescue_wait_kill_nikolai();
+    level.rescue_init = 1;
+    thread rescue_enemy_battlechatter();
+    thread spawn_echo_team_near_chopper();
   }
 }
 
-_id_650E() {
-  _id_650C();
+rescue_thread() {
+  rescue_init();
   self notify("rescue_thread");
   self endon("rescue_thread");
-  thread _id_6562();
-  thread _id_650F();
-  _id_6578();
+  thread rescue_carry_nikolai_setup();
+  thread minimap_change_watcher();
+  rescue_spawn_initial();
   level waittill("rescue_begin");
-  _id_6510();
+  rescue_begin();
 }
 
-_id_650F() {
+minimap_change_watcher() {
   common_scripts\utility::flag_wait("use_exit_minimap");
   maps\_compass::setupminimap("compass_map_payback_exit", "exit_minimap_corner");
 }
 
-_id_6510() {
+rescue_begin() {
   maps\_audio::aud_send_msg("begin_npc_weapon_audio_hack");
-  thread _id_6564();
-  thread _id_6512();
-  thread _id_6511();
+  thread player_out_in_open();
+  thread rescue_intro_combat();
+  thread clear_chopper_obj_spot();
   level waittill("all_pre_rescue_enemies_dead");
-  objective_state(maps\_utility::_id_2816("obj_find_chopper"), "done");
+  objective_state(maps\_utility::obj("obj_find_chopper"), "done");
   var_0 = common_scripts\utility::getStruct("rescue_nikolai_obj_spot", "targetname");
-  objective_state(maps\_utility::_id_2816("obj_rescue"), "current");
-  objective_position(maps\_utility::_id_2816("obj_rescue"), var_0.origin);
-  thread _id_6513();
-  _id_651C();
+  objective_state(maps\_utility::obj("obj_rescue"), "current");
+  objective_position(maps\_utility::obj("obj_rescue"), var_0.origin);
+  thread rescue_begin_dialogue_thread();
+  rescue_advance_to_chopper();
 }
 
-_id_6511() {
+clear_chopper_obj_spot() {
   level endon("disable_clear_chopper_obj_spot");
   common_scripts\utility::flag_wait("clear_chopper_obj_spot");
-  objective_position(maps\_utility::_id_2816("obj_rescue"), (0, 0, 0));
+  objective_position(maps\_utility::obj("obj_rescue"), (0, 0, 0));
 }
 
-_id_6512() {
+rescue_intro_combat() {
   common_scripts\utility::flag_wait("rescue_intro_firing_at_nikolai");
-  var_0 = maps\payback_util::_id_5DD7("rescue_intro_firing_at_nikolai");
+  var_0 = maps\payback_util::array_spawn_targetname_allow_fail("rescue_intro_firing_at_nikolai");
   var_1 = getEnt("rescue_intro_fire_at_nikolai_spot", "targetname");
 
   foreach(var_3 in var_0) {
     var_3 setentitytarget(var_1);
-    var_3 thread maps\payback_sandstorm_code::_id_648A();
-    var_3 thread _id_651A();
+    var_3 thread maps\payback_sandstorm_code::flashlight_on_guy();
+    var_3 thread cleanup_arch_enemies();
   }
 
-  maps\payback_util::_id_64F2(var_0, "rescue_intro");
-  var_0 = maps\_utility::_id_1361(var_0);
+  maps\payback_util::payback_array_waittill_combat(var_0, "rescue_intro");
+  var_0 = maps\_utility::array_removedead(var_0);
 
   foreach(var_3 in var_0) {
     var_3 clearentitytarget();
@@ -191,58 +191,58 @@ _id_6512() {
     var_3.fixednode = 0;
   }
 
-  maps\_utility::_id_2636(var_0);
-  maps\_utility::_id_26BF("rescue_intro_post_combat");
+  maps\_utility::waittill_dead_or_dying(var_0);
+  maps\_utility::activate_trigger_with_targetname("rescue_intro_post_combat");
   level notify("all_pre_rescue_enemies_dead");
 }
 
-_id_6513() {
+rescue_begin_dialogue_thread() {
   level endon("pickup_nikolai_vo_started");
-  level._id_54E0 maps\_utility::_id_168C("payback_mct_theresnikschopper");
+  level.soap maps\_utility::dialogue_queue("payback_mct_theresnikschopper");
   maps\_audio::aud_send_msg("mus_rescue_start_nikolai_music");
   wait 0.2;
-  level._id_4877 maps\_utility::_id_168C("payback_pri_echoteampinned");
+  level.price maps\_utility::dialogue_queue("payback_pri_echoteampinned");
   wait 0.2;
-  level._id_4877 maps\_utility::_id_168C("payback_pri_fromnorthwest");
+  level.price maps\_utility::dialogue_queue("payback_pri_fromnorthwest");
   wait 0.1;
-  maps\_utility::_id_11F4("payback_eol_copythat");
+  maps\_utility::radio_dialogue("payback_eol_copythat");
   maps\_audio::aud_send_msg("mus_nikolai");
 }
 
-_id_6514() {
+spawn_echo_team_near_chopper() {
   level endon("clear_echo_stuff");
   setlasermaterial("gfx_laser_bright", "");
-  level._id_6515 = getEnt("rescue_echo_1_spawner", "targetname") maps\_utility::_id_166F(1);
-  level._id_6515 maps\_utility::_id_0D04();
-  level._id_6515._id_1032 = "rescue_echo_1";
-  level._id_6515._id_6516 = level._effect["dust_kickup"];
-  level._id_6515._id_6517 = "j_mainroot";
-  level._id_6515 thread _id_651B();
-  level._id_6515 thread _id_6528();
-  level._id_6518 = getEnt("rescue_echo_2_spawner", "targetname") maps\_utility::_id_166F(1);
-  level._id_6518 maps\_utility::_id_0D04();
-  level._id_6518._id_1032 = "rescue_echo_2";
-  level._id_6518 thread _id_651B();
-  level._id_6518._id_6516 = level._effect["dust_kickup"];
-  level._id_6518._id_6517 = "j_mainroot";
-  level._id_6518 thread _id_6528();
-  level._id_6519 = getEnt("rescue_echo_3_spawner", "targetname") maps\_utility::_id_166F(1);
-  level._id_6519 maps\_utility::_id_0D04();
-  level._id_6519._id_1032 = "rescue_echo_3";
-  level._id_6519 thread _id_6528();
-  level._id_6519._id_59C3 = 1;
-  level._id_6519.ignoreme = 1;
+  level.rescue_echo_1 = getEnt("rescue_echo_1_spawner", "targetname") maps\_utility::spawn_ai(1);
+  level.rescue_echo_1 maps\_utility::magic_bullet_shield();
+  level.rescue_echo_1.animname = "rescue_echo_1";
+  level.rescue_echo_1._id_6516 = level._effect["dust_kickup"];
+  level.rescue_echo_1._id_6517 = "j_mainroot";
+  level.rescue_echo_1 thread laser_handler();
+  level.rescue_echo_1 thread crash_site_ally_prep();
+  level.rescue_echo_2 = getEnt("rescue_echo_2_spawner", "targetname") maps\_utility::spawn_ai(1);
+  level.rescue_echo_2 maps\_utility::magic_bullet_shield();
+  level.rescue_echo_2.animname = "rescue_echo_2";
+  level.rescue_echo_2 thread laser_handler();
+  level.rescue_echo_2._id_6516 = level._effect["dust_kickup"];
+  level.rescue_echo_2._id_6517 = "j_mainroot";
+  level.rescue_echo_2 thread crash_site_ally_prep();
+  level.rescue_echo_3 = getEnt("rescue_echo_3_spawner", "targetname") maps\_utility::spawn_ai(1);
+  level.rescue_echo_3 maps\_utility::magic_bullet_shield();
+  level.rescue_echo_3.animname = "rescue_echo_3";
+  level.rescue_echo_3 thread crash_site_ally_prep();
+  level.rescue_echo_3.notarget = 1;
+  level.rescue_echo_3.ignoreme = 1;
   common_scripts\utility::flag_wait("start_nikolai_pullout_echo");
-  level._id_6519 laserforceoff();
-  level._id_650D maps\_anim::_id_1246(level._id_6519, "payback_sstorm_chopper_rescue_echo_pullout");
-  level._id_6519 setgoalnode(getnode("rescue_echo_3_end_spot", "targetname"));
-  level._id_6519 waittill("goal");
-  level._id_6519._id_59C3 = 0;
-  level._id_6519.ignoreme = 0;
-  level._id_6519 thread _id_651B();
+  level.rescue_echo_3 laserforceoff();
+  level.chopper_rescue_ref maps\_anim::anim_single_solo(level.rescue_echo_3, "payback_sstorm_chopper_rescue_echo_pullout");
+  level.rescue_echo_3 setgoalnode(getnode("rescue_echo_3_end_spot", "targetname"));
+  level.rescue_echo_3 waittill("goal");
+  level.rescue_echo_3.notarget = 0;
+  level.rescue_echo_3.ignoreme = 0;
+  level.rescue_echo_3 thread laser_handler();
 }
 
-_id_651A() {
+cleanup_arch_enemies() {
   self endon("death");
   common_scripts\utility::flag_wait("start_nikolai_pullout_echo");
 
@@ -251,15 +251,15 @@ _id_651A() {
   }
 }
 
-_id_651B() {
+laser_handler() {
   level endon("stop_laser_handler");
   var_0 = 1;
 
   while(!common_scripts\utility::flag("stop_laser_handler")) {
-    if(animscripts\utility::_id_0CE3() && var_0) {
+    if(animscripts\utility::canseeenemy() && var_0) {
       self laserforceon();
       var_0 = 0;
-    } else if(!animscripts\utility::_id_0CE3() && !var_0) {
+    } else if(!animscripts\utility::canseeenemy() && !var_0) {
       self laserforceoff();
       var_0 = 1;
     }
@@ -268,127 +268,127 @@ _id_651B() {
   }
 }
 
-_id_651C() {
-  _id_657D(1);
-  level._id_4877 maps\_utility::_id_123B();
-  level._id_54E0 maps\_utility::_id_123B();
-  level._id_4877.goalradius = 128;
-  level._id_54E0.goalradius = 128;
-  level._id_4877 maps\_utility::_id_265A();
-  level._id_54E0 maps\_utility::_id_265A();
-  level._id_4877 thread _id_6528();
-  level._id_54E0 thread _id_6528();
-  thread _id_656E();
-  level._id_54E0._id_2199 = 0;
-  level._id_54E0 setgoalnode(getnode("rescue_soap_chopper", "targetname"));
+rescue_advance_to_chopper() {
+  rescue_contain_player_enable(1);
+  level.price maps\_utility::disable_ai_color();
+  level.soap maps\_utility::disable_ai_color();
+  level.price.goalradius = 128;
+  level.soap.goalradius = 128;
+  level.price maps\_utility::battlechatter_off();
+  level.soap maps\_utility::battlechatter_off();
+  level.price thread crash_site_ally_prep();
+  level.soap thread crash_site_ally_prep();
+  thread rescue_nikolai_price();
+  level.soap.script_grenades = 0;
+  level.soap setgoalnode(getnode("rescue_soap_chopper", "targetname"));
 }
 
-_id_651D() {
+rescue_enemy_battlechatter() {
   wait 0.5;
   level.player endon("death");
 
   for(;;) {
     var_0 = getaiarray("axis");
-    var_0 = maps\_utility::_id_0AEC(level.player.origin, var_0, undefined, 4);
+    var_0 = maps\_utility::get_array_of_closest(level.player.origin, var_0, undefined, 4);
 
     if(var_0.size > 0) {
       var_1 = randomintrange(0, var_0.size);
       var_2 = var_0[var_1];
-      var_2 maps\_utility::_id_1EFE("order_move_combat");
+      var_2 maps\_utility::custom_battlechatter("order_move_combat");
     }
 
     wait(randomfloatrange(1.5, 5.0));
   }
 }
 
-_id_651E() {
+rescue_chopper_extract_dialogue() {
   level endon("rescue_picking_up_nikolai");
   level notify("pickup_nikolai_vo_started");
   common_scripts\utility::flag_wait("player_near_crashed_chopper");
-  level._id_4877 maps\_utility::_id_168C("payback_pri_goodtoseeyou");
+  level.price maps\_utility::dialogue_queue("payback_pri_goodtoseeyou");
   wait 0.5;
-  level._id_6515 maps\_utility::_id_168C("payback_eol_twovehicles");
+  level.rescue_echo_1 maps\_utility::dialogue_queue("payback_eol_twovehicles");
   common_scripts\utility::trigger_on("ready_to_pick_up_niko_save_trig", "targetname");
   wait 0.5;
-  level._id_4877 maps\_utility::_id_168C("payback_pri_suppress");
+  level.price maps\_utility::dialogue_queue("payback_pri_suppress");
   wait 4;
 
   for(;;) {
-    level._id_4877 maps\_utility::_id_168C("payback_pri_getnikolai");
+    level.price maps\_utility::dialogue_queue("payback_pri_getnikolai");
     wait 4;
-    level._id_4877 maps\_utility::_id_168C("payback_pri_grabnikolai");
+    level.price maps\_utility::dialogue_queue("payback_pri_grabnikolai");
     wait 4;
-    level._id_4877 maps\_utility::_id_168C("payback_pri_waitingfor");
+    level.price maps\_utility::dialogue_queue("payback_pri_waitingfor");
     wait 4;
   }
 }
 
-_id_651F() {
-  level.player._id_20F2._id_22F5 = 2;
-  level.player._id_20F2._id_22F6 = 2;
-  level.player._id_20F2._id_22F4 = 2;
-  level.player._id_20F2._id_22F9 = 500;
-  level.player._id_20F2._id_22FC = 0.1;
-  level.player._id_20F2.playerhealth_regularregendelay = 500;
-  level.player._id_20F2._id_22F6 = 2;
-  level.player._id_20F2._id_22FB = 0.1;
-  level.player._id_20F2._id_22F8 = 0.01;
+health_mods() {
+  level.player.gs.invultime_onshield = 2;
+  level.player.gs.invultime_postshield = 2;
+  level.player.gs.invultime_preshield = 2;
+  level.player.gs.longregentime = 500;
+  level.player.gs.player_attacker_accuracy = 0.1;
+  level.player.gs.playerhealth_regularregendelay = 500;
+  level.player.gs.invultime_postshield = 2;
+  level.player.gs.regenrate = 0.1;
+  level.player.gs.worthydamageratio = 0.01;
 }
 
-_id_6520() {
+rescue_wait_kill_nikolai() {
   level waittill("rescue_kill_nikolai");
-  level._id_6521 delete();
-  level._id_650D thread maps\_anim::_id_1246(level._id_64A5, "rescue_nikolai_death");
-  level._id_64A5.allowdeath = 1;
-  level._id_64A5 maps\_utility::_id_1902();
-  magicbullet("ak47", level._id_64A5 getEye() + (0, 0, 10), level._id_64A5 getEye());
-  level._id_64A5 kill();
+  level.nikolai_use_trigger delete();
+  level.chopper_rescue_ref thread maps\_anim::anim_single_solo(level.nikolai, "rescue_nikolai_death");
+  level.nikolai.allowdeath = 1;
+  level.nikolai maps\_utility::stop_magic_bullet_shield();
+  magicbullet("ak47", level.nikolai getEye() + (0, 0, 10), level.nikolai getEye());
+  level.nikolai kill();
   wait 1;
   setDvar("ui_deadquote", "@PAYBACK_NIKOLAI_KILLED");
-  maps\_utility::_id_1826();
+  maps\_utility::missionfailedwrapper();
 }
 
-_id_6522() {
+rescue_exit_setup() {
   var_0 = getEntArray("rescue_escape_trigger", "script_noteworthy");
 
   foreach(var_2 in var_0) {
     var_2 common_scripts\utility::trigger_on();
 
-    if(isDefined(var_2._id_164F) && var_2._id_164F == "phantom_fire") {
-      var_2 thread _id_657F();
+    if(isDefined(var_2.script_parameters) && var_2.script_parameters == "phantom_fire") {
+      var_2 thread rescue_phantom_trigger_wait();
     }
   }
 }
 
-_id_6523() {
-  _id_6522();
-  _id_657D(0);
+rescue_exit_sequence() {
+  rescue_exit_setup();
+  rescue_contain_player_enable(0);
   var_0 = common_scripts\utility::getStructArray("rescue_phantom_fire_source1", "targetname");
-  thread maps\payback_util::_id_64E9(level.player, "ak47", var_0, 0.05, 1.5, 3000, 5000);
+  thread maps\payback_util::phantom_pressure(level.player, "ak47", var_0, 0.05, 1.5, 3000, 5000);
   level waittill("rescue_escape_dialogue");
   level notify("stop_rescue_respawns");
 }
 
-_id_6524() {
-  thread _id_6529();
-  thread _id_652A();
-  thread _id_652B();
-  thread _id_652C();
-  thread _id_652D();
-  thread _id_6525();
-  thread _id_6536();
+move_allies_after_pickup() {
+  thread rescue_exit_sequence_price();
+  thread rescue_exit_sequence_soap();
+  thread rescue_exit_sequence_echo_1();
+  thread rescue_exit_sequence_echo_2();
+  thread rescue_exit_sequence_echo_3();
+  thread flare_thread();
+  thread new_jeep_escape_setup();
 }
 
-_id_6525() {
+flare_thread() {
   level waittill("start_flare");
   maps\_audio::aud_send_msg("mus_rescue_music_day_saved");
-  thread _id_6526::_id_409C("jeep_escape_flare");
-  thread _id_52A4();
+  thread maps/_flare::flare_from_targetname("jeep_escape_flare");
+  thread flare_light();
   level waittill("flare_done");
   common_scripts\utility::flag_set("start_flare_fade");
 }
 
-_id_52A4() {
+flare_light() {
   var_0 = getEnt("jeep_flare", "targetname");
   level waittill("flare_explodes");
   var_0 setlightintensity(6.0);
@@ -405,124 +405,124 @@ _id_52A4() {
   }
 }
 
-_id_6527() {
+ally_run_prep() {
   self clearenemy();
   self.ignoreall = 1;
   self.goalradius = 32;
   self.ignoreexplosionevents = 1;
   self.grenadeawareness = 0;
-  self._id_59C3 = 1;
+  self.notarget = 1;
   self.ignoreme = 1;
   self.ignoresuppression = 1;
   self.suppressionwait = 0;
-  self._id_0EEE = 1;
+  self.disablebulletwhizbyreaction = 1;
   self.ignorerandombulletdamage = 1;
-  thread maps\_utility::_id_1057();
-  thread maps\_utility::_id_0EEC();
+  thread maps\_utility::disable_pain();
+  thread maps\_utility::disable_surprise();
   self allowedstances("stand");
   self.badplaceawareness = 0;
 }
 
-_id_6528() {
+crash_site_ally_prep() {
   self.ignoreexplosionevents = 1;
   self.grenadeawareness = 0;
   self.ignoresuppression = 1;
   self.suppressionwait = 0;
-  self._id_0EEE = 1;
+  self.disablebulletwhizbyreaction = 1;
   self.ignorerandombulletdamage = 1;
-  thread maps\_utility::_id_1057();
-  thread maps\_utility::_id_0EEC();
+  thread maps\_utility::disable_pain();
+  thread maps\_utility::disable_surprise();
   self.badplaceawareness = 0;
 }
 
-_id_6529() {
-  level._id_4877 _id_6527();
-  thread _id_6531();
+rescue_exit_sequence_price() {
+  level.price ally_run_prep();
+  thread price_run_part_1();
 }
 
-_id_652A() {
-  level._id_54E0 _id_6527();
-  thread _id_6532();
+rescue_exit_sequence_soap() {
+  level.soap ally_run_prep();
+  thread soap_run_part_1();
 }
 
-_id_652B() {
+rescue_exit_sequence_echo_1() {
   var_0 = common_scripts\utility::getStruct("slide_ref", "targetname");
   level waittill("move_echo_2_and_3");
-  level._id_6515 maps\_utility::_id_27A1(getnode("rescue_echo_1_run_start_spot", "targetname"));
-  level._id_6515 _id_6527();
-  level._id_6515 laserforceoff();
-  var_0 maps\_anim::_id_124A(level._id_6515, "rescue_echo_1_slide");
-  var_0 maps\_anim::_id_1246(level._id_6515, "rescue_echo_1_slide");
-  level._id_6515 setgoalnode(getnode("rescue_echo_1_goal", "targetname"));
+  level.rescue_echo_1 maps\_utility::teleport_ai(getnode("rescue_echo_1_run_start_spot", "targetname"));
+  level.rescue_echo_1 ally_run_prep();
+  level.rescue_echo_1 laserforceoff();
+  var_0 maps\_anim::anim_reach_solo(level.rescue_echo_1, "rescue_echo_1_slide");
+  var_0 maps\_anim::anim_single_solo(level.rescue_echo_1, "rescue_echo_1_slide");
+  level.rescue_echo_1 setgoalnode(getnode("rescue_echo_1_goal", "targetname"));
   var_1 = common_scripts\utility::getStruct("shoot_echo_1_and_2_bullet_spot", "targetname");
-  level._id_6515 waittill("goal");
-  level._id_6515 maps\_utility::_id_1902();
-  magicbullet("ak47", var_1.origin, level._id_6515 gettagorigin("J_SpineUpper") + (4, 2, 10));
+  level.rescue_echo_1 waittill("goal");
+  level.rescue_echo_1 maps\_utility::stop_magic_bullet_shield();
+  magicbullet("ak47", var_1.origin, level.rescue_echo_1 gettagorigin("J_SpineUpper") + (4, 2, 10));
   wait 0.1;
-  magicbullet("ak47", var_1.origin, level._id_6515 gettagorigin("J_SpineUpper") + (10, 12, 5));
+  magicbullet("ak47", var_1.origin, level.rescue_echo_1 gettagorigin("J_SpineUpper") + (10, 12, 5));
   wait 0.1;
-  magicbullet("ak47", var_1.origin, level._id_6515 gettagorigin("J_SpineUpper") + (7, 3, 8));
+  magicbullet("ak47", var_1.origin, level.rescue_echo_1 gettagorigin("J_SpineUpper") + (7, 3, 8));
   wait 0.1;
-  magicbullet("ak47", var_1.origin, level._id_6515 gettagorigin("J_SpineUpper") + (4, 2, 10));
+  magicbullet("ak47", var_1.origin, level.rescue_echo_1 gettagorigin("J_SpineUpper") + (4, 2, 10));
 
-  if(isDefined(level._id_6515) && isalive(level._id_6515)) {
-    level._id_6515 kill();
+  if(isDefined(level.rescue_echo_1) && isalive(level.rescue_echo_1)) {
+    level.rescue_echo_1 kill();
   }
 }
 
-_id_652C() {
+rescue_exit_sequence_echo_2() {
   var_0 = common_scripts\utility::getStruct("slide_ref", "targetname");
   level waittill("move_echo_2_and_3");
-  level._id_6518 maps\_utility::_id_27A1(getnode("rescue_echo_2_run_start_spot", "targetname"));
-  level._id_6518 _id_6527();
-  level._id_6518 laserforceoff();
-  var_0 maps\_anim::_id_124A(level._id_6518, "rescue_echo_2_slide");
-  var_0 maps\_anim::_id_1246(level._id_6518, "rescue_echo_2_slide");
-  level._id_6518 setgoalnode(getnode("rescue_echo_2_goal", "targetname"));
+  level.rescue_echo_2 maps\_utility::teleport_ai(getnode("rescue_echo_2_run_start_spot", "targetname"));
+  level.rescue_echo_2 ally_run_prep();
+  level.rescue_echo_2 laserforceoff();
+  var_0 maps\_anim::anim_reach_solo(level.rescue_echo_2, "rescue_echo_2_slide");
+  var_0 maps\_anim::anim_single_solo(level.rescue_echo_2, "rescue_echo_2_slide");
+  level.rescue_echo_2 setgoalnode(getnode("rescue_echo_2_goal", "targetname"));
   var_1 = common_scripts\utility::getStruct("shoot_echo_1_and_2_bullet_spot", "targetname");
-  level._id_6518 waittill("goal");
-  level._id_6518 maps\_utility::_id_1902();
-  magicbullet("ak47", var_1.origin, level._id_6518 gettagorigin("J_SpineUpper") + (4, 2, 10));
+  level.rescue_echo_2 waittill("goal");
+  level.rescue_echo_2 maps\_utility::stop_magic_bullet_shield();
+  magicbullet("ak47", var_1.origin, level.rescue_echo_2 gettagorigin("J_SpineUpper") + (4, 2, 10));
   wait 0.1;
-  magicbullet("ak47", var_1.origin, level._id_6518 gettagorigin("J_SpineUpper") + (10, 12, 5));
+  magicbullet("ak47", var_1.origin, level.rescue_echo_2 gettagorigin("J_SpineUpper") + (10, 12, 5));
   wait 0.1;
-  magicbullet("ak47", var_1.origin, level._id_6518 gettagorigin("J_SpineUpper") + (7, 3, 8));
+  magicbullet("ak47", var_1.origin, level.rescue_echo_2 gettagorigin("J_SpineUpper") + (7, 3, 8));
   wait 0.1;
-  magicbullet("ak47", var_1.origin, level._id_6518 gettagorigin("J_SpineUpper") + (4, 2, 10));
+  magicbullet("ak47", var_1.origin, level.rescue_echo_2 gettagorigin("J_SpineUpper") + (4, 2, 10));
 
-  if(isDefined(level._id_6518) && isalive(level._id_6518)) {
-    level._id_6518 kill();
+  if(isDefined(level.rescue_echo_2) && isalive(level.rescue_echo_2)) {
+    level.rescue_echo_2 kill();
   }
 }
 
-_id_652D() {
+rescue_exit_sequence_echo_3() {
   var_0 = common_scripts\utility::getStruct("rescue_echo_3_bullet_spot", "targetname");
   level waittill("move_echo_2_and_3");
-  level._id_6519 maps\_utility::_id_27A1(getnode("rescue_echo_3_run_start_spot", "targetname"));
-  level._id_6519 _id_6527();
-  level._id_6519 setgoalnode(getnode("rescue_echo_3_goal", "targetname"));
-  level._id_6519._id_0D50 = maps\_utility::_id_270F("echo_stumble_forward_death");
-  level._id_6519 waittill("goal");
-  level._id_6519 maps\_utility::_id_1902();
-  magicbullet("ak47", var_0.origin, level._id_6519 gettagorigin("J_SpineUpper") + (4, 2, 10));
+  level.rescue_echo_3 maps\_utility::teleport_ai(getnode("rescue_echo_3_run_start_spot", "targetname"));
+  level.rescue_echo_3 ally_run_prep();
+  level.rescue_echo_3 setgoalnode(getnode("rescue_echo_3_goal", "targetname"));
+  level.rescue_echo_3.deathanim = maps\_utility::getgenericanim("echo_stumble_forward_death");
+  level.rescue_echo_3 waittill("goal");
+  level.rescue_echo_3 maps\_utility::stop_magic_bullet_shield();
+  magicbullet("ak47", var_0.origin, level.rescue_echo_3 gettagorigin("J_SpineUpper") + (4, 2, 10));
   wait 0.1;
-  magicbullet("ak47", var_0.origin, level._id_6519 gettagorigin("J_SpineUpper") + (10, 12, 5));
+  magicbullet("ak47", var_0.origin, level.rescue_echo_3 gettagorigin("J_SpineUpper") + (10, 12, 5));
   wait 0.1;
-  magicbullet("ak47", var_0.origin, level._id_6519 gettagorigin("J_SpineUpper") + (7, 3, 8));
+  magicbullet("ak47", var_0.origin, level.rescue_echo_3 gettagorigin("J_SpineUpper") + (7, 3, 8));
   wait 0.1;
-  magicbullet("ak47", var_0.origin, level._id_6519 gettagorigin("J_SpineUpper") + (4, 2, 10));
+  magicbullet("ak47", var_0.origin, level.rescue_echo_3 gettagorigin("J_SpineUpper") + (4, 2, 10));
 
-  if(isDefined(level._id_6519) && isalive(level._id_6519)) {
-    level._id_6519 kill();
+  if(isDefined(level.rescue_echo_3) && isalive(level.rescue_echo_3)) {
+    level.rescue_echo_3 kill();
   }
 }
 
-_id_652E() {
+keep_up_or_die() {
   level endon("notify_slide_started");
 
   while(!common_scripts\utility::flag("slide_started")) {
-    var_0 = distancesquared(level.player.origin, level._id_54E0.origin);
-    var_1 = distancesquared(level.player.origin, level._id_4877.origin);
+    var_0 = distancesquared(level.player.origin, level.soap.origin);
+    var_1 = distancesquared(level.player.origin, level.price.origin);
 
     if(var_0 > 1000000 && var_1 > 1000000) {
       level notify("disable_ignore_player_triggers");
@@ -541,7 +541,7 @@ _id_652E() {
 
       if(isalive(level.player)) {
         level.player kill();
-        maps\_utility::_id_1826();
+        maps\_utility::missionfailedwrapper();
       }
 
       return;
@@ -551,7 +551,7 @@ _id_652E() {
   }
 }
 
-_id_6530() {
+street_run_allow_damage() {
   level endon("notify_slide_started");
   common_scripts\utility::flag_wait("price_at_ridge");
   wait 7;
@@ -569,238 +569,238 @@ _id_6530() {
 
   if(isalive(level.player)) {
     level.player kill();
-    maps\_utility::_id_1826();
+    maps\_utility::missionfailedwrapper();
   }
 }
 
-_id_6531() {
+price_run_part_1() {
   level endon("notify_slide_started");
-  level._id_4877._id_0FC6 = 1.2;
-  level._id_4877._id_10F7 = 1.2;
+  level.price.moveplaybackrate = 1.2;
+  level.price.animplaybackrate = 1.2;
   wait 1;
   var_0 = common_scripts\utility::getStruct("price_run_anim_ref_1", "targetname");
   var_1 = common_scripts\utility::getStruct("price_run_anim_ref_2", "targetname");
   var_2 = common_scripts\utility::getStruct("price_run_anim_ref_2_debris", "targetname");
-  var_3 = maps\_utility::_id_1287("escape_debris");
-  var_3._id_10F7 = 1.2;
-  var_2 thread maps\_anim::_id_11CF(var_3, "escape_debris_dodge");
+  var_3 = maps\_utility::spawn_anim_model("escape_debris");
+  var_3.animplaybackrate = 1.2;
+  var_2 thread maps\_anim::anim_first_frame_solo(var_3, "escape_debris_dodge");
   var_4 = common_scripts\utility::getStruct("price_run_anim_ref_3", "targetname");
   var_5 = common_scripts\utility::getStruct("price_dodge_rpg_spot", "targetname");
   var_6 = common_scripts\utility::getStruct(var_5.target, "targetname");
   var_7 = common_scripts\utility::getStruct("price_run_anim_ref_4", "targetname");
   var_8 = getnode("price_run_spot_4", "targetname");
   var_9 = getnode("price_rpg_dodge_alt", "targetname");
-  var_0 maps\_anim::_id_11CF(level._id_4877, "payback_escape_start_backpedal_price");
+  var_0 maps\_anim::anim_first_frame_solo(level.price, "payback_escape_start_backpedal_price");
   wait 3.5;
-  level._id_4877.a._id_0D26 = "stand";
-  level._id_4877.a._id_0D2B = "run";
-  var_0 maps\_anim::_id_1247(level._id_4877, "payback_escape_start_backpedal_price");
+  level.price.a.pose = "stand";
+  level.price.a.movement = "run";
+  var_0 maps\_anim::anim_single_solo_run(level.price, "payback_escape_start_backpedal_price");
   level notify("move_echo_1");
-  var_1 maps\_anim::_id_124A(level._id_4877, "escape_debris_dodge");
+  var_1 maps\_anim::anim_reach_solo(level.price, "escape_debris_dodge");
 
   if(!common_scripts\utility::flag("price_check_anim_ref_2")) {
-    var_2 thread maps\_anim::_id_1246(var_3, "escape_debris_dodge");
-    var_1 maps\_anim::_id_1247(level._id_4877, "escape_debris_dodge");
+    var_2 thread maps\_anim::anim_single_solo(var_3, "escape_debris_dodge");
+    var_1 maps\_anim::anim_single_solo_run(level.price, "escape_debris_dodge");
   }
 
-  var_4 maps\_anim::_id_124A(level._id_4877, "payback_escape_rpg_react_price");
+  var_4 maps\_anim::anim_reach_solo(level.price, "payback_escape_rpg_react_price");
   magicbullet("rpg_straight", var_5.origin, var_6.origin, level.player);
 
   if(!common_scripts\utility::flag("price_check_anim_ref_3")) {
-    var_4 maps\_anim::_id_1247(level._id_4877, "payback_escape_rpg_react_price");
+    var_4 maps\_anim::anim_single_solo_run(level.price, "payback_escape_rpg_react_price");
   } else {
-    level._id_4877 setgoalnode(var_9);
-    level._id_4877 waittill("goal");
+    level.price setgoalnode(var_9);
+    level.price waittill("goal");
   }
 
-  var_7 maps\_anim::_id_124A(level._id_4877, "payback_escape_forward_wave_right_price");
+  var_7 maps\_anim::anim_reach_solo(level.price, "payback_escape_forward_wave_right_price");
 
   if(!common_scripts\utility::flag("price_check_anim_ref_4")) {
-    var_7 maps\_anim::_id_1247(level._id_4877, "payback_escape_forward_wave_right_price");
+    var_7 maps\_anim::anim_single_solo_run(level.price, "payback_escape_forward_wave_right_price");
   }
-  level._id_4877.goalradius = 64;
-  level._id_4877 setgoalnode(var_8);
-  level._id_4877 waittill("goal");
+  level.price.goalradius = 64;
+  level.price setgoalnode(var_8);
+  level.price waittill("goal");
   common_scripts\utility::flag_set("price_at_ridge");
-  level._id_4877 allowedstances("stand");
-  level._id_4877._id_10F7 = 1;
-  level._id_4877._id_0FC6 = 1;
-  level._id_4877.ignoreall = 0;
-  level._id_4877._id_59C3 = 0;
-  level._id_4877.ignoreme = 0;
+  level.price allowedstances("stand");
+  level.price.animplaybackrate = 1;
+  level.price.moveplaybackrate = 1;
+  level.price.ignoreall = 0;
+  level.price.notarget = 0;
+  level.price.ignoreme = 0;
 }
 
-_id_6532() {
+soap_run_part_1() {
   level endon("notify_slide_started");
-  level._id_54E0._id_0FC6 = 1.2;
-  level._id_54E0._id_6517 = "j_mainroot";
-  level._id_54E0._id_6516 = level._effect["dust_kickup"];
-  level._id_54E0._id_10F7 = 1.3;
+  level.soap.moveplaybackrate = 1.2;
+  level.soap._id_6517 = "j_mainroot";
+  level.soap._id_6516 = level._effect["dust_kickup"];
+  level.soap.animplaybackrate = 1.3;
   var_0 = common_scripts\utility::getStruct("soap_run_anim_ref_1", "targetname");
   var_1 = common_scripts\utility::getStruct("soap_run_anim_ref_2", "targetname");
   var_2 = common_scripts\utility::getStruct("soap_run_anim_ref_3", "targetname");
   var_3 = common_scripts\utility::getStruct("soap_run_anim_ref_4", "targetname");
   var_4 = common_scripts\utility::getStruct("soap_run_anim_ref_5", "targetname");
   var_5 = getnode("soap_slide_goal", "targetname");
-  var_0 maps\_anim::_id_11CF(level._id_54E0, "payback_escape_start_wave_soap");
+  var_0 maps\_anim::anim_first_frame_solo(level.soap, "payback_escape_start_wave_soap");
   wait 4.4;
   level notify("move_echo_2_and_3");
-  level._id_54E0.a._id_0D26 = "stand";
-  level._id_54E0.a._id_0D2B = "run";
-  var_0 maps\_anim::_id_1247(level._id_54E0, "payback_escape_start_wave_soap");
-  var_1 maps\_anim::_id_124A(level._id_54E0, "payback_escape_turn_shoot_wave_soap");
+  level.soap.a.pose = "stand";
+  level.soap.a.movement = "run";
+  var_0 maps\_anim::anim_single_solo_run(level.soap, "payback_escape_start_wave_soap");
+  var_1 maps\_anim::anim_reach_solo(level.soap, "payback_escape_turn_shoot_wave_soap");
 
   if(!common_scripts\utility::flag("soap_check_anim_ref_2")) {
-    var_1 maps\_anim::_id_1247(level._id_54E0, "payback_escape_turn_shoot_wave_soap");
+    var_1 maps\_anim::anim_single_solo_run(level.soap, "payback_escape_turn_shoot_wave_soap");
   }
-  var_2 maps\_anim::_id_124A(level._id_54E0, "payback_escape_hood_slide_soap");
+  var_2 maps\_anim::anim_reach_solo(level.soap, "payback_escape_hood_slide_soap");
 
   if(!common_scripts\utility::flag("soap_check_anim_ref_3")) {
     maps\_audio::aud_send_msg("soap_hood_slide");
-    var_2 maps\_anim::_id_1247(level._id_54E0, "payback_escape_hood_slide_soap");
+    var_2 maps\_anim::anim_single_solo_run(level.soap, "payback_escape_hood_slide_soap");
   }
 
-  var_3 maps\_anim::_id_124A(level._id_54E0, "payback_escape_forward_wave_left_soap");
+  var_3 maps\_anim::anim_reach_solo(level.soap, "payback_escape_forward_wave_left_soap");
 
   if(!common_scripts\utility::flag("soap_check_anim_ref_4")) {
-    var_3 maps\_anim::_id_1247(level._id_54E0, "payback_escape_forward_wave_left_soap");
+    var_3 maps\_anim::anim_single_solo_run(level.soap, "payback_escape_forward_wave_left_soap");
   }
-  var_4 maps\_anim::_id_124A(level._id_54E0, "payback_escape_turn_shoot_wave_soap");
+  var_4 maps\_anim::anim_reach_solo(level.soap, "payback_escape_turn_shoot_wave_soap");
 
   if(!common_scripts\utility::flag("soap_check_anim_ref_5")) {
-    var_4 maps\_anim::_id_1247(level._id_54E0, "payback_escape_turn_shoot_wave_soap");
+    var_4 maps\_anim::anim_single_solo_run(level.soap, "payback_escape_turn_shoot_wave_soap");
   }
-  level._id_54E0.goalradius = 64;
-  level._id_54E0 setgoalnode(var_5);
-  level._id_54E0 waittill("goal");
-  level._id_4877 allowedstances("stand");
-  level._id_54E0._id_10F7 = 1;
-  level._id_54E0._id_0FC6 = 1;
-  level._id_54E0.ignoreall = 0;
-  level._id_54E0._id_59C3 = 0;
-  level._id_54E0.ignoreme = 0;
+  level.soap.goalradius = 64;
+  level.soap setgoalnode(var_5);
+  level.soap waittill("goal");
+  level.price allowedstances("stand");
+  level.soap.animplaybackrate = 1;
+  level.soap.moveplaybackrate = 1;
+  level.soap.ignoreall = 0;
+  level.soap.notarget = 0;
+  level.soap.ignoreme = 0;
 }
 
-_id_6533() {
-  level._id_6534 waittill("trigger");
+waittill_player_triggers_jeep() {
+  level.player_enter_jeep_trigger waittill("trigger");
   common_scripts\utility::flag_set("player_in_escape_jeep");
   level notify("player_jumping_in_jeep");
 }
 
-_id_6535(var_0, var_1) {
+enter_jeep_player_blend_to_anim(var_0, var_1) {
   level.player playerlinktoblend(var_0, "tag_player", var_1);
 }
 
-_id_6536() {
+new_jeep_escape_setup() {
   level.player endon("death");
-  thread _id_6560();
-  thread _id_654B();
+  thread jeep_escape_ambient_rpg();
+  thread jeep_escape_path_triggers();
   var_0 = [];
-  level._id_6537 = common_scripts\utility::getStruct("slide_ref", "targetname");
-  level._id_6538 = maps\_vehicle::_id_2A99("escape_jeep_1");
-  level._id_6538 setCanDamage(0);
-  level._id_6538 maps\_vehicle::_id_2B17();
-  level._id_6534 = getEnt("player_enter_jeep_trigger", "targetname");
-  level._id_6539 = spawn("script_model", level._id_6538.origin);
-  level._id_6539 linkTo(level._id_6538, "tag_brakelight_right", (0, 0, 0), (0, 0, 0));
-  level._id_653A = maps\_vehicle::_id_2A99("escape_jeep_2");
-  level._id_653A setCanDamage(0);
-  level._id_653A maps\_vehicle::_id_2B17();
-  thread _id_6558();
-  thread _id_6552();
-  thread _id_6553();
-  level._id_653B = getEnt("escape_jeep_1_driver", "targetname") maps\_utility::_id_166F(1);
-  level._id_653B maps\_utility::_id_0D04();
-  level._id_653B maps\_utility::_id_265A();
-  level._id_653B maps\_utility::_id_24F5();
-  level._id_653B._id_1032 = "escape_jeep_1_driver";
-  level._id_653B linkTo(level._id_6538, "tag_driver", (0, 0, 0), (0, 0, 0));
-  level._id_6538 thread maps\_anim::_id_124E(level._id_653B, "escape_jeep_1_driver_loop", "stop_escape_jeep_1_driver_loop_1", "tag_driver");
-  level._id_653C = getEnt("escape_jeep_2_driver", "targetname") maps\_utility::_id_166F(1);
-  level._id_653C maps\_utility::_id_0D04();
-  level._id_653C maps\_utility::_id_265A();
-  level._id_653C maps\_utility::_id_24F5();
-  level._id_653C._id_1032 = "escape_jeep_2_driver";
-  level._id_653C linkTo(level._id_653A, "tag_driver", (0, 0, 0), (0, 0, 0));
-  level._id_653A thread maps\_anim::_id_124E(level._id_653C, "escape_jeep_2_driver_loop", "stop_escape_jeep_2_driver_loop_1", "tag_driver");
-  level._id_653D = getEnt("escape_jeep_1_gunner", "targetname") maps\_utility::_id_166F(1);
-  level._id_653D maps\_utility::_id_0D04();
-  level._id_653D laserforceon();
-  level._id_653D._id_1032 = "escape_jeep_1_gunner";
-  level._id_653D linkTo(level._id_6538, "tag_passenger", (0, 0, 0), (0, 0, 0));
-  level._id_6538 thread maps\_anim::_id_124E(level._id_653D, "escape_jeep_1_gunner_shoot_loop", "stop_gunner_1_shoot_loop", "tag_passenger");
-  level._id_653E = getEnt("escape_jeep_2_gunner", "targetname") maps\_utility::_id_166F(1);
-  level._id_653E maps\_utility::_id_0D04();
-  level._id_653E laserforceon();
-  level._id_653E._id_1032 = "escape_jeep_2_gunner";
-  level._id_653E linkTo(level._id_653A, "tag_guy0", (0, 0, 0), (0, 0, 0));
-  level._id_653A thread maps\_anim::_id_124E(level._id_653E, "escape_jeep_2_gunner_shoot_loop", "stop_gunner_2_shoot_loop", "tag_guy0");
-  level._id_653F = getEnt("nikolai_jeep_escape", "targetname") maps\_utility::_id_166F(1);
-  level._id_653F._id_1032 = "nikolai_jeep_escape";
-  level._id_653F setCanDamage(0);
-  level._id_653F maps\_utility::_id_265A();
-  level._id_653F.ignoreall = 1;
-  level._id_653F.ignoreme = 1;
-  level._id_653F maps\_utility::_id_24F5();
-  level._id_653F hide();
-  level._id_653F._id_6516 = level._effect["dust_kickup"];
-  level._id_653F._id_6517 = "j_mainroot";
-  var_0 = maps\_utility::_id_0BC3(var_0, level._id_653F);
-  level._id_6537 thread maps\_anim::_id_11CF(level._id_653F, "jeep_slide_escape");
-  var_0 = maps\_utility::_id_0BC3(var_0, level._id_4877);
-  level._id_4877._id_6517 = "j_mainroot";
-  level._id_4877._id_6516 = level._effect["dust_kickup"];
-  var_0 = maps\_utility::_id_0BC3(var_0, level._id_54E0);
-  level._id_6540 = maps\_utility::_id_1287("player_slide_arms");
-  var_0 = maps\_utility::_id_0BC3(var_0, level._id_6540);
-  level._id_6540 hide();
-  level._id_6537 thread maps\_anim::_id_11CF(level._id_6540, "jeep_slide_escape");
-  level._id_6540 thread _id_6555();
-  level._id_6541 = maps\_utility::_id_1287("player_slide_legs");
-  var_0 = maps\_utility::_id_0BC3(var_0, level._id_6541);
-  level._id_6541 hide();
-  level._id_6541._id_6516 = level._effect["dust_kickup"];
-  level._id_6541._id_6517 = "j_ankle_le";
-  level._id_6537 thread maps\_anim::_id_11CF(level._id_6541, "jeep_slide_escape");
-  level._id_6542 = maps\_utility::_id_1287("player_jeep_arms");
-  level._id_6542 hide();
-  level._id_6542 linkTo(level._id_6538, "tag_guy1", (0, 0, 0), (0, 0, 0));
-  level._id_6542 thread maps\_anim::_id_11CF(level._id_6542, "end_mount");
-  level._id_6542 thread _id_6557();
+  level.slide_ref = common_scripts\utility::getStruct("slide_ref", "targetname");
+  level.escape_jeep_1 = maps\_vehicle::spawn_vehicle_from_targetname("escape_jeep_1");
+  level.escape_jeep_1 setCanDamage(0);
+  level.escape_jeep_1 maps\_vehicle::vehicle_lights_on();
+  level.player_enter_jeep_trigger = getEnt("player_enter_jeep_trigger", "targetname");
+  level.jeep_obj_spot = spawn("script_model", level.escape_jeep_1.origin);
+  level.jeep_obj_spot linkTo(level.escape_jeep_1, "tag_brakelight_right", (0, 0, 0), (0, 0, 0));
+  level.escape_jeep_2 = maps\_vehicle::spawn_vehicle_from_targetname("escape_jeep_2");
+  level.escape_jeep_2 setCanDamage(0);
+  level.escape_jeep_2 maps\_vehicle::vehicle_lights_on();
+  thread player_enter_jeep();
+  thread soap_attach_to_jeep();
+  thread nikolai_attach_to_jeep();
+  level.escape_jeep_1_driver = getEnt("escape_jeep_1_driver", "targetname") maps\_utility::spawn_ai(1);
+  level.escape_jeep_1_driver maps\_utility::magic_bullet_shield();
+  level.escape_jeep_1_driver maps\_utility::battlechatter_off();
+  level.escape_jeep_1_driver maps\_utility::gun_remove();
+  level.escape_jeep_1_driver.animname = "escape_jeep_1_driver";
+  level.escape_jeep_1_driver linkTo(level.escape_jeep_1, "tag_driver", (0, 0, 0), (0, 0, 0));
+  level.escape_jeep_1 thread maps\_anim::anim_loop_solo(level.escape_jeep_1_driver, "escape_jeep_1_driver_loop", "stop_escape_jeep_1_driver_loop_1", "tag_driver");
+  level.escape_jeep_2_driver = getEnt("escape_jeep_2_driver", "targetname") maps\_utility::spawn_ai(1);
+  level.escape_jeep_2_driver maps\_utility::magic_bullet_shield();
+  level.escape_jeep_2_driver maps\_utility::battlechatter_off();
+  level.escape_jeep_2_driver maps\_utility::gun_remove();
+  level.escape_jeep_2_driver.animname = "escape_jeep_2_driver";
+  level.escape_jeep_2_driver linkTo(level.escape_jeep_2, "tag_driver", (0, 0, 0), (0, 0, 0));
+  level.escape_jeep_2 thread maps\_anim::anim_loop_solo(level.escape_jeep_2_driver, "escape_jeep_2_driver_loop", "stop_escape_jeep_2_driver_loop_1", "tag_driver");
+  level.escape_jeep_1_gunner = getEnt("escape_jeep_1_gunner", "targetname") maps\_utility::spawn_ai(1);
+  level.escape_jeep_1_gunner maps\_utility::magic_bullet_shield();
+  level.escape_jeep_1_gunner laserforceon();
+  level.escape_jeep_1_gunner.animname = "escape_jeep_1_gunner";
+  level.escape_jeep_1_gunner linkTo(level.escape_jeep_1, "tag_passenger", (0, 0, 0), (0, 0, 0));
+  level.escape_jeep_1 thread maps\_anim::anim_loop_solo(level.escape_jeep_1_gunner, "escape_jeep_1_gunner_shoot_loop", "stop_gunner_1_shoot_loop", "tag_passenger");
+  level.escape_jeep_2_gunner = getEnt("escape_jeep_2_gunner", "targetname") maps\_utility::spawn_ai(1);
+  level.escape_jeep_2_gunner maps\_utility::magic_bullet_shield();
+  level.escape_jeep_2_gunner laserforceon();
+  level.escape_jeep_2_gunner.animname = "escape_jeep_2_gunner";
+  level.escape_jeep_2_gunner linkTo(level.escape_jeep_2, "tag_guy0", (0, 0, 0), (0, 0, 0));
+  level.escape_jeep_2 thread maps\_anim::anim_loop_solo(level.escape_jeep_2_gunner, "escape_jeep_2_gunner_shoot_loop", "stop_gunner_2_shoot_loop", "tag_guy0");
+  level.nikolai_jeep_escape = getEnt("nikolai_jeep_escape", "targetname") maps\_utility::spawn_ai(1);
+  level.nikolai_jeep_escape.animname = "nikolai_jeep_escape";
+  level.nikolai_jeep_escape setCanDamage(0);
+  level.nikolai_jeep_escape maps\_utility::battlechatter_off();
+  level.nikolai_jeep_escape.ignoreall = 1;
+  level.nikolai_jeep_escape.ignoreme = 1;
+  level.nikolai_jeep_escape maps\_utility::gun_remove();
+  level.nikolai_jeep_escape hide();
+  level.nikolai_jeep_escape._id_6516 = level._effect["dust_kickup"];
+  level.nikolai_jeep_escape._id_6517 = "j_mainroot";
+  var_0 = maps\_utility::array_add(var_0, level.nikolai_jeep_escape);
+  level.slide_ref thread maps\_anim::anim_first_frame_solo(level.nikolai_jeep_escape, "jeep_slide_escape");
+  var_0 = maps\_utility::array_add(var_0, level.price);
+  level.price._id_6517 = "j_mainroot";
+  level.price._id_6516 = level._effect["dust_kickup"];
+  var_0 = maps\_utility::array_add(var_0, level.soap);
+  level.escape_player_arms = maps\_utility::spawn_anim_model("player_slide_arms");
+  var_0 = maps\_utility::array_add(var_0, level.escape_player_arms);
+  level.escape_player_arms hide();
+  level.slide_ref thread maps\_anim::anim_first_frame_solo(level.escape_player_arms, "jeep_slide_escape");
+  level.escape_player_arms thread player_escape_notetracks();
+  level.escape_player_legs = maps\_utility::spawn_anim_model("player_slide_legs");
+  var_0 = maps\_utility::array_add(var_0, level.escape_player_legs);
+  level.escape_player_legs hide();
+  level.escape_player_legs._id_6516 = level._effect["dust_kickup"];
+  level.escape_player_legs._id_6517 = "j_ankle_le";
+  level.slide_ref thread maps\_anim::anim_first_frame_solo(level.escape_player_legs, "jeep_slide_escape");
+  level.jeep_player_arms = maps\_utility::spawn_anim_model("player_jeep_arms");
+  level.jeep_player_arms hide();
+  level.jeep_player_arms linkTo(level.escape_jeep_1, "tag_guy1", (0, 0, 0), (0, 0, 0));
+  level.jeep_player_arms thread maps\_anim::anim_first_frame_solo(level.jeep_player_arms, "end_mount");
+  level.jeep_player_arms thread player_enter_jeep_notetracks();
   common_scripts\utility::flag_wait("start_player_slide");
-  level._id_6543 = missile_createrepulsorent(level._id_4877, 5000, 200);
-  level._id_6544 = missile_createrepulsorent(level._id_54E0, 5000, 200);
-  level._id_6545 = missile_createrepulsorent(level.player, 5000, 200);
-  level._id_6546 = missile_createrepulsorent(level._id_653F, 5000, 200);
-  var_1 = missile_createrepulsorent(level._id_6538, 5000, 200);
-  var_2 = missile_createrepulsorent(level._id_653A, 5000, 200);
+  level.price_repulsor = missile_createrepulsorent(level.price, 5000, 200);
+  level._id_6544 = missile_createrepulsorent(level.soap, 5000, 200);
+  level.player_repulsor = missile_createrepulsorent(level.player, 5000, 200);
+  level._id_6546 = missile_createrepulsorent(level.nikolai_jeep_escape, 5000, 200);
+  var_1 = missile_createrepulsorent(level.escape_jeep_1, 5000, 200);
+  var_2 = missile_createrepulsorent(level.escape_jeep_2, 5000, 200);
   level.player enableinvulnerability();
   level.player.health = level.player.maxhealth;
   level.player freezecontrols(1);
   level.player setstance("stand");
   level.player disableweapons();
-  thread _id_6575();
+  thread rescue_carry_nikolai_drop();
   common_scripts\utility::flag_set("slide_started");
   level notify("notify_slide_started");
-  level._id_653F common_scripts\utility::delaycall(1, ::show);
-  level._id_4877 maps\_utility::_id_1414();
-  level._id_54E0 maps\_utility::_id_1414();
-  level._id_54E0._id_10F7 = 1;
-  level._id_54E0._id_0FC6 = 1;
-  level._id_4877._id_10F7 = 1;
-  level._id_4877._id_0FC6 = 1;
+  level.nikolai_jeep_escape common_scripts\utility::delaycall(1, ::show);
+  level.price maps\_utility::anim_stopanimscripted();
+  level.soap maps\_utility::anim_stopanimscripted();
+  level.soap.animplaybackrate = 1;
+  level.soap.moveplaybackrate = 1;
+  level.price.animplaybackrate = 1;
+  level.price.moveplaybackrate = 1;
   wait 0.05;
   maps\_audio::aud_send_msg("outro_slide_start");
-  level._id_6537 thread maps\_anim::_id_11DD(var_0, "jeep_slide_escape");
-  level._id_6540 thread _id_6547();
-  level._id_4877 thread _id_6550();
-  level._id_54E0 thread _id_6551();
-  level._id_653F thread _id_6554();
-  maps\_utility::delaythread(0.05, ::_id_6535, level._id_6540, 0.25);
-  level._id_6541 common_scripts\utility::delaycall(1, ::show);
+  level.slide_ref thread maps\_anim::anim_single(var_0, "jeep_slide_escape");
+  level.escape_player_arms thread player_slide_rumbles();
+  level.price thread price_escape_notetracks();
+  level.soap thread soap_escape_notetracks();
+  level.nikolai_jeep_escape thread nikolai_escape_notetracks();
+  maps\_utility::delaythread(0.05, ::enter_jeep_player_blend_to_anim, level.escape_player_arms, 0.25);
+  level.escape_player_legs common_scripts\utility::delaycall(1, ::show);
 }
 
-_id_6547() {
+player_slide_rumbles() {
   self waittillmatch("single anim", "slide_fx_on");
   level.player playRumbleOnEntity("light_1s");
   wait 0.4;
@@ -809,20 +809,20 @@ _id_6547() {
   level.player stoprumble("subtle_tank_rumble");
 }
 
-_id_6548() {
-  maps\_utility::_id_27CA("jeep_escape_enemies", maps\payback_sandstorm_code::_id_648A);
-  maps\_utility::_id_272C("jeep_escape_enemies", 1);
+jeep_escape_enemies() {
+  maps\_utility::array_spawn_function_targetname("jeep_escape_enemies", maps\payback_sandstorm_code::flashlight_on_guy);
+  maps\_utility::array_spawn_targetname("jeep_escape_enemies", 1);
 }
 
-_id_6549(var_0, var_1) {
-  var_2 = maps\_vehicle::_id_2A99(var_0);
-  var_2._id_2955 = 1;
-  var_2 maps\_vehicle::_id_2B17();
+jeep_escape_technical_wait_for_goto(var_0, var_1) {
+  var_2 = maps\_vehicle::spawn_vehicle_from_targetname(var_0);
+  var_2.dontunloadonend = 1;
+  var_2 maps\_vehicle::vehicle_lights_on();
   level waittill(var_1);
-  var_2 maps\_vehicle::_id_1FA6();
+  var_2 maps\_vehicle::gopath();
 }
 
-_id_654A() {
+ridge_contain() {
   level endon("player_jumping_in_jeep");
   common_scripts\utility::flag_wait("ridge_contain");
 
@@ -841,57 +841,57 @@ _id_654A() {
 
     if(isalive(level.player)) {
       level.player kill();
-      maps\_utility::_id_1826();
+      maps\_utility::missionfailedwrapper();
     }
   }
 }
 
-_id_654B() {
+jeep_escape_path_triggers() {
   common_scripts\utility::flag_wait("final_technicals");
-  thread _id_655D();
-  thread _id_655E();
+  thread jeep_escape_final_technical_1();
+  thread jeep_escape_final_technical_2();
   common_scripts\utility::flag_wait("winning");
 
   if(common_scripts\utility::flag("player_in_escape_jeep")) {
-    thread _id_654D();
+    thread destroy_final_technical_2();
 
-    if(isalive(level._id_654C)) {
-      level._id_654C maps\_vehicle::_id_2A11();
+    if(isalive(level.final_technical_1)) {
+      level.final_technical_1 maps\_vehicle::force_kill();
     }
     wait 1;
-    objective_state(maps\_utility::_id_2816("obj_rescue"), "done");
-    level._id_653A notify("stop_soap_new_fire_loop");
-    thread _id_02A6();
+    objective_state(maps\_utility::obj("obj_rescue"), "done");
+    level.escape_jeep_2 notify("stop_soap_new_fire_loop");
+    thread jeep_escape_vo();
     wait 4;
-    level.player thread maps\payback_util::_id_64E0(1, 2);
-    level._id_02A5 maps\_utility::_id_27AE(4);
+    level.player thread maps\payback_util::set_black_fade(1, 2);
+    level.jeep_rumble_loop maps\_utility::rumble_ramp_off(4);
     wait 6;
-    maps\payback_util::_id_64A9();
-    maps\_utility::_id_195A();
+    maps\payback_util::show_hud_after_scripted_sequence();
+    maps\_utility::nextmission();
   }
 }
 
-_id_02A6() {
-  level._id_653B maps\_utility::_id_168C("payback_eol_glad");
+jeep_escape_vo() {
+  level.escape_jeep_1_driver maps\_utility::dialogue_queue("payback_eol_glad");
   wait 0.5;
-  maps\_utility::_id_11F4("payback_mct_inparis");
+  maps\_utility::radio_dialogue("payback_mct_inparis");
   wait 0.5;
-  level._id_4877 maps\_utility::_id_168C("payback_pri_iknowwho");
+  level.price maps\_utility::dialogue_queue("payback_pri_iknowwho");
 }
 
-_id_654D() {
+destroy_final_technical_2() {
   wait 0.5;
 
-  if(isalive(level._id_654E)) {
-    level._id_654E maps\_vehicle::_id_2A11();
+  if(isalive(level.final_technical_2)) {
+    level.final_technical_2 maps\_vehicle::force_kill();
   }
 }
 
-_id_654F() {
+get_in_jeep_timer() {
   level endon("player_jumping_in_jeep");
   level.player.ignoreme = 1;
   wait 4;
-  thread _id_655F();
+  thread jeep_escape_uaz();
   wait 6;
   level.player.ignoreme = 0;
   wait 5;
@@ -911,223 +911,223 @@ _id_654F() {
 
     if(isalive(level.player)) {
       level.player kill();
-      maps\_utility::_id_1826();
+      maps\_utility::missionfailedwrapper();
     }
   }
 }
 
-_id_6550() {
+price_escape_notetracks() {
   self waittillmatch("single anim", "end");
-  level._id_4877 linkTo(level._id_6538, "tag_guy0", (0, 0, 0), (0, 0, 0));
+  level.price linkTo(level.escape_jeep_1, "tag_guy0", (0, 0, 0), (0, 0, 0));
   common_scripts\utility::flag_set("price_in_escape_jeep_1");
-  level._id_6538 thread maps\_anim::_id_124E(level._id_4877, "price_jeep_shoot_loop", "stop_price_jeep_wave_and_shoot_loop", "tag_guy0");
-  level._id_6538 waittill("stop_price_jeep_wave_and_shoot_loop");
-  level._id_6538 maps\_anim::_id_1246(level._id_4877, "price_jeep_sit_down", "tag_guy0");
-  level._id_6538 thread maps\_anim::_id_124E(level._id_4877, "price_back_jeep_loop", "stop_price_jeep_wave_and_shoot_loop", "tag_guy0");
+  level.escape_jeep_1 thread maps\_anim::anim_loop_solo(level.price, "price_jeep_shoot_loop", "stop_price_jeep_wave_and_shoot_loop", "tag_guy0");
+  level.escape_jeep_1 waittill("stop_price_jeep_wave_and_shoot_loop");
+  level.escape_jeep_1 maps\_anim::anim_single_solo(level.price, "price_jeep_sit_down", "tag_guy0");
+  level.escape_jeep_1 thread maps\_anim::anim_loop_solo(level.price, "price_back_jeep_loop", "stop_price_jeep_wave_and_shoot_loop", "tag_guy0");
 }
 
-_id_6551() {
+soap_escape_notetracks() {
   level endon("player_entering_jeep");
   self waittillmatch("single anim", "end");
-  self linkTo(level._id_653A, "tag_guy1", (0, 0, 0), (0, 0, 0));
-  level._id_653A thread maps\_anim::_id_124E(self, "soap_jeep_shoot_loop", "stop_soap_and_nikolai_loops", "tag_guy1");
+  self linkTo(level.escape_jeep_2, "tag_guy1", (0, 0, 0), (0, 0, 0));
+  level.escape_jeep_2 thread maps\_anim::anim_loop_solo(self, "soap_jeep_shoot_loop", "stop_soap_and_nikolai_loops", "tag_guy1");
 }
 
-_id_6552() {
+soap_attach_to_jeep() {
   common_scripts\utility::flag_wait("player_entering_jeep");
   wait 0.05;
-  level._id_54E0 maps\_utility::_id_1414();
-  level._id_54E0 linkTo(level._id_653A, "tag_guy1", (0, 0, 0), (0, 0, 0));
-  level._id_653A thread maps\_anim::_id_124E(level._id_54E0, "soap_jeep_shoot_loop_2", "stop_soap_new_fire_loop", "tag_guy1");
-  level._id_653A waittill("stop_soap_new_fire_loop");
-  level._id_653A maps\_anim::_id_1246(level._id_54E0, "soap_jeep_sit_down", "tag_guy1");
-  level._id_653A thread maps\_anim::_id_124E(level._id_54E0, "soap_back_jeep_loop", undefined, "tag_guy1");
+  level.soap maps\_utility::anim_stopanimscripted();
+  level.soap linkTo(level.escape_jeep_2, "tag_guy1", (0, 0, 0), (0, 0, 0));
+  level.escape_jeep_2 thread maps\_anim::anim_loop_solo(level.soap, "soap_jeep_shoot_loop_2", "stop_soap_new_fire_loop", "tag_guy1");
+  level.escape_jeep_2 waittill("stop_soap_new_fire_loop");
+  level.escape_jeep_2 maps\_anim::anim_single_solo(level.soap, "soap_jeep_sit_down", "tag_guy1");
+  level.escape_jeep_2 thread maps\_anim::anim_loop_solo(level.soap, "soap_back_jeep_loop", undefined, "tag_guy1");
 }
 
-_id_6553() {
+nikolai_attach_to_jeep() {
   level endon("nikolai_attached_to_jeep_natural");
   common_scripts\utility::flag_wait("player_entering_jeep");
   wait 0.05;
-  level._id_653F maps\_utility::_id_1414();
-  level._id_653F linkTo(level._id_653A, "tag_passenger", (0, 0, 0), (0, 0, 0));
-  level._id_653A maps\_anim::_id_124E(level._id_653F, "nikolai_passenger_loop", undefined, "tag_passenger");
+  level.nikolai_jeep_escape maps\_utility::anim_stopanimscripted();
+  level.nikolai_jeep_escape linkTo(level.escape_jeep_2, "tag_passenger", (0, 0, 0), (0, 0, 0));
+  level.escape_jeep_2 maps\_anim::anim_loop_solo(level.nikolai_jeep_escape, "nikolai_passenger_loop", undefined, "tag_passenger");
 }
 
-_id_6554() {
+nikolai_escape_notetracks() {
   level endon("player_entering_jeep");
   self waittillmatch("single anim", "end");
   level notify("nikolai_attached_to_jeep_natural");
-  self linkTo(level._id_653A, "tag_passenger", (0, 0, 0), (0, 0, 0));
-  level._id_653A maps\_anim::_id_124E(self, "nikolai_passenger_loop", "stop_soap_and_nikolai_loops", "tag_passenger");
+  self linkTo(level.escape_jeep_2, "tag_passenger", (0, 0, 0), (0, 0, 0));
+  level.escape_jeep_2 maps\_anim::anim_loop_solo(self, "nikolai_passenger_loop", "stop_soap_and_nikolai_loops", "tag_passenger");
 }
 
-_id_6555() {
+player_escape_notetracks() {
   self waittillmatch("single anim", "gun_up");
-  thread _id_6556();
+  thread price_slide_end_vo();
   level.player enableweapons();
   self waittillmatch("single anim", "end");
-  thread _id_654F();
-  thread _id_654A();
-  thread _id_6533();
+  thread get_in_jeep_timer();
+  thread ridge_contain();
+  thread waittill_player_triggers_jeep();
   level.player disableinvulnerability();
   level notify("move_jeep_escape_technical_1");
   level notify("move_jeep_escape_technical_2");
   level.player unlink();
   level.player allowjump(1);
   level.player allowcrouch(1);
-  level._id_6540 delete();
-  level._id_6541 delete();
-  maps\_utility::_id_1C43();
+  level.escape_player_arms delete();
+  level.escape_player_legs delete();
+  maps\_utility::autosave_now();
 }
 
-_id_6556() {
-  level._id_4877 maps\_utility::_id_168C("payback_pri_letsgocmon");
+price_slide_end_vo() {
+  level.price maps\_utility::dialogue_queue("payback_pri_letsgocmon");
   wait 0.5;
-  level._id_4877 maps\_utility::_id_168C("payback_pri_gottamove");
+  level.price maps\_utility::dialogue_queue("payback_pri_gottamove");
 }
 
-_id_6557() {
+player_enter_jeep_notetracks() {
   self waittillmatch("single anim", "end");
-  level._id_6538 notify("stop_price_jeep_wave_and_shoot_loop");
-  level._id_6542 hide();
-  level.player playerlinktodelta(level._id_6542, "tag_player");
+  level.escape_jeep_1 notify("stop_price_jeep_wave_and_shoot_loop");
+  level.jeep_player_arms hide();
+  level.player playerlinktodelta(level.jeep_player_arms, "tag_player");
   level.player freezecontrols(0);
   level.player enableweapons();
   common_scripts\utility::flag_set("player_in_jeep");
 }
 
-_id_6558() {
+player_enter_jeep() {
   level waittill("player_jumping_in_jeep");
   common_scripts\utility::exploder(7000);
   level._id_566C = 0.3;
   maps\_audio::aud_send_msg("mus_rescue_start_finale_music");
   level.player enableinvulnerability();
   level.player.health = level.player.maxhealth;
-  thread _id_6559();
-  thread maps\_utility::_id_11F4("payback_pri_moveout_r");
-  level._id_653D maps\_utility::_id_265A();
-  level._id_653E maps\_utility::_id_265A();
-  thread _id_655C();
-  level._id_6538 thread maps\_vehicle::_id_1FA6();
-  level._id_653A maps\_utility::delaythread(0.5, maps\_vehicle::_id_1FA6);
-  level._id_6538 vehicle_setspeed(41, 10);
-  level._id_653A vehicle_setspeed(41, 10);
-  level._id_6538 _id_655A();
-  level._id_653A _id_655A();
+  thread jeep_ride_exit_rumbles();
+  thread maps\_utility::radio_dialogue("payback_pri_moveout_r");
+  level.escape_jeep_1_gunner maps\_utility::battlechatter_off();
+  level.escape_jeep_2_gunner maps\_utility::battlechatter_off();
+  thread gunner_2_sit_down_and_idle();
+  level.escape_jeep_1 thread maps\_vehicle::gopath();
+  level.escape_jeep_2 maps\_utility::delaythread(0.5, maps\_vehicle::gopath);
+  level.escape_jeep_1 vehicle_setspeed(41, 10);
+  level.escape_jeep_2 vehicle_setspeed(41, 10);
+  level.escape_jeep_1 jeep_tread_fx();
+  level.escape_jeep_2 jeep_tread_fx();
   level.player freezecontrols(1);
   level.player setstance("stand");
   level.player disableweapons();
-  level._id_6534 delete();
-  level.player playerlinktoblend(level._id_6542, "tag_player", 0.25);
-  level._id_6542 common_scripts\utility::delaycall(0.25, ::show);
+  level.player_enter_jeep_trigger delete();
+  level.player playerlinktoblend(level.jeep_player_arms, "tag_player", 0.25);
+  level.jeep_player_arms common_scripts\utility::delaycall(0.25, ::show);
   common_scripts\utility::flag_set("player_entering_jeep");
   level notify("player_entering_jeep");
-  level._id_653A notify("stop_soap_and_nikolai_loops");
-  maps\payback_util::_id_64A8();
+  level.escape_jeep_2 notify("stop_soap_and_nikolai_loops");
+  maps\payback_util::hide_hud_for_scripted_sequence();
   maps\_audio::aud_send_msg("outro_player_in_jeep");
-  level._id_6542 maps\_anim::_id_1246(level._id_6542, "end_mount");
-  thread _id_655B();
+  level.jeep_player_arms maps\_anim::anim_single_solo(level.jeep_player_arms, "end_mount");
+  thread gunner_1_sit_down_and_idle();
 }
 
-_id_6559() {
+jeep_ride_exit_rumbles() {
   wait 0.5;
   level.player playRumbleOnEntity("light_1s");
   wait 0.4;
-  level._id_02A5 = level.player maps\_utility::_id_27AB("subtle_tank_rumble");
+  level.jeep_rumble_loop = level.player maps\_utility::get_rumble_ent("subtle_tank_rumble");
 }
 
-_id_655A() {
+jeep_tread_fx() {
   playFXOnTag(level._effect["pb_jeep_trail"], self, "tag_wheel_back_left");
   wait 0.05;
   playFXOnTag(level._effect["pb_jeep_trail"], self, "tag_wheel_back_right");
 }
 
-_id_655B() {
-  level._id_6538 notify("stop_gunner_1_shoot_loop");
-  level._id_6538 maps\_anim::_id_1246(level._id_653D, "escape_jeep_1_gunner_sit_down", "tag_passenger");
-  level._id_6538 maps\_anim::_id_124E(level._id_653D, "escape_jeep_1_gunner_passenger_loop", undefined, "tag_passenger");
+gunner_1_sit_down_and_idle() {
+  level.escape_jeep_1 notify("stop_gunner_1_shoot_loop");
+  level.escape_jeep_1 maps\_anim::anim_single_solo(level.escape_jeep_1_gunner, "escape_jeep_1_gunner_sit_down", "tag_passenger");
+  level.escape_jeep_1 maps\_anim::anim_loop_solo(level.escape_jeep_1_gunner, "escape_jeep_1_gunner_passenger_loop", undefined, "tag_passenger");
 }
 
-_id_655C() {
+gunner_2_sit_down_and_idle() {
   wait 3;
-  level._id_653A notify("stop_gunner_2_shoot_loop");
-  level._id_653A maps\_anim::_id_1246(level._id_653E, "escape_jeep_2_gunner_sit_down", "tag_guy0");
-  level._id_653A maps\_anim::_id_124E(level._id_653E, "escape_jeep_2_gunner_rear_loop", undefined, "tag_guy0");
+  level.escape_jeep_2 notify("stop_gunner_2_shoot_loop");
+  level.escape_jeep_2 maps\_anim::anim_single_solo(level.escape_jeep_2_gunner, "escape_jeep_2_gunner_sit_down", "tag_guy0");
+  level.escape_jeep_2 maps\_anim::anim_loop_solo(level.escape_jeep_2_gunner, "escape_jeep_2_gunner_rear_loop", undefined, "tag_guy0");
 }
 
-_id_655D() {
-  level._id_654C = maps\_vehicle::_id_2881("jeep_escape_final_technical_1");
-  level._id_654C._id_2955 = 1;
-  level._id_654C maps\_vehicle::_id_2B17();
+jeep_escape_final_technical_1() {
+  level.final_technical_1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("jeep_escape_final_technical_1");
+  level.final_technical_1.dontunloadonend = 1;
+  level.final_technical_1 maps\_vehicle::vehicle_lights_on();
 }
 
-_id_655E() {
-  level._id_654E = maps\_vehicle::_id_2881("jeep_escape_final_technical_2");
-  level._id_654E._id_2955 = 1;
-  level._id_654E maps\_vehicle::_id_2B17();
+jeep_escape_final_technical_2() {
+  level.final_technical_2 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("jeep_escape_final_technical_2");
+  level.final_technical_2.dontunloadonend = 1;
+  level.final_technical_2 maps\_vehicle::vehicle_lights_on();
 }
 
-_id_655F() {
-  var_0 = maps\_vehicle::_id_2881("jeep_escape_uaz");
-  var_0 maps\_vehicle::_id_2B17();
+jeep_escape_uaz() {
+  var_0 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("jeep_escape_uaz");
+  var_0 maps\_vehicle::vehicle_lights_on();
 }
 
-_id_6560() {
+jeep_escape_ambient_rpg() {
   common_scripts\utility::flag_wait("jeep_escape_rpg_1");
-  thread _id_6561("jeep_escape_rpg_1");
+  thread jeep_escape_rpg("jeep_escape_rpg_1");
   common_scripts\utility::flag_wait("jeep_escape_rpg_2");
-  thread _id_6561("jeep_escape_rpg_2");
+  thread jeep_escape_rpg("jeep_escape_rpg_2");
   common_scripts\utility::flag_wait("jeep_escape_rpg_3");
-  thread _id_6561("jeep_escape_rpg_3");
+  thread jeep_escape_rpg("jeep_escape_rpg_3");
 }
 
-_id_6561(var_0) {
+jeep_escape_rpg(var_0) {
   var_1 = common_scripts\utility::getStruct(var_0, "targetname");
   var_2 = common_scripts\utility::getStruct(var_1.target, "targetname");
   magicbullet("rpg", var_1.origin, var_2.origin);
 }
 
-_id_6562() {
-  level._id_64A5 endon("death");
+rescue_carry_nikolai_setup() {
+  level.nikolai endon("death");
   level endon("rescue_kill_nikolai");
 
-  if(!isDefined(level._id_64A5)) {
-    maps\payback_util::_id_594A("nikolai", "s3_rescue_nikolai");
+  if(!isDefined(level.nikolai)) {
+    maps\payback_util::spawn_ally("nikolai", "s3_rescue_nikolai");
   }
-  level._id_64A5 maps\_utility::_id_1057();
-  level._id_64A5._id_0D68 = 1;
-  level._id_64A5 pushplayer(1);
-  level._id_64A5.a._id_0D26 = "crouch";
-  thread _id_6567();
-  thread _id_656F();
-  thread _id_6570();
-  level._id_64A5 thread maps\_utility::_id_24F5();
-  level._id_650D thread maps\_anim::_id_11CF(level._id_64A5, "payback_sstorm_chopper_rescue_nikolai_pullout");
+  level.nikolai maps\_utility::disable_pain();
+  level.nikolai.flashbangimmunity = 1;
+  level.nikolai pushplayer(1);
+  level.nikolai.a.pose = "crouch";
+  thread rescue_nikolai_player();
+  thread crashed_chopper_prop();
+  thread crashed_chopper_tail();
+  level.nikolai thread maps\_utility::gun_remove();
+  level.chopper_rescue_ref thread maps\_anim::anim_first_frame_solo(level.nikolai, "payback_sstorm_chopper_rescue_nikolai_pullout");
   common_scripts\utility::flag_wait("start_nikolai_pullout");
   common_scripts\utility::flag_set("start_nikolai_pullout_echo");
-  level._id_650D maps\_anim::_id_1246(level._id_64A5, "payback_sstorm_chopper_rescue_nikolai_pullout");
-  level._id_650D thread maps\_anim::_id_124E(level._id_64A5, "rescue_nikolai_idle", "stop_nikolai_loop");
+  level.chopper_rescue_ref maps\_anim::anim_single_solo(level.nikolai, "payback_sstorm_chopper_rescue_nikolai_pullout");
+  level.chopper_rescue_ref thread maps\_anim::anim_loop_solo(level.nikolai, "rescue_nikolai_idle", "stop_nikolai_loop");
   level notify("disable_clear_chopper_obj_spot");
-  thread _id_6563();
-  objective_position(maps\_utility::_id_2816("obj_rescue"), level._id_64A5.origin + (0, 0, 20));
-  objective_setpointertextoverride(maps\_utility::_id_2816("obj_rescue"), &"PAYBACK_NIKOLAI");
-  level._id_6521 setHintString(&"PAYBACK_USE_FREE_NIKOLAI");
-  level._id_6521 useTriggerRequireLookAt();
-  level._id_6521 common_scripts\utility::trigger_on();
+  thread pickup_nikolai_enable_and_disable_weapons();
+  objective_position(maps\_utility::obj("obj_rescue"), level.nikolai.origin + (0, 0, 20));
+  objective_setpointertextoverride(maps\_utility::obj("obj_rescue"), &"PAYBACK_NIKOLAI");
+  level.nikolai_use_trigger setHintString(&"PAYBACK_USE_FREE_NIKOLAI");
+  level.nikolai_use_trigger useTriggerRequireLookAt();
+  level.nikolai_use_trigger common_scripts\utility::trigger_on();
 }
 
-_id_6563() {
+pickup_nikolai_enable_and_disable_weapons() {
   level endon("rescue_picking_up_nikolai");
   var_0 = getEnt("rescue_nikolai_disable_weapons_trigger", "targetname");
   var_1 = getdvarint("cg_fov");
   setsaveddvar("objectiveHide", 0);
 
   for(;;) {
-    if(level.player istouching(var_0) && level.player worldpointinreticle_circle(level._id_64A5.origin, var_1, 120)) {
+    if(level.player istouching(var_0) && level.player worldpointinreticle_circle(level.nikolai.origin, var_1, 120)) {
       level.player disableweapons();
       setsaveddvar("objectiveHide", 1);
 
-      while(level.player istouching(var_0) && level.player worldpointinreticle_circle(level._id_64A5.origin, var_1, 120)) {
+      while(level.player istouching(var_0) && level.player worldpointinreticle_circle(level.nikolai.origin, var_1, 120)) {
         wait 0.5;
       }
       level.player enableweapons();
@@ -1138,39 +1138,39 @@ _id_6563() {
   }
 }
 
-_id_6564() {
+player_out_in_open() {
   level endon("slide_started");
   var_0 = getEnt("player_out_in_open", "targetname");
 
   for(;;) {
     if(level.player istouching(var_0)) {
-      level.player._id_20F2._id_22FC = 1.5;
+      level.player.gs.player_attacker_accuracy = 1.5;
 
       while(level.player istouching(var_0)) {
         wait 0.05;
       }
-      level.player._id_20F2._id_22FC = 0.1;
+      level.player.gs.player_attacker_accuracy = 0.1;
     }
 
     wait 0.05;
   }
 }
 
-_id_6565(var_0, var_1) {
+ignore_player_until_looking_at_target(var_0, var_1) {
   level endon("start_player_slide");
   level endon("disable_ignore_player_triggers");
   var_2 = getdvarint("cg_fov");
   level.player.ignoreme = 1;
   level.player enabledeathshield(1);
   level.player._id_652F = 1;
-  level.player._id_20F2._id_22FC = 0.1;
+  level.player.gs.player_attacker_accuracy = 0.1;
 
   for(;;) {
     if(level.player istouching(var_0) && level.player worldpointinreticle_circle(var_1.origin, var_2, 160)) {
       level.player.ignoreme = 0;
       level.player enabledeathshield(0);
       level.player._id_652F = 0;
-      level.player._id_20F2._id_22FC = 1.5;
+      level.player.gs.player_attacker_accuracy = 1.5;
 
       while(level.player istouching(var_0) && level.player worldpointinreticle_circle(var_1.origin, var_2, 160)) {
         wait 0.05;
@@ -1178,41 +1178,41 @@ _id_6565(var_0, var_1) {
       level.player.ignoreme = 1;
       level.player enabledeathshield(1);
       level.player._id_652F = 1;
-      level.player._id_20F2._id_22FC = 0.1;
+      level.player.gs.player_attacker_accuracy = 0.1;
     }
 
     wait 0.05;
   }
 }
 
-_id_6566() {
-  level._id_650D notify("stop_nikolai_loop");
-  level._id_650D maps\_anim::_id_1246(level._id_64A5, "rescue_nikolai");
+rescue_nikolai() {
+  level.chopper_rescue_ref notify("stop_nikolai_loop");
+  level.chopper_rescue_ref maps\_anim::anim_single_solo(level.nikolai, "rescue_nikolai");
 }
 
-_id_6567() {
-  var_0 = maps\_utility::_id_1287("rescue_nikolai_player_rig");
+rescue_nikolai_player() {
+  var_0 = maps\_utility::spawn_anim_model("rescue_nikolai_player_rig");
   var_0 hide();
-  level._id_650D maps\_anim::_id_11CF(var_0, "rescue_nikolai");
-  level._id_6521 = getEnt("nikolai_use_trigger", "targetname");
-  level._id_6521 common_scripts\utility::trigger_off();
-  level._id_6521 waittill("trigger");
-  thread _id_6569();
+  level.chopper_rescue_ref maps\_anim::anim_first_frame_solo(var_0, "rescue_nikolai");
+  level.nikolai_use_trigger = getEnt("nikolai_use_trigger", "targetname");
+  level.nikolai_use_trigger common_scripts\utility::trigger_off();
+  level.nikolai_use_trigger waittill("trigger");
+  thread follow_technical();
   var_1 = getEnt("ignore_player_trigger_1", "targetname");
   var_2 = getEnt("ignore_player_target_1", "targetname");
-  thread _id_6565(var_1, var_2);
+  thread ignore_player_until_looking_at_target(var_1, var_2);
   var_1 = getEnt("ignore_player_trigger_2", "targetname");
   var_2 = getEnt("ignore_player_target_2", "targetname");
-  thread _id_6565(var_1, var_2);
+  thread ignore_player_until_looking_at_target(var_1, var_2);
   level.player enableinvulnerability();
-  thread _id_651F();
-  level._id_4877 maps\_utility::_id_265A();
-  level._id_54E0 maps\_utility::_id_265A();
-  level._id_6515 maps\_utility::_id_265A();
-  level._id_6518 maps\_utility::_id_265A();
-  level._id_6519 maps\_utility::_id_265A();
+  thread health_mods();
+  level.price maps\_utility::battlechatter_off();
+  level.soap maps\_utility::battlechatter_off();
+  level.rescue_echo_1 maps\_utility::battlechatter_off();
+  level.rescue_echo_2 maps\_utility::battlechatter_off();
+  level.rescue_echo_3 maps\_utility::battlechatter_off();
   level.player.health = level.player.maxhealth;
-  thread _id_656A();
+  thread move_echo_2_3_price_when_nikolai_picked_up();
   var_3 = getEntArray("street_run_anim_check_triggers", "script_noteworthy");
 
   foreach(var_1 in var_3) {}
@@ -1221,19 +1221,19 @@ _id_6567() {
   level notify("clear_echo_stuff");
   level notify("stop_laser_handler");
   common_scripts\utility::flag_set("stop_laser_handler");
-  level._id_6519 laserforceoff();
-  thread _id_6524();
-  thread _id_656B();
-  thread _id_6571();
-  thread _id_652E();
-  thread _id_6530();
-  objective_position(maps\_utility::_id_2816("obj_rescue"), (0, 0, 0));
-  objective_setpointertextoverride(maps\_utility::_id_2816("obj_rescue"), "");
-  level._id_6521 delete();
+  level.rescue_echo_3 laserforceoff();
+  thread move_allies_after_pickup();
+  thread pickup_nikolai_radio_echo();
+  thread carry_warn_and_kill_trigs();
+  thread keep_up_or_die();
+  thread street_run_allow_damage();
+  objective_position(maps\_utility::obj("obj_rescue"), (0, 0, 0));
+  objective_setpointertextoverride(maps\_utility::obj("obj_rescue"), "");
+  level.nikolai_use_trigger delete();
   level notify("rescue_picking_up_nikolai");
   setsaveddvar("objectiveHide", 0);
   level.player disableweapons();
-  thread _id_6568();
+  thread max_player_ammo_for_ending();
   level.player allowcrouch(0);
   level.player allowprone(0);
   level.player setstance("stand");
@@ -1241,21 +1241,21 @@ _id_6567() {
   wait 0.4;
   setsunflareposition((345, 253, 0));
   var_0 show();
-  thread _id_6523();
+  thread rescue_exit_sequence();
   maps\_audio::aud_send_msg("nikolai_pickup");
-  thread _id_6566();
-  level._id_650D maps\_anim::_id_1246(var_0, "rescue_nikolai");
+  thread rescue_nikolai();
+  level.chopper_rescue_ref maps\_anim::anim_single_solo(var_0, "rescue_nikolai");
   level.player disableinvulnerability();
-  thread _id_656C();
+  thread pickup_nikolai_and_escape_vo();
   setsaveddvar("mantle_enable", 0);
   level.player unlink();
   var_0 delete();
-  thread _id_6579();
-  _id_6572();
-  maps\_utility::_id_1C43();
+  thread run_objective_markers();
+  rescue_carry_nikolai_pickup_finish();
+  maps\_utility::autosave_now();
 }
 
-_id_6568() {
+max_player_ammo_for_ending() {
   var_0 = level.player getcurrentweapon();
 
   if(var_0 != "none") {
@@ -1272,123 +1272,123 @@ _id_6568() {
   }
 }
 
-_id_6569() {
+follow_technical() {
   common_scripts\utility::flag_wait("spawn_follow_technical");
-  var_0 = maps\_vehicle::_id_2881("follow_technical");
+  var_0 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("follow_technical");
   var_0 setCanDamage(0);
-  var_0._id_2955 = 1;
-  var_0 thread maps\_vehicle::_id_2B17();
+  var_0.dontunloadonend = 1;
+  var_0 thread maps\_vehicle::vehicle_lights_on();
   common_scripts\utility::flag_wait("wait_to_move_follow_technical");
   var_1 = getvehiclenode("follow_technical_path_2", "targetname");
   var_0 attachpath(var_1);
-  var_0 thread maps\_vehicle::_id_1FA6();
+  var_0 thread maps\_vehicle::gopath();
 }
 
-_id_656A() {
-  level._id_4877.ignoreall = 1;
-  level._id_4877 clearenemy();
-  level._id_4877 setgoalnode(getnode("echo_2_3_price_pickup_niko_move_spot", "targetname"));
-  level._id_6518.ignoreall = 1;
-  level._id_6518 clearenemy();
-  level._id_6518 setgoalnode(getnode("echo_2_3_price_pickup_niko_move_spot", "targetname"));
-  level._id_6519.ignoreall = 1;
-  level._id_6519 clearenemy();
-  level._id_6519 setgoalnode(getnode("echo_2_3_price_pickup_niko_move_spot", "targetname"));
+move_echo_2_3_price_when_nikolai_picked_up() {
+  level.price.ignoreall = 1;
+  level.price clearenemy();
+  level.price setgoalnode(getnode("echo_2_3_price_pickup_niko_move_spot", "targetname"));
+  level.rescue_echo_2.ignoreall = 1;
+  level.rescue_echo_2 clearenemy();
+  level.rescue_echo_2 setgoalnode(getnode("echo_2_3_price_pickup_niko_move_spot", "targetname"));
+  level.rescue_echo_3.ignoreall = 1;
+  level.rescue_echo_3 clearenemy();
+  level.rescue_echo_3 setgoalnode(getnode("echo_2_3_price_pickup_niko_move_spot", "targetname"));
 }
 
-_id_656B() {
+pickup_nikolai_radio_echo() {
   wait 0.5;
-  level._id_4877 maps\_utility::_id_168C("payback_pri_headingtoexfil");
+  level.price maps\_utility::dialogue_queue("payback_pri_headingtoexfil");
 }
 
-_id_656C() {
+pickup_nikolai_and_escape_vo() {
   level.player endon("death");
   level endon("start_player_slide");
-  thread _id_656D();
-  level._id_4877 maps\_utility::_id_168C("payback_pri_moveout4");
+  thread pickup_nikolai_and_escape_radio_vo();
+  level.price maps\_utility::dialogue_queue("payback_pri_moveout4");
   wait 2;
-  level._id_54E0 maps\_utility::_id_168C("payback_mct_followme");
+  level.soap maps\_utility::dialogue_queue("payback_mct_followme");
   wait 2;
-  level._id_4877 maps\_utility::_id_168C("payback_pri_comeonyuri");
+  level.price maps\_utility::dialogue_queue("payback_pri_comeonyuri");
   common_scripts\utility::flag_wait("start_flare");
   setculldist(0);
   wait 1;
-  level._id_54E0 maps\_utility::_id_168C("payback_mct_iseethem");
+  level.soap maps\_utility::dialogue_queue("payback_mct_iseethem");
   wait 2;
-  level._id_4877 maps\_utility::_id_168C("payback_pri_yurithisway");
+  level.price maps\_utility::dialogue_queue("payback_pri_yurithisway");
   wait 2;
-  level._id_54E0 maps\_utility::_id_168C("payback_mct_keepmoving2");
+  level.soap maps\_utility::dialogue_queue("payback_mct_keepmoving2");
   wait 2;
-  level._id_4877 maps\_utility::_id_168C("payback_pri_letsgoyuri");
+  level.price maps\_utility::dialogue_queue("payback_pri_letsgoyuri");
 }
 
-_id_656D() {
+pickup_nikolai_and_escape_radio_vo() {
   level.player endon("death");
   wait 3;
-  level._id_6515 maps\_utility::_id_168C("payback_eol_approachingexfil");
+  level.rescue_echo_1 maps\_utility::dialogue_queue("payback_eol_approachingexfil");
   common_scripts\utility::flag_wait("start_flare");
   wait 2;
 
-  if(isDefined(level._id_6515) && isalive(level._id_6515)) {
-    level._id_6515 maps\_utility::_id_168C("payback_eol_letsgo");
+  if(isDefined(level.rescue_echo_1) && isalive(level.rescue_echo_1)) {
+    level.rescue_echo_1 maps\_utility::dialogue_queue("payback_eol_letsgo");
   }
 }
 
-_id_656E() {
+rescue_nikolai_price() {
   level endon("rescue_picking_up_nikolai");
-  level._id_4877._id_2199 = 0;
-  level._id_4877 setgoalnode(getnode("rescue_price_chopper", "targetname"));
-  level._id_4877 waittill("goal");
-  thread _id_651E();
+  level.price.script_grenades = 0;
+  level.price setgoalnode(getnode("rescue_price_chopper", "targetname"));
+  level.price waittill("goal");
+  thread rescue_chopper_extract_dialogue();
 }
 
-_id_656F() {
-  var_0 = maps\_utility::_id_1287("chopper_prop");
-  level._id_650D maps\_anim::_id_124E(var_0, "payback_sstorm_chopper_rescue_propeller");
+crashed_chopper_prop() {
+  var_0 = maps\_utility::spawn_anim_model("chopper_prop");
+  level.chopper_rescue_ref maps\_anim::anim_loop_solo(var_0, "payback_sstorm_chopper_rescue_propeller");
 }
 
-_id_6570() {
-  var_0 = maps\_utility::_id_1287("chopper_tail");
+crashed_chopper_tail() {
+  var_0 = maps\_utility::spawn_anim_model("chopper_tail");
   var_1 = common_scripts\utility::getStruct("crashed_chopper_tail_spot", "targetname");
   var_0.origin = var_1.origin;
   var_0.angles = var_1.angles;
-  var_0 maps\_anim::_id_124E(var_0, "payback_sstorm_chopper_rescue_tail_rotor");
+  var_0 maps\_anim::anim_loop_solo(var_0, "payback_sstorm_chopper_rescue_tail_rotor");
 }
 
-_id_6571() {
+carry_warn_and_kill_trigs() {
   common_scripts\utility::flag_clear("carry_warn");
   common_scripts\utility::flag_clear("carry_kill");
   var_0 = [];
-  var_0 = maps\_utility::_id_0BC3(var_0, "payback_pri_wheregoing");
-  var_0 = maps\_utility::_id_0BC3(var_0, "payback_pri_getbackhere2");
+  var_0 = maps\_utility::array_add(var_0, "payback_pri_wheregoing");
+  var_0 = maps\_utility::array_add(var_0, "payback_pri_getbackhere2");
   var_1 = common_scripts\utility::random(var_0);
   common_scripts\utility::flag_wait("carry_warn");
-  level thread maps\_utility::_id_11F4(var_1);
+  level thread maps\_utility::radio_dialogue(var_1);
   common_scripts\utility::flag_wait("carry_kill");
   setDvar("ui_deadquote", "@PAYBACK_STAY_WITH_TEAM");
-  maps\_utility::_id_1826();
+  maps\_utility::missionfailedwrapper();
 }
 
-_id_6572() {
-  _id_6573(1);
+rescue_carry_nikolai_pickup_finish() {
+  payback_stance_carry_icon_enable(1);
   level.player setmovespeedscale(0.75);
   level.player allowcrouch(0);
   level.player allowprone(0);
   level.player allowjump(0);
   level.player allowmelee(0);
-  thread _id_6576();
-  _id_6577(level.player, 1);
+  thread rescue_carry_prevent_weapon_pickup_thread();
+  rescue_set_carry_viewbob(level.player, 1);
 
-  if(isDefined(level._id_64A5)) {
-    level._id_64A5 maps\_utility::_id_1902();
-    level._id_64A5 delete();
-    level._id_64A5 = undefined;
+  if(isDefined(level.nikolai)) {
+    level.nikolai maps\_utility::stop_magic_bullet_shield();
+    level.nikolai delete();
+    level.nikolai = undefined;
   }
 }
 
-_id_6573(var_0) {
+payback_stance_carry_icon_enable(var_0) {
   if(isDefined(var_0) && var_0 == 0) {
-    _id_6574();
+    payback_stance_carry_icon_disable();
     return;
   }
 
@@ -1410,22 +1410,22 @@ _id_6573(var_0) {
   level.stance_carry.alpha = 1;
 }
 
-_id_6574() {
+payback_stance_carry_icon_disable() {
   if(isDefined(level.stance_carry)) {
     level.stance_carry destroy();
   }
   setsaveddvar("hud_showStance", "1");
 }
 
-_id_6575() {
-  _id_6573(0);
+rescue_carry_nikolai_drop() {
+  payback_stance_carry_icon_enable(0);
   setsaveddvar("mantle_enable", 1);
   level.player setmovespeedscale(1);
   level notify("rescue_carry_prevent_weapon_pickup_thread_stop");
-  _id_6577(level.player, 0);
+  rescue_set_carry_viewbob(level.player, 0);
 }
 
-_id_6576() {
+rescue_carry_prevent_weapon_pickup_thread() {
   level notify("rescue_carry_prevent_weapon_pickup_thread");
   level endon("rescue_carry_prevent_weapon_pickup_thread");
   level endon("rescue_carry_prevent_weapon_pickup_thread_stop");
@@ -1433,7 +1433,7 @@ _id_6576() {
 
   foreach(var_2 in var_0) {
     if(isalive(var_2)) {
-      var_2._id_217A = 1;
+      var_2.dontdropweapon = 1;
     }
   }
 
@@ -1449,7 +1449,7 @@ _id_6576() {
   }
 }
 
-_id_6577(var_0, var_1) {
+rescue_set_carry_viewbob(var_0, var_1) {
   if(var_1) {
     setsaveddvar("bg_viewBobAmplitudeStanding", "0.007 0.007");
     setsaveddvar("bg_viewBobAmplitudeStandingAds", "0.007 0.007");
@@ -1465,32 +1465,32 @@ _id_6577(var_0, var_1) {
   }
 }
 
-_id_6578() {
+rescue_spawn_initial() {
   maps\_audio::aud_send_msg("set_pre_rescue_mix");
   var_0 = common_scripts\utility::getStructArray("rescue_phantom_fire_source1", "targetname");
-  thread maps\payback_util::_id_64E9(level._id_64A5, "ak47", var_0, 0.05, 1.5, 3000, 5000, 0.5);
-  thread _id_6581(level.player, "rescue_escape_dialogue");
+  thread maps\payback_util::phantom_pressure(level.nikolai, "ak47", var_0, 0.05, 1.5, 3000, 5000, 0.5);
+  thread rescue_protect_from_rpg_till(level.player, "rescue_escape_dialogue");
   getEnt("pb_end_vista", "targetname") show();
 }
 
-_id_6579() {
+run_objective_markers() {
   var_0 = common_scripts\utility::getStruct("jeep_escape_objective_spot_1", "targetname");
-  objective_position(maps\_utility::_id_2816("obj_rescue"), var_0.origin);
+  objective_position(maps\_utility::obj("obj_rescue"), var_0.origin);
   level waittill("run_objective_spot_2");
-  _id_657A();
+  check_if_ok_to_delete();
   var_1 = common_scripts\utility::getStruct("jeep_escape_objective_spot_2", "targetname");
-  objective_position(maps\_utility::_id_2816("obj_rescue"), var_1.origin);
+  objective_position(maps\_utility::obj("obj_rescue"), var_1.origin);
   wait 1;
-  thread _id_6548();
-  thread _id_6549("jeep_escape_technical_1", "move_jeep_escape_technical_1");
-  thread _id_6549("jeep_escape_technical_2", "move_jeep_escape_technical_2");
+  thread jeep_escape_enemies();
+  thread jeep_escape_technical_wait_for_goto("jeep_escape_technical_1", "move_jeep_escape_technical_1");
+  thread jeep_escape_technical_wait_for_goto("jeep_escape_technical_2", "move_jeep_escape_technical_2");
   level waittill("run_objective_spot_3");
-  objective_onentity(maps\_utility::_id_2816("obj_rescue"), level._id_6539);
+  objective_onentity(maps\_utility::obj("obj_rescue"), level.jeep_obj_spot);
   level waittill("player_jumping_in_jeep");
-  objective_position(maps\_utility::_id_2816("obj_rescue"), (0, 0, 0));
+  objective_position(maps\_utility::obj("obj_rescue"), (0, 0, 0));
 }
 
-_id_657A() {
+check_if_ok_to_delete() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
@@ -1502,15 +1502,15 @@ _id_657A() {
   }
 }
 
-_id_657B(var_0) {
+slide_fx_on(var_0) {
   playFXOnTag(var_0._id_6516, var_0, var_0._id_6517);
 }
 
-_id_657C(var_0) {
+slide_fx_off(var_0) {
   stopFXOnTag(var_0._id_6516, var_0, var_0._id_6517);
 }
 
-_id_657D(var_0) {
+rescue_contain_player_enable(var_0) {
   var_1 = getEntArray("rescue_contain_player_triggers", "script_noteworthy");
 
   foreach(var_3 in var_1) {
@@ -1523,43 +1523,43 @@ _id_657D(var_0) {
   }
 
   if(var_0) {
-    level thread _id_657E();
+    level thread rescue_player_contain();
   }
 }
 
-_id_657E() {
+rescue_player_contain() {
   level notify("rescue_player_contain");
   level endon("rescue_player_contain");
   level.player endon("death");
   var_0 = [];
-  var_0 = maps\_utility::_id_0BC3(var_0, "payback_pri_wheregoing");
-  var_0 = maps\_utility::_id_0BC3(var_0, "payback_pri_getbackhere2");
+  var_0 = maps\_utility::array_add(var_0, "payback_pri_wheregoing");
+  var_0 = maps\_utility::array_add(var_0, "payback_pri_getbackhere2");
   level waittill("rescue_player_warn");
   var_1 = common_scripts\utility::random(var_0);
-  level thread maps\_utility::_id_11F4(var_1);
+  level thread maps\_utility::radio_dialogue(var_1);
 }
 
-_id_657F() {
+rescue_phantom_trigger_wait() {
   if(isDefined(self.target)) {
     self waittill("trigger");
     var_0 = common_scripts\utility::getStructArray(self.target, "targetname");
-    thread maps\payback_util::_id_64E9(level.player, "ak47", var_0, 0.05, 1.5, 3000, 5000);
+    thread maps\payback_util::phantom_pressure(level.player, "ak47", var_0, 0.05, 1.5, 3000, 5000);
   }
 }
 
-_id_6580() {
+rescue_trigger_fire_rpg() {
   self endon("death");
 
   if(isDefined(self.target)) {
-    var_0 = maps\_utility::_id_27F1(self.target, "targetname");
+    var_0 = maps\_utility::getent_or_struct(self.target, "targetname");
 
     if(isDefined(var_0) && isDefined(var_0.target)) {
-      var_1 = maps\_utility::_id_27F1(var_0.target, "targetname");
+      var_1 = maps\_utility::getent_or_struct(var_0.target, "targetname");
 
       if(isDefined(var_1)) {
         self waittill("trigger", var_2);
 
-        if(!isDefined(self._id_164F) || self._id_164F != "force") {
+        if(!isDefined(self.script_parameters) || self.script_parameters != "force") {
           while(vectordot(vectorNormalize(var_0.origin - level.player.origin), anglesToForward(level.player.angles)) > 0.5) {
             wait 0.1;
           }
@@ -1570,14 +1570,14 @@ _id_6580() {
   }
 }
 
-_id_6581(var_0, var_1, var_2) {
+rescue_protect_from_rpg_till(var_0, var_1, var_2) {
   var_3 = missile_createrepulsorent(var_0, 25000, 350);
 
   if(isDefined(var_2)) {
     if(!isDefined(var_1)) {
       var_1 = "rescue_protect_from_rpg_till";
     }
-    var_0 thread maps\_utility::_id_1424(var_1, var_2);
+    var_0 thread maps\_utility::notify_delay(var_1, var_2);
   }
 
   if(isDefined(var_1)) {

@@ -4,13 +4,13 @@
 **************************************/
 
 main() {
-  _id_589C::main();
+  maps/createfx/hijack_fx::main();
 
-  if(!maps\_utility::_id_0A36()) {
+  if(!maps\_utility::is_specialop()) {
     maps\_blizzard_hijack::_id_566B();
   }
   level thread maps\_shg_fx::_id_4456();
-  thread _id_589E();
+  thread setup_footstep_fx();
   level._effect["snow_blowoff_ledge"] = loadfx("snow/snow_blowoff_ledge");
   level._effect["snow_blowoff_ledge_runner"] = loadfx("snow/snow_blowoff_ledge_runner");
   level._effect["snow_spray_detail_oriented_runner_400x400_rvn"] = loadfx("snow/snow_spray_detail_oriented_runner_400x400_rvn");
@@ -150,23 +150,23 @@ main() {
   level._effect["hijack_water_splash_short"] = loadfx("maps/hijack/hijack_water_splash_short");
 }
 
-_id_589E() {
+setup_footstep_fx() {
   level._effect["footstep_snow"] = loadfx("impacts/hjk_footstep_snow");
   level._effect["footstep_snow_small"] = loadfx("impacts/hjk_footstep_snow_small");
   level._effect["footstep_ice"] = loadfx("impacts/hjk_footstep_ice");
   level._effect["footstep_dust"] = loadfx("impacts/footstep_dust");
-  animscripts\utility::_id_24BB("snow", level._effect["footstep_snow"]);
-  animscripts\utility::_id_24BB("ice", level._effect["footstep_ice"]);
-  animscripts\utility::_id_24BB("asphalt", level._effect["footstep_dust"]);
-  animscripts\utility::_id_24BB("dirt", level._effect["footstep_dust"]);
-  animscripts\utility::_id_24BC("snow", level._effect["footstep_snow_small"]);
-  animscripts\utility::_id_24BC("ice", level._effect["footstep_ice"]);
-  animscripts\utility::_id_24BC("asphalt", level._effect["footstep_dust"]);
-  animscripts\utility::_id_24BC("dirt", level._effect["footstep_dust"]);
-  level.player thread _id_589F();
+  animscripts\utility::setfootstepeffect("snow", level._effect["footstep_snow"]);
+  animscripts\utility::setfootstepeffect("ice", level._effect["footstep_ice"]);
+  animscripts\utility::setfootstepeffect("asphalt", level._effect["footstep_dust"]);
+  animscripts\utility::setfootstepeffect("dirt", level._effect["footstep_dust"]);
+  animscripts\utility::setfootstepeffectsmall("snow", level._effect["footstep_snow_small"]);
+  animscripts\utility::setfootstepeffectsmall("ice", level._effect["footstep_ice"]);
+  animscripts\utility::setfootstepeffectsmall("asphalt", level._effect["footstep_dust"]);
+  animscripts\utility::setfootstepeffectsmall("dirt", level._effect["footstep_dust"]);
+  level.player thread playersnowfootstepshijack();
 }
 
-_id_589F() {
+playersnowfootstepshijack() {
   for(;;) {
     wait(randomfloatrange(0.25, 0.5));
     var_0 = self.origin + (0, 0, 0);

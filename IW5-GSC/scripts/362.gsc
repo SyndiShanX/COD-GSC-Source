@@ -3,7 +3,7 @@
  * Script: scripts\362.gsc
 **************************************/
 
-_id_2852() {
+globalthink() {
   if(!isDefined(self.vehicletype)) {
     return;
   }
@@ -13,10 +13,10 @@ _id_2852() {
     var_0 = 1;
   }
   if(self.vehicletype == "cobra" || self.vehicletype == "cobra_player") {
-    thread _id_286C("chopperpilot_hellfire", "cobra_Sidewinder");
+    thread attachmissiles("chopperpilot_hellfire", "cobra_Sidewinder");
 
-    if(isDefined(self._id_2853)) {
-      self._id_2853 thread _id_286C("chopperpilot_hellfire", "cobra_Sidewinder");
+    if(isDefined(self.fullmodel)) {
+      self.fullmodel thread attachmissiles("chopperpilot_hellfire", "cobra_Sidewinder");
     }
     var_0 = 1;
   }
@@ -24,26 +24,26 @@ _id_2852() {
   if(!var_0) {
     return;
   }
-  level thread _id_2856(self);
-  level thread maps\_helicopter_ai::_id_2845(self);
+  level thread flares_think(self);
+  level thread maps\_helicopter_ai::evasive_think(self);
 
   if(getDvar("cobrapilot_wingman_enabled") == "1") {
-    if(isDefined(self._id_2854)) {
-      level._id_2855 = self;
-      level thread maps\_helicopter_ai::_id_284E(self);
+    if(isDefined(self.script_wingman)) {
+      level.wingman = self;
+      level thread maps\_helicopter_ai::wingman_think(self);
     }
   }
 }
 
-_id_2856(var_0) {
+flares_think(var_0) {
   var_0 endon("death");
   notifyoncommand("flare_button", "+frag");
   notifyoncommand("flare_button", "+usereload");
   notifyoncommand("flare_button", "+activate");
 
   while(var_0.health > 0) {
-    if(isDefined(var_0._id_2857)) {
-      var_0._id_2858 waittill("flare_button");
+    if(isDefined(var_0.playercontrolled)) {
+      var_0.pilot waittill("flare_button");
     } else {
       var_0 waittill("incomming_missile", var_1);
 
@@ -56,18 +56,18 @@ _id_2856(var_0) {
       wait(randomfloatrange(0.5, 1.0));
     }
 
-    thread _id_285B(var_0);
+    thread flares_fire(var_0);
     wait 3.0;
   }
 }
 
-_id_2859(var_0, var_1, var_2, var_3) {
+flares_fire_burst(var_0, var_1, var_2, var_3) {
   var_4 = 1;
 
   for(var_5 = 0; var_5 < var_1; var_5++) {
-    playFX(level._id_285A[var_0.vehicletype], var_0 gettagorigin("tag_flare"));
+    playFX(level.flare_fx[var_0.vehicletype], var_0 gettagorigin("tag_flare"));
 
-    if(isDefined(var_0._id_2857)) {
+    if(isDefined(var_0.playercontrolled)) {
       level.stats["flares_used"]++;
       var_0 notify("dropping_flares");
 
@@ -78,30 +78,30 @@ _id_2859(var_0, var_1, var_2, var_3) {
     }
 
     if(var_5 <= var_2 - 1) {
-      thread _id_2860(var_0, var_3);
+      thread flares_redirect_missiles(var_0, var_3);
     }
     wait 0.1;
   }
 }
 
-_id_285B(var_0) {
+flares_fire(var_0) {
   var_0 endon("death");
   var_1 = 5.0;
 
-  if(isDefined(var_0._id_285C)) {
-    var_1 = var_0._id_285C;
+  if(isDefined(var_0.flare_duration)) {
+    var_1 = var_0.flare_duration;
   }
-  _id_2859(var_0, 8, 1, var_1);
+  flares_fire_burst(var_0, 8, 1, var_1);
 }
 
-_id_285D() {
-  if(isDefined(self._id_285E)) {
-    missile_deleteattractor(self._id_285E);
+create_missileattractor_on_player_chopper() {
+  if(isDefined(self.missileattractor)) {
+    missile_deleteattractor(self.missileattractor);
   }
-  self._id_285E = missile_createattractorent(self._id_285F, 10000, 10000);
+  self.missileattractor = missile_createattractorent(self.centeraimpoint, 10000, 10000);
 }
 
-_id_2860(var_0, var_1) {
+flares_redirect_missiles(var_0, var_1) {
   var_0 notify("flares_out");
   var_0 endon("death");
   var_0 endon("flares_out");
@@ -109,31 +109,31 @@ _id_2860(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = 5.0;
   }
-  var_2 = _id_2863(var_0);
+  var_2 = flares_get_vehicle_velocity(var_0);
   var_3 = spawn("script_origin", var_0 gettagorigin("tag_flare"));
   var_3 movegravity(var_2, var_1);
   var_4 = undefined;
 
-  if(isDefined(var_0._id_2857)) {
-    if(isDefined(var_0._id_285E)) {
-      missile_deleteattractor(var_0._id_285E);
+  if(isDefined(var_0.playercontrolled)) {
+    if(isDefined(var_0.missileattractor)) {
+      missile_deleteattractor(var_0.missileattractor);
     }
     var_4 = missile_createattractorent(var_3, 10000, 10000);
   }
 
-  if(isDefined(var_0._id_2861)) {
-    for(var_5 = 0; var_5 < var_0._id_2861.size; var_5++) {
-      var_0._id_2861[var_5] missile_settargetEnt(var_3);
+  if(isDefined(var_0.incomming_missiles)) {
+    for(var_5 = 0; var_5 < var_0.incomming_missiles.size; var_5++) {
+      var_0.incomming_missiles[var_5] missile_settargetEnt(var_3);
     }
   }
 
   wait(var_1);
 
-  if(isDefined(var_0._id_2857)) {
+  if(isDefined(var_0.playercontrolled)) {
     if(isDefined(var_4)) {
       missile_deleteattractor(var_4);
     }
-    var_0 thread _id_285D();
+    var_0 thread create_missileattractor_on_player_chopper();
   }
 
   if(!isDefined(var_0.script_targetoffset_z)) {
@@ -141,32 +141,32 @@ _id_2860(var_0, var_1) {
   }
   var_6 = (0, 0, var_0.script_targetoffset_z);
 
-  if(!isDefined(var_0._id_2861)) {
+  if(!isDefined(var_0.incomming_missiles)) {
     return;
   }
-  for(var_5 = 0; var_5 < var_0._id_2861.size; var_5++) {
-    var_0._id_2861[var_5] missile_settargetEnt(var_0, var_6);
+  for(var_5 = 0; var_5 < var_0.incomming_missiles.size; var_5++) {
+    var_0.incomming_missiles[var_5] missile_settargetEnt(var_0, var_6);
   }
 }
 
-_id_2863(var_0) {
+flares_get_vehicle_velocity(var_0) {
   var_1 = var_0.origin;
   wait 0.05;
   var_2 = var_0.origin - var_1;
   return var_2 * 20;
 }
 
-_id_2864(var_0, var_1) {
+missile_deathwait(var_0, var_1) {
   var_1 endon("death");
   var_0 waittill("death");
 
-  if(!isDefined(var_1._id_2861)) {
+  if(!isDefined(var_1.incomming_missiles)) {
     return;
   }
-  var_1._id_2861 = common_scripts\utility::array_remove(var_1._id_2861, var_0);
+  var_1.incomming_missiles = common_scripts\utility::array_remove(var_1.incomming_missiles, var_0);
 }
 
-_id_2865(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+getenemytarget(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isDefined(var_2)) {
     var_2 = 0;
   }
@@ -185,8 +185,8 @@ _id_2865(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_10 = [];
 
   if(var_4) {
-    for(var_11 = 0; var_11 < level._id_0B5A[var_9].size; var_11++) {
-      var_10[var_10.size] = level._id_0B5A[var_9][var_11];
+    for(var_11 = 0; var_11 < level.vehicles[var_9].size; var_11++) {
+      var_10[var_10.size] = level.vehicles[var_9][var_11];
     }
   }
 
@@ -194,7 +194,7 @@ _id_2865(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_12 = getaiarray(var_9);
 
     for(var_11 = 0; var_11 < var_12.size; var_11++) {
-      if(isDefined(var_12[var_11]._id_2866)) {
+      if(isDefined(var_12[var_11].ignored_by_attack_heli)) {
         continue;
       }
       var_10[var_10.size] = var_12[var_11];
@@ -208,10 +208,10 @@ _id_2865(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   if(isDefined(var_6)) {
-    var_10 = maps\_utility::_id_264D(var_10, var_6);
+    var_10 = maps\_utility::array_exclude(var_10, var_6);
   }
   if(var_5) {
-    var_10 = maps\_utility::_id_0B53(var_10);
+    var_10 = maps\_utility::array_randomize(var_10);
   }
   var_13 = anglesToForward(self.angles);
 
@@ -265,17 +265,17 @@ _id_2865(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(var_7.size == 1) {
     return var_7[0];
   }
-  var_19 = maps\_utility::_id_0AE9(self.origin, var_7);
+  var_19 = maps\_utility::getclosest(self.origin, var_7);
   return var_19;
 }
 
-_id_2867(var_0) {
+shootenemytarget_bullets(var_0) {
   self endon("death");
   self endon("mg_off");
   var_0 endon("death");
   self endon("gunner_new_target");
 
-  if(isDefined(self._id_2857)) {
+  if(isDefined(self.playercontrolled)) {
     self endon("gunner_stop_firing");
   }
   var_1 = (0, 0, 0);
@@ -294,17 +294,17 @@ _id_2867(var_0) {
       iprintln("randomShots = " + var_2);
     }
     for(var_3 = 0; var_3 < var_2; var_3++) {
-      if(isDefined(self._id_2857)) {
-        if(isDefined(level._id_2868) && level._id_2868.size > 0) {
-          self setvehweapon(level._id_2869);
+      if(isDefined(self.playercontrolled)) {
+        if(isDefined(level.cobraweapon) && level.cobraweapon.size > 0) {
+          self setvehweapon(level.gunnerweapon);
         }
       }
 
-      thread _id_286B(self, "tag_turret", var_0, var_1, (1, 1, 0), 0.05);
+      thread shootenemytarget_bullets_debugline(self, "tag_turret", var_0, var_1, (1, 1, 0), 0.05);
       self fireweapon("tag_flash");
 
-      if(isDefined(self._id_2857)) {
-        self setvehweapon(level._id_2868[self._id_2858.currentweapon].v["weapon"]);
+      if(isDefined(self.playercontrolled)) {
+        self setvehweapon(level.cobraweapon[self.pilot.currentweapon].v["weapon"]);
       }
       wait 0.05;
     }
@@ -313,7 +313,7 @@ _id_2867(var_0) {
   }
 }
 
-_id_286B(var_0, var_1, var_2, var_3, var_4, var_5) {
+shootenemytarget_bullets_debugline(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(getDvar("cobrapilot_debug") != "1") {
     return;
   }
@@ -339,8 +339,8 @@ _id_286B(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 }
 
-_id_286C(var_0, var_1, var_2, var_3) {
-  self._id_286D = 1;
+attachmissiles(var_0, var_1, var_2, var_3) {
+  self.hasattachedweapons = 1;
   var_4 = [];
   var_4[0] = var_0;
 
@@ -354,8 +354,8 @@ _id_286C(var_0, var_1, var_2, var_3) {
     var_4[3] = var_3;
   }
   for(var_5 = 0; var_5 < var_4.size; var_5++) {
-    for(var_6 = 0; var_6 < level._id_286E[var_4[var_5]].size; var_6++) {
-      self attach(level.cobra_missile_models[var_4[var_5]], level._id_286E[var_4[var_5]][var_6]);
+    for(var_6 = 0; var_6 < level.cobra_weapon_tags[var_4[var_5]].size; var_6++) {
+      self attach(level.cobra_missile_models[var_4[var_5]], level.cobra_weapon_tags[var_4[var_5]][var_6]);
     }
   }
 }
@@ -487,8 +487,8 @@ fire_missile(var_0, var_1, var_2, var_3, var_4) {
 
   var_6 = weaponfiretime(var_5);
 
-  if(isDefined(self._id_2871)) {
-    var_9 = self._id_2871;
+  if(isDefined(self.nextmissiletag)) {
+    var_9 = self.nextmissiletag;
   } else {
     var_9 = -1;
   }
@@ -503,7 +503,7 @@ fire_missile(var_0, var_1, var_2, var_3, var_4) {
         if(isDefined(level._effect["ffar_mi28_muzzleflash"])) {
           playFXOnTag(common_scripts\utility::getfx("ffar_mi28_muzzleflash"), self, var_8[var_9]);
         }
-        thread _id_2872(0.1, 0.5, 0.2, var_2.origin, 1600);
+        thread delayed_earthquake(0.1, 0.5, 0.2, var_2.origin, 1600);
       }
     } else {
       self setvehweapon(var_5);
@@ -516,7 +516,7 @@ fire_missile(var_0, var_1, var_2, var_3, var_4) {
           case "ffar_airlift":
           case "ffar_bog_a_lite":
           case "ffar":
-            var_11 thread _id_2873(0.1);
+            var_11 thread missilelosetarget(0.1);
             break;
           case "apache_zippy_wall":
           case "mi28_zippy_cheap":
@@ -524,9 +524,9 @@ fire_missile(var_0, var_1, var_2, var_3, var_4) {
           case "apache_zippy_nd":
           case "apache_zippy":
             if(!isDefined(var_4)) {
-              var_11 thread _id_2873(0.6);
+              var_11 thread missilelosetarget(0.6);
             } else {
-              var_11 thread _id_2873(var_4);
+              var_11 thread missilelosetarget(var_4);
             }
             break;
           default:
@@ -538,7 +538,7 @@ fire_missile(var_0, var_1, var_2, var_3, var_4) {
       self notify("missile_fired", var_11);
     }
 
-    self._id_2871 = var_9;
+    self.nextmissiletag = var_9;
 
     if(var_10 < var_1 - 1) {
       wait(var_6);
@@ -551,12 +551,12 @@ fire_missile(var_0, var_1, var_2, var_3, var_4) {
   self setvehweapon(var_7);
 }
 
-_id_2872(var_0, var_1, var_2, var_3, var_4) {
+delayed_earthquake(var_0, var_1, var_2, var_3, var_4) {
   wait(var_0);
   earthquake(var_1, var_2, var_3, var_4);
 }
 
-_id_2873(var_0) {
+missilelosetarget(var_0) {
   self endon("death");
   wait(var_0);
 

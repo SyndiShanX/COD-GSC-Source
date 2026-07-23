@@ -506,18 +506,18 @@ stance_carry_icon_disable() {
   setsaveddvar("hud_showStance", "1");
 }
 
-_id_09A2() {
+create_mantle() {
   if(level.console) {
     var_0 = createfontstring("default", 1.8);
     var_0 setpoint("CENTER", undefined, -23, 115);
-    var_0 settext(level._id_09A3["mantle"]);
+    var_0 settext(level.strings["mantle"]);
     var_1 = createicon("hint_mantle", 40, 40);
     var_1 setpoint("CENTER", undefined, 73, 0);
     var_1 setparent(var_0);
   } else {
     var_0 = createfontstring("default", 1.6);
     var_0 setpoint("CENTER", undefined, 0, 115);
-    var_0 settext(level._id_09A3["mantle"]);
+    var_0 settext(level.strings["mantle"]);
     var_1 = createicon("hint_mantle", 40, 40);
     var_1 setpoint("CENTER", undefined, 0, 30);
     var_1 setparent(var_0);
@@ -525,12 +525,12 @@ _id_09A2() {
 
   var_1.alpha = 0;
   var_0.alpha = 0;
-  level._id_09A4 = [];
-  level._id_09A4["text"] = var_0;
-  level._id_09A4["icon"] = var_1;
+  level.hud_mantle = [];
+  level.hud_mantle["text"] = var_0;
+  level.hud_mantle["icon"] = var_1;
 }
 
-_id_09A5(var_0, var_1, var_2, var_3) {
+get_countdown_hud(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_3)) {
     var_3 = 0;
   }
@@ -573,7 +573,7 @@ _id_09A5(var_0, var_1, var_2, var_3) {
   return var_6;
 }
 
-_id_09A6(var_0, var_1, var_2, var_3) {
+get_download_state_hud(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_3)) {
     var_3 = 0;
   }
@@ -616,7 +616,7 @@ _id_09A6(var_0, var_1, var_2, var_3) {
   return var_6;
 }
 
-_id_09A7(var_0, var_1, var_2) {
+create_client_overlay(var_0, var_1, var_2) {
   if(isDefined(var_2)) {
     var_3 = newclienthudelem(var_2);
   } else {
@@ -635,8 +635,8 @@ _id_09A7(var_0, var_1, var_2) {
   return var_3;
 }
 
-_id_09A8(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = maps\_utility::_id_09A9();
+create_client_overlay_custom_size(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = maps\_utility::get_player_from_self();
   var_6 = newclienthudelem(var_5);
 
   if(!isDefined(var_4)) {
@@ -661,8 +661,8 @@ _id_09A8(var_0, var_1, var_2, var_3, var_4) {
   return var_6;
 }
 
-_id_09AA(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = maps\_utility::_id_09A9();
+create_client_overlay_fullscreen(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = maps\_utility::get_player_from_self();
   var_6 = newclienthudelem(var_5);
 
   if(!isDefined(var_4)) {

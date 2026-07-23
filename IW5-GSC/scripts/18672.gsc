@@ -6,27 +6,27 @@
 #using_animtree("vehicles");
 
 main(var_0, var_1, var_2) {
-  maps\_vehicle::_id_2AC2("80s_hatch1", var_0, var_1, var_2);
-  maps\_vehicle::_id_2AD2(::_id_2B1D);
-  maps\_vehicle::_id_2AD0("vehicle_80s_hatch1_brn_destructible_mp", "vehicle_80s_hatch1_brn");
-  maps\_vehicle::_id_2AD0("vehicle_80s_hatch1_green_destructible_mp", "vehicle_80s_hatch1_green");
-  maps\_vehicle::_id_2AD0("vehicle_80s_hatch1_red_destructible_mp", "vehicle_80s_hatch1_red");
-  maps\_vehicle::_id_2AD0("vehicle_80s_hatch1_silv_destructible_mp", "vehicle_80s_hatch1_silv");
-  maps\_vehicle::_id_2AD0("vehicle_80s_hatch1_tan_destructible_mp", "vehicle_80s_hatch1_tan");
-  maps\_vehicle::_id_2AD0("vehicle_80s_hatch1_yel_destructible_mp", "vehicle_80s_hatch1_yel");
-  maps\_vehicle::_id_2AC1(%technical_driving_idle_forward, %technical_driving_idle_backward, 10);
-  maps\_vehicle::_id_2ACE(999, 500, 1500);
-  maps\_vehicle::_id_2AC6("allies");
-  maps\_vehicle::_id_2ACA(::_id_3A9D, ::_id_3A9C);
+  maps\_vehicle::build_template("80s_hatch1", var_0, var_1, var_2);
+  maps\_vehicle::build_localinit(::init_local);
+  maps\_vehicle::build_destructible("vehicle_80s_hatch1_brn_destructible_mp", "vehicle_80s_hatch1_brn");
+  maps\_vehicle::build_destructible("vehicle_80s_hatch1_green_destructible_mp", "vehicle_80s_hatch1_green");
+  maps\_vehicle::build_destructible("vehicle_80s_hatch1_red_destructible_mp", "vehicle_80s_hatch1_red");
+  maps\_vehicle::build_destructible("vehicle_80s_hatch1_silv_destructible_mp", "vehicle_80s_hatch1_silv");
+  maps\_vehicle::build_destructible("vehicle_80s_hatch1_tan_destructible_mp", "vehicle_80s_hatch1_tan");
+  maps\_vehicle::build_destructible("vehicle_80s_hatch1_yel_destructible_mp", "vehicle_80s_hatch1_yel");
+  maps\_vehicle::build_drive(%technical_driving_idle_forward, %technical_driving_idle_backward, 10);
+  maps\_vehicle::build_life(999, 500, 1500);
+  maps\_vehicle::build_team("allies");
+  maps\_vehicle::build_aianims(::setanims, ::set_vehicle_anims);
 }
 
-_id_2B1D() {}
+init_local() {}
 
-_id_3A9C(var_0) {
+set_vehicle_anims(var_0) {
   return var_0;
 }
 
-_id_3A9D() {
+setanims() {
   var_0 = [];
   return var_0;
   return var_0;

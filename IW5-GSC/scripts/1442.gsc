@@ -18,7 +18,7 @@ move_player_to_start(var_0) {
   }
 }
 
-_id_166B(var_0) {
+tank_fire_at_enemies(var_0) {
   self endon("death");
   self endon("stop_random_tank_fire");
   var_1 = undefined;
@@ -28,11 +28,11 @@ _id_166B(var_0) {
       self setturrettargetEnt(var_1, (randomintrange(-64, 64), randomintrange(-64, 64), randomintrange(-16, 100)));
 
       if(sighttracepassed(self.origin + (0, 0, 100), var_1.origin + (0, 0, 40), 0, self)) {
-        self._id_166C++;
+        self.tank_think_fire_count++;
         self fireweapon();
 
-        if(self._id_166C >= 3) {
-          if((!isDefined(var_1.damageshield) || var_1.damageshield == 0) && (!isDefined(var_1._id_0D04) || var_1._id_0D04 == 0)) {
+        if(self.tank_think_fire_count >= 3) {
+          if((!isDefined(var_1.damageshield) || var_1.damageshield == 0) && (!isDefined(var_1.magic_bullet_shield) || var_1.magic_bullet_shield == 0)) {
             var_1 notify("death");
           }
         }
@@ -47,8 +47,8 @@ _id_166B(var_0) {
         break;
       }
 
-      var_1 = _id_166D(var_0);
-      self._id_166C = 0;
+      var_1 = get_tank_target_by_script_noteworthy(var_0);
+      self.tank_think_fire_count = 0;
       wait 1;
     }
 
@@ -56,7 +56,7 @@ _id_166B(var_0) {
   }
 }
 
-_id_166D(var_0) {
+get_tank_target_by_script_noteworthy(var_0) {
   var_1 = getEntArray(var_0, "script_noteworthy");
 
   if(isDefined(var_1)) {
@@ -74,7 +74,7 @@ _id_166D(var_0) {
   return undefined;
 }
 
-_id_166E(var_0, var_1, var_2, var_3) {
+spawn_friendlies(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_2)) {
     var_2 = 1;
   }
@@ -93,14 +93,14 @@ _id_166E(var_0, var_1, var_2, var_3) {
   var_12 = 0;
 
   foreach(var_14 in var_5) {
-    var_15 = var_14 maps\_utility::_id_166F(1);
+    var_15 = var_14 maps\_utility::spawn_ai(1);
 
     if(var_2) {
-      var_15 thread maps\_utility::_id_139E();
+      var_15 thread maps\_utility::replace_on_death();
     }
     var_15 forceteleport(var_11.origin, var_11.angles);
     var_15 setgoalpos(var_15.origin);
-    var_7 = maps\_utility::_id_0BC3(var_7, var_15);
+    var_7 = maps\_utility::array_add(var_7, var_15);
     var_12++;
 
     if(isDefined(var_3) && var_12 >= var_3) {
@@ -111,7 +111,7 @@ _id_166E(var_0, var_1, var_2, var_3) {
   return var_7;
 }
 
-_id_1670() {
+setupplayerforanimations() {
   if(level.player isthrowinggrenade()) {
     wait 1.2;
   }
@@ -127,7 +127,7 @@ _id_1670() {
   }
 }
 
-_id_1671() {
+setupplayerforgameplay() {
   level.player allowsprint(1);
   level.player allowprone(1);
   level.player allowcrouch(1);
@@ -135,14 +135,14 @@ _id_1671() {
   level.player allowmelee(1);
 }
 
-_id_1672(var_0) {
+forceplayerweapon_start(var_0) {
   if(!isDefined(var_0)) {
     var_0 = 1;
   }
-  level._id_1673 = level.player getcurrentweapon();
-  level.player giveweapon(level._id_1674);
-  level.player givemaxammo(level._id_1674);
-  level.player switchtoweaponimmediate(level._id_1674);
+  level.old_force_weapon = level.player getcurrentweapon();
+  level.player giveweapon(level.force_weapon);
+  level.player givemaxammo(level.force_weapon);
+  level.player switchtoweaponimmediate(level.force_weapon);
 
   if(var_0) {
     level.player enableweapons();
@@ -150,51 +150,51 @@ _id_1672(var_0) {
   level.player disableweaponswitch();
 }
 
-_id_1675(var_0) {
+forceplayerweapon_end(var_0) {
   if(!isDefined(var_0)) {
     var_0 = 1;
   }
-  level.player takeweapon(level._id_1674);
+  level.player takeweapon(level.force_weapon);
 
-  if(isDefined(level._id_1673)) {
-    level.player switchtoweapon(level._id_1673);
+  if(isDefined(level.old_force_weapon)) {
+    level.player switchtoweapon(level.old_force_weapon);
   }
   if(var_0) {
     level.player enableweapons();
     level.player enableweaponswitch();
   }
 
-  level._id_1673 = undefined;
+  level.old_force_weapon = undefined;
 }
 
-_id_1676() {
+monitorscopechange() {
   foreach(var_1 in level.players) {
-    if(!isDefined(var_1._id_1678)) {
-      var_1._id_1678 = var_1 maps\_hud_util::createserverclientfontstring("default", 1.75);
-      var_1._id_1678.horzalign = "center";
-      var_1._id_1678.vertalign = "top";
-      var_1._id_1678.alignx = "center";
-      var_1._id_1678.aligny = "top";
-      var_1._id_1678.x = 0;
-      var_1._id_1678.y = 20;
-      var_1._id_1678 settext(&"VARIABLE_SCOPE_SNIPER_ZOOM");
-      var_1._id_1678.alpha = 0;
-      var_1._id_1678.sort = 0.5;
-      var_1._id_1678.foreground = 1;
+    if(!isDefined(var_1.sniper_zoom_hint_hud)) {
+      var_1.sniper_zoom_hint_hud = var_1 maps\_hud_util::createserverclientfontstring("default", 1.75);
+      var_1.sniper_zoom_hint_hud.horzalign = "center";
+      var_1.sniper_zoom_hint_hud.vertalign = "top";
+      var_1.sniper_zoom_hint_hud.alignx = "center";
+      var_1.sniper_zoom_hint_hud.aligny = "top";
+      var_1.sniper_zoom_hint_hud.x = 0;
+      var_1.sniper_zoom_hint_hud.y = 20;
+      var_1.sniper_zoom_hint_hud settext(&"VARIABLE_SCOPE_SNIPER_ZOOM");
+      var_1.sniper_zoom_hint_hud.alpha = 0;
+      var_1.sniper_zoom_hint_hud.sort = 0.5;
+      var_1.sniper_zoom_hint_hud.foreground = 1;
     }
 
-    var_1._id_1679 = 1;
+    var_1.fov_snipe = 1;
   }
 
   var_3 = 0;
-  level.players[0]._id_167A = "cg_playerFovScale0";
+  level.players[0].sniper_dvar = "cg_playerFovScale0";
 
   if(level.players.size == 2) {
-    level.players[1]._id_167A = "cg_playerFovScale1";
+    level.players[1].sniper_dvar = "cg_playerFovScale1";
   }
   foreach(var_1 in level.players) {
-    var_1 thread _id_1680();
-    var_1 thread _id_1681();
+    var_1 thread monitormagcycle();
+    var_1 thread disablevariablescopehudondeath();
   }
 
   if(!isDefined(level.variable_scope_weapons)) {
@@ -223,17 +223,17 @@ _id_1676() {
     }
 
     if(var_8 && !var_6 isreloading() && !var_6 isswitchingweapon()) {
-      if(var_6 maps\_utility::_id_167C() && var_6 adsButtonPressed()) {
-        var_6 _id_167E(var_3);
+      if(var_6 maps\_utility::isads() && var_6 adsButtonPressed()) {
+        var_6 turnonvariablescopehud(var_3);
         var_3 = 1;
 
-        if(isDefined(level._id_167D)) {
+        if(isDefined(level.variable_scope_shadow_center)) {
           var_14 = undefined;
           var_15 = undefined;
           var_16 = anglesToForward(var_6 getplayerangles());
           var_17 = var_6.origin;
 
-          foreach(var_19 in level._id_167D) {
+          foreach(var_19 in level.variable_scope_shadow_center) {
             var_20 = anglesToForward(vectortoangles(var_19 - var_17));
             var_21 = vectordot(var_16, var_20);
 
@@ -251,7 +251,7 @@ _id_1676() {
         var_3 = 0;
 
         if(isDefined(var_6)) {
-          var_6 _id_167F();
+          var_6 turnoffvariablescopehud();
         }
         setsaveddvar("sm_sunShadowCenter", "0 0 0");
       }
@@ -259,7 +259,7 @@ _id_1676() {
       var_3 = 0;
 
       if(isDefined(var_7)) {
-        var_7 _id_167F();
+        var_7 turnoffvariablescopehud();
       }
       setsaveddvar("sm_sunShadowCenter", "0 0 0");
     }
@@ -268,47 +268,47 @@ _id_1676() {
   }
 }
 
-_id_167E(var_0) {
+turnonvariablescopehud(var_0) {
   self disableoffhandweapons();
-  setsaveddvar(self._id_167A, self._id_1679);
-  self._id_1678.alpha = 1;
+  setsaveddvar(self.sniper_dvar, self.fov_snipe);
+  self.sniper_zoom_hint_hud.alpha = 1;
 
   if(!var_0) {
     level notify("variable_sniper_hud_enter");
   }
 }
 
-_id_167F() {
+turnoffvariablescopehud() {
   level notify("variable_sniper_hud_exit");
   self enableoffhandweapons();
-  setsaveddvar(self._id_167A, 1);
-  self._id_1678.alpha = 0;
+  setsaveddvar(self.sniper_dvar, 1);
+  self.sniper_zoom_hint_hud.alpha = 0;
 }
 
-_id_1680() {
+monitormagcycle() {
   notifyoncommand("mag_cycle", "+melee_zoom");
   notifyoncommand("mag_cycle", "+sprint_zoom");
 
   for(;;) {
     self waittill("mag_cycle");
 
-    if(self._id_1678.alpha) {
-      if(self._id_1679 == 0.5) {
-        self._id_1679 = 1;
+    if(self.sniper_zoom_hint_hud.alpha) {
+      if(self.fov_snipe == 0.5) {
+        self.fov_snipe = 1;
         continue;
       }
 
-      self._id_1679 = 0.5;
+      self.fov_snipe = 0.5;
     }
   }
 }
 
-_id_1681() {
+disablevariablescopehudondeath() {
   self waittill("death");
-  _id_167F();
+  turnoffvariablescopehud();
 }
 
-_id_1682(var_0) {
+convert_fov_string(var_0) {
   if(var_0 == 0.5) {
     return 10;
   }
@@ -318,16 +318,16 @@ _id_1682(var_0) {
   return 5;
 }
 
-_id_1683(var_0) {
+worldtolocalcoords(var_0) {
   var_1 = var_0 - self.origin;
   return (vectordot(var_1, anglesToForward(self.angles)), -1.0 * vectordot(var_1, anglestoright(self.angles)), vectordot(var_1, anglestoup(self.angles)));
 }
 
-_id_1684(var_0, var_1) {
+vectorcross(var_0, var_1) {
   return (var_0[1] * var_1[2] - var_0[2] * var_1[1], var_0[2] * var_1[0] - var_0[0] * var_1[2], var_0[0] * var_1[1] - var_0[1] * var_1[0]);
 }
 
-_id_1685(var_0, var_1, var_2, var_3, var_4, var_5) {
+createdebugtexthud(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = 2.0;
 
   if(isDefined(var_5)) {
@@ -349,27 +349,27 @@ _id_1685(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(var_4)) {
     var_7.label = var_4;
   }
-  level._id_1686[var_0] = var_7;
+  level.debug_text_hud[var_0] = var_7;
 }
 
-_id_1687(var_0, var_1) {
-  level._id_1686[var_0] setvalue(var_1);
+printdebugtexthud(var_0, var_1) {
+  level.debug_text_hud[var_0] setvalue(var_1);
 }
 
-_id_1688(var_0, var_1) {
-  level._id_1686[var_0] settext(var_1);
+printdebugtextstringhud(var_0, var_1) {
+  level.debug_text_hud[var_0] settext(var_1);
 }
 
-_id_1689(var_0, var_1) {
-  level._id_1686[var_0].color = var_1;
+changedebugtexthudcolor(var_0, var_1) {
+  level.debug_text_hud[var_0].color = var_1;
 }
 
-_id_168A(var_0) {
-  level._id_1686[var_0] destroy();
-  level._id_1686[var_0] = undefined;
+deletedebugtexthud(var_0) {
+  level.debug_text_hud[var_0] destroy();
+  level.debug_text_hud[var_0] = undefined;
 }
 
-_id_168B(var_0, var_1, var_2, var_3, var_4) {
+dialogue_reminder(var_0, var_1, var_2, var_3, var_4) {
   level endon("stop_reminders");
   level endon("missionfailed");
   var_5 = undefined;
@@ -392,21 +392,21 @@ _id_168B(var_0, var_1, var_2, var_3, var_4) {
 
       if(!common_scripts\utility::flag(var_1)) {
         if(isstring(var_0) && var_0 == "radio") {
-          _id_168D();
-          maps\_utility::_id_11F4(var_7);
-          _id_168E();
+          conversation_start();
+          maps\_utility::radio_dialogue(var_7);
+          conversation_stop();
           continue;
         }
 
-        _id_168D();
-        var_0 maps\_utility::_id_168C(var_7);
-        _id_168E();
+        conversation_start();
+        var_0 maps\_utility::dialogue_queue(var_7);
+        conversation_stop();
       }
     }
   }
 }
 
-_id_168D() {
+conversation_start() {
   if(!common_scripts\utility::flag_exist("flag_conversation_in_progress")) {
     common_scripts\utility::flag_init("flag_conversation_in_progress");
   }
@@ -414,11 +414,11 @@ _id_168D() {
   common_scripts\utility::flag_set("flag_conversation_in_progress");
 }
 
-_id_168E() {
+conversation_stop() {
   common_scripts\utility::flag_clear("flag_conversation_in_progress");
 }
 
-_id_168F(var_0, var_1) {
+array_find(var_0, var_1) {
   foreach(var_4, var_3 in var_0) {
     if(var_3 == var_1) {
       return var_4;
@@ -428,17 +428,17 @@ _id_168F(var_0, var_1) {
   return undefined;
 }
 
-_id_1690(var_0, var_1) {
+array_combine_unique(var_0, var_1) {
   var_2 = [];
 
   foreach(var_4 in var_0) {
-    if(!isDefined(_id_168F(var_2, var_4))) {
+    if(!isDefined(array_find(var_2, var_4))) {
       var_2[var_2.size] = var_4;
     }
   }
 
   foreach(var_4 in var_1) {
-    if(!isDefined(_id_168F(var_2, var_4))) {
+    if(!isDefined(array_find(var_2, var_4))) {
       var_2[var_2.size] = var_4;
     }
   }
@@ -446,46 +446,46 @@ _id_1690(var_0, var_1) {
   return var_2;
 }
 
-_id_1691(var_0) {
+so_vfx_entity_fixup(var_0) {
   var_1 = getEntArray();
 
   foreach(var_3 in var_1) {
-    if(isDefined(var_3._id_1692) && common_scripts\utility::string_starts_with(var_3._id_1692, var_0)) {
-      var_3._id_1693 = 1;
+    if(isDefined(var_3.script_flag) && common_scripts\utility::string_starts_with(var_3.script_flag, var_0)) {
+      var_3.script_specialops = 1;
     }
   }
 }
 
-_id_1694(var_0) {
+so_mark_class(var_0) {
   var_1 = getEntArray();
 
   foreach(var_3 in var_1) {
     if(isDefined(var_3.classname) && var_3.classname == var_0) {
-      var_3._id_1693 = 1;
+      var_3.script_specialops = 1;
     }
   }
 }
 
-_id_1695(var_0) {
+laser_targeting_device(var_0) {
   var_0 endon("remove_laser_targeting_device");
-  var_0._id_1696 = undefined;
-  var_0._id_1697 = 0;
+  var_0.lastusedweapon = undefined;
+  var_0.laserforceon = 0;
   var_0 setweaponhudiconoverride("actionslot4", "dpad_laser_designator");
-  var_0 thread _id_169C();
+  var_0 thread cleanuplasertargetingdevice();
   var_0 notifyonplayercommand("use_laser", "+actionslot 4");
   var_0 notifyonplayercommand("fired_laser", "+attack");
   var_0 notifyonplayercommand("fired_laser", "+attack_akimbo_accessible");
-  var_0._id_1698 = 1;
-  var_0._id_1699 = 20;
-  var_0 childthread _id_169D();
+  var_0.laserallowed = 1;
+  var_0.lasercooldownafterhit = 20;
+  var_0 childthread monitorlaseroff();
 
   for(;;) {
     var_0 waittill("use_laser");
 
-    if(var_0._id_1697 || !var_0._id_1698 || var_0 _id_169A()) {
+    if(var_0.laserforceon || !var_0.laserallowed || var_0 shouldforcedisablelaser()) {
       var_0 notify("cancel_laser");
       var_0 laserforceoff();
-      var_0._id_1697 = 0;
+      var_0.laserforceon = 0;
       var_0 allowads(1);
       wait 0.2;
       var_0 allowfire(1);
@@ -494,13 +494,13 @@ _id_1695(var_0) {
 
     var_0 laserforceon();
     var_0 allowfire(0);
-    var_0._id_1697 = 1;
+    var_0.laserforceon = 1;
     var_0 allowads(0);
-    var_0 thread _id_169E();
+    var_0 thread laser_designate_target();
   }
 }
 
-_id_169A() {
+shouldforcedisablelaser() {
   var_0 = self getcurrentweapon();
 
   if(var_0 == "rpg") {
@@ -509,8 +509,8 @@ _id_169A() {
   if(common_scripts\utility::string_starts_with(var_0, "gl")) {
     return 1;
   }
-  if(isDefined(level._id_169B) && isarray(level._id_169B)) {
-    foreach(var_2 in level._id_169B) {
+  if(isDefined(level.laser_designator_disable_list) && isarray(level.laser_designator_disable_list)) {
+    foreach(var_2 in level.laser_designator_disable_list) {
       if(var_0 == var_2) {
         return 1;
       }
@@ -526,19 +526,19 @@ _id_169A() {
   return 0;
 }
 
-_id_169C() {
+cleanuplasertargetingdevice() {
   self waittill("remove_laser_targeting_device");
   self setweaponhudiconoverride("actionslot4", "none");
   self notify("cancel_laser");
   self laserforceoff();
-  self._id_1697 = undefined;
+  self.laserforceon = undefined;
   self allowfire(1);
   self allowads(1);
 }
 
-_id_169D() {
+monitorlaseroff() {
   for(;;) {
-    if(_id_169A() && isDefined(self._id_1697) && self._id_1697) {
+    if(shouldforcedisablelaser() && isDefined(self.laserforceon) && self.laserforceon) {
       self notify("use_laser");
       wait 2.0;
     }
@@ -547,25 +547,25 @@ _id_169D() {
   }
 }
 
-_id_169E() {
+laser_designate_target() {
   self endon("cancel_laser");
 
   for(;;) {
     self waittill("fired_laser");
-    var_0 = _id_16A2();
+    var_0 = get_laser_designated_trace();
     var_1 = var_0["position"];
     var_2 = var_0["entity"];
     level notify("laser_coordinates_received");
     var_3 = undefined;
 
-    if(isDefined(level._id_169F) && isDefined(var_2) && maps\_utility::_id_0AD1(level._id_169F, var_2)) {
+    if(isDefined(level.laser_targets) && isDefined(var_2) && maps\_utility::array_contains(level.laser_targets, var_2)) {
       var_3 = var_2;
-      level._id_169F = common_scripts\utility::array_remove(level._id_169F, var_2);
+      level.laser_targets = common_scripts\utility::array_remove(level.laser_targets, var_2);
     } else {
-      var_3 = _id_16A0(var_1);
+      var_3 = gettargettriggerhit(var_1);
     }
     if(isDefined(var_3)) {
-      thread _id_16A3(var_3);
+      thread laser_artillery(var_3);
       level notify("laser_target_painted");
       wait 0.5;
       self notify("use_laser");
@@ -573,11 +573,11 @@ _id_169E() {
   }
 }
 
-_id_16A0(var_0) {
-  if(!isDefined(level._id_16A1) || level._id_16A1.size == 0) {
+gettargettriggerhit(var_0) {
+  if(!isDefined(level.laser_triggers) || level.laser_triggers.size == 0) {
     return undefined;
   }
-  foreach(var_2 in level._id_16A1) {
+  foreach(var_2 in level.laser_triggers) {
     var_3 = distance2d(var_0, var_2.origin);
     var_4 = var_0[2] - var_2.origin[2];
 
@@ -588,7 +588,7 @@ _id_16A0(var_0) {
       continue;
     }
     if(var_3 <= var_2.radius && var_4 <= var_2.height && var_4 >= 0) {
-      level._id_16A1 = common_scripts\utility::array_remove(level._id_16A1, var_2);
+      level.laser_triggers = common_scripts\utility::array_remove(level.laser_triggers, var_2);
       return getEnt(var_2.target, "script_noteworthy");
     }
   }
@@ -596,7 +596,7 @@ _id_16A0(var_0) {
   return undefined;
 }
 
-_id_16A2() {
+get_laser_designated_trace() {
   var_0 = self getEye();
   var_1 = self getplayerangles();
   var_2 = anglesToForward(var_1);
@@ -610,43 +610,43 @@ _id_16A2() {
   return var_4;
 }
 
-_id_16A3(var_0) {
+laser_artillery(var_0) {
   level.player endon("remove_laser_targeting_device");
-  level.player._id_1698 = 0;
+  level.player.laserallowed = 0;
   self setweaponhudiconoverride("actionslot4", "dpad_killstreak_hellfire_missile_inactive");
-  maps\_utility::_id_16A4("allies");
+  maps\_utility::flavorbursts_off("allies");
   var_1 = level.player;
   wait 2.5;
 
-  if(!isDefined(var_0._id_16A5)) {
-    var_0._id_16A5 = 99;
+  if(!isDefined(var_0.script_index)) {
+    var_0.script_index = 99;
   }
   wait 1;
 
-  if(isDefined(var_0._id_16A6)) {
-    var_2 = _id_16A7("geo_before", var_0._id_16A6);
+  if(isDefined(var_0.script_group)) {
+    var_2 = get_geo_group("geo_before", var_0.script_group);
 
     if(var_2.size > 0) {
       common_scripts\utility::array_call(var_2, ::hide);
     }
-    var_3 = _id_16A7("geo_after", var_0._id_16A6);
+    var_3 = get_geo_group("geo_after", var_0.script_group);
 
     if(var_3.size > 0) {
       common_scripts\utility::array_call(var_3, ::show);
     }
   }
 
-  wait(level.player._id_1699);
-  level.player._id_1698 = 1;
+  wait(level.player.lasercooldownafterhit);
+  level.player.laserallowed = 1;
   self setweaponhudiconoverride("actionslot4", "dpad_laser_designator");
 }
 
-_id_16A7(var_0, var_1) {
+get_geo_group(var_0, var_1) {
   var_2 = getEntArray(var_0, "targetname");
   var_3 = [];
 
   foreach(var_5 in var_2) {
-    if(isDefined(var_5._id_16A6) && var_5._id_16A6 == var_1) {
+    if(isDefined(var_5.script_group) && var_5.script_group == var_1) {
       var_3[var_3.size] = var_5;
     }
   }
@@ -654,7 +654,7 @@ _id_16A7(var_0, var_1) {
   return var_3;
 }
 
-_id_16A8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+progress_bar(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(!isDefined(self.inuse) || self.inuse == 0) {
     self.inuse = 1;
   } else {
@@ -691,7 +691,7 @@ _id_16A8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
     if(var_8 > var_2) {
       if(isDefined(var_4)) {
-        thread _id_16AD(var_0, var_4);
+        thread progress_bar_hud_success(var_0, var_4);
       }
       if(isDefined(var_1)) {
         [[var_1]]();
@@ -715,7 +715,7 @@ _id_16A8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   if(!var_12) {
     if(isDefined(var_6)) {
-      thread _id_16AB(var_0, var_6);
+      thread progress_bar_hud_failure(var_0, var_6);
     }
     if(isDefined(var_5)) {
       [[var_5]]();
@@ -739,7 +739,7 @@ _id_16A8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   return var_12;
 }
 
-_id_16AA(var_0, var_1, var_2, var_3) {
+progress_bar_hud_internal(var_0, var_1, var_2, var_3) {
   if(isDefined(self)) {
     self playSound(var_3, "sound_played", 1);
   }
@@ -755,22 +755,22 @@ _id_16AA(var_0, var_1, var_2, var_3) {
   var_4.sort = 2;
   var_4.label = var_1;
   var_4[[var_2]]();
-  var_4 thread _id_16AF();
+  var_4 thread hud_blink();
   wait 2;
   var_4 notify("stop_blink");
   wait 0.05;
   var_4 destroy();
 }
 
-_id_16AB(var_0, var_1) {
-  _id_16AA(var_0, var_1, maps\_specialops::_id_16AC, "so_sample_not_collected");
+progress_bar_hud_failure(var_0, var_1) {
+  progress_bar_hud_internal(var_0, var_1, maps\_specialops::set_hud_red, "so_sample_not_collected");
 }
 
-_id_16AD(var_0, var_1) {
-  _id_16AA(var_0, var_1, maps\_specialops::_id_16AE, "arcademode_2x");
+progress_bar_hud_success(var_0, var_1) {
+  progress_bar_hud_internal(var_0, var_1, maps\_specialops::set_hud_green, "arcademode_2x");
 }
 
-_id_16AF(var_0) {
+hud_blink(var_0) {
   self endon("stop_blink");
   self endon("death");
   var_1 = 0.1;
@@ -786,19 +786,19 @@ _id_16AF(var_0) {
   }
 }
 
-_id_16B0() {
+vision_change_multiple_init() {
   var_0 = getEntArray("shg_vision_multiple_trigger", "targetname");
 
   foreach(var_2 in var_0) {}
-  var_2 thread _id_16B1();
+  var_2 thread vision_change_multiple_internal();
 }
 
-_id_16B1() {
+vision_change_multiple_internal() {
   var_0 = common_scripts\utility::getStructArray(self.target, "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = vectorNormalize(self.origin - var_2.origin);
-    var_2._id_16B2 = var_3;
+    var_2.forward_for_vision_change = var_3;
   }
 
   for(;;) {
@@ -810,7 +810,7 @@ _id_16B1() {
       var_8 = 0;
 
       foreach(var_2 in var_0) {
-        var_10 = vectordot(var_6, var_2._id_16B2);
+        var_10 = vectordot(var_6, var_2.forward_for_vision_change);
 
         if(!isDefined(var_7) || var_10 < var_8) {
           var_7 = var_2;
@@ -820,21 +820,21 @@ _id_16B1() {
 
       var_12 = 1;
 
-      if(isDefined(var_7._id_1662)) {
-        var_12 = var_7._id_1662;
+      if(isDefined(var_7.script_duration)) {
+        var_12 = var_7.script_duration;
       }
-      var_7 maps\_lights::_id_1663(var_12);
+      var_7 maps\_lights::set_sun_shadow_params(var_12);
       wait(var_12);
     }
   }
 }
 
-_id_16B3(var_0) {
+change_character_model(var_0) {
   self setModel(var_0);
-  _id_16B4(self.weapon);
+  update_weapon_tag_visibility(self.weapon);
 }
 
-_id_16B4(var_0, var_1) {
+update_weapon_tag_visibility(var_0, var_1) {
   if(isDefined(var_0) && var_0 != "none") {
     var_2 = getweaponhidetags(var_0);
     var_3 = 0;
@@ -849,7 +849,7 @@ _id_16B4(var_0, var_1) {
   }
 }
 
-_id_16B5(var_0, var_1, var_2) {
+create_splitscreen_safe_hud_item(var_0, var_1, var_2) {
   if(issplitscreen()) {
     if(self == level.player) {
       var_0 = var_0 + 2;
@@ -857,21 +857,21 @@ _id_16B5(var_0, var_1, var_2) {
     var_0 = var_0 / 2;
   }
 
-  return maps\_specialops::_id_16B6(var_0, var_1, var_2, self);
+  return maps\_specialops::so_create_hud_item(var_0, var_1, var_2, self);
 }
 
-_id_16B7(var_0, var_1, var_2, var_3, var_4, var_5) {
-  level._id_16B8 = "award_positive";
-  level._id_16B9 = "award_positive";
-  level._id_16BA = _id_16BE(var_0, var_1, var_2);
-  level._id_16BB = _id_16BE(var_3, var_4, var_5);
-  common_scripts\utility::array_thread(level.players, ::_id_16BF);
-  level._id_16BC = 1;
-  level._id_16BD = ::_id_16C2;
-  _id_16D5();
+so_eog_summary(var_0, var_1, var_2, var_3, var_4, var_5) {
+  level.bonus_1_shader = "award_positive";
+  level.bonus_2_shader = "award_positive";
+  level.challenge_1 = get_challenge_values(var_0, var_1, var_2);
+  level.challenge_2 = get_challenge_values(var_3, var_4, var_5);
+  common_scripts\utility::array_thread(level.players, ::require_defined_bonuses);
+  level.custom_eog_no_defaults = 1;
+  level.eog_summary_callback = ::custom_eog_summary;
+  handle_bonus_xp();
 }
 
-_id_16BE(var_0, var_1, var_2) {
+get_challenge_values(var_0, var_1, var_2) {
   var_3 = [];
 
   if(isDefined(var_0)) {
@@ -887,167 +887,167 @@ _id_16BE(var_0, var_1, var_2) {
   return var_3;
 }
 
-_id_16BF() {
-  if(!isDefined(self._id_16C0)) {
-    self._id_16C0 = 0;
+require_defined_bonuses() {
+  if(!isDefined(self.bonus_1)) {
+    self.bonus_1 = 0;
   }
-  if(!isDefined(self._id_16C1)) {
-    self._id_16C1 = 0;
+  if(!isDefined(self.bonus_2)) {
+    self.bonus_2 = 0;
   }
 }
 
-_id_16C2() {
+custom_eog_summary() {
   if(issplitscreen()) {
     setDvar("ui_hide_hint", 1);
   }
-  if(!level._id_16C9) {
+  if(!level.missionfailed) {
     setDvar("ui_hide_hint", 1);
   }
-  level._id_16C3 = _id_16CA();
-  level._id_16C4 = 0;
+  level.challenge_time_limit = get_time_limit();
+  level.session_score = 0;
 
   foreach(var_1 in level.players) {
-    var_1._id_16C5 = _id_16CD(var_1);
-    level._id_16C4 = level._id_16C4 + var_1._id_16C5["kill_score"];
-    level._id_16C4 = level._id_16C4 + var_1._id_16C5["challenge_1"];
-    level._id_16C4 = level._id_16C4 + var_1._id_16C5["challenge_2"];
+    var_1.final_summary = get_final_summary(var_1);
+    level.session_score = level.session_score + var_1.final_summary["kill_score"];
+    level.session_score = level.session_score + var_1.final_summary["challenge_1"];
+    level.session_score = level.session_score + var_1.final_summary["challenge_2"];
   }
 
-  level._id_16C4 = level._id_16C4 + level.players[0]._id_16C5["gameskill_score"];
-  level._id_16C4 = level._id_16C4 + level.players[0]._id_16C5["time_score"];
-  level._id_16C4 = int(level._id_16C4);
+  level.session_score = level.session_score + level.players[0].final_summary["gameskill_score"];
+  level.session_score = level.session_score + level.players[0].final_summary["time_score"];
+  level.session_score = int(level.session_score);
 
   foreach(var_1 in level.players) {
-    var_1 maps\_specialops::_id_17FE(level._id_16C4);
+    var_1 maps\_specialops::override_summary_score(level.session_score);
 
-    if(maps\_utility::_id_12C1()) {
-      var_4 = maps\_utility::_id_133A(var_1);
-      var_1 maps\_utility::_id_16C7("", "@SPECIAL_OPS_PERFORMANCE_YOU", "@SPECIAL_OPS_PERFORMANCE_PARTNER");
-      var_1 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_DIFFICULTY", var_1._id_16C5["difficulty"], var_4._id_16C5["difficulty"]);
-      var_1 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_KILLS", var_1._id_16C5["kills_num"], var_4._id_16C5["kills_num"]);
-      var_1 maps\_utility::_id_16C7(level._id_16BA["description"], var_1._id_16C5["ch_1_tally"], var_4._id_16C5["ch_1_tally"]);
+    if(maps\_utility::is_coop()) {
+      var_4 = maps\_utility::get_other_player(var_1);
+      var_1 maps\_utility::add_custom_eog_summary_line("", "@SPECIAL_OPS_PERFORMANCE_YOU", "@SPECIAL_OPS_PERFORMANCE_PARTNER");
+      var_1 maps\_utility::add_custom_eog_summary_line("@SPECIAL_OPS_UI_DIFFICULTY", var_1.final_summary["difficulty"], var_4.final_summary["difficulty"]);
+      var_1 maps\_utility::add_custom_eog_summary_line("@SPECIAL_OPS_UI_KILLS", var_1.final_summary["kills_num"], var_4.final_summary["kills_num"]);
+      var_1 maps\_utility::add_custom_eog_summary_line(level.challenge_1["description"], var_1.final_summary["ch_1_tally"], var_4.final_summary["ch_1_tally"]);
 
-      if(level._id_16BB["value"] > 0) {
-        var_1 maps\_utility::_id_16C7(level._id_16BB["description"], var_1._id_16C5["ch_2_tally"], var_4._id_16C5["ch_2_tally"]);
+      if(level.challenge_2["value"] > 0) {
+        var_1 maps\_utility::add_custom_eog_summary_line(level.challenge_2["description"], var_1.final_summary["ch_2_tally"], var_4.final_summary["ch_2_tally"]);
       }
-      var_1 maps\_utility::_id_16C7(var_1._id_16C5["t_message"], "", var_4._id_16C5["time_string"]);
+      var_1 maps\_utility::add_custom_eog_summary_line(var_1.final_summary["t_message"], "", var_4.final_summary["time_string"]);
 
-      if(level._id_16BB["value"] <= 0 || !issplitscreen()) {
-        var_1 maps\_utility::_id_16C8();
+      if(level.challenge_2["value"] <= 0 || !issplitscreen()) {
+        var_1 maps\_utility::add_custom_eog_summary_line_blank();
       }
-      if(!level._id_16C9) {
-        var_1 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_SCORE", "", level._id_16C4);
+      if(!level.missionfailed) {
+        var_1 maps\_utility::add_custom_eog_summary_line("@SPECIAL_OPS_UI_SCORE", "", level.session_score);
       }
       continue;
     }
 
-    if(!level._id_16C9) {
-      var_1 maps\_utility::_id_16C7("", "", "@SPECIAL_OPS_POINTS");
-      var_1 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_DIFFICULTY", var_1._id_16C5["difficulty"], var_1._id_16C5["gameskill_score"]);
-      var_1 maps\_utility::_id_16C7(var_1._id_16C5["t_message"], var_1._id_16C5["time_string"], var_1._id_16C5["time_score"]);
-      var_1 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_KILLS", var_1._id_16C5["kills_num"], var_1._id_16C5["kill_score"]);
-      var_1 maps\_utility::_id_16C7(level._id_16BA["description"], var_1._id_16C5["ch_1_tally"], var_1._id_16C5["challenge_1"]);
+    if(!level.missionfailed) {
+      var_1 maps\_utility::add_custom_eog_summary_line("", "", "@SPECIAL_OPS_POINTS");
+      var_1 maps\_utility::add_custom_eog_summary_line("@SPECIAL_OPS_UI_DIFFICULTY", var_1.final_summary["difficulty"], var_1.final_summary["gameskill_score"]);
+      var_1 maps\_utility::add_custom_eog_summary_line(var_1.final_summary["t_message"], var_1.final_summary["time_string"], var_1.final_summary["time_score"]);
+      var_1 maps\_utility::add_custom_eog_summary_line("@SPECIAL_OPS_UI_KILLS", var_1.final_summary["kills_num"], var_1.final_summary["kill_score"]);
+      var_1 maps\_utility::add_custom_eog_summary_line(level.challenge_1["description"], var_1.final_summary["ch_1_tally"], var_1.final_summary["challenge_1"]);
 
-      if(level._id_16BB["value"] > 0) {
-        var_1 maps\_utility::_id_16C7(level._id_16BB["description"], var_1._id_16C5["ch_2_tally"], var_1._id_16C5["challenge_2"]);
+      if(level.challenge_2["value"] > 0) {
+        var_1 maps\_utility::add_custom_eog_summary_line(level.challenge_2["description"], var_1.final_summary["ch_2_tally"], var_1.final_summary["challenge_2"]);
       }
-      if(level._id_16BB["value"] <= 0 || !issplitscreen()) {
-        var_1 maps\_utility::_id_16C8();
+      if(level.challenge_2["value"] <= 0 || !issplitscreen()) {
+        var_1 maps\_utility::add_custom_eog_summary_line_blank();
       }
-      var_1 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_SCORE", " ", level._id_16C4);
+      var_1 maps\_utility::add_custom_eog_summary_line("@SPECIAL_OPS_UI_SCORE", " ", level.session_score);
       continue;
     }
 
-    var_1 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_DIFFICULTY", "", var_1._id_16C5["difficulty"]);
-    var_1 maps\_utility::_id_16C7(var_1._id_16C5["t_message"], "", var_1._id_16C5["time_string"]);
-    var_1 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_KILLS", "", var_1._id_16C5["kills_num"]);
-    var_1 maps\_utility::_id_16C7(level._id_16BA["description"], "", var_1._id_16C5["ch_1_tally"]);
+    var_1 maps\_utility::add_custom_eog_summary_line("@SPECIAL_OPS_UI_DIFFICULTY", "", var_1.final_summary["difficulty"]);
+    var_1 maps\_utility::add_custom_eog_summary_line(var_1.final_summary["t_message"], "", var_1.final_summary["time_string"]);
+    var_1 maps\_utility::add_custom_eog_summary_line("@SPECIAL_OPS_UI_KILLS", "", var_1.final_summary["kills_num"]);
+    var_1 maps\_utility::add_custom_eog_summary_line(level.challenge_1["description"], "", var_1.final_summary["ch_1_tally"]);
 
-    if(level._id_16BB["value"] > 0) {
-      var_1 maps\_utility::_id_16C7(level._id_16BB["description"], "", var_1._id_16C5["ch_2_tally"]);
+    if(level.challenge_2["value"] > 0) {
+      var_1 maps\_utility::add_custom_eog_summary_line(level.challenge_2["description"], "", var_1.final_summary["ch_2_tally"]);
     }
   }
 }
 
-_id_16CA() {
-  if(!isDefined(level._id_16CB)) {
-    level._id_16CB = 420000;
+get_time_limit() {
+  if(!isDefined(level.so_mission_worst_time)) {
+    level.so_mission_worst_time = 420000;
   }
-  if(!isDefined(level._id_4412)) {
-    level._id_4412 = 0;
+  if(!isDefined(level.so_mission_min_time)) {
+    level.so_mission_min_time = 0;
   }
-  if(!isDefined(level._id_16C3)) {
-    level._id_16CC = 0;
-    level._id_16C3 = level._id_16CB;
+  if(!isDefined(level.challenge_time_limit)) {
+    level.timed_mission = 0;
+    level.challenge_time_limit = level.so_mission_worst_time;
   } else {
-    level._id_16CC = 1;
+    level.timed_mission = 1;
   }
-  level._id_4413 = level._id_16CB - level._id_4412;
-  return level._id_16C3;
+  level.so_mission_adjusted_worst_time = level.so_mission_worst_time - level.so_mission_min_time;
+  return level.challenge_time_limit;
 }
 
-_id_16CD(var_0, var_1, var_2) {
-  var_0._id_16C5 = [];
-  var_0._id_16C5["final_score"] = 0;
-  var_0._id_16C5["level_time"] = level._id_16CE - level._id_16CF;
+get_final_summary(var_0, var_1, var_2) {
+  var_0.final_summary = [];
+  var_0.final_summary["final_score"] = 0;
+  var_0.final_summary["level_time"] = level.challenge_end_time - level.challenge_start_time;
 
-  if(level._id_16C3 > var_0._id_16C5["level_time"]) {
-    var_0._id_16C5["t_message"] = _id_16D4("bonus");
-    var_0._id_16C5["remaining_time"] = int(level._id_16C3 - var_0._id_16C5["level_time"]);
+  if(level.challenge_time_limit > var_0.final_summary["level_time"]) {
+    var_0.final_summary["t_message"] = get_time_message("bonus");
+    var_0.final_summary["remaining_time"] = int(level.challenge_time_limit - var_0.final_summary["level_time"]);
 
-    if(!level._id_16C9) {}
+    if(!level.missionfailed) {}
 
-    if(!level._id_16CC) {
-      if(level._id_4412 <= var_0._id_16C5["level_time"]) {
-        var_0._id_16C5["time_percent"] = max((level._id_4413 - (var_0._id_16C5["level_time"] - level._id_4412)) / level._id_4413, 0.0);
+    if(!level.timed_mission) {
+      if(level.so_mission_min_time <= var_0.final_summary["level_time"]) {
+        var_0.final_summary["time_percent"] = max((level.so_mission_adjusted_worst_time - (var_0.final_summary["level_time"] - level.so_mission_min_time)) / level.so_mission_adjusted_worst_time, 0.0);
       } else {
-        var_0._id_16C5["time_percent"] = 1;
+        var_0.final_summary["time_percent"] = 1;
       }
-    } else if(level._id_4412 >= var_0._id_16C5["remaining_time"]) {
-      var_0._id_16C5["time_percent"] = max(var_0._id_16C5["remaining_time"] / level._id_4413, 0.0);
+    } else if(level.so_mission_min_time >= var_0.final_summary["remaining_time"]) {
+      var_0.final_summary["time_percent"] = max(var_0.final_summary["remaining_time"] / level.so_mission_adjusted_worst_time, 0.0);
     } else {
-      var_0._id_16C5["time_percent"] = 1;
+      var_0.final_summary["time_percent"] = 1;
     }
-    var_0._id_16C5["time_score"] = int(var_0._id_16C5["time_percent"] * 5000);
+    var_0.final_summary["time_score"] = int(var_0.final_summary["time_percent"] * 5000);
 
-    if(level._id_16CC) {
-      var_0._id_16C5["time_string"] = maps\_utility::_id_16D0(var_0._id_16C5["remaining_time"] * 0.001, 1);
+    if(level.timed_mission) {
+      var_0.final_summary["time_string"] = maps\_utility::convert_to_time_string(var_0.final_summary["remaining_time"] * 0.001, 1);
     } else {
-      var_0._id_16C5["time_string"] = maps\_utility::_id_16D0(var_0._id_16C5["level_time"] * 0.001, 1);
+      var_0.final_summary["time_string"] = maps\_utility::convert_to_time_string(var_0.final_summary["level_time"] * 0.001, 1);
     }
-    var_0._id_16C5["final_score"] = var_0._id_16C5["final_score"] + var_0._id_16C5["time_score"];
+    var_0.final_summary["final_score"] = var_0.final_summary["final_score"] + var_0.final_summary["time_score"];
   } else {
-    var_0._id_16C5["t_message"] = _id_16D4("no_bonus");
-    var_0._id_16C5["time_string"] = maps\_utility::_id_16D0(var_0._id_16C5["level_time"] * 0.001, 1);
-    var_0._id_16C5["time_score"] = 0;
+    var_0.final_summary["t_message"] = get_time_message("no_bonus");
+    var_0.final_summary["time_string"] = maps\_utility::convert_to_time_string(var_0.final_summary["level_time"] * 0.001, 1);
+    var_0.final_summary["time_score"] = 0;
   }
 
-  var_0._id_16C5["gameskill_low"] = level._id_16D1;
-  var_0._id_16C5["gameskill_score"] = max(10000 * var_0._id_16C5["gameskill_low"], 0);
-  var_0._id_16C5["final_score"] = var_0._id_16C5["final_score"] + var_0._id_16C5["gameskill_score"];
+  var_0.final_summary["gameskill_low"] = level.specops_reward_gameskill;
+  var_0.final_summary["gameskill_score"] = max(10000 * var_0.final_summary["gameskill_low"], 0);
+  var_0.final_summary["final_score"] = var_0.final_summary["final_score"] + var_0.final_summary["gameskill_score"];
 
-  if(isDefined(level._id_16BA["max_successes"])) {
-    var_0._id_16C5["challenge_1"] = min(level._id_16BA["value"] * var_0._id_16C0, level._id_16BA["value"] * level._id_16BA["max_successes"]);
+  if(isDefined(level.challenge_1["max_successes"])) {
+    var_0.final_summary["challenge_1"] = min(level.challenge_1["value"] * var_0.bonus_1, level.challenge_1["value"] * level.challenge_1["max_successes"]);
   } else {
-    var_0._id_16C5["challenge_1"] = level._id_16BA["value"] * var_0._id_16C0;
+    var_0.final_summary["challenge_1"] = level.challenge_1["value"] * var_0.bonus_1;
   }
-  if(isDefined(level._id_16BB["max_successes"])) {
-    var_0._id_16C5["challenge_2"] = min(level._id_16BB["value"] * var_0._id_16C1, level._id_16BB["value"] * level._id_16BB["max_successes"]);
+  if(isDefined(level.challenge_2["max_successes"])) {
+    var_0.final_summary["challenge_2"] = min(level.challenge_2["value"] * var_0.bonus_2, level.challenge_2["value"] * level.challenge_2["max_successes"]);
   } else {
-    var_0._id_16C5["challenge_2"] = level._id_16BB["value"] * var_0._id_16C1;
+    var_0.final_summary["challenge_2"] = level.challenge_2["value"] * var_0.bonus_2;
   }
-  var_0._id_16C5["final_score"] = var_0._id_16C5["final_score"] + var_0._id_16C5["challenge_1"] + var_0._id_16C5["challenge_2"];
-  var_0._id_16C5["ch_1_tally"] = _id_16D3(var_0._id_16C0, level._id_16BA["max_successes"]);
-  var_0._id_16C5["ch_2_tally"] = _id_16D3(var_0._id_16C1, level._id_16BB["max_successes"]);
-  var_0._id_16C5["kills_num"] = var_0.stats["kills"];
-  var_0._id_16C5["kill_score"] = min(var_0.stats["kills"] * 25, 2500);
-  var_0._id_16C5["final_score"] = var_0._id_16C5["final_score"] + var_0._id_16C5["kill_score"];
-  var_0._id_16C5["final_score"] = _id_16E0(var_0, var_0._id_16C5["final_score"], var_0._id_16C5["gameskill_score"]);
-  var_0._id_16C5["difficulty"] = maps\_specialops::_id_16D2(var_0.gameskill);
-  return var_0._id_16C5;
+  var_0.final_summary["final_score"] = var_0.final_summary["final_score"] + var_0.final_summary["challenge_1"] + var_0.final_summary["challenge_2"];
+  var_0.final_summary["ch_1_tally"] = get_tally_string(var_0.bonus_1, level.challenge_1["max_successes"]);
+  var_0.final_summary["ch_2_tally"] = get_tally_string(var_0.bonus_2, level.challenge_2["max_successes"]);
+  var_0.final_summary["kills_num"] = var_0.stats["kills"];
+  var_0.final_summary["kill_score"] = min(var_0.stats["kills"] * 25, 2500);
+  var_0.final_summary["final_score"] = var_0.final_summary["final_score"] + var_0.final_summary["kill_score"];
+  var_0.final_summary["final_score"] = score_check(var_0, var_0.final_summary["final_score"], var_0.final_summary["gameskill_score"]);
+  var_0.final_summary["difficulty"] = maps\_specialops::so_get_difficulty_menu_string(var_0.gameskill);
+  return var_0.final_summary;
 }
 
-_id_16D3(var_0, var_1) {
+get_tally_string(var_0, var_1) {
   if(!isDefined(var_1) && var_0 > 0) {
     return var_0;
   }
@@ -1063,14 +1063,14 @@ _id_16D3(var_0, var_1) {
   if(isDefined(var_1) && var_0 > var_1) {
     var_0 = var_1;
   }
-  if(maps\_utility::_id_12C1()) {
+  if(maps\_utility::is_coop()) {
     return var_0;
   } else {
     return var_0 + " / " + var_1;
   }
 }
 
-_id_16D4(var_0) {
+get_time_message(var_0) {
   if(var_0 == "bonus") {
     return "@SPECIAL_OPS_UI_TIME";
   }
@@ -1079,40 +1079,40 @@ _id_16D4(var_0) {
   }
 }
 
-_id_16D5(var_0) {
+handle_bonus_xp(var_0) {
   foreach(var_2 in level.players) {}
-  var_2 thread _id_16D6(level._id_16BA["value"], level._id_16BB["value"]);
+  var_2 thread give_xp_on_success(level.challenge_1["value"], level.challenge_2["value"]);
 }
 
-_id_16D6(var_0, var_1) {
-  self._id_16D8 = _id_16DB(1, level._id_16BA, level._id_16B8, var_0, level._id_16D7);
-  self._id_16DA = _id_16DB(2, level._id_16BB, level._id_16B9, var_1, level._id_16D9);
-  thread _id_16DF();
-  thread _id_16E1(self._id_16D8);
-  thread _id_16E2(self._id_16DA);
-  thread _id_12A9();
+give_xp_on_success(var_0, var_1) {
+  self.ch_1 = get_bonus_xp_vars(1, level.challenge_1, level.bonus_1_shader, var_0, level.challenge_1_small_text);
+  self.ch_2 = get_bonus_xp_vars(2, level.challenge_2, level.bonus_2_shader, var_1, level.challenge_2_small_text);
+  thread play_bonus_sound();
+  thread bonus1_icon_text(self.ch_1);
+  thread bonus2_icon_text(self.ch_2);
+  thread monitor_challenges();
 }
 
-_id_12A9(var_0) {
-  var_1 = self._id_16C0;
-  var_2 = self._id_16C1;
+monitor_challenges(var_0) {
+  var_1 = self.bonus_1;
+  var_2 = self.bonus_2;
 
   for(;;) {
-    if(self._id_16C0 != var_1) {
-      _id_16DD(self._id_16D8, var_1, 1);
-      var_1 = self._id_16C0;
+    if(self.bonus_1 != var_1) {
+      calculate_bonus(self.ch_1, var_1, 1);
+      var_1 = self.bonus_1;
     }
 
-    if(self._id_16C1 != var_2) {
-      _id_16DD(self._id_16DA, var_2, 2);
-      var_2 = self._id_16C1;
+    if(self.bonus_2 != var_2) {
+      calculate_bonus(self.ch_2, var_2, 2);
+      var_2 = self.bonus_2;
     }
 
     wait 0.05;
   }
 }
 
-_id_16DB(var_0, var_1, var_2, var_3, var_4) {
+get_bonus_xp_vars(var_0, var_1, var_2, var_3, var_4) {
   var_5 = [];
   var_5["value"] = var_3;
   var_5["number"] = var_0;
@@ -1122,27 +1122,27 @@ _id_16DB(var_0, var_1, var_2, var_3, var_4) {
   return var_5;
 }
 
-_id_16DC(var_0) {
+get_bonus_number(var_0) {
   if(var_0 == 1) {
-    return self._id_16C0;
+    return self.bonus_1;
   }
   if(var_0 == 2) {
-    return self._id_16C1;
+    return self.bonus_2;
   }
 }
 
-_id_16DD(var_0, var_1, var_2) {
-  var_3 = _id_16DC(var_2);
+calculate_bonus(var_0, var_1, var_2) {
+  var_3 = get_bonus_number(var_2);
 
   if(isDefined(var_0["max"]) && var_3 < var_0["max"]) {
-    _id_16DE(var_0, var_1, var_2);
+    give_bonus(var_0, var_1, var_2);
   } else if(!isDefined(var_0["max"])) {
-    _id_16DE(var_0, var_1, var_2);
+    give_bonus(var_0, var_1, var_2);
   }
 }
 
-_id_16DE(var_0, var_1, var_2) {
-  var_3 = _id_16DC(var_2);
+give_bonus(var_0, var_1, var_2) {
+  var_3 = get_bonus_number(var_2);
 
   for(var_4 = 0; var_4 < var_3 - var_1; var_4++) {
     if(var_2 == 1) {
@@ -1154,7 +1154,7 @@ _id_16DE(var_0, var_1, var_2) {
   }
 }
 
-_id_16DF() {
+play_bonus_sound() {
   for(;;) {
     self waittill("bonus_achieved");
     thread common_scripts\utility::play_sound_in_space("arcademode_2x", self getEye());
@@ -1162,46 +1162,46 @@ _id_16DF() {
   }
 }
 
-_id_16E0(var_0, var_1, var_2) {
+score_check(var_0, var_1, var_2) {
   var_3 = var_2 + 29999;
   var_1 = int(min(var_1, var_3));
   return var_1;
 }
 
-_id_16E1(var_0) {
+bonus1_icon_text(var_0) {
   for(;;) {
     self waittill("bonus1_achieved");
-    _id_16E3(150, 115, 1, var_0);
+    get_challenge_hud_params(150, 115, 1, var_0);
   }
 }
 
-_id_16E2(var_0) {
+bonus2_icon_text(var_0) {
   for(;;) {
     self waittill("bonus2_achieved");
-    _id_16E3(170, 135, 2, var_0);
+    get_challenge_hud_params(170, 135, 2, var_0);
   }
 }
 
-_id_16E3(var_0, var_1, var_2, var_3) {
+get_challenge_hud_params(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3["text"])) {
-    var_4["bar"] = _id_16E6(59, var_0, "right", 0);
-    var_4["bar"] _id_16E5(18);
+    var_4["bar"] = make_bar_get_basic_placement(59, var_0, "right", 0);
+    var_4["bar"] move_bonus(18);
     var_5 = [];
-    var_5["text"] = _id_16E7(76, var_1, "right", 2);
+    var_5["text"] = make_text_get_basic_placement(76, var_1, "right", 2);
     var_5["text"] settext(var_3["text"]);
-    var_5["text"] thread _id_16E4();
-    var_5["num"] = _id_16E7(76, var_1, "left", 2);
-    var_5["num"] thread _id_16E4();
-    var_6 = _id_16DC(var_2);
+    var_5["text"] thread flash_text();
+    var_5["num"] = make_text_get_basic_placement(76, var_1, "left", 2);
+    var_5["num"] thread flash_text();
+    var_6 = get_bonus_number(var_2);
 
     for(var_7 = 0; var_7 < 90.0; var_7++) {
-      var_8 = _id_16DC(var_2);
-      var_9 = _id_16D3(var_8, var_3["max"]);
+      var_8 = get_bonus_number(var_2);
+      var_9 = get_tally_string(var_8, var_3["max"]);
       var_5["num"] settext(" " + var_9);
 
       if(var_6 != var_8) {
         var_6 = var_8;
-        var_5["num"] thread _id_16E4();
+        var_5["num"] thread flash_text();
       }
 
       wait 0.05;
@@ -1219,7 +1219,7 @@ _id_16E3(var_0, var_1, var_2, var_3) {
   }
 }
 
-_id_16E4() {
+flash_text() {
   for(var_0 = 0; var_0 < 2; var_0++) {
     if(isDefined(self)) {
       self changefontscaleovertime(0.25);
@@ -1237,27 +1237,27 @@ _id_16E4() {
   }
 }
 
-_id_16E5(var_0) {
+move_bonus(var_0) {
   self scaleovertime(0.25, 100, var_0);
   wait 0.25;
 }
 
-_id_16E6(var_0, var_1, var_2, var_3) {
+make_bar_get_basic_placement(var_0, var_1, var_2, var_3) {
   var_4 = newclienthudelem(self);
-  var_4 = _id_16E8(var_4, 59, var_1, "right", 0);
+  var_4 = get_basic_placement(var_4, 59, var_1, "right", 0);
   var_4 setshader("hud_white_box", 100, 1);
   var_4.alpha = 0.5;
   var_4.color = (0.7, 0.8, 0.7);
   return var_4;
 }
 
-_id_16E7(var_0, var_1, var_2, var_3) {
+make_text_get_basic_placement(var_0, var_1, var_2, var_3) {
   var_4 = maps\_hud_util::createserverclientfontstring("hudsmall", 0.75);
-  var_4 = _id_16E8(var_4, 76, var_1, var_2, 2);
+  var_4 = get_basic_placement(var_4, 76, var_1, var_2, 2);
   return var_4;
 }
 
-_id_16E8(var_0, var_1, var_2, var_3, var_4) {
+get_basic_placement(var_0, var_1, var_2, var_3, var_4) {
   var_0.x = var_1;
   var_0.y = var_2;
   var_0.alignx = var_3;
@@ -1270,22 +1270,22 @@ _id_16E8(var_0, var_1, var_2, var_3, var_4) {
   return var_0;
 }
 
-_id_16E9(var_0) {
-  maps\_utility::_id_16EA();
+multiple_dialogue_queue(var_0) {
+  maps\_utility::bcs_scripted_dialogue_start();
 
-  if(isDefined(self._id_1253)) {
-    maps\_utility::_id_1254(self._id_1253, 0.5);
+  if(isDefined(self.last_queue_time)) {
+    maps\_utility::wait_for_buffer_time_to_pass(self.last_queue_time, 0.5);
   }
   var_1 = [];
   var_1[0] = [self, 0];
-  maps\_utility::_id_1255(::_id_16EB, var_1, var_0);
+  maps\_utility::function_stack(::anim_single_end_early, var_1, var_0);
 
   if(isalive(self)) {
-    self._id_1253 = gettime();
+    self.last_queue_time = gettime();
   }
 }
 
-_id_16EB(var_0, var_1, var_2) {
+anim_single_end_early(var_0, var_1, var_2) {
   var_3 = self;
   var_4 = [];
 
@@ -1296,13 +1296,13 @@ _id_16EB(var_0, var_1, var_2) {
     if(!isDefined(var_9)) {
       continue;
     }
-    if(!isDefined(var_9._id_0BA3)) {
-      var_9._id_0BA3 = 0;
+    if(!isDefined(var_9._animactive)) {
+      var_9._animactive = 0;
     }
-    var_9._id_0BA3++;
+    var_9._animactive++;
   }
 
-  var_11 = maps\_anim::_id_1202(var_2);
+  var_11 = maps\_anim::get_anim_position(var_2);
   var_12 = var_11["origin"];
   var_13 = var_11["angles"];
   var_14 = "single anim";
@@ -1316,11 +1316,11 @@ _id_16EB(var_0, var_1, var_2) {
     var_21 = 0;
     var_22 = undefined;
     var_23 = undefined;
-    var_24 = var_9._id_1032;
+    var_24 = var_9.animname;
 
-    if(isDefined(level._id_11B7[var_24]) && isDefined(level._id_11B7[var_24][var_1])) {
+    if(isDefined(level.scr_face[var_24]) && isDefined(level.scr_face[var_24][var_1])) {
       var_18 = 1;
-      var_23 = level._id_11B7[var_24][var_1];
+      var_23 = level.scr_face[var_24][var_1];
     }
 
     if(isDefined(level.scr_sound[var_24]) && isDefined(level.scr_sound[var_24][var_1])) {
@@ -1328,42 +1328,42 @@ _id_16EB(var_0, var_1, var_2) {
       var_22 = level.scr_sound[var_24][var_1];
     }
 
-    if(isDefined(level._id_0C59[var_24]) && isDefined(level._id_0C59[var_24][var_1]) && (!isai(var_9) || !var_9 maps\_utility::_id_0D69())) {
+    if(isDefined(level.scr_anim[var_24]) && isDefined(level.scr_anim[var_24][var_1]) && (!isai(var_9) || !var_9 maps\_utility::doinglongdeath())) {
       var_20 = 1;
     }
-    if(isDefined(level._id_11B9[var_24]) && isDefined(level._id_11B9[var_24][var_1])) {
-      var_9 playSound(level._id_11B9[var_24][var_1]);
+    if(isDefined(level.scr_animsound[var_24]) && isDefined(level.scr_animsound[var_24][var_1])) {
+      var_9 playSound(level.scr_animsound[var_24][var_1]);
     }
     if(var_20) {
-      var_9 maps\_anim::_id_1282();
+      var_9 maps\_anim::last_anim_time_check();
 
       if(isPlayer(var_9)) {
-        var_25 = level._id_0C59[var_24]["root"];
+        var_25 = level.scr_anim[var_24]["root"];
         var_9 setanim(var_25, 0, 0.2);
-        var_26 = level._id_0C59[var_24][var_1];
+        var_26 = level.scr_anim[var_24][var_1];
         var_9 setflaggedanim(var_14, var_26, 1, 0.2);
       } else if(var_9.code_classname == "misc_turret") {
-        var_26 = level._id_0C59[var_24][var_1];
+        var_26 = level.scr_anim[var_24][var_1];
         var_9 setflaggedanim(var_14, var_26, 1, 0.2);
       } else {
-        var_9 animScripted(var_14, var_12, var_13, level._id_0C59[var_24][var_1]);
+        var_9 animScripted(var_14, var_12, var_13, level.scr_anim[var_24][var_1]);
       }
-      thread maps\_anim::_id_0C61(var_9, var_14, var_1, var_24);
-      thread maps\_anim::_id_0C62(var_9, var_14, var_1);
+      thread maps\_anim::start_notetrack_wait(var_9, var_14, var_1, var_24);
+      thread maps\_anim::animscriptdonotetracksthread(var_9, var_14, var_1);
     }
 
     if(var_18 || var_19) {
       if(var_18) {
         if(var_19) {
-          var_9 thread _id_16F0(var_1, var_18, var_22, level._id_11B7[var_24][var_1]);
+          var_9 thread dofacialdialogue(var_1, var_18, var_22, level.scr_face[var_24][var_1]);
         }
-        thread maps\_anim::_id_1269(var_9, var_1, level._id_11B7[var_24][var_1]);
+        thread maps\_anim::anim_facialanim(var_9, var_1, level.scr_face[var_24][var_1]);
       } else if(isai(var_9)) {
         if(var_20) {
-          var_9 animscripts\face::_id_0C46(var_23, var_22, 1.0);
+          var_9 animscripts\face::sayspecificdialogue(var_23, var_22, 1.0);
         } else {
-          var_9 thread maps\_anim::_id_0BDB("single dialogue");
-          var_9 animscripts\face::_id_0C46(var_23, var_22, 1.0, "single dialogue");
+          var_9 thread maps\_anim::anim_facialfiller("single dialogue");
+          var_9 animscripts\face::sayspecificdialogue(var_23, var_22, 1.0, "single dialogue");
         }
       } else {
         var_9 thread maps\_utility::play_sound_on_entity(var_22, "single dialogue");
@@ -1371,23 +1371,23 @@ _id_16EB(var_0, var_1, var_2) {
     }
 
     if(var_20) {
-      var_27 = getanimlength(level._id_0C59[var_24][var_1]);
-      var_15 thread _id_16EC(var_9, var_1);
-      var_15 thread _id_16EF(var_9, var_1, var_27, var_0[var_7][1]);
+      var_27 = getanimlength(level.scr_anim[var_24][var_1]);
+      var_15 thread anim_end_early_deathnotify(var_9, var_1);
+      var_15 thread anim_end_early_animationendnotify(var_9, var_1, var_27, var_0[var_7][1]);
       var_16++;
       continue;
     }
 
     if(var_18) {
-      var_15 thread _id_16EC(var_9, var_1);
-      var_15 thread _id_16ED(var_9, var_1, var_23);
+      var_15 thread anim_end_early_deathnotify(var_9, var_1);
+      var_15 thread anim_end_early_facialendnotify(var_9, var_1, var_23);
       var_16++;
       continue;
     }
 
     if(var_19) {
-      var_15 thread _id_16EC(var_9, var_1);
-      var_15 thread _id_16EE(var_9, var_1);
+      var_15 thread anim_end_early_deathnotify(var_9, var_1);
+      var_15 thread anim_end_early_dialogueendnotify(var_9, var_1);
       var_16++;
     }
   }
@@ -1400,31 +1400,31 @@ _id_16EB(var_0, var_1, var_2) {
       continue;
     }
     if(isPlayer(var_9)) {
-      var_24 = var_9._id_1032;
+      var_24 = var_9.animname;
 
-      if(isDefined(level._id_0C59[var_24][var_1])) {
-        var_25 = level._id_0C59[var_24]["root"];
+      if(isDefined(level.scr_anim[var_24][var_1])) {
+        var_25 = level.scr_anim[var_24]["root"];
         var_9 setanim(var_25, 1, 0.2);
-        var_26 = level._id_0C59[var_24][var_1];
+        var_26 = level.scr_anim[var_24][var_1];
         var_9 clearanim(var_26, 0.2);
       }
     }
 
-    var_9._id_0BA3--;
-    var_9._id_11BE = gettime();
+    var_9._animactive--;
+    var_9._lastanimtime = gettime();
   }
 
   self notify(var_1);
 }
 
-_id_16EC(var_0, var_1) {
+anim_end_early_deathnotify(var_0, var_1) {
   var_0 endon("kill_anim_end_notify_" + var_1);
   var_0 waittill("death");
   self notify(var_1, var_0);
   var_0 notify("kill_anim_end_notify_" + var_1);
 }
 
-_id_16ED(var_0, var_1, var_2) {
+anim_end_early_facialendnotify(var_0, var_1, var_2) {
   var_0 endon("kill_anim_end_notify_" + var_1);
   var_3 = getanimlength(var_2);
   wait(var_3);
@@ -1432,19 +1432,19 @@ _id_16ED(var_0, var_1, var_2) {
   var_0 notify("kill_anim_end_notify_" + var_1);
 }
 
-_id_16EE(var_0, var_1) {
+anim_end_early_dialogueendnotify(var_0, var_1) {
   var_0 endon("kill_anim_end_notify_" + var_1);
   var_0 waittill("single dialogue");
   self notify(var_1, var_0);
   var_0 notify("kill_anim_end_notify_" + var_1);
 }
 
-_id_16EF(var_0, var_1, var_2, var_3) {
+anim_end_early_animationendnotify(var_0, var_1, var_2, var_3) {
   var_0 endon("kill_anim_end_notify_" + var_1);
   var_2 = var_2 - var_3;
 
   if(var_3 > 0 && var_2 > 0) {
-    var_0 maps\_utility::_id_11E4("single anim", "end", var_2);
+    var_0 maps\_utility::waittill_match_or_timeout("single anim", "end", var_2);
     var_0 stopanimScripted();
   } else {
     var_0 waittillmatch("single anim", "end");
@@ -1454,11 +1454,11 @@ _id_16EF(var_0, var_1, var_2, var_3) {
   var_0 notify("kill_anim_end_notify_" + var_1);
 }
 
-_id_16F0(var_0, var_1, var_2, var_3) {
+dofacialdialogue(var_0, var_1, var_2, var_3) {
   if(var_1) {
-    thread _id_16F1(var_0);
-    thread _id_16F2(var_0);
-    thread _id_16F3(var_0);
+    thread notify_facial_anim_end(var_0);
+    thread warn_facial_dialogue_unspoken(var_0);
+    thread warn_facial_dialogue_too_many(var_0);
     var_4 = [];
 
     if(!isarray(var_2)) {
@@ -1468,28 +1468,28 @@ _id_16F0(var_0, var_1, var_2, var_3) {
     }
     foreach(var_6 in var_4) {
       self waittillmatch("face_done_" + var_0, "dialogue_line");
-      animscripts\face::_id_0C46(undefined, var_6, 1.0);
+      animscripts\face::sayspecificdialogue(undefined, var_6, 1.0);
     }
 
     self notify("all_facial_lines_done");
   } else {
-    animscripts\face::_id_0C46(undefined, var_2, 1.0, "single dialogue");
+    animscripts\face::sayspecificdialogue(undefined, var_2, 1.0, "single dialogue");
   }
 }
 
-_id_16F1(var_0) {
+notify_facial_anim_end(var_0) {
   self endon("death");
   self waittillmatch("face_done_" + var_0, "end");
   self notify("facial_anim_end_" + var_0);
 }
 
-_id_16F2(var_0) {
+warn_facial_dialogue_unspoken(var_0) {
   self endon("death");
   self endon("all_facial_lines_done");
   self waittill("facial_anim_end_" + var_0);
 }
 
-_id_16F3(var_0) {
+warn_facial_dialogue_too_many(var_0) {
   self endon("death");
   self endon("facial_anim_end_" + var_0);
   self waittill("all_facial_lines_done");

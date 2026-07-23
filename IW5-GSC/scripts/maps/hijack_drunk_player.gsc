@@ -15,11 +15,11 @@ main() {
   common_scripts\utility::flag_init("stop_being_stunned");
   common_scripts\utility::flag_init("stop_fade_in_out");
   waittillframeend;
-  level._id_5984 = 0.8;
-  level.player._id_141D = 0.7;
+  level.player_heartrate = 0.8;
+  level.player.movespeedscale = 0.7;
 }
 
-_id_5985() {
+aftermath_style_walking() {
   waittillframeend;
   waittillframeend;
 
@@ -27,82 +27,82 @@ _id_5985() {
     return;
   }
   level endon("stop_aftermath_player");
-  level._id_5258 = spawn("script_model", (0, 0, 0));
-  level.player playersetgroundreferenceent(level._id_5258);
-  level childthread _id_5986();
+  level.ground_ref_ent = spawn("script_model", (0, 0, 0));
+  level.player playersetgroundreferenceent(level.ground_ref_ent);
+  level childthread slowview();
   level notify("slowview");
 
   if(common_scripts\utility::flag("aftermath_dont_do_wakeup")) {
     return;
   }
-  _id_598B();
+  player_wakeup();
 }
 
-_id_5986() {
+slowview() {
   for(;;) {
     level waittill("slowview", var_0);
 
     if(isDefined(var_0)) {
       wait(var_0);
     }
-    childthread _id_5987();
+    childthread restart_slowview();
   }
 }
 
-_id_5987() {
+restart_slowview() {
   level endon("slowview");
   wait 10;
   level notify("slowview");
 }
 
-_id_5988() {
+start_player_heartbeat() {
   common_scripts\utility::flag_set("player_heartbeat_sound");
-  thread _id_4BCB();
+  thread player_heartbeat();
 }
 
-_id_4BCB() {
+player_heartbeat() {
   level notify("stop_heart");
   level endon("stop_heart");
 
   for(;;) {
     if(!common_scripts\utility::flag("fall")) {
-      if(isDefined(level._id_5989)) {
-        [[level._id_5989]]();
+      if(isDefined(level.heartbeat_blood_func)) {
+        [[level.heartbeat_blood_func]]();
       }
       if(common_scripts\utility::flag("player_heartbeat_sound")) {
         wait 0.05;
         level.player playRumbleOnEntity("damage_light");
       }
 
-      wait(level._id_5984);
+      wait(level.player_heartrate);
     }
 
     wait(0 + randomfloat(0.1));
 
-    if(randomint(50) > level.player._id_141D * 190) {
+    if(randomint(50) > level.player.movespeedscale * 190) {
       wait(randomfloat(1));
     }
   }
 }
 
-_id_4F51() {}
+get_player_speed() {}
 
-_id_598A() {
+player_fade_in_out() {
   while(!common_scripts\utility::flag("stop_fade_in_out")) {
-    maps\hijack_code::_id_09FA(0.3, randomfloatrange(0.5, 0.8));
+    maps\hijack_code::fade_out(0.3, randomfloatrange(0.5, 0.8));
     wait(randomfloatrange(0.2, 0.35));
-    maps\hijack_code::_id_17CC(0.3);
+    maps\hijack_code::fade_in(0.3);
     wait(randomfloatrange(2, 5));
   }
 }
 
-_id_598B() {
+player_wakeup() {
   common_scripts\utility::flag_wait("start_doing_aftermath_walk");
-  thread _id_598F();
-  level.player childthread _id_51E6();
+  thread swivel();
+  level.player childthread player_random_blur();
 }
 
-_id_51E5(var_0) {
+adjust_angles_to_player(var_0) {
   var_1 = var_0[0];
   var_2 = var_0[2];
   var_3 = anglestoright(level.player.angles);
@@ -114,17 +114,17 @@ _id_51E5(var_0) {
   return var_7 + (0, var_0[1], 0);
 }
 
-_id_5717() {
-  thread _id_5993();
+limp() {
+  thread limp_thread();
 }
 
-_id_598C(var_0) {
+adjust_swivel_over_time(var_0) {
   level endon("stop_drunk_walk");
   var_1 = 1;
   var_2 = 1;
 
   for(;;) {
-    var_3 = var_2 * level._id_598D;
+    var_3 = var_2 * level.unsteady_scale;
     var_4 = randomfloatrange(var_3 * 0.5, var_3);
     var_1--;
 
@@ -143,7 +143,7 @@ _id_598C(var_0) {
     var_7 = gettime();
     var_0 moveTo((var_4, 0, 0), var_6, var_6 * 0.5, var_6 * 0.5);
     wait(var_6);
-    maps\_utility::_id_1254(var_7, 0.6);
+    maps\_utility::wait_for_buffer_time_to_pass(var_7, 0.6);
 
     for(;;) {
       var_8 = distance((0, 0, 0), level.player getvelocity());
@@ -157,34 +157,34 @@ _id_598C(var_0) {
   }
 }
 
-_id_598E() {
+swivel_ends() {
   level waittill("stop_drunk_walk");
   var_0 = 0.8;
-  level._id_5258 rotateTo((0, 0, 0), var_0, var_0 * 0.5, var_0 * 0.5);
+  level.ground_ref_ent rotateTo((0, 0, 0), var_0, var_0 * 0.5, var_0 * 0.5);
   wait(var_0);
-  level._id_5258 delete();
+  level.ground_ref_ent delete();
   level.player playersetgroundreferenceent(undefined);
   setslowmotion(0.95, 1, 0.5);
 }
 
-_id_598F() {
-  thread _id_598E();
+swivel() {
+  thread swivel_ends();
   level endon("stop_drunk_walk");
-  level._id_598D = 5.0;
+  level.unsteady_scale = 5.0;
   var_0 = 0;
   var_1 = 0;
   var_2 = 0.1;
 
   for(;;) {
     var_3 = distance((0, 0, 0), level.player getvelocity());
-    var_0 = var_0 + var_3 * 0.026 * level._id_598D;
+    var_0 = var_0 + var_3 * 0.026 * level.unsteady_scale;
 
     if(var_3 == 0) {
       var_0 = var_0 + 1.5;
     } else {
       var_0 = var_0 + randomfloatrange(0, 2);
     }
-    var_1 = var_1 + var_3 * 0.01 * level._id_598D;
+    var_1 = var_1 + var_3 * 0.01 * level.unsteady_scale;
 
     if(var_3 == 0) {
       var_1 = var_1 + 1.5;
@@ -195,18 +195,18 @@ _id_598F() {
       var_0 = var_0 + var_3 * 0.1;
     }
     var_4 = sin(var_0) - 1;
-    var_5 = var_4 * 1.8 * level._id_598D;
-    var_6 = sin(var_0) * 1.26 * level._id_598D;
-    var_7 = sin(var_1) * 1.8 * level._id_598D;
+    var_5 = var_4 * 1.8 * level.unsteady_scale;
+    var_6 = sin(var_0) * 1.26 * level.unsteady_scale;
+    var_7 = sin(var_1) * 1.8 * level.unsteady_scale;
 
     if(!common_scripts\utility::flag("player_limping")) {
-      level._id_5258 rotateTo((var_5, var_7, var_6), var_2, var_2 * 0.5, var_2 * 0.5);
+      level.ground_ref_ent rotateTo((var_5, var_7, var_6), var_2, var_2 * 0.5, var_2 * 0.5);
     }
     wait 0.05;
   }
 }
 
-_id_5990(var_0) {
+swivel_stunplayer(var_0) {
   level notify("swivel_stunplayer");
   level endon("swivel_stunplayer");
   level.player allowcrouch(0);
@@ -216,7 +216,7 @@ _id_5990(var_0) {
   level.player allowprone(1);
 }
 
-_id_5991() {
+setslowmotion_overtime() {
   level endon("stop_drunk_walk");
   var_0 = 1;
   var_1 = 0.15;
@@ -231,7 +231,7 @@ _id_5991() {
   }
 }
 
-_id_5992(var_0) {
+adjust_roll_ent(var_0) {
   level endon("stop_drunk_walk");
   var_1 = 0;
   var_2 = 140;
@@ -264,16 +264,16 @@ _id_5992(var_0) {
 
     if(!var_7) {
       var_7 = 1;
-      _id_5717();
+      limp();
       var_13 = 2;
       var_14 = common_scripts\utility::spawn_tag_origin();
-      var_14.origin = (level._id_598D, 0, 0);
+      var_14.origin = (level.unsteady_scale, 0, 0);
       var_14 moveTo((1, 0, 0), var_13, var_13 * 0.5, var_13 * 0.5);
 
       for(;;) {
-        level._id_598D = var_14.origin[0];
+        level.unsteady_scale = var_14.origin[0];
 
-        if(level._id_598D == 1) {
+        if(level.unsteady_scale == 1) {
           break;
         }
 
@@ -296,7 +296,7 @@ _id_5992(var_0) {
   }
 }
 
-_id_5993() {
+limp_thread() {
   level notify("kill_limp");
   level endon("kill_limp");
 
@@ -309,21 +309,21 @@ _id_5993() {
     }
 
     var_1 = 2.3;
-    level.player thread _id_5990(var_1);
+    level.player thread swivel_stunplayer(var_1);
     level notify("not_random_blur");
     common_scripts\utility::noself_delaycall(0.5, ::setblur, 4, 0.25);
     common_scripts\utility::noself_delaycall(1.2, ::setblur, 0, 1);
-    maps\_utility::delaythread(var_1, ::_id_51E6);
+    maps\_utility::delaythread(var_1, ::player_random_blur);
     level.player playRumbleOnEntity("damage_light");
-    level.player maps\_utility::_id_279B(0.35, 0.3);
-    level.player maps\_utility::delaythread(var_1 * 0.5, maps\_utility::_id_279B, 0.7, var_1);
+    level.player maps\_utility::blend_movespeedscale(0.35, 0.3);
+    level.player maps\_utility::delaythread(var_1 * 0.5, maps\_utility::blend_movespeedscale, 0.7, var_1);
     common_scripts\utility::flag_clear("force_limp");
     wait(var_1);
     break;
   }
 }
 
-_id_5994() {
+limp_old() {
   var_0 = 0;
   var_1 = 0;
 
@@ -338,7 +338,7 @@ _id_5994() {
       continue;
     }
 
-    var_5 = var_4 / (level.player._id_141D * 190);
+    var_5 = var_4 / (level.player.movespeedscale * 190);
     var_6 = randomfloatrange(3, 5);
 
     if(randomint(100) < 20) {
@@ -365,19 +365,19 @@ _id_5994() {
       var_0++;
     }
     common_scripts\utility::flag_set("player_limping");
-    childthread _id_51E4(var_11, var_7, var_8);
+    childthread stumble(var_11, var_7, var_8);
     level common_scripts\utility::waittill_either("recovered", "force_limp");
     common_scripts\utility::flag_clear("player_limping");
   }
 }
 
-_id_5995() {
+end_random_blur() {
   level waittill("not_random_blur");
   setblur(0, 0.1);
 }
 
-_id_51E6() {
-  thread _id_5995();
+player_random_blur() {
+  thread end_random_blur();
   level endon("dying");
   level endon("not_random_blur");
 
@@ -397,7 +397,7 @@ _id_51E6() {
   }
 }
 
-_id_5996() {
+player_jump_punishment() {
   wait 2;
 
   for(;;) {
@@ -424,39 +424,39 @@ _id_5996() {
   }
 }
 
-_id_51E4(var_0, var_1, var_2, var_3) {
+stumble(var_0, var_1, var_2, var_3) {
   level endon("stop_stumble");
 
   if(common_scripts\utility::flag("collapse")) {
     return;
   }
-  var_0 = _id_51E5(var_0);
-  level._id_5258 rotateTo(var_0, var_1, var_1 / 4 * 3, var_1 / 4);
-  level._id_5258 waittill("rotatedone");
+  var_0 = adjust_angles_to_player(var_0);
+  level.ground_ref_ent rotateTo(var_0, var_1, var_1 / 4 * 3, var_1 / 4);
+  level.ground_ref_ent waittill("rotatedone");
   var_4 = (randomfloat(4) - 4, randomfloat(5), 0);
-  var_4 = _id_51E5(var_4);
-  level._id_5258 rotateTo(var_4, var_2, 0, var_2 / 2);
-  level._id_5258 waittill("rotatedone");
+  var_4 = adjust_angles_to_player(var_4);
+  level.ground_ref_ent rotateTo(var_4, var_2, 0, var_2 / 2);
+  level.ground_ref_ent waittill("rotatedone");
 
   if(!isDefined(var_3)) {
     level notify("recovered");
   }
 }
 
-_id_5997() {
-  var_0 = _id_51E5((-5, -5, 0));
-  level._id_5258 rotateTo(var_0, 0.6, 0.6, 0);
-  level._id_5258 waittill("rotatedone");
-  var_0 = _id_51E5((-15, -20, 0));
-  level._id_5258 rotateTo(var_0, 2.5, 0, 2.5);
-  level._id_5258 waittill("rotatedone");
-  var_0 = _id_51E5((5, 5, 0));
-  level._id_5258 rotateTo(var_0, 2.5, 2, 0.5);
-  level._id_5258 waittill("rotatedone");
-  level._id_5258 rotateTo((0, 0, 0), 1, 0.2, 0.8);
+recover() {
+  var_0 = adjust_angles_to_player((-5, -5, 0));
+  level.ground_ref_ent rotateTo(var_0, 0.6, 0.6, 0);
+  level.ground_ref_ent waittill("rotatedone");
+  var_0 = adjust_angles_to_player((-15, -20, 0));
+  level.ground_ref_ent rotateTo(var_0, 2.5, 0, 2.5);
+  level.ground_ref_ent waittill("rotatedone");
+  var_0 = adjust_angles_to_player((5, 5, 0));
+  level.ground_ref_ent rotateTo(var_0, 2.5, 2, 0.5);
+  level.ground_ref_ent waittill("rotatedone");
+  level.ground_ref_ent rotateTo((0, 0, 0), 1, 0.2, 0.8);
 }
 
-_id_4595(var_0) {
+hud_hide(var_0) {
   wait 0.1;
   setsaveddvar("hud_showStance", 0);
   setsaveddvar("compass", "0");

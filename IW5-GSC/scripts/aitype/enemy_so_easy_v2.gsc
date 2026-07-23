@@ -22,7 +22,7 @@ main() {
   }
 
   self.weapon = "none";
-  _id_05D8::main();
+  character/character_so_russian_naval_assault::main();
 }
 
 spawner() {
@@ -30,6 +30,6 @@ spawner() {
 }
 
 precache() {
-  _id_05D8::precache();
+  character/character_so_russian_naval_assault::precache();
   precacheitem("fraggrenade");
 }

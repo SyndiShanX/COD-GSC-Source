@@ -4,51 +4,51 @@
 **************************************/
 
 main(var_0, var_1, var_2) {
-  maps\_vehicle::_id_2AC2("zodiac", var_0, var_1, var_2);
-  maps\_vehicle::_id_2AD2(::_id_2B1D);
-  maps\_vehicle::_id_2ABE("vehicle_zodiac");
-  maps\_vehicle::_id_2ACE(999, 500, 1500);
-  maps\_vehicle::_id_2AC6("allies");
-  maps\_vehicle::_id_2ACA(::_id_3A9D, ::_id_3A9C);
-  maps\_vehicle::_id_2ACD(::_id_3E58);
+  maps\_vehicle::build_template("zodiac", var_0, var_1, var_2);
+  maps\_vehicle::build_localinit(::init_local);
+  maps\_vehicle::build_deathmodel("vehicle_zodiac");
+  maps\_vehicle::build_life(999, 500, 1500);
+  maps\_vehicle::build_team("allies");
+  maps\_vehicle::build_aianims(::setanims, ::set_vehicle_anims);
+  maps\_vehicle::build_unload_groups(::unload_groups);
 }
 
-_id_2B1D() {}
+init_local() {}
 
-_id_3A9C(var_0) {
+set_vehicle_anims(var_0) {
   return var_0;
 }
 
 #using_animtree("generic_human");
 
-_id_3A9D() {
+setanims() {
   var_0 = [];
 
   for(var_1 = 0; var_1 < 6; var_1++) {
     var_0[var_1] = spawnStruct();
   }
-  var_0[0]._id_24F2 = "tag_body";
-  var_0[1]._id_24F2 = "tag_body";
-  var_0[2]._id_24F2 = "tag_body";
-  var_0[3]._id_24F2 = "tag_body";
-  var_0[4]._id_24F2 = "tag_body";
-  var_0[5]._id_24F2 = "tag_body";
-  var_0[0]._id_0F59 = % oilrig_civ_escape_1_seal_a;
-  var_0[1]._id_0F59 = % oilrig_civ_escape_2_seal_a;
-  var_0[2]._id_0F59 = % oilrig_civ_escape_3_a;
-  var_0[3]._id_0F59 = % oilrig_civ_escape_4_a;
-  var_0[4]._id_0F59 = % oilrig_civ_escape_5_a;
-  var_0[5]._id_0F59 = % oilrig_civ_escape_6_a;
-  var_0[0]._id_257C = % pickup_driver_climb_out;
-  var_0[1]._id_257C = % pickup_driver_climb_out;
-  var_0[2]._id_257C = % pickup_passenger_climb_out;
-  var_0[3]._id_257C = % pickup_passenger_climb_out;
-  var_0[4]._id_257C = % pickup_passenger_climb_out;
-  var_0[5]._id_257C = % pickup_passenger_climb_out;
+  var_0[0].sittag = "tag_body";
+  var_0[1].sittag = "tag_body";
+  var_0[2].sittag = "tag_body";
+  var_0[3].sittag = "tag_body";
+  var_0[4].sittag = "tag_body";
+  var_0[5].sittag = "tag_body";
+  var_0[0].idle = % oilrig_civ_escape_1_seal_a;
+  var_0[1].idle = % oilrig_civ_escape_2_seal_a;
+  var_0[2].idle = % oilrig_civ_escape_3_a;
+  var_0[3].idle = % oilrig_civ_escape_4_a;
+  var_0[4].idle = % oilrig_civ_escape_5_a;
+  var_0[5].idle = % oilrig_civ_escape_6_a;
+  var_0[0].getout = % pickup_driver_climb_out;
+  var_0[1].getout = % pickup_driver_climb_out;
+  var_0[2].getout = % pickup_passenger_climb_out;
+  var_0[3].getout = % pickup_passenger_climb_out;
+  var_0[4].getout = % pickup_passenger_climb_out;
+  var_0[5].getout = % pickup_passenger_climb_out;
   return var_0;
 }
 
-_id_3E58() {
+unload_groups() {
   var_0 = [];
   var_0["passengers"] = [];
   var_0["all"] = [];

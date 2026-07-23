@@ -3,13 +3,13 @@
  * Script: scripts\1552.gsc
 **************************************/
 
-_id_3B6D(var_0) {
+squad_setup(var_0) {
   if(!common_scripts\utility::flag_exist("squad_spawning")) {
     common_scripts\utility::flag_init("squad_spawning");
   }
-  level._id_3B6E = 1;
-  level._id_3B6F = 3;
-  level._id_3B70 = [];
+  level.new_squad_logic = 1;
+  level.merge_squad_member_max = 3;
+  level.leaders = [];
 
   if(isDefined(var_0) && var_0) {
     var_1 = common_scripts\utility::getStructArray("leader", "script_noteworthy");
@@ -22,14 +22,14 @@ _id_3B6D(var_0) {
     }
   }
 
-  level._id_3B71 = ::_id_3B8B;
-  thread _id_3B80();
-  thread _id_3B7E();
-  thread _id_3B99();
+  level.squad_follower_func = ::setup_follower_advanced;
+  thread merge_squad();
+  thread squad_spread();
+  thread drawleader();
   return var_1;
 }
 
-_id_3B72(var_0, var_1, var_2) {
+squad_disband(var_0, var_1, var_2) {
   if(isDefined(var_0) && var_0 > 0) {
     wait(var_0);
   }
@@ -37,17 +37,17 @@ _id_3B72(var_0, var_1, var_2) {
     common_scripts\utility::flag_waitopen("squad_spawning");
   }
   level notify("squad_disband");
-  level._id_3B70 = [];
+  level.leaders = [];
 
   if(isDefined(var_1)) {
     var_3 = getaiarray("axis");
 
     foreach(var_5 in var_3) {
       var_5 notify("ai_behavior_change");
-      var_5._id_3B73 = undefined;
-      var_5._id_3B74 = undefined;
+      var_5.leader = undefined;
+      var_5.squadmembers = undefined;
 
-      if(isDefined(var_5._id_3B75) && var_5._id_3B75) {
+      if(isDefined(var_5.is_squad_enemy) && var_5.is_squad_enemy) {
         if(isDefined(var_2)) {
           var_5 thread[[var_1]](var_2);
         } else {
@@ -55,12 +55,12 @@ _id_3B72(var_0, var_1, var_2) {
         }
       }
 
-      var_5._id_3B75 = 0;
+      var_5.is_squad_enemy = 0;
     }
   }
 }
 
-_id_3B76(var_0, var_1) {
+setup_zones(var_0, var_1) {
   level endon("challenge_success");
   level endon("special_op_terminated");
 
@@ -73,43 +73,43 @@ _id_3B76(var_0, var_1) {
   foreach(var_5 in var_2) {}
   var_3[var_3.size] = getEnt(var_5, "script_linkname");
 
-  var_0 thread _id_3B95();
+  var_0 thread one_direction_trigger();
   var_0 waittill("trigger");
 
   if(getaiarray("axis").size > 1) {
-    level._id_3B77 = 1;
-    _id_3B7C();
+    level.cleaning_up = 1;
+    squad_clean_up();
     wait 2.02;
   } else {
-    level._id_3B77 = 0;
+    level.cleaning_up = 0;
   }
-  if(level._id_3B70.size + var_1 > level._id_3B78) {
-    var_1 = level._id_3B78 - level._id_3B70.size;
+  if(level.leaders.size + var_1 > level.desired_squads) {
+    var_1 = level.desired_squads - level.leaders.size;
   }
   for(var_7 = 0; var_7 < var_1; var_7++) {
-    _id_3B7B(var_3, undefined, undefined, undefined);
+    spawn_far_squad(var_3, undefined, undefined, undefined);
   }
   wait 1;
-  level._id_3B77 = 0;
+  level.cleaning_up = 0;
   level notify("clean_up_done");
   level notify("zone_spawn_complete");
 }
 
-_id_3B79(var_0) {
+spawn_enemy_squads(var_0) {
   level endon("challenge_success");
   level endon("special_op_terminated");
-  var_1 = _id_3B6D();
+  var_1 = squad_setup();
 
-  if(!isDefined(level._id_3B78)) {
-    level._id_3B78 = 4;
+  if(!isDefined(level.desired_squads)) {
+    level.desired_squads = 4;
   } else {
     var_2 = "Must have at least 4 squad leader spawners in level";
   }
-  if(isDefined(level._id_3B7A) && level._id_3B7A) {
+  if(isDefined(level.squad_zoning) && level.squad_zoning) {
     var_3 = getEntArray("zone_trig", "targetname");
 
     foreach(var_5 in var_3) {}
-    thread _id_3B76(var_5, int(var_5.script_noteworthy));
+    thread setup_zones(var_5, int(var_5.script_noteworthy));
 
     level waittill("zone_spawn_complete");
   }
@@ -117,30 +117,30 @@ _id_3B79(var_0) {
   for(;;) {
     wait 0.15;
 
-    if(isDefined(level._id_3B77) && level._id_3B77) {
+    if(isDefined(level.cleaning_up) && level.cleaning_up) {
       level waittill("clean_up_done");
     }
-    if(level._id_3B70.size < level._id_3B78) {
-      _id_3B7B(var_1, undefined, undefined, var_0);
+    if(level.leaders.size < level.desired_squads) {
+      spawn_far_squad(var_1, undefined, undefined, var_0);
     }
   }
 }
 
-_id_3B7B(var_0, var_1, var_2, var_3) {
+spawn_far_squad(var_0, var_1, var_2, var_3) {
   var_4 = [];
   var_4[var_4.size] = level.player;
 
-  if(maps\_utility::_id_12C1()) {
+  if(maps\_utility::is_coop()) {
     var_4[var_4.size] = level.players[1];
   }
-  foreach(var_6 in level._id_3B70) {}
+  foreach(var_6 in level.leaders) {}
   var_4[var_4.size] = var_6;
 
   var_8 = undefined;
 
   while(var_0.size > 1) {
     foreach(var_10 in var_4) {
-      var_8 = maps\_utility::_id_0AE9(var_10.origin, var_0);
+      var_8 = maps\_utility::getclosest(var_10.origin, var_0);
       var_0 = common_scripts\utility::array_remove(var_0, var_8);
 
       if(var_0.size == 1) {
@@ -150,7 +150,7 @@ _id_3B7B(var_0, var_1, var_2, var_3) {
   }
 
   var_8 = var_0[0];
-  thread _id_3B9A(var_8.origin, (1, 1, 1));
+  thread draw_debug_marker(var_8.origin, (1, 1, 1));
 
   if(isspawner(var_0[0])) {
     var_12 = getEntArray(var_8.target, "targetname");
@@ -167,51 +167,51 @@ _id_3B7B(var_0, var_1, var_2, var_3) {
 
   common_scripts\utility::flag_set("squad_spawning");
   var_16 = [];
-  var_16 = _id_3B81(var_12, var_1, var_2, var_3);
+  var_16 = spawn_enemy_group(var_12, var_1, var_2, var_3);
   common_scripts\utility::flag_clear("squad_spawning");
   wait 0.05;
   return var_16;
 }
 
-_id_3B7C() {
+squad_clean_up() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2._id_3B7D)) {
+    if(isDefined(var_2.protector_obj_group)) {
       var_0 = common_scripts\utility::array_remove(var_0, var_2);
     }
   }
 
-  thread maps\_utility::_id_2756(var_0, 1300);
+  thread maps\_utility::ai_delete_when_out_of_sight(var_0, 1300);
 }
 
-_id_3B7E() {
+squad_spread() {
   level endon("challenge_success");
   level endon("special_op_terminated");
 
   for(;;) {
     wait 1;
 
-    if(!isDefined(level._id_3B70)) {
+    if(!isDefined(level.leaders)) {
       continue;
     }
-    if(level._id_3B70.size < 2) {
+    if(level.leaders.size < 2) {
       continue;
     }
-    foreach(var_1 in level._id_3B70) {
-      if(!isDefined(var_1._id_3B74) || var_1._id_3B74.size < 2) {
+    foreach(var_1 in level.leaders) {
+      if(!isDefined(var_1.squadmembers) || var_1.squadmembers.size < 2) {
         continue;
       }
-      foreach(var_3 in level._id_3B70) {
+      foreach(var_3 in level.leaders) {
         if(var_3 == var_1) {
           continue;
         }
-        if(!isDefined(var_3._id_3B74) || var_3._id_3B74.size < 2) {
+        if(!isDefined(var_3.squadmembers) || var_3.squadmembers.size < 2) {
           continue;
         }
         if(distance(var_1.origin, var_3.origin) < 600) {
-          foreach(var_5 in var_3._id_3B74) {
-            if(isDefined(var_5._id_3B7F) && var_5._id_3B7F) {
+          foreach(var_5 in var_3.squadmembers) {
+            if(isDefined(var_5.saw_player) && var_5.saw_player) {
               var_5.goalradius = 800;
             }
           }
@@ -219,8 +219,8 @@ _id_3B7E() {
           continue;
         }
 
-        foreach(var_5 in var_3._id_3B74) {
-          if(isDefined(var_5._id_3B7F) && var_5._id_3B7F) {
+        foreach(var_5 in var_3.squadmembers) {
+          if(isDefined(var_5.saw_player) && var_5.saw_player) {
             var_5.goalradius = 600;
           }
         }
@@ -229,57 +229,57 @@ _id_3B7E() {
   }
 }
 
-_id_3B80() {
+merge_squad() {
   level endon("challenge_success");
   level endon("special_op_terminated");
 
   for(;;) {
     wait 2;
 
-    if(!isDefined(level._id_3B70)) {
+    if(!isDefined(level.leaders)) {
       continue;
     }
-    if(level._id_3B70.size < 2) {
+    if(level.leaders.size < 2) {
       continue;
     }
-    var_0 = level._id_3B70[0];
+    var_0 = level.leaders[0];
 
-    foreach(var_2 in level._id_3B70) {
-      if(var_0._id_3B74.size > var_2._id_3B74.size) {
+    foreach(var_2 in level.leaders) {
+      if(var_0.squadmembers.size > var_2.squadmembers.size) {
         var_0 = var_2;
       }
     }
 
-    var_4 = common_scripts\utility::array_remove(level._id_3B70, var_0);
+    var_4 = common_scripts\utility::array_remove(level.leaders, var_0);
     var_5 = var_4[0];
 
     foreach(var_2 in var_4) {
-      if(var_5._id_3B74.size > var_2._id_3B74.size) {
+      if(var_5.squadmembers.size > var_2.squadmembers.size) {
         var_5 = var_2;
       }
     }
 
-    var_8 = var_0._id_3B74.size + var_5._id_3B74.size + 2;
+    var_8 = var_0.squadmembers.size + var_5.squadmembers.size + 2;
 
     if(var_8 <= 3) {
-      level._id_3B70 = common_scripts\utility::array_remove(level._id_3B70, var_0);
+      level.leaders = common_scripts\utility::array_remove(level.leaders, var_0);
       var_0 notify("demotion");
-      var_9 = common_scripts\utility::array_combine(var_0._id_3B74, var_5._id_3B74);
+      var_9 = common_scripts\utility::array_combine(var_0.squadmembers, var_5.squadmembers);
       var_9[var_9.size] = var_0;
       var_9[var_9.size] = var_5;
-      var_5 thread _id_3B84(var_9);
+      var_5 thread setup_leader(var_9);
       var_10 = common_scripts\utility::array_remove(var_9, var_5);
 
       foreach(var_12 in var_10) {
         if(isalive(var_12)) {
-          var_12 thread _id_3B88(var_5);
+          var_12 thread setup_follower(var_5);
         }
       }
     }
   }
 }
 
-_id_3B81(var_0, var_1, var_2, var_3) {
+spawn_enemy_group(var_0, var_1, var_2, var_3) {
   level endon("challenge_success");
   level endon("special_op_terminated");
   var_4 = 0;
@@ -287,8 +287,8 @@ _id_3B81(var_0, var_1, var_2, var_3) {
   if(isDefined(var_1)) {
     var_4 = 1;
   }
-  if(!isDefined(level._id_3B70)) {
-    level._id_3B70 = [];
+  if(!isDefined(level.leaders)) {
+    level.leaders = [];
   }
   if(!isDefined(var_3)) {
     var_3 = var_0.size - 1;
@@ -322,7 +322,7 @@ _id_3B81(var_0, var_1, var_2, var_3) {
         var_6.count = 1;
         var_6.origin = var_15.origin;
         var_6.angles = var_15.angles;
-        var_16 = var_6 maps\_utility::_id_166F(1);
+        var_16 = var_6 maps\_utility::spawn_ai(1);
         var_13[var_13.size] = var_16;
       }
 
@@ -335,7 +335,7 @@ _id_3B81(var_0, var_1, var_2, var_3) {
         var_7.count = 1;
         var_7.origin = var_15.origin;
         var_7.angles = var_15.angles;
-        var_16 = var_7 maps\_utility::_id_166F(1);
+        var_16 = var_7 maps\_utility::spawn_ai(1);
         var_13[var_13.size] = var_16;
       }
     }
@@ -351,7 +351,7 @@ _id_3B81(var_0, var_1, var_2, var_3) {
         continue;
       }
       var_15.count = 1;
-      var_16 = var_15 maps\_utility::_id_166F(1);
+      var_16 = var_15 maps\_utility::spawn_ai(1);
       var_13[var_13.size] = var_16;
     }
   }
@@ -362,7 +362,7 @@ _id_3B81(var_0, var_1, var_2, var_3) {
   var_20 = [];
 
   foreach(var_16 in var_13) {
-    var_16._id_3B75 = 1;
+    var_16.is_squad_enemy = 1;
 
     if(isalive(var_16)) {
       var_20[var_20.size] = var_16;
@@ -375,42 +375,42 @@ _id_3B81(var_0, var_1, var_2, var_3) {
   foreach(var_16 in var_13) {
     if(var_16.script_noteworthy == "leader") {
       var_23 = var_16;
-      var_23._id_3B82["left"] = 0;
-      var_23._id_3B82["right"] = 0;
-      var_23 thread _id_3B84(var_13);
+      var_23.back_occupied["left"] = 0;
+      var_23.back_occupied["right"] = 0;
+      var_23 thread setup_leader(var_13);
     }
   }
 
   if(var_13.size < var_0.size && !isDefined(var_23)) {
     var_23 = var_13[randomint(var_13.size)];
     var_23.script_noteworthy = "leader";
-    var_23 thread _id_3B84(var_13);
+    var_23 thread setup_leader(var_13);
   }
 
   foreach(var_16 in var_13) {
-    if(isDefined(level._id_3B83)) {
+    if(isDefined(level.squad_drop_weapon_rate)) {
       var_27 = randomfloat(1);
 
-      if(var_27 > level._id_3B83) {
+      if(var_27 > level.squad_drop_weapon_rate) {
         var_16.dropweapon = 0;
       }
     }
 
     if(var_16.script_noteworthy == "follower") {
-      var_16 thread _id_3B88(var_23);
+      var_16 thread setup_follower(var_23);
     }
   }
 
   return var_13;
 }
 
-_id_3B84(var_0) {
+setup_leader(var_0) {
   level endon("squad_disband");
   self notify("new_leader");
   self endon("new_leader");
   self endon("demotion");
-  self._id_3B74 = [];
-  self._id_3B73 = undefined;
+  self.squadmembers = [];
+  self.leader = undefined;
 
   foreach(var_2 in var_0) {
     if(!isalive(var_2)) {
@@ -418,48 +418,48 @@ _id_3B84(var_0) {
     }
   }
 
-  if(!isDefined(level._id_3B6E) || level._id_3B6E == 0) {
-    if(var_0.size == 1 && level._id_3B70.size > 0) {
-      var_4 = level._id_3B70[0];
+  if(!isDefined(level.new_squad_logic) || level.new_squad_logic == 0) {
+    if(var_0.size == 1 && level.leaders.size > 0) {
+      var_4 = level.leaders[0];
 
-      if(level._id_3B70.size > 1) {
-        var_4 = maps\_utility::_id_2605(self.origin, level._id_3B70);
+      if(level.leaders.size > 1) {
+        var_4 = maps\_utility::get_closest_living(self.origin, level.leaders);
       }
-      _id_3B88(var_4);
+      setup_follower(var_4);
       return;
     }
   }
 
-  if(!maps\_utility::is_in_array(level._id_3B70, self)) {
-    level._id_3B70[level._id_3B70.size] = self;
+  if(!maps\_utility::is_in_array(level.leaders, self)) {
+    level.leaders[level.leaders.size] = self;
   }
-  if(isDefined(level._id_3B85)) {
-    self thread[[level._id_3B85]]();
+  if(isDefined(level.squad_leader_behavior_func)) {
+    self thread[[level.squad_leader_behavior_func]]();
   } else {
     self.goalradius = 2048;
-    var_5 = maps\_utility::_id_0AE9(self.origin, level.players);
+    var_5 = maps\_utility::getclosest(self.origin, level.players);
     self.favoriteenemy = var_5;
     self setgoalentity(var_5);
     self setengagementmindist(300, 200);
     self setengagementmaxdist(512, 720);
   }
 
-  thread _id_3B87();
-  thread _id_3B86();
+  thread wait_for_followers();
+  thread enlarge_follower_goalradius_upon_seeing_player();
 
-  if(!isDefined(level._id_3B6E) || level._id_3B6E == 0) {
-    thread _id_3B98(var_0);
+  if(!isDefined(level.new_squad_logic) || level.new_squad_logic == 0) {
+    thread handle_all_followers_dying(var_0);
   }
   self waittill("death");
   var_6 = [];
 
-  foreach(var_4 in level._id_3B70) {
+  foreach(var_4 in level.leaders) {
     if(isDefined(var_4) && isalive(var_4)) {
       var_6[var_6.size] = var_4;
     }
   }
 
-  level._id_3B70 = var_6;
+  level.leaders = var_6;
   var_4 = undefined;
 
   foreach(var_2 in var_0) {
@@ -467,128 +467,128 @@ _id_3B84(var_0) {
       if(!isDefined(var_4)) {
         var_4 = var_2;
         var_2 notify("promotion");
-        var_2 thread _id_3B84(var_0);
+        var_2 thread setup_leader(var_0);
         continue;
       }
 
-      var_2 thread _id_3B88(var_4);
+      var_2 thread setup_follower(var_4);
     }
   }
 }
 
-_id_3B86() {
+enlarge_follower_goalradius_upon_seeing_player() {
   level endon("squad_disband");
   self endon("new_leader");
   self endon("demotion");
   self endon("death");
   self waittill("enemy_visible");
 
-  if(isDefined(self._id_3B74) && self._id_3B74.size) {
-    foreach(var_1 in self._id_3B74) {}
+  if(isDefined(self.squadmembers) && self.squadmembers.size) {
+    foreach(var_1 in self.squadmembers) {}
     var_1 notify("leader_saw_player");
   }
 }
 
-_id_3B87() {
+wait_for_followers() {
   level endon("squad_disband");
   self endon("new_leader");
   self endon("demotion");
   self endon("death");
-  var_0 = self._id_0FC6;
+  var_0 = self.moveplaybackrate;
 
   for(;;) {
     wait 2;
 
-    if(isDefined(self._id_3B74) && self._id_3B74.size) {
-      var_1 = maps\_utility::_id_2605(self.origin, self._id_3B74);
+    if(isDefined(self.squadmembers) && self.squadmembers.size) {
+      var_1 = maps\_utility::get_closest_living(self.origin, self.squadmembers);
 
       if(isDefined(var_1) && distance(var_1.origin, self.origin) > 256) {
-        self._id_0FC6 = 0.85 * var_0;
+        self.moveplaybackrate = 0.85 * var_0;
       } else {
-        self._id_0FC6 = var_0;
+        self.moveplaybackrate = var_0;
       }
     }
   }
 }
 
-_id_3B88(var_0) {
+setup_follower(var_0) {
   level endon("squad_disband");
   self notify("assigned_new_leader");
   self endon("assigned_new_leader");
   self endon("death");
   self endon("promotion");
-  self._id_3B74 = undefined;
-  self._id_3B73 = var_0;
-  thread _id_3B8A(var_0);
+  self.squadmembers = undefined;
+  self.leader = var_0;
+  thread leader_follower_count(var_0);
 
-  if(isDefined(level._id_3B89)) {
-    self[[level._id_3B89]]();
+  if(isDefined(level.attributes_func)) {
+    self[[level.attributes_func]]();
   }
-  if(isDefined(level._id_3B71)) {
-    self[[level._id_3B71]](var_0);
+  if(isDefined(level.squad_follower_func)) {
+    self[[level.squad_follower_func]](var_0);
   } else {
-    thread _id_3B8E(var_0);
+    thread follow_leader_regular(var_0);
   }
 }
 
-_id_3B8A(var_0) {
+leader_follower_count(var_0) {
   level endon("squad_disband");
   self endon("assigned_new_leader");
   var_0 endon("death");
-  var_0._id_3B74[var_0._id_3B74.size] = self;
+  var_0.squadmembers[var_0.squadmembers.size] = self;
   self waittill("death");
 
-  if(!isDefined(self._id_3B73)) {
+  if(!isDefined(self.leader)) {
     return;
   }
-  if(isalive(self._id_3B73) && isDefined(self._id_3B73._id_3B74) && self._id_3B73._id_3B74.size > 0) {
+  if(isalive(self.leader) && isDefined(self.leader.squadmembers) && self.leader.squadmembers.size > 0) {
     var_1 = [];
 
-    foreach(var_3 in var_0._id_3B74) {
+    foreach(var_3 in var_0.squadmembers) {
       if(isalive(var_3)) {
         var_1[var_1.size] = var_3;
       }
     }
 
-    var_0._id_3B74 = var_1;
+    var_0.squadmembers = var_1;
   }
 }
 
-_id_3B8B(var_0) {
-  if(_id_3B97(var_0)) {
+setup_follower_advanced(var_0) {
+  if(is_riotshield(var_0)) {
     var_0.goalradius = 1300;
     var_1 = undefined;
 
-    if(!var_0._id_3B82["right"] && !var_0._id_3B82["left"]) {
+    if(!var_0.back_occupied["right"] && !var_0.back_occupied["left"]) {
       if(common_scripts\utility::cointoss()) {
-        _id_3B8C("left");
+        follow_leader_riotshield("left");
       } else {
-        _id_3B8C("right");
+        follow_leader_riotshield("right");
       }
       return;
     }
 
-    if(var_0._id_3B82["right"] && var_0._id_3B82["left"]) {
-      _id_3B8E();
+    if(var_0.back_occupied["right"] && var_0.back_occupied["left"]) {
+      follow_leader_regular();
       return;
     }
 
-    if(!var_0._id_3B82["right"] && var_0._id_3B82["left"]) {
-      _id_3B8C("right");
+    if(!var_0.back_occupied["right"] && var_0.back_occupied["left"]) {
+      follow_leader_riotshield("right");
       return;
     }
 
-    if(var_0._id_3B82["right"] && !var_0._id_3B82["left"]) {
-      _id_3B8C("left");
+    if(var_0.back_occupied["right"] && !var_0.back_occupied["left"]) {
+      follow_leader_riotshield("left");
       return;
       return;
     }
   } else {
-    _id_3B8E();
+    follow_leader_regular();
   }
 }
 
-_id_3B8C(var_0) {
+follow_leader_riotshield(var_0) {
   level endon("squad_disband");
   self endon("death");
   self endon("promotion");
@@ -598,27 +598,27 @@ _id_3B8C(var_0) {
   self.favoriteenemy = undefined;
   self setengagementmindist(300, 200);
   self setengagementmaxdist(512, 720);
-  self._id_3B73._id_3B82[var_0] = 1;
-  self._id_3B8D = var_0;
-  thread _id_3B92();
+  self.leader.back_occupied[var_0] = 1;
+  self.is_occupying = var_0;
+  thread setup_follower_goalradius_riotshield();
 
   for(;;) {
-    var_1 = self._id_3B73 _id_3B93(var_0, 0);
+    var_1 = self.leader get_riotshield_back_pos(var_0, 0);
 
     if(!isDefined(var_1)) {
-      _id_3B8E();
+      follow_leader_regular();
       return;
     }
 
-    var_2 = self._id_3B73.origin;
+    var_2 = self.leader.origin;
     wait 0.2;
 
-    while(isDefined(self._id_3B73) && isalive(self._id_3B73) && distance(self._id_3B73.origin, var_2) < 2) {
-      var_2 = self._id_3B73.origin;
+    while(isDefined(self.leader) && isalive(self.leader) && distance(self.leader.origin, var_2) < 2) {
+      var_2 = self.leader.origin;
       wait 0.2;
     }
 
-    if(!isalive(self._id_3B73) || !isDefined(var_1)) {
+    if(!isalive(self.leader) || !isDefined(var_1)) {
       self setgoalpos(self.origin);
       continue;
     }
@@ -627,7 +627,7 @@ _id_3B8C(var_0) {
   }
 }
 
-_id_3B8E() {
+follow_leader_regular() {
   level endon("squad_disband");
   self endon("death");
   self endon("promotion");
@@ -637,45 +637,45 @@ _id_3B8E() {
   self.favoriteenemy = undefined;
   self setengagementmindist(300, 200);
   self setengagementmaxdist(512, 720);
-  thread _id_3B91();
+  thread setup_follower_goalradius();
 
   for(;;) {
     wait 0.2;
 
-    if(!isalive(self._id_3B73)) {
+    if(!isalive(self.leader)) {
       self setgoalpos(self.origin);
       continue;
     }
 
-    self setgoalpos(self._id_3B73.origin);
+    self setgoalpos(self.leader.origin);
   }
 }
 
-_id_3B8F(var_0, var_1) {
+protector_leader_logic(var_0, var_1) {
   level endon("squad_disband");
   self endon("death");
-  self._id_3B82["left"] = 0;
-  self._id_3B82["right"] = 0;
-  self._id_3B90 = 1;
-  self._id_3B7D = var_0;
+  self.back_occupied["left"] = 0;
+  self.back_occupied["right"] = 0;
+  self.protecting_obj = 1;
+  self.protector_obj_group = var_0;
   var_2 = common_scripts\utility::getStruct(self.target, "targetname");
-  _id_3B94(var_1, var_2.origin);
+  bind_in_place(var_1, var_2.origin);
   var_1 waittill("trigger");
   wait 5;
-  self._id_3B90 = 0;
+  self.protecting_obj = 0;
   self.goalradius = 512;
-  var_3 = maps\_utility::_id_0AE9(self.origin, level.players);
+  var_3 = maps\_utility::getclosest(self.origin, level.players);
   self.favoriteenemy = var_3;
   self setgoalentity(var_3);
 }
 
-_id_3B91() {
+setup_follower_goalradius() {
   common_scripts\utility::waittill_either("enemy_visible", "leader_saw_player");
   self.goalradius = 600;
-  self._id_3B7F = 1;
+  self.saw_player = 1;
 }
 
-_id_3B92() {
+setup_follower_goalradius_riotshield() {
   level endon("squad_disband");
   self endon("death");
   self endon("promotion");
@@ -686,25 +686,25 @@ _id_3B92() {
   var_2 = 120;
 
   for(;;) {
-    maps\_utility::_id_26E3("on");
+    maps\_utility::cqb_walk("on");
 
-    if(isDefined(self._id_3B90) && self._id_3B90) {
+    if(isDefined(self.protecting_obj) && self.protecting_obj) {
       wait 1;
       continue;
     }
 
     wait 30;
     self.goalradius = 600;
-    maps\_utility::_id_26E3("off");
+    maps\_utility::cqb_walk("off");
     wait 20;
     self.goalradius = 8;
   }
 
   self.goalradius = 600;
-  self._id_3B73._id_3B82[self._id_3B8D] = 0;
+  self.leader.back_occupied[self.is_occupying] = 0;
 }
 
-_id_3B93(var_0, var_1) {
+get_riotshield_back_pos(var_0, var_1) {
   if(!isDefined(var_0)) {
     return undefined;
   }
@@ -728,7 +728,7 @@ _id_3B93(var_0, var_1) {
   return self.origin + var_4;
 }
 
-_id_3B94(var_0, var_1) {
+bind_in_place(var_0, var_1) {
   level endon("squad_disband");
   var_0 endon("trigger");
   self endon("death");
@@ -740,25 +740,25 @@ _id_3B94(var_0, var_1) {
   }
 }
 
-_id_3B95() {
+one_direction_trigger() {
   self endon("trigger");
   var_0 = getEnt(self.target, "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::trigger_off();
 }
 
-_id_3B96(var_0) {
-  return isDefined(var_0._id_3B73) && var_0._id_3B73.classname == "actor_enemy_afghan_riotshield";
+is_leader_riotshield(var_0) {
+  return isDefined(var_0.leader) && var_0.leader.classname == "actor_enemy_afghan_riotshield";
 }
 
-_id_3B97(var_0) {
+is_riotshield(var_0) {
   if(var_0.classname == "actor_enemy_afghan_riotshield") {
     return 1;
   }
   return 0;
 }
 
-_id_3B98(var_0) {
+handle_all_followers_dying(var_0) {
   level endon("squad_disband");
   self endon("death");
 
@@ -772,30 +772,30 @@ _id_3B98(var_0) {
       }
     }
 
-    if(var_1 == 1 && level._id_3B70.size > 1) {
-      level._id_3B70 = common_scripts\utility::array_remove(level._id_3B70, self);
-      var_5 = level._id_3B70[0];
+    if(var_1 == 1 && level.leaders.size > 1) {
+      level.leaders = common_scripts\utility::array_remove(level.leaders, self);
+      var_5 = level.leaders[0];
 
-      if(level._id_3B70.size > 1) {
-        var_5 = maps\_utility::_id_2605(self.origin, level._id_3B70);
+      if(level.leaders.size > 1) {
+        var_5 = maps\_utility::get_closest_living(self.origin, level.leaders);
       }
-      thread _id_3B88(var_5);
+      thread setup_follower(var_5);
       self notify("demotion");
       return;
     }
   }
 }
 
-_id_3B99() {
+drawleader() {
   if(getDvar("squad_debug") == "" || getDvar("squad_debug") == "0") {
     return;
   }
   var_0 = (1, 1, 1);
 
   for(;;) {
-    foreach(var_2 in level._id_3B70) {
-      if(isalive(var_2) && isDefined(var_2._id_3B74)) {
-        foreach(var_4 in var_2._id_3B74) {
+    foreach(var_2 in level.leaders) {
+      if(isalive(var_2) && isDefined(var_2.squadmembers)) {
+        foreach(var_4 in var_2.squadmembers) {
           if(isDefined(var_4) && isalive(var_4)) {}
         }
       }
@@ -805,7 +805,7 @@ _id_3B99() {
   }
 }
 
-_id_3B9A(var_0, var_1) {
+draw_debug_marker(var_0, var_1) {
   if(getDvar("squad_debug") == "" || getDvar("squad_debug") == "0") {
     return;
   }
@@ -814,7 +814,7 @@ _id_3B9A(var_0, var_1) {
   }
 }
 
-_id_3B9B() {
+drawfollowers() {
   if(getDvar("squad_debug") == "" || getDvar("squad_debug") == "0") {
     return;
   }
@@ -822,8 +822,8 @@ _id_3B9B() {
     var_0 = getaiarray();
 
     foreach(var_2 in var_0) {
-      if(isDefined(var_2._id_3B73)) {
-        thread common_scripts\utility::draw_line_for_time(var_2.origin, var_2._id_3B73.origin, 0.5, 0.5, 1, 0.1);
+      if(isDefined(var_2.leader)) {
+        thread common_scripts\utility::draw_line_for_time(var_2.origin, var_2.leader.origin, 0.5, 0.5, 1, 0.1);
       }
     }
 

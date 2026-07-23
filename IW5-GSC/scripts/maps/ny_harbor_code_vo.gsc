@@ -3,97 +3,97 @@
  * Script: scripts\maps\ny_harbor_code_vo.gsc
 **********************************************/
 
-_id_4AD8(var_0) {
+vo_wetsub_intro(var_0) {
   if(isDefined(var_0)) {
     wait(var_0);
   }
   common_scripts\utility::flag_wait("npcs_spawned");
-  maps\_utility::_id_11F4("nyharbor_rno_inposition");
-  maps\_utility::_id_11F4("nyharbor_lns_radiocheck");
-  maps\_utility::_id_11F4("nyharbor_sel_fivebyfive");
-  maps\_utility::_id_11F4("nyharbor_lns_starttheparty");
-  maps\_utility::_id_11F4("nyharbor_sel_copythat");
-  maps\_utility::_id_11F4("nyharbor_rno_dontstart");
+  maps\_utility::radio_dialogue("nyharbor_rno_inposition");
+  maps\_utility::radio_dialogue("nyharbor_lns_radiocheck");
+  maps\_utility::radio_dialogue("nyharbor_sel_fivebyfive");
+  maps\_utility::radio_dialogue("nyharbor_lns_starttheparty");
+  maps\_utility::radio_dialogue("nyharbor_sel_copythat");
+  maps\_utility::radio_dialogue("nyharbor_rno_dontstart");
   wait 1;
-  maps\_utility::_id_11F4("nyharbor_lns_almostthrough");
+  maps\_utility::radio_dialogue("nyharbor_lns_almostthrough");
   common_scripts\utility::flag_wait("tunnel_linkup_dialogue");
-  maps\_utility::_id_11F4("nyharbor_rno_gotout");
-  maps\_utility::_id_11F4("nyharbor_lns_forthem");
+  maps\_utility::radio_dialogue("nyharbor_rno_gotout");
+  maps\_utility::radio_dialogue("nyharbor_lns_forthem");
   wait 4;
-  maps\_utility::_id_11F4("nyharbor_lns_linkup");
+  maps\_utility::radio_dialogue("nyharbor_lns_linkup");
   common_scripts\utility::flag_wait("tunnel_tracker_dialogue");
-  maps\_utility::_id_11F4("nyharbor_sel_ontracker");
-  maps\_utility::_id_11F4("nyharbor_lns_approachingrv");
+  maps\_utility::radio_dialogue("nyharbor_sel_ontracker");
+  maps\_utility::radio_dialogue("nyharbor_lns_approachingrv");
   common_scripts\utility::flag_wait("up_ahead_vo");
-  maps\_utility::_id_11F4("nyharbor_lns_upahead");
-  maps\_utility::_id_11F4("nyharbor_rno_iseethem");
+  maps\_utility::radio_dialogue("nyharbor_lns_upahead");
+  maps\_utility::radio_dialogue("nyharbor_rno_iseethem");
   common_scripts\utility::flag_wait("leaving_tunnel");
   wait 2;
-  maps\_utility::_id_11F4("nyharbor_sel_intercept");
-  maps\_utility::_id_11F4("nyharbor_lns_leadtheway");
+  maps\_utility::radio_dialogue("nyharbor_sel_intercept");
+  maps\_utility::radio_dialogue("nyharbor_lns_leadtheway");
   common_scripts\utility::flag_set("light_toggle_on_1");
 }
 
-_id_4AD9(var_0) {
-  maps\_utility::_id_11F4("nyharbor_lns_entrypoint");
+vo_sandman_grate(var_0) {
+  maps\_utility::radio_dialogue("nyharbor_lns_entrypoint");
 }
 
-_id_4ADA(var_0) {
+vo_mines(var_0) {
   level endon("russian_sub_event");
 
   if(isDefined(var_0)) {
     wait(var_0);
   }
-  maps\_utility::_id_11F4("nyharbor_sel_watchsonar");
+  maps\_utility::radio_dialogue("nyharbor_sel_watchsonar");
   wait 2;
-  maps\_utility::_id_11F4("nyharbor_lns_eyesonsonar");
+  maps\_utility::radio_dialogue("nyharbor_lns_eyesonsonar");
   common_scripts\utility::flag_wait("mine_2");
-  maps\_utility::_id_11F4("nyharbor_rno_mine");
-  maps\_utility::_id_11F4("nyharbor_lns_keepitsteady");
+  maps\_utility::radio_dialogue("nyharbor_rno_mine");
+  maps\_utility::radio_dialogue("nyharbor_lns_keepitsteady");
   common_scripts\utility::flag_wait("mine_3");
-  maps\_utility::_id_11F4("nyharbor_lns_right");
+  maps\_utility::radio_dialogue("nyharbor_lns_right");
   common_scripts\utility::flag_wait("mine_5");
-  maps\_utility::_id_11F4("nyharbor_lns_anothermine");
+  maps\_utility::radio_dialogue("nyharbor_lns_anothermine");
   wait 1;
-  maps\_utility::_id_11F4("nyharbor_lns_clear");
+  maps\_utility::radio_dialogue("nyharbor_lns_clear");
 }
 
-_id_4ADB(var_0) {
+vo_wetsub_russian_sub(var_0) {
   if(isDefined(var_0)) {
     wait(var_0);
   }
-  maps\_utility::_id_11F4("nyharbor_lns_powerdown");
+  maps\_utility::radio_dialogue("nyharbor_lns_powerdown");
   wait 3;
-  maps\_utility::_id_11F4("nyharbor_sel_targetapproaching");
+  maps\_utility::radio_dialogue("nyharbor_sel_targetapproaching");
   wait 8;
-  maps\_utility::_id_11F4("nyharbor_sel_steady");
+  maps\_utility::radio_dialogue("nyharbor_sel_steady");
   wait 8;
-  maps\_utility::_id_11F4("nyharbor_lns_waittilpasses");
+  maps\_utility::radio_dialogue("nyharbor_lns_waittilpasses");
   common_scripts\utility::flag_wait("sdvs_chase_sub");
-  maps\_utility::_id_11F4("nyharbor_lns_okaygo");
-  thread _id_4ADD();
+  maps\_utility::radio_dialogue("nyharbor_lns_okaygo");
+  thread mine_nag_lines();
   wait 3;
-  maps\_utility::_id_11F4("nyharbor_lns_getinposition");
-  maps\_utility::_id_11F4("nyharbor_sel_planting");
+  maps\_utility::radio_dialogue("nyharbor_lns_getinposition");
+  maps\_utility::radio_dialogue("nyharbor_sel_planting");
   wait 1.5;
-  maps\_utility::_id_11F4("nyharbor_rno_planting");
+  maps\_utility::radio_dialogue("nyharbor_rno_planting");
 
   if(!common_scripts\utility::flag("vo_stop_mine_nag")) {
-    maps\_utility::_id_11F4("nyharbor_lns_plantjaywick");
+    maps\_utility::radio_dialogue("nyharbor_lns_plantjaywick");
   }
   common_scripts\utility::flag_wait("submine_planted");
   wait 3;
-  maps\_utility::_id_11F4("nyharbor_lns_minesarmed");
-  maps\_utility::_id_11F4("nyharbor_sel_goodjob");
-  maps\_utility::_id_11F4("nyharbor_lns_goingexplosive");
+  maps\_utility::radio_dialogue("nyharbor_lns_minesarmed");
+  maps\_utility::radio_dialogue("nyharbor_sel_goodjob");
+  maps\_utility::radio_dialogue("nyharbor_lns_goingexplosive");
   wait 1;
-  maps\_utility::_id_11F4("nyharbor_lns_commencingassault");
-  maps\_utility::_id_11F4("nyharbor_hqr_primaryobjective");
+  maps\_utility::radio_dialogue("nyharbor_lns_commencingassault");
+  maps\_utility::radio_dialogue("nyharbor_hqr_primaryobjective");
   wait 2.5;
-  maps\_utility::_id_11F4("nyharbor_lns_holdposition");
+  maps\_utility::radio_dialogue("nyharbor_lns_holdposition");
 }
 
-_id_4ADC() {
+sdv_follow_nag_lines() {
   level endon("stop_sdv_follow_nag");
   var_0 = [];
   var_0[var_0.size] = "nyharbor_lns_hurryup";
@@ -111,13 +111,13 @@ _id_4ADC() {
       continue;
     } else {
       var_1 = var_5;
-      maps\_utility::_id_11F4(var_5);
+      maps\_utility::radio_dialogue(var_5);
       wait(var_4);
     }
   }
 }
 
-_id_4ADD() {
+mine_nag_lines() {
   var_0 = [];
   var_0[var_0.size] = "nyharbor_lns_plantyourmine";
   var_0[var_0.size] = "nyharbor_lns_frostgetinposition";
@@ -138,56 +138,56 @@ _id_4ADD() {
       wait(var_4);
 
       if(!common_scripts\utility::flag("vo_stop_mine_nag")) {
-        maps\_utility::_id_11F4(var_5);
+        maps\_utility::radio_dialogue(var_5);
       }
     }
   }
 }
 
-_id_4ADE() {
+vo_sub_exterior() {
   common_scripts\utility::flag_wait("vo_hatch_open");
-  level._id_45C0 maps\_utility::_id_168C("nyharbor_lns_hatchopening");
-  level._id_45C0 maps\_utility::_id_168C("nyharbor_lns_comingout");
+  level.sandman maps\_utility::dialogue_queue("nyharbor_lns_hatchopening");
+  level.sandman maps\_utility::dialogue_queue("nyharbor_lns_comingout");
   common_scripts\utility::flag_wait("vo_frag_out");
-  level._id_45C0 maps\_utility::_id_168C("nyharbor_lns_fragout");
+  level.sandman maps\_utility::dialogue_queue("nyharbor_lns_fragout");
   common_scripts\utility::flag_wait("vo_frag_out_clear");
-  level._id_45C0 maps\_utility::_id_168C("nyharbor_lns_clearheaddown");
+  level.sandman maps\_utility::dialogue_queue("nyharbor_lns_clearheaddown");
   common_scripts\utility::flag_set("sandman_talking_on_deck");
 }
 
-_id_4ADF() {
+vo_sub_exterior_allies() {
   level endon("hatch_player_using_ladder");
   common_scripts\utility::flag_wait("sub_exterior_guys_dead");
   common_scripts\utility::flag_wait("sandman_talking_on_deck");
   wait 1;
-  level._id_4AE0 maps\_utility::_id_168C("nyharbor_trk_decksecured");
+  level.sub_truck maps\_utility::dialogue_queue("nyharbor_trk_decksecured");
   wait 3.0;
 
   if(!common_scripts\utility::flag("hatch_player_using_ladder")) {
-    level._id_4AE1 maps\_utility::_id_168C("nyharbor_rno_headdown");
+    level.sub_grinch maps\_utility::dialogue_queue("nyharbor_rno_headdown");
   }
   wait 5;
 
   if(!common_scripts\utility::flag("hatch_player_using_ladder")) {
-    level._id_4AE0 maps\_utility::_id_168C("nyharbor_trk_jobtodo");
+    level.sub_truck maps\_utility::dialogue_queue("nyharbor_trk_jobtodo");
   }
   wait 5;
 
   if(!common_scripts\utility::flag("hatch_player_using_ladder")) {
-    level._id_4AE1 maps\_utility::_id_168C("nyharbor_rno_downthere");
+    level.sub_grinch maps\_utility::dialogue_queue("nyharbor_rno_downthere");
   }
   common_scripts\utility::flag_wait("sub_exterior_hind_1_fire");
-  level._id_4AE0 maps\_utility::_id_168C("nyharbor_trk_incominghind");
+  level.sub_truck maps\_utility::dialogue_queue("nyharbor_trk_incominghind");
 }
 
-_id_4AE2() {
+vo_sub_interior_engine_room() {
   common_scripts\utility::flag_wait("vo_sub_interior_1");
-  level._id_45C0 maps\_utility::_id_168C("nyharbor_lns_unknowns");
+  level.sandman maps\_utility::dialogue_queue("nyharbor_lns_unknowns");
   common_scripts\utility::flag_wait("vo_go_downstairs");
-  level._id_45C0 maps\_utility::_id_168C("nyharbor_lns_rvdownstairs");
+  level.sandman maps\_utility::dialogue_queue("nyharbor_lns_rvdownstairs");
 }
 
-_id_00AA() {
+sandman_exit_nag_vo() {
   common_scripts\utility::flag_wait("barracks_exit_nag_vo");
   var_0 = [];
   var_0[0] = "nyharbor_snd_downstairs";
@@ -195,7 +195,7 @@ _id_00AA() {
   var_1 = 0;
 
   while(!common_scripts\utility::flag("sandman_paired_kill") && !common_scripts\utility::flag("barracks_move_sandman")) {
-    level._id_45C0 maps\_utility::_id_168C(var_0[var_1]);
+    level.sandman maps\_utility::dialogue_queue(var_0[var_1]);
 
     if(var_1 == 0) {
       var_1 = 1;
@@ -206,84 +206,84 @@ _id_00AA() {
   }
 }
 
-_id_4AE3() {
+vo_sub_interior_barracks() {
   common_scripts\utility::flag_wait("barracks_vo");
 }
 
-_id_4AE4() {
+vo_sub_interior_reactor() {
   common_scripts\utility::flag_wait("sandman_paired_kill_complete");
-  level._id_45C0 maps\_utility::_id_168C("nyharbor_lns_stairsclear");
-  level._id_45C0 maps\_utility::_id_168C("nyharbor_lns_takeleft");
+  level.sandman maps\_utility::dialogue_queue("nyharbor_lns_stairsclear");
+  level.sandman maps\_utility::dialogue_queue("nyharbor_lns_takeleft");
   common_scripts\utility::flag_wait("reactor_room_announcement");
-  thread _id_4AE5();
-  maps\_utility::_id_11F4("nyharbor_rpa_evacuate");
+  thread sandman_translate_scuttle();
+  maps\_utility::radio_dialogue("nyharbor_rpa_evacuate");
 }
 
-_id_4AE5() {
+sandman_translate_scuttle() {
   wait 2.5;
-  level._id_45C0 maps\_utility::_id_168C("nyharbor_lns_scuttle");
-  level._id_45C0 maps\_utility::_id_168C("nyharbor_lns_takepoint");
+  level.sandman maps\_utility::dialogue_queue("nyharbor_lns_scuttle");
+  level.sandman maps\_utility::dialogue_queue("nyharbor_lns_takepoint");
 }
 
-_id_4AE6() {
+vo_sub_interior_missile_room_1() {
   common_scripts\utility::flag_wait("vo_to_bridge");
-  level._id_45C0 maps\_utility::_id_168C("nyharbor_lns_tothebridge2");
+  level.sandman maps\_utility::dialogue_queue("nyharbor_lns_tothebridge2");
 }
 
-_id_4AE7() {
+vo_sub_interior_missile_room_2() {
   common_scripts\utility::flag_wait("vo_wait_at_door");
   wait 1;
 
   if(!common_scripts\utility::flag("ready_for_breach")) {
-    level._id_45C0 maps\_utility::_id_168C("nyharbor_lns_atthedoor2");
+    level.sandman maps\_utility::dialogue_queue("nyharbor_lns_atthedoor2");
     wait 0.05;
   }
 
   common_scripts\utility::flag_wait("vo_breach");
-  level._id_45C0 maps\_utility::_id_168C("nyharbor_lns_kickercharge");
-  level._id_45C0 setlookatentity();
+  level.sandman maps\_utility::dialogue_queue("nyharbor_lns_kickercharge");
+  level.sandman setlookatentity();
   common_scripts\utility::flag_wait("breach_guys_dead");
   wait 2;
-  level._id_45C0 maps\_utility::_id_168C("nyharbor_lns_areasecure");
+  level.sandman maps\_utility::dialogue_queue("nyharbor_lns_areasecure");
 }
 
-_id_4AE8(var_0) {
-  level._id_45C0 maps\_utility::_id_168C("nyharbor_lns_launchkeys");
+vo_sub_sandman_got_key(var_0) {
+  level.sandman maps\_utility::dialogue_queue("nyharbor_lns_launchkeys");
 }
 
-_id_4AE9() {
+vo_sub_sandman_captain_flip_wface() {
   level waittill("start_missilekey");
-  level._id_45C0 maps\_utility::_id_168C("nyharbor_lns_missilekey");
+  level.sandman maps\_utility::dialogue_queue("nyharbor_lns_missilekey");
   level notify("gridcoords");
-  level._id_45C0 maps\_utility::_id_168C("nyharbor_lns_launchin30");
-  level._id_45C0 maps\_utility::_id_168C("nyharbor_lns_console");
+  level.sandman maps\_utility::dialogue_queue("nyharbor_lns_launchin30");
+  level.sandman maps\_utility::dialogue_queue("nyharbor_lns_console");
   common_scripts\utility::flag_set("sub_control_room_player_to_controls");
-  maps\_utility::delaythread(6, ::_id_4AED);
+  maps\_utility::delaythread(6, ::sub_interior_bridge_console_nag);
 }
 
-_id_4AEA(var_0) {
-  thread _id_4AE9();
+vo_sub_sandman_captain_flip(var_0) {
+  thread vo_sub_sandman_captain_flip_wface();
   common_scripts\utility::flag_set("vo_sandman_checkpointneptune");
-  level._id_45C0 maps\_utility::_id_168C("nyharbor_lns_checkpointneptune");
-  maps\_utility::_id_11F4("nyharbor_hqr_copyneptune");
+  level.sandman maps\_utility::dialogue_queue("nyharbor_lns_checkpointneptune");
+  maps\_utility::radio_dialogue("nyharbor_hqr_copyneptune");
   level waittill("gridcoords");
-  maps\_utility::_id_11F4("nyharbor_hqr_coordinates");
+  maps\_utility::radio_dialogue("nyharbor_hqr_coordinates");
 }
 
-_id_4AEB(var_0) {
-  level._id_45C0 maps\_utility::_id_168C("nyharbor_lns_321turn");
-  level._id_45C0 maps\_utility::_id_168C("nyharbor_lns_missiles");
+vo_sandman_count_down(var_0) {
+  level.sandman maps\_utility::dialogue_queue("nyharbor_lns_321turn");
+  level.sandman maps\_utility::dialogue_queue("nyharbor_lns_missiles");
   common_scripts\utility::flag_set("vo_bridge_is_done");
-  maps\_utility::_id_11F4("nyharbor_hqr_teaminposition");
-  level._id_45C0 maps\_utility::_id_168C("nyharbor_lns_gogo");
+  maps\_utility::radio_dialogue("nyharbor_hqr_teaminposition");
+  level.sandman maps\_utility::dialogue_queue("nyharbor_lns_gogo");
   maps\_audio::aud_send_msg("mus_to_the_zodiac");
 }
 
-_id_4AEC() {
+vo_sub_interior_bridge() {
   common_scripts\utility::flag_wait("vo_sub_interior_6");
 }
 
-_id_4AED() {
+sub_interior_bridge_console_nag() {
   wait 1;
   var_0 = [];
   var_0[0] = "nyharbor_lns_overhere";
@@ -291,7 +291,7 @@ _id_4AED() {
   var_1 = 0;
 
   while(!common_scripts\utility::flag("player_at_controls")) {
-    level._id_45C0 maps\_utility::_id_168C(var_0[var_1]);
+    level.sandman maps\_utility::dialogue_queue(var_0[var_1]);
 
     if(var_1 == 0) {
       var_1 = 1;
@@ -302,51 +302,51 @@ _id_4AED() {
   }
 }
 
-_id_4AEE(var_0) {
+live_dialog_queue(var_0) {
   if(isalive(self)) {
-    maps\_utility::_id_168C(var_0);
+    maps\_utility::dialogue_queue(var_0);
   } else {
     wait 100;
   }
 }
 
-_id_4AEF(var_0) {
+vo_zodiac_ride(var_0) {
   if(isDefined(var_0)) {
     wait(var_0);
   }
   common_scripts\utility::flag_wait("sub_exit_player_going_out_hatch");
   wait 3;
-  level._id_45C0 _id_4AEE("nyharbor_lns_letsroll");
-  maps\_utility::_id_11F4("nyharbor_rno_amentothat");
+  level.sandman live_dialog_queue("nyharbor_lns_letsroll");
+  maps\_utility::radio_dialogue("nyharbor_rno_amentothat");
   common_scripts\utility::flag_wait("player_on_boat");
-  level._id_45C0 _id_4AEE("nyharbor_lns_punchit");
+  level.sandman live_dialog_queue("nyharbor_lns_punchit");
   wait 1;
-  level._id_45C0 _id_4AEE("nyharbor_lns_missileslaunching");
+  level.sandman live_dialog_queue("nyharbor_lns_missileslaunching");
   common_scripts\utility::flag_wait("zubrs");
-  level._id_45C0 _id_4AEE("nyharbor_lns_keepup");
+  level.sandman live_dialog_queue("nyharbor_lns_keepup");
   common_scripts\utility::flag_wait("spawn_hind01");
   wait 4;
-  level._id_45C0 _id_4AEE("nyharbor_lns_gunit");
+  level.sandman live_dialog_queue("nyharbor_lns_gunit");
   common_scripts\utility::flag_wait("vo_missiles_incoming");
-  level._id_45C0 _id_4AEE("nyharbor_lns_missilescoming");
+  level.sandman live_dialog_queue("nyharbor_lns_missilescoming");
   wait 2;
-  level._id_45C0 _id_4AEE("nyharbor_lns_keepongoing");
+  level.sandman live_dialog_queue("nyharbor_lns_keepongoing");
   common_scripts\utility::flag_wait("start_boat_crash");
   wait 1;
-  level._id_45C0 _id_4AEE("nyharbor_lns_lookout");
+  level.sandman live_dialog_queue("nyharbor_lns_lookout");
   wait 0.5;
-  level._id_45C0 _id_4AEE("nyharbor_lns_shootmines");
+  level.sandman live_dialog_queue("nyharbor_lns_shootmines");
   common_scripts\utility::flag_wait("spawn_chinook");
   wait 2;
-  level._id_45C0 _id_4AEE("nyharbor_lns_theresourbird");
+  level.sandman live_dialog_queue("nyharbor_lns_theresourbird");
   common_scripts\utility::flag_wait("switch_chinook");
   wait 3;
-  level._id_45C0 _id_4AEE("nyharbor_lns_theresheis");
+  level.sandman live_dialog_queue("nyharbor_lns_theresheis");
   wait 0;
-  maps\_utility::_id_11F4("nyharbor_plt_feetwet");
+  maps\_utility::radio_dialogue("nyharbor_plt_feetwet");
   common_scripts\utility::flag_wait("finale_dialogue");
   wait 3;
-  level._id_45C0 _id_4AEE("nyharbor_lns_missioncomplete");
-  maps\_utility::_id_11F4("nyharbor_hqr_oneforbooks");
-  level._id_45C0 _id_4AEE("nyharbor_lns_easyday");
+  level.sandman live_dialog_queue("nyharbor_lns_missioncomplete");
+  maps\_utility::radio_dialogue("nyharbor_hqr_oneforbooks");
+  level.sandman live_dialog_queue("nyharbor_lns_easyday");
 }

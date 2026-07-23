@@ -22,7 +22,7 @@ main() {
   }
 
   self.weapon = "usp";
-  _id_5B98::main();
+  character/character_vil_kruger::main();
 }
 
 spawner() {
@@ -30,7 +30,7 @@ spawner() {
 }
 
 precache() {
-  _id_5B98::precache();
+  character/character_vil_kruger::precache();
   precacheitem("usp");
   precacheitem("fraggrenade");
 }

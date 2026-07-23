@@ -4,11 +4,11 @@
 **************************************/
 
 main(var_0, var_1, var_2) {
-  maps\_vehicle::_id_2AC2("zubr", var_0, var_1, var_2);
-  maps\_vehicle::_id_2AD2(::_id_2B1D);
-  maps\_vehicle::_id_2ABE("russian_zubr_watercraft");
-  maps\_vehicle::_id_2ACE(999, 500, 1500);
-  maps\_vehicle::_id_2AC6("axis");
+  maps\_vehicle::build_template("zubr", var_0, var_1, var_2);
+  maps\_vehicle::build_localinit(::init_local);
+  maps\_vehicle::build_deathmodel("russian_zubr_watercraft");
+  maps\_vehicle::build_life(999, 500, 1500);
+  maps\_vehicle::build_team("axis");
 }
 
-_id_2B1D() {}
+init_local() {}

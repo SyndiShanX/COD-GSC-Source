@@ -7,46 +7,46 @@ main() {
   if(getDvar("cobrapilot_surface_to_air_missiles_enabled") == "") {
     setDvar("cobrapilot_surface_to_air_missiles_enabled", "1");
   }
-  _id_436B();
+  tryreload();
   thread firemissile();
-  thread _id_2298();
-  thread _id_4362();
+  thread turret_think();
+  thread detachall_on_death();
 }
 
-_id_4362() {
+detachall_on_death() {
   self waittill("death");
   self detachall();
 }
 
-_id_2298() {
+turret_think() {
   self endon("death");
 
-  if(!isDefined(self._id_29AA)) {
+  if(!isDefined(self.script_turret)) {
     return;
   }
-  if(self._id_29AA == 0) {
+  if(self.script_turret == 0) {
     return;
   }
-  self._id_4363 = 30000;
+  self.attackradius = 30000;
 
   if(isDefined(self.radius)) {
-    self._id_4363 = self.radius;
+    self.attackradius = self.radius;
   }
-  while(!isDefined(level._id_4364)) {
+  while(!isDefined(level.cobrapilot_difficulty)) {
     wait 0.05;
   }
   var_0 = 1.0;
 
-  if(level._id_4364 == "easy") {
+  if(level.cobrapilot_difficulty == "easy") {
     var_0 = 0.5;
-  } else if(level._id_4364 == "medium") {
+  } else if(level.cobrapilot_difficulty == "medium") {
     var_0 = 1.7;
-  } else if(level._id_4364 == "hard") {
+  } else if(level.cobrapilot_difficulty == "hard") {
     var_0 = 1.0;
-  } else if(level._id_4364 == "insane") {
+  } else if(level.cobrapilot_difficulty == "insane") {
     var_0 = 1.5;
   }
-  self._id_4363 = self._id_4363 * var_0;
+  self.attackradius = self.attackradius * var_0;
 
   if(getDvar("cobrapilot_debug") == "1") {
     iprintln("surface-to-air missile range difficultyScaler = " + var_0);
@@ -54,7 +54,7 @@ _id_2298() {
   for(;;) {
     wait(2 + randomfloat(1));
     var_1 = undefined;
-    var_1 = maps\_helicopter_globals::_id_2865(self._id_4363, undefined, 0, 1);
+    var_1 = maps\_helicopter_globals::getenemytarget(self.attackradius, undefined, 0, 1);
 
     if(!isDefined(var_1)) {
       continue;
@@ -65,11 +65,11 @@ _id_2298() {
       var_2 = var_2 + (0, 0, var_1.script_targetoffset_z);
     }
     self setturrettargetvec(var_2);
-    level thread _id_4365(self, 5.0);
+    level thread turret_rotate_timeout(self, 5.0);
     self waittill("turret_rotate_stopped");
     self clearturrettarget();
 
-    if(distance(self.origin, var_1.origin) > self._id_4363) {
+    if(distance(self.origin, var_1.origin) > self.attackradius) {
       continue;
     }
     var_3 = 0;
@@ -83,10 +83,10 @@ _id_2298() {
       self waittill("missile_fired", var_4);
 
       if(isDefined(var_4)) {
-        if(level._id_4364 == "hard") {
+        if(level.cobrapilot_difficulty == "hard") {
           wait(1 + randomfloat(2));
           continue;
-        } else if(level._id_4364 == "insane") {
+        } else if(level.cobrapilot_difficulty == "insane") {
           continue;
         } else {
           var_4 waittill("death");
@@ -98,14 +98,14 @@ _id_2298() {
   }
 }
 
-_id_4365(var_0, var_1) {
+turret_rotate_timeout(var_0, var_1) {
   var_0 endon("death");
   var_0 endon("turret_rotate_stopped");
   wait(var_1);
   var_0 notify("turret_rotate_stopped");
 }
 
-_id_4366(var_0) {
+within_attack_range(var_0) {
   var_1 = distance((self.origin[0], self.origin[1], 0), (var_0.origin[0], var_0.origin[1], 0));
   var_2 = var_0.origin[2] - self.origin[2];
 
@@ -114,7 +114,7 @@ _id_4366(var_0) {
   }
   var_3 = var_2 * 2.5;
 
-  if(var_1 <= self._id_4363 + var_3) {
+  if(var_1 <= self.attackradius + var_3) {
     return 1;
   }
   return 0;
@@ -131,27 +131,27 @@ firemissile() {
       var_0.script_targetoffset_z = 0;
     }
     var_2 = (0, 0, var_0.script_targetoffset_z);
-    var_1 = self fireweapon(self._id_3E59[self._id_4367], var_0, var_2);
+    var_1 = self fireweapon(self._id_3E59[self.missilelaunchnexttag], var_0, var_2);
 
     if(getDvar("cobrapilot_debug") == "1") {
-      level thread _id_436A(var_1, var_0, var_2);
+      level thread draw_missile_target_line(var_1, var_0, var_2);
     }
-    if(!isDefined(var_0._id_2861)) {
-      var_0._id_2861 = [];
+    if(!isDefined(var_0.incomming_missiles)) {
+      var_0.incomming_missiles = [];
     }
-    var_0._id_2861 = maps\_utility::_id_0BC3(var_0._id_2861, var_1);
-    thread maps\_helicopter_globals::_id_2864(var_1, var_0);
-    self detach(self._id_4368, self._id_3E59[self._id_4367]);
-    self._id_4367++;
-    self._id_4369--;
+    var_0.incomming_missiles = maps\_utility::array_add(var_0.incomming_missiles, var_1);
+    thread maps\_helicopter_globals::missile_deathwait(var_1, var_0);
+    self detach(self.missilemodel, self._id_3E59[self.missilelaunchnexttag]);
+    self.missilelaunchnexttag++;
+    self.missileammo--;
     var_0 notify("incomming_missile", var_1);
-    _id_436B();
+    tryreload();
     wait 0.05;
     self notify("missile_fired", var_1);
   }
 }
 
-_id_436A(var_0, var_1, var_2) {
+draw_missile_target_line(var_0, var_1, var_2) {
   var_0 endon("death");
 
   for(;;) {
@@ -159,19 +159,19 @@ _id_436A(var_0, var_1, var_2) {
   }
 }
 
-_id_436B() {
-  if(!isDefined(self._id_4369)) {
-    self._id_4369 = 0;
+tryreload() {
+  if(!isDefined(self.missileammo)) {
+    self.missileammo = 0;
   }
-  if(!isDefined(self._id_4367)) {
-    self._id_4367 = 0;
+  if(!isDefined(self.missilelaunchnexttag)) {
+    self.missilelaunchnexttag = 0;
   }
-  if(self._id_4369 > 0) {
+  if(self.missileammo > 0) {
     return;
   }
   for(var_0 = 0; var_0 < self._id_3E59.size; var_0++) {
-    self attach(self._id_4368, self._id_3E59[var_0]);
+    self attach(self.missilemodel, self._id_3E59[var_0]);
   }
-  self._id_4369 = self._id_3E59.size;
-  self._id_4367 = 0;
+  self.missileammo = self._id_3E59.size;
+  self.missilelaunchnexttag = 0;
 }

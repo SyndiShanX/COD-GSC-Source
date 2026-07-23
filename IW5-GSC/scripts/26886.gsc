@@ -165,7 +165,7 @@ _id_68EA() {
 }
 
 _id_68EC(var_0) {
-  var_0._id_49E0 = 0;
+  var_0.active = 0;
   var_1 = undefined;
   var_2 = undefined;
   var_3 = undefined;
@@ -187,7 +187,7 @@ _id_68EC(var_0) {
     var_4._id_68ED[0] = var_0;
     var_4._id_68EE = var_1;
     var_4._id_68EF = var_2;
-    var_4._id_49E0 = 0;
+    var_4.active = 0;
     level._id_68EB[var_3] = var_4;
   } else {
     var_5 = level._id_68EB[var_3]._id_68ED.size;
@@ -198,7 +198,7 @@ _id_68EC(var_0) {
 _id_68F0() {
   for(;;) {
     self._id_68EE waittill("trigger");
-    self._id_49E0 = 1;
+    self.active = 1;
 
     foreach(var_1 in self._id_68ED) {}
     var_1 _id_68F1();
@@ -207,7 +207,7 @@ _id_68F0() {
       return;
     }
     self._id_68EF waittill("trigger");
-    self._id_49E0 = 0;
+    self.active = 0;
 
     foreach(var_1 in self._id_68ED) {}
     var_1 _id_68F4();
@@ -224,8 +224,8 @@ _id_68F1() {
   var_4 = var_4 / 16384;
   var_5 = "default";
 
-  if(isDefined(self._id_164F)) {
-    var_5 = self._id_164F;
+  if(isDefined(self.script_parameters)) {
+    var_5 = self.script_parameters;
   }
   if(!isDefined(level._id_68E9[var_5])) {
     return;
@@ -421,8 +421,8 @@ _id_68FB(var_0, var_1) {
     var_2 = var_0["model"];
   }
   var_3 = _id_68F5(var_1, var_0["classname"], var_2, var_0["spawnflags"]);
-  var_3._id_1032 = "floating_body";
-  var_3 maps\_anim::_id_1244();
+  var_3.animname = "floating_body";
+  var_3 maps\_anim::setanimtree();
 
   if(isDefined(var_0["headmodel"])) {
     if(isarray(var_0["headmodel"])) {
@@ -438,7 +438,7 @@ _id_68FB(var_0, var_1) {
   } else {
     var_5 = var_0["animation"];
   }
-  var_3 thread maps\_anim::_id_11C8(var_3, var_5);
+  var_3 thread maps\_anim::anim_generic_loop(var_3, var_5);
   var_3 thread body(var_0, var_1);
   return var_3;
 }
@@ -462,8 +462,8 @@ _id_68FC(var_0, var_1) {
     var_2 = var_0["model"];
   }
   var_3 = _id_68F5(var_1, var_0["classname"], var_2, var_0["spawnflags"], 1);
-  var_3._id_1032 = "floating_body";
-  var_3 maps\_anim::_id_1244();
+  var_3.animname = "floating_body";
+  var_3 maps\_anim::setanimtree();
 
   if(isDefined(var_0["headmodel"])) {
     if(isarray(var_0["headmodel"])) {
@@ -483,7 +483,7 @@ _id_68FD(var_0, var_1, var_2) {
   self endon("death");
 
   if(isarray(var_2)) {
-    maps\_anim::_id_11C0(self, var_2[0]);
+    maps\_anim::anim_generic_first_frame(self, var_2[0]);
 
     for(;;) {
       var_3 = distance2d(level.player.origin, self.origin);
@@ -496,19 +496,19 @@ _id_68FD(var_0, var_1, var_2) {
     }
 
     wait(randomfloatrange(var_0["min_start_delay"], var_0["max_start_delay"]));
-    maps\_anim::_id_11C1(self, var_2[0]);
+    maps\_anim::anim_generic(self, var_2[0]);
     var_4 = var_2[1];
   } else {
     var_4 = var_2;
   }
-  maps\_anim::_id_11C8(self, var_4);
+  maps\_anim::anim_generic_loop(self, var_4);
 }
 
 _id_68FE(var_0) {
   var_1 = common_scripts\utility::spawn_tag_origin();
   var_1.origin = var_0.origin;
   var_1.angles = var_0.angles;
-  var_0._id_3DB0 = var_1;
+  var_0.tag_origin = var_1;
   var_0 linkTo(var_1, "tag_origin");
 
   if(!isDefined(level._id_68FF)) {
@@ -526,7 +526,7 @@ _id_6900(var_0) {
 _id_6901() {
   self waittill("death");
   _id_6900(self);
-  self._id_3DB0 delete();
+  self.tag_origin delete();
 }
 
 _id_6902(var_0, var_1) {
@@ -536,8 +536,8 @@ _id_6902(var_0, var_1) {
     var_2 = var_0["model"];
   }
   var_3 = _id_68F5(var_1, var_0["classname"], var_2, var_0["spawnflags"]);
-  var_3._id_1032 = "floating_body";
-  var_3 maps\_anim::_id_1244();
+  var_3.animname = "floating_body";
+  var_3 maps\_anim::setanimtree();
 
   if(isDefined(var_0["headmodel"])) {
     if(isarray(var_0["headmodel"])) {
@@ -553,7 +553,7 @@ _id_6902(var_0, var_1) {
   } else {
     var_5 = var_0["animation"];
   }
-  var_3 thread maps\_anim::_id_11C8(var_3, var_5);
+  var_3 thread maps\_anim::anim_generic_loop(var_3, var_5);
   _id_68FE(var_3);
   var_3 thread _id_6903(var_0, var_1);
   return var_3;
@@ -585,13 +585,13 @@ _id_6905() {
   for(var_2 = 4; var_2 < 5; var_2 = var_2 + 1) {}
 }
 
-_id_6877() {
+debug_thread() {
   for(;;) {
     foreach(var_2, var_1 in level._id_68E5) {}
     iprintln("dvc " + var_2 + " = " + var_1);
 
     foreach(var_8, var_4 in level._id_68EB) {
-      if(var_4._id_49E0) {
+      if(var_4.active) {
         iprintln("dv " + var_8 + " active");
 
         foreach(var_6 in var_4._id_68ED) {}

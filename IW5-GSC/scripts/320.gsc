@@ -68,13 +68,13 @@ main() {
   var_6 = common_scripts\utility::array_combine(var_6, getEntArray("glass", "script_noteworthy"));
 
   if(var_6.size) {
-    level._id_1DDD = [];
-    level._id_1DDD["glass_large"]["breakfx"] = loadfx("props/car_glass_large");
-    level._id_1DDD["glass_large"]["breaksnd"] = "veh_glass_break_large";
-    level._id_1DDD["glass_med"]["breakfx"] = loadfx("props/car_glass_med");
-    level._id_1DDD["glass_med"]["breaksnd"] = "veh_glass_break_small";
-    level._id_1DDD["glass_small"]["breakfx"] = loadfx("props/car_glass_headlight");
-    level._id_1DDD["glass_small"]["breaksnd"] = "veh_glass_break_small";
+    level._glass_info = [];
+    level._glass_info["glass_large"]["breakfx"] = loadfx("props/car_glass_large");
+    level._glass_info["glass_large"]["breaksnd"] = "veh_glass_break_large";
+    level._glass_info["glass_med"]["breakfx"] = loadfx("props/car_glass_med");
+    level._glass_info["glass_med"]["breaksnd"] = "veh_glass_break_small";
+    level._glass_info["glass_small"]["breakfx"] = loadfx("props/car_glass_headlight");
+    level._glass_info["glass_small"]["breaksnd"] = "veh_glass_break_small";
   }
 
   var_7 = getEntArray("interactive_tv", "targetname");
@@ -88,7 +88,7 @@ main() {
     level.breakables_fx["tv_explode"] = loadfx("explosions/tv_explosion");
   }
 
-  level._id_1DDE = getEntArray("interactive_tv_light", "targetname");
+  level.tv_lite_array = getEntArray("interactive_tv_light", "targetname");
   var_8 = getEntArray("destroyable_security_camera", "script_noteworthy");
 
   if(var_8.size) {
@@ -99,29 +99,29 @@ main() {
 
   level.barrelexpsound = "barrel_mtl_explode";
   var_9 = 25;
-  level._id_1DE0["orange vase"] = 1;
-  level._id_1DE0["green vase"] = 1;
-  level._id_1DE0["bottle"] = 1;
+  level.breakables_peicescollide["orange vase"] = 1;
+  level.breakables_peicescollide["green vase"] = 1;
+  level.breakables_peicescollide["bottle"] = 1;
   level.barrelhealth = 150;
   level.precachemodeltype = [];
   level.barrelexplodingthisframe = 0;
   level.breakables_clip = [];
   level.breakables_clip = getEntArray("vase_break_remove", "targetname");
-  level._id_1DE5 = [];
-  level._id_1DE5 = getEntArray("xenon_auto_aim", "targetname");
-  level._id_1DE6 = getEntArray("xenon_auto_aim_secondary", "targetname");
+  level.console_auto_aim = [];
+  level.console_auto_aim = getEntArray("xenon_auto_aim", "targetname");
+  level.console_auto_aim_2nd = getEntArray("xenon_auto_aim_secondary", "targetname");
 
-  for(var_10 = 0; var_10 < level._id_1DE5.size; var_10++) {
-    level._id_1DE5[var_10] notsolid();
+  for(var_10 = 0; var_10 < level.console_auto_aim.size; var_10++) {
+    level.console_auto_aim[var_10] notsolid();
   }
-  for(var_10 = 0; var_10 < level._id_1DE6.size; var_10++) {
-    level._id_1DE6[var_10] notsolid();
+  for(var_10 = 0; var_10 < level.console_auto_aim_2nd.size; var_10++) {
+    level.console_auto_aim_2nd[var_10] notsolid();
   }
-  maps\_utility::_id_1DE7();
+  maps\_utility::set_console_status();
 
   if(level.console) {
-    level._id_1DE5 = undefined;
-    level._id_1DE6 = undefined;
+    level.console_auto_aim = undefined;
+    level.console_auto_aim_2nd = undefined;
   }
 
   var_11 = getEntArray("breakable clip", "targetname");
@@ -132,22 +132,22 @@ main() {
   level._breakable_utility_modelarray = [];
   level._breakable_utility_modelindex = 0;
   level._breakable_utility_maxnum = var_9;
-  common_scripts\utility::array_thread(getEntArray("tincan", "targetname"), ::_id_1E07);
-  common_scripts\utility::array_thread(getEntArray("helmet_pop", "targetname"), ::_id_1E08);
+  common_scripts\utility::array_thread(getEntArray("tincan", "targetname"), ::tincan_think);
+  common_scripts\utility::array_thread(getEntArray("helmet_pop", "targetname"), ::helmet_pop);
   common_scripts\utility::array_thread(getEntArray("explodable_barrel", "targetname"), ::explodable_barrel_think);
   common_scripts\utility::array_thread(getEntArray("explodable_barrel", "script_noteworthy"), ::explodable_barrel_think);
-  common_scripts\utility::array_thread(getEntArray("shuddering_entity", "targetname"), ::_id_1E06);
-  common_scripts\utility::array_thread(getEntArray("breakable box", "targetname"), ::_id_1E0E);
-  common_scripts\utility::array_thread(getEntArray("breakable box", "script_noteworthy"), ::_id_1E0E);
-  common_scripts\utility::array_thread(getEntArray("breakable", "targetname"), ::_id_1E0E);
-  common_scripts\utility::array_thread(getEntArray("breakable_vase", "targetname"), ::_id_1E0E);
+  common_scripts\utility::array_thread(getEntArray("shuddering_entity", "targetname"), ::shuddering_entity_think);
+  common_scripts\utility::array_thread(getEntArray("breakable box", "targetname"), ::breakable_think);
+  common_scripts\utility::array_thread(getEntArray("breakable box", "script_noteworthy"), ::breakable_think);
+  common_scripts\utility::array_thread(getEntArray("breakable", "targetname"), ::breakable_think);
+  common_scripts\utility::array_thread(getEntArray("breakable_vase", "targetname"), ::breakable_think);
   common_scripts\utility::array_thread(getEntArray("oil_spill", "targetname"), ::oil_spill_think);
-  common_scripts\utility::array_thread(getEntArray("glass", "targetname"), ::_id_1DF7);
-  common_scripts\utility::array_thread(getEntArray("interactive_tv", "targetname"), ::_id_1DEC);
-  common_scripts\utility::array_thread(getEntArray("destroyable_security_camera", "script_noteworthy"), ::_id_1DEB);
+  common_scripts\utility::array_thread(getEntArray("glass", "targetname"), ::glass_logic);
+  common_scripts\utility::array_thread(getEntArray("interactive_tv", "targetname"), ::tv_logic);
+  common_scripts\utility::array_thread(getEntArray("destroyable_security_camera", "script_noteworthy"), ::security_camera_logic);
 }
 
-_id_1DEB() {
+security_camera_logic() {
   self setCanDamage(1);
   var_0 = undefined;
 
@@ -162,74 +162,74 @@ _id_1DEB() {
   playFXOnTag(level.breakables_fx["security_camera_explode"], self, "tag_deathfx");
 }
 
-_id_1DEC() {
+tv_logic() {
   self setCanDamage(1);
-  self._id_1DED = undefined;
-  self._id_1DEE = undefined;
-  self._id_1DED = "com_tv2_d";
-  self._id_1DEE = "com_tv2";
-  self._id_1DEF = "com_tv2_testpattern";
+  self.damagemodel = undefined;
+  self.offmodel = undefined;
+  self.damagemodel = "com_tv2_d";
+  self.offmodel = "com_tv2";
+  self.onmodel = "com_tv2_testpattern";
 
   if(issubstr(self.model, "1")) {
-    self._id_1DEE = "com_tv1";
-    self._id_1DEF = "com_tv1_testpattern";
+    self.offmodel = "com_tv1";
+    self.onmodel = "com_tv1_testpattern";
   }
 
   if(isDefined(self.target)) {
-    if(isDefined(level._id_1DF0)) {
+    if(isDefined(level.disable_interactive_tv_use_triggers)) {
       var_0 = getEnt(self.target, "targetname");
 
       if(isDefined(var_0)) {
         var_0 delete();
       }
     } else {
-      self._id_1DF1 = getEnt(self.target, "targetname");
-      self._id_1DF1 useTriggerRequireLookAt();
-      self._id_1DF1 setCursorHint("HINT_NOICON");
+      self.usetrig = getEnt(self.target, "targetname");
+      self.usetrig useTriggerRequireLookAt();
+      self.usetrig setCursorHint("HINT_NOICON");
     }
   }
 
-  var_1 = maps\_utility::_id_0AEC(self.origin, level._id_1DDE, undefined, undefined, 64);
+  var_1 = maps\_utility::get_array_of_closest(self.origin, level.tv_lite_array, undefined, undefined, 64);
 
   if(var_1.size) {
-    self._id_1DF2 = var_1[0];
-    level._id_1DDE = common_scripts\utility::array_remove(level._id_1DDE, self._id_1DF2);
-    self._id_1DF3 = self._id_1DF2 getlightintensity();
+    self.lite = var_1[0];
+    level.tv_lite_array = common_scripts\utility::array_remove(level.tv_lite_array, self.lite);
+    self.liteintensity = self.lite getlightintensity();
   }
 
-  thread _id_1DF5();
+  thread tv_damage();
 
-  if(isDefined(self._id_1DF1)) {
-    thread _id_1DF4();
+  if(isDefined(self.usetrig)) {
+    thread tv_off();
   }
 }
 
-_id_1DF4() {
-  self._id_1DF1 endon("death");
+tv_off() {
+  self.usetrig endon("death");
 
   for(;;) {
     wait 0.2;
-    self._id_1DF1 waittill("trigger");
+    self.usetrig waittill("trigger");
     self notify("off");
 
-    if(self.model == self._id_1DEE) {
-      self setModel(self._id_1DEF);
+    if(self.model == self.offmodel) {
+      self setModel(self.onmodel);
 
-      if(isDefined(self._id_1DF2)) {
-        self._id_1DF2 setlightintensity(self._id_1DF3);
+      if(isDefined(self.lite)) {
+        self.lite setlightintensity(self.liteintensity);
       }
       continue;
     }
 
-    self setModel(self._id_1DEE);
+    self setModel(self.offmodel);
 
-    if(isDefined(self._id_1DF2)) {
-      self._id_1DF2 setlightintensity(0);
+    if(isDefined(self.lite)) {
+      self.lite setlightintensity(0);
     }
   }
 }
 
-_id_1DF5() {
+tv_damage() {
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
@@ -245,28 +245,28 @@ _id_1DF5() {
     break;
   }
 
-  if(isDefined(level._id_1DF6)) {
-    [[level._id_1DF6]]();
+  if(isDefined(level.tvhook)) {
+    [[level.tvhook]]();
   }
   self notify("off");
 
-  if(isDefined(self._id_1DF1)) {
-    self._id_1DF1 notify("death");
+  if(isDefined(self.usetrig)) {
+    self.usetrig notify("death");
   }
-  self setModel(self._id_1DED);
+  self setModel(self.damagemodel);
 
-  if(isDefined(self._id_1DF2)) {
-    self._id_1DF2 setlightintensity(0);
+  if(isDefined(self.lite)) {
+    self.lite setlightintensity(0);
   }
   playFXOnTag(level.breakables_fx["tv_explode"], self, "tag_fx");
   self playSound("tv_shot_burst");
 
-  if(isDefined(self._id_1DF1)) {
-    self._id_1DF1 delete();
+  if(isDefined(self.usetrig)) {
+    self.usetrig delete();
   }
 }
 
-_id_1DF7() {
+glass_logic() {
   var_0 = undefined;
   var_1 = undefined;
   var_2 = undefined;
@@ -299,8 +299,8 @@ _id_1DF7() {
     var_1 = var_2 setcontents(0);
   }
 
-  if(isDefined(self._id_1DF8)) {
-    var_3 = self._id_1DF8;
+  if(isDefined(self.script_health)) {
+    var_3 = self.script_health;
   } else if(isDefined(var_2)) {
     var_3 = 99;
   } else {
@@ -354,13 +354,13 @@ _id_1DF7() {
     var_2 delete();
   }
 
-  _id_1DF9(self getorigin(), self.destructible_type, var_0);
+  glass_play_break_fx(self getorigin(), self.destructible_type, var_0);
   self delete();
 }
 
-_id_1DF9(var_0, var_1, var_2) {
-  thread common_scripts\utility::play_sound_in_space(level._id_1DDD[var_1]["breaksnd"], var_0);
-  playFX(level._id_1DDD[var_1]["breakfx"], var_0, var_2);
+glass_play_break_fx(var_0, var_1, var_2) {
+  thread common_scripts\utility::play_sound_in_space(level._glass_info[var_1]["breaksnd"], var_0);
+  playFX(level._glass_info[var_1]["breakfx"], var_0, var_2);
   level notify("glass_shatter");
 }
 
@@ -490,7 +490,7 @@ explodable_barrel_think() {
 
   self endon("exploding");
   breakable_clip();
-  _id_1E13();
+  xenon_auto_aim();
   self.damagetaken = 0;
   self setCanDamage(1);
 
@@ -600,14 +600,14 @@ explodable_barrel_explode() {
     var_9 = self.damageowner;
 
     if(isPlayer(var_9)) {
-      maps\_utility::_id_1E05(self.origin, "rifle", 150);
+      maps\_utility::arcademode_kill(self.origin, "rifle", 150);
     }
     self.damageowner = undefined;
   }
 
-  level._id_193D["time"] = gettime();
-  level._id_193D["origin"] = self.origin + (0, 0, 30);
-  level._id_193D["radius"] = var_8;
+  level.lastexplodingbarrel["time"] = gettime();
+  level.lastexplodingbarrel["origin"] = self.origin + (0, 0, 30);
+  level.lastexplodingbarrel["radius"] = var_8;
   self radiusdamage(self.origin + (0, 0, 30), var_8, var_7, var_6, var_9);
 
   if(randomint(2) == 0) {
@@ -626,7 +626,7 @@ explodable_barrel_explode() {
   level.barrelexplodingthisframe = 0;
 }
 
-_id_1E06() {
+shuddering_entity_think() {
   var_0 = 0;
 
   if(self.model == "prop_helmet_german_normandy") {
@@ -646,7 +646,7 @@ _id_1E06() {
   }
 }
 
-_id_1E07() {
+tincan_think() {
   if(self.classname != "script_model") {
     return;
   }
@@ -665,16 +665,16 @@ _id_1E07() {
   self delete();
 }
 
-_id_1E08() {
+helmet_pop() {
   if(self.classname != "script_model") {
     return;
   }
-  _id_1E13();
+  xenon_auto_aim();
   self setCanDamage(1);
-  thread _id_1E09();
+  thread helmet_logic();
 }
 
-_id_1E09() {
+helmet_logic() {
   self waittill("damage", var_0, var_1);
 
   if(isai(var_1)) {
@@ -684,8 +684,8 @@ _id_1E09() {
   }
   var_3 = vectorNormalize(self.origin - var_2);
 
-  if(!isDefined(self._id_1E0A) && isPlayer(var_1)) {
-    thread animscripts\death::_id_0ED0(var_3);
+  if(!isDefined(self.dontremove) && isPlayer(var_1)) {
+    thread animscripts\death::helmetlaunch(var_3);
     return;
   }
 
@@ -694,20 +694,20 @@ _id_1E09() {
   var_4 = spawn("script_model", self.origin + (0, 0, 5));
   var_4.angles = self.angles;
   var_4 setModel(self.model);
-  var_4 thread animscripts\death::_id_0ED0(var_3);
-  self._id_1E0A = 0;
+  var_4 thread animscripts\death::helmetlaunch(var_3);
+  self.dontremove = 0;
   self notify("ok_remove");
 }
 
-_id_1E0B(var_0) {
-  if(!isDefined(level._id_1E0C)) {
+allowbreak(var_0) {
+  if(!isDefined(level.breakingents)) {
     return 1;
   }
-  if(level._id_1E0C.size == 0) {
+  if(level.breakingents.size == 0) {
     return 0;
   } else {
-    for(var_1 = 0; var_1 < level._id_1E0C.size; var_1++) {
-      if(var_0 == level._id_1E0C[var_1]) {
+    for(var_1 = 0; var_1 < level.breakingents.size; var_1++) {
+      if(var_0 == level.breakingents[var_1]) {
         return 1;
       }
     }
@@ -718,14 +718,14 @@ _id_1E0B(var_0) {
   return 1;
 }
 
-_id_1E0D(var_0) {
+breakable_think_triggered(var_0) {
   for(;;) {
     self waittill("trigger", var_1);
     var_0 notify("damage", 100, var_1);
   }
 }
 
-_id_1E0E() {
+breakable_think() {
   if(self.classname != "script_model") {
     return;
   }
@@ -744,7 +744,7 @@ _id_1E0E() {
 
     var_0 = "orange vase";
     breakable_clip();
-    _id_1E13();
+    xenon_auto_aim();
   } else if(self.model == "egypt_prop_vase2" || self.model == "egypt_prop_vase5" || self.model == "egypt_prop_vase6") {
     if(!isDefined(level.precachemodeltype["egypt_prop_vase_g"])) {
       level.precachemodeltype["egypt_prop_vase_g"] = 1;
@@ -756,7 +756,7 @@ _id_1E0E() {
 
     var_0 = "green vase";
     breakable_clip();
-    _id_1E13();
+    xenon_auto_aim();
   } else if(self.model == "prop_crate_dak1" || self.model == "prop_crate_dak2" || self.model == "prop_crate_dak3" || self.model == "prop_crate_dak4" || self.model == "prop_crate_dak5" || self.model == "prop_crate_dak6" || self.model == "prop_crate_dak7" || self.model == "prop_crate_dak8" || self.model == "prop_crate_dak9") {
     if(!isDefined(level.precachemodeltype["prop_crate_dak_shard"])) {
       level.precachemodeltype["prop_crate_dak_shard"] = 1;
@@ -765,7 +765,7 @@ _id_1E0E() {
 
     var_0 = "wood box";
     breakable_clip();
-    _id_1E13();
+    xenon_auto_aim();
   } else if(self.model == "prop_winebottle_breakable") {
     if(!isDefined(level.precachemodeltype["prop_winebottle"])) {
       level.precachemodeltype["prop_winebottle"] = 1;
@@ -774,7 +774,7 @@ _id_1E0E() {
     }
 
     var_0 = "bottle";
-    _id_1E13();
+    xenon_auto_aim();
   } else if(self.model == "prop_diningplate_roundfloral") {
     if(!isDefined(level.precachemodeltype["prop_diningplate_brokenfloral"])) {
       level.precachemodeltype["prop_diningplate_brokenfloral"] = 1;
@@ -785,8 +785,8 @@ _id_1E0E() {
     }
 
     var_0 = "plate";
-    self._id_1E0F = "round_floral";
-    _id_1E13();
+    self.plate = "round_floral";
+    xenon_auto_aim();
   } else if(self.model == "prop_diningplate_roundplain") {
     if(!isDefined(level.precachemodeltype["prop_diningplate_brokenplain"])) {
       level.precachemodeltype["prop_diningplate_brokenplain"] = 1;
@@ -797,8 +797,8 @@ _id_1E0E() {
     }
 
     var_0 = "plate";
-    self._id_1E0F = "round_plain";
-    _id_1E13();
+    self.plate = "round_plain";
+    xenon_auto_aim();
   } else if(self.model == "prop_diningplate_roundstack") {
     if(!isDefined(level.precachemodeltype["prop_diningplate_brokenplain"])) {
       level.precachemodeltype["prop_diningplate_brokenplain"] = 1;
@@ -817,8 +817,8 @@ _id_1E0E() {
     }
 
     var_0 = "plate";
-    self._id_1E0F = "round_stack";
-    _id_1E13();
+    self.plate = "round_stack";
+    xenon_auto_aim();
   } else if(self.model == "prop_diningplate_ovalfloral") {
     if(!isDefined(level.precachemodeltype["prop_diningplate_brokenfloral"])) {
       level.precachemodeltype["prop_diningplate_brokenfloral"] = 1;
@@ -829,8 +829,8 @@ _id_1E0E() {
     }
 
     var_0 = "plate";
-    self._id_1E0F = "oval_floral";
-    _id_1E13();
+    self.plate = "oval_floral";
+    xenon_auto_aim();
   } else if(self.model == "prop_diningplate_ovalplain") {
     if(!isDefined(level.precachemodeltype["prop_diningplate_brokenplain"])) {
       level.precachemodeltype["prop_diningplate_brokenplain"] = 1;
@@ -841,8 +841,8 @@ _id_1E0E() {
     }
 
     var_0 = "plate";
-    self._id_1E0F = "oval_plain";
-    _id_1E13();
+    self.plate = "oval_plain";
+    xenon_auto_aim();
   } else if(self.model == "prop_diningplate_ovalstack") {
     if(!isDefined(level.precachemodeltype["prop_diningplate_brokenplain"])) {
       level.precachemodeltype["prop_diningplate_brokenplain"] = 1;
@@ -861,8 +861,8 @@ _id_1E0E() {
     }
 
     var_0 = "plate";
-    self._id_1E0F = "oval_stack";
-    _id_1E13();
+    self.plate = "oval_stack";
+    xenon_auto_aim();
   }
 
   if(!isDefined(var_0)) {
@@ -872,15 +872,15 @@ _id_1E0E() {
     var_1 = getEnt(self.target, "targetname");
 
     if(isDefined(var_1) && var_1.classname == "trigger_multiple") {
-      var_1 thread _id_1E0D(self);
+      var_1 thread breakable_think_triggered(self);
     }
   }
 
   self setCanDamage(1);
-  thread _id_1E10(var_0);
+  thread breakable_logic(var_0);
 }
 
-_id_1E10(var_0) {
+breakable_logic(var_0) {
   var_1 = undefined;
 
   for(;;) {
@@ -890,7 +890,7 @@ _id_1E10(var_0) {
       var_1 joltbody(self.origin + (0, 0, -90), 0.2);
     }
     if(var_0 == "wood box") {
-      if(!_id_1E0B(var_1)) {
+      if(!allowbreak(var_1)) {
         continue;
       }
       if(!isDefined(level.flags) || !isDefined(level.flags["Breakable Boxes"])) {
@@ -917,8 +917,8 @@ _id_1E10(var_0) {
       var_4 = level.breakables_fx["vase"];
       break;
     case "wood box":
-      if(isDefined(level._id_1E12)) {
-        var_3 = level._id_1E12;
+      if(isDefined(level.crateimpactsound)) {
+        var_3 = level.crateimpactsound;
       } else {
         var_3 = "bullet_large_vase";
       }
@@ -935,7 +935,7 @@ _id_1E10(var_0) {
   }
 
   thread common_scripts\utility::play_sound_in_space(var_3, self.origin);
-  thread _id_1E1B(self, var_0);
+  thread make_broken_peices(self, var_0);
 
   if(isDefined(var_4)) {
     playFX(var_4, self.origin);
@@ -963,49 +963,49 @@ _id_1E10(var_0) {
     self.remove delete();
   }
 
-  if(!isDefined(self._id_1E0A)) {
+  if(!isDefined(self.dontremove)) {
     self delete();
   } else {
-    self._id_1E0A = 0;
+    self.dontremove = 0;
   }
   self notify("ok_remove");
 }
 
-_id_1E13() {
-  if(isDefined(level._id_1DE5) && level._id_1DE5.size > 0) {
-    self._id_1E14 = _id_1E23(self.origin, level._id_1DE5);
+xenon_auto_aim() {
+  if(isDefined(level.console_auto_aim) && level.console_auto_aim.size > 0) {
+    self.autoaim = getclosestaccurantent(self.origin, level.console_auto_aim);
   }
-  if(isDefined(self._id_1E14)) {
-    level._id_1DE5 = common_scripts\utility::array_remove(level._id_1DE5, self._id_1E14);
-    thread _id_1E16();
+  if(isDefined(self.autoaim)) {
+    level.console_auto_aim = common_scripts\utility::array_remove(level.console_auto_aim, self.autoaim);
+    thread xenon_remove_auto_aim();
   }
 }
 
-_id_1E15() {
+xenon_auto_aim_stop_logic() {
   self notify("entered_xenon_auto_aim_stop_logic");
   self endon("entered_xenon_auto_aim_stop_logic");
-  self._id_1E14 waittill("xenon_auto_aim_stop_logic");
-  self._id_1E0A = undefined;
+  self.autoaim waittill("xenon_auto_aim_stop_logic");
+  self.dontremove = undefined;
 }
 
-_id_1E16(var_0) {
-  thread _id_1E15();
+xenon_remove_auto_aim(var_0) {
+  thread xenon_auto_aim_stop_logic();
   self endon("xenon_auto_aim_stop_logic");
-  self._id_1E14 endon("xenon_auto_aim_stop_logic");
+  self.autoaim endon("xenon_auto_aim_stop_logic");
   self notify("xenon_remove_auto_aim");
-  self._id_1E14 thread _id_1E17(var_0);
-  self._id_1E0A = 1;
+  self.autoaim thread xenon_enable_auto_aim(var_0);
+  self.dontremove = 1;
   self waittill("damage", var_1, var_2);
-  self._id_1E14 disableaimassist();
-  self._id_1E14 delete();
+  self.autoaim disableaimassist();
+  self.autoaim delete();
 
-  if(self._id_1E0A) {
+  if(self.dontremove) {
     self waittill("ok_remove");
   }
   self delete();
 }
 
-_id_1E17(var_0) {
+xenon_enable_auto_aim(var_0) {
   self endon("xenon_auto_aim_stop_logic");
   self endon("death");
 
@@ -1017,9 +1017,9 @@ _id_1E17(var_0) {
     level waittill(var_1);
   }
 
-  self._id_1E18 = 0;
+  self.wait_message = 0;
 
-  if(isDefined(self._id_1E19) && self._id_1E19 == 1) {
+  if(isDefined(self.recreate) && self.recreate == 1) {
     self waittill("recreate");
   }
   self enableaimassist();
@@ -1043,7 +1043,7 @@ breakable_clip() {
   }
 }
 
-_id_1E1B(var_0, var_1) {
+make_broken_peices(var_0, var_1) {
   var_2 = anglestoright(var_0.angles);
   var_3 = anglesToForward(var_0.angles);
   var_4 = anglestoup(var_0.angles);
@@ -1051,125 +1051,125 @@ _id_1E1B(var_0, var_1) {
 
   switch (var_1) {
     case "orange vase":
-      var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -7, 0, 22, var_0, (0, 0, 0), "egypt_prop_vase_br2");
-      var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 13, -6, 28, var_0, (0, 245.1, 0), "egypt_prop_vase_br7");
-      var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 12, 10, 27, var_0, (0, 180, 0), "egypt_prop_vase_br7");
-      var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 3, 2, 0, var_0, (0, 0, 0), "egypt_prop_vase_br5");
+      var_5[var_5.size] = addpiece(var_2, var_3, var_4, -7, 0, 22, var_0, (0, 0, 0), "egypt_prop_vase_br2");
+      var_5[var_5.size] = addpiece(var_2, var_3, var_4, 13, -6, 28, var_0, (0, 245.1, 0), "egypt_prop_vase_br7");
+      var_5[var_5.size] = addpiece(var_2, var_3, var_4, 12, 10, 27, var_0, (0, 180, 0), "egypt_prop_vase_br7");
+      var_5[var_5.size] = addpiece(var_2, var_3, var_4, 3, 2, 0, var_0, (0, 0, 0), "egypt_prop_vase_br5");
       break;
     case "green vase":
-      var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -6, -1, 26, var_0, (0, 0, 0), "egypt_prop_vase_br1");
-      var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 12, 1, 31, var_0, (0, 348.5, 0), "egypt_prop_vase_br3");
-      var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 6, 13, 29, var_0, (0, 153.5, 0), "egypt_prop_vase_br6");
-      var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 3, 1, 0, var_0, (0, 0, 0), "egypt_prop_vase_br4");
+      var_5[var_5.size] = addpiece(var_2, var_3, var_4, -6, -1, 26, var_0, (0, 0, 0), "egypt_prop_vase_br1");
+      var_5[var_5.size] = addpiece(var_2, var_3, var_4, 12, 1, 31, var_0, (0, 348.5, 0), "egypt_prop_vase_br3");
+      var_5[var_5.size] = addpiece(var_2, var_3, var_4, 6, 13, 29, var_0, (0, 153.5, 0), "egypt_prop_vase_br6");
+      var_5[var_5.size] = addpiece(var_2, var_3, var_4, 3, 1, 0, var_0, (0, 0, 0), "egypt_prop_vase_br4");
       break;
     case "wood box":
-      var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -10, 10, 25, var_0, (0, 0, 0), "prop_crate_dak_shard");
-      var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 10, 10, 25, var_0, (0, 90, 0), "prop_crate_dak_shard");
-      var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 10, -10, 25, var_0, (0, 180, 0), "prop_crate_dak_shard");
-      var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -10, -10, 25, var_0, (0, 270, 0), "prop_crate_dak_shard");
-      var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 10, 10, 5, var_0, (180, 0, 0), "prop_crate_dak_shard");
-      var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 10, -10, 5, var_0, (180, 90, 0), "prop_crate_dak_shard");
-      var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -10, -10, 5, var_0, (180, 180, 0), "prop_crate_dak_shard");
-      var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -10, 10, 5, var_0, (180, 270, 0), "prop_crate_dak_shard");
+      var_5[var_5.size] = addpiece(var_2, var_3, var_4, -10, 10, 25, var_0, (0, 0, 0), "prop_crate_dak_shard");
+      var_5[var_5.size] = addpiece(var_2, var_3, var_4, 10, 10, 25, var_0, (0, 90, 0), "prop_crate_dak_shard");
+      var_5[var_5.size] = addpiece(var_2, var_3, var_4, 10, -10, 25, var_0, (0, 180, 0), "prop_crate_dak_shard");
+      var_5[var_5.size] = addpiece(var_2, var_3, var_4, -10, -10, 25, var_0, (0, 270, 0), "prop_crate_dak_shard");
+      var_5[var_5.size] = addpiece(var_2, var_3, var_4, 10, 10, 5, var_0, (180, 0, 0), "prop_crate_dak_shard");
+      var_5[var_5.size] = addpiece(var_2, var_3, var_4, 10, -10, 5, var_0, (180, 90, 0), "prop_crate_dak_shard");
+      var_5[var_5.size] = addpiece(var_2, var_3, var_4, -10, -10, 5, var_0, (180, 180, 0), "prop_crate_dak_shard");
+      var_5[var_5.size] = addpiece(var_2, var_3, var_4, -10, 10, 5, var_0, (180, 270, 0), "prop_crate_dak_shard");
       break;
     case "bottle":
-      var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 0, 0, 10, var_0, (0, 0, 0), "prop_winebottle_broken_top");
+      var_5[var_5.size] = addpiece(var_2, var_3, var_4, 0, 0, 10, var_0, (0, 0, 0), "prop_winebottle_broken_top");
       var_5[var_5.size - 1].type = "bottle_top";
-      var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 0, 0, 0, var_0, (0, 0, 0), "prop_winebottle_broken_bot");
+      var_5[var_5.size] = addpiece(var_2, var_3, var_4, 0, 0, 0, var_0, (0, 0, 0), "prop_winebottle_broken_bot");
       var_5[var_5.size - 1].type = "bottle_bot";
       break;
     case "plate":
-      switch (var_0._id_1E0F) {
+      switch (var_0.plate) {
         case "round_floral":
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -3, -4, 0.5, var_0, (0, 150, 0), "prop_diningplate_brokenfloral1");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, -3, -4, 0.5, var_0, (0, 150, 0), "prop_diningplate_brokenfloral1");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 3, -2, 0.5, var_0, (0, 149.8, 0), "prop_diningplate_brokenfloral2");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, 3, -2, 0.5, var_0, (0, 149.8, 0), "prop_diningplate_brokenfloral2");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 1, 2, 0.5, var_0, (0, 150.2, 0), "prop_diningplate_brokenfloral3");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, 1, 2, 0.5, var_0, (0, 150.2, 0), "prop_diningplate_brokenfloral3");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -4, 2, 0.5, var_0, (0, 146.8, 0), "prop_diningplate_brokenfloral4");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, -4, 2, 0.5, var_0, (0, 146.8, 0), "prop_diningplate_brokenfloral4");
           var_5[var_5.size - 1].type = "plate";
           break;
         case "round_plain":
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -3, -4, 0.5, var_0, (0, 150, 0), "prop_diningplate_brokenplain1");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, -3, -4, 0.5, var_0, (0, 150, 0), "prop_diningplate_brokenplain1");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 3, -2, 0.5, var_0, (0, 149.8, 0), "prop_diningplate_brokenplain2");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, 3, -2, 0.5, var_0, (0, 149.8, 0), "prop_diningplate_brokenplain2");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 1, 2, 0.5, var_0, (0, 150.2, 0), "prop_diningplate_brokenplain3");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, 1, 2, 0.5, var_0, (0, 150.2, 0), "prop_diningplate_brokenplain3");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -4, 2, 0.5, var_0, (0, 146.8, 0), "prop_diningplate_brokenplain4");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, -4, 2, 0.5, var_0, (0, 146.8, 0), "prop_diningplate_brokenplain4");
           var_5[var_5.size - 1].type = "plate";
           break;
         case "round_stack":
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -3, -4, 0.5, var_0, (0, 150, 0), "prop_diningplate_brokenfloral1");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, -3, -4, 0.5, var_0, (0, 150, 0), "prop_diningplate_brokenfloral1");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 3, -2, 0.5, var_0, (0, 149.8, 0), "prop_diningplate_brokenfloral2");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, 3, -2, 0.5, var_0, (0, 149.8, 0), "prop_diningplate_brokenfloral2");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 1, 2, 0.5, var_0, (0, 150.2, 0), "prop_diningplate_brokenfloral3");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, 1, 2, 0.5, var_0, (0, 150.2, 0), "prop_diningplate_brokenfloral3");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -4, 2, 0.5, var_0, (0, 146.8, 0), "prop_diningplate_brokenfloral4");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, -4, 2, 0.5, var_0, (0, 146.8, 0), "prop_diningplate_brokenfloral4");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -4, 3, 2.5, var_0, (0, 60, 0), "prop_diningplate_brokenplain1");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, -4, 3, 2.5, var_0, (0, 60, 0), "prop_diningplate_brokenplain1");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -1, -3, 2.5, var_0, (0, 59.8, 0), "prop_diningplate_brokenplain2");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, -1, -3, 2.5, var_0, (0, 59.8, 0), "prop_diningplate_brokenplain2");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 2, -1, 2.5, var_0, (0, 60.2, 0), "prop_diningplate_brokenplain3");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, 2, -1, 2.5, var_0, (0, 60.2, 0), "prop_diningplate_brokenplain3");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 2, 4, 2.5, var_0, (0, 56.8, 0), "prop_diningplate_brokenplain4");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, 2, 4, 2.5, var_0, (0, 56.8, 0), "prop_diningplate_brokenplain4");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -3, -4, 4.5, var_0, (0, 150, 0), "prop_diningplate_brokenfloral1");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, -3, -4, 4.5, var_0, (0, 150, 0), "prop_diningplate_brokenfloral1");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 3, -2, 4.5, var_0, (0, 149.8, 0), "prop_diningplate_brokenfloral2");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, 3, -2, 4.5, var_0, (0, 149.8, 0), "prop_diningplate_brokenfloral2");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 1, 2, 4.5, var_0, (0, 150.2, 0), "prop_diningplate_brokenfloral3");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, 1, 2, 4.5, var_0, (0, 150.2, 0), "prop_diningplate_brokenfloral3");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -4, 2, 4.5, var_0, (0, 146.8, 0), "prop_diningplate_brokenfloral4");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, -4, 2, 4.5, var_0, (0, 146.8, 0), "prop_diningplate_brokenfloral4");
           var_5[var_5.size - 1].type = "plate";
           break;
         case "oval_floral":
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 4, -4, 0.5, var_0, (0, 205.9, 0), "prop_diningplate_brokenfloral1");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, 4, -4, 0.5, var_0, (0, 205.9, 0), "prop_diningplate_brokenfloral1");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -6, 1, 0.5, var_0, (0, 352.2, 0), "prop_diningplate_brokenfloral2");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, -6, 1, 0.5, var_0, (0, 352.2, 0), "prop_diningplate_brokenfloral2");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 4, 2, 0.5, var_0, (0, 150.2, 0), "prop_diningplate_brokenfloral3");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, 4, 2, 0.5, var_0, (0, 150.2, 0), "prop_diningplate_brokenfloral3");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -2, 5, 0.5, var_0, (0, 102.3, 0), "prop_diningplate_brokenfloral4");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, -2, 5, 0.5, var_0, (0, 102.3, 0), "prop_diningplate_brokenfloral4");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -3, -3, 0.5, var_0, (0, 246.7, 0), "prop_diningplate_brokenfloral4");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, -3, -3, 0.5, var_0, (0, 246.7, 0), "prop_diningplate_brokenfloral4");
           var_5[var_5.size - 1].type = "plate";
           break;
         case "oval_plain":
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 4, -4, 0.5, var_0, (0, 205.9, 0), "prop_diningplate_brokenplain1");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, 4, -4, 0.5, var_0, (0, 205.9, 0), "prop_diningplate_brokenplain1");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -6, 1, 0.5, var_0, (0, 352.2, 0), "prop_diningplate_brokenplain2");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, -6, 1, 0.5, var_0, (0, 352.2, 0), "prop_diningplate_brokenplain2");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 4, 2, 0.5, var_0, (0, 150.2, 0), "prop_diningplate_brokenplain3");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, 4, 2, 0.5, var_0, (0, 150.2, 0), "prop_diningplate_brokenplain3");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -2, 5, 0.5, var_0, (0, 102.3, 0), "prop_diningplate_brokenplain4");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, -2, 5, 0.5, var_0, (0, 102.3, 0), "prop_diningplate_brokenplain4");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -3, -3, 0.5, var_0, (0, 246.7, 0), "prop_diningplate_brokenplain4");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, -3, -3, 0.5, var_0, (0, 246.7, 0), "prop_diningplate_brokenplain4");
           var_5[var_5.size - 1].type = "plate";
           break;
         case "oval_stack":
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 4, -4, 0.5, var_0, (0, 205.9, 0), "prop_diningplate_brokenfloral1");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, 4, -4, 0.5, var_0, (0, 205.9, 0), "prop_diningplate_brokenfloral1");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -6, 1, 0.5, var_0, (0, 352.2, 0), "prop_diningplate_brokenfloral2");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, -6, 1, 0.5, var_0, (0, 352.2, 0), "prop_diningplate_brokenfloral2");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 4, 2, 0.5, var_0, (0, 150.2, 0), "prop_diningplate_brokenfloral3");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, 4, 2, 0.5, var_0, (0, 150.2, 0), "prop_diningplate_brokenfloral3");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -2, 5, 0.5, var_0, (0, 102.3, 0), "prop_diningplate_brokenfloral4");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, -2, 5, 0.5, var_0, (0, 102.3, 0), "prop_diningplate_brokenfloral4");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -3, -3, 0.5, var_0, (0, 246.7, 0), "prop_diningplate_brokenfloral4");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, -3, -3, 0.5, var_0, (0, 246.7, 0), "prop_diningplate_brokenfloral4");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -4, 5, 2.5, var_0, (0, 25.9, 0), "prop_diningplate_brokenplain1");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, -4, 5, 2.5, var_0, (0, 25.9, 0), "prop_diningplate_brokenplain1");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 6, 0, 2.5, var_0, (0, 172.2, 0), "prop_diningplate_brokenplain2");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, 6, 0, 2.5, var_0, (0, 172.2, 0), "prop_diningplate_brokenplain2");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, -4, -1, 2.5, var_0, (0, 330.2, 0), "prop_diningplate_brokenplain3");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, -4, -1, 2.5, var_0, (0, 330.2, 0), "prop_diningplate_brokenplain3");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 2, -4, 2.5, var_0, (0, 282.3, 0), "prop_diningplate_brokenplain4");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, 2, -4, 2.5, var_0, (0, 282.3, 0), "prop_diningplate_brokenplain4");
           var_5[var_5.size - 1].type = "plate";
-          var_5[var_5.size] = _id_1E1F(var_2, var_3, var_4, 3, 4, 2.5, var_0, (0, 66.7, 0), "prop_diningplate_brokenplain4");
+          var_5[var_5.size] = addpiece(var_2, var_3, var_4, 3, 4, 2.5, var_0, (0, 66.7, 0), "prop_diningplate_brokenplain4");
           var_5[var_5.size - 1].type = "plate";
           break;
       }
@@ -1179,9 +1179,9 @@ _id_1E1B(var_0, var_1) {
       return;
   }
 
-  common_scripts\utility::array_thread(var_5, ::_id_1E1D, var_0.origin);
+  common_scripts\utility::array_thread(var_5, ::pieces_move, var_0.origin);
 
-  if(isDefined(level._id_1DE0[var_1]) && level._id_1DE0[var_1] == 1) {
+  if(isDefined(level.breakables_peicescollide[var_1]) && level.breakables_peicescollide[var_1] == 1) {
     var_6 = var_5[0].origin[2];
 
     for(var_7 = 0; var_7 < var_5.size; var_7++) {
@@ -1190,7 +1190,7 @@ _id_1E1B(var_0, var_1) {
       }
     }
 
-    common_scripts\utility::array_thread(var_5, ::_id_1E1E, var_6);
+    common_scripts\utility::array_thread(var_5, ::pieces_collision, var_6);
   } else {
     wait 2;
 
@@ -1202,7 +1202,7 @@ _id_1E1B(var_0, var_1) {
   }
 }
 
-_id_1E1C(var_0) {
+list_add(var_0) {
   if(isDefined(level._breakable_utility_modelarray[level._breakable_utility_modelindex])) {
     level._breakable_utility_modelarray[level._breakable_utility_modelindex] delete();
   }
@@ -1214,7 +1214,7 @@ _id_1E1C(var_0) {
   }
 }
 
-_id_1E1D(var_0) {
+pieces_move(var_0) {
   self endon("do not kill");
 
   if(isDefined(self.type) && self.type == "bottle_bot") {
@@ -1270,7 +1270,7 @@ _id_1E1D(var_0) {
   var_1 delete();
 }
 
-_id_1E1E(var_0) {
+pieces_collision(var_0) {
   self endon("death");
   wait 0.1;
   var_1 = bulletTrace(self.origin, self.origin - (0, 0, 50000), 0, undefined);
@@ -1285,7 +1285,7 @@ _id_1E1E(var_0) {
   self unlink();
 }
 
-_id_1E1F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+addpiece(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_9 = 1;
   var_10 = var_0;
   var_11 = var_1;
@@ -1298,11 +1298,11 @@ _id_1E1F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_14 setModel(var_8);
   var_14.modelscale = var_9;
   var_14.angles = var_6.angles + var_7;
-  _id_1E1C(var_14);
+  list_add(var_14);
   return var_14;
 }
 
-_id_1E21(var_0, var_1) {
+getfurthestent(var_0, var_1) {
   if(var_1.size < 1) {
     return;
   }
@@ -1342,7 +1342,7 @@ getclosestent(var_0, var_1) {
   return var_3;
 }
 
-_id_1E23(var_0, var_1) {
+getclosestaccurantent(var_0, var_1) {
   if(var_1.size < 1) {
     return;
   }
@@ -1362,7 +1362,7 @@ _id_1E23(var_0, var_1) {
   return var_3;
 }
 
-_id_1E24(var_0, var_1) {
+getclosestaiment(var_0, var_1) {
   if(var_1.size < 1) {
     return;
   }

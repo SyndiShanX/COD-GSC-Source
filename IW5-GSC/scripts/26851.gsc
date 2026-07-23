@@ -9,26 +9,26 @@ _id_68B1(var_0, var_1) {
   common_scripts\utility::flag_set("player_can_die_on_zodiac");
 
   if(!isDefined(var_0)) {
-    level._id_68B2 = "viewhands_player_udt";
+    level.zodiac_playerhandmodel = "viewhands_player_udt";
   } else {
-    level._id_68B2 = var_0;
+    level.zodiac_playerhandmodel = var_0;
   }
   if(!isDefined(var_1)) {
-    level._id_68B3 = "vehicle_zodiac_viewmodel";
+    level.zodiac_playerzodiacmodel = "vehicle_zodiac_viewmodel";
   } else {
-    level._id_68B3 = var_1;
+    level.zodiac_playerzodiacmodel = var_1;
   }
   level._id_68B4 = "viewmodel_miniUZI";
   level._id_68B5 = "uzi";
-  precachemodel(level._id_68B2);
-  precachemodel(level._id_68B3);
+  precachemodel(level.zodiac_playerhandmodel);
+  precachemodel(level.zodiac_playerzodiacmodel);
   precachemodel(level._id_68B4);
   precacheitem(level._id_68B5);
   level._id_68B6 = loadfx("muzzleflashes/uzi_flash_view");
   level._id_68B7 = loadfx("shellejects/pistol_view");
   level._id_68B8 = [];
   level._id_68B8["weap_glock_fire_snowmobile"] = "weap_miniuzi_fire_plr";
-  _id_6870();
+  zodiac_anims();
   maps\_utility::add_hint_string("zodiac_attack", &"SCRIPT_PLATFORM_SNOWMOBILE_ATTACK", ::_id_68DD);
   maps\_utility::add_hint_string("zodiac_drive", &"SCRIPT_PLATFORM_SNOWMOBILE_DRIVE", ::_id_68DE);
   maps\_utility::add_hint_string("zodiac_reverse", &"SCRIPT_PLATFORM_SNOWMOBILE_REVERSE", ::_id_68E2);
@@ -39,16 +39,16 @@ _id_68B9(var_0, var_1) {
   var_2 makeusable();
   self waittill("vehicle_mount", var_3);
 
-  if(!getdvarint("scr_zodiac_test") && maps\_utility::_id_1451()) {
-    maps\_utility::delaythread(20, maps\_utility::_id_1F61, "zodiac_attack");
-    maps\_utility::delaythread(3, maps\_utility::_id_1F61, "zodiac_drive");
+  if(!getdvarint("scr_zodiac_test") && maps\_utility::is_default_start()) {
+    maps\_utility::delaythread(20, maps\_utility::display_hint, "zodiac_attack");
+    maps\_utility::delaythread(3, maps\_utility::display_hint, "zodiac_drive");
   }
 
   var_3.vehicle = var_2;
   var_2._id_68BA = var_2.model;
   var_2._id_68BB = 32;
-  var_2._id_1032 = "zodiac_player";
-  var_2 maps\_utility::_id_2629();
+  var_2.animname = "zodiac_player";
+  var_2 maps\_utility::assign_animtree();
   var_2 makeunusable();
   var_2 dontcastshadows();
   var_3 thread _id_68DF(var_2);
@@ -91,8 +91,8 @@ _id_68BE(var_0, var_1, var_2) {
     var_5["player"] = 1690000;
     var_6["player"] = ::_id_68BC;
     var_7["player"] = spawnStruct();
-    var_7["player"]._id_15D9 = -20;
-    var_7["player"]._id_15DA = 20;
+    var_7["player"].min = -20;
+    var_7["player"].max = 20;
     var_7["player"]._id_68BF = 0;
     var_8 = "player";
   } else {
@@ -104,14 +104,14 @@ _id_68BE(var_0, var_1, var_2) {
     var_5["price"] = 18490000;
     var_6["price"] = ::_id_68BD;
     var_7["price"]["right"] = spawnStruct();
-    var_7["price"]["right"]._id_15D9 = -80;
-    var_7["price"]["right"]._id_15DA = 5;
+    var_7["price"]["right"].min = -80;
+    var_7["price"]["right"].max = 5;
     var_7["price"]["right"]._id_68BF = -25;
     var_7["price"]["right"]._id_68C0 = -55;
     var_7["price"]["right"]._id_68C1 = 5;
     var_7["price"]["left"] = spawnStruct();
-    var_7["price"]["left"]._id_15D9 = -5;
-    var_7["price"]["left"]._id_15DA = 80;
+    var_7["price"]["left"].min = -5;
+    var_7["price"]["left"].max = 80;
     var_7["price"]["left"]._id_68BF = 25;
     var_7["price"]["left"]._id_68C0 = -5;
     var_7["price"]["left"]._id_68C1 = 55;
@@ -125,7 +125,7 @@ _id_68BE(var_0, var_1, var_2) {
     var_13 = self;
 
     if(var_8 == "price") {
-      var_13 = level._id_4877;
+      var_13 = level.price;
     }
     var_14 = var_13.origin;
     var_15 = var_7["player"];
@@ -143,8 +143,8 @@ _id_68BE(var_0, var_1, var_2) {
     foreach(var_17 in var_10) {
       var_18 = var_17.origin;
 
-      if(isDefined(var_17._id_0EF1)) {
-        if(var_17._id_0EF1 == level._id_68C2) {
+      if(isDefined(var_17.ridingvehicle)) {
+        if(var_17.ridingvehicle == level._id_68C2) {
           var_9 = var_3[var_8];
         }
         var_9 = var_4[var_8];
@@ -164,7 +164,7 @@ _id_68BE(var_0, var_1, var_2) {
       }
       var_22 = angleclamp180(var_20[1] - var_13.angles[1]);
 
-      if(var_22 < var_15._id_15D9 || var_22 > var_15._id_15DA) {
+      if(var_22 < var_15.min || var_22 > var_15.max) {
         continue;
       }
       if(var_8 == "price") {
@@ -218,7 +218,7 @@ _id_68C3(var_0) {
   var_1 = var_1 * 17.6;
   var_2 = (0, var_1, 64);
   thread _id_68C5(var_0, var_2);
-  maps\_utility::_id_281A();
+  maps\_utility::player_dismount_vehicle();
 }
 
 _id_68C4() {
@@ -228,10 +228,10 @@ _id_68C4() {
 
 _id_68C5(var_0, var_1) {
   var_0 waittill("vehicle_dismount");
-  maps\_utility::_id_1EC5(var_1);
+  maps\_utility::beginsliding(var_1);
 
   if(common_scripts\utility::flag("player_can_die_on_zodiac")) {
-    maps\_utility::_id_1887();
+    maps\_utility::kill_wrapper();
   }
   wait 1.0;
 }
@@ -272,9 +272,9 @@ _id_68C8(var_0, var_1) {
   if(isDefined(var_0._id_68C9)) {
     return;
   }
-  var_0 setModel(level._id_68B3);
-  var_0 attach(level._id_68B2, "tag_player");
-  var_0 clearanim(var_0 maps\_utility::_id_1281("root"), 0);
+  var_0 setModel(level.zodiac_playerzodiacmodel);
+  var_0 attach(level.zodiac_playerhandmodel, "tag_player");
+  var_0 clearanim(var_0 maps\_utility::getanim("root"), 0);
   var_0._id_68C9 = 1;
   thread _id_68CD(var_0, var_1);
 }
@@ -288,8 +288,8 @@ _id_68CA(var_0) {
     var_0._id_68CB = undefined;
   }
 
-  var_0 detach(level._id_68B2, "tag_player");
-  var_0 clearanim(var_0 maps\_utility::_id_1281("root"), 0);
+  var_0 detach(level.zodiac_playerhandmodel, "tag_player");
+  var_0 clearanim(var_0 maps\_utility::getanim("root"), 0);
   var_0._id_68C9 = undefined;
   var_0 notify("kill_anims");
 }
@@ -333,7 +333,7 @@ _id_68CF(var_0, var_1, var_2) {
   var_3 = spawnStruct();
 
   if(isalive(self._id_6882)) {
-    var_3._id_2816 = self._id_6882;
+    var_3.obj = self._id_6882;
     var_3.origin = self._id_6882 getshootatpos() + common_scripts\utility::randomvectorrange(-10, 10) + (0, 0, -1 * randomfloat(40));
     return var_3;
   }
@@ -344,13 +344,13 @@ _id_68CF(var_0, var_1, var_2) {
     if(distance(level.player.origin, var_6.origin) > 2300) {
       continue;
     }
-    if(!maps\_utility::_id_26AB(level.player.origin, level.player.angles, var_6.origin, 0.965925)) {
+    if(!maps\_utility::within_fov_2d(level.player.origin, level.player.angles, var_6.origin, 0.965925)) {
       continue;
     }
     if(!level.player sightconetrace(var_6 getshootatpos(), var_6)) {
       continue;
     }
-    var_3._id_2816 = var_6;
+    var_3.obj = var_6;
     var_3.origin = var_6.origin;
     thread _id_68CE(var_6);
     return var_3;
@@ -362,13 +362,13 @@ _id_68CF(var_0, var_1, var_2) {
     if(distance(level.player.origin, var_6.origin) > 1300) {
       continue;
     }
-    if(!maps\_utility::_id_26AB(level.player.origin, level.player.angles, var_6.origin, cos(15))) {
+    if(!maps\_utility::within_fov_2d(level.player.origin, level.player.angles, var_6.origin, cos(15))) {
       continue;
     }
     if(!level.player sightconetrace(var_6.origin + (0, 0, 16), var_6)) {
       continue;
     }
-    var_3._id_2816 = var_6;
+    var_3.obj = var_6;
     var_3.origin = var_6.origin;
     var_3._id_68D0 = 1;
     return var_3;
@@ -388,7 +388,7 @@ _id_68D1() {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-    if(var_3 == level._id_68D2) {
+    if(var_3 == level.players_boat) {
       continue;
     }
     if(isDefined(level._id_68C2) && var_3 == level._id_68C2) {
@@ -400,17 +400,17 @@ _id_68D1() {
     if(isspawner(var_3)) {
       continue;
     }
-    if(var_3._id_0A39.size > 1) {
+    if(var_3.riders.size > 1) {
       continue;
     }
-    if(!var_3._id_0A39.size) {
+    if(!var_3.riders.size) {
       continue;
     }
     if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "bobbing_boat") {
       continue;
     }
     var_3 thread _id_68D4();
-    var_1[var_1.size] = var_3._id_0A39[0];
+    var_1[var_1.size] = var_3.riders[0];
   }
 
   return var_1;
@@ -421,10 +421,10 @@ _id_68D4() {
   self endon("wipeout_when_not_in_fov");
   self endon("death");
 
-  while(maps\_utility::_id_26AD(self.origin, 0.5)) {
+  while(maps\_utility::within_fov_of_players(self.origin, 0.5)) {
     wait 0.05;
   }
-  self._id_439F = 1;
+  self.wipeout = 1;
 }
 
 _id_68D5(var_0, var_1, var_2) {
@@ -452,14 +452,14 @@ _id_68D6(var_0) {
   playFXOnTag(level._id_68B7, var_0, "tag_brass");
   level.player playRumbleOnEntity("smg_fire");
 
-  if(!isDefined(var_2._id_2816)) {
+  if(!isDefined(var_2.obj)) {
     return;
   }
-  if(!isai(var_2._id_2816)) {
-    var_2._id_2816 notify("damage", 50, level.player, self.origin, var_2._id_2816.origin, "MOD_PISTOL_BULLET", "", "");
+  if(!isai(var_2.obj)) {
+    var_2.obj notify("damage", 50, level.player, self.origin, var_2.obj.origin, "MOD_PISTOL_BULLET", "", "");
   }
   if(isDefined(var_2._id_68D0)) {
-    _id_68D7(var_2._id_2816);
+    _id_68D7(var_2.obj);
     return;
   }
 }
@@ -467,14 +467,14 @@ _id_68D6(var_0) {
 _id_68D7(var_0) {
   var_0 notify("newanim");
   var_0 startragdoll();
-  var_0._id_0EF1._id_439F = 1;
+  var_0.ridingvehicle.wipeout = 1;
 }
 
 _id_68D8(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_0 endon(var_2);
-  var_0 setflaggedanimrestart(var_1, var_0 maps\_utility::_id_1281(var_3), 0.001, 0.08, 1.0);
-  var_0 setflaggedanimrestart(var_1, var_0 maps\_utility::_id_1281(var_4), 0.001, 0.08, 1.0);
-  var_0 setflaggedanimrestart(var_1, var_0 maps\_utility::_id_1281(var_5), 0.001, 0.08, 1.0);
+  var_0 setflaggedanimrestart(var_1, var_0 maps\_utility::getanim(var_3), 0.001, 0.08, 1.0);
+  var_0 setflaggedanimrestart(var_1, var_0 maps\_utility::getanim(var_4), 0.001, 0.08, 1.0);
+  var_0 setflaggedanimrestart(var_1, var_0 maps\_utility::getanim(var_5), 0.001, 0.08, 1.0);
 
   for(;;) {
     var_6 = var_0 vehicle_getsteering() * -1.0;
@@ -489,15 +489,15 @@ _id_68D8(var_0, var_1, var_2, var_3, var_4, var_5) {
       var_9 = 0.001;
     }
 
-    var_0 setflaggedanim(var_1, var_0 maps\_utility::_id_1281(var_3), var_7, 0.08, 1.0);
-    var_0 setflaggedanim(var_1, var_0 maps\_utility::_id_1281(var_4), var_8, 0.08, 1.0);
-    var_0 setflaggedanim(var_1, var_0 maps\_utility::_id_1281(var_5), var_9, 0.08, 1.0);
+    var_0 setflaggedanim(var_1, var_0 maps\_utility::getanim(var_3), var_7, 0.08, 1.0);
+    var_0 setflaggedanim(var_1, var_0 maps\_utility::getanim(var_4), var_8, 0.08, 1.0);
+    var_0 setflaggedanim(var_1, var_0 maps\_utility::getanim(var_5), var_9, 0.08, 1.0);
     wait 0.05;
   }
 }
 
 _id_68D9(var_0) {
-  var_0 setanimknoblimited(var_0 maps\_utility::_id_1281("gun_pullout_root"), 1.0, 0.0, 1.0);
+  var_0 setanimknoblimited(var_0 maps\_utility::getanim("gun_pullout_root"), 1.0, 0.0, 1.0);
   childthread _id_68D8(var_0, "pullout_anim", "pullout_done", "gun_pullout_L", "gun_pullout", "gun_pullout_R");
   var_0 waittillmatch("pullout_anim", "attach_gun");
   var_0 attach(level._id_68B4, "tag_weapon_left");
@@ -514,8 +514,8 @@ _id_68D9(var_0) {
   var_0._id_68CB = 1;
   var_0 waittillmatch("pullout_anim", "end");
   var_0 notify("pullout_done");
-  var_0 setanim(var_0 maps\_utility::_id_1281("uzi"), 1.0, 0.0, 1.0);
-  var_0 setanimknoblimited(var_0 maps\_utility::_id_1281("gun_idle"), 1.0, 0.0, 1.0);
+  var_0 setanim(var_0 maps\_utility::getanim("uzi"), 1.0, 0.0, 1.0);
+  var_0 setanimknoblimited(var_0 maps\_utility::getanim("gun_idle"), 1.0, 0.0, 1.0);
   var_0._id_68DA = 1.0;
 
   for(;;) {
@@ -527,32 +527,32 @@ _id_68D9(var_0) {
 
     if(var_1 && var_0._id_68BB > 0) {
       common_scripts\utility::flag_set("player_shot_on_zodiac");
-      var_0 setflaggedanimknoblimitedrestart("fire_anim", var_0 maps\_utility::_id_1281("gun_fire"), 1.0, 0.0, 1.0);
+      var_0 setflaggedanimknoblimitedrestart("fire_anim", var_0 maps\_utility::getanim("gun_fire"), 1.0, 0.0, 1.0);
 
       if(var_0._id_68BB == 1) {
-        var_0 setanimknoblimitedrestart(var_0 maps\_utility::_id_1281("uzi_last_fire"), 1.0, 0.0, 1.0);
+        var_0 setanimknoblimitedrestart(var_0 maps\_utility::getanim("uzi_last_fire"), 1.0, 0.0, 1.0);
       } else {
-        var_0 setanimknoblimitedrestart(var_0 maps\_utility::_id_1281("uzi_fire"), 1.0, 0.0, 1.0);
+        var_0 setanimknoblimitedrestart(var_0 maps\_utility::getanim("uzi_fire"), 1.0, 0.0, 1.0);
       }
       _id_68D6(var_0);
       wait 0.05;
       var_0._id_68BB = var_0._id_68BB - 1;
       var_0._id_68DA = 1.0;
     } else if(var_0._id_68BB <= 0) {
-      var_0 setflaggedanimknoblimitedrestart("reload_anim", var_0 maps\_utility::_id_1281("gun_reload"), 1.0, 0.0, 1.0);
-      var_0 setanimknoblimitedrestart(var_0 maps\_utility::_id_1281("uzi_reload"), 1.0, 0.0, 1.0);
+      var_0 setflaggedanimknoblimitedrestart("reload_anim", var_0 maps\_utility::getanim("gun_reload"), 1.0, 0.0, 1.0);
+      var_0 setanimknoblimitedrestart(var_0 maps\_utility::getanim("uzi_reload"), 1.0, 0.0, 1.0);
       var_0 waittillmatch("reload_anim", "end");
       var_0._id_68BB = 32;
       var_0._id_68DA = 1.0;
     } else {
-      var_0 setanimknoblimited(var_0 maps\_utility::_id_1281("gun_idle"), 1.0, 0.0, 1.0);
+      var_0 setanimknoblimited(var_0 maps\_utility::getanim("gun_idle"), 1.0, 0.0, 1.0);
       var_0._id_68DA = var_0._id_68DA - 0.05;
     }
 
     wait 0.05;
   }
 
-  var_0 setanimknoblimited(var_0 maps\_utility::_id_1281("gun_putaway_root"), 1.0, 0.0, 1.0);
+  var_0 setanimknoblimited(var_0 maps\_utility::getanim("gun_putaway_root"), 1.0, 0.0, 1.0);
   childthread _id_68D8(var_0, "putaway_anim", "putaway_done", "gun_putaway_L", "gun_putaway", "gun_putaway_R");
   var_0 waittillmatch("putaway_anim", "detach_gun");
 
@@ -567,8 +567,8 @@ _id_68D9(var_0) {
 }
 
 _id_68DB(var_0, var_1) {
-  var_0 setanim(var_0 maps\_utility::_id_1281("drive_left_arm"), 1.0, 0.1, 1.0);
-  var_0 setanim(var_0 maps\_utility::_id_1281("shoot_left_arm"), 0.0, 0.1, 1.0);
+  var_0 setanim(var_0 maps\_utility::getanim("drive_left_arm"), 1.0, 0.1, 1.0);
+  var_0 setanim(var_0 maps\_utility::getanim("shoot_left_arm"), 0.0, 0.1, 1.0);
 
   if(isDefined(var_1) && var_1) {
     return;
@@ -577,14 +577,14 @@ _id_68DB(var_0, var_1) {
     var_2 = _id_68DC();
 
     if(var_2) {
-      var_0 setanim(var_0 maps\_utility::_id_1281("drive_left_arm"), 0.001, 0.1, 1.0);
-      var_0 setanim(var_0 maps\_utility::_id_1281("shoot_left_arm"), 1.0, 0.1, 1.0);
+      var_0 setanim(var_0 maps\_utility::getanim("drive_left_arm"), 0.001, 0.1, 1.0);
+      var_0 setanim(var_0 maps\_utility::getanim("shoot_left_arm"), 1.0, 0.1, 1.0);
       childthread _id_68D9(var_0);
       var_0 waittill("drive_shooting_done");
     }
 
-    var_0 setanim(var_0 maps\_utility::_id_1281("drive_left_arm"), 1.0, 0.1, 1.0);
-    var_0 setanim(var_0 maps\_utility::_id_1281("shoot_left_arm"), 0.0, 0.1, 1.0);
+    var_0 setanim(var_0 maps\_utility::getanim("drive_left_arm"), 1.0, 0.1, 1.0);
+    var_0 setanim(var_0 maps\_utility::getanim("shoot_left_arm"), 0.0, 0.1, 1.0);
     wait 0.05;
   }
 }
@@ -598,31 +598,31 @@ _id_68DC() {
 
 #using_animtree("vehicles");
 
-_id_6870() {
-  level._id_1245["zodiac_player"] = #animtree;
-  level._id_1F90["zodiac_player"] = level._id_68B2;
-  level._id_0C59["zodiac_player"]["root"] = % root;
-  level._id_0C59["zodiac_player"]["left_arm"] = % player_snowmobile_left_arm;
-  level._id_0C59["zodiac_player"]["drive_left_arm"] = % player_snowmobile_drive_left_arm;
-  level._id_0C59["zodiac_player"]["shoot_left_arm"] = % player_snowmobile_shoot_left_arm;
-  level._id_0C59["zodiac_player"]["gun_fire"] = % player_snowmobile_gun_fire;
-  level._id_0C59["zodiac_player"]["gun_idle"] = % player_snowmobile_gun_idle;
-  level._id_0C59["zodiac_player"]["gun_pullout_root"] = % player_snowmobile_gun_pullout_root;
-  level._id_0C59["zodiac_player"]["gun_pullout_L"] = % player_snowmobile_gun_pullout_l;
-  level._id_0C59["zodiac_player"]["gun_pullout"] = % player_snowmobile_gun_pullout;
-  level._id_0C59["zodiac_player"]["gun_pullout_R"] = % player_snowmobile_gun_pullout_r;
-  level._id_0C59["zodiac_player"]["gun_putaway_root"] = % player_snowmobile_gun_putaway_root;
-  level._id_0C59["zodiac_player"]["gun_putaway_L"] = % player_snowmobile_gun_putaway_l;
-  level._id_0C59["zodiac_player"]["gun_putaway"] = % player_snowmobile_gun_putaway;
-  level._id_0C59["zodiac_player"]["gun_putaway_R"] = % player_snowmobile_gun_putaway_r;
-  level._id_0C59["zodiac_player"]["gun_reload"] = % player_snowmobile_gun_reload;
-  level._id_0C59["zodiac_player"]["right_arm"] = % player_snowmobile_right_arm;
-  level._id_0C59["zodiac_player"]["uzi"] = % snowmobile_glock;
-  level._id_0C59["zodiac_player"]["uzi_fire"] = % snowmobile_glock_fire;
-  level._id_0C59["zodiac_player"]["uzi_last_fire"] = % snowmobile_glock_last_fire;
-  level._id_0C59["zodiac_player"]["uzi_reload"] = % snowmobile_glock_reload;
-  level._id_0C59["zodiac_player"]["sleeve_pose"] = % player_sleeve_pose;
-  level._id_0C59["zodiac_player"]["sleeve_flapping"] = % player_sleeve_flapping;
+zodiac_anims() {
+  level.scr_animtree["zodiac_player"] = #animtree;
+  level.scr_model["zodiac_player"] = level.zodiac_playerhandmodel;
+  level.scr_anim["zodiac_player"]["root"] = % root;
+  level.scr_anim["zodiac_player"]["left_arm"] = % player_snowmobile_left_arm;
+  level.scr_anim["zodiac_player"]["drive_left_arm"] = % player_snowmobile_drive_left_arm;
+  level.scr_anim["zodiac_player"]["shoot_left_arm"] = % player_snowmobile_shoot_left_arm;
+  level.scr_anim["zodiac_player"]["gun_fire"] = % player_snowmobile_gun_fire;
+  level.scr_anim["zodiac_player"]["gun_idle"] = % player_snowmobile_gun_idle;
+  level.scr_anim["zodiac_player"]["gun_pullout_root"] = % player_snowmobile_gun_pullout_root;
+  level.scr_anim["zodiac_player"]["gun_pullout_L"] = % player_snowmobile_gun_pullout_l;
+  level.scr_anim["zodiac_player"]["gun_pullout"] = % player_snowmobile_gun_pullout;
+  level.scr_anim["zodiac_player"]["gun_pullout_R"] = % player_snowmobile_gun_pullout_r;
+  level.scr_anim["zodiac_player"]["gun_putaway_root"] = % player_snowmobile_gun_putaway_root;
+  level.scr_anim["zodiac_player"]["gun_putaway_L"] = % player_snowmobile_gun_putaway_l;
+  level.scr_anim["zodiac_player"]["gun_putaway"] = % player_snowmobile_gun_putaway;
+  level.scr_anim["zodiac_player"]["gun_putaway_R"] = % player_snowmobile_gun_putaway_r;
+  level.scr_anim["zodiac_player"]["gun_reload"] = % player_snowmobile_gun_reload;
+  level.scr_anim["zodiac_player"]["right_arm"] = % player_snowmobile_right_arm;
+  level.scr_anim["zodiac_player"]["uzi"] = % snowmobile_glock;
+  level.scr_anim["zodiac_player"]["uzi_fire"] = % snowmobile_glock_fire;
+  level.scr_anim["zodiac_player"]["uzi_last_fire"] = % snowmobile_glock_last_fire;
+  level.scr_anim["zodiac_player"]["uzi_reload"] = % snowmobile_glock_reload;
+  level.scr_anim["zodiac_player"]["sleeve_pose"] = % player_sleeve_pose;
+  level.scr_anim["zodiac_player"]["sleeve_flapping"] = % player_sleeve_flapping;
 }
 
 _id_68DD() {
@@ -652,7 +652,7 @@ _id_68DF(var_0) {
       var_0._id_68E0++;
 
       if(var_0._id_68E0 >= 3) {
-        var_0 maps\_utility::_id_1F61("zodiac_reverse");
+        var_0 maps\_utility::display_hint("zodiac_reverse");
       }
     } else {
       var_0._id_68E0 = 0;

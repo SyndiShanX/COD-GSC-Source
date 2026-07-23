@@ -4,35 +4,35 @@
 **************************************/
 
 main(var_0, var_1, var_2) {
-  maps\_vehicle::_id_2AC2("f15", var_0, var_1, var_2);
-  maps\_vehicle::_id_2AD2(::_id_2B1D);
-  maps\_vehicle::_id_2ABE("vehicle_f15");
+  maps\_vehicle::build_template("f15", var_0, var_1, var_2);
+  maps\_vehicle::build_localinit(::init_local);
+  maps\_vehicle::build_deathmodel("vehicle_f15");
   level._effect["engineeffect"] = loadfx("fire/jet_afterburner");
   level._effect["afterburner"] = loadfx("fire/jet_afterburner_ignite");
   level._effect["contrail"] = loadfx("smoke/jet_contrail");
-  maps\_vehicle::_id_2A02("explosions/large_vehicle_explosion", undefined, "explo_metal_rand", undefined, undefined, undefined, undefined, undefined, undefined, 0);
-  maps\_vehicle::_id_2ACE(999, 500, 1500);
-  maps\_vehicle::_id_29F5("mig_rumble", 0.1, 0.2, 11300, 0.05, 0.05);
-  maps\_vehicle::_id_2AC6("allies");
+  maps\_vehicle::build_deathfx("explosions/large_vehicle_explosion", undefined, "explo_metal_rand", undefined, undefined, undefined, undefined, undefined, undefined, 0);
+  maps\_vehicle::build_life(999, 500, 1500);
+  maps\_vehicle::build_rumble("mig_rumble", 0.1, 0.2, 11300, 0.05, 0.05);
+  maps\_vehicle::build_team("allies");
   var_3 = randomfloatrange(0, 1);
-  var_4 = maps\_vehicle::_id_2B1A(var_0, var_2);
-  maps\_vehicle::_id_2AAD(var_4, "wingtip_green", "TAG_LEFT_WINGTIP", "misc/aircraft_light_wingtip_green", "running", var_3);
-  maps\_vehicle::_id_2AAD(var_4, "tail_green", "TAG_LEFT_TAIL", "misc/aircraft_light_wingtip_green", "running", var_3);
-  maps\_vehicle::_id_2AAD(var_4, "wingtip_red", "TAG_RIGHT_WINGTIP", "misc/aircraft_light_wingtip_red", "running", var_3);
-  maps\_vehicle::_id_2AAD(var_4, "tail_red", "TAG_RIGHT_TAIL", "misc/aircraft_light_wingtip_red", "running", var_3);
-  maps\_vehicle::_id_2AAD(var_4, "white_blink", "TAG_LIGHT_BELLY", "misc/aircraft_light_white_blink", "running", var_3);
-  maps\_vehicle::_id_2AAD(var_4, "landing_light01", "TAG_LIGHT_LANDING01", "misc/light_mig29_landing", "landing", 0.0);
+  var_4 = maps\_vehicle::get_light_model(var_0, var_2);
+  maps\_vehicle::build_light(var_4, "wingtip_green", "TAG_LEFT_WINGTIP", "misc/aircraft_light_wingtip_green", "running", var_3);
+  maps\_vehicle::build_light(var_4, "tail_green", "TAG_LEFT_TAIL", "misc/aircraft_light_wingtip_green", "running", var_3);
+  maps\_vehicle::build_light(var_4, "wingtip_red", "TAG_RIGHT_WINGTIP", "misc/aircraft_light_wingtip_red", "running", var_3);
+  maps\_vehicle::build_light(var_4, "tail_red", "TAG_RIGHT_TAIL", "misc/aircraft_light_wingtip_red", "running", var_3);
+  maps\_vehicle::build_light(var_4, "white_blink", "TAG_LIGHT_BELLY", "misc/aircraft_light_white_blink", "running", var_3);
+  maps\_vehicle::build_light(var_4, "landing_light01", "TAG_LIGHT_LANDING01", "misc/light_mig29_landing", "landing", 0.0);
 }
 
-_id_2B1D() {
-  thread _id_443A();
-  thread _id_4008();
-  thread _id_443C();
-  thread _id_495A();
-  maps\_vehicle::_id_2AB3("running");
+init_local() {
+  thread playengineeffects();
+  thread handle_death();
+  thread playcontrail();
+  thread landing_gear_up();
+  maps\_vehicle::lights_on("running");
 }
 
-_id_3A9C(var_0) {
+set_vehicle_anims(var_0) {
   var_1 = "rope_test";
   precachemodel(var_1);
   return var_0;
@@ -40,12 +40,12 @@ _id_3A9C(var_0) {
 
 #using_animtree("vehicles");
 
-_id_495A() {
+landing_gear_up() {
   self useanimtree(#animtree);
   self setanim(%mig_landing_gear_up);
 }
 
-_id_3A9D() {
+setanims() {
   var_0 = [];
 
   for(var_1 = 0; var_1 < 1; var_1++) {
@@ -54,70 +54,70 @@ _id_3A9D() {
   return var_0;
 }
 
-_id_443A() {
+playengineeffects() {
   self endon("death");
   self endon("stop_engineeffects");
-  maps\_utility::_id_1402("engineeffects");
-  maps\_utility::_id_13DC("engineeffects");
+  maps\_utility::ent_flag_init("engineeffects");
+  maps\_utility::ent_flag_set("engineeffects");
   var_0 = common_scripts\utility::getfx("engineeffect");
 
   for(;;) {
-    maps\_utility::_id_1654("engineeffects");
+    maps\_utility::ent_flag_wait("engineeffects");
     playFXOnTag(var_0, self, "tag_engine_right");
     playFXOnTag(var_0, self, "tag_engine_left");
-    maps\_utility::_id_13DB("engineeffects");
+    maps\_utility::ent_flag_waitopen("engineeffects");
     stopFXOnTag(var_0, self, "tag_engine_left");
     stopFXOnTag(var_0, self, "tag_engine_right");
   }
 }
 
-_id_495B() {
+playafterburner() {
   self endon("death");
   self endon("stop_afterburners");
-  maps\_utility::_id_1402("afterburners");
-  maps\_utility::_id_13DC("afterburners");
+  maps\_utility::ent_flag_init("afterburners");
+  maps\_utility::ent_flag_set("afterburners");
   var_0 = common_scripts\utility::getfx("afterburner");
 
   for(;;) {
-    maps\_utility::_id_1654("afterburners");
+    maps\_utility::ent_flag_wait("afterburners");
     playFXOnTag(var_0, self, "tag_engine_right");
     playFXOnTag(var_0, self, "tag_engine_left");
-    maps\_utility::_id_13DB("afterburners");
+    maps\_utility::ent_flag_waitopen("afterburners");
     stopFXOnTag(var_0, self, "tag_engine_left");
     stopFXOnTag(var_0, self, "tag_engine_right");
   }
 }
 
-_id_4008() {
+handle_death() {
   self waittill("death");
 
-  if(isDefined(self._id_443B)) {
-    self._id_443B delete();
+  if(isDefined(self.tag1)) {
+    self.tag1 delete();
   }
-  if(isDefined(self._id_495C)) {
-    self._id_495C delete();
+  if(isDefined(self.tag2)) {
+    self.tag2 delete();
   }
 }
 
-_id_443C() {
-  self._id_443B = _id_443E("tag_engine_right", 1);
-  self._id_495C = _id_443E("tag_engine_left", -1);
+playcontrail() {
+  self.tag1 = add_contrail("tag_engine_right", 1);
+  self.tag2 = add_contrail("tag_engine_left", -1);
   var_0 = common_scripts\utility::getfx("contrail");
   self endon("death");
-  maps\_utility::_id_1402("contrails");
-  maps\_utility::_id_13DC("contrails");
+  maps\_utility::ent_flag_init("contrails");
+  maps\_utility::ent_flag_set("contrails");
 
   for(;;) {
-    maps\_utility::_id_1654("contrails");
-    playFXOnTag(var_0, self._id_443B, "tag_origin");
-    playFXOnTag(var_0, self._id_495C, "tag_origin");
-    maps\_utility::_id_13DB("contrails");
-    stopFXOnTag(var_0, self._id_443B, "tag_origin");
-    stopFXOnTag(var_0, self._id_495C, "tag_origin");
+    maps\_utility::ent_flag_wait("contrails");
+    playFXOnTag(var_0, self.tag1, "tag_origin");
+    playFXOnTag(var_0, self.tag2, "tag_origin");
+    maps\_utility::ent_flag_waitopen("contrails");
+    stopFXOnTag(var_0, self.tag1, "tag_origin");
+    stopFXOnTag(var_0, self.tag2, "tag_origin");
   }
 }
 
-_id_443E(var_0, var_1) {
+add_contrail(var_0, var_1) {
   var_2 = common_scripts\utility::spawn_tag_origin();
   var_2.origin = self gettagorigin(var_0);
   var_2.angles = self gettagangles(var_0);
@@ -126,15 +126,15 @@ _id_443E(var_0, var_1) {
   var_3.forward = -156;
   var_3.up = 0;
   var_3.right = 224 * var_1;
-  var_3._id_13FE = 0;
-  var_3._id_13FF = 0;
-  var_3 maps\_utility::_id_18B9();
+  var_3.yaw = 0;
+  var_3.pitch = 0;
+  var_3 maps\_utility::flashbanggettimeleftsec();
   var_2 linkTo(self, var_0);
   return var_2;
 }
 
-_id_443F(var_0) {
-  var_1 = _id_4440(var_0);
+playerisclose(var_0) {
+  var_1 = playerisinfront(var_0);
 
   if(var_1) {
     var_2 = 1;
@@ -153,7 +153,7 @@ _id_443F(var_0) {
   }
 }
 
-_id_4440(var_0) {
+playerisinfront(var_0) {
   if(!isDefined(var_0)) {
     return 0;
   }
@@ -168,13 +168,13 @@ _id_4440(var_0) {
   }
 }
 
-_id_3E81() {
+plane_sound_node() {
   self waittill("trigger", var_0);
   var_0 endon("death");
-  thread _id_3E81();
+  thread plane_sound_node();
   var_0 thread common_scripts\utility::play_loop_sound_on_entity("veh_f15_dist_loop");
 
-  while(_id_4440(var_0)) {
+  while(playerisinfront(var_0)) {
     wait 0.05;
   }
   wait 0.5;
@@ -182,19 +182,19 @@ _id_3E81() {
   if(isDefined(var_0)) {
     var_0 thread common_scripts\utility::play_sound_in_space("veh_f15_sonic_boom");
     var_0 waittill("reached_end_node");
-    var_0 _id_4441("veh_f15_dist_loop");
+    var_0 stop_sound("veh_f15_dist_loop");
     var_0 delete();
   }
 }
 
-_id_495D() {
+plane_bomb_node() {
   level._effect["plane_bomb_explosion1"] = loadfx("explosions/bomb_explosion_ac130_small");
   level._effect["plane_bomb_explosion2"] = loadfx("explosions/bomb_explosion_ac130_small");
   self waittill("trigger", var_0);
   var_0 endon("death");
-  thread _id_495D();
+  thread plane_bomb_node();
   var_1 = common_scripts\utility::get_linked_ents();
-  var_1 = maps\_utility::_id_0AEC(self.origin, var_1, undefined, var_1.size);
+  var_1 = maps\_utility::get_array_of_closest(self.origin, var_1, undefined, var_1.size);
   var_2 = 0;
   wait(randomfloatrange(0.3, 0.8));
 
@@ -214,11 +214,11 @@ _id_495D() {
   }
 }
 
-_id_495E() {
+plane_bomb_cluster() {
   self waittill("trigger", var_0);
   var_0 endon("death");
   var_1 = var_0;
-  var_1 thread _id_495E();
+  var_1 thread plane_bomb_cluster();
   var_2 = spawn("script_model", var_1.origin - (0, 0, 100));
   var_2.angles = var_1.angles;
   var_2 setModel("projectile_cbu97_clusterbomb");
@@ -269,6 +269,6 @@ _id_495E() {
   var_2 delete();
 }
 
-_id_4441(var_0) {
+stop_sound(var_0) {
   self notify("stop sound" + var_0);
 }

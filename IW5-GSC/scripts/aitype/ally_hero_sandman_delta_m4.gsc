@@ -22,7 +22,7 @@ main() {
   }
 
   self.weapon = "m4_grenadier";
-  _id_5FA1::main();
+  character/character_hero_delta_sandman::main();
 }
 
 spawner() {
@@ -30,7 +30,7 @@ spawner() {
 }
 
 precache() {
-  _id_5FA1::precache();
+  character/character_hero_delta_sandman::precache();
   precacheitem("m4_grenadier");
   precacheitem("m203_m4");
   precacheitem("usp_silencer");

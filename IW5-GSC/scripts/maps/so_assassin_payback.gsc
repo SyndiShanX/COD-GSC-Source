@@ -6,7 +6,7 @@
 #using_animtree("generic_human");
 
 main() {
-  _id_02F0::main();
+  maps/so_assassin_payback_precache::main();
   maps\payback_precache::main();
   precacheitem("smoke_grenade_american");
   precacheitem("zippy_rockets");
@@ -16,38 +16,38 @@ main() {
   _id_562F();
   level._effect["_breach_doorbreach_detpack"] = loadfx("explosions/exp_pack_doorbreach");
   level._effect["aerial_explosion_large_linger"] = loadfx("explosions/aerial_explosion_large_linger");
-  _id_0619::_id_3D06();
+  maps/_chopperboss::chopper_boss_load_fx();
   level._effect["extraction_smoke"] = loadfx("smoke/signal_smoke_green");
   precacheminimapsentrycodeassets();
   maps\_utility::add_hint_string("contact_hostage", &"SO_ASSASSIN_PAYBACK_USE_HOSTAGE", ::_id_5BB2);
   maps\_utility::add_hint_string("throw_smoke", &"SO_ASSASSIN_PAYBACK_THROW_SMOKE", ::_id_5BB4);
-  _id_3F71();
+  setup_players();
   maps\_load::main();
   maps\_stinger::init();
   _id_5BB5();
-  level thread maps\_specialops::_id_181D();
-  level thread maps\_specialops::_id_1825();
-  thread maps\_specialops::_id_1802("so_assassin_payback_start", "so_assassin_payback_complete");
-  thread maps\_specialops::_id_17F3();
-  thread maps\_specialops::_id_17F5("so_assassin_payback_complete");
+  level thread maps\_specialops::enable_escape_warning();
+  level thread maps\_specialops::enable_escape_failure();
+  thread maps\_specialops::enable_challenge_timer("so_assassin_payback_start", "so_assassin_payback_complete");
+  thread maps\_specialops::fade_challenge_in();
+  thread maps\_specialops::fade_challenge_out("so_assassin_payback_complete");
   wait 0.1;
   getEnt("pb_end_vista", "targetname") hide();
   var_0 = getEnt("intro_gate_right", "targetname");
   var_0 delete();
   var_1 = getEnt("intro_gate_left", "targetname");
   var_1 delete();
-  level._id_0C59["generic"]["casual_killer_walk_f"][0] = % casual_killer_walk_f;
-  level._id_0C59["generic"]["casual_stand_idle"] = % casual_stand_idle;
-  level._id_0C59["generic"]["death_pose_07"] = % paris_npc_dead_poses_v07;
-  level._id_0C59["generic"]["death_pose_08"] = % paris_npc_dead_poses_v08;
-  maps\_shg_common::_id_1694("trigger_multiple_audio");
-  maps\_shg_common::_id_1694("trigger_multiple_visionset");
+  level.scr_anim["generic"]["casual_killer_walk_f"][0] = % casual_killer_walk_f;
+  level.scr_anim["generic"]["casual_stand_idle"] = % casual_stand_idle;
+  level.scr_anim["generic"]["death_pose_07"] = % paris_npc_dead_poses_v07;
+  level.scr_anim["generic"]["death_pose_08"] = % paris_npc_dead_poses_v08;
+  maps\_shg_common::so_mark_class("trigger_multiple_audio");
+  maps\_shg_common::so_mark_class("trigger_multiple_visionset");
   maps\payback_aud::main();
   wait 0.1;
-  _id_1109();
+  setup();
   thread _id_47C4();
   wait 0.1;
-  _id_4794();
+  setup_ent_rockers();
 }
 
 _id_562F() {
@@ -58,7 +58,7 @@ _id_562F() {
       continue;
     }
 
-    var_1._id_1693 = 1;
+    var_1.script_specialops = 1;
   }
 
   level.createfxent = common_scripts\utility::array_removeundefined(level.createfxent);
@@ -81,7 +81,7 @@ attachpath(var_0) {
 }
 
 _id_5BB2() {
-  var_0 = maps\_utility::_id_09A9();
+  var_0 = maps\_utility::get_player_from_self();
 
   for(var_1 = 0; var_1 < level.players.size; var_1++) {
     if(var_0 == level.players[var_1]) {
@@ -122,13 +122,13 @@ _id_5BB5() {
   common_scripts\utility::flag_init("no_prone_water_trigger");
 }
 
-_id_1109() {
+setup() {
   _id_5BD5();
   _id_555F();
-  maps\_specialops::_id_1827(maps\_specialops::_id_182A, maps\_specialops::_id_1829, maps\_specialops::_id_1828);
+  maps\_specialops::so_delete_all_by_type(maps\_specialops::type_spawn_trigger, maps\_specialops::type_vehicle, maps\_specialops::type_spawners);
   _id_5561();
   _id_5633();
-  _id_02F1();
+  disconnect_specops_paths();
   level._id_5BB6 = [];
   level._id_5BB7 = [];
   level._id_5BB8 = [];
@@ -138,7 +138,7 @@ _id_1109() {
   level._id_5BBC = [];
   level._id_5BBD = 0;
   level._id_5BBE = 0;
-  level._id_16CF = 0;
+  level.challenge_start_time = 0;
   level._id_5BBF = undefined;
   level._id_5BC0 = 1575;
   level._id_5BC1 = 0;
@@ -158,7 +158,7 @@ _id_1109() {
   level._id_5BCA = 5;
   level._id_5BCB = 4;
 
-  if(level.gameskill <= 1 && !maps\_utility::_id_12C1()) {
+  if(level.gameskill <= 1 && !maps\_utility::is_coop()) {
     level._id_5BCC = 32 + 10 * level._id_5BCB;
   } else {
     level._id_5BCC = 34 + 10 * level._id_5BCB;
@@ -171,12 +171,12 @@ _id_1109() {
   level._id_5BD2 = level._id_5BD1 * level._id_5BD1;
   level._id_5BD3 = 30;
   level._id_5BD4 = 0;
-  thread _id_5093("balcony_corpses");
+  thread spawn_corpses("balcony_corpses");
   _id_5BD7();
   level._id_5BBD = level._id_5BBC.size;
   level._id_5BBE = 0;
   _id_5BDA();
-  level._id_16CF = gettime();
+  level.challenge_start_time = gettime();
   level thread _id_5BF3();
 }
 
@@ -193,8 +193,8 @@ _id_555F() {
   var_0 = getEntArray();
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2._id_1692) && var_2._id_1692 == "no_prone_water_trigger") {
-      var_2._id_1693 = 1;
+    if(isDefined(var_2.script_flag) && var_2.script_flag == "no_prone_water_trigger") {
+      var_2.script_specialops = 1;
     }
   }
 }
@@ -229,7 +229,7 @@ _id_5633() {
       var_2 = getEnt(var_0[var_1].target, "targetname");
 
       if(isDefined(var_2)) {
-        var_2 maps\_utility::_id_27C5();
+        var_2 maps\_utility::hide_entity();
       }
     }
 
@@ -277,7 +277,7 @@ _id_5562(var_0, var_1, var_2) {
           var_6 = getEnt(var_5.target, "targetname");
 
           if(isDefined(var_6)) {
-            var_6 maps\_utility::_id_27C5();
+            var_6 maps\_utility::hide_entity();
           }
         }
       }
@@ -288,37 +288,37 @@ _id_5562(var_0, var_1, var_2) {
   }
 }
 
-_id_02F1() {
+disconnect_specops_paths() {
   var_0 = getEntArray("assassin_box_clip", "targetname");
 
   foreach(var_2 in var_0) {}
   var_2 disconnectPaths();
 }
 
-_id_3F71() {
-  level._id_1C74 = "dragunov";
-  level._id_1C75 = "mp5";
-  level._id_1C76 = "mp5";
-  level._id_1C77 = "usp";
+setup_players() {
+  level.sniper_primary = "dragunov";
+  level.sniper_secondary = "mp5";
+  level.heavy_primary = "mp5";
+  level.heavy_secondary = "usp";
 }
 
 _id_5BD7() {
-  _id_0619::_id_3D07("script_noteworthy", "struct_chopper_boss_loc");
+  maps/_chopperboss::chopper_boss_locs_populate("script_noteworthy", "struct_chopper_boss_loc");
   _id_5BD8();
   var_0 = getEntArray("vip1_guard", "script_noteworthy");
   var_1 = getEntArray("roof_guard", "script_noteworthy");
   var_0 = common_scripts\utility::array_combine(var_0, var_1);
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
-    var_3 = var_0[var_2] maps\_utility::_id_166F(1, 0);
+    var_3 = var_0[var_2] maps\_utility::spawn_ai(1, 0);
     var_3.maxsightdistsqrd = level._id_5BD2;
     var_3.pacifist = 1;
     var_3.goalradius = 32;
-    var_3 maps\_utility::_id_140B("casual_killer_walk_f");
-    var_3 maps\_utility::_id_26FA("casual_stand_idle");
+    var_3 maps\_utility::set_generic_run_anim("casual_killer_walk_f");
+    var_3 maps\_utility::set_generic_idle_anim("casual_stand_idle");
     var_3 allowedstances("stand");
-    var_3._id_117F = 1;
-    var_3._id_1199 = 1;
+    var_3.disablearrivals = 1;
+    var_3.disableexits = 1;
     var_3.alertlevel = "noncombat";
 
     if(isDefined(var_3.target)) {
@@ -340,15 +340,15 @@ _id_5BD7() {
   var_4 = getEntArray("vip2_guard", "script_noteworthy");
 
   for(var_2 = 0; var_2 < var_4.size; var_2++) {
-    var_5 = var_4[var_2] maps\_utility::_id_166F(1, 0);
+    var_5 = var_4[var_2] maps\_utility::spawn_ai(1, 0);
     var_5.maxsightdistsqrd = level._id_5BD2;
     var_5.pacifist = 1;
     var_5.goalradius = 32;
-    var_5 maps\_utility::_id_140B("casual_killer_walk_f");
-    var_5 maps\_utility::_id_26FA("casual_stand_idle");
+    var_5 maps\_utility::set_generic_run_anim("casual_killer_walk_f");
+    var_5 maps\_utility::set_generic_idle_anim("casual_stand_idle");
     var_5 allowedstances("stand");
-    var_5._id_117F = 1;
-    var_5._id_1199 = 1;
+    var_5.disablearrivals = 1;
+    var_5.disableexits = 1;
     var_5.alertlevel = "noncombat";
 
     if(isDefined(var_5.target)) {
@@ -363,15 +363,15 @@ _id_5BD7() {
   var_6 = getEntArray("vip3_guard", "script_noteworthy");
 
   for(var_2 = 0; var_2 < var_6.size; var_2++) {
-    var_7 = var_6[var_2] maps\_utility::_id_166F(1, 0);
+    var_7 = var_6[var_2] maps\_utility::spawn_ai(1, 0);
     var_7.maxsightdistsqrd = level._id_5BD2;
     var_7.pacifist = 1;
     var_7.goalradius = 32;
     var_7 setgoalpos(var_7.origin);
-    var_7 maps\_utility::_id_140B("casual_killer_walk_f");
+    var_7 maps\_utility::set_generic_run_anim("casual_killer_walk_f");
     var_7 allowedstances("stand");
-    var_7._id_117F = 1;
-    var_7._id_1199 = 1;
+    var_7.disablearrivals = 1;
+    var_7.disableexits = 1;
     level._id_5BB8 = common_scripts\utility::add_to_array(level._id_5BB8, var_7);
     var_7 thread _id_5BDE(3);
   }
@@ -379,12 +379,12 @@ _id_5BD7() {
 
 _id_5BD8() {
   var_0 = getEnt("vip_1_spawner", "targetname");
-  var_1 = var_0 maps\_utility::_id_166F(1, 0);
+  var_1 = var_0 maps\_utility::spawn_ai(1, 0);
   _id_5BD9(var_1, 1);
   var_1.targetname = "vip_1";
   level._id_5BB6[0] = var_1;
   var_2 = getEnt("vip_2_spawner", "targetname");
-  var_3 = var_2 maps\_utility::_id_166F(1, 0);
+  var_3 = var_2 maps\_utility::spawn_ai(1, 0);
   _id_5BD9(var_3, 2);
   var_3.targetname = "vip_2";
   level._id_5BB7[0] = var_3;
@@ -401,10 +401,10 @@ _id_5BD9(var_0, var_1) {
   var_0.maxsightdistsqrd = var_3;
   var_0.pacifist = 1;
   var_0.goalradius = 32;
-  var_0 maps\_utility::_id_140B("casual_killer_walk_f");
+  var_0 maps\_utility::set_generic_run_anim("casual_killer_walk_f");
   var_0 allowedstances("stand");
-  var_0._id_117F = 1;
-  var_0._id_1199 = 1;
+  var_0.disablearrivals = 1;
+  var_0.disableexits = 1;
   var_0 thread _id_5BE4(var_1);
   var_0 thread _id_5BDE(var_1);
   var_0.script_noteworthy = "vips";
@@ -412,9 +412,9 @@ _id_5BD9(var_0, var_1) {
 
 _id_5BDA() {
   createthreatbiasgroup("hostages");
-  maps\_utility::_id_27CA("hostage_spawner", ::_id_5BDB);
-  maps\_utility::_id_272C("hostage_spawner", 1);
-  maps\_utility::_id_26BA("hostages", "axis");
+  maps\_utility::array_spawn_function_targetname("hostage_spawner", ::_id_5BDB);
+  maps\_utility::array_spawn_targetname("hostage_spawner", 1);
+  maps\_utility::ignoreeachother("hostages", "axis");
   var_0 = common_scripts\utility::getStruct("hostage_loc", "targetname");
   level._id_5BBF = var_0;
 }
@@ -424,7 +424,7 @@ _id_5BDB() {
   self.grenadeawareness = 0;
   self.team = "allies";
   self.ignoreme = 1;
-  thread maps\_utility::_id_0D04();
+  thread maps\_utility::magic_bullet_shield();
   self.ignorerandombulletdamage = 1;
   self setthreatbiasgroup("hostages");
   thread _id_5BDD();
@@ -432,16 +432,16 @@ _id_5BDB() {
 
 _id_5BDD() {
   common_scripts\utility::flag_wait("hostages_vulnerable");
-  maps\_utility::_id_1902();
+  maps\_utility::stop_magic_bullet_shield();
   self waittill("death");
 
   if(common_scripts\utility::flag("so_assassin_payback_complete")) {
     return;
   }
   level._id_5BC1++;
-  level._id_16CE = gettime();
-  maps\_specialops::_id_183F("@SO_ASSASSIN_PAYBACK_HOSTAGE_DEATH");
-  level maps\_utility::_id_1826();
+  level.challenge_end_time = gettime();
+  maps\_specialops::so_force_deadquote("@SO_ASSASSIN_PAYBACK_HOSTAGE_DEATH");
+  level maps\_utility::missionfailedwrapper();
 }
 
 _id_5BDE(var_0) {
@@ -474,7 +474,7 @@ _id_5BE0(var_0, var_1) {
 
   switch (var_0) {
     case 1:
-      var_2 = maps\_utility::_id_1228(level._id_5BB6);
+      var_2 = maps\_utility::remove_dead_from_array(level._id_5BB6);
       level._id_5BC5[0] = 1;
 
       foreach(var_4 in var_2) {
@@ -486,7 +486,7 @@ _id_5BE0(var_0, var_1) {
             var_4 setgoalpos(var_5.origin);
             var_4.goalradius = 64;
           } else {
-            var_4 maps\_utility::_id_13A4("b");
+            var_4 maps\_utility::set_force_color("b");
           }
         }
 
@@ -499,7 +499,7 @@ _id_5BE0(var_0, var_1) {
 
       break;
     case 2:
-      var_2 = maps\_utility::_id_1228(level._id_5BB7);
+      var_2 = maps\_utility::remove_dead_from_array(level._id_5BB7);
       level._id_5BC5[1] = 1;
 
       foreach(var_4 in var_2) {
@@ -513,7 +513,7 @@ _id_5BE0(var_0, var_1) {
             var_4.pathenemyfightdist = 8;
             var_4.pathenemylookahead = 8;
           } else {
-            var_4 maps\_utility::_id_13A4("r");
+            var_4 maps\_utility::set_force_color("r");
           }
         }
 
@@ -526,7 +526,7 @@ _id_5BE0(var_0, var_1) {
 
       break;
     case 3:
-      var_2 = maps\_utility::_id_1228(level._id_5BB8);
+      var_2 = maps\_utility::remove_dead_from_array(level._id_5BB8);
       level._id_5BC5[2] = 1;
 
       foreach(var_4 in var_2) {
@@ -538,7 +538,7 @@ _id_5BE0(var_0, var_1) {
             var_4 setgoalpos(var_5.origin);
             var_4.goalradius = 64;
           } else {
-            var_4 maps\_utility::_id_13A4("c");
+            var_4 maps\_utility::set_force_color("c");
           }
         }
 
@@ -551,7 +551,7 @@ _id_5BE0(var_0, var_1) {
 
       break;
     case 4:
-      var_2 = maps\_utility::_id_1228(level._id_5BB9);
+      var_2 = maps\_utility::remove_dead_from_array(level._id_5BB9);
       level._id_5BC5[3] = 1;
 
       foreach(var_4 in var_2) {
@@ -580,20 +580,20 @@ _id_5BE2() {
     self.maxsightdistsqrd = 25000000;
     self.goalradius = 256;
     self.pacifist = 0;
-    maps\_utility::_id_140C();
-    maps\_utility::_id_26FC();
+    maps\_utility::clear_run_anim();
+    maps\_utility::clear_generic_idle_anim();
     self allowedstances("stand", "prone", "crouch");
-    self._id_117F = 0;
-    self._id_1199 = 0;
+    self.disablearrivals = 0;
+    self.disableexits = 0;
     self.ignoreall = 0;
-    self._id_1382 = 0;
+    self.script_forcegoal = 0;
   }
 }
 
 _id_5BE3() {
   for(var_0 = 0; var_0 < level._id_5BBC.size; var_0++) {
     if(isalive(level._id_5BBC[var_0])) {
-      level._id_5BBC[var_0] maps\_utility::_id_2521();
+      level._id_5BBC[var_0] maps\_utility::unset_forcegoal();
       var_1 = common_scripts\utility::getStruct("vip_escape_wait_" + (var_0 + 1), "targetname");
       level._id_5BBC[var_0] setgoalpos(var_1.origin);
     }
@@ -605,7 +605,7 @@ _id_5BE4(var_0) {
   self waittill("death");
   var_1 = 0;
   var_2 = 0;
-  level._id_5BBC = maps\_utility::_id_1361(level._id_5BBC);
+  level._id_5BBC = maps\_utility::array_removedead(level._id_5BBC);
 
   for(var_3 = 0; var_3 < level._id_5BBC.size; var_3++) {
     if(isalive(level._id_5BBC[var_3])) {
@@ -614,8 +614,8 @@ _id_5BE4(var_0) {
   }
 
   if(var_1 > 0) {
-    maps\ss_util::_id_4421("so_assassin_kill_confirmed");
-    maps\ss_util::_id_4421("so_assassin_one_more");
+    maps\ss_util::radio_dialogue_queue_single("so_assassin_kill_confirmed");
+    maps\ss_util::radio_dialogue_queue_single("so_assassin_one_more");
   } else {
     _id_5BE6(4);
 
@@ -626,11 +626,11 @@ _id_5BE4(var_0) {
   }
 }
 
-_id_4794() {
+setup_ent_rockers() {
   level thread _id_558F();
-  level._id_16BC = 1;
-  level._id_16BD = ::_id_5B6F;
-  thread _id_479C();
+  level.custom_eog_no_defaults = 1;
+  level.eog_summary_callback = ::customeogsummary;
+  thread objectives();
 
   for(var_0 = 0; var_0 < level.players.size; var_0++) {
     level.players[var_0] thread _id_5640();
@@ -641,22 +641,22 @@ _id_4794() {
   thread _id_5BEF();
 }
 
-_id_5B6F() {
-  var_0 = int(min(level._id_16CE - level._id_16CF, 86400000));
+customeogsummary() {
+  var_0 = int(min(level.challenge_end_time - level.challenge_start_time, 86400000));
   var_1 = 0;
 
   foreach(var_3 in level.players) {}
-  var_1 = var_1 + var_3._id_16C6["kills"];
+  var_1 = var_1 + var_3.so_eog_summary_data["kills"];
 
-  var_5 = int(level._id_16D1 * 10000);
-  level._id_16C4 = var_5;
+  var_5 = int(level.specops_reward_gameskill * 10000);
+  level.session_score = var_5;
   var_6 = int(var_1 * 25);
-  level._id_16C4 = level._id_16C4 + var_6;
+  level.session_score = level.session_score + var_6;
   var_7 = 120000;
   var_8 = 1.0 - min(1.0, level._id_5BE5 / var_7);
   var_9 = 5000 - 25 * level._id_5BCC;
   var_10 = int(var_8 * var_9);
-  level._id_16C4 = level._id_16C4 + var_10;
+  level.session_score = level.session_score + var_10;
   var_11 = 0;
 
   if(var_0 <= level._id_5BCD) {
@@ -664,10 +664,10 @@ _id_5B6F() {
   } else if(var_0 <= level._id_5BCE) {
     var_11 = int(5000 * (1 - (var_0 - level._id_5BCD) / (level._id_5BCE - level._id_5BCD)));
   }
-  level._id_16C4 = level._id_16C4 + var_11;
+  level.session_score = level.session_score + var_11;
 
   foreach(var_3 in level.players) {}
-  var_3 maps\_specialops::_id_17FE(level._id_16C4);
+  var_3 maps\_specialops::override_summary_score(level.session_score);
 
   var_14[0] = "@MENU_RECRUIT";
   var_14[1] = "@MENU_REGULAR";
@@ -678,7 +678,7 @@ _id_5B6F() {
   var_17 = undefined;
   var_18 = undefined;
 
-  if(maps\_utility::_id_12C1()) {
+  if(maps\_utility::is_coop()) {
     var_15 = "@SPECIAL_OPS_UI_TEAM_SCORE";
     var_16 = "@SPECIAL_OPS_PERFORMANCE_YOU";
     var_17 = "@SPECIAL_OPS_PERFORMANCE_PARTNER";
@@ -689,55 +689,55 @@ _id_5B6F() {
     var_17 = "@SPECIAL_OPS_POINTS";
   }
 
-  maps\_utility::_id_1E71();
+  maps\_utility::clear_custom_eog_summary();
 
   foreach(var_3 in level.players) {
-    var_20 = var_3._id_16C6["kills"];
-    var_21 = var_3._id_16C6["time"] * 0.001;
-    var_22 = maps\_utility::_id_16D0(var_21, 1);
-    var_23 = maps\_utility::_id_16D0(level._id_5BE5 / 1000, 1);
-    var_24 = var_14[var_3._id_16C6["difficulty"]];
-    var_25 = var_3._id_16C6["score"];
+    var_20 = var_3.so_eog_summary_data["kills"];
+    var_21 = var_3.so_eog_summary_data["time"] * 0.001;
+    var_22 = maps\_utility::convert_to_time_string(var_21, 1);
+    var_23 = maps\_utility::convert_to_time_string(level._id_5BE5 / 1000, 1);
+    var_24 = var_14[var_3.so_eog_summary_data["difficulty"]];
+    var_25 = var_3.so_eog_summary_data["score"];
 
-    if(maps\_utility::_id_12C1()) {
-      var_26 = maps\_utility::_id_133A(var_3)._id_16C6["kills"];
-      var_27 = var_14[maps\_utility::_id_133A(var_3)._id_16C6["difficulty"]];
+    if(maps\_utility::is_coop()) {
+      var_26 = maps\_utility::get_other_player(var_3).so_eog_summary_data["kills"];
+      var_27 = var_14[maps\_utility::get_other_player(var_3).so_eog_summary_data["difficulty"]];
 
-      if(!level._id_16C9) {
-        var_3 maps\_utility::_id_16C7("", var_16, var_17, var_18, 1);
-        var_3 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_DIFFICULTY", var_24, var_27, var_5, 2);
-        var_3 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_TIME", var_22, var_22, var_11, 3);
-        var_3 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_KILLS", var_20, var_26, var_6, 4);
-        var_3 maps\_utility::_id_16C7("@SO_ASSASSIN_PAYBACK_HELI_KILL", var_23, var_23, var_10, 5);
-        var_3 maps\_utility::_id_16C7("", "", undefined, undefined, 6);
-        var_3 maps\_utility::_id_16C7(var_15, var_25, undefined, undefined, 7);
+      if(!level.missionfailed) {
+        var_3 maps\_utility::add_custom_eog_summary_line("", var_16, var_17, var_18, 1);
+        var_3 maps\_utility::add_custom_eog_summary_line("@SPECIAL_OPS_UI_DIFFICULTY", var_24, var_27, var_5, 2);
+        var_3 maps\_utility::add_custom_eog_summary_line("@SPECIAL_OPS_UI_TIME", var_22, var_22, var_11, 3);
+        var_3 maps\_utility::add_custom_eog_summary_line("@SPECIAL_OPS_UI_KILLS", var_20, var_26, var_6, 4);
+        var_3 maps\_utility::add_custom_eog_summary_line("@SO_ASSASSIN_PAYBACK_HELI_KILL", var_23, var_23, var_10, 5);
+        var_3 maps\_utility::add_custom_eog_summary_line("", "", undefined, undefined, 6);
+        var_3 maps\_utility::add_custom_eog_summary_line(var_15, var_25, undefined, undefined, 7);
       } else {
-        var_3 maps\_utility::_id_16C7("", var_16, var_17, undefined, 1);
-        var_3 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_DIFFICULTY", var_24, var_27, undefined, 2);
-        var_3 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_TIME", var_22, var_22, undefined, 3);
-        var_3 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_KILLS", var_20, var_26, undefined, 4);
+        var_3 maps\_utility::add_custom_eog_summary_line("", var_16, var_17, undefined, 1);
+        var_3 maps\_utility::add_custom_eog_summary_line("@SPECIAL_OPS_UI_DIFFICULTY", var_24, var_27, undefined, 2);
+        var_3 maps\_utility::add_custom_eog_summary_line("@SPECIAL_OPS_UI_TIME", var_22, var_22, undefined, 3);
+        var_3 maps\_utility::add_custom_eog_summary_line("@SPECIAL_OPS_UI_KILLS", var_20, var_26, undefined, 4);
       }
 
       continue;
     }
 
-    if(!level._id_16C9) {
-      var_3 maps\_utility::_id_16C7("", var_16, var_17, var_18, 1);
-      var_3 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_DIFFICULTY", var_24, var_5, undefined, 2);
-      var_3 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_TIME", var_22, var_11, undefined, 3);
-      var_3 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_KILLS", var_20, var_6, undefined, 4);
-      var_3 maps\_utility::_id_16C7("@SO_ASSASSIN_PAYBACK_HELI_KILL", var_23, var_10, undefined, 5);
-      var_3 maps\_utility::_id_16C7("", "", undefined, undefined, 6);
-      var_3 maps\_utility::_id_16C7(var_15, var_25, undefined, undefined, 7);
+    if(!level.missionfailed) {
+      var_3 maps\_utility::add_custom_eog_summary_line("", var_16, var_17, var_18, 1);
+      var_3 maps\_utility::add_custom_eog_summary_line("@SPECIAL_OPS_UI_DIFFICULTY", var_24, var_5, undefined, 2);
+      var_3 maps\_utility::add_custom_eog_summary_line("@SPECIAL_OPS_UI_TIME", var_22, var_11, undefined, 3);
+      var_3 maps\_utility::add_custom_eog_summary_line("@SPECIAL_OPS_UI_KILLS", var_20, var_6, undefined, 4);
+      var_3 maps\_utility::add_custom_eog_summary_line("@SO_ASSASSIN_PAYBACK_HELI_KILL", var_23, var_10, undefined, 5);
+      var_3 maps\_utility::add_custom_eog_summary_line("", "", undefined, undefined, 6);
+      var_3 maps\_utility::add_custom_eog_summary_line(var_15, var_25, undefined, undefined, 7);
       continue;
     }
 
-    var_3 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_DIFFICULTY", var_24, undefined, undefined, 1);
-    var_3 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_TIME", var_22, undefined, undefined, 2);
-    var_3 maps\_utility::_id_16C7("@SPECIAL_OPS_UI_KILLS", var_20, undefined, undefined, 3);
+    var_3 maps\_utility::add_custom_eog_summary_line("@SPECIAL_OPS_UI_DIFFICULTY", var_24, undefined, undefined, 1);
+    var_3 maps\_utility::add_custom_eog_summary_line("@SPECIAL_OPS_UI_TIME", var_22, undefined, undefined, 2);
+    var_3 maps\_utility::add_custom_eog_summary_line("@SPECIAL_OPS_UI_KILLS", var_20, undefined, undefined, 3);
   }
 
-  if(!level._id_16C9) {
+  if(!level.missionfailed) {
     setDvar("ui_hide_hint", 1);
   } else {
     setDvar("ui_hide_hint", 0);
@@ -775,18 +775,18 @@ _id_5BE7() {
   foreach(var_1 in level.players) {}
   var_1 thread _id_5BEB();
 
-  thread _id_50E5();
+  thread opening_dialogue();
 
   while(level._id_5BD4 < 1) {
     wait 1.0;
   }
   common_scripts\utility::flag_set("out_of_stage_1");
-  thread maps\ss_util::_id_4421("so_assassin_enemy_heading_your_way");
+  thread maps\ss_util::radio_dialogue_queue_single("so_assassin_enemy_heading_your_way");
   var_3 = getEntArray("hostage_guard", "script_noteworthy");
   var_4 = common_scripts\utility::getStruct("hostage_loc", "targetname");
 
   foreach(var_6 in var_3) {
-    var_7 = var_6 maps\_utility::_id_166F(1, 0);
+    var_7 = var_6 maps\_utility::spawn_ai(1, 0);
     var_7.goalradius = 512;
     var_7 setgoalpos(var_4.origin);
     level._id_5BBA = common_scripts\utility::add_to_array(level._id_5BBA, var_7);
@@ -826,18 +826,18 @@ _id_5BE7() {
   _id_5BE6(2);
 
   if(level._id_5BD4 < 6) {
-    thread maps\ss_util::_id_4421("so_assassin_team_large_enemy_force");
+    thread maps\ss_util::radio_dialogue_queue_single("so_assassin_team_large_enemy_force");
   }
-  for(level._id_5BBC = maps\_utility::_id_1361(level._id_5BBC); level._id_5BBC.size > 0; level._id_5BBC = maps\_utility::_id_1361(level._id_5BBC)) {
+  for(level._id_5BBC = maps\_utility::array_removedead(level._id_5BBC); level._id_5BBC.size > 0; level._id_5BBC = maps\_utility::array_removedead(level._id_5BBC)) {
     wait 1.0;
   }
   _id_5BE6(3);
-  thread maps\ss_util::_id_4421("so_assassin_nice_work");
+  thread maps\ss_util::radio_dialogue_queue_single("so_assassin_nice_work");
   var_9 = getaiarray("axis");
 
   for(var_10 = 0; var_10 < var_9.size; var_10++) {
     if(!isDefined(var_9[var_10].script_noteworthy) || var_9[var_10].script_noteworthy != "hostage_guard") {
-      var_9[var_10] thread maps\_utility::_id_2790();
+      var_9[var_10] thread maps\_utility::player_seek_enable();
     }
   }
 
@@ -851,35 +851,35 @@ _id_5BE7() {
     var_1 setoffhandsecondaryclass("smoke");
     var_1 giveweapon("smoke_grenade_american");
     var_1 thread _id_47BE();
-    var_1 thread maps\_utility::_id_1823("throw_smoke", undefined);
+    var_1 thread maps\_utility::display_hint_timeout("throw_smoke", undefined);
   }
 
   _id_5BE6(6);
   common_scripts\utility::flag_wait("smoke_thrown");
-  thread maps\ss_util::_id_4421("so_assassin_chopping_a_task_force");
-  thread maps\_specialops::_id_17FF(level._id_5BC7, 0, &"SO_ASSASSIN_PAYBACK_EXFIL_HUD");
+  thread maps\ss_util::radio_dialogue_queue_single("so_assassin_chopping_a_task_force");
+  thread maps\_specialops::enable_countdown_timer(level._id_5BC7, 0, &"SO_ASSASSIN_PAYBACK_EXFIL_HUD");
   thread _id_5BEC();
   wait(level._id_5BC7 - level._id_5BC9 - level._id_5BC8);
   var_13 = getEnt("cobra", "targetname");
-  var_14 = var_13 maps\_vehicle::_id_1F9E();
+  var_14 = var_13 maps\_vehicle::spawn_vehicle_and_gopath();
   var_14 thread _id_5BFB();
   wait(level._id_5BC8);
   var_15 = getEnt("blackhawk", "targetname");
-  var_16 = var_15 maps\_vehicle::_id_1F9E();
+  var_16 = var_15 maps\_vehicle::spawn_vehicle_and_gopath();
   var_17 = getEnt("blackhawk_pilot", "targetname");
-  var_18 = var_17 maps\_utility::_id_166F(1, 0);
-  var_18 thread maps\_utility::_id_0D72(0);
-  var_16 thread maps\_vehicle_aianim::_id_24E5(var_18);
+  var_18 = var_17 maps\_utility::spawn_ai(1, 0);
+  var_18 thread maps\_utility::set_battlechatter(0);
+  var_16 thread maps\_vehicle_aianim::guy_enter(var_18);
   var_19 = getEnt("blackhawk_copilot", "targetname");
-  var_20 = var_19 maps\_utility::_id_166F(1, 0);
-  var_20 thread maps\_utility::_id_0D72(0);
-  var_16 thread maps\_vehicle_aianim::_id_24E5(var_20);
+  var_20 = var_19 maps\_utility::spawn_ai(1, 0);
+  var_20 thread maps\_utility::set_battlechatter(0);
+  var_16 thread maps\_vehicle_aianim::guy_enter(var_20);
   wait(level._id_5BCA);
   var_21 = common_scripts\utility::getStruct("last_wave_flee", "targetname");
   var_9 = getaiarray("axis");
 
   for(var_10 = 0; var_10 < var_9.size; var_10++) {
-    var_9[var_10] maps\_utility::_id_2791();
+    var_9[var_10] maps\_utility::player_seek_disable();
     var_9[var_10] setgoalpos(var_21.origin);
     var_9[var_10].ignoreme = 1;
   }
@@ -920,9 +920,9 @@ _id_5BEB() {
   }
 }
 
-_id_50E5() {
+opening_dialogue() {
   wait 2.5;
-  maps\ss_util::_id_4421("so_assassin_approved_to_engage");
+  maps\ss_util::radio_dialogue_queue_single("so_assassin_approved_to_engage");
 }
 
 _id_5BEC() {
@@ -941,15 +941,15 @@ _id_5BEC() {
 
   foreach(var_9 in var_7) {
     if(isalive(var_9)) {
-      var_9 thread maps\_utility::_id_2790();
+      var_9 thread maps\_utility::player_seek_enable();
     }
   }
 
   var_11 = gettime();
 
   for(var_12 = 0; var_12 < var_6.size; var_12++) {
-    var_9 = var_6[var_12] maps\_utility::_id_166F(1, 0);
-    var_9 thread maps\_utility::_id_2790();
+    var_9 = var_6[var_12] maps\_utility::spawn_ai(1, 0);
+    var_9 thread maps\_utility::player_seek_enable();
     level._id_5BC4 = common_scripts\utility::add_to_array(level._id_5BC4, var_9);
   }
 
@@ -971,8 +971,8 @@ _id_5BEC() {
     }
 
     for(var_12 = 0; var_12 < var_6.size; var_12++) {
-      var_9 = var_6[var_12] maps\_utility::_id_166F(1, 0);
-      var_9 thread maps\_utility::_id_2790();
+      var_9 = var_6[var_12] maps\_utility::spawn_ai(1, 0);
+      var_9 thread maps\_utility::player_seek_enable();
       level._id_5BC4 = common_scripts\utility::add_to_array(level._id_5BC4, var_9);
     }
   }
@@ -999,26 +999,26 @@ _id_47BE() {
 
 _id_5BED() {
   wait 3.8;
-  thread _id_4FA4("extraction_smoke", self, "stop_green_smoke_fx");
+  thread playfx_then_stop("extraction_smoke", self, "stop_green_smoke_fx");
   wait 0.1;
   self delete();
 }
 
-_id_4FA4(var_0, var_1, var_2, var_3) {
-  var_4 = _id_4C9A(var_1);
+playfx_then_stop(var_0, var_1, var_2, var_3) {
+  var_4 = spawn_tag_to_loc(var_1);
   var_4 rotateTo((180, 180, 0), 0.1);
   playFXOnTag(common_scripts\utility::getfx(var_0), var_4, "tag_origin");
   common_scripts\utility::flag_wait(var_2);
   stopFXOnTag(common_scripts\utility::getfx(var_0), var_4, "tag_origin");
 }
 
-_id_4C9A(var_0) {
+spawn_tag_to_loc(var_0) {
   var_1 = common_scripts\utility::spawn_tag_origin();
-  var_1 _id_4C9B(var_0);
+  var_1 angles_and_origin(var_0);
   return var_1;
 }
 
-_id_4C9B(var_0) {
+angles_and_origin(var_0) {
   self.origin = var_0.origin;
 
   if(isDefined(var_0.angles)) {
@@ -1031,14 +1031,14 @@ _id_5BEE() {
   var_0 = getEntArray("patrol_guy", "script_noteworthy");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    var_2 = var_0[var_1] maps\_utility::_id_166F(1, 0);
+    var_2 = var_0[var_1] maps\_utility::spawn_ai(1, 0);
     var_2.maxsightdistsqrd = level._id_5BD2;
     var_2.pacifist = 1;
     var_2.goalradius = 32;
-    var_2 maps\_utility::_id_140B("casual_killer_walk_f");
+    var_2 maps\_utility::set_generic_run_anim("casual_killer_walk_f");
     var_2 allowedstances("stand");
-    var_2._id_117F = 1;
-    var_2._id_1199 = 1;
+    var_2.disablearrivals = 1;
+    var_2.disableexits = 1;
     level._id_5BB9 = common_scripts\utility::add_to_array(level._id_5BB9, var_2);
     var_2 thread _id_5BDE(4);
   }
@@ -1048,7 +1048,7 @@ _id_5BEE() {
   if(level._id_5BD4 > 0) {
     return;
   }
-  thread maps\ss_util::_id_4421("so_assassin_enemy_contacts");
+  thread maps\ss_util::radio_dialogue_queue_single("so_assassin_enemy_contacts");
   var_3 = common_scripts\utility::getStruct("patrol_goal_struct1", "targetname");
   var_4 = common_scripts\utility::getStruct("patrol_goal_struct2", "targetname");
   var_5 = common_scripts\utility::getStruct("patrol_goal_struct3", "targetname");
@@ -1073,7 +1073,7 @@ _id_5BEF() {
   }
   _id_5BF0("attack_littlebird_spawner", "attack_heli_start", "attack_heli_pilot");
 
-  if(level.gameskill > 1 || maps\_utility::_id_12C1()) {
+  if(level.gameskill > 1 || maps\_utility::is_coop()) {
     wait 3.0;
     level thread _id_5BF1("attack_littlebird_spawner", "attack_heli_2_start", "attack_heli_start", "attack_heli_pilot_2");
   }
@@ -1087,21 +1087,21 @@ _id_5BEF() {
 
 _id_5BF0(var_0, var_1, var_2) {
   var_3 = getEnt(var_0, "targetname");
-  var_4 = var_3 maps\_vehicle::_id_1F9E();
+  var_4 = var_3 maps\_vehicle::spawn_vehicle_and_gopath();
   var_5 = common_scripts\utility::getStruct(var_1, "targetname");
-  var_4.health = 2 * var_4.health - var_4._id_163B;
+  var_4.health = 2 * var_4.health - var_4.healthbuffer;
   var_6 = getEnt(var_2, "targetname");
-  var_7 = var_6 maps\_utility::_id_166F(1, 0);
-  var_4 thread maps\_vehicle_aianim::_id_24E5(var_7);
-  var_4 thread _id_0619::_id_3D0C(var_5);
-  var_4 thread _id_0619::_id_3D09("death deathspin");
-  level._id_5BC6 = maps\_utility::_id_0BC3(level._id_5BC6, var_4);
+  var_7 = var_6 maps\_utility::spawn_ai(1, 0);
+  var_4 thread maps\_vehicle_aianim::guy_enter(var_7);
+  var_4 thread maps/_chopperboss::chopper_boss_behavior_little_bird(var_5);
+  var_4 thread maps/_chopperboss::chopper_path_release("death deathspin");
+  level._id_5BC6 = maps\_utility::array_add(level._id_5BC6, var_4);
   common_scripts\utility::flag_set("attack_heli_spawned");
   level notify("start_heli_timer");
   level._id_5BC3++;
   var_4 thread _id_5BF2();
   wait 3.0;
-  thread maps\ss_util::_id_4421("so_assassin_enemy_littlebird");
+  thread maps\ss_util::radio_dialogue_queue_single("so_assassin_enemy_littlebird");
 }
 
 _id_5BF1(var_0, var_1, var_2, var_3) {
@@ -1110,8 +1110,8 @@ _id_5BF1(var_0, var_1, var_2, var_3) {
   var_6 = 0;
 
   while(!var_6) {
-    if(isDefined(var_4._id_3D0B) && var_4._id_3D0B) {
-      if(isDefined(var_5._id_3D0B) && var_5._id_3D0B) {
+    if(isDefined(var_4.in_use) && var_4.in_use) {
+      if(isDefined(var_5.in_use) && var_5.in_use) {
         wait 0.5;
       } else {
         var_6 = 1;
@@ -1155,19 +1155,19 @@ _id_5BF3() {
 
 _id_5BF4() {
   level endon("special_op_terminated");
-  var_0 = maps\_specialops::_id_185B();
-  self._id_5BF5 = maps\_specialops::_id_16B6(3, var_0, &"SO_ASSASSIN_PAYBACK_HELI_HUD", self);
-  self._id_5BF6 = maps\_specialops::_id_16B6(3, var_0, undefined, self);
+  var_0 = maps\_specialops::so_hud_ypos();
+  self._id_5BF5 = maps\_specialops::so_create_hud_item(3, var_0, &"SO_ASSASSIN_PAYBACK_HELI_HUD", self);
+  self._id_5BF6 = maps\_specialops::so_create_hud_item(3, var_0, undefined, self);
   self._id_5BF6.alignx = "left";
-  thread maps\_specialops::_id_1866(self._id_5BF5);
-  thread maps\_specialops::_id_1866(self._id_5BF6);
+  thread maps\_specialops::info_hud_handle_fade(self._id_5BF5);
+  thread maps\_specialops::info_hud_handle_fade(self._id_5BF6);
   thread _id_5BF7();
-  var_1 = maps\_utility::_id_16D0(level._id_5BE5 / 1000, 1);
+  var_1 = maps\_utility::convert_to_time_string(level._id_5BE5 / 1000, 1);
   self._id_5BF6 settext(var_1);
 
   for(;;) {
     if(level._id_5BC3 > 0) {
-      var_1 = maps\_utility::_id_16D0(level._id_5BE5 / 1000, 1);
+      var_1 = maps\_utility::convert_to_time_string(level._id_5BE5 / 1000, 1);
       self._id_5BF6 settext(var_1);
     } else {
       level waittill("start_heli_timer");
@@ -1181,11 +1181,11 @@ _id_5BF7() {
 
   for(;;) {
     if(level._id_5BC3 > 0) {
-      self._id_5BF6 maps\_specialops::_id_185F();
-      self._id_5BF5 maps\_specialops::_id_185F();
+      self._id_5BF6 maps\_specialops::set_hud_yellow();
+      self._id_5BF5 maps\_specialops::set_hud_yellow();
     } else {
-      self._id_5BF6 maps\_specialops::_id_185D();
-      self._id_5BF5 maps\_specialops::_id_185D();
+      self._id_5BF6 maps\_specialops::set_hud_white();
+      self._id_5BF5 maps\_specialops::set_hud_white();
       level waittill("start_heli_timer");
     }
 
@@ -1198,15 +1198,15 @@ _id_5BF8() {
   self endon("death");
 
   for(;;) {
-    while(!maps\_stinger::_id_5BAD()) {
+    while(!maps\_stinger::playerstingerads()) {
       wait 0.05;
     }
-    level._id_5BC6 = maps\_utility::_id_1228(level._id_5BC6);
+    level._id_5BC6 = maps\_utility::remove_dead_from_array(level._id_5BC6);
 
     foreach(var_1 in level._id_5BC6) {
       target_set(var_1);
 
-      if(maps\_utility::_id_12C1()) {
+      if(maps\_utility::is_coop()) {
         if(self == level.players[0]) {
           target_hidefromplayer(var_1, level.players[1]);
           continue;
@@ -1216,14 +1216,14 @@ _id_5BF8() {
       }
     }
 
-    while(maps\_stinger::_id_5BAD()) {
+    while(maps\_stinger::playerstingerads()) {
       wait 0.05;
     }
-    level._id_5BC6 = maps\_utility::_id_1228(level._id_5BC6);
+    level._id_5BC6 = maps\_utility::remove_dead_from_array(level._id_5BC6);
 
     foreach(var_1 in level._id_5BC6) {
       if(target_istarget(var_1)) {
-        if(maps\_utility::_id_12C1()) {
+        if(maps\_utility::is_coop()) {
           if(self == level.players[0]) {
             target_hidefromplayer(var_1, level.players[0]);
           } else {
@@ -1241,7 +1241,7 @@ _id_5BF9() {
   level endon("special_op_terminated");
   var_0 = getEnt("hostage_trigger", "targetname");
   level thread _id_5BFA();
-  maps\_utility::_id_262B("hostage_trigger", "targetname");
+  maps\_utility::trigger_wait("hostage_trigger", "targetname");
   common_scripts\utility::flag_set("hostage_reached");
   level._id_5BB3[0] = 0;
   level._id_5BB3[1] = 0;
@@ -1254,7 +1254,7 @@ _id_5BF9() {
 
         if(level._id_5BB3[var_2] == 0) {
           level._id_5BB3[var_2] = 1;
-          level.players[var_2] thread maps\_utility::_id_1823("contact_hostage", undefined);
+          level.players[var_2] thread maps\_utility::display_hint_timeout("contact_hostage", undefined);
         }
 
         if(level.players[var_2] useButtonPressed()) {
@@ -1297,7 +1297,7 @@ _id_5BFA() {
 
 _id_5BFB() {
   wait 3;
-  level._id_5BC6 = maps\_utility::_id_1228(level._id_5BC6);
+  level._id_5BC6 = maps\_utility::remove_dead_from_array(level._id_5BC6);
 
   for(var_0 = level._id_5BC6.size - 1; var_0 >= 0; var_0--) {
     var_1 = level._id_5BC6[var_0];
@@ -1309,62 +1309,62 @@ _id_5BFB() {
   }
 }
 
-_id_4F95(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+so_objective_handler(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   level endon("special_op_terminated");
-  objective_add(maps\_utility::_id_2816(var_0), "active", var_1);
-  objective_current(maps\_utility::_id_2816(var_0));
+  objective_add(maps\_utility::obj(var_0), "active", var_1);
+  objective_current(maps\_utility::obj(var_0));
 
   if(isDefined(var_6)) {
-    objective_setpointertextoverride(maps\_utility::_id_2816(var_0), var_6);
+    objective_setpointertextoverride(maps\_utility::obj(var_0), var_6);
   }
   if(isDefined(var_4)) {
-    objective_position(maps\_utility::_id_2816(var_0), var_4.origin);
+    objective_position(maps\_utility::obj(var_0), var_4.origin);
     common_scripts\utility::flag_wait(var_5);
-    objective_position(maps\_utility::_id_2816(var_0), (0, 0, 0));
+    objective_position(maps\_utility::obj(var_0), (0, 0, 0));
   }
 
   if(isDefined(var_2)) {
-    objective_position(maps\_utility::_id_2816(var_0), var_2.origin);
+    objective_position(maps\_utility::obj(var_0), var_2.origin);
   }
   common_scripts\utility::flag_wait(var_3);
-  objective_position(maps\_utility::_id_2816(var_0), (0, 0, 0));
+  objective_position(maps\_utility::obj(var_0), (0, 0, 0));
 
   if(!isDefined(var_7) || var_7 == 0) {
-    maps\_utility::_id_2727(maps\_utility::_id_2816(var_0));
+    maps\_utility::objective_complete(maps\_utility::obj(var_0));
   }
 }
 
-_id_479C() {
+objectives() {
   level endon("special_op_terminated");
   thread _id_5BFC();
   common_scripts\utility::flag_wait("obj_vips_dead");
   thread _id_5BF9();
   wait 0.1;
-  _id_4F95(maps\_utility::_id_2816("hostage"), &"SO_ASSASSIN_PAYBACK_OBJECTIVE_RESCUE", level._id_5BBF, "hostage_x_pressed", undefined, undefined, &"SO_ASSASSIN_PAYBACK_OBJECTIVE_HOSTAGES");
+  so_objective_handler(maps\_utility::obj("hostage"), &"SO_ASSASSIN_PAYBACK_OBJECTIVE_RESCUE", level._id_5BBF, "hostage_x_pressed", undefined, undefined, &"SO_ASSASSIN_PAYBACK_OBJECTIVE_HOSTAGES");
   wait 0.1;
-  _id_4F95(maps\_utility::_id_2816("smoke"), &"SO_ASSASSIN_PAYBACK_OBJECTIVE_SIGNAL", undefined, "smoke_thrown");
+  so_objective_handler(maps\_utility::obj("smoke"), &"SO_ASSASSIN_PAYBACK_OBJECTIVE_SIGNAL", undefined, "smoke_thrown");
   wait 0.1;
-  _id_4F95(maps\_utility::_id_2816("defend"), &"SO_ASSASSIN_PAYBACK_OBJECTIVE_DEFEND_EXFIL", undefined, "rescue_arrives");
+  so_objective_handler(maps\_utility::obj("defend"), &"SO_ASSASSIN_PAYBACK_OBJECTIVE_DEFEND_EXFIL", undefined, "rescue_arrives");
   wait 0.1;
-  level._id_16CE = gettime();
+  level.challenge_end_time = gettime();
   common_scripts\utility::flag_set("so_assassin_payback_complete");
 }
 
 _id_5BFC() {
   level endon("obj_vips_dead");
-  objective_add(maps\_utility::_id_2816("kill_vips"), "active", &"SO_ASSASSIN_PAYBACK_OBJECTIVE_ELIMINATE_VIP1");
-  objective_add(maps\_utility::_id_2816("kill_vips2"), "active", &"SO_ASSASSIN_PAYBACK_OBJECTIVE_ELIMINATE_VIP2");
-  objective_current(maps\_utility::_id_2816("kill_vips"), maps\_utility::_id_2816("kill_vips2"));
-  level._id_5BBC[0] thread _id_5BFE(maps\_utility::_id_2816("kill_vips"));
-  level._id_5BBC[0] thread _id_5BFD(maps\_utility::_id_2816("kill_vips"));
-  level._id_5BBC[1] thread _id_5BFE(maps\_utility::_id_2816("kill_vips2"));
-  level._id_5BBC[1] thread _id_5BFD(maps\_utility::_id_2816("kill_vips2"));
+  objective_add(maps\_utility::obj("kill_vips"), "active", &"SO_ASSASSIN_PAYBACK_OBJECTIVE_ELIMINATE_VIP1");
+  objective_add(maps\_utility::obj("kill_vips2"), "active", &"SO_ASSASSIN_PAYBACK_OBJECTIVE_ELIMINATE_VIP2");
+  objective_current(maps\_utility::obj("kill_vips"), maps\_utility::obj("kill_vips2"));
+  level._id_5BBC[0] thread _id_5BFE(maps\_utility::obj("kill_vips"));
+  level._id_5BBC[0] thread _id_5BFD(maps\_utility::obj("kill_vips"));
+  level._id_5BBC[1] thread _id_5BFE(maps\_utility::obj("kill_vips2"));
+  level._id_5BBC[1] thread _id_5BFD(maps\_utility::obj("kill_vips2"));
 }
 
 _id_5BFD(var_0) {
   level endon("special_op_terminated");
   self waittill("death");
-  maps\_utility::_id_2727(var_0);
+  maps\_utility::objective_complete(var_0);
 }
 
 _id_5BFE(var_0) {
@@ -1375,7 +1375,7 @@ _id_5BFE(var_0) {
   while(!var_1) {
     objective_position(var_0, self.origin);
 
-    if(maps\_utility::_id_2752(self getEye()) || maps\_utility::_id_2752(self.origin)) {
+    if(maps\_utility::either_player_looking_at(self getEye()) || maps\_utility::either_player_looking_at(self.origin)) {
       var_1 = 1;
     }
     wait 0.1;
@@ -1441,17 +1441,17 @@ _id_5C01() {
   for(;;) {
     self.pathenemylookahead = 8;
     self setgoalpos(var_0.origin);
-    maps\_utility::_id_26FA("casual_stand_idle");
+    maps\_utility::set_generic_idle_anim("casual_stand_idle");
     self.goalradius = 16;
     self.ignoreall = 1;
     self waittill("goal");
-    self._id_1382 = 1;
+    self.script_forcegoal = 1;
     wait 6.0;
     var_0 = common_scripts\utility::getStruct(var_0.target, "targetname");
   }
 }
 
-_id_5C02() {
+sandstorm_skybox_hide() {
   var_0 = getEntArray("sandstorm_sky", "targetname");
 
   foreach(var_2 in var_0) {}
@@ -1463,7 +1463,7 @@ _id_5C02() {
   var_2 show();
 }
 
-_id_5C03() {
+sandstorm_skybox_show() {
   var_0 = getEntArray("sandstorm_sky", "targetname");
 
   foreach(var_2 in var_0) {}
@@ -1475,7 +1475,7 @@ _id_5C03() {
   var_2 hide();
 }
 
-_id_5093(var_0, var_1) {
+spawn_corpses(var_0, var_1) {
   var_2 = [];
 
   foreach(var_4 in getEntArray(var_0, "targetname")) {
@@ -1485,7 +1485,7 @@ _id_5093(var_0, var_1) {
       if(isDefined(var_1)) {
         var_5 = var_1;
       }
-      var_2[var_2.size] = _id_5094(var_4, var_5, var_4.origin, var_4.angles);
+      var_2[var_2.size] = spawn_corpse(var_4, var_5, var_4.origin, var_4.angles);
     }
   }
 
@@ -1504,7 +1504,7 @@ _id_5093(var_0, var_1) {
     }
 
     if(isDefined(var_12)) {
-      var_2[var_2.size] = _id_5094(var_12, var_9._id_205B, var_9.origin, var_9.angles);
+      var_2[var_2.size] = spawn_corpse(var_12, var_9.script_animation, var_9.origin, var_9.angles);
       continue;
     }
   }
@@ -1512,12 +1512,12 @@ _id_5093(var_0, var_1) {
   return var_2;
 }
 
-_id_5094(var_0, var_1, var_2, var_3) {
+spawn_corpse(var_0, var_1, var_2, var_3) {
   var_0.count++;
   var_4 = undefined;
 
   for(;;) {
-    var_4 = var_0 maps\_utility::_id_166F(1);
+    var_4 = var_0 maps\_utility::spawn_ai(1);
 
     if(isDefined(var_4)) {
       break;
@@ -1527,27 +1527,27 @@ _id_5094(var_0, var_1, var_2, var_3) {
   }
 
   if(isDefined(var_4)) {
-    var_4._id_1032 = "generic";
-    var_4 maps\_utility::_id_24F5();
+    var_4.animname = "generic";
+    var_4 maps\_utility::gun_remove();
     var_4 forceteleport(var_2, var_3);
-    var_5 = var_4 maps\_utility::_id_1281(var_1);
-    var_4 maps\_anim::_id_11C0(var_4, var_1);
-    var_6 = maps\_vehicle_aianim::_id_25C1(var_4);
+    var_5 = var_4 maps\_utility::getanim(var_1);
+    var_4 maps\_anim::anim_generic_first_frame(var_4, var_1);
+    var_6 = maps\_vehicle_aianim::convert_guy_to_drone(var_4);
     var_6 setanim(var_5, 1, 0.2);
     var_6 notsolid();
     return var_6;
   }
 }
 
-_id_47C7(var_0) {
+add_radio(var_0) {
   foreach(var_2 in var_0) {}
-  level._id_11BB[var_2] = var_2;
+  level.scr_radio[var_2] = var_2;
 }
 
 _id_47C4() {
-  _id_47C7(["so_assassin_enemy_heading_your_way", "so_assassin_team_large_enemy_force", "so_assassin_chopping_a_task_force", "so_assassin_enemy_contacts", "so_assassin_enemy_littlebird", "so_assassin_approved_to_engage", "so_assassin_kill_confirmed", "so_assassin_one_more", "so_assassin_nice_work"]);
+  add_radio(["so_assassin_enemy_heading_your_way", "so_assassin_team_large_enemy_force", "so_assassin_chopping_a_task_force", "so_assassin_enemy_contacts", "so_assassin_enemy_littlebird", "so_assassin_approved_to_engage", "so_assassin_kill_confirmed", "so_assassin_one_more", "so_assassin_nice_work"]);
 }
 
 _id_558F() {
-  maps\_audio_music::_id_15A7("pybk_mx_construction");
+  maps\_audio_music::mus_play("pybk_mx_construction");
 }

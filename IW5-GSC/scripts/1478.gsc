@@ -4,72 +4,72 @@
 **************************************/
 
 main() {
-  if(isDefined(level._id_3AAC)) {
+  if(isDefined(level.juggernaut_initialized)) {
     return;
   }
-  level._id_3AAC = 1;
+  level.juggernaut_initialized = 1;
 
-  if(!isDefined(level._id_2106)) {
-    level._id_2106 = [];
+  if(!isDefined(level.subclass_spawn_functions)) {
+    level.subclass_spawn_functions = [];
   }
-  level._id_2106["juggernaut"] = ::_id_3AAE;
-  level._id_3AAD = 0;
+  level.subclass_spawn_functions["juggernaut"] = ::subclass_juggernaut;
+  level.juggernaut_next_alert_time = 0;
 }
 
-_id_3AAE() {
-  self._id_0A37 = 1;
+subclass_juggernaut() {
+  self.juggernaut = 1;
   self.minpaindamage = 200;
   self.grenadeammo = 0;
-  self._id_10A3 = 0.05;
-  self._id_0F3C = 1;
+  self.doorflashchance = 0.05;
+  self.aggressivemode = 1;
   self.ignoresuppression = 1;
-  self._id_1151 = 1;
-  self._id_0FDF = 1;
-  self._id_100A = 1;
-  self._id_1199 = 1;
-  self._id_117F = 1;
-  self._id_0EEE = 1;
+  self.no_pistol_switch = 1;
+  self.norunngun = 1;
+  self.dontmelee = 1;
+  self.disableexits = 1;
+  self.disablearrivals = 1;
+  self.disablebulletwhizbyreaction = 1;
   self.combatmode = "no_cover";
-  self._id_0FD9 = 1;
-  self.a._id_0D31 = 1;
-  maps\_utility::_id_2721();
-  maps\_utility::_id_0EEC();
-  _id_3AB3();
-  maps\_utility::_id_12E2(animscripts\pain::_id_0D82);
-  maps\_utility::_id_12E2(maps\_spawner::_id_216B);
+  self.neversprintforvariation = 1;
+  self.a.disablelongdeath = 1;
+  maps\_utility::disable_turnanims();
+  maps\_utility::disable_surprise();
+  init_juggernaut_animsets();
+  maps\_utility::add_damage_function(animscripts\pain::additive_pain);
+  maps\_utility::add_damage_function(maps\_spawner::pain_resistance);
 
   if(!self isbadguy()) {
     return;
   }
-  self._id_1A2D = 40;
-  maps\_utility::_id_12E2(maps\_spawner::_id_1A2D);
-  thread _id_3AAF();
-  thread _id_3AB0();
+  self.bullet_resistance = 40;
+  maps\_utility::add_damage_function(maps\_spawner::bullet_resistance);
+  thread juggernaut_hunt_immediately_behavior();
+  thread juggernaut_sound_when_player_close();
   self.pathenemyfightdist = 128;
   self.pathenemylookahead = 128;
   level notify("juggernaut_spawned");
   self waittill("death", var_0, var_1, var_2);
 
-  if(isDefined(self) && isDefined(self._id_2145)) {
+  if(isDefined(self) && isDefined(self.nodrop)) {
     var_3 = [];
     var_3[var_3.size] = "left";
     var_3[var_3.size] = "right";
     var_3[var_3.size] = "chest";
     var_3[var_3.size] = "back";
-    animscripts\shared::_id_23C1();
+    animscripts\shared::detachallweaponmodels();
 
     foreach(var_5 in var_3) {
-      var_2 = self.a._id_0EE4[var_5];
+      var_2 = self.a.weaponpos[var_5];
 
       if(var_2 == "none") {
         continue;
       }
-      self.weaponinfo[var_2]._id_2099 = "none";
-      self.a._id_0EE4[var_5] = "none";
+      self.weaponinfo[var_2].position = "none";
+      self.a.weaponpos[var_5] = "none";
     }
 
     self.weapon = "none";
-    animscripts\shared::_id_23C4();
+    animscripts\shared::updateattachedweaponmodels();
   }
 
   level notify("juggernaut_died");
@@ -85,7 +85,7 @@ _id_3AAE() {
   }
 }
 
-_id_3AAF() {
+juggernaut_hunt_immediately_behavior() {
   self endon("death");
   self endon("stop_hunting");
   self.usechokepoints = 0;
@@ -101,11 +101,11 @@ _id_3AAF() {
   }
 }
 
-_id_3AB0() {
+juggernaut_sound_when_player_close() {
   self endon("death");
   level endon("special_op_terminated");
 
-  if(isDefined(level._id_3AB1) && level._id_3AB1) {
+  if(isDefined(level.skip_juggernaut_intro_sound) && level.skip_juggernaut_intro_sound) {
     return;
   }
   var_0 = 2500;
@@ -118,10 +118,10 @@ _id_3AB0() {
   for(;;) {
     wait 0.05;
 
-    if(gettime() < level._id_3AAD) {
+    if(gettime() < level.juggernaut_next_alert_time) {
       continue;
     }
-    var_1 = maps\_utility::_id_2608(self.origin);
+    var_1 = maps\_utility::get_closest_player(self.origin);
 
     if(!isalive(var_1)) {
       continue;
@@ -129,7 +129,7 @@ _id_3AB0() {
     if(distance(var_1.origin, self.origin) > var_0) {
       continue;
     }
-    if(level._id_3AB2) {
+    if(level.pmc_alljuggernauts) {
       var_2 = self gettagorigin("tag_flash");
 
       if(!bullettracepassed(self getEye(), var_1 getEye(), 0, undefined)) {
@@ -141,18 +141,18 @@ _id_3AB0() {
     break;
   }
 
-  level._id_3AAD = gettime() + 15000;
+  level.juggernaut_next_alert_time = gettime() + 15000;
   level notify("juggernaut_attacking");
-  common_scripts\utility::array_thread(level.players, maps\_utility::_id_2782, "_juggernaut_attack");
+  common_scripts\utility::array_thread(level.players, maps\_utility::playlocalsoundwrapper, "_juggernaut_attack");
 }
 
 #using_animtree("generic_human");
 
-_id_3AB3() {
+init_juggernaut_animsets() {
   self.walkdist = 500;
   self.walkdistfacingmotion = 500;
-  maps\_utility::_id_26F9("run", %juggernaut_runf, %juggernaut_sprint);
-  maps\_utility::_id_26F9("walk", %juggernaut_walkf);
-  maps\_utility::_id_26F9("cqb", %juggernaut_walkf);
-  maps\_utility::_id_26F8(%juggernaut_stand_fire_burst, %juggernaut_aim5, %juggernaut_stand_idle, %juggernaut_stand_reload);
+  maps\_utility::set_move_animset("run", %juggernaut_runf, %juggernaut_sprint);
+  maps\_utility::set_move_animset("walk", %juggernaut_walkf);
+  maps\_utility::set_move_animset("cqb", %juggernaut_walkf);
+  maps\_utility::set_combat_stand_animset(%juggernaut_stand_fire_burst, %juggernaut_aim5, %juggernaut_stand_idle, %juggernaut_stand_reload);
 }

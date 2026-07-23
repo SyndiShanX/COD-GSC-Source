@@ -11,10 +11,10 @@ main() {
   maps\_utility::precache("wood_plank2");
   maps\_utility::precache("gib_woodplank");
   var_0 = getEntArray("wood_splinter", "targetname");
-  maps\_utility::array_thread(var_0, ::_id_43FA);
+  maps\_utility::array_thread(var_0, ::wood_think);
 }
 
-_id_43FA() {
+wood_think() {
   if(!isDefined(self.target)) {
     return;
   }
@@ -27,11 +27,11 @@ _id_43FA() {
     if(!isDefined(var_0[var_1].target)) {
       continue;
     }
-    var_0[var_1]._id_43FB = getEntArray(var_0[var_1].target, "targetname");
+    var_0[var_1].brokenpiece = getEntArray(var_0[var_1].target, "targetname");
 
-    for(var_2 = 0; var_2 < var_0[var_1]._id_43FB.size; var_2++) {
-      if(isDefined(var_0[var_1]._id_43FB[var_2])) {
-        var_0[var_1]._id_43FB[var_2] hide();
+    for(var_2 = 0; var_2 < var_0[var_1].brokenpiece.size; var_2++) {
+      if(isDefined(var_0[var_1].brokenpiece[var_2])) {
+        var_0[var_1].brokenpiece[var_2] hide();
       }
     }
   }
@@ -50,11 +50,11 @@ _id_43FA() {
     if(!isDefined(var_0[var_1].target)) {
       continue;
     }
-    var_0[var_1]._id_43FB = getEntArray(var_0[var_1].target, "targetname");
+    var_0[var_1].brokenpiece = getEntArray(var_0[var_1].target, "targetname");
 
-    for(var_2 = 0; var_2 < var_0[var_1]._id_43FB.size; var_2++) {
-      if(isDefined(var_0[var_1]._id_43FB[var_2])) {
-        var_0[var_1]._id_43FB[var_2] show();
+    for(var_2 = 0; var_2 < var_0[var_1].brokenpiece.size; var_2++) {
+      if(isDefined(var_0[var_1].brokenpiece[var_2])) {
+        var_0[var_1].brokenpiece[var_2] show();
       }
     }
   }
@@ -64,12 +64,12 @@ _id_43FA() {
       continue;
     }
     var_0[var_1] playSound("wood_break");
-    var_0[var_1] thread _id_43FC(var_4);
+    var_0[var_1] thread splinter(var_4);
     var_0[var_1] delete();
   }
 }
 
-_id_43FC(var_0) {
+splinter(var_0) {
   var_1 = spawn("script_model", (0, 0, 0));
 
   if(randomint(100) > 25) {
@@ -87,15 +87,15 @@ _id_43FC(var_0) {
   }
 
   var_1.origin = self getorigin();
-  var_1 thread _id_43FD(var_0);
+  var_1 thread go(var_0);
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "dark") {
     return;
   }
-  _id_43FE(var_1.origin, var_0);
+  small_gibs(var_1.origin, var_0);
 }
 
-_id_43FD(var_0) {
+go(var_0) {
   var_1 = vectorNormalize(self.origin - var_0);
   var_1 = var_1 * (250 + randomint(100));
   var_2 = var_1[0];
@@ -112,7 +112,7 @@ _id_43FD(var_0) {
   self delete();
 }
 
-_id_43FE(var_0, var_1) {
+small_gibs(var_0, var_1) {
   var_2 = [];
 
   for(var_3 = 0; var_3 < randomint(6) + 1; var_3++) {

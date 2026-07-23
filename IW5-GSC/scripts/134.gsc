@@ -3,141 +3,141 @@
  * Script: scripts\134.gsc
 **************************************/
 
-_id_1455(var_0) {
-  if(!isDefined(level._id_1456)) {
-    level._id_1456 = spawnStruct();
+rvb_init(var_0) {
+  if(!isDefined(level._audio)) {
+    level._audio = spawnStruct();
   }
-  level._id_1456._id_1457 = spawnStruct();
-  level._id_1456._id_1457._id_1458 = 0;
-  level._id_1456._id_1457._id_1459 = 0;
-  level._id_1456._id_1457._id_145A = "";
+  level._audio.reverb = spawnStruct();
+  level._audio.reverb.use_string_table_presets = 0;
+  level._audio.reverb.use_iw_presets = 0;
+  level._audio.reverb.current_reverb = "";
 }
 
-_id_145B() {
-  level._id_1456._id_1457._id_1458 = 1;
-  level._id_1456._id_1457._id_1459 = 0;
+rvb_use_string_table() {
+  level._audio.reverb.use_string_table_presets = 1;
+  level._audio.reverb.use_iw_presets = 0;
 }
 
-_id_145C() {
-  level._id_1456._id_1457._id_1459 = 1;
-  level._id_1456._id_1457._id_1458 = 0;
+rvb_use_iw_presets() {
+  level._audio.reverb.use_iw_presets = 1;
+  level._audio.reverb.use_string_table_presets = 0;
 }
 
-_id_145D(var_0, var_1) {
+rvb_set_dry_level(var_0, var_1) {
   var_1 = clamp(var_1, 0, 1.0);
-  var_0._id_145E = var_1;
+  var_0.drylevel = var_1;
 }
 
-_id_145F(var_0, var_1) {
+rvb_set_wet_level(var_0, var_1) {
   var_1 = clamp(var_1, 0, 1.0);
-  var_0._id_1460 = var_1;
+  var_0.wetlevel = var_1;
 }
 
-_id_1461(var_0, var_1) {
-  if(!isDefined(level._id_1456._id_1457._id_1462) || level._id_1456._id_1457._id_1462 != var_0) {
-    level._id_1456._id_1457._id_1462 = var_0;
+rvb_apply_reverb(var_0, var_1) {
+  if(!isDefined(level._audio.reverb.applied_reverb) || level._audio.reverb.applied_reverb != var_0) {
+    level._audio.reverb.applied_reverb = var_0;
     var_2 = undefined;
 
     if(isDefined(var_1)) {
       var_2 = var_1;
     } else {
-      var_2 = var_0._id_1463;
+      var_2 = var_0.fadetime;
     }
-    level.player setreverb(var_0.priority, var_0._id_1464, var_0._id_145E, var_0._id_1460, var_2);
+    level.player setreverb(var_0.priority, var_0.roomtype, var_0.drylevel, var_0.wetlevel, var_2);
   }
 }
 
-_id_1465(var_0, var_1) {
-  if(level.player maps\_utility::_id_1008("player_has_red_flashing_overlay")) {
+rvb_start_preset(var_0, var_1) {
+  if(level.player maps\_utility::ent_flag("player_has_red_flashing_overlay")) {
     if(isDefined(var_0) && var_0 != "none") {
-      var_2 = _id_1472(var_0);
+      var_2 = rvbx_get_reverb_preset(var_0);
 
       if(!isDefined(var_2)) {
-        maps\_audio::_id_1466("Failed to load reverb preset: " + var_0);
+        maps\_audio::aud_print_warning("Failed to load reverb preset: " + var_0);
         return;
       }
 
       if(var_0 != "deathsdoor") {
-        _id_1468(var_0, var_2);
-        level._id_1456._id_1467._id_1457 = var_0;
+        rvbx_store_current_reverb_track(var_0, var_2);
+        level._audio.deathsdoor.reverb = var_0;
       }
     } else {
-      _id_1468("none", undefined);
-      level._id_1456._id_1467._id_1457 = "none";
+      rvbx_store_current_reverb_track("none", undefined);
+      level._audio.deathsdoor.reverb = "none";
     }
 
     return;
   }
 
-  if((isDefined(var_0) && var_0 == "none" || !isDefined(var_0)) && isDefined(level._id_1456._id_145A)) {
+  if((isDefined(var_0) && var_0 == "none" || !isDefined(var_0)) && isDefined(level._audio.current_reverb)) {
     level.player deactivatereverb("snd_enveffectsprio_level", 1);
-    level._id_1456._id_145A = undefined;
-    level._id_1456._id_1457._id_145A = "";
+    level._audio.current_reverb = undefined;
+    level._audio.reverb.current_reverb = "";
     return;
   } else if(!isDefined(var_0) || isDefined(var_0) && var_0 == "none") {
     return;
   }
-  var_2 = _id_1472(var_0);
+  var_2 = rvbx_get_reverb_preset(var_0);
 
   if(!isDefined(var_2)) {
-    maps\_audio::_id_1466("Failed to load reverb preset: " + var_0);
+    maps\_audio::aud_print_warning("Failed to load reverb preset: " + var_0);
     return;
   }
 
-  level._id_1456._id_145A = var_0;
+  level._audio.current_reverb = var_0;
 
   if(var_0 != "deathsdoor") {
-    _id_1468(var_0, var_2);
+    rvbx_store_current_reverb_track(var_0, var_2);
   }
-  if(level._id_1456._id_1457._id_145A != var_0) {
-    level._id_1456._id_1457._id_145A = var_0;
-    _id_1461(var_2, var_1);
+  if(level._audio.reverb.current_reverb != var_0) {
+    level._audio.reverb.current_reverb = var_0;
+    rvb_apply_reverb(var_2, var_1);
   }
 }
 
-_id_1468(var_0, var_1) {
+rvbx_store_current_reverb_track(var_0, var_1) {
   if(var_0 != "deathsdoor") {
-    level._id_1469 = var_0;
+    level.reverb_track = var_0;
 
-    if(var_0 == "none" && !isDefined(level._id_146A["none"])) {
-      level._id_146A["none"] = 1;
-    } else if(!isDefined(level._id_146A[var_0])) {
-      level._id_146A[var_0] = [];
-      level._id_146A[var_0]["priority"] = "snd_enveffectsprio_level";
-      level._id_146A[var_0]["roomtype"] = var_1._id_1464;
-      level._id_146A[var_0]["drylevel"] = var_1._id_145E;
-      level._id_146A[var_0]["wetlevel"] = var_1._id_1460;
-      level._id_146A[var_0]["fadetime"] = var_1._id_1463;
+    if(var_0 == "none" && !isDefined(level.ambient_reverb["none"])) {
+      level.ambient_reverb["none"] = 1;
+    } else if(!isDefined(level.ambient_reverb[var_0])) {
+      level.ambient_reverb[var_0] = [];
+      level.ambient_reverb[var_0]["priority"] = "snd_enveffectsprio_level";
+      level.ambient_reverb[var_0]["roomtype"] = var_1.roomtype;
+      level.ambient_reverb[var_0]["drylevel"] = var_1.drylevel;
+      level.ambient_reverb[var_0]["wetlevel"] = var_1.wetlevel;
+      level.ambient_reverb[var_0]["fadetime"] = var_1.fadetime;
     }
   }
 }
 
-_id_146B() {
-  level._id_1469 = "";
+rvb_deactive_reverb() {
+  level.reverb_track = "";
   level.player deactivatereverb("snd_enveffectsprio_level", 2);
-  level._id_1456._id_145A = undefined;
-  level._id_1456._id_1457._id_145A = "";
+  level._audio.current_reverb = undefined;
+  level._audio.reverb.current_reverb = "";
 }
 
-_id_146C() {
+rvb_get_applied_reverb() {
   var_0 = undefined;
 
-  if(isDefined(level._id_1456._id_1457._id_1462)) {
-    var_0 = level._id_1456._id_1457._id_1462;
+  if(isDefined(level._audio.reverb.applied_reverb)) {
+    var_0 = level._audio.reverb.applied_reverb;
   }
   return var_0;
 }
 
-_id_146D(var_0, var_1) {
-  var_2 = maps\_audio::_id_146E();
+rvbx_get_preset_from_string_table(var_0, var_1) {
+  var_2 = maps\_audio::get_reverb_stringtable();
   var_3 = "soundtables/common_reverb.csv";
   var_4 = [];
 
   if(var_1) {
-    var_4 = _id_146F(var_2, var_0);
+    var_4 = rvbx_get_reverb_preset_from_stringtable_internal(var_2, var_0);
   }
   if(!isDefined(var_4) || var_4.size == 0) {
-    var_4 = _id_146F(var_3, var_0);
+    var_4 = rvbx_get_reverb_preset_from_stringtable_internal(var_3, var_0);
   }
   if(!isDefined(var_4) || var_4.size == 0) {
     return;
@@ -145,7 +145,7 @@ _id_146D(var_0, var_1) {
   return var_4;
 }
 
-_id_146F(var_0, var_1) {
+rvbx_get_reverb_preset_from_stringtable_internal(var_0, var_1) {
   var_2 = [];
   var_3 = "";
   var_4 = "";
@@ -168,57 +168,57 @@ _id_146F(var_0, var_1) {
   return var_2;
 }
 
-_id_1470() {
+rvbx_apply_inital_reverb() {
   while(!isDefined(level.player)) {
     wait 0.5;
   }
-  _id_1461(level._id_1456._id_1457._id_1471);
+  rvb_apply_reverb(level._audio.reverb.default_reverb);
 }
 
-_id_1472(var_0) {
-  if(!isDefined(level._id_1456._id_1457._id_1473)) {
-    level._id_1456._id_1457._id_1473 = [];
+rvbx_get_reverb_preset(var_0) {
+  if(!isDefined(level._audio.reverb.preset_cache)) {
+    level._audio.reverb.preset_cache = [];
   }
-  var_1 = _id_1476();
+  var_1 = rvbx_create();
   var_2 = [];
 
-  if(isDefined(level._id_1456._id_1474)) {
-    var_2 = [[level._id_1456._id_1474]](var_0, var_2);
-  } else if(isDefined(level._id_1456._id_1457._id_1473[var_0])) {
-    var_2 = level._id_1456._id_1457._id_1473[var_0];
-  } else if(level._id_1456._id_1457._id_1458) {
-    var_2 = _id_146D(var_0, 1);
+  if(isDefined(level._audio.level_audio_reverb_function)) {
+    var_2 = [[level._audio.level_audio_reverb_function]](var_0, var_2);
+  } else if(isDefined(level._audio.reverb.preset_cache[var_0])) {
+    var_2 = level._audio.reverb.preset_cache[var_0];
+  } else if(level._audio.reverb.use_string_table_presets) {
+    var_2 = rvbx_get_preset_from_string_table(var_0, 1);
 
     if(!isDefined(var_2)) {
       return;
     }
-    level._id_1456._id_1457._id_1473[var_0] = var_2;
+    level._audio.reverb.preset_cache[var_0] = var_2;
   } else {
-    var_2 = _id_146D(var_0, 0);
+    var_2 = rvbx_get_preset_from_string_table(var_0, 0);
 
     if(!isDefined(var_2) || var_2.size == 0) {
-      var_2 = maps\_audio::_id_1475(var_0, var_2);
+      var_2 = maps\_audio::audio_presets_reverb(var_0, var_2);
     }
     if(!isDefined(var_2)) {
       return;
     }
-    level._id_1456._id_1457._id_1473[var_0] = var_2;
+    level._audio.reverb.preset_cache[var_0] = var_2;
   }
 
   var_1.name = var_0;
-  var_1._id_1464 = var_2["roomtype"];
-  var_1._id_145E = var_2["drylevel"];
-  var_1._id_1460 = var_2["wetlevel"];
-  var_1._id_1463 = var_2["fadetime"];
+  var_1.roomtype = var_2["roomtype"];
+  var_1.drylevel = var_2["drylevel"];
+  var_1.wetlevel = var_2["wetlevel"];
+  var_1.fadetime = var_2["fadetime"];
   return var_1;
 }
 
-_id_1476() {
+rvbx_create() {
   var_0 = spawnStruct();
-  var_0._id_1464 = "generic";
-  var_0._id_145E = 1.0;
-  var_0._id_1460 = 0.5;
-  var_0._id_1463 = 0;
+  var_0.roomtype = "generic";
+  var_0.drylevel = 1.0;
+  var_0.wetlevel = 0.5;
+  var_0.fadetime = 0;
   var_0.priority = "snd_enveffectsprio_level";
   return var_0;
 }

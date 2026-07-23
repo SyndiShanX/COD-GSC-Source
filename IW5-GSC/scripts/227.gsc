@@ -5,11 +5,11 @@
 
 init() {
   precacheshader("damage_feedback");
-  common_scripts\utility::array_thread(level.players, ::_id_1A26);
-  common_scripts\utility::array_thread(level.players, ::_id_1A28);
+  common_scripts\utility::array_thread(level.players, ::init_damage_feedback);
+  common_scripts\utility::array_thread(level.players, ::monitordamage);
 }
 
-_id_1A26() {
+init_damage_feedback() {
   self.hud_damagefeedback = newclienthudelem(self);
   self.hud_damagefeedback.alignx = "center";
   self.hud_damagefeedback.aligny = "middle";
@@ -21,28 +21,28 @@ _id_1A26() {
   self.hud_damagefeedback.y = 12;
 }
 
-_id_1A28() {
-  maps\_utility::_id_12E2(::_id_1A2B);
+monitordamage() {
+  maps\_utility::add_damage_function(::damagefeedback_took_damage);
 }
 
-_id_1A29() {
-  maps\_utility::_id_1A2A(::_id_1A2B);
+stopmonitordamage() {
+  maps\_utility::remove_damage_function(::damagefeedback_took_damage);
 }
 
-_id_1A2B(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+damagefeedback_took_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isPlayer(var_1)) {
     return;
   }
-  if(!maps\_utility::_id_1A2C()) {
+  if(!maps\_utility::is_damagefeedback_enabled()) {
     return;
   }
-  if(isDefined(self._id_1A2D)) {
+  if(isDefined(self.bullet_resistance)) {
     var_7 = [];
     var_7["MOD_PISTOL_BULLET"] = 1;
     var_7["MOD_RIFLE_BULLET"] = 1;
 
     if(isDefined(var_7[var_4])) {
-      if(var_0 <= self._id_1A2D) {
+      if(var_0 <= self.bullet_resistance) {
         return;
       }
     }
@@ -61,20 +61,20 @@ updatedamagefeedback(var_0) {
   if(var_0.team == self.team || var_0.team == "neutral") {
     return;
   }
-  if(isDefined(var_0._id_0D04) && var_0._id_0D04) {
+  if(isDefined(var_0.magic_bullet_shield) && var_0.magic_bullet_shield) {
     return;
   }
   if(isDefined(var_0.godmode) && var_0.godmode) {
     return;
   }
-  if(isDefined(var_0._id_2982) && var_0._id_2982) {
+  if(isDefined(var_0.script_godmode) && var_0.script_godmode) {
     return;
   }
   self playlocalsound("SP_hit_alert");
   var_1 = 1;
 
-  if(isDefined(level._id_1A2F._id_1A30)) {
-    var_1 = level._id_1A2F._id_1A30;
+  if(isDefined(level.slowmo.speed_slow)) {
+    var_1 = level.slowmo.speed_slow;
   }
   self.hud_damagefeedback.alpha = 1;
   self.hud_damagefeedback fadeovertime(var_1);

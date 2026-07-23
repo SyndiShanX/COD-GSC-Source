@@ -21,8 +21,8 @@ _id_566F() {
   }
   common_scripts\utility::array_thread(level.players, ::_id_5672);
 
-  if(maps\_utility::_id_0A36()) {
-    common_scripts\utility::array_thread(level.players, ::_id_5896);
+  if(maps\_utility::is_specialop()) {
+    common_scripts\utility::array_thread(level.players, ::blizzard_flake_proc);
   }
   thread _id_5695();
 }
@@ -30,11 +30,11 @@ _id_566F() {
 _id_5672() {
   var_0 = 0.32;
 
-  if(maps\_utility::_id_0A36()) {
+  if(maps\_utility::is_specialop()) {
     var_0 = 0.2;
   }
   for(;;) {
-    if(maps\_utility::_id_0A36()) {
+    if(maps\_utility::is_specialop()) {
       self playFX(level._effect["blizzard_main"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
     } else {
       playFX(level._effect["blizzard_main"], self.origin);
@@ -43,7 +43,7 @@ _id_5672() {
   }
 }
 
-_id_5896() {
+blizzard_flake_proc() {
   var_0 = 0.05;
 
   for(;;) {
@@ -52,7 +52,7 @@ _id_5896() {
   }
 }
 
-_id_5897(var_0, var_1) {
+playfx_follow_player(var_0, var_1) {
   var_1 endon("death");
   var_2 = spawn("script_model", var_1.origin);
   var_2 setModel("tag_origin");
@@ -80,10 +80,10 @@ _id_5675() {
   level._effect["blizzard_main_flake"] = loadfx("snow/snow_hijack_so_flake");
   level._effect["blizzard_so_level_0"] = loadfx("misc/blank");
   level._effect["blizzard_so_level_1"] = loadfx("snow/snow_hijack_so");
-  level._id_5898 = [];
-  level._id_5898["r"] = 0.699094;
-  level._id_5898["g"] = 0.741239;
-  level._id_5898["b"] = 0.82818;
+  level.fog_color = [];
+  level.fog_color["r"] = 0.699094;
+  level.fog_color["g"] = 0.741239;
+  level.fog_color["b"] = 0.82818;
   var_0 = getmapsunlight();
   level._id_5676 = (var_0[0], var_0[1], var_0[2]);
   level._id_5677 = 1.0;
@@ -115,7 +115,7 @@ _id_567B(var_0) {
   resetsunlight();
 }
 
-_id_5899(var_0) {
+blizzard_level_transition_climbing(var_0) {
   _id_5696();
   thread _id_568E("climbing", var_0);
   thread _id_5686(0, 0);
@@ -124,7 +124,7 @@ _id_5899(var_0) {
   _id_5678(var_0, 0.25);
 }
 
-_id_589A(var_0) {
+blizzard_level_transition_climbing_up(var_0) {
   _id_5696();
   thread _id_568E("climbing_up", var_0);
   thread _id_5686(0, 0);
@@ -133,7 +133,7 @@ _id_589A(var_0) {
   _id_5678(var_0, 0.45);
 }
 
-_id_589B(var_0) {
+blizzard_level_transition_snowmobile(var_0) {
   _id_5696();
   thread _id_568E("snowmobile", var_0);
   thread _id_5686(0, 0);
@@ -238,7 +238,7 @@ _id_568E(var_0, var_1) {
 }
 
 _id_568F() {
-  if(maps\_utility::_id_0A36()) {
+  if(maps\_utility::is_specialop()) {
     level._effect["blizzard_main"] = level._effect["blizzard_so_level_" + level._id_5671];
   } else {
     level._effect["blizzard_main"] = level._effect["blizzard_level_" + level._id_5671];
@@ -322,11 +322,11 @@ _id_5693(var_0) {
 
 _id_5695() {
   var_0 = [];
-  var_0 = maps\_utility::_id_2695("lighthaze_snow");
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("lighthaze_snow_headlights"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("snow_spray_detail_runner400x400"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("snow_spray_detail_runner0x400"));
-  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::_id_2695("snow_spray_detail_runner400x0"));
+  var_0 = maps\_utility::getfxarraybyid("lighthaze_snow");
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("lighthaze_snow_headlights"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("snow_spray_detail_runner400x400"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("snow_spray_detail_runner0x400"));
+  var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("snow_spray_detail_runner400x0"));
   wait 0.1;
 
   for(;;) {
@@ -338,7 +338,7 @@ _id_5695() {
     common_scripts\utility::flag_waitopen("pause_blizzard_ground_fx");
 
     foreach(var_2 in var_0) {}
-    var_2 maps\_utility::_id_1655();
+    var_2 maps\_utility::restarteffect();
   }
 }
 

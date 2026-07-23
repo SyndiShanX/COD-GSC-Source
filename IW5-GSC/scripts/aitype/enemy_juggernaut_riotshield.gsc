@@ -22,7 +22,7 @@ main() {
   }
 
   self.weapon = "pecheneg";
-  _id_05C7::main();
+  character/character_so_juggernaut_mid::main();
 }
 
 spawner() {
@@ -30,11 +30,11 @@ spawner() {
 }
 
 precache() {
-  _id_05C7::precache();
+  character/character_so_juggernaut_mid::precache();
   precacheitem("pecheneg");
   precacheitem("iw5_riotshield_so");
   precacheitem("fnfiveseven");
   precacheitem("fraggrenade");
-  _id_05C8::_id_3AD6();
-  _id_05C6::main();
+  maps/_riotshield::init_riotshield();
+  maps/_juggernaut::main();
 }

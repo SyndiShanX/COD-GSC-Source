@@ -3,34 +3,34 @@
  * Script: scripts\1374.gsc
 **************************************/
 
-_id_4219() {
-  _id_4232();
-  thread _id_421A();
+stealth_visibility_friendly_main() {
+  friendly_init();
+  thread friendly_visibility_logic();
 }
 
-_id_421A() {
+friendly_visibility_logic() {
   self endon("death");
   self endon("pain_death");
-  var_0 = self._id_0B6E._id_41ED._id_421B;
+  var_0 = self._stealth.logic.current_stance_func;
 
   if(isPlayer(self)) {
-    thread _id_4229();
+    thread player_movespeed_calc_loop();
   }
   for(;;) {
-    maps\_utility::_id_1654("_stealth_enabled");
+    maps\_utility::ent_flag_wait("_stealth_enabled");
     self[[var_0]]();
-    self.maxvisibledist = _id_421F();
+    self.maxvisibledist = friendly_compute_score();
     wait 0.05;
   }
 }
 
-_id_421C() {
+friendly_getvelocity() {
   return length(self getvelocity());
 }
 
-_id_421D() {
+player_getvelocity_pc() {
   var_0 = length(self getvelocity());
-  var_1 = self._id_0B6E._id_41ED.stance;
+  var_1 = self._stealth.logic.stance;
   var_2 = [];
   var_2["stand"] = 30;
   var_2["crouch"] = 15;
@@ -41,82 +41,82 @@ _id_421D() {
   var_3["prone"] = 10;
 
   if(!var_0) {
-    self._id_0B6E._id_41ED._id_421E = 0;
-  } else if(var_0 > self._id_0B6E._id_41ED._id_421E) {
-    self._id_0B6E._id_41ED._id_421E = self._id_0B6E._id_41ED._id_421E + var_2[var_1];
+    self._stealth.logic.player_pc_velocity = 0;
+  } else if(var_0 > self._stealth.logic.player_pc_velocity) {
+    self._stealth.logic.player_pc_velocity = self._stealth.logic.player_pc_velocity + var_2[var_1];
 
-    if(self._id_0B6E._id_41ED._id_421E > var_0) {
-      self._id_0B6E._id_41ED._id_421E = var_0;
+    if(self._stealth.logic.player_pc_velocity > var_0) {
+      self._stealth.logic.player_pc_velocity = var_0;
     }
-  } else if(var_0 < self._id_0B6E._id_41ED._id_421E) {
-    self._id_0B6E._id_41ED._id_421E = self._id_0B6E._id_41ED._id_421E - var_3[var_1];
+  } else if(var_0 < self._stealth.logic.player_pc_velocity) {
+    self._stealth.logic.player_pc_velocity = self._stealth.logic.player_pc_velocity - var_3[var_1];
 
-    if(self._id_0B6E._id_41ED._id_421E < 0) {
-      self._id_0B6E._id_41ED._id_421E = 0;
+    if(self._stealth.logic.player_pc_velocity < 0) {
+      self._stealth.logic.player_pc_velocity = 0;
     }
   }
 
-  return self._id_0B6E._id_41ED._id_421E;
+  return self._stealth.logic.player_pc_velocity;
 }
 
-_id_421F(var_0) {
+friendly_compute_score(var_0) {
   if(!isDefined(var_0)) {
-    var_0 = self._id_0B6E._id_41ED.stance;
+    var_0 = self._stealth.logic.stance;
   }
   if(var_0 == "back") {
     var_0 = "prone";
   }
-  var_1 = level._id_0B6E._id_41ED._id_4220;
-  var_2 = level._id_0B6E._id_41ED._id_4221[var_1][var_0];
+  var_1 = level._stealth.logic.detection_level;
+  var_2 = level._stealth.logic.detect_range[var_1][var_0];
 
-  if(maps\_utility::_id_1008("_stealth_in_shadow")) {
+  if(maps\_utility::ent_flag("_stealth_in_shadow")) {
     var_2 = var_2 * 0.5;
 
-    if(var_2 < level._id_0B6E._id_41ED._id_4221["hidden"]["prone"]) {
-      var_2 = level._id_0B6E._id_41ED._id_4221["hidden"]["prone"];
+    if(var_2 < level._stealth.logic.detect_range["hidden"]["prone"]) {
+      var_2 = level._stealth.logic.detect_range["hidden"]["prone"];
     }
   }
 
-  var_3 = self._id_0B6E._id_41ED._id_4222[var_1][var_0];
+  var_3 = self._stealth.logic.movespeed_multiplier[var_1][var_0];
 
-  if(isDefined(self._id_4223) && var_3 > self._id_4223) {
-    var_3 = self._id_4223;
+  if(isDefined(self._stealth_move_detection_cap) && var_3 > self._stealth_move_detection_cap) {
+    var_3 = self._stealth_move_detection_cap;
   }
   return var_2 + var_3;
 }
 
-_id_4224() {
-  return self.a._id_0D26;
+friendly_getstance_ai() {
+  return self.a.pose;
 }
 
-_id_4225() {
+friendly_getangles_ai() {
   return self.angles;
 }
 
-_id_4226() {
-  self._id_0B6E._id_41ED.stance = self[[self._id_0B6E._id_41ED._id_4227]]();
-  self._id_0B6E._id_41ED._id_4228 = self._id_0B6E._id_41ED.stance;
+friendly_compute_stances_ai() {
+  self._stealth.logic.stance = self[[self._stealth.logic.getstance_func]]();
+  self._stealth.logic.oldstance = self._stealth.logic.stance;
 }
 
-_id_4229() {
+player_movespeed_calc_loop() {
   self endon("death");
   self endon("pain_death");
-  var_0 = self._id_0B6E._id_41ED._id_422A;
-  var_1 = self._id_0B6E._id_41ED._id_422B;
+  var_0 = self._stealth.logic.getangles_func;
+  var_1 = self._stealth.logic.getvelocity_func;
   var_2 = self[[var_0]]();
 
   for(;;) {
-    maps\_utility::_id_1654("_stealth_enabled");
+    maps\_utility::ent_flag_wait("_stealth_enabled");
     var_3 = undefined;
 
-    if(maps\_utility::_id_1008("_stealth_in_shadow")) {
+    if(maps\_utility::ent_flag("_stealth_in_shadow")) {
       var_3 = 0;
     } else {
       var_3 = self[[var_1]]();
     }
-    foreach(var_9, var_5 in self._id_0B6E._id_41ED._id_4222) {
+    foreach(var_9, var_5 in self._stealth.logic.movespeed_multiplier) {
       foreach(var_8, var_7 in var_5) {}
-      var_7 = var_3 * self._id_0B6E._id_41ED._id_422C[var_9][var_8];
+      var_7 = var_3 * self._stealth.logic.movespeed_scale[var_9][var_8];
     }
 
     var_2 = self[[var_0]]();
@@ -124,93 +124,93 @@ _id_4229() {
   }
 }
 
-_id_422D() {
+friendly_getstance_player() {
   return self getstance();
 }
 
-_id_422E() {
+friendly_getangles_player() {
   return self getplayerangles();
 }
 
-_id_422F() {
-  var_0 = self[[self._id_0B6E._id_41ED._id_4227]]();
+friendly_compute_stances_player() {
+  var_0 = self[[self._stealth.logic.getstance_func]]();
 
-  if(!self._id_0B6E._id_41ED._id_4230) {
+  if(!self._stealth.logic.stance_change) {
     switch (var_0) {
       case "prone":
-        if(self._id_0B6E._id_41ED._id_4228 != "prone") {
-          self._id_0B6E._id_41ED._id_4230 = self._id_0B6E._id_41ED._id_4231;
+        if(self._stealth.logic.oldstance != "prone") {
+          self._stealth.logic.stance_change = self._stealth.logic.stance_change_time;
         }
         break;
       case "crouch":
-        if(self._id_0B6E._id_41ED._id_4228 == "stand") {
-          self._id_0B6E._id_41ED._id_4230 = self._id_0B6E._id_41ED._id_4231;
+        if(self._stealth.logic.oldstance == "stand") {
+          self._stealth.logic.stance_change = self._stealth.logic.stance_change_time;
         }
         break;
     }
   }
 
-  if(self._id_0B6E._id_41ED._id_4230) {
-    self._id_0B6E._id_41ED.stance = self._id_0B6E._id_41ED._id_4228;
+  if(self._stealth.logic.stance_change) {
+    self._stealth.logic.stance = self._stealth.logic.oldstance;
 
-    if(self._id_0B6E._id_41ED._id_4230 > 0.05) {
-      self._id_0B6E._id_41ED._id_4230 = self._id_0B6E._id_41ED._id_4230 - 0.05;
+    if(self._stealth.logic.stance_change > 0.05) {
+      self._stealth.logic.stance_change = self._stealth.logic.stance_change - 0.05;
     } else {
-      self._id_0B6E._id_41ED._id_4230 = 0;
-      self._id_0B6E._id_41ED.stance = var_0;
-      self._id_0B6E._id_41ED._id_4228 = var_0;
+      self._stealth.logic.stance_change = 0;
+      self._stealth.logic.stance = var_0;
+      self._stealth.logic.oldstance = var_0;
     }
   } else {
-    self._id_0B6E._id_41ED.stance = var_0;
-    self._id_0B6E._id_41ED._id_4228 = var_0;
+    self._stealth.logic.stance = var_0;
+    self._stealth.logic.oldstance = var_0;
   }
 }
 
-_id_4232() {
-  maps\_utility::_id_1402("_stealth_in_shadow");
-  maps\_utility::_id_1402("_stealth_enabled");
-  maps\_utility::_id_13DC("_stealth_enabled");
-  self._id_0B6E = spawnStruct();
-  self._id_0B6E._id_41ED = spawnStruct();
+friendly_init() {
+  maps\_utility::ent_flag_init("_stealth_in_shadow");
+  maps\_utility::ent_flag_init("_stealth_enabled");
+  maps\_utility::ent_flag_set("_stealth_enabled");
+  self._stealth = spawnStruct();
+  self._stealth.logic = spawnStruct();
 
   if(isPlayer(self)) {
-    self._id_0B6E._id_41ED._id_4227 = ::_id_422D;
-    self._id_0B6E._id_41ED._id_422A = ::_id_422E;
+    self._stealth.logic.getstance_func = ::friendly_getstance_player;
+    self._stealth.logic.getangles_func = ::friendly_getangles_player;
 
     if(level.console) {
-      self._id_0B6E._id_41ED._id_422B = ::_id_421C;
+      self._stealth.logic.getvelocity_func = ::friendly_getvelocity;
     } else {
-      self._id_0B6E._id_41ED._id_422B = ::_id_421D;
-      self._id_0B6E._id_41ED._id_421E = 0;
+      self._stealth.logic.getvelocity_func = ::player_getvelocity_pc;
+      self._stealth.logic.player_pc_velocity = 0;
     }
 
-    self._id_0B6E._id_41ED._id_421B = ::_id_422F;
+    self._stealth.logic.current_stance_func = ::friendly_compute_stances_player;
   } else {
-    self._id_0B6E._id_41ED._id_4227 = ::_id_4224;
-    self._id_0B6E._id_41ED._id_422A = ::_id_4225;
-    self._id_0B6E._id_41ED._id_422B = ::_id_421C;
-    self._id_0B6E._id_41ED._id_421B = ::_id_4226;
+    self._stealth.logic.getstance_func = ::friendly_getstance_ai;
+    self._stealth.logic.getangles_func = ::friendly_getangles_ai;
+    self._stealth.logic.getvelocity_func = ::friendly_getvelocity;
+    self._stealth.logic.current_stance_func = ::friendly_compute_stances_ai;
   }
 
-  self._id_0B6E._id_41ED._id_4231 = 0.2;
-  self._id_0B6E._id_41ED._id_4230 = 0;
-  self._id_0B6E._id_41ED._id_4228 = self[[self._id_0B6E._id_41ED._id_4227]]();
-  self._id_0B6E._id_41ED.stance = self[[self._id_0B6E._id_41ED._id_4227]]();
-  self._id_0B6E._id_41ED._id_41EE = [];
-  self._id_0B6E._id_41ED._id_4222 = [];
-  self._id_0B6E._id_41ED._id_422C = [];
-  self._id_0B6E._id_41ED._id_4222["hidden"] = [];
-  self._id_0B6E._id_41ED._id_4222["hidden"]["prone"] = 0;
-  self._id_0B6E._id_41ED._id_4222["hidden"]["crouch"] = 0;
-  self._id_0B6E._id_41ED._id_4222["hidden"]["stand"] = 0;
-  self._id_0B6E._id_41ED._id_4222["spotted"] = [];
-  self._id_0B6E._id_41ED._id_4222["spotted"]["prone"] = 0;
-  self._id_0B6E._id_41ED._id_4222["spotted"]["crouch"] = 0;
-  self._id_0B6E._id_41ED._id_4222["spotted"]["stand"] = 0;
-  _id_4233();
+  self._stealth.logic.stance_change_time = 0.2;
+  self._stealth.logic.stance_change = 0;
+  self._stealth.logic.oldstance = self[[self._stealth.logic.getstance_func]]();
+  self._stealth.logic.stance = self[[self._stealth.logic.getstance_func]]();
+  self._stealth.logic.spotted_list = [];
+  self._stealth.logic.movespeed_multiplier = [];
+  self._stealth.logic.movespeed_scale = [];
+  self._stealth.logic.movespeed_multiplier["hidden"] = [];
+  self._stealth.logic.movespeed_multiplier["hidden"]["prone"] = 0;
+  self._stealth.logic.movespeed_multiplier["hidden"]["crouch"] = 0;
+  self._stealth.logic.movespeed_multiplier["hidden"]["stand"] = 0;
+  self._stealth.logic.movespeed_multiplier["spotted"] = [];
+  self._stealth.logic.movespeed_multiplier["spotted"]["prone"] = 0;
+  self._stealth.logic.movespeed_multiplier["spotted"]["crouch"] = 0;
+  self._stealth.logic.movespeed_multiplier["spotted"]["stand"] = 0;
+  friendly_default_movespeed_scale();
 }
 
-_id_4233() {
+friendly_default_movespeed_scale() {
   var_0 = [];
   var_0["prone"] = 3;
   var_0["crouch"] = 2;
@@ -219,19 +219,19 @@ _id_4233() {
   var_1["prone"] = 2;
   var_1["crouch"] = 2;
   var_1["stand"] = 2;
-  _id_4234(var_0, var_1);
+  friendly_set_movespeed_scale(var_0, var_1);
 }
 
-_id_4234(var_0, var_1) {
+friendly_set_movespeed_scale(var_0, var_1) {
   if(isDefined(var_0)) {
-    self._id_0B6E._id_41ED._id_422C["hidden"]["prone"] = var_0["prone"];
-    self._id_0B6E._id_41ED._id_422C["hidden"]["crouch"] = var_0["crouch"];
-    self._id_0B6E._id_41ED._id_422C["hidden"]["stand"] = var_0["stand"];
+    self._stealth.logic.movespeed_scale["hidden"]["prone"] = var_0["prone"];
+    self._stealth.logic.movespeed_scale["hidden"]["crouch"] = var_0["crouch"];
+    self._stealth.logic.movespeed_scale["hidden"]["stand"] = var_0["stand"];
   }
 
   if(isDefined(var_1)) {
-    self._id_0B6E._id_41ED._id_422C["spotted"]["prone"] = var_1["prone"];
-    self._id_0B6E._id_41ED._id_422C["spotted"]["crouch"] = var_1["crouch"];
-    self._id_0B6E._id_41ED._id_422C["spotted"]["stand"] = var_1["stand"];
+    self._stealth.logic.movespeed_scale["spotted"]["prone"] = var_1["prone"];
+    self._stealth.logic.movespeed_scale["spotted"]["crouch"] = var_1["crouch"];
+    self._stealth.logic.movespeed_scale["spotted"]["stand"] = var_1["stand"];
   }
 }

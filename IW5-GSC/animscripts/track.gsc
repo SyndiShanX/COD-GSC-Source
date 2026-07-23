@@ -5,14 +5,14 @@
 
 #using_animtree("generic_human");
 
-_id_0CA9() {
+trackshootentorpos() {
   self endon("killanimscript");
   self endon("stop tracking");
   self endon("melee");
-  _id_0CAA(%aim_2, %aim_4, %aim_6, %aim_8);
+  trackloop(%aim_2, %aim_4, %aim_6, %aim_8);
 }
 
-_id_0CAA(var_0, var_1, var_2, var_3) {
+trackloop(var_0, var_1, var_2, var_3) {
   var_4 = 0;
   var_5 = 0;
   var_6 = (0, 0, 0);
@@ -24,33 +24,33 @@ _id_0CAA(var_0, var_1, var_2, var_3) {
 
   if(self.type == "dog") {
     var_12 = 0;
-    self._id_0CAB = self.enemy;
+    self.shootent = self.enemy;
   } else {
     var_12 = 1;
     var_13 = 0;
     var_14 = 0;
 
-    if(isDefined(self._id_0CAC)) {
-      var_13 = anim._id_0CAD;
+    if(isDefined(self.covercrouchlean_aimmode)) {
+      var_13 = anim.covercrouchleanpitch;
     }
-    if((self.script == "cover_left" || self.script == "cover_right") && isDefined(self.a._id_0CAE) && self.a._id_0CAE == "lean") {
-      var_14 = self._id_0CAF.angles[1] - self.angles[1];
+    if((self.script == "cover_left" || self.script == "cover_right") && isDefined(self.a.cornermode) && self.a.cornermode == "lean") {
+      var_14 = self.covernode.angles[1] - self.angles[1];
     }
     var_11 = (var_13, var_14, 0);
   }
 
   for(;;) {
-    _id_0CC9();
-    var_15 = animscripts\shared::_id_0CB0();
-    var_16 = self._id_0CB1;
+    incranimaimweight();
+    var_15 = animscripts\shared::getshootfrompos();
+    var_16 = self.shootpos;
 
-    if(isDefined(self._id_0CAB)) {
-      var_16 = self._id_0CAB getshootatpos();
+    if(isDefined(self.shootent)) {
+      var_16 = self.shootent getshootatpos();
     }
-    if(!isDefined(var_16) && animscripts\utility::_id_0CB2()) {
-      var_16 = _id_0CB6(var_15);
+    if(!isDefined(var_16) && animscripts\utility::shouldcqb()) {
+      var_16 = trackloop_cqbshootpos(var_15);
     }
-    var_17 = isDefined(self._id_0CB3) || isDefined(self._id_0CB4);
+    var_17 = isDefined(self.onsnowmobile) || isDefined(self.onatv);
     var_18 = isDefined(var_16);
     var_19 = (0, 0, 0);
 
@@ -58,10 +58,10 @@ _id_0CAA(var_0, var_1, var_2, var_3) {
       var_19 = var_16;
     }
     var_20 = 0;
-    var_21 = isDefined(self._id_0CB5);
+    var_21 = isDefined(self.stepoutyaw);
 
     if(var_21) {
-      var_20 = self._id_0CB5;
+      var_20 = self.stepoutyaw;
     }
     var_6 = self getaimangle(var_15, var_19, var_18, var_11, var_20, var_21, var_17);
     var_22 = var_6[0];
@@ -100,19 +100,19 @@ _id_0CAA(var_0, var_1, var_2, var_3) {
     var_7 = 0;
     var_4 = var_23;
     var_5 = var_22;
-    _id_0CC2(var_0, var_1, var_2, var_3, var_22, var_23);
+    trackloop_setanimweights(var_0, var_1, var_2, var_3, var_22, var_23);
     wait 0.05;
   }
 }
 
-_id_0CB6(var_0) {
+trackloop_cqbshootpos(var_0) {
   var_1 = undefined;
   var_2 = anglesToForward(self.angles);
 
-  if(isDefined(self._id_0CB7)) {
-    var_1 = self._id_0CB7 getshootatpos();
+  if(isDefined(self.cqb_target)) {
+    var_1 = self.cqb_target getshootatpos();
 
-    if(isDefined(self._id_0CB8)) {
+    if(isDefined(self.cqb_wide_target_track)) {
       if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.177) {
         var_1 = undefined;
       }
@@ -121,10 +121,10 @@ _id_0CB6(var_0) {
     }
   }
 
-  if(!isDefined(var_1) && isDefined(self._id_0CB9)) {
-    var_1 = self._id_0CB9;
+  if(!isDefined(var_1) && isDefined(self.cqb_point_of_interest)) {
+    var_1 = self.cqb_point_of_interest;
 
-    if(isDefined(self._id_0CBA)) {
+    if(isDefined(self.cqb_wide_poi_track)) {
       if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.177) {
         var_1 = undefined;
       }
@@ -136,17 +136,17 @@ _id_0CB6(var_0) {
   return var_1;
 }
 
-_id_0CBB(var_0, var_1) {
-  if(animscripts\utility::_id_0CBC()) {
+trackloop_anglesfornoshootpos(var_0, var_1) {
+  if(animscripts\utility::recentlysawenemy()) {
     var_2 = self.enemy getshootatpos() - self.enemy.origin;
     var_3 = self lastknownpos(self.enemy) + var_2;
-    return _id_0CBE(var_3 - var_0, var_1);
+    return trackloop_getdesiredangles(var_3 - var_0, var_1);
   }
 
   var_4 = 0;
   var_5 = 0;
 
-  if(isDefined(self.node) && isDefined(anim._id_0CBD[self.node.type]) && distancesquared(self.origin, self.node.origin) < 16) {
+  if(isDefined(self.node) && isDefined(anim.iscombatscriptnode[self.node.type]) && distancesquared(self.origin, self.node.origin) < 16) {
     var_5 = angleclamp180(self.angles[1] - self.node.angles[1]);
   } else {
     var_6 = self getanglestolikelyenemypath();
@@ -160,7 +160,7 @@ _id_0CBB(var_0, var_1) {
   return (var_4, var_5, 0);
 }
 
-_id_0CBE(var_0, var_1) {
+trackloop_getdesiredangles(var_0, var_1) {
   var_2 = vectortoangles(var_0);
   var_3 = 0;
   var_4 = 0;
@@ -175,8 +175,8 @@ _id_0CBE(var_0, var_1) {
   var_5 = 360 - var_2[0];
   var_5 = angleclamp180(var_5 + var_1[0] + var_3);
 
-  if(isDefined(self._id_0CB5)) {
-    var_6 = self._id_0CB5 - var_2[1];
+  if(isDefined(self.stepoutyaw)) {
+    var_6 = self.stepoutyaw - var_2[1];
   } else {
     var_7 = angleclamp180(self.desiredangle - self.angles[1]) * 0.5;
     var_6 = var_7 + self.angles[1] - var_2[1];
@@ -186,15 +186,15 @@ _id_0CBE(var_0, var_1) {
   return (var_5, var_6, 0);
 }
 
-_id_0CBF(var_0, var_1, var_2) {
-  if(isDefined(self._id_0CB3) || isDefined(self._id_0CB4)) {
+trackloop_clampangles(var_0, var_1, var_2) {
+  if(isDefined(self.onsnowmobile) || isDefined(self.onatv)) {
     if(var_1 > self.rightaimlimit || var_1 < self.leftaimlimit) {
       var_1 = 0;
     }
     if(var_0 > self.upaimlimit || var_0 < self.downaimlimit) {
       var_0 = 0;
     }
-  } else if(var_2 && (abs(var_1) > anim._id_0CC0 || abs(var_0) > anim._id_0CC1)) {
+  } else if(var_2 && (abs(var_1) > anim.maxanglecheckyawdelta || abs(var_0) > anim.maxanglecheckpitchdelta)) {
     var_1 = 0;
     var_0 = 0;
   } else {
@@ -209,50 +209,50 @@ _id_0CBF(var_0, var_1, var_2) {
   return (var_0, var_1, 0);
 }
 
-_id_0CC2(var_0, var_1, var_2, var_3, var_4, var_5) {
+trackloop_setanimweights(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(var_5 > 0) {
-    var_6 = var_5 / self.rightaimlimit * self.a._id_0CC3;
+    var_6 = var_5 / self.rightaimlimit * self.a.aimweight;
     self setanimlimited(var_1, 0, 0.1, 1, 1);
     self setanimlimited(var_2, var_6, 0.1, 1, 1);
   } else if(var_5 < 0) {
-    var_6 = var_5 / self.leftaimlimit * self.a._id_0CC3;
+    var_6 = var_5 / self.leftaimlimit * self.a.aimweight;
     self setanimlimited(var_2, 0, 0.1, 1, 1);
     self setanimlimited(var_1, var_6, 0.1, 1, 1);
   }
 
   if(var_4 > 0) {
-    var_6 = var_4 / self.upaimlimit * self.a._id_0CC3;
+    var_6 = var_4 / self.upaimlimit * self.a.aimweight;
     self setanimlimited(var_0, 0, 0.1, 1, 1);
     self setanimlimited(var_3, var_6, 0.1, 1, 1);
   } else if(var_4 < 0) {
-    var_6 = var_4 / self.downaimlimit * self.a._id_0CC3;
+    var_6 = var_4 / self.downaimlimit * self.a.aimweight;
     self setanimlimited(var_3, 0, 0.1, 1, 1);
     self setanimlimited(var_0, var_6, 0.1, 1, 1);
   }
 }
 
-_id_0CC4(var_0, var_1) {
+setanimaimweight(var_0, var_1) {
   if(!isDefined(var_1) || var_1 <= 0) {
-    self.a._id_0CC3 = var_0;
-    self.a._id_0CC5 = var_0;
-    self.a._id_0CC6 = var_0;
-    self.a._id_0CC7 = 0;
+    self.a.aimweight = var_0;
+    self.a.aimweight_start = var_0;
+    self.a.aimweight_end = var_0;
+    self.a.aimweight_transframes = 0;
   } else {
-    if(!isDefined(self.a._id_0CC3)) {
-      self.a._id_0CC3 = 0;
+    if(!isDefined(self.a.aimweight)) {
+      self.a.aimweight = 0;
     }
-    self.a._id_0CC5 = self.a._id_0CC3;
-    self.a._id_0CC6 = var_0;
-    self.a._id_0CC7 = int(var_1 * 20);
+    self.a.aimweight_start = self.a.aimweight;
+    self.a.aimweight_end = var_0;
+    self.a.aimweight_transframes = int(var_1 * 20);
   }
 
-  self.a._id_0CC8 = 0;
+  self.a.aimweight_t = 0;
 }
 
-_id_0CC9() {
-  if(self.a._id_0CC8 < self.a._id_0CC7) {
-    self.a._id_0CC8++;
-    var_0 = 1.0 * self.a._id_0CC8 / self.a._id_0CC7;
-    self.a._id_0CC3 = self.a._id_0CC5 * (1 - var_0) + self.a._id_0CC6 * var_0;
+incranimaimweight() {
+  if(self.a.aimweight_t < self.a.aimweight_transframes) {
+    self.a.aimweight_t++;
+    var_0 = 1.0 * self.a.aimweight_t / self.a.aimweight_transframes;
+    self.a.aimweight = self.a.aimweight_start * (1 - var_0) + self.a.aimweight_end * var_0;
   }
 }

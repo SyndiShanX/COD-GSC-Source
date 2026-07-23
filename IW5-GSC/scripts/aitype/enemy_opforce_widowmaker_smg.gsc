@@ -36,7 +36,7 @@ main() {
       break;
   }
 
-  _id_4957::main();
+  character/character_russian_naval_assault::main();
 }
 
 spawner() {
@@ -44,7 +44,7 @@ spawner() {
 }
 
 precache() {
-  _id_4957::precache();
+  character/character_russian_naval_assault::precache();
   precacheitem("p90");
   precacheitem("p90_eotech");
   precacheitem("pp90m1");

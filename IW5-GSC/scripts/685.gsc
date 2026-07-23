@@ -4,8 +4,8 @@
 **************************************/
 
 main() {
-  _id_495F::main("vehicle_blackhawk_hero_hamburg", undefined, "script_vehicle_blackhawk_hero_hamburg");
-  _id_4960::main("vehicle_f15", undefined, "script_vehicle_f15");
+  vehicle_scripts/_blackhawk_hamburg::main("vehicle_blackhawk_hero_hamburg", undefined, "script_vehicle_blackhawk_hero_hamburg");
+  vehicle_scripts/_f15::main("vehicle_f15", undefined, "script_vehicle_f15");
   vehicle_scripts\_mi17::main("vehicle_mi17_woodland_fly", "mi17_so", "script_vehicle_mi17_woodland_fly_so");
-  _id_0669::main("ss_n_12_missile", undefined, "script_vehicle_ss_n_12");
+  vehicle_scripts/_ss_n_12::main("ss_n_12_missile", undefined, "script_vehicle_ss_n_12");
 }

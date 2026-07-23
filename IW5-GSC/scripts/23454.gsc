@@ -9,7 +9,7 @@ main() {
   self.headmodel = "head_africa_militia_b_hat";
 
   if(isendstr(self.headmodel, "_hat")) {
-    codescripts\character::attachhat("alias_africa_militia_hats_b", _id_05BB::main());
+    codescripts\character::attachhat("alias_africa_militia_hats_b", xmodelalias/alias_africa_militia_hats_b::main());
   }
   self.voice = "african";
 }
@@ -17,5 +17,5 @@ main() {
 precache() {
   precachemodel("body_africa_militia_rpg_b");
   precachemodel("head_africa_militia_b_hat");
-  codescripts\character::precachemodelarray(_id_05BB::main());
+  codescripts\character::precachemodelarray(xmodelalias/alias_africa_militia_hats_b::main());
 }

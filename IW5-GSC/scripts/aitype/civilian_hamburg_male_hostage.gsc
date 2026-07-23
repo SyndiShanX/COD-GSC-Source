@@ -22,7 +22,7 @@ main() {
   }
 
   self.weapon = "none";
-  _id_5BA1::main();
+  character/character_civilian_hamburg_hostage::main();
 }
 
 spawner() {
@@ -30,5 +30,5 @@ spawner() {
 }
 
 precache() {
-  _id_5BA1::precache();
+  character/character_civilian_hamburg_hostage::precache();
 }

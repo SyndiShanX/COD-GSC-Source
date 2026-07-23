@@ -25,13 +25,13 @@ main() {
 
   switch (codescripts\character::get_random_character(3)) {
     case 0:
-      _id_05BD::main();
+      character/character_africa_militia_smg_a::main();
       break;
     case 1:
-      _id_05BE::main();
+      character/character_africa_militia_smg_b::main();
       break;
     case 2:
-      _id_05BF::main();
+      character/character_africa_militia_smg_c::main();
       break;
   }
 }
@@ -41,11 +41,11 @@ spawner() {
 }
 
 precache() {
-  _id_05BD::precache();
-  _id_05BE::precache();
-  _id_05BF::precache();
+  character/character_africa_militia_smg_a::precache();
+  character/character_africa_militia_smg_b::precache();
+  character/character_africa_militia_smg_c::precache();
   precacheitem("pp90m1");
   precacheitem("usp");
   precacheitem("fraggrenade");
-  _id_05C2::main();
+  maps/_rambo::main();
 }

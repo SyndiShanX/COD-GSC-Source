@@ -7,29 +7,29 @@
 
 main() {
   waittillframeend;
-  _id_1E41();
-  level._id_1E3D = [];
-  level._id_1E3E = #animtree;
+  init_wind_if_uninitialized();
+  level.init_animatedmodels_dump = [];
+  level.anim_prop_models_animtree = #animtree;
 
   if(!isDefined(level.anim_prop_models)) {
     level.anim_prop_models = [];
   }
-  if(!isDefined(level._id_1E40)) {
-    level._id_1E40 = [];
+  if(!isDefined(level.anim_prop_init_threads)) {
+    level.anim_prop_init_threads = [];
   }
   var_0 = getEntArray("animated_model", "targetname");
-  common_scripts\utility::array_thread(var_0, ::_id_1E46);
+  common_scripts\utility::array_thread(var_0, ::model_init);
 
-  if(isDefined(level._id_1E3D) && level._id_1E3D.size) {
+  if(isDefined(level.init_animatedmodels_dump) && level.init_animatedmodels_dump.size) {
     var_1 = " ";
 
-    foreach(var_3 in level._id_1E3D) {}
+    foreach(var_3 in level.init_animatedmodels_dump) {}
     var_1 = var_1 + (var_3 + " ");
   }
 
   foreach(var_6 in var_0) {
-    if(isDefined(level._id_1E40[var_6.model])) {
-      var_6 thread[[level._id_1E40[var_6.model]]]();
+    if(isDefined(level.anim_prop_init_threads[var_6.model])) {
+      var_6 thread[[level.anim_prop_init_threads[var_6.model]]]();
       continue;
     }
 
@@ -44,32 +44,32 @@ main() {
     }
 
     if(var_8) {
-      var_6 thread _id_1E49();
+      var_6 thread animatetreewind();
     } else {
       var_6 thread animatemodel();
     }
   }
 }
 
-_id_1E41() {
-  if(isDefined(level._id_1E42)) {
+init_wind_if_uninitialized() {
+  if(isDefined(level.wind)) {
     return;
   }
-  level._id_1E42 = spawnStruct();
-  level._id_1E42._id_1E43 = 0.4;
-  level._id_1E42.weight = 1;
-  level._id_1E42._id_1E45 = 0.2;
+  level.wind = spawnStruct();
+  level.wind.rate = 0.4;
+  level.wind.weight = 1;
+  level.wind.variance = 0.2;
 }
 
-_id_1E46() {
+model_init() {
   if(!isDefined(level.anim_prop_models[self.model])) {
-    if(!_id_1E47(level._id_1E3D, self.model)) {
-      level._id_1E3D[level._id_1E3D.size] = self.model;
+    if(!already_dumpped(level.init_animatedmodels_dump, self.model)) {
+      level.init_animatedmodels_dump[level.init_animatedmodels_dump.size] = self.model;
     }
   }
 }
 
-_id_1E47(var_0, var_1) {
+already_dumpped(var_0, var_1) {
   if(var_0.size <= 0) {
     return 0;
   }
@@ -91,20 +91,20 @@ animatemodel() {
   self setanimtime(var_2, randomfloatrange(0, 1));
 }
 
-_id_1E49() {
+animatetreewind() {
   self useanimtree(#animtree);
   var_0 = "strong";
 
   for(;;) {
-    thread _id_1E4A(var_0);
+    thread blendtreeanims(var_0);
     level waittill("windchange", var_0);
   }
 }
 
-_id_1E4A(var_0) {
+blendtreeanims(var_0) {
   level endon("windchange");
-  var_1 = level._id_1E42.weight;
-  var_2 = level._id_1E42._id_1E43 + randomfloat(level._id_1E42._id_1E45);
+  var_1 = level.wind.weight;
+  var_2 = level.wind.rate + randomfloat(level.wind.variance);
   self setanim(level.anim_prop_models[self.model]["still"], 1, self getanimtime(level.anim_prop_models[self.model]["still"]), var_2);
   self setanim(level.anim_prop_models[self.model][var_0], var_1, self getanimtime(level.anim_prop_models[self.model][var_0]), var_2);
 }

@@ -7,14 +7,14 @@
 
 main() {
   self endon("killanimscript");
-  animscripts\utility::_id_0D15("grenadecower");
+  animscripts\utility::initialize("grenadecower");
 
-  if(isDefined(self._id_3ACA)) {
-    self[[self._id_3ACA]]();
+  if(isDefined(self.grenadecowerfunction)) {
+    self[[self.grenadecowerfunction]]();
     return;
   }
 
-  if(self.a._id_0D26 == "prone") {
+  if(self.a.pose == "prone") {
     animscripts\stop::main();
     return;
   }
@@ -28,18 +28,18 @@ main() {
   } else {
     var_0 = self.angles[1];
   }
-  if(self.a._id_0D26 == "stand") {
-    if(isDefined(self.grenade) && _id_3FE0(var_0)) {
+  if(self.a.pose == "stand") {
+    if(isDefined(self.grenade) && trydive(var_0)) {
       return;
     }
     self setflaggedanimknoballrestart("cowerstart", %exposed_squat_down_grenade_f, %body, 1, 0.2);
-    animscripts\shared::_id_0C51("cowerstart");
+    animscripts\shared::donotetracks("cowerstart");
   }
 
-  self.a._id_0D26 = "crouch";
-  self.a._id_0D2B = "stop";
+  self.a.pose = "crouch";
+  self.a.movement = "stop";
   self setflaggedanimknoballrestart("cower", %exposed_squat_idle_grenade_f, %body, 1, 0.2);
-  animscripts\shared::_id_0C51("cower");
+  animscripts\shared::donotetracks("cower");
   self waittill("never");
 }
 
@@ -47,7 +47,7 @@ end_script() {
   self.safetochangescript = 1;
 }
 
-_id_3FE0(var_0) {
+trydive(var_0) {
   if(randomint(2) == 0) {
     return 0;
   }
@@ -69,7 +69,7 @@ _id_3FE0(var_0) {
   }
   self.safetochangescript = 0;
   self setflaggedanimknoballrestart("cowerstart", var_1, %body, 1, 0.2);
-  animscripts\shared::_id_0C51("cowerstart");
+  animscripts\shared::donotetracks("cowerstart");
   self.safetochangescript = 1;
   return 1;
 }

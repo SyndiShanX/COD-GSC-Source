@@ -15,14 +15,14 @@ main() {
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   audio_settings();
-  thread _id_48EC();
+  thread ac130_thread();
 }
 
 audio_settings() {
   maps\mp\_audio::add_reverb("default", "arena", 0.15, 0.9, 2);
 }
 
-_id_48EC() {
+ac130_thread() {
   var_0 = 1200;
   var_1 = 3;
   var_2 = 0;
@@ -50,7 +50,7 @@ _id_48EC() {
         var_4 = var_12;
       }
       var_8 moveTo(var_9.origin, var_12);
-      var_8 thread _id_48ED(var_12);
+      var_8 thread play_plane_fx(var_12);
       var_5[var_5.size] = var_8;
     }
 
@@ -66,6 +66,6 @@ _id_48EC() {
   }
 }
 
-_id_48ED(var_0) {
+play_plane_fx(var_0) {
   self endon("delete_plane");
 }

@@ -6,18 +6,18 @@
 main() {
   level.wave_table = "sp/so_survival/tier_dlc_1.csv";
   level.loadout_table = "sp/so_survival/tier_dlc_1.csv";
-  _id_061C::_id_3D56("easy", "actor_enemy_so_easy_v2");
+  maps/_so_survival_ai::ai_type_add_override_class("easy", "actor_enemy_so_easy_v2");
   maps\mp\mp_morningwood_precache::main();
   maps\createart\mp_morningwood_art::main();
   maps\mp\mp_morningwood_fx::main();
   maps\createfx\mp_morningwood_fx::main();
-  maps\_so_survival::_id_3F65();
+  maps\_so_survival::survival_preload();
   maps\_load::main();
   ambientplay("ambient_mp_morningwood");
   maps\_utility::set_vision_set("mp_morningwood", 0);
-  maps\_so_survival::_id_3F66();
+  maps\_so_survival::survival_postload();
   maps\_compass::setupminimap("compass_map_mp_morningwood");
-  maps\_so_survival::_id_3F67();
+  maps\_so_survival::survival_init();
   thread killtrigger((-328, -712, 824), 40, 50);
   thread killtrigger((-368, -724, 824), 40, 50);
   thread killtrigger((-404, -752, 824), 40, 50);
@@ -37,7 +37,7 @@ killtrigger(var_0, var_1, var_2) {
     if(!isPlayer(var_4)) {
       continue;
     }
-    var_4 maps\_utility::_id_1887();
+    var_4 maps\_utility::kill_wrapper();
   }
 }
 
@@ -46,5 +46,5 @@ spawn_blocker_collision(var_0, var_1) {
   var_2 setModel("tag_origin");
   var_2.origin = var_0;
   var_2.angles = var_1 + (0, 90, 0);
-  var_2 clonebrushmodeltoscriptmodel(level._id_3BB1[0]);
+  var_2 clonebrushmodeltoscriptmodel(level.airdropcratecollisionboxes[0]);
 }

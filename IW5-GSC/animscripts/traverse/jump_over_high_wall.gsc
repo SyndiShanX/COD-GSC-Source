@@ -6,8 +6,8 @@
 #using_animtree("generic_human");
 
 main() {
-  self._id_247C = "crouch";
-  animscripts\utility::_id_247B();
+  self.desired_anim_pose = "crouch";
+  animscripts\utility::updateanimpose();
   self endon("killanimscript");
   self traversemode("nogravity");
   self traversemode("noclip");
@@ -22,5 +22,5 @@ main() {
   self traversemode("noclip");
   self waittillmatch("diveanim", "gravity on");
   self traversemode("gravity");
-  animscripts\shared::_id_0C51("diveanim");
+  animscripts\shared::donotetracks("diveanim");
 }

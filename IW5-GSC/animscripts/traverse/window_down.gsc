@@ -9,15 +9,15 @@ main() {
   var_0 = % windowclimb_fall;
   var_1 = % windowclimb_land;
   var_2 = 35;
-  self._id_247C = "crouch";
-  animscripts\utility::_id_247B();
+  self.desired_anim_pose = "crouch";
+  animscripts\utility::updateanimpose();
   self endon("killanimscript");
   self traversemode("noclip");
   var_3 = self getnegotiationstartnode();
   self orientmode("face angle", var_3.angles[1]);
-  var_4 = var_3._id_1EFA - var_3.origin[2];
+  var_4 = var_3.traverse_height - var_3.origin[2];
   self setflaggedanimknoballrestart("traverse", var_0, %body, 1, 0.15, 1);
-  thread animscripts\notetracks::_id_239E("traverse", "stop_traverse_notetracks");
+  thread animscripts\notetracks::donotetracksforever("traverse", "stop_traverse_notetracks");
   wait 1.5;
   var_5 = (0, var_3.angles[1], 0);
   var_6 = anglesToForward(var_5);
@@ -27,17 +27,17 @@ main() {
   var_9 = var_3.origin[2] - var_8;
   var_10 = 0;
 
-  for(var_11 = 0; var_11 < level._id_20C4.size; var_11++) {
-    if(var_9 < level._id_20C4[var_11]) {
+  for(var_11 = 0; var_11 < level.window_down_height.size; var_11++) {
+    if(var_9 < level.window_down_height[var_11]) {
       continue;
     }
-    var_10 = var_9 - level._id_20C4[var_11];
+    var_10 = var_9 - level.window_down_height[var_11];
   }
 
-  thread animscripts\traverse\shared::_id_3FE7(var_10 * -1);
+  thread animscripts\traverse\shared::teleportthread(var_10 * -1);
   var_12 = self.origin[2];
   var_13 = 0;
-  level._id_3FFF = [];
+  level.traversefall = [];
 
   for(;;) {
     var_13 = var_12 - self.origin[2];
@@ -56,10 +56,10 @@ main() {
   self notify("stop_traverse_notetracks");
   self setflaggedanimknoballrestart("traverse", var_1, %body, 1, 0.15, 1);
   self traversemode("gravity");
-  animscripts\shared::_id_0C51("traverse");
+  animscripts\shared::donotetracks("traverse");
 }
 
-_id_4000(var_0) {
+printer(var_0) {
   level notify("print_this_" + var_0);
   level endon("print_this_" + var_0);
 
@@ -68,13 +68,13 @@ _id_4000(var_0) {
   }
 }
 
-_id_4001(var_0, var_1) {
+showline(var_0, var_1) {
   for(;;) {
     wait 0.05;
   }
 }
 
-_id_4002(var_0, var_1) {
+printerdebugger(var_0, var_1) {
   level notify("prrint_this_" + var_1);
   level endon("prrint_this_" + var_1);
 

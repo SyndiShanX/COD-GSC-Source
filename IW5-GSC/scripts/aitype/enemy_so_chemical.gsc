@@ -25,16 +25,16 @@ main() {
 
   switch (codescripts\character::get_random_character(4)) {
     case 0:
-      _id_05CC::main();
+      character/character_chemwar_russian_assault_a::main();
       break;
     case 1:
-      _id_05D1::main();
+      character/character_chemwar_russian_assault_aa::main();
       break;
     case 2:
-      _id_05DA::main();
+      character/character_chemwar_m_d_so::main();
       break;
     case 3:
-      _id_05DB::main();
+      character/character_chemwar_m_dd_so::main();
       break;
   }
 }
@@ -44,9 +44,9 @@ spawner() {
 }
 
 precache() {
-  _id_05CC::precache();
-  _id_05D1::precache();
-  _id_05DA::precache();
-  _id_05DB::precache();
+  character/character_chemwar_russian_assault_a::precache();
+  character/character_chemwar_russian_assault_aa::precache();
+  character/character_chemwar_m_d_so::precache();
+  character/character_chemwar_m_dd_so::precache();
   precacheitem("fraggrenade");
 }

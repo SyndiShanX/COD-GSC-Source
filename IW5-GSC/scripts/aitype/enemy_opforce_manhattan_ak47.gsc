@@ -41,10 +41,10 @@ main() {
 
   switch (codescripts\character::get_random_character(2)) {
     case 0:
-      _id_0631::main();
+      character/character_opforce_manhattan_assault_a::main();
       break;
     case 1:
-      _id_0632::main();
+      character/character_russian_military_rpg_a::main();
       break;
   }
 }
@@ -54,8 +54,8 @@ spawner() {
 }
 
 precache() {
-  _id_0631::precache();
-  _id_0632::precache();
+  character/character_opforce_manhattan_assault_a::precache();
+  character/character_russian_military_rpg_a::precache();
   precacheitem("ak47");
   precacheitem("ak47_acog");
   precacheitem("ak47_grenadier");

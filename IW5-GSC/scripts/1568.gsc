@@ -13,33 +13,33 @@ main(var_0, var_1, var_2) {
   } else if(isDefined(var_1) && var_1 == "mi17_so_takes_damage") {
     var_3 = "mi17_so_takes_damage";
   }
-  _id_061D::main(var_0, var_3, var_2);
-  maps\_vehicle::_id_2AC1(%mi17_heli_rotors, undefined, 0);
-  maps\_vehicle::_id_2ABE("vehicle_mi17_woodland");
-  maps\_vehicle::_id_2ABE("vehicle_mi17_woodland_fly");
-  maps\_vehicle::_id_2ABE("vehicle_mi17_woodland_landing");
-  maps\_vehicle::_id_2ABE("vehicle_mi17_woodland_fly_cheap");
-  maps\_vehicle::_id_2AD2(::_id_2B1D);
-  maps\_vehicle::_id_2AC5();
-  maps\_vehicle::_id_2ACA(::_id_3A9D, ::_id_3A9C);
-  maps\_vehicle::_id_2ACC(::_id_3E84);
-  maps\_vehicle::_id_2ACD(::_id_3E58);
+  vehicle_scripts/_mi17_noai::main(var_0, var_3, var_2);
+  maps\_vehicle::build_drive(%mi17_heli_rotors, undefined, 0);
+  maps\_vehicle::build_deathmodel("vehicle_mi17_woodland");
+  maps\_vehicle::build_deathmodel("vehicle_mi17_woodland_fly");
+  maps\_vehicle::build_deathmodel("vehicle_mi17_woodland_landing");
+  maps\_vehicle::build_deathmodel("vehicle_mi17_woodland_fly_cheap");
+  maps\_vehicle::build_localinit(::init_local);
+  maps\_vehicle::build_treadfx();
+  maps\_vehicle::build_aianims(::setanims, ::set_vehicle_anims);
+  maps\_vehicle::build_attach_models(::_id_3E84);
+  maps\_vehicle::build_unload_groups(::unload_groups);
 }
 
-_id_2B1D() {
-  if(maps\_utility::_id_1E25()) {
-    self._id_295E = distance(self gettagorigin("tag_origin"), self gettagorigin("tag_ground"));
-    self._id_295A = 710;
+init_local() {
+  if(maps\_utility::is_iw4_map_sp()) {
+    self.originheightoffset = distance(self gettagorigin("tag_origin"), self gettagorigin("tag_ground"));
+    self.fastropeoffset = 710;
   } else {
-    self._id_295A = 710 + distance(self gettagorigin("tag_origin"), self gettagorigin("tag_ground"));
+    self.fastropeoffset = 710 + distance(self gettagorigin("tag_origin"), self gettagorigin("tag_ground"));
   }
-  self._id_2941 = 0;
-  maps\_vehicle::_id_2AB3("running");
+  self.script_badplace = 0;
+  maps\_vehicle::lights_on("running");
 }
 
-_id_3A9C(var_0) {
+set_vehicle_anims(var_0) {
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    var_0[var_1]._id_2523 = % mi17_heli_idle;
+    var_0[var_1].vehicle_getoutanim = % mi17_heli_idle;
   }
   return var_0;
 }
@@ -50,106 +50,106 @@ _id_3E83(var_0) {
 
 #using_animtree("generic_human");
 
-_id_3A9D() {
+setanims() {
   var_0 = [];
 
   for(var_1 = 0; var_1 < 10; var_1++) {
     var_0[var_1] = spawnStruct();
   }
-  var_0[1]._id_0F59 = % mi17_1_idle;
-  var_0[2]._id_0F59 = % mi17_2_idle;
-  var_0[3]._id_0F59 = % mi17_3_idle;
-  var_0[4]._id_0F59 = % mi17_4_idle;
-  var_0[5]._id_0F59 = % mi17_5_idle;
-  var_0[6]._id_0F59 = % mi17_6_idle;
-  var_0[7]._id_0F59 = % mi17_7_idle;
-  var_0[8]._id_0F59 = % mi17_8_idle;
-  var_0[0]._id_0F59[0] = % helicopter_pilot1_idle;
-  var_0[0]._id_0F59[1] = % helicopter_pilot1_twitch_clickpannel;
-  var_0[0]._id_0F59[2] = % helicopter_pilot1_twitch_lookback;
-  var_0[0]._id_0F59[3] = % helicopter_pilot1_twitch_lookoutside;
-  var_0[0]._id_254D[0] = 500;
-  var_0[0]._id_254D[1] = 100;
-  var_0[0]._id_254D[2] = 100;
-  var_0[0]._id_254D[3] = 100;
-  var_0[0]._id_24F4 = 0;
-  var_0[9]._id_24F4 = 0;
-  var_0[9]._id_0F59[0] = % helicopter_pilot2_idle;
-  var_0[9]._id_0F59[1] = % helicopter_pilot2_twitch_clickpannel;
-  var_0[9]._id_0F59[2] = % helicopter_pilot2_twitch_lookoutside;
-  var_0[9]._id_0F59[3] = % helicopter_pilot2_twitch_radio;
-  var_0[9]._id_254D[0] = 450;
-  var_0[9]._id_254D[1] = 100;
-  var_0[9]._id_254D[2] = 100;
-  var_0[9]._id_254D[3] = 100;
-  var_0[0]._id_24F2 = "tag_driver";
-  var_0[1]._id_24F2 = "tag_detach";
-  var_0[2]._id_24F2 = "tag_detach";
-  var_0[3]._id_24F2 = "tag_detach";
-  var_0[4]._id_24F2 = "tag_detach";
-  var_0[5]._id_24F2 = "tag_detach";
-  var_0[6]._id_24F2 = "tag_detach";
-  var_0[7]._id_24F2 = "tag_detach";
-  var_0[8]._id_24F2 = "tag_detach";
-  var_0[9]._id_24F2 = "tag_passenger";
-  var_0[1]._id_257C = % mi17_1_drop;
-  var_0[2]._id_257C = % mi17_2_drop;
-  var_0[3]._id_257C = % mi17_3_drop;
-  var_0[4]._id_257C = % mi17_4_drop;
-  var_0[5]._id_257C = % mi17_5_drop;
-  var_0[6]._id_257C = % mi17_6_drop;
-  var_0[7]._id_257C = % mi17_7_drop;
-  var_0[8]._id_257C = % mi17_8_drop;
-  var_0[1]._id_259A = "crouch";
-  var_0[2]._id_259A = "crouch";
-  var_0[3]._id_259A = "crouch";
-  var_0[4]._id_259A = "crouch";
-  var_0[5]._id_259A = "crouch";
-  var_0[6]._id_259A = "crouch";
-  var_0[7]._id_259A = "crouch";
-  var_0[8]._id_259A = "crouch";
-  var_0[2]._id_2571 = 1;
-  var_0[3]._id_2571 = 1;
-  var_0[4]._id_2571 = 1;
-  var_0[5]._id_2571 = 1;
-  var_0[6]._id_2571 = 1;
-  var_0[7]._id_2571 = 1;
-  var_0[8]._id_2571 = 1;
-  var_0[2]._id_2592 = % fastrope_fall;
-  var_0[3]._id_2592 = % fastrope_fall;
-  var_0[4]._id_2592 = % fastrope_fall;
-  var_0[5]._id_2592 = % fastrope_fall;
-  var_0[6]._id_2592 = % fastrope_fall;
-  var_0[7]._id_2592 = % fastrope_fall;
-  var_0[8]._id_2592 = % fastrope_fall;
-  var_0[1]._id_2590 = 1;
-  var_0[2]._id_2590 = 1;
-  var_0[3]._id_2590 = 1;
-  var_0[4]._id_2590 = 1;
-  var_0[5]._id_2590 = 1;
-  var_0[6]._id_2590 = 1;
-  var_0[7]._id_2590 = 1;
-  var_0[8]._id_2590 = 1;
-  var_0[1]._id_258D = "fastrope_loop_npc";
-  var_0[2]._id_258D = "fastrope_loop_npc";
-  var_0[3]._id_258D = "fastrope_loop_npc";
-  var_0[4]._id_258D = "fastrope_loop_npc";
-  var_0[5]._id_258D = "fastrope_loop_npc";
-  var_0[6]._id_258D = "fastrope_loop_npc";
-  var_0[7]._id_258D = "fastrope_loop_npc";
-  var_0[8]._id_258D = "fastrope_loop_npc";
-  var_0[1]._id_256A = "TAG_FastRope_RI";
-  var_0[2]._id_256A = "TAG_FastRope_RI";
-  var_0[3]._id_256A = "TAG_FastRope_RI";
-  var_0[4]._id_256A = "TAG_FastRope_RI";
-  var_0[5]._id_256A = "TAG_FastRope_LE";
-  var_0[6]._id_256A = "TAG_FastRope_LE";
-  var_0[7]._id_256A = "TAG_FastRope_LE";
-  var_0[8]._id_256A = "TAG_FastRope_LE";
+  var_0[1].idle = % mi17_1_idle;
+  var_0[2].idle = % mi17_2_idle;
+  var_0[3].idle = % mi17_3_idle;
+  var_0[4].idle = % mi17_4_idle;
+  var_0[5].idle = % mi17_5_idle;
+  var_0[6].idle = % mi17_6_idle;
+  var_0[7].idle = % mi17_7_idle;
+  var_0[8].idle = % mi17_8_idle;
+  var_0[0].idle[0] = % helicopter_pilot1_idle;
+  var_0[0].idle[1] = % helicopter_pilot1_twitch_clickpannel;
+  var_0[0].idle[2] = % helicopter_pilot1_twitch_lookback;
+  var_0[0].idle[3] = % helicopter_pilot1_twitch_lookoutside;
+  var_0[0].idleoccurrence[0] = 500;
+  var_0[0].idleoccurrence[1] = 100;
+  var_0[0].idleoccurrence[2] = 100;
+  var_0[0].idleoccurrence[3] = 100;
+  var_0[0].bhasgunwhileriding = 0;
+  var_0[9].bhasgunwhileriding = 0;
+  var_0[9].idle[0] = % helicopter_pilot2_idle;
+  var_0[9].idle[1] = % helicopter_pilot2_twitch_clickpannel;
+  var_0[9].idle[2] = % helicopter_pilot2_twitch_lookoutside;
+  var_0[9].idle[3] = % helicopter_pilot2_twitch_radio;
+  var_0[9].idleoccurrence[0] = 450;
+  var_0[9].idleoccurrence[1] = 100;
+  var_0[9].idleoccurrence[2] = 100;
+  var_0[9].idleoccurrence[3] = 100;
+  var_0[0].sittag = "tag_driver";
+  var_0[1].sittag = "tag_detach";
+  var_0[2].sittag = "tag_detach";
+  var_0[3].sittag = "tag_detach";
+  var_0[4].sittag = "tag_detach";
+  var_0[5].sittag = "tag_detach";
+  var_0[6].sittag = "tag_detach";
+  var_0[7].sittag = "tag_detach";
+  var_0[8].sittag = "tag_detach";
+  var_0[9].sittag = "tag_passenger";
+  var_0[1].getout = % mi17_1_drop;
+  var_0[2].getout = % mi17_2_drop;
+  var_0[3].getout = % mi17_3_drop;
+  var_0[4].getout = % mi17_4_drop;
+  var_0[5].getout = % mi17_5_drop;
+  var_0[6].getout = % mi17_6_drop;
+  var_0[7].getout = % mi17_7_drop;
+  var_0[8].getout = % mi17_8_drop;
+  var_0[1].getoutstance = "crouch";
+  var_0[2].getoutstance = "crouch";
+  var_0[3].getoutstance = "crouch";
+  var_0[4].getoutstance = "crouch";
+  var_0[5].getoutstance = "crouch";
+  var_0[6].getoutstance = "crouch";
+  var_0[7].getoutstance = "crouch";
+  var_0[8].getoutstance = "crouch";
+  var_0[2].ragdoll_getout_death = 1;
+  var_0[3].ragdoll_getout_death = 1;
+  var_0[4].ragdoll_getout_death = 1;
+  var_0[5].ragdoll_getout_death = 1;
+  var_0[6].ragdoll_getout_death = 1;
+  var_0[7].ragdoll_getout_death = 1;
+  var_0[8].ragdoll_getout_death = 1;
+  var_0[2].ragdoll_fall_anim = % fastrope_fall;
+  var_0[3].ragdoll_fall_anim = % fastrope_fall;
+  var_0[4].ragdoll_fall_anim = % fastrope_fall;
+  var_0[5].ragdoll_fall_anim = % fastrope_fall;
+  var_0[6].ragdoll_fall_anim = % fastrope_fall;
+  var_0[7].ragdoll_fall_anim = % fastrope_fall;
+  var_0[8].ragdoll_fall_anim = % fastrope_fall;
+  var_0[1].rappel_kill_achievement = 1;
+  var_0[2].rappel_kill_achievement = 1;
+  var_0[3].rappel_kill_achievement = 1;
+  var_0[4].rappel_kill_achievement = 1;
+  var_0[5].rappel_kill_achievement = 1;
+  var_0[6].rappel_kill_achievement = 1;
+  var_0[7].rappel_kill_achievement = 1;
+  var_0[8].rappel_kill_achievement = 1;
+  var_0[1].getoutloopsnd = "fastrope_loop_npc";
+  var_0[2].getoutloopsnd = "fastrope_loop_npc";
+  var_0[3].getoutloopsnd = "fastrope_loop_npc";
+  var_0[4].getoutloopsnd = "fastrope_loop_npc";
+  var_0[5].getoutloopsnd = "fastrope_loop_npc";
+  var_0[6].getoutloopsnd = "fastrope_loop_npc";
+  var_0[7].getoutloopsnd = "fastrope_loop_npc";
+  var_0[8].getoutloopsnd = "fastrope_loop_npc";
+  var_0[1].fastroperig = "TAG_FastRope_RI";
+  var_0[2].fastroperig = "TAG_FastRope_RI";
+  var_0[3].fastroperig = "TAG_FastRope_RI";
+  var_0[4].fastroperig = "TAG_FastRope_RI";
+  var_0[5].fastroperig = "TAG_FastRope_LE";
+  var_0[6].fastroperig = "TAG_FastRope_LE";
+  var_0[7].fastroperig = "TAG_FastRope_LE";
+  var_0[8].fastroperig = "TAG_FastRope_LE";
   return _id_3E83(var_0);
 }
 
-_id_3E58() {
+unload_groups() {
   var_0 = [];
   var_0["back"] = [];
   var_0["front"] = [];
@@ -179,13 +179,13 @@ _id_3E84() {
   var_0["TAG_FastRope_LE"] = spawnStruct();
   var_0["TAG_FastRope_LE"].model = "rope_test";
   var_0["TAG_FastRope_LE"].tag = "TAG_FastRope_LE";
-  var_0["TAG_FastRope_LE"]._id_2018 = % mi17_rope_idle_le;
-  var_0["TAG_FastRope_LE"]._id_2577 = % mi17_rope_drop_le;
+  var_0["TAG_FastRope_LE"].idleanim = % mi17_rope_idle_le;
+  var_0["TAG_FastRope_LE"].dropanim = % mi17_rope_drop_le;
   var_0["TAG_FastRope_RI"] = spawnStruct();
   var_0["TAG_FastRope_RI"].model = "rope_test_ri";
   var_0["TAG_FastRope_RI"].tag = "TAG_FastRope_RI";
-  var_0["TAG_FastRope_RI"]._id_2018 = % mi17_rope_idle_ri;
-  var_0["TAG_FastRope_RI"]._id_2577 = % mi17_rope_drop_ri;
+  var_0["TAG_FastRope_RI"].idleanim = % mi17_rope_idle_ri;
+  var_0["TAG_FastRope_RI"].dropanim = % mi17_rope_drop_ri;
   var_1 = getarraykeys(var_0);
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {

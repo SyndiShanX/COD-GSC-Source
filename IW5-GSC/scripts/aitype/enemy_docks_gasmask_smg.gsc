@@ -44,34 +44,34 @@ main() {
 
   switch (codescripts\character::get_random_character(10)) {
     case 0:
-      _id_05CC::main();
+      character/character_chemwar_russian_assault_a::main();
       break;
     case 1:
-      _id_05CD::main();
+      character/character_chemwar_russian_assault_m_b::main();
       break;
     case 2:
-      _id_05CE::main();
+      character/character_chemwar_russian_assault_m_c::main();
       break;
     case 3:
-      _id_05CF::main();
+      character/character_chemwar_russian_assault_m_d::main();
       break;
     case 4:
-      _id_05D0::main();
+      character/character_chemwar_russian_assault_m_e::main();
       break;
     case 5:
-      _id_05D1::main();
+      character/character_chemwar_russian_assault_aa::main();
       break;
     case 6:
-      _id_05D2::main();
+      character/character_chemwar_russian_assault_m_bb::main();
       break;
     case 7:
-      _id_05D3::main();
+      character/character_chemwar_russian_assault_m_cc::main();
       break;
     case 8:
-      _id_05D4::main();
+      character/character_chemwar_russian_assault_m_dd::main();
       break;
     case 9:
-      _id_05D5::main();
+      character/character_chemwar_russian_assault_m_ee::main();
       break;
   }
 }
@@ -81,16 +81,16 @@ spawner() {
 }
 
 precache() {
-  _id_05CC::precache();
-  _id_05CD::precache();
-  _id_05CE::precache();
-  _id_05CF::precache();
-  _id_05D0::precache();
-  _id_05D1::precache();
-  _id_05D2::precache();
-  _id_05D3::precache();
-  _id_05D4::precache();
-  _id_05D5::precache();
+  character/character_chemwar_russian_assault_a::precache();
+  character/character_chemwar_russian_assault_m_b::precache();
+  character/character_chemwar_russian_assault_m_c::precache();
+  character/character_chemwar_russian_assault_m_d::precache();
+  character/character_chemwar_russian_assault_m_e::precache();
+  character/character_chemwar_russian_assault_aa::precache();
+  character/character_chemwar_russian_assault_m_bb::precache();
+  character/character_chemwar_russian_assault_m_cc::precache();
+  character/character_chemwar_russian_assault_m_dd::precache();
+  character/character_chemwar_russian_assault_m_ee::precache();
   precacheitem("p90");
   precacheitem("p90_eotech");
   precacheitem("p90_reflex");

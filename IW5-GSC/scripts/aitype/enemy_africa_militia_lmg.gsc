@@ -32,10 +32,10 @@ main() {
 
   switch (codescripts\character::get_random_character(2)) {
     case 0:
-      _id_5B9B::main();
+      character/character_africa_militia_lmg_a::main();
       break;
     case 1:
-      _id_5B9C::main();
+      character/character_africa_militia_lmg_b::main();
       break;
   }
 }
@@ -45,11 +45,11 @@ spawner() {
 }
 
 precache() {
-  _id_5B9B::precache();
-  _id_5B9C::precache();
+  character/character_africa_militia_lmg_a::precache();
+  character/character_africa_militia_lmg_b::precache();
   precacheitem("m60e4");
   precacheitem("pecheneg");
   precacheitem("glock");
   precacheitem("fraggrenade");
-  _id_05C2::main();
+  maps/_rambo::main();
 }

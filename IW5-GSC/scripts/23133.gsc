@@ -6,5 +6,5 @@
 main() {
   level.tweakfile = 1;
   level.player = getEntArray("player", "classname")[0];
-  _id_5895::main();
+  maps/createart/hijack_fog::main();
 }

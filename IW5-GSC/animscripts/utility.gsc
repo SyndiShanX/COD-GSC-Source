@@ -5,91 +5,91 @@
 
 #using_animtree("generic_human");
 
-_id_2479(var_0) {
+initanimtree(var_0) {
   self clearanim(%body, 0.3);
   self setanim(%body, 1, 0);
 
   if(var_0 != "pain" && var_0 != "death") {
-    self.a._id_0D19 = "none";
+    self.a.special = "none";
   }
-  self._id_247A = 0;
-  self.a._id_0CC3 = 1.0;
-  self.a._id_0CC5 = 1.0;
-  self.a._id_0CC6 = 1.0;
-  self.a._id_0CC7 = 0;
-  self.a._id_0CC8 = 0;
-  _id_0A69();
+  self.missedsightchecks = 0;
+  self.a.aimweight = 1.0;
+  self.a.aimweight_start = 1.0;
+  self.a.aimweight_end = 1.0;
+  self.a.aimweight_transframes = 0;
+  self.a.aimweight_t = 0;
+  isincombat();
 }
 
-_id_247B() {
-  if(isDefined(self._id_247C) && self._id_247C != self.a._id_0D26) {
-    if(self.a._id_0D26 == "prone") {
-      _id_0F7D(0.5);
+updateanimpose() {
+  if(isDefined(self.desired_anim_pose) && self.desired_anim_pose != self.a.pose) {
+    if(self.a.pose == "prone") {
+      exitpronewrapper(0.5);
     }
-    if(self._id_247C == "prone") {
+    if(self.desired_anim_pose == "prone") {
       self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
-      _id_10E1(0.5);
+      enterpronewrapper(0.5);
       self setanimknoball(%prone_aim_5, %body, 1, 0.1, 1);
     }
   }
 
-  self._id_247C = undefined;
+  self.desired_anim_pose = undefined;
 }
 
-_id_0D15(var_0) {
-  if(isDefined(self._id_0D0F)) {
+initialize(var_0) {
+  if(isDefined(self.longdeathstarting)) {
     if(var_0 != "pain" && var_0 != "death") {
       self kill(self.origin);
     }
     if(var_0 != "pain") {
-      self._id_0D0F = undefined;
+      self.longdeathstarting = undefined;
       self notify("kill_long_death");
     }
   }
 
-  if(isDefined(self.a._id_0D6A) && var_0 != "death") {
+  if(isDefined(self.a.mayonlydie) && var_0 != "death") {
     self kill(self.origin);
   }
-  if(isDefined(self.a._id_20AD)) {
-    var_1 = self.a._id_20AD;
-    self.a._id_20AD = undefined;
+  if(isDefined(self.a.postscriptfunc)) {
+    var_1 = self.a.postscriptfunc;
+    self.a.postscriptfunc = undefined;
     [[var_1]](var_0);
   }
 
-  if(var_0 != "combat" && var_0 != "pain" && var_0 != "death" && _id_0C95()) {
-    animscripts\combat::_id_1159(%pistol_stand_switch, 1);
+  if(var_0 != "combat" && var_0 != "pain" && var_0 != "death" && usingsidearm()) {
+    animscripts\combat::switchtolastweapon(%pistol_stand_switch, 1);
   }
   if(var_0 != "combat" && var_0 != "move" && var_0 != "pain") {
-    self.a._id_1111 = undefined;
+    self.a.magicreloadwhenreachenemy = undefined;
   }
   if(var_0 != "death") {
-    self.a._id_0D55 = 0;
+    self.a.nodeath = 0;
   }
-  if(isDefined(self._id_23A0) && (var_0 == "pain" || var_0 == "death" || var_0 == "flashed")) {
-    animscripts\combat_utility::_id_23AA();
+  if(isDefined(self.isholdinggrenade) && (var_0 == "pain" || var_0 == "death" || var_0 == "flashed")) {
+    animscripts\combat_utility::dropgrenade();
   }
-  self._id_23A0 = undefined;
-  animscripts\squadmanager::_id_0A96(var_0);
-  self._id_0CAF = undefined;
-  self._id_0A9D = 0;
-  self._id_0F53 = 0;
-  self._id_0CDD = 0;
-  self.a._id_0F78 = undefined;
-  self.a._id_1019 = gettime();
-  self.a._id_0CE2 = 0;
+  self.isholdinggrenade = undefined;
+  animscripts\squadmanager::aiupdateanimstate(var_0);
+  self.covernode = undefined;
+  self.suppressed = 0;
+  self.isreloading = 0;
+  self.changingcoverpos = 0;
+  self.a.aimidlethread = undefined;
+  self.a.scriptstarttime = gettime();
+  self.a.atconcealmentnode = 0;
 
   if(isDefined(self.node) && (self.node.type == "Conceal Prone" || self.node.type == "Conceal Crouch" || self.node.type == "Conceal Stand")) {
-    self.a._id_0CE2 = 1;
+    self.a.atconcealmentnode = 1;
   }
-  _id_2479(var_0);
-  _id_247B();
+  initanimtree(var_0);
+  updateanimpose();
 }
 
-_id_23F1() {
-  if(isDefined(self._id_0FFE) && self._id_0FFE) {
-    if(_id_0CEA(self.primaryweapon)) {
+getpreferredweapon() {
+  if(isDefined(self.wantshotgun) && self.wantshotgun) {
+    if(isshotgun(self.primaryweapon)) {
       return self.primaryweapon;
-    } else if(_id_0CEA(self.secondaryweapon)) {
+    } else if(isshotgun(self.secondaryweapon)) {
       return self.secondaryweapon;
     }
   }
@@ -97,7 +97,7 @@ _id_23F1() {
   return self.primaryweapon;
 }
 
-_id_247D(var_0, var_1, var_2) {
+badplacer(var_0, var_1, var_2) {
   for(var_3 = 0; var_3 < var_0 * 20; var_3++) {
     for(var_4 = 0; var_4 < 10; var_4++) {
       var_5 = (0, randomint(360), 0);
@@ -109,7 +109,7 @@ _id_247D(var_0, var_1, var_2) {
   }
 }
 
-_id_247E() {
+printdisplaceinfo() {
   self endon("death");
   self notify("displaceprint");
   self endon("displaceprint");
@@ -119,25 +119,25 @@ _id_247E() {
   }
 }
 
-_id_0A69() {
+isincombat() {
   if(self.alertlevelint > 1) {
     return 1;
   }
   if(isDefined(self.enemy)) {
-    self.a._id_20A9 = gettime() + anim._id_20CA + randomint(anim._id_20CB);
+    self.a.combatendtime = gettime() + anim.combatmemorytimeconst + randomint(anim.combatmemorytimerand);
     return 1;
   }
 
-  return self.a._id_20A9 > gettime();
+  return self.a.combatendtime > gettime();
 }
 
-_id_0FB8() {
+getenemyeyepos() {
   if(isDefined(self.enemy)) {
-    self.a._id_247F = self.enemy getshootatpos();
-    self.a._id_20AA = gettime();
-    return self.a._id_247F;
-  } else if(isDefined(self.a._id_20AA) && isDefined(self.a._id_247F) && self.a._id_20AA + 3000 < gettime()) {
-    return self.a._id_247F;
+    self.a.lastenemypos = self.enemy getshootatpos();
+    self.a.lastenemytime = gettime();
+    return self.a.lastenemypos;
+  } else if(isDefined(self.a.lastenemytime) && isDefined(self.a.lastenemypos) && self.a.lastenemytime + 3000 < gettime()) {
+    return self.a.lastenemypos;
   } else {
     var_0 = self getshootatpos();
     var_0 = var_0 + (196 * self.lookforward[0], 196 * self.lookforward[1], 196 * self.lookforward[2]);
@@ -145,8 +145,8 @@ _id_0FB8() {
   }
 }
 
-_id_0F41(var_0) {
-  if(!isDefined(self._id_0C96)) {
+getnodeforwardyaw(var_0) {
+  if(!isDefined(self.heat)) {
     if(var_0.type == "Cover Left") {
       return var_0.angles[1] + 90;
     } else if(var_0.type == "Cover Right") {
@@ -157,17 +157,17 @@ _id_0F41(var_0) {
   return var_0.angles[1];
 }
 
-_id_2480(var_0) {
+getnodeyawtoorigin(var_0) {
   if(isDefined(self.node)) {
-    var_1 = self.node.angles[1] - _id_101A(var_0);
+    var_1 = self.node.angles[1] - getyaw(var_0);
   } else {
-    var_1 = self.angles[1] - _id_101A(var_0);
+    var_1 = self.angles[1] - getyaw(var_0);
   }
   var_1 = angleclamp180(var_1);
   return var_1;
 }
 
-_id_116D() {
+getnodeyawtoenemy() {
   var_0 = undefined;
 
   if(isDefined(self.enemy)) {
@@ -183,21 +183,21 @@ _id_116D() {
   }
 
   if(isDefined(self.node)) {
-    var_2 = self.node.angles[1] - _id_101A(var_0);
+    var_2 = self.node.angles[1] - getyaw(var_0);
   } else {
-    var_2 = self.angles[1] - _id_101A(var_0);
+    var_2 = self.angles[1] - getyaw(var_0);
   }
   var_2 = angleclamp180(var_2);
   return var_2;
 }
 
-_id_113E(var_0) {
-  var_1 = self.angles[1] - _id_101A(var_0);
+getyawtospot(var_0) {
+  var_1 = self.angles[1] - getyaw(var_0);
   var_1 = angleclamp180(var_1);
   return var_1;
 }
 
-_id_0D5C() {
+getyawtoenemy() {
   var_0 = undefined;
 
   if(isDefined(self.enemy)) {
@@ -208,22 +208,22 @@ _id_0D5C() {
     var_0 = self.origin + var_1;
   }
 
-  var_2 = self.angles[1] - _id_101A(var_0);
+  var_2 = self.angles[1] - getyaw(var_0);
   var_2 = angleclamp180(var_2);
   return var_2;
 }
 
-_id_101A(var_0) {
+getyaw(var_0) {
   return vectortoyaw(var_0 - self.origin);
 }
 
-_id_2481(var_0) {
+getyaw2d(var_0) {
   var_1 = vectortoangles((var_0[0], var_0[1], 0) - (self.origin[0], self.origin[1], 0));
   return var_1[1];
 }
 
-_id_2482() {
-  var_0 = self.angles[1] - _id_101A(self.enemy.origin);
+absyawtoenemy() {
+  var_0 = self.angles[1] - getyaw(self.enemy.origin);
   var_0 = angleclamp180(var_0);
 
   if(var_0 < 0) {
@@ -232,8 +232,8 @@ _id_2482() {
   return var_0;
 }
 
-_id_2483() {
-  var_0 = self.angles[1] - _id_2481(self.enemy.origin);
+absyawtoenemy2d() {
+  var_0 = self.angles[1] - getyaw2d(self.enemy.origin);
   var_0 = angleclamp180(var_0);
 
   if(var_0 < 0) {
@@ -242,8 +242,8 @@ _id_2483() {
   return var_0;
 }
 
-_id_2484(var_0) {
-  var_1 = self.angles[1] - _id_101A(var_0);
+absyawtoorigin(var_0) {
+  var_1 = self.angles[1] - getyaw(var_0);
   var_1 = angleclamp180(var_1);
 
   if(var_1 < 0) {
@@ -252,7 +252,7 @@ _id_2484(var_0) {
   return var_1;
 }
 
-_id_2485(var_0) {
+absyawtoangles(var_0) {
   var_1 = self.angles[1] - var_0;
   var_1 = angleclamp180(var_1);
 
@@ -262,69 +262,69 @@ _id_2485(var_0) {
   return var_1;
 }
 
-_id_2486(var_0, var_1) {
+getyawfromorigin(var_0, var_1) {
   var_2 = vectortoangles(var_0 - var_1);
   return var_2[1];
 }
 
-_id_2487(var_0, var_1) {
-  var_2 = self gettagangles(var_0)[1] - _id_2486(var_1, self gettagorigin(var_0));
+getyawtotag(var_0, var_1) {
+  var_2 = self gettagangles(var_0)[1] - getyawfromorigin(var_1, self gettagorigin(var_0));
   var_2 = angleclamp180(var_2);
   return var_2;
 }
 
-_id_244F(var_0) {
-  var_1 = self.angles[1] - _id_101A(var_0);
+getyawtoorigin(var_0) {
+  var_1 = self.angles[1] - getyaw(var_0);
   var_1 = angleclamp180(var_1);
   return var_1;
 }
 
-_id_2488(var_0) {
-  var_1 = self gettagangles("TAG_EYE")[1] - _id_101A(var_0);
+geteyeyawtoorigin(var_0) {
+  var_1 = self gettagangles("TAG_EYE")[1] - getyaw(var_0);
   var_1 = angleclamp180(var_1);
   return var_1;
 }
 
-_id_2489(var_0) {
-  if(isDefined(self._id_0CAF)) {
-    return self._id_0CAF doesnodeallowstance(var_0);
+isstanceallowedwrapper(var_0) {
+  if(isDefined(self.covernode)) {
+    return self.covernode doesnodeallowstance(var_0);
   }
   return self isstanceallowed(var_0);
 }
 
-_id_10AF(var_0) {
+choosepose(var_0) {
   if(!isDefined(var_0)) {
-    var_0 = self.a._id_0D26;
+    var_0 = self.a.pose;
   }
   switch (var_0) {
     case "stand":
-      if(_id_2489("stand")) {
+      if(isstanceallowedwrapper("stand")) {
         var_1 = "stand";
-      } else if(_id_2489("crouch")) {
+      } else if(isstanceallowedwrapper("crouch")) {
         var_1 = "crouch";
-      } else if(_id_2489("prone")) {
+      } else if(isstanceallowedwrapper("prone")) {
         var_1 = "prone";
       } else {
         var_1 = "stand";
       }
       break;
     case "crouch":
-      if(_id_2489("crouch")) {
+      if(isstanceallowedwrapper("crouch")) {
         var_1 = "crouch";
-      } else if(_id_2489("stand")) {
+      } else if(isstanceallowedwrapper("stand")) {
         var_1 = "stand";
-      } else if(_id_2489("prone")) {
+      } else if(isstanceallowedwrapper("prone")) {
         var_1 = "prone";
       } else {
         var_1 = "crouch";
       }
       break;
     case "prone":
-      if(_id_2489("prone")) {
+      if(isstanceallowedwrapper("prone")) {
         var_1 = "prone";
-      } else if(_id_2489("crouch")) {
+      } else if(isstanceallowedwrapper("crouch")) {
         var_1 = "crouch";
-      } else if(_id_2489("stand")) {
+      } else if(isstanceallowedwrapper("stand")) {
         var_1 = "stand";
       } else {
         var_1 = "prone";
@@ -338,17 +338,17 @@ _id_10AF(var_0) {
   return var_1;
 }
 
-_id_0BEE() {
+getclaimednode() {
   var_0 = self.node;
 
-  if(isDefined(var_0) && (self nearnode(var_0) || isDefined(self._id_0CAF) && var_0 == self._id_0CAF)) {
+  if(isDefined(var_0) && (self nearnode(var_0) || isDefined(self.covernode) && var_0 == self.covernode)) {
     return var_0;
   }
   return undefined;
 }
 
-_id_248A() {
-  var_0 = _id_0BEE();
+getnodetype() {
+  var_0 = getclaimednode();
 
   if(isDefined(var_0)) {
     return var_0.type;
@@ -356,8 +356,8 @@ _id_248A() {
   return "none";
 }
 
-_id_2472() {
-  var_0 = _id_0BEE();
+getnodedirection() {
+  var_0 = getclaimednode();
 
   if(isDefined(var_0)) {
     return var_0.angles[1];
@@ -365,8 +365,8 @@ _id_2472() {
   return self.desiredangle;
 }
 
-_id_248B() {
-  var_0 = _id_0BEE();
+getnodeforward() {
+  var_0 = getclaimednode();
 
   if(isDefined(var_0)) {
     return anglesToForward(var_0.angles);
@@ -374,8 +374,8 @@ _id_248B() {
   return anglesToForward(self.angles);
 }
 
-_id_2473() {
-  var_0 = _id_0BEE();
+getnodeorigin() {
+  var_0 = getclaimednode();
 
   if(isDefined(var_0)) {
     return var_0.origin;
@@ -383,17 +383,17 @@ _id_2473() {
   return self.origin;
 }
 
-_id_0D08(var_0, var_1) {
+safemod(var_0, var_1) {
   var_2 = int(var_0) % var_1;
   var_2 = var_2 + var_1;
   return var_2 % var_1;
 }
 
-_id_0D61(var_0) {
+absangleclamp180(var_0) {
   return abs(angleclamp180(var_0));
 }
 
-_id_0FFC(var_0) {
+quadrantanimweights(var_0) {
   var_1 = cos(var_0);
   var_2 = sin(var_0);
   var_3["front"] = 0;
@@ -401,7 +401,7 @@ _id_0FFC(var_0) {
   var_3["back"] = 0;
   var_3["left"] = 0;
 
-  if(isDefined(self._id_241B)) {
+  if(isDefined(self.alwaysrunforward)) {
     var_3["front"] = 1;
     return var_3;
   }
@@ -429,7 +429,7 @@ _id_0FFC(var_0) {
   return var_3;
 }
 
-_id_243A(var_0) {
+getquadrant(var_0) {
   var_0 = angleclamp(var_0);
 
   if(var_0 < 45 || var_0 > 315) {
@@ -444,7 +444,7 @@ _id_243A(var_0) {
   return var_1;
 }
 
-_id_248C(var_0, var_1) {
+isinset(var_0, var_1) {
   for(var_2 = var_1.size - 1; var_2 >= 0; var_2--) {
     if(var_0 == var_1[var_2]) {
       return 1;
@@ -454,25 +454,25 @@ _id_248C(var_0, var_1) {
   return 0;
 }
 
-_id_248D(var_0) {
+playanim(var_0) {
   if(isDefined(var_0)) {
     self setflaggedanimknoballrestart("playAnim", var_0, %root, 1, 0.1, 1);
     var_1 = getanimlength(var_0);
     var_1 = 3 * var_1 + 1;
-    thread _id_248E("time is up", "time is up", var_1);
+    thread notifyaftertime("time is up", "time is up", var_1);
     self waittill("time is up");
     self notify("enddrawstring");
   }
 }
 
-_id_248E(var_0, var_1, var_2) {
+notifyaftertime(var_0, var_1, var_2) {
   self endon("death");
   self endon(var_1);
   wait(var_2);
   self notify(var_0);
 }
 
-_id_248F(var_0) {
+drawstring(var_0) {
   self endon("killanimscript");
   self endon("enddrawstring");
 
@@ -481,7 +481,7 @@ _id_248F(var_0) {
   }
 }
 
-_id_2490(var_0, var_1, var_2, var_3) {
+drawstringtime(var_0, var_1, var_2, var_3) {
   var_4 = var_3 * 20;
 
   for(var_5 = 0; var_5 < var_4; var_5++) {
@@ -489,7 +489,7 @@ _id_2490(var_0, var_1, var_2, var_3) {
   }
 }
 
-_id_2491(var_0) {
+showlastenemysightpos(var_0) {
   self notify("got known enemy2");
   self endon("got known enemy2");
   self endon("death");
@@ -511,61 +511,61 @@ _id_2491(var_0) {
   }
 }
 
-_id_0F8C() {
+hasenemysightpos() {
   if(isDefined(self.node)) {
-    return _id_0F4A() || _id_0F39();
+    return canseeenemyfromexposed() || cansuppressenemyfromexposed();
   } else {
-    return _id_0CE3() || _id_0CF3();
+    return canseeenemy() || cansuppressenemy();
   }
 }
 
-_id_0CEE() {
-  return self._id_199F;
+getenemysightpos() {
+  return self.goodshootpos;
 }
 
-_id_2492() {
-  if(!_id_0F8C()) {
+util_ignorecurrentsightpos() {
+  if(!hasenemysightpos()) {
     return;
   }
-  self._id_2493 = _id_0CEE();
-  self._id_2494 = self.origin;
+  self.ignoresightpos = getenemysightpos();
+  self.ignoreorigin = self.origin;
 }
 
-_id_2495() {
-  if(!_id_0F8C()) {
+util_evaluateknownenemylocation() {
+  if(!hasenemysightpos()) {
     return 0;
   }
   var_0 = self getmuzzlepos();
   var_1 = self getshootatpos() - var_0;
 
-  if(isDefined(self._id_2493) && isDefined(self._id_2494)) {
-    if(distance(self.origin, self._id_2494) < 25) {
+  if(isDefined(self.ignoresightpos) && isDefined(self.ignoreorigin)) {
+    if(distance(self.origin, self.ignoreorigin) < 25) {
       return 0;
     }
   }
 
-  self._id_2493 = undefined;
-  var_2 = self canshoot(_id_0CEE(), var_1);
+  self.ignoresightpos = undefined;
+  var_2 = self canshoot(getenemysightpos(), var_1);
 
   if(!var_2) {
-    self._id_2493 = _id_0CEE();
+    self.ignoresightpos = getenemysightpos();
     return 0;
   }
 
   return 1;
 }
 
-_id_2496() {
+debugtimeout() {
   wait 5;
   self notify("timeout");
 }
 
-_id_2497(var_0, var_1, var_2) {
+debugposinternal(var_0, var_1, var_2) {
   self endon("death");
   self notify("stop debug " + var_0);
   self endon("stop debug " + var_0);
   var_3 = spawnStruct();
-  var_3 thread _id_2496();
+  var_3 thread debugtimeout();
   var_3 endon("timeout");
 
   if(self.enemy.team == "allies") {
@@ -578,19 +578,19 @@ _id_2497(var_0, var_1, var_2) {
   }
 }
 
-_id_2498(var_0, var_1) {
-  thread _id_2497(var_0, var_1, 2.15);
+debugpos(var_0, var_1) {
+  thread debugposinternal(var_0, var_1, 2.15);
 }
 
-_id_2499(var_0, var_1, var_2) {
-  thread _id_2497(var_0, var_1, var_2);
+debugpossize(var_0, var_1, var_2) {
+  thread debugposinternal(var_0, var_1, var_2);
 }
 
-_id_249A(var_0, var_1) {
+debugburstprint(var_0, var_1) {
   var_2 = var_0 / var_1;
   var_3 = undefined;
 
-  if(var_0 == self._id_0CD1) {
+  if(var_0 == self.bulletsinclip) {
     var_3 = "all rounds";
   } else if(var_2 < 0.25) {
     var_3 = "small burst";
@@ -599,11 +599,11 @@ _id_249A(var_0, var_1) {
   } else {
     var_3 = "long burst";
   }
-  thread _id_2499(self.origin + (0, 0, 42), var_3, 1.5);
-  thread _id_2498(self.origin + (0, 0, 60), "Suppressing");
+  thread debugpossize(self.origin + (0, 0, 42), var_3, 1.5);
+  thread debugpos(self.origin + (0, 0, 60), "Suppressing");
 }
 
-_id_249B() {
+printshootproc() {
   self endon("death");
   self notify("stop shoot " + self.export);
   self endon("stop shoot " + self.export);
@@ -615,9 +615,9 @@ _id_249B() {
   }
 }
 
-_id_249C() {}
+printshoot() {}
 
-_id_249D(var_0, var_1, var_2, var_3) {
+showdebugproc(var_0, var_1, var_2, var_3) {
   self endon("death");
   var_4 = var_3 * 20;
 
@@ -626,34 +626,34 @@ _id_249D(var_0, var_1, var_2, var_3) {
   }
 }
 
-_id_249E(var_0, var_1, var_2, var_3) {
-  thread _id_249D(var_0, var_1 + (0, 0, -5), var_2, var_3);
+showdebugline(var_0, var_1, var_2, var_3) {
+  thread showdebugproc(var_0, var_1 + (0, 0, -5), var_2, var_3);
 }
 
-_id_0D5F() {
-  [[anim._id_20D4]]();
+shootenemywrapper() {
+  [[anim.shootenemywrapper_func]]();
 }
 
-_id_249F() {
-  self.a._id_0AA7 = gettime();
-  maps\_gameskill::_id_2310();
+shootenemywrapper_normal() {
+  self.a.lastshoottime = gettime();
+  maps\_gameskill::set_accuracy_based_on_situation();
   self notify("shooting");
   self shoot();
 }
 
-_id_20D3() {
+shootenemywrapper_shootnotify() {
   level notify("an_enemy_shot", self);
-  _id_249F();
+  shootenemywrapper_normal();
 }
 
-_id_2384(var_0) {
+shootposwrapper(var_0) {
   var_1 = bulletspread(self getmuzzlepos(), var_0, 4);
-  self.a._id_0AA7 = gettime();
+  self.a.lastshoottime = gettime();
   self notify("shooting");
   self shoot(1, var_1);
 }
 
-_id_24A0() {
+throwgun() {
   var_0 = spawn("script_model", (0, 0, 0));
   var_0 setModel("temp");
   var_0.origin = self gettagorigin("tag_weapon_right") + (50, 50, 0);
@@ -696,32 +696,32 @@ _id_24A0() {
   var_0 delete();
 }
 
-_id_20CC(var_0) {
-  anim._id_10FA["stand"]["in"] = % casual_stand_idle_trans_in;
-  anim._id_1100["stand"][0][0] = % casual_stand_idle;
-  anim._id_1100["stand"][0][1] = % casual_stand_idle_twitch;
-  anim._id_1100["stand"][0][2] = % casual_stand_idle_twitchb;
-  anim._id_1101["stand"][0][0] = 2;
-  anim._id_1101["stand"][0][1] = 1;
-  anim._id_1101["stand"][0][2] = 1;
-  anim._id_1100["stand"][1][0] = % casual_stand_v2_idle;
-  anim._id_1100["stand"][1][1] = % casual_stand_v2_twitch_radio;
-  anim._id_1100["stand"][1][2] = % casual_stand_v2_twitch_shift;
-  anim._id_1100["stand"][1][3] = % casual_stand_v2_twitch_talk;
-  anim._id_1101["stand"][1][0] = 10;
-  anim._id_1101["stand"][1][1] = 4;
-  anim._id_1101["stand"][1][2] = 7;
-  anim._id_1101["stand"][1][3] = 4;
-  anim._id_1100["stand_cqb"][0][0] = % cqb_stand_idle;
-  anim._id_1100["stand_cqb"][0][1] = % cqb_stand_twitch;
-  anim._id_1101["stand_cqb"][0][0] = 2;
-  anim._id_1101["stand_cqb"][0][1] = 1;
-  anim._id_10FA["crouch"]["in"] = % casual_crouch_idle_in;
-  anim._id_1100["crouch"][0][0] = % casual_crouch_idle;
-  anim._id_1101["crouch"][0][0] = 6;
+setenv(var_0) {
+  anim.idleanimtransition["stand"]["in"] = % casual_stand_idle_trans_in;
+  anim.idleanimarray["stand"][0][0] = % casual_stand_idle;
+  anim.idleanimarray["stand"][0][1] = % casual_stand_idle_twitch;
+  anim.idleanimarray["stand"][0][2] = % casual_stand_idle_twitchb;
+  anim.idleanimweights["stand"][0][0] = 2;
+  anim.idleanimweights["stand"][0][1] = 1;
+  anim.idleanimweights["stand"][0][2] = 1;
+  anim.idleanimarray["stand"][1][0] = % casual_stand_v2_idle;
+  anim.idleanimarray["stand"][1][1] = % casual_stand_v2_twitch_radio;
+  anim.idleanimarray["stand"][1][2] = % casual_stand_v2_twitch_shift;
+  anim.idleanimarray["stand"][1][3] = % casual_stand_v2_twitch_talk;
+  anim.idleanimweights["stand"][1][0] = 10;
+  anim.idleanimweights["stand"][1][1] = 4;
+  anim.idleanimweights["stand"][1][2] = 7;
+  anim.idleanimweights["stand"][1][3] = 4;
+  anim.idleanimarray["stand_cqb"][0][0] = % cqb_stand_idle;
+  anim.idleanimarray["stand_cqb"][0][1] = % cqb_stand_twitch;
+  anim.idleanimweights["stand_cqb"][0][0] = 2;
+  anim.idleanimweights["stand_cqb"][0][1] = 1;
+  anim.idleanimtransition["crouch"]["in"] = % casual_crouch_idle_in;
+  anim.idleanimarray["crouch"][0][0] = % casual_crouch_idle;
+  anim.idleanimweights["crouch"][0][0] = 6;
 }
 
-_id_24A1() {
+personalcoldbreath() {
   var_0 = "TAG_EYE";
   self endon("death");
   self notify("stop personal effect");
@@ -734,8 +734,8 @@ _id_24A1() {
       break;
     }
 
-    if(isDefined(self.a._id_0D2B) && self.a._id_0D2B == "stop") {
-      if(isDefined(self._id_1097) && self._id_1097 == 1) {
+    if(isDefined(self.a.movement) && self.a.movement == "stop") {
+      if(isDefined(self.isindoor) && self.isindoor == 1) {
         continue;
       }
       playFXOnTag(level._effect["cold_breath"], self, var_0);
@@ -747,11 +747,11 @@ _id_24A1() {
   }
 }
 
-_id_24A2() {
+personalcoldbreathstop() {
   self notify("stop personal effect");
 }
 
-_id_24A3() {
+personalcoldbreathspawner() {
   self endon("death");
   self notify("stop personal effect");
   self endon("stop personal effect");
@@ -759,31 +759,31 @@ _id_24A3() {
   for(;;) {
     self waittill("spawned", var_0);
 
-    if(maps\_utility::_id_13AF(var_0)) {
+    if(maps\_utility::spawn_failed(var_0)) {
       continue;
     }
-    var_0 thread _id_24A1();
+    var_0 thread personalcoldbreath();
   }
 }
 
-_id_0F4C() {
-  if(isDefined(self._id_24A4)) {
-    return self._id_24A4;
+issuppressedwrapper() {
+  if(isDefined(self.forcesuppression)) {
+    return self.forcesuppression;
   }
-  if(self.suppressionmeter <= self._id_0CFB) {
+  if(self.suppressionmeter <= self.suppressionthreshold) {
     return 0;
   }
   return self issuppressed();
 }
 
-_id_0F62() {
-  if(self.suppressionmeter <= self._id_0CFB * 0.25) {
+ispartiallysuppressedwrapper() {
+  if(self.suppressionmeter <= self.suppressionthreshold * 0.25) {
     return 0;
   }
   return self issuppressed();
 }
 
-_id_0F8E(var_0) {
+getnodeoffset(var_0) {
   if(isDefined(var_0.offset)) {
     return var_0.offset;
   }
@@ -801,27 +801,27 @@ _id_0F8E(var_0) {
   switch (var_0.type) {
     case "Cover Left":
       if(var_0 gethighestnodestance() == "crouch") {
-        var_8 = _id_24A5(var_9, var_10, var_1);
+        var_8 = calculatenodeoffset(var_9, var_10, var_1);
       } else {
-        var_8 = _id_24A5(var_9, var_10, var_2);
+        var_8 = calculatenodeoffset(var_9, var_10, var_2);
       }
       break;
     case "Cover Right":
       if(var_0 gethighestnodestance() == "crouch") {
-        var_8 = _id_24A5(var_9, var_10, var_3);
+        var_8 = calculatenodeoffset(var_9, var_10, var_3);
       } else {
-        var_8 = _id_24A5(var_9, var_10, var_4);
+        var_8 = calculatenodeoffset(var_9, var_10, var_4);
       }
       break;
     case "Turret":
     case "Cover Stand":
     case "Conceal Stand":
-      var_8 = _id_24A5(var_9, var_10, var_6);
+      var_8 = calculatenodeoffset(var_9, var_10, var_6);
       break;
     case "Cover Crouch Window":
     case "Cover Crouch":
     case "Conceal Crouch":
-      var_8 = _id_24A5(var_9, var_10, var_5);
+      var_8 = calculatenodeoffset(var_9, var_10, var_5);
       break;
   }
 
@@ -829,62 +829,62 @@ _id_0F8E(var_0) {
   return var_0.offset;
 }
 
-_id_24A5(var_0, var_1, var_2) {
+calculatenodeoffset(var_0, var_1, var_2) {
   return var_0 * var_2[0] + var_1 * var_2[1] + (0, 0, var_2[2]);
 }
 
-_id_0CBC() {
+recentlysawenemy() {
   return isDefined(self.enemy) && self seerecently(self.enemy, 5);
 }
 
-_id_0CE3(var_0) {
+canseeenemy(var_0) {
   if(!isDefined(self.enemy)) {
     return 0;
   }
   if(isDefined(var_0) && self cansee(self.enemy, var_0) || self cansee(self.enemy)) {
-    if(!_id_24A6(self getEye(), self.enemy getshootatpos())) {
+    if(!checkpitchvisibility(self getEye(), self.enemy getshootatpos())) {
       return 0;
     }
-    self._id_199F = _id_0FB8();
-    _id_24A7();
+    self.goodshootpos = getenemyeyepos();
+    dontgiveuponsuppressionyet();
     return 1;
   }
 
   return 0;
 }
 
-_id_0F4A() {
+canseeenemyfromexposed() {
   if(!isDefined(self.enemy)) {
-    self._id_199F = undefined;
+    self.goodshootpos = undefined;
     return 0;
   }
 
-  var_0 = _id_0FB8();
+  var_0 = getenemyeyepos();
 
   if(!isDefined(self.node)) {
     var_1 = self cansee(self.enemy);
   } else {
-    var_1 = _id_117A(var_0, self.node);
+    var_1 = canseepointfromexposedatnode(var_0, self.node);
   }
   if(var_1) {
-    self._id_199F = var_0;
-    _id_24A7();
+    self.goodshootpos = var_0;
+    dontgiveuponsuppressionyet();
   } else {}
 
   return var_1;
 }
 
-_id_117A(var_0, var_1) {
+canseepointfromexposedatnode(var_0, var_1) {
   if(var_1.type == "Cover Left" || var_1.type == "Cover Right") {
-    if(!animscripts\corner::_id_244E(var_0, var_1)) {
+    if(!animscripts\corner::canseepointfromexposedatcorner(var_0, var_1)) {
       return 0;
     }
   }
 
-  var_2 = _id_0F8E(var_1);
+  var_2 = getnodeoffset(var_1);
   var_3 = var_1.origin + var_2;
 
-  if(!_id_24A6(var_3, var_0, var_1)) {
+  if(!checkpitchvisibility(var_3, var_0, var_1)) {
     return 0;
   }
   if(!sighttracepassed(var_3, var_0, 0, undefined)) {
@@ -899,9 +899,9 @@ _id_117A(var_0, var_1) {
   return 1;
 }
 
-_id_24A6(var_0, var_1, var_2) {
-  var_3 = self.downaimlimit - anim._id_20A1;
-  var_4 = self.upaimlimit + anim._id_20A1;
+checkpitchvisibility(var_0, var_1, var_2) {
+  var_3 = self.downaimlimit - anim.aimpitchdifftolerance;
+  var_4 = self.upaimlimit + anim.aimpitchdifftolerance;
   var_5 = angleclamp180(vectortoangles(var_1 - var_0)[0]);
 
   if(var_5 > var_4) {
@@ -911,7 +911,7 @@ _id_24A6(var_0, var_1, var_2) {
     if(isDefined(var_2) && var_2.type != "Cover Crouch" && var_2.type != "Conceal Crouch") {
       return 0;
     }
-    if(var_5 < anim._id_0CAD + var_3) {
+    if(var_5 < anim.covercrouchleanpitch + var_3) {
       return 0;
     }
   }
@@ -919,35 +919,35 @@ _id_24A6(var_0, var_1, var_2) {
   return 1;
 }
 
-_id_24A7() {
-  self.a._id_24A8 = 1;
+dontgiveuponsuppressionyet() {
+  self.a.shouldresetgiveuponsuppressiontimer = 1;
 }
 
-_id_24A9() {
-  if(!isDefined(self.a._id_24A8)) {
-    self.a._id_24A8 = 1;
+updategiveuponsuppressiontimer() {
+  if(!isDefined(self.a.shouldresetgiveuponsuppressiontimer)) {
+    self.a.shouldresetgiveuponsuppressiontimer = 1;
   }
-  if(self.a._id_24A8) {
-    self.a._id_24AA = gettime() + randomintrange(15000, 30000);
-    self.a._id_24A8 = 0;
+  if(self.a.shouldresetgiveuponsuppressiontimer) {
+    self.a.giveuponsuppressiontime = gettime() + randomintrange(15000, 30000);
+    self.a.shouldresetgiveuponsuppressiontimer = 0;
   }
 }
 
-_id_24AB(var_0, var_1, var_2) {
+showlines(var_0, var_1, var_2) {
   for(;;) {
     wait 0.05;
     wait 0.05;
   }
 }
 
-_id_24AC() {
+aisuppressai() {
   if(!self canattackenemynode()) {
     return 0;
   }
   var_0 = undefined;
 
   if(isDefined(self.enemy.node)) {
-    var_1 = _id_0F8E(self.enemy.node);
+    var_1 = getnodeoffset(self.enemy.node);
     var_0 = self.enemy.node.origin + var_1;
   } else {
     var_0 = self.enemy getshootatpos();
@@ -961,107 +961,107 @@ _id_24AC() {
     }
   }
 
-  self._id_199F = var_0;
+  self.goodshootpos = var_0;
   return 1;
 }
 
-_id_0F39() {
-  if(!_id_24AD()) {
-    self._id_199F = undefined;
+cansuppressenemyfromexposed() {
+  if(!hassuppressableenemy()) {
+    self.goodshootpos = undefined;
     return 0;
   }
 
   if(!isPlayer(self.enemy)) {
-    return _id_24AC();
+    return aisuppressai();
   }
   if(isDefined(self.node)) {
     if(self.node.type == "Cover Left" || self.node.type == "Cover Right") {
-      if(!animscripts\corner::_id_244E(_id_0FB8(), self.node)) {
+      if(!animscripts\corner::canseepointfromexposedatcorner(getenemyeyepos(), self.node)) {
         return 0;
       }
     }
 
-    var_0 = _id_0F8E(self.node);
+    var_0 = getnodeoffset(self.node);
     var_1 = self.node.origin + var_0;
   } else {
     var_1 = self getmuzzlepos();
   }
-  if(!_id_24A6(var_1, self.lastenemysightpos)) {
+  if(!checkpitchvisibility(var_1, self.lastenemysightpos)) {
     return 0;
   }
-  return _id_24B2(var_1);
+  return findgoodsuppressspot(var_1);
 }
 
-_id_0CF3() {
-  if(!_id_24AD()) {
-    self._id_199F = undefined;
+cansuppressenemy() {
+  if(!hassuppressableenemy()) {
+    self.goodshootpos = undefined;
     return 0;
   }
 
   if(!isPlayer(self.enemy)) {
-    return _id_24AC();
+    return aisuppressai();
   }
   var_0 = self getmuzzlepos();
 
-  if(!_id_24A6(var_0, self.lastenemysightpos)) {
+  if(!checkpitchvisibility(var_0, self.lastenemysightpos)) {
     return 0;
   }
-  return _id_24B2(var_0);
+  return findgoodsuppressspot(var_0);
 }
 
-_id_24AD() {
+hassuppressableenemy() {
   if(!isDefined(self.enemy)) {
     return 0;
   }
   if(!isDefined(self.lastenemysightpos)) {
     return 0;
   }
-  _id_24A9();
+  updategiveuponsuppressiontimer();
 
-  if(gettime() > self.a._id_24AA) {
+  if(gettime() > self.a.giveuponsuppressiontime) {
     return 0;
   }
-  if(!_id_24AF()) {
-    return isDefined(self._id_199F);
+  if(!needrecalculatesuppressspot()) {
+    return isDefined(self.goodshootpos);
   }
   return 1;
 }
 
-_id_24AE(var_0) {
+canseeandshootpoint(var_0) {
   if(!sighttracepassed(self getshootatpos(), var_0, 0, undefined)) {
     return 0;
   }
-  if(self.a._id_0EE4["right"] == "none") {
+  if(self.a.weaponpos["right"] == "none") {
     return 0;
   }
   var_1 = self getmuzzlepos();
   return sighttracepassed(var_1, var_0, 0, undefined);
 }
 
-_id_24AF() {
-  if(isDefined(self._id_199F) && !_id_24AE(self._id_199F)) {
+needrecalculatesuppressspot() {
+  if(isDefined(self.goodshootpos) && !canseeandshootpoint(self.goodshootpos)) {
     return 1;
   }
-  return !isDefined(self._id_24B0) || self._id_24B0 != self.lastenemysightpos || distancesquared(self._id_24B1, self.origin) > 1024;
+  return !isDefined(self.lastenemysightposold) || self.lastenemysightposold != self.lastenemysightpos || distancesquared(self.lastenemysightposselforigin, self.origin) > 1024;
 }
 
-_id_24B2(var_0) {
-  if(!_id_24AF()) {
-    return isDefined(self._id_199F);
+findgoodsuppressspot(var_0) {
+  if(!needrecalculatesuppressspot()) {
+    return isDefined(self.goodshootpos);
   }
   if(isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) > squared(self.enemy.maxvisibledist)) {
-    self._id_199F = undefined;
+    self.goodshootpos = undefined;
     return 0;
   }
 
   if(!sighttracepassed(self getshootatpos(), var_0, 0, undefined)) {
-    self._id_199F = undefined;
+    self.goodshootpos = undefined;
     return 0;
   }
 
-  self._id_24B1 = self.origin;
-  self._id_24B0 = self.lastenemysightpos;
-  var_1 = _id_0FB8();
+  self.lastenemysightposselforigin = self.origin;
+  self.lastenemysightposold = self.lastenemysightpos;
+  var_1 = getenemyeyepos();
   var_2 = bulletTrace(self.lastenemysightpos, var_1, 0, undefined);
   var_3 = var_2["position"];
   var_4 = self.lastenemysightpos - var_3;
@@ -1080,7 +1080,7 @@ _id_24B2(var_0) {
   var_8 = (var_8[0] / var_7, var_8[1] / var_7, var_8[2] / var_7);
   var_7++;
   var_9 = var_3;
-  self._id_199F = undefined;
+  self.goodshootpos = undefined;
   var_10 = 0;
   var_11 = 2;
 
@@ -1095,7 +1095,7 @@ _id_24B2(var_0) {
 
     if(var_13) {
       var_10++;
-      self._id_199F = var_14;
+      self.goodshootpos = var_14;
 
       if(var_12 > 0 && var_10 < var_11 && var_12 < var_7 + var_11 - 1) {
         continue;
@@ -1106,10 +1106,10 @@ _id_24B2(var_0) {
     }
   }
 
-  return isDefined(self._id_199F);
+  return isDefined(self.goodshootpos);
 }
 
-_id_10FF(var_0, var_1) {
+anim_array(var_0, var_1) {
   var_2 = var_0.size;
   var_3 = randomint(var_2);
 
@@ -1138,7 +1138,7 @@ _id_10FF(var_0, var_1) {
   return var_0[var_3];
 }
 
-_id_24B3(var_0, var_1, var_2, var_3, var_4, var_5) {
+print3dtime(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = var_0 / 0.05;
 
   for(var_7 = 0; var_7 < var_6; var_7++) {
@@ -1146,7 +1146,7 @@ _id_24B3(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 }
 
-_id_24B4(var_0, var_1, var_2, var_3, var_4) {
+print3drise(var_0, var_1, var_2, var_3, var_4) {
   var_5 = 100.0;
   var_6 = 0;
   var_0 = var_0 + common_scripts\utility::randomvector(30);
@@ -1157,36 +1157,36 @@ _id_24B4(var_0, var_1, var_2, var_3, var_4) {
   }
 }
 
-_id_24B5(var_0, var_1) {
+crossproduct(var_0, var_1) {
   return var_0[0] * var_1[1] - var_0[1] * var_1[0] > 0;
 }
 
-_id_239F() {
+getgrenademodel() {
   return getweaponmodel(self.grenadeweapon);
 }
 
-_id_24B6(var_0) {
+sawenemymove(var_0) {
   if(!isDefined(var_0)) {
     var_0 = 500;
   }
-  return gettime() - self._id_24B7 < var_0;
+  return gettime() - self.personalsighttime < var_0;
 }
 
-_id_24B8() {
+canthrowgrenade() {
   if(!self.grenadeammo) {
     return 0;
   }
-  if(self._id_20B5) {
+  if(self.script_forcegrenade) {
     return 1;
   }
   return isPlayer(self.enemy);
 }
 
-_id_24B9() {
+usingboltactionweapon() {
   return weaponisboltaction(self.weapon);
 }
 
-_id_24BA(var_0) {
+random_weight(var_0) {
   var_1 = randomint(var_0.size);
 
   if(var_0.size > 1) {
@@ -1211,42 +1211,42 @@ _id_24BA(var_0) {
   return var_1;
 }
 
-_id_24BB(var_0, var_1) {
-  if(!isDefined(anim._id_20D1)) {
-    anim._id_20D1 = [];
+setfootstepeffect(var_0, var_1) {
+  if(!isDefined(anim.optionalstepeffects)) {
+    anim.optionalstepeffects = [];
   }
-  anim._id_20D1[anim._id_20D1.size] = var_0;
+  anim.optionalstepeffects[anim.optionalstepeffects.size] = var_0;
   level._effect["step_" + var_0] = var_1;
 }
 
-_id_24BC(var_0, var_1) {
-  if(!isDefined(anim._id_20D2)) {
-    anim._id_20D2 = [];
+setfootstepeffectsmall(var_0, var_1) {
+  if(!isDefined(anim.optionalstepeffectssmall)) {
+    anim.optionalstepeffectssmall = [];
   }
-  anim._id_20D2[anim._id_20D2.size] = var_0;
+  anim.optionalstepeffectssmall[anim.optionalstepeffectssmall.size] = var_0;
   level._effect["step_small_" + var_0] = var_1;
 }
 
-_id_24BD(var_0, var_1, var_2, var_3, var_4, var_5) {
+setnotetrackeffect(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(var_2)) {
     var_2 = "all";
   }
-  if(!isDefined(level._id_1E89)) {
-    level._id_1E89 = [];
+  if(!isDefined(level._notetrackfx)) {
+    level._notetrackfx = [];
   }
-  level._id_1E89[var_0][var_2] = spawnStruct();
-  level._id_1E89[var_0][var_2].tag = var_1;
-  level._id_1E89[var_0][var_2].fx = var_3;
+  level._notetrackfx[var_0][var_2] = spawnStruct();
+  level._notetrackfx[var_0][var_2].tag = var_1;
+  level._notetrackfx[var_0][var_2].fx = var_3;
 
   if(isDefined(var_4)) {
-    level._id_1E89[var_0][var_2]._id_23FC = var_4;
+    level._notetrackfx[var_0][var_2].sound_prefix = var_4;
   }
   if(isDefined(var_5)) {
-    level._id_1E89[var_0][var_2]._id_23FD = var_5;
+    level._notetrackfx[var_0][var_2].sound_suffix = var_5;
   }
 }
 
-_id_24BE(var_0, var_1) {
+persistentdebugline(var_0, var_1) {
   self endon("death");
   level notify("newdebugline");
   level endon("newdebugline");
@@ -1256,67 +1256,67 @@ _id_24BE(var_0, var_1) {
   }
 }
 
-_id_10E1(var_0) {
-  thread _id_24BF(var_0);
+enterpronewrapper(var_0) {
+  thread enterpronewrapperproc(var_0);
 }
 
-_id_24BF(var_0) {
+enterpronewrapperproc(var_0) {
   self endon("death");
   self notify("anim_prone_change");
   self endon("anim_prone_change");
-  self enterprone(var_0, isDefined(self.a._id_0D29));
+  self enterprone(var_0, isDefined(self.a.onback));
   self waittill("killanimscript");
 
-  if(self.a._id_0D26 != "prone" && !isDefined(self.a._id_0D29)) {
-    self.a._id_0D26 = "prone";
+  if(self.a.pose != "prone" && !isDefined(self.a.onback)) {
+    self.a.pose = "prone";
   }
 }
 
-_id_0F7D(var_0) {
-  thread _id_24C0(var_0);
+exitpronewrapper(var_0) {
+  thread exitpronewrapperproc(var_0);
 }
 
-_id_24C0(var_0) {
+exitpronewrapperproc(var_0) {
   self endon("death");
   self notify("anim_prone_change");
   self endon("anim_prone_change");
   self exitprone(var_0);
   self waittill("killanimscript");
 
-  if(self.a._id_0D26 == "prone") {
-    self.a._id_0D26 = "crouch";
+  if(self.a.pose == "prone") {
+    self.a.pose = "crouch";
   }
 }
 
-_id_0F65() {
-  if(self.a._id_0CE2) {
+canblindfire() {
+  if(self.a.atconcealmentnode) {
     return 0;
   }
-  if(!animscripts\weaponlist::_id_0CCA()) {
+  if(!animscripts\weaponlist::usingautomaticweapon()) {
     return 0;
   }
   if(weaponclass(self.weapon) == "mg") {
     return 0;
   }
-  if(isDefined(self._id_24C1) && self._id_24C1 == 1) {
+  if(isDefined(self.disable_blindfire) && self.disable_blindfire == 1) {
     return 0;
   }
   return 1;
 }
 
-_id_24C2() {
-  if(!_id_0F8C()) {
+canhitsuppressspot() {
+  if(!hasenemysightpos()) {
     return 0;
   }
   var_0 = self getmuzzlepos();
-  return sighttracepassed(var_0, _id_0CEE(), 0, undefined);
+  return sighttracepassed(var_0, getenemysightpos(), 0, undefined);
 }
 
-_id_0FC3(var_0) {
-  return self.a._id_0CA6[var_0];
+moveanim(var_0) {
+  return self.a.moveanimset[var_0];
 }
 
-_id_0F26(var_0, var_1) {
+randomanimoftwo(var_0, var_1) {
   if(randomint(2)) {
     return var_0;
   } else {
@@ -1324,20 +1324,20 @@ _id_0F26(var_0, var_1) {
   }
 }
 
-_id_0D4D(var_0) {
-  return self.a._id_0C6D[var_0];
+animarray(var_0) {
+  return self.a.array[var_0];
 }
 
-_id_0F8D(var_0) {
-  return self.a._id_0C6D[var_0].size > 0;
+animarrayanyexist(var_0) {
+  return self.a.array[var_0].size > 0;
 }
 
-_id_0CA8(var_0) {
-  var_1 = randomint(self.a._id_0C6D[var_0].size);
-  return self.a._id_0C6D[var_0][var_1];
+animarraypickrandom(var_0) {
+  var_1 = randomint(self.a.array[var_0].size);
+  return self.a.array[var_0][var_1];
 }
 
-_id_0C6D(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
+array(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
   var_14 = [];
 
   if(isDefined(var_0)) {
@@ -1411,35 +1411,35 @@ _id_0C6D(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   return var_14;
 }
 
-_id_115A() {
+getaiprimaryweapon() {
   return self.primaryweapon;
 }
 
-_id_24C3() {
+getaisecondaryweapon() {
   return self.secondaryweapon;
 }
 
-_id_24C4() {
+getaisidearmweapon() {
   return self.sidearm;
 }
 
-_id_24C5() {
+getaicurrentweapon() {
   return self.weapon;
 }
 
-_id_1118() {
+usingprimary() {
   return self.weapon == self.primaryweapon && self.weapon != "none";
 }
 
-_id_24C6() {
+usingsecondary() {
   return self.weapon == self.secondaryweapon && self.weapon != "none";
 }
 
-_id_0C95() {
+usingsidearm() {
   return self.weapon == self.sidearm && self.weapon != "none";
 }
 
-_id_24C7() {
+getaicurrentweaponslot() {
   if(self.weapon == self.primaryweapon) {
     return "primary";
   } else if(self.weapon == self.secondaryweapon) {
@@ -1449,19 +1449,19 @@ _id_24C7() {
   } else {}
 }
 
-_id_24C8(var_0) {
+aihasweapon(var_0) {
   if(isDefined(self.weaponinfo[var_0])) {
     return 1;
   }
   return 0;
 }
 
-_id_0F99(var_0) {
+getanimendpos(var_0) {
   var_1 = getmovedelta(var_0, 0, 1);
   return self localtoworldcoords(var_1);
 }
 
-_id_0D2F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+damagelocationisany(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(!isDefined(var_0)) {
     return 0;
   }
@@ -1531,23 +1531,23 @@ _id_0D2F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   return 0;
 }
 
-_id_24C9() {
+usingpistol() {
   return weaponclass(self.weapon) == "pistol";
 }
 
-_id_0BB6() {
+usingrocketlauncher() {
   return weaponclass(self.weapon) == "rocketlauncher";
 }
 
-_id_0F79() {
+usingmg() {
   return weaponclass(self.weapon) == "mg";
 }
 
-_id_2380() {
+usingshotgun() {
   return weaponclass(self.weapon) == "spread";
 }
 
-_id_0EE3() {
+usingriflelikeweapon() {
   var_0 = weaponclass(self.weapon);
 
   switch (var_0) {
@@ -1562,7 +1562,7 @@ _id_0EE3() {
   return 0;
 }
 
-_id_24CA(var_0) {
+ragdolldeath(var_0) {
   self endon("killanimscript");
   var_1 = self.origin;
   var_2 = (0, 0, 0);
@@ -1573,7 +1573,7 @@ _id_24CA(var_0) {
     var_1 = self.origin;
 
     if(self.health == 1) {
-      self.a._id_0D55 = 1;
+      self.a.nodeath = 1;
       self startragdoll();
       self clearanim(var_0, 0.1);
       wait 0.05;
@@ -1584,44 +1584,44 @@ _id_24CA(var_0) {
   }
 }
 
-_id_0CB2() {
-  return isDefined(self._id_109A) && !isDefined(self.grenade);
+shouldcqb() {
+  return isDefined(self.cqbwalking) && !isDefined(self.grenade);
 }
 
-_id_0C98() {
-  return isDefined(self._id_109A);
+iscqbwalking() {
+  return isDefined(self.cqbwalking);
 }
 
-_id_10B9() {
-  return !self.facemotion || isDefined(self._id_109A);
+iscqbwalkingorfacingenemy() {
+  return !self.facemotion || isDefined(self.cqbwalking);
 }
 
-_id_10F0() {
-  self.a._id_10F2 = randomint(2);
+randomizeidleset() {
+  self.a.idleset = randomint(2);
 }
 
-_id_0CEA(var_0) {
+isshotgun(var_0) {
   return weaponclass(var_0) == "spread";
 }
 
-_id_0BEB(var_0) {
+issniperrifle(var_0) {
   return weaponclass(var_0) == "sniper";
 }
 
-_id_0C97() {
+weapon_pump_action_shotgun() {
   return self.weapon != "none" && weaponisboltaction(self.weapon) && weaponclass(self.weapon) == "spread";
 }
 
-_id_1078(var_0, var_1) {
-  var_2 = var_0 % anim._id_20F6;
-  return anim._id_20F7[var_2] % var_1;
+getrandomintfromseed(var_0, var_1) {
+  var_2 = var_0 % anim.randominttablesize;
+  return anim.randominttable[var_2] % var_1;
 }
 
-_id_104B() {
-  if(_id_24C6()) {
+getcurrentweaponslotname() {
+  if(usingsecondary()) {
     return "secondary";
   }
-  if(_id_0C95()) {
+  if(usingsidearm()) {
     return "sidearm";
   }
   return "primary";

@@ -8,7 +8,7 @@ init() {
   var_1 initnotifymessage();
 }
 
-_id_12A9() {}
+monitor_challenges() {}
 
 challenge_targetval(var_0, var_1, var_2) {
   var_3 = tablelookup(var_0, 0, var_1, 6 + (var_2 - 1) * 2);
@@ -77,7 +77,7 @@ buildchallengetableinfo(var_0, var_1) {
   return int(var_2);
 }
 
-_id_12B5() {
+buildchallengeinfo() {
   level.challengeinfo = [];
   var_0 = 0;
   var_0 = var_0 + buildchallengetableinfo("sp/allchallengesTable.csv", 0);
@@ -148,7 +148,7 @@ giverankxpafterwait(var_0, var_1) {
   self endon("death");
   self endon("disconnect");
   wait 0.25;
-  maps\_utility::_id_12BE("challenge", level.challengeinfo[var_0]["reward"][var_1]);
+  maps\_utility::givexp("challenge", level.challengeinfo[var_0]["reward"][var_1]);
 }
 
 processchallenge(var_0, var_1, var_2) {
@@ -191,7 +191,7 @@ processchallenge(var_0, var_1, var_2) {
 }
 
 initnotifymessage() {
-  if(maps\_utility::_id_12C1()) {
+  if(maps\_utility::is_coop()) {
     var_0 = 2.5;
     var_1 = 1.75;
     var_2 = 24;
@@ -240,8 +240,8 @@ initnotifymessage() {
   self.notifyicon.hidewheninmenu = 1;
   self.notifyicon.archived = 0;
   self.notifyicon.alpha = 0;
-  self._id_12C6 = 0;
-  self._id_12C7 = [];
+  self.doingnotify = 0;
+  self.notifyqueue = [];
   self.doingsplash = [];
   self.doingsplash[0] = undefined;
   self.doingsplash[1] = undefined;
