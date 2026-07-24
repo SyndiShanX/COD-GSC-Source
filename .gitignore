@@ -1,2 +1,3 @@
-BO1-GSC/.blitzignore
-/IW7-GSC/Jekyll
+*.blitzignore
+IW7-GSC/Jekyll-GSC
+IW7-GSC/ZT-GSC

@@ -1,7 +1,7 @@
-/**************************************
+/********************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: 4050.gsc
-**************************************/
+ * Script: scripts\mp\maps\mp_parkour\mp_parkour_fx.gsc
+********************************************************/
 
 main() {
   level._effect["vfx_parkour_sun"] = loadfx("vfx/iw7/levels/mp_parkour/vfx_parkour_sun.vfx");

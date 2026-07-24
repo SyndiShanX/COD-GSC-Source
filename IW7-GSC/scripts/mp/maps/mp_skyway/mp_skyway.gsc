@@ -22,8 +22,71 @@ main() {
   thread _id_CDA4("mp_moon_screen_destinations_v2");
   thread _id_5364();
   thread securitymetaldetectors();
-  level.removedspawnpoints = [];
-  level.removedspawnpoints[247] = 1;
+  thread fix_collision();
+  level.modifiedspawnpoints["1339 2045 0"]["mp_koth_spawn"]["remove"] = 1;
+  scripts\mp\spawnlogic::addttlosoverride(589, 1102, 1.0, 1.0);
+  scripts\mp\spawnlogic::addttlosoverride(589, 907, 1.0, 1.0);
+  scripts\mp\spawnlogic::addttlosoverride(589, 908, 1.0, 1.0);
+  scripts\mp\spawnlogic::addttlosoverride(589, 909, 1.0, 1.0);
+  scripts\mp\spawnlogic::addttlosoverride(589, 217, 1.0, 1.0);
+  scripts\mp\spawnlogic::addttlosoverride(589, 218, 1.0, 1.0);
+  scripts\mp\spawnlogic::addttlosoverride(589, 219, 1.0, 1.0);
+  scripts\mp\spawnlogic::addttlosoverride(177, 1102, 1.0, 1.0);
+  scripts\mp\spawnlogic::addttlosoverride(177, 907, 1.0, 1.0);
+  scripts\mp\spawnlogic::addttlosoverride(177, 908, 1.0, 1.0);
+  scripts\mp\spawnlogic::addttlosoverride(177, 909, 1.0, 1.0);
+  scripts\mp\spawnlogic::addttlosoverride(177, 217, 1.0, 1.0);
+  scripts\mp\spawnlogic::addttlosoverride(177, 218, 1.0, 1.0);
+  scripts\mp\spawnlogic::addttlosoverride(177, 219, 1.0, 1.0);
+}
+
+fix_collision() {
+  var_0 = spawn("script_model", (1856, -736, -112));
+  var_0.angles = (0, 0, 180);
+  var_0 setModel("mp_desert_uplink_col_01");
+  var_1 = getEnt("clip32x32x256", "targetname");
+  var_2 = spawn("script_model", (256, -60, -32));
+  var_2.angles = (0, 0, 90);
+  var_2 clonebrushmodeltoscriptmodel(var_1);
+  var_3 = getEnt("clip32x32x256", "targetname");
+  var_4 = spawn("script_model", (368, -60, -32));
+  var_4.angles = (0, 0, 90);
+  var_4 clonebrushmodeltoscriptmodel(var_3);
+  var_5 = getEnt("player256x256x8", "targetname");
+  var_6 = spawn("script_model", (384, -192, 80));
+  var_6.angles = (0, 60, 90);
+  var_6 clonebrushmodeltoscriptmodel(var_5);
+  var_7 = getEnt("player256x256x8", "targetname");
+  var_8 = spawn("script_model", (256, -192, 80));
+  var_8.angles = (0, -60, 90);
+  var_8 clonebrushmodeltoscriptmodel(var_7);
+  var_9 = getEnt("clip64x64x256", "targetname");
+  var_10 = spawn("script_model", (284, 1216, -40));
+  var_10.angles = (0, 0, 90);
+  var_10 clonebrushmodeltoscriptmodel(var_9);
+  var_11 = getEnt("clip64x64x256", "targetname");
+  var_12 = spawn("script_model", (348, 1216, -40));
+  var_12.angles = (0, 0, 90);
+  var_12 clonebrushmodeltoscriptmodel(var_11);
+  var_13 = getEnt("clip64x64x128", "targetname");
+  var_14 = spawn("script_model", (776, 3868, 276));
+  var_14.angles = (0, 0, 0);
+  var_14 clonebrushmodeltoscriptmodel(var_13);
+  var_15 = spawn("script_model", (2520, 1392, -12));
+  var_15.angles = (0, 0, 0);
+  var_15 setModel("mp_skyway_nosight_v1");
+  var_16 = getEnt("clip128x128x256", "targetname");
+  var_17 = spawn("script_model", (88, 2988, 252));
+  var_17.angles = (0, 270, 90);
+  var_17 clonebrushmodeltoscriptmodel(var_16);
+  var_18 = getEnt("player128x128x8", "targetname");
+  var_19 = spawn("script_model", (325, 688, -70));
+  var_19.angles = (0, 0, 0);
+  var_19 clonebrushmodeltoscriptmodel(var_18);
+  var_20 = getEnt("player128x128x8", "targetname");
+  var_21 = spawn("script_model", (328, 560, -70));
+  var_21.angles = (0, 0, 0);
+  var_21 clonebrushmodeltoscriptmodel(var_20);
 }
 
 _id_CDA4(var_0) {
