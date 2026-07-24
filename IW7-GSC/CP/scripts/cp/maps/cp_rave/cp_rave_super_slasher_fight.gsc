@@ -56,8 +56,9 @@ debug_trap_survivor() {
 debug_release_survivor() {
   scripts\engine\utility::flag_set("survivor_released");
 
-  if(!isDefined(level.boat_survivor))
+  if(!isDefined(level.boat_survivor)) {
     level thread scripts\cp\maps\cp_rave\cp_rave_boat::spawn_survivor_on_boat();
+  }
 }
 
 init_get_survivor_to_island() {
@@ -88,13 +89,15 @@ move_lost_and_found(var_0) {
   }
 
   if(var_0 == "island") {
-    if(isDefined(level.lnf_sign))
+    if(isDefined(level.lnf_sign)) {
       level.lnf_sign show();
+    }
 
     level.lnf_struct.origin = (-4679.5, 4989.5, -113.82);
   } else {
-    if(isDefined(level.lnf_sign))
+    if(isDefined(level.lnf_sign)) {
       level.lnf_sign hide();
+    }
 
     level.lnf_struct.origin = level.lnf_struct.og_origin;
   }
@@ -146,8 +149,9 @@ super_slasher_fight() {
   wait 2;
   level notify("ss_intro_finished");
 
-  foreach(var_1 in level.players)
-  var_1 playsoundtoplayer(var_1.vo_prefix + "slasher_super_first", var_1);
+  foreach(var_1 in level.players) {
+    var_1 playsoundtoplayer(var_1.vo_prefix + "slasher_super_first", var_1);
+  }
 
   wait 6;
   level thread unlimited_zombie_spawn();
@@ -173,15 +177,17 @@ watch_for_player_connect() {
   level endon("game_ended");
 
   foreach(var_1 in level.players) {
-    if(var_1 scripts\cp\utility::isteleportenabled())
+    if(var_1 scripts\cp\utility::isteleportenabled()) {
       var_1 scripts\cp\utility::allow_player_teleport(0);
+    }
   }
 
   for(;;) {
     level waittill("connected", var_3);
 
-    if(var_3 scripts\cp\utility::isteleportenabled())
+    if(var_3 scripts\cp\utility::isteleportenabled()) {
       var_3 scripts\cp\utility::allow_player_teleport(0);
+    }
   }
 }
 
@@ -200,13 +206,15 @@ delay_drop_soul_key() {
   drop_soul_key();
 
   foreach(var_1 in level.players) {
-    if(!var_1 scripts\cp\utility::isteleportenabled())
+    if(!var_1 scripts\cp\utility::isteleportenabled()) {
       var_1 scripts\cp\utility::allow_player_teleport(1);
+    }
   }
 
   if(isDefined(level.volumes_before_fight) && level.volumes_before_fight.size > 1) {
-    foreach(var_4 in level.volumes_before_fight)
-    var_4 scripts\cp\zombies\zombies_spawning::make_volume_active();
+    foreach(var_4 in level.volumes_before_fight) {
+      var_4 scripts\cp\zombies\zombies_spawning::make_volume_active();
+    }
   }
 }
 
@@ -336,14 +344,16 @@ activate_trap_trigger(var_0) {
 }
 
 set_memory_trap_state(var_0, var_1) {
-  if(!isDefined(var_0.current_state))
+  if(!isDefined(var_0.current_state)) {
     var_0.current_state = "";
+  }
 
   if(var_0.current_state == var_1) {
     return;
   }
-  if(var_0.current_state != "")
+  if(var_0.current_state != "") {
     stopFXOnTag(level._effect["memory_trap_" + var_0.current_state], var_0, "tag_origin");
+  }
 
   var_0.current_state = var_1;
   playFXOnTag(level._effect["memory_trap_" + var_1], var_0, "tag_origin");
@@ -355,10 +365,11 @@ slasher_in_trap(var_0, var_1) {
 
   for(;;) {
     if(isDefined(level.superslasher)) {
-      if(distance2dsquared(level.superslasher.origin, var_1) <= var_2)
+      if(distance2dsquared(level.superslasher.origin, var_1) <= var_2) {
         activate_initial_weak_spot(var_0);
-      else
+      } else {
         deactivate_initial_weak_spot(var_0);
+      }
     }
 
     scripts\engine\utility::waitframe();
@@ -457,8 +468,9 @@ activate_weak_spots(var_0) {
   var_1 = get_potential_weak_spot_tags();
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(var_2 > 0)
+    if(var_2 > 0) {
       wait 5;
+    }
 
     complete_weak_spot(var_1[var_2], var_0, get_weak_spot_hit_vfx_index(var_2));
   }
@@ -475,8 +487,9 @@ activate_weak_spots(var_0) {
     var_0.bmayshockwave = 1;
     var_0 scripts\aitypes\superslasher\util::requestshockwave();
 
-    if(distance2dsquared(var_0.origin, level.superslashergotogroundspot) > 4096)
+    if(distance2dsquared(var_0.origin, level.superslashergotogroundspot) > 4096) {
       var_0 scripts\aitypes\superslasher\util::dosawsharks();
+    }
   }
 }
 
@@ -612,8 +625,9 @@ delay_change_spawn_loc() {
 }
 
 register_soul_collection_loc(var_0, var_1) {
-  if(!isDefined(level.soul_collection_locs))
+  if(!isDefined(level.soul_collection_locs)) {
     level.soul_collection_locs = [];
+  }
 
   var_2 = spawnStruct();
   var_2.pos = var_0;
@@ -704,26 +718,30 @@ vfx_point_to_trap(var_0) {
 charm_fly_to_trap_loc(var_0) {
   var_1 = var_0.memory_trap_loc;
 
-  foreach(var_3 in level.soul_collection_models)
-  var_3 moveTo(var_1, 1.5);
+  foreach(var_3 in level.soul_collection_models) {
+    var_3 moveTo(var_1, 1.5);
+  }
 
   wait 1.5;
 
   foreach(var_3 in level.soul_collection_models) {
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_3 delete();
+    }
   }
 }
 
 turn_off_charm_state_vfx() {
-  foreach(var_1 in level.soul_collection_models)
-  set_coll_state(var_1, "none");
+  foreach(var_1 in level.soul_collection_models) {
+    set_coll_state(var_1, "none");
+  }
 }
 
 all_soul_charm_full() {
   foreach(var_1 in level.soul_collection_models) {
-    if(var_1.current_collection_state != "full")
+    if(var_1.current_collection_state != "full") {
       return 0;
+    }
   }
 
   return 1;
@@ -765,27 +783,30 @@ move_up(var_0) {
 get_new_coll_state(var_0) {
   var_1 = int(15.0);
 
-  if(var_0 == 30)
+  if(var_0 == 30) {
     return "full";
-  else if(var_0 < 30 && var_0 >= var_1)
+  } else if(var_0 < 30 && var_0 >= var_1) {
     return "medium";
-  else if(var_0 < var_1 && var_0 > 0)
+  } else if(var_0 < var_1 && var_0 > 0) {
     return "small";
-  else
+  } else {
     return "none";
+  }
 }
 
 set_coll_state(var_0, var_1) {
-  if(!isDefined(var_0.current_collection_state))
+  if(!isDefined(var_0.current_collection_state)) {
     var_0.current_collection_state = "";
+  }
 
   if(var_0.current_collection_state == var_1) {
     return;
   }
   var_0 setscriptablepartstate("fx", var_1);
 
-  if(isDefined(var_0.current_state_vfx))
+  if(isDefined(var_0.current_state_vfx)) {
     var_0.current_state_vfx delete();
+  }
 
   var_0.current_collection_state = var_1;
 
@@ -807,8 +828,9 @@ zom_die_soul_mon() {
       var_1 = var_0.pos;
       var_2 = scripts\engine\utility::getclosest(var_1, level.soul_collection_models);
 
-      if(distance2dsquared(var_1, var_2.origin) <= 250000)
+      if(distance2dsquared(var_1, var_2.origin) <= 250000) {
         level thread soul_fly_charm(var_1, var_2);
+      }
 
       scripts\engine\utility::waitframe();
       continue;
@@ -834,16 +856,18 @@ soul_fly_charm(var_0, var_1) {
     var_5 = distance(var_4, var_3);
     var_6 = var_5 / 600;
 
-    if(var_6 < 0.05)
+    if(var_6 < 0.05) {
       var_6 = 0.05;
+    }
 
     var_2 moveTo(var_3, var_6);
     wait 0.05;
 
-    if(isDefined(var_1) && distancesquared(var_2.origin, var_1.origin) > 256)
+    if(isDefined(var_1) && distancesquared(var_2.origin, var_1.origin) > 256) {
       continue;
-    else
+    } else {
       break;
+    }
   }
 
   var_1 notify("soul_collected");
@@ -873,8 +897,9 @@ summon_a_zombie_at(var_0, var_1) {
 play_intro(var_0, var_1, var_2) {
   var_3 = (0, 0, -11);
 
-  if(scripts\engine\utility::is_true(var_2))
+  if(scripts\engine\utility::is_true(var_2)) {
     var_0 scragentsetanimscale(0.0, 1.0);
+  }
 
   var_4 = spawnfx(level._effect["superslasher_summon_zombie_portal"], var_1 + var_3, (0, 0, 1), (1, 0, 0));
   triggerfx(var_4);
@@ -882,8 +907,9 @@ play_intro(var_0, var_1, var_2) {
   var_5 = thread scripts\engine\utility::play_loopsound_in_space("zmb_superslasher_summon_activate_lp", var_1 + var_3);
   var_0 scripts\engine\utility::waittill_any("death", "intro_vignette_done");
 
-  if(scripts\engine\utility::is_true(var_2) && isDefined(var_0))
+  if(scripts\engine\utility::is_true(var_2) && isDefined(var_0)) {
     var_0 scragentsetanimscale(1.0, 1.0);
+  }
 
   playsoundatpos(var_1 + var_3, "zmb_superslasher_summon_deactivate");
   var_5 stoploopsound();
@@ -961,8 +987,9 @@ reg_spawns() {
   level.super_slasher_zombie_spawn_loc = scripts\engine\utility::getStructArray("super_slasher_zombie_spawn_loc", "script_noteworthy");
   var_0 = gettime();
 
-  foreach(var_2 in level.super_slasher_zombie_spawn_loc)
-  var_2.previous_used_time_stamp = var_0;
+  foreach(var_2 in level.super_slasher_zombie_spawn_loc) {
+    var_2.previous_used_time_stamp = var_0;
+  }
 }
 
 get_close_zom_spawn(var_0) {
@@ -991,18 +1018,18 @@ get_zombie_spawn_spot() {
     case "near_player":
       var_0 = get_random_available_player();
 
-      if(isDefined(var_0))
+      if(isDefined(var_0)) {
         return get_close_zom_spawn(var_0.origin);
-      else {
+      } else {
         var_1 = scripts\engine\utility::random(level.super_slasher_zombie_spawn_loc);
         return var_1.origin;
       }
     case "shockwave":
       var_2 = get_least_targeted_player();
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         return get_spawn_shockwave(var_2);
-      else {
+      } else {
         var_1 = scripts\engine\utility::random(level.super_slasher_zombie_spawn_loc);
         return var_1.origin;
       }
@@ -1071,8 +1098,9 @@ get_random_available_player() {
 activate_super_slasher_barrier(var_0) {
   level endon("game_ended");
 
-  if(!isDefined(level.active_super_slasher_barrier_id_list))
+  if(!isDefined(level.active_super_slasher_barrier_id_list)) {
     level.active_super_slasher_barrier_id_list = [];
+  }
 
   var_1 = getEnt("super_slasher_barrier_" + var_0, "targetname");
 
@@ -1160,8 +1188,9 @@ deactivate_all_super_slasher_barriers() {
   if(!isDefined(level.active_super_slasher_barrier_id_list)) {
     return;
   }
-  foreach(var_1 in level.active_super_slasher_barrier_id_list)
-  deactivate_super_slasher_barrier(var_1);
+  foreach(var_1 in level.active_super_slasher_barrier_id_list) {
+    deactivate_super_slasher_barrier(var_1);
+  }
 }
 
 set_zombie_spawning_parameters(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -1261,8 +1290,9 @@ switch_to_sad_face(var_0) {
 drop_soul_key() {
   var_0 = (-4880, 4710, -87);
 
-  if(isDefined(level.soul_key_drop_pos))
+  if(isDefined(level.soul_key_drop_pos)) {
     var_0 = level.soul_key_drop_pos;
+  }
 
   var_1 = spawn("script_model", var_0);
   var_1 setModel("zmb_soul_key_single");
@@ -1368,6 +1398,7 @@ watch_for_revive(var_0) {
   var_0 endon("disconnect");
   var_0 waittill("spawned_player");
 
-  if(scripts\engine\utility::is_true(var_0.unlimited_rave))
+  if(scripts\engine\utility::is_true(var_0.unlimited_rave)) {
     var_0 thread scripts\cp\maps\cp_rave\cp_rave::enter_rave_mode(var_0);
+  }
 }

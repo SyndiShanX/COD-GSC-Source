@@ -7,8 +7,9 @@ _id_C573() {
   level endon("game_ended");
   self endon("disconnect");
 
-  if(!isDefined(level.console))
+  if(!isDefined(level.console)) {
     level.console = getDvar("consoleGame") == "true";
+  }
 
   level.playerviewowner = self;
 
@@ -27,8 +28,9 @@ callback_frontendplayerconnect() {
 }
 
 coming_from_rig_select() {
-  if(!isDefined(level._id_4C01))
+  if(!isDefined(level._id_4C01)) {
     return 0;
+  }
 
   return level._id_4C01 == "rig_select" || level._id_4C01 == "rig_pick" || level._id_4C01 == "rig_trait_select" || level._id_4C01 == "rig_head_select" || level._id_4C01 == "rig_taunt_select";
 }
@@ -135,9 +137,9 @@ _id_12DBB() {
 _id_12E4A() {
   var_0 = undefined;
 
-  if(isDefined(level._id_1641._id_13C27))
+  if(isDefined(level._id_1641._id_13C27)) {
     var_0 = level._id_1641._id_13C27;
-  else {
+  } else {
     var_1 = _id_81A3(level._id_4BF6);
     var_0 = var_1._id_13C27;
   }
@@ -209,10 +211,11 @@ _id_37BA(var_0) {
       frontendscenecameracharacters(0);
       _id_F289(level._id_37B5, level._id_37B5.basecam);
 
-      if(level._id_4C01 == "private_lobby_menu" || level._id_4C01 == "create_a_class")
+      if(level._id_4C01 == "private_lobby_menu" || level._id_4C01 == "create_a_class") {
         thread _id_BD64(level.active_camera, 5000, ::_id_12D9B);
-      else
+      } else {
         scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, 40, level._id_37B5._id_3F70, 0.2, 0.2, ::_id_12DBB);
+      }
 
       level._id_4BF6 = undefined;
       break;
@@ -220,10 +223,11 @@ _id_37BA(var_0) {
       frontendscenecameracharacters(0);
       _id_F289(level._id_37B5, level._id_37B5._id_AEB5);
 
-      if(level._id_4C01 == "create_a_class" || level._id_4C01 == "private_lobby")
+      if(level._id_4C01 == "create_a_class" || level._id_4C01 == "private_lobby") {
         thread _id_BD64(level.active_camera, 5000, ::_id_12D9B);
-      else
+      } else {
         scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, 40, level._id_37B5._id_3F70, 0.2, 0.2, ::_id_12DBB);
+      }
 
       level._id_4BF6 = undefined;
       break;
@@ -236,8 +240,9 @@ _id_37BA(var_0) {
       } else {
         var_2 = 5000;
 
-        if(level._id_4C01 == "mission_team_lobby")
+        if(level._id_4C01 == "mission_team_lobby") {
           var_2 = 600;
+        }
 
         _id_F289(level._id_1641, level._id_1641._id_369A);
         thread _id_BD64(level._id_1641._id_369A, var_2, ::_id_12DBB);
@@ -323,13 +328,14 @@ _id_37BA(var_0) {
       _id_F289(var_1, var_1._id_282B);
       level._id_4BF6 = var_0.index;
 
-      if(level._id_4C01 == "armory")
+      if(level._id_4C01 == "armory") {
         scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, level._id_1641.myfov, level._id_1641._id_3F70, 0.2, 0.2, ::_id_12D9B);
-      else {
-        if(level._id_4C01 == "loadout_select" || level._id_4C01 == "weapon_select")
+      } else {
+        if(level._id_4C01 == "loadout_select" || level._id_4C01 == "weapon_select") {
           var_2 = 5000;
-        else
+        } else {
           var_2 = 100;
+        }
 
         thread _id_BD64(level._id_1641._id_282B, var_2, ::_id_12D9B);
       }
@@ -341,10 +347,11 @@ _id_37BA(var_0) {
       if(isDefined(level._id_4BF6) && level._id_4BF6 == var_0.index) {
         _id_F289(level._id_1641, level._id_1641.basecam);
 
-        if(level._id_4C01 == "barracks")
+        if(level._id_4C01 == "barracks") {
           thread _id_BD64(level._id_1641.basecam, 100, ::_id_12D9B);
-        else
+        } else {
           thread _id_BD64(level._id_1641.basecam, 600, ::_id_12D9B);
+        }
       } else {
         var_1 = _id_81A3(var_0.index);
         _id_F289(var_1, var_1.basecam);
@@ -374,10 +381,11 @@ _id_37BA(var_0) {
       frontendscenecameracharacters(0);
       _id_F289(level.camera_gamebattles_lobby, level.camera_gamebattles_lobby.basecam);
 
-      if(level._id_4C01 == "create_a_class")
+      if(level._id_4C01 == "create_a_class") {
         thread _id_BD64(level.active_camera, 5000, ::_id_12D9B);
-      else
+      } else {
         scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, 40, level.camera_gamebattles_lobby._id_3F70, 0.2, 0.2, ::_id_12DBB);
+      }
 
       level._id_4BF6 = undefined;
       break;
@@ -659,8 +667,9 @@ epictauntlistener() {
       continue;
     }
 
-    if(var_0 == "taunt_reset")
+    if(var_0 == "taunt_reset") {
       scripts\mp\broshot_utilities::respawnclientcharacter();
+    }
   }
 }
 

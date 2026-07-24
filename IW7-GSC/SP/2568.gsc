@@ -37,14 +37,17 @@ resetmisstime_code() {
 }
 
 _id_7FD3() {
-  if(isDefined(self._id_10AB7) && self._id_10AB7)
+  if(isDefined(self._id_10AB7) && self._id_10AB7) {
     return "sprint";
+  }
 
-  if(scripts\anim\utility::_id_FFDB())
+  if(scripts\anim\utility::_id_FFDB()) {
     return "cqb";
+  }
 
-  if(isDefined(self._id_527B))
+  if(isDefined(self._id_527B)) {
     return self._id_527B;
+  }
 
   var_0 = scripts\aitypes\bt_util::bt_getdemeanor();
   return var_0;
@@ -92,20 +95,24 @@ _id_7EFC() {
     var_4 = distancesquared(self.origin, self._blackboard.shootparams.pos);
 
     if(var_4 > 262144 && self _meth_81BF("crouch") && !scripts\engine\utility::actor_is3d() && !scripts\anim\utility_common::isusingsidearm()) {
-      if(sighttracepassed(self.origin + (0, 0, 32), self._blackboard.shootparams.pos, 0, undefined))
+      if(sighttracepassed(self.origin + (0, 0, 32), self._blackboard.shootparams.pos, 0, undefined)) {
         return "crouch";
+      }
     }
   }
 
   for(;;) {
-    if(self _meth_81BF("stand") && var_1)
+    if(self _meth_81BF("stand") && var_1) {
       return "stand";
+    }
 
-    if(self _meth_81BF("crouch") && var_2)
+    if(self _meth_81BF("crouch") && var_2) {
       return "crouch";
+    }
 
-    if(self _meth_81BF("prone") && var_3)
+    if(self _meth_81BF("prone") && var_3) {
       return "prone";
+    }
 
     if(!var_1 || !var_2 || !var_3) {
       var_1 = 1;
@@ -121,38 +128,47 @@ _id_7EFC() {
 }
 
 _id_3DE5() {
-  if(!isDefined(level._id_A936[self.team]))
+  if(!isDefined(level._id_A936[self.team])) {
     return 0;
+  }
 
-  if(scripts\aitypes\combat::_id_10026())
+  if(scripts\aitypes\combat::_id_10026()) {
     return 1;
+  }
 
-  if(gettime() - level._id_A936[self.team] < level._id_18D7)
+  if(gettime() - level._id_A936[self.team] < level._id_18D7) {
     return 0;
+  }
 
-  if(!issentient(self.enemy))
+  if(!issentient(self.enemy)) {
     return 0;
+  }
 
-  if(level._id_18D5[self.team])
+  if(level._id_18D5[self.team]) {
     level._id_18D5[self.team] = 0;
+  }
 
   var_0 = isDefined(self._id_18CC) && self._id_18CC;
 
-  if(!var_0 && getaicount(self.team) < getaicount(self.enemy.team))
+  if(!var_0 && getaicount(self.team) < getaicount(self.enemy.team)) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_2543() {
-  if(!self _meth_81A5(self.enemy.origin))
+  if(!self _meth_81A5(self.enemy.origin)) {
     return 0;
+  }
 
-  if(scripts\anim\utility_common::islongrangeai())
+  if(scripts\anim\utility_common::islongrangeai()) {
     return 0;
+  }
 
-  if(!_id_3DE5())
+  if(!_id_3DE5()) {
     return 0;
+  }
 
   self _meth_80E6(0);
 
@@ -175,28 +191,33 @@ _id_2543() {
 }
 
 _id_2542(var_0) {
-  if(!scripts\aitypes\combat::_id_FFC2())
+  if(!scripts\aitypes\combat::_id_FFC2()) {
     return anim.failure;
+  }
 
   switch (self.bt.instancedata[var_0]) {
     case 0:
-      if(self _meth_8255(32))
+      if(self _meth_8255(32)) {
         return anim.success;
+      }
 
       break;
     case 3:
-      if(self _meth_8255(64))
+      if(self _meth_8255(64)) {
         return anim.success;
+      }
 
       break;
     case 7:
-      if(self _meth_8255(96))
+      if(self _meth_8255(96)) {
         return anim.success;
+      }
 
       break;
     case 11:
-      if(_id_2543())
+      if(_id_2543()) {
         return anim.success;
+      }
 
       break;
     case 15:
@@ -206,8 +227,9 @@ _id_2542(var_0) {
 
   self.bt.instancedata[var_0]++;
 
-  if(self.bt.instancedata[var_0] > 60)
+  if(self.bt.instancedata[var_0] > 60) {
     self.bt.instancedata[var_0] = 0;
+  }
 
   return anim.running;
 }
@@ -217,8 +239,9 @@ _id_81F4() {
 }
 
 _id_12E93() {
-  if(self.unittype == "c6i" || scripts\engine\utility::actor_is3d() || self.team == "neutral")
+  if(self.unittype == "c6i" || scripts\engine\utility::actor_is3d() || self.team == "neutral") {
     return anim.success;
+  }
 
   var_0 = gettime();
 

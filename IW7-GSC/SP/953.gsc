@@ -12,8 +12,9 @@ main() {
   self.voice = "c6";
   self _meth_82C6("c6servo");
 
-  if(issentient(self))
+  if(issentient(self)) {
     self sethitlocdamagetable("locdmgtable/c6_lochit_dmgtable");
+  }
 
   if(issentient(self)) {
     self _meth_849A();

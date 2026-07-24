@@ -39,8 +39,9 @@ simpleaction_begin(var_0) {
 }
 
 simpleaction_tick(var_0) {
-  if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.success;
 }
@@ -66,8 +67,9 @@ dosimpleaction(var_0, var_1) {
 facepoint(var_0, var_1) {
   var_2 = scripts\engine\utility::getyawtospot(var_1);
 
-  if(abs(var_2) < 16)
+  if(abs(var_2) < 16) {
     return 0;
+  }
 
   self.desiredyaw = var_2;
   dosimpleaction_immediate(var_0, "turn");
@@ -97,10 +99,11 @@ planscaledrouteto(var_0) {
   var_9 = var_8 / var_5;
   var_10 = ceil(var_9);
 
-  if(var_10 - var_9 < 0.5)
+  if(var_10 - var_9 < 0.5) {
     var_9 = var_10;
-  else
+  } else {
     var_9 = floor(var_9);
+  }
 
   var_11 = var_5 * var_9;
   var_12 = var_7 + var_11;
@@ -121,26 +124,32 @@ getdesiredmovedirindex(var_0, var_1) {
   var_2 = getyawfrompointtospot(var_0, var_1);
   var_3 = abs(var_2);
 
-  if(var_3 <= 22.5)
+  if(var_3 <= 22.5) {
     return 8;
+  }
 
-  if(var_3 >= 157.5)
+  if(var_3 >= 157.5) {
     return 2;
+  }
 
   if(var_2 > 0) {
-    if(var_2 < 67.5)
+    if(var_2 < 67.5) {
       return 7;
+    }
 
-    if(var_2 < 112.5)
+    if(var_2 < 112.5) {
       return 4;
+    }
 
     return 1;
   } else {
-    if(var_3 < 67.5)
+    if(var_3 < 67.5) {
       return 9;
+    }
 
-    if(var_3 < 112.5)
+    if(var_3 < 112.5) {
       return 6;
+    }
 
     return 2;
   }
@@ -156,8 +165,9 @@ move_begin(var_0) {
 }
 
 move_tick(var_0) {
-  if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.success;
 }
@@ -181,8 +191,9 @@ bomb_begin(var_0) {
 }
 
 bomb_tick(var_0) {
-  if(self.numofspawnrequested > 0)
+  if(self.numofspawnrequested > 0) {
     return anim.running;
+  }
 
   return anim.success;
 }
@@ -198,8 +209,9 @@ spawn_begin(var_0) {
 }
 
 spawn_tick(var_0) {
-  if(self.numofspawnrequested > 0)
+  if(self.numofspawnrequested > 0) {
     return anim.running;
+  }
 
   return anim.success;
 }
@@ -215,8 +227,9 @@ submerge_spawn_begin(var_0) {
 }
 
 submerge_spawn_tick(var_0) {
-  if(self.numofspawnrequested > 0)
+  if(self.numofspawnrequested > 0) {
     return anim.running;
+  }
 
   return anim.success;
 }
@@ -232,8 +245,9 @@ submerge_bomb_begin(var_0) {
 }
 
 submerge_bomb_tick(var_0) {
-  if(self.numofbombrequested > 0)
+  if(self.numofbombrequested > 0) {
     return anim.running;
+  }
 
   return anim.success;
 }
@@ -251,8 +265,9 @@ heal_begin(var_0) {
 }
 
 heal_tick(var_0) {
-  if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.success;
 }
@@ -268,8 +283,9 @@ roar_begin(var_0) {
 }
 
 roar_tick(var_0) {
-  if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.success;
 }
@@ -285,8 +301,9 @@ beam_begin(var_0) {
 }
 
 beam_tick(var_0) {
-  if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   scripts\asm\crab_boss\crab_boss_asm::clearaction();
   return anim.success;
@@ -404,10 +421,11 @@ oncrabbrutesummon(var_0) {
   self.spawnposarray = var_0;
   self.numofspawnrequested = self.spawnposarray.size;
 
-  if(scripts\asm\asm::asm_isinstate("submerge_loop"))
+  if(scripts\asm\asm::asm_isinstate("submerge_loop")) {
     self.nextaction = "submerge_spawn";
-  else
+  } else {
     self.nextaction = "spawn";
+  }
 }
 
 dosubmergespawn() {
@@ -429,16 +447,18 @@ getsubmergebombspawnindex() {
   var_0 = 4;
   var_1 = var_0;
 
-  if(isDefined(level.crab_boss_num_submerge_spawn))
+  if(isDefined(level.crab_boss_num_submerge_spawn)) {
     var_1 = level.crab_boss_num_submerge_spawn;
+  }
 
   var_2 = scripts\cp\maps\cp_town\cp_town_crab_boss_fight::get_num_alive_agent_of_type("crab_mini");
   var_3 = max(0, var_1 - var_2);
   var_4 = scripts\engine\utility::array_randomize([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
   var_5 = [];
 
-  for(var_6 = 0; var_6 < var_3; var_6++)
+  for(var_6 = 0; var_6 < var_3; var_6++) {
     var_5[var_6] = var_4[var_6];
+  }
 
   return var_5;
 }
@@ -540,11 +560,13 @@ interruptcurrentstate() {
 }
 
 decideaction(var_0) {
-  if(isDefined(self.desiredaction))
+  if(isDefined(self.desiredaction)) {
     return anim.success;
+  }
 
-  if(!isDefined(self.nextaction) && isDefined(self.desiredbossmovepos))
+  if(!isDefined(self.nextaction) && isDefined(self.desiredbossmovepos)) {
     self.nextaction = "boss_movement";
+  }
 
   if(isDefined(self.nextaction)) {
     scripts\aitypes\dlc3\bt_action_api::setdesiredaction(var_0, self.nextaction);

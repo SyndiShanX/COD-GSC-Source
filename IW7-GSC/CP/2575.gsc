@@ -19,28 +19,33 @@ canmovefrompointtopoint(var_0, var_1) {
   var_2 = navtrace(var_0, var_1, self, 1);
   var_3 = var_2["fraction"];
 
-  if(var_3 >= self.acceptablemeleefraction)
+  if(var_3 >= self.acceptablemeleefraction) {
     var_4 = 0;
-  else
+  } else {
     var_4 = 1;
+  }
 
   return !var_4;
 }
 
 ismeleevalid(var_0, var_1) {
-  if(scripts\asm\asm_bb::bb_ismissingaleg())
+  if(scripts\asm\asm_bb::bb_ismissingaleg()) {
     return 0;
+  }
 
-  if(!scripts\aitypes\melee::ismeleevalid_common(var_0, var_1))
+  if(!scripts\aitypes\melee::ismeleevalid_common(var_0, var_1)) {
     return 0;
+  }
 
   var_2 = scripts\aitypes\melee::gettargetchargepos(var_0);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return 0;
+  }
 
-  if(!canmovefrompointtopoint(self.origin, var_2))
+  if(!canmovefrompointtopoint(self.origin, var_2)) {
     return 0;
+  }
 
   return 1;
 }

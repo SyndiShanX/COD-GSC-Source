@@ -32,8 +32,9 @@ _id_798A(var_0, var_1, var_2) {
 
   foreach(var_5 in var_3) {
     if(isDefined(var_5._id_EE52)) {
-      if(var_5._id_EE52 == var_2)
+      if(var_5._id_EE52 == var_2) {
         return var_5;
+      }
     }
   }
 }
@@ -102,8 +103,9 @@ _id_7471() {
   var_8 = getEntArray("lgt_bridge_klaxon", "script_noteworthy");
   var_9 = getEnt("lgt_bridge_opsmap", "script_noteworthy");
 
-  if(isDefined(var_9))
+  if(isDefined(var_9)) {
     var_9 thread _id_C6A9();
+  }
 
   level waittill("jump_started");
   scripts\engine\utility::flag_wait("lgt_flag_bridge_armory");
@@ -121,11 +123,13 @@ _id_A244() {
 _id_620F(var_0, var_1) {
   var_2 = var_0;
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0.5;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   scripts\sp\lights::_id_AB83(10, 0.5);
   thread _id_E707(var_0, var_1);
@@ -140,11 +144,13 @@ _id_E707(var_0, var_1) {
   self endon("kill_klaxon");
   var_2 = var_0;
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0.5;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   wait(var_1);
 

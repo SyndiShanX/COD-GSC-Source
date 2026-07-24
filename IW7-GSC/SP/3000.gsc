@@ -6,36 +6,41 @@
 _id_7561(var_0, var_1, var_2, var_3) {
   scripts\sp\utility::_id_75CE();
 
-  if(!isDefined(self._id_7560))
+  if(!isDefined(self._id_7560)) {
     self._id_7560 = [];
+  }
 
   var_4 = spawnStruct();
   var_4.tag = var_1;
   var_4.fx = var_2;
   var_4.on = 0;
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = "";
+  }
 
   var_4.state = var_3;
 
-  if(isDefined(self._id_7560[var_0]))
-    self._id_7560[var_0] = scripts\engine\utility::array_add(self._id_7560[var_0], var_4);
-  else
+  if(isDefined(self._id_7560[var_0])) {
+    self._id_7560[var_0] = ::scripts\engine\utility::array_add(self._id_7560[var_0], var_4);
+  } else {
     self._id_7560[var_0] = [var_4];
+  }
 }
 
 _id_7562(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = var_1;
+  }
 
   var_4 = 1;
 
   while(var_4 < 100) {
     var_5 = var_1 + "_" + var_4;
 
-    if(issubstr(var_1, "00"))
+    if(issubstr(var_1, "00")) {
       var_5 = var_1 + var_4;
+    }
 
     if(scripts\sp\utility::hastag(self.model, var_5)) {
       _id_7561(var_0, var_5, var_2, var_3);
@@ -58,8 +63,9 @@ _id_7564(var_0, var_1, var_2) {
       break;
     }
 
-    if(!self._id_7560[var_0][var_3].on == var_1)
+    if(!self._id_7560[var_0][var_3].on == var_1) {
       _id_119B9(var_0, var_3, var_1, var_2);
+    }
 
     var_3++;
   }
@@ -77,8 +83,9 @@ _id_7563(var_0, var_1) {
     }
 
     if(var_1 != self._id_7560[var_0][var_2].state || !self._id_7560[var_0][var_2].on) {
-      if(self._id_7560[var_0][var_2].on)
+      if(self._id_7560[var_0][var_2].on) {
         _id_119B9(var_0, var_2, 0);
+      }
 
       self._id_7560[var_0][var_2].state = var_1;
       _id_119B9(var_0, var_2, 1);
@@ -91,8 +98,9 @@ _id_7563(var_0, var_1) {
 _id_119B9(var_0, var_1, var_2, var_3) {
   var_4 = self._id_7560[var_0][var_1].fx;
 
-  if(isDefined(self._id_7560[var_0][var_1].state) && self._id_7560[var_0][var_1].state != "")
+  if(isDefined(self._id_7560[var_0][var_1].state) && self._id_7560[var_0][var_1].state != "") {
     var_4 = var_4 + "_" + self._id_7560[var_0][var_1].state;
+  }
 
   var_5 = self._id_7560[var_0][var_1].tag;
 
@@ -103,10 +111,11 @@ _id_119B9(var_0, var_1, var_2, var_3) {
     thread scripts\sp\utility::_id_75C4(var_4, var_5);
     self._id_7560[var_0][var_1].on = 1;
   } else {
-    if(scripts\engine\utility::is_true(var_3))
+    if(scripts\engine\utility::is_true(var_3)) {
       thread scripts\sp\utility::_id_75A0(var_4, var_5);
-    else
+    } else {
       thread scripts\sp\utility::_id_75F8(var_4, var_5);
+    }
 
     self._id_7560[var_0][var_1].on = 0;
   }
@@ -221,14 +230,17 @@ _id_398C(var_0, var_1, var_2, var_3, var_4) {
     return;
   }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "idle";
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "idle";
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "high";
+  }
 
   var_5 = self.origin;
   var_6 = self.angles;
@@ -241,14 +253,15 @@ _id_398C(var_0, var_1, var_2, var_3, var_4) {
   var_7 = scripts\sp\utility::_id_10639("ftl_model", var_5, var_6);
   var_8 = self._id_7482 + "_pre";
 
-  if(isDefined(self._id_7483))
+  if(isDefined(self._id_7483)) {
     var_8 = self._id_7483;
+  }
 
   playFXOnTag(level._effect[var_8], var_7, "tag_ftl_ship_origin");
 
-  if(isDefined(self._id_7475))
+  if(isDefined(self._id_7475)) {
     wait(self._id_7475);
-  else {
+  } else {
     wait 2;
     var_7 scripts\sp\anim::_id_1F35(var_7, "ftl_in");
     wait 0.1;
@@ -261,20 +274,23 @@ _id_398C(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(self.script_team) && self.script_team == "allies") {
     if(soundexists("capitalship_npc_ally_ftl_in")) {
-      if(isDefined(var_3))
+      if(isDefined(var_3)) {
         var_3 playSound("capitalship_npc_ally_ftl_in");
-      else
+      } else {
         self playSound("capitalship_npc_ally_ftl_in");
+      }
     }
   } else if(soundexists("capitalship_npc_enemy_ftl_in")) {
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_3 playSound("capitalship_npc_enemy_ftl_in");
-    else
+    } else {
       self playSound("capitalship_npc_enemy_ftl_in");
+    }
   }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     self vehicle_teleport(var_5, var_6);
+  }
 
   self show();
   _id_0BB6::_id_39EE(0);
@@ -287,16 +303,19 @@ _id_398C(var_0, var_1, var_2, var_3, var_4) {
   thread _id_749C(var_4);
   var_7 thread _id_4080(0.7);
 
-  if(isDefined(level._effect[self._id_7482 + "_in"]))
+  if(isDefined(level._effect[self._id_7482 + "_in"])) {
     playFXOnTag(level._effect[self._id_7482 + "_in"], self, "tag_origin");
+  }
 
-  if(isDefined(level._effect[var_8 + "_post"]))
+  if(isDefined(level._effect[var_8 + "_post"])) {
     playFXOnTag(level._effect[var_8 + "_post"], self, "tag_origin");
+  }
 }
 
 _id_398E(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 0;
+  }
 
   var_5 = getEnt(var_0, "targetname");
   var_6 = var_5 _id_3990(var_1, var_2, var_3, var_4);
@@ -314,11 +333,13 @@ _id_3990(var_0, var_1, var_2, var_3) {
   var_4 hide();
   var_4 _id_398C(var_0, var_1, var_2, undefined, var_3);
 
-  if(isDefined(var_4.target) && isDefined(getvehiclenode(var_4.target, "targetname")))
+  if(isDefined(var_4.target) && isDefined(getvehiclenode(var_4.target, "targetname"))) {
     var_4 startpath();
+  }
 
-  if(!isDefined(var_4.turrets) || isDefined(var_4.turrets) && var_4.turrets.size == 0)
+  if(!isDefined(var_4.turrets) || isDefined(var_4.turrets) && var_4.turrets.size == 0) {
     var_4 _id_0BB6::_id_39E8();
+  }
 
   return var_4;
 }
@@ -342,17 +363,18 @@ _id_3991(var_0) {
   thread _id_749C();
 
   if(!scripts\engine\utility::is_true(var_0)) {
-    if(soundexists("capitalship_npc_ally_ftl_out"))
+    if(soundexists("capitalship_npc_ally_ftl_out")) {
       self playSound("capitalship_npc_ally_ftl_out");
-    else {}
+    } else {}
   }
 
   var_1 thread _id_4080(1);
 }
 
 _id_7491() {
-  if(scripts\engine\utility::is_true(self._id_7479))
+  if(scripts\engine\utility::is_true(self._id_7479)) {
     killfxontag(level._effect["vfx_vehicle_mons_warp_out_ftldrive_core"], self, "TAG_ORIGIN");
+  }
 
   _id_39CD("off_kill");
   _id_39D0("off_kill");
@@ -367,8 +389,9 @@ _id_7491() {
     }
   }
 
-  if(isDefined(self._id_B55A))
+  if(isDefined(self._id_B55A)) {
     self._id_B55A hide();
+  }
 
   _id_0BB6::_id_39EE(1);
   _id_397D();
@@ -377,12 +400,13 @@ _id_7491() {
 }
 
 _id_749C(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
-  if(isDefined(self._id_749D))
+  if(isDefined(self._id_749D)) {
     self[[self._id_749D]]();
-  else {
+  } else {
     earthquake(0.8, 0.5, level.player.origin, 5000);
 
     if(var_0) {
@@ -406,8 +430,9 @@ _id_4080(var_0) {
 }
 
 _id_398F(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_2 = scripts\sp\utility::_id_10808();
   var_2 _id_39CD("off");
@@ -417,10 +442,11 @@ _id_398F(var_0, var_1) {
   var_2 hide();
   var_2._id_74A6 = 1;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_2 scripts\engine\utility::delaythread(var_0, ::_id_398D, var_1);
-  else
+  } else {
     var_2 thread _id_398D(var_1);
+  }
 
   return var_2;
 }
@@ -439,8 +465,9 @@ _id_398D(var_0) {
   var_4 = scripts\engine\utility::spawn_tag_origin(self.origin, self.angles);
 
   if(isDefined(self.script_team) && self.script_team == "allies") {
-    if(soundexists("capitalship_npc_ally_ftl_in"))
+    if(soundexists("capitalship_npc_ally_ftl_in")) {
       self playSound("capitalship_npc_ally_ftl_in");
+    }
   } else if(soundexists("capitalship_npc_enemy_ftl_in"))
     self playSound("capitalship_npc_enemy_ftl_in");
 
@@ -475,25 +502,29 @@ _id_397F(var_0, var_1) {
   if(!isDefined(self._id_539B) && (var_0 || var_1)) {
     return;
   }
-  if(isDefined(var_0) && var_0 && isDefined(self._id_539B[0]))
+  if(isDefined(var_0) && var_0 && isDefined(self._id_539B[0])) {
     thread _id_16C4(self._id_539B[0], 0);
+  }
 
   if(isDefined(var_1) && var_1) {
-    if(isDefined(self._id_EF3C) && isDefined(self._id_539B[2]))
+    if(isDefined(self._id_EF3C) && isDefined(self._id_539B[2])) {
       thread _id_16C4(self._id_539B[2], 2);
-    else if(isDefined(self._id_539B[1]))
+    } else if(isDefined(self._id_539B[1])) {
       thread _id_16C4(self._id_539B[1], 1);
+    }
   }
 }
 
 _id_39AE() {
-  if(isDefined(self._id_539A))
+  if(isDefined(self._id_539A)) {
     thread _id_16C4(self._id_539A, 4);
+  }
 }
 
 _id_16C4(var_0, var_1) {
-  if(!isDefined(self._id_539C))
+  if(!isDefined(self._id_539C)) {
     self._id_539C = [];
+  }
 
   if(isDefined(self._id_539C[var_1])) {
     return;
@@ -526,29 +557,33 @@ _id_39C5() {
   if(!isDefined(self._id_EF3C)) {
     return;
   }
-  foreach(var_1 in self._id_EF3C)
-  var_1 delete();
+  foreach(var_1 in self._id_EF3C) {
+    var_1 delete();
+  }
 }
 
 _id_39C6() {
   if(!isDefined(self._id_EF3C)) {
     return;
   }
-  foreach(var_1 in self._id_EF3C)
-  var_1 hide();
+  foreach(var_1 in self._id_EF3C) {
+    var_1 hide();
+  }
 }
 
 _id_39C8() {
   if(!isDefined(self._id_EF3C)) {
     return;
   }
-  foreach(var_1 in self._id_EF3C)
-  var_1 show();
+  foreach(var_1 in self._id_EF3C) {
+    var_1 show();
+  }
 }
 
 _id_9B82() {
-  if(scripts\engine\utility::is_true(self._id_9B82))
+  if(scripts\engine\utility::is_true(self._id_9B82)) {
     return 1;
+  }
 
   return 0;
 }
@@ -558,8 +593,9 @@ _id_39BB() {
 
   foreach(var_1 in self._id_8B4F) {
     foreach(var_3 in var_1) {
-      if(isDefined(var_3) && !isstruct(var_3))
+      if(isDefined(var_3) && !isstruct(var_3)) {
         var_3 notsolid();
+      }
     }
   }
 }
@@ -568,19 +604,22 @@ _id_3980() {
   self dontcastshadows();
 
   if(isDefined(self._id_EF3C)) {
-    foreach(var_1 in self._id_EF3C)
-    var_1 dontcastshadows();
+    foreach(var_1 in self._id_EF3C) {
+      var_1 dontcastshadows();
+    }
   }
 
   if(isDefined(self._id_539C)) {
-    foreach(var_4 in self._id_539C)
-    var_4 dontcastshadows();
+    foreach(var_4 in self._id_539C) {
+      var_4 dontcastshadows();
+    }
   }
 
   foreach(var_7 in self._id_8B4F) {
     foreach(var_9 in var_7) {
-      if(isDefined(var_9) && !isstruct(var_9))
+      if(isDefined(var_9) && !isstruct(var_9)) {
         var_9 dontcastshadows();
+      }
     }
   }
 }

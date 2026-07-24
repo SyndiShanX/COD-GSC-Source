@@ -29,8 +29,9 @@ _id_1E07() {
 
     _id_0EE4::_id_6E5E("ambient_zone_returne");
 
-    if(isDefined(level._id_FDBC) && level._id_FDBC == "rogue")
+    if(isDefined(level._id_FDBC) && level._id_FDBC == "rogue") {
       level thread _id_10A6::_id_888B();
+    }
   }
 }
 
@@ -72,23 +73,27 @@ _id_1E04() {
 }
 
 _id_1E0B() {
-  if(!scripts\engine\utility::flag("shipcrib_prisoner_ambientmr_tr_loaded"))
+  if(!scripts\engine\utility::flag("shipcrib_prisoner_ambientmr_tr_loaded")) {
     scripts\sp\utility::_id_12641("shipcrib_prisoner_ambientmr_tr");
+  }
 }
 
 _id_1E0A() {
-  if(!scripts\engine\utility::flag("shipcrib_prisoner_ambientml_tr_loaded"))
+  if(!scripts\engine\utility::flag("shipcrib_prisoner_ambientml_tr_loaded")) {
     scripts\sp\utility::_id_12641("shipcrib_prisoner_ambientml_tr");
+  }
 }
 
 _id_1E0E() {
-  if(!scripts\engine\utility::flag("shipcrib_prisoner_ambientml_tr_loaded"))
+  if(!scripts\engine\utility::flag("shipcrib_prisoner_ambientml_tr_loaded")) {
     scripts\sp\utility::_id_12641("shipcrib_prisoner_ambientml_tr");
+  }
 }
 
 _id_1E0D() {
-  if(!scripts\engine\utility::flag("shipcrib_prisoner_ambientml_tr_loaded"))
+  if(!scripts\engine\utility::flag("shipcrib_prisoner_ambientml_tr_loaded")) {
     scripts\sp\utility::_id_12641("shipcrib_prisoner_ambientml_tr");
+  }
 }
 
 _id_E46D() {
@@ -118,8 +123,9 @@ _id_8AB5() {
   var_4 hide();
   var_4._id_4348 hide();
 
-  foreach(var_6 in var_2)
-  var_6 hide();
+  foreach(var_6 in var_2) {
+    var_6 hide();
+  }
 
   level thread _id_0EF9::_id_FE03("jackal_cheap", "jackal_bay_1");
   level thread _id_0EF9::_id_FE03("jackal_cheap", "jackal_bay_3");
@@ -428,14 +434,17 @@ _id_8ABD() {
   var_6 = _id_0EFB::_id_FD9C("returndeck_misc_flightcrew");
 
   foreach(var_8 in var_6) {
-    if(var_8._id_1FBB == "phone_guy")
+    if(var_8._id_1FBB == "phone_guy") {
       var_8 detach("equipment_wall_mounted_phone_handset_01", "tag_accessory_right");
+    }
 
-    if(var_8._id_1FBB == "inspector")
+    if(var_8._id_1FBB == "inspector") {
       var_8 detach("p7_desk_metal_military_03_tablet", "tag_inhand");
+    }
 
-    if(isDefined(var_8._id_1EF1))
+    if(isDefined(var_8._id_1EF1)) {
       var_8._id_1EF1 delete();
+    }
   }
 
   _id_0EFB::_id_FDBB("returndeck_misc_flightcrew");
@@ -448,16 +457,18 @@ _id_8ABD() {
   _id_0EFB::_id_FDE8(level._id_FD6E.jackals);
   var_10 = level._id_FD6E._id_5EE3["vehicle_dropship_return"] _id_0BBF::_id_796E();
 
-  foreach(var_12 in var_10)
-  _id_0EFB::_id_FDE7(var_12);
+  foreach(var_12 in var_10) {
+    _id_0EFB::_id_FDE7(var_12);
+  }
 
   _id_0EFB::_id_FDE8(level._id_FD6E._id_5EE3);
   _id_0EFB::_id_FDE8(level._id_FD6E._id_7316);
   var_14 = getEnt("return_deck_towcart", "targetname");
   _id_0EFB::_id_FDE7(var_14);
 
-  foreach(var_16 in level._id_FD6E._id_E416)
-  _id_0EFB::_id_FDE7(var_16);
+  foreach(var_16 in level._id_FD6E._id_E416) {
+    _id_0EFB::_id_FDE7(var_16);
+  }
 
   _id_0EFB::_id_FDE8(level._id_FD6E._id_11A55);
   level thread scripts\sp\utility::_id_12651(["shipcrib_prisoner_hangar_tr", "shipcrib_prisoner_dropship_tr", "shipcrib_prisoner_ambientmr_tr", "shipcrib_prisoner_mezz_tr"]);
@@ -494,14 +505,16 @@ _id_8A8A() {
   var_1 = getEnt("leave_towcart_a_cargo", "targetname");
   var_2 = scripts\engine\utility::array_combine(var_0, [var_1]);
 
-  foreach(var_4 in var_2)
-  var_4 show();
+  foreach(var_4 in var_2) {
+    var_4 show();
+  }
 
   var_6 = getEntArray("return_forklift_a_cargo", "targetname");
 
   if(isDefined(var_6)) {
-    foreach(var_4 in var_6)
-    var_4 delete();
+    foreach(var_4 in var_6) {
+      var_4 delete();
+    }
   }
 
   level thread _id_0EF9::_id_FE03("jackal_cheap", "jackal_bay_1", undefined, undefined, 1);
@@ -806,8 +819,9 @@ _id_AB16() {
   var_0 = scripts\engine\utility::array_combine(var_0, _id_0EFB::_id_FD9C("catwalks_secA"));
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2._id_1DF6))
+    if(isDefined(var_2._id_1DF6)) {
       var_2._id_1DF6 notify("ambient_idle_scene_end");
+    }
   }
 
   _id_0EFB::_id_FDBB("catwalks_armory");
@@ -836,11 +850,13 @@ _id_AB1C() {
     var_5 = _id_0EF8::_id_FE01("spawner_marine", var_2[var_4]);
     var_5 _id_0EFB::_id_FD6F("scar_rally");
 
-    if(isDefined(var_2[var_4]._id_EE52))
+    if(isDefined(var_2[var_4]._id_EE52)) {
       var_5._id_EE52 = var_2[var_4]._id_EE52;
+    }
 
-    if(isDefined(var_2[var_4].script_parameters))
+    if(isDefined(var_2[var_4].script_parameters)) {
       var_5.script_parameters = var_2[var_4].script_parameters;
+    }
 
     var_5 scripts\sp\utility::_id_65E0("enable_arrivals");
     var_5 scripts\sp\utility::_id_65E0("at_elevator");
@@ -924,8 +940,9 @@ _id_8A87() {
 
   foreach(var_1 in _id_0EFB::_id_FD9C("leave_deck_misc")) {
     if(isDefined(var_1._id_1EF2)) {
-      if(isDefined(var_1._id_1EF2._id_4348))
+      if(isDefined(var_1._id_1EF2._id_4348)) {
         var_1._id_1EF2._id_4348 delete();
+      }
 
       var_1._id_1EF2 delete();
     }
@@ -967,6 +984,7 @@ _id_8A87() {
     }
   }
 
-  foreach(var_11 in var_3)
-  _id_0EFB::_id_FDE7(var_11);
+  foreach(var_11 in var_3) {
+    _id_0EFB::_id_FDE7(var_11);
+  }
 }

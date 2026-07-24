@@ -7,35 +7,40 @@ _id_C0E1(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_0 endon("stop_sequencing_notetracks");
   var_0 endon("death");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_6 = var_2;
-  else
+  } else {
     var_6 = self;
+  }
 
   var_7 = undefined;
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_7 = var_4;
-  else
+  } else {
     var_7 = var_0._id_1FBB;
+  }
 
   var_8 = spawnStruct();
   var_8._id_53F2 = [];
   var_9 = [];
 
   if(isDefined(var_7) && isDefined(level._id_EC8D[var_7]) && isDefined(var_3)) {
-    if(isDefined(level._id_EC8D[var_7][var_3]))
+    if(isDefined(level._id_EC8D[var_7][var_3])) {
       var_9[var_3] = level._id_EC8D[var_7][var_3];
+    }
 
-    if(isDefined(level._id_EC8D[var_7]["any"]))
+    if(isDefined(level._id_EC8D[var_7]["any"])) {
       var_9["any"] = level._id_EC8D[var_7]["any"];
+    }
   }
 
   foreach(var_18, var_11 in var_9) {
     foreach(var_13 in level._id_EC8D[var_7][var_18]) {
       foreach(var_15 in var_13) {
-        if(isDefined(var_15["dialog"]))
+        if(isDefined(var_15["dialog"])) {
           var_8._id_53F2[var_15["dialog"]] = 1;
+        }
       }
     }
   }
@@ -59,8 +64,9 @@ _id_C0E1(var_0, var_1, var_2, var_3, var_4, var_5) {
     } else
       var_0 waittill(var_1, var_23);
 
-    if(!isarray(var_23))
+    if(!isarray(var_23)) {
       var_23 = [var_23];
+    }
 
     scripts\anim\utility::validatenotetracks(var_1, var_23, var_5);
     var_24 = undefined;
@@ -68,8 +74,9 @@ _id_C0E1(var_0, var_1, var_2, var_3, var_4, var_5) {
     foreach(var_26 in var_23) {
       _id_C0CC(var_0, var_3, var_26, var_7, var_9, var_6, var_8);
 
-      if(var_26 == "end")
+      if(var_26 == "end") {
         var_24 = 1;
+      }
     }
 
     if(isDefined(var_24)) {
@@ -79,13 +86,15 @@ _id_C0E1(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_C0CC(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(var_2 == "end")
+  if(var_2 == "end") {
     return 1;
+  }
 
   foreach(var_12, var_8 in var_4) {
     if(isDefined(level._id_EC8D[var_3][var_12][var_2])) {
-      foreach(var_10 in level._id_EC8D[var_3][var_12][var_2])
-      _id_1ED8(var_10, var_0, var_6, var_5);
+      foreach(var_10 in level._id_EC8D[var_3][var_12][var_2]) {
+        _id_1ED8(var_10, var_0, var_6, var_5);
+      }
     }
   }
 
@@ -101,15 +110,16 @@ _id_C0DB(var_0) {
   if(var_1 == "ps_") {
     var_2 = getsubstr(var_0, 3);
 
-    if(isDefined(self._id_1EFF))
+    if(isDefined(self._id_1EFF)) {
       self thread[[self._id_1EFF]](var_2, "j_head", 1);
-    else {
+    } else {
       var_3 = strtok(var_2, ",");
 
-      if(var_3.size < 2)
+      if(var_3.size < 2) {
         thread scripts\sp\utility::play_sound_on_tag(var_2, undefined, 1);
-      else
+      } else {
         thread scripts\sp\utility::play_sound_on_tag(var_3[0], var_3[1], 1);
+      }
     }
 
     return 1;
@@ -118,12 +128,13 @@ _id_C0DB(var_0) {
   if(var_1 == "vo_") {
     var_2 = getsubstr(var_0, 3);
 
-    if(isDefined(self._id_1EFF))
+    if(isDefined(self._id_1EFF)) {
       self thread[[self._id_1EFF]](var_2, "j_head", 1);
-    else if(!issentient(self))
+    } else if(!issentient(self)) {
       thread scripts\sp\utility::play_sound_on_tag(var_2, "j_head", 1, var_2);
-    else
+    } else {
       self _meth_824A(var_2, "sounddone", 1);
+    }
 
     return 1;
   }
@@ -211,10 +222,11 @@ _id_C0DB(var_0) {
   if(var_1 == "pip_") {
     var_2 = getsubstr(var_0, 4);
 
-    if(isDefined(self._id_1EFF))
+    if(isDefined(self._id_1EFF)) {
       self thread[[self._id_1EFF]](var_2, "j_head", 1);
-    else
+    } else {
       thread scripts\sp\pip_util::_id_CBA5(var_2);
+    }
 
     return 1;
   }
@@ -297,35 +309,41 @@ _id_7729(var_0, var_1) {
       var_0 _id_0F18::_id_10E8A("set_blind", 0);
       break;
     case "helmet_on":
-      if(!isai(var_0))
+      if(!isai(var_0)) {
         var_0 thread _id_0E4B::_id_8E05();
+      }
 
       break;
     case "helmet_on_visor_up":
-      if(!isai(var_0))
+      if(!isai(var_0)) {
         var_0 thread _id_0E4B::_id_8E05(1);
+      }
 
       break;
     case "helmet_on_visor_up_no_audio":
-      if(!isai(var_0))
+      if(!isai(var_0)) {
         var_0 thread _id_0E4B::_id_8E05(1, undefined, 1);
+      }
 
       break;
     case "helmet_off":
-      if(!isai(var_0))
+      if(!isai(var_0)) {
         var_0 thread _id_0E4B::_id_8E02();
+      }
 
       break;
     case "visor_up":
     case "visor_raise":
-      if(!isai(var_0))
+      if(!isai(var_0)) {
         var_0 thread _id_0E4B::_id_1348D();
+      }
 
       break;
     case "visor_down":
     case "visor_lower":
-      if(!isai(var_0))
+      if(!isai(var_0)) {
         var_0 thread _id_0E4B::_id_13485();
+      }
 
       break;
     case "plr_pull_visor_down_activate_lma_normal_and_clear":
@@ -338,13 +356,15 @@ _id_7729(var_0, var_1) {
       thread _id_0B0B::_id_25C0();
       break;
     case "opsmap_scene_start":
-      if(isDefined(var_0._id_9A30))
+      if(isDefined(var_0._id_9A30)) {
         var_0 thread scripts\sp\interaction::_id_CD50(var_0._id_9A30, var_0._id_C6B8);
+      }
 
       break;
     case "opsmap_scene_end":
-      if(isDefined(var_0._id_9A30))
+      if(isDefined(var_0._id_9A30)) {
         var_0 thread scripts\sp\interaction::_id_9A0F();
+      }
 
       break;
     case "vr_npc_switch_fire_rate":
@@ -354,17 +374,21 @@ _id_7729(var_0, var_1) {
 }
 
 _id_1ED8(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_0["function"]))
+  if(isDefined(var_0["function"])) {
     self thread[[var_0["function"]]](var_1);
+  }
 
-  if(isDefined(var_0["flag"]))
+  if(isDefined(var_0["flag"])) {
     scripts\engine\utility::flag_set(var_0["flag"]);
+  }
 
-  if(isDefined(var_0["flag_clear"]))
+  if(isDefined(var_0["flag_clear"])) {
     scripts\engine\utility::flag_clear(var_0["flag_clear"]);
+  }
 
-  if(isDefined(var_0["notify"]))
+  if(isDefined(var_0["notify"])) {
     level notify(var_0["notify"]);
+  }
 
   if(isDefined(var_0["attach gun left"])) {
     var_1 _id_86DE();
@@ -382,40 +406,46 @@ _id_1ED8(var_0, var_1, var_2, var_3) {
   }
 
   if(isDefined(var_0["attach model"])) {
-    if(isDefined(var_0["selftag"]))
+    if(isDefined(var_0["selftag"])) {
       var_1 attach(var_0["attach model"], var_0["selftag"]);
-    else
+    } else {
       var_3 attach(var_0["attach model"], var_0["tag"]);
+    }
 
     return;
   }
 
   if(isDefined(var_0["detach model"])) {
-    if(isDefined(var_0["selftag"]))
+    if(isDefined(var_0["selftag"])) {
       var_1 detach(var_0["detach model"], var_0["selftag"]);
-    else
+    } else {
       var_3 detach(var_0["detach model"], var_0["tag"]);
+    }
   }
 
   if(isDefined(var_0["sound"])) {
     var_4 = undefined;
 
-    if(!isDefined(var_0["sound_stays_death"]))
+    if(!isDefined(var_0["sound_stays_death"])) {
       var_4 = 1;
+    }
 
     var_5 = undefined;
 
-    if(isDefined(var_0["sound_on_tag"]))
+    if(isDefined(var_0["sound_on_tag"])) {
       var_5 = var_0["sound_on_tag"];
+    }
 
     var_1 thread scripts\sp\utility::play_sound_on_tag(var_0["sound"], var_5, var_4);
   }
 
-  if(isDefined(var_0["playersound"]))
+  if(isDefined(var_0["playersound"])) {
     level.player playSound(var_0["playersound"]);
+  }
 
-  if(isDefined(var_0["playerdialogue"]))
+  if(isDefined(var_0["playerdialogue"])) {
     level.player thread scripts\sp\utility::_id_1034D(var_0["playerdialogue"]);
+  }
 
   if(!var_2._id_54A9) {
     if(isDefined(var_0["dialog"]) && isDefined(var_2._id_53F2[var_0["dialog"]])) {
@@ -425,17 +455,20 @@ _id_1ED8(var_0, var_1, var_2, var_3) {
     }
   }
 
-  if(isDefined(var_0["create model"]))
+  if(isDefined(var_0["create model"])) {
     _id_1E93(var_1, var_0);
-  else if(isDefined(var_0["delete model"]))
+  } else if(isDefined(var_0["delete model"])) {
     _id_1F1E(var_1, var_0);
+  }
 
   if(isDefined(var_0["selftag"])) {
-    if(isDefined(var_0["effect"]))
+    if(isDefined(var_0["effect"])) {
       level thread _id_C0C8(var_1, var_0);
+    }
 
-    if(isDefined(var_0["stop_effect"]))
+    if(isDefined(var_0["stop_effect"])) {
       stopFXOnTag(level._effect[var_0["stop_effect"]], var_1, var_0["selftag"]);
+    }
 
     if(isDefined(var_0["swap_part_to_efx"])) {
       playFXOnTag(level._effect[var_0["swap_part_to_efx"]], var_1, var_0["selftag"]);
@@ -446,31 +479,37 @@ _id_1ED8(var_0, var_1, var_2, var_3) {
       var_6 = undefined;
       var_7 = scripts\engine\utility::getfx(var_0["trace_part_for_efx"]);
 
-      if(isDefined(var_0["trace_part_for_efx_water"]))
+      if(isDefined(var_0["trace_part_for_efx_water"])) {
         var_6 = scripts\engine\utility::getfx(var_0["trace_part_for_efx_water"]);
+      }
 
       var_8 = 0;
 
-      if(isDefined(var_0["trace_part_for_efx_delete_depth"]))
+      if(isDefined(var_0["trace_part_for_efx_delete_depth"])) {
         var_8 = var_0["trace_part_for_efx_delete_depth"];
+      }
 
       var_1 thread _id_11A80(var_0["selftag"], var_7, var_6, var_8);
     }
 
-    if(isDefined(var_0["trace_part_for_efx_canceling"]))
+    if(isDefined(var_0["trace_part_for_efx_canceling"])) {
       var_1 thread _id_11A81(var_0["selftag"]);
+    }
   }
 
-  if(isDefined(var_0["tag"]) && isDefined(var_0["effect"]))
+  if(isDefined(var_0["tag"]) && isDefined(var_0["effect"])) {
     playFXOnTag(level._effect[var_0["effect"]], var_3, var_0["tag"]);
+  }
 
-  if(isDefined(var_0["selftag"]) && isDefined(var_0["effect_looped"]))
+  if(isDefined(var_0["selftag"]) && isDefined(var_0["effect_looped"])) {
     playFXOnTag(level._effect[var_0["effect_looped"]], var_1, var_0["selftag"]);
+  }
 }
 
 _id_1E93(var_0, var_1) {
-  if(!isDefined(var_0._id_EF84))
+  if(!isDefined(var_0._id_EF84)) {
     var_0._id_EF84 = [];
+  }
 
   var_2 = var_0._id_EF84.size;
   var_0._id_EF84[var_2] = spawn("script_model", (0, 0, 0));
@@ -519,8 +558,9 @@ _id_86D5(var_0) {
   var_2 = self gettagangles(var_0["tag"]);
   var_3 = 0;
 
-  if(isDefined(var_0["suspend"]))
+  if(isDefined(var_0["suspend"])) {
     var_3 = var_0["suspend"];
+  }
 
   var_4 = spawn("weapon_" + self.weapon, var_1, var_3);
   var_4.angles = var_2;
@@ -532,13 +572,15 @@ _id_86D5(var_0) {
 _id_C0C8(var_0, var_1) {
   var_2 = isDefined(var_1["moreThanThreeHack"]);
 
-  if(var_2)
+  if(var_2) {
     scripts\engine\utility::lock("moreThanThreeHack");
+  }
 
   playFXOnTag(level._effect[var_1["effect"]], var_0, var_1["selftag"]);
 
-  if(var_2)
+  if(var_2) {
     scripts\engine\utility::unlock("moreThanThreeHack");
+  }
 }
 
 _id_11A81(var_0) {
@@ -564,29 +606,33 @@ _id_11A80(var_0, var_1, var_2, var_3) {
     _id_1173F(var_7);
     scripts\sp\utility::_id_12BDD(var_4);
 
-    if(var_7._id_10E51 == 1 && gettime() - var_7._id_A8EE > 3000)
+    if(var_7._id_10E51 == 1 && gettime() - var_7._id_A8EE > 3000) {
       return;
+    }
   }
 
   if(!isDefined(self)) {
     return;
   }
-  if(isDefined(var_2) && var_7._id_9034)
+  if(isDefined(var_2) && var_7._id_9034) {
     var_1 = var_2;
+  }
 
   playFX(var_1, var_7._id_A8F6);
 
-  if(var_3 == 0)
+  if(var_3 == 0) {
     self hidepart(var_0);
-  else
+  } else {
     thread _id_8ED1(var_7._id_A8F6[2] - var_3, var_0);
+  }
 }
 
 _id_8ED1(var_0, var_1) {
   self endon("entitydeleted");
 
-  while(self gettagorigin(var_1)[2] > var_0)
+  while(self gettagorigin(var_1)[2] > var_0) {
     wait 0.05;
+  }
 
   self hidepart(var_1);
 }
@@ -712,8 +758,9 @@ _id_1697(var_0) {
 }
 
 _id_1754() {
-  if(!isDefined(self._id_1FDC))
+  if(!isDefined(self._id_1FDC)) {
     self._id_1FDC = [];
+  }
 
   var_0 = 0;
 
@@ -724,8 +771,9 @@ _id_1754() {
     }
   }
 
-  if(!var_0)
+  if(!var_0) {
     level._id_1FDC[level._id_1FDC.size] = self;
+  }
 }
 
 _id_6A85(var_0, var_1, var_2) {
@@ -743,10 +791,11 @@ _id_6A85(var_0, var_1, var_2) {
       if(var_6 == "vo_") {
         var_7 = getsubstr(var_5, 3);
 
-        if(!issentient(self))
+        if(!issentient(self)) {
           thread scripts\sp\utility::play_sound_on_tag(var_7, "j_head", 1, var_7);
-        else
+        } else {
           self _meth_824A(var_7, "face_sounddone", 1);
+        }
 
         continue;
       }

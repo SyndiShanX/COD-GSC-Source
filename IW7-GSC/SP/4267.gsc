@@ -14,8 +14,9 @@ _id_404E(var_0) {
   if(isDefined(level._id_1D6B) && isDefined(level._id_1D6B[var_0])) {
     foreach(var_2 in level._id_1D6B[var_0]) {
       if(isarray(var_2)) {
-        foreach(var_4 in var_2)
-        _id_0EFB::_id_FDBA(var_4);
+        foreach(var_4 in var_2) {
+          _id_0EFB::_id_FDBA(var_4);
+        }
 
         continue;
       }
@@ -28,19 +29,22 @@ _id_404E(var_0) {
 }
 
 _id_780D(var_0, var_1) {
-  if(!isDefined(level._id_1D6B))
+  if(!isDefined(level._id_1D6B)) {
     return undefined;
+  }
 
   if(isDefined(var_1) && isDefined(level._id_1D6B[var_1])) {
-    if(isDefined(level._id_1D6B[var_1][var_0]))
+    if(isDefined(level._id_1D6B[var_1][var_0])) {
       return level._id_1D6B[var_1][var_0];
-    else
+    } else {
       return undefined;
+    }
   } else {
     foreach(var_3 in level._id_1D6B) {
       foreach(var_5 in var_3) {
-        if(isDefined(var_5._id_1DCA) && var_5._id_1DCA == var_0)
+        if(isDefined(var_5._id_1DCA) && var_5._id_1DCA == var_0) {
           return var_5;
+        }
       }
     }
   }
@@ -65,12 +69,13 @@ _id_1062F(var_0) {
     var_7._id_1D77 = var_4.animation;
     var_7._id_1EEF = var_4;
 
-    if(isDefined(var_4.script_index))
+    if(isDefined(var_4.script_index)) {
       var_7.index = var_4.script_index;
+    }
 
-    if(isDefined(var_4.script_noteworthy))
+    if(isDefined(var_4.script_noteworthy)) {
       var_8 = var_4.script_noteworthy;
-    else {
+    } else {
       var_2++;
       var_8 = var_4.targetname + "_auto_" + var_2;
     }
@@ -162,8 +167,9 @@ _id_7C87(var_0) {
   if(isDefined(var_0)) {
     var_1 = strtok(var_0, "_");
 
-    if(var_1[var_1.size - 1] == "male" || var_1[var_1.size - 1] == "female")
+    if(var_1[var_1.size - 1] == "male" || var_1[var_1.size - 1] == "female") {
       return var_1[var_1.size - 1];
+    }
   }
 
   return undefined;
@@ -193,22 +199,25 @@ _id_45E9(var_0, var_1) {
 }
 
 _id_780E(var_0, var_1) {
-  if(isDefined(var_0.index) && !isDefined(var_1[var_0.index]))
+  if(isDefined(var_0.index) && !isDefined(var_1[var_0.index])) {
     return var_0.index;
-  else
+  } else {
     return _id_79B8(var_1);
+  }
 }
 
 _id_79B8(var_0) {
   for(var_1 = 0; var_1 == var_1; var_1++) {
-    if(!isDefined(var_0[var_1]))
+    if(!isDefined(var_0[var_1])) {
       return var_1;
+    }
   }
 }
 
 _id_DE95(var_0, var_1) {
-  if(!isDefined(level._id_1D6B))
+  if(!isDefined(level._id_1D6B)) {
     level._id_1D6B = [];
+  }
 
   level._id_1D6B[var_0] = var_1;
 }
@@ -219,21 +228,23 @@ _id_1F5E(var_0, var_1, var_2, var_3) {
   }
   self endon("death");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     scripts\engine\utility::flag_wait(var_2);
+  }
 
   if(isDefined(var_3)) {
-    if(var_3)
+    if(var_3) {
       _id_137C5();
+    }
   }
 
   wait(var_0);
   _id_9867();
 
   if(isDefined(self._id_1D77)) {
-    if(_id_9E86(self._id_1D77))
+    if(_id_9E86(self._id_1D77)) {
       _id_CC81(self._id_1D77, var_0, var_1);
-    else {
+    } else {
       _id_CC7C(self._id_1D77, var_0, var_1);
       _id_404F();
     }
@@ -250,8 +261,9 @@ _id_CC7C(var_0, var_1, var_2) {
   var_3 = getanimlength(scripts\sp\utility::_id_7DC1(var_0));
   self._id_1EEF thread scripts\sp\anim::_id_1EC7(self, var_0);
 
-  if(var_2 > 0)
+  if(var_2 > 0) {
     scripts\engine\utility::delaycall(0.05, ::_meth_82B0, scripts\sp\utility::_id_7DC1(var_0), var_2);
+  }
 
   _id_CE0E(var_2);
   wait(var_3 - var_2 * var_3);
@@ -264,10 +276,11 @@ _id_404F() {
 
 _id_9E86(var_0) {
   if(isDefined(level._id_EC85[self._id_1FBB][var_0])) {
-    if(isarray(level._id_EC85[self._id_1FBB][var_0]))
+    if(isarray(level._id_EC85[self._id_1FBB][var_0])) {
       return 1;
-    else
+    } else {
       return 0;
+    }
   } else {}
 }
 
@@ -278,22 +291,25 @@ _id_7DC7(var_0) {
 _id_9867() {
   self._id_DA9E = _id_781D(self._id_1D77);
 
-  if(self._id_DA9E.size > 0)
+  if(self._id_DA9E.size > 0) {
     self._id_DA9C = _id_1063B(self._id_DA9E);
+  }
 }
 
 _id_781D(var_0) {
   var_1 = [];
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return var_1;
+  }
 
   var_2 = getarraykeys(level._id_EC8C);
 
   foreach(var_4 in var_2) {
     if(isstring(var_4)) {
-      if(_id_2288(level._id_EC85[var_4], var_0))
+      if(_id_2288(level._id_EC85[var_4], var_0)) {
         var_1 = scripts\engine\utility::array_add(var_1, var_4);
+      }
     }
   }
 
@@ -301,15 +317,17 @@ _id_781D(var_0) {
 }
 
 _id_2288(var_0, var_1) {
-  if(!isarray(var_0))
+  if(!isarray(var_0)) {
     return 0;
+  }
 
   var_2 = getarraykeys(var_0);
 
   foreach(var_4 in var_2) {
     if(isstring(var_4)) {
-      if(var_4 == var_1)
+      if(var_4 == var_1) {
         return 1;
+      }
     }
   }
 
@@ -319,8 +337,9 @@ _id_2288(var_0, var_1) {
 _id_1063B(var_0) {
   var_1 = [];
 
-  foreach(var_3 in var_0)
-  var_1 = scripts\engine\utility::array_add(var_1, scripts\sp\utility::_id_10639(var_3));
+  foreach(var_3 in var_0) {
+    var_1 = scripts\engine\utility::array_add(var_1, scripts\sp\utility::_id_10639(var_3));
+  }
 
   return var_1;
 }
@@ -340,16 +359,18 @@ _id_CE0E(var_0) {
     foreach(var_2 in self._id_DA9C) {
       self._id_1EEF thread scripts\sp\anim::_id_1F35(var_2, self._id_1D77);
 
-      if(var_0 > 0)
+      if(var_0 > 0) {
         var_2 scripts\engine\utility::delaycall(0.05, ::_meth_82B0, var_2 scripts\sp\utility::_id_7DC1(self._id_1D77), var_0);
+      }
     }
   }
 }
 
 _id_40C4() {
   if(isDefined(self._id_DA9C)) {
-    foreach(var_1 in self._id_DA9C)
-    var_1 delete();
+    foreach(var_1 in self._id_DA9C) {
+      var_1 delete();
+    }
   }
 }
 
@@ -364,12 +385,14 @@ _id_CC87(var_0, var_1, var_2, var_3) {
   _id_9867();
   _id_CC81(self._id_F272["start"], 0, var_1);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     scripts\engine\utility::flag_wait(var_2);
+  }
 
   if(isDefined(var_3)) {
-    if(var_3)
+    if(var_3) {
       _id_137C5();
+    }
   }
 
   wait(var_0);
@@ -399,25 +422,29 @@ _id_137C5() {
   while(var_0 == 0) {
     wait 0.05;
 
-    if(level.player scripts\sp\utility::_id_D637(self.origin))
+    if(level.player scripts\sp\utility::_id_D637(self.origin)) {
       var_0 = 1;
+    }
   }
 }
 
 _id_300C() {
-  if(!scripts\engine\utility::flag_exist("allow_bridge_ffa_move"))
+  if(!scripts\engine\utility::flag_exist("allow_bridge_ffa_move")) {
     scripts\engine\utility::flag_init("allow_bridge_ffa_move");
+  }
 
   scripts\engine\utility::flag_set("allow_bridge_ffa_move");
 
-  if(!scripts\engine\utility::flag_exist("bridge_ffa_in_transit"))
+  if(!scripts\engine\utility::flag_exist("bridge_ffa_in_transit")) {
     scripts\engine\utility::flag_init("bridge_ffa_in_transit");
+  }
 
   _id_300B();
   _id_300E();
 
-  if(!scripts\engine\utility::flag_exist("setup_sceneblock_anims") || !scripts\engine\utility::flag("setup_sceneblock_anims"))
+  if(!scripts\engine\utility::flag_exist("setup_sceneblock_anims") || !scripts\engine\utility::flag("setup_sceneblock_anims")) {
     _id_0B6A::_id_EBE9();
+  }
 
   _id_0EFB::_id_FE05();
   level._id_FD6E._id_300A = [];
@@ -549,8 +576,9 @@ _id_300A() {
   self endon("stop_ffa");
   var_0 = ["shipcrib_bridge_radiation_station_idle_01", "shipcrib_bridge_radiation_station_idle_02"];
 
-  while(!scripts\engine\utility::flag("allow_bridge_ffa_move") || scripts\engine\utility::flag("bridge_ffa_in_transit") || distance2dsquared(self.origin, level.player.origin) <= squared(200.0))
+  while(!scripts\engine\utility::flag("allow_bridge_ffa_move") || scripts\engine\utility::flag("bridge_ffa_in_transit") || distance2dsquared(self.origin, level.player.origin) <= squared(200.0)) {
     wait 0.05;
+  }
 
   scripts\sp\interaction_manager::_id_11048();
   var_1 = undefined;
@@ -570,8 +598,9 @@ _id_300A() {
     var_1 notify("stop_loop");
     var_6 = randomint(2);
 
-    while(!scripts\engine\utility::flag("allow_bridge_ffa_move") || scripts\engine\utility::flag("bridge_ffa_in_transit") || distance2d(self.origin, level.player.origin) <= 200.0 || distance2d(level.player.origin, var_1.origin) <= 150.0)
+    while(!scripts\engine\utility::flag("allow_bridge_ffa_move") || scripts\engine\utility::flag("bridge_ffa_in_transit") || distance2d(self.origin, level.player.origin) <= 200.0 || distance2d(level.player.origin, var_1.origin) <= 150.0) {
       wait 0.05;
+    }
 
     if(var_5 == "radiation") {
       scripts\engine\utility::flag_set("bridge_ffa_in_transit");
@@ -602,8 +631,9 @@ _id_300A() {
       var_7 thread scripts\sp\anim::_id_1EEA(level._id_FD6E._id_300A["tablet"], "shipcrib_bridge_greaseboard_tablet_idle_03", "stop_loop");
       wait(getanimlength(level._id_EC85["generic"]["shipcrib_bridge_greaseboard_idle_03"][0]));
 
-      while(!scripts\engine\utility::flag("allow_bridge_ffa_move") || scripts\engine\utility::flag("bridge_ffa_in_transit") || distance2d(self.origin, level.player.origin) <= 200.0 || distance2d(level.player.origin, var_1.origin) <= 150.0)
+      while(!scripts\engine\utility::flag("allow_bridge_ffa_move") || scripts\engine\utility::flag("bridge_ffa_in_transit") || distance2d(self.origin, level.player.origin) <= 200.0 || distance2d(level.player.origin, var_1.origin) <= 150.0) {
         wait 0.05;
+      }
 
       var_7 notify("stop_loop");
       var_7 thread scripts\sp\anim::_id_1F35(level._id_FD6E._id_300A["tablet"], "shipcrib_bridge_greaseboard_tablet_idle_end_03");
@@ -615,15 +645,17 @@ _id_300A() {
       self.script_pushable = 0;
       scripts\engine\utility::flag_clear("bridge_ffa_in_transit");
 
-      if(isDefined(self.gender) && issubstr(self.gender, "female"))
+      if(isDefined(self.gender) && issubstr(self.gender, "female")) {
         thread scripts\sp\interaction::_id_CD50("opsmap_comms_react");
-      else
+      } else {
         thread scripts\sp\interaction::_id_CD50("standing_console_simple");
+      }
 
       wait(randomfloatrange(5, 10));
 
-      while(!scripts\engine\utility::flag("allow_bridge_ffa_move") || scripts\engine\utility::flag("bridge_ffa_in_transit") || distance2d(self.origin, level.player.origin) <= 200.0 || distance2d(level.player.origin, var_1.origin) <= 150.0)
+      while(!scripts\engine\utility::flag("allow_bridge_ffa_move") || scripts\engine\utility::flag("bridge_ffa_in_transit") || distance2d(self.origin, level.player.origin) <= 200.0 || distance2d(level.player.origin, var_1.origin) <= 150.0) {
         wait 0.05;
+      }
     }
 
     thread _id_0EE5::_id_10FC4();
@@ -637,10 +669,11 @@ print_check_ffa_conditions(var_0) {
     var_2 = "Bridge FFA In Transit = " + scripts\engine\utility::flag("bridge_ffa_in_transit");
     var_3 = "Distance To Player = " + distance2d(self.origin, level.player.origin);
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_4 = "Player Distance To Dest = " + distance2d(level.player.origin, var_0.origin);
-    else
+    } else {
       var_4 = "Player Distance To Dest = no ent";
+    }
 
     var_5 = self gettagorigin("j_head") + anglestoup(self.angles) * 10;
     var_6 = self gettagorigin("j_head") + anglestoup(self.angles) * 20;
@@ -669,13 +702,14 @@ _id_787E() {
 
     if(distance2d(var_2.origin, level.player.origin) >= 200.0) {
       if(!scripts\engine\utility::array_contains(level._id_FD6E._id_300A["taken"], var_1)) {
-        level._id_FD6E._id_300A["taken"] = scripts\engine\utility::array_add(level._id_FD6E._id_300A["taken"], var_1);
+        level._id_FD6E._id_300A["taken"] = ::scripts\engine\utility::array_add(level._id_FD6E._id_300A["taken"], var_1);
 
         foreach(var_4 in level._id_FD6E._id_300A["locations"]) {
           var_5 = _id_0EFB::_id_EFDB(var_4);
 
-          if(distance2d(var_2.origin, var_5.origin) <= 100.0 && var_4 != var_1)
-            level._id_FD6E._id_300A["taken"] = scripts\engine\utility::array_add(level._id_FD6E._id_300A["taken"], var_4);
+          if(distance2d(var_2.origin, var_5.origin) <= 100.0 && var_4 != var_1) {
+            level._id_FD6E._id_300A["taken"] = ::scripts\engine\utility::array_add(level._id_FD6E._id_300A["taken"], var_4);
+          }
         }
 
         break;
@@ -692,13 +726,14 @@ _id_4137(var_0) {
   wait 1.0;
   var_1 = level._id_FD6E._id_300A["locations"][var_0];
   var_2 = _id_0EFB::_id_EFDB(var_1);
-  level._id_FD6E._id_300A["taken"] = scripts\engine\utility::array_remove(level._id_FD6E._id_300A["taken"], var_1);
+  level._id_FD6E._id_300A["taken"] = ::scripts\engine\utility::array_remove(level._id_FD6E._id_300A["taken"], var_1);
 
   foreach(var_4 in level._id_FD6E._id_300A["taken"]) {
     var_5 = _id_0EFB::_id_EFDB(var_4);
 
-    if(distance2d(var_2.origin, var_5.origin) <= 100.0)
-      level._id_FD6E._id_300A["taken"] = scripts\engine\utility::array_remove(level._id_FD6E._id_300A["taken"], var_4);
+    if(distance2d(var_2.origin, var_5.origin) <= 100.0) {
+      level._id_FD6E._id_300A["taken"] = ::scripts\engine\utility::array_remove(level._id_FD6E._id_300A["taken"], var_4);
+    }
   }
 }
 

@@ -38,8 +38,9 @@ teleport_begin(var_0) {
 }
 
 teleport_tick(var_0) {
-  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   self clearpath();
   return anim.success;
@@ -56,8 +57,9 @@ teleport_end(var_0) {
 melee_goontick(var_0) {
   var_1 = scripts\aitypes\dlc4\melee::melee_tick(var_0);
 
-  if(var_1 == anim.failure)
+  if(var_1 == anim.failure) {
     scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(var_0, "post_attack");
+  }
 
   return var_1;
 }
@@ -65,8 +67,9 @@ melee_goontick(var_0) {
 movingmelee_goontick(var_0) {
   var_1 = scripts\aitypes\dlc4\melee::movingmelee_tick(var_0);
 
-  if(var_1 == anim.failure)
+  if(var_1 == anim.failure) {
     scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(var_0, "post_attack");
+  }
 
   return var_1;
 }
@@ -119,19 +122,22 @@ postattack_begin(var_0) {
 }
 
 postattack_tick(var_0) {
-  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0)) {
     return anim.runing;
+  }
 
   var_1 = scripts\asm\dlc4\dlc4_asm::getenemy();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return anim.failure;
+  }
 
   scripts\aitypes\dlc4\behavior_utils::facepoint(var_1.origin);
   var_2 = scripts\aitypes\dlc4\bt_state_api::btstate_getinstancedata(var_0);
 
-  if(gettime() < var_2.postattackendtime)
+  if(gettime() < var_2.postattackendtime) {
     return anim.running;
+  }
 
   return anim.success;
 }
@@ -146,15 +152,17 @@ candomanuever(var_0) {
   var_2 = getmovedelta(var_1, 0, 1);
   var_3 = self localtoworldcoords(var_2);
 
-  if(!scripts\mp\agents\zombie\zombie_util::_id_38D1(self.origin, var_3))
+  if(!scripts\mp\agents\zombie\zombie_util::_id_38D1(self.origin, var_3)) {
     return 0;
+  }
 
   return 1;
 }
 
 decideaction(var_0) {
-  if(isDefined(self.desiredaction))
+  if(isDefined(self.desiredaction)) {
     return anim.success;
+  }
 
   if(isDefined(self.nextaction)) {
     scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(var_0, self.nextaction);
@@ -164,8 +172,9 @@ decideaction(var_0) {
 
   var_1 = scripts\asm\dlc4\dlc4_asm::getenemy();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return anim.failure;
+  }
 
   var_2 = gettime();
 
@@ -175,8 +184,9 @@ decideaction(var_0) {
       return anim.success;
     }
 
-    if(scripts\aitypes\dlc4\alien_jump::tryjumpattack(var_0, var_1))
+    if(scripts\aitypes\dlc4\alien_jump::tryjumpattack(var_0, var_1)) {
       return anim.success;
+    }
   } else {
     var_3 = scripts\asm\dlc4\dlc4_asm::gettunedata();
     var_4 = distancesquared(var_1.origin, self.origin);
@@ -198,21 +208,25 @@ getdodgemovescale(var_0, var_1) {
   var_4 = self getanimentry(var_0, var_3);
   var_5 = scripts\anim\notetracks_mp::getsafecircleradius(var_4);
 
-  if(var_5 < var_2.min_dodge_scale)
+  if(var_5 < var_2.min_dodge_scale) {
     return undefined;
+  }
 
-  if(var_5 > var_2.max_dodge_scale)
+  if(var_5 > var_2.max_dodge_scale) {
     return var_2.max_dodge_scale;
+  }
 
   return var_5;
 }
 
 updatestumble(var_0) {
-  if(!isDefined(self.damageaccumulator))
+  if(!isDefined(self.damageaccumulator)) {
     return 0;
+  }
 
-  if(isDefined(self._blackboard.requested_dodge_dir))
+  if(isDefined(self._blackboard.requested_dodge_dir)) {
     return 0;
+  }
 
   if(!isDefined(self.damageaccumulator.lastdamagetime) || gettime() > self.damageaccumulator.lastdamagetime + 1000) {
     self.damageaccumulator.accumulateddamage = 0;
@@ -221,11 +235,13 @@ updatestumble(var_0) {
 
   var_1 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 
-  if(isDefined(self.nextstumbletime) && gettime() < self.nextstumbletime)
+  if(isDefined(self.nextstumbletime) && gettime() < self.nextstumbletime) {
     return 0;
+  }
 
-  if(self.damageaccumulator.accumulateddamage < self.maxhealth * var_1.stumble_damage_pct)
+  if(self.damageaccumulator.accumulateddamage < self.maxhealth * var_1.stumble_damage_pct) {
     return 0;
+  }
 
   if(randomint(100) < var_1.stumble_chance) {
     _id_5AB8(var_0);
@@ -241,20 +257,24 @@ updatedodge(var_0) {
   var_1 = gettime();
 
   if(isDefined(self._blackboard.requested_dodge_dir)) {
-    if(self.lastdodgetime - var_1 > 150)
+    if(self.lastdodgetime - var_1 > 150) {
       self._blackboard.requested_dodge_dir = undefined;
-    else
+    } else {
       return 0;
+    }
   }
 
-  if(!isDefined(self.pathgoalpos))
+  if(!isDefined(self.pathgoalpos)) {
     return 0;
+  }
 
-  if(!isDefined(self.lastwhizbytime))
+  if(!isDefined(self.lastwhizbytime)) {
     return 0;
+  }
 
-  if(self.lastwhizbytime == var_1)
+  if(self.lastwhizbytime == var_1) {
     return 0;
+  }
 
   var_2 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 
@@ -263,11 +283,13 @@ updatedodge(var_0) {
     return 0;
   }
 
-  if(isDefined(self.lastdodgechecktime) && var_1 - self.lastdodgechecktime < var_2.min_dodge_test_interval_ms)
+  if(isDefined(self.lastdodgechecktime) && var_1 - self.lastdodgechecktime < var_2.min_dodge_test_interval_ms) {
     return 0;
+  }
 
-  if(isDefined(self.lastdodgetime) && var_1 < self.lastdodgetime + var_2.min_dodge_interval_ms)
+  if(isDefined(self.lastdodgetime) && var_1 < self.lastdodgetime + var_2.min_dodge_interval_ms) {
     return 0;
+  }
 
   self.lastdodgechecktime = var_1;
   var_3 = randomint(100);
@@ -275,8 +297,9 @@ updatedodge(var_0) {
   if(var_3 < var_2.dodge_chance) {
     var_4 = distancesquared(self.pathgoalpos, self.origin);
 
-    if(var_4 < var_2.min_enemy_dist_to_dodge_sq)
+    if(var_4 < var_2.min_enemy_dist_to_dodge_sq) {
       return 0;
+    }
 
     self.lastdodgetime = gettime();
     var_5 = undefined;
@@ -317,11 +340,13 @@ followenemy_begin(var_0) {
 followenemy_tick(var_0) {
   var_1 = scripts\asm\dlc4\dlc4_asm::getenemy();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return anim.failure;
+  }
 
-  if(!updatestumble(var_0))
+  if(!updatestumble(var_0)) {
     updatedodge(var_0);
+  }
 
   var_2 = scripts\asm\dlc4\dlc4_asm::gettunedata();
   var_3 = getclosestpointonnavmesh(var_1.origin, self);
@@ -331,8 +356,9 @@ followenemy_tick(var_0) {
     self scragentsetgoalpos(var_3);
 
     if(!self cansee(var_1)) {
-      if(!isDefined(self.pathgoalpos))
+      if(!isDefined(self.pathgoalpos)) {
         scripts\aitypes\dlc4\behavior_utils::facepoint(var_1.origin);
+      }
 
       return anim.running;
     }

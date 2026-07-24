@@ -72,10 +72,11 @@ give_boombox(var_0, var_1) {
   thread waitrestoreperks();
   self.iscarrying = 0;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 setcarryingboombox(var_0, var_1, var_2) {
@@ -100,8 +101,9 @@ setcarryingboombox(var_0, var_1, var_2) {
       return 1;
     }
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       var_3 = "force_cancel_placement";
+    }
 
     if(var_3 == "cancel_boombox" || var_3 == "force_cancel_placement") {
       if(!var_1 && var_3 == "cancel_boombox") {
@@ -110,10 +112,11 @@ setcarryingboombox(var_0, var_1, var_2) {
       scripts\engine\utility::allow_weapon(1);
       var_0 boombox_setcancelled();
 
-      if(var_3 != "force_cancel_placement")
+      if(var_3 != "force_cancel_placement") {
         thread watch_dpad();
-      else if(var_1)
+      } else if(var_1) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
+      }
 
       return 0;
     }
@@ -121,8 +124,9 @@ setcarryingboombox(var_0, var_1, var_2) {
     if(!var_0.canbeplaced) {
       continue;
     }
-    if(var_1)
+    if(var_1) {
       scripts\cp\utility::remove_crafted_item_from_inventory(self);
+    }
 
     var_0 boombox_setplaced(var_2, self);
     scripts\engine\utility::allow_weapon(1);
@@ -204,16 +208,19 @@ boombox_handledeath(var_0) {
   boombox_setinactive();
   self playSound("sentry_explode");
 
-  if(isDefined(self.charge_fx))
+  if(isDefined(self.charge_fx)) {
     self.charge_fx delete();
+  }
 
-  if(isDefined(self.zap_model))
+  if(isDefined(self.zap_model)) {
     self.zap_model delete();
+  }
 
   scripts\cp\utility::removefromtraplist();
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 boombox_setplaced(var_0, var_1) {
@@ -247,8 +254,9 @@ boombox_setplaced(var_0, var_1) {
 boombox_setcancelled() {
   self.carriedby forceusehintoff();
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.iscarrying = 0;
+  }
 
   self.carriedboombox delete();
   self delete();
@@ -339,8 +347,9 @@ release_zombie_on_radio_death(var_0) {
   self endon("death");
   var_0 scripts\engine\utility::waittill_any("boombox_explode", "death");
 
-  if(isDefined(self.og_goalradius))
+  if(isDefined(self.og_goalradius)) {
     self.goalradius = self.og_goalradius;
+  }
 
   self.og_goalradius = undefined;
   self.about_to_dance = 0;
@@ -420,15 +429,15 @@ create_attract_positions(var_0, var_1, var_2, var_3) {
     if(!scripts\cp\loot::is_in_active_volume(var_10)) {
       continue;
     }
-    if(isDefined(var_10) && distancesquared(var_10, self.origin) > var_4)
+    if(isDefined(var_10) && distancesquared(var_10, self.origin) > var_4) {
       continue;
-    else {
+    } else {
       if(abs(var_10[2] - self.origin[2]) < 60) {
         if(level.script != "cp_disco") {
           if(ispointinvolume(var_10, level.dance_floor_volume)) {
-            if(isDefined(level.discotrap_active))
+            if(isDefined(level.discotrap_active)) {
               continue;
-            else if(!self.discotrap_disabled) {
+            } else if(!self.discotrap_disabled) {
               self.discotrap_disabled = 1;
               var_11 = scripts\engine\utility::getStructArray("interaction_discoballtrap", "script_noteworthy");
               level thread scripts\cp\cp_interaction::interaction_cooldown(var_11[0], 30);
@@ -455,9 +464,9 @@ create_attract_positions(var_0, var_1, var_2, var_3) {
     if(!scripts\cp\loot::is_in_active_volume(var_10)) {
       continue;
     }
-    if(isDefined(var_10) && distancesquared(var_10, self.origin) > var_4)
+    if(isDefined(var_10) && distancesquared(var_10, self.origin) > var_4) {
       continue;
-    else {
+    } else {
       if(abs(var_10[2] - self.origin[2]) < 60) {
         var_12 = spawnStruct();
         var_12.origin = var_10;

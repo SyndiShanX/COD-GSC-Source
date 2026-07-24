@@ -37,14 +37,17 @@ dotraverseanim_dlc1(var_0, var_1, var_2, var_3) {
   var_6 = undefined;
   var_6 = var_4.animscript;
 
-  if(var_1 == "traverse_external")
+  if(var_1 == "traverse_external") {
     var_6 = var_1;
+  }
 
-  if(needscrawlinganimstate_dlc1(var_6))
+  if(needscrawlinganimstate_dlc1(var_6)) {
     var_6 = "crawling_" + var_6;
+  }
 
-  if(self.agent_type == "lumberjack")
+  if(self.agent_type == "lumberjack") {
     var_6 = var_6 + "_norestart";
+  }
 
   if(!isDefined(var_6)) {
     return;
@@ -95,16 +98,18 @@ dotraverseanim_dlc1(var_0, var_1, var_2, var_3) {
   var_25 = getnotetracktimes(var_13, var_24);
   var_26 = getnotetracktimes(var_13, "code_move");
 
-  if(var_26.size > 0)
+  if(var_26.size > 0) {
     var_27 = getmovedelta(var_13, 0, var_26[0]);
-  else
+  } else {
     var_27 = getmovedelta(var_13, 0, 1);
+  }
 
   var_28 = scripts\anim\notetracks_mp::_id_7DC9(var_8, var_27);
   var_29 = animhasnotetrack(var_13, "ignoreanimscaling");
 
-  if(var_29)
+  if(var_29) {
     var_28._id_13E2B = 1.0;
+  }
 
   self scragentsetphysicsmode("noclip");
   var_30 = self _meth_8145();
@@ -117,8 +122,9 @@ dotraverseanim_dlc1(var_0, var_1, var_2, var_3) {
       scripts\anim\notetracks_mp::_id_5AC1(var_6, var_7, var_13, "traverse", var_14, var_18, 0, ::zombietraversenotetrackhandler_dlc1);
       var_31 = scripts\engine\utility::getStruct(self.endnode.target, "targetname");
 
-      if(isDefined(var_31.script_noteworthy) && var_31.script_noteworthy == "continue_flex_height")
+      if(isDefined(var_31.script_noteworthy) && var_31.script_noteworthy == "continue_flex_height") {
         scripts\anim\notetracks_mp::_id_5AC1(var_6, var_7, var_13, "traverse", var_18, var_16, 1, ::zombietraversenotetrackhandler_dlc1);
+      }
 
       self scragentsetanimscale(1.0, 1.0);
       scripts\anim\notetracks_mp::_id_CED5(var_6, var_7, "traverse", "end", ::zombietraversenotetrackhandler_dlc1);
@@ -148,8 +154,9 @@ dotraverseanim_dlc1(var_0, var_1, var_2, var_3) {
       scripts\anim\notetracks_mp::_id_5AC2(var_6, var_7, "traverse", var_13, var_20, var_22, var_31, var_33, ::zombietraversenotetrackhandler_dlc1);
       self scragentsetanimscale(1.0, 1.0);
 
-      if(var_25.size == 0 || !scripts\engine\utility::is_true(self.dismember_crawl))
+      if(var_25.size == 0 || !scripts\engine\utility::is_true(self.dismember_crawl)) {
         scripts\anim\notetracks_mp::_id_CED5(var_6, var_7, "traverse", "end", ::zombietraversenotetrackhandler_dlc1);
+      }
     }
 
     self.endnode = undefined;
@@ -158,21 +165,25 @@ dotraverseanim_dlc1(var_0, var_1, var_2, var_3) {
     scripts\anim\notetracks_mp::_id_CED5(var_6, var_7, "traverse", var_20, ::zombietraversenotetrackhandler_dlc1);
     var_33 = var_23[0];
 
-    if(!isDefined(var_30))
+    if(!isDefined(var_30)) {
       var_31 = var_5;
-    else
+    } else {
       var_31 = var_30.origin;
+    }
 
     scripts\anim\notetracks_mp::_id_5AC2(var_6, var_7, "traverse", var_13, var_20, var_22, var_31, var_33, ::zombietraversenotetrackhandler_dlc1);
 
-    if(var_25.size == 0 || !scripts\engine\utility::is_true(self.dismember_crawl))
+    if(var_25.size == 0 || !scripts\engine\utility::is_true(self.dismember_crawl)) {
       scripts\anim\notetracks_mp::_id_CED5(var_6, var_7, "traverse", "end", ::zombietraversenotetrackhandler_dlc1);
+    }
   } else if(var_11 && abs(var_8[2]) < 64) {
-    if(var_15.size != 1)
+    if(var_15.size != 1) {
       var_15 = getnotetracktimes(var_13, "flex_across_start");
+    }
 
-    if(var_17.size != 1)
+    if(var_17.size != 1) {
       var_17 = getnotetracktimes(var_13, "flex_across_end");
+    }
 
     var_34 = getanimlength(var_13);
     var_35 = var_15[0] * var_34;
@@ -186,8 +197,9 @@ dotraverseanim_dlc1(var_0, var_1, var_2, var_3) {
     var_41 = var_38 - var_40;
     var_42 = length2d(var_37);
 
-    if(var_42 < 0.01)
+    if(var_42 < 0.01) {
       var_42 = 1.0;
+    }
 
     var_43 = (var_41 + var_42) / var_42;
     self scragentsetanimscale(var_43, 0);
@@ -214,8 +226,9 @@ dotraverseanim_dlc1(var_0, var_1, var_2, var_3) {
         var_28._id_13E2B = 1;
         var_28.z = 1;
 
-        if(!var_29 && length2dsquared(var_9) < 0.64 * length2dsquared(var_27))
+        if(!var_29 && length2dsquared(var_9) < 0.64 * length2dsquared(var_27)) {
           var_28._id_13E2B = 0.4;
+        }
 
         self scragentsetanimscale(var_28._id_13E2B, var_28.z);
         scripts\anim\notetracks_mp::_id_CED3(var_6, var_7, self.traverseratescale, "traverse", var_14);
@@ -226,8 +239,9 @@ dotraverseanim_dlc1(var_0, var_1, var_2, var_3) {
         var_47 = var_5 - self.origin;
         var_48 = var_27 - var_45;
 
-        if(!var_29 && length2dsquared(var_47) < 0.5625 * length2dsquared(var_48))
+        if(!var_29 && length2dsquared(var_47) < 0.5625 * length2dsquared(var_48)) {
           var_28._id_13E2B = 0.75;
+        }
 
         var_49 = var_27 - var_46;
         var_50 = (var_49[0] * var_28._id_13E2B, var_49[1] * var_28._id_13E2B, var_49[2] * var_28.z);
@@ -239,11 +253,13 @@ dotraverseanim_dlc1(var_0, var_1, var_2, var_3) {
         var_56 = var_28;
         var_28 = scripts\anim\notetracks_mp::_id_7DC9(var_55, var_54, 1);
 
-        if(var_29)
+        if(var_29) {
           var_28._id_13E2B = 1.0;
+        }
 
-        if(var_55[2] <= 0)
+        if(var_55[2] <= 0) {
           var_28.z = 0.0;
+        }
 
         self scragentsetanimscale(var_28._id_13E2B, var_28.z);
         scripts\anim\notetracks_mp::_id_1384D("traverse", var_16);
@@ -274,15 +290,17 @@ dotraverseanim_dlc1(var_0, var_1, var_2, var_3) {
     self scragentsetanimscale(var_28._id_13E2B, var_28.z);
     var_44 = clamp(2 / var_28.z, 0.5, 1);
 
-    if(var_15.size > 0)
+    if(var_15.size > 0) {
       scripts\anim\notetracks_mp::_id_CED3(var_6, var_7, self.traverseratescale, "traverse", var_14);
+    }
 
     if(var_17.size > 0) {
       scripts\anim\notetracks_mp::_id_CED3(var_6, var_7, var_44 * 1.0, "traverse", var_16);
       scripts\anim\notetracks_mp::_id_F2B1(var_6, var_7, self.traverseratescale);
 
-      if(animhasnotetrack(var_13, "removestatelock"))
+      if(animhasnotetrack(var_13, "removestatelock")) {
         scripts\anim\notetracks_mp::_id_1384D("traverse", "removestatelock");
+      }
 
       scripts\anim\notetracks_mp::setstatelocked(0, "DoTraverse");
       scripts\anim\notetracks_mp::_id_1384D("traverse", "code_move");
@@ -305,8 +323,9 @@ lerptoabovegrounddlc1() {
   var_2 = var_1[2];
   var_3 = self.origin[2];
 
-  if(var_3 < var_2)
+  if(var_3 < var_2) {
     self setOrigin((self.origin[0], self.origin[1], var_2 + var_0), 0);
+  }
 }
 
 terminatetraverse_dlc1(var_0, var_1) {
@@ -314,10 +333,11 @@ terminatetraverse_dlc1(var_0, var_1) {
   var_3 = undefined;
 
   if(isDefined(var_2._id_116FB)) {
-    if(isarray(var_2._id_116FB[0]))
+    if(isarray(var_2._id_116FB[0])) {
       var_3 = var_2._id_116FB[0];
-    else
+    } else {
       var_3 = var_2._id_116FB;
+    }
   }
 
   scripts\asm\asm::_id_2388(var_0, var_1, var_2, var_2._id_116FB);
@@ -345,8 +365,9 @@ traverse_lerp_z_over_time_dlc1(var_0, var_1, var_2) {
 }
 
 needscrawlinganimstate_dlc1(var_0) {
-  if(self.dismember_crawl)
+  if(self.dismember_crawl) {
     return 1;
+  }
 
   return 0;
 }
@@ -370,8 +391,9 @@ choosemovingdeathanim_dlc1(var_0, var_1, var_2) {
 }
 
 chooseballoongrabanim(var_0, var_1, var_2) {
-  if(scripts\asm\zombie\zombie::_id_BE92())
+  if(scripts\asm\zombie\zombie::_id_BE92()) {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "prone");
+  }
 
   return scripts\asm\asm::asm_lookupanimfromalias(var_1, "stand");
 }
@@ -396,10 +418,11 @@ balloongrabnotehandler(var_0, var_1, var_2, var_3) {
     self.balloon_in_hand = spawn("script_model", var_5);
     self.balloon_model = scripts\engine\utility::random(var_4);
 
-    if(self.bholdingballooninleft)
+    if(self.bholdingballooninleft) {
       self attach(self.balloon_model, "tag_accessory_left");
-    else
+    } else {
       self attach(self.balloon_model, "tag_accessory_right");
+    }
 
     self.balloon_in_hand.origin = var_5;
     self linkTo(self.balloon_in_hand);
@@ -413,8 +436,9 @@ balloongrabnotehandler(var_0, var_1, var_2, var_3) {
 }
 
 chooseballoonfloatanim(var_0, var_1, var_2) {
-  if(scripts\engine\utility::is_true(self.bholdingballooninleft))
+  if(scripts\engine\utility::is_true(self.bholdingballooninleft)) {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "left");
+  }
 
   return scripts\asm\asm::asm_lookupanimfromalias(var_1, "right");
 }
@@ -422,19 +446,21 @@ chooseballoonfloatanim(var_0, var_1, var_2) {
 shouldballoongrableft(var_0, var_1, var_2, var_3) {
   self.bholdingballooninleft = undefined;
 
-  if(_id_0C72::_id_9EA5())
+  if(_id_0C72::_id_9EA5()) {
     self.bholdingballooninleft = 1;
-  else if(randomintrange(0, 100) < 50)
+  } else if(randomintrange(0, 100) < 50) {
     self.bholdingballooninleft = 1;
-  else
+  } else {
     self.bholdingballooninleft = 0;
+  }
 
   return self.bholdingballooninleft;
 }
 
 isdismembermentdisabled(var_0, var_1, var_2, var_3) {
-  if(scripts\engine\utility::is_true(self._id_55CF))
+  if(scripts\engine\utility::is_true(self._id_55CF)) {
     return 1;
+  }
 
   return 0;
 }

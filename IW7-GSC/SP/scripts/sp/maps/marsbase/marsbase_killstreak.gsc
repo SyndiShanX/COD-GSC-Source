@@ -24,8 +24,9 @@ _id_9676() {
   _id_131E();
   level._id_B3B8 = [];
 
-  for(var_0 = 0; var_0 < 24; var_0++)
+  for(var_0 = 0; var_0 < 24; var_0++) {
     level._id_B3B8[var_0] = 0;
+  }
 
   level.player thread _id_133D();
   scripts\sp\utility::_id_9187("mars_killstreak_targeting_outline", 301, ::_id_B392);
@@ -102,8 +103,9 @@ _id_141D() {
   if(!scripts\engine\utility::is_true(self._id_2711)) {
     return;
   }
-  while(!isDefined(level.player._id_1586))
+  while(!isDefined(level.player._id_1586)) {
     scripts\engine\utility::waitframe();
+  }
 
   self notify("end_mars_killstreak_text");
   scripts\sp\utility::_id_11425();
@@ -120,9 +122,9 @@ _id_1329() {
     scripts\engine\utility::waittill_any("weapon_change", "weapon_dropped");
     var_0 = self getcurrentweapon();
 
-    if(issubstr("mars_killstreak", var_0) && !level._id_B3B7)
+    if(issubstr("mars_killstreak", var_0) && !level._id_B3B7) {
       self switchtoweapon(level.player._id_4C2F);
-    else {
+    } else {
       level.player.lastweapon = level.player._id_4C2F;
       level.player._id_4C2F = var_0;
     }
@@ -132,8 +134,9 @@ _id_1329() {
 }
 
 _id_B262(var_0) {
-  if(!scripts\engine\utility::flag_exist(var_0 + "_destroyed"))
+  if(!scripts\engine\utility::flag_exist(var_0 + "_destroyed")) {
     scripts\engine\utility::flag_init(var_0 + "_destroyed");
+  }
 
   var_1 = undefined;
 
@@ -147,8 +150,9 @@ _id_B262(var_0) {
   if(isDefined(var_1)) {
     var_1._id_11554 = 1;
 
-    if(isDefined(level._id_B3B1))
+    if(isDefined(level._id_B3B1)) {
       level.player thread _id_130E();
+    }
   }
 }
 
@@ -306,14 +310,16 @@ _id_133D() {
       continue;
     }
 
-    if(issubstr(self getcurrentweapon(), "mars_killstreak") && !level._id_B3B7)
+    if(issubstr(self getcurrentweapon(), "mars_killstreak") && !level._id_B3B7) {
       level.player thread scripts\sp\utility::_id_56BE("hint_monsweapon_not_ready", 2);
+    }
   }
 }
 
 _id_1348(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   level._id_B3B1._id_E322 = level._id_B3B1._id_E321.origin;
   var_2 = anglesToForward(level._id_B3B1._id_C6D9.angles);
@@ -328,8 +334,9 @@ _id_1348(var_0, var_1) {
   var_5 = scripts\common\trace::ray_trace(var_3, var_3 + var_2 * var_4, [level.player]);
   var_6 = var_5["position"];
 
-  if(isDefined(level._id_B3B1.target))
+  if(isDefined(level._id_B3B1.target)) {
     var_6 = scripts\sp\math::_id_ACE9(var_3, var_6, level._id_B3B1.target, (0, 0, 1));
+  }
 
   var_7 = level._id_B3B1._id_E320.origin;
   level._id_B3B1._id_E320.origin = var_6;
@@ -338,8 +345,9 @@ _id_1348(var_0, var_1) {
   if(_id_1324()) {
     _id_133F(level._id_B3B1.target, level._id_B3B1._id_E320.origin);
 
-    foreach(var_9 in level._id_B3B1._id_10E4D)
-    var_9.angles = level._id_B3B1._id_5B1C[0].angles;
+    foreach(var_9 in level._id_B3B1._id_10E4D) {
+      var_9.angles = level._id_B3B1._id_5B1C[0].angles;
+    }
   }
 }
 
@@ -364,18 +372,21 @@ _id_130E() {
   var_0 = [];
 
   foreach(var_2 in level._id_B3B2) {
-    if(var_2._id_11554 == 1 && var_2.dead == 0 && var_2._id_8C33 == 0)
+    if(var_2._id_11554 == 1 && var_2.dead == 0 && var_2._id_8C33 == 0) {
       var_0[var_0.size] = var_2;
+    }
   }
 
   foreach(var_2 in var_0) {
     var_5 = _id_1336(var_2, 2);
 
-    if(isDefined(var_2._id_ABF8.turret))
+    if(isDefined(var_2._id_ABF8.turret)) {
       var_2._id_ABF8.turret scripts\sp\utility::_id_9196(1, 1, 1, "mars_killstreak_targeting_outline");
+    }
 
-    if(isDefined(var_2._id_ABF8._id_129CC))
+    if(isDefined(var_2._id_ABF8._id_129CC)) {
       var_2._id_ABF8._id_129CC scripts\sp\utility::_id_9196(1, 1, 1, "mars_killstreak_targeting_outline");
+    }
 
     if(isDefined(var_2._id_ABF8.turret) && isDefined(var_2._id_ABF8._id_129CC)) {
       var_2 thread _id_130D(var_5);
@@ -420,24 +431,27 @@ _id_1321() {
   var_0 = getaiarray("allies");
   var_0 = scripts\engine\utility::array_add(var_0, level._id_6AF9);
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_1320(0);
+  foreach(var_2 in var_0) {
+    var_2 thread _id_1320(0);
+  }
 
   var_4 = getaiarray("axis");
 
   foreach(var_2 in var_4) {
-    if(!scripts\engine\utility::is_true(var_2._id_2708))
+    if(!scripts\engine\utility::is_true(var_2._id_2708)) {
       var_2 thread _id_1320(1);
+    }
   }
 }
 
 _id_1320(var_0) {
   thread _id_131F();
 
-  if(var_0)
+  if(var_0) {
     var_1 = 1;
-  else
+  } else {
     var_1 = 0;
+  }
 
   var_2 = _id_1336(self, var_1);
 
@@ -447,8 +461,9 @@ _id_1320(var_0) {
   scripts\engine\utility::waittill_any("death", "mars_killstreak_outro_black");
   _id_1331(var_2);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self hudoutlinedisable();
+  }
 }
 
 _id_1336(var_0, var_1) {
@@ -467,11 +482,13 @@ _id_1336(var_0, var_1) {
     setomnvar("ui_reticles_" + var_2 + "_lock_state", var_1);
 
     if(var_1 == 1) {
-      if(isDefined(var_0.unittype) && var_0.unittype == "c8")
+      if(isDefined(var_0.unittype) && var_0.unittype == "c8") {
         var_0 hudoutlineenable(1, 1, 1);
+      }
     } else if(var_1 == 0) {
-      if(isDefined(level._id_6AF9) && var_0 == level._id_6AF9)
+      if(isDefined(level._id_6AF9) && var_0 == level._id_6AF9) {
         var_0 hudoutlineenable(2, 0, 1);
+      }
     }
   }
 
@@ -510,8 +527,9 @@ _id_1315() {
   } else
     level._id_B3B1._id_E31F = [var_1, var_2];
 
-  if(var_0)
+  if(var_0) {
     thread _id_1332();
+  }
 }
 
 _id_1316() {
@@ -530,8 +548,9 @@ _id_1316() {
   } else
     level._id_B3B1._id_E31F = [var_1];
 
-  if(var_0)
+  if(var_0) {
     thread _id_1332();
+  }
 }
 
 _id_1332() {
@@ -547,13 +566,15 @@ _id_1332() {
 }
 
 _id_1322() {
-  foreach(var_1 in level._id_B3B1._id_E31F)
-  var_1 hide();
+  foreach(var_1 in level._id_B3B1._id_E31F) {
+    var_1 hide();
+  }
 }
 
 _id_1337() {
-  foreach(var_1 in level._id_B3B1._id_E31F)
-  var_1 show();
+  foreach(var_1 in level._id_B3B1._id_E31F) {
+    var_1 show();
+  }
 }
 
 _id_1314(var_0, var_1) {
@@ -569,10 +590,10 @@ _id_1314(var_0, var_1) {
     var_3 scripts\sp\utility::_id_9196(0, 0, 1, "mars_killstreak_targeting_outline");
   }
 
-  level._id_B3B1._id_5B1C[0] = scripts\sp\utility::_id_10639("reticle", var_0, level._id_B3B1._id_E320.angles);
+  level._id_B3B1._id_5B1C[0] = ::scripts\sp\utility::_id_10639("reticle", var_0, level._id_B3B1._id_E320.angles);
   level._id_B3B1._id_5B1C[0] dontcastshadows();
   level._id_B3B1._id_5B1C[0] scripts\sp\utility::_id_9196(0, 0, 1, "mars_killstreak_targeting_outline");
-  level._id_B3B1._id_5B1C[1] = scripts\sp\utility::_id_10639("reticle_bg", var_0 - (0, 0, 4), level._id_B3B1._id_E320.angles);
+  level._id_B3B1._id_5B1C[1] = ::scripts\sp\utility::_id_10639("reticle_bg", var_0 - (0, 0, 4), level._id_B3B1._id_E320.angles);
   level._id_B3B1._id_5B1C[1] dontcastshadows();
   level._id_B3B1._id_5B1C[1] scripts\sp\utility::_id_9196(5, 0, 1, "mars_killstreak_targeting_outline");
   _id_133F(var_0, var_1);
@@ -620,8 +641,9 @@ _id_133F(var_0, var_1) {
       }
     }
 
-    foreach(var_15 in level._id_B3B1._id_5B1A)
-    var_15 dontinterpolate();
+    foreach(var_15 in level._id_B3B1._id_5B1A) {
+      var_15 dontinterpolate();
+    }
   } else if(var_12 < level._id_B3B1._id_5B1A.size) {
     var_17 = var_12;
     var_18 = level._id_B3B1._id_5B1A.size - 1;
@@ -632,8 +654,9 @@ _id_133F(var_0, var_1) {
       level._id_B3B1._id_5B1A[var_6] = undefined;
     }
 
-    foreach(var_15 in level._id_B3B1._id_5B1A)
-    var_15 dontinterpolate();
+    foreach(var_15 in level._id_B3B1._id_5B1A) {
+      var_15 dontinterpolate();
+    }
   }
 
   var_21 = scripts\engine\utility::flat_angle(vectortoangles(var_2));
@@ -655,8 +678,9 @@ _id_133F(var_0, var_1) {
 }
 
 _id_1324() {
-  if(!isDefined(level._id_B3B1._id_5B19))
+  if(!isDefined(level._id_B3B1._id_5B19)) {
     level._id_B3B1._id_5B19 = 0;
+  }
 
   return level._id_B3B1._id_5B19;
 }
@@ -685,8 +709,9 @@ _id_1318() {
 
   level._id_B3B1._id_5B1A = undefined;
 
-  if(isDefined(level._id_B3B1._id_5B1C))
+  if(isDefined(level._id_B3B1._id_5B1C)) {
     scripts\sp\utility::_id_228A(level._id_B3B1._id_5B1C);
+  }
 
   level._id_B3B1._id_5B1C = undefined;
   level.player notify("mars_killstreak_dragline_reticle_deleted");
@@ -703,13 +728,15 @@ _id_1317(var_0) {
 }
 
 _id_1333() {
-  foreach(var_1 in level._id_B3B1._id_E31F)
-  var_1 scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
+  foreach(var_1 in level._id_B3B1._id_E31F) {
+    var_1 scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
+  }
 
   wait 0.15;
 
-  foreach(var_1 in level._id_B3B1._id_E31F)
-  var_1 scripts\sp\utility::_id_9196(0, 0, 1, "mars_killstreak_targeting_outline");
+  foreach(var_1 in level._id_B3B1._id_E31F) {
+    var_1 scripts\sp\utility::_id_9196(0, 0, 1, "mars_killstreak_targeting_outline");
+  }
 
   wait 0.15;
   level.player notify("mars_killstreak_reticle_animation_done");
@@ -846,16 +873,19 @@ _id_1339() {
   level._id_B3B1._id_114F3 = _id_1341(level._id_B3B1._id_E320.origin);
   self notify("mars_killstreak_fire");
 
-  if(level.player scripts\engine\utility::is_player_gamepad_enabled())
+  if(level.player scripts\engine\utility::is_player_gamepad_enabled()) {
     _id_1345(1.0, 40.0);
-  else
+  } else {
     _id_1345(1.0, 55.0);
+  }
 
-  foreach(var_1 in level._id_B3B1._id_E31F)
-  var_1 scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
+  foreach(var_1 in level._id_B3B1._id_E31F) {
+    var_1 scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
+  }
 
-  foreach(var_1 in level._id_B3B1._id_5B1B)
-  var_1 scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
+  foreach(var_1 in level._id_B3B1._id_5B1B) {
+    var_1 scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
+  }
 
   if(isDefined(level._id_B3B1._id_5B1C)) {
     level._id_B3B1._id_5B1C[0] scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
@@ -925,55 +955,69 @@ _id_1312() {
 }
 
 _id_131C() {
-  foreach(var_1 in level._id_B3B1._id_E31F)
-  var_1 scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
+  foreach(var_1 in level._id_B3B1._id_E31F) {
+    var_1 scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
+  }
 
-  foreach(var_1 in level._id_B3B1._id_5B1B)
-  var_1 scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
-
-  wait 0.2;
-
-  foreach(var_1 in level._id_B3B1._id_E31F)
-  var_1 scripts\sp\utility::_id_9196(4, 0, 1, "mars_killstreak_targeting_outline");
-
-  foreach(var_1 in level._id_B3B1._id_5B1B)
-  var_1 scripts\sp\utility::_id_9196(4, 0, 1, "mars_killstreak_targeting_outline");
-
-  foreach(var_1 in level._id_B3B1._id_10E4D)
-  var_1 scripts\sp\utility::_id_9196(4, 0, 1, "mars_killstreak_targeting_outline");
+  foreach(var_1 in level._id_B3B1._id_5B1B) {
+    var_1 scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
+  }
 
   wait 0.2;
 
-  foreach(var_1 in level._id_B3B1._id_E31F)
-  var_1 scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
+  foreach(var_1 in level._id_B3B1._id_E31F) {
+    var_1 scripts\sp\utility::_id_9196(4, 0, 1, "mars_killstreak_targeting_outline");
+  }
 
-  foreach(var_1 in level._id_B3B1._id_5B1B)
-  var_1 scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
+  foreach(var_1 in level._id_B3B1._id_5B1B) {
+    var_1 scripts\sp\utility::_id_9196(4, 0, 1, "mars_killstreak_targeting_outline");
+  }
 
-  foreach(var_1 in level._id_B3B1._id_10E4D)
-  var_1 scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
-
-  wait 0.2;
-
-  foreach(var_1 in level._id_B3B1._id_E31F)
-  var_1 scripts\sp\utility::_id_9196(4, 0, 1, "mars_killstreak_targeting_outline");
-
-  foreach(var_1 in level._id_B3B1._id_5B1B)
-  var_1 scripts\sp\utility::_id_9196(4, 0, 1, "mars_killstreak_targeting_outline");
-
-  foreach(var_1 in level._id_B3B1._id_10E4D)
-  var_1 scripts\sp\utility::_id_9196(4, 0, 1, "mars_killstreak_targeting_outline");
+  foreach(var_1 in level._id_B3B1._id_10E4D) {
+    var_1 scripts\sp\utility::_id_9196(4, 0, 1, "mars_killstreak_targeting_outline");
+  }
 
   wait 0.2;
 
-  foreach(var_1 in level._id_B3B1._id_E31F)
-  var_1 scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
+  foreach(var_1 in level._id_B3B1._id_E31F) {
+    var_1 scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
+  }
 
-  foreach(var_1 in level._id_B3B1._id_5B1B)
-  var_1 scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
+  foreach(var_1 in level._id_B3B1._id_5B1B) {
+    var_1 scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
+  }
 
-  foreach(var_1 in level._id_B3B1._id_10E4D)
-  var_1 scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
+  foreach(var_1 in level._id_B3B1._id_10E4D) {
+    var_1 scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
+  }
+
+  wait 0.2;
+
+  foreach(var_1 in level._id_B3B1._id_E31F) {
+    var_1 scripts\sp\utility::_id_9196(4, 0, 1, "mars_killstreak_targeting_outline");
+  }
+
+  foreach(var_1 in level._id_B3B1._id_5B1B) {
+    var_1 scripts\sp\utility::_id_9196(4, 0, 1, "mars_killstreak_targeting_outline");
+  }
+
+  foreach(var_1 in level._id_B3B1._id_10E4D) {
+    var_1 scripts\sp\utility::_id_9196(4, 0, 1, "mars_killstreak_targeting_outline");
+  }
+
+  wait 0.2;
+
+  foreach(var_1 in level._id_B3B1._id_E31F) {
+    var_1 scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
+  }
+
+  foreach(var_1 in level._id_B3B1._id_5B1B) {
+    var_1 scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
+  }
+
+  foreach(var_1 in level._id_B3B1._id_10E4D) {
+    var_1 scripts\sp\utility::_id_9196(1, 0, 1, "mars_killstreak_targeting_outline");
+  }
 
   wait 0.1;
   _id_131A();
@@ -985,8 +1029,9 @@ _id_131C() {
     level._id_B3B1._id_5B1B[var_29] delete();
   }
 
-  if(isDefined(level._id_B3B1._id_5B1C))
+  if(isDefined(level._id_B3B1._id_5B1C)) {
     scripts\sp\utility::_id_228A(level._id_B3B1._id_5B1C);
+  }
 
   _id_1335(0);
 }
@@ -1029,8 +1074,9 @@ _id_1346() {
   if(isalive(level.player)) {
     level.player playerlinktodelta(level._id_B3B1._id_C6DB, "tag_origin", 1, 0, 0, 0, 0, 1);
 
-    if(level.player islinked())
+    if(level.player islinked()) {
       level.player _meth_8392(0.05, 5, 5);
+    }
   }
 }
 
@@ -1143,8 +1189,9 @@ _id_1344() {
     var_11[0] = level.player getnormalizedmovement();
     var_11[1] = level.player _meth_814B();
 
-    if(!var_6 && scripts\engine\utility::is_true(self _meth_8139("invertedPitch")))
+    if(!var_6 && scripts\engine\utility::is_true(self _meth_8139("invertedPitch"))) {
       var_11[1] = (-1 * var_11[1][0], var_11[1][1], var_11[1][2]);
+    }
 
     var_12 = max(length(var_11[0]), length(var_11[1]));
     var_10 = (var_11[0] + var_11[1]) * 0.5;
@@ -1156,31 +1203,36 @@ _id_1344() {
     var_17 = 0;
     var_18 = 0;
 
-    if(!scripts\engine\utility::is_true(var_6))
+    if(!scripts\engine\utility::is_true(var_6)) {
       var_19 = (var_10[0], 0 - var_10[1], 0);
-    else
+    } else {
       var_19 = (var_10[0], var_10[1], 0) * 0.8;
+    }
 
     var_20 = vectorNormalize(var_19);
     var_21 = (distance(var_19, (0, 0, 0)) - var_8) / (1 - var_8);
 
-    if(var_21 < 0)
+    if(var_21 < 0) {
       var_21 = 0.0;
+    }
 
-    if(var_21 > 0.9)
+    if(var_21 > 0.9) {
       var_21 = 1.0;
+    }
 
     var_22 = vectortoangles(var_20);
 
-    if(var_21 == 0)
+    if(var_21 == 0) {
       var_22 = (0, 0, 0);
+    }
 
     var_23 = var_22 + var_13;
     var_24 = level._id_B3B1._id_B4B7 - level._id_B3B1._id_B7C5;
     var_25 = var_21 * var_24 + level._id_B3B1._id_B7C5;
 
-    if(var_21 == 0)
+    if(var_21 == 0) {
       var_25 = 0;
+    }
 
     var_4 = var_2;
     var_5 = var_3;
@@ -1193,8 +1245,9 @@ _id_1344() {
 
     var_3 = var_25;
 
-    if(var_25 > var_5)
+    if(var_25 > var_5) {
       var_3 = clamp(var_25, 0, var_5 + var_9);
+    }
 
     var_26 = _id_1311(level._id_B3B1._id_E321.origin + var_2 * var_3);
 
@@ -1219,10 +1272,11 @@ _id_1344() {
       var_30 = distance2d(level._id_B3B1._id_E321.origin, level._id_B3B1._id_1157C);
 
       if(var_30 <= level._id_B3B1._id_C1A4) {
-        if(var_30 == 0)
+        if(var_30 == 0) {
           var_27 = level._id_B3B1._id_C1A3;
-        else
+        } else {
           var_27 = vectorNormalize(level._id_B3B1._id_E321.origin - level._id_B3B1._id_1157C);
+        }
 
         var_31 = var_28 + var_27 * level._id_B3B1._id_C1A5;
         var_29 = var_31 - level._id_B3B1._id_E321.origin;
@@ -1250,10 +1304,11 @@ _id_1344() {
 _id_132A() {
   var_0 = self getplayerangles(1);
 
-  if(isDefined(level._id_B3B1._id_A9C0))
+  if(isDefined(level._id_B3B1._id_A9C0)) {
     level._id_B3B1._id_C1A3 = vectorNormalize(scripts\engine\utility::flatten_vector(level._id_B3B1._id_A9C0));
-  else
+  } else {
     level._id_B3B1._id_C1A3 = anglestoright(var_0);
+  }
 
   level._id_B3B1._id_C1A4 = 270;
   level._id_B3B1._id_C1A5 = 66.6667;
@@ -1261,25 +1316,27 @@ _id_132A() {
   level._id_B3B1._id_C1A2 = 1;
   wait 1.0;
 
-  if(isDefined(level._id_B3B1))
+  if(isDefined(level._id_B3B1)) {
     level._id_B3B1._id_C1A2 = 0;
+  }
 }
 
 _id_1311(var_0) {
   var_1 = var_0;
 
-  if(ispointinvolume(var_1, level._id_B3B3[level._id_B3B1._id_2F06].volume))
+  if(ispointinvolume(var_1, level._id_B3B3[level._id_B3B1._id_2F06].volume)) {
     return var_1;
-  else {
+  } else {
     var_2 = [];
 
     for(var_3 = 0; var_3 < level._id_B3B3[level._id_B3B1._id_2F06]._id_132A8.size; var_3++) {
       var_4 = level._id_B3B3[level._id_B3B1._id_2F06]._id_132A8[var_3].origin;
 
-      if(var_3 == level._id_B3B3[level._id_B3B1._id_2F06]._id_132A8.size - 1)
+      if(var_3 == level._id_B3B3[level._id_B3B1._id_2F06]._id_132A8.size - 1) {
         var_5 = level._id_B3B3[level._id_B3B1._id_2F06]._id_132A8[0].origin;
-      else
+      } else {
         var_5 = level._id_B3B3[level._id_B3B1._id_2F06]._id_132A8[var_3 + 1].origin;
+      }
 
       var_2[var_2.size] = pointonsegmentnearesttopoint(var_4, var_5, var_1);
     }
@@ -1378,8 +1435,9 @@ _id_1326(var_0, var_1) {
     var_5[var_7] = var_11["position"];
 
     foreach(var_13 in level._id_B3B2) {
-      if(var_13.dead == 0 && var_13._id_11554 == 1 && distance(var_13.origin, var_10) < 450)
+      if(var_13.dead == 0 && var_13._id_11554 == 1 && distance(var_13.origin, var_10) < 450) {
         level notify(var_13.targetname + "_targeted");
+      }
     }
   }
 
@@ -1423,8 +1481,9 @@ _id_1327(var_0) {
   var_5 = scripts\sp\utility::_id_81FF();
 
   foreach(var_7 in var_5) {
-    if(distance(var_7.origin, var_0) < 450 && !scripts\engine\utility::is_true(var_7._id_270C))
+    if(distance(var_7.origin, var_0) < 450 && !scripts\engine\utility::is_true(var_7._id_270C)) {
       var_7 thread _id_1328(400, var_0, level.player, level.player, "MOD_EXPLOSIVE");
+    }
   }
 
   foreach(var_10 in level._id_B3B2) {
@@ -1436,12 +1495,14 @@ _id_1327(var_0) {
     }
   }
 
-  if(distance2d(level.player.origin, var_0) < 450)
+  if(distance2d(level.player.origin, var_0) < 450) {
     level.player dodamage(level.player.health + 10000, var_0, level.player, level.player, "MOD_EXPLOSIVE");
+  }
 
   foreach(var_13 in level._id_CAF7) {
-    if(distance(var_13.origin, var_0) < 450)
+    if(distance(var_13.origin, var_0) < 450) {
       var_13 thread _id_1328(400, var_0, level.player, undefined, "MOD_EXPLOSIVE");
+    }
   }
 }
 
@@ -1465,8 +1526,9 @@ _id_6F2A(var_0, var_1) {
   }
   self._id_9395 = 1;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(randomfloat(var_1));
+  }
 
   if(!self _meth_81B7()) {
     self._id_DC1A = 1;
@@ -1481,8 +1543,9 @@ _id_6F2A(var_0, var_1) {
 _id_E1ED(var_0) {
   scripts\engine\utility::waitframe();
 
-  if(isalive(self))
+  if(isalive(self)) {
     self._id_BFED = var_0;
+  }
 }
 
 #using_animtree("generic_human");
@@ -1494,8 +1557,9 @@ _id_131B() {
   level._id_6AF9 = var_0 spawndrone();
   var_1 = level.player getmovingplatformparent();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level._id_6AF9 linkTo(var_1);
+  }
 
   level._id_6AF9 _meth_83D0(#animtree);
   level._id_6AF9 makeentitysentient("allies");
@@ -1542,12 +1606,13 @@ _id_130F() {
   var_1 = 0;
 
   for(;;) {
-    if(var_1 == 0)
+    if(var_1 == 0) {
       wait 5;
-    else if(var_1 == 1)
+    } else if(var_1 == 1) {
       wait(randomfloatrange(1, 3));
-    else if(var_1 > 1)
+    } else if(var_1 > 1) {
       wait 0.5;
+    }
 
     var_0 = 0;
     var_2 = getaiarray("axis");
@@ -1578,10 +1643,11 @@ _id_1313(var_0) {
   level.player endon("reset_killstreak_cooldown");
   level.player endon("take_mars_killstreak");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = 0.05 / var_0;
-  else
+  } else {
     var_1 = 0.000416667;
+  }
 
   while(level._id_B3B4 < 1.0) {
     level._id_B3B4 = level._id_B3B4 + var_1;
@@ -1594,8 +1660,9 @@ _id_1313(var_0) {
 }
 
 _id_131D(var_0) {
-  while(scripts\engine\utility::flag("gator_death_start"))
+  while(scripts\engine\utility::flag("gator_death_start")) {
     wait 0.1;
+  }
 
   setomnvar("ui_jackal_cooldown_done", 1);
   setomnvar("ui_jackal_meter", 1.0);
@@ -1619,8 +1686,9 @@ _id_1323(var_0) {
       wait 0.25;
     }
 
-    if(var_1)
+    if(var_1) {
       wait 3.0;
+    }
 
     if(isDefined(var_0) && var_0) {
       if(!level._id_A68E) {
@@ -1632,8 +1700,9 @@ _id_1323(var_0) {
       continue;
     }
 
-    while(isDefined(level._id_8569) && level._id_8569 scripts\sp\utility::_id_65DB("player_at_door") && !scripts\engine\utility::flag("flag_greenhouse_exit_end"))
+    while(isDefined(level._id_8569) && level._id_8569 scripts\sp\utility::_id_65DB("player_at_door") && !scripts\engine\utility::flag("flag_greenhouse_exit_end")) {
       wait 1.0;
+    }
 
     scripts\sp\utility::_id_56BE("hint_use_monsweapon", 3);
     wait 15;
@@ -1650,8 +1719,9 @@ _id_B391(var_0) {
 _id_B393(var_0, var_1) {
   self notify("end_mars_killstreak_text");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 3;
+  }
 
   var_2 = newhudelem();
   var_2.alignx = "left";

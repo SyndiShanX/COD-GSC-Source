@@ -12,8 +12,9 @@ _id_9739() {
 _id_789F(var_0) {
   self endon("death");
 
-  if(!isDefined(level._id_FDBE))
+  if(!isDefined(level._id_FDBE)) {
     _id_9739();
+  }
 
   if(isDefined(var_0)) {
     var_1 = _id_7C05(var_0);
@@ -295,13 +296,13 @@ _id_9854() {
 }
 
 _id_7C05(var_0) {
-  if(isDefined(level._id_FDBE._id_A594[var_0]))
+  if(isDefined(level._id_FDBE._id_A594[var_0])) {
     return level._id_FDBE._id_A594[var_0];
-  else if(isDefined(level._id_FDBE._id_7741["male"][var_0]))
+  } else if(isDefined(level._id_FDBE._id_7741["male"][var_0])) {
     return level._id_FDBE._id_7741["male"][var_0];
-  else if(isDefined(level._id_FDBE._id_7741["female"][var_0]))
+  } else if(isDefined(level._id_FDBE._id_7741["female"][var_0])) {
     return level._id_FDBE._id_7741["female"][var_0];
-  else {}
+  } else {}
 }
 
 _id_7A8C(var_0) {
@@ -320,8 +321,9 @@ _id_7A8C(var_0) {
 }
 
 _id_7BE9(var_0) {
-  if(!isDefined(var_0.gender))
+  if(!isDefined(var_0.gender)) {
     var_0.gender = "male";
+  }
 
   if(var_0.gender == "female") {
     var_1 = _id_7BEA(level._id_FDBE._id_7741["female"]);
@@ -341,8 +343,9 @@ _id_7BEA(var_0) {
       var_2 = 0;
 
       foreach(var_4 in var_0) {
-        if(var_2 == var_1)
+        if(var_2 == var_1) {
           return var_4;
+        }
 
         var_2++;
       }
@@ -356,10 +359,11 @@ _id_7BEA(var_0) {
 }
 
 _id_7AED(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = var_1;
-  else
+  } else {
     var_2 = _id_0EFB::_id_7AF0();
+  }
 
   if(isDefined(var_2)) {
     var_3 = _id_7AEE(var_2);
@@ -376,20 +380,23 @@ _id_7AED(var_0, var_1) {
 }
 
 _id_7AEE(var_0) {
-  if(!isDefined(level._id_FDC6))
+  if(!isDefined(level._id_FDC6)) {
     _id_9865();
+  }
 
-  if(isDefined(var_0) && isDefined(level._id_FDC6[var_0]))
+  if(isDefined(var_0) && isDefined(level._id_FDC6[var_0])) {
     return level._id_FDC6[var_0];
-  else
+  } else {
     return undefined;
+  }
 }
 
 _id_7AEF() {
   var_0 = _id_0EFB::_id_7C60();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = _id_0EFB::_id_7C5F();
+  }
 
   var_1 = undefined;
 

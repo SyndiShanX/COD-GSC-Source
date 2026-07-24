@@ -88,8 +88,9 @@ _id_95D1() {
 
 _id_F395(var_0) {
   foreach(var_6, var_2 in var_0) {
-    foreach(var_5, var_4 in var_2)
-    level._id_10E6D._id_0021[var_6][var_5] = var_4;
+    foreach(var_5, var_4 in var_2) {
+      level._id_10E6D._id_0021[var_6][var_5] = var_4;
+    }
   }
 }
 
@@ -117,8 +118,9 @@ _id_B2F1() {
     setsaveddvar("ai_corpseSynch", 0);
 
     if(getdvarint("ai_threatsightDisplay", 1)) {
-      foreach(var_1 in level.players)
-      var_1 thread scripts\sp\utility::play_sound_on_entity("ui_stealth_busted");
+      foreach(var_1 in level.players) {
+        var_1 thread scripts\sp\utility::play_sound_on_entity("ui_stealth_busted");
+      }
     }
 
     if(!scripts\engine\utility::flag("stealth_enabled")) {
@@ -172,8 +174,9 @@ _id_10E20() {
       var_2 = scripts\engine\utility::array_removeundefined(var_2);
 
       if(var_2.size > 0) {
-        if(var_2[0].team == "allies")
+        if(var_2[0].team == "allies") {
           continue;
+        }
       }
 
       thread _id_1284D(var_4);
@@ -184,8 +187,9 @@ _id_10E20() {
 
   var_0 = level._id_10E6D.group.groups;
 
-  foreach(var_4, var_2 in var_0)
-  _id_0F27::_id_868A("stealth_spotted", var_4);
+  foreach(var_4, var_2 in var_0) {
+    _id_0F27::_id_868A("stealth_spotted", var_4);
+  }
 }
 
 _id_1284D(var_0) {
@@ -202,8 +206,9 @@ _id_1284D(var_0) {
     wait(level._id_10E6D._id_53A0.timeout);
     var_2 = _id_3DB9(var_0);
 
-    if(!var_2)
+    if(!var_2) {
       return;
+    }
   }
 
   level notify("enemy_" + var_0 + "_stop");
@@ -225,8 +230,9 @@ _id_3DB9(var_0) {
   var_1 = _id_0F27::_id_79F5(var_0);
 
   foreach(var_4, var_3 in var_1) {
-    if(isalive(var_3.enemy))
+    if(isalive(var_3.enemy)) {
       return 0;
+    }
   }
 
   return 1;
@@ -253,6 +259,7 @@ _id_D0B2(var_0) {
   level._id_10E6D.save._id_D202--;
   waittillframeend;
 
-  if(!level._id_10E6D.save._id_D202)
+  if(!level._id_10E6D.save._id_D202) {
     scripts\engine\utility::flag_clear("stealth_player_nade");
+  }
 }

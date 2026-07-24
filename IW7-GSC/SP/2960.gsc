@@ -20,7 +20,7 @@ _id_7AA4() {
   var_0["trigger_multiple_compass"] = ::_id_12769;
   var_0["trigger_multiple_fx_volume"] = ::_id_1276E;
   var_0["trigger_multiple_kleenex"] = ::_id_12770;
-  var_0["trigger_multiple_light_sunshadow"] = scripts\sp\lights::_id_11203;
+  var_0["trigger_multiple_light_sunshadow"] = ::scripts\sp\lights::_id_11203;
   var_0["trigger_multiple_jackal_boundary_autoturn"] = ::_id_12759;
   var_0["trigger_multiple_jackal_boundary_warning"] = ::_id_1275B;
   var_0["trigger_multiple_jackal_boundary_push"] = ::_id_1275A;
@@ -30,7 +30,7 @@ _id_7AA4() {
   var_0["trigger_multiple_spacejump"] = ::_id_12794;
 
   if(!scripts\sp\starts::_id_9C4B()) {
-    var_0["trigger_multiple_autosave"] = scripts\sp\autosave::_id_12724;
+    var_0["trigger_multiple_autosave"] = ::scripts\sp\autosave::_id_12724;
     var_0["trigger_multiple_spawn"] = _id_0B77::_id_12797;
     var_0["trigger_multiple_spawn_reinforcement"] = _id_0B77::_id_12798;
   }
@@ -46,14 +46,14 @@ _id_7AA4() {
   var_0["trigger_multiple_friendly_stop_respawn"] = ::trigger_friendly_stop_respawn;
   var_0["trigger_multiple_physics"] = ::_id_1277E;
   var_0["trigger_multiple_fx_watersheeting"] = ::_id_1276F;
-  var_0["trigger_multiple_fakeactor_move"] = scripts\sp\fakeactor::_id_12735;
-  var_0["trigger_multiple_fakeactor_node_disable"] = scripts\sp\fakeactor::_id_12736;
-  var_0["trigger_multiple_fakeactor_node_enable"] = scripts\sp\fakeactor::_id_12738;
-  var_0["trigger_multiple_fakeactor_node_disablegroup"] = scripts\sp\fakeactor::_id_12737;
-  var_0["trigger_multiple_fakeactor_node_enablegroup"] = scripts\sp\fakeactor::_id_12739;
-  var_0["trigger_multiple_fakeactor_node_passthrough"] = scripts\sp\fakeactor::_id_1273B;
-  var_0["trigger_multiple_fakeactor_node_lock"] = scripts\sp\fakeactor::_id_1273A;
-  var_0["trigger_multiple_geo_mover"] = scripts\sp\geo_mover::_id_12764;
+  var_0["trigger_multiple_fakeactor_move"] = ::scripts\sp\fakeactor::_id_12735;
+  var_0["trigger_multiple_fakeactor_node_disable"] = ::scripts\sp\fakeactor::_id_12736;
+  var_0["trigger_multiple_fakeactor_node_enable"] = ::scripts\sp\fakeactor::_id_12738;
+  var_0["trigger_multiple_fakeactor_node_disablegroup"] = ::scripts\sp\fakeactor::_id_12737;
+  var_0["trigger_multiple_fakeactor_node_enablegroup"] = ::scripts\sp\fakeactor::_id_12739;
+  var_0["trigger_multiple_fakeactor_node_passthrough"] = ::scripts\sp\fakeactor::_id_1273B;
+  var_0["trigger_multiple_fakeactor_node_lock"] = ::scripts\sp\fakeactor::_id_1273A;
+  var_0["trigger_multiple_geo_mover"] = ::scripts\sp\geo_mover::_id_12764;
   var_0["trigger_multiple_transient"] = ::_id_12773;
   var_0["trigger_multiple_fire"] = ::_id_1273C;
   var_0["trigger_radius_fire"] = ::_id_1273C;
@@ -63,8 +63,9 @@ _id_7AA4() {
 _id_1276F(var_0) {
   var_1 = 3;
 
-  if(isDefined(var_0._id_ED75))
+  if(isDefined(var_0._id_ED75)) {
     var_1 = var_0._id_ED75;
+  }
 
   for(;;) {
     var_0 waittill("trigger", var_2);
@@ -84,16 +85,16 @@ _id_7AA5() {
     var_0["camper_spawner"] = _id_0B77::camper_trigger_think;
     var_0["flood_spawner"] = _id_0B77::_id_6F5D;
     var_0["trigger_spawner"] = _id_0B77::_id_12797;
-    var_0["trigger_autosave"] = scripts\sp\autosave::_id_12724;
+    var_0["trigger_autosave"] = ::scripts\sp\autosave::_id_12724;
     var_0["trigger_spawngroup"] = ::_id_1279A;
     var_0["trigger_vehicle_spline_spawn"] = ::_id_127AC;
     var_0["trigger_vehicle_spawn"] = _id_0B77::_id_12797;
     var_0["random_spawn"] = _id_0B77::_id_DC9B;
   }
 
-  var_0["autosave_now"] = scripts\sp\autosave::_id_2671;
-  var_0["trigger_autosave_tactical"] = scripts\sp\autosave::_id_12727;
-  var_0["trigger_autosave_stealth"] = scripts\sp\autosave::_id_12726;
+  var_0["autosave_now"] = ::scripts\sp\autosave::_id_2671;
+  var_0["trigger_autosave_tactical"] = ::scripts\sp\autosave::_id_12727;
+  var_0["trigger_autosave_stealth"] = ::scripts\sp\autosave::_id_12726;
   var_0["trigger_unlock"] = ::_id_127A8;
   var_0["trigger_lookat"] = ::_id_12760;
   var_0["trigger_looking"] = ::_id_12762;
@@ -119,7 +120,7 @@ _id_7AA5() {
   var_0["trigger_slide"] = ::_id_12792;
   var_0["trigger_dooropen"] = ::_id_12734;
   var_0["stealth_shadow"] = ::_id_1279C;
-  var_0["geo_mover"] = scripts\sp\geo_mover::_id_12764;
+  var_0["geo_mover"] = ::scripts\sp\geo_mover::_id_12764;
   var_0["no_crouch_or_prone"] = ::_id_12775;
   var_0["no_prone"] = ::_id_12776;
   return var_0;
@@ -147,8 +148,9 @@ _id_9726() {
 
   if(!scripts\sp\starts::_id_9C4B()) {
     for(var_10 = 0; var_10 < var_4.size; var_10++) {
-      if(var_4[var_10].spawnflags & 32)
+      if(var_4[var_10].spawnflags & 32) {
         thread _id_0B77::_id_12797(var_4[var_10]);
+      }
     }
   }
 
@@ -158,50 +160,64 @@ _id_9726() {
     var_4 = getEntArray(var_13, "code_classname");
 
     foreach(var_15 in var_4) {
-      if(isDefined(var_15.script_flag_true))
+      if(isDefined(var_15.script_flag_true)) {
         level thread _id_1278F(var_15);
+      }
 
-      if(isDefined(var_15.script_flag_false))
+      if(isDefined(var_15.script_flag_false)) {
         level thread _id_1278E(var_15);
+      }
 
-      if(isDefined(var_15._id_ED0E) || isDefined(var_15._id_ED0D))
+      if(isDefined(var_15._id_ED0E) || isDefined(var_15._id_ED0D)) {
         level thread scripts\sp\autosave::_id_268B(var_15);
+      }
 
-      if(isDefined(var_15._id_EE17))
+      if(isDefined(var_15._id_EE17)) {
         level thread scripts\sp\mgturret::_id_B6BE(var_15);
+      }
 
-      if(isDefined(var_15._id_EDF7))
+      if(isDefined(var_15._id_EDF7)) {
         level thread _id_0B77::_id_A617(var_15);
+      }
 
-      if(isDefined(var_15._id_EDF5))
+      if(isDefined(var_15._id_EDF5)) {
         level thread scripts\sp\vehicle_code::_id_A629(var_15);
+      }
 
-      if(isDefined(var_15.script_emptyspawner))
+      if(isDefined(var_15.script_emptyspawner)) {
         level thread _id_0B77::_id_61BD(var_15);
+      }
 
-      if(isDefined(var_15.script_prefab_exploder))
+      if(isDefined(var_15.script_prefab_exploder)) {
         var_15.script_exploder = var_15.script_prefab_exploder;
+      }
 
-      if(isDefined(var_15.script_exploder))
+      if(isDefined(var_15.script_exploder)) {
         level thread exploder_load(var_15);
+      }
 
-      if(isDefined(var_15._id_EEEF))
+      if(isDefined(var_15._id_EEEF)) {
         level thread _id_12780(var_15);
+      }
 
-      if(isDefined(var_15._id_ED18))
+      if(isDefined(var_15._id_ED18)) {
         level thread _id_12729(var_15);
+      }
 
-      if(isDefined(var_15._id_EEEE))
+      if(isDefined(var_15._id_EEEE)) {
         var_15 thread _id_1274C();
+      }
 
-      if(isDefined(var_15._id_EE90))
+      if(isDefined(var_15._id_EE90)) {
         level thread _id_0B77::_id_DC8F(var_15);
+      }
 
       if(isDefined(var_15.targetname)) {
         var_16 = var_15.targetname;
 
-        if(isDefined(var_1[var_16]))
+        if(isDefined(var_1[var_16])) {
           level thread[[var_1[var_16]]](var_15);
+        }
       }
     }
   }
@@ -210,21 +226,25 @@ _id_9726() {
 _id_1272E(var_0) {
   var_1 = 1;
 
-  if(var_1)
+  if(var_1) {
     var_0 delete();
+  }
 }
 
 _id_4984() {}
 
 _id_9CEA() {
-  if(getDvar("createfx") != "")
+  if(getDvar("createfx") != "") {
     return 1;
+  }
 
-  if(getdvarint("scr_art_tweak") > 0)
+  if(getdvarint("scr_art_tweak") > 0) {
     return 1;
+  }
 
-  if(isDefined(level._id_10CDA) && level._id_10CDA == "no_game")
+  if(isDefined(level._id_10CDA) && level._id_10CDA == "no_game") {
     return 1;
+  }
 
   return 0;
 }
@@ -233,42 +253,49 @@ _id_12773(var_0) {
   var_2 = undefined;
   var_3 = undefined;
 
-  if(isDefined(var_0._id_EEE7))
+  if(isDefined(var_0._id_EEE7)) {
     var_2 = strtok(var_0._id_EEE7, " ");
+  }
 
-  if(isDefined(var_0._id_EEE8))
+  if(isDefined(var_0._id_EEE8)) {
     var_3 = strtok(var_0._id_EEE8, " ");
+  }
 
   if(isDefined(var_2)) {
     foreach(var_5 in var_2) {
-      if(!scripts\engine\utility::flag_exist(var_5 + "_loaded"))
+      if(!scripts\engine\utility::flag_exist(var_5 + "_loaded")) {
         scripts\engine\utility::flag_init(var_5 + "_loaded");
+      }
     }
   }
 
   if(isDefined(var_3)) {
     foreach(var_5 in var_3) {
-      if(!scripts\engine\utility::flag_exist(var_5 + "_loaded"))
+      if(!scripts\engine\utility::flag_exist(var_5 + "_loaded")) {
         scripts\engine\utility::flag_init(var_5 + "_loaded");
+      }
     }
   }
 
   for(;;) {
     var_0 waittill("trigger");
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       scripts\sp\utility::_id_12651(var_3);
+    }
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       scripts\sp\utility::_id_12643(var_2);
+    }
   }
 }
 
 _id_1272F(var_0) {
   var_1 = var_0 scripts\sp\utility::_id_7D1E();
 
-  if(!isDefined(level.flag[var_1]))
+  if(!isDefined(level.flag[var_1])) {
     scripts\engine\utility::flag_init(var_1);
+  }
 
   for(;;) {
     var_0 waittill("trigger", var_2);
@@ -287,8 +314,9 @@ _id_1272F(var_0) {
 _id_1273D(var_0) {
   var_1 = var_0 scripts\sp\utility::_id_7D1E();
 
-  if(!isDefined(level.flag[var_1]))
+  if(!isDefined(level.flag[var_1])) {
     scripts\engine\utility::flag_init(var_1);
+  }
 
   for(;;) {
     var_0 waittill("trigger");
@@ -300,8 +328,9 @@ _id_1273D(var_0) {
 _id_1273E(var_0) {
   var_1 = var_0 scripts\sp\utility::_id_7D1E();
 
-  if(!isDefined(level.flag[var_1]))
+  if(!isDefined(level.flag[var_1])) {
     scripts\engine\utility::flag_init(var_1);
+  }
 
   for(;;) {
     var_0 waittill("trigger");
@@ -325,8 +354,9 @@ _id_733E() {
     if(!isalive(var_2)) {
       continue;
     }
-    if(var_2 istouching(self))
+    if(var_2 istouching(self)) {
       return 1;
+    }
 
     wait 0.1;
   }
@@ -336,8 +366,9 @@ _id_733E() {
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = var_0[var_1];
 
-    if(var_2 istouching(self))
+    if(var_2 istouching(self)) {
       return 1;
+    }
   }
 
   return 0;
@@ -346,8 +377,9 @@ _id_733E() {
 _id_1273F(var_0) {
   var_1 = var_0 scripts\sp\utility::_id_7D1E();
 
-  if(!isDefined(level.flag[var_1]))
+  if(!isDefined(level.flag[var_1])) {
     scripts\engine\utility::flag_init(var_1);
+  }
 
   for(;;) {
     var_0 waittill("trigger", var_2);
@@ -384,21 +416,25 @@ trigger_friendly_respawn(var_0) {
 _id_1275E(var_0) {
   var_1 = var_0 scripts\sp\utility::_id_7D1E();
 
-  if(!isDefined(level.flag[var_1]))
+  if(!isDefined(level.flag[var_1])) {
     scripts\engine\utility::flag_init(var_1);
+  }
 
-  if(!isDefined(level._id_A842))
+  if(!isDefined(level._id_A842)) {
     level._id_A842 = [];
+  }
 
   for(;;) {
     var_0 waittill("trigger", var_2);
 
-    if(isalive(var_2) && isDefined(var_0) && var_2 istouching(var_0))
+    if(isalive(var_2) && isDefined(var_0) && var_2 istouching(var_0)) {
       level._id_A842 = scripts\engine\utility::array_add(level._id_A842, var_0);
+    }
 
     while(isalive(var_2) && isDefined(var_0) && var_2 istouching(var_0)) {
-      if(!scripts\engine\utility::flag(var_1))
+      if(!scripts\engine\utility::flag(var_1)) {
         thread _id_1275F(var_1);
+      }
 
       wait 0.25;
     }
@@ -446,18 +482,21 @@ _id_12723(var_0) {
 _id_12744(var_0) {
   var_1 = var_0 scripts\sp\utility::_id_7D1E();
 
-  if(!isDefined(level.flag[var_1]))
+  if(!isDefined(level.flag[var_1])) {
     scripts\engine\utility::flag_init(var_1);
+  }
 
   for(;;) {
     var_0 waittill("trigger", var_2);
     var_0 scripts\sp\utility::script_delay();
 
-    if(isalive(var_2) && isDefined(var_0) && var_2 istouching(var_0))
+    if(isalive(var_2) && isDefined(var_0) && var_2 istouching(var_0)) {
       scripts\engine\utility::flag_set(var_1);
+    }
 
-    while(isalive(var_2) && isDefined(var_0) && var_2 istouching(var_0))
+    while(isalive(var_2) && isDefined(var_0) && var_2 istouching(var_0)) {
       wait 0.25;
+    }
 
     scripts\engine\utility::flag_clear(var_1);
   }
@@ -480,8 +519,9 @@ _id_1274C() {
 _id_1274D() {
   level waittill("trigger_group_" + self._id_EEEE, var_0);
 
-  if(self != var_0)
+  if(self != var_0) {
     self delete();
+  }
 }
 
 _id_12777(var_0) {
@@ -528,17 +568,20 @@ _id_1277E(var_0) {
     var_10 = var_6.script_parameters;
     var_11 = var_6.script_damage;
 
-    if(!isDefined(var_9))
+    if(!isDefined(var_9)) {
       var_9 = 350;
+    }
 
-    if(!isDefined(var_10))
+    if(!isDefined(var_10)) {
       var_10 = 0.25;
+    }
 
     setDvar("tempdvar", var_10);
     var_10 = getdvarfloat("tempdvar");
 
-    if(isDefined(var_11))
+    if(isDefined(var_11)) {
       radiusdamage(var_6.origin, var_9, var_11, var_11 * 0.5);
+    }
 
     physicsexplosionsphere(var_6.origin, var_9, var_9 * 0.5, var_10);
   }
@@ -577,8 +620,9 @@ _id_1786(var_0) {
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = var_0[var_1];
 
-    if(!isDefined(level.trigger_flags[var_2]))
+    if(!isDefined(level.trigger_flags[var_2])) {
       level.trigger_flags[var_2] = [];
+    }
 
     level.trigger_flags[var_2][level.trigger_flags[var_2].size] = self;
   }
@@ -594,8 +638,9 @@ _id_1279A(var_0) {
   var_0 waittill("trigger");
   var_2 = scripts\engine\utility::random(level._id_10727[var_1]);
 
-  foreach(var_5, var_4 in var_2)
-  var_4 scripts\sp\utility::_id_10619();
+  foreach(var_5, var_4 in var_2) {
+    var_4 scripts\sp\utility::_id_10619();
+  }
 }
 
 _id_1279E(var_0) {
@@ -639,24 +684,28 @@ _id_7D1F() {
     var_3 = [];
 
     foreach(var_5 in var_2) {
-      if(var_5.classname == "script_origin")
+      if(var_5.classname == "script_origin") {
         var_3[var_3.size] = var_5;
+      }
 
-      if(issubstr(var_5.classname, "trigger"))
+      if(issubstr(var_5.classname, "trigger")) {
         var_0[var_0.size] = var_5;
+      }
     }
 
     var_2 = scripts\engine\utility::getStructArray(self.target, "targetname");
 
-    foreach(var_5 in var_2)
-    var_3[var_3.size] = var_5;
+    foreach(var_5 in var_2) {
+      var_3[var_3.size] = var_5;
+    }
 
     if(var_3.size == 1) {
       var_9 = var_3[0];
       var_1 = var_9.origin;
 
-      if(isDefined(var_9.code_classname))
+      if(isDefined(var_9.code_classname)) {
         var_9 delete();
+      }
     }
   }
 
@@ -677,8 +726,9 @@ _id_12762(var_0) {
 _id_12761(var_0, var_1) {
   var_2 = 0.78;
 
-  if(isDefined(var_0._id_ED6D))
+  if(isDefined(var_0._id_ED6D)) {
     var_2 = var_0._id_ED6D;
+  }
 
   var_3 = var_0 _id_7D1F();
   var_4 = var_3["triggers"];
@@ -689,30 +739,35 @@ _id_12761(var_0, var_1) {
   if(var_6) {
     var_7 = var_0 scripts\sp\utility::_id_7D1E();
 
-    if(!isDefined(level.flag[var_7]))
+    if(!isDefined(level.flag[var_7])) {
       scripts\engine\utility::flag_init(var_7);
+    }
   } else if(!var_4.size) {}
 
-  if(var_1 && var_6)
+  if(var_1 && var_6) {
     level endon(var_7);
+  }
 
   var_0 endon("death");
   var_8 = 1;
 
-  if(isDefined(var_0._id_EE61))
+  if(isDefined(var_0._id_EE61)) {
     var_8 = var_0._id_EE61;
+  }
 
   for(;;) {
-    if(var_6)
+    if(var_6) {
       scripts\engine\utility::flag_clear(var_7);
+    }
 
     var_0 waittill("trigger", var_9);
     var_10 = [];
 
     while(var_9 istouching(var_0)) {
       if(var_8 && !sighttracepassed(var_9 getEye(), var_5, 0, undefined)) {
-        if(var_6)
+        if(var_6) {
           scripts\engine\utility::flag_clear(var_7);
+        }
 
         wait 0.5;
         continue;
@@ -726,8 +781,9 @@ _id_12761(var_0, var_1) {
       if(var_14 >= var_2) {
         scripts\engine\utility::array_thread(var_4, scripts\sp\utility::_id_F225, "trigger");
 
-        if(var_6)
+        if(var_6) {
           scripts\engine\utility::flag_set(var_7, var_9);
+        }
 
         if(var_1) {
           return;
@@ -758,8 +814,9 @@ _id_1272B(var_0) {
   if(var_4) {
     var_5 = var_0 scripts\sp\utility::_id_7D1E();
 
-    if(!isDefined(level.flag[var_5]))
+    if(!isDefined(level.flag[var_5])) {
       scripts\engine\utility::flag_init(var_5);
+    }
   } else if(!var_1.size) {}
 
   var_0 endon("death");
@@ -773,22 +830,25 @@ _id_1272B(var_0) {
   var_7[var_7.size] = (0, 0, var_6);
 
   for(;;) {
-    if(var_4)
+    if(var_4) {
       scripts\engine\utility::flag_clear(var_5);
+    }
 
     var_0 waittill("trigger", var_8);
 
     while(level.player istouching(var_0)) {
       if(!var_8 _id_392A(var_2, var_7)) {
-        if(var_4)
+        if(var_4) {
           scripts\engine\utility::flag_clear(var_5);
+        }
 
         wait 0.1;
         continue;
       }
 
-      if(var_4)
+      if(var_4) {
         scripts\engine\utility::flag_set(var_5);
+      }
 
       scripts\engine\utility::array_thread(var_1, scripts\sp\utility::_id_F225, "trigger");
       wait 0.5;
@@ -798,8 +858,9 @@ _id_1272B(var_0) {
 
 _id_392A(var_0, var_1) {
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(sighttracepassed(self getEye(), var_0 + var_1[var_2], 1, self))
+    if(sighttracepassed(self getEye(), var_0 + var_1[var_2], 1, self)) {
       return 1;
+    }
   }
 
   return 0;
@@ -808,8 +869,9 @@ _id_392A(var_0, var_1) {
 _id_127A8(var_0) {
   var_1 = "not_set";
 
-  if(isDefined(var_0.script_noteworthy))
+  if(isDefined(var_0.script_noteworthy)) {
     var_1 = var_0.script_noteworthy;
+  }
 
   var_2 = getEntArray(var_0.target, "targetname");
   var_0 thread _id_127A9(var_0.target);
@@ -833,8 +895,9 @@ _id_135AA(var_0, var_1) {
   level endon("unlocked_trigger_hit" + var_1);
   var_2 = spawnStruct();
 
-  for(var_3 = 0; var_3 < var_0.size; var_3++)
+  for(var_3 = 0; var_3 < var_0.size; var_3++) {
     var_0[var_3] thread _id_E1A0(var_2, var_1);
+  }
 
   var_2 waittill("trigger");
   level notify("unlocked_trigger_hit" + var_1);
@@ -853,25 +916,28 @@ _id_12729(var_0) {
   if(isDefined(var_0.target)) {
     var_2 = getEntArray(var_0.target, "targetname");
 
-    if(issubstr(var_2[0].classname, "trigger"))
+    if(issubstr(var_2[0].classname, "trigger")) {
       var_1 = var_2[0];
+    }
   }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 waittill("trigger", var_3);
-  else
+  } else {
     var_0 waittill("trigger", var_3);
+  }
 
   var_4 = undefined;
 
   if(isDefined(var_1)) {
-    if(var_3.team != level.player.team && level.player istouching(var_0))
+    if(var_3.team != level.player.team && level.player istouching(var_0)) {
       var_4 = level.player scripts\anim\battlechatter::_id_7E32("custom");
-    else if(var_3.team == level.player.team) {
+    } else if(var_3.team == level.player.team) {
       var_5 = "axis";
 
-      if(level.player.team == "axis")
+      if(level.player.team == "axis") {
         var_5 = "allies";
+      }
 
       var_6 = scripts\anim\battlechatter::_id_8145("custom", var_5);
       var_6 = scripts\engine\utility::get_array_of_farthest(level.player.origin, var_6);
@@ -888,8 +954,9 @@ _id_12729(var_0) {
     }
   } else if(isPlayer(var_3))
     var_4 = var_3 scripts\anim\battlechatter::_id_7E32("custom");
-  else
+  else {
     var_4 = var_3;
+  }
 
   if(!isDefined(var_4)) {
     return;
@@ -899,10 +966,11 @@ _id_12729(var_0) {
   }
   var_10 = var_4 scripts\sp\utility::_id_4C39(var_0._id_ED18);
 
-  if(!var_10)
+  if(!var_10) {
     level scripts\engine\utility::delaythread(0.25, ::_id_12729, var_0);
-  else
+  } else {
     var_0 notify("custom_battlechatter_done");
+  }
 }
 
 _id_28D5(var_0) {
@@ -938,17 +1006,20 @@ _id_1274B(var_0) {
       var_4 = var_2.origin;
       var_5 = undefined;
 
-      if(var_3 != var_4)
+      if(var_3 != var_4) {
         var_5 = var_4 - var_3;
+      }
 
       if(isDefined(var_5)) {
-        foreach(var_7 in var_1)
-        destroyglass(var_7, var_5);
+        foreach(var_7 in var_1) {
+          destroyglass(var_7, var_5);
+        }
 
         break;
       } else {
-        foreach(var_7 in var_1)
-        destroyglass(var_7);
+        foreach(var_7 in var_1) {
+          destroyglass(var_7);
+        }
 
         break;
       }
@@ -967,8 +1038,9 @@ _id_12730(var_0) {
 _id_7C30() {
   var_0 = [];
 
-  if(!isDefined(self.script_linkto))
+  if(!isDefined(self.script_linkto)) {
     return var_0;
+  }
 
   var_1 = strtok(self.script_linkto, " ");
 
@@ -976,8 +1048,9 @@ _id_7C30() {
     var_3 = var_1[var_2];
     var_4 = getEnt(var_3, "script_linkname");
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_0[var_0.size] = var_4;
+    }
   }
 
   return var_0;
@@ -996,8 +1069,9 @@ _id_127A5(var_0) {
 }
 
 _id_1274E(var_0) {
-  if(!isDefined(level._id_56D9))
+  if(!isDefined(level._id_56D9)) {
     level._id_56D9 = [];
+  }
 
   waittillframeend;
   var_1 = var_0._id_EDDC;
@@ -1014,8 +1088,9 @@ _id_12731(var_0) {
   for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 delete();
+    }
   }
 }
 
@@ -1028,8 +1103,9 @@ _id_127A6(var_0) {
   }
   var_1 = strtok(var_0.script_linkto, " ");
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     scripts\engine\utility::array_thread(getEntArray(var_1[var_2], "script_linkname"), scripts\engine\utility::trigger_off);
+  }
 }
 
 _id_12752(var_0) {
@@ -1062,8 +1138,9 @@ _id_11A40(var_0, var_1) {
   wait 1;
   self.ignoretriggers = 0;
 
-  while(self istouching(var_0))
+  while(self istouching(var_0)) {
     wait 1;
+  }
 
   [[var_1]](0);
 }
@@ -1076,8 +1153,9 @@ _id_12787(var_0) {
 _id_12741(var_0) {
   var_1 = var_0 scripts\sp\utility::_id_7D1E();
 
-  if(!isDefined(level.flag[var_1]))
+  if(!isDefined(level.flag[var_1])) {
     scripts\engine\utility::flag_init(var_1);
+  }
 
   for(;;) {
     var_0 waittill("trigger", var_2);
@@ -1094,8 +1172,9 @@ _id_12771(var_0) {
   for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(isDefined(var_0.script_noteworthy))
+    if(isDefined(var_0.script_noteworthy)) {
       var_1 _id_0B0A::_id_1121E(var_0.script_noteworthy, var_0.script_delay);
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -1170,20 +1249,23 @@ _id_102ED(var_0) {
   }
   self endon("death");
 
-  if(soundexists("SCN_cliffhanger_player_hillslide"))
+  if(soundexists("SCN_cliffhanger_player_hillslide")) {
     self playSound("SCN_cliffhanger_player_hillslide");
+  }
 
   var_1 = undefined;
 
-  if(isDefined(var_0.script_accel))
+  if(isDefined(var_0.script_accel)) {
     var_1 = var_0.script_accel;
+  }
 
   self endon("cancel_sliding");
 
-  if(getdvarint("use_legacy_slide") > 0)
+  if(getdvarint("use_legacy_slide") > 0) {
     thread scripts\sp\utility::_id_2A76();
-  else
+  } else {
     thread scripts\sp\utility::_id_2A75(undefined, var_1);
+  }
 
   for(;;) {
     if(!self istouching(var_0)) {
@@ -1193,21 +1275,24 @@ _id_102ED(var_0) {
     wait 0.05;
   }
 
-  if(isDefined(level._id_62F7))
+  if(isDefined(level._id_62F7)) {
     wait(level._id_62F7);
+  }
 
-  if(getdvarint("use_legacy_slide") > 0)
+  if(getdvarint("use_legacy_slide") > 0) {
     scripts\sp\utility::_id_638A();
-  else
+  } else {
     scripts\sp\utility::_id_6389();
+  }
 }
 
 _id_1276E(var_0) {
   var_1 = spawn("script_origin", (0, 0, 0));
   var_0.fx = [];
 
-  foreach(var_3 in level.createfxent)
-  _id_23C8(var_3, var_0, var_1);
+  foreach(var_3 in level.createfxent) {
+    _id_23C8(var_3, var_0, var_1);
+  }
 
   var_1 delete();
 
@@ -1235,8 +1320,9 @@ _id_1276D(var_0) {
   for(;;) {
     self waittill("trigger");
 
-    if(!var_0._id_75AD)
+    if(!var_0._id_75AD) {
       scripts\engine\utility::array_thread(var_0.fx, scripts\sp\utility::_id_E2B0);
+    }
 
     wait 1;
   }
@@ -1246,8 +1332,9 @@ _id_1276C(var_0) {
   for(;;) {
     self waittill("trigger");
 
-    if(var_0._id_75AD)
+    if(var_0._id_75AD) {
       scripts\engine\utility::array_thread(var_0.fx, scripts\engine\utility::pauseeffect);
+    }
 
     wait 1;
   }
@@ -1255,27 +1342,31 @@ _id_1276C(var_0) {
 
 _id_23C8(var_0, var_1, var_2) {
   if(isDefined(var_0.v["soundalias"]) && var_0.v["soundalias"] != "nil") {
-    if(!isDefined(var_0.v["stopable"]) || !var_0.v["stopable"])
+    if(!isDefined(var_0.v["stopable"]) || !var_0.v["stopable"]) {
       return;
+    }
   }
 
   var_2.origin = var_0.v["origin"];
 
-  if(var_2 istouching(var_1))
+  if(var_2 istouching(var_1)) {
     var_1.fx[var_1.fx.size] = var_0;
+  }
 }
 
 _id_12769(var_0) {
   var_1 = var_0.script_parameters;
 
-  if(!isDefined(level._id_B7AE))
+  if(!isDefined(level._id_B7AE)) {
     level._id_B7AE = "";
+  }
 
   for(;;) {
     var_0 waittill("trigger");
 
-    if(level._id_B7AE != var_1)
+    if(level._id_B7AE != var_1) {
       scripts\sp\compass::setupminimap(var_1);
+    }
   }
 }
 
@@ -1305,8 +1396,9 @@ _id_BFE5(var_0) {
 }
 
 _id_1275A(var_0) {
-  if(!isDefined(level._id_A0E4))
+  if(!isDefined(level._id_A0E4)) {
     level._id_A0E4 = 0;
+  }
 
   var_0._id_12751 = level._id_A0E4;
   level._id_A0E4++;
@@ -1324,8 +1416,9 @@ _id_1275A(var_0) {
     }
     var_0 thread[[level._id_A056.trigger_func._id_A0E2]]();
 
-    while(isalive(var_1) && isDefined(var_0) && var_1 istouching(var_0) && isDefined(level._id_D127))
+    while(isalive(var_1) && isDefined(var_0) && var_1 istouching(var_0) && isDefined(level._id_D127)) {
       wait 0.05;
+    }
 
     var_0 thread[[level._id_A056.trigger_func._id_A0E3]]();
   }
@@ -1334,11 +1427,13 @@ _id_1275A(var_0) {
 _id_1275B(var_0) {
   var_1 = "trigger_jackal_boundary_warning";
 
-  if(!isDefined(level._id_A392))
+  if(!isDefined(level._id_A392)) {
     level._id_A392 = [];
+  }
 
-  if(!scripts\engine\utility::flag_exist(var_1))
+  if(!scripts\engine\utility::flag_exist(var_1)) {
     scripts\engine\utility::flag_init(var_1);
+  }
 
   var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
 
@@ -1355,8 +1450,9 @@ _id_1275B(var_0) {
       continue;
     }
     if(level.player scripts\sp\utility::_id_65DB("disable_jackal_map_boundary_warning")) {
-      while(isalive(var_4) && isDefined(var_0) && var_4 istouching(var_0) && isDefined(level._id_D127) && level.player scripts\sp\utility::_id_65DB("disable_jackal_map_boundary_warning"))
+      while(isalive(var_4) && isDefined(var_0) && var_4 istouching(var_0) && isDefined(level._id_D127) && level.player scripts\sp\utility::_id_65DB("disable_jackal_map_boundary_warning")) {
         wait 0.05;
+      }
     }
 
     if(level.player scripts\sp\utility::_id_65DB("disable_jackal_map_boundary_warning")) {
@@ -1368,13 +1464,15 @@ _id_1275B(var_0) {
       level._id_A392 = scripts\engine\utility::array_add(level._id_A392, var_0);
     }
 
-    while(isalive(var_4) && isDefined(var_0) && var_4 istouching(var_0) && isDefined(level._id_D127))
+    while(isalive(var_4) && isDefined(var_0) && var_4 istouching(var_0) && isDefined(level._id_D127)) {
       wait 0.05;
+    }
 
     level._id_A392 = scripts\engine\utility::array_remove(level._id_A392, var_0);
 
-    if(level._id_A392.size == 0)
+    if(level._id_A392.size == 0) {
       scripts\engine\utility::flag_clear(var_1);
+    }
   }
 }
 
@@ -1392,10 +1490,11 @@ _id_A391(var_0, var_1, var_2) {
   var_6 = 0;
 
   while(var_6 < 1) {
-    if(scripts\engine\utility::flag(var_2) || scripts\engine\utility::flag("jackal_is_autoturning"))
+    if(scripts\engine\utility::flag(var_2) || scripts\engine\utility::flag("jackal_is_autoturning")) {
       var_6 = 0;
-    else
+    } else {
       var_6++;
+    }
 
     var_7 = vectorNormalize(self.origin - level._id_D127.origin);
     var_8 = anglesToForward(level._id_D127.angles);
@@ -1424,11 +1523,13 @@ _id_12759(var_0) {
   var_1 = "trigger_jackal_boundary_autoturn";
   var_2 = "jackal_is_autoturning";
 
-  if(!scripts\engine\utility::flag_exist(var_1))
+  if(!scripts\engine\utility::flag_exist(var_1)) {
     scripts\engine\utility::flag_init(var_1);
+  }
 
-  if(!scripts\engine\utility::flag_exist(var_2))
+  if(!scripts\engine\utility::flag_exist(var_2)) {
     scripts\engine\utility::flag_init(var_2);
+  }
 
   var_3 = scripts\engine\utility::getStruct(var_0.target, "targetname");
 
@@ -1439,8 +1540,9 @@ _id_12759(var_0) {
       continue;
     }
     if(level.player scripts\sp\utility::_id_65DB("disable_jackal_map_boundary_autoturn")) {
-      while(isalive(var_4) && isDefined(var_0) && var_4 istouching(var_0) && isDefined(level._id_D127) && level.player scripts\sp\utility::_id_65DB("disable_jackal_map_boundary_autoturn"))
+      while(isalive(var_4) && isDefined(var_0) && var_4 istouching(var_0) && isDefined(level._id_D127) && level.player scripts\sp\utility::_id_65DB("disable_jackal_map_boundary_autoturn")) {
         wait 0.05;
+      }
     }
 
     if(level.player scripts\sp\utility::_id_65DB("disable_jackal_map_boundary_autoturn")) {
@@ -1449,19 +1551,22 @@ _id_12759(var_0) {
     if(!scripts\engine\utility::flag(var_1)) {
       scripts\engine\utility::flag_set(var_1);
 
-      if(!scripts\engine\utility::flag(var_2))
+      if(!scripts\engine\utility::flag(var_2)) {
         var_3 thread[[level._id_A056.trigger_func._id_A0E1]](var_0, var_4, var_1, var_2);
+      }
 
       level._id_A056._id_2698 = scripts\engine\utility::array_add(level._id_A056._id_2698, var_0);
     }
 
-    while(isalive(var_4) && isDefined(var_0) && var_4 istouching(var_0) && isDefined(level._id_D127))
+    while(isalive(var_4) && isDefined(var_0) && var_4 istouching(var_0) && isDefined(level._id_D127)) {
       wait 0.05;
+    }
 
     level._id_A056._id_2698 = scripts\engine\utility::array_remove(level._id_A056._id_2698, var_0);
 
-    if(level._id_A056._id_2698.size == 0)
+    if(level._id_A056._id_2698.size == 0) {
       scripts\engine\utility::flag_clear(var_1);
+    }
   }
 }
 
@@ -1474,8 +1579,9 @@ _id_1275C(var_0) {
     }
     var_0 _id_A2FF();
 
-    while(isalive(var_1) && isDefined(var_0) && var_1 istouching(var_0) && isDefined(level._id_D127))
+    while(isalive(var_1) && isDefined(var_0) && var_1 istouching(var_0) && isDefined(level._id_D127)) {
       wait 0.25;
+    }
 
     var_0 _id_A300();
   }
@@ -1530,15 +1636,17 @@ exploder_load(var_0) {
   var_0 waittill("trigger");
 
   if(isDefined(var_0.script_chance) && randomfloat(1) > var_0.script_chance) {
-    if(!var_0 scripts\sp\utility::script_delay())
+    if(!var_0 scripts\sp\utility::script_delay()) {
       wait 4;
+    }
 
     level thread exploder_load(var_0);
     return;
   }
 
-  if(!var_0 scripts\sp\utility::script_delay() && isDefined(var_0._id_ED85))
+  if(!var_0 scripts\sp\utility::script_delay() && isDefined(var_0._id_ED85)) {
     wait(var_0._id_ED85);
+  }
 
   scripts\engine\utility::exploder(var_0.script_exploder);
   level notify("killexplodertridgers" + var_0.script_exploder);
@@ -1573,8 +1681,9 @@ _id_93A4(var_0, var_1) {
   self endon("death");
   scripts\sp\utility::_id_65E1(var_1);
 
-  while(isDefined(var_0) && self istouching(var_0))
+  while(isDefined(var_0) && self istouching(var_0)) {
     wait 0.05;
+  }
 
   scripts\sp\utility::_id_65DD(var_1);
 }
@@ -1590,8 +1699,9 @@ _id_1273C(var_0) {
     var_0.script_delay_max = 0.9;
   }
 
-  if(isDefined(var_0.script_damage))
+  if(isDefined(var_0.script_damage)) {
     var_1 = var_0.script_damage;
+  }
 
   for(;;) {
     var_0 waittill("trigger", var_4);
@@ -1603,8 +1713,9 @@ _id_1273C(var_0) {
       if(var_0.classname == "trigger_radius_fire") {
         if(isDefined(var_0.script_radius)) {
           if(distance2dsquared(var_4.origin, var_0.origin) <= squared(var_0.script_radius)) {
-            if(isDefined(var_0._id_EE51) && isnumber(var_0._id_EE51))
+            if(isDefined(var_0._id_EE51) && isnumber(var_0._id_EE51)) {
               var_2 = var_0._id_EE51;
+            }
 
             var_3 = var_3 * var_2;
           }
@@ -1615,8 +1726,9 @@ _id_1273C(var_0) {
 
         if(isDefined(var_6.script_radius)) {
           if(distance2dsquared(var_4.origin, var_6.origin) <= squared(var_6.script_radius)) {
-            if(isDefined(var_0._id_EE51) && isnumber(var_0._id_EE51))
+            if(isDefined(var_0._id_EE51) && isnumber(var_0._id_EE51)) {
               var_2 = var_0._id_EE51;
+            }
 
             var_3 = var_3 * var_2;
           }
@@ -1626,10 +1738,11 @@ _id_1273C(var_0) {
 
     var_4 dodamage(var_3, var_5);
 
-    if(var_3 < 6)
+    if(var_3 < 6) {
       var_4 playRumbleOnEntity("damage_light");
-    else
+    } else {
       var_4 playRumbleOnEntity("damage_heavy");
+    }
 
     var_0 scripts\sp\utility::script_delay();
   }

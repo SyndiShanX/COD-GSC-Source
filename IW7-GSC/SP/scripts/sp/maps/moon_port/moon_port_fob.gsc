@@ -29,14 +29,16 @@ _id_71F2() {
 }
 
 _id_71ED() {
-  if(getdvarint("kleenex") == 1)
+  if(getdvarint("kleenex") == 1) {
     scripts\sp\utility::_id_A6F2();
+  }
 
   scripts\engine\utility::flag_wait("into_fob");
   var_0 = getaiarray("axis");
 
-  foreach(var_2 in var_0)
-  var_2 _meth_81D0();
+  foreach(var_2 in var_0) {
+    var_2 _meth_81D0();
+  }
 
   thread _id_71E6();
   thread _id_7202();
@@ -57,18 +59,21 @@ _id_71ED() {
   thread _id_71F8();
   thread _id_71DD();
 
-  while(scripts\sp\utility::_id_77DB("fob_cafe_enemies") + scripts\sp\utility::_id_77DB("fob_cafe_enemy_bots") > 2)
+  while(scripts\sp\utility::_id_77DB("fob_cafe_enemies") + scripts\sp\utility::_id_77DB("fob_cafe_enemy_bots") > 2) {
     wait 0.1;
+  }
 
   var_4 = scripts\sp\utility::_id_77DA("fob_cafe_enemies");
   var_5 = scripts\sp\utility::_id_77DA("fob_cafe_enemy_bots");
   var_4 = scripts\sp\utility::_id_22A2(var_4, var_5);
 
-  foreach(var_7 in var_4)
-  var_7.attackeraccuracy = 10;
+  foreach(var_7 in var_4) {
+    var_7.attackeraccuracy = 10;
+  }
 
-  while(scripts\sp\utility::_id_77DB("fob_cafe_enemies") + scripts\sp\utility::_id_77DB("fob_cafe_enemy_bots") > 0)
+  while(scripts\sp\utility::_id_77DB("fob_cafe_enemies") + scripts\sp\utility::_id_77DB("fob_cafe_enemy_bots") > 0) {
     wait 0.1;
+  }
 
   scripts\engine\utility::flag_set("fob_halls_cafe_enemies_clear");
   wait 0.65;
@@ -83,8 +88,9 @@ _id_71ED() {
   level.player scripts\sp\utility::_id_F526("relaxed");
   var_10 = getEnt("fob_arrive_volume", "targetname");
 
-  foreach(var_12 in level.allies)
-  var_12 thread _id_3B1B(var_10);
+  foreach(var_12 in level.allies) {
+    var_12 thread _id_3B1B(var_10);
+  }
 
   scripts\engine\utility::flag_wait("fob_arrived");
   thread _id_71E9();
@@ -97,8 +103,9 @@ _id_71DE() {
 }
 
 _id_71DD() {
-  while(scripts\sp\utility::_id_77DD("fob_cafe_enemies") + scripts\sp\utility::_id_77DB("fob_cafe_enemy_bots") > 6)
+  while(scripts\sp\utility::_id_77DD("fob_cafe_enemies") + scripts\sp\utility::_id_77DB("fob_cafe_enemy_bots") > 6) {
     wait 0.1;
+  }
 
   wait 0.25;
   var_0 = getaiunittypearray("axis", "c6");
@@ -112,8 +119,9 @@ _id_71DD() {
   wait 1;
   thread scripts\sp\maps\moon_port\moon_port_util::_id_F293("fob_guards", "fob_cafe_mdf_pushup");
 
-  while(scripts\sp\utility::_id_77DD("fob_cafe_enemies") + scripts\sp\utility::_id_77DB("fob_cafe_enemy_bots") != 0)
+  while(scripts\sp\utility::_id_77DD("fob_cafe_enemies") + scripts\sp\utility::_id_77DB("fob_cafe_enemy_bots") != 0) {
     wait 0.1;
+  }
 
   thread scripts\sp\maps\moon_port\moon_port_util::_id_F293("fob_guards", "fob_arrive_volume");
 }
@@ -122,8 +130,9 @@ _id_71F8() {
   setthreatbias("fob_guards", "cafe_enemies_ledge", 0);
   setthreatbias("cafe_enemies_ledge", "fob_guards", 0);
 
-  while(scripts\sp\utility::_id_77DD("fob_ledge_badguys") > 0)
+  while(scripts\sp\utility::_id_77DD("fob_ledge_badguys") > 0) {
     wait 0.1;
+  }
 
   scripts\sp\utility::_id_15F5("fob_ledge_moveup");
   thread _id_71DE();
@@ -156,11 +165,13 @@ _id_71E6() {
 _id_7202() {
   scripts\engine\utility::flag_wait("fob_halls_player_jumped_up");
 
-  if(isDefined(level.allies["marine2"]) && isalive(level.allies["marine2"]))
+  if(isDefined(level.allies["marine2"]) && isalive(level.allies["marine2"])) {
     level.allies["marine2"] scripts\sp\utility::_id_10346("moon_un2_goteyeson");
+  }
 
-  if(isDefined(level.allies["marine1"]) && isalive(level.allies["marine1"]))
+  if(isDefined(level.allies["marine1"]) && isalive(level.allies["marine1"])) {
     level.allies["marine1"] scripts\sp\utility::_id_10346("moon_eth_friendliesat9oc");
+  }
 
   level.allies["salter"] scripts\sp\utility::_id_10346("moon_slt_leftflankswideopen");
   scripts\sp\utility::_id_1034D("moon_plr_letstakeit");
@@ -186,8 +197,9 @@ _id_71EA() {
 _id_10669() {
   var_0 = getEntArray("fob_cafe_corpses_top", "targetname");
 
-  foreach(var_2 in var_0)
-  var_3 = var_2 scripts\sp\utility::_id_10619();
+  foreach(var_2 in var_0) {
+    var_3 = var_2 scripts\sp\utility::_id_10619();
+  }
 
   wait 0.1;
 }
@@ -232,8 +244,9 @@ _id_7203() {
   thread _id_71EC(1);
   level.player scripts\sp\utility::_id_F526("relaxed");
 
-  foreach(var_2 in level.allies)
-  var_2 scripts\sp\utility::_id_51E1("casual_gun");
+  foreach(var_2 in level.allies) {
+    var_2 scripts\sp\utility::_id_51E1("casual_gun");
+  }
 
   scripts\engine\utility::flag_set("fob_arrived");
 }
@@ -249,8 +262,9 @@ _id_71F9() {
   level.player scripts\sp\utility::_id_F526("normal");
   thread _id_71E0();
 
-  foreach(var_1 in level.allies)
-  var_1 scripts\sp\utility::_id_4145();
+  foreach(var_1 in level.allies) {
+    var_1 scripts\sp\utility::_id_4145();
+  }
 }
 
 _id_71E5() {
@@ -273,8 +287,9 @@ _id_71FA(var_0) {
   var_6 = scripts\engine\utility::getStruct(var_2.target, "targetname");
   var_7 = 1.5;
 
-  if(isDefined(var_0) && var_0)
+  if(isDefined(var_0) && var_0) {
     var_7 = 0.1;
+  }
 
   var_1 moveTo(var_5.origin, var_7);
   var_2 moveTo(var_6.origin, var_7);
@@ -289,8 +304,9 @@ _id_71DC() {
   scripts\sp\utility::_id_28D8("axis");
   var_0 = scripts\sp\utility::_id_77DA("fob_ambient_guys");
 
-  foreach(var_2 in var_0)
-  var_2 _meth_81D0();
+  foreach(var_2 in var_0) {
+    var_2 _meth_81D0();
+  }
 }
 
 _id_71DF() {
@@ -308,8 +324,9 @@ _id_71E0() {
     if(scripts\engine\utility::array_contains(level.allies, var_3)) {
       continue;
     }
-    if(isDefined(var_3._id_B14F) && var_3._id_B14F)
+    if(isDefined(var_3._id_B14F) && var_3._id_B14F) {
       var_3 scripts\sp\utility::_id_1101B();
+    }
 
     var_3 delete();
   }

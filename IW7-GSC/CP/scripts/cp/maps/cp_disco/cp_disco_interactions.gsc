@@ -66,8 +66,9 @@ register_interactions() {
   level notify("interactions_initialized");
   scripts\engine\utility::flag_set("interactions_initialized");
 
-  if(isDefined(level.escape_interaction_registration_func))
+  if(isDefined(level.escape_interaction_registration_func)) {
     [[level.escape_interaction_registration_func]]();
+  }
 }
 
 register_pack_a_punch_interactions() {
@@ -112,8 +113,9 @@ register_environment_interactions() {
 }
 
 trash_can_use(var_0, var_1) {
-  if(!isDefined(var_0.used_by))
+  if(!isDefined(var_0.used_by)) {
     var_0.used_by = [];
+  }
 
   if(isDefined(var_1.first_cipher_seen) && var_1.first_cipher_seen && !scripts\engine\utility::array_contains(var_0.used_by, var_1)) {
     var_0.used_by[var_0.used_by.size] = var_1;
@@ -252,15 +254,17 @@ disco_register_interaction(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
   var_10.enabled = 1;
   var_10.disable_guided_interactions = var_0;
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     var_6 = 0;
+  }
 
   var_10.cost = var_6;
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     var_10.requires_power = var_7;
-  else
+  } else {
     var_10.requires_power = 0;
+  }
 
   var_10.init_func = var_8;
   var_10.can_use_override_func = var_9;
@@ -270,18 +274,21 @@ disco_register_interaction(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
 init_pivot_power_doors() {
   var_0 = scripts\engine\utility::getStructArray("power_door_pivot", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 thread pivot_power_door();
+  foreach(var_2 in var_0) {
+    var_2 thread pivot_power_door();
+  }
 }
 
 pivot_power_door() {
-  if(scripts\engine\utility::is_true(self.requires_power))
+  if(scripts\engine\utility::is_true(self.requires_power)) {
     level scripts\engine\utility::waittill_any("power_on", self.power_area + " power_on");
+  }
 
   self.powered_on = 1;
 
-  if(isDefined(self.script_sound))
+  if(isDefined(self.script_sound)) {
     playsoundatpos(self.origin, self.script_sound);
+  }
 
   if(isDefined(self.target) && self.target == "subway_left_door") {
     wait 0.2;
@@ -303,8 +310,9 @@ pivot_power_door() {
     }
 
     if(isDefined(self.script_angles)) {
-      if(!isDefined(var_2.angles))
+      if(!isDefined(var_2.angles)) {
         var_2.angles = (0, 0, 0);
+      }
 
       var_2 rotateTo(var_2.angles + self.script_angles, 1);
       continue;
@@ -321,18 +329,21 @@ pivot_power_door() {
 init_sliding_power_doors() {
   var_0 = scripts\engine\utility::getStructArray("power_door_sliding", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 thread sliding_power_door();
+  foreach(var_2 in var_0) {
+    var_2 thread sliding_power_door();
+  }
 }
 
 sliding_power_door() {
-  if(scripts\engine\utility::is_true(self.requires_power))
+  if(scripts\engine\utility::is_true(self.requires_power)) {
     level scripts\engine\utility::waittill_any("power_on", self.power_area + " power_on");
+  }
 
   self.powered_on = 1;
 
-  if(isDefined(self.script_sound))
+  if(isDefined(self.script_sound)) {
     playsoundatpos(self.origin, self.script_sound);
+  }
 
   var_0 = getEntArray(self.target, "targetname");
 
@@ -344,8 +355,9 @@ sliding_power_door() {
 
     var_3 = undefined;
 
-    if(isDefined(var_2.target))
+    if(isDefined(var_2.target)) {
       var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
+    }
 
     if(isDefined(var_3)) {
       var_4 = var_3.origin - var_2.origin;
@@ -369,10 +381,11 @@ sliding_power_door() {
 disableinteractionfortime(var_0, var_1) {
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
-  else
+  } else {
     wait 3;
+  }
 
   scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
 }
@@ -404,21 +417,25 @@ atm_withdrawal(var_0, var_1) {
 }
 
 atm_withdrawal_hint(var_0, var_1) {
-  if(var_0.requires_power && !var_0.powered_on)
+  if(var_0.requires_power && !var_0.powered_on) {
     return &"COOP_INTERACTIONS_REQUIRES_POWER";
+  }
 
-  if(isDefined(level.atm_amount_deposited) && level.atm_amount_deposited < 1000)
+  if(isDefined(level.atm_amount_deposited) && level.atm_amount_deposited < 1000) {
     return &"CP_DISCO_INTERACTIONS_ATM_INSUFFICIENT_FUNDS";
+  }
 
   return level.interaction_hintstrings[var_0.script_noteworthy];
 }
 
 final_part_rewind_quest() {
-  if(!isDefined(self.clocks_destroyed))
+  if(!isDefined(self.clocks_destroyed)) {
     self.clocks_destroyed = 0;
+  }
 
-  if(!isDefined(self.array_of_clocks))
+  if(!isDefined(self.array_of_clocks)) {
     self.array_of_clocks = [];
+  }
 
   self.array_of_clocks = level.clocks_to_be_destroyed;
   self.start_breaking_clock = 1;
@@ -453,14 +470,17 @@ watch_for_rewind_triggered_on_completion() {
       self setvelocity((0, 0, 0));
       self setstance("stand");
 
-      if(!scripts\engine\utility::isweaponswitchallowed())
+      if(!scripts\engine\utility::isweaponswitchallowed()) {
         scripts\engine\utility::allow_weapon_switch(1);
+      }
 
-      if(!scripts\engine\utility::isusabilityallowed())
+      if(!scripts\engine\utility::isusabilityallowed()) {
         scripts\engine\utility::allow_usability(1);
+      }
 
-      if(!scripts\cp\utility::isteleportenabled())
+      if(!scripts\cp\utility::isteleportenabled()) {
         scripts\cp\utility::allow_player_teleport(1);
+      }
 
       scripts\cp\utility::removedamagemodifier("rewind_invulnerability", 0);
       self playanimscriptevent("power_exit", "rewind");
@@ -473,11 +493,13 @@ watch_for_rewind_triggered_on_completion() {
       self limitedmovement(0);
       self unlink();
 
-      if(isDefined(self.rewindmover))
+      if(isDefined(self.rewindmover)) {
         self.rewindmover delete();
+      }
 
-      if(scripts\engine\utility::is_true(self.isrewinding))
+      if(scripts\engine\utility::is_true(self.isrewinding)) {
         self.isrewinding = 0;
+      }
 
       self notify("ended_on_successful_teleport");
       break;
@@ -492,15 +514,17 @@ watch_for_final_quest_end() {
 
   for(;;) {
     if(self.clocks_destroyed == 3) {
-      if(isDefined(self.rewindmover) || scripts\engine\utility::is_true(self.isrewinding))
+      if(isDefined(self.rewindmover) || scripts\engine\utility::is_true(self.isrewinding)) {
         thread watch_for_rewind_triggered_on_completion();
+      }
 
       foreach(var_1 in level.players) {
         var_1.start_breaking_clock = 0;
         var_1.clocks_destroyed = 0;
 
-        if(!isDefined(var_1.array_of_clocks))
+        if(!isDefined(var_1.array_of_clocks)) {
           var_1.array_of_clocks = level.clocks_to_be_destroyed;
+        }
 
         foreach(var_3 in var_1.array_of_clocks) {
           var_3.health = 5;
@@ -558,8 +582,9 @@ spawn_power_up(var_0, var_1) {
   var_8 = scripts\common\trace::ray_trace(var_0 getEye(), var_2 + var_6, self, var_7);
   var_2 = scripts\engine\utility::drop_to_ground(var_8["position"] + var_6 * -18, 32, -2000);
 
-  if(!scripts\cp\cp_weapon::isinvalidzone(var_2, level.invalid_spawn_volume_array, undefined, undefined, 1))
+  if(!scripts\cp\cp_weapon::isinvalidzone(var_2, level.invalid_spawn_volume_array, undefined, undefined, 1)) {
     var_2 = getclosestpointonnavmesh(var_0.origin);
+  }
 
   level scripts\cp\loot::drop_loot(var_2, var_0, var_1);
 }
@@ -612,8 +637,9 @@ watch_for_damage_on_clock(var_0) {
       var_2.clocks_destroyed++;
       var_0.already_attacked_by_player = 1;
 
-      if(var_2.clocks_destroyed == 1)
+      if(var_2.clocks_destroyed == 1) {
         var_2 thread start_rewind_sequence();
+      }
 
       var_0 playfx_and_shatter_clock(var_2);
       continue;
@@ -630,8 +656,9 @@ playfx_and_shatter_clock(var_0) {
   playFX(level._effect["crafting_pickup"], self.origin);
   var_0 playlocalsound("disco_backstory_clock_smash");
 
-  if(self.health < 0)
+  if(self.health < 0) {
     self.health = 5;
+  }
 
   if(isDefined(var_0.clocks_destroyed) && var_0.clocks_destroyed == 3) {
     self hidefromplayer(var_0);
@@ -672,8 +699,9 @@ hint_memory_tv(var_0, var_1) {
 
 init_memory_tv() {
   foreach(var_1 in level.players) {
-    while(!isDefined(var_1.vo_prefix))
+    while(!isDefined(var_1.vo_prefix)) {
       wait 1;
+    }
   }
 
   level.tv_channels_models = ["cp_disco_tv_crt", "cp_disco_tv_sally", "cp_disco_tv_pointd", "cp_disco_tv_andre", "cp_disco_tv_aj", "cp_disco_tv_yeti"];
@@ -770,8 +798,9 @@ init_memory_tv() {
 
     foreach(var_1 in level.players) {
       if(var_1.vo_prefix == var_4.owner_prefix) {
-        if(!isDefined(var_1.tv_interaction))
+        if(!isDefined(var_1.tv_interaction)) {
           var_1.tv_interaction = var_4;
+        }
       }
     }
   }
@@ -805,9 +834,9 @@ use_memory_tv_object(var_0, var_1) {
   var_1 endon("last_stand");
   var_1 endon("death");
 
-  if(var_1.vo_prefix == "p5_")
+  if(var_1.vo_prefix == "p5_") {
     playsoundatpos(var_0.origin, "ww_magicbox_laughter");
-  else {
+  } else {
     if(scripts\engine\utility::is_true(var_1.kung_fu_mode)) {
       return;
     }
@@ -824,15 +853,17 @@ use_memory_tv_object(var_0, var_1) {
 
     if(!isDefined(var_1.tv_interaction)) {
       foreach(var_5 in level.tv_array) {
-        if(var_5.owner_prefix == var_1.vo_prefix)
+        if(var_5.owner_prefix == var_1.vo_prefix) {
           var_1.tv_interaction = var_5;
+        }
       }
     }
 
     if(!isDefined(var_1.tv_model)) {
       foreach(var_8 in level.tv_modelsarray) {
-        if(var_8.owner == var_1.vo_prefix)
+        if(var_8.owner == var_1.vo_prefix) {
           var_1.tv_model = var_8;
+        }
       }
     }
 
@@ -919,10 +950,11 @@ watch_for_tries() {
   self endon("tv_quest_complete");
   level endon("game_ended");
 
-  if(self.tv_interaction.times_interacted == self.tv_interaction.number_of_tv_interactions)
+  if(self.tv_interaction.times_interacted == self.tv_interaction.number_of_tv_interactions) {
     thread start_fake_spawn_sequence(self);
-  else
+  } else {
     self.interacted_with_set = undefined;
+  }
 }
 
 choose_number_of_karatemasters() {
@@ -964,8 +996,9 @@ start_fake_spawn_sequence(var_0) {
     var_6 = level.desired_enemy_deaths_this_wave;
     var_7 = level.wave_num;
 
-    while(level.current_enemy_deaths == level.desired_enemy_deaths_this_wave)
+    while(level.current_enemy_deaths == level.desired_enemy_deaths_this_wave) {
       wait 0.05;
+    }
 
     level.current_enemy_deaths = 0;
     level.desired_enemy_deaths_this_wave = 24;
@@ -978,8 +1011,9 @@ start_fake_spawn_sequence(var_0) {
   wait 2;
   var_9 = skeleton_spawner(var_8, var_0);
 
-  while(self.skeletons_alive > 0)
+  while(self.skeletons_alive > 0) {
     wait 0.1;
+  }
 
   var_0.finished_final_part = 1;
   var_0.tv_model.model setModel("cp_disco_tv_crt");
@@ -1010,8 +1044,9 @@ determine_best_shovel_spawns(var_0, var_1) {
   var_3 = scripts\engine\utility::getStructArray("camper_to_lake_spawner", "targetname");
   var_3 = sortbydistance(var_3, var_0);
 
-  for(var_4 = 0; var_4 < var_1; var_4++)
+  for(var_4 = 0; var_4 < var_1; var_4++) {
     var_2[var_4] = var_3[var_4];
+  }
 
   var_5 = scripts\engine\utility::array_randomize(var_2);
   return var_2;
@@ -1039,8 +1074,9 @@ skeleton_spawner(var_0, var_1) {
       var_2[var_2.size] = var_4;
       var_4 thread set_skeleton_attributes();
 
-      if(!isDefined(var_1.skeletons))
+      if(!isDefined(var_1.skeletons)) {
         var_1.skeletons = [];
+      }
 
       var_1.skeletons[var_1.skeletons.size] = var_4;
       wait 1;
@@ -1059,8 +1095,9 @@ skeleton_death_watcher(var_0) {
   self waittill("death");
   var_0.skeletons_alive--;
 
-  if(var_0.skeletons_alive <= 0)
+  if(var_0.skeletons_alive <= 0) {
     var_0.finished_final_part = 1;
+  }
 }
 
 spawn_skeleton_solo(var_0) {
@@ -1075,8 +1112,9 @@ spawn_skeleton_solo(var_0) {
   for(var_4 = 0; var_4 < var_2; var_4++) {
     var_5 = var_1 scripts\cp\zombies\zombies_spawning::spawn_wave_enemy("karatemaster", 1, var_1, var_0);
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       return var_5;
+    }
 
     wait(var_3);
   }
@@ -1090,8 +1128,9 @@ set_skeleton_attributes() {
   self.dont_cleanup = 1;
   self.movemode = "sprint";
 
-  if(!scripts\engine\utility::is_true(self.aj_karatemaster))
+  if(!scripts\engine\utility::is_true(self.aj_karatemaster)) {
     self.aj_karatemaster = 1;
+  }
 
   self.health = scripts\cp\zombies\cp_disco_spawning::calculatezombiehealth("karatemaster");
 }
@@ -1109,16 +1148,19 @@ hint_nunchucks(var_0, var_1) {
 }
 
 init_nunchucks() {
-  if(!isDefined(level.clock))
+  if(!isDefined(level.clock)) {
     level.clock = [];
+  }
 
-  if(!isDefined(level.clock[0]))
+  if(!isDefined(level.clock[0])) {
     level.clock[0] = undefined;
+  }
 
   level.quest_one_objects = [];
 
-  foreach(var_2, var_1 in scripts\engine\utility::getStructArray("clock", "script_noteworthy"))
-  level.clock[0] = var_1;
+  foreach(var_2, var_1 in scripts\engine\utility::getStructArray("clock", "script_noteworthy")) {
+    level.clock[0] = var_1;
+  }
 
   var_3 = scripts\engine\utility::getStructArray("mem", "targetname");
 
@@ -1146,17 +1188,20 @@ init_nunchucks() {
     var_5.health = 5;
     var_5.damage_done = 0;
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       var_1.model = var_5;
+    }
 
     level.quest_one_objects[var_2] = var_1;
   }
 
-  foreach(var_7 in level.players)
-  var_7.attacked_first_object = 0;
+  foreach(var_7 in level.players) {
+    var_7.attacked_first_object = 0;
+  }
 
-  if(isDefined(level.clock_interaction))
+  if(isDefined(level.clock_interaction)) {
     scripts\cp\cp_interaction::enable_linked_interactions(level.clock_interaction);
+  }
 }
 
 watch_for_player_disconnect(var_0, var_1, var_2, var_3) {
@@ -1194,10 +1239,11 @@ use_nunchucks_object(var_0, var_1) {
   }
   foreach(var_3 in level.players) {
     if(var_3 == var_1) {
-      if(isDefined(level.clock_interaction_q2) && isDefined(level.clock_interaction_q2.clock_owner) && level.clock_interaction_q2.clock_owner == var_3)
+      if(isDefined(level.clock_interaction_q2) && isDefined(level.clock_interaction_q2.clock_owner) && level.clock_interaction_q2.clock_owner == var_3) {
         return;
-      else if(isDefined(level.clock_interaction_q3) && isDefined(level.clock_interaction_q3.clock_owner) && level.clock_interaction_q3.clock_owner == var_3)
+      } else if(isDefined(level.clock_interaction_q3) && isDefined(level.clock_interaction_q3.clock_owner) && level.clock_interaction_q3.clock_owner == var_3) {
         return;
+      }
     } else if(isDefined(level.clock_interaction) && isDefined(level.clock_interaction.clock_owner) && level.clock_interaction.clock_owner == var_3)
       return;
   }
@@ -1216,11 +1262,13 @@ use_nunchucks_object(var_0, var_1) {
   level.clock_interaction = var_0;
   var_0.clock_owner = var_1;
 
-  if(!isDefined(var_1.objects_array_sequence))
+  if(!isDefined(var_1.objects_array_sequence)) {
     var_1.objects_array_sequence = [];
+  }
 
-  if(!isDefined(var_1.objects_array_sequence["part1"]))
+  if(!isDefined(var_1.objects_array_sequence["part1"])) {
     var_1.objects_array_sequence["part1"] = [];
+  }
 
   var_0.clock_active = 1;
   var_1.angles_when_using_clock = var_1 getplayerangles();
@@ -1287,19 +1335,23 @@ clock_watcher(var_0, var_1, var_2, var_3) {
     }
   }
 
-  while(gettime() <= var_1 + var_4 * 1000)
+  while(gettime() <= var_1 + var_4 * 1000) {
     scripts\engine\utility::waitframe();
+  }
 
   var_0.clock_active = 0;
 
-  if(var_3 == 1)
+  if(var_3 == 1) {
     var_0.clock_owner = undefined;
+  }
 
-  if(var_3 == 2)
+  if(var_3 == 2) {
     var_0.clock_owner_q2 = undefined;
+  }
 
-  if(var_3 == 3)
+  if(var_3 == 3) {
     var_0.clock_owner_q3 = undefined;
+  }
 
   var_2 notify("stop_clock_sfx");
   level notify("clock_tick_done_" + var_3);
@@ -1379,8 +1431,9 @@ watch_for_sequence_trigger(var_0, var_1) {
   }
 
   if(isDefined(var_5)) {
-    foreach(var_8 in var_2)
-    var_8 thread[[var_5]](var_0);
+    foreach(var_8 in var_2) {
+      var_8 thread[[var_5]](var_0);
+    }
   }
 
   for(;;) {
@@ -1392,16 +1445,18 @@ watch_for_sequence_trigger(var_0, var_1) {
 
       switch (var_1) {
         case "1":
-          foreach(var_19 in level.players)
-          var_19.attacked_first_object = 0;
+          foreach(var_19 in level.players) {
+            var_19.attacked_first_object = 0;
+          }
 
           var_0.finished_part_one = 1;
           level.clock_interaction.clock_owner = undefined;
           var_0 notify("part_" + var_1 + "_VO_done");
           break;
         case "2":
-          foreach(var_19 in level.players)
-          var_19.attacked_first_object_q2 = 0;
+          foreach(var_19 in level.players) {
+            var_19.attacked_first_object_q2 = 0;
+          }
 
           var_0.finished_part_two = 1;
           var_0.quest_active_q2 = 0;
@@ -1409,8 +1464,9 @@ watch_for_sequence_trigger(var_0, var_1) {
           var_0 notify("part_" + var_1 + "_VO_done");
           break;
         case "3":
-          foreach(var_19 in level.players)
-          var_19.attacked_first_object_q3 = 0;
+          foreach(var_19 in level.players) {
+            var_19.attacked_first_object_q3 = 0;
+          }
 
           var_0.finished_part_three = 1;
           var_0.quest_active_q3 = 0;
@@ -1530,45 +1586,57 @@ play_character_bio(var_0, var_1) {
 
   switch (var_0) {
     case 1:
-      if(var_1.vo_prefix == "p1_")
+      if(var_1.vo_prefix == "p1_") {
         var_3 = "ww_bio_sally_1";
+      }
 
-      if(var_1.vo_prefix == "p2_")
+      if(var_1.vo_prefix == "p2_") {
         var_3 = "ww_bio_pdex_1";
+      }
 
-      if(var_1.vo_prefix == "p3_")
+      if(var_1.vo_prefix == "p3_") {
         var_3 = "ww_bio_andre_1";
+      }
 
-      if(var_1.vo_prefix == "p4_")
+      if(var_1.vo_prefix == "p4_") {
         var_3 = "ww_bio_aj_1";
+      }
 
       break;
     case 2:
-      if(var_1.vo_prefix == "p1_")
+      if(var_1.vo_prefix == "p1_") {
         var_3 = "ww_bio_sally_2";
+      }
 
-      if(var_1.vo_prefix == "p2_")
+      if(var_1.vo_prefix == "p2_") {
         var_3 = "ww_bio_pdex_2";
+      }
 
-      if(var_1.vo_prefix == "p3_")
+      if(var_1.vo_prefix == "p3_") {
         var_3 = "ww_bio_andre_2";
+      }
 
-      if(var_1.vo_prefix == "p4_")
+      if(var_1.vo_prefix == "p4_") {
         var_3 = "ww_bio_aj_2";
+      }
 
       break;
     case 3:
-      if(var_1.vo_prefix == "p1_")
+      if(var_1.vo_prefix == "p1_") {
         var_3 = "ww_bio_sally_3";
+      }
 
-      if(var_1.vo_prefix == "p2_")
+      if(var_1.vo_prefix == "p2_") {
         var_3 = "ww_bio_pdex_3";
+      }
 
-      if(var_1.vo_prefix == "p3_")
+      if(var_1.vo_prefix == "p3_") {
         var_3 = "ww_bio_andre_3";
+      }
 
-      if(var_1.vo_prefix == "p4_")
+      if(var_1.vo_prefix == "p4_") {
         var_3 = "ww_bio_aj_3";
+      }
 
       break;
   }
@@ -1596,8 +1664,9 @@ reset_rewind_mover(var_0) {
   var_2 = level.clock[var_0 - 1].angles;
   var_3 = (0, 0, 0);
 
-  if(isDefined(self.rewindmover) || scripts\engine\utility::is_true(self.isrewinding))
+  if(isDefined(self.rewindmover) || scripts\engine\utility::is_true(self.isrewinding)) {
     thread watch_for_rewind_triggered_on_completion();
+  }
 }
 
 reset_on_failure(var_0) {
@@ -1618,8 +1687,9 @@ reset_on_failure(var_0) {
         var_2.model.maxhealth = 5;
       }
 
-      foreach(var_5 in level.players)
-      var_5.attacked_first_object = 0;
+      foreach(var_5 in level.players) {
+        var_5.attacked_first_object = 0;
+      }
 
       level.clock_interaction.clock_owner = undefined;
       var_0.objects_array_sequence["part1"] = [];
@@ -1627,8 +1697,9 @@ reset_on_failure(var_0) {
       var_0 setscriptablepartstate("scripted_rewind", "inactive");
       var_0 setscriptablepartstate("clockFx", "inactive");
 
-      if(isDefined(var_0.rewindmover))
+      if(isDefined(var_0.rewindmover)) {
         var_0 thread reset_rewind_mover(1);
+      }
 
       var_0.quest_num = undefined;
       level notify("objects_reset");
@@ -1655,9 +1726,9 @@ watch_for_damage_on_struct(var_0) {
     if(isDefined(var_5) && var_5 != "MOD_MELEE") {
       continue;
     }
-    if(self.object_num == 2 && var_2.objects_array_sequence["part1"].size == 0)
+    if(self.object_num == 2 && var_2.objects_array_sequence["part1"].size == 0) {
       continue;
-    else if(!scripts\engine\utility::is_true(var_2.attacked_first_object) && self.object_num == 1 && var_2.objects_array_sequence["part1"].size == 0) {
+    } else if(!scripts\engine\utility::is_true(var_2.attacked_first_object) && self.object_num == 1 && var_2.objects_array_sequence["part1"].size == 0) {
       var_2.objects_array_sequence["part1"][self.object_num - 1] = self;
       self.model.damage_done = self.model.damage_done + var_1;
       var_2.attacked_first_object = 1;
@@ -1674,8 +1745,9 @@ watch_for_damage_on_struct(var_0) {
     }
 
     if(var_2.objects_array_sequence["part1"].size == 2) {
-      foreach(var_12 in var_2.objects_array_sequence["part1"])
-      var_12 playfx_and_shatter(var_2);
+      foreach(var_12 in var_2.objects_array_sequence["part1"]) {
+        var_12 playfx_and_shatter(var_2);
+      }
 
       var_2 playlocalsound("zmb_ui_earn_tickets");
       var_0 notify("part_one_complete");
@@ -1706,30 +1778,35 @@ removememorystructonconnect(var_0) {
 }
 
 removememorystructswhenvalid(var_0, var_1) {
-  while(!isDefined(var_1.disabled_interactions))
+  while(!isDefined(var_1.disabled_interactions)) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(var_0, var_1);
   var_1 thread scripts\cp\maps\cp_disco\cp_disco::update_special_mode_for_player(var_1);
 }
 
 setup_backstory_models_hotjoined_player() {
-  if(!isDefined(self.quest_two_objects))
+  if(!isDefined(self.quest_two_objects)) {
     self.quest_two_objects = [];
+  }
 
-  if(!isDefined(self.quest_three_objects))
+  if(!isDefined(self.quest_three_objects)) {
     self.quest_three_objects = [];
+  }
 
   self.quest_two_objects = level.quest_two_objects;
   self.quest_three_objects = level.quest_three_objects;
 }
 
 setup_backstory_models(var_0, var_1) {
-  if(!isDefined(level.quest_two_objects))
+  if(!isDefined(level.quest_two_objects)) {
     level.quest_two_objects = [];
+  }
 
-  if(!isDefined(level.quest_three_objects))
+  if(!isDefined(level.quest_three_objects)) {
     level.quest_three_objects = [];
+  }
 
   scripts\cp\maps\cp_disco\cp_disco::addtopersonalinteractionlist(var_0);
 
@@ -1754,17 +1831,21 @@ setup_backstory_models(var_0, var_1) {
       default:
     }
 
-    if(var_1 == "memory_object_three" || var_1 == "memory_object_four")
+    if(var_1 == "memory_object_three" || var_1 == "memory_object_four") {
       level.quest_two_objects[var_0.object_num - 1] = var_0;
+    }
 
-    if(var_1 == "memory_object_five" || var_1 == "memory_object_six")
+    if(var_1 == "memory_object_five" || var_1 == "memory_object_six") {
       level.quest_three_objects[var_0.object_num - 1] = var_0;
+    }
 
-    if(!isDefined(var_3.quest_two_objects))
+    if(!isDefined(var_3.quest_two_objects)) {
       var_3.quest_two_objects = [];
+    }
 
-    if(!isDefined(var_3.quest_three_objects))
+    if(!isDefined(var_3.quest_three_objects)) {
       var_3.quest_three_objects = [];
+    }
 
     var_3.quest_two_objects[var_0.object_num - 1] = level.quest_two_objects[var_0.object_num - 1];
     var_3.quest_three_objects[var_0.object_num - 1] = level.quest_three_objects[var_0.object_num - 1];
@@ -1778,8 +1859,9 @@ mem_object_hint(var_0, var_1) {
 mem_object_func(var_0, var_1) {}
 
 getcurrentquestfromstruct(var_0, var_1) {
-  if(!isDefined(var_0.script_noteworthy))
+  if(!isDefined(var_0.script_noteworthy)) {
     return undefined;
+  }
 
   switch (var_0.script_noteworthy) {
     case "memory_object_four":
@@ -1834,9 +1916,9 @@ activatememquestmodel(var_0, var_1, var_2) {
     if(isDefined(var_8) && var_8 != "MOD_MELEE") {
       continue;
     }
-    if(var_0.object_num == 2 && var_5.objects_array_sequence[var_3].size == 0)
+    if(var_0.object_num == 2 && var_5.objects_array_sequence[var_3].size == 0) {
       continue;
-    else if(var_0.object_num == 1 && var_5.objects_array_sequence[var_3].size == 0) {
+    } else if(var_0.object_num == 1 && var_5.objects_array_sequence[var_3].size == 0) {
       if(var_3 == "quest_2" && !scripts\engine\utility::is_true(var_5.attacked_first_object_q2)) {
         var_5.objects_array_sequence[var_3][0] = var_0;
         var_0.model.damage_done = var_0.model.damage_done + var_4;
@@ -1867,13 +1949,15 @@ activatememquestmodel(var_0, var_1, var_2) {
     if(var_5.objects_array_sequence[var_3].size == 2) {
       var_5 playlocalsound("zmb_ui_earn_tickets");
 
-      if(var_3 == "quest_2")
+      if(var_3 == "quest_2") {
         var_5 notify("part_two_complete");
-      else if(var_3 == "quest_3")
+      } else if(var_3 == "quest_3") {
         var_5 notify("part_three_complete");
+      }
 
-      foreach(var_15 in var_5.objects_array_sequence[var_3])
-      var_15 playfx_and_shatter(var_5);
+      foreach(var_15 in var_5.objects_array_sequence[var_3]) {
+        var_15 playfx_and_shatter(var_5);
+      }
     }
   }
 }
@@ -1890,40 +1974,44 @@ applymemquestattributes(var_0, var_1, var_2, var_3) {
       if(var_3.vo_prefix == "p1_") {
         var_1.playeroffset[var_3.name] = (-2462.58, 4604.5, 782.219);
 
-        if(scripts\engine\utility::is_true(var_3.quest_active_q2))
+        if(scripts\engine\utility::is_true(var_3.quest_active_q2)) {
           var_0 setModel("cp_disco_memory_quest_newspaper");
-        else
+        } else {
           var_0 setModel("cp_disco_memory_quest_newspaper_nophy");
+        }
 
         var_0.origin = (-2462.58, 4604.5, 782.219);
         var_0.angles = (0, 180, 0);
       } else if(var_3.vo_prefix == "p2_") {
         var_1.playeroffset[var_3.name] = (-2462.58, 4604.5, 782.219);
 
-        if(scripts\engine\utility::is_true(var_3.quest_active_q2))
+        if(scripts\engine\utility::is_true(var_3.quest_active_q2)) {
           var_0 setModel("cp_disco_comic_book");
-        else
+        } else {
           var_0 setModel("cp_disco_comic_book_nophy");
+        }
 
         var_0.origin = (-2462.58, 4604.5, 782.219);
         var_0.angles = (0, 180, 0);
       } else if(var_3.vo_prefix == "p3_") {
         var_1.playeroffset[var_3.name] = (-2459.6, 4597.5, 783.2);
 
-        if(scripts\engine\utility::is_true(var_3.quest_active_q2))
+        if(scripts\engine\utility::is_true(var_3.quest_active_q2)) {
           var_0 setModel("cp_disco_microphone_quest");
-        else
+        } else {
           var_0 setModel("cp_disco_microphone_nophy");
+        }
 
         var_0.origin = (-2459.6, 4597.5, 783.2);
         var_0.angles = (85, 0, 0);
       } else if(var_3.vo_prefix == "p4_") {
         var_1.playeroffset[var_3.name] = (-2459.5, 4597.5, 782.1);
 
-        if(scripts\engine\utility::is_true(var_3.quest_active_q2))
+        if(scripts\engine\utility::is_true(var_3.quest_active_q2)) {
           var_0 setModel("cp_disco_trophy");
-        else
+        } else {
           var_0 setModel("cp_disco_trophy_nophy");
+        }
 
         var_0.origin = (-2459.5, 4597.5, 782.1);
         var_0.angles = (0, 0, 0);
@@ -1934,40 +2022,44 @@ applymemquestattributes(var_0, var_1, var_2, var_3) {
       if(var_3.vo_prefix == "p1_") {
         var_1.playeroffset[var_3.name] = (-1215, 294.5, 956.5);
 
-        if(scripts\engine\utility::is_true(var_3.quest_active_q2))
+        if(scripts\engine\utility::is_true(var_3.quest_active_q2)) {
           var_0 setModel("cp_disco_memory_quest_newspaper");
-        else
+        } else {
           var_0 setModel("cp_disco_memory_quest_newspaper_nophy");
+        }
 
         var_0.origin = (-1215, 294.5, 956.5);
         var_0.angles = (0, 317.1, 0);
       } else if(var_3.vo_prefix == "p2_") {
         var_1.playeroffset[var_3.name] = (-1215, 294.5, 956.5);
 
-        if(scripts\engine\utility::is_true(var_3.quest_active_q2))
+        if(scripts\engine\utility::is_true(var_3.quest_active_q2)) {
           var_0 setModel("cp_disco_comic_book");
-        else
+        } else {
           var_0 setModel("cp_disco_comic_book_nophy");
+        }
 
         var_0.origin = (-1215, 294.5, 956.5);
         var_0.angles = (0, 317.1, 0);
       } else if(var_3.vo_prefix == "p3_") {
         var_1.playeroffset[var_3.name] = (-1215, 301.5, 957.5);
 
-        if(scripts\engine\utility::is_true(var_3.quest_active_q2))
+        if(scripts\engine\utility::is_true(var_3.quest_active_q2)) {
           var_0 setModel("cp_disco_microphone_quest");
-        else
+        } else {
           var_0 setModel("cp_disco_microphone_nophy");
+        }
 
         var_0.origin = (-1215, 301.5, 957.5);
         var_0.angles = (0, 0, -86.6);
       } else if(var_3.vo_prefix == "p4_") {
         var_1.playeroffset[var_3.name] = (-1215, 299.5, 956.5);
 
-        if(scripts\engine\utility::is_true(var_3.quest_active_q2))
+        if(scripts\engine\utility::is_true(var_3.quest_active_q2)) {
           var_0 setModel("cp_disco_trophy");
-        else
+        } else {
           var_0 setModel("cp_disco_trophy_nophy");
+        }
 
         var_0.origin = (-1215, 299.5, 956.5);
         var_0.angles = (0, 90, 0);
@@ -1977,25 +2069,29 @@ applymemquestattributes(var_0, var_1, var_2, var_3) {
     case "memory_object_six":
     case "memory_object_five":
       if(var_3.vo_prefix == "p1_") {
-        if(scripts\engine\utility::is_true(var_3.quest_active_q3))
+        if(scripts\engine\utility::is_true(var_3.quest_active_q3)) {
           var_0 setModel("cp_disco_movie_script_book_04");
-        else
+        } else {
           var_0 setModel("cp_disco_movie_script_book_04_nophy");
+        }
       } else if(var_3.vo_prefix == "p2_") {
-        if(scripts\engine\utility::is_true(var_3.quest_active_q3))
+        if(scripts\engine\utility::is_true(var_3.quest_active_q3)) {
           var_0 setModel("cp_disco_movie_script_book_02");
-        else
+        } else {
           var_0 setModel("cp_disco_movie_script_book_02_nophy");
+        }
       } else if(var_3.vo_prefix == "p3_") {
-        if(scripts\engine\utility::is_true(var_3.quest_active_q3))
+        if(scripts\engine\utility::is_true(var_3.quest_active_q3)) {
           var_0 setModel("cp_disco_movie_script_book_03");
-        else
+        } else {
           var_0 setModel("cp_disco_movie_script_book_03_nophy");
+        }
       } else if(var_3.vo_prefix == "p4_") {
-        if(scripts\engine\utility::is_true(var_3.quest_active_q3))
+        if(scripts\engine\utility::is_true(var_3.quest_active_q3)) {
           var_0 setModel("cp_disco_movie_script_book_01");
-        else
+        } else {
           var_0 setModel("cp_disco_movie_script_book_01_nophy");
+        }
       }
 
       break;
@@ -2057,17 +2153,21 @@ init_mem6() {
 init_nunchucks_2() {
   level.quest_two_objects = [];
 
-  if(!isDefined(level.clock[1]))
+  if(!isDefined(level.clock[1])) {
     level.clock[1] = undefined;
+  }
 
-  foreach(var_2, var_1 in scripts\engine\utility::getStructArray("clock_2", "script_noteworthy"))
-  level.clock[1] = var_1;
+  foreach(var_2, var_1 in scripts\engine\utility::getStructArray("clock_2", "script_noteworthy")) {
+    level.clock[1] = var_1;
+  }
 
-  foreach(var_4 in level.players)
-  var_4.attacked_first_object_q2 = 0;
+  foreach(var_4 in level.players) {
+    var_4.attacked_first_object_q2 = 0;
+  }
 
-  if(isDefined(level.clock_interaction_q2))
+  if(isDefined(level.clock_interaction_q2)) {
     scripts\cp\cp_interaction::enable_linked_interactions(level.clock_interaction_q2);
+  }
 }
 
 watch_for_player_disconnect_q2(var_0, var_1, var_2, var_3) {
@@ -2111,10 +2211,11 @@ use_nunchucks_object_2(var_0, var_1) {
   }
   foreach(var_3 in level.players) {
     if(var_3 == var_1) {
-      if(isDefined(level.clock_interaction) && isDefined(level.clock_interaction.clock_owner) && level.clock_interaction.clock_owner == var_3)
+      if(isDefined(level.clock_interaction) && isDefined(level.clock_interaction.clock_owner) && level.clock_interaction.clock_owner == var_3) {
         return;
-      else if(isDefined(level.clock_interaction_q3) && isDefined(level.clock_interaction_q3.clock_owner) && level.clock_interaction_q3.clock_owner == var_3)
+      } else if(isDefined(level.clock_interaction_q3) && isDefined(level.clock_interaction_q3.clock_owner) && level.clock_interaction_q3.clock_owner == var_3) {
         return;
+      }
     } else if(isDefined(level.clock_interaction_q2) && isDefined(level.clock_interaction_q2.clock_owner) && level.clock_interaction_q2.clock_owner == var_3)
       return;
   }
@@ -2122,11 +2223,13 @@ use_nunchucks_object_2(var_0, var_1) {
   if(scripts\engine\utility::is_true(var_1.finished_part_two) && getDvar("scr_nunchucks") == "") {
     return;
   }
-  if(!isDefined(var_1.objects_array_sequence))
+  if(!isDefined(var_1.objects_array_sequence)) {
     var_1.objects_array_sequence = [];
+  }
 
-  if(!isDefined(var_1.objects_array_sequence["quest_2"]))
+  if(!isDefined(var_1.objects_array_sequence["quest_2"])) {
     var_1.objects_array_sequence["quest_2"] = [];
+  }
 
   var_1 setscriptablepartstate("clockFx", "active");
   level thread player_clock_tick_sfx(var_1);
@@ -2203,8 +2306,9 @@ reset_on_failure_q2(var_0) {
         var_0 thread scripts\cp\maps\cp_disco\cp_disco::update_special_mode_for_player(var_0);
       }
 
-      foreach(var_5 in level.players)
-      var_5.attacked_first_object_q2 = 0;
+      foreach(var_5 in level.players) {
+        var_5.attacked_first_object_q2 = 0;
+      }
 
       level.clock_interaction_q2.clock_owner = undefined;
       var_0.objects_array_sequence["quest_2"] = [];
@@ -2212,8 +2316,9 @@ reset_on_failure_q2(var_0) {
       var_0 setscriptablepartstate("scripted_rewind", "inactive");
       level.clock_interaction_q2.clock_active = 0;
 
-      if(isDefined(var_0.rewindmover))
+      if(isDefined(var_0.rewindmover)) {
         var_0 thread reset_rewind_mover(2);
+      }
 
       var_0.quest_num = undefined;
       var_0 notify("objects_reset_q2");
@@ -2241,9 +2346,9 @@ watch_for_damage_on_struct_q2(var_0) {
     if(isDefined(var_5) && var_5 != "MOD_MELEE") {
       continue;
     }
-    if(self.object_num == 2 && var_2.objects_array_sequence["quest_2"].size == 0)
+    if(self.object_num == 2 && var_2.objects_array_sequence["quest_2"].size == 0) {
       continue;
-    else if(!scripts\engine\utility::is_true(var_2.attacked_first_object_q2) && self.object_num == 1 && var_2.objects_array_sequence["part2"].size == 0) {
+    } else if(!scripts\engine\utility::is_true(var_2.attacked_first_object_q2) && self.object_num == 1 && var_2.objects_array_sequence["part2"].size == 0) {
       var_2.objects_array_sequence["quest_2"][self.object_num - 1] = self;
       self.model.damage_done = self.model.damage_done + var_1;
       var_2.attacked_first_object_q2 = 1;
@@ -2261,8 +2366,9 @@ watch_for_damage_on_struct_q2(var_0) {
     }
 
     if(var_2.objects_array_sequence["quest_2"].size == 2) {
-      foreach(var_12 in var_2.objects_array_sequence["quest_2"])
-      var_12 playfx_and_shatter(var_2);
+      foreach(var_12 in var_2.objects_array_sequence["quest_2"]) {
+        var_12 playfx_and_shatter(var_2);
+      }
 
       var_2 playlocalsound("zmb_ui_earn_tickets");
       var_2 notify("part_two_complete");
@@ -2273,17 +2379,21 @@ watch_for_damage_on_struct_q2(var_0) {
 init_nunchucks_3() {
   level.quest_three_objects = [];
 
-  if(!isDefined(level.clock[2]))
+  if(!isDefined(level.clock[2])) {
     level.clock[2] = undefined;
+  }
 
-  foreach(var_2, var_1 in scripts\engine\utility::getStructArray("clock_3", "script_noteworthy"))
-  level.clock[2] = var_1;
+  foreach(var_2, var_1 in scripts\engine\utility::getStructArray("clock_3", "script_noteworthy")) {
+    level.clock[2] = var_1;
+  }
 
-  foreach(var_4 in level.players)
-  var_4.attacked_first_object_q3 = 0;
+  foreach(var_4 in level.players) {
+    var_4.attacked_first_object_q3 = 0;
+  }
 
-  if(isDefined(level.clock_interaction_q3))
+  if(isDefined(level.clock_interaction_q3)) {
     scripts\cp\cp_interaction::enable_linked_interactions(level.clock_interaction_q3);
+  }
 }
 
 watch_for_player_disconnect_q3(var_0, var_1, var_2, var_3) {
@@ -2327,10 +2437,11 @@ use_nunchucks_object_3(var_0, var_1) {
   }
   foreach(var_3 in level.players) {
     if(var_3 == var_1) {
-      if(isDefined(level.clock_interaction) && isDefined(level.clock_interaction.clock_owner) && level.clock_interaction.clock_owner == var_3)
+      if(isDefined(level.clock_interaction) && isDefined(level.clock_interaction.clock_owner) && level.clock_interaction.clock_owner == var_3) {
         return;
-      else if(isDefined(level.clock_interaction_q2) && isDefined(level.clock_interaction_q2.clock_owner) && level.clock_interaction_q2.clock_owner == var_3)
+      } else if(isDefined(level.clock_interaction_q2) && isDefined(level.clock_interaction_q2.clock_owner) && level.clock_interaction_q2.clock_owner == var_3) {
         return;
+      }
     } else if(isDefined(level.clock_interaction_q3) && isDefined(level.clock_interaction_q3.clock_owner) && level.clock_interaction_q3.clock_owner == var_3)
       return;
   }
@@ -2338,11 +2449,13 @@ use_nunchucks_object_3(var_0, var_1) {
   if(scripts\engine\utility::is_true(var_1.finished_part_three) && getDvar("scr_nunchucks") == "") {
     return;
   }
-  if(!isDefined(var_1.objects_array_sequence))
+  if(!isDefined(var_1.objects_array_sequence)) {
     var_1.objects_array_sequence = [];
+  }
 
-  if(!isDefined(var_1.objects_array_sequence["quest_3"]))
+  if(!isDefined(var_1.objects_array_sequence["quest_3"])) {
     var_1.objects_array_sequence["quest_3"] = [];
+  }
 
   var_1 setscriptablepartstate("clockFx", "active");
   level thread player_clock_tick_sfx(var_1);
@@ -2417,8 +2530,9 @@ reset_on_failure_q3(var_0) {
         var_0 thread scripts\cp\maps\cp_disco\cp_disco::update_special_mode_for_player(var_0);
       }
 
-      foreach(var_5 in level.players)
-      var_5.attacked_first_object_q3 = 0;
+      foreach(var_5 in level.players) {
+        var_5.attacked_first_object_q3 = 0;
+      }
 
       level.clock_interaction_q3.clock_owner = undefined;
       var_0.objects_array_sequence["quest_3"] = [];
@@ -2426,8 +2540,9 @@ reset_on_failure_q3(var_0) {
       var_0 setscriptablepartstate("scripted_rewind", "inactive");
       level.clock_interaction_q3.clock_active = 0;
 
-      if(isDefined(var_0.rewindmover))
+      if(isDefined(var_0.rewindmover)) {
         var_0 thread reset_rewind_mover(3);
+      }
 
       var_0.quest_num = undefined;
       var_0 notify("objects_reset_q3");
@@ -2453,9 +2568,9 @@ watch_for_damage_on_struct_q3(var_0) {
     if(isDefined(var_5) && var_5 != "MOD_MELEE") {
       continue;
     }
-    if(self.object_num == 2 && var_2.objects_array_sequence["quest_3"].size == 0)
+    if(self.object_num == 2 && var_2.objects_array_sequence["quest_3"].size == 0) {
       continue;
-    else if(!scripts\engine\utility::is_true(var_2.attacked_first_object_q3) && self.object_num == 1 && var_2.objects_array_sequence["part3"].size == 0) {
+    } else if(!scripts\engine\utility::is_true(var_2.attacked_first_object_q3) && self.object_num == 1 && var_2.objects_array_sequence["part3"].size == 0) {
       var_2.objects_array_sequence["quest_3"][self.object_num - 1] = self;
       self.model.damage_done = self.model.damage_done + var_1;
       var_2.attacked_first_object_q3 = 1;
@@ -2474,8 +2589,9 @@ watch_for_damage_on_struct_q3(var_0) {
     }
 
     if(var_2.objects_array_sequence["quest_3"].size == 2) {
-      foreach(var_12 in var_2.objects_array_sequence["quest_3"])
-      var_12 playfx_and_shatter(var_2);
+      foreach(var_12 in var_2.objects_array_sequence["quest_3"]) {
+        var_12 playfx_and_shatter(var_2);
+      }
 
       var_2 playlocalsound("zmb_ui_earn_tickets");
       var_2 notify("part_three_complete");
@@ -2504,8 +2620,9 @@ disco_wait_for_interaction_triggered(var_0) {
     var_0 thread scripts\cp\cp_interaction::delayed_trigger_unset();
     var_2 = level.interactions[var_0.script_noteworthy].cost;
 
-    if(!isDefined(level.interactions[var_0.script_noteworthy].spend_type))
+    if(!isDefined(level.interactions[var_0.script_noteworthy].spend_type)) {
       level.interactions[var_0.script_noteworthy].spend_type = "null";
+    }
 
     if(isDefined(level.interactions[var_0.script_noteworthy].can_use_override_func)) {
       if(![[level.interactions[var_0.script_noteworthy].can_use_override_func]](var_0, var_1)) {
@@ -2523,8 +2640,9 @@ disco_wait_for_interaction_triggered(var_0) {
         continue;
       }
 
-      if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player))
+      if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player)) {
         var_2 = 0;
+      }
     } else if(scripts\cp\cp_interaction::interaction_is_weapon_upgrade(var_0)) {
       var_3 = var_1 getcurrentweapon();
       level.prevweapon = var_1 getcurrentweapon();
@@ -2536,10 +2654,11 @@ disco_wait_for_interaction_triggered(var_0) {
           wait 0.1;
           continue;
         } else if(scripts\cp\maps\cp_disco\cp_disco_weapon_upgrade::can_upgrade(var_3, 1)) {
-          if(var_4 == 1)
+          if(var_4 == 1) {
             var_2 = 5000;
-          else if(var_4 == 2)
+          } else if(var_4 == 2) {
             var_2 = 10000;
+          }
         } else {
           scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"CP_ZMB_INTERACTIONS_UPGRADE_WEAPON_FAIL");
           wait 0.1;
@@ -2552,12 +2671,13 @@ disco_wait_for_interaction_triggered(var_0) {
         wait 0.1;
         continue;
       } else if(scripts\cp\maps\cp_disco\cp_disco_weapon_upgrade::can_upgrade(var_3)) {
-        if(scripts\engine\utility::is_true(level.has_picked_up_fuses) && !isDefined(level.placed_alien_fuses))
+        if(scripts\engine\utility::is_true(level.has_picked_up_fuses) && !isDefined(level.placed_alien_fuses)) {
           var_2 = 0;
-        else if(var_4 == 1)
+        } else if(var_4 == 1) {
           var_2 = 5000;
-        else if(var_4 == 2)
+        } else if(var_4 == 2) {
           var_2 = 10000;
+        }
       } else {
         scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"CP_ZMB_INTERACTIONS_UPGRADE_WEAPON_FAIL");
         wait 0.1;
@@ -2581,16 +2701,17 @@ disco_wait_for_interaction_triggered(var_0) {
           var_7 = scripts\cp\utility::getrawbaseweaponname(var_0.script_noteworthy);
           var_4 = scripts\cp\cp_weapon::get_weapon_level(var_7);
 
-          if(var_4 > 1)
+          if(var_4 > 1) {
             var_2 = 4500;
-          else
+          } else {
             var_2 = var_2 * 0.5;
+          }
         }
       }
     } else if(scripts\cp\cp_interaction::interaction_is_perk(var_0)) {
-      if(!var_1 scripts\cp\cp_interaction::can_use_perk(var_0))
+      if(!var_1 scripts\cp\cp_interaction::can_use_perk(var_0)) {
         var_2 = 0;
-      else if((scripts\cp\utility::isplayingsolo() || level.only_one_player) && var_0.perk_type == "perk_machine_revive" && var_1.self_revives_purchased <= var_1.max_self_revive_machine_use) {
+      } else if((scripts\cp\utility::isplayingsolo() || level.only_one_player) && var_0.perk_type == "perk_machine_revive" && var_1.self_revives_purchased <= var_1.max_self_revive_machine_use) {
         var_2 = 500;
         var_1 thread scripts\cp\cp_vo::try_to_play_vo("purchase_perk_revive_solo", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
       } else
@@ -2608,10 +2729,11 @@ disco_wait_for_interaction_triggered(var_0) {
         continue;
       }
 
-      if(self.card_refills == 1)
+      if(self.card_refills == 1) {
         var_2 = level.fortune_visit_cost_2;
-      else
+      } else {
         var_2 = level.fortune_visit_cost_1;
+      }
     }
 
     if(!scripts\cp\cp_interaction::can_purchase_interaction(var_0, var_2, level.interactions[var_0.script_noteworthy].spend_type)) {
@@ -2643,17 +2765,19 @@ disco_wait_for_interaction_triggered(var_0) {
 
     thread scripts\cp\cp_interaction::interaction_post_activate_delay(var_0);
 
-    if(scripts\cp\cp_interaction::interaction_is_weapon_buy(var_0))
+    if(scripts\cp\cp_interaction::interaction_is_weapon_buy(var_0)) {
       level notify("interaction", var_0.name, undefined, self);
-    else
+    } else {
       level notify("interaction", "purchase", level.interactions[var_0.script_noteworthy], self);
+    }
 
     var_8 = level.interactions[var_0.script_noteworthy].spend_type;
     thread scripts\cp\cp_interaction::take_player_money(var_2, var_8);
     level thread[[level.interactions[var_0.script_noteworthy].activation_func]](var_0, self);
 
-    if(scripts\cp\cp_interaction::interaction_is_souvenir(var_0))
+    if(scripts\cp\cp_interaction::interaction_is_souvenir(var_0)) {
       level thread scripts\cp\cp_interaction::souvenir_team_splash(var_0.script_noteworthy, self);
+    }
 
     scripts\cp\cp_interaction::interaction_post_activate_update(var_0);
     wait 0.1;
@@ -2713,24 +2837,30 @@ disco_player_interaction_monitor() {
       continue;
     }
 
-    if(scripts\cp\cp_interaction::interaction_is_window_entrance(var_5) && distancesquared(var_5.origin, self.origin) < var_2)
+    if(scripts\cp\cp_interaction::interaction_is_window_entrance(var_5) && distancesquared(var_5.origin, self.origin) < var_2) {
       var_4 = var_5;
+    }
 
-    if(!isDefined(var_4) && !scripts\cp\cp_interaction::interaction_is_window_entrance(var_5) && distancesquared(var_5.origin, self.origin) <= var_0)
+    if(!isDefined(var_4) && !scripts\cp\cp_interaction::interaction_is_window_entrance(var_5) && distancesquared(var_5.origin, self.origin) <= var_0) {
       var_4 = var_5;
+    }
 
-    if(isDefined(var_4) && (scripts\cp\cp_interaction::interaction_is_door_buy(var_4) || scripts\cp\cp_interaction::interaction_is_chi_door(var_4)) && !scripts\cp\cp_interaction::interaction_is_special_door_buy(var_4))
+    if(isDefined(var_4) && (scripts\cp\cp_interaction::interaction_is_door_buy(var_4) || scripts\cp\cp_interaction::interaction_is_chi_door(var_4)) && !scripts\cp\cp_interaction::interaction_is_special_door_buy(var_4)) {
       var_4 = undefined;
+    }
 
     if(!isDefined(var_4) && isDefined(level.should_allow_far_search_dist_func)) {
-      if(distancesquared(var_5.origin, self.origin) <= var_1)
+      if(distancesquared(var_5.origin, self.origin) <= var_1) {
         var_4 = var_5;
+      }
 
-      if(isDefined(var_4) && ![[level.should_allow_far_search_dist_func]](var_4))
+      if(isDefined(var_4) && ![[level.should_allow_far_search_dist_func]](var_4)) {
         var_4 = undefined;
+      }
     } else if(!isDefined(var_4) && isDefined(var_5.custom_search_dist)) {
-      if(distance(var_5.origin, self.origin) <= var_5.custom_search_dist)
+      if(distance(var_5.origin, self.origin) <= var_5.custom_search_dist) {
         var_4 = var_5;
+      }
     }
 
     if(!isDefined(var_4)) {
@@ -2756,8 +2886,9 @@ disco_player_interaction_monitor() {
         scripts\cp\cp_interaction::reset_interaction();
 
         if(isDefined(self.current_crafted_inventory) && self.current_crafted_inventory.item == "crafted_windowtrap") {
-          if(!isDefined(var_4.has_trap))
+          if(!isDefined(var_4.has_trap)) {
             thread scripts\cp\cp_interaction::flash_inventory();
+          }
         }
 
         self.last_interaction_point = var_4;
@@ -2768,8 +2899,9 @@ disco_player_interaction_monitor() {
       }
 
       if(isDefined(self.current_crafted_inventory) && self.current_crafted_inventory.item == "crafted_windowtrap") {
-        if(!isDefined(var_4.has_trap))
+        if(!isDefined(var_4.has_trap)) {
           thread scripts\cp\cp_interaction::flash_inventory();
+        }
       }
     }
 
@@ -2779,12 +2911,13 @@ disco_player_interaction_monitor() {
       continue;
     }
 
-    if(!isDefined(self.last_interaction_point))
+    if(!isDefined(self.last_interaction_point)) {
       scripts\cp\cp_interaction::set_interaction_point(var_4);
-    else if(self.last_interaction_point == var_4 && scripts\cp\cp_interaction::interaction_is_weapon_buy(var_4) && !scripts\engine\utility::is_true(self.delay_hint))
+    } else if(self.last_interaction_point == var_4 && scripts\cp\cp_interaction::interaction_is_weapon_buy(var_4) && !scripts\engine\utility::is_true(self.delay_hint)) {
       scripts\cp\cp_interaction::set_interaction_point(var_4, 0);
-    else if(self.last_interaction_point != var_4)
+    } else if(self.last_interaction_point != var_4) {
       scripts\cp\cp_interaction::set_interaction_point(var_4);
+    }
 
     wait 0.05;
   }
@@ -2943,10 +3076,11 @@ runrewind(var_0) {
   self setphasestatus(1);
   var_5 = (0, 0, 0);
 
-  if(isDefined(level.clock[int(var_0) - 1]) && var_0 != 4)
+  if(isDefined(level.clock[int(var_0) - 1]) && var_0 != 4) {
     var_5 = level.clock[int(var_0) - 1].origin;
-  else if(var_0 == 4)
+  } else if(var_0 == 4) {
     var_5 = self.rewindorigins[self.rewindpositionstartindex];
+  }
 
   var_6 = self.rewindangles[self.rewindpositionstartindex];
   var_7 = self.rewindvelocities[self.rewindpositionstartindex];
@@ -2983,13 +3117,15 @@ runrewind(var_0) {
     scripts\cp\zombies\zombie_afterlife_arcade::add_white_screen();
     thread scripts\cp\zombies\zombie_afterlife_arcade::remove_white_screen(var_10);
 
-    if(!isDefined(var_14))
+    if(!isDefined(var_14)) {
       var_14 = self.rewindorigins[self.rewindorigins.size - 1];
+    }
 
-    if(isDefined(var_12))
+    if(isDefined(var_12)) {
       self.rewindmover.origin = vectorlerp(var_12, var_14, 0.05);
-    else
+    } else {
       self.rewindmover.origin = var_14;
+    }
 
     wait(var_10);
   }
@@ -3003,8 +3139,9 @@ play_fx_rewind(var_0) {
 }
 
 return_player_to_clock(var_0, var_1) {
-  while(isDefined(var_0.rewindmover))
+  while(isDefined(var_0.rewindmover)) {
     wait 0.1;
+  }
 
   var_2 = 2;
 
@@ -3038,9 +3175,9 @@ return_player_to_clock(var_0, var_1) {
   var_0 thread scripts\cp\zombies\zombie_afterlife_arcade::remove_white_screen(0.05);
   var_0 thread play_fx_rewind(var_2);
 
-  if(isDefined(var_0.rewindmover))
+  if(isDefined(var_0.rewindmover)) {
     var_0 completeplayerwarp(var_0.rewindmover, var_5, var_6, var_7, var_1);
-  else {
+  } else {
     var_8 = vectorlerp(var_0.origin, var_5, 0.05);
     var_9 = getclosestpointonnavmesh(var_5);
     var_0 setOrigin(var_9, 0);
@@ -3077,14 +3214,17 @@ completeplayerwarp(var_0, var_1, var_2, var_3, var_4) {
   scripts\engine\utility::waitframe();
   var_0 solid();
 
-  if(!scripts\engine\utility::isweaponswitchallowed())
+  if(!scripts\engine\utility::isweaponswitchallowed()) {
     scripts\engine\utility::allow_weapon_switch(1);
+  }
 
-  if(!scripts\engine\utility::isusabilityallowed())
+  if(!scripts\engine\utility::isusabilityallowed()) {
     scripts\engine\utility::allow_usability(1);
+  }
 
-  if(!scripts\cp\utility::isteleportenabled())
+  if(!scripts\cp\utility::isteleportenabled()) {
     scripts\cp\utility::allow_player_teleport(1);
+  }
 
   scripts\cp\utility::removedamagemodifier("rewind_invulnerability", 0);
   self playanimscriptevent("power_exit", "rewind");
@@ -3101,8 +3241,9 @@ completeplayerwarp(var_0, var_1, var_2, var_3, var_4) {
   self setscriptablepartstate("scripted_rewind", "inactive");
   self notify("rewind_power_finished");
 
-  if(isDefined(self.clocks_destroyed))
+  if(isDefined(self.clocks_destroyed)) {
     self.clocks_destroyed = 0;
+  }
 
   self.isrewinding = 0;
   self.quest_num = undefined;
@@ -3125,14 +3266,17 @@ restorefunctionality() {
   }
   self.rewindrestrictedfunctionality = undefined;
 
-  if(!scripts\engine\utility::isweaponswitchallowed())
+  if(!scripts\engine\utility::isweaponswitchallowed()) {
     scripts\engine\utility::allow_weapon_switch(1);
+  }
 
-  if(!scripts\engine\utility::isusabilityallowed())
+  if(!scripts\engine\utility::isusabilityallowed()) {
     scripts\engine\utility::allow_usability(1);
+  }
 
-  if(!scripts\cp\utility::isteleportenabled())
+  if(!scripts\cp\utility::isteleportenabled()) {
     scripts\cp\utility::allow_player_teleport(1);
+  }
 }
 
 restrictfunctionalitycleanup() {
@@ -3148,8 +3292,9 @@ rotate_fans() {
   level endon("stop_waterfall_trap");
   level.center_sewer_fan rotateYaw(7200, 28, 2, 5);
 
-  foreach(var_1 in level.sewer_fans)
-  var_1 rotateYaw(14400, 28, randomintrange(1, 4), 5);
+  foreach(var_1 in level.sewer_fans) {
+    var_1 rotateYaw(14400, 28, randomintrange(1, 4), 5);
+  }
 }
 
 rotate_center_fan() {
@@ -3174,8 +3319,9 @@ init_fan_trap() {
   level.lower_sewer_phys_point = scripts\engine\utility::getStruct(level.lower_sewer_phys_vol.target, "targetname");
   level.sewer_fan_trig = spawn("trigger_radius", (-882.5, 1846, 151.5), 0, 585, 96);
 
-  foreach(var_1 in level.sewer_fan_interactions)
-  var_1 thread sewer_fan_power_handler();
+  foreach(var_1 in level.sewer_fan_interactions) {
+    var_1 thread sewer_fan_power_handler();
+  }
 
   level thread rotate_center_fan();
 }
@@ -3184,16 +3330,18 @@ sewer_fan_power_handler() {
   level scripts\engine\utility::waittill_any("power_on", self.power_area + " power_on");
   self.powered_on = 1;
 
-  foreach(var_1 in level.sewer_fan_switches)
-  var_1 setModel("mp_frag_button_on_green");
+  foreach(var_1 in level.sewer_fan_switches) {
+    var_1 setModel("mp_frag_button_on_green");
+  }
 }
 
 init_electric_trap() {
   scripts\engine\utility::flag_init("rooftop_walkway_open");
   var_0 = scripts\engine\utility::getStructArray("electric_trap", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
+  foreach(var_2 in var_0) {
+    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
+  }
 
   wait 10;
 
@@ -3207,8 +3355,9 @@ init_electric_trap() {
 
   scripts\engine\utility::flag_set("rooftop_walkway_open");
 
-  foreach(var_2 in var_0)
-  scripts\cp\cp_interaction::add_to_current_interaction_list(var_2);
+  foreach(var_2 in var_0) {
+    scripts\cp\cp_interaction::add_to_current_interaction_list(var_2);
+  }
 }
 
 use_electric_trap(var_0, var_1) {
@@ -3276,10 +3425,11 @@ electrocute_zombie(var_0, var_1) {
   var_0.electrocuted = 1;
   var_0 setscriptablepartstate("electrocuted", "on");
 
-  if(var_1 scripts\cp\utility::is_valid_player(1))
+  if(var_1 scripts\cp\utility::is_valid_player(1)) {
     var_2 = var_1;
-  else
+  } else {
     var_2 = undefined;
+  }
 
   var_0 dodamage(var_0.health + 100, var_0.origin, var_2, var_2, "MOD_UNKNOWN", "iw7_electrictrap_zm");
 }
@@ -3297,8 +3447,9 @@ use_fan_trap(var_0, var_1) {
   scripts\cp\cp_interaction::disable_linked_interactions(var_0);
   level thread fan_trap_sfx();
 
-  foreach(var_3 in level.sewer_fan_switches)
-  var_3 setModel("mp_frag_button_on");
+  foreach(var_3 in level.sewer_fan_switches) {
+    var_3 setModel("mp_frag_button_on");
+  }
 
   var_0.trap_kills = 0;
   var_5 = gettime() + 2000;
@@ -3337,13 +3488,15 @@ use_fan_trap(var_0, var_1) {
   level.lower_sewer_phys_vol physics_volumeenable(0);
   scripts\cp\cp_interaction::enable_linked_interactions(var_0);
 
-  if(scripts\engine\utility::flag("rk_fight_started"))
+  if(scripts\engine\utility::flag("rk_fight_started")) {
     scripts\cp\cp_interaction::interaction_cooldown(var_0, 300);
-  else
+  } else {
     scripts\cp\cp_interaction::interaction_cooldown(var_0, 60);
+  }
 
-  foreach(var_3 in level.sewer_fan_switches)
-  var_3 setModel("mp_frag_button_on_green");
+  foreach(var_3 in level.sewer_fan_switches) {
+    var_3 setModel("mp_frag_button_on_green");
+  }
 }
 
 fan_trap_sfx() {
@@ -3412,10 +3565,11 @@ fling_zombie(var_0, var_1) {
   self.disable_armor = 1;
   wait(randomfloatrange(0.5, 1.5));
 
-  if(var_1 scripts\cp\utility::is_valid_player())
+  if(var_1 scripts\cp\utility::is_valid_player()) {
     var_2 = var_1;
-  else
+  } else {
     var_2 = undefined;
+  }
 
   self.dontmutilate = 1;
   self dodamage(self.health + 100, level.sewer_fan_trig.origin, var_2, var_2, "MOD_UNKNOWN", "iw7_fantrap_zm");

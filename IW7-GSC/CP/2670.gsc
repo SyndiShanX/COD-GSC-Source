@@ -32,8 +32,9 @@ init() {
 _id_65F5(var_0) {
   var_1 = 262144;
 
-  if(level._id_B548.size < 1)
+  if(level._id_B548.size < 1) {
     return undefined;
+  }
 
   var_2 = [];
 
@@ -41,13 +42,14 @@ _id_65F5(var_0) {
     if(!isDefined(var_4) || var_4.fully_charged) {
       continue;
     }
-    if(distancesquared(var_4.origin, var_0.origin) < var_1)
+    if(distancesquared(var_4.origin, var_0.origin) < var_1) {
       var_2[var_2.size] = var_4;
+    }
   }
 
-  if(var_2.size == 0)
+  if(var_2.size == 0) {
     return undefined;
-  else {
+  } else {
     var_6 = sortbydistance(var_2, var_0.origin);
     return var_6[0];
   }
@@ -76,8 +78,9 @@ _id_A630(var_0, var_1, var_2) {
   var_7 = 350;
   var_8 = var_6 / var_7;
 
-  if(var_8 < 0.05)
+  if(var_8 < 0.05) {
     var_8 = 0.05;
+  }
 
   var_4 moveTo(var_1 gettagorigin("tag_fx"), var_8);
   var_4 waittill("movedone");
@@ -85,8 +88,9 @@ _id_A630(var_0, var_1, var_2) {
   wait 0.5;
   var_4 delete();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 notify("soul_collected");
+  }
 }
 
 give_crafted_medusa(var_0, var_1) {
@@ -133,10 +137,11 @@ _id_837E(var_0, var_1, var_2) {
   thread scripts\cp\utility::wait_restore_player_perk();
   self.iscarrying = 0;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 setcarryingims(var_0, var_1, var_2, var_3) {
@@ -161,8 +166,9 @@ setcarryingims(var_0, var_1, var_2, var_3) {
       return 1;
     }
 
-    if(!isDefined(var_4))
+    if(!isDefined(var_4)) {
       var_4 = "force_cancel_placement";
+    }
 
     if(var_4 == "cancel_medusa" || var_4 == "force_cancel_placement") {
       if(!var_1 && var_4 == "cancel_medusa") {
@@ -171,10 +177,11 @@ setcarryingims(var_0, var_1, var_2, var_3) {
       scripts\engine\utility::allow_weapon(1);
       var_0 _id_B542();
 
-      if(var_4 != "force_cancel_placement")
+      if(var_4 != "force_cancel_placement") {
         thread watch_dpad();
-      else if(var_1)
+      } else if(var_1) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
+      }
 
       return 0;
     }
@@ -182,8 +189,9 @@ setcarryingims(var_0, var_1, var_2, var_3) {
     if(!var_0.canbeplaced) {
       continue;
     }
-    if(var_1)
+    if(var_1) {
       scripts\cp\utility::remove_crafted_item_from_inventory(self);
+    }
 
     var_0 _id_B545(var_2, var_3, self);
     scripts\engine\utility::allow_weapon(1);
@@ -222,8 +230,9 @@ _id_B53C(var_0) {
   _id_B544();
   self playSound("sentry_explode");
 
-  if(isDefined(self.charge_fx))
+  if(isDefined(self.charge_fx)) {
     self.charge_fx delete();
+  }
 
   _id_E11F();
 
@@ -232,8 +241,9 @@ _id_B53C(var_0) {
     self playSound("sentry_explode_smoke");
     wait 0.1;
 
-    if(isDefined(self))
+    if(isDefined(self)) {
       self delete();
+    }
   }
 }
 
@@ -258,8 +268,9 @@ _id_B53D() {
       self playSound("trap_medusa_pickup");
     }
 
-    if(isDefined(self.charge_fx))
+    if(isDefined(self.charge_fx)) {
       self.charge_fx delete();
+    }
 
     _id_E11F();
     self delete();
@@ -300,20 +311,24 @@ _id_B545(var_0, var_1, var_2) {
 
   var_4 = "zmb_medusa_energy_collector_01_empty";
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_4 = "zmb_medusa_energy_collector_01_empty";
-  else {
-    if(var_1 > 3)
+  } else {
+    if(var_1 > 3) {
       var_4 = "zmb_medusa_energy_collector_01_1";
+    }
 
-    if(var_1 > 5)
+    if(var_1 > 5) {
       var_4 = "zmb_medusa_energy_collector_01_2";
+    }
 
-    if(var_1 > 7)
+    if(var_1 > 7) {
       var_4 = "zmb_medusa_energy_collector_01_3";
+    }
 
-    if(var_1 > 9)
+    if(var_1 > 9) {
       var_4 = "zmb_medusa_energy_collector_01";
+    }
   }
 
   var_3 setModel(var_4);
@@ -329,8 +344,9 @@ _id_B545(var_0, var_1, var_2) {
 _id_B542() {
   self.carriedby forceusehintoff();
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.iscarrying = 0;
+  }
 
   self.carriedmedusa delete();
   self delete();
@@ -343,8 +359,9 @@ _id_B543(var_0, var_1) {
   self.carriedby = var_0;
   var_0.iscarrying = 1;
 
-  if(var_1)
+  if(var_1) {
     self.firstplacement = 1;
+  }
 
   var_0 thread scripts\cp\utility::update_trap_placement_internal(self, self.carriedmedusa, level._id_B549["crafted_medusa"]);
   thread scripts\cp\utility::item_oncarrierdeath(var_0);
@@ -369,8 +386,9 @@ _id_B541(var_0, var_1) {
   self._id_3CC3 = 0;
   self.fully_charged = 0;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self._id_3CC3 = var_1;
+  }
 
   if(self._id_3CC3 >= 10) {
     self.fully_charged = 1;
@@ -379,10 +397,11 @@ _id_B541(var_0, var_1) {
 
   _id_1862();
 
-  if(!self.fully_charged)
+  if(!self.fully_charged) {
     self setscriptablepartstate("base", "charge_level_1");
-  else
+  } else {
     self setscriptablepartstate("base", "charge_level_2");
+  }
 }
 
 _id_B547() {
@@ -393,24 +412,28 @@ _id_B547() {
     self._id_3CC3++;
     var_0 = "zmb_medusa_energy_collector_01_empty";
 
-    if(self._id_3CC3 >= 3)
+    if(self._id_3CC3 >= 3) {
       var_0 = "zmb_medusa_energy_collector_01_1";
+    }
 
-    if(self._id_3CC3 > 5)
+    if(self._id_3CC3 > 5) {
       var_0 = "zmb_medusa_energy_collector_01_2";
+    }
 
-    if(self._id_3CC3 > 7)
+    if(self._id_3CC3 > 7) {
       var_0 = "zmb_medusa_energy_collector_01_3";
+    }
 
-    if(self._id_3CC3 > 9)
+    if(self._id_3CC3 > 9) {
       var_0 = "zmb_medusa_energy_collector_01";
+    }
 
     if(self.model != var_0) {
       self setModel(var_0);
 
-      if(self._id_3CC3 != 10)
+      if(self._id_3CC3 != 10) {
         self setscriptablepartstate("base", "charge_level_1");
-      else {
+      } else {
         self setHintString(level._id_B549["crafted_medusa"]._id_74BF);
         self.fully_charged = 1;
         self setscriptablepartstate("base", "charge_level_2");
@@ -446,7 +469,8 @@ _id_B539() {
   for(;;) {
     wait 3.0;
 
-    if(!isDefined(self.carriedby))
+    if(!isDefined(self.carriedby)) {
       self playSound("sentry_gun_beep");
+    }
   }
 }

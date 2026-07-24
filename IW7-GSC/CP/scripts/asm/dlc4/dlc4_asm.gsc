@@ -53,14 +53,16 @@ choosespawnanim(var_0, var_1, var_2) {
         break;
     }
 
-    if(scripts\asm\asm_mp::_id_2347(var_1, self.spawner.script_animation + var_3))
+    if(scripts\asm\asm_mp::_id_2347(var_1, self.spawner.script_animation + var_3)) {
       return scripts\asm\asm::asm_lookupanimfromalias(var_1, self.spawner.script_animation + var_3);
-    else if(scripts\asm\asm_mp::_id_2347(var_1, self.spawner.script_animation))
+    } else if(scripts\asm\asm_mp::_id_2347(var_1, self.spawner.script_animation)) {
       return scripts\asm\asm::asm_lookupanimfromalias(var_1, self.spawner.script_animation);
+    }
   }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return _id_0F3C::_id_3EF4(var_0, var_1, var_2);
+  }
 
   return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_2);
 }
@@ -78,12 +80,14 @@ clearasmaction() {
 }
 
 shoulddoaction(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.requested_action))
+  if(!isDefined(self.requested_action)) {
     return 0;
+  }
 
   if(self.requested_action == var_2) {
-    if(isDefined(self.current_action) && self.current_action == var_2)
+    if(isDefined(self.current_action) && self.current_action == var_2) {
       return 0;
+    }
 
     self.current_action = var_2;
     return 1;
@@ -93,15 +97,18 @@ shoulddoaction(var_0, var_1, var_2, var_3) {
 }
 
 shouldabortaction(var_0, var_1, var_2, var_3) {
-  if(scripts\engine\utility::is_true(self.btraversalteleport))
+  if(scripts\engine\utility::is_true(self.btraversalteleport)) {
     return 0;
+  }
 
-  if(!isDefined(self.requested_action))
+  if(!isDefined(self.requested_action)) {
     return 1;
+  }
 
   if(isDefined(var_3)) {
-    if(self.requested_action != var_3)
+    if(self.requested_action != var_3) {
       return 1;
+    }
   }
 
   return 0;
@@ -114,17 +121,21 @@ playanimandlookatenemy(var_0, var_1, var_2, var_3) {
 }
 
 isanimdone(var_0, var_1, var_2, var_3) {
-  if(scripts\asm\asm::_id_232B(var_1, "end"))
+  if(scripts\asm\asm::_id_232B(var_1, "end")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "early_end"))
+  if(scripts\asm\asm::_id_232B(var_1, "early_end")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "finish_early"))
+  if(scripts\asm\asm::_id_232B(var_1, "finish_early")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "code_move"))
+  if(scripts\asm\asm::_id_232B(var_1, "code_move")) {
     return 1;
+  }
 
   return 0;
 }
@@ -134,30 +145,36 @@ ismyenemyinfrontofme(var_0, var_1) {
   var_3 = vectorNormalize(anglesToForward(self.angles) * (1, 1, 0));
   var_4 = vectordot(var_2, var_3);
 
-  if(var_4 > var_1)
+  if(var_4 > var_1) {
     return 1;
+  }
 
   return 0;
 }
 
 shouldmeleeattackhit(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = self.origin;
+  }
 
-  if(scripts\mp\agents\zombie\zombie_util::_id_9DE0(var_0))
+  if(scripts\mp\agents\zombie\zombie_util::_id_9DE0(var_0)) {
     return 1;
+  }
 
   var_5 = distance2dsquared(var_0.origin, var_4);
 
-  if(var_5 > var_1)
+  if(var_5 > var_1) {
     return 0;
+  }
 
   if(!ismyenemyinfrontofme(var_0, var_2)) {
-    if(var_5 < var_3)
+    if(var_5 < var_3) {
       return 1;
+    }
 
     return 0;
   }
@@ -221,13 +238,15 @@ alienmeleenotehandler(var_0, var_1, var_2, var_3) {
         if(var_15 > var_10 && var_10 > 0) {
           var_16 = var_15 / var_10;
 
-          if(var_16 < 1)
+          if(var_16 < 1) {
             var_16 = 1;
+          }
 
           var_16 = var_16 + var_4.melee_xy_scale_boost;
 
-          if(var_16 > var_4.melee_max_flex_xy_scale)
+          if(var_16 > var_4.melee_max_flex_xy_scale) {
             var_16 = var_4.melee_max_flex_xy_scale;
+          }
         } else
           var_16 = 1 + var_4.melee_xy_scale_boost;
 
@@ -252,8 +271,9 @@ meleenotehandler(var_0, var_1, var_2, var_3) {
         self notify("attack_miss", var_4);
     }
 
-    if(!scripts\engine\utility::is_true(self.bmovingmelee))
+    if(!scripts\engine\utility::is_true(self.bmovingmelee)) {
       self notify("stop_melee_face_enemy");
+    }
   }
 }
 
@@ -275,8 +295,9 @@ stopfacingenemy(var_0, var_1) {
 }
 
 choosemovingmeleeattack(var_0, var_1, var_2) {
-  if(isDefined(self._blackboard.movingmeleeattackindex))
+  if(isDefined(self._blackboard.movingmeleeattackindex)) {
     return self._blackboard.movingmeleeattackindex;
+  }
 
   return randomint(self getanimentrycount(var_1));
 }
@@ -285,8 +306,9 @@ playmovingmeleeattack(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   var_4 = 1;
 
-  if(isDefined(self._id_C081))
+  if(isDefined(self._id_C081)) {
     var_4 = self._id_C081;
+  }
 
   var_5 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   var_6 = self getanimentry(var_1, var_5);
@@ -297,14 +319,16 @@ playmovingmeleeattack(var_0, var_1, var_2, var_3) {
   var_11 = randomfloatrange(var_10.min_stop_facing_enemy_time_before_hit, var_10.max_stop_facing_enemy_time_before_hit);
   var_12 = var_9 - var_11;
 
-  if(var_12 < 0)
+  if(var_12 < 0) {
     var_12 = 0.1;
+  }
 
   thread scripts\asm\zombie\melee::_id_6A6A(var_1, self.curmeleetarget);
   thread stopfacingenemy(var_1, var_12);
 
-  if(isDefined(self.preventplayerpushdist))
+  if(isDefined(self.preventplayerpushdist)) {
     self _meth_85C9(self.preventplayerpushdist);
+  }
 
   scripts\asm\asm_mp::_id_2365(var_0, var_1, var_2, var_5, var_4);
 }
@@ -318,8 +342,9 @@ playmeleeattack(var_0, var_1, var_2, var_3) {
   thread scripts\asm\zombie\melee::_id_6A6A(var_1, self.curmeleetarget);
   var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
 
-  if(isDefined(self.preventplayerpushdist))
+  if(isDefined(self.preventplayerpushdist)) {
     self _meth_85C9(self.preventplayerpushdist);
+  }
 
   scripts\asm\asm_mp::_id_2365(var_0, var_1, var_2, var_4, self._id_C081);
 }
@@ -357,8 +382,9 @@ doteleporthack(var_0, var_1, var_2, var_3) {
 }
 
 shouldturn(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.desiredyaw))
+  if(!isDefined(self.desiredyaw)) {
     return 0;
+  }
 
   return 1;
 }
@@ -383,8 +409,9 @@ _id_D56A(var_0, var_1, var_2, var_3) {
   var_5 = self getanimentry(var_1, var_4);
   var_6 = getanimlength(var_5);
 
-  if(isDefined(self.additionalyaw))
+  if(isDefined(self.additionalyaw)) {
     thread handleadditionalyaw(var_1, floor(var_6 * 20));
+  }
 
   return scripts\asm\asm_mp::_id_2365(var_0, var_1, var_2, var_4, self._id_C081);
 }
@@ -394,22 +421,24 @@ _id_3F0A(var_0, var_1, var_2) {
   var_4 = abs(self.desiredyaw);
 
   if(self.desiredyaw < 0) {
-    if(var_4 < 67.5)
+    if(var_4 < 67.5) {
       var_3 = 9;
-    else if(var_4 < 112.5)
+    } else if(var_4 < 112.5) {
       var_3 = 6;
-    else if(var_4 < 157.5)
+    } else if(var_4 < 157.5) {
       var_3 = 3;
-    else
+    } else {
       var_3 = "2r";
+    }
   } else if(self.desiredyaw < 67.5)
     var_3 = 7;
-  else if(self.desiredyaw < 112.5)
+  else if(self.desiredyaw < 112.5) {
     var_3 = 4;
-  else if(self.desiredyaw < 157.5)
+  } else if(self.desiredyaw < 157.5) {
     var_3 = 1;
-  else
+  } else {
     var_3 = "2l";
+  }
 
   var_5 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
   var_6 = self getanimentry(var_1, var_5);
@@ -420,24 +449,28 @@ _id_3F0A(var_0, var_1, var_2) {
 }
 
 shouldstartarrivalalien(var_0, var_1, var_2, var_3) {
-  if(!scripts\asm\zombie\zombie::_id_FFE7())
+  if(!scripts\asm\zombie\zombie::_id_FFE7()) {
     return 0;
+  }
 
   var_4 = self.pathgoalpos;
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
   var_5 = gettunedata();
 
-  if(!isDefined(var_5.arrivalanimdist[var_2]))
+  if(!isDefined(var_5.arrivalanimdist[var_2])) {
     return 0;
+  }
 
   var_6 = var_5.arrivalanimdist[var_2];
   var_7 = distance2d(var_4, self.origin);
 
-  if(var_7 < var_6 * 1.1 && var_7 > var_6 * 0.75)
+  if(var_7 < var_6 * 1.1 && var_7 > var_6 * 0.75) {
     return 1;
+  }
 
   return 0;
 }
@@ -465,15 +498,17 @@ playaliendeathanim(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   self scragentsetphysicsmode("gravity");
 
-  if(!scripts\engine\utility::is_true(self._id_11B2F))
+  if(!scripts\engine\utility::is_true(self._id_11B2F)) {
     self _meth_8281("anim deltas");
+  }
 
   scripts\asm\asm_mp::_id_2364(var_0, var_1, var_2, var_3);
 }
 
 getenemy() {
-  if(isDefined(self.myenemy))
+  if(isDefined(self.myenemy)) {
     return self.myenemy;
+  }
 
   return undefined;
 }
@@ -492,11 +527,13 @@ lookatenemy() {
 dojump(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
 
-  if(self.agent_type == "alien_phantom")
+  if(self.agent_type == "alien_phantom") {
     self.bteleporting = 1;
+  }
 
-  if(isDefined(self.preventplayerpushdist))
+  if(isDefined(self.preventplayerpushdist)) {
     self _meth_85C9(self.preventplayerpushdist);
+  }
 
   scripts\asm\alien_goon\alien_jump::_id_A4C3(var_0, var_1, self.origin, self.angles, self._blackboard.jumpdestinationpos, self._blackboard.jumpdestinationangles, self._blackboard.jumpnextpos);
   self.bteleporting = undefined;
@@ -511,8 +548,9 @@ dojumpattack(var_0, var_1, var_2, var_3) {
   var_4 = gettunedata();
   thread domeleedamageoncontact(var_1, self.curmeleetarget, self._id_B601 * var_4.jump_attack_melee_damage_multiplier, var_4.jump_attack_damage_radius_sq, var_4.jump_attack_damage_dot);
 
-  if(isDefined(self.preventplayerpushdist))
+  if(isDefined(self.preventplayerpushdist)) {
     self _meth_85C9(self.preventplayerpushdist);
+  }
 
   scripts\asm\alien_goon\alien_jump::jumpattack(var_0, var_1, self._blackboard.jumpdestinationpos);
   self._blackboard.jumpdestinationpos = undefined;
@@ -533,8 +571,9 @@ doalienjumptraversal(var_0, var_1, var_2, var_3) {
   var_7 = vectorNormalize((var_5 - self.origin) * (1, 1, 0));
   var_8 = vectortoangles(var_7);
 
-  if(self.agent_type == "alien_phantom")
+  if(self.agent_type == "alien_phantom") {
     self.bteleporting = 1;
+  }
 
   scripts\asm\alien_goon\alien_jump::_id_A4C3(var_0, var_1, self.origin, var_8, var_5, var_8, var_5 + anglesToForward(var_8) * 10);
   self.bteleporting = undefined;
@@ -556,8 +595,9 @@ jumpnotehandler(var_0, var_1, var_2, var_3) {
     if(self isethereal()) {
       level.totalphantomsjumping--;
 
-      if(level.totalphantomsjumping <= 0)
+      if(level.totalphantomsjumping <= 0) {
         level.totalphantomsjumping = 0;
+      }
 
       self setethereal(0);
       thread play_teleport_end();
@@ -575,8 +615,9 @@ terminate_jump(var_0, var_1, var_2) {
 }
 
 isalienjumpfinished(var_0, var_1, var_2, var_3) {
-  if(scripts\engine\utility::is_true(self._id_11B2F))
+  if(scripts\engine\utility::is_true(self._id_11B2F)) {
     return 0;
+  }
 
   return shouldabortaction(var_0, var_1, var_2, var_1);
 }

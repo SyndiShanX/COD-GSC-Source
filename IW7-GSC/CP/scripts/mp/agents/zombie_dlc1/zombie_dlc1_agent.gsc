@@ -32,12 +32,13 @@ zombieinit_dlc1() {
 _id_FAB0() {
   level endon("game_ended");
 
-  if(!isDefined(level.agent_definition))
+  if(!isDefined(level.agent_definition)) {
     level waittill("scripted_agents_initialized");
+  }
 
   level.agent_definition["generic_zombie"]["setup_func"] = ::setupagent;
   level.agent_definition["generic_zombie"]["setup_model_func"] = ::_id_FACE;
-  level.movemodefunc["generic_zombie"] = scripts\cp\agents\gametype_zombie::run_if_last_zombie;
+  level.movemodefunc["generic_zombie"] = ::scripts\cp\agents\gametype_zombie::run_if_last_zombie;
   level.agent_funcs["generic_zombie"]["on_damaged_finished"] = ::onzombiedamagefinished;
   level.agent_funcs["generic_zombie"]["on_killed"] = ::onzombiekilled;
 }
@@ -65,10 +66,11 @@ onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   }
 
   if(isDefined(self.bholdingballooninleft) && isDefined(self.balloon_model)) {
-    if(self.bholdingballooninleft)
+    if(self.bholdingballooninleft) {
       self detach(self.balloon_model, "tag_accessory_left");
-    else
+    } else {
       self detach(self.balloon_model, "tag_accessory_right");
+    }
   }
 
   self.bholdingballooninleft = undefined;

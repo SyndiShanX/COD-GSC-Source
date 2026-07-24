@@ -23,14 +23,16 @@ _id_965D() {
       var_4 = getcsplinepointlabel(var_1, var_3);
 
       if(isDefined(var_4)) {
-        if(!isDefined(level._id_4AEE[var_4]))
+        if(!isDefined(level._id_4AEE[var_4])) {
           level._id_4AEE[var_4] = 1;
+        }
       }
     }
   }
 
-  if(level._id_4AEE.size == 0)
+  if(level._id_4AEE.size == 0) {
     return;
+  }
 }
 
 _id_10A49() {
@@ -40,8 +42,9 @@ _id_10A49() {
   self endon("terminate_ai_threads");
   self endon("enter_jackal");
 
-  if(!isDefined(level._id_4AEE))
+  if(!isDefined(level._id_4AEE)) {
     level _id_965D();
+  }
 
   childthread _id_10A48();
 }
@@ -115,10 +118,11 @@ _id_10A44(var_0) {
   if(isDefined(var_2) && var_2 != "") {
     var_3 = getcsplinepointstring(var_0, var_1);
 
-    if(isDefined(var_3) && var_2 != "")
+    if(isDefined(var_3) && var_2 != "") {
       self notify("splinenode_label", var_2, var_0, var_1, var_3);
-    else
+    } else {
       self notify("splinenode_label", var_2, var_0, var_1);
+    }
   }
 }
 
@@ -133,8 +137,9 @@ _id_A50D(var_0) {
     return;
   }
 
-  if(scripts\engine\utility::cointoss())
+  if(scripts\engine\utility::cointoss()) {
     _id_A4F9(0);
+  }
 }
 
 _id_A4F9(var_0) {
@@ -181,15 +186,17 @@ _id_517E() {
 }
 
 _id_10A46(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0.2;
+  }
 
   self _meth_8479(var_0);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self _meth_847B(var_1, var_2);
-  else
+  } else {
     self _meth_847B(var_1);
+  }
 
   self._id_10A43 = var_0;
   self waittill("near_goal");

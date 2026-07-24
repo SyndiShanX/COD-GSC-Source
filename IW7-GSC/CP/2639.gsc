@@ -13,12 +13,13 @@ updatedamagefeedback(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = "standard_cp";
   var_8 = undefined;
 
-  if(isDefined(var_1) && var_1)
+  if(isDefined(var_1) && var_1) {
     self playlocalsound("cp_hit_alert_strong");
-  else if(scripts\engine\utility::is_true(self.deadeye_charge))
+  } else if(scripts\engine\utility::is_true(self.deadeye_charge)) {
     self playlocalsound("cp_hit_alert_perk");
-  else
+  } else {
     self playlocalsound("cp_hit_alert");
+  }
 
   switch (var_0) {
     case "hitalienarmor":
@@ -101,24 +102,29 @@ updatehitmarker(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_0)) {
     return;
   }
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 0;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
   self setclientomnvar("damage_scale_type", "standard");
 
-  if(var_4)
+  if(var_4) {
     self setclientomnvar("damage_feedback_kill", 1);
-  else
+  } else {
     self setclientomnvar("damage_feedback_kill", 0);
+  }
 
-  if(var_3)
+  if(var_3) {
     self setclientomnvar("damage_scale_type", "hitalienarmor");
+  }
 
   if(var_1) {
     self setclientomnvar("damage_scale_type", "hitaliensoft");
@@ -126,8 +132,9 @@ updatehitmarker(var_0, var_1, var_2, var_3, var_4) {
   } else
     self setclientomnvar("damage_feedback_headshot", 0);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self setclientomnvar("ui_damage_amount", int(var_2));
+  }
 
   self setclientomnvar("damage_feedback", var_0);
   self setclientomnvar("damage_feedback_notify", gettime());
@@ -139,17 +146,19 @@ _id_1118C(var_0, var_1, var_2) {
   playFXOnTag(level._effect["stun_shock"], var_0.stun_struct.attack_bolt, "TAG_ORIGIN");
   var_3 = undefined;
 
-  if(isDefined(self.agent_type) && scripts\cp\cp_agent_utils::get_agent_type(self) == "seeder_spore")
+  if(isDefined(self.agent_type) && scripts\cp\cp_agent_utils::get_agent_type(self) == "seeder_spore") {
     var_3 = self gettagorigin("J_Spore_46");
-  else if(isDefined(self) && isalive(self) && scripts\cp\utility::has_tag(self.model, "J_SpineUpper"))
+  } else if(isDefined(self) && isalive(self) && scripts\cp\utility::has_tag(self.model, "J_SpineUpper")) {
     var_3 = self gettagorigin("J_SpineUpper");
+  }
 
   if(isDefined(var_3)) {
     var_0.stun_struct.attack_bolt moveTo(var_3, 0.05);
     wait 0.05;
 
-    if(isDefined(self) && var_2 == "MOD_MELEE")
+    if(isDefined(self) && var_2 == "MOD_MELEE") {
       self playSound("trap_electric_shock");
+    }
 
     wait 0.05;
     var_4 = int(var_1 / 2);
@@ -157,11 +166,13 @@ _id_1118C(var_0, var_1, var_2) {
     if(isDefined(self)) {
       var_5 = self;
 
-      if(isDefined(self.agent_type) && scripts\cp\cp_agent_utils::get_agent_type(self) == "seeder_spore")
+      if(isDefined(self.agent_type) && scripts\cp\cp_agent_utils::get_agent_type(self) == "seeder_spore") {
         var_5 = self._id_4353;
+      }
 
-      if(isDefined(var_5))
+      if(isDefined(var_5)) {
         var_5 dodamage(var_4, self.origin, var_0, var_0.stun_struct.attack_bolt, var_2);
+      }
     }
   }
 
@@ -170,17 +181,20 @@ _id_1118C(var_0, var_1, var_2) {
 
 _id_F29B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(isDefined(var_1)) {
-    if(var_1 == "xm25_mp" && var_0 == "MOD_IMPACT")
+    if(var_1 == "xm25_mp" && var_0 == "MOD_IMPACT") {
       var_2 = 95;
+    }
 
-    if(var_1 == "spider_beam_mp")
+    if(var_1 == "spider_beam_mp") {
       var_2 = var_2 * 15;
+    }
 
     if(var_1 == "alienthrowingknife_mp" && var_0 == "MOD_IMPACT") {
-      if(can_hypno(var_3, 0, var_4, var_0, var_1, var_5, var_6, var_7, var_8, var_9))
+      if(can_hypno(var_3, 0, var_4, var_0, var_1, var_5, var_6, var_7, var_8, var_9)) {
         var_2 = 20000;
-      else if(scripts\cp\cp_agent_utils::get_agent_type(self) != "elite")
+      } else if(scripts\cp\cp_agent_utils::get_agent_type(self) != "elite") {
         var_2 = 500;
+      }
     }
   }
 
@@ -188,8 +202,9 @@ _id_F29B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 }
 
 can_hypno(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(isDefined(self._id_38E0) && self._id_38E0)
+  if(isDefined(self._id_38E0) && self._id_38E0) {
     return 0;
+  }
 
   switch (self.agent_type) {
     case "seeder":
@@ -202,8 +217,9 @@ can_hypno(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) 
     case "goon":
       return 1;
     case "elite":
-      if(var_0 scripts\cp\utility::is_upgrade_enabled("hypno_rhino_upgrade") || var_1)
+      if(var_0 scripts\cp\utility::is_upgrade_enabled("hypno_rhino_upgrade") || var_1) {
         return 1;
+      }
     default:
       return 0;
   }
@@ -213,44 +229,52 @@ scale_alien_damage_by_perks(var_0, var_1, var_2, var_3) {
   var_4 = 1.05;
 
   if(scripts\engine\utility::isbulletdamage(var_2) && !_id_9D39(var_3) && !_id_9DB8(var_3)) {
-    if(!_id_9D39(var_3))
+    if(!_id_9D39(var_3)) {
       var_1 = int(var_1 * var_0 scripts\cp\perks\perk_utility::perk_getbulletdamagescalar());
-    else if(_id_9D38(var_3))
+    } else if(_id_9D38(var_3)) {
       var_1 = int(var_1 * var_0 scripts\cp\perks\perk_utility::_id_CA43());
+    }
 
-    if(isDefined(var_0._id_1517))
+    if(isDefined(var_0._id_1517)) {
       var_1 = int(var_1 * var_0._id_1517);
+    }
   }
 
-  if(var_2 == "MOD_EXPLOSIVE")
+  if(var_2 == "MOD_EXPLOSIVE") {
     var_1 = int(var_1 * var_0 scripts\cp\perks\perk_utility::perk_getexplosivedamagescalar());
+  }
 
   if(var_2 == "MOD_MELEE") {
-    if(should_play_melee_blood_vfx(var_0))
+    if(should_play_melee_blood_vfx(var_0)) {
       playFXOnTag(level._effect["melee_blood"], var_0, "tag_weapon_right");
+    }
 
     var_1 = int(var_1 * var_0 scripts\cp\perks\perk_utility::perk_getmeleescalar());
 
-    if(isDefined(var_0._id_1518))
+    if(isDefined(var_0._id_1518)) {
       var_1 = int(var_1 * var_0._id_1518);
+    }
   }
 
-  if(var_0 scripts\cp\utility::is_upgrade_enabled("damage_booster_upgrade"))
+  if(var_0 scripts\cp\utility::is_upgrade_enabled("damage_booster_upgrade")) {
     var_1 = int(var_1 * var_4);
+  }
 
   return var_1;
 }
 
 should_play_melee_blood_vfx(var_0) {
-  if(isDefined(level.should_play_melee_blood_vfx_func))
+  if(isDefined(level.should_play_melee_blood_vfx_func)) {
     return [[level.should_play_melee_blood_vfx_func]](var_0);
+  }
 
   return 1;
 }
 
 _id_9D39(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   switch (var_0) {
     case "ball_drone_gun_mp":
@@ -290,8 +314,9 @@ _id_9D39(var_0) {
 }
 
 _id_9DB8(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   switch (var_0) {
     case "iw6_alienminigun4_mp":
@@ -308,8 +333,9 @@ _id_9DB8(var_0) {
 }
 
 _id_9D38(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   switch (var_0) {
     case "alientank_rigger_turret_mp":
@@ -326,14 +352,16 @@ _id_9D38(var_0) {
 }
 
 scale_alien_damage_by_weapon_type(var_0, var_1, var_2, var_3, var_4) {
-  if(isDefined(var_4) && var_4 != "none")
+  if(isDefined(var_4) && var_4 != "none") {
     var_1 = _id_3D84(self, var_1, var_0, var_3, var_2);
+  }
 
   if(isDefined(var_2) && var_2 == "MOD_EXPLOSIVE_BULLET" && var_4 != "none") {
-    if(scripts\cp\utility::coop_getweaponclass(var_3) == "weapon_shotgun")
+    if(scripts\cp\utility::coop_getweaponclass(var_3) == "weapon_shotgun") {
       var_1 = var_1 + int(var_1 * level.shotgundamagemod);
-    else
+    } else {
       var_1 = var_1 + int(var_1 * level.exploimpactmod);
+    }
   }
 
   return var_1;
@@ -352,11 +380,13 @@ scale_alien_damage_by_prestige(var_0, var_1) {
 _id_3D84(var_0, var_1, var_2, var_3, var_4) {
   var_5 = 500;
 
-  if(!isDefined(var_0) || !scripts\cp\utility::isreallyalive(var_0))
+  if(!isDefined(var_0) || !scripts\cp\utility::isreallyalive(var_0)) {
     return var_1;
+  }
 
-  if(!isDefined(var_2) || !isPlayer(var_2) || var_4 != "MOD_EXPLOSIVE_BULLET")
+  if(!isDefined(var_2) || !isPlayer(var_2) || var_4 != "MOD_EXPLOSIVE_BULLET") {
     return var_1;
+  }
 
   if(scripts\cp\utility::coop_getweaponclass(var_3) == "weapon_shotgun") {
     var_6 = distance(var_2.origin, var_0.origin);
@@ -364,8 +394,9 @@ _id_3D84(var_0, var_1, var_2, var_3, var_4) {
     var_8 = var_1 * 8;
     var_9 = var_8 * var_7;
 
-    if(var_6 > var_5)
+    if(var_6 > var_5) {
       return var_1;
+    }
 
     return int(var_9);
   }
@@ -381,12 +412,13 @@ check_for_special_damage(var_0, var_1, var_2) {
     return;
   }
   if(!isDefined(var_0.is_burning) && isalive(var_0)) {
-    if((scripts\cp\utility::player_has_special_ammo(self, "incendiary_ammo") || scripts\cp\utility::player_has_special_ammo(self, "combined_ammo")) && var_2 != "MOD_UNKNOWN")
+    if((scripts\cp\utility::player_has_special_ammo(self, "incendiary_ammo") || scripts\cp\utility::player_has_special_ammo(self, "combined_ammo")) && var_2 != "MOD_UNKNOWN") {
       var_0 thread catch_alien_on_fire(self, undefined, undefined, 1);
-    else if(var_1 == "iw5_alienriotshield4_mp" && self.fireshield == 1.0)
+    } else if(var_1 == "iw5_alienriotshield4_mp" && self.fireshield == 1.0) {
       var_0 thread catch_alien_on_fire(self);
-    else if((scripts\engine\utility::is_true(self._id_8B86) || scripts\engine\utility::is_true(self._id_8BAC)) && var_2 != "MOD_UNKNOWN")
+    } else if((scripts\engine\utility::is_true(self._id_8B86) || scripts\engine\utility::is_true(self._id_8BAC)) && var_2 != "MOD_UNKNOWN") {
       var_0 thread catch_alien_on_fire(self, undefined, undefined, 1);
+    }
 
     switch (var_1) {
       case "iw6_alienmk323_mp":
@@ -401,8 +433,9 @@ check_for_special_damage(var_0, var_1, var_2) {
   } else {
     var_3 = scripts\cp\utility::getrawbaseweaponname(var_1);
 
-    if(isDefined(self.special_ammocount) && isDefined(self.special_ammocount[var_3]) && self.special_ammocount[var_3] > 0)
+    if(isDefined(self.special_ammocount) && isDefined(self.special_ammocount[var_3]) && self.special_ammocount[var_3] > 0) {
       return;
+    }
   }
 }
 
@@ -447,15 +480,18 @@ damage_alien_over_time(var_0, var_1, var_2, var_3) {
         var_1 = 3;
     }
   } else {
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       var_2 = 150;
+    }
 
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       var_1 = 3;
+    }
   }
 
-  if(isDefined(var_0) && isDefined(var_3) && var_0 scripts\cp\utility::is_upgrade_enabled("incendiary_ammo_upgrade") && isDefined(var_3))
+  if(isDefined(var_0) && isDefined(var_3) && var_0 scripts\cp\utility::is_upgrade_enabled("incendiary_ammo_upgrade") && isDefined(var_3)) {
     var_2 = var_2 * 1.2;
+  }
 
   var_2 = var_2 * level.alien_health_per_player_scalar[level.players.size];
   var_5 = 0;
@@ -466,20 +502,23 @@ damage_alien_over_time(var_0, var_1, var_2, var_3) {
   for(var_9 = 0; var_9 < var_6; var_9++) {
     wait(var_7);
 
-    if(isalive(self))
+    if(isalive(self)) {
       self dodamage(var_8, self.origin, var_0, var_0, "MOD_UNKNOWN");
+    }
   }
 }
 
 alien_fire_on() {
-  if(!isDefined(self.is_burning))
+  if(!isDefined(self.is_burning)) {
     self.is_burning = 0;
+  }
 
   self.is_burning++;
 
   if(self.is_burning == 1 && self.species == "alien") {
-    if(isDefined(self.agent_type) && self.agent_type != "minion")
+    if(isDefined(self.agent_type) && self.agent_type != "minion") {
       self setscriptablepartstate("animpart", "burning");
+    }
   }
 }
 
@@ -492,22 +531,25 @@ alien_fire_off() {
   self.is_burning = undefined;
   self notify("fire_off");
 
-  if(self.species == "alien")
+  if(self.species == "alien") {
     self setscriptablepartstate("animpart", "normal");
+  }
 }
 
 update_damage_score(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(!isDefined(level._id_24B8) || var_1 != level._id_24B8) {
-    if(isDefined(var_1) && isDefined(var_1.owner))
+    if(isDefined(var_1) && isDefined(var_1.owner)) {
       scripts\cp\cp_agent_utils::store_attacker_info(var_1.owner, var_2 * 0.75);
-    else if(isDefined(var_1) && isDefined(var_1.pet) && var_1.pet == 1)
+    } else if(isDefined(var_1) && isDefined(var_1.pet) && var_1.pet == 1) {
       scripts\cp\cp_agent_utils::store_attacker_info(var_1.owner, var_2);
-    else
+    } else {
       scripts\cp\cp_agent_utils::store_attacker_info(var_1, var_2);
+    }
 
     if(isDefined(var_1) && isDefined(var_5)) {
-      if(isDefined(level._id_12D86))
+      if(isDefined(level._id_12D86)) {
         level thread[[level._id_12D86]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, self);
+      }
     }
   }
 
@@ -515,8 +557,9 @@ update_damage_score(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
 }
 
 update_zombie_damage_challenge(var_0, var_1, var_2) {
-  if(isDefined(level.update_zombie_damage_challenge))
+  if(isDefined(level.update_zombie_damage_challenge)) {
     [[level.update_zombie_damage_challenge]](var_0, var_1, var_2);
+  }
 }
 
 handlemissiledamage(var_0, var_1, var_2) {
@@ -573,8 +616,9 @@ handlegrenadedamage(var_0, var_1, var_2) {
         var_2 = var_2 * 4;
         break;
       default:
-        if(scripts\cp\utility::isstrstart(var_0, "alt_"))
+        if(scripts\cp\utility::isstrstart(var_0, "alt_")) {
           var_2 = var_2 * 3;
+        }
 
         break;
     }
@@ -585,8 +629,9 @@ handlegrenadedamage(var_0, var_1, var_2) {
 
 handleapdamage(var_0, var_1, var_2, var_3) {
   if(var_1 == "MOD_RIFLE_BULLET" || var_1 == "MOD_PISTOL_BULLET") {
-    if(var_3 scripts\cp\utility::_hasperk("specialty_armorpiercing") || scripts\cp\utility::isfmjdamage(var_0, var_1, var_3))
+    if(var_3 scripts\cp\utility::_hasperk("specialty_armorpiercing") || scripts\cp\utility::isfmjdamage(var_0, var_1, var_3)) {
       return var_2 * level.armorpiercingmod;
+    }
   }
 
   return var_2;
@@ -597,11 +642,13 @@ onkillstreakkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_8 = undefined;
 
   if(isDefined(var_0) && isDefined(self.owner)) {
-    if(isDefined(var_0.owner) && isPlayer(var_0.owner))
+    if(isDefined(var_0.owner) && isPlayer(var_0.owner)) {
       var_0 = var_0.owner;
+    }
 
-    if(self.owner scripts\cp\utility::isenemy(var_0))
+    if(self.owner scripts\cp\utility::isenemy(var_0)) {
       var_8 = var_0;
+    }
   }
 
   if(isDefined(var_8)) {
@@ -610,16 +657,18 @@ onkillstreakkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_7 = 1;
   }
 
-  if(isDefined(self.owner) && isDefined(var_5))
+  if(isDefined(self.owner) && isDefined(var_5)) {
     self.owner thread scripts\cp\utility::leaderdialogonplayer(var_5, undefined, undefined, self.origin);
+  }
 
   self notify("death");
   return var_7;
 }
 
 handlemeleedamage(var_0, var_1, var_2) {
-  if(var_1 == "MOD_MELEE")
+  if(var_1 == "MOD_MELEE") {
     return self.maxhealth + 1;
+  }
 
   return var_2;
 }
@@ -663,10 +712,11 @@ _id_3343() {
     break;
   }
 
-  if(level.c4explodethisframe)
+  if(level.c4explodethisframe) {
     wait(0.1 + randomfloat(0.4));
-  else
+  } else {
     wait 0.05;
+  }
 
   if(!isDefined(self)) {
     return;
@@ -674,62 +724,75 @@ _id_3343() {
   level.c4explodethisframe = 1;
   thread resetc4explodethisframe();
 
-  if(isDefined(var_4) && (issubstr(var_4, "MOD_GRENADE") || issubstr(var_4, "MOD_EXPLOSIVE")))
+  if(isDefined(var_4) && (issubstr(var_4, "MOD_GRENADE") || issubstr(var_4, "MOD_EXPLOSIVE"))) {
     self.waschained = 1;
+  }
 
-  if(isDefined(var_8) && var_8 &level.idflags_penetration)
+  if(isDefined(var_8) && var_8 &level.idflags_penetration) {
     self.wasdamagedfrombulletpenetration = 1;
+  }
 
   self.wasdamaged = 1;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self.damagedby = var_0;
+  }
 
-  if(isPlayer(var_0))
+  if(isPlayer(var_0)) {
     var_0 updatedamagefeedback("c4");
+  }
 
   if(level.teambased) {
     if(isDefined(var_0) && isDefined(self.owner)) {
       var_10 = var_0.pers["team"];
       var_11 = self.owner.pers["team"];
 
-      if(isDefined(var_10) && isDefined(var_11) && var_10 != var_11)
+      if(isDefined(var_10) && isDefined(var_11) && var_10 != var_11) {
         var_0 notify("destroyed_equipment");
+      }
     }
   } else if(isDefined(self.owner) && isDefined(var_0) && var_0 != self.owner)
     var_0 notify("destroyed_equipment");
 
-  if(self.weapon_name == "transponder_mp" || self.weapon_name == "ztransponder_mp")
+  if(self.weapon_name == "transponder_mp" || self.weapon_name == "ztransponder_mp") {
     self.owner notify("transponder_update", 0);
+  }
 
   waittillframeend;
   self notify("detonateExplosive", var_0);
 }
 
 friendlyfirecheck(var_0, var_1, var_2) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 1;
+  }
 
-  if(!level.teambased)
+  if(!level.teambased) {
     return 1;
+  }
 
   var_3 = var_1.team;
   var_4 = level.friendlyfire;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_4 = var_2;
+  }
 
-  if(var_4 != 0)
+  if(var_4 != 0) {
     return 1;
+  }
 
-  if(var_1 == var_0)
+  if(var_1 == var_0) {
     return 0;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     return 1;
+  }
 
-  if(var_3 != var_0.team)
+  if(var_3 != var_0.team) {
     return 1;
+  }
 
   return 0;
 }
@@ -759,18 +822,21 @@ _id_20BA() {
 }
 
 _id_9BE5(var_0, var_1, var_2) {
-  if(isDefined(var_2) && scripts\cp\utility::is_trap(var_2))
+  if(isDefined(var_2) && scripts\cp\utility::is_trap(var_2)) {
     return 0;
+  }
 
-  if(var_0 == "MOD_UNKNOWN" && var_1 != "none")
+  if(var_0 == "MOD_UNKNOWN" && var_1 != "none") {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_A010(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   var_1 = getweaponbasename(var_0);
 

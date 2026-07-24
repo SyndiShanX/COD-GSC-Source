@@ -44,10 +44,11 @@ clean_up_chi_meter_on_last_stand(var_0) {
   for(;;) {
     var_0 waittill("last_stand");
 
-    if(scripts\engine\utility::is_true(var_0.unlimited_chi))
+    if(scripts\engine\utility::is_true(var_0.unlimited_chi)) {
       continue;
-    else
+    } else {
       var_0 chi_meter_off(var_0);
+    }
   }
 }
 
@@ -62,29 +63,34 @@ chi_drain_time(var_0) {
 
   for(;;) {
     if(!scripts\engine\utility::is_true(self.spectating) && !scripts\engine\utility::is_true(self.inlaststand)) {
-      if(scripts\engine\utility::is_true(self.chi_mode_od))
+      if(scripts\engine\utility::is_true(self.chi_mode_od)) {
         self.chi_meter_adustment = 0;
+      }
 
-      if(!scripts\engine\utility::is_true(self.unlimited_chi))
+      if(!scripts\engine\utility::is_true(self.unlimited_chi)) {
         var_1 = var_1 + self.chi_meter_adustment;
+      }
 
-      if(var_1 > 1000)
+      if(var_1 > 1000) {
         var_1 = 1000;
-      else if(var_1 <= 0)
+      } else if(var_1 <= 0) {
         var_1 = 0;
+      }
 
       self.chi_meter_adustment = 0;
       var_2 = var_1 / 1000;
 
-      if(var_2 > 1)
+      if(var_2 > 1) {
         var_2 = 1;
+      }
 
       var_4 = var_2;
       self setclientomnvar("zom_general_fill_percent", var_4);
 
       if(var_2 <= 0) {
-        while(scripts\engine\utility::is_true(self.kung_fu_exit_delay))
+        while(scripts\engine\utility::is_true(self.kung_fu_exit_delay)) {
           wait 0.1;
+        }
 
         self setclientomnvar("zom_general_fill_percent", 0);
         self.pre_kung_fu_weapon = scripts\cp\utility::getvalidtakeweapon();
@@ -115,10 +121,11 @@ flash_chi_meter_glow() {
     self setclientomnvar("zm_ui_show_general", 2);
     wait 0.5;
 
-    if(scripts\engine\utility::is_true(self.chi_mode))
+    if(scripts\engine\utility::is_true(self.chi_mode)) {
       self setclientomnvar("zm_ui_show_general", 4);
-    else
+    } else {
       self setclientomnvar("zm_ui_show_general", 1);
+    }
   }
 }
 

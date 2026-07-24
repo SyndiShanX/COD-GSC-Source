@@ -30,13 +30,15 @@ _id_11AF8(var_0, var_1, var_2, var_3, var_4) {
     var_14 = 0;
     var_15 = 0;
 
-    if(isDefined(self._id_4716))
+    if(isDefined(self._id_4716)) {
       var_14 = anim.covercrouchleanpitch;
+    }
 
     var_16 = self.script;
 
-    if((var_16 == "cover_left" || var_16 == "cover_right") && isDefined(self.a._id_4667) && self.a._id_4667 == "lean")
+    if((var_16 == "cover_left" || var_16 == "cover_right") && isDefined(self.a._id_4667) && self.a._id_4667 == "lean") {
       var_15 = self.covernode.angles[1] - self.angles[1];
+    }
 
     var_12 = (var_14, var_15, 0);
   }
@@ -46,24 +48,28 @@ _id_11AF8(var_0, var_1, var_2, var_3, var_4) {
     var_17 = scripts\anim\shared::_id_811C();
     var_18 = self._id_FECF;
 
-    if(isDefined(self._id_FE9E))
+    if(isDefined(self._id_FE9E)) {
       var_18 = self._id_FE9E getshootatpos();
+    }
 
-    if(!isDefined(var_18) && scripts\anim\utility::_id_FFDB())
+    if(!isDefined(var_18) && scripts\anim\utility::_id_FFDB()) {
       var_18 = _id_11AFB(var_17);
+    }
 
     var_19 = isDefined(self._id_C59B) || isDefined(self.onatv);
     var_20 = isDefined(var_18);
     var_21 = (0, 0, 0);
 
-    if(var_20)
+    if(var_20) {
       var_21 = var_18;
+    }
 
     var_22 = 0;
     var_23 = isDefined(self._id_10F8C);
 
-    if(var_23)
+    if(var_23) {
       var_22 = self._id_10F8C;
+    }
 
     var_7 = self _meth_80FA(var_17, var_21, var_20, var_12, var_22, var_23, var_19);
     var_24 = var_7[0];
@@ -125,8 +131,9 @@ _id_11AFB(var_0) {
     var_1 = self._id_4792 getshootatpos();
 
     if(isDefined(self._id_4796)) {
-      if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.177)
+      if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.177) {
         var_1 = undefined;
+      }
     } else if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.643)
       var_1 = undefined;
   }
@@ -135,8 +142,9 @@ _id_11AFB(var_0) {
     var_1 = self._id_478F;
 
     if(isDefined(self._id_4795)) {
-      if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.177)
+      if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.177) {
         var_1 = undefined;
+      }
     } else if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.643)
       var_1 = undefined;
   }
@@ -154,9 +162,9 @@ _id_11AF9(var_0, var_1) {
   var_4 = 0;
   var_5 = 0;
 
-  if(isDefined(self.node) && isDefined(anim._id_9D8E[self.node.type]) && distancesquared(self.origin, self.node.origin) < 16)
+  if(isDefined(self.node) && isDefined(anim._id_9D8E[self.node.type]) && distancesquared(self.origin, self.node.origin) < 16) {
     var_5 = angleclamp180(self.node.angles[1] - self.angles[1]);
-  else {
+  } else {
     var_6 = self _meth_80FC();
 
     if(isDefined(var_6)) {
@@ -173,9 +181,9 @@ _id_11AFC(var_0, var_1) {
   var_3 = 0;
   var_4 = 0;
 
-  if(self.stairsstate == "up")
+  if(self.stairsstate == "up") {
     var_3 = 40;
-  else if(self.stairsstate == "down") {
+  } else if(self.stairsstate == "down") {
     var_3 = -40;
     var_4 = -12;
   }
@@ -183,9 +191,9 @@ _id_11AFC(var_0, var_1) {
   var_5 = var_2[0];
   var_5 = angleclamp180(var_5 + var_1[0] + var_3);
 
-  if(isDefined(self._id_10F8C))
+  if(isDefined(self._id_10F8C)) {
     var_6 = var_2[1] - self._id_10F8C;
-  else {
+  } else {
     var_7 = angleclamp180(self.desiredangle - self.angles[1]) * 0.5;
     var_6 = var_2[1] - (var_7 + self.angles[1]);
   }
@@ -196,19 +204,22 @@ _id_11AFC(var_0, var_1) {
 
 _id_11AFA(var_0, var_1, var_2) {
   if(isDefined(self._id_C59B) || isDefined(self.onatv)) {
-    if(var_1 > self.leftaimlimit || var_1 < self.rightaimlimit)
+    if(var_1 > self.leftaimlimit || var_1 < self.rightaimlimit) {
       var_1 = 0;
+    }
 
-    if(var_0 > self.downaimlimit || var_0 < self.upaimlimit)
+    if(var_0 > self.downaimlimit || var_0 < self.upaimlimit) {
       var_0 = 0;
+    }
   } else if(var_2 && (abs(var_1) > anim._id_B480 || abs(var_0) > anim._id_B47F)) {
     var_1 = 0;
     var_0 = 0;
   } else {
-    if(self.gunblockedbywall)
+    if(self.gunblockedbywall) {
       var_1 = clamp(var_1, -10, 10);
-    else
+    } else {
       var_1 = clamp(var_1, self.rightaimlimit, self.leftaimlimit);
+    }
 
     var_0 = clamp(var_0, self.upaimlimit, self.downaimlimit);
   }
@@ -244,8 +255,9 @@ _id_11AFE(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self _meth_82AC(var_2, var_10, 0.1, 1, 1);
   self _meth_82AC(var_3, var_11, 0.1, 1, 1);
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     self _meth_82AC(var_4, var_9, 0.1, 1, 1);
+  }
 }
 
 _id_F641(var_0, var_1) {
@@ -255,8 +267,9 @@ _id_F641(var_0, var_1) {
     self.a._id_1A4C = var_0;
     self.a._id_1A4F = 0;
   } else {
-    if(!isDefined(self.a._id_1A4B))
+    if(!isDefined(self.a._id_1A4B)) {
       self.a._id_1A4B = 0;
+    }
 
     self.a._id_1A4D = self.a._id_1A4B;
     self.a._id_1A4C = var_0;

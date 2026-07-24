@@ -18,8 +18,9 @@ main() {
   self.voice = "setdef";
   self _meth_82C6("vestheavy");
 
-  if(issentient(self))
+  if(issentient(self)) {
     self sethitlocdamagetable("locdmgtable/ai_lochit_dmgtable");
+  }
 
   self _meth_83D0(#animtree);
 }

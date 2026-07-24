@@ -29,8 +29,9 @@ init() {
   scripts\cp\cp_gamelogic::init();
   scripts\cp\cp_laststand::init_laststand();
 
-  if(_id_100BC())
+  if(_id_100BC()) {
     level thread _id_132A3();
+  }
 
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
@@ -127,11 +128,13 @@ _id_FAAB() {
     var_3 = getEntArray(var_2, "classname");
 
     for(var_4 = 0; var_4 < var_3.size; var_4++) {
-      if(isDefined(var_3[var_4].script_prefab_exploder))
+      if(isDefined(var_3[var_4].script_prefab_exploder)) {
         var_3[var_4].script_exploder = var_3[var_4].script_prefab_exploder;
+      }
 
-      if(isDefined(var_3[var_4].script_exploder))
+      if(isDefined(var_3[var_4].script_exploder)) {
         level thread exploder_load(var_3[var_4]);
+      }
     }
   }
 }
@@ -165,10 +168,11 @@ trackcarepackages() {
 
 _id_5048() {
   if(scripts\engine\utility::is_true(self.keep_perks)) {
-    if(scripts\cp\utility::has_zombie_perk("perk_machine_tough"))
+    if(scripts\cp\utility::has_zombie_perk("perk_machine_tough")) {
       return 200;
-    else
+    } else {
       return 100;
+    }
   } else
     return 100;
 }
@@ -206,8 +210,9 @@ defaultgetspawnpoint() {
 getassignedspawnpoint(var_0) {
   var_1 = self getentitynumber();
 
-  if(var_1 == 4)
+  if(var_1 == 4) {
     var_1 = 1;
+  }
 
   return var_0[var_1];
 }
@@ -272,8 +277,9 @@ _id_E896() {
   scripts\cp\utility::gameflaginit("prematch_done", 0);
   setomnvar("ui_prematch_period", 1);
 
-  if(isDefined(level.prematchfunc))
+  if(isDefined(level.prematchfunc)) {
     [[level.prematchfunc]]();
+  }
 
   scripts\cp\utility::gameflagset("prematch_done");
   setomnvar("ui_prematch_period", 0);
@@ -284,8 +290,9 @@ _id_8489() {
   level endon("game_ended");
   level endon("coop_grace_period");
 
-  while(getactiveclientcount() == 0)
+  while(getactiveclientcount() == 0) {
     scripts\engine\utility::waitframe();
+  }
 
   while(level.ingraceperiod > 0) {
     wait 1.0;
@@ -305,14 +312,17 @@ _id_100BC() {
 
 _id_132A3() {
   for(;;) {
-    if(level.rankedmatch)
+    if(level.rankedmatch) {
       exitlevel(0);
+    }
 
-    if(!getdvarint("xblive_privatematch"))
+    if(!getdvarint("xblive_privatematch")) {
       exitlevel(0);
+    }
 
-    if(getDvar("dedicated") != "dedicated LAN server" && getDvar("dedicated") != "dedicated internet server")
+    if(getDvar("dedicated") != "dedicated LAN server" && getDvar("dedicated") != "dedicated internet server") {
       exitlevel(0);
+    }
 
     wait 5;
   }
@@ -337,17 +347,20 @@ _id_5043() {
   self.no_team_outlines = 0;
   self.no_outline = 0;
 
-  if(scripts\cp\utility::coop_mode_has("outline"))
+  if(scripts\cp\utility::coop_mode_has("outline")) {
     thread scripts\cp\cp_outline::playeroutlinemonitor();
+  }
 
   thread scripts\cp\cp_vo::_id_97CC();
   thread scripts\cp\cp_merits::updatemerits();
 
-  if(self ishost())
+  if(self ishost()) {
     level.player = self;
+  }
 
-  if(!level.teambased)
+  if(!level.teambased) {
     game["roundsWon"][self.guid] = 0;
+  }
 
   waittillframeend;
   _id_1810(self);
@@ -359,19 +372,23 @@ _id_5043() {
     return;
   }
 
-  if(isai(self) && isDefined(level.bot_funcs) && isDefined(level.bot_funcs["think"]))
+  if(isai(self) && isDefined(level.bot_funcs) && isDefined(level.bot_funcs["think"])) {
     self thread[[level.bot_funcs["think"]]]();
+  }
 
   level endon("game_ended");
 
-  if(isDefined(level.hostmigrationtimer))
+  if(isDefined(level.hostmigrationtimer)) {
     thread scripts\cp\cp_hostmigration::hostmigrationtimerthink();
+  }
 
-  if(isDefined(level.onplayerconnectaudioinit))
+  if(isDefined(level.onplayerconnectaudioinit)) {
     [[level.onplayerconnectaudioinit]]();
+  }
 
-  if(!isai(self))
+  if(!isai(self)) {
     _id_D3D9();
+  }
 
   spawnplayer();
 }
@@ -398,8 +415,9 @@ initclientdvars() {
   initclientdvarssplitscreenspecific();
   self setclientdvars("cg_drawSpectatorMessages", 1, "cg_deadChatWithDead", 0, "cg_deadChatWithTeam", 1, "cg_deadHearTeamLiving", 1, "cg_deadHearAllLiving", 0, "ui_altscene", 0);
 
-  if(level.teambased)
+  if(level.teambased) {
     self setclientdvar("cg_everyonehearseveryone", 0);
+  }
 }
 
 initclientdvarssplitscreenspecific() {
@@ -449,8 +467,9 @@ _id_72C1() {
   for(;;) {
     self waittill("luinotifyserver", var_0, var_1);
 
-    if(var_0 == "arcade_off")
+    if(var_0 == "arcade_off") {
       self notify("adjustedStance");
+    }
 
     if(var_0 == "end_game") {
       level thread[[level._id_72BF]]();
@@ -466,8 +485,9 @@ spawnintermission(var_0) {
   self setclientdvar("cg_everyoneHearsEveryone", 1);
   self setdepthoffield(0, 128, 512, 4000, 6, 1.8);
 
-  if(level.console)
+  if(level.console) {
     self setclientdvar("cg_fov", "90");
+  }
 
   scripts\cp\utility::updatesessionstate("intermission");
 }
@@ -506,8 +526,9 @@ _id_108F4(var_0) {
 _id_136E9() {
   self.waitingtospawn = 1;
 
-  if(scripts\cp\utility::isusingremote())
+  if(scripts\cp\utility::isusingremote()) {
     self waittill("stopped_using_remote");
+  }
 
   self.waitingtospawn = 0;
 }
@@ -516,10 +537,11 @@ _id_108F3(var_0) {
   self notify("spawned");
   self notify("started_spawnPlayer");
 
-  if(level.gameended)
+  if(level.gameended) {
     self spawn(getspawnorigin(self, 1), _id_8132(self));
-  else
+  } else {
     self spawn(getspawnorigin(self), _id_8132(self));
+  }
 
   _id_E262();
   _id_E261();
@@ -527,24 +549,29 @@ _id_108F3(var_0) {
   resetplayerdamagemodifiers();
   var_0 = scripts\engine\utility::ter_op(isDefined(var_0), var_0, 0);
 
-  if(!var_0)
+  if(!var_0) {
     _id_C07F();
+  }
 
-  if(isai(self))
+  if(isai(self)) {
     _id_10828(var_0);
+  }
 
   [[level.onspawnplayer]]();
 
-  if(!scripts\engine\utility::flag("introscreen_over"))
+  if(!scripts\engine\utility::flag("introscreen_over")) {
     scripts\cp\utility::freezecontrolswrapper(1);
+  }
 
   self[[level.custom_giveloadout]](var_0);
 
-  if(getdvarint("camera_thirdPerson"))
+  if(getdvarint("camera_thirdPerson")) {
     scripts\cp\utility::setthirdpersondof(1);
+  }
 
-  if(_id_1001B())
+  if(_id_1001B()) {
     scripts\cp\utility::freezecontrolswrapper(1);
+  }
 
   waittillframeend;
   self notify("spawned_player");
@@ -561,23 +588,26 @@ _id_E261() {
   self stoprumble("damage_heavy");
   self setdepthoffield(0, 0, 512, 512, 4, 0);
 
-  if(level.console)
+  if(level.console) {
     self setclientdvar("cg_fov", "65");
+  }
 }
 
 resetplayerdamagemodifiers() {
   if(isDefined(self.additivedamagemodifiers)) {
     var_0 = getarraykeys(self.additivedamagemodifiers);
 
-    foreach(var_2 in var_0)
-    scripts\cp\utility::removedamagemodifier(var_2, 1);
+    foreach(var_2 in var_0) {
+      scripts\cp\utility::removedamagemodifier(var_2, 1);
+    }
   }
 
   if(isDefined(self.multiplicativedamagemodifiers)) {
     var_0 = getarraykeys(self.multiplicativedamagemodifiers);
 
-    foreach(var_2 in var_0)
-    scripts\cp\utility::removedamagemodifier(var_2, 0);
+    foreach(var_2 in var_0) {
+      scripts\cp\utility::removedamagemodifier(var_2, 0);
+    }
   }
 }
 
@@ -595,8 +625,9 @@ _id_E263() {
 }
 
 _id_8144() {
-  if(isDefined(level._id_D425))
+  if(isDefined(level._id_D425)) {
     return [[level._id_D425]](self);
+  }
 
   return "allies";
 }
@@ -620,8 +651,9 @@ _id_10828(var_0) {
   scripts\cp\utility::freezecontrolswrapper(1);
 
   if(!var_0) {
-    if(isDefined(level.bot_funcs) && isDefined(level.bot_funcs["player_spawned"]))
+    if(isDefined(level.bot_funcs) && isDefined(level.bot_funcs["player_spawned"])) {
       self[[level.bot_funcs["player_spawned"]]]();
+    }
   }
 }
 
@@ -632,19 +664,22 @@ getspawnorigin(var_0, var_1) {
     var_2 = var_0.forcespawnorigin;
     var_2 = getclosestpointonnavmesh(var_2);
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_2 = var_0.forcespawnorigin;
+    }
 
     var_0.forcespawnorigin = undefined;
   } else {
     var_3 = var_0[[level.getspawnpoint]]();
     var_2 = scripts\engine\utility::ter_op(scripts\engine\utility::is_true(level.disable_start_spawn_on_navmesh), scripts\engine\utility::drop_to_ground(var_3.origin, 0, -100), getclosestpointonnavmesh(var_3.origin));
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_2 = var_3;
+    }
 
-    if(level.script == "cp_disco")
+    if(level.script == "cp_disco") {
       var_2 = var_3.origin;
+    }
   }
 
   return var_2;
@@ -665,8 +700,9 @@ _id_8132(var_0) {
 }
 
 _id_1001B() {
-  if(game["state"] == "postgame")
+  if(game["state"] == "postgame") {
     return 1;
+  }
 
   return 0;
 }
@@ -680,10 +716,11 @@ enterspectator() {
 }
 
 _id_F858() {
-  if(isDefined(level._id_10979))
+  if(isDefined(level._id_10979)) {
     [[level._id_10979]](self);
-  else
+  } else {
     _id_504C(self);
+  }
 }
 
 _id_504C(var_0) {
@@ -700,22 +737,26 @@ _id_5045(var_0) {
   scripts\cp\cp_analytics::on_player_disconnect(var_0);
   _id_E15A(self);
 
-  if(_id_563B())
+  if(_id_563B()) {
     level thread[[level._id_72BF]]();
+  }
 
-  if(isDefined(level.onplayerdisconnected))
+  if(isDefined(level.onplayerdisconnected)) {
     level thread[[level.onplayerdisconnected]](self, var_0);
+  }
 }
 
 _id_563B() {
-  if(level.splitscreen)
+  if(level.splitscreen) {
     return level.players.size <= 1;
+  }
 
   var_0 = 0;
 
   foreach(var_2 in level.players) {
-    if(scripts\cp\cp_laststand::player_in_laststand(var_2))
+    if(scripts\cp\cp_laststand::player_in_laststand(var_2)) {
       var_0 = scripts\cp\cp_laststand::gameshouldend(var_2);
+    }
   }
 
   return var_0;
@@ -734,21 +775,24 @@ _id_E15A(var_0) {
 }
 
 _id_5049() {
-  if(self ishost())
+  if(self ishost()) {
     initclientdvarssplitscreenspecific();
+  }
 
   if(_id_9E39(self)) {
     var_0 = 0;
 
     foreach(var_2 in level.players) {
-      if(_id_9E39(var_2))
+      if(_id_9E39(var_2)) {
         var_0++;
+      }
     }
 
     level.hostmigrationreturnedplayercount++;
 
-    if(level.hostmigrationreturnedplayercount >= var_0 * 2 / 3)
+    if(level.hostmigrationreturnedplayercount >= var_0 * 2 / 3) {
       level notify("hostmigration_enoughplayers");
+    }
   }
 }
 
@@ -760,24 +804,28 @@ _id_503E() {
   if(level.gameended) {
     return;
   }
-  if(isDefined(level._id_C53D))
+  if(isDefined(level._id_C53D)) {
     level thread[[level._id_C53D]]();
+  }
 
   level.hostmigrationreturnedplayercount = 0;
 
-  foreach(var_1 in level.characters)
-  var_1.hostmigrationcontrolsfrozen = 0;
+  foreach(var_1 in level.characters) {
+    var_1.hostmigrationcontrolsfrozen = 0;
+  }
 
   level.hostmigrationtimer = 1;
   setDvar("ui_inhostmigration", 1);
   level notify("host_migration_begin");
 
   foreach(var_1 in level.characters) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 thread scripts\cp\cp_hostmigration::hostmigrationtimerthink();
+    }
 
-    if(isPlayer(var_1))
+    if(isPlayer(var_1)) {
       var_1 setclientomnvar("ui_session_state", var_1.sessionstate);
+    }
   }
 
   setDvar("ui_game_state", game["state"]);
@@ -786,8 +834,9 @@ _id_503E() {
   level.hostmigrationtimer = undefined;
   setDvar("ui_inhostmigration", 0);
 
-  if(isDefined(level.hostmigrationend))
+  if(isDefined(level.hostmigrationend)) {
     level thread[[level.hostmigrationend]]();
+  }
 
   level notify("host_migration_end");
 }
@@ -796,11 +845,13 @@ _id_97F7() {
   var_0 = getEntArray("destructable", "targetname");
 
   if(getDvar("scr_destructables") == "0") {
-    for(var_1 = 0; var_1 < var_0.size; var_1++)
+    for(var_1 = 0; var_1 < var_0.size; var_1++) {
       var_0[var_1] delete();
+    }
   } else {
-    for(var_1 = 0; var_1 < var_0.size; var_1++)
+    for(var_1 = 0; var_1 < var_0.size; var_1++) {
       var_0[var_1] thread destructable_think();
+    }
   }
 }
 
@@ -808,14 +859,17 @@ destructable_think() {
   var_0 = 40;
   var_1 = 0;
 
-  if(isDefined(self.script_accumulate))
+  if(isDefined(self.script_accumulate)) {
     var_0 = self.script_accumulate;
+  }
 
-  if(isDefined(self.script_threshold))
+  if(isDefined(self.script_threshold)) {
     var_1 = self.script_threshold;
+  }
 
-  if(isDefined(self.script_fxid))
+  if(isDefined(self.script_fxid)) {
     self.fx = loadfx(self.script_fxid);
+  }
 
   var_2 = 0;
   self setCanDamage(1);
@@ -837,8 +891,9 @@ destructable_think() {
 destructable_destruct() {
   var_0 = self;
 
-  if(isDefined(var_0.fx))
+  if(isDefined(var_0.fx)) {
     playFX(var_0.fx, var_0.origin + (0, 0, 6));
+  }
 
   var_0 delete();
 }
@@ -847,12 +902,14 @@ setupexploders() {
   var_0 = getEntArray("script_brushmodel", "classname");
   var_1 = getEntArray("script_model", "classname");
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_0[var_0.size] = var_1[var_2];
+  }
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
-    if(isDefined(var_0[var_2].script_prefab_exploder))
+    if(isDefined(var_0[var_2].script_prefab_exploder)) {
       var_0[var_2].script_exploder = var_0[var_2].script_prefab_exploder;
+    }
 
     if(isDefined(var_0[var_2].script_exploder)) {
       if(var_0[var_2].model == "fx" && (!isDefined(var_0[var_2].targetname) || var_0[var_2].targetname != "exploderchunk")) {
@@ -877,35 +934,42 @@ setupexploders() {
   var_4 = getEntArray("script_brushmodel", "classname");
 
   for(var_2 = 0; var_2 < var_4.size; var_2++) {
-    if(isDefined(var_4[var_2].script_prefab_exploder))
+    if(isDefined(var_4[var_2].script_prefab_exploder)) {
       var_4[var_2].script_exploder = var_4[var_2].script_prefab_exploder;
+    }
 
-    if(isDefined(var_4[var_2].script_exploder))
+    if(isDefined(var_4[var_2].script_exploder)) {
       var_3[var_3.size] = var_4[var_2];
+    }
   }
 
   var_4 = getEntArray("script_model", "classname");
 
   for(var_2 = 0; var_2 < var_4.size; var_2++) {
-    if(isDefined(var_4[var_2].script_prefab_exploder))
+    if(isDefined(var_4[var_2].script_prefab_exploder)) {
       var_4[var_2].script_exploder = var_4[var_2].script_prefab_exploder;
+    }
 
-    if(isDefined(var_4[var_2].script_exploder))
+    if(isDefined(var_4[var_2].script_exploder)) {
       var_3[var_3.size] = var_4[var_2];
+    }
   }
 
   var_4 = getEntArray("item_health", "classname");
 
   for(var_2 = 0; var_2 < var_4.size; var_2++) {
-    if(isDefined(var_4[var_2].script_prefab_exploder))
+    if(isDefined(var_4[var_2].script_prefab_exploder)) {
       var_4[var_2].script_exploder = var_4[var_2].script_prefab_exploder;
+    }
 
-    if(isDefined(var_4[var_2].script_exploder))
+    if(isDefined(var_4[var_2].script_exploder)) {
       var_3[var_3.size] = var_4[var_2];
+    }
   }
 
-  if(!isDefined(level.createfxent))
+  if(!isDefined(level.createfxent)) {
     level.createfxent = [];
+  }
 
   var_5 = [];
   var_5["exploderchunk visible"] = 1;
@@ -934,15 +998,17 @@ setupexploders() {
     var_7.v["ender"] = var_6.script_ender;
     var_7.v["type"] = "exploder";
 
-    if(!isDefined(var_6.script_fxid))
+    if(!isDefined(var_6.script_fxid)) {
       var_7.v["fxid"] = "No FX";
-    else
+    } else {
       var_7.v["fxid"] = var_6.script_fxid;
+    }
 
     var_7.v["exploder"] = var_6.script_exploder;
 
-    if(!isDefined(var_7.v["delay"]))
+    if(!isDefined(var_7.v["delay"])) {
       var_7.v["delay"] = 0;
+    }
 
     if(isDefined(var_6.target)) {
       var_8 = getEnt(var_7.v["target"], "targetname").origin;
@@ -954,10 +1020,11 @@ setupexploders() {
       var_7.model.disconnect_paths = var_6.script_disconnectpaths;
     }
 
-    if(isDefined(var_6.targetname) && isDefined(var_5[var_6.targetname]))
+    if(isDefined(var_6.targetname) && isDefined(var_5[var_6.targetname])) {
       var_7.v["exploder_type"] = var_6.targetname;
-    else
+    } else {
       var_7.v["exploder_type"] = "normal";
+    }
 
     var_7 scripts\common\createfx::post_entity_creation_function();
   }
@@ -999,10 +1066,11 @@ exploder_load(var_0) {
   var_0 waittill("trigger");
 
   if(isDefined(var_0.script_chance) && randomfloat(1) > var_0.script_chance) {
-    if(isDefined(var_0.script_delay))
+    if(isDefined(var_0.script_delay)) {
       wait(var_0.script_delay);
-    else
+    } else {
       wait 4;
+    }
 
     level thread exploder_load(var_0);
     return;
@@ -1055,10 +1123,11 @@ _id_98BC() {
 }
 
 _id_988E() {
-  if(isDefined(level._id_D0FE))
+  if(isDefined(level._id_D0FE)) {
     [[level._id_D0FE]]();
-  else
+  } else {
     scripts\cp\cp_laststand::default_player_init_laststand();
+  }
 }
 
 _id_988B() {

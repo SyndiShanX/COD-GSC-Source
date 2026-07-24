@@ -27,14 +27,16 @@ _id_967C() {
 }
 
 main() {
-  if(getDvar("mg42") == "")
+  if(getDvar("mg42") == "") {
     setDvar("mgTurret", "off");
+  }
 
   level._id_B153 = 24;
   var_0 = getEntArray("turretInfo", "targetname");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] delete();
+  }
 
   scripts\engine\utility::create_lock("mg42_drones");
   scripts\engine\utility::create_lock("mg42_drones_target_trace");
@@ -49,15 +51,17 @@ _id_D66E() {
     var_0 = getnode(self.target, "targetname");
 
     if(isDefined(var_0)) {
-      if(isDefined(var_0.radius))
+      if(isDefined(var_0.radius)) {
         self.goalradius = var_0.radius;
+      }
 
       self _meth_82EE(var_0);
     }
   }
 
-  while(!isDefined(self.node))
+  while(!isDefined(self.node)) {
     wait 0.05;
+  }
 
   var_1 = undefined;
 
@@ -66,8 +70,9 @@ _id_D66E() {
     var_1 = var_0;
   }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = self.node;
+  }
 
   if(!isDefined(var_1)) {
     return;
@@ -88,10 +93,11 @@ _id_D66E() {
   }
   _id_E1C9(var_3);
 
-  if(var_3._id_9F46)
+  if(var_3._id_9F46) {
     _id_AB14(var_3);
-  else
+  } else {
     _id_E826(var_3);
+  }
 
   scripts\sp\mg_penetration::_id_8715(var_1.turret);
 }
@@ -108,15 +114,17 @@ _id_B6BE(var_0) {
   var_1 = getaiarray("bad_guys");
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(isDefined(var_1[var_2]._id_EE13) && var_0._id_EE13 == var_1[var_2]._id_EE13)
+    if(isDefined(var_1[var_2]._id_EE13) && var_0._id_EE13 == var_1[var_2]._id_EE13) {
       var_1[var_2] notify("auto_ai");
+    }
   }
 
   var_3 = getspawnerarray();
 
   for(var_2 = 0; var_2 < var_3.size; var_2++) {
-    if(isDefined(var_3[var_2]._id_EE13) && var_0._id_EE13 == var_3[var_2]._id_EE13)
+    if(isDefined(var_3[var_2]._id_EE13) && var_0._id_EE13 == var_3[var_2]._id_EE13) {
       var_3[var_2]._id_19C1 = "auto_ai";
+    }
   }
 
   _id_0B77::_id_A622(var_0);
@@ -126,8 +134,9 @@ _id_B6A8(var_0) {
   self endon("death");
   self endon("stop_suppressionFire");
 
-  if(!isDefined(self._id_112C7))
+  if(!isDefined(self._id_112C7)) {
     self._id_112C7 = 1;
+  }
 
   for(;;) {
     while(self._id_112C7) {
@@ -137,8 +146,9 @@ _id_B6A8(var_0) {
 
     self cleartargetentity();
 
-    while(!self._id_112C7)
+    while(!self._id_112C7) {
       wait 1;
+    }
   }
 }
 
@@ -151,52 +161,59 @@ _id_B31A(var_0) {
 }
 
 _id_32B6(var_0) {
-  if(var_0 == "delay")
+  if(var_0 == "delay") {
     return 0.2;
-  else if(var_0 == "delay_range")
+  } else if(var_0 == "delay_range") {
     return 0.5;
-  else if(var_0 == "burst")
+  } else if(var_0 == "burst") {
     return 0.5;
-  else if(var_0 == "burst_fire_rate")
+  } else if(var_0 == "burst_fire_rate") {
     return 0.1;
-  else
+  } else {
     return 1.5;
+  }
 }
 
 _id_32B7() {
   self endon("death");
   self endon("stop_burst_fire_unmanned");
 
-  if(isDefined(self.script_delay_min))
+  if(isDefined(self.script_delay_min)) {
     var_0 = self.script_delay_min;
-  else
+  } else {
     var_0 = _id_32B6("delay");
+  }
 
-  if(isDefined(self.script_delay_max))
+  if(isDefined(self.script_delay_max)) {
     var_1 = self.script_delay_max - var_0;
-  else
+  } else {
     var_1 = _id_32B6("delay_range");
+  }
 
-  if(isDefined(self._id_ED26))
+  if(isDefined(self._id_ED26)) {
     var_2 = self._id_ED26;
-  else
+  } else {
     var_2 = _id_32B6("burst");
+  }
 
-  if(isDefined(self._id_ED25))
+  if(isDefined(self._id_ED25)) {
     var_3 = self._id_ED25 - var_2;
-  else
+  } else {
     var_3 = _id_32B6("burst_range");
+  }
 
-  if(isDefined(self._id_ED24))
+  if(isDefined(self._id_ED24)) {
     var_4 = self._id_ED24;
-  else
+  } else {
     var_4 = _id_32B6("burst_fire_rate");
+  }
 
   var_5 = gettime();
   var_6 = "start";
 
-  if(isDefined(self._id_FC63))
+  if(isDefined(self._id_FC63)) {
     thread _id_12A2F();
+  }
 
   for(;;) {
     var_7 = (var_5 - gettime()) * 0.001;
@@ -215,8 +232,9 @@ _id_32B7() {
       continue;
     }
 
-    if(var_6 != "aim")
+    if(var_6 != "aim") {
       var_6 = "aim";
+    }
 
     thread _id_12A99(var_7);
     self waittill("turretstatechange");
@@ -228,8 +246,9 @@ _id_5AAA(var_0) {
   self endon("turretstatechange");
   var_1 = 0.1;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = var_0;
+  }
 
   for(;;) {
     self shootturret();
@@ -241,15 +260,17 @@ _id_12A2F() {
   self endon("death");
   self endon("stop_burst_fire_unmanned");
 
-  if(isDefined(self._id_FC65))
+  if(isDefined(self._id_FC65)) {
     self._id_FC66 = 1;
+  }
 
   for(;;) {
     self waittill("turret_fire");
     playFXOnTag(self._id_FC63, self, "tag_origin");
 
-    if(isDefined(self._id_FC66) && self._id_FC66)
+    if(isDefined(self._id_FC66) && self._id_FC66) {
       thread _id_12A30();
+    }
   }
 }
 
@@ -273,8 +294,9 @@ _id_12A99(var_0) {
   self endon("turretstatechange");
   wait(var_0);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self notify("turretstatechange");
+  }
 }
 
 _id_DC9D(var_0) {
@@ -285,10 +307,11 @@ _id_DC9D(var_0) {
   self settargetentity(var_0);
 
   for(;;) {
-    if(isPlayer(var_0))
+    if(isPlayer(var_0)) {
       var_0.origin = self._id_B319 getorigin();
-    else
+    } else {
       var_0.origin = self._id_B319.origin;
+    }
 
     var_0.origin = var_0.origin + (20 - randomfloat(40), 20 - randomfloat(40), 20 - randomfloat(60));
     wait 0.2;
@@ -314,31 +337,36 @@ _id_32B5(var_0, var_1) {
   var_0 endon("stopfiring");
   self endon("stop_using_built_in_burst_fire");
 
-  if(isDefined(var_0.script_delay_min))
+  if(isDefined(var_0.script_delay_min)) {
     var_2 = var_0.script_delay_min;
-  else
+  } else {
     var_2 = _id_32B6("delay");
+  }
 
-  if(isDefined(var_0.script_delay_max))
+  if(isDefined(var_0.script_delay_max)) {
     var_3 = var_0.script_delay_max - var_2;
-  else
+  } else {
     var_3 = _id_32B6("delay_range");
+  }
 
-  if(isDefined(var_0._id_ED26))
+  if(isDefined(var_0._id_ED26)) {
     var_4 = var_0._id_ED26;
-  else
+  } else {
     var_4 = _id_32B6("burst");
+  }
 
-  if(isDefined(var_0._id_ED25))
+  if(isDefined(var_0._id_ED25)) {
     var_5 = var_0._id_ED25 - var_4;
-  else
+  } else {
     var_5 = _id_32B6("burst_range");
+  }
 
   for(;;) {
     var_0 _meth_8398();
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_0 thread _id_DC9D(var_1);
+    }
 
     wait(var_4 + randomfloat(var_5));
     var_0 _meth_83A3();
@@ -347,8 +375,9 @@ _id_32B5(var_0, var_1) {
 }
 
 _id_140E() {
-  if(!isDefined(self._id_6E66))
+  if(!isDefined(self._id_6E66)) {
     self._id_6E66 = 0;
+  }
 
   if(!isDefined(self.targetname)) {
     return;
@@ -361,8 +390,9 @@ _id_140E() {
   if(!isDefined(var_0._id_EE12)) {
     return;
   }
-  if(!isDefined(var_0._id_B6A2))
+  if(!isDefined(var_0._id_B6A2)) {
     var_0._id_B6A2 = 1;
+  }
 
   self._id_EE12 = var_0._id_EE12;
   var_1 = 1;
@@ -371,8 +401,9 @@ _id_140E() {
     if(var_1) {
       var_1 = 0;
 
-      if(isDefined(var_0.targetname) || self._id_6E66)
+      if(isDefined(var_0.targetname) || self._id_6E66) {
         self waittill("get new user");
+      }
     }
 
     if(!var_0._id_B6A2) {
@@ -386,20 +417,24 @@ _id_140E() {
     for(var_4 = 0; var_4 < var_3.size; var_4++) {
       var_5 = 1;
 
-      if(isDefined(var_3[var_4]._id_EE12) && var_3[var_4]._id_EE12 == self._id_EE12)
+      if(isDefined(var_3[var_4]._id_EE12) && var_3[var_4]._id_EE12 == self._id_EE12) {
         var_5 = 0;
+      }
 
-      if(isDefined(var_3[var_4].used_an_mg42))
+      if(isDefined(var_3[var_4].used_an_mg42)) {
         var_5 = 1;
+      }
 
-      if(var_5)
+      if(var_5) {
         var_2[var_2.size] = var_3[var_4];
+      }
     }
 
-    if(var_2.size)
+    if(var_2.size) {
       var_3 = scripts\sp\utility::_id_78AB(var_0.origin, undefined, var_2);
-    else
+    } else {
       var_3 = scripts\sp\utility::_id_78AA(var_0.origin, undefined);
+    }
 
     var_2 = undefined;
 
@@ -415,8 +450,9 @@ _id_140E() {
 }
 
 _id_B6AA() {
-  if(!isDefined(self._id_19C1))
+  if(!isDefined(self._id_19C1)) {
     self._id_19C1 = "manual_ai";
+  }
 
   var_0 = getnode(self.target, "targetname");
 
@@ -468,11 +504,13 @@ _id_B6AA() {
 _id_A5F9(var_0, var_1, var_2, var_3) {
   var_0 waittill(var_1);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 delete();
+  }
 }
 
 _id_B6A5(var_0, var_1, var_2) {
@@ -496,23 +534,27 @@ _id_B6A5(var_0, var_1, var_2) {
 }
 
 _id_D279() {
-  if(!isDefined(level._id_CFE7))
+  if(!isDefined(level._id_CFE7)) {
     return 0;
+  }
 
-  if(level.player getstance() == "prone")
+  if(level.player getstance() == "prone") {
     return 1;
+  }
 
-  if(level._id_CFE8 == "cow" && level.player getstance() == "crouch")
+  if(level._id_CFE8 == "cow" && level.player getstance() == "crouch") {
     return 1;
+  }
 
   return 0;
 }
 
 _id_10B5A() {
-  if(level.player getstance() == "prone")
+  if(level.player getstance() == "prone") {
     return (0, 0, 5);
-  else if(level.player getstance() == "crouch")
+  } else if(level.player getstance() == "crouch") {
     return (0, 0, 25);
+  }
 
   return (0, 0, 50);
 }
@@ -526,8 +568,9 @@ _id_B6A4(var_0, var_1) {
   self waittill("goal");
 
   if(var_1) {
-    if(!level._id_B6AB[var_0.target])
+    if(!level._id_B6AB[var_0.target]) {
       level waittill(var_0.target);
+    }
   }
 
   self.pacifist = 0;
@@ -537,8 +580,9 @@ _id_B6A4(var_0, var_1) {
   var_3 = spawn("script_model", (0, 0, 0));
   var_3._id_EB9C = 3;
 
-  if(getDvar("mg42") != "off")
+  if(getDvar("mg42") != "off") {
     var_3 setModel("temp");
+  }
 
   var_3 thread _id_116C2(var_0, var_2);
   level thread _id_A5F9(self, "death", var_2, var_3);
@@ -580,8 +624,9 @@ _id_B6A4(var_0, var_1) {
       for(var_13 = 0; var_13 < 1; var_13 = var_13 + var_10) {
         var_2.origin = var_7 * (1.0 - var_13) + (level.player getorigin() + _id_10B5A()) * var_13;
 
-        if(_id_D279())
+        if(_id_D279()) {
           var_13 = 2;
+        }
 
         wait(var_9);
       }
@@ -667,8 +712,9 @@ _id_B6A4(var_0, var_1) {
         var_3.origin = (0, 0, 0);
       }
 
-      while(isDefined(level._id_CFE7))
+      while(isDefined(level._id_CFE7)) {
         wait 0.2;
+      }
 
       wait(0.75 + randomfloat(0.2));
     }
@@ -681,8 +727,9 @@ _id_FE6F(var_0) {
   for(;;) {
     var_1 = [];
 
-    for(var_2 = 0; var_2 < var_0.size; var_2++)
+    for(var_2 = 0; var_2 < var_0.size; var_2++) {
       var_1[var_2] = 0;
+    }
 
     for(var_2 = 0; var_2 < var_0.size; var_2++) {
       self._id_86EA = randomint(var_0.size);
@@ -691,8 +738,9 @@ _id_FE6F(var_0) {
       while(var_1[self._id_86EA]) {
         self._id_86EA++;
 
-        if(self._id_86EA >= var_0.size)
+        if(self._id_86EA >= var_0.size) {
           self._id_86EA = 0;
+        }
       }
 
       var_1[self._id_86EA] = 1;
@@ -708,10 +756,11 @@ _id_BC9D(var_0, var_1, var_2) {
   if(isDefined(var_1) && var_1 == "auto_ai") {
     var_0 setmode("auto_ai");
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_0 settargetentity(var_2);
-    else
+    } else {
       var_0 cleartargetentity();
+    }
   }
 
   self _meth_83D7(var_0);
@@ -733,13 +782,15 @@ _id_12A42(var_0) {
   var_1 = getEnt(var_0._id_263A, "targetname");
   var_2 = 0.5;
 
-  if(isDefined(var_1._id_EEF6))
+  if(isDefined(var_1._id_EEF6)) {
     var_2 = var_1._id_EEF6;
+  }
 
   var_3 = 2;
 
-  if(isDefined(var_1._id_EEF5))
+  if(isDefined(var_1._id_EEF5)) {
     var_2 = var_1._id_EEF5;
+  }
 
   for(;;) {
     var_1 waittill("turret_deactivate");
@@ -760,8 +811,9 @@ _id_129EA(var_0, var_1) {
       var_4 = var_2[var_3].keepclaimednodeifvalid;
       var_2[var_3].keepclaimednodeifvalid = 0;
 
-      if(!var_2[var_3] _meth_83D4(var_0))
+      if(!var_2[var_3] _meth_83D4(var_0)) {
         var_2[var_3].keepclaimednodeifvalid = var_4;
+      }
     }
   }
 }
@@ -804,42 +856,48 @@ _id_B6A7(var_0, var_1) {
 }
 
 _id_B6A9(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0.88;
+  }
 
   self endon("death");
   self notify("stop_mg42_target_drones");
   self endon("stop_mg42_target_drones");
   self._id_5CAD = 0;
 
-  if(!isDefined(self._id_ED98))
+  if(!isDefined(self._id_ED98)) {
     self._id_ED98 = 0;
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   self setmode("manual_ai");
   var_3 = scripts\sp\utility::_id_7E72();
 
-  if(!isDefined(level._id_5CC3))
+  if(!isDefined(level._id_5CC3)) {
     var_4 = 1;
-  else
+  } else {
     var_4 = 0;
+  }
 
   for(;;) {
     if(var_4) {
-      if(isDefined(self._id_5CC6))
+      if(isDefined(self._id_5CC6)) {
         self setmode(self._id_5041);
-      else if(var_0)
+      } else if(var_0) {
         self setmode("auto_nonai");
-      else
+      } else {
         self setmode("auto_ai");
+      }
 
       level waittill("new_drone");
     }
 
-    if(!isDefined(self._id_C3EA))
+    if(!isDefined(self._id_C3EA)) {
       self._id_C3EA = self.contextleanenabled;
+    }
 
     self.contextleanenabled = 2;
 
@@ -854,10 +912,11 @@ _id_B6A9(var_0, var_1, var_2) {
     } else
       var_5 = undefined;
 
-    if(var_1 == "allies")
+    if(var_1 == "allies") {
       var_6 = "axis";
-    else
+    } else {
       var_6 = "allies";
+    }
 
     while(level._id_5CC3[var_6].lastindex) {
       scripts\engine\utility::lock("mg42_drones");
@@ -880,13 +939,15 @@ _id_B6A9(var_0, var_1, var_2) {
         break;
       }
 
-      if(isDefined(self._id_1F5F))
+      if(isDefined(self._id_1F5F)) {
         [[self._id_1F5F]]();
+      }
 
-      if(var_0)
+      if(var_0) {
         self setmode("manual");
-      else
+      } else {
         self setmode("manual_ai");
+      }
 
       self settargetentity(var_7, (0, 0, 32));
       _id_5C88(var_7, 1, var_2);
@@ -972,8 +1033,9 @@ _id_7868(var_0, var_1) {
   var_7 = self getturrettarget(1);
 
   if(!isDefined(self._id_D836)) {
-    if(isDefined(var_2) && isDefined(var_7) && distancesquared(self.origin, var_7.origin) < distancesquared(self.origin, var_2.origin))
+    if(isDefined(var_2) && isDefined(var_7) && distancesquared(self.origin, var_7.origin) < distancesquared(self.origin, var_2.origin)) {
       var_2 = undefined;
+    }
   }
 
   return var_2;
@@ -1028,17 +1090,21 @@ _id_EB7D() {
       var_9._id_12A72._id_0349 = 15;
       var_9._id_12A72._id_006B = 15;
 
-      if(isDefined(var_7._id_01B8))
+      if(isDefined(var_7._id_01B8)) {
         var_9._id_12A72._id_01B8 = min(var_7._id_01B8, 45);
+      }
 
-      if(isDefined(var_7.rightarc))
+      if(isDefined(var_7.rightarc)) {
         var_9._id_12A72.rightarc = min(var_7.rightarc, 45);
+      }
 
-      if(isDefined(var_7._id_0349))
+      if(isDefined(var_7._id_0349)) {
         var_9._id_12A72._id_0349 = min(var_7._id_0349, 15);
+      }
 
-      if(isDefined(var_7._id_006B))
+      if(isDefined(var_7._id_006B)) {
         var_9._id_12A72._id_006B = min(var_7._id_006B, 15);
+      }
 
       var_7 delete();
     }
@@ -1056,8 +1122,9 @@ _id_263B() {
     if(!isDefined(var_3._id_6A0B)) {
       continue;
     }
-    if(!isDefined(var_3._id_ED69))
+    if(!isDefined(var_3._id_ED69)) {
       var_1[var_1.size] = var_3;
+    }
   }
 
   if(!var_1.size) {
@@ -1099,23 +1166,26 @@ _id_EB66() {
   if(!isDefined(self._id_6A0B)) {
     return;
   }
-  if(!isDefined(level._id_FC5D))
+  if(!isDefined(level._id_FC5D)) {
     level._id_FC5D = [];
+  }
 
   level._id_FC5D[self._id_6A0B] = self;
 
   if(isDefined(self._id_EEF7)) {
     var_0 = strtok(self._id_EEF7, " ");
 
-    for(var_1 = 0; var_1 < var_0.size; var_1++)
+    for(var_1 = 0; var_1 < var_0.size; var_1++) {
       self._id_FC5E["connected"][var_0[var_1]] = 1;
+    }
   }
 
   if(isDefined(self._id_EEF3)) {
     var_0 = strtok(self._id_EEF3, " ");
 
-    for(var_1 = 0; var_1 < var_0.size; var_1++)
+    for(var_1 = 0; var_1 < var_0.size; var_1++) {
       self._id_FC5E["ambush"][var_0[var_1]] = 1;
+    }
   }
 }
 
@@ -1253,20 +1323,22 @@ _id_6C73(var_0) {
   thread _id_12DB9(var_0);
   thread _id_BC78(var_0, var_2);
 
-  if(var_3 == "ambush")
+  if(var_3 == "ambush") {
     thread _id_DDE3(var_0);
+  }
 
-  if(var_2._id_9F46)
+  if(var_2._id_9F46) {
     _id_AB14(var_2);
-  else {
+  } else {
     _id_CB35(var_2);
     _id_E826(var_2);
   }
 
   self notify("stop_updating_enemy_target_pos");
 
-  if(var_3 == "ambush")
+  if(var_3 == "ambush") {
     _id_1A30(var_2, var_0);
+  }
 
   var_2 settargetentity(var_0);
 }
@@ -1311,8 +1383,9 @@ _id_E826(var_0) {
   self notify("kill_get_gun_back_on_killanimscript_thread");
   scripts\anim\shared::placeweaponon(self.weapon, "none");
 
-  if(self isbadguy())
+  if(self isbadguy()) {
     self.health = 1;
+  }
 
   self attach(self._id_12A78, level._id_D66F);
   thread _id_12A60();
@@ -1330,11 +1403,13 @@ _id_E826(var_0) {
 
   self notify("kill_turret_detach_thread");
 
-  if(self isbadguy())
+  if(self isbadguy()) {
     self.health = var_1;
+  }
 
-  if(soundexists("weapon_setup"))
+  if(soundexists("weapon_setup")) {
     playworldsound("weapon_setup", self.origin);
+  }
 
   self animScripted("setup_done", var_0.origin, var_0.angles, var_2);
   _id_E2DB();
@@ -1358,8 +1433,9 @@ _id_906E() {
 }
 
 _id_130FD() {
-  if(!isDefined(self.turret))
+  if(!isDefined(self.turret)) {
     return 0;
+  }
 
   return self.turret.owner == self;
 }
@@ -1386,8 +1462,9 @@ _id_12A4E() {
     for(var_4 = 0; var_4 < var_1.size; var_4++) {
       var_2 = scripts\engine\utility::random(var_1);
 
-      if(isDefined(var_3[var_2.origin + ""]))
+      if(isDefined(var_3[var_2.origin + ""])) {
         return;
+      }
     }
   }
 
@@ -1398,10 +1475,11 @@ _id_12A4E() {
   }
   _id_E1C9(var_5);
 
-  if(var_5._id_9F46)
+  if(var_5._id_9F46) {
     _id_AB14(var_5);
-  else
+  } else {
     _id_E826(var_5);
+  }
 
   scripts\sp\mg_penetration::_id_8715(var_2.turret);
 }
@@ -1436,7 +1514,7 @@ _id_7BC7(var_0) {
     if(!isDefined(var_3["spots"])) {
       continue;
     }
-    var_3["spot"] = scripts\engine\utility::random(var_3["spots"]);
+    var_3["spot"] = ::scripts\engine\utility::random(var_3["spots"]);
     return var_3;
   }
 }
@@ -1557,15 +1635,17 @@ _id_1101D() {
   self endon("stop_checking_for_flanking");
   self waittill("turret_deactivate");
 
-  if(isalive(self.owner))
+  if(isalive(self.owner)) {
     self.owner notify("end_mg_behavior");
+  }
 }
 
 _id_12A05(var_0) {
   var_1 = var_0 _meth_8165();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 0;
+  }
 
   return var_1 == self;
 }

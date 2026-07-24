@@ -35,17 +35,18 @@ zombieinit_dlc() {
 _id_FAB0() {
   level endon("game_ended");
 
-  if(!isDefined(level.agent_definition))
+  if(!isDefined(level.agent_definition)) {
     level waittill("scripted_agents_initialized");
+  }
 
   level.agent_definition["generic_zombie"]["setup_func"] = ::setupagent;
   level.agent_definition["generic_zombie"]["setup_model_func"] = ::_id_FACE;
-  level.agent_funcs["generic_zombie"]["gametype_on_killed"] = scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiekilled;
-  level.agent_funcs["generic_zombie"]["gametype_on_damage_finished"] = scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
-  level.agent_funcs["generic_zombie"]["on_damaged"] = scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiedamaged;
+  level.agent_funcs["generic_zombie"]["gametype_on_killed"] = ::scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiekilled;
+  level.agent_funcs["generic_zombie"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+  level.agent_funcs["generic_zombie"]["on_damaged"] = ::scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiedamaged;
   level.agent_funcs["generic_zombie"]["on_damaged_finished"] = ::onzombiedamagefinished;
   level.agent_funcs["generic_zombie"]["on_killed"] = ::onzombiekilled;
-  level.movemodefunc["generic_zombie"] = scripts\cp\agents\gametype_zombie::run_if_last_zombie;
+  level.movemodefunc["generic_zombie"] = ::scripts\cp\agents\gametype_zombie::run_if_last_zombie;
   level.soldier_models = ["zombie_dlc3_male_soldier_02", "zombie_dlc3_male_soldier_03", "zombie_dlc3_male_soldier_04"];
 }
 
@@ -67,13 +68,15 @@ _id_FACE(var_0) {
 }
 
 should_be_soldier() {
-  if(level.wave_num < 5)
+  if(level.wave_num < 5) {
     return 0;
+  }
 
   var_0 = randomint(100);
 
-  if(var_0 < 15)
+  if(var_0 < 15) {
     return 1;
+  }
 
   return 0;
 }

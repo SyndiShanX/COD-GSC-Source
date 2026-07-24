@@ -29,13 +29,15 @@ _id_B1D3() {
   var_2 = getEnt("hill_battle_cleanup_volume", "targetname");
 
   foreach(var_4 in var_1) {
-    if(var_4 istouching(var_2))
+    if(var_4 istouching(var_2)) {
       var_4 delete();
+    }
   }
 
   foreach(var_7 in var_0) {
-    if(!scripts\engine\utility::is_true(var_7.damageshield) && var_7 istouching(var_2))
+    if(!scripts\engine\utility::is_true(var_7.damageshield) && var_7 istouching(var_2)) {
       var_7 _meth_81D0();
+    }
   }
 
   var_2 delete();
@@ -112,8 +114,9 @@ _id_88DE(var_0) {
   level notify("elevator_dropship_crew_ready");
   wait 1;
 
-  while(getaiarray("axis").size > 0)
+  while(getaiarray("axis").size > 0) {
     wait 0.15;
+  }
 
   wait 1;
   level.player scripts\sp\utility::_id_F526("relaxed");
@@ -150,8 +153,9 @@ _id_3B5C(var_0) {
   scripts\engine\utility::flag_wait("flag_bridgewalk_start");
   wait 1;
 
-  while(getaiarray("axis").size > 0)
+  while(getaiarray("axis").size > 0) {
     wait 0.15;
+  }
 
   wait 1;
   level.player scripts\sp\utility::_id_F526("relaxed");
@@ -189,13 +193,15 @@ _id_4A5F(var_0, var_1, var_2) {
   }
   wait(randomfloatrange(var_1, var_2));
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return;
-  else if(isDefined(var_4.script_parameters))
+  } else if(isDefined(var_4.script_parameters)) {
     scripts\sp\utility::_id_51E1(var_4.script_parameters);
+  }
 
-  if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == "look_at_player")
+  if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == "look_at_player") {
     scripts\sp\utility::_id_7799(level.player);
+  }
 
   self _meth_82EE(var_4);
   self waittill("goal");
@@ -221,8 +227,9 @@ _id_106BD() {
   var_0 = getspawnerarray("elevator_retreat_dropship_crew");
   var_1 = [];
 
-  foreach(var_4, var_3 in var_0)
-  var_1[var_4] = var_3 scripts\sp\utility::_id_10619(1);
+  foreach(var_4, var_3 in var_0) {
+    var_1[var_4] = var_3 scripts\sp\utility::_id_10619(1);
+  }
 
   return var_1;
 }

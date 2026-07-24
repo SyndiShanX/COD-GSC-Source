@@ -37,8 +37,9 @@ _id_3030() {
   var_6 = [var_1, var_2, var_4];
   var_7 = scripts\engine\utility::array_add(var_6, var_3);
 
-  foreach(var_9 in var_7)
-  var_9._id_99E6 = scripts\sp\lights::_id_95A8([var_9 _meth_8134()]);
+  foreach(var_9 in var_7) {
+    var_9._id_99E6 = scripts\sp\lights::_id_95A8([var_9 _meth_8134()]);
+  }
 
   var_11 = _id_0EEB::_id_7976("return");
   scripts\engine\utility::array_call(var_6, ::setlightintensity, 0);
@@ -109,11 +110,13 @@ _id_E439() {
 _id_620F(var_0, var_1) {
   var_2 = var_0;
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0.5;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   scripts\sp\lights::_id_AB83(10, 0.5);
   thread _id_E707(var_0, var_1);
@@ -128,11 +131,13 @@ _id_E707(var_0, var_1) {
   self endon("kill_klaxon");
   var_2 = var_0;
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0.5;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   wait(var_1);
 

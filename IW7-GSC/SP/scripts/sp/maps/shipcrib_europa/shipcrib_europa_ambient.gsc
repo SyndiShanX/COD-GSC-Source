@@ -34,8 +34,9 @@ _id_E46D() {
 
     _id_0EFB::_id_FD71();
 
-    foreach(var_1 in level._id_FD6E.jackals)
-    var_1 _id_0BDC::_id_A2DA();
+    foreach(var_1 in level._id_FD6E.jackals) {
+      var_1 _id_0BDC::_id_A2DA();
+    }
 
     scripts\sp\maps\shipcrib_europa\shipcrib_europa::_id_40B0();
     _id_0EFB::_id_FDE8(level._id_FD6E.jackals);
@@ -317,8 +318,9 @@ _id_174F() {
 _id_40A1(var_0) {
   var_0 waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_16CB() {
@@ -566,18 +568,21 @@ _id_1E0B() {
 }
 
 _id_1E0A() {
-  if(!scripts\engine\utility::flag("shipcrib_europa_ambientml_tr_loaded"))
+  if(!scripts\engine\utility::flag("shipcrib_europa_ambientml_tr_loaded")) {
     scripts\sp\utility::_id_12641("shipcrib_europa_ambientml_tr");
+  }
 }
 
 _id_1E0E() {
-  if(!scripts\engine\utility::flag("shipcrib_europa_ambientml_tr_loaded"))
+  if(!scripts\engine\utility::flag("shipcrib_europa_ambientml_tr_loaded")) {
     scripts\sp\utility::_id_12641("shipcrib_europa_ambientml_tr");
+  }
 }
 
 _id_1E0D() {
-  if(!scripts\engine\utility::flag("shipcrib_europa_ambientml_tr_loaded"))
+  if(!scripts\engine\utility::flag("shipcrib_europa_ambientml_tr_loaded")) {
     scripts\sp\utility::_id_12641("shipcrib_europa_ambientml_tr");
+  }
 }
 
 _id_8A8B(var_0) {
@@ -981,22 +986,25 @@ _id_600A(var_0, var_1) {
   var_0 notify("goal_notified");
   var_0 waittill("move_finished");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "jackal";
+  }
 
   var_2 = getnode("storage_death_" + var_1, "targetname");
   self setgoalpos(var_2.origin);
   self waittill("goal");
 
-  if(isDefined(self._id_B14F))
+  if(isDefined(self._id_B14F)) {
     scripts\sp\utility::_id_1101B();
+  }
 
   _id_0EFB::_id_FDBA(self);
 }
 
 _id_60AB(var_0, var_1, var_2, var_3) {
-  for(var_4 = 0; var_4 < var_1; var_4++)
+  for(var_4 = 0; var_4 < var_1; var_4++) {
     self waittill("goal_notified");
+  }
 
   wait 1;
   scripts\engine\utility::flag_waitopen(var_3);
@@ -1035,8 +1043,9 @@ _id_8A91(var_0) {
     var_6 _id_0EFB::_id_FD6F("hangar_leaving_crew");
     var_6 thread _id_0EE5::_id_202D();
 
-    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "hasgun")
+    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "hasgun") {
       var_6 attach(getweaponmodel("iw7_m4"), "tag_weapon_right");
+    }
 
     var_3 thread scripts\sp\anim::_id_1ECC(var_6, var_3.animation, "stop_loop");
     var_6 scripts\engine\utility::delaycall(0.05, ::_meth_82B0, var_6 scripts\sp\utility::_id_7DC1(var_3.animation)[0], randomfloatrange(0, 1));
@@ -1100,15 +1109,17 @@ _id_8A90() {
   var_3 thread _id_0EE5::_id_202D();
   var_2 thread scripts\sp\anim::_id_1ECC(var_3, "shipcrib_hangar_c12_event_spectator_07_idle_01", "stop_loop");
 
-  while(!isDefined(level._id_3508))
+  while(!isDefined(level._id_3508)) {
     scripts\engine\utility::waitframe();
+  }
 
   var_1 endon("death");
   var_3 endon("death");
   level._id_3508 endon("death");
 
-  while(distance2dsquared(level._id_3508.origin, var_1.origin) > 184900)
+  while(distance2dsquared(level._id_3508.origin, var_1.origin) > 184900) {
     scripts\engine\utility::waitframe();
+  }
 
   var_0 notify("stop_loop");
   var_2 notify("stop_loop");

@@ -15,17 +15,19 @@ sasquatch_init(var_0, var_1, var_2, var_3) {
 sasquatch_playidleanim(var_0, var_1, var_2, var_3) {
   var_4 = isDefined(self.enemy);
 
-  if(var_4)
+  if(var_4) {
     self orientmode("face enemy");
-  else
+  } else {
     self orientmode("face angle abs", self.angles);
+  }
 
   scripts\asm\asm_mp::_id_235F(var_0, var_1, var_2, 1, 0);
 }
 
 sas_play_meleeattack(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.bt.meleetarget))
+  if(isDefined(self.bt.meleetarget)) {
     thread sasquatch_faceenemyhelper(self.bt.meleetarget, 500, var_1);
+  }
 
   scripts\asm\asm_mp::_id_2364(var_0, var_1, var_2, var_3);
 }
@@ -35,13 +37,15 @@ sasquatch_melee_cleanup(var_0, var_1, var_2) {
 }
 
 sasquatch_faceenemyhelper(var_0, var_1, var_2) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self endon(var_2 + "_finished");
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 = gettime() + var_1;
-  else
+  } else {
     var_3 = -1;
+  }
 
   while((var_3 < 0 || gettime() <= var_3) && isDefined(var_0) && isalive(var_0)) {
     var_4 = var_0.origin - self.origin;
@@ -91,8 +95,9 @@ sasquatch_domeleedamage() {
     var_13 = vectordot(var_10, var_6);
 
     if(var_11 < var_4) {
-      if(var_13 < var_5)
+      if(var_13 < var_5) {
         continue;
+      }
     } else if(var_13 < var_3) {
       continue;
     }
@@ -101,8 +106,9 @@ sasquatch_domeleedamage() {
     scripts\asm\zombie\melee::domeleedamage(var_9, var_0, "MOD_IMPACT");
   }
 
-  if(!var_7)
+  if(!var_7) {
     self notify("attack_miss");
+  }
 }
 
 sas_play_throw(var_0, var_1, var_2, var_3) {
@@ -136,10 +142,11 @@ sasquatch_throwrock(var_0) {
     var_4 = var_0.origin - self.origin;
 
     if(vectordot(var_3, vectorNormalize(var_4)) > 0.707) {
-      if(isalive(var_0))
+      if(isalive(var_0)) {
         var_2 = var_0 getEye();
-      else
+      } else {
         var_2 = var_0.origin;
+      }
     }
   }
 
@@ -154,8 +161,9 @@ sasquatch_throwrock(var_0) {
 }
 
 sas_play_throw_terminate(var_0, var_1, var_2) {
-  if(isDefined(self.rockmodel))
+  if(isDefined(self.rockmodel)) {
     self.rockmodel delete();
+  }
 
   scripts\asm\asm::asm_fireephemeralevent("throwevent", "end");
 }
@@ -171,10 +179,11 @@ sas_play_rush_orienthelper(var_0, var_1) {
 }
 
 sas_play_rushattack_notehandler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "hit")
+  if(var_0 == "hit") {
     sasquatch_domeleedamage();
-  else if(var_0 == "footstep_left_small")
+  } else if(var_0 == "footstep_left_small") {
     scripts\asm\asm::asm_fireephemeralevent("rushattack", "end");
+  }
 }
 
 sas_play_rushattack_cleanup(var_0, var_1, var_2) {

@@ -51,16 +51,18 @@ _id_97A4(var_0) {
   var_0.achievement_registration_func = scripts\cp\zombies\achievement::register_default_achievements;
   scripts\cp\zombies\achievement::init_player_achievement(var_0);
 
-  while(!isDefined(var_0.pers))
+  while(!isDefined(var_0.pers)) {
     wait 1;
+  }
 
   var_0._id_1193D = [];
   var_0.killswithitem = [];
   var_0.itemtype = " ";
   var_0._id_118F0 = [];
 
-  if(!isDefined(level._id_311A))
+  if(!isDefined(level._id_311A)) {
     level._id_311A = 0;
+  }
 
   if(level.wave_num == 0) {
     var_0.pers["timesPerWave"] = spawnStruct();
@@ -119,11 +121,13 @@ _id_97A4(var_0) {
   var_0._id_A03C[var_0.itempicked] = 0;
   var_0.itemkills[var_0.itempicked] = 0;
 
-  if(!isDefined(var_0.totalxpearned))
+  if(!isDefined(var_0.totalxpearned)) {
     var_0.totalxpearned = 0;
+  }
 
-  if(!isDefined(var_0.score_earned))
+  if(!isDefined(var_0.score_earned)) {
     var_0.score_earned = 0;
+  }
 
   var_0.downsperweaponlog = [];
   var_0.killsperweaponlog = [];
@@ -139,20 +143,23 @@ _id_97A4(var_0) {
   var_0.explosive_kills = 0;
   var_0.total_trap_kills = 0;
 
-  if(!isDefined(var_0.exitingafterlifearcade))
+  if(!isDefined(var_0.exitingafterlifearcade)) {
     var_0.exitingafterlifearcade = 0;
+  }
 
   var_0.meleekill = 0;
   var_0.kung_fu_vo = 0;
 
-  if(!isDefined(var_0.trapkills))
+  if(!isDefined(var_0.trapkills)) {
     var_0.trapkills = [];
+  }
 
   var_1 = ["trap_gator", "trap_dragon", "trap_gravitron", "trap_danceparty", "trap_rocket", "trap_spin"];
 
   foreach(var_3 in var_1) {
-    if(!isDefined(var_0.trapkills[var_3]))
+    if(!isDefined(var_0.trapkills[var_3])) {
       var_0.trapkills[var_3] = 0;
+    }
   }
 
   var_5 = var_0._id_8235;
@@ -161,41 +168,47 @@ _id_97A4(var_0) {
     foreach(var_7 in var_5) {
       var_0.weapon_name_log = scripts\cp\utility::getbaseweaponname(var_7);
 
-      if(!isDefined(var_0.aggregateweaponkills[var_0.weapon_name_log]))
+      if(!isDefined(var_0.aggregateweaponkills[var_0.weapon_name_log])) {
         var_0.aggregateweaponkills[var_0.weapon_name_log] = 0;
+      }
     }
   }
 }
 
 _id_AF67(var_0, var_1) {
-  if(isDefined(var_0.score_earned))
+  if(isDefined(var_0.score_earned)) {
     var_0.score_earned = var_0.score_earned + var_1;
+  }
 
   scripts\cp\cp_analytics::_id_AF6A("currency_earned", var_1, [var_1], [var_0.clientid], [var_0.clientid]);
 }
 
 log_zombiedeath(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(isDefined(var_3) && var_3 != "none")
+  if(isDefined(var_3) && var_3 != "none") {
     scripts\cp\cp_analytics::_id_AF6A("zombie_death", var_0, [var_1, var_2.clientid, var_3, var_4, "" + var_5], [var_2.clientid, var_3], [var_2.clientid]);
+  }
 }
 
 _id_AF90(var_0, var_1, var_2, var_3) {
   scripts\cp\cp_analytics::_id_AF6A("wave_complete", 1, [level.script, var_0, var_1, var_2, var_3], [level.script]);
 
-  foreach(var_5 in level.players)
-  var_5.logevent = "wave_complete";
+  foreach(var_5 in level.players) {
+    var_5.logevent = "wave_complete";
+  }
 }
 
 _id_AF68(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_8 = var_4.agent_type;
-  else
+  } else {
     var_8 = "";
+  }
 
   scripts\cp\cp_analytics::_id_AF6A("dropped_to_last_stand", var_0, [var_1.clientid, var_3, var_8, "" + var_5, var_6, var_7], [var_1.clientid, var_2], [var_1.clientid]);
 
-  if(!isDefined(var_1.logevent))
+  if(!isDefined(var_1.logevent)) {
     var_1.logevent = "droppedToLastStand";
+  }
 
   var_1.logevent = "droppedToLastStand";
 }
@@ -234,8 +247,9 @@ log_purchasingforateamdoor(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_AF62(var_0, var_1) {
-  if(var_0 != "next_challenge")
+  if(var_0 != "next_challenge") {
     scripts\cp\cp_analytics::_id_AF6A("challenge_activated", 1, [level.script, var_0, var_1], [level.script]);
+  }
 }
 
 _id_AF63(var_0, var_1, var_2) {
@@ -251,21 +265,24 @@ _id_AF79(var_0) {
 }
 
 log_purchasingaweapon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = "none";
+  }
 
   if(var_3 == "none") {
     var_1.wavesheldwithweapon[getweaponbasename(var_2)] = var_4;
 
-    if(isDefined(var_7[var_3]))
+    if(isDefined(var_7[var_3])) {
       var_9 = var_7[var_3];
-    else
+    } else {
       var_9 = 0;
+    }
 
-    if(isDefined(var_8[var_3]))
+    if(isDefined(var_8[var_3])) {
       var_10 = var_8[var_3];
-    else
+    } else {
       var_10 = 0;
+    }
 
     var_6 = 0;
   } else {
@@ -273,11 +290,13 @@ log_purchasingaweapon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
     var_6 = var_4 - var_11;
     var_1.wavesheldwithweapon[getweaponbasename(var_2)] = var_4;
 
-    if(!isDefined(var_1.killsperweaponlog[var_3]))
+    if(!isDefined(var_1.killsperweaponlog[var_3])) {
       var_1.killsperweaponlog[var_3] = 0;
+    }
 
-    if(!isDefined(var_1.downsperweaponlog[var_3]))
+    if(!isDefined(var_1.downsperweaponlog[var_3])) {
       var_1.downsperweaponlog[var_3] = 0;
+    }
 
     var_9 = var_1.killsperweaponlog[var_3];
     var_10 = var_1.downsperweaponlog[var_3];
@@ -338,8 +357,9 @@ log_perk_returned(var_0, var_1) {
 log_finished_mini_game(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_1 scripts\cp\zombies\achievement::update_achievement_arcade(var_1, var_3, var_2);
 
-  if(var_5 > 0 && var_3 != "coaster")
+  if(var_5 > 0 && var_3 != "coaster") {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("arcade_complete", "zmb_comment_vo", "low", 10, 0, 0, 0, 45);
+  }
 
   scripts\cp\cp_analytics::_id_AF6A("finished_mini_game", var_0, [var_1.clientid, var_2, var_3, var_4, var_5, var_6], [var_1.clientid, var_3]);
 }
@@ -502,20 +522,22 @@ _id_AF91(var_0, var_1) {
     if(var_3 > 0) {
       var_10 = var_1 getrankedplayerdata("cp", "killsPerWeapon", var_4);
 
-      if(!isDefined(var_1.aggregateweaponkills[var_4]))
+      if(!isDefined(var_1.aggregateweaponkills[var_4])) {
         var_1 setplayerdata("cp", "DeadliestWeaponKills", var_4, var_10);
-      else
+      } else {
         var_1 setplayerdata("cp", "DeadliestWeaponKills", var_4, var_10);
+      }
 
       var_1 setplayerdata("cp", "DeadliestWeaponName", var_4);
     }
   } else {
     var_11 = var_1 getrankedplayerdata("cp", "killsPerWeapon", var_9);
 
-    if(!isDefined(var_1.aggregateweaponkills[var_9]))
+    if(!isDefined(var_1.aggregateweaponkills[var_9])) {
       var_1 setplayerdata("cp", "DeadliestWeaponKills", var_9, var_11);
-    else
+    } else {
       var_1 setplayerdata("cp", "DeadliestWeaponKills", var_9, var_1.aggregateweaponkills[var_9] + var_11);
+    }
 
     var_1 setplayerdata("cp", "DeadliestWeaponName", var_9);
   }
@@ -531,8 +553,9 @@ _id_13F5C() {
     log_explosive_kills(var_6, var_2);
 
     foreach(var_4 in var_0) {
-      if(isDefined(var_2.trapkills[var_4]))
+      if(isDefined(var_2.trapkills[var_4])) {
         var_2.total_trap_kills = var_2.total_trap_kills + var_2.trapkills[var_4];
+      }
     }
   }
 }
@@ -544,14 +567,17 @@ log_playershotsontarget(var_0, var_1, var_2) {
 }
 
 log_times_per_wave(var_0, var_1) {
-  if(!isDefined(var_1.pers["timesPerWave"]._id_11930))
+  if(!isDefined(var_1.pers["timesPerWave"]._id_11930)) {
     var_1.pers["timesPerWave"]._id_11930 = [];
+  }
 
-  if(!isDefined(var_1.pers["timesPerWave"]._id_11930[level.wave_num_at_start_of_game]))
+  if(!isDefined(var_1.pers["timesPerWave"]._id_11930[level.wave_num_at_start_of_game])) {
     var_1.pers["timesPerWave"]._id_11930[level.wave_num_at_start_of_game] = [];
+  }
 
-  if(!isDefined(var_1.pers["timesPerWave"]._id_11930[level.wave_num_at_start_of_game][var_0]))
+  if(!isDefined(var_1.pers["timesPerWave"]._id_11930[level.wave_num_at_start_of_game][var_0])) {
     var_1.pers["timesPerWave"]._id_11930[level.wave_num_at_start_of_game][var_0] = 0;
+  }
 
   var_1.pers["timesPerWave"]._id_11930[level.wave_num_at_start_of_game][var_0]++;
 }

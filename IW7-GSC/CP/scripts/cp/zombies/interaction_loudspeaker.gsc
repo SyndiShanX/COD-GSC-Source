@@ -29,8 +29,9 @@ init_loudspeaker_trap() {
   level.rave_dance_attract_zone.height = 175;
   level.rave_dance_attract_zone.origin = level.rave_dance_attract_zone.origin + (0, 0, -50);
 
-  foreach(var_5 in var_0)
-  var_5 thread _id_13611();
+  foreach(var_5 in var_0) {
+    var_5 thread _id_13611();
+  }
 
   wait 1;
   level.rave_dance_attract_sorter = scripts\engine\utility::getStruct("rave_dance_sorter", "targetname");
@@ -44,18 +45,20 @@ _id_13611() {
   for(;;) {
     var_1 = "power_on";
 
-    if(var_0)
+    if(var_0) {
       var_1 = level scripts\engine\utility::waittill_any_return_no_endon_death("power_on", self.power_area + " power_on", "power_off");
+    }
 
     if(var_1 == "power_off" && !scripts\engine\utility::is_true(self.powered_on)) {
       wait 0.25;
       continue;
     }
 
-    if(var_1 != "power_off")
+    if(var_1 != "power_off") {
       self.powered_on = 1;
-    else
+    } else {
       self.powered_on = 0;
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -142,8 +145,9 @@ _id_78B3(var_0) {
 }
 
 _id_E1E0() {
-  foreach(var_1 in level.rave_dance_spots)
-  var_1.occupied = 0;
+  foreach(var_1 in level.rave_dance_spots) {
+    var_1.occupied = 0;
+  }
 }
 
 _id_8401(var_0) {
@@ -173,8 +177,9 @@ release_zombie_on_trap_done() {
   self endon("death");
   level waittill("speaker_trap_done");
 
-  if(isDefined(self.og_goalradius))
+  if(isDefined(self.og_goalradius)) {
     self scragentsetgoalRadius(self.og_goalradius);
+  }
 
   self.og_goalradius = undefined;
   self.about_to_dance = 0;

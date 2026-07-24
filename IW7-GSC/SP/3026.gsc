@@ -97,13 +97,15 @@ _id_1105E(var_0) {
 }
 
 _id_1105F(var_0) {
-  foreach(var_2 in var_0)
-  var_2._blackboard._id_90EE = undefined;
+  foreach(var_2 in var_0) {
+    var_2._blackboard._id_90EE = undefined;
+  }
 }
 
 _id_1105D(var_0) {
-  foreach(var_2 in var_0)
-  var_2._blackboard._id_7002 = undefined;
+  foreach(var_2 in var_0) {
+    var_2._blackboard._id_7002 = undefined;
+  }
 }
 
 _id_F661(var_0, var_1) {
@@ -130,14 +132,16 @@ _id_F661(var_0, var_1) {
 
   var_10 = _id_1042E(var_2);
 
-  for(var_3 = 0; var_3 < var_0 && var_3 < var_1.size; var_3++)
+  for(var_3 = 0; var_3 < var_0 && var_3 < var_1.size; var_3++) {
     var_1[var_3]._blackboard._id_90EE = var_4;
+  }
 }
 
 _id_11ADF() {
   if(isDefined(self._blackboard._id_90EE) && isDefined(level._id_D127) && self._blackboard._id_90EE == level._id_D127) {
-    if(!scripts\engine\utility::array_contains(level._id_A056._id_90E3, self))
+    if(!scripts\engine\utility::array_contains(level._id_A056._id_90E3, self)) {
       level._id_A056._id_90E3 = scripts\engine\utility::array_add(level._id_A056._id_90E3, self);
+    }
   } else if(scripts\engine\utility::array_contains(level._id_A056._id_90E3, self)) {
     level._id_A056._id_90E3 = scripts\engine\utility::array_remove(level._id_A056._id_90E3, self);
     self._blackboard._id_90EC = "";
@@ -146,8 +150,9 @@ _id_11ADF() {
 
 _id_11AD9() {
   if(isDefined(self._blackboard._id_7002) && isDefined(level._id_D127) && self._blackboard._id_7002 == level._id_D127) {
-    if(!scripts\engine\utility::array_contains(level._id_A056._id_7001, self))
+    if(!scripts\engine\utility::array_contains(level._id_A056._id_7001, self)) {
       level._id_A056._id_7001 = scripts\engine\utility::array_add(level._id_A056._id_7001, self);
+    }
   } else if(scripts\engine\utility::array_contains(level._id_A056._id_7001, self))
     level._id_A056._id_7001 = scripts\engine\utility::array_remove(level._id_A056._id_7001, self);
 }
@@ -180,15 +185,17 @@ _id_F660(var_0, var_1) {
 
   var_12 = _id_1042E(var_2);
 
-  for(var_3 = 0; var_3 < var_0 && var_3 < var_1.size; var_3++)
+  for(var_3 = 0; var_3 < var_0 && var_3 < var_1.size; var_3++) {
     var_1[var_3]._blackboard._id_7002 = var_4;
+  }
 }
 
 _id_1042E(var_0) {
   var_1 = [];
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++)
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_1[var_1.size] = var_2;
+  }
 
   for(var_2 = 0; var_2 < var_1.size - 1; var_2++) {
     for(var_3 = var_2 + 1; var_3 < var_1.size; var_3++) {
@@ -222,35 +229,40 @@ _id_11ADE() {
     var_5 = gettime();
     var_6 = level._id_D127.spaceship_mode;
 
-    if(var_6 == "hover")
+    if(var_6 == "hover") {
       var_7 = 2000;
-    else
+    } else {
       var_7 = 300;
+    }
 
     if(var_6 != var_1) {
       var_1 = var_6;
       var_3 = var_5;
     }
 
-    if(var_2 != var_6 && var_5 - var_3 > var_7)
+    if(var_2 != var_6 && var_5 - var_3 > var_7) {
       var_2 = var_6;
+    }
 
-    if(level._id_D127.spaceship_boosting)
+    if(level._id_D127.spaceship_boosting) {
       var_8 = -1000;
-    else if(var_2 == "hover") {
+    } else if(var_2 == "hover") {
       var_8 = level._id_A48E._id_A3F5;
 
-      if(level._id_90E2._id_90E0 < 0.25)
+      if(level._id_90E2._id_90E0 < 0.25) {
         level._id_90E2._id_90E0 = 0.25;
+      }
     } else if(var_2 == "fly" && var_6 == "fly")
       var_8 = -4000;
-    else
+    else {
       var_8 = 0;
+    }
 
-    if(var_8 != 0)
+    if(var_8 != 0) {
       var_9 = var_0 * (1000 / var_8);
-    else
+    } else {
       var_9 = 0;
+    }
 
     level._id_90E2._id_90E0 = level._id_90E2._id_90E0 + var_9;
     level._id_90E2._id_90E0 = clamp(level._id_90E2._id_90E0, 0, 1);
@@ -261,60 +273,73 @@ _id_7E6E(var_0) {
   var_1 = int(level._id_A48E._id_A3F4 * level._id_90E2._id_1112E);
   var_0 = int(var_0 * level._id_90E2._id_90E0);
 
-  if(var_0 > var_1)
+  if(var_0 > var_1) {
     var_0 = var_1;
+  }
 
   return var_0;
 }
 
 _id_7E6C(var_0) {
-  if(scripts\sp\utility::_id_7B9D() < 0.4)
+  if(scripts\sp\utility::_id_7B9D() < 0.4) {
     return 0;
+  }
 
   return int(min(level._id_7000 * 10.0, var_0 * level._id_7000));
 }
 
 _id_100B5() {
-  if(level._id_7000 <= 0)
+  if(level._id_7000 <= 0) {
     return 0;
+  }
 
-  if(level._id_D127.ignoreme)
+  if(level._id_D127.ignoreme) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_100B6() {
-  if(level._id_90E2._id_1112E <= 0)
+  if(level._id_90E2._id_1112E <= 0) {
     return 0;
+  }
 
-  if(level._id_D127.ignoreme)
+  if(level._id_D127.ignoreme) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_10022() {
-  if(!self._blackboard._id_90EA)
+  if(!self._blackboard._id_90EA) {
     return 0;
+  }
 
-  if(self._blackboard._id_9DC2)
+  if(self._blackboard._id_9DC2) {
     return 0;
+  }
 
-  if(isDefined(self._blackboard._id_A9D1) && self._blackboard._id_A9D1 + 5000 < gettime())
+  if(isDefined(self._blackboard._id_A9D1) && self._blackboard._id_A9D1 + 5000 < gettime()) {
     return 0;
+  }
 
-  if(isDefined(self._blackboard._id_90EE) && self._blackboard._id_90EE != level._id_D127)
+  if(isDefined(self._blackboard._id_90EE) && self._blackboard._id_90EE != level._id_D127) {
     return 0;
+  }
 
-  if(!isenemyteam(level._id_D127.team, self.team))
+  if(!isenemyteam(level._id_D127.team, self.team)) {
     return 0;
+  }
 
-  if(!isDefined(self._id_9B4C) && self._id_9B4C)
+  if(!isDefined(self._id_9B4C) && self._id_9B4C) {
     return 0;
+  }
 
-  if(_id_0BDC::_id_9BCF())
+  if(_id_0BDC::_id_9BCF()) {
     return 0;
+  }
 
   return 1;
 }

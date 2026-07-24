@@ -31,8 +31,9 @@ _id_96D7() {
   if(!level.console) {
     level.player scripts\sp\utility::_id_65E0("script_allow_showviewmodel");
 
-    if(!is_jackal_only_mission())
+    if(!is_jackal_only_mission()) {
       thread handle_fov_viewmodel();
+    }
   }
 }
 
@@ -105,11 +106,13 @@ _id_D37B() {
     if(isDefined(self._id_10954)) {
       continue;
     }
-    if(scripts\engine\utility::getdamagetype(var_4) != "bullet")
+    if(scripts\engine\utility::getdamagetype(var_4) != "bullet") {
       var_6 = -32 * var_2 + self.origin;
+    }
 
-    if(isDefined(var_5) && getweaponbasename(var_5) == "iw7_sonic")
+    if(isDefined(var_5) && getweaponbasename(var_5) == "iw7_sonic") {
       _id_20B3();
+    }
   }
 }
 
@@ -125,8 +128,9 @@ _id_965A() {
   scripts\engine\utility::flag_init("missionfailed");
   level.players = getEntArray("player", "classname");
 
-  for(var_0 = 0; var_0 < level.players.size; var_0++)
+  for(var_0 = 0; var_0 < level.players.size; var_0++) {
     level.players[var_0].unique_id = "player" + var_0;
+  }
 
   level.player = level.players[0];
   level._id_5012 = 190;
@@ -171,8 +175,9 @@ _id_16BC(var_0) {
 }
 
 _id_4E0E() {
-  foreach(var_1 in self._id_4E0E)
-  thread[[var_1]]();
+  foreach(var_1 in self._id_4E0E) {
+    thread[[var_1]]();
+  }
 }
 
 _id_51E7() {}

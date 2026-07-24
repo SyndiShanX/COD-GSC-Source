@@ -24,8 +24,9 @@ _id_10BBD() {
 _id_B194() {
   _id_9684();
 
-  while(level.allies.size < 4)
+  while(level.allies.size < 4) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\sp\utility::_id_2669("breach_scene");
   level._id_2F8B = scripts\engine\utility::getStruct("scene_mons_breach", "targetname");
@@ -61,8 +62,9 @@ _id_B194() {
   level.player _meth_8562();
   scripts\engine\utility::flag_set("disable_autosaves");
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_2683();
+  }
 
   level notify("breach_started");
   scripts\engine\utility::flag_set("breach_started");
@@ -73,8 +75,9 @@ _id_B194() {
   level.player disableweaponpickup();
   var_5 = 0.45;
 
-  if(length(level.player getvelocity()) > 200)
+  if(length(level.player getvelocity()) > 200) {
     var_5 = 0.25;
+  }
 
   level.player setvelocity((0, 0, 0));
   level.player _meth_823C(level.player._id_E505, "tag_player", var_5, var_5 * 0.5, 0);
@@ -125,15 +128,17 @@ _id_B194() {
   scripts\sp\utility::_id_10322();
   level.player scripts\sp\utility::_id_D2CA(0.05);
 
-  while(isDefined(level._id_2F7E))
+  while(isDefined(level._id_2F7E)) {
     scripts\engine\utility::waitframe();
+  }
 
   if(level._id_2F8E.size == 0) {
     var_10 = getaiarray("axis");
 
     foreach(var_12 in var_10) {
-      if(isDefined(var_12._id_B14F))
+      if(isDefined(var_12._id_B14F)) {
         var_12 scripts\sp\utility::_id_1101B();
+      }
 
       var_12 scripts\sp\utility::_id_54C6();
     }
@@ -212,16 +217,18 @@ _id_F162() {
   thread _id_F134();
   scripts\sp\utility::_id_9196(1, 0, 1);
 
-  if(!isDefined(level._id_F15E))
+  if(!isDefined(level._id_F15E)) {
     level._id_F15E = 0;
-  else
+  } else {
     level._id_F15E = level._id_F15E + randomfloatrange(0.15, 0.25);
+  }
 
   scripts\engine\utility::delaythread(level._id_F15E, scripts\engine\utility::play_loop_sound_on_entity, "seeker_target_acquire_lp");
   var_0 = 0.25;
 
-  if(self.script_index == 3)
+  if(self.script_index == 3) {
     var_0 = var_0 + 0.15;
+  }
 
   scripts\engine\utility::delaythread(var_0, scripts\sp\vehicle_paths::_id_845A);
   playFXOnTag(level._id_7649["seeker_axis"], self, "tag_fx");
@@ -247,8 +254,9 @@ _id_F132() {
   self clearanim(%equip_seeker_walk_forward, 0.05);
   self _meth_82A2(%equip_seeker_traverse_jumpup);
 
-  while(distance(self.origin, level.player.origin) > 135)
+  while(distance(self.origin, level.player.origin) > 135) {
     wait 0.05;
+  }
 
   self clearanim(%equip_seeker_traverse_jumpup, 0.05);
   self _meth_82A2(%equip_seeker_traverse_jumpdown, 1, 0.25);
@@ -282,15 +290,17 @@ _id_F12E() {
     var_7 = var_6 / var_3;
     var_8 = var_4 * var_7;
 
-    if(var_8 > var_4)
+    if(var_8 > var_4) {
       var_8 = var_4;
-    else if(var_8 < var_5)
+    } else if(var_8 < var_5) {
       var_8 = var_5;
+    }
 
     var_9 = self.health - var_8;
 
-    if(var_9 <= 0)
+    if(var_9 <= 0) {
       self notify("death");
+    }
 
     self.health = var_9;
   }
@@ -369,18 +379,21 @@ _id_F12F() {
 _id_F134() {
   self endon("death");
 
-  while(level._id_2F8E.size != 1)
+  while(level._id_2F8E.size != 1) {
     wait 0.05;
+  }
 
-  while(distance(level.player.origin, self.origin) > 150)
+  while(distance(level.player.origin, self.origin) > 150) {
     wait 0.05;
+  }
 
   level notify("seeker_breach_player_grabbed");
   self vehicle_setspeedimmediate(25, 25);
 
   foreach(var_1 in getaiarray("axis")) {
-    if(!isDefined(var_1._id_B14F))
+    if(!isDefined(var_1._id_B14F)) {
       var_1 scripts\sp\utility::_id_B14F();
+    }
   }
 
   self._id_5957 = 1;
@@ -402,8 +415,9 @@ _id_F128() {
   var_1 = getaiarray("axis");
 
   foreach(var_3 in var_1) {
-    if(isDefined(var_3._id_B14F))
+    if(isDefined(var_3._id_B14F)) {
       var_3 scripts\sp\utility::_id_1101B();
+    }
 
     radiusdamage(var_3.origin, 75, 9999, 9999, undefined, "MOD_EXPLOSIVE");
   }
@@ -423,8 +437,9 @@ _id_2F56() {
     var_2 = level.player.origin + (0, 0, 56);
     var_3 = anglestoright(level.player.angles);
 
-    if(scripts\engine\utility::cointoss())
+    if(scripts\engine\utility::cointoss()) {
       var_3 = var_3 * -1;
+    }
 
     var_2 = var_2 + var_3 * randomintrange(10, 30);
     bullettracer(var_2, var_0.origin, var_1.weapon, 1);
@@ -438,12 +453,13 @@ _id_1C20() {
   var_1 = 2;
   var_2 = [];
 
-  foreach(var_4 in level.allies)
-  var_2 = scripts\engine\utility::add_to_array(var_2, var_4.weapon);
+  foreach(var_4 in level.allies) {
+    var_2 = scripts\engine\utility::add_to_array(var_2, var_4.weapon);
+  }
 
   var_6 = [];
-  var_6[0] = scripts\engine\utility::getStruct("breach_struct_01", "targetname");
-  var_6[1] = scripts\engine\utility::getStruct("breach_struct_02", "targetname");
+  var_6[0] = ::scripts\engine\utility::getStruct("breach_struct_01", "targetname");
+  var_6[1] = ::scripts\engine\utility::getStruct("breach_struct_02", "targetname");
   wait 2;
   thread _id_6A44(var_2, var_6);
   wait 0.5;
@@ -451,8 +467,9 @@ _id_1C20() {
   while(level._id_6B02.size + level._id_2F8E.size > var_1) {
     var_7 = _id_77E2(level._id_6B02);
 
-    if(!isDefined(var_7))
+    if(!isDefined(var_7)) {
       var_7 = _id_77E2(level._id_2F8E);
+    }
 
     var_8 = scripts\engine\utility::random(var_2);
     var_9 = scripts\engine\utility::random(var_6);
@@ -488,8 +505,9 @@ _id_D10D(var_0) {
   var_5 = distance(var_2, var_3);
   var_6 = var_2 + var_4 * var_5;
 
-  if(distancesquared(var_3, var_6) < var_1)
+  if(distancesquared(var_3, var_6) < var_1) {
     return 1;
+  }
 
   return 0;
 }
@@ -526,8 +544,9 @@ _id_F97B() {
   scripts\sp\utility::_id_9187("default_seeker", 1);
   var_0 = scripts\engine\utility::getStructArray("fake_seeker_spawn", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_106F2();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_106F2();
+  }
 
   wait 1;
   var_4 = 1;
@@ -580,10 +599,11 @@ _id_F13D(var_0) {
     var_6 = var_5 - var_2;
     var_7 = vectorNormalize(var_6);
 
-    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "use_fall_height")
+    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "use_fall_height") {
       var_8 = var_3.origin[2] - var_5[2];
-    else
+    } else {
       var_8 = var_3.origin[2] - var_2[2];
+    }
 
     var_9 = self.angles;
     var_10 = var_4.angles - self.angles;
@@ -669,14 +689,16 @@ _id_1CD0(var_0, var_1) {
   self _meth_8250(0);
 
   if(isalive(level.player)) {
-    if(!isDefined(var_1) || !var_1)
+    if(!isDefined(var_1) || !var_1) {
       var_0 scripts\sp\anim::_id_1F35(self, "breach_entry");
+    }
 
     scripts\engine\utility::waitframe();
     var_2 = "stop_loop";
 
-    if(self == level._id_6754)
+    if(self == level._id_6754) {
       var_2 = "ethan_stop_loop";
+    }
 
     var_0 thread scripts\sp\anim::_id_1EEA(self, "postbreach_idle", var_2);
 
@@ -722,8 +744,9 @@ _id_CF4F() {
 
   while(var_0) {
     if(!isalive(level.player)) {
-      foreach(var_2 in level.allies)
-      var_2 _meth_83A1();
+      foreach(var_2 in level.allies) {
+        var_2 _meth_83A1();
+      }
 
       var_0 = 0;
     }
@@ -743,8 +766,9 @@ _id_F119() {
   while(var_0) {
     var_1 = getaicount("axis", "all");
 
-    if(var_1 <= 5)
+    if(var_1 <= 5) {
       var_0 = 0;
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -953,14 +977,17 @@ _id_5412() {
   thread _id_2F60();
   level._id_6754 scripts\sp\utility::_id_10346("heist_eth_bridgeisontheot");
 
-  if(!scripts\engine\utility::flag("breach_started"))
+  if(!scripts\engine\utility::flag("breach_started")) {
     level.player scripts\sp\utility::_id_1034D("heist_plr_wellhavetobreac");
+  }
 
-  if(!scripts\engine\utility::flag("breach_started"))
+  if(!scripts\engine\utility::flag("breach_started")) {
     level._id_6754 scripts\sp\utility::_id_10346("heist_eth_gotasoftpointri");
+  }
 
-  if(!scripts\engine\utility::flag("breach_started"))
+  if(!scripts\engine\utility::flag("breach_started")) {
     level.player thread scripts\sp\utility::_id_1034D("heist_plr_copyiseeit");
+  }
 
   thread _id_2F7A();
   scripts\engine\utility::flag_wait("breach_started");

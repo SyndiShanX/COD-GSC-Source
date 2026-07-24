@@ -29,8 +29,9 @@ give_crafted_portal(var_0, var_1) {
   scripts\cp\utility::set_crafted_inventory_item("crafted_portal", ::give_crafted_portal, var_1);
 
   if(isDefined(var_1.placed_portals) && var_1.placed_portals.size == 2) {
-    foreach(var_3 in var_1.placed_portals)
-    var_3 notify("death");
+    foreach(var_3 in var_1.placed_portals) {
+      var_3 notify("death");
+    }
   }
 }
 
@@ -69,18 +70,20 @@ give_portal(var_0, var_1, var_2) {
   removeperks();
   self.carriedsentry = var_3;
 
-  if(var_0)
+  if(var_0) {
     var_3.firstplacement = 1;
+  }
 
   var_4 = setcarryingportal(var_3, var_0, var_1);
   self.carriedsentry = undefined;
   thread waitrestoreperks();
   self.iscarrying = 0;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 setcarryingportal(var_0, var_1, var_2) {
@@ -105,8 +108,9 @@ setcarryingportal(var_0, var_1, var_2) {
       return 1;
     }
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       var_3 = "force_cancel_placement";
+    }
 
     if(var_3 == "cancel_portal" || var_3 == "force_cancel_placement") {
       if(!var_1 && var_3 == "cancel_portal") {
@@ -115,10 +119,11 @@ setcarryingportal(var_0, var_1, var_2) {
       scripts\engine\utility::allow_weapon(1);
       var_0 portal_setcancelled();
 
-      if(var_3 != "force_cancel_placement")
+      if(var_3 != "force_cancel_placement") {
         thread watch_dpad();
-      else if(var_1)
+      } else if(var_1) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
+      }
 
       return 0;
     }
@@ -126,8 +131,9 @@ setcarryingportal(var_0, var_1, var_2) {
     if(!var_0.canbeplaced) {
       continue;
     }
-    if(var_1)
+    if(var_1) {
       scripts\cp\utility::remove_crafted_item_from_inventory(self);
+    }
 
     var_0 portal_setplaced(var_2, self);
     scripts\engine\utility::allow_weapon(1);
@@ -170,10 +176,11 @@ createportalforplayer(var_0, var_1) {
   var_2 makeunusable();
   var_2 setsentryowner(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_2._id_130D2 = 1;
-  else
+  } else {
     var_2._id_130D2 = var_1;
+  }
 
   var_2 portal_initportal(var_0);
   return var_2;
@@ -194,8 +201,9 @@ portal_handledeath(var_0) {
   var_0.placed_portals = scripts\engine\utility::array_remove(var_0.placed_portals, self);
   scripts\cp\utility::removefromtraplist();
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 portal_setplaced(var_0, var_1) {
@@ -205,8 +213,9 @@ portal_setplaced(var_0, var_1) {
   if(isDefined(level.secretpapstructs) && level.secretpapstructs.size > 0 && !isDefined(level.portal_opened)) {
     var_3 = scripts\engine\utility::getclosest(self.origin, level.secretpapstructs);
 
-    if(distance(var_3.origin, self.origin) <= 128)
+    if(distance(var_3.origin, self.origin) <= 128) {
       var_2.papredirect = 1;
+    }
   }
 
   var_2 solid();
@@ -224,8 +233,9 @@ portal_setplaced(var_0, var_1) {
   self delete();
   var_2 hudoutlineenableforclient(var_1, 2, 0, 1, 0);
 
-  if(!isDefined(var_1.placed_portals))
+  if(!isDefined(var_1.placed_portals)) {
     var_1.placed_portals = [];
+  }
 
   var_1.placed_portals[var_1.placed_portals.size] = var_2;
 
@@ -235,15 +245,17 @@ portal_setplaced(var_0, var_1) {
     scripts\cp\utility::set_crafted_inventory_item("crafted_portal", ::give_crafted_portal, var_1);
   }
 
-  if(var_1.placed_portals.size == 3)
+  if(var_1.placed_portals.size == 3) {
     var_1.placed_portals[var_1.placed_portals.size - 1] notify("death");
+  }
 }
 
 portal_setcancelled() {
   self.carriedby forceusehintoff();
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.iscarrying = 0;
+  }
 
   self.carriedportal delete();
   self delete();
@@ -279,9 +291,9 @@ portal_setactive(var_0) {
   scripts\cp\utility::addtotraplist();
   wait 1;
 
-  if(!scripts\engine\utility::is_true(self.papredirect))
+  if(!scripts\engine\utility::is_true(self.papredirect)) {
     self setscriptablepartstate("portal", "on");
-  else {
+  } else {
     iprintlnbold("PAP PORTAL ACTIVE");
     self.owner notify("craft_dpad_watcher");
     self.owner setclientomnvar("zom_crafted_weapon", 0);
@@ -289,8 +301,9 @@ portal_setactive(var_0) {
     level.portal_opened = 1;
     activate_pap_portals(self.origin);
 
-    foreach(var_2 in self.owner.placed_portals)
-    var_2 notify("death");
+    foreach(var_2 in self.owner.placed_portals) {
+      var_2 notify("death");
+    }
   }
 }
 
@@ -335,8 +348,9 @@ portal_wait_for_player() {
 
   for(;;) {
     if(scripts\engine\utility::is_true(self.owner.teleporting)) {
-      while(distancesquared(self.owner.origin, self.origin) < 576)
+      while(distancesquared(self.owner.origin, self.origin) < 576) {
         wait 0.1;
+      }
 
       self.owner.teleporting = undefined;
     }
@@ -355,9 +369,9 @@ teleport_owner(var_0) {
   var_1 = self.placed_portals;
 
   foreach(var_3 in self.placed_portals) {
-    if(var_3 == var_0)
+    if(var_3 == var_0) {
       continue;
-    else {
+    } else {
       self playlocalsound("zmb_portal_travel_lr");
       scripts\cp\zombies\zombie_afterlife_arcade::add_white_screen();
       thread scripts\cp\zombies\zombie_afterlife_arcade::remove_white_screen(0.5);

@@ -45,8 +45,9 @@ _id_FA78(var_0, var_1, var_2) {
     var_14 = [];
 
     foreach(var_11 in var_6) {
-      if(isDefined(var_11._id_EEC9))
+      if(isDefined(var_11._id_EEC9)) {
         var_14[var_14.size] = var_11;
+      }
     }
 
     if(var_14.size == var_6.size) {
@@ -77,18 +78,20 @@ _id_FA78(var_0, var_1, var_2) {
 
   var_3 = scripts\engine\utility::array_combine(var_3, var_7);
 
-  foreach(var_22 in var_3)
-  var_22 linkTo(var_4, "TAG_SEAT_LEFT_01");
+  foreach(var_22 in var_3) {
+    var_22 linkTo(var_4, "TAG_SEAT_LEFT_01");
+  }
 
   var_4 thread scripts\sp\anim::_id_1EE7(var_3, "infil_loop", "stop_infil_loop", "TAG_SEAT_LEFT_01");
   level.player _meth_823B(var_5, "tag_player");
   scripts\engine\utility::waitframe();
   level.player playerlinktodelta(var_5, "tag_player", 0.5, 90, 90, 30, 30, 1);
 
-  if(!isDefined(level._id_12BCE))
+  if(!isDefined(level._id_12BCE)) {
     var_4 thread _id_12BCD(var_3, var_5, var_6);
-  else
+  } else {
     var_4 thread[[level._id_12BCE]](var_3, var_5, var_6);
+  }
 
   return var_4;
 }
@@ -168,6 +171,7 @@ _id_DC49(var_0) {
 _id_C5ED(var_0) {
   var_0._id_12BEF _id_0BBC::_id_C5F1(["right"]);
 
-  if(isDefined(var_0._id_12BEF._id_4D94._id_5A27._id_4348))
+  if(isDefined(var_0._id_12BEF._id_4D94._id_5A27._id_4348)) {
     var_0._id_12BEF._id_4D94._id_5A27._id_4348 thread _id_0F00::_id_5DBA();
+  }
 }

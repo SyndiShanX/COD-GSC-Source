@@ -120,8 +120,9 @@ trydodamage(var_0, var_1, var_2, var_3) {
   var_4 = physics_raycast(self.origin, var_1, var_3, self, 0, "physicsquery_closest");
   var_5 = !(isDefined(var_4) && var_4.size > 0);
 
-  if(var_5)
+  if(var_5) {
     var_0 dodamage(var_2, self.origin, self.owner, self, "MOD_EXPLOSIVE", "iw7_blackholegun_mp");
+  }
 }
 
 watchforincidentalplayerdamage(var_0) {
@@ -222,8 +223,9 @@ spawnblackholephysicsvolume(var_0) {
     }
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 
   level.bhgunphysicsvolumes[var_3] = var_1;
   var_1 thread blackholephysicsvolumeactivate();
@@ -243,14 +245,17 @@ cleanuptrigger(var_0) {
 }
 
 cleanupsingularity(var_0, var_1, var_2) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 delete();
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 
   self setscriptablepartstate("singularity", "off", 0);
   self delete();
@@ -262,8 +267,9 @@ projectiledisconnectwatcher(var_0, var_1) {
   var_0 waittill("disconnect");
   cleanupprojectile();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 delete();
+  }
 
   self delete();
 }

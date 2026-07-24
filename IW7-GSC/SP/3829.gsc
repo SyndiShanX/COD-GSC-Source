@@ -4,8 +4,9 @@
 **************************************/
 
 _id_FDF4(var_0) {
-  if(!isDefined(level._id_FD6E._id_ECDC))
+  if(!isDefined(level._id_FD6E._id_ECDC)) {
     level._id_FD6E._id_ECDC = [];
+  }
 
   switch (var_0) {
     case "shipcrib_moon":
@@ -27,27 +28,31 @@ _id_FDF4(var_0) {
   level._id_FD6E._id_ECDC = scripts\engine\utility::array_combine(level._id_FD6E._id_ECDC, var_1);
   level._id_FD6E._id_ECDC = scripts\engine\utility::array_remove_duplicates(level._id_FD6E._id_ECDC);
 
-  foreach(var_3 in level._id_FD6E._id_ECDC)
-  precachemodel(var_3);
+  foreach(var_3 in level._id_FD6E._id_ECDC) {
+    precachemodel(var_3);
+  }
 }
 
 _id_FDF3(var_0) {
   scripts\engine\utility::flag_init("shipcrib_screens_initialized");
   level _id_0EFB::_id_FE05();
 
-  if(!isDefined(level._id_FD6E._id_ECCE))
+  if(!isDefined(level._id_FD6E._id_ECCE)) {
     level._id_FD6E._id_ECCE = [];
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = level.script;
+  }
 
   level _id_FDF4(var_0);
   level _id_FDF4("undefined");
   var_1 = scripts\engine\utility::getStructArray("opsmap", "script_noteworthy");
 
   foreach(var_3 in var_1) {
-    if(!isDefined(var_3._id_EE52) || var_3._id_EE52 != "shipcrib_screen")
+    if(!isDefined(var_3._id_EE52) || var_3._id_EE52 != "shipcrib_screen") {
       var_1 = scripts\engine\utility::array_remove(var_1, var_3);
+    }
   }
 
   var_5 = scripts\engine\utility::getStructArray("shipcrib_screen", "script_noteworthy");
@@ -72,11 +77,13 @@ _id_FDF3(var_0) {
 
     switch (var_3.ent.model) {
       case "bridge_screen_admiral":
-        if(var_3.script_parameters == "admiral_main")
+        if(var_3.script_parameters == "admiral_main") {
           level._id_FD6E._id_ECCE["admiral_monitor"] = var_3;
+        }
 
-        if(var_3.script_parameters == "admiral_captains")
+        if(var_3.script_parameters == "admiral_captains") {
           level._id_FD6E._id_ECCE["admiral_monitor_captains"] = var_3;
+        }
 
         var_3._id_ECD6 = 1;
         var_3.ent _id_FDF0();
@@ -106,12 +113,14 @@ _id_FDF1(var_0, var_1) {
   }
 
   if(isDefined(var_0.script_parameters)) {
-    if(var_0.script_parameters == "opsmap")
+    if(var_0.script_parameters == "opsmap") {
       var_0.script_modelname = "bridge_screen_opsmap_08";
+    }
   }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level.script;
+  }
 
   switch (var_1) {
     case "shipcrib_moon":
@@ -129,8 +138,9 @@ _id_FDF1(var_0, var_1) {
       break;
   }
 
-  if(!isDefined(scripts\engine\utility::array_find(level._id_FD6E._id_ECDC, var_2)))
+  if(!isDefined(scripts\engine\utility::array_find(level._id_FD6E._id_ECDC, var_2))) {
     var_2 = var_0.script_modelname;
+  }
 
   return var_2;
 }
@@ -174,23 +184,26 @@ _id_FDF8() {
         var_2 = 8;
 
         for(;;) {
-          if(self._id_ECD0.size > 0)
+          if(self._id_ECD0.size > 0) {
             _id_FDEA();
+          }
 
           var_3 = 0;
 
-          if(self._id_ECD8.size > 0)
+          if(self._id_ECD8.size > 0) {
             var_3 = randomint(self._id_ECD8.size);
-          else {}
+          } else {}
 
           var_4 = _id_FDEF(4);
 
           if(!scripts\engine\utility::array_contains(var_4, var_3) || var_1 == var_2) {
-            if(var_1 == var_2)
+            if(var_1 == var_2) {
               debug_print3d(self.origin, var_1, (1, 0, 0), 1, 0.25, 200);
+            }
 
-            if(isDefined(self._id_ECD1))
+            if(isDefined(self._id_ECD1)) {
               childthread _id_FDEB(var_3);
+            }
 
             self._id_ECBF = var_3;
 
@@ -284,8 +297,9 @@ _id_FDF6(var_0, var_1, var_2) {
   self endon("screen_stop_thinking");
   level endon("screens_stop_thinking");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0.5;
+  }
 
   var_3 = 0;
   var_4 = 0;
@@ -341,8 +355,9 @@ _id_FDF6(var_0, var_1, var_2) {
     if(isDefined(var_6._id_ECD6)) {
       continue;
     }
-    if(isDefined(var_6.ent._id_13D1A))
+    if(isDefined(var_6.ent._id_13D1A)) {
       var_6.ent._id_13D1A delete();
+    }
 
     if(isDefined(var_2) && isDefined(var_6.script_parameters) && var_6.script_parameters == var_2) {
       if(!isDefined(scripts\engine\utility::array_find(level._id_FD6E._id_ECDC, var_6.script_modelname + var_0))) {
@@ -353,9 +368,9 @@ _id_FDF6(var_0, var_1, var_2) {
       var_6.ent notify("stop_children");
       var_6.ent._id_ECD1 = undefined;
 
-      if(var_4)
+      if(var_4) {
         var_6.ent setModel(var_6.script_modelname + var_0);
-      else if(var_0 == "_red" && scripts\engine\utility::cointoss() && isDefined(scripts\engine\utility::array_find(level._id_FD6E._id_ECDC, var_6.script_modelname + "_red_widgets"))) {
+      } else if(var_0 == "_red" && scripts\engine\utility::cointoss() && isDefined(scripts\engine\utility::array_find(level._id_FD6E._id_ECDC, var_6.script_modelname + "_red_widgets"))) {
         var_6.ent._id_13D1A = spawn("script_model", var_6.ent.origin);
         var_6.ent._id_13D1A.angles = var_6.ent.angles;
         var_6.ent._id_13D1A setModel(var_6.script_modelname + "_red_widgets");
@@ -372,8 +387,9 @@ _id_FDF6(var_0, var_1, var_2) {
         var_6.ent setModel(var_6.ent.model + var_0);
       } else if(issubstr(var_6.ent.model, "_red_lp"))
         var_6.ent setModel(var_6.script_modelname + "_red");
-      else
+      else {
         var_6.ent setModel(var_6.script_modelname + var_0);
+      }
 
       if(var_6.ent._id_ECD8.size <= 1) {
         continue;
@@ -381,15 +397,18 @@ _id_FDF6(var_0, var_1, var_2) {
       var_6.ent _id_FDF2();
       var_6.ent _meth_8184();
 
-      if(isDefined(var_6.ent._id_13D1A))
+      if(isDefined(var_6.ent._id_13D1A)) {
         var_6.ent._id_13D1A thread _id_FDF9();
+      }
 
       if(var_3 && randomint(3) > 0) {
-        if(var_6.ent._id_ECD8.size > 1)
+        if(var_6.ent._id_ECD8.size > 1) {
           var_6.ent showpart(var_6.ent._id_ECD8[randomint(var_6.ent._id_ECD8.size)]);
+        }
       } else if(!var_3) {
-        if(var_6.ent._id_ECD8.size > 1)
+        if(var_6.ent._id_ECD8.size > 1) {
           var_6.ent showpart(var_6.ent._id_ECD8[randomint(var_6.ent._id_ECD8.size)]);
+        }
       }
 
       wait(randomfloatrange(0, var_1));
@@ -405,9 +424,9 @@ _id_FDF6(var_0, var_1, var_2) {
       var_6.ent notify("stop_children");
       var_6.ent._id_ECD1 = undefined;
 
-      if(var_4)
+      if(var_4) {
         var_6.ent setModel(var_6.script_modelname + var_0);
-      else if(var_0 == "_red" && scripts\engine\utility::cointoss() && isDefined(scripts\engine\utility::array_find(level._id_FD6E._id_ECDC, var_6.script_modelname + "_red_widgets"))) {
+      } else if(var_0 == "_red" && scripts\engine\utility::cointoss() && isDefined(scripts\engine\utility::array_find(level._id_FD6E._id_ECDC, var_6.script_modelname + "_red_widgets"))) {
         var_6.ent._id_13D1A = spawn("script_model", var_6.ent.origin);
         var_6.ent._id_13D1A.angles = var_6.ent.angles;
         var_6.ent._id_13D1A setModel(var_6.script_modelname + "_red_widgets");
@@ -424,8 +443,9 @@ _id_FDF6(var_0, var_1, var_2) {
         var_6.ent setModel(var_6.ent.model + var_0);
       } else if(issubstr(var_6.ent.model, "_red_lp"))
         var_6.ent setModel(var_6.script_modelname + "_red");
-      else
+      else {
         var_6.ent setModel(var_6.script_modelname + var_0);
+      }
 
       if(getnumparts(var_6.ent.model) <= 1) {
         continue;
@@ -433,15 +453,17 @@ _id_FDF6(var_0, var_1, var_2) {
       var_6.ent _id_FDF2();
       var_6.ent _meth_8184();
 
-      if(isDefined(var_6.ent._id_13D1A))
+      if(isDefined(var_6.ent._id_13D1A)) {
         var_6.ent._id_13D1A thread _id_FDF9(var_6.ent);
+      }
 
-      if(var_6.ent._id_ECD8.size > 1)
+      if(var_6.ent._id_ECD8.size > 1) {
         var_6.ent showpart(var_6.ent._id_ECD8[randomint(var_6.ent._id_ECD8.size)]);
-      else if(var_6.ent._id_ECD0.size > 1)
+      } else if(var_6.ent._id_ECD0.size > 1) {
         var_6.ent showpart(var_6.ent._id_ECD0[randomint(var_6.ent._id_ECD0.size)]);
-      else if(var_6.ent._id_ECD7.size > 1)
+      } else if(var_6.ent._id_ECD7.size > 1) {
         var_6.ent showpart(var_6.ent._id_ECD7[randomint(var_6.ent._id_ECD7.size)]);
+      }
 
       wait(randomfloatrange(0, var_1));
       continue;
@@ -458,14 +480,17 @@ _id_FDF9(var_0) {
   self _meth_8184();
   var_1 = [];
 
-  if(self._id_ECD8.size > 0)
+  if(self._id_ECD8.size > 0) {
     var_1[var_1.size] = "flip";
+  }
 
-  if(self._id_ECD0.size > 0)
+  if(self._id_ECD0.size > 0) {
     var_1[var_1.size] = "anim";
+  }
 
-  if(self._id_ECD7.size > 0)
+  if(self._id_ECD7.size > 0) {
     var_1[var_1.size] = "flash";
+  }
 
   if(var_1.size < 1) {
     return;
@@ -500,8 +525,9 @@ _id_FDF9(var_0) {
           wait(randomfloatrange(0.075, 0.2));
           self hidepart(var_4);
 
-          if(var_6)
+          if(var_6) {
             var_0 hidepart(var_0._id_ECD8[var_5]);
+          }
         }
       }
 
@@ -558,14 +584,16 @@ _id_FDF2() {
       var_5 = getsubstr(var_4, 8, var_4.size);
 
       if(scripts\engine\utility::array_contains(self._id_ECD8, var_5)) {
-        if(!isDefined(self._id_ECD1))
+        if(!isDefined(self._id_ECD1)) {
           self._id_ECD1 = [];
+        }
 
-        if(!isDefined(self._id_ECD1[var_5]))
+        if(!isDefined(self._id_ECD1[var_5])) {
           self._id_ECD1[var_5] = [];
+        }
 
         self._id_ECD0 = scripts\engine\utility::array_remove(self._id_ECD0, var_4);
-        self._id_ECD1[var_5] = scripts\engine\utility::array_add(self._id_ECD1[var_5], var_4);
+        self._id_ECD1[var_5] = ::scripts\engine\utility::array_add(self._id_ECD1[var_5], var_4);
       }
     }
   }
@@ -604,8 +632,9 @@ _id_FDEF(var_0) {
   self endon("screen_stop_thinking");
   level endon("screens_stop_thinking");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 4;
+  }
 
   if(!isDefined(self._id_ECD4)) {
     var_1 = scripts\engine\utility::get_array_of_closest(self.origin, level._id_FD6E._id_ECCE);
@@ -613,18 +642,21 @@ _id_FDEF(var_0) {
     foreach(var_3 in var_1) {
       var_4 = getsubstr(var_3.script_modelname, 0, 20);
 
-      if(getsubstr(self.model, 0, 20) != var_4)
+      if(getsubstr(self.model, 0, 20) != var_4) {
         var_1 = scripts\engine\utility::array_remove(var_1, var_3);
+      }
 
-      if(self.origin == var_3.origin)
+      if(self.origin == var_3.origin) {
         var_1 = scripts\engine\utility::array_remove(var_1, var_3);
+      }
     }
 
     if(var_1.size > var_0) {
       self._id_ECD4 = [];
 
-      for(var_6 = 0; var_6 < var_0; var_6++)
+      for(var_6 = 0; var_6 < var_0; var_6++) {
         self._id_ECD4[var_6] = var_1[var_6];
+      }
     } else
       self._id_ECD4 = var_1;
   }
@@ -632,8 +664,9 @@ _id_FDEF(var_0) {
   var_7 = [];
 
   for(var_6 = 0; var_6 < self._id_ECD4.size; var_6++) {
-    if(isDefined(self._id_ECD4[var_6].ent._id_ECBF))
+    if(isDefined(self._id_ECD4[var_6].ent._id_ECBF)) {
       var_7[var_6] = self._id_ECD4[var_6].ent._id_ECBF;
+    }
   }
 
   return var_7;
@@ -646,14 +679,16 @@ _id_FDEE(var_0) {
   level endon("screens_stop_thinking");
 
   foreach(var_2 in var_0) {
-    if(self.origin == var_2.ent.origin)
+    if(self.origin == var_2.ent.origin) {
       return var_2.ent;
+    }
   }
 }
 
 debug_print3d(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(getdvarint("shipcrib_screens_debug") == 1)
+  if(getdvarint("shipcrib_screens_debug") == 1) {
     return;
+  }
 }
 
 _id_FDF5() {

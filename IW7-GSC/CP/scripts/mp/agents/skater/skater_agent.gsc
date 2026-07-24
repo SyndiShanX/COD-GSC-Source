@@ -14,20 +14,22 @@ registerscriptedagent() {
 _id_FAB0() {
   level endon("game_ended");
 
-  if(!isDefined(level.agent_definition))
+  if(!isDefined(level.agent_definition)) {
     level waittill("scripted_agents_initialized");
+  }
 
-  level.agent_funcs["skater"]["on_damaged"] = scripts\cp\maps\cp_disco\cp_disco_damage::cp_disco_onzombiedamaged;
-  level.agent_funcs["skater"]["gametype_on_damage_finished"] = scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
-  level.agent_funcs["skater"]["gametype_on_killed"] = scripts\cp\agents\gametype_zombie::onzombiekilled;
-  level.movemodefunc["skater"] = scripts\cp\agents\gametype_zombie::run_if_last_zombie;
+  level.agent_funcs["skater"]["on_damaged"] = ::scripts\cp\maps\cp_disco\cp_disco_damage::cp_disco_onzombiedamaged;
+  level.agent_funcs["skater"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+  level.agent_funcs["skater"]["gametype_on_killed"] = ::scripts\cp\agents\gametype_zombie::onzombiekilled;
+  level.movemodefunc["skater"] = ::scripts\cp\agents\gametype_zombie::run_if_last_zombie;
   level.agent_definition["skater"]["setup_func"] = ::setupagent;
   level.agent_definition["skater"]["setup_model_func"] = ::_id_FACE;
-  level.agent_funcs["skater"]["on_damaged_finished"] = scripts\mp\agents\zombie\zombie_agent::onzombiedamagefinished;
-  level.agent_funcs["skater"]["on_killed"] = scripts\mp\agents\zombie\zombie_agent::onzombiekilled;
+  level.agent_funcs["skater"]["on_damaged_finished"] = ::scripts\mp\agents\zombie\zombie_agent::onzombiedamagefinished;
+  level.agent_funcs["skater"]["on_killed"] = ::scripts\mp\agents\zombie\zombie_agent::onzombiekilled;
 
-  if(!isDefined(level._id_8CBD))
+  if(!isDefined(level._id_8CBD)) {
     level._id_8CBD = [];
+  }
 
   level._id_8CBD["skater"] = ::_id_3725;
 }
@@ -39,8 +41,9 @@ setupagent() {
   self.nocorpse = 1;
   self.allowpain = 0;
 
-  if(isDefined(level.suicider_avoidance_radius))
+  if(isDefined(level.suicider_avoidance_radius)) {
     self setavoidanceradius(level.suicider_avoidance_radius);
+  }
 
   thread _id_899C();
 }

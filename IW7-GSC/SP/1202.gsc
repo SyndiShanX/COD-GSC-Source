@@ -12,8 +12,9 @@ main() {
   self.voice = "unitednations";
   self _meth_82C6("c12servo");
 
-  if(issentient(self))
+  if(issentient(self)) {
     self sethitlocdamagetable("locdmgtable/ai_lochit_dmgtable");
+  }
 
   if(issentient(self)) {
     self _meth_849A();

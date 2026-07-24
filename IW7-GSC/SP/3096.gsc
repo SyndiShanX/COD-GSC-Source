@@ -4,13 +4,15 @@
 **************************************/
 
 _id_1EDC() {
-  if(!isDefined(self.anims))
+  if(!isDefined(self.anims)) {
     self.anims = spawnStruct();
+  }
 }
 
 _id_A3B2(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = self.spaceship_mode;
+  }
 
   self.anims.state = var_0;
 }
@@ -58,16 +60,19 @@ _id_A1E5(var_0, var_1, var_2) {
   self._id_92CC = undefined;
   self._id_BBB5 = undefined;
 
-  if(var_0 == "fly_glide")
+  if(var_0 == "fly_glide") {
     var_0 = "fly";
+  }
 
-  if(var_0 == "hover_glide")
+  if(var_0 == "hover_glide") {
     var_0 = "hover";
+  }
 
-  if(level._id_241D)
+  if(level._id_241D) {
     var_3 = "";
-  else
+  } else {
     var_3 = "_space";
+  }
 
   switch (var_0) {
     case "hover":

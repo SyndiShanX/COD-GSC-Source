@@ -20,8 +20,9 @@ _id_E46D() {
     scripts\engine\utility::flag_wait("ambient_return_elevator_2f");
 
     if(isDefined(level._id_FD6E.jackals)) {
-      foreach(var_1 in level._id_FD6E.jackals)
-      var_1 _id_0BDC::_id_A2DA();
+      foreach(var_1 in level._id_FD6E.jackals) {
+        var_1 _id_0BDC::_id_A2DA();
+      }
     }
 
     _id_0EFB::_id_FDE8(level._id_FD6E.jackals);
@@ -389,8 +390,9 @@ _id_CDA2(var_0) {
         var_4 thread _id_10AB::_id_1F5E(0.0, 0.0);
     }
 
-    if(issubstr(var_4._id_1D77, "lying"))
+    if(issubstr(var_4._id_1D77, "lying")) {
       var_4 thread _id_10319();
+    }
   }
 }
 
@@ -472,8 +474,9 @@ _id_CC9D(var_0) {
   foreach(var_3 in var_1) {
     var_4 = var_0[var_3];
 
-    if(var_3 == "tablet_supervisor")
+    if(var_3 == "tablet_supervisor") {
       var_4 _id_174F();
+    }
 
     var_4 thread _id_10AB::_id_1F5E(0.0, 0.0);
     level._id_2208[level._id_2208.size] = var_4;
@@ -490,8 +493,9 @@ _id_174F() {
 _id_40A1(var_0) {
   var_0 waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_ADA9() {
@@ -650,8 +654,9 @@ _id_8AB9() {
 }
 
 _id_8A7F(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "";
+  }
 
   level thread _id_10A2::_id_1A5D();
   level thread _id_10A4::_id_3B9D();

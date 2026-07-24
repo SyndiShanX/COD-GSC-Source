@@ -16,22 +16,25 @@ init_teleport_portals() {
     self.teleport_door = scripts\engine\utility::getclosest(self.origin, getEntArray("chi_door_fast_travel", "targetname"));
     var_4 = getEntArray("chi_door_fast_travel_symbol", "targetname");
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       self.teleport_door_symbol = scripts\engine\utility::getclosest(self.origin, var_4);
+    }
 
     self.recently_used = [];
     self.cooldown = 0;
     self.opened = 0;
 
-    if(!isDefined(self.angles))
+    if(!isDefined(self.angles)) {
       self.angles = (0, 0, 0);
+    }
 
     self.teleport_spots = scripts\engine\utility::getStructArray(self.end_point.target, "targetname");
     script_add_teleport_spots();
 
     foreach(var_6 in self.teleport_spots) {
-      if(!isDefined(var_6.angles))
+      if(!isDefined(var_6.angles)) {
         var_6.angles = (0, 0, 0);
+      }
     }
   }
 }
@@ -59,8 +62,9 @@ move_player_through_portal_tube(var_0, var_1) {
   var_0 scripts\cp\zombies\zombie_afterlife_arcade::add_white_screen();
   var_2 = move_through_tube(var_0, "fast_travel_tube_start", "fast_travel_tube_end");
 
-  if(isDefined(self.cooldown))
+  if(isDefined(self.cooldown)) {
     self.cooldown = self.cooldown + 30;
+  }
 
   teleport_to_portal_safe_spot(var_0, var_1);
   var_0 thread scripts\cp\zombies\zombie_afterlife_arcade::remove_white_screen(0.1);
@@ -75,8 +79,9 @@ move_player_through_portal_tube(var_0, var_1) {
   var_0 scripts\cp\powers\coop_powers::power_enablepower();
   var_0 thread update_personal_ents_after_delay();
 
-  if(var_0.vo_prefix == "p5_")
+  if(var_0.vo_prefix == "p5_") {
     var_0 thread scripts\cp\cp_vo::try_to_play_vo("fasttravel_exit", "town_comment_vo");
+  }
 }
 
 move_through_tube(var_0, var_1, var_2) {
@@ -108,8 +113,9 @@ move_through_tube(var_0, var_1, var_2) {
   var_0.is_fast_traveling = undefined;
   var_0 scripts\cp\utility::removedamagemodifier("fast_travel", 0);
 
-  if(var_0 scripts\cp\utility::isignoremeenabled())
+  if(var_0 scripts\cp\utility::isignoremeenabled()) {
     var_0 scripts\cp\utility::allow_player_ignore_me(0);
+  }
 
   var_0.is_fast_traveling = undefined;
   var_0.no_outline = 0;
@@ -134,29 +140,33 @@ update_personal_ents_after_delay() {
 }
 
 unlinkplayerafterduration() {
-  while(scripts\engine\utility::is_true(self.isrewinding) || isDefined(self.rewindmover))
+  while(scripts\engine\utility::is_true(self.isrewinding) || isDefined(self.rewindmover)) {
     scripts\engine\utility::waitframe();
+  }
 
   self unlink();
 }
 
 teleport_to_portal_safe_spot(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = var_1;
-  else
+  } else {
     var_2 = self.teleport_spots;
+  }
 
   var_3 = undefined;
 
   while(!isDefined(var_3)) {
     foreach(var_5 in var_2) {
-      if(!positionwouldtelefrag(var_5.origin))
+      if(!positionwouldtelefrag(var_5.origin)) {
         var_3 = var_5;
+      }
     }
 
     if(!isDefined(var_3)) {
-      if(!isDefined(var_2[0].angles))
+      if(!isDefined(var_2[0].angles)) {
         var_2[0].angles = (0, 0, 0);
+      }
 
       var_7 = scripts\cp\utility::vec_multiply(anglesToForward(var_2[0].angles), 64);
       var_3 = spawnStruct();
@@ -169,10 +179,11 @@ teleport_to_portal_safe_spot(var_0, var_1) {
 
   var_0 playershow();
 
-  if(scripts\engine\utility::is_true(var_0.isrewinding) || isDefined(self.rewindmover))
+  if(scripts\engine\utility::is_true(var_0.isrewinding) || isDefined(self.rewindmover)) {
     var_0 thread unlinkplayerafterduration();
-  else
+  } else {
     var_0 unlink();
+  }
 
   var_0 dontinterpolate();
   var_0 setOrigin(var_3.origin);

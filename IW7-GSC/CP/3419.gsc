@@ -17,27 +17,31 @@ _id_50C9() {
 }
 
 givedefaultloadout(var_0, var_1) {
-  if(!isDefined(level.perksetfuncs))
+  if(!isDefined(level.perksetfuncs)) {
     _id_958F();
+  }
 
   var_2 = self;
   var_2.changingweapon = undefined;
   var_2 takeallweapons();
 
-  if(!scripts\engine\utility::is_true(var_2.keep_perks))
+  if(!scripts\engine\utility::is_true(var_2.keep_perks)) {
     var_2 scripts\cp\utility::_clearperks();
+  }
 
   var_2 thread delayreturningperks(var_2);
   var_2 scripts\cp\utility::_detachall();
   var_2._id_108EF = 0;
 
-  if(isDefined(var_2.headmodel))
+  if(isDefined(var_2.headmodel)) {
     var_2.headmodel = undefined;
+  }
 
   var_3 = get_player_character_num();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 = var_1;
+  }
 
   var_2 thread setmodelfromcustomization(var_3);
   var_4 = getplayermodelindex();
@@ -45,10 +49,11 @@ givedefaultloadout(var_0, var_1) {
   var_2 _meth_82C6(var_5);
   scripts\engine\utility::flag_wait("introscreen_over");
 
-  if(isDefined(level.move_speed_scale))
+  if(isDefined(level.move_speed_scale)) {
     self[[level.move_speed_scale]]();
-  else
+  } else {
     updatemovespeedscale();
+  }
 
   var_2.primaryweapon = "none";
   var_2 thread scripts\cp\cp_weapon::setweaponlaser_internal();
@@ -72,20 +77,22 @@ givedefaultloadout(var_0, var_1) {
   var_2.default_starting_melee_weapon = var_6;
   var_2.currentmeleeweapon = var_6;
 
-  if(isDefined(var_2.starting_weapon))
+  if(isDefined(var_2.starting_weapon)) {
     var_2.default_starting_pistol = var_2.starting_weapon;
-  else if(isDefined(level.default_weapon))
+  } else if(isDefined(level.default_weapon)) {
     var_2.default_starting_pistol = level.default_weapon;
-  else
+  } else {
     var_2.default_starting_pistol = "iw7_g18_zmr";
+  }
 
   var_7 = scripts\cp\utility::getrawbaseweaponname(var_2.default_starting_pistol);
   var_2.default_starting_pistol = return_wbk_version_of_weapon(var_2, var_7, var_2.default_starting_pistol);
 
-  if(isDefined(level.last_stand_pistol))
+  if(isDefined(level.last_stand_pistol)) {
     var_2.last_stand_pistol = level.last_stand_pistol;
-  else
+  } else {
     var_2.last_stand_pistol = var_2.default_starting_pistol;
+  }
 
   var_8 = scripts\cp\utility::getrawbaseweaponname(var_2.default_starting_pistol);
   var_2 scripts\cp\utility::_giveweapon(var_2.default_starting_pistol, undefined, undefined, 1);
@@ -97,19 +104,23 @@ givedefaultloadout(var_0, var_1) {
   var_2 assignweaponoffhandspecial("super_default_zm");
   var_2.specialoffhandgrenade = "super_default_zm";
 
-  if(issplitscreen())
+  if(issplitscreen()) {
     var_2 thread _id_1358A(var_2.default_starting_pistol);
-  else
+  } else {
     var_2 setspawnweapon(var_2.default_starting_pistol, 1);
+  }
 
-  if(isDefined(level.force_used_clip))
+  if(isDefined(level.force_used_clip)) {
     var_2 setweaponammoclip(var_2.default_starting_pistol, int(level.force_used_clip / 100 * weaponclipsize(var_2.default_starting_pistol)));
+  }
 
-  if(isDefined(level.force_starting_ammo))
+  if(isDefined(level.force_starting_ammo)) {
     var_2 setweaponammostock(var_2.default_starting_pistol, level.force_starting_ammo);
+  }
 
-  if(isDefined(level.additional_loadout_func))
+  if(isDefined(level.additional_loadout_func)) {
     [[level.additional_loadout_func]](var_2);
+  }
 
   var_2 notify("weapon_level_changed");
   var_2 _id_F53D();
@@ -120,13 +131,15 @@ return_wbk_version_of_weapon(var_0, var_1, var_2) {
   level endon("game_ended");
   var_0 endon("disconnect");
 
-  if(!scripts\engine\utility::is_true(var_0.weaponkitinitialized))
+  if(!scripts\engine\utility::is_true(var_0.weaponkitinitialized)) {
     var_0 waittill("player_weapon_build_kit_initialized");
+  }
 
-  if(isDefined(var_0.weapon_build_models[var_1]))
+  if(isDefined(var_0.weapon_build_models[var_1])) {
     return var_0.weapon_build_models[var_1];
-  else
+  } else {
     return var_2;
+  }
 }
 
 delayreturningperks(var_0) {
@@ -140,8 +153,9 @@ delayreturningperks(var_0) {
       var_1 = getarraykeys(var_0.zombies_perks);
 
       foreach(var_3 in var_1) {
-        if(isDefined(level.coop_perk_callbacks) && isDefined(level.coop_perk_callbacks[var_3]) && isDefined(level.coop_perk_callbacks[var_3].set))
+        if(isDefined(level.coop_perk_callbacks) && isDefined(level.coop_perk_callbacks[var_3]) && isDefined(level.coop_perk_callbacks[var_3].set)) {
           var_0[[level.coop_perk_callbacks[var_3].set]]();
+        }
       }
     }
 
@@ -152,15 +166,17 @@ delayreturningperks(var_0) {
 release_character_number(var_0) {
   var_1 = var_0._id_CFC4;
 
-  if(!scripts\engine\utility::array_contains(level.available_player_characters, var_1) && var_1 != 5)
+  if(!scripts\engine\utility::array_contains(level.available_player_characters, var_1) && var_1 != 5) {
     level.available_player_characters = scripts\engine\utility::array_add(level.available_player_characters, var_1);
+  }
 }
 
 _id_785A(var_0, var_1) {
-  if(isDefined(var_0.pap[var_1]))
+  if(isDefined(var_0.pap[var_1])) {
     return var_0.pap[var_1].lvl;
-  else
+  } else {
     return 1;
+  }
 }
 
 setmodelfromcustomization(var_0) {
@@ -180,15 +196,17 @@ setmodelfromcustomization(var_0) {
   setcharactermodels(var_1.body_model, var_1.head_model, var_1.view_model, var_1.hair_model);
   thread setplayerinside(self, var_1.photo_index);
 
-  if(isDefined(var_1.post_setup_func))
+  if(isDefined(var_1.post_setup_func)) {
     [[var_1.post_setup_func]](self);
+  }
 }
 
 get_player_character_num() {
   var_1 = getDvar("ui_mapname");
 
-  if(isDefined(self._id_CFC4))
+  if(isDefined(self._id_CFC4)) {
     return self._id_CFC4;
+  }
 
   var_2 = scripts\engine\utility::random(level.available_player_characters);
 
@@ -240,8 +258,9 @@ setplayerinside(var_0, var_1) {
   var_0 endon("disconnect");
   var_2 = var_0 getentitynumber();
 
-  if(var_2 == 4)
+  if(var_2 == 4) {
     var_2 = 0;
+  }
 
   var_0._id_2B17 = _id_786B(var_2);
   var_0.player_character_index = var_1;
@@ -361,8 +380,9 @@ _id_7CAB(var_0) {
 }
 
 setcharactermodels(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.headmodel))
+  if(isDefined(self.headmodel)) {
     self detach(self.headmodel);
+  }
 
   self._id_2C14 = var_0;
   self setModel(var_0);
@@ -396,38 +416,46 @@ updatemovespeedscale() {
   } else {
     var_0 = getplayerspeedbyweapon(self);
 
-    if(isDefined(self.chargemode_speedscale))
+    if(isDefined(self.chargemode_speedscale)) {
       var_0 = self.chargemode_speedscale;
-    else if(isDefined(self.siege_speedscale))
+    } else if(isDefined(self.siege_speedscale)) {
       var_0 = self.siege_speedscale;
+    }
 
     var_1 = self.chill_data;
 
-    if(isDefined(var_1) && isDefined(var_1.speedmod))
+    if(isDefined(var_1) && isDefined(var_1.speedmod)) {
       var_0 = var_0 + var_1.speedmod;
+    }
 
-    if(isDefined(self.speedstripmod))
+    if(isDefined(self.speedstripmod)) {
       var_0 = var_0 + self.speedstripmod;
+    }
 
-    if(isDefined(self.phasespeedmod))
+    if(isDefined(self.phasespeedmod)) {
       var_0 = var_0 + self.phasespeedmod;
+    }
 
-    if(isDefined(self.weaponaffinityspeedboost))
+    if(isDefined(self.weaponaffinityspeedboost)) {
       var_0 = var_0 + self.weaponaffinityspeedboost;
+    }
 
-    if(isDefined(self.weaponpassivespeedmod))
+    if(isDefined(self.weaponpassivespeedmod)) {
       var_0 = var_0 + self.weaponpassivespeedmod;
+    }
 
-    if(isDefined(self.weaponpassivespeedonkillmod))
+    if(isDefined(self.weaponpassivespeedonkillmod)) {
       var_0 = var_0 + self.weaponpassivespeedonkillmod;
+    }
 
     var_0 = min(1.5, var_0);
   }
 
   self.weaponspeed = var_0;
 
-  if(!isDefined(self.combatspeedscalar))
+  if(!isDefined(self.combatspeedscalar)) {
     self.combatspeedscalar = 1;
+  }
 
   self setmovespeedscale(var_0 * self.movespeedscaler * self.combatspeedscalar);
 }
@@ -436,30 +464,33 @@ getplayerspeedbyweapon(var_0) {
   var_1 = 1.0;
   self.weaponlist = self getweaponslistprimaries();
 
-  if(getDvar("normalize_movement_speed", "on") == "on")
+  if(getDvar("normalize_movement_speed", "on") == "on") {
     return 1.0;
+  }
 
-  if(!self.weaponlist.size)
+  if(!self.weaponlist.size) {
     var_1 = 0.9;
-  else {
+  } else {
     var_2 = self getcurrentweapon();
 
-    if(scripts\cp\utility::issuperweapon(var_2))
+    if(scripts\cp\utility::issuperweapon(var_2)) {
       var_1 = level.superweapons[var_2]._id_BCEF;
-    else {
+    } else {
       var_3 = weaponinventorytype(var_2);
 
       if(var_3 != "primary" && var_3 != "altmode") {
-        if(isDefined(self.saved_lastweapon))
+        if(isDefined(self.saved_lastweapon)) {
           var_2 = self.saved_lastweapon;
-        else
+        } else {
           var_2 = undefined;
+        }
       }
 
-      if(!isDefined(var_2) || !self hasweapon(var_2))
+      if(!isDefined(var_2) || !self hasweapon(var_2)) {
         var_1 = _id_8237();
-      else
+      } else {
         var_1 = _id_8236(var_2);
+      }
     }
   }
 
@@ -484,8 +515,9 @@ _id_8237() {
       if(var_3 == 0) {
         continue;
       }
-      if(var_3 < var_0)
+      if(var_3 < var_0) {
         var_0 = var_3;
+      }
     }
   } else
     var_0 = 0.9;
@@ -509,8 +541,9 @@ _id_8226() {
       if(var_3 == 0) {
         continue;
       }
-      if(var_3 < var_0)
+      if(var_3 < var_0) {
         var_0 = var_3;
+      }
     }
   } else
     var_0 = 8;
@@ -524,11 +557,13 @@ getweaponvarianttablename(var_0) {
   var_2 = scripts\cp\utility::getbaseweaponname(var_0);
   var_1 = float(tablelookup(level.statstable, 4, var_2, 8));
 
-  if(!isDefined(var_1) || var_1 < 1)
+  if(!isDefined(var_1) || var_1 < 1) {
     var_1 = float(tablelookup(level.game_mode_statstable, 4, var_2, 8));
+  }
 
-  if(!isDefined(var_1) || var_1 < 1)
+  if(!isDefined(var_1) || var_1 < 1) {
     var_1 = 10;
+  }
 
   return var_1;
 }
@@ -556,8 +591,9 @@ _id_1358A(var_0) {
   level endon("game_ended");
   wait 0.5;
 
-  if(!self hasweapon(var_0))
+  if(!self hasweapon(var_0)) {
     var_0 = self getweaponslistprimaries()[0];
+  }
 
   self setspawnweapon(var_0);
 }
@@ -685,10 +721,11 @@ _id_F53D() {
     var_16 = _id_7AA8(self);
     var_11 = var_2;
 
-    if(isDefined(level.player_suit))
+    if(isDefined(level.player_suit)) {
       self setsuit(level.player_suit);
-    else
+    } else {
       self setsuit("zom_suit");
+    }
 
     self.suit = "zom_suit";
     self allowdoublejump(0);
@@ -708,8 +745,9 @@ _id_F53D() {
 
     thread scripts\cp\powers\coop_powers::clearpowers();
 
-    if(isDefined(var_16))
+    if(isDefined(var_16)) {
       thread scripts\cp\powers\coop_powers::givepower(var_16, "primary", undefined, undefined, undefined, 0, 1);
+    }
 
     _allowbattleslide(var_11 &var_3);
     self energy_setmax(0, var_13);
@@ -717,14 +755,16 @@ _id_F53D() {
     self energy_setrestorerate(0, var_14);
     self energy_setresttimems(0, var_15);
 
-    if(isDefined(var_12))
+    if(isDefined(var_12)) {
       self[[var_12]]();
+    }
   }
 
   self allowmantle(0);
 
-  if(!scripts\cp\utility::is_consumable_active("grenade_cooldown"))
+  if(!scripts\cp\utility::is_consumable_active("grenade_cooldown")) {
     scripts\cp\powers\coop_powers::power_modifycooldownrate(0.0);
+  }
 
   scripts\cp\utility::giveperk("specialty_throwback");
   self notify("set_player_perks");
@@ -739,10 +779,11 @@ _id_23C6() {
 }
 
 _allowbattleslide(var_0) {
-  if(var_0)
+  if(var_0) {
     thread scripts\cp\perks\perkfunctions::setbattleslide();
-  else
+  } else {
     self notify("battleSlide_unset");
+  }
 }
 
 register_player_character(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_16) {
@@ -764,8 +805,9 @@ register_player_character(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
   var_17.post_setup_func = var_15;
   level.player_character_info[var_0] = var_17;
 
-  if(var_1 == "yes")
+  if(var_1 == "yes") {
     level.available_player_characters[level.available_player_characters.size] = var_0;
+  }
 }
 
 prestige_getslowhealthregenscalar() {

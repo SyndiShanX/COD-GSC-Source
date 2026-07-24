@@ -43,14 +43,15 @@ _id_48BE(var_0) {
   var_1.origin = var_0.origin;
   var_1.angles = var_0.angles;
 
-  if(!isDefined(level._id_4EE9))
+  if(!isDefined(level._id_4EE9)) {
     level._id_4EE9 = [var_1];
-  else if(level._id_4EE9.size > 50) {
+  } else if(level._id_4EE9.size > 50) {
     var_2 = [];
     level._id_4EE9[0] delete();
 
-    for(var_3 = 1; var_3 < level._id_4EE9.size; var_3++)
+    for(var_3 = 1; var_3 < level._id_4EE9.size; var_3++) {
       var_2[var_2.size] = level._id_4EE9[var_3];
+    }
 
     var_2[var_2.size] = var_1;
     level._id_4EE9 = var_2;

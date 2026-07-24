@@ -139,8 +139,9 @@ _id_B892() {
   scripts\sp\utility::anim_stopanimScripted();
 
   if(isDefined(self._id_DBBD)) {
-    foreach(var_1 in self._id_DBBD)
-    var_1 delete();
+    foreach(var_1 in self._id_DBBD) {
+      var_1 delete();
+    }
   }
 }
 

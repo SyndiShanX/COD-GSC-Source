@@ -19,8 +19,9 @@ bridge_hallway() {
   wait 1;
 
   foreach(var_3 in var_0.lights) {
-    if(var_3 _meth_8136() > 80)
+    if(var_3 _meth_8136() > 80) {
       var_3 scripts\sp\lights::_id_AB83(0, 2);
+    }
   }
 
   wait 2;
@@ -64,8 +65,9 @@ _id_7471() {
   var_8 = getEntArray("lgt_bridge_klaxon", "script_noteworthy");
   var_9 = getEnt("lgt_bridge_opsmap", "script_noteworthy");
 
-  if(isDefined(var_9))
+  if(isDefined(var_9)) {
     var_9 thread _id_C6A9();
+  }
 
   level waittill("jump_started");
 }

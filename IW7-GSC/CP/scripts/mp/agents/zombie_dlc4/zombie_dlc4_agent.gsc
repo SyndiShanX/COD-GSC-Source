@@ -8,8 +8,9 @@ registerscriptedagent() {
   behaviortree\zombie_dlc4::_id_DEE8();
   scripts\asm\zombie_dlc4\mp\states::_id_2371();
 
-  if(!isDefined(level.species_funcs))
+  if(!isDefined(level.species_funcs)) {
     level.species_funcs = [];
+  }
 
   level.agent_definition["generic_zombie"]["asm"] = "zombie_dlc4";
   level.agent_definition["generic_zombie"]["behaviorTree"] = "zombie_dlc4";
@@ -39,14 +40,15 @@ zombieinit_dlc() {
 _id_FAB0() {
   level endon("game_ended");
 
-  if(!isDefined(level.agent_definition))
+  if(!isDefined(level.agent_definition)) {
     level waittill("scripted_agents_initialized");
+  }
 
   level.agent_definition["generic_zombie"]["setup_func"] = ::setupagent;
   level.agent_definition["generic_zombie"]["setup_model_func"] = ::_id_FACE;
-  level.agent_funcs["generic_zombie"]["gametype_on_damage_finished"] = scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
-  level.agent_funcs["generic_zombie"]["gametype_on_killed"] = scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiekilled;
-  level.agent_funcs["generic_zombie"]["on_damaged"] = scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiedamaged;
+  level.agent_funcs["generic_zombie"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+  level.agent_funcs["generic_zombie"]["gametype_on_killed"] = ::scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiekilled;
+  level.agent_funcs["generic_zombie"]["on_damaged"] = ::scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiedamaged;
   level.agent_funcs["generic_zombie"]["on_damaged_finished"] = ::onzombiedamagefinished;
   level.agent_funcs["generic_zombie"]["on_killed"] = ::onzombiekilled;
 }
@@ -57,11 +59,13 @@ setupagent() {
   self.pinched = undefined;
   self.fridge_trap_marked = undefined;
 
-  if(scripts\engine\utility::is_true(self.activated_venomx_sphere))
+  if(scripts\engine\utility::is_true(self.activated_venomx_sphere)) {
     self.activated_venomx_sphere = undefined;
+  }
 
-  if(scripts\engine\utility::is_true(self.dot_triggered))
+  if(scripts\engine\utility::is_true(self.dot_triggered)) {
     self.dot_triggered = undefined;
+  }
 }
 
 _id_FACE(var_0) {

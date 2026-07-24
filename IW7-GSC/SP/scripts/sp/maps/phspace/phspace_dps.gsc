@@ -4,8 +4,9 @@
 ***************************************************/
 
 _id_107B7() {
-  if(!isDefined(level._id_12B67))
+  if(!isDefined(level._id_12B67)) {
     level._id_12B67 = scripts\sp\vehicle::_id_1080C("un_retribution");
+  }
 
   level._id_12B67 scripts\sp\vehicle::_id_8441();
   level._id_12B67._id_1FBB = "retribution";
@@ -25,8 +26,9 @@ _id_A0F0() {
   var_0 = scripts\engine\utility::spawn_tag_origin(var_0.origin, var_0.angles);
   var_1 = "jackal_callin";
 
-  if(getdvarint("E3", 0))
+  if(getdvarint("E3", 0)) {
     var_1 = "jackal_callin_dps";
+  }
 
   wait 0.1;
   scripts\sp\vehicle_build::_id_31C6("script_vehicle_jackal_friendly_pearl", "default", "vfx/iw7/core/vehicle/jackal/vfx_jackal_wash_concrete.vfx", 1);
@@ -39,16 +41,18 @@ _id_A0F0() {
     level._id_D127 _id_0BDC::_id_6B4C("none", 0);
     level._id_D127 _id_0BDC::_id_104A6(1);
 
-    if(getdvarint("E3", 0))
+    if(getdvarint("E3", 0)) {
       scripts\sp\utility::_id_15F5("jackals_salter_to_jackal_dps");
-    else
+    } else {
       scripts\sp\utility::_id_15F5("jackals_salter_to_jackal");
+    }
 
     _id_0BDC::_id_137CF();
   }
 
-  if(getdvarint("e3", 0))
+  if(getdvarint("e3", 0)) {
     thread _id_1358D();
+  }
 
   level._id_D127 _id_0BDC::_id_A167();
   _id_0BDC::_id_A153(1);
@@ -165,8 +169,9 @@ _id_1130D(var_0) {
   if(!isDefined(var_1)) {
     return;
   }
-  if(level.player istouching(var_1))
+  if(level.player istouching(var_1)) {
     level.player _meth_81D0();
+  }
 
   var_1 solid();
   _id_0BDC::_id_137CF();
@@ -178,9 +183,9 @@ _id_376D(var_0, var_1) {
   var_0._id_1FBB = "retribution";
   var_0 scripts\sp\anim::_id_F64A();
 
-  if(!isDefined(level._id_10256))
+  if(!isDefined(level._id_10256)) {
     scripts\sp\anim::_id_1F35(var_0, var_1);
-  else {
+  } else {
     thread scripts\sp\anim::_id_1F35(var_0, var_1);
     var_2 = [var_0];
     scripts\sp\anim::_id_1F2A(var_2, var_1, 1);
@@ -210,8 +215,9 @@ _id_CA93() {
 }
 
 _id_107C1() {
-  if(!isDefined(level._id_EA99))
+  if(!isDefined(level._id_EA99)) {
     level._id_EA99 = scripts\sp\vehicle::_id_1080C("jackal_salter");
+  }
 
   level._id_EA99._id_1FBB = "salter_jackal";
   level._id_EA99.unittype = "jackal";

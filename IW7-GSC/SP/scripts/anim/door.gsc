@@ -21,10 +21,11 @@ _id_5A09() {
 
   var_1 = var_0.type == "Door Interior" || self _meth_808A(var_0);
 
-  if(var_1)
+  if(var_1) {
     _id_5A06(var_0);
-  else
+  } else {
     _id_5A0A(var_0);
+  }
 
   for(;;) {
     var_2 = self _meth_811E();
@@ -51,8 +52,9 @@ _id_115CD() {
 _id_5817(var_0) {
   thread _id_115CD();
 
-  if(self.grenadeweapon == "flash_grenade")
+  if(self.grenadeweapon == "flash_grenade") {
     self notify("flashbang_thrown");
+  }
 
   self orientmode("face current");
   var_0._id_BF7D = gettime() + 5000;
@@ -77,8 +79,9 @@ _id_5A08(var_0, var_1, var_2, var_3, var_4) {
   var_7 = undefined;
   var_8 = anglesToForward(var_0.angles);
 
-  if(var_0.type == "Door Interior" && !self _meth_808A(var_0))
+  if(var_0.type == "Door Interior" && !self _meth_808A(var_0)) {
     var_8 = -1 * var_8;
+  }
 
   var_9 = (var_0.origin[0], var_0.origin[1], var_0.origin[2] + 64);
   var_10 = var_9;
@@ -88,10 +91,11 @@ _id_5A08(var_0, var_1, var_2, var_3, var_4) {
     var_12 = var_0.origin - self.origin;
     var_13 = vectordot(var_11, var_12);
 
-    if(var_13 > 20)
+    if(var_13 > 20) {
       var_13 = 20;
-    else if(var_13 < -20)
+    } else if(var_13 < -20) {
       var_13 = -20;
+    }
 
     var_10 = var_9 + var_13 * var_11;
   }
@@ -125,8 +129,9 @@ _id_5A08(var_0, var_1, var_2, var_3, var_4) {
       if(!var_5) {
         var_14 = var_9 + var_8 * 100;
 
-        if(!self _meth_81A2(self.enemy, var_14, 128))
+        if(!self _meth_81A2(self.enemy, var_14, 128)) {
           return;
+        }
       }
 
       var_5 = 1;
@@ -141,8 +146,9 @@ _id_5A08(var_0, var_1, var_2, var_3, var_4) {
     wait(var_4);
     var_15 = self _meth_811E();
 
-    if(!isDefined(var_15) || var_15 != var_0)
+    if(!isDefined(var_15) || var_15 != var_0) {
       return;
+    }
   }
 }
 
@@ -155,9 +161,9 @@ _id_940A() {
   self._id_9E45 = 0;
 
   for(;;) {
-    if(self _meth_81A4() && !self.doingambush)
+    if(self _meth_81A4() && !self.doingambush) {
       _id_5A07();
-    else if(!isDefined(self._id_B7B5) || self._id_B7B5 < gettime()) {
+    } else if(!isDefined(self._id_B7B5) || self._id_B7B5 < gettime()) {
       self._id_B7B5 = undefined;
       _id_5A0B();
     }
@@ -170,8 +176,9 @@ _id_5A07() {
   if(!isDefined(self._id_BEF7) && !self.doingambush) {
     self._id_9E45 = 1;
 
-    if(!scripts\anim\utility::_id_9D9B())
+    if(!scripts\anim\utility::_id_9D9B()) {
       scripts\sp\utility::_id_61E7(1);
+    }
   }
 }
 
@@ -179,8 +186,9 @@ _id_5A0B() {
   if(!isDefined(self._id_4797)) {
     self._id_9E45 = 0;
 
-    if(scripts\anim\utility::_id_9D9B())
+    if(scripts\anim\utility::_id_9D9B()) {
       scripts\sp\utility::_id_5514();
+    }
   }
 }
 

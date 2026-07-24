@@ -11,37 +11,46 @@ _id_5E99(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   _id_DEB9();
   _id_DEBA();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level thread _id_FD7B(var_0, var_1);
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level thread _id_FD7C(var_0, var_2);
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level thread _id_FD7D(var_0, var_3);
+  }
 
-  if(isDefined(var_4) || isDefined(var_5))
+  if(isDefined(var_4) || isDefined(var_5)) {
     level thread _id_FD7E(var_0, var_4, var_5);
+  }
 
-  if(isDefined(var_6) || isDefined(var_7))
+  if(isDefined(var_6) || isDefined(var_7)) {
     level thread _id_FD7F(var_0, var_6, var_7);
+  }
 }
 
 _id_5E9A(var_0) {
   foreach(var_2 in var_0) {
-    if(isDefined(var_2._id_1F1C))
+    if(isDefined(var_2._id_1F1C)) {
       var_2._id_1F1C notify("ambient_idle_scene_end");
+    }
 
-    if(isDefined(var_2._id_1DF7))
+    if(isDefined(var_2._id_1DF7)) {
       var_2._id_1DF7 delete();
+    }
 
     var_2 notify("cleaned");
 
-    if(isDefined(var_2._id_B14F))
+    if(isDefined(var_2._id_B14F)) {
       var_2 scripts\sp\utility::_id_1101B();
+    }
 
-    if(isai(var_2))
+    if(isai(var_2)) {
       var_2 _meth_81D0();
+    }
 
     var_2 delete();
   }
@@ -151,8 +160,9 @@ _id_FD7E(var_0, var_1, var_2) {
     var_3[var_3.size] = var_2;
   }
 
-  if(var_3.size > 0)
+  if(var_3.size > 0) {
     var_0 thread scripts\sp\idles::_id_CC80(var_3);
+  }
 }
 
 _id_FD7F(var_0, var_1, var_2) {

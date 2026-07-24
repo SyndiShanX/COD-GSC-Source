@@ -136,29 +136,33 @@ _id_5BE1() {
       }
     }
 
-    if(level.player._id_5C6E > 0)
+    if(level.player._id_5C6E > 0) {
       level.player._id_5C6E = level.player._id_5C6E - 0.05;
+    }
 
-    if(level.player._id_5C4F > 0)
+    if(level.player._id_5C4F > 0) {
       level.player._id_5C4F = level.player._id_5C4F - 0.05;
+    }
 
     wait 0.05;
   }
 }
 
 _id_7AC7() {
-  if(isDefined(self._id_5CB3))
+  if(isDefined(self._id_5CB3)) {
     return 5;
-  else
+  } else {
     return 3;
+  }
 }
 
 _id_7B32() {
   var_0 = 0;
 
   for(var_1 = 0; var_1 < _id_7AC7(); var_1++) {
-    if(isDefined(self._id_4C29[var_1]))
+    if(isDefined(self._id_4C29[var_1])) {
       var_0++;
+    }
   }
 
   return var_0;
@@ -166,27 +170,31 @@ _id_7B32() {
 
 _id_7B15() {
   for(var_0 = 0; var_0 < _id_7AC7(); var_0++) {
-    if(!isDefined(self._id_4C29[var_0]))
+    if(!isDefined(self._id_4C29[var_0])) {
       return var_0;
+    }
   }
 
   return undefined;
 }
 
 _id_385A() {
-  if(!self _meth_843C() || self isreloading() || !scripts\engine\utility::isoffhandweaponsallowed() || !scripts\engine\utility::isoffhandsecondaryweaponsallowed())
+  if(!self _meth_843C() || self isreloading() || !scripts\engine\utility::isoffhandweaponsallowed() || !scripts\engine\utility::isoffhandsecondaryweaponsallowed()) {
     return 0;
+  }
 
   var_0 = self getammocount(_id_129A());
 
-  if(var_0 <= 0)
+  if(var_0 <= 0) {
     return 0;
+  }
 
   if(_id_7B32() >= _id_7AC7() - 1) {
     thread _id_C808();
 
-    while(_id_7B32() > _id_7AC7() - 1)
+    while(_id_7B32() > _id_7AC7() - 1) {
       wait 0.05;
+    }
 
     return 1;
   }
@@ -249,10 +257,11 @@ _id_112BA(var_0) {
   if(var_12["fraction"] != 1.0) {
     var_12 = scripts\common\trace::ray_trace(var_5, var_5 + var_7 * (var_10 + var_9), undefined, scripts\common\trace::create_solid_ai_contents(1));
 
-    if(var_12["fraction"] != 1.0)
+    if(var_12["fraction"] != 1.0) {
       var_11 = var_5 + var_7 * var_10 * var_12["fraction"];
-    else
+    } else {
       var_11 = var_5 + var_7 * var_10;
+    }
   } else
     var_11 = var_5 + var_6 * var_10;
 
@@ -281,8 +290,9 @@ _id_112BA(var_0) {
   var_13 thread _id_5C1F();
   var_13 thread _id_5C4B(1, 1);
 
-  if(!isDefined(var_13._id_B435))
+  if(!isDefined(var_13._id_B435)) {
     var_13._id_B435 = 100;
+  }
 
   var_13._id_1280E = 0;
   var_13 thread _id_112BC();
@@ -363,12 +373,13 @@ _id_5C37() {
   var_0 = 0;
 
   for(;;) {
-    if(_id_D2DD())
+    if(_id_D2DD()) {
       var_0 = 1;
-    else if(level.player.ignoreme)
+    } else if(level.player.ignoreme) {
       var_0 = 1;
-    else
+    } else {
       var_0 = 0;
+    }
 
     self.ignoreme = var_0;
     wait 0.1;
@@ -376,11 +387,13 @@ _id_5C37() {
 }
 
 _id_5C4B(var_0, var_1) {
-  if(isDefined(var_0) && var_0)
+  if(isDefined(var_0) && var_0) {
     thread _id_5BD8();
+  }
 
-  if(isDefined(var_1) && var_1)
+  if(isDefined(var_1) && var_1) {
     thread _id_5BDD();
+  }
 }
 
 _id_5C3F() {
@@ -396,8 +409,9 @@ _id_5BF0() {
   var_0 = scripts\engine\utility::waittill_any_return("no_ammo", "lethal_damage", "timeout", "vr_delete");
 
   if(isDefined(level.player._id_4C29[self._id_9180]._id_9A96) && level.player._id_4C29[self._id_9180]._id_9A96) {
-    while(level.player._id_4C29[self._id_9180]._id_9A96)
+    while(level.player._id_4C29[self._id_9180]._id_9A96) {
       wait 0.05;
+    }
   }
 
   thread _id_F378(self._id_9180, "off");
@@ -407,19 +421,21 @@ _id_5BF0() {
     thread _id_5BF5(1);
   } else if(var_0 == "lethal_damage")
     thread _id_5BF6();
-  else if(var_0 == "timeout")
+  else if(var_0 == "timeout") {
     thread _id_5BF5();
-  else if(var_0 == "vr_delete")
+  } else if(var_0 == "vr_delete") {
     thread _id_5BF7();
+  }
 }
 
 _id_5BF5(var_0) {
   self notify("death_anim");
 
-  if(isDefined(var_0) && var_0 == 1)
+  if(isDefined(var_0) && var_0 == 1) {
     _id_F377(self._id_9180, "noammo");
-  else
+  } else {
     _id_F377(self._id_9180, "destroyed");
+  }
 
   scripts\sp\utility::_id_9193("default_supdrone");
   self._id_5CDB scripts\sp\utility::_id_9193("default_supdrone");
@@ -435,8 +451,9 @@ _id_5BF7() {
   self._id_5CDB scripts\sp\utility::_id_9193("default_supdrone");
   scripts\engine\utility::waitframe();
 
-  if(isDefined(self._id_B00E))
+  if(isDefined(self._id_B00E)) {
     self._id_B00E delete();
+  }
 
   self delete();
 }
@@ -449,13 +466,15 @@ _id_5BF6() {
   self playSound("support_drone_engine_mvmt_death");
   self setanimknob(%equip_pocket_drone_death_loop);
 
-  if(isDefined(self.lastdamagedir))
+  if(isDefined(self.lastdamagedir)) {
     var_0 = self.lastdamagedir;
-  else
+  } else {
     var_0 = anglestoright(level.player getplayerangles());
+  }
 
-  if(var_0 == (0, 0, 0))
+  if(var_0 == (0, 0, 0)) {
     var_0 = (1, 0, 0);
+  }
 
   var_1 = anglestoup(vectortoangles(var_0));
   playFX(level._effect["drone_shotdown_air_damage"], self.origin, var_0, var_1);
@@ -491,8 +510,9 @@ _id_5C0C(var_0) {
   var_10 show();
   var_10 physicslaunchserver(var_10.origin, var_7 * var_9);
 
-  if(isDefined(self._id_B00E))
+  if(isDefined(self._id_B00E)) {
     self._id_B00E delete();
+  }
 
   self delete();
   var_11 = 0.1;
@@ -535,8 +555,9 @@ _id_5C0D() {
   self vehicle_setspeed(30, 8, 8);
   wait 0.5;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self vehicle_setspeed(30, 25, 25);
+  }
 }
 
 _id_5C55() {
@@ -550,8 +571,9 @@ _id_5C55() {
   self._id_8435 = (0, 0, level._id_5C19[level._id_5C18]);
   level._id_5C18++;
 
-  if(level._id_5C18 >= level._id_5C19.size)
+  if(level._id_5C18 >= level._id_5C19.size) {
     level._id_5C18 = 0;
+  }
 
   var_0 = 1;
   var_1 = (-3000, -3000, -3000);
@@ -578,10 +600,11 @@ _id_5C55() {
     } else if(var_4 == "combat") {
       self._id_BE7A = scripts\sp\utility::array_removedeadvehicles(self._id_BE7A);
 
-      if(isDefined(self._id_1155E) && isalive(self._id_1155E) && level.player._id_5C4F > 0)
+      if(isDefined(self._id_1155E) && isalive(self._id_1155E) && level.player._id_5C4F > 0) {
         var_3 = var_1;
-      else
+      } else {
         var_3 = _id_5C53(var_1);
+      }
     }
 
     if(var_1 == var_3) {
@@ -600,20 +623,22 @@ _id_5C54() {
   var_4 = var_2 + (0, 0, var_3);
   var_5 = scripts\common\trace::ray_trace(var_2, var_4, undefined, scripts\common\trace::create_solid_ai_contents(1));
 
-  if(var_5["fraction"] != 1.0)
+  if(var_5["fraction"] != 1.0) {
     var_4 = var_2 + (0, 0, var_5["fraction"] * var_3 - 10.0);
+  }
 
-  if(getdvarint("support_drone_debug"))
+  if(getdvarint("support_drone_debug")) {
     thread scripts\engine\utility::draw_line_for_time(var_2, var_4, 0, 1, 1, 0.1);
+  }
 
   var_6 = 1.0;
   var_7 = 1.0;
 
-  if(self._id_D384 == 1)
+  if(self._id_D384 == 1) {
     var_7 = -1.0;
-  else if(self._id_D384 == 2)
+  } else if(self._id_D384 == 2) {
     var_6 = -1.0;
-  else if(self._id_D384 >= 3) {
+  } else if(self._id_D384 >= 3) {
     var_6 = -1.0;
     var_7 = -1.0;
   }
@@ -629,20 +654,23 @@ _id_5C54() {
     var_10 = var_4 + var_11 * (var_5["fraction"] * var_12 - 10.0);
   }
 
-  if(getdvarint("support_drone_debug"))
+  if(getdvarint("support_drone_debug")) {
     thread scripts\engine\utility::draw_line_for_time(var_4, var_10, 0, 1, 1, 0.1);
+  }
 
   var_13 = var_10;
 
-  if(getdvarint("support_drone_debug"))
+  if(getdvarint("support_drone_debug")) {
     thread scripts\engine\utility::draw_line_for_time(var_13, var_13 + (0, 0, 16), 0, 0, 1, 0.1);
+  }
 
   var_14 = scripts\common\trace::ray_trace_passed(self.origin, var_13, undefined, scripts\common\trace::create_solid_ai_contents(1));
 
-  if(var_14)
+  if(var_14) {
     self._id_6FFF = 1;
-  else if(getdvarint("support_drone_debug"))
+  } else if(getdvarint("support_drone_debug")) {
     thread scripts\engine\utility::draw_line_for_time(self.origin, var_13, 1, 0, 0, 0.1);
+  }
 
   var_15 = scripts\engine\utility::drop_to_ground(var_13, 0);
   var_16 = getclosestpointonnavmesh(var_15);
@@ -654,17 +682,19 @@ _id_5C54() {
       thread scripts\engine\utility::draw_line_for_time(var_16, var_16 + (0, 0, 16), 0, 1, 0, 0.25);
     }
 
-    if(!self._id_6FFF)
+    if(!self._id_6FFF) {
       var_17 = 0;
+    }
   }
 
   var_18 = var_13;
 
   if(!var_17) {
-    if(distance(var_2, var_16) > distance(var_2, var_15))
+    if(distance(var_2, var_16) > distance(var_2, var_15)) {
       var_18 = var_4;
-    else
+    } else {
       var_18 = (var_16[0], var_16[1], var_4[2]);
+    }
   }
 
   self._id_1D55 = var_3;
@@ -688,13 +718,15 @@ _id_5C5A(var_0) {
 }
 
 _id_5C56(var_0) {
-  if(getdvarint("support_drone_debug"))
+  if(getdvarint("support_drone_debug")) {
     thread scripts\sp\utility::draw_circle(self._id_4B2F + (0, 0, 16), self._id_4B2E, (1, 0, 0), 1.0, 0, 1);
+  }
 
-  if(distance(var_0, self._id_4B2F) >= self._id_4B2E)
+  if(distance(var_0, self._id_4B2F) >= self._id_4B2E) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_5C51() {
@@ -713,57 +745,64 @@ _id_5C53(var_0) {
     var_4[var_4.size] = var_6.origin + (0, 0, var_1);
   }
 
-  for(var_8 = 0; var_8 < int(self._id_BE7A.size * 1.5); var_8++)
+  for(var_8 = 0; var_8 < int(self._id_BE7A.size * 1.5); var_8++) {
     var_3[var_3.size] = var_2;
+  }
 
   var_9 = averagepoint(var_3);
   var_10 = averagepoint(var_4);
   var_11 = (0, 0, 0);
 
-  if(var_10 == var_2)
+  if(var_10 == var_2) {
     var_11 = level.player.angles;
-  else
+  } else {
     var_11 = vectortoangles(vectorNormalize(var_10 - var_2));
+  }
 
   var_12 = vectorNormalize(var_10 - var_2);
   var_13 = distance(var_9, var_2);
 
-  if(var_13 > 700)
+  if(var_13 > 700) {
     var_9 = var_2 + var_12 * 700;
+  }
 
   var_14 = anglestoright(var_11);
   var_15 = 90;
 
-  if(self._id_D384 == 0)
+  if(self._id_D384 == 0) {
     var_9 = var_9 + var_14 * var_15 / 2;
-  else if(self._id_D384 == 1)
+  } else if(self._id_D384 == 1) {
     var_9 = var_9 - var_14 * var_15 / 2;
-  else if(self._id_D384 == 2)
+  } else if(self._id_D384 == 2) {
     var_9 = var_9 + var_14 * var_15 * 1.5;
-  else if(self._id_D384 >= 3)
+  } else if(self._id_D384 >= 3) {
     var_9 = var_9 - var_14 * var_15 * 1.5;
+  }
 
   if(isDefined(self._id_1155E) && isalive(self._id_1155E)) {
     var_16 = vectorNormalize(self._id_1155E.origin + (0, 0, var_1) - var_9);
     var_17 = distance(self._id_1155E.origin + (0, 0, var_1), var_9) / 4.0;
 
-    if(var_17 > 100)
+    if(var_17 > 100) {
       var_17 = 100;
+    }
 
     var_9 = var_9 + var_16 * var_17;
   }
 
-  if(distancesquared(var_9, var_0) < 2500)
+  if(distancesquared(var_9, var_0) < 2500) {
     return var_0;
-  else
+  } else {
     level.player._id_5C4F = randomfloatrange(0.2, 2.5);
+  }
 
   var_18 = scripts\common\trace::ray_trace_passed(self.origin, var_9, undefined, scripts\common\trace::create_solid_ai_contents(1));
 
-  if(var_18)
+  if(var_18) {
     self._id_6FFF = 1;
-  else if(getdvarint("support_drone_debug"))
+  } else if(getdvarint("support_drone_debug")) {
     thread scripts\engine\utility::draw_line_for_time(self.origin, var_9, 1, 0, 0, 0.1);
+  }
 
   var_19 = scripts\engine\utility::drop_to_ground(var_9, 0);
   var_20 = getclosestpointonnavmesh(var_19);
@@ -775,27 +814,31 @@ _id_5C53(var_0) {
       thread scripts\engine\utility::draw_line_for_time(var_20, var_20 + (0, 0, 16), 0, 1, 0, 0.25);
     }
 
-    if(!self._id_6FFF)
+    if(!self._id_6FFF) {
       var_21 = 0;
+    }
   }
 
   var_22 = var_9;
 
-  if(!var_21)
+  if(!var_21) {
     var_22 = (var_20[0], var_20[1], var_20[2] + var_1);
+  }
 
   self._id_1D55 = var_1;
   return var_22;
 }
 
 _id_5C52() {
-  if(_id_D2DD())
+  if(_id_D2DD()) {
     return "follow";
+  }
 
   self._id_BE7A = scripts\sp\utility::array_removedeadvehicles(self._id_BE7A);
 
-  if(self._id_BE7A.size > 0)
+  if(self._id_BE7A.size > 0) {
     return "combat";
+  }
 
   return "follow";
 }
@@ -808,8 +851,9 @@ _id_5C61(var_0) {
   if(self._id_6FFF == 1) {
     self setvehgoalpos(var_0, 1);
 
-    if(getdvarint("support_drone_debug"))
+    if(getdvarint("support_drone_debug")) {
       thread scripts\engine\utility::draw_line_for_time(self.origin, var_0, 0, 1, 0, 0.25);
+    }
 
     scripts\engine\utility::waittill_any("near_goal", "goal");
     return;
@@ -830,8 +874,9 @@ _id_5C61(var_0) {
   foreach(var_7, var_6 in var_3) {
     if(getdvarint("support_drone_debug")) {}
 
-    if(isDefined(self._id_1D55))
+    if(isDefined(self._id_1D55)) {
       var_6 = var_6 + (0, 0, self._id_1D55);
+    }
 
     if(getdvarint("support_drone_debug")) {}
 
@@ -867,21 +912,24 @@ _id_5C1F() {
   self endon("death_anim");
   self endon("death");
 
-  if(!isDefined(self._id_BE7A))
+  if(!isDefined(self._id_BE7A)) {
     self._id_BE7A = [];
+  }
 
   for(;;) {
     var_0 = [];
 
     foreach(var_2 in getaiarray("axis")) {
-      if(_id_64EA(var_2) && !issubstr(var_2.classname, "c12"))
+      if(_id_64EA(var_2) && !issubstr(var_2.classname, "c12")) {
         var_0[var_0.size] = var_2;
+      }
     }
 
-    if(self._id_BE7A.size == 0 && var_0.size > 0)
+    if(self._id_BE7A.size == 0 && var_0.size > 0) {
       self notify("found_enemies");
-    else if(self._id_BE7A.size > 0 && var_0.size == 0)
+    } else if(self._id_BE7A.size > 0 && var_0.size == 0) {
       self notify("no_enemies");
+    }
 
     self._id_BE7A = var_0;
     wait 0.1;
@@ -889,17 +937,21 @@ _id_5C1F() {
 }
 
 _id_64EA(var_0) {
-  if(!isalive(var_0) || var_0 scripts\sp\utility::_id_58DA())
+  if(!isalive(var_0) || var_0 scripts\sp\utility::_id_58DA()) {
     return 0;
+  }
 
-  if(distance(var_0.origin, self.origin) > 1200)
+  if(distance(var_0.origin, self.origin) > 1200) {
     return 0;
+  }
 
-  if(isDefined(var_0._id_1CAC))
+  if(isDefined(var_0._id_1CAC)) {
     return var_0._id_1CAC;
+  }
 
-  if(var_0.ignoreme)
+  if(var_0.ignoreme) {
     return 0;
+  }
 
   return 1;
 }
@@ -985,8 +1037,9 @@ _id_5BED() {
       var_1 = 1;
     }
 
-    if(var_0 > 1200)
+    if(var_0 > 1200) {
       self notify("lethal_damage");
+    }
   }
 }
 
@@ -995,8 +1048,9 @@ _id_5C05() {
   scripts\sp\utility::_id_75C4("drone_damaged_loop", "tag_origin");
   scripts\engine\utility::waittill_any("death", "death_anim");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     scripts\sp\utility::_id_75F8("drone_damaged_loop", "tag_origin");
+  }
 }
 
 _id_5BD8() {
@@ -1004,11 +1058,13 @@ _id_5BD8() {
   self endon("death");
   self endon("entitydeleted");
 
-  if(!scripts\sp\utility::_id_65DF("target_timeout"))
+  if(!scripts\sp\utility::_id_65DF("target_timeout")) {
     scripts\sp\utility::_id_65E0("target_timeout");
+  }
 
-  if(!scripts\sp\utility::_id_65DF("target_killed_wait"))
+  if(!scripts\sp\utility::_id_65DF("target_killed_wait")) {
     scripts\sp\utility::_id_65E0("target_killed_wait");
+  }
 
   self._id_2654 = 1;
   childthread _id_5BE6();
@@ -1035,22 +1091,26 @@ _id_5BE6() {
     var_0 = 0;
     var_1 = 0;
 
-    while(level.player._id_5C6E > 0)
+    while(level.player._id_5C6E > 0) {
       scripts\engine\utility::waitframe();
+    }
 
-    while(_id_D2DD())
+    while(_id_D2DD()) {
       wait 0.25;
+    }
 
     if(self._id_BE7A.size == 0) {
       self waittill("found_enemies");
       continue;
     }
 
-    if(isDefined(self._id_1155E) && (!isalive(self._id_1155E) || self._id_1155E scripts\sp\utility::_id_58DA()) || scripts\sp\utility::_id_65DB("target_killed_wait"))
+    if(isDefined(self._id_1155E) && (!isalive(self._id_1155E) || self._id_1155E scripts\sp\utility::_id_58DA()) || scripts\sp\utility::_id_65DB("target_killed_wait")) {
       var_1 = 1;
+    }
 
-    if(!var_1 || scripts\sp\utility::_id_65DB("target_timeout"))
+    if(!var_1 || scripts\sp\utility::_id_65DB("target_timeout")) {
       var_0 = 1;
+    }
 
     if(var_0) {
       var_2 = _id_5C1C(self._id_1155E);
@@ -1077,8 +1137,9 @@ _id_5BE6() {
 _id_5C1C(var_0) {
   self._id_BE7A = scripts\sp\utility::array_removedeadvehicles(self._id_BE7A);
 
-  if(self._id_BE7A.size == 0)
+  if(self._id_BE7A.size == 0) {
     return undefined;
+  }
 
   var_1 = [];
 
@@ -1087,10 +1148,11 @@ _id_5C1C(var_0) {
       continue;
     }
     if(isDefined(var_3._id_1CAC)) {
-      if(var_3._id_1CAC)
+      if(var_3._id_1CAC) {
         var_1[var_1.size] = var_3;
-      else
+      } else {
         continue;
+      }
     }
 
     if(isDefined(var_3.ignoreme) && var_3.ignoreme) {
@@ -1099,23 +1161,27 @@ _id_5C1C(var_0) {
     var_1[var_1.size] = var_3;
   }
 
-  if(var_1.size == 0)
+  if(var_1.size == 0) {
     return undefined;
+  }
 
   var_5 = [];
 
   foreach(var_3 in var_1) {
-    if(_id_5BE9(var_3))
+    if(_id_5BE9(var_3)) {
       var_5[var_5.size] = var_3;
+    }
   }
 
   var_8 = var_5;
 
-  if(var_8.size == 0)
+  if(var_8.size == 0) {
     return undefined;
+  }
 
-  if(isDefined(var_0) && scripts\engine\utility::array_contains(var_8, var_0))
+  if(isDefined(var_0) && scripts\engine\utility::array_contains(var_8, var_0)) {
     return var_0;
+  }
 
   var_9 = var_8[randomint(var_8.size)];
   return var_9;
@@ -1125,14 +1191,16 @@ _id_5BE9(var_0) {
   var_1 = 0;
   var_2 = scripts\common\trace::ray_trace(self.origin, var_0 gettagorigin("j_head"), undefined, scripts\common\trace::create_solid_ai_contents(1));
 
-  if(var_2["fraction"] == 1.0)
+  if(var_2["fraction"] == 1.0) {
     var_1 = 1;
+  }
 
   if(isalive(level.player) && var_1 == 0) {
     var_2 = scripts\common\trace::ray_trace(level.player getEye(), var_0 gettagorigin("j_head"), undefined, scripts\common\trace::create_solid_ai_contents(1));
 
-    if(var_2["fraction"] == 1.0)
+    if(var_2["fraction"] == 1.0) {
       var_1 = 1;
+    }
   }
 
   return var_1;
@@ -1164,14 +1232,16 @@ _id_5C98(var_0) {
 
     var_4 = ["j_Head", "j_Spine4", "j_SpineLower"];
 
-    if(var_0.asmname == "seeker")
+    if(var_0.asmname == "seeker") {
       var_4 = scripts\engine\utility::array_remove(var_4, "j_SpineLower");
+    }
 
     var_5 = undefined;
 
     foreach(var_7 in var_4) {
-      if(getdvarint("support_drone_debug"))
+      if(getdvarint("support_drone_debug")) {
         thread scripts\engine\utility::draw_line_for_time(var_1, var_0 gettagorigin(var_7), 0.7, 0, 0, 0.1);
+      }
 
       var_8 = scripts\common\trace::ray_trace_detail(var_1, var_0 gettagorigin(var_7), self);
 
@@ -1302,16 +1372,18 @@ _id_5C0F() {
   self.ammocount = self.ammocount - 1;
   _id_5C32(self._id_9180, self.ammocount);
 
-  if(self.ammocount <= 0)
+  if(self.ammocount <= 0) {
     self notify("no_ammo");
+  }
 
   var_1 = var_0 gettagorigin("j_spine4");
   var_2 = var_1 - var_0.origin;
   var_3 = 4;
 
   for(var_4 = 0; var_4 < var_3; var_4++) {
-    if(self.ammocount <= 0)
+    if(self.ammocount <= 0) {
       wait 0.1;
+    }
 
     thread _id_5C10();
     self._id_5CDB shootturret();
@@ -1320,8 +1392,9 @@ _id_5C0F() {
 
   wait 0.05;
 
-  if(isDefined(var_0) && (!isalive(var_0) || var_0 scripts\sp\utility::_id_58DA()))
+  if(isDefined(var_0) && (!isalive(var_0) || var_0 scripts\sp\utility::_id_58DA())) {
     _id_F378(self._id_9180, "kill");
+  }
 }
 
 _id_5BEB() {
@@ -1350,14 +1423,16 @@ _id_5C12() {
   self.ammocount = self.ammocount - 1;
   _id_5C32(self._id_9180, self.ammocount);
 
-  if(self.ammocount <= 0)
+  if(self.ammocount <= 0) {
     self notify("no_ammo");
+  }
 
   var_0 = 1;
 
   for(var_1 = 0; var_1 < var_0; var_1++) {
-    if(self.ammocount <= 0)
+    if(self.ammocount <= 0) {
       wait 0.1;
+    }
 
     self._id_5CDB shootturret();
     wait 0.1;
@@ -1370,8 +1445,9 @@ _id_5C10() {
   self notify("firing");
   self endon("firing");
 
-  if(!self._id_6DA5)
+  if(!self._id_6DA5) {
     self._id_6DA5 = 1;
+  }
 
   wait 1;
   self._id_6DA5 = 0;
@@ -1382,8 +1458,9 @@ _id_5C59() {
   thread scripts\engine\utility::play_loop_sound_on_entity("support_drone_close_lyr");
   scripts\engine\utility::waittill_any("death", "death_anim");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     _id_5C58("support_drone_engine", "support_drone_close_lyr");
+  }
 }
 
 _id_5C58(var_0, var_1) {
@@ -1398,8 +1475,9 @@ _id_5C5C() {
   scripts\sp\utility::_id_75C4("drone_thruster", "j_fan_rear_ri");
   scripts\engine\utility::waittill_any("death", "death_anim");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     _id_5C5B();
+  }
 }
 
 _id_5C5B() {
@@ -1410,11 +1488,13 @@ _id_5C5B() {
 }
 
 _id_9C6F() {
-  if(!isDefined(level.player._id_4C29))
+  if(!isDefined(level.player._id_4C29)) {
     return 0;
+  }
 
-  if(level.player._id_4C29.size <= 0)
+  if(level.player._id_4C29.size <= 0) {
     return 0;
+  }
 
   return 1;
 }
@@ -1423,8 +1503,9 @@ get_all_drones() {
   var_0 = [];
 
   for(var_1 = 0; var_1 < 5; var_1++) {
-    if(isDefined(level.player._id_4C29[var_1]) && isDefined(level.player._id_4C29[var_1]._id_5BD7) && isalive(level.player._id_4C29[var_1]._id_5BD7))
+    if(isDefined(level.player._id_4C29[var_1]) && isDefined(level.player._id_4C29[var_1]._id_5BD7) && isalive(level.player._id_4C29[var_1]._id_5BD7)) {
       var_0 = scripts\engine\utility::array_add(var_0, level.player._id_4C29[var_1]._id_5BD7);
+    }
   }
 
   return var_0;
@@ -1434,16 +1515,18 @@ _id_A5B9() {
   if(!isDefined(level.player._id_4C29) || level.player._id_4C29.size == 0) {
     return;
   }
-  foreach(var_1 in level.player._id_4C29)
-  var_1._id_5BD7 notify("lethal_damage");
+  foreach(var_1 in level.player._id_4C29) {
+    var_1._id_5BD7 notify("lethal_damage");
+  }
 }
 
 _id_5139() {
   if(!isDefined(level.player._id_4C29) || level.player._id_4C29.size == 0) {
     return;
   }
-  foreach(var_1 in level.player._id_4C29)
-  var_1._id_5BD7 notify("vr_delete");
+  foreach(var_1 in level.player._id_4C29) {
+    var_1._id_5BD7 notify("vr_delete");
+  }
 }
 
 _id_1310A() {
@@ -1451,8 +1534,9 @@ _id_1310A() {
 }
 
 _id_D2DD() {
-  if(_id_1310A())
+  if(_id_1310A()) {
     return !scripts\engine\utility::flag("stealth_spotted");
+  }
 
   return 0;
 }
@@ -1508,8 +1592,9 @@ _id_F4B1(var_0) {
 }
 
 _id_129A() {
-  if(isDefined(level.player._id_5CB3) && level.player._id_5CB3 == 1)
+  if(isDefined(level.player._id_5CB3) && level.player._id_5CB3 == 1) {
     return "supportdrone_up2";
-  else
+  } else {
     return "supportdrone";
+  }
 }

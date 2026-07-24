@@ -9,8 +9,9 @@ _id_E3BC(var_0) {
   _id_0EFB::_id_E3F7();
   var_1 = ["jackal_bay_1", "jackal_bay_2", "jackal_bay_3", "jackal_bay_4"];
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = [var_0];
+  }
 
   foreach(var_0 in var_1) {
     level._id_E35D._id_AA5F[var_0] = spawnStruct();
@@ -23,8 +24,9 @@ _id_E3BC(var_0) {
     if(var_3.size > 1) {
       var_3 = scripts\engine\utility::array_remove(var_3, var_3[0]);
 
-      foreach(var_5 in var_3)
-      var_5 linkTo(level._id_E35D._id_AA5F[var_0]._id_5979);
+      foreach(var_5 in var_3) {
+        var_5 linkTo(level._id_E35D._id_AA5F[var_0]._id_5979);
+      }
     }
 
     var_3 = _id_0EFB::_id_7991(var_0, "script_noteworthy", "door_2");
@@ -33,8 +35,9 @@ _id_E3BC(var_0) {
     if(var_3.size > 1) {
       var_3 = scripts\engine\utility::array_remove(var_3, var_3[0]);
 
-      foreach(var_5 in var_3)
-      var_5 linkTo(level._id_E35D._id_AA5F[var_0]._id_597A);
+      foreach(var_5 in var_3) {
+        var_5 linkTo(level._id_E35D._id_AA5F[var_0]._id_597A);
+      }
     }
 
     level._id_E35D._id_AA5F[var_0]._id_5979._id_101EE = _id_0EFB::_id_798A(var_0, "script_noteworthy", "signal_lamp_1_red");
@@ -177,11 +180,13 @@ _id_E3C0(var_0) {
 }
 
 _id_E3BE(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
   level _id_E3C0(var_0);
   level _id_E3C1(var_0, var_2);
@@ -191,11 +196,13 @@ _id_E3BE(var_0, var_1, var_2, var_3) {
     setsaveddvar("bg_cinematicCanPause", "1");
     cinematicingame("sc_assault_maptrans_jackal_launch");
 
-    while(!iscinematicplaying())
+    while(!iscinematicplaying()) {
       scripts\engine\utility::waitframe();
+    }
 
-    while(iscinematicplaying())
+    while(iscinematicplaying()) {
       scripts\engine\utility::waitframe();
+    }
 
     stopcinematicingame();
   }
@@ -208,8 +215,9 @@ _id_E3BE(var_0, var_1, var_2, var_3) {
     _id_E3BF();
   }
 
-  if(var_3)
+  if(var_3) {
     level._id_D127 waittill("notify_player_launch");
+  }
 
   level _id_E3C2(var_0, var_2);
 }
@@ -227,21 +235,24 @@ _id_E3C1(var_0, var_1) {
   level _id_E3C0(var_0);
   var_2 = level._id_E35D._id_AA5F[var_0];
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
-  if(level._id_FD6E.jackals[var_0] == level._id_D127)
+  if(level._id_FD6E.jackals[var_0] == level._id_D127) {
     level._id_D127.anchor linkTo(var_2._id_102DD);
-  else
+  } else {
     level._id_FD6E.jackals[var_0] linkTo(var_2._id_102DD);
+  }
 
   if(var_1) {
     scripts\engine\utility::exploder("1st_airlock_open");
     level.player playSound("scn_jackal_launch_door_open");
   }
 
-  if(var_0 == "jackal_bay_3")
+  if(var_0 == "jackal_bay_3") {
     level thread _id_E3BA();
+  }
 
   var_2._id_5979 _id_E3B9("open", 3, 1);
 
@@ -259,10 +270,11 @@ _id_E3C1(var_0, var_1) {
   level._id_FD6E.jackals[var_0] unlink();
   scripts\engine\utility::waitframe();
 
-  if(level._id_FD6E.jackals[var_0] == level._id_D127)
+  if(level._id_FD6E.jackals[var_0] == level._id_D127) {
     level._id_D127.anchor linkTo(level._id_E35D._id_AA5F[var_0]._id_3FFB);
-  else
+  } else {
     level._id_FD6E.jackals[var_0] linkTo(level._id_E35D._id_AA5F[var_0]._id_3FFB, "tag_origin", (0, 0, -140), (0, 0, 0));
+  }
 
   if(var_1) {
     level thread _id_0BDC::_id_A2B0(%jackal_pilot_reaction_crane_start, %jackal_vehicle_shipcrib_landed);
@@ -296,29 +308,34 @@ _id_E3C1(var_0, var_1) {
 
   level scripts\engine\utility::delaythread(1, ::_id_E3CA, var_0, "open", 4);
 
-  if(var_1)
+  if(var_1) {
     level.player scripts\engine\utility::delaycall(1, ::playsound, "scn_jackal_launch_ret_ext_doors");
+  }
 
   var_2._id_597A thread _id_E3B9("close", 3);
   var_2._id_597B _id_E3B9("close", 3);
 }
 
 _id_E3BD(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
-  if(var_1)
+  if(var_1) {
     scripts\engine\utility::exploder("airlock_depressurize");
+  }
 
   wait 1;
 
-  if(var_1)
+  if(var_1) {
     level notify("launch_decompression_done");
+  }
 }
 
 _id_E3C2(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   level _id_E3C0(var_0);
   var_2 = level._id_E35D._id_AA5F[var_0];
@@ -352,10 +369,11 @@ _id_E3C3(var_0) {
   level._id_E35D._id_AA5F[var_0]._id_597A moveTo(level._id_E35D._id_AA5F[var_0]._id_597A._id_4291, 3);
   wait 3;
 
-  if(level._id_FD6E.jackals[var_0] == level._id_D127)
+  if(level._id_FD6E.jackals[var_0] == level._id_D127) {
     level._id_D127.anchor linkTo(level._id_E35D._id_AA5F[var_0]._id_102DD);
-  else
+  } else {
     level._id_FD6E.jackals[var_0] linkTo(level._id_E35D._id_AA5F[var_0]._id_102DD);
+  }
 
   level._id_E35D._id_AA5F[var_0]._id_5979 moveTo(level._id_E35D._id_AA5F[var_0]._id_5979._id_C630, 3);
   wait 3;
@@ -368,8 +386,9 @@ _id_E3C3(var_0) {
 _id_E3B9(var_0, var_1, var_2) {
   self endon("death");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   var_3 = 0.25;
   var_4 = var_1;
@@ -402,8 +421,9 @@ _id_E3B9(var_0, var_1, var_2) {
 
   wait(var_4);
 
-  if(var_1 > var_3 && var_2)
+  if(var_1 > var_3 && var_2) {
     self _meth_8291(0.5, 0.5, 0.5, var_3, 0, 0, 1024, 14, 14, 14);
+  }
 
   wait(var_3);
 
@@ -515,8 +535,9 @@ _id_AB96(var_0, var_1) {
 }
 
 _id_E3CA(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   switch (var_1) {
     case "open":
@@ -580,8 +601,9 @@ _id_A404() {
       wait(var_16);
       var_21 = var_21 + 1;
 
-      if(var_21 > 3)
+      if(var_21 > 3) {
         var_21 = 0;
+      }
     }
   }
 
@@ -591,8 +613,9 @@ _id_A404() {
   }
 
   for(var_20 = 0; var_20 < var_19; var_20++) {
-    foreach(var_23 in var_15)
-    scripts\engine\utility::array_thread(var_23, ::_id_4CCE, var_16);
+    foreach(var_23 in var_15) {
+      scripts\engine\utility::array_thread(var_23, ::_id_4CCE, var_16);
+    }
 
     wait(var_16 * 2);
   }

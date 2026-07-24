@@ -16,8 +16,9 @@ main() {
   self.voice = "unitednations";
   self _meth_82C6("vestlight");
 
-  if(issentient(self))
+  if(issentient(self)) {
     self sethitlocdamagetable("locdmgtable/ai_lochit_dmgtable");
+  }
 
   self _meth_83D0(#animtree);
 }

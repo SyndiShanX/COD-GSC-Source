@@ -11,14 +11,16 @@ _id_CBB5(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(getdvarint("e3")) {
     return;
   }
-  if(gettime() < 500)
+  if(gettime() < 500) {
     wait 0.5;
+  }
 
   if(!isDefined(var_1)) {
     return;
   }
-  if(!isDefined(level._id_CB9C))
+  if(!isDefined(level._id_CB9C)) {
     level._id_CB9C = level.player _meth_8216();
+  }
 
   if(_id_CBAC()) {
     return;
@@ -33,11 +35,13 @@ _id_CBB5(var_0, var_1, var_2, var_3, var_4, var_5) {
   level._id_CB9C.tag = var_1;
   level._id_CB9C.fov = scripts\engine\utility::ter_op(isDefined(var_2), var_2, 30);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level._id_CB9C.origin_offset = var_3;
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     level._id_CB9C.angles_offset = var_4;
+  }
 
   level._id_CB9C.entity = var_0;
   level._id_CB9C.enable = 1;
@@ -50,10 +54,11 @@ _id_CBB5(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(var_5)) {
     setomnvar("ui_show_pip", 1);
 
-    if(isDefined(level.player _meth_8473()))
+    if(isDefined(level.player _meth_8473())) {
       setomnvar("ui_jackal_hide_follow_pip", 1);
-    else
+    } else {
       setomnvar("ui_jackal_hide_follow_pip", 0);
+    }
   }
 }
 
@@ -71,11 +76,13 @@ _id_2ADF(var_0) {
   setomnvar("ui_show_pip", 1);
   cinematicingame(var_0);
 
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     wait 0.05;
+  }
 
-  while(iscinematicplaying())
+  while(iscinematicplaying()) {
     wait 0.05;
+  }
 
   stopcinematicingame();
   setomnvar("ui_show_pip", 0);

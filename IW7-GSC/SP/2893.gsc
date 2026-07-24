@@ -39,11 +39,11 @@ _id_C097(var_0, var_1, var_2) {
     var_1 = var_3;
   }
 
-  if(var_2 > var_1)
+  if(var_2 > var_1) {
     return 1.0;
-  else if(var_2 < var_0)
+  } else if(var_2 < var_0) {
     return 0.0;
-  else if(var_0 == var_1) {}
+  } else if(var_0 == var_1) {}
 
   return (var_2 - var_0) / (var_1 - var_0);
 }
@@ -82,8 +82,9 @@ _id_ACE9(var_0, var_1, var_2, var_3) {
   var_5 = var_1 - var_0;
   var_6 = vectordot(var_3, var_5);
 
-  if(var_6 == 0)
+  if(var_6 == 0) {
     return undefined;
+  }
 
   var_7 = (var_4 - vectordot(var_3, var_0)) / var_6;
   var_8 = var_0 + var_5 * var_7;
@@ -91,8 +92,9 @@ _id_ACE9(var_0, var_1, var_2, var_3) {
 }
 
 _id_13DE5(var_0, var_1, var_2) {
-  while(var_2 > var_1)
+  while(var_2 > var_1) {
     var_2 = var_2 - (var_1 - var_0 + 1);
+  }
 
   return var_2;
 }
@@ -154,8 +156,9 @@ _id_DCA0() {
 }
 
 _id_F47F(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = self.angles;
+  }
 
   self.angles = _id_31AB(var_0, var_1);
 }
@@ -176,8 +179,9 @@ _id_4A7C(var_0, var_1, var_2) {
   self endon("death");
   self endon("stop_spring");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   var_3 = _id_10AAE(var_1, self.origin, anglesToForward(self.angles) * var_2);
 
@@ -198,8 +202,9 @@ _id_4A7A(var_0, var_1, var_2) {
   self endon("death");
   self endon("stop_spring");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   var_3 = _id_10AAE(var_1, self.origin, anglesToForward(self.angles) * var_2);
 
@@ -221,8 +226,9 @@ _id_C7E3(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("stop_spring");
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1;
+  }
 
   var_4 = _id_10AAF(var_1, var_2, self.origin, anglesToForward(self.angles) * var_3);
 
@@ -243,8 +249,9 @@ _id_12B89(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("stop_spring");
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1;
+  }
 
   var_4 = _id_10AB0(var_1, var_2, self.origin, anglesToForward(self.angles) * var_3);
 
@@ -310,11 +317,13 @@ _id_10AB0(var_0, var_1, var_2, var_3) {
 }
 
 _id_10AB4(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     _id_10AB2(var_0, var_2);
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     _id_10AB3(var_0, var_3);
+  }
 
   var_4 = level._id_10AB5[var_0].pos - var_1;
   var_5 = level._id_10AB5[var_0]._id_332A * var_4 + level._id_10AB5[var_0]._id_332B * level._id_10AB5[var_0]._id_1326C;

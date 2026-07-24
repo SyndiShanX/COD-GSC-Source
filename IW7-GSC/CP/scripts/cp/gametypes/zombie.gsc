@@ -11,10 +11,11 @@ main() {
   init_zombie_fx();
   scripts\cp\cp_music_and_dialog::init();
 
-  if(getdvarint("gnet_build", 0) != 0)
+  if(getdvarint("gnet_build", 0) != 0) {
     scripts\cp\utility::coop_mode_enable(["pillage", "loot", "challenge", "doors", "wall_buys", "crafting"]);
-  else
+  } else {
     scripts\cp\utility::coop_mode_enable(["pillage", "loot", "challenge", "doors", "guided_interaction", "wall_buys", "crafting", "outline"]);
+  }
 
   level.nodefiltertracestime = 0;
   level.nodefiltertracesthisframe = 0;
@@ -60,8 +61,9 @@ main() {
   scripts\cp\cp_weapon::weaponsinit();
   scripts\cp\utility::healthregeninit(0);
 
-  if(!isDefined(level.powers))
+  if(!isDefined(level.powers)) {
     level.powers = [];
+  }
 
   level.overcook_func = [];
   level.hardcoremode = getdvarint("scr_aliens_hardcore");
@@ -100,8 +102,9 @@ main() {
 blank() {}
 
 waitforplayers() {
-  while(!isDefined(level.players))
+  while(!isDefined(level.players)) {
     wait 0.1;
+  }
 }
 
 _id_13F20(var_0) {
@@ -113,21 +116,25 @@ _id_13F20(var_0) {
   var_0 scripts\cp\utility::stoplocalsound_safe("zmb_laststand_music");
   var_0 clearclienttriggeraudiozone(0.3);
 
-  if(isDefined(level.vision_set_override))
+  if(isDefined(level.vision_set_override)) {
     var_0 thread reset_override_visionset(0.2);
+  }
 
   var_0 visionsetnakedforplayer("", 0);
   var_1 = randomintrange(1, 5);
   var_2 = "zmb_revive_music_lr_0" + var_1;
 
-  if(soundexists(var_2))
+  if(soundexists(var_2)) {
     var_0 playlocalsound(var_2);
+  }
 
-  if(var_0 scripts\cp\utility::isignoremeenabled())
+  if(var_0 scripts\cp\utility::isignoremeenabled()) {
     var_0 scripts\cp\utility::allow_player_ignore_me(0);
+  }
 
-  if(scripts\engine\utility::is_true(var_0.have_permanent_perks))
+  if(scripts\engine\utility::is_true(var_0.have_permanent_perks)) {
     var_0 thread give_permanent_perks(var_0);
+  }
 }
 
 give_permanent_perks(var_0) {
@@ -135,11 +142,13 @@ give_permanent_perks(var_0) {
   var_0 endon("last_stand");
   var_1 = ["perk_machine_boom", "perk_machine_flash", "perk_machine_fwoosh", "perk_machine_more", "perk_machine_rat_a_tat", "perk_machine_revive", "perk_machine_run", "perk_machine_smack", "perk_machine_tough", "perk_machine_zap"];
 
-  if(isDefined(level.all_perk_list))
+  if(isDefined(level.all_perk_list)) {
     var_1 = level.all_perk_list;
+  }
 
-  if(scripts\cp\utility::isplayingsolo() || level.only_one_player)
+  if(scripts\cp\utility::isplayingsolo() || level.only_one_player) {
     var_1 = scripts\engine\utility::array_remove(var_1, "perk_machine_revive");
+  }
 
   wait 1;
 
@@ -153,11 +162,13 @@ give_permanent_perks(var_0) {
 }
 
 reset_override_visionset(var_0) {
-  if(var_0 > 0)
+  if(var_0 > 0) {
     wait(var_0);
+  }
 
-  if(isDefined(level.vision_set_override))
+  if(isDefined(level.vision_set_override)) {
     self visionsetnakedforplayer(level.vision_set_override, 0.1);
+  }
 }
 
 init_zombie_flags() {
@@ -190,10 +201,11 @@ zombie_onstartgametype() {
   scripts\cp\zombies\coop_wall_buys::init();
   scripts\cp\cp_persistence::register_eog_to_lb_playerdata_mapping();
 
-  if(isDefined(level.challenge_init_func))
+  if(isDefined(level.challenge_init_func)) {
     [[level.challenge_init_func]]();
-  else
+  } else {
     scripts\cp\cp_challenge::init_coop_challenge();
+  }
 
   scripts\cp\zombies\zombie_analytics::init();
   scripts\cp\cp_laststand::set_revive_time(3000, 5000);
@@ -203,11 +215,13 @@ zombie_onstartgametype() {
   level.damagelistsize = 20;
   scripts\cp\utility::alien_health_per_player_init();
 
-  if(scripts\cp\utility::coop_mode_has("loot"))
+  if(scripts\cp\utility::coop_mode_has("loot")) {
     scripts\cp\loot::init_loot();
+  }
 
-  if(scripts\cp\utility::coop_mode_has("pillage"))
+  if(scripts\cp\utility::coop_mode_has("pillage")) {
     thread scripts\cp\zombies\zombies_pillage::pillage_init();
+  }
 
   level thread handle_nondeterministic_entities();
   level thread revive_players_between_waves_monitor();
@@ -217,13 +231,15 @@ zombie_onstartgametype() {
   scripts\cp\perks\perkmachines::init_zombie_perks_callback();
   scripts\cp\perks\perkmachines::init_perks_from_table();
 
-  if(isDefined(level.player_respawn_locations_init))
+  if(isDefined(level.player_respawn_locations_init)) {
     level thread[[level.player_respawn_locations_init]]();
+  }
 
   thread scripts\cp\zombies\zombies_consumables::init_consumables();
 
-  if(isDefined(level.spawn_vo_func))
+  if(isDefined(level.spawn_vo_func)) {
     level thread[[level.spawn_vo_func]]();
+  }
 
   scripts\cp\zombies\zombies_weapons::init();
   scripts\cp\zombies\zombie_quest::_id_10CEF();
@@ -236,15 +252,17 @@ zombie_onstartgametype() {
   level thread validate_door_buy_setup();
   level thread scripts\cp\zombies\directors_cut::start_directors_cut();
 
-  if(scripts\cp\utility::coop_mode_has("wall_buys"))
+  if(scripts\cp\utility::coop_mode_has("wall_buys")) {
     level thread scripts\cp\zombies\coop_wall_buys::_id_23DA();
-  else
+  } else {
     scripts\cp\cp_interaction::_id_55A2();
+  }
 
-  if(isDefined(level._id_F9F1))
+  if(isDefined(level._id_F9F1)) {
     level[[level._id_F9F1]]();
-  else
+  } else {
     _id_F9F0();
+  }
 
   level thread reset_variables_on_wave_start();
 }
@@ -264,8 +282,9 @@ reset_variables_on_wave_start() {
   for(;;) {
     level waittill("wave_starting");
 
-    foreach(var_1 in level.players)
-    var_1.can_give_revive_xp = 1;
+    foreach(var_1 in level.players) {
+      var_1.can_give_revive_xp = 1;
+    }
   }
 }
 
@@ -280,28 +299,32 @@ handle_nondeterministic_entities() {
   wait 5;
   level notify("spawn_nondeterministic_entities");
 
-  if(isDefined(level.post_nondeterministic_func))
+  if(isDefined(level.post_nondeterministic_func)) {
     level thread[[level.post_nondeterministic_func]]();
+  }
 }
 
 onplayerconnect() {
   for(;;) {
     level waittill("connected", var_0);
 
-    if(!isDefined(level.special_character_count))
+    if(!isDefined(level.special_character_count)) {
       level.special_character_count = 0;
+    }
 
     if(!isai(var_0)) {
       var_0 scripts\cp\cp_analytics::on_player_connect();
       var_0 thread watchforluinotifyweaponreset(var_0);
 
-      if(isDefined(var_0.connecttime))
+      if(isDefined(var_0.connecttime)) {
         var_0.connect_time = var_0.connecttime;
-      else
+      } else {
         var_0.connect_time = gettime();
+      }
 
-      if(scripts\cp\utility::coop_mode_has("outline"))
+      if(scripts\cp\utility::coop_mode_has("outline")) {
         var_0 thread scripts\cp\cp_outline::outline_monitor_think();
+      }
 
       var_0.xpscale = getdvarint("online_zombies_xpscale");
       var_0.weaponxpscale = getdvarint("online_zombie_weapon_xpscale");
@@ -312,13 +335,15 @@ onplayerconnect() {
         var_3 = var_0 _meth_85BE() > 1;
 
         if(isDefined(var_1)) {
-          if(var_3 && var_1 > 1)
+          if(var_3 && var_1 > 1) {
             var_0.weaponxpscale = var_1;
+          }
         }
 
         if(isDefined(var_2)) {
-          if(var_3 && var_2 > 1)
+          if(var_3 && var_2 > 1) {
             var_0.xpscale = var_2;
+          }
         }
       }
 
@@ -330,29 +355,37 @@ onplayerconnect() {
       var_0.total_currency_earned = 0;
       var_0.can_give_revive_xp = 1;
 
-      if(!isDefined(var_0.pap))
+      if(!isDefined(var_0.pap)) {
         var_0.pap = [];
+      }
 
-      if(!isDefined(var_0.powerupicons))
+      if(!isDefined(var_0.powerupicons)) {
         var_0.powerupicons = [];
+      }
 
-      if(!isDefined(var_0.powers))
+      if(!isDefined(var_0.powers)) {
         var_0.powers = [];
+      }
 
-      if(!isDefined(var_0.powers_active))
+      if(!isDefined(var_0.powers_active)) {
         var_0.powers_active = [];
+      }
 
-      if(!isDefined(var_0.disabled_interactions))
+      if(!isDefined(var_0.disabled_interactions)) {
         var_0.disabled_interactions = [];
+      }
 
-      if(!isDefined(var_0._id_C54A))
+      if(!isDefined(var_0._id_C54A)) {
         var_0._id_C54A = [];
+      }
 
-      if(!isDefined(var_0._id_C5C9))
+      if(!isDefined(var_0._id_C5C9)) {
         var_0._id_C5C9 = [];
+      }
 
-      if(!isDefined(var_0._id_C4E6))
+      if(!isDefined(var_0._id_C4E6)) {
         var_0._id_C4E6 = [];
+      }
 
       var_0 thread zombie_player_connect_black_screen();
       var_0.disabledteleportation = 0;
@@ -370,14 +403,16 @@ onplayerconnect() {
       var_0 scripts\cp\zombies\zombie_afterlife_arcade::init_soul_power(var_0);
 
       if(scripts\engine\utility::flag("introscreen_over")) {
-        if(isDefined(level.custom_player_hotjoin_func))
+        if(isDefined(level.custom_player_hotjoin_func)) {
           var_0 thread[[level.custom_player_hotjoin_func]]();
-        else
+        } else {
           var_0 thread player_hotjoin();
+        }
 
         if(scripts\cp\cp_challenge::current_challenge_exist() && scripts\cp\utility::coop_mode_has("challenge")) {
-          if(isDefined(level.challenge_hotjoin_func))
+          if(isDefined(level.challenge_hotjoin_func)) {
             var_0 thread[[level.challenge_hotjoin_func]]();
+          }
         }
       }
 
@@ -389,12 +424,14 @@ onplayerconnect() {
       var_0 thread scripts\cp\zombies\zombie_analytics::_id_97A4(var_0);
       var_0 thread streamweaponsonzonechange(var_0);
 
-      if(isDefined(level.custom_onplayerconnect_func))
+      if(isDefined(level.custom_onplayerconnect_func)) {
         [[level.custom_onplayerconnect_func]](var_0);
+      }
 
       if(!scripts\cp\utility::map_check(0) && !scripts\cp\utility::map_check(1)) {
-        if(!isDefined(level.kick_player_queue))
+        if(!isDefined(level.kick_player_queue)) {
           level thread kick_player_queue_loop();
+        }
 
         var_0 thread kick_for_inactivity(var_0);
       }
@@ -408,12 +445,13 @@ watchforluinotifyweaponreset(var_0) {
   var_0 endon("weaponplayerdatafinished");
   var_1 = "cp/cp_wall_buy_models.csv";
 
-  if(scripts\cp\utility::map_check(3))
+  if(scripts\cp\utility::map_check(3)) {
     var_1 = "cp/cp_town_wall_buy_models.csv";
-  else if(scripts\cp\utility::map_check(2))
+  } else if(scripts\cp\utility::map_check(2)) {
     var_1 = "cp/cp_disco_wall_buy_models.csv";
-  else if(scripts\cp\utility::map_check(4))
+  } else if(scripts\cp\utility::map_check(4)) {
     var_1 = "cp/cp_final_wall_buy_models.csv";
+  }
 
   for(;;) {
     var_0 waittill("luinotifyserver", var_2, var_3);
@@ -425,15 +463,17 @@ watchforluinotifyweaponreset(var_0) {
         if(isDefined(var_4)) {
           var_5 = tablelookup(var_1, 0, var_3, 2);
 
-          if(isDefined(var_5) && var_5 != "")
+          if(isDefined(var_5) && var_5 != "") {
             var_0 setplayerdata("cp", "zombiePlayerLoadout", "zombiePlayerWeaponModels", var_5, "variantID", -1);
+          }
         }
 
         continue;
       }
 
-      if(var_2 == "weaponplayerdatafinished")
+      if(var_2 == "weaponplayerdatafinished") {
         var_0 notify("weaponplayerdatafinished");
+      }
     }
   }
 }
@@ -448,8 +488,9 @@ streamweaponsonzonechange(var_0) {
   var_2 = scripts\engine\utility::getStructArray("interaction", "targetname");
 
   foreach(var_4 in var_2) {
-    if(isDefined(var_4.name) && var_4.name == "wall_buy")
+    if(isDefined(var_4.name) && var_4.name == "wall_buy") {
       var_1[var_1.size] = var_4;
+    }
   }
 
   var_6 = 1;
@@ -462,10 +503,11 @@ streamweaponsonzonechange(var_0) {
     for(var_10 = scripts\engine\utility::get_array_of_closest(var_0.origin, var_1, undefined, 10, 5000, 0); var_7 <= var_6 && var_8 < var_10.size; var_8++) {
       var_11 = scripts\cp\utility::getrawbaseweaponname(var_10[var_8].script_noteworthy);
 
-      if(isDefined(var_0.weapon_build_models[var_11]))
+      if(isDefined(var_0.weapon_build_models[var_11])) {
         var_12 = var_0.weapon_build_models[var_11];
-      else
+      } else {
         var_12 = var_10[var_8].script_noteworthy;
+      }
 
       var_9[var_9.size] = var_12;
       var_9 = scripts\engine\utility::array_remove_duplicates(var_9);
@@ -485,8 +527,9 @@ player_hotjoin() {
   thread hotjoin_protection();
   self.pers["hotjoined"] = 1;
 
-  if(isDefined(level.wave_num))
+  if(isDefined(level.wave_num)) {
     self.wave_num_when_joined = level.wave_num;
+  }
 
   var_0 = getDvar("ui_mapname");
 
@@ -494,8 +537,9 @@ player_hotjoin() {
     disablepaspeaker("pa_speaker_stage_2");
     disablepaspeaker("pa_speaker_path");
 
-    if(!scripts\engine\utility::is_true(level.slasherpa))
+    if(!scripts\engine\utility::is_true(level.slasherpa)) {
       disablepaspeaker("pa_super_slasher");
+    }
   }
 
   if(var_0 == "cp_disco") {
@@ -546,12 +590,14 @@ player_hotjoin() {
     self.introscreen_overlay.alpha = 0;
     wait 3;
 
-    if(isDefined(self.introscreen_overlay))
+    if(isDefined(self.introscreen_overlay)) {
       self.introscreen_overlay destroy();
+    }
   }
 
-  while(!scripts\engine\utility::is_true(self.photosetup))
+  while(!scripts\engine\utility::is_true(self.photosetup)) {
     wait 1;
+  }
 
   self setclientomnvar("ui_hide_hud", 0);
   self.reboarding_points = 0;
@@ -559,11 +605,13 @@ player_hotjoin() {
   scripts\cp\zombies\zombies_consumables::init_player_consumables();
   scripts\cp\zombies\zombie_afterlife_arcade::init_soul_power(self);
 
-  if(getDvar("ui_gametype") == "zombie")
+  if(getDvar("ui_gametype") == "zombie") {
     self setclientomnvar("zombie_wave_number", level.wave_num);
+  }
 
-  if(isDefined(level.char_intro_gesture))
+  if(isDefined(level.char_intro_gesture)) {
     self[[level.char_intro_gesture]]();
+  }
 
   level thread reenable_zombie_emmisive();
 }
@@ -572,9 +620,9 @@ reenable_zombie_emmisive() {
   var_0 = scripts\mp\mp_agent::getaliveagentsofteam("axis");
 
   foreach(var_2 in var_0) {
-    if(scripts\engine\utility::is_true(var_2.is_suicide_bomber))
+    if(scripts\engine\utility::is_true(var_2.is_suicide_bomber)) {
       continue;
-    else if(scripts\engine\utility::is_true(var_2.is_turned)) {
+    } else if(scripts\engine\utility::is_true(var_2.is_turned)) {
       continue;
     }
     var_2 emissiveblend(1, 0.1);
@@ -628,8 +676,9 @@ onspawnplayer() {
     }
   }
 
-  if(isDefined(level.custom_onspawnplayer_func))
+  if(isDefined(level.custom_onspawnplayer_func)) {
     self[[level.custom_onspawnplayer_func]]();
+  }
 
   scripts\cp\cp_globallogic::player_init_invulnerability();
   scripts\cp\cp_globallogic::player_init_damageshield();
@@ -643,13 +692,15 @@ onspawnplayer() {
   thread scripts\cp\zombies\zombies_weapons::weapon_watch_hint();
   thread scripts\cp\zombies\zombies_weapons::axe_damage_cone();
 
-  if(isDefined(level.katana_damage_cone_func))
+  if(isDefined(level.katana_damage_cone_func)) {
     self thread[[level.katana_damage_cone_func]]();
+  }
 
   thread scripts\cp\zombies\zombies_weapons::reload_watcher();
 
-  if(getDvar("ui_mapname") == "cp_zmb")
+  if(getDvar("ui_mapname") == "cp_zmb") {
     thread _id_9B1A();
+  }
 
   thread _id_172D();
   thread scripts\cp\cp_weapon::watchweaponusage();
@@ -657,11 +708,13 @@ onspawnplayer() {
   thread scripts\cp\cp_weapon::watchweaponfired();
   thread scripts\cp\cp_weapon::watchplayermelee();
 
-  if(scripts\cp\utility::isplayingsolo() || level.only_one_player)
+  if(scripts\cp\utility::isplayingsolo() || level.only_one_player) {
     thread scripts\cp\cp_hud_message::init_tutorial_message_array();
+  }
 
-  if(isDefined(self.anchor))
+  if(isDefined(self.anchor)) {
     self.anchor delete();
+  }
 
   scripts\cp\utility::force_usability_enabled();
 }
@@ -687,14 +740,17 @@ _id_172D() {
 loadplayerassets(var_0) {
   var_1 = [];
 
-  if(isDefined(var_0.primaryweapon))
+  if(isDefined(var_0.primaryweapon)) {
     var_1[var_1.size] = var_0.primaryweapon;
+  }
 
-  if(isDefined(var_0.secondaryweapon))
+  if(isDefined(var_0.secondaryweapon)) {
     var_1[var_1.size] = var_0.secondaryweapon;
+  }
 
-  if(var_1.size > 0)
+  if(var_1.size > 0) {
     self loadweaponsforplayer(var_1);
+  }
 }
 
 get_starting_currency(var_0) {
@@ -705,10 +761,11 @@ get_starting_currency(var_0) {
     return var_1;
   } else if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight())
     return scripts\cp\zombies\direct_boss_fight::get_direct_to_boss_fight_starting_currency();
-  else if(scripts\cp\zombies\directors_cut::directors_cut_activated_for(var_0))
+  else if(scripts\cp\zombies\directors_cut::directors_cut_activated_for(var_0)) {
     return scripts\cp\zombies\directors_cut::get_directors_cut_starting_currency();
-  else
+  } else {
     return scripts\cp\cp_persistence::get_starting_currency();
+  }
 }
 
 set_player_max_currency(var_0) {
@@ -719,8 +776,9 @@ set_player_max_currency(var_0) {
 replace_grenades_between_waves() {
   level endon("game_ended");
 
-  foreach(var_1 in level.players)
-  thread replace_grenades_on_player(var_1);
+  foreach(var_1 in level.players) {
+    thread replace_grenades_on_player(var_1);
+  }
 }
 
 replace_grenades_on_player(var_0) {
@@ -743,8 +801,9 @@ replace_grenades_on_player(var_0) {
     var_0 thread recharge_power(var_3);
   }
 
-  if(isDefined(var_0.pre_arcade_primary_power) && isDefined(var_0.pre_arcade_primary_power_charges))
+  if(isDefined(var_0.pre_arcade_primary_power) && isDefined(var_0.pre_arcade_primary_power_charges)) {
     var_0.pre_arcade_primary_power_charges = level.powers[var_0.pre_arcade_primary_power].maxcharges;
+  }
 }
 
 wait_for_last_stand() {
@@ -768,11 +827,13 @@ wait_for_last_stand() {
 recharge_power(var_0) {
   var_1 = 2;
 
-  while(scripts\engine\utility::is_true(self.powers[var_0].active))
+  while(scripts\engine\utility::is_true(self.powers[var_0].active)) {
     wait 0.05;
+  }
 
-  while(scripts\engine\utility::is_true(self.powers[var_0].updating))
+  while(scripts\engine\utility::is_true(self.powers[var_0].updating)) {
     wait 0.05;
+  }
 
   scripts\cp\powers\coop_powers::power_adjustcharges(var_1, "primary");
 }
@@ -839,23 +900,28 @@ set_spawn_loc(var_0) {
 }
 
 zombie_get_player_respawn_loc(var_0) {
-  if(isDefined(level.force_respawn_location))
+  if(isDefined(level.force_respawn_location)) {
     return [[level.force_respawn_location]](var_0);
+  }
 
-  if(!isDefined(level.active_player_respawn_locs) || level.active_player_respawn_locs.size == 0 || level.players.size == 0)
+  if(!isDefined(level.active_player_respawn_locs) || level.active_player_respawn_locs.size == 0 || level.players.size == 0) {
     return [[level.getspawnpoint]]();
+  }
 
-  if(isDefined(level.respawn_loc_override_func))
+  if(isDefined(level.respawn_loc_override_func)) {
     return [[level.respawn_loc_override_func]](var_0);
+  }
 
   var_1 = get_available_players(var_0);
   var_2 = _id_784D(var_1);
 
-  if(var_2.size == 0)
+  if(var_2.size == 0) {
     return get_respawn_loc_near_team_center(var_0, var_1);
+  }
 
-  if(var_2.size == 1)
+  if(var_2.size == 1) {
     return var_2[0];
+  }
 
   return var_0 get_respawn_loc_rated(var_1, var_2);
 }
@@ -902,8 +968,9 @@ _id_9CA5(var_0, var_1) {
   var_2 = 250000;
 
   foreach(var_4 in var_1) {
-    if(distancesquared(var_4.origin, var_0.origin) < var_2)
+    if(distancesquared(var_4.origin, var_0.origin) < var_2) {
       return 1;
+    }
   }
 
   return 0;
@@ -914,8 +981,9 @@ _id_9CA4(var_0) {
   var_2 = scripts\mp\mp_agent::getaliveagentsofteam("axis");
 
   foreach(var_4 in var_2) {
-    if(distancesquared(var_4.origin, var_0.origin) < var_1)
+    if(distancesquared(var_4.origin, var_0.origin) < var_1) {
       return 1;
+    }
   }
 
   return 0;
@@ -964,8 +1032,9 @@ get_respawn_loc_rated(var_0, var_1) {
       var_9 = var_9 - distancesquared(var_11.origin, var_8.origin) * var_4;
     }
 
-    foreach(var_14 in level.spawned_enemies)
-    var_9 = var_9 + distancesquared(var_14.origin, var_8.origin);
+    foreach(var_14 in level.spawned_enemies) {
+      var_9 = var_9 + distancesquared(var_14.origin, var_8.origin);
+    }
 
     var_9 = var_9 / 1000000;
 
@@ -985,23 +1054,27 @@ take_away_special_ammo(var_0) {
 default_zombie_prematch_func() {
   var_0 = 0;
 
-  if(!scripts\engine\utility::is_true(level.introscreen_done))
+  if(!scripts\engine\utility::is_true(level.introscreen_done)) {
     var_0 = 10;
+  }
 
-  if(scripts\engine\utility::is_true(game["gamestarted"]))
+  if(scripts\engine\utility::is_true(game["gamestarted"])) {
     var_0 = 0;
+  }
 
   if(var_0 > 0) {
     var_1 = level wait_for_first_player_connect();
     level thread show_introscreen_text();
 
-    if(isDefined(level.intro_dialogue_func))
+    if(isDefined(level.intro_dialogue_func)) {
       level thread[[level.intro_dialogue_func]]();
+    }
 
     wait(var_0 - 3);
 
-    if(isDefined(level.postintroscreenfunc))
+    if(isDefined(level.postintroscreenfunc)) {
       [[level.postintroscreenfunc]]();
+    }
 
     scripts\engine\utility::flag_set("introscreen_over");
     level.introscreen_done = 1;
@@ -1011,22 +1084,25 @@ default_zombie_prematch_func() {
     scripts\engine\utility::flag_set("introscreen_over");
   }
 
-  if(scripts\engine\utility::is_true(level.intermission))
+  if(scripts\engine\utility::is_true(level.intermission)) {
     return;
+  }
 }
 
 show_introscreen_text() {
-  if(isDefined(level.introscreen_text_func))
+  if(isDefined(level.introscreen_text_func)) {
     [[level.introscreen_text_func]]();
+  }
 }
 
 wait_for_first_player_connect() {
   var_0 = undefined;
 
-  if(level.players.size == 0)
+  if(level.players.size == 0) {
     level waittill("connected", var_0);
-  else
+  } else {
     var_0 = level.players[0];
+  }
 
   return var_0;
 }
@@ -1048,14 +1124,16 @@ zombie_player_connect_black_screen() {
   self.introscreen_overlay.alpha = 1;
   self.introscreen_overlay.foreground = 1;
 
-  if(!scripts\engine\utility::flag("introscreen_over"))
+  if(!scripts\engine\utility::flag("introscreen_over")) {
     scripts\engine\utility::flag_wait("introscreen_over");
+  }
 
   self.introscreen_overlay fadeovertime(2);
   self.introscreen_overlay.alpha = 0;
 
-  while(!scripts\engine\utility::is_true(self.photosetup))
+  while(!scripts\engine\utility::is_true(self.photosetup)) {
     wait 1;
+  }
 
   var_0 = 2.0;
   var_1 = getDvar("ui_mapname");
@@ -1073,30 +1151,35 @@ zombie_player_connect_black_screen() {
 
   self setclientomnvar("ui_hide_hud", 0);
 
-  if(isDefined(level.char_intro_music))
+  if(isDefined(level.char_intro_music)) {
     self thread[[level.char_intro_music]]();
+  }
 
-  if(var_1 != "cp_town")
+  if(var_1 != "cp_town") {
     wait 1.5;
+  }
 
   self.introscreen_overlay destroy();
 
-  if(var_1 != "cp_town")
+  if(var_1 != "cp_town") {
     _id_CE90();
+  }
 
   scripts\engine\utility::flag_set("intro_gesture_done");
   scripts\cp\zombies\zombies_consumables::init_player_consumables();
   wait 3.0;
 
-  if(isDefined(level.char_intro_gesture))
+  if(isDefined(level.char_intro_gesture)) {
     self[[level.char_intro_gesture]]();
+  }
 
   wait 1.5;
   scripts\cp\utility::freezecontrolswrapper(0);
   self enableweapons();
 
-  if(var_1 == "cp_town" && isDefined(level.film_grain_off))
+  if(var_1 == "cp_town" && isDefined(level.film_grain_off)) {
     self setclientomnvar("zm_ui_dialpad_9", 2);
+  }
 }
 
 _id_CE90() {
@@ -1117,20 +1200,23 @@ melee_strength_timer() {
   for(;;) {
     var_2 = gettime();
 
-    if(var_2 - var_1 >= level.playermeleestunregentime)
+    if(var_2 - var_1 >= level.playermeleestunregentime) {
       self.meleestrength = 1.0;
-    else
+    } else {
       self.meleestrength = 0;
+    }
 
     if(self meleeButtonPressed() && !self isreloading() && !self useButtonPressed()) {
       var_1 = gettime();
 
-      if(var_0 == 1)
+      if(var_0 == 1) {
         var_0 = 0;
+      }
     } else if(!self meleeButtonPressed())
       var_0 = 1;
-    else
+    else {
       var_0 = 0;
+    }
 
     wait 0.05;
   }
@@ -1155,8 +1241,9 @@ hasgl3weapon() {
 isgl3weapon(var_0) {
   var_1 = getweaponbasename(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 0;
+  }
 
   return var_0 == "iw7_glprox_zm";
 }
@@ -1203,19 +1290,21 @@ _id_1BA3() {}
 on_alien_type_killed(var_0) {}
 
 dev_damage_show_damage_numbers() {
-  if(getdvarint("zm_damage_numbers", 0) == 1)
+  if(getdvarint("zm_damage_numbers", 0) == 1) {
     setomnvar("zm_dev_damage", 1);
-  else
+  } else {
     setomnvar("zm_dev_damage", 0);
+  }
 }
 
 precachelb() {
   var_0 = " LB_" + getDvar("ui_mapname");
 
-  if(scripts\cp\utility::isplayingsolo())
+  if(scripts\cp\utility::isplayingsolo()) {
     var_0 = var_0 + "_SOLO";
-  else
+  } else {
     var_0 = var_0 + "_COOP";
+  }
 
   precacheleaderboards(var_0);
 }
@@ -1227,33 +1316,38 @@ _id_13F1F(var_0) {
   var_2 = getweaponbasename(var_1);
   var_3 = var_0 getcurrentweaponclipammo();
 
-  if(!isDefined(var_0.downsperweaponlog[var_2]))
+  if(!isDefined(var_0.downsperweaponlog[var_2])) {
     var_0.downsperweaponlog[var_2] = 1;
-  else
+  } else {
     var_0.downsperweaponlog[var_2]++;
+  }
 
-  if(!scripts\engine\utility::is_true(level.no_laststand_music))
+  if(!scripts\engine\utility::is_true(level.no_laststand_music)) {
     var_0 scripts\cp\utility::playlocalsound_safe("zmb_laststand_music");
+  }
 
   var_0 clearclienttriggeraudiozone(0);
 
-  if(!self issplitscreenplayer())
+  if(!self issplitscreenplayer()) {
     var_0 setclienttriggeraudiozonepartialwithfade("last_stand_cp", 0.02, "mix", "reverb", "filter");
+  }
 
   var_0.have_self_revive = var_0 scripts\cp\utility::has_zombie_perk("perk_machine_revive") || var_0 scripts\cp\utility::is_consumable_active("self_revive") && !scripts\engine\utility::is_true(var_0.disable_self_revive_fnf);
 
-  if(isDefined(level.have_self_revive_override))
+  if(isDefined(level.have_self_revive_override)) {
     var_0.have_self_revive = [[level.have_self_revive_override]](var_0);
+  }
 
   if(var_0.have_self_revive) {
     var_4 = (scripts\cp\utility::isplayingsolo() || level.only_one_player) && var_0 scripts\cp\utility::has_zombie_perk("perk_machine_revive");
     var_0 notify("player_has_self_revive", var_4);
   }
 
-  if(isDefined(var_0.mule_weapon) && !scripts\engine\utility::is_true(var_0.playing_ghosts_n_skulls))
+  if(isDefined(var_0.mule_weapon) && !scripts\engine\utility::is_true(var_0.playing_ghosts_n_skulls)) {
     var_0.former_mule_weapon = var_0.mule_weapon;
-  else
+  } else {
     var_0.former_mule_weapon = undefined;
+  }
 
   var_0 scripts\cp\zombies\zombies_perk_machines::remove_perks_from_player();
   scripts\cp\zombies\zombie_analytics::_id_AF68(1, var_0, var_1, var_3, var_0.recent_attacker, var_0.origin, level.wave_num, var_0.kills);
@@ -1277,8 +1371,9 @@ _id_9B1A() {
       level waittill("spawn_wave_done");
 
       if(0 == var_1 % 2 && var_1 > 1) {
-        foreach(var_3 in level.players)
-        var_3 setclientomnvar("zm_nag_text", 1);
+        foreach(var_3 in level.players) {
+          var_3 setclientomnvar("zm_nag_text", 1);
+        }
 
         var_0 = var_0 + 1;
       }
@@ -1286,8 +1381,9 @@ _id_9B1A() {
       var_1 = var_1 + 1;
       wait 0.5;
 
-      foreach(var_3 in level.players)
-      var_3 setclientomnvar("zm_nag_text", 0);
+      foreach(var_3 in level.players) {
+        var_3 setclientomnvar("zm_nag_text", 0);
+      }
     }
   }
 }
@@ -1303,10 +1399,11 @@ _id_13F35() {
 }
 
 _id_13F50(var_0) {
-  if(scripts\engine\utility::is_true(var_0.in_afterlife_arcade))
+  if(scripts\engine\utility::is_true(var_0.in_afterlife_arcade)) {
     return 0;
-  else
+  } else {
     return 1;
+  }
 }
 
 _id_12EFE(var_0, var_1) {
@@ -1318,24 +1415,28 @@ _id_12EFE(var_0, var_1) {
   var_2 = getweaponbasename(var_1);
 
   if(var_1 == "zmb_fireworksprojectile_mp") {
-    if(!isDefined(self.killswithitem[self.itemtype]))
+    if(!isDefined(self.killswithitem[self.itemtype])) {
       self.killswithitem[self.itemtype] = 1;
-    else
+    } else {
       self.killswithitem[self.itemtype]++;
+    }
   }
 
-  if(!isDefined(self.killsperweaponlog[var_2]))
+  if(!isDefined(self.killsperweaponlog[var_2])) {
     self.killsperweaponlog[var_2] = 1;
-  else
+  } else {
     self.killsperweaponlog[var_2]++;
+  }
 
-  if(!isDefined(self._id_DDC3))
+  if(!isDefined(self._id_DDC3)) {
     self._id_DDC3 = [];
+  }
 
-  if(!isDefined(self._id_DDC3[var_1]))
+  if(!isDefined(self._id_DDC3[var_1])) {
     self._id_DDC3[var_1] = 1;
-  else
+  } else {
     self._id_DDC3[var_1]++;
+  }
 
   var_3 = scripts\cp\utility::getequipmenttype(var_1);
 
@@ -1422,8 +1523,9 @@ zombiehostmigrationend() {
     var_2.ignoreall = 0;
   }
 
-  if(isDefined(level.customhostmigrationend))
+  if(isDefined(level.customhostmigrationend)) {
     level thread[[level.customhostmigrationend]]();
+  }
 }
 
 resetplayerhud() {
@@ -1436,10 +1538,11 @@ resetplayerhud() {
     var_1 setclientomnvar("zombie_wave_number", level.wave_num);
     wait 0.1;
 
-    if(scripts\engine\utility::is_true(var_1.deck_select_ready))
+    if(scripts\engine\utility::is_true(var_1.deck_select_ready)) {
       var_1 setclientomnvar("zm_consumable_selection_ready", 1);
-    else
+    } else {
       var_1 setclientomnvar("zm_consumable_selection_ready", 0);
+    }
 
     wait 0.1;
   }
@@ -1498,8 +1601,9 @@ kick_for_inactivity(var_0) {
         continue;
       }
 
-      if(!scripts\engine\utility::is_true(var_0.in_afterlife_arcade) && !scripts\engine\utility::is_true(var_0.inlaststand))
+      if(!scripts\engine\utility::is_true(var_0.in_afterlife_arcade) && !scripts\engine\utility::is_true(var_0.inlaststand)) {
         var_3 = var_3 - var_4;
+      }
 
       if(var_3 < 0) {
         if(level.players.size > 1) {
@@ -1530,8 +1634,9 @@ check_for_movement() {
       var_3 = self getnormalizedmovement();
 
       if(var_3[0] == var_1[0] && var_3[1] == var_1[1]) {
-        if(gettime() - var_2 > 90000 && level.players.size > 1)
+        if(gettime() - var_2 > 90000 && level.players.size > 1) {
           add_to_kick_queue(self);
+        }
 
         continue;
       }
@@ -1542,8 +1647,9 @@ check_for_movement() {
 }
 
 add_to_kick_queue(var_0) {
-  if(!scripts\engine\utility::exist_in_array_MAYBE(level.kick_player_queue, var_0))
+  if(!scripts\engine\utility::exist_in_array_MAYBE(level.kick_player_queue, var_0)) {
     level.kick_player_queue = scripts\engine\utility::add_to_array(level.kick_player_queue, var_0);
+  }
 }
 
 kick_player_queue_loop() {
@@ -1555,8 +1661,9 @@ kick_player_queue_loop() {
         if(!isDefined(var_1)) {
           continue;
         }
-        if(!var_1 ishost())
+        if(!var_1 ishost()) {
           kick(var_1 getentitynumber(), "EXE_PLAYERKICKED_INACTIVE");
+        }
       }
 
       if(level.kick_player_queue.size > 0) {
@@ -1580,8 +1687,9 @@ check_for_move_change() {
   self endon("disconnect");
   self endon("done_inactivity_check");
 
-  while(!isDefined(self.model))
+  while(!isDefined(self.model)) {
     wait 0.1;
+  }
 
   var_0 = 1;
   var_1 = var_0;
@@ -1612,25 +1720,30 @@ get_move_direction_from_vectors(var_0) {
   var_9 = var_1;
 
   if(var_0[0] > 0) {
-    if(var_0[1] <= 0.7 && var_0[1] >= -0.7)
+    if(var_0[1] <= 0.7 && var_0[1] >= -0.7) {
       var_9 = var_1;
+    }
 
-    if(var_0[0] > 0.5 && var_0[1] > 0.7)
+    if(var_0[0] > 0.5 && var_0[1] > 0.7) {
       var_9 = var_2;
-    else if(var_0[0] > 0.5 && var_0[1] < -0.7)
+    } else if(var_0[0] > 0.5 && var_0[1] < -0.7) {
       var_9 = var_3;
+    }
   } else if(var_0[0] < 0) {
-    if(var_0[1] < 0.4 && var_0[1] > -0.4)
+    if(var_0[1] < 0.4 && var_0[1] > -0.4) {
       var_9 = var_4;
+    }
 
-    if(var_0[0] < -0.5 && var_0[1] > 0.5)
+    if(var_0[0] < -0.5 && var_0[1] > 0.5) {
       var_9 = var_5;
-    else if(var_0[0] < -0.5 && var_0[1] < -0.5)
+    } else if(var_0[0] < -0.5 && var_0[1] < -0.5) {
       var_9 = var_6;
+    }
   } else if(var_0[1] > 0.4)
     var_9 = var_7;
-  else if(var_0[1] < -0.4)
+  else if(var_0[1] < -0.4) {
     var_9 = var_8;
+  }
 
   return var_9;
 }

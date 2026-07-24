@@ -15,8 +15,9 @@ registerscriptedagent() {
 _id_FAB0() {
   level endon("game_ended");
 
-  if(!isDefined(level.agent_definition))
+  if(!isDefined(level.agent_definition)) {
     level waittill("scripted_agents_initialized");
+  }
 
   level.agent_definition["dlc4_boss"]["setup_func"] = ::setupagent;
   level.agent_definition["dlc4_boss"]["setup_model_func"] = ::_id_FACE;
@@ -112,8 +113,9 @@ setupzombiegametypevars() {
   self.death_anim_no_ragdoll = undefined;
   self.dont_cleanup = 1;
 
-  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1)
+  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1) {
     self._id_AB3F = 1;
+  }
 }
 
 setupagent() {
@@ -139,11 +141,13 @@ setupagent() {
 _id_C4E0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   var_12 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 
-  if(var_5 == var_12.entangler_weapon_name)
+  if(var_5 == var_12.entangler_weapon_name) {
     var_2 = 0;
+  }
 
-  if(!isDefined(var_1) || !isPlayer(var_1))
+  if(!isDefined(var_1) || !isPlayer(var_1)) {
     var_2 = 0;
+  }
 
   [[level.agent_funcs["dlc4_boss"]["on_damaged_finished"]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0.0, var_10, var_11);
 }
@@ -155,19 +159,22 @@ ondamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 
   self.health = 999999;
   var_13 = 0;
 
-  if(self.showblood || var_13)
+  if(self.showblood || var_13) {
     self finishagentdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
+  }
 
   if(self._id_FCA5 && !var_13) {
-    if(isDefined(var_6) && isDefined(var_7))
+    if(isDefined(var_6) && isDefined(var_7)) {
       playFX(level._effect["boss_shield_hit"], var_6, var_7 * -150);
+    }
   }
 
   if(!self.cantakedamage) {
     return;
   }
-  if(isPlayer(var_1))
+  if(isPlayer(var_1)) {
     var_1 thread scripts\cp\cp_damage::updatehitmarker("high_damage_cp");
+  }
 
   var_14 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 
@@ -176,8 +183,9 @@ ondamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 
     self.damagecap = max(self.damagecap - var_2, 0);
 
     if(self.frenziedhealth <= 0) {
-      if(!self.interruptable)
+      if(!self.interruptable) {
         self.frenziedhealth = 1;
+      }
     }
   } else if(level.fbd.bossstate == "LAST_STAND") {
     self.laststandhealth = self.laststandhealth - min(var_2, self.damagecap);

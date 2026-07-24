@@ -157,13 +157,15 @@ _id_5CC7(var_0, var_1, var_2, var_3, var_4) {
   var_5.speed = 0;
   wait 0.5;
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_5 playLoopSound(var_4);
+  }
 
   var_5.destination = var_5._id_C72D;
 
-  for(;;)
+  for(;;) {
     var_5.destination = _id_5CBC(var_5, var_5.destination, var_6);
+  }
 }
 
 _id_5CBC(var_0, var_1, var_2) {
@@ -179,8 +181,9 @@ _id_5CBC(var_0, var_1, var_2) {
   } else {
     var_0 hide();
 
-    if(isDefined(var_0._id_4380))
+    if(isDefined(var_0._id_4380)) {
       var_0._id_4380 notsolid();
+    }
 
     wait 1;
     var_0.origin = var_0._id_C72D.origin;
@@ -188,8 +191,9 @@ _id_5CBC(var_0, var_1, var_2) {
     wait 1;
     var_0 show();
 
-    if(isDefined(var_0._id_4380))
+    if(isDefined(var_0._id_4380)) {
       var_0._id_4380 solid();
+    }
 
     return var_0._id_C72D;
   }

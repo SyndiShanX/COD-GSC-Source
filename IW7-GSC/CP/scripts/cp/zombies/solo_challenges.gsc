@@ -12,13 +12,15 @@ _id_956D() {
   var_0 = getDvar("ui_mapname");
   level.zombie_challenge_table = "cp/zombies/" + var_0 + "_challenges.csv";
 
-  if(!tableexists(level.zombie_challenge_table))
+  if(!tableexists(level.zombie_challenge_table)) {
     level.zombie_challenge_table = undefined;
+  }
 
   level.challenge_data = [];
 
-  if(isDefined(level.challenge_registration_func))
+  if(isDefined(level.challenge_registration_func)) {
     [[level.challenge_registration_func]]();
+  }
 }
 
 update_challenge(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
@@ -38,8 +40,9 @@ update_challenge(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 
 }
 
 _id_62C6() {
-  if(current_challenge_exist() && scripts\cp\utility::coop_mode_has("challenge"))
+  if(current_challenge_exist() && scripts\cp\utility::coop_mode_has("challenge")) {
     deactivate_current_challenge();
+  }
 }
 
 deactivate_current_challenge(var_0) {
@@ -54,24 +57,28 @@ deactivate_current_challenge(var_0) {
     var_1[[var_1._id_E4C5]]();
     var_2 = "challenge";
 
-    if(isDefined(level._id_3C24))
+    if(isDefined(level._id_3C24)) {
       var_2 = level._id_3C24;
+    }
 
     if(_id_9F17(var_1)) {
-      if(var_0.vo_prefix == "p5_")
+      if(var_0.vo_prefix == "p5_") {
         var_0 thread scripts\cp\cp_vo::try_to_play_vo("challenge_success", "zmb_comment_vo");
+      }
     }
   } else {
     _id_56AD("challenge_failed", 0, undefined, var_0);
 
     if(_id_9F17(var_1)) {
-      if(isDefined(level._id_3C2B[var_1.ref]) && _id_9F17(var_1))
+      if(isDefined(level._id_3C2B[var_1.ref]) && _id_9F17(var_1)) {
         level._id_3C2B[var_1.ref]++;
+      }
 
-      if(var_1.ref == "no_laststand" || var_1.ref == "no_bleedout" || var_1.ref == "protect_player")
+      if(var_1.ref == "no_laststand" || var_1.ref == "no_bleedout" || var_1.ref == "protect_player") {
         scripts\cp\zombies\zombie_analytics::_id_AF64(var_1.ref, level.wave_num, 0, level._id_3C2B[var_1.ref]);
-      else
+      } else {
         scripts\cp\zombies\zombie_analytics::_id_AF64(var_1.ref, level.wave_num, var_1.current_progress / var_1.goal * 100, level._id_3C2B[var_1.ref]);
+      }
 
       foreach(var_0 in level.players) {
         if(!scripts\cp\utility::isplayingsolo() && level.players.size > 1) {
@@ -127,10 +134,11 @@ activate_new_challenge(var_0, var_1) {
   if(var_1.current_challenge[[var_1.current_challenge._id_386E]]()) {
     var_2 = _id_7897(var_0);
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_1.current_challenge.goal = var_2;
-    else
+    } else {
       level.current_challenge_scalar = -1;
+    }
 
     _id_56AD(var_0, 1, var_2, var_1);
     var_1 _id_F31A(var_0);
@@ -148,16 +156,18 @@ _id_56AD(var_0, var_1, var_2, var_3) {
   var_4 = tablelookup(level.zombie_challenge_table, 1, var_0, 0);
 
   if(var_1) {
-    if(var_0 == "next_challenge")
+    if(var_0 == "next_challenge") {
       var_3 playlocalsound("zmb_challenge_config");
-    else
+    } else {
       var_3 playlocalsound("zmb_challenge_start");
+    }
 
     var_3 setclientomnvar("zm_show_challenge", -1);
     wait 0.05;
 
-    if(level.script != "cp_disco")
+    if(level.script != "cp_disco") {
       var_3 setclientomnvar("ui_intel_active_index", -1);
+    }
 
     var_3 setclientomnvar("ui_intel_progress_current", -1);
     wait 0.05;
@@ -174,8 +184,9 @@ _id_56AD(var_0, var_1, var_2, var_3) {
     if(isDefined(var_2)) {
       var_5 = var_2;
 
-      if(isDefined(var_3.kung_fu_progression) && isDefined(var_3.kung_fu_progression.active_discipline))
+      if(isDefined(var_3.kung_fu_progression) && isDefined(var_3.kung_fu_progression.active_discipline)) {
         var_5 = var_2 - var_3.kung_fu_progression.challenge_progress[var_3.kung_fu_progression.active_discipline];
+      }
 
       var_3 setclientomnvar("ui_intel_challenge_scalar", var_2);
       var_3 setclientomnvar("ui_intel_progress_max", var_2);
@@ -221,8 +232,9 @@ reset_omnvars() {
   self notify("challenge_complete");
   wait 0.5;
 
-  if(level.script != "cp_disco")
+  if(level.script != "cp_disco") {
     self setclientomnvar("ui_intel_active_index", -1);
+  }
 
   self setclientomnvar("ui_intel_progress_current", -1);
   self setclientomnvar("ui_intel_progress_max", -1);
@@ -241,31 +253,36 @@ register_challenge(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
   var_11.default_success = var_2;
   var_11._id_9F82 = ::_id_4FFA;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_11._id_9F82 = var_3;
+  }
 
   var_11._id_386E = ::_id_4FDD;
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_11._id_386E = var_4;
+  }
 
   var_11._id_1609 = var_5;
   var_11._id_4DDE = var_6;
   var_11._id_6ACB = ::_id_4FED;
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     var_11._id_6ACB = var_7;
+  }
 
   var_11._id_12E9C = var_8;
   var_11._id_E4C5 = ::_id_5011;
 
-  if(isDefined(var_9))
+  if(isDefined(var_9)) {
     var_11._id_E4C5 = var_9;
+  }
 
   var_11._id_6AD0 = ::_id_4FEE;
 
-  if(isDefined(var_10))
+  if(isDefined(var_10)) {
     var_11._id_6AD0 = var_10;
+  }
 
   level.challenge_data[var_0] = var_11;
 }
@@ -282,17 +299,19 @@ _id_4FDD() {
 _id_4FED() {}
 
 _id_4FFA() {
-  if(isDefined(self.success))
+  if(isDefined(self.success)) {
     return self.success;
-  else
+  } else {
     return 0;
+  }
 }
 
 default_successfunc() {
-  if(isDefined(self.success))
+  if(isDefined(self.success)) {
     return self.success;
-  else
+  } else {
     return self.default_success;
+  }
 }
 
 _id_4FEE() {}
@@ -361,8 +380,9 @@ update_death_challenges(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   }
   var_9 = var_1;
 
-  if(isDefined(var_1.playerowner) && var_1.playerowner scripts\cp\utility::is_valid_player(1))
+  if(isDefined(var_1.playerowner) && var_1.playerowner scripts\cp\utility::is_valid_player(1)) {
     var_9 = var_1.playerowner;
+  }
 
   if(!isPlayer(var_9)) {
     return;
@@ -375,7 +395,8 @@ update_death_challenges(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   if(isDefined(level.custom_death_challenge_func)) {
     var_11 = self[[level.custom_death_challenge_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 
-    if(!scripts\engine\utility::is_true(var_11))
+    if(!scripts\engine\utility::is_true(var_11)) {
       return;
+    }
   }
 }

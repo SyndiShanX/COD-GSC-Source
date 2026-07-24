@@ -10,8 +10,9 @@ main() {
 _id_953A() {
   level._id_2571._id_1D66 = ["insertion_to_hallway", "hallway_to_atrium", "atrium_to_hallway", "hallway_to_life_support", "life_support_to_hallway", "hallway_to_armory", "insertion_to_hallway_secondary", "hallway_to_atrium_secondary", "atrium_to_hallway_secondary", "hallway_to_life_support_secondary", "life_support_to_hallway_secondary", "hallway_to_armory_secondary"];
 
-  foreach(var_1 in level._id_2571._id_1D66)
-  scripts\engine\utility::flag_init(var_1);
+  foreach(var_1 in level._id_2571._id_1D66) {
+    scripts\engine\utility::flag_init(var_1);
+  }
 
   scripts\engine\utility::flag_init("random_ambience_started");
   scripts\engine\utility::flag_init("audio_entering_hangar");
@@ -66,8 +67,9 @@ _id_476A() {
 }
 
 _id_10D4A() {
-  while(isDefined(level._id_D127) == 0)
+  while(isDefined(level._id_D127) == 0) {
     scripts\engine\utility::waitframe();
+  }
 
   var_0 = 131072;
   var_1 = 2048;
@@ -119,8 +121,9 @@ _id_9A54() {
 }
 
 _id_9A5B() {
-  while(!isDefined(level._id_9ADD))
+  while(!isDefined(level._id_9ADD)) {
     scripts\engine\utility::waitframe();
+  }
 
   level._id_9ADD scripts\sp\utility::_id_65E3("hellas_in_sight");
 }
@@ -179,55 +182,61 @@ _id_DC6D() {
       case "insertion_to_hallway":
         scripts\engine\utility::flag_waitopen("insertion_to_hallway");
 
-        if(scripts\engine\utility::flag("insertion_to_hallway_secondary"))
+        if(scripts\engine\utility::flag("insertion_to_hallway_secondary")) {
           _id_4FC5();
-        else
+        } else {
           _id_990F();
+        }
 
         break;
       case "hallway_to_atrium":
         scripts\engine\utility::flag_waitopen("hallway_to_atrium");
 
-        if(scripts\engine\utility::flag("hallway_to_atrium_secondary"))
+        if(scripts\engine\utility::flag("hallway_to_atrium_secondary")) {
           _id_9A63();
-        else
+        } else {
           _id_4FC5();
+        }
 
         break;
       case "atrium_to_hallway":
         scripts\engine\utility::flag_waitopen("atrium_to_hallway");
 
-        if(scripts\engine\utility::flag("atrium_to_hallway_secondary"))
+        if(scripts\engine\utility::flag("atrium_to_hallway_secondary")) {
           _id_4FC5();
-        else
+        } else {
           _id_9A63();
+        }
 
         break;
       case "hallway_to_life_support":
         scripts\engine\utility::flag_waitopen("hallway_to_life_support");
 
-        if(scripts\engine\utility::flag("hallway_to_life_support_secondary"))
+        if(scripts\engine\utility::flag("hallway_to_life_support_secondary")) {
           _id_9A63();
-        else
+        } else {
           _id_4FC5();
+        }
 
         break;
       case "life_support_to_hallway":
         scripts\engine\utility::flag_waitopen("life_support_to_hallway");
 
-        if(scripts\engine\utility::flag("life_support_to_hallway_secondary"))
+        if(scripts\engine\utility::flag("life_support_to_hallway_secondary")) {
           _id_4FC5();
-        else
+        } else {
           _id_9A63();
+        }
 
         break;
       case "hallway_to_armory":
         scripts\engine\utility::flag_waitopen("hallway_to_armory");
 
-        if(scripts\engine\utility::flag("hallway_to_armory_secondary"))
+        if(scripts\engine\utility::flag("hallway_to_armory_secondary")) {
           _id_9A63();
-        else
+        } else {
           _id_4FC5();
+        }
 
         break;
       default:
@@ -294,11 +303,13 @@ _id_4FC5() {
 }
 
 _id_3959() {
-  while(isDefined(level._id_3965) == 0)
+  while(isDefined(level._id_3965) == 0) {
     scripts\engine\utility::waitframe();
+  }
 
-  if(!isDefined(level._id_A73E) || !isDefined(level._id_A73C))
+  if(!isDefined(level._id_A73E) || !isDefined(level._id_A73C)) {
     scripts\sp\maps\sa_wounded\sa_wounded_fx::_id_3AB7();
+  }
 
   var_0 = scripts\engine\utility::spawn_tag_origin(level._id_A73E.origin + (-1500, 0, 0));
   var_1 = scripts\engine\utility::spawn_tag_origin(level._id_DBA9.origin + (-1500, 0, 0));
@@ -318,8 +329,9 @@ _id_3959() {
 }
 
 _id_A48A(var_0, var_1, var_2, var_3) {
-  while(isDefined(level._id_D127) == 0)
+  while(isDefined(level._id_D127) == 0) {
     scripts\engine\utility::waitframe();
+  }
 
   while(!scripts\engine\utility::flag("audio_entering_hangar")) {
     if(level._id_D127.origin[0] > var_0.origin[0]) {

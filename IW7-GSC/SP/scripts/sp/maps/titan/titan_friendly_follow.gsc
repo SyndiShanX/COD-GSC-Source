@@ -31,11 +31,13 @@ _id_73B8(var_0, var_1, var_2) {
   self._id_73B5 = undefined;
   self._id_4B59 = undefined;
 
-  if(!scripts\sp\utility::_id_65DF("override_follow_mode"))
+  if(!scripts\sp\utility::_id_65DF("override_follow_mode")) {
     scripts\sp\utility::_id_65E0("override_follow_mode");
+  }
 
-  if(!scripts\sp\utility::_id_65DF("override_follow_colors"))
+  if(!scripts\sp\utility::_id_65DF("override_follow_colors")) {
     scripts\sp\utility::_id_65E0("override_follow_colors");
+  }
 
   scripts\sp\utility::_id_F3B5("r");
   scripts\sp\utility::_id_54F7();
@@ -71,15 +73,17 @@ _id_B7D2(var_0) {
   level endon("stop_friendly_follow_mode");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2._id_B7D2))
+    if(isDefined(var_2._id_B7D2)) {
       var_0 = scripts\engine\utility::array_remove(var_0, var_2);
+    }
   }
 
   if(!var_0.size) {
     return;
   }
-  foreach(var_2 in var_0)
-  var_2._id_B7D2 = 1;
+  foreach(var_2 in var_0) {
+    var_2._id_B7D2 = 1;
+  }
 
   scripts\engine\utility::array_thread(var_0, scripts\sp\utility::_id_51E1, "combat");
   scripts\engine\utility::array_thread(var_0, scripts\sp\utility::_id_65E0, "pause_mirror_player_speed");
@@ -91,8 +95,9 @@ _id_B7D2(var_0) {
       var_7 = 0;
       var_8 = distance2dsquared(var_2.origin, level.player.origin);
 
-      if(var_8 >= 160000)
+      if(var_8 >= 160000) {
         var_7 = 1;
+      }
 
       if(level.player.speed > 235 || var_7) {
         var_2 _id_51E2("sprint");
@@ -136,8 +141,9 @@ _id_196F(var_0, var_1) {
   if(distancesquared(self.origin, var_0) < var_2) {
     return;
   }
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
   self setgoalpos(var_0);
   self._id_73B5 = var_0;
@@ -145,9 +151,9 @@ _id_196F(var_0, var_1) {
   var_3 = self _meth_80E3();
 
   if(isDefined(var_3)) {
-    if(isDefined(self.node) && var_3 == self.node)
+    if(isDefined(self.node) && var_3 == self.node) {
       return var_3;
-    else {
+    } else {
       self _meth_82EE(var_3);
       return var_3;
     }
@@ -163,9 +169,9 @@ _id_196F(var_0, var_1) {
         continue;
       }
 
-      if(isDefined(self.node) && var_3 == self.node)
+      if(isDefined(self.node) && var_3 == self.node) {
         return var_3;
-      else {
+      } else {
         self _meth_82EE(var_3);
         return var_3;
       }
@@ -181,8 +187,9 @@ _id_73B2(var_0) {
   var_2 = [];
 
   foreach(var_4 in var_1) {
-    if(isDefined(var_4._id_ED33))
+    if(isDefined(var_4._id_ED33)) {
       var_2[var_2.size] = var_4;
+    }
   }
 
   scripts\engine\utility::array_thread(var_2, ::_id_43A1, var_0);
@@ -195,8 +202,9 @@ _id_43A1(var_0) {
     self waittill("trigger");
     scripts\engine\utility::array_thread(var_0, ::_id_439D, self);
 
-    while(level.player istouching(self))
+    while(level.player istouching(self)) {
       wait 0.05;
+    }
 
     scripts\engine\utility::array_thread(var_0, ::_id_7222, self);
   }
@@ -242,10 +250,11 @@ _id_7D3D(var_0, var_1) {
   var_2[1] = var_5;
 
   foreach(var_7 in var_2) {
-    if(_id_9C68(var_7))
+    if(_id_9C68(var_7)) {
       return var_7;
-    else
+    } else {
       _id_73B3("!", var_7);
+    }
   }
 
   return undefined;
@@ -254,8 +263,9 @@ _id_7D3D(var_0, var_1) {
 _id_9C68(var_0) {
   var_1 = getdvarint("friendly_follow_debug");
 
-  if(level.player scripts\sp\maps\titan\titan_code::_id_10A5C(var_0))
+  if(level.player scripts\sp\maps\titan\titan_code::_id_10A5C(var_0)) {
     return 0;
+  }
 
   var_2 = scripts\common\trace::create_default_contents();
   var_3 = [];
@@ -264,10 +274,11 @@ _id_9C68(var_0) {
 
   if(var_5.size) {
     if(isDefined(var_5[0]["distance"])) {
-      if(var_5[0]["distance"] < -2)
+      if(var_5[0]["distance"] < -2) {
         return 0;
-      else
+      } else {
         return 1;
+      }
     }
   } else
     return 1;
@@ -306,8 +317,9 @@ _id_73F4() {
     var_2 = self.enemy;
 
     if(_id_73E4(var_2)) {
-      if(!scripts\engine\utility::flag(var_0))
+      if(!scripts\engine\utility::flag(var_0)) {
         wait(var_1);
+      }
 
       _id_73DE(var_2);
     }
@@ -320,20 +332,23 @@ _id_73F6() {
   if(!scripts\engine\utility::flag("buddy_door_room_entered")) {
     var_0 = undefined;
 
-    if(isDefined(self._id_A906))
+    if(isDefined(self._id_A906)) {
       var_0 = self._id_A906;
-    else if(isDefined(self._id_A905))
+    } else if(isDefined(self._id_A905)) {
       var_0 = self._id_A905;
+    }
 
-    if(!isDefined(var_0))
+    if(!isDefined(var_0)) {
       self._id_E45C = var_0;
+    }
 
     self notify("stop_going_to_node");
 
-    if(self == level._id_C47F)
+    if(self == level._id_C47F) {
       thread _id_73B8(120, 70, 0.75);
-    else
+    } else {
       thread _id_73B8(250, 100);
+    }
   }
 
   _id_10FD9();
@@ -353,8 +368,9 @@ _id_1A33() {
     if(!isDefined(self._id_11707) && (isDefined(self.enemy) && !level.player scripts\sp\utility::_id_CFAC(self.enemy)) || !isDefined(self.enemy)) {
       self clearenemy();
 
-      if(self.a.movement == "stop" && isDefined(self.goalnode))
+      if(self.a.movement == "stop" && isDefined(self.goalnode)) {
         self orientmode("face angle", self.goalnode.angles[1]);
+      }
 
       var_0 = getaiarray("axis");
 
@@ -371,14 +387,17 @@ _id_1A33() {
 }
 
 _id_73E4(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(!isalive(var_0))
+  if(!isalive(var_0)) {
     return 0;
+  }
 
-  if(isDefined(var_0.ignoreme) && var_0.ignoreme == 1)
+  if(isDefined(var_0.ignoreme) && var_0.ignoreme == 1) {
     return 0;
+  }
 
   var_1 = 200;
   var_2 = 850;
@@ -412,8 +431,9 @@ _id_73E4(var_0) {
 
   var_4 = undefined;
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 1;
+  }
 
   if(isDefined(var_4) && scripts\sp\maps\titan\titan_code::_id_D283(var_4)) {
     _id_73B4("^5 Player sees required ai.");
@@ -429,10 +449,11 @@ _id_EA10() {
 }
 
 _id_9BCE(var_0) {
-  if(var_0 scripts\sp\utility::_id_65DF("stealth_attack") && var_0 scripts\sp\utility::_id_65DB("stealth_attack"))
+  if(var_0 scripts\sp\utility::_id_65DF("stealth_attack") && var_0 scripts\sp\utility::_id_65DB("stealth_attack")) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_7AE0() {
@@ -475,8 +496,9 @@ _id_73DE(var_0) {
   self._id_2894 = self._id_2894 * 10;
   self.dontevershoot = undefined;
 
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     _id_73CF(var_0);
+  }
 
   self._id_2894 = var_2;
   self._id_CA15 = 0;
@@ -504,14 +526,17 @@ _id_73CF(var_0) {
 }
 
 _id_78FD() {
-  if(!isDefined(self._id_EDAD))
+  if(!isDefined(self._id_EDAD)) {
     return undefined;
+  }
 
-  if(isDefined(self._id_4397))
+  if(isDefined(self._id_4397)) {
     return self._id_4397;
+  }
 
-  if(isDefined(self._id_439C))
+  if(isDefined(self._id_439C)) {
     return self._id_439C;
+  }
 
   return undefined;
 }
@@ -525,8 +550,9 @@ _id_73F9(var_0) {
     if(!self cansee(var_0)) {
       var_2 = distance(self.origin, var_0.origin);
 
-      if(var_2 <= var_1)
+      if(var_2 <= var_1) {
         self setgoalpos(var_0.origin);
+      }
     } else
       self setgoalpos(self.origin);
 
@@ -538,8 +564,9 @@ _id_992C(var_0) {
   for(;;) {
     self waittill("damage", var_1, var_2);
 
-    if(var_2 == var_0)
+    if(var_2 == var_0) {
       scripts\sp\utility::_id_54C6();
+    }
   }
 }
 
@@ -565,10 +592,11 @@ _id_8406() {
 
   var_0 = undefined;
 
-  if(isDefined(self._id_A906))
+  if(isDefined(self._id_A906)) {
     var_0 = self._id_A906;
-  else if(isDefined(self._id_A905))
+  } else if(isDefined(self._id_A905)) {
     var_0 = self._id_A905;
+  }
 
   if(!isDefined(var_0)) {
     return;
@@ -580,8 +608,9 @@ _id_1017F() {
   level notify("stop_friendly_follow_mode");
 
   foreach(var_1 in getaiarray("allies")) {
-    if(var_1 scripts\sp\utility::_id_65DF("override_follow_mode"))
+    if(var_1 scripts\sp\utility::_id_65DF("override_follow_mode")) {
       var_1 _id_10FD8();
+    }
   }
 }
 
@@ -592,8 +621,9 @@ _id_10FD8() {
   self._id_4B59 = undefined;
   self._id_B7D2 = undefined;
 
-  if(scripts\sp\utility::_id_65DF("override_follow_mode") && scripts\sp\utility::_id_65DB("override_follow_mode"))
+  if(scripts\sp\utility::_id_65DF("override_follow_mode") && scripts\sp\utility::_id_65DB("override_follow_mode")) {
     scripts\sp\utility::_id_65DD("override_follow_mode");
+  }
 
   self allowedstances("stand", "crouch", "prone");
   scripts\sp\utility::_id_4145();
@@ -601,8 +631,9 @@ _id_10FD8() {
 
 _id_10180() {
   foreach(var_1 in getaiarray("allies")) {
-    if(isDefined(var_1._id_73F4))
+    if(isDefined(var_1._id_73F4)) {
       var_1 _id_10FD9();
+    }
   }
 }
 
@@ -623,8 +654,9 @@ _id_13511() {
 
 _id_8E49() {
   if(isDefined(level._id_C47F.enemy)) {
-    if(isDefined(level._id_2429.enemy))
+    if(isDefined(level._id_2429.enemy)) {
       return level._id_C47F.enemy == level._id_2429.enemy;
+    }
   }
 
   return 0;

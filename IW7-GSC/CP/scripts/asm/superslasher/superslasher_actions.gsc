@@ -6,10 +6,11 @@
 superslasher_domeleedamage() {
   var_0 = 60;
 
-  if(isDefined(self.pathgoalpos))
+  if(isDefined(self.pathgoalpos)) {
     var_1 = 36864;
-  else
+  } else {
     var_1 = 25600;
+  }
 
   var_2 = 72;
   var_3 = 0.707;
@@ -35,16 +36,18 @@ superslasher_domeleedamage() {
     var_12 = vectordot(var_9, var_6);
 
     if(var_10 < var_4) {
-      if(var_12 < var_5)
+      if(var_12 < var_5) {
         continue;
+      }
     } else if(var_12 < var_3) {
       continue;
     }
     scripts\asm\zombie\melee::domeleedamage(var_8, 0.8 * var_8.maxhealth, "MOD_IMPACT");
     var_13 = 20;
 
-    if(!self isonground())
+    if(!self isonground()) {
       var_13 = var_13 * 0.05;
+    }
 
     var_14 = vectorNormalize(var_8.origin + (0, 0, 45) - self.origin);
     var_15 = var_14 * var_13 * 10;
@@ -60,10 +63,11 @@ superslasher_dogroundpoundimpact() {
 superslasher_summonminions(var_0) {
   self setscriptablepartstate("summon_minions", "on");
 
-  if(var_0 == "ground")
+  if(var_0 == "ground") {
     dogenericsummons(self.nextsummonid, var_0, 1.5, undefined);
-  else
+  } else {
     dowallsummon(self.nextsummonid, var_0);
+  }
 
   self.nextsummonid++;
 }
@@ -72,26 +76,30 @@ dogenericsummons(var_0, var_1, var_2, var_3) {
   var_4 = [(-4479, 3951, -161), (-4200, 4030, -164), (-4340, 4527, -146), (-4174, 4895, -144), (-4186, 5220, -154), (-4261, 5478, -160), (-4437, 5668, -150), (-4805, 5547, -134), (-4829, 5045, -140), (-5111, 4425, -67), (-4469, 4789, -151), (-4642, 4542, -156)];
   var_5 = [130, 146, 160, 193, 163, 205, 238, 266, 291, 12, 237, 85];
 
-  if(!isDefined(self.spawnwave))
+  if(!isDefined(self.spawnwave)) {
     self.spawnwave = 0;
+  }
 
   var_6 = min(self.spawnwave, 10);
   self.spawnwave++;
   var_7 = [];
 
-  for(var_8 = 0; var_8 < var_4.size; var_8++)
+  for(var_8 = 0; var_8 < var_4.size; var_8++) {
     var_7[var_7.size] = var_8;
+  }
 
   var_9 = scripts\engine\utility::array_randomize(var_7);
   var_10 = var_9.size;
 
-  if(var_1 == "ground")
+  if(var_1 == "ground") {
     var_10 = 8;
+  }
 
   summontracker_init(var_0, var_10, var_3);
 
-  if(var_2 <= 0)
+  if(var_2 <= 0) {
     var_2 = 0.05;
+  }
 }
 
 dowallsummon(var_0, var_1) {
@@ -101,8 +109,9 @@ dowallsummon(var_0, var_1) {
 }
 
 summontracker_init(var_0, var_1, var_2) {
-  if(!isDefined(self.summontracker))
+  if(!isDefined(self.summontracker)) {
     self.summontracker = [];
+  }
 
   var_3 = spawnStruct();
   var_3.guysremaining = var_1;
@@ -118,8 +127,9 @@ summontracker_decrement(var_0) {
   var_1.guysremaining--;
 
   if(var_1.guysremaining == 0) {
-    if(isDefined(var_1.fnallguysdead))
+    if(isDefined(var_1.fnallguysdead)) {
       self[[var_1.fnallguysdead]](var_0);
+    }
 
     self.summontracker[var_0] = undefined;
   }
@@ -211,8 +221,9 @@ domaskshockwave(var_0) {
   var_1 = var_0 == "roof";
   var_2 = self.origin;
 
-  if(var_1)
+  if(var_1) {
     var_2 = (-5092, 4644, -129);
+  }
 
   var_3 = 30;
   var_4 = 5;
@@ -254,8 +265,9 @@ domaskshockwave(var_0) {
   self._blackboard.bstoptauntingcontinuously = 1;
   scripts\cp\maps\cp_rave\cp_rave_super_slasher_fight::set_zombie_spawning_parameters("continuous", 999999, 0.2, 0.05, "near_player", "generic_zombie");
 
-  if(self.fight_round < 3)
+  if(self.fight_round < 3) {
     level thread scripts\cp\maps\cp_rave\cp_rave_super_slasher_fight::soul_collection_sequence();
+  }
 }
 
 shock_wave_wind_sfx() {
@@ -283,8 +295,9 @@ shock_wave_wind_sfx() {
 }
 
 stop_wind_fire_sfxs(var_0) {
-  foreach(var_2 in var_0)
-  var_2 thread stop_wind_fire_sfx(var_2);
+  foreach(var_2 in var_0) {
+    var_2 thread stop_wind_fire_sfx(var_2);
+  }
 }
 
 stop_wind_fire_sfx(var_0) {
@@ -328,13 +341,15 @@ domaskwires() {
   }
   var_0 = 1;
 
-  if(level.superslasher.fight_round == 2)
+  if(level.superslasher.fight_round == 2) {
     var_0 = level.players.size;
-  else
+  } else {
     var_0 = 4;
+  }
 
-  for(var_1 = 1; var_1 <= var_0; var_1++)
+  for(var_1 = 1; var_1 <= var_0; var_1++) {
     scripts\cp\maps\cp_rave\cp_rave_super_slasher_fight::activate_super_slasher_barrier(var_1);
+  }
 }
 
 stopwireattack() {
@@ -390,8 +405,9 @@ superslasher_dosawfan() {
     var_5.bvertical = 0;
     thread superslasher_dosawblade(var_5);
 
-    if(var_3 % 4 == 0)
+    if(var_3 % 4 == 0) {
       wait 0.05;
+    }
   }
 }
 
@@ -402,10 +418,11 @@ superslasher_dosawblade(var_0) {
 superslasher_dothrownsaw() {
   var_0 = self gettagorigin("j_wrist_ri");
 
-  if(isDefined(self._blackboard.throwsawtarget))
+  if(isDefined(self._blackboard.throwsawtarget)) {
     var_1 = self._blackboard.throwsawtarget.origin + (0, 0, 48);
-  else
+  } else {
     var_1 = self._blackboard.throwsawbackuptargetpos + (0, 0, 48);
+  }
 
   var_2 = vectorNormalize(var_1 - var_0);
   var_3 = vectortoyaw(var_2);
@@ -423,8 +440,9 @@ superslasher_dostompattack(var_0) {
   var_2 = 0.2;
   var_3 = 1024;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_3 = var_0;
+  }
 
   var_4 = int(var_3 / (var_1 * 2));
   var_5 = (var_3 - var_1 * 2) / (var_4 - 1);
@@ -460,8 +478,9 @@ dostickdamage(var_0, var_1, var_2, var_3) {
   while(var_3 > 0) {
     foreach(var_7 in level.players) {
       if(isalive(var_7)) {
-        if(distance2dsquared(var_7.origin, var_1) < var_4)
+        if(distance2dsquared(var_7.origin, var_1) < var_4) {
           var_7 dodamage(0.9 * var_7.maxhealth, var_1, var_0, var_0, "MOD_IMPACT");
+        }
       }
     }
 
@@ -474,15 +493,17 @@ dosawsharks(var_0) {
   var_1 = level.players.size + 1;
   var_2 = self.origin;
 
-  if(var_0 == "roof")
+  if(var_0 == "roof") {
     var_2 = (-4862, 4788, -138);
+  }
 
   self.sawsharks = [];
   var_3 = spawnStruct();
   var_3.perplayer = [];
 
-  foreach(var_5 in level.players)
-  var_3.perplayer[var_5 getentitynumber()] = 0;
+  foreach(var_5 in level.players) {
+    var_3.perplayer[var_5 getentitynumber()] = 0;
+  }
 
   var_7 = (90, 0, 0);
   var_8 = 40000;
@@ -493,10 +514,11 @@ dosawsharks(var_0) {
     var_12 = spawnsawshark(var_11);
     self.sawsharks[self.sawsharks.size] = var_12;
 
-    if(var_0 == "roof")
+    if(var_0 == "roof") {
       thread dosawshark_followtarget(var_12, var_3, undefined, var_2 + rotatevector(var_7, (0, var_10, 0)), var_8);
-    else
+    } else {
       thread dosawshark_followowner(var_12, var_3, var_10, var_8);
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -521,8 +543,9 @@ delayplayingsawsharkvfx(var_0) {
 killallsharks(var_0) {
   if(isDefined(var_0.sawsharks)) {
     foreach(var_2 in var_0.sawsharks) {
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         deletesawshark(var_2);
+      }
     }
   }
 }
@@ -587,10 +610,11 @@ dosawshark_followowner(var_0, var_1, var_2, var_3) {
     wait 0.05;
   }
 
-  if(isDefined(var_5) && var_3 > 0)
+  if(isDefined(var_5) && var_3 > 0) {
     thread dosawshark_followtarget(var_0, var_1, var_5, var_6, var_3);
-  else
+  } else {
     deletesawshark(var_0);
+  }
 }
 
 dosawshark_followtarget(var_0, var_1, var_2, var_3, var_4) {
@@ -606,8 +630,9 @@ dosawshark_followtarget(var_0, var_1, var_2, var_3, var_4) {
     var_6 = vectortoyaw(var_2.origin - var_5);
     var_10 = var_2 getentitynumber();
 
-    if(isDefined(var_1.perplayer[var_10]))
+    if(isDefined(var_1.perplayer[var_10])) {
       var_1.perplayer[var_10]++;
+    }
   }
 
   var_11 = scripts\common\trace::create_default_contents(1);
@@ -652,8 +677,9 @@ dosawshark_followtarget(var_0, var_1, var_2, var_3, var_4) {
 }
 
 allocattackent() {
-  if(!isDefined(self.attackents))
+  if(!isDefined(self.attackents)) {
     self.attackents = [];
+  }
 
   var_0 = undefined;
 

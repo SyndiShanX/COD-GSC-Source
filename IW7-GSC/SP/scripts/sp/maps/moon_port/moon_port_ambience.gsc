@@ -11,8 +11,9 @@ _id_F8B8() {
   level._id_4B3C = "";
   var_0 = getEntArray("ambient_ships_trigger", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_1DED();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_1DED();
+  }
 
   thread _id_1D7A();
 }
@@ -28,8 +29,9 @@ _id_1DED() {
       continue;
     }
 
-    if(!isDefined(self.script_parameters) || self.script_parameters != "oneoff")
+    if(!isDefined(self.script_parameters) || self.script_parameters != "oneoff") {
       level._id_4B3C = self.script_noteworthy;
+    }
 
     switch (self.script_noteworthy) {
       case "ambient_ships_intro":
@@ -115,11 +117,13 @@ _id_1DC9(var_0) {
 _id_B03C(var_0, var_1, var_2) {
   level endon("stop_fake_actors");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 5;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 12;
+  }
 
   for(;;) {
     var_3 = getEntArray(var_0, "targetname");
@@ -142,11 +146,13 @@ _id_1DF9() {
 }
 
 _id_F935(var_0, var_1) {
-  if(!isDefined(level._id_1DEB))
+  if(!isDefined(level._id_1DEB)) {
     level._id_1DEB = [];
+  }
 
-  if(isDefined(level._id_1DEB[var_0]))
+  if(isDefined(level._id_1DEB[var_0])) {
     _id_DFF4(var_0);
+  }
 
   wait 0.1;
   var_2 = scripts\sp\vehicle::_id_1080D(var_1);
@@ -178,8 +184,9 @@ _id_DFF4(var_0) {
 }
 
 _id_1DEC() {
-  foreach(var_2, var_1 in level._id_1DEB)
-  _id_DFF4(var_2);
+  foreach(var_2, var_1 in level._id_1DEB) {
+    _id_DFF4(var_2);
+  }
 }
 
 _id_FD66(var_0, var_1, var_2) {
@@ -226,8 +233,9 @@ _id_FD66(var_0, var_1, var_2) {
 
     while(var_13 > 0) {
       foreach(var_15 in var_11) {
-        if(var_0 == "right")
+        if(var_0 == "right") {
           var_15[1] = var_15[1] * -1;
+        }
 
         var_16 = transformmove(self.origin, self.angles, (0, 0, 0), (0, 0, 0), var_15, var_12);
         var_17 = var_16["origin"];
@@ -240,8 +248,9 @@ _id_FD66(var_0, var_1, var_2) {
         var_22 = var_17 + var_21 * anglesToForward(var_19) + var_15;
         var_23 = vectortoangles(var_22 - var_17);
 
-        if(scripts\engine\utility::cointoss())
+        if(scripts\engine\utility::cointoss()) {
           wait(randomfloatrange(0.05, 0.08));
+        }
       }
 
       var_13--;
@@ -272,28 +281,32 @@ _id_6D0F(var_0, var_1, var_2, var_3) {
   var_5[9] = (-1656, 3184, -1187);
   var_6 = 0;
 
-  if(isDefined(var_3) && scripts\engine\utility::cointoss() && scripts\engine\utility::cointoss())
+  if(isDefined(var_3) && scripts\engine\utility::cointoss() && scripts\engine\utility::cointoss()) {
     var_6 = 1;
+  }
 
   var_7 = var_2;
 
-  if(isDefined(var_3) && scripts\engine\utility::cointoss())
+  if(isDefined(var_3) && scripts\engine\utility::cointoss()) {
     var_7 = var_3;
+  }
 
   while(var_4 > 0) {
     if(var_6 == 1) {
       var_7 = var_2;
 
-      if(scripts\engine\utility::cointoss())
+      if(scripts\engine\utility::cointoss()) {
         var_7 = var_3;
+      }
     }
 
     var_8 = var_5[2];
 
-    if(var_4 == 4 || var_4 == 3)
+    if(var_4 == 4 || var_4 == 3) {
       var_8 = var_5[4];
-    else if(var_4 == 2 || var_4 == 1)
+    } else if(var_4 == 2 || var_4 == 1) {
       var_8 = var_5[5];
+    }
 
     var_9 = transformmove(self.origin, self.angles, (0, 0, 0), (0, 0, 0), var_8, var_1);
     var_10 = var_9["origin"];

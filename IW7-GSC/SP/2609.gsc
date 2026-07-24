@@ -17,8 +17,9 @@ bcs_trigs_assign_aliases() {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-    if(isDefined(var_3.classname) && issubstr(var_3.classname, "trigger_multiple_bcs"))
+    if(isDefined(var_3.classname) && issubstr(var_3.classname, "trigger_multiple_bcs")) {
       var_1[var_1.size] = var_3;
+    }
   }
 
   foreach(var_3 in var_1) {
@@ -27,8 +28,9 @@ bcs_trigs_assign_aliases() {
     }
     var_6 = parselocationaliases(level.bcs_location_mappings[var_3.classname]);
 
-    if(var_6.size > 1)
+    if(var_6.size > 1) {
       var_6 = scripts\engine\utility::array_randomize(var_6);
+    }
 
     var_3.locationaliases = var_6;
   }
@@ -49,8 +51,9 @@ add_bcs_location_mapping(var_0, var_1) {
 
     foreach(var_6 in var_4) {
       foreach(var_8 in var_3) {
-        if(var_6 == var_8)
+        if(var_6 == var_8) {
           return;
+        }
       }
     }
 
@@ -63,9 +66,9 @@ add_bcs_location_mapping(var_0, var_1) {
 }
 
 bcs_location_trigger_mapping() {
-  if(scripts\engine\utility::issp())
+  if(scripts\engine\utility::issp()) {
     sp();
-  else {
+  } else {
     metropolis();
     quarry();
     breakneck();

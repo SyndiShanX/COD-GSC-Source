@@ -73,8 +73,9 @@ init_location() {
   _id_0BB8::_id_7562("thrust_rear", "fx_engine_s", "missileboat_thruster_rear_lrg", self._id_501F);
   _id_0BB8::_id_7562("thrust_vert", "fx_thruster_v_s", "missileboat_thruster_down_sml", self._id_501F);
 
-  if(!issubstr(self.classname, "_plane"))
+  if(!issubstr(self.classname, "_plane")) {
     self._id_51E6 = 1;
+  }
 
   if(issubstr(self.classname, "cheap")) {
     _id_0BB2::_id_3193();
@@ -85,16 +86,18 @@ init_location() {
   self._id_7482 = "missileboat_ca_warp";
   self._id_7481 = 1;
 
-  if(scripts\sp\utility::_id_B324())
+  if(scripts\sp\utility::_id_B324()) {
     self[[level._id_A056._id_11543]]("capitalship", "JACKAL_AJAK", "none", "none", 0, 1, 1);
+  }
 
   if(issubstr(self.classname, "turret") || !issubstr(self.classname, "plane")) {
     self._id_EEF9 = "cannon_missile_ca_hardpoint cannon_small_ca,3,1,amb_turret_l_1,amb_turret_r_1,amb_turret_l_2,amb_turret_r_2,amb_turret_l_3,amb_turret_r_3";
     self._id_C825 = "missileboat_turret";
     _id_0BB6::_id_39E8();
 
-    foreach(var_1 in self._id_8B4F["cap_hardpoint_missile_barrage"])
-    var_1._id_FEAD = 0;
+    foreach(var_1 in self._id_8B4F["cap_hardpoint_missile_barrage"]) {
+      var_1._id_FEAD = 0;
+    }
 
     self._id_12A8B = 1;
     self._id_12B8B = 0;
@@ -113,8 +116,9 @@ init_location() {
 
   _id_F5D9();
 
-  if(issubstr(self.classname, "turret") || !issubstr(self.classname, "plane"))
+  if(issubstr(self.classname, "turret") || !issubstr(self.classname, "plane")) {
     thread _id_F04B(1);
+  }
 }
 
 _id_F5D9() {
@@ -123,14 +127,17 @@ _id_F5D9() {
   }
   var_0 = [];
 
-  foreach(var_2 in self.turrets)
-  var_0 = scripts\engine\utility::array_combine(var_0, var_2);
+  foreach(var_2 in self.turrets) {
+    var_0 = scripts\engine\utility::array_combine(var_0, var_2);
+  }
 
-  foreach(var_5 in self._id_8B4F)
-  var_0 = scripts\engine\utility::array_combine(var_0, var_5);
+  foreach(var_5 in self._id_8B4F) {
+    var_0 = scripts\engine\utility::array_combine(var_0, var_5);
+  }
 
-  foreach(var_8 in var_0)
-  var_8[[level._id_A056._id_1151D]]();
+  foreach(var_8 in var_0) {
+    var_8[[level._id_A056._id_1151D]]();
+  }
 }
 
 _id_F486(var_0, var_1, var_2, var_3) {
@@ -138,11 +145,13 @@ _id_F486(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("new_volume");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = self._id_63DE;
+  }
 
-  while(!isDefined(self._id_7560["thrust_vert"]))
+  while(!isDefined(self._id_7560["thrust_vert"])) {
     scripts\engine\utility::waitframe();
+  }
 
   var_4 = self;
 
@@ -162,13 +171,15 @@ _id_F486(var_0, var_1, var_2, var_3) {
   _id_0BB8::_id_39D0("off");
   _id_0BB8::_id_39CD("idle");
 
-  if(isDefined(level._id_2523))
+  if(isDefined(level._id_2523)) {
     level._id_2523 = scripts\engine\utility::array_add(level._id_2523, var_4);
-  else
+  } else {
     level._id_2523 = [var_4];
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 25000;
+  }
 
   var_5 = getcsplineidarray("missileboat_start", "targetname");
 
@@ -192,9 +203,9 @@ _id_F486(var_0, var_1, var_2, var_3) {
       var_6 = undefined;
       var_4._id_63DE = scripts\engine\utility::array_randomize(var_4._id_63DE);
 
-      if(isDefined(level._id_D127) && scripts\engine\utility::array_contains(var_4._id_63DE, level._id_D127) && level._id_D127 istouching(var_0))
+      if(isDefined(level._id_D127) && scripts\engine\utility::array_contains(var_4._id_63DE, level._id_D127) && level._id_D127 istouching(var_0)) {
         var_6 = level._id_D127;
-      else {
+      } else {
         foreach(var_8 in var_4._id_63DE) {
           if(isDefined(var_8) && var_8 istouching(var_0)) {
             var_6 = var_8;
@@ -207,8 +218,9 @@ _id_F486(var_0, var_1, var_2, var_3) {
         if(isDefined(level._id_D127) && scripts\engine\utility::array_contains(var_4._id_63DE, level._id_D127) && isDefined(level._id_D127)) {
           var_10 = distance(var_4.origin, level._id_D127.origin);
 
-          if(var_10 < var_2)
+          if(var_10 < var_2) {
             var_6 = level._id_D127;
+          }
         }
       }
 
@@ -220,18 +232,20 @@ _id_F486(var_0, var_1, var_2, var_3) {
       var_4 thread _id_B84F(var_6);
       var_4 thread _id_B84E(var_0, var_6, var_2);
 
-      if(!isDefined(level._id_D127) || var_6 != level._id_D127)
+      if(!isDefined(level._id_D127) || var_6 != level._id_D127) {
         var_4 thread _id_B87D(var_6, var_3);
+      }
 
       while(isDefined(var_6) && var_6 istouching(var_0)) {
         if(scripts\engine\utility::array_contains(var_4._id_63DE, level._id_D127)) {
-          if(!level._id_D127 istouching(var_0) && !var_4._id_12B8B)
+          if(!level._id_D127 istouching(var_0) && !var_4._id_12B8B) {
             wait 0.5;
-          else if(var_6 == level._id_D127 && !var_4._id_12B8B)
+          } else if(var_6 == level._id_D127 && !var_4._id_12B8B) {
             wait 0.5;
-          else {
-            if(!isDefined(var_6))
+          } else {
+            if(!isDefined(var_6)) {
               var_4._id_63DE = scripts\engine\utility::array_remove(var_4._id_63DE, var_6);
+            }
 
             break;
           }
@@ -296,8 +310,8 @@ _id_B84F(var_0) {
 
   while(isDefined(var_0)) {
     var_7 = distancesquared(level._id_D127.origin, var_1.origin);
-    var_1._id_8B50["cap_hardpoint_missile_barrage"] = scripts\engine\utility::array_removeundefined(var_1._id_8B50["cap_hardpoint_missile_barrage"]);
-    var_1._id_8B51["cap_hardpoint_missile_barrage"] = scripts\engine\utility::array_removeundefined(var_1._id_8B51["cap_hardpoint_missile_barrage"]);
+    var_1._id_8B50["cap_hardpoint_missile_barrage"] = ::scripts\engine\utility::array_removeundefined(var_1._id_8B50["cap_hardpoint_missile_barrage"]);
+    var_1._id_8B51["cap_hardpoint_missile_barrage"] = ::scripts\engine\utility::array_removeundefined(var_1._id_8B51["cap_hardpoint_missile_barrage"]);
     var_8 = var_1._id_8B50["cap_hardpoint_missile_barrage"];
     var_9 = var_1._id_8B51["cap_hardpoint_missile_barrage"];
 
@@ -306,15 +320,17 @@ _id_B84F(var_0) {
       var_10 = 1;
     }
 
-    if(var_7 < var_6 || var_1._id_12B8B)
+    if(var_7 < var_6 || var_1._id_12B8B) {
       var_11 = vectortoangles(level._id_D127.origin - var_1.origin);
-    else
+    } else {
       var_11 = vectortoangles(var_0.origin - var_1.origin);
+    }
 
     var_12 = var_1.angles[1] - var_11[1];
 
-    if(var_12 < 0)
+    if(var_12 < 0) {
       var_12 = 360 + var_12;
+    }
 
     if(var_8.size + var_9.size == 0) {
       var_1 notify("all_turrets_dead");
@@ -322,22 +338,25 @@ _id_B84F(var_0) {
     }
 
     if(abs(var_8.size - var_9.size) > 3 || var_8.size == 0 || var_9.size == 0) {
-      if(var_8.size < var_9.size)
+      if(var_8.size < var_9.size) {
         var_2 = (0, var_11[1] + 90, 0);
-      else
+      } else {
         var_2 = (0, var_11[1] - 90, 0);
+      }
     } else if(var_12 <= 180)
       var_2 = (0, var_11[1] + 90, 0);
-    else
+    else {
       var_2 = (0, var_11[1] - 90, 0);
+    }
 
     var_1._id_E739 = var_2;
 
     if(var_1._id_DF62 == "stopped") {
-      if(var_1._id_12B8B)
+      if(var_1._id_12B8B) {
         var_1 _meth_845F(50, 35, 25, 15);
-      else
+      } else {
         var_1 _meth_845F(25, 15, 25, 15);
+      }
 
       var_1 _meth_8455(var_1.origin, 1, var_2);
     } else if(var_3) {
@@ -444,8 +463,9 @@ _id_B87D(var_0, var_1) {
   var_6 = var_2._id_8B51["cap_hardpoint_missile_barrage"];
   var_7 = scripts\engine\utility::array_combine(var_5, var_6);
 
-  foreach(var_9 in var_7)
-  var_9._id_FEAD = 0;
+  foreach(var_9 in var_7) {
+    var_9._id_FEAD = 0;
+  }
 
   while(isDefined(var_0)) {
     if(var_2._id_DF62 != "always") {
@@ -455,8 +475,9 @@ _id_B87D(var_0, var_1) {
       var_11 = vectortoangles(var_0.origin - var_2.origin);
       var_12 = var_2.angles[1] - var_11[1];
 
-      if(var_12 < 0)
+      if(var_12 < 0) {
         var_12 = 360 + var_12;
+      }
 
       if(var_12 >= 180) {
         var_3 = var_5;
@@ -472,8 +493,9 @@ _id_B87D(var_0, var_1) {
           continue;
         }
 
-        if(!isDefined(var_9._id_FEAD))
+        if(!isDefined(var_9._id_FEAD)) {
           var_9._id_FEAD = 0;
+        }
 
         if(!var_9._id_FEAD) {
           wait(randomfloatrange(0.5, 1.25));
@@ -492,8 +514,9 @@ _id_B87D(var_0, var_1) {
           continue;
         }
 
-        if(!isDefined(var_9._id_FEAD))
+        if(!isDefined(var_9._id_FEAD)) {
           var_9._id_FEAD = 0;
+        }
 
         if(var_9._id_FEAD) {
           var_9 notify("turret_closed");
@@ -532,11 +555,13 @@ _id_B86F(var_0, var_1, var_2) {
   var_6 = 0;
   var_7 = var_1.turrets["cap_turret_small_constant"];
 
-  if(isDefined(var_3._id_EF5B))
+  if(isDefined(var_3._id_EF5B)) {
     var_3._id_EF5B = undefined;
+  }
 
-  if(isDefined(var_0.script_linkto))
+  if(isDefined(var_0.script_linkto)) {
     var_6 = 1;
+  }
 
   wait(randomfloat(1));
 
@@ -551,8 +576,9 @@ _id_B86F(var_0, var_1, var_2) {
       var_10 = var_0 scripts\sp\utility::_id_7A97();
 
       foreach(var_13 in var_10) {
-        if(isDefined(var_13.script_parameters))
+        if(isDefined(var_13.script_parameters)) {
           var_10 = scripts\engine\utility::array_remove(var_10, var_13);
+        }
       }
 
       var_10 = scripts\engine\utility::array_randomize(var_10);
@@ -590,34 +616,38 @@ _id_B86F(var_0, var_1, var_2) {
       var_16 = randomint(var_10.size - 1);
       var_3._id_217B = 0.35;
 
-      if(!isDefined(var_1.shooting_missile_barrage) || isDefined(var_1.shooting_missile_barrage) && !var_1.shooting_missile_barrage)
+      if(!isDefined(var_1.shooting_missile_barrage) || isDefined(var_1.shooting_missile_barrage) && !var_1.shooting_missile_barrage) {
         thread _id_0B76::_id_1992("tag_flash", var_10[var_16]);
-      else
+      } else {
         wait 3;
+      }
 
       var_22 = distancesquared(level._id_D127.origin, var_1.origin);
 
-      if(var_22 < 1600000000)
+      if(var_22 < 1600000000) {
         wait(randomfloatrange(0.75, 1.25));
-      else
+      } else {
         wait 4;
+      }
 
       var_1._id_9829 = 0;
       wait(randomfloatrange(1, 3));
     } else {
       var_3._id_217B = 0.35;
 
-      if(!isDefined(var_1.shooting_missile_barrage) || isDefined(var_1.shooting_missile_barrage) && !var_1.shooting_missile_barrage)
+      if(!isDefined(var_1.shooting_missile_barrage) || isDefined(var_1.shooting_missile_barrage) && !var_1.shooting_missile_barrage) {
         thread _id_0B76::_id_1992("tag_flash", var_0);
-      else
+      } else {
         wait 3;
+      }
 
       var_22 = distancesquared(level._id_D127.origin, var_1.origin);
 
-      if(var_22 < 1600000000)
+      if(var_22 < 1600000000) {
         wait(randomfloatrange(0.75, 1.25));
-      else
+      } else {
         wait 4;
+      }
 
       var_1._id_9829 = 0;
       wait(randomfloatrange(2, 4));
@@ -632,10 +662,11 @@ _id_B86F(var_0, var_1, var_2) {
         var_16 = randomint(var_23);
 
         if(isDefined(var_24[var_16])) {
-          if(!isDefined(var_1.shooting_missile_barrage) || isDefined(var_1.shooting_missile_barrage) && !var_1.shooting_missile_barrage)
+          if(!isDefined(var_1.shooting_missile_barrage) || isDefined(var_1.shooting_missile_barrage) && !var_1.shooting_missile_barrage) {
             thread _id_0B76::_id_1992("tag_flash", var_24[var_16]);
-          else
+          } else {
             wait 3;
+          }
 
           wait(randomfloatrange(0.5, 0.75));
         }
@@ -655,20 +686,24 @@ _id_B87B(var_0, var_1) {
   self endon("new_volume");
   self endon("new_target");
 
-  if(isDefined(self._id_7486) && self._id_7486)
+  if(isDefined(self._id_7486) && self._id_7486) {
     self waittill("ftl_complete");
+  }
 
   var_2 = self;
   var_3 = [var_2];
 
-  while(!isDefined(var_2.turrets["cap_turret_small_constant"]))
+  while(!isDefined(var_2.turrets["cap_turret_small_constant"])) {
     wait 0.05;
+  }
 
-  while(!isDefined(var_2._id_8B51["cap_hardpoint_missile_barrage"]))
+  while(!isDefined(var_2._id_8B51["cap_hardpoint_missile_barrage"])) {
     wait 0.05;
+  }
 
-  while(!isDefined(var_2._id_8B50["cap_hardpoint_missile_barrage"]))
+  while(!isDefined(var_2._id_8B50["cap_hardpoint_missile_barrage"])) {
     wait 0.05;
+  }
 
   var_3 = scripts\engine\utility::array_combine(var_3, var_2.turrets["cap_turret_small_constant"]);
   var_3 = scripts\engine\utility::array_combine(var_3, var_2._id_8B51["cap_hardpoint_missile_barrage"]);
@@ -700,10 +735,11 @@ _id_B87B(var_0, var_1) {
       if(scripts\common\trace::sphere_trace_passed(var_2.origin, var_10, var_7, var_3)) {
         var_2 _meth_845F(200, 180, 40, 20);
 
-        if(!isDefined(var_2._id_E739))
+        if(!isDefined(var_2._id_E739)) {
           var_2 _id_B85C(var_10, 1, undefined, (0, var_2.angles[1], 0));
-        else
+        } else {
           var_2 _id_B85C(var_10, 1, undefined, var_2._id_E739);
+        }
 
         break;
       } else {
@@ -741,8 +777,9 @@ _id_B87B(var_0, var_1) {
 
   for(;;) {
     foreach(var_20 in var_1) {
-      if(isDefined(var_20) && ispointinvolume(var_20.origin, var_0))
+      if(isDefined(var_20) && ispointinvolume(var_20.origin, var_0)) {
         var_13 = var_13 + 1;
+      }
     }
 
     if(var_13 > 0 || var_2._id_12B8B) {
@@ -766,19 +803,22 @@ _id_B85C(var_0, var_1, var_2, var_3) {
     self._id_DF62 = "heavy";
     _id_0BB8::_id_39CD("heavy");
 
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       var_2 = 1000.0;
+    }
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       self _meth_8455(var_0, var_1, var_3);
-    else
+    } else {
       self _meth_8455(var_0, var_1);
+    }
 
     self setneargoalnotifydist(var_2);
     var_4 = distance(var_0, self.origin);
 
-    if(var_4 > var_2)
+    if(var_4 > var_2) {
       self waittill("near_goal");
+    }
 
     self._id_DF62 = "stopped";
     self._id_9829 = 0;
@@ -812,16 +852,18 @@ _id_B875(var_0, var_1) {
         var_7 = var_8;
         var_14 = distancesquared(var_3, var_0.origin);
 
-        if(var_14 < var_9)
+        if(var_14 < var_9) {
           var_2 = var_11;
-        else
+        } else {
           var_6 = var_11;
+        }
       }
     }
   }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = var_6;
+  }
 
   if(isDefined(var_2)) {
     var_16 = vectorNormalize(var_5 - self.origin);
@@ -865,15 +907,17 @@ _id_B875(var_0, var_1) {
 }
 
 _id_B872(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0.2;
+  }
 
   self _meth_8479(var_0);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self _meth_847B(var_1, var_2);
-  else
+  } else {
     self _meth_847B(var_1);
+  }
 
   self._id_10A43 = var_0;
   self waittill("near_goal");
@@ -888,10 +932,11 @@ _id_B871(var_0) {
   if(isDefined(var_2) && var_2 != "") {
     var_3 = getcsplinepointstring(var_0, var_1);
 
-    if(isDefined(var_3) && var_2 != "")
+    if(isDefined(var_3) && var_2 != "") {
       self notify("splinenode_label", var_2, var_0, var_1, var_3);
-    else
+    } else {
       self notify("splinenode_label", var_2, var_0, var_1);
+    }
   }
 }
 
@@ -901,10 +946,11 @@ _id_B870(var_0) {
   var_1._id_74A6 = 1;
   var_1 _meth_8554(200, 10, 1, 1500, 10, 1, 0.25);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 scripts\engine\utility::delaythread(var_0, ::_id_B859);
-  else
+  } else {
     var_1 thread _id_B859();
+  }
 
   return var_1;
 }
@@ -914,8 +960,9 @@ _id_B859() {
   self._id_7486 = 1;
   var_0 = scripts\engine\utility::spawn_tag_origin(self.origin, self.angles);
 
-  if(soundexists("capitalship_npc_enemy_ftl_in"))
+  if(soundexists("capitalship_npc_enemy_ftl_in")) {
     self playSound("capitalship_npc_enemy_ftl_in");
+  }
 
   wait 0.25;
   self setneargoalnotifydist(100);
@@ -972,8 +1019,9 @@ _id_7476() {
   level.player earthquakeforplayer(var_8 * 4, 0.5, level._id_D127.origin, 20000);
   playFXOnTag(scripts\engine\utility::getfx("missileboat_ca_warp_pre"), self, "tag_origin");
 
-  if(!scripts\common\trace::ray_trace_passed(var_0 + (0, 0, 12), level.player getEye()))
+  if(!scripts\common\trace::ray_trace_passed(var_0 + (0, 0, 12), level.player getEye())) {
     var_8 = var_8 * 0.5;
+  }
 
   if(getdvarint("debug_frag_mb")) {
     iprintln("Naromalized value is " + var_7);
@@ -994,14 +1042,17 @@ _id_7476() {
 }
 
 _id_F04B(var_0) {
-  while(isDefined(self._id_74A6))
+  while(isDefined(self._id_74A6)) {
     wait 0.05;
+  }
 
-  if(!isDefined(level._id_F04D))
+  if(!isDefined(level._id_F04D)) {
     level._id_F04D = [];
+  }
 
-  if(!isDefined(level._id_F02D))
+  if(!isDefined(level._id_F02D)) {
     level._id_F02D = [];
+  }
 
   level._id_F04D = scripts\engine\utility::array_add(level._id_F04D, self);
   level._id_F02D = scripts\engine\utility::array_add(level._id_F02D, self);
@@ -1025,17 +1076,21 @@ _id_F04B(var_0) {
 }
 
 _id_B84D() {
-  if(isDefined(self._id_9278) && self._id_9278)
+  if(isDefined(self._id_9278) && self._id_9278) {
     return 1;
+  }
 
-  if(!isDefined(self._id_DF62))
+  if(!isDefined(self._id_DF62)) {
     return 0;
+  }
 
-  if(length(self.spaceship_vel) > 100)
+  if(length(self.spaceship_vel) > 100) {
     return 0;
+  }
 
-  if(self._id_DF62 != "stopped")
+  if(self._id_DF62 != "stopped") {
     return 0;
+  }
 
   return 1;
 }
@@ -1052,8 +1107,9 @@ _id_77D2(var_0) {
   foreach(var_5 in var_1) {
     var_6 = getcsplinepointposition(var_5, 0);
 
-    if(ispointinvolume(var_6, self._id_24CE))
+    if(ispointinvolume(var_6, self._id_24CE)) {
       var_2[var_2.size] = var_5;
+    }
   }
 
   foreach(var_9 in var_0) {

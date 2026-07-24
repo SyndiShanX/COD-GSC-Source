@@ -24,8 +24,9 @@ _id_3359(var_0, var_1, var_2, var_3) {
 }
 
 _id_3377(var_0) {
-  if(!isDefined(anim._id_C05A))
+  if(!isDefined(anim._id_C05A)) {
     anim._id_C05A = [];
+  }
 
   if(isDefined(anim._id_C05A[var_0])) {
     return;
@@ -51,8 +52,9 @@ _id_3377(var_0) {
 }
 
 _id_3375() {
-  if(!isDefined(anim._id_85DF))
+  if(!isDefined(anim._id_85DF)) {
     anim._id_85DF = [];
+  }
 
   if(isDefined(anim._id_85DF["c6"])) {
     return;
@@ -182,16 +184,17 @@ _id_33AD(var_0, var_1) {
 }
 
 _id_335C(var_0, var_1, var_2) {
-  if(scripts\asm\asm_bb::_id_293E())
+  if(scripts\asm\asm_bb::_id_293E()) {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "haywire");
-  else {
+  } else {
     var_3 = scripts\asm\asm::asm_getdemeanor();
 
     if(scripts\asm\asm::asm_hasdemeanoranimoverride(var_3, "idle")) {
       var_4 = scripts\asm\asm::asm_getdemeanoranimoverride(var_3, "idle");
 
-      if(isarray(var_4))
+      if(isarray(var_4)) {
         return var_4[randomint(var_4.size)];
+      }
 
       return var_4;
     }
@@ -203,19 +206,21 @@ _id_335C(var_0, var_1, var_2) {
 _id_335D(var_0, var_1, var_2) {
   var_3 = scripts\asm\asm::asm_getdemeanor();
 
-  if(scripts\asm\asm_bb::_id_293E())
+  if(scripts\asm\asm_bb::_id_293E()) {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, scripts\asm\asm_bb::_id_2922());
-  else if(scripts\asm\asm::asm_hasdemeanoranimoverride(var_3, var_2)) {
+  } else if(scripts\asm\asm::asm_hasdemeanoranimoverride(var_3, var_2)) {
     var_4 = scripts\asm\asm::asm_getdemeanoranimoverride(var_3, var_2);
 
-    if(isarray(var_4))
+    if(isarray(var_4)) {
       return var_4[randomint(var_4.size)];
+    }
 
     return var_4;
   }
 
-  if(!scripts\asm\asm::asm_hasalias(var_1, var_3))
+  if(!scripts\asm\asm::asm_hasalias(var_1, var_3)) {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "default");
+  }
 
   return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
 }
@@ -224,8 +229,9 @@ _id_CEB9(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   var_4 = self.angles[1];
 
-  if(isDefined(self.grenade) && distancesquared(self.origin, self.grenade.origin) > 144)
+  if(isDefined(self.grenade) && distancesquared(self.origin, self.grenade.origin) > 144) {
     var_4 = vectortoyaw(self.grenade.origin - self.origin);
+  }
 
   self orientmode("face angle", var_4);
   var_5 = self[[self._id_7191]](var_0, var_1);
@@ -233,12 +239,13 @@ _id_CEB9(var_0, var_1, var_2, var_3) {
   self _meth_82EA(var_1, var_5, 1, var_2, 1);
   thread _id_0A1E::_id_231F(var_0, var_1);
 
-  if(animhasnotetrack(var_5, "grenade_left"))
+  if(animhasnotetrack(var_5, "grenade_left")) {
     self waittillmatch(var_1, "grenade_left");
-  else if(animhasnotetrack(var_5, "grenade_right"))
+  } else if(animhasnotetrack(var_5, "grenade_right")) {
     self waittillmatch(var_1, "grenade_right");
-  else
+  } else {
     wait 1;
+  }
 
   if(isDefined(self.grenade)) {
     self.grenade delete();

@@ -38,8 +38,9 @@ collect_bait() {
 init_bait_heads() {
   var_0 = getEntArray("bait_head", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread wait_to_be_fed();
+  foreach(var_2 in var_0) {
+    var_2 thread wait_to_be_fed();
+  }
 }
 
 wait_to_be_fed() {
@@ -56,11 +57,13 @@ play_signal_if_bait_nearby() {
   self endon("stop_attacking_player");
   var_0 = 160000;
 
-  while(!isDefined(level.players))
+  while(!isDefined(level.players)) {
     wait 0.1;
+  }
 
-  while(level.players.size < 1)
+  while(level.players.size < 1) {
     wait 0.1;
+  }
 
   for(;;) {
     var_1 = 0;
@@ -75,8 +78,9 @@ play_signal_if_bait_nearby() {
       }
     }
 
-    if(!var_1)
+    if(!var_1) {
       self setscriptablepartstate("bait", "inactive");
+    }
 
     wait 1;
   }
@@ -132,10 +136,11 @@ remove_rave_lock() {
 face_enemy(var_0) {
   for(;;) {
     if(!self.head isenemyinfrontofme(var_0, 0.9, (0, 90, 0))) {
-      if(self.head isenemyrightofme(var_0, (0, 115, 0)))
+      if(self.head isenemyrightofme(var_0, (0, 115, 0))) {
         self rotateYaw(self.angles[2] + 10, 0.15, 0.05, 0.05);
-      else
+      } else {
         self rotateYaw(self.angles[2] - 10, 0.15, 0.05, 0.05);
+      }
     } else
       break;
 
@@ -163,8 +168,9 @@ listen_for_bait_throw() {
   for(;;) {
     self waittill("grenade_fire", var_0, var_1);
 
-    if(isDefined(var_0) && isDefined(var_1))
+    if(isDefined(var_0) && isDefined(var_1)) {
       var_0 thread wait_for_impact(var_1, self);
+    }
   }
 }
 
@@ -177,8 +183,9 @@ wait_for_impact(var_0, var_1) {
   var_4 = scripts\engine\utility::getclosest(var_2, var_3, 500);
 
   if(isDefined(var_4)) {
-    if(isDefined(var_4.bait))
+    if(isDefined(var_4.bait)) {
       var_4.bait delete();
+    }
 
     var_4.anchor.bait = spawn("script_origin", var_2);
     var_4.anchor.bait_time = gettime();
@@ -251,8 +258,9 @@ move_back_to_wall() {
   self moveTo(self.wall_spot, 1, 0.25, 0.25);
   self waittill("movedone");
 
-  if(isDefined(self.bait))
+  if(isDefined(self.bait)) {
     self.bait delete();
+  }
 }
 
 get_move_spot() {
@@ -266,10 +274,11 @@ get_move_spot() {
     var_1[var_1.size] = var_3;
   }
 
-  if(var_1.size > 0)
+  if(var_1.size > 0) {
     var_5 = scripts\engine\utility::getclosest(self.origin, var_1);
-  else
+  } else {
     var_5 = scripts\engine\utility::getclosest(self.origin, var_0);
+  }
 
   return var_5.origin;
 }
@@ -284,8 +293,9 @@ listen_for_damage() {
       continue;
     }
     if(var_9 == "iw7_bait_zm") {
-      if(self.on_wall)
+      if(self.on_wall) {
         self notify("hit_with_bait");
+      }
 
       wait 0.1;
       continue;
@@ -307,8 +317,9 @@ listen_for_damage() {
 listen_for_symbol_press() {}
 
 wait_for_key_pickup() {
-  if(level.harpoon_locks > 2)
+  if(level.harpoon_locks > 2) {
     scripts\engine\utility::flag_set("chains_unlocked");
+  }
 }
 
 spawn_chain_locks() {
@@ -330,8 +341,9 @@ spawn_chain_locks() {
 show_hide_symbols() {
   level endon("chains_unlocked");
 
-  while(!isDefined(level.players))
+  while(!isDefined(level.players)) {
     wait 0.1;
+  }
 
   for(;;) {
     foreach(var_1 in level.players) {

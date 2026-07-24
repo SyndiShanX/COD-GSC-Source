@@ -38,10 +38,11 @@ _id_4911(var_0) {
   var_1 setModel("tag_origin");
   var_1 linkTo(self, var_0, (10, 0, 0), (0, 0, 0));
 
-  if(self.team == "axis")
+  if(self.team == "axis") {
     playFXOnTag(level._id_7649["c12_enemy_light"], var_1, "tag_origin");
-  else
+  } else {
     playFXOnTag(level._id_7649["c12_ally_light"], var_1, "tag_origin");
+  }
 
   return var_1;
 }
@@ -49,8 +50,9 @@ _id_4911(var_0) {
 _id_E138() {
   if(isDefined(self.bt._id_ACB4)) {
     foreach(var_1 in self.bt._id_ACB4) {
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         var_1 delete();
+      }
     }
   }
 }

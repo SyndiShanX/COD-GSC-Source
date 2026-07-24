@@ -6,18 +6,21 @@
 laughing_clown(var_0, var_1) {
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
 
-  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade))
+  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade)) {
     var_0 notify("machine_used");
+  }
 
   level.wave_num_at_start_of_game = level.wave_num;
 
-  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade))
+  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade)) {
     scripts\cp\zombies\zombie_analytics::log_times_per_wave("laughingclown", var_1);
-  else
+  } else {
     scripts\cp\zombies\zombie_analytics::log_times_per_wave("laughingclown_afterlife", var_1);
+  }
 
-  if(isDefined(level.start_black_hole_func))
+  if(isDefined(level.start_black_hole_func)) {
     var_0 thread[[level.start_black_hole_func]](var_0, var_1);
+  }
 
   var_2 = getEntArray(var_0.target, "targetname");
   var_3 = scripts\engine\utility::is_true(var_1.in_afterlife_arcade);
@@ -37,8 +40,9 @@ laughing_clown(var_0, var_1) {
       continue;
     }
 
-    if(var_9.script_noteworthy == "ball_chute_dir")
+    if(var_9.script_noteworthy == "ball_chute_dir") {
       var_6 = var_9;
+    }
   }
 
   var_11 = randomfloatrange(1, 2);
@@ -52,8 +56,9 @@ laughing_clown(var_0, var_1) {
   var_15 setModel("zmb_arcade_game_ball_small");
   var_15.origin = var_6.origin + scripts\cp\utility::vec_multiply(anglesToForward(var_6.angles), 1) + (0, 0, 0.1);
 
-  if(var_3)
+  if(var_3) {
     var_15.origin = var_6.origin + scripts\cp\utility::vec_multiply(anglesToForward(var_6.angles), 3) + (0, 0, 0.2);
+  }
 
   var_15 physicslaunchserver(var_14, vectorNormalize(anglesToForward(var_6.angles)) * 65);
   var_16 = undefined;
@@ -69,8 +74,9 @@ laughing_clown(var_0, var_1) {
       break;
     }
 
-    if(distancesquared(var_18, var_15.origin) < 0.05)
+    if(distancesquared(var_18, var_15.origin) < 0.05) {
       var_15 physicslaunchserver(var_15.origin + (randomintrange(20, 35), randomintrange(20, 35), 0), vectorNormalize(anglesToForward(var_6.angles)) * 5);
+    }
 
     var_17++;
 
@@ -83,8 +89,9 @@ laughing_clown(var_0, var_1) {
 
   wait 0.5;
 
-  if(var_1 scripts\cp\utility::is_valid_player())
+  if(var_1 scripts\cp\utility::is_valid_player()) {
     var_1 playlocalsound("mp_slot_machine_coins");
+  }
 
   if(var_3) {
     switch (var_16.script_noteworthy) {
@@ -153,13 +160,15 @@ laughing_clown(var_0, var_1) {
 }
 
 _id_1285F(var_0, var_1) {
-  if(scripts\engine\utility::is_true(var_0.in_afterlife_arcade))
+  if(scripts\engine\utility::is_true(var_0.in_afterlife_arcade)) {
     var_0 scripts\cp\zombies\zombie_afterlife_arcade::give_soul_power(var_0, var_1);
+  }
 }
 
 _id_FF2B(var_0, var_1) {
-  if(var_1 && !scripts\engine\utility::is_true(var_0.in_afterlife_arcade))
+  if(var_1 && !scripts\engine\utility::is_true(var_0.in_afterlife_arcade)) {
     return 0;
+  }
 
   return 1;
 }
@@ -178,8 +187,9 @@ init_all_laughing_clowns() {
 init_all_afterlife_laughing_clowns() {
   var_0 = scripts\engine\utility::getStructArray("laughingclown_afterlife", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_9655();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_9655();
+  }
 }
 
 _id_9655() {
@@ -207,15 +217,17 @@ _id_9655() {
       continue;
     }
 
-    if(var_7.classname == "light_spot")
+    if(var_7.classname == "light_spot") {
       var_4 = var_7;
+    }
   }
 
   var_3 linkTo(var_2);
   var_2 linkTo(var_1);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 thread _id_42D6(self, var_0);
+  }
 
   if(!var_0) {
     return;
@@ -240,8 +252,9 @@ _id_9655() {
 _id_42D6(var_0, var_1) {
   self endon("stop_laughingclown");
 
-  if(scripts\engine\utility::is_true(var_1))
+  if(scripts\engine\utility::is_true(var_1)) {
     level scripts\engine\utility::waittill_any("power_on", var_0.power_area + " power_on");
+  }
 
   self rotateYaw(-30, 0.75);
 
@@ -251,10 +264,11 @@ _id_42D6(var_0, var_1) {
     var_4 = var_2 - var_3;
     self playSound("arcade_blackhole_mvmt");
 
-    if(scripts\engine\utility::is_true(var_1) && var_0.powered_on == 0)
+    if(scripts\engine\utility::is_true(var_1) && var_0.powered_on == 0) {
       level scripts\engine\utility::waittill_any("power_on", var_0.power_area + " power_on");
-    else
+    } else {
       self waittill("rotatedone");
+    }
 
     wait(randomfloatrange(0.1, 0.25));
     self playSound("arcade_blackhole_mvmt");

@@ -16,8 +16,9 @@ main() {
   scripts\sp\utility::_id_1263F("rogue_finale_tr");
   scripts\sp\utility::_id_1263F("rogue_base_tr");
 
-  if(getdvarint("r_reflectionProbeGenerate") == 1)
+  if(getdvarint("r_reflectionProbeGenerate") == 1) {
     _id_894E();
+  }
 
   scripts\sp\maps\rogue\gen\rogue_art::main();
   scripts\sp\maps\rogue\rogue_fx::main();
@@ -48,8 +49,9 @@ _id_D428() {
 _id_894E() {
   var_0 = getEnt("dorm_tv_screen", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 hide();
+  }
 }
 
 _id_E612() {
@@ -216,38 +218,42 @@ _id_960C() {
         var_5 = 0;
 
         if(isDefined(level._id_1158[1])) {
-          if(level._id_1158[1] == "dorm")
+          if(level._id_1158[1] == "dorm") {
             var_5 = 1;
+          }
         }
 
         var_6 = 0;
 
-        if(level._id_1158[0] == "finale")
+        if(level._id_1158[0] == "finale") {
           var_6 = 1;
-        else if(isDefined(level._id_1158[1])) {
-          if(level._id_1158[1] == "finale")
+        } else if(isDefined(level._id_1158[1])) {
+          if(level._id_1158[1] == "finale") {
             var_6 = 1;
+          }
         }
 
         var_7 = 0;
         var_8 = 0;
 
-        if((level._id_1158[0] == "hangar" || level._id_1158[0] == "solararray") && scripts\engine\utility::flag("player_is_outside") == 1)
+        if((level._id_1158[0] == "hangar" || level._id_1158[0] == "solararray") && scripts\engine\utility::flag("player_is_outside") == 1) {
           var_7 = 15;
-        else if(level._id_1158[0] == "hangar" || level._id_1158[0] == "solararray")
+        } else if(level._id_1158[0] == "hangar" || level._id_1158[0] == "solararray") {
           var_7 = 10;
-        else if(scripts\engine\utility::array_contains(var_4, level._id_1158[0]) || var_5 == 1)
+        } else if(scripts\engine\utility::array_contains(var_4, level._id_1158[0]) || var_5 == 1) {
           var_7 = 3;
-        else
+        } else {
           var_7 = 5;
+        }
 
         if(var_7 >= 15) {
           var_8 = randomfloatrange(7, 10);
 
-          if(level._id_111C3.time >= 0 && level._id_111C3.time < 12)
+          if(level._id_111C3.time >= 0 && level._id_111C3.time < 12) {
             level._id_8632 rotateTo((20, 0, 0), var_8);
-          else if(level._id_111C3.time >= 12)
+          } else if(level._id_111C3.time >= 12) {
             level._id_8632 rotateTo((-20, 0, 0), var_8);
+          }
 
           level.player _meth_8251((level._id_111C3.time / 24 * 10 - 10, 0, 0), 0);
         } else {
@@ -268,10 +274,11 @@ _id_960C() {
             var_11 = -200;
             var_12 = 0;
 
-            if(scripts\engine\utility::flag("power_on"))
+            if(scripts\engine\utility::flag("power_on")) {
               var_12 = 0.01;
-            else
+            } else {
               var_12 = -0.01;
+            }
 
             thread _id_DC60(var_9, var_10, var_11);
           } else
@@ -299,14 +306,17 @@ _id_DC60(var_0, var_1, var_2, var_3) {
   level endon("rogue_quake");
 
   if(getdvarint("override_rogue_physics", 0) == 1) {
-    if(getdvarint("rogue_grav_x", 0) != 0)
+    if(getdvarint("rogue_grav_x", 0) != 0) {
       var_0 = getdvarint("rogue_grav_x", 0);
+    }
 
-    if(getdvarint("rogue_grav_y", 0) != 0)
+    if(getdvarint("rogue_grav_y", 0) != 0) {
       var_1 = getdvarint("rogue_grav_y", 0);
+    }
 
-    if(getdvarint("rogue_grav_z", 0) != 0)
+    if(getdvarint("rogue_grav_z", 0) != 0) {
       var_2 = getdvarint("rogue_grav_z", 0);
+    }
   }
 
   var_4 = 0.75;
@@ -318,20 +328,23 @@ _id_DC60(var_0, var_1, var_2, var_3) {
   while(var_0 != 0 || var_1 != 0 || var_2 != -389) {
     physics_setgravity((var_0, var_1, var_2));
 
-    if(var_0 - var_6 <= 0)
+    if(var_0 - var_6 <= 0) {
       var_0 = 0;
-    else
+    } else {
       var_0 = var_0 - var_6;
+    }
 
-    if(var_1 - var_7 <= 0)
+    if(var_1 - var_7 <= 0) {
       var_1 = 0;
-    else
+    } else {
       var_1 = var_1 - var_7;
+    }
 
-    if(var_2 - var_8 <= -389)
+    if(var_2 - var_8 <= -389) {
       var_2 = -389;
-    else
+    } else {
       var_2 = var_2 - var_8;
+    }
 
     wait 0.05;
   }
@@ -340,9 +353,9 @@ _id_DC60(var_0, var_1, var_2, var_3) {
 _id_C759() {
   wait 0.2;
 
-  if(!isDefined(level._id_CB16))
+  if(!isDefined(level._id_CB16)) {
     return;
-  else {
+  } else {
     if(level._id_CB16 == "right") {
       return;
     }
@@ -363,19 +376,22 @@ _id_13858() {
       var_3 = 0;
 
       if(isDefined(level._id_1158[0])) {
-        if(level._id_1158[0] == "dorm")
+        if(level._id_1158[0] == "dorm") {
           var_3 = 1;
+        }
 
         if(isDefined(level._id_1158[1])) {
-          if(level._id_1158[1] == "dorm")
+          if(level._id_1158[1] == "dorm") {
             var_3 = 1;
+          }
         }
       }
 
-      if(var_3 == 0)
+      if(var_3 == 0) {
         physicsexplosionsphere(var_0 + var_2 * 200, 400, 1, 0.01);
-      else
+      } else {
         physicsexplosionsphere(var_0 + var_2 * 150, 300, 1, 0.01);
+      }
     }
   }
 }
@@ -388,14 +404,15 @@ _id_10AC5() {
       var_0 = 0;
 
       if(isDefined(level._id_1158[1])) {
-        if(level._id_1158[1] == "dorm")
+        if(level._id_1158[1] == "dorm") {
           var_0 = 1;
+        }
       }
 
       if(isDefined(level._id_1158[0])) {
-        if((level._id_1158[0] == "dorm" || var_0) && scripts\engine\utility::flag("power_off"))
+        if((level._id_1158[0] == "dorm" || var_0) && scripts\engine\utility::flag("power_off")) {
           scripts\engine\utility::flag_clear("force_flashlights_off");
-        else {
+        } else {
           wait 4;
           scripts\engine\utility::flag_set("force_flashlights_off");
         }
@@ -969,13 +986,15 @@ _id_E65B(var_0) {
 }
 
 _id_E65E(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     scripts\engine\utility::delaythread(1, scripts\sp\utility::_id_7616, "rogue_fx_vol_0");
+  }
 
   scripts\engine\utility::delaythread(1, scripts\sp\utility::_id_7616, "rogue_fx_vol_dorm");
 
-  if(scripts\engine\utility::flag("second_half_fx_paused"))
+  if(scripts\engine\utility::flag("second_half_fx_paused")) {
     scripts\sp\utility::_id_7619("rogue_fx_vol_1");
+  }
 }
 
 _id_E65D(var_0) {
@@ -986,6 +1005,7 @@ _id_E65D(var_0) {
 
   scripts\engine\utility::delaythread(1, scripts\sp\utility::_id_7616, "rogue_fx_vol_1");
 
-  if(scripts\engine\utility::flag("finale_fx_paused"))
+  if(scripts\engine\utility::flag("finale_fx_paused")) {
     scripts\sp\utility::_id_7619("rogue_fx_vol_finale");
+  }
 }

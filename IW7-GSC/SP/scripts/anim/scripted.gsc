@@ -24,8 +24,9 @@ main() {
     self._id_EF4D = undefined;
   }
 
-  if(isDefined(self._id_4E70))
+  if(isDefined(self._id_4E70)) {
     self._id_4E6F = self._id_4E70;
+  }
 
   self waittill("killanimscript");
 }
@@ -36,10 +37,11 @@ init(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self._id_433C["angles"] = var_2;
   self._id_433C["anim"] = var_3;
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     self._id_433C["animMode"] = var_4;
-  else
+  } else {
     self._id_433C["animMode"] = "normal";
+  }
 
   self._id_433C["goalTime"] = var_6;
   self._id_433C["animRate"] = var_7;
@@ -63,27 +65,31 @@ init(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 #using_animtree("generic_human");
 
 _id_962B() {
-  if(!isDefined(self._id_433C["root"]))
+  if(!isDefined(self._id_433C["root"])) {
     self._id_433C["root"] = % body;
+  }
 }
 
 #using_animtree("c6");
 
 _id_9563() {
-  if(!isDefined(self._id_433C["root"]))
+  if(!isDefined(self._id_433C["root"])) {
     self._id_433C["root"] = % body;
+  }
 }
 
 #using_animtree("c8");
 
 _id_9567() {
-  if(!isDefined(self._id_433C["root"]))
+  if(!isDefined(self._id_433C["root"])) {
     self._id_433C["root"] = % body;
+  }
 }
 
 #using_animtree("c12");
 
 _id_9568() {
-  if(!isDefined(self._id_433C["root"]))
+  if(!isDefined(self._id_433C["root"])) {
     self._id_433C["root"] = % body;
+  }
 }

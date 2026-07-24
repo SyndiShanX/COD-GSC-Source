@@ -14,11 +14,13 @@ registerscriptedagent() {
 _id_FAB0() {
   level endon("game_ended");
 
-  if(!isDefined(level.agent_definition))
+  if(!isDefined(level.agent_definition)) {
     level waittill("scripted_agents_initialized");
+  }
 
-  if(!isDefined(level.species_funcs))
+  if(!isDefined(level.species_funcs)) {
     level.species_funcs = [];
+  }
 
   level.species_funcs["elvira"] = [];
   level.agent_definition["elvira"]["setup_func"] = ::setupagent;
@@ -81,9 +83,9 @@ _id_899D() {
     self waittill("enemy");
 
     for(;;) {
-      if(isDefined(self.enemy))
+      if(isDefined(self.enemy)) {
         self._id_6571 = gettime() + 1000;
-      else if(isDefined(self._id_6571)) {
+      } else if(isDefined(self._id_6571)) {
         if(gettime() > self._id_6571) {
           self._id_6571 = undefined;
           break;
@@ -174,8 +176,9 @@ _id_11562() {
 
 picktargetingfunction() {
   if(isDefined(self.enemy) && isDefined(self.enemy.dismember_crawl) && self.enemy.dismember_crawl) {
-    if(isDefined(self.targetcrawlerfunction))
+    if(isDefined(self.targetcrawlerfunction)) {
       return self.targetcrawlerfunction;
+    }
   }
 
   var_0 = 0;
@@ -184,8 +187,9 @@ picktargetingfunction() {
   for(var_2 = 0; var_2 < self.targetingfunctionchances.size; var_2++) {
     var_3 = self.targetingfunctionchances[var_2];
 
-    if(var_1 < var_3 + var_0)
+    if(var_1 < var_3 + var_0) {
       return self.targetingfunctions[var_2];
+    }
 
     var_0 = var_0 + var_3;
   }
@@ -199,8 +203,9 @@ _id_7E8E() {
 }
 
 getdefaultenemychestpos() {
-  if(scripts\engine\utility::is_true(self.dismember_crawl))
+  if(scripts\engine\utility::is_true(self.dismember_crawl)) {
     return _id_7E8E();
+  }
 
   var_0 = 70;
   var_1 = 15;

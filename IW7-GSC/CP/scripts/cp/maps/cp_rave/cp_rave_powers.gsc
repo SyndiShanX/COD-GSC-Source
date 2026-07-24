@@ -28,8 +28,9 @@ listen_for_bait_throw() {
   for(;;) {
     self waittill("grenade_fire", var_0, var_1);
 
-    if(isDefined(var_0) && isDefined(var_1))
+    if(isDefined(var_0) && isDefined(var_1)) {
       var_0 thread wait_for_impact(var_1, self);
+    }
   }
 }
 
@@ -45,8 +46,9 @@ wait_for_impact(var_0, var_1) {
   var_4 = scripts\engine\utility::getclosest(var_2, var_3, 500);
 
   if(isDefined(var_4)) {
-    if(isDefined(var_4.bait))
+    if(isDefined(var_4.bait)) {
       var_4.bait delete();
+    }
 
     var_4.bait = spawn("script_origin", var_2);
     var_4.bait_time = gettime();

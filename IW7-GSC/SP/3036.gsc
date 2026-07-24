@@ -42,11 +42,13 @@ _id_F434(var_0) {
 }
 
 _id_D803(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     precachemodel(var_0);
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = (0, 0, 0);
+  }
 
   level._id_A056._id_C8F7 = var_0;
   level._id_A056._id_C8F8 = var_1;
@@ -63,15 +65,17 @@ _id_A31E(var_0) {
 _id_A2A9(var_0) {
   scripts\sp\pip_util::_id_CBA3();
 
-  if(isDefined(self) && isDefined(self._id_CB89) && !isDefined(var_0))
+  if(isDefined(self) && isDefined(self._id_CB89) && !isDefined(var_0)) {
     self._id_CB89 delete();
+  }
 }
 
 _id_490C(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     self._id_CB89 = _id_1063A();
-  else
+  } else {
     self._id_CB89 = var_0;
+  }
 
   thread scripts\engine\utility::delete_on_death(self._id_CB89);
   self._id_CB89 hide();
@@ -108,8 +112,9 @@ _id_1063A(var_0, var_1, var_2) {
   var_0 = scripts\engine\utility::ter_op(isDefined(var_0), var_0, "body_un_jackal_pilots");
   var_3 setModel(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = scripts\engine\utility::ter_op(randomint(100) < 50, "head_bg_var_head_sc_engineering_mate_head_male_bc_02", "head_bg_var_head_male_bc_07_head_male_bc_01");
+  }
 
   var_2 = scripts\engine\utility::ter_op(isDefined(var_2), var_2, "helmet_un_jackal_pilots_generic");
   var_3 attach(var_1);
@@ -123,8 +128,9 @@ _id_1063A(var_0, var_1, var_2) {
 _id_B156(var_0, var_1, var_2, var_3) {
   var_4 = "tag_flash";
 
-  if(!isDefined(level._id_1656))
+  if(!isDefined(level._id_1656)) {
     level._id_1656 = [];
+  }
 
   for(var_5 = 0; var_5 < var_0; var_5++) {
     thread scripts\sp\utility::play_sound_on_entity("jackal_missile_launch_space_npc");
@@ -140,17 +146,20 @@ _id_B156(var_0, var_1, var_2, var_3) {
       var_10 = magicbullet("spaceship_homing_missile", var_7, var_1.origin);
       var_10 thread _id_B158(var_1, var_2);
 
-      if(isDefined(var_3))
+      if(isDefined(var_3)) {
         var_10 thread _id_699A(var_3, var_1);
+      }
     }
 
-    if(isDefined(var_10))
+    if(isDefined(var_10)) {
       var_10 setCanDamage(0);
+    }
 
-    if(var_4 == "tag_flash")
+    if(var_4 == "tag_flash") {
       var_4 = "tag_flash_2";
-    else
+    } else {
       var_4 = "tag_flash";
+    }
 
     wait 0.3;
   }
@@ -165,8 +174,9 @@ _id_B158(var_0, var_1) {
   if(isDefined(var_1) && var_1) {} else
     wait(var_4);
 
-  if(isDefined(var_0) && isvalidmissile(self) && isDefined(self))
+  if(isDefined(var_0) && isvalidmissile(self) && isDefined(self)) {
     self missile_settargetEnt(var_0);
+  }
 
   self waittill("death");
   var_0 notify("missile_hit");
@@ -202,10 +212,11 @@ _id_C3DB(var_0, var_1, var_2) {
   }
   self._id_EF4A = 1;
 
-  if(isDefined(self._id_B6B6))
+  if(isDefined(self._id_B6B6)) {
     var_3 = self._id_B6B6;
-  else
+  } else {
     var_3 = "magic_spaceship_30mm_projectile";
+  }
 
   self endon("death");
   var_4 = undefined;
@@ -225,10 +236,11 @@ _id_C3DB(var_0, var_1, var_2) {
       magicbullet(var_3, var_9, var_10, undefined, self);
     }
 
-    if(var_6 == "TAG_FLASH_right")
+    if(var_6 == "TAG_FLASH_right") {
       var_6 = "TAG_FLASH_left";
-    else
+    } else {
       var_6 = "TAG_FLASH_right";
+    }
 
     wait 0.05;
   }
@@ -242,35 +254,40 @@ _id_C3D9(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
   var_5 = undefined;
 
-  if(isDefined(self._id_B6B6))
+  if(isDefined(self._id_B6B6)) {
     var_6 = self._id_B6B6;
-  else
+  } else {
     var_6 = "magic_spaceship_30mm_projectile";
+  }
 
   var_7 = "tag_flash_right";
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = randomintrange(5, 15);
+  }
 
   var_8 = 1;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_8 = 0;
+  }
 
   for(var_9 = 0; var_9 < var_1; var_9++) {
     var_10 = self gettagorigin(var_7) + anglesToForward(self.angles) * 20;
 
-    if(var_8 || !isDefined(var_0))
+    if(var_8 || !isDefined(var_0)) {
       var_11 = var_10 + anglesToForward(self.angles) * 1000;
-    else
+    } else {
       var_11 = _id_7D3F(var_0.origin, var_2, var_3);
+    }
 
     magicbullet(var_6, var_10, var_11, undefined, self);
 
-    if(var_7 == "tag_flash_right")
+    if(var_7 == "tag_flash_right") {
       var_7 = "tag_flash_left";
-    else
+    } else {
       var_7 = "tag_flash_right";
+    }
 
     wait 0.05;
   }
@@ -278,15 +295,17 @@ _id_C3D9(var_0, var_1, var_2, var_3) {
 
 _id_7D3F(var_0, var_1, var_2) {
   if(isDefined(var_2)) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       return var_0 + scripts\engine\utility::randomvectorrange(var_1, var_2);
-    else
+    } else {
       return var_0 + scripts\engine\utility::randomvectorrange(0, var_2);
+    }
   } else if(isDefined(var_1)) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       return var_0 + scripts\engine\utility::randomvectorrange(var_1, var_2);
-    else
+    } else {
       return var_0 + scripts\engine\utility::randomvectorrange(0, var_1);
+    }
   }
 
   return var_0;
@@ -300,10 +319,11 @@ _id_B155(var_0, var_1, var_2, var_3) {
   var_5 = "magic_spaceship_20mm_bullet";
   var_6 = gettime() + var_0 * 1000;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_7 = var_3;
-  else
+  } else {
     var_7 = 0.1;
+  }
 
   while(var_6 >= gettime()) {
     var_8 = anglestoaxis(self gettagangles(var_4));
@@ -313,10 +333,11 @@ _id_B155(var_0, var_1, var_2, var_3) {
     var_12 = var_11 + anglesToForward(self.angles) * 10000;
 
     if(isDefined(var_1)) {
-      if(isDefined(var_1.model) && scripts\sp\utility::hastag(var_1.model, "tag_eye"))
+      if(isDefined(var_1.model) && scripts\sp\utility::hastag(var_1.model, "tag_eye")) {
         var_12 = var_1 gettagorigin("tag_eye");
-      else
+      } else {
         var_12 = var_1.origin;
+      }
     } else {
       var_13 = bulletTrace(var_11, var_12, 0, self);
       var_12 = var_13["position"];
@@ -326,15 +347,17 @@ _id_B155(var_0, var_1, var_2, var_3) {
       var_14 = magicbullet(var_5, var_11, var_12);
       playFXOnTag(level._effect["30mm_flash"], self, var_4);
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         playFX(var_2, var_12);
+      }
 
       bullettracer(self gettagorigin(var_4), var_12, var_5, 1);
 
-      if(var_4 == "tag_flash")
+      if(var_4 == "tag_flash") {
         var_4 = "tag_flash_2";
-      else
+      } else {
         var_4 = "tag_flash";
+      }
     }
 
     wait(var_7);
@@ -357,8 +380,9 @@ _id_9CBA(var_0) {
 }
 
 _id_F43D(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   if(isDefined(self._id_ED2D)) {
     switch (self._id_ED2D) {
@@ -405,32 +429,36 @@ _id_F43D(var_0, var_1) {
 }
 
 _id_F389(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "tag_origin";
+  }
 
   if(!isDefined(level._id_A056)) {
     return;
   }
   level._id_A056._id_3818 = scripts\engine\utility::array_removeundefined(level._id_A056._id_3818);
 
-  if(!scripts\engine\utility::array_contains(level._id_A056._id_3818, self))
+  if(!scripts\engine\utility::array_contains(level._id_A056._id_3818, self)) {
     level._id_A056._id_3818 = scripts\engine\utility::array_add(level._id_A056._id_3818, self);
+  }
 
   self._id_615D = spawnStruct();
   self._id_615D._id_7601 = var_0;
   self._id_615D._id_619D = 0;
   self._id_615D._id_C78B = 0;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self._id_615D._id_C76E = var_1;
+  }
 }
 
 _id_F387() {
   if(!isDefined(level._id_A056) || !isDefined(level._id_A056._id_3818)) {
     return;
   }
-  if(!scripts\engine\utility::array_contains(level._id_A056._id_3818, self))
+  if(!scripts\engine\utility::array_contains(level._id_A056._id_3818, self)) {
     level._id_A056._id_3818 = scripts\engine\utility::array_remove(level._id_A056._id_3818, self);
+  }
 }
 
 _id_A169() {
@@ -438,16 +466,19 @@ _id_A169() {
   self endon("death");
   var_0 = (1, 0, 0);
 
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 _id_A207(var_0) {
-  if(!isDefined(self._id_8E5D))
+  if(!isDefined(self._id_8E5D)) {
     self._id_8E5D = [];
+  }
 
-  if(!scripts\engine\utility::array_contains(self._id_8E5D, var_0))
+  if(!scripts\engine\utility::array_contains(self._id_8E5D, var_0)) {
     self._id_8E5D = scripts\engine\utility::array_add(self._id_8E5D, var_0);
+  }
 
   self _meth_8189(var_0);
 }
@@ -462,8 +493,9 @@ _id_A335(var_0) {
   self._id_8E5D = scripts\engine\utility::array_remove(self._id_8E5D, var_0);
   self showallparts();
 
-  foreach(var_2 in self._id_8E5D)
-  self _meth_8189(var_2);
+  foreach(var_2 in self._id_8E5D) {
+    self _meth_8189(var_2);
+  }
 }
 
 _id_A334() {
@@ -472,8 +504,9 @@ _id_A334() {
 }
 
 _id_A208(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   if(var_0) {
     _id_A207("j_mainroot");
@@ -491,20 +524,23 @@ _id_1985() {
   self._id_4074 = [];
   self waittill("entitydeleted");
 
-  if(issentient(self))
+  if(issentient(self)) {
     self freeentitysentient();
+  }
 
   level._id_A056._id_1630 = scripts\engine\utility::array_remove(level._id_A056._id_1630, self);
 
   if(self.script_team == "allies") {
-    if(scripts\engine\utility::array_contains(level._id_A056._id_1914, self))
+    if(scripts\engine\utility::array_contains(level._id_A056._id_1914, self)) {
       level._id_A056._id_1914 = scripts\engine\utility::array_remove(level._id_A056._id_1914, self);
+    }
   } else if(scripts\engine\utility::array_contains(level._id_A056._id_191E, self))
     level._id_A056._id_191E = scripts\engine\utility::array_remove(level._id_A056._id_191E, self);
 
   foreach(var_1 in self._id_4074) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 delete();
+    }
   }
 }
 
@@ -518,14 +554,16 @@ _id_1980(var_0, var_1) {
 }
 
 _id_6B4C(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   thread _id_0C1A::_id_A3B6(var_0, 1.0);
   thread _id_0C20::_id_A3B7(var_0);
 
-  if(!var_1)
+  if(!var_1) {
     thread _id_0C18::_id_A3B5(var_0);
+  }
 
   self._id_6B4E = var_0;
 }
@@ -535,8 +573,9 @@ _id_6B4D() {
   self.audio._id_552E = undefined;
   self.fx.state = undefined;
 
-  if(isDefined(self.fx._id_552E))
+  if(isDefined(self.fx._id_552E)) {
     self thread[[self.fx._id_552E]]();
+  }
 
   self.fx._id_552E = undefined;
   self.anims.state = undefined;
@@ -544,13 +583,15 @@ _id_6B4D() {
 }
 
 _id_A19D(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     setDvar("scr_jackalDemigod", 1);
-  else
+  } else {
     setDvar("scr_jackalDemigod", 0);
+  }
 }
 
 _id_A324(var_0) {
@@ -606,10 +647,11 @@ _id_107BA(var_0) {
 
 _id_ACF8() {
   for(;;) {
-    if(!isDefined(level._id_D127))
+    if(!isDefined(level._id_D127)) {
       var_0 = level.player;
-    else
+    } else {
       var_0 = level._id_D127;
+    }
 
     wait 0.05;
   }
@@ -680,13 +722,15 @@ _id_19A4(var_0) {
 }
 
 _id_19B8(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     self._id_3D4F = 1;
-  else
+  } else {
     self._id_3D4F = undefined;
+  }
 }
 
 _id_19AA(var_0) {
@@ -711,8 +755,9 @@ _id_19A6(var_0) {
 }
 
 _id_198F(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   self _meth_8555(var_0);
 }
@@ -739,16 +784,18 @@ _id_1983() {
 }
 
 _id_199F() {
-  if(isDefined(self._blackboard._id_A421))
+  if(isDefined(self._blackboard._id_A421)) {
     self._blackboard._id_A421._id_A420 = scripts\engine\utility::array_remove(self._blackboard._id_A421._id_A420, self);
+  }
 
   self._blackboard._id_A421 = undefined;
   _id_19B7();
 }
 
 _id_A253(var_0) {
-  if(!isDefined(self._id_A420))
+  if(!isDefined(self._id_A420)) {
     self._id_A420 = [];
+  }
 
   self._id_A420[self._id_A420.size] = var_0;
 }
@@ -776,7 +823,7 @@ _id_1991(var_0) {
 
     if(level._id_A056._id_67D8 == level._id_A065["evasion"].size) {
       level._id_A056._id_67D8 = 0;
-      level._id_A065["evasion"] = scripts\engine\utility::array_randomize(level._id_A065["evasion"]);
+      level._id_A065["evasion"] = ::scripts\engine\utility::array_randomize(level._id_A065["evasion"]);
     }
   }
 
@@ -814,17 +861,19 @@ _id_A202(var_0) {
   var_3 = scripts\common\trace::create_contents(1, 1, 0, 1, 1, 1);
   var_4 = scripts\common\trace::ray_trace(var_1, var_2, undefined, var_3, 1);
 
-  if(isDefined(var_4["entity"]) && var_4["entity"] == var_0)
+  if(isDefined(var_4["entity"]) && var_4["entity"] == var_0) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_A288(var_0) {
-  if(var_0)
+  if(var_0) {
     _id_1980(1, 1);
-  else
+  } else {
     _id_1980();
+  }
 }
 
 _id_A0B3(var_0) {
@@ -832,15 +881,17 @@ _id_A0B3(var_0) {
 }
 
 _id_A342(var_0, var_1, var_2) {
-  if(isDefined(self._blackboard))
+  if(isDefined(self._blackboard)) {
     _id_1981();
+  }
 
   if(!isDefined(var_0)) {}
 
-  if(isDefined(var_2) && var_2)
+  if(isDefined(var_2) && var_2) {
     var_3 = self.origin;
-  else
+  } else {
     var_3 = undefined;
+  }
 
   _id_0C24::_id_10A46(var_0, var_1, var_3);
 }
@@ -880,19 +931,21 @@ _id_F5BD(var_0) {
 _id_7BBA() {
   var_0 = level.player _meth_8473();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     return var_0.origin;
-  else
+  } else {
     return level.player.origin;
+  }
 }
 
 _id_7BB9() {
   var_0 = level.player _meth_8473();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     return var_0.angles;
-  else
+  } else {
     return level.player.angles;
+  }
 }
 
 _id_F448(var_0) {
@@ -971,17 +1024,21 @@ _id_F48D(var_0) {
 }
 
 _id_F48C(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self._id_1EE1 = var_0;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self._id_1EE2 = var_1;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self._id_1F20 = var_2;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self._id_1F21 = var_3;
+  }
 }
 
 _id_F358(var_0) {
@@ -1028,20 +1085,25 @@ _id_F420(var_0, var_1, var_2, var_3, var_4) {
     self._id_99F5._id_56B6 = 35;
   }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     self._id_99F5._id_AB4B = var_3;
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     self._id_99F5._id_E526 = var_4;
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self._id_99F5.draw_distance = var_0;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self._id_99F5._id_12FC3 = var_1;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self._id_99F5.height = var_2;
+  }
 
   _id_DE6D();
 }
@@ -1051,17 +1113,21 @@ _id_F420(var_0, var_1, var_2, var_3, var_4) {
 _id_A2DE(var_0, var_1, var_2, var_3) {
   var_1 = 0;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0.2;
+  }
 
   self _meth_848F(var_0);
 
@@ -1090,12 +1156,14 @@ _id_A2DE(var_0, var_1, var_2, var_3) {
 }
 
 _id_A16F() {
-  while(level._id_A056._id_56F9.size == 0)
+  while(level._id_A056._id_56F9.size == 0) {
     wait 0.05;
+  }
 
   for(;;) {
-    while(!isDefined(level._id_D127))
+    while(!isDefined(level._id_D127)) {
       wait 0.05;
+    }
 
     level._id_A056._id_56F9 = scripts\engine\utility::array_removeundefined(level._id_A056._id_56F9);
 
@@ -1134,14 +1202,17 @@ _id_A16F() {
         var_13 = scripts\sp\math::_id_6A8E(1, var_13, var_12);
       }
 
-      if(isDefined(var_5._id_A494))
+      if(isDefined(var_5._id_A494)) {
         var_15 = scripts\sp\math::_id_6A8E(var_5._id_A48F, 1, var_12);
+      }
 
-      if(var_13 < var_0)
+      if(var_13 < var_0) {
         var_0 = var_13;
+      }
 
-      if(var_13 < var_0)
+      if(var_13 < var_0) {
         var_0 = var_13;
+      }
     }
 
     _id_A301(var_0, 0.05, "radius_dist");
@@ -1155,10 +1226,11 @@ _id_A16F() {
 _id_394B(var_0, var_1) {
   var_1 = var_1 * 0.5;
 
-  if(var_0 > var_1)
+  if(var_0 > var_1) {
     var_0 = var_1;
-  else if(var_0 < var_1 * -1)
+  } else if(var_0 < var_1 * -1) {
     var_0 = var_1 * -1;
+  }
 
   return var_0;
 }
@@ -1240,8 +1312,9 @@ _id_A16E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self._id_A490 = var_1;
   self._id_A494 = var_2;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     self._id_A48F = var_3;
+  }
 
   if(isDefined(var_4)) {
     self._id_A496 = var_4;
@@ -1249,10 +1322,11 @@ _id_A16E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     self._id_A498 = var_6;
   }
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     self._id_A491 = var_7;
-  else
+  } else {
     self._id_A491 = 0;
+  }
 
   self._id_A495 = 1;
   level._id_A056._id_56F9 = scripts\engine\utility::array_add(level._id_A056._id_56F9, self);
@@ -1276,20 +1350,22 @@ _id_A16C(var_0) {
 }
 
 _id_A25B(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(level._id_D127.linked_ents))
+  if(!isDefined(level._id_D127.linked_ents)) {
     level._id_D127.linked_ents = [];
+  }
 
   level._id_D127.linked_ents = scripts\engine\utility::array_removeundefined(level._id_D127.linked_ents);
   self._id_AD25 = var_2;
   self._id_AD19 = var_3;
   self._id_AD42 = var_1;
 
-  if(!scripts\engine\utility::array_contains(level._id_D127.linked_ents, self))
+  if(!scripts\engine\utility::array_contains(level._id_D127.linked_ents, self)) {
     level._id_D127.linked_ents = scripts\engine\utility::array_add(level._id_D127.linked_ents, self);
+  }
 
-  if(isDefined(var_5) && var_5)
+  if(isDefined(var_5) && var_5) {
     self linkTo(level._id_D127, var_1, var_2, var_3);
-  else if(!isDefined(var_4)) {
+  } else if(!isDefined(var_4)) {
     level.player.spaceship_linked_ent = self;
     level.player _meth_8468(self, var_1, var_0, var_2, var_3);
   } else {
@@ -1310,18 +1386,21 @@ _id_A387() {
 }
 
 _id_A386(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   level.player _meth_8490("unlimited_boost", var_0);
 }
 
 _id_A160(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0.0;
+  }
 
   if(var_0) {
     level.player scripts\sp\utility::_id_65E1("disable_jackal_quickturn");
@@ -1376,11 +1455,13 @@ _id_12DCD(var_0) {
 }
 
 _id_12DD0(var_0) {
-  if(isDefined(level._id_D127._id_4C15))
+  if(isDefined(level._id_D127._id_4C15)) {
     level._id_D127 _id_0BD9::_id_D17E();
+  }
 
-  if(isDefined(level._id_D127.missiles))
+  if(isDefined(level._id_D127.missiles)) {
     _id_0BDD::_id_A27B();
+  }
 }
 
 _id_12DCF(var_0) {
@@ -1405,8 +1486,9 @@ _id_A07D() {
   if(!scripts\sp\utility::_id_B324()) {
     return;
   }
-  if(isDefined(self._id_4F5E))
+  if(isDefined(self._id_4F5E)) {
     self._id_4F5E delete();
+  }
 
   self._id_FF24 = 1;
 
@@ -1415,10 +1497,11 @@ _id_A07D() {
   }
   var_0 = _id_0A2F::_id_D9FB();
 
-  if(self.model == "veh_mil_air_un_jackal_landed_03b")
+  if(self.model == "veh_mil_air_un_jackal_landed_03b") {
     var_1 = (-3.99147, 0, -15.6889);
-  else
+  } else {
     var_1 = (0, 0, 0);
+  }
 
   self._id_4F5E = spawn("script_model", self.origin);
   self._id_4F5E setModel(var_0);
@@ -1426,15 +1509,17 @@ _id_A07D() {
 }
 
 _id_A077(var_0) {
-  if(isDefined(self._id_4F5E))
+  if(isDefined(self._id_4F5E)) {
     self._id_4F5E delete();
+  }
 
   var_1 = strtok(var_0, "_");
   var_2 = var_1.size - 1;
   var_3 = "livery_" + var_1[var_2 - 1] + "_" + var_1[var_2] + "_tr";
 
-  if(!scripts\engine\utility::flag(var_3 + "_loaded"))
+  if(!scripts\engine\utility::flag(var_3 + "_loaded")) {
     scripts\sp\utility::_id_12641(var_3);
+  }
 
   self._id_4F5E = spawn("script_model", self.origin);
   self._id_4F5E setModel(var_0);
@@ -1442,15 +1527,17 @@ _id_A077(var_0) {
 }
 
 _id_A2DA() {
-  if(isDefined(self._id_4F5E))
+  if(isDefined(self._id_4F5E)) {
     self._id_4F5E delete();
+  }
 }
 
 _id_8B87() {
-  if(self._id_93D2.size > 0)
+  if(self._id_93D2.size > 0) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_1378D(var_0) {
@@ -1480,10 +1567,11 @@ _id_137C2(var_0) {
 _id_9C1B(var_0) {
   var_1 = _id_0B76::_id_7A60(self.origin);
 
-  if(var_1 > var_0)
+  if(var_1 > var_0) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_1378C(var_0) {
@@ -1513,15 +1601,17 @@ _id_137C1(var_0) {
 _id_9C1A(var_0) {
   var_1 = distance(self.origin, level._id_D127.origin);
 
-  if(var_1 < var_0)
+  if(var_1 < var_0) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_A149(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   if(var_0) {
     var_0 = 0;
@@ -1531,48 +1621,55 @@ _id_A149(var_0) {
     var_0 = 1;
     level.player scripts\sp\utility::_id_65DD("disable_jackal_ads");
 
-    if(!level.player scripts\sp\utility::_id_65DB("disable_jackal_lockon"))
+    if(!level.player scripts\sp\utility::_id_65DB("disable_jackal_lockon")) {
       level.player _meth_8490("disable_lockon", 0);
+    }
   }
 
   level.player allowads(var_0);
 }
 
 _id_A14D(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   level.player _meth_8490("disable_collision", var_0);
 
-  if(var_0)
+  if(var_0) {
     setsaveddvar("spaceshipResolvePenetration", 0);
-  else
+  } else {
     setsaveddvar("spaceshipResolvePenetration", 1);
+  }
 }
 
 _id_A14A(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   level.player _meth_8490("disable_boost", var_0);
 }
 
 _id_A162(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level.player scripts\sp\utility::_id_65E1("disable_jackal_targetAid");
-  else
+  } else {
     level.player scripts\sp\utility::_id_65DD("disable_jackal_targetAid");
+  }
 }
 
 _id_A35D(var_0, var_1) {
   level notify("new_target_aid_pool");
   level._id_A056._id_EF83 = var_0;
 
-  if(isDefined(var_1) && var_1)
+  if(isDefined(var_1) && var_1) {
     thread _id_A35E();
+  }
 }
 
 _id_A35E() {
@@ -1587,28 +1684,33 @@ _id_A35E() {
 }
 
 _id_A163(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level.player scripts\sp\utility::_id_65E1("disable_jackal_targetAid_update");
-  else
+  } else {
     level.player scripts\sp\utility::_id_65DD("disable_jackal_targetAid_update");
+  }
 }
 
 jackal_disable_damage_vision_distortion(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level.player scripts\sp\utility::_id_65E1("disable_jackal_damage_vision_distortion");
-  else
+  } else {
     level.player scripts\sp\utility::_id_65DD("disable_jackal_damage_vision_distortion");
+  }
 }
 
 jackal_engine_throttle_sfx_volume(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_0 = clamp(var_0, 0, 1);
   level._id_D127 thread jackal_engine_throttle_sfx_volume_internal(var_0, var_1);
@@ -1620,8 +1722,9 @@ jackal_engine_throttle_sfx_volume_internal(var_0, var_1) {
   self endon("player_exit_jackal");
   self endon("death");
 
-  if(!isDefined(self.engine_master_volume))
+  if(!isDefined(self.engine_master_volume)) {
     self.engine_master_volume = 0;
+  }
 
   var_2 = self.engine_master_volume;
 
@@ -1635,143 +1738,171 @@ jackal_engine_throttle_sfx_volume_internal(var_0, var_1) {
 }
 
 _id_A14C(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   level._id_D127._id_5509 = var_0;
 }
 
 _id_A15C(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level.player scripts\sp\utility::_id_65E1("disable_jackal_mode_switch");
-  else
+  } else {
     level.player scripts\sp\utility::_id_65DD("disable_jackal_mode_switch");
+  }
 }
 
 _id_A154(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level.player scripts\sp\utility::_id_65E1("disable_jackal_cockpit_VO");
-  else
+  } else {
     level.player scripts\sp\utility::_id_65DD("disable_jackal_cockpit_VO");
+  }
 }
 
 _id_A15B(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level.player scripts\sp\utility::_id_65E1("disable_jackal_missiles");
-  else
+  } else {
     level.player scripts\sp\utility::_id_65DD("disable_jackal_missiles");
+  }
 }
 
 _id_A14F(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level.player scripts\sp\utility::_id_65E1("disable_jackal_emp");
-  else
+  } else {
     level.player scripts\sp\utility::_id_65DD("disable_jackal_emp");
+  }
 }
 
 _id_A158(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level.player scripts\sp\utility::_id_65E1("disable_jackal_map_boundary_autoturn");
-  else
+  } else {
     level.player scripts\sp\utility::_id_65DD("disable_jackal_map_boundary_autoturn");
+  }
 }
 
 _id_A159(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level.player scripts\sp\utility::_id_65E1("disable_jackal_map_boundary_push");
-  else
+  } else {
     level.player scripts\sp\utility::_id_65DD("disable_jackal_map_boundary_push");
+  }
 }
 
 _id_A15A(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level.player scripts\sp\utility::_id_65E1("disable_jackal_map_boundary_warning");
-  else
+  } else {
     level.player scripts\sp\utility::_id_65DD("disable_jackal_map_boundary_warning");
+  }
 }
 
 _id_A155(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level.player scripts\sp\utility::_id_65E1("disable_jackal_juke");
-  else
+  } else {
     level.player scripts\sp\utility::_id_65DD("disable_jackal_juke");
+  }
 
   level.player _meth_8490("disable_juke", var_0);
 }
 
 _id_A161(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level.player scripts\sp\utility::_id_65E1("disable_jackal_roll");
-  else
+  } else {
     level.player scripts\sp\utility::_id_65DD("disable_jackal_roll");
+  }
 
-  if(scripts\sp\utility::_id_D123())
+  if(scripts\sp\utility::_id_D123()) {
     _id_0BD9::_id_F380();
+  }
 }
 
 _id_A15E(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level.player scripts\sp\utility::_id_65E1("disable_jackal_overheat");
-  else
+  } else {
     level.player scripts\sp\utility::_id_65DD("disable_jackal_overheat");
+  }
 }
 
 _id_A14E(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level.player scripts\sp\utility::_id_65E1("disable_jackal_dogfight");
-  else
+  } else {
     level.player scripts\sp\utility::_id_65DD("disable_jackal_dogfight");
+  }
 }
 
 _id_A151(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level.player scripts\sp\utility::_id_65E1("disable_jackal_flares");
-  else
+  } else {
     level.player scripts\sp\utility::_id_65DD("disable_jackal_flares");
+  }
 }
 
 _id_A153(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   if(var_0 && !level.player scripts\sp\utility::_id_65DB("disable_jackal_guns")) {
     level.player scripts\sp\utility::_id_65E1("disable_jackal_guns");
@@ -1783,8 +1914,9 @@ _id_A153(var_0, var_1) {
 }
 
 _id_A152(var_0) {
-  if(var_0)
+  if(var_0) {
     level._id_D127 notify("spaceship_weapon_state_change", "silent");
+  }
 
   level._id_D127 _meth_849E("spaceship_disabled_guns");
   thread _id_A157();
@@ -1794,36 +1926,42 @@ _id_A152(var_0) {
 }
 
 _id_A19E(var_0) {
-  if(var_0)
+  if(var_0) {
     level._id_D127 notify("spaceship_weapon_state_change", "silent");
+  }
 
   level._id_D127 _id_0BD9::_id_D17E();
 
-  if(!level.player scripts\sp\utility::_id_65DB("disable_jackal_lockon"))
+  if(!level.player scripts\sp\utility::_id_65DB("disable_jackal_lockon")) {
     level.player _meth_8490("disable_lockon", 0);
+  }
 
   level._id_D127 _meth_849F(1);
   level.player allowads(1);
 
-  if(!level.player scripts\sp\utility::_id_65DB("disable_jackal_overheat"))
+  if(!level.player scripts\sp\utility::_id_65DB("disable_jackal_overheat")) {
     setomnvar("ui_jackal_weapon_display_temp", 1);
+  }
 }
 
 _id_A166(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level.player scripts\sp\utility::_id_65E1("disable_jackal_weapon_switch");
-  else
+  } else {
     level.player scripts\sp\utility::_id_65DD("disable_jackal_weapon_switch");
+  }
 }
 
 _id_82DD(var_0) {
   self.missiles.count = self.missiles.count + var_0;
 
-  if(self.missiles.count > self.missiles._id_B446)
+  if(self.missiles.count > self.missiles._id_B446) {
     self.missiles.count = self.missiles._id_B446;
+  }
 
   setomnvar("ui_jackal_missile_count", self.missiles.count);
 }
@@ -1833,11 +1971,13 @@ _id_10CD8() {
 }
 
 _id_E047() {
-  while(!isDefined(level._id_D127))
+  while(!isDefined(level._id_D127)) {
     wait 0.05;
+  }
 
-  while(!isDefined(level._id_D127.missiles))
+  while(!isDefined(level._id_D127.missiles)) {
     wait 0.05;
+  }
 
   level._id_D127.missiles.count = 0;
   setomnvar("ui_jackal_missile_count", level._id_D127.missiles.count);
@@ -1852,53 +1992,62 @@ _id_A157() {
 _id_13C11(var_0, var_1) {
   level._id_D127 endon("player_exit_jackal");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
   level.player playSound(var_0);
 }
 
 _id_A15F(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level.player scripts\sp\utility::_id_65E1("disable_jackal_pilot_assist");
-  else
+  } else {
     level.player scripts\sp\utility::_id_65DD("disable_jackal_pilot_assist");
+  }
 
   level.player _meth_8490("disable_pilot_aim_assist", var_0);
   level.player _meth_8490("disable_pilot_move_assist", var_0);
 }
 
 _id_A15D(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level._id_A056._id_1C54 = 0;
-  else
+  } else {
     level._id_A056._id_1C54 = 1;
+  }
 }
 
 _id_A14B(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level._id_A056._id_1C3C = 0;
-  else
+  } else {
     level._id_A056._id_1C3C = 1;
+  }
 }
 
 _id_A165(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level._id_A056._id_1C6D = 0;
-  else
+  } else {
     level._id_A056._id_1C6D = 1;
+  }
 }
 
 _id_A1AA(var_0, var_1, var_2, var_3, var_4) {
@@ -1918,8 +2067,9 @@ _id_A1AD(var_0) {
 }
 
 _id_A1AB(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   if(!isDefined(level._id_A056._id_68B3._id_68B6[var_0])) {
     return;
@@ -1928,15 +2078,17 @@ _id_A1AB(var_0, var_1) {
 }
 
 jackal_eventmanager_event_is_running(var_0) {
-  if(!isDefined(level._id_A056._id_68B3._id_68B6[var_0]))
+  if(!isDefined(level._id_A056._id_68B3._id_68B6[var_0])) {
     return 0;
+  }
 
   return level._id_A056._id_68B3._id_68B6[var_0].running;
 }
 
 _id_A1AE(var_0) {
-  while(!isDefined(level._id_A056._id_68B3._id_68B6[var_0]))
+  while(!isDefined(level._id_A056._id_68B3._id_68B6[var_0])) {
     wait 0.05;
+  }
 }
 
 _id_A1AC(var_0) {
@@ -1944,15 +2096,17 @@ _id_A1AC(var_0) {
 }
 
 _id_A1A9(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   level._id_A056._id_68B3._id_54F1 = var_0;
 }
 
 _id_A1DD(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   if(!isstring(var_0) && var_0 == 0) {
     level.player scripts\sp\utility::_id_65DD("jackal_force_mode");
@@ -1965,20 +2119,23 @@ _id_A1DD(var_0) {
 }
 
 _id_A1DC(var_0) {
-  if(!isDefined(var_0) || var_0 == 0)
+  if(!isDefined(var_0) || var_0 == 0) {
     var_0 = 0;
+  }
 
   level._id_A056._id_6F90 = var_0;
 }
 
 _id_A164(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level._id_A056._id_1C6C = 0;
-  else
+  } else {
     level._id_A056._id_1C6C = 1;
+  }
 
   level notify("notify_new_jackal_speed_zone");
 }
@@ -1987,31 +2144,35 @@ _id_A156(var_0) {
   if(scripts\sp\utility::_id_93A6()) {
     return;
   }
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   level._id_A056.targets = scripts\engine\utility::array_removeundefined(level._id_A056.targets);
 
   if(var_0) {
     level.player scripts\sp\utility::_id_65E1("disable_jackal_lockon");
 
-    foreach(var_2 in level._id_A056.targets)
-    var_2 _id_105D9();
+    foreach(var_2 in level._id_A056.targets) {
+      var_2 _id_105D9();
+    }
 
     setomnvar("ui_jackal_callouts_enabled", 0);
   } else {
     level.player scripts\sp\utility::_id_65DD("disable_jackal_lockon");
 
     foreach(var_2 in level._id_A056.targets) {
-      if(var_2._id_AEDF._id_AEEA)
+      if(var_2._id_AEDF._id_AEEA) {
         var_2 _id_105D6();
+      }
     }
 
     setomnvar("ui_jackal_callouts_enabled", 1);
   }
 
-  if(scripts\engine\utility::player_is_in_jackal())
+  if(scripts\engine\utility::player_is_in_jackal()) {
     level.player _meth_8490("disable_lockon", var_0);
+  }
 }
 
 _id_A066(var_0) {
@@ -2022,8 +2183,9 @@ _id_A066(var_0) {
 }
 
 _id_A0BE(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   if(var_0) {
     setsaveddvar("spaceshipAnalogPhysics", 0);
@@ -2037,10 +2199,11 @@ _id_A0BE(var_0) {
 }
 
 _id_9CC8() {
-  if(isDefined(self._id_AEDF))
+  if(isDefined(self._id_AEDF)) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_107A2() {
@@ -2123,34 +2286,41 @@ _id_D2A7() {
 }
 
 _id_D2A0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = (0, 0, 0);
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     self._id_AB78 = 1000;
-  else
+  } else {
     self._id_AB78 = var_2;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     self._id_AB82 = 0.05;
-  else
+  } else {
     self._id_AB82 = var_3;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     self._id_AB8D = 0.15;
-  else
+  } else {
     self._id_AB8D = var_4;
+  }
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     self._id_AB72 = 0.07;
-  else
+  } else {
     self._id_AB72 = var_5;
+  }
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     self._id_BC68 = 0.05;
+  }
 
-  if(!isDefined(var_7))
+  if(!isDefined(var_7)) {
     self._id_AFF9 = 1;
+  }
 
   self._id_11512 = var_0;
   self._id_11514 = var_1;
@@ -2173,40 +2343,47 @@ _id_D29A(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     var_10 = self._id_11512;
   }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_12 = self._id_11514;
-  else
+  } else {
     var_12 = var_2;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_13 = self._id_AB78;
-  else
+  } else {
     var_13 = var_3;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_14 = self._id_AB82;
-  else
+  } else {
     var_14 = var_4;
+  }
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_15 = self._id_AB8D;
-  else
+  } else {
     var_15 = var_5;
+  }
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     var_16 = self._id_AB72;
-  else
+  } else {
     var_16 = var_6;
+  }
 
-  if(!isDefined(var_7))
+  if(!isDefined(var_7)) {
     var_17 = self._id_BC68;
-  else
+  } else {
     var_17 = var_7;
+  }
 
-  if(!isDefined(var_8))
+  if(!isDefined(var_8)) {
     var_18 = self._id_AFF9;
-  else
+  } else {
     var_18 = var_8;
+  }
 
   var_19 = self._id_11514;
   var_20 = self._id_AB78;
@@ -2242,8 +2419,9 @@ _id_D29A(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     self._id_BC68 = scripts\sp\math::_id_6A8E(var_17, var_24, var_26);
     self._id_AFF9 = scripts\sp\math::_id_6A8E(var_18, var_25, var_26);
 
-    if(isDefined(var_11))
+    if(isDefined(var_11)) {
       self._id_11512 linkTo(var_0);
+    }
 
     self notify("target_ent_blend_done");
     wait 0.05;
@@ -2258,8 +2436,9 @@ _id_D29A(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   _id_D2A0(var_0, var_12, var_13, var_14, var_15, var_16, var_17, var_18);
   self notify("target_ent_blend_done");
 
-  if(isDefined(var_11))
+  if(isDefined(var_11)) {
     var_11 delete();
+  }
 }
 
 _id_D2A4() {
@@ -2311,15 +2490,17 @@ _id_D2A2(var_0, var_1, var_2) {
   self._id_11535 = self._id_11535 + var_15[0] * var_3;
   self._id_11533 = self._id_11533 + var_15[1] * var_4;
 
-  if(self._id_11535 > var_11)
+  if(self._id_11535 > var_11) {
     self._id_11535 = var_11;
-  else if(self._id_11535 < var_12)
+  } else if(self._id_11535 < var_12) {
     self._id_11535 = var_12;
+  }
 
-  if(self._id_11533 < var_13)
+  if(self._id_11533 < var_13) {
     self._id_11533 = var_13;
-  else if(self._id_11533 > var_14)
+  } else if(self._id_11533 > var_14) {
     self._id_11533 = var_14;
+  }
 
   self._id_11535 = self._id_11535 * var_9;
   self._id_11533 = self._id_11533 * var_9;
@@ -2335,8 +2516,9 @@ _id_D29D() {
   self waittill("death");
 
   foreach(var_1 in self._id_4074) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 delete();
+    }
   }
 }
 
@@ -2371,24 +2553,27 @@ _id_4311() {
 }
 
 _id_A110(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     level.player playSound("jackal_screens_on");
+  }
 
   level._id_D127 _id_4323(var_0);
 }
 
 _id_4323(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   setomnvar("ui_jackal_entity", self);
   setomnvar("ui_jackal_cockpit_screens_noboot", var_0);
   setomnvar("ui_jackal_cockpit_screens", 1);
 
-  if(var_0)
+  if(var_0) {
     var_1 = "cockpit_light_monitor";
-  else
+  } else {
     var_1 = "cockpit_light_monitor_boot";
+  }
 
   _id_A108(var_1);
 }
@@ -2432,8 +2617,9 @@ _id_A10C(var_0) {
 _id_A10A() {
   level._id_D127._id_4324 = undefined;
 
-  if(!isDefined(level._id_D127._id_431C))
+  if(!isDefined(level._id_D127._id_431C)) {
     level._id_D127._id_431C = "default";
+  }
 
   level._id_D127 _id_4320(level._id_D127._id_431C);
 }
@@ -2443,14 +2629,16 @@ _id_A10D(var_0, var_1, var_2) {
 }
 
 _id_4321(var_0, var_1, var_2) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self notify("cancel_request_for" + var_2);
+  }
 
   self endon("cancel_request_for" + var_0);
 
   if(isDefined(var_1) && isDefined(self._id_431D)) {
-    while(self._id_431D == var_1)
+    while(self._id_431D == var_1) {
       wait 0.05;
+    }
   }
 
   _id_4320(var_0);
@@ -2459,13 +2647,15 @@ _id_4321(var_0, var_1, var_2) {
 _id_A10B(var_0) {
   level._id_D127._id_431C = var_0;
 
-  if(!isDefined(level._id_D127._id_4324))
+  if(!isDefined(level._id_D127._id_4324)) {
     level._id_D127 _id_4320(var_0);
+  }
 }
 
 _id_4320(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     setomnvar("ui_jackal_cockpit_display", 0);
+  }
 
   if(isDefined(self._id_431D) && self._id_431D == var_0) {
     return;
@@ -2495,8 +2685,9 @@ _id_A10E() {}
 
 _id_A261(var_0) {
   if(!isDefined(level._id_D127._id_4B23)) {
-    if(isDefined(level._id_D127._id_4B22))
+    if(isDefined(level._id_D127._id_4B22)) {
       level._id_D127 stoploopsound(level._id_D127._id_4B22);
+    }
 
     level._id_D127._id_4B22 = var_0;
     level._id_D127 playLoopSound(level._id_D127._id_4B22);
@@ -2507,22 +2698,25 @@ _id_A261(var_0) {
 _id_1100D(var_0) {
   if(isDefined(var_0)) {
     if(isDefined(level._id_D127._id_4B22) && level._id_D127._id_4B22 == var_0) {
-      if(!isDefined(level._id_D127._id_4B23))
+      if(!isDefined(level._id_D127._id_4B23)) {
         level._id_D127 stoploopsound(level._id_D127._id_4B22);
+      }
 
       level._id_D127._id_4B22 = undefined;
     }
   } else {
-    if(!isDefined(level._id_D127._id_4B23))
+    if(!isDefined(level._id_D127._id_4B23)) {
       level._id_D127 stoploopsound(level._id_D127._id_4B22);
+    }
 
     level._id_D127._id_4B22 = undefined;
   }
 }
 
 _id_A262(var_0) {
-  if(isDefined(level._id_D127._id_4B22))
+  if(isDefined(level._id_D127._id_4B22)) {
     level._id_D127 stoploopsound(level._id_D127._id_4B22);
+  }
 
   level._id_D127._id_4B23 = var_0;
   level._id_D127 playLoopSound(level._id_D127._id_4B23);
@@ -2533,14 +2727,16 @@ _id_1100E() {
     level._id_D127 stoploopsound(level._id_D127._id_4B23);
     level._id_D127._id_4B23 = undefined;
 
-    if(isDefined(level._id_D127._id_4B22))
+    if(isDefined(level._id_D127._id_4B22)) {
       level._id_D127 playLoopSound(level._id_D127._id_4B22);
+    }
   }
 }
 
 _id_A250(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   if(var_0) {
     setomnvar("ui_jackal_atmo_launch", 1);
@@ -2565,8 +2761,9 @@ _id_A229() {
   setomnvar("ui_jackal_hud_shutdown", 0);
   setomnvar("ui_active_hud", "jackal");
 
-  if(!level.player scripts\sp\utility::_id_65DB("disable_jackal_lockon"))
+  if(!level.player scripts\sp\utility::_id_65DB("disable_jackal_lockon")) {
     setomnvar("ui_jackal_callouts_enabled", 1);
+  }
 
   level._id_A056.targets = scripts\engine\utility::array_removeundefined(level._id_A056.targets);
   var_0 = 9;
@@ -2612,11 +2809,13 @@ _id_105DB(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 _id_D920(var_0) {
   self endon("death");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "null";
+  }
 
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 _id_11544(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
@@ -2639,25 +2838,29 @@ _id_11544(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self._id_AEDF.callout = 0;
   self._id_AEDF._id_3A5B = 0;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self._id_AEDF._id_3A5C = var_2;
-  else
+  } else {
     self._id_AEDF._id_3A5C = "none";
+  }
 
   self._id_AEDF._id_C72C = self._id_AEDF._id_3A5C;
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     self._id_AEDF._id_3782 = "none";
-  else
+  } else {
     self._id_AEDF._id_3782 = var_3;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 0;
+  }
 
-  if(isDefined(var_6) && var_6)
+  if(isDefined(var_6) && var_6) {
     var_8 = 0;
-  else
+  } else {
     var_8 = 1;
+  }
 
   self _meth_8339(0);
   var_9 = 0;
@@ -2665,10 +2868,11 @@ _id_11544(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(isDefined(self.script_team)) {
     if(self.script_team == "allies" && isDefined(var_3)) {
       if(!isDefined(var_1)) {
-        if(isDefined(self._id_EDB8))
+        if(isDefined(self._id_EDB8)) {
           self.name = self._id_EDB8;
-        else
+        } else {
           scripts\sp\names::_id_7B07("unitednations");
+        }
 
         var_1 = self.name;
         var_9 = 1;
@@ -2676,8 +2880,9 @@ _id_11544(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
       _id_A32F();
     } else {
-      if(!isDefined(var_1))
+      if(!isDefined(var_1)) {
         var_1 = "JACKAL_ENEMY";
+      }
 
       if(var_0 == "jackal" || var_0 == "ace") {
         self._id_AEDF._id_38A4 = 1;
@@ -2686,25 +2891,29 @@ _id_11544(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       }
     }
 
-    if(isstring(var_1))
+    if(isstring(var_1)) {
       self _meth_8307(var_1, &"");
-    else
+    } else {
       self _meth_8307("", var_1);
+    }
 
-    if(var_9)
+    if(var_9) {
       self._id_AEDF._id_3782 = self._id_AEDF._id_3782 + "_unloc";
+    }
   }
 
-  if(isDefined(var_5) && var_5)
+  if(isDefined(var_5) && var_5) {
     _id_A366();
+  }
 
   level._id_A056.targets = scripts\engine\utility::array_removeundefined(level._id_A056.targets);
   level._id_A056.targets = scripts\engine\utility::array_add(level._id_A056.targets, self);
   self _meth_84BE(self._id_AEDF.type);
   _id_620B();
 
-  if(var_8)
+  if(var_8) {
     thread _id_105D7(var_7);
+  }
 }
 
 _id_105D2() {
@@ -2715,13 +2924,15 @@ _id_105D4() {
   self endon("death");
 
   for(;;) {
-    while(!isDefined(level._id_D127) || !isDefined(level._id_D127._id_4BC7) || level._id_D127._id_4BC7 != self)
+    while(!isDefined(level._id_D127) || !isDefined(level._id_D127._id_4BC7) || level._id_D127._id_4BC7 != self) {
       wait 0.05;
+    }
 
     scripts\sp\utility::_id_F40A("enemy", 0, 1);
 
-    while(isDefined(level._id_D127) && isDefined(level._id_D127._id_4BC7) && level._id_D127._id_4BC7 == self)
+    while(isDefined(level._id_D127) && isDefined(level._id_D127._id_4BC7) && level._id_D127._id_4BC7 == self) {
       wait 0.05;
+    }
 
     self hudoutlinedisable();
   }
@@ -2735,8 +2946,9 @@ _id_105D3() {
   if(isDefined(self._id_A8CB) && gettime() - self._id_A8CB < 10000) {
     if(isDefined(self._id_8EF0)) {
       foreach(var_2 in self._id_8EF0) {
-        if(isDefined(var_2))
+        if(isDefined(var_2)) {
           self._id_A8CB = gettime();
+        }
       }
     } else
       self._id_A8CB = gettime();
@@ -2759,8 +2971,9 @@ _id_105D3() {
 
     if(isDefined(self._id_8EF0)) {
       foreach(var_2 in self._id_8EF0) {
-        if(isDefined(var_2))
+        if(isDefined(var_2)) {
           var_2 hudoutlinedisable();
+        }
       }
     } else
       self hudoutlinedisable();
@@ -2796,8 +3009,9 @@ _id_A36D() {
   self._id_AEDF.priority = 1;
   _id_0B76::_id_F42C(self._id_AEDF._id_3A5C);
 
-  if(self._id_AEDF._id_72A3)
+  if(self._id_AEDF._id_72A3) {
     thread _id_3777();
+  }
 }
 
 _id_3777() {
@@ -2831,8 +3045,9 @@ _id_A36A() {
   self._id_AEDF._id_3A5C = self._id_AEDF._id_C72C;
   _id_0B76::_id_F42C(self._id_AEDF._id_3A5C);
 
-  if(self._id_AEDF._id_72A3)
+  if(self._id_AEDF._id_72A3) {
     _id_620A();
+  }
 }
 
 _id_A368() {
@@ -2851,8 +3066,9 @@ _id_A366() {
   }
   self._id_AEDF._id_72A3 = 1;
 
-  if(!self._id_AEDF.priority)
+  if(!self._id_AEDF.priority) {
     _id_620A();
+  }
 }
 
 _id_A364() {
@@ -2861,8 +3077,9 @@ _id_A364() {
   }
   self._id_AEDF._id_72A3 = 0;
 
-  if(!self._id_AEDF._id_11567)
+  if(!self._id_AEDF._id_11567) {
     _id_5543();
+  }
 }
 
 _id_620B() {
@@ -2893,10 +3110,11 @@ _id_105D7(var_0) {
   self endon("spaceship_target_remove");
   self endon("juicy_feedback_thread");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = var_0;
-  else
+  } else {
     var_1 = "jackal_impact_target";
+  }
 
   if(self.script_team != "axis") {
     return;
@@ -2911,8 +3129,9 @@ _id_105D7(var_0) {
       continue;
     }
     if(var_6 == "MOD_PROJECTILE") {
-      if(isDefined(level._id_D127) && isDefined(level._id_D127._id_4C15))
+      if(isDefined(level._id_D127) && isDefined(level._id_D127._id_4C15)) {
         playworldsound(level._id_D127._id_4C15._id_1151E, var_5);
+      }
 
       var_7 = vectorNormalize(var_5 - self.origin);
       playFX(scripts\engine\utility::getfx(var_1), var_5, var_7, (0, 0, 1));
@@ -2938,8 +3157,9 @@ _id_105D8() {
 _id_105D9() {
   if(!isDefined(self._id_AEDF)) {}
 
-  if(self._id_AEDF._id_C940)
+  if(self._id_AEDF._id_C940) {
     level._id_A056._id_C93E = scripts\engine\utility::array_remove(level._id_A056._id_C93E, self);
+  }
 
   self _meth_84A0(0);
   self _meth_8558();
@@ -2957,29 +3177,33 @@ _id_105D6() {
   if(level.player scripts\sp\utility::_id_65DF("disable_jackal_lockon") && level.player scripts\sp\utility::_id_65DB("disable_jackal_lockon")) {
     return;
   }
-  if(self._id_AEDF.callout)
+  if(self._id_AEDF.callout) {
     _id_0B76::_id_F42B(self._id_AEDF._id_3782);
+  }
 
-  if(self._id_AEDF._id_C940)
+  if(self._id_AEDF._id_C940) {
     level._id_A056._id_C93E = scripts\engine\utility::array_add(level._id_A056._id_C93E, self);
-  else if(self._id_AEDF._id_3A5B)
+  } else if(self._id_AEDF._id_3A5B) {
     _id_0B76::_id_F42C(self._id_AEDF._id_3A5C);
+  }
 
   self _meth_84BE(self._id_AEDF.type);
 }
 
 _id_7B9B() {
-  if(scripts\engine\utility::player_is_in_jackal())
+  if(scripts\engine\utility::player_is_in_jackal()) {
     return level._id_D127 gettagorigin("tag_camera");
-  else
+  } else {
     return level.player getEye();
+  }
 }
 
 _id_7B9F() {
-  if(scripts\engine\utility::player_is_in_jackal())
+  if(scripts\engine\utility::player_is_in_jackal()) {
     return level._id_D127 gettagangles("tag_camera");
-  else
+  } else {
     return level.player getEye();
+  }
 }
 
 _id_7BC2() {
@@ -2987,8 +3211,9 @@ _id_7BC2() {
 }
 
 _id_10CD1(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "fly";
+  }
 
   thread _id_10CD4(var_0, var_1, var_2, var_3);
   var_0 _id_A287(0.1);
@@ -2996,8 +3221,9 @@ _id_10CD1(var_0, var_1, var_2, var_3) {
   var_0 scripts\engine\utility::delaythread(1, ::_id_A388, 1);
   _id_137D6();
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     _id_0BD9::_id_FA4F();
+  }
 }
 
 _id_10CD2(var_0, var_1) {
@@ -3007,18 +3233,20 @@ _id_10CD2(var_0, var_1) {
 _id_10CD3(var_0, var_1) {
   if(isDefined(var_1)) {
     if(isstring(var_1)) {
-      if(isstruct(scripts\engine\utility::getStruct(var_1, "targetname")))
+      if(isstruct(scripts\engine\utility::getStruct(var_1, "targetname"))) {
         var_1 = scripts\engine\utility::getStruct(var_1, "targetname");
-      else if(isent(getEnt(var_1, "targetname")))
+      } else if(isent(getEnt(var_1, "targetname"))) {
         var_1 = getEnt(var_1, "targetname");
+      }
     }
 
     var_2 = var_1.origin;
 
-    if(isDefined(var_1.angles))
+    if(isDefined(var_1.angles)) {
       var_3 = var_1.angles;
-    else
+    } else {
       var_3 = (0, 0, 0);
+    }
 
     var_0 vehicle_teleport(var_2, var_3);
   }
@@ -3035,47 +3263,52 @@ _id_10CD3(var_0, var_1) {
 _id_10CD4(var_0, var_1, var_2, var_3) {
   var_0 thread _id_10CD5();
 
-  while(!isDefined(var_0._id_D161))
+  while(!isDefined(var_0._id_D161)) {
     wait 0.05;
+  }
 
   var_0 notify("player_jackal_scripting_inited");
 
-  if(var_2 == "runway")
+  if(var_2 == "runway") {
     var_0 _id_F48D("runway");
-  else if(var_2 == "retribution")
+  } else if(var_2 == "retribution") {
     var_0 _id_F48D("retribution");
-  else if(var_2 == "shipcrib_europa_launch")
+  } else if(var_2 == "shipcrib_europa_launch") {
     var_0 _id_F48D("shipcrib_europa_launch");
-  else
+  } else {
     var_0 _id_F48D("instant_" + var_2);
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_0 _id_F5BD(var_3);
-  else if(var_2 == "land")
+  } else if(var_2 == "land") {
     var_0 _id_F5BD("vtol");
-  else if(var_2 == "runway")
+  } else if(var_2 == "runway") {
     var_0 _id_F5BD("runway");
-  else if(var_2 == "retribution")
+  } else if(var_2 == "retribution") {
     var_0 _id_F5BD("retribution");
-  else if(var_2 == "shipcrib")
+  } else if(var_2 == "shipcrib") {
     var_0 _id_F5BD("shipcrib");
-  else
+  } else {
     var_0 _id_F5BD("instant");
+  }
 
   if(isDefined(var_1)) {
     if(isstring(var_1)) {
-      if(isstruct(scripts\engine\utility::getStruct(var_1, "targetname")))
+      if(isstruct(scripts\engine\utility::getStruct(var_1, "targetname"))) {
         var_1 = scripts\engine\utility::getStruct(var_1, "targetname");
-      else if(isent(getEnt(var_1, "targetname")))
+      } else if(isent(getEnt(var_1, "targetname"))) {
         var_1 = getEnt(var_1, "targetname");
+      }
     }
 
     var_4 = var_1.origin;
 
-    if(isDefined(var_1.angles))
+    if(isDefined(var_1.angles)) {
       var_5 = var_1.angles;
-    else
+    } else {
       var_5 = (0, 0, 0);
+    }
 
     var_0 vehicle_teleport(var_4, var_5);
   }
@@ -3093,17 +3326,21 @@ _id_10CD5() {
 }
 
 _id_A38E(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = level._id_A056._id_4FEB["spaceshipSpringCameraMaxAngle"];
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level._id_A056._id_4FEB["spaceshipSpringCameraSpringStrength"];
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = level._id_A056._id_4FEB["spaceshipSpringCameraSpringStrengthOut"];
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
   thread scripts\sp\utility::_id_AB9A("spaceshipSpringCameraMaxAngle", var_0, var_3);
   thread scripts\sp\utility::_id_AB9A("spaceshipSpringCameraSpringStrength", var_1, var_3);
@@ -3111,48 +3348,57 @@ _id_A38E(var_0, var_1, var_2, var_3) {
 }
 
 _id_A2FC(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "default";
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   level._id_A056 thread _id_A0CF("boost", var_2, var_0, var_1);
 }
 
 _id_A303(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   level._id_A056 thread _id_A0CF("weapKick", "weapKick", var_0, var_1);
 }
 
 _id_A2FE(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "default";
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   level._id_A056 thread _id_A0CF("boost", var_2, var_0, var_1);
 }
 
 _id_A301(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "default";
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   level._id_A056 thread _id_A0CF("speed", var_2, var_0, var_1);
 }
 
 _id_A302(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "default";
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   level._id_A056 thread _id_A0CF("turn", var_2, var_0, var_1);
 }
@@ -3224,33 +3470,38 @@ _id_A07A(var_0, var_1, var_2, var_3) {
 }
 
 _id_A083(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "default";
+  }
 
   level._id_A056 thread _id_A0D0("view_rotate", var_2, var_0, var_1);
 }
 
 _id_A080(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "default";
+  }
 
   level._id_A056 thread _id_A0D0("ship_rotate", var_2, var_0, var_1);
 }
 
 _id_A078(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "default";
+  }
 
   var_0 = scripts\engine\utility::mph_to_ips(var_0);
   level._id_A056 thread _id_A0D0("force", var_2, var_0, var_1);
 }
 
 _id_A2D7(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0.0;
+  }
 
-  foreach(var_3, var_2 in level._id_A056._id_BBB9["force"]._id_3C66)
-  level._id_A056 thread _id_A0D0("force", var_3, (0, 0, 0), var_0);
+  foreach(var_3, var_2 in level._id_A056._id_BBB9["force"]._id_3C66) {
+    level._id_A056 thread _id_A0D0("force", var_3, (0, 0, 0), var_0);
+  }
 }
 
 _id_A0CF(var_0, var_1, var_2, var_3) {
@@ -3258,8 +3509,9 @@ _id_A0CF(var_0, var_1, var_2, var_3) {
   self endon(var_1);
   self endon("player_left_jackal");
 
-  if(!isDefined(self._id_BBB9[var_0]._id_3C66[var_1]))
+  if(!isDefined(self._id_BBB9[var_0]._id_3C66[var_1])) {
     self._id_BBB9[var_0]._id_3C66[var_1] = 1;
+  }
 
   var_4 = self._id_BBB9[var_0]._id_3C66[var_1] - var_2;
 
@@ -3278,15 +3530,17 @@ _id_A0CF(var_0, var_1, var_2, var_3) {
 
   self._id_BBB9[var_0]._id_3C66[var_1] = var_2;
 
-  if(self._id_BBB9[var_0]._id_3C66[var_1] == 1)
+  if(self._id_BBB9[var_0]._id_3C66[var_1] == 1) {
     self._id_BBB9[var_0]._id_3C66 = scripts\sp\utility::_id_22B2(self._id_BBB9[var_0]._id_3C66, var_1);
+  }
 }
 
 _id_7CF7() {
   self._id_1189B++;
 
-  if(self._id_1189B > 100)
+  if(self._id_1189B > 100) {
     self._id_1189B = 0;
+  }
 
   return self._id_1189B;
 }
@@ -3297,8 +3551,9 @@ _id_A0D0(var_0, var_1, var_2, var_3) {
   self endon(var_0 + var_1 + "_impulse");
   self endon("player_left_jackal");
 
-  if(!isDefined(self._id_BBB9[var_0]._id_3C66[var_1]))
+  if(!isDefined(self._id_BBB9[var_0]._id_3C66[var_1])) {
     self._id_BBB9[var_0]._id_3C66[var_1] = (0, 0, 0);
+  }
 
   var_4 = self._id_BBB9[var_0]._id_3C66[var_1];
 
@@ -3320,10 +3575,11 @@ _id_A0D0(var_0, var_1, var_2, var_3) {
 }
 
 _id_A325(var_0, var_1, var_2) {
-  if(length(var_2) == 0)
+  if(length(var_2) == 0) {
     self._id_BBB9[var_0]._id_3C66 = scripts\sp\utility::_id_22B3(self._id_BBB9[var_0]._id_3C66, [var_1]);
-  else
+  } else {
     self._id_BBB9[var_0]._id_3C66[var_1] = var_2;
+  }
 }
 
 _id_E0A1() {
@@ -3338,8 +3594,9 @@ _id_137D6() {
 _id_137CF() {
   level.player endon("death");
 
-  if(isalive(level.player) && level.player scripts\sp\utility::_id_65DF("flag_player_has_jackal"))
+  if(isalive(level.player) && level.player scripts\sp\utility::_id_65DF("flag_player_has_jackal")) {
     level.player scripts\sp\utility::_id_65E3("flag_player_has_jackal");
+  }
 }
 
 _id_137DA() {
@@ -3366,19 +3623,21 @@ _id_137D8() {
 
 _id_137DB() {
   for(;;) {
-    if(_id_A2A7())
+    if(_id_A2A7()) {
       return;
-    else
+    } else {
       wait 0.05;
+    }
   }
 }
 
 _id_137D9() {
   for(;;) {
-    if(!_id_A2A7())
+    if(!_id_A2A7()) {
       return;
-    else
+    } else {
       wait 0.05;
+    }
   }
 }
 
@@ -3409,8 +3668,9 @@ _id_137A9() {
   for(;;) {
     self waittill("mountable", var_0);
 
-    if(var_0)
+    if(var_0) {
       return;
+    }
   }
 }
 
@@ -3421,8 +3681,9 @@ waittill_nodialogueplaying() {
   for(;;) {
     self waittill("mountable", var_0);
 
-    if(!var_0)
+    if(!var_0) {
       return;
+    }
   }
 }
 
@@ -3442,15 +3703,17 @@ _id_104A6(var_0) {
 }
 
 _id_DE6D() {
-  if(self._id_99F5._id_BBF1)
+  if(self._id_99F5._id_BBF1) {
     thread _id_0BD9::_id_1049C();
+  }
 }
 
 _id_CF50(var_0) {
   _id_E0A1();
 
-  foreach(var_2 in level._id_A056._id_12F96)
-  var_2 _id_104A6(var_0);
+  foreach(var_2 in level._id_A056._id_12F96) {
+    var_2 _id_104A6(var_0);
+  }
 }
 
 _id_104A0() {
@@ -3458,31 +3721,35 @@ _id_104A0() {
 }
 
 _id_7A5B(var_0) {
-  if(scripts\engine\utility::player_is_in_jackal())
+  if(scripts\engine\utility::player_is_in_jackal()) {
     return var_0;
-  else
+  } else {
     return var_0 + "_grnd";
+  }
 }
 
 _id_9BDE() {
-  if(isDefined(self.classname) && self.classname == "script_vehicle_jackal_fake_enemy")
+  if(isDefined(self.classname) && self.classname == "script_vehicle_jackal_fake_enemy") {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_9CF5() {
-  if(isDefined(self.spawnflags) && self.spawnflags & 1)
+  if(isDefined(self.spawnflags) && self.spawnflags & 1) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_A2A7() {
-  if(isDefined(self.owner) && self.owner == level.player)
+  if(isDefined(self.owner) && self.owner == level.player) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_13675(var_0) {
@@ -3496,19 +3763,22 @@ _id_A06A(var_0) {
   level notify("notify_new_landing_state");
   level endon("notify_new_landing_state");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level.player scripts\sp\utility::_id_65E1("flag_player_landing_enabled");
-  else
+  } else {
     level.player scripts\sp\utility::_id_65DD("flag_player_landing_enabled");
+  }
 
   foreach(var_2 in level._id_A056._id_1632) {
     foreach(var_4 in var_2.lights) {
       if(var_0) {
-        if(var_2.enabled)
+        if(var_2.enabled) {
           playFXOnTag(scripts\engine\utility::getfx("landing_pad_lights"), var_4, "tag_origin");
+        }
 
         continue;
       }
@@ -3516,45 +3786,52 @@ _id_A06A(var_0) {
       killfxontag(scripts\engine\utility::getfx("landing_pad_lights"), var_4, "tag_origin");
     }
 
-    if(!var_0)
+    if(!var_0) {
       var_2 _id_0BDB::_id_4130();
+    }
   }
 }
 
 _id_A24B(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   var_2 = [];
 
   foreach(var_4 in level._id_A056._id_A82D) {
-    if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == var_0)
+    if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == var_0) {
       var_2 = scripts\engine\utility::array_add(var_2, var_4);
+    }
   }
 
-  foreach(var_4 in var_2)
-  _id_6211(var_4, var_1);
+  foreach(var_4 in var_2) {
+    _id_6211(var_4, var_1);
+  }
 }
 
 _id_A24A(var_0) {
   var_1 = [];
 
   foreach(var_3 in level._id_A056._id_A82D) {
-    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == var_0)
+    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == var_0) {
       var_1 = scripts\engine\utility::array_add(var_1, var_3);
+    }
   }
 
   foreach(var_3 in var_1) {
     level._id_A056._id_A82D = scripts\engine\utility::array_remove(level._id_A056._id_A82D, var_3);
 
-    if(scripts\engine\utility::array_contains(level._id_A056._id_1632, var_3))
+    if(scripts\engine\utility::array_contains(level._id_A056._id_1632, var_3)) {
       level._id_A056._id_1632 = scripts\engine\utility::array_remove(level._id_A056._id_1632, var_3);
+    }
 
     var_3 _id_0BDB::_id_4130();
     var_3._id_1270F delete();
 
-    foreach(var_7 in var_3.lights)
-    var_7 delete();
+    foreach(var_7 in var_3.lights) {
+      var_7 delete();
+    }
   }
 }
 
@@ -3588,16 +3865,18 @@ _id_137F6(var_0, var_1, var_2, var_3) {
   self endon("entitydeleted");
   var_0 endon("entitydeleted");
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0.1;
+  }
 
   var_4 = "waittill_point_timeout";
   var_5 = "point_success";
   self endon(var_4);
   thread _id_1358E(var_2, var_4, var_5);
 
-  while(!_id_9C87(var_0, var_1))
+  while(!_id_9C87(var_0, var_1)) {
     wait(var_3);
+  }
 
   self notify(var_5);
 }
@@ -3611,33 +3890,35 @@ _id_1358E(var_0, var_1, var_2) {
 _id_9C87(var_0, var_1) {
   var_2 = undefined;
 
-  if(isent(var_0) || isstruct(var_0))
+  if(isent(var_0) || isstruct(var_0)) {
     var_2 = var_0.origin;
-  else if(!isvector(var_0)) {} else
+  } else if(!isvector(var_0)) {} else
     var_2 = var_0;
 
   var_3 = vectordot(vectorNormalize(var_2 - self.origin), anglesToForward(self.angles));
 
-  if(var_3 > var_1)
+  if(var_3 > var_1) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_9B92(var_0, var_1) {
   var_2 = undefined;
 
-  if(isent(var_0) || isstruct(var_0))
+  if(isent(var_0) || isstruct(var_0)) {
     var_2 = var_0.origin;
-  else if(!isvector(var_0)) {} else
+  } else if(!isvector(var_0)) {} else
     var_2 = var_0;
 
   var_3 = distance(self.origin, var_2);
 
-  if(var_3 < var_1)
+  if(var_3 < var_1) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_1079F(var_0, var_1) {
@@ -3647,8 +3928,9 @@ _id_1079F(var_0, var_1) {
 
   var_2 = var_0 scripts\sp\utility::_id_10808();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 _id_1162F(var_1);
+  }
 
   return var_2;
 }
@@ -3658,8 +3940,9 @@ _id_1162F(var_0) {
 
   if(!isDefined(var_1)) {}
 
-  if(!isDefined(var_1.angles))
+  if(!isDefined(var_1.angles)) {
     var_1.angles = (0, 0, 0);
+  }
 
   self vehicle_teleport(var_1.origin + (0, 0, 70), var_1.angles);
   self _meth_8455(var_1.origin + (0, 0, 70), 1, var_1.angles);
@@ -3672,11 +3955,13 @@ _id_10749() {
 }
 
 _id_E04B() {
-  if(isDefined(self._id_BC85))
+  if(isDefined(self._id_BC85)) {
     self._id_BC85 delete();
+  }
 
-  if(isDefined(self._id_AFEE))
+  if(isDefined(self._id_AFEE)) {
     self._id_AFEE delete();
+  }
 }
 
 _id_7AB7() {
@@ -3694,16 +3979,17 @@ _id_7AFB() {
 }
 
 _id_7B9E() {
-  if(!isDefined(level._id_D127))
+  if(!isDefined(level._id_D127)) {
     return 0;
-  else
+  } else {
     return length(level._id_D127.spaceship_vel);
+  }
 }
 
 _id_7B9C() {
-  if(!isDefined(level._id_D127))
+  if(!isDefined(level._id_D127)) {
     return 0;
-  else {
+  } else {
     var_0 = rotatevectorinverted(level._id_D127.spaceship_vel, level._id_D127.angles);
     return var_0[0];
   }
@@ -3724,18 +4010,20 @@ _id_D165(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_D155(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(isDefined(var_4) && var_4)
+  if(isDefined(var_4) && var_4) {
     var_6 = "absolute";
-  else
+  } else {
     var_6 = "desires";
+  }
 
   level._id_A056._id_11B0D[var_5][var_6] = 1;
   level._id_D127 notify(var_5 + "_started");
   level.player _meth_8462(var_0, var_5, var_6, var_1, var_3);
   level.player _meth_8462(var_0, var_5, var_6 + "_player", var_2, var_3);
 
-  if(var_1 == 0 && var_2 == 1)
+  if(var_1 == 0 && var_2 == 1) {
     thread _id_D156(var_5, var_6, var_3);
+  }
 }
 
 _id_D156(var_0, var_1, var_2) {
@@ -3743,13 +4031,15 @@ _id_D156(var_0, var_1, var_2) {
   wait(var_2);
   level._id_A056._id_11B0D[var_0][var_1] = 0;
 
-  if(level._id_A056._id_11B0D[var_0]["absolute"] == 0 && level._id_A056._id_11B0D[var_0]["desires"] == 0 && level._id_A056._id_11B0D[var_0]["link"] == 0)
+  if(level._id_A056._id_11B0D[var_0]["absolute"] == 0 && level._id_A056._id_11B0D[var_0]["desires"] == 0 && level._id_A056._id_11B0D[var_0]["link"] == 0) {
     level.player _meth_8463(var_0);
+  }
 }
 
 _id_D164(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   level._id_A056._id_11B0D["moveto"]["link"] = 1;
   level._id_A056._id_11B0D["lookat"]["link"] = 1;
@@ -3767,8 +4057,9 @@ _id_D190(var_0) {
   if(!isDefined(level._id_A056._id_AD1D)) {
     return;
   }
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   thread _id_D191(var_0, "moveto", "moveto");
   thread _id_D191(var_0, "lookat", "orient");
@@ -3785,37 +4076,43 @@ _id_D191(var_0, var_1, var_2) {
   level._id_A056._id_11B0D["moveto"]["link"] = 0;
   level._id_A056._id_11B0D["lookat"]["link"] = 0;
 
-  if(level._id_A056._id_11B0D[var_1]["absolute"] == 0 && level._id_A056._id_11B0D[var_1]["desires"] == 0 && level._id_A056._id_11B0D[var_1]["link"] == 0)
+  if(level._id_A056._id_11B0D[var_1]["absolute"] == 0 && level._id_A056._id_11B0D[var_1]["desires"] == 0 && level._id_A056._id_11B0D[var_1]["link"] == 0) {
     level.player _meth_8463(var_1);
+  }
 }
 
 _id_D960(var_0, var_1) {
   if(isvector(var_0)) {
-    if(self islinked())
+    if(self islinked()) {
       self unlink();
+    }
 
     self dontinterpolate();
     self.origin = var_0;
   } else if(isstruct(var_0)) {
-    if(self islinked())
+    if(self islinked()) {
       self unlink();
+    }
 
     self dontinterpolate();
     self.origin = var_0.origin;
   } else if(isent(var_0)) {
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       var_1 = getpartname(var_0.model, 0);
+    }
 
     self linkTo(var_0, var_1, (0, 0, 0), (0, 0, 0));
   } else {}
 }
 
 _id_A2B0(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0.2;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0.2;
+  }
 
   level.player _meth_8489("body", var_0, var_2, var_1);
   wait(getanimlength(var_0) - var_3);
@@ -3826,16 +4123,19 @@ _id_2B74(var_0, var_1, var_2, var_3, var_4, var_5) {
   self notify("stop_blended_links");
   self endon("stop_blended_links");
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
   var_6 = var_2 * var_3;
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = getpartname(var_0.model, 0);
+  }
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = getpartname(var_1.model, 0);
+  }
 
   while(var_6 < var_2) {
     var_7 = var_6 / var_2;
@@ -3851,10 +4151,11 @@ _id_2B74(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_17 = var_1 gettagorigin(var_5);
     var_18 = var_17 * var_7 + var_16 * (1 - var_7);
 
-    if(var_7 < 0.5)
+    if(var_7 < 0.5) {
       self linkTo(var_0, var_4, rotatevectorinverted(var_18 - var_16, var_8), var_15 - var_8);
-    else
+    } else {
       self linkTo(var_1, var_5, rotatevectorinverted(var_18 - var_17, var_9), var_15 - var_9);
+    }
 
     wait 0.05;
     var_6 = var_6 + 0.05;
@@ -3862,17 +4163,19 @@ _id_2B74(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   scripts\engine\utility::waitframe();
 
-  if(isDefined(self.start))
+  if(isDefined(self.start)) {
     self.start delete();
+  }
 }
 
 _id_13DE7(var_0, var_1) {
-  if(var_0[var_1] > 180)
+  if(var_0[var_1] > 180) {
     var_2 = var_0[var_1] - 360;
-  else if(var_0[var_1] < -180)
+  } else if(var_0[var_1] < -180) {
     var_2 = var_0[var_1] + 360;
-  else
+  } else {
     var_2 = var_0[var_1];
+  }
 
   return var_2;
 }
@@ -3993,22 +4296,26 @@ _id_A1EF(var_0, var_1, var_2, var_3, var_4) {
     var_1 = var_5.speed;
   }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 1.0;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = var_4 * scripts\engine\utility::mph_to_ips(var_1);
+  }
 
   _id_A1ED(var_0, var_1, var_2, var_3);
   _id_A342(var_0, var_4, var_3);
 }
 
 _id_A1F3(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 1.0;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 2048;
+  }
 
   _id_A1F2(var_0, var_1, var_2, var_3);
   _id_A342(var_0, var_4, 1);
@@ -4017,8 +4324,9 @@ _id_A1F3(var_0, var_1, var_2, var_3, var_4) {
 _id_A1F0(var_0, var_1, var_2, var_3, var_4) {
   _id_1981();
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0.2;
+  }
 
   var_5 = getcsplineid(var_0);
   var_6 = (var_4, 0, 0);
@@ -4027,13 +4335,15 @@ _id_A1F0(var_0, var_1, var_2, var_3, var_4) {
   var_8 = calccsplineclosestpoint(var_5, var_7);
   self _meth_8455(var_8);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 384.0;
+  }
 
   self setneargoalnotifydist(var_2);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self _meth_845F(var_1);
+  }
 
   self waittill("near_goal");
   _id_1981();
@@ -4045,41 +4355,48 @@ _id_A1F0(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_A1ED(var_0, var_1, var_2, var_3) {
-  if(isDefined(self._blackboard))
+  if(isDefined(self._blackboard)) {
     _id_1981();
+  }
 
-  if(isDefined(var_3) && var_3)
+  if(isDefined(var_3) && var_3) {
     var_4 = calccsplineclosestpoint(var_0, self.origin);
-  else
+  } else {
     var_4 = getcsplinepointposition(var_0, 0);
+  }
 
   self _meth_8455(var_4);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 384.0;
+  }
 
   self setneargoalnotifydist(var_2);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self _meth_845F(var_1);
+  }
 
   self waittill("near_goal");
 }
 
 _id_A1F2(var_0, var_1, var_2, var_3) {
-  if(isDefined(self._blackboard))
+  if(isDefined(self._blackboard)) {
     _id_1981();
+  }
 
   var_4 = getcsplinepointposition(var_0, var_1);
   self _meth_8455(var_4);
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 384.0;
+  }
 
   self setneargoalnotifydist(var_3);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self _meth_845F(var_2);
+  }
 
   self waittill("near_goal");
 }
@@ -4092,20 +4409,24 @@ _id_A113(var_0, var_1, var_2, var_3) {
   if(isDefined(level._id_D127._id_5F6F)) {
     return;
   }
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 3;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0.5;
+  }
 
   var_4 = [var_2, var_0, var_1, gettime(), var_3];
   _id_A104(var_4);
 
-  if(!isDefined(level._id_D127._id_432D))
+  if(!isDefined(level._id_D127._id_432D)) {
     thread _id_A115();
+  }
 }
 
 _id_A115() {
@@ -4126,8 +4447,9 @@ _id_A115() {
     level.player scripts\sp\utility::_id_65DD("jackal_cockpit_VO");
     level._id_A056._id_4B57 = -999999;
 
-    if(level._id_A056._id_432C.size > 0)
+    if(level._id_A056._id_432C.size > 0) {
       wait(level._id_A056._id_432C[0][4]);
+    }
   }
 
   level._id_D127._id_432D delete();
@@ -4174,10 +4496,11 @@ _id_198D() {
 _id_A1F4(var_0, var_1, var_2, var_3) {
   var_4 = scripts\engine\utility::getStruct(var_0, "targetname");
 
-  if(isDefined(var_3) && var_3)
+  if(isDefined(var_3) && var_3) {
     var_5 = var_4.angles;
-  else
+  } else {
     var_5 = undefined;
+  }
 
   _id_A1EC(var_4.origin, var_1, var_2, var_5);
 }
@@ -4186,22 +4509,25 @@ _id_A1EC(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("delete");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 384.0;
+  }
 
   _id_1981();
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     self _meth_8455(var_0, var_1, var_3);
-  else
+  } else {
     self _meth_8455(var_0, var_1);
+  }
 
   self setneargoalnotifydist(var_2);
 
-  if(var_1)
+  if(var_1) {
     self waittill("goal");
-  else
+  } else {
     self waittill("near_goal");
+  }
 }
 
 _id_1981() {
@@ -4211,8 +4537,9 @@ _id_1981() {
   if(self._blackboard._id_EF72 && !isDefined(self._id_1FCE)) {
     return;
   }
-  if(!self._blackboard._id_EF72)
+  if(!self._blackboard._id_EF72) {
     self._id_1FCE = 1;
+  }
 
   self._blackboard._id_3F28 = undefined;
   self notify("jackal_animscripteduntilgoal");
@@ -4270,16 +4597,18 @@ _id_1984(var_0) {
 }
 
 _id_6E8C(var_0) {
-  if(isDefined(level._id_D127) && var_0 == level._id_D127)
+  if(isDefined(level._id_D127) && var_0 == level._id_D127) {
     thread _id_6E92();
+  }
 
   scripts\engine\utility::waittill_either("missile_hit", "burnt_out");
   self.active = 0;
   self notify("pos_updated");
   stopFXOnTag(self.fx, self, "tag_origin");
 
-  if(isDefined(var_0) && scripts\engine\utility::array_contains(var_0._id_6E9C._id_12B86, self))
+  if(isDefined(var_0) && scripts\engine\utility::array_contains(var_0._id_6E9C._id_12B86, self)) {
     var_0._id_6E9C._id_12B86 = scripts\engine\utility::array_remove(var_0._id_6E9C._id_12B86, self);
+  }
 
   wait 0.05;
   self delete();
@@ -4319,8 +4648,9 @@ _id_19AE(var_0) {
   self notify("stop sound" + self._blackboard._id_6D83);
   self notify("firemode changed");
 
-  if(scripts\sp\utility::_id_65DF("jackal_firing"))
+  if(scripts\sp\utility::_id_65DF("jackal_firing")) {
     scripts\sp\utility::_id_65DD("jackal_firing");
+  }
 }
 
 _id_1989() {
@@ -4351,13 +4681,15 @@ _id_198A() {
 }
 
 _id_19A0(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     _id_19A2();
-  else
+  } else {
     _id_1986();
+  }
 }
 
 _id_19AB(var_0, var_1, var_2, var_3) {
@@ -4369,38 +4701,44 @@ _id_19AB(var_0, var_1, var_2, var_3) {
 }
 
 _id_19AC(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     self._blackboard._id_23A4 = _id_0C21::_id_9536();
-  else {
+  } else {
     self._blackboard._id_23A4.speed = var_0;
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       self._blackboard._id_23A4._id_1545 = var_1;
+    }
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       self._blackboard._id_23A4._id_1E91 = var_2;
+    }
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       self._blackboard._id_23A4._id_1E71 = var_3;
+    }
   }
 
   _id_0C21::_id_20DD();
 }
 
 _id_19AD(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     self._blackboard._id_1113B = _id_0C21::_id_976D();
-  else {
+  } else {
     self._blackboard._id_1113B.speed = var_0;
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       self._blackboard._id_1113B._id_1545 = var_1;
+    }
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       self._blackboard._id_1113B._id_1E91 = var_2;
+    }
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       self._blackboard._id_1113B._id_1E71 = var_3;
+    }
   }
 
   _id_0C21::_id_20DD();
@@ -4411,11 +4749,13 @@ _id_1996() {
 }
 
 _id_ACE8(var_0, var_1) {
-  while(!isDefined(level._id_D127))
+  while(!isDefined(level._id_D127)) {
     wait 0.05;
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = (1, 1, 1);
+  }
 
   self endon("stop_line");
 
@@ -4424,26 +4764,29 @@ _id_ACE8(var_0, var_1) {
       break;
     }
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_2 = self gettagorigin(var_1);
-    else
+    } else {
       var_2 = self.origin;
+    }
 
     wait 0.05;
   }
 }
 
 _id_19A7(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self._id_B8AE))
+  if(!isDefined(self._id_B8AE)) {
     self._id_B8AE = spawnStruct();
+  }
 
   var_0 = max(512, var_0);
   self._id_B8AE._id_DCCA = var_0;
   self._id_B8AE._id_B48B = var_1;
   self._id_B8AE._id_B758 = var_2;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     self._id_B8AE._id_B4C9 = var_3;
+  }
 }
 
 _id_1987() {
@@ -4459,10 +4802,11 @@ _id_1995(var_0) {
   self._blackboard._id_38DC = var_0;
   var_1 = undefined;
 
-  if(var_0 == "up")
+  if(var_0 == "up") {
     var_1 = _func_2EE(self.asmname, "cannon_state", "up", 0);
-  else
+  } else {
     var_1 = _func_2EE(self.asmname, "cannon_state", "down", 0);
+  }
 
   self _meth_82E2("cannon", var_1.anims, 1.0, 0.0, 1.0);
   self _meth_82B0(var_1.anims, 1.0);
@@ -4521,14 +4865,17 @@ _id_D527(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawn("script_origin", var_1);
   var_5 playSound(var_0, "sounddone");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_5 _meth_8277(var_2, 0);
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_5 _meth_8278(var_3, 0);
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_5 linkTo(var_4);
+  }
 
   var_5 waittill("sounddone");
   var_5 delete();
@@ -4537,25 +4884,30 @@ _id_D527(var_0, var_1, var_2, var_3, var_4) {
 _id_D52C(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = scripts\engine\utility::spawn_tag_origin(self.origin, self.angles);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = getpartname(self.model, 0);
+  }
 
   var_6 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   var_6 playSound(var_0, "sounddone");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_6 _meth_8277(var_2, 0);
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_6 _meth_8278(var_3, 0);
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     _id_D52D(var_6, "sounddone", var_4);
-  else
+  } else {
     var_6 waittill("sounddone");
+  }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     wait(var_5);
+  }
 
   var_6 _meth_8278(0, 0.1);
   var_6 delete();
@@ -4582,8 +4934,9 @@ _id_413B() {
 
   level._id_A056._id_D824 = scripts\engine\utility::array_removeundefined(level._id_A056._id_D824);
 
-  if(level._id_A056._id_D824.size == 0)
+  if(level._id_A056._id_D824.size == 0) {
     level.player _meth_84D4(0);
+  }
 }
 
 _id_413C() {
@@ -4593,20 +4946,22 @@ _id_413C() {
 
 _id_A287(var_0) {
   if(isDefined(var_0)) {
-    if(isDefined(level.script) && level.script == "moonjackal")
+    if(isDefined(level.script) && level.script == "moonjackal") {
       level.player scripts\engine\utility::delaycall(1, ::_meth_82C0, "jackal_mute_engines", 1);
-    else
+    } else {
       level.player _meth_82C0("jackal_mute_engines", var_0);
+    }
   } else
     level.player _meth_82C0("jackal_mute_engines", 0.5);
 }
 
 _id_A388(var_0) {
   if(isDefined(var_0)) {
-    if(isDefined(level.script) && level.script == "moonjackal")
+    if(isDefined(level.script) && level.script == "moonjackal") {
       level.player scripts\engine\utility::delaycall(2, ::_meth_82C0, "jackal_cockpit", 0.5);
-    else
+    } else {
       level.player _meth_82C0("jackal_cockpit", var_0);
+    }
   } else
     level.player _meth_82C0("jackal_cockpit", 0.5);
 }
@@ -4637,50 +4992,59 @@ _id_198C(var_0) {
 }
 
 _id_3819() {
-  if(!self._id_38A2)
+  if(!self._id_38A2) {
     return 0;
+  }
 
-  if(self.ignoreme)
+  if(self.ignoreme) {
     return 0;
+  }
 
-  if(_id_9CB2())
+  if(_id_9CB2()) {
     return 0;
+  }
 
-  if(_id_9B67())
+  if(_id_9B67()) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_9BCF() {
-  if(isDefined(self._blackboard) && isDefined(self._blackboard._id_A421))
+  if(isDefined(self._blackboard) && isDefined(self._blackboard._id_A421)) {
     return 1;
+  }
 
-  if(isDefined(self._id_A420) && self._id_A420.size > 0)
+  if(isDefined(self._id_A420) && self._id_A420.size > 0) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_9CB2() {
-  if(isDefined(self._blackboard) && self._blackboard._id_EF72)
+  if(isDefined(self._blackboard) && self._blackboard._id_EF72) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_9B67() {
-  if(isDefined(self._blackboard) && self._blackboard.animscriptedactive)
+  if(isDefined(self._blackboard) && self._blackboard.animscriptedactive) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_9C06() {
-  if(isDefined(self._blackboard) && isDefined(self._blackboard._id_90EE))
+  if(isDefined(self._blackboard) && isDefined(self._blackboard._id_90EE)) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_16EE(var_0, var_1) {
@@ -4690,17 +5054,20 @@ _id_16EE(var_0, var_1) {
 }
 
 _id_A224(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   if(var_0) {
     setomnvar("ui_jackal_autopilot", 1);
 
-    if(var_1)
+    if(var_1) {
       _id_A112("jackal_hud_autopilot");
+    }
   } else
     setomnvar("ui_jackal_autopilot", 0);
 }
@@ -4930,8 +5297,9 @@ _id_136A6(var_0) {
 }
 
 _id_116A8(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   var_3 = scripts\sp\hud_util::_id_48B7("black", 0, level.player);
   var_4 = scripts\sp\hud_util::createfontstring("default", 1.5);

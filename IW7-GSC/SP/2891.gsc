@@ -4,8 +4,9 @@
 **************************************/
 
 _id_EB77(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   level.player endon("death");
 
@@ -35,14 +36,17 @@ _id_EB77(var_0, var_1) {
 _id_E2E3(var_0, var_1, var_2) {
   var_3 = scripts\engine\utility::ter_op(isDefined(var_2) && var_2, ::switchtoweaponimmediate, ::switchtoweapon);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(!isDefined(game["weaponstates"]))
+  if(!isDefined(game["weaponstates"])) {
     return 0;
+  }
 
-  if(!isDefined(game["weaponstates"][var_0]))
+  if(!isDefined(game["weaponstates"][var_0])) {
     return 0;
+  }
 
   level.player takeallweapons();
 
@@ -82,8 +86,9 @@ _id_96D7() {
 }
 
 _id_7AA6() {
-  if(isDefined(level._id_AE21))
+  if(isDefined(level._id_AE21)) {
     return level._id_AE21;
+  }
 
   return level.script;
 }
@@ -103,8 +108,9 @@ persist(var_0, var_1, var_2) {
   }
   level._id_1304 = 1;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level.player setoffhandsecondaryclass(var_2);
+  }
 
   _id_E2E3(_id_7AA6(), 1);
   level._id_8B8E = 1;
@@ -114,45 +120,53 @@ _id_AE21(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(isDefined(var_0)) {
     var_8 = _id_7AA6();
 
-    if(var_0 != var_8 || isDefined(level._id_1304))
+    if(var_0 != var_8 || isDefined(level._id_1304)) {
       return;
+    }
   }
 
   if(isDefined(var_1)) {
-    if(var_1 == "iw7_ar57")
+    if(var_1 == "iw7_ar57") {
       var_1 = "iw7_ar57+ar57scope";
+    }
 
     level.default_weapon = var_1;
     level.player giveweapon(var_1);
   }
 
   if(isDefined(var_6)) {
-    if(var_6 == "iw7_erad")
+    if(var_6 == "iw7_erad") {
       var_6 = "iw7_erad+eradscope";
+    }
 
     level.player setoffhandsecondaryclass(var_6);
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level.player giveweapon(var_2);
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level.player giveweapon(var_3);
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     level.player giveweapon(var_4);
+  }
 
   level.player switchtoweapon(var_1);
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     level.player setviewmodel(var_5);
+  }
 
   level._id_37E7 = level._id_1303;
   level._id_1303 = undefined;
   level._id_8B8E = 1;
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     _id_F551(var_7);
+  }
 }
 
 _id_F551(var_0) {

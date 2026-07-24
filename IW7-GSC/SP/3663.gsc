@@ -4,22 +4,26 @@
 **************************************/
 
 _id_9755(var_0) {
-  if(!level.player scripts\sp\utility::_id_65DF("pressurized"))
+  if(!level.player scripts\sp\utility::_id_65DF("pressurized")) {
     level.player scripts\sp\utility::_id_65E0("pressurized");
+  }
 
-  if(!level.player scripts\sp\utility::_id_65DF("player_gravity_off"))
+  if(!level.player scripts\sp\utility::_id_65DF("player_gravity_off")) {
     level.player scripts\sp\utility::_id_65E0("player_gravity_off");
+  }
 
-  if(!level.player scripts\sp\utility::_id_65DF("player_space_override_off"))
+  if(!level.player scripts\sp\utility::_id_65DF("player_space_override_off")) {
     level.player scripts\sp\utility::_id_65E0("player_space_override_off");
+  }
 
   if(!isDefined(var_0) || !var_0) {
     setsaveddvar("player_spaceViewHeight", 60);
     setsaveddvar("player_spaceCapsuleHeight", 70);
   }
 
-  if(!isDefined(level.player.space))
+  if(!isDefined(level.player.space)) {
     level.player.space = spawnStruct();
+  }
 
   level.player.space._id_6F43 = 0;
 }
@@ -31,20 +35,23 @@ _id_9756() {
 _id_5570(var_0) {
   _id_9755(1);
 
-  if(var_0 == 1)
+  if(var_0 == 1) {
     level.player scripts\sp\utility::_id_65E1("player_space_override_off");
-  else
+  } else {
     level.player scripts\sp\utility::_id_65DD("player_space_override_off");
+  }
 }
 
 _id_9C7B() {
   _id_9755(1);
 
-  if(level.player scripts\sp\utility::_id_65DB("player_space_override_off"))
+  if(level.player scripts\sp\utility::_id_65DB("player_space_override_off")) {
     return 0;
+  }
 
-  if(!level.player scripts\sp\utility::_id_65DB("player_gravity_off"))
+  if(!level.player scripts\sp\utility::_id_65DB("player_gravity_off")) {
     return 0;
+  }
 
   return 1;
 }
@@ -59,11 +66,13 @@ _id_622C(var_0, var_1) {
   level.player scripts\sp\utility::_id_65E1("player_gravity_off");
   level._id_7684 = _id_0E50::pain;
 
-  if(!isDefined(var_0) || var_0)
+  if(!isDefined(var_0) || var_0) {
     level.player thread _id_0E47::_id_4D8A();
+  }
 
-  if(!isDefined(var_1) || var_1)
+  if(!isDefined(var_1) || var_1) {
     level.player thread _id_0E4A::_id_84BA();
+  }
 
   level.player thread _id_0E50::_id_CF84();
   level.player thread _id_853A();
@@ -162,11 +171,13 @@ _id_5558() {
   self allowswim(0);
   scripts\engine\utility::allow_doublejump(1);
 
-  if(isDefined(self._id_286F))
+  if(isDefined(self._id_286F)) {
     self.attackeraccuracy = self._id_286F;
+  }
 
-  if(isDefined(self._id_13E97))
+  if(isDefined(self._id_13E97)) {
     self._id_13E97 delete();
+  }
 }
 
 _id_853A() {
@@ -174,18 +185,21 @@ _id_853A() {
   self.space._id_6F43 = 1;
   _id_61FA();
 
-  while(_id_9C7B())
+  while(_id_9C7B()) {
     wait 0.05;
+  }
 
   _id_40A6();
 
   if(isDefined(level.player._id_9BF5)) {
-    while(level.player._id_9BF5 == 1)
+    while(level.player._id_9BF5 == 1) {
       scripts\engine\utility::waitframe();
+    }
   }
 
-  if(isDefined(self._id_849A))
+  if(isDefined(self._id_849A)) {
     level.player thread _id_0E4A::_id_84B9();
+  }
 }
 
 _id_61FA() {
@@ -203,8 +217,9 @@ _id_552C() {
 }
 
 _id_37FE() {
-  if(self isonground())
+  if(self isonground()) {
     return 1;
+  }
 
   return 0;
 }
@@ -227,8 +242,9 @@ _id_8B3A() {
     if(var_2 >= var_1 * 0.99) {
       self.attackeraccuracy = 0.4 * self._id_286F;
 
-      if(var_2 >= var_1 * var_0)
+      if(var_2 >= var_1 * var_0) {
         self.attackeraccuracy = 0.15 * self._id_286F;
+      }
     }
 
     scripts\engine\utility::waitframe();
@@ -319,8 +335,9 @@ _id_EBAB(var_0) {
   var_2 = var_1[0];
 
   if(var_2 > 0) {
-    if(!isDefined(var_0))
+    if(!isDefined(var_0)) {
       var_0 = 75.0;
+    }
 
     var_3 = 1 - min(var_0, var_2) / var_0;
     return max(var_3, 0.1);

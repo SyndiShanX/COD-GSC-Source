@@ -13,8 +13,9 @@ give_attacker_kill_rewards(var_0, var_1) {
   if(scripts\cp\cp_agent_utils::get_agent_type(self) == "elite" || scripts\cp\cp_agent_utils::get_agent_type(self) == "mammoth") {
     var_2 = get_reward_point_for_kill();
 
-    foreach(var_4 in level.players)
-    givekillreward(var_4, var_2, "large");
+    foreach(var_4 in level.players) {
+      givekillreward(var_4, var_2, "large");
+    }
 
     return;
   }
@@ -25,8 +26,9 @@ give_attacker_kill_rewards(var_0, var_1) {
         if(isDefined(self.player_who_tagged) && self.player_who_tagged == var_4 && var_4 != var_0) {
           var_7 = getassistbonusamount();
 
-          if(isDefined(level.cash_scalar))
+          if(isDefined(level.cash_scalar)) {
             var_7 = var_7 * level.cash_scalar;
+          }
 
           givekillreward(var_4, var_7 * 2);
           var_4 scripts\cp\cp_persistence::eog_player_update_stat("assists", 1);
@@ -40,8 +42,9 @@ give_attacker_kill_rewards(var_0, var_1) {
       var_10 = self.maxhealth * var_9;
       var_7 = getassistbonusamount();
 
-      if(isDefined(level.cash_scalar))
+      if(isDefined(level.cash_scalar)) {
         var_7 = var_7 * level.cash_scalar;
+      }
 
       foreach(var_12 in self.attacker_damage) {
         if(var_12.player == var_0 || isDefined(var_0.owner) && var_12.player == var_0.owner) {
@@ -72,8 +75,9 @@ give_attacker_kill_rewards(var_0, var_1) {
 
   var_2 = get_reward_point_for_kill();
 
-  if(isDefined(var_1) && var_1 == "soft" && !var_14)
+  if(isDefined(var_1) && var_1 == "soft" && !var_14) {
     var_2 = int(var_2 * 1.5);
+  }
 
   givekillreward(var_0, var_2, "large", var_1);
 }
@@ -89,16 +93,19 @@ get_reward_point_for_kill() {
 givekillreward(var_0, var_1, var_2, var_3) {
   var_4 = var_1 * level.cycle_reward_scalar;
 
-  if(isDefined(level.cash_scalar))
+  if(isDefined(level.cash_scalar)) {
     var_4 = var_4 * level.cash_scalar;
+  }
 
   var_0 scripts\cp\cp_persistence::give_player_currency(var_4, var_2, var_3);
 
-  if(isDefined(level.zombie_xp))
+  if(isDefined(level.zombie_xp)) {
     var_0 scripts\cp\cp_persistence::give_player_xp(int(var_4));
+  }
 
   if(scripts\engine\utility::flag_exist("cortex_started") && scripts\engine\utility::flag("cortex_started")) {
-    if(isDefined(level.add_cortex_charge_func))
+    if(isDefined(level.add_cortex_charge_func)) {
       [[level.add_cortex_charge_func]](var_1);
+    }
   }
 }

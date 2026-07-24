@@ -7,8 +7,9 @@ _id_8AC7() {
   scripts\sp\maps\rogue\rogue_util::_id_BC53("hangar_start_player");
   level._id_10AC8 = scripts\sp\maps\rogue\rogue_util::_id_10626("hangar_start");
 
-  foreach(var_1 in level._id_10AC8)
-  var_1 thread _id_F567();
+  foreach(var_1 in level._id_10AC8) {
+    var_1 thread _id_F567();
+  }
 }
 
 _id_F0D1() {}
@@ -90,8 +91,9 @@ _id_8AD8() {
   thread _id_134DE();
   scripts\sp\utility::_id_15F5("hangar_initial_colors");
 
-  foreach(var_6 in var_4)
-  var_6 scripts\sp\utility::_id_51E1("cqb");
+  foreach(var_6 in var_4) {
+    var_6 scripts\sp\utility::_id_51E1("cqb");
+  }
 
   scripts\engine\utility::flag_wait("anim_hangar_vin_goto");
   scripts\engine\utility::exploder("hangar_power_on");
@@ -102,13 +104,15 @@ _id_8AD8() {
     var_6 thread _id_8A54(var_3);
   }
 
-  while(var_3._id_162F != 4)
+  while(var_3._id_162F != 4) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_set("sun_vision_blend");
 
-  while(level._id_111C3.time < 12)
+  while(level._id_111C3.time < 12) {
     wait 0.05;
+  }
 
   var_3 notify("stop_loop");
   scripts\engine\utility::exploder("rockland_00");
@@ -116,15 +120,17 @@ _id_8AD8() {
   var_3 thread scripts\sp\anim::_id_1EE7(var_4, "hangar_vignette_ready", "stop_loop");
   wait 0.05;
 
-  while(level._id_111C3.time < 17)
+  while(level._id_111C3.time < 17) {
     wait 0.05;
+  }
 
   var_4[var_4.size] = level._id_8A36;
   var_3 notify("stop_loop");
   level._id_8A36 playSound("rogue_hangar_door_02");
 
-  if(isDefined(level._id_8A3B))
+  if(isDefined(level._id_8A3B)) {
     level._id_8A3B notify("door_opened");
+  }
 
   level.player clearclienttriggeraudiozone(1);
   var_3 thread scripts\sp\anim::_id_1F2C(var_4, "hangar_vignette_exit");
@@ -145,8 +151,9 @@ _id_8AD8() {
   thread scripts\sp\utility::_id_266F();
   level._id_8A36._id_4348 thread _id_5158();
 
-  if(!level.console)
+  if(!level.console) {
     waitforalltransients();
+  }
 }
 
 _id_5158() {
@@ -227,10 +234,11 @@ _id_DD1A() {
 }
 
 _id_11002(var_0) {
-  if(self == level.player && !scripts\engine\utility::flag("kill_array_chatter"))
+  if(self == level.player && !scripts\engine\utility::flag("kill_array_chatter")) {
     scripts\sp\utility::_id_10350(var_0);
-  else if(!scripts\engine\utility::flag("kill_array_chatter"))
+  } else if(!scripts\engine\utility::flag("kill_array_chatter")) {
     scripts\sp\utility::_id_10346(var_0);
+  }
 }
 
 _id_8AD6() {
@@ -249,8 +257,9 @@ _id_8AD6() {
 }
 
 _id_8A54(var_0) {
-  while(scripts\sp\utility::_id_65DF("ready_for_Hangar") == 0 || scripts\sp\utility::_id_65DB("ready_for_Hangar") == 0)
+  while(scripts\sp\utility::_id_65DF("ready_for_Hangar") == 0 || scripts\sp\utility::_id_65DB("ready_for_Hangar") == 0) {
     wait 0.05;
+  }
 
   var_0 scripts\sp\anim::_id_1F17(self, "hangar_vignette_enter");
   level._id_8AD7 = 1;
@@ -276,8 +285,9 @@ _id_F3E1() {
 _id_BD3D() {
   var_0 = getEntArray("solar_array_mover", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_C895();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_C895();
+  }
 }
 
 _id_C893() {
@@ -401,8 +411,9 @@ _id_AC85() {
 }
 
 _id_AC9F(var_0, var_1) {
-  foreach(var_3 in var_0)
-  var_3._id_99E8 = var_3 _meth_8134();
+  foreach(var_3 in var_0) {
+    var_3._id_99E8 = var_3 _meth_8134();
+  }
 
   while(!scripts\engine\utility::flag("player_left_hangar")) {
     foreach(var_3 in var_0) {
@@ -424,8 +435,9 @@ _id_AC9F(var_0, var_1) {
 
   var_0[0] notify("perm_off");
 
-  foreach(var_3 in var_0)
-  var_3 delete();
+  foreach(var_3 in var_0) {
+    var_3 delete();
+  }
 }
 
 _id_ACA0() {
@@ -436,15 +448,17 @@ _id_ACA0() {
 _id_8ACE() {
   scripts\sp\maps\rogue\rogue_util::_id_1120C(18, 4);
 
-  while(!scripts\engine\utility::flag("player_is_outside") || !scripts\engine\utility::flag("power_off"))
+  while(!scripts\engine\utility::flag("player_is_outside") || !scripts\engine\utility::flag("power_off")) {
     wait 0.05;
+  }
 
   level notify("stop_hangar_exploders");
 
-  if(scripts\engine\utility::flag("power_on"))
+  if(scripts\engine\utility::flag("power_on")) {
     scripts\sp\utility::_id_10FEC("200");
-  else
+  } else {
     scripts\sp\utility::_id_10FEC("201");
+  }
 
   scripts\sp\maps\rogue\rogue_util::_id_111E8(6.5, 16, 1);
 }

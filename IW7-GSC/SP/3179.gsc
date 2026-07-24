@@ -34,10 +34,11 @@ _id_D55D(var_0, var_1, var_2, var_3) {
     self waittillmatch("traverse", "gravity on");
     self animmode("gravity");
 
-    if(!animhasnotetrack(var_4, "blend"))
+    if(!animhasnotetrack(var_4, "blend")) {
       wait(var_8);
-    else
+    } else {
       self waittillmatch("traverse", "blend");
+    }
   }
 
   _id_11701(var_0, var_1);
@@ -58,8 +59,9 @@ _id_D566(var_0, var_1, var_2, var_3) {
   self animmode("noclip");
   self._id_126EC = self.origin[2];
 
-  if(!animhasnotetrack(var_4, "traverse_align"))
+  if(!animhasnotetrack(var_4, "traverse_align")) {
     _id_89F5();
+  }
 
   var_7 = 0;
   _id_0A1E::_id_2369(var_0, var_1, var_4);
@@ -114,21 +116,24 @@ _id_11701(var_0, var_1) {
   var_3 = undefined;
 
   if(isDefined(var_2._id_116FB)) {
-    if(isarray(var_2._id_116FB[0]))
+    if(isarray(var_2._id_116FB[0])) {
       var_3 = var_2._id_116FB[0];
-    else
+    } else {
       var_3 = var_2._id_116FB;
+    }
   }
 
   var_4 = isDefined(var_2.transitions) && var_2.transitions.size > 0;
 
-  if(!var_4 && !isDefined(var_3))
+  if(!var_4 && !isDefined(var_3)) {
     var_3 = "exposed_idle";
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     thread scripts\asm\asm::asm_setstate(var_3, undefined);
-  else
+  } else {
     scripts\asm\asm::asm_fireevent(var_1, "traverse_end");
+  }
 
   self notify("killanimscript");
 }
@@ -155,30 +160,34 @@ _id_11662(var_0, var_1, var_2, var_3) {
   if(var_0 == 0 || var_2 <= 0) {
     return;
   }
-  if(var_1 > 0)
+  if(var_1 > 0) {
     wait(var_1);
+  }
 
   var_4 = (0, 0, var_0 / var_2);
 
-  if(isDefined(var_3) && var_3 < 1.0)
+  if(isDefined(var_3) && var_3 < 1.0) {
     self _meth_82B1(self._id_126DB, var_3);
+  }
 
   for(var_5 = 0; var_5 < var_2; var_5++) {
     self _meth_80F1(self.origin + var_4);
     scripts\engine\utility::waitframe();
   }
 
-  if(isDefined(var_3) && var_3 < 1.0)
+  if(isDefined(var_3) && var_3 < 1.0) {
     self _meth_82B1(self._id_126DB, 1.0);
+  }
 }
 
 _id_89F8(var_0) {
-  if(var_0 == "traverse_death")
+  if(var_0 == "traverse_death") {
     return _id_89F6();
-  else if(var_0 == "traverse_align")
+  } else if(var_0 == "traverse_align") {
     return _id_89F5();
-  else if(var_0 == "traverse_drop")
+  } else if(var_0 == "traverse_drop") {
     return _id_89F7();
+  }
 }
 
 _id_89F6() {
@@ -210,10 +219,11 @@ _id_89F7() {
   var_8 = 0 - var_5[2];
   var_9 = var_8 - var_3;
 
-  if(var_8 < var_3)
+  if(var_8 < var_3) {
     var_10 = var_8 / var_3;
-  else
+  } else {
     var_10 = 1;
+  }
 
   var_11 = (var_6 - var_4) / 3.0;
   var_12 = (var_6 - var_7) / 3.0;
@@ -243,8 +253,9 @@ _id_D55E(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   var_4 = getdvarint("ai_debug_doublejump", 0);
 
-  if(var_4 != 3 && var_4 != 4)
+  if(var_4 != 3 && var_4 != 4) {
     _id_3E58(var_1);
+  }
 
   self._id_DC1A = 1;
   var_5 = self _meth_8148();
@@ -345,22 +356,25 @@ _id_7E83(var_0, var_1, var_2, var_3, var_4) {
 _id_5AE3(var_0, var_1, var_2, var_3) {
   var_4 = var_3[2] - var_2.origin[2];
 
-  if(var_4 < 0)
+  if(var_4 < 0) {
     return 0;
+  }
 
   if(isDefined(var_2._id_A4C9) && getdvarint("ai_debug_doublejump", 0) != 2) {
     var_5 = var_2._id_A4C9;
     var_6 = var_2.angles - var_2._id_10DCE;
 
-    if(var_6 != (0, 0, 0))
+    if(var_6 != (0, 0, 0)) {
       var_5 = rotatevector(var_5, var_6);
+    }
 
     var_7 = var_2.origin + var_5;
     var_8 = var_7[2];
     var_8 = var_8 - 44;
 
-    if(var_3[2] < var_8)
+    if(var_3[2] < var_8) {
       return 0;
+    }
   }
 
   var_9 = var_3 - var_2.origin;
@@ -369,8 +383,9 @@ _id_5AE3(var_0, var_1, var_2, var_3) {
   var_11 = _id_7E83(var_0, var_1, var_3, var_10, "footstep_left_small");
   var_12 = var_11 - var_2.origin;
 
-  if(vectordot(var_12, var_9) < 0)
+  if(vectordot(var_12, var_9) < 0) {
     return 0;
+  }
 
   return 1;
 }
@@ -394,15 +409,17 @@ _id_3E04(var_0, var_1, var_2, var_3) {
 }
 
 _id_81D8() {
-  if(isDefined(self._id_126C5))
+  if(isDefined(self._id_126C5)) {
     return self._id_126C5;
+  }
 
   return self _meth_8148();
 }
 
 _id_81D7() {
-  if(isDefined(self._id_126C3))
+  if(isDefined(self._id_126C3)) {
     return self._id_126C3;
+  }
 
   return self _meth_8146();
 }
@@ -437,8 +454,9 @@ doublejumpterminate(var_0, var_1, var_2) {
 }
 
 doublejumpearlyterminate(var_0, var_1, var_2) {
-  if(!scripts\asm\asm::_id_232B(var_1, "end"))
+  if(!scripts\asm\asm::_id_232B(var_1, "end")) {
     doublejumpterminate(var_0, var_1, var_2);
+  }
 }
 
 isdriving(var_0, var_1, var_2, var_3) {
@@ -451,8 +469,9 @@ _id_CF24(var_0, var_1, var_2, var_3) {
   var_5 = _id_81D7();
   var_6 = var_4.angles - var_4._id_10DCE;
 
-  if(var_6 != (0, 0, 0))
+  if(var_6 != (0, 0, 0)) {
     var_5 = rotatevector(var_5, var_6);
+  }
 
   var_7 = undefined;
   var_8 = getdvarint("ai_debug_doublejump", 0);
@@ -461,8 +480,9 @@ _id_CF24(var_0, var_1, var_2, var_3) {
     if(isDefined(var_4._id_A4C9)) {
       var_9 = var_4._id_A4C9;
 
-      if(var_6 != (0, 0, 0))
+      if(var_6 != (0, 0, 0)) {
         var_9 = rotatevector(var_9, var_6);
+      }
 
       var_7 = var_4.origin + var_9;
       var_10 = var_7[2];
@@ -498,8 +518,9 @@ _id_CF24(var_0, var_1, var_2, var_3) {
     var_18 = 1;
     var_20 = getnotetracktimes(var_13, "gravity on");
 
-    if(isDefined(var_20) && var_20.size > 0)
+    if(isDefined(var_20) && var_20.size > 0) {
       var_19 = var_20[0];
+    }
   }
 
   var_15 = (var_15[0], var_15[1], 0);
@@ -511,15 +532,17 @@ _id_3ED2(var_0, var_1, var_2) {
   var_3 = _id_81D7();
   var_4 = "double_jump_up";
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_4 = "double_jump_" + var_2;
-  else if(var_3[2] < self.origin[2])
+  } else if(var_3[2] < self.origin[2]) {
     var_4 = "double_jump_down";
+  }
 
-  if(self.asm.footsteps.foot == "right")
+  if(self.asm.footsteps.foot == "right") {
     var_5 = "right_";
-  else
+  } else {
     var_5 = "left_";
+  }
 
   var_4 = var_5 + var_4;
   var_6 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_4);
@@ -539,8 +562,9 @@ _id_820D(var_0, var_1) {
 }
 
 _id_100BF(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return 0;
+  }
 
   var_4 = self.enemy.origin;
   var_5 = self._id_126C5;
@@ -552,8 +576,9 @@ _id_100BF(var_0, var_1, var_2, var_3) {
   var_9 = vectorNormalize(var_4 - var_6);
   var_10 = vectordot(var_8, var_9);
 
-  if(var_10 < 0.2588)
+  if(var_10 < 0.2588) {
     return 0;
+  }
 
   return 1;
 }
@@ -570,8 +595,9 @@ _id_812B(var_0) {
 _id_11657(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon(var_0 + "_finished");
 
-  if(var_1 > 0)
+  if(var_1 > 0) {
     wait(var_1);
+  }
 
   var_6 = var_2 / var_3;
   var_7 = self.origin[2];
@@ -594,18 +620,20 @@ _id_11657(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_16 = self.origin + var_6;
     self _meth_80F1(var_16);
 
-    if(var_10 + 1 < var_3)
+    if(var_10 + 1 < var_3) {
       scripts\engine\utility::waitframe();
+    }
   }
 
   self _meth_82B1(var_4, 1);
 }
 
 _id_138D4(var_0, var_1) {
-  if(var_0 == "start_jump")
+  if(var_0 == "start_jump") {
     thread _id_89BB(var_1);
-  else if(var_0 == "end_mantle")
+  } else if(var_0 == "end_mantle") {
     self animmode("gravity");
+  }
 }
 
 _id_89BB(var_0, var_1, var_2) {
@@ -619,8 +647,9 @@ _id_89BB(var_0, var_1, var_2) {
   self endon(var_3 + "_finished");
   var_10 = getanimlength(var_4);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = (gettime() - var_6) * 0.001;
+  }
 
   var_11 = var_1 / var_10;
   var_12 = getnotetracktimes(var_4, "end_jump");
@@ -641,18 +670,20 @@ _id_89BB(var_0, var_1, var_2) {
   var_14 = getmovedelta(var_4, var_11, var_7);
   var_15 = self localtoworldcoords(var_14);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   if(var_9) {
     var_16 = distance(self.origin, var_15);
     var_17 = distance(self.origin, var_5);
     var_2 = var_16 / var_17;
 
-    if(var_2 < 0.7)
+    if(var_2 < 0.7) {
       var_2 = 0.7;
-    else if(var_2 > 1.3)
+    } else if(var_2 > 1.3) {
       var_2 = 1.3;
+    }
   }
 
   var_19 = var_5 - var_15;
@@ -689,8 +720,9 @@ _id_820F(var_0) {
   var_5 = var_3 - var_0.origin;
   var_6 = vectordot(var_4, var_5);
 
-  if(var_6 > 0)
+  if(var_6 > 0) {
     return "right";
+  }
 
   return "left";
 }
@@ -731,8 +763,9 @@ _id_D5CF(var_0, var_1, var_2, var_3) {
   self orientmode("face angle", self.angles[1]);
   self.useanimgoalweight = 1;
 
-  if(isDefined(var_3) && var_3 == "shoot")
+  if(isDefined(var_3) && var_3 == "shoot") {
     _id_FAF7();
+  }
 
   var_4 = _id_0A1E::asm_getallanimsforstate(var_0, var_1);
   var_5 = getnotetracktimes(var_4, "wall_contact");
@@ -746,8 +779,9 @@ _id_D5CF(var_0, var_1, var_2, var_3) {
   _id_0A1E::_id_2369(var_0, var_1, var_4);
   var_10 = _id_0A1E::_id_231F(var_0, var_1, scripts\asm\asm::_id_2341(var_0, var_1));
 
-  if(var_10 == "end")
+  if(var_10 == "end") {
     thread scripts\asm\asm::_id_2310(var_0, var_1, 0);
+  }
 }
 
 _id_820C(var_0) {
@@ -773,8 +807,9 @@ _id_D5D2(var_0, var_1, var_2, var_3) {
   var_10 = 1.0;
   var_11 = getnotetracktimes(var_4, "code_move");
 
-  if(isDefined(var_11) && var_11.size > 0)
+  if(isDefined(var_11) && var_11.size > 0) {
     var_10 = var_11[0];
+  }
 
   _id_D50F(var_0, var_1, var_4, var_2, var_9, var_8, var_10, 0, 1);
   self _meth_80F1(var_9, var_8);
@@ -784,14 +819,17 @@ _id_D5D2(var_0, var_1, var_2, var_3) {
 _id_D50F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self endon(var_1 + "_finished");
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     var_6 = 1;
+  }
 
-  if(!isDefined(var_7))
+  if(!isDefined(var_7)) {
     var_7 = 0;
+  }
 
-  if(!isDefined(var_8))
+  if(!isDefined(var_8)) {
     var_8 = 0;
+  }
 
   self _meth_80F1(self.origin, var_5);
   self animmode("noclip");
@@ -804,18 +842,20 @@ _id_D50F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 }
 
 _id_3F0D(var_0, var_1, var_2) {
-  if(isDefined(self._id_138B9))
+  if(isDefined(self._id_138B9)) {
     return self._id_138B9;
+  }
 
   var_3 = self._id_138BC;
   var_4 = angleclamp180(self._id_138C1 - self.angles[1]);
   var_4 = abs(var_4);
 
   if(var_4 >= 22.5) {
-    if(var_4 > 67.5)
+    if(var_4 > 67.5) {
       var_3 = var_3 + "_90";
-    else
+    } else {
       var_3 = var_3 + "_45";
+    }
   }
 
   self._id_138B9 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
@@ -831,27 +871,31 @@ _id_3F0F(var_0, var_1, var_2) {
   var_7 = 0;
 
   if(var_6 >= 0) {
-    if(var_6 > 120)
+    if(var_6 > 120) {
       var_7 = 1;
+    }
   } else if(0 - var_6 > 240)
     var_7 = 1;
 
   if(var_7 == 0) {
     var_8 = distancesquared(self.origin, var_5);
 
-    if(var_8 > 40000)
+    if(var_8 > 40000) {
       var_7 = 1;
+    }
   }
 
   var_9 = "left_";
 
-  if(self.asm.footsteps.foot == "right")
+  if(self.asm.footsteps.foot == "right") {
     var_9 = "right_";
+  }
 
-  if(var_7)
+  if(var_7) {
     var_3 = var_9 + "double_jump";
-  else
+  } else {
     var_3 = var_9 + "single_jump";
+  }
 
   var_10 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
   return var_10;
@@ -862,23 +906,27 @@ _id_F22D(var_0, var_1, var_2, var_3) {
   wait(var_1);
   scripts\asm\asm::asm_fireevent(var_0, var_2);
 
-  if(var_3)
+  if(var_3) {
     self notify(var_2);
+  }
 }
 
 _id_8BCB(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self._id_138BA))
+  if(!isDefined(self._id_138BA)) {
     return 0;
+  }
 
   var_4 = self._id_126C5;
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
   var_5 = self._id_138BA + 2;
 
-  if(var_4._id_138A6._id_C050.size <= var_5)
+  if(var_4._id_138A6._id_C050.size <= var_5) {
     return 0;
+  }
 
   return 1;
 }
@@ -891,10 +939,11 @@ _id_D5D0(var_0, var_1, var_2, var_3) {
   var_5 = _id_820D(var_4, self._id_138BA);
   var_6 = self.angles;
 
-  if(self._id_138BC == "left")
+  if(self._id_138BC == "left") {
     self._id_138BC = "right";
-  else
+  } else {
     self._id_138BC = "left";
+  }
 
   var_7 = _id_0A1E::asm_getallanimsforstate(var_0, var_1);
   _id_D50F(var_0, var_1, var_7, var_2, var_5, var_6);
@@ -903,21 +952,24 @@ _id_D5D0(var_0, var_1, var_2, var_3) {
 _id_8211(var_0) {
   var_1 = var_0.angles - var_0._id_138A6._id_10DCE;
 
-  if(var_1 == (0, 0, 0))
+  if(var_1 == (0, 0, 0)) {
     return var_0.origin + var_0._id_138A6._id_B313;
+  }
 
   var_2 = rotatevector(var_0._id_138A6._id_B313, var_1);
   return var_0.origin + var_2;
 }
 
 _id_8210(var_0) {
-  if(!isDefined(var_0._id_138A6._id_B312))
+  if(!isDefined(var_0._id_138A6._id_B312)) {
     return undefined;
+  }
 
   var_1 = var_0.angles[1] - var_0._id_138A6._id_10DCE[1];
 
-  if(var_1 == 0)
+  if(var_1 == 0) {
     return var_0._id_138A6._id_B312;
+  }
 
   return (0, angleclamp180(var_0._id_138A6._id_B312[1] + var_1), 0);
 }
@@ -925,13 +977,15 @@ _id_8210(var_0) {
 _id_8212() {
   var_0 = self._id_126C5;
 
-  if(!isDefined(var_0._id_138A6._id_B313))
+  if(!isDefined(var_0._id_138A6._id_B313)) {
     return "none";
+  }
 
   var_1 = _id_8211(var_0);
 
-  if(var_1[2] >= self.origin[2])
+  if(var_1[2] >= self.origin[2]) {
     return "high";
+  }
 
   return "low";
 }
@@ -939,8 +993,9 @@ _id_8212() {
 _id_100C0(var_0, var_1, var_2, var_3) {
   var_4 = self._id_126C5;
 
-  if(!isDefined(var_4._id_138A6._id_331A))
+  if(!isDefined(var_4._id_138A6._id_331A)) {
     return 0;
+  }
 
   return var_4._id_138A6._id_331A;
 }
@@ -966,8 +1021,9 @@ _id_D5D4(var_0, var_1, var_2, var_3) {
   var_14 = length(var_13);
   var_14 = var_14 - var_12;
 
-  if(var_14 < 0)
+  if(var_14 < 0) {
     var_14 = 0;
+  }
 
   var_15 = var_14 / var_7;
   var_16 = getanimlength(var_5);
@@ -998,20 +1054,23 @@ _id_3F10(var_0, var_1, var_2) {
   var_6 = 0;
 
   if(var_5 >= 0) {
-    if(var_5 > 120)
+    if(var_5 > 120) {
       var_6 = 1;
+    }
   } else if(0 - var_5 > 240)
     var_6 = 1;
 
   if(var_6 == 0) {
     var_7 = distancesquared(self.origin, var_4);
 
-    if(var_7 > 46225)
+    if(var_7 > 46225) {
       var_6 = 1;
+    }
   }
 
-  if(var_6)
+  if(var_6) {
     var_3 = var_3 + "_double";
+  }
 
   var_4 = self._id_126C3;
   var_8 = self._id_126C5;
@@ -1023,10 +1082,11 @@ _id_3F10(var_0, var_1, var_2) {
   var_11 = abs(var_11);
 
   if(var_11 >= 22.5) {
-    if(var_11 > 67.5)
+    if(var_11 > 67.5) {
       var_3 = var_3 + "_90";
-    else
+    } else {
       var_3 = var_3 + "_45";
+    }
   }
 
   var_12 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
@@ -1043,31 +1103,34 @@ _id_D5D3(var_0, var_1, var_2, var_3) {
   var_9 = getnotetracktimes(var_8, "ground");
   scripts\anim\combat::_id_F296();
 
-  if(isDefined(var_9) && var_9.size > 0)
+  if(isDefined(var_9) && var_9.size > 0) {
     var_7 = var_9[0];
-  else {
+  } else {
     var_10 = getnotetracktimes(var_8, "end_double_jump");
 
-    if(isDefined(var_10) && var_10.size > 0)
+    if(isDefined(var_10) && var_10.size > 0) {
       var_7 = var_10[0];
-    else {
+    } else {
       var_11 = getnotetracktimes(var_8, "end_jump");
 
-      if(isDefined(var_11) && var_11.size > 0)
+      if(isDefined(var_11) && var_11.size > 0) {
         var_7 = var_11[0];
+      }
     }
   }
 
-  if(soundexists("wallrun_end_npc"))
+  if(soundexists("wallrun_end_npc")) {
     self playSound("wallrun_end_npc");
+  }
 
   _id_D50F(var_0, var_1, var_8, var_2, var_5, var_6, var_7, 1, 1);
   thread _id_11705(var_0, var_1);
 }
 
 _id_9EBA(var_0, var_1, var_2, var_3) {
-  if(isDefined(self._id_126C5))
+  if(isDefined(self._id_126C5)) {
     return 0;
+  }
 
   return 1;
 }
@@ -1129,14 +1192,17 @@ _id_D55B(var_0, var_1, var_2, var_3) {
   var_5 = 1.0;
   var_6 = undefined;
 
-  if(getdvarint("ai_wall_run_use_align_notetrack", 1) == 1)
+  if(getdvarint("ai_wall_run_use_align_notetrack", 1) == 1) {
     var_6 = getnotetracktimes(var_4, "align");
+  }
 
-  if(!isDefined(var_6) || var_6.size == 0)
+  if(!isDefined(var_6) || var_6.size == 0) {
     var_6 = getnotetracktimes(var_4, "code_move");
+  }
 
-  if(isDefined(var_6) && var_6.size > 0)
+  if(isDefined(var_6) && var_6.size > 0) {
     var_5 = var_6[0];
+  }
 
   var_7 = getmovedelta(var_4, 0, var_5);
   var_8 = getangledelta(var_4, 0, var_5);
@@ -1176,9 +1242,9 @@ _id_3F07(var_0, var_1, var_2) {
   var_3 = anglesToForward(self.angles);
   var_4 = vectortoangles(var_3);
 
-  if(self._id_126C5.animscript == "wall_run")
+  if(self._id_126C5.animscript == "wall_run") {
     var_5 = vectortoangles(_id_820D(self._id_126C5, 0) - self.origin);
-  else {
+  } else {
     var_6 = self._id_126C3 - self._id_126C5.origin;
     var_6 = (var_6[0], var_6[1], 0);
     var_5 = vectortoangles(var_6);
@@ -1189,8 +1255,9 @@ _id_3F07(var_0, var_1, var_2) {
   var_9 = getangleindex(var_8, 22.5);
   var_10 = _id_0C5D::_id_8174(var_1, undefined, 1);
 
-  if(!isDefined(var_10[var_9]))
+  if(!isDefined(var_10[var_9])) {
     return undefined;
+  }
 
   return var_10[var_9];
 }
@@ -1198,14 +1265,16 @@ _id_3F07(var_0, var_1, var_2) {
 _id_FAF0(var_0, var_1, var_2, var_3) {
   var_4 = self _meth_84F9(120);
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
   var_5 = var_4["node"];
   var_6 = var_4["position"];
 
-  if(!isDefined(var_5) || !isDefined(var_5.animscript))
+  if(!isDefined(var_5) || !isDefined(var_5.animscript)) {
     return 0;
+  }
 
   self._id_126C5 = var_5;
   self._id_126C3 = var_6;
@@ -1221,8 +1290,9 @@ _id_4123(var_0, var_1, var_2, var_3) {
 _id_FFB7(var_0, var_1, var_2, var_3) {
   var_4 = distance2dsquared(self.origin, _id_820D(self._id_126C5, 1));
 
-  if(var_4 < 144)
+  if(var_4 < 144) {
     return 1;
+  }
 
   return 0;
 }
@@ -1231,18 +1301,21 @@ _id_FFFD(var_0, var_1, var_2, var_3) {
   if(_id_9EBA(var_0, var_1, var_2, var_3)) {
     _id_FAF0(var_0, var_1, var_2, var_3);
 
-    if(!isDefined(self._id_126C5))
+    if(!isDefined(self._id_126C5)) {
       return 0;
+    }
 
-    if(self._id_126C5.animscript != "wall_run")
+    if(self._id_126C5.animscript != "wall_run") {
       return 0;
+    }
 
     var_4 = self._id_126C5;
     var_5 = vectorNormalize(_id_820D(var_4, 0) - self.origin);
     var_6 = _id_0C65::_id_371C(var_1, var_2, var_5, 0, 1);
 
-    if(!isDefined(var_6))
+    if(!isDefined(var_6)) {
       return 0;
+    }
 
     self.a._id_FC61 = var_6;
     self._id_138BC = _id_820F(self._id_126C5);
@@ -1253,8 +1326,9 @@ _id_FFFD(var_0, var_1, var_2, var_3) {
 }
 
 _id_100B3(var_0, var_1, var_2, var_3) {
-  if(var_2 == self._id_126C5.animscript)
+  if(var_2 == self._id_126C5.animscript) {
     return 1;
+  }
 
   return 0;
 }
@@ -1273,14 +1347,17 @@ _id_9FB1(var_0) {
 }
 
 _id_FFFC(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self._id_126C5))
+  if(!isDefined(self._id_126C5)) {
     return 0;
+  }
 
-  if(!_id_9FB1(self._id_126C5.animscript))
+  if(!_id_9FB1(self._id_126C5.animscript)) {
     return 0;
+  }
 
-  if(!self.facemotion)
+  if(!self.facemotion) {
     return 0;
+  }
 
   var_4 = undefined;
 
@@ -1303,20 +1380,24 @@ _id_FFFC(var_0, var_1, var_2, var_3) {
   var_12 = _id_0C5D::_id_8174(var_2, undefined, 1);
   var_13 = var_12[var_11];
 
-  if(!isDefined(var_13))
+  if(!isDefined(var_13)) {
     return 0;
+  }
 
   var_14 = 1.0;
   var_15 = undefined;
 
-  if(getdvarint("ai_wall_run_use_align_notetrack", 1) == 1)
+  if(getdvarint("ai_wall_run_use_align_notetrack", 1) == 1) {
     var_15 = getnotetracktimes(var_13, "align");
+  }
 
-  if(!isDefined(var_15) || var_15.size == 0)
+  if(!isDefined(var_15) || var_15.size == 0) {
     var_15 = getnotetracktimes(var_13, "code_move");
+  }
 
-  if(isDefined(var_15) && var_15.size > 0)
+  if(isDefined(var_15) && var_15.size > 0) {
     var_14 = var_15[0];
+  }
 
   var_16 = getmovedelta(var_13, 0, var_14);
   var_17 = getangledelta(var_13, 0, var_14);
@@ -1329,23 +1410,26 @@ _id_FFFC(var_0, var_1, var_2, var_3) {
     var_22 = vectordot(var_8, var_21);
 
     if(var_22 > 0.707) {
-      if(abs(var_20) > 10)
+      if(abs(var_20) > 10) {
         return 0;
+      }
     } else if(abs(var_20) > 64)
       return 0;
   } else if(var_20 > 10)
     return 0;
 
-  if(self._id_126C5.animscript == "wall_run")
+  if(self._id_126C5.animscript == "wall_run") {
     self._id_138BC = var_4;
+  }
 
   return 1;
 }
 
 _id_89FB(var_0) {
   if(var_0 == "wall_contact") {
-    if(soundexists("wallrun_start_npc"))
+    if(soundexists("wallrun_start_npc")) {
       self playSound("wallrun_start_npc");
+    }
   }
 }
 

@@ -54,8 +54,9 @@ slam_execute(var_0, var_1, var_2) {
     if(var_3 < 576) {
       return;
     }
-    if(var_3 > squared(600))
+    if(var_3 > squared(600)) {
       return;
+    }
   }
 
   var_4 = var_0 scripts\engine\utility::spawn_tag_origin();
@@ -101,17 +102,19 @@ slam_executeinternal(var_0, var_1, var_2, var_3) {
     var_12 = undefined;
     var_13 = distancesquared(var_1, var_11.origin);
 
-    if(var_13 <= var_6)
+    if(var_13 <= var_6) {
       var_12 = 250;
-    else if(var_13 <= var_7)
+    } else if(var_13 <= var_7) {
       var_12 = 100;
-    else
+    } else {
       continue;
+    }
 
     var_11 scripts\cp\cp_weapon::shellshockondamage("MOD_EXPLOSIVE", var_12);
 
-    if(var_12 >= var_11.health)
+    if(var_12 >= var_11.health) {
       var_11.customdeath = 1;
+    }
 
     var_11 dodamage(var_12, var_1, var_0, var_0, "MOD_CRUSH");
   }
@@ -130,8 +133,9 @@ slam_delent(var_0, var_1) {
   var_0 scripts\engine\utility::waittill_any("death", "disconnect", "slam_finished");
   scripts\engine\utility::waitframe();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 delete();
+  }
 }
 
 _id_102CC(var_0, var_1) {

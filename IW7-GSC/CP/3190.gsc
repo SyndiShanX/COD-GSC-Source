@@ -5,11 +5,13 @@
 
 _id_8E15(var_0, var_1, var_2, var_3) {
   if(var_0 == "remove_helmet") {
-    if(self.helmetlocation == "head")
+    if(self.helmetlocation == "head") {
       scripts\mp\agents\zombie_brute\zombie_brute_agent::_id_BCBC();
+    }
   } else if(var_0 == "put_on_helmet") {
-    if(self.helmetlocation == "hand")
+    if(self.helmetlocation == "hand") {
       scripts\mp\agents\zombie_brute\zombie_brute_agent::_id_BCBD();
+    }
   }
 }
 
@@ -81,35 +83,42 @@ _id_D48D(var_0, var_1, var_2, var_3) {
 }
 
 _id_1001D(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.zombiepiece))
+  if(isDefined(self.zombiepiece)) {
     return 0;
+  }
 
-  if(!isDefined(self.zombiepiecetarget))
+  if(!isDefined(self.zombiepiecetarget)) {
     return 0;
+  }
 
-  if(scripts\engine\utility::is_true(self.bwanttograbzombie))
+  if(scripts\engine\utility::is_true(self.bwanttograbzombie)) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_100AC(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.zombiepiece) || !isDefined(self.bwantrangeattack))
+  if(!isDefined(self.zombiepiece) || !isDefined(self.bwantrangeattack)) {
     return 0;
+  }
 
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return 0;
+  }
 
-  if(self.helmetlocation == "hand")
+  if(self.helmetlocation == "hand") {
     return 0;
+  }
 
   var_4 = anglesToForward(self.angles);
   var_5 = self.enemy.origin - self.origin;
   var_5 = (var_5[0], var_5[1], 0);
   var_5 = vectorNormalize(var_5);
 
-  if(vectordot(var_4, var_5) < 0)
+  if(vectordot(var_4, var_5) < 0) {
     return 0;
+  }
 
   return 1;
 }
@@ -127,15 +136,17 @@ _id_10055(var_0, var_1, var_2, var_3) {
     break;
   }
 
-  if(var_5 > 1)
+  if(var_5 > 1) {
     return 1;
+  }
 
   return randomint(100) < 50;
 }
 
 _id_3EFA(var_0, var_1, var_2) {
-  if(self.helmetlocation == "hand")
+  if(self.helmetlocation == "hand") {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "attack_slam_helmet");
+  }
 
   return scripts\asm\asm::asm_lookupanimfromalias(var_1, "attack_slam");
 }
@@ -152,8 +163,9 @@ _id_D51C(var_0, var_1, var_2, var_3) {
 }
 
 _id_FFE2(var_0, var_1, var_2, var_3) {
-  if(scripts\engine\utility::is_true(self.bblockedbyfrozenzombies))
+  if(scripts\engine\utility::is_true(self.bblockedbyfrozenzombies)) {
     return 1;
+  }
 
   return 0;
 }
@@ -166,8 +178,9 @@ _id_895D(var_0) {
 
   foreach(var_3 in level.players) {
     if(isalive(var_3)) {
-      if(distancesquared(self.origin, var_3.origin) < 40000)
+      if(distancesquared(self.origin, var_3.origin) < 40000) {
         scripts\asm\zombie\melee::domeleedamage(var_3, var_1, "MOD_IMPACT");
+      }
     }
   }
 
@@ -195,31 +208,37 @@ _id_100A0(var_0, var_1, var_2, var_3) {
 }
 
 _id_FFF1(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return 0;
+  }
 
-  if(scripts\engine\utility::is_true(self.blaserattack))
+  if(scripts\engine\utility::is_true(self.blaserattack)) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_10063(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.desiredhelmetlocation) || !isDefined(self.helmetlocation))
+  if(!isDefined(self.desiredhelmetlocation) || !isDefined(self.helmetlocation)) {
     return 0;
+  }
 
-  if(self.helmetlocation != self.desiredhelmetlocation && self.desiredhelmetlocation == "head")
+  if(self.helmetlocation != self.desiredhelmetlocation && self.desiredhelmetlocation == "head") {
     return 1;
+  }
 
   return 0;
 }
 
 shouldreloadwhilemoving(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.desiredhelmetlocation) || !isDefined(self.helmetlocation))
+  if(!isDefined(self.desiredhelmetlocation) || !isDefined(self.helmetlocation)) {
     return 0;
+  }
 
-  if(self.helmetlocation != self.desiredhelmetlocation && self.desiredhelmetlocation == "hand")
+  if(self.helmetlocation != self.desiredhelmetlocation && self.desiredhelmetlocation == "hand") {
     return 1;
+  }
 
   return 0;
 }
@@ -259,8 +278,9 @@ _id_116F8(var_0, var_1, var_2) {
 }
 
 terminatelaserattackprep(var_0, var_1, var_2) {
-  if(!_id_1FB4(var_0, var_1, undefined, var_2))
+  if(!_id_1FB4(var_0, var_1, undefined, var_2)) {
     _id_116F8(var_0, var_1, var_2);
+  }
 }
 
 _id_8979(var_0) {
@@ -269,8 +289,9 @@ _id_8979(var_0) {
   self setscriptablepartstate("laser_flare", "active");
   var_1 = getdvarint("scr_debugLaser", 0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_2 = distance(self.origin, self.lookposition);
   wait 0.2;
@@ -281,10 +302,11 @@ _id_8979(var_0) {
     wait 0.05;
   }
 
-  if(var_1)
+  if(var_1) {
     var_3 = 99999999;
-  else
+  } else {
     var_3 = 60.0;
+  }
 
   for(var_4 = 0; var_4 < var_3; var_4++) {
     if(isDefined(self.enemy)) {
@@ -292,9 +314,9 @@ _id_8979(var_0) {
       var_6 = var_5 - self.lookposition;
       var_7 = length(var_6);
 
-      if(var_7 < 10.0)
+      if(var_7 < 10.0) {
         self.lookposition = var_5;
-      else {
+      } else {
         var_8 = vectorNormalize(var_6);
         var_9 = var_8 * 200 * 0.05;
         self.lookposition = self.lookposition + var_9;
@@ -328,8 +350,9 @@ _id_FF5C() {
   if(isDefined(var_3["entity"])) {
     var_4 = var_3["entity"];
 
-    if(isDefined(var_4.agent_type) && var_4.agent_type == "generic_zombie" && !isDefined(var_4.flung))
+    if(isDefined(var_4.agent_type) && var_4.agent_type == "generic_zombie" && !isDefined(var_4.flung)) {
       var_4 thread _id_A869(self);
+    }
   }
 }
 
@@ -337,8 +360,9 @@ has_tag(var_0, var_1) {
   var_2 = getnumparts(var_0);
 
   for(var_3 = 0; var_3 < var_2; var_3++) {
-    if(tolower(getpartname(var_0, var_3)) == tolower(var_1))
+    if(tolower(getpartname(var_0, var_3)) == tolower(var_1)) {
       return 1;
+    }
   }
 
   return 0;
@@ -414,20 +438,23 @@ _id_D499(var_0, var_1, var_2, var_3) {
 _id_3EC3(var_0, var_1, var_2) {
   var_3 = self getanimentrycount(var_1);
 
-  if(var_3 == 1)
+  if(var_3 == 1) {
     return "helmet";
+  }
 
-  if(self.helmetlocation == "head")
+  if(self.helmetlocation == "head") {
     return "helmet";
-  else
+  } else {
     return "no_helmet";
+  }
 }
 
 _id_3EC1(var_0, var_1, var_2) {
   var_3 = self getanimentrycount(var_1);
 
-  if(var_3 == 1)
+  if(var_3 == 1) {
     return 0;
+  }
 
   return randomintrange(0, var_3);
 }
@@ -435,13 +462,15 @@ _id_3EC1(var_0, var_1, var_2) {
 _id_3EC2(var_0, var_1, var_2) {
   var_3 = self getanimentrycount(var_1);
 
-  if(var_3 == 1)
+  if(var_3 == 1) {
     return "duck_run";
+  }
 
-  if(self.helmetlocation == "head")
+  if(self.helmetlocation == "head") {
     return "duck_run";
-  else
+  } else {
     return "sprint_run";
+  }
 }
 
 _id_1003B(var_0, var_1, var_2, var_3) {
@@ -463,13 +492,15 @@ _id_D4E7(var_0, var_1, var_2, var_3) {
 _id_3EC0(var_0, var_1, var_2) {
   var_3 = self getanimentrycount(var_1);
 
-  if(var_3 == 1)
+  if(var_3 == 1) {
     return "helmet_on";
+  }
 
-  if(self.helmetlocation == "head")
+  if(self.helmetlocation == "head") {
     return "helmet_on";
-  else
+  } else {
     return "helmet_off";
+  }
 }
 
 _id_FFEB(var_0, var_1, var_2, var_3) {
@@ -479,13 +510,15 @@ _id_FFEB(var_0, var_1, var_2, var_3) {
 _id_3EC9(var_0, var_1, var_2) {
   var_3 = self getanimentrycount(var_1);
 
-  if(var_3 == 1)
+  if(var_3 == 1) {
     var_2 = var_2 + "_helmet";
+  }
 
-  if(self.helmetlocation == "head")
+  if(self.helmetlocation == "head") {
     var_2 = var_2 + "_helmet";
-  else
+  } else {
     var_2 = var_2 + "_no_helmet";
+  }
 
   return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_2);
 }

@@ -45,15 +45,17 @@ _id_12AB4(var_0) {
   thread scripts\sp\utility::_id_56BA("zerog_ascend_hint");
   scripts\engine\utility::flag_wait_or_timeout("zerog_ascend", 4);
 
-  if(!scripts\engine\utility::flag("zerog_ascend"))
+  if(!scripts\engine\utility::flag("zerog_ascend")) {
     scripts\engine\utility::flag_set("zerog_ascend");
+  }
 
   wait 1;
   thread scripts\sp\utility::_id_56BA("zerog_descend_hint");
   scripts\engine\utility::flag_wait_or_timeout("zerog_descend", 4);
 
-  if(!scripts\engine\utility::flag("zerog_descend"))
+  if(!scripts\engine\utility::flag("zerog_descend")) {
     scripts\engine\utility::flag_set("zerog_descend");
+  }
 
   wait 1;
   thread _id_13EB3(var_0);
@@ -97,8 +99,9 @@ _id_13987(var_0) {
   level endon(var_0);
   level endon("zerog_descend");
 
-  while(!level.player _meth_843B())
+  while(!level.player _meth_843B()) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_set("zerog_descend");
 }
@@ -107,8 +110,9 @@ _id_13988(var_0) {
   level endon("zerog_grapple");
   level endon(var_0);
 
-  while(!level.player _id_0F31::_id_9E14())
+  while(!level.player _id_0F31::_id_9E14()) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_set("zerog_grapple");
 }
@@ -148,15 +152,17 @@ _id_13EB3(var_0) {
   level.player givemaxammo("trackingfragzerog");
 
   if(level.player _id_0F31::_id_9E14()) {
-    while(level.player _id_0F31::_id_9E14())
+    while(level.player _id_0F31::_id_9E14()) {
       scripts\engine\utility::waitframe();
+    }
   }
 
   thread scripts\sp\utility::_id_56BA("zerog_grenade_hint");
   scripts\engine\utility::flag_wait_or_timeout("zerog_grenade", 4);
 
-  if(!scripts\engine\utility::flag("zerog_grenade"))
+  if(!scripts\engine\utility::flag("zerog_grenade")) {
     scripts\engine\utility::flag_set("zerog_grenade");
+  }
 }
 
 _id_8971(var_0) {
@@ -165,8 +171,9 @@ _id_8971(var_0) {
   thread scripts\sp\utility::_id_56BA("zerog_rotate_hint");
   scripts\engine\utility::flag_wait_or_timeout("zerog_rotate", 4);
 
-  if(!scripts\engine\utility::flag("zerog_rotate"))
+  if(!scripts\engine\utility::flag("zerog_rotate")) {
     scripts\engine\utility::flag_set("zerog_rotate");
+  }
 }
 
 _id_8970(var_0) {

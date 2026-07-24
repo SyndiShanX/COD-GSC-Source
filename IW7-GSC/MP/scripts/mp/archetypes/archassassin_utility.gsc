@@ -29,17 +29,20 @@ playbodyfx(var_0, var_1) {
   var_3 = "bullet_atomizer_impact_npc";
   var_4 = (0, 0, 0);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_4 = var_1;
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_3 = var_0;
+  }
 
   self playSound(var_3);
 
   foreach(var_6 in var_2) {
-    foreach(var_8 in var_6)
-    playFX(level._effect["atomize_body"], var_8["org"] + var_4, anglesToForward(var_8["angles"]));
+    foreach(var_8 in var_6) {
+      playFX(level._effect["atomize_body"], var_8["org"] + var_4, anglesToForward(var_8["angles"]));
+    }
 
     wait 0.01;
   }

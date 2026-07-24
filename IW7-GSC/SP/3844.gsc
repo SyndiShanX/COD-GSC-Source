@@ -19,22 +19,26 @@ _id_9587() {
   foreach(var_2 in var_0) {
     var_2._id_4550 = var_2.script_type;
 
-    if(isDefined(var_2.script_parameters))
+    if(isDefined(var_2.script_parameters)) {
       var_2._id_E1B3 = var_2.script_parameters;
+    }
 
     var_2 thread _id_454E();
   }
 }
 
 _id_454E() {
-  if(isDefined(self.targetname))
+  if(isDefined(self.targetname)) {
     level._id_E993[self.targetname] = self;
+  }
 
-  if(!isDefined(level._id_E992[self._id_4550]))
+  if(!isDefined(level._id_E992[self._id_4550])) {
     level._id_E992[self._id_4550] = spawnStruct();
+  }
 
-  if(!isDefined(level._id_E992[self._id_4550]._id_454F))
+  if(!isDefined(level._id_E992[self._id_4550]._id_454F)) {
     level._id_E992[self._id_4550]._id_454F = [];
+  }
 
   level._id_E992[self._id_4550]._id_454F = scripts\engine\utility::array_add(level._id_E992[self._id_4550]._id_454F, self);
   self._id_E98B = 1;
@@ -87,8 +91,9 @@ _id_E990() {
         _id_12BD4();
 
         if(isDefined(self._id_13081) && self._id_13081 == 1) {
-          if(!issubstr(self.model, "_off"))
+          if(!issubstr(self.model, "_off")) {
             self setModel(self.model + "_off");
+          }
 
           break;
         }
@@ -100,8 +105,9 @@ _id_E990() {
       _id_12BD4();
 
       if(isDefined(self._id_13081) && self._id_13081 == 1) {
-        if(!issubstr(self.model, "_off"))
+        if(!issubstr(self.model, "_off")) {
           self setModel(self.model + "_off");
+        }
 
         break;
       }
@@ -129,16 +135,18 @@ _id_E991() {
     level.player._id_8C06 = 1;
     self._id_13081 = 1;
 
-    if(!issubstr(self.model, "_off"))
+    if(!issubstr(self.model, "_off")) {
       self setModel(self.model + "_off");
+    }
 
     _id_0F12::_id_FD0D(self);
   } else if(isDefined(level._id_AC74) && level._id_AC74 < 3) {
     _id_0F0A::_id_12E51(1);
     self._id_13081 = 1;
 
-    if(!issubstr(self.model, "_off"))
+    if(!issubstr(self.model, "_off")) {
       self setModel(self.model + "_off");
+    }
 
     _id_0F12::_id_FD0D(self);
   } else
@@ -150,54 +158,62 @@ _id_E991() {
 _id_E98D() {
   wait 1.0;
 
-  if(scripts\sp\utility::hastag(self.model, "tag_locked"))
+  if(scripts\sp\utility::hastag(self.model, "tag_locked")) {
     self showpart("tag_locked", self.model);
+  }
 
-  if(scripts\sp\utility::hastag(self.model, "tag_unlocked"))
+  if(scripts\sp\utility::hastag(self.model, "tag_unlocked")) {
     self hidepart("tag_unlocked", self.model);
+  }
 
   var_0 = "assault_system";
   thread _id_87D6();
   self._id_4D94 = spawnStruct();
 
-  if(isDefined(self._id_9026))
+  if(isDefined(self._id_9026)) {
     self._id_4D94.origin = self._id_9026.origin;
-  else
+  } else {
     self._id_4D94.origin = self gettagorigin("tag_use");
+  }
 
-  if(isDefined(self._id_885A))
+  if(isDefined(self._id_885A)) {
     self._id_4D94._id_885A = self._id_885A;
-  else if(isDefined(level._id_885A))
+  } else if(isDefined(level._id_885A)) {
     self._id_4D94._id_885A = level._id_885A;
-  else
+  } else {
     self._id_4D94._id_885A = 16;
+  }
 
-  if(isDefined(level._id_8851))
+  if(isDefined(level._id_8851)) {
     self._id_4D94._id_8851 = level._id_8851;
-  else
+  } else {
     self._id_4D94._id_8851 = 384;
+  }
 
   self._id_4D94._id_116C0 = self.script_objective;
   self._id_4D94.icon = "specialty_hardline";
   self._id_4D94._id_113AC = var_0;
   self._id_4D94.hintstring = "Generic Hack";
 
-  if(isDefined(self._id_8822))
+  if(isDefined(self._id_8822)) {
     self._id_4D94._id_8822 = self._id_8822;
-  else
+  } else {
     self._id_4D94._id_8822 = ::_id_7777;
+  }
 
   self._id_4D94._id_113A8 = level._id_FD5B.size;
   self._id_4D94._id_4BF9 = 0.0;
   self._id_4D94._id_DC04 = self._id_4D94.origin - (0, 0, 20);
 
-  if(isDefined(self._id_EF20))
+  if(isDefined(self._id_EF20)) {
     self._id_4D94._id_4C64 = self._id_EF20;
-  else
+  } else {
     self._id_4D94._id_4C64 = "generic_hack_complete";
+  }
 
-  if(isDefined(self._id_E99B) && isDefined(self._id_E99B._id_EDA0))
+  if(isDefined(self._id_E99B) && isDefined(self._id_E99B._id_EDA0)) {
     scripts\engine\utility::flag_wait(self._id_E99B._id_EDA0);
+  }
 
   _id_E98C();
 }
@@ -208,8 +224,9 @@ _id_E98C() {
   self._id_8804 = 0;
   self._id_32D9 = scripts\engine\utility::spawn_tag_origin(self._id_4D94.origin, self.angles);
 
-  if(isDefined(self.collision))
+  if(isDefined(self.collision)) {
     self.collision disconnectPaths();
+  }
 
   for(;;) {
     if(scripts\engine\utility::is_true(self._id_7274)) {
@@ -236,22 +253,27 @@ _id_E98C() {
     }
   }
 
-  if(scripts\sp\utility::hastag(self.model, "tag_locked"))
+  if(scripts\sp\utility::hastag(self.model, "tag_locked")) {
     self hidepart("tag_locked", self.model);
-
-  if(scripts\sp\utility::hastag(self.model, "tag_unlocked"))
-    self showpart("tag_unlocked", self.model);
-
-  if(isDefined(self._id_32D9))
-    self._id_32D9 _id_0E46::_id_DFE3();
-
-  if(isDefined(self._id_4550)) {
-    if(!issubstr(self.model, "_off"))
-      self setModel(self.model + "_off");
   }
 
-  if(isDefined(self._id_5A57) && self._id_5A57 == "sa_armory_loot_door")
+  if(scripts\sp\utility::hastag(self.model, "tag_unlocked")) {
+    self showpart("tag_unlocked", self.model);
+  }
+
+  if(isDefined(self._id_32D9)) {
+    self._id_32D9 _id_0E46::_id_DFE3();
+  }
+
+  if(isDefined(self._id_4550)) {
+    if(!issubstr(self.model, "_off")) {
+      self setModel(self.model + "_off");
+    }
+  }
+
+  if(isDefined(self._id_5A57) && self._id_5A57 == "sa_armory_loot_door") {
     thread scripts\sp\utility::play_sound_on_entity("sa_armory_door_unlock_01");
+  }
 
   self thread[[self._id_4D94._id_8822]]();
   _id_12BD4();
@@ -279,8 +301,9 @@ _id_87D6() {
 
   foreach(var_2 in var_0) {
     foreach(var_4 in level._id_E99C) {
-      if(var_2 istouching(var_4))
+      if(var_2 istouching(var_4)) {
         var_2 thread _id_87D7();
+      }
     }
   }
 }
@@ -311,8 +334,9 @@ _id_7777() {
 }
 
 _id_E98E() {
-  if(isDefined(self._id_EF20) && isDefined(level._id_74D5[self._id_EF20]))
+  if(isDefined(self._id_EF20) && isDefined(level._id_74D5[self._id_EF20])) {
     [[level._id_74D5[self._id_EF20]]]();
+  }
 
   wait 0.05;
 }
@@ -346,8 +370,9 @@ _id_7987(var_0, var_1, var_2) {
 
   foreach(var_5 in var_3) {
     if(isDefined(var_5._id_EE52)) {
-      if(var_5._id_EE52 == var_2)
+      if(var_5._id_EE52 == var_2) {
         return var_5;
+      }
     }
   }
 }
@@ -418,8 +443,9 @@ _id_AED7() {
     if(isDefined(var_2.script_noteworthy)) {
       switch (var_2.script_noteworthy) {
         case "sa_door_in_use_trigger":
-          if(isDefined(var_2._id_5978))
+          if(isDefined(var_2._id_5978)) {
             var_2._id_5978 _id_0F05::_id_AED6(0);
+          }
 
           break;
         default:
@@ -436,8 +462,9 @@ _id_12BD4() {
     if(isDefined(var_2.script_noteworthy)) {
       switch (var_2.script_noteworthy) {
         case "sa_door_in_use_trigger":
-          if(isDefined(var_2._id_5978))
+          if(isDefined(var_2._id_5978)) {
             var_2._id_5978 _id_0F05::_id_12BD3(1);
+          }
 
           break;
         default:
@@ -477,8 +504,9 @@ _id_FD30() {
     }
 
     foreach(var_7 in var_3) {
-      if(isDefined(var_7._id_37C2))
+      if(isDefined(var_7._id_37C2)) {
         var_7._id_37C2 delete();
+      }
     }
   }
 

@@ -23,16 +23,18 @@ _id_94EF() {
     var_1.origin = var_1.origin + (0, 0, 0.15);
     var_1.area_name = get_area(var_1);
 
-    if(isDefined(var_1.area_name))
+    if(isDefined(var_1.area_name)) {
       level._id_B160[level._id_B160.size] = var_1.area_name;
+    }
 
     var_1._id_E74A = _id_7C20();
     var_1._id_13C25 = _id_7ABF();
     var_2 = scripts\engine\utility::getclosest(var_1.origin, scripts\engine\utility::getStructArray("spinner", "script_noteworthy"));
     var_3 = spawn("script_model", var_2.origin + (0, 0, 0.15));
 
-    if(!isDefined(var_2.angles))
+    if(!isDefined(var_2.angles)) {
       var_2.angles = (0, 0, 0);
+    }
 
     var_3.angles = var_2.angles;
     var_3 setModel("zmb_magic_wheel_spinner");
@@ -96,13 +98,15 @@ _id_13643() {
       }
     }
 
-    if(scripts\engine\utility::flag_exist("fire_sale") && scripts\engine\utility::flag("fire_sale"))
+    if(scripts\engine\utility::flag_exist("fire_sale") && scripts\engine\utility::flag("fire_sale")) {
       var_2 = 10;
-    else
+    } else {
       var_2 = 950;
+    }
 
-    if(isDefined(level.meph_fight_started))
+    if(isDefined(level.meph_fight_started)) {
       var_2 = 0;
+    }
 
     if(var_0 scripts\cp\cp_persistence::player_has_enough_currency(var_2)) {
       var_0 scripts\cp\cp_persistence::take_player_currency(var_2, 1, "magic_wheel");
@@ -119,9 +123,9 @@ _id_51EB(var_0, var_1, var_2) {
   var_1 endon("disconnect");
   var_1 playlocalsound("purchase_deny");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_1 forceusehinton(&"COOP_INTERACTIONS_CANNOT_BUY");
-  else {
+  } else {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("no_cash", "zmb_comment_vo", "high", 30, 0, 0, 1, 50);
     var_1 forceusehinton(&"COOP_INTERACTIONS_NEED_MONEY");
   }
@@ -144,8 +148,9 @@ _id_BC3F() {
 _id_BC3E(var_0) {
   level._id_A8E2 = var_0;
 
-  if(isDefined(level.show_wheel_location_func))
+  if(isDefined(level.show_wheel_location_func)) {
     level thread[[level.show_wheel_location_func]](var_0);
+  }
 
   foreach(var_2 in level._id_B163) {
     if(!isDefined(var_2.area_name)) {
@@ -165,9 +170,9 @@ init_magic_wheel(var_0) {
   if(!isDefined(var_0.area_name)) {
     return;
   }
-  if(var_0.area_name != level._id_B161)
+  if(var_0.area_name != level._id_B161) {
     level thread _id_8E95(var_0);
-  else {
+  } else {
     var_0 setscriptablepartstate("base", "on");
     var_0 setscriptablepartstate("fx", get_default_fx_state());
     var_0._id_10A03 setscriptablepartstate("spinner", "idle");
@@ -180,16 +185,18 @@ init_magic_wheel(var_0) {
     var_0 setuserange(72);
     level.current_active_wheel = var_0;
 
-    if(isDefined(level.magic_wheel_spin_hint))
+    if(isDefined(level.magic_wheel_spin_hint)) {
       var_0 setHintString(level.magic_wheel_spin_hint);
-    else
+    } else {
       var_0 setHintString(&"CP_ZMB_INTERACTIONS_SPIN_WHEEL");
+    }
   }
 }
 
 _id_8E95(var_0) {
-  while(scripts\engine\utility::is_true(var_0.inuse))
+  while(scripts\engine\utility::is_true(var_0.inuse)) {
     wait 0.05;
+  }
 
   var_0 makeunusable();
   var_0 setscriptablepartstate("base", "off");
@@ -213,8 +220,9 @@ _id_100ED(var_0) {
   var_2 hide();
   var_3 = get_default_fx_state();
 
-  if(scripts\engine\utility::flag("fire_sale"))
+  if(scripts\engine\utility::flag("fire_sale")) {
     var_3 = "firesale";
+  }
 
   var_0 setscriptablepartstate("fx", var_3);
   wait 1;
@@ -224,20 +232,23 @@ _id_100ED(var_0) {
   var_0 setusefov(60);
   var_0 setuserange(72);
 
-  if(scripts\engine\utility::flag_exist("fire_sale") && scripts\engine\utility::flag("fire_sale"))
+  if(scripts\engine\utility::flag_exist("fire_sale") && scripts\engine\utility::flag("fire_sale")) {
     var_0 setHintString(&"COOP_INTERACTIONS_SPIN_WHEEL_FIRE_SALE");
-  else if(isDefined(level.magic_wheel_spin_hint))
+  } else if(isDefined(level.magic_wheel_spin_hint)) {
     var_0 setHintString(level.magic_wheel_spin_hint);
-  else
+  } else {
     var_0 setHintString(&"CP_ZMB_INTERACTIONS_SPIN_WHEEL");
+  }
 }
 
 get_default_fx_state() {
-  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap1) && should_play_upgraded_magic_wheel_vfx())
+  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap1) && should_play_upgraded_magic_wheel_vfx()) {
     return "upgrade";
+  }
 
-  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap2) && should_play_upgraded_magic_wheel_vfx())
+  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap2) && should_play_upgraded_magic_wheel_vfx()) {
     return "upgrade";
+  }
 
   return "normal";
 }
@@ -245,10 +256,11 @@ get_default_fx_state() {
 should_play_upgraded_magic_wheel_vfx() {
   switch (level.script) {
     case "cp_disco":
-      if(scripts\engine\utility::is_true(level.complete_skull_buster))
+      if(scripts\engine\utility::is_true(level.complete_skull_buster)) {
         return 1;
-      else
+      } else {
         return 0;
+      }
     default:
       return 0;
   }
@@ -259,8 +271,9 @@ get_area(var_0) {
 
   foreach(var_3 in var_1) {
     if(ispointinvolume(var_0.origin + (0, 0, 50), var_3)) {
-      if(isDefined(var_3.basename))
+      if(isDefined(var_3.basename)) {
         return var_3.basename;
+      }
     }
   }
 
@@ -297,8 +310,9 @@ _id_12FFA(var_0, var_1, var_2) {
       var_14 = var_7;
       var_15 = scripts\cp\utility::getrawbaseweaponname(var_7);
 
-      if(isDefined(var_0.weapon_build_models[var_15]))
+      if(isDefined(var_0.weapon_build_models[var_15])) {
         var_14 = var_0.weapon_build_models[var_15];
+      }
 
       var_5[var_5.size] = var_14;
     }
@@ -314,22 +328,25 @@ _id_12FFA(var_0, var_1, var_2) {
   var_1._id_10A05 = 0;
   var_1 waittill("ready");
 
-  if(!level._id_B162)
+  if(!level._id_B162) {
     var_1._id_10A03 setscriptablepartstate("spinner", "idle");
+  }
 
   var_1.inuse = 0;
   var_1 setscriptablepartstate("spin_light", "off");
 
   if(!scripts\engine\utility::flag_exist("fire_sale") || !scripts\engine\utility::flag("fire_sale")) {
     if(level._id_B162) {
-      if(isDefined(var_0))
+      if(isDefined(var_0)) {
         var_0 scripts\cp\cp_persistence::give_player_currency(var_2, undefined, undefined, 1, "magicWheelRefund");
+      }
 
       level._id_B162 = 0;
       wait 0.5;
 
-      if(isDefined(var_1.weapon))
+      if(isDefined(var_1.weapon)) {
         var_1.weapon delete();
+      }
 
       _id_BC3F();
     } else {
@@ -355,8 +372,9 @@ _id_12FFA(var_0, var_1, var_2) {
 }
 
 _id_13D00(var_0) {
-  while(!isDefined(var_0.weapon))
+  while(!isDefined(var_0.weapon)) {
     wait 0.05;
+  }
 
   while(var_0._id_10A05) {
     var_1 = var_0.weapon._id_8293;
@@ -367,10 +385,11 @@ _id_13D00(var_0) {
 _id_7B18(var_0) {
   var_1 = 21 / (var_0._id_E74A / 5 * 0.05);
 
-  if(var_1 - int(var_1) > 0)
+  if(var_1 - int(var_1) > 0) {
     var_1 = int(var_1) + 1;
-  else
+  } else {
     var_1 = int(var_1);
+  }
 
   var_0._id_E74D = var_1 * 0.05;
   var_2 = randomint(var_0._id_13C25.size);
@@ -378,24 +397,25 @@ _id_7B18(var_0) {
 }
 
 can_have_nunchucks(var_0) {
-  if(var_0.vo_prefix != "p5_")
+  if(var_0.vo_prefix != "p5_") {
     return 0;
-  else {
+  } else {
     var_1 = var_0 getrankedplayerdata("cp", "alienSession", "escapedRank0");
     var_2 = var_0 getrankedplayerdata("cp", "alienSession", "escapedRank1");
     var_3 = var_0 getrankedplayerdata("cp", "alienSession", "escapedRank2");
     var_4 = var_0 getrankedplayerdata("cp", "alienSession", "escapedRank3");
 
-    if(isDefined(var_1) && var_1 == 1)
+    if(isDefined(var_1) && var_1 == 1) {
       return 1;
-    else if(isDefined(var_2) && var_2 == 1)
+    } else if(isDefined(var_2) && var_2 == 1) {
       return 1;
-    else if(isDefined(var_3) && var_3 == 1)
+    } else if(isDefined(var_3) && var_3 == 1) {
       return 1;
-    else if(isDefined(var_4) && var_4 == 1)
+    } else if(isDefined(var_4) && var_4 == 1) {
       return 1;
-    else
+    } else {
       return 0;
+    }
   }
 }
 
@@ -409,14 +429,16 @@ get_weapon_with_new_camo(var_0, var_1, var_2) {
 }
 
 _id_1010C(var_0, var_1) {
-  if(scripts\engine\utility::flag("fire_sale"))
+  if(scripts\engine\utility::flag("fire_sale")) {
     var_0.fire_sale_spin = 1;
+  }
 
   var_2 = undefined;
   var_0._id_BF6D = _id_7B18(var_0);
 
-  if(isDefined(level.nextwheelweaponfunc))
+  if(isDefined(level.nextwheelweaponfunc)) {
     var_0._id_BF6D = [[level.nextwheelweaponfunc]](var_0, var_0._id_BF6D, var_1);
+  }
 
   if(level.script == "cp_disco") {
     if(scripts\engine\utility::is_true(var_1.finished_backstory) && !scripts\engine\utility::is_true(var_1.given_nunchucks)) {
@@ -435,9 +457,9 @@ _id_1010C(var_0, var_1) {
         var_3 = "iw7_nunchucks_zm_pap2";
       }
 
-      if(var_3 != "")
+      if(var_3 != "") {
         var_0._id_BF6D = var_3;
-      else {
+      } else {
         var_0._id_13C25 = scripts\engine\utility::array_add(var_0._id_13C25, "iw7_nunchucks_zm");
         var_0._id_BF6D = "iw7_nunchucks_zm";
       }
@@ -462,9 +484,9 @@ _id_1010C(var_0, var_1) {
           var_3 = "iw7_nunchucks_zm_pap2";
         }
 
-        if(var_3 != "")
+        if(var_3 != "") {
           var_0._id_BF6D = var_3;
-        else {
+        } else {
           var_0._id_13C25 = scripts\engine\utility::array_add(var_0._id_13C25, "iw7_nunchucks_zm");
           var_0._id_BF6D = "iw7_nunchucks_zm";
         }
@@ -481,10 +503,11 @@ _id_1010C(var_0, var_1) {
           var_0._id_13C25 = scripts\engine\utility::array_add(var_0._id_13C25, "iw7_venomx_zm_pap2+camo34");
           var_3 = "iw7_venomx_zm_pap2+camo34";
         } else if(scripts\cp\zombies\directors_cut::directors_cut_is_activated()) {
-          if(var_1 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade"))
+          if(var_1 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade")) {
             var_3 = "iw7_venomx_zm_pap2+camo34";
-          else
+          } else {
             var_3 = "iw7_venomx_zm_pap1+camo32";
+          }
         } else if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap1) && !var_1 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade")) {
           var_3 = "iw7_venomx_zm_pap1+camo32";
           var_0._id_13C25 = scripts\engine\utility::array_add(var_0._id_13C25, "iw7_venomx_zm_pap1+camo32");
@@ -509,19 +532,22 @@ _id_1010C(var_0, var_1) {
 
   var_4 = getweaponindexfromlist(var_0._id_BF6D, var_0._id_13C25);
 
-  if(scripts\engine\utility::array_contains(var_0._id_13C25, "iw7_forgefreeze_zm+forgefreezealtfire"))
+  if(scripts\engine\utility::array_contains(var_0._id_13C25, "iw7_forgefreeze_zm+forgefreezealtfire")) {
     var_0._id_13C25 = scripts\engine\utility::array_remove(var_0._id_13C25, "iw7_forgefreeze_zm+forgefreezealtfire");
+  }
 
   var_1 loadweaponsforplayer([var_0._id_BF6D], 1);
 
-  if(level.currentweaponlist.size > 0)
+  if(level.currentweaponlist.size > 0) {
     var_5 = level.currentweaponlist;
-  else
+  } else {
     var_5 = getrotationlist(var_0._id_13C25);
+  }
 
   if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap1) || scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap2)) {
-    foreach(var_8, var_7 in var_5)
-    var_5[var_8] = get_weapon_with_new_camo(var_1, var_7, get_camo_for_upgraded_weapon(getweaponbasename(var_7), var_1));
+    foreach(var_8, var_7 in var_5) {
+      var_5[var_8] = get_weapon_with_new_camo(var_1, var_7, get_camo_for_upgraded_weapon(getweaponbasename(var_7), var_1));
+    }
   }
 
   level.activewheels++;
@@ -536,34 +562,38 @@ _id_1010C(var_0, var_1) {
     var_0 playSound("zmb_wheel_spin_tick");
     var_9++;
 
-    if(isDefined(var_0.weapon))
+    if(isDefined(var_0.weapon)) {
       var_0.weapon setmoverweapon(var_5[var_9]);
-    else {
+    } else {
       var_0.weapon = spawn("script_weapon", var_11.origin, 0, 0, var_5[var_9]);
 
-      if(isDefined(var_11.angles))
+      if(isDefined(var_11.angles)) {
         var_0.weapon.angles = var_11.angles;
-      else
+      } else {
         var_0.weapon.angles = (0, 0, 0);
+      }
     }
 
     var_0.weapon._id_8293 = var_5[var_9];
 
-    if(var_9 >= var_5.size - 1)
+    if(var_9 >= var_5.size - 1) {
       var_9 = -1;
+    }
   }
 
   var_0.weapon._id_8293 = var_0._id_13C25[var_4];
 
-  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap1) || scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap2))
+  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap1) || scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap2)) {
     var_0.weapon setmoverweapon(get_weapon_with_new_camo(var_1, var_0.weapon._id_8293, get_camo_for_upgraded_weapon(getweaponbasename(var_0.weapon._id_8293), var_1)));
-  else
+  } else {
     var_0.weapon setmoverweapon(var_0.weapon._id_8293);
+  }
 
   level.activewheels--;
 
-  if(level.activewheels < 0)
+  if(level.activewheels < 0) {
     level.activewheels = 0;
+  }
 
   if(!level.activewheels) {
     clearworldweapons();
@@ -578,18 +608,21 @@ _id_1010C(var_0, var_1) {
     level._id_13D01++;
     var_15 = randomint(100);
 
-    if(scripts\engine\utility::is_true(level.meph_fight_started))
+    if(scripts\engine\utility::is_true(level.meph_fight_started)) {
       level._id_13D01 = 0;
+    }
 
-    if(level._id_13D01 == 7)
+    if(level._id_13D01 == 7) {
       var_15 = 100;
+    }
 
     if(var_15 > 50 && level._id_13D01 > 4) {
       level._id_B162 = 1;
       var_16 = var_0.weapon.origin;
 
-      if(isDefined(var_0.weapon))
+      if(isDefined(var_0.weapon)) {
         var_0.weapon delete();
+      }
 
       var_17 = spawn("script_model", var_16);
       var_17 setModel("zmb_arcade_toy_astronaut_blue");
@@ -626,15 +659,17 @@ _id_1010C(var_0, var_1) {
   var_0.weapon scripts\engine\utility::waittill_any_timeout(12, "weapon_taken");
   var_0.weapon delete();
 
-  if(scripts\engine\utility::array_contains(var_0._id_13C25, "iw7_nunchucks_zm"))
+  if(scripts\engine\utility::array_contains(var_0._id_13C25, "iw7_nunchucks_zm")) {
     var_0._id_13C25 = scripts\engine\utility::array_remove(var_0._id_13C25, "iw7_nunchucks_zm");
-  else if(scripts\engine\utility::array_contains(var_0._id_13C25, "iw7_nunchucks_zm_pap2"))
+  } else if(scripts\engine\utility::array_contains(var_0._id_13C25, "iw7_nunchucks_zm_pap2")) {
     var_0._id_13C25 = scripts\engine\utility::array_remove(var_0._id_13C25, "iw7_nunchucks_zm_pap2");
+  }
 
-  if(scripts\engine\utility::array_contains(var_0._id_13C25, "iw7_venomx_zm_pap1+camo32"))
+  if(scripts\engine\utility::array_contains(var_0._id_13C25, "iw7_venomx_zm_pap1+camo32")) {
     var_0._id_13C25 = scripts\engine\utility::array_remove(var_0._id_13C25, "iw7_venomx_zm_pap1+camo32");
-  else if(scripts\engine\utility::array_contains(var_0._id_13C25, "iw7_venomx_zm_pap2+camo34"))
+  } else if(scripts\engine\utility::array_contains(var_0._id_13C25, "iw7_venomx_zm_pap2+camo34")) {
     var_0._id_13C25 = scripts\engine\utility::array_remove(var_0._id_13C25, "iw7_venomx_zm_pap2+camo34");
+  }
 
   var_0 setscriptablepartstate("spin_light", "off");
   var_0._id_13C25 = _id_7ABF();
@@ -644,25 +679,28 @@ _id_1010C(var_0, var_1) {
 }
 
 can_have_venomx(var_0) {
-  if(scripts\engine\utility::flag_exist("completepuzzles_step4") && scripts\engine\utility::flag("completepuzzles_step4"))
+  if(scripts\engine\utility::flag_exist("completepuzzles_step4") && scripts\engine\utility::flag("completepuzzles_step4")) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 getrotationlist(var_0) {
   var_1 = [];
 
-  for(var_2 = 0; var_2 < 8; var_2++)
+  for(var_2 = 0; var_2 < 8; var_2++) {
     var_1[var_2] = var_0[var_2];
+  }
 
   return var_1;
 }
 
 getweaponindexfromlist(var_0, var_1) {
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(var_0 == var_1[var_2])
+    if(var_0 == var_1[var_2]) {
       return var_2;
+    }
   }
 
   return 0;
@@ -679,8 +717,9 @@ _id_B16B(var_0) {
 _id_7C20() {
   var_0 = 1440;
 
-  if(randomint(100) > 50)
+  if(randomint(100) > 50) {
     var_0 = 1080;
+  }
 
   return var_0;
 }
@@ -705,8 +744,9 @@ _id_7A37(var_0, var_1) {
   var_2 = getarraykeys(var_0);
 
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
-    if(var_2[var_3] == var_1)
+    if(var_2[var_3] == var_1) {
       return var_3;
+    }
   }
 }
 
@@ -716,10 +756,11 @@ _id_782E(var_0, var_1) {
 }
 
 _id_7D60(var_0) {
-  if(isDefined(level.coop_weapontable))
+  if(isDefined(level.coop_weapontable)) {
     var_1 = level.coop_weapontable;
-  else
+  } else {
     var_1 = "cp/cp_weapontable.csv";
+  }
 
   return tablelookup(var_1, 2, var_0, 1);
 }
@@ -744,10 +785,11 @@ wait_for_player_to_take_weapon(var_0) {
   }
 
   if(isDefined(self._id_8293) && getsubstr(self._id_8293, 0, 5) == "power") {
-    if(level.powers[self._id_8293].defaultslot == "secondary")
+    if(level.powers[self._id_8293].defaultslot == "secondary") {
       var_1 scripts\cp\powers\coop_powers::givepower(self._id_8293, level.powers[self._id_8293].defaultslot, undefined, undefined, undefined, 0, 0);
-    else
+    } else {
       var_1 scripts\cp\powers\coop_powers::givepower(self._id_8293, level.powers[self._id_8293].defaultslot, undefined, undefined, undefined, 0, 1);
+    }
   } else {
     var_2 = self._id_8293;
     _id_B16A(var_1, var_2);
@@ -793,8 +835,9 @@ wait_for_player_to_take_weapon(var_0) {
 _id_B16A(var_0, var_1) {
   var_0 notify("weapon_purchased");
 
-  if(scripts\engine\utility::is_true(var_0.isusingsupercard))
+  if(scripts\engine\utility::is_true(var_0.isusingsupercard)) {
     wait 0.5;
+  }
 
   var_2 = undefined;
 
@@ -812,8 +855,9 @@ _id_B16A(var_0, var_1) {
   var_5 = scripts\cp\utility::getrawbaseweaponname(var_1);
   var_0 scripts\cp\utility::take_fists_weapon(var_0);
 
-  if(isDefined(var_0.weapon_build_models[var_5]))
+  if(isDefined(var_0.weapon_build_models[var_5])) {
     var_1 = var_0.weapon_build_models[var_5];
+  }
 
   if(var_0 scripts\cp\cp_weapon::can_upgrade(var_1) && is_magic_wheel_upgrades(var_0)) {
     var_2 = get_camo_for_upgraded_weapon(var_5, var_0);
@@ -824,15 +868,17 @@ _id_B16A(var_0, var_1) {
     var_8 = spawnStruct();
     var_8.lvl = 2;
 
-    if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap2))
+    if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap2)) {
       var_8.lvl = 3;
+    }
 
     var_0.pap[var_7] = var_8;
     var_0 notify("weapon_level_changed");
     var_0 scripts\cp\cp_merits::processmerit("mt_purchased_weapon");
 
-    if(var_0 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade"))
+    if(var_0 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade")) {
       var_0 scripts\cp\utility::notify_used_consumable("magic_wheel_upgrade");
+    }
   } else {
     var_6 = getweaponattachments(var_1);
     var_1 = var_0 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_1, undefined, var_6, undefined, undefined);
@@ -844,47 +890,61 @@ _id_B16A(var_0, var_1) {
     var_0 notify("weapon_level_changed");
   }
 
-  if(issubstr(var_1, "g18_"))
+  if(issubstr(var_1, "g18_")) {
     var_0.has_replaced_starting_pistol = 1;
+  }
 
-  if(issubstr(var_1, "udm45_"))
+  if(issubstr(var_1, "udm45_")) {
     var_0 scripts\cp\cp_merits::processmerit("mt_udm_unlock");
+  }
 
-  if(issubstr(var_1, "rvn_"))
+  if(issubstr(var_1, "rvn_")) {
     var_0 scripts\cp\cp_merits::processmerit("mt_rvn_unlock");
+  }
 
-  if(issubstr(var_1, "crdb_"))
+  if(issubstr(var_1, "crdb_")) {
     var_0 scripts\cp\cp_merits::processmerit("mt_crdb_unlock");
+  }
 
-  if(issubstr(var_1, "vr_"))
+  if(issubstr(var_1, "vr_")) {
     var_0 scripts\cp\cp_merits::processmerit("mt_vr_unlock");
+  }
 
-  if(issubstr(var_1, "mp28_"))
+  if(issubstr(var_1, "mp28_")) {
     var_0 scripts\cp\cp_merits::processmerit("mt_mp28_unlock");
+  }
 
-  if(issubstr(var_1, "minilmg_"))
+  if(issubstr(var_1, "minilmg_")) {
     var_0 scripts\cp\cp_merits::processmerit("mt_minilmg_unlock");
+  }
 
-  if(issubstr(var_1, "ba50cal_"))
+  if(issubstr(var_1, "ba50cal_")) {
     var_0 scripts\cp\cp_merits::processmerit("mt_ba50cal_unlock");
+  }
 
-  if(issubstr(var_1, "mod2187_"))
+  if(issubstr(var_1, "mod2187_")) {
     var_0 scripts\cp\cp_merits::processmerit("mt_mod2187_unlock");
+  }
 
-  if(issubstr(var_1, "longshot_"))
+  if(issubstr(var_1, "longshot_")) {
     var_0 scripts\cp\cp_merits::processmerit("mt_longshot_unlock");
+  }
 
-  if(issubstr(var_1, "gauss_"))
+  if(issubstr(var_1, "gauss_")) {
     var_0 scripts\cp\cp_merits::processmerit("mt_gauss_unlock");
+  }
 
-  if(issubstr(var_1, "mag_"))
+  if(issubstr(var_1, "mag_")) {
     var_0 scripts\cp\cp_merits::processmerit("mt_mag_unlock");
+  }
 
-  if(issubstr(var_1, "unsalmg_"))
+  if(issubstr(var_1, "unsalmg_")) {
     var_0 scripts\cp\cp_merits::processmerit("mt_unsalmg_unlock");
+  }
 
-  if(issubstr(var_1, "tacburst_"))
+  if(issubstr(var_1, "tacburst_")) {
     var_0 scripts\cp\cp_merits::processmerit("mt_tacburst_unlock");
+  }
 
   var_0 notify("wor_item_pickup", var_1);
   var_0 givemaxammo(var_1);
@@ -894,14 +954,15 @@ _id_B16A(var_0, var_1) {
 get_camo_for_upgraded_weapon(var_0, var_1) {
   var_2 = undefined;
 
-  if(isDefined(level.no_pap_camos) && scripts\engine\utility::array_contains(level.no_pap_camos, var_0))
+  if(isDefined(level.no_pap_camos) && scripts\engine\utility::array_contains(level.no_pap_camos, var_0)) {
     var_2 = undefined;
-  else if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap2) && isDefined(level.pap_2_camo))
+  } else if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap2) && isDefined(level.pap_2_camo)) {
     var_2 = level.pap_2_camo;
-  else if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap1) && var_1 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade") && isDefined(level.pap_2_camo))
+  } else if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap1) && var_1 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade") && isDefined(level.pap_2_camo)) {
     var_2 = level.pap_2_camo;
-  else if(isDefined(level.pap_1_camo))
+  } else if(isDefined(level.pap_1_camo)) {
     var_2 = level.pap_1_camo;
+  }
 
   switch (var_0) {
     case "dischord":
@@ -932,33 +993,41 @@ get_camo_for_upgraded_weapon(var_0, var_1) {
 }
 
 get_attachment_for_upgraded_weapon(var_0, var_1) {
-  if(issubstr(var_0, "venomx"))
+  if(issubstr(var_0, "venomx")) {
     return undefined;
+  }
 
-  if(issubstr(var_0, "nunchucks"))
+  if(issubstr(var_0, "nunchucks")) {
     return undefined;
+  }
 
-  if(issubstr(var_0, "dischord") || issubstr(var_0, "facemelter") || issubstr(var_0, "headcutter") || issubstr(var_0, "shredder"))
+  if(issubstr(var_0, "dischord") || issubstr(var_0, "facemelter") || issubstr(var_0, "headcutter") || issubstr(var_0, "shredder")) {
     return "pap1";
+  }
 
-  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap2))
+  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap2)) {
     return "pap2";
+  }
 
-  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap1) && var_1 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade"))
+  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap1) && var_1 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade")) {
     return "pap2";
+  }
 
   return "pap1";
 }
 
 is_magic_wheel_upgrades(var_0) {
-  if(var_0 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade"))
+  if(var_0 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade")) {
     return 1;
+  }
 
-  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap2))
+  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap2)) {
     return 1;
+  }
 
-  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap1))
+  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap1)) {
     return 1;
+  }
 
   return 0;
 }
@@ -1009,13 +1078,14 @@ _id_4DB4(var_0, var_1, var_2) {
       if(!isDefined(var_5.area_name)) {
         continue;
       }
-      if(!isDefined(var_2))
+      if(!isDefined(var_2)) {
         _id_BC3F();
-      else if(var_5 == var_2) {
-        if(isDefined(level.magic_wheel_spin_hint))
+      } else if(var_5 == var_2) {
+        if(isDefined(level.magic_wheel_spin_hint)) {
           var_5 setHintString(level.magic_wheel_spin_hint);
-        else
+        } else {
           var_5 setHintString(&"CP_ZMB_INTERACTIONS_SPIN_WHEEL");
+        }
 
         continue;
       }
@@ -1024,8 +1094,9 @@ _id_4DB4(var_0, var_1, var_2) {
       thread _id_8E95(var_5);
     }
 
-    foreach(var_8 in level.players)
-    var_8._id_8B7B = undefined;
+    foreach(var_8 in level.players) {
+      var_8._id_8B7B = undefined;
+    }
 
     level notify("deactivated" + var_0);
     var_10 = 1;
@@ -1041,8 +1112,9 @@ _id_4DB4(var_0, var_1, var_2) {
         }
       }
 
-      if(!var_11)
+      if(!var_11) {
         var_10 = 0;
+      }
     }
 
     wait 0.25;

@@ -9,15 +9,17 @@ main() {
   self notify("killanimscript");
   self.pushable = 0;
 
-  if(getdvarint("ai_iw7") == 1)
+  if(getdvarint("ai_iw7") == 1) {
     self clearanim(_id_0A1E::asm_getbodyknob(), 0.3);
-  else
+  } else {
     self clearanim(self._id_E6E6, 0.3);
+  }
 
-  if(scripts\engine\utility::actor_is3d())
+  if(scripts\engine\utility::actor_is3d()) {
     self orientmode("face angle 3d", self.angles);
-  else
+  } else {
     self orientmode("face angle", self.angles[1]);
+  }
 
   self _meth_82A2(self._id_1286, 1, 0, 0);
   self._id_1286 = undefined;

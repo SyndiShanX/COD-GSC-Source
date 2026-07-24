@@ -12,21 +12,25 @@ init_woodchipper_trap() {
     var_3 = scripts\engine\utility::getStructArray(var_2.target, "targetname");
 
     foreach(var_5 in var_3) {
-      if(isDefined(var_5.radius))
+      if(isDefined(var_5.radius)) {
         var_2.suction_spot = var_5;
+      }
 
-      if(var_5.script_noteworthy == "zombie_in_fx")
+      if(var_5.script_noteworthy == "zombie_in_fx") {
         var_2.zombie_in_fx = var_5;
+      }
 
-      if(var_5.script_noteworthy == "zombie_out_fx")
+      if(var_5.script_noteworthy == "zombie_out_fx") {
         var_2.zombie_out_fx = var_5;
+      }
     }
 
     var_7 = getEntArray(var_2.target, "targetname");
 
     foreach(var_9 in var_7) {
-      if(var_9.classname == "light_spot")
+      if(var_9.classname == "light_spot") {
         var_2.light = var_9;
+      }
     }
 
     var_2.woodchipper_trigger = spawn("trigger_radius", var_2.suction_spot.origin, 0, var_2.suction_spot.radius, 96);
@@ -43,10 +47,11 @@ woodchipper_trap_wait_for_power() {
     if(var_0) {
       var_1 = level scripts\engine\utility::waittill_any_return_no_endon_death("power_on", self.power_area + " power_on", "power_off");
 
-      if(var_1 != "power_off")
+      if(var_1 != "power_off") {
         self.powered_on = 1;
-      else
+      } else {
         self.powered_on = 0;
+      }
     }
 
     if(!var_0) {
@@ -69,8 +74,9 @@ use_woodchipper_trap(var_0, var_1) {
   playsoundatpos(var_0.origin, "trap_wood_chipper_start");
   var_3 = thread scripts\engine\utility::play_loopsound_in_space("trap_wood_chipper_lp", var_0.origin);
 
-  while(gettime() < var_2)
+  while(gettime() < var_2) {
     wait 1;
+  }
 
   playsoundatpos(var_0.origin, "trap_wood_chipper_end");
   var_3 stoploopsound();
@@ -161,8 +167,9 @@ suck_zombie(var_0, var_1) {
     var_1.trap_kills = var_1.trap_kills + 1;
     thread woodchipper_spray(var_1);
 
-    if(var_1.trap_kills == 1)
+    if(var_1.trap_kills == 1) {
       scripts\engine\utility::exploder(11);
+    }
 
     thread woodchipper_grind_sfx(var_1);
 
@@ -178,8 +185,9 @@ suck_zombie(var_0, var_1) {
 }
 
 woodchipper_grind_sfx(var_0) {
-  if(!isDefined(var_0.grind_sfx))
+  if(!isDefined(var_0.grind_sfx)) {
     var_0.grind_sfx = 0;
+  }
 
   if(var_0.grind_sfx == 0) {
     var_0.grind_sfx = 1;

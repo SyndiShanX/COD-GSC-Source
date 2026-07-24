@@ -33,8 +33,9 @@ update_disco_challenge(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
   }
   self.current_challenge.current_progress = self.current_challenge.current_progress + var_0;
 
-  if(self.current_challenge.current_progress >= self.current_challenge.goal)
+  if(self.current_challenge.current_progress >= self.current_challenge.goal) {
     self.current_challenge.success = 1;
+  }
 
   scripts\cp\zombies\solo_challenges::update_challenge_progress(self.current_challenge.current_progress, self.current_challenge.goal);
 
@@ -57,12 +58,14 @@ chi_challenge_activate(var_0) {
   var_2 = var_0.kung_fu_progression.disciplines_levels[var_0.kung_fu_progression.active_discipline];
 
   if(isDefined(var_0.current_player_challenge)) {
-    if(issubstr(var_0.current_player_challenge, var_1))
+    if(issubstr(var_0.current_player_challenge, var_1)) {
       return;
+    }
   }
 
-  if(var_2 < 3)
+  if(var_2 < 3) {
     var_0 thread chi_challenge_start(var_1 + "_" + (var_2 + 1) + "_challenge");
+  }
 }
 
 chi_challenge_start(var_0) {
@@ -147,10 +150,11 @@ challenge_success(var_0) {
 
   var_0.kung_fu_progression.challenge_progress[var_0.kung_fu_progression.active_discipline] = 0;
 
-  if(isDefined(self.success))
+  if(isDefined(self.success)) {
     return self.success;
-  else
+  } else {
     return self.default_success;
+  }
 }
 
 empty(var_0) {}
@@ -171,8 +175,9 @@ get_scalar_from_table(var_0) {
   for(var_7 = var_3; var_7 <= var_4; var_7++) {
     var_8 = tablelookup(var_1, var_2, var_7, var_5);
 
-    if(var_8 == "")
+    if(var_8 == "") {
       return undefined;
+    }
 
     if(var_8 != var_0) {
       continue;
@@ -182,18 +187,21 @@ get_scalar_from_table(var_0) {
     if(isDefined(var_9)) {
       var_9 = strtok(var_9, " ");
 
-      if(var_9.size > 0)
+      if(var_9.size > 0) {
         return int(var_9[0]);
+      }
     }
   }
 }
 
 default_playerdamage_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(!isDefined(level.current_challenge))
+  if(!isDefined(level.current_challenge)) {
     return 0;
+  }
 
-  if(scripts\engine\utility::flag("pause_challenges"))
+  if(scripts\engine\utility::flag("pause_challenges")) {
     return 0;
+  }
 
   return 1;
 }
@@ -201,27 +209,32 @@ default_playerdamage_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, va
 default_death_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_9 = var_1;
 
-  if(isDefined(var_1.playerowner) && var_1.playerowner scripts\cp\utility::is_valid_player(1))
+  if(isDefined(var_1.playerowner) && var_1.playerowner scripts\cp\utility::is_valid_player(1)) {
     var_9 = var_1.playerowner;
+  }
 
-  if(!isDefined(var_9.current_player_challenge) || !isDefined(var_9.kung_fu_progression.active_discipline))
+  if(!isDefined(var_9.current_player_challenge) || !isDefined(var_9.kung_fu_progression.active_discipline)) {
     return 0;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
   var_10 = var_9.kung_fu_progression.active_discipline;
   var_11 = var_9.kung_fu_progression.disciplines_levels[var_9.kung_fu_progression.active_discipline];
 
   switch (var_11) {
     case 0:
-      if(!issubstr(var_4, "fists_zm_"))
+      if(!issubstr(var_4, "fists_zm_")) {
         return 0;
+      }
 
       break;
     case 1:
-      if(var_4 != "iw7_shuriken_" + var_10 + "_proj" && var_4 != "iw7_shuriken_zm_" + var_10)
+      if(var_4 != "iw7_shuriken_" + var_10 + "_proj" && var_4 != "iw7_shuriken_zm_" + var_10) {
         return 0;
+      }
 
       break;
     case 2:
@@ -233,13 +246,15 @@ default_death_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
         break;
       }
 
-      if(!issubstr(var_4, "fists_zm_") || var_3 != "MOD_UNKNOWN")
+      if(!issubstr(var_4, "fists_zm_") || var_3 != "MOD_UNKNOWN") {
         return 0;
+      }
 
       break;
     case 3:
-      if(var_4 != "power_repulsor")
+      if(var_4 != "power_repulsor") {
         return 0;
+      }
 
       break;
   }

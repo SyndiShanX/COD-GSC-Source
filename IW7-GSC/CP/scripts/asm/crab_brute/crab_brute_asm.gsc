@@ -9,8 +9,9 @@ asminit(var_0, var_1, var_2, var_3) {
 }
 
 shouldbruteplaypainanim() {
-  if(isDefined(self.bforceallowpain) && self.bforceallowpain)
+  if(isDefined(self.bforceallowpain) && self.bforceallowpain) {
     return 1;
+  }
 
   return scripts\asm\zombie\zombie::_id_1004F();
 }
@@ -51,17 +52,21 @@ playanimandlookatenemy(var_0, var_1, var_2, var_3) {
 }
 
 isanimdone(var_0, var_1, var_2, var_3) {
-  if(scripts\asm\asm::_id_232B(var_1, "end"))
+  if(scripts\asm\asm::_id_232B(var_1, "end")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "early_end"))
+  if(scripts\asm\asm::_id_232B(var_1, "early_end")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "finish_early"))
+  if(scripts\asm\asm::_id_232B(var_1, "finish_early")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "code_move"))
+  if(scripts\asm\asm::_id_232B(var_1, "code_move")) {
     return 1;
+  }
 
   return 0;
 }
@@ -108,10 +113,11 @@ dosummonfromfakecrabboss(var_0) {
 dosummon() {
   self setscriptablepartstate("lure_fx", "summon");
 
-  if(isDefined(level.crab_boss))
+  if(isDefined(level.crab_boss)) {
     level.crab_boss scripts\aitypes\crab_boss\behaviors::oncrabbrutesummon(self.spawnpoints);
-  else
+  } else {
     level.fake_crab_boss dosummonfromfakecrabboss(self.spawnpoints);
+  }
 }
 
 doflash() {
@@ -139,17 +145,20 @@ doflash() {
     }
     var_8 = scripts\common\trace::create_default_contents(1);
 
-    if(scripts\common\trace::ray_trace_passed(self getEye(), var_2 getEye(), var_2, var_8))
+    if(scripts\common\trace::ray_trace_passed(self getEye(), var_2 getEye(), var_2, var_8)) {
       var_2 _id_20CA(var_0.flash_duration, var_0.flash_rumble_duration);
+    }
   }
 }
 
 _id_20CA(var_0, var_1) {
-  if(!isDefined(self._id_6EC8) || var_0 > self._id_6EC8)
+  if(!isDefined(self._id_6EC8) || var_0 > self._id_6EC8) {
     self._id_6EC8 = var_0;
+  }
 
-  if(!isDefined(self._id_6EDB) || var_1 > self._id_6EDB)
+  if(!isDefined(self._id_6EDB) || var_1 > self._id_6EDB) {
     self._id_6EDB = var_1;
+  }
 
   wait 0.05;
 
@@ -158,8 +167,9 @@ _id_20CA(var_0, var_1) {
     self.flashendtime = gettime() + self._id_6EC8 * 1000;
   }
 
-  if(isDefined(self._id_6EDB))
+  if(isDefined(self._id_6EDB)) {
     thread _id_6EDC(self._id_6EDB);
+  }
 
   self._id_6EC8 = undefined;
   self._id_6EDB = undefined;
@@ -189,33 +199,39 @@ meleenotehandler(var_0, var_1, var_2, var_3) {
         self notify("attack_miss", var_4);
     }
 
-    if(!scripts\engine\utility::is_true(self.bmovingmelee))
+    if(!scripts\engine\utility::is_true(self.bmovingmelee)) {
       self notify("stop_melee_face_enemy");
+    }
   }
 }
 
 shouldabortaction(var_0, var_1, var_2, var_3) {
-  if(scripts\engine\utility::is_true(self.btraversalteleport))
+  if(scripts\engine\utility::is_true(self.btraversalteleport)) {
     return 0;
+  }
 
-  if(!isDefined(self.requested_action))
+  if(!isDefined(self.requested_action)) {
     return 1;
+  }
 
   if(isDefined(var_3)) {
-    if(self.requested_action != var_3)
+    if(self.requested_action != var_3) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 shoulddoaction(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.requested_action))
+  if(!isDefined(self.requested_action)) {
     return 0;
+  }
 
   if(self.requested_action == var_2) {
-    if(isDefined(self.current_action) && self.current_action == var_2)
+    if(isDefined(self.current_action) && self.current_action == var_2) {
       return 0;
+    }
 
     self.current_action = var_2;
     return 1;
@@ -228,8 +244,9 @@ playanimwithplaybackrate(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   var_4 = var_3;
 
-  if(var_1 == "burrow_loop")
+  if(var_1 == "burrow_loop") {
     thread play_burrow_loop_sfx();
+  }
 
   var_5 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   scripts\asm\asm_mp::_id_2365(var_0, var_1, var_2, var_5, var_4);
@@ -258,18 +275,21 @@ playmeleeattack(var_0, var_1, var_2, var_3) {
 choosemeleeattack(var_0, var_1, var_2) {
   var_3 = self.curmeleetarget;
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = scripts\mp\agents\crab_brute\crab_brute_agent::getenemy();
+  }
 
   var_4 = 0;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_4 = length(var_3 getvelocity());
+  }
 
-  if(scripts\asm\asm_bb::bb_moverequested() || var_4 > 0)
+  if(scripts\asm\asm_bb::bb_moverequested() || var_4 > 0) {
     var_5 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "attack_moving");
-  else
+  } else {
     var_5 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "attack");
+  }
 
   return var_5;
 }
@@ -301,11 +321,13 @@ doteleporthack(var_0, var_1, var_2, var_3) {
 }
 
 shouldstopshield(var_0, var_1, var_2, var_3) {
-  if(shoulddoshield(var_0, var_1, var_2, var_3))
+  if(shoulddoshield(var_0, var_1, var_2, var_3)) {
     return 0;
+  }
 
-  if(gettime() < self.minshieldstoptime)
+  if(gettime() < self.minshieldstoptime) {
     return 0;
+  }
 
   return 1;
 }
@@ -319,23 +341,27 @@ ismyenemyinfrontofme(var_0, var_1) {
   var_3 = anglesToForward(self.angles);
   var_4 = vectordot(var_2, var_3);
 
-  if(var_4 > var_1)
+  if(var_4 > var_1) {
     return 1;
+  }
 
   return 0;
 }
 
 shouldmeleeattackhit(var_0, var_1, var_2) {
-  if(scripts\mp\agents\zombie\zombie_util::_id_9DE0(var_0))
+  if(scripts\mp\agents\zombie\zombie_util::_id_9DE0(var_0)) {
     return 1;
+  }
 
   var_3 = distance2dsquared(var_0.origin, self.origin);
 
-  if(var_3 > var_1)
+  if(var_3 > var_1) {
     return 0;
+  }
 
-  if(!ismyenemyinfrontofme(var_0, var_2))
+  if(!ismyenemyinfrontofme(var_0, var_2)) {
     return 0;
+  }
 
   return 1;
 }
@@ -392,8 +418,9 @@ playchargeloop(var_0, var_1, var_2, var_3) {
 choosechargeoutroanim(var_0, var_1, var_2) {
   var_3 = "charge_miss";
 
-  if(scripts\engine\utility::is_true(self.bchargehit))
+  if(scripts\engine\utility::is_true(self.bchargehit)) {
     var_3 = "charge_hit";
+  }
 
   return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
 }
@@ -403,30 +430,33 @@ choosecrabbruteturnanim(var_0, var_1, var_2) {
   var_4 = abs(self.desiredyaw);
 
   if(self.desiredyaw < 0) {
-    if(var_4 < 67.5)
+    if(var_4 < 67.5) {
       var_3 = 9;
-    else if(var_4 < 112.5)
+    } else if(var_4 < 112.5) {
       var_3 = 6;
-    else if(var_4 < 157.5)
+    } else if(var_4 < 157.5) {
       var_3 = 3;
-    else
+    } else {
       var_3 = "2r";
+    }
   } else if(self.desiredyaw < 67.5)
     var_3 = 7;
-  else if(self.desiredyaw < 112.5)
+  else if(self.desiredyaw < 112.5) {
     var_3 = 4;
-  else if(self.desiredyaw < 157.5)
+  } else if(self.desiredyaw < 157.5) {
     var_3 = 1;
-  else
+  } else {
     var_3 = "2l";
+  }
 
   self.desiredyaw = undefined;
   return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
 }
 
 shouldturn(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.desiredyaw))
+  if(!isDefined(self.desiredyaw)) {
     return 0;
+  }
 
   return 1;
 }
@@ -434,14 +464,16 @@ shouldturn(var_0, var_1, var_2, var_3) {
 shouldcrabbrutestartarrival(var_0, var_1, var_2, var_3) {
   var_4 = scripts\mp\agents\crab_brute\crab_brute_agent::getenemy();
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return scripts\asm\zombie\zombie::_id_10092(var_0, var_1, var_2, var_3);
+  }
 
   var_5 = scripts\mp\agents\crab_brute\crab_brute_tunedata::gettunedata();
   var_6 = distancesquared(self.origin, var_4.origin);
 
-  if(var_6 < var_5.min_dist_to_enemy_to_do_arrival_sq)
+  if(var_6 < var_5.min_dist_to_enemy_to_do_arrival_sq) {
     return 0;
+  }
 
   return scripts\asm\zombie\zombie::_id_10092(var_0, var_1, var_2, var_3);
 }
@@ -473,8 +505,9 @@ doburrowoutrodamage(var_0) {
 }
 
 play_burrow_outro_sfx() {
-  if(isDefined(self.burrow_loop_obj))
+  if(isDefined(self.burrow_loop_obj)) {
     thread stop_burrow_loop();
+  }
 
   thread scripts\engine\utility::play_sound_in_space("brute_burrow_out_of_ground", self.origin + (0, 0, 30));
 }
@@ -483,8 +516,9 @@ stop_burrow_loop() {
   self.burrow_loop_obj stopsounds();
   wait 0.1;
 
-  if(isDefined(self.burrow_loop_obj))
+  if(isDefined(self.burrow_loop_obj)) {
     self.burrow_loop_obj delete();
+  }
 }
 
 playburrowoutro(var_0, var_1, var_2, var_3) {

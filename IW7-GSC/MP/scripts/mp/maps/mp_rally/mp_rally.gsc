@@ -47,8 +47,9 @@ setupspinningblades() {
   level endon("game_ended");
   var_0 = getEntArray("spinning_blades", "targetname");
 
-  foreach(var_2 in var_0)
-  thread spinthisblade(var_2);
+  foreach(var_2 in var_0) {
+    thread spinthisblade(var_2);
+  }
 
   var_4 = getEnt("decapitator_kill_trigger", "targetname");
 
@@ -67,10 +68,11 @@ setupspinningblades() {
         }
         var_5 suicide();
 
-        if(var_5.loadoutarchetype == "archetype_scout")
+        if(var_5.loadoutarchetype == "archetype_scout") {
           playFX(level._effect["reaper_kill_robot"], var_5.origin + (0, 0, 0));
-        else
+        } else {
           playFX(level._effect["blade_kill"], var_5.origin + (0, 0, 0));
+        }
 
         continue;
       }
@@ -82,8 +84,9 @@ setupspinningblades() {
             continue;
           }
 
-          if(var_5.streakname == "venom")
+          if(var_5.streakname == "venom") {
             var_5 notify("venom_end", var_5.origin);
+          }
         }
       }
     }
@@ -123,8 +126,9 @@ setuppowerlines() {
             continue;
           }
 
-          if(var_1.streakname == "venom")
+          if(var_1.streakname == "venom") {
             var_1 notify("venom_end", var_1.origin);
+          }
         }
       }
     }
@@ -240,8 +244,9 @@ barreldropperloop(var_0, var_1, var_2, var_3) {
 
     if(isDefined(var_15)) {
       foreach(var_17 in var_15) {
-        if(var_17 istouching(var_3))
+        if(var_17 istouching(var_3)) {
           var_17 scripts\mp\killstreaks\utility::dodamagetokillstreak(1000, var_4, var_3, var_17.team, var_3.origin, "MOD_EXPLOSIVE", "bombproj_mp");
+        }
       }
     }
 
@@ -270,8 +275,9 @@ lingeringgascloudwatch(var_0, var_1, var_2, var_3) {
         continue;
       }
 
-      if(!var_4.isindoomjuice)
+      if(!var_4.isindoomjuice) {
         thread playeringaswatcher(var_4, var_0, var_1, var_2, var_3);
+      }
     }
   }
 }
@@ -286,16 +292,18 @@ playeringaswatcher(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_0 istouching(var_2)) {
       if(var_0.team == var_4) {
-        if(var_0.health > 20)
+        if(var_0.health > 20) {
           var_0 dodamage(20, var_2.explosionloc, var_2);
-        else
+        } else {
           var_0 suicide();
+        }
       } else if(isDefined(var_3))
         var_0 dodamage(20, var_2.explosionloc, var_3);
-      else if(var_0.health > 20)
+      else if(var_0.health > 20) {
         var_0 dodamage(20, var_2.explosionloc, var_2);
-      else
+      } else {
         var_0 suicide();
+      }
     } else
       var_0.isindoomjuice = 0;
 
@@ -340,15 +348,17 @@ burninantordestroyequipment(var_0, var_1) {
 
     if(isDefined(var_3)) {
       foreach(var_5 in var_3) {
-        if(var_5 istouching(var_0))
+        if(var_5 istouching(var_0)) {
           var_5 scripts\mp\killstreaks\utility::dodamagetokillstreak(10000, var_1, var_0, var_5.team, var_0.origin, "MOD_EXPLOSIVE", "bombproj_mp");
+        }
       }
     }
 
     if(isDefined(var_2)) {
       foreach(var_5 in var_2) {
-        if(var_5.streakname == "sentry_shock" && var_5 istouching(var_0))
+        if(var_5.streakname == "sentry_shock" && var_5 istouching(var_0)) {
           var_5 scripts\mp\killstreaks\utility::dodamagetokillstreak(100000, var_1, var_0, var_5.team, var_0.origin, "MOD_MELEE", "bombproj_mp");
+        }
       }
     }
 
@@ -387,8 +397,9 @@ watchforvictims(var_0, var_1) {
             continue;
           }
 
-          if(var_2.streakname == "venom")
+          if(var_2.streakname == "venom") {
             var_2 scripts\mp\killstreaks\utility::dodamagetokillstreak(10000, var_1, var_0, var_2.team, var_0.origin, "MOD_EXPLOSIVE", "bombproj_mp");
+          }
         }
       }
     }
@@ -396,10 +407,11 @@ watchforvictims(var_0, var_1) {
 }
 
 burninatorplaydeathfx(var_0, var_1, var_2) {
-  if(isDefined(var_2) && var_1.team != var_2.team)
+  if(isDefined(var_2) && var_1.team != var_2.team) {
     var_1 dodamage(10000, var_0.origin, var_2);
-  else
+  } else {
     var_1 suicide();
+  }
 
   scripts\engine\utility::waitframe();
   scripts\engine\utility::waitframe();
@@ -410,10 +422,11 @@ burninatorplaydeathfx(var_0, var_1, var_2) {
     var_4 hide(1);
     var_4.permanentcustommovetransition = 1;
 
-    if(var_1.loadoutarchetype == "archetype_scout")
+    if(var_1.loadoutarchetype == "archetype_scout") {
       playFX(level._effect["reaper_kill_robot"], var_1.origin + (0, 0, 0));
-    else
+    } else {
       playFX(level._effect["burn_kill"], var_1.origin + (0, 0, 0), var_3);
+    }
   }
 }
 
@@ -483,7 +496,8 @@ apex_not_outofbounds() {
   level waittill("game_ended");
 
   foreach(var_0 in level.outofboundstriggerpatches) {
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_0 delete();
+    }
   }
 }

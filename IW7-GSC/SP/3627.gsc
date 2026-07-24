@@ -44,8 +44,9 @@ _id_C334() {
     thread on_deploy();
     self waittill("offhandshield_retract");
 
-    if(scripts\sp\utility::_id_65DB("player_retract_shield_active"))
+    if(scripts\sp\utility::_id_65DB("player_retract_shield_active")) {
       thread on_retract();
+    }
   }
 }
 
@@ -53,8 +54,9 @@ offhand_shield_unequip_think() {
   self endon("death");
   self waittill("secondary_equipment_change");
 
-  if(scripts\sp\utility::_id_65DB("player_retract_shield_active"))
+  if(scripts\sp\utility::_id_65DB("player_retract_shield_active")) {
     thread on_retract();
+  }
 }
 
 on_deploy() {
@@ -111,8 +113,9 @@ _id_DDD3() {
   if(isDefined(level.player._id_C337._id_54C2)) {
     return;
   }
-  while(level.player _meth_84D0() > getdvarfloat("offhandshield_minenergyfordeploy"))
+  while(level.player _meth_84D0() > getdvarfloat("offhandshield_minenergyfordeploy")) {
     wait 0.15;
+  }
 
   scripts\sp\utility::_id_56BE("shield_recharge", 3);
   level.player._id_C337._id_54C2 = 1;
@@ -169,8 +172,9 @@ _id_C330() {
       thread scripts\engine\utility::play_loop_sound_on_entity("retract_shield_energy_alarm");
       childthread _id_C339(var_0);
 
-      while(self _meth_84D0() < var_0 && self._id_C337.active)
+      while(self _meth_84D0() < var_0 && self._id_C337.active) {
         wait 0.05;
+      }
 
       self notify("stop soundretract_shield_energy_alarm");
     }
@@ -185,8 +189,9 @@ _id_C339(var_0) {
   }
   self._id_C337._id_FC8E = 1;
 
-  while(self _meth_84D0() < var_0)
+  while(self _meth_84D0() < var_0) {
     wait 0.05;
+  }
 
   scripts\sp\utility::play_sound_on_entity("retract_shield_ready");
   self._id_C337._id_FC8E = undefined;
@@ -213,8 +218,9 @@ _id_CB92(var_0) {
     var_2 = scripts\engine\utility::array_remove_array(var_2, var_2);
     var_3 = getaiarray();
 
-    if(isDefined(level.player._id_C337._id_6A48))
+    if(isDefined(level.player._id_C337._id_6A48)) {
       var_3 = scripts\engine\utility::array_combine(var_3, level._id_C337._id_6A48);
+    }
 
     foreach(var_5 in var_3) {
       var_6 = distance(var_5.origin, self.origin);
@@ -247,14 +253,16 @@ _id_CB92(var_0) {
     }
 
     if(var_8._id_D028 <= level.player._id_C337._id_CB8F._id_56E8) {
-      if(var_8._id_D028 <= level.player._id_C337._id_CB8F.time * 0.5)
+      if(var_8._id_D028 <= level.player._id_C337._id_CB8F.time * 0.5) {
         level.player._id_C337._id_CB8F.interval = level.player._id_C337._id_CB8F.interval * 0.5;
-      else if(var_8._id_D028 <= level.player._id_C337._id_CB8F.time * 0.75)
+      } else if(var_8._id_D028 <= level.player._id_C337._id_CB8F.time * 0.75) {
         level.player._id_C337._id_CB8F.interval = level.player._id_C337._id_CB8F.interval * 0.75;
+      }
     }
 
-    if(level.player._id_C337._id_CB8F.interval < var_1)
+    if(level.player._id_C337._id_CB8F.interval < var_1) {
       level.player._id_C337._id_CB8F.interval = var_1;
+    }
 
     if(var_3.size && level._id_6DD1) {
       level._id_6DD1 = 0;
@@ -295,10 +303,11 @@ _id_CB95(var_0) {
   var_1 = scripts\sp\math::_id_C097(0.1, 1, var_0);
   var_2 = scripts\sp\math::_id_6A8E(1.1, 0.8, var_1);
 
-  if(issentient(self))
+  if(issentient(self)) {
     var_3 = self getEye();
-  else
+  } else {
     var_3 = self.origin;
+  }
 
   var_4 = spawn("script_origin", var_3);
   var_4 playSound("retract_shield_tracker_3d_target", "sounddone");
@@ -310,8 +319,9 @@ _id_CB95(var_0) {
 _id_C76C(var_0, var_1) {
   self endon("death");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
   var_2 = getaiarray();
   var_3 = getspawnerarray();
@@ -319,13 +329,15 @@ _id_C76C(var_0, var_1) {
   if(var_0) {
     scripts\engine\utility::array_thread(var_2, ::_id_C76A);
 
-    if(var_3.size)
+    if(var_3.size) {
       scripts\sp\utility::_id_22C7(var_3, ::_id_C76A);
+    }
   } else {
     scripts\engine\utility::array_thread(var_2, ::_id_C769);
 
-    if(var_3.size)
+    if(var_3.size) {
       scripts\engine\utility::array_thread(var_3, scripts\sp\utility::_id_E08B, ::_id_C76A);
+    }
   }
 }
 
@@ -335,10 +347,11 @@ _id_C76A() {
   }
   self._id_FC9D = 1;
 
-  if(isDefined(self.team) && self.team == "allies")
+  if(isDefined(self.team) && self.team == "allies") {
     scripts\sp\utility::_id_9196(3, 0, 1, "shield");
-  else
+  } else {
     scripts\sp\utility::_id_9196(1, 0, 1, "shield");
+  }
 }
 
 _id_C769() {
@@ -373,8 +386,9 @@ _id_FC8B() {
 _id_C780(var_0) {
   _id_AB81(1);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait(var_0);
+  }
 
   _id_AB81(0);
 }
@@ -390,17 +404,19 @@ _id_AB81(var_0) {
     setsaveddvar("r_hudoutlineOccludedOutlineColor", var_3 + var_1 + "");
     setsaveddvar("r_hudoutlineOccludedInteriorColor", var_4 + var_1 + "");
 
-    if(var_0 && var_5 < 2)
+    if(var_0 && var_5 < 2) {
       setsaveddvar("r_hudoutlineFillColor1", var_3 + var_1 + "");
-    else if(!var_0 && var_5 > 2)
+    } else if(!var_0 && var_5 > 2) {
       setsaveddvar("r_hudoutlineFillColor1", var_3 + var_1 + "");
+    }
 
     setsaveddvar("r_hudoutlineOccludedInlineColor", var_4 + var_1 + "");
 
-    if(var_0)
+    if(var_0) {
       var_1 = scripts\engine\utility::ter_op(var_5 == 9, 1, var_1 + 0.1);
-    else
+    } else {
       var_1 = scripts\engine\utility::ter_op(var_5 == 9, 0, var_1 - 0.1);
+    }
 
     wait(var_2);
   }

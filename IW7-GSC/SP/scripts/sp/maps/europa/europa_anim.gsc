@@ -224,10 +224,11 @@ _id_8CA1(var_0) {
   var_0 _id_0C60::_id_8C99();
   var_0 detach(var_0.hatmodel);
 
-  if(var_0 == level._id_EBBB)
+  if(var_0 == level._id_EBBB) {
     var_0 attach("helmet_hero_sipes_crushed");
-  else
+  } else {
     var_0 attach("helmet_hero_t_crushed");
+  }
 }
 
 _id_C7BF(var_0) {
@@ -236,8 +237,9 @@ _id_C7BF(var_0) {
   level.player thread scripts\sp\gameskill::_id_2BDB(2, 0.5);
   var_1 = getEntArray("europa_lights_outro_2", "targetname");
 
-  foreach(var_3 in var_1)
-  var_3 setlightintensity(0);
+  foreach(var_3 in var_1) {
+    var_3 setlightintensity(0);
+  }
 }
 
 _id_54D7(var_0, var_1, var_2) {
@@ -247,11 +249,13 @@ _id_54D7(var_0, var_1, var_2) {
 }
 
 _id_C7C5(var_0) {
-  if(!isDefined(var_0._id_902B))
+  if(!isDefined(var_0._id_902B)) {
     var_0._id_902B = 0;
+  }
 
-  if(scripts\sp\utility::_id_93A6() && !isDefined(level.player.helmet))
+  if(scripts\sp\utility::_id_93A6() && !isDefined(level.player.helmet)) {
     level.player.helmet = level._id_10964.helmet;
+  }
 
   var_0._id_902B++;
   var_1 = 1;
@@ -285,18 +289,20 @@ _id_C7C5(var_0) {
     scripts\engine\utility::flag_set("outro_freeze");
   }
 
-  if(var_1)
+  if(var_1) {
     level.player viewkick(100, var_0.origin, 0);
+  }
 }
 
 _id_C7CD() {
   var_0 = anglesToForward(level.player getplayerangles());
   playFX(scripts\engine\utility::getfx("outro_player_glass_punch"), level.player getEye(), var_0);
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     level._id_10964.helmet delete();
-  else
+  } else {
     level.player.helmet delete();
+  }
 }
 
 _id_C7C4(var_0) {
@@ -312,13 +318,15 @@ _id_C7CE(var_0) {
   var_3 = 1;
   var_4 = [level.player._id_E505, var_0];
 
-  foreach(var_6 in var_4)
-  var_6 thread _id_AB76(var_6 scripts\sp\utility::_id_7DC1("outro"), var_1, var_3, var_2);
+  foreach(var_6 in var_4) {
+    var_6 thread _id_AB76(var_6 scripts\sp\utility::_id_7DC1("outro"), var_1, var_3, var_2);
+  }
 
   wait 0.5;
 
-  foreach(var_6 in var_4)
-  var_6 thread _id_AB76(var_6 scripts\sp\utility::_id_7DC1("outro"), var_1, var_2, var_3);
+  foreach(var_6 in var_4) {
+    var_6 thread _id_AB76(var_6 scripts\sp\utility::_id_7DC1("outro"), var_1, var_2, var_3);
+  }
 }
 
 _id_AB76(var_0, var_1, var_2, var_3) {
@@ -441,8 +449,9 @@ _id_8E18(var_0) {
     self._id_8E1E = undefined;
     var_3 = self _meth_850C("helmet", "helmet");
 
-    if(var_3 > 0)
+    if(var_3 > 0) {
       self _meth_850B(var_3, "helmet", "helmet");
+    }
   }
 
   self detach(self.hatmodel, "");
@@ -529,8 +538,9 @@ _id_EE25() {
 }
 
 _id_12920(var_0) {
-  if(isDefined(var_0._id_B14F))
+  if(isDefined(var_0._id_B14F)) {
     var_0 scripts\sp\utility::_id_1101B();
+  }
 
   var_0.diequietly = 1;
   var_0._id_DC1A = 1;
@@ -540,8 +550,9 @@ _id_12920(var_0) {
 }
 
 _id_C0C7(var_0) {
-  if(isDefined(var_0._id_B14F))
+  if(isDefined(var_0._id_B14F)) {
     var_0 scripts\sp\utility::_id_1101B();
+  }
 
   var_0.a.nodeath = 1;
   var_0 scripts\sp\utility::_id_54C6();
@@ -563,14 +574,16 @@ _id_F1EC(var_0) {
   level.player playSound("europa_armory_self_destruct_ui");
   cinematicingame("europa_selfdestruct");
 
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     wait 0.05;
+  }
 
   thread _id_0B0A::_id_583F(0, 4, 10, 5, 15, 150, 0.5);
   scripts\engine\utility::delaythread(3.5, _id_0B0A::_id_583D, 1);
 
-  while(iscinematicplaying())
+  while(iscinematicplaying()) {
     wait 0.05;
+  }
 
   stopcinematicingame();
   setsaveddvar("bg_cinematicFullScreen", "1");
@@ -600,16 +613,19 @@ _id_F2DF(var_0) {
   var_2 = "bfganim";
   level._id_11B30._id_2AA2 clearanim(%root, 0.2);
 
-  if(var_0 == "idle")
+  if(var_0 == "idle") {
     level._id_11B30._id_2AA2 thread _id_2AA4(var_1[var_0]);
+  }
 
   level._id_11B30._id_2AA2 _meth_82E1(var_2, var_1[var_0], 1, 0.2, 1);
 
-  if(var_0 == "fire")
+  if(var_0 == "fire") {
     thread _id_2AA3();
+  }
 
-  if(var_0 != "idle")
+  if(var_0 != "idle") {
     level._id_11B30._id_2AA2 waittillmatch(var_2, "end");
+  }
 }
 
 _id_2AA4(var_0) {

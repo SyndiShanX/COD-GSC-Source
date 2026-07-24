@@ -13,15 +13,17 @@ _id_91E0(var_0, var_1) {
   self.a.usingworldspacehitmarkers = var_0;
   self.ignoreme = 1;
 
-  if(isDefined(self._id_B79F))
+  if(isDefined(self._id_B79F)) {
     self.ignoreme = self._id_B79F;
+  }
 
   self._id_9DA6 = 0;
   self setturretanim(self.primaryturretanim);
   self _meth_82AB(self.primaryturretanim, 1, 0.2, 1);
 
-  if(isDefined(self.weapon))
+  if(isDefined(self.weapon)) {
     scripts\anim\shared::placeweaponon(self.weapon, "none");
+  }
 
   self._id_C584 = 1;
   self._id_8020 = ::_id_129D3;
@@ -42,8 +44,9 @@ _id_91E0(var_0, var_1) {
   thread _id_6D6A(var_0);
   wait 0.05;
 
-  if(isalive(self))
+  if(isalive(self)) {
     thread _id_8716(var_0);
+  }
 }
 
 _id_8713() {
@@ -113,8 +116,9 @@ _id_129D3() {
     self._id_8020 = undefined;
     self _meth_83AF();
 
-    if(isDefined(self.weapon))
+    if(isDefined(self.weapon)) {
       scripts\anim\shared::placeweaponon(self.weapon, "right");
+    }
   }
 
   level thread _id_129D2(self, var_0);
@@ -143,8 +147,9 @@ _id_129D2(var_0, var_1) {
   var_1._id_1A56 = undefined;
   var_1._id_6D96 = undefined;
 
-  if(isDefined(var_1._id_10953))
+  if(isDefined(var_1._id_10953)) {
     level[[var_1._id_10953]](var_0, var_1);
+  }
 }
 
 _id_12A45(var_0) {
@@ -162,12 +167,13 @@ _id_12A45(var_0) {
     var_5 = anglesToForward(var_3);
     var_6 = vectordot(var_4, var_5);
 
-    if(var_6 == 0)
+    if(var_6 == 0) {
       _id_12A4C("none");
-    else if(var_6 > 0)
+    } else if(var_6 > 0) {
       _id_12A4C("right");
-    else
+    } else {
       _id_12A4C("left");
+    }
 
     var_2 = self gettagangles(var_1);
     wait 0.05;
@@ -175,8 +181,9 @@ _id_12A45(var_0) {
 }
 
 _id_12A4C(var_0) {
-  if(!isDefined(self._id_E729) || self._id_E729 != var_0)
+  if(!isDefined(self._id_E729) || self._id_E729 != var_0) {
     self._id_E729 = var_0;
+  }
 }
 
 _id_8716(var_0) {
@@ -197,10 +204,11 @@ _id_8716(var_0) {
     var_3 = undefined;
 
     if(!var_0 _id_129BF(var_0._id_6D87, var_0._id_4292)) {
-      if(var_0._id_E729 == "right")
+      if(var_0._id_E729 == "right") {
         var_3 = self._id_17E5;
-      else if(var_0._id_E729 == "left")
+      } else if(var_0._id_E729 == "left") {
         var_3 = self._id_17E4;
+      }
 
       if(isDefined(var_3)) {
         self _meth_82AC(self._id_17E0, 1, var_1, 1);
@@ -241,8 +249,9 @@ _id_873F(var_0, var_1, var_2, var_3) {
   self._id_BFDC = 1;
   var_3 = % humvee_passenger_2_turret;
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = self._id_C938;
+  }
 
   var_4 = scripts\sp\vehicle_aianim::_id_1F00(var_0, var_1);
   var_5 = var_0 gettagorigin(var_4._id_10220);
@@ -293,31 +302,38 @@ _id_6D6A(var_0) {
       wait 0.05;
     }
 
-    if(var_0 _id_114FA(var_1) && !self.ignoreall)
+    if(var_0 _id_114FA(var_1) && !self.ignoreall) {
       var_0._id_5855 = 1;
+    }
 
-    while(var_0 _id_114FA(var_1) && !self.ignoreall && !self._id_9DA6)
+    while(var_0 _id_114FA(var_1) && !self.ignoreall && !self._id_9DA6) {
       wait 0.05;
+    }
 
-    if(var_0._id_5855 || self.ignoreall)
+    if(var_0._id_5855 || self.ignoreall) {
       var_0._id_5855 = 0;
+    }
 
     wait 0.05;
   }
 }
 
 _id_114FA(var_0) {
-  if(isDefined(self._id_596A))
+  if(isDefined(self._id_596A)) {
     return 0;
+  }
 
-  if(!isDefined(self._id_6D87))
+  if(!isDefined(self._id_6D87)) {
     return 0;
+  }
 
-  if(!_id_12A3D(var_0))
+  if(!_id_12A3D(var_0)) {
     return 0;
+  }
 
-  if(var_0 != self._id_6D87)
+  if(var_0 != self._id_6D87) {
     return 0;
+  }
 
   return 1;
 }
@@ -336,12 +352,13 @@ _id_12A3C(var_0) {
     var_3 = 0;
 
     if(_id_12A3D(var_1) || !isDefined(var_1)) {
-      if(!isDefined(var_1) && isDefined(var_2))
+      if(!isDefined(var_1) && isDefined(var_2)) {
         var_3 = 1;
-      else if(isDefined(var_1) && !isDefined(var_2))
+      } else if(isDefined(var_1) && !isDefined(var_2)) {
         var_3 = 1;
-      else if(isDefined(var_1) && var_1 != var_2)
+      } else if(isDefined(var_1) && var_1 != var_2) {
         var_3 = 1;
+      }
 
       if(var_3) {
         self._id_6D87 = var_1;
@@ -355,14 +372,17 @@ _id_12A3C(var_0) {
 }
 
 _id_12A3D(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(isDefined(var_0.ignoreme) && var_0.ignoreme)
+  if(isDefined(var_0.ignoreme) && var_0.ignoreme) {
     return 0;
+  }
 
-  if(issubstr(var_0.code_classname, "actor") && !isalive(var_0))
+  if(issubstr(var_0.code_classname, "actor") && !isalive(var_0)) {
     return 0;
+  }
 
   return 1;
 }
@@ -371,8 +391,9 @@ _id_F479(var_0, var_1, var_2, var_3) {
   self endon("turret_cleanup");
   var_4 = self _meth_813D();
 
-  if(var_4 != "manual")
+  if(var_4 != "manual") {
     self setmode("manual");
+  }
 
   if(!isDefined(var_1) && !isDefined(var_2)) {
     var_1 = 1.5;
@@ -383,18 +404,20 @@ _id_F479(var_0, var_1, var_2, var_3) {
   self settargetentity(var_0);
   self waittill("turret_on_target");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     self waittill(var_3);
-  else if(isDefined(var_2))
+  } else if(isDefined(var_2)) {
     wait(randomfloatrange(var_1, var_2));
-  else
+  } else {
     wait(var_1);
+  }
 
   _id_4C35();
   self cleartargetentity(var_0);
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     self setmode(var_4);
+  }
 }
 
 _id_5AAA(var_0) {
@@ -460,8 +483,9 @@ _id_129F7(var_0, var_1, var_2) {
   var_4 = var_0 _id_DF51();
   _id_57FB(var_0, var_3, var_2);
 
-  if(var_4)
+  if(var_4) {
     var_0 _id_DF52();
+  }
 }
 
 _id_DF51() {
@@ -488,8 +512,9 @@ _id_5A65(var_0) {
   self endon("dismount");
   self endon("jumping_out");
 
-  if(anim._id_3D4B)
+  if(anim._id_3D4B) {
     thread scripts\sp\utility::_id_4C39("inform_reloading");
+  }
 
   _id_57FB(var_0, self._id_12A81, 1);
 }
@@ -502,14 +527,16 @@ _id_57FB(var_0, var_1, var_2) {
   var_0._id_12A94 = "customanim";
   var_0 turretfiredisable();
 
-  if(var_0 _meth_810A() > 0)
+  if(var_0 _meth_810A() > 0) {
     var_0 _meth_83A2();
+  }
 
   var_0 notify("kill_fireController");
   self notify("custom_anim");
 
-  if(isDefined(var_2) && var_2)
+  if(isDefined(var_2) && var_2) {
     var_0 _id_129BD();
+  }
 
   self _meth_82AA(self._id_12A93, 1, 0.2);
   self _meth_82E7("special_anim", var_1, 1, 0, 1);
@@ -526,8 +553,9 @@ _id_57FB(var_0, var_1, var_2) {
   self _meth_82AC(self.primaryturretanim, 1);
   self _meth_82AC(self._id_17E6, 1);
 
-  if(isDefined(var_2) && var_2)
+  if(isDefined(var_2) && var_2) {
     var_0 _id_129BC();
+  }
 
   self._id_4C7D = undefined;
   self._id_9DA6 = 0;
@@ -541,8 +569,9 @@ _id_4C35() {
   if(!isDefined(self._id_9DA6)) {
     return;
   }
-  while(self._id_9DA6)
+  while(self._id_9DA6) {
     wait 0.05;
+  }
 }
 
 _id_129BD(var_0) {
@@ -584,8 +613,9 @@ _id_129BC() {
 _id_129BF(var_0, var_1) {
   var_2 = _id_129F3(var_0);
 
-  if(var_2 <= var_1)
+  if(var_2 <= var_1) {
     return 1;
+  }
 
   return 0;
 }

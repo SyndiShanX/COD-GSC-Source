@@ -28,8 +28,9 @@ watch_for_trap_kills_obtained() {
 
   for(;;) {
     if(scripts\engine\utility::is_true(level.trap_kills_laser) && scripts\engine\utility::is_true(level.trap_kills_blackhole) && scripts\engine\utility::is_true(level.trap_kills_fridge) && scripts\engine\utility::is_true(level.trap_kills_electric) && scripts\engine\utility::is_true(level.trap_kills_acidrain)) {
-      foreach(var_1 in level.players)
-      var_1 scripts\cp\zombies\achievement::update_achievement("FAILED_MAINTENANCE", 1);
+      foreach(var_1 in level.players) {
+        var_1 scripts\cp\zombies\achievement::update_achievement("FAILED_MAINTENANCE", 1);
+      }
 
       level notify("achievement_given");
     }
@@ -39,14 +40,17 @@ watch_for_trap_kills_obtained() {
 }
 
 cp_final_should_be_affected_by_trap(var_0, var_1, var_2) {
-  if(isDefined(var_0.agent_type) && var_0.agent_type == "slasher")
+  if(isDefined(var_0.agent_type) && var_0.agent_type == "slasher") {
     return 0;
+  }
 
-  if(!scripts\cp\utility::should_be_affected_by_trap(var_0, var_1, var_2))
+  if(!scripts\cp\utility::should_be_affected_by_trap(var_0, var_1, var_2)) {
     return 0;
+  }
 
-  if(var_0.team == "allies")
+  if(var_0.team == "allies") {
     return 0;
+  }
 
   return 1;
 }
@@ -54,18 +58,21 @@ cp_final_should_be_affected_by_trap(var_0, var_1, var_2) {
 force_panels_powered_on() {
   var_0 = scripts\engine\utility::getStructArray("laser_trap", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2.powered_on = 1;
+  foreach(var_2 in var_0) {
+    var_2.powered_on = 1;
+  }
 
   var_4 = scripts\engine\utility::getStructArray("blackhole_trap", "script_noteworthy");
 
-  foreach(var_2 in var_4)
-  var_2.powered_on = 1;
+  foreach(var_2 in var_4) {
+    var_2.powered_on = 1;
+  }
 
   var_7 = scripts\engine\utility::getStructArray("acid_rain_trap", "script_noteworthy");
 
-  foreach(var_2 in var_7)
-  var_2.powered_on = 1;
+  foreach(var_2 in var_7) {
+    var_2.powered_on = 1;
+  }
 
   var_10 = scripts\engine\utility::getStruct("fridge_trap", "script_noteworthy");
   var_10.powered_on = 1;
@@ -119,9 +126,9 @@ lasers_trap_init() {
 power_on_lasers(var_0) {
   var_1 = getEnt(self.target, "targetname");
 
-  if(!isDefined(self.activated))
+  if(!isDefined(self.activated)) {
     var_1.activated = 1;
-  else if(scripts\engine\utility::is_true(self.activated)) {
+  } else if(scripts\engine\utility::is_true(self.activated)) {
     return;
   }
   thread create_laser_beam_fx(self, var_1, var_0);
@@ -150,10 +157,11 @@ create_laser_beam_fx(var_0, var_1, var_2) {
   var_5 = randomfloat(1);
   thread laser_sound_individual();
 
-  if(var_5 > 0.5)
+  if(var_5 > 0.5) {
     var_6 = playfxontagsbetweenclients(scripts\engine\utility::getfx("trap_ww_beam"), var_3, "tag_origin", var_4, "tag_origin");
-  else
+  } else {
     var_6 = playfxontagsbetweenclients(scripts\engine\utility::getfx("trap_ww_beam"), var_4, "tag_origin", var_3, "tag_origin");
+  }
 
   var_6.targetname = "laser_beam_effect";
   thread _id_403A(var_6);
@@ -214,8 +222,9 @@ _id_403A(var_0) {
   level endon("game_ended");
   level waittill("lasers_end");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 laser_eye_fx() {
@@ -286,8 +295,9 @@ remove_padding_damage() {
   self endon("disconnect");
   wait 0.5;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self.padding_damage = undefined;
+  }
 }
 
 kill_fx_on_death(var_0, var_1) {
@@ -303,8 +313,9 @@ run_laser_death(var_0, var_1) {
   var_0.atomize_me = 1;
   var_0.not_killed_by_headshot = 1;
 
-  if(!scripts\engine\utility::is_true(level.trap_kills_laser))
+  if(!scripts\engine\utility::is_true(level.trap_kills_laser)) {
     level.trap_kills_laser = 1;
+  }
 
   if(isDefined(var_1)) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("lasertrap_killfirm", "zmb_comment_vo");
@@ -330,14 +341,16 @@ use_lasers_trap(var_0, var_1) {
   activate_trap_feedback(var_1);
   playFX(level._effect["console_spark"], var_0.origin + (0, 0, 40));
 
-  foreach(var_0 in var_3)
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
+  foreach(var_0 in var_3) {
+    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
+  }
 
   if(var_2) {
-    if(scripts\engine\utility::cointoss())
+    if(scripts\engine\utility::cointoss()) {
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("activate_trap_generic", "zmb_comment_vo");
-    else
+    } else {
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("lasertrap_activated", "zmb_comment_vo");
+    }
   }
 
   var_10 = scripts\engine\utility::array_combine(getEntArray("trap_lasers", "script_noteworthy"), getEntArray("trap_lasers_no_trig", "script_noteworthy"));
@@ -350,8 +363,9 @@ use_lasers_trap(var_0, var_1) {
   wait 23;
   level notify("lasers_end");
 
-  if(isDefined(var_1) && isPlayer(var_1))
+  if(isDefined(var_1) && isPlayer(var_1)) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("lasertrap_deactiveated", "zmb_comment_vo");
+  }
 
   var_14 = int(90 * level.trapcooldownarray["laser_trap"]);
 
@@ -406,10 +420,11 @@ _id_2B36() {
     if(var_0) {
       var_1 = level scripts\engine\utility::waittill_any_return_no_endon_death("power_on", self.power_area + " power_on", "power_off");
 
-      if(var_1 != "power_off")
+      if(var_1 != "power_off") {
         self.powered_on = 1;
-      else
+      } else {
         self.powered_on = 0;
+      }
     }
 
     if(!var_0) {
@@ -457,14 +472,16 @@ watch_for_obtain_helmet() {
       continue;
     }
 
-    if(scripts\engine\utility::flag("set_movie_spaceland"))
+    if(scripts\engine\utility::flag("set_movie_spaceland")) {
       spawn_brute_helmet(var_11, var_2);
+    }
   }
 }
 
 spawn_brute_helmet(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level.players[0];
+  }
 
   var_2 = spawn("script_model", var_0);
   var_2 setModel("cp_final_brute_mascot_mask");
@@ -489,10 +506,11 @@ use_blackhole_trap(var_0, var_1) {
   playFX(level._effect["console_spark"], var_0.origin + (0, 0, 40));
 
   if(var_2) {
-    if(scripts\engine\utility::cointoss())
+    if(scripts\engine\utility::cointoss()) {
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("activate_trap_generic", "zmb_comment_vo");
-    else
+    } else {
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("screentrap_activated", "zmb_comment_vo");
+    }
   }
 
   scripts\cp\cp_interaction::disable_linked_interactions(var_0);
@@ -504,8 +522,9 @@ use_blackhole_trap(var_0, var_1) {
   thread _id_2B35(var_0._id_2B30.origin, 20);
   wait 8;
 
-  if(isDefined(var_1) && isPlayer(var_1) && scripts\engine\utility::cointoss() && scripts\engine\utility::flag("set_movie_spaceland") && !scripts\engine\utility::flag("pulled_out_helmet"))
+  if(isDefined(var_1) && isPlayer(var_1) && scripts\engine\utility::cointoss() && scripts\engine\utility::flag("set_movie_spaceland") && !scripts\engine\utility::flag("pulled_out_helmet")) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("screentrap_item_hint", "zmb_comment_vo");
+  }
 
   wait 12;
   var_0 notify("stop_dmg");
@@ -513,8 +532,9 @@ use_blackhole_trap(var_0, var_1) {
   scripts\engine\utility::flag_clear("screen_trap_active");
   wait 3;
 
-  if(isDefined(var_1) && isPlayer(var_1))
+  if(isDefined(var_1) && isPlayer(var_1)) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("screentrap_deactivated", "zmb_comment_vo");
+  }
 
   var_4 = int(90 * level.trapcooldownarray["blackhole_trap"]);
   scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
@@ -572,8 +592,9 @@ suck_zombie(var_0, var_1) {
     self.anchor rotateTo((-90, 0, 0), 0.2);
     var_6 = 360;
 
-    if(randomint(100) > 50)
+    if(randomint(100) > 50) {
       var_6 = -360;
+    }
 
     self.anchor rotateroll(var_6, 1.5);
     self.anchor moveTo(var_2.origin, 1.5);
@@ -583,16 +604,18 @@ suck_zombie(var_0, var_1) {
     self.disable_armor = 1;
 
     if(isDefined(var_0)) {
-      if(!isDefined(var_0.trapkills["trap_gravitron"]))
+      if(!isDefined(var_0.trapkills["trap_gravitron"])) {
         var_0.trapkills["trap_gravitron"] = 1;
-      else
+      } else {
         var_0.trapkills["trap_gravitron"]++;
+      }
 
       var_7 = ["kill_trap_generic", "kill_trap_gravitron"];
       var_0 thread scripts\cp\cp_vo::try_to_play_vo(scripts\engine\utility::random(var_7), "zmb_comment_vo", "highest", 10, 0, 0, 1, 25);
 
-      if(!scripts\engine\utility::is_true(level.trap_kills_blackhole))
+      if(!scripts\engine\utility::is_true(level.trap_kills_blackhole)) {
         level.trap_kills_blackhole = 1;
+      }
 
       self dodamage(self.health + 100, var_2.origin, var_0, var_0, "MOD_UNKNOWN", "iw7_theatertrap_zm");
       return;
@@ -617,8 +640,9 @@ check_if_frost_radius() {
     earthquake(0.2, 0.5, self.origin, 240);
 
     foreach(var_1 in level.players) {
-      if(distancesquared(self.origin, var_1.origin) < 28224)
+      if(distancesquared(self.origin, var_1.origin) < 28224) {
         var_1 thread chill_scrnfx(self);
+      }
     }
 
     wait 0.5;
@@ -629,8 +653,9 @@ check_players_fridge_damage_explosion() {
   earthquake(0.5, 0.3, self.origin, 240);
 
   foreach(var_1 in level.players) {
-    if(distancesquared(self.origin, var_1.origin) < 28224)
+    if(distancesquared(self.origin, var_1.origin) < 28224) {
       var_1 dodamage(70, self.origin, self, self, "MOD_EXPLOSIVE", "iw7_fridgetrap_zm");
+    }
   }
 }
 
@@ -663,10 +688,11 @@ use_fridge_trap(var_0, var_1) {
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
 
   if(var_2) {
-    if(scripts\engine\utility::cointoss())
+    if(scripts\engine\utility::cointoss()) {
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("activate_trap_generic", "zmb_comment_vo");
-    else
+    } else {
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("chumtrap_activated", "zmb_comment_vo");
+    }
   }
 
   var_3 = getEnt(var_0.target, "targetname");
@@ -751,8 +777,9 @@ release_zombie_on_radio_death(var_0) {
   self endon("death");
   var_0 scripts\engine\utility::waittill_any("fridge_explode", "fridge_death");
 
-  if(isDefined(self.og_goalradius))
+  if(isDefined(self.og_goalradius)) {
     self.goalradius = self.og_goalradius;
+  }
 
   self.og_goalradius = undefined;
   self.about_to_dance = 0;
@@ -802,15 +829,17 @@ fridge_frozen_damage(var_0, var_1) {
   var_2 = self.health;
   self.health = 1;
 
-  if(!scripts\engine\utility::is_true(level.trap_kills_fridge))
+  if(!scripts\engine\utility::is_true(level.trap_kills_fridge)) {
     level.trap_kills_fridge = 1;
+  }
 
   wait 8;
 
-  if(isDefined(var_1) && isPlayer(var_1))
+  if(isDefined(var_1) && isPlayer(var_1)) {
     var_3 = var_1;
-  else
+  } else {
     var_3 = undefined;
+  }
 
   var_1 thread scripts\cp\cp_vo::try_to_play_vo("chumtrap_killfirm", "zmb_comment_vo");
   self dodamage(self.health + 100, self.origin, var_3, var_0, "MOD_EXPLOSIVE", "iw7_fridgetrap_zm");
@@ -858,9 +887,9 @@ create_attract_positions(var_0, var_1, var_2, var_3) {
     }
     var_11 = abs(var_10[2] - self.origin[2]);
 
-    if(isDefined(var_10) && distancesquared(var_10, self.origin) > var_4)
+    if(isDefined(var_10) && distancesquared(var_10, self.origin) > var_4) {
       continue;
-    else {
+    } else {
       if(var_11 < 200) {
         var_12 = spawnStruct();
         var_12.origin = var_10;
@@ -883,9 +912,9 @@ create_attract_positions(var_0, var_1, var_2, var_3) {
     }
     var_11 = abs(var_10[2] - self.origin[2]);
 
-    if(isDefined(var_10) && distancesquared(var_10, self.origin) > var_4)
+    if(isDefined(var_10) && distancesquared(var_10, self.origin) > var_4) {
       continue;
-    else {
+    } else {
       if(var_11 < 200) {
         var_12 = spawnStruct();
         var_12.origin = var_10;
@@ -949,10 +978,11 @@ electric_trap_use(var_0, var_1) {
   }
 
   if(var_2) {
-    if(scripts\engine\utility::cointoss())
+    if(scripts\engine\utility::cointoss()) {
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("activate_trap_generic", "zmb_comment_vo");
-    else
+    } else {
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("elecwater_activated", "zmb_comment_vo");
+    }
   }
 
   var_8 = spawn("script_origin", (-729, 4873, -85));
@@ -966,8 +996,9 @@ electric_trap_use(var_0, var_1) {
   wait 24;
   level notify("stop_electric_trap");
 
-  if(isDefined(var_1) && isPlayer(var_1))
+  if(isDefined(var_1) && isPlayer(var_1)) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("elecwater_deactivated", "zmb_comment_vo");
+  }
 
   var_10 = int(90 * level.trapcooldownarray["electric_trap"]);
 
@@ -1011,8 +1042,9 @@ electric_trap_damage(var_0, var_1) {
       }
 
       if(var_4.agent_type == "alien_goon") {
-        if(isDefined(var_1) && isPlayer(var_1))
+        if(isDefined(var_1) && isPlayer(var_1)) {
           var_1 thread scripts\cp\cp_vo::try_to_play_vo("elecwater_killfirm", "zmb_comment_vo");
+        }
 
         thread delayed_cryptid_death(var_4, var_1);
       }
@@ -1034,20 +1066,23 @@ killfxaftertime(var_0) {
   level endon("game_ended");
   wait 3;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 is_crog() {
-  if(!isDefined(self.agent_type))
+  if(!isDefined(self.agent_type)) {
     return 0;
+  }
 
   return self.agent_type == "crab_mini" || self.agent_type == "crab_brute";
 }
 
 is_cryptid() {
-  if(!isDefined(self.agent_type))
+  if(!isDefined(self.agent_type)) {
     return 0;
+  }
 
   return self.agent_type == "alien_goon" || self.agent_type == "alien_phantom" || self.agent_type == "alien_rhino";
 }
@@ -1065,8 +1100,9 @@ electrocute_zombie(var_0, var_1) {
   playfxbetweenpoints(level._effect["electric_trap_attack"], var_4, vectortoangles(var_5 - var_4), var_5);
   playFX(level._effect["electric_trap_shock"], var_5);
 
-  if(scripts\cp\utility::should_be_affected_by_trap(var_0, 1, 0))
+  if(scripts\cp\utility::should_be_affected_by_trap(var_0, 1, 0)) {
     var_0 setscriptablepartstate("electrocuted", "on");
+  }
 
   if(isDefined(var_1) && isPlayer(var_1) && var_1 scripts\cp\utility::is_valid_player()) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("elecwater_killfirm", "zmb_comment_vo");
@@ -1074,8 +1110,9 @@ electrocute_zombie(var_0, var_1) {
   } else
     var_6 = undefined;
 
-  if(!scripts\engine\utility::is_true(level.trap_kills_electric))
+  if(!scripts\engine\utility::is_true(level.trap_kills_electric)) {
     level.trap_kills_electric = 1;
+  }
 
   var_0 dodamage(var_0.health + 100, var_0.origin, var_6, var_6, "MOD_UNKNOWN", "iw7_electrotrap_zm");
 }
@@ -1123,8 +1160,9 @@ use_rain_trap(var_0, var_1) {
     var_6 setModel("mp_frag_button_on");
   }
 
-  if(var_2)
+  if(var_2) {
     activate_trap_feedback(var_1);
+  }
 
   playFX(level._effect["console_spark"], var_0.origin + (0, 0, 40));
   var_8 = scripts\engine\utility::play_loopsound_in_space("zmb_acid_sprinkler_lp_01", (2561.9, 5538.54, 162.494));
@@ -1132,14 +1170,16 @@ use_rain_trap(var_0, var_1) {
   var_10 = scripts\engine\utility::play_loopsound_in_space("zmb_acid_sprinkler_splash_lp_01", (2909.23, 5501.22, 64.1279));
   var_11 = scripts\engine\utility::play_loopsound_in_space("zmb_acid_sprinkler_splash_lp_02", (2479.75, 5430.08, 67.123));
 
-  foreach(var_13 in level.ambient_acid_water)
-  var_13 hide();
+  foreach(var_13 in level.ambient_acid_water) {
+    var_13 hide();
+  }
 
   if(var_2) {
-    if(scripts\engine\utility::cointoss())
+    if(scripts\engine\utility::cointoss()) {
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("activate_trap_generic", "zmb_comment_vo");
-    else
+    } else {
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("acidrain_activated", "zmb_comment_vo");
+    }
   }
 
   scripts\engine\utility::exploder(55);
@@ -1156,11 +1196,13 @@ use_rain_trap(var_0, var_1) {
   var_11 stoploopsound();
   var_11 delete();
 
-  foreach(var_13 in level.ambient_acid_water)
-  var_13 show();
+  foreach(var_13 in level.ambient_acid_water) {
+    var_13 show();
+  }
 
-  if(isDefined(var_1) && isPlayer(var_1))
+  if(isDefined(var_1) && isPlayer(var_1)) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("acidrain_deactivated", "zmb_comment_vo");
+  }
 
   var_17 = int(90 * level.trapcooldownarray["acid_rain_trap"]);
 
@@ -1180,8 +1222,9 @@ use_rain_trap(var_0, var_1) {
 remove_padding_damage_and_rain() {
   remove_padding_damage();
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     stopfxontagforclients(level._effect["sasquatch_rock_hit"], self, "tag_eye", self);
+  }
 }
 
 rain_trap_damage(var_0, var_1) {
@@ -1209,8 +1252,9 @@ rain_trap_damage(var_0, var_1) {
         continue;
       }
       if(var_4 is_crog() || var_4 is_cryptid()) {
-        if(var_4.agent_type == "alien_goon")
+        if(var_4.agent_type == "alien_goon") {
           thread delayed_cryptid_death(var_4, var_1);
+        }
 
         continue;
       }
@@ -1225,10 +1269,11 @@ delayed_cryptid_death(var_0, var_1) {
   wait(randomfloat(0.5));
   var_0.marked_for_death = 1;
 
-  if(isDefined(var_1) && isPlayer(var_1))
+  if(isDefined(var_1) && isPlayer(var_1)) {
     var_0 dodamage(var_0.health + 100, var_0.origin, var_1, var_1, "MOD_UNKNOWN", "iw7_raintrap_zm");
-  else
+  } else {
     var_0 dodamage(var_0.health + 100, var_0.origin, undefined, undefined, "MOD_UNKNOWN", "iw7_raintrap_zm");
+  }
 }
 
 rain_dmg_zombie(var_0, var_1) {
@@ -1250,8 +1295,9 @@ rain_dmg_zombie(var_0, var_1) {
 
   playFX(level._effect["acid_rain_death"], var_0.origin);
 
-  if(!scripts\engine\utility::is_true(level.trap_kills_acidrain))
+  if(!scripts\engine\utility::is_true(level.trap_kills_acidrain)) {
     level.trap_kills_acidrain = 1;
+  }
 
   playsoundatpos(var_0.origin, "gib_fullbody");
   var_0 dodamage(var_0.health + 100, var_0.origin, var_2, var_2, "MOD_UNKNOWN", "iw7_raintrap_zm");
@@ -1265,8 +1311,9 @@ listen_for_power() {
       var_0 = getEnt(self.target, "targetname");
 
       if(isDefined(var_0)) {
-        if(var_0.model == "mp_frag_button_on")
+        if(var_0.model == "mp_frag_button_on") {
           var_0 setModel("mp_frag_button_on_green");
+        }
       }
     }
 
@@ -1274,8 +1321,9 @@ listen_for_power() {
       var_0 = getEnt(self.target_secondary, "targetname");
 
       if(isDefined(var_0)) {
-        if(var_0.model == "mp_frag_button_on")
+        if(var_0.model == "mp_frag_button_on") {
           var_0 setModel("mp_frag_button_on_green");
+        }
       }
     }
   }

@@ -72,8 +72,9 @@ _id_255D() {
       var_2 = 0.5 * (1 + scripts\sp\vehicle_code::_id_12E33(self._id_E500));
       var_3 = self islegacyagent(scripts\anim\utility::_id_1F64(var_0));
 
-      if(var_0 == "right2left")
+      if(var_0 == "right2left") {
         var_3 = 1 - var_3;
+      }
 
       var_4 = 20 * abs(var_3 - var_2);
 
@@ -124,8 +125,9 @@ _id_255E() {
       var_1 = gettime() + 3000;
     }
 
-    if(var_1 <= gettime())
+    if(var_1 <= gettime()) {
       _id_2568();
+    }
 
     self _meth_82A9(scripts\anim\utility::_id_1F64("add_aim_left_center"), var_3, var_0);
     self _meth_82AC(scripts\anim\utility::_id_1F64("add_aim_left_left"), var_4, var_0);
@@ -167,8 +169,9 @@ _id_255C(var_0) {
       var_1._id_67E5["bump"][var_0] = 0;
       self notify("atv_event_occurred");
 
-      if(self._id_4B71 != "bump_big")
+      if(self._id_4B71 != "bump_big") {
         thread _id_2558(scripts\anim\utility::_id_1F64("event_bump"));
+      }
     }
 
     if(var_1._id_67E5["bump_big"][var_0]) {
@@ -182,16 +185,18 @@ _id_255C(var_0) {
       var_1._id_67E5["sway_left"][var_0] = 0;
       self notify("atv_event_occurred");
 
-      if(self._id_4B71 != "bump_big")
+      if(self._id_4B71 != "bump_big") {
         thread _id_2558(scripts\anim\utility::_id_1F64("event_sway")["left"]);
+      }
     }
 
     if(var_1._id_67E5["sway_right"][var_0]) {
       var_1._id_67E5["sway_right"][var_0] = 0;
       self notify("atv_event_occurred");
 
-      if(self._id_4B71 != "bump_big")
+      if(self._id_4B71 != "bump_big") {
         thread _id_2558(scripts\anim\utility::_id_1F64("event_sway")["right"]);
+      }
     }
 
     wait 0.05;
@@ -244,12 +249,13 @@ _id_2570() {
   self._id_FECF = self.enemy getshootatpos();
   var_0 = distancesquared(self.origin, self.enemy.origin);
 
-  if(var_0 < 1000000)
+  if(var_0 < 1000000) {
     self._id_FED7 = "full";
-  else if(var_0 < 4000000)
+  } else if(var_0 < 4000000) {
     self._id_FED7 = "burst";
-  else
+  } else {
     self._id_FED7 = "single";
+  }
 
   if(isDefined(self.enemy.vehicle)) {
     var_1 = 0.5;
@@ -268,15 +274,17 @@ _id_2570() {
         var_9 = vectordot(var_4, var_6);
         var_9 = var_9 / 3;
 
-        if(var_9 > 128)
+        if(var_9 > 128) {
           var_9 = 128;
-        else if(var_9 < -128)
+        } else if(var_9 < -128) {
           var_9 = -128;
+        }
 
-        if(var_9 > 0)
+        if(var_9 > 0) {
           var_9 = 128 - var_9;
-        else
+        } else {
           var_9 = -128 - var_9;
+        }
 
         self._id_FE9E = undefined;
         self._id_FECF = var_2.origin + var_8 * var_5 + var_9 * var_6;
@@ -303,14 +311,17 @@ _id_2566() {
 }
 
 _id_2560() {
-  if(!self._id_E500._id_10F83)
+  if(!self._id_E500._id_10F83) {
     return 0;
+  }
 
-  if(!scripts\anim\utility_common::needtoreload(0))
+  if(!scripts\anim\utility_common::needtoreload(0)) {
     return 0;
+  }
 
-  if(!scripts\anim\utility_common::usingriflelikeweapon())
+  if(!scripts\anim\utility_common::usingriflelikeweapon()) {
     return 0;
+  }
 
   _id_2561();
   self notify("abort_reload");
@@ -343,18 +354,21 @@ _id_2561() {
 }
 
 _id_256E(var_0) {
-  if(var_0 == "start_aim")
+  if(var_0 == "start_aim") {
     return 1;
+  }
 }
 
 _id_256D(var_0) {
-  if(var_0 == "end")
+  if(var_0 == "end") {
     return 1;
+  }
 }
 
 _id_256F(var_0) {
-  if(var_0 == "start_lean")
+  if(var_0 == "start_lean") {
     return 1;
+  }
 }
 
 _id_256A() {
@@ -371,15 +385,17 @@ _id_256A() {
     var_5 = (self.origin[0], self.origin[1], self getEye()[2]);
     var_6 = self._id_FECF;
 
-    if(isDefined(self._id_FE9E))
+    if(isDefined(self._id_FE9E)) {
       var_6 = self._id_FE9E getshootatpos();
+    }
 
     if(!isDefined(var_6)) {
       var_3 = 0;
       var_7 = self _meth_80FC();
 
-      if(isDefined(var_7))
+      if(isDefined(var_7)) {
         var_3 = angleclamp180(self.angles[1] - var_7[1]);
+      }
     } else {
       var_8 = var_6 - var_5;
       var_9 = vectortoangles(var_8);
@@ -387,16 +403,18 @@ _id_256A() {
       var_3 = angleclamp180(var_3);
     }
 
-    if(var_3 < self.rightaimlimit || var_3 > self.leftaimlimit)
+    if(var_3 < self.rightaimlimit || var_3 > self.leftaimlimit) {
       var_3 = 0;
+    }
 
-    if(var_4)
+    if(var_4) {
       var_4 = 0;
-    else {
+    } else {
       var_10 = var_3 - var_2;
 
-      if(abs(var_10) > var_1)
+      if(abs(var_10) > var_1) {
         var_3 = var_2 + var_1 * scripts\engine\utility::sign(var_10);
+      }
     }
 
     var_2 = var_3;
@@ -423,14 +441,16 @@ _id_2559(var_0, var_1, var_2) {
       continue;
     }
 
-    if(!isDefined(var_4))
+    if(!isDefined(var_4)) {
       var_4 = var_0[var_6];
+    }
   }
 
   var_8 = var_3;
 
-  if(isDefined(anim._id_D893) && var_8 == anim._id_D893 && gettime() - anim._id_D894 < 500)
+  if(isDefined(anim._id_D893) && var_8 == anim._id_D893 && gettime() - anim._id_D894 < 500) {
     var_8 = var_4;
+  }
 
   anim._id_D893 = var_8;
   anim._id_D894 = gettime();
@@ -442,8 +462,9 @@ _id_2555() {
   var_1 = var_0._id_D89A;
   var_1 = (var_1[0], var_1[1], randomfloatrange(200, 400)) * 0.75;
 
-  if(lengthsquared(var_1) > 1000000)
+  if(lengthsquared(var_1) > 1000000) {
     var_1 = vectorNormalize(var_1) * 1000;
+  }
 
   var_2 = spawn("script_origin", self.origin);
   var_2 moveslide((0, 0, 40), 15, var_1);
@@ -468,8 +489,9 @@ _id_255F() {
 _id_2554() {
   var_0 = self._id_E500;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return _id_255F();
+  }
 
   var_1 = var_0._id_D89A;
   _id_2555();
@@ -500,15 +522,16 @@ _id_51D1() {
 
   wait 3;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_2564(var_0) {
   self.a._id_2274["idle"] = level._id_EC85["atv"][var_0]["idle"];
   self.a._id_2274["drive"] = level._id_EC85["atv"][var_0]["drive"];
   self.a._id_2274["fire"] = level._id_EC85["atv"][var_0]["fire"];
-  self.a._id_2274["single"] = scripts\anim\utility::_id_2274(level._id_EC85["atv"][var_0]["single"]);
+  self.a._id_2274["single"] = ::scripts\anim\utility::_id_2274(level._id_EC85["atv"][var_0]["single"]);
   self.a._id_2274["burst2"] = level._id_EC85["atv"][var_0]["fire"];
   self.a._id_2274["burst3"] = level._id_EC85["atv"][var_0]["fire"];
   self.a._id_2274["burst4"] = level._id_EC85["atv"][var_0]["fire"];

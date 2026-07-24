@@ -22,8 +22,9 @@ _id_61CA() {
   self endon("terminate_ai_threads");
   thread _id_0BDC::_id_1985();
 
-  if(!issentient(self))
+  if(!issentient(self)) {
     var_0 = self makeentitysentient(self.script_team, 0);
+  }
 
   _id_0BDC::_id_A0AF();
   self _meth_8459("face motion");
@@ -31,17 +32,19 @@ _id_61CA() {
   self.behaviortreeasset = "jackal";
   self._id_1FA9 = "jackal";
 
-  if(!isDefined(self.subclass))
+  if(!isDefined(self.subclass)) {
     self.subclass = "jackal";
+  }
 
   if(self.script_team == "axis") {
     if(isDefined(self._id_9B4C) && self._id_9B4C) {
       var_1 = "ace";
 
-      if(!isDefined(level._id_1554))
+      if(!isDefined(level._id_1554)) {
         level._id_1554 = 0;
-      else
+      } else {
         level._id_1554++;
+      }
 
       self._id_92BD = _id_0A2F::_id_D9EC(level._id_1554);
       var_2 = _id_0BDC::_id_A064(self._id_92BD);
@@ -79,10 +82,11 @@ _id_61CA() {
   self.suppressionthreshold = 0.5;
 
   if(!isDefined(anim._id_3D4B)) {
-    if(scripts\engine\utility::player_is_in_jackal())
+    if(scripts\engine\utility::player_is_in_jackal()) {
       anim.player = level._id_D127;
-    else
+    } else {
       anim.player = getEntArray("player", "classname")[0];
+    }
 
     scripts\anim\init::_id_97DA();
   }
@@ -104,26 +108,30 @@ _id_61CA() {
   _id_0C24::_id_10A49();
   thread _id_0C1B::_id_13C2B();
 
-  if(!isDefined(self._id_6EA3) || scripts\engine\utility::is_true(self._id_6EA3))
+  if(!isDefined(self._id_6EA3) || scripts\engine\utility::is_true(self._id_6EA3)) {
     thread _id_0C1B::_id_6EAC();
+  }
 
   thread _id_0C1C::init();
   level._id_A056._id_1630 = scripts\engine\utility::array_add(level._id_A056._id_1630, self);
   self _meth_8455(self.origin, 1);
   _id_107E2();
 
-  if(isDefined(self._id_9B4C) && self._id_9B4C)
+  if(isDefined(self._id_9B4C) && self._id_9B4C) {
     _id_0BDC::_id_1997();
+  }
 
-  if(isDefined(self._id_9CB8) && self._id_9CB8)
+  if(isDefined(self._id_9CB8) && self._id_9CB8) {
     _id_0BDC::_id_1999();
+  }
 
   _id_20DD("fly");
 }
 
 _id_D97E() {
-  if(isDefined(self._id_EF05))
+  if(isDefined(self._id_EF05)) {
     thread _id_0C24::_id_517E();
+  }
 }
 
 _id_54F8() {
@@ -131,18 +139,21 @@ _id_54F8() {
   self notify("removed from battleChatter");
   self._id_1912 = 0;
 
-  if(issentient(self))
+  if(issentient(self)) {
     self freeentitysentient();
+  }
 
-  if(_id_0BDC::_id_9CC8())
+  if(_id_0BDC::_id_9CC8()) {
     _id_0BDC::_id_105DA();
+  }
 
   level._id_A056._id_1630 = scripts\engine\utility::array_remove(level._id_A056._id_1630, self);
 
-  if(self.script_team == "allies")
+  if(self.script_team == "allies") {
     level._id_A056._id_1914 = scripts\engine\utility::array_remove(level._id_A056._id_1914, self);
-  else
+  } else {
     level._id_A056._id_191E = scripts\engine\utility::array_remove(level._id_A056._id_191E, self);
+  }
 }
 
 _id_A231() {
@@ -273,8 +284,9 @@ _id_107E2() {
     return;
   }
   foreach(var_2 in var_0) {
-    if(isspawner(var_2) && isDefined(var_2.vehicletype) && var_2.vehicletype == self.vehicletype && var_2.script_team == self.script_team)
+    if(isspawner(var_2) && isDefined(var_2.vehicletype) && var_2.vehicletype == self.vehicletype && var_2.script_team == self.script_team) {
       thread _id_B28A(var_2, self);
+    }
   }
 }
 
@@ -306,14 +318,16 @@ _id_976D() {
 _id_814A(var_0) {
   var_1 = undefined;
 
-  if(!isDefined(self._blackboard))
+  if(!isDefined(self._blackboard)) {
     return _id_976D();
+  }
 
   if(!isDefined(var_0)) {
-    if(self._blackboard._id_E1AC != "none")
+    if(self._blackboard._id_E1AC != "none") {
       var_0 = self._blackboard._id_E1AC;
-    else
+    } else {
       var_0 = "fly";
+    }
   }
 
   switch (var_0) {
@@ -345,12 +359,14 @@ _id_B2E0() {
   for(;;) {
     var_0 = _id_0BCE::_id_7DB5();
 
-    foreach(var_2 in var_0)
-    var_2._id_C1DB = 0;
+    foreach(var_2 in var_0) {
+      var_2._id_C1DB = 0;
+    }
 
     foreach(var_2 in var_0) {
-      if(isalive(var_2.enemy) && var_2.enemy scripts\sp\vehicle::_id_9FEF() && isaircraft(var_2.enemy))
+      if(isalive(var_2.enemy) && var_2.enemy scripts\sp\vehicle::_id_9FEF() && isaircraft(var_2.enemy)) {
         var_2.enemy._id_C1DB++;
+      }
     }
 
     wait 0.05;

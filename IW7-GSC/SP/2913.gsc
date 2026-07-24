@@ -60,10 +60,11 @@ _id_ACDE(var_0, var_1, var_2, var_3) {
     _id_36DC(var_0, var_2, var_1, var_3);
 
     if(var_1) {
-      if(var_0 == "leg_left")
+      if(var_0 == "leg_left") {
         var_0 = "leg_right";
-      else
+      } else {
         var_0 = "leg_left";
+      }
     }
 
     var_3 = 0;
@@ -107,23 +108,25 @@ _id_3DB3(var_0, var_1) {
 }
 
 _id_9BBB(var_0) {
-  if(_id_7B8E() != var_0)
+  if(_id_7B8E() != var_0) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_7B8E() {
   var_0 = vectortoangles(level.player getnormalizedmovement())[1];
 
-  if(var_0 >= 315 || var_0 <= 45)
+  if(var_0 >= 315 || var_0 <= 45) {
     var_1 = "forward";
-  else if(var_0 > 45 && var_0 < 135)
+  } else if(var_0 > 45 && var_0 < 135) {
     var_1 = "right";
-  else if(var_0 > 225 && var_0 < 315)
+  } else if(var_0 > 225 && var_0 < 315) {
     var_1 = "left";
-  else
+  } else {
     var_1 = "backward";
+  }
 
   return var_1;
 }
@@ -195,8 +198,9 @@ _id_36DC(var_0, var_1, var_2, var_3) {
 
   var_9 = (var_6, var_8, var_7);
 
-  if(var_0 == "leg_left")
+  if(var_0 == "leg_left") {
     var_9 = (var_9[0] * -1.5, var_9[1] * -1.5, var_9[2]);
+  }
 
   if(var_1 && !level.player playerads() || var_3) {
     var_5 = var_1;
@@ -220,8 +224,9 @@ _id_36DC(var_0, var_1, var_2, var_3) {
     var_10 = var_10 * 1.35;
   }
 
-  if(var_2)
+  if(var_2) {
     var_10 = var_10 * 0.5;
+  }
 
   _id_11182(var_9, var_11, var_10, var_5);
 }
@@ -233,10 +238,11 @@ _id_11182(var_0, var_1, var_2, var_3) {
   self._id_8632 rotateTo(var_0, var_1, var_1 / 4 * 3, var_1 / 4);
   self._id_8632 waittill("rotatedone");
 
-  if(isDefined(self._id_883D) && self._id_883D != "none")
+  if(isDefined(self._id_883D) && self._id_883D != "none") {
     thread _id_D0E5(var_3);
-  else
+  } else {
     thread _id_D0E6(var_3);
+  }
 
   var_4 = (randomfloat(4) - 4, randomfloat(5), 0);
   var_4 = _id_186F(var_4);
@@ -250,8 +256,9 @@ _id_D2CC() {
 }
 
 _id_D0E5(var_0) {
-  if(isDefined(self._id_883B) && soundexists(self._id_883B))
+  if(isDefined(self._id_883B) && soundexists(self._id_883B)) {
     self playSound(self._id_883B);
+  }
 }
 
 _id_D0E6(var_0) {

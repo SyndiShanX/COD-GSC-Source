@@ -72,8 +72,9 @@ dragon_shuriken_throw_listener(var_0) {
     }
     self setscriptablepartstate("shuriken", "inactive");
 
-    while(isDefined(var_3) && distance2dsquared(var_3.origin, self.origin) <= 8100)
+    while(isDefined(var_3) && distance2dsquared(var_3.origin, self.origin) <= 8100) {
       wait 0.05;
+    }
 
     if(!isDefined(var_3)) {
       continue;
@@ -175,14 +176,16 @@ throw_charged_shuriken(var_0, var_1, var_2) {
   var_4 = [];
   var_5 = var_1.origin;
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "iw7_shuriken_dragon_proj";
+  }
 
   thread scripts\engine\utility::play_sound_in_space("kungfu_shuriken_split", var_5);
 
   foreach(var_7 in var_3) {
-    if(scripts\engine\utility::within_fov(self.origin, self getplayerangles(), var_7.origin, 0.9))
+    if(scripts\engine\utility::within_fov(self.origin, self getplayerangles(), var_7.origin, 0.9)) {
       var_4[var_4.size] = var_7;
+    }
   }
 
   if(var_4.size == 0) {
@@ -222,8 +225,9 @@ dragon_super_use(var_0) {
   var_1 = scripts\cp\utility::getvalidtakeweapon();
   var_2 = "dragon";
 
-  if(isDefined(self.kung_fu_progression.active_discipline))
+  if(isDefined(self.kung_fu_progression.active_discipline)) {
     var_1 = level.kung_fu_upgrades[var_2].melee_weapon;
+  }
 
   scripts\cp\powers\coop_powers::power_disablepower();
   scripts\engine\utility::allow_melee(0);
@@ -250,8 +254,9 @@ stay_in_kung_fu_till_gesture_done(var_0) {
   self.kung_fu_shield = 1;
   var_1 = 500;
 
-  if(self.chi_meter_amount - var_1 <= 0)
+  if(self.chi_meter_amount - var_1 <= 0) {
     self.kung_fu_exit_delay = 1;
+  }
 
   var_2 = self getgestureanimlength(var_0);
   wait(var_2);
@@ -324,8 +329,9 @@ follow_dragon_path(var_0, var_1) {
     var_4 = [];
 
     foreach(var_6 in var_3) {
-      if(isDefined(var_6.agent_type) && var_6.agent_type != "ratking")
+      if(isDefined(var_6.agent_type) && var_6.agent_type != "ratking") {
         var_4 = scripts\engine\utility::array_add(var_4, var_6);
+      }
     }
 
     var_3 = var_4;
@@ -352,8 +358,9 @@ follow_dragon_path(var_0, var_1) {
             self moveTo(self.origin + var_12 + (0, 0, 60), 0.25);
             self waittill("movedone");
 
-            if(isalive(var_10))
+            if(isalive(var_10)) {
               dragon_kill_guy(var_10, self.owner, var_1);
+            }
 
             continue;
           }
@@ -376,8 +383,9 @@ follow_dragon_path(var_0, var_1) {
 clean_up_spiral() {
   self.on_spiral_path = 0;
 
-  if(isDefined(self.spin_org))
+  if(isDefined(self.spin_org)) {
     self.spin_org delete();
+  }
 
   self notify("found_enemy");
 }
@@ -387,8 +395,9 @@ idle_spiral() {
   self endon("death");
   wait 0.25;
 
-  if(!scripts\engine\utility::is_true(self.on_spiral_path))
+  if(!scripts\engine\utility::is_true(self.on_spiral_path)) {
     move_along_spiral_path();
+  }
 }
 
 move_along_spiral_path(var_0) {
@@ -437,8 +446,9 @@ move_along_path_new(var_0, var_1) {
       break;
     }
 
-    if(!var_6)
+    if(!var_6) {
       thread turn_towards_target(var_5);
+    }
   } else if(isalive(var_1)) {
     var_5 = var_1.origin + (0, 0, 60);
     thread turn_towards_target(var_5);
@@ -490,8 +500,9 @@ dragon_super_damage(var_0, var_1, var_2) {
   var_3 = 0.1;
   var_4 = 22500;
 
-  while(!isDefined(self.spin_org))
+  while(!isDefined(self.spin_org)) {
     wait 0.1;
+  }
 
   var_5 = self.spin_org;
 
@@ -499,8 +510,9 @@ dragon_super_damage(var_0, var_1, var_2) {
     var_6 = level.spawned_enemies;
 
     foreach(var_8 in var_6) {
-      if(distancesquared(self.spiral_center, var_8.origin) < var_4)
+      if(distancesquared(self.spiral_center, var_8.origin) < var_4) {
         dragon_kill_guy(var_8, var_0, var_2);
+      }
     }
 
     var_1 = var_1 - var_3;
@@ -512,8 +524,9 @@ dragon_kill_guy(var_0, var_1, var_2) {
   var_0.nocorpse = 1;
   var_0.full_gib = 1;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_0 dodamage(var_0.health + 1000, var_0.origin, var_1, var_1, "MOD_UNKNOWN", var_2);
-  else
+  } else {
     var_0 dodamage(var_0.health + 1000, var_0.origin, level.players[0], level.players[0], "MOD_UNKNOWN", var_2);
+  }
 }

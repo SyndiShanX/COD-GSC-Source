@@ -32,27 +32,33 @@ clearaction() {
 }
 
 isanimdone(var_0, var_1, var_2, var_3) {
-  if(scripts\asm\asm::_id_232B(var_1, "end"))
+  if(scripts\asm\asm::_id_232B(var_1, "end")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "early_end"))
+  if(scripts\asm\asm::_id_232B(var_1, "early_end")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "finish_early"))
+  if(scripts\asm\asm::_id_232B(var_1, "finish_early")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "code_move"))
+  if(scripts\asm\asm::_id_232B(var_1, "code_move")) {
     return 1;
+  }
 
   return 0;
 }
 
 isrevivedone(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.reviveplayer))
+  if(!isDefined(self.reviveplayer)) {
     return 1;
+  }
 
-  if(!scripts\engine\utility::is_true(self.reviveplayer.inlaststand))
+  if(!scripts\engine\utility::is_true(self.reviveplayer.inlaststand)) {
     return 1;
+  }
 
   return 0;
 }
@@ -81,33 +87,39 @@ playreviveanim(var_0, var_1, var_2, var_3) {
 }
 
 shouldabortaction(var_0, var_1, var_2, var_3) {
-  if(scripts\engine\utility::is_true(self.btraversalteleport))
+  if(scripts\engine\utility::is_true(self.btraversalteleport)) {
     return 0;
+  }
 
-  if(!isDefined(self.requested_action))
+  if(!isDefined(self.requested_action)) {
     return 1;
+  }
 
   if(isDefined(var_3)) {
-    if(self.requested_action != var_3)
+    if(self.requested_action != var_3) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 shoulddoaction(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.requested_action))
+  if(!isDefined(self.requested_action)) {
     return 0;
+  }
 
   if(isDefined(var_3) && var_3 != "") {
-    if(self.requested_action == var_3)
+    if(self.requested_action == var_3) {
       return 1;
+    }
 
     return 0;
   }
 
-  if(self.requested_action == var_2)
+  if(self.requested_action == var_2) {
     return 1;
+  }
 
   return 0;
 }
@@ -137,8 +149,9 @@ playmovingpainanim(var_0, var_1, var_2, var_3) {
 }
 
 choosereviveanim(var_0, var_1, var_2) {
-  if(!isDefined(self.reviveanimindex))
+  if(!isDefined(self.reviveanimindex)) {
     self.reviveanimindex = _id_0F3C::_id_3EF4(var_0, var_1, var_2);
+  }
 
   return self.reviveanimindex;
 }
@@ -147,10 +160,11 @@ faceplayer(var_0, var_1) {
   self endon(var_0 + "_finished");
 
   for(;;) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       self orientmode("face angle abs", (0, vectortoyaw(var_1.origin - self.origin), 0));
-    else
+    } else {
       break;
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -193,10 +207,11 @@ dotraverseteleport(var_0, var_1, var_2, var_3) {
   thread playteleportfx(var_1, 0.75);
   var_4 = undefined;
 
-  if(isDefined(self.earlytraversalteleportpos))
+  if(isDefined(self.earlytraversalteleportpos)) {
     var_4 = self.earlytraversalteleportpos;
-  else
+  } else {
     var_4 = self _meth_8146();
+  }
 
   var_5 = vectorNormalize((var_4 - self.origin) * (1, 1, 0));
   var_6 = vectortoangles(var_5);

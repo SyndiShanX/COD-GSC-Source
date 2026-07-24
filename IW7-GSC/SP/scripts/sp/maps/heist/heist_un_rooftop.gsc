@@ -4,14 +4,17 @@
 ******************************************************/
 
 _id_1D1E() {
-  if(!isDefined(level._id_EA2C))
+  if(!isDefined(level._id_EA2C)) {
     scripts\sp\maps\heist\heist_util::_id_107BE();
+  }
 
-  if(!isDefined(level._id_6754))
+  if(!isDefined(level._id_6754)) {
     scripts\sp\maps\heist\heist_util::_id_106D9();
+  }
 
-  if(!isDefined(level._id_76FB))
+  if(!isDefined(level._id_76FB)) {
     scripts\sp\maps\heist\heist_util::_id_10710();
+  }
 
   level._id_EA2C scripts\sp\utility::_id_54F7();
   level._id_76FB scripts\sp\utility::_id_54F7();
@@ -25,8 +28,9 @@ _id_D93F() {
   scripts\sp\utility::_id_F5AF("continue_player_beatdown", [level.player]);
   setomnvar("ui_hide_hud", 1);
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_8E06();
+  }
 }
 
 _id_D93D() {
@@ -41,8 +45,9 @@ _id_D93D() {
 }
 
 _id_D93E() {
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_8E06();
+  }
 }
 
 _id_119FE() {
@@ -69,7 +74,7 @@ _id_119FE() {
   level._id_10DA9 = 1;
   scripts\engine\utility::flag_set("hvt_anim_done");
   thread scripts\sp\maps\prisoner\prisoner_hvt_scene::_id_D757(1);
-  [var_1, var_2, var_3, var_4] = scripts\sp\maps\prisoner\prisoner_hvt_scene::_id_107AC();
+  [var_1, var_2, var_3, var_4] = ::scripts\sp\maps\prisoner\prisoner_hvt_scene::_id_107AC();
   scripts\sp\maps\prisoner\prisoner_hvt_scene::_id_8D20();
   scripts\sp\maps\prisoner\prisoner_hvt_scene::_id_1073C();
   level._id_9265 scripts\engine\utility::delaythread(0.05, scripts\sp\anim::_id_1F2A, [level._id_920F], "churchfall_death_b", 0.99);
@@ -98,11 +103,13 @@ _id_2AE0(var_0) {
   setsaveddvar("bg_cinematicCanPause", "1");
   cinematicingame(var_0);
 
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     wait 0.05;
+  }
 
-  while(iscinematicplaying())
+  while(iscinematicplaying()) {
     wait 0.05;
+  }
 
   stopcinematicingame();
   setsaveddvar("bg_cinematicFullScreen", "1");
@@ -140,8 +147,9 @@ _id_119F6() {
 }
 
 _id_119FD() {
-  while(!isDefined(level._id_924B))
+  while(!isDefined(level._id_924B)) {
     wait 0.05;
+  }
 
   thread _id_119F7();
 
@@ -153,8 +161,9 @@ _id_119FD() {
     level._id_9267 scripts\sp\anim::_id_1F35(level.player._id_E505, "churchfall_death_b");
   }
 
-  if(isDefined(level._id_9262))
+  if(isDefined(level._id_9262)) {
     setsaveddvar("sv_znear", level._id_9262);
+  }
 
   level._id_9266 delete();
   level._id_9267 delete();
@@ -254,15 +263,17 @@ _id_119F7() {
   level._id_10232 = getEntArray("skelter_spawner", "targetname");
   level._id_10233 = 0;
 
-  foreach(var_1 in level._id_10232)
-  var_1._id_9BE9 = 1;
+  foreach(var_1 in level._id_10232) {
+    var_1._id_9BE9 = 1;
+  }
 
   level waittill("small_shake");
   level.player playSound("scn_heist_mons_arrive");
   level waittill("start_shake");
 
-  if(level._id_10CDA != "jackal_arrives")
+  if(level._id_10CDA != "jackal_arrives") {
     thread _id_BA49();
+  }
 
   level._id_F058 = scripts\sp\utility::_id_7C9B("skelter_path");
   level._id_F055 = 0;
@@ -288,8 +299,9 @@ _id_7694() {
     foreach(var_1 in level._id_7695) {
       if(isDefined(var_1) && isent(var_1)) {
         if(isDefined(var_1._id_CB53)) {
-          foreach(var_3 in var_1._id_CB53)
-          var_3 delete();
+          foreach(var_3 in var_1._id_CB53) {
+            var_3 delete();
+          }
         }
 
         var_1 _id_0BA9::_id_397B();
@@ -299,15 +311,17 @@ _id_7694() {
 
   if(isDefined(level._id_7696)) {
     foreach(var_1 in level._id_7696) {
-      if(isDefined(var_1) && isent(var_1))
+      if(isDefined(var_1) && isent(var_1)) {
         var_1 delete();
+      }
     }
   }
 
   if(isDefined(level._id_1678)) {
     foreach(var_9 in level._id_1678) {
-      if(isDefined(var_9))
+      if(isDefined(var_9)) {
         var_9 delete();
+      }
     }
   }
 
@@ -315,24 +329,28 @@ _id_7694() {
   level._id_12B4E = getEnt("un_building_model", "targetname");
   level._id_12B4F = getEnt("un_building_tower_model", "targetname");
 
-  if(isDefined(level._id_12B4E))
+  if(isDefined(level._id_12B4E)) {
     level._id_12B4E delete();
+  }
 
-  if(isDefined(level._id_12B4F))
+  if(isDefined(level._id_12B4F)) {
     level._id_12B4F delete();
+  }
 
   var_11 = getEntArray("atis_guns", "targetname");
 
   if(isDefined(var_11)) {
-    foreach(var_13 in var_11)
-    var_13 delete();
+    foreach(var_13 in var_11) {
+      var_13 delete();
+    }
   }
 
   var_15 = getEntArray("heist_atis_tower", "targetname");
 
   if(isDefined(var_15)) {
-    foreach(var_3 in var_15)
-    var_3 delete();
+    foreach(var_3 in var_15) {
+      var_3 delete();
+    }
   }
 
   if(isDefined(level._id_6EF0)) {
@@ -361,16 +379,18 @@ _id_6EEF() {
     var_1._id_42BC = var_2 _id_36FF((12000, 0, 0), var_1._id_42B2);
     var_4 = scripts\engine\utility::spawn_tag_origin(var_1._id_42BC, var_1._id_42B2);
 
-    if(var_1 != level._id_BAE8 && var_2.origin[1] > 45000)
+    if(var_1 != level._id_BAE8 && var_2.origin[1] > 45000) {
       playFXOnTag(level._effect["vfx_heist_cloud_bg"], var_4, "tag_origin");
+    }
 
     level._id_6EF0 = scripts\engine\utility::array_add(level._id_6EF0, var_4);
   }
 }
 
 _id_36FF(var_0, var_1) {
-  if(!isDefined(var_1) && isDefined(self.angles))
+  if(!isDefined(var_1) && isDefined(self.angles)) {
     var_1 = self.angles;
+  }
 
   var_2 = anglesToForward(var_1) * var_0[0];
   var_3 = anglestoright(var_1) * var_0[1];
@@ -397,8 +417,9 @@ _id_F01F() {
   var_0 = getEntArray("clear_on_fly", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    if(var_2 scripts\sp\vehicle::_id_9FEF())
+    if(var_2 scripts\sp\vehicle::_id_9FEF()) {
       var_2 _id_0BA9::_id_397B();
+    }
   }
 
   var_4 = scripts\engine\utility::getStruct("sdf_boom_point", "targetname");
@@ -410,8 +431,9 @@ _id_F01F() {
   }
 
   foreach(var_7 in level._id_7696) {
-    if(isDefined(var_7) && isalive(var_7))
+    if(isDefined(var_7) && isalive(var_7)) {
       var_7 delete();
+    }
   }
 
   wait 0.05;
@@ -456,8 +478,9 @@ _id_119F9(var_0, var_1) {
   }
   var_0 endon("death");
 
-  if(isDefined(var_0._id_ED75))
+  if(isDefined(var_0._id_ED75)) {
     wait(var_0._id_ED75);
+  }
 
   var_2 = scripts\sp\maps\heist\heist::_id_F045(var_0);
   var_2 endon("death");
@@ -474,9 +497,9 @@ _id_119F9(var_0, var_1) {
     var_2 _id_0BB6::_id_39E1();
     var_2._id_B80E = (0, 0, -1000);
 
-    if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "sdf_destroyer_closeup")
+    if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "sdf_destroyer_closeup") {
       var_2._id_EEF9 = "cannon_missile_ca_hardpoint cannon_small_ca,3,1,amb_turret_sml_l_ts_1,amb_turret_sml_l_ts_5,amb_turret_sml_r_ts_1,amb_turret_sml_r_ts_5,amb_turret_sml_r_ts_6,amb_turret_sml_r_ts_7,amb_turret_sml_l_ts_6,amb_turret_sml_l_ts_7 cannon_flak_ca,3,1 cannon_phalanx";
-    else {
+    } else {
       var_2._id_EEF9 = "missile_tube_ca cannon_large_un,1,1,amb_turret_lu_1,amb_turret_lu_2,amb_turret_ru_1,amb_turret_ru_2";
       thread _id_F015(var_2);
     }
@@ -488,8 +511,9 @@ _id_119F9(var_0, var_1) {
     var_2 thread _id_F04A();
   }
 
-  if(!var_1)
+  if(!var_1) {
     var_2 playLoopSound("ajak_engine_high");
+  }
 
   var_3 = undefined;
   var_3 = getvehiclenode(var_2.target, "targetname");
@@ -515,14 +539,17 @@ _id_F016(var_0) {
     var_0 waittill("noteworthy", var_1);
     var_2 = strtok(var_1, " ");
 
-    if(scripts\engine\utility::array_contains(var_2, "action_skelter"))
+    if(scripts\engine\utility::array_contains(var_2, "action_skelter")) {
       thread _id_F01C(var_0);
+    }
 
-    if(scripts\engine\utility::array_contains(var_2, "action_missile"))
+    if(scripts\engine\utility::array_contains(var_2, "action_missile")) {
       thread _id_F017(var_0);
+    }
 
-    if(scripts\engine\utility::array_contains(var_2, "action_missile_off"))
+    if(scripts\engine\utility::array_contains(var_2, "action_missile_off")) {
       var_0._id_B81F = 1;
+    }
 
     wait 0.05;
   }
@@ -555,16 +582,18 @@ _id_F01C(var_0) {
     }
     var_6 = var_0 _id_F057();
 
-    if(!isDefined(var_6))
+    if(!isDefined(var_6)) {
       var_6 = scripts\engine\utility::random(level._id_F058);
+    }
 
     var_7 = getcsplinepointposition(var_6, 0);
     var_8 = vectordot(anglesToForward(var_0.angles), var_7 - var_0.origin);
 
-    if(var_8 >= 0)
+    if(var_8 >= 0) {
       var_9 = anglestoleft(var_0.angles);
-    else
+    } else {
       var_9 = anglestoright(var_0.angles);
+    }
 
     var_5 dontinterpolate();
     var_5 vehicle_teleport(var_0.origin, var_9);
@@ -578,10 +607,11 @@ _id_F01C(var_0) {
 }
 
 _id_F01D() {
-  if(level._id_10233 < level._id_10232.size - 1)
+  if(level._id_10233 < level._id_10232.size - 1) {
     level._id_10233++;
-  else
+  } else {
     level._id_10233 = 0;
+  }
 
   return level._id_10233;
 }
@@ -607,8 +637,9 @@ _id_F057() {
     var_1 = scripts\engine\utility::random(level._id_F058);
     var_2 = getcsplinepointposition(var_1, 0);
 
-    if(var_2[2] <= self.origin[2])
+    if(var_2[2] <= self.origin[2]) {
       var_0 = var_1;
+    }
 
     wait 0.05;
   }
@@ -771,18 +802,21 @@ _id_F01A(var_0, var_1, var_2) {
   }
   var_3 = scripts\engine\utility::flat_origin(self.origin);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = var_0.size;
+  }
 
   var_4 = undefined;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_4 = var_2 * var_2;
+  }
 
   var_5 = 0;
 
-  if(var_1 >= var_0.size && var_5 == 0 && !isDefined(var_4))
+  if(var_1 >= var_0.size && var_5 == 0 && !isDefined(var_4)) {
     return sortbydistance(var_0, var_3);
+  }
 
   var_6 = [];
 
@@ -803,13 +837,15 @@ _id_F01A(var_0, var_1, var_2) {
 
   var_6 = sortbydistance(var_6, var_3);
 
-  if(var_1 >= var_6.size)
+  if(var_1 >= var_6.size) {
     return var_6;
+  }
 
   var_11 = [];
 
-  for(var_12 = 0; var_12 < var_1; var_12++)
+  for(var_12 = 0; var_12 < var_1; var_12++) {
     var_11[var_12] = var_6[var_12];
+  }
 
   return var_11;
 }
@@ -825,8 +861,9 @@ _id_BA97(var_0) {
   var_1 = scripts\common\trace::create_all_contents();
   var_2 = scripts\common\trace::ray_trace(self.origin, var_0, undefined, var_1);
 
-  if(isDefined(var_2["entity"]) && isDefined(var_2["entity"].targetname) && var_2["entity"].targetname == "fake_mons_collision")
+  if(isDefined(var_2["entity"]) && isDefined(var_2["entity"].targetname) && var_2["entity"].targetname == "fake_mons_collision") {
     return 1;
+  }
 
   return 0;
 }
@@ -910,15 +947,17 @@ _id_3F8D() {
   level endon("top_of_church_garbage_collect");
   var_0 = [];
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     var_0 = scripts\engine\utility::get_target_array();
+  }
 
   if(var_0.size == 0) {
     return;
   }
   foreach(var_2 in var_0) {
-    if(getdvarint("debug_fleet"))
+    if(getdvarint("debug_fleet")) {
       thread _id_D8F3();
+    }
 
     var_2 dontcastshadows();
     var_2.trigger = self;
@@ -947,11 +986,13 @@ _id_D8F3() {
   self endon("death");
   var_0 = ".";
 
-  if(isDefined(self._id_6A0B))
+  if(isDefined(self._id_6A0B)) {
     var_0 = self._id_6A0B;
+  }
 
-  for(;;)
+  for(;;) {
     wait 0.1;
+  }
 }
 
 _id_3F8A(var_0) {
@@ -959,8 +1000,9 @@ _id_3F8A(var_0) {
   var_1 = var_0.script_parameters;
   var_2 = [];
 
-  if(isDefined(var_0.target))
+  if(isDefined(var_0.target)) {
     var_2 = var_0 scripts\engine\utility::get_target_array();
+  }
 
   if(var_2.size > 0) {
     foreach(var_4 in var_2) {
@@ -990,19 +1032,22 @@ _id_3F8A(var_0) {
 }
 
 _id_3F8C() {
-  if(!isDefined(level._id_3F86))
+  if(!isDefined(level._id_3F86)) {
     level._id_3F86 = getEntArray("city_destruction_damage_trigger", "targetname");
+  }
 
   foreach(var_1 in level._id_3F86) {
     var_2 = [];
 
-    if(isDefined(var_1.target))
+    if(isDefined(var_1.target)) {
       var_2 = var_1 scripts\engine\utility::get_target_array();
+    }
 
     if(var_2.size == 0) {
       continue;
     }
-    foreach(var_4 in var_2)
-    var_4 delete();
+    foreach(var_4 in var_2) {
+      var_4 delete();
+    }
   }
 }

@@ -128,8 +128,9 @@ _id_480E() {
   level.player freezecontrols(1);
   level.player _meth_8185();
 
-  while(iscinematicplaying())
+  while(iscinematicplaying()) {
     wait 0.05;
+  }
 
   setsaveddvar("r_dof_hq", 1);
   level.player allowreload(0);
@@ -142,8 +143,9 @@ _id_480E() {
     scripts\sp\specialist_MAYBE::_id_F2A6(1);
   }
 
-  if(!scripts\sp\utility::_id_93A6())
+  if(!scripts\sp\utility::_id_93A6()) {
     level.player takeallweapons();
+  }
 
   level.player disableweapons();
   scripts\sp\utility::_id_15F5("mall_corpse_trig");
@@ -225,8 +227,9 @@ _id_5E97() {
   while(gettime() - var_1 < var_2) {
     wait(randomfloatrange(0.05, 0.1));
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       self detach(var_0, "TAG_COCKPIT_SCREENS");
+    }
 
     if(scripts\engine\utility::cointoss()) {
       var_0 = undefined;
@@ -237,8 +240,9 @@ _id_5E97() {
     self attach(var_0, "TAG_COCKPIT_SCREENS");
   }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self detach(var_0, "TAG_COCKPIT_SCREENS");
+  }
 }
 
 _id_5E00() {
@@ -319,8 +323,9 @@ _id_5ED0(var_0, var_1) {
   var_2 setmode("manual");
   var_2 hide();
 
-  if(!var_1)
+  if(!var_1) {
     level._id_5014 = var_2;
+  }
 
   var_3 = scripts\sp\utility::_id_10639("dropship_turret");
   level._id_5014 = var_3;
@@ -337,10 +342,11 @@ _id_5ED0(var_0, var_1) {
 _id_12926(var_0) {
   level endon("stop_fire");
 
-  if(var_0)
+  if(var_0) {
     level waittill("start_fire");
-  else
+  } else {
     wait 9;
+  }
 
   var_1 = "tag_flash";
   var_2 = "generic_mg_turret_nosound";
@@ -490,8 +496,9 @@ _id_4313(var_0) {
     self waittill("damage", var_2, var_3, var_4, var_5, var_2, var_2, var_2, var_6, var_2, var_2);
 
     if(var_3 == level.player) {
-      if(isDefined(var_6) && var_6 == "j_helmet")
+      if(isDefined(var_6) && var_6 == "j_helmet") {
         thread _id_0C60::_id_8E17();
+      }
 
       var_7 = scripts\sp\damagefeedback::isheadshot(var_6);
       level.player scripts\sp\damagefeedback::updatehitmarker("high_damage", 1, var_7, self);
@@ -519,10 +526,11 @@ _id_117F5() {
     var_2 = _id_C247(var_2, var_4);
     var_3 = _id_C247(var_3, var_4);
 
-    if(isDefined(self))
+    if(isDefined(self)) {
       level.player playerlinktodelta(self, "tag_player", 1, var_1, var_0, var_2, var_3, 1);
-    else
+    } else {
       break;
+    }
 
     wait 0.05;
   }
@@ -532,10 +540,11 @@ _id_117F5() {
 
 _id_C247(var_0, var_1) {
   if(var_0 > 0) {
-    if(var_0 - var_1 <= 0)
+    if(var_0 - var_1 <= 0) {
       var_0 = 0;
-    else
+    } else {
       var_0 = var_0 - var_1;
+    }
   }
 
   return var_0;
@@ -597,8 +606,9 @@ _id_EAAA() {
       continue;
     }
     if(var_1 == level.player) {
-      if(isDefined(var_5) && var_5 == "j_helmet")
+      if(isDefined(var_5) && var_5 == "j_helmet") {
         thread _id_0C60::_id_8E17();
+      }
 
       break;
     }
@@ -628,10 +638,11 @@ _id_4314(var_0) {
   level.player _meth_823C(var_0, "tag_player", 0.25, 0, 0);
   scripts\sp\anim::_id_1F35(var_0, "dropship_wakeup_jumpout");
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread _id_10961();
-  else
+  } else {
     level.player _meth_80A1();
+  }
 
   thread scripts\sp\utility::_id_266F();
   level.player allowreload(1);
@@ -739,8 +750,9 @@ _id_4330() {
   var_1 = var_0 scripts\sp\utility::_id_7A97();
   var_2 = [];
 
-  foreach(var_4 in var_1)
-  var_2[var_2.size] = var_4 scripts\engine\utility::spawn_tag_origin();
+  foreach(var_4 in var_1) {
+    var_2[var_2.size] = var_4 scripts\engine\utility::spawn_tag_origin();
+  }
 
   var_6 = self.mgturret[0];
   var_6 setmode("manual");
@@ -846,11 +858,13 @@ _id_3FB9(var_0, var_1) {
 _id_3FBA(var_0) {
   var_1 = level._id_5014;
 
-  if(var_0._id_1FBB == "crash_civ_10")
+  if(var_0._id_1FBB == "crash_civ_10") {
     var_1 = level._id_13853[0];
+  }
 
-  if(var_0._id_1FBB == "crash_civ_11")
+  if(var_0._id_1FBB == "crash_civ_11") {
     var_1 = level._id_13853[1];
+  }
 
   var_2 = ["tag_eye", "j_clavicle_le", "j_clavicle_ri", "j_hip_ri"];
 
@@ -891,13 +905,13 @@ _id_4809() {
   var_2 = [];
 
   for(var_3 = 0; var_3 < 33; var_3++) {
-    var_1[var_3] = scripts\sp\utility::_id_10639("crash_chair");
+    var_1[var_3] = ::scripts\sp\utility::_id_10639("crash_chair");
     var_1[var_3] notsolid();
     var_0 thread _id_C97A(var_1[var_3], "chair_" + var_3);
   }
 
   for(var_3 = 0; var_3 < 12; var_3++) {
-    var_2[var_3] = scripts\sp\utility::_id_10639("crash_umbrella");
+    var_2[var_3] = ::scripts\sp\utility::_id_10639("crash_umbrella");
     var_2[var_3] notsolid();
     var_2[var_3]._id_113AF = scripts\sp\utility::_id_10639("crash_table");
     var_2[var_3]._id_113AF notsolid();
@@ -911,8 +925,9 @@ _id_4809() {
 _id_13857() {
   var_0 = getspawnerarray("wake_up_slaughter_civ");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_102CF();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_102CF();
+  }
 }
 
 _id_102CF() {
@@ -933,8 +948,9 @@ _id_102CF() {
 _id_C97A(var_0, var_1) {
   scripts\sp\anim::_id_1F35(var_0, var_1);
 
-  if(isDefined(var_0._id_113AF))
+  if(isDefined(var_0._id_113AF)) {
     var_0._id_113AF delete();
+  }
 
   var_0 delete();
 }
@@ -948,8 +964,9 @@ _id_47F7() {
   level.allies["eth3n"] scripts\sp\utility::_id_F3B5("y");
   level.allies["salter"] thread scripts\sp\utility::_id_19FA(level.allies["salter"].weapon, "iw7_m8+m8scope_sp", 512, 0);
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_8E06();
+  }
 }
 
 _id_4802() {
@@ -983,8 +1000,9 @@ _id_4800() {
   var_0 = getaiarray("axis");
   var_0 = scripts\sp\utility::array_removedeadvehicles(var_0);
 
-  foreach(var_2 in var_0)
-  var_2 scripts\sp\utility::_id_51E1("frantic");
+  foreach(var_2 in var_0) {
+    var_2 scripts\sp\utility::_id_51E1("frantic");
+  }
 
   thread _id_4801();
   thread _id_281B();
@@ -1015,8 +1033,9 @@ _id_4801() {
   var_0 = getaiarray("axis");
   level._id_B2BA = 0;
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_874B();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_874B();
+  }
 
   var_4 = 3;
 
@@ -1024,8 +1043,9 @@ _id_4801() {
     var_0 = getaiarray("axis");
 
     foreach(var_2 in var_0) {
-      if(!isDefined(var_2._id_EC1D))
+      if(!isDefined(var_2._id_EC1D)) {
         var_2 thread _id_874B();
+      }
     }
 
     if(level._id_B2BA >= var_4) {
@@ -1045,8 +1065,9 @@ _id_4801() {
     var_0 = getaiarray("axis");
 
     foreach(var_2 in var_0) {
-      if(!isDefined(var_2._id_EC1D))
+      if(!isDefined(var_2._id_EC1D)) {
         var_2 thread _id_874B();
+      }
     }
 
     if(level._id_B2BA >= var_7) {
@@ -1063,8 +1084,9 @@ _id_B2BB() {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "mall_spawner")
+    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "mall_spawner") {
       var_1[var_1.size] = var_3;
+    }
   }
 
   scripts\engine\utility::flag_wait("mall_combat_retreat_1");
@@ -1103,8 +1125,9 @@ _id_874B() {
   self._id_EC1D = 0;
   self waittill("death", var_0);
 
-  if(var_0 == level.player)
+  if(var_0 == level.player) {
     level._id_B2BA++;
+  }
 }
 
 _id_10743() {
@@ -1123,8 +1146,9 @@ _id_10743() {
   scripts\engine\utility::flag_wait("top_guy_shot_at");
 
   foreach(var_3 in var_1) {
-    if(isalive(var_3))
+    if(isalive(var_3)) {
       var_3.ignoreall = 0;
+    }
   }
 }
 
@@ -1158,15 +1182,16 @@ _id_47FE() {
   scripts\sp\utility::_id_28D8("allies");
   scripts\engine\utility::flag_wait("mall_combat_retreat_3");
 
-  if(isDefined(level._id_11A08))
+  if(isDefined(level._id_11A08)) {
     level._id_11A08 = undefined;
-  else {
+  } else {
     scripts\sp\utility::_id_10350("phstreets_plr_ethanwerepushin");
     level.allies["eth3n"] scripts\sp\utility::_id_10347("phstreets_eth_rog");
   }
 
-  while(getaiarray("axis").size > 1)
+  while(getaiarray("axis").size > 1) {
     wait 0.1;
+  }
 
   var_0 = getaiarray("axis")[0];
 
@@ -1218,15 +1243,17 @@ _id_B2B7() {
     wait 0.05;
   }
 
-  if(isDefined(self) && isalive(self))
+  if(isDefined(self) && isalive(self)) {
     self clearentitytarget();
+  }
 
   var_1 delete();
 }
 
 _id_18B9() {
-  if(level.player adsButtonPressed())
+  if(level.player adsButtonPressed()) {
     return 1;
+  }
 
   return 0;
 }
@@ -1236,8 +1263,9 @@ _id_3B07() {
   var_0 = sortbydistance(var_0, level.player.origin);
   var_0[0]._id_2634 = 1;
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_3B06();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_3B06();
+  }
 }
 
 _id_3B06() {
@@ -1245,8 +1273,9 @@ _id_3B06() {
   var_0 = spawn("trigger_radius", self.origin, 0, 500, 96);
   var_1 = scripts\engine\utility::getStruct(self.target, "targetname");
 
-  if(!isDefined(self._id_2634))
+  if(!isDefined(self._id_2634)) {
     var_0 waittill("trigger");
+  }
 
   magicgrenade("frag", var_1.origin, self.origin, 3, 1);
   wait 2;
@@ -1256,8 +1285,9 @@ _id_3B06() {
 _id_1DB2() {
   var_0 = scripts\engine\utility::getStructArray("ambient_fake_fire_struct", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_6AEA();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_6AEA();
+  }
 }
 
 _id_6AEA(var_0) {
@@ -1279,8 +1309,9 @@ _id_6AEA(var_0) {
         bullettracer(var_8, var_9, "iw7_ar57", 1);
         var_10 = physicstrace(var_8, var_9);
 
-        if(isDefined(var_10))
+        if(isDefined(var_10)) {
           physicsexplosionsphere(var_10, 76, 48, 0.25);
+        }
 
         wait 0.05;
       }
@@ -1331,8 +1362,9 @@ _id_1064B() {
   var_0 = getEnt("bar_corpse_start_trig", "targetname");
   var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
 
-  foreach(var_3 in var_1)
-  var_3.script_parameters = "notsolid";
+  foreach(var_3 in var_1) {
+    var_3.script_parameters = "notsolid";
+  }
 
   scripts\sp\utility::_id_15F5("bar_corpse_start_trig");
 }
@@ -1354,8 +1386,9 @@ _id_2817() {
           var_3 thread _id_1DA9();
           var_0++;
 
-          if(var_0 == 2)
+          if(var_0 == 2) {
             return;
+          }
         }
       }
     }
@@ -1366,8 +1399,9 @@ _id_2817() {
 
 _id_13266(var_0) {
   if(distance2dsquared(var_0.origin, level.player.origin) < squared(10000)) {
-    if(issubstr(var_0.classname, "dropship") && isDefined(var_0.mgturret) && level.player scripts\sp\math::_id_9C85(var_0.origin))
+    if(issubstr(var_0.classname, "dropship") && isDefined(var_0.mgturret) && level.player scripts\sp\math::_id_9C85(var_0.origin)) {
       return 1;
+    }
   }
 
   return 0;
@@ -1413,8 +1447,9 @@ _id_2816() {
         wait 1.3;
         var_0++;
 
-        if(var_0 > 4)
+        if(var_0 > 4) {
           return;
+        }
       }
     }
 
@@ -1435,8 +1470,9 @@ _id_2815() {
   level.allies["eth3n"] scripts\sp\utility::_id_10347("phstreets_eth_communicationsm");
   scripts\engine\utility::flag_wait("crash_player_leaving_bar");
 
-  foreach(var_1 in level.allies)
-  var_1.ignoreall = 1;
+  foreach(var_1 in level.allies) {
+    var_1.ignoreall = 1;
+  }
 
   level.allies["eth3n"] scripts\sp\utility::_id_10347("phstreets_eth_setdefassaultsh");
   scripts\engine\utility::exploder("grenades_explosion_01");
@@ -1480,14 +1516,16 @@ _id_47F1() {
     var_4 = anglesToForward((0, 360, 0));
 
     if(var_0 > 0) {
-      if(isDefined(var_3) && isDefined(var_4))
+      if(isDefined(var_3) && isDefined(var_4)) {
         scripts\engine\utility::noself_delaycall(var_0, ::destroyglass, var_3, var_4);
+      }
 
       continue;
     }
 
-    if(isDefined(var_3) && isDefined(var_4))
+    if(isDefined(var_3) && isDefined(var_4)) {
       destroyglass(var_3, var_4);
+    }
   }
 
   thread _id_47F2();
@@ -1531,8 +1569,9 @@ _id_2814(var_0) {
 _id_281A() {
   var_0 = self.spawner;
 
-  if(isDefined(var_0.script_sound))
+  if(isDefined(var_0.script_sound)) {
     thread scripts\sp\utility::play_sound_on_entity(var_0.script_sound);
+  }
 }
 
 _id_2813() {
@@ -1548,8 +1587,9 @@ _id_85D9() {
   _id_8595();
   level.player takeweapon("frag");
 
-  foreach(var_2 in level.allies)
-  var_2.ignoreall = 1;
+  foreach(var_2 in level.allies) {
+    var_2.ignoreall = 1;
+  }
 
   scripts\engine\utility::flag_set("crash_player_approaching_gate");
   thread scripts\sp\maps\pearlharbor\pearlharbor_util::_id_EF24("streets_scriptable_cars");
@@ -1564,8 +1604,9 @@ _id_85D8() {
   var_0 = scripts\sp\vehicle::_id_1080D("grenade_tut_dropships_dist");
   scripts\engine\utility::flag_wait("crash_bar_dialogue_done");
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_2683();
+  }
 
   thread _id_8586();
   var_1 = scripts\engine\utility::getStruct("grenade_gate_hint", "targetname");
@@ -1673,8 +1714,9 @@ _id_8586() {
     scripts\engine\utility::flag_set("grenade_tut_allies_attack");
   }
 
-  if(!scripts\engine\utility::flag("player_threw_grenade"))
+  if(!scripts\engine\utility::flag("player_threw_grenade")) {
     scripts\sp\utility::_id_10350("phstreets_plr_openfire");
+  }
 
   scripts\engine\utility::flag_set("grenade_vo_complete");
 }
@@ -1688,13 +1730,15 @@ _id_85A1() {
 _id_8592() {
   wait 5;
 
-  if(!scripts\engine\utility::flag("grenade_give_scene_started"))
+  if(!scripts\engine\utility::flag("grenade_give_scene_started")) {
     level.allies["salter"] thread scripts\sp\utility::_id_10347("phstreets_slt_onyoureyes");
+  }
 
   wait 5;
 
-  if(!scripts\engine\utility::flag("grenade_give_scene_started"))
+  if(!scripts\engine\utility::flag("grenade_give_scene_started")) {
     level.allies["admiral"] thread scripts\sp\utility::_id_10347("phstreets_adm_getustothattowe");
+  }
 }
 
 _id_8594() {
@@ -1777,8 +1821,9 @@ _id_858F() {
 }
 
 _id_8595(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait 1;
+  }
 
   var_1 = getEnt("grenade_gate_left", "targetname");
   var_1._id_1FBB = "grenade_gate_left";
@@ -1811,8 +1856,9 @@ _id_85A4() {
   self makevehiclenotcollidewithplayers(1);
   var_0 = scripts\engine\utility::spawn_tag_origin((53792, 29976, -34300));
 
-  foreach(var_2 in self._id_E4FB)
-  var_2 thread _id_8547(var_0);
+  foreach(var_2 in self._id_E4FB) {
+    var_2 thread _id_8547(var_0);
+  }
 
   scripts\engine\utility::delaythread(2, scripts\sp\utility::_id_22CD, "grenade_tut_dropship_civis", 1);
   scripts\engine\utility::exploder("rattle_tree_dropship_grenades");
@@ -1839,15 +1885,17 @@ _id_85A6() {
   thread _id_85A7();
   _id_858E();
 
-  if(self.script_parameters == "sdf5")
+  if(self.script_parameters == "sdf5") {
     scripts\engine\utility::flag_set("grenade_dropship_leave");
+  }
 
   scripts\engine\utility::waitframe();
   self _meth_83A1();
   var_1 = 0;
 
-  if(gettime() - level._id_858D > 500)
+  if(gettime() - level._id_858D > 500) {
     var_1 = 1;
+  }
 
   if(!scripts\engine\utility::flag("grenade_tut_player_threw_grenade") || var_1) {
     if(self.script_parameters == "sdf2") {
@@ -1859,8 +1907,9 @@ _id_85A6() {
       wait(randomfloat(1.2));
 
     if(self.script_parameters == "sdf5") {
-      if(self.health < 150)
+      if(self.health < 150) {
         self.health = 150 - self.health;
+      }
     }
 
     var_2 = getnode(self.script_linkto, "script_linkname");
@@ -1940,8 +1989,9 @@ _id_8547(var_0) {
   self.ignoreall = 0;
   self _meth_82DE(var_0);
 
-  if(self.script_parameters != "sdf5")
+  if(self.script_parameters != "sdf5") {
     thread _id_EC93(var_0);
+  }
 
   thread scripts\engine\utility::flag_set_delayed("grenade_tut_shooting_civis", 3);
   scripts\engine\utility::flag_wait("grenade_enemies_alerted");
@@ -1999,8 +2049,9 @@ _id_858E() {
   level scripts\sp\utility::_id_178D(scripts\engine\utility::flag_wait, "grenade_enemies_alerted");
   scripts\sp\utility::_id_57D6();
 
-  if(scripts\engine\utility::cointoss())
+  if(scripts\engine\utility::cointoss()) {
     wait(randomfloatrange(0.25, 0.75));
+  }
 
   scripts\engine\utility::flag_set("grenade_enemies_alerted");
 }
@@ -2030,8 +2081,9 @@ _id_85A5(var_0, var_1, var_2) {
     var_3 = 1;
 
     foreach(var_5 in var_0) {
-      if(var_5 istouching(var_1))
+      if(var_5 istouching(var_1)) {
         var_3 = 0;
+      }
     }
 
     if(var_3) {
@@ -2108,8 +2160,9 @@ _id_85A3() {
   self.grenadeawareness = 0;
   self.combatmode = "no_cover";
 
-  if(isDefined(var_0._id_EE2C))
+  if(isDefined(var_0._id_EE2C)) {
     thread scripts\sp\utility::_id_F492(var_0._id_EE2C);
+  }
 
   scripts\sp\maps\pearlharbor\pearlharbor_util::_id_19C5(var_1);
 }
@@ -2129,8 +2182,9 @@ _id_8B25() {
 _id_8B26() {
   self endon("death");
 
-  if(!isDefined(level._id_8B26))
+  if(!isDefined(level._id_8B26)) {
     level._id_8B26 = [];
+  }
 
   level._id_8B26[level._id_8B26.size] = self;
   self notsolid();
@@ -2141,8 +2195,9 @@ _id_8B26() {
   }
   thread scripts\sp\maps\pearlharbor\pearlharbor_util::_id_39BC("no_effect", undefined);
 
-  if(scripts\sp\maps\pearlharbor\pearlharbor_util::_id_C8ED("heli"))
+  if(scripts\sp\maps\pearlharbor\pearlharbor_util::_id_C8ED("heli")) {
     scripts\sp\maps\pearlharbor\pearlharbor_util::_id_39A7();
+  }
 
   scripts\sp\utility::_id_127B3("hill_vista_capitalships_trig");
   _id_0BA9::_id_397B();

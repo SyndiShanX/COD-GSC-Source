@@ -50,8 +50,9 @@ fix_collision() {
 }
 
 callback_vr_playerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(var_4 != "MOD_TRIGGER_HURT")
+  if(var_4 != "MOD_TRIGGER_HURT") {
     self.nocorpse = 1;
+  }
 
   thread vrdeatheffects();
   scripts\mp\damage::playerkilled_internal(var_0, var_1, self, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0);
@@ -84,8 +85,9 @@ playbodyfx(var_0) {
   var_1[1][3]["effect"] = "vfx_vr_enemy_death";
 
   foreach(var_3 in var_1) {
-    foreach(var_5 in var_3)
-    playFX(scripts\engine\utility::getfx(var_5["effect"]), var_5["org"]);
+    foreach(var_5 in var_3) {
+      playFX(scripts\engine\utility::getfx(var_5["effect"]), var_5["org"]);
+    }
 
     wait 0.01;
   }
@@ -110,8 +112,9 @@ handleholograms() {
   wait 5;
   var_0 = getscriptablearray("hologram_object", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread runholograminitialization();
+  foreach(var_2 in var_0) {
+    var_2 thread runholograminitialization();
+  }
 }
 
 runholograminitialization() {
@@ -141,8 +144,9 @@ handlelightinggeo() {
   var_0 = getEntArray("big_screen", "targetname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.script_parameters))
+    if(isDefined(var_2.script_parameters)) {
       var_2 moveTo((-2444, 1279.5, 95), 0.1);
+    }
   }
 }
 

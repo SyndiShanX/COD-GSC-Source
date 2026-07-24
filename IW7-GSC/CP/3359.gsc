@@ -65,10 +65,11 @@ _id_127DC() {
   var_0 = self.owner;
   self waittill("detonateExplosive", var_1);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     thread _id_127DB(var_1);
-  else
+  } else {
     thread _id_127DB(var_0);
+  }
 }
 
 _id_127D8() {
@@ -76,8 +77,9 @@ _id_127D8() {
   self.owner endon("disconnect");
   self waittill("emp_damage", var_0, var_1);
 
-  if(isDefined(self.owner) && var_0 != self.owner)
+  if(isDefined(self.owner) && var_0 != self.owner) {
     var_0 notify("destroyed_equipment");
+  }
 
   thread _id_127D7();
 }
@@ -93,8 +95,9 @@ _id_127DB(var_0) {
 }
 
 _id_127D7(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   thread _id_127D6(var_0 + 2);
   wait(var_0);
@@ -212,22 +215,26 @@ _id_127E8(var_0, var_1) {
 }
 
 _id_127E4(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
-  else if(isPlayer(var_0) || isagent(var_0)) {
-    if(scripts\cp\powers\coop_phaseshift::isentityphaseshifted(var_0))
+  } else if(isPlayer(var_0) || isagent(var_0)) {
+    if(scripts\cp\powers\coop_phaseshift::isentityphaseshifted(var_0)) {
       return 0;
+    }
 
-    if(!scripts\cp\utility::isreallyalive(var_0))
+    if(!scripts\cp\utility::isreallyalive(var_0)) {
       return 0;
+    }
 
-    if(self.team == var_0.team)
+    if(self.team == var_0.team) {
       return 0;
+    }
 
-    if(!var_1 && lengthsquared(var_0 getentityvelocity()) < 0.0001)
+    if(!var_1 && lengthsquared(var_0 getentityvelocity()) < 0.0001) {
       return 0;
-    else
+    } else {
       return 1;
+    }
   } else
     return 1;
 }
@@ -270,8 +277,9 @@ _id_127E0(var_0, var_1) {
     self._id_6316 delete();
 
     foreach(var_11 in self._id_41EF) {
-      if(isDefined(var_11))
+      if(isDefined(var_11)) {
         var_11 delete();
+      }
     }
   }
 }
@@ -297,8 +305,9 @@ _id_127F0() {
     var_3 = var_2 getentitynumber();
     self._id_41F6[var_3] = var_2;
 
-    if(isDefined(self._id_41EF[var_3]))
+    if(isDefined(self._id_41EF[var_3])) {
       self._id_41EF[var_3] delete();
+    }
 
     self._id_41EF[var_3] = playfxontagsbetweenclients(scripts\engine\utility::getfx("tripMineLaserFr"), self._id_10D97, "tag_origin", self._id_6316, "tag_origin", var_2);
   }
@@ -313,8 +322,9 @@ _id_127EF() {
   for(;;) {
     foreach(var_2, var_1 in self._id_41F6) {
       if(!isDefined(var_1)) {
-        if(isDefined(self._id_41EF[var_2]))
+        if(isDefined(self._id_41EF[var_2])) {
           self._id_41EF[var_2] delete();
+        }
 
         self._id_41F6[var_2] = undefined;
         self._id_41EF[var_2] = undefined;
@@ -337,8 +347,9 @@ _id_127F1() {
     var_2 = var_1 + anglestoup(self.angles) * 1000;
     var_3 = physics_raycast(var_1, var_2, var_0, self, 0, "physicsquery_closest");
 
-    if(isDefined(var_3) && var_3.size > 0)
+    if(isDefined(var_3) && var_3.size > 0) {
       var_2 = var_3[0]["position"];
+    }
 
     self._id_6316 unlink();
     self._id_6316.origin = var_2;
@@ -373,6 +384,7 @@ _id_127D3(var_0) {
   self endon("missile_stuck");
   var_0 waittill("disconnect");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }

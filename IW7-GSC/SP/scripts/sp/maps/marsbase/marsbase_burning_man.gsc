@@ -61,8 +61,9 @@ _id_A5B2() {
 
   if(var_1.size > 0) {
     foreach(var_3 in var_1) {
-      if(isDefined(var_3) && !var_3 istouching(var_0))
+      if(isDefined(var_3) && !var_3 istouching(var_0)) {
         var_3 delete();
+      }
     }
   }
 }
@@ -110,17 +111,20 @@ _id_11779() {
   var_11 = 20;
   level._id_11695 = 0;
 
-  if(!isDefined(self.burning))
+  if(!isDefined(self.burning)) {
     self.burning = 0;
+  }
 
   var_12 = getEnt("trig_burning_tunnel", "targetname");
   var_13 = getEntArray("trig_burning_man_flamejet", "targetname");
 
-  if(!scripts\engine\utility::flag_exist("burning_tunnel_heat_gesture"))
+  if(!scripts\engine\utility::flag_exist("burning_tunnel_heat_gesture")) {
     scripts\engine\utility::flag_init("burning_tunnel_heat_gesture");
+  }
 
-  if(!scripts\engine\utility::flag_exist("heat_gesture_lock"))
+  if(!scripts\engine\utility::flag_exist("heat_gesture_lock")) {
     scripts\engine\utility::flag_init("heat_gesture_lock");
+  }
 
   while(!scripts\engine\utility::flag("flag_airlock_door_open")) {
     if(self istouching(var_12)) {
@@ -139,11 +143,11 @@ _id_11779() {
       var_15 = var_14 + var_11;
       var_16 = var_14 - var_11;
 
-      if(self._id_116C8 < var_15)
+      if(self._id_116C8 < var_15) {
         self._id_116C8 = self._id_116C8 + var_8;
-      else if(self._id_116C8 > var_16)
+      } else if(self._id_116C8 > var_16) {
         self._id_116C8 = self._id_116C8 - var_9;
-      else {
+      } else {
         var_17 = randomintrange(-1, 1);
         self._id_116C8 = self._id_116C8 + var_17;
       }
@@ -153,8 +157,9 @@ _id_11779() {
         var_5 = 0;
       }
 
-      if(self._id_116C8 > var_1)
+      if(self._id_116C8 > var_1) {
         self._id_116C8 = self._id_116C8 - var_10;
+      }
     }
 
     wait 0.1;
@@ -174,9 +179,9 @@ _id_1885(var_0, var_1) {
     level.player setclientomnvar("ui_helmet_meter_temperature", int(var_4));
     scripts\engine\utility::waitframe();
 
-    if(var_4 > 100 && !var_3)
+    if(var_4 > 100 && !var_3) {
       var_3 = 1;
-    else if(var_4 < 100 && !var_2 && var_3) {
+    } else if(var_4 < 100 && !var_2 && var_3) {
       level.player notify("stop_temperature_sfx");
       var_2 = 1;
     } else if(var_4 >= 100 && var_2 && var_3) {
@@ -208,11 +213,13 @@ _id_12970() {
 _id_8CD1(var_0, var_1, var_2, var_3) {
   var_4 = self._id_116C8 + var_2 * var_3;
 
-  if(var_4 > var_0)
+  if(var_4 > var_0) {
     return var_0;
+  }
 
-  if(var_4 < var_1)
+  if(var_4 < var_1) {
     return var_1;
+  }
 
   return var_4;
 }
@@ -251,8 +258,9 @@ _id_3BA3() {
   scripts\sp\utility::_id_15F5("burning_man_allies_inside_colortrig");
   scripts\engine\utility::flag_wait("flag_burning_man_airlock_approached");
 
-  if(!level.console)
+  if(!level.console) {
     waitfortransient("marsbase_tunnel_airlock_tr");
+  }
 
   scripts\sp\utility::_id_15F5("burning_man_allies_wait_door_colortrig");
   scripts\engine\utility::flag_wait("flag_airlock_door_open");
@@ -332,8 +340,9 @@ _id_3296(var_0, var_1, var_2) {
   scripts\sp\utility::_id_F2A8(1);
   self._id_10265 = 1;
 
-  if(!var_2)
+  if(!var_2) {
     var_1 scripts\sp\anim::_id_1F35(self, var_0);
+  }
 
   scripts\sp\utility::_id_54C6();
   scripts\engine\utility::flag_wait("flag_airlock_door_open");
@@ -355,8 +364,9 @@ _id_4035(var_0) {
   stopFXOnTag(scripts\engine\utility::getfx("vfx_pr_fire_medium"), self, "tag_origin");
   self delete();
 
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     var_0 delete();
+  }
 }
 
 _id_10660() {
@@ -431,8 +441,9 @@ _id_3BA2() {
   level._id_8604 thread scripts\sp\coverwall::_id_596D();
   var_7 _id_13743();
 
-  if(!isDefined(level._id_1493))
+  if(!isDefined(level._id_1493)) {
     level._id_1493 = [level._id_6754, level._id_30F6, level._id_EA2C, level._id_8604];
+  }
 
   var_10 = getcorpsearray();
   clearallcorpses();
@@ -470,8 +481,9 @@ _id_3BA2() {
   var_15 = scripts\engine\utility::array_combine(var_14, var_13);
 
   foreach(var_17 in var_15) {
-    if(isDefined(var_17))
+    if(isDefined(var_17)) {
       scripts\sp\utility::_id_16AE(var_17, "aa2");
+    }
   }
 
   scripts\sp\utility::_id_4074("aa2");

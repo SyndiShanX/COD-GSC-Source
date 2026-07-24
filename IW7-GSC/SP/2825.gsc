@@ -12,8 +12,9 @@ _id_952F() {
   level._id_A03A = getDvar("player_itemUseFOV");
   var_0 = getEntArray("loot_room_volume", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_CF73();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_CF73();
+  }
 }
 
 _id_2237() {}
@@ -48,18 +49,21 @@ _id_489F(var_0) {
         var_3 = [];
 
         foreach(var_13 in var_9) {
-          if(ispointinvolume(var_13.origin, var_5))
+          if(ispointinvolume(var_13.origin, var_5)) {
             var_1 = scripts\engine\utility::array_add(var_1, var_13);
+          }
         }
 
         foreach(var_16 in var_10) {
-          if(ispointinvolume(var_16.origin, var_5))
+          if(ispointinvolume(var_16.origin, var_5)) {
             var_2 = scripts\engine\utility::array_add(var_2, var_16);
+          }
         }
 
         foreach(var_19 in var_11) {
-          if(ispointinvolume(var_19.origin, var_5))
+          if(ispointinvolume(var_19.origin, var_5)) {
             var_3 = scripts\engine\utility::array_add(var_3, var_19);
+          }
         }
       }
     }
@@ -100,8 +104,9 @@ _id_CF73() {
 
 _id_CF6C() {
   if(level.script == "sa_assassination") {
-    if(isDefined(level._id_21E7))
+    if(isDefined(level._id_21E7)) {
       level[[level._id_21E7]]();
+    }
   } else {
     level._id_EC87["player_arms"] = #animtree;
     level._id_EC8C["player_arms"] = "viewmodel_base_viewhands_iw7";
@@ -140,8 +145,9 @@ _id_B095(var_0, var_1, var_2) {
   foreach(var_8, var_6 in var_1) {
     var_7 = 1;
 
-    if(var_4 > var_3)
+    if(var_4 > var_3) {
       var_7 = 2;
+    }
 
     if(isDefined(level._id_B092)) {
       level._id_B093 = var_6;
@@ -232,8 +238,9 @@ _id_AF05(var_0) {
   var_1._id_1FBB = "loot_locker";
   var_1 scripts\sp\anim::_id_1F35(var_1, "open_locker_doors");
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_4 delete();
+  }
 }
 
 _id_AF0F(var_0, var_1) {
@@ -264,8 +271,9 @@ _id_B097(var_0) {
     if(var_0._id_F1B8 != "none" && _id_0A2F::_id_9B49(var_0._id_F1B8)) {
       var_3 = _id_0A2F::build_attach_models(var_0._id_F1B8, "random", undefined, 0, 0, 3);
 
-      if(isDefined(var_3))
+      if(isDefined(var_3)) {
         var_0._id_F1B8 = var_0._id_F1B8 + "+" + var_3;
+      }
 
       var_4 = spawn("weapon_" + var_0._id_F1B8, var_0._id_F1B5.origin, 1);
       var_4.angles = var_0._id_F1B5.angles;
@@ -306,16 +314,18 @@ _id_3E94(var_0, var_1) {
   if(!isDefined(scripts\engine\utility::get_template_script_MAYBE())) {
     return;
   }
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   var_0._id_3850 = undefined;
   var_2 = undefined;
   var_3 = undefined;
   var_4 = ["none"];
 
-  if(!var_1)
+  if(!var_1) {
     var_4 = _id_0A2F::_id_D9FA();
+  }
 
   var_4 = scripts\engine\utility::array_combine(var_4, _id_0A2F::_id_DA0A());
   var_4 = scripts\engine\utility::array_combine(var_4, _id_0A2F::_id_DA10());
@@ -325,7 +335,7 @@ _id_3E94(var_0, var_1) {
 
     if(var_0._id_BF1B / 8 >= var_5) {
       if(level._id_D9E5["optionalunlocks"].size > 0) {
-        level._id_D9E5["optionalunlocks"] = scripts\engine\utility::array_randomize(level._id_D9E5["optionalunlocks"]);
+        level._id_D9E5["optionalunlocks"] = ::scripts\engine\utility::array_randomize(level._id_D9E5["optionalunlocks"]);
 
         foreach(var_7 in level._id_D9E5["optionalunlocks"]) {
           if(scripts\engine\utility::array_contains(level._id_D9E5["loaded_weapons"], var_7)) {
@@ -334,8 +344,9 @@ _id_3E94(var_0, var_1) {
           }
         }
 
-        if(isDefined(var_2))
+        if(isDefined(var_2)) {
           var_3 = _id_13C06(var_2, var_0.nodes);
+        }
 
         if(isDefined(var_3)) {
           var_0._id_F1B8 = var_2;
@@ -353,8 +364,9 @@ _id_3E94(var_0, var_1) {
     var_0._id_3850 = [];
 
     foreach(var_10 in level._id_D9E5["loaded_weapons"]) {
-      if(!scripts\engine\utility::array_contains(var_4, var_10) && !scripts\engine\utility::array_contains(level._id_D9E5["optionalunlocks"], var_10))
+      if(!scripts\engine\utility::array_contains(var_4, var_10) && !scripts\engine\utility::array_contains(level._id_D9E5["optionalunlocks"], var_10)) {
         var_0._id_3850 = scripts\engine\utility::array_add(var_0._id_3850, var_10);
+      }
     }
   }
 
@@ -362,13 +374,15 @@ _id_3E94(var_0, var_1) {
   var_2 = undefined;
   var_3 = undefined;
 
-  if(!isDefined(var_0._id_845F))
+  if(!isDefined(var_0._id_845F)) {
     var_0._id_845F = 0;
+  }
 
   for(var_12 = 0; var_12 < var_0._id_3850.size; var_12++) {
     if(scripts\engine\utility::get_template_script_MAYBE() == "rogue") {
-      if(var_0._id_10310 < var_0._id_11A2E)
+      if(var_0._id_10310 < var_0._id_11A2E) {
         var_0._id_845F = 1;
+      }
 
       if(var_0._id_845F && randomint(100) > 25) {
         var_3 = undefined;
@@ -385,11 +399,13 @@ _id_3E94(var_0, var_1) {
     } else if(scripts\engine\utility::get_template_script_MAYBE() == "moon_port") {
       var_2 = var_0._id_3850[var_12];
 
-      if(!isDefined(var_0._id_8460))
+      if(!isDefined(var_0._id_8460)) {
         var_0._id_8460 = 0;
+      }
 
-      if(!isDefined(var_0._id_8461))
+      if(!isDefined(var_0._id_8461)) {
         var_0._id_8461 = 0;
+      }
 
       if(var_2 == "iw7_devastator" && var_0._id_8461 < 12) {
         var_3 = _id_13C06(var_2, var_0.nodes);
@@ -427,48 +443,55 @@ _id_13C06(var_0, var_1) {
   var_7 = 0;
 
   if(isDefined(level._id_72A6)) {
-    if(level._id_72A6 == "silencer")
+    if(level._id_72A6 == "silencer") {
       var_7 = 1;
+    }
   }
 
-  if(var_0 == "iw7_sdflmg")
+  if(var_0 == "iw7_sdflmg") {
     var_6 = 0.2;
-  else if(var_0 == "iw7_ar57") {
-    if(var_7)
+  } else if(var_0 == "iw7_ar57") {
+    if(var_7) {
       var_2 = "silenced_smg";
+    }
 
     var_6 = 0;
   } else if(var_0 == "iw7_crb") {
-    if(var_7)
+    if(var_7) {
       var_2 = "silenced_smg";
+    }
 
     var_6 = 2.8;
   } else if(var_0 == "iw7_devastator")
     var_6 = 0.5;
-  else if(var_0 == "iw7_m8")
+  else if(var_0 == "iw7_m8") {
     var_6 = 0.2;
-  else if(var_0 == "iw7_kbs")
+  } else if(var_0 == "iw7_kbs") {
     var_6 = 4.8;
-  else if(var_0 == "iw7_fmg") {
-    if(var_7)
+  } else if(var_0 == "iw7_fmg") {
+    if(var_7) {
       var_2 = "silenced_smg";
+    }
 
     var_6 = -1;
   } else if(var_0 == "iw7_ripper")
     var_6 = -1;
   else if(var_0 == "iw7_ump45") {
-    if(var_7)
+    if(var_7) {
       var_2 = "silenced_smg";
+    }
 
     var_6 = -4;
   } else if(var_0 == "iw7_erad") {
-    if(var_7)
+    if(var_7) {
       var_2 = "silenced_smg";
+    }
 
     var_6 = 0;
   } else if(var_0 == "iw7_fhr") {
-    if(var_7)
+    if(var_7) {
       var_2 = "silenced_smg";
+    }
 
     var_6 = 1;
   } else if(var_0 == "iw7_ake") {
@@ -519,8 +542,9 @@ _id_13C06(var_0, var_1) {
       break;
   }
 
-  if(_id_0A2F::_id_DA40(var_0))
+  if(_id_0A2F::_id_DA40(var_0)) {
     var_5 = "heavy";
+  }
 
   var_8 = undefined;
   var_9 = undefined;
@@ -564,24 +588,28 @@ _id_13C06(var_0, var_1) {
           foreach(var_14 in var_12) {
             if(!scripts\engine\utility::array_contains(var_1, var_14)) {
               if(isDefined(var_11.script_noteworthy) && var_11.script_noteworthy == "stacked") {
-                if(isDefined(var_14.script_parameters) && var_14.script_parameters == "extra_large")
+                if(isDefined(var_14.script_parameters) && var_14.script_parameters == "extra_large") {
                   var_21 = 1;
+                }
               }
             }
 
             if(!scripts\engine\utility::array_contains(var_1, var_14) && var_0 == "iw7_sdflmg") {
               if(!isDefined(var_11.script_noteworthy)) {
-                if(isDefined(var_14.script_parameters) && var_14.script_parameters == "extra_large")
+                if(isDefined(var_14.script_parameters) && var_14.script_parameters == "extra_large") {
                   var_22 = 1;
+                }
               }
             }
           }
         } else {
-          if(var_0 == "iw7_smg")
+          if(var_0 == "iw7_smg") {
             var_22 = 1;
+          }
 
-          if(isDefined(var_11.script_noteworthy) && var_11.script_noteworthy == "stacked")
+          if(isDefined(var_11.script_noteworthy) && var_11.script_noteworthy == "stacked") {
             var_21 = 1;
+          }
         }
 
         if(!var_21 && !var_22) {
@@ -608,8 +636,9 @@ _id_13C06(var_0, var_1) {
       }
     }
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       var_3 = var_4;
+    }
   } else {
     foreach(var_11 in var_1) {
       if(!isDefined(var_11.script_parameters)) {
@@ -621,12 +650,14 @@ _id_13C06(var_0, var_1) {
       }
     }
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       var_3 = var_4;
+    }
   }
 
-  if(isDefined(var_6) && isDefined(var_3))
+  if(isDefined(var_6) && isDefined(var_3)) {
     var_3.origin = var_3.origin + (0, 0, var_6);
+  }
 
   return var_3;
 }
@@ -640,16 +671,18 @@ _id_116DD(var_0, var_1, var_2) {
   _id_8835();
   setomnvar("ui_inworld_terminal_hack", 0);
 
-  if(isDefined(self._id_92B9) && self._id_92B9 == 1)
+  if(isDefined(self._id_92B9) && self._id_92B9 == 1) {
     _id_F3F0("on");
-  else
+  } else {
     _id_F3F0("on", 1);
+  }
 
   if(_id_0A2F::_id_DA44(var_1, var_2)) {
-    if(isDefined(self._id_92B9) && self._id_92B9 == 1)
+    if(isDefined(self._id_92B9) && self._id_92B9 == 1) {
       _id_F3F0("hacked");
-    else
+    } else {
       _id_F3F0("hacked", 1);
+    }
 
     return;
   }
@@ -704,20 +737,23 @@ _id_116DC(var_0, var_1, var_2) {
         continue;
       }
 
-      if(var_11 == "upgrade1")
+      if(var_11 == "upgrade1") {
         var_7 = var_7 + 1;
+      }
     }
 
     var_13 = var_5[var_7];
     var_14 = level.player _meth_84C6("equipmentState", var_13);
     var_15 = "upgrade1";
 
-    if(isDefined(var_14) && var_14 == "upgrade1")
+    if(isDefined(var_14) && var_14 == "upgrade1") {
       var_15 = "upgrade2";
+    }
 
     if(var_13 == "coverwall" && var_15 == "upgrade1") {
-      if(level.player._id_4759.active.size > 0)
+      if(level.player._id_4759.active.size > 0) {
         level.player thread scripts\sp\coverwall::_id_B9C4();
+      }
     }
 
     level.player _meth_84C7("equipmentState", var_13, var_15);
@@ -737,8 +773,9 @@ _id_116DC(var_0, var_1, var_2) {
 terminal_unlocks_ui(var_0, var_1) {
   scripts\engine\utility::waitframe();
 
-  if(scripts\engine\utility::flag("game_saving"))
+  if(scripts\engine\utility::flag("game_saving")) {
     wait 0.25;
+  }
 
   thread clearomnvaronautosave("ui_loot_unlocked");
   var_2 = var_0.size;
@@ -749,8 +786,9 @@ terminal_unlocks_ui(var_0, var_1) {
     wait 3.0;
 
     if(var_3 < var_2 - 1) {
-      while(scripts\engine\utility::flag("game_saving"))
+      while(scripts\engine\utility::flag("game_saving")) {
         scripts\engine\utility::waitframe();
+      }
     }
   }
 
@@ -772,8 +810,9 @@ _id_FA17(var_0) {
   var_1 = scripts\sp\utility::_id_10639("player_arms");
   var_2 = level.player _meth_84C6("currentViewModel");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_1 setModel(var_2);
+  }
 
   var_1 hide();
   var_3 = [var_1, self];
@@ -794,21 +833,23 @@ _id_FA17(var_0) {
 _id_2246() {}
 
 _id_8835() {
-  if(!isDefined(self.angles))
+  if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
+  }
 
   self._id_87EB = [];
   var_0 = undefined;
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     var_0 = getEnt(self.target, "targetname");
+  }
 
   if(isDefined(var_0)) {
     self._id_87EB["fx_tag"] = var_0 scripts\engine\utility::spawn_tag_origin();
     self._id_87EB["fx_tag"].origin = self._id_87EB["fx_tag"].origin + anglesToForward(var_0.angles) * 47.9;
     self._id_87EB["fx_tag"].origin = self._id_87EB["fx_tag"].origin + anglestoup(var_0.angles) * 52;
   } else
-    self._id_87EB["fx_tag"] = scripts\engine\utility::spawn_tag_origin();
+    self._id_87EB["fx_tag"] = ::scripts\engine\utility::spawn_tag_origin();
 
   if(!isDefined(var_0)) {
     self._id_87EB["fx_tag"].origin = self.origin + anglesToForward(self.angles) * -2.0;
@@ -827,10 +868,11 @@ _id_87EC() {
 }
 
 _id_8834(var_0) {
-  if(isDefined(self._id_92B9) && self._id_92B9 == 1)
+  if(isDefined(self._id_92B9) && self._id_92B9 == 1) {
     _id_F3F0("hack");
-  else
+  } else {
     _id_F3F0("hack", 1);
+  }
 
   setomnvar("ui_inworld_terminal_wrist_ent", var_0);
   setomnvar("ui_wrist_pc", 7);
@@ -839,8 +881,9 @@ _id_8834(var_0) {
 }
 
 _id_F3F0(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "on";
+  }
 
   var_2 = self._id_87EB["fx_tag"];
 
@@ -860,36 +903,41 @@ _id_F3F0(var_0, var_1) {
     case "on":
       setomnvar("ui_inworld_terminal_on", 1);
 
-      if(isDefined(var_1) && var_1)
+      if(isDefined(var_1) && var_1) {
         setomnvar("ui_inworld_terminal_hack2", 0);
-      else
+      } else {
         setomnvar("ui_inworld_terminal_hack", 0);
+      }
 
       break;
     case "hacked":
-      if(!getomnvar("ui_inworld_terminal_on"))
+      if(!getomnvar("ui_inworld_terminal_on")) {
         setomnvar("ui_inworld_terminal_on", 1);
+      }
 
-      if(isDefined(var_1) && var_1)
+      if(isDefined(var_1) && var_1) {
         setomnvar("ui_inworld_terminal_hack2", 2);
-      else
+      } else {
         setomnvar("ui_inworld_terminal_hack", 2);
+      }
 
       break;
     case "hack":
-      if(isDefined(var_1) && var_1)
+      if(isDefined(var_1) && var_1) {
         setomnvar("ui_inworld_terminal_hack2", 1);
-      else
+      } else {
         setomnvar("ui_inworld_terminal_hack", 1);
+      }
 
       break;
     case "off":
       setomnvar("ui_inworld_terminal_on", 0);
 
-      if(isDefined(var_1) && var_1)
+      if(isDefined(var_1) && var_1) {
         setomnvar("ui_inworld_terminal_hack2", 0);
-      else
+      } else {
         setomnvar("ui_inworld_terminal_hack", 0);
+      }
 
       break;
   }

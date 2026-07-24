@@ -9,8 +9,9 @@ _id_5AD1(var_0) {
   notifyoncommand("jump", "+gostand");
   notifyoncommand("jump", "+moveup");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 60;
+  }
 
   setsaveddvar("jump_height", var_0);
   self._id_AD32 = undefined;
@@ -75,8 +76,9 @@ _id_C144() {
     var_0 = bulletTrace(self.origin + (0, 0, 1), self.origin - (0, 0, getdvarint("jump_height")), 0, self);
     var_1 = var_0["fraction"] < 0.2;
 
-    if(var_1)
+    if(var_1) {
       self notify("landed_on_ground");
+    }
 
     wait 0.2;
   }

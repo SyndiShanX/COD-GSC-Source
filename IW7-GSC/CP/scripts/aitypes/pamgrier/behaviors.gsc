@@ -25,8 +25,9 @@ setupaction(var_0, var_1, var_2, var_3) {
   var_4.fntick = var_2;
   var_4.fnend = var_3;
 
-  if(!isDefined(self.actions))
+  if(!isDefined(self.actions)) {
     self.actions = [];
+  }
 
   self.actions[var_0] = var_4;
 }
@@ -52,8 +53,9 @@ updateeveryframe(var_0) {
       self.lastenemysighttime = gettime();
       self.lastenemysightpos = var_1.origin;
 
-      if(!isDefined(self.enemyreacquiredtime))
+      if(!isDefined(self.enemyreacquiredtime)) {
         self.enemyreacquiredtime = self.lastenemysighttime;
+      }
     } else
       self.enemyreacquiredtime = undefined;
   } else {
@@ -78,8 +80,9 @@ findnearbypamtarget() {
     var_1 = scripts\engine\utility::array_combine(var_1, var_4);
   }
 
-  if(!isDefined(var_1) || var_1.size == 0)
+  if(!isDefined(var_1) || var_1.size == 0) {
     return undefined;
+  }
 
   var_6 = undefined;
   var_7 = 0;
@@ -105,8 +108,9 @@ findnearbypamtarget() {
     }
   }
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     return undefined;
+  }
 
   return var_6;
 }
@@ -130,13 +134,15 @@ findpamteleporttarget(var_0) {
     var_2 = scripts\engine\utility::array_combine(var_2, var_5);
   }
 
-  if(!isDefined(var_2) || var_2.size == 0)
+  if(!isDefined(var_2) || var_2.size == 0) {
     return 0;
+  }
 
-  if(scripts\engine\utility::is_true(var_0))
+  if(scripts\engine\utility::is_true(var_0)) {
     var_2 = scripts\engine\utility::array_randomize(var_2);
-  else
+  } else {
     var_2 = scripts\engine\utility::array_sort_with_func(var_2, ::teleporttargetcompare);
+  }
 
   foreach(var_8 in var_2) {
     if(!isalive(var_8)) {
@@ -169,13 +175,15 @@ findpamteleporttarget(var_0) {
 }
 
 isvalidteleportposition(var_0) {
-  if(!isDefined(level.pamvalidteleportpositioncenter))
+  if(!isDefined(level.pamvalidteleportpositioncenter)) {
     return 1;
+  }
 
   var_1 = distance2dsquared(level.pamvalidteleportpositioncenter, var_0);
 
-  if(var_1 > level.pamvalidteleportradius * level.pamvalidteleportradius)
+  if(var_1 > level.pamvalidteleportradius * level.pamvalidteleportradius) {
     return 0;
+  }
 
   return 1;
 }
@@ -235,8 +243,9 @@ wait_tick(var_0) {
     self.pamenemy = findnearbypamtarget();
 
     if(isDefined(self.pamenemy)) {
-      if(shouldtrymeleeattack() && trymeleeattacks())
+      if(shouldtrymeleeattack() && trymeleeattacks()) {
         return anim.failure;
+      }
 
       self.pamenemy = undefined;
     }
@@ -255,8 +264,9 @@ wait_tick(var_0) {
     }
   }
 
-  if(var_2 < var_1.teleporttime)
+  if(var_2 < var_1.teleporttime) {
     return anim.running;
+  }
 
   if(isDefined(self.needtochilltime) && var_2 > self.needtochilltime) {
     self.desiredaction = "return_home";
@@ -304,8 +314,9 @@ chillin_tick(var_0) {
   var_1 = scripts\aitypes\ratking\bt_state_api::btstate_getinstancedata(var_0);
   var_2 = gettime();
 
-  if(var_2 < var_1.endchilltime)
+  if(var_2 < var_1.endchilltime) {
     return anim.running;
+  }
 
   if(var_2 > self.nextrevivetime) {
     if(findplayertorevive()) {
@@ -345,8 +356,9 @@ teleportattack_teleportdone(var_0, var_1) {
 teleportattack_tick(var_0) {
   self clearpath();
 
-  if(scripts\aitypes\ratking\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\ratking\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   self.desiredaction = "wait";
   return anim.failure;
@@ -380,8 +392,9 @@ reviveplayer_begin(var_0) {
 }
 
 reviveplayer_tick(var_0) {
-  if(scripts\aitypes\ratking\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\ratking\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.failure;
 }
@@ -394,8 +407,9 @@ reviveplayer_teleportdone(var_0, var_1) {
     self.pamenemy = findnearbypamtarget();
 
     if(isDefined(self.pamenemy)) {
-      if(trymeleeattacks())
+      if(trymeleeattacks()) {
         return;
+      }
     }
   }
 
@@ -413,10 +427,11 @@ reviveplayer_end(var_0) {
 
   if(isDefined(self.reviveplayer)) {
     if(!scripts\engine\utility::is_true(self.reviveplayer.inlaststand)) {
-      if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player))
+      if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player)) {
         self.nextrevivetime = gettime() + var_1.min_time_between_revivals_solo;
-      else
+      } else {
         self.nextrevivetime = gettime() + var_1.min_time_between_revivals;
+      }
     } else
       self.forcenextrevivetime = gettime() + var_1.max_time_to_attack_targets_when_player_needs_revive_ms;
   } else
@@ -437,10 +452,11 @@ melee_begin(var_0) {
     var_3 = var_2 getvelocity();
     var_4 = length2dsquared(var_3);
 
-    if(var_4 < 144)
+    if(var_4 < 144) {
       self clearpath();
-    else
+    } else {
       self.bmovingmelee = 1;
+    }
   } else
     self clearpath();
 
@@ -452,8 +468,9 @@ melee_begin(var_0) {
 melee_tick(var_0) {
   self clearpath();
 
-  if(scripts\aitypes\ratking\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\ratking\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.failure;
 }
@@ -473,9 +490,9 @@ requestteleport(var_0, var_1, var_2) {
 }
 
 returnhome_begin(var_0) {
-  if(!isDefined(level.pam_grier_chillin_origins) || level.pam_grier_chillin_origins.size == 0)
+  if(!isDefined(level.pam_grier_chillin_origins) || level.pam_grier_chillin_origins.size == 0) {
     requestteleport(self.chillinpos, self.chillinangles, "return_home");
-  else {
+  } else {
     var_1 = randomint(level.pam_grier_chillin_origins.size);
     var_2 = vectortoangles(level.pam_grier_chillin_origins[var_1] - self.origin);
     self.desiredyaw = var_2[1];
@@ -489,8 +506,9 @@ returnhome_begin(var_0) {
 returnhome_tick(var_0) {
   self clearpath();
 
-  if(scripts\aitypes\ratking\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\ratking\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   self.desiredaction = "chillin";
   return anim.failure;
@@ -508,12 +526,14 @@ shouldtrymeleeattack() {
 trymeleeattacks(var_0) {
   var_1 = scripts\mp\agents\pamgrier\pamgrier_agent::getenemy();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = distancesquared(self.origin, var_1.origin);
+  }
 
   if(!ispointonnavmesh(var_1.origin)) {
-    if(var_0 > self.meleeradiuswhentargetnotonnavmesh * self.meleeradiuswhentargetnotonnavmesh)
+    if(var_0 > self.meleeradiuswhentargetnotonnavmesh * self.meleeradiuswhentargetnotonnavmesh) {
       return 0;
+    }
   } else if(var_0 > self.meleeradiusbasesq)
     return 0;
 
@@ -522,10 +542,11 @@ trymeleeattacks(var_0) {
 }
 
 decideaction(var_0) {
-  if(!isDefined(self.needtochilltime))
+  if(!isDefined(self.needtochilltime)) {
     self.desiredaction = "return_home";
-  else
+  } else {
     self.desiredaction = "wait";
+  }
 
   return anim.success;
 }
@@ -536,8 +557,9 @@ doaction_begin(var_0) {
   var_1 = self.actions[self.desiredaction].fnbegin;
   self.desiredaction = undefined;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     [[var_1]](var_0);
+  }
 }
 
 doaction_tick(var_0) {
@@ -547,8 +569,9 @@ doaction_tick(var_0) {
   if(isDefined(var_2)) {
     var_3 = [[var_2]](var_0);
 
-    if(!isDefined(self.desiredaction))
+    if(!isDefined(self.desiredaction)) {
       return var_3;
+    }
   }
 
   if(isDefined(self.desiredaction)) {
@@ -564,8 +587,9 @@ doaction_end(var_0) {
   var_1 = getcurrentdesiredaction(var_0);
   var_2 = self.actions[var_1].fnend;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     [[var_2]](var_0);
+  }
 
   scripts\aitypes\ratking\bt_state_api::btstate_endstates(var_0);
   self.bt.instancedata[var_0] = undefined;

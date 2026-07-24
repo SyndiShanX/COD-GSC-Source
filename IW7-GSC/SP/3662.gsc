@@ -33,15 +33,17 @@ _id_96F1() {
   anim.player._id_9F6B = 0;
   anim.player._id_29BF = 0.0;
 
-  if(isDefined(level._id_D127) && anim.player == level._id_D127)
+  if(isDefined(level._id_D127) && anim.player == level._id_D127) {
     anim.player._id_46BC = "JK";
-  else
+  } else {
     anim.player._id_46BC = "UN";
+  }
 }
 
 _id_CF8E() {
-  while(!isDefined(anim._id_3D4B))
+  while(!isDefined(anim._id_3D4B)) {
     wait 0.5;
+  }
 
   if(!isDefined(anim.player._id_28CF) || isDefined(anim.player._id_28CF) && !anim.player._id_28CF) {
     anim.player._id_28CF = 1;
@@ -82,11 +84,13 @@ _id_D313() {
 _id_CF8C() {
   anim notify("player_battlechatter_off");
 
-  if(isDefined(anim.player) && isDefined(anim.player._id_28CF))
+  if(isDefined(anim.player) && isDefined(anim.player._id_28CF)) {
     anim.player._id_28CF = 0;
+  }
 
-  if(isDefined(anim.player) && isDefined(anim.player._id_9F6B))
+  if(isDefined(anim.player) && isDefined(anim.player._id_9F6B)) {
     anim.player._id_9F6B = 0;
+  }
 }
 
 _id_D439() {
@@ -95,8 +99,9 @@ _id_D439() {
   var_0 = 0.5;
   wait(var_0);
 
-  if(!scripts\engine\utility::player_is_in_jackal())
+  if(!scripts\engine\utility::player_is_in_jackal()) {
     thread scripts\anim\battlechatter_ai::_id_1A10();
+  }
 
   wait(var_0);
   thread _id_D381();
@@ -129,8 +134,9 @@ _id_D37C() {
 }
 
 _id_D381() {
-  while(!scripts\engine\utility::player_is_in_jackal() && isalive(anim.player) && scripts\anim\battlechatter::_id_29CA())
+  while(!scripts\engine\utility::player_is_in_jackal() && isalive(anim.player) && scripts\anim\battlechatter::_id_29CA()) {
     wait 1.0;
+  }
 
   while(isalive(anim.player) && scripts\anim\battlechatter::_id_29CA() && (isDefined(anim.player._id_28CF) && anim.player._id_28CF)) {
     if(scripts\engine\utility::player_is_in_jackal()) {
@@ -139,13 +145,15 @@ _id_D381() {
           if(level.player._id_58B7._blackboard._id_9DE4) {
             wait(randomfloatrange(0.25, 0.5));
 
-            if(isDefined(level.player._id_58B7))
+            if(isDefined(level.player._id_58B7)) {
               anim.player scripts\anim\battlechatter_ai::_id_181C("movement", "generic", level.player._id_58B7, 0.9);
+            }
           } else {
             wait(randomfloatrange(0.5, 0.75));
 
-            if(isDefined(level.player._id_58B7))
+            if(isDefined(level.player._id_58B7)) {
               anim.player scripts\anim\battlechatter_ai::_id_183F("acquired", level.player._id_58B7);
+            }
           }
         }
       }
@@ -153,8 +161,9 @@ _id_D381() {
 
     wait 1.0;
 
-    while(!scripts\engine\utility::player_is_in_jackal() && isalive(anim.player) && scripts\anim\battlechatter::_id_29CA())
+    while(!scripts\engine\utility::player_is_in_jackal() && isalive(anim.player) && scripts\anim\battlechatter::_id_29CA()) {
       wait 1.0;
+    }
   }
 }
 
@@ -194,8 +203,9 @@ _id_D45C() {
 
     wait 2;
 
-    while(scripts\engine\utility::player_is_in_jackal())
+    while(scripts\engine\utility::player_is_in_jackal()) {
       wait 5.0;
+    }
   }
 }
 
@@ -203,10 +213,11 @@ _id_CF87() {
   anim.player._id_29C8 = 1;
 
   while(isalive(anim.player) && scripts\anim\battlechatter::_id_29CA() && (isDefined(anim.player._id_28CF) && anim.player._id_28CF)) {
-    if(anim.player._id_29C8 == 0)
+    if(anim.player._id_29C8 == 0) {
       var_0 = 10;
-    else
+    } else {
       var_0 = anim.player._id_29C8;
+    }
 
     anim.player._id_9F6B = 1;
 
@@ -218,8 +229,9 @@ _id_CF87() {
     anim.player._id_9F6B = 0;
     level waittill("player_battlechatter_refresh");
 
-    while(anim.player._id_9F6B != 0)
+    while(anim.player._id_9F6B != 0) {
       wait 0.5;
+    }
   }
 }
 
@@ -257,14 +269,17 @@ _id_CF86() {
 
     if(var_0 < 500) {
       if(scripts\sp\utility::_id_D1DF(self.origin + (0, 0, 40))) {
-        if(self.targetname == "ammo_pickup")
+        if(self.targetname == "ammo_pickup") {
           level notify("pc_ammocrate_pickup");
+        }
 
-        if(self.targetname == "equipment_pickup")
+        if(self.targetname == "equipment_pickup") {
           level notify("pc_equipcrate_pickup");
+        }
 
-        if(self.targetname == "loot_hint_struct")
+        if(self.targetname == "loot_hint_struct") {
           level notify("pc_armory_door");
+        }
 
         break;
       }
@@ -275,11 +290,13 @@ _id_CF86() {
 }
 
 _id_9FE0(var_0) {
-  if(!isDefined(self._id_10AC8._id_9E9B[var_0]) || !isDefined(anim.isteamsaying[self.team][var_0]))
+  if(!isDefined(self._id_10AC8._id_9E9B[var_0]) || !isDefined(anim.isteamsaying[self.team][var_0])) {
     return 1;
+  }
 
-  if(!self._id_10AC8._id_9E9B[var_0] && !anim.isteamsaying[self.team][var_0])
+  if(!self._id_10AC8._id_9E9B[var_0] && !anim.isteamsaying[self.team][var_0]) {
     return 1;
+  }
 
   return 0;
 }

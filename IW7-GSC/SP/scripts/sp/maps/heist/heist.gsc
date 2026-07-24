@@ -76,8 +76,9 @@ main() {
   var_2 = ["pathblocker_hangar_shift_1_main", "pathblocker_hangar_shift_2_main"];
 
   foreach(var_4 in var_2) {
-    foreach(var_6 in getEntArray(var_4, "targetname"))
-    var_6 notsolid();
+    foreach(var_6 in getEntArray(var_4, "targetname")) {
+      var_6 notsolid();
+    }
   }
 }
 
@@ -268,15 +269,17 @@ _id_9712() {
 }
 
 _id_8EA3(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = var_1;
-  else
+  } else {
     var_2 = "targetname";
+  }
 
   var_3 = getEnt(var_0, var_2);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 hide();
+  }
 
   level._id_F05E = scripts\engine\utility::array_add(level._id_F05E, var_3);
 }
@@ -307,8 +310,9 @@ _id_F052() {
   level._id_BAEA linkTo(level._id_BAE8);
   var_0 = getEntArray("light_mons_hangar_fake", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 linkTo(level._id_BAE8);
+  foreach(var_2 in var_0) {
+    var_2 linkTo(level._id_BAE8);
+  }
 
   level notify("mons_fake_hangar_lights_off");
   var_4 = getEnt("refl_mons_fake_hangar", "targetname");
@@ -334,30 +338,35 @@ _id_F04F() {
   level._id_BAE9 = getEntArray("mons_hangar", "targetname");
 
   if(isDefined(level._id_BAE9)) {
-    foreach(var_1 in level._id_BAE9)
-    var_1 delete();
+    foreach(var_1 in level._id_BAE9) {
+      var_1 delete();
+    }
   }
 
   level notify("mons_fake_hangar_lights_off");
   var_3 = getEntArray("light_mons_hangar_fake", "script_noteworthy");
 
-  foreach(var_5 in var_3)
-  var_5 delete();
+  foreach(var_5 in var_3) {
+    var_5 delete();
+  }
 
   var_7 = getEnt("refl_mons_fake_hangar", "targetname");
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     var_7 delete();
+  }
 
   level._id_BAEA = getEnt("mons_hangar_clip", "targetname");
 
-  if(isDefined(level._id_BAEA))
+  if(isDefined(level._id_BAEA)) {
     level._id_BAEA delete();
+  }
 
   level._id_BAE8 = scripts\sp\utility::_id_7D40("mons_skybox", "targetname");
 
-  if(isDefined(level._id_BAE8._id_4348))
+  if(isDefined(level._id_BAE8._id_4348)) {
     level._id_BAE8._id_4348 delete();
+  }
 
   if(isDefined(level._id_BAE8)) {
     level._id_BAE8 thread _id_0BB8::_id_39D0("off");
@@ -381,8 +390,9 @@ _id_F054() {
     if(issubstr(var_3.classname, "light")) {
       var_4 = var_3.origin - var_1.origin;
 
-      if(!isDefined(var_1.angles))
+      if(!isDefined(var_1.angles)) {
         var_1.angles = (0, 0, 0);
+      }
 
       var_5 = scripts\engine\utility::anglebetweenvectors(anglesToForward(var_3.angles), anglesToForward(var_1.angles));
       var_3 linkTo(level._id_E3F6, "tag_origin", var_4, (0, var_5, 0));
@@ -403,8 +413,9 @@ _id_F045(var_0) {
   var_1 = var_0 scripts\sp\utility::_id_10808();
   level._id_F05D = scripts\engine\utility::array_add(level._id_F05D, var_1);
 
-  if(getdvarint("debug_fleet"))
+  if(getdvarint("debug_fleet")) {
     var_1 thread _id_D8F7();
+  }
 
   return var_1;
 }
@@ -413,11 +424,13 @@ _id_D8F7() {
   self endon("death");
   var_0 = ".";
 
-  if(isDefined(self._id_6A0B))
+  if(isDefined(self._id_6A0B)) {
     var_0 = self._id_6A0B;
+  }
 
-  for(;;)
+  for(;;) {
     wait 0.1;
+  }
 }
 
 _id_3F91() {
@@ -456,8 +469,9 @@ _id_7D16(var_0) {
   var_1["mons_bridge_approach"] = ["heist_base_tr", "heist_geo_om_gun_deck_tr", "heist_geo_om_cic_tr", "heist_cap_ships_tr", "heist_geo_om_bridge_tr"];
   var_1["mons_launch"] = ["heist_city_mover_tr", "heist_cap_ships_tr", "heist_geo_om_bridge_tr"];
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     return var_1[var_0];
+  }
 
   return var_1;
 }
@@ -506,13 +520,15 @@ _id_AE0D(var_0) {
 
   if(isDefined(level._id_4BCB)) {
     foreach(var_3 in _id_7D16(level._id_4BCB)) {
-      if(!isDefined(scripts\engine\utility::array_find(var_1, var_3)))
+      if(!isDefined(scripts\engine\utility::array_find(var_1, var_3))) {
         thread scripts\sp\utility::_id_1264E(var_3);
+      }
     }
   }
 
-  foreach(var_3 in var_1)
-  thread scripts\sp\utility::_id_12641(var_3);
+  foreach(var_3 in var_1) {
+    thread scripts\sp\utility::_id_12641(var_3);
+  }
 
   level._id_4BCB = var_0;
 }
@@ -654,8 +670,9 @@ _id_8AC2(var_0) {
   level._id_10293 = 1;
   var_3 = scripts\engine\utility::getStruct("mons_skybox_rotate", "targetname") scripts\engine\utility::spawn_tag_origin();
 
-  foreach(var_5 in level._id_10291)
-  var_5 linkTo(var_3);
+  foreach(var_5 in level._id_10291) {
+    var_5 linkTo(var_3);
+  }
 
   var_1 linkTo(var_3);
 }

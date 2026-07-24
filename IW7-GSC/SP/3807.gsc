@@ -28,8 +28,9 @@ _id_E38C() {
   for(var_1 = 0; var_1 < var_0; var_1++) {
     var_2 = getpartname(level._id_E35D._id_47DC.model, var_1);
 
-    if(getsubstr(var_2, 0, 9) == "tag_light")
+    if(getsubstr(var_2, 0, 9) == "tag_light") {
       scripts\engine\utility::noself_delaycall(randomfloatrange(0, 0.3), ::playfxontag, scripts\engine\utility::getfx("red_light"), level._id_E35D._id_47DC, var_2);
+    }
   }
 }
 
@@ -85,8 +86,9 @@ _id_E38F(var_0, var_1) {
   self endon("death");
   level endon("dropship_crane_stop");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   wait(var_0);
   self playSound(var_1);

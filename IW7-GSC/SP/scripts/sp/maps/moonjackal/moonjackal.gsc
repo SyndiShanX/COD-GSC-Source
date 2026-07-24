@@ -53,15 +53,17 @@ _id_BB4B() {
 }
 
 _id_900C() {
-  if(scripts\engine\utility::flag("started_transition") || !scripts\engine\utility::flag("launch_area_clear"))
+  if(scripts\engine\utility::flag("started_transition") || !scripts\engine\utility::flag("launch_area_clear")) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_9006() {
-  if(scripts\engine\utility::flag("started_transition") || scripts\engine\utility::flag("launch_area_clear"))
+  if(scripts\engine\utility::flag("started_transition") || scripts\engine\utility::flag("launch_area_clear")) {
     return 1;
+  }
 
   return 0;
 }
@@ -101,10 +103,11 @@ _id_B8F3() {
       continue;
     }
 
-    if(isDefined(level._id_D127) && level._id_D127 _id_0BDC::_id_A2A7())
+    if(isDefined(level._id_D127) && level._id_D127 _id_0BDC::_id_A2A7()) {
       var_0 = level._id_D127.origin;
-    else
+    } else {
       var_0 = level.player.origin;
+    }
 
     var_1 = (200000, 0, 0);
     var_1 = rotatevector(var_1, level._id_111D0._id_1120D + level._id_111D0._id_75AC);
@@ -120,8 +123,9 @@ _id_B8C5() {
   waittillframeend;
   var_0 = 0;
 
-  if(level._id_10CDA != "default")
+  if(level._id_10CDA != "default") {
     var_0 = 1;
+  }
 
   switch (level._id_10CDA) {
     case "default":

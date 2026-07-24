@@ -249,43 +249,49 @@ vehicle_badplace() {}
 _id_1F3F(var_0, var_1, var_2, var_3, var_4) {
   var_5 = self;
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_4 endon(var_3);
-  else
+  } else {
     var_5 endon(var_3);
+  }
 
   if(isarray(var_0)) {
     foreach(var_7 in var_0) {
-      if(!isai(var_7) || isalive(var_7))
+      if(!isai(var_7) || isalive(var_7)) {
         var_5 thread _id_1F40(var_7, var_1, var_2, var_3, var_4);
+      }
     }
   } else {
     var_7 = var_0;
 
-    if(!isai(var_7) || isalive(var_7))
+    if(!isai(var_7) || isalive(var_7)) {
       var_5 thread _id_1F40(var_7, var_1, var_2, var_3, var_4);
+    }
   }
 }
 
 _id_1F40(var_0, var_1, var_2, var_3, var_4) {
   var_0 endon("stop_anim_single_to_loop_solo");
 
-  if(isai(var_0))
+  if(isai(var_0)) {
     var_0 endon("death");
+  }
 
   var_5 = self;
 
-  if(isDefined(var_4) && isDefined(var_3))
+  if(isDefined(var_4) && isDefined(var_3)) {
     var_4 endon(var_3);
-  else if(isDefined(var_3))
+  } else if(isDefined(var_3)) {
     var_5 endon(var_3);
+  }
 
   if(isDefined(var_0)) {
     if(!isai(var_0) || isalive(var_0)) {
       var_5 scripts\sp\anim::_id_1F35(var_0, var_1);
 
-      if(isDefined(var_4))
+      if(isDefined(var_4)) {
         var_5 = var_4;
+      }
 
       var_5 thread scripts\sp\anim::_id_1EEA(var_0, var_2, var_3);
     }
@@ -295,8 +301,9 @@ _id_1F40(var_0, var_1, var_2, var_3, var_4) {
 _id_1F3D(var_0, var_1) {
   var_2 = self;
 
-  foreach(var_4 in var_0)
-  var_2 thread _id_1F3E(var_4, var_1);
+  foreach(var_4 in var_0) {
+    var_2 thread _id_1F3E(var_4, var_1);
+  }
 }
 
 _id_1F3E(var_0, var_1, var_2) {

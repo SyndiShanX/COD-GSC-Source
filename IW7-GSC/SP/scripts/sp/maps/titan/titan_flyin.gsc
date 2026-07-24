@@ -31,11 +31,13 @@ _id_D610() {
 }
 
 _id_D611() {
-  if(isDefined(level._id_B33E))
+  if(isDefined(level._id_B33E)) {
     level._id_B33E scripts\sp\utility::_id_F3B5("orange");
+  }
 
-  if(isDefined(level._id_2429))
+  if(isDefined(level._id_2429)) {
     level._id_2429 scripts\sp\utility::_id_F3B5("red");
+  }
 
   level.player scripts\sp\utility::_id_F526("relaxed");
 
@@ -56,8 +58,9 @@ _id_2AD3() {
   cinematicingame("titan_dropship_turbulence");
   wait 0.05;
 
-  while(iscinematicplaying())
+  while(iscinematicplaying()) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_set("bink_done");
 }
@@ -118,13 +121,15 @@ _id_5EA4() {
   level._id_5D6C scripts\sp\utility::_id_65E0("exiting");
   var_1 = getEntArray("freighter_ships", "targetname");
 
-  foreach(var_3 in var_1)
-  var_3 hide();
+  foreach(var_3 in var_1) {
+    var_3 hide();
+  }
 
-  if(scripts\sp\utility::hastag(level._id_5D6C.model, "tag_origin"))
+  if(scripts\sp\utility::hastag(level._id_5D6C.model, "tag_origin")) {
     level._id_5D6C._id_E6E8 = "tag_origin";
-  else
+  } else {
     level._id_5D6C._id_E6E8 = level._id_5D6C.model;
+  }
 
   scripts\sp\maps\titan\titan_code::_id_10733();
   thread _id_2C23();
@@ -159,10 +164,11 @@ _id_11884() {
   self notify("stop_thrusters_on_off");
 
   for(;;) {
-    if(scripts\engine\utility::flag("titan_enable_thrusters"))
+    if(scripts\engine\utility::flag("titan_enable_thrusters")) {
       scripts\sp\utility::_id_65DD("inside_dropship_disable_effects");
-    else if(!scripts\engine\utility::flag("squad_unloaded"))
+    } else if(!scripts\engine\utility::flag("squad_unloaded")) {
       scripts\sp\utility::_id_65E1("inside_dropship_disable_effects");
+    }
 
     wait 0.2;
   }
@@ -274,8 +280,9 @@ _id_134D0() {
   wait 3.6;
 
   for(var_0 = 0; var_0 < 20; var_0++) {
-    if(!scripts\engine\utility::flag("freefall_start") || scripts\engine\utility::flag("dropship_fly_sfx"))
+    if(!scripts\engine\utility::flag("freefall_start") || scripts\engine\utility::flag("dropship_fly_sfx")) {
       _id_5E58("titan_dropship_radio_bursts");
+    }
 
     wait(randomintrange(3, 5));
   }
@@ -298,8 +305,9 @@ _id_5E59() {
       continue;
     }
 
-    if(var_2 == "sc_titan_bgs_Fivesecondstothe")
+    if(var_2 == "sc_titan_bgs_Fivesecondstothe") {
       scripts\engine\utility::flag_set("dropship_land_sfx");
+    }
   }
 }
 
@@ -360,8 +368,9 @@ _id_D1AA() {
   wait 1;
   level endon("stop_player_jumpout_check");
 
-  while(level._id_5D6C _id_0BBF::_id_D118())
+  while(level._id_5D6C _id_0BBF::_id_D118()) {
     wait 0.1;
+  }
 
   level.player _meth_80A1();
   level.player scripts\sp\utility::_id_54C6();
@@ -381,18 +390,20 @@ _id_5D77(var_0) {
   var_6 = ["right_01", "right_02", "middle_01", "middle_02"];
 
   foreach(var_9, var_8 in level._id_5D6C _id_0BBF::_id_796E()) {
-    if(isDefined(scripts\engine\utility::array_find(var_6, var_9)))
+    if(isDefined(scripts\engine\utility::array_find(var_6, var_9))) {
       var_5[var_5.size] = var_8;
+    }
   }
 
   var_10 = 3;
   level._id_5D6C._id_86D9 = [];
 
-  foreach(var_9 in var_6)
-  level._id_5D6C scripts\sp\anim::_id_1EC3(var_5[var_9], "dropship_intro");
+  foreach(var_9 in var_6) {
+    level._id_5D6C scripts\sp\anim::_id_1EC3(var_5[var_9], "dropship_intro");
+  }
 
   for(var_13 = 1; var_13 < var_10; var_13++) {
-    level._id_5D6C._id_86D9[var_13] = scripts\sp\utility::_id_10639("dropship_seat_mount0" + var_13, level._id_5D6C.origin);
+    level._id_5D6C._id_86D9[var_13] = ::scripts\sp\utility::_id_10639("dropship_seat_mount0" + var_13, level._id_5D6C.origin);
     level._id_5D6C scripts\sp\anim::_id_1EC3(level._id_5D6C._id_86D9[var_13], "seat_mount_ff", var_1);
     level._id_5D6C._id_86D9[var_13] linkTo(level._id_5D6C, var_1);
   }
@@ -402,15 +413,17 @@ _id_5D77(var_0) {
   level._id_5D6C scripts\sp\anim::_id_1EC3(level._id_5D6C._id_D27E, "dropship_player_seat_exit");
   level._id_5D6C._id_D27E linkTo(level._id_5D6C);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_14 = "loading_movie_scene";
-  else
+  } else {
     var_14 = "intro_dropoff_scene";
+  }
 
   level notify("loading_anim_start");
 
-  foreach(var_3 in level._id_10AC8)
-  var_3._id_1EEF thread _id_9AB1(var_3, var_14);
+  foreach(var_3 in level._id_10AC8) {
+    var_3._id_1EEF thread _id_9AB1(var_3, var_14);
+  }
 
   level._id_5D6C thread scripts\sp\anim::_id_1F2C(var_5, "dropship_intro", var_1);
   wait 1;
@@ -419,16 +432,18 @@ _id_5D77(var_0) {
   level waittill("intro_scene_done");
 
   if(isDefined(var_0)) {
-    foreach(var_3 in level._id_10AC8)
-    var_3._id_1EEF thread scripts\sp\anim::_id_1EE0(var_3, var_14);
+    foreach(var_3 in level._id_10AC8) {
+      var_3._id_1EEF thread scripts\sp\anim::_id_1EE0(var_3, var_14);
+    }
 
     return;
   }
 
   scripts\engine\utility::flag_wait("begin_intro_unload");
 
-  foreach(var_3 in level._id_10AC8)
-  var_3 scripts\engine\utility::delaythread(0.5, ::_id_873C);
+  foreach(var_3 in level._id_10AC8) {
+    var_3 scripts\engine\utility::delaythread(0.5, ::_id_873C);
+  }
 
   level._id_B33E scripts\sp\utility::_id_F3B5("orange");
   level._id_2429 scripts\sp\utility::_id_F3B5("red");
@@ -442,14 +457,16 @@ _id_5D77(var_0) {
   scripts\engine\utility::flag_set("squad_unloaded");
   wait 5;
 
-  foreach(var_3 in level._id_10AC8)
-  var_3._id_1EEF delete();
+  foreach(var_3 in level._id_10AC8) {
+    var_3._id_1EEF delete();
+  }
 
   level._id_2C23 delete();
   level._id_2C23._id_1EEF delete();
 
-  foreach(var_24 in level._id_5D6C._id_86D9)
-  var_24 delete();
+  foreach(var_24 in level._id_5D6C._id_86D9) {
+    var_24 delete();
+  }
 }
 
 _id_9AB1(var_0, var_1) {
@@ -457,8 +474,9 @@ _id_9AB1(var_0, var_1) {
     scripts\engine\utility::flag_set("freefall_start");
     scripts\sp\anim::_id_1F35(var_0, "intro_dropoff_scene_2");
 
-    if(getdvarint("flyin_pip"))
+    if(getdvarint("flyin_pip")) {
       thread scripts\sp\pip_util::_id_CBA3();
+    }
 
     level notify("intro_scene_done");
     thread scripts\sp\anim::_id_1EEA(var_0, "intro_dropoff_idle");
@@ -523,8 +541,9 @@ _id_5E6B() {
   level.player._id_1EB7 scripts\sp\anim::_id_1F35(level.player._id_1E9C, "intro_dropoff_exit");
   scripts\sp\maps\titan\titan_code::_id_DF3E();
 
-  if(isDefined(level.player._id_13C3F))
+  if(isDefined(level.player._id_13C3F)) {
     level.player._id_13C3F delete();
+  }
 
   setsaveddvar("cg_drawplayershadow", 1);
   level.player._id_1E9C delete();
@@ -539,8 +558,9 @@ _id_5E6B() {
   level.player setmovespeedscale(1.0);
   scripts\sp\maps\titan\titan_code::_id_13784(level._id_10AC8);
 
-  while(distance2d(var_0.origin, level.player.origin) < 800)
+  while(distance2d(var_0.origin, level.player.origin) < 800) {
     wait 0.1;
+  }
 
   thread scripts\sp\maps\titan\titan_code::_id_D250(1);
   level._id_5D6C _id_0BBC::_id_F362("right", level._id_EC85["dropship_flyin"]["dropship_door_close"]);
@@ -551,8 +571,9 @@ _id_5E6B() {
 
 destroy_coverwalls_on_takeoff() {
   for(var_0 = 0; var_0 < 5; var_0++) {
-    if(isDefined(level.player._id_4759._id_11168) && level.player._id_4759._id_11168.size > 0)
+    if(isDefined(level.player._id_4759._id_11168) && level.player._id_4759._id_11168.size > 0) {
       thread scripts\sp\coverwall::_id_DFBD();
+    }
 
     wait 1;
   }
@@ -589,8 +610,9 @@ _id_5E64() {
   level._id_5988.origin = level._id_5D6C gettagorigin("TAG_DOOR_RIGHT");
   level._id_5988 linkTo(level._id_5D6C, "TAG_DOOR_RIGHT");
 
-  foreach(var_1 in level._id_59E0)
-  var_1 linkTo(level._id_5988);
+  foreach(var_1 in level._id_59E0) {
+    var_1 linkTo(level._id_5988);
+  }
 }
 
 _id_113D7() {
@@ -606,8 +628,9 @@ _id_D1F5() {
   var_0 = getEnt("pip_monitor", "targetname");
   var_1 = var_0 scripts\sp\utility::_id_7A8F();
 
-  foreach(var_3 in var_1)
-  var_3 linkTo(var_0);
+  foreach(var_3 in var_1) {
+    var_3 linkTo(var_0);
+  }
 
   var_0 linkTo(level.player._id_1E9C, "tag_origin", (42, 13, 47), (0, 270, 0));
   thread scripts\sp\pip_util::_id_CBB5(level._id_C47F, "tag_eye", 29, (18, 3, 1), (0, 200, 3), 1);
@@ -633,8 +656,9 @@ _id_13485() {
 _id_9132() {
   wait 2.6;
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     scripts\sp\specialist_MAYBE::_id_8E05();
+  }
 
   thread _id_0B0B::_id_25C2(2.0, "normal", "titan_dropship");
   wait 0.6;
@@ -644,8 +668,9 @@ _id_FA08() {
   var_0 = level.player scripts\sp\utility::_id_7D74();
   var_1 = "tag_origin";
 
-  if(var_0.size > 0)
+  if(var_0.size > 0) {
     var_1 = getweaponmodel(var_0[0]);
+  }
 
   level.player._id_13C3F = spawn("script_model", level.player._id_1E9C gettagorigin("tag_weapon_right"));
   level.player._id_13C3F.angles = level.player._id_1E9C gettagangles("tag_weapon_right");
@@ -725,8 +750,9 @@ _id_10637() {
 
   scripts\engine\utility::flag_wait("free_fall_done");
 
-  foreach(var_7 in var_1)
-  var_7 thread _id_7005();
+  foreach(var_7 in var_1) {
+    var_7 thread _id_7005();
+  }
 }
 
 _id_7005() {

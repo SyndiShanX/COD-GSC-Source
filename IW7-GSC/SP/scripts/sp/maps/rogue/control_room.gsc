@@ -28,8 +28,9 @@ _id_F0D2() {}
 _id_3B50() {
   scripts\engine\utility::flag_set("objective_control");
 
-  foreach(var_1 in level.allies)
-  var_1.disableplayeradsloscheck = 1;
+  foreach(var_1 in level.allies) {
+    var_1.disableplayeradsloscheck = 1;
+  }
 }
 
 _id_45B6() {
@@ -106,8 +107,9 @@ _id_45B2() {
   scripts\engine\utility::array_thread(level._id_10AC8, scripts\sp\maps\rogue\rogue_util::_id_12984);
   thread _id_DD07(var_0);
 
-  foreach(var_3 in level._id_10AC8)
-  var_3 scripts\sp\utility::_id_5522();
+  foreach(var_3 in level._id_10AC8) {
+    var_3 scripts\sp\utility::_id_5522();
+  }
 
   thread scripts\sp\utility::_id_266F();
   thread _id_59E2();
@@ -193,8 +195,9 @@ _id_3D98(var_0) {
 }
 
 _id_DD07(var_0, var_1) {
-  foreach(var_3 in level._id_10AC8)
-  var_3 scripts\sp\utility::_id_54F7();
+  foreach(var_3 in level._id_10AC8) {
+    var_3 scripts\sp\utility::_id_54F7();
+  }
 
   level._id_13E12 _meth_82EE(getnode("control_airlock_temp_node_salter", "targetname"));
   level._id_B4F9 _meth_82EE(getnode("control_airlock_temp_node_mco", "targetname"));
@@ -216,8 +219,9 @@ _id_45B8() {
   scripts\engine\utility::flag_clear("sun_vision_blend");
   level waittill("start_control_room_scene");
 
-  foreach(var_4 in level._id_10AC8)
-  thread scripts\sp\anim::_id_1F12(var_4);
+  foreach(var_4 in level._id_10AC8) {
+    thread scripts\sp\anim::_id_1F12(var_4);
+  }
 
   level.player scripts\sp\utility::_id_F526("relaxed");
   level.player notify("kill_fspar_hint");
@@ -225,8 +229,9 @@ _id_45B8() {
   var_0 thread _id_13E14();
   var_1 = scripts\engine\utility::array_remove(level._id_10AC8, level._id_B4F9);
 
-  foreach(var_4 in var_1)
-  var_0 thread scripts\sp\anim::_id_1F35(var_4, "control_room_scene");
+  foreach(var_4 in var_1) {
+    var_0 thread scripts\sp\anim::_id_1F35(var_4, "control_room_scene");
+  }
 
   var_0 scripts\sp\anim::_id_1F35(level._id_B4F9, "control_room_scene");
   scripts\engine\utility::flag_set("objective_control");
@@ -252,8 +257,9 @@ _id_A5C1() {
   self endon("death");
   wait(randomfloatrange(1, 4));
 
-  if(isalive(self))
+  if(isalive(self)) {
     self _meth_81D0();
+  }
 }
 
 _id_13727() {
@@ -270,8 +276,9 @@ _id_13727() {
       }
     }
 
-    if(level.player istouching(var_1) == 0)
+    if(level.player istouching(var_1) == 0) {
       var_2 = 0;
+    }
 
     if(var_2 == 1) {
       break;

@@ -43,8 +43,9 @@ _id_113A9() {
     foreach(var_6 in var_1) {
       var_7 = (var_6.origin[0], var_6.origin[1], var_4.origin[2]);
 
-      if(ispointinvolume(var_7, var_4))
+      if(ispointinvolume(var_7, var_4)) {
         var_4.doors = scripts\engine\utility::array_add(var_4.doors, var_6);
+      }
     }
   }
 
@@ -55,10 +56,11 @@ _id_113A9() {
   _id_0F17::_id_2FA4();
 
   foreach(var_15 in var_13) {
-    if(var_15.targetname == "assault_system")
+    if(var_15.targetname == "assault_system") {
       var_15 _id_0F0A::_id_F994();
-    else if(var_15.targetname == "assault_entry")
+    } else if(var_15.targetname == "assault_entry") {
       var_0 = var_15 _id_0F06::_id_F95F();
+    }
 
     if(var_15.targetname != "assault_objective" && var_15.targetname != "assault_entry") {
       var_15 thread _id_113A1();
@@ -244,8 +246,9 @@ _id_134F9(var_0, var_1) {
     case "off":
       var_5 = "off";
 
-      if(var_0 == "life_support")
+      if(var_0 == "life_support") {
         var_3 = var_3 - 1;
+      }
 
       break;
     case "hacked":
@@ -267,16 +270,18 @@ _id_134F9(var_0, var_1) {
 }
 
 _id_87E3() {
-  if(!isDefined(self._id_4D94._id_8EBC))
+  if(!isDefined(self._id_4D94._id_8EBC)) {
     self._id_8EBC = 0;
-  else
+  } else {
     self._id_8EBC = max(self._id_8EBC - 1, 0);
+  }
 
   if(self._id_8EBC > 0) {
     return;
   }
-  if(!isDefined(self._id_55F2))
+  if(!isDefined(self._id_55F2)) {
     self._id_55F2 = 0;
+  }
 
   self._id_13BEE = _id_8796();
   self._id_9028 = _id_8794();
@@ -286,10 +291,11 @@ _id_87E3() {
 }
 
 _id_87AC() {
-  if(!isDefined(self._id_8EBC))
+  if(!isDefined(self._id_8EBC)) {
     self._id_8EBC = 1;
-  else
+  } else {
     self._id_8EBC = self._id_8EBC + 1;
+  }
 
   if(self._id_8EBC > 1) {
     return;
@@ -313,8 +319,9 @@ _id_87AC() {
 _id_DABB() {
   var_0 = level scripts\engine\utility::waittill_any_return("hack_success", "hack_fail", "proximity_hack_end");
 
-  if(var_0 == "hack_success")
+  if(var_0 == "hack_success") {
     thread _id_87C7();
+  }
 
   thread _id_87C2();
 }
@@ -322,18 +329,21 @@ _id_DABB() {
 _id_87C6(var_0) {
   level._id_4BC6 = self;
 
-  if(isDefined(self._id_4D94._id_505A))
+  if(isDefined(self._id_4D94._id_505A)) {
     _id_5075(self._id_4D94);
+  }
 
   wait 0.8;
 
-  if(scripts\engine\utility::flag("proximity_hacking"))
+  if(scripts\engine\utility::flag("proximity_hacking")) {
     thread _id_134F9(var_0, "hacking");
+  }
 }
 
 _id_87C2() {
-  if(isDefined(self._id_4D94._id_505A))
+  if(isDefined(self._id_4D94._id_505A)) {
     _id_5074();
+  }
 
   level.player enableweapons();
   level.player freezecontrols(0);
@@ -352,10 +362,11 @@ _id_8794() {
   var_0.vertalign = "bottom";
   var_0.alpha = 0;
 
-  if(isDefined(self._id_4D94.hintstring))
+  if(isDefined(self._id_4D94.hintstring)) {
     var_1 = self._id_4D94.hintstring;
-  else
+  } else {
     var_1 = "System Interface";
+  }
 
   var_0 settext(var_1);
   return var_0;
@@ -402,11 +413,13 @@ _id_DAB9() {
       }
 
       if(!scripts\engine\utility::flag("hack_nearby_nag_cooldown") && self._id_55F2 == 0) {
-        if(self._id_4D94._id_113AC == "life_support")
+        if(self._id_4D94._id_113AC == "life_support") {
           thread scripts\sp\utility::_id_10350("ship_assault_eth_lifesupportsyst", 0.05);
+        }
 
-        if(self._id_4D94._id_113AC == "robotics")
+        if(self._id_4D94._id_113AC == "robotics") {
           thread scripts\sp\utility::_id_10350("ship_assault_eth_roboticssystems", 0.05);
+        }
 
         scripts\engine\utility::flag_set("hack_nearby_nag_cooldown");
         level thread scripts\sp\utility::_id_6E2B("hack_nearby_nag_cooldown", randomfloatrange(20.0, 25.0));
@@ -497,25 +510,29 @@ _id_517D(var_0, var_1) {
 }
 
 _id_10DE1(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self._id_D9E4 = _id_4A0E();
-  else
+  } else {
     self._id_DA58 = _id_4A0E();
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self._id_D9E3 = _id_4A0D();
-  else
+  } else {
     self._id_D9E1 = _id_4A0D();
+  }
 }
 
 _id_F80E(var_0, var_1) {
-  if(var_0 > 1)
+  if(var_0 > 1) {
     var_0 = 1;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 scripts\sp\hud_util::updatebar(var_0);
-  else
+  } else {
     self._id_D9E1 scripts\sp\hud_util::updatebar(var_0);
+  }
 }
 
 _id_6379() {
@@ -604,8 +621,9 @@ _id_E1D1() {
     var_2 _id_AD11();
     var_2 movez(var_3, 0.5);
 
-    if(!isDefined(var_2.script_parameters))
+    if(!isDefined(var_2.script_parameters)) {
       var_2 connectpaths();
+    }
   }
 }
 
@@ -613,8 +631,9 @@ _id_AD11() {
   var_0 = self;
   var_1 = var_0 scripts\sp\utility::_id_7A8F();
 
-  foreach(var_3 in var_1)
-  var_3 linkTo(var_0);
+  foreach(var_3 in var_1) {
+    var_3 linkTo(var_0);
+  }
 }
 
 _id_78C7(var_0) {

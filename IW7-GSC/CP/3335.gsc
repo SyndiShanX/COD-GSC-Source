@@ -60,10 +60,11 @@ c4_explodeonnotify() {
   var_0 = self.owner;
   self waittill("detonateExplosive", var_1);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     thread c4_explode(var_1);
-  else
+  } else {
     thread c4_explode(var_0);
+  }
 }
 
 c4_destroyonemp() {
@@ -71,8 +72,9 @@ c4_destroyonemp() {
   self.owner endon("disconnect");
   self waittill("emp_damage", var_0, var_1);
 
-  if(isDefined(self.owner) && var_0 != self.owner)
+  if(isDefined(self.owner) && var_0 != self.owner) {
     var_0 notify("destroyed_equipment");
+  }
 
   thread c4_destroy();
 }
@@ -126,8 +128,9 @@ c4_watchforaltdetonation() {
       if(var_0 >= 0.5) {
         continue;
       }
-      if(!scripts\cp\powers\coop_phaseshift::isentityphaseshifted(self) && !scripts\cp\utility::isusingremote() && scripts\cp\utility::isreallyalive(self))
+      if(!scripts\cp\powers\coop_phaseshift::isentityphaseshifted(self) && !scripts\cp\utility::isusingremote() && scripts\cp\utility::isreallyalive(self)) {
         thread c4_detonateall();
+      }
     }
 
     wait 0.05;
@@ -137,8 +140,9 @@ c4_watchforaltdetonation() {
 c4_detonateall() {
   if(isDefined(self.c4s)) {
     foreach(var_1 in self.c4s) {
-      if(var_1 c4_candetonate())
+      if(var_1 c4_candetonate()) {
         var_1 thread c4_detonate();
+      }
     }
   }
 }
@@ -146,8 +150,9 @@ c4_detonateall() {
 c4_addtoarray(var_0) {
   var_1 = self.owner;
 
-  if(!isDefined(self.c4s))
+  if(!isDefined(self.c4s)) {
     self.c4s = [];
+  }
 
   self.c4s[var_0 getentitynumber()] = var_0;
   thread c4_removefromarrayondeath(var_0);

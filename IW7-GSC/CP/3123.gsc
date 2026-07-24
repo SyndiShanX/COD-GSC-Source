@@ -19,15 +19,17 @@ _id_295B() {
 }
 
 _id_298C() {
-  if(!isDefined(self._blackboard.combatmode_old) || self._blackboard.combatmode_old == 0)
+  if(!isDefined(self._blackboard.combatmode_old) || self._blackboard.combatmode_old == 0) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_298D() {
-  if(isDefined(self._blackboard.combatmode_old) && self._blackboard.combatmode_old == 2)
+  if(isDefined(self._blackboard.combatmode_old) && self._blackboard.combatmode_old == 2) {
     return 1;
+  }
 
   return 0;
 }
@@ -35,13 +37,15 @@ _id_298D() {
 _id_2979(var_0) {
   self._blackboard._id_2AA1 = var_0;
 
-  if(var_0)
+  if(var_0) {
     self.dontevershoot = 1;
+  }
 }
 
 _id_2921() {
-  if(!isDefined(self._blackboard._id_2AA1))
+  if(!isDefined(self._blackboard._id_2AA1)) {
     return 0;
+  }
 
   return self._blackboard._id_2AA1;
 }

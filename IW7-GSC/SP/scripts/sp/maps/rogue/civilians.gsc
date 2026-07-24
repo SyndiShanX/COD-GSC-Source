@@ -7,8 +7,9 @@ _id_3FE0() {
   scripts\sp\maps\rogue\rogue_util::_id_BC53("civilian_start_player");
   level._id_10AC8 = scripts\sp\maps\rogue\rogue_util::_id_10626("civilian_start", ["Salter"]);
 
-  foreach(var_1 in level._id_10AC8)
-  var_1 thread scripts\sp\utility::_id_7226(getnode("enter_civ" + var_1._id_111B7, "targetname"));
+  foreach(var_1 in level._id_10AC8) {
+    var_1 thread scripts\sp\utility::_id_7226(getnode("enter_civ" + var_1._id_111B7, "targetname"));
+  }
 
   scripts\engine\utility::flag_set("sun_safe_zone");
   scripts\engine\utility::flag_set("interior_quakes");
@@ -35,8 +36,9 @@ _id_F0CB() {
 _id_F0D2() {}
 
 _id_3FDE() {
-  if(getdvarint("civ_cam_scripting", 0) == 1)
+  if(getdvarint("civ_cam_scripting", 0) == 1) {
     _id_3F96();
+  }
 
   scripts\engine\utility::array_thread(level._id_10AC8, scripts\sp\maps\rogue\rogue_util::_id_12984);
   thread _id_F90F();
@@ -59,8 +61,9 @@ _id_3FDE() {
 }
 
 _id_BCF7() {
-  foreach(var_1 in level._id_10AC8)
-  var_1 thread scripts\sp\utility::_id_7226(getnode("enter_civ" + var_1._id_111B7, "targetname"));
+  foreach(var_1 in level._id_10AC8) {
+    var_1 thread scripts\sp\utility::_id_7226(getnode("enter_civ" + var_1._id_111B7, "targetname"));
+  }
 }
 
 _id_541F() {
@@ -167,8 +170,9 @@ _id_4070() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2._id_B14F) && var_2._id_B14F)
+    if(isDefined(var_2._id_B14F) && var_2._id_B14F) {
       var_2 scripts\sp\utility::_id_1101B();
+    }
 
     var_2 delete();
   }
@@ -256,13 +260,15 @@ _id_CCC8() {
 }
 
 _id_3FBE(var_0) {
-  foreach(var_2 in var_0)
-  var_2 thread _id_CEC4("civ_scene", "civ_idle", self, "civ_stop_loop");
+  foreach(var_2 in var_0) {
+    var_2 thread _id_CEC4("civ_scene", "civ_idle", self, "civ_stop_loop");
+  }
 }
 
 _id_CEC4(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = self;
+  }
 
   var_2 scripts\sp\anim::_id_1F35(self, var_0);
   var_2 thread scripts\sp\anim::_id_1EEA(self, var_1, var_3);
@@ -272,8 +278,9 @@ _id_CDFC(var_0) {
   var_1 = getEntArray("model_salter_pipship", "targetname");
   scripts\engine\utility::array_call(var_1, ::show);
 
-  if(!isDefined(level._id_13E12))
+  if(!isDefined(level._id_13E12)) {
     scripts\sp\maps\rogue\rogue_util::_id_10626(undefined, ["Omar", "Kashima", "Brooks"]);
+  }
 
   level.player scripts\sp\utility::_id_D090("ges_radio");
   level.player scripts\engine\utility::delaycall(0.5, ::playsound, "ges_plr_radio_on");
@@ -285,8 +292,9 @@ _id_CDFC(var_0) {
   level.player allowsprint(1);
   scripts\engine\utility::array_call(var_1, ::delete);
 
-  if(isDefined(level._id_13E12._id_B14F))
+  if(isDefined(level._id_13E12._id_B14F)) {
     level._id_13E12 scripts\sp\utility::_id_1101B();
+  }
 
   level._id_13E12 delete();
   level.allies["Salter"] = undefined;
@@ -296,8 +304,9 @@ _id_3FBD() {
   scripts\engine\utility::flag_wait("flag_dialogue_pre_buddy_door");
   wait 1.5;
 
-  while(!isDefined(level._id_3FA7))
+  while(!isDefined(level._id_3FA7)) {
     wait 0.05;
+  }
 
   var_0 = level._id_3FA7.origin + (0, 0, 50);
   var_1 = ["rogue_civ2_somethingsoutsi", "rogue_civ1_shhh", "rogue_civ3_dontletthemin", "rogue_civ1_quietstayhidden"];
@@ -352,8 +361,9 @@ _id_C489() {
   wait 5;
 
   for(;;) {
-    while(distance2d(level._id_3FA0.origin, level.player.origin) < 300)
+    while(distance2d(level._id_3FA0.origin, level.player.origin) < 300) {
       wait 0.05;
+    }
 
     level._id_B4F9 scripts\sp\utility::_id_10346(var_2);
     var_2 = scripts\engine\utility::ter_op(var_2 == var_0, var_1, var_0);
@@ -382,16 +392,18 @@ _id_CD72() {
 }
 
 _id_137F4(var_0) {
-  while(distance2d(level.player.origin, self.origin) > var_0)
+  while(distance2d(level.player.origin, self.origin) > var_0) {
     wait 0.1;
+  }
 }
 
 _id_61F9() {
   thread _id_876F();
   level._id_6C43 = scripts\engine\utility::getStruct("button_fnl_roof", "targetname");
 
-  if(!isDefined(level._id_6C43))
+  if(!isDefined(level._id_6C43)) {
     level._id_6C43 = getEnt("button_fnl_roof", "targetname");
+  }
 
   level._id_6C43 _id_0E46::_id_48C4(undefined, undefined, &"ROGUE_HANGAR_PROMPT");
   level._id_6C43 waittill("trigger");
@@ -400,11 +412,13 @@ _id_61F9() {
   self notify("civ_jones_stop_loop");
   scripts\engine\utility::array_thread(level._id_10AC8, scripts\sp\utility::_id_51E1, "combat");
 
-  if(level._id_10CDA != "finale_combat")
+  if(level._id_10CDA != "finale_combat") {
     thread scripts\sp\maps\rogue\finale::_id_33B3();
+  }
 
-  if(!level.console)
+  if(!level.console) {
     waitforalltransients();
+  }
 
   _id_CD71();
 }
@@ -417,13 +431,15 @@ _id_876F() {
     var_2 thread scripts\sp\utility::_id_7792(level.player);
   }
 
-  while(!isDefined(level._id_6C43))
+  while(!isDefined(level._id_6C43)) {
     wait 0.1;
+  }
 
   scripts\engine\utility::flag_wait("civs_over");
 
-  foreach(var_2 in var_0)
-  var_2 scripts\sp\utility::_id_77B9(0.25);
+  foreach(var_2 in var_0) {
+    var_2 scripts\sp\utility::_id_77B9(0.25);
+  }
 }
 
 _id_CD71() {
@@ -452,11 +468,13 @@ _id_49FE(var_0, var_1, var_2) {
   var_3 = scripts\sp\utility::_id_10639("player_rig");
   var_0 thread scripts\sp\anim::_id_1EC3(var_3, var_1);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
-  if(var_2)
+  if(var_2) {
     var_3 hide();
+  }
 
   return var_3;
 }
@@ -513,8 +531,9 @@ _id_3F9C(var_0) {
   self endon("death");
   self._id_1FBB = self.script_parameters;
 
-  if(self._id_1FBB == "civ_jones")
+  if(self._id_1FBB == "civ_jones") {
     self._id_1FBB = "civ_lee";
+  }
 
   self._id_111B7 = "_" + scripts\sp\utility::string(self.script_parameters);
   self.combat = self.spawner.targetname != "civ_fnl";
@@ -526,18 +545,21 @@ _id_3F9C(var_0) {
   self.dontmelee = 1;
   self.goalradius = 32;
 
-  if(!self.combat)
+  if(!self.combat) {
     scripts\sp\utility::_id_51E1("casual");
-  else
+  } else {
     scripts\sp\utility::_id_51E1("casual_gun");
+  }
 
-  if(self._id_1FBB == "civ_lee")
+  if(self._id_1FBB == "civ_lee") {
     var_1 = "lee_stop_loop";
-  else if(self.combat)
+  } else if(self.combat) {
     var_1 = "combat_stop_loop";
+  }
 
-  if(getdvarint("debug_finale_anims"))
+  if(getdvarint("debug_finale_anims")) {
     thread scripts\sp\maps\rogue\rogue_util::_id_D8E9(self._id_1FBB);
+  }
 
   self.team = "allies";
 }
@@ -547,8 +569,9 @@ _id_3FAA(var_0, var_1) {
   scripts\engine\utility::flag_wait("flag_cvl_start");
   var_0 scripts\sp\anim::_id_1F35(self, "civ_scene");
 
-  if(isDefined(level._id_EC85[self._id_1FBB]["civ_idle"]))
+  if(isDefined(level._id_EC85[self._id_1FBB]["civ_idle"])) {
     var_0 scripts\sp\anim::_id_1EEA(self, "civ_idle", var_1);
+  }
 }
 
 _id_167A() {

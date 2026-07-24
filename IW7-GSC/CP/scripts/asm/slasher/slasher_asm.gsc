@@ -36,28 +36,33 @@ clearslasheraction() {
 }
 
 issawbladeattackdone(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.requested_action))
+  if(!isDefined(self.requested_action)) {
     return 1;
+  }
 
-  if(self.requested_action != "sawblade_attack")
+  if(self.requested_action != "sawblade_attack") {
     return 1;
+  }
 
   return 0;
 }
 
 shouldendblock(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.requested_action) || self.requested_action != "block")
+  if(!isDefined(self.requested_action) || self.requested_action != "block") {
     return 1;
+  }
 
   return 0;
 }
 
 shouldshootsawblade(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.requested_action))
+  if(!isDefined(self.requested_action)) {
     return 0;
+  }
 
-  if(!scripts\asm\asm_bb::_id_291C())
+  if(!scripts\asm\asm_bb::_id_291C()) {
     return 0;
+  }
 
   return 1;
 }
@@ -77,17 +82,21 @@ playanimandlookatenemy(var_0, var_1, var_2, var_3) {
 }
 
 isanimdone(var_0, var_1, var_2, var_3) {
-  if(scripts\asm\asm::_id_232B(var_1, "end"))
+  if(scripts\asm\asm::_id_232B(var_1, "end")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "early_end"))
+  if(scripts\asm\asm::_id_232B(var_1, "early_end")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "finish_early"))
+  if(scripts\asm\asm::_id_232B(var_1, "finish_early")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "code_move"))
+  if(scripts\asm\asm::_id_232B(var_1, "code_move")) {
     return 1;
+  }
 
   return 0;
 }
@@ -101,25 +110,29 @@ playtauntanim(var_0, var_1, var_2, var_3) {
 dosummonspawn() {}
 
 dogroundpounddamage(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self endon(var_0 + "_finished");
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
   var_2 = scripts\mp\agents\slasher\slasher_tunedata::gettunedata();
 
   foreach(var_4 in level.players) {
     if(isalive(var_4)) {
-      if(distancesquared(self.origin, var_4.origin) < var_2.ground_pound_damage_radius_sq)
+      if(distancesquared(self.origin, var_4.origin) < var_2.ground_pound_damage_radius_sq) {
         scripts\asm\zombie\melee::domeleedamage(var_4, self.ground_pound_damage, "MOD_IMPACT");
+      }
     }
   }
 }
 
 groundpoundnotehandler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "groundpound")
+  if(var_0 == "groundpound") {
     dogroundpounddamage();
+  }
 }
 
 playgroundpound(var_0, var_1, var_2, var_3) {
@@ -129,8 +142,9 @@ playgroundpound(var_0, var_1, var_2, var_3) {
 }
 
 summonnotehandler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "start_summon_zombies")
+  if(var_0 == "start_summon_zombies") {
     dosummonspawn();
+  }
 }
 
 meleenotehandler(var_0, var_1, var_2, var_3) {
@@ -151,20 +165,23 @@ meleenotehandler(var_0, var_1, var_2, var_3) {
     }
   } else if(var_0 == "spin_attack_damage_begin")
     thread startspinattackdamage(var_1);
-  else if(var_0 == "spin_attack_damage_end")
+  else if(var_0 == "spin_attack_damage_end") {
     stopspinattackdamage();
+  }
 }
 
 shouldstartramanim(var_0, var_1, var_2, var_3) {
-  if(scripts\asm\asm_bb::bb_meleerequested(var_0, var_1, var_2, var_3))
+  if(scripts\asm\asm_bb::bb_meleerequested(var_0, var_1, var_2, var_3)) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_100AD(var_0, var_1, var_2, var_3) {
-  if(!scripts\asm\asm_bb::bb_throwgrenaderequested())
+  if(!scripts\asm\asm_bb::bb_throwgrenaderequested()) {
     return 0;
+  }
 
   return 1;
 }
@@ -230,26 +247,31 @@ grenadethrowterminate(var_0, var_1, var_2) {
 }
 
 shouldabortaction(var_0, var_1, var_2, var_3) {
-  if(scripts\engine\utility::is_true(self.btraversalteleport))
+  if(scripts\engine\utility::is_true(self.btraversalteleport)) {
     return 0;
+  }
 
-  if(!isDefined(self.requested_action))
+  if(!isDefined(self.requested_action)) {
     return 1;
+  }
 
   if(isDefined(var_3)) {
-    if(self.requested_action != var_3)
+    if(self.requested_action != var_3) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 shoulddoaction(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.requested_action))
+  if(!isDefined(self.requested_action)) {
     return 0;
+  }
 
-  if(self.requested_action == var_2)
+  if(self.requested_action == var_2) {
     return 1;
+  }
 
   return 0;
 }
@@ -264,8 +286,9 @@ firebladeburst(var_0, var_1, var_2) {
     var_7 = magicbullet("iw7_slasher_sawblade_mp", var_1, var_2 + var_6, self);
     var_8 = getDvar("ui_mapname");
 
-    if(var_8 != "cp_final")
+    if(var_8 != "cp_final") {
       var_7 thread hide_and_show_blade();
+    }
 
     wait(var_3.sawblade_burst_interval);
   }
@@ -291,8 +314,9 @@ fireblades(var_0) {
         var_6 = magicbullet("iw7_slasher_sawblade_mp", var_3, var_4 + var_5, self);
         var_7 = getDvar("ui_mapname");
 
-        if(var_7 != "cp_final")
+        if(var_7 != "cp_final") {
           var_6 thread hide_and_show_blade();
+        }
       }
 
       var_8 = randomfloatrange(var_1.min_sawblade_fire_interval, var_1.max_sawblade_fire_interval);
@@ -309,8 +333,9 @@ hide_and_show_blade() {
   self endon("death");
 
   foreach(var_1 in level.players) {
-    if(!scripts\engine\utility::is_true(var_1.rave_mode))
+    if(!scripts\engine\utility::is_true(var_1.rave_mode)) {
       self hidefromplayer(var_1);
+    }
   }
 }
 
@@ -340,15 +365,17 @@ _id_BEA0(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
   var_5 = scripts\mp\agents\slasher\slasher_agent::getenemy();
 
-  if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.ent))
+  if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.ent)) {
     var_4 = self._blackboard.shootparams.ent.origin;
-  else if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.pos))
+  } else if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.pos)) {
     var_4 = self._blackboard.shootparams.pos;
-  else if(isDefined(var_5))
+  } else if(isDefined(var_5)) {
     var_4 = var_5.origin;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
   var_6 = self.angles[1] - vectortoyaw(var_4 - self.origin);
   var_7 = distancesquared(self.origin, var_4);
@@ -356,12 +383,14 @@ _id_BEA0(var_0, var_1, var_2, var_3) {
   if(var_7 < 65536) {
     var_8 = sqrt(var_7);
 
-    if(var_8 > 3)
+    if(var_8 > 3) {
       var_6 = var_6 + asin(-3 / var_8);
+    }
   }
 
-  if(abs(angleclamp180(var_6)) > self._id_129AF)
+  if(abs(angleclamp180(var_6)) > self._id_129AF) {
     return 1;
+  }
 
   return 0;
 }
@@ -372,21 +401,24 @@ _id_81DE() {
   var_2 = undefined;
 
   if(isDefined(self._blackboard.shootparams)) {
-    if(isDefined(self._blackboard.shootparams.ent))
+    if(isDefined(self._blackboard.shootparams.ent)) {
       var_1 = self._blackboard.shootparams.ent;
-    else if(isDefined(self._blackboard.shootparams.pos))
+    } else if(isDefined(self._blackboard.shootparams.pos)) {
       var_2 = self._blackboard.shootparams.pos;
+    }
   }
 
   var_3 = scripts\mp\agents\slasher\slasher_agent::getenemy();
 
   if(isDefined(var_3)) {
-    if(!isDefined(var_1) && !isDefined(var_2))
+    if(!isDefined(var_1) && !isDefined(var_2)) {
       var_1 = var_3;
+    }
   }
 
-  if(isDefined(var_1) && !issentient(var_1))
+  if(isDefined(var_1) && !issentient(var_1)) {
     var_0 = 1.5;
+  }
 
   var_4 = scripts\engine\utility::getpredictedaimyawtoshootentorpos(var_0, var_1, var_2);
   return var_4;
@@ -395,22 +427,24 @@ _id_81DE() {
 _id_3F0A(var_0, var_1, var_2) {
   var_3 = _id_81DE();
 
-  if(var_3 < 0)
+  if(var_3 < 0) {
     var_4 = "right";
-  else
+  } else {
     var_4 = "left";
+  }
 
   var_3 = abs(var_3);
   var_5 = 0;
 
-  if(var_3 > 157.5)
+  if(var_3 > 157.5) {
     var_5 = 180;
-  else if(var_3 > 112.5)
+  } else if(var_3 > 112.5) {
     var_5 = 135;
-  else if(var_3 > 67.5)
+  } else if(var_3 > 67.5) {
     var_5 = 90;
-  else
+  } else {
     var_5 = 45;
+  }
 
   var_6 = var_4 + "_" + var_5;
   var_7 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_6);
@@ -426,8 +460,9 @@ _id_D56A(var_0, var_1, var_2, var_3) {
   self _meth_8281("anim deltas");
   scripts\asm\asm_mp::_id_2365(var_0, var_1, var_2, var_4);
 
-  if(!isDefined(var_5) && isDefined(self.pathgoalpos))
+  if(!isDefined(var_5) && isDefined(self.pathgoalpos)) {
     self clearpath();
+  }
 
   scripts\asm\asm_mp::_id_237F("face current");
   scripts\asm\asm_mp::_id_237E("code_move");
@@ -454,8 +489,9 @@ ramattacknotehandler(var_0, var_1, var_2, var_3) {
       var_4 = scripts\mp\agents\slasher\slasher_tunedata::gettunedata();
       var_5 = distancesquared(self.origin, self.curmeleetarget.origin);
 
-      if(var_5 < var_4.ram_attack_melee_dist_sq && scripts\asm\zombie\melee::isenemyinfrontofme(self.curmeleetarget, var_4.ram_attack_dot))
+      if(var_5 < var_4.ram_attack_melee_dist_sq && scripts\asm\zombie\melee::isenemyinfrontofme(self.curmeleetarget, var_4.ram_attack_dot)) {
         thread doramattackdamage(self.curmeleetarget);
+      }
     }
   }
 }
@@ -554,8 +590,9 @@ startspinattackdamage(var_0) {
       var_8 = var_1[var_6 getentitynumber()];
 
       if(isDefined(var_8)) {
-        if(gettime() - var_8 < 250)
+        if(gettime() - var_8 < 250) {
           continue;
+        }
       }
 
       var_9 = abs(var_6.origin[2] - self.origin[2]);
@@ -595,18 +632,20 @@ slashershouldstartarrival(var_0, var_1, var_2, var_3) {
   if(isDefined(var_4)) {
     var_5 = distancesquared(self.origin, var_4.origin);
 
-    if(var_5 < 65536)
+    if(var_5 < 65536) {
       return 0;
+    }
   }
 
   return scripts\asm\zombie\zombie::_id_10092(var_0, var_1, var_2, var_3);
 }
 
 choosemeleeattack(var_0, var_1, var_2) {
-  if(scripts\asm\asm_bb::bb_moverequested())
+  if(scripts\asm\asm_bb::bb_moverequested()) {
     var_3 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "attack_moving");
-  else
+  } else {
     var_3 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "attack");
+  }
 
   return var_3;
 }
@@ -634,23 +673,26 @@ playteleportout(var_0, var_1, var_2, var_3) {
   var_5 = scripts\mp\agents\slasher\slasher_agent::getenemy();
   self setscriptablepartstate("teleport", "hide");
 
-  if(soundexists("slasher_teleport_in"))
+  if(soundexists("slasher_teleport_in")) {
     play_teleport_sound_to_players("slasher_teleport_in");
+  }
 
   wait 0.1;
   self hide();
   self setOrigin(self.teleportpos, 0);
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     self.angles = vectortoangles(var_5.origin - self.origin);
+  }
 
   self.teleportpos = undefined;
   self scragentsetgoalpos(self.origin);
   self clearpath();
   thread showmelater();
 
-  if(!scripts\engine\utility::is_true(self.btraversalteleport))
+  if(!scripts\engine\utility::is_true(self.btraversalteleport)) {
     scripts\mp\agents\slasher\slasher_agent::lookatslasherenemy();
+  }
 
   scripts\asm\asm_mp::_id_2365(var_0, var_1, var_2, var_4, 1.5);
 
@@ -665,8 +707,9 @@ playteleportout(var_0, var_1, var_2, var_3) {
 showmelater() {
   wait 0.1;
 
-  if(soundexists("slasher_teleport_out"))
+  if(soundexists("slasher_teleport_out")) {
     play_teleport_sound_to_players("slasher_teleport_out");
+  }
 
   self setscriptablepartstate("teleport", "show");
   self show();
@@ -674,8 +717,9 @@ showmelater() {
 
 play_teleport_sound_to_players(var_0) {
   foreach(var_2 in level.players) {
-    if(!self isethereal() || scripts\engine\utility::is_true(var_2.rave_mode))
+    if(!self isethereal() || scripts\engine\utility::is_true(var_2.rave_mode)) {
       self playsoundtoplayer(var_0, var_2);
+    }
   }
 }
 

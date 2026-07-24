@@ -37,8 +37,9 @@ _id_7927() {
   var_0 = % gaz_turret_death;
 
   if(isDefined(self._id_E500)) {
-    if(isDefined(level._id_5F07))
+    if(isDefined(level._id_5F07)) {
       var_0 = self[[level._id_5F07]]();
+    }
   }
 
   return var_0;

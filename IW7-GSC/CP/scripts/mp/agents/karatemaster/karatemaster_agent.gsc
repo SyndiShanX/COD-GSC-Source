@@ -13,13 +13,14 @@ registerscriptedagent() {
 _id_FAB0() {
   level endon("game_ended");
 
-  if(!isDefined(level.agent_definition))
+  if(!isDefined(level.agent_definition)) {
     level waittill("scripted_agents_initialized");
+  }
 
   level.agent_definition["karatemaster"]["setup_func"] = ::setupagent;
   level.agent_definition["karatemaster"]["setup_model_func"] = ::_id_FACE;
-  level.agent_funcs["karatemaster"]["gametype_on_damage_finished"] = scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
-  level.agent_funcs["karatemaster"]["gametype_on_killed"] = scripts\cp\agents\gametype_zombie::onzombiekilled;
+  level.agent_funcs["karatemaster"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+  level.agent_funcs["karatemaster"]["gametype_on_killed"] = ::scripts\cp\agents\gametype_zombie::onzombiekilled;
   level.agent_funcs["karatemaster"]["on_damaged"] = ::_id_C4E0;
   level.agent_funcs["karatemaster"]["on_damaged_finished"] = ::ondamagefinished;
   level.agent_funcs["karatemaster"]["on_killed"] = level._id_C4BE;
@@ -27,10 +28,11 @@ _id_FAB0() {
 }
 
 _id_FACE(var_0) {
-  if(isDefined(level.karate_zombie_model_list))
+  if(isDefined(level.karate_zombie_model_list)) {
     var_1 = scripts\engine\utility::random(level.karate_zombie_model_list);
-  else
+  } else {
     var_1 = "karatemaster_male_3_black";
+  }
 
   self setModel(var_1);
   thread scripts\mp\agents\zombie\zombie_agent::_id_50EF();
@@ -118,8 +120,9 @@ setupzombiegametypevars() {
   self.dont_cleanup = 1;
   self setavoidanceradius(30);
 
-  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1)
+  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1) {
     self._id_AB3F = 1;
+  }
 
   setmovemode("run");
 }
@@ -182,8 +185,9 @@ accumulatedamage(var_0, var_1) {
 
   self.damageaccumulator.lastdamagetime = gettime();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = (1, 1, 1);
+  }
 
   self.damageaccumulator.lastdir = var_1;
   self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + var_0;
@@ -202,8 +206,9 @@ getdamageaccumulator() {
     self.damageaccumulator.lastdamagetime = 0;
   }
 
-  if(self.damageaccumulator.accumulateddamage == 0)
+  if(self.damageaccumulator.accumulateddamage == 0) {
     return undefined;
+  }
 
   return self.damageaccumulator;
 }
@@ -226,15 +231,17 @@ _id_C4E0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 }
 
 should_spawn_karatemaster() {
-  if(scripts\engine\utility::flag_exist("rk_fight_started") && scripts\engine\utility::flag("rk_fight_started"))
+  if(scripts\engine\utility::flag_exist("rk_fight_started") && scripts\engine\utility::flag("rk_fight_started")) {
     return undefined;
+  }
 
   var_0 = 0;
 
-  if(level.wave_num >= 20)
+  if(level.wave_num >= 20) {
     var_0 = min(level.wave_num - 19, 10);
-  else if(level.wave_num < 10)
+  } else if(level.wave_num < 10) {
     return undefined;
+  }
 
   var_1 = 5;
 
@@ -249,8 +256,9 @@ should_spawn_karatemaster() {
   }
 
   if(level.wave_num > var_1) {
-    if(randomint(100) < var_0)
+    if(randomint(100) < var_0) {
       return "karatemaster";
+    }
 
     return undefined;
   }

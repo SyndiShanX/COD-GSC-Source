@@ -14,39 +14,47 @@ _id_488D() {
 }
 
 _id_9DA0(var_0) {
-  if(isDefined(self.dontmelee))
+  if(isDefined(self.dontmelee)) {
     return 0;
+  }
 
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return 0;
+  }
 
-  if(isDefined(self.enemy.dontmelee))
+  if(isDefined(self.enemy.dontmelee)) {
     return 0;
+  }
 
-  if(isDefined(self._stealth) && !scripts\aitypes\melee::canmeleeduringstealth())
+  if(isDefined(self._stealth) && !scripts\aitypes\melee::canmeleeduringstealth()) {
     return 0;
+  }
 
-  if(isDefined(var_0) && var_0)
+  if(isDefined(var_0) && var_0) {
     return 1;
+  }
 
-  if(scripts\aitypes\melee::_id_9DD1())
+  if(scripts\aitypes\melee::_id_9DD1()) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_9D9F(var_0) {
-  if(!scripts\asm\asm_bb::bb_iscrawlmelee())
+  if(!scripts\asm\asm_bb::bb_iscrawlmelee()) {
     return anim.failure;
+  }
 
   return anim.success;
 }
 
 _id_487C(var_0) {
-  if(randomint(100) < 25)
+  if(randomint(100) < 25) {
     _id_0BFE::_id_E1B1(randomintrange(3000, 8000));
-  else
+  } else {
     _id_0BFE::_id_E1B2(randomintrange(3000, 8000));
+  }
 
   thread _id_0BFE::_id_5671();
   _id_488D();
@@ -110,56 +118,71 @@ _id_488C(var_0) {
 }
 
 _id_9DA2(var_0, var_1) {
-  if(scripts\aitypes\melee::ismeleevalid_common(var_0, var_1) == 0)
+  if(scripts\aitypes\melee::ismeleevalid_common(var_0, var_1) == 0) {
     return 0;
+  }
 
   if(var_1) {
-    if(scripts\anim\utility_common::isusingsidearm())
+    if(scripts\anim\utility_common::isusingsidearm()) {
       return 0;
+    }
   }
 
-  if(isDefined(self.grenade) && self.frontshieldanglecos == 1)
+  if(isDefined(self.grenade) && self.frontshieldanglecos == 1) {
     return 0;
+  }
 
-  if(isDefined(var_0._id_5951) || isDefined(var_0.ignoreme) && var_0.ignoreme)
+  if(isDefined(var_0._id_5951) || isDefined(var_0.ignoreme) && var_0.ignoreme) {
     return 0;
+  }
 
-  if(!isai(var_0) && !isPlayer(var_0))
+  if(!isai(var_0) && !isPlayer(var_0)) {
     return 0;
+  }
 
-  if(isDefined(self._id_B5DD) && isDefined(var_0._id_B5DD))
+  if(isDefined(self._id_B5DD) && isDefined(var_0._id_B5DD)) {
     return 0;
+  }
 
-  if(isDefined(self._id_B5DD) && isDefined(var_0._id_B14F) || isDefined(var_0._id_B5DD) && isDefined(self._id_B14F))
+  if(isDefined(self._id_B5DD) && isDefined(var_0._id_B14F) || isDefined(var_0._id_B5DD) && isDefined(self._id_B14F)) {
     return 0;
+  }
 
   if(isai(var_0)) {
-    if(var_0 _meth_81A6())
+    if(var_0 _meth_81A6()) {
       return 0;
+    }
 
-    if(var_0 scripts\sp\utility::_id_58DA() || var_0.delayeddeath)
+    if(var_0 scripts\sp\utility::_id_58DA() || var_0.delayeddeath) {
       return 0;
+    }
 
-    if(self.stairsstate != "none" || var_0.stairsstate != "none")
+    if(self.stairsstate != "none" || var_0.stairsstate != "none") {
       return 0;
+    }
 
-    if(var_0.unittype != "soldier" && var_0.unittype != "c6" && var_0.unittype != "c6i")
+    if(var_0.unittype != "soldier" && var_0.unittype != "c6" && var_0.unittype != "c6i") {
       return 0;
+    }
   }
 
-  if(isPlayer(var_0))
+  if(isPlayer(var_0)) {
     var_2 = var_0 getstance();
-  else
+  } else {
     var_2 = var_0.a.pose;
+  }
 
-  if(var_2 != "stand" && var_2 != "crouch")
+  if(var_2 != "stand" && var_2 != "crouch") {
     return 0;
+  }
 
-  if(isDefined(self._id_B14F) && isDefined(var_0._id_B14F))
+  if(isDefined(self._id_B14F) && isDefined(var_0._id_B14F)) {
     return 0;
+  }
 
-  if(isDefined(var_0.grenade))
+  if(isDefined(var_0.grenade)) {
     return 0;
+  }
 
   return 1;
 }

@@ -442,11 +442,13 @@ _id_FC75(var_0) {
 }
 
 _id_C0C7(var_0) {
-  if(isDefined(var_0._id_B14F))
+  if(isDefined(var_0._id_B14F)) {
     var_0 scripts\sp\utility::_id_1101B();
+  }
 
-  if(!isDefined(var_0._id_EE5F) || !var_0._id_EE5F)
+  if(!isDefined(var_0._id_EE5F) || !var_0._id_EE5F) {
     var_0.forceragdollimmediate = 1;
+  }
 
   var_0 scripts\sp\utility::_id_F2A8(1);
   var_0._id_10265 = 1;

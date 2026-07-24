@@ -33,8 +33,9 @@ _id_8A6A(var_0) {
 
     var_6 _id_0EFB::_id_FD6F("hangar_hustle");
 
-    if(isDefined(var_5.script_index))
+    if(isDefined(var_5.script_index)) {
       var_6.script_index = var_5.script_index;
+    }
 
     var_7 = undefined;
 
@@ -69,8 +70,9 @@ _id_8A68(var_0, var_1) {
   self endon("death");
   self endon("hustle_do_stop");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   self._id_91F5 = var_0;
 
@@ -88,8 +90,9 @@ _id_8A68(var_0, var_1) {
     var_6 = randomintrange(var_4, var_5);
 
     for(var_7 = 0; var_7 < var_6; var_7++) {
-      if(var_7 == 0)
+      if(var_7 == 0) {
         thread _id_0EE5::_id_202D();
+      }
 
       scripts\sp\anim::_id_1EC7(self, var_0["idle1"]);
     }
@@ -99,8 +102,9 @@ _id_8A68(var_0, var_1) {
     var_6 = randomintrange(var_4, var_5);
 
     for(var_7 = 0; var_7 < var_6; var_7++) {
-      if(var_7 == 0)
+      if(var_7 == 0) {
         thread _id_0EE5::_id_202D();
+      }
 
       scripts\sp\anim::_id_1EC7(self, var_0["idle2"]);
     }
@@ -152,16 +156,19 @@ _id_8A69(var_0, var_1) {
 
 _id_8A6B(var_0) {
   foreach(var_2 in var_0) {
-    if(isDefined(var_2._id_1F1C))
+    if(isDefined(var_2._id_1F1C)) {
       var_2._id_1F1C notify("ambient_idle_scene_end");
+    }
 
     var_2 notify("cleaned");
 
-    if(isDefined(var_2._id_B14F))
+    if(isDefined(var_2._id_B14F)) {
       var_2 scripts\sp\utility::_id_1101B();
+    }
 
-    if(isai(var_2))
+    if(isai(var_2)) {
       var_2 _meth_81D0();
+    }
 
     var_2 delete();
   }

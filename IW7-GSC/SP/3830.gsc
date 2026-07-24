@@ -8,21 +8,25 @@ _id_E3F4() {}
 _id_F0E1(var_0, var_1, var_2) {
   return;
 
-  if(isDefined(level._id_F0DE))
+  if(isDefined(level._id_F0DE)) {
     level._id_F0DE delete();
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 65;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   var_0 = _id_0EFB::_id_7CBC("security_camera", "targetname", var_0);
   level._id_F0DE = var_0 scripts\engine\utility::spawn_tag_origin();
   scripts\sp\pip_util::_id_CBB5(level._id_F0DE, "tag_origin", var_1);
 
-  if(var_2)
+  if(var_2) {
     setomnvar("ui_show_pip", 1);
+  }
 }
 
 _id_F0DF() {

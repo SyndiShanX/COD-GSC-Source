@@ -25,8 +25,9 @@ _id_1E07() {
   for(;;) {
     scripts\engine\utility::flag_wait("ambient_zone_returne");
 
-    if(scripts\engine\utility::flag("shipcrib_rogue_ambientmr_tr_loaded"))
+    if(scripts\engine\utility::flag("shipcrib_rogue_ambientmr_tr_loaded")) {
       scripts\sp\utility::_id_1264E("shipcrib_rogue_ambientmr_tr");
+    }
 
     _id_0EE4::_id_6E5E("ambient_zone_returne");
   }
@@ -109,23 +110,27 @@ _id_13559() {
 }
 
 _id_1E0B() {
-  if(!scripts\engine\utility::flag("shipcrib_rogue_ambientmr_tr_loaded"))
+  if(!scripts\engine\utility::flag("shipcrib_rogue_ambientmr_tr_loaded")) {
     scripts\sp\utility::_id_12641("shipcrib_rogue_ambientmr_tr");
+  }
 }
 
 _id_1E0A() {
-  if(!scripts\engine\utility::flag("shipcrib_rogue_ambientml_tr_loaded"))
+  if(!scripts\engine\utility::flag("shipcrib_rogue_ambientml_tr_loaded")) {
     scripts\sp\utility::_id_12641("shipcrib_rogue_ambientml_tr");
+  }
 }
 
 _id_1E0E() {
-  if(!scripts\engine\utility::flag("shipcrib_rogue_ambientml_tr_loaded"))
+  if(!scripts\engine\utility::flag("shipcrib_rogue_ambientml_tr_loaded")) {
     scripts\sp\utility::_id_12641("shipcrib_rogue_ambientml_tr");
+  }
 }
 
 _id_1E0D() {
-  if(!scripts\engine\utility::flag("shipcrib_rogue_ambientml_tr_loaded"))
+  if(!scripts\engine\utility::flag("shipcrib_rogue_ambientml_tr_loaded")) {
     scripts\sp\utility::_id_12641("shipcrib_rogue_ambientml_tr");
+  }
 }
 
 #using_animtree("jackal");
@@ -183,8 +188,9 @@ _id_1A72() {
   var_0 = scripts\engine\utility::array_combine(var_0, _id_0EFB::_id_FD9C("catwalks_sec3B"));
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2._id_1DF6))
+    if(isDefined(var_2._id_1DF6)) {
       var_2._id_1DF6 notify("ambient_idle_scene_end");
+    }
   }
 
   _id_0EFB::_id_FDBB("catwalks_armory");
@@ -303,8 +309,9 @@ _id_361D(var_0, var_1, var_2, var_3, var_4) {
   var_6 _id_0EFB::_id_FD6F("c12_guys");
 
   if(isDefined(var_3)) {
-    if(var_3)
+    if(var_3) {
       var_6 scripts\sp\utility::_id_86E2();
+    }
   }
 
   var_6 _id_361E(var_5, var_2, var_4);
@@ -324,8 +331,9 @@ _id_361E(var_0, var_1, var_2) {
   var_0 scripts\sp\anim::_id_1EC7(self, var_1 + "_scare");
   var_0 thread scripts\sp\anim::_id_1ECC(self, var_1 + "_idle_02", "stop_loop_" + var_1);
 
-  if(var_2)
+  if(var_2) {
     thread _id_0EE5::_id_202D();
+  }
 }
 
 _id_11A48() {
@@ -342,8 +350,9 @@ _id_11A48() {
   var_0 vehicle_setspeed(0, 1, 1);
 
   foreach(var_2 in var_0._id_3A5D) {
-    if(var_2 islinked())
+    if(var_2 islinked()) {
       var_2 unlink();
+    }
 
     var_2 delete();
   }
@@ -463,8 +472,9 @@ _id_A0C5() {
   var_2 thread scripts\sp\anim::_id_1EEA(var_4, "intro_idle");
   var_5 = [var_3, var_4];
 
-  foreach(var_7 in var_5)
-  var_7 thread _id_A0C7(var_2);
+  foreach(var_7 in var_5) {
+    var_7 thread _id_A0C7(var_2);
+  }
 }
 
 _id_A0C6(var_0) {
@@ -773,8 +783,9 @@ _id_A5F7() {
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2._id_1EF1)) {
-      if(isDefined(var_2._id_1EF1._id_4348))
+      if(isDefined(var_2._id_1EF1._id_4348)) {
         var_2._id_1EF1._id_4348 delete();
+      }
 
       var_2._id_1EF1 delete();
     }

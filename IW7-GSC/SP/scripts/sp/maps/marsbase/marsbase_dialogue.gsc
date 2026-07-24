@@ -30,10 +30,11 @@ _id_5430() {
 }
 
 _id_545E(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 scripts\sp\utility::_id_10346("marsbase_plt1_aagunsarecuttin");
-  else
+  } else {
     scripts\sp\maps\marsbase\marsbase_util::_id_CB9E("mars_jackal_pip", "marsbase_plt1_aagunsarecuttin");
+  }
 }
 
 _id_5411() {}
@@ -79,10 +80,11 @@ _id_5406() {
     }
 
     if(!var_4) {
-      if(isPlayer(var_1[var_2]))
+      if(isPlayer(var_1[var_2])) {
         level.player scripts\sp\utility::_id_1034D(var_0[var_2]);
-      else
+      } else {
         var_1[var_2] scripts\sp\utility::_id_10346(var_0[var_2]);
+      }
 
       var_2++;
 
@@ -91,8 +93,9 @@ _id_5406() {
       }
     }
 
-    if(var_3)
+    if(var_3) {
       var_4 = 0;
+    }
   }
 }
 
@@ -226,8 +229,9 @@ _id_53FD(var_0) {
   level._id_8604 thread scripts\sp\utility::_id_10346("marsbase_brk_enemydroppodsincoming");
   level endon("greenhouse_battle_done");
 
-  if(!scripts\engine\utility::is_true(var_0))
+  if(!scripts\engine\utility::is_true(var_0)) {
     wait 2;
+  }
 
   level._id_8604 scripts\sp\utility::_id_10346("marsbase_grf_clearthosepositionsup");
   scripts\engine\utility::flag_wait("greenhouse_center_droppods");
@@ -245,8 +249,9 @@ _id_53FF() {
   wait 0.75;
   level waittill("dropship_3_go");
 
-  if(!scripts\engine\utility::flag("flag_greenhouse_near_door"))
+  if(!scripts\engine\utility::flag("flag_greenhouse_near_door")) {
     scripts\sp\utility::_id_1034D("marsbase_plr_areasecuremoveup");
+  }
 
   setmusicstate("");
   scripts\sp\utility::_id_10350("marsbase_plt2_raven3insertingmarines");
@@ -258,10 +263,11 @@ _id_53FF() {
 }
 
 _id_544A() {
-  if(randomint(2))
+  if(randomint(2)) {
     level._id_EA2C scripts\sp\utility::_id_10346("marsbase_slt_theyreholdingtheentry");
-  else
+  } else {
     level.player scripts\sp\utility::_id_1034D("marsbase_plr_gotsetdefonthe");
+  }
 }
 
 _id_53F6() {
@@ -281,8 +287,9 @@ _id_53FA() {
   level.player waittill("player_attached_to_door");
   wait 0.5;
 
-  if(!scripts\engine\utility::flag("gator_effort_vo"))
+  if(!scripts\engine\utility::flag("gator_effort_vo")) {
     level._id_76FB scripts\sp\utility::_id_10346("marsbase_nav_itsgoodtobeinthefight");
+  }
 }
 
 _id_53FC() {
@@ -325,8 +332,9 @@ _id_542C() {
   scripts\sp\utility::_id_10350("marsbase_plt1_42406toraiderwere");
   level thread _id_53F5();
 
-  while(!scripts\engine\utility::is_true(level._id_B3B7))
+  while(!scripts\engine\utility::is_true(level._id_B3B7)) {
     wait 1;
+  }
 
   level._id_6754 scripts\sp\utility::_id_10346("marsbase_eth_ordnancedroneisready");
   level._id_EA2C scripts\sp\utility::_id_10346("marsbase_slt_takethatgunout");
@@ -377,10 +385,11 @@ _id_5408() {
     wait 2;
 
     if(!scripts\engine\utility::flag("aa_gun_2_destroyed")) {
-      if(isPlayer(var_1[var_2]))
+      if(isPlayer(var_1[var_2])) {
         level.player scripts\sp\utility::_id_1034D(var_0[var_2]);
-      else
+      } else {
         var_1[var_2] scripts\sp\utility::_id_10346(var_0[var_2]);
+      }
 
       var_2++;
 
@@ -401,22 +410,25 @@ _id_53F4() {
   while(!scripts\engine\utility::flag("aa2_destroyed")) {
     wait 20;
 
-    while(!scripts\engine\utility::is_true(level._id_B3B7))
+    while(!scripts\engine\utility::is_true(level._id_B3B7)) {
       wait 1;
+    }
 
     if(!scripts\engine\utility::flag("player_in_mars_killstreak") && !scripts\engine\utility::flag("aa2_destroyed")) {
       var_3 = var_0[var_2];
       var_4 = var_1[var_2];
 
-      if(!isPlayer(var_4))
+      if(!isPlayer(var_4)) {
         var_4 thread scripts\sp\utility::_id_10346(var_3);
-      else
+      } else {
         level.player thread scripts\sp\utility::_id_1034D(var_3);
+      }
 
       var_2++;
 
-      if(var_2 >= var_0.size)
+      if(var_2 >= var_0.size) {
         var_2 = 0;
+      }
     }
   }
 }
@@ -439,8 +451,9 @@ _id_53F9() {
   setmusicstate("flaming_corridor");
   scripts\engine\utility::flag_wait("flag_burning_man_cave_entrance_reached");
 
-  while(!isDefined(level._id_3297))
+  while(!isDefined(level._id_3297)) {
     scripts\engine\utility::waitframe();
+  }
 
   level._id_3297 thread scripts\sp\utility::_id_10346("marsbase_sdf3_aghhhh");
   scripts\engine\utility::flag_wait("flag_burning_man_airlock_seen");
@@ -607,8 +620,9 @@ _id_53F8() {
     var_4 thread scripts\sp\utility::_id_10346(var_3);
     var_2++;
 
-    if(var_2 >= var_0.size)
+    if(var_2 >= var_0.size) {
       var_2 = 0;
+    }
   }
 }
 
@@ -622,11 +636,13 @@ _id_10349(var_0, var_1, var_2, var_3) {
   level notify("notify_stop_dialogue_nag");
   level endon("notify_stop_dialogue_nag");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level endon(var_1);
+  }
 
-  if(!scripts\engine\utility::flag_exist("flag_dialogue_nag_active"))
+  if(!scripts\engine\utility::flag_exist("flag_dialogue_nag_active")) {
     scripts\engine\utility::flag_init("flag_dialogue_nag_active");
+  }
 
   scripts\engine\utility::flag_clear("flag_dialogue_nag_active");
   var_0 = scripts\engine\utility::ter_op(isarray(var_0), var_0, [var_0]);
@@ -667,29 +683,33 @@ _id_10349(var_0, var_1, var_2, var_3) {
       var_8 = randomfloatrange(var_6, var_7);
       var_12 = self;
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         var_12 = var_2[var_11];
+      }
 
-      if(isDefined(var_10))
+      if(isDefined(var_10)) {
         var_12 childthread _id_1407(var_10);
+      }
     }
 
-    if(!scripts\engine\utility::flag("flag_dialogue_nag_active"))
+    if(!scripts\engine\utility::flag("flag_dialogue_nag_active")) {
       var_5 = var_5 + 0.05;
+    }
   }
 }
 
 _id_1407(var_0) {
   scripts\engine\utility::flag_set("flag_dialogue_nag_active");
 
-  if(issubstr(var_0, "tmp"))
+  if(issubstr(var_0, "tmp")) {
     _id_0B6A::_id_EC0E(var_0);
-  else if(self == level.player)
+  } else if(self == level.player) {
     scripts\sp\utility::_id_1034D(var_0);
-  else if(self == level)
+  } else if(self == level) {
     scripts\sp\utility::_id_10350(var_0);
-  else
+  } else {
     scripts\sp\utility::_id_10346(var_0);
+  }
 
   scripts\engine\utility::flag_clear("flag_dialogue_nag_active");
 }

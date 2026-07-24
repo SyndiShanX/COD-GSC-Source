@@ -36,23 +36,29 @@ strobelight_setup() {
   self.light_position_hide = self.origin - (0, 0, 1024);
 
   for(;;) {
-    if(self.light_targetname == "strobelight_r" && scripts\engine\utility::flag("strobe_red"))
+    if(self.light_targetname == "strobelight_r" && scripts\engine\utility::flag("strobe_red")) {
       self.origin = self.light_position_show;
+    }
 
-    if(self.light_targetname == "strobelight_r" && !scripts\engine\utility::flag("strobe_red"))
+    if(self.light_targetname == "strobelight_r" && !scripts\engine\utility::flag("strobe_red")) {
       self.origin = self.light_position_hide;
+    }
 
-    if(self.light_targetname == "strobelight_g" && scripts\engine\utility::flag("strobe_green"))
+    if(self.light_targetname == "strobelight_g" && scripts\engine\utility::flag("strobe_green")) {
       self.origin = self.light_position_show;
+    }
 
-    if(self.light_targetname == "strobelight_g" && !scripts\engine\utility::flag("strobe_green"))
+    if(self.light_targetname == "strobelight_g" && !scripts\engine\utility::flag("strobe_green")) {
       self.origin = self.light_position_hide;
+    }
 
-    if(self.light_targetname == "strobelight_b" && scripts\engine\utility::flag("strobe_blue"))
+    if(self.light_targetname == "strobelight_b" && scripts\engine\utility::flag("strobe_blue")) {
       self.origin = self.light_position_show;
+    }
 
-    if(self.light_targetname == "strobelight_b" && !scripts\engine\utility::flag("strobe_blue"))
+    if(self.light_targetname == "strobelight_b" && !scripts\engine\utility::flag("strobe_blue")) {
       self.origin = self.light_position_hide;
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -91,14 +97,17 @@ fire_light_flicker_setup() {
   self.max_intensity = 750;
   self.min_intensity = 5;
 
-  if(isDefined(var_0["frequency"]))
+  if(isDefined(var_0["frequency"])) {
     self.frequency = float(var_0["frequency"]);
+  }
 
-  if(isDefined(var_0["max_intensity"]))
+  if(isDefined(var_0["max_intensity"])) {
     self.max_intensity = float(var_0["max_intensity"]);
+  }
 
-  if(isDefined(var_0["min_intensity"]))
+  if(isDefined(var_0["min_intensity"])) {
     self.min_intensity = float(var_0["min_intensity"]);
+  }
 
   thread fire_light_flicker();
 }
@@ -126,23 +135,29 @@ light_fixture_flicker_setup() {
 
   for(;;) {
     if(scripts\engine\utility::flag("light_fixture_on")) {
-      foreach(var_7 in var_3)
-      var_7 show();
+      foreach(var_7 in var_3) {
+        var_7 show();
+      }
 
-      foreach(var_10 in var_2)
-      var_10 hide();
+      foreach(var_10 in var_2) {
+        var_10 hide();
+      }
 
-      foreach(var_13 in var_1)
-      var_13 setlightintensity(var_4);
+      foreach(var_13 in var_1) {
+        var_13 setlightintensity(var_4);
+      }
     } else if(scripts\engine\utility::flag("light_fixture_off")) {
-      foreach(var_7 in var_3)
-      var_7 hide();
+      foreach(var_7 in var_3) {
+        var_7 hide();
+      }
 
-      foreach(var_10 in var_2)
-      var_10 show();
+      foreach(var_10 in var_2) {
+        var_10 show();
+      }
 
-      foreach(var_13 in var_1)
-      var_13 setlightintensity(var_5);
+      foreach(var_13 in var_1) {
+        var_13 setlightintensity(var_5);
+      }
     }
 
     scripts\engine\utility::waitframe();

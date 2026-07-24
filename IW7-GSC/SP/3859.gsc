@@ -45,22 +45,26 @@ _id_E9DD(var_0, var_1) {
     return;
   }
   foreach(var_5 in var_2) {
-    if(!isDefined(var_0) || !isDefined(var_0._id_1352E) || ispointinvolume(var_5.origin, var_0._id_1352E))
+    if(!isDefined(var_0) || !isDefined(var_0._id_1352E) || ispointinvolume(var_5.origin, var_0._id_1352E)) {
       var_3 = scripts\engine\utility::array_add(var_3, var_5);
+    }
   }
 
   if(var_3.size < 1) {
     return;
   }
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0._id_E5A8 = [];
+  }
 
   for(var_7 = 0; var_7 < var_3.size; var_7++) {
-    if(!var_3[var_7] scripts\sp\utility::_id_65DF("rss_activated"))
+    if(!var_3[var_7] scripts\sp\utility::_id_65DF("rss_activated")) {
       var_3[var_7] scripts\sp\utility::_id_65E0("rss_activated");
+    }
 
-    if(!var_3[var_7] scripts\sp\utility::_id_65DF("rss_deactivated"))
+    if(!var_3[var_7] scripts\sp\utility::_id_65DF("rss_deactivated")) {
       var_3[var_7] scripts\sp\utility::_id_65E0("rss_deactivated");
+    }
 
     var_3[var_7]._id_E57E = 0;
     var_3[var_7]._id_10E43 = [];
@@ -70,8 +74,9 @@ _id_E9DD(var_0, var_1) {
     var_3[var_7]._id_DBBE = [];
     var_3[var_7]._id_C891 = [];
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_0._id_E5A8[var_7] = var_3[var_7];
+    }
 
     var_8 = getEntArray(var_3[var_7].target, "targetname");
     var_9 = scripts\engine\utility::getStructArray(var_3[var_7].target, "targetname");
@@ -140,21 +145,24 @@ _id_E9DD(var_0, var_1) {
         if(!isDefined(var_18.script_parameters)) {
           continue;
         }
-        if(var_18.script_parameters == var_24.script_parameters)
+        if(var_18.script_parameters == var_24.script_parameters) {
           var_18._id_101E1 = var_24;
+        }
       }
     }
 
-    foreach(var_29 in var_3[var_7]._id_DBBA)
-    var_3[var_7] _id_D852(var_29);
+    foreach(var_29 in var_3[var_7]._id_DBBA) {
+      var_3[var_7] _id_D852(var_29);
+    }
 
     if(isDefined(var_3[var_7].script_index) && var_3[var_7].script_index == 0) {
       var_3[var_7] thread _id_8954();
       continue;
     }
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_3[var_7] thread _id_8952(var_0);
+    }
   }
 }
 
@@ -173,8 +181,9 @@ _id_8952(var_0) {
     }
   }
 
-  for(var_7 = 0; var_7 < self._id_107A5.size; var_7++)
+  for(var_7 = 0; var_7 < self._id_107A5.size; var_7++) {
     self._id_107A5[var_7] _id_E781(self, var_0);
+  }
 
   thread _id_8953(var_0);
 }
@@ -192,30 +201,34 @@ _id_E780(var_0, var_1) {
   if(var_0 scripts\sp\utility::_id_65DF("rss_deactivated") && var_0 scripts\sp\utility::_id_65DB("rss_deactivated")) {
     return;
   }
-  if(isDefined(self.script_delay))
+  if(isDefined(self.script_delay)) {
     wait(self.script_delay);
+  }
 
   var_2 = undefined;
 
   while(!isDefined(var_2)) {
     level._id_E977.spawners["c6_rss"][0].origin = self.origin;
 
-    if(isDefined(self.angles))
+    if(isDefined(self.angles)) {
       level._id_E977.spawners["c6_rss"][0].angles = self.angles;
+    }
 
     level._id_E977.spawners["c6_rss"][0].count = 99;
     var_2 = level._id_E977.spawners["c6_rss"][0] scripts\sp\utility::_id_10619(1);
 
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       scripts\engine\utility::waitframe();
+    }
   }
 
   waittillframeend;
 
   foreach(var_4 in var_0._id_10E43) {
     if(isDefined(var_4) && var_4.script_parameters == self.script_parameters) {
-      if(isDefined(var_4._id_113F3) && scripts\engine\utility::is_true(var_4._id_113F3[level.player getentitynumber()]))
+      if(isDefined(var_4._id_113F3) && scripts\engine\utility::is_true(var_4._id_113F3[level.player getentitynumber()])) {
         var_2 _id_0F25::_id_113D9(level.player, 0);
+      }
 
       var_4 delete();
     }
@@ -225,8 +238,9 @@ _id_E780(var_0, var_1) {
   var_6 = undefined;
 
   foreach(var_8 in var_0._id_DBBE) {
-    if(var_2.script_parameters == var_8.script_parameters)
+    if(var_2.script_parameters == var_8.script_parameters) {
       var_6 = var_8;
+    }
   }
 
   thread _id_0F00::_id_CDE4(var_2.origin);
@@ -242,8 +256,9 @@ _id_E780(var_0, var_1) {
 
   if(var_0.lights.size > 0) {
     foreach(var_11 in var_0.lights) {
-      if(var_11.script_parameters == self.script_parameters)
+      if(var_11.script_parameters == self.script_parameters) {
         var_11 thread disablelittlebirdrally();
+      }
     }
   }
 
@@ -259,8 +274,9 @@ _id_D852(var_0) {
   var_0._id_DBB9 = undefined;
 
   foreach(var_2 in self._id_DBBE) {
-    if(var_2.script_parameters == var_0.script_parameters)
+    if(var_2.script_parameters == var_0.script_parameters) {
       var_0._id_DBB9 = var_2;
+    }
   }
 
   var_0._id_1FBB = "arm";
@@ -275,8 +291,9 @@ _id_CDD2(var_0) {
   var_1 = undefined;
 
   foreach(var_3 in self._id_DBBA) {
-    if(var_3.script_parameters == var_0.script_parameters)
+    if(var_3.script_parameters == var_0.script_parameters) {
       var_1 = var_3;
+    }
   }
 
   var_1._id_1FBB = "arm";
@@ -305,23 +322,27 @@ _id_8954(var_0) {
     thread _id_0F00::_id_CDE5(self.origin);
   }
 
-  if(self.lights.size > 0)
+  if(self.lights.size > 0) {
     scripts\engine\utility::array_thread(self.lights, ::disablelittlebirdrally);
+  }
 
   wait 0.25;
 
   foreach(var_2 in self._id_DBBE) {
-    if(isDefined(var_2._id_75AD) && var_2._id_75AD == 1)
+    if(isDefined(var_2._id_75AD) && var_2._id_75AD == 1) {
       stopFXOnTag(scripts\engine\utility::getfx("locker_set_white"), var_2, "tag_origin");
+    }
   }
 
   foreach(var_5 in self._id_10E43) {
-    if(isDefined(var_5._id_113F3))
+    if(isDefined(var_5._id_113F3)) {
       var_5 _id_0F25::_id_113E2(0);
+    }
   }
 
-  foreach(var_8 in self._id_C891)
-  var_8 setModel("equipment_sdf_kiosk_01_off");
+  foreach(var_8 in self._id_C891) {
+    var_8 setModel("equipment_sdf_kiosk_01_off");
+  }
 
   scripts\sp\utility::_id_65E1("rss_deactivated");
 }
@@ -336,22 +357,26 @@ _id_E782() {
     }
   }
 
-  foreach(var_4 in self._id_C891)
-  var_4 setModel("equipment_sdf_kiosk_01_c6_deploy");
+  foreach(var_4 in self._id_C891) {
+    var_4 setModel("equipment_sdf_kiosk_01_c6_deploy");
+  }
 
-  while(self._id_E57E > 0)
+  while(self._id_E57E > 0) {
     wait 0.05;
+  }
 
   scripts\sp\utility::_id_65E1("rss_deactivated");
   wait 0.25;
 
   foreach(var_1 in self._id_DBBE) {
-    if(isDefined(var_1._id_75AD) && var_1._id_75AD == 1)
+    if(isDefined(var_1._id_75AD) && var_1._id_75AD == 1) {
       stopFXOnTag(scripts\engine\utility::getfx("locker_set_red"), var_1, "tag_origin");
+    }
   }
 
-  foreach(var_4 in self._id_C891)
-  var_4 setModel("equipment_sdf_kiosk_01_off");
+  foreach(var_4 in self._id_C891) {
+    var_4 setModel("equipment_sdf_kiosk_01_off");
+  }
 }
 
 disablelittlebirdrally() {

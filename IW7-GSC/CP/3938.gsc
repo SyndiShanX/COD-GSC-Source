@@ -8,8 +8,9 @@ registerscriptedagent() {
   _id_03A9::_id_DEE8();
   _id_0F37::_id_2371();
 
-  if(level.gametype != "zombie")
+  if(level.gametype != "zombie") {
     _id_09FD::_id_3353();
+  }
 
   _id_9812();
   thread _id_FAB0();
@@ -18,11 +19,13 @@ registerscriptedagent() {
 _id_FAB0() {
   level endon("game_ended");
 
-  if(!isDefined(level.agent_definition))
+  if(!isDefined(level.agent_definition)) {
     level waittill("scripted_agents_initialized");
+  }
 
-  if(!isDefined(level.species_funcs))
+  if(!isDefined(level.species_funcs)) {
     level.species_funcs = [];
+  }
 
   level.species_funcs["c6"] = [];
   level.agent_definition["c6"]["setup_func"] = ::setupagent;
@@ -75,9 +78,9 @@ _id_899D() {
     self waittill("enemy");
 
     for(;;) {
-      if(isDefined(self.enemy))
+      if(isDefined(self.enemy)) {
         self._id_6571 = gettime() + 1000;
-      else if(isDefined(self._id_6571)) {
+      } else if(isDefined(self._id_6571)) {
         if(gettime() > self._id_6571) {
           self._id_6571 = undefined;
           break;
@@ -225,26 +228,29 @@ scriptedgoalwaitforarrival() {
   for(;;) {
     self waittill("goal_reached");
 
-    if(isDefined(self._id_EF7D))
+    if(isDefined(self._id_EF7D)) {
       var_0 = self._id_EF7D;
-    else if(isDefined(self._id_EF7A))
+    } else if(isDefined(self._id_EF7A)) {
       var_0 = self._id_EF7A.origin;
-    else if(isDefined(self._id_EF7C))
+    } else if(isDefined(self._id_EF7C)) {
       var_0 = self._id_EF7C.origin;
-    else
+    } else {
       continue;
+    }
 
     var_1 = 16;
 
-    if(isDefined(self._id_EF7E))
+    if(isDefined(self._id_EF7E)) {
       var_1 = self._id_EF7E * self._id_EF7E;
+    }
 
     if(distance2dsquared(self.origin, var_0) <= var_1) {
       self._id_EF7D = undefined;
       self._id_EF7C = undefined;
 
-      if(!isDefined(self._id_EF7B))
+      if(!isDefined(self._id_EF7B)) {
         self._id_EF7A = undefined;
+      }
 
       self notify("scriptedGoal_reached");
     }
@@ -252,8 +258,9 @@ scriptedgoalwaitforarrival() {
 }
 
 _id_F834(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   self._id_EF79 = var_1;
   self._id_EF73 = var_0;
@@ -281,10 +288,11 @@ _id_F832(var_0, var_1, var_2) {
   self._id_EF7A = var_0;
   self._id_EF7E = var_1;
 
-  if(isDefined(var_2) && var_2)
+  if(isDefined(var_2) && var_2) {
     self._id_EF7B = var_2;
-  else
+  } else {
     self._id_EF7B = undefined;
+  }
 }
 
 _id_41D9() {

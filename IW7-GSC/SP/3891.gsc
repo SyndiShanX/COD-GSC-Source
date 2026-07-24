@@ -4,25 +4,30 @@
 **************************************/
 
 _id_258C() {
-  if(!isDefined(level._id_2571))
+  if(!isDefined(level._id_2571)) {
     level._id_2571 = spawnStruct();
+  }
 
-  if(!isDefined(level._id_2571._id_5A61))
+  if(!isDefined(level._id_2571._id_5A61)) {
     level._id_2571._id_5A61 = [];
+  }
 
   _id_25B4();
   _id_260A();
 }
 
 _id_25B4() {
-  if(!isDefined(level._id_2571._id_8492))
+  if(!isDefined(level._id_2571._id_8492)) {
     level._id_2571._id_8492 = spawn("script_origin", (0, 0, 0));
+  }
 
-  if(!isDefined(level._id_2571._id_8491))
+  if(!isDefined(level._id_2571._id_8491)) {
     level._id_2571._id_8491 = spawn("script_origin", (0, 0, 0));
+  }
 
-  if(!isDefined(level._id_2571._id_8490))
+  if(!isDefined(level._id_2571._id_8490)) {
     level._id_2571._id_8490 = spawn("script_origin", (0, 0, 0));
+  }
 }
 
 _id_260A() {
@@ -162,22 +167,26 @@ _id_D0B0() {
   level._id_2571._id_8491 stopsounds();
   wait 0.2;
 
-  if(isDefined(level._id_2571._id_8490))
+  if(isDefined(level._id_2571._id_8490)) {
     level._id_2571._id_8490 stoploopsound();
+  }
 
-  if(isDefined(level._id_2571._id_8492))
+  if(isDefined(level._id_2571._id_8492)) {
     level._id_2571._id_8492 stopsounds();
+  }
 }
 
 _id_D35A() {
   level.player endon("end_zerog_movement");
   level._id_2571._id_13EBD = 0;
 
-  if(!isDefined(level._id_2571._id_13ED7))
+  if(!isDefined(level._id_2571._id_13ED7)) {
     level._id_2571._id_13ED7 = spawn("script_origin", (0, 0, 0));
+  }
 
-  if(!isDefined(level._id_2571._id_13ED9))
+  if(!isDefined(level._id_2571._id_13ED9)) {
     level._id_2571._id_13ED9 = spawn("script_origin", (0, 0, 0));
+  }
 
   level._id_2571._id_13ED7 _meth_8278(0.0, 0.0);
   level._id_2571._id_13ED7 _meth_8277(1.0, 0.0);
@@ -213,9 +222,9 @@ _id_D35A() {
       }
 
       if(!level._id_2571._id_13EBD) {
-        if(!level.player isonground() && !scripts\engine\utility::player_is_in_jackal() && (var_3 > 0.2 || level.player _meth_81CE() || level.player _meth_843B()))
+        if(!level.player isonground() && !scripts\engine\utility::player_is_in_jackal() && (var_3 > 0.2 || level.player _meth_81CE() || level.player _meth_843B())) {
           thread _id_D2DA();
-        else if((level.player buttonPressed("DPAD_LEFT") || level.player buttonPressed("DPAD_RIGHT") || level.player buttonPressed("DPAD_UP")) && !var_2) {
+        } else if((level.player buttonPressed("DPAD_LEFT") || level.player buttonPressed("DPAD_RIGHT") || level.player buttonPressed("DPAD_UP")) && !var_2) {
           thread _id_D2DA();
           var_2 = 1;
         } else if(!level.player buttonPressed("DPAD_LEFT") && !level.player buttonPressed("DPAD_RIGHT") && !level.player buttonPressed("DPAD_UP") && var_2)
@@ -237,8 +246,9 @@ _id_D048() {
     level._id_2571._id_13EDB = 0;
     wait 1;
 
-    if(isDefined(level._id_2571._id_13ED7))
+    if(isDefined(level._id_2571._id_13ED7)) {
       level._id_2571._id_13ED7 stoploopsound();
+    }
   }
 
   level._id_2571._id_13EBD = 0;
@@ -254,8 +264,9 @@ _id_D2DA() {
   level._id_2571._id_13EBD = 1;
   level._id_2571._id_13ED9 _meth_8278(0.2, 0.0);
 
-  if(isDefined(level._id_2571._id_13ED9))
+  if(isDefined(level._id_2571._id_13ED9)) {
     level._id_2571._id_13ED9 playSound("zero_g_mvmt_start");
+  }
 
   wait 0.3;
   level._id_2571._id_13ED7 _meth_8277(1.0, 0.0);
@@ -263,16 +274,18 @@ _id_D2DA() {
   level._id_2571._id_13ED7 _meth_8277(1.5, 3.0);
 
   if(isDefined(level._id_2571._id_13ED9)) {
-    if(level.player _meth_8439() || level.player issprinting())
+    if(level.player _meth_8439() || level.player issprinting()) {
       level._id_2571._id_13ED9 _meth_8278(0.8, 0.2);
-    else
+    } else {
       level._id_2571._id_13ED9 _meth_8278(0.2, 0.2);
+    }
   }
 
   wait 0.1;
 
-  if(isDefined(level._id_2571._id_13ED7))
+  if(isDefined(level._id_2571._id_13ED7)) {
     level._id_2571._id_13ED7 _meth_8278(level._id_2571._id_13EDB, 3);
+  }
 }
 
 _id_D049() {
@@ -334,8 +347,9 @@ _id_C191() {
       self._id_13E79 = undefined;
     }
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       thread scripts\engine\utility::play_sound_in_space("zero_g_npc_mvmt_boost_end", var_0);
+    }
   }
 }
 

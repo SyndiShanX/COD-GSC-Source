@@ -10,10 +10,11 @@ init_bumper_cars() {
     return;
   }
   foreach(var_2 in var_0) {
-    if(var_2.origin == (4113.9, 184.9, 112))
+    if(var_2.origin == (4113.9, 184.9, 112)) {
       var_2.fast_mover = 1;
-    else
+    } else {
       var_2.fast_mover = 0;
+    }
 
     var_2.dmgtrigger = getEnt(var_2.target, "targetname");
     var_2.dmgtrigger enablelinkTo();
@@ -42,8 +43,9 @@ init_bumper_cars() {
   for(;;) {
     var_0 = scripts\engine\utility::array_randomize(var_0);
 
-    foreach(var_6, var_2 in var_0)
-    var_2 activate_bumper_car(var_6);
+    foreach(var_6, var_2 in var_0) {
+      var_2 activate_bumper_car(var_6);
+    }
   }
 }
 
@@ -58,8 +60,9 @@ activate_bumper_car(var_0) {
 
   var_3 = 1.75;
 
-  if(self.fast_mover)
+  if(self.fast_mover) {
     var_3 = 1.2;
+  }
 
   wait(randomfloatrange(1, 3));
 
@@ -77,22 +80,25 @@ activate_bumper_car(var_0) {
         if(!isDefined(var_4[var_6]["entity"])) {
           continue;
         }
-        if(isPlayer(var_4[var_6]["entity"]) && (scripts\cp\cp_laststand::player_in_laststand(var_4[var_6]["entity"]) || scripts\engine\utility::is_true(var_4[var_6]["entity"].isreviving)))
+        if(isPlayer(var_4[var_6]["entity"]) && (scripts\cp\cp_laststand::player_in_laststand(var_4[var_6]["entity"]) || scripts\engine\utility::is_true(var_4[var_6]["entity"].isreviving))) {
           var_5 = 1;
+        }
       }
 
-      if(var_5)
+      if(var_5) {
         return;
-      else
+      } else {
         break;
+      }
 
       wait 0.1;
     }
 
-    if(self.fast_mover)
+    if(self.fast_mover) {
       self playsoundonmovingent("trap_bumper_car_mvmt_short");
-    else
+    } else {
       self playsoundonmovingent("trap_bumper_car_mvmt_long");
+    }
 
     self setscriptablepartstate("bumpercar", "moving");
     wait 0.3;
@@ -129,22 +135,25 @@ activate_bumper_car(var_0) {
         if(!isDefined(var_4[var_6]["entity"])) {
           continue;
         }
-        if(isPlayer(var_4[var_6]["entity"]) && (scripts\cp\cp_laststand::player_in_laststand(var_4[var_6]["entity"]) || scripts\engine\utility::is_true(var_4[var_6]["entity"].isreviving)))
+        if(isPlayer(var_4[var_6]["entity"]) && (scripts\cp\cp_laststand::player_in_laststand(var_4[var_6]["entity"]) || scripts\engine\utility::is_true(var_4[var_6]["entity"].isreviving))) {
           var_5 = 1;
+        }
       }
 
-      if(var_5)
+      if(var_5) {
         return;
-      else
+      } else {
         break;
+      }
 
       wait 0.1;
     }
 
-    if(self.fast_mover)
+    if(self.fast_mover) {
       self playsoundonmovingent("trap_bumper_car_mvmt_short");
-    else
+    } else {
       self playsoundonmovingent("trap_bumper_car_mvmt_long");
+    }
 
     self setscriptablepartstate("bumpercar", "moving");
     wait 0.05;
@@ -169,8 +178,9 @@ activate_bumper_car(var_0) {
     self.state = "fwd";
   }
 
-  if(isDefined(self.nav_obs))
+  if(isDefined(self.nav_obs)) {
     destroynavobstacle(self.nav_obs);
+  }
 
   self waittill("movedone");
   wait 0.1;
@@ -178,8 +188,9 @@ activate_bumper_car(var_0) {
   self.nav_obs = createnavobstaclebybounds(self.origin, (56, 32, 32), self.angles);
   var_7 = scripts\engine\utility::getclosest(self.origin, level.bumper_car_impact_spots, 128);
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     playFX(level._effect["bumpercar_impact"], var_7.origin, anglesToForward((0, 270, 0)), anglestoup((0, 270, 0)));
+  }
 
   self setscriptablepartstate("bumpercar", "impact");
   wait 0.15;
@@ -194,8 +205,9 @@ kill_zombies() {
 
     foreach(var_3 in var_1) {
       if(var_0 == var_3) {
-        if(isDefined(var_3.owner) && var_3.owner scripts\cp\utility::is_valid_player(1))
+        if(isDefined(var_3.owner) && var_3.owner scripts\cp\utility::is_valid_player(1)) {
           var_3.owner scripts\cp\cp_weapon::placeequipmentfailed(var_0.weapon_name, 1, var_0.origin);
+        }
 
         var_3 notify("detonateExplosive");
       }
@@ -230,8 +242,9 @@ fling_zombie(var_0) {
   self.nocorpse = 1;
   var_2 = scripts\engine\utility::get_array_of_closest(self.origin, level.players, undefined, 4, var_1);
 
-  foreach(var_4 in var_2)
-  var_4 thread scripts\cp\cp_vo::try_to_play_vo("trap_kill_rover", "zmb_comment_vo", "medium", 5, 0, 0, 1, 25);
+  foreach(var_4 in var_2) {
+    var_4 thread scripts\cp\cp_vo::try_to_play_vo("trap_kill_rover", "zmb_comment_vo", "medium", 5, 0, 0, 1, 25);
+  }
 
   self dodamage(self.health + 1000, var_0.origin);
 }
@@ -245,8 +258,9 @@ push_and_damage_player(var_0) {
   self setvelocity(vectorNormalize(self.origin - var_0.origin) * 300 + (0, 0, 100));
   wait 0.1;
 
-  if(isPlayer(self) && !scripts\engine\utility::is_true(self.isrewinding))
+  if(isPlayer(self) && !scripts\engine\utility::is_true(self.isrewinding)) {
     self dodamage(self.health + 100, var_0.origin);
+  }
 
   wait 0.1;
   self.flung = undefined;

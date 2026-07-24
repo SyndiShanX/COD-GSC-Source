@@ -23,13 +23,15 @@ _id_668D(var_0) {
   if(!_id_381A(var_0)) {
     return;
   }
-  foreach(var_2 in _id_782B())
-  _id_668C(var_0, var_2);
+  foreach(var_2 in _id_782B()) {
+    _id_668C(var_0, var_2);
+  }
 }
 
 _id_668C(var_0, var_1) {
-  if(!isDefined(var_0._id_6691))
+  if(!isDefined(var_0._id_6691)) {
     var_0._id_6691 = [];
+  }
 
   var_2 = level._id_13F0F[var_1];
   var_3 = var_0 gettagorigin(var_2.tag);
@@ -43,19 +45,23 @@ _id_668C(var_0, var_1) {
 }
 
 process_damage_to_armor(var_0, var_1, var_2, var_3, var_4) {
-  if(scripts\engine\utility::is_true(var_0.disable_armor))
+  if(scripts\engine\utility::is_true(var_0.disable_armor)) {
     return var_2;
+  }
 
-  if(!isDefined(var_0._id_6691))
+  if(!isDefined(var_0._id_6691)) {
     return var_2;
+  }
 
   var_5 = var_0._id_6691[var_3];
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     return var_2;
+  }
 
-  if(var_5.fake_health <= 0)
+  if(var_5.fake_health <= 0) {
     return var_2;
+  }
 
   var_5 notify("damage", var_2, var_1, var_4);
   return 0;
@@ -66,8 +72,9 @@ clean_up_zombie_armor(var_0) {
     return;
   }
   foreach(var_2 in var_0._id_6691) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2 notify("damage", var_2.fake_health);
+    }
   }
 }
 
@@ -83,15 +90,17 @@ _id_217F(var_0, var_1) {
     if(scripts\engine\utility::is_true(level.insta_kill)) {
       var_4 = var_0.fake_health;
 
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         var_1 dodamage(var_1.health, var_0.origin);
+      }
     }
 
     var_7 = gettime();
 
     if(var_7 != var_2) {
-      if(isPlayer(var_5))
+      if(isPlayer(var_5)) {
         var_5 scripts\cp\cp_damage::updatedamagefeedback("hitalienarmor");
+      }
 
       var_2 = var_7;
       var_3 = var_6;
@@ -122,8 +131,9 @@ _id_5386(var_0, var_1) {
 }
 
 modify_apache_lifetime(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return undefined;
+  }
 
   var_0 = vectorNormalize((var_0[0], var_0[1], 0));
   var_0 = var_0 + (0, 0, 1);
@@ -139,16 +149,18 @@ _id_782B() {
   var_0 = 6000;
 
   if(level.wave_num >= var_0) {
-    if(randomint(100) <= level.wave_num)
+    if(randomint(100) <= level.wave_num) {
       return ["space_helmet"];
+    }
   }
 
   return [];
 }
 
 _id_381A(var_0) {
-  if(var_0 scripts\asm\zombie\zombie::_id_9E0F())
+  if(var_0 scripts\asm\zombie\zombie::_id_9E0F()) {
     return 0;
+  }
 
   return 1;
 }

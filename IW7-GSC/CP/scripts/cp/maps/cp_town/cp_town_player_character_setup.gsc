@@ -28,30 +28,35 @@ register_player_character(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
   var_16.melee_weapon = var_14;
   var_16.post_setup_func = var_15;
 
-  if(!isDefined(level.player_character_info))
+  if(!isDefined(level.player_character_info)) {
     level.player_character_info = [];
+  }
 
-  if(!isDefined(level.available_player_characters))
+  if(!isDefined(level.available_player_characters)) {
     level.available_player_characters = [];
+  }
 
   level.player_character_info[var_0] = var_16;
 
-  if(var_1 == "yes")
+  if(var_1 == "yes") {
     level.available_player_characters[level.available_player_characters.size] = var_0;
+  }
 }
 
 post_elvira_setup_func(var_0) {
   var_0 scripts\cp\zombies\achievement::update_achievement("MISTRESS_OF_DARK", 1);
 
-  if(!isDefined(level.special_character_count))
+  if(!isDefined(level.special_character_count)) {
     level.special_character_count = 1;
-  else
+  } else {
     level.special_character_count++;
+  }
 }
 
 post_el_setup_func(var_0) {
-  if(!isDefined(level.special_character_count))
+  if(!isDefined(level.special_character_count)) {
     level.special_character_count = 1;
-  else
+  } else {
     level.special_character_count++;
+  }
 }

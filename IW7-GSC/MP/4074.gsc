@@ -49,8 +49,9 @@ _id_F03D() {
   waittillframeend;
   self._id_75A4 = getscriptablearray(scripts\engine\utility::getStruct("thruster_fx_lights", "script_noteworthy").target, "targetname");
 
-  foreach(var_1 in self._id_75A4)
-  var_1 setscriptablepartstate("onoff", "off");
+  foreach(var_1 in self._id_75A4) {
+    var_1 setscriptablepartstate("onoff", "off");
+  }
 }
 
 _id_CCEB() {

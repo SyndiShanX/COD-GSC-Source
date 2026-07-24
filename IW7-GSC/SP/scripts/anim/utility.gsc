@@ -9,8 +9,9 @@ _id_97CF(var_0) {
   self clearanim(%body, 0.3);
   self _meth_82A2(%body, 1, 0);
 
-  if(var_0 != "pain" && var_0 != "death")
+  if(var_0 != "pain" && var_0 != "death") {
     self.a._id_10930 = "none";
+  }
 
   self.a._id_1A4B = 1.0;
   self.a._id_1A4D = 1.0;
@@ -22,8 +23,9 @@ _id_97CF(var_0) {
 
 _id_12E5F() {
   if(isDefined(self._id_5270) && self._id_5270 != self.a.pose) {
-    if(self.a.pose == "prone")
+    if(self.a.pose == "prone") {
       exitpronewrapper(0.5);
+    }
 
     if(self._id_5270 == "prone") {
       self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
@@ -43,8 +45,9 @@ _id_9832(var_0) {
   }
 
   if(isDefined(self._id_AFE7)) {
-    if(var_0 != "pain" && var_0 != "death")
+    if(var_0 != "pain" && var_0 != "death") {
       self _meth_81D0(self.origin);
+    }
 
     if(var_0 != "pain") {
       self._id_AFE7 = undefined;
@@ -52,8 +55,9 @@ _id_9832(var_0) {
     }
   }
 
-  if(isDefined(self.a._id_B4E7) && var_0 != "death")
+  if(isDefined(self.a._id_B4E7) && var_0 != "death") {
     self _meth_81D0(self.origin);
+  }
 
   if(isDefined(self.a._id_D707)) {
     var_1 = self.a._id_D707;
@@ -61,17 +65,21 @@ _id_9832(var_0) {
     [[var_1]](var_0);
   }
 
-  if(var_0 != "combat" && var_0 != "pain" && var_0 != "death" && scripts\anim\utility_common::isusingsidearm())
+  if(var_0 != "combat" && var_0 != "pain" && var_0 != "death" && scripts\anim\utility_common::isusingsidearm()) {
     scripts\anim\combat::_id_11380(_id_B027("combat", "pistol_to_primary"), 1);
+  }
 
-  if(var_0 != "combat" && var_0 != "move" && var_0 != "pain")
+  if(var_0 != "combat" && var_0 != "move" && var_0 != "pain") {
     self.a._id_B168 = undefined;
+  }
 
-  if(var_0 != "death")
+  if(var_0 != "death") {
     self.a.nodeath = 0;
+  }
 
-  if(isDefined(self._id_9E33) && (var_0 == "pain" || var_0 == "death" || var_0 == "flashed"))
+  if(isDefined(self._id_9E33) && (var_0 == "pain" || var_0 == "death" || var_0 == "flashed")) {
     scripts\anim\combat_utility::_id_5D29();
+  }
 
   self._id_9E33 = undefined;
   scripts\anim\squadmanager::_id_1B0E(var_0);
@@ -83,8 +91,9 @@ _id_9832(var_0) {
   self.a._id_EF87 = gettime();
   self.a._id_2411 = 0;
 
-  if(isDefined(self.node) && (self.node.type == "Conceal Prone" || self.node.type == "Conceal Crouch" || self.node.type == "Conceal Stand"))
+  if(isDefined(self.node) && (self.node.type == "Conceal Prone" || self.node.type == "Conceal Crouch" || self.node.type == "Conceal Stand")) {
     self.a._id_2411 = 1;
+  }
 
   _id_97CF(var_0);
   _id_12E5F();
@@ -92,10 +101,11 @@ _id_9832(var_0) {
 
 _id_8097() {
   if(isDefined(self._id_138DF) && self._id_138DF) {
-    if(scripts\anim\utility_common::isshotgun(self.primaryweapon))
+    if(scripts\anim\utility_common::isshotgun(self.primaryweapon)) {
       return self.primaryweapon;
-    else if(scripts\anim\utility_common::isshotgun(self.secondaryweapon))
+    } else if(scripts\anim\utility_common::isshotgun(self.secondaryweapon)) {
       return self.secondaryweapon;
+    }
   }
 
   return self.primaryweapon;
@@ -118,23 +128,27 @@ _id_D912() {
   self notify("displaceprint");
   self endon("displaceprint");
 
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 _id_9E40(var_0) {
-  if((!isDefined(var_0) || var_0) && self.alertlevelint > 1)
+  if((!isDefined(var_0) || var_0) && self.alertlevelint > 1) {
     return 1;
+  }
 
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     return 1;
+  }
 
   return self.a.combatendtime > gettime();
 }
 
 _id_12EB9() {
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     self.a.combatendtime = gettime() + anim.combatidlepreventoverlappingplayer + randomint(anim.combatmemorytimeconst);
+  }
 }
 
 _id_824E(var_0, var_1) {
@@ -150,48 +164,53 @@ _id_7EAD(var_0) {
 }
 
 _id_9F75(var_0) {
-  if(isDefined(self.covernode))
+  if(isDefined(self.covernode)) {
     return self.covernode doesnodeallowstance(var_0);
+  }
 
   return self _meth_81BF(var_0);
 }
 
 _id_3EF2(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = self.a.pose;
+  }
 
   switch (var_0) {
     case "stand":
-      if(_id_9F75("stand"))
+      if(_id_9F75("stand")) {
         var_1 = "stand";
-      else if(_id_9F75("crouch"))
+      } else if(_id_9F75("crouch")) {
         var_1 = "crouch";
-      else if(_id_9F75("prone"))
+      } else if(_id_9F75("prone")) {
         var_1 = "prone";
-      else
+      } else {
         var_1 = "stand";
+      }
 
       break;
     case "crouch":
-      if(_id_9F75("crouch"))
+      if(_id_9F75("crouch")) {
         var_1 = "crouch";
-      else if(_id_9F75("stand"))
+      } else if(_id_9F75("stand")) {
         var_1 = "stand";
-      else if(_id_9F75("prone"))
+      } else if(_id_9F75("prone")) {
         var_1 = "prone";
-      else
+      } else {
         var_1 = "crouch";
+      }
 
       break;
     case "prone":
-      if(_id_9F75("prone"))
+      if(_id_9F75("prone")) {
         var_1 = "prone";
-      else if(_id_9F75("crouch"))
+      } else if(_id_9F75("crouch")) {
         var_1 = "crouch";
-      else if(_id_9F75("stand"))
+      } else if(_id_9F75("stand")) {
         var_1 = "stand";
-      else
+      } else {
         var_1 = "prone";
+      }
 
       break;
     default:
@@ -224,15 +243,17 @@ _id_5B86(var_0) {
   self endon("killanimscript");
   self endon("enddrawstring");
 
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 _id_5B87(var_0, var_1, var_2, var_3) {
   var_4 = var_3 * 20;
 
-  for(var_5 = 0; var_5 < var_4; var_5++)
+  for(var_5 = 0; var_5 < var_4; var_5++) {
     wait 0.05;
+  }
 }
 
 _id_10136(var_0) {
@@ -243,24 +264,27 @@ _id_10136(var_0) {
   if(!isDefined(self.enemy)) {
     return;
   }
-  if(self.enemy.team == "allies")
+  if(self.enemy.team == "allies") {
     var_1 = (0.4, 0.7, 1);
-  else
+  } else {
     var_1 = (1, 0.7, 0.4);
+  }
 
   for(;;) {
     wait 0.05;
 
-    if(!isDefined(self.lastenemysightpos))
+    if(!isDefined(self.lastenemysightpos)) {
       continue;
+    }
   }
 }
 
 _id_8BED() {
-  if(isDefined(self.node))
+  if(isDefined(self.node)) {
     return scripts\anim\utility_common::canseeenemyfromexposed() || scripts\anim\utility_common::cansuppressenemyfromexposed();
-  else
+  } else {
     return scripts\anim\utility_common::canseeenemy() || scripts\anim\utility_common::cansuppressenemy();
+  }
 }
 
 _id_7E90() {
@@ -276,15 +300,17 @@ utility_trigger_demeanoroverride() {
 }
 
 utility_trigger_deleter() {
-  if(!_id_8BED())
+  if(!_id_8BED()) {
     return 0;
+  }
 
   var_0 = self getmuzzlepos();
   var_1 = self getshootatpos() - var_0;
 
   if(isDefined(self._id_9332) && isDefined(self._id_932D)) {
-    if(distance(self.origin, self._id_932D) < 25)
+    if(distance(self.origin, self._id_932D) < 25) {
       return 0;
+    }
   }
 
   self._id_9332 = undefined;
@@ -311,13 +337,15 @@ _id_4F4E(var_0, var_1, var_2) {
   var_3 thread _id_4F57();
   var_3 endon("timeout");
 
-  if(self.enemy.team == "allies")
+  if(self.enemy.team == "allies") {
     var_4 = (0.4, 0.7, 1);
-  else
+  } else {
     var_4 = (1, 0.7, 0.4);
+  }
 
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 _id_4F4D(var_0, var_1) {
@@ -332,14 +360,15 @@ _id_4F38(var_0, var_1) {
   var_2 = var_0 / var_1;
   var_3 = undefined;
 
-  if(var_0 == self.bulletsinclip)
+  if(var_0 == self.bulletsinclip) {
     var_3 = "all rounds";
-  else if(var_2 < 0.25)
+  } else if(var_2 < 0.25) {
     var_3 = "small burst";
-  else if(var_2 < 0.5)
+  } else if(var_2 < 0.5) {
     var_3 = "med burst";
-  else
+  } else {
     var_3 = "long burst";
+  }
 
   thread _id_4F4F(self.origin + (0, 0, 42), var_3, 1.5);
   thread _id_4F4D(self.origin + (0, 0, 60), "Suppressing");
@@ -352,8 +381,9 @@ _id_D91C() {
   var_0 = 0.25;
   var_1 = var_0 * 20;
 
-  for(var_2 = 0; var_2 < var_1; var_2 = var_2 + 1)
+  for(var_2 = 0; var_2 < var_1; var_2 = var_2 + 1) {
     wait 0.05;
+  }
 }
 
 _id_D91B() {}
@@ -362,8 +392,9 @@ _id_1011C(var_0, var_1, var_2, var_3) {
   self endon("death");
   var_4 = var_3 * 20;
 
-  for(var_5 = 0; var_5 < var_4; var_5 = var_5 + 1)
+  for(var_5 = 0; var_5 < var_4; var_5 = var_5 + 1) {
     wait 0.05;
+  }
 }
 
 _id_1011B(var_0, var_1, var_2, var_3) {
@@ -375,10 +406,11 @@ _id_FE9C(var_0) {
   scripts\sp\gameskill::_id_F288();
   self notify("shooting");
 
-  if(scripts\anim\utility_common::isasniper() && isDefined(self.asm.shootparams) && isDefined(self.asm.shootparams.pos))
+  if(scripts\anim\utility_common::isasniper() && isDefined(self.asm.shootparams) && isDefined(self.asm.shootparams.pos)) {
     self shoot(1, self.asm.shootparams.pos, 1, 0, 1);
-  else
+  } else {
     self shoot(1, undefined, var_0);
+  }
 }
 
 _id_FE9D(var_0) {
@@ -389,14 +421,15 @@ _id_FE9D(var_0) {
 _id_FED2(var_0, var_1) {
   self.a._id_A9ED = gettime();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   self notify("shooting");
 
-  if(scripts\anim\utility_common::isasniper())
+  if(scripts\anim\utility_common::isasniper()) {
     self shoot(1, var_0, 1, 1, 1);
-  else {
+  } else {
     var_2 = bulletspread(self getmuzzlepos(), var_0, 4);
     self shoot(1, var_2, var_1);
   }
@@ -439,8 +472,9 @@ _id_11816() {
     wait 0.05;
   }
 
-  if(isDefined(var_4) && isDefined(var_4.origin))
+  if(isDefined(var_4) && isDefined(var_4.origin)) {
     var_4 unlink();
+  }
 
   var_0 delete();
 }
@@ -491,8 +525,9 @@ _id_CA77() {
 }
 
 _id_9ED4() {
-  if(self.suppressionmeter <= self.suppressionthreshold * 0.25)
+  if(self.suppressionmeter <= self.suppressionthreshold * 0.25) {
     return 0;
+  }
 
   return self issuppressed();
 }
@@ -508,14 +543,16 @@ _id_1E9D(var_0, var_1) {
   var_2 = var_0.size;
   var_3 = randomint(var_2);
 
-  if(var_2 == 1)
+  if(var_2 == 1) {
     return var_0[0];
+  }
 
   var_4 = 0;
   var_5 = 0;
 
-  for(var_6 = 0; var_6 < var_2; var_6++)
+  for(var_6 = 0; var_6 < var_2; var_6++) {
     var_5 = var_5 + var_1[var_6];
+  }
 
   var_7 = randomfloat(var_5);
   var_8 = 0;
@@ -534,18 +571,21 @@ _id_1E9D(var_0, var_1) {
 }
 
 _id_EB7E(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 500;
+  }
 
   return gettime() - self._id_CA7E < var_0;
 }
 
 _id_3928() {
-  if(!self.grenadeammo)
+  if(!self.grenadeammo) {
     return 0;
+  }
 
-  if(self.script_forcegrenade)
+  if(self.script_forcegrenade) {
     return 1;
+  }
 
   return isPlayer(self.enemy);
 }
@@ -560,8 +600,9 @@ _id_DCA3(var_0) {
   if(var_0.size > 1) {
     var_2 = 0;
 
-    for(var_3 = 0; var_3 < var_0.size; var_3++)
+    for(var_3 = 0; var_3 < var_0.size; var_3++) {
       var_2 = var_2 + var_0[var_3];
+    }
 
     var_4 = randomfloat(var_2);
     var_2 = 0;
@@ -580,41 +621,47 @@ _id_DCA3(var_0) {
 }
 
 _id_F715(var_0, var_1, var_2) {
-  if(!isDefined(anim.optionalstepeffects))
+  if(!isDefined(anim.optionalstepeffects)) {
     anim.optionalstepeffects = [];
+  }
 
   anim.optionalstepeffects[var_1] = 1;
   level._effect["step_" + var_1][var_0] = var_2;
 }
 
 _id_F716(var_0, var_1, var_2) {
-  if(!isDefined(anim.optionalstepeffectssmall))
+  if(!isDefined(anim.optionalstepeffectssmall)) {
     anim.optionalstepeffectssmall = [];
+  }
 
   anim.optionalstepeffectssmall[var_1] = 1;
   level._effect["step_small_" + var_1][var_0] = var_2;
 }
 
 _id_12CBF(var_0) {
-  if(isDefined(anim.optionalstepeffects))
+  if(isDefined(anim.optionalstepeffects)) {
     anim.optionalstepeffects[var_0] = undefined;
+  }
 
   level._effect["step_" + var_0] = undefined;
 }
 
 _id_12CC0(var_0) {
-  if(isDefined(anim.optionalstepeffectssmall))
+  if(isDefined(anim.optionalstepeffectssmall)) {
     anim.optionalstepeffectssmall[var_0] = undefined;
+  }
 
   level._effect["step_small_" + var_0] = undefined;
 }
 
 _id_F7B9(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "all";
+  }
 
-  if(!isDefined(level._notetrackfx))
+  if(!isDefined(level._notetrackfx)) {
     level._notetrackfx = [];
+  }
 
   level._notetrackfx[var_0][var_2] = spawnStruct();
   level._notetrackfx[var_0][var_2].tag = var_1;
@@ -623,24 +670,28 @@ _id_F7B9(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_F7BA(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "all";
+  }
 
-  if(!isDefined(level._notetrackfx))
+  if(!isDefined(level._notetrackfx)) {
     level._notetrackfx = [];
+  }
 
-  if(isDefined(level._notetrackfx[var_0][var_1]))
+  if(isDefined(level._notetrackfx[var_0][var_1])) {
     var_4 = level._notetrackfx[var_0][var_1];
-  else {
+  } else {
     var_4 = spawnStruct();
     level._notetrackfx[var_0][var_1] = var_4;
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_4.sound_prefix = var_2;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_4.sound_suffix = var_3;
+  }
 }
 
 enterpronewrapper(var_0) {
@@ -654,8 +705,9 @@ _id_662B(var_0) {
   self _meth_80DF(var_0, isDefined(self.a.onback));
   self waittill("killanimscript");
 
-  if(self.a.pose != "prone" && !isDefined(self.a.onback))
+  if(self.a.pose != "prone" && !isDefined(self.a.onback)) {
     self.a.pose = "prone";
+  }
 }
 
 exitpronewrapper(var_0) {
@@ -669,29 +721,35 @@ _id_697C(var_0) {
   self _meth_80E0(var_0);
   self waittill("killanimscript");
 
-  if(self.a.pose == "prone")
+  if(self.a.pose == "prone") {
     self.a.pose = "crouch";
+  }
 }
 
 _id_3875() {
-  if(self.a._id_2411)
+  if(self.a._id_2411) {
     return 0;
+  }
 
-  if(!scripts\anim\weaponlist::usingautomaticweapon())
+  if(!scripts\anim\weaponlist::usingautomaticweapon()) {
     return 0;
+  }
 
-  if(weaponclass(self.weapon) == "mg")
+  if(weaponclass(self.weapon) == "mg") {
     return 0;
+  }
 
-  if(isDefined(self._id_5507) && self._id_5507 == 1)
+  if(isDefined(self._id_5507) && self._id_5507 == 1) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_38C0() {
-  if(!_id_8BED())
+  if(!_id_8BED()) {
     return 0;
+  }
 
   var_0 = self getmuzzlepos();
   return sighttracepassed(var_0, _id_7E90(), 0, undefined);
@@ -702,10 +760,11 @@ _id_7FCC(var_0) {
 }
 
 _id_DCA6(var_0, var_1) {
-  if(randomint(2))
+  if(randomint(2)) {
     return var_0;
-  else
+  } else {
     return var_1;
+  }
 }
 
 _id_1F64(var_0) {
@@ -724,73 +783,87 @@ _id_1F67(var_0) {
 _id_2274(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
   var_14 = [];
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_14[0] = var_0;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_14[1] = var_1;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_14[2] = var_2;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_14[3] = var_3;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_14[4] = var_4;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_14[5] = var_5;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_14[6] = var_6;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     var_14[7] = var_7;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_8))
+  if(isDefined(var_8)) {
     var_14[8] = var_8;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_9))
+  if(isDefined(var_9)) {
     var_14[9] = var_9;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_10))
+  if(isDefined(var_10)) {
     var_14[10] = var_10;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_11))
+  if(isDefined(var_11)) {
     var_14[11] = var_11;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_12))
+  if(isDefined(var_12)) {
     var_14[12] = var_12;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_13))
+  if(isDefined(var_13)) {
     var_14[13] = var_13;
+  }
 
   return var_14;
 }
@@ -812,18 +885,19 @@ _id_7DA1() {
 }
 
 _id_7DA2() {
-  if(self.weapon == self.primaryweapon)
+  if(self.weapon == self.primaryweapon) {
     return "primary";
-  else if(self.weapon == self.secondaryweapon)
+  } else if(self.weapon == self.secondaryweapon) {
     return "secondary";
-  else if(self.weapon == self._id_101B4)
+  } else if(self.weapon == self._id_101B4) {
     return "sidearm";
-  else {}
+  } else {}
 }
 
 _id_1A18(var_0) {
-  if(isDefined(self.weaponinfo[var_0]))
+  if(isDefined(self.weaponinfo[var_0])) {
     return 1;
+  }
 
   return 0;
 }
@@ -881,19 +955,22 @@ _id_80BD(var_0, var_1) {
 }
 
 _id_7E52() {
-  if(scripts\anim\utility_common::isusingsecondary())
+  if(scripts\anim\utility_common::isusingsecondary()) {
     return "secondary";
+  }
 
-  if(scripts\anim\utility_common::isusingsidearm())
+  if(scripts\anim\utility_common::isusingsidearm()) {
     return "sidearm";
+  }
 
   return "primary";
 }
 
 _id_B027(var_0, var_1) {
   if(isDefined(self._id_1F62)) {
-    if(isDefined(anim.archetypes[self._id_1F62][var_0]) && isDefined(anim.archetypes[self._id_1F62][var_0][var_1]))
+    if(isDefined(anim.archetypes[self._id_1F62][var_0]) && isDefined(anim.archetypes[self._id_1F62][var_0][var_1])) {
       return anim.archetypes[self._id_1F62][var_0][var_1];
+    }
   }
 
   return anim.archetypes["soldier"][var_0][var_1];
@@ -904,8 +981,9 @@ _id_B028(var_0) {
     if(isDefined(anim.archetypes[self._id_1F62][var_0])) {
       var_1 = anim.archetypes["soldier"][var_0];
 
-      foreach(var_4, var_3 in anim.archetypes[self._id_1F62][var_0])
-      var_1[var_4] = var_3;
+      foreach(var_4, var_3 in anim.archetypes[self._id_1F62][var_0]) {
+        var_1[var_4] = var_3;
+      }
 
       return var_1;
     }
@@ -916,8 +994,9 @@ _id_B028(var_0) {
 
 _id_B031(var_0, var_1, var_2) {
   if(isDefined(self._id_1F62)) {
-    if(isDefined(anim.archetypes[self._id_1F62][var_0]) && isDefined(anim.archetypes[self._id_1F62][var_0][var_1]) && isDefined(anim.archetypes[self._id_1F62][var_0][var_1][var_2]))
+    if(isDefined(anim.archetypes[self._id_1F62][var_0]) && isDefined(anim.archetypes[self._id_1F62][var_0][var_1]) && isDefined(anim.archetypes[self._id_1F62][var_0][var_1][var_2])) {
       return anim.archetypes[self._id_1F62][var_0][var_1][var_2];
+    }
   }
 
   return anim.archetypes["soldier"][var_0][var_1][var_2];
@@ -925,8 +1004,9 @@ _id_B031(var_0, var_1, var_2) {
 
 _id_B02B(var_0, var_1) {
   if(isDefined(self._id_1F62)) {
-    if(isDefined(anim.archetypes[self._id_1F62][var_0]) && isDefined(anim.archetypes[self._id_1F62][var_0][var_1]))
+    if(isDefined(anim.archetypes[self._id_1F62][var_0]) && isDefined(anim.archetypes[self._id_1F62][var_0][var_1])) {
       return anim.archetypes[self._id_1F62][var_0][var_1];
+    }
   }
 
   return anim.archetypes["dog"][var_0][var_1];

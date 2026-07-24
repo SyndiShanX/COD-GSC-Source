@@ -68,8 +68,9 @@ _id_E5EE() {
     while(isDefined(self._id_30E7) && self._id_30E7) {
       wait 0.05;
 
-      if(!isalive(self))
+      if(!isalive(self)) {
         return;
+      }
     }
 
     var_2 = spawn("script_model", self.origin);
@@ -98,8 +99,9 @@ _id_E5EE() {
     }
     var_0 = scripts\engine\utility::waittill_any_return("end_rodeo", "death");
 
-    if(var_0 == "death")
+    if(var_0 == "death") {
       return;
+    }
   }
 }
 
@@ -137,8 +139,9 @@ _id_B2E2() {
   self._id_C925["left_leg"] = var_3;
   self waittill("death");
 
-  foreach(var_5 in self._id_C925)
-  var_5 delete();
+  foreach(var_5 in self._id_C925) {
+    var_5 delete();
+  }
 
   self._id_C925 = undefined;
 }
@@ -157,8 +160,9 @@ monitor_pain() {
   for(;;) {
     scripts\engine\utility::waitframe();
 
-    foreach(var_2, var_1 in self._id_C925)
-    _id_36F9(var_2, var_1);
+    foreach(var_2, var_1 in self._id_C925) {
+      _id_36F9(var_2, var_1);
+    }
   }
 }
 
@@ -179,10 +183,11 @@ _id_36F9(var_0, var_1) {
     var_7 = var_3 / var_1._id_B440;
     var_9 = var_2 / var_1._id_B43D;
 
-    if(var_7 < var_9)
+    if(var_7 < var_9) {
       var_10 = var_7;
-    else
+    } else {
       var_10 = var_9;
+    }
 
     var_1._id_8CB0 = int(var_10 * 50);
   } else {
@@ -190,10 +195,11 @@ _id_36F9(var_0, var_1) {
       var_8 = var_4 / var_1._id_B43E;
       var_9 = var_2 / var_1._id_B43D;
 
-      if(var_8 < var_9)
+      if(var_8 < var_9) {
         var_10 = var_8;
-      else
+      } else {
         var_10 = var_9;
+      }
 
       var_1._id_8CB0 = int(var_10 * 50);
       return;
@@ -208,8 +214,9 @@ _id_10F6C() {
   self._id_10F6A = 0;
 
   for(;;) {
-    while(!_id_10F6E())
+    while(!_id_10F6E()) {
       wait 0.05;
+    }
 
     setomnvar("ui_lockon_ads", 1);
 
@@ -228,10 +235,11 @@ _id_10F6C() {
         var_2 = self _meth_850C("right_arm", "upper") + self _meth_850C("right_arm");
         var_3 = self _meth_850C("left_arm", "upper") + self _meth_850C("left_arm");
 
-        if(var_3 > 0 && (var_3 < var_2 || var_2 == 0))
+        if(var_3 > 0 && (var_3 < var_2 || var_2 == 0)) {
           var_1 = "left_arm";
-        else if(var_2 > 0)
+        } else if(var_2 > 0) {
           var_1 = "right_arm";
+        }
       }
 
       var_4 = self._id_C925[var_1];
@@ -249,8 +257,9 @@ _id_10F6C() {
       var_5 = gettime();
       self._id_10F6A = var_5 + 250;
 
-      if(!isDefined(self._id_10F68))
+      if(!isDefined(self._id_10F68)) {
         thread _id_10F69();
+      }
 
       setomnvar("ui_lockon_target_health_0", var_4._id_8CB0);
     }
@@ -262,8 +271,9 @@ _id_10F6C() {
 _id_10F69() {
   self._id_10F68 = 1;
 
-  while(_id_10100())
+  while(_id_10100()) {
     wait 0.05;
+  }
 
   self._id_10F68 = undefined;
   self._id_10F6B = undefined;
@@ -274,14 +284,17 @@ _id_10F69() {
 }
 
 _id_10100() {
-  if(!isalive(self))
+  if(!isalive(self)) {
     return 0;
+  }
 
-  if(!isalive(level.player))
+  if(!isalive(level.player)) {
     return 0;
+  }
 
-  if(!isDefined(self._id_10F6B))
+  if(!isDefined(self._id_10F6B)) {
     return 0;
+  }
 
   return gettime() < self._id_10F6A;
 }
@@ -290,11 +303,13 @@ _id_10F6E() {
   var_0 = level.player getcurrentweapon();
   var_1 = getweaponbasename(var_0);
 
-  if(!isDefined(var_1) || var_1 != "iw7_steeldragon")
+  if(!isDefined(var_1) || var_1 != "iw7_steeldragon") {
     return 0;
+  }
 
-  if(level.player getweaponammoclip(var_0) == 0)
+  if(level.player getweaponammoclip(var_0) == 0) {
     return 0;
+  }
 
   return 1;
 }
@@ -321,8 +336,9 @@ _id_11A0D() {
       }
       var_7 = "right_arm";
 
-      if(var_6 < var_5 && var_6 != 0 || var_5 == 0)
+      if(var_6 < var_5 && var_6 != 0 || var_5 == 0) {
         var_7 = "left_arm";
+      }
 
       self _meth_850B(var_4, var_7, "upper");
     }
@@ -337,8 +353,9 @@ _id_4D1A() {
   for(;;) {
     self waittill("damage_any");
 
-    if(self.health < var_0)
+    if(self.health < var_0) {
       self.health = var_0;
+    }
 
     self._id_7212 = gettime() + 10000;
   }

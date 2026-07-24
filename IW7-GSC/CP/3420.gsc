@@ -33,8 +33,9 @@ init() {
 mini_ufo_init(var_0, var_1, var_2) {
   var_3 = spawn("script_model", var_0.origin);
 
-  if(isDefined(var_0.angles))
+  if(isDefined(var_0.angles)) {
     var_3.angles = var_0.angles;
+  }
 
   var_3 setModel("park_ufo_statue_toy");
   var_1.miniufos[var_1.miniufos.size] = var_3;
@@ -93,8 +94,9 @@ getminiufopath(var_0, var_1) {
 
     var_1.path[var_1.path.size] = var_4;
 
-    if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == "mini_ufo_teleport_to_center")
+    if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == "mini_ufo_teleport_to_center") {
       var_3 = scripts\engine\utility::getStruct("mini_ufo_center_struct", "targetname");
+    }
 
     var_2 = var_4;
   }
@@ -119,8 +121,9 @@ distance_check_for_vo(var_0) {
   self endon("death");
   scripts\engine\utility::flag_wait("mini_ufo_" + var_0 + "_ready");
 
-  if(!scripts\engine\utility::is_true(self.played_alias_ufostart))
+  if(!scripts\engine\utility::is_true(self.played_alias_ufostart)) {
     self.played_alias_ufostart = 0;
+  }
 
   while(scripts\engine\utility::flag("mini_ufo_" + var_0 + "_ready")) {
     var_1 = scripts\engine\utility::get_array_of_closest(self.origin, level.players, undefined, 10, 1000);
@@ -159,10 +162,11 @@ spawnuniversaldangerzone(var_0, var_1) {
       var_0 setscriptablepartstate("miniufo", "mini_ufo");
     }
 
-    if(scripts\engine\utility::flag("mini_ufo_" + var_1 + "_ready"))
+    if(scripts\engine\utility::flag("mini_ufo_" + var_1 + "_ready")) {
       var_4 = 150;
-    else if(isDefined(var_2.script_speed))
+    } else if(isDefined(var_2.script_speed)) {
       var_4 = var_2.script_speed;
+    }
 
     var_5 = var_3;
     var_5 = get_next_valid_struct(var_0, var_5, var_1);
@@ -192,8 +196,9 @@ spawnuniversaldangerzone(var_0, var_1) {
 
 update_ufo_angles(var_0, var_1) {
   for(;;) {
-    if(scripts\engine\utility::flag("mini_ufo_" + var_1 + "_collecting"))
+    if(scripts\engine\utility::flag("mini_ufo_" + var_1 + "_collecting")) {
       scripts\engine\utility::flag_waitopen("mini_ufo_" + var_1 + "_collecting");
+    }
 
     var_0 waittill("next_position_found", var_2, var_3);
     var_4 = vectortoangles(var_3.origin - var_2.origin) + (180, 0, 0);
@@ -202,10 +207,11 @@ update_ufo_angles(var_0, var_1) {
 }
 
 changeangledelay(var_0, var_1, var_2, var_3, var_4) {
-  if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "mini_ufo_teleport_to_center")
+  if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "mini_ufo_teleport_to_center") {
     wait(var_1 + 0.1);
-  else
+  } else {
     wait(max(0.05, var_1 - 0.35));
+  }
 
   var_0 notify("next_position_found", var_4, var_2);
 }
@@ -243,8 +249,9 @@ get_move_rate(var_0, var_1, var_2, var_3) {
   var_4 = distance(var_1, var_2);
   var_5 = var_4 / var_3;
 
-  if(var_5 < 0.05)
+  if(var_5 < 0.05) {
     var_5 = 0.05;
+  }
 
   return var_5;
 }

@@ -108,8 +108,9 @@ _id_44E1() {
   scripts\engine\utility::flag_wait_or_timeout("openingIGC_aborted", 20);
   scripts\sp\utility::_id_2669("concourse_combat_start");
 
-  if(!scripts\engine\utility::flag("openingIGC_aborted"))
+  if(!scripts\engine\utility::flag("openingIGC_aborted")) {
     scripts\engine\utility::flag_set("openingIGC_aborted");
+  }
 
   level.allies["eth3n"] scripts\sp\utility::_id_F3B5("g");
   level.player scripts\sp\utility::_id_F526("normal");
@@ -145,33 +146,39 @@ _id_4499() {
   wait 1.5;
   scripts\sp\maps\moon_port\moon_port_util::_id_15F6("igc_scene_friendlies_1");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 scripts\sp\utility::_id_135F1("trigger", 15);
+  }
 
   scripts\sp\maps\moon_port\moon_port_util::_id_F293("sdf_igc_scene_guys", "sdf_igc_retreat_vol");
 
-  if(level._id_7752 == 1)
+  if(level._id_7752 == 1) {
     thread _id_7752();
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 scripts\sp\utility::_id_135F1("trigger", 25);
+  }
 
   scripts\sp\maps\moon_port\moon_port_util::_id_15F6("igc_scene_friendlies_2");
   scripts\sp\maps\moon_port\moon_port_util::_id_F293("sdf_igc_scene_guys", "sdf_igc_retreat_right_vol");
   scripts\sp\maps\moon_port\moon_port_util::_id_F293("sdf_igc_reinforcements", "sdf_igc_retreat_right_vol");
 
-  if(level._id_7752 == 1)
+  if(level._id_7752 == 1) {
     thread _id_7752();
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 scripts\sp\utility::_id_135F1("trigger", 25);
+  }
 
   scripts\sp\maps\moon_port\moon_port_util::_id_F293("sdf_igc_scene_guys", "corner_lower_vol");
   scripts\sp\maps\moon_port\moon_port_util::_id_F293("sdf_igc_reinforcements", "corner_lower_vol");
   scripts\sp\maps\moon_port\moon_port_util::_id_15F6("concourse_fallback_corner_friendlies");
 
-  if(level._id_7752 == 1)
+  if(level._id_7752 == 1) {
     thread _id_7752();
+  }
 
   _id_44D2();
 
@@ -181,19 +188,23 @@ _id_4499() {
     var_4 = scripts\sp\utility::array_removedeadvehicles(var_4);
     var_4 = sortbydistance(var_4, var_3.origin);
 
-    if(isDefined(var_4[2]))
+    if(isDefined(var_4[2])) {
       var_4[2] thread _id_26ED();
+    }
 
-    if(isDefined(var_4[1]))
+    if(isDefined(var_4[1])) {
       var_4[1] thread _id_26ED();
+    }
 
-    if(isDefined(var_4[0]))
+    if(isDefined(var_4[0])) {
       var_4[0] _id_26ED();
+    }
 
     wait 4;
   } else {
-    while(scripts\sp\utility::_id_77DB("sdf_igc_sniper") > 0)
+    while(scripts\sp\utility::_id_77DB("sdf_igc_sniper") > 0) {
       wait 0.2;
+    }
 
     wait 1;
   }
@@ -277,14 +288,16 @@ _id_78AE() {
 _id_449A() {
   var_0 = getEnt("concourse_main_spawn_robots", "script_noteworthy");
 
-  if(level._id_7752 == 1)
+  if(level._id_7752 == 1) {
     thread _id_7752();
+  }
 
   wait 4;
   var_1 = _id_78AE();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 scripts\sp\utility::_id_10347("moon_sdf4_fallback");
+  }
 
   wait 0.5;
   level.allies["marineCO"] scripts\sp\utility::_id_10346("moon_omr_wereclearingthem");
@@ -292,16 +305,19 @@ _id_449A() {
   wait 0.5;
   var_1 = _id_78AE();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 scripts\sp\utility::_id_10347("moon_sdf4_getthosec6sup");
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 waittill("trigger");
+  }
 
   var_1 = _id_78AE();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 scripts\sp\utility::_id_10347("moon_sdf3_upthere");
+  }
 
   wait 3;
   scripts\engine\utility::flag_set("coastguard_obj");
@@ -523,18 +539,21 @@ _id_44DC() {
   scripts\engine\utility::flag_wait("openingIGC_aborted");
 
   foreach(var_17, var_16 in var_1) {
-    if(var_16.team == "axis")
+    if(var_16.team == "axis") {
       var_16 _id_EBEC();
+    }
   }
 
   var_18 = getnode("sdf_igc_end_node_1", "targetname");
   var_19 = getnode("sdf_igc_end_node_2", "targetname");
 
-  if(isDefined(var_1[0]))
+  if(isDefined(var_1[0])) {
     var_1[0] _meth_82EE(var_18);
+  }
 
-  if(isDefined(var_1[1]))
+  if(isDefined(var_1[1])) {
     var_1[1] _meth_82EE(var_19);
+  }
 }
 
 _id_D7C6(var_0) {
@@ -641,8 +660,9 @@ _id_44DE() {
   var_2 = getEntArray("sdf_igc_corner_runners", "targetname");
 
   foreach(var_4 in var_2) {
-    if(getaicount() < 32)
+    if(getaicount() < 32) {
       var_1[var_1.size] = var_4 scripts\sp\utility::_id_10619();
+    }
   }
 }
 
@@ -695,8 +715,9 @@ _id_44C8() {
   scripts\engine\utility::flag_wait("start_concourse_main");
   var_0 = getaiarray("axis");
 
-  if(var_0.size < 12)
+  if(var_0.size < 12) {
     scripts\sp\utility::_id_22CD("concouse_2_xtra_1");
+  }
 
   foreach(var_3 in var_0) {
     var_3.ignoreall = 0;
@@ -707,19 +728,22 @@ _id_44C8() {
   wait 1;
   var_0 = getaiarray("axis");
 
-  if(var_0.size < 12)
+  if(var_0.size < 12) {
     scripts\sp\utility::_id_22CD("concouse_2_xtra_2");
+  }
 
-  while(getaiunittypearray("axis", "soldier").size > 3 && !scripts\engine\utility::flag("concourse_main_rush_01"))
+  while(getaiunittypearray("axis", "soldier").size > 3 && !scripts\engine\utility::flag("concourse_main_rush_01")) {
     wait 0.2;
+  }
 
   scripts\sp\utility::_id_2669("concourse_main_second_wave");
   thread scripts\sp\maps\moon_port\moon_port_util::_id_F293("concourse_sdf_01", "concourse_main_goalvol_02", 0.1, 0.2, "frantic", 0.5);
   scripts\engine\utility::flag_wait_or_timeout("concourse_main_rush_01", 2.5);
   var_7 = getEnt("cc_moveup_1", "targetname");
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     var_7 delete();
+  }
 
   scripts\sp\utility::_id_15F5("concourse_main_ally_push_01");
   scripts\engine\utility::flag_wait_or_timeout("concourse_main_rush_01", 3.0);
@@ -727,8 +751,9 @@ _id_44C8() {
   scripts\engine\utility::flag_wait_or_timeout("concourse_main_rush_01", 5.0);
   thread scripts\sp\utility::_id_12641("moon_port_harass_tr");
 
-  while(getaicount("axis") > 4 && !scripts\engine\utility::flag("concourse_main_rush_02"))
+  while(getaicount("axis") > 4 && !scripts\engine\utility::flag("concourse_main_rush_02")) {
     wait 0.2;
+  }
 
   scripts\sp\utility::_id_2669("concourse_main_third_wave");
   scripts\sp\utility::_id_15F5("concourse_main_ally_push_02");
@@ -908,12 +933,14 @@ _id_3472() {
   var_3 = getEntArray("concourse_3_final_room_spawners", "targetname");
 
   foreach(var_5 in var_3) {
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       var_5 scripts\engine\utility::trigger_off();
+    }
   }
 
-  foreach(var_8 in var_2)
-  var_8 thread _id_3473();
+  foreach(var_8 in var_2) {
+    var_8 thread _id_3473();
+  }
 }
 
 _id_3473() {
@@ -921,17 +948,19 @@ _id_3473() {
   self.health = 10;
   var_0 = scripts\sp\utility::_id_7951(level.player.origin, level.player.angles, self.origin);
 
-  if(var_0 >= 0.3)
+  if(var_0 >= 0.3) {
     wait 2.5;
+  }
 
   for(;;) {
     var_0 = scripts\sp\utility::_id_7951(level.player.origin, level.player.angles, self.origin);
 
-    if(var_0 >= 0.3)
+    if(var_0 >= 0.3) {
       wait(randomintrange(1, 3));
-    else {
-      if(isDefined(self._id_B14F) && self._id_B14F)
+    } else {
+      if(isDefined(self._id_B14F) && self._id_B14F) {
         scripts\sp\utility::_id_1101B();
+      }
 
       self _meth_81D0();
     }
@@ -953,14 +982,17 @@ _id_3466() {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5);
 
     if(var_5 == "MOD_GRENADE_SPLASH") {
-      if(var_0 == 0)
+      if(var_0 == 0) {
         level.allies["marineCO"] scripts\sp\utility::_id_10346("moon_omr_grenadestunnedit");
+      }
 
-      if(var_0 == 1)
+      if(var_0 == 1) {
         level.allies["salter"] scripts\sp\utility::_id_10346("moon_slt_grenadeout");
+      }
 
-      if(var_0 == 2)
+      if(var_0 == 2) {
         level.allies["salter"] scripts\sp\utility::_id_10346("moon_slt_goodeffect");
+      }
 
       var_0 = var_0 + 1;
       wait 5;
@@ -1021,10 +1053,11 @@ _id_44A9() {
   var_1 = [];
 
   for(var_2 = var_0; isDefined(var_2); var_2 = var_3) {
-    if(isDefined(var_2.target))
+    if(isDefined(var_2.target)) {
       var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
-    else
+    } else {
       break;
+    }
 
     var_4 = var_2 scripts\sp\utility::_id_10639("c8_shutter");
     var_4.origin = var_2.origin;
@@ -1114,15 +1147,17 @@ _id_44B2() {
   scripts\engine\utility::flag_wait("concourse_c8_intro_start");
   self.favoriteenemy = level._id_44A8;
 
-  if(self._id_1FBB == "marine2")
+  if(self._id_1FBB == "marine2") {
     wait 6;
-  else
+  } else {
     wait 12;
+  }
 
   scripts\engine\utility::flag_set("concourse_c8_start_" + self._id_1FBB);
 
-  if(isDefined(level._id_44A8))
+  if(isDefined(level._id_44A8)) {
     level._id_44A8.favoriteenemy = self;
+  }
 
   scripts\sp\utility::_id_F417(1);
   scripts\sp\utility::_id_1101B();
@@ -1135,8 +1170,9 @@ _id_44AA(var_0) {
   var_2 = getEntArray(var_1.target, "targetname");
 
   foreach(var_4 in var_2) {
-    if(var_4.script_noteworthy == level._id_44B1)
+    if(var_4.script_noteworthy == level._id_44B1) {
       var_4 scripts\sp\utility::_id_15F1();
+    }
   }
 }
 
@@ -1226,32 +1262,38 @@ _id_1C19(var_0) {
   var_3 = level.allies["marineCO"];
   var_4 = undefined;
 
-  if(isDefined(level.allies["mdf1"]))
+  if(isDefined(level.allies["mdf1"])) {
     var_4 = level.allies["mdf1"];
+  }
 
   var_5 = undefined;
 
-  if(isDefined(level.allies["brooks"]))
+  if(isDefined(level.allies["brooks"])) {
     var_5 = level.allies["brooks"];
+  }
 
   var_6 = undefined;
 
-  if(isDefined(level.allies["kashima"]))
+  if(isDefined(level.allies["kashima"])) {
     var_6 = level.allies["kashima"];
+  }
 
   level.allies = [];
   level.allies["salter"] = var_1;
   level.allies["eth3n"] = var_2;
   level.allies["marineCO"] = var_3;
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     level.allies["mdf1"] = var_4;
+  }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     level.allies["brooks"] = var_5;
+  }
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     level.allies["kashima"] = var_6;
+  }
 }
 
 _id_3457() {
@@ -1290,8 +1332,9 @@ _id_FC80() {
   thread _id_FC83();
   scripts\engine\utility::flag_wait("player_grabbed_shield");
 
-  if(scripts\engine\utility::flag("shield_pick_reminder_dialogue"))
+  if(scripts\engine\utility::flag("shield_pick_reminder_dialogue")) {
     scripts\engine\utility::flag_waitopen("shield_pick_reminder_dialogue");
+  }
 
   scripts\sp\utility::_id_1034D("moon_plr_howdothesespece");
   scripts\engine\utility::flag_set("ethan_sheild_line_done");
@@ -1319,8 +1362,9 @@ _id_FC83() {
 }
 
 _id_FC87() {
-  while(!isDefined(level._id_A892))
+  while(!isDefined(level._id_A892)) {
     scripts\engine\utility::waitframe();
+  }
 
   level.allies["salter"] scripts\sp\utility::_id_54F7();
   level.allies["salter"].goalradius = 56;
@@ -1336,8 +1380,9 @@ _id_FC87() {
   level.allies["salter"] orientmode("face point", level.player.origin);
 
   foreach(var_1 in level._id_3451) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 delete();
+    }
   }
 
   var_1 = scripts\sp\utility::_id_10639("retract_shield");
@@ -1350,8 +1395,9 @@ _id_FC87() {
   level.allies["salter"] scripts\sp\utility::_id_51E1("cqb");
   scripts\engine\utility::flag_wait("player_shield_intro_done");
 
-  foreach(var_5 in level.allies)
-  var_5 scripts\sp\utility::_id_77B9(1);
+  foreach(var_5 in level.allies) {
+    var_5 scripts\sp\utility::_id_77B9(1);
+  }
 
   level.allies["salter"] scripts\sp\utility::_id_4145();
 }
@@ -1406,22 +1452,27 @@ _id_FC85() {
 }
 
 _id_137CD() {
-  while(!level._id_3451.size)
+  while(!level._id_3451.size) {
     wait 0.05;
+  }
 
   var_0 = scripts\engine\utility::getclosest(level.player.origin, level._id_3451);
 
-  if(!scripts\sp\utility::_id_D0BD("offhandshield", 1) && !scripts\sp\utility::_id_D0BD("offhandshield_up1", 1))
+  if(!scripts\sp\utility::_id_D0BD("offhandshield", 1) && !scripts\sp\utility::_id_D0BD("offhandshield_up1", 1)) {
     var_0 scripts\sp\utility::_id_918B("ar_callouts_huntershield", 0, (0, 0, 0));
+  }
 
-  while(!scripts\sp\utility::_id_D0BD("offhandshield", 1) && !scripts\sp\utility::_id_D0BD("offhandshield_up1", 1))
+  while(!scripts\sp\utility::_id_D0BD("offhandshield", 1) && !scripts\sp\utility::_id_D0BD("offhandshield_up1", 1)) {
     wait 0.05;
+  }
 
-  while(!level.player isonground())
+  while(!level.player isonground()) {
     wait 0.05;
+  }
 
-  if(isDefined(level.player._id_20F8))
+  if(isDefined(level.player._id_20F8)) {
     level.player._id_20F8 scripts\sp\utility::_id_918C();
+  }
 
   scripts\engine\utility::flag_set("player_grabbed_shield");
 }
@@ -1460,8 +1511,9 @@ _id_FC7B() {
   thread _id_42FF(var_0);
   scripts\engine\utility::flag_wait("player_opened_shield_hall_door");
 
-  if(scripts\sp\utility::_id_D0BD("offhandshield", 1) || scripts\sp\utility::_id_D0BD("offhandshield_up1", 1))
+  if(scripts\sp\utility::_id_D0BD("offhandshield", 1) || scripts\sp\utility::_id_D0BD("offhandshield_up1", 1)) {
     thread scripts\sp\utility::_id_56BE("retractable_shield_hint", 5);
+  }
 
   thread _id_28B4();
   scripts\engine\utility::flag_set("shield_hall_ambush");
@@ -1473,8 +1525,9 @@ _id_FC7B() {
   scripts\sp\utility::_id_15F5("shield_hallway_colortrig");
   scripts\engine\utility::flag_wait_either("coastguard_c8_spawned", "coastguard_hallway_enemies_dead");
 
-  foreach(var_2 in level.allies)
-  var_2 scripts\sp\utility::_id_5514();
+  foreach(var_2 in level.allies) {
+    var_2 scripts\sp\utility::_id_5514();
+  }
 }
 
 _id_42FF(var_0) {
@@ -1629,8 +1682,9 @@ _id_EA56(var_0) {
     scripts\sp\anim::_id_1F35(var_0, "buddy_door_nag");
     thread scripts\sp\anim::_id_1EEA(var_0, "buddy_door_idle", "stop_salter_idle");
 
-    if(var_1 < 20)
+    if(var_1 < 20) {
       var_1 = var_1 + 12;
+    }
   }
 }
 
@@ -1640,8 +1694,9 @@ _id_4300() {
   scripts\sp\utility::_id_F417(1);
   scripts\sp\utility::_id_5550();
 
-  if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "selfdestruct_c6")
+  if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "selfdestruct_c6") {
     thread _id_4301();
+  }
 
   var_1 = var_0 scripts\sp\utility::_id_7A96();
 
@@ -1669,15 +1724,17 @@ _id_449D() {
 }
 
 _id_E334() {
-  if(level.player scripts\sp\utility::_id_65DB("player_retract_shield_active"))
+  if(level.player scripts\sp\utility::_id_65DB("player_retract_shield_active")) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_28B3() {
-  if(!level.player scripts\sp\utility::_id_65DB("player_retract_shield_active"))
+  if(!level.player scripts\sp\utility::_id_65DB("player_retract_shield_active")) {
     return 1;
+  }
 
   return 0;
 }
@@ -1835,8 +1892,9 @@ _id_42FE() {
 
   scripts\engine\utility::flag_wait("start_decompression");
 
-  if(isDefined(self._id_B14F) && self._id_B14F)
+  if(isDefined(self._id_B14F) && self._id_B14F) {
     scripts\sp\utility::_id_1101B();
+  }
 
   self delete();
 }

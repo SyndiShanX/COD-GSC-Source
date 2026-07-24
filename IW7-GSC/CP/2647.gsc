@@ -22,8 +22,9 @@ showkillstreaksplash(var_0, var_1, var_2) {
   }
   var_3 = spawnStruct();
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_0 = var_0 + ("_" + var_2);
+  }
 
   showsplash(var_0, var_1);
 }
@@ -31,23 +32,26 @@ showkillstreaksplash(var_0, var_1, var_2) {
 showchallengesplash(var_0, var_1) {
   var_2 = undefined;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = var_1;
-  else
+  } else {
     var_2 = scripts\cp\cp_hud_util::mt_getstate(var_0) - 1;
+  }
 
   var_3 = level.meritinfo[var_0]["displayParam"];
 
   if(!isDefined(var_3)) {
     var_3 = scripts\cp\cp_hud_util::mt_gettarget(var_0, var_2);
 
-    if(var_3 == 0)
+    if(var_3 == 0) {
       var_3 = 1;
+    }
 
     var_4 = level.meritinfo[var_0]["paramScale"];
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_3 = int(var_3 / var_4);
+    }
   }
 
   thread showsplash(var_0, var_3);
@@ -71,33 +75,39 @@ showsplashinternal(var_0, var_1, var_2) {
   if(!isDefined(var_3) || var_3 < 0) {
     return;
   }
-  if(!isDefined(self.nextsplashlistindex))
+  if(!isDefined(self.nextsplashlistindex)) {
     self.nextsplashlistindex = 0;
+  }
 
-  if(!isDefined(self.splashlisttoggle))
+  if(!isDefined(self.splashlisttoggle)) {
     self.splashlisttoggle = 1;
+  }
 
   var_4 = var_3;
 
-  if(self.splashlisttoggle)
+  if(self.splashlisttoggle) {
     var_4 = var_4 | 2048;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self setclientomnvar("ui_player_splash_param_" + self.nextsplashlistindex, var_1);
-  else
+  } else {
     self setclientomnvar("ui_player_splash_param_" + self.nextsplashlistindex, -1);
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self setclientomnvar("ui_player_splash_cardClientId_" + self.nextsplashlistindex, var_2 getentitynumber());
-  else
+  } else {
     self setclientomnvar("ui_player_splash_cardClientId_" + self.nextsplashlistindex, -1);
+  }
 
   self setclientomnvar("ui_player_splash_id_" + self.nextsplashlistindex, var_4);
 
-  if(!isDefined(self.recentsplashcount))
+  if(!isDefined(self.recentsplashcount)) {
     self.recentsplashcount = 1;
-  else
+  } else {
     self.recentsplashcount++;
+  }
 
   thread cleanuplocalplayersplashlist();
   self.nextsplashlistindex++;
@@ -152,8 +162,9 @@ lowermessagethink() {
   self.lowermessages = [];
   var_0 = "default";
 
-  if(isDefined(level.lowermessagefont))
+  if(isDefined(level.lowermessagefont)) {
     var_0 = level.lowermessagefont;
+  }
 
   var_1 = level.lowertexty;
   var_2 = level.lowertextfontsize;
@@ -221,36 +232,41 @@ onkillstreaksplashshown(var_0) {}
 showerrormessage(var_0, var_1) {
   var_2 = tablelookuprownum("mp/errorMessages.csv", 0, var_0);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self setclientomnvar("ui_mp_error_message_param", var_1);
-  else
+  } else {
     self setclientomnvar("ui_mp_error_message_param", -1);
+  }
 
   self setclientomnvar("ui_mp_error_message_id", var_2);
 
-  if(!isDefined(self.errormessagebitflipper))
+  if(!isDefined(self.errormessagebitflipper)) {
     self.errormessagebitflipper = 0;
+  }
 
   self.errormessagebitflipper = !self.errormessagebitflipper;
   self setclientomnvar("ui_mp_error_trigger", scripts\engine\utility::ter_op(self.errormessagebitflipper, 2, 1));
 }
 
 showerrormessagetoallplayers(var_0, var_1) {
-  foreach(var_3 in level.players)
-  showerrormessage(var_0, var_1);
+  foreach(var_3 in level.players) {
+    showerrormessage(var_0, var_1);
+  }
 }
 
 showmiscmessage(var_0) {
   var_1 = tablelookuprownum("mp/miscMessages.csv", 0, var_0);
   var_2 = tablelookupbyrow("mp/miscMessages.csv", var_1, 3);
 
-  if(isDefined(var_2) && var_2 != "")
+  if(isDefined(var_2) && var_2 != "") {
     self playlocalsound(var_2);
+  }
 
   self setclientomnvar("ui_misc_message_id", var_1);
 
-  if(!isDefined(self._id_B7D7))
+  if(!isDefined(self._id_B7D7)) {
     self._id_B7D7 = 0;
+  }
 
   self._id_B7D7 = !self._id_B7D7;
   self setclientomnvar("ui_misc_message_trigger", scripts\engine\utility::ter_op(self._id_B7D7, 1, 0));
@@ -262,8 +278,9 @@ hintmessagedeaththink() {
   for(;;) {
     self waittill("death");
 
-    if(isDefined(self.hintmessage))
+    if(isDefined(self.hintmessage)) {
       self.hintmessage scripts\cp\utility::destroyelem();
+    }
   }
 }
 
@@ -346,15 +363,17 @@ wait_for_tutorial_unpause() {
   self endon("disconnect");
   self waittill("luinotifyserver", var_0);
 
-  if(var_0 == "tutorial_unpause")
+  if(var_0 == "tutorial_unpause") {
     setslowmotion(1.0, 1.0, 0);
+  }
 }
 
 shouldshowtutorial(var_0) {
-  if(isDefined(level.should_show_tutorial_func))
+  if(isDefined(level.should_show_tutorial_func)) {
     return [[level.should_show_tutorial_func]](var_0);
-  else
+  } else {
     return 1;
+  }
 }
 
 wait_and_play_tutorial_message(var_0, var_1) {

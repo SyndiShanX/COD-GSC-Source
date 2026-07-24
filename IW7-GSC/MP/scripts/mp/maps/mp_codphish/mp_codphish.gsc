@@ -28,7 +28,8 @@ apex_not_outofbounds() {
   level waittill("game_ended");
 
   foreach(var_0 in level.outofboundstriggerpatches) {
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_0 delete();
+    }
   }
 }

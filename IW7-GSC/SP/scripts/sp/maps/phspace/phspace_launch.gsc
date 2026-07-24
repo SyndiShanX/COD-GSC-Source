@@ -97,8 +97,9 @@ _id_5297() {
 
   var_0 = getEntArray("lot_script_car", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_DAF0();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_DAF0();
+  }
 }
 
 _id_DAF0() {
@@ -130,10 +131,11 @@ _id_436B(var_0) {
   var_2 linkTo(var_1, "j_base");
   var_1 scripts\sp\anim::_id_F64A();
 
-  if(scripts\engine\utility::is_true(var_0))
+  if(scripts\engine\utility::is_true(var_0)) {
     var_1 scripts\sp\anim::_id_1EC3(var_1, "statue_collapse");
-  else
+  } else {
     var_1 scripts\sp\anim::_id_1EE0(var_1, "statue_collapse");
+  }
 
   createnavrepulsor("statue", 0, var_1, 384);
   var_2 disconnectPaths();
@@ -188,8 +190,9 @@ _id_8A04() {
 _id_1C1A() {
   level endon("handoff_cleanup");
 
-  for(var_0 = scripts\sp\utility::_id_7951(level.player.origin, level.player.angles, self.origin); var_0 >= 0.4; var_0 = scripts\sp\utility::_id_7951(level.player.origin, level.player.angles, self.origin))
+  for(var_0 = scripts\sp\utility::_id_7951(level.player.origin, level.player.angles, self.origin); var_0 >= 0.4; var_0 = scripts\sp\utility::_id_7951(level.player.origin, level.player.angles, self.origin)) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\sp\utility::_id_4145();
 }
@@ -257,8 +260,9 @@ _id_8A05() {
 
   wait 3.0;
 
-  foreach(var_5 in level._id_923A)
-  var_5 scripts\sp\utility::_id_51E1("casual_gun");
+  foreach(var_5 in level._id_923A) {
+    var_5 scripts\sp\utility::_id_51E1("casual_gun");
+  }
 }
 
 _id_1073B(var_0) {
@@ -327,8 +331,9 @@ _id_8A00() {
 
   if(isDefined(level._id_923A)) {
     foreach(var_7 in level._id_923A) {
-      if(isDefined(var_7))
+      if(isDefined(var_7)) {
         var_7 delete();
+      }
     }
   }
 }
@@ -351,8 +356,9 @@ _id_A417() {
   scripts\engine\utility::flag_wait("jackals_start_call_in");
   thread _id_A0EF();
 
-  if(!isDefined(level._id_D127))
+  if(!isDefined(level._id_D127)) {
     level._id_D127 = scripts\sp\vehicle::_id_1080C("jackal_player");
+  }
 
   level._id_D127 motionblurhqenable();
   level._id_D127 _id_0BDC::_id_104A6(0);
@@ -377,8 +383,9 @@ _id_A417() {
   level._id_A056._id_87D8 = 2.3;
   _id_0BDC::_id_137CF();
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     _id_0BD9::_id_FA4F();
+  }
 
   level._id_D127 _id_0BDC::_id_A167();
   _id_0BDC::_id_A153(1);
@@ -513,8 +520,9 @@ _id_1130D(var_0) {
   if(!isDefined(var_1)) {
     return;
   }
-  if(level.player istouching(var_1))
+  if(level.player istouching(var_1)) {
     level.player _meth_81D0();
+  }
 
   var_1 solid();
   _id_0BDC::_id_137CF();
@@ -615,8 +623,9 @@ _id_A41A() {
     _id_0BDC::_id_D164(level._id_D2A1._id_BD0D, 0);
     level.player freezecontrols(1);
 
-    while(iscinematicplaying())
+    while(iscinematicplaying()) {
       scripts\engine\utility::waitframe();
+    }
 
     level.player freezecontrols(0);
   }
@@ -774,10 +783,11 @@ _id_39F3(var_0, var_1) {
   self._id_11837 = var_0;
   self endon("stop_launch_vert_wash");
 
-  if(self == level._id_12B67)
+  if(self == level._id_12B67) {
     level.player playSound("scn_phspace_launch_retribution_thrusters_on");
-  else
+  } else {
     level.player playSound("scn_phspace_launch_tigris_thrusters_on");
+  }
 
   playFXOnTag(scripts\engine\utility::getfx(var_0), self._id_11836, "tag_origin");
 
@@ -812,8 +822,9 @@ _id_C0CA(var_0) {
     var_0 thread scripts\sp\utility::_id_75C4("vfx_capship_un_thruster_rear_lrg_launch_singleton", "fx_engine_l_2");
   }
 
-  if(var_0 == level._id_12B7D)
+  if(var_0 == level._id_12B7D) {
     var_0 playSound("phspace_launch_capital_01");
+  }
 
   wait 0.65;
   var_0 _id_0BB8::_id_39D0("off");
@@ -828,8 +839,9 @@ _id_50B8(var_0, var_1) {
 _id_C0C9(var_0) {
   var_0 _id_0BB8::_id_39CD("heavy");
 
-  if(var_0 == level._id_12B67)
+  if(var_0 == level._id_12B67) {
     var_0 thread _id_E317(0);
+  }
 }
 
 _id_C0C5(var_0) {
@@ -890,13 +902,15 @@ _id_CFDE(var_0) {
   _id_0BDC::_id_A14A(1);
   _id_0BDC::_id_A160(1);
 
-  if(getdvarint("E3", 0) && !getdvarint("e3_negus", 0))
+  if(getdvarint("E3", 0) && !getdvarint("e3_negus", 0)) {
     scripts\sp\maps\pearlharbor\pearlharbor_util::_id_13801(5);
+  }
 
   scripts\sp\maps\pearlharbor\pearlharbor_util::_id_13801(10);
 
-  if(getdvarint("E3", 0) && !getdvarint("e3_negus", 0))
+  if(getdvarint("E3", 0) && !getdvarint("e3_negus", 0)) {
     _id_5F9A(10);
+  }
 
   earthquake(0.22, 1.1, level._id_D127.origin, 5000);
   level.player notify("jackal_vtol_takeoff_plr");
@@ -977,15 +991,17 @@ _id_CFDE(var_0) {
       var_21 = scripts\sp\math::_id_C097(0, var_6, var_7);
       var_7 = var_7 - 0.05;
 
-      if(var_7 < 0)
+      if(var_7 < 0) {
         var_7 = 0;
+      }
     } else
       var_21 = 1;
 
     var_20 = var_20 * var_19;
 
-    if(!scripts\engine\utility::flag("flag_player_boosters_disengaged"))
+    if(!scripts\engine\utility::flag("flag_player_boosters_disengaged")) {
       var_8 _id_CFDF(var_17, var_18, var_19, var_21);
+    }
 
     level._id_D2A1._id_BD0D.origin = level._id_D2A1.origin + (var_20 + var_8._id_BC49) * var_21;
     level._id_D2A1._id_B025.origin = level._id_D2A1._id_AFEB.origin + (var_20 + var_8._id_AFF8) * var_21;
@@ -997,8 +1013,9 @@ _id_CFDE(var_0) {
     level._id_1EF0 linkTo(level._id_1EF0.parent);
     wait 0.05;
 
-    if(var_7 <= 0.0)
+    if(var_7 <= 0.0) {
       return;
+    }
   }
 }
 
@@ -1202,15 +1219,17 @@ _id_CFDF(var_0, var_1, var_2, var_3) {
   self._id_11535 = self._id_11535 + var_19[0] * var_4;
   self._id_11533 = self._id_11533 + var_19[1] * var_5;
 
-  if(self._id_11535 > var_15)
+  if(self._id_11535 > var_15) {
     self._id_11535 = var_15;
-  else if(self._id_11535 < var_16)
+  } else if(self._id_11535 < var_16) {
     self._id_11535 = var_16;
+  }
 
-  if(self._id_11533 < var_17)
+  if(self._id_11533 < var_17) {
     self._id_11533 = var_17;
-  else if(self._id_11533 > var_18)
+  } else if(self._id_11533 > var_18) {
     self._id_11533 = var_18;
+  }
 
   self._id_11535 = self._id_11535 * var_13;
   self._id_11533 = self._id_11533 * var_13;
@@ -1306,8 +1325,9 @@ _id_D27C(var_0, var_1) {
 _id_424D(var_0) {
   var_1 = getanimlength(level._id_EC85["sled_jackal"]["space_launch"]);
 
-  if(getdvarint("E3", 0) && !getdvarint("e3_negus", 0))
+  if(getdvarint("E3", 0) && !getdvarint("e3_negus", 0)) {
     var_1 = var_1 - 6;
+  }
 
   wait(var_1);
   var_2 = scripts\engine\utility::getStruct("jackal_launch_animnode_clone", "targetname");
@@ -1354,8 +1374,9 @@ _id_11442() {
 _id_408A() {
   var_0 = scripts\sp\utility::_id_77DA("jackals_hvr_marines");
 
-  foreach(var_2 in var_0)
-  var_2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
+  }
 
   if(isDefined(level._id_11323)) {
     level._id_11323 delete();
@@ -1491,11 +1512,13 @@ _id_AA74(var_0) {
 }
 
 _id_104F7(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     playFXOnTag(scripts\engine\utility::getfx(var_0), level._id_D127, "j_mainroot_ship");
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     stopFXOnTag(scripts\engine\utility::getfx(var_1), level._id_D127, "j_mainroot_ship");
+  }
 }
 
 _id_104FC() {
@@ -1544,14 +1567,16 @@ space_launch_get_offset_from_ship() {
 }
 
 _id_104EA(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   var_3 = getEnt("trigger_local_cloudfx_thick", "targetname");
   var_3 _id_0BDC::_id_136A6(self);
 
-  foreach(var_5 in var_0)
-  scripts\sp\utility::_id_75C4(var_1, var_5, var_2);
+  foreach(var_5 in var_0) {
+    scripts\sp\utility::_id_75C4(var_1, var_5, var_2);
+  }
 }
 
 _id_104E9() {
@@ -1617,8 +1642,9 @@ _id_104F4() {
   _id_0BDC::_id_137CF();
   wait 1.5;
 
-  while(!isDefined(level._id_AA61))
+  while(!isDefined(level._id_AA61)) {
     wait 0.05;
+  }
 
   level._id_AA61 castdistantshadows();
   level._id_AA62 castdistantshadows();
@@ -1669,23 +1695,27 @@ _id_104E8() {
 _id_E317(var_0) {
   var_1 = ["tag_engine_rear_l_out_01_launch", "tag_engine_rear_l_out_02_launch", "tag_engine_rear_l_out_03_launch", "tag_engine_rear_l_out_04_launch", "tag_engine_rear_r_out_01_launch", "tag_engine_rear_r_out_02_launch", "tag_engine_rear_r_out_03_launch", "tag_engine_rear_r_out_04_launch"];
 
-  if(var_0)
+  if(var_0) {
     var_2 = scripts\sp\utility::_id_75C4;
-  else
+  } else {
     var_2 = scripts\sp\utility::_id_75F8;
+  }
 
-  foreach(var_4 in var_1)
-  self[[var_2]]("retribution_thrust_rear_launch", var_4);
+  foreach(var_4 in var_1) {
+    self[[var_2]]("retribution_thrust_rear_launch", var_4);
+  }
 }
 
 _id_118B9(var_0) {
   var_1 = ["fx_engine_l_1", "fx_engine_l_4"];
 
-  if(var_0)
+  if(var_0) {
     var_2 = scripts\sp\utility::_id_75C4;
-  else
+  } else {
     var_2 = scripts\sp\utility::_id_75F8;
+  }
 
-  foreach(var_4 in var_1)
-  self[[var_2]]("un_thruster_rear_lrg_launch", var_4);
+  foreach(var_4 in var_1) {
+    self[[var_2]]("un_thruster_rear_lrg_launch", var_4);
+  }
 }

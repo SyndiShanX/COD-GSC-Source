@@ -4,8 +4,9 @@
 **************************************/
 
 setupdestructibledoors() {
-  if(isDefined(self._id_4D5D))
+  if(isDefined(self._id_4D5D)) {
     thread _id_4D5E();
+  }
 }
 
 _id_4D5F() {
@@ -19,8 +20,9 @@ _id_4D5F() {
       return;
     }
     if(isDefined(self._id_71A1)) {
-      foreach(var_2 in var_0)
-      self[[self._id_71A1]](var_2);
+      foreach(var_2 in var_0) {
+        self[[self._id_71A1]](var_2);
+      }
     }
   }
 }
@@ -35,8 +37,9 @@ _id_4D60() {
       return;
     }
     if(isDefined(self._id_719D)) {
-      foreach(var_2 in var_0)
-      self[[self._id_719D]](var_2);
+      foreach(var_2 in var_0) {
+        self[[self._id_719D]](var_2);
+      }
     }
   }
 }
@@ -49,15 +52,17 @@ _id_4D5E() {
 }
 
 _id_9F3E(var_0) {
-  if(scripts\asm\asm_bb::bb_isselfdestruct())
+  if(scripts\asm\asm_bb::bb_isselfdestruct()) {
     return anim.success;
+  }
 
   return anim.failure;
 }
 
 isheadless(var_0) {
-  if(scripts\asm\asm_bb::bb_isheadless())
+  if(scripts\asm\asm_bb::bb_isheadless()) {
     return anim.success;
+  }
 
   return anim.failure;
 }

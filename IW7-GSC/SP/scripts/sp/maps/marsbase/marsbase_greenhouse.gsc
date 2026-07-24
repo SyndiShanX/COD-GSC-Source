@@ -56,8 +56,9 @@ _id_10C67() {
   thread _id_A4F0();
   var_2 = getEnt("mdl_gate_c8_bustwall", "targetname");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 
   level thread scripts\sp\maps\marsbase\marsbase_util::_id_DC75();
   scripts\sp\utility::_id_15F5("orbit_a2");
@@ -77,14 +78,17 @@ _id_76E1(var_0, var_1, var_2, var_3) {
   var_6 = getEnt(var_1 + "_clip", "targetname");
   var_7 = getEnt(var_2 + "_clip", "targetname");
 
-  if(isDefined(var_6) && !var_6 islinked())
+  if(isDefined(var_6) && !var_6 islinked()) {
     var_6 linkTo(var_4);
+  }
 
-  if(isDefined(var_7) && !var_7 islinked())
+  if(isDefined(var_7) && !var_7 islinked()) {
     var_7 linkTo(var_5);
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = float(var_4._id_EE52);
+  }
 
   switch (var_0) {
     case "open":
@@ -155,8 +159,9 @@ _id_8572() {
   var_7 = scripts\sp\maps\marsbase\marsbase_util::_id_2281(var_6);
 
   foreach(var_9 in var_7) {
-    if(isspawner(var_9))
+    if(isspawner(var_9)) {
       var_9 scripts\sp\utility::_id_1747(::_id_8571, var_9.targetname);
+    }
   }
 }
 
@@ -184,13 +189,15 @@ _id_855F() {
   _id_8560();
   var_0 = getEnt("trig_inside_greenhouse", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
   var_1 = getspawner("veh_base_dropship3", "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 delete();
+  }
 
   var_2 = scripts\sp\utility::_id_77DF("group_greenhouse_enemies_01");
   var_3 = scripts\sp\utility::_id_77DF("group_greenhouse_enemies_02");
@@ -199,36 +206,42 @@ _id_855F() {
   var_6 = getEntArray("spawner_droppod_cheap", "targetname");
 
   foreach(var_8 in var_2) {
-    if(isDefined(var_8))
+    if(isDefined(var_8)) {
       var_8 delete();
+    }
   }
 
   foreach(var_8 in var_3) {
-    if(isDefined(var_8))
+    if(isDefined(var_8)) {
       var_8 delete();
+    }
   }
 
   foreach(var_8 in var_4) {
-    if(isDefined(var_8))
+    if(isDefined(var_8)) {
       var_8 delete();
+    }
   }
 
   foreach(var_8 in var_5) {
-    if(isDefined(var_8))
+    if(isDefined(var_8)) {
       var_8 delete();
+    }
   }
 
   foreach(var_8 in var_6) {
-    if(isDefined(var_8))
+    if(isDefined(var_8)) {
       var_8 delete();
+    }
   }
 }
 
 _id_8560() {
   var_0 = getEntArray("trig_greenhouse_spawn_enemies", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
+  }
 }
 
 _id_8561() {
@@ -311,8 +324,9 @@ _id_854E() {
 _id_8566() {
   var_0 = getEntArray("trig_greenhouse_nav_allies", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
+  }
 }
 
 _id_8556() {
@@ -348,8 +362,9 @@ _id_8556() {
       continue;
     }
 
-    if(var_4 == level._id_6754)
+    if(var_4 == level._id_6754) {
       var_3 = 1;
+    }
   }
 }
 
@@ -393,15 +408,17 @@ _id_1C0F() {
   thread _id_5D63();
   var_3 = getaiarray("axis");
 
-  foreach(var_5 in var_3)
-  var_5 thread _id_54C7();
+  foreach(var_5 in var_3) {
+    var_5 thread _id_54C7();
+  }
 
   while(var_3.size > 0) {
     wait 0.1;
 
     foreach(var_5 in var_3) {
-      if(!isDefined(var_5) || !isalive(var_5))
+      if(!isDefined(var_5) || !isalive(var_5)) {
         var_3 = scripts\engine\utility::array_remove(var_3, var_5);
+      }
     }
   }
 
@@ -478,8 +495,9 @@ _id_46A8() {
 _id_54C7() {
   self endon("death");
 
-  while(isDefined(level.player._id_883D) && level.player._id_883D == "controllingrobot" || level.player scripts\sp\maps\marsbase\marsbase_util::_id_9BDD(self, 0.5) || scripts\engine\utility::is_true(self._id_B14F))
+  while(isDefined(level.player._id_883D) && level.player._id_883D == "controllingrobot" || level.player scripts\sp\maps\marsbase\marsbase_util::_id_9BDD(self, 0.5) || scripts\engine\utility::is_true(self._id_B14F)) {
     wait 0.1;
+  }
 
   self _meth_81D0();
 }
@@ -532,13 +550,15 @@ _id_106D4() {
   if(isDefined(var_0)) {
     var_1 = 0;
 
-    for(var_2 = 50; !level.player scripts\sp\maps\marsbase\marsbase_util::_id_9BDD(var_0, 0.6) && var_1 < var_2; var_1++)
+    for(var_2 = 50; !level.player scripts\sp\maps\marsbase\marsbase_util::_id_9BDD(var_0, 0.6) && var_1 < var_2; var_1++) {
       wait 0.1;
+    }
 
     var_3 = getEnt("spawner_enemy_stairs", "targetname");
 
-    if(!scripts\engine\utility::flag("greenhouse_cull_back_nodes") && isDefined(var_3))
+    if(!scripts\engine\utility::flag("greenhouse_cull_back_nodes") && isDefined(var_3)) {
       scripts\sp\maps\marsbase\marsbase_util::_id_10711("spawner_enemy_stairs");
+    }
   }
 }
 
@@ -550,8 +570,9 @@ _id_855C() {
   var_0[0] = getspawner("greenhouse_c8_left", "script_noteworthy");
   var_0[1] = getspawner("greenhouse_c8_right", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 scripts\sp\utility::_id_1747(::_id_855B);
+  foreach(var_2 in var_0) {
+    var_2 scripts\sp\utility::_id_1747(::_id_855B);
+  }
 
   thread _id_34AE();
 }
@@ -603,8 +624,9 @@ _id_34AF() {
   var_0[1] = getEnt("trig_player_right_path", "targetname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2 endon("death");
+    }
   }
 
   var_4 = "not_aggro";
@@ -647,8 +669,9 @@ _id_8563() {
   var_0 = scripts\sp\maps\marsbase\marsbase_code::_id_77E5("aigroup_greenhouse_cqb");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2) && isalive(var_2))
+    if(isDefined(var_2) && isalive(var_2)) {
       var_2.health = 5;
+    }
   }
 }
 
@@ -656,13 +679,15 @@ _id_856C(var_0, var_1, var_2, var_3) {
   var_4 = scripts\engine\utility::getStruct(var_0, "targetname");
   var_5 = getspawnerarray(var_4.target);
 
-  foreach(var_7 in var_5)
-  var_7 scripts\sp\utility::_id_1747(var_1, var_4.target);
+  foreach(var_7 in var_5) {
+    var_7 scripts\sp\utility::_id_1747(var_1, var_4.target);
+  }
 
   thread scripts\sp\maps\marsbase\marsbase_util::_id_6F56(var_0, "targetname");
 
-  if(scripts\engine\utility::is_true(var_3))
+  if(scripts\engine\utility::is_true(var_3)) {
     thread _id_856D(var_0);
+  }
 
   level scripts\engine\utility::waittill_any_in_array_return(var_2);
   scripts\sp\maps\marsbase\marsbase_util::_id_6F57(var_0, "targetname", 1);
@@ -676,8 +701,9 @@ _id_856D(var_0) {
     scripts\engine\utility::flag_wait(var_1);
     scripts\sp\maps\marsbase\marsbase_util::_id_6F57(var_0, "targetname", 0);
 
-    while(scripts\engine\utility::flag(var_1))
+    while(scripts\engine\utility::flag(var_1)) {
       wait 0.5;
+    }
 
     scripts\sp\maps\marsbase\marsbase_util::_id_6F56(var_0, "targetname");
     wait 0.5;
@@ -688,26 +714,30 @@ _id_8554() {
   scripts\engine\utility::flag_wait("greenhouse_cull_back_nodes");
   var_0 = getnodearray("back_node", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 _meth_80AC();
+  foreach(var_2 in var_0) {
+    var_2 _meth_80AC();
+  }
 
   var_4 = getspawnerarray();
   var_5 = [];
 
   foreach(var_7 in var_4) {
-    if(isDefined(var_7.script_noteworthy) && var_7.script_noteworthy == "back_spawners")
+    if(isDefined(var_7.script_noteworthy) && var_7.script_noteworthy == "back_spawners") {
       var_5 = scripts\engine\utility::array_add(var_5, var_7);
+    }
   }
 
   foreach(var_10 in var_5) {
-    if(isDefined(var_10))
+    if(isDefined(var_10)) {
       var_10 delete();
+    }
   }
 
   var_12 = getnodearray("node_greenhouse_bridge_left", "script_noteworthy");
 
-  foreach(var_14 in var_12)
-  var_14 _meth_80AC();
+  foreach(var_14 in var_12) {
+    var_14 _meth_80AC();
+  }
 }
 
 _id_855E() {
@@ -722,17 +752,20 @@ _id_855E() {
     var_5 = [];
 
     foreach(var_7 in var_0) {
-      if(level.player scripts\sp\maps\marsbase\marsbase_util::_id_9BDD(var_7, 0.5, 1))
+      if(level.player scripts\sp\maps\marsbase\marsbase_util::_id_9BDD(var_7, 0.5, 1)) {
         var_5 = scripts\engine\utility::array_add(var_5, var_7);
+      }
     }
 
-    if(var_5.size > 1)
+    if(var_5.size > 1) {
       var_4 = var_5[randomint(var_5.size - 1)];
-    else if(var_5.size == 1)
+    } else if(var_5.size == 1) {
       var_4 = var_5[0];
+    }
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_4 thread _id_855D();
+    }
   }
 }
 
@@ -746,9 +779,9 @@ _id_856E(var_0) {
   var_1 = getEnt("gate_base_intro_left_clip", "targetname");
   var_2 = getEnt("gate_base_intro_right_clip", "targetname");
 
-  if(scripts\engine\utility::is_true(var_0))
+  if(scripts\engine\utility::is_true(var_0)) {
     var_3 = 0.1;
-  else {
+  } else {
     var_0 = 0;
     var_3 = 3;
   }
@@ -795,18 +828,21 @@ _id_854F(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   level thread scripts\sp\maps\marsbase\marsbase_util::_id_A1CA(var_8, var_1, var_7, 10);
 
   if(!scripts\engine\utility::is_true(var_4)) {
-    if(randomint(10) > 2)
+    if(randomint(10) > 2) {
       var_8 thread _id_854D();
+    }
   }
 
   if(!scripts\engine\utility::is_true(var_5)) {
-    if(randomint(10) < 2)
+    if(randomint(10) < 2) {
       var_8 thread _id_0BDC::_id_1991();
+    }
   }
 
   if(!scripts\engine\utility::is_true(var_6)) {
-    if(randomint(10) < 4)
+    if(randomint(10) < 4) {
       var_8 thread _id_854C();
+    }
   }
 }
 
@@ -841,13 +877,15 @@ _id_F046(var_0, var_1, var_2) {
   var_5 = getEntArray("sdf_gate_support_1", "targetname");
   var_6 = [];
 
-  if(!scripts\engine\utility::is_true(var_1))
+  if(!scripts\engine\utility::is_true(var_1)) {
     var_4 thread _id_76E4();
+  }
 
-  if(!scripts\engine\utility::is_true(var_1))
+  if(!scripts\engine\utility::is_true(var_1)) {
     thread _id_76D4();
-  else
+  } else {
     scripts\engine\utility::flag_set("gate_c8_destroyed");
+  }
 
   wait 0.5;
   thread scripts\sp\utility::_id_12641("marsbase_olympus_mons_guts_tr");
@@ -876,8 +914,9 @@ _id_76E4() {
     var_1._id_1FBB = "generic";
     scripts\sp\anim::_id_1EC3(var_1, "greenhouse_gate_enemy_slide_in");
 
-    if(isDefined(var_1) && isalive(var_1))
+    if(isDefined(var_1) && isalive(var_1)) {
       scripts\sp\anim::_id_1F35(var_1, "greenhouse_gate_enemy_slide_in");
+    }
   }
 }
 
@@ -914,8 +953,9 @@ _id_76D7() {
     var_2 = getaiarray("axis");
 
     foreach(var_4 in var_2) {
-      if(isalive(var_4))
+      if(isalive(var_4)) {
         var_4.grenadeammo = 0;
+      }
     }
 
     var_1 thread _id_76D9();
@@ -933,8 +973,9 @@ _id_76D7() {
         } else
           var_6++;
 
-        if(var_6 >= 3)
+        if(var_6 >= 3) {
           var_6 = 0;
+        }
       }
     }
   }
@@ -963,8 +1004,9 @@ _id_76D9() {
   scripts\sp\utility::_id_127AE("trig_inside_greenhouse", "targetname");
   level notify("gate_c8_bypassed");
 
-  if(isDefined(self) && isalive(self))
+  if(isDefined(self) && isalive(self)) {
     scripts\sp\utility::_id_F2D8(500);
+  }
 }
 
 _id_76D5() {
@@ -977,8 +1019,9 @@ _id_76D5() {
   self playSound("mars_base_c8_burst");
   var_4 = getEnt("mdl_gate_c8_bustwall", "targetname");
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_4 delete();
+  }
 
   var_5 = getEnt("fxanim_sp_mars_wall_explode_01", "targetname");
 
@@ -1043,11 +1086,13 @@ _id_8568() {
 }
 
 _id_F4AB(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 60;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   scripts\sp\utility::_id_75C4("burning_arm_left", "j_shoulder_le");
   scripts\sp\utility::_id_75C4("burning_arm_right", "j_shoulder_ri");
@@ -1055,10 +1100,11 @@ _id_F4AB(var_0, var_1) {
   scripts\sp\utility::_id_75C4("burning_legs", "j_hip_le");
   scripts\sp\utility::_id_75C4("burning_legs", "j_hip_ri");
 
-  if(scripts\engine\utility::is_true(var_1))
+  if(scripts\engine\utility::is_true(var_1)) {
     wait(var_0);
-  else
+  } else {
     scripts\engine\utility::waittill_any_timeout(var_0, "death");
+  }
 
   if(isDefined(self)) {
     stopFXOnTag(scripts\engine\utility::getfx("burning_arm_left"), self, "j_shoulder_le");
@@ -1115,8 +1161,9 @@ _id_5D63() {
   var_10 = getEnt("trig_dropship3_still_onboard", "targetname");
 
   foreach(var_12 in var_5) {
-    if(isDefined(var_12) && isalive(var_12) && var_12 istouching(var_10))
+    if(isDefined(var_12) && isalive(var_12) && var_12 istouching(var_10)) {
       var_12 delete();
+    }
   }
 
   var_1 notify("stop_loop");
@@ -1181,8 +1228,9 @@ _id_5D6B() {
   var_0 = getEnt("trig_dropship3_still_onboard", "targetname");
   wait 6;
 
-  if(level._id_30F6 istouching(var_0))
+  if(level._id_30F6 istouching(var_0)) {
     scripts\sp\utility::_id_15F5("trig_gha_dropship3_tactical");
+  }
 
   level notify("dropship3_unload_abort");
 }
@@ -1238,8 +1286,9 @@ _id_5D69() {
 }
 
 _id_5D65(var_0) {
-  if(scripts\engine\utility::is_true(var_0))
+  if(scripts\engine\utility::is_true(var_0)) {
     wait 4.5;
+  }
 
   var_1 = getEnt("fxanim_dropship_crash", "targetname");
   var_1 scripts\sp\utility::_id_23B7("dropship3_crash");
@@ -1266,11 +1315,13 @@ _id_5D64() {
   wait(randomfloatrange(0.05, 0.15));
   var_4 scripts\sp\anim::_id_1F35(var_3, var_5[1]);
 
-  if(isDefined(var_2) && isalive(var_2))
+  if(isDefined(var_2) && isalive(var_2)) {
     var_2 _meth_81D0();
+  }
 
-  if(isDefined(var_3) && isalive(var_3))
+  if(isDefined(var_3) && isalive(var_3)) {
     var_3 _meth_81D0();
+  }
 }
 
 _id_5D67() {

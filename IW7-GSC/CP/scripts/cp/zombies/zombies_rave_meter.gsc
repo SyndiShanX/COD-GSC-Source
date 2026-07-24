@@ -28,10 +28,11 @@ clean_up_rave_meter_on_last_stand(var_0) {
   for(;;) {
     var_0 waittill("last_stand");
 
-    if(scripts\engine\utility::is_true(var_0.unlimited_rave))
+    if(scripts\engine\utility::is_true(var_0.unlimited_rave)) {
       continue;
-    else
+    } else {
       var_0 rave_meter_off(var_0);
+    }
   }
 }
 
@@ -55,8 +56,9 @@ rave_drain_time(var_0) {
 
   for(;;) {
     if(!scripts\engine\utility::is_true(self.spectating) && !scripts\engine\utility::is_true(self.inlaststand)) {
-      if(scripts\engine\utility::is_true(self.rave_mode_od))
+      if(scripts\engine\utility::is_true(self.rave_mode_od)) {
         self.rave_meter_adustment = 0;
+      }
 
       if(!scripts\engine\utility::is_true(self.unlimited_rave)) {
         var_1 = var_1 - var_3 + self.rave_meter_adustment;
@@ -64,16 +66,18 @@ rave_drain_time(var_0) {
       } else
         self setclientomnvar("zm_ui_general_two", 1);
 
-      if(var_1 > 1000)
+      if(var_1 > 1000) {
         var_1 = 1000;
-      else if(var_1 <= 0)
+      } else if(var_1 <= 0) {
         var_1 = 0;
+      }
 
       self.rave_meter_adustment = 0;
       var_2 = var_1 / 1000;
 
-      if(var_2 > 1)
+      if(var_2 > 1) {
         var_2 = 1;
+      }
 
       var_4 = 1 - var_2;
       self setclientomnvar("zom_general_fill_percent", var_4);
@@ -107,10 +111,11 @@ flash_rave_meter_glow() {
     self setclientomnvar("zm_ui_show_general", 2);
     wait 0.5;
 
-    if(scripts\engine\utility::is_true(self.rave_mode))
+    if(scripts\engine\utility::is_true(self.rave_mode)) {
       self setclientomnvar("zm_ui_show_general", 4);
-    else
+    } else {
       self setclientomnvar("zm_ui_show_general", 0);
+    }
   }
 }
 

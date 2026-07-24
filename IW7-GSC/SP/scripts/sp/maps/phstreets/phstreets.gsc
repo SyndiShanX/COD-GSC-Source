@@ -26,8 +26,9 @@ main() {
   scripts\sp\starts::_id_48E1("Crash Wakeup", "SDF has invaded the city of Geneva. Reyes and his squad have crash landed and must get to the Aatis tower to stop the attack.");
   scripts\sp\starts::_id_48E4(var_0);
 
-  if(getdvarint("r_reflectionProbeGenerate") == 1)
+  if(getdvarint("r_reflectionProbeGenerate") == 1) {
     _id_894E();
+  }
 
   var_1 = ["geneva_periph_lake_tr", "phstreets_mall_tr"];
   var_2 = ["geneva_periph_lake_tr", "geneva_periph_south_tr", "phstreets_mall_tr", "phstreets_streets_tr"];
@@ -78,8 +79,9 @@ main() {
   scripts\sp\utility::_id_1263F("geneva_periph_south_tr");
   setdvarifuninitialized("camera_fx_enabled", 1);
 
-  if(getdvarint("camera_fx_enabled"))
+  if(getdvarint("camera_fx_enabled")) {
     scripts\sp\maps\pearlharbor\pearlharbor_util::_id_37A9();
+  }
 
   scripts\sp\load::main();
   _id_CAE7();
@@ -132,21 +134,24 @@ _id_CAE8() {
   if(scripts\engine\utility::flag("crash_wakeup_complete")) {
     var_0 = 0;
 
-    if(scripts\engine\utility::flag("grenade_give_scene_done"))
+    if(scripts\engine\utility::flag("grenade_give_scene_done")) {
       var_0 = 1;
+    }
 
     var_1 = 0;
 
-    if(scripts\engine\utility::flag("player_got_hackdevice"))
+    if(scripts\engine\utility::flag("player_got_hackdevice")) {
       var_1 = 1;
+    }
 
     level.player thread scripts\sp\maps\pearlharbor\pearlharbor_crash::_id_82C2(var_0, var_1);
   }
 
   thread _id_1264B();
 
-  if(getdvarint("camera_fx_enabled"))
+  if(getdvarint("camera_fx_enabled")) {
     thread scripts\sp\maps\pearlharbor\pearlharbor_util::_id_CCBE();
+  }
 }
 
 _id_ABE0() {

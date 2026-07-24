@@ -14,8 +14,9 @@ init_player_characters() {
 post_hoff_setup_func(var_0) {
   var_0 scripts\cp\zombies\achievement::update_achievement("HOFF_THE_CHARTS", 1);
 
-  if(!isDefined(level.special_character_count))
+  if(!isDefined(level.special_character_count)) {
     level.special_character_count = 1;
-  else
+  } else {
     level.special_character_count++;
+  }
 }

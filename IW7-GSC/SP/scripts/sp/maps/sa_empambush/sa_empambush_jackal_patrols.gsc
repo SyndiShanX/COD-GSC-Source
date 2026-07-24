@@ -47,6 +47,7 @@ _id_A5FC(var_0) {
 _id_10A88(var_0) {
   self endon("death");
 
-  for(;;)
+  for(;;) {
     _id_0F0F::_id_E801(var_0);
+  }
 }

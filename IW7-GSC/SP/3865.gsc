@@ -58,10 +58,11 @@ _id_468A() {
   if(scripts\engine\utility::is_true(self._id_10E6D._id_466C._id_9B2C)) {
     return;
   }
-  if(isDefined(self._id_10E6D._id_466C.ent))
+  if(isDefined(self._id_10E6D._id_466C.ent)) {
     self._id_10E6D._id_4686 = gettime() + 100;
-  else
+  } else {
     self._id_10E6D._id_4686 = gettime() + 1000;
+  }
 
   var_0 = getcorpsearray();
   var_1 = undefined;
@@ -84,14 +85,17 @@ _id_468A() {
     var_9 = level._id_10E6D._id_466C._id_101E0;
     var_10 = level._id_10E6D._id_466C._id_53A1;
 
-    if(isDefined(self._id_10E6D._id_C810))
+    if(isDefined(self._id_10E6D._id_C810)) {
       var_8 = self._id_10E6D._id_C810 * self._id_10E6D._id_C810;
+    }
 
-    if(isDefined(self._id_10E6D._id_C811))
+    if(isDefined(self._id_10E6D._id_C811)) {
       var_9 = self._id_10E6D._id_C811 * self._id_10E6D._id_C811;
+    }
 
-    if(isDefined(self._id_10E6D._id_C80F))
+    if(isDefined(self._id_10E6D._id_C80F)) {
       var_10 = self._id_10E6D._id_C80F * self._id_10E6D._id_C80F;
+    }
 
     if(var_7 < var_8) {
       if(abs(self.origin[2] - var_6[2]) < 60) {
@@ -107,8 +111,9 @@ _id_468A() {
       var_11 = self._id_10E6D._id_466C.ent scripts\sp\utility::_id_78E4();
       var_12 = distancesquared(self.origin, var_11);
 
-      if(var_12 <= var_7)
+      if(var_12 <= var_7) {
         continue;
+      }
     }
 
     if(var_7 > var_9) {
@@ -138,8 +143,9 @@ _id_468A() {
   if(isDefined(var_1)) {
     var_1.found = 1;
 
-    if(scripts\engine\utility::is_true(var_1._id_F182) && isDefined(self._id_10E6D._id_466C.ent) && self._id_10E6D._id_466C.ent == var_1)
+    if(scripts\engine\utility::is_true(var_1._id_F182) && isDefined(self._id_10E6D._id_466C.ent) && self._id_10E6D._id_466C.ent == var_1) {
       self._id_10E6D._id_C997 = gettime();
+    }
 
     self _meth_84F7("found_corpse", var_1, var_1 scripts\sp\utility::_id_78E4());
   } else if(isDefined(var_2)) {
@@ -159,14 +165,16 @@ _id_467E(var_0) {
   var_1 = var_0.entity;
   var_2 = var_1 scripts\sp\utility::_id_78E4();
 
-  if(isDefined(self._id_10E6D._id_466C.ent))
+  if(isDefined(self._id_10E6D._id_466C.ent)) {
     self._id_10E6D._id_466C.ent._id_F182 = undefined;
+  }
 
   self._id_10E6D._id_466C.ent = undefined;
   var_1 _meth_82CB(level._id_10E6D._id_466C._id_E237);
 
-  if(!isDefined(self._id_1FBB) && isDefined(self._id_1FEC) && self._id_1FEC == "generic_human")
+  if(!isDefined(self._id_1FBB) && isDefined(self._id_1FEC) && self._id_1FEC == "generic_human") {
     self._id_1FBB = "generic";
+  }
 
   var_3 = ["check_body_1", "check_body_2", "check_body_3", "check_body_4"];
   var_4 = var_3[randomint(var_3.size)];
@@ -192,18 +200,21 @@ _id_4688(var_0) {
   self notify("corpse_seen_claim");
   self endon("corpse_seen_claim");
 
-  if(isDefined(self._id_10E6D._id_466C.ent))
+  if(isDefined(self._id_10E6D._id_466C.ent)) {
     self._id_10E6D._id_466C.ent._id_F182 = undefined;
+  }
 
   var_0._id_F182 = 1;
   self._id_10E6D._id_466C.ent = var_0;
   self waittill("death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0._id_F182 = undefined;
+  }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     thread _id_467C();
+  }
 }
 
 _id_4689(var_0) {
@@ -239,8 +250,9 @@ _id_4689(var_0) {
 
 _id_467C() {
   if(isDefined(self._id_10E6D._id_466C)) {
-    if(isDefined(self._id_10E6D._id_466C.ent))
+    if(isDefined(self._id_10E6D._id_466C.ent)) {
       self._id_10E6D._id_466C.ent._id_F182 = undefined;
+    }
 
     self._id_10E6D._id_466C.ent = undefined;
     self._id_10E6D._id_466C._id_9B2C = undefined;

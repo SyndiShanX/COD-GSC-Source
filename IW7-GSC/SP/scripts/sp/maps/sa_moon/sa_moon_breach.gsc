@@ -61,8 +61,9 @@ _id_E8F8() {
   var_2 _id_0E46::_id_48C4(undefined, undefined, &"SHIP_ASSAULT_OBJ_BREACH", undefined, 500, 100, 1);
   var_2 waittill("trigger");
 
-  foreach(var_4 in level._id_84B8)
-  var_4 delete();
+  foreach(var_4 in level._id_84B8) {
+    var_4 delete();
+  }
 
   level._id_84B8 = [];
   level notify("handle_zero_g_highlighting");
@@ -217,8 +218,9 @@ _id_2FD8() {
   scripts\engine\utility::flag_wait("player_started_elevator_scene");
 
   if(isDefined(self) && isalive(self)) {
-    if(isDefined(self._id_438A))
+    if(isDefined(self._id_438A)) {
       self._id_438A delete();
+    }
 
     self delete();
   }
@@ -256,15 +258,18 @@ _id_2F66() {
     if(!scripts\engine\utility::flag("bridge_gravity_restoring") || !scripts\engine\utility::flag("bridge_gravity_restored")) {
       var_1 thread scripts\sp\anim::_id_1EEA(self, "breach_death_loop_new", self._id_1FBB + "stop_breach_death_loop");
 
-      if(self.script_noteworthy == "breach_captain")
+      if(self.script_noteworthy == "breach_captain") {
         var_1 thread scripts\sp\anim::_id_1EEA(level._id_3A1E, "breach_enter_loop", "keycard_stop_breach_loop");
+      }
     }
   } else {
-    if(isDefined(self._id_B14F) && self._id_B14F)
+    if(isDefined(self._id_B14F) && self._id_B14F) {
       scripts\sp\utility::_id_1101B();
+    }
 
-    if(isDefined(self._id_438A))
+    if(isDefined(self._id_438A)) {
       self._id_438A delete();
+    }
 
     scripts\engine\utility::waitframe();
     self delete();
@@ -293,8 +298,9 @@ _id_4FB2() {
   var_0 = scripts\engine\utility::getStruct("bridge_breach_anim_struct", "targetname");
   var_0 scripts\sp\anim::_id_1F35(self, "plant_breach_custom");
 
-  if(isDefined(self._id_B14F) && self._id_B14F)
+  if(isDefined(self._id_B14F) && self._id_B14F) {
     scripts\sp\utility::_id_1101B();
+  }
 
   self delete();
 }
@@ -309,15 +315,17 @@ _id_E965() {
   wait 1.0;
   scripts\sp\utility::_id_10350("mn_fer_copy_standing_by");
 
-  if(!scripts\engine\utility::flag("bridge_breach_started"))
+  if(!scripts\engine\utility::flag("bridge_breach_started")) {
     level thread _id_E905();
+  }
 }
 
 _id_E90C() {
   scripts\engine\utility::flag_wait("bridge_breach_anim_started");
 
-  while(!isDefined(level._id_6754))
+  while(!isDefined(level._id_6754)) {
     scripts\engine\utility::waitframe();
+  }
 
   level._id_6754 scripts\sp\utility::_id_10346("sa_moon_eth_illshortcircuitem");
 }
@@ -407,13 +415,15 @@ _id_E962() {
   wait 0.35;
   var_1 = getEnt("bridge_window_player_clip", "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 notsolid();
+  }
 
   scripts\engine\utility::flag_wait("bridge_gravity_restoring");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 solid();
+  }
 }
 
 _id_E8F7() {
@@ -422,13 +432,15 @@ _id_E8F7() {
   var_0 setModel("sdf_bridge_window_break_02_static");
   var_1 = getEnt("bridge_window_allies_clip", "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 notsolid();
+  }
 
   scripts\engine\utility::flag_wait("bridge_gravity_restoring");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 solid();
+  }
 }
 
 _id_E90B() {
@@ -449,8 +461,9 @@ _id_E8FE() {
   var_0 = scripts\sp\utility::_id_10639("generic_prop_x3");
   var_0 hide();
 
-  if(!isDefined(level._id_2FD7))
+  if(!isDefined(level._id_2FD7)) {
     level._id_2FD7 = scripts\engine\utility::getStruct("bridge_breach_anim_struct", "targetname");
+  }
 
   level._id_2FD7 scripts\sp\anim::_id_1EC3(var_0, "breach_debris");
   var_1 = spawn("script_model", var_0 gettagorigin("j_prop_1"));
@@ -502,11 +515,13 @@ _id_E907() {
       var_2 moveTo(var_5.origin, 0.05);
       var_2 rotateTo(var_5.angles, 0.05);
 
-      if(isDefined(var_5.script_noteworthy))
+      if(isDefined(var_5.script_noteworthy)) {
         var_2._id_BF0C = var_5.script_noteworthy;
+      }
 
-      if(isDefined(var_5.script_angles))
+      if(isDefined(var_5.script_angles)) {
         var_2._id_5CE1 = var_5.script_angles;
+      }
 
       wait 0.05;
     }
@@ -518,8 +533,9 @@ _id_E907() {
   var_0 = scripts\engine\utility::array_removeundefined(var_0);
   level._id_BF0D = [];
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_4929();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_4929();
+  }
 
   scripts\engine\utility::flag_wait("player_inside_maintenance_tunnel");
   level._id_BF0D = scripts\engine\utility::array_removeundefined(level._id_BF0D);
@@ -546,8 +562,9 @@ _id_AA8A() {
   wait 0.05;
   var_0 = 1;
 
-  if(isDefined(self.script_index))
+  if(isDefined(self.script_index)) {
     var_0 = self.script_index;
+  }
 
   var_1 = self.origin;
   var_2 = undefined;
@@ -555,24 +572,30 @@ _id_AA8A() {
   var_4 = undefined;
 
   if(isDefined(self.script_angles)) {
-    if(self.script_angles[0] != 0)
+    if(self.script_angles[0] != 0) {
       var_2 = anglestoup(self.angles) * self.script_angles[0];
+    }
 
-    if(self.script_angles[1] != 0)
+    if(self.script_angles[1] != 0) {
       var_3 = anglesToForward(self.angles) * self.script_angles[1];
+    }
 
-    if(self.script_angles[2] != 0)
+    if(self.script_angles[2] != 0) {
       var_4 = anglestoright(self.angles) * self.script_angles[2];
+    }
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_1 = var_1 + var_2;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_1 = var_1 + var_3;
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_1 = var_1 + var_4;
+  }
 
   var_5 = var_1 + (0, 0, -24);
 
@@ -596,12 +619,14 @@ _id_AA8A() {
   }
 
   if(isDefined(self._id_EF20)) {
-    if(self._id_EF20 == "wait_for_flag")
+    if(self._id_EF20 == "wait_for_flag") {
       scripts\engine\utility::flag_wait("breach_end");
+    }
   }
 
-  if(isDefined(self._id_EF15))
+  if(isDefined(self._id_EF15)) {
     wait(self._id_EF15);
+  }
 
   self physicslaunchserver(var_1, var_11);
 }
@@ -614,8 +639,9 @@ _id_4929() {
   level._id_BF0D = scripts\engine\utility::add_to_array(level._id_BF0D, var_0);
   var_1 = 0;
 
-  if(isDefined(self.script_delay))
+  if(isDefined(self.script_delay)) {
     var_1 = self.script_delay;
+  }
 
   if(isDefined(self._id_EF20) && self._id_EF20 == "delete_me") {
     if(!level.player worldpointinreticle_circle(var_0.origin, 65, 650)) {
@@ -630,8 +656,9 @@ _id_4929() {
   var_3 = var_2 + (0, 0, 24);
   var_4 = (0, 0, -50);
 
-  if(isDefined(self._id_5CE1))
+  if(isDefined(self._id_5CE1)) {
     var_4 = self._id_5CE1;
+  }
 
   self delete();
   var_0 _meth_841C(1, var_3, var_4);

@@ -16,8 +16,9 @@ _id_336F(var_0) {
 }
 
 _id_336E(var_0) {
-  if(!isDefined(self.grenade))
+  if(!isDefined(self.grenade)) {
     return anim.success;
+  }
 
   return anim.running;
 }
@@ -27,14 +28,17 @@ _id_3370(var_0) {
 }
 
 _id_846E(var_0) {
-  if(!isDefined(self.grenade))
+  if(!isDefined(self.grenade)) {
     return anim.failure;
+  }
 
-  if(!isDefined(self.pathgoalpos))
+  if(!isDefined(self.pathgoalpos)) {
     return anim.success;
+  }
 
-  if(scripts\asm\asm::asm_ephemeraleventfired("grenade response", "return throw"))
+  if(scripts\asm\asm::asm_ephemeraleventfired("grenade response", "return throw")) {
     return anim.success;
+  }
 
   return anim.running;
 }
@@ -46,11 +50,13 @@ _id_85C1(var_0) {
 }
 
 _id_85C3(var_0) {
-  if(scripts\asm\asm::asm_ephemeraleventfired("grenade response", "return throw complete"))
+  if(scripts\asm\asm::asm_ephemeraleventfired("grenade response", "return throw complete")) {
     return anim.success;
+  }
 
-  if(!isDefined(self.grenade))
+  if(!isDefined(self.grenade)) {
     return anim.success;
+  }
 
   return anim.running;
 }
@@ -60,8 +66,9 @@ _id_85C2(var_0) {
 }
 
 _id_335B(var_0) {
-  if(_id_0A0B::_id_7C35("torso") == "dismember")
+  if(_id_0A0B::_id_7C35("torso") == "dismember") {
     return anim.failure;
+  }
 
   return _id_0A18::_id_3928(var_0);
 }

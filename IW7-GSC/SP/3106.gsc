@@ -77,10 +77,11 @@ _id_70B7(var_0, var_1, var_2, var_3) {
           var_4.id = var_0;
           var_5 = var_1._id_D8BE[var_4.id];
 
-          if(isDefined(var_5))
+          if(isDefined(var_5)) {
             var_4._id_4B1B = var_5;
-          else
+          } else {
             var_4._id_4B1B = 0;
+          }
 
           var_4._id_C21E = 2;
           var_4._id_71D4 = ::_id_704C;
@@ -91,10 +92,11 @@ _id_70B7(var_0, var_1, var_2, var_3) {
           var_4.id = var_0 + 1;
           var_5 = var_1._id_D8BE[var_4.id];
 
-          if(isDefined(var_5))
+          if(isDefined(var_5)) {
             var_4._id_4B1B = var_5;
-          else
+          } else {
             var_4._id_4B1B = 0;
+          }
 
           var_4._id_C21E = 2;
           var_4._id_71D4 = ::_id_70CE;
@@ -105,10 +107,11 @@ _id_70B7(var_0, var_1, var_2, var_3) {
           var_4.id = var_0 + 2;
           var_5 = var_1._id_D8BE[var_4.id];
 
-          if(isDefined(var_5))
+          if(isDefined(var_5)) {
             var_4._id_4B1B = var_5;
-          else
+          } else {
             var_4._id_4B1B = 0;
+          }
 
           var_4._id_C21E = 2;
           var_4._id_71D4 = ::_id_70D1;
@@ -119,10 +122,11 @@ _id_70B7(var_0, var_1, var_2, var_3) {
           var_4.id = var_0 + 3;
           var_5 = var_1._id_D8BE[var_4.id];
 
-          if(isDefined(var_5))
+          if(isDefined(var_5)) {
             var_4._id_4B1B = var_5;
-          else
+          } else {
             var_4._id_4B1B = 0;
+          }
 
           var_4._id_C21E = 2;
           var_4._id_71D4 = ::_id_70D0;
@@ -133,10 +137,11 @@ _id_70B7(var_0, var_1, var_2, var_3) {
           var_4.id = var_0 + 4;
           var_5 = var_1._id_D8BE[var_4.id];
 
-          if(isDefined(var_5))
+          if(isDefined(var_5)) {
             var_4._id_4B1B = var_5;
-          else
+          } else {
             var_4._id_4B1B = 0;
+          }
 
           var_4._id_C21E = 2;
           var_4._id_71D4 = ::_id_70CD;
@@ -147,10 +152,11 @@ _id_70B7(var_0, var_1, var_2, var_3) {
           var_4.id = var_0 + 5;
           var_5 = var_1._id_D8BE[var_4.id];
 
-          if(isDefined(var_5))
+          if(isDefined(var_5)) {
             var_4._id_4B1B = var_5;
-          else
+          } else {
             var_4._id_4B1B = 0;
+          }
 
           var_4._id_C21E = 3;
           var_4._id_71D4 = ::_id_70CC;
@@ -161,10 +167,11 @@ _id_70B7(var_0, var_1, var_2, var_3) {
           var_4.id = var_0 + 6;
           var_5 = var_1._id_D8BE[var_4.id];
 
-          if(isDefined(var_5))
+          if(isDefined(var_5)) {
             var_4._id_4B1B = var_5;
-          else
+          } else {
             var_4._id_4B1B = 0;
+          }
 
           var_4._id_C21E = 2;
           var_4._id_71D4 = ::_id_70D3;
@@ -173,15 +180,17 @@ _id_70B7(var_0, var_1, var_2, var_3) {
           var_6 = var_0 + 7;
           var_3 = _id_0A0D::_id_593B(var_6);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_6] = -1;
+          }
 
           break;
       }
     }
 
-    if(var_3 != anim.failure)
+    if(var_3 != anim.failure) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -232,23 +241,26 @@ _id_704C(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_9D44(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
           var_4 = var_0 + 1;
           var_3 = _id_0A0D::_id_593B(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
       }
     }
 
-    if(var_3 != anim.success)
+    if(var_3 != anim.success) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -265,8 +277,9 @@ _id_70CE(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_10015(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
@@ -275,10 +288,11 @@ _id_70CE(var_0, var_1, var_2, var_3) {
           var_5.id = var_0 + 1;
           var_6 = var_1._id_D8BE[var_5.id];
 
-          if(isDefined(var_6))
+          if(isDefined(var_6)) {
             var_5._id_4B1B = var_6;
-          else
+          } else {
             var_5._id_4B1B = 0;
+          }
 
           var_5._id_C21E = 4;
           var_5._id_71D4 = ::_id_7083;
@@ -286,8 +300,9 @@ _id_70CE(var_0, var_1, var_2, var_3) {
       }
     }
 
-    if(var_3 != anim.success)
+    if(var_3 != anim.success) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -320,10 +335,11 @@ _id_7083(var_0, var_1, var_2, var_3) {
           var_4.id = var_0;
           var_5 = var_1._id_D8BE[var_4.id];
 
-          if(isDefined(var_5))
+          if(isDefined(var_5)) {
             var_4._id_4B1B = var_5;
-          else
+          } else {
             var_4._id_4B1B = 0;
+          }
 
           var_4._id_C21E = 2;
           var_4._id_71D4 = ::_id_7086;
@@ -334,10 +350,11 @@ _id_7083(var_0, var_1, var_2, var_3) {
           var_4.id = var_0 + 1;
           var_5 = var_1._id_D8BE[var_4.id];
 
-          if(isDefined(var_5))
+          if(isDefined(var_5)) {
             var_4._id_4B1B = var_5;
-          else
+          } else {
             var_4._id_4B1B = 0;
+          }
 
           var_4._id_C21E = 3;
           var_4._id_71D4 = ::_id_7084;
@@ -348,10 +365,11 @@ _id_7083(var_0, var_1, var_2, var_3) {
           var_4.id = var_0 + 2;
           var_5 = var_1._id_D8BE[var_4.id];
 
-          if(isDefined(var_5))
+          if(isDefined(var_5)) {
             var_4._id_4B1B = var_5;
-          else
+          } else {
             var_4._id_4B1B = 0;
+          }
 
           var_4._id_C21E = 3;
           var_4._id_71D4 = ::_id_7085;
@@ -359,22 +377,25 @@ _id_7083(var_0, var_1, var_2, var_3) {
         case 3:
           var_6 = var_0 + 3;
 
-          if(!isDefined(var_1._id_D8BE[var_6]))
+          if(!isDefined(var_1._id_D8BE[var_6])) {
             _id_0A0D::_id_7221(var_6);
+          }
 
           var_3 = _id_0A0D::follow(var_6);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_6] = -1;
-          else
+          } else {
             _id_0A0D::_id_7231(var_6);
+          }
 
           break;
       }
     }
 
-    if(var_3 != anim.failure)
+    if(var_3 != anim.failure) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -410,23 +431,26 @@ _id_7086(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_9E00(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
           var_4 = var_0 + 1;
           var_3 = _id_0A0D::_id_61C4(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
       }
     }
 
-    if(var_3 != anim.success)
+    if(var_3 != anim.success) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -443,33 +467,37 @@ _id_7084(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_10016(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
           var_4 = var_0 + 1;
           var_3 = _id_0A0D::_id_F711(var_4, scripts\aitypes\bt_util::_id_0076(var_4));
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 2:
           var_4 = var_0 + 2;
           var_3 = _id_0A0D::_id_7232(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
-          else
+          } else {
             _id_0A0D::_id_7234(var_4);
+          }
 
           break;
       }
     }
 
-    if(var_3 != anim.success)
+    if(var_3 != anim.success) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -482,8 +510,9 @@ _id_710F(var_0, var_1, var_2) {
   var_3 = var_0._id_D8BE[var_1];
 
   if(isDefined(var_3) && var_3 != -1) {
-    if(var_3 == 2)
+    if(var_3 == 2) {
       _id_0A0D::_id_7234(scripts\aitypes\bt_util::bt_getchildtaskid(var_1, var_3));
+    }
   }
 
   var_2._id_71D2 = undefined;
@@ -497,37 +526,42 @@ _id_7085(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_9E77(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
           var_4 = var_0 + 1;
           var_3 = _id_0A0D::_id_F711(var_4, scripts\aitypes\bt_util::_id_0076(var_4));
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 2:
           var_4 = var_0 + 2;
 
-          if(!isDefined(var_1._id_D8BE[var_4]))
+          if(!isDefined(var_1._id_D8BE[var_4])) {
             _id_0A0D::_id_7221(var_4);
+          }
 
           var_3 = _id_0A0D::follow(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
-          else
+          } else {
             _id_0A0D::_id_7231(var_4);
+          }
 
           break;
       }
     }
 
-    if(var_3 != anim.success)
+    if(var_3 != anim.success) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -540,8 +574,9 @@ _id_7110(var_0, var_1, var_2) {
   var_3 = var_0._id_D8BE[var_1];
 
   if(isDefined(var_3) && var_3 != -1) {
-    if(var_3 == 2)
+    if(var_3 == 2) {
       _id_0A0D::_id_7231(scripts\aitypes\bt_util::bt_getchildtaskid(var_1, var_3));
+    }
   }
 
   var_2._id_71D2 = undefined;
@@ -555,8 +590,9 @@ _id_70D1(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_10027(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
@@ -565,10 +601,11 @@ _id_70D1(var_0, var_1, var_2, var_3) {
           var_5.id = var_0 + 1;
           var_6 = var_1._id_D8BE[var_5.id];
 
-          if(isDefined(var_6))
+          if(isDefined(var_6)) {
             var_5._id_4B1B = var_6;
-          else
+          } else {
             var_5._id_4B1B = 0;
+          }
 
           var_5._id_C21E = 2;
           var_5._id_71D4 = ::_id_7092;
@@ -576,8 +613,9 @@ _id_70D1(var_0, var_1, var_2, var_3) {
       }
     }
 
-    if(var_3 != anim.success)
+    if(var_3 != anim.success) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -618,10 +656,11 @@ _id_7092(var_0, var_1, var_2, var_3) {
           var_4.id = var_0 + 1;
           var_5 = var_1._id_D8BE[var_4.id];
 
-          if(isDefined(var_5))
+          if(isDefined(var_5)) {
             var_4._id_4B1B = var_5;
-          else
+          } else {
             var_4._id_4B1B = 0;
+          }
 
           var_4._id_C21E = 4;
           var_4._id_71D4 = ::_id_7093;
@@ -629,8 +668,9 @@ _id_7092(var_0, var_1, var_2, var_3) {
       }
     }
 
-    if(var_3 != anim.failure)
+    if(var_3 != anim.failure) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -661,8 +701,9 @@ _id_70D2(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_10028(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
@@ -677,8 +718,9 @@ _id_70D2(var_0, var_1, var_2, var_3) {
           var_4 = var_0 + 2;
           var_3 = _id_0A0D::_id_41B6(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
       }
@@ -718,30 +760,34 @@ _id_7094(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_10075(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
           var_4 = var_0 + 1;
           var_3 = _id_0A0D::_id_F748(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 2:
           var_4 = var_0 + 2;
 
-          if(!isDefined(var_1._id_D8BE[var_4]))
+          if(!isDefined(var_1._id_D8BE[var_4])) {
             _id_0A0D::_id_98E0(var_4);
+          }
 
           var_3 = _id_0A0D::_id_136C0(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
-          else
+          } else {
             _id_0A0D::_id_11704(var_4);
+          }
 
           break;
       }
@@ -763,8 +809,9 @@ _id_711A(var_0, var_1, var_2) {
   var_3 = var_0._id_D8BE[var_1];
 
   if(isDefined(var_3) && var_3 != -1) {
-    if(var_3 == 2)
+    if(var_3 == 2) {
       _id_0A0D::_id_11704(scripts\aitypes\bt_util::bt_getchildtaskid(var_1, var_3));
+    }
   }
 
   var_2._id_71D2 = undefined;
@@ -778,24 +825,27 @@ _id_7093(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_F711(var_4, scripts\aitypes\bt_util::_id_0076(var_4));
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
           var_4 = var_0 + 1;
           var_3 = _id_0A0D::_id_F706(var_4, scripts\aitypes\bt_util::_id_0076(var_4));
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 2:
           var_4 = var_0 + 2;
           var_3 = _id_0A0D::_id_F7C9(var_4, scripts\aitypes\bt_util::_id_0076(var_4));
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 3:
@@ -804,10 +854,11 @@ _id_7093(var_0, var_1, var_2, var_3) {
           var_5.id = var_0 + 3;
           var_6 = var_1._id_D8BE[var_5.id];
 
-          if(isDefined(var_6))
+          if(isDefined(var_6)) {
             var_5._id_4B1B = var_6;
-          else
+          } else {
             var_5._id_4B1B = 0;
+          }
 
           var_5._id_C21E = 2;
           var_5._id_71D4 = ::_id_7095;
@@ -815,8 +866,9 @@ _id_7093(var_0, var_1, var_2, var_3) {
       }
     }
 
-    if(var_3 != anim.success)
+    if(var_3 != anim.success) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -835,10 +887,11 @@ _id_7095(var_0, var_1, var_2, var_3) {
           var_4.id = var_0;
           var_5 = var_1._id_D8BE[var_4.id];
 
-          if(isDefined(var_5))
+          if(isDefined(var_5)) {
             var_4._id_4B1B = var_5;
-          else
+          } else {
             var_4._id_4B1B = 0;
+          }
 
           var_4._id_C21E = 2;
           var_4._id_71D4 = ::_id_7096;
@@ -849,10 +902,11 @@ _id_7095(var_0, var_1, var_2, var_3) {
           var_4.id = var_0 + 1;
           var_5 = var_1._id_D8BE[var_4.id];
 
-          if(isDefined(var_5))
+          if(isDefined(var_5)) {
             var_4._id_4B1B = var_5;
-          else
+          } else {
             var_4._id_4B1B = 0;
+          }
 
           var_4._id_C21E = 3;
           var_4._id_71D4 = ::_id_7097;
@@ -860,8 +914,9 @@ _id_7095(var_0, var_1, var_2, var_3) {
       }
     }
 
-    if(var_3 != anim.failure)
+    if(var_3 != anim.failure) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -878,23 +933,26 @@ _id_7096(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_1002B(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
           var_4 = var_0 + 1;
           var_3 = _id_0A0D::_id_90F2(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
       }
     }
 
-    if(var_3 != anim.success)
+    if(var_3 != anim.success) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -911,35 +969,40 @@ _id_7097(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_F706(var_4, scripts\aitypes\bt_util::_id_0076(var_4));
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
           var_4 = var_0 + 1;
           var_3 = _id_0A0D::_id_F7C9(var_4, scripts\aitypes\bt_util::_id_0076(var_4));
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 2:
           var_4 = var_0 + 2;
 
-          if(!isDefined(var_1._id_D8BE[var_4]))
+          if(!isDefined(var_1._id_D8BE[var_4])) {
             _id_0A09::_id_FAF6(var_4);
+          }
 
           var_3 = _id_0A09::_id_5AEA(var_4, scripts\aitypes\bt_util::_id_0076(var_4));
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
       }
     }
 
-    if(var_3 != anim.success)
+    if(var_3 != anim.success) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -956,8 +1019,9 @@ _id_70D0(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_8C2C(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
@@ -966,10 +1030,11 @@ _id_70D0(var_0, var_1, var_2, var_3) {
           var_5.id = var_0 + 1;
           var_6 = var_1._id_D8BE[var_5.id];
 
-          if(isDefined(var_6))
+          if(isDefined(var_6)) {
             var_5._id_4B1B = var_6;
-          else
+          } else {
             var_5._id_4B1B = 0;
+          }
 
           var_5._id_C21E = 2;
           var_5._id_71D4 = ::_id_708A;
@@ -977,8 +1042,9 @@ _id_70D0(var_0, var_1, var_2, var_3) {
       }
     }
 
-    if(var_3 != anim.success)
+    if(var_3 != anim.success) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -1011,10 +1077,11 @@ _id_708A(var_0, var_1, var_2, var_3) {
           var_4.id = var_0;
           var_5 = var_1._id_D8BE[var_4.id];
 
-          if(isDefined(var_5))
+          if(isDefined(var_5)) {
             var_4._id_4B1B = var_5;
-          else
+          } else {
             var_4._id_4B1B = 0;
+          }
 
           var_4._id_C21E = 2;
           var_4._id_71D4 = ::_id_70CF;
@@ -1025,10 +1092,11 @@ _id_708A(var_0, var_1, var_2, var_3) {
           var_4.id = var_0 + 1;
           var_5 = var_1._id_D8BE[var_4.id];
 
-          if(isDefined(var_5))
+          if(isDefined(var_5)) {
             var_4._id_4B1B = var_5;
-          else
+          } else {
             var_4._id_4B1B = 0;
+          }
 
           var_4._id_C21E = 2;
           var_4._id_71D4 = ::_id_708B;
@@ -1036,8 +1104,9 @@ _id_708A(var_0, var_1, var_2, var_3) {
       }
     }
 
-    if(var_3 != anim.failure)
+    if(var_3 != anim.failure) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -1072,8 +1141,9 @@ _id_70CF(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_10017(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
@@ -1087,8 +1157,9 @@ _id_70CF(var_0, var_1, var_2, var_3) {
       }
     }
 
-    if(var_3 != anim.success)
+    if(var_3 != anim.success) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -1119,22 +1190,25 @@ _id_7087(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_B4DB(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
           var_4 = var_0 + 1;
 
-          if(!isDefined(var_1._id_D8BE[var_4]))
+          if(!isDefined(var_1._id_D8BE[var_4])) {
             _id_0A0D::_id_724A(var_4);
+          }
 
           var_3 = _id_0A0D::_id_7248(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
-          else
+          } else {
             _id_0A0D::_id_724B(var_4);
+          }
 
           break;
       }
@@ -1156,8 +1230,9 @@ _id_7111(var_0, var_1, var_2) {
   var_3 = var_0._id_D8BE[var_1];
 
   if(isDefined(var_3) && var_3 != -1) {
-    if(var_3 == 1)
+    if(var_3 == 1) {
       _id_0A0D::_id_724B(scripts\aitypes\bt_util::bt_getchildtaskid(var_1, var_3));
+    }
   }
 
   var_2._id_71D2 = undefined;
@@ -1171,29 +1246,33 @@ _id_708B(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_6CAB(var_4, scripts\aitypes\bt_util::_id_0076(var_4));
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
           var_4 = var_0 + 1;
 
-          if(!isDefined(var_1._id_D8BE[var_4]))
+          if(!isDefined(var_1._id_D8BE[var_4])) {
             _id_0A0D::_id_98E0(var_4);
+          }
 
           var_3 = _id_0A0D::_id_136C0(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
-          else
+          } else {
             _id_0A0D::_id_11704(var_4);
+          }
 
           break;
       }
     }
 
-    if(var_3 != anim.success)
+    if(var_3 != anim.success) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -1206,8 +1285,9 @@ _id_7113(var_0, var_1, var_2) {
   var_3 = var_0._id_D8BE[var_1];
 
   if(isDefined(var_3) && var_3 != -1) {
-    if(var_3 == 1)
+    if(var_3 == 1) {
       _id_0A0D::_id_11704(scripts\aitypes\bt_util::bt_getchildtaskid(var_1, var_3));
+    }
   }
 
   var_2._id_71D2 = undefined;
@@ -1221,8 +1301,9 @@ _id_70CD(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_9D6A(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
@@ -1231,10 +1312,11 @@ _id_70CD(var_0, var_1, var_2, var_3) {
           var_5.id = var_0 + 1;
           var_6 = var_1._id_D8BE[var_5.id];
 
-          if(isDefined(var_6))
+          if(isDefined(var_6)) {
             var_5._id_4B1B = var_6;
-          else
+          } else {
             var_5._id_4B1B = 0;
+          }
 
           var_5._id_C21E = 7;
           var_5._id_71D4 = _id_0C1D::_id_707F;
@@ -1242,8 +1324,9 @@ _id_70CD(var_0, var_1, var_2, var_3) {
       }
     }
 
-    if(var_3 != anim.success)
+    if(var_3 != anim.success) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -1274,16 +1357,18 @@ _id_70CC(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_8C3A(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
           var_4 = var_0 + 1;
           var_3 = _id_0A0D::_id_8C2C(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 2:
@@ -1292,10 +1377,11 @@ _id_70CC(var_0, var_1, var_2, var_3) {
           var_5.id = var_0 + 2;
           var_6 = var_1._id_D8BE[var_5.id];
 
-          if(isDefined(var_6))
+          if(isDefined(var_6)) {
             var_5._id_4B1B = var_6;
-          else
+          } else {
             var_5._id_4B1B = 0;
+          }
 
           var_5._id_C21E = 3;
           var_5._id_71D4 = ::_id_7062;
@@ -1303,11 +1389,13 @@ _id_70CC(var_0, var_1, var_2, var_3) {
       }
     }
 
-    if(var_2._id_4B1B == 1)
+    if(var_2._id_4B1B == 1) {
       var_3 = scripts\aitypes\bt_util::bt_negateresult(var_3);
+    }
 
-    if(var_3 != anim.success)
+    if(var_3 != anim.success) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -1340,10 +1428,11 @@ _id_7062(var_0, var_1, var_2, var_3) {
           var_4.id = var_0;
           var_5 = var_1._id_D8BE[var_4.id];
 
-          if(isDefined(var_5))
+          if(isDefined(var_5)) {
             var_4._id_4B1B = var_5;
-          else
+          } else {
             var_4._id_4B1B = 0;
+          }
 
           var_4._id_C21E = 2;
           var_4._id_71D4 = ::_id_704D;
@@ -1354,10 +1443,11 @@ _id_7062(var_0, var_1, var_2, var_3) {
           var_4.id = var_0 + 1;
           var_5 = var_1._id_D8BE[var_4.id];
 
-          if(isDefined(var_5))
+          if(isDefined(var_5)) {
             var_4._id_4B1B = var_5;
-          else
+          } else {
             var_4._id_4B1B = 0;
+          }
 
           var_4._id_C21E = 4;
           var_4._id_71D4 = ::_id_70A6;
@@ -1368,10 +1458,11 @@ _id_7062(var_0, var_1, var_2, var_3) {
           var_4.id = var_0 + 2;
           var_5 = var_1._id_D8BE[var_4.id];
 
-          if(isDefined(var_5))
+          if(isDefined(var_5)) {
             var_4._id_4B1B = var_5;
-          else
+          } else {
             var_4._id_4B1B = 0;
+          }
 
           var_4._id_C21E = 2;
           var_4._id_71D4 = ::_id_70B5;
@@ -1379,8 +1470,9 @@ _id_7062(var_0, var_1, var_2, var_3) {
       }
     }
 
-    if(var_3 != anim.failure)
+    if(var_3 != anim.failure) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -1419,8 +1511,9 @@ _id_704D(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_FFBE(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
@@ -1429,10 +1522,11 @@ _id_704D(var_0, var_1, var_2, var_3) {
           var_5.id = var_0 + 1;
           var_6 = var_1._id_D8BE[var_5.id];
 
-          if(isDefined(var_6))
+          if(isDefined(var_6)) {
             var_5._id_4B1B = var_6;
-          else
+          } else {
             var_5._id_4B1B = 0;
+          }
 
           var_5._id_C21E = 2;
           var_5._id_71D4 = ::_id_716F;
@@ -1440,8 +1534,9 @@ _id_704D(var_0, var_1, var_2, var_3) {
       }
     }
 
-    if(var_3 != anim.success)
+    if(var_3 != anim.success) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -1474,10 +1569,11 @@ _id_716F(var_0, var_1, var_2, var_3) {
           var_4.id = var_0;
           var_5 = var_1._id_D8BE[var_4.id];
 
-          if(isDefined(var_5))
+          if(isDefined(var_5)) {
             var_4._id_4B1B = var_5;
-          else
+          } else {
             var_4._id_4B1B = 0;
+          }
 
           var_4._id_C21E = 6;
           var_4._id_71D4 = ::_id_704E;
@@ -1493,8 +1589,9 @@ _id_716F(var_0, var_1, var_2, var_3) {
       }
     }
 
-    if(var_3 != anim.failure)
+    if(var_3 != anim.failure) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -1525,59 +1622,67 @@ _id_704E(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_10029(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
           var_4 = var_0 + 1;
           var_3 = _id_0A0D::_id_F748(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 2:
           var_4 = var_0 + 2;
           var_3 = _id_0A0D::_id_C936(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 3:
           var_4 = var_0 + 3;
           var_3 = _id_0A0D::_id_F7C9(var_4, scripts\aitypes\bt_util::_id_0076(var_4));
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 4:
           var_4 = var_0 + 4;
           var_3 = _id_0A0D::_id_F706(var_4, scripts\aitypes\bt_util::_id_0076(var_4));
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 5:
           var_4 = var_0 + 5;
 
-          if(!isDefined(var_1._id_D8BE[var_4]))
+          if(!isDefined(var_1._id_D8BE[var_4])) {
             _id_0A09::_id_FAF6(var_4);
+          }
 
           var_3 = _id_0A09::_id_5AEA(var_4, scripts\aitypes\bt_util::_id_0076(var_4));
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
       }
     }
 
-    if(var_3 != anim.success)
+    if(var_3 != anim.success) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -1594,62 +1699,70 @@ _id_704F(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_FFD6(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
           var_4 = var_0 + 1;
           var_3 = _id_0A0D::_id_10E66(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 2:
           var_4 = var_0 + 2;
           var_3 = _id_0A0D::_id_6CAB(var_4, scripts\aitypes\bt_util::_id_0076(var_4));
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 3:
           var_4 = var_0 + 3;
           var_3 = _id_0A0D::_id_F672(var_4, scripts\aitypes\bt_util::_id_0076(var_4));
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 4:
           var_4 = var_0 + 4;
           var_3 = _id_0A0D::_id_F72A(var_4, scripts\aitypes\bt_util::_id_0076(var_4));
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 5:
           var_4 = var_0 + 5;
           var_3 = _id_0A0D::_id_F706(var_4, scripts\aitypes\bt_util::_id_0076(var_4));
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 6:
           var_4 = var_0 + 6;
 
-          if(!isDefined(var_1._id_D8BE[var_4]))
+          if(!isDefined(var_1._id_D8BE[var_4])) {
             _id_0A0D::_id_98E0(var_4);
+          }
 
           var_3 = _id_0A0D::_id_136C0(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
-          else
+          } else {
             _id_0A0D::_id_11704(var_4);
+          }
 
           break;
       }
@@ -1671,8 +1784,9 @@ _id_70E3(var_0, var_1, var_2) {
   var_3 = var_0._id_D8BE[var_1];
 
   if(isDefined(var_3) && var_3 != -1) {
-    if(var_3 == 6)
+    if(var_3 == 6) {
       _id_0A0D::_id_11704(scripts\aitypes\bt_util::bt_getchildtaskid(var_1, var_3));
+    }
   }
 
   var_2._id_71D2 = undefined;
@@ -1686,45 +1800,51 @@ _id_70A6(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_1003E(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
           var_4 = var_0 + 1;
           var_3 = _id_0A0D::_id_F748(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 2:
           var_4 = var_0 + 2;
           var_3 = _id_0A0D::_id_C936(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 3:
           var_4 = var_0 + 3;
 
-          if(!isDefined(var_1._id_D8BE[var_4]))
+          if(!isDefined(var_1._id_D8BE[var_4])) {
             _id_0A0D::_id_98E0(var_4);
+          }
 
           var_3 = _id_0A0D::_id_136C0(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
-          else
+          } else {
             _id_0A0D::_id_11704(var_4);
+          }
 
           break;
       }
     }
 
-    if(var_3 != anim.success)
+    if(var_3 != anim.success) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -1737,8 +1857,9 @@ _id_7126(var_0, var_1, var_2) {
   var_3 = var_0._id_D8BE[var_1];
 
   if(isDefined(var_3) && var_3 != -1) {
-    if(var_3 == 3)
+    if(var_3 == 3) {
       _id_0A0D::_id_11704(scripts\aitypes\bt_util::bt_getchildtaskid(var_1, var_3));
+    }
   }
 
   var_2._id_71D2 = undefined;
@@ -1752,8 +1873,9 @@ _id_70B5(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_1006C(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
@@ -1762,10 +1884,11 @@ _id_70B5(var_0, var_1, var_2, var_3) {
           var_5.id = var_0 + 1;
           var_6 = var_1._id_D8BE[var_5.id];
 
-          if(isDefined(var_6))
+          if(isDefined(var_6)) {
             var_5._id_4B1B = var_6;
-          else
+          } else {
             var_5._id_4B1B = 0;
+          }
 
           var_5._id_C21E = 7;
           var_5._id_71D4 = _id_0C1D::_id_707F;
@@ -1773,8 +1896,9 @@ _id_70B5(var_0, var_1, var_2, var_3) {
       }
     }
 
-    if(var_3 != anim.success)
+    if(var_3 != anim.success) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;
@@ -1805,8 +1929,9 @@ _id_70D3(var_0, var_1, var_2, var_3) {
           var_4 = var_0;
           var_3 = _id_0A0D::_id_1003F(var_4);
 
-          if(var_3 == anim.running)
+          if(var_3 == anim.running) {
             var_1._id_E87F[var_4] = -1;
+          }
 
           break;
         case 1:
@@ -1815,10 +1940,11 @@ _id_70D3(var_0, var_1, var_2, var_3) {
           var_5.id = var_0 + 1;
           var_6 = var_1._id_D8BE[var_5.id];
 
-          if(isDefined(var_6))
+          if(isDefined(var_6)) {
             var_5._id_4B1B = var_6;
-          else
+          } else {
             var_5._id_4B1B = 0;
+          }
 
           var_5._id_C21E = 7;
           var_5._id_71D4 = _id_0C1D::_id_707F;
@@ -1826,8 +1952,9 @@ _id_70D3(var_0, var_1, var_2, var_3) {
       }
     }
 
-    if(var_3 != anim.success)
+    if(var_3 != anim.success) {
       return var_3;
+    }
 
     var_2._id_4B1B++;
     var_3 = undefined;

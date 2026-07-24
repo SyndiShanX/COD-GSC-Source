@@ -197,8 +197,9 @@ _id_A058() {
   self.loop_sound = 0;
   wait 0.05;
 
-  if(isDefined(level._id_D127._id_76F8))
+  if(isDefined(level._id_D127._id_76F8)) {
     level._id_D127._id_76F8 stoploopsound("jackal_gatling_fire_plr");
+  }
 }
 
 _id_A268(var_0) {
@@ -206,10 +207,11 @@ _id_A268(var_0) {
   self endon("new_fire_func");
   setomnvar("ui_jackal_firing", 1);
 
-  if(var_0)
+  if(var_0) {
     level._id_D127._id_6D2D playSound("jackal_microlite_space_left");
-  else
+  } else {
     level._id_D127._id_6D2E playSound("jackal_microlite_space_right");
+  }
 
   earthquake(0.16, 0.76, level._id_D127.origin, 10000);
   wait 0.1;
@@ -223,10 +225,11 @@ _id_A2CC(var_0) {
   self endon("new_fire_func");
   var_1 = level.player _meth_848A();
 
-  if(isDefined(var_1) && isDefined(var_1[0]) && var_1[2] > 0.05)
+  if(isDefined(var_1) && isDefined(var_1[0]) && var_1[2] > 0.05) {
     var_2 = var_1[0];
-  else
+  } else {
     var_2 = self._id_5F27;
+  }
 
   playfxontagsbetweenclients(scripts\engine\utility::getfx("jackal_primary_energy"), level._id_D127, "tag_flash", var_2, "tag_origin");
   playfxontagsbetweenclients(scripts\engine\utility::getfx("jackal_primary_energy"), level._id_D127, "tag_flash_2", var_2, "tag_origin");
@@ -256,16 +259,18 @@ _id_A059(var_0) {
 
   var_6 = 0.15;
 
-  if(var_1 > 0)
+  if(var_1 > 0) {
     _id_0BDC::_id_A079(level._id_D127.origin + anglesToForward(level._id_D127.angles) * 500, var_1, 0.05, 3);
+  }
 
   if(abs(var_2 + var_3) > 0) {
     _id_0BDC::_id_A07E((var_2, var_3, 0), 0.05, 0.5);
     _id_0BDC::_id_A07E((-0.5 * var_2, -0.5 * var_3, 0), 0.05, var_6 * 3.0);
   }
 
-  if(abs(var_4 + var_5) > 0)
+  if(abs(var_4 + var_5) > 0) {
     _id_0BDC::_id_A081((var_4, var_5, 0) * -1, 0.05, var_6);
+  }
 
   earthquake(0.13, 0.76, level._id_D127.origin, 10000);
   wait 0.05;
@@ -303,8 +308,9 @@ _id_A1F6(var_0) {
     _id_0BDC::_id_A07E((-0.5 * var_3, -0.5 * var_4, 0), 0.05, var_7 * 3.0);
   }
 
-  if(abs(var_5 + var_6) > 0)
+  if(abs(var_5 + var_6) > 0) {
     _id_0BDC::_id_A081((var_5, var_6, 0) * -1, 0.05, var_7);
+  }
 
   earthquake(0.15, 0.76, level._id_D127.origin, 10000);
   wait 0.05;
@@ -346,16 +352,18 @@ _id_A05B(var_0) {
   var_6 = 0.25;
   earthquake(0.23, 0.76, level._id_D127.origin, 10000);
 
-  if(var_1 > 0)
+  if(var_1 > 0) {
     _id_0BDC::_id_A079(level._id_D127.origin + anglesToForward(level._id_D127.angles) * 500, var_1, 0.05, 3);
+  }
 
   if(abs(var_2 + var_3) > 0) {
     _id_0BDC::_id_A07E((var_2, var_3, 0), 0.05, 0.5);
     _id_0BDC::_id_A07E((-0.5 * var_2, -0.5 * var_3, 0), 0.05, var_6 * 3.0);
   }
 
-  if(abs(var_4 + var_5) > 0)
+  if(abs(var_4 + var_5) > 0) {
     _id_0BDC::_id_A081((var_4, var_5, 0) * -1, 0.05, var_6);
+  }
 
   wait 0.1;
   setomnvar("ui_jackal_firing", 0);
@@ -381,16 +389,18 @@ _id_A101(var_0) {
   var_6 = 0.25;
   earthquake(0.23, 0.76, level._id_D127.origin, 10000);
 
-  if(var_1 > 0)
+  if(var_1 > 0) {
     _id_0BDC::_id_A079(level._id_D127.origin + anglesToForward(level._id_D127.angles) * 500, var_1, 0.05, 3);
+  }
 
   if(abs(var_2 + var_3) > 0) {
     _id_0BDC::_id_A07E((var_2, var_3, 0), 0.05, 0.5);
     _id_0BDC::_id_A07E((-0.5 * var_2, -0.5 * var_3, 0), 0.05, var_6 * 3.0);
   }
 
-  if(abs(var_4 + var_5) > 0)
+  if(abs(var_4 + var_5) > 0) {
     _id_0BDC::_id_A081((var_4, var_5, 0) * -1, 0.05, var_6);
+  }
 
   wait 0.1;
   setomnvar("ui_jackal_firing", 0);
@@ -416,16 +426,18 @@ _id_A075(var_0) {
   var_6 = 0.25;
   earthquake(0.32, 0.76, level._id_D127.origin, 10000);
 
-  if(var_1 > 0)
+  if(var_1 > 0) {
     _id_0BDC::_id_A079(level._id_D127.origin + anglesToForward(level._id_D127.angles) * 500, var_1, 0.05, 3);
+  }
 
   if(abs(var_2 + var_3) > 0) {
     _id_0BDC::_id_A07E((var_2, var_3, 0), 0.05, 0.5);
     _id_0BDC::_id_A07E((-0.5 * var_2, -0.5 * var_3, 0), 0.05, var_6 * 3.0);
   }
 
-  if(abs(var_4 + var_5) > 0)
+  if(abs(var_4 + var_5) > 0) {
     _id_0BDC::_id_A081((var_4, var_5, 0) * -1, 0.05, var_6);
+  }
 
   wait 0.1;
   setomnvar("ui_jackal_firing", 0);
@@ -537,10 +549,11 @@ _id_A27A(var_0) {
 }
 
 _id_A27B() {
-  if(scripts\sp\utility::_id_D15B("weapons"))
+  if(scripts\sp\utility::_id_D15B("weapons")) {
     self.missiles._id_B446 = 12;
-  else
+  } else {
     self.missiles._id_B446 = 8;
+  }
 
   self.missiles.count = self.missiles._id_B446;
   setomnvar("ui_jackal_missile_count", self.missiles.count);
@@ -559,10 +572,11 @@ _id_A26A(var_0) {
     self.missiles.active = var_0;
     setomnvar("ui_jackal_missile", var_0);
 
-    if(var_0)
+    if(var_0) {
       thread _id_A277();
-    else
+    } else {
       self notify("jackal_missiles_off");
+    }
   }
 }
 
@@ -581,19 +595,20 @@ _id_A277() {
 
   for(;;) {
     if(level.player fragButtonPressed() && !var_2 && !level.player scripts\sp\utility::_id_65DB("disable_jackal_missiles")) {
-      if(self.missiles.count <= 0)
+      if(self.missiles.count <= 0) {
         _id_A273();
-      else {
+      } else {
         level._id_D127 scripts\sp\utility::_id_65E1("player_jackal_missile");
         var_1 = _id_A275(var_0, var_1);
         level._id_D127 scripts\sp\utility::_id_65DD("player_jackal_missile");
       }
     }
 
-    if(level.player fragButtonPressed())
+    if(level.player fragButtonPressed()) {
       var_2 = 1;
-    else
+    } else {
       var_2 = 0;
+    }
 
     wait 0.05;
   }
@@ -611,14 +626,15 @@ _id_A275(var_0, var_1) {
   while(var_2 > 0) {
     var_8 = undefined;
 
-    if(var_2 == 4)
+    if(var_2 == 4) {
       var_7 = var_6 * var_4;
-    else if(var_2 == 3)
+    } else if(var_2 == 3) {
       var_7 = var_6 * var_5;
-    else if(var_2 == 2)
+    } else if(var_2 == 2) {
       var_7 = var_6 * var_4 * -1;
-    else if(var_2 == 1)
+    } else if(var_2 == 1) {
       var_7 = var_6 * var_5 * -1;
+    }
 
     var_9 = level.player _meth_848A();
 
@@ -634,8 +650,9 @@ _id_A275(var_0, var_1) {
     _id_A274(var_8, var_0[var_1], var_7);
     var_1++;
 
-    if(var_1 == var_0.size)
+    if(var_1 == var_0.size) {
       var_1 = 0;
+    }
 
     var_2--;
     wait 0.1;
@@ -656,8 +673,9 @@ _id_A274(var_0, var_1, var_2) {
   level.player playRumbleOnEntity("damage_heavy");
   earthquake(0.235, 0.9, level._id_D127.origin, 5000);
 
-  if(isDefined(self._id_727D))
+  if(isDefined(self._id_727D)) {
     var_0 = self._id_727D;
+  }
 
   var_8 = scripts\engine\utility::spawn_tag_origin();
   var_8.origin = var_7;
@@ -668,21 +686,23 @@ _id_A274(var_0, var_1, var_2) {
   } else
     var_8.angles = self.angles;
 
-  if(isDefined(self._id_B83B))
+  if(isDefined(self._id_B83B)) {
     var_10 = self._id_B83B;
-  else
+  } else {
     var_10 = "missile_flare_short";
+  }
 
-  if(isDefined(self._id_B803))
+  if(isDefined(self._id_B803)) {
     var_11 = self._id_B803;
-  else
+  } else {
     var_11 = undefined;
+  }
 
   var_12 = 1000;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_13 = 1;
-  else {
+  } else {
     var_13 = 0;
     var_0 = scripts\engine\utility::spawn_tag_origin();
     var_0._id_5F27 = 1;
@@ -728,8 +748,9 @@ _id_B838(var_0) {
   var_3 = scripts\sp\math::_id_6A8E(0, 0.5, var_2);
   wait(var_3);
 
-  if(isDefined(var_0) && isvalidmissile(self) && isDefined(self))
+  if(isDefined(var_0) && isvalidmissile(self) && isDefined(self)) {
     self missile_settargetEnt(var_0);
+  }
 }
 
 _id_A273() {
@@ -752,25 +773,27 @@ _id_A270(var_0) {
 _id_A271() {
   self endon("jackal_missile_count_try_vo" + self.missiles.count);
 
-  if(self.missiles.count < 5)
+  if(self.missiles.count < 5) {
     self notify("jackal_missile_count_try_vo" + (self.missiles.count + 1));
+  }
 
   wait 1.5;
 
-  if(self.missiles.count == 1)
+  if(self.missiles.count == 1) {
     _id_A26C("jackal_hud_1missileremaini");
-  else if(self.missiles.count == 15)
+  } else if(self.missiles.count == 15) {
     _id_A26C("jackal_hud_15missilesremai");
-  else if(self.missiles.count == 10)
+  } else if(self.missiles.count == 10) {
     _id_A26C("jackal_hud_10missilesremai");
-  else if(self.missiles.count == 5)
+  } else if(self.missiles.count == 5) {
     _id_A26C("jackal_hud_5missilesremain");
-  else if(self.missiles.count == 4)
+  } else if(self.missiles.count == 4) {
     _id_A26C("jackal_hud_4missilesremain");
-  else if(self.missiles.count == 3)
+  } else if(self.missiles.count == 3) {
     _id_A26C("jackal_hud_3missilesremain");
-  else if(self.missiles.count == 2)
+  } else if(self.missiles.count == 2) {
     _id_A26C("jackal_hud_2missilesremain");
+  }
 }
 
 _id_A26C(var_0) {

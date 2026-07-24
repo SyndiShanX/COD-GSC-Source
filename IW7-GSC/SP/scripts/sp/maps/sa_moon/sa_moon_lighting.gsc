@@ -185,8 +185,9 @@ _id_AC28(var_0, var_1, var_2) {
 
 _id_6119(var_0) {
   if(var_0 == "on") {
-    if(isDefined(self.script_noteworthy) && self.script_noteworthy == "warningflash_player")
+    if(isDefined(self.script_noteworthy) && self.script_noteworthy == "warningflash_player") {
       thread _id_611F(0, 40, 10, 50);
+    }
 
     thread _id_611F(0, 450, 55, 500);
   } else {
@@ -211,8 +212,9 @@ _id_611F(var_0, var_1, var_2, var_3) {
     wait 0.05;
     var_6 = var_6 + 10;
 
-    if(var_6 > var_4)
+    if(var_6 > var_4) {
       var_6 = var_6 - var_4;
+    }
 
     wait 0.05;
     self setlightintensity(var_1);

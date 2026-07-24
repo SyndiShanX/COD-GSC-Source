@@ -746,11 +746,13 @@ _id_36AB(var_0) {
 _id_D609(var_0) {}
 
 _id_C0C7(var_0) {
-  if(isDefined(var_0._id_B14F))
+  if(isDefined(var_0._id_B14F)) {
     var_0 scripts\sp\utility::_id_1101B();
+  }
 
-  if(!isDefined(var_0._id_EE5F) || !var_0._id_EE5F)
+  if(!isDefined(var_0._id_EE5F) || !var_0._id_EE5F) {
     var_0.forceragdollimmediate = 1;
+  }
 
   var_0 scripts\sp\utility::_id_F2A8(1);
   var_0._id_10265 = 1;
@@ -759,11 +761,13 @@ _id_C0C7(var_0) {
 }
 
 _id_C11B(var_0, var_1) {
-  if(isDefined(self._id_B14F))
+  if(isDefined(self._id_B14F)) {
     scripts\sp\utility::_id_1101B();
+  }
 
-  if(!isDefined(self._id_EE5F) || !self._id_EE5F)
+  if(!isDefined(self._id_EE5F) || !self._id_EE5F) {
     self.forceragdollimmediate = 1;
+  }
 
   self._id_10265 = 1;
   self._id_4E46 = _id_0C60::_id_58CB;
@@ -775,8 +779,9 @@ _id_5E13(var_0) {
 }
 
 _id_C0C3(var_0) {
-  if(isDefined(var_0._id_B14F))
+  if(isDefined(var_0._id_B14F)) {
     var_0 scripts\sp\utility::_id_1101B();
+  }
 
   var_0 scripts\sp\utility::_id_F2A8(1);
   var_0 setCanDamage(1);
@@ -968,8 +973,9 @@ _id_4807() {
   level.player allowads(1);
   scripts\engine\utility::flag_wait("crash_player_jumper_dead");
 
-  while(level.player scripts\sp\utility::_id_9D27())
+  while(level.player scripts\sp\utility::_id_9D27()) {
     wait 0.05;
+  }
 
   setsaveddvar("scr_dof_enable", 1);
   thread _id_0B0A::_id_583D(1);
@@ -1049,10 +1055,11 @@ _id_B0C7(var_0) {
   var_1 = ["tag_eye", "j_clavicle_le", "j_clavicle_ri", "j_hip_ri"];
   var_1 = scripts\engine\utility::array_randomize(var_1);
 
-  if(var_0._id_1FBB == "lover_male")
+  if(var_0._id_1FBB == "lover_male") {
     var_0 playSound("phstreets_mcv5_cryscream3");
-  else
+  } else {
     var_0 playSound("phstreets_fcv3_cryscream6");
+  }
 
   foreach(var_3 in var_1) {
     var_4 = var_0 gettagorigin("j_spine4") + anglesToForward(var_0.angles) * -200;

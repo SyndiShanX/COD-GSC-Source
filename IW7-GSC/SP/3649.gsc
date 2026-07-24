@@ -80,8 +80,9 @@ _id_12CBB() {
 }
 
 _id_F849() {
-  if(isDefined(self.perks) && isDefined(self.perks["specialty_shocker"]))
+  if(isDefined(self.perks) && isDefined(self.perks["specialty_shocker"])) {
     self.perks["specialty_shocker"] = undefined;
+  }
 
   scripts\sp\utility::_id_13705();
   scripts\sp\utility::_id_12641("weapon_iw7_knife_perk_tr");
@@ -93,8 +94,9 @@ _id_12D2F() {
 }
 
 _id_F83E() {
-  if(isDefined(self.perks) && isDefined(self.perks["specialty_slasher"]))
+  if(isDefined(self.perks) && isDefined(self.perks["specialty_slasher"])) {
     self.perks["specialty_slasher"] = undefined;
+  }
 
   scripts\sp\utility::_id_13705();
   scripts\sp\utility::_id_12641("weapon_iw7_knife_upgrade1_tr");

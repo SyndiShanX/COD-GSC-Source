@@ -105,8 +105,9 @@ _id_D8CF() {
   self endon("death");
   self endon("disable_equipment_autoswitch");
 
-  while(!isDefined(level.player.curobjid))
+  while(!isDefined(level.player.curobjid)) {
     wait 0.05;
+  }
 
   thread _id_D8CE();
 
@@ -128,8 +129,9 @@ _id_D8CF() {
       continue;
     }
     if(isDefined(scripts\sp\utility::_id_7BD6()) && scripts\sp\utility::_id_7BD7() <= 0) {
-      if(isDefined(scripts\sp\utility::_id_7CAF()) && scripts\sp\utility::_id_7CB0() > 0)
+      if(isDefined(scripts\sp\utility::_id_7CAF()) && scripts\sp\utility::_id_7CB0() > 0) {
         _id_1418();
+      }
     }
   }
 }
@@ -161,14 +163,16 @@ _id_D8CE() {
     if(scripts\sp\utility::_id_7BD7() > 0) {
       continue;
     }
-    if(scripts\engine\utility::flag("primary_equipment_in_use"))
+    if(scripts\engine\utility::flag("primary_equipment_in_use")) {
       scripts\engine\utility::flag_waitopen("primary_equipment_in_use");
+    }
 
     if(var_0 != scripts\sp\utility::_id_7BD6()) {
       continue;
     }
-    if(isDefined(scripts\sp\utility::_id_7CAF()) && scripts\sp\utility::_id_7CB0() > 0)
+    if(isDefined(scripts\sp\utility::_id_7CAF()) && scripts\sp\utility::_id_7CB0() > 0) {
       _id_1418();
+    }
   }
 }
 
@@ -176,8 +180,9 @@ _id_F0B5() {
   self endon("death");
   self endon("disable_equipment_autoswitch");
 
-  while(!isDefined(level.player._id_4B21))
+  while(!isDefined(level.player._id_4B21)) {
     wait 0.05;
+  }
 
   thread _id_F0B4();
 
@@ -201,18 +206,21 @@ _id_F0B5() {
     if(var_1 == scripts\sp\utility::_id_7C3E()) {
       continue;
     }
-    if(scripts\engine\utility::flag("secondary_equipment_in_use"))
+    if(scripts\engine\utility::flag("secondary_equipment_in_use")) {
       scripts\engine\utility::flag_waitopen("secondary_equipment_in_use");
+    }
 
-    while(level.player isthrowinggrenade())
+    while(level.player isthrowinggrenade()) {
       wait 0.05;
+    }
 
     if(!isDefined(scripts\sp\utility::_id_7C3D()) || var_0 != scripts\sp\utility::_id_7C3D()) {
       continue;
     }
     if(isDefined(scripts\sp\utility::_id_7C3D()) && scripts\sp\utility::_id_7C3E() <= 0) {
-      if(isDefined(scripts\sp\utility::_id_7CB1()) && scripts\sp\utility::_id_7CB2() > 0)
+      if(isDefined(scripts\sp\utility::_id_7CB1()) && scripts\sp\utility::_id_7CB2() > 0) {
         _id_1419();
+      }
     }
   }
 }
@@ -244,14 +252,16 @@ _id_F0B4() {
     if(scripts\sp\utility::_id_7C3E() > 0) {
       continue;
     }
-    if(scripts\engine\utility::flag("secondary_equipment_in_use"))
+    if(scripts\engine\utility::flag("secondary_equipment_in_use")) {
       scripts\engine\utility::flag_waitopen("secondary_equipment_in_use");
+    }
 
     if(var_0 != scripts\sp\utility::_id_7C3D()) {
       continue;
     }
-    if(isDefined(scripts\sp\utility::_id_7CB1()) && scripts\sp\utility::_id_7CB2() > 0)
+    if(isDefined(scripts\sp\utility::_id_7CB1()) && scripts\sp\utility::_id_7CB2() > 0) {
       _id_1419();
+    }
   }
 }
 
@@ -272,8 +282,9 @@ _id_66A2() {
       continue;
     }
 
-    if(var_0 == "secondary_equipment_switch_input" && level.player._id_110BA != "" && !scripts\sp\utility::_id_9C8E() && !scripts\sp\utility::_id_9CB6())
+    if(var_0 == "secondary_equipment_switch_input" && level.player._id_110BA != "" && !scripts\sp\utility::_id_9C8E() && !scripts\sp\utility::_id_9CB6()) {
       _id_1419();
+    }
   }
 }
 
@@ -333,15 +344,18 @@ _id_11429() {
 
   for(var_3 = 0; var_3 < var_0.size; var_3++) {
     if(scripts\sp\utility::_id_93A6() && scripts\sp\utility::_id_93AC()) {
-      if(var_0[var_3] == "nanoshot" || var_0[var_3] == "helmet")
+      if(var_0[var_3] == "nanoshot" || var_0[var_3] == "helmet") {
         continue;
+      }
     }
 
-    if(_id_0B29::_id_12F5(var_0[var_3]))
+    if(_id_0B29::_id_12F5(var_0[var_3])) {
       var_1 = var_0[var_3];
+    }
 
-    if(_id_0B29::_id_12F1(var_0[var_3]))
+    if(_id_0B29::_id_12F1(var_0[var_3])) {
       var_2 = var_0[var_3];
+    }
   }
 
   if(isDefined(var_1)) {

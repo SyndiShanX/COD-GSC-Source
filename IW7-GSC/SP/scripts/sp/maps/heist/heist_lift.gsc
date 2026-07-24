@@ -39,13 +39,15 @@ _id_BAC9() {
 }
 
 _id_BAC8() {
-  while(!isDefined(level._id_AC77))
+  while(!isDefined(level._id_AC77)) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::flag_set("obj_getonlift");
 
-  if(getdvarint("debug_lift_top", 0) == 1)
+  if(getdvarint("debug_lift_top", 0) == 1) {
     level waittill("forever");
+  }
 
   thread _id_3A75();
   thread scripts\sp\maps\heist\heist_util::_id_968F("lift_moving_cover", "lift_moving_cover_state_1");
@@ -63,11 +65,13 @@ _id_BAC8() {
   level._id_92DA = 0;
   var_0 = getEnt("origin_lift_scene", "targetname");
 
-  foreach(var_2 in level.allies)
-  var_0 thread _id_EBEE(var_2);
+  foreach(var_2 in level.allies) {
+    var_0 thread _id_EBEE(var_2);
+  }
 
-  while(level._id_AC79 < 4)
+  while(level._id_AC79 < 4) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::flag_wait("mons_landed_end");
   setomnvar("ui_hide_hud", 1);
@@ -76,8 +80,9 @@ _id_BAC8() {
   scripts\sp\utility::_id_E006();
   level.player scripts\sp\utility::_id_F526("safe");
 
-  while(!scripts\engine\utility::flag("elevator_safe_flag"))
+  while(!scripts\engine\utility::flag("elevator_safe_flag")) {
     wait 0.05;
+  }
 
   var_4 = getEnt("lift_filler_clip_1", "targetname");
   var_4.origin = var_4.origin + (0, 0, -112);
@@ -85,8 +90,9 @@ _id_BAC8() {
   scripts\sp\maps\heist\heist_util::_id_4264("door_lift_lower_left", "door_lift_lower_right", 1);
   scripts\engine\utility::flag_clear("obj_getonlift");
 
-  while(level._id_92DA < 4)
+  while(level._id_92DA < 4) {
     scripts\engine\utility::waitframe();
+  }
 
   var_0 notify("stop_loop_salter");
   var_0 notify("stop_loop_ethan");
@@ -213,13 +219,15 @@ _id_AD16() {
   var_1 = undefined;
 
   foreach(var_3 in self) {
-    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "clip")
+    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "clip") {
       var_0 = var_3;
+    }
   }
 
   foreach(var_3 in self) {
-    if(isDefined(var_3.classname) && var_3.classname == "script_model")
+    if(isDefined(var_3.classname) && var_3.classname == "script_model") {
       var_1 = var_3;
+    }
   }
 
   var_0 linkTo(var_1);
@@ -232,19 +240,22 @@ _id_9773() {
   var_0 = undefined;
 
   foreach(var_2 in self) {
-    if(isDefined(var_2.classname) && var_2.classname == "script_model")
+    if(isDefined(var_2.classname) && var_2.classname == "script_model") {
       var_0 = var_2;
+    }
   }
 
   var_0 movez(76, 0.05);
 }
 
 _id_BC76(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 3.5;
+  }
 
   foreach(var_3 in self) {
     if(isDefined(var_3.classname) && var_3.classname == "script_model") {
@@ -268,11 +279,13 @@ _id_EBEE(var_0) {
   var_1 = var_0 scripts\sp\utility::_id_7DC1("elevator_idle");
   var_2 = getstartorigin(self.origin, self.angles, var_1[0]);
 
-  if(var_0 != level._id_A54E)
+  if(var_0 != level._id_A54E) {
     var_0 thread _id_3B1C(var_2);
+  }
 
-  if(var_0 == level._id_A54E)
+  if(var_0 == level._id_A54E) {
     wait 2;
+  }
 
   var_0 thread _id_AC7A();
   var_0 thread _id_92DB();
@@ -497,8 +510,9 @@ cargo_lift_preinit() {
 }
 
 _id_3A73() {
-  while(!isDefined(level._id_AC77))
+  while(!isDefined(level._id_AC77)) {
     scripts\engine\utility::waitframe();
+  }
 
   level._id_AC77._id_119F3 = scripts\engine\utility::get_target_ent("ref_top_lift");
   getEnt("origin_lift_scene", "targetname") linkTo(level._id_AC77);
@@ -520,8 +534,9 @@ _id_3A73() {
 
   var_4 = getEntArray("light_mons_lift_screen", "script_noteworthy");
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     scripts\engine\utility::array_call(var_4, ::linkto, level._id_AC77);
+  }
 
   scripts\engine\utility::waitframe();
   level._id_AC77 _meth_80AF(undefined);

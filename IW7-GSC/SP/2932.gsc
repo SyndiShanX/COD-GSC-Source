@@ -39,8 +39,9 @@ _id_10547(var_0) {
     thread _id_10557();
     thread _id_10539();
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       return;
+    }
   }
 }
 
@@ -82,12 +83,13 @@ _id_1054E() {
 }
 
 _id_1054D(var_0) {
-  if(var_0 == "attach")
+  if(var_0 == "attach") {
     return "vfx_magboot_light_green";
-  else if(var_0 == "detach")
+  } else if(var_0 == "detach") {
     return "vfx_magboot_light_red";
-  else if(var_0 == "off")
+  } else if(var_0 == "off") {
     return "vfx_magboot_light_orange";
+  }
 }
 
 _id_10548() {
@@ -115,16 +117,18 @@ _id_1054F(var_0, var_1) {
       foreach(var_3 in self._id_AB46) {
         var_4 = _id_1054D(self._id_AB40);
 
-        if(isDefined(var_4))
+        if(isDefined(var_4)) {
           killfxontag(scripts\engine\utility::getfx(var_4), var_3, "tag_origin");
+        }
       }
     }
 
     foreach(var_3 in self._id_AB46) {
       var_4 = _id_1054D(var_1);
 
-      if(isDefined(var_4))
+      if(isDefined(var_4)) {
         playFXOnTag(scripts\engine\utility::getfx(var_4), var_3, "tag_origin");
+      }
     }
 
     self._id_AB40 = var_1;
@@ -133,16 +137,18 @@ _id_1054F(var_0, var_1) {
       foreach(var_3 in self._id_E521) {
         var_4 = _id_1054D(self._id_E51B);
 
-        if(isDefined(var_4))
+        if(isDefined(var_4)) {
           killfxontag(scripts\engine\utility::getfx(var_4), var_3, "tag_origin");
+        }
       }
     }
 
     foreach(var_3 in self._id_E521) {
       var_4 = _id_1054D(var_1);
 
-      if(isDefined(var_4))
+      if(isDefined(var_4)) {
         playFXOnTag(scripts\engine\utility::getfx(var_4), var_3, "tag_origin");
+      }
     }
 
     self._id_E51B = var_1;
@@ -152,11 +158,13 @@ _id_1054F(var_0, var_1) {
 _id_1054A() {
   scripts\engine\utility::waittill_either("death", "delete_magboot_lights");
 
-  foreach(var_1 in self._id_AB46)
-  var_1 delete();
+  foreach(var_1 in self._id_AB46) {
+    var_1 delete();
+  }
 
-  foreach(var_1 in self._id_E521)
-  var_1 delete();
+  foreach(var_1 in self._id_E521) {
+    var_1 delete();
+  }
 }
 
 _id_1306D() {
@@ -338,16 +346,17 @@ _id_FC16() {
 }
 
 _id_FC17(var_0) {
-  if(level._id_10534._id_A4C4 == 1)
+  if(level._id_10534._id_A4C4 == 1) {
     var_0 = "scn_gravity_jump_land_01";
-  else if(level._id_10534._id_A4C4 == 2)
+  } else if(level._id_10534._id_A4C4 == 2) {
     var_0 = "scn_gravity_jump_land_02";
-  else if(level._id_10534._id_A4C4 == 3)
+  } else if(level._id_10534._id_A4C4 == 3) {
     var_0 = "scn_gravity_jump_land_03";
-  else if(level._id_10534._id_A4C4 == 4)
+  } else if(level._id_10534._id_A4C4 == 4) {
     var_0 = "scn_gravity_jump_land_04";
-  else if(level._id_10534._id_A4C4 == 5)
+  } else if(level._id_10534._id_A4C4 == 5) {
     var_0 = "scn_gravity_jump_land_05";
+  }
 
   self waittill("spacejump_land");
   self playSound(var_0);
@@ -359,11 +368,13 @@ _id_10557() {
     level.player thread _id_FC16();
     level._id_10534._id_A7B8.origin = var_0;
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       level._id_4B9B = var_4 getlinkedparent();
+    }
 
-    if(var_6)
+    if(var_6) {
       self waittill("spacejump_movertakeoff", var_0, var_1, var_2, var_3, var_4, var_5, var_6);
+    }
 
     var_7 = distance(self.origin, var_0);
     _id_10554(var_7, var_4);
@@ -372,8 +383,9 @@ _id_10557() {
     setglobalsoundcontext("spacejump", "jump", 2);
     level._id_10534._id_A4C4++;
 
-    if(scripts\engine\utility::flag("spacejump_gunless"))
+    if(scripts\engine\utility::flag("spacejump_gunless")) {
       scripts\engine\utility::allow_ads(0);
+    }
 
     scripts\engine\utility::allow_usability(0);
     scripts\engine\utility::allow_weapon_switch(0);
@@ -400,11 +412,13 @@ _id_10557() {
     destroynavrepulsor("spacejump_repulsor");
     level._id_10534._id_A7B8 _meth_8445();
 
-    if(var_8)
+    if(var_8) {
       level waittill("vignette_land_end");
+    }
 
-    if(scripts\engine\utility::flag("spacejump_gunless"))
+    if(scripts\engine\utility::flag("spacejump_gunless")) {
       scripts\engine\utility::allow_ads(1);
+    }
 
     scripts\engine\utility::allow_usability(1);
     scripts\engine\utility::allow_weapon_switch(1);
@@ -433,8 +447,9 @@ _id_10539() {
   for(;;) {
     self waittill("spacejump_fail", var_0, var_1, var_2, var_3, var_4, var_5, var_6);
 
-    while(self isgestureplaying("ges_grav_jump_gunless_fail") || self isgestureplaying("ges_grav_jump_combat_fail"))
+    while(self isgestureplaying("ges_grav_jump_gunless_fail") || self isgestureplaying("ges_grav_jump_combat_fail")) {
       scripts\engine\utility::waitframe();
+    }
   }
 }
 
@@ -455,10 +470,11 @@ _id_10536() {
   self waittill("deathshield", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
   setDvar("player_death_animated", 0);
 
-  if(isDefined(level._id_10534._id_4E21))
+  if(isDefined(level._id_10534._id_4E21)) {
     self _meth_84EB("ges_grav_jump_death_jackal_left", 0.2, level._id_10534._id_4E21);
-  else
+  } else {
     self _meth_84EB("ges_grav_jump_gunless_death", 0.2);
+  }
 
   scripts\sp\utility::_id_B8D1();
 }
@@ -470,8 +486,9 @@ _id_10535(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7 = var_3.script_animation + "_legs";
   var_8 = "ges_grav_jump_" + var_3.script_animation;
 
-  if(var_5 != "none")
+  if(var_5 != "none") {
     var_8 = var_8 + ("_" + var_5);
+  }
 
   _id_10555(var_8);
   _id_10556(var_0, var_1, var_6, var_7, var_8);
@@ -501,9 +518,9 @@ _id_10541(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7 = "";
   var_8 = "scn_gravity_jump_land_generic";
 
-  if(level._id_10534._id_A4C4 <= level._id_10534._id_11183)
+  if(level._id_10534._id_A4C4 <= level._id_10534._id_11183) {
     var_7 = "stumble_" + level._id_10534._id_A4C4;
-  else {
+  } else {
     var_9 = vectorNormalize(var_0 - self.origin);
     var_10 = anglestoup(var_1);
     var_11 = vectordot(var_9, var_10);
@@ -528,8 +545,9 @@ _id_10541(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_14 = var_7 + "_legs";
   var_15 = "ges_grav_jump_" + var_7;
 
-  if(var_5 != "none")
+  if(var_5 != "none") {
     var_15 = var_15 + ("_" + var_5);
+  }
 
   _id_10555(var_15);
   thread _id_FC17(var_8);

@@ -62,9 +62,9 @@ _id_9ABC() {
 }
 
 _id_5858() {
-  if(level.player scripts\engine\utility::is_player_gamepad_enabled())
+  if(level.player scripts\engine\utility::is_player_gamepad_enabled()) {
     scripts\sp\utility::_id_56BA("fly_controller");
-  else {
+  } else {
     thread scripts\sp\utility::_id_56BA("fly_kb");
     wait 0.05;
     thread _id_9EEC();
@@ -72,10 +72,11 @@ _id_5858() {
 }
 
 _id_9EAC() {
-  if(level.player scripts\engine\utility::is_player_gamepad_enabled())
+  if(level.player scripts\engine\utility::is_player_gamepad_enabled()) {
     return level.player getnormalizedmovement() != (0, 0, 0) || level.player _meth_814B() != (0, 0, 0);
-  else
+  } else {
     return level.player scripts\sp\utility::_id_65DB("isFlying");
+  }
 }
 
 _id_9EEC() {
@@ -89,13 +90,15 @@ _id_9EEC() {
 }
 
 _id_9CF7() {
-  if(level.player scripts\sp\utility::_id_65DB("switched_weapon_during_tutorial"))
+  if(level.player scripts\sp\utility::_id_65DB("switched_weapon_during_tutorial")) {
     return 1;
+  }
 
-  if(issubstr(level.player getcurrentweapon(), "hybrid_snow"))
+  if(issubstr(level.player getcurrentweapon(), "hybrid_snow")) {
     return !level.player _meth_8519(level.player getcurrentprimaryweapon());
-  else
+  } else {
     return level.player _meth_8519(level.player getcurrentprimaryweapon());
+  }
 }
 
 _id_9B50() {
@@ -108,8 +111,9 @@ _id_D42B() {
 
 _id_1873() {
   foreach(var_1 in level.createfxent) {
-    if(isDefined(var_1.v["exploder"]) && var_1.v["exploder"] == "clouds")
+    if(isDefined(var_1.v["exploder"]) && var_1.v["exploder"] == "clouds") {
       var_1.v["origin"] = var_1.v["origin"] + (-193, 1501, 0);
+    }
   }
 }
 
@@ -238,8 +242,9 @@ _id_5E21() {
   thread _id_A4E1();
 
   if(!scripts\sp\utility::_id_9BB5()) {
-    while(!isDefined(level._id_5D6C))
+    while(!isDefined(level._id_5D6C)) {
       wait 0.05;
+    }
   }
 
   scripts\engine\utility::array_thread(level._id_EBCA, scripts\sp\utility::_id_BE4A);
@@ -251,8 +256,9 @@ _id_5E21() {
   level._id_EBBB detach("head_hero_sipes_cine_hqss");
   level._id_EBBB attach(level._id_EBBB._id_C383);
 
-  if(isDefined(level._id_EBBC._id_8719))
+  if(isDefined(level._id_EBBC._id_8719)) {
     level._id_EBBC._id_8719 delete();
+  }
 
   scripts\sp\utility::_id_2669("jump");
   scripts\sp\maps\europa\europa_util::_id_134B7("europa_tee_gotimewolfcallit");
@@ -272,8 +278,9 @@ _id_5E21() {
   level._id_EBBC linkTo(level._id_EBCB, "tag_origin");
   level._id_EBCB thread scripts\sp\anim::_id_1F2C([level._id_EBBB, level._id_EBBC], "europa_dropship_halo_jump", "tag_origin");
 
-  if(level.console || level.player usinggamepad())
+  if(level.console || level.player usinggamepad()) {
     level.player lerpviewangleclamp(1, 0.5, 0.5, 10, 10, 10, 10);
+  }
 
   level.player _meth_8392(0, 1.6, 0.9);
   level.player _meth_81DE(65, 3);
@@ -364,10 +371,11 @@ _id_1C0C() {
   foreach(var_1 in level._id_EBCA) {
     playFXOnTag(scripts\engine\utility::getfx("thrust_loop"), var_1, "tag_fx_bottom");
 
-    if(var_1._id_1FBB == "scar1")
+    if(var_1._id_1FBB == "scar1") {
       var_1 playSound("scn_europa_scar1_boost");
-    else
+    } else {
       var_1 playSound("scn_europa_scar2_boost");
+    }
 
     wait 0.3;
   }
@@ -408,8 +416,9 @@ _id_AB79(var_0, var_1) {
 }
 
 _id_13760(var_0) {
-  while(_id_7945() < var_0)
+  while(_id_7945() < var_0) {
     wait 0.05;
+  }
 }
 
 _id_7945() {
@@ -527,15 +536,17 @@ _id_B2EC(var_0, var_1) {
   for(;;) {
     wait 0.05;
 
-    if(var_4 + var_5 < var_3)
+    if(var_4 + var_5 < var_3) {
       var_4 = clamp(var_4 + var_5, var_2, var_3);
-    else
+    } else {
       var_4 = var_3;
+    }
 
-    if(!var_8)
+    if(!var_8) {
       self._id_13D31 = _id_7D7D();
-    else
+    } else {
       var_8 = 0;
+    }
 
     while(!_id_9C77()) {
       self._id_13D78 = clamp(self._id_13D78 + var_4, 0, var_6);
@@ -550,20 +561,22 @@ _id_B2EC(var_0, var_1) {
 }
 
 _id_9C77() {
-  if(level.console || level.player usinggamepad())
+  if(level.console || level.player usinggamepad()) {
     return length(level.player getnormalizedmovement()) >= 0.1 || length(level.player _meth_814B()) >= 0.1;
-  else
+  } else {
     return length(level.player getnormalizedmovement()) >= 0.1;
+  }
 }
 
 _id_7D7D() {
   var_0 = scripts\sp\math::_id_7ADE(level._id_EBCA[0].origin, level._id_EBCA[1].origin);
   var_0 = scripts\sp\math::_id_7ADE(var_0, level._id_EBCA[0].origin);
 
-  if(level.player getEye()[0] > var_0[0])
+  if(level.player getEye()[0] > var_0[0]) {
     return anglesToForward(level.player._id_8892.angles);
-  else
+  } else {
     return anglesToForward(level.player._id_8892.angles) * -1;
+  }
 }
 
 _id_CFDD(var_0, var_1, var_2) {
@@ -590,10 +603,11 @@ _id_CFDD(var_0, var_1, var_2) {
   self._id_11535 = self._id_11535 + var_9[0] * var_6;
   self._id_11533 = self._id_11533 + var_9[1] * var_6;
 
-  if(self._id_11535 > var_5)
+  if(self._id_11535 > var_5) {
     self._id_11535 = var_5;
-  else if(self._id_11535 < var_5 * -1)
+  } else if(self._id_11535 < var_5 * -1) {
     self._id_11535 = var_5 * -1;
+  }
 
   self._id_11535 = self._id_11535 * var_4;
   self._id_11533 = self._id_11533 * var_4;
@@ -650,46 +664,54 @@ _id_CFE2(var_0, var_1, var_2, var_3, var_4, var_5) {
   self notify("stop_current_anim_time_lerp" + var_5);
   self endon("stop_current_anim_time_lerp" + var_5);
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 1;
+  }
 
-  if(var_1 == 1)
+  if(var_1 == 1) {
     var_1 = 0.999;
-  else if(var_1 == 0)
+  } else if(var_1 == 0) {
     var_1 = 0.001;
+  }
 
   var_6 = getanimlength(var_0);
   var_2 = var_2 * var_6;
   var_3 = var_3 * var_6;
 
-  if(!isDefined(self._id_1EE3))
+  if(!isDefined(self._id_1EE3)) {
     self._id_1EE3 = [];
+  }
 
-  if(!isDefined(self._id_1EE3[var_5]))
+  if(!isDefined(self._id_1EE3[var_5])) {
     self._id_1EE3[var_5] = 0.0;
+  }
 
   for(var_7 = self islegacyagent(var_0); abs(var_7 - var_1) > 0.0; var_7 = self islegacyagent(var_0)) {
     var_8 = (var_1 - var_7) * var_6 / 0.05;
     var_9 = abs(self._id_1EE3[var_5] - var_8);
 
-    if(var_9 < var_2)
+    if(var_9 < var_2) {
       self._id_1EE3[var_5] = var_8;
+    }
 
-    if(self._id_1EE3[var_5] < var_8)
+    if(self._id_1EE3[var_5] < var_8) {
       self._id_1EE3[var_5] = self._id_1EE3[var_5] + var_2;
-    else
+    } else {
       self._id_1EE3[var_5] = self._id_1EE3[var_5] - var_2;
+    }
 
-    if(abs(self._id_1EE3[var_5]) > var_3)
+    if(abs(self._id_1EE3[var_5]) > var_3) {
       self._id_1EE3[var_5] = self._id_1EE3[var_5] * (var_3 / abs(self._id_1EE3[var_5]));
+    }
 
     var_10 = 1;
     var_11 = abs(var_1 - var_7);
 
-    if(self._id_1EE3[var_5] > 0 && var_1 > var_7)
+    if(self._id_1EE3[var_5] > 0 && var_1 > var_7) {
       var_10 = scripts\sp\math::_id_C097(0, var_4, var_11);
-    else if(self._id_1EE3[var_5] < 0 && var_1 < var_7)
+    } else if(self._id_1EE3[var_5] < 0 && var_1 < var_7) {
       var_10 = scripts\sp\math::_id_C097(0, var_4, var_11);
+    }
 
     self._id_1EE3[var_5] = self._id_1EE3[var_5] * var_10;
     self _meth_82B1(var_0, self._id_1EE3[var_5]);
@@ -721,10 +743,11 @@ _id_5727() {
     var_10 = scripts\sp\math::_id_7ADE(level._id_EBCA[0].origin, level._id_EBCA[1].origin);
     self._id_7440 = scripts\sp\math::_id_C097(0, var_0, var_9);
 
-    if(level.player getEye()[0] > var_10[0])
+    if(level.player getEye()[0] > var_10[0]) {
       var_11 = "right";
-    else
+    } else {
       var_11 = "left";
+    }
 
     if(self._id_7440 <= 0.175) {
       var_7 = undefined;
@@ -757,12 +780,14 @@ _id_5727() {
       var_4 = var_4 + 1;
       var_12 = _id_E758(scripts\engine\utility::mod(var_3, 5));
 
-      if(!var_12)
+      if(!var_12) {
         thread _id_B293("white", var_11, 9);
+      }
     }
 
-    if(var_4 > var_5)
+    if(var_4 > var_5) {
       thread _id_D1D3();
+    }
 
     if(isDefined(var_7)) {
       if(!isDefined(var_8) || var_7 != var_8) {
@@ -801,12 +826,13 @@ _id_D1D3() {
 _id_B293(var_0, var_1, var_2) {
   level endon("lightning_death");
 
-  if(var_0 == "white")
+  if(var_0 == "white") {
     var_0 = (1, 1, 1);
-  else if(var_0 == "orange")
+  } else if(var_0 == "orange") {
     var_0 = (1, 0.5, 0);
-  else
+  } else {
     var_0 = (1, 0, 0);
+  }
 
   if(var_1 == "left") {
     var_2 = var_2 * -1;
@@ -870,8 +896,9 @@ _id_E758(var_0) {
 }
 
 _id_5E22() {
-  if(getdvarint("debug_europa"))
+  if(getdvarint("debug_europa")) {
     iprintln("opening umbra portal 'halo_portal' ");
+  }
 
   setumbraportalstate("halo_portal", 1);
 
@@ -915,8 +942,9 @@ _id_8891() {
     var_2 = level.player getnormalizedmovement();
     var_3 = var_2[1];
 
-    if(var_3 < 0)
+    if(var_3 < 0) {
       var_3 = var_3 * -1;
+    }
 
     if(var_3 > 0.15) {
       if(var_0 == 0) {
@@ -975,8 +1003,9 @@ _id_D1B3() {
     level._id_6E87 stopsounds();
     wait 0.05;
 
-    if(isDefined(level._id_6E87))
+    if(isDefined(level._id_6E87)) {
       level._id_6E87 delete();
+    }
   }
 
   level.player._id_8632 rotateTo((0, 0, 0), 0.5);
@@ -985,23 +1014,27 @@ _id_D1B3() {
   level.player._id_8632 delete();
   thread scripts\sp\maps\europa\europa_util::_id_DF3E();
 
-  if(isDefined(level._id_D267))
+  if(isDefined(level._id_D267)) {
     level._id_D267 delete();
+  }
 
   level.player._id_8892 delete();
 
-  if(isDefined(level._id_1178C))
+  if(isDefined(level._id_1178C)) {
     level._id_1178C delete();
+  }
 
-  if(isDefined(level._id_1178D))
+  if(isDefined(level._id_1178D)) {
     level._id_1178D delete();
+  }
 }
 
 _id_F562(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_2 = var_0;
-  else
+  } else {
     var_2 = 1;
+  }
 
   var_3 = 0.85 * var_2;
   var_4 = 0.22 * var_2;
@@ -1015,10 +1048,11 @@ _id_DC5D(var_0) {
   var_1 = getdvarfloat("r_mbRadialoverridechromaticAberration");
   var_2 = getdvarfloat("r_mbradialoverridestrength");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_3 = var_0;
-  else
+  } else {
     var_3 = 1;
+  }
 
   var_1 = 0;
   var_2 = 0;
@@ -1051,26 +1085,30 @@ _id_DFCD() {
 }
 
 _id_5DFD() {
-  if(getdvarint("debug_europa"))
+  if(getdvarint("debug_europa")) {
     iprintln("hiding intro_surface_vista_01");
+  }
 
   var_0 = getEnt("intro_surface_vista_01", "targetname");
   var_0 hide();
 
-  if(getdvarint("debug_europa"))
+  if(getdvarint("debug_europa")) {
     iprintln("hiding base_reveal_vista");
+  }
 
   scripts\sp\maps\europa\europa_util::toggle_cockpit_lights(0);
   scripts\engine\utility::flag_wait("clouds_idle_start");
 
-  if(getdvarint("debug_europa"))
+  if(getdvarint("debug_europa")) {
     iprintln("opening umbra portal named 'halo_portal' ");
+  }
 
   setumbraportalstate("halo_portal", 1);
   wait 6;
 
-  if(getdvarint("debug_europa"))
+  if(getdvarint("debug_europa")) {
     iprintln("show intro_surface_vista_01");
+  }
 
   var_0 show();
 }
@@ -1100,8 +1138,9 @@ _id_8890() {
 
   for(;;) {
     if(level.player _meth_81CE()) {
-      if(isDefined(level._id_CFE4._id_2A4C))
+      if(isDefined(level._id_CFE4._id_2A4C)) {
         level._id_CFE4._id_2A4C scripts\sp\utility::_id_10460(0.05, 1);
+      }
 
       if(var_0 - var_1 > 0) {
         var_0 = var_0 - var_1;
@@ -1175,13 +1214,15 @@ _id_D1B4() {
 _id_D1B9() {
   var_0 = scripts\sp\utility::_id_864C(level.player.origin);
 
-  while(level.player.origin[2] - var_0[2] > 500)
+  while(level.player.origin[2] - var_0[2] > 500) {
     wait 0.05;
+  }
 
   playFX(scripts\engine\utility::getfx("landing_kickup_dist"), var_0);
 
-  while(level.player.origin[2] - var_0[2] > 325)
+  while(level.player.origin[2] - var_0[2] > 325) {
     wait 0.05;
+  }
 
   playFX(scripts\engine\utility::getfx("landing_kickup"), var_0);
   level waittill("player_landed");
@@ -1210,8 +1251,9 @@ _id_59E8() {
   scripts\engine\utility::flag_wait("dropship_door_open");
   scripts\engine\utility::delaythread(3, ::_id_5E1B);
 
-  if(getdvarint("debug_europa"))
+  if(getdvarint("debug_europa")) {
     iprintln("dropship_door_open FX");
+  }
 
   wait 0.7;
   level.player playRumbleOnEntity("heavy_3s");
@@ -1227,8 +1269,9 @@ _id_59E8() {
   var_3 = scripts\engine\utility::spawn_tag_origin(var_2.origin, var_2.angles);
   var_3 playLoopSound("scn_europa_dropship_door_wind_lp");
 
-  if(getdvarint("debug_europa"))
+  if(getdvarint("debug_europa")) {
     iprintln("ex_door_open exploder");
+  }
 
   scripts\engine\utility::exploder("ex_door_open");
   thread _id_5E45();
@@ -1245,8 +1288,9 @@ _id_5E1B() {
 _id_5E45() {}
 
 _id_8893() {
-  if(scripts\engine\utility::flag("halo_jump_start"))
+  if(scripts\engine\utility::flag("halo_jump_start")) {
     return 1;
+  }
 
   return 0;
 }
@@ -1297,11 +1341,11 @@ _id_5E23() {
     var_5 = clamp(var_5, 15, 40);
     var_6 = var_0;
 
-    if(var_0 > 0.4)
+    if(var_0 > 0.4) {
       level.player _meth_8291((var_6 + 0.35) * (var_6 + 0.35) * 1.5, var_6, (var_6 + 0.35) * (var_6 + 0.35) * 2.0, var_3, 0, -1, 0, var_5, var_5, var_5);
-    else if(var_0 > 0.12)
+    } else if(var_0 > 0.12) {
       level.player _meth_8291(var_6 * 1.5, var_6 * 1.2, var_6 * 2.0, var_3, 0, -1, 0, var_5, var_5, var_5);
-    else {
+    } else {
       var_6 = 0.05;
       level.player _meth_8291(var_6 * 1.5, var_6, var_6 * 2.0, var_3, 0, -1, 0, var_5, var_5, var_5);
     }
@@ -1337,11 +1381,13 @@ _id_A837() {
   wait 1;
   var_0 = scripts\sp\utility::_id_864C(self.origin);
 
-  if(self == level._id_EBBB)
+  if(self == level._id_EBBB) {
     self playSound("scn_europa_scar1_land");
+  }
 
-  if(self == level._id_EBBC)
+  if(self == level._id_EBBC) {
     self playSound("scn_europa_scar2_land");
+  }
 
   playFX(scripts\engine\utility::getfx("landing_kickup"), var_0);
   wait 1.3;
@@ -1452,8 +1498,9 @@ _id_888C(var_0, var_1, var_2) {
 
     if(isDefined(var_2)) {
       if(var_5 < var_8) {
-        if(!isDefined(level.player._id_58DF) || level.player._id_58DF == 0)
+        if(!isDefined(level.player._id_58DF) || level.player._id_58DF == 0) {
           level.player._id_8894 playSound("scn_europa_halo_altitude_beep");
+        }
 
         var_8 = floor(var_5 / var_7) * var_7;
       }
@@ -1475,10 +1522,11 @@ _id_888F(var_0, var_1) {
     while(var_4 > var_3) {
       var_4 = var_4 - var_5;
 
-      if(abs(var_4 - var_3) < 1)
+      if(abs(var_4 - var_3) < 1) {
         setomnvar("ui_helmet_meter_temperature", int(var_3));
-      else
+      } else {
         setomnvar("ui_helmet_meter_temperature", int(var_3));
+      }
 
       wait 0.05;
     }
@@ -1486,10 +1534,11 @@ _id_888F(var_0, var_1) {
     while(var_4 < var_3) {
       var_4 = var_4 - var_5;
 
-      if(abs(var_4 - var_3) < 1)
+      if(abs(var_4 - var_3) < 1) {
         setomnvar("ui_helmet_meter_temperature", int(var_3));
-      else
+      } else {
         setomnvar("ui_helmet_meter_temperature", int(var_4));
+      }
 
       wait 0.05;
     }
@@ -1553,8 +1602,9 @@ _id_4212() {
 _id_4209() {
   thread _id_0B11::_id_CCBE();
 
-  if(scripts\engine\utility::flag("player_boost_failed"))
+  if(scripts\engine\utility::flag("player_boost_failed")) {
     level waittill("forever");
+  }
 
   scripts\sp\utility::_id_2669("cliffjumper");
   thread _id_420E();
@@ -1587,8 +1637,9 @@ _id_4211() {
   var_0 = scripts\engine\utility::getStruct("jump_obj", "targetname");
   objective_position(1, var_0.origin - (0, 0, 56));
 
-  if(level._id_7683 < 2)
+  if(level._id_7683 < 2) {
     objective_setpointertextoverride(1, &"EUROPA_JUMPIN");
+  }
 
   scripts\engine\utility::flag_wait("cliffjump_start");
   objective_position(1, (0, 0, 0));
@@ -1598,14 +1649,16 @@ _id_420E() {
   scripts\engine\utility::flag_wait("cliffjump_start");
   wait 3;
 
-  if(getdvarint("debug_europa"))
+  if(getdvarint("debug_europa")) {
     iprintln("hiding intro_surface_vista_01");
+  }
 
   var_0 = getEnt("intro_surface_vista_01", "targetname");
   var_0 hide();
 
-  if(getdvarint("debug_europa"))
+  if(getdvarint("debug_europa")) {
     iprintln("hiding intro_surface_vista_01");
+  }
 }
 
 _id_7451() {
@@ -1655,19 +1708,21 @@ _id_AB7E() {
     if(scripts\sp\math::_id_D638(level.player.origin, var_6, var_5, var_4)) {
       var_1 = 0;
 
-      if(gettime() > var_8)
+      if(gettime() > var_8) {
         var_11 = 0.002;
-      else
+      } else {
         var_11 = 0;
+      }
     } else {
       var_12 = distance2dsquared(level.player.origin, var_6) < distance2dsquared(var_7, var_6);
 
       if(!var_1) {}
 
-      if(var_12)
+      if(var_12) {
         var_11 = 0.005;
-      else
+      } else {
         var_11 = 0.02;
+      }
     }
 
     level._id_7452.alpha = level._id_7452.alpha + var_11;
@@ -1687,8 +1742,9 @@ _id_AB7E() {
       level.player thread scripts\sp\maps\europa\europa_util::_id_12992();
       level.player scripts\engine\utility::delaythread(5, scripts\sp\maps\europa\europa_util::_id_12970);
 
-      if(var_10 == 2)
+      if(var_10 == 2) {
         thread start_player_freezing_sfx();
+      }
     }
 
     wait 0.225;
@@ -1725,8 +1781,9 @@ _id_738B() {
   }
   level notify("froze_to_death");
 
-  if(isDefined(level.freeze_sfx_org))
+  if(isDefined(level.freeze_sfx_org)) {
     level.freeze_sfx_org scripts\engine\utility::delaycall(1.0, ::stopsounds);
+  }
 
   level.player.death._id_1025C = 1;
   _id_0B60::_id_F322("EUROPA_FREEZE_DEATH");
@@ -1783,8 +1840,9 @@ _id_10ACC() {
 }
 
 _id_EBC2() {
-  while(self _meth_81A6())
+  while(self _meth_81A6()) {
     wait 0.05;
+  }
 
   scripts\sp\utility::_id_61E7();
 
@@ -1801,15 +1859,17 @@ _id_420C() {
   var_0 = getEnt("intro_surface_vista_01", "targetname");
   var_0 hide();
 
-  if(getdvarint("debug_europa"))
+  if(getdvarint("debug_europa")) {
     iprintln("Hiding 'intro_surface_vista_01' ");
+  }
 
   thread _id_0B11::_id_CCBE();
 }
 
 _id_134C2() {
-  if(level._id_10CDA == "cliffjumper")
+  if(level._id_10CDA == "cliffjumper") {
     wait 1.5;
+  }
 
   setglobalsoundcontext("storm", "storm_ext", 1.0);
   scripts\sp\maps\europa\europa_util::_id_134B7("europa_plr_surfacetemps300");
@@ -1893,8 +1953,9 @@ _id_41FF() {
 
   scripts\engine\utility::delaythread(1, ::_id_4201);
 
-  if(isDefined(level.player._id_737C))
+  if(isDefined(level.player._id_737C)) {
     level.player._id_737C thread _id_C800(0, 0.5);
+  }
 
   foreach(var_1 in level._id_EBCA) {
     var_1._id_B015 notify("stop_loop");
@@ -1989,8 +2050,9 @@ _id_6ADE() {
     playFX(level._effect["bullet_tracer"], var_5, anglesToForward(var_8), anglestoup(var_8));
     wait 0.05;
 
-    if(isDefined(level._id_421D._id_D04B))
+    if(isDefined(level._id_421D._id_D04B)) {
       playFX(level._id_7649["human_gib_head"], scripts\engine\utility::getStruct("blood_pool_struct", "targetname").origin);
+    }
 
     wait(randomfloatrange(0.15, 0.25));
     var_9 = scripts\sp\utility::_id_864C(var_6 + (0, 0, 10));
@@ -2026,14 +2088,16 @@ _id_78A5() {
 
 _id_F300(var_0) {
   foreach(var_2 in level._id_421D._id_1684) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2 _meth_82B1(var_2 scripts\sp\utility::_id_7DC1("cliffjumper"), var_0);
+    }
   }
 }
 
 _id_13745(var_0) {
-  while(_id_78A6() < var_0)
+  while(_id_78A6() < var_0) {
     wait 0.05;
+  }
 }
 
 _id_4201() {}
@@ -2043,16 +2107,19 @@ _id_4213(var_0) {
   scripts\engine\utility::exploder("le_clouds");
   var_1 = level._id_421D._id_D04B.origin;
 
-  while(level.player.origin[2] - var_1[2] > 500)
+  while(level.player.origin[2] - var_1[2] > 500) {
     wait 0.05;
+  }
 
-  while(!level._id_CF99)
+  while(!level._id_CF99) {
     wait 0.05;
+  }
 
   playFX(scripts\engine\utility::getfx("landing_kickup_dist"), var_1);
 
-  while(level.player.origin[2] - var_1[2] > 325)
+  while(level.player.origin[2] - var_1[2] > 325) {
     wait 0.05;
+  }
 
   playFX(scripts\engine\utility::getfx("landing_kickup"), var_1);
 }
@@ -2069,8 +2136,9 @@ _id_AD0C(var_0) {
   var_8 = scripts\sp\math::_id_C097(var_6, var_5, var_7);
   var_9 = scripts\sp\math::_id_6A8E(var_3, var_4, var_8);
 
-  if(level.player istouching(getEnt("freaking_lerp_quicker", "targetname")))
+  if(level.player istouching(getEnt("freaking_lerp_quicker", "targetname"))) {
     var_9 = 0.5;
+  }
 
   level.player thread scripts\sp\maps\europa\europa_util::_id_D85C();
   level.player _meth_823C(var_0._id_D267, "tag_player", var_9);
@@ -2080,8 +2148,9 @@ _id_AD0C(var_0) {
   thread _id_10135();
   scripts\engine\utility::flag_wait("cliffjump_complete");
 
-  if(isDefined(level._id_4214))
+  if(isDefined(level._id_4214)) {
     level._id_4214 delete();
+  }
 
   level.player scripts\sp\maps\europa\europa_util::_id_DF3E();
   var_0._id_D267 delete();
@@ -2090,8 +2159,9 @@ _id_AD0C(var_0) {
 _id_10135() {
   level endon("cliffjump_complete");
 
-  while(!isDefined(level._id_4214))
+  while(!isDefined(level._id_4214)) {
     wait 0.05;
+  }
 
   level._id_4214 show();
 }
@@ -2103,13 +2173,15 @@ _id_420A(var_0) {
   thread _id_4202(var_0);
   thread _id_4206(var_0);
 
-  while(!level._id_CF99)
+  while(!level._id_CF99) {
     wait 0.05;
+  }
 
   thread _id_5FB3();
 
-  if(scripts\engine\utility::flag("boost_required_end"))
+  if(scripts\engine\utility::flag("boost_required_end")) {
     return;
+  }
 }
 
 _id_420B() {
@@ -2118,8 +2190,9 @@ _id_420B() {
 }
 
 _id_4206(var_0) {
-  while(distancesquared(level.player.origin, var_0._id_D04B.origin) > squared(1400))
+  while(distancesquared(level.player.origin, var_0._id_D04B.origin) > squared(1400)) {
     wait 0.05;
+  }
 
   if(level._id_CF99) {
     return;
@@ -2204,8 +2277,9 @@ _id_4207() {
   var_0 = scripts\engine\utility::getStructArray("drop_landing_start", "targetname");
 
   foreach(var_2 in var_0) {
-    if(var_2.script_noteworthy != "scar2")
+    if(var_2.script_noteworthy != "scar2") {
       level._id_EBBB _meth_80F1(var_2.origin, var_2.angles, 50000);
+    }
   }
 
   level._id_EBBB scripts\sp\utility::_id_4145();
@@ -2250,10 +2324,11 @@ _id_D86B() {
   notifyoncommand("playerjump", "+moveup");
 
   while(var_0 == 0) {
-    if(!level._id_7683)
+    if(!level._id_7683) {
       level.player scripts\engine\utility::waittill_notify_or_timeout("playerjump", 20);
-    else
+    } else {
       level.player waittill("playerjump");
+    }
 
     level notify("change_camera_shake");
     var_0 = 1;
@@ -2275,8 +2350,9 @@ _id_D86A() {
 }
 
 _id_2CB4() {
-  if(level._id_CF99 == 1 || scripts\engine\utility::flag("player_boosted"))
+  if(level._id_CF99 == 1 || scripts\engine\utility::flag("player_boosted")) {
     return 1;
+  }
 
   return 0;
 }
@@ -2305,10 +2381,11 @@ _id_5EA4() {
   level._id_5D6C._id_1FBB = "dropship";
   level._id_5D6C scripts\sp\anim::_id_F64A();
 
-  if(scripts\sp\utility::hastag(level._id_5D6C.model, "tag_origin"))
+  if(scripts\sp\utility::hastag(level._id_5D6C.model, "tag_origin")) {
     level._id_5D6C._id_E6E8 = "tag_origin";
-  else
+  } else {
     level._id_5D6C._id_E6E8 = level._id_5D6C.model;
+  }
 
   level._id_5D6C thread _id_5D91();
 }
@@ -2332,7 +2409,8 @@ _id_5D91() {
   }
 
   if(isDefined(self._id_E4FB)) {
-    foreach(var_6 in self._id_E4FB)
-    var_6 delete();
+    foreach(var_6 in self._id_E4FB) {
+      var_6 delete();
+    }
   }
 }

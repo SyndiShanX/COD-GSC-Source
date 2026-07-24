@@ -13,8 +13,9 @@ _id_F171(var_0, var_1, var_2, var_3) {
   var_4 = getclosestpointonnavmesh(self.origin);
   var_5 = distancesquared(var_4, self.origin);
 
-  if(var_5 > squared(15))
+  if(var_5 > squared(15)) {
     return 1;
+  }
 
   return 0;
 }
@@ -23,10 +24,11 @@ _id_11701(var_0, var_1) {
   var_2 = anim.asm[var_0].states[var_1];
   var_3 = undefined;
 
-  if(isarray(var_2._id_116FB))
+  if(isarray(var_2._id_116FB)) {
     var_3 = var_2._id_116FB[0];
-  else
+  } else {
     var_3 = var_2._id_116FB;
+  }
 
   scripts\asm\asm::_id_2388(var_0, var_1, var_2, var_2._id_116FB);
   scripts\asm\asm::_id_238A(var_0, var_3, 0.2, undefined, undefined, undefined);
@@ -44,8 +46,9 @@ _id_F16E(var_0, var_1, var_2, var_3) {
 }
 
 _id_F16C(var_0, var_1, var_2, var_3) {
-  if(isDefined(self._id_2029))
+  if(isDefined(self._id_2029)) {
     self._id_2029 delete();
+  }
 
   self._id_EA0E = 1;
   stopFXOnTag(level._id_7649["seeker_" + self.team], self, "tag_fx");
@@ -68,8 +71,9 @@ _id_F16C(var_0, var_1, var_2, var_3) {
 }
 
 isfactorinuse(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.pathgoalpos))
+  if(!isDefined(self.pathgoalpos)) {
     return 0;
+  }
 
   var_4 = vectortoangles(self.lookaheaddir);
   self orientmode("face angle", var_4[1]);
@@ -156,10 +160,11 @@ _id_D561(var_0, var_1, var_2, var_3) {
   var_7 = 0;
 
   if(isDefined(var_3)) {
-    if(isarray(var_3))
+    if(isarray(var_3)) {
       var_7 = var_3[0];
-    else
+    } else {
       var_7 = var_3;
+    }
   } else if(isDefined(var_4._id_126D4))
     var_7 = var_4._id_126D5;
 
@@ -185,8 +190,9 @@ _id_A4E8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_18 = scripts\common\trace::ray_trace(var_16, var_10, self, var_17);
     var_19 = scripts\common\trace::ray_trace(var_16, var_11, self, var_17);
 
-    if(var_18["fraction"] < 0.95 || var_19["fraction"] < 0.95)
+    if(var_18["fraction"] < 0.95 || var_19["fraction"] < 0.95) {
       return;
+    }
   }
 
   var_20 = _id_3EA3(var_0, var_1, "takeoff");
@@ -259,11 +265,13 @@ _id_F154(var_0) {
 }
 
 _id_9FBC(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.melee.target))
+  if(!isDefined(self.melee.target)) {
     return 0;
+  }
 
-  if(var_3 == "player")
+  if(var_3 == "player") {
     return isPlayer(self.melee.target);
+  }
 
   return isDefined(self.melee.target.unittype) && tolower(self.melee.target.unittype) == tolower(var_3);
 }

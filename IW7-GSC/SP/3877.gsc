@@ -4,8 +4,9 @@
 **************************************/
 
 _id_11408() {
-  if(!isDefined(self._id_11400))
+  if(!isDefined(self._id_11400)) {
     _id_11406();
+  }
 
   _id_1140B(1);
 }
@@ -16,11 +17,13 @@ _id_11407() {
 }
 
 _id_1140B(var_0, var_1) {
-  if(!isDefined(self._id_11400))
+  if(!isDefined(self._id_11400)) {
     _id_11406();
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 4;
+  }
 
   self._id_11400["enabled"] = var_0;
   self._id_11400["action_slot"] = var_1;
@@ -28,8 +31,9 @@ _id_1140B(var_0, var_1) {
 }
 
 _id_1140C(var_0) {
-  if(!isDefined(self._id_11400))
+  if(!isDefined(self._id_11400)) {
     _id_11406();
+  }
 
   self._id_11400["marking_enabled"] = var_0;
   var_1 = _id_11401();
@@ -54,8 +58,9 @@ _id_1140C(var_0) {
       if(issentient(var_3) && !isalive(var_3)) {
         continue;
       }
-      if(isDefined(var_3._id_113F3) && isDefined(var_3._id_113F3[self getentitynumber()]))
+      if(isDefined(var_3._id_113F3) && isDefined(var_3._id_113F3[self getentitynumber()])) {
         var_3 _id_113D9(self);
+      }
     }
   }
 }
@@ -66,18 +71,21 @@ _id_113D9(var_0, var_1) {
     level._id_11414 = 1;
   }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   if(!isDefined(self) || issentient(self) && !isalive(self)) {
-    if(isDefined(self))
+    if(isDefined(self)) {
       _id_113E2(0);
+    }
 
     return;
   }
 
-  if(var_1 && (!isDefined(self._id_113F3) || !isDefined(self._id_113F3[var_0 getentitynumber()]) || !self._id_113F3[var_0 getentitynumber()]))
+  if(var_1 && (!isDefined(self._id_113F3) || !isDefined(self._id_113F3[var_0 getentitynumber()]) || !self._id_113F3[var_0 getentitynumber()])) {
     var_0 thread scripts\sp\utility::play_sound_on_entity("drone_tag_success");
+  }
 
   self._id_113F3[var_0 getentitynumber()] = 1;
   _id_113E2(1);
@@ -99,31 +107,35 @@ _id_113DA(var_0, var_1) {
   var_0 endon("disconnect");
 
   if(!isDefined(self) || issentient(self) && !isalive(self)) {
-    if(isDefined(self))
+    if(isDefined(self)) {
       _id_113E2(0);
+    }
 
     return;
   }
 
   var_2 = var_0 getentitynumber();
 
-  if(!isDefined(var_0._id_113E1))
+  if(!isDefined(var_0._id_113E1)) {
     var_0._id_113E1 = 0;
+  }
 
   var_3 = isDefined(self._id_113F3) && scripts\engine\utility::is_true(self._id_113F3[var_2]);
 
   for(var_4 = 1; var_1 && getdvarint("ai_threatsight", 1); var_3 = isDefined(self._id_113F3) && scripts\engine\utility::is_true(self._id_113F3[var_2])) {
     self._id_113F9 = 1;
 
-    if(var_4)
+    if(var_4) {
       _id_113E2(1, "dead");
-    else
+    } else {
       _id_113E2(var_3);
+    }
 
     var_5 = var_0._id_113E1 - gettime();
 
-    if(var_5 > 0)
+    if(var_5 > 0) {
       wait(float(var_5) / 1000.0);
+    }
 
     var_4 = !var_4;
     var_0._id_113E1 = gettime() + 200;
@@ -179,8 +191,9 @@ _id_1140E() {
   self notify("tagging_shutdown");
   _id_1140B(0);
 
-  if(isDefined(self._id_11400) && isDefined(self._id_11400["camera"]))
+  if(isDefined(self._id_11400) && isDefined(self._id_11400["camera"])) {
     self._id_11400["camera"] delete();
+  }
 
   self._id_11400 = undefined;
 }
@@ -213,8 +226,9 @@ _id_11412() {
     }
     var_0 = self._id_11400["enabled"] && self._id_11400["outline_enabled"];
 
-    if(var_0 && (scripts\sp\utility::_id_9D27() || _id_1140D()))
+    if(var_0 && (scripts\sp\utility::_id_9D27() || _id_1140D())) {
       _id_113EC();
+    }
 
     wait 0.05;
   }
@@ -255,8 +269,9 @@ _id_113EC() {
     if(!var_10) {
       var_11 = var_9 gettagorigin("tag_origin");
 
-      if(isai(var_9))
+      if(isai(var_9)) {
         var_11 = var_9 getEye();
+      }
 
       var_12 = distance(var_11, var_1);
 
@@ -297,8 +312,9 @@ _id_650C() {
   if(isDefined(self._id_11411)) {
     return;
   }
-  if(!isDefined(self._id_1140F))
+  if(!isDefined(self._id_1140F)) {
     self._id_1140F = 0;
+  }
 
   if(!isDefined(level._id_11410)) {
     level._id_11410 = [];
@@ -338,22 +354,26 @@ _id_6509(var_0) {
   var_2 = level.player getEye();
 
   if(!var_1 && var_0 scripts\sp\utility::hastag(var_0.model, "j_head")) {
-    if(sighttracepassed(var_2, var_0 gettagorigin("j_head"), 0, var_0._id_101E1, var_0, 0))
+    if(sighttracepassed(var_2, var_0 gettagorigin("j_head"), 0, var_0._id_101E1, var_0, 0)) {
       var_1 = 1;
+    }
   }
 
   if(!var_1 && var_0 scripts\sp\utility::hastag(var_0.model, "j_spinelower")) {
-    if(sighttracepassed(var_2, var_0 gettagorigin("j_spinelower"), 0, var_0._id_101E1, var_0, 0))
+    if(sighttracepassed(var_2, var_0 gettagorigin("j_spinelower"), 0, var_0._id_101E1, var_0, 0)) {
       var_1 = 1;
+    }
   }
 
   if(!var_1 && var_0 scripts\sp\utility::hastag(var_0.model, "tag_attach")) {
-    if(sighttracepassed(var_2, var_0 gettagorigin("tag_attach"), 0, var_0._id_101E1, var_0, 0))
+    if(sighttracepassed(var_2, var_0 gettagorigin("tag_attach"), 0, var_0._id_101E1, var_0, 0)) {
       var_1 = 1;
+    }
   }
 
-  if(!var_1 && sighttracepassed(var_2, var_0.origin, 0, var_0._id_101E1, var_0, 0))
+  if(!var_1 && sighttracepassed(var_2, var_0.origin, 0, var_0._id_101E1, var_0, 0)) {
     var_1 = 1;
+  }
 
   return var_1;
 }
@@ -361,16 +381,18 @@ _id_6509(var_0) {
 _id_113EB(var_0, var_1, var_2) {
   var_3 = gettime();
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   var_4 = getdvarint("tagging_normal_pulse_rate");
   var_5 = getdvarint("tagging_normal_prep_time");
   var_6 = getdvarint("tagging_normal_track_time");
   var_7 = 0;
 
-  if(!var_1._id_11400["marking_enabled"])
+  if(!var_1._id_11400["marking_enabled"]) {
     var_0 = "range";
+  }
 
   switch (var_0) {
     case "view":
@@ -407,12 +429,14 @@ _id_113EB(var_0, var_1, var_2) {
   var_8 = var_6 + var_5;
   var_9 = 0;
 
-  if(isDefined(self._id_113EA))
+  if(isDefined(self._id_113EA)) {
     var_9 = var_3 - self._id_113EA;
+  }
 
   if(var_9 >= var_8) {
-    if(var_2)
+    if(var_2) {
       var_1._id_113F4 = 1;
+    }
 
     _id_113D9(var_1);
   }
@@ -446,15 +470,17 @@ _id_113F8() {
     }
 
     if(!isDefined(self._id_113F9)) {
-      if(!isDefined(self._id_113FD))
+      if(!isDefined(self._id_113FD)) {
         self._id_113FD = gettime();
+      }
 
       var_0 = int((gettime() - self._id_113FD) / 100);
 
-      if(var_0 % 2)
+      if(var_0 % 2) {
         _id_113FA();
-      else
+      } else {
         _id_113FB();
+      }
 
       if(var_0 > 3) {
         _id_113FB();
@@ -462,8 +488,9 @@ _id_113F8() {
       }
     }
 
-    if(isDefined(self._id_FC9D))
+    if(isDefined(self._id_FC9D)) {
       thread _id_113FE();
+    }
 
     wait 0.05;
   }
@@ -484,8 +511,9 @@ _id_113F5() {
   var_0["dead"] = 0;
   var_1 = "dead";
 
-  if(isDefined(self.team))
+  if(isDefined(self.team)) {
     var_1 = self.team;
+  }
 
   return var_0[var_1];
 }
@@ -520,10 +548,11 @@ _id_113FC() {
     var_1 = var_0 * var_0;
     var_2 = lengthsquared(level.player.origin - self.origin);
 
-    if(var_2 > var_1)
+    if(var_2 > var_1) {
       _id_113FA();
-    else
+    } else {
       _id_113FB();
+    }
 
     wait 0.05;
   }
@@ -559,8 +588,9 @@ _id_113F7() {
     }
   }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     _id_113E2(0);
+  }
 
   self._id_113F7 = undefined;
 }

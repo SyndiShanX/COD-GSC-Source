@@ -15,8 +15,9 @@ main(var_0) {
 }
 
 _id_B79D(var_0, var_1) {
-  if(var_1 _meth_810A() > 0)
+  if(var_1 _meth_810A() > 0) {
     var_1 _meth_83A2();
+  }
 }
 
 _id_6D64(var_0) {
@@ -37,8 +38,9 @@ _id_6D64(var_0) {
   var_7 = 0;
   var_0._id_F0C7 = 15;
 
-  if(isDefined(var_0._id_F0C8))
+  if(isDefined(var_0._id_F0C8)) {
     var_0._id_F0C7 = var_0._id_F0C8;
+  }
 
   var_0._id_6D96 = 0;
   scripts\anim\hummer_turret\common::_id_57DB(var_0);
@@ -57,11 +59,13 @@ _id_6D64(var_0) {
       scripts\anim\hummer_turret\common::_id_5AAA(var_0);
       wait 0.05;
     } else if(!var_0._id_5855 && var_6) {
-      if(!isDefined(var_2))
+      if(!isDefined(var_2)) {
         var_2 = gettime();
+      }
 
-      if(!isDefined(var_3))
+      if(!isDefined(var_3)) {
         var_3 = randomfloatrange(var_0._id_6A4F, var_0._id_6A4E);
+      }
 
       if(gettime() - var_2 >= var_3) {
         var_6 = 0;
@@ -71,8 +75,9 @@ _id_6D64(var_0) {
         var_3 = undefined;
       }
     } else if(!var_0._id_5855 && !var_6 && var_7) {
-      if(!isDefined(var_5))
+      if(!isDefined(var_5)) {
         var_5 = randomfloatrange(var_0._id_6A52, var_0._id_6A51);
+      }
 
       if(self._id_9DA6 || gettime() - var_4 >= var_5) {
         var_0 _meth_83A2();
@@ -81,8 +86,9 @@ _id_6D64(var_0) {
       }
     }
 
-    if(var_0._id_12A94 == "fire")
+    if(var_0._id_12A94 == "fire") {
       var_0._id_6D96 = var_0._id_6D96 + 0.05;
+    }
 
     if(var_0._id_6D96 > var_0._id_F0C7) {
       var_0._id_5855 = 0;
@@ -109,6 +115,7 @@ _id_B7A2() {
   }
   self _meth_8395();
 
-  while(self _meth_810A() < 1)
+  while(self _meth_810A() < 1) {
     wait 0.05;
+  }
 }

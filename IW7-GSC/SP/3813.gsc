@@ -7,10 +7,11 @@ _id_202D(var_0, var_1, var_2) {
   self endon("death");
   _id_2033();
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_3 = _id_0EF1::_id_789F();
-  else
+  } else {
     var_3 = var_2;
+  }
 
   var_4 = _id_2034(var_0);
 
@@ -44,32 +45,36 @@ _id_10FC4() {
 _id_DB62(var_0, var_1) {
   self endon("death");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 = self;
+  }
 
   var_1 waittill(var_0);
   _id_10FC4();
 }
 
 _id_2031(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = _id_0EF1::_id_7BEA(var_2);
+  }
 
   var_0 = _id_3DC8(var_0);
   thread scripts\sp\interaction::_id_CE18(var_0, var_1, var_2);
 }
 
 _id_2030(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = _id_0EF1::_id_7BEA(var_2);
+  }
 
   var_3 = _id_80E0(var_0);
   thread scripts\sp\interaction::_id_CE1A(var_3, var_1, var_2);
 }
 
 _id_2038(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = _id_0EF1::_id_7BEA(var_1);
+  }
 
   thread scripts\sp\interaction::_id_CE16(var_0, var_1);
 }
@@ -81,13 +86,15 @@ _id_2037(var_0, var_1, var_2) {
   if(!scripts\sp\interaction::_id_9C27(var_0)) {
     return;
   }
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_3 = _id_0EF1::_id_789F();
-  else
+  } else {
     var_3 = var_2;
+  }
 
-  if(!isDefined(var_1) || !isstring(var_1))
+  if(!isDefined(var_1) || !isstring(var_1)) {
     var_1 = _id_0EF1::_id_7BEA(var_3);
+  }
 
   scripts\engine\utility::delaythread(0.05, scripts\sp\interaction::_id_CE1A, var_0, var_1, var_3);
 }
@@ -109,12 +116,13 @@ _id_2034(var_0) {
   var_1 = "unknown";
 
   if(isDefined(var_0)) {
-    if(isnumber(var_0))
+    if(isnumber(var_0)) {
       var_1 = "Defined Idle";
-    else if(scripts\sp\interaction::_id_9C27(var_0))
+    } else if(scripts\sp\interaction::_id_9C27(var_0)) {
       var_1 = "Defined Reaction";
-    else
+    } else {
       var_1 = "Undefined";
+    }
   } else
     var_1 = "Undefined";
 
@@ -154,8 +162,9 @@ _id_80E0(var_0) {
     default:
   }
 
-  if(self._id_1FBB == "salter")
+  if(self._id_1FBB == "salter") {
     var_1 = var_1 + "_xo";
+  }
 
   return var_1;
 }
@@ -187,8 +196,9 @@ _id_7F0E(var_0) {
 
 _id_3DC8(var_0) {
   if(self._id_1FBB == "salter") {
-    if(scripts\sp\interaction::_id_9C27(var_0 + "_xo"))
+    if(scripts\sp\interaction::_id_9C27(var_0 + "_xo")) {
       var_0 = var_0 + "_xo";
+    }
   }
 
   return var_0;
@@ -232,8 +242,9 @@ _id_983A() {
 }
 
 _id_2032(var_0, var_1, var_2) {
-  foreach(var_4 in var_0)
-  var_4 endon("death");
+  foreach(var_4 in var_0) {
+    var_4 endon("death");
+  }
 
   if(!isDefined(var_1)) {
     var_1 = [];
@@ -260,18 +271,21 @@ _id_2032(var_0, var_1, var_2) {
 }
 
 _id_202E(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = level.player;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
   _id_2033();
   var_4 = _id_7F0E(var_1);
   thread _id_0B6A::_id_EC0B(var_0, var_4, undefined, undefined, undefined, undefined, undefined, var_3);
 
-  while(distance2d(self.origin, var_0.origin) > 16)
+  while(distance2d(self.origin, var_0.origin) > 16) {
     scripts\engine\utility::waitframe();
+  }
 
   childthread scripts\sp\utility::_id_7799(var_2, 2, 1.2);
   childthread scripts\sp\utility::_id_7798(var_2, 2, 1.2);

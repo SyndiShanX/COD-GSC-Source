@@ -86,8 +86,9 @@ _id_FA7D() {
   level._id_BF61 = -1.0;
   var_0 = getEntArray("watertank_invulnerable", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_12E48();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_12E48();
+  }
 }
 
 _id_12E48() {
@@ -120,15 +121,17 @@ _id_7D54(var_0, var_1, var_2) {
   var_4 = var_2 - var_3;
   var_5 = bulletTrace(var_3, var_3 + 1.5 * var_4, 0, var_0, 0);
 
-  if(isDefined(var_5["normal"]) && isDefined(var_5["entity"]) && var_5["entity"] == self)
+  if(isDefined(var_5["normal"]) && isDefined(var_5["entity"]) && var_5["entity"] == self) {
     return var_5["normal"];
+  }
 
   return undefined;
 }
 
 _id_37F6() {
-  if(gettime() < level._id_BF61)
+  if(gettime() < level._id_BF61) {
     return 0;
+  }
 
   return 1;
 }
@@ -148,8 +151,9 @@ managephysicsprops() {
   for(;;) {
     level waittill("connected", var_0);
 
-    if(!var_0 ishost())
+    if(!var_0 ishost()) {
       thread triggerphysicsbump();
+    }
   }
 }
 

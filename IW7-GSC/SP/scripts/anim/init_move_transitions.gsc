@@ -9,33 +9,40 @@ _id_968D() {
   }
   anim._id_BC99 = 1;
 
-  if(!isDefined(anim._id_4751))
+  if(!isDefined(anim._id_4751)) {
     anim._id_4751 = [];
+  }
 
-  if(!isDefined(anim._id_4719))
+  if(!isDefined(anim._id_4719)) {
     anim._id_4719 = [];
+  }
 
   anim._id_B490 = [];
   anim._id_68CA = [];
   anim._id_126E7 = [];
 
-  if(!isDefined(anim._id_4754))
+  if(!isDefined(anim._id_4754)) {
     anim._id_4754 = [];
+  }
 
-  if(!isDefined(anim._id_4753))
+  if(!isDefined(anim._id_4753)) {
     anim._id_4753 = [];
+  }
 
-  if(!isDefined(anim._id_471B))
+  if(!isDefined(anim._id_471B)) {
     anim._id_471B = [];
+  }
 
   anim._id_471D = [];
   anim._id_4755 = [];
 
-  if(!isDefined(anim._id_4752))
+  if(!isDefined(anim._id_4752)) {
     anim._id_4752 = [];
+  }
 
-  if(!isDefined(anim._id_471A))
+  if(!isDefined(anim._id_471A)) {
     anim._id_471A = [];
+  }
 
   anim._id_22E7 = [];
 }
@@ -126,10 +133,11 @@ _id_98A0() {
       }
 
       if(isDefined(anim.archetypes["soldier"]["cover_exit"][var_4]) && isDefined(anim.archetypes["soldier"]["cover_exit"][var_4][var_2])) {
-        if(animhasnotetrack(anim.archetypes["soldier"]["cover_exit"][var_4][var_2], "code_move"))
+        if(animhasnotetrack(anim.archetypes["soldier"]["cover_exit"][var_4][var_2], "code_move")) {
           var_5 = getnotetracktimes(anim.archetypes["soldier"]["cover_exit"][var_4][var_2], "code_move")[0];
-        else
+        } else {
           var_5 = 1;
+        }
 
         anim.archetypes["soldier"]["cover_exit_dist"][var_4][var_2] = getmovedelta(anim.archetypes["soldier"]["cover_exit"][var_4][var_2], 0, var_5);
         anim.archetypes["soldier"]["cover_exit_angles"][var_4][var_2] = getangledelta(anim.archetypes["soldier"]["cover_exit"][var_4][var_2], 0, 1);
@@ -147,8 +155,9 @@ _id_98A0() {
       }
       var_6 = lengthsquared(anim.archetypes["soldier"]["cover_trans_dist"][var_4][var_2]);
 
-      if(anim._id_4754[var_4] < var_6)
+      if(anim._id_4754[var_4] < var_6) {
         anim._id_4754[var_4] = var_6;
+      }
     }
 
     anim._id_4754[var_4] = sqrt(anim._id_4754[var_4]);
@@ -162,8 +171,9 @@ _id_98A0() {
   anim._id_6A1B["exposed_ready"] = 1;
   anim._id_6A1B["heat"] = 1;
 
-  if(!isDefined(anim._id_AFE8))
+  if(!isDefined(anim._id_AFE8)) {
     anim._id_AFE8 = 0;
+  }
 
   foreach(var_4, var_8 in anim._id_6A1B) {
     for(var_2 = 7; var_2 <= 9; var_2++) {
@@ -185,8 +195,9 @@ _id_98A0() {
       }
       var_9 = length(anim.archetypes["soldier"]["cover_trans_dist"][var_4][var_2]);
 
-      if(var_9 > anim._id_AFE8)
+      if(var_9 > anim._id_AFE8) {
         anim._id_AFE8 = var_9;
+      }
     }
   }
 

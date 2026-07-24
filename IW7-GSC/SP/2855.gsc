@@ -7,12 +7,13 @@ _id_5F84(var_0) {
   self notify("disable_dynamic_move");
   self endon("disable_dynamic_move");
 
-  if(isDefined(self._id_5F76))
+  if(isDefined(self._id_5F76)) {
     var_1 = squared(self._id_5F76);
-  else if(isDefined(var_0))
+  } else if(isDefined(var_0)) {
     var_1 = squared(var_0);
-  else
+  } else {
     var_1 = squared(300);
+  }
 
   self._id_51E4 = undefined;
   scripts\sp\utility::_id_4145();
@@ -29,8 +30,9 @@ _id_5F84(var_0) {
         if(!isDefined(self.demeanoroverride) || isDefined(self.demeanoroverride) && self.demeanoroverride == "sprint") {
           scripts\sp\utility::_id_4145();
 
-          if(isDefined(self._id_51E4))
+          if(isDefined(self._id_51E4)) {
             scripts\sp\utility::_id_51E1(self._id_51E4);
+          }
         }
       } else if(!isDefined(self.demeanoroverride) || isDefined(self.demeanoroverride) && self.demeanoroverride != "sprint") {
         self._id_51E4 = self.demeanoroverride;
@@ -48,10 +50,11 @@ _id_5F84(var_0) {
 _id_5557() {
   self notify("disable_dynamic_move");
 
-  if(isDefined(self._id_51E4))
+  if(isDefined(self._id_51E4)) {
     scripts\sp\utility::_id_51E1(self._id_51E4);
-  else
+  } else {
     scripts\sp\utility::_id_4145();
+  }
 
   self._id_51E4 = undefined;
   scripts\sp\utility::_id_4169("sprint");

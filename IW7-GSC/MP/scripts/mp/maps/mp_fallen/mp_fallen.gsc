@@ -33,8 +33,9 @@ _id_C853() {
 _id_CBF3() {
   var_0 = scripts\engine\utility::getStruct("pitching_machine", "script_noteworthy");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 thread _id_CBF1();
+  }
 }
 
 _id_CBF1() {
@@ -44,8 +45,9 @@ _id_CBF1() {
   var_1 = _id_CBF0();
   var_2 = getEntArray("pitching_wheel", "script_noteworthy");
 
-  foreach(var_4 in var_2)
-  var_4.physicsactivated = 0;
+  foreach(var_4 in var_2) {
+    var_4.physicsactivated = 0;
+  }
 
   for(;;) {
     for(var_6 = 0; var_6 < 5; var_6++) {
@@ -59,8 +61,9 @@ _id_CBF1() {
 _id_CBF0() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 5; var_1++)
+  for(var_1 = 0; var_1 < 5; var_1++) {
     var_0[var_1] = _id_CBF4();
+  }
 
   return var_0;
 }
@@ -136,8 +139,9 @@ _id_F9BA() {
   level._id_BF47 = -1.0;
   var_0 = getEntArray("beer_keg", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_13957();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_13957();
+  }
 }
 
 _id_13957() {
@@ -170,15 +174,17 @@ _id_7A63(var_0, var_1, var_2) {
   var_4 = var_2 - var_3;
   var_5 = bulletTrace(var_3, var_3 + 1.5 * var_4, 0, var_0, 0);
 
-  if(isDefined(var_5["normal"]) && isDefined(var_5["entity"]) && var_5["entity"] == self)
+  if(isDefined(var_5["normal"]) && isDefined(var_5["entity"]) && var_5["entity"] == self) {
     return var_5["normal"];
+  }
 
   return undefined;
 }
 
 _id_3827() {
-  if(gettime() < level._id_BF47)
+  if(gettime() < level._id_BF47) {
     return 0;
+  }
 
   return 1;
 }

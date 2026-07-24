@@ -12,8 +12,9 @@ fast_travel_init() {
   level.ziplines_achievement_trigger_list = [];
   level.ziplines_achievement_trigger_list = var_0;
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_97AD();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_97AD();
+  }
 
   level thread watch_for_zipline_achievement();
 }
@@ -22,11 +23,13 @@ watch_for_zipline_achievement() {
   level endon("game_ended");
   level endon("zipline_achievement_done");
 
-  while(level.ziplines_achievement_trigger_list.size > 0)
+  while(level.ziplines_achievement_trigger_list.size > 0) {
     scripts\engine\utility::waitframe();
+  }
 
-  foreach(var_1 in level.players)
-  var_1 scripts\cp\zombies\achievement::update_achievement("RIDE_FOR_YOUR_LIFE", 4);
+  foreach(var_1 in level.players) {
+    var_1 scripts\cp\zombies\achievement::update_achievement("RIDE_FOR_YOUR_LIFE", 4);
+  }
 
   level notify("zipline_achievement_done");
 }
@@ -53,9 +56,9 @@ _id_97AD() {
     }
   }
 
-  if(!isDefined(self._id_164A))
+  if(!isDefined(self._id_164A)) {
     return;
-  else {}
+  } else {}
 
   self._id_13EFC._id_62E4 = self._id_13EFB;
   self._id_13EFC.trigger = self;
@@ -105,8 +108,9 @@ _id_AD5D() {
           thread player_zipline_travel(var_3, var_1);
           var_3 scripts\cp\cp_merits::processmerit("mt_dlc1_all_ziplines");
 
-          if(scripts\engine\utility::array_contains(level.ziplines_achievement_trigger_list, self))
+          if(scripts\engine\utility::array_contains(level.ziplines_achievement_trigger_list, self)) {
             level.ziplines_achievement_trigger_list = scripts\engine\utility::array_remove(level.ziplines_achievement_trigger_list, self);
+          }
 
           var_1 = gettime() + 500;
           wait 1;
@@ -127,8 +131,9 @@ handle_zipline_hint(var_0) {
   }
   self.zipline_hint = 1;
 
-  while(!scripts\cp\cp_laststand::player_in_laststand(self) && !scripts\engine\utility::is_true(self.is_fast_traveling) && self istouching(var_0))
+  while(!scripts\cp\cp_laststand::player_in_laststand(self) && !scripts\engine\utility::is_true(self.is_fast_traveling) && self istouching(var_0)) {
     wait 0.05;
+  }
 
   self.zipline_hint = undefined;
   self forceusehintoff();
@@ -178,8 +183,9 @@ delay_nearby_zombie_cleanup() {
   var_0 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.enemy) && var_2.enemy == self && distancesquared(var_2.origin, self.origin) < 272144)
+    if(isDefined(var_2.enemy) && var_2.enemy == self && distancesquared(var_2.origin, self.origin) < 272144) {
       var_2.delay_cleanup_until = gettime() + 12000;
+    }
   }
 }
 
@@ -201,13 +207,15 @@ player_zipline(var_0, var_1) {
   var_6 setModel("tag_origin");
   var_7 = getEnt("zipline_cord", "targetname");
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     var_7 linkTo(var_6);
+  }
 
   var_8 = getEnt("zipline_handle", "targetname");
 
-  if(isDefined(var_8))
+  if(isDefined(var_8)) {
     var_8 linkTo(var_6);
+  }
 
   var_0 playerlinkTo(var_6, undefined, 0.5, 20, 10, 50, 40);
   var_6 playLoopSound("rave_zipline_lp");
@@ -215,8 +223,9 @@ player_zipline(var_0, var_1) {
   var_0 playerlinkedoffsetenable();
   var_0 playgestureviewmodel("ges_zipline");
 
-  while(var_1 > gettime())
+  while(var_1 > gettime()) {
     wait 0.05;
+  }
 
   wait 1;
   var_0 lerpfovbypreset("zombiearcade");
@@ -272,8 +281,9 @@ clear_zipline_landing_area() {
       if(var_1 == self) {
         continue;
       }
-      if(distance2d(var_1.origin, self.origin) < 24)
+      if(distance2d(var_1.origin, self.origin) < 24) {
         var_1 setvelocity((-50, -100, 0));
+      }
     }
 
     wait 0.1;
@@ -322,8 +332,9 @@ _id_ECC7(var_0) {
     scripts\engine\utility::waitframe();
   }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 delete();
+  }
 }
 
 teleport_to_safe_spot(var_0) {
@@ -331,8 +342,9 @@ teleport_to_safe_spot(var_0) {
 
   while(!isDefined(var_1)) {
     foreach(var_3 in self.end_positions) {
-      if(!positionwouldtelefrag(var_3.origin))
+      if(!positionwouldtelefrag(var_3.origin)) {
         var_1 = var_3;
+      }
     }
 
     wait 0.1;

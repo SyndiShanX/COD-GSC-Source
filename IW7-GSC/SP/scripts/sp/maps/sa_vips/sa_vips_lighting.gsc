@@ -97,8 +97,9 @@ _id_E9EB() {
       wait 0.05;
       var_3 = var_3 + 0.05;
 
-      if(var_3 > var_1)
+      if(var_3 > var_1) {
         var_3 = var_3 - var_1;
+      }
 
       wait 0.05;
       var_7 setlightintensity(1000);

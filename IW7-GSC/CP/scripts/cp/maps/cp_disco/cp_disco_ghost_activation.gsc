@@ -41,10 +41,11 @@ player_pick_up_monitor(var_0, var_1) {
       if(player_picking_up_item(var_3, var_0)) {
         level notify(var_1);
 
-        if(var_0.model == "towel_crumpled_01")
+        if(var_0.model == "towel_crumpled_01") {
           var_4 = "skullbuster_arcade_pickup_rag";
-        else
+        } else {
           var_4 = "skullbuster_arcade_pickup_spraycleaner";
+        }
 
         var_3 playlocalsound(var_4);
         playFX(level._effect["sb_quest_item_pickup"], var_0.origin);
@@ -57,20 +58,25 @@ player_pick_up_monitor(var_0, var_1) {
 }
 
 player_picking_up_item(var_0, var_1) {
-  if(!isPlayer(var_0))
+  if(!isPlayer(var_0)) {
     return 0;
+  }
 
-  if(!player_within_pick_up_distance(var_0, var_1))
+  if(!player_within_pick_up_distance(var_0, var_1)) {
     return 0;
+  }
 
-  if(!var_0 useButtonPressed())
+  if(!var_0 useButtonPressed()) {
     return 0;
+  }
 
-  if(!var_0 worldpointinreticle_circle(var_1.origin, 65, 80))
+  if(!var_0 worldpointinreticle_circle(var_1.origin, 65, 80)) {
     return 0;
+  }
 
-  if(!sighttracepassed(var_0 getEye(), var_1.origin + (0, 0, 5), 0, var_1))
+  if(!sighttracepassed(var_0 getEye(), var_1.origin + (0, 0, 5), 0, var_1)) {
     return 0;
+  }
 
   return 1;
 }
@@ -94,24 +100,29 @@ player_cleaning_up_arcade_cabinet(var_0) {
   var_2 = (-717, 2610, 942);
   var_3 = 900;
 
-  if(distance2dsquared(var_0.origin, var_1) > var_3)
+  if(distance2dsquared(var_0.origin, var_1) > var_3) {
     return 0;
+  }
 
-  if(!var_0 useButtonPressed())
+  if(!var_0 useButtonPressed()) {
     return 0;
+  }
 
-  if(!var_0 worldpointinreticle_circle(var_2, 80, 100))
+  if(!var_0 worldpointinreticle_circle(var_2, 80, 100)) {
     return 0;
+  }
 
   return 1;
 }
 
 player_within_pick_up_distance(var_0, var_1) {
-  if(distance2dsquared(var_1.origin, var_0.origin) <= 2500)
+  if(distance2dsquared(var_1.origin, var_0.origin) <= 2500) {
     return 1;
+  }
 
-  if(distance2dsquared(var_1.origin, var_0 getEye()) <= 2500)
+  if(distance2dsquared(var_1.origin, var_0 getEye()) <= 2500) {
     return 1;
+  }
 
   return 0;
 }
@@ -127,11 +138,13 @@ complete_clean_arcade_cabinet() {
 }
 
 delete_clean_arcade_cabinet_entities() {
-  if(isDefined(level.sb_quest_cleaner))
+  if(isDefined(level.sb_quest_cleaner)) {
     level.sb_quest_cleaner delete();
+  }
 
-  if(isDefined(level.sb_quest_towel))
+  if(isDefined(level.sb_quest_towel)) {
     level.sb_quest_towel delete();
+  }
 }
 
 debug_clean_arcade_cabinet() {}
@@ -204,48 +217,58 @@ mahjong_win_sequence(var_0) {
 
 clear_outline_for_all_players(var_0) {
   foreach(var_2 in level.players) {
-    for(var_3 = 1; var_3 <= 14; var_3++)
+    for(var_3 = 1; var_3 <= 14; var_3++) {
       var_0.mahjong_set[var_3].mahjong_tile hudoutlinedisableforclient(var_2);
+    }
   }
 }
 
 check_winning_hand(var_0) {
-  if(!check_all_mahjong_filled(var_0))
+  if(!check_all_mahjong_filled(var_0)) {
     return 0;
+  }
 
-  if(!check_streak_or_triplet(1, var_0))
+  if(!check_streak_or_triplet(1, var_0)) {
     return 0;
+  }
 
-  if(!check_streak_or_triplet(4, var_0))
+  if(!check_streak_or_triplet(4, var_0)) {
     return 0;
+  }
 
-  if(!check_streak_or_triplet(7, var_0))
+  if(!check_streak_or_triplet(7, var_0)) {
     return 0;
+  }
 
-  if(!check_streak_or_triplet(10, var_0))
+  if(!check_streak_or_triplet(10, var_0)) {
     return 0;
+  }
 
-  if(!check_pair(13, var_0))
+  if(!check_pair(13, var_0)) {
     return 0;
+  }
 
   return 1;
 }
 
 check_all_mahjong_filled(var_0) {
   for(var_1 = 1; var_1 <= 14; var_1++) {
-    if(var_0.mahjong_set[var_1].mahjong_value == "")
+    if(var_0.mahjong_set[var_1].mahjong_value == "") {
       return 0;
+    }
   }
 
   return 1;
 }
 
 check_streak_or_triplet(var_0, var_1) {
-  if(check_streak(var_0, var_1))
+  if(check_streak(var_0, var_1)) {
     return 1;
+  }
 
-  if(check_triplet(var_0, var_1))
+  if(check_triplet(var_0, var_1)) {
     return 1;
+  }
 
   return 0;
 }
@@ -255,8 +278,9 @@ check_streak(var_0, var_1) {
   var_3 = int(var_1.mahjong_set[var_0 + 1].mahjong_value);
   var_4 = int(var_1.mahjong_set[var_0 + 2].mahjong_value);
 
-  if(var_3 == var_2 + 1 && var_4 == var_3 + 1)
+  if(var_3 == var_2 + 1 && var_4 == var_3 + 1) {
     return 1;
+  }
 
   return 0;
 }
@@ -266,8 +290,9 @@ check_triplet(var_0, var_1) {
   var_3 = int(var_1.mahjong_set[var_0 + 1].mahjong_value);
   var_4 = int(var_1.mahjong_set[var_0 + 2].mahjong_value);
 
-  if(var_3 == var_2 && var_4 == var_3)
+  if(var_3 == var_2 && var_4 == var_3) {
     return 1;
+  }
 
   return 0;
 }
@@ -276,8 +301,9 @@ check_pair(var_0, var_1) {
   var_2 = int(var_1.mahjong_set[var_0].mahjong_value);
   var_3 = int(var_1.mahjong_set[var_0 + 1].mahjong_value);
 
-  if(var_3 == var_2)
+  if(var_3 == var_2) {
     return 1;
+  }
 
   return 0;
 }
@@ -286,8 +312,9 @@ update_player_monitor(var_0) {
   level endon("winning_mahjong_hand");
 
   for(;;) {
-    foreach(var_2 in level.players)
-    update_mahjong_state_for_player(var_2, var_0);
+    foreach(var_2 in level.players) {
+      update_mahjong_state_for_player(var_2, var_0);
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -295,8 +322,9 @@ update_player_monitor(var_0) {
 
 update_mahjong_state_for_player(var_0, var_1) {
   if(!player_in_play_space(var_0, var_1)) {
-    if(player_looking_at_any_mahjong_tile(var_0))
+    if(player_looking_at_any_mahjong_tile(var_0)) {
       clear_mahjong_state_for_player(var_0);
+    }
 
     return;
   }
@@ -305,8 +333,9 @@ update_mahjong_state_for_player(var_0, var_1) {
 
   if(isDefined(var_2)) {
     if(!looking_at_the_same_mahjong(var_0, var_2)) {
-      if(player_looking_at_any_mahjong_tile(var_0))
+      if(player_looking_at_any_mahjong_tile(var_0)) {
         clear_mahjong_state_for_player(var_0);
+      }
 
       set_mahjong_struct_currently_looking_at(var_0, var_2);
     }
@@ -314,14 +343,17 @@ update_mahjong_state_for_player(var_0, var_1) {
 }
 
 player_interact_with_mahjong_set(var_0, var_1) {
-  if(!player_in_play_space(var_0, var_1))
+  if(!player_in_play_space(var_0, var_1)) {
     return 0;
+  }
 
-  if(!player_looking_at_any_mahjong_tile(var_0))
+  if(!player_looking_at_any_mahjong_tile(var_0)) {
     return 0;
+  }
 
-  if(!var_0 useButtonPressed())
+  if(!var_0 useButtonPressed()) {
     return 0;
+  }
 
   return 1;
 }
@@ -335,10 +367,11 @@ player_in_play_space(var_0, var_1) {
 }
 
 set_mahjong_struct_currently_looking_at(var_0, var_1) {
-  if(is_empty_mahjong(var_1))
+  if(is_empty_mahjong(var_1)) {
     show_empty_mahjong_for_player(var_0, var_1);
-  else
+  } else {
     show_mahjong_outline_for_player(var_0, var_1);
+  }
 
   var_0.mahjong_struct_currently_looking_at = var_1;
 }
@@ -346,10 +379,11 @@ set_mahjong_struct_currently_looking_at(var_0, var_1) {
 clear_mahjong_state_for_player(var_0) {
   var_1 = var_0.mahjong_struct_currently_looking_at;
 
-  if(is_empty_mahjong(var_1))
+  if(is_empty_mahjong(var_1)) {
     clear_empty_mahjong_for_player(var_0, var_1);
-  else
+  } else {
     hide_mahjong_outline_for_player(var_0, var_1);
+  }
 
   var_0.mahjong_struct_currently_looking_at = undefined;
 }
@@ -370,8 +404,9 @@ any_other_player_looking_at_it(var_0, var_1) {
     if(var_3 == var_0) {
       continue;
     }
-    if(isDefined(var_3.mahjong_struct_currently_looking_at) && var_3.mahjong_struct_currently_looking_at == var_1)
+    if(isDefined(var_3.mahjong_struct_currently_looking_at) && var_3.mahjong_struct_currently_looking_at == var_1) {
       return 1;
+    }
   }
 
   return 0;
@@ -401,8 +436,9 @@ get_mahjong_struct_currently_looking_at(var_0, var_1) {
   var_2 = [];
 
   foreach(var_4 in var_1.mahjong_set) {
-    if(var_0 worldpointinreticle_circle(var_4.origin, 25, 75))
+    if(var_0 worldpointinreticle_circle(var_4.origin, 25, 75)) {
       var_2[var_2.size] = var_4;
+    }
   }
 
   return scripts\engine\utility::getclosest(var_0.origin, var_2);
@@ -432,8 +468,9 @@ generate_mahjong_values(var_0) {
 
   var_9 = get_additional_num_of_missing_tiles();
 
-  for(var_4 = 0; var_4 < var_9; var_4++)
+  for(var_4 = 0; var_4 < var_9; var_4++) {
     var_2[var_2.size] = "" + randomintrange(1, 6);
+  }
 
   var_1.starting_hand = var_3;
   var_1.tiles_for_pick_up = var_2;
@@ -444,13 +481,15 @@ get_index_to_remove(var_0) {
   var_1 = [];
   var_2 = [];
 
-  for(var_3 = 0; var_3 < 14; var_3++)
+  for(var_3 = 0; var_3 < 14; var_3++) {
     var_2[var_2.size] = var_3;
+  }
 
   var_2 = scripts\engine\utility::array_randomize(var_2);
 
-  for(var_4 = 0; var_4 < var_0; var_4++)
+  for(var_4 = 0; var_4 < var_0; var_4++) {
     var_1[var_1.size] = var_2[var_4];
+  }
 
   return var_1;
 }
@@ -458,8 +497,9 @@ get_index_to_remove(var_0) {
 init_current_mahjong_count() {
   level.current_mahjong_count = [];
 
-  for(var_0 = 1; var_0 <= 5; var_0++)
+  for(var_0 = 1; var_0 <= 5; var_0++) {
     level.current_mahjong_count[var_0] = 0;
+  }
 }
 
 get_least_used_num(var_0) {
@@ -504,8 +544,9 @@ get_random_pair() {
 }
 
 update_current_mahjong_conunt(var_0) {
-  foreach(var_2 in var_0)
-  level.current_mahjong_count[var_2]++;
+  foreach(var_2 in var_0) {
+    level.current_mahjong_count[var_2]++;
+  }
 }
 
 coin_flip() {
@@ -562,19 +603,21 @@ swap_mahjong_tile_with_player_mahjong(var_0, var_1, var_2) {
 }
 
 play_swap_mahjong_sfx(var_0, var_1, var_2, var_3) {
-  if(var_1 != "" && var_2 == "" && var_3 == 1)
+  if(var_1 != "" && var_2 == "" && var_3 == 1) {
     playsoundatpos(var_0.origin, "mahjong_pickup_existing_tile");
-  else if(var_1 != "" && var_2 == "" && !var_3 == 1)
+  } else if(var_1 != "" && var_2 == "" && !var_3 == 1) {
     playsoundatpos(var_0.origin, "mahjong_pickup_tile_exlpo");
-  else if(var_1 != "" && var_2 != "")
+  } else if(var_1 != "" && var_2 != "") {
     playsoundatpos(var_0.origin, "mahjong_pickup_existing_tile");
-  else if(var_1 == "" && var_2 != "")
+  } else if(var_1 == "" && var_2 != "") {
     playsoundatpos(var_0.origin, "mahjong_place_tile");
+  }
 }
 
 get_mahjong_tile_on_player(var_0) {
-  if(!isDefined(var_0.mahjong_tile_on_me))
+  if(!isDefined(var_0.mahjong_tile_on_me)) {
     var_0.mahjong_tile_on_me = "";
+  }
 
   return var_0.mahjong_tile_on_me;
 }
@@ -584,14 +627,17 @@ set_mahjong_tile_on_player(var_0, var_1) {
 }
 
 player_use_mahjong_struct(var_0, var_1) {
-  if(distance2dsquared(var_0.origin, var_1.origin) > 6400)
+  if(distance2dsquared(var_0.origin, var_1.origin) > 6400) {
     return 0;
+  }
 
-  if(!var_1 useButtonPressed())
+  if(!var_1 useButtonPressed()) {
     return 0;
+  }
 
-  if(!var_1 worldpointinreticle_circle(var_0.origin, 55, 75))
+  if(!var_1 worldpointinreticle_circle(var_0.origin, 55, 75)) {
     return 0;
+  }
 
   return 1;
 }
@@ -616,10 +662,11 @@ set_mahjong_value(var_0, var_1, var_2) {
 get_mahjong_model(var_0, var_1) {
   switch (var_0) {
     case "":
-      if(scripts\engine\utility::is_true(var_1))
+      if(scripts\engine\utility::is_true(var_1)) {
         return "cp_disco_mahjong_tile_clear";
-      else
+      } else {
         return "tag_origin";
+      }
     case "1":
       return "cp_disco_mahjong_tile_01";
     case "2":
@@ -675,15 +722,17 @@ clean_up_all_mahjong() {
 
   if(isDefined(var_0.mahjong_set)) {
     for(var_1 = 1; var_1 <= 14; var_1++) {
-      if(isDefined(var_0.mahjong_set[var_1].mahjong_tile))
+      if(isDefined(var_0.mahjong_set[var_1].mahjong_tile)) {
         var_0.mahjong_set[var_1].mahjong_tile delete();
+      }
     }
   }
 
   if(isDefined(level.mahjong_struct_for_pick_up)) {
     foreach(var_3 in level.mahjong_struct_for_pick_up) {
-      if(isDefined(var_3.mahjong_tile))
+      if(isDefined(var_3.mahjong_tile)) {
         var_3.mahjong_tile delete();
+      }
     }
   }
 }
@@ -702,16 +751,18 @@ mahjong_player_disconnect_monitor(var_0) {
 
 get_available_mahjong_struct_for_pick_up() {
   foreach(var_1 in level.mahjong_struct_for_pick_up) {
-    if(var_1.mahjong_value == "")
+    if(var_1.mahjong_value == "") {
       return var_1;
+    }
   }
 }
 
 write_1_9_7_2() {
   var_0 = ["1", "9", "7", "2"];
 
-  foreach(var_2 in var_0)
-  wait_player_write_number(var_2);
+  foreach(var_2 in var_0) {
+    wait_player_write_number(var_2);
+  }
 }
 
 wait_player_write_number(var_0) {
@@ -754,15 +805,17 @@ play_success_vfx(var_0) {
 }
 
 clean_damage_monitor(var_0) {
-  if(isDefined(var_0.damage_monitor))
+  if(isDefined(var_0.damage_monitor)) {
     var_0.damage_monitor delete();
+  }
 }
 
 clean_all_candles(var_0) {
   if(isDefined(var_0.timer_structs)) {
     foreach(var_2 in var_0.timer_structs) {
-      if(isDefined(var_2.candle))
+      if(isDefined(var_2.candle)) {
         var_2.candle delete();
+      }
     }
   }
 }
@@ -770,8 +823,9 @@ clean_all_candles(var_0) {
 clean_all_flame_vfx(var_0) {
   if(isDefined(var_0.timer_structs)) {
     foreach(var_2 in var_0.timer_structs) {
-      if(isDefined(var_2.flame_vfx))
+      if(isDefined(var_2.flame_vfx)) {
         var_2.flame_vfx delete();
+      }
     }
   }
 }
@@ -779,8 +833,9 @@ clean_all_flame_vfx(var_0) {
 clean_all_cube_vfx(var_0) {
   if(isDefined(var_0.damage_marker_structs)) {
     foreach(var_2 in var_0.damage_marker_structs) {
-      if(isDefined(var_2.cube_vfx))
+      if(isDefined(var_2.cube_vfx)) {
         var_2.cube_vfx delete();
+      }
     }
   }
 }
@@ -797,8 +852,9 @@ show_cube_at_tile(var_0, var_1) {
 
 get_damage_marker_with_id(var_0, var_1) {
   foreach(var_3 in var_0.damage_marker_structs) {
-    if(isDefined(var_3.name) && var_3.name == var_1)
+    if(isDefined(var_3.name) && var_3.name == var_1) {
       return var_3;
+    }
   }
 
   return undefined;
@@ -808,8 +864,9 @@ wait_for_first_tile_hit(var_0) {
   for(;;) {
     var_0 waittill("damage_marker_hit", var_1);
 
-    if(var_1 == 1)
+    if(var_1 == 1) {
       return;
+    }
   }
 }
 
@@ -820,8 +877,9 @@ tiles_hit_listener(var_0, var_1) {
     var_0 waittill("damage_marker_hit", var_2);
 
     if(var_2 == -1) {
-      if(var_0.tiles_hit.size > 0)
+      if(var_0.tiles_hit.size > 0) {
         var_0 notify("write_number_fail");
+      }
 
       continue;
     }
@@ -830,12 +888,14 @@ tiles_hit_listener(var_0, var_1) {
       show_cube_at_tile(var_0, "" + var_2);
       var_0.tiles_hit[var_0.tiles_hit.size] = var_2;
 
-      if(var_0.tiles_hit.size == 1)
+      if(var_0.tiles_hit.size == 1) {
         var_0 thread start_candle_timer(var_0, get_timer_time(var_1));
+      }
     }
 
-    if(var_0.tiles_hit.size == var_0.num_of_tile_to_hit)
+    if(var_0.tiles_hit.size == var_0.num_of_tile_to_hit) {
       var_0 notify("write_number_success");
+    }
   }
 }
 
@@ -866,13 +926,15 @@ start_candle_timer(var_0, var_1) {
 }
 
 hide_all_candles(var_0) {
-  foreach(var_3, var_2 in var_0.timer_structs)
-  var_2.candle hide();
+  foreach(var_3, var_2 in var_0.timer_structs) {
+    var_2.candle hide();
+  }
 }
 
 show_all_candles(var_0) {
-  foreach(var_3, var_2 in var_0.timer_structs)
-  var_2.candle show();
+  foreach(var_3, var_2 in var_0.timer_structs) {
+    var_2.candle show();
+  }
 }
 
 spawn_candle_flame(var_0) {
@@ -884,8 +946,9 @@ spawn_candle_flame(var_0) {
 }
 
 set_up_timer_candles(var_0) {
-  foreach(var_3, var_2 in var_0.timer_structs)
-  var_2.candle = set_up_candle(var_2, var_3);
+  foreach(var_3, var_2 in var_0.timer_structs) {
+    var_2.candle = set_up_candle(var_2, var_3);
+  }
 }
 
 set_up_controlling_struct(var_0) {
@@ -903,8 +966,9 @@ set_up_controlling_struct(var_0) {
       continue;
     }
 
-    if(var_4 == "damage_marker")
+    if(var_4 == "damage_marker") {
       var_0.damage_marker_structs[var_0.damage_marker_structs.size] = var_3;
+    }
   }
 
   var_7 = getEntArray(var_0.target, "targetname");
@@ -949,10 +1013,11 @@ get_tile_hit_id(var_0, var_1) {
   var_2 = var_0.damage_marker_structs;
   var_3 = scripts\engine\utility::getclosest(var_1, var_2);
 
-  if(isDefined(var_3.name))
+  if(isDefined(var_3.name)) {
     return int(var_3.name);
-  else
+  } else {
     return -1;
+  }
 }
 
 set_up_candle(var_0, var_1) {
@@ -1083,8 +1148,9 @@ player_reached_monitor(var_0) {
 
 player_reach_goal(var_0) {
   foreach(var_2 in level.players) {
-    if(distancesquared(var_0.origin, var_2 getEye()) < 1600)
+    if(distancesquared(var_0.origin, var_2 getEye()) < 1600) {
       return 1;
+    }
   }
 
   return 0;
@@ -1095,8 +1161,9 @@ wait_for_player_to_jump_on_top(var_0) {
 
   for(;;) {
     foreach(var_2 in level.players) {
-      if(player_is_on_top_sky_step(var_2, var_0))
+      if(player_is_on_top_sky_step(var_2, var_0)) {
         return;
+      }
     }
 
     scripts\engine\utility::waitframe();
@@ -1110,11 +1177,13 @@ sky_step_timeout_monitor(var_0) {
 }
 
 player_is_on_top_sky_step(var_0, var_1) {
-  if(distancesquared(var_0.origin, var_1.origin) > 400)
+  if(distancesquared(var_0.origin, var_1.origin) > 400) {
     return 0;
+  }
 
-  if(var_0.origin[2] < var_1.origin[2])
+  if(var_0.origin[2] < var_1.origin[2]) {
     return 0;
+  }
 
   return 1;
 }
@@ -1159,8 +1228,9 @@ activate_sky_step(var_0, var_1) {
   var_2.origin = var_0.origin;
   var_2.sky_step_vfx setscriptablepartstate("vfx", "sky_step");
 
-  if(scripts\engine\utility::is_true(var_1))
+  if(scripts\engine\utility::is_true(var_1)) {
     var_2 thread sky_step_timeout_monitor(var_2);
+  }
 
   return var_2;
 }
@@ -1185,8 +1255,9 @@ clean_up_sky_steps() {
 
 get_available_sky_step() {
   foreach(var_1 in level.sky_steps) {
-    if(var_1.activated == 0)
+    if(var_1.activated == 0) {
       return var_1;
+    }
   }
 }
 
@@ -1234,18 +1305,21 @@ any_player_reach_skull(var_0) {
 }
 
 should_set_up_skull_in_front_of_train() {
-  if(!scripts\engine\utility::is_true(level.should_set_up_skull_in_front_of_train))
+  if(!scripts\engine\utility::is_true(level.should_set_up_skull_in_front_of_train)) {
     return 0;
+  }
 
-  if(isDefined(level.train_skull))
+  if(isDefined(level.train_skull)) {
     return 0;
+  }
 
   return 1;
 }
 
 complete_grab_skull_in_front_train() {
-  if(isDefined(level.train_skull))
+  if(isDefined(level.train_skull)) {
     level.train_skull delete();
+  }
 
   level.should_set_up_skull_in_front_of_train = 0;
   scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::notify_activation_progress(5);
@@ -1267,8 +1341,9 @@ complete_call_service_number() {
 play_gns_success_vo() {
   level endon("game_ended");
 
-  foreach(var_1 in level.players)
-  var_1 thread scripts\cp\cp_vo::try_to_play_vo("access_ghostnskulls", "disco_comment_vo");
+  foreach(var_1 in level.players) {
+    var_1 thread scripts\cp\cp_vo::try_to_play_vo("access_ghostnskulls", "disco_comment_vo");
+  }
 }
 
 debug_call_service_number() {}
@@ -1334,8 +1409,9 @@ wait_for_player_activation() {
     }
 
     if(var_2) {
-      if(isDefined(level.gns_game_console_vfx))
+      if(isDefined(level.gns_game_console_vfx)) {
         level.gns_game_console_vfx delete();
+      }
 
       return;
     }
@@ -1411,27 +1487,32 @@ cp_disco_ghost_color_manager() {
   var_4 = 0;
 
   foreach(var_6 in level.zombie_ghosts) {
-    if(var_6.color == "red")
+    if(var_6.color == "red") {
       var_1++;
+    }
 
-    if(var_6.color == "green")
+    if(var_6.color == "green") {
       var_2++;
+    }
 
-    if(var_6.color == "yellow")
+    if(var_6.color == "yellow") {
       var_3++;
+    }
 
-    if(var_6.color == "blue")
+    if(var_6.color == "blue") {
       var_4++;
+    }
   }
 
-  if(var_1 < var_0)
+  if(var_1 < var_0) {
     level.zombie_ghost_model = "zombie_ghost_cube_red";
-  else if(var_2 < var_0)
+  } else if(var_2 < var_0) {
     level.zombie_ghost_model = "zombie_ghost_cube_green";
-  else if(var_3 < var_0)
+  } else if(var_3 < var_0) {
     level.zombie_ghost_model = "zombie_ghost_cube_yellow";
-  else
+  } else {
     level.zombie_ghost_model = "zombie_ghost_cube_blue";
+  }
 }
 
 cp_disco_set_moving_target_color(var_0, var_1) {
@@ -1439,15 +1520,17 @@ cp_disco_set_moving_target_color(var_0, var_1) {
   var_3 = "";
 
   if(var_1 == 1) {
-    if(!isDefined(level.moving_target_color_based_on_priority))
+    if(!isDefined(level.moving_target_color_based_on_priority)) {
       determine_color(var_2);
+    }
 
-    if(scripts\engine\utility::array_contains(level.moving_target_priority["low"], var_0))
+    if(scripts\engine\utility::array_contains(level.moving_target_priority["low"], var_0)) {
       var_3 = level.moving_target_color_based_on_priority["low"];
-    else if(scripts\engine\utility::array_contains(level.moving_target_priority["medium"], var_0))
+    } else if(scripts\engine\utility::array_contains(level.moving_target_priority["medium"], var_0)) {
       var_3 = level.moving_target_color_based_on_priority["medium"];
-    else if(scripts\engine\utility::array_contains(level.moving_target_priority["high"], var_0))
+    } else if(scripts\engine\utility::array_contains(level.moving_target_priority["high"], var_0)) {
       var_3 = level.moving_target_color_based_on_priority["high"];
+    }
   } else
     var_3 = scripts\engine\utility::random(var_2);
 
@@ -1463,11 +1546,13 @@ determine_color(var_0) {
 }
 
 cp_disco_should_moving_target_explode(var_0, var_1) {
-  if(level.allow_skulls_to_explode == 0)
+  if(level.allow_skulls_to_explode == 0) {
     return 0;
+  }
 
-  if(var_1.revealed == 1)
+  if(var_1.revealed == 1) {
     return 0;
+  }
 
   return isDefined(var_1) && isDefined(var_1.color) && var_0.color == var_1.color;
 }
@@ -1505,8 +1590,9 @@ disco_gns_player_reward_func() {
 upgrade_magic_wheel() {
   level.magic_wheel_upgraded = 1;
 
-  if(isDefined(level.current_active_wheel))
+  if(isDefined(level.current_active_wheel)) {
     level.current_active_wheel setscriptablepartstate("fx", "upgrade");
+  }
 }
 
 gns3_formation_movement() {
@@ -1580,8 +1666,9 @@ randomize_color_for_color_group() {
 
 assign_color_to_color_group() {
   foreach(var_1 in level.moving_target_groups) {
-    foreach(var_3 in var_1)
-    var_3.color = level.color_for_color_group[var_3.color_group];
+    foreach(var_3 in var_1) {
+      var_3.color = level.color_for_color_group[var_3.color_group];
+    }
   }
 }
 
@@ -1596,8 +1683,9 @@ reveal_color_for_puzzle() {
     var_4 = get_moving_targets_with_reveal_id(var_3);
 
     if(var_4.size > 0) {
-      foreach(var_6 in var_4)
-      reveal_moving_target_color(var_6);
+      foreach(var_6 in var_4) {
+        reveal_moving_target_color(var_6);
+      }
 
       wait(var_1);
     } else {
@@ -1614,8 +1702,9 @@ get_moving_targets_with_reveal_id(var_0) {
 
   foreach(var_3 in level.moving_target_groups) {
     foreach(var_5 in var_3) {
-      if(isDefined(var_5.reveal_id) && var_5.reveal_id == var_0)
+      if(isDefined(var_5.reveal_id) && var_5.reveal_id == var_0) {
         var_1[var_1.size] = var_5;
+      }
     }
   }
 
@@ -1634,8 +1723,9 @@ cp_disco_assign_moving_target_flags(var_0, var_1) {
   var_1.subgroup = var_0.subclass;
   var_1.vfx_start = isDefined(var_0.script_side);
 
-  if(isDefined(var_0.script_startname))
+  if(isDefined(var_0.script_startname)) {
     var_1.reveal_id = int(var_0.script_startname);
+  }
 }
 
 cp_disco_reset_moving_target_wave_data() {
@@ -1662,8 +1752,9 @@ get_moving_targets_in_same_subgroup(var_0) {
 
   foreach(var_3 in level.moving_target_groups) {
     foreach(var_5 in var_3) {
-      if(isDefined(var_5) && var_5.subgroup == var_0)
+      if(isDefined(var_5) && var_5.subgroup == var_0) {
         var_1[var_1.size] = var_5;
+      }
     }
   }
 
@@ -1672,8 +1763,9 @@ get_moving_targets_in_same_subgroup(var_0) {
 
 all_moving_targets_are_revealed(var_0) {
   foreach(var_2 in var_0) {
-    if(var_2.revealed == 0)
+    if(var_2.revealed == 0) {
       return 0;
+    }
   }
 
   return 1;
@@ -1695,8 +1787,9 @@ explode_moving_targets(var_0, var_1) {
 
 get_vfx_start_moving_target(var_0) {
   foreach(var_2 in var_0) {
-    if(scripts\engine\utility::is_true(var_2.vfx_start))
+    if(scripts\engine\utility::is_true(var_2.vfx_start)) {
       return var_2;
+    }
   }
 }
 

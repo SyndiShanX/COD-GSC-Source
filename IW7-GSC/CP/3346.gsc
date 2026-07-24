@@ -17,8 +17,9 @@ init() {
 _id_E154() {
   self notify("remove_phase_shift");
 
-  if(isentityphaseshifted(self))
+  if(isentityphaseshifted(self)) {
     exitphaseshift(0.0);
+  }
 }
 
 _id_E88D() {
@@ -28,8 +29,9 @@ _id_E88D() {
   var_0 = 5;
   self notify("phase_shift_power_activated");
 
-  if(!isentityphaseshifted(self))
+  if(!isentityphaseshifted(self)) {
     _id_6626(1, var_0);
+  }
 
   scripts\cp\powers\coop_powers::_id_4575(var_0, "powers_phase_shift_update", "phaseshift_interrupted");
   exitphaseshift();
@@ -37,11 +39,13 @@ _id_E88D() {
 }
 
 _id_6626(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 5;
+  }
 
   self notify("phase_shift_start");
   _id_F7E3(1);
@@ -50,8 +54,9 @@ _id_6626(var_0, var_1) {
   if(getdvarint("bg_thirdPerson") == 0) {
     self visionsetnakedforplayer("phase_shift_mp", scripts\engine\utility::ter_op(var_0, 0.1, 0.0));
 
-    if(var_0)
+    if(var_0) {
       thread doscreenflash();
+    }
 
     thread _id_1090A(var_1);
   }
@@ -63,11 +68,13 @@ _id_6626(var_0, var_1) {
   thread _id_13A57();
   scripts\cp\utility::allow_player_ignore_me(1);
 
-  if(!scripts\engine\utility::is_true(level.no_power_cooldowns))
+  if(!scripts\engine\utility::is_true(level.no_power_cooldowns)) {
     scripts\cp\powers\coop_powers::power_modifycooldownrate(0);
+  }
 
-  if(!scripts\engine\utility::is_true(self.wor_phase_shift))
+  if(!scripts\engine\utility::is_true(self.wor_phase_shift)) {
     self disableusability();
+  }
 
   scripts\cp\utility::allow_player_interactions(0);
   scripts\cp\powers\coop_powers::power_disablepower();
@@ -81,8 +88,9 @@ exitphaseshift(var_0) {
   self playSound("ftl_phase_in_npc");
 
   if(getdvarint("bg_thirdPerson") == 0) {
-    if(!isDefined(var_0) || var_0)
+    if(!isDefined(var_0) || var_0) {
       doscreenflash();
+    }
   }
 
   _id_410A();
@@ -93,8 +101,9 @@ _id_10918(var_0) {
   var_1 = spawn("script_model", self.origin);
   var_1 setModel("tag_origin");
 
-  if(getdvarint("bg_thirdPerson") == 0)
+  if(getdvarint("bg_thirdPerson") == 0) {
     var_1 hidefromplayer(self);
+  }
 
   wait 0.1;
   playfxontagforteam(scripts\engine\utility::getfx(var_0 + "_friendly"), var_1, "tag_origin", self.team);
@@ -115,16 +124,19 @@ _id_410A() {
   self visionsetnakedforplayer("", 0.0);
   self.has_special_weapon = 0;
 
-  if(!scripts\engine\utility::is_true(level.no_power_cooldowns) || scripts\cp\utility::is_consumable_active("grenade_cooldown"))
+  if(!scripts\engine\utility::is_true(level.no_power_cooldowns) || scripts\cp\utility::is_consumable_active("grenade_cooldown")) {
     scripts\cp\powers\coop_powers::_id_D74E();
+  }
 
-  if(scripts\cp\utility::isignoremeenabled())
+  if(scripts\cp\utility::isignoremeenabled()) {
     scripts\cp\utility::allow_player_ignore_me(0);
+  }
 
   scripts\cp\powers\coop_powers::deactivatepower("power_phaseShift");
 
-  if(!scripts\cp\utility::areinteractionsenabled())
+  if(!scripts\cp\utility::areinteractionsenabled()) {
     scripts\cp\utility::allow_player_interactions(1);
+  }
 
   self enableusability();
   scripts\cp\powers\coop_powers::power_enablepower();
@@ -158,11 +170,11 @@ _id_108EE(var_0, var_1, var_2, var_3, var_4) {
 _id_2A71(var_0, var_1) {
   var_2 = undefined;
 
-  if(var_0.team == "allies")
+  if(var_0.team == "allies") {
     var_2 = "axis";
-  else if(var_0.team == "axis")
+  } else if(var_0.team == "axis") {
     var_2 = "allies";
-  else {}
+  } else {}
 
   thread _id_108EE(scripts\engine\utility::getfx("vfx_phase_shift_trail_enemy"), var_0, var_0, var_2, var_1);
   var_3 = scripts\engine\utility::ter_op(level.teambased, scripts\engine\utility::getfx("vfx_phase_shift_trail_friendly"), scripts\engine\utility::getfx("vfx_phase_shift_trail_enemy"));
@@ -219,8 +231,9 @@ _id_12EEA(var_0) {
 doscreenflash() {
   scripts\engine\utility::waitframe();
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     playfxontagforclients(scripts\engine\utility::getfx("vfx_screen_flash"), self, "tag_eye", self);
+  }
 }
 
 isentityphaseshifted(var_0) {
@@ -307,8 +320,9 @@ outline_enemies() {
         continue;
       }
 
-      if(var_3 % 2 == 0)
+      if(var_3 % 2 == 0) {
         wait 0.05;
+      }
     }
 
     wait 0.25;

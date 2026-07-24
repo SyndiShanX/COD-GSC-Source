@@ -4,10 +4,11 @@
 ******************************************************/
 
 main() {
-  if(self.type == "dog")
+  if(self.type == "dog") {
     _id_102DE();
-  else
+  } else {
     _id_102DF();
+  }
 }
 
 #using_animtree("generic_human");
@@ -16,10 +17,11 @@ _id_102DF() {
   var_0 = [];
   var_0["traverseAnim"] = % slide_across_car;
 
-  if(getdvarint("ai_iw7", 0) == 0)
+  if(getdvarint("ai_iw7", 0) == 0) {
     scripts\anim\traverse\shared::_id_5AC3(var_0);
-  else
+  } else {
     self waittill("killanimscript");
+  }
 }
 
 #using_animtree("dog");

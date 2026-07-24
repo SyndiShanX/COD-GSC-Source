@@ -8,8 +8,9 @@ _id_FFD9() {
 }
 
 _id_FFDA(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.bt.cover) && isDefined(self._id_280A))
+  if(isDefined(self.bt.cover) && isDefined(self._id_280A)) {
     return scripts\asm\asm_bb::bb_reloadrequested();
+  }
 
   return 0;
 }
@@ -32,10 +33,11 @@ _id_CF00(var_0, var_1, var_2, var_3) {
   } else if(var_3 == "stickToNode") {
     var_7 = getmovedelta(var_2);
 
-    if(distancesquared(var_1.origin, self.origin) < 16)
+    if(distancesquared(var_1.origin, self.origin) < 16) {
       self _meth_8272(var_1.origin);
-    else
+    } else {
       thread _id_ABB7(var_1, 4, var_0 + "_finished");
+    }
   }
 }
 
@@ -56,12 +58,13 @@ _id_3F06(var_0, var_1, var_2) {
 
   var_10 = spawnStruct();
 
-  if(abs(var_8) > 135)
+  if(abs(var_8) > 135) {
     var_10._id_1299D = scripts\asm\asm::asm_lookupanimfromalias(var_1, "2");
-  else if(var_8 < 0)
+  } else if(var_8 < 0) {
     var_10._id_1299D = scripts\asm\asm::asm_lookupanimfromalias(var_1, "6");
-  else
+  } else {
     var_10._id_1299D = scripts\asm\asm::asm_lookupanimfromalias(var_1, "4");
+  }
 
   var_10._id_D81F = var_7;
   return var_10;
@@ -73,16 +76,18 @@ _id_D559(var_0, var_1, var_2, var_3) {
   self clearanim(_id_0A1E::asm_getbodyknob(), var_2);
   var_5 = 1.0;
 
-  if((scripts\asm\asm_bb::bb_meleechargerequested(var_0, var_1, var_2, var_3) || scripts\asm\asm_bb::bb_meleerequested(var_0, var_1, var_2, var_3)) && isDefined(self.melee.target) && isPlayer(self.melee.target))
+  if((scripts\asm\asm_bb::bb_meleechargerequested(var_0, var_1, var_2, var_3) || scripts\asm\asm_bb::bb_meleerequested(var_0, var_1, var_2, var_3)) && isDefined(self.melee.target) && isPlayer(self.melee.target)) {
     var_5 = 2.0;
+  }
 
   self _meth_82E7(var_1, var_4._id_1299D, 1.0, var_2, var_5);
   _id_0A1E::_id_2369(var_0, var_1, var_4._id_1299D);
   thread _id_D55A(var_1, var_4._id_1299D, var_4._id_D81F, var_2);
   var_6 = _id_0A1E::_id_231F(var_0, var_1, scripts\asm\asm::_id_2341(var_0, var_1));
 
-  if(var_6 == "end")
+  if(var_6 == "end") {
     thread scripts\asm\asm::_id_2310(var_0, var_1, 0);
+  }
 }
 
 _id_D55A(var_0, var_1, var_2, var_3) {
@@ -111,14 +116,16 @@ _id_D558(var_0, var_1, var_2, var_3) {
   var_6 = scripts\asm\asm_bb::bb_getcovernode();
 
   if(!isDefined(var_6)) {
-    if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 4096)
+    if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 4096) {
       var_6 = self.node;
+    }
   }
 
   var_7 = undefined;
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_7 = _id_8178(var_0, var_1, var_5, var_6);
+  }
 
   if(isDefined(var_7)) {
     self endon(var_1 + "_finished");
@@ -131,8 +138,9 @@ _id_D558(var_0, var_1, var_2, var_3) {
     self animmode("zonly_physics", 0);
     self orientmode("face current");
 
-    if(self.script == "init")
+    if(self.script == "init") {
       wait 0.05;
+    }
 
     _id_0A1E::_id_2369(var_0, var_1, var_7._id_02C9);
     self clearanim(_id_0A1E::asm_getbodyknob(), var_2);
@@ -170,8 +178,9 @@ _id_8178(var_0, var_1, var_2, var_3) {
   if(var_5) {
     var_8 = undefined;
 
-    if(scripts\engine\utility::isnodecoverleft(var_3) && _id_0F3D::_id_9D4C(var_0, var_1, undefined, "Cover Left Crouch") || scripts\engine\utility::isnodecoverright(var_3) && _id_0F3D::_id_9D4C(var_0, var_1, undefined, "Cover Right Crouch"))
+    if(scripts\engine\utility::isnodecoverleft(var_3) && _id_0F3D::_id_9D4C(var_0, var_1, undefined, "Cover Left Crouch") || scripts\engine\utility::isnodecoverright(var_3) && _id_0F3D::_id_9D4C(var_0, var_1, undefined, "Cover Right Crouch")) {
       var_8 = "crouch";
+    }
 
     var_6 = scripts\asm\shared\utility::getnodeforwardyaw(var_3, var_8);
     var_7 = var_3.angles;
@@ -189,14 +198,16 @@ _id_8178(var_0, var_1, var_2, var_3) {
 }
 
 _id_9E30(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   var_1 = var_0 _meth_8169();
 
   foreach(var_3 in var_1) {
-    if(var_3 == "over")
+    if(var_3 == "over") {
       return 0;
+    }
   }
 
   return 1;
@@ -205,13 +216,15 @@ _id_9E30(var_0) {
 _id_3EC7(var_0, var_1, var_2) {
   var_3 = var_2;
 
-  if(_id_9E30(self.node))
+  if(_id_9E30(self.node)) {
     var_3 = var_3 + "_high";
+  }
 
   var_4 = _id_0A1E::_id_2356(var_1, var_3);
 
-  if(isarray(var_4))
+  if(isarray(var_4)) {
     return var_4[randomint(var_4.size)];
+  }
 
   return var_4;
 }
@@ -226,8 +239,9 @@ _id_CEFC(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     if(isarray(var_3)) {
-      foreach(var_7 in var_3)
-      _id_CF00(var_1, var_5, var_4, var_7);
+      foreach(var_7 in var_3) {
+        _id_CF00(var_1, var_5, var_4, var_7);
+      }
     } else
       _id_CF00(var_1, var_5, var_4, var_3);
   }
@@ -252,10 +266,11 @@ _id_12675(var_0) {
   var_1 = self._id_164D[var_0];
 
   if(isDefined(var_1._id_10E23)) {
-    if(var_1._id_10E23 == "stand_run_loop")
+    if(var_1._id_10E23 == "stand_run_loop") {
       return 1;
-    else if(scripts\engine\utility::actor_is3d() && var_1._id_10E23 == "stand_run_strafe_loop")
+    } else if(scripts\engine\utility::actor_is3d() && var_1._id_10E23 == "stand_run_strafe_loop") {
       return 1;
+    }
   }
 
   return 0;
@@ -266,8 +281,9 @@ _id_CF01(var_0, var_1, var_2, var_3) {
     var_4 = [scripts\asm\asm_bb::bb_getcovernode(), self.node];
 
     for(var_5 = 0; !isDefined(self.asm._id_A961) && var_5 < var_4.size; var_5++) {
-      if(isDefined(var_4[var_5]) && distancesquared(self.origin, var_4[var_5].origin) < 256)
+      if(isDefined(var_4[var_5]) && distancesquared(self.origin, var_4[var_5].origin) < 256) {
         self.asm._id_A961 = var_4[var_5];
+      }
     }
   }
 
@@ -282,16 +298,18 @@ _id_CF02(var_0, var_1, var_2, var_3) {
       var_4 = scripts\asm\asm_bb::bb_getcovernode();
 
       if(isDefined(var_4)) {
-        if(distancesquared(var_4.origin, self.origin) < 16)
+        if(distancesquared(var_4.origin, self.origin) < 16) {
           self _meth_8272(var_4.origin);
-        else
+        } else {
           thread _id_ABB7(var_4, 4, var_1 + "_finished");
+        }
       }
 
       self.keepclaimednodeifvalid = 0;
 
-      if(_id_12675(var_0))
+      if(_id_12675(var_0)) {
         childthread scripts\asm\shared\utility::setuseanimgoalweight(var_1, var_2);
+      }
     }
   }
 
@@ -343,8 +361,9 @@ _id_CEC2(var_0, var_1, var_2, var_3) {
   childthread scripts\asm\shared\utility::setuseanimgoalweight(var_1, var_2);
   var_6 = _id_0A1E::_id_2323(var_0, var_1, var_5, scripts\asm\asm::_id_2341(var_0, var_1));
 
-  if(isDefined(var_6) && var_6 == "end")
+  if(isDefined(var_6) && var_6 == "end") {
     thread scripts\asm\asm::_id_2310(var_0, var_1, 0);
+  }
 
   scripts\asm\asm::asm_fireevent(var_1, "end");
 }
@@ -355,8 +374,9 @@ _id_41A2(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     if(isarray(var_2)) {
-      foreach(var_4 in var_2)
-      scripts\asm\asm::asm_fireephemeralevent(var_4, "end");
+      foreach(var_4 in var_2) {
+        scripts\asm\asm::asm_fireephemeralevent(var_4, "end");
+      }
     } else
       scripts\asm\asm::asm_fireephemeralevent(var_2, "end");
   }
@@ -390,15 +410,17 @@ _id_D51A(var_0, var_1, var_2, var_3) {
   self _meth_82EA(var_1, var_5, 1, var_2, 1);
   _id_0A1E::_id_2369(var_0, var_1, var_5);
 
-  if(isDefined(self._blackboard.shufflenode))
+  if(isDefined(self._blackboard.shufflenode)) {
     var_7 = self._blackboard.shufflenode.angles[1];
-  else if(isDefined(self.node))
+  } else if(isDefined(self.node)) {
     var_7 = self.node.angles[1];
-  else
+  } else {
     var_7 = self.angles[1];
+  }
 
-  if(self.unittype != "c6" && isDefined(var_4[var_1]))
+  if(self.unittype != "c6" && isDefined(var_4[var_1])) {
     var_7 = var_7 + var_4[var_1];
+  }
 
   self orientmode("face angle", var_7);
   _id_0A1E::_id_231F(var_0, var_1);
@@ -414,21 +436,25 @@ _id_10054(var_0, var_1, var_2, var_3) {
 }
 
 _id_FFB5(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self._blackboard.shufflenode))
+  if(!isDefined(self._blackboard.shufflenode)) {
     return 1;
+  }
 
-  if(!isDefined(self.node))
+  if(!isDefined(self.node)) {
     return 1;
+  }
 
-  if(self._blackboard.shufflenode != self.node)
+  if(self._blackboard.shufflenode != self.node) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_FFCA(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_3) && self._blackboard.shufflenode.type != var_3)
+  if(isDefined(var_3) && self._blackboard.shufflenode.type != var_3) {
     return 0;
+  }
 
   var_4 = _id_0A1E::_id_235D(var_2);
   var_5 = scripts\asm\asm::asm_lookupanimfromalias(var_2, var_4);
@@ -441,8 +467,9 @@ _id_FFCA(var_0, var_1, var_2, var_3) {
   var_11 = self._blackboard.shufflenode.origin - self._blackboard._id_1016B.origin;
   var_11 = (var_11[0], var_11[1], 0);
 
-  if(vectordot(var_11, var_6) < 0)
+  if(vectordot(var_11, var_6) < 0) {
     return 1;
+  }
 
   return 0;
 }
@@ -457,10 +484,11 @@ _id_D518(var_0, var_1, var_2, var_3) {
   var_5 = getmovedelta(var_4);
   var_6 = getangledelta3d(var_4);
 
-  if(isDefined(self._blackboard.shufflenode))
+  if(isDefined(self._blackboard.shufflenode)) {
     var_7 = self._blackboard.shufflenode;
-  else
+  } else {
     var_7 = self.node;
+  }
 
   if(isDefined(var_7)) {
     var_8 = (0, scripts\asm\shared\utility::getnodeforwardyaw(var_7), 0);

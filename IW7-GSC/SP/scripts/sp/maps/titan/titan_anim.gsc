@@ -127,8 +127,9 @@ _id_91DC() {
   level._id_EC88["omar"]["titan_omr_letsgetthisdoor"] = % titan_omr_letsgetthisdoor_face;
   level._id_EC88["omar"]["titan_usf_brookskashimawerepushing1"] = % titan_usf_brookskashimawerepushing1_face;
 
-  foreach(var_2 in var_0)
-  scripts\sp\anim::_id_17F6("omar", var_2, ::_id_5E5A, "intro_dropoff_scene_2");
+  foreach(var_2 in var_0) {
+    scripts\sp\anim::_id_17F6("omar", var_2, ::_id_5E5A, "intro_dropoff_scene_2");
+  }
 
   scripts\sp\anim::_id_17FA("atom", "vo_sc_titan_atm_Iwontletyou", "dropship_sfx_start", "intro_dropoff_scene");
   scripts\sp\anim::_id_17F6("omar", "vo_titan_usf_breathers", ::_id_6FE0, "intro_dropoff_scene_2");
@@ -195,8 +196,9 @@ _id_91DC() {
 }
 
 _id_11463(var_0) {
-  if(isDefined(var_0._id_B14F))
+  if(isDefined(var_0._id_B14F)) {
     var_0 scripts\sp\utility::_id_1101B();
+  }
 
   var_0 _meth_83A1();
   var_0 _meth_81D0();
@@ -206,8 +208,9 @@ _id_11463(var_0) {
 _id_244D(var_0) {
   thread _id_2450();
 
-  if(isDefined(var_0._id_B14F))
+  if(isDefined(var_0._id_B14F)) {
     var_0 scripts\sp\utility::_id_1101B();
+  }
 
   var_0.allowdeath = 1;
   var_0.a.nodeath = 1;
@@ -218,8 +221,9 @@ _id_244D(var_0) {
 _id_2450() {
   var_0 = scripts\engine\utility::getStructArray("atom_phys_pulse", "targetname");
 
-  foreach(var_2 in var_0)
-  physicsexplosionsphere(var_2.origin, 20, 10, 0.15);
+  foreach(var_2 in var_0) {
+    physicsexplosionsphere(var_2.origin, 20, 10, 0.15);
+  }
 }
 
 _id_244E(var_0) {
@@ -485,8 +489,9 @@ _id_4216(var_0) {
   level._id_B33B._id_1EB7 notify("stop_loop");
   level._id_B33B._id_1EB7 scripts\sp\anim::_id_1F35(level._id_B33B, "cliffside_chat");
 
-  if(scripts\engine\utility::flag("base_alerted") == 0)
+  if(scripts\engine\utility::flag("base_alerted") == 0) {
     level._id_B33B._id_1EB7 thread scripts\sp\anim::_id_1EEA(level._id_B33B, "cliffside_idle", "stop_loop");
+  }
 }
 
 _id_4217(var_0) {
@@ -505,8 +510,9 @@ _id_5E33(var_0) {
 _id_2080(var_0) {
   var_1 = scripts\engine\utility::getStructArray("beacon_holo", "targetname");
 
-  foreach(var_3 in var_1)
-  var_3 notify("landed");
+  foreach(var_3 in var_1) {
+    var_3 notify("landed");
+  }
 
   level._id_B33B thread scripts\sp\utility::_id_77B7("arm_up");
   wait 0.6;
@@ -570,8 +576,9 @@ _id_F431(var_0) {
 }
 
 _id_53F7() {
-  foreach(var_1 in level._id_B351)
-  var_1 scripts\sp\maps\titan\titan_code::_id_134B7("");
+  foreach(var_1 in level._id_B351) {
+    var_1 scripts\sp\maps\titan\titan_code::_id_134B7("");
+  }
 }
 
 #using_animtree("generic_human");

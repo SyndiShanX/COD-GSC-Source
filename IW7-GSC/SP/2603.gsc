@@ -75,12 +75,14 @@ getlaserstartpoint() {
 
     self.bhaslasertag = 0;
   } else if(scripts\engine\utility::is_true(self.bhaslasertag)) {
-    if(!shoulduselasertag())
+    if(!shoulduselasertag()) {
       self.bhaslasertag = 0;
+    }
   }
 
-  if(self.bhaslasertag)
+  if(self.bhaslasertag) {
     return self gettagorigin("tag_laser");
+  }
 
   return self getmuzzlepos();
 }
@@ -118,10 +120,11 @@ _id_103BB() {
       var_3 = vectorNormalize((var_3[0], var_3[1], 0));
       var_4 = vectordot(var_2, var_3);
 
-      if(var_4 < 0.996)
+      if(var_4 < 0.996) {
         self._id_103A9.angles = getlaserangles();
-      else
+      } else {
         self._id_103A9.angles = vectortoangles(self._id_45E2._id_1A2B - self._id_103A9.origin);
+      }
     }
 
     scripts\engine\utility::waitframe();
@@ -133,8 +136,9 @@ _id_11B0B() {
 }
 
 _id_11B0C() {
-  if(!isDefined(self._id_103A9))
+  if(!isDefined(self._id_103A9)) {
     thread _id_103BB();
+  }
 }
 
 _id_41A1() {
@@ -142,38 +146,43 @@ _id_41A1() {
 }
 
 _id_E24D(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self._id_45E2))
+  if(!isDefined(self._id_45E2)) {
     self._id_45E2 = spawnStruct();
+  }
 
   self._id_45E2._id_103A6 = undefined;
   self._id_45E2.target = var_0.target;
   self._id_45E2._id_45DC = 96;
 
-  if(var_1)
+  if(var_1) {
     self._id_45E2._id_45E1 = 1500;
-  else if(scripts\engine\utility::is_true(var_3))
+  } else if(scripts\engine\utility::is_true(var_3)) {
     self._id_45E2._id_45E1 = 1500;
-  else
+  } else {
     self._id_45E2._id_45E1 = 2000;
+  }
 
   self _meth_857A("interpolate");
   var_4 = scripts\sp\gameskill::_id_7C6D(level._id_7683);
   var_5 = level._id_54D0["sniper_converge_scale"][var_4];
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     self._id_45E2._id_45E1 = self._id_45E2._id_45E1 * var_5;
+  }
 
-  if(isDefined(level._id_103A4))
+  if(isDefined(level._id_103A4)) {
     self._id_45E2._id_45E1 = self._id_45E2._id_45E1 * level._id_103A4;
+  }
 
   self._id_45E2._id_45DB = 12;
   self._id_45E2._id_AED8 = 750;
   self._id_45E2._id_45DA = undefined;
 
-  if(!isDefined(self._id_103A9))
+  if(!isDefined(self._id_103A9)) {
     self._id_45E2._id_45D8 = -1500;
-  else
+  } else {
     self._id_45E2._id_45D8 = 0;
+  }
 
   self._id_45E2._id_45E0 = self._id_45E2._id_45E1 + 1000;
   self._id_45E2._id_45D9 = self._id_45E2._id_45E0 + 500;
@@ -182,17 +191,18 @@ _id_E24D(var_0, var_1, var_2, var_3) {
     var_6 = undefined;
     var_7 = undefined;
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_6 = var_2;
-    else {
+    } else {
       if(isDefined(var_0.target)) {
         var_8 = var_0.target.origin;
 
         if(isPlayer(var_0.target)) {
           var_7 = var_0.target getvelocity();
 
-          if(var_7 == (0, 0, 0))
+          if(var_7 == (0, 0, 0)) {
             var_7 = undefined;
+          }
         }
       } else
         var_8 = var_0.pos - (0, 0, 70);
@@ -210,20 +220,23 @@ _id_E24D(var_0, var_1, var_2, var_3) {
       var_11 = vectorcross(var_10, (0, 0, 1));
       var_12 = randomfloatrange(6, 36);
 
-      if(scripts\engine\utility::is_true(var_3))
+      if(scripts\engine\utility::is_true(var_3)) {
         var_12 = randomfloatrange(12, 24);
+      }
 
       if(isDefined(var_7)) {
         var_13 = vectordot(var_7, var_11);
 
-        if(var_13 < 0)
+        if(var_13 < 0) {
           var_6 = var_6 + var_11 * var_12;
-        else
+        } else {
           var_6 = var_6 - var_11 * var_12;
+        }
       } else if(randomintrange(0, 2))
         var_6 = var_6 + var_11 * var_12;
-      else
+      else {
         var_6 = var_6 - var_11 * var_12;
+      }
     }
 
     self._id_45E2._id_45DE = vectorNormalize(var_6 - var_0.pos);
@@ -235,10 +248,11 @@ _id_36DA(var_0) {
   if(isDefined(self._id_45E2._id_45DA) && gettime() - self._id_45E2._id_45DA >= 100) {
     var_1 = gettime() - self._id_45E2._id_45DA;
 
-    if(isDefined(var_0.target) && isPlayer(var_0.target))
+    if(isDefined(var_0.target) && isPlayer(var_0.target)) {
       self _meth_857A("lock");
-    else
+    } else {
       self _meth_857A("interpolate");
+    }
 
     return var_0.pos - (0, 0, 1.3);
   }
@@ -254,21 +268,24 @@ _id_36DA(var_0) {
 
   var_5 = (self._id_45E2._id_45E1 - self._id_45E2._id_45D8) / self._id_45E2._id_45E1;
 
-  if(self._id_45E2._id_45D8 >= self._id_45E2._id_45E1)
+  if(self._id_45E2._id_45D8 >= self._id_45E2._id_45E1) {
     var_5 = 0.0;
+  }
 
   var_6 = var_5 * (self._id_45E2._id_45DC - self._id_45E2._id_45DB) + self._id_45E2._id_45DB;
   var_4 = var_0.pos + self._id_45E2._id_45DE * var_6;
 
-  if(isDefined(var_0.target) && isPlayer(var_0.target))
+  if(isDefined(var_0.target) && isPlayer(var_0.target)) {
     self _meth_857A("interpolate");
+  }
 
   return var_4;
 }
 
 _id_C59A() {
-  if(isDefined(self._id_45E2) && isDefined(self._id_103A9))
+  if(isDefined(self._id_45E2) && isDefined(self._id_103A9)) {
     self._id_45E2._id_103A6 = 1;
+  }
 }
 
 _id_C599() {
@@ -282,8 +299,9 @@ _id_129A4(var_0) {
   self endon("death");
   wait(var_0);
 
-  if(isDefined(self._id_103A9))
+  if(isDefined(self._id_103A9)) {
     self._id_103A9[[self._id_71BD]]();
+  }
 }
 
 _id_45E5(var_0) {
@@ -293,26 +311,30 @@ _id_45E5(var_0) {
   if(isDefined(var_0.target)) {
     var_1 = self cansee(var_0.target);
 
-    if(isDefined(self._id_45E2) && isDefined(self._id_45E2.target) && self._id_45E2.target != var_0.target)
+    if(isDefined(self._id_45E2) && isDefined(self._id_45E2.target) && self._id_45E2.target != var_0.target) {
       var_2 = 1;
+    }
 
-    if(var_1)
+    if(var_1) {
       var_0.pos = var_0.target getshootatpos();
+    }
   }
 
-  if(!isDefined(self._id_45E2) || var_2)
+  if(!isDefined(self._id_45E2) || var_2) {
     _id_E24D(var_0, var_2);
-  else if(var_1 && !scripts\engine\utility::is_true(self._id_45E2._id_2AB7)) {
-    if(isDefined(self._id_45E2._id_1A2B) && distancesquared(self._id_45E2._id_1A2B, var_0.pos) < 3600)
+  } else if(var_1 && !scripts\engine\utility::is_true(self._id_45E2._id_2AB7)) {
+    if(isDefined(self._id_45E2._id_1A2B) && distancesquared(self._id_45E2._id_1A2B, var_0.pos) < 3600) {
       _id_E24D(var_0, var_2, undefined, 1);
-    else
+    } else {
       _id_E24D(var_0, var_2);
+    }
   } else if(scripts\engine\utility::is_true(self._id_45E2._id_103A6)) {
     self _meth_857A("interpolate");
     self._id_45E2._id_103A6 = undefined;
 
-    if(isDefined(var_0.target) && isPlayer(var_0.target) && self cansee(var_0.target))
+    if(isDefined(var_0.target) && isPlayer(var_0.target) && self cansee(var_0.target)) {
       _id_E24D(var_0, var_2, undefined, 1);
+    }
   }
 
   self._id_45E2._id_2AB7 = var_1;
@@ -323,46 +345,53 @@ _id_45E5(var_0) {
   var_7 = self _meth_853C();
 
   if(self._id_45E2._id_45D8 < 0) {
-    if(!_id_9D30())
+    if(!_id_9D30()) {
       return 0;
+    }
 
     self._id_45E2._id_45D8 = self._id_45E2._id_45D8 + 50;
     var_8 = vectordot(var_6, var_7);
 
-    if(var_8 < 0.984)
+    if(var_8 < 0.984) {
       return 0;
+    }
 
     var_6 = vectorNormalize((var_6[0], var_6[1], 0));
     var_7 = vectorNormalize((var_7[0], var_7[1], 0));
     var_9 = vectordot(var_6, var_7);
 
-    if(var_9 < 0.996)
+    if(var_9 < 0.996) {
       return 0;
+    }
 
     self._id_45E2._id_45D8 = 0;
   } else {
     self._id_45E2._id_45D8 = self._id_45E2._id_45D8 + 50;
     var_8 = vectordot(var_6, var_7);
 
-    if(var_8 < 0.984)
+    if(var_8 < 0.984) {
       var_3 = 0;
+    }
 
     var_6 = vectorNormalize((var_6[0], var_6[1], 0));
     var_7 = vectorNormalize((var_7[0], var_7[1], 0));
     var_9 = vectordot(var_6, var_7);
 
-    if(var_9 < 0.996)
+    if(var_9 < 0.996) {
       var_3 = 0;
+    }
   }
 
   if(self._id_45E2._id_45D8 >= self._id_45E2._id_45E1) {
     if(isDefined(var_0.target)) {
       if(!isDefined(self._id_45E2._id_45DA)) {
-        if(var_1)
+        if(var_1) {
           self._id_45E2._id_45DA = gettime();
+        }
       } else if(gettime() >= self._id_45E2._id_45DA + 200) {
-        if(!var_1)
+        if(!var_1) {
           self._id_45E2._id_45DA = undefined;
+        }
       }
     }
   }
@@ -385,48 +414,55 @@ _id_811E(var_0) {
 
   var_3 = undefined;
 
-  if(isDefined(self._blackboard.shootparams))
+  if(isDefined(self._blackboard.shootparams)) {
     var_3 = self._blackboard.shootparams;
-  else if(isDefined(self.asm.shootparams))
+  } else if(isDefined(self.asm.shootparams)) {
     var_3 = self.asm.shootparams;
+  }
 
-  if(!scripts\asm\asm_bb::_id_2985())
+  if(!scripts\asm\asm_bb::_id_2985()) {
     return undefined;
-  else if(isDefined(var_3.ent))
+  } else if(isDefined(var_3.ent)) {
     var_1._id_FECF = var_3.ent getshootatpos();
-  else if(isDefined(var_3.pos))
+  } else if(isDefined(var_3.pos)) {
     var_1._id_FECF = var_3.pos;
+  }
 
-  if(isDefined(var_1._id_FECF))
+  if(isDefined(var_1._id_FECF)) {
     return var_1;
+  }
 
   return undefined;
 }
 
 _id_9F60() {
-  if(!isDefined(self._id_45E2))
+  if(!isDefined(self._id_45E2)) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_9F61() {
-  if(isDefined(self._id_103A9))
+  if(isDefined(self._id_103A9)) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_9D30() {
-  if(!isDefined(self.asm._id_1A49))
+  if(!isDefined(self.asm._id_1A49)) {
     return 0;
+  }
 
   var_0 = 100.0;
   var_0 = var_0 * 2;
   var_1 = gettime();
 
-  if(self.asm._id_1A49 + var_0 < var_1)
+  if(self.asm._id_1A49 + var_0 < var_1) {
     return 1;
+  }
 
   return 0;
 }
@@ -445,12 +481,14 @@ _id_11AF8(var_0) {
     _id_93E2();
     var_6 = scripts\asm\asm::_id_231B(self.asm._id_11AC7, "aim");
 
-    if(!var_6 && scripts\asm\asm::_id_231B(self.asm._id_11AC7, "notetrackAim"))
+    if(!var_6 && scripts\asm\asm::_id_231B(self.asm._id_11AC7, "notetrackAim")) {
       var_6 = scripts\asm\asm::_id_232B(scripts\asm\asm::asm_getcurrentstate(self.asm._id_11AC7), "start_aim");
+    }
 
     if(!var_6 || !isDefined(self._blackboard.shootparams)) {
-      if(!var_6 && isDefined(self._id_45E2))
+      if(!var_6 && isDefined(self._id_45E2)) {
         _id_41A1();
+      }
 
       _id_11B0B();
       self.asm._id_1A49 = undefined;
@@ -464,8 +502,9 @@ _id_11AF8(var_0) {
       var_8 = _id_811E(var_7);
       var_9 = undefined;
 
-      if(isDefined(var_8))
+      if(isDefined(var_8)) {
         var_9 = var_8._id_FECF;
+      }
 
       var_10 = self _meth_8164();
       var_11 = isDefined(var_10);
@@ -481,10 +520,11 @@ _id_11AF8(var_0) {
           var_9 = _id_36DA(self._blackboard.shootparams);
           self._id_45E2._id_1A2B = var_9;
 
-          if(var_15)
+          if(var_15) {
             _id_11B0C();
-          else
+          } else {
             _id_11B0B();
+          }
         } else
           _id_11B0B();
       } else
@@ -493,14 +533,16 @@ _id_11AF8(var_0) {
       var_16 = isDefined(var_9);
       var_17 = (0, 0, 0);
 
-      if(var_16)
+      if(var_16) {
         var_17 = var_9;
+      }
 
       var_18 = 0;
       var_19 = isDefined(self._id_10F8C);
 
-      if(var_19)
+      if(var_19) {
         var_18 = self._id_10F8C;
+      }
 
       var_20 = 0;
       var_21 = 0;
@@ -517,10 +559,11 @@ _id_11AF8(var_0) {
 
       var_24 = (var_21, var_20, 0);
 
-      if(scripts\engine\utility::_id_9DA3() || isDefined(var_8) && isDefined(var_8._id_2AA9) && var_8._id_2AA9)
+      if(scripts\engine\utility::_id_9DA3() || isDefined(var_8) && isDefined(var_8._id_2AA9) && var_8._id_2AA9) {
         var_1 = self _meth_80FA(var_7, var_17, var_16, var_24, var_18, var_19, 0);
-      else
+      } else {
         var_1 = (0, 0, 0);
+      }
     } else if(self.asm._id_D8C7 < 5 && self.asm._id_D8BB < 5) {
       wait 0.05;
       continue;
@@ -538,8 +581,9 @@ _id_11AF8(var_0) {
       var_5 = 30;
     } else if(scripts\anim\utility_common::isasniper())
       var_5 = 2;
-    else
+    else {
       var_5 = 10;
+    }
 
     var_27 = 4;
     var_3 = self.relativedir;
@@ -567,10 +611,11 @@ _id_11AF8(var_0) {
     self.asm._id_D8C7 = var_26;
     self.asm._id_D8BB = var_25;
 
-    if(isDefined(self.asm._id_58EC) && self.asm._id_58EC)
+    if(isDefined(self.asm._id_58EC) && self.asm._id_58EC) {
       _id_11AFF(var_25, var_26);
-    else
+    } else {
       _id_11AFE(var_25, var_26);
+    }
 
     wait 0.05;
   }
@@ -583,10 +628,11 @@ _id_11AFD() {
   var_0 = clamp(self.asm._id_D8C7, self.rightaimlimit, self.leftaimlimit);
   var_1 = clamp(self.asm._id_D8BB, self.upaimlimit, self.downaimlimit);
 
-  if(isDefined(self.asm._id_58EC) && self.asm._id_58EC)
+  if(isDefined(self.asm._id_58EC) && self.asm._id_58EC) {
     _id_11AFF(var_1, var_0);
-  else
+  } else {
     _id_11AFE(var_1, var_0);
+  }
 }
 
 _id_11AFB(var_0) {
@@ -597,8 +643,9 @@ _id_11AFB(var_0) {
     var_1 = self._id_4792 getshootatpos();
 
     if(isDefined(self._id_4796)) {
-      if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.177)
+      if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.177) {
         var_1 = undefined;
+      }
     } else if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.643)
       var_1 = undefined;
   }
@@ -607,8 +654,9 @@ _id_11AFB(var_0) {
     var_1 = self._id_478F;
 
     if(isDefined(self._id_4795)) {
-      if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.177)
+      if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.177) {
         var_1 = undefined;
+      }
     } else if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.643)
       var_1 = undefined;
   }
@@ -631,8 +679,9 @@ _id_11AFE(var_0, var_1) {
     var_6 = self.asm._id_11A90._id_1A25;
   }
 
-  if(isDefined(self.asm._id_11A90._id_1A21))
+  if(isDefined(self.asm._id_11A90._id_1A21)) {
     var_2 = self.asm._id_11A90._id_1A21;
+  }
 
   var_7 = 0;
   var_8 = 0;
@@ -661,8 +710,9 @@ _id_11AFE(var_0, var_1) {
   self _meth_82AC(var_5, var_10, 0.1, 1, 1);
   self _meth_82AC(var_6, var_11, 0.1, 1, 1);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self _meth_82AC(var_2, var_9, 0.1, 1, 1);
+  }
 }
 
 _id_11AFF(var_0, var_1) {
@@ -686,8 +736,9 @@ _id_11AFF(var_0, var_1) {
 
   for(var_18 = 0; var_17 > var_11[var_18]; var_18++) {}
 
-  if(var_18 == 0)
+  if(var_18 == 0) {
     var_18 = 1;
+  }
 
   for(var_19 = 0; var_19 < var_10.size; var_19++) {
     if(var_19 == var_18 || var_19 == var_18 - 1) {
@@ -708,8 +759,9 @@ _id_11AFF(var_0, var_1) {
       continue;
     }
 
-    if(var_10[var_19] != var_10[var_18] && var_10[var_19] != var_10[var_18 - 1])
+    if(var_10[var_19] != var_10[var_18] && var_10[var_19] != var_10[var_18 - 1]) {
       self clearanim(var_10[var_19], 0.05);
+    }
   }
 }
 
@@ -720,8 +772,9 @@ _id_F641(var_0, var_1) {
     self.a._id_1A4C = var_0;
     self.a._id_1A4F = 0;
   } else {
-    if(!isDefined(self.a._id_1A4B))
+    if(!isDefined(self.a._id_1A4B)) {
       self.a._id_1A4B = 0;
+    }
 
     self.a._id_1A4D = self.a._id_1A4B;
     self.a._id_1A4C = var_0;
@@ -740,34 +793,39 @@ _id_93E2() {
 }
 
 _id_1A3A() {
-  if(!isDefined(self._blackboard.shootparams.pos) && !isDefined(self._blackboard.shootparams.ent))
+  if(!isDefined(self._blackboard.shootparams.pos) && !isDefined(self._blackboard.shootparams.ent)) {
     return 1;
+  }
 
   var_0 = self _meth_8164();
 
   if(isDefined(self._blackboard.shootparams._id_29AF)) {
-    if(!isDefined(self._id_45E2))
+    if(!isDefined(self._id_45E2)) {
       return 0;
+    }
 
     if(isDefined(self._id_45E2._id_45DA)) {
       var_1 = gettime() - self._id_45E2._id_45DA;
 
-      if(var_1 >= self._id_45E2._id_AED8)
+      if(var_1 >= self._id_45E2._id_AED8) {
         return 1;
+      }
     } else if(self._id_45E2._id_45D8 >= self._id_45E2._id_45E0)
       return 1;
 
     return 0;
   }
 
-  if(scripts\asm\asm_bb::_id_293E())
+  if(scripts\asm\asm_bb::_id_293E()) {
     return 1;
+  }
 
   var_2 = scripts\anim\shared::_id_811C();
   var_3 = _id_811E(var_2);
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     return 0;
+  }
 
   var_4 = var_3._id_FECF;
 
@@ -792,14 +850,16 @@ _id_1A3A() {
   var_15 = scripts\engine\utility::absangleclamp180(var_7[1] - var_10[1]);
 
   if(var_15 > var_12) {
-    if(var_15 > var_13 || distancesquared(self getEye(), var_4) > anim._id_1A50)
+    if(var_15 > var_13 || distancesquared(self getEye(), var_4) > anim._id_1A50) {
       return 0;
+    }
   }
 
   var_16 = scripts\engine\utility::absangleclamp180(var_7[0] - var_10[0]);
 
-  if(var_16 > var_14)
+  if(var_16 > var_14) {
     return 0;
+  }
 
   return 1;
 }

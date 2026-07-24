@@ -50,14 +50,17 @@ debug_dj_location() {
 }
 
 complete_fetch_quest() {
-  if(!scripts\engine\utility::is_true(level.dj_part_1_found))
+  if(!scripts\engine\utility::is_true(level.dj_part_1_found)) {
     pick_up_part_1(level.selected_dj_parts[1], level.players[0]);
+  }
 
-  if(!scripts\engine\utility::is_true(level.dj_part_2_found))
+  if(!scripts\engine\utility::is_true(level.dj_part_2_found)) {
     pick_up_part_2(level.selected_dj_parts[2], level.players[0]);
+  }
 
-  if(!scripts\engine\utility::is_true(level.dj_part_3_found))
+  if(!scripts\engine\utility::is_true(level.dj_part_3_found)) {
     pick_up_part_3(level.selected_dj_parts[3], level.players[0]);
+  }
 }
 
 do_fetch_quest() {
@@ -67,16 +70,18 @@ do_fetch_quest() {
 debug_beat_fetch_quest() {}
 
 fetch_quest_use_dj_door(var_0, var_1) {
-  if(!isDefined(level.first_time_use_door_allparts))
+  if(!isDefined(level.first_time_use_door_allparts)) {
     level.first_time_use_door_allparts = 0;
+  }
 
   level thread play_dj_parts_quest_vo(var_1, var_0);
 }
 
 play_dj_parts_quest_vo(var_0, var_1) {
   if(isDefined(var_0.vo_prefix)) {
-    if(var_0.vo_prefix == "p5_")
+    if(var_0.vo_prefix == "p5_") {
       var_0 thread scripts\cp\cp_vo::try_to_play_vo("quest_intro", "zmb_comment_vo");
+    }
   }
 
   if(get_num_of_dj_quest_parts_collected() == 0) {
@@ -91,10 +96,11 @@ play_dj_parts_quest_vo(var_0, var_1) {
   } else if(get_num_of_dj_quest_parts_collected() == 3) {
     scripts\cp\cp_vo::remove_from_nag_vo("nag_return_djpart");
 
-    if(level.first_time_use_door_allparts == 0)
+    if(level.first_time_use_door_allparts == 0) {
       playsoundatpos(level.dj.origin, "dj_quest_ufo_parts_before_quest");
-    else
+    } else {
       playsoundatpos(level.dj.origin, "dj_quest_parts_all");
+    }
 
     scripts\cp\zombies\zombie_analytics::log_frequency_device_crafted_dj(level.wave_num, var_1.name);
     level.use_dj_door_func = undefined;
@@ -111,10 +117,11 @@ init_part_1() {
 pick_up_part_1(var_0, var_1) {
   level.dj_part_1_found = 1;
 
-  if(randomint(100) > 90)
+  if(randomint(100) > 90) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("collect_dj", "zmb_comment_vo", "low", 10, 0, 0, 1, 50);
-  else
+  } else {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("quest_dj_boombox", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
+  }
 
   level thread scripts\cp\cp_vo::remove_from_nag_vo("dj_craft_nag", 1);
   pick_up_dj_quest_part(var_0, var_1, 22);
@@ -127,10 +134,11 @@ init_part_2() {
 pick_up_part_2(var_0, var_1) {
   level.dj_part_2_found = 1;
 
-  if(randomint(100) > 90)
+  if(randomint(100) > 90) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("collect_dj", "zmb_comment_vo", "low", 10, 0, 0, 1, 50);
-  else
+  } else {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("quest_dj_calculator", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
+  }
 
   pick_up_dj_quest_part(var_0, var_1, 23);
 }
@@ -142,10 +150,11 @@ init_part_3() {
 pick_up_part_3(var_0, var_1) {
   level.dj_part_3_found = 1;
 
-  if(randomint(100) > 90)
+  if(randomint(100) > 90) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("collect_dj", "zmb_comment_vo", "low", 10, 0, 0, 1, 50);
-  else
+  } else {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("quest_dj_umbrella", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
+  }
 
   pick_up_dj_quest_part(var_0, var_1, 24);
   level thread scripts\cp\cp_vo::remove_from_nag_vo("dj_quest_ufo_partsrecovery_hint");
@@ -155,8 +164,9 @@ init_dj_quest_part(var_0, var_1) {
   if(scripts\cp\utility::is_codxp()) {
     return;
   }
-  if(!isDefined(level.djpartsareas))
+  if(!isDefined(level.djpartsareas)) {
     level.djpartsareas = ["area_1", "area_2", "area_3"];
+  }
 
   var_2 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
   var_3 = scripts\engine\utility::random(level.djpartsareas);
@@ -176,8 +186,9 @@ init_dj_quest_part(var_0, var_1) {
   var_10 = spawn("script_model", var_9.origin);
   var_10 setModel(var_1);
 
-  if(isDefined(var_9.angles))
+  if(isDefined(var_9.angles)) {
     var_10.angles = var_9.angles;
+  }
 
   var_5.part_model = var_10;
   var_5.custom_search_dist = 96;
@@ -202,14 +213,17 @@ pick_up_dj_quest_part(var_0, var_1, var_2) {
 get_num_of_dj_quest_parts_collected() {
   var_0 = 0;
 
-  if(scripts\engine\utility::is_true(level.dj_part_1_found))
+  if(scripts\engine\utility::is_true(level.dj_part_1_found)) {
     var_0++;
+  }
 
-  if(scripts\engine\utility::is_true(level.dj_part_2_found))
+  if(scripts\engine\utility::is_true(level.dj_part_2_found)) {
     var_0++;
+  }
 
-  if(scripts\engine\utility::is_true(level.dj_part_3_found))
+  if(scripts\engine\utility::is_true(level.dj_part_3_found)) {
     var_0++;
+  }
 
   return var_0;
 }
@@ -221,8 +235,9 @@ add_to_dj_quest_part_list(var_0) {
 setup_dj_doors() {
   var_0 = scripts\engine\utility::getStructArray("dj_quest_door", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2.selected = 0;
+  foreach(var_2 in var_0) {
+    var_2.selected = 0;
+  }
 
   if(isDefined(level.the_hoff)) {
     return;
@@ -241,12 +256,14 @@ choose_new_dj_door() {
   }
   level.disable_broadcast = 1;
 
-  while(!isDefined(level.dj) || !isDefined(level.dj.current_state) || level.dj.current_state != "idle")
+  while(!isDefined(level.dj) || !isDefined(level.dj.current_state) || level.dj.current_state != "idle") {
     wait 1;
+  }
 
   for(;;) {
-    if(level.dj.current_state != "close_window")
+    if(level.dj.current_state != "close_window") {
       set_dj_state("close_window");
+    }
 
     wait 1;
 
@@ -257,8 +274,9 @@ choose_new_dj_door() {
 
   var_0 = scripts\engine\utility::getStructArray("dj_quest_door", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2.selected = 0;
+  foreach(var_2 in var_0) {
+    var_2.selected = 0;
+  }
 
   level.dj waittill("window_closed");
 
@@ -320,8 +338,9 @@ use_dj_door_to_request_defense(var_0, var_1) {
   scripts\engine\utility::flag_set("dj_request_defense_done");
   level thread scripts\cp\cp_vo::try_to_play_vo("dj_quest_ufo_speakerdefense_start", "zmb_dj_vo");
 
-  foreach(var_1 in level.players)
-  var_1 setclientomnvar("zm_special_item", 3);
+  foreach(var_1 in level.players) {
+    var_1 setclientomnvar("zm_special_item", 3);
+  }
 }
 
 use_dj_door_during_speaker_defense(var_0, var_1) {
@@ -332,8 +351,9 @@ use_dj_door_after_fail_speaker_defense(var_0, var_1) {
   scripts\engine\utility::flag_set("dj_request_defense_done");
   level.use_dj_door_func = ::use_dj_door_during_speaker_defense;
 
-  foreach(var_1 in level.players)
-  var_1 setclientomnvar("zm_special_item", 3);
+  foreach(var_1 in level.players) {
+    var_1 setclientomnvar("zm_special_item", 3);
+  }
 }
 
 use_dj_door_to_pick_up_analyzer(var_0, var_1) {}
@@ -432,8 +452,9 @@ init_get_tone_generator() {
 get_tone_generator() {
   scripts\engine\utility::flag_wait("tone_generators_given");
 
-  foreach(var_1 in level.players)
-  var_1 setclientomnvar("zm_special_item", 5);
+  foreach(var_1 in level.players) {
+    var_1 setclientomnvar("zm_special_item", 5);
+  }
 }
 
 complete_get_tone_generator() {
@@ -571,9 +592,9 @@ debug_beat_ufo_projectile_attack() {}
 
 use_dj_door(var_0, var_1) {
   if(var_0.selected == 1) {
-    if(level.dj.current_state == "mic_loop")
+    if(level.dj.current_state == "mic_loop") {
       var_1 playlocalsound("dj_deny");
-    else if(isDefined(level.use_dj_door_func)) {
+    } else if(isDefined(level.use_dj_door_func)) {
       [[level.use_dj_door_func]](var_0, var_1);
       var_1 playlocalsound("dj_turn_in");
     } else
@@ -603,8 +624,9 @@ disable_dj_broadcast_for_time(var_0) {
 }
 
 get_speaker_loc(var_0) {
-  if(level.selected_speaker_defense_locations.size == 0)
+  if(level.selected_speaker_defense_locations.size == 0) {
     select_speaker_defense_locations();
+  }
 
   var_1 = scripts\engine\utility::random(level.selected_speaker_defense_locations);
   level.selected_speaker_defense_locations = scripts\engine\utility::array_remove(level.selected_speaker_defense_locations, var_1);
@@ -619,17 +641,19 @@ dj_arcade_purchase_hint_func(var_0, var_1) {
 }
 
 dj_speaker_mid_hint_func(var_0, var_1) {
-  if(scripts\engine\utility::is_true(var_0.placed))
+  if(scripts\engine\utility::is_true(var_0.placed)) {
     return &"CP_QUEST_WOR_USE_TONE_EQUIP";
-  else
+  } else {
     return &"CP_QUEST_WOR_PLACE_PART";
+  }
 }
 
 dj_door_hintstring(var_0, var_1) {
-  if(var_0.selected)
+  if(var_0.selected) {
     return &"CP_ZMB_INTERACTIONS_TALK_TO_DJ";
-  else
+  } else {
     return &"CP_ZMB_INTERACTIONS_DJ_NOT_HERE";
+  }
 }
 
 init_dj_speaker() {
@@ -638,8 +662,9 @@ init_dj_speaker() {
   foreach(var_2 in var_0) {
     var_3 = scripts\cp\cp_interaction::get_area_for_power(var_2);
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_2.area_name = var_3;
+    }
 
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
     var_2.custom_search_dist = 128;
@@ -653,11 +678,13 @@ playstaticsoundinarea(var_0) {
   var_0 endon("death");
 
   for(;;) {
-    if(!scripts\engine\utility::flag("dj_request_defense_done"))
+    if(!scripts\engine\utility::flag("dj_request_defense_done")) {
       scripts\engine\utility::flag_wait("dj_request_defense_done");
+    }
 
-    if(scripts\engine\utility::is_true(level.spawn_event_running))
+    if(scripts\engine\utility::is_true(level.spawn_event_running)) {
       level waittill("regular_wave_starting");
+    }
 
     var_1 = scripts\engine\utility::get_array_of_closest(var_0.origin, level.players, undefined, 4, 96);
 
@@ -676,10 +703,11 @@ managespeakerlocactivation(var_0) {
   var_0 endon("speaker_loc_manager");
   level endon("speaker_defense_started");
 
-  if(scripts\engine\utility::is_true(level.spawn_event_running))
+  if(scripts\engine\utility::is_true(level.spawn_event_running)) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
-  else
+  } else {
     scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
+  }
 
   for(;;) {
     var_1 = level scripts\engine\utility::waittill_any_return("event_wave_starting", "regular_wave_starting");
@@ -697,16 +725,19 @@ waitforallplayerstriggered(var_0) {
   var_0 notify("waiting_for_all_structs_used");
   var_0 endon("waiting_for_all_structs_used");
 
-  if(!scripts\engine\utility::array_contains(level.centerstructstriggered, var_0))
+  if(!scripts\engine\utility::array_contains(level.centerstructstriggered, var_0)) {
     level.centerstructstriggered[level.centerstructstriggered.size] = var_0;
+  }
 
-  if(level.centerstructstriggered.size == level.players.size)
+  if(level.centerstructstriggered.size == level.players.size) {
     scripts\engine\utility::flag_set("all_center_positions_used");
+  }
 
   wait 1;
 
-  if(scripts\engine\utility::array_contains(level.centerstructstriggered, var_0))
+  if(scripts\engine\utility::array_contains(level.centerstructstriggered, var_0)) {
     level.centerstructstriggered = scripts\engine\utility::array_remove(level.centerstructstriggered, var_0);
+  }
 }
 
 disableparkpas() {
@@ -734,8 +765,9 @@ speaker_defend_hint_func(var_0, var_1) {
 start_defense_sequence(var_0, var_1) {
   var_2 = var_1 can_place_speaker(var_0);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return 0;
+  }
 
   set_up_defense_sequence_zombie_model();
   notify_objective();
@@ -745,8 +777,9 @@ start_defense_sequence(var_0, var_1) {
   level thread scripts\cp\cp_vo::try_to_play_vo("dj_sign_off", "zmb_dj_vo", "medium", 3, 0, 0, 1);
   set_up_and_start_speaker(var_0, var_2);
 
-  foreach(var_1 in level.players)
-  var_1 setclientomnvar("zm_special_item", 0);
+  foreach(var_1 in level.players) {
+    var_1 setclientomnvar("zm_special_item", 0);
+  }
 
   level.use_dj_door_func = ::use_dj_door_during_speaker_defense;
   level thread stopwavefromprogressing(var_0);
@@ -756,10 +789,11 @@ start_defense_sequence(var_0, var_1) {
 can_place_speaker(var_0) {
   var_1 = self canplayerplacesentry(1, 24);
 
-  if(self isonground() && var_1["result"] && abs(var_0.origin[2] - self.origin[2]) < 24)
+  if(self isonground() && var_1["result"] && abs(var_0.origin[2] - self.origin[2]) < 24) {
     return var_1;
-  else
+  } else {
     return undefined;
+  }
 }
 
 keep_park_workers_from_despawning() {
@@ -773,8 +807,9 @@ keep_park_workers_from_despawning() {
 }
 
 turn_despawn_back_on() {
-  foreach(var_1 in level.spawned_enemies)
-  var_1.dont_cleanup = undefined;
+  foreach(var_1 in level.spawned_enemies) {
+    var_1.dont_cleanup = undefined;
+  }
 }
 
 speaker_hint_func(var_0, var_1) {
@@ -788,23 +823,26 @@ stopwavefromprogressing(var_0) {
   var_4 = level.desired_enemy_deaths_this_wave;
   var_5 = level.wave_num;
 
-  while(level.current_enemy_deaths == level.desired_enemy_deaths_this_wave)
+  while(level.current_enemy_deaths == level.desired_enemy_deaths_this_wave) {
     wait 0.05;
+  }
 
   level.current_enemy_deaths = 0;
 
-  if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player))
+  if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player)) {
     level.max_static_spawned_enemies = 16;
-  else
+  } else {
     level.max_static_spawned_enemies = 24;
+  }
 
   level.desired_enemy_deaths_this_wave = 24;
   level.special_event = 1;
   scripts\engine\utility::flag_set("pause_wave_progression");
   var_6 = level scripts\engine\utility::waittill_any_return("speaker_defense_failed", "speaker_defense_completed");
 
-  if(var_6 == "speaker_defense_completed")
+  if(var_6 == "speaker_defense_completed") {
     level.force_drop_loot_item = "ammo_max";
+  }
 
   var_7 = spawn("script_model", level.players[0].origin);
   var_7 setModel("tag_origin");
@@ -817,8 +855,9 @@ stopwavefromprogressing(var_0) {
   turn_despawn_back_on();
   wait 2;
 
-  if(var_6 == "speaker_defense_failed")
+  if(var_6 == "speaker_defense_failed") {
     scripts\engine\utility::flag_set("force_spawn_boss");
+  }
 
   wait 3;
   scripts\engine\utility::flag_clear("pause_wave_progression");
@@ -840,15 +879,17 @@ startspeakereventspawning(var_0) {
   var_3 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
   var_4 = scripts\engine\utility::get_array_of_closest(var_0.origin, level.players, undefined, 4, 1000);
 
-  foreach(var_6 in scripts\cp\cp_agent_utils::getaliveagentsofteam("axis"))
-  var_6 thread adjustmovespeed(var_6);
+  foreach(var_6 in scripts\cp\cp_agent_utils::getaliveagentsofteam("axis")) {
+    var_6 thread adjustmovespeed(var_6);
+  }
 
   foreach(var_9 in var_1) {
     if(ispointinvolume(var_0.origin, var_9)) {
       var_2 = var_9;
 
-      foreach(var_11 in var_3)
-      var_11 thread sendzombietospeaker(var_11, var_2);
+      foreach(var_11 in var_3) {
+        var_11 thread sendzombietospeaker(var_11, var_2);
+      }
 
       break;
     }
@@ -857,8 +898,9 @@ startspeakereventspawning(var_0) {
   if(isDefined(var_2.spawners)) {
     var_14 = scripts\engine\utility::get_array_of_closest(var_0.origin, var_2.spawners, undefined, 100, 400);
 
-    foreach(var_16 in var_14)
-    var_16 scripts\cp\zombies\zombies_spawning::make_spawner_inactive();
+    foreach(var_16 in var_14) {
+      var_16 scripts\cp\zombies\zombies_spawning::make_spawner_inactive();
+    }
   }
 
   foreach(var_19 in var_1) {
@@ -870,8 +912,9 @@ startspeakereventspawning(var_0) {
 
   level scripts\engine\utility::waittill_any_return("speaker_defense_failed", "speaker_defense_completed");
 
-  foreach(var_22 in var_1)
-  var_22 scripts\cp\zombies\zombies_spawning::make_volume_active();
+  foreach(var_22 in var_1) {
+    var_22 scripts\cp\zombies\zombies_spawning::make_volume_active();
+  }
 }
 
 sendzombietospeaker(var_0, var_1) {
@@ -880,8 +923,9 @@ sendzombietospeaker(var_0, var_1) {
   level endon("speaker_defense_failed");
   level endon("speaker_defense_completed");
 
-  while(!isDefined(level.current_speaker))
+  while(!isDefined(level.current_speaker)) {
     wait 0.05;
+  }
 
   var_0.scripted_mode = 1;
   var_0.ignoreall = 1;
@@ -908,8 +952,9 @@ disable_speaker_loc_interaction(var_0) {
 }
 
 set_defense_sequence_active_flag() {
-  if(!scripts\engine\utility::flag_exist("defense_sequence_active"))
+  if(!scripts\engine\utility::flag_exist("defense_sequence_active")) {
     scripts\engine\utility::flag_init("defense_sequence_active");
+  }
 
   scripts\engine\utility::flag_set("defense_sequence_active");
   level.defense_sequence_duration = gettime();
@@ -918,13 +963,15 @@ set_defense_sequence_active_flag() {
 set_up_and_start_speaker(var_0, var_1) {
   var_2 = var_1["origin"];
 
-  if(isDefined(var_0.wave_num_override))
+  if(isDefined(var_0.wave_num_override)) {
     level.wave_num_override = var_0.wave_num_override;
+  }
 
-  if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player))
+  if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player)) {
     level.spawndelayoverride = 0.7;
-  else
+  } else {
     level.spawndelayoverride = 0.35;
+  }
 
   var_2 = var_2 + (0, 0, 0.5);
   var_3 = spawn("script_model", var_2);
@@ -969,8 +1016,9 @@ adjustmovespeed(var_0, var_1) {
   if(scripts\engine\utility::is_true(var_0.is_suicide_bomber)) {
     return;
   }
-  if(scripts\engine\utility::is_true(var_1))
+  if(scripts\engine\utility::is_true(var_1)) {
     wait 0.5;
+  }
 
   var_0.movemode = "sprint";
   var_0 scripts\asm\asm_bb::bb_requestmovetype("sprint");
@@ -1009,8 +1057,9 @@ damage_monitor(var_0, var_1) {
     playFX(level._effect["vfx_zb_thu_sparks"], var_0.origin + (0, 0, 32));
     var_3 notify("speaker_attacked");
 
-    foreach(var_5 in level.players)
-    var_5 thread scripts\cp\cp_vo::try_to_play_vo("quest_ufo_defend_speakers", "zmb_comment_vo");
+    foreach(var_5 in level.players) {
+      var_5 thread scripts\cp\cp_vo::try_to_play_vo("quest_ufo_defend_speakers", "zmb_comment_vo");
+    }
 
     var_7 = gettime();
 
@@ -1091,13 +1140,15 @@ exit_defense_sequence(var_0) {
   level.has_speaker = 1;
   level notify("speaker_picked_up");
 
-  foreach(var_1 in level.players)
-  var_1 setclientomnvar("zm_special_item", 3);
+  foreach(var_1 in level.players) {
+    var_1 setclientomnvar("zm_special_item", 3);
+  }
 
   var_0 makeunusable();
 
-  if(isDefined(level.frequency_device_clip.navrepulsor))
+  if(isDefined(level.frequency_device_clip.navrepulsor)) {
     destroynavrepulsor(level.frequency_device_clip.navrepulsor);
+  }
 
   var_0 delete();
 }
@@ -1139,8 +1190,9 @@ assign_zombie_attacker_logic(var_0, var_1) {
     var_2 thread adjustmovespeed(var_2, 1);
 
     if(level.num_of_active_zombie_attacker < 3) {
-      if(isDefined(var_2.species) && var_2.species == "zombie" && !scripts\engine\utility::is_true(var_2.active_speaker_attacker))
+      if(isDefined(var_2.species) && var_2.species == "zombie" && !scripts\engine\utility::is_true(var_2.active_speaker_attacker)) {
         attack_speaker(var_2, var_1);
+      }
     }
   }
 }
@@ -1255,13 +1307,15 @@ defense_sequence_fail(var_0) {
   clear_defense_sequence_zombie_model();
   setomnvar("zm_ui_timer", 0);
 
-  if(isDefined(level.current_speaker))
+  if(isDefined(level.current_speaker)) {
     level.current_speaker = undefined;
+  }
 
   var_0 makeunusable();
 
-  if(isDefined(level.frequency_device_clip.navrepulsor))
+  if(isDefined(level.frequency_device_clip.navrepulsor)) {
     destroynavrepulsor(level.frequency_device_clip.navrepulsor);
+  }
 
   level.use_dj_door_func = ::use_dj_door_after_fail_speaker_defense;
   level thread choose_new_dj_door();
@@ -1280,8 +1334,9 @@ defense_sequence_success(var_0) {
   var_0 setHintString(var_2);
   var_0 makeusable();
 
-  if(isDefined(level.current_speaker))
+  if(isDefined(level.current_speaker)) {
     level.current_speaker = undefined;
+  }
 
   foreach(var_4 in level.players) {
     var_4 scripts\cp\cp_persistence::give_player_xp(250, 1);
@@ -1296,8 +1351,9 @@ activateallmiddleplacementstructs() {
   foreach(var_1 in level.alldjcenterstructs) {
     var_1.disabled = undefined;
 
-    if(!scripts\engine\utility::array_contains(level.current_interaction_structs, var_1))
+    if(!scripts\engine\utility::array_contains(level.current_interaction_structs, var_1)) {
       scripts\cp\cp_interaction::add_to_current_interaction_list(var_1);
+    }
   }
 }
 
@@ -1324,12 +1380,13 @@ deactivatemiddleplacementstructs() {
 
 waitforplayertrigger(var_0, var_1) {
   if(scripts\engine\utility::is_true(var_0.placed)) {
-    if(isDefined(level.spawn_event_running) && level.spawn_event_running)
+    if(isDefined(level.spawn_event_running) && level.spawn_event_running) {
       play_tone(var_0, var_1, 0);
-    else if(scripts\engine\utility::flag("all_structs_placed"))
+    } else if(scripts\engine\utility::flag("all_structs_placed")) {
       play_tone(var_0, var_1, 1);
-    else
+    } else {
       play_tone(var_0, var_1, 0);
+    }
   } else
     place_tone_generator_on(var_0);
 }
@@ -1349,8 +1406,9 @@ place_tone_generator_on(var_0) {
   if(level.djcenterstructs.size == 0) {
     scripts\engine\utility::flag_set("all_structs_placed");
 
-    foreach(var_3 in level.players)
-    var_3 setclientomnvar("zm_special_item", 4);
+    foreach(var_3 in level.players) {
+      var_3 setclientomnvar("zm_special_item", 4);
+    }
   }
 }
 
@@ -1360,8 +1418,9 @@ play_tone(var_0, var_1, var_2) {
   var_1 thread scripts\cp\zombies\zombies_pillage::gesture_activate("ges_devil_horns_zm", undefined, 0, 0.5);
   level notify("tone_played", var_3[3], var_0);
 
-  if(scripts\engine\utility::is_true(var_2))
+  if(scripts\engine\utility::is_true(var_2)) {
     level thread waitforallplayerstriggered(var_0);
+  }
 }
 
 set_up_defense_sequence_zombie_model() {
@@ -1403,8 +1462,9 @@ dj_broadcast_vo_handler(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isDefined(level.dj.current_state)) {
     return;
   }
-  while(scripts\cp\cp_vo::is_vo_system_busy() && !isDefined(level.dj_trying_to_broadcast))
+  while(scripts\cp\cp_vo::is_vo_system_busy() && !isDefined(level.dj_trying_to_broadcast)) {
     wait 0.1;
+  }
 
   if(scripts\engine\utility::is_true(var_4)) {
     level.dj notify("end_dj_broadcast_handler");
@@ -1425,8 +1485,9 @@ dj_broadcast_vo_handler(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   level.dj_trying_to_broadcast = 1;
   scripts\cp\cp_vo::set_vo_system_busy(1);
 
-  while(scripts\cp\cp_music_and_dialog::vo_is_playing())
+  while(scripts\cp\cp_music_and_dialog::vo_is_playing()) {
     wait 0.1;
+  }
 
   level.dj thread endon_different_state_changed("approach_mic");
   level.dj thread dj_endon_timeout(30);
@@ -1435,8 +1496,9 @@ dj_broadcast_vo_handler(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   level.dj_trying_to_broadcast = undefined;
   scripts\cp\cp_vo::set_vo_system_busy(0);
 
-  foreach(var_8 in level.players)
-  var_8 scripts\cp\cp_vo::set_vo_system_playing(0);
+  foreach(var_8 in level.players) {
+    var_8 scripts\cp\cp_vo::set_vo_system_playing(0);
+  }
 
   set_dj_state("exit_mic");
   level.dj notify("finished_dj_broadcast");
@@ -1446,8 +1508,9 @@ dj_broadcast_vo_handler(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 play_dj_broadcast_vo(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   level.dj endon("end_dj_broadcast_early");
 
-  if(level.dj.current_state != "at_mic")
+  if(level.dj.current_state != "at_mic") {
     level.dj waittill("at_mic");
+  }
 
   level.dj_broadcasting = 1;
   var_7 = scripts\cp\cp_vo::create_vo_data(var_0, var_3, var_5, var_6);
@@ -1474,8 +1537,9 @@ get_dj_into_idle() {
       set_dj_state("idle");
       break;
     case "approach_mic":
-      while(level.dj.current_state != "mic_loop")
+      while(level.dj.current_state != "mic_loop") {
         wait 0.1;
+      }
     case "mic_loop":
       set_dj_state("exit_mic");
       break;
@@ -1483,16 +1547,18 @@ get_dj_into_idle() {
       break;
   }
 
-  while(level.dj.current_state != "idle")
+  while(level.dj.current_state != "idle") {
     wait 0.1;
+  }
 }
 
 endon_different_state_changed(var_0) {
   level.dj endon("finished_dj_broadcast");
   level.dj waittill("state_changed", var_1);
 
-  if(var_0 != var_1)
+  if(var_0 != var_1) {
     level.dj notify("end_dj_broadcast_early");
+  }
 }
 
 dj_endon_timeout(var_0) {
@@ -1520,8 +1586,9 @@ dj_state_manager(var_0) {
   level endon("stop_dj_manager");
 
   for(;;) {
-    if(!isDefined(level.dj.desired_state))
+    if(!isDefined(level.dj.desired_state)) {
       wait 0.05;
+    }
 
     level.dj notify("state_changed", level.dj.desired_state);
 
@@ -1585,8 +1652,9 @@ dj_idle() {
   var_1 = % iw7_cp_zom_hoff_dj_idle_01;
   var_2 = var_1;
 
-  if(randomint(100) > 80)
+  if(randomint(100) > 80) {
     var_2 = var_0;
+  }
 
   var_3 = getanimlength(var_2);
   level.dj scriptmodelplayanimdeltamotionfrompos(var_2, level.active_dj_spot.origin, level.active_dj_spot.angles);

@@ -25,8 +25,9 @@ _id_10C3C() {
   scripts\sp\maps\yard\yard_util::_id_1723("obj_yard_main", "current", &"YARD_OBJ_TARGET");
   var_0 = getEnt("lift_light", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
   thread scripts\sp\maps\yard\yard_central::_id_8E71();
   thread scripts\sp\maps\yard\yard_central::_id_8E78();
@@ -57,8 +58,9 @@ _id_B1DA() {
   var_0 thread scripts\sp\anim::_id_1F2C(var_2, "end_scene");
   scripts\engine\utility::noself_delaycall(2, ::visionsetnaked, "yard_ext_rip", 1);
 
-  foreach(var_4 in level._id_633F)
-  var_4 show();
+  foreach(var_4 in level._id_633F) {
+    var_4 show();
+  }
 
   wait(getanimlength(var_1 scripts\sp\utility::_id_7DC1("end_scene")) - 3);
   var_6 = scripts\sp\hud_util::_id_48B7("black", 0, level.player);
@@ -98,8 +100,9 @@ _id_634F() {
 }
 
 _id_6339(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     wait 10;
+  }
 
   var_1 = [];
   var_2 = level._id_EAD6;
@@ -156,10 +159,11 @@ _id_5174(var_0) {
   scripts\engine\utility::flag_wait("end_started");
   wait(getanimlength(scripts\sp\utility::_id_7DC1("end_scene")));
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     _id_0BA9::_id_397B();
-  else
+  } else {
     self delete();
+  }
 }
 
 _id_6355() {
@@ -173,8 +177,9 @@ _id_6355() {
     var_4.angles = var_3.angles;
     var_1[var_1.size] = var_4;
 
-    if(isDefined(var_3.script_noteworthy))
+    if(isDefined(var_3.script_noteworthy)) {
       var_4 thread _id_634A(var_3.script_noteworthy);
+    }
   }
 
   scripts\engine\utility::flag_wait("end_started");
@@ -224,8 +229,9 @@ _id_5302() {
   var_11 = sortbydistance(var_0, level.player.origin);
   var_12 = scripts\engine\utility::array_reverse(var_11);
 
-  foreach(var_8 in var_12)
-  radiusdamage(var_8.origin, 1, 99999, 99999);
+  foreach(var_8 in var_12) {
+    radiusdamage(var_8.origin, 1, 99999, 99999);
+  }
 }
 
 _id_52EE(var_0) {
@@ -340,8 +346,9 @@ _id_6349() {
   var_0 = scripts\sp\vehicle::_id_1080E("ending_ring_capitalships");
   var_1 = scripts\sp\utility::_id_2299(var_0);
 
-  foreach(var_3 in var_1)
-  var_3 _id_0BB8::_id_39BB();
+  foreach(var_3 in var_1) {
+    var_3 _id_0BB8::_id_39BB();
+  }
 
   level waittill("capital_ship_explode_1");
   var_1[0] thread _id_633B(undefined, 5);
@@ -356,14 +363,16 @@ _id_633B(var_0, var_1) {
     var_2 = _id_0BA9::_id_39AA(self.origin, 1);
     var_2 notsolid();
 
-    foreach(var_4 in var_2._id_CB53)
-    var_4 notsolid();
+    foreach(var_4 in var_2._id_CB53) {
+      var_4 notsolid();
+    }
   } else {
     self notify("death");
     scripts\engine\utility::waitframe();
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       wait(var_1);
+    }
 
     _id_0BA9::_id_397B();
   }
@@ -492,8 +501,9 @@ sfx_ending_helmet() {
 }
 
 _id_6347() {
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     level.player.helmet = level._id_10964.helmet;
+  }
 
   thread sfx_ending_helmet();
   level waittill("crack_glass_1");
@@ -591,8 +601,9 @@ _id_CE71(var_0, var_1) {
   var_3 = spawn("script_origin", level.player.origin);
   var_3 linkTo(level.player);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 _meth_8278(var_1);
+  }
 
   var_3 playLoopSound(var_2);
   wait(var_0);

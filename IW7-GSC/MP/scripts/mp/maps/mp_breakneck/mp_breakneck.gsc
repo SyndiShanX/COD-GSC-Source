@@ -51,13 +51,15 @@ fix_collision() {
 _id_D80C() {
   level._id_2B31 = ["superstructure_hull_chunk_01", "superstructure_hull_chunk_02", "debris_exterior_damaged_metal_panels_01", "debris_exterior_damaged_metal_panels_02", "debris_exterior_damaged_metal_panels_03", "debris_exterior_damaged_metal_panels_08", "machinery_tower_pipe_beam_support_01_destroyed"];
 
-  foreach(var_1 in level._id_2B31)
-  precachemodel(var_1);
+  foreach(var_1 in level._id_2B31) {
+    precachemodel(var_1);
+  }
 
   level._id_871B = ["weapon_spas12_wm", "weapon_ripper_rare_wm", "weapon_vr_rifle_wm"];
 
-  foreach(var_4 in level._id_871B)
-  precachemodel(var_4);
+  foreach(var_4 in level._id_871B) {
+    precachemodel(var_4);
+  }
 
   precachemodel("armory_weapon_locker_clamp_bn");
 }
@@ -165,11 +167,13 @@ _id_FA94() {
     level._id_2B2F._id_DAE4 = getEntArray("breakneck_blackhole_pull", "targetname");
 
     if(isDefined(level._id_2B2F._id_DAE3)) {
-      if(level._id_2B2F._id_DAE3.size != 0)
+      if(level._id_2B2F._id_DAE3.size != 0) {
         scripts\engine\utility::array_thread(level._id_2B2F._id_DAE5, ::_id_139AE);
+      }
 
-      if(level._id_2B2F._id_DAE4.size != 0)
+      if(level._id_2B2F._id_DAE4.size != 0) {
         level thread _id_139AF();
+      }
     }
   }
 
@@ -197,11 +201,13 @@ _id_2B44() {
   var_0 = getscriptablearray("scriptable_spawn_pulls", "targetname");
 
   if(game["roundsPlayed"] == 0) {
-    foreach(var_2 in var_0)
-    var_2 setscriptablepartstate("default", "countdown_anim");
+    foreach(var_2 in var_0) {
+      var_2 setscriptablepartstate("default", "countdown_anim");
+    }
   } else {
-    foreach(var_2 in var_0)
-    var_2 setscriptablepartstate("default", "fast_anim");
+    foreach(var_2 in var_0) {
+      var_2 setscriptablepartstate("default", "fast_anim");
+    }
   }
 }
 
@@ -225,8 +231,9 @@ _id_139AE() {
 _id_139AF() {
   level endon("game_ended");
 
-  foreach(var_1 in level._id_2B2F._id_DAE4)
-  var_1.physicsactivated = 0;
+  foreach(var_1 in level._id_2B2F._id_DAE4) {
+    var_1.physicsactivated = 0;
+  }
 
   for(;;) {
     wait(15 + scripts\engine\utility::cointoss() * randomint(15));
@@ -244,8 +251,9 @@ _id_2B43() {
   level endon("game_ended");
   self endon("death");
 
-  if(!isDefined(self.angles))
+  if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
+  }
 
   var_0 = scripts\engine\utility::spawn_tag_origin(self.origin + (0, 0, 32), self.angles);
   var_0 show();

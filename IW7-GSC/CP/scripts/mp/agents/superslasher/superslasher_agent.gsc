@@ -38,11 +38,13 @@ loadsuperslashervfx() {
 _id_FAB0() {
   level endon("game_ended");
 
-  if(!isDefined(level.agent_definition))
+  if(!isDefined(level.agent_definition)) {
     level waittill("scripted_agents_initialized");
+  }
 
-  if(!isDefined(level.species_funcs))
+  if(!isDefined(level.species_funcs)) {
     level.species_funcs = [];
+  }
 
   level.species_funcs["superslasher"] = [];
   level.agent_definition["superslasher"]["setup_func"] = ::setupagent;
@@ -123,8 +125,9 @@ setupagent() {
   self.lastdamagedir = [];
   self.lastdamagetime = 0;
 
-  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1)
+  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1) {
     self._id_AB3F = 1;
+  }
 
   thread _id_899C();
 }
@@ -144,13 +147,15 @@ onsuperslasherkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
   self.nocorpse = 1;
 
   if(isDefined(self.attackents)) {
-    foreach(var_10 in self.attackents)
-    var_10 delete();
+    foreach(var_10 in self.attackents) {
+      var_10 delete();
+    }
   }
 
   if(isDefined(self.shields)) {
-    foreach(var_13 in self.shields)
-    var_13 delete();
+    foreach(var_13 in self.shields) {
+      var_13 delete();
+    }
   }
 
   scripts\asm\superslasher\superslasher_actions::stopwireattack();
@@ -201,8 +206,9 @@ onsuperslasherdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
   if(isDefined(var_1) && var_1 == self) {
     return;
   }
-  if(scripts\engine\utility::is_true(self.damageshield) && isDefined(var_6) && isDefined(var_7))
+  if(scripts\engine\utility::is_true(self.damageshield) && isDefined(var_6) && isDefined(var_7)) {
     playFX(level._effect["super_slasher_shield_hit"], var_6, var_7 * -150);
+  }
 
   if(isDefined(self.btrophysystem)) {
     if(isDefined(var_1) && isPlayer(var_1)) {
@@ -219,8 +225,9 @@ onsuperslasherdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
   if(isDefined(self._blackboard.binair)) {
     var_2 = int(min(var_2, self.health - 1));
 
-    if(var_2 == 0)
+    if(var_2 == 0) {
       return;
+    }
   }
 
   if(var_5 == "iw7_harpoon_zm") {
@@ -242,8 +249,9 @@ onsuperslasherdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
 
   var_3 = var_3 | level.idflags_no_knockback;
 
-  if(isDefined(level.players) && level.players.size >= 1)
+  if(isDefined(level.players) && level.players.size >= 1) {
     var_2 = var_2 / level.players.size;
+  }
 
   scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 }

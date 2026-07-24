@@ -140,13 +140,15 @@ _id_3600() {
     wait 0.05;
   }
 
-  if(!var_5)
+  if(!var_5) {
     var_2["zero"] = 0;
+  }
 
   var_2["max"] = _id_3583();
 
-  if(var_2["max"] < var_2["min"])
+  if(var_2["max"] < var_2["min"]) {
     var_2["max"] = var_2["max"] + 360;
+  }
 
   var_2["rate"] = 0.05 * abs(var_2["max"] - var_2["min"]) / getanimlength(var_1);
   var_0._id_DCCF["main"] = [];
@@ -166,8 +168,9 @@ _id_3580(var_0, var_1) {
   var_3 = _id_3628(var_0, "rail", "height");
   var_4 = (var_2, 0, 0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = _id_357E();
+  }
 
   var_4 = rotatevector(var_4, (0, var_1, 0));
   var_4 = rotatevector(var_4, self.angles);
@@ -177,10 +180,11 @@ _id_3580(var_0, var_1) {
 _id_358F(var_0) {
   var_1 = undefined;
 
-  if(var_0 == "left")
+  if(var_0 == "left") {
     var_1 = "j_clavicle_track_le";
-  else
+  } else {
     var_1 = "j_clavicle_track_ri";
+  }
 
   var_2 = self gettagorigin(var_1);
   return var_2;
@@ -189,10 +193,11 @@ _id_358F(var_0) {
 _id_358C(var_0, var_1) {
   var_2 = undefined;
 
-  if(var_1 == "left")
+  if(var_1 == "left") {
     var_2 = "j_clavicle_track_le";
-  else
+  } else {
     var_2 = "j_clavicle_track_ri";
+  }
 
   var_3 = self gettagorigin(var_2);
   var_4 = self.origin;
@@ -206,10 +211,11 @@ _id_358C(var_0, var_1) {
 _id_358B(var_0) {
   var_1 = undefined;
 
-  if(var_0 == "left")
+  if(var_0 == "left") {
     var_1 = "j_clavicle_track_le";
-  else
+  } else {
     var_1 = "j_clavicle_track_ri";
+  }
 
   var_2 = self gettagorigin(var_1);
   var_3 = _id_358D(var_0);
@@ -249,10 +255,11 @@ _id_3581(var_0, var_1) {
 _id_3590(var_0) {
   var_1 = undefined;
 
-  if(var_0 == "left")
+  if(var_0 == "left") {
     var_1 = "j_clavicle_track_le";
-  else
+  } else {
     var_1 = "j_clavicle_track_ri";
+  }
 
   var_2 = self gettagorigin(var_1);
   var_3 = var_2 - self.origin;
@@ -262,10 +269,11 @@ _id_3590(var_0) {
 _id_3591(var_0) {
   var_1 = undefined;
 
-  if(var_0 == "left")
+  if(var_0 == "left") {
     var_1 = "j_clavicle_track_le";
-  else
+  } else {
     var_1 = "j_clavicle_track_ri";
+  }
 
   var_2 = self gettagorigin(var_1);
   return var_2[2] - self.origin[2];
@@ -274,10 +282,11 @@ _id_3591(var_0) {
 _id_358E(var_0, var_1) {
   var_2 = undefined;
 
-  if(var_1 == "left")
+  if(var_1 == "left") {
     var_2 = "j_clavicle_x_le";
-  else
+  } else {
     var_2 = "j_clavicle_x_ri";
+  }
 
   var_3 = self gettagangles(var_2);
   var_4 = anglestoright(var_3);
@@ -298,10 +307,11 @@ _id_3603(var_0) {
   var_1 = self.asm._id_11B08;
   var_2 = 0;
 
-  if(var_0 == "left")
+  if(var_0 == "left") {
     var_2 = 90;
-  else
+  } else {
     var_2 = -90;
+  }
 
   var_1._id_DCCF[var_0] = [];
   var_1._id_DCCF[var_0]["rail"] = [];
@@ -332,10 +342,11 @@ _id_3603(var_0) {
   var_1._id_DCCF[var_0]["rail"]["max"] = _id_358B(var_0);
   var_1._id_DCCF[var_0]["rail"]["rate"] = 0.05 * abs(var_1._id_DCCF[var_0]["rail"]["max"] - var_1._id_DCCF[var_0]["rail"]["min"]) / getanimlength(var_3);
 
-  if(var_0 == "left")
+  if(var_0 == "left") {
     _id_3608(var_3, var_0, "rail", 90);
-  else
+  } else {
     _id_3608(var_3, var_0, "rail", -90);
+  }
 
   var_3 = _id_0A1E::_id_2356("aimset_" + var_0, "arm_pitch");
   self _meth_82A2(var_3, 1, 0, 0);
@@ -353,10 +364,11 @@ _id_3603(var_0) {
   while(var_15 < 8) {
     var_16 = undefined;
 
-    if(var_0 == "left")
+    if(var_0 == "left") {
       var_16 = "j_clavicle_x_le";
-    else
+    } else {
       var_16 = "j_clavicle_x_ri";
+    }
 
     var_17 = _id_358E(var_3, var_0);
     var_18 = self islegacyagent(var_3);
@@ -373,10 +385,11 @@ _id_3603(var_0) {
 _id_3585(var_0) {
   var_1 = undefined;
 
-  if(var_0 == "left")
+  if(var_0 == "left") {
     var_1 = "tag_weapon_rotate_le";
-  else
+  } else {
     var_1 = "tag_weapon_rotate_ri";
+  }
 
   return self gettagangles(var_1);
 }
@@ -384,10 +397,11 @@ _id_3585(var_0) {
 _id_3587(var_0) {
   var_1 = undefined;
 
-  if(var_0 == "left")
+  if(var_0 == "left") {
     var_1 = "tag_weapon_rotate_le";
-  else
+  } else {
     var_1 = "tag_weapon_rotate_ri";
+  }
 
   return self gettagorigin(var_1);
 }
@@ -395,10 +409,11 @@ _id_3587(var_0) {
 _id_3586(var_0) {
   var_1 = undefined;
 
-  if(var_0 == "left")
+  if(var_0 == "left") {
     var_1 = "j_weaponshoulder_x_le";
-  else
+  } else {
     var_1 = "j_weaponshoulder_x_ri";
+  }
 
   return self gettagorigin(var_1);
 }
@@ -406,10 +421,11 @@ _id_3586(var_0) {
 _id_3588(var_0) {
   var_1 = undefined;
 
-  if(var_0 == "left")
+  if(var_0 == "left") {
     var_1 = "j_weaponshoulder_le";
-  else
+  } else {
     var_1 = "j_weaponshoulder_ri";
+  }
 
   return self gettagorigin(var_1);
 }
@@ -476,14 +492,16 @@ _id_3594(var_0, var_1) {
   var_2 = undefined;
 
   if(var_0 == "left") {
-    if(var_1 == "top")
+    if(var_1 == "top") {
       var_2 = "tag_missile_top_le";
-    else
+    } else {
       var_2 = "tag_missile_bottom_le";
+    }
   } else if(var_1 == "top")
     var_2 = "tag_missile_top_ri";
-  else
+  else {
     var_2 = "tag_missile_bottom_ri";
+  }
 
   return var_2;
 }
@@ -581,14 +599,16 @@ _id_3582() {
       return var_5;
     } else if(isDefined(var_3))
       return var_3;
-    else if(isDefined(var_4))
+    else if(isDefined(var_4)) {
       return var_4;
+    }
   }
 
-  if(var_1)
+  if(var_1) {
     return _id_3595("left");
-  else
+  } else {
     return _id_3595("right");
+  }
 
   return undefined;
 }
@@ -596,25 +616,30 @@ _id_3582() {
 _id_3595(var_0, var_1) {
   var_2 = self._blackboard.shootparams;
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return undefined;
+  }
 
   var_3 = var_2._id_13CC3[var_0];
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     return undefined;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(!var_1 && !var_3._id_312A)
+  if(!var_1 && !var_3._id_312A) {
     return undefined;
+  }
 
   if(isDefined(var_3._id_1A46) && var_3._id_1A47 != gettime()) {
     var_4 = 0;
 
-    if(_id_0C08::_id_A007(var_0, "rocket"))
+    if(_id_0C08::_id_A007(var_0, "rocket")) {
       var_4 = 1;
+    }
 
     return _id_0C08::_id_FE67(var_3, var_4);
   }
@@ -635,13 +660,15 @@ _id_351E(var_0, var_1, var_2, var_3, var_4) {
   var_7 = _id_3588(var_0);
   var_8 = _id_357F(var_0, var_2);
 
-  if(var_0 == "left")
+  if(var_0 == "left") {
     var_8 = var_8 - 90;
-  else
+  } else {
     var_8 = var_8 + 90;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = _id_357E();
+  }
 
   var_9 = anglestoaxis(self.angles + (0, var_1 + var_8, 0));
   var_10 = var_6 - var_7;
@@ -667,24 +694,27 @@ _id_3521(var_0, var_1, var_2, var_3, var_4) {
   if(var_4 > var_6) {
     var_7 = -90;
 
-    if(var_0 == "right")
+    if(var_0 == "right") {
       var_7 = 90;
+    }
   } else {
     var_5 = var_5 / var_6;
     var_8 = anglesToForward((0, var_2 + self.angles[1], 0));
     var_7 = acos(var_4 / var_6);
     var_9 = vectordot(var_5, var_8);
 
-    if(var_0 == "right")
+    if(var_0 == "right") {
       var_7 = -1 * var_7;
+    }
 
     if(-1 < var_9 && var_9 < 1) {
       var_10 = vectorcross(var_5, var_8);
 
-      if(var_10[2] > 0)
+      if(var_10[2] > 0) {
         var_7 = var_7 - acos(var_9);
-      else
+      } else {
         var_7 = var_7 + acos(var_9);
+      }
     }
   }
 
@@ -715,10 +745,11 @@ _id_3522(var_0) {
   } else
     var_2._id_8E55 = 0;
 
-  if(_id_9E4D())
+  if(_id_9E4D()) {
     var_8 = _id_3583();
-  else
+  } else {
     var_8 = _id_357E(var_0._id_8E54);
+  }
 
   var_9 = _id_3595("left");
 
@@ -728,14 +759,15 @@ _id_3522(var_0) {
     var_2._id_AB57 = _id_3521("left", var_9, var_8, var_10, var_11);
     var_2._id_AB56 = _id_3520("left", var_9, var_8, var_10, var_11, var_2._id_AB57);
 
-    if(self._id_13CC3["left"] == "minigun")
+    if(self._id_13CC3["left"] == "minigun") {
       _id_351E("left", var_8, var_0._id_AB57, var_0._id_AB56, var_2);
-    else if(self._id_13CC3["left"] == "rocket") {
+    } else if(self._id_13CC3["left"] == "rocket") {
       var_2._id_AB57 = var_2._id_AB57 + _id_3628("main", "rocket", "yaw_delta");
       var_2._id_AB56 = var_2._id_AB56 + _id_3628("main", "rocket", "pitch_delta");
 
-      if(isDefined(self._id_E5C4))
+      if(isDefined(self._id_E5C4)) {
         var_2._id_AB56 = var_2._id_AB56 - self._id_E5C4;
+      }
     }
   } else {
     var_2._id_AB57 = 90;
@@ -750,14 +782,15 @@ _id_3522(var_0) {
     var_2._id_E530 = _id_3521("right", var_12, var_8, var_10, var_11);
     var_2._id_E52F = _id_3520("right", var_12, var_8, var_10, var_11, var_2._id_E530);
 
-    if(self._id_13CC3["right"] == "minigun")
+    if(self._id_13CC3["right"] == "minigun") {
       _id_351E("right", var_8, var_0._id_E530, var_0._id_E52F, var_2);
-    else if(self._id_13CC3["right"] == "rocket") {
+    } else if(self._id_13CC3["right"] == "rocket") {
       var_2._id_E530 = var_2._id_E530 - _id_3628("main", "rocket", "yaw_delta");
       var_2._id_E52F = var_2._id_E52F + _id_3628("main", "rocket", "pitch_delta");
 
-      if(isDefined(self._id_E5C4))
+      if(isDefined(self._id_E5C4)) {
         var_2._id_E52F = var_2._id_E52F - self._id_E5C4;
+      }
     }
   } else {
     var_2._id_E530 = -90;
@@ -808,8 +841,9 @@ _id_3631(var_0) {
     var_3 = self _meth_8103(var_2);
   }
 
-  if(!self.asm._id_11B08.btracking)
+  if(!self.asm._id_11B08.btracking) {
     self clearanim(var_2, var_0);
+  }
 }
 
 _id_3574() {
@@ -843,13 +877,15 @@ _id_3608(var_0, var_1, var_2, var_3, var_4) {
   var_6 = _id_3628(var_1, var_2, "max");
   var_7 = var_6 - var_5;
 
-  if(var_5 < var_6)
+  if(var_5 < var_6) {
     var_3 = clamp(angleclamp180(var_3), var_5, var_6);
-  else
+  } else {
     var_3 = clamp(angleclamp180(var_3), var_6, var_5);
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 0;
+  }
 
   var_8 = (var_3 - var_5) / var_7;
   var_8 = clamp(var_8, 0, 1);
@@ -863,22 +899,25 @@ _id_3607(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7 = _id_3628(var_2, var_3, "max");
   var_8 = var_7 - var_6;
 
-  if(var_6 < var_7)
+  if(var_6 < var_7) {
     var_4 = clamp(var_4, var_6, var_7);
-  else
+  } else {
     var_4 = clamp(var_4, var_7, var_6);
+  }
 
   var_9 = (var_4 - var_6) / var_8;
   var_9 = clamp(var_9, 0, 1);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = self islegacyagent(var_0);
+  }
 
   var_10 = var_6 + var_1 * var_8;
   var_11 = abs(var_4 - var_10);
 
-  if(var_11 > var_5)
+  if(var_11 > var_5) {
     var_11 = var_5;
+  }
 
   if(-0.002 < var_11 && var_11 < 0.002) {
     var_11 = 0;
@@ -887,8 +926,9 @@ _id_3607(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   var_12 = 1;
 
-  if(var_9 < var_1)
+  if(var_9 < var_1) {
     var_12 = -1;
+  }
 
   var_13 = _id_3628(var_2, var_3, "rate");
   self _meth_82B1(var_0, var_12 * var_11 / var_13);
@@ -953,14 +993,16 @@ _id_362C() {
   for(;;) {
     var_17 = scripts\asm\asm::_id_231B(self.asm._id_11AC7, "aim");
 
-    if(isDefined(self._blackboard._id_E5F9))
+    if(isDefined(self._blackboard._id_E5F9)) {
       var_17 = 0;
-    else if(isDefined(self._blackboard.rodeorequested))
+    } else if(isDefined(self._blackboard.rodeorequested)) {
       var_17 = 1;
+    }
 
     if(var_17) {
-      if(!self.asm._id_11B08.btracking)
+      if(!self.asm._id_11B08.btracking) {
         _id_35A7();
+      }
 
       if(isDefined(self._blackboard.rodeorequested)) {
         if(!self.asm._id_11B08._id_30E6) {
@@ -978,17 +1020,21 @@ _id_362C() {
         self _meth_82A2(var_12, 1000, 0.1, 1);
         _id_3607(var_0, var_16._id_8E54, "main", "hex", var_18._id_8E55, 6 * self._id_1A48);
 
-        if(isDefined(var_18._id_AB57))
+        if(isDefined(var_18._id_AB57)) {
           _id_3607(var_1, var_16._id_AB57, "left", "rail", var_18._id_AB57, 8 * self._id_1A48);
+        }
 
-        if(isDefined(var_18._id_AB56))
+        if(isDefined(var_18._id_AB56)) {
           _id_3607(var_2, var_16._id_AB56, "left", "pitch", var_18._id_AB56, 8 * self._id_1A48);
+        }
 
-        if(isDefined(var_18._id_E530))
+        if(isDefined(var_18._id_E530)) {
           _id_3607(var_3, var_16._id_E530, "right", "rail", var_18._id_E530, 8 * self._id_1A48);
+        }
 
-        if(isDefined(var_18._id_E52F))
+        if(isDefined(var_18._id_E52F)) {
           _id_3607(var_4, var_16._id_E52F, "right", "pitch", var_18._id_E52F, 8 * self._id_1A48);
+        }
 
         if(isDefined(var_18._id_B7A9) && isDefined(var_18._id_B7A6)) {
           var_19 = var_18._id_B7A9;
@@ -996,15 +1042,17 @@ _id_362C() {
           var_21 = var_13 - var_19;
           var_22 = var_14 - var_20;
 
-          if(var_21 > var_15)
+          if(var_21 > var_15) {
             var_19 = var_13 - var_15;
-          else if(var_21 < -1 * var_15)
+          } else if(var_21 < -1 * var_15) {
             var_19 = var_13 + var_15;
+          }
 
-          if(var_22 > var_15)
+          if(var_22 > var_15) {
             var_20 = var_14 - var_15;
-          else if(var_22 < -1 * var_15)
+          } else if(var_22 < -1 * var_15) {
             var_20 = var_14 + var_15;
+          }
 
           _id_360B(var_19, var_20, var_5, var_6, var_9, var_7, var_8, var_10, var_11);
           var_13 = var_18._id_B7A9;
@@ -1049,17 +1097,19 @@ _id_35D6(var_0, var_1, var_2, var_3) {
   var_7 = var_5._id_13CC3[var_6];
   self._id_164D[var_0]._id_4C1A = var_7;
 
-  if(var_6 == "left")
+  if(var_6 == "left") {
     var_8 = self.secondaryweapon;
-  else
+  } else {
     var_8 = self.primaryweapon;
+  }
 
   var_9 = var_7._id_C241;
   var_10 = [];
 
   if(isDefined(var_7._id_EF76)) {
-    foreach(var_12 in var_7._id_EF76)
-    var_10[var_10.size] = var_12;
+    foreach(var_12 in var_7._id_EF76) {
+      var_10[var_10.size] = var_12;
+    }
   } else
     var_10[0] = var_7.ent;
 
@@ -1075,11 +1125,13 @@ _id_35D6(var_0, var_1, var_2, var_3) {
     var_15 = self._blackboard.scriptableparts[var_6 + "_arm"];
 
     if(isDefined(var_15)) {
-      if(var_15.state == "dmg_upper")
+      if(var_15.state == "dmg_upper") {
         var_14 = ["bottom"];
+      }
 
-      if(var_15.state == "dmg_lower")
+      if(var_15.state == "dmg_lower") {
         var_14 = ["top"];
+      }
     }
   }
 
@@ -1089,8 +1141,9 @@ _id_35D6(var_0, var_1, var_2, var_3) {
   var_7._id_E5E0 = var_18;
   var_19 = [];
 
-  foreach(var_21, var_12 in var_10)
-  var_19[var_21] = var_12.origin;
+  foreach(var_21, var_12 in var_10) {
+    var_19[var_21] = var_12.origin;
+  }
 
   thread _id_35E9(var_6, var_14[0], var_18, var_7._id_DCE8 * var_9, var_1 + "_finished");
   self waittill("rocket_ready");
@@ -1101,10 +1154,11 @@ _id_35D6(var_0, var_1, var_2, var_3) {
   for(var_23 = 0; var_22 < var_9; var_23 = (var_23 + 1) % var_10.size) {
     if(isDefined(var_7._id_E5E0) || isDefined(var_10[var_23])) {
       if(var_22 == 0) {
-        if(var_22 < var_16.size)
+        if(var_22 < var_16.size) {
           _id_35D3(var_1, "fire", 1);
-        else
+        } else {
           wait 0.1;
+        }
       } else
         wait(var_7._id_DCE8 / 1000);
 
@@ -1120,19 +1174,22 @@ _id_35D6(var_0, var_1, var_2, var_3) {
       var_27 = _id_3592(var_6, var_14[var_25]);
       var_28 = anglesToForward(var_27);
 
-      if(var_6 == "left")
+      if(var_6 == "left") {
         var_29 = self.secondaryweapon;
-      else
+      } else {
         var_29 = self.primaryweapon;
+      }
 
-      if(scripts\sp\utility::_id_93A6() || level._id_7683 == 2 && isDefined(self._id_32D5) && self._id_32D5)
+      if(scripts\sp\utility::_id_93A6() || level._id_7683 == 2 && isDefined(self._id_32D5) && self._id_32D5) {
         var_29 = "iw7_c12rocket_specialist_mode";
+      }
 
       var_30 = magicbullet(var_29, var_26, var_19[var_23]);
       playFXOnTag(level._id_7649["muz_c12_rocket"], self, _id_3594(var_6, var_14[var_25]));
 
-      if(isDefined(self._id_11B06))
+      if(isDefined(self._id_11B06)) {
         _id_362D(var_30);
+      }
 
       if(isDefined(var_7._id_E5E0)) {
         var_30._id_1155F = var_10[var_23];
@@ -1202,8 +1259,9 @@ _id_35E9(var_0, var_1, var_2, var_3, var_4) {
 
   _id_3635(var_5, var_2, 0);
 
-  foreach(var_14 in self._id_E5DB)
-  var_14 linkTo(self, var_5);
+  foreach(var_14 in self._id_E5DB) {
+    var_14 linkTo(self, var_5);
+  }
 
   wait(var_10);
   wait(anim._id_35EC);
@@ -1241,8 +1299,9 @@ _id_35EA(var_0) {
 }
 
 _id_362D(var_0) {
-  if(!isDefined(self._id_6D6C))
+  if(!isDefined(self._id_6D6C)) {
     self._id_6D6C = [];
+  }
 
   var_1 = [];
 
@@ -1265,8 +1324,9 @@ _id_360F(var_0) {
   for(;;) {
     self waittill(var_0, var_1);
 
-    if(!isarray(var_1))
+    if(!isarray(var_1)) {
       var_1 = [var_1];
+    }
 
     foreach(var_3 in var_1) {
       if(var_3 == "end") {
@@ -1335,10 +1395,11 @@ _id_35C5(var_0, var_1, var_2) {
   if(var_7._id_29A1 && !var_2) {
     var_10 = undefined;
 
-    if(isDefined(var_7.ent))
+    if(isDefined(var_7.ent)) {
       var_10 = var_7.ent;
-    else if(isDefined(var_7._id_EF76))
+    } else if(isDefined(var_7._id_EF76)) {
       var_10 = var_7._id_EF76[0];
+    }
 
     self _meth_8494(var_4, var_5, var_6, var_8, var_10, var_9, var_1, var_3);
   } else {
@@ -1351,28 +1412,35 @@ _id_35C5(var_0, var_1, var_2) {
 _id_3615(var_0, var_1, var_2) {
   var_3 = self._blackboard.shootparams;
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     return 1;
+  }
 
   var_4 = var_3._id_13CC3[var_0];
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 1;
+  }
 
-  if(!_id_0C08::_id_9F5B(var_0))
+  if(!_id_0C08::_id_9F5B(var_0)) {
     return 1;
+  }
 
-  if(var_4 != var_1)
+  if(var_4 != var_1) {
     return 1;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
-  if(!var_2 && !var_4._id_312A)
+  if(!var_2 && !var_4._id_312A) {
     return 1;
+  }
 
-  if(isDefined(self._id_9DD2) && self._id_9DD2)
+  if(isDefined(self._id_9DD2) && self._id_9DD2) {
     return 1;
+  }
 
   return 0;
 }
@@ -1392,8 +1460,9 @@ _id_3612(var_0, var_1, var_2) {
   var_5 = self._id_164D[var_0]._id_4C1A;
   var_6 = self._id_164D[var_0].slot;
 
-  if(isDefined(self._id_EF6F) && isDefined(var_5._id_EF76))
+  if(isDefined(self._id_EF6F) && isDefined(var_5._id_EF76)) {
     self notify(var_5._id_EF6F);
+  }
 
   self._id_164D[var_0]._id_4C1A = undefined;
 }
@@ -1405,8 +1474,9 @@ _id_3613(var_0, var_1, var_2) {
   scripts\asm\asm::asm_fireephemeralevent("rocket_shoot_complete", var_4);
   var_5 = self._id_164D[var_0]._id_4C1A;
 
-  if(isDefined(var_5._id_EF77))
+  if(isDefined(var_5._id_EF77)) {
     self notify(var_5._id_EF77);
+  }
 
   self._id_164D[var_0]._id_4C1A = undefined;
   _id_35EA(var_5);
@@ -1419,10 +1489,11 @@ _id_3526(var_0, var_1, var_2, var_3) {
   var_5 = self._id_164D[var_0].slot;
   var_6 = var_4._id_13CC3[var_5];
 
-  if(var_6._id_C241 == 1)
+  if(var_6._id_C241 == 1) {
     var_7 = var_5 + "_1";
-  else
+  } else {
     var_7 = var_5 + "_4";
+  }
 
   return _id_0A1E::_id_2356(var_1, var_7);
 }

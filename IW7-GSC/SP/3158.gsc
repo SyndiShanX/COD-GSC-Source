@@ -8,8 +8,9 @@ _id_98CC(var_0, var_1, var_2, var_3) {
 }
 
 _id_FFC9(var_0, var_1, var_2, var_3) {
-  if(!scripts\asm\asm_bb::_id_291C())
+  if(!scripts\asm\asm_bb::_id_291C()) {
     return 0;
+  }
 
   return scripts\asm\asm::_id_232B(var_1, "burst_delay_finished");
 }
@@ -30,31 +31,37 @@ _id_FE76(var_0, var_1, var_2, var_3) {
 }
 
 _id_10002(var_0, var_1, var_2, var_3) {
-  if(!_id_10081(var_0, var_1, var_2, var_3))
+  if(!_id_10081(var_0, var_1, var_2, var_3)) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_10081(var_0, var_1, var_2, var_3) {
-  if(!scripts\anim\utility_common::isasniper())
+  if(!scripts\anim\utility_common::isasniper()) {
     return 0;
+  }
 
-  if(_id_0A2B::_id_9F60())
+  if(_id_0A2B::_id_9F60()) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_10080(var_0, var_1, var_2, var_3) {
-  if(!scripts\anim\utility_common::isasniper())
+  if(!scripts\anim\utility_common::isasniper()) {
     return _id_FFC9(var_0, var_1, var_2, var_3);
+  }
 
-  if(_id_0A2B::_id_9F60())
+  if(_id_0A2B::_id_9F60()) {
     return 0;
+  }
 
-  if(!_id_FFC9(var_0, var_1, var_2, var_3))
+  if(!_id_FFC9(var_0, var_1, var_2, var_3)) {
     return 0;
+  }
 
   return 1;
 }
@@ -79,28 +86,33 @@ _id_FECE(var_0, var_1, var_2, var_3) {
   var_4 = self.asm.shootparams;
   var_5 = self._blackboard.shootparams;
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     return 1;
+  }
 
-  if(scripts\anim\utility_common::isasniper())
+  if(scripts\anim\utility_common::isasniper()) {
     return 0;
+  }
 
-  if(_id_3DFB(var_4.ent, var_5.ent) || !isDefined(var_4.ent) && _id_3DFB(var_4.pos, var_5.pos) || _id_3DFB(var_4._id_1119D, var_5._id_1119D))
+  if(_id_3DFB(var_4.ent, var_5.ent) || !isDefined(var_4.ent) && _id_3DFB(var_4.pos, var_5.pos) || _id_3DFB(var_4._id_1119D, var_5._id_1119D)) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_FEDC(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.asm.shootparams))
+  if(isDefined(self.asm.shootparams)) {
     return self.asm.shootparams._id_FF0B == 1;
+  }
 
   return self._blackboard.shootparams._id_FF0B == 1;
 }
 
 _id_FED9(var_0, var_1, var_2, var_3) {
-  if(self._blackboard.shootparams._id_1119D == "full" || self._blackboard.shootparams._id_1119D == "burst")
+  if(self._blackboard.shootparams._id_1119D == "full" || self._blackboard.shootparams._id_1119D == "burst") {
     return 1;
+  }
 
   return 0;
 }
@@ -118,11 +130,13 @@ _id_FEDA(var_0, var_1, var_2, var_3) {
 }
 
 _id_3DFB(var_0, var_1) {
-  if(isDefined(var_0) != isDefined(var_1))
+  if(isDefined(var_0) != isDefined(var_1)) {
     return 1;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 0;
+  }
 
   return var_0 != var_1;
 }
@@ -167,10 +181,11 @@ _id_FE70(var_0, var_1, var_2, var_3) {
   _id_FE89();
   var_4 = _id_FE64();
 
-  if(isDefined(self _meth_8164()))
+  if(isDefined(self _meth_8164())) {
     _id_5AAC(var_4);
-  else
+  } else {
     _id_5AAB(var_0, var_1, var_2, var_4);
+  }
 
   self.asm.shootparams._id_C21C--;
   scripts\asm\asm::asm_fireevent("shoot", "shoot_finished");
@@ -184,11 +199,13 @@ _id_FE71(var_0, var_1, var_2) {
 _id_FE61(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
 
-  if(!isDefined(self.asm.shootparams))
+  if(!isDefined(self.asm.shootparams)) {
     _id_FE89();
+  }
 
-  if(scripts\anim\utility_common::isasniper(1))
+  if(scripts\anim\utility_common::isasniper(1)) {
     _id_0A2B::_id_C599();
+  }
 
   var_4 = _id_FE64();
   self _meth_83CE();
@@ -197,14 +214,16 @@ _id_FE61(var_0, var_1, var_2, var_3) {
   _id_FE5C(var_0, var_1, var_5, 2);
   self.asm.shootparams._id_C21C--;
 
-  if(!_id_FEDC())
+  if(!_id_FEDC()) {
     _id_FE82(0.05);
+  }
 
   scripts\asm\asm::asm_fireevent("shoot", "shoot_finished");
   scripts\asm\asm::asm_fireevent(var_1, "shoot_finished");
 
-  if(scripts\anim\utility_common::isasniper(1))
+  if(scripts\anim\utility_common::isasniper(1)) {
     _id_0A2B::_id_C59A();
+  }
 }
 
 _id_FE7D(var_0) {
@@ -234,8 +253,9 @@ _id_FE5C(var_0, var_1, var_2, var_3) {
   if(var_6) {
     var_8 = getnotetracktimes(var_2, "fire");
 
-    if(var_8.size == 1 && var_8[0] == 0)
+    if(var_8.size == 1 && var_8[0] == 0) {
       var_6 = 0;
+    }
   }
 
   var_9 = 0;
@@ -245,8 +265,9 @@ _id_FE5C(var_0, var_1, var_2, var_3) {
   var_13 = scripts\anim\utility_common::weapon_pump_action_shotgun();
 
   while(var_9 < var_10 && var_10 > 0) {
-    if(var_6)
+    if(var_6) {
       self waittillmatch(var_1, "fire");
+    }
 
     if(!self.bulletsinclip) {
       break;
@@ -255,25 +276,29 @@ _id_FE5C(var_0, var_1, var_2, var_3) {
     shootatshootentorpos(var_11);
 
     if(var_12) {
-      if(randomint(3) == 0)
+      if(randomint(3) == 0) {
         self.bulletsinclip--;
+      }
     } else
       self.bulletsinclip--;
 
-    if(var_7)
+    if(var_7) {
       self.a.rockets--;
+    }
 
     var_9++;
 
-    if(var_13)
+    if(var_13) {
       childthread _id_FE7D(var_1);
+    }
 
     if(self.asm.shootparams._id_6B92 && var_9 == var_10) {
       break;
     }
 
-    if(!var_6 || var_10 == 1 && self.asm.shootparams._id_1119D == "single")
+    if(!var_6 || var_10 == 1 && self.asm.shootparams._id_1119D == "single") {
       self waittillmatch(var_1, "end");
+    }
   }
 
   self notify(var_5);
@@ -281,8 +306,9 @@ _id_FE5C(var_0, var_1, var_2, var_3) {
 
 shootatshootentorpos(var_0) {
   if(isDefined(self.asm.shootparams.ent)) {
-    if(isDefined(self.enemy) && self.asm.shootparams.ent == self.enemy)
+    if(isDefined(self.enemy) && self.asm.shootparams.ent == self.enemy) {
       self[[anim.shootenemywrapper_func]](var_0);
+    }
   } else
     self[[anim._id_FED3]](self.asm.shootparams.pos, var_0);
 }
@@ -297,18 +323,19 @@ _id_FE64() {
   var_0 = self.asm.shootparams._id_1119D;
   var_1 = 1.0;
 
-  if(isDefined(self._id_FED4))
+  if(isDefined(self._id_FED4)) {
     var_1 = self._id_FED4;
-  else if(var_0 == "mg")
+  } else if(var_0 == "mg") {
     var_1 = 0.1;
-  else if(var_0 == "full")
+  } else if(var_0 == "full") {
     var_1 = scripts\anim\weaponlist::autoshootanimrate() * randomfloatrange(0.5, 1.0);
-  else if(var_0 == "burst")
+  } else if(var_0 == "burst") {
     var_1 = scripts\anim\weaponlist::burstshootanimrate();
-  else if(scripts\anim\utility_common::isusingsidearm())
+  } else if(scripts\anim\utility_common::isusingsidearm()) {
     var_1 = 3.0;
-  else if(scripts\anim\utility_common::isusingshotgun())
+  } else if(scripts\anim\utility_common::isusingshotgun()) {
     var_1 = scripts\anim\combat_utility::_id_FEFE();
+  }
 
   return var_1;
 }
@@ -344,24 +371,27 @@ _id_FE89(var_0, var_1, var_2, var_3) {
 
 _id_32BE() {
   if(isDefined(self.asm.shootparams) && self.asm.shootparams._id_1119D == "full" && !self.asm.shootparams._id_6B92) {
-    if(self.a._id_A9ED == gettime())
+    if(self.a._id_A9ED == gettime()) {
       wait 0.05;
+    }
 
     return;
   }
 
   var_0 = _id_80E7();
 
-  if(var_0)
+  if(var_0) {
     wait(var_0);
+  }
 }
 
 _id_80E7() {
   var_0 = (gettime() - self.a._id_A9ED) / 1000;
   var_1 = _id_7E12();
 
-  if(var_1 > var_0)
+  if(var_1 > var_0) {
     return var_1 - var_0;
+  }
 
   return 0;
 }
@@ -369,44 +399,52 @@ _id_80E7() {
 _id_7E13() {
   var_0 = isDefined(self.turret);
 
-  if(var_0 && isDefined(self.turret.script_delay_min))
+  if(var_0 && isDefined(self.turret.script_delay_min)) {
     var_1 = self.turret.script_delay_min;
-  else
+  } else {
     var_1 = 0.2;
+  }
 
-  if(var_0 && isDefined(self.turret.script_delay_max))
+  if(var_0 && isDefined(self.turret.script_delay_max)) {
     var_2 = self.turret.script_delay_max - var_1;
-  else
+  } else {
     var_2 = 0.5;
+  }
 
   return var_1 + randomfloat(var_2);
 }
 
 _id_7E12() {
-  if(scripts\sp\mgturret::_id_130FD() || weaponclass(self.weapon) == "mg")
+  if(scripts\sp\mgturret::_id_130FD() || weaponclass(self.weapon) == "mg") {
     return _id_7E13();
+  }
 
-  if(scripts\anim\utility_common::isusingsidearm())
+  if(scripts\anim\utility_common::isusingsidearm()) {
     return randomfloatrange(0.15, 0.55);
+  }
 
-  if(scripts\anim\utility_common::weapon_pump_action_shotgun())
+  if(scripts\anim\utility_common::weapon_pump_action_shotgun()) {
     return randomfloatrange(1.0, 1.7);
+  }
 
-  if(scripts\anim\utility_common::isasniper())
+  if(scripts\anim\utility_common::isasniper()) {
     return scripts\anim\combat_utility::_id_8130();
+  }
 
   if(isDefined(self.asm.shootparams)) {
     if(self.asm.shootparams._id_6B92) {
-      if(isDefined(self.asm.shootparams.ent))
+      if(isDefined(self.asm.shootparams.ent)) {
         return randomfloatrange(0.2, 0.4);
-      else
+      } else {
         return randomfloatrange(0.6, 1.0);
+      }
     }
 
-    if(isDefined(self.asm.shootparams.ent))
+    if(isDefined(self.asm.shootparams.ent)) {
       return randomfloatrange(0.4, 0.9);
-    else
+    } else {
       return randomfloatrange(0.8, 1.2);
+    }
   }
 
   return randomfloatrange(0.8, 1.2);

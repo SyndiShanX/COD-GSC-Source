@@ -23,8 +23,9 @@ is_valid_tile_spot() {
   var_0 = [(-1803, 2629, 937), (-1138, 3784, 782), (-2407.5, 3456, 494.5), (-1928.5, 3815.5, 750.5), (-1911, 4188.5, 742)];
 
   foreach(var_2 in var_0) {
-    if(self.origin == var_2)
+    if(self.origin == var_2) {
       return 0;
+    }
   }
 
   return 1;
@@ -42,8 +43,9 @@ init_crafting_station(var_0, var_1) {
       var_4.origin = var_5.origin;
       var_5.item = var_4;
 
-      if(isDefined(var_5.angles))
+      if(isDefined(var_5.angles)) {
         var_4.angles = var_5.angles;
+      }
 
       continue;
     }
@@ -54,8 +56,9 @@ init_crafting_station(var_0, var_1) {
   var_7 = scripts\engine\utility::getStructArray("puzzle", "script_noteworthy");
 
   foreach(var_9 in var_7) {
-    if(var_9.name == var_0 && !scripts\engine\utility::is_true(var_9.used))
+    if(var_9.name == var_0 && !scripts\engine\utility::is_true(var_9.used)) {
       scripts\cp\cp_interaction::remove_from_current_interaction_list(var_9);
+    }
   }
 
   var_2.remaining_pieces = 3;
@@ -64,9 +67,9 @@ init_crafting_station(var_0, var_1) {
 }
 
 use_crafting_station(var_0, var_1) {
-  if(scripts\engine\utility::is_true(var_1.kung_fu_mode))
+  if(scripts\engine\utility::is_true(var_1.kung_fu_mode)) {
     var_1 playlocalsound("perk_machine_deny");
-  else {
+  } else {
     if(!scripts\engine\utility::array_contains(level.current_interaction_structs, var_0)) {
       return;
     }
@@ -105,8 +108,9 @@ use_crafting_station(var_0, var_1) {
       var_0.puzzle_complete = 1;
       var_0.crafted_item playSound("zmb_coin_appear");
 
-      if(var_1 scripts\cp\utility::is_valid_player())
+      if(var_1 scripts\cp\utility::is_valid_player()) {
         var_1 thread scripts\cp\cp_vo::try_to_play_vo("puzzle_craft_success", "zmb_comment_vo", "low", 10, 0, 0, 0, 50);
+      }
 
       scripts\cp\cp_vo::remove_from_nag_vo("nag_puzzle");
 
@@ -245,8 +249,9 @@ get_puzzle_piece_location(var_0) {
     if(!var_4 is_valid_tile_spot()) {
       continue;
     }
-    if(var_4.name == var_0 && !scripts\engine\utility::is_true(var_4.used))
+    if(var_4.name == var_0 && !scripts\engine\utility::is_true(var_4.used)) {
       var_2[var_2.size] = var_4;
+    }
   }
 
   var_2 = scripts\engine\utility::array_randomize(var_2);

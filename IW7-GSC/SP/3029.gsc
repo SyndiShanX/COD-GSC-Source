@@ -27,11 +27,13 @@ _id_D186() {
 }
 
 _id_D188() {
-  if(isDefined(self._id_4B23))
+  if(isDefined(self._id_4B23)) {
     self stoploopsound(self._id_4B23);
+  }
 
-  if(isDefined(self._id_4B22))
+  if(isDefined(self._id_4B22)) {
     self stoploopsound(self._id_4B22);
+  }
 
   level.player _meth_80A1();
 }
@@ -51,8 +53,9 @@ _id_D13C() {
     }
     if(isDefined(var_1.classname) && var_1.classname == "misc_turret") {
       if(isDefined(var_1.type) && var_1.type != "cap_turret_missile_barrage") {
-        if(isDefined(var_1._id_4D1E) && isDefined(var_1._id_4D1E._id_B428))
+        if(isDefined(var_1._id_4D1E) && isDefined(var_1._id_4D1E._id_B428)) {
           var_0 = var_1._id_4D1E._id_B428;
+        }
       }
     }
 
@@ -152,8 +155,9 @@ _id_D136() {
     var_22 = var_19 * var_20 * var_20 * var_21;
     var_22 = var_22 * level._id_A48E._id_D3BC;
 
-    if(scripts\sp\utility::_id_D15B("hull"))
+    if(scripts\sp\utility::_id_D15B("hull")) {
       var_22 = var_22 * 0.33;
+    }
 
     var_22 = clamp(var_22, 0, 1);
     var_4 thread _id_D135(var_22);
@@ -170,13 +174,15 @@ _id_D136() {
           var_24 = scripts\sp\math::_id_6A8E(2, 1, var_24);
           var_22 = var_24;
 
-          if(var_22 > 0.99)
+          if(var_22 > 0.99) {
             var_22 = 0.99;
+          }
 
           var_25 = scripts\sp\math::_id_6A8E(0, var_23, var_22);
 
-          if(isDefined(var_12.script_team) && var_12.script_team == "axis")
+          if(isDefined(var_12.script_team) && var_12.script_team == "axis") {
             var_12 dodamage(var_25, level._id_D127.origin, level._id_D127, undefined, "MOD_IMPACT", "spaceship_cannon_projectile");
+          }
         }
       }
 
@@ -209,30 +215,35 @@ _id_D135(var_0, var_1) {
   var_14 = scripts\sp\math::_id_6A8E(var_8, var_9, var_10);
   earthquake(var_11, var_12, level._id_D127.origin, 5000);
 
-  if(var_0 > 0.5)
+  if(var_0 > 0.5) {
     level.player playRumbleOnEntity("grenade_rumbe");
-  else if(var_0 > 0.25)
+  } else if(var_0 > 0.25) {
     level.player playRumbleOnEntity("damage_heavy");
-  else
+  } else {
     level.player playRumbleOnEntity("damage_light");
+  }
 }
 
 _id_D07A(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_2) || var_2 == "spaceship_scripted_locked_enemy_bullets" || var_2 == "spaceship_homing_missile")
+  if(!isDefined(var_2) || var_2 == "spaceship_scripted_locked_enemy_bullets" || var_2 == "spaceship_homing_missile") {
     return 0;
+  }
 
-  if(_id_0BDC::_id_7B9E() < 25)
+  if(_id_0BDC::_id_7B9E() < 25) {
     return 0;
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   var_4 = vectordot(anglesToForward(self.angles), var_0 * -1);
 
-  if(var_4 > 0.83)
+  if(var_4 > 0.83) {
     return 0;
-  else
+  } else {
     return 1;
+  }
 }
 
 _id_4CF3() {
@@ -248,8 +259,9 @@ _id_D142() {
   self waittill("script_death", var_0);
   self._id_5F6F = 1;
 
-  if(isDefined(level._id_D127._id_432D))
+  if(isDefined(level._id_D127._id_432D)) {
     level._id_D127._id_432D _meth_8278(0, 0.5);
+  }
 
   if(!isDefined(self._id_A56F) || !self._id_A56F) {
     _id_0BDC::_id_D16C(level._id_D127.origin, 0, 0, 0);
@@ -350,13 +362,15 @@ _id_D140() {
 }
 
 _id_D13F(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = scripts\engine\utility::random([6, 8, 9, 3, 4]);
+  }
 
-  if(var_0 < 10)
+  if(var_0 < 10) {
     var_1 = "0";
-  else
+  } else {
     var_1 = "";
+  }
 
   var_0 = "tag_cockpit_damage_fx_" + var_1 + var_0;
   earthquake(randomfloatrange(0.25, 0.3), 0.6, level._id_D127.origin, 15000);
@@ -368,19 +382,21 @@ _id_D13A() {
   var_0 = randomint(100) < 20;
   var_1 = randomint(100) < 40;
 
-  if(var_0)
+  if(var_0) {
     var_2 = "_lrg";
-  else if(var_1)
+  } else if(var_1) {
     var_2 = "_med";
-  else
+  } else {
     var_2 = "";
+  }
 
   var_3 = randomintrange(1, 10);
 
-  if(var_3 < 10)
+  if(var_3 < 10) {
     var_4 = "0";
-  else
+  } else {
     var_4 = "";
+  }
 
   var_3 = "tag_cockpit_damage_fx_" + var_4 + var_3;
   scripts\sp\utility::_id_75C4("cockpit_damage_sparks" + var_2, var_3);
@@ -464,8 +480,9 @@ _id_12864() {
     return 1;
   }
 
-  if(self._id_9C28)
+  if(self._id_9C28) {
     return 1;
+  }
 
   return 0;
 }
@@ -499,18 +516,20 @@ _id_D13E() {
   self endon("damage_recover");
   self endon("script_death");
 
-  if(isDefined(self._id_5763) && self._id_5763)
+  if(isDefined(self._id_5763) && self._id_5763) {
     var_0 = level._id_A48E._id_D3BF / 1000;
-  else
+  } else {
     var_0 = level._id_A48E._id_D3C0 / 1000;
+  }
 
   wait(var_0);
 
   while(self._id_B154 < scripts\sp\gameskill::_id_7A59()) {
     self._id_B154 = self._id_B154 + level._id_A48E._id_D3BB;
 
-    if(self._id_B154 > scripts\sp\gameskill::_id_7A59())
+    if(self._id_B154 > scripts\sp\gameskill::_id_7A59()) {
       self._id_B154 = scripts\sp\gameskill::_id_7A59();
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -611,10 +630,11 @@ _id_11AB3() {
       self._id_5763 = 0;
     }
 
-    if(isDefined(self._id_728F))
+    if(isDefined(self._id_728F)) {
       var_6 = self._id_728F;
-    else
+    } else {
       var_6 = min(var_7, var_6);
+    }
 
     if(var_6 < var_5) {
       var_9 = scripts\sp\math::_id_C097(0, var_5, var_6);
@@ -670,9 +690,9 @@ _id_11AB3() {
 }
 
 _id_A2B3(var_0) {
-  if(!var_0)
+  if(!var_0) {
     level._id_D127._id_728F = undefined;
-  else {
+  } else {
     var_0 = clamp(var_0, 0, 1);
     level._id_D127._id_728F = 1 - var_0;
   }
@@ -690,14 +710,17 @@ _id_DAEA(var_0, var_1, var_2) {
   self endon("script_death");
   var_3 = _id_79FF();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0.1;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1.0;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0.5;
+  }
 
   var_4 = var_0 * 2.0;
   var_5 = var_0;
@@ -733,17 +756,19 @@ _id_79FF() {
 }
 
 _id_D12F(var_0, var_1, var_2) {
-  if(self._id_9C28)
+  if(self._id_9C28) {
     var_0 = var_0 * 1.5;
+  }
 
   var_3 = scripts\sp\math::_id_C097(0, 300, var_0);
   var_4 = scripts\sp\math::_id_6A8E(0.15, 0.39, var_3);
   earthquake(var_4, 0.4, level._id_D127.origin, 50000);
 
-  if(var_3 > 0.6)
+  if(var_3 > 0.6) {
     level.player playRumbleOnEntity("damage_heavy");
-  else if(var_3 > 0.3)
+  } else if(var_3 > 0.3) {
     level.player playRumbleOnEntity("damage_light");
+  }
 
   var_5 = scripts\sp\math::_id_6A8E(1.3, 2.0, var_3);
   thread _id_0BDC::_id_D527("jackal_bullet_impact_player", var_2, undefined, var_5, self);
@@ -778,27 +803,30 @@ _id_D14E(var_0, var_1, var_2) {
   var_4 = scripts\sp\math::_id_6A8E(0.01, 0.4, var_3);
   earthquake(var_4, 0.75, level._id_D127.origin, 50000);
 
-  if(var_3 > 0.6)
+  if(var_3 > 0.6) {
     level.player playRumbleOnEntity("damage_heavy");
-  else if(var_3 > 0.3)
+  } else if(var_3 > 0.3) {
     level.player playRumbleOnEntity("damage_light");
+  }
 
   var_5 = scripts\sp\math::_id_6A8E(0.3, 1.5, var_3);
   thread _id_0BDC::_id_D527("explosive_impact_player_jackal", var_2, undefined, var_5);
   var_1 = vectorNormalize(level._id_D127.origin - var_2);
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread _id_4D00(var_3, var_1, var_2, 2);
-  else
+  } else {
     _id_4CFF(var_3, var_1, var_2, 2);
+  }
 }
 
 _id_88DB() {
   if(!isDefined(level._id_10147)) {
     return;
   }
-  while(!isDefined(level._id_D127))
+  while(!isDefined(level._id_D127)) {
     wait 0.05;
+  }
 
   var_0 = 0;
   var_1 = 0;
@@ -840,8 +868,9 @@ _id_88DB() {
     var_5 = level._id_D127;
     var_6 = 0;
 
-    if(isDefined(var_5._id_B154))
+    if(isDefined(var_5._id_B154)) {
       var_6 = var_5._id_B154 / scripts\sp\gameskill::_id_7A59();
+    }
 
     var_4 setshader("black", int(var_6 * 100), 8);
   }
@@ -853,10 +882,11 @@ _id_B81C(var_0) {
   var_3 = scripts\sp\math::_id_6A8E(0.01, 0.4, var_2);
   earthquake(var_3, 0.75, level._id_D127.origin, 50000);
 
-  if(var_2 > 0.6)
+  if(var_2 > 0.6) {
     level.player playRumbleOnEntity("damage_heavy");
-  else if(var_2 > 0.3)
+  } else if(var_2 > 0.3) {
     level.player playRumbleOnEntity("damage_light");
+  }
 
   var_4 = vectorNormalize(level._id_D127.origin - var_0);
   var_2 = 1 - scripts\sp\math::_id_C097(300, 10000, var_1);
@@ -873,8 +903,9 @@ _id_4D00(var_0, var_1, var_2, var_3, var_4) {
   var_5 = 120;
   var_6 = (70, 40, 200);
 
-  if(scripts\engine\utility::cointoss())
+  if(scripts\engine\utility::cointoss()) {
     var_6 = var_6 * -1;
+  }
 
   earthquake(var_0, 0.75, level._id_D127.origin, 50000);
   _id_0BDC::_id_A079(var_2, var_5 * var_0, 0.05 * var_3, var_3, var_4);

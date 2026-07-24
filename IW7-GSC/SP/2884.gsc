@@ -51,16 +51,18 @@ _id_45A6() {
 _id_12753() {
   self endon("death");
 
-  if(isDefined(self._id_B004))
+  if(isDefined(self._id_B004)) {
     self._id_B004["interaction_trigger_override"] = 1;
+  }
 }
 
 _id_12755(var_0) {
   self endon("death");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2._id_B004))
+    if(isDefined(var_2._id_B004)) {
       var_2._id_B004["interaction_trigger_override"] = 1;
+    }
   }
 }
 
@@ -71,44 +73,51 @@ _id_12754() {
 
   foreach(var_3 in var_1) {
     if(isDefined(var_3._id_B004["common_name"])) {
-      if(var_3._id_B004["common_name"] == var_0)
+      if(var_3._id_B004["common_name"] == var_0) {
         var_3._id_B004["interaction_trigger_override"] = 1;
+      }
     }
   }
 }
 
 _id_DDE1() {
   foreach(var_1 in level._id_9A2E._id_4D94["actors"]) {
-    if(!isDefined(var_1))
-      level._id_9A2E._id_4D94["actors"] = scripts\engine\utility::array_remove(level._id_9A2E._id_4D94["actors"], var_1);
+    if(!isDefined(var_1)) {
+      level._id_9A2E._id_4D94["actors"] = ::scripts\engine\utility::array_remove(level._id_9A2E._id_4D94["actors"], var_1);
+    }
   }
 }
 
 _id_168F() {
   if(isDefined(level._id_9A2E)) {
-    if(!scripts\engine\utility::array_contains(level._id_9A2E._id_4D94["actors"], self))
-      level._id_9A2E._id_4D94["actors"] = scripts\engine\utility::array_add(level._id_9A2E._id_4D94["actors"], self);
+    if(!scripts\engine\utility::array_contains(level._id_9A2E._id_4D94["actors"], self)) {
+      level._id_9A2E._id_4D94["actors"] = ::scripts\engine\utility::array_add(level._id_9A2E._id_4D94["actors"], self);
+    }
   }
 }
 
 _id_DFB5() {
-  if(isDefined(level._id_9A2E))
-    level._id_9A2E._id_4D94["actors"] = scripts\engine\utility::array_remove(level._id_9A2E._id_4D94["actors"], self);
+  if(isDefined(level._id_9A2E)) {
+    level._id_9A2E._id_4D94["actors"] = ::scripts\engine\utility::array_remove(level._id_9A2E._id_4D94["actors"], self);
+  }
 }
 
 _id_3839(var_0) {
   var_1 = level.player.origin;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_2 = var_0;
-  else
+  } else {
     var_2 = 140.0;
+  }
 
-  if(!isDefined(level._id_9A2E))
+  if(!isDefined(level._id_9A2E)) {
     return 1;
+  }
 
-  if(isDefined(self._id_1C4D) && !self._id_1C4D)
+  if(isDefined(self._id_1C4D) && !self._id_1C4D) {
     return 0;
+  }
 
   _id_DDE1();
 
@@ -116,8 +125,9 @@ _id_3839(var_0) {
     if(isDefined(var_4) && isDefined(self)) {
       if(distance(self.origin, var_4.origin) < var_2) {
         if(scripts\sp\utility::hastag(var_4.model, "j_spine4") && level.player scripts\sp\utility::_id_D637(var_4 gettagorigin("j_spine4"))) {
-          if(isDefined(var_4._id_9C84) && var_4._id_9C84)
+          if(isDefined(var_4._id_9C84) && var_4._id_9C84) {
             return 0;
+          }
         }
       }
     }
@@ -129,13 +139,15 @@ _id_3839(var_0) {
 _id_3838(var_0) {
   var_1 = level.player.origin;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_2 = var_0;
-  else
+  } else {
     var_2 = 140.0;
+  }
 
-  if(!isDefined(level._id_9A2E))
+  if(!isDefined(level._id_9A2E)) {
     return 1;
+  }
 
   _id_DDE1();
 
@@ -144,11 +156,13 @@ _id_3838(var_0) {
       if(self != var_4) {
         if(distance(self.origin, var_4.origin) < var_2) {
           if(scripts\engine\utility::within_fov(level.player getEye(), level.player.angles, var_4 gettagorigin("j_spine4"), cos(45))) {
-            if(isDefined(var_4._id_D4A4) && var_4._id_D4A4 || isDefined(var_4._id_9CE2) && var_4._id_9CE2)
+            if(isDefined(var_4._id_D4A4) && var_4._id_D4A4 || isDefined(var_4._id_9CE2) && var_4._id_9CE2) {
               return 0;
+            }
 
-            if(isDefined(var_4._id_1C48) && !var_4._id_1C48)
+            if(isDefined(var_4._id_1C48) && !var_4._id_1C48) {
               return 0;
+            }
           }
         }
       }
@@ -166,8 +180,9 @@ _id_9A0E(var_0) {
     _id_DDE1();
 
     foreach(var_2 in level._id_9A2E._id_4D94["actors"]) {
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         var_2._id_1C4D = 0;
+      }
     }
 
     for(;;) {
@@ -185,8 +200,9 @@ _id_9A0E(var_0) {
     var_0._id_1C4D = 1;
 
     foreach(var_2 in level._id_9A2E._id_4D94["actors"]) {
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         var_2._id_1C4D = 1;
+      }
     }
   }
 }
@@ -233,33 +249,39 @@ remind_calltrain_sethot(var_0) {
 }
 
 _id_DB7B(var_0, var_1, var_2) {
-  if(!isDefined(var_0) && isDefined(var_1))
+  if(!isDefined(var_0) && isDefined(var_1)) {
     var_0 = "none";
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_0 = var_0 + "+" + var_1;
+  }
 
   level._id_9A2E._id_4D94["reminder_queue"][var_0] = self;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self.remind_calltrain = var_2;
+  }
 }
 
 _id_DB7C(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 = var_0 + "+" + var_1;
-  else
+  } else {
     var_0 = var_1;
+  }
 
   level._id_9A2E._id_4D94["reminder_queue"][var_0] = self;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self.remind_calltrain = var_2;
+  }
 
   self._id_13007 = 1;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     self._id_E40E = var_3;
+  }
 }
 
 _id_DB7D(var_0, var_1, var_2, var_3) {
@@ -284,12 +306,13 @@ _id_E815(var_0) {
       var_6 = var_5[0];
 
       if(isDefined(var_4._id_13008) && var_4._id_13008) {
-        if(isDefined(var_4._id_DEED) && isDefined(var_4._id_D6E3))
+        if(isDefined(var_4._id_DEED) && isDefined(var_4._id_D6E3)) {
           var_4 thread scripts\sp\interaction::_id_CE18(var_4._id_DEED, var_6, var_4._id_D6E3);
-        else if(isDefined(self._id_D6E0) && isDefined(self._id_D6E2))
+        } else if(isDefined(self._id_D6E0) && isDefined(self._id_D6E2)) {
           self thread[[self._id_D6E0]](undefined, undefined, self._id_D6E2);
-        else
+        } else {
           var_4 thread _id_CD24(85.0, 50.0, var_6, 1, var_4.reminder_cooldown_timer);
+        }
       } else if(isDefined(var_4._id_13007) && var_4._id_13007) {
         var_7 = undefined;
         var_8 = undefined;
@@ -300,18 +323,20 @@ _id_E815(var_0) {
         } else
           var_7 = var_5[0];
 
-        if(isDefined(var_4.remind_calltrain))
+        if(isDefined(var_4.remind_calltrain)) {
           var_4.remind_calltrain thread _id_CDDB(var_4, 85.0, 50.0, var_7, undefined, 1);
-        else
+        } else {
           var_4 thread _id_CDDB(var_4, 85.0, 50.0, var_7, undefined, 1);
+        }
       }
     }
   }
 
   wait(var_0);
 
-  while(level._id_9A2E._id_C9C3)
+  while(level._id_9A2E._id_C9C3) {
     scripts\engine\utility::waitframe();
+  }
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_3 = var_1[var_2];
@@ -328,23 +353,26 @@ _id_E815(var_0) {
           var_9 = getanimlength(var_4 scripts\sp\utility::_id_7DC1(var_5[1]));
           var_4 thread scripts\sp\utility::_id_C12D("reminder_anim_done", var_9);
 
-          if(isDefined(var_4._id_E40E))
+          if(isDefined(var_4._id_E40E)) {
             var_4.remind_calltrain scripts\engine\utility::delaythread(var_9, scripts\sp\anim::_id_1EEA, var_4, var_4._id_E40E, "stop_loop");
+          }
         } else {
           var_4 notify("stop_loop");
           var_4 thread scripts\sp\anim::_id_1F35(var_4, var_5[1]);
           var_9 = getanimlength(var_4 scripts\sp\utility::_id_7DC1(var_5[1]));
           var_4 thread scripts\sp\utility::_id_C12D("reminder_anim_done", var_9);
 
-          if(isDefined(var_4._id_E40E))
+          if(isDefined(var_4._id_E40E)) {
             var_4 scripts\engine\utility::delaythread(var_9, scripts\sp\anim::_id_1EEA, var_4, var_4._id_E40E, "stop_loop");
+          }
         }
 
         if(var_6 != "none") {
-          if(!soundexists(var_6))
+          if(!soundexists(var_6)) {
             var_4 _id_0B6A::_id_EC0E(var_6);
-          else
+          } else {
             var_4 scripts\sp\utility::_id_10346(var_6);
+          }
         }
       } else if(!soundexists(var_3)) {} else
         var_4 scripts\sp\utility::_id_10346(var_3);
@@ -357,8 +385,9 @@ _id_E815(var_0) {
       level._id_9A2E._id_3840 = 1;
     }
 
-    while(level._id_9A2E._id_C9C3)
+    while(level._id_9A2E._id_C9C3) {
       scripts\engine\utility::waitframe();
+    }
   }
 
   level notify("reminders_done");
@@ -396,16 +425,19 @@ _id_45A9() {
 }
 
 _id_CE40(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "casual";
+  }
 
-  if(isDefined(self.gender) && issubstr(self.gender, "female"))
+  if(isDefined(self.gender) && issubstr(self.gender, "female")) {
     var_2 = "busy";
+  }
 
   var_4 = var_0 + "_" + "casual";
 
-  if(var_2 == "casual" || var_2 == "nag")
+  if(var_2 == "casual" || var_2 == "nag") {
     var_4 = var_0 + "_" + var_2;
+  }
 
   self._id_DD4A = var_0;
   self._id_DD49 = var_2;
@@ -432,10 +464,11 @@ _id_CE40(var_0, var_1, var_2, var_3) {
 }
 
 _id_11048() {
-  if(!isDefined(self._id_9B89))
+  if(!isDefined(self._id_9B89)) {
     thread scripts\sp\interaction::_id_9A0F();
-  else
+  } else {
     self notify("reaction_end");
+  }
 
   self notify("change_reaction_state");
   self._id_DD49 = undefined;
@@ -500,8 +533,9 @@ _id_F2A7(var_0, var_1) {
     case "alert":
     case "nag":
     case "casual":
-      foreach(var_3 in level._id_9A2E._id_4D94["actors"])
-      var_3 thread _id_F566(var_0, var_1);
+      foreach(var_3 in level._id_9A2E._id_4D94["actors"]) {
+        var_3 thread _id_F566(var_0, var_1);
+      }
 
       break;
   }
@@ -514,31 +548,37 @@ _id_DD45(var_0, var_1, var_2, var_3) {
   self endon("stop_smart_reaction");
   var_4 = 85.0;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_4 = var_0;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level.player;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0.7;
+  }
 
   wait(var_2);
 
   if(isDefined(self._id_DD4A)) {
-    if(isDefined(level._id_10E1C[self._id_9A30]._id_EBEA["trigger_radius"]))
+    if(isDefined(level._id_10E1C[self._id_9A30]._id_EBEA["trigger_radius"])) {
       var_4 = level._id_10E1C[self._id_9A30]._id_EBEA["trigger_radius"] * 1.2;
+    }
   }
 
   scripts\engine\utility::waitframe();
 
-  if(isDefined(var_3) && var_3)
+  if(isDefined(var_3) && var_3) {
     thread scripts\sp\utility::_id_7799(var_1, 0.5, 0.5);
-  else
+  } else {
     thread scripts\sp\utility::_id_779A(var_1, 0.5, 0.5, var_4);
+  }
 
-  while(!isDefined(self._id_9BFC))
+  while(!isDefined(self._id_9BFC)) {
     wait 0.05;
+  }
 
   thread scripts\sp\utility::_id_7798(var_1);
   wait(randomfloatrange(4.0, 6.0));
@@ -572,8 +612,9 @@ _id_77B1(var_0, var_1) {
   var_2 = 50.0;
 
   if(isDefined(self._id_DD4A)) {
-    if(isDefined(level._id_10E1C[self._id_9A30]._id_EBEA["trigger_radius"]))
+    if(isDefined(level._id_10E1C[self._id_9A30]._id_EBEA["trigger_radius"])) {
       var_2 = level._id_10E1C[self._id_9A30]._id_EBEA["trigger_radius"];
+    }
   }
 
   _id_13775(var_2);
@@ -602,12 +643,12 @@ _id_77B1(var_0, var_1) {
           var_5 = level._id_9A2E._id_4D94["reminder_vo"][var_0]["spent_" + self.gender];
         }
 
-        if(var_4.size < 1 && var_5.size < 1)
+        if(var_4.size < 1 && var_5.size < 1) {
           var_3 = undefined;
-        else {
+        } else {
           var_3 = var_4[randomint(var_4.size)];
-          level._id_9A2E._id_4D94["reminder_vo"][var_0]["spent_" + self.gender] = scripts\engine\utility::array_add(level._id_9A2E._id_4D94["reminder_vo"][var_0]["spent_" + self.gender], var_3);
-          level._id_9A2E._id_4D94["reminder_vo"][var_0][self.gender] = scripts\engine\utility::array_remove(level._id_9A2E._id_4D94["reminder_vo"][var_0][self.gender], var_3);
+          level._id_9A2E._id_4D94["reminder_vo"][var_0]["spent_" + self.gender] = ::scripts\engine\utility::array_add(level._id_9A2E._id_4D94["reminder_vo"][var_0]["spent_" + self.gender], var_3);
+          level._id_9A2E._id_4D94["reminder_vo"][var_0][self.gender] = ::scripts\engine\utility::array_remove(level._id_9A2E._id_4D94["reminder_vo"][var_0][self.gender], var_3);
         }
 
         break;
@@ -623,20 +664,21 @@ _id_77B1(var_0, var_1) {
       var_5 = level._id_9A2E._id_4D94["busy_vo"]["spent_" + self.gender];
     }
 
-    if(var_4.size < 1 && var_5.size < 1)
+    if(var_4.size < 1 && var_5.size < 1) {
       var_3 = undefined;
-    else {
+    } else {
       var_3 = var_4[randomint(var_4.size)];
-      level._id_9A2E._id_4D94["busy_vo"]["spent_" + self.gender] = scripts\engine\utility::array_add(level._id_9A2E._id_4D94["busy_vo"]["spent_" + self.gender], var_3);
-      level._id_9A2E._id_4D94["busy_vo"][self.gender] = scripts\engine\utility::array_remove(level._id_9A2E._id_4D94["busy_vo"][self.gender], var_3);
+      level._id_9A2E._id_4D94["busy_vo"]["spent_" + self.gender] = ::scripts\engine\utility::array_add(level._id_9A2E._id_4D94["busy_vo"]["spent_" + self.gender], var_3);
+      level._id_9A2E._id_4D94["busy_vo"][self.gender] = ::scripts\engine\utility::array_remove(level._id_9A2E._id_4D94["busy_vo"][self.gender], var_3);
     }
   }
 
   if(isDefined(var_3)) {
     scripts\sp\utility::_id_10346(var_3);
 
-    if(isDefined(var_1) && var_1)
+    if(isDefined(var_1) && var_1) {
       level thread remind_calltrain_sethot(90.0);
+    }
   }
 
   self._id_D4A4 = 1;
@@ -669,20 +711,25 @@ _id_CD24(var_0, var_1, var_2, var_3, var_4) {
   self endon("stop_smart_reaction");
   thread _id_168F();
 
-  if(isDefined(self._id_1C48) && !self._id_1C48)
+  if(isDefined(self._id_1C48) && !self._id_1C48) {
     self._id_1C48 = 1;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 150.0;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = var_0 * 0.5;
+  }
 
-  if(!isDefined(self._id_9BFC) || isDefined(self._id_9BFC) && !self._id_9BFC)
+  if(!isDefined(self._id_9BFC) || isDefined(self._id_9BFC) && !self._id_9BFC) {
     thread _id_DD45(var_0);
+  }
 
   _id_13775(var_1);
   _id_CD25(var_4);
@@ -715,21 +762,23 @@ _id_13775(var_0) {
 _id_9EED(var_0) {
   self endon("death");
 
-  if(isDefined(self._id_9B89))
+  if(isDefined(self._id_9B89)) {
     var_1 = self gettagorigin("j_head");
-  else if(isai(self))
+  } else if(isai(self)) {
     var_1 = self getEye();
-  else if(isDefined(self.origin))
+  } else if(isDefined(self.origin)) {
     var_1 = self.origin;
-  else
+  } else {
     return 0;
+  }
 
   var_2 = level.player getEye();
   var_3 = level.player getplayerangles();
 
   if(distance2d(self.origin, level.player.origin) <= var_0) {
-    if(scripts\engine\utility::within_fov(var_2, var_3, var_1, cos(25)))
+    if(scripts\engine\utility::within_fov(var_2, var_3, var_1, cos(25))) {
       return 1;
+    }
   }
 
   return 0;
@@ -738,8 +787,9 @@ _id_9EED(var_0) {
 _id_38F2(var_0) {
   if(!isDefined(self._id_1C48) || isDefined(self._id_1C48) && self._id_1C48) {
     if(!isDefined(self._id_77B2)) {
-      if(_id_3838(var_0))
+      if(_id_3838(var_0)) {
         return 1;
+      }
     }
   }
 
@@ -752,10 +802,11 @@ _id_CD25(var_0) {
   self._id_D4A4 = 1;
 
   if(!isDefined(self._id_9B89)) {
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       thread scripts\sp\utility::_id_77A9(var_0);
-    else
+    } else {
       thread scripts\sp\utility::_id_77B7("salute");
+    }
   } else
     scripts\sp\utility::_id_7790(%shipcrib_gst_head_salute_01);
 
@@ -777,25 +828,29 @@ _id_CD52(var_0, var_1) {
 }
 
 _id_509C(var_0) {
-  if(!isDefined(self._id_1FBB))
+  if(!isDefined(self._id_1FBB)) {
     self._id_1FBB = "generic";
+  }
 
-  if(!isDefined(level._id_EC88[self._id_1FBB]))
+  if(!isDefined(level._id_EC88[self._id_1FBB])) {
     level._id_EC88[self._id_1FBB] = [];
+  }
 
   if(isarray(var_0)) {
     foreach(var_2 in var_0) {
       if(!isDefined(level._id_EC88[self._id_1FBB][var_2])) {
         if(isDefined(level._id_FDBF) && isDefined(self.gender)) {
-          if(isDefined(level._id_FDBF[self.gender]) && isDefined(level._id_FDBF[self.gender][var_2]))
+          if(isDefined(level._id_FDBF[self.gender]) && isDefined(level._id_FDBF[self.gender][var_2])) {
             level._id_EC88[self._id_1FBB][var_2] = level._id_FDBF[self.gender][var_2];
+          }
         }
       }
     }
   } else if(!isDefined(level._id_EC88[self._id_1FBB][var_0])) {
     if(isDefined(level._id_FDBF) && isDefined(self.gender)) {
-      if(isDefined(level._id_FDBF[self.gender]) && isDefined(level._id_FDBF[self.gender][var_0]))
+      if(isDefined(level._id_FDBF[self.gender]) && isDefined(level._id_FDBF[self.gender][var_0])) {
         level._id_EC88[self._id_1FBB][var_0] = level._id_FDBF[self.gender][var_0];
+      }
     }
   }
 }
@@ -811,24 +866,27 @@ _id_CE17(var_0) {
         _id_509C(var_3);
 
         if(!soundexists(var_3)) {
-          if(!scripts\engine\utility::flag_exist("e3_europa_demo"))
+          if(!scripts\engine\utility::flag_exist("e3_europa_demo")) {
             _id_0B6A::_id_EC0E(var_3);
+          }
         } else if(issubstr(var_3, "plr"))
           level.player scripts\sp\utility::_id_1034D(var_3);
         else {
           var_1 = _id_B19B(var_3);
 
-          if(isDefined(var_1))
+          if(isDefined(var_1)) {
             var_1 scripts\sp\utility::_id_10346(var_3);
-          else
+          } else {
             scripts\sp\utility::_id_10346(var_3);
+          }
         }
 
         continue;
       }
 
-      if(isnumber(var_3))
+      if(isnumber(var_3)) {
         wait(var_3);
+      }
     }
   } else {
     var_3 = var_0;
@@ -837,17 +895,19 @@ _id_CE17(var_0) {
       _id_509C(var_3);
 
       if(!soundexists(var_3)) {
-        if(!scripts\engine\utility::flag_exist("e3_europa_demo"))
+        if(!scripts\engine\utility::flag_exist("e3_europa_demo")) {
           _id_0B6A::_id_EC0E(var_3);
+        }
       } else if(issubstr(var_3, "plr"))
         level.player scripts\sp\utility::_id_1034D(var_3);
       else {
         var_1 = _id_B19B(var_3);
 
-        if(isDefined(var_1))
+        if(isDefined(var_1)) {
           var_1 scripts\sp\utility::_id_10346(var_3);
-        else
+        } else {
           scripts\sp\utility::_id_10346(var_3);
+        }
       }
     }
   }
@@ -862,8 +922,9 @@ _id_7286(var_0) {
 _id_4177(var_0) {
   if(isDefined(level._id_9A2E)) {
     if(isDefined(level._id_9A2E._id_4D94["reminder_queue"])) {
-      if(scripts\engine\utility::array_contains(level._id_9A2E._id_4D94["reminder_queue"], self))
+      if(scripts\engine\utility::array_contains(level._id_9A2E._id_4D94["reminder_queue"], self)) {
         level._id_9A2E._id_4D94["reminder_queue"][var_0] = undefined;
+      }
     }
   }
 }
@@ -877,8 +938,9 @@ _id_CD37(var_0, var_1, var_2, var_3) {
     var_5 endon("stop_smart_reaction");
   }
 
-  foreach(var_5 in var_0)
-  var_5 thread _id_168F();
+  foreach(var_5 in var_0) {
+    var_5 thread _id_168F();
+  }
 
   thread _id_DD43(var_0, var_1);
   _id_1377E(var_0, var_2);
@@ -937,8 +999,9 @@ _id_CD36(var_0, var_1, var_2) {
 
 _id_8694(var_0, var_1) {
   foreach(var_3 in var_1) {
-    if(var_3 _id_9EED(var_0))
+    if(var_3 _id_9EED(var_0)) {
       return 1;
+    }
   }
 
   return 0;
@@ -955,11 +1018,13 @@ _id_DD43(var_0, var_1, var_2) {
 
   var_6 = 85.0;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_6 = var_1;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = level.player;
+  }
 
   _id_9856(var_0, var_2);
   var_7 = _id_491D(var_0);
@@ -981,21 +1046,24 @@ _id_9856(var_0, var_1) {
 
   scripts\engine\utility::waitframe();
 
-  foreach(var_3 in var_0)
-  var_3 thread scripts\sp\utility::_id_7792(var_1);
+  foreach(var_3 in var_0) {
+    var_3 thread scripts\sp\utility::_id_7792(var_1);
+  }
 }
 
 _id_12DE3(var_0, var_1, var_2, var_3) {
-  if(distance2d(var_1.origin, var_2.origin) <= var_3)
+  if(distance2d(var_1.origin, var_2.origin) <= var_3) {
     _id_6216(var_0);
-  else
+  } else {
     _id_5551(var_0);
+  }
 }
 
 _id_6216(var_0) {
   foreach(var_2 in var_0) {
-    if(!var_2._id_B009)
+    if(!var_2._id_B009) {
       var_2 _id_4915();
+    }
 
     var_2._id_B009 = 1;
   }
@@ -1003,8 +1071,9 @@ _id_6216(var_0) {
 
 _id_5551(var_0) {
   foreach(var_2 in var_0) {
-    if(var_2._id_B009)
+    if(var_2._id_B009) {
       var_2 _id_4915();
+    }
 
     var_2._id_B009 = 0;
   }
@@ -1025,8 +1094,9 @@ _id_12DE4(var_0) {
 
 _id_12DE2(var_0) {
   foreach(var_2 in var_0) {
-    if(var_2._id_B008 > 0)
+    if(var_2._id_B008 > 0) {
       var_2._id_B008 = var_2._id_B008 - 0.05;
+    }
   }
 }
 
@@ -1047,10 +1117,11 @@ _id_4FB7() {
 }
 
 _id_45FB(var_0) {
-  if(!isarray(var_0))
+  if(!isarray(var_0)) {
     return [var_0];
-  else
+  } else {
     return var_0;
+  }
 }
 
 _id_CD26(var_0, var_1, var_2, var_3, var_4) {
@@ -1097,13 +1168,15 @@ _id_11035() {
 }
 
 _id_DB71(var_0) {
-  if(!isDefined(self._id_77B2))
+  if(!isDefined(self._id_77B2)) {
     self._id_77B2 = [];
+  }
 
   var_1 = var_0;
 
-  if(isarray(var_0))
+  if(isarray(var_0)) {
     var_1 = var_0[0];
+  }
 
   self._id_77B2[var_1] = var_0;
 }
@@ -1118,11 +1191,13 @@ _id_CD27(var_0, var_1) {
   thread _id_168F();
   self._id_1C48 = 1;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 150.0;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = var_0 * 0.5;
+  }
 
   thread _id_DD45(var_0);
   var_2 = getarraykeys(self._id_77B2);
@@ -1157,24 +1232,26 @@ _id_CD27(var_0, var_1) {
         if(isstring(var_9)) {
           _id_509C(var_9);
 
-          if(!soundexists(var_9))
+          if(!soundexists(var_9)) {
             _id_0B6A::_id_EC0E(var_9);
-          else if(issubstr(var_9, "plr"))
+          } else if(issubstr(var_9, "plr")) {
             level.player scripts\sp\utility::_id_1034D(var_9);
-          else {
+          } else {
             var_10 = _id_B19B(var_9);
 
-            if(isDefined(var_10))
+            if(isDefined(var_10)) {
               var_10 scripts\sp\utility::_id_10346(var_9);
-            else
+            } else {
               scripts\sp\utility::_id_10346(var_9);
+            }
           }
 
           continue;
         }
 
-        if(isnumber(var_9))
+        if(isnumber(var_9)) {
           wait(var_9);
+        }
       }
     } else if(!soundexists(var_5))
       _id_0B6A::_id_EC0E(var_5);
@@ -1182,10 +1259,11 @@ _id_CD27(var_0, var_1) {
       _id_509C(var_5);
       var_10 = _id_B19B(var_5);
 
-      if(isDefined(var_10))
+      if(isDefined(var_10)) {
         var_10 scripts\sp\utility::_id_10346(var_5);
-      else
+      } else {
         scripts\sp\utility::_id_10346(var_5);
+      }
     }
 
     self._id_77B2[var_4] = undefined;
@@ -1195,26 +1273,29 @@ _id_CD27(var_0, var_1) {
 
   self._id_77B2 = undefined;
 
-  if(isDefined(self._id_D6E0) && isDefined(self._id_D6E2))
+  if(isDefined(self._id_D6E0) && isDefined(self._id_D6E2)) {
     self thread[[self._id_D6E0]](undefined, undefined, self._id_D6E2);
+  }
 }
 
 _id_B19B(var_0) {
   var_1 = strtok(var_0, "_");
 
-  if(scripts\engine\utility::array_contains(var_1, "nav") || scripts\engine\utility::array_contains(var_1, "gtr"))
+  if(scripts\engine\utility::array_contains(var_1, "nav") || scripts\engine\utility::array_contains(var_1, "gtr")) {
     return level._id_76FB;
-  else if(scripts\engine\utility::array_contains(var_1, "slt") || scripts\engine\utility::array_contains(var_1, "xo"))
+  } else if(scripts\engine\utility::array_contains(var_1, "slt") || scripts\engine\utility::array_contains(var_1, "xo")) {
     return level._id_EA2C;
-  else if(scripts\engine\utility::array_contains(var_1, "bsw")) {
-    if(level.script == "shipcrib_rogue" || level.script == "shipcrib_prisoner")
+  } else if(scripts\engine\utility::array_contains(var_1, "bsw")) {
+    if(level.script == "shipcrib_rogue" || level.script == "shipcrib_prisoner") {
       return level._id_10214;
-    else
+    } else {
       return level._id_1044B;
+    }
   } else if(scripts\engine\utility::array_contains(var_1, "cmo"))
     return level._id_4451;
-  else if(scripts\engine\utility::array_contains(var_1, "dpo"))
+  else if(scripts\engine\utility::array_contains(var_1, "dpo")) {
     return level._id_5CFC;
+  }
 
   return undefined;
 }
@@ -1224,12 +1305,13 @@ _id_CDDB(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_0._id_D7D9)) {
     if(isDefined(var_0._id_D7DA)) {
-      if(var_0._id_D7DA.size == 1)
+      if(var_0._id_D7DA.size == 1) {
         var_0[[var_0._id_D7D9]](var_0._id_D7DA[0]);
-      else if(var_0._id_D7DA.size == 2)
+      } else if(var_0._id_D7DA.size == 2) {
         var_0[[var_0._id_D7D9]](var_0._id_D7DA[0], var_0._id_D7DA[1]);
-      else if(var_0._id_D7DA.size == 3)
+      } else if(var_0._id_D7DA.size == 3) {
         var_0[[var_0._id_D7D9]](var_0._id_D7DA[0], var_0._id_D7DA[1], var_0._id_D7DA[2]);
+      }
     }
   }
 
@@ -1237,20 +1319,25 @@ _id_CDDB(var_0, var_1, var_2, var_3, var_4, var_5) {
   level endon("reminders_done");
   var_0 thread _id_168F();
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 0;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 150.0;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = var_1 * 0.5;
+  }
 
-  if(!isDefined(var_0._id_9BFC) || isDefined(var_0._id_9BFC) && !var_0._id_9BFC)
+  if(!isDefined(var_0._id_9BFC) || isDefined(var_0._id_9BFC) && !var_0._id_9BFC) {
     var_0 thread _id_DD45(var_1);
+  }
 
-  while(distance2d(var_0.origin, level.player.origin) <= var_1 + 25.0)
+  while(distance2d(var_0.origin, level.player.origin) <= var_1 + 25.0) {
     scripts\engine\utility::waitframe();
+  }
 
   for(;;) {
     if(!isDefined(var_0)) {
@@ -1273,8 +1360,9 @@ _id_CDDB(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_8 = getanimlength(var_0 scripts\sp\utility::_id_7DC1(var_3));
   thread scripts\sp\utility::_id_C12D("reminder_anim_done", var_8);
 
-  if(isDefined(var_0._id_E40E))
+  if(isDefined(var_0._id_E40E)) {
     scripts\engine\utility::delaythread(var_8, scripts\sp\anim::_id_1EEA, var_0, var_0._id_E40E, "stop_loop");
+  }
 
   if(isDefined(var_4)) {
     if(var_5) {
@@ -1284,8 +1372,9 @@ _id_CDDB(var_0, var_1, var_2, var_3, var_4, var_5) {
 
       if(isDefined(level._id_9A2E)) {
         if(isDefined(level._id_9A2E._id_4D94["reminder_queue"])) {
-          if(scripts\engine\utility::array_contains(level._id_9A2E._id_4D94["reminder_queue"], var_0))
+          if(scripts\engine\utility::array_contains(level._id_9A2E._id_4D94["reminder_queue"], var_0)) {
             level._id_9A2E._id_4D94["reminder_queue"][var_4] = undefined;
+          }
         }
       }
     }
@@ -1295,12 +1384,13 @@ _id_CDDB(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_0._id_D6E0) && !isDefined(var_0._id_D6E2)) {
     if(isDefined(var_0._id_D6E1)) {
-      if(var_0._id_D7DA.size == 1)
+      if(var_0._id_D7DA.size == 1) {
         var_0[[var_0._id_D6E0]](var_0._id_D6E1[0]);
-      else if(var_0._id_D7DA.size == 2)
+      } else if(var_0._id_D7DA.size == 2) {
         var_0[[var_0._id_D6E0]](var_0._id_D6E1[0], var_0._id_D6E1[1]);
-      else if(var_0._id_D7DA.size == 3)
+      } else if(var_0._id_D7DA.size == 3) {
         var_0[[var_0._id_D6E0]](var_0._id_D6E1[0], var_0._id_D6E1[1], var_0._id_D6E1[2]);
+      }
     }
   } else if(isDefined(var_0._id_D6E0) && isDefined(var_0._id_D6E2))
     var_0 thread[[var_0._id_D6E0]](undefined, undefined, var_0._id_D6E2);

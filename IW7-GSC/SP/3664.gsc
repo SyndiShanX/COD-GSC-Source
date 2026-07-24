@@ -20,8 +20,9 @@ _id_6247() {
 _id_5593() {
   self notify("disable_thruster_audio");
 
-  if(isDefined(self._id_1183D))
+  if(isDefined(self._id_1183D)) {
     self._id_1183D._id_1045D delete();
+  }
 
   self._id_1183D = undefined;
 }
@@ -48,15 +49,17 @@ _id_11851() {
 
     if(var_5 != 0) {
       if(var_4 > 20) {
-        if(level.player issprinting())
+        if(level.player issprinting()) {
           _id_12877();
-        else
+        } else {
           _id_12876();
+        }
       } else if(var_5 >= var_0)
         _id_12875();
 
-      if(var_11 > 20 || var_10 > 20 || var_12 > 20)
+      if(var_11 > 20 || var_10 > 20 || var_12 > 20) {
         _id_12876();
+      }
     }
 
     var_0 = var_5;
@@ -92,8 +95,9 @@ _id_12877() {
 }
 
 _id_F335(var_0, var_1) {
-  if(!isDefined(level._id_11CC))
+  if(!isDefined(level._id_11CC)) {
     level._id_11CC = [];
+  }
 
   if(!isDefined(level._id_11CC[var_0])) {
     var_2 = newhudelem();
@@ -138,8 +142,9 @@ _id_CF84() {
 
     var_3 = _id_7A41();
 
-    if(!var_2)
+    if(!var_2) {
       thread _id_1286C(var_3);
+    }
 
     thread _id_1286D(var_3);
     var_1 = var_3;
@@ -147,21 +152,23 @@ _id_CF84() {
 }
 
 _id_7A41() {
-  if(self issprinting() && !self.space._id_6F43)
+  if(self issprinting() && !self.space._id_6F43) {
     self.space._id_1045D._id_10AB9 = self.space._id_1045D._id_10AB9 + 1;
-  else
+  } else {
     self.space._id_1045D._id_10AB9 = self.space._id_1045D._id_10AB9 - 0.25;
+  }
 
   var_0 = 0;
   self.space._id_1045D._id_10AB9 = clamp(self.space._id_1045D._id_10AB9, 0, 200);
   var_1 = int(self.space._id_1045D._id_10AB9);
 
-  if(var_1 > 60)
+  if(var_1 > 60) {
     var_0 = 3;
-  else if(var_1 > 40)
+  } else if(var_1 > 40) {
     var_0 = 2;
-  else if(var_1 > 20)
+  } else if(var_1 > 20) {
     var_0 = 1;
+  }
 
   return var_0;
 }
@@ -207,8 +214,9 @@ _id_11AC5() {
     self waittill("begin_firing");
     var_1 = scripts\engine\utility::waittill_notify_or_timeout_return("end_firing", 1.5);
 
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       thread _id_CD54("player_short_breath_out");
+    }
   }
 }
 
@@ -220,8 +228,9 @@ _id_CD54(var_0) {
   if(self.space._id_1045D _meth_81CB()) {
     self.space._id_1045D stopsounds();
 
-    while(self.space._id_1045D _meth_81CB())
+    while(self.space._id_1045D _meth_81CB()) {
       scripts\engine\utility::waitframe();
+    }
   }
 
   _id_CE38(var_0, 1);
@@ -238,14 +247,16 @@ _id_1286C(var_0) {
   var_1 = _id_787D(0);
   self.space._id_1045D._id_3800 = 0;
 
-  if(!scripts\sp\utility::_id_65DB("pressurized"))
+  if(!scripts\sp\utility::_id_65DB("pressurized")) {
     _id_CE38(var_1["inhale"]);
+  }
 
   if(!scripts\sp\utility::_id_65DB("pressurized")) {
     _id_CE38(var_1["exhale"]);
 
-    if(isDefined(var_1["time"]))
+    if(isDefined(var_1["time"])) {
       wait(var_1["time"]);
+    }
   }
 
   self.space._id_1045D._id_3800 = 1;
@@ -280,8 +291,9 @@ _id_1286D(var_0) {
 _id_CE38(var_0, var_1) {
   self endon("death");
 
-  while(self.space._id_1045D _meth_81CB() && !isDefined(var_1))
+  while(self.space._id_1045D _meth_81CB() && !isDefined(var_1)) {
     wait 0.05;
+  }
 
   if(isDefined(var_1)) {
     self.space._id_1045D playSound(var_0, "space_sound_interrupt_done", 1);

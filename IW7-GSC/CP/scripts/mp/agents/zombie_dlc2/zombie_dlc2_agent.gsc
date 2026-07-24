@@ -35,15 +35,16 @@ zombieinit_dlc2() {
 _id_FAB0() {
   level endon("game_ended");
 
-  if(!isDefined(level.agent_definition))
+  if(!isDefined(level.agent_definition)) {
     level waittill("scripted_agents_initialized");
+  }
 
   level.agent_definition["generic_zombie"]["setup_func"] = ::setupagent;
   level.agent_definition["generic_zombie"]["setup_model_func"] = ::_id_FACE;
-  level.agent_funcs["generic_zombie"]["gametype_on_killed"] = scripts\cp\maps\cp_disco\cp_disco_damage::cp_disco_onzombiekilled;
-  level.movemodefunc["generic_zombie"] = scripts\cp\agents\gametype_zombie::run_if_last_zombie;
-  level.agent_funcs["generic_zombie"]["on_damaged"] = scripts\cp\maps\cp_disco\cp_disco_damage::cp_disco_onzombiedamaged;
-  level.agent_funcs["generic_zombie"]["on_damaged_finished"] = scripts\mp\agents\zombie\zombie_agent::onzombiedamagefinished;
+  level.agent_funcs["generic_zombie"]["gametype_on_killed"] = ::scripts\cp\maps\cp_disco\cp_disco_damage::cp_disco_onzombiekilled;
+  level.movemodefunc["generic_zombie"] = ::scripts\cp\agents\gametype_zombie::run_if_last_zombie;
+  level.agent_funcs["generic_zombie"]["on_damaged"] = ::scripts\cp\maps\cp_disco\cp_disco_damage::cp_disco_onzombiedamaged;
+  level.agent_funcs["generic_zombie"]["on_damaged_finished"] = ::scripts\mp\agents\zombie\zombie_agent::onzombiedamagefinished;
   level.agent_funcs["generic_zombie"]["on_killed"] = ::onzombiekilled;
 }
 

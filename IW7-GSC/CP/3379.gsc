@@ -42,14 +42,16 @@ _id_F918(var_0) {
     }
   }
 
-  if(isDefined(self.light))
+  if(isDefined(self.light)) {
     self.light setlightintensity(0);
+  }
 
   for(;;) {
     var_6 = "power_on";
 
-    if(var_1)
+    if(var_1) {
       var_6 = level scripts\engine\utility::waittill_any_return_no_endon_death("power_on", self.power_area + " power_on", "power_off");
+    }
 
     if(var_6 == "power_off" && !scripts\engine\utility::is_true(self.powered_on)) {
       setomnvar("zombie_arcade_clowntooth_power_" + self.script_location, 0);
@@ -61,15 +63,17 @@ _id_F918(var_0) {
       self.powered_on = 1;
       setomnvar("zombie_arcade_clowntooth_power_" + self.script_location, 1);
 
-      if(isDefined(self.light))
+      if(isDefined(self.light)) {
         self.light setlightintensity(2);
+      }
 
       getEnt("cryptid_attack_arcade", "targetname") setModel("park_game_cryptid_attack");
     } else {
       self.powered_on = 0;
 
-      if(isDefined(self.light))
+      if(isDefined(self.light)) {
         self.light setlightintensity(0);
+      }
     }
 
     if(!var_1) {
@@ -91,13 +95,15 @@ use_clowntooth_game(var_0, var_1) {
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
   level.wave_num_at_start_of_game = level.wave_num;
 
-  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade))
+  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade)) {
     scripts\cp\zombies\zombie_analytics::log_times_per_wave("clown_tooth_game", var_1);
-  else
+  } else {
     scripts\cp\zombies\zombie_analytics::log_times_per_wave("clown_tooth_game_afterlife", var_1);
+  }
 
-  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade))
+  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade)) {
     var_0 notify("machine_used");
+  }
 
   var_1.pre_arcade_game_weapon = var_1 scripts\cp\zombies\arcade_game_utility::saveplayerpregameweapon(var_1);
   var_2 = scripts\engine\utility::getStructArray("cryptid_sound", "targetname");
@@ -113,10 +119,11 @@ use_clowntooth_game(var_0, var_1) {
   var_0.score = 0;
   setomnvar("zombie_arcade_clowntooth_score_" + var_0.script_location, var_0.score);
 
-  if(scripts\engine\utility::is_true(var_1.in_afterlife_arcade))
+  if(scripts\engine\utility::is_true(var_1.in_afterlife_arcade)) {
     setomnvar("zombie_afterlife_clowntooth_balls", 6);
-  else
+  } else {
     setomnvar("zombie_arcade_clowntooth_balls", 6);
+  }
 
   var_1 scripts\cp\zombies\arcade_game_utility::take_player_grenades_pre_game();
   var_1 giveweapon("iw7_cpclowntoothball_mp");
@@ -128,8 +135,9 @@ use_clowntooth_game(var_0, var_1) {
   var_1 thread _id_D040(var_0, var_1);
   var_1 thread _id_D09E(var_0, var_1);
 
-  if(isDefined(level.start_cryptid_attack_func))
+  if(isDefined(level.start_cryptid_attack_func)) {
     var_0 thread[[level.start_cryptid_attack_func]](var_0, var_1);
+  }
 }
 
 _id_F917(var_0, var_1) {
@@ -162,13 +170,15 @@ _id_13633(var_0, var_1) {
     var_0.score++;
     self playSound("arcade_cryptid_attack_tooth_hit");
 
-    if(isDefined(self.script_noteworthy))
+    if(isDefined(self.script_noteworthy)) {
       self playSound("arcade_" + self.script_noteworthy);
-    else
+    } else {
       self playSound("zmb_wheel_spin_tick");
+    }
 
-    if(var_0.score == 6)
+    if(var_0.score == 6) {
       var_0.score = 10;
+    }
 
     setomnvar("zombie_arcade_clowntooth_score_" + var_0.script_location, var_0.score * 10);
     self rotateTo(scripts\engine\utility::getStruct(self.target, "targetname").angles, 0.1);
@@ -191,8 +201,9 @@ _id_42D7(var_0, var_1) {
     if(var_3 != "iw7_cpclowntoothball_mp") {
       continue;
     }
-    if(!isDefined(self.disabledusability) || self.disabledusability == 0)
+    if(!isDefined(self.disabledusability) || self.disabledusability == 0) {
       scripts\engine\utility::allow_usability(0);
+    }
 
     self waittill("grenade_fire", var_4, var_3);
 
@@ -200,10 +211,11 @@ _id_42D7(var_0, var_1) {
       self notify("throw_a_ball_at_cryptid_attack");
       var_2--;
 
-      if(scripts\engine\utility::is_true(var_1.in_afterlife_arcade))
+      if(scripts\engine\utility::is_true(var_1.in_afterlife_arcade)) {
         setomnvar("zombie_afterlife_clowntooth_balls", var_2);
-      else
+      } else {
         setomnvar("zombie_arcade_clowntooth_balls", var_2);
+      }
     }
 
     if(var_2 == 0) {
@@ -256,14 +268,16 @@ _id_6946(var_0, var_1, var_2) {
     var_1.playing_game = undefined;
     var_1 scripts\engine\utility::allow_weapon_switch(1);
 
-    if(!var_1 scripts\engine\utility::isusabilityallowed())
+    if(!var_1 scripts\engine\utility::isusabilityallowed()) {
       var_1 scripts\engine\utility::allow_usability(1);
+    }
 
     var_1 scripts\cp\zombies\arcade_game_utility::give_player_back_weapon(var_1);
     var_1 scripts\cp\zombies\arcade_game_utility::restore_player_grenades_post_game();
 
-    if(var_0.score > 0)
+    if(var_0.score > 0) {
       playsoundatpos(var_0.origin, "mp_slot_machine_coins");
+    }
 
     if(var_0.score == 6) {
       wait 1;
@@ -282,8 +296,9 @@ _id_6946(var_0, var_1, var_2) {
       scripts\cp\zombies\zombie_analytics::log_finished_mini_game(1, var_1, level.wave_num_at_start_of_game, "clown_tooth_game", 0, var_3, var_1.pers["timesPerWave"]._id_11930[level.wave_num_at_start_of_game]["clown_tooth_game"]);
     }
 
-    if(!var_1 scripts\cp\utility::areinteractionsenabled())
+    if(!var_1 scripts\cp\utility::areinteractionsenabled()) {
       var_1 scripts\cp\utility::allow_player_interactions(1);
+    }
   }
 
   scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);

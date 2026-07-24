@@ -135,14 +135,17 @@ _id_3AB7() {
 }
 
 _id_3AEA(var_0, var_1) {
-  if(isDefined(level._id_AB3C))
+  if(isDefined(level._id_AB3C)) {
     scripts\engine\utility::array_thread(level._id_AB3C, ::_id_3AB2, "vfx_carrier_engine_glow_powered");
+  }
 
-  if(isDefined(level._id_E518))
+  if(isDefined(level._id_E518)) {
     scripts\engine\utility::array_thread(level._id_E518, ::_id_3AB2, "vfx_carrier_engine_glow_powered");
+  }
 
-  if(isDefined(level._id_3BAB))
+  if(isDefined(level._id_3BAB)) {
     scripts\engine\utility::array_thread(level._id_3BAB, ::_id_3AB2, "vfx_carrier_engine_glow_powered");
+  }
 
   if(!scripts\engine\utility::is_true(var_1)) {
     scripts\sp\utility::_id_10FEC(1000);
@@ -193,13 +196,15 @@ _id_3AEA(var_0, var_1) {
   level._id_DBB0 = _id_F909("r_engine_4", "vfx_capship_thruster_rear_med_launch");
   level._id_E519[level._id_E519.size] = level._id_DBB0;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level waittill(var_0);
-  else
+  } else {
     level waittill("jackal_landing");
+  }
 
-  if(!scripts\engine\utility::is_true(var_1))
+  if(!scripts\engine\utility::is_true(var_1)) {
     scripts\sp\utility::_id_10FEC(2000);
+  }
 
   if(isDefined(level._id_E519) && isDefined(level._id_AB3D) && isDefined(level._id_3BAC)) {
     scripts\engine\utility::array_thread(level._id_E519, ::_id_3AB2, "vfx_capship_thruster_rear_med_launch");
@@ -218,10 +223,11 @@ _id_F909(var_0, var_1) {
   var_2 = scripts\engine\utility::getStruct(var_0, "targetname");
   var_3 = scripts\engine\utility::spawn_tag_origin(var_2.origin);
 
-  if(isDefined(var_1) && var_1 != "vfx_wounded_thrust_burst")
+  if(isDefined(var_1) && var_1 != "vfx_wounded_thrust_burst") {
     var_3.angles = (0, 180, 0);
-  else
+  } else {
     var_3.angles = (-90, 0, 0);
+  }
 
   playFXOnTag(level._effect[var_1], var_3, "tag_origin");
   return var_3;
@@ -233,8 +239,9 @@ _id_3AB2(var_0, var_1) {
   }
   stopFXOnTag(level._effect[var_0], self, "tag_origin");
 
-  if(scripts\engine\utility::is_true(var_1))
+  if(scripts\engine\utility::is_true(var_1)) {
     self delete();
+  }
 }
 
 _id_1329C() {
@@ -276,16 +283,16 @@ _id_A0F1() {
   level thread _id_A0F6();
   thread _id_A2BD();
   level._id_A0F2 = [];
-  level._id_A0F2[0] = scripts\engine\utility::getfx("vfx_wndd_clouds_faint");
-  level._id_A0F2[1] = scripts\engine\utility::getfx("vfx_wndd_clouds_thin");
-  level._id_A0F2[2] = scripts\engine\utility::getfx("vfx_wndd_clouds_thick");
-  level._id_A0F2[3] = scripts\engine\utility::getfx("vfx_wndd_clouds_solid");
-  level._id_A0F2[4] = scripts\engine\utility::getfx("vfx_wndd_clouds_intermit");
+  level._id_A0F2[0] = ::scripts\engine\utility::getfx("vfx_wndd_clouds_faint");
+  level._id_A0F2[1] = ::scripts\engine\utility::getfx("vfx_wndd_clouds_thin");
+  level._id_A0F2[2] = ::scripts\engine\utility::getfx("vfx_wndd_clouds_thick");
+  level._id_A0F2[3] = ::scripts\engine\utility::getfx("vfx_wndd_clouds_solid");
+  level._id_A0F2[4] = ::scripts\engine\utility::getfx("vfx_wndd_clouds_intermit");
   level._id_A0F3 = [];
-  level._id_A0F3[0] = scripts\engine\utility::getfx("vfx_wndd_cldshov_faint");
-  level._id_A0F3[1] = scripts\engine\utility::getfx("vfx_wndd_cldshov_thin");
-  level._id_A0F3[2] = scripts\engine\utility::getfx("vfx_wndd_cldshov_thick");
-  level._id_A0F3[3] = scripts\engine\utility::getfx("vfx_wndd_cldshov_intermit");
+  level._id_A0F3[0] = ::scripts\engine\utility::getfx("vfx_wndd_cldshov_faint");
+  level._id_A0F3[1] = ::scripts\engine\utility::getfx("vfx_wndd_cldshov_thin");
+  level._id_A0F3[2] = ::scripts\engine\utility::getfx("vfx_wndd_cldshov_thick");
+  level._id_A0F3[3] = ::scripts\engine\utility::getfx("vfx_wndd_cldshov_intermit");
 
   for(;;) {
     level._id_38E6 = undefined;
@@ -294,25 +301,28 @@ _id_A0F1() {
     var_2 = undefined;
     var_3 = _id_0BDC::_id_7B9E();
 
-    if(var_3 <= 200 && !scripts\engine\utility::is_true(level._id_BFF5))
+    if(var_3 <= 200 && !scripts\engine\utility::is_true(level._id_BFF5)) {
       var_2 = level._id_A0F3;
-    else
+    } else {
       var_2 = level._id_A0F2;
+    }
 
     if(!isDefined(level._id_A0F4)) {
-      if(var_0 >= 5000)
+      if(var_0 >= 5000) {
         level._id_38E6 = var_2[randomintrange(0, 1)];
-      else if(var_0 >= -1000)
+      } else if(var_0 >= -1000) {
         level._id_38E6 = var_2[randomintrange(0, 2)];
-      else if(var_0 >= -10000)
+      } else if(var_0 >= -10000) {
         level._id_38E6 = var_2[randomintrange(1, 2)];
-      else if(var_0 >= -20000)
+      } else if(var_0 >= -20000) {
         level._id_38E6 = var_2[randomintrange(1, 3)];
-      else
+      } else {
         level._id_38E6 = var_2[randomintrange(2, 3)];
+      }
 
-      if(var_1 <= 340 && var_1 >= 260)
+      if(var_1 <= 340 && var_1 >= 260) {
         level._id_38E6 = var_2[0];
+      }
     } else
       level._id_38E6 = level._id_A0F4;
 
@@ -326,8 +336,9 @@ _id_A2BD() {
   var_0 = "tag_barrel";
 
   for(;;) {
-    if(isDefined(level._id_38E6))
+    if(isDefined(level._id_38E6)) {
       playFXOnTag(level._id_38E6, self, var_0);
+    }
 
     wait 0.06;
   }
@@ -335,10 +346,11 @@ _id_A2BD() {
 
 _id_A0F6() {
   for(;;) {
-    if(scripts\engine\utility::flag("do_cannopy_embers"))
+    if(scripts\engine\utility::flag("do_cannopy_embers")) {
       _id_A0F5("vfx_wndd_smoke_thick");
-    else
+    } else {
       _id_A0F5(undefined);
+    }
 
     scripts\engine\utility::waitframe();
   }

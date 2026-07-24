@@ -37,12 +37,13 @@ _id_13238(var_0, var_1) {
   var_2 setModel(var_0);
   var_2 notsolid();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_2 hide();
+  }
 
-  if(var_0 == "veh_mil_air_un_destroyer_periph")
+  if(var_0 == "veh_mil_air_un_destroyer_periph") {
     playFXOnTag(level._effect["vfx_ph_destroyer_thruster_low"], var_2, "tag_origin");
-  else if(var_0 == "veh_mil_air_un_cruiser_periph") {
+  } else if(var_0 == "veh_mil_air_un_cruiser_periph") {
     playFXOnTag(level._effect["vfx_ph_cruiser_thruster_low"], var_2, "tag_origin");
     var_2 attach("veh_mil_air_un_cruiser_periph_details", "tag_origin");
   }
@@ -59,12 +60,13 @@ vehicle_cleanup_handler() {
 }
 
 vehicle_cleanupexitboundinginfo(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self waittill("end_spline");
-  else if(self.classname == "script_model")
+  } else if(self.classname == "script_model") {
     self waittill("pathdone");
-  else
+  } else {
     self waittill("reached_end_node");
+  }
 
   wait 0.05;
 
@@ -77,10 +79,11 @@ vehicle_cleanupexitboundinginfo(var_0) {
 }
 
 _id_131D9(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_2 = getvehiclenode(var_0, "targetname");
-  else
+  } else {
     var_2 = getvehiclenode(self.target, "targetname");
+  }
 
   self dontinterpolate();
   self.origin = var_2.origin;
@@ -113,8 +116,9 @@ _id_131D9(var_0, var_1) {
       continue;
     }
 
-    if(isDefined(var_2.script_noteworthy))
+    if(isDefined(var_2.script_noteworthy)) {
       self notify(var_2.script_noteworthy);
+    }
 
     if(isDefined(var_2.target)) {
       var_2 = getvehiclenode(var_2.target, "targetname");
@@ -143,32 +147,37 @@ _id_131DA(var_0) {
   self endon("ph_capship_movedone");
   var_0 = var_0 - 0.1;
 
-  if(var_0 < 0)
+  if(var_0 < 0) {
     var_0 = 0;
+  }
 
   wait(var_0);
   self notify("ph_capship_movedone");
 }
 
 _id_E6CC(var_0, var_1, var_2) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 = 1;
-  else
+  } else {
     var_1 = 0;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 = 1;
-  else
+  } else {
     var_2 = 0;
+  }
 
   var_3 = getEnt(var_0, "targetname") scripts\sp\utility::_id_10619(1);
 
   if(!isDefined(var_3._id_ED1B)) {
-    if(isDefined(self.weapon) && var_1)
+    if(isDefined(self.weapon) && var_1) {
       var_3 scripts\sp\utility::_id_86E4();
+    }
 
-    if(!var_2)
+    if(!var_2) {
       var_3 scripts\sp\utility::_id_51E1("casual");
+    }
 
     var_3 scripts\sp\utility::_id_F3BC();
     var_3 scripts\sp\utility::_id_F415(1);
@@ -316,13 +325,15 @@ _id_E304() {
   var_5 linkTo(self);
   wait 3.0;
 
-  foreach(var_7 in self.turrets["cap_turret_missile_barrage"])
-  var_7 settargetentity(var_5);
+  foreach(var_7 in self.turrets["cap_turret_missile_barrage"]) {
+    var_7 settargetentity(var_5);
+  }
 
   wait 12.0;
 
-  foreach(var_7 in self.turrets["cap_turret_missile_barrage"])
-  var_7 settargetentity(var_4);
+  foreach(var_7 in self.turrets["cap_turret_missile_barrage"]) {
+    var_7 settargetentity(var_4);
+  }
 }
 
 _id_6EF5() {
@@ -436,8 +447,9 @@ _id_6EF7(var_0) {
   thread _id_6EF8();
   wait 3.5;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     thread _id_6EFC("fleet_jackal_angles_initial");
+  }
 
   scripts\engine\utility::flag_wait("fleet_parade_1_stop");
 }
@@ -451,8 +463,9 @@ _id_6EF8() {
     wait 0.05;
     var_4 thread _id_131D9(var_3);
 
-    if(issubstr(var_3, "parade_1_close"))
+    if(issubstr(var_3, "parade_1_close")) {
       var_4 thread _id_6F02();
+    }
 
     var_4 thread _id_FB58(var_3);
   }
@@ -516,13 +529,15 @@ _id_6EFE() {
       var_2 dontcastshadows();
       wait 0.05;
 
-      if(level._id_C8B9[var_3].size > 0)
+      if(level._id_C8B9[var_3].size > 0) {
         var_2 thread _id_6F01(level._id_C8B9[var_3]);
+      }
 
       var_2 thread _id_131D9(var_1);
 
-      if(issubstr(var_1, "parade_1_close"))
+      if(issubstr(var_1, "parade_1_close")) {
         var_2 thread _id_6F02();
+      }
 
       var_2 thread _id_FB58(var_1);
       wait(randomfloatrange(3.0, 6.1));
@@ -578,8 +593,9 @@ _id_6F04() {
 }
 
 _id_6F01(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     self waittill("dropships_go");
+  }
 
   foreach(var_3 in var_0) {
     var_4 = getEnt(var_3, "targetname");
@@ -593,15 +609,17 @@ _id_6F01(var_0, var_1) {
     var_5 thread vehicle_cleanupexitboundinginfo();
   }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     return;
+  }
 }
 
 _id_6EF4() {
   level._id_C8C9++;
 
-  if(level._id_C8C9 > 5)
+  if(level._id_C8C9 > 5) {
     level._id_C8C9 = 1;
+  }
 
   var_0 = [];
 
@@ -618,8 +636,9 @@ _id_6EF4() {
 
   self waittill("reached_end_node");
 
-  foreach(var_3 in var_0)
-  var_3 delete();
+  foreach(var_3 in var_0) {
+    var_3 delete();
+  }
 }
 
 _id_6F00() {
@@ -648,8 +667,9 @@ _id_6EFF() {
       var_2 dontcastshadows();
       wait 0.05;
 
-      if(level._id_C8BB[var_3].size > 0)
+      if(level._id_C8BB[var_3].size > 0) {
         var_2 thread _id_6F01(level._id_C8BB[var_3]);
+      }
 
       var_2 thread _id_FB58(var_1);
       var_2 thread _id_131D9(var_1);
@@ -661,10 +681,11 @@ _id_6EFF() {
 }
 
 _id_6EFC(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = var_1;
-  else
+  } else {
     var_2 = 1.0;
+  }
 
   var_3 = 0;
   var_4 = getEntArray(var_0, "targetname");
@@ -696,8 +717,9 @@ _id_6EFC(var_0, var_1) {
 _id_79BF() {
   level._id_6EFB++;
 
-  if(level._id_6EFB > 2)
+  if(level._id_6EFB > 2) {
     level._id_6EFB = 0;
+  }
 
   return level._id_6EFA[level._id_6EFB];
 }
@@ -705,8 +727,9 @@ _id_79BF() {
 _id_E6CB() {
   scripts\engine\utility::flag_wait("roof_second_stop");
 
-  if(!isDefined(level._id_E6C2))
+  if(!isDefined(level._id_E6C2)) {
     level._id_E6C2 = [];
+  }
 
   _id_FA2D();
   _id_FA2C();
@@ -833,9 +856,9 @@ _id_FA2D() {
   level._id_E69B["waverB"] = _id_E6CC(var_1 + "waverB");
   level._id_E6A7 = [];
   level._id_E6A7 = [];
-  level._id_E6A7["section1_toolbox"] = scripts\sp\utility::_id_10639("jackal_toolbox_1", level._id_E69C.origin);
-  level._id_E6A7["section2_toolbox"] = scripts\sp\utility::_id_10639("jackal_toolbox_2", level._id_E69C.origin);
-  level._id_E6A7["section3_toolbox"] = scripts\sp\utility::_id_10639("jackal_toolbox_3", level._id_E69C.origin);
+  level._id_E6A7["section1_toolbox"] = ::scripts\sp\utility::_id_10639("jackal_toolbox_1", level._id_E69C.origin);
+  level._id_E6A7["section2_toolbox"] = ::scripts\sp\utility::_id_10639("jackal_toolbox_2", level._id_E69C.origin);
+  level._id_E6A7["section3_toolbox"] = ::scripts\sp\utility::_id_10639("jackal_toolbox_3", level._id_E69C.origin);
   level._id_E6A7["section1_toolbox"]._id_2485 = "jackal_toolbox_pc";
   level._id_E6A7["section2_toolbox"]._id_2485 = "jackal_toolbox_pc";
   level._id_E6A7["section3_toolbox"]._id_2485 = "jackal_toolbox_tablet";
@@ -844,11 +867,13 @@ _id_FA2D() {
   level._id_E6A7["section3_toolbox"].attach_offset = [(6, 2, 38), (0, 356, 0)];
   var_2 = getarraykeys(level._id_E69B);
 
-  foreach(var_4 in var_2)
-  level._id_E69B[var_4]._id_1FBB = var_4;
+  foreach(var_4 in var_2) {
+    level._id_E69B[var_4]._id_1FBB = var_4;
+  }
 
-  foreach(var_7 in level._id_E69B)
-  var_0 thread scripts\sp\anim::_id_1EEA(var_7, "jackal_land_entrance_idle", "stop_" + var_7._id_1FBB);
+  foreach(var_7 in level._id_E69B) {
+    var_0 thread scripts\sp\anim::_id_1EEA(var_7, "jackal_land_entrance_idle", "stop_" + var_7._id_1FBB);
+  }
 
   foreach(var_10 in level._id_E6A7) {
     var_0 scripts\sp\anim::_id_1EC3(var_10, "jackal_land_entrance");
@@ -923,17 +948,19 @@ _id_CDE8() {
 }
 
 _id_FB77(var_0) {
-  if(issubstr(var_0, "close"))
+  if(issubstr(var_0, "close")) {
     scripts\sp\utility::play_loop_sound_on_tag("scn_phparade_dropships_close_lp", "tag_origin", 1, 1);
-  else if(issubstr(var_0, "mid"))
+  } else if(issubstr(var_0, "mid")) {
     scripts\sp\utility::play_loop_sound_on_tag("scn_phparade_dropships_med_lp", "tag_origin", 1, 1);
-  else if(issubstr(var_0, "far"))
+  } else if(issubstr(var_0, "far")) {
     scripts\sp\utility::play_loop_sound_on_tag("scn_phparade_dropships_dist_lp", "tag_origin", 1, 1);
+  }
 }
 
 _id_FB58(var_0) {
-  if(issubstr(var_0, "close"))
+  if(issubstr(var_0, "close")) {
     scripts\sp\utility::play_loop_sound_on_tag("scn_phparade_capital_ship_close_lp", "tag_origin", 1, 1);
-  else if(issubstr(var_0, "mid"))
+  } else if(issubstr(var_0, "mid")) {
     scripts\sp\utility::play_loop_sound_on_tag("scn_phparade_capital_ship_med_lp", "tag_origin", 1, 1);
+  }
 }

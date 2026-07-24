@@ -110,18 +110,21 @@ _id_BAA9() {
   if(isDefined(level._id_2056)) {
     foreach(var_2 in level._id_2056) {
       if(isDefined(var_2)) {
-        if(isDefined(var_2._id_129D4))
+        if(isDefined(var_2._id_129D4)) {
           var_2._id_129D4 delete();
+        }
       }
     }
 
     scripts\sp\utility::_id_228A(level._id_2056);
 
-    if(isDefined(level._id_2052))
+    if(isDefined(level._id_2052)) {
       level._id_2052 delete();
+    }
 
-    if(isDefined(level._id_2050))
+    if(isDefined(level._id_2050)) {
       level._id_2050 delete();
+    }
   }
 
   scripts\engine\utility::exploder("mons_clouds");
@@ -142,11 +145,13 @@ _id_BAA9() {
   scripts\engine\utility::flag_set("mons_event_started");
   level._id_739C scripts\sp\utility::_id_51E1("combat");
 
-  if(isDefined(level._id_2050))
+  if(isDefined(level._id_2050)) {
     level._id_2050 delete();
+  }
 
-  if(isDefined(level._id_2052))
+  if(isDefined(level._id_2052)) {
     level._id_2052 delete();
+  }
 
   scripts\sp\utility::_id_22CD("mi_pre_knockdown_friendlies_2");
   thread _id_B6D8();
@@ -234,8 +239,9 @@ _id_6A68() {
   var_1 = scripts\engine\utility::getStruct("mons_event_2", "targetname");
   scripts\engine\utility::flag_wait("mi_mons_attack_start");
 
-  while(!level.player isonground())
+  while(!level.player isonground()) {
     scripts\engine\utility::waitframe();
+  }
 
   level.player setmovespeedscale(0.7);
   level.player._id_843F = 1;
@@ -275,8 +281,9 @@ _id_BC01() {
         continue;
       }
 
-      if(var_5.name == "Kashima")
+      if(var_5.name == "Kashima") {
         var_5 scripts\sp\utility::_id_1160F(var_3);
+      }
     }
   }
 }
@@ -292,8 +299,9 @@ _id_119C4() {
 _id_D1A6(var_0) {
   level endon("mons_intro_wave_hit_player");
 
-  while(level.player istouching(var_0) && !scripts\engine\utility::flag("mons_intro_wave_hit_player"))
+  while(level.player istouching(var_0) && !scripts\engine\utility::flag("mons_intro_wave_hit_player")) {
     scripts\engine\utility::waitframe();
+  }
 
   if(!scripts\engine\utility::flag("mons_intro_wave_hit_player")) {
     level.player scripts\engine\utility::allow_jump(1);
@@ -525,8 +533,9 @@ _id_81D2() {
 }
 
 _id_B6CD(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
   thread _id_A34E(var_0);
   wait 2.5;
@@ -534,8 +543,9 @@ _id_B6CD(var_0, var_1) {
 }
 
 _id_B6CE(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
   thread _id_A34E(var_0);
   wait 1;
@@ -543,8 +553,9 @@ _id_B6CE(var_0, var_1) {
 }
 
 _id_B6CF(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
   thread _id_A34E(var_0);
   self playSound("jackal_un_flyby_fast_close");
@@ -556,8 +567,9 @@ _id_B6D5() {
 }
 
 _id_B6D9(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait(var_0);
+  }
 
   self._id_C045 = 1;
   level._id_739C _id_0A05::_id_360D("left", [self], undefined, 0);
@@ -611,10 +623,11 @@ _id_B6DD(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = scripts\engine\utility::getStruct(var_0, "targetname");
   var_8 = getEnt(var_7.target, "targetname");
 
-  if(var_3)
+  if(var_3) {
     var_9 = var_8 scripts\sp\utility::_id_10619(1, 1);
-  else
+  } else {
     var_9 = scripts\sp\utility::_id_2C17(var_8);
+  }
 
   var_9._id_1FBB = "redshirt";
   level._id_B6D7 = scripts\engine\utility::array_add(level._id_B6D7, var_9);
@@ -622,19 +635,23 @@ _id_B6DD(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_9 endon("entitydeleted");
   var_10 = [var_2, var_9];
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_7 scripts\sp\anim::_id_1EC3(var_9, var_4);
-  else
+  } else {
     var_7 scripts\sp\anim::_id_1EC1(var_10, var_4);
+  }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_7 thread scripts\sp\anim::_id_1EEA(var_9, var_5);
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     scripts\engine\utility::flag_wait(var_1);
+  }
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_7 scripts\sp\anim::_id_1F17(var_2, var_4);
+  }
 
   var_7 notify("stop_loop");
   var_7 thread scripts\sp\anim::_id_1F2C(var_10, var_4);
@@ -646,8 +663,9 @@ _id_B6DD(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_13 = var_7 scripts\sp\utility::_id_7A97();
 
     foreach(var_15 in var_13) {
-      if(var_15.script_noteworthy == var_12._id_1FBB)
+      if(var_15.script_noteworthy == var_12._id_1FBB) {
         var_12 thread _id_B6E3(var_15);
+      }
     }
   }
 }
@@ -721,19 +739,22 @@ _id_326D() {
   scripts\engine\utility::flag_set("mons_bunker_door_opened");
   wait 0.05;
 
-  if(!level.console)
+  if(!level.console) {
     waitforalltransients();
+  }
 
   level notify("bunker_run_start");
   scripts\engine\utility::exploder("fx_mons_door");
   visionsetnaked("", 3);
 
-  foreach(var_8 in level._id_3277)
-  var_8 show();
+  foreach(var_8 in level._id_3277) {
+    var_8 show();
+  }
 
   foreach(var_11 in var_1) {
-    if(isDefined(var_11))
+    if(isDefined(var_11)) {
       var_11 notify("cancel_path");
+    }
   }
 
   thread _id_B6C7();
@@ -799,8 +820,9 @@ _id_3269() {
   var_1 = getEntArray("bunker_doorway", "targetname");
 
   foreach(var_3 in var_0) {
-    if(var_3.classname == "script_brushmodel")
+    if(var_3.classname == "script_brushmodel") {
       var_3 notsolid();
+    }
 
     var_3 hide();
   }
@@ -808,15 +830,17 @@ _id_3269() {
   scripts\engine\utility::flag_wait("mi_bunker_runners_delete");
 
   foreach(var_3 in var_0) {
-    if(var_3.classname == "script_brushmodel")
+    if(var_3.classname == "script_brushmodel") {
       var_3 solid();
+    }
 
     var_3 show();
   }
 
   foreach(var_3 in var_1) {
-    if(var_3.classname == "script_brushmodel")
+    if(var_3.classname == "script_brushmodel") {
       var_3 hide();
+    }
 
     var_3 hide();
   }
@@ -830,14 +854,17 @@ _id_3269() {
     var_9 delete();
   }
 
-  if(isDefined(var_10))
+  if(isDefined(var_10)) {
     var_10 delete();
+  }
 
-  if(isDefined(var_11))
+  if(isDefined(var_11)) {
     var_11 delete();
+  }
 
-  if(isDefined(level._id_739C.bt._id_71C9))
+  if(isDefined(level._id_739C.bt._id_71C9)) {
     level._id_739C[[level._id_739C.bt._id_71C9]]();
+  }
 }
 
 _id_3268(var_0) {
@@ -868,8 +895,9 @@ _id_CB3C() {
   foreach(var_2 in var_0) {
     var_3 = 0;
 
-    if(isDefined(var_2._id_EF15))
+    if(isDefined(var_2._id_EF15)) {
       var_3 = var_2._id_EF15;
+    }
 
     var_2 scripts\engine\utility::delaythread(var_3, scripts\sp\vehicle::_id_1080B);
   }
@@ -878,8 +906,9 @@ _id_CB3C() {
 _id_B6E1() {
   self endon("entitydeleted");
 
-  if(isDefined(self.script_parameters) && self.script_parameters == "exploder")
+  if(isDefined(self.script_parameters) && self.script_parameters == "exploder") {
     self._id_9930 = 1;
+  }
 
   if(isDefined(self.script_animation)) {
     self._id_72B1 = scripts\sp\utility::_id_7DC3(self.script_animation);
@@ -924,8 +953,9 @@ _id_B6DC() {
   var_0 = scripts\sp\utility::_id_7A97()[0];
   thread _id_B6E3(var_0);
 
-  if(isDefined(self._id_ED46))
+  if(isDefined(self._id_ED46)) {
     self._id_4E2A = _id_7DC4(self._id_ED46);
+  }
 
   level._id_B6D7 = scripts\engine\utility::array_add(level._id_B6D7, self);
 }
@@ -934,8 +964,9 @@ _id_7DC4(var_0) {
   if(isDefined(self._id_1FBB)) {
     var_1 = level._id_EC85[self._id_1FBB][var_0];
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       return var_1;
+    }
   }
 
   var_1 = level._id_EC85["generic"][var_0];
@@ -947,8 +978,9 @@ _id_B6CC() {
   var_1 = getnode(var_0.script_linkto, "script_linkname");
   thread _id_B6E3(var_1);
 
-  if(isDefined(self.script_animation))
+  if(isDefined(self.script_animation)) {
     self._id_4E2A = _id_7DC4(self.script_animation);
+  }
 
   level._id_B6D7 = scripts\engine\utility::array_add(level._id_B6D7, self);
   scripts\sp\utility::_id_51E1("frantic");
@@ -1015,44 +1047,51 @@ _id_B6E3(var_0) {
   var_1 = var_0;
 
   for(;;) {
-    if(isDefined(var_1.animation))
+    if(isDefined(var_1.animation)) {
       var_1 scripts\sp\anim::_id_1ECE(self, var_1.animation);
-    else {
+    } else {
       self.goalradius = 64;
 
-      if(isDefined(var_1.radius))
+      if(isDefined(var_1.radius)) {
         self.goalradius = var_1.radius;
+      }
 
-      if(isnode(var_1))
+      if(isnode(var_1)) {
         self _meth_82EE(var_1);
-      else
+      } else {
         self setgoalpos(var_1.origin);
+      }
 
       self waittill("goal");
     }
 
     var_1 thread _id_8428();
 
-    if(isDefined(var_1.script_linkto))
+    if(isDefined(var_1.script_linkto)) {
       thread _id_19EF(var_1);
-
-    if(isDefined(var_1._id_ED22)) {
-      if(var_1._id_ED22)
-        scripts\sp\utility::_id_B14F();
-      else
-        scripts\sp\utility::_id_1101B();
     }
 
-    if(isDefined(var_1._id_ED9E))
-      scripts\engine\utility::flag_set(var_1._id_ED9E);
+    if(isDefined(var_1._id_ED22)) {
+      if(var_1._id_ED22) {
+        scripts\sp\utility::_id_B14F();
+      } else {
+        scripts\sp\utility::_id_1101B();
+      }
+    }
 
-    if(isDefined(var_1._id_EDA0))
+    if(isDefined(var_1._id_ED9E)) {
+      scripts\engine\utility::flag_set(var_1._id_ED9E);
+    }
+
+    if(isDefined(var_1._id_EDA0)) {
       scripts\engine\utility::flag_wait(var_1._id_EDA0);
+    }
 
     var_1 scripts\sp\utility::script_delay();
 
-    if(isDefined(var_1.animation))
+    if(isDefined(var_1.animation)) {
       var_1 scripts\sp\anim::_id_1ECB(self, var_1.animation);
+    }
 
     if(!isDefined(var_1.target)) {
       break;
@@ -1065,15 +1104,17 @@ _id_B6E3(var_0) {
   self notify("completed_run_path");
 
   if(isDefined(var_1._id_ED43)) {
-    if(isDefined(self._id_B14F))
+    if(isDefined(self._id_B14F)) {
       scripts\sp\utility::_id_1101B();
+    }
 
     scripts\sp\utility::_id_54C6();
   }
 
   if(isDefined(var_1._id_ED54)) {
-    if(isDefined(self._id_B14F))
+    if(isDefined(self._id_B14F)) {
       scripts\sp\utility::_id_1101B();
+    }
 
     self delete();
   }
@@ -1132,8 +1173,9 @@ _id_8428() {
     }
     var_3 = 0;
 
-    if(isDefined(var_2._id_ED96))
+    if(isDefined(var_2._id_ED96)) {
       var_3 = var_2._id_ED96;
+    }
 
     scripts\engine\utility::noself_delaycall(var_3, ::playfx, scripts\engine\utility::getfx(var_2.script_fxid), var_2.origin);
   }
@@ -1142,13 +1184,15 @@ _id_8428() {
 _id_7E98(var_0, var_1) {
   var_2 = getEnt(var_0, var_1);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     return var_2;
+  }
 
   var_3 = getnode(var_0, var_1);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     return var_3;
+  }
 
   return scripts\engine\utility::getStruct(var_0, var_1);
 }
@@ -1216,8 +1260,9 @@ _id_A133() {
   var_9 = getEnt("jackal_crash_pit_trigger", "targetname");
   var_10 = [var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8];
 
-  foreach(var_12 in var_10)
-  var_12 hide();
+  foreach(var_12 in var_10) {
+    var_12 hide();
+  }
 
   var_0 notsolid();
   level waittill("swap_jackals");
@@ -1230,8 +1275,9 @@ _id_A133() {
   level notify("toggle_crash_dmg");
 
   for(;;) {
-    if(level.player istouching(var_9))
+    if(level.player istouching(var_9)) {
       level.player dodamage(35, level.player.origin);
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -1256,8 +1302,9 @@ _id_A130() {
   level endon("toggle_crash_dmg");
 
   for(;;) {
-    if(level.player istouching(self))
+    if(level.player istouching(self)) {
       level.player dodamage(1000, self.origin);
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -1280,8 +1327,9 @@ _id_A135(var_0) {
   var_5.angles = self.angles + (randomintrange(var_4, var_3), randomintrange(var_4, var_3), randomintrange(var_4, var_3));
   var_5 setModel(self.script_modelname);
 
-  if(!isDefined(self.angles))
+  if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
+  }
 
   var_5 moveTo(self.origin, 0.2, 0, 0.1);
   var_5 rotateTo(self.angles, 0.2, 0, 0.1);
@@ -1305,8 +1353,9 @@ _id_A34E(var_0) {
   var_3 = distance(var_1.origin, var_2.origin);
   var_4 = 25;
 
-  if(isDefined(var_1.script_speed))
+  if(isDefined(var_1.script_speed)) {
     var_4 = var_1.script_speed;
+  }
 
   var_5 = var_3 / var_4;
   var_6 = var_1 scripts\engine\utility::spawn_tag_origin();
@@ -1364,12 +1413,13 @@ _id_BA4B() {
   var_1 = scripts\engine\utility::getStructArray("mi_mons_intro_jackal_structs", "targetname");
 
   foreach(var_3 in var_1) {
-    if(!isDefined(var_0[var_3.script_noteworthy]))
+    if(!isDefined(var_0[var_3.script_noteworthy])) {
       var_0[var_3.script_noteworthy] = [];
+    }
 
     var_4 = var_3 scripts\engine\utility::spawn_tag_origin();
     var_4 linkTo(level._id_B6D6);
-    var_0[var_3.script_noteworthy] = scripts\engine\utility::array_add(var_0[var_3.script_noteworthy], var_4);
+    var_0[var_3.script_noteworthy] = ::scripts\engine\utility::array_add(var_0[var_3.script_noteworthy], var_4);
   }
 
   scripts\engine\utility::flag_wait("mi_mons_lower_jackals");
@@ -1389,8 +1439,9 @@ _id_BA4B() {
     wait(randomfloatrange(0.1, 0.3));
   }
 
-  foreach(var_8 in var_0)
-  scripts\sp\utility::_id_228A(var_8);
+  foreach(var_8 in var_0) {
+    scripts\sp\utility::_id_228A(var_8);
+  }
 }
 
 _id_BA4C() {
@@ -1424,10 +1475,11 @@ _id_BAFB() {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-    if(!isDefined(var_1[var_3.script_noteworthy]))
+    if(!isDefined(var_1[var_3.script_noteworthy])) {
       var_1[var_3.script_noteworthy] = [];
+    }
 
-    var_1[var_3.script_noteworthy] = scripts\engine\utility::array_add(var_1[var_3.script_noteworthy], var_3);
+    var_1[var_3.script_noteworthy] = ::scripts\engine\utility::array_add(var_1[var_3.script_noteworthy], var_3);
   }
 
   foreach(var_6 in var_1) {
@@ -1531,8 +1583,9 @@ _id_B6C7() {
   level._id_B6D7 = scripts\engine\utility::array_removeundefined(level._id_B6D7);
 
   foreach(var_1 in level._id_B6D7) {
-    if(isDefined(var_1._id_B14F))
+    if(isDefined(var_1._id_B14F)) {
       var_1 scripts\sp\utility::_id_1101B();
+    }
 
     var_1 delete();
   }
@@ -1560,8 +1613,9 @@ _id_BAAB() {
   level._id_B33E.script_noteworthy = "marine2";
   var_0 = [level.player, level._id_739C, level._id_2429, level._id_C47F, level._id_B33B, level._id_B33E];
 
-  foreach(var_2 in var_0)
-  var_2.goalradius = 32;
+  foreach(var_2 in var_0) {
+    var_2.goalradius = 32;
+  }
 
   scripts\sp\utility::_id_F5AF("mons_intro_knockback_start", var_0);
 }
@@ -1627,8 +1681,9 @@ _id_E45E(var_0, var_1, var_2) {
   var_8 = var_3 * var_5;
   var_9 = 0;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_9 = randomfloatrange(var_2 * -1, var_2);
+  }
 
   var_7 = var_7 + var_0[0];
   var_8 = var_8 + var_0[1];
@@ -1637,8 +1692,9 @@ _id_E45E(var_0, var_1, var_2) {
 }
 
 _id_9D77(var_0) {
-  if(isDefined(var_0.unittype) && var_0.unittype == "c12")
+  if(isDefined(var_0.unittype) && var_0.unittype == "c12") {
     return 1;
+  }
 
   return 0;
 }
@@ -1830,8 +1886,9 @@ _id_356F(var_0) {
   var_7 missile_settargetEnt(var_8);
   level waittill("bunker_door_scene_done");
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     var_7 delete();
+  }
 
   var_8 delete();
 }

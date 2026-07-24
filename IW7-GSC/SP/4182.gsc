@@ -304,8 +304,9 @@ _id_FA83() {
   level._id_BF34 = -1.0;
   var_0 = getEntArray("winecask_invulnerable", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_12E50();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_12E50();
+  }
 }
 
 _id_12E50() {
@@ -336,15 +337,17 @@ _id_7D7F(var_0, var_1, var_2) {
   var_4 = var_2 - var_3;
   var_5 = bulletTrace(var_3, var_3 + 1.5 * var_4, 0, var_0, 0);
 
-  if(isDefined(var_5["normal"]) && isDefined(var_5["entity"]) && var_5["entity"] == self)
+  if(isDefined(var_5["normal"]) && isDefined(var_5["entity"]) && var_5["entity"] == self) {
     return var_5["normal"];
+  }
 
   return undefined;
 }
 
 _id_37F5() {
-  if(gettime() < level._id_BF34)
+  if(gettime() < level._id_BF34) {
     return 0;
+  }
 
   return 1;
 }

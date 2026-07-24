@@ -18,8 +18,9 @@ main(var_0, var_1, var_2) {
 }
 
 init_location() {
-  if(self.classname == "script_vehicle_capitalship_freighter_small")
+  if(self.classname == "script_vehicle_capitalship_freighter_small") {
     thread _id_11868();
+  }
 }
 
 _id_11868() {
@@ -35,10 +36,11 @@ _id_11868() {
   for(;;) {
     var_1 = length((var_0[0], var_0[1], 0) - (self.origin[0], self.origin[1], 0));
 
-    if(var_1 > 100)
+    if(var_1 > 100) {
       _id_11853();
-    else
+    } else {
       _id_1185C();
+    }
 
     var_0 = self.origin;
     wait 0.05;

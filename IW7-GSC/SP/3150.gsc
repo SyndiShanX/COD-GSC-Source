@@ -30,8 +30,9 @@ _id_A18B(var_0, var_1, var_2) {
     case "end":
       return var_0;
     default:
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         return [[var_2]](var_0);
+      }
 
       break;
   }
@@ -235,8 +236,9 @@ _id_9EAA(var_0, var_1, var_2, var_3) {
 }
 
 _id_A41C(var_0, var_1, var_2, var_3) {
-  if(self._id_117C == 0)
+  if(self._id_117C == 0) {
     return _id_9EAA(var_0, var_1, var_2, var_3);
+  }
 
   return 0;
 }
@@ -260,8 +262,9 @@ _id_C17B(var_0, var_1, var_2, var_3) {
 _id_67C5(var_0) {
   self endon("death");
 
-  while(!isDefined(self._blackboard) || !isDefined(self._blackboard._id_1000D))
+  while(!isDefined(self._blackboard) || !isDefined(self._blackboard._id_1000D)) {
     wait 0.05;
+  }
 
   for(;;) {
     if(self._blackboard._id_1000D) {
@@ -271,10 +274,11 @@ _id_67C5(var_0) {
       self._blackboard._id_9DE4 = 1;
       self _meth_82AB(var_3, 1.0, 0.0);
 
-      if(var_2 == 0 || var_2 == 1 || var_2 == 6)
+      if(var_2 == 0 || var_2 == 1 || var_2 == 6) {
         self playSound("jackal_evade_long");
-      else
+      } else {
         self playSound("jackal_evade_short");
+      }
 
       wait(getanimlength(var_3) * 0.8);
       self._blackboard._id_9DE4 = 0;
@@ -288,8 +292,9 @@ _id_67C6() {
   self endon("evade_debug_stop");
   self endon("death");
 
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 _id_1EA6(var_0) {
@@ -312,8 +317,9 @@ _id_1EA6(var_0) {
       self._blackboard._id_38DC = self._blackboard._id_E1AB;
       var_3 = var_2;
 
-      if(self._blackboard._id_38DC == "up")
+      if(self._blackboard._id_38DC == "up") {
         var_3 = var_1;
+      }
 
       self _meth_82E2("cannon", var_3.anims, 1.0, 0.0, 1.0);
       _id_0A1E::_id_231F(var_0, "cannon");

@@ -12,8 +12,9 @@ _id_470E(var_0) {
   self.covernode = self.node;
   self._id_4757 = var_0;
 
-  if(!isDefined(self.node.turret))
+  if(!isDefined(self.node.turret)) {
     scripts\anim\cover_behavior::_id_129B4(0);
+  }
 
   if(var_0 == "crouch") {
     _id_F923("unknown");
@@ -24,8 +25,9 @@ _id_470E(var_0) {
   self.a._id_1A3E = undefined;
   self orientmode("face angle", self.covernode.angles[1]);
 
-  if(isDefined(self.node) && isDefined(self.node.turret))
+  if(isDefined(self.node) && isDefined(self.node.turret)) {
     _id_130DF();
+  }
 
   self animmode("normal");
 
@@ -43,8 +45,9 @@ _id_470E(var_0) {
       thread scripts\anim\shared::_id_BD1D(self.covernode, 0.4);
       wait 0.2;
 
-      if(var_0 == "crouch")
+      if(var_0 == "crouch") {
         self.a.pose = "crouch";
+      }
 
       wait 0.2;
     } else
@@ -54,21 +57,24 @@ _id_470E(var_0) {
   _id_F6C0();
 
   if(var_0 == "crouch") {
-    if(self.a.pose == "prone")
+    if(self.a.pose == "prone") {
       scripts\anim\utility::exitpronewrapper(1);
+    }
 
     self.a.pose = "crouch";
   }
 
-  if(self._id_4757 == "stand")
+  if(self._id_4757 == "stand") {
     self.a._id_10930 = "cover_stand";
-  else
+  } else {
     self.a._id_10930 = "cover_crouch";
+  }
 
   var_3 = spawnStruct();
 
-  if(!self.fixednode)
+  if(!self.fixednode) {
     var_3._id_BD1C = scripts\anim\cover_behavior::_id_BD1C;
+  }
 
   var_3.reload = ::_id_4742;
   var_3._id_AB2D = ::_id_D66A;
@@ -108,8 +114,9 @@ _id_F925(var_0) {
 _id_4742() {
   var_0 = scripts\anim\combat_utility::reload(2.0, scripts\anim\utility::_id_1F64("reload"));
 
-  if(isDefined(var_0) && var_0)
+  if(isDefined(var_0) && var_0) {
     return 1;
+  }
 
   return 0;
 }
@@ -118,12 +125,14 @@ _id_D66A() {
   self.keepclaimednodeifvalid = 1;
 
   if(isDefined(self._id_DC5C) && randomfloat(1) < self._id_DC5C) {
-    if(_id_DC57())
+    if(_id_DC57()) {
       return 1;
+    }
   }
 
-  if(!_id_D65B())
+  if(!_id_D65B()) {
     return 0;
+  }
 
   shootastold();
   scripts\anim\combat_utility::_id_631A();
@@ -132,10 +141,11 @@ _id_D66A() {
     var_0 = lengthsquared(self.origin - self._id_FECF);
 
     if(scripts\anim\utility_common::usingrocketlauncher() && scripts\anim\utility::_id_10000(var_0)) {
-      if(self.a.pose == "stand")
+      if(self.a.pose == "stand") {
         scripts\anim\shared::_id_1180E(scripts\anim\utility::_id_B027("combat", "drop_rpg_stand"));
-      else
+      } else {
         scripts\anim\shared::_id_1180E(scripts\anim\utility::_id_B027("combat", "drop_rpg_crouch"));
+      }
     }
   }
 
@@ -178,38 +188,45 @@ shootastold() {
 }
 
 _id_FEE1() {
-  if(self._id_4757 == "crouch")
+  if(self._id_4757 == "crouch") {
     thread _id_1E82();
+  }
 
   thread scripts\anim\combat_utility::_id_1A3E();
   scripts\anim\combat_utility::_id_FEDF();
 }
 
 _id_DC57() {
-  if(!scripts\anim\utility::_id_8BED())
+  if(!scripts\anim\utility::_id_8BED()) {
     return 0;
+  }
 
   var_0 = "rambo";
 
-  if(randomint(10) < 2)
+  if(randomint(10) < 2) {
     var_0 = "rambo_fail";
+  }
 
-  if(!scripts\anim\utility::_id_1F65(var_0))
+  if(!scripts\anim\utility::_id_1F65(var_0)) {
     return 0;
+  }
 
-  if(self._id_4757 == "crouch" && !self.covernode._id_4A9D)
+  if(self._id_4757 == "crouch" && !self.covernode._id_4A9D) {
     return 0;
+  }
 
   var_1 = _id_811F(self.covernode.origin + scripts\anim\utility_common::getnodeoffset(self.covernode));
 
-  if(var_1 > 15)
+  if(var_1 > 15) {
     return 0;
+  }
 
   var_2 = anglesToForward(self.angles);
   var_3 = self.origin + var_2 * -16;
 
-  if(!self maymovetopoint(var_3))
+  if(!self maymovetopoint(var_3)) {
     return 0;
+  }
 
   self._id_4740 = gettime();
   _id_F6C0();
@@ -237,24 +254,27 @@ _id_92CC() {
   for(;;) {
     var_0 = randomint(2) == 0 && scripts\anim\utility::_id_1F65("hide_idle_twitch");
 
-    if(var_0)
+    if(var_0) {
       var_1 = scripts\anim\utility::_id_1F67("hide_idle_twitch");
-    else
+    } else {
       var_1 = scripts\anim\utility::_id_1F64("hide_idle");
+    }
 
     _id_D49E(var_1, var_0);
   }
 }
 
 _id_6F27() {
-  if(!scripts\anim\utility::_id_1F65("hide_idle_flinch"))
+  if(!scripts\anim\utility::_id_1F65("hide_idle_flinch")) {
     return 0;
+  }
 
   var_0 = anglesToForward(self.angles);
   var_1 = self.origin + var_0 * -16;
 
-  if(!self maymovetopoint(var_1, !scripts\engine\utility::actor_is3d()))
+  if(!self maymovetopoint(var_1, !scripts\engine\utility::actor_is3d())) {
     return 0;
+  }
 
   _id_F6C0();
   self.keepclaimednodeifvalid = 1;
@@ -265,10 +285,11 @@ _id_6F27() {
 }
 
 _id_D49E(var_0, var_1) {
-  if(var_1)
+  if(var_1) {
     self _meth_82E4("idle", var_0, %body, 1, 0.25, 1);
-  else
+  } else {
     self _meth_82E3("idle", var_0, %body, 1, 0.25, 1);
+  }
 
   _id_470A(var_0);
   self.a._id_4727 = "hide";
@@ -276,19 +297,22 @@ _id_D49E(var_0, var_1) {
 }
 
 look(var_0) {
-  if(!isDefined(self.a._id_2274["hide_to_look"]))
+  if(!isDefined(self.a._id_2274["hide_to_look"])) {
     return 0;
+  }
 
-  if(!_id_C9FC())
+  if(!_id_C9FC()) {
     return 0;
+  }
 
   scripts\anim\shared::_id_D4C2(scripts\anim\utility::_id_1F64("look_idle"), var_0);
   var_1 = undefined;
 
-  if(scripts\anim\utility_common::issuppressedwrapper())
+  if(scripts\anim\utility_common::issuppressedwrapper()) {
     var_1 = scripts\anim\utility::_id_1F64("look_to_hide_fast");
-  else
+  } else {
     var_1 = scripts\anim\utility::_id_1F64("look_to_hide");
+  }
 
   self _meth_82E4("looking_end", var_1, %body, 1, 0.1);
   _id_470A(var_1);
@@ -297,8 +321,9 @@ look(var_0) {
 }
 
 _id_C9FC() {
-  if(isDefined(self.covernode._id_ED6A))
+  if(isDefined(self.covernode._id_ED6A)) {
     return 0;
+  }
 
   var_0 = scripts\anim\utility::_id_1F64("hide_to_look");
   self _meth_82E3("looking_start", var_0, %body, 1, 0.2);
@@ -316,8 +341,9 @@ _id_6B9B() {
 }
 
 _id_D65C() {
-  if(self.a._id_4727 == "left" || self.a._id_4727 == "right" || self.a._id_4727 == "over")
+  if(self.a._id_4727 == "left" || self.a._id_4727 == "right" || self.a._id_4727 == "over") {
     return 1;
+  }
 
   return scripts\anim\combat_utility::_id_DCAD();
 }
@@ -328,24 +354,28 @@ _id_D65B() {
   var_2 = scripts\anim\utility::_id_1F64("hide_2_" + var_0);
   var_3 = !scripts\engine\utility::actor_is3d();
 
-  if(!self maymovetopoint(scripts\anim\utility::_id_7DC6(var_2), var_3))
+  if(!self maymovetopoint(scripts\anim\utility::_id_7DC6(var_2), var_3)) {
     return 0;
+  }
 
-  if(self.script == "cover_crouch" && var_0 == "lean")
+  if(self.script == "cover_crouch" && var_0 == "lean") {
     self._id_4716 = 1;
+  }
 
-  if(self._id_4757 == "crouch")
+  if(self._id_4757 == "crouch") {
     _id_F923(var_0);
-  else
+  } else {
     _id_F925(var_0);
+  }
 
   self.a._id_10930 = "none";
   self._id_10957 = undefined;
 
-  if(self._id_4757 == "stand")
+  if(self._id_4757 == "stand") {
     self.a._id_10930 = "cover_stand_aim";
-  else
+  } else {
     self.a._id_10930 = "cover_crouch_aim";
+  }
 
   self._id_3C60 = 1;
   self notify("done_changing_cover_pos");
@@ -369,8 +399,9 @@ _id_D65B() {
   thread scripts\anim\track::_id_11B07();
   wait(var_1);
 
-  if(scripts\anim\utility_common::isasniper())
+  if(scripts\anim\utility_common::isasniper()) {
     thread scripts\anim\shoot_behavior::_id_103A7();
+  }
 
   self._id_3C60 = 0;
   self._id_4740 = gettime();
@@ -385,10 +416,11 @@ donotetracksforpopup(var_0) {
 }
 
 _id_F8A6(var_0) {
-  if(self.a._id_4727 == "left" || self.a._id_4727 == "right")
+  if(self.a._id_4727 == "left" || self.a._id_4727 == "right") {
     var_1 = "crouch";
-  else
+  } else {
     var_1 = self.a._id_4727;
+  }
 
   self _meth_82A5(scripts\anim\utility::_id_1F64(var_1 + "_aim"), %body, 1, var_0);
 
@@ -426,10 +458,11 @@ _id_8405() {
   scripts\anim\shared::donotetracks("go_to_hide");
   self.a._id_4727 = "hide";
 
-  if(self._id_4757 == "stand")
+  if(self._id_4757 == "stand") {
     self.a._id_10930 = "cover_stand";
-  else
+  } else {
     self.a._id_10930 = "cover_crouch";
+  }
 
   self._id_3C60 = 0;
 }
@@ -439,17 +472,19 @@ _id_128B0(var_0) {
 }
 
 _id_128AF(var_0, var_1) {
-  if(isDefined(self.dontevershoot) || isDefined(var_0._id_5951))
+  if(isDefined(self.dontevershoot) || isDefined(var_0._id_5951)) {
     return 0;
+  }
 
   var_2 = undefined;
 
-  if(isDefined(self._id_DC5C) && randomfloat(1.0) < self._id_DC5C)
+  if(isDefined(self._id_DC5C) && randomfloat(1.0) < self._id_DC5C) {
     var_2 = scripts\anim\utility::_id_1F67("grenade_rambo");
-  else if(isDefined(var_1) && var_1)
+  } else if(isDefined(var_1) && var_1) {
     var_2 = scripts\anim\utility::_id_1F67("grenade_safe");
-  else
+  } else {
     var_2 = scripts\anim\utility::_id_1F67("grenade_exposed");
+  }
 
   _id_F6C0();
   self.keepclaimednodeifvalid = 1;
@@ -459,8 +494,9 @@ _id_128AF(var_0, var_1) {
 }
 
 _id_2B99() {
-  if(!scripts\anim\utility::_id_1F65("blind_fire"))
+  if(!scripts\anim\utility::_id_1F65("blind_fire")) {
     return 0;
+  }
 
   _id_F6C0();
   self.keepclaimednodeifvalid = 1;
@@ -478,17 +514,21 @@ _id_4A2B(var_0, var_1, var_2) {
   var_3 makeusable();
   var_3 setdefaultdroppitch(0);
 
-  if(isDefined(var_0._id_01B8))
+  if(isDefined(var_0._id_01B8)) {
     var_3._id_01B8 = var_0._id_01B8;
+  }
 
-  if(isDefined(var_0.rightarc))
+  if(isDefined(var_0.rightarc)) {
     var_3.rightarc = var_0.rightarc;
+  }
 
-  if(isDefined(var_0._id_0349))
+  if(isDefined(var_0._id_0349)) {
     var_3._id_0349 = var_0._id_0349;
+  }
 
-  if(isDefined(var_0._id_006B))
+  if(isDefined(var_0._id_006B)) {
     var_3._id_006B = var_0._id_006B;
+  }
 
   return var_3;
 }
@@ -498,8 +538,9 @@ _id_51B9(var_0) {
   self endon("being_used");
   wait 0.1;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 notify("turret_use_failed");
+  }
 
   self delete();
 }
@@ -518,10 +559,11 @@ _id_F92B(var_0) {
   self.a._id_2274 = scripts\anim\utility::_id_B028("cover_crouch");
 
   if(scripts\anim\utility_common::weapon_pump_action_shotgun()) {
-    if(var_0 == "lean" || var_0 == "stand")
-      self.a._id_2274["single"] = scripts\anim\utility::_id_B027("shotgun_stand", "single");
-    else
-      self.a._id_2274["single"] = scripts\anim\utility::_id_B027("shotgun_crouch", "single");
+    if(var_0 == "lean" || var_0 == "stand") {
+      self.a._id_2274["single"] = ::scripts\anim\utility::_id_B027("shotgun_stand", "single");
+    } else {
+      self.a._id_2274["single"] = ::scripts\anim\utility::_id_B027("shotgun_crouch", "single");
+    }
   }
 
   if(isDefined(anim._id_DC5B)) {
@@ -543,10 +585,11 @@ _id_FA52(var_0) {
     self.a._id_2274["semi4"] = var_1["semi4"];
     self.a._id_2274["semi5"] = var_1["semi5"];
 
-    if(scripts\anim\utility_common::weapon_pump_action_shotgun())
-      self.a._id_2274["single"] = scripts\anim\utility::_id_B027("shotgun_stand", "single");
-    else
+    if(scripts\anim\utility_common::weapon_pump_action_shotgun()) {
+      self.a._id_2274["single"] = ::scripts\anim\utility::_id_B027("shotgun_stand", "single");
+    } else {
       self.a._id_2274["single"] = var_1["single"];
+    }
 
     self.a._id_2274["burst2"] = var_1["burst2"];
     self.a._id_2274["burst3"] = var_1["burst3"];
@@ -563,8 +606,9 @@ _id_FA52(var_0) {
 }
 
 _id_B05A(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0.1;
+  }
 
   self _meth_82A8(scripts\anim\utility::_id_1F64("hide_idle"), %body, 1, var_0);
   self.a._id_4727 = "hide";
@@ -588,15 +632,17 @@ _id_1E82() {
 }
 
 _id_BE9D() {
-  if(self._id_4757 != "crouch")
+  if(self._id_4757 != "crouch") {
     return 0;
+  }
 
   var_0 = _id_811F(self getEye());
 
-  if(self.a._id_4727 == "lean")
+  if(self.a._id_4727 == "lean") {
     return var_0 < 10;
-  else
+  } else {
     return var_0 > 45;
+  }
 }
 
 _id_7DFA() {
@@ -608,11 +654,13 @@ _id_7DFA() {
   } else {
     var_1 = _id_811F(self.covernode.origin + scripts\anim\utility_common::getnodeoffset(self.covernode));
 
-    if(var_1 > 30)
+    if(var_1 > 30) {
       return "lean";
+    }
 
-    if(var_1 > 15 || !self.covernode._id_4A9D)
+    if(var_1 > 15 || !self.covernode._id_4A9D) {
       return "stand";
+    }
 
     var_0 = self.covernode _meth_8169();
     var_0[var_0.size] = "crouch";
@@ -639,15 +687,17 @@ _id_811F(var_0) {
 }
 
 _id_F6C0() {
-  if(scripts\engine\utility::actor_is3d())
+  if(scripts\engine\utility::actor_is3d()) {
     self animmode("nogravity");
-  else
+  } else {
     self animmode("zonly_physics");
+  }
 }
 
 _id_470A(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "run";
+  }
 
   self.facialidx = scripts\anim\face::playfacialanim(var_0, var_1, self.facialidx);
 }

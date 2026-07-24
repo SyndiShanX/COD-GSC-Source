@@ -4,8 +4,9 @@
 **************************************/
 
 _id_A298() {
-  if(isDefined(level._id_A3B9))
+  if(isDefined(level._id_A3B9)) {
     self[[level._id_A3B9._id_375D._id_444F]]();
+  }
 }
 
 _id_9640() {
@@ -13,16 +14,17 @@ _id_9640() {
   _id_FA3D();
   _id_0BDC::_id_19B8();
 
-  if(_id_0BDC::_id_9CF5())
+  if(_id_0BDC::_id_9CF5()) {
     _id_0BDC::_id_F43D("player");
-  else if(isDefined(self._id_C0B0) && self._id_C0B0)
+  } else if(isDefined(self._id_C0B0) && self._id_C0B0) {
     _id_0BDC::_id_F43D("null");
-  else if(self.model == "tag_origin")
+  } else if(self.model == "tag_origin") {
     _id_0BDC::_id_F43D("null");
-  else if(issubstr(self.classname, "jackal_fake"))
+  } else if(issubstr(self.classname, "jackal_fake")) {
     _id_0BDC::_id_F43D("fake");
-  else
+  } else {
     _id_0BDC::_id_F43D("ai");
+  }
 
   self._id_5960 = 1;
   self setneargoalnotifydist(128.0);
@@ -51,8 +53,9 @@ _id_FA3D() {
 }
 
 _id_A329(var_0) {
-  if(getdvarint("jackalHandbrakeMode"))
+  if(getdvarint("jackalHandbrakeMode")) {
     level.player allowads(0);
+  }
 
   level.player _id_0BCE::_id_A2B2(self, undefined, var_0);
   level.player setOrigin((100000, 100000, 100000));
@@ -63,8 +66,9 @@ _id_A329(var_0) {
 _id_A2D9() {
   setsaveddvar("spaceship_disableViewModelNotetracks", 0);
 
-  if(getdvarint("jackalHandbrakeMode"))
+  if(getdvarint("jackalHandbrakeMode")) {
     level.player allowads(1);
+  }
 
   setomnvar("ui_jackal_hide_follow_pip", 1);
   level.player _id_0BCE::_id_A2B1(self);
@@ -177,8 +181,9 @@ _id_10496() {
   scripts\engine\utility::flag_init("jackal_landing_active");
   scripts\engine\utility::flag_init("jackal_landing_never_launch_drone");
 
-  if(!scripts\engine\utility::flag_exist("flag_jackal_in_landingzone"))
+  if(!scripts\engine\utility::flag_exist("flag_jackal_in_landingzone")) {
     scripts\engine\utility::flag_init("flag_jackal_in_landingzone");
+  }
 }
 
 _id_10498() {
@@ -216,8 +221,9 @@ _id_10498() {
 _id_75E7(var_0, var_1) {
   var_2 = "";
 
-  if(var_0 == "axis")
+  if(var_0 == "axis") {
     var_2 = "_enemy";
+  }
 
   level._effect[var_0 + "_rearThrustBoost"] = loadfx("vfx/iw7/core/vehicle/jackal" + var_2 + "/vfx_jackal" + var_2 + "_rear_thrust_boost.vfx");
   level._effect[var_0 + "_rearThrustMax"] = loadfx("vfx/iw7/core/vehicle/jackal" + var_2 + "/vfx_jackal" + var_2 + "_rear_thrust_fly_atmosphere.vfx");
@@ -298,8 +304,9 @@ _id_75E7(var_0, var_1) {
   level._effect["fake_follow_jackal_tracer"] = loadfx("vfx/core/projectile/jackal/vfx_core_projectile_jackal_ai_modern_tail_fake.vfx");
   level._effect["30mm_flash"] = loadfx("vfx/core/muzflash/jackal/vfx_core_flash_jackal_30mm.vfx");
 
-  if(!isDefined(level._id_A1E3))
+  if(!isDefined(level._id_A1E3)) {
     level._id_A1E3 = [];
+  }
 
   if(var_0 == "axis") {
     level._id_A1E3[var_0 + "_rear_thrusters"] = ["tag_thrust_rear1"];
@@ -354,7 +361,7 @@ _id_75E7(var_0, var_1) {
 _id_31A1() {
   level._id_A065["evasion"] = [%jackal_vehicle_evade_01, %jackal_vehicle_evade_02, %jackal_vehicle_evade_03, %jackal_vehicle_evade_04, %jackal_vehicle_evade_05, %jackal_vehicle_evade_06, %jackal_vehicle_evade_07, %jackal_vehicle_evade_08];
   level._id_A065["evasion_overlay"] = % jackal_evade_overlay;
-  level._id_A065["evasion"] = scripts\engine\utility::array_randomize(level._id_A065["evasion"]);
+  level._id_A065["evasion"] = ::scripts\engine\utility::array_randomize(level._id_A065["evasion"]);
 }
 
 _id_104A7() {
@@ -373,11 +380,13 @@ _id_104A7() {
     var_4.tag_origin.origin = var_4.origin;
     var_4.tag_origin.angles = var_4.angles;
 
-    if(isDefined(var_3.script_noteworthy))
+    if(isDefined(var_3.script_noteworthy)) {
       var_4.script_noteworthy = var_3.script_noteworthy;
+    }
 
-    if(isDefined(var_3._id_EE10))
+    if(isDefined(var_3._id_EE10)) {
       var_4._id_EE10 = var_3._id_EE10;
+    }
 
     var_3 = undefined;
     var_5 = undefined;
@@ -386,8 +395,9 @@ _id_104A7() {
       var_5 = getEnt(var_2.script_noteworthy, "targetname");
 
       if(isDefined(var_5)) {
-        if(issubstr(var_5.classname, "_vehicle"))
+        if(issubstr(var_5.classname, "_vehicle")) {
           var_5 = scripts\sp\utility::_id_7D40(var_2.script_noteworthy, "targetname");
+        }
 
         var_2 enablelinkTo();
         var_2 _meth_8314();
@@ -406,8 +416,9 @@ _id_104A7() {
         var_9 = scripts\engine\utility::spawn_tag_origin();
         var_9.origin = var_8.origin;
 
-        if(isDefined(var_5))
+        if(isDefined(var_5)) {
           var_9 linkTo(var_5);
+        }
 
         var_4.lights = scripts\engine\utility::array_add(var_4.lights, var_9);
       }
@@ -424,10 +435,11 @@ _id_104A7() {
 _id_104A8() {
   var_0 = getEntArray("jackal_cockpit_probe", "targetname");
 
-  if(var_0.size == 0)
+  if(var_0.size == 0) {
     return;
-  else
+  } else {
     level._id_A056._id_DE59 = var_0[0];
+  }
 }
 
 init_location() {}
@@ -527,23 +539,27 @@ _id_A213() {
 }
 
 _id_A20A() {
-  if(!isDefined(level._id_D127))
+  if(!isDefined(level._id_D127)) {
     return 1;
+  }
 
-  if(level._id_D127.spaceship_mode == "hover")
+  if(level._id_D127.spaceship_mode == "hover") {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_A21F() {
-  if(!isDefined(level._id_D127))
+  if(!isDefined(level._id_D127)) {
     return 1;
+  }
 
-  if(level._id_D127.spaceship_mode == "fly")
+  if(level._id_D127.spaceship_mode == "fly") {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_A223() {

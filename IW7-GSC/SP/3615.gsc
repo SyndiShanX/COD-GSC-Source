@@ -9,8 +9,9 @@ _id_6137() {
   level._effect["battery_explosion"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_a2_barrel_model.vfx");
   var_0 = getEntArray("phys_battery_destructible", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_6134();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_6134();
+  }
 }
 
 _id_6134() {
@@ -40,8 +41,9 @@ _id_6134() {
 
     var_2 = int(var_2 - var_5);
 
-    if(var_2 <= 0 && !isDefined(self._id_C528))
+    if(var_2 <= 0 && !isDefined(self._id_C528)) {
       var_2 = 50;
+    }
 
     if(var_2 <= 0) {
       break;
@@ -54,8 +56,9 @@ _id_6134() {
         if(!var_4) {
           var_4 = 1;
 
-          if(soundexists("emp_battery_damaged_warning_lp"))
+          if(soundexists("emp_battery_damaged_warning_lp")) {
             thread scripts\sp\utility::play_loop_sound_on_tag("emp_battery_damaged_warning_lp", "tag_origin", 1, 1);
+          }
         }
 
         playFXOnTag(scripts\engine\utility::getfx("fuse_shock"), self, "tag_origin");
@@ -75,8 +78,9 @@ _id_6134() {
         var_17 = vectorNormalize(var_7);
         var_18 = 20;
 
-        if(isDefined(var_9) && var_9 == "MOD_IMPACT")
+        if(isDefined(var_9) && var_9 == "MOD_IMPACT") {
           var_18 = 3;
+        }
 
         var_7 = var_17 * var_18;
       }
@@ -101,16 +105,18 @@ _id_6134() {
     if(!var_3) {
       var_3 = 1;
 
-      if(soundexists("emp_battery_damaged_lp"))
+      if(soundexists("emp_battery_damaged_lp")) {
         var_20 thread scripts\sp\utility::play_loop_sound_on_tag("emp_battery_damaged_lp", "tag_origin", 1, 1);
+      }
     }
 
     playFXOnTag(scripts\engine\utility::getfx("impact_shock"), var_20, "tag_origin");
     self._id_109DB = scripts\engine\utility::array_add(self._id_109DB, var_20);
   }
 
-  while(isDefined(self._id_5945))
+  while(isDefined(self._id_5945)) {
     scripts\engine\utility::waitframe();
+  }
 
   self notify("barrel_death");
 }
@@ -138,18 +144,21 @@ _id_6135() {
     var_6 = var_5 / self._id_CAF6;
     var_7 = var_0 * var_6;
 
-    if(var_4 <= self._id_CAF6)
+    if(var_4 <= self._id_CAF6) {
       var_3 thread _id_0E1D::_id_2837(self.origin, var_4, var_7);
+    }
 
-    if(var_4 <= 340)
+    if(var_4 <= 340) {
       var_3 thread _id_6136(self.origin, var_4, var_7);
+    }
   }
 
   radiusdamage(self.origin, 2, 1, 0, self);
   scripts\engine\utility::waitframe();
 
-  if(soundexists("emp_battery_explode"))
+  if(soundexists("emp_battery_explode")) {
     thread scripts\engine\utility::play_sound_in_space("emp_battery_explode", self.origin);
+  }
 
   playFX(scripts\engine\utility::getfx("battery_explosion"), self.origin);
 
@@ -157,15 +166,17 @@ _id_6135() {
     killfxontag(scripts\engine\utility::getfx("impact_shock"), var_10, "tag_origin");
     scripts\engine\utility::waitframe();
 
-    if(isDefined(var_10))
+    if(isDefined(var_10)) {
       var_10 delete();
+    }
   }
 
   killfxontag(scripts\engine\utility::getfx("fuse_shock"), self, "tag_origin");
   scripts\engine\utility::waitframe();
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_6136(var_0, var_1, var_2) {

@@ -79,11 +79,13 @@ _id_C8C1() {
   var_5 = scripts\engine\utility::array_add(var_5, var_3);
   level notify("aatis_fires");
 
-  if(isDefined(level._id_CB8E))
+  if(isDefined(level._id_CB8E)) {
     level._id_CB8E delete();
+  }
 
-  foreach(var_10 in level.allies)
-  var_10 unlink();
+  foreach(var_10 in level.allies) {
+    var_10 unlink();
+  }
 
   level._id_D03A scripts\sp\anim::_id_1F2C(var_5, "attack_dropship_knockback");
   level._id_D03A._id_4D94._id_4348 solid();
@@ -166,8 +168,9 @@ _id_C8D6() {
     scripts\engine\utility::flag_wait("dropship_player_controlled_begin");
     level._id_D03A notify("stop_loop");
 
-    if(isDefined(level._id_5D72))
+    if(isDefined(level._id_5D72)) {
       scripts\engine\utility::array_thread(level._id_5D72, scripts\sp\maps\pearlharbor\pearlharbor_util::_id_518F);
+    }
 
     level.player unlink();
     level._id_D267 unlink();
@@ -255,8 +258,9 @@ _id_C8D4() {
 }
 
 _id_C8D5() {
-  if(isDefined(self.script_prefab_exploder))
+  if(isDefined(self.script_prefab_exploder)) {
     level notify("killexplodertridgers" + self.script_prefab_exploder);
+  }
 
   scripts\engine\utility::trigger_off();
   scripts\engine\utility::flag_wait("dropship_player_controlled_begin");
@@ -270,17 +274,20 @@ _id_C8D5() {
     }
   }
 
-  if(isDefined(self.script_prefab_exploder))
+  if(isDefined(self.script_prefab_exploder)) {
     thread scripts\sp\trigger::exploder_load(self);
+  }
 
-  if(isDefined(self._id_ED9E))
+  if(isDefined(self._id_ED9E)) {
     scripts\engine\utility::flag_set(self._id_ED9E);
+  }
 
   if(isDefined(self.script_parameters)) {
-    if(self.script_parameters == "geo_mover")
+    if(self.script_parameters == "geo_mover") {
       thread scripts\sp\geo_mover::_id_12764(self);
-    else if(self.script_parameters == "spawner")
+    } else if(self.script_parameters == "spawner") {
       thread _id_0B77::_id_12797(self);
+    }
   }
 }
 
@@ -337,8 +344,9 @@ _id_5E5C(var_0) {
       var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
       var_4 = vectorNormalize(var_3.origin - var_2.origin);
 
-      if(isDefined(var_2._id_ED9E))
+      if(isDefined(var_2._id_ED9E)) {
         scripts\engine\utility::flag_set(var_2._id_ED9E);
+      }
     }
 
     var_7 = var_6[2];
@@ -356,10 +364,11 @@ _id_5E5C(var_0) {
       var_19 = anglestoright(self.angles);
       var_20 = undefined;
 
-      if(vectordot(var_11, var_18) > 0)
+      if(vectordot(var_11, var_18) > 0) {
         var_20 = var_18;
-      else
+      } else {
         var_20 = var_18 * -1;
+      }
 
       var_15 = var_15 + var_20 * var_5;
     }
@@ -491,10 +500,11 @@ _id_C8C6() {
   level.player clearclienttriggeraudiozone(3.0);
   thread _id_C8C5();
 
-  if(getdvarint("dont_load_nextmission", 0) == 0)
+  if(getdvarint("dont_load_nextmission", 0) == 0) {
     scripts\sp\utility::_id_BF95();
-  else
+  } else {
     level waittill("forever");
+  }
 }
 
 _id_C8C5() {}

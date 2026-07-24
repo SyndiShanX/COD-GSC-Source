@@ -60,16 +60,18 @@ shootblankorrpg(var_0, var_1, var_2) {
 
     if(self.bulletsinclip > 0) {
       if(var_8) {
-        if(randomint(3) == 0)
+        if(randomint(3) == 0) {
           self.bulletsinclip--;
+        }
       } else
         self.bulletsinclip--;
     }
 
     var_5++;
 
-    if(var_9)
+    if(var_9) {
       childthread _id_FE7D(var_0);
+    }
 
     if(self.asm.shootparams._id_6B92 && var_5 == var_6) {
       break;
@@ -96,8 +98,9 @@ _id_FE5C(var_0, var_1, var_2, var_3) {
   var_13 = scripts\anim\utility_common::weapon_pump_action_shotgun();
 
   while(var_9 < var_10 && var_10 > 0) {
-    if(var_7)
+    if(var_7) {
       self waittillmatch(var_1, "fire");
+    }
 
     if(!self.bulletsinclip) {
       break;
@@ -106,27 +109,31 @@ _id_FE5C(var_0, var_1, var_2, var_3) {
     scripts\anim\utility_common::shootenemywrapper(var_11);
 
     if(var_12) {
-      if(randomint(3) == 0)
+      if(randomint(3) == 0) {
         self.bulletsinclip--;
+      }
     } else
       self.bulletsinclip--;
 
     if(var_8) {
-      if(issubstr(tolower(self.weapon), "rpg") || issubstr(tolower(self.weapon), "panzerfaust"))
+      if(issubstr(tolower(self.weapon), "rpg") || issubstr(tolower(self.weapon), "panzerfaust")) {
         self hidepart("tag_rocket");
+      }
     }
 
     var_9++;
 
-    if(var_13)
+    if(var_13) {
       childthread _id_FE7D(var_1);
+    }
 
     if(self.asm.shootparams._id_6B92 && var_9 == var_10) {
       break;
     }
 
-    if(!var_7 || var_10 == 1 && self.asm.shootparams._id_1119D == "single")
+    if(!var_7 || var_10 == 1 && self.asm.shootparams._id_1119D == "single") {
       self waittillmatch(var_1, "end");
+    }
   }
 
   self notify(var_5);
@@ -139,11 +146,13 @@ _id_FE84(var_0, var_1, var_2) {
 }
 
 _id_FEFE() {
-  if(scripts\anim\utility_common::weapon_pump_action_shotgun())
+  if(scripts\anim\utility_common::weapon_pump_action_shotgun()) {
     return 1.0;
+  }
 
-  if(scripts\anim\weaponlist::usingautomaticweapon())
+  if(scripts\anim\weaponlist::usingautomaticweapon()) {
     return scripts\anim\weaponlist::autoshootanimrate() * 0.7;
+  }
 
   return 0.4;
 }
@@ -152,16 +161,17 @@ _id_FE64() {
   var_0 = self.asm.shootparams._id_1119D;
   var_1 = 1.0;
 
-  if(isDefined(self._id_FED4))
+  if(isDefined(self._id_FED4)) {
     var_1 = self._id_FED4;
-  else if(var_0 == "full")
+  } else if(var_0 == "full") {
     var_1 = scripts\anim\weaponlist::autoshootanimrate() * randomfloatrange(0.5, 1.0);
-  else if(var_0 == "burst")
+  } else if(var_0 == "burst") {
     var_1 = scripts\anim\weaponlist::burstshootanimrate();
-  else if(scripts\anim\utility_common::isusingsidearm())
+  } else if(scripts\anim\utility_common::isusingsidearm()) {
     var_1 = 3.0;
-  else if(scripts\anim\utility_common::isusingshotgun())
+  } else if(scripts\anim\utility_common::isusingshotgun()) {
     var_1 = _id_FEFE();
+  }
 
   return var_1;
 }
@@ -183,44 +193,49 @@ _id_FE89() {
 
 _id_32BE() {
   if(self.asm.shootparams._id_1119D == "full" && !self.asm.shootparams._id_6B92) {
-    if(self._id_A9ED == gettime())
+    if(self._id_A9ED == gettime()) {
       wait 0.05;
+    }
 
     return;
   }
 
   var_0 = _id_80E7();
 
-  if(var_0)
+  if(var_0) {
     wait(var_0);
+  }
 }
 
 _id_80E7() {
   var_0 = (gettime() - self._id_A9ED) / 1000;
   var_1 = _id_7E12();
 
-  if(var_1 > var_0)
+  if(var_1 > var_0) {
     return var_1 - var_0;
+  }
 
   return 0;
 }
 
 _id_8130() {
-  if(isPlayer(self.enemy))
+  if(isPlayer(self.enemy)) {
     return randomfloatrange(self.enemy.gs._id_B750, self.enemy.gs._id_B461);
-  else
+  } else {
     return randomfloatrange(anim._id_B750, anim._id_B461);
+  }
 }
 
 _id_7E12() {
-  if(scripts\anim\utility_common::isusingsidearm())
+  if(scripts\anim\utility_common::isusingsidearm()) {
     return randomfloatrange(0.15, 0.55);
-  else if(scripts\anim\utility_common::weapon_pump_action_shotgun())
+  } else if(scripts\anim\utility_common::weapon_pump_action_shotgun()) {
     return randomfloatrange(1.0, 1.7);
-  else if(scripts\anim\utility_common::isasniper())
+  } else if(scripts\anim\utility_common::isasniper()) {
     return _id_8130();
-  else if(self.asm.shootparams._id_6B92)
+  } else if(self.asm.shootparams._id_6B92) {
     return randomfloatrange(0.1, 0.35);
-  else
+  } else {
     return randomfloatrange(0.4, 0.9);
+  }
 }

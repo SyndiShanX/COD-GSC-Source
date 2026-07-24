@@ -99,8 +99,9 @@ _id_3A0E() {
   scripts\engine\utility::flag_set("flag_capt_killed");
   level._id_3A0C waittill("trigger");
 
-  if(!level._id_3A0C scripts\sp\intelligence::_id_3DAD())
+  if(!level._id_3A0C scripts\sp\intelligence::_id_3DAD()) {
     level._id_3A0C scripts\sp\intelligence::_id_EB60();
+  }
 
   updategamerprofileall();
   wait 0.05;
@@ -135,30 +136,36 @@ _id_C639() {
     var_1 = issubstr(self.script_parameters, "death");
     var_2 = scripts\engine\utility::getStruct(self.script_parameters, "targetname");
 
-    if(var_0)
+    if(var_0) {
       level._id_FD31 = self;
+    }
 
     var_3 = 0.1;
 
-    if(var_0)
+    if(var_0) {
       var_3 = 1.25;
+    }
 
-    if(var_1)
+    if(var_1) {
       self._id_DC1A = 1;
+    }
 
-    if(isDefined(self.script_noteworthy))
+    if(isDefined(self.script_noteworthy)) {
       thread scripts\sp\utility::_id_10346(self.script_noteworthy);
+    }
 
     self.allowdeath = 1;
     var_2 scripts\sp\anim::_id_1ECA(self, self.script_parameters);
     var_2 scripts\sp\anim::_id_1F35(self, self.script_parameters, undefined, var_3, "generic");
 
-    if(var_1)
+    if(var_1) {
       self _meth_81D0();
+    }
   }
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     thread scripts\sp\utility::_id_7226(getnode(self.target, "targetname"));
+  }
 }
 
 _id_C63A() {

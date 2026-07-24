@@ -4,22 +4,25 @@
 **************************************/
 
 _id_FE05() {
-  if(!isDefined(level._id_FD6E))
+  if(!isDefined(level._id_FD6E)) {
     level._id_FD6E = spawnStruct();
+  }
 
   return level._id_FD6E;
 }
 
 _id_E3F7() {
-  if(!isDefined(level._id_E35D))
+  if(!isDefined(level._id_E35D)) {
     level._id_E35D = spawnStruct();
+  }
 
   return level._id_E35D;
 }
 
 _id_118C1() {
-  if(!isDefined(level._id_118A8))
+  if(!isDefined(level._id_118A8)) {
     level._id_118A8 = spawnStruct();
+  }
 
   return level._id_118A8;
 }
@@ -30,8 +33,9 @@ _id_7D7A(var_0, var_1) {
     level._id_877A = [];
 
     foreach(var_4 in var_2) {
-      if(isDefined(var_4.targetname))
+      if(isDefined(var_4.targetname)) {
         level._id_877A = scripts\engine\utility::array_add(level._id_877A, var_4.targetname);
+      }
     }
   }
 
@@ -41,20 +45,21 @@ _id_7D7A(var_0, var_1) {
     var_6.origin = var_0;
     return var_6;
   } else if(isstring(var_0)) {
-    if(isstruct(scripts\engine\utility::getStruct(var_0, "targetname")))
+    if(isstruct(scripts\engine\utility::getStruct(var_0, "targetname"))) {
       return scripts\engine\utility::getStruct(var_0, "targetname");
-    else if(isent(getEnt(var_0, "targetname")))
+    } else if(isent(getEnt(var_0, "targetname"))) {
       return getEnt(var_0, "targetname");
-    else if(isnode(getnode(var_0, "targetname")))
+    } else if(isnode(getnode(var_0, "targetname"))) {
       return getnode(var_0, "targetname");
-    else if(getsubstr(var_0, 0, 2) == "**")
+    } else if(getsubstr(var_0, 0, 2) == "**") {
       return getsubstr(var_0, 2);
-    else if(isDefined(scripts\engine\utility::array_find(level._id_877A, var_0)))
+    } else if(isDefined(scripts\engine\utility::array_find(level._id_877A, var_0))) {
       return getvehiclenode(var_0, "targetname");
-    else if(isDefined(var_1) && var_1)
+    } else if(isDefined(var_1) && var_1) {
       return undefined;
-    else
+    } else {
       return;
+    }
   } else
     return var_0;
 }
@@ -64,8 +69,9 @@ _id_7CBB(var_0, var_1, var_2, var_3) {
 
   foreach(var_6 in var_4) {
     if(isDefined(var_6.script_parameters)) {
-      if(var_6.script_parameters == var_2)
+      if(var_6.script_parameters == var_2) {
         return var_6;
+      }
     }
   }
 }
@@ -75,36 +81,41 @@ _id_798D(var_0, var_1, var_2) {
 
   foreach(var_5 in var_3) {
     if(isDefined(var_5.script_noteworthy)) {
-      if(var_5.script_noteworthy == var_2)
+      if(var_5.script_noteworthy == var_2) {
         return var_5;
+      }
     }
   }
 }
 
 _id_798E(var_0, var_1, var_2) {
-  if(var_2 == "_ignore_last_sparam")
+  if(var_2 == "_ignore_last_sparam") {
     return getEnt(var_0, var_1);
+  }
 
   var_3 = getEntArray(var_0, var_1);
 
   foreach(var_5 in var_3) {
     if(isDefined(var_5.script_parameters)) {
-      if(var_5.script_parameters == var_2)
+      if(var_5.script_parameters == var_2) {
         return var_5;
+      }
     }
   }
 }
 
 _id_7CBE(var_0, var_1, var_2) {
-  if(var_2 == "_ignore_last_sparam")
+  if(var_2 == "_ignore_last_sparam") {
     return scripts\engine\utility::getStruct(var_0, var_1);
+  }
 
   var_3 = scripts\engine\utility::getStructArray(var_0, var_1);
 
   foreach(var_5 in var_3) {
     if(isDefined(var_5.script_parameters)) {
-      if(var_5.script_parameters == var_2)
+      if(var_5.script_parameters == var_2) {
         return var_5;
+      }
     }
   }
 }
@@ -114,8 +125,9 @@ _id_7CBC(var_0, var_1, var_2) {
 
   foreach(var_5 in var_3) {
     if(isDefined(var_5._id_EE52)) {
-      if(var_5._id_EE52 == var_2)
+      if(var_5._id_EE52 == var_2) {
         return var_5;
+      }
     }
   }
 }
@@ -125,8 +137,9 @@ _id_798A(var_0, var_1, var_2) {
 
   foreach(var_5 in var_3) {
     if(isDefined(var_5._id_EE52)) {
-      if(var_5._id_EE52 == var_2)
+      if(var_5._id_EE52 == var_2) {
         return var_5;
+      }
     }
   }
 }
@@ -136,8 +149,9 @@ _id_7CC0(var_0, var_1, var_2) {
 
   foreach(var_5 in var_3) {
     if(isDefined(var_5._id_EE52)) {
-      if(var_5._id_EE52 != var_2)
+      if(var_5._id_EE52 != var_2) {
         var_3 = scripts\engine\utility::array_remove(var_3, var_5);
+      }
 
       continue;
     }
@@ -153,8 +167,9 @@ _id_7991(var_0, var_1, var_2) {
 
   foreach(var_5 in var_3) {
     if(isDefined(var_5._id_EE52)) {
-      if(var_5._id_EE52 != var_2)
+      if(var_5._id_EE52 != var_2) {
         var_3 = scripts\engine\utility::array_remove(var_3, var_5);
+      }
 
       continue;
     }
@@ -171,8 +186,9 @@ _id_7992(var_0, var_1, var_2) {
 
     foreach(var_5 in var_3) {
       if(isDefined(var_5.script_parameters)) {
-        if(var_5.script_parameters != var_0)
+        if(var_5.script_parameters != var_0) {
           var_3 = scripts\engine\utility::array_remove(var_3, var_5);
+        }
 
         continue;
       }
@@ -184,8 +200,9 @@ _id_7992(var_0, var_1, var_2) {
 
   foreach(var_5 in var_3) {
     if(isDefined(var_5.script_noteworthy)) {
-      if(var_5.script_noteworthy != var_2)
+      if(var_5.script_noteworthy != var_2) {
         var_3 = scripts\engine\utility::array_remove(var_3, var_5);
+      }
 
       continue;
     }
@@ -197,15 +214,17 @@ _id_7992(var_0, var_1, var_2) {
 }
 
 _id_7994(var_0, var_1, var_2) {
-  if(var_2 == "_ignore_last_sparam")
+  if(var_2 == "_ignore_last_sparam") {
     return getEntArray(var_0, var_1);
+  }
 
   var_3 = getEntArray(var_0, var_1);
 
   foreach(var_5 in var_3) {
     if(isDefined(var_5.script_parameters)) {
-      if(var_5.script_parameters != var_2)
+      if(var_5.script_parameters != var_2) {
         var_3 = scripts\engine\utility::array_remove(var_3, var_5);
+      }
 
       continue;
     }
@@ -221,8 +240,9 @@ _id_7995(var_0, var_1, var_2) {
 
   foreach(var_5 in var_3) {
     if(isDefined(var_5.script_parent)) {
-      if(var_5.script_parent != var_2)
+      if(var_5.script_parent != var_2) {
         var_3 = scripts\engine\utility::array_remove(var_3, var_5);
+      }
 
       continue;
     }
@@ -238,8 +258,9 @@ _id_7993(var_0, var_1, var_2) {
 
   foreach(var_5 in var_3) {
     if(isDefined(var_5.script_parameters)) {
-      if(getsubstr(var_5.script_parameters, 0, var_2.size) != var_2)
+      if(getsubstr(var_5.script_parameters, 0, var_2.size) != var_2) {
         var_3 = scripts\engine\utility::array_remove(var_3, var_5);
+      }
 
       continue;
     }
@@ -253,8 +274,9 @@ _id_7993(var_0, var_1, var_2) {
 _id_799B(var_0, var_1) {
   foreach(var_3 in var_0) {
     if(isDefined(var_3.script_noteworthy)) {
-      if(var_3.script_noteworthy != var_1)
+      if(var_3.script_noteworthy != var_1) {
         var_0 = scripts\engine\utility::array_remove(var_0, var_3);
+      }
 
       continue;
     }
@@ -270,8 +292,9 @@ _id_7990(var_0) {
 
   foreach(var_3 in var_1) {
     if(isDefined(var_3.targetname)) {
-      if(getsubstr(var_3.targetname, 0, var_0.size) != var_0)
+      if(getsubstr(var_3.targetname, 0, var_0.size) != var_0) {
         var_1 = scripts\engine\utility::array_remove(var_1, var_3);
+      }
 
       continue;
     }
@@ -287,8 +310,9 @@ _id_7CBF(var_0) {
   var_2 = getarraykeys(level.struct_class_names["targetname"]);
 
   foreach(var_4 in var_2) {
-    if(getsubstr(var_4, 0, var_0.size) != var_0)
+    if(getsubstr(var_4, 0, var_0.size) != var_0) {
       var_1 = scripts\engine\utility::array_remove(var_1, var_1[var_4]);
+    }
   }
 }
 
@@ -296,45 +320,52 @@ _id_798C(var_0, var_1, var_2, var_3) {
   var_4 = _id_7991(var_0, var_1, var_2);
 
   foreach(var_6 in var_4) {
-    if(isDefined(var_6.script_parent) && var_6.script_parent == var_3)
+    if(isDefined(var_6.script_parent) && var_6.script_parent == var_3) {
       return var_6;
+    }
   }
 }
 
 _id_798B(var_0, var_1, var_2, var_3) {
-  if(var_3 == "_ignore_last_sparam")
+  if(var_3 == "_ignore_last_sparam") {
     return _id_798A(var_0, var_1, var_2);
+  }
 
   var_4 = _id_7991(var_0, var_1, var_2);
 
   foreach(var_6 in var_4) {
-    if(isDefined(var_6.script_parameters) && var_6.script_parameters == var_3)
+    if(isDefined(var_6.script_parameters) && var_6.script_parameters == var_3) {
       return var_6;
+    }
   }
 }
 
 _id_7CBD(var_0, var_1, var_2, var_3) {
-  if(var_3 == "_ignore_last_sparam")
+  if(var_3 == "_ignore_last_sparam") {
     return _id_7CBC(var_0, var_1, var_2);
+  }
 
   var_4 = _id_7CC0(var_0, var_1, var_2);
 
   foreach(var_6 in var_4) {
-    if(isDefined(var_6.script_parameters) && var_6.script_parameters == var_3)
+    if(isDefined(var_6.script_parameters) && var_6.script_parameters == var_3) {
       return var_6;
+    }
   }
 }
 
 _id_7CC1(var_0, var_1, var_2) {
-  if(var_2 == "_ignore_last_sparam")
+  if(var_2 == "_ignore_last_sparam") {
     return scripts\engine\utility::getStructArray(var_0, var_1);
+  }
 
   var_3 = scripts\engine\utility::getStructArray(var_0, var_1);
 
   foreach(var_5 in var_3) {
     if(isDefined(var_5.script_parameters)) {
-      if(var_5.script_parameters != var_2)
+      if(var_5.script_parameters != var_2) {
         var_3 = scripts\engine\utility::array_remove(var_3, var_5);
+      }
 
       continue;
     }
@@ -350,8 +381,9 @@ _id_7C34(var_0, var_1, var_2) {
 
   foreach(var_5 in var_3) {
     if(isDefined(var_5._id_EE52)) {
-      if(var_5._id_EE52 != var_2)
+      if(var_5._id_EE52 != var_2) {
         var_3 = scripts\engine\utility::array_remove(var_3, var_5);
+      }
 
       continue;
     }
@@ -367,11 +399,12 @@ _id_FDE7(var_0) {
     if(isai(var_0) || isDefined(var_0._id_9B89)) {
       return;
     }
-    if(isDefined(level._id_FD6E) && isDefined(level._id_FD6E._id_7316) && scripts\engine\utility::array_contains(level._id_FD6E._id_7316, var_0))
+    if(isDefined(level._id_FD6E) && isDefined(level._id_FD6E._id_7316) && scripts\engine\utility::array_contains(level._id_FD6E._id_7316, var_0)) {
       var_0 _id_7304();
-    else {
-      if(isDefined(var_0._id_9A62))
+    } else {
+      if(isDefined(var_0._id_9A62)) {
         scripts\engine\utility::array_call(var_0._id_9A62, ::delete);
+      }
 
       var_0 delete();
     }
@@ -384,8 +417,9 @@ _id_FDE8(var_0) {
   if(!isDefined(var_0)) {
     return;
   }
-  foreach(var_2 in var_0)
-  _id_FDE7(var_2);
+  foreach(var_2 in var_0) {
+    _id_FDE7(var_2);
+  }
 }
 
 _id_7304() {
@@ -404,23 +438,28 @@ _id_FE0C() {
   if(!isDefined(level._id_FD6E)) {
     return;
   }
-  if(isDefined(level._id_FD6E._id_5EE3))
+  if(isDefined(level._id_FD6E._id_5EE3)) {
     _id_22B8(level._id_FD6E._id_5EE3);
+  }
 
-  if(isDefined(level._id_FD6E.jackals))
+  if(isDefined(level._id_FD6E.jackals)) {
     _id_22B8(level._id_FD6E.jackals);
+  }
 
-  if(isDefined(level._id_FD6E._id_7316))
+  if(isDefined(level._id_FD6E._id_7316)) {
     _id_22B8(level._id_FD6E._id_7316);
+  }
 
-  if(isDefined(level._id_FD6E._id_11A55))
+  if(isDefined(level._id_FD6E._id_11A55)) {
     _id_22B8(level._id_FD6E._id_11A55);
+  }
 }
 
 _id_22B8(var_0) {
   foreach(var_3, var_2 in var_0) {
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       var_0 = scripts\sp\utility::_id_22B2(var_0, var_3);
+    }
   }
 }
 
@@ -429,11 +468,13 @@ _id_EFDB(var_0) {
 }
 
 _id_FD9C(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "all";
+  }
 
-  if(!isDefined(level._id_FD6E._id_1912[var_0]))
+  if(!isDefined(level._id_FD6E._id_1912[var_0])) {
     return [];
+  }
 
   return level._id_FD6E._id_1912[var_0];
 }
@@ -446,22 +487,24 @@ _id_FD72(var_0) {
 
 _id_FD71() {
   foreach(var_2, var_1 in level._id_FD6E._id_1912) {
-    level._id_FD6E._id_1912[var_2] = scripts\engine\utility::array_removeundefined(level._id_FD6E._id_1912[var_2]);
-    level._id_FD6E._id_1912[var_2] = scripts\sp\utility::_id_22B9(level._id_FD6E._id_1912[var_2]);
+    level._id_FD6E._id_1912[var_2] = ::scripts\engine\utility::array_removeundefined(level._id_FD6E._id_1912[var_2]);
+    level._id_FD6E._id_1912[var_2] = ::scripts\sp\utility::_id_22B9(level._id_FD6E._id_1912[var_2]);
   }
 }
 
 _id_FD6F(var_0) {
-  if(!isDefined(level._id_FD6E._id_1912[var_0]))
+  if(!isDefined(level._id_FD6E._id_1912[var_0])) {
     level._id_FD6E._id_1912[var_0] = [];
+  }
 
   self._id_ECE7 = var_0;
-  level._id_FD6E._id_1912[var_0] = scripts\engine\utility::add_to_array(level._id_FD6E._id_1912[var_0], self);
+  level._id_FD6E._id_1912[var_0] = ::scripts\engine\utility::add_to_array(level._id_FD6E._id_1912[var_0], self);
 }
 
 _id_FDBB(var_0) {
-  if(!isarray(var_0))
+  if(!isarray(var_0)) {
     var_0 = [var_0];
+  }
 
   foreach(var_2 in var_0) {
     var_3 = _id_FD9C(var_2);
@@ -482,14 +525,17 @@ _id_FDBA(var_0) {
   var_0.diequietly = 1;
   var_0.noragdoll = 1;
 
-  if(isDefined(var_0._id_1F1C))
+  if(isDefined(var_0._id_1F1C)) {
     var_0._id_1F1C notify("ambient_idle_scene_end");
+  }
 
-  if(isDefined(var_0._id_B14F))
+  if(isDefined(var_0._id_B14F)) {
     var_0 scripts\sp\utility::_id_1101B();
+  }
 
-  if(isai(var_0))
+  if(isai(var_0)) {
     var_0 _meth_81D0();
+  }
 
   var_0 delete();
 }
@@ -513,32 +559,36 @@ _id_CD3F(var_0) {
   _id_11004();
   var_1 = level._id_C6AA["retribution"]._id_EF67;
 
-  while(!isDefined(var_1))
+  while(!isDefined(var_1)) {
     scripts\engine\utility::waitframe();
+  }
 
   var_2 = undefined;
 
-  if(issubstr(var_0, "nav") || issubstr(var_0, "gator"))
+  if(issubstr(var_0, "nav") || issubstr(var_0, "gator")) {
     var_2 = level._id_C6AA["retribution"]._id_454F["nav"];
-  else if(issubstr(var_0, "xo") || issubstr(var_0, "salter"))
+  } else if(issubstr(var_0, "xo") || issubstr(var_0, "salter")) {
     var_2 = level._id_C6AA["retribution"]._id_454F["xo"];
-  else if(issubstr(var_0, "drop") || issubstr(var_0, "do"))
+  } else if(issubstr(var_0, "drop") || issubstr(var_0, "do")) {
     var_2 = level._id_C6AA["retribution"]._id_454F["drop"];
-  else if(issubstr(var_0, "conn") || issubstr(var_0, "captain"))
+  } else if(issubstr(var_0, "conn") || issubstr(var_0, "captain")) {
     var_2 = level._id_C6AA["retribution"]._id_454F["captain"];
+  }
 
   thread scripts\sp\interaction::_id_CD50(var_0, var_1, var_2);
 }
 
 _id_11004() {
-  if(scripts\sp\utility::_id_65DF("hold_simple_idles"))
+  if(scripts\sp\utility::_id_65DF("hold_simple_idles")) {
     scripts\sp\utility::_id_65DD("hold_simple_idles");
+  }
 
   thread scripts\sp\interaction::_id_9A0F();
 
   if(isDefined(self._id_C6B7)) {
-    if(isDefined(self._id_C6B7._id_4B31))
+    if(isDefined(self._id_C6B7._id_4B31)) {
       self._id_C6B7 clearanim(self._id_C6B7._id_4B31, 0.2);
+    }
   }
 
   self._id_C6B7 = undefined;
@@ -563,10 +613,11 @@ _id_F59B(var_0) {
 }
 
 _id_7C60() {
-  if(isDefined(level._id_FDFA))
+  if(isDefined(level._id_FDFA)) {
     return level._id_FDFA;
-  else
+  } else {
     return undefined;
+  }
 }
 
 _id_7C5F() {
@@ -574,8 +625,9 @@ _id_7C5F() {
     level._id_FDBC = level.player _meth_84C6("lastCompletedMission");
 
     if(!scripts\sp\utility::_id_9BB5()) {
-      if(isDefined(_id_4EDF()))
+      if(isDefined(_id_4EDF())) {
         level._id_FDBC = _id_4EDF();
+      }
     }
   }
 
@@ -600,8 +652,9 @@ _id_9DB9() {
 _id_4EDF() {
   var_0 = _id_4EE1();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = _id_4EE0();
+  }
 
   return var_0;
 }
@@ -689,8 +742,9 @@ _id_4EE1() {
 _id_7AF0() {
   var_0 = _id_7C60();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = _id_7C5F();
+  }
 
   var_1 = _id_45F0(var_0);
   return var_1;
@@ -765,8 +819,9 @@ _id_45F0(var_0) {
 }
 
 _id_9CB4() {
-  if(!isDefined(level._id_EFF6))
+  if(!isDefined(level._id_EFF6)) {
     _id_9870();
+  }
 
   return level._id_EFF6;
 }
@@ -774,10 +829,11 @@ _id_9CB4() {
 _id_9870() {
   var_0 = level.player _meth_84C6("scTitanFirstPlay");
 
-  if((!isDefined(var_0) || var_0 == 0) && level.script == "shipcrib_titan")
+  if((!isDefined(var_0) || var_0 == 0) && level.script == "shipcrib_titan") {
     var_1 = 1;
-  else
+  } else {
     var_1 = 0;
+  }
 
   level._id_EFF6 = var_1;
 }
@@ -848,8 +904,9 @@ _id_FDB2(var_0) {
 _id_FDBD(var_0, var_1) {
   _id_FE05();
 
-  if(!isDefined(level._id_FD6E._id_111D7))
+  if(!isDefined(level._id_FD6E._id_111D7)) {
     level._id_FD6E._id_111D7 = getmapsuncolorandintensity()[3];
+  }
 
   var_2 = var_1 / 0.05;
   var_3 = var_0 - level._id_FD6E._id_111D7;
@@ -870,29 +927,34 @@ _id_FDBD(var_0, var_1) {
 }
 
 _id_FDCD() {
-  if(isDefined(level._id_C6AA) && isDefined(level._id_C6AA["retribution"]) && isDefined(level._id_C6AA["retribution"]._id_BA11) && isDefined(level._id_C6AA["retribution"]._id_BA11["nav_screen"]))
+  if(isDefined(level._id_C6AA) && isDefined(level._id_C6AA["retribution"]) && isDefined(level._id_C6AA["retribution"]._id_BA11) && isDefined(level._id_C6AA["retribution"]._id_BA11["nav_screen"])) {
     level._id_C6AA["retribution"]._id_BA11["nav_screen"] unlink();
+  }
 }
 
 _id_25ED() {
   var_0 = randomintrange(0, 3);
 
-  if(var_0 == 0)
+  if(var_0 == 0) {
     setglobalsoundcontext("vr_fire_speed", "", 0);
+  }
 
-  if(var_0 == 1)
+  if(var_0 == 1) {
     setglobalsoundcontext("vr_fire_speed", "1", 0);
+  }
 
-  if(var_0 == 2)
+  if(var_0 == 2) {
     setglobalsoundcontext("vr_fire_speed", "2", 0);
+  }
 }
 
 _id_EB8E(var_0, var_1, var_2) {
   level notify("shipcrib_loadout_heroes");
   level endon("shipcrib_loadout_heroes");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = [level._id_EA2C, level._id_6754, level._id_C47F, level._id_30F6, level._id_A538];
+  }
 
   var_0 = scripts\engine\utility::array_removeundefined(var_0);
   scripts\engine\utility::array_thread(var_0, ::_id_EB8D, var_1, var_2);
@@ -904,11 +966,13 @@ _id_EB8D(var_0, var_1) {
   self endon("death");
   level endon("shipcrib_loadout_heroes");
 
-  if(!isDefined(level._id_FDFA) && !isDefined(var_0))
+  if(!isDefined(level._id_FDFA) && !isDefined(var_0)) {
     return 0;
+  }
 
-  if(isDefined(level._id_FDFA))
+  if(isDefined(level._id_FDFA)) {
     var_0 = level._id_FDFA;
+  }
 
   switch (self._id_1FBB) {
     case "salter":
@@ -946,8 +1010,9 @@ _id_EB8D(var_0, var_1) {
   }
 
   if(isDefined(var_1) && var_1) {
-    if(isDefined(self._id_13C4D))
+    if(isDefined(self._id_13C4D)) {
       self._id_13C4D delete();
+    }
 
     scripts\sp\utility::_id_CC06(self.weapon, "back");
   }
@@ -1215,7 +1280,7 @@ _id_3DDE(var_0, var_1) {
     scripts\sp\utility::_id_12641(var_2);
 
     if(!scripts\engine\utility::array_contains(level._id_D9E5["loaded_weapons"], var_0)) {
-      level._id_D9E5["loaded_weapons"] = scripts\engine\utility::array_add(level._id_D9E5["loaded_weapons"], var_0);
+      level._id_D9E5["loaded_weapons"] = ::scripts\engine\utility::array_add(level._id_D9E5["loaded_weapons"], var_0);
       level.player _meth_84C7("weaponsLoaded", var_0, 1);
     }
   }
@@ -1226,8 +1291,9 @@ _id_7B87(var_0) {
 }
 
 _id_FDD6(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "Urban";
+  }
 
   switch (var_1) {
     case "Urban":
@@ -1271,8 +1337,9 @@ _id_37D0(var_0, var_1, var_2) {
 }
 
 _id_FDD7(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   var_1 = _id_FD9D();
 
@@ -1288,8 +1355,9 @@ _id_FDD7(var_0) {
       break;
   }
 
-  if(var_0)
+  if(var_0) {
     self setModel(var_1);
+  }
 
   level.player setviewmodel(var_1);
   level.player _meth_8574(var_2);
@@ -1305,10 +1373,11 @@ _id_FE02(var_0, var_1, var_2) {
 _id_FD9D() {
   var_0 = level.player _meth_84C6("currentViewModel");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "viewmodel_base_viewhands_iw7";
-  else if(var_0 == "")
+  } else if(var_0 == "") {
     var_0 = "viewmodel_base_viewhands_iw7";
+  }
 
   return var_0;
 }
@@ -1325,22 +1394,25 @@ shipcrib_autosave_now_silent() {
     var_0 = shipcrib_autosave_now_silent_internal();
 
     if(!isDefined(var_0)) {
-      if(scripts\engine\utility::flag("game_saving"))
+      if(scripts\engine\utility::flag("game_saving")) {
         scripts\engine\utility::flag_clear("game_saving");
+      }
 
       return;
     }
 
-    if(var_0)
+    if(var_0) {
       return;
+    }
   }
 }
 
 shipcrib_autosave_now_silent_internal() {
   level endon("try_new_autosave");
 
-  while(!scripts\sp\autosave::_id_1190(1, 1))
+  while(!scripts\sp\autosave::_id_1190(1, 1)) {
     wait 1;
+  }
 
   return 1;
 }

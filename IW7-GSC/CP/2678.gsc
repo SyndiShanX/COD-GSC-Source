@@ -21,8 +21,9 @@ poweruponplayerconnect() {
 
     foreach(var_3 in var_0) {
       if(scripts\engine\utility::is_true(level.active_power_ups[var_3])) {
-        if(isDefined(level.power_up_func[var_3]))
+        if(isDefined(level.power_up_func[var_3])) {
           thread[[level.power_up_func[var_3]]](var_1);
+        }
       }
     }
   }
@@ -35,8 +36,9 @@ init_powerup_effects() {
 }
 
 init_powerup_data() {
-  if(!isDefined(level.active_power_ups))
+  if(!isDefined(level.active_power_ups)) {
     level.active_power_ups = [];
+  }
 
   level.active_power_ups["instakill"] = 0;
   level.active_power_ups["double_money"] = 0;
@@ -49,20 +51,25 @@ init_powerup_data() {
   level.power_up_func["infinite_grenades"] = ::apply_infinite_grenade_effects;
   level.power_up_func["fire_sale"] = ::apply_fire_sale_effects;
 
-  if(!isDefined(level.power_up_drop_score))
+  if(!isDefined(level.power_up_drop_score)) {
     level.power_up_drop_score = 500;
+  }
 
-  if(!isDefined(level.powerup_drop_increment))
+  if(!isDefined(level.powerup_drop_increment)) {
     level.powerup_drop_increment = randomintrange(2000, 3000);
+  }
 
-  if(!isDefined(level.powerup_drop_max_per_round))
+  if(!isDefined(level.powerup_drop_max_per_round)) {
     level.powerup_drop_max_per_round = 5;
+  }
 
-  if(!isDefined(level.powerup_drop_count))
+  if(!isDefined(level.powerup_drop_count)) {
     level.powerup_drop_count = 0;
+  }
 
-  if(!isDefined(level.score_to_drop))
+  if(!isDefined(level.score_to_drop)) {
     level.score_to_drop = level.powerup_drop_increment;
+  }
 }
 
 check_to_increase_powerup_drop_rates() {
@@ -74,8 +81,9 @@ check_to_increase_powerup_drop_rates() {
         var_1.checked = 1;
         level.score_to_drop = level.score_to_drop + level.power_up_drop_score;
 
-        if(var_1 scripts\cp\utility::is_consumable_active("more_power_up_drops"))
+        if(var_1 scripts\cp\utility::is_consumable_active("more_power_up_drops")) {
           level.powerup_drop_increment = level.powerup_drop_increment - 5;
+        }
       }
     }
 
@@ -106,10 +114,11 @@ read_loot_table() {
   level.loot_icon = [];
   level.loot_id = [];
 
-  if(isDefined(level.power_up_table))
+  if(isDefined(level.power_up_table)) {
     var_0 = level.power_up_table;
-  else
+  } else {
     var_0 = "cp/zombies/zombie_loot.csv";
+  }
 
   for(var_1 = 1; var_1 <= 100; var_1++) {
     var_2 = table_look_up(var_0, var_1, 2);
@@ -143,8 +152,9 @@ read_loot_table() {
 
     var_10 = table_look_up(var_0, var_1, 3);
 
-    if(!isDefined(level._effect[var_10]))
+    if(!isDefined(level._effect[var_10])) {
       level._effect[var_10] = loadfx(var_10);
+    }
 
     level.loot_fx[var_9] = var_10;
     var_11 = table_look_up(var_0, var_1, 1);
@@ -171,8 +181,9 @@ convert_to_float_array(var_0) {
   var_0 = strtok(var_0, " ");
   var_1 = [];
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++)
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_1[var_2] = float(var_0[var_2]);
+  }
 
   return var_1;
 }
@@ -180,22 +191,25 @@ convert_to_float_array(var_0) {
 get_weight_sum(var_0) {
   var_1 = 0;
 
-  foreach(var_3 in var_0)
-  var_1 = var_1 + var_3;
+  foreach(var_3 in var_0) {
+    var_1 = var_1 + var_3;
+  }
 
   return var_1;
 }
 
 drop_loot(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(var_2 == "none")
+  if(var_2 == "none") {
     return 0;
+  }
 
   var_0 = getclosestpointonnavmesh(var_0);
   var_6 = scripts\engine\utility::is_true(var_3);
   var_7 = create_loot_model(var_0);
 
-  if(!isDefined(var_7))
+  if(!isDefined(var_7)) {
     return 0;
+  }
 
   var_7.fnf_consumable_active = 0;
 
@@ -211,8 +225,9 @@ drop_loot(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7.fxname = var_11;
   var_12 = (0, 0, 0);
 
-  if(isDefined(var_1) && var_1 scripts\cp\utility::is_consumable_active("more_power_up_drops"))
+  if(isDefined(var_1) && var_1 scripts\cp\utility::is_consumable_active("more_power_up_drops")) {
     var_1 scripts\cp\utility::notify_used_consumable("more_power_up_drops");
+  }
 
   if(isDefined(var_4)) {
     level.powerup_drop_increment = level.powerup_drop_increment * 1.14;
@@ -228,19 +243,22 @@ drop_loot(var_0, var_1, var_2, var_3, var_4, var_5) {
   } else {
     var_0 = var_0 + (0, 0, 50);
 
-    if(scripts\engine\utility::is_true(var_7.fnf_consumable_active))
+    if(scripts\engine\utility::is_true(var_7.fnf_consumable_active)) {
       var_7.fnffx = spawnfx(level._effect["powerup_additive_fx"], var_0 + (0, 0, -10));
+    }
 
     var_7.fx = spawnfx(scripts\engine\utility::getfx(var_11), var_0);
 
-    if(isDefined(var_12))
+    if(isDefined(var_12)) {
       var_7.fx.angles = var_12;
+    }
   }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_7.owner = var_1;
-  else
+  } else {
     var_7.owner = level.players[0];
+  }
 
   var_7 notify("activate");
 
@@ -259,16 +277,18 @@ drop_loot(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7 thread loot_think(var_7);
   var_13 = get_index_for_powerup(var_2);
 
-  if(isDefined(var_13) && scripts\engine\utility::is_true(var_5))
+  if(isDefined(var_13) && scripts\engine\utility::is_true(var_5)) {
     update_power_up_drop_time(var_13);
+  }
 
   level thread cleanuppowerup(var_7);
   return 1;
 }
 
 loot_fly_to_player_enabled() {
-  if(scripts\engine\utility::is_true(level.disable_loot_fly_to_player))
+  if(scripts\engine\utility::is_true(level.disable_loot_fly_to_player)) {
     return 0;
+  }
 
   return 1;
 }
@@ -279,8 +299,9 @@ moveeffecttoclosestplayer(var_0) {
   var_0.fx setModel("tag_origin");
   wait 0.1;
 
-  if(scripts\engine\utility::is_true(var_0.fnf_consumable_active))
+  if(scripts\engine\utility::is_true(var_0.fnf_consumable_active)) {
     playFXOnTag(level._effect["powerup_additive_fx"], var_0.fx, "tag_origin");
+  }
 
   playFXOnTag(scripts\engine\utility::getfx(var_0.fxname), var_0.fx, "tag_origin");
   var_1 = scripts\engine\utility::getclosest(var_0.origin, level.players);
@@ -288,8 +309,9 @@ moveeffecttoclosestplayer(var_0) {
   var_3 = 300;
   var_4 = var_2 / var_3;
 
-  if(var_4 < 0.05)
+  if(var_4 < 0.05) {
     var_4 = 0.05;
+  }
 
   var_5 = getclosestpointonnavmesh(scripts\engine\utility::drop_to_ground(var_1.origin, 32, -100)) + (0, 0, 50);
   var_0.fx moveTo(var_5, var_4);
@@ -302,22 +324,26 @@ moveeffecttoclosestplayer(var_0) {
 cleanuppowerup(var_0) {
   var_0 scripts\engine\utility::waittill_any_timeout(get_loot_time_out(), "picked_up");
 
-  if(scripts\engine\utility::is_true(var_0.fnf_consumable_active))
+  if(scripts\engine\utility::is_true(var_0.fnf_consumable_active)) {
     playFX(level._effect["pickup_fnfmod"], var_0.origin + (0, 0, 50));
-  else
+  } else {
     playFX(level._effect["pickup"], var_0.origin + (0, 0, 50));
+  }
 
-  if(isDefined(var_0.fx))
+  if(isDefined(var_0.fx)) {
     var_0.fx delete();
+  }
 
-  if(isDefined(var_0.fnffx))
+  if(isDefined(var_0.fnffx)) {
     var_0.fnffx delete();
+  }
 
   wait 0.5;
   var_0.fnf_consumable_active = 0;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
   var_0 notify("loot_deleted");
 }
@@ -346,30 +372,35 @@ loot_fx_handler() {
     self.fx setfxkilldefondelete();
   }
 
-  if(isDefined(self) && isDefined(self.fx))
+  if(isDefined(self) && isDefined(self.fx)) {
     self.fx delete();
+  }
 
-  if(isDefined(self) && isDefined(self.fnffx))
+  if(isDefined(self) && isDefined(self.fnffx)) {
     self.fnffx delete();
+  }
 }
 
 get_loot_time_out() {
-  if(isDefined(level.loot_time_out))
+  if(isDefined(level.loot_time_out)) {
     return level.loot_time_out;
+  }
 
   return 30;
 }
 
 get_index_for_powerup(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "kill_generic_zombie";
+  }
 
   var_2 = 0;
   var_3 = level.loot_info[var_1]["contents"].size;
 
   for(var_2 = 0; var_2 < var_3; var_2++) {
-    if(level.loot_info[var_1]["contents"][var_2]["value"] == var_0)
+    if(level.loot_info[var_1]["contents"][var_2]["value"] == var_0) {
       return var_2;
+    }
   }
 
   return 0;
@@ -398,8 +429,9 @@ create_loot_model(var_0) {
 }
 
 get_loot_fx(var_0) {
-  if(!isDefined(level.loot_fx[var_0.content]))
+  if(!isDefined(level.loot_fx[var_0.content])) {
     return "vfx_loot_ace_hearts";
+  }
 
   return level.loot_fx[var_0.content];
 }
@@ -408,8 +440,9 @@ loot_think(var_0) {
   var_0 endon("loot_deleted");
   var_1 = var_0 scripts\engine\utility::waittill_any_timeout(get_loot_time_out(), "picked_up");
 
-  if(var_1 == "picked_up")
+  if(var_1 == "picked_up") {
     thread process_loot_content(var_0.owner, var_0.content, var_0, 1);
+  }
 }
 
 loot_pick_up_monitor(var_0) {
@@ -446,8 +479,9 @@ process_loot_content(var_0, var_1, var_2, var_3) {
       break;
     case "fire":
       if(isDefined(level.fire_sale_func)) {
-        if(isDefined(var_0.temporal_increase))
+        if(isDefined(var_0.temporal_increase)) {
           var_6 = int(var_6) * var_0.temporal_increase;
+        }
 
         level thread scripts\cp\cp_vo::try_to_play_vo("powerup_firesale", "zmb_powerup_vo");
         var_2 playSound("zmb_powerup_fire_sale");
@@ -456,16 +490,18 @@ process_loot_content(var_0, var_1, var_2, var_3) {
 
       break;
     case "grenade":
-      if(isDefined(var_0.temporal_increase))
+      if(isDefined(var_0.temporal_increase)) {
         var_6 = int(var_6) * var_0.temporal_increase;
+      }
 
       level thread scripts\cp\cp_vo::try_to_play_vo("powerup_infinitegrenades", "zmb_powerup_vo");
       var_2 playSound("zmb_powerup_infinite_grenades");
       level thread give_infinite_grenade(var_4, int(var_6), var_7);
       break;
     case "infinite":
-      if(isDefined(var_0.temporal_increase))
+      if(isDefined(var_0.temporal_increase)) {
         var_6 = int(var_6) * var_0.temporal_increase;
+      }
 
       level thread scripts\cp\cp_vo::try_to_play_vo("powerup_infiniteammo", "zmb_powerup_vo");
       var_2 playSound("zmb_powerup_infinite_ammo");
@@ -495,8 +531,9 @@ process_loot_content(var_0, var_1, var_2, var_3) {
       level thread scale_earned_cash(var_0, var_4, int(var_6), var_7);
       break;
     case "instakill":
-      if(isDefined(var_0.temporal_increase))
+      if(isDefined(var_0.temporal_increase)) {
         var_6 = int(var_6) * var_0.temporal_increase;
+      }
 
       level thread scripts\cp\cp_vo::try_to_play_vo("powerup_instakill", "zmb_powerup_vo");
       var_2 playSound("zmb_powerup_instakill");
@@ -519,19 +556,22 @@ process_loot_content(var_0, var_1, var_2, var_3) {
     default:
   }
 
-  if(scripts\engine\utility::is_true(var_3))
+  if(scripts\engine\utility::is_true(var_3)) {
     var_0 scripts\cp\cp_merits::processmerit("mt_powerup_grabs");
+  }
 
   var_0 thread scripts\cp\cp_hud_message::tutorial_lookup_func("powerups");
   scripts\engine\utility::waitframe();
 
-  if(var_9)
+  if(var_9) {
     display_powerup_popup(var_8);
+  }
 }
 
 get_loot_content(var_0, var_1, var_2) {
-  if(!isDefined(level.loot_info[var_0]))
+  if(!isDefined(level.loot_info[var_0])) {
     return undefined;
+  }
 
   var_3 = gettime();
   var_4 = choose_powerup(var_0, var_3, var_1);
@@ -582,8 +622,9 @@ choose_powerup(var_0, var_1, var_2) {
           break;
       case "upgrade":
         if((scripts\engine\utility::is_true(level.power_up_drop_override) || var_1 - var_7 >= 600000) && var_3 >= 15) {
-          if(!scripts\cp\utility::is_codxp())
+          if(!scripts\cp\utility::is_codxp()) {
             level.allowed_powerups[level.allowed_powerups.size] = var_5;
+          }
 
           break;
         } else
@@ -617,8 +658,9 @@ choose_powerup(var_0, var_1, var_2) {
     }
   }
 
-  if(level.allowed_powerups.size < 1)
+  if(level.allowed_powerups.size < 1) {
     return undefined;
+  }
 
   var_9 = level.allowed_powerups[get_loot_index_based_on_weights(var_0)];
   var_10 = level.loot_info[var_0]["contents"][var_9]["value"];
@@ -642,8 +684,9 @@ get_loot_index_based_on_weights(var_0) {
     var_3 = int(level.allowed_powerups[var_2]);
     var_5 = var_5 + level.loot_info[var_0]["weights"][var_3];
 
-    if(var_5 >= var_4)
+    if(var_5 >= var_4) {
       return var_2;
+    }
   }
 }
 
@@ -676,8 +719,9 @@ update_enemy_killed_event(var_0, var_1, var_2) {
     return;
   }
   if(isDefined(level.invalid_spawn_volume_array)) {
-    if(!scripts\cp\cp_weapon::isinvalidzone(var_1, level.invalid_spawn_volume_array, undefined, undefined, 1))
+    if(!scripts\cp\cp_weapon::isinvalidzone(var_1, level.invalid_spawn_volume_array, undefined, undefined, 1)) {
       return;
+    }
   } else if(!scripts\cp\cp_weapon::isinvalidzone(var_1, undefined, undefined, undefined, 1)) {
     return;
   }
@@ -685,23 +729,27 @@ update_enemy_killed_event(var_0, var_1, var_2) {
   var_3 = undefined;
   var_6 = 0;
 
-  if(var_2 scripts\cp\utility::is_consumable_active("more_power_up_drops"))
+  if(var_2 scripts\cp\utility::is_consumable_active("more_power_up_drops")) {
     var_7 = level.score_to_drop * 0.7;
-  else
+  } else {
     var_7 = level.score_to_drop;
+  }
 
   for(var_8 = 0; var_8 < var_5.size; var_8++) {
-    if(isDefined(var_5[var_8].total_currency_earned))
+    if(isDefined(var_5[var_8].total_currency_earned)) {
       var_6 = var_6 + var_5[var_8].total_currency_earned;
+    }
   }
 
   var_9 = 0;
 
-  if(var_6 > var_7 && !var_9)
+  if(var_6 > var_7 && !var_9) {
     var_3 = get_loot_content("kill_" + var_0, var_1);
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level thread drop_loot(var_1, var_2, var_3, undefined, var_6, 1);
+  }
 }
 
 update_power_up_drop_time(var_0) {
@@ -723,8 +771,9 @@ give_explosive_armor(var_0, var_1, var_2) {
     if(!isalive(var_4) || scripts\engine\utility::is_true(var_4.inlaststand)) {
       continue;
     }
-    if(!scripts\engine\utility::is_true(var_4.has_explosive_armor))
+    if(!scripts\engine\utility::is_true(var_4.has_explosive_armor)) {
       thread give_player_explosive_armor(var_4, var_0);
+    }
   }
 }
 
@@ -799,8 +848,9 @@ deactivate_explosive_armor(var_0, var_1) {
   scripts\engine\utility::flag_clear("explosive_armor");
   level.explosive_touch = undefined;
 
-  foreach(var_3 in level.players)
-  var_3.has_explosive_armor = undefined;
+  foreach(var_3 in level.players) {
+    var_3.has_explosive_armor = undefined;
+  }
 }
 
 damage_enemies_in_radius() {
@@ -886,8 +936,9 @@ outline_all_enemies(var_0) {
 
       scripts\cp\cp_outline::enable_outline_for_players(var_3, level.players, 4, 0, 0, "high");
 
-      if(var_4 % 2 == 0)
+      if(var_4 % 2 == 0) {
         wait 0.05;
+      }
     }
 
     wait 0.2;
@@ -915,15 +966,17 @@ give_infinite_grenade(var_0, var_1, var_2) {
   level thread deactivate_infinite_grenade(var_0, var_1);
   level.active_power_ups["infinite_grenades"] = 1;
 
-  foreach(var_4 in level.players)
-  thread apply_infinite_grenade_effects(var_4);
+  foreach(var_4 in level.players) {
+    thread apply_infinite_grenade_effects(var_4);
+  }
 }
 
 apply_fire_sale_effects(var_0) {
-  if(isDefined(var_0.temporal_increase))
+  if(isDefined(var_0.temporal_increase)) {
     var_0 thread power_icon_active(30 * var_0.temporal_increase, "fire_30");
-  else
+  } else {
     var_0 thread power_icon_active(30, "fire_30");
+  }
 }
 
 apply_infinite_grenade_effects(var_0) {
@@ -931,10 +984,11 @@ apply_infinite_grenade_effects(var_0) {
   var_0.has_infinite_grenade = 1;
   var_0 scripts\cp\powers\coop_powers::power_adjustcharges(1, "primary", 1);
 
-  if(isDefined(var_0.temporal_increase))
+  if(isDefined(var_0.temporal_increase)) {
     var_0 thread power_icon_active(30 * var_0.temporal_increase, "grenade_30");
-  else
+  } else {
     var_0 thread power_icon_active(30, "grenade_30");
+  }
 }
 
 deactivate_infinite_grenade(var_0, var_1) {
@@ -965,8 +1019,9 @@ give_infinite_ammo(var_0, var_1, var_2) {
   level.active_power_ups["infinite_ammo"] = 1;
   level thread deactivate_infinite_ammo(var_0, var_1);
 
-  foreach(var_4 in level.players)
-  thread apply_infinite_ammo_effects(var_4);
+  foreach(var_4 in level.players) {
+    thread apply_infinite_ammo_effects(var_4);
+  }
 }
 
 apply_infinite_ammo_effects(var_0) {
@@ -975,10 +1030,11 @@ apply_infinite_ammo_effects(var_0) {
   var_1 = var_0 ammo_round_up();
   var_0 thread unlimited_ammo(var_1, "infinite_20");
 
-  if(isDefined(var_0.temporal_increase))
+  if(isDefined(var_0.temporal_increase)) {
     var_0 thread power_icon_active(20 * var_0.temporal_increase, "infinite_20");
-  else
+  } else {
     var_0 thread power_icon_active(20, "infinite_20");
+  }
 }
 
 deactivate_infinite_ammo(var_0, var_1) {
@@ -991,13 +1047,15 @@ deactivate_infinite_ammo(var_0, var_1) {
     level.infinite_ammo = undefined;
     level notify("deactivated" + var_0);
 
-    foreach(var_4 in level.players)
-    var_4.has_infinite_ammo = undefined;
+    foreach(var_4 in level.players) {
+      var_4.has_infinite_ammo = undefined;
+    }
   }
 
   foreach(var_4 in level.players) {
-    if(var_4 scripts\cp\utility::isinfiniteammoenabled())
+    if(var_4 scripts\cp\utility::isinfiniteammoenabled()) {
       var_4 scripts\cp\utility::enable_infinite_ammo(0);
+    }
   }
 }
 
@@ -1059,8 +1117,9 @@ deactivate_left_power(var_0, var_1, var_2, var_3) {
   level notify("deactivated" + var_3);
   scripts\cp\powers\coop_powers::removepower(var_2);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     thread scripts\cp\powers\coop_powers::givepower(var_1, "secondary", undefined, undefined, undefined, undefined, 0);
+  }
 }
 
 give_ammo() {
@@ -1080,8 +1139,9 @@ give_max_ammo_to_player(var_0) {
   foreach(var_3 in var_1) {
     var_0 givemaxammo(var_3);
 
-    if(weaponmaxammo(var_3) == weaponclipsize(var_3))
+    if(weaponmaxammo(var_3) == weaponclipsize(var_3)) {
       var_0 setweaponammoclip(var_3, weaponclipsize(var_3));
+    }
   }
 
   var_5 = getarraykeys(var_0.powers);
@@ -1110,17 +1170,19 @@ activate_instakill(var_0, var_1, var_2, var_3) {
   level thread deactivate_instakill(var_1, var_2);
   level.active_power_ups["instakill"] = 1;
 
-  foreach(var_5 in level.players)
-  thread apply_instakill_effects(var_5);
+  foreach(var_5 in level.players) {
+    thread apply_instakill_effects(var_5);
+  }
 }
 
 apply_instakill_effects(var_0) {
   var_0.instakill = 1;
 
-  if(isDefined(var_0.temporal_increase))
+  if(isDefined(var_0.temporal_increase)) {
     var_0 thread power_icon_active(30 * var_0.temporal_increase, "instakill_30");
-  else
+  } else {
     var_0 thread power_icon_active(30, "instakill_30");
+  }
 }
 
 deactivate_instakill(var_0, var_1) {
@@ -1129,8 +1191,9 @@ deactivate_instakill(var_0, var_1) {
   scripts\engine\utility::waittill_any_timeout(var_1, "deactivated" + var_0);
   level notify("deactivated" + var_0);
 
-  foreach(var_3 in level.players)
-  var_3.instakill = undefined;
+  foreach(var_3 in level.players) {
+    var_3.instakill = undefined;
+  }
 
   level.insta_kill = undefined;
   level.active_power_ups["instakill"] = 0;
@@ -1144,22 +1207,25 @@ scale_earned_cash(var_0, var_1, var_2, var_3) {
   level.active_power_ups["double_money"] = 1;
   level.cash_scalar = 2;
 
-  if(isDefined(var_0.temporal_increase))
+  if(isDefined(var_0.temporal_increase)) {
     level thread deactivate_scaled_cash(var_1, 30 * var_0.temporal_increase, var_2);
-  else
+  } else {
     level thread deactivate_scaled_cash(var_1, 30, var_2);
+  }
 
-  foreach(var_5 in level.players)
-  thread apply_double_money_effects(var_5);
+  foreach(var_5 in level.players) {
+    thread apply_double_money_effects(var_5);
+  }
 }
 
 apply_double_money_effects(var_0) {
   var_0.double_money = 1;
 
-  if(isDefined(var_0.temporal_increase))
+  if(isDefined(var_0.temporal_increase)) {
     var_0 thread power_icon_active(30 * var_0.temporal_increase, "cash_2");
-  else
+  } else {
     var_0 thread power_icon_active(30, "cash_2");
+  }
 }
 
 deactivate_scaled_cash(var_0, var_1, var_2) {
@@ -1172,8 +1238,9 @@ deactivate_scaled_cash(var_0, var_1, var_2) {
     level.cash_scalar = 1;
     level.active_power_ups["double_money"] = 0;
 
-    foreach(var_5 in level.players)
-    var_5.double_money = undefined;
+    foreach(var_5 in level.players) {
+      var_5.double_money = undefined;
+    }
   }
 }
 
@@ -1209,8 +1276,9 @@ get_fx_points(var_0, var_1, var_2, var_3, var_4) {
     var_9 = scripts\engine\utility::get_array_of_closest(var_8.origin, level.players, undefined, 1, var_4, 1);
 
     if(var_9.size >= 1) {
-      if(!isDefined(var_8.angles))
+      if(!isDefined(var_8.angles)) {
         var_8.angles = (0, 0, 0);
+      }
 
       var_10 = scripts\engine\utility::spawn_tag_origin(var_8.origin, var_8.angles);
       var_10 show();
@@ -1243,22 +1311,24 @@ kill_closest_enemies(var_0, var_1) {
   scripts\engine\utility::waitframe();
   var_4 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
 
-  foreach(var_6 in level.players)
-  var_6 scripts\cp\utility::adddamagemodifier("nuke", 0.0, 0);
+  foreach(var_6 in level.players) {
+    var_6 scripts\cp\utility::adddamagemodifier("nuke", 0.0, 0);
+  }
 
   var_8 = sortbydistance(var_4, var_2);
   var_9 = 400;
 
-  if(isDefined(level.cash_scalar))
+  if(isDefined(level.cash_scalar)) {
     var_9 = 400 * level.cash_scalar;
+  }
 
   foreach(var_11 in var_8) {
     if(is_immune_against_nuke(var_11)) {
       continue;
     }
-    if(scripts\engine\utility::is_true(var_11.isfrozen))
+    if(scripts\engine\utility::is_true(var_11.isfrozen)) {
       var_11 dodamage(var_11.health + 100, var_11.origin);
-    else {
+    } else {
       var_11.ignoreall = 1;
       var_11.is_burning = 1;
       var_11.nocorpse = undefined;
@@ -1276,8 +1346,9 @@ kill_closest_enemies(var_0, var_1) {
     var_6 scripts\cp\utility::removedamagemodifier("nuke", 0);
 
     if(!scripts\engine\utility::is_true(level.forced_nuke)) {
-      if(!scripts\cp\cp_laststand::player_in_laststand(var_6))
+      if(!scripts\cp\cp_laststand::player_in_laststand(var_6)) {
         var_6 scripts\cp\cp_persistence::give_player_currency(var_9, undefined, undefined, 1, "nuke");
+      }
     }
   }
 
@@ -1311,8 +1382,9 @@ nuke_fx(var_0, var_1) {
   wait 5;
 
   foreach(var_4 in var_1) {
-    foreach(var_6 in level.players)
-    stopfxontagforclients(level._effect["big_explo"], var_4, "tag_origin", var_6);
+    foreach(var_6 in level.players) {
+      stopfxontagforclients(level._effect["big_explo"], var_4, "tag_origin", var_6);
+    }
 
     var_4 delete();
     scripts\engine\utility::waitframe();
@@ -1373,8 +1445,9 @@ hide_power_icon(var_0, var_1, var_2, var_3) {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 60;
+  }
 
   var_4 = 5.5;
   var_0 = var_0 - var_4;
@@ -1388,8 +1461,9 @@ hide_power_icon(var_0, var_1, var_2, var_3) {
   level scripts\engine\utility::waittill_any_timeout(var_4, "deactivated" + var_1);
   level notify("power_up_deactivated");
 
-  if(isDefined(self.powerupicons[var_1]))
+  if(isDefined(self.powerupicons[var_1])) {
     self.powerupicons[var_1] = undefined;
+  }
 
   self notify("remove " + var_1 + " icon");
   self setclientomnvarbit("zm_active_powerups", var_2 - 1, 0);
@@ -1400,19 +1474,22 @@ hidecarryiconongameend() {
   self endon("remove_carryIcon");
   level waittill("game_ended");
 
-  if(isDefined(self.carryicon))
+  if(isDefined(self.carryicon)) {
     self.carryicon.alpha = 0;
+  }
 }
 
 is_in_active_volume(var_0) {
-  if(!isDefined(level.active_spawn_volumes))
+  if(!isDefined(level.active_spawn_volumes)) {
     return 1;
+  }
 
   var_1 = sortbydistance(level.active_spawn_volumes, var_0);
 
   foreach(var_3 in var_1) {
-    if(ispointinvolume(var_0, var_3))
+    if(ispointinvolume(var_0, var_3)) {
       return 1;
+    }
   }
 
   return 0;
@@ -1423,8 +1500,9 @@ ammo_round_up() {
   self endon("disconnect");
   var_0 = [];
 
-  foreach(var_2 in self.weaponlist)
-  var_0[var_2] = self getammocount(var_2);
+  foreach(var_2 in self.weaponlist) {
+    var_0[var_2] = self getammocount(var_2);
+  }
 
   return var_0;
 }
@@ -1434,8 +1512,9 @@ unlimited_ammo(var_0, var_1) {
   self endon("disconnect");
   level endon("deactivated" + var_1);
 
-  if(!isDefined(self.weaponlist))
+  if(!isDefined(self.weaponlist)) {
     self.weaponlist = self getweaponslistprimaries();
+  }
 
   scripts\cp\utility::enable_infinite_ammo(1);
 
@@ -1469,8 +1548,9 @@ weapon_no_unlimited_check(var_0) {
   var_1 = 1;
 
   foreach(var_3 in level.opweaponsarray) {
-    if(var_0 == var_3)
+    if(var_0 == var_3) {
       var_1 = 0;
+    }
   }
 
   return var_1;
@@ -1479,6 +1559,7 @@ weapon_no_unlimited_check(var_0) {
 do_screen_flash() {
   scripts\engine\utility::waitframe();
 
-  if(isDefined(self) && scripts\cp\utility::has_tag(self.model, "tag_eye"))
+  if(isDefined(self) && scripts\cp\utility::has_tag(self.model, "tag_eye")) {
     playfxontagforclients(level._effect["vfx_screen_flash"], self, "tag_eye", self);
+  }
 }

@@ -62,8 +62,9 @@ _id_5A9C() {
   scripts\engine\utility::flag_clear("outdoor_surface_physics_on");
   thread scripts\sp\maps\rogue\rogue_util::_id_1AC5("green");
 
-  foreach(var_5 in var_2)
-  var_5 scripts\sp\utility::_id_6224();
+  foreach(var_5 in var_2) {
+    var_5 scripts\sp\utility::_id_6224();
+  }
 }
 
 _id_EA57() {
@@ -80,16 +81,17 @@ _id_5A9D() {
     var_0 = scripts\sp\utility::_id_78AA(level.player.origin, "allies");
     var_1 = distance2d(level.player.origin, var_0.origin);
 
-    if(var_1 <= 64)
+    if(var_1 <= 64) {
       level.player scripts\sp\utility::_id_D2CD(70, 0.2);
-    else if(var_1 <= 128)
+    } else if(var_1 <= 128) {
       level.player scripts\sp\utility::_id_D2CD(75, 0.2);
-    else if(var_1 <= 256)
+    } else if(var_1 <= 256) {
       level.player scripts\sp\utility::_id_D2CD(80, 0.2);
-    else if(var_1 <= 512)
+    } else if(var_1 <= 512) {
       level.player scripts\sp\utility::_id_D2CD(90, 0.2);
-    else
+    } else {
       level.player scripts\sp\utility::_id_D2CD(100, 0.2);
+    }
 
     wait 0.2;
   }
@@ -100,8 +102,9 @@ _id_5A9D() {
 _id_59FB() {
   var_0 = getEntArray("airlock_door_collision", "targetname");
 
-  while(distance2d(var_0[0].origin, level.player.origin) > 450)
+  while(distance2d(var_0[0].origin, level.player.origin) > 450) {
     wait 0.05;
+  }
 
   scripts\engine\utility::exploder("reachairlock");
 }
@@ -135,23 +138,25 @@ _id_10AD4(var_0, var_1) {
   var_0 scripts\sp\anim::_id_1F35(self, "array_2_exit");
   var_1 scripts\sp\anim::_id_1F17(self, "dorm_airlock_entrance_run");
 
-  if(self == level._id_B4F9)
+  if(self == level._id_B4F9) {
     _id_B4FA(var_1);
-  else {
+  } else {
     level notify("first_guy_in");
     scripts\sp\utility::_id_65E1("playing_dorm_intro");
     var_1 scripts\sp\anim::_id_1F35(self, "dorm_airlock_entrance_run");
 
-    if(isDefined(self._id_2271))
+    if(isDefined(self._id_2271)) {
       self._id_2271 notify("stop_array_idle");
+    }
 
     var_1 thread scripts\sp\anim::_id_1EEA(self, "dorm_airlock_entrance_idle", "airlock_open");
   }
 }
 
 _id_5A8B() {
-  foreach(var_1 in level._id_10AC8)
-  var_1 scripts\sp\utility::_id_65E0("playing_dorm_intro");
+  foreach(var_1 in level._id_10AC8) {
+    var_1 scripts\sp\utility::_id_65E0("playing_dorm_intro");
+  }
 
   level waittill("first_guy_in");
   var_3 = getEnt("dorm_animnode", "targetname");
@@ -218,15 +223,16 @@ _id_5A78(var_0, var_1) {
   self _meth_82B0(scripts\sp\utility::_id_7DC1("dorm_approach_land"), 0.85);
   var_1 scripts\sp\anim::_id_1F17(self, "dorm_airlock_entrance_run");
 
-  if(self == level._id_B4F9)
+  if(self == level._id_B4F9) {
     _id_B4FA(var_1);
-  else {
+  } else {
     level notify("first_guy_in");
     scripts\sp\utility::_id_65E1("playing_dorm_intro");
     var_1 scripts\sp\anim::_id_1F35(self, "dorm_airlock_entrance_run");
 
-    if(isDefined(self._id_2271))
+    if(isDefined(self._id_2271)) {
       self._id_2271 notify("stop_array_idle");
+    }
 
     var_1 thread scripts\sp\anim::_id_1EEA(self, "dorm_airlock_entrance_idle", "airlock_open");
   }
@@ -251,8 +257,9 @@ _id_1ADC() {
   var_0 = scripts\engine\utility::getStruct("dorm_airlock_trig_org", "targetname");
   var_1 = squared(1200);
 
-  while(distancesquared(var_0.origin, level.player.origin) > var_1)
+  while(distancesquared(var_0.origin, level.player.origin) > var_1) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::flag_set("fake_burn_player");
   thread _id_A604();
@@ -288,8 +295,9 @@ _id_1ACC(var_0) {
   var_0 thread scripts\sp\anim::_id_1F35(var_2, "dorm_airlock_entrance_player");
   level waittill("start_ally_anims");
 
-  foreach(var_5 in level._id_10AC8)
-  var_5 scripts\sp\utility::_id_5522();
+  foreach(var_5 in level._id_10AC8) {
+    var_5 scripts\sp\utility::_id_5522();
+  }
 
   var_0 thread _id_DAE2(var_2);
   var_0 notify("player_arrived");
@@ -322,8 +330,9 @@ _id_D2E7(var_0, var_1) {
   scripts\engine\utility::flag_wait("player_jumped_chasm");
   scripts\engine\utility::delaythread(2, scripts\sp\maps\rogue\rogue_util::_id_404C);
 
-  foreach(var_3 in level._id_10AC8)
-  var_3 _meth_8250(0);
+  foreach(var_3 in level._id_10AC8) {
+    var_3 _meth_8250(0);
+  }
 
   thread scripts\engine\utility::exploder("Bigjump_01");
   var_5 = getgroundposition(level.player.origin, 32);
@@ -333,8 +342,9 @@ _id_D2E7(var_0, var_1) {
     wait 0.05;
   }
 
-  foreach(var_3 in level._id_10AC8)
-  var_3 _meth_8250(1);
+  foreach(var_3 in level._id_10AC8) {
+    var_3 _meth_8250(1);
+  }
 
   thread _id_1ADC();
   thread _id_5A8A(var_0, var_1);
@@ -353,8 +363,9 @@ _id_D2E7(var_0, var_1) {
   scripts\engine\utility::flag_set("player_in_scene");
   var_9 = getEnt("dormitory_run_rail_blocker", "targetname");
 
-  if(isDefined(var_9))
+  if(isDefined(var_9)) {
     var_9 delete();
+  }
 
   thread _id_D1BB();
   var_8 thread scripts\sp\anim::_id_1F35(var_8, "player_landing");
@@ -376,8 +387,9 @@ _id_A60F() {
   level endon("start_vo");
   level.player waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_D1BB() {
@@ -388,8 +400,9 @@ _id_D1BB() {
 }
 
 _id_5A8A(var_0, var_1) {
-  foreach(var_3 in level._id_10AC8)
-  var_3 thread _id_5A78(var_0, var_1);
+  foreach(var_3 in level._id_10AC8) {
+    var_3 thread _id_5A78(var_0, var_1);
+  }
 }
 
 _id_5A70(var_0) {
@@ -455,8 +468,9 @@ _id_5A96() {
   var_5 notify("player_arrived");
   var_5 notify("airlock_open");
 
-  foreach(var_1 in level._id_10AC8)
-  var_5 thread _id_1ADA(var_1);
+  foreach(var_1 in level._id_10AC8) {
+    var_5 thread _id_1ADA(var_1);
+  }
 
   _id_0B1F::_id_1374E("dormitory_entrance_airlock");
   waitforalltransients();
@@ -473,8 +487,9 @@ _id_1ADA(var_0) {
     return;
   }
 
-  if(isDefined(var_0._id_2271))
+  if(isDefined(var_0._id_2271)) {
     var_0._id_2271 notify("stop_array_idle");
+  }
 
   var_0 setgoalpos(var_0.origin);
 }
@@ -530,8 +545,9 @@ _id_5A9A() {
   scripts\engine\utility::array_thread(level._id_10AC8, scripts\sp\maps\rogue\rogue_util::_id_12984);
   _id_1ABB();
 
-  foreach(var_1 in level._id_10AC8)
-  var_1 _meth_8250(0);
+  foreach(var_1 in level._id_10AC8) {
+    var_1 _meth_8250(0);
+  }
 
   scripts\engine\utility::flag_wait("start_dorm_entrances");
   thread achievement_watcher();
@@ -572,8 +588,9 @@ _id_D1C8() {
   if(scripts\engine\utility::flag("all_dorm_scenes_complete")) {
     level.player scripts\sp\utility::_id_10350("asteroid_plr_letsgetthisshow");
 
-    if(distance(level.player.origin, level._id_13E12.origin) > 800)
+    if(distance(level.player.origin, level._id_13E12.origin) > 800) {
       level._id_13E12 scripts\sp\utility::_id_10346("asteroid_slt_okaywellberight");
+    }
   }
 }
 
@@ -600,8 +617,9 @@ _id_1ABB() {
   var_1 = scripts\engine\utility::flag_wait_any_return("dorm_door_peeked_open", "dorm_door_kicked_open");
 
   if(var_1 == "dorm_door_peeked_open") {
-    while(_id_0B1E::_id_794C("dorm_intro_airlock") <= 67)
+    while(_id_0B1E::_id_794C("dorm_intro_airlock") <= 67) {
       wait 0.05;
+    }
   } else {}
 
   thread _id_5A82();
@@ -612,8 +630,9 @@ _id_1ABB() {
   var_0 notify("stop_idles");
   var_2 = [level._id_B33B, level._id_B33E, level._id_13E12, level._id_B4F9];
 
-  foreach(var_4 in var_2)
-  var_0 thread _id_DD0E(var_4);
+  foreach(var_4 in var_2) {
+    var_0 thread _id_DD0E(var_4);
+  }
 
   scripts\engine\utility::flag_set("flashlight_desired");
   thread scripts\sp\maps\rogue\rogue_util::_id_61D3(0, 1);
@@ -625,24 +644,28 @@ _id_6DB9() {
   level endon("dorm_door_kicked_open");
   level endon("door_kick_start");
 
-  while(_id_0B1E::_id_794C("dorm_intro_airlock") <= 5)
+  while(_id_0B1E::_id_794C("dorm_intro_airlock") <= 5) {
     wait 0.05;
+  }
 
   scripts\engine\utility::delaythread(0.2, scripts\engine\utility::play_sound_in_space, "rogue_steam_hiss_medium_close_deep", (22706, 44681, -812));
   level.player clearclienttriggeraudiozone(2);
 
-  while(_id_0B1E::_id_794C("dorm_intro_airlock") <= 20)
+  while(_id_0B1E::_id_794C("dorm_intro_airlock") <= 20) {
     wait 0.05;
+  }
 
   thread scripts\engine\utility::play_sound_in_space("emt_rogue_sparks_runner", (22864, 44816, -821));
 
-  while(_id_0B1E::_id_794C("dorm_intro_airlock") <= 40)
+  while(_id_0B1E::_id_794C("dorm_intro_airlock") <= 40) {
     wait 0.05;
+  }
 
   thread scripts\engine\utility::play_sound_in_space("emt_rogue_sparks_runner", (22864, 44816, -821));
 
-  while(_id_0B1E::_id_794C("dorm_intro_airlock") <= 60)
+  while(_id_0B1E::_id_794C("dorm_intro_airlock") <= 60) {
     wait 0.05;
+  }
 
   level._id_5A23["dorm_intro_airlock"]._id_55F5 = 1;
   thread _id_0B1E::_id_59C9("dorm_intro_airlock");
@@ -657,10 +680,11 @@ _id_6DB8() {
 
 _id_6663() {
   for(var_0 = 0; var_0 < 50; var_0++) {
-    if(scripts\engine\utility::cointoss())
+    if(scripts\engine\utility::cointoss()) {
       playFX(level._effect["vfx_rogue_shiphall_spark_a"], (23205, 44915, -597));
-    else
+    } else {
       playFX(level._effect["vfx_rogue_shiphall_spark_a"], (23205, 44915, -597));
+    }
 
     wait(randomfloatrange(0.1, 0.3));
   }
@@ -722,9 +746,9 @@ _id_DD0E(var_0) {
   scripts\sp\anim::_id_1F17(var_0, "dorm_main_room_intro");
   scripts\sp\anim::_id_1F35(var_0, "dorm_main_room_intro");
 
-  if(var_0 != level._id_B4F9)
+  if(var_0 != level._id_B4F9) {
     scripts\sp\anim::_id_1EE0(var_0, "dorm_main_room_intro");
-  else {
+  } else {
     if(!scripts\engine\utility::flag("kickoff_dorm_intro_anims")) {
       scripts\sp\anim::_id_1EE0(var_0, "dorm_main_room_intro");
       scripts\engine\utility::flag_wait("kickoff_dorm_intro_anims");
@@ -900,8 +924,9 @@ _id_1100B(var_0) {
   var_0 endon("bail_on_media");
   wait 1;
 
-  for(var_1 = scripts\sp\utility::_id_7951(level.player.origin, level.player getplayerangles(), self.origin); var_1 <= 0.2 || !scripts\engine\utility::flag("dorm_player_in_scene"); var_1 = scripts\sp\utility::_id_7951(level.player.origin, level.player getplayerangles(), self.origin))
+  for(var_1 = scripts\sp\utility::_id_7951(level.player.origin, level.player getplayerangles(), self.origin); var_1 <= 0.2 || !scripts\engine\utility::flag("dorm_player_in_scene"); var_1 = scripts\sp\utility::_id_7951(level.player.origin, level.player getplayerangles(), self.origin)) {
     wait 0.2;
+  }
 
   var_0 notify("ipd_idle_stop");
 }
@@ -1080,8 +1105,9 @@ armory_delay_weapon_switch() {
 _id_2231() {
   thread _id_3D8C();
 
-  if(!scripts\engine\utility::flag("power_on"))
+  if(!scripts\engine\utility::flag("power_on")) {
     wait 2;
+  }
 
   level._id_B33E scripts\sp\maps\rogue\rogue_util::_id_12958();
   thread scripts\sp\maps\rogue\rogue_util::_id_9A6C(12, 12, 1, "stop_fake_armory_power");
@@ -1166,8 +1192,9 @@ _id_2FB4(var_0) {
       scripts\engine\utility::flag_set("bail_on_shuffle");
       level notify("bail_on_shuffle");
 
-      while(self._id_9CC0)
+      while(self._id_9CC0) {
         wait 0.1;
+      }
 
       self notify("time_for_scene");
       break;
@@ -1207,10 +1234,11 @@ _id_1CDF(var_0) {
   thread _id_E1CF();
   scripts\sp\utility::_id_51E1("casual_gun");
 
-  if(scripts\engine\utility::cointoss())
+  if(scripts\engine\utility::cointoss()) {
     var_3 = "rogue_poi_idle_A";
-  else
+  } else {
     var_3 = "rogue_poi_idle_B";
+  }
 
   if(self == level._id_13E12 && isDefined(self._id_10124)) {
     var_4 = scripts\engine\utility::getStruct("dorm_explore_node_xo_pitstop", "targetname");
@@ -1266,8 +1294,9 @@ _id_D349(var_0, var_1) {
 _id_D348(var_0, var_1) {
   var_0 endon("dorm_is_over");
 
-  for(var_2 = scripts\sp\utility::_id_7951(level.player.origin, level.player getplayerangles(), self.origin); var_2 <= 0.7 || !scripts\engine\utility::flag("dorm_player_in_kitchen"); var_2 = scripts\sp\utility::_id_7951(level.player.origin, level.player getplayerangles(), self.origin))
+  for(var_2 = scripts\sp\utility::_id_7951(level.player.origin, level.player getplayerangles(), self.origin); var_2 <= 0.7 || !scripts\engine\utility::flag("dorm_player_in_kitchen"); var_2 = scripts\sp\utility::_id_7951(level.player.origin, level.player getplayerangles(), self.origin)) {
     wait 0.05;
+  }
 
   var_0 notify(var_1);
 }
@@ -1294,8 +1323,9 @@ _id_D1C9() {
   level._id_B33E notify("stop_individual_explore");
 
   foreach(var_2 in level._id_10AC8) {
-    if(isDefined(var_2._id_69D9))
+    if(isDefined(var_2._id_69D9)) {
       var_2._id_69D9 notify("stop_explore_idle");
+    }
 
     var_2 scripts\sp\utility::anim_stopanimScripted();
   }
@@ -1304,11 +1334,13 @@ _id_D1C9() {
   var_4 = [level._id_13E12, level._id_B33B, level._id_B33E];
 
   foreach(var_2 in var_4) {
-    if(isDefined(var_2._id_1580))
+    if(isDefined(var_2._id_1580)) {
       var_2._id_1580 delete();
+    }
 
-    if(isDefined(var_2._id_CBB1))
+    if(isDefined(var_2._id_CBB1)) {
       var_2._id_CBB1 delete();
+    }
   }
 }
 
@@ -1320,8 +1352,9 @@ _id_CDFF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self notify("stop_reaction");
   self notify("stop_scene_cuz_player_left");
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_0 notify(var_6);
+  }
 
   level notify("dorm_scene_bailed");
 
@@ -1353,8 +1386,9 @@ _id_5A8E(var_0) {
   level endon("dorm_timeout");
   var_1 = 60;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = var_0;
+  }
 
   scripts\engine\utility::flag_wait_either("player_leaving_dorms", "all_dorm_scenes_complete");
 
@@ -1378,17 +1412,19 @@ _id_5A8E(var_0) {
 _id_1C14() {
   level endon("dorm_explore_finished");
 
-  if(!scripts\engine\utility::flag("timeout_occured_in_dorms"))
+  if(!scripts\engine\utility::flag("timeout_occured_in_dorms")) {
     scripts\engine\utility::flag_set("timeout_occured_in_dorms");
-  else
+  } else {
     return;
+  }
 
   level.player notify("reset_nag");
   _id_1C15();
   var_0 = getEnt("dorm_animnode", "targetname");
 
-  if(!scripts\engine\utility::flag("player_leaving_dorms"))
+  if(!scripts\engine\utility::flag("player_leaving_dorms")) {
     thread _id_B500();
+  }
 
   foreach(var_2 in level._id_10AC8) {
     var_2 scripts\sp\utility::_id_51E1("cqb");
@@ -1408,10 +1444,11 @@ _id_694F(var_0) {
     var_0 scripts\sp\anim::_id_1F0D(self, "dorm_main_exit_enter");
     thread _id_BE39();
 
-    if(!scripts\engine\utility::flag("player_sees_bodies"))
+    if(!scripts\engine\utility::flag("player_sees_bodies")) {
       thread _id_6984();
-    else
+    } else {
       thread _id_6986();
+    }
 
     var_0 scripts\sp\anim::_id_1F35(self, "dorm_main_exit_enter");
     var_0 scripts\sp\anim::_id_1EEA(self, "dorm_done_idle", "stop_dorm_done_idle");
@@ -1475,8 +1512,9 @@ _id_1C15() {
   level._id_B33E notify("stop_individual_explore");
 
   foreach(var_2 in level._id_10AC8) {
-    if(isDefined(var_2._id_69D9))
+    if(isDefined(var_2._id_69D9)) {
       var_2._id_69D9 notify("stop_explore_idle");
+    }
 
     var_2 scripts\sp\utility::anim_stopanimScripted();
     thread scripts\sp\anim::_id_1F12(var_2);
@@ -1497,8 +1535,9 @@ _id_4677() {
   thread scripts\sp\maps\rogue\rogue_util::_id_1AC5("red");
   scripts\engine\utility::delaythread(1, _id_0E4B::_id_1348D, 1);
 
-  foreach(var_1 in level._id_10AC8)
-  var_1 scripts\sp\utility::_id_DC45("raise");
+  foreach(var_1 in level._id_10AC8) {
+    var_1 scripts\sp\utility::_id_DC45("raise");
+  }
 
   thread toggle_dorm_flares();
 }
@@ -1526,8 +1565,9 @@ _id_4674() {
   level.player disableweaponpickup();
   level.player scripts\sp\utility::_id_F526("normal");
 
-  foreach(var_1 in level._id_10AC8)
-  var_1 scripts\sp\utility::_id_4145();
+  foreach(var_1 in level._id_10AC8) {
+    var_1 scripts\sp\utility::_id_4145();
+  }
 
   scripts\engine\utility::flag_clear("force_flashlights_on");
   scripts\engine\utility::flag_set("scbt_ignore_combat");
@@ -1568,8 +1608,9 @@ _id_4672() {
   _id_D1C9();
   var_6 = [var_1, var_2, level._id_B4F9, level._id_B33B, level._id_B33E, var_3];
 
-  foreach(var_8 in var_6)
-  var_0 thread _id_167C(var_8);
+  foreach(var_8 in var_6) {
+    var_0 thread _id_167C(var_8);
+  }
 
   var_0._id_A6FB = var_5;
   var_0._id_5978 = var_1;
@@ -1631,8 +1672,9 @@ _id_167C(var_0) {
   if(scripts\engine\utility::flag("player_grabbed_knife")) {
     return;
   }
-  if(isai(var_0))
+  if(isai(var_0)) {
     thread scripts\sp\anim::_id_1EEA(var_0, "corpse_hall_idle_1", "stop_idles");
+  }
 }
 
 _id_4673() {
@@ -1643,8 +1685,9 @@ _id_4673() {
   var_4 = var_0._id_5978;
   var_5 = 0;
 
-  if(_id_0A2F::_id_DA19())
+  if(_id_0A2F::_id_DA19()) {
     var_5 = 1;
+  }
 
   var_6 = scripts\sp\utility::_id_10639("player_rig");
   var_6 hide();
@@ -1660,23 +1703,26 @@ _id_4673() {
   level.player scripts\sp\maps\rogue\rogue_util::_id_DB2E(var_6, 0.5, 0, 0, 0, 0);
   var_7 = [level._id_B33B, level._id_B33E, level._id_B4F9, level._id_13E12, var_4, var_2];
 
-  foreach(var_9 in var_7)
-  var_0 thread _id_167D(var_9);
+  foreach(var_9 in var_7) {
+    var_0 thread _id_167D(var_9);
+  }
 
   var_11 = _id_0B1E::_id_794D("creep_hall_airlock");
   thread _id_466F();
   scripts\engine\utility::delaythread(8.5, _id_0B1F::_id_1AA9, "dormitory_exit_airlock", 1, var_4, var_11, 0);
   thread scripts\sp\maps\rogue\rogue_util::_id_9A6C(12, 12, 0, "never");
 
-  if(!var_5)
+  if(!var_5) {
     level.player thread _id_8303();
+  }
 
   var_12 = "corpse_hall_scene_2_keepknife";
 
-  if(getDvar("corpse_airlock_knifeforce") == "keep")
+  if(getDvar("corpse_airlock_knifeforce") == "keep") {
     var_12 = "corpse_hall_scene_2_keepknife";
-  else if(var_5 || getDvar("corpse_airlock_knifeforce") == "throw")
+  } else if(var_5 || getDvar("corpse_airlock_knifeforce") == "throw") {
     var_12 = "corpse_hall_scene_2_throwknife";
+  }
 
   var_0 scripts\sp\anim::_id_1F2C([var_6, var_3], var_12);
   scripts\sp\maps\rogue\rogue_util::_id_DAE1(var_6);
@@ -1687,10 +1733,11 @@ _id_4673() {
 _id_8303() {
   var_0 = "specialty_slasher";
 
-  if(!isDefined(self.perks[var_0]))
+  if(!isDefined(self.perks[var_0])) {
     self.perks[var_0] = 1;
-  else
+  } else {
     self.perks[var_0]++;
+  }
 
   self setperk(var_0, !isDefined(level.scriptperks[var_0]));
   scripts\sp\utility::_id_12641("weapon_iw7_knife_perk_tr");
@@ -1719,10 +1766,11 @@ _id_167D(var_0) {
   scripts\sp\anim::_id_1F35(var_0, "corpse_hall_scene_2");
 
   if(isai(var_0)) {
-    if(var_0 != level._id_13E12)
+    if(var_0 != level._id_13E12) {
       thread scripts\sp\anim::_id_1EEA(var_0, "corpse_hall_idle_2", "stop_corpse_airlock_idle");
-    else
+    } else {
       thread scripts\sp\anim::_id_1EEA(var_0, "corpse_hall_salt_ready_idle", "stop_corpse_airlock_idle");
+    }
   }
 }
 
@@ -1765,8 +1813,9 @@ _id_4A55() {
   thread _id_4A4E();
   thread _id_4A4D();
 
-  foreach(var_1 in level._id_10AC8)
-  thread scripts\sp\anim::_id_1F12(var_1);
+  foreach(var_1 in level._id_10AC8) {
+    thread scripts\sp\anim::_id_1F12(var_1);
+  }
 
   thread _id_0B1E::_id_59BE("creep_hall_airlock", undefined, 60, 1);
   level._id_5A23["creep_hall_airlock"]._id_C9F9 = 1;
@@ -1785,8 +1834,9 @@ _id_4A55() {
   var_6[2] = getEnt("creep_hall_box_2", "targetname");
 
   foreach(var_8 in var_6) {
-    if(isDefined(var_8))
+    if(isDefined(var_8)) {
       var_8 delete();
+    }
   }
 
   var_10 = getEnt("model_salter_grab_bot_restraint", "targetname");
@@ -1804,11 +1854,13 @@ _id_4A55() {
   thread _id_4A53();
   level waittill("door_peek_start");
 
-  while(_id_0B1E::_id_794C("creep_hall_airlock") <= 60)
+  while(_id_0B1E::_id_794C("creep_hall_airlock") <= 60) {
     wait 0.05;
+  }
 
-  if(!level.console)
+  if(!level.console) {
     waitforalltransients();
+  }
 
   level notify("creep_hall_airlockdoor_peek_disabled");
   level.player setclienttriggeraudiozonepartialwithfade("rogue_creep_mix", 4, "mix");
@@ -1820,8 +1872,9 @@ _id_4A55() {
   foreach(var_1 in level._id_10AC8) {
     var_1 _meth_83A1();
 
-    if(var_1 == level._id_13E12)
+    if(var_1 == level._id_13E12) {
       var_1 scripts\sp\utility::_id_1160F(getnode("creep_hallway_start" + var_1._id_111B7, "targetname"));
+    }
   }
 
   thread better_ally_pathing_in_hall();
@@ -1855,8 +1908,9 @@ _id_4A55() {
   var_3 thread _id_135BC(var_5);
   scripts\engine\utility::waitframe();
 
-  if(!var_5 scripts\sp\utility::_id_65DB("arm_l_destroyed"))
+  if(!var_5 scripts\sp\utility::_id_65DB("arm_l_destroyed")) {
     var_3 scripts\sp\anim::_id_1EE7(var_17, "creep_hall_grab_idle", "stop_creep_grab");
+  }
 
   scripts\engine\utility::flag_set("creep_vo_wait_3");
   var_17 = [var_16, var_10];
@@ -1941,10 +1995,11 @@ _id_AAC1() {
     return;
   }
   while(isDefined(var_0)) {
-    if(!scripts\engine\utility::flag("creep_vo_wait_3"))
+    if(!scripts\engine\utility::flag("creep_vo_wait_3")) {
       level._id_13E12 _id_137C3(var_0);
-    else
+    } else {
       wait 3;
+    }
 
     var_1 = var_0;
 
@@ -1960,8 +2015,9 @@ _id_AAC1() {
 }
 
 _id_137C3(var_0) {
-  while(level._id_13E12 istouching(var_0) == 0 && !scripts\engine\utility::flag("creep_vo_wait_3"))
+  while(level._id_13E12 istouching(var_0) == 0 && !scripts\engine\utility::flag("creep_vo_wait_3")) {
     wait 0.05;
+  }
 }
 
 _id_6A47() {
@@ -1974,8 +2030,9 @@ _id_6A47() {
   level._id_5A23["creep_hall_airlock"]._id_5A03 disconnectPaths();
 
   foreach(var_2 in level._id_10AC8) {
-    if(var_2 != level._id_13E12)
+    if(var_2 != level._id_13E12) {
       var_2 scripts\sp\utility::_id_51E1("cqb");
+    }
   }
 }
 
@@ -2013,9 +2070,9 @@ _id_4A4D() {
 }
 
 _id_7650() {
-  if(scripts\engine\utility::flag("power_on"))
+  if(scripts\engine\utility::flag("power_on")) {
     thread scripts\engine\utility::play_sound_in_space("c6_hostile_burst", level.player.origin + (9000, -20, 0));
-  else {
+  } else {
     scripts\engine\utility::flag_wait("power_on");
     wait(randomintrange(1, 3));
     thread scripts\engine\utility::play_sound_in_space("c6_hostile_burst", level.player.origin + (9000, -20, 0));
@@ -2023,9 +2080,9 @@ _id_7650() {
 
   wait 2.25;
 
-  if(scripts\engine\utility::flag("power_on"))
+  if(scripts\engine\utility::flag("power_on")) {
     thread scripts\engine\utility::play_sound_in_space("c6_0_inform_incoming_c6", level.player.origin + (20, -9000, 0));
-  else {
+  } else {
     scripts\engine\utility::flag_wait("power_on");
     wait(randomintrange(1, 3));
     thread scripts\engine\utility::play_sound_in_space("c6_0_inform_incoming_c6", level.player.origin + (20, -9000, 0));
@@ -2033,9 +2090,9 @@ _id_7650() {
 
   wait 1.25;
 
-  if(scripts\engine\utility::flag("power_on"))
+  if(scripts\engine\utility::flag("power_on")) {
     thread scripts\engine\utility::play_sound_in_space("c6_0_resp_ack_co_gnrc_affirm", level.player.origin + (6000, -6000, 0));
-  else {
+  } else {
     scripts\engine\utility::flag_wait("power_on");
     wait(randomintrange(1, 3));
     thread scripts\engine\utility::play_sound_in_space("c6_0_resp_ack_co_gnrc_affirm", level.player.origin + (6000, -6000, 0));
@@ -2070,8 +2127,9 @@ _id_EA8B(var_0) {
     var_3 = self gettagangles("tag_flash");
     var_4 = anglesToForward(var_3) * 92 + anglestoright(var_3) * randomintrange(-10, 10) + anglestoup(var_3) * randomintrange(-10, 10);
 
-    if(isDefined(var_0) && !var_0 scripts\sp\utility::_id_65DB("head_destroyed"))
+    if(isDefined(var_0) && !var_0 scripts\sp\utility::_id_65DB("head_destroyed")) {
       var_4 = anglesToForward(var_3) * 92 + anglestoup(var_3) * 10;
+    }
 
     var_1 = 0;
     magicbullet(self.primaryweapon, var_2, var_2 + var_4);
@@ -2097,38 +2155,45 @@ _id_F929() {
 _id_4A4F() {
   var_0 = getEntArray("creep_hall_light", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 setlightintensity(0);
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(0);
+  }
 
   level waittill("salter_grabbed");
 
-  foreach(var_2 in var_0)
-  var_2 setlightintensity(5);
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(5);
+  }
 
   while(!scripts\engine\utility::flag("shipping_go")) {
     scripts\engine\utility::flag_waitopen("power_on");
 
-    foreach(var_2 in var_0)
-    var_2 setlightintensity(0);
+    foreach(var_2 in var_0) {
+      var_2 setlightintensity(0);
+    }
 
     scripts\engine\utility::flag_wait("power_on");
 
-    foreach(var_2 in var_0)
-    var_2 setlightintensity(5);
+    foreach(var_2 in var_0) {
+      var_2 setlightintensity(5);
+    }
   }
 
-  foreach(var_2 in var_0)
-  var_2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
+  }
 }
 
 _id_4A50(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 0;
+  }
 
   var_6 = [var_0];
 
-  if(isDefined(self._id_2BAE))
+  if(isDefined(self._id_2BAE)) {
     var_6 = [var_0, self._id_2BAE];
+  }
 
   if(isDefined(var_4)) {
     thread scripts\sp\anim::_id_1EEA(self._id_2BAE, var_2, "stop_creep_idle");
@@ -2138,16 +2203,19 @@ _id_4A50(var_0, var_1, var_2, var_3, var_4, var_5) {
     scripts\sp\anim::_id_1F2C(var_6, var_1);
 
   if(var_5 || distance2d(level.player.origin, var_0.origin) > var_3) {
-    foreach(var_8 in var_6)
-    thread scripts\sp\anim::_id_1EEA(var_8, var_2, "stop_creep_idle");
+    foreach(var_8 in var_6) {
+      thread scripts\sp\anim::_id_1EEA(var_8, var_2, "stop_creep_idle");
+    }
   } else
     return;
 
-  while(distance2d(level.player.origin, var_0.origin) > var_3)
+  while(distance2d(level.player.origin, var_0.origin) > var_3) {
     wait 0.1;
+  }
 
-  if(!var_5)
+  if(!var_5) {
     self notify("stop_creep_idle");
+  }
 }
 
 _id_A5C0() {
@@ -2166,15 +2234,17 @@ _id_3BFB(var_0) {
   var_0 endon("stop_creep_grab");
   var_1 = 0;
 
-  for(var_2 = 200; var_1 < var_2; var_1 = var_1 + var_3)
+  for(var_2 = 200; var_1 < var_2; var_1 = var_1 + var_3) {
     self waittill("damage", var_3);
+  }
 
   scripts\sp\utility::_id_65E1("arm_l_destroyed");
 }
 
 _id_4A53() {
-  while(_id_0B1E::_id_794C("creep_hall_airlock") <= 42)
+  while(_id_0B1E::_id_794C("creep_hall_airlock") <= 42) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_wait("start_creep_vo");
   level.player scripts\sp\utility::_id_10350("asteroid_plr_werelookingfors");
@@ -2256,13 +2326,15 @@ _id_4A45() {
   level notify("stop_hand_holding_allies");
   var_1 = [level._id_B4F9, level._id_B33B, level._id_B33E];
 
-  foreach(var_3 in var_1)
-  var_3 _meth_82EE(getnode("shipping_start" + var_3._id_111B7, "targetname"));
+  foreach(var_3 in var_1) {
+    var_3 _meth_82EE(getnode("shipping_start" + var_3._id_111B7, "targetname"));
+  }
 
   setglobalsoundcontext("atmosphere", "helmet", 1);
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_2683();
+  }
 
   _id_F928();
   _id_4A4C();
@@ -2298,14 +2370,16 @@ _id_4A4C() {
 
   if(isDefined(level._id_4A57)) {
     foreach(var_2 in level._id_4A57) {
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         var_2 delete();
+      }
     }
   }
 
   foreach(var_2 in level._id_10AC8) {
-    if(isDefined(var_2._id_C381))
+    if(isDefined(var_2._id_C381)) {
       var_2.grenadeawareness = var_2._id_C381;
+    }
   }
 
   scripts\engine\utility::flag_clear("disable_alt_vision_calls");
@@ -2324,19 +2398,22 @@ _id_4A4A() {
   scripts\sp\maps\rogue\rogue_util::_id_119AF(0);
   thread scripts\sp\maps\rogue\rogue_util::remove_navigating_equipment();
 
-  foreach(var_1 in level._id_10AC8)
-  var_1 _meth_8250(0);
+  foreach(var_1 in level._id_10AC8) {
+    var_1 _meth_8250(0);
+  }
 
   var_3 = getEntArray("shipping_hallway_init_robots", "targetname");
   var_4 = [];
   var_5 = scripts\sp\utility::_id_7E72();
   var_6 = 6;
 
-  if(var_5 == "easy" || var_5 == "medium")
+  if(var_5 == "easy" || var_5 == "medium") {
     var_6 = 4;
+  }
 
-  for(var_7 = 0; var_7 < var_6; var_7++)
+  for(var_7 = 0; var_7 < var_6; var_7++) {
     var_4[var_7] = var_3[var_7] scripts\sp\utility::_id_10619(1);
+  }
 
   for(var_7 = 0; var_7 < var_4.size; var_7++) {
     var_4[var_7]._id_1FBB = "worker_bot";
@@ -2418,9 +2495,9 @@ _id_5A81() {
   var_0 = spawn("script_origin", level.player.origin);
   wait 0.5;
 
-  if(scripts\engine\utility::flag("power_on"))
+  if(scripts\engine\utility::flag("power_on")) {
     var_0 playSound("asteroid_anc_emergencybeaconactivated_r");
-  else {
+  } else {
     scripts\engine\utility::flag_wait("power_on");
     wait(randomintrange(2, 5));
     var_0 playSound("asteroid_anc_emergencybeaconactivated_r");
@@ -2428,9 +2505,9 @@ _id_5A81() {
 
   wait 25;
 
-  if(scripts\engine\utility::flag("power_on"))
+  if(scripts\engine\utility::flag("power_on")) {
     var_0 playSound("asteroid_anc_asteroiddestabilizationdetected_r");
-  else {
+  } else {
     scripts\engine\utility::flag_wait("power_on");
     wait(randomintrange(2, 5));
     var_0 playSound("asteroid_anc_asteroiddestabilizationdetected_r");
@@ -2438,9 +2515,9 @@ _id_5A81() {
 
   wait 25;
 
-  if(scripts\engine\utility::flag("power_on"))
+  if(scripts\engine\utility::flag("power_on")) {
     var_0 playSound("asteroid_anc_lockdownmodeinitiated_r", "sound_done");
-  else {
+  } else {
     scripts\engine\utility::flag_wait("power_on");
     wait(randomintrange(2, 5));
     var_0 playSound("asteroid_anc_lockdownmodeinitiated_r", "sound_done");
@@ -2567,18 +2644,20 @@ _id_D06F() {
   level.player._id_EA2B = 1;
   level.player scripts\sp\utility::_id_10350("asteroid_plr_ohshit");
 
-  if(!scripts\engine\utility::flag("all_dorm_scenes_complete"))
+  if(!scripts\engine\utility::flag("all_dorm_scenes_complete")) {
     _id_CBB2();
+  }
 }
 
 _id_2762(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     _id_0B6A::_id_EC0E(var_0);
-  else if(!scripts\engine\utility::flag("dorm_explore_finished")) {
-    if(self == level.player)
+  } else if(!scripts\engine\utility::flag("dorm_explore_finished")) {
+    if(self == level.player) {
       scripts\sp\utility::_id_1034D(var_0);
-    else
+    } else {
       scripts\sp\utility::_id_10346(var_0);
+    }
   }
 }
 
@@ -2586,8 +2665,9 @@ achievement_watcher() {
   level._id_5A67 = 0;
   scripts\engine\utility::flag_wait("dorm_explore_finished");
 
-  if(level._id_5A67 >= 4)
+  if(level._id_5A67 >= 4) {
     level.player giveachievement("Dorm Fully Explored");
+  }
 }
 
 _id_5A9F() {
@@ -2644,13 +2724,15 @@ _id_5F09() {
   while(!scripts\engine\utility::flag("dorm_explore_finished")) {
     level waittill("rogue_quake", var_3);
 
-    foreach(var_5 in var_0)
-    physicsexplosionsphere(var_5.origin, 40, 8, 0.05);
+    foreach(var_5 in var_0) {
+      physicsexplosionsphere(var_5.origin, 40, 8, 0.05);
+    }
 
     level waittill("rogue_quake", var_3);
 
-    foreach(var_5 in var_1)
-    physicsexplosionsphere(var_5.origin, 40, 8, 0.05);
+    foreach(var_5 in var_1) {
+      physicsexplosionsphere(var_5.origin, 40, 8, 0.05);
+    }
   }
 }
 
@@ -2661,23 +2743,26 @@ _id_5F08() {
     level waittill("rogue_quake", var_1);
     wait 0.1;
 
-    foreach(var_3 in var_0)
-    physicsexplosionsphere(var_3.origin, 32, 30, 0.1);
+    foreach(var_3 in var_0) {
+      physicsexplosionsphere(var_3.origin, 32, 30, 0.1);
+    }
   }
 }
 
 _id_5634() {
   var_0 = getEnt("airlock_door_clip", "script_noteworthy");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 disconnectPaths();
+  }
 }
 
 _id_4527() {
   var_0 = getEnt("airlock_door_clip", "script_noteworthy");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 connectpaths();
+  }
 }
 
 _id_5A82() {

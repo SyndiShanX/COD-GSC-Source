@@ -67,8 +67,9 @@ _id_637E() {
 _id_12CE7() {
   self endon("disconnect");
 
-  while(!self isonground() && isalive(self))
+  while(!self isonground() && isalive(self)) {
     wait 0.05;
+  }
 
   self.flung = undefined;
   self limitedmovement(0);
@@ -79,8 +80,9 @@ _id_E163() {
   self.ability_invulnerable = undefined;
   scripts\cp\utility::removedamagemodifier("rewind", 0);
 
-  if(!scripts\engine\utility::isusabilityallowed())
+  if(!scripts\engine\utility::isusabilityallowed()) {
     scripts\engine\utility::allow_usability(1);
+  }
 
   self playanimscriptevent("power_exit", "rewind");
 
@@ -110,14 +112,15 @@ _id_13A62() {
     self waittill("rewindBeginRace");
     waittillframeend;
 
-    if(isDefined(var_0._id_6ACF))
+    if(isDefined(var_0._id_6ACF)) {
       scripts\cp\powers\coop_powers::power_adjustcharges(1, "secondary");
-    else if(isDefined(var_0._id_10DE6) && isDefined(var_0._id_4E59))
+    } else if(isDefined(var_0._id_10DE6) && isDefined(var_0._id_4E59)) {
       scripts\cp\powers\coop_powers::power_adjustcharges(1, "secondary");
-    else if(isDefined(var_0._id_637B))
+    } else if(isDefined(var_0._id_637B)) {
       _id_637E();
-    else if(isDefined(var_0._id_10DE6))
+    } else if(isDefined(var_0._id_10DE6)) {
       _id_10DEB();
+    }
 
     self notify("rewindEndRace");
   }
@@ -192,14 +195,17 @@ restorefunctionality() {
   }
   self.rewindrestrictedfunctionality = undefined;
 
-  if(!scripts\engine\utility::isweaponswitchallowed())
+  if(!scripts\engine\utility::isweaponswitchallowed()) {
     scripts\engine\utility::allow_weapon_switch(1);
+  }
 
-  if(!scripts\engine\utility::isusabilityallowed())
+  if(!scripts\engine\utility::isusabilityallowed()) {
     scripts\engine\utility::allow_usability(1);
+  }
 
-  if(!scripts\cp\utility::isteleportenabled())
+  if(!scripts\cp\utility::isteleportenabled()) {
     scripts\cp\utility::allow_player_teleport(1);
+  }
 }
 
 restrictfunctionalitycleanup() {

@@ -113,8 +113,9 @@ _id_F63D(var_0, var_1) {
   var_2 = _id_7D14();
   _id_FB0B(var_0, "none");
 
-  foreach(var_4 in var_2)
-  _id_FB0B(var_0, var_4, var_1);
+  foreach(var_4 in var_2) {
+    _id_FB0B(var_0, var_4, var_1);
+  }
 }
 
 _id_7D14() {

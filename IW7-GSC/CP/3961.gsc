@@ -16,8 +16,9 @@ registerscriptedagent() {
 _id_FAB0() {
   level endon("game_ended");
 
-  if(!isDefined(level.agent_definition))
+  if(!isDefined(level.agent_definition)) {
     level waittill("scripted_agents_initialized");
+  }
 
   level.agent_definition["zombie_ghost"]["setup_func"] = ::setupagent;
   level.agent_definition["zombie_ghost"]["setup_model_func"] = ::_id_FACE;
@@ -165,8 +166,9 @@ _id_50EF() {
   if(scripts\engine\utility::is_true(self.head_is_exploding)) {
     return;
   }
-  if(isDefined(level._id_C01F))
+  if(isDefined(level._id_C01F)) {
     return;
+  }
 }
 
 _id_AEB0() {
@@ -178,26 +180,29 @@ _id_C536(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
   if(isPlayer(var_1)) {
     if(isDefined(var_5) && var_5 == "iw7_entangler_zm") {
-      if(!isDefined(self._id_65FC))
+      if(!isDefined(self._id_65FC)) {
         _id_D974(var_1, self);
-      else if(var_1 == self._id_65FC)
+      } else if(var_1 == self._id_65FC) {
         _id_D974(var_1, self);
-      else if(!isDefined(level.fbd) || !isDefined(level.fbd.fightstarted) || !level.fbd.fightstarted)
+      } else if(!isDefined(level.fbd) || !isDefined(level.fbd.fightstarted) || !level.fbd.fightstarted) {
         _id_8263(var_1, var_12);
+      }
     } else if(!isDefined(level.fbd) || !isDefined(level.fbd.fightstarted) || !level.fbd.fightstarted)
       var_1 iprintlnbold("This weapon is not effective againt the ghost");
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self.health = self.health + var_2;
+  }
 }
 
 _id_8263(var_0, var_1) {
   if(!isDefined(var_0._id_D8A1) || (var_1 - var_0._id_D8A1) / 1000 > 3) {
-    if(isDefined(level.grab_same_ghost_string))
+    if(isDefined(level.grab_same_ghost_string)) {
       var_0 iprintlnbold(level.grab_same_ghost_string);
-    else
+    } else {
       var_0 iprintlnbold(&"CP_ZMB_GHOST_TRACK_SAME_GHOST");
+    }
 
     var_0._id_D8A1 = var_1;
   }
@@ -231,8 +236,9 @@ _id_C535(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   _id_108D0(self._id_1657, var_3, var_4);
   scripts\mp\mp_agent::default_on_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 
-  if(isDefined(level.ghost_killed_update_func))
+  if(isDefined(level.ghost_killed_update_func)) {
     [[level.ghost_killed_update_func]](var_1, var_4);
+  }
 }
 
 _id_108D0(var_0, var_1, var_2) {}

@@ -47,8 +47,9 @@ _id_9284() {
   var_0 = 17;
   level._id_9285 = getEntArray("ice_drill", "targetname");
 
-  foreach(var_3, var_2 in level._id_9285)
-  var_2 thread _id_E6FD(var_0 * (level._id_9285.size - var_3));
+  foreach(var_3, var_2 in level._id_9285) {
+    var_2 thread _id_E6FD(var_0 * (level._id_9285.size - var_3));
+  }
 }
 
 _id_E6FD(var_0) {

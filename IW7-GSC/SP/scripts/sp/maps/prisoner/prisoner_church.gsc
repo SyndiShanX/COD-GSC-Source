@@ -71,15 +71,17 @@ _id_3F32() {
   scripts\sp\utility::_id_127AE("church_atwindow_trig", "targetname");
   var_1 = scripts\engine\utility::getStruct("lobbylookat", "targetname");
 
-  while(!level.player scripts\sp\utility::_id_D1DF(var_1.origin, 0.01, 1) && !scripts\engine\utility::flag("flag_church_outside_end"))
+  while(!level.player scripts\sp\utility::_id_D1DF(var_1.origin, 0.01, 1) && !scripts\engine\utility::flag("flag_church_outside_end")) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::flag_wait_any("entrance_player_spotted", "flag_church_outside_end");
 
-  if(isalive(var_0[0]))
+  if(isalive(var_0[0])) {
     scripts\engine\utility::play_sound_in_space("pris_sd_2a_exposed_acquired", var_0[0].origin + (0, 0, 70));
-  else if(isalive(var_0[1]))
+  } else if(isalive(var_0[1])) {
     scripts\engine\utility::play_sound_in_space("pris_sd_2a_exposed_acquired", var_0[1].origin + (0, 0, 70));
+  }
 
   scripts\engine\utility::flag_wait_any("lobby_death_1", "lobby_death_2");
   wait 0.25;
@@ -115,8 +117,9 @@ _id_AEB2() {
   scripts\sp\utility::_id_127AE("church_atwindow_trig", "targetname");
   scripts\engine\utility::waittill_any_timeout(2.0, "ai_events", "flag_church_outside_end");
 
-  if(isalive(self))
+  if(isalive(self)) {
     self.ignoreall = 0;
+  }
 
   scripts\engine\utility::flag_set("entrance_player_spotted");
 }
@@ -129,8 +132,9 @@ _id_13D56(var_0) {
     wait 2;
   }
 
-  if(isalive(var_0[1]) && isalive(var_0[0]))
+  if(isalive(var_0[1]) && isalive(var_0[0])) {
     scripts\engine\utility::play_sound_in_space("prisoner_sf1_siryessir", var_0[1].origin + (0, 0, 70));
+  }
 }
 
 _id_3F34() {
@@ -144,8 +148,9 @@ _id_3F34() {
   while(var_0 || !scripts\engine\utility::flag("annex_countdown_flag")) {
     var_1 = getaicount("axis", "all");
 
-    if(var_1 <= 2)
+    if(var_1 <= 2) {
       var_0 = 0;
+    }
 
     wait 0.1;
   }
@@ -154,8 +159,9 @@ _id_3F34() {
   var_2 = scripts\engine\utility::getStruct("chuch_lobbyguy_animorigin", "targetname");
   wait 1.0;
 
-  if(!scripts\engine\utility::flag("window_dialogue"))
+  if(!scripts\engine\utility::flag("window_dialogue")) {
     level.player scripts\sp\utility::_id_1034D("prisoner_plr_thismustbethean");
+  }
 
   wait 10.0;
   level notify("marker_on");
@@ -175,8 +181,9 @@ _id_13D62() {
   var_1 waittill("trigger");
   objective_delete(scripts\sp\utility::_id_C264("window_nag_marker"));
 
-  while(level.player istouching(var_1))
+  while(level.player istouching(var_1)) {
     wait 0.5;
+  }
 }
 
 _id_3F33() {
@@ -231,14 +238,16 @@ pc_transient_wait_church() {
 _id_3F49() {
   var_0 = getEntArray("church_ext_light", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 _meth_8300(13);
+  foreach(var_2 in var_0) {
+    var_2 _meth_8300(13);
+  }
 
   var_4 = getEntArray("church_int_light", "targetname");
 
   foreach(var_2 in var_4) {
-    if(isDefined(var_2.script_noteworthy))
+    if(isDefined(var_2.script_noteworthy)) {
       var_2 setlightintensity(int(var_2.script_noteworthy));
+    }
   }
 }
 
@@ -250,16 +259,18 @@ _id_3F3D() {
   var_1 = scripts\sp\utility::_id_107EA("antechamber_stairs");
   var_1.ignoreall = 1;
 
-  if(isalive(var_0[0]))
+  if(isalive(var_0[0])) {
     scripts\engine\utility::play_sound_in_space("prisoner_sf1_lookforhostiles", var_0[0].origin + (5, 0, 30));
+  }
 
   var_0[0] scripts\sp\utility::_id_51E1("cqb");
   var_0[1] scripts\sp\utility::_id_51E1("cqb");
   scripts\engine\utility::flag_set("hallway_runner_go");
   scripts\sp\utility::_id_127AE("church_stairs_alert", "targetname");
 
-  if(isalive(var_1))
+  if(isalive(var_1)) {
     var_1.ignoreall = 0;
+  }
 }
 
 _id_AEB3() {
@@ -269,8 +280,9 @@ _id_AEB3() {
   for(;;) {
     var_0 = _id_0B1E::_id_794C("church_lobby_hallway_door");
 
-    if(isDefined(var_0) && var_0 >= 15)
+    if(isDefined(var_0) && var_0 >= 15) {
       level notify("door_kick_open");
+    }
 
     wait 0.05;
   }
@@ -296,10 +308,11 @@ _id_C7F5(var_0, var_1, var_2, var_3) {
     var_5 = "step_run_up_wood";
   }
 
-  if(var_2 >= var_4)
+  if(var_2 >= var_4) {
     var_6 = var_2 / var_4;
-  else
+  } else {
     var_6 = 1;
+  }
 
   var_7 = spawn("script_model", var_0);
   wait 0.02;
@@ -320,10 +333,11 @@ _id_1E87(var_0, var_1) {
   var_3 = 360 - vectortoangles(var_2)[0];
 
   if(var_3 > 10 && var_3 < 90) {
-    if(var_1 == "walk")
+    if(var_1 == "walk") {
       var_0 playSound("step_walk_up_wood_creak");
-    else
+    } else {
       var_0 playSound("step_run_up_wood_creak");
+    }
   }
 }
 
@@ -349,8 +363,9 @@ _id_3F38() {
   var_0 = getEnt("trig_sound_door_slam", "targetname");
   var_0 waittill("trigger");
 
-  if(isalive(level._id_8588))
+  if(isalive(level._id_8588)) {
     thread scripts\engine\utility::play_sound_in_space("prisoner_ria_wereoutoftimesc", var_1.origin);
+  }
 
   wait 1.0;
 
@@ -368,8 +383,9 @@ _id_3F38() {
 
     wait 2;
 
-    if(isalive(level._id_8588))
+    if(isalive(level._id_8588)) {
       level._id_8588 scripts\sp\utility::_id_6224();
+    }
   }
 }
 
@@ -413,8 +429,9 @@ _id_8806() {
   scripts\engine\utility::flag_wait("flag_church_end");
   var_0 = _id_0E29::_id_87F3();
 
-  if(isDefined(var_0.targetname) && var_0.targetname == "church_bait_door_c6")
+  if(isDefined(var_0.targetname) && var_0.targetname == "church_bait_door_c6") {
     _id_0E29::_id_87E0(3);
+  }
 }
 
 _id_D656() {
@@ -424,8 +441,9 @@ _id_D656() {
   level._id_3F2D rotateYaw(70, 0.05, 0, 0.0);
   level._id_B00B = scripts\engine\utility::getStruct("church_bait_door_interact", "targetname");
 
-  while(!scripts\engine\utility::flag("player_in_the_library") && !level.player scripts\sp\utility::_id_D1DF(level._id_B00B.origin, 0.5))
+  while(!scripts\engine\utility::flag("player_in_the_library") && !level.player scripts\sp\utility::_id_D1DF(level._id_B00B.origin, 0.5)) {
     scripts\engine\utility::waitframe();
+  }
 
   level._id_3F2D rotateYaw(-70, 1.5, 0, 0.0);
   wait 1.5;
@@ -536,8 +554,9 @@ _id_2549() {
   level._id_113B1 = scripts\sp\utility::_id_107EA("enemy_church_table_flipper");
   level._id_254A = scripts\engine\utility::array_add(level._id_254A, level._id_113B1);
 
-  foreach(var_1 in level._id_254A)
-  var_1.ignoreall = 1;
+  foreach(var_1 in level._id_254A) {
+    var_1.ignoreall = 1;
+  }
 
   scripts\sp\utility::_id_127AE("church_rafters_enter_trigger", "targetname");
   level notify("entered_rafters");
@@ -545,8 +564,9 @@ _id_2549() {
   wait 2.0;
 
   foreach(var_1 in level._id_254A) {
-    if(isalive(var_1))
+    if(isalive(var_1)) {
       var_1.ignoreall = 0;
+    }
 
     wait 0.2;
   }

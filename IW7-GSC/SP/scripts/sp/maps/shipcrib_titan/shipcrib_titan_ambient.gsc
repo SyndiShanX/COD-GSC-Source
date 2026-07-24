@@ -71,8 +71,9 @@ _id_1DE8() {
 }
 
 _id_1DC6() {
-  if(level._id_10CDA == "titan start")
+  if(level._id_10CDA == "titan start") {
     _id_ADD5();
+  }
 }
 
 _id_1E02() {
@@ -131,8 +132,9 @@ _id_1E01() {
 }
 
 _id_1E0B() {
-  if(!scripts\engine\utility::flag("shipcrib_titan_ambientmr_tr_loaded"))
+  if(!scripts\engine\utility::flag("shipcrib_titan_ambientmr_tr_loaded")) {
     scripts\sp\utility::_id_12641("shipcrib_titan_ambientmr_tr");
+  }
 
   level thread _id_A2EB();
   level thread scripts\sp\maps\shipcrib_titan\shipcrib_titan::_id_E3C8();
@@ -142,8 +144,9 @@ _id_1E0B() {
 #using_animtree("jackal");
 
 _id_1E0A() {
-  if(!scripts\engine\utility::flag("shipcrib_titan_ambientml_tr_loaded"))
+  if(!scripts\engine\utility::flag("shipcrib_titan_ambientml_tr_loaded")) {
     scripts\sp\utility::_id_12641("shipcrib_titan_ambientml_tr");
+  }
 
   _id_0EF9::_id_FE03("jackal_cheap", "jackal_bay_3", undefined, undefined, 1);
   _id_ADD3("jackal_bay_3");
@@ -155,13 +158,15 @@ _id_1E0A() {
 }
 
 _id_1E0E() {
-  if(!scripts\engine\utility::flag("shipcrib_titan_ambientml_tr_loaded"))
+  if(!scripts\engine\utility::flag("shipcrib_titan_ambientml_tr_loaded")) {
     scripts\sp\utility::_id_12641("shipcrib_titan_ambientml_tr");
+  }
 }
 
 _id_1E0D() {
-  if(!scripts\engine\utility::flag("shipcrib_titan_ambientml_tr_loaded"))
+  if(!scripts\engine\utility::flag("shipcrib_titan_ambientml_tr_loaded")) {
     scripts\sp\utility::_id_12641("shipcrib_titan_ambientml_tr");
+  }
 }
 
 _id_ADD5() {
@@ -299,8 +304,9 @@ _id_B348(var_0) {
     var_4 = _id_0EF8::_id_FE01("spawner_marine", var_3, "cheap");
     var_4 thread _id_0EE5::_id_202D();
 
-    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "hasgun")
+    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "hasgun") {
       var_4 scripts\sp\utility::_id_86E2();
+    }
 
     var_3 thread scripts\sp\anim::_id_1ECC(var_4, var_3.animation, "stop_loop");
     var_4 scripts\engine\utility::delaycall(0.05, ::_meth_82B0, var_4 scripts\sp\utility::_id_7DC1(var_3.animation)[0], randomfloatrange(0, 1));
@@ -431,8 +437,9 @@ _id_107E3() {
 }
 
 _id_40C9() {
-  if(isDefined(level._id_A052))
+  if(isDefined(level._id_A052)) {
     level._id_A052 delete();
+  }
 }
 
 _id_CE66(var_0) {
@@ -461,8 +468,9 @@ _id_174F() {
 _id_40A1(var_0) {
   var_0 waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 #using_animtree("jackal");
@@ -493,8 +501,9 @@ _id_21AF(var_0) {
 
   level thread _id_10A3::_id_3B9E();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "";
+  }
 
   switch (var_0) {
     case "close":
@@ -553,10 +562,11 @@ _id_8A82() {
 }
 
 _id_E38D(var_0) {
-  if(!isDefined(level._id_8A33))
+  if(!isDefined(level._id_8A33)) {
     level._id_8A33 = 1;
-  else
+  } else {
     return;
+  }
 
   var_1 = getEntArray(var_0, "targetname");
   var_2 = getEnt("hangar_crane_leave_origin", "targetname");
@@ -618,8 +628,9 @@ _id_FDD4(var_0, var_1, var_2) {
 
     if(var_6 > var_2 * var_2) {
       if(var_3 == 1) {
-        foreach(var_8 in var_0)
-        var_8 _meth_8278(0, 0.5);
+        foreach(var_8 in var_0) {
+          var_8 _meth_8278(0, 0.5);
+        }
 
         var_3 = 0;
       }
@@ -629,21 +640,24 @@ _id_FDD4(var_0, var_1, var_2) {
     }
 
     if(var_3 == 0) {
-      foreach(var_8 in var_0)
-      var_8 _meth_8278(1, 0.5);
+      foreach(var_8 in var_0) {
+        var_8 _meth_8278(1, 0.5);
+      }
 
       var_3 = 1;
     }
 
     if(var_5 < var_1.size) {
-      if(soundexists(var_1[var_5]))
+      if(soundexists(var_1[var_5])) {
         var_0[var_4] _id_0EE9::_id_CD78(var_1[var_5]);
+      }
 
       var_4 = var_4 + 1;
       var_5 = var_5 + 1;
 
-      if(var_4 > var_0.size - 1)
+      if(var_4 > var_0.size - 1) {
         var_4 = 0;
+      }
 
       wait(randomfloatrange(0.5, 1));
       continue;

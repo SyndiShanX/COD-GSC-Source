@@ -8,8 +8,9 @@ _id_FDCE(var_0, var_1, var_2, var_3) {
 
   if(isDefined(level._id_FD6E._id_CBBE) && !isDefined(var_1)) {}
 
-  if(isDefined(self) && isDefined(self._id_FDD3))
+  if(isDefined(self) && isDefined(self._id_FDD3)) {
     self._id_FDD3 delete();
+  }
 
   var_4 = undefined;
   var_5 = undefined;
@@ -17,8 +18,9 @@ _id_FDCE(var_0, var_1, var_2, var_3) {
 
   switch (var_0) {
     case "admiral_main":
-      if(!isDefined(level._id_188A))
+      if(!isDefined(level._id_188A)) {
         _id_0EF8::_id_FDFC("spawner_admiral", "admirals_office");
+      }
 
       if(!isDefined(var_1)) {
         var_6 = scripts\engine\utility::getStruct("admirals_office", "targetname");
@@ -31,11 +33,13 @@ _id_FDCE(var_0, var_1, var_2, var_3) {
         cinematicingame(var_3);
         level thread _id_E361("main", "pip_on", 1);
 
-        while(!iscinematicplaying())
+        while(!iscinematicplaying()) {
           wait 0.05;
+        }
 
-        while(iscinematicplaying())
+        while(iscinematicplaying()) {
           wait 0.05;
+        }
 
         stopcinematicingame();
         setsaveddvar("bg_cinematicFullScreen", "1");
@@ -53,8 +57,9 @@ _id_FDCE(var_0, var_1, var_2, var_3) {
       level thread _id_E361("main", "pip_on", 1);
       break;
     case "admiral_captains":
-      if(!isDefined(level._id_188A))
+      if(!isDefined(level._id_188A)) {
         _id_0EF8::_id_FDFC("spawner_admiral", "admirals_office");
+      }
 
       if(!isDefined(var_1)) {
         var_6 = scripts\engine\utility::getStruct("admirals_office", "targetname");
@@ -67,11 +72,13 @@ _id_FDCE(var_0, var_1, var_2, var_3) {
         cinematicingame(var_3);
         level thread _id_E361("captains", "pip_on", 1);
 
-        while(!iscinematicplaying())
+        while(!iscinematicplaying()) {
           wait 0.05;
+        }
 
-        while(iscinematicplaying())
+        while(iscinematicplaying()) {
           wait 0.05;
+        }
 
         stopcinematicingame();
         setsaveddvar("bg_cinematicFullScreen", "1");
@@ -89,8 +96,9 @@ _id_FDCE(var_0, var_1, var_2, var_3) {
       level thread _id_E361("captains", "pip_on", 1);
       break;
     case "admiral_cic":
-      if(!isDefined(level._id_188A))
+      if(!isDefined(level._id_188A)) {
         _id_0EF8::_id_FDFC("spawner_admiral", "admirals_office");
+      }
 
       if(!isDefined(var_1)) {
         var_6 = scripts\engine\utility::getStruct("admirals_office", "targetname");
@@ -169,8 +177,9 @@ _id_FDCE(var_0, var_1, var_2, var_3) {
     case "salter_jackal_test":
       var_9 = getEnt("jackal", "targetname");
 
-      if(!isDefined(level._id_EA2C))
+      if(!isDefined(level._id_EA2C)) {
         _id_0EF8::_id_FDFC("spawner_salter", var_9);
+      }
 
       var_5 = getEnt("jackal_pip", "targetname") scripts\engine\utility::spawn_tag_origin();
       scripts\sp\pip_util::_id_CBB5(var_5, "tag_origin", 60);
@@ -182,8 +191,9 @@ _id_FDCE(var_0, var_1, var_2, var_3) {
     case "salter_jackal_test_low":
       var_9 = getEnt("jackal", "targetname");
 
-      if(!isDefined(level._id_EA2C))
+      if(!isDefined(level._id_EA2C)) {
         _id_0EF8::_id_FDFC("spawner_salter", var_9);
+      }
 
       var_5 = getEnt("jackal_pip_taylor", "targetname") scripts\engine\utility::spawn_tag_origin();
       scripts\sp\pip_util::_id_CBB5(var_5, "tag_origin", 60);
@@ -200,14 +210,16 @@ _id_FDCE(var_0, var_1, var_2, var_3) {
       if(isDefined(var_2) && var_2) {
         scripts\sp\utility::_id_9131(var_3);
 
-        if(scripts\engine\utility::flag_exist("pip_hold"))
+        if(scripts\engine\utility::flag_exist("pip_hold")) {
           scripts\engine\utility::flag_clear("pip_hold");
+        }
 
         break;
       }
 
-      if(!isDefined(level._id_6BD5))
+      if(!isDefined(level._id_6BD5)) {
         _id_0EF8::_id_FDFC("spawner_ferran", level._id_C6AA["tigris"]._id_10E52["captain"]);
+      }
 
       var_5 = _id_0EFB::_id_7CBD("opsmap", "script_noteworthy", "captain_cam_ferran", "tigris");
       level._id_6BD5._id_FDD3 = var_5 scripts\engine\utility::spawn_tag_origin();
@@ -231,8 +243,9 @@ _id_FDCE(var_0, var_1, var_2, var_3) {
 _id_FDCF() {
   scripts\sp\pip_util::_id_CBA3();
 
-  if(isDefined(self._id_FDD3))
+  if(isDefined(self._id_FDD3)) {
     self._id_FDD3 delete();
+  }
 
   if(!isDefined(level._id_FD6E._id_CBBE)) {
     return;
@@ -240,15 +253,17 @@ _id_FDCF() {
   switch (level._id_FD6E._id_CBBE) {
     case "admiral_full":
     case "admiral_main":
-      if(isDefined(level._id_188A._id_FDD3))
+      if(isDefined(level._id_188A._id_FDD3)) {
         level._id_188A._id_FDD3 delete();
+      }
 
       _id_0EFB::_id_FDBA(level._id_188A);
       level thread _id_E361("main", "pip_off");
       break;
     case "admiral_captains":
-      if(isDefined(level._id_188A._id_FDD3))
+      if(isDefined(level._id_188A._id_FDD3)) {
         level._id_188A._id_FDD3 delete();
+      }
 
       _id_0EFB::_id_FDBA(level._id_188A);
       level thread _id_E361("captains", "pip_off");
@@ -275,15 +290,17 @@ _id_FDCF() {
     case "ethan_workshop":
       break;
     case "ferran_opsmap":
-      if(isDefined(level._id_6BD5._id_FDD3))
+      if(isDefined(level._id_6BD5._id_FDD3)) {
         level._id_6BD5._id_FDD3 delete();
+      }
 
       _id_0EFB::_id_FDBA(level._id_6BD5);
       break;
   }
 
-  if(isDefined(level._id_1BDF))
+  if(isDefined(level._id_1BDF)) {
     level._id_1BDF delete();
+  }
 
   level._id_FD6E._id_CBBE = undefined;
 }
@@ -299,11 +316,13 @@ _id_FD78(var_0, var_1) {
       cinematicingame(var_1);
       level thread _id_E361("main", "pip_on", 1);
 
-      while(!iscinematicplaying())
+      while(!iscinematicplaying()) {
         wait 0.05;
+      }
 
-      while(iscinematicplaying())
+      while(iscinematicplaying()) {
         wait 0.05;
+      }
 
       stopcinematicingame();
       var_3 stopsounds();
@@ -322,11 +341,13 @@ _id_FD78(var_0, var_1) {
       cinematicingame(var_1);
       level thread _id_E361("captains", "pip_on", 1);
 
-      while(!iscinematicplaying())
+      while(!iscinematicplaying()) {
         wait 0.05;
+      }
 
-      while(iscinematicplaying())
+      while(iscinematicplaying()) {
         wait 0.05;
+      }
 
       stopcinematicingame();
       var_3 stopsounds();
@@ -349,19 +370,22 @@ _id_FD78(var_0, var_1) {
       setomnvar("ui_show_pip", 1);
       cinematicingame(var_1);
 
-      while(!iscinematicplaying())
+      while(!iscinematicplaying()) {
         wait 0.05;
+      }
 
-      while(iscinematicplaying())
+      while(iscinematicplaying()) {
         wait 0.05;
+      }
 
       stopcinematicingame();
       setomnvar("ui_show_pip", 0);
       setsaveddvar("bg_cinematicFullScreen", "1");
       setsaveddvar("bg_cinematicCanPause", "1");
 
-      if(scripts\engine\utility::flag_exist("pip_hold"))
+      if(scripts\engine\utility::flag_exist("pip_hold")) {
         scripts\engine\utility::flag_clear("pip_hold");
+      }
 
       level.player playSound("ui_pip_off_hud_right");
       break;
@@ -388,8 +412,9 @@ _id_E362() {
   level._id_E35D._id_188C["main"]["transition_4"] = _id_0EFB::_id_798B("shipcrib_screen", "script_noteworthy", "transition_4", "admiral_main");
   level._id_E35D._id_188C["main"]["transition_4"] _meth_83D0(#animtree);
 
-  if(isDefined(level._id_FD6E) && isDefined(level._id_FD6E._id_ECCE) && isDefined(level._id_FD6E._id_ECCE["admiral_monitor"]))
+  if(isDefined(level._id_FD6E) && isDefined(level._id_FD6E._id_ECCE) && isDefined(level._id_FD6E._id_ECCE["admiral_monitor"])) {
     level._id_E35D._id_188C["main"]["model"] = level._id_FD6E._id_ECCE["admiral_monitor"].ent;
+  }
 
   level._id_E35D._id_188C["captains"] = [];
   level._id_E35D._id_188C["captains"]["pip"] = _id_0EFB::_id_798A("retribution_admiral_monitor_captains", "script_noteworthy", "pip");
@@ -405,8 +430,9 @@ _id_E362() {
   level._id_E35D._id_188C["captains"]["transition_4"] = _id_0EFB::_id_798B("shipcrib_screen", "script_noteworthy", "transition_4", "admiral_captains");
   level._id_E35D._id_188C["captains"]["transition_4"] _meth_83D0(#animtree);
 
-  if(isDefined(level._id_FD6E) && isDefined(level._id_FD6E._id_ECCE) && isDefined(level._id_FD6E._id_ECCE["admiral_monitor_captains"]))
+  if(isDefined(level._id_FD6E) && isDefined(level._id_FD6E._id_ECCE) && isDefined(level._id_FD6E._id_ECCE["admiral_monitor_captains"])) {
     level._id_E35D._id_188C["captains"]["model"] = level._id_FD6E._id_ECCE["admiral_monitor_captains"].ent;
+  }
 
   level._id_E35D._id_188C["cic"] = [];
   level._id_E35D._id_188C["cic"]["pip"] = _id_0EFB::_id_798A("retribution_admiral_monitor_cic", "script_noteworthy", "pip");
@@ -414,8 +440,9 @@ _id_E362() {
   level._id_E35D._id_188C["cic"]["lines"] = _id_0EFB::_id_798A("retribution_admiral_monitor_cic", "script_noteworthy", "lines");
   level._id_E35D._id_188C["cic"]["static"] = _id_0EFB::_id_798A("retribution_admiral_monitor_cic", "script_noteworthy", "static");
 
-  if(isDefined(level._id_FD6E) && isDefined(level._id_FD6E._id_ECCE) && isDefined(level._id_FD6E._id_ECCE["admiral_monitor_cic"]))
+  if(isDefined(level._id_FD6E) && isDefined(level._id_FD6E._id_ECCE) && isDefined(level._id_FD6E._id_ECCE["admiral_monitor_cic"])) {
     level._id_E35D._id_188C["cic"]["model"] = level._id_FD6E._id_ECCE["admiral_monitor_cic"].ent;
+  }
 
   _id_E360();
 }
@@ -423,8 +450,9 @@ _id_E362() {
 _id_E361(var_0, var_1, var_2) {
   var_3 = level._id_E35D._id_188C[var_0];
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     _id_E360();
+  }
 
   var_4 = getEnt("bridge_" + var_0 + "_tv", "script_noteworthy");
 

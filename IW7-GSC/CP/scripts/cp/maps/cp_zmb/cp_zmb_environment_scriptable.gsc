@@ -38,8 +38,9 @@ set_nonstick() {
 turn_on_global_light() {
   var_0 = getEntArray("global_light", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("root", "on");
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("root", "on");
+  }
 }
 
 zmb_main_entrance_gate() {
@@ -49,8 +50,9 @@ zmb_main_entrance_gate() {
 turn_on_main_gate() {
   var_0 = getEntArray("main_gate", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("main_gate", "gate_on");
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("main_gate", "gate_on");
+  }
 
   for(var_4 = 1; var_4 <= 5; var_4++) {
     var_5 = getEnt("gate_light_0" + var_4, "targetname");
@@ -172,8 +174,9 @@ init() {
 
 is_all_power_on() {
   foreach(var_1 in level.generators) {
-    if(!scripts\engine\utility::is_true(var_1.powered_on))
+    if(!scripts\engine\utility::is_true(var_1.powered_on)) {
       return 0;
+    }
   }
 
   return 1;
@@ -181,14 +184,15 @@ is_all_power_on() {
 
 all_power_vo(var_0) {
   if(isDefined(var_0)) {
-    if(var_0.vo_prefix == "p1_")
+    if(var_0.vo_prefix == "p1_") {
       level thread scripts\cp\cp_vo::try_to_play_vo("poweron_final_valleygirl_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
-    else if(var_0.vo_prefix == "p2_")
+    } else if(var_0.vo_prefix == "p2_") {
       level thread scripts\cp\cp_vo::try_to_play_vo("poweron_final_nerd_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
-    else if(var_0.vo_prefix == "p3_")
+    } else if(var_0.vo_prefix == "p3_") {
       level thread scripts\cp\cp_vo::try_to_play_vo("poweron_final_rapper_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
-    else if(var_0.vo_prefix == "p4_")
+    } else if(var_0.vo_prefix == "p4_") {
       level thread scripts\cp\cp_vo::try_to_play_vo("poweron_final_jock_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
+    }
   }
 }
 
@@ -201,8 +205,9 @@ power_on_monitor() {
     level waittill("power_on_scriptable_and_light", var_1, var_2);
     var_3 = is_all_power_on();
 
-    if(var_3)
+    if(var_3) {
       level thread all_power_vo(var_2);
+    }
 
     var_4 = strtok(var_1, ",");
 
@@ -262,14 +267,15 @@ power_on_monitor() {
 }
 
 main_power_turned_on(var_0) {
-  if(var_0.vo_prefix == "p1_")
+  if(var_0.vo_prefix == "p1_") {
     level thread scripts\cp\cp_vo::try_to_play_vo("poweron_first_valleygirl_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
-  else if(var_0.vo_prefix == "p2_")
+  } else if(var_0.vo_prefix == "p2_") {
     level thread scripts\cp\cp_vo::try_to_play_vo("poweron_first_nerd_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
-  else if(var_0.vo_prefix == "p3_")
+  } else if(var_0.vo_prefix == "p3_") {
     level thread scripts\cp\cp_vo::try_to_play_vo("poweron_first_rapper_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
-  else if(var_0.vo_prefix == "p4_")
+  } else if(var_0.vo_prefix == "p4_") {
     level thread scripts\cp\cp_vo::try_to_play_vo("poweron_first_jock_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
+  }
 
   level.power_on = 1;
   level scripts\cp\cp_vo::add_to_nag_vo("dj_fateandfort_replenish_nag", "zmb_dj_vo", 180, 30, 20, 1);
@@ -356,6 +362,7 @@ signs_kepler() {
   getEnt("chromosphere_mike", "targetname") setscriptablepartstate("main", "on");
   var_0 = getEntArray("octonian", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("body", "on");
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("body", "on");
+  }
 }

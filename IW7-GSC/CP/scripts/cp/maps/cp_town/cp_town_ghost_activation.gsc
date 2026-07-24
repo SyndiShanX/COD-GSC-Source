@@ -47,15 +47,17 @@ watch_for_skull_death() {
 shoot_skulls_in_map() {
   level waittill("prematch_done");
 
-  foreach(var_1 in level.weeping_angels_note)
-  var_1 thread watch_for_damage_on_struct();
+  foreach(var_1 in level.weeping_angels_note) {
+    var_1 thread watch_for_damage_on_struct();
+  }
 
   var_3 = 0;
 
   while(!scripts\engine\utility::is_true(var_3)) {
     if(isDefined(level.skulls_killed)) {
-      if(level.skulls_killed >= 5)
+      if(level.skulls_killed >= 5) {
         var_3 = 1;
+      }
     }
 
     wait 1;
@@ -77,8 +79,9 @@ find_radiation_extractor_collect_radiation() {
   level.radiation_extractor.ticks_of_radiation = 0;
   level thread watch_radiation_extractor_ticks();
 
-  foreach(var_1 in level.players)
-  var_1 thread watch_for_player_position();
+  foreach(var_1 in level.players) {
+    var_1 thread watch_for_player_position();
+  }
 
   scripts\cp\cp_interaction::add_to_current_interaction_list(level.radiation_extraction_interaction);
   level scripts\engine\utility::waittill_any("completed_extraction", "debug_radiation_extractor_collect_radiation");
@@ -138,10 +141,11 @@ watch_for_player_position() {
       continue;
     }
 
-    if(distance2dsquared(level.radiation_extraction_interaction.origin, self.origin) <= 1000000 && !scripts\engine\utility::is_true(self.in_afterlife_arcade))
+    if(distance2dsquared(level.radiation_extraction_interaction.origin, self.origin) <= 1000000 && !scripts\engine\utility::is_true(self.in_afterlife_arcade)) {
       level.charge_machine = 1;
-    else
+    } else {
       level.charge_machine = 0;
+    }
 
     wait 1;
   }
@@ -157,8 +161,9 @@ wait_for_trap_kills(var_0, var_1) {
   for(;;) {
     level waittill(var_0, var_2);
 
-    if(var_2 == var_1)
+    if(var_2 == var_1) {
       return;
+    }
   }
 }
 
@@ -166,8 +171,9 @@ pollute_pool_and_kills() {
   level waittill("placed_extractor_in_pool");
   wait_for_trap_kills("pool_trap_kills", 16);
 
-  if(isDefined(level.pool_extraction_fx))
+  if(isDefined(level.pool_extraction_fx)) {
     level.pool_extraction_fx delete();
+  }
 
   level.rad_extractor_owner = undefined;
   scripts\cp\cp_interaction::add_to_current_interaction_list(level.radiation_extraction_interaction);
@@ -216,58 +222,64 @@ calculate_cipher_from_current_interaction(var_0, var_1, var_2, var_3, var_4) {
   var_14 = 0;
   var_15 = level.alphabets[var_1];
 
-  if(var_2 == "0")
+  if(var_2 == "0") {
     var_12 = 0;
-  else if(var_2 == level.cipherlettera)
+  } else if(var_2 == level.cipherlettera) {
     var_12 = var_5 * var_9 + level.alphabets[var_2];
-  else if(var_2 == level.cipherletterb)
+  } else if(var_2 == level.cipherletterb) {
     var_12 = var_6 * var_9 + level.alphabets[var_2];
-  else if(var_2 == level.cipherletterc)
+  } else if(var_2 == level.cipherletterc) {
     var_12 = var_7 * var_9 + level.alphabets[var_2];
-  else if(var_2 == level.cipherletterd)
+  } else if(var_2 == level.cipherletterd) {
     var_12 = var_8 * var_9 + level.alphabets[var_2];
+  }
 
-  if(var_3 == "0")
+  if(var_3 == "0") {
     var_13 = 0;
-  else if(var_3 == level.cipherlettera)
+  } else if(var_3 == level.cipherlettera) {
     var_13 = var_5 * var_10 + level.alphabets[var_3];
-  else if(var_3 == level.cipherletterb)
+  } else if(var_3 == level.cipherletterb) {
     var_13 = var_6 * var_10 + level.alphabets[var_3];
-  else if(var_3 == level.cipherletterc)
+  } else if(var_3 == level.cipherletterc) {
     var_13 = var_7 * var_10 + level.alphabets[var_3];
-  else if(var_3 == level.cipherletterd)
+  } else if(var_3 == level.cipherletterd) {
     var_13 = var_8 * var_10 + level.alphabets[var_3];
+  }
 
-  if(var_4 == "0")
+  if(var_4 == "0") {
     var_14 = 0;
-  else if(var_4 == level.cipherlettera)
+  } else if(var_4 == level.cipherlettera) {
     var_14 = var_5 * var_11 + level.alphabets[var_4];
-  else if(var_4 == level.cipherletterb)
+  } else if(var_4 == level.cipherletterb) {
     var_14 = var_6 * var_11 + level.alphabets[var_4];
-  else if(var_4 == level.cipherletterc)
+  } else if(var_4 == level.cipherletterc) {
     var_14 = var_7 * var_11 + level.alphabets[var_4];
-  else if(var_4 == level.cipherletterd)
+  } else if(var_4 == level.cipherletterd) {
     var_14 = var_8 * var_11 + level.alphabets[var_4];
+  }
 
   var_16 = 0;
 
-  if(!isDefined(var_15))
+  if(!isDefined(var_15)) {
     var_16 = var_12 + var_13 + var_14;
-  else
+  } else {
     var_16 = var_15 + var_12 + var_13 + var_14;
+  }
 
   var_17 = 0;
   var_18 = var_16;
 
-  if(var_18 >= 26)
+  if(var_18 >= 26) {
     var_18 = var_18 - 26 * int(floor(var_18 / 26));
-  else
+  } else {
     var_18 = var_16;
+  }
 
-  if(var_18 < 1)
+  if(var_18 < 1) {
     var_18 = 26;
-  else
+  } else {
     var_18 = var_18 - 26 * int(floor(var_18 / 26));
+  }
 
   var_17 = var_18;
   var_19 = "";
@@ -341,8 +353,9 @@ calculate_cipher_from_letters_initially(var_0, var_1, var_2, var_3) {
 
   foreach(var_10 in var_5) {
     foreach(var_27, var_26 in level.alphabets) {
-      if(var_10 == var_27)
+      if(var_10 == var_27) {
         var_20[var_20.size] = level.alphabets[var_10];
+      }
     }
   }
 
@@ -369,8 +382,9 @@ calculate_cipher_from_letters_initially(var_0, var_1, var_2, var_3) {
           continue;
         }
 
-        if(var_10 == var_3)
+        if(var_10 == var_3) {
           var_21[var_21.size] = var_16 * var_17 + level.alphabets[var_27];
+        }
       }
     }
   }
@@ -398,8 +412,9 @@ calculate_cipher_from_letters_initially(var_0, var_1, var_2, var_3) {
           continue;
         }
 
-        if(var_10 == var_3)
+        if(var_10 == var_3) {
           var_22[var_22.size] = var_16 * var_18 + level.alphabets[var_27];
+        }
       }
     }
   }
@@ -427,31 +442,35 @@ calculate_cipher_from_letters_initially(var_0, var_1, var_2, var_3) {
           continue;
         }
 
-        if(var_10 == var_3)
+        if(var_10 == var_3) {
           var_23[var_23.size] = var_16 * var_19 + level.alphabets[var_27];
+        }
       }
     }
   }
 
   level.ciphertotalcolumn = [];
 
-  for(var_38 = 0; var_38 < var_20.size; var_38++)
+  for(var_38 = 0; var_38 < var_20.size; var_38++) {
     level.ciphertotalcolumn[var_38] = var_20[var_38] + var_21[var_38] + var_22[var_38] + var_23[var_38];
+  }
 
   level.final_cipher_letter_numbers = [];
 
   foreach(var_42, var_40 in level.ciphertotalcolumn) {
     var_41 = var_40;
 
-    if(var_41 >= 26)
+    if(var_41 >= 26) {
       var_41 = var_41 - 26 * int(floor(var_41 / 26));
-    else
+    } else {
       var_41 = var_40;
+    }
 
-    if(var_41 < 1)
+    if(var_41 < 1) {
       var_41 = 26;
-    else
+    } else {
       var_41 = var_41 - 26 * int(floor(var_41 / 26));
+    }
 
     level.final_cipher_letter_numbers[var_42] = var_41;
   }
@@ -460,8 +479,9 @@ calculate_cipher_from_letters_initially(var_0, var_1, var_2, var_3) {
 
   foreach(var_42, var_44 in level.final_cipher_letter_numbers) {
     foreach(var_27, var_46 in level.alphabets) {
-      if(var_44 == var_46)
+      if(var_44 == var_46) {
         level.available_letters_for_cipher[level.available_letters_for_cipher.size] = var_27;
+      }
     }
   }
 }
@@ -472,8 +492,9 @@ cipher_quest() {
     var_1.model show();
   }
 
-  foreach(var_4 in level.cipher_model_structs)
-  var_4.model show();
+  foreach(var_4 in level.cipher_model_structs) {
+    var_4.model show();
+  }
 
   level waittill("cipher_solved");
 }
@@ -486,11 +507,13 @@ complete_cipher_quest() {
     var_1.model hide();
   }
 
-  foreach(var_4 in level.cipher_model_structs)
-  var_4.model hide();
+  foreach(var_4 in level.cipher_model_structs) {
+    var_4.model hide();
+  }
 
-  foreach(var_8, var_7 in level.cipher_choices)
-  level.cipher_choices[var_8].model setscriptablepartstate("cipher_glyph", "neutral");
+  foreach(var_8, var_7 in level.cipher_choices) {
+    level.cipher_choices[var_8].model setscriptablepartstate("cipher_glyph", "neutral");
+  }
 
   scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::notify_activation_progress(4);
 }
@@ -509,14 +532,17 @@ slow_mo_sphere(var_0) {
   self.sacred_ground thread apply_slow_mo_on_trigger();
   level waittill("end_painting_" + var_0.name);
 
-  if(isDefined(self.sacred_ground.fx))
+  if(isDefined(self.sacred_ground.fx)) {
     self.sacred_ground.fx delete();
+  }
 
-  if(isDefined(self.sacred_ground._id_FB2F))
+  if(isDefined(self.sacred_ground._id_FB2F)) {
     self.sacred_ground._id_FB2F delete();
+  }
 
-  if(isDefined(self.sacred_ground))
+  if(isDefined(self.sacred_ground)) {
     self.sacred_ground delete();
+  }
 
   var_0.model setModel("cp_town_willard_painting");
   var_1 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
@@ -559,15 +585,17 @@ apply_slow_mo_on_trigger() {
   for(;;) {
     foreach(var_1 in level.players) {
       if(var_1 istouching(self)) {
-        if(!scripts\engine\utility::is_true(var_1.inside_slow_sphere))
+        if(!scripts\engine\utility::is_true(var_1.inside_slow_sphere)) {
           var_1 thread scripts\cp\maps\cp_town\cp_town::update_special_mode_for_player(var_1);
+        }
 
         var_1.inside_slow_sphere = 1;
         continue;
       }
 
-      if(scripts\engine\utility::is_true(var_1.inside_slow_sphere))
+      if(scripts\engine\utility::is_true(var_1.inside_slow_sphere)) {
         var_1 thread scripts\cp\maps\cp_town\cp_town::update_special_mode_for_player(var_1);
+      }
 
       var_1.inside_slow_sphere = 0;
     }
@@ -616,13 +644,15 @@ apply_slow_mo_on_trigger() {
 }
 
 weeping_angels_start() {
-  foreach(var_1 in level.weeping_angels_note)
-  var_1.model show();
+  foreach(var_1 in level.weeping_angels_note) {
+    var_1.model show();
+  }
 
   level waittill("weeping_angels_note_read");
 
-  foreach(var_4 in level.players)
-  var_4.weeping_angels_puzzle = 1;
+  foreach(var_4 in level.players) {
+    var_4.weeping_angels_puzzle = 1;
+  }
 
   level.frozenzombiefunc = ::custom_slow_time_func;
   level.thawzombiefunc = ::custom_unslow_func;
@@ -665,8 +695,9 @@ shoot_the_machine() {
 play_gns_success_vo() {
   level endon("game_ended");
 
-  foreach(var_1 in level.players)
-  var_1 thread scripts\cp\cp_vo::try_to_play_vo("access_ghostnskulls", "town_comment_vo");
+  foreach(var_1 in level.players) {
+    var_1 thread scripts\cp\cp_vo::try_to_play_vo("access_ghostnskulls", "town_comment_vo");
+  }
 }
 
 watch_for_damage_on_machine() {
@@ -764,8 +795,9 @@ wait_for_player_activation() {
     }
 
     if(var_2) {
-      if(isDefined(level.gns_game_console_vfx))
+      if(isDefined(level.gns_game_console_vfx)) {
         level.gns_game_console_vfx delete();
+      }
 
       return;
     }
@@ -824,8 +856,9 @@ cp_town_gns_4_setup() {
   set_up_platform_and_trigger();
   level thread init_weeping_angels_note();
 
-  if(!isDefined(level.hidden_figures))
+  if(!isDefined(level.hidden_figures)) {
     level.hidden_figures = [];
+  }
 
   level.hidden_figures[0] = spawnStruct();
   level.hidden_figures[0].origin = (4058, -4359, 76);
@@ -893,8 +926,9 @@ entangled_cube_color_manager(var_0) {
       var_1 = var_0.ghost_in_entanglement;
       var_2 = get_platform_trigger_color(var_0);
 
-      if(isDefined(var_1.color) && var_2 != var_1.color)
+      if(isDefined(var_1.color) && var_2 != var_1.color) {
         change_cube_color(var_1, var_2);
+      }
     }
 
     scripts\engine\utility::waitframe();
@@ -920,8 +954,9 @@ get_platform_trigger_color(var_0) {
   foreach(var_3 in var_1) {
     var_4 = getEnt(var_3 + "_platform_trigger", "targetname");
 
-    if(var_0 istouching(var_4))
+    if(var_0 istouching(var_4)) {
       return var_3;
+    }
   }
 
   return "white";
@@ -953,13 +988,15 @@ color_indicator_manager() {
 }
 
 turn_off_color_indicator() {
-  foreach(var_1 in level.skull_hop_color_indicators)
-  var_1 setscriptablepartstate("skull_hop_indicator", "off");
+  foreach(var_1 in level.skull_hop_color_indicators) {
+    var_1 setscriptablepartstate("skull_hop_indicator", "off");
+  }
 }
 
 turn_on_color_indicator() {
-  foreach(var_1 in level.skull_hop_color_indicators)
-  var_1 setscriptablepartstate("skull_hop_indicator", level.color_indicator_color);
+  foreach(var_1 in level.skull_hop_color_indicators) {
+    var_1 setscriptablepartstate("skull_hop_indicator", level.color_indicator_color);
+  }
 }
 
 kill_color_indicator_manager() {
@@ -1006,8 +1043,9 @@ init_cipher_choices() {
 
     var_3 setscriptablepartstate("cipher_glyph", "neutral");
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_2.model = var_3;
+    }
 
     var_4 = strtok(var_2.name, "_");
     var_2.index = int(var_4[2]);
@@ -1058,8 +1096,9 @@ init_cipher_letters() {
         break;
     }
 
-    if(!isDefined(level.cipher_pointer))
+    if(!isDefined(level.cipher_pointer)) {
       level.cipher_pointer = 0;
+    }
   }
 
   level thread watch_for_correct_combination_of_letters_entered();
@@ -1140,8 +1179,9 @@ watch_for_correct_combination_of_letters_entered() {
     for(var_1 = 0; var_1 < level.cipher_pointer; var_1++) {
       var_0 = var_0 + level.cipher_model_structs[var_1].current_letter;
 
-      if(level.chosen_cipher_word == var_0)
+      if(level.chosen_cipher_word == var_0) {
         level notify("cipher_solved");
+      }
     }
 
     wait 1;
@@ -1180,8 +1220,9 @@ does_cipher_have_all_letters(var_0, var_1, var_2, var_3, var_4) {
   var_7 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
   foreach(var_9 in var_6) {
-    if(!scripts\engine\utility::array_contains(var_5, var_9))
+    if(!scripts\engine\utility::array_contains(var_5, var_9)) {
       return 0;
+    }
   }
 
   return 1;
@@ -1190,8 +1231,9 @@ does_cipher_have_all_letters(var_0, var_1, var_2, var_3, var_4) {
 get_chars_of_word_as_array(var_0) {
   var_1 = [];
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++)
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_1[var_2] = var_0[var_2];
+  }
 
   return var_1;
 }
@@ -1202,23 +1244,29 @@ cipher_activation_func(var_0, var_1) {
   if(scripts\engine\utility::is_true(level.completed_cipher)) {
     return;
   }
-  if(!isDefined(level.letter_roll))
+  if(!isDefined(level.letter_roll)) {
     level.letter_roll = [];
+  }
 
-  if(!isDefined(level.letter_roll["a"]))
+  if(!isDefined(level.letter_roll["a"])) {
     level.letter_roll["a"] = "0";
+  }
 
-  if(!isDefined(level.letter_roll["b"]))
+  if(!isDefined(level.letter_roll["b"])) {
     level.letter_roll["b"] = "0";
+  }
 
-  if(!isDefined(level.letter_roll["c"]))
+  if(!isDefined(level.letter_roll["c"])) {
     level.letter_roll["c"] = "0";
+  }
 
-  if(!isDefined(level.letter_roll["d"]))
+  if(!isDefined(level.letter_roll["d"])) {
     level.letter_roll["d"] = "0";
+  }
 
-  if(!isDefined(level.letter_inputs))
+  if(!isDefined(level.letter_inputs)) {
     level.letter_inputs = [];
+  }
 
   switch (var_0.name) {
     case "cipher_interaction_01":
@@ -1256,8 +1304,9 @@ clear_up_input_display_after_time(var_0) {
   level thread watch_for_inputs_reentered();
   wait(var_0);
 
-  foreach(var_3, var_2 in level.cipher_choices)
-  level.cipher_choices[var_3].model setscriptablepartstate("cipher_glyph", "neutral");
+  foreach(var_3, var_2 in level.cipher_choices) {
+    level.cipher_choices[var_3].model setscriptablepartstate("cipher_glyph", "neutral");
+  }
 }
 
 watch_for_inputs_reentered() {
@@ -1305,10 +1354,11 @@ paintings_activation_function(var_0, var_1) {
     return;
   }
   if(isDefined(var_0.painting_owner)) {
-    if(var_0.painting_owner == var_1)
+    if(var_0.painting_owner == var_1) {
       return;
-    else
+    } else {
       return;
+    }
   }
 
   if(scripts\engine\utility::is_true(level.painting_active)) {
@@ -1335,8 +1385,9 @@ paintings_activation_function(var_0, var_1) {
     var_1 playlocalsound("part_pickup");
 
     if(isDefined(var_1.array_of_weeping_angels)) {
-      foreach(var_3 in var_1.array_of_weeping_angels)
-      var_3 delete();
+      foreach(var_3 in var_1.array_of_weeping_angels) {
+        var_3 delete();
+      }
     }
 
     var_1.hidden_figures_hit = 0;
@@ -1345,8 +1396,9 @@ paintings_activation_function(var_0, var_1) {
     var_1.hidden_figures_hit = 0;
 
     if(isDefined(var_1.array_of_weeping_angels)) {
-      foreach(var_3 in var_1.array_of_weeping_angels)
-      var_3 delete();
+      foreach(var_3 in var_1.array_of_weeping_angels) {
+        var_3 delete();
+      }
     }
 
     var_1 playlocalsound("perk_machine_deny");
@@ -1364,8 +1416,9 @@ watch_for_player_disconnect_after_painting_trigger(var_0, var_1) {
     var_1 waittill("disconnect");
 
     if(isDefined(var_1.array_of_weeping_angels)) {
-      foreach(var_3 in var_1.array_of_weeping_angels)
-      var_3 delete();
+      foreach(var_3 in var_1.array_of_weeping_angels) {
+        var_3 delete();
+      }
     }
 
     var_0.model setModel("cp_town_willard_painting");
@@ -1413,9 +1466,9 @@ collector_activation_func(var_0, var_1) {
   var_1 endon("disconnect");
   level endon("game_ended");
 
-  if(scripts\engine\utility::is_true(level.picked_up_radiation_collector))
+  if(scripts\engine\utility::is_true(level.picked_up_radiation_collector)) {
     var_1 playlocalsound("perk_machine_deny");
-  else if(!isDefined(level.skulls_killed)) {
+  } else if(!isDefined(level.skulls_killed)) {
     var_1 playlocalsound("perk_machine_deny");
     return;
   } else {
@@ -1545,8 +1598,9 @@ init_cipher_interaction_structs() {
       default:
     }
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_2.model = var_3;
+    }
 
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
     var_2.model hide();
@@ -1634,8 +1688,9 @@ init_collector_func() {
       default:
     }
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_2.model = var_3;
+    }
 
     level.radiation_collector[var_4] = var_2;
   }
@@ -1656,8 +1711,9 @@ init_extraction_point_func() {
       default:
     }
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_2.model = var_3;
+    }
 
     level.radiation_collector[var_4] = var_2;
   }
@@ -1752,8 +1808,9 @@ init_skulls_to_shoot() {
     var_7.health = 5;
     var_7.damage_done = 0;
 
-    if(isDefined(var_7))
+    if(isDefined(var_7)) {
       var_6.model = var_7;
+    }
 
     level.skullbusters_map_skulls[var_8] = var_6;
     level.skullbusters_map_skulls[var_8] thread watch_for_skull_death();
@@ -1778,11 +1835,13 @@ determine_color(var_0) {
 }
 
 cp_town_should_moving_target_explode(var_0, var_1) {
-  if(!isDefined(level.color_indicator_color))
+  if(!isDefined(level.color_indicator_color)) {
     return 0;
+  }
 
-  if(level.color_indicator_color == "off")
+  if(level.color_indicator_color == "off") {
     return 0;
+  }
 
   return var_0.color == level.color_indicator_color;
 }
@@ -1810,8 +1869,9 @@ town_gns_player_reward_func() {
 upgrade_magic_wheel() {
   level.magic_wheel_upgraded = 1;
 
-  if(isDefined(level.current_active_wheel))
+  if(isDefined(level.current_active_wheel)) {
     level.current_active_wheel setscriptablepartstate("fx", "upgrade");
+  }
 }
 
 gns3_formation_movement() {
@@ -1871,8 +1931,9 @@ activate_gns_platforms() {
   var_0 = scripts\engine\utility::array_randomize(["up_down", "up_down", "forward_backward", "forward_backward"]);
   var_1 = scripts\engine\utility::array_randomize(["green", "yellow", "blue", "red"]);
 
-  foreach(var_4, var_3 in var_1)
-  level thread activate_platform_color(var_3, var_0[var_4]);
+  foreach(var_4, var_3 in var_1) {
+    level thread activate_platform_color(var_3, var_0[var_4]);
+  }
 }
 
 town_gns_start_func() {
@@ -1921,15 +1982,17 @@ activate_color_indicator() {
 deactivate_color_indicator() {
   kill_color_indicator_manager();
 
-  foreach(var_1 in level.skull_hop_color_indicators)
-  var_1 delete();
+  foreach(var_1 in level.skull_hop_color_indicators) {
+    var_1 delete();
+  }
 }
 
 update_color_indicator_color(var_0) {
   level.color_indicator_color = var_0;
 
-  foreach(var_2 in level.skull_hop_color_indicators)
-  var_2 setscriptablepartstate("skull_hop_indicator", var_0);
+  foreach(var_2 in level.skull_hop_color_indicators) {
+    var_2 setscriptablepartstate("skull_hop_indicator", var_0);
+  }
 }
 
 death_floor_player_monitor(var_0) {
@@ -1942,8 +2005,9 @@ death_floor_player_monitor(var_0) {
       scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::teleport_into_arcade_console(var_1);
       var_2 = scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::get_active_moving_target_based_on_priority();
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         level thread scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::activate_red_moving_target(var_2);
+      }
     }
   }
 }
@@ -2021,8 +2085,9 @@ get_moving_targets_in_same_subgroup(var_0) {
 
   foreach(var_3 in level.moving_target_groups) {
     foreach(var_5 in var_3) {
-      if(isDefined(var_5) && var_5.subgroup == var_0)
+      if(isDefined(var_5) && var_5.subgroup == var_0) {
         var_1[var_1.size] = var_5;
+      }
     }
   }
 
@@ -2031,8 +2096,9 @@ get_moving_targets_in_same_subgroup(var_0) {
 
 all_moving_targets_are_revealed(var_0) {
   foreach(var_2 in var_0) {
-    if(var_2.revealed == 0)
+    if(var_2.revealed == 0) {
       return 0;
+    }
   }
 
   return 1;
@@ -2054,8 +2120,9 @@ explode_moving_targets(var_0, var_1) {
 
 get_vfx_start_moving_target(var_0) {
   foreach(var_2 in var_0) {
-    if(scripts\engine\utility::is_true(var_2.vfx_start))
+    if(scripts\engine\utility::is_true(var_2.vfx_start)) {
       return var_2;
+    }
   }
 }
 
@@ -2140,8 +2207,9 @@ init_weeping_angels_note() {
     var_3.maxhealth = 5;
     var_3.health = 5;
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_2.model = var_3;
+    }
 
     var_2.model hide();
     level.weeping_angels_note[var_4] = var_2;
@@ -2236,10 +2304,11 @@ _id_837E(var_0, var_1) {
   thread scripts\cp\utility::wait_restore_player_perk();
   self.iscarrying = 0;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 setcarryingims(var_0, var_1, var_2, var_3) {
@@ -2264,8 +2333,9 @@ setcarryingims(var_0, var_1, var_2, var_3) {
       return 1;
     }
 
-    if(!isDefined(var_4))
+    if(!isDefined(var_4)) {
       var_4 = "force_cancel_placement";
+    }
 
     if(var_4 == "cancel_medusa" || var_4 == "force_cancel_placement") {
       if(!var_1 && var_4 == "cancel_medusa") {
@@ -2274,10 +2344,11 @@ setcarryingims(var_0, var_1, var_2, var_3) {
       scripts\engine\utility::allow_weapon(1);
       var_0 _id_B542();
 
-      if(var_4 != "force_cancel_placement")
+      if(var_4 != "force_cancel_placement") {
         thread watch_dpad();
-      else if(var_1)
+      } else if(var_1) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
+      }
 
       return 0;
     }
@@ -2285,8 +2356,9 @@ setcarryingims(var_0, var_1, var_2, var_3) {
     if(!var_0.canbeplaced) {
       continue;
     }
-    if(var_1)
+    if(var_1) {
       scripts\cp\utility::remove_crafted_item_from_inventory(self);
+    }
 
     var_0 _id_B545(var_2, undefined, self);
     scripts\engine\utility::allow_weapon(1);
@@ -2326,8 +2398,9 @@ _id_B53C(var_0) {
   _id_B544();
   self playSound("sentry_explode");
 
-  if(isDefined(self.charge_fx))
+  if(isDefined(self.charge_fx)) {
     self.charge_fx delete();
+  }
 
   scripts\cp\utility::removefromtraplist();
 
@@ -2336,8 +2409,9 @@ _id_B53C(var_0) {
     self playSound("sentry_explode_smoke");
     wait 0.1;
 
-    if(isDefined(self))
+    if(isDefined(self)) {
       self delete();
+    }
   }
 }
 
@@ -2368,8 +2442,9 @@ _id_B545(var_0, var_1, var_2) {
   self.carriedmedusa delete();
   var_3 solid();
 
-  if(!isDefined(var_2._id_B546))
+  if(!isDefined(var_2._id_B546)) {
     var_2._id_B546 = 1;
+  }
 
   var_4 = "cp_town_radiation_extractor";
   var_3 setModel(var_4);
@@ -2400,8 +2475,9 @@ _id_B545(var_0, var_1, var_2) {
 _id_B542() {
   self.carriedby forceusehintoff();
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.iscarrying = 0;
+  }
 
   self.carriedmedusa delete();
   self delete();
@@ -2414,8 +2490,9 @@ _id_B543(var_0, var_1) {
   self.carriedby = var_0;
   var_0.iscarrying = 1;
 
-  if(var_1)
+  if(var_1) {
     self.firstplacement = 1;
+  }
 
   var_0 thread scripts\cp\utility::update_trap_placement_internal(self, self.carriedmedusa, level.rad_extractor_settings["crafted_rad_extractor"]);
   thread scripts\cp\utility::item_oncarrierdeath(var_0);
@@ -2504,8 +2581,9 @@ removememorystructonconnect(var_0) {
 }
 
 removememorystructswhenvalid(var_0, var_1) {
-  while(!isDefined(var_1.disabled_interactions))
+  while(!isDefined(var_1.disabled_interactions)) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(var_0, var_1);
   var_1 thread scripts\cp\maps\cp_town\cp_town::update_special_mode_for_player(var_1);
@@ -2573,8 +2651,9 @@ activatefiguredamage(var_0, var_1, var_2) {
       if(isDefined(var_4.hidden_figures_hit)) {
         var_4.hidden_figures_hit++;
 
-        if(var_4.hidden_figures_hit >= 4)
+        if(var_4.hidden_figures_hit >= 4) {
           var_4 thread scripts\cp\maps\cp_town\cp_town::update_special_mode_for_player(var_4);
+        }
       }
 
       var_0.model hidefromplayer(var_4);
@@ -2600,8 +2679,9 @@ showhiddenfigurestoplayer(var_0, var_1, var_2, var_3) {
     if(!scripts\engine\utility::is_true(var_3.triggered_rad_extractor_device)) {
       return;
     }
-    if(!scripts\engine\utility::is_true(var_3.weeping_angels_puzzle) && getDvar("scr_skullbuster_cipher_easy", "") == "")
+    if(!scripts\engine\utility::is_true(var_3.weeping_angels_puzzle) && getDvar("scr_skullbuster_cipher_easy", "") == "") {
       return;
+    }
   }
 
   var_4 = 0.5;
@@ -2663,8 +2743,9 @@ showhiddenfigurestoplayer(var_0, var_1, var_2, var_3) {
         break;
     }
 
-    if(int(distance(var_0.origin, var_3.origin)) <= 120)
+    if(int(distance(var_0.origin, var_3.origin)) <= 120) {
       var_3 dodamage(int(var_3.health / 4), var_3.origin);
+    }
 
     var_0.angles = vectortoangles(var_3.origin - var_0.origin);
     var_1.model = var_0;

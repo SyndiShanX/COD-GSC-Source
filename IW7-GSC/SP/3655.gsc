@@ -15,8 +15,9 @@ _id_4D8A() {
   thread _id_A4D9();
 
   while(_id_0E4F::_id_9C7B()) {
-    while(level.player _meth_8439() || level.player _meth_843B() || level.player _meth_81CE())
+    while(level.player _meth_8439() || level.player _meth_843B() || level.player _meth_81CE()) {
       wait 0.05;
+    }
 
     self waittill("juke");
     var_1 = self getnormalizedmovement();
@@ -72,9 +73,9 @@ _id_4D8A() {
       var_14 = 20000;
     }
 
-    if(var_8 == 1)
+    if(var_8 == 1) {
       var_7 = var_1;
-    else {
+    } else {
       var_6 = 125;
 
       if(var_2["fraction"] > 0.3) {
@@ -82,8 +83,9 @@ _id_4D8A() {
         var_15 = (min(0, var_15[0]), var_15[1], var_15[2]);
         var_7 = anglesToForward(var_15) * var_4 * min(1, length(var_1));
 
-        if(isDefined(self._id_5AD4))
+        if(isDefined(self._id_5AD4)) {
           var_7 = var_7 * 1.2;
+        }
 
         var_6 = 150;
       } else {
@@ -107,8 +109,9 @@ _id_4D8A() {
       var_7 = vectorNormalize(var_7);
       setsaveddvar("player_SwimWaterCurrent", var_7 * var_14);
 
-      if(var_8 != 1)
+      if(var_8 != 1) {
         thread _id_118C4(var_0, var_7);
+      }
     }
 
     wait(var_9);
@@ -130,8 +133,9 @@ _id_4D8A() {
     thread scripts\sp\utility::_id_D2CD(100, var_13);
     thread _id_0E48::_id_C144();
 
-    if(_id_9C57())
+    if(_id_9C57()) {
       self waittill("landed_on_ground");
+    }
 
     wait(var_13);
     self._id_4D93 = undefined;
@@ -166,8 +170,9 @@ _id_11ABF() {
     var_1 = length(var_0);
 
     if(self buttonPressed("BUTTON_LSTICK") && var_1 > 0.3 || self _meth_843B() || self _meth_81CE()) {
-      if(self._id_4D8B)
+      if(self._id_4D8B) {
         self notify("juke");
+      }
     }
 
     scripts\engine\utility::waitframe();

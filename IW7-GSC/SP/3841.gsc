@@ -76,15 +76,17 @@ _id_FCEF() {
   foreach(var_37 in var_9) {
     var_13 = var_37._id_EEAC;
 
-    if(isDefined(var_13))
+    if(isDefined(var_13)) {
       var_0[var_13]._id_611E = scripts\engine\utility::array_add(var_0[var_13]._id_611E, var_37);
+    }
   }
 
   foreach(var_40 in var_10) {
     var_13 = var_40._id_EEAC;
 
-    if(isDefined(var_13))
+    if(isDefined(var_13)) {
       var_0[var_13]._id_6122 = scripts\engine\utility::array_add(var_0[var_13]._id_6122, var_40);
+    }
   }
 
   scripts\engine\utility::array_thread(var_0, ::_id_FCDD);
@@ -165,8 +167,9 @@ _id_13BA() {
   var_0 = self;
   wait 0.5;
 
-  foreach(var_2 in var_0._id_6513)
-  var_3 = var_2 thread scripts\sp\utility::_id_10619(1);
+  foreach(var_2 in var_0._id_6513) {
+    var_3 = var_2 thread scripts\sp\utility::_id_10619(1);
+  }
 }
 
 _id_146E() {
@@ -177,17 +180,19 @@ _id_146E() {
   foreach(var_3 in var_0._id_6513) {
     var_4 = var_3 scripts\sp\utility::_id_10619(1);
 
-    if(isDefined(var_4.target))
+    if(isDefined(var_4.target)) {
       var_4._id_1FEB = scripts\engine\utility::getStruct(var_3.target, "targetname");
-    else
+    } else {
       var_4._id_1FEB = var_4;
+    }
 
     var_1[var_1.size] = var_4;
   }
 
   foreach(var_4 in var_1) {
-    if(!isDefined(var_4.animation))
+    if(!isDefined(var_4.animation)) {
       var_4.animation = "harbor_floating_idle_03";
+    }
 
     var_4._id_1FEB thread scripts\sp\anim::_id_1ECC(var_4, var_4.animation);
     var_4 scripts\sp\utility::_id_F2A8(1);
@@ -205,8 +210,9 @@ _id_146E() {
 
   wait 1.0;
 
-  foreach(var_4 in var_1)
-  var_4 scripts\sp\utility::_id_F415(0);
+  foreach(var_4 in var_1) {
+    var_4 scripts\sp\utility::_id_F415(0);
+  }
 }
 
 _id_1470() {
@@ -228,8 +234,9 @@ _id_1471() {
   var_2 = [];
   var_2[0] = _id_1183(var_1, "breach_wall_animstruct_01");
 
-  for(var_3 = 0; isDefined(var_2[var_3].target); var_3 = var_3 + 1)
-    var_2[var_3 + 1] = scripts\engine\utility::getStruct(var_2[var_3].target, "targetname");
+  for(var_3 = 0; isDefined(var_2[var_3].target); var_3 = var_3 + 1) {
+    var_2[var_3 + 1] = ::scripts\engine\utility::getStruct(var_2[var_3].target, "targetname");
+  }
 
   var_4 = _id_1183(var_1, "breach_wall_charge_01");
   var_5 = _id_1183(var_1, "breach_wall_charge_02");
@@ -247,8 +254,9 @@ _id_1471() {
     var_9 = 0.0;
     var_10 = 0.0;
 
-    if(var_8 == var_2.size - 1)
+    if(var_8 == var_2.size - 1) {
       var_10 = 0.1;
+    }
 
     var_6 _id_117D(var_2[var_8], var_2[var_8].script_delay, var_9, var_10);
   }
@@ -265,13 +273,15 @@ _id_1471() {
   var_2 = [];
   var_2[0] = _id_1183(var_1, "breach_wall_floatin");
 
-  for(var_3 = 0; isDefined(var_2[var_3].target); var_3 = var_3 + 1)
-    var_2[var_3 + 1] = scripts\engine\utility::getStruct(var_2[var_3].target, "targetname");
+  for(var_3 = 0; isDefined(var_2[var_3].target); var_3 = var_3 + 1) {
+    var_2[var_3 + 1] = ::scripts\engine\utility::getStruct(var_2[var_3].target, "targetname");
+  }
 
   var_11 = 0.0;
 
-  foreach(var_13 in var_2)
-  var_11 = var_11 + var_13.script_delay;
+  foreach(var_13 in var_2) {
+    var_11 = var_11 + var_13.script_delay;
+  }
 
   var_15 = var_2[0].script_delay + var_2[1].script_delay;
   var_16 = var_15 + 0.15;
@@ -284,11 +294,13 @@ _id_1471() {
     var_9 = 0.0;
     var_10 = 0.0;
 
-    if(var_8 == 0)
+    if(var_8 == 0) {
       var_9 = 0.1;
+    }
 
-    if(var_8 == var_2.size - 1)
+    if(var_8 == var_2.size - 1) {
       var_10 = 0.1;
+    }
 
     var_6 _id_117D(var_2[var_8], var_2[var_8].script_delay, var_9, var_10);
   }
@@ -451,8 +463,9 @@ _id_1479() {
 
 _id_1185(var_0, var_1) {
   foreach(var_3 in var_0) {
-    if(isDefined(var_3.targetname) && var_3.targetname == var_1)
+    if(isDefined(var_3.targetname) && var_3.targetname == var_1) {
       return var_3;
+    }
   }
 }
 
@@ -460,8 +473,9 @@ _id_1186(var_0, var_1) {
   var_2 = [];
 
   foreach(var_4 in var_0) {
-    if(isDefined(var_4.targetname) && var_4.targetname == var_1)
+    if(isDefined(var_4.targetname) && var_4.targetname == var_1) {
       var_2[var_2.size] = var_4;
+    }
   }
 
   return var_2;
@@ -469,8 +483,9 @@ _id_1186(var_0, var_1) {
 
 _id_1183(var_0, var_1) {
   foreach(var_3 in var_0) {
-    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == var_1)
+    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == var_1) {
       return var_3;
+    }
   }
 }
 
@@ -478,8 +493,9 @@ _id_1184(var_0, var_1) {
   var_2 = [];
 
   foreach(var_4 in var_0) {
-    if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == var_1)
+    if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == var_1) {
       var_2[var_2.size] = var_4;
+    }
   }
 
   return var_2;

@@ -12,8 +12,9 @@ _id_DED9(var_0, var_1) {
 }
 
 _id_7A45(var_0) {
-  if(!isDefined(level.interactions) || !isDefined(level.interactions[var_0]))
+  if(!isDefined(level.interactions) || !isDefined(level.interactions[var_0])) {
     return undefined;
+  }
 
   return level.interactions[var_0];
 }
@@ -23,16 +24,18 @@ _id_7CA7(var_0) {
     if(isDefined(self.asm)) {
       var_1 = scripts\asm\asm::asm_getdemeanor();
 
-      if(var_1 == "casual")
+      if(var_1 == "casual") {
         var_0 = var_0 + "_" + var_1;
-      else
+      } else {
         var_0 = var_0 + "_alert";
+      }
     } else
       var_0 = var_0 + "_casual";
   }
 
-  if(!isDefined(level._id_10E1C) || !isDefined(level._id_10E1C[var_0]))
+  if(!isDefined(level._id_10E1C) || !isDefined(level._id_10E1C[var_0])) {
     return undefined;
+  }
 
   return level._id_10E1C[var_0];
 }
@@ -46,26 +49,30 @@ _id_9CD8(var_0) {
 }
 
 _id_9CD7(var_0) {
-  if(isDefined(var_0._id_EE92) && _id_9CD8(var_0._id_EE92))
+  if(isDefined(var_0._id_EE92) && _id_9CD8(var_0._id_EE92)) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_9C26(var_0) {
-  if(isDefined(var_0._id_EE92) && _id_9C27(var_0._id_EE92))
+  if(isDefined(var_0._id_EE92) && _id_9C27(var_0._id_EE92)) {
     return 1;
+  }
 
-  if(isDefined(var_0.script_noteworthy) && _id_9C27(var_0.script_noteworthy))
+  if(isDefined(var_0.script_noteworthy) && _id_9C27(var_0.script_noteworthy)) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_9C25(var_0) {
   if(isDefined(var_0._id_EE92)) {
-    if(_id_9C27(var_0._id_EE92) || var_0._id_EE92 == "combat_reaction")
+    if(_id_9C27(var_0._id_EE92) || var_0._id_EE92 == "combat_reaction") {
       return 1;
+    }
   }
 
   return 0;
@@ -74,19 +81,21 @@ _id_9C25(var_0) {
 _id_7837(var_0) {
   var_1 = scripts\asm\asm::asm_getdemeanor();
 
-  if(isDefined(var_0._id_22F2))
+  if(isDefined(var_0._id_22F2)) {
     return var_0._id_22F2[var_1];
-  else
+  } else {
     return undefined;
+  }
 }
 
 _id_79A5(var_0) {
   var_1 = scripts\asm\asm::asm_getdemeanor();
 
-  if(isDefined(var_0._id_6980))
+  if(isDefined(var_0._id_6980)) {
     return var_0._id_6980[var_1];
-  else
+  } else {
     return undefined;
+  }
 }
 
 _id_7A30(var_0) {
@@ -101,8 +110,9 @@ _id_F96C(var_0) {
   self.asm._id_4C86.interaction = var_0;
   var_1 = _id_7A45(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = _id_7CA7(var_0);
+  }
 
   self.asm._id_4C86._id_697F = _id_79A5(var_1);
 }
@@ -110,14 +120,17 @@ _id_F96C(var_0) {
 _id_CD4C(var_0, var_1, var_2, var_3, var_4) {
   var_0 = _id_7A45(var_0);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0.05;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 1;
+  }
 
   _id_10C47(var_0._id_EBEA[var_1]);
   self _meth_82E1(var_1, var_0._id_EBEA[var_1], var_2, var_3, var_4);
@@ -130,13 +143,15 @@ _id_509D(var_0) {
   var_1 = undefined;
 
   for(;;) {
-    if(isstruct(var_0) || isent(var_0))
+    if(isstruct(var_0) || isent(var_0)) {
       var_1 = var_0.origin;
-    else if(isvector(var_0))
+    } else if(isvector(var_0)) {
       var_1 = var_0;
+    }
 
-    if(isDefined(self._id_B004))
+    if(isDefined(self._id_B004)) {
       self._id_B004["interaction_position"] = var_1;
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -170,8 +185,9 @@ _id_CD4B(var_0, var_1, var_2) {
   }
   self._id_B004 = var_3._id_EBEA;
 
-  if(!isDefined(self._id_1FBB))
+  if(!isDefined(self._id_1FBB)) {
     self._id_1FBB = "generic";
+  }
 
   self._id_1F25 = 0;
   self._id_EBF8 = 0;
@@ -182,60 +198,68 @@ _id_CD4B(var_0, var_1, var_2) {
   self._id_9A30 = var_0;
   self._id_DD4C = 1;
 
-  if(!isDefined(self._id_1C4D))
+  if(!isDefined(self._id_1C4D)) {
     self._id_1C4D = 1;
+  }
 
   if(isDefined(level._id_9A2E)) {
     scripts\sp\interaction_manager::_id_168F();
     level._id_9A2E._id_4D94["registered_interactions"][var_0] = [];
 
-    if(isDefined(var_3._id_EBEA["vo_lines_male"]))
+    if(isDefined(var_3._id_EBEA["vo_lines_male"])) {
       level._id_9A2E._id_4D94["registered_interactions"][var_0]["vo_lines_male"] = var_3._id_EBEA["vo_lines_male"];
+    }
 
-    if(isDefined(var_3._id_EBEA["vo_lines_female"]))
+    if(isDefined(var_3._id_EBEA["vo_lines_female"])) {
       level._id_9A2E._id_4D94["registered_interactions"][var_0]["vo_lines_female"] = var_3._id_EBEA["vo_lines_female"];
+    }
   }
 
   if(isDefined(var_1)) {
     var_4 = undefined;
 
-    if(isarray(self._id_B004["idle"]))
+    if(isarray(self._id_B004["idle"])) {
       var_5 = self._id_B004["idle"][0];
-    else
+    } else {
       var_5 = self._id_B004["idle"];
+    }
 
-    if(isstring(var_1))
+    if(isstring(var_1)) {
       var_4 = scripts\engine\utility::getStruct(var_1, "targetname");
-    else if(isstruct(var_1))
+    } else if(isstruct(var_1)) {
       var_4 = var_1;
-    else if(isent(var_1))
+    } else if(isent(var_1)) {
       var_4 = var_1;
-    else
+    } else {
       return;
+    }
 
     var_6 = var_5;
     var_7 = getstartorigin(var_4.origin, var_4.angles, var_6);
     var_8 = getstartangles(var_4.origin, var_4.angles, var_6);
 
-    if(!isDefined(self._id_9B89))
+    if(!isDefined(self._id_9B89)) {
       self _meth_80F1(var_7, var_8);
-    else {
+    } else {
       self.origin = var_7;
       self.angles = var_8;
     }
 
-    if(!isDefined(self._id_9B89))
+    if(!isDefined(self._id_9B89)) {
       self animmode("noclip");
+    }
 
     self._id_C6B9 = var_4;
   }
 
-  if(!isDefined(self._id_1EDB))
+  if(!isDefined(self._id_1EDB)) {
     self._id_1EDB = spawnStruct();
+  }
 
   if(isDefined(self._id_B004["no_gun"])) {
-    if(!isDefined(self._id_9B89))
+    if(!isDefined(self._id_9B89)) {
       scripts\sp\utility::_id_86E4();
+    }
   }
 
   if(isDefined(self._id_9B89)) {
@@ -248,8 +272,9 @@ _id_CD4B(var_0, var_1, var_2) {
     }
   } else if(!isDefined(var_2))
     _id_0A1E::_id_2307(::_id_9A35, ::_id_9A0F);
-  else
+  else {
     _id_0A1E::_id_2307(::_id_9A11, ::_id_9A0F);
+  }
 
   self waittill("reaction_end");
 }
@@ -277,18 +302,19 @@ setup_interaction_head() {
 }
 
 _id_CD51(var_0, var_1, var_2, var_3) {
-  if(issubstr(var_0, "blended"))
+  if(issubstr(var_0, "blended")) {
     thread _id_CD4D(var_0, var_1);
-  else
+  } else {
     thread _id_CD4B(var_0, var_1);
+  }
 
   _id_DB73(var_2, var_3);
 }
 
 _id_DB73(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     thread _id_CDB1(var_0);
-  else {
+  } else {
     self waittill("playing_interaction_scene");
     scripts\engine\utility::delaythread(var_1, scripts\sp\interaction_manager::_id_CE17, var_0);
   }
@@ -360,8 +386,9 @@ play_looping_acknowlegdements(var_0, var_1) {
   self endon("death");
   self endon("stop_smart_reaction");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 300;
+  }
 
   if(isDefined(var_0)) {
     var_2 = _id_4906(var_0);
@@ -386,8 +413,9 @@ _id_CE0C() {
 }
 
 _id_137F5(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 256;
+  }
 
   for(;;) {
     if(distance2d(self.origin, level.player.origin) >= var_0) {
@@ -399,8 +427,9 @@ _id_137F5(var_0) {
 }
 
 _id_4906(var_0) {
-  if(!isarray(var_0) && !isstruct(var_0) && !isstring(var_0) && !isvector(var_0) && !var_0)
+  if(!isarray(var_0) && !isstruct(var_0) && !isstring(var_0) && !isvector(var_0) && !var_0) {
     return undefined;
+  }
 
   var_1 = spawnStruct();
   var_1._id_2857 = var_0;
@@ -418,8 +447,9 @@ _id_7A4D() {
   var_0 = undefined;
 
   if(isDefined(self._id_269A)) {
-    if(self._id_269A.size <= 0)
+    if(self._id_269A.size <= 0) {
       _id_E1F7();
+    }
 
     var_0 = self._id_269A[randomint(self._id_269A.size)];
     self.used = scripts\engine\utility::array_add(self.used, var_0);
@@ -471,8 +501,9 @@ _id_CD38(var_0, var_1, var_2) {
 _id_48F8(var_0) {
   var_1 = [];
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++)
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_1[var_2] = _id_4906(var_0[var_2]);
+  }
 
   return var_1;
 }
@@ -480,8 +511,9 @@ _id_48F8(var_0) {
 _id_7A4E(var_0) {
   var_1 = [];
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++)
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_1[var_2] = var_0[var_2] _id_7A4D();
+  }
 
   return var_1;
 }
@@ -495,60 +527,68 @@ _id_CD53(var_0, var_1, var_2) {
   if(!isDefined(var_3)) {
     return;
   }
-  if(!isDefined(self._id_1FBB))
+  if(!isDefined(self._id_1FBB)) {
     self._id_1FBB = "generic";
+  }
 
   self._id_9C84 = 0;
   self._id_BE79 = 0;
   self._id_9A30 = var_0;
   self._id_DD4C = 1;
 
-  if(!isDefined(self._id_1C4D))
+  if(!isDefined(self._id_1C4D)) {
     self._id_1C4D = 1;
+  }
 
-  if(isDefined(level._id_9A2E))
+  if(isDefined(level._id_9A2E)) {
     scripts\sp\interaction_manager::_id_168F();
+  }
 
   if(isDefined(var_1)) {
     var_4 = undefined;
 
-    if(isarray(var_3._id_EBEA["idle"]))
+    if(isarray(var_3._id_EBEA["idle"])) {
       var_5 = var_3._id_EBEA["idle"][0];
-    else
+    } else {
       var_5 = var_3._id_EBEA["idle"];
+    }
 
-    if(isstring(var_1))
+    if(isstring(var_1)) {
       var_4 = scripts\engine\utility::getStruct(var_1, "targetname");
-    else if(isstruct(var_1))
+    } else if(isstruct(var_1)) {
       var_4 = var_1;
-    else if(isent(var_1))
+    } else if(isent(var_1)) {
       var_4 = var_1;
-    else
+    } else {
       return;
+    }
 
     var_6 = var_5;
     var_7 = getstartorigin(var_4.origin, var_4.angles, var_6);
     var_8 = getstartangles(var_4.origin, var_4.angles, var_6);
 
-    if(!isDefined(self._id_9B89))
+    if(!isDefined(self._id_9B89)) {
       self _meth_80F1(var_7, var_8);
-    else {
+    } else {
       self.origin = var_7;
       self.angles = var_8;
     }
 
-    if(!isDefined(self._id_9B89))
+    if(!isDefined(self._id_9B89)) {
       self animmode("noclip");
+    }
 
     self._id_C6B9 = var_4;
   }
 
-  if(!isDefined(self._id_1EDB))
+  if(!isDefined(self._id_1EDB)) {
     self._id_1EDB = spawnStruct();
+  }
 
   if(isDefined(var_3._id_EBEA["no_gun"])) {
-    if(!isDefined(self._id_9B89) && self.weapon != "none")
+    if(!isDefined(self._id_9B89) && self.weapon != "none") {
       scripts\sp\utility::_id_86E4();
+    }
   }
 
   if(isDefined(self._id_9B89)) {
@@ -570,8 +610,9 @@ _id_CD50(var_0, var_1, var_2) {
   }
   self._id_B004 = var_3._id_EBEA;
 
-  if(!isDefined(self._id_1FBB))
+  if(!isDefined(self._id_1FBB)) {
     self._id_1FBB = "generic";
+  }
 
   self._id_1F25 = 0;
   self._id_EBF8 = 0;
@@ -584,31 +625,36 @@ _id_CD50(var_0, var_1, var_2) {
   self._id_C6B9 = undefined;
   self._id_C6B7 = undefined;
 
-  if(!isDefined(self._id_1C4D))
+  if(!isDefined(self._id_1C4D)) {
     self._id_1C4D = 1;
+  }
 
-  if(isDefined(level._id_9A2E))
-    level._id_9A2E._id_4D94["actors"] = scripts\engine\utility::array_add(level._id_9A2E._id_4D94["actors"], self);
+  if(isDefined(level._id_9A2E)) {
+    level._id_9A2E._id_4D94["actors"] = ::scripts\engine\utility::array_add(level._id_9A2E._id_4D94["actors"], self);
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self._id_C6B7 = var_2;
+  }
 
   if(isDefined(var_1)) {
     var_4 = undefined;
 
-    if(isarray(self._id_B004["idle"]))
+    if(isarray(self._id_B004["idle"])) {
       var_5 = self._id_B004["idle"][0];
-    else
+    } else {
       var_5 = self._id_B004["idle"];
+    }
 
-    if(isstring(var_1))
+    if(isstring(var_1)) {
       var_4 = scripts\engine\utility::getStruct(var_1, "targetname");
-    else if(isstruct(var_1))
+    } else if(isstruct(var_1)) {
       var_4 = var_1;
-    else if(isent(var_1))
+    } else if(isent(var_1)) {
       var_4 = var_1;
-    else
+    } else {
       return;
+    }
 
     var_6 = var_5;
     var_7 = getstartorigin(var_4.origin, var_4.angles, var_6);
@@ -616,15 +662,18 @@ _id_CD50(var_0, var_1, var_2) {
     self._id_C6B9 = var_1;
   }
 
-  if(!isDefined(self._id_9B89))
+  if(!isDefined(self._id_9B89)) {
     self animmode("noclip");
+  }
 
-  if(!isDefined(self._id_1EDB))
+  if(!isDefined(self._id_1EDB)) {
     self._id_1EDB = spawnStruct();
+  }
 
   if(isDefined(self._id_B004["no_gun"])) {
-    if(!isDefined(self._id_9B89) && self.weapon != "none")
+    if(!isDefined(self._id_9B89) && self.weapon != "none") {
       scripts\sp\utility::_id_86E4();
+    }
   }
 
   if(isDefined(self._id_9B89)) {
@@ -651,8 +700,9 @@ _id_CD4D(var_0, var_1) {
 }
 
 _id_E1CE(var_0, var_1) {
-  if(!isDefined(self._id_1FBB))
+  if(!isDefined(self._id_1FBB)) {
     self._id_1FBB = "generic";
+  }
 
   self._id_B004 = var_0._id_EBEA;
   self._id_1F25 = 0;
@@ -664,40 +714,45 @@ _id_E1CE(var_0, var_1) {
   self._id_9A30 = var_1;
   self._id_DD4C = 1;
 
-  if(!isDefined(self._id_1C4D) || isDefined(self._id_1C4D) && !self._id_1C4D)
+  if(!isDefined(self._id_1C4D) || isDefined(self._id_1C4D) && !self._id_1C4D) {
     self._id_1C4D = 1;
+  }
 
-  if(!isDefined(self._id_1EDB))
+  if(!isDefined(self._id_1EDB)) {
     self._id_1EDB = spawnStruct();
+  }
 
   if(isDefined(self._id_B004["no_gun"])) {
-    if(!isDefined(self._id_9B89))
+    if(!isDefined(self._id_9B89)) {
       scripts\sp\utility::_id_86E4();
+    }
   }
 }
 
 _id_1690() {
-  if(isDefined(level._id_9A2E))
-    level._id_9A2E._id_4D94["actors"] = scripts\engine\utility::array_add(level._id_9A2E._id_4D94["actors"], self);
+  if(isDefined(level._id_9A2E)) {
+    level._id_9A2E._id_4D94["actors"] = ::scripts\engine\utility::array_add(level._id_9A2E._id_4D94["actors"], self);
+  }
 }
 
 _id_7A46() {
-  if(isarray(self._id_B004["idle"]))
+  if(isarray(self._id_B004["idle"])) {
     return self._id_B004["idle"][0];
-  else
+  } else {
     return self._id_B004["idle"];
+  }
 }
 
 _id_7A47(var_0) {
   var_1 = undefined;
 
-  if(isstring(var_0))
+  if(isstring(var_0)) {
     var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
-  else if(isstruct(var_0))
+  } else if(isstruct(var_0)) {
     var_1 = var_0;
-  else if(isent(var_0))
+  } else if(isent(var_0)) {
     var_1 = var_0;
-  else {}
+  } else {}
 
   return var_1;
 }
@@ -715,8 +770,9 @@ _id_BBFA(var_0) {
     var_4 = getstartangles(var_2.origin, var_2.angles, var_1);
     _id_1162B(var_3, var_4);
 
-    if(!isDefined(self._id_9B89))
+    if(!isDefined(self._id_9B89)) {
       self animmode("noclip");
+    }
   }
 }
 
@@ -747,8 +803,9 @@ _id_CD4F(var_0, var_1) {
   }
   self._id_B004 = var_2._id_EBEA;
 
-  if(!isDefined(self._id_1FBB))
+  if(!isDefined(self._id_1FBB)) {
     self._id_1FBB = "generic";
+  }
 
   self._id_9A30 = var_0;
   self._id_1F25 = 0;
@@ -758,32 +815,37 @@ _id_CD4F(var_0, var_1) {
   self._id_9C84 = 0;
   self._id_BE79 = 0;
 
-  if(!isDefined(self._id_1C4D))
+  if(!isDefined(self._id_1C4D)) {
     self._id_1C4D = 1;
+  }
 
-  if(isDefined(level._id_9A2E))
-    level._id_9A2E._id_4D94["actors"] = scripts\engine\utility::array_add(level._id_9A2E._id_4D94["actors"], self);
+  if(isDefined(level._id_9A2E)) {
+    level._id_9A2E._id_4D94["actors"] = ::scripts\engine\utility::array_add(level._id_9A2E._id_4D94["actors"], self);
+  }
 
   if(isDefined(var_1)) {
     var_3 = undefined;
     var_4 = self._id_B004["lastanim"];
 
-    if(isstring(var_1))
+    if(isstring(var_1)) {
       var_3 = scripts\engine\utility::getStruct(var_1, "targetname");
-    else if(isstruct(var_1))
+    } else if(isstruct(var_1)) {
       var_3 = var_1;
-    else
+    } else {
       return;
+    }
 
     self._id_B004["optional_struct"] = var_3;
   }
 
-  if(!isDefined(self._id_1EDB))
+  if(!isDefined(self._id_1EDB)) {
     self._id_1EDB = spawnStruct();
+  }
 
   if(isDefined(self._id_B004["no_gun"])) {
-    if(!isDefined(self._id_9B89))
+    if(!isDefined(self._id_9B89)) {
       scripts\sp\utility::_id_86E4();
+    }
   }
 
   thread _id_0A1E::_id_2307(::_id_9A13);
@@ -799,10 +861,11 @@ _id_9C3D(var_0, var_1) {
   var_3 = vectorNormalize(var_0.origin - level.player.origin);
   var_4 = vectordot(var_2, var_3);
 
-  if(var_4 >= var_1)
+  if(var_4 >= var_1) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_9A13() {
@@ -820,25 +883,28 @@ _id_9A13() {
   var_0 = self._id_B004["optional_struct"];
   var_1 = "single anim";
 
-  if(!scripts\sp\utility::_id_65DF("interaction_end"))
+  if(!scripts\sp\utility::_id_65DF("interaction_end")) {
     scripts\sp\utility::_id_65E0("interaction_end");
+  }
 
   scripts\sp\utility::_id_65DD("interaction_end");
   var_2 = 0.25;
   var_3 = 0.25;
 
-  if(isDefined(self._id_B004["common_name"]))
+  if(isDefined(self._id_B004["common_name"])) {
     thread scripts\sp\interaction_manager::_id_12754();
+  }
 
   if(!self._id_BE79) {
     self._id_9C84 = 1;
     self notify("playing_interaction");
     var_4 = undefined;
 
-    if(isDefined(self._id_B004["interaction_position"]))
+    if(isDefined(self._id_B004["interaction_position"])) {
       var_4 = vectortoangles(self._id_B004["interaction_position"] - self.origin);
-    else
+    } else {
       var_4 = vectortoangles(level.player.origin - self.origin);
+    }
 
     var_5 = abs(angleclamp(var_4 - self.angles[1]) - 360);
     var_6 = scripts\sp\math::_id_C097(0, 360, var_5);
@@ -895,13 +961,15 @@ _id_9A11() {
   thread _id_9A3B("stop");
   var_1 = "single anim";
 
-  if(!scripts\sp\utility::_id_65DF("scene_end"))
+  if(!scripts\sp\utility::_id_65DF("scene_end")) {
     scripts\sp\utility::_id_65E0("scene_end");
+  }
 
   scripts\sp\utility::_id_65DD("scene_end");
 
-  if(!scripts\sp\utility::_id_65DF("playing_interaction"))
+  if(!scripts\sp\utility::_id_65DF("playing_interaction")) {
     scripts\sp\utility::_id_65E0("playing_interaction");
+  }
 
   scripts\sp\utility::_id_65DD("playing_interaction");
   var_2 = 0.11;
@@ -913,17 +981,19 @@ _id_9A11() {
   var_8 = undefined;
   var_9 = undefined;
 
-  if(isDefined(self._id_B004["reacquire_left"]) || isDefined(self._id_B004["reacquire_right"]))
+  if(isDefined(self._id_B004["reacquire_left"]) || isDefined(self._id_B004["reacquire_right"])) {
     var_7 = 1;
+  }
 
   self._id_DD54 = spawn("trigger_radius", self.origin, 0, self._id_B004["trigger_radius"], self._id_B004["trigger_radius"]);
 
   for(;;) {
     if((level.player istouching(self._id_DD54) || _id_9C3D(self, 0.925)) && !self._id_DC80) {
-      if(self._id_F274)
+      if(self._id_F274) {
         self._id_10254 = 1;
-      else
+      } else {
         self._id_10254 = 0;
+      }
     } else
       self._id_10254 = 0;
 
@@ -938,10 +1008,11 @@ _id_9A11() {
       }
 
       if(scripts\sp\interaction_manager::_id_3839(self._id_B004["trigger_radius"] * 2)) {
-        if(isDefined(self._id_B004["interaction_position"]))
+        if(isDefined(self._id_B004["interaction_position"])) {
           var_10 = lengthsquared(self._id_B004["interaction_position"] - self.origin);
-        else
+        } else {
           var_10 = lengthsquared(level.player.origin - self.origin);
+        }
 
         if(isDefined(self._id_B004["interaction_trigger_override"])) {
           break;
@@ -959,27 +1030,30 @@ _id_9A11() {
       scripts\engine\utility::waitframe();
     }
 
-    if(isDefined(self._id_B004["common_name"]))
+    if(isDefined(self._id_B004["common_name"])) {
       thread scripts\sp\interaction_manager::_id_12754();
+    }
 
     self._id_9C84 = 1;
     self notify("playing_interaction_scene");
     level notify("playing_interaction");
     var_15 = undefined;
 
-    if(isDefined(self._id_B004["interaction_position"]))
+    if(isDefined(self._id_B004["interaction_position"])) {
       var_15 = vectortoangles(self._id_B004["interaction_position"] - self.origin);
-    else
+    } else {
       var_15 = vectortoangles(level.player.origin - self.origin);
+    }
 
     var_16 = abs(angleclamp(var_15 - self.angles[1]) - 360);
     var_17 = scripts\sp\math::_id_C097(0, 360, var_16);
 
     if(isDefined(self._id_B004["backseam"])) {
-      if(var_17 >= 0 && var_17 <= 0.5)
+      if(var_17 >= 0 && var_17 <= 0.5) {
         var_17 = var_17 + 0.5;
-      else
+      } else {
         var_17 = var_17 - 0.5;
+      }
     }
 
     var_18 = self._id_B004["lastanim"];
@@ -1020,17 +1094,20 @@ _id_9A11() {
       }
     }
 
-    if(isDefined(self._id_B004["reaction_func"]))
+    if(isDefined(self._id_B004["reaction_func"])) {
       self thread[[self._id_B004["reaction_func"]]]();
+    }
 
     var_25 = getanimlength(var_23);
     var_25 = var_25 - var_4;
 
-    if(var_25 < 0)
+    if(var_25 < 0) {
       var_25 = 0;
+    }
 
-    if(!self._id_10254)
+    if(!self._id_10254) {
       wait(var_25);
+    }
 
     if(!self._id_10254) {
       _id_10C47(self._id_B004["follow"]);
@@ -1051,8 +1128,9 @@ _id_9A11() {
     self _meth_82E8(var_1, var_26, 1, 0.25, 1);
     self._id_9C84 = 1;
 
-    if(!self._id_10254)
+    if(!self._id_10254) {
       self _meth_82AC(self._id_B004["additive"], 1, var_4, 1);
+    }
 
     scripts\engine\utility::delaythread(getanimlength(var_26), scripts\sp\utility::_id_65E1, "scene_end");
     scripts\sp\utility::_id_65E1("playing_interaction");
@@ -1085,10 +1163,11 @@ _id_9A11() {
         if(isDefined(self._id_B004["exitangles"])) {
           var_29 = self._id_B004["exitangles_anims"]["lastexitanim"];
 
-          if(isDefined(self._id_B004["interaction_position"]))
+          if(isDefined(self._id_B004["interaction_position"])) {
             var_15 = vectortoangles(self._id_B004["interaction_position"] - self.origin);
-          else
+          } else {
             var_15 = vectortoangles(level.player.origin - self.origin);
+          }
 
           var_16 = abs(angleclamp(var_15 - self.angles[1]) - 360);
 
@@ -1136,14 +1215,16 @@ _id_9A11() {
               self._id_9C84 = 0;
               var_9 = 1;
 
-              if(!isDefined(self._id_B004["allow_multi_use"]))
+              if(!isDefined(self._id_B004["allow_multi_use"])) {
                 self waittill("forever");
+              }
             }
           } else {
             var_9 = 1;
 
-            if(!isDefined(self._id_B004["allow_multi_use"]))
+            if(!isDefined(self._id_B004["allow_multi_use"])) {
               self waittill("forever");
+            }
           }
 
           self._id_9C84 = 0;
@@ -1182,14 +1263,16 @@ _id_9A11() {
               self._id_9C84 = 0;
               var_9 = 1;
 
-              if(!isDefined(self._id_B004["allow_multi_use"]))
+              if(!isDefined(self._id_B004["allow_multi_use"])) {
                 self waittill("forever");
+              }
             }
           } else {
             var_9 = 1;
 
-            if(!isDefined(self._id_B004["allow_multi_use"]))
+            if(!isDefined(self._id_B004["allow_multi_use"])) {
               self waittill("forever");
+            }
           }
 
           self._id_9C84 = 0;
@@ -1197,22 +1280,25 @@ _id_9A11() {
         }
       }
 
-      if(isDefined(self._id_B004["interaction_position"]))
+      if(isDefined(self._id_B004["interaction_position"])) {
         var_15 = vectortoangles(self._id_B004["interaction_position"] - self.origin);
-      else
+      } else {
         var_15 = vectortoangles(level.player.origin - self.origin);
+      }
 
       var_16 = abs(angleclamp(var_15 - self.angles[1]) - 360);
       var_17 = scripts\sp\math::_id_C097(0, 360, var_16);
 
-      if(self._id_7245)
+      if(self._id_7245) {
         var_17 = 0;
+      }
 
       if(isDefined(self._id_B004["backseam"])) {
-        if(var_17 >= 0 && var_17 <= 0.5)
+        if(var_17 >= 0 && var_17 <= 0.5) {
           var_17 = var_17 + 0.5;
-        else
+        } else {
           var_17 = var_17 - 0.5;
+        }
 
         var_27 = var_27 + (var_17 - var_27) * var_2;
       } else
@@ -1226,8 +1312,9 @@ _id_9A11() {
         var_16 = acos(var_35);
         var_36 = vectorcross(var_33, var_34);
 
-        if(vectordot(var_36, anglestoup(self.angles)) < 0)
+        if(vectordot(var_36, anglestoup(self.angles)) < 0) {
           var_16 = var_16 * -1;
+        }
 
         var_37 = 0;
 
@@ -1249,10 +1336,11 @@ _id_9A11() {
           _id_F5CD(self._id_B004["follow"], var_27);
 
         if(var_37) {
-          if(isDefined(self._id_B004["interaction_position"]))
+          if(isDefined(self._id_B004["interaction_position"])) {
             var_15 = vectortoangles(self._id_B004["interaction_position"] - self.origin);
-          else
+          } else {
             var_15 = vectortoangles(level.player.origin - self.origin);
+          }
 
           var_16 = abs(angleclamp(var_15 - self.angles[1]) - 360);
           var_17 = scripts\sp\math::_id_C097(0, 360, var_16);
@@ -1305,43 +1393,50 @@ _id_9A35() {
   thread _id_9A3B("stop");
   var_1 = "single anim";
 
-  if(!scripts\sp\utility::_id_65DF("scene_end"))
+  if(!scripts\sp\utility::_id_65DF("scene_end")) {
     scripts\sp\utility::_id_65E0("scene_end");
+  }
 
   scripts\sp\utility::_id_65DD("scene_end");
   var_2 = 0.11;
 
-  if(isDefined(self._id_B004["lookat_lerp"]))
+  if(isDefined(self._id_B004["lookat_lerp"])) {
     var_2 = self._id_B004["lookat_lerp"];
+  }
 
   var_3 = 0.25;
 
-  if(isDefined(self._id_B004["initial_reaction_blendtime"]))
+  if(isDefined(self._id_B004["initial_reaction_blendtime"])) {
     var_3 = self._id_B004["initial_reaction_blendtime"];
+  }
 
   var_4 = 0.25;
 
-  if(isDefined(self._id_B004["lookat_follow_blendtime"]))
+  if(isDefined(self._id_B004["lookat_follow_blendtime"])) {
     var_4 = self._id_B004["lookat_follow_blendtime"];
+  }
 
   var_5 = 350;
 
-  if(isDefined(self._id_B004["lookat_end_distance"]))
+  if(isDefined(self._id_B004["lookat_end_distance"])) {
     var_5 = self._id_B004["lookat_end_distance"];
+  }
 
   var_6 = 0.45;
 
-  if(isDefined(self._id_B004["lookat_end_blendtime"]))
+  if(isDefined(self._id_B004["lookat_end_blendtime"])) {
     var_6 = self._id_B004["lookat_end_blendtime"];
+  }
 
   self._id_DD54 = spawn("trigger_radius", self.origin, 0, self._id_B004["trigger_radius"], self._id_B004["trigger_radius"]);
 
   for(;;) {
     if((level.player istouching(self._id_DD54) || _id_9C3D(self, 0.925)) && !self._id_DC80) {
-      if(self._id_F274)
+      if(self._id_F274) {
         self._id_10254 = 1;
-      else
+      } else {
         self._id_10254 = 0;
+      }
     } else
       self._id_10254 = 0;
 
@@ -1356,10 +1451,11 @@ _id_9A35() {
       }
 
       if(scripts\sp\interaction_manager::_id_3839(self._id_B004["trigger_radius"] * 2)) {
-        if(isDefined(self._id_B004["interaction_position"]))
+        if(isDefined(self._id_B004["interaction_position"])) {
           var_7 = lengthsquared(self._id_B004["interaction_position"] - self.origin);
-        else
+        } else {
           var_7 = lengthsquared(level.player.origin - self.origin);
+        }
 
         if(isDefined(self._id_B004["interaction_trigger_override"])) {
           break;
@@ -1377,18 +1473,20 @@ _id_9A35() {
       scripts\engine\utility::waitframe();
     }
 
-    if(isDefined(self._id_B004["common_name"]))
+    if(isDefined(self._id_B004["common_name"])) {
       thread scripts\sp\interaction_manager::_id_12754();
+    }
 
     self._id_9C84 = 1;
     self notify("playing_interaction_scene");
     level notify("playing_interaction");
     var_12 = undefined;
 
-    if(isDefined(self._id_B004["interaction_position"]))
+    if(isDefined(self._id_B004["interaction_position"])) {
       var_12 = vectortoangles(self._id_B004["interaction_position"] - self.origin);
-    else
+    } else {
       var_12 = vectortoangles(level.player.origin - self.origin);
+    }
 
     var_13 = abs(angleclamp(var_12 - self.angles[1]) - 360);
     var_14 = self._id_B004["lastanim"];
@@ -1420,17 +1518,19 @@ _id_9A35() {
     level thread scripts\sp\interaction_manager::_id_9A0E(self);
 
     if(isDefined(self._id_B004["scene"])) {
-      if(isDefined(self._id_B004["interaction_position"]))
+      if(isDefined(self._id_B004["interaction_position"])) {
         var_12 = vectortoangles(self._id_B004["interaction_position"] - self.origin);
-      else
+      } else {
         var_12 = vectortoangles(level.player.origin - self.origin);
+      }
 
       var_13 = abs(angleclamp(var_12 - self.angles[1]) - 360);
 
-      if(self._id_10254)
+      if(self._id_10254) {
         wait 0.0;
-      else
+      } else {
         wait(getanimlength(var_19));
+      }
 
       if(isarray(self._id_B004["scene"])) {
         var_20 = self._id_EBF8;
@@ -1447,10 +1547,11 @@ _id_9A35() {
     }
 
     if(isDefined(self._id_B004["exitangles"])) {
-      if(isDefined(self._id_B004["interaction_position"]))
+      if(isDefined(self._id_B004["interaction_position"])) {
         var_12 = vectortoangles(self._id_B004["interaction_position"] - self.origin);
-      else
+      } else {
         var_12 = vectortoangles(level.player.origin - self.origin);
+      }
 
       var_13 = abs(angleclamp(var_12 - self.angles[1]) - 360);
       var_21 = self._id_B004["exitangles_anims"]["lastexitanim"];
@@ -1486,8 +1587,9 @@ _id_9A35() {
 
       self._id_9C84 = 0;
 
-      if(!isDefined(self._id_B004["allow_multi_use"]))
+      if(!isDefined(self._id_B004["allow_multi_use"])) {
         self waittill("forever");
+      }
     }
 
     if(!self._id_10254) {
@@ -1502,8 +1604,9 @@ _id_9A35() {
       }
     }
 
-    if(isDefined(self._id_B004["reaction_func"]))
+    if(isDefined(self._id_B004["reaction_func"])) {
       self[[self._id_B004["reaction_func"]]]();
+    }
 
     var_26 = getanimlength(var_19);
     wait(var_26);
@@ -1513,10 +1616,11 @@ _id_9A35() {
         if(isarray(var_14[0])) {
           _id_10C47();
 
-          if(self._id_1F25 >= var_14[0].size - 1)
+          if(self._id_1F25 >= var_14[0].size - 1) {
             self _meth_82E3(var_1, self._id_B004["end_idle"], %body, 1, var_6, 1);
-          else
+          } else {
             self _meth_82E3(var_1, var_0, %body, 1, var_6, 1);
+          }
         } else
           self _meth_82E3(var_1, self._id_B004["end_idle"], %body, 1, var_6, 1);
       } else {
@@ -1543,14 +1647,16 @@ _id_9A35() {
       } else {
         self._id_9C84 = 0;
 
-        if(!isDefined(self._id_B004["allow_multi_use"]))
+        if(!isDefined(self._id_B004["allow_multi_use"])) {
           self waittill("forever");
+        }
       }
     } else {
       self._id_9C84 = 0;
 
-      if(!isDefined(self._id_B004["allow_multi_use"]))
+      if(!isDefined(self._id_B004["allow_multi_use"])) {
         self waittill("forever");
+      }
     }
 
     scripts\engine\utility::waitframe();
@@ -1579,18 +1685,20 @@ _id_9A37() {
   var_2 = undefined;
 
   if(isarray(var_1["idle"])) {
-    if(isDefined(self.gender) && issubstr(self.gender, "female"))
+    if(isDefined(self.gender) && issubstr(self.gender, "female")) {
       var_2 = "idle_female";
-    else
+    } else {
       var_2 = "idle";
+    }
 
     var_0 = var_1[var_2][0];
     thread _id_DC7E();
   } else {
-    if(isDefined(self.gender) && issubstr(self.gender, "female"))
+    if(isDefined(self.gender) && issubstr(self.gender, "female")) {
       var_2 = "idle_female";
-    else
+    } else {
       var_2 = "idle";
+    }
 
     var_0 = var_1[var_2];
   }
@@ -1602,8 +1710,9 @@ _id_9A37() {
   thread _id_9A3B("stop");
   thread _id_CC88();
 
-  if(!scripts\sp\utility::_id_65DF("scene_end"))
+  if(!scripts\sp\utility::_id_65DF("scene_end")) {
     scripts\sp\utility::_id_65E0("scene_end");
+  }
 
   scripts\sp\utility::_id_65DD("scene_end");
   var_4 = 0.11;
@@ -1622,10 +1731,11 @@ _id_9A37() {
     for(;;) {
       if(!isDefined(self._id_DD49) || isDefined(self._id_DD49) && self._id_DD49 != "busy" && self._id_DD49 != "nag") {
         if(scripts\sp\interaction_manager::_id_3839(var_1["trigger_radius"] * 2)) {
-          if(isDefined(var_1["interaction_position"]))
+          if(isDefined(var_1["interaction_position"])) {
             var_9 = lengthsquared(var_1["interaction_position"] - self.origin);
-          else
+          } else {
             var_9 = lengthsquared(level.player.origin - self.origin);
+          }
 
           if(isDefined(var_1["interaction_trigger_override"])) {
             break;
@@ -1649,10 +1759,11 @@ _id_9A37() {
     level notify("playing_interaction");
     var_14 = undefined;
 
-    if(isDefined(var_1["interaction_position"]))
+    if(isDefined(var_1["interaction_position"])) {
       var_14 = vectortoangles(var_1["interaction_position"] - self.origin);
-    else
+    } else {
       var_14 = vectortoangles(level.player.origin - self.origin);
+    }
 
     var_15 = abs(angleclamp(var_14 - self.angles[1]) - 360);
     var_16 = "lastanim";
@@ -1678,14 +1789,15 @@ _id_9A37() {
     self._id_9C84 = 1;
     thread scripts\sp\interaction_manager::_id_9A39();
     wait(getanimlength(var_21));
-    level._id_10E1C[self._id_9A30]._id_EBEA["angle_" + var_16 + "_spent"] = scripts\engine\utility::array_add(level._id_10E1C[self._id_9A30]._id_EBEA["angle_" + var_16 + "_spent"], var_21);
-    level._id_10E1C[self._id_9A30]._id_EBEA[var_16] = scripts\engine\utility::array_remove(level._id_10E1C[self._id_9A30]._id_EBEA[var_16], var_21);
+    level._id_10E1C[self._id_9A30]._id_EBEA["angle_" + var_16 + "_spent"] = ::scripts\engine\utility::array_add(level._id_10E1C[self._id_9A30]._id_EBEA["angle_" + var_16 + "_spent"], var_21);
+    level._id_10E1C[self._id_9A30]._id_EBEA[var_16] = ::scripts\engine\utility::array_remove(level._id_10E1C[self._id_9A30]._id_EBEA[var_16], var_21);
 
     if(isDefined(var_1["exitangles"])) {
-      if(isDefined(var_1["interaction_position"]))
+      if(isDefined(var_1["interaction_position"])) {
         var_14 = vectortoangles(var_1["interaction_position"] - self.origin);
-      else
+      } else {
         var_14 = vectortoangles(level.player.origin - self.origin);
+      }
 
       var_15 = abs(angleclamp(var_14 - self.angles[1]) - 360);
       var_22 = "lastexitanim";
@@ -1707,15 +1819,16 @@ _id_9A37() {
       _id_10C47(var_26);
       self _meth_82E2(var_3, var_26, 1, var_8, 1);
       wait(getanimlength(var_26));
-      level._id_10E1C[self._id_9A30]._id_EBEA[var_22] = scripts\engine\utility::array_remove(level._id_10E1C[self._id_9A30]._id_EBEA[var_22], var_26);
+      level._id_10E1C[self._id_9A30]._id_EBEA[var_22] = ::scripts\engine\utility::array_remove(level._id_10E1C[self._id_9A30]._id_EBEA[var_22], var_26);
     }
 
     _id_10C47(var_0);
     self _meth_82E2(var_3, var_0, 1, var_8, 1);
     self._id_9C84 = 0;
 
-    if(isDefined(var_1["reaction_func"]))
+    if(isDefined(var_1["reaction_func"])) {
       self[[var_1["reaction_func"]]]();
+    }
 
     level notify("interaction_done");
     thread scripts\sp\interaction_manager::_id_F566("busy");
@@ -1742,8 +1855,9 @@ _id_9A36() {
     self notify("playing_interaction_scene");
     level notify("playing_interaction");
 
-    if(isDefined(self._id_B004["common_name"]))
+    if(isDefined(self._id_B004["common_name"])) {
       thread scripts\sp\interaction_manager::_id_12754();
+    }
 
     _id_CCA9();
     scripts\engine\utility::waitframe();
@@ -1760,8 +1874,9 @@ _id_9843() {
     self animmode("noclip");
   }
 
-  if(!scripts\sp\utility::_id_65DF("scene_end"))
+  if(!scripts\sp\utility::_id_65DF("scene_end")) {
     scripts\sp\utility::_id_65E0("scene_end");
+  }
 
   scripts\sp\utility::_id_65DD("scene_end");
   self._id_DD54 = spawn("trigger_radius", self.origin, 0, self._id_B004["trigger_radius"], self._id_B004["trigger_radius"]);
@@ -1778,10 +1893,11 @@ _id_F8D1() {
 _id_7A4C() {
   var_0 = undefined;
 
-  if(isarray(self._id_B004["idle"]))
+  if(isarray(self._id_B004["idle"])) {
     var_0 = self._id_B004["idle"][0];
-  else
+  } else {
     var_0 = self._id_B004["idle"];
+  }
 
   return var_0;
 }
@@ -1790,10 +1906,11 @@ _id_9C61() {
   var_0 = undefined;
 
   if((level.player istouching(self._id_DD54) || _id_9C3D(self, 0.925)) && !self._id_DC80) {
-    if(self._id_F274)
+    if(self._id_F274) {
       var_0 = 1;
-    else
+    } else {
       var_0 = 0;
+    }
   } else
     var_0 = 0;
 
@@ -1810,10 +1927,11 @@ _id_2B88() {
     var_4 = scripts\sp\interaction_manager::_id_3839(self._id_B004["trigger_radius"] * 2);
 
     if(var_4) {
-      if(isDefined(self._id_B004["interaction_position"]))
+      if(isDefined(self._id_B004["interaction_position"])) {
         var_0 = lengthsquared(self._id_B004["interaction_position"] - self.origin);
-      else
+      } else {
         var_0 = lengthsquared(level.player.origin - self.origin);
+      }
 
       if(isDefined(self._id_B004["interaction_trigger_override"])) {
         break;
@@ -1855,8 +1973,9 @@ _id_CCA9() {
     self _meth_82E8("single anim", self._id_B004["fwd_anim"], var_10 + 0.005, 0.2);
     var_14 = 1;
 
-    if(scripts\engine\utility::anglebetweenvectorssigned(var_5, var_4, var_9) > 0)
+    if(scripts\engine\utility::anglebetweenvectorssigned(var_5, var_4, var_9) > 0) {
       var_14 = 0;
+    }
 
     if(var_14) {
       var_1 = scripts\sp\math::_id_AB6F(var_1, var_13, 0.1);
@@ -1931,10 +2050,11 @@ _id_101F9() {
   self endon("reaction_end");
   var_0 = _id_7A45(self._id_9A30);
 
-  if(!scripts\sp\utility::_id_65DF("hold_simple_idles"))
+  if(!scripts\sp\utility::_id_65DF("hold_simple_idles")) {
     scripts\sp\utility::_id_65E0("hold_simple_idles");
-  else
+  } else {
     scripts\sp\utility::_id_65DD("hold_simple_idles");
+  }
 
   if(!isarray(var_0._id_EBEA["idle"])) {
     return;
@@ -1967,20 +2087,23 @@ _id_101F9() {
   _id_9A3B("stop");
 
   for(;;) {
-    if(isDefined(self._id_C6B9))
+    if(isDefined(self._id_C6B9)) {
       _id_13CA(self._id_C6B9, var_3);
+    }
 
     _id_10C47(var_3);
     self _meth_82E2("single anim", var_3, 1, 0.2, 1);
     thread _id_0C4C::_id_19BE();
 
-    if(isDefined(self._id_C6B7))
+    if(isDefined(self._id_C6B7)) {
       thread _id_1404(var_5);
+    }
 
     wait(getanimlength(var_3) * randomintrange(1, 2));
 
-    while(scripts\sp\utility::_id_65DB("hold_simple_idles"))
+    while(scripts\sp\utility::_id_65DB("hold_simple_idles")) {
       wait(getanimlength(var_3));
+    }
 
     if(var_8.size <= 0) {
       var_8 = var_1;
@@ -2006,8 +2129,9 @@ _id_101F9() {
 
     self clearanim(var_3, 0.2);
 
-    if(isDefined(self._id_C6B9))
+    if(isDefined(self._id_C6B9)) {
       _id_13CA(self._id_C6B9, var_10);
+    }
 
     _id_10C47(var_10);
     self _meth_82E2("single anim", var_10, 1, 0.2, 1);
@@ -2015,8 +2139,9 @@ _id_101F9() {
     wait(getanimlength(var_10));
     self clearanim(var_10, 0.2);
 
-    if(isDefined(self._id_C6B7))
+    if(isDefined(self._id_C6B7)) {
       thread _id_1402();
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -2070,10 +2195,11 @@ _id_CC8B(var_0, var_1) {
   wait(var_0);
   var_2 = strtok(var_1, "_");
 
-  if(scripts\engine\utility::array_contains(var_2, "plr"))
+  if(scripts\engine\utility::array_contains(var_2, "plr")) {
     level.player scripts\sp\utility::play_sound_on_entity(var_1);
-  else
+  } else {
     scripts\sp\utility::_id_10346(var_1);
+  }
 }
 
 _id_1368() {
@@ -2094,8 +2220,9 @@ _id_1368() {
           wait(lookupsoundlength(var_3) / 1000);
           self notify("single dialogue");
 
-          if(isDefined(self._id_EF82))
+          if(isDefined(self._id_EF82)) {
             self clearanim(self._id_EF82, 0.2);
+          }
         }
       }
 
@@ -2108,8 +2235,9 @@ _id_1368() {
       wait(lookupsoundlength(var_3) / 1000);
       self notify("single dialogue");
 
-      if(isDefined(self._id_EF82))
+      if(isDefined(self._id_EF82)) {
         self clearanim(self._id_EF82, 0.2);
+      }
     }
   }
 }
@@ -2154,32 +2282,36 @@ _id_CC88() {
   if(!isDefined(level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["vo_lines_female"])) {
     return;
   }
-  if(!isDefined(level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["used_male_vo"]))
+  if(!isDefined(level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["used_male_vo"])) {
     level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["used_male_vo"] = [];
+  }
 
   if(isDefined(self.gender) && issubstr(self.gender, "male")) {
-    if(level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["vo_lines_male"].size < 1)
+    if(level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["vo_lines_male"].size < 1) {
       level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["vo_lines_male"] = level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["used_male_vo"];
+    }
 
     var_2 = level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["vo_lines_male"];
     var_3 = randomint(var_2.size);
     var_1 = var_2[var_3];
-    level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["vo_lines_male"] = scripts\sp\utility::array_remove_index(level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["vo_lines_male"], var_3);
-    level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["used_male_vo"] = scripts\engine\utility::array_add(level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["used_male_vo"], var_1);
+    level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["vo_lines_male"] = ::scripts\sp\utility::array_remove_index(level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["vo_lines_male"], var_3);
+    level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["used_male_vo"] = ::scripts\engine\utility::array_add(level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["used_male_vo"], var_1);
   }
 
-  if(!isDefined(level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["used_female_vo"]))
+  if(!isDefined(level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["used_female_vo"])) {
     level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["used_female_vo"] = [];
+  }
 
   if(isDefined(self.gender) && issubstr(self.gender, "female")) {
-    if(level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["vo_lines_female"].size < 1)
+    if(level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["vo_lines_female"].size < 1) {
       level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["vo_lines_female"] = level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["used_female_vo"];
+    }
 
     var_2 = level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["vo_lines_female"];
     var_3 = randomint(var_2.size);
     var_1 = var_2[var_3];
-    level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["vo_lines_female"] = scripts\sp\utility::array_remove_index(level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["vo_lines_female"], var_3);
-    level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["used_female_vo"] = scripts\engine\utility::array_add(level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["used_female_vo"], var_1);
+    level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["vo_lines_female"] = ::scripts\sp\utility::array_remove_index(level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["vo_lines_female"], var_3);
+    level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["used_female_vo"] = ::scripts\engine\utility::array_add(level._id_9A2E._id_4D94["registered_state_interactions"][self._id_9A30]["used_female_vo"], var_1);
   }
 
   var_4 = undefined;
@@ -2215,36 +2347,40 @@ _id_CC8C(var_0) {
   if(isDefined(level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["vo_lines_male"])) {
     var_1 = 1;
 
-    if(!isDefined(level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["used_male_vo"]))
+    if(!isDefined(level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["used_male_vo"])) {
       level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["used_male_vo"] = [];
+    }
 
     if(isDefined(self.gender) && issubstr(self.gender, "male")) {
-      if(level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["vo_lines_male"].size < 1)
+      if(level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["vo_lines_male"].size < 1) {
         level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["vo_lines_male"] = level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["used_male_vo"];
+      }
 
       var_4 = level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["vo_lines_male"];
       var_5 = randomint(var_4.size);
       var_2 = var_4[var_5];
-      level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["vo_lines_male"] = scripts\sp\utility::array_remove_index(level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["vo_lines_male"], var_5);
-      level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["used_male_vo"] = scripts\engine\utility::array_add(level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["used_male_vo"], var_2);
+      level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["vo_lines_male"] = ::scripts\sp\utility::array_remove_index(level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["vo_lines_male"], var_5);
+      level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["used_male_vo"] = ::scripts\engine\utility::array_add(level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["used_male_vo"], var_2);
     }
   }
 
   if(isDefined(level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["vo_lines_female"])) {
     var_1 = 1;
 
-    if(!isDefined(level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["used_female_vo"]))
+    if(!isDefined(level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["used_female_vo"])) {
       level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["used_female_vo"] = [];
+    }
 
     if(isDefined(self.gender) && issubstr(self.gender, "female")) {
-      if(level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["vo_lines_female"].size < 1)
+      if(level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["vo_lines_female"].size < 1) {
         level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["vo_lines_female"] = level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["used_female_vo"];
+      }
 
       var_4 = level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["vo_lines_female"];
       var_5 = randomint(var_4.size);
       var_2 = var_4[var_5];
-      level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["vo_lines_female"] = scripts\sp\utility::array_remove_index(level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["vo_lines_female"], var_5);
-      level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["used_female_vo"] = scripts\engine\utility::array_add(level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["used_female_vo"], var_2);
+      level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["vo_lines_female"] = ::scripts\sp\utility::array_remove_index(level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["vo_lines_female"], var_5);
+      level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["used_female_vo"] = ::scripts\engine\utility::array_add(level._id_9A2E._id_4D94["registered_interactions"][self._id_9A30]["used_female_vo"], var_2);
     }
   }
 
@@ -2252,14 +2388,16 @@ _id_CC8C(var_0) {
 
   if(!isDefined(var_1)) {
     if(isstring(var_0[var_6])) {
-      for(var_7 = 1; var_7 < var_0.size; var_7 = var_7 + 2)
+      for(var_7 = 1; var_7 < var_0.size; var_7 = var_7 + 2) {
         _id_CC8B(var_0[var_7], var_0[var_7 + 1]);
+      }
 
       return;
     }
 
-    for(var_7 = 1; var_7 < var_0.size - 1; var_7 = var_7 + 2)
+    for(var_7 = 1; var_7 < var_0.size - 1; var_7 = var_7 + 2) {
       _id_CC8B(var_0[var_7], var_0[var_7 + 1]);
+    }
 
     return;
   } else
@@ -2274,13 +2412,15 @@ _id_F59A(var_0) {
   if(isstring(var_0[var_1])) {
     self._id_F273 = 0.0;
 
-    for(var_2 = 1; var_2 < var_0.size; var_2 = var_2 + 2)
+    for(var_2 = 1; var_2 < var_0.size; var_2 = var_2 + 2) {
       self._id_F275 = self._id_F275 + var_0[var_2];
+    }
   } else {
     self._id_F273 = var_0[var_1];
 
-    for(var_2 = 1; var_2 < var_0.size - 1; var_2 = var_2 + 2)
+    for(var_2 = 1; var_2 < var_0.size - 1; var_2 = var_2 + 2) {
       self._id_F275 = self._id_F275 + var_0[var_2];
+    }
   }
 }
 
@@ -2291,14 +2431,16 @@ _id_DC7D() {
   var_0 = undefined;
   var_1 = _id_7A45(self._id_9A30);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = _id_7CA7(self._id_9A30);
+  }
 
   self._id_383A = 1;
   self._id_9C83 = undefined;
 
-  if(!isarray(var_1._id_EBEA["idle"]))
+  if(!isarray(var_1._id_EBEA["idle"])) {
     var_1._id_EBEA["idle"] = [var_1._id_EBEA["idle"], var_1._id_EBEA["idle"]];
+  }
 
   var_2 = [];
   var_3 = var_1._id_EBEA["idle"];
@@ -2338,16 +2480,17 @@ _id_DC7D() {
       var_10 = getstartorigin(self._id_C6B9.origin, self._id_C6B9.angles, var_9);
       var_11 = getstartangles(self._id_C6B9.origin, self._id_C6B9.angles, var_9);
 
-      if(!isDefined(self._id_9B89))
+      if(!isDefined(self._id_9B89)) {
         self _meth_80F1(var_10, var_11);
-      else {
+      } else {
         self.origin = var_10;
         self.angles = var_11;
       }
     }
 
-    while(self._id_9C84)
+    while(self._id_9C84) {
       scripts\engine\utility::waitframe();
+    }
 
     _id_10C47(var_9);
     self _meth_82E2("single anim", var_9, 1, 0.2, 1);
@@ -2355,16 +2498,17 @@ _id_DC7D() {
     var_12 = getanimlength(var_9);
     wait(var_12);
 
-    while(self._id_9C84)
+    while(self._id_9C84) {
       scripts\engine\utility::waitframe();
+    }
 
     if(isDefined(self._id_C6B9)) {
       var_10 = getstartorigin(self._id_C6B9.origin, self._id_C6B9.angles, var_4);
       var_11 = getstartangles(self._id_C6B9.origin, self._id_C6B9.angles, var_4);
 
-      if(!isDefined(self._id_9B89))
+      if(!isDefined(self._id_9B89)) {
         self _meth_80F1(var_10, var_11);
-      else {
+      } else {
         self.origin = var_10;
         self.angles = var_11;
       }
@@ -2399,10 +2543,11 @@ _id_DC7E() {
   self._id_9C83 = undefined;
   var_2 = undefined;
 
-  if(isDefined(self.gender) && issubstr(self.gender, "female"))
+  if(isDefined(self.gender) && issubstr(self.gender, "female")) {
     var_2 = "idle_female";
-  else
+  } else {
     var_2 = "idle";
+  }
 
   var_3 = var_1._id_EBEA[var_2][0];
   self._id_10DB2 = var_3;
@@ -2439,8 +2584,8 @@ _id_DC7E() {
     }
 
     var_9 = level._id_10E1C[self._id_9A30]._id_EBEA[var_7][randomint(level._id_10E1C[self._id_9A30]._id_EBEA[var_7].size)];
-    level._id_10E1C[self._id_9A30]._id_EBEA[var_8] = scripts\engine\utility::array_add(level._id_10E1C[self._id_9A30]._id_EBEA[var_8], var_9);
-    level._id_10E1C[self._id_9A30]._id_EBEA[var_7] = scripts\engine\utility::array_remove(level._id_10E1C[self._id_9A30]._id_EBEA[var_7], var_9);
+    level._id_10E1C[self._id_9A30]._id_EBEA[var_8] = ::scripts\engine\utility::array_add(level._id_10E1C[self._id_9A30]._id_EBEA[var_8], var_9);
+    level._id_10E1C[self._id_9A30]._id_EBEA[var_7] = ::scripts\engine\utility::array_remove(level._id_10E1C[self._id_9A30]._id_EBEA[var_7], var_9);
     var_10 = undefined;
     var_11 = undefined;
 
@@ -2448,16 +2593,17 @@ _id_DC7E() {
       var_10 = getstartorigin(self._id_C6B9.origin, self._id_C6B9.angles, var_9);
       var_11 = getstartangles(self._id_C6B9.origin, self._id_C6B9.angles, var_9);
 
-      if(!isDefined(self._id_9B89))
+      if(!isDefined(self._id_9B89)) {
         self _meth_80F1(var_10, var_11);
-      else {
+      } else {
         self.origin = var_10;
         self.angles = var_11;
       }
     }
 
-    while(self._id_9C84)
+    while(self._id_9C84) {
       scripts\engine\utility::waitframe();
+    }
 
     _id_10C47(var_9);
     self _meth_82E2("single anim", var_9, 1, 0.2, 1);
@@ -2465,16 +2611,17 @@ _id_DC7E() {
     var_12 = getanimlength(var_9);
     wait(var_12);
 
-    while(self._id_9C84)
+    while(self._id_9C84) {
       scripts\engine\utility::waitframe();
+    }
 
     if(isDefined(self._id_C6B9)) {
       var_10 = getstartorigin(self._id_C6B9.origin, self._id_C6B9.angles, var_3);
       var_11 = getstartangles(self._id_C6B9.origin, self._id_C6B9.angles, var_3);
 
-      if(!isDefined(self._id_9B89))
+      if(!isDefined(self._id_9B89)) {
         self _meth_80F1(var_10, var_11);
-      else {
+      } else {
         self.origin = var_10;
         self.angles = var_11;
       }
@@ -2507,8 +2654,9 @@ _id_DC7F(var_0, var_1, var_2) {
   level endon("stop_group_idle_controller");
   self endon("death");
 
-  if(!scripts\engine\utility::flag_exist("hold_group_vignettes"))
+  if(!scripts\engine\utility::flag_exist("hold_group_vignettes")) {
     scripts\engine\utility::flag_init("hold_group_vignettes");
+  }
 
   var_3 = [];
   var_4 = var_2;
@@ -2532,8 +2680,9 @@ _id_DC7F(var_0, var_1, var_2) {
     for(;;) {
       if(!scripts\engine\utility::flag("hold_group_vignettes")) {
         foreach(var_10 in var_0) {
-          if(!isDefined(var_10._id_9C83))
+          if(!isDefined(var_10._id_9C83)) {
             var_8++;
+          }
         }
 
         if(var_8 >= var_0.size) {
@@ -2570,9 +2719,9 @@ _id_DC7F(var_0, var_1, var_2) {
         var_16 = getstartorigin(var_6.origin, var_6.angles, var_15);
         var_17 = getstartangles(var_6.origin, var_6.angles, var_15);
 
-        if(isai(var_6))
+        if(isai(var_6)) {
           var_6 _meth_80F1(var_16, var_17);
-        else {
+        } else {
           var_6.origin = var_16;
           var_6.angles = var_17;
         }
@@ -2634,8 +2783,9 @@ _id_9A10() {
 }
 
 _id_F5CD(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   var_3 = self islegacyagent(var_0);
   var_4 = getanimlength(var_0);
@@ -2656,11 +2806,13 @@ _id_CCCA(var_0, var_1) {
   self._id_BE79 = 0;
   self._id_43E5 = var_1;
 
-  if(isDefined(level._id_9A2E))
-    level._id_9A2E._id_4D94["actors"] = scripts\engine\utility::array_add(level._id_9A2E._id_4D94["actors"], self);
+  if(isDefined(level._id_9A2E)) {
+    level._id_9A2E._id_4D94["actors"] = ::scripts\engine\utility::array_add(level._id_9A2E._id_4D94["actors"], self);
+  }
 
-  while(self.script == "init")
+  while(self.script == "init") {
     scripts\engine\utility::waitframe();
+  }
 
   for(;;) {
     for(;;) {
@@ -2751,25 +2903,28 @@ _id_43DA(var_0, var_1) {
   }
   self._id_B004 = var_2._id_EBEA;
 
-  if(!isDefined(self._id_1FBB))
+  if(!isDefined(self._id_1FBB)) {
     self._id_1FBB = "generic";
+  }
 
   var_3 = lengthsquared(level.player.origin - self.origin);
   var_4 = undefined;
   var_5 = scripts\common\trace::create_contents(1, 1, 0, 1, 1, 1);
   var_6 = undefined;
 
-  if(isDefined(self._id_B004["interaction_position"]))
+  if(isDefined(self._id_B004["interaction_position"])) {
     var_3 = lengthsquared(self._id_B004["interaction_position"] - self.origin);
-  else
+  } else {
     var_3 = lengthsquared(level.player.origin - self.origin);
+  }
 
   if(var_3 < squared(self._id_B004["trigger_radius"]) && _id_9C3D(self, 0.925)) {
     var_4 = vectorNormalize(level.player getEye() - self getEye()) * self._id_B004["trigger_radius"] + self getEye();
     var_6 = scripts\common\trace::ray_trace(self getEye(), var_4, self, var_5);
 
-    if(isPlayer(var_6["entity"]))
+    if(isPlayer(var_6["entity"])) {
       _id_43DB();
+    }
   }
 }
 
@@ -2784,10 +2939,11 @@ _id_43DB() {
   var_0 = self._id_43E4;
   var_1 = undefined;
 
-  if(isDefined(self._id_B004["interaction_position"]))
+  if(isDefined(self._id_B004["interaction_position"])) {
     var_1 = vectortoangles(self._id_B004["interaction_position"] - self.origin);
-  else
+  } else {
     var_1 = vectortoangles(level.player.origin - self.origin);
+  }
 
   var_2 = abs(angleclamp(var_1 - self.angles[1]) - 360);
   var_3 = self._id_B004["lastanim"];
@@ -2838,18 +2994,21 @@ _id_BF07() {
   if(isDefined(self._id_A906)) {
     var_0 = self._id_A906.origin;
 
-    while(isDefined(self._id_A906) && self._id_A906.origin == var_0)
+    while(isDefined(self._id_A906) && self._id_A906.origin == var_0) {
       scripts\engine\utility::waitframe();
+    }
   } else if(isDefined(self._id_A905)) {
     var_0 = self._id_A905.origin;
 
-    while(isDefined(self._id_A905) && self._id_A905.origin == var_0)
+    while(isDefined(self._id_A905) && self._id_A905.origin == var_0) {
       scripts\engine\utility::waitframe();
+    }
   } else if(isDefined(self._id_A907)) {
     var_0 = self._id_A907;
 
-    while(isDefined(self._id_A907) && self._id_A907 == var_0)
+    while(isDefined(self._id_A907) && self._id_A907 == var_0) {
       scripts\engine\utility::waitframe();
+    }
   }
 
   self notify("interaction_done");
@@ -2870,20 +3029,23 @@ _id_9A32() {
 }
 
 _id_9A3B(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "stop";
+  }
 
-  if(isai(self))
+  if(isai(self)) {
     self.a.movement = var_0;
-  else
+  } else {
     return;
+  }
 }
 
 _id_10C47(var_0) {
   var_1 = undefined;
 
-  if(isDefined(self._id_9A30))
+  if(isDefined(self._id_9A30)) {
     var_1 = self._id_9A30;
+  }
 
   thread scripts\sp\anim::_id_10CBF(self, "single anim", var_1, undefined, var_0);
   thread scripts\sp\anim::_id_1FCA(self, "single anim", var_1);

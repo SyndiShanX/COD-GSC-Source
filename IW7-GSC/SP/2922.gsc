@@ -56,11 +56,13 @@ _id_EC01(var_0, var_1, var_2) {
   self _meth_83A1();
   _id_0A1E::_id_2385();
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
-  if(var_2)
+  if(var_2) {
     _id_EC08("point", var_0);
+  }
 
   scripts\sp\anim::_id_1EC7(self, var_1);
   self setgoalpos(self.origin);
@@ -81,10 +83,11 @@ _id_EC0D(var_0, var_1) {
     if(var_1 && scripts\sp\interaction::_id_9C26(var_2)) {
       if(isDefined(var_2._id_EE92)) {
         if(issubstr(var_2._id_EE92, "opsmap")) {
-          if(self._id_1FBB == "salter" || self._id_1FBB == "gator" || self._id_1FBB == "drop_officer")
+          if(self._id_1FBB == "salter" || self._id_1FBB == "gator" || self._id_1FBB == "drop_officer") {
             thread _id_0EFB::_id_CD3F(var_2._id_EE92);
-          else
+          } else {
             thread scripts\sp\interaction::_id_CD50(var_2._id_EE92);
+          }
         } else
           thread scripts\sp\interaction::_id_CD4B(var_2._id_EE92);
       } else
@@ -99,8 +102,9 @@ _id_EC02(var_0, var_1) {
   level.player endon("death");
   var_2 = _id_0EFB::_id_7D7A(var_0);
 
-  if(!isstring(var_0))
+  if(!isstring(var_0)) {
     var_0 = "empty";
+  }
 
   level._id_EC02[var_0] = var_2;
   var_2 endon("death");
@@ -108,8 +112,9 @@ _id_EC02(var_0, var_1) {
   var_3 = squared(500);
 
   for(;;) {
-    while(distance2dsquared(var_2.origin, level.player.origin) > var_3)
+    while(distance2dsquared(var_2.origin, level.player.origin) > var_3) {
       scripts\engine\utility::waitframe();
+    }
 
     var_2 _id_0E46::_id_DFE3();
 
@@ -117,16 +122,18 @@ _id_EC02(var_0, var_1) {
       break;
     }
 
-    while(distance2dsquared(var_2.origin, level.player.origin) < var_3)
+    while(distance2dsquared(var_2.origin, level.player.origin) < var_3) {
       scripts\engine\utility::waitframe();
+    }
 
     var_2 _id_0E46::_id_48C4(undefined, undefined, undefined, 60, 3000, 0);
   }
 }
 
 _id_EC03(var_0) {
-  if(isDefined(level._id_EC02) && isDefined(level._id_EC02[var_0]) && isDefined(level._id_EC02[var_0]._id_4C1F))
+  if(isDefined(level._id_EC02) && isDefined(level._id_EC02[var_0]) && isDefined(level._id_EC02[var_0]._id_4C1F)) {
     level._id_EC02[var_0] _id_0E46::_id_DFE3();
+  }
 }
 
 _id_EC08(var_0, var_1, var_2) {
@@ -140,11 +147,13 @@ _id_EC08(var_0, var_1, var_2) {
   _id_0A1E::_id_2385();
   var_3 = _id_0EFB::_id_7D7A(var_1);
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "angle";
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   switch (var_0) {
     case "angle":
@@ -174,8 +183,9 @@ _id_EC08(var_0, var_1, var_2) {
       break;
   }
 
-  if(isDefined(var_3._id_8779) && !var_2)
+  if(isDefined(var_3._id_8779) && !var_2) {
     var_3 delete();
+  }
 }
 
 _id_EC0A(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -183,18 +193,21 @@ _id_EC0A(var_0, var_1, var_2, var_3, var_4, var_5) {
   self notify("starting_new_sceneblock");
   self endon("starting_new_sceneblock");
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 0;
+  }
 
   if(isDefined(self._id_EC09)) {
-    if(!isDefined(level._id_EC85[self._id_1FBB]))
+    if(!isDefined(level._id_EC85[self._id_1FBB])) {
       level._id_EC85[self._id_1FBB] = [];
+    }
 
     if(!isDefined(level._id_EC85[self._id_1FBB][self._id_EC09])) {
-      if(self._id_1FBB == "salter")
+      if(self._id_1FBB == "salter") {
         level._id_EC85[self._id_1FBB][self._id_EC09] = level._id_EBFF._id_EA31[self._id_EC09 + "_XO"];
-      else
+      } else {
         level._id_EC85[self._id_1FBB][self._id_EC09] = level._id_EBFF.anims[self._id_EC09];
+      }
     }
 
     scripts\sp\anim::_id_1F35(self, self._id_EC09);
@@ -209,30 +222,36 @@ _id_EC0A(var_0, var_1, var_2, var_3, var_4, var_5) {
   scripts\sp\anim::_id_1F12(self);
   var_6 = _id_0EFB::_id_7D7A(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = "stand_idle";
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = "Exposed";
+  }
 
   if(var_1) {
-    if(var_5)
+    if(var_5) {
       scripts\engine\utility::delaycall(0.05, ::_meth_8250, 1);
-    else
+    } else {
       scripts\engine\utility::delaycall(0.05, ::_meth_8250, 0);
+    }
 
     var_6 scripts\sp\anim::_id_1ED0(self, var_3, undefined, var_4);
   } else {
-    if(var_5)
+    if(var_5) {
       scripts\engine\utility::delaycall(0.05, ::_meth_8250, 1);
-    else
+    } else {
       scripts\engine\utility::delaycall(0.05, ::_meth_8250, 0);
+    }
 
     var_6 scripts\sp\anim::_id_1ECE(self, var_3);
   }
@@ -240,34 +259,38 @@ _id_EC0A(var_0, var_1, var_2, var_3, var_4, var_5) {
   self.goalradius = 0;
   self setgoalpos(self.origin);
 
-  if(var_5)
+  if(var_5) {
     self _meth_8250(0);
+  }
 
   self notify("sceneblock_reach_finished");
 
   if(var_2 && scripts\sp\interaction::_id_9C26(var_6)) {
     if(isDefined(var_6._id_EE92)) {
       if(issubstr(var_6._id_EE92, "opsmap")) {
-        if(self._id_1FBB == "salter" || self._id_1FBB == "gator" || self._id_1FBB == "drop_officer")
+        if(self._id_1FBB == "salter" || self._id_1FBB == "gator" || self._id_1FBB == "drop_officer") {
           thread _id_0EFB::_id_CD3F(var_6._id_EE92);
-        else
+        } else {
           thread scripts\sp\interaction::_id_CD50(var_6._id_EE92);
+        }
       } else
         thread scripts\sp\interaction::_id_CD4B(var_6._id_EE92);
     } else
       thread scripts\sp\interaction::_id_CD4B(var_6.script_noteworthy);
   }
 
-  if(var_2 && scripts\sp\interaction::_id_9CD7(var_6))
+  if(var_2 && scripts\sp\interaction::_id_9CD7(var_6)) {
     thread scripts\sp\interaction_manager::_id_CE40(var_6._id_EE92, var_6);
+  }
 }
 
 _id_EC0C(var_0, var_1, var_2) {
   self endon("death");
   self endon("sceneblock_reachloop_stop");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "stop_loop";
+  }
 
   _id_EC0A(var_0);
   self notify("sceneblock_reachloop_reach_finished");
@@ -281,21 +304,25 @@ _id_EC0B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self endon("starting_new_sceneblock_idle");
   scripts\sp\utility::_id_415D("casual");
 
-  if(!scripts\engine\utility::flag_exist("setup_sceneblock_anims") || !scripts\engine\utility::flag("setup_sceneblock_anims"))
+  if(!scripts\engine\utility::flag_exist("setup_sceneblock_anims") || !scripts\engine\utility::flag("setup_sceneblock_anims")) {
     _id_EBE9();
+  }
 
-  if(!isDefined(var_7))
+  if(!isDefined(var_7)) {
     var_7 = 0;
+  }
 
-  if(!isDefined(level._id_EC85[self._id_1FBB]))
+  if(!isDefined(level._id_EC85[self._id_1FBB])) {
     level._id_EC85[self._id_1FBB] = [];
+  }
 
   if(isDefined(self._id_EC09) && isDefined(self._id_EC07)) {
     if(!isDefined(level._id_EC85[self._id_1FBB][self._id_EC09])) {
-      if(self._id_1FBB == "salter")
+      if(self._id_1FBB == "salter") {
         level._id_EC85[self._id_1FBB][self._id_EC09] = level._id_EBFF._id_EA31[self._id_EC09 + "_XO"];
-      else
+      } else {
         level._id_EC85[self._id_1FBB][self._id_EC09] = level._id_EBFF.anims[self._id_EC09];
+      }
     }
 
     scripts\sp\anim::_id_1F35(self, self._id_EC09);
@@ -303,63 +330,70 @@ _id_EC0B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   }
 
   if(var_1 != "shipcrib_stand_console" && !isDefined(level._id_EC85[self._id_1FBB][var_1])) {
-    if(self._id_1FBB == "salter")
+    if(self._id_1FBB == "salter") {
       level._id_EC85[self._id_1FBB][var_1][0] = level._id_EBFF._id_EA31[var_1 + "_XO"];
-    else
+    } else {
       level._id_EC85[self._id_1FBB][var_1][0] = level._id_EBFF.anims[var_1];
+    }
   }
 
   self._id_EC07 = undefined;
   self._id_EC09 = undefined;
   _id_EC0A(var_0, var_3, var_4, var_5, var_6, var_7);
 
-  if(var_1 != "shipcrib_stand_console")
+  if(var_1 != "shipcrib_stand_console") {
     thread scripts\sp\utility::_id_F40E("casual", var_1);
+  }
 
   switch (var_1) {
     case "shipcrib_stand_stationary_talk_idle_01":
       self._id_EC07 = "shipcrib_stand_idle01_arrival";
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         self._id_EC09 = "shipcrib_stand_" + var_2 + "_exit";
-      else
+      } else {
         self._id_EC09 = "shipcrib_stand_idle01_exit";
+      }
 
       break;
     case "shipcrib_stand_stationary_talk_idle_02":
       self._id_EC07 = "shipcrib_stand_idle02_arrival";
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         self._id_EC09 = "shipcrib_stand_" + var_2 + "_exit";
-      else
+      } else {
         self._id_EC09 = "shipcrib_stand_idle02_exit";
+      }
 
       break;
     case "shipcrib_stand_stationary_talk_idle_03":
       self._id_EC07 = "shipcrib_stand_idle03_arrival";
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         self._id_EC09 = "shipcrib_stand_" + var_2 + "_exit";
-      else
+      } else {
         self._id_EC09 = "shipcrib_stand_idle03_exit";
+      }
 
       break;
     case "shipcrib_stand_stationary_talk_idle_04":
       self._id_EC07 = "shipcrib_stand_idle04_arrival";
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         self._id_EC09 = "shipcrib_stand_" + var_2 + "_exit";
-      else
+      } else {
         self._id_EC09 = "shipcrib_stand_idle04_exit";
+      }
 
       break;
     case "shipcrib_stand_stationary_talk_idle_05":
       self._id_EC07 = "shipcrib_stand_idle05_arrival";
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         self._id_EC09 = "shipcrib_stand_" + var_2 + "_exit";
-      else
+      } else {
         self._id_EC09 = "shipcrib_stand_idle05_exit";
+      }
 
       break;
     case "shipcrib_stand_console":
@@ -371,10 +405,11 @@ _id_EC0B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   if(isDefined(self._id_EC07)) {
     if(!isDefined(level._id_EC85[self._id_1FBB][self._id_EC07])) {
-      if(self._id_1FBB == "salter")
+      if(self._id_1FBB == "salter") {
         level._id_EC85[self._id_1FBB][self._id_EC07] = level._id_EBFF._id_EA31[self._id_EC07 + "_XO"];
-      else
+      } else {
         level._id_EC85[self._id_1FBB][self._id_EC07] = level._id_EBFF.anims[self._id_EC07];
+      }
     }
 
     scripts\sp\anim::_id_1F35(self, self._id_EC07);
@@ -395,14 +430,16 @@ _id_13B0() {
 _id_EC06(var_0) {
   scripts\sp\utility::_id_415D("casual");
 
-  if(!scripts\engine\utility::flag_exist("setup_sceneblock_anims") || !scripts\engine\utility::flag("setup_sceneblock_anims"))
+  if(!scripts\engine\utility::flag_exist("setup_sceneblock_anims") || !scripts\engine\utility::flag("setup_sceneblock_anims")) {
     _id_EBE9();
+  }
 
   if(!isDefined(level._id_EC85[self._id_1FBB][var_0])) {
-    if(self._id_1FBB == "salter")
+    if(self._id_1FBB == "salter") {
       level._id_EC85[self._id_1FBB][var_0][0] = level._id_EBFF._id_EA31[var_0 + "_XO"];
-    else
+    } else {
       level._id_EC85[self._id_1FBB][var_0][0] = level._id_EBFF.anims[var_0];
+    }
   }
 
   switch (var_0) {
@@ -448,17 +485,20 @@ _id_EC0F(var_0, var_1, var_2) {
   _id_0A1E::_id_2385();
   var_3 = _id_0EFB::_id_7D7A(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "sceneblock_walk_loop";
+  }
 
   _id_EC08("point", var_3, 1);
   var_4 = scripts\common\trace::ray_trace(self.origin + (0, 0, 1), self.origin + (0, 0, -6), self);
 
-  if(isDefined(var_4["entity"]))
+  if(isDefined(var_4["entity"])) {
     self linkTo(var_4["entity"]);
+  }
 
   thread scripts\sp\anim::_id_1ECC(self, var_2, "stop_loop");
   var_5 = 0;
@@ -480,8 +520,9 @@ _id_EC0F(var_0, var_1, var_2) {
   self unlink();
   self setgoalpos(getgroundposition(self.origin, 1));
 
-  if(var_1)
+  if(var_1) {
     _id_EC08("angle", var_3);
+  }
 }
 
 _id_EC0E(var_0, var_1, var_2) {}
@@ -492,8 +533,9 @@ _id_1450(var_0, var_1, var_2, var_3) {
   if(getdvarint("loc_warnings", 0)) {
     return;
   }
-  if(!isDefined(level._id_545A))
+  if(!isDefined(level._id_545A)) {
     level._id_545A = [];
+  }
 
   var_4 = 4;
 
@@ -501,8 +543,9 @@ _id_1450(var_0, var_1, var_2, var_3) {
     var_6 = 0;
 
     if(isDefined(level._id_545A["last cleartime"])) {
-      if(gettime() - level._id_545A["last cleartime"] > 1000)
+      if(gettime() - level._id_545A["last cleartime"] > 1000) {
         var_6 = 1;
+      }
     }
 
     if(var_5 == var_4 || var_6) {

@@ -51,8 +51,9 @@ _id_5F20() {}
 _id_5F1B() {}
 
 _id_1723(var_0, var_1, var_2, var_3) {
-  if(!scripts\sp\utility::_id_C268(var_0))
+  if(!scripts\sp\utility::_id_C268(var_0)) {
     objective_add(scripts\sp\utility::_id_C264(var_0), var_1, var_2);
+  }
 }
 
 _id_ABE0() {

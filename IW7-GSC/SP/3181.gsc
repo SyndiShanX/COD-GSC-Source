@@ -31,8 +31,9 @@ _id_13ED1(var_0, var_1, var_2, var_3) {
   self._id_55DA = 1;
   self._id_C09F = 1;
 
-  if(self.team == "allies")
+  if(self.team == "allies") {
     self._id_C554 = 1;
+  }
 
   self._id_4E52 = 1;
   self._id_4E46 = ::_id_104CD;
@@ -56,14 +57,17 @@ _id_10D48() {
   self endon("stop_thruster_thread");
   thread _id_11859();
 
-  while(!isDefined(level._id_13EEB))
+  while(!isDefined(level._id_13EEB)) {
     wait 0.25;
+  }
 
-  if(!isDefined(self._id_7608))
+  if(!isDefined(self._id_7608)) {
     self._id_7608 = self[[level._id_13EEB]]("tag_fx_back");
+  }
 
-  while(!isDefined(level._id_13EEA))
+  while(!isDefined(level._id_13EEA)) {
     wait 0.25;
+  }
 
   if(!isDefined(self._id_7607)) {
     wait 0.1;
@@ -75,8 +79,9 @@ _id_11859() {
   self endon("stop_thruster_thread");
   self waittill("death");
 
-  if(isDefined(self) && isDefined(self._id_11093))
+  if(isDefined(self) && isDefined(self._id_11093)) {
     self[[self._id_11093]]();
+  }
 }
 
 _id_1104E() {
@@ -107,14 +112,17 @@ _id_41AE() {
 }
 
 _id_4E4B() {
-  if(!isDefined(self._id_A969))
+  if(!isDefined(self._id_A969)) {
     return 0;
+  }
 
-  if(self._id_A969 == "")
+  if(self._id_A969 == "") {
     return 0;
+  }
 
-  if(self._id_A969 == "j_head" || self._id_A969 == "j_helmet")
+  if(self._id_A969 == "j_head" || self._id_A969 == "j_helmet") {
     return 0;
+  }
 
   return 1;
 }
@@ -237,14 +245,15 @@ _id_9E8D() {
 _id_CE14(var_0) {
   var_1 = undefined;
 
-  if(var_0 == "up")
+  if(var_0 == "up") {
     var_1 = "tag_fx_top";
-  else if(var_0 == "down")
+  } else if(var_0 == "down") {
     var_1 = "tag_fx_bottom";
-  else if(var_0 == "left")
+  } else if(var_0 == "left") {
     var_1 = "tag_fx_left";
-  else if(var_0 == "right")
+  } else if(var_0 == "right") {
     var_1 = "tag_fx_right";
+  }
 
   self[[level._id_13EE9]](var_1);
 }

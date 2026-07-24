@@ -4,8 +4,9 @@
 **************************************/
 
 _id_35A6(var_0, var_1, var_2, var_3) {
-  if(!isDefined(anim._id_362A))
+  if(!isDefined(anim._id_362A)) {
     _id_0C41::_id_3629();
+  }
 
   self.allowpain = 0;
   self.asm._id_7360 = 0;
@@ -97,21 +98,23 @@ _id_E756(var_0, var_1) {
 }
 
 _id_35E3(var_0, var_1, var_2, var_3) {
-  if(issubstr(var_0, "_left"))
+  if(issubstr(var_0, "_left")) {
     self._id_164D[var_0].slot = "left";
-  else if(issubstr(var_0, "_right"))
+  } else if(issubstr(var_0, "_right")) {
     self._id_164D[var_0].slot = "right";
-  else {}
+  } else {}
 }
 
 _id_3514(var_0, var_1, var_2, var_3) {
   var_4 = self._id_164D[var_0].slot;
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
-  if(!isDefined(self._id_13CC3[var_4]))
+  if(!isDefined(self._id_13CC3[var_4])) {
     return 0;
+  }
 
   return self._id_13CC3[var_4] == var_3;
 }
@@ -119,12 +122,14 @@ _id_3514(var_0, var_1, var_2, var_3) {
 _id_3518(var_0) {
   var_1 = self._blackboard.shootparams;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 0;
+  }
 
   foreach(var_4, var_3 in self._id_13CC3) {
-    if(var_4 == var_0)
+    if(var_4 == var_0) {
       return isDefined(var_1._id_13CC3[var_4]);
+    }
   }
 
   return 0;
@@ -137,21 +142,25 @@ _id_3519(var_0, var_1, var_2, var_3) {
 _id_351A(var_0, var_1, var_2, var_3) {
   var_4 = self._blackboard.shootparams;
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
   var_5 = self._id_164D[var_0].slot;
 
-  if(var_5 == "left")
+  if(var_5 == "left") {
     var_6 = "left_arm";
-  else
+  } else {
     var_6 = "right_arm";
+  }
 
-  if(scripts\asm\asm_bb::ispartdismembered(var_6))
+  if(scripts\asm\asm_bb::ispartdismembered(var_6)) {
     return 0;
+  }
 
-  if(!isDefined(self._id_13CC3[var_5]) || self._id_13CC3[var_5] != var_3)
+  if(!isDefined(self._id_13CC3[var_5]) || self._id_13CC3[var_5] != var_3) {
     return 0;
+  }
 
   return _id_0C08::_id_10079(var_5);
 }
@@ -163,21 +172,25 @@ _id_3515(var_0, var_1, var_2, var_3) {
 _id_3516(var_0, var_1, var_2, var_3) {
   var_4 = self._blackboard.shootparams;
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
   var_5 = self._id_164D[var_0].slot;
 
-  if(var_5 == "left")
+  if(var_5 == "left") {
     var_6 = "left_arm";
-  else
+  } else {
     var_6 = "right_arm";
+  }
 
-  if(scripts\asm\asm_bb::ispartdismembered(var_6))
+  if(scripts\asm\asm_bb::ispartdismembered(var_6)) {
     return 0;
+  }
 
-  if(!isDefined(self._id_13CC3[var_5]) || self._id_13CC3[var_5] != var_3)
+  if(!isDefined(self._id_13CC3[var_5]) || self._id_13CC3[var_5] != var_3) {
     return 0;
+  }
 
   return _id_0C08::_id_A004(var_5);
 }

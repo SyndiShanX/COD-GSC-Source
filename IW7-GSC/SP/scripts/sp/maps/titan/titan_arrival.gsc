@@ -14,8 +14,9 @@ _id_6DDA() {
   scripts\engine\utility::flag_wait("intro_final_jump");
   wait 0.05;
 
-  if(!level.console)
+  if(!level.console) {
     waitforalltransients();
+  }
 }
 
 _id_6DD7() {
@@ -28,8 +29,9 @@ _id_6DD7() {
   scripts\engine\utility::flag_wait("intro_final_jump");
   wait 0.05;
 
-  if(!level.console)
+  if(!level.console) {
     waitforalltransients();
+  }
 }
 
 _id_6DD9() {
@@ -41,8 +43,9 @@ _id_6DD8() {
   scripts\engine\utility::flag_wait("intro_final_jump");
   wait 0.05;
 
-  if(!level.console)
+  if(!level.console) {
     waitforalltransients();
+  }
 }
 
 _id_134B6() {
@@ -87,8 +90,9 @@ _id_134B6() {
   scripts\engine\utility::flag_wait("intro_final_jump");
   wait 0.05;
 
-  if(!level.console)
+  if(!level.console) {
     waitforalltransients();
+  }
 }
 
 _id_1286E() {
@@ -113,8 +117,9 @@ _id_1286E() {
   scripts\engine\utility::flag_wait("intro_final_jump");
   wait 0.05;
 
-  if(!level.console)
+  if(!level.console) {
     waitforalltransients();
+  }
 }
 
 _id_31F5() {
@@ -142,15 +147,17 @@ _id_31F3() {
   thread scripts\sp\maps\titan\titan_stealth_street::_id_10F2A();
   var_0 = getEntArray("freighter_ships", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 show();
+  foreach(var_2 in var_0) {
+    var_2 show();
+  }
 
   scripts\sp\utility::_id_E820("ai_demeanor_trig", scripts\sp\maps\titan\titan_code::_id_1939);
   thread _id_225D();
   wait 0.05;
 
-  if(!level.console)
+  if(!level.console) {
     waitforalltransients();
+  }
 
   scripts\engine\utility::flag_wait("squad_enter_building1");
   thread _id_138C4();
@@ -159,14 +166,16 @@ _id_31F3() {
   level._id_B33E thread _id_841D();
   level._id_2429 thread _id_8421();
 
-  foreach(var_5 in level._id_10AC8)
-  var_5 thread scripts\sp\utility::_id_F2DA(0);
+  foreach(var_5 in level._id_10AC8) {
+    var_5 thread scripts\sp\utility::_id_F2DA(0);
+  }
 
   thread scripts\sp\maps\titan\titan_stealth_street::_id_D2E0();
   scripts\engine\utility::flag_wait("building1_exit");
 
-  foreach(var_5 in level._id_8E42)
-  var_5.script_pushable = 1;
+  foreach(var_5 in level._id_8E42) {
+    var_5.script_pushable = 1;
+  }
 }
 
 _id_8421() {
@@ -178,11 +187,13 @@ _id_8421() {
 _id_31F4() {
   scripts\sp\utility::_id_10FEC("landing_amb_fx");
 
-  if(isDefined(level._id_B33E))
+  if(isDefined(level._id_B33E)) {
     level._id_B33E scripts\sp\utility::_id_F3B5("orange");
+  }
 
-  if(isDefined(level._id_2429))
+  if(isDefined(level._id_2429)) {
     level._id_2429 scripts\sp\utility::_id_F3B5("orange");
+  }
 
   level.player scripts\sp\utility::_id_F526("normal");
   thread scripts\sp\maps\titan\titan_stealth_street::_id_D2E0();
@@ -250,9 +261,9 @@ _id_138C4() {
   var_7 = getstartorigin(var_6._id_1389C.origin, var_6._id_1389C.angles, var_6 scripts\sp\utility::_id_7DC1("wall_response"));
   var_8 = distance(var_6.origin, var_7);
 
-  if(level._id_C47F._id_240F || var_8 <= 450)
+  if(level._id_C47F._id_240F || var_8 <= 450) {
     scripts\engine\utility::flag_set("do_wall_scene");
-  else {
+  } else {
     level.player freezecontrols(1);
     level.player scripts\engine\utility::delaycall(0.15, ::freezecontrols, 0);
     scripts\engine\utility::array_thread(var_1, ::_id_138C3);
@@ -294,8 +305,9 @@ _id_31E8() {
   var_2 = level._id_B33E;
   var_3 = distance(var_2.origin, var_1.origin);
 
-  if(var_3 <= 200)
+  if(var_3 <= 200) {
     level._id_B33E scripts\sp\utility::_id_10346("titan_ksh_thisshitsmessedup");
+  }
 }
 
 _id_138C2() {
@@ -312,8 +324,9 @@ _id_138C2() {
   thread scripts\sp\maps\titan\titan_code::_id_10FC2();
   self._id_1389C scripts\sp\anim::_id_1F17(self, "wall_response");
 
-  if(self == level._id_C47F)
+  if(self == level._id_C47F) {
     scripts\engine\utility::flag_set("do_wall_scene_poster");
+  }
 
   self._id_1389C scripts\sp\anim::_id_1F35(self, "wall_response");
   scripts\engine\utility::flag_set("wall_scene_complete");
@@ -373,8 +386,9 @@ _id_62EC() {
   }
   level notify("stop_wall_scene");
 
-  foreach(var_1 in level._id_10AC8)
-  var_1 _id_10FC0();
+  foreach(var_1 in level._id_10AC8) {
+    var_1 _id_10FC0();
+  }
 }
 
 _id_10FC0() {
@@ -392,8 +406,9 @@ _id_31E3() {
   var_0 = getEnt("first_building_blocker", "targetname");
   var_0 moveTo(var_0.origin + (0, 35, 700), 0.5);
 
-  if(isDefined(level._id_5D6C))
+  if(isDefined(level._id_5D6C)) {
     level._id_5D6C delete();
+  }
 }
 
 #using_animtree("player");
@@ -412,8 +427,9 @@ _id_31E4() {
   var_4 = scripts\engine\utility::array_combine(var_2, var_3);
 
   foreach(var_6 in var_4) {
-    if(isDefined(var_6._id_1EB7))
+    if(isDefined(var_6._id_1EB7)) {
       var_6._id_1EB7 delete();
+    }
 
     var_6._id_1EB7 = spawnStruct();
     var_6._id_1EB7.origin = var_0.origin;
@@ -424,8 +440,9 @@ _id_31E4() {
   var_8 = getanimlength(%titan_abandoned_building_plr_buddy_door_open);
   wait 0.05;
 
-  if(!level.console)
+  if(!level.console) {
     waitforalltransients();
+  }
 
   var_9 = scripts\engine\utility::getStruct("building1_exit_door_interact", "targetname");
   var_9 thread _id_0E46::_id_48C4();
@@ -444,8 +461,9 @@ _id_31E4() {
   level.player._id_1E9C scripts\engine\utility::delaycall(0.1, ::show);
   thread scripts\sp\maps\titan\gen\titan_art::_id_99F6(0.1, 13.0);
 
-  foreach(var_11 in var_4)
-  var_11._id_1EB7 thread scripts\sp\anim::_id_1F35(var_11, "building1_exit");
+  foreach(var_11 in var_4) {
+    var_11._id_1EB7 thread scripts\sp\anim::_id_1F35(var_11, "building1_exit");
+  }
 
   foreach(var_11 in var_3) {
     var_14 = getanimlength(var_11 scripts\sp\utility::_id_7DC1("building1_exit"));
@@ -490,8 +508,9 @@ _id_31F0(var_0) {
   scripts\sp\utility::_id_61C7();
   scripts\sp\utility::_id_51E1("combat");
 
-  if(self == level._id_B33B || self == level._id_B33E)
+  if(self == level._id_B33B || self == level._id_B33E) {
     self notify(self._id_1FBB + "_start_group_split");
+  }
 }
 
 _id_869C() {
@@ -525,8 +544,9 @@ _id_31F2() {
   level endon("building1_exit");
   scripts\engine\utility::flag_wait("building1_start_room2");
 
-  if(!scripts\engine\utility::flag("do_wall_scene"))
+  if(!scripts\engine\utility::flag("do_wall_scene")) {
     scripts\engine\utility::array_thread(level._id_10AC8, ::_id_841D);
+  }
 }
 
 _id_FB46() {
@@ -566,8 +586,9 @@ _id_31EB() {
 }
 
 _id_31E9() {
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_2683();
+  }
 
   thread _id_D5E7();
   thread scripts\sp\maps\titan\titan_stealth_street::_id_76E7();
@@ -586,8 +607,9 @@ _id_31E9() {
   scripts\engine\utility::flag_wait("omar_heads_to_slide");
   wait 0.05;
 
-  if(!level.console)
+  if(!level.console) {
     waitforalltransients();
+  }
 
   level._id_C47F thread scripts\sp\maps\titan\titan_stealth_street::_id_C48E();
   thread scripts\sp\maps\titan\titan_stealth_street::_id_C491();
@@ -618,8 +640,9 @@ _id_31EA() {
   var_0 = getEntArray("convo_trigger", "targetname");
   scripts\engine\utility::array_thread(var_0, scripts\engine\utility::trigger_off);
 
-  if(isDefined(level._id_C47F))
+  if(isDefined(level._id_C47F)) {
     level._id_C47F scripts\sp\maps\titan\titan_code::_id_8DEC(1);
+  }
 }
 
 _id_31EC() {

@@ -4,10 +4,11 @@
 ***************************************************/
 
 hint_phonebooth(var_0, var_1) {
-  if(scripts\engine\utility::is_true(var_0.powered_on))
+  if(scripts\engine\utility::is_true(var_0.powered_on)) {
     return &"CP_DISCO_INTERACTIONS_PHONEBOOTH_USE";
-  else
+  } else {
     return &"COOP_INTERACTIONS_REQUIRES_POWER";
+  }
 }
 
 init_phonebooth() {
@@ -222,20 +223,22 @@ phonebooth_update_scriptable_state(var_0) {
   if(!isDefined(var_0.pb_scriptable)) {
     return;
   }
-  if(!isDefined(var_0.powered_on) || var_0.powered_on == 0)
+  if(!isDefined(var_0.powered_on) || var_0.powered_on == 0) {
     var_0.pb_scriptable setscriptablepartstate("phonebooth", "power_off");
-  else if(isDefined(var_0.quest_state)) {
-    if(var_0.quest_state == 1)
+  } else if(isDefined(var_0.quest_state)) {
+    if(var_0.quest_state == 1) {
       var_0.pb_scriptable setscriptablepartstate("phonebooth", "power_red");
-    else
+    } else {
       var_0.pb_scriptable setscriptablepartstate("phonebooth", "power_on");
+    }
   } else
     var_0.pb_scriptable setscriptablepartstate("phonebooth", "power_on");
 }
 
 update_all_phonebooth_scriptable_states() {
-  foreach(var_1 in level.phone.booths)
-  phonebooth_update_scriptable_state(var_1);
+  foreach(var_1 in level.phone.booths) {
+    phonebooth_update_scriptable_state(var_1);
+  }
 }
 
 init_phone() {
@@ -245,8 +248,9 @@ init_phone() {
   self.quest_state = 0;
 
   foreach(var_1 in scripts\engine\utility::getStructArray(self.target, "targetname")) {
-    if(var_1.script_parameters == "linkpoint")
+    if(var_1.script_parameters == "linkpoint") {
       self.linkpoint_struct = var_1;
+    }
   }
 
   self.keypad_frame = undefined;
@@ -289,27 +293,31 @@ init_phone() {
       }
     }
 
-    if(issubstr(var_4.classname, "scriptable"))
+    if(issubstr(var_4.classname, "scriptable")) {
       self.pb_scriptable = var_4;
+    }
   }
 
   if(isDefined(level.players)) {
     foreach(var_12 in level.players) {
-      if(isDefined(self.keypad_frame))
+      if(isDefined(self.keypad_frame)) {
         self.keypad_frame hidefromplayer(var_12);
+      }
     }
   }
 
   if(scripts\engine\utility::is_true(self.requires_power)) {
     var_14 = undefined;
 
-    if(isDefined(self.script_area))
+    if(isDefined(self.script_area)) {
       var_14 = self.script_area;
-    else
+    } else {
       var_14 = scripts\cp\cp_interaction::get_area_for_power(self);
+    }
 
-    if(isDefined(var_14))
+    if(isDefined(var_14)) {
       level scripts\engine\utility::waittill_any("power_on", var_14 + " power_on");
+    }
   }
 
   self.powered_on = 1;
@@ -390,8 +398,9 @@ use_phonebooth(var_0, var_1) {
   var_1 notify("force_cancel_placement");
   var_5 = 1;
 
-  if(isDefined(level.phone_preuse_func))
+  if(isDefined(level.phone_preuse_func)) {
     var_5 = [[level.phone_preuse_func]]();
+  }
 
   if(isDefined(level.phone_puzzle_phone) && var_0 == level.phone_puzzle_phone) {
     phone_puzzle_call(var_0, var_1);
@@ -409,10 +418,11 @@ use_phonebooth(var_0, var_1) {
     var_6 = 0.1;
     var_7 = var_1 getstance();
 
-    if(var_7 == "prone")
+    if(var_7 == "prone") {
       var_6 = 0.7;
-    else if(var_7 == "crouch")
+    } else if(var_7 == "crouch") {
       var_6 = 0.3;
+    }
 
     var_1 scripts\engine\utility::allow_prone(0);
     var_1 scripts\engine\utility::allow_crouch(0);
@@ -440,15 +450,17 @@ use_phonebooth(var_0, var_1) {
       var_1 scripts\engine\utility::waittill_any("exit_phonebooth", "phone_outro_end");
     }
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1.iscarrying = undefined;
+    }
 
     wait 0.1;
 
     foreach(var_14, var_9 in var_0.keypad_buttons) {
       if(isDefined(var_9.model)) {
-        if(isDefined(var_1))
+        if(isDefined(var_1)) {
           scripts\cp\cp_outline::disable_outline_for_player(var_9.model, var_1);
+        }
 
         var_9.model delete();
       }
@@ -494,9 +506,9 @@ snd_phone_intro(var_0) {
   self endon("exit_phonebooth");
   self endon("dialed");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     playlocalsound_phone("receiver_pickup");
-  else {
+  } else {
     thread playlocalsound_phone("payphone_npc_start_pickup_receiver");
     wait 10.358;
   }
@@ -535,8 +547,9 @@ use_phone_keypad(var_0, var_1, var_2) {
   wait(var_2);
   var_3 = var_1 getEye();
 
-  foreach(var_5 in var_0.keypad_buttons)
-  var_5.vdronestrikeheight = vectorNormalize(var_5.keypos - var_3);
+  foreach(var_5 in var_0.keypad_buttons) {
+    var_5.vdronestrikeheight = vectorNormalize(var_5.keypos - var_3);
+  }
 
   var_1 thread phone_hilight_focused_button(var_0, var_1);
   var_1 thread phone_exit_look(var_0);
@@ -578,10 +591,11 @@ use_phone_keypad(var_0, var_1, var_2) {
         var_15 = var_13.keyvalue;
         var_1 thread playlocalsound_phone(var_10);
 
-        if(isDefined(var_8))
+        if(isDefined(var_8)) {
           var_8 = var_8 + var_10;
-        else
+        } else {
           var_8 = var_10;
+        }
 
         var_7[var_9] = var_15;
         var_9++;
@@ -602,14 +616,16 @@ use_phone_keypad(var_0, var_1, var_2) {
     if(var_21 < 250) {
       var_22 = (250 - var_21) / 1000;
 
-      if(var_22 >= 0.05)
+      if(var_22 >= 0.05) {
         wait(var_22);
+      }
     }
 
-    if(isDefined(var_10))
+    if(isDefined(var_10)) {
       var_1 stoplocalsound_phone(var_10);
-    else
+    } else {
       continue;
+    }
 
     foreach(var_25, var_24 in level.phone.numbers) {
       if(var_8 == var_25) {
@@ -621,8 +637,9 @@ use_phone_keypad(var_0, var_1, var_2) {
       }
     }
 
-    if(var_9 >= 9)
+    if(var_9 >= 9) {
       return "invalid_number";
+    }
   }
 }
 
@@ -724,14 +741,16 @@ playlocalsound_phone(var_0, var_1, var_2) {
   self endon("death");
   self endon("disconect");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   var_2 = 0;
 
   if(scripts\engine\utility::is_true(var_1) && self._phone_sounds_played.size > 0) {
-    foreach(var_4 in self._phone_sounds_played)
-    stoplocalsound_phone(var_4);
+    foreach(var_4 in self._phone_sounds_played) {
+      stoplocalsound_phone(var_4);
+    }
 
     self._phone_sounds_played = [];
   }
@@ -748,8 +767,9 @@ playlocalsound_phone(var_0, var_1, var_2) {
     scripts\cp\utility::play_looping_sound_on_ent(level.phone.sounds[var_0]);
     self waittill("stop_loop");
 
-    if(isDefined(self._phone_sounds_active))
+    if(isDefined(self._phone_sounds_active)) {
       self._phone_sounds_active = scripts\engine\utility::array_remove(self._phone_sounds_active, var_0);
+    }
   } else {
     if(var_2) {
       return;
@@ -763,9 +783,9 @@ playlocalsound_phone(var_0, var_1, var_2) {
     var_6 = lookupsoundlength(level.phone.sounds[var_0]);
     wait(var_6 / 1000 + 0.05);
 
-    if(isDefined(self._phone_sounds_active))
+    if(isDefined(self._phone_sounds_active)) {
       self._phone_sounds_active = scripts\engine\utility::array_remove(self._phone_sounds_active, var_0);
-    else {}
+    } else {}
   }
 }
 
@@ -773,15 +793,17 @@ stoplocalsound_phone(var_0) {
   if(!isDefined(level.phone.sounds[var_0])) {
     return;
   }
-  if(issubstr(level.phone.sounds[var_0], "_lp"))
+  if(issubstr(level.phone.sounds[var_0], "_lp")) {
     self stoploopsound(level.phone.sounds[var_0]);
-  else
+  } else {
     self stoplocalsound(level.phone.sounds[var_0]);
+  }
 
   self notify("stop_" + var_0);
 
-  if(isDefined(self._phone_sounds_played))
+  if(isDefined(self._phone_sounds_played)) {
     self._phone_sounds_active = scripts\engine\utility::array_remove(self._phone_sounds_active, var_0);
+  }
 }
 
 stoplocalsoundall() {
@@ -790,8 +812,9 @@ stoplocalsoundall() {
   if(self._phone_sounds_played.size == 0) {
     return;
   }
-  foreach(var_1 in self._phone_sounds_played)
-  thread stoplocalsound_phone(var_1);
+  foreach(var_1 in self._phone_sounds_played) {
+    thread stoplocalsound_phone(var_1);
+  }
 
   self._phone_sounds_played = [];
 }
@@ -868,77 +891,92 @@ phone_morse_code(var_0) {
   var_2 = undefined;
 
   for(var_3 = 0; var_3 < 3; var_3++) {
-    if(var_3 + 1 == 3)
+    if(var_3 + 1 == 3) {
       var_2 = getsubstr(level.morse_number, var_3);
-    else
+    } else {
       var_2 = getsubstr(level.morse_number, var_3, var_3 + 1);
+    }
 
     switch (var_2) {
       case "0":
-        for(var_4 = 0; var_4 < 5; var_4++)
+        for(var_4 = 0; var_4 < 5; var_4++) {
           play_morse_dash(var_0);
+        }
 
         break;
       case "1":
         play_morse_dot(var_0);
 
-        for(var_4 = 0; var_4 < 4; var_4++)
+        for(var_4 = 0; var_4 < 4; var_4++) {
           play_morse_dash(var_0);
+        }
 
         break;
       case "2":
-        for(var_4 = 0; var_4 < 2; var_4++)
+        for(var_4 = 0; var_4 < 2; var_4++) {
           play_morse_dot(var_0);
+        }
 
-        for(var_4 = 0; var_4 < 3; var_4++)
+        for(var_4 = 0; var_4 < 3; var_4++) {
           play_morse_dash(var_0);
+        }
 
         break;
       case "3":
-        for(var_4 = 0; var_4 < 3; var_4++)
+        for(var_4 = 0; var_4 < 3; var_4++) {
           play_morse_dot(var_0);
+        }
 
-        for(var_4 = 0; var_4 < 2; var_4++)
+        for(var_4 = 0; var_4 < 2; var_4++) {
           play_morse_dash(var_0);
+        }
 
         break;
       case "4":
-        for(var_4 = 0; var_4 < 4; var_4++)
+        for(var_4 = 0; var_4 < 4; var_4++) {
           play_morse_dot(var_0);
+        }
 
         play_morse_dash(var_0);
         break;
       case "5":
-        for(var_4 = 0; var_4 < 5; var_4++)
+        for(var_4 = 0; var_4 < 5; var_4++) {
           play_morse_dot(var_0);
+        }
 
         break;
       case "6":
         play_morse_dash(var_0);
 
-        for(var_4 = 0; var_4 < 4; var_4++)
+        for(var_4 = 0; var_4 < 4; var_4++) {
           play_morse_dot(var_0);
+        }
 
         break;
       case "7":
-        for(var_4 = 0; var_4 < 2; var_4++)
+        for(var_4 = 0; var_4 < 2; var_4++) {
           play_morse_dash(var_0);
+        }
 
-        for(var_4 = 0; var_4 < 3; var_4++)
+        for(var_4 = 0; var_4 < 3; var_4++) {
           play_morse_dot(var_0);
+        }
 
         break;
       case "8":
-        for(var_4 = 0; var_4 < 3; var_4++)
+        for(var_4 = 0; var_4 < 3; var_4++) {
           play_morse_dash(var_0);
+        }
 
-        for(var_4 = 0; var_4 < 2; var_4++)
+        for(var_4 = 0; var_4 < 2; var_4++) {
           play_morse_dot(var_0);
+        }
 
         break;
       case "9":
-        for(var_4 = 0; var_4 < 4; var_4++)
+        for(var_4 = 0; var_4 < 4; var_4++) {
           play_morse_dash(var_0);
+        }
 
         play_morse_dot(var_0);
         break;

@@ -135,11 +135,12 @@ _id_8172() {
 
   foreach(var_3 in var_0) {
     if(isDefined(var_3.script_noteworthy)) {
-      if(!isDefined(var_1[var_3.script_noteworthy]))
+      if(!isDefined(var_1[var_3.script_noteworthy])) {
         var_1[var_3.script_noteworthy] = [];
+      }
 
       var_4 = _id_9853(var_3);
-      var_1[var_3.script_noteworthy] = scripts\engine\utility::array_add(var_1[var_3.script_noteworthy], var_4);
+      var_1[var_3.script_noteworthy] = ::scripts\engine\utility::array_add(var_1[var_3.script_noteworthy], var_4);
     }
   }
 
@@ -153,14 +154,15 @@ _id_9853(var_0) {
   var_1.ent = var_0;
   var_1._id_CBFB = scripts\engine\utility::getStruct(var_0.target, "targetname");
 
-  if(var_0.script_parameters == "gasoline" || var_0.script_parameters == "nitrogen" || var_0.script_parameters == "air")
+  if(var_0.script_parameters == "gasoline" || var_0.script_parameters == "nitrogen" || var_0.script_parameters == "air") {
     var_1._id_E8F5 = var_0.script_parameters;
-  else {}
+  } else {}
 
-  if(isDefined(var_0.script_index))
+  if(isDefined(var_0.script_index)) {
     var_1.number = var_0.script_index;
-  else
+  } else {
     var_1.number = 0;
+  }
 
   if(var_0.script_parameters == "nitrogen") {
     var_1._id_8625 = scripts\engine\utility::spawn_tag_origin(var_1._id_CBFB.origin, var_1._id_CBFB.angles);
@@ -189,20 +191,24 @@ _id_4DB6(var_0, var_1, var_2) {
 }
 
 _id_3C42(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = getarraykeys(level._id_74B2);
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "all";
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = -1;
+  }
 
   foreach(var_5 in var_1) {
     foreach(var_7 in level._id_74B2[var_5]) {
       if(var_7._id_E8F5 == var_2 || var_2 == "all") {
-        if(var_7.number == var_3 || var_3 == -1)
+        if(var_7.number == var_3 || var_3 == -1) {
           var_7[[var_0]]();
+        }
       }
     }
   }

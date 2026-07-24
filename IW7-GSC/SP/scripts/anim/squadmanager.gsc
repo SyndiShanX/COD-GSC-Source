@@ -47,8 +47,9 @@ _id_4A1B(var_0, var_1) {
     var_2 thread[[var_4]]();
   }
 
-  for(var_3 = 0; var_3 < anim._id_10AE5.size; var_3++)
+  for(var_3 = 0; var_3 < anim._id_10AE5.size; var_3++) {
     anim._id_10AE5[var_3] _id_12F25();
+  }
 
   var_2 thread _id_10AFC();
   var_2 thread _id_C35D();
@@ -64,8 +65,9 @@ _id_51D2(var_0) {
   var_2 = anim._id_10AF9[var_0];
   var_2 notify("squad_deleting");
 
-  while(var_2._id_B661.size)
+  while(var_2._id_B661.size) {
     var_2._id_B661[0] _id_185C(var_2._id_B661[0].team);
+  }
 
   anim._id_10AE5[var_1] = anim._id_10AE5[anim._id_10AE5.size - 1];
   anim._id_10AE5[var_1]._id_10AE4 = var_1;
@@ -73,36 +75,40 @@ _id_51D2(var_0) {
   anim._id_10AF9[var_0] = undefined;
   anim notify("squad deleted " + var_0);
 
-  for(var_3 = 0; var_3 < anim._id_10AE5.size; var_3++)
+  for(var_3 = 0; var_3 < anim._id_10AE5.size; var_3++) {
     anim._id_10AE5[var_3] _id_12F25();
+  }
 }
 
 _id_1811(var_0) {
   if(!isDefined(var_0)) {
-    if(isDefined(self._id_EEC4))
+    if(isDefined(self._id_EEC4)) {
       var_0 = self._id_EEC4;
-    else
+    } else {
       var_0 = self.team;
+    }
   }
 
-  if(!isDefined(anim._id_10AF9[var_0]))
+  if(!isDefined(anim._id_10AF9[var_0])) {
     anim _id_4A1B(var_0, self);
+  }
 
   var_1 = anim._id_10AF9[var_0];
   var_2 = 0;
 
   if(isDefined(var_1._id_B661)) {
     foreach(var_4 in var_1._id_B661) {
-      if(var_4 != anim.player)
+      if(var_4 != anim.player) {
         continue;
-      else {
+      } else {
         var_2 = 1;
         break;
       }
     }
 
-    if(!var_2)
+    if(!var_2) {
       var_1._id_B661[var_1._id_B661.size] = self;
+    }
   }
 
   self._id_10AC8 = var_1;
@@ -115,8 +121,9 @@ _id_D362() {
   if(scripts\engine\utility::player_is_in_jackal()) {
     anim.player = level._id_D127;
 
-    if(!isDefined(anim.player.team))
+    if(!isDefined(anim.player.team)) {
       anim.player.team = "allies";
+    }
 
     anim._id_68AD["threat"]["self"] = 11000;
     anim._id_68AD["threat"]["squad"] = 7000;
@@ -137,13 +144,15 @@ _id_D362() {
 
     _id_0E4E::_id_96F1();
 
-    while(scripts\engine\utility::player_is_in_jackal())
+    while(scripts\engine\utility::player_is_in_jackal()) {
       wait 0.05;
+    }
   } else {
     anim.player = var_0;
 
-    if(!isDefined(anim.player.team))
+    if(!isDefined(anim.player.team)) {
       anim.player.team = "allies";
+    }
 
     _id_0E4E::_id_D313();
     anim._id_68AD["threat"]["self"] = 9000;
@@ -165,8 +174,9 @@ _id_D362() {
 
     _id_0E4E::_id_96F1();
 
-    while(!scripts\engine\utility::player_is_in_jackal())
+    while(!scripts\engine\utility::player_is_in_jackal()) {
       wait 0.05;
+    }
   }
 
   for(;;) {
@@ -174,15 +184,17 @@ _id_D362() {
       var_2 = [];
 
       foreach(var_4 in anim._id_10AF9["allies"]._id_B661) {
-        if(var_4 != level.player)
+        if(var_4 != level.player) {
           var_2[var_2.size] = var_4;
+        }
       }
 
       anim._id_10AF9["allies"]._id_B661 = var_2;
       anim.player = level._id_D127;
 
-      if(!isDefined(anim.player.team))
+      if(!isDefined(anim.player.team)) {
         anim.player.team = "allies";
+      }
 
       _id_0E4E::_id_D313();
       anim._id_68AD["threat"]["self"] = 11000;
@@ -204,8 +216,9 @@ _id_D362() {
 
       _id_0E4E::_id_96F1();
 
-      while(scripts\engine\utility::player_is_in_jackal())
+      while(scripts\engine\utility::player_is_in_jackal()) {
         wait 0.05;
+      }
 
       continue;
     }
@@ -213,15 +226,17 @@ _id_D362() {
     var_2 = [];
 
     foreach(var_4 in anim._id_10AF9["allies"]._id_B661) {
-      if(!isDefined(level._id_D127) || isDefined(level._id_D127) && var_4 != level._id_D127)
+      if(!isDefined(level._id_D127) || isDefined(level._id_D127) && var_4 != level._id_D127) {
         var_2[var_2.size] = var_4;
+      }
     }
 
     anim._id_10AF9["allies"]._id_B661 = var_2;
     anim.player = var_0;
 
-    if(!isDefined(anim.player.team))
+    if(!isDefined(anim.player.team)) {
       anim.player.team = "allies";
+    }
 
     _id_0E4E::_id_D313();
     anim._id_68AD["threat"]["self"] = 9000;
@@ -243,44 +258,51 @@ _id_D362() {
 
     _id_0E4E::_id_96F1();
 
-    while(!scripts\engine\utility::player_is_in_jackal())
+    while(!scripts\engine\utility::player_is_in_jackal()) {
       wait 0.05;
+    }
   }
 }
 
 _id_8151(var_0) {
   var_1 = "allies";
 
-  if(isDefined(level.template_script) && level.template_script == "phparade")
+  if(isDefined(level.template_script) && level.template_script == "phparade") {
     var_0.team = "allies";
+  }
 
-  if(var_0.team == "axis" || var_0.team == "neutral" || var_0.team == "team3")
+  if(var_0.team == "axis" || var_0.team == "neutral" || var_0.team == "team3") {
     var_1 = var_0.team;
+  }
 
   return var_1;
 }
 
 _id_185C(var_0) {
   if(!isDefined(var_0)) {
-    if(isDefined(self._id_EEC4))
+    if(isDefined(self._id_EEC4)) {
       var_0 = self._id_EEC4;
-    else
+    } else {
       var_0 = self.team;
+    }
 
-    if(isDefined(self._id_29B8) && self._id_29B8)
+    if(isDefined(self._id_29B8) && self._id_29B8) {
       var_0 = "jackal_" + self.script_team;
+    }
   }
 
-  if(!isDefined(anim._id_10AF9[var_0]))
+  if(!isDefined(anim._id_10AF9[var_0])) {
     anim _id_4A1B(var_0, self);
+  }
 
   var_1 = anim._id_10AF9[var_0];
 
   if(isDefined(self._id_10AC8)) {
-    if(self._id_10AC8 == var_1)
+    if(self._id_10AC8 == var_1) {
       return;
-    else
+    } else {
       _id_E11A();
+    }
   }
 
   self.lastenemysighttime = 0;
@@ -292,12 +314,14 @@ _id_185C(var_0) {
   var_1._id_B65C = var_1._id_B661.size;
 
   if(isDefined(level._id_AE64)) {
-    if(self.team == "allies" && scripts\anim\battlechatter::_id_9EC2())
+    if(self.team == "allies" && scripts\anim\battlechatter::_id_9EC2()) {
       _id_1804();
+    }
   }
 
-  foreach(var_3 in self._id_10AC8._id_B659)
-  self thread[[var_3]](self._id_10AC8._id_10AEE);
+  foreach(var_3 in self._id_10AC8._id_B659) {
+    self thread[[var_3]](self._id_10AC8._id_10AEE);
+  }
 
   thread _id_B65D();
 }
@@ -306,12 +330,13 @@ _id_E11A() {
   var_0 = self._id_10AC8;
   var_1 = -1;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     var_1 = self._id_10AED;
-  else {
+  } else {
     for(var_2 = 0; var_2 < var_0._id_B661.size; var_2++) {
-      if(var_0._id_B661[var_2] == self)
+      if(var_0._id_B661[var_2] == self) {
         var_1 = var_2;
+      }
     }
   }
 
@@ -319,21 +344,25 @@ _id_E11A() {
     var_3 = var_0._id_B661[var_0._id_B661.size - 1];
     var_0._id_B661[var_1] = var_3;
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_3._id_10AED = var_1;
+    }
   }
 
   var_0._id_B661[var_0._id_B661.size - 1] = undefined;
   var_0._id_B65C = var_0._id_B661.size;
 
-  if(isDefined(self._id_10AF0))
+  if(isDefined(self._id_10AF0)) {
     _id_E142();
+  }
 
-  foreach(var_5 in self._id_10AC8._id_B65F)
-  self thread[[var_5]](var_0._id_10AEE);
+  foreach(var_5 in self._id_10AC8._id_B65F) {
+    self thread[[var_5]](var_0._id_10AEE);
+  }
 
-  if(var_0._id_B65C == 0)
+  if(var_0._id_B65C == 0) {
     _id_51D2(var_0._id_10AEE);
+  }
 
   if(isDefined(self)) {
     self._id_10AC8 = undefined;
@@ -357,12 +386,13 @@ _id_E142() {
   var_0 = self._id_10AC8;
   var_1 = -1;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     var_1 = self._id_10AF0;
-  else {
+  } else {
     for(var_2 = 0; var_2 < var_0._id_C35C.size; var_2++) {
-      if(var_0._id_C35C[var_2] == self)
+      if(var_0._id_C35C[var_2] == self) {
         var_1 = var_2;
+      }
     }
   }
 
@@ -370,24 +400,28 @@ _id_E142() {
     var_3 = var_0._id_C35C[var_0._id_C35C.size - 1];
     var_0._id_C35C[var_1] = var_3;
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_3._id_10AF0 = var_1;
+    }
   }
 
   var_0._id_C35C[var_0._id_C35C.size - 1] = undefined;
   var_0._id_C35A = var_0._id_C35C.size;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self._id_10AF0 = undefined;
+  }
 }
 
 _id_C35D() {
-  if(!isDefined(level._id_AE64))
+  if(!isDefined(level._id_AE64)) {
     anim waittill("loadout complete");
+  }
 
   for(var_0 = 0; var_0 < self._id_B661.size; var_0++) {
-    if(self._id_B661[var_0] scripts\anim\battlechatter::_id_9EC2())
+    if(self._id_B661[var_0] scripts\anim\battlechatter::_id_9EC2()) {
       self._id_B661[var_0] _id_1804();
+    }
   }
 }
 
@@ -404,8 +438,9 @@ _id_B65D() {
   self endon("removed from squad");
   self waittill("death", var_0);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self.attacker = var_0;
+  }
 
   _id_E11A();
 }
@@ -413,13 +448,15 @@ _id_B65D() {
 _id_12E77() {
   self._id_9E40 = 0;
 
-  for(var_0 = 0; var_0 < anim._id_10AE5.size; var_0++)
+  for(var_0 = 0; var_0 < anim._id_10AE5.size; var_0++) {
     self._id_10AE9[anim._id_10AE5[var_0]._id_10AEE]._id_9E42 = 0;
+  }
 
   for(var_0 = 0; var_0 < self._id_B661.size; var_0++) {
     if(isDefined(self._id_B661[var_0])) {
-      if(isDefined(self._id_B661[var_0].enemy) && isDefined(self._id_B661[var_0].enemy._id_10AC8) && self._id_B661[var_0]._id_440E > 0)
+      if(isDefined(self._id_B661[var_0].enemy) && isDefined(self._id_B661[var_0].enemy._id_10AC8) && self._id_B661[var_0]._id_440E > 0) {
         self._id_10AE9[self._id_B661[var_0].enemy._id_10AC8._id_10AEE]._id_9E42 = 1;
+      }
     }
   }
 }
@@ -433,8 +470,9 @@ _id_12E59() {
   _id_12E77();
   var_5 = !isDefined(self.enemy);
 
-  if(!var_5)
+  if(!var_5) {
     self.forward = vectorNormalize(self.enemy.origin - self.origin);
+  }
 
   foreach(var_7 in self._id_B661) {
     if(!isalive(var_7)) {
@@ -443,8 +481,9 @@ _id_12E59() {
     var_2++;
     var_0 = var_0 + var_7.origin;
 
-    if(var_5)
+    if(var_5) {
       var_1 = var_1 + anglesToForward(var_7.angles);
+    }
 
     if(isDefined(var_7.enemy) && isDefined(var_7.enemy._id_10AC8)) {
       if(!isDefined(var_3)) {
@@ -452,21 +491,24 @@ _id_12E59() {
         continue;
       }
 
-      if(var_7.enemy._id_10AC8._id_B65C > var_3._id_B65C)
+      if(var_7.enemy._id_10AC8._id_B65C > var_3._id_B65C) {
         var_3 = var_7.enemy._id_10AC8;
+      }
     }
   }
 
   if(var_2) {
     self.origin = var_0 / var_2;
 
-    if(var_5)
+    if(var_5) {
       self.forward = var_1 / var_2;
+    }
   } else {
     self.origin = var_0;
 
-    if(var_5)
+    if(var_5) {
       self.forward = var_1;
+    }
   }
 
   self._id_9E40 = var_4;
@@ -480,19 +522,22 @@ _id_12F25() {
       self._id_10AE9[anim._id_10AE5[var_0]._id_10AEE]._id_9E42 = 0;
     }
 
-    foreach(var_2 in self._id_10AFD)
-    self thread[[var_2]](anim._id_10AE5[var_0]._id_10AEE);
+    foreach(var_2 in self._id_10AFD) {
+      self thread[[var_2]](anim._id_10AE5[var_0]._id_10AEE);
+    }
   }
 }
 
 _id_D909(var_0, var_1, var_2, var_3) {
   self endon("death");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = (0, 0, 0);
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = (1, 0, 0);
+  }
 
   for(var_4 = 0; var_4 < var_1 * 2; var_4++) {
     if(!isalive(self)) {
@@ -556,10 +601,11 @@ _id_1B0F(var_0) {
     return;
   }
   if(isDefined(self.lastenemysightpos)) {
-    if(self._id_440E < 0)
+    if(self._id_440E < 0) {
       self._id_440E = var_0;
-    else
+    } else {
       self._id_440E = self._id_440E + var_0;
+    }
 
     self.lastenemysighttime = gettime();
     return;
@@ -568,10 +614,11 @@ _id_1B0F(var_0) {
     return;
   }
 
-  if(self._id_440E > 0)
+  if(self._id_440E > 0) {
     self._id_440E = 0 - var_0;
-  else
+  } else {
     self._id_440E = self._id_440E - var_0;
+  }
 }
 
 _id_1B10(var_0) {
@@ -579,10 +626,11 @@ _id_1B10(var_0) {
     return;
   }
   if(isDefined(self._id_3136) && self._id_3136 || isDefined(self.asmname) && self.asmname != "jackal" && self issuppressed()) {
-    if(self._id_112CA < 0)
+    if(self._id_112CA < 0) {
       self._id_112CA = var_0;
-    else
+    } else {
       self._id_112CA = self._id_112CA + var_0;
+    }
   } else {
     if(self._id_112CA > 0) {
       self._id_112CA = 0 - var_0;

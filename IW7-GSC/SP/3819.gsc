@@ -26,8 +26,9 @@ _id_FD81() {
   var_0 = scripts\engine\utility::array_combine(var_0, getEntArray("shipcrib_elevator_magazine_bay4", "script_noteworthy"));
 
   foreach(var_2 in var_0) {
-    if(!isDefined(var_2._id_EE52) || var_2._id_EE52 != "model")
+    if(!isDefined(var_2._id_EE52) || var_2._id_EE52 != "model") {
       var_0 = scripts\engine\utility::array_remove(var_0, var_2);
+    }
   }
 
   foreach(var_2 in var_0) {
@@ -58,16 +59,18 @@ _id_FD81() {
         var_2._id_BE60 _meth_80AF(undefined);
       }
 
-      if(var_2.collision.size > 0)
+      if(var_2.collision.size > 0) {
         scripts\engine\utility::array_call(var_2.collision, ::linkto, var_2);
+      }
 
       scripts\engine\utility::array_call(var_2.lights, ::linkto, var_2);
       var_2._id_6F68 = _id_0EFB::_id_7CC1("shipcrib_elevator_floor", "script_noteworthy", var_5);
       var_2._id_6F68 = scripts\engine\utility::array_sort_with_func(var_2._id_6F68, _id_0EE4::_id_9B41);
       var_2._id_6F67 = [];
 
-      foreach(var_8 in var_2._id_6F68)
-      var_2._id_6F67 = scripts\engine\utility::array_add(var_2._id_6F67, var_8._id_EE52);
+      foreach(var_8 in var_2._id_6F68) {
+        var_2._id_6F67 = scripts\engine\utility::array_add(var_2._id_6F67, var_8._id_EE52);
+      }
 
       var_2._id_2C3F = _id_0EFB::_id_7994("shipcrib_elevator_bollards", "script_noteworthy", var_5);
 
@@ -87,8 +90,9 @@ _id_FD81() {
       var_2._id_10F5A = _id_0EFB::_id_7CC1("shipcrib_elevator_steam", "script_noteworthy", var_5);
 
       if(isDefined(var_2._id_10F5A) && var_2._id_10F5A.size > 0) {
-        foreach(var_14 in var_2._id_10F5A)
-        var_14 thread _id_6104(var_2);
+        foreach(var_14 in var_2._id_10F5A) {
+          var_14 thread _id_6104(var_2);
+        }
       }
 
       _id_FD80(var_5);
@@ -134,16 +138,18 @@ _id_60ED(var_0) {
         if(level.elevators[var_0]._id_4B10 == self._id_EE52) {
           self moveTo(self._id_5AF1, 1.25);
 
-          if(isDefined(level.elevators[var_0]._id_2C3E))
+          if(isDefined(level.elevators[var_0]._id_2C3E)) {
             level.elevators[var_0]._id_2C3E notsolid();
+          }
         }
 
         break;
       case "doors_close":
         self moveTo(self._id_12D74, 1.25);
 
-        if(isDefined(level.elevators[var_0]._id_2C3E))
+        if(isDefined(level.elevators[var_0]._id_2C3E)) {
           level.elevators[var_0]._id_2C3E solid();
+        }
 
         break;
     }
@@ -178,8 +184,9 @@ _id_6104(var_0) {
       break;
   }
 
-  while(!isDefined(var_0._id_4B10))
+  while(!isDefined(var_0._id_4B10)) {
     scripts\engine\utility::waitframe();
+  }
 
   if(var_0._id_4B10 != self._id_EE52) {
     playFXOnTag(scripts\engine\utility::getfx(var_2), var_1, "tag_origin");
@@ -211,21 +218,24 @@ _id_6105() {
       var_0 = scripts\engine\utility::array_find(self._id_6F67, self._id_4B10);
 
       if(var_0 == 0) {
-        if(self._id_6084.alpha == 0)
+        if(self._id_6084.alpha == 0) {
           self._id_6084.alpha = 1;
+        }
       } else if(var_0 == self._id_6F67.size - 1) {
-        if(self._id_6084.alpha == 0)
+        if(self._id_6084.alpha == 0) {
           self._id_6084.alpha = 1;
+        }
       } else if(self._id_6084.alpha == 0)
         self._id_6084.alpha = 1;
 
       if(_id_60EF() || _id_60EE() || isDefined(self._id_BC8B)) {
         var_1 = undefined;
 
-        if(!isDefined(self._id_BC8B))
+        if(!isDefined(self._id_BC8B)) {
           var_1 = self._id_32DB;
-        else
+        } else {
           var_1 = scripts\engine\utility::array_find(self._id_6F67, self._id_BC8B);
+        }
 
         self._id_BC8B = undefined;
         self._id_32DB = undefined;
@@ -234,8 +244,9 @@ _id_6105() {
         self waittill("doors_finished");
         self._id_BE5F _meth_83C9();
 
-        if(isDefined(self._id_BE60))
+        if(isDefined(self._id_BE60)) {
           self._id_BE60 _meth_83C9();
+        }
 
         thread _id_60FF("start");
         thread _id_60FC();
@@ -248,8 +259,9 @@ _id_6105() {
         self waittill("doors_finished");
         self._id_BE5F _meth_80AF(undefined);
 
-        if(isDefined(self._id_BE60))
+        if(isDefined(self._id_BE60)) {
           self._id_BE60 _meth_80AF(undefined);
+        }
 
         self notify("move_finished");
         level notify("elevator_finished");
@@ -311,8 +323,9 @@ _id_60EE() {
 _id_60FC() {
   self endon("death");
 
-  if(level.player istouching(self.trigger))
+  if(level.player istouching(self.trigger)) {
     screenshake(level.player.origin, 0.2, 0.2, 0.2, 0.2, 0, 0, 0, 12, 12, 12);
+  }
 }
 
 _id_60F4(var_0) {
@@ -332,18 +345,21 @@ _id_60F4(var_0) {
       }
     }
 
-    if(_id_582A(var_0, self._id_4B10))
+    if(_id_582A(var_0, self._id_4B10)) {
       wait 0.5;
+    }
 
     switch (var_1) {
       case "doors_open":
         if(!isDefined(self._id_BFEA)) {
           foreach(var_5 in var_3) {
-            if(isDefined(self.anims))
+            if(isDefined(self.anims)) {
               self setanimknob(self.anims[var_5 + "_lower"], 1);
+            }
 
-            if(isDefined(self._id_5989))
+            if(isDefined(self._id_5989)) {
               self._id_5989[var_5] notsolid();
+            }
           }
 
           thread _id_60FF("open");
@@ -358,12 +374,14 @@ _id_60F4(var_0) {
         break;
       case "doors_close":
         if(!isDefined(self._id_BFEA)) {
-          if(isDefined(self._id_5989))
+          if(isDefined(self._id_5989)) {
             scripts\engine\utility::array_call(self._id_5989, ::solid);
+          }
 
           foreach(var_5 in var_3) {
-            if(isDefined(self.anims))
+            if(isDefined(self.anims)) {
               self setanimknob(self.anims[var_5 + "_raise"], 1);
+            }
           }
 
           thread _id_60FF("close");
@@ -413,14 +431,16 @@ _id_60FF(var_0) {
       self stoploopsound();
       break;
     case "close":
-      if(self._id_5A4C != "closed")
+      if(self._id_5A4C != "closed") {
         self playSound(self._id_FB2F["close"]);
+      }
 
       break;
     case "open":
       if(self._id_5A4C != "open") {
-        if(isDefined(self._id_FB2F["open"]))
+        if(isDefined(self._id_FB2F["open"])) {
           thread scripts\engine\utility::play_sound_in_space(self._id_FB2F["open"], self.origin - (100, 100, 0));
+        }
       }
 
       break;
@@ -430,11 +450,13 @@ _id_60FF(var_0) {
 _id_60FD(var_0, var_1, var_2, var_3) {
   var_4 = _id_7976(var_0);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1;
+  }
 
   if(var_2) {
     foreach(var_6 in var_4._id_6F68) {
@@ -442,24 +464,27 @@ _id_60FD(var_0, var_1, var_2, var_3) {
         return;
       }
       if(var_6._id_EE52 == var_1) {
-        while(var_4._id_32D7)
+        while(var_4._id_32D7) {
           scripts\engine\utility::waitframe();
+        }
 
         var_4._id_32D7 = 1;
 
         if(var_3) {
           var_4._id_BE5F _meth_83C9();
 
-          if(isDefined(var_4._id_BE60))
+          if(isDefined(var_4._id_BE60)) {
             var_4._id_BE60 _meth_83C9();
+          }
         }
 
         var_4.origin = var_6.origin;
         var_4._id_4B10 = var_6._id_EE52;
         var_4._id_BE5F scripts\engine\utility::delaycall(0.05, ::_meth_80AF);
 
-        if(isDefined(var_4._id_BE60))
+        if(isDefined(var_4._id_BE60)) {
           var_4._id_BE60 scripts\engine\utility::delaycall(0.05, ::_meth_80AF);
+        }
 
         var_4 scripts\engine\utility::delaythread(0.05, scripts\sp\utility::_id_F225, "doors_open");
         var_4 scripts\engine\utility::delaythread(0.05, ::_id_60F2, var_0);
@@ -527,20 +552,23 @@ _id_6103(var_0, var_1, var_2) {
 _id_7873(var_0, var_1) {
   var_2 = _id_7976(var_0);
 
-  if(!isDefined(var_2._id_2C3F))
+  if(!isDefined(var_2._id_2C3F)) {
     return undefined;
+  }
 
   var_3 = [];
 
   foreach(var_5 in var_2._id_2C3F) {
-    if(var_5._id_EE52 == var_1)
+    if(var_5._id_EE52 == var_1) {
       var_3 = scripts\engine\utility::array_add(var_3, var_5);
+    }
   }
 
-  if(var_3.size > 0)
+  if(var_3.size > 0) {
     return var_3;
-  else
+  } else {
     return undefined;
+  }
 }
 
 _id_60EC(var_0, var_1, var_2) {
@@ -549,8 +577,9 @@ _id_60EC(var_0, var_1, var_2) {
   if(!isDefined(var_3)) {
     return;
   }
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1.25;
+  }
 
   foreach(var_5 in var_3) {
     if(isDefined(var_5._id_EE59) && var_5._id_EE59 == "collision_wall") {
@@ -570,8 +599,9 @@ _id_60EB(var_0, var_1, var_2) {
   if(!isDefined(var_3)) {
     return;
   }
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1.25;
+  }
 
   foreach(var_5 in var_3) {
     if(isDefined(var_5._id_EE59) && var_5._id_EE59 == "collision_wall") {
@@ -588,8 +618,9 @@ _id_60EB(var_0, var_1, var_2) {
 _id_7C38(var_0, var_1) {
   foreach(var_3 in var_0) {
     if(isDefined(var_3._id_EE52)) {
-      if(var_3._id_EE52 == var_1)
+      if(var_3._id_EE52 == var_1) {
         return var_3;
+      }
     }
   }
 }
@@ -599,8 +630,9 @@ _id_7C37(var_0, var_1) {
 
   foreach(var_4 in var_0) {
     if(isDefined(var_4._id_EE52)) {
-      if(var_4._id_EE52 == var_1)
+      if(var_4._id_EE52 == var_1) {
         var_2 = scripts\engine\utility::array_add(var_2, var_4);
+      }
     }
   }
 
@@ -610,8 +642,9 @@ _id_7C37(var_0, var_1) {
 _id_7C39(var_0, var_1) {
   foreach(var_3 in var_0) {
     if(isDefined(var_3._id_EE52)) {
-      if(getsubstr(var_3._id_EE52, 0, var_1.size) != var_1)
+      if(getsubstr(var_3._id_EE52, 0, var_1.size) != var_1) {
         var_0 = scripts\engine\utility::array_remove(var_0, var_3);
+      }
     }
   }
 
@@ -626,8 +659,9 @@ _id_6101(var_0, var_1) {
   var_2 = _id_7976(var_0);
   var_2.doors = var_1;
 
-  foreach(var_4 in var_2.doors)
-  var_2._id_5989[var_4] = _id_7C38(var_2.collision, "collision_" + var_4);
+  foreach(var_4 in var_2.doors) {
+    var_2._id_5989[var_4] = _id_7C38(var_2.collision, "collision_" + var_4);
+  }
 
   var_2 thread _id_60F3(var_0);
 }
@@ -636,8 +670,9 @@ _id_582A(var_0, var_1) {
   self endon("death");
 
   foreach(var_3 in self._id_2C3F) {
-    if(level.elevators[var_0]._id_4B10 == var_3._id_EE52)
+    if(level.elevators[var_0]._id_4B10 == var_3._id_EE52) {
       return 1;
+    }
   }
 
   return 0;
@@ -646,10 +681,11 @@ _id_582A(var_0, var_1) {
 _id_60F6() {
   self endon("death");
 
-  if(scripts\engine\utility::flag_exist(level.script + "_prime_in_tr_loaded"))
+  if(scripts\engine\utility::flag_exist(level.script + "_prime_in_tr_loaded")) {
     scripts\engine\utility::flag_wait(level.script + "_prime_in_tr_loaded");
-  else if(scripts\engine\utility::flag_exist(level.script + "_prime_tr_loaded"))
+  } else if(scripts\engine\utility::flag_exist(level.script + "_prime_tr_loaded")) {
     scripts\engine\utility::flag_wait(level.script + "_prime_tr_loaded");
+  }
 
   _id_60F5();
   self showpart("tag_bridge_deck", self.model);
@@ -763,6 +799,7 @@ _id_60F7(var_0) {
       break;
   }
 
-  while(self istouching(var_0))
+  while(self istouching(var_0)) {
     scripts\engine\utility::waitframe();
+  }
 }

@@ -20,8 +20,9 @@ init_escape_interactions() {
   level thread remove_team_door_meters();
   var_0 = getEntArray("escape_exit_path", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 hide();
+  foreach(var_2 in var_0) {
+    var_2 hide();
+  }
 }
 
 get_escape_exit_interactions() {
@@ -31,18 +32,21 @@ get_escape_exit_interactions() {
 delete_zombie_gamemode_entities() {
   var_0 = getEntArray("first_gate_bollard", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
+  }
 
   var_4 = getEntArray("first_gate_bollard_clip", "targetname");
 
-  foreach(var_6 in var_4)
-  var_6 delete();
+  foreach(var_6 in var_4) {
+    var_6 delete();
+  }
 
   var_8 = getEntArray("bollard_trigger", "targetname");
 
-  foreach(var_10 in var_8)
-  var_10 delete();
+  foreach(var_10 in var_8) {
+    var_10 delete();
+  }
 }
 
 delete_all_doors() {
@@ -59,8 +63,9 @@ delete_all_doors() {
         continue;
       }
       if(var_5.target == var_2.target && var_5 != var_2) {
-        if(scripts\engine\utility::array_contains(var_0, var_5))
+        if(scripts\engine\utility::array_contains(var_0, var_5)) {
           var_0 = scripts\engine\utility::array_remove(var_0, var_5);
+        }
       }
     }
 
@@ -89,8 +94,9 @@ delete_door(var_0) {
   var_1 = getEntArray(var_0.target, "targetname");
 
   foreach(var_4, var_3 in var_1) {
-    if(var_3.classname == "script_brushmodel")
+    if(var_3.classname == "script_brushmodel") {
       var_3 connectpaths();
+    }
 
     var_3 delete();
   }
@@ -102,8 +108,9 @@ delete_team_door(var_0) {
   var_2 = getEntArray(var_1[0].target, "targetname");
 
   foreach(var_5, var_4 in var_2) {
-    if(var_4.spawnflags == 1)
+    if(var_4.spawnflags == 1) {
       var_4 connectpaths();
+    }
 
     var_4 delete();
   }
@@ -120,20 +127,23 @@ spawn_escape_entities() {
   foreach(var_5, var_3 in var_1) {
     var_4 = spawn("script_model", var_3.origin);
 
-    if(isDefined(var_3.angles))
+    if(isDefined(var_3.angles)) {
       var_4.angles = var_3.angles;
+    }
 
     var_4 setModel(var_3.script_noteworthy);
     level.escape_barriers[level.escape_barriers.size] = var_4;
 
-    if(var_5 % 3 == 0)
+    if(var_5 % 3 == 0) {
       wait 0.05;
+    }
   }
 
   var_6 = getEntArray("escape_door", "targetname");
 
-  foreach(var_8 in var_6)
-  level thread setup_door(var_8);
+  foreach(var_8 in var_6) {
+    level thread setup_door(var_8);
+  }
 
   level thread escape_armageddon();
 }
@@ -176,8 +186,9 @@ setup_door(var_0) {
     }
     var_4 = spawn("script_model", var_3.origin);
 
-    if(isDefined(var_3.angles))
+    if(isDefined(var_3.angles)) {
       var_4.angles = var_3.angles;
+    }
 
     var_4 setModel(var_3.script_noteworthy);
     var_0.panels[var_0.panels.size] = var_4;

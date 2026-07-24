@@ -28,19 +28,22 @@ main() {
 
     var_5 = getEntArray("mn_welldeck_lights", "script_noteworthy");
 
-    foreach(var_7 in var_5)
-    var_7 setlightintensity(1);
+    foreach(var_7 in var_5) {
+      var_7 setlightintensity(1);
+    }
 
     var_9 = getEntArray("mn_welldeck_claxons", "script_noteworthy");
 
-    foreach(var_7 in var_9)
-    var_7 setlightintensity(1);
+    foreach(var_7 in var_9) {
+      var_7 setlightintensity(1);
+    }
   }
 
-  if(getdvarint("greenlight") == 0)
+  if(getdvarint("greenlight") == 0) {
     scripts\sp\utility::_id_F343("Ride Deploy");
-  else
+  } else {
     scripts\sp\utility::_id_F343("Tutorials");
+  }
 
   _id_1296B();
   scripts\engine\utility::flag_init("player_indoor_p1");
@@ -54,8 +57,9 @@ main() {
   if(getdvarint("r_reflectionProbeGenerate") == 0) {
     var_12 = getEntArray("bakedScreen", "targetname");
 
-    foreach(var_14 in var_12)
-    var_14 delete();
+    foreach(var_14 in var_12) {
+      var_14 delete();
+    }
   }
 
   var_16 = ["moon_port_welldeck_tr", "moon_port_infil_tr"];
@@ -171,8 +175,9 @@ _id_BB33() {
   _id_0B20::_id_5A38();
   scripts\engine\utility::waitframe();
 
-  if(scripts\engine\utility::flag("player_grabbed_shield"))
+  if(scripts\engine\utility::flag("player_grabbed_shield")) {
     level.player giveweapon("offhandshield");
+  }
 
   scripts\engine\utility::waitframe();
   level._id_1093A = ::_id_10196;
@@ -184,8 +189,9 @@ _id_BB33() {
   scripts\sp\utility::_id_F44E(1);
   var_0 = getEnt("hangar_window_blocker", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 hide();
+  }
 
   if(isDefined(level.doors["hangar_door"])) {
     level.doors["hangar_door"] showpart("door_locked");
@@ -228,8 +234,9 @@ _id_ABE0() {
 
 _id_10196() {
   if(isDefined(level._id_4D80)) {
-    if(level.player istouching(level._id_4D80))
+    if(level.player istouching(level._id_4D80)) {
       return 0;
+    }
 
     return 1;
   } else
@@ -240,8 +247,9 @@ _id_245A(var_0) {
   var_1 = getEnt(var_0, "targetname");
   var_2 = var_1 scripts\engine\utility::get_target_array();
 
-  foreach(var_4 in var_2)
-  var_4 linkTo(var_1);
+  foreach(var_4 in var_2) {
+    var_4 linkTo(var_1);
+  }
 }
 
 _id_F9DD() {
@@ -300,21 +308,24 @@ _id_7785() {
       var_1 = level._id_13133[var_0];
       var_0 = var_0 + 1;
 
-      if(var_0 >= level._id_13133.size)
+      if(var_0 >= level._id_13133.size) {
         var_0 = 0;
+      }
 
       var_2 = level._id_13133[var_0];
       var_3 = [];
       var_4 = [];
 
       foreach(var_6 in var_1) {
-        if(!scripts\engine\utility::array_contains(var_2, var_6))
+        if(!scripts\engine\utility::array_contains(var_2, var_6)) {
           var_3[var_3.size] = var_6;
+        }
       }
 
       foreach(var_6 in var_2) {
-        if(!scripts\engine\utility::array_contains(var_1, var_6))
+        if(!scripts\engine\utility::array_contains(var_1, var_6)) {
           var_4[var_4.size] = var_6;
+        }
       }
 
       scripts\sp\utility::_id_12651(var_3);
@@ -322,8 +333,9 @@ _id_7785() {
       scripts\sp\utility::_id_12643(var_4);
     }
 
-    while(level.player useButtonPressed())
+    while(level.player useButtonPressed()) {
       wait 0.1;
+    }
 
     wait 0.1;
   }

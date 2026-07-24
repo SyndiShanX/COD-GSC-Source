@@ -44,8 +44,9 @@ _id_F95F() {
       break;
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     return var_2;
+  }
 }
 
 _id_239A() {
@@ -76,8 +77,9 @@ _id_6661() {
 }
 
 _id_6662(var_0) {
-  if(level._id_FD5C)
+  if(level._id_FD5C) {
     level waittill("window_vents_unlocked");
+  }
 
   thread _id_FD29(var_0);
 }
@@ -101,58 +103,68 @@ _id_FD29(var_0) {
   foreach(var_6 in var_4) {
     var_7 = getEntArray(var_6, "script_linkname");
 
-    if(var_7.size > 0)
+    if(var_7.size > 0) {
       var_1 = scripts\engine\utility::array_combine(var_1, var_7);
+    }
   }
 
   foreach(var_6 in var_4) {
     var_10 = scripts\engine\utility::getStructArray(var_6, "script_linkname");
 
-    if(var_10.size > 0)
+    if(var_10.size > 0) {
       var_2 = scripts\engine\utility::array_combine(var_2, var_10);
+    }
   }
 
   foreach(var_13 in var_1) {
     if(var_13.classname == "trigger_multiple") {
-      if(isDefined(var_13.targetname) && var_13.targetname == "decompress_open_door")
+      if(isDefined(var_13.targetname) && var_13.targetname == "decompress_open_door") {
         var_3._id_C624 = var_13;
-      else
+      } else {
         var_3._id_4F94 = var_13;
+      }
     }
 
     if(isDefined(var_13.targetname)) {
-      if(var_13.classname == "func_glass")
+      if(var_13.classname == "func_glass") {
         var_3._id_4F9C = var_13;
+      }
 
       if(var_13.targetname == "decompress_door") {
         var_3._id_4F96 = var_13;
         var_14 = var_3._id_4F96 scripts\sp\utility::_id_7A8F();
 
         if(var_14.size > 0) {
-          foreach(var_16 in var_14)
-          var_16 linkTo(var_3._id_4F96);
+          foreach(var_16 in var_14) {
+            var_16 linkTo(var_3._id_4F96);
+          }
         }
       }
 
       continue;
     }
 
-    if(var_13.classname == "script_brushmodel")
+    if(var_13.classname == "script_brushmodel") {
       var_3._id_4F9D = scripts\engine\utility::array_add(var_3._id_4F9D, var_13);
+    }
 
-    if(var_13.classname == "script_model")
+    if(var_13.classname == "script_model") {
       var_3._id_4F9D = scripts\engine\utility::array_add(var_3._id_4F9D, var_13);
+    }
   }
 
   foreach(var_20 in var_2) {
-    if(var_20.targetname == "decompress_bottom_left")
+    if(var_20.targetname == "decompress_bottom_left") {
       var_3._id_4F92 = var_20;
+    }
 
-    if(var_20.targetname == "decompress_top_right")
+    if(var_20.targetname == "decompress_top_right") {
       var_3._id_4FAD = var_20;
+    }
 
-    if(var_20.targetname == "decompress_fx")
+    if(var_20.targetname == "decompress_fx") {
       var_3._id_4F9A = scripts\engine\utility::array_add(var_3._id_4F9A, var_20);
+    }
   }
 
   var_22 = [];
@@ -173,8 +185,9 @@ _id_FD29(var_0) {
   var_3 thread _id_FCE1();
   var_3 waittill("window_open");
 
-  while(!isglassdestroyed(var_3._id_4F9C))
+  while(!isglassdestroyed(var_3._id_4F9C)) {
     scripts\engine\utility::waitframe();
+  }
 
   wait 0.5;
   var_3 notify("window_breached");
@@ -191,8 +204,9 @@ _id_FCE1() {
   var_1 = 2;
   var_2 = 5;
 
-  if(level._id_FD5C)
+  if(level._id_FD5C) {
     var_0._id_C624 waittill("trigger");
+  }
 
   var_3 = var_0._id_4FAD.origin[2] - var_0._id_4F92.origin[2] - var_2;
   var_0._id_4F96 movez(var_3, var_1);
@@ -236,8 +250,9 @@ _id_FCE3() {
 _id_FCE7() {
   var_0 = self;
 
-  foreach(var_2 in var_0._id_4F9D)
-  var_0 thread _id_FCE9(var_2);
+  foreach(var_2 in var_0._id_4F9D) {
+    var_0 thread _id_FCE9(var_2);
+  }
 }
 
 _id_FCE9(var_0) {
@@ -247,9 +262,9 @@ _id_FCE9(var_0) {
   var_4 = var_0.origin + var_2 * var_3 + (0, 0, var_1._id_C036 / 2);
   var_5 = undefined;
 
-  if(scripts\common\trace::ray_trace_passed(var_0.origin, var_4))
+  if(scripts\common\trace::ray_trace_passed(var_0.origin, var_4)) {
     var_5 = var_0.origin + var_2 * 10000 + (0, 0, var_1._id_C036 / 2);
-  else {
+  } else {
     var_6 = 500000;
 
     foreach(var_8 in var_1._id_6959) {
@@ -323,6 +338,7 @@ _id_FCE6() {
   var_0 = self;
   wait 5;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }

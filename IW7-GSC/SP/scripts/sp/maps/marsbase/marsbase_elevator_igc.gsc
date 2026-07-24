@@ -73,8 +73,9 @@ _id_CCF4() {
   var_4 = undefined;
 
   foreach(var_6 in var_3) {
-    if(var_6.classname == "script_model")
+    if(var_6.classname == "script_model") {
       var_4 = var_6;
+    }
   }
 
   var_8 = scripts\sp\utility::_id_10639("elevator_mag", (0, 0, 0), (0, 0, 0));
@@ -121,8 +122,9 @@ _id_CCF4() {
 _id_60AE(var_0) {
   level endon("elevator_igc_started");
 
-  while(distance2d(level.player.origin, var_0.origin) > 1024)
+  while(distance2d(level.player.origin, var_0.origin) > 1024) {
     wait 0.25;
+  }
 
   wait 10.0;
   level._id_B4F1 scripts\sp\utility::_id_10350("marsbase_mac_letsgetthegate");
@@ -130,8 +132,9 @@ _id_60AE(var_0) {
 
 _id_C1AD(var_0) {
   foreach(var_2 in var_0) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2 delete();
+    }
   }
 }
 
@@ -159,8 +162,9 @@ _id_60DA() {
 _id_106BC(var_0, var_1) {
   var_2 = getspawner(var_0, "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 scripts\sp\utility::_id_1747(var_1);
+  }
 
   return var_2 scripts\sp\utility::_id_10619(1);
 }
@@ -244,8 +248,9 @@ _id_CD23(var_0, var_1) {
 _id_1061A(var_0) {
   var_1 = [];
 
-  for(var_2 = 0; var_2 < var_0; var_2++)
-    var_1[var_2] = scripts\sp\utility::_id_10619(1);
+  for(var_2 = 0; var_2 < var_0; var_2++) {
+    var_1[var_2] = ::scripts\sp\utility::_id_10619(1);
+  }
 
   return var_1;
 }

@@ -9,14 +9,16 @@ _id_BE57(var_0, var_1, var_2) {
   if(getdvarint("narrative_debug") == 1) {
     if(!isDefined(self)) {}
 
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       var_2 = (0, 0, 0);
+    }
 
     self endon("death");
     self endon("narrative_debug_stop");
 
-    for(var_3 = 0; var_3 < var_1; var_3++)
+    for(var_3 = 0; var_3 < var_1; var_3++) {
       scripts\engine\utility::waitframe();
+    }
   }
 }
 
@@ -24,19 +26,23 @@ _id_BE56(var_0, var_1, var_2) {
   setdvarifuninitialized("narrative_debug", 0);
 
   if(getdvarint("narrative_debug") == 1) {
-    if(!isDefined(self.origin))
+    if(!isDefined(self.origin)) {
       return;
-    else
+    } else {
       var_3 = self.origin;
+    }
 
-    if(!isDefined(var_0))
+    if(!isDefined(var_0)) {
       var_0 = 6;
+    }
 
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       var_1 = (1, 1, 1);
+    }
 
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       var_2 = 400;
+    }
   }
 }
 
@@ -44,17 +50,21 @@ _id_BE55(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   setdvarifuninitialized("narrative_debug", 0);
 
   if(getdvarint("narrative_debug") == 1) {
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       var_2 = (1, 1, 1);
+    }
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       var_3 = 1;
+    }
 
-    if(!isDefined(var_4))
+    if(!isDefined(var_4)) {
       var_4 = 0;
+    }
 
-    if(!isDefined(var_5))
+    if(!isDefined(var_5)) {
       var_5 = 200;
+    }
 
     if(isDefined(var_6)) {
       if(isDefined(var_7)) {
@@ -87,8 +97,9 @@ _id_48A9() {
 }
 
 _id_DFCC() {
-  if(isDefined(self._id_2AC1))
+  if(isDefined(self._id_2AC1)) {
     self._id_2AC1 delete();
+  }
 }
 
 _id_196B(var_0, var_1, var_2, var_3) {
@@ -112,11 +123,13 @@ _id_194A(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(isDefined(var_6) && scripts\engine\utility::flag(var_6)) {
     return;
   }
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 0.7;
+  }
 
   thread _id_1949(var_0);
 
@@ -138,8 +151,9 @@ _id_194A(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 _id_1961(var_0, var_1, var_2, var_3) {
   self endon("death");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   thread _id_1949(var_0);
   _id_0C4C::_id_1960(var_1);
@@ -155,17 +169,21 @@ _id_1949(var_0) {
 _id_195C(var_0, var_1, var_2, var_3, var_4) {
   self endon("death");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 4.0;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 1.0;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0.25;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0.35;
+  }
 
   var_0 = _id_0EFB::_id_7D7A(var_0);
   thread _id_0C4C::_id_1955(var_0, var_1, var_2);
@@ -174,6 +192,7 @@ _id_195C(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_10348(var_0, var_1) {
-  if(!scripts\engine\utility::flag(var_1))
+  if(!scripts\engine\utility::flag(var_1)) {
     scripts\sp\utility::_id_10347(var_0);
+  }
 }

@@ -15,10 +15,11 @@ _id_31CA() {
 _id_31CB(var_0) {
   self._id_12A33 = [];
 
-  if(self._id_101AD == "L")
+  if(self._id_101AD == "L") {
     var_1 = ["amb_missile_l_1", "amb_missile_l_2", "amb_missile_l_3", "amb_missile_l_4", "amb_missile_l_5", "amb_missile_l_6", "amb_missile_l_7", "amb_missile_l_8", "amb_missile_l_9", "amb_missile_l_10", "amb_missile_l_11", "amb_missile_l_12"];
-  else
+  } else {
     var_1 = ["amb_missile_r_1", "amb_missile_r_2", "amb_missile_r_3", "amb_missile_r_4", "amb_missile_r_5", "amb_missile_r_6", "amb_missile_r_7", "amb_missile_r_8", "amb_missile_r_9", "amb_missile_r_10", "amb_missile_r_11", "amb_missile_r_12"];
+  }
 }
 
 _id_129E5(var_0) {
@@ -62,8 +63,9 @@ _id_129DF() {
 
 _id_12A85(var_0) {
   foreach(var_2 in self._id_12A33) {
-    foreach(var_4 in var_2.turrets)
-    var_4 thread _id_12A19(var_0);
+    foreach(var_4 in var_2.turrets) {
+      var_4 thread _id_12A19(var_0);
+    }
   }
 }
 
@@ -80,8 +82,9 @@ _id_12A19(var_0) {
 _id_12A84(var_0) {
   foreach(var_2 in self._id_12A33) {
     foreach(var_4 in var_2.turrets) {
-      if(isDefined(var_4))
+      if(isDefined(var_4)) {
         var_4 thread _id_129D5(var_0);
+      }
     }
   }
 
@@ -95,20 +98,23 @@ _id_129D5(var_0) {
 }
 
 _id_129C1(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   if(isDefined(self)) {
     self setanimknob(var_0, 1, 0.2);
 
-    if(var_2)
+    if(var_2) {
       self _meth_82B0(var_0, 1);
+    }
 
     if(self._id_5978._id_1BE4) {
       self._id_5978 setanimknob(var_1, 1, 0.2);
 
-      if(var_2)
+      if(var_2) {
         self._id_5978 _meth_82B0(var_1, 1);
+      }
     }
   }
 }

@@ -23,8 +23,9 @@ _id_10C68() {
 }
 
 _id_B1ED() {
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_2683();
+  }
 
   level._id_EA2C scripts\sp\utility::_id_72EC("iw7_m4", "primary");
   level._id_EA2C scripts\sp\utility::_id_F415(1);
@@ -60,8 +61,9 @@ _id_B1ED() {
   level waittill("exitdoor_boss_dropship_exited");
   scripts\engine\utility::flag_wait("gator_death_end");
 
-  if(!level.console)
+  if(!level.console) {
     waitfortransient("marsbase_combat_meatgrinder_tr");
+  }
 
   scripts\engine\utility::array_thread(level._id_1684, scripts\sp\utility::_id_F3B5, "r");
   var_2 = scripts\engine\utility::getStruct("s_exitdoor_ref", "targetname");
@@ -95,8 +97,9 @@ _id_696E() {
   var_3 = scripts\engine\utility::getStructArray("s_exitdoor_glitch_fx", "targetname");
   var_4 = [];
 
-  for(var_5 = 0; var_5 < var_3.size; var_5++)
-    var_4[var_5] = scripts\engine\utility::spawn_tag_origin(var_3[var_5].origin, var_3[var_5].angles);
+  for(var_5 = 0; var_5 < var_3.size; var_5++) {
+    var_4[var_5] = ::scripts\engine\utility::spawn_tag_origin(var_3[var_5].origin, var_3[var_5].angles);
+  }
 
   var_6 = undefined;
   var_7 = undefined;
@@ -148,14 +151,16 @@ _id_683C() {
     level notify("nag_player_open_exitdoor_" + var_1);
     _id_5782(var_1, var_2);
 
-    if(scripts\engine\utility::flag("exitdoor_boss_dropship_started"))
+    if(scripts\engine\utility::flag("exitdoor_boss_dropship_started")) {
       var_0 = 5;
+    }
 
     wait(var_0);
 
     if(!scripts\engine\utility::is_true(level.player._id_2704)) {
-      if(var_1 < 3)
+      if(var_1 < 3) {
         var_1++;
+      }
     }
   }
 
@@ -196,17 +201,19 @@ _id_6970(var_0, var_1, var_2, var_3) {
   var_6 = scripts\sp\utility::_id_7D40(var_0, "targetname");
 
   if(isDefined(var_5) && isDefined(var_6)) {
-    while(!var_6 istouching(var_5))
+    while(!var_6 istouching(var_5)) {
       scripts\engine\utility::waitframe();
+    }
 
     var_7 = scripts\engine\utility::getStructArray(var_2, "targetname");
     var_7 = scripts\engine\utility::array_randomize(var_7);
 
     foreach(var_9 in var_7) {
-      if(scripts\engine\utility::is_true(var_3) && scripts\engine\utility::cointoss())
+      if(scripts\engine\utility::is_true(var_3) && scripts\engine\utility::cointoss()) {
         var_6 thread _id_0B76::_id_1992("tag_origin", level.player, 1);
-      else
+      } else {
         var_6 thread _id_0B76::_id_1992("tag_origin", var_9, 1);
+      }
 
       var_6 thread _id_5783(var_9.origin, var_9.radius);
       wait 0.38;
@@ -215,8 +222,9 @@ _id_6970(var_0, var_1, var_2, var_3) {
     if(!isDefined(level._id_1499) || !scripts\engine\utility::is_true(level._id_1499[var_2])) {
       scripts\engine\utility::exploder(var_4[var_2]);
 
-      if(!isDefined(level._id_1499))
+      if(!isDefined(level._id_1499)) {
         level._id_1499 = [];
+      }
 
       level._id_1499[var_2] = 1;
       var_11 = 0;
@@ -240,14 +248,16 @@ _id_6970(var_0, var_1, var_2, var_3) {
       var_19 thread scripts\sp\utility::play_loop_sound_on_tag("emt_fire_large_lp_01", "tag_origin");
     }
 
-    if(scripts\engine\utility::is_true(var_3))
+    if(scripts\engine\utility::is_true(var_3)) {
       radiusdamage(level.player.origin, 500, 500, 250, self, "MOD_EXPLOSIVE");
+    }
   }
 }
 
 _id_5783(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 256;
+  }
 
   var_2 = 1000;
   var_3 = 500;
@@ -288,8 +298,9 @@ _id_5765(var_0) {
     var_11 = var_5 + var_9;
     level thread scripts\sp\maps\marsbase\marsbase_util::_id_A1CA(var_11, var_10, 129, 8);
 
-    if(scripts\engine\utility::flag("flag_burning_man_cave_approach_reached"))
+    if(scripts\engine\utility::flag("flag_burning_man_cave_approach_reached")) {
       level thread _id_14CA(var_11, var_6, var_7, 0);
+    }
 
     wait(randomfloatrange(0.05, 0.15));
   }
@@ -302,30 +313,34 @@ _id_14CA(var_0, var_1, var_2, var_3) {
   var_5 setneargoalnotifydist(16);
 
   if(isDefined(var_4) && isDefined(var_5)) {
-    while(!var_5 istouching(var_4))
+    while(!var_5 istouching(var_4)) {
       scripts\engine\utility::waitframe();
+    }
 
     var_6 = scripts\engine\utility::getStructArray(var_2, "targetname");
     var_6 = scripts\engine\utility::array_randomize(var_6);
 
     foreach(var_8 in var_6) {
-      if(scripts\engine\utility::is_true(var_3) && scripts\engine\utility::cointoss())
+      if(scripts\engine\utility::is_true(var_3) && scripts\engine\utility::cointoss()) {
         var_5 thread _id_0B76::_id_1992("tag_origin", level.player, 1);
-      else
+      } else {
         var_5 thread _id_0B76::_id_1992("tag_origin", var_8, 1);
+      }
 
       var_5 thread _id_5766(var_8.origin, var_8.radius);
       wait 0.38;
     }
 
-    if(scripts\engine\utility::is_true(var_3))
+    if(scripts\engine\utility::is_true(var_3)) {
       radiusdamage(level.player.origin, 500, 500, 250, self, "MOD_EXPLOSIVE");
+    }
   }
 }
 
 _id_5766(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 256;
+  }
 
   var_2 = 1000;
   var_3 = 500;
@@ -386,8 +401,9 @@ _id_6972() {
   scripts\engine\utility::flag_wait("flag_greenhouse_approach_end");
   var_0 = level._id_EA2C._id_1FBB + "_door_sequence_complete";
 
-  if(!level._id_EA2C scripts\engine\utility::flag_exist(var_0))
+  if(!level._id_EA2C scripts\engine\utility::flag_exist(var_0)) {
     level._id_EA2C scripts\engine\utility::flag_init(var_0);
+  }
 
   var_1 = getEntArray("generic_door", "script_noteworthy");
   var_2 = scripts\engine\utility::getStruct("s_exitdoor_ref", "targetname");
@@ -470,11 +486,13 @@ _id_6845() {
   level._id_76FB.a.nodeath = 1;
   level._id_76FB scripts\sp\maps\marsbase\marsbase_util::_id_4046(1, level._id_2CDF.origin);
 
-  foreach(var_1 in scripts\sp\utility::_id_77DA("group_ally_dropship2_engineers"))
-  var_1 scripts\sp\maps\marsbase\marsbase_util::_id_4046(1, level._id_2CDF.origin);
+  foreach(var_1 in scripts\sp\utility::_id_77DA("group_ally_dropship2_engineers")) {
+    var_1 scripts\sp\maps\marsbase\marsbase_util::_id_4046(1, level._id_2CDF.origin);
+  }
 
-  foreach(var_1 in scripts\sp\utility::_id_77DA("group_ally_dropship3_marines"))
-  var_1 scripts\sp\maps\marsbase\marsbase_util::_id_4046(1, level._id_2CDF.origin);
+  foreach(var_1 in scripts\sp\utility::_id_77DA("group_ally_dropship3_marines")) {
+    var_1 scripts\sp\maps\marsbase\marsbase_util::_id_4046(1, level._id_2CDF.origin);
+  }
 }
 
 _id_76FF() {
@@ -492,8 +510,9 @@ _id_76FC() {
   var_0 = getEntArray("strafe_fire_tag_origin", "targetname");
 
   if(isDefined(var_0) && var_0.size > 0) {
-    foreach(var_2 in var_0)
-    var_2 delete();
+    foreach(var_2 in var_0) {
+      var_2 delete();
+    }
   }
 
   var_4 = ["j_spineupper", "j_spinelower", "j_neck", "j_shoulder_le", "j_shoulder_ri", "j_spineupper", "j_spinelower", "j_neck", "j_shoulder_le", "j_shoulder_ri"];
@@ -534,11 +553,13 @@ _id_76FD() {
   var_2 = 0.1;
   var_3 = level._effect["crawling_death_blood_smear"];
 
-  if(isDefined(self.a._id_486A))
+  if(isDefined(self.a._id_486A)) {
     var_2 = self.a._id_486A;
+  }
 
-  if(isDefined(self.a._id_4869))
+  if(isDefined(self.a._id_4869)) {
     var_3 = level._effect[self.a._id_4869];
+  }
 
   while(var_2) {
     var_4 = self gettagorigin(var_0);
@@ -612,7 +633,7 @@ _id_6968() {
   var_0["turret"] = "hill_enemy_mg_dropship_mg";
   var_0["light"] = "hill_enemy_mg_dropship_light";
   var_1 = [];
-  var_1["shootat_target"] = scripts\engine\utility::getStruct("s_shootgator_bullet_trail_end", "targetname");
+  var_1["shootat_target"] = ::scripts\engine\utility::getStruct("s_shootgator_bullet_trail_end", "targetname");
   var_1["n_deviate_x"] = 0.05;
   var_1["n_deviate_y"] = 0.05;
   var_1["num_bursts_min"] = 119;
@@ -647,8 +668,9 @@ _id_696B(var_0) {
   wait 5;
   var_1 = scripts\engine\utility::getStruct("struct_ghexit_murdertarget", "targetname");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level._id_76FB;
+  }
 
   var_0["shootat_target"] = var_1;
   var_0["n_deviate_x"] = 10;
@@ -677,8 +699,9 @@ _id_696A() {
 
   scripts\sp\utility::_id_DFE6(::_id_6969);
 
-  if(isDefined(self.gunner))
+  if(isDefined(self.gunner)) {
     self.gunner scripts\sp\utility::_id_DFE6(::_id_6969);
+  }
 }
 
 _id_6969(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
@@ -691,17 +714,20 @@ _id_6969(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 _id_696D(var_0) {
   var_1 = scripts\engine\utility::getStruct("s_shootgator_bullet_trail_start", "targetname");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level._id_76FB;
+  }
 
   var_2 = var_1 scripts\engine\utility::spawn_tag_origin();
   self settargetentity(var_2);
 
-  if(!isDefined(var_0["n_deviate_x"]))
+  if(!isDefined(var_0["n_deviate_x"])) {
     var_0["n_deviate_x"] = 10;
+  }
 
-  if(!isDefined(var_0["n_deviate_y"]))
+  if(!isDefined(var_0["n_deviate_y"])) {
     var_0["n_deviate_y"] = 10;
+  }
 
   var_3 = var_0["shootat_target"];
   var_4 = var_0["n_deviate_x"];
@@ -750,8 +776,9 @@ _id_14BB() {
       var_4 = var_3[var_5];
     }
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       [[var_4]]();
+    }
   }
 }
 
@@ -797,15 +824,16 @@ _id_14B1() {
   var_2["func_shoot"] = ::_id_14B2;
   var_2["hovertime_min"] = 2;
   var_2["hovertime_max"] = 4;
-  var_2["func_exit"] = scripts\sp\maps\marsbase\marsbase_util::_id_2CE2;
+  var_2["func_exit"] = ::scripts\sp\maps\marsbase\marsbase_util::_id_2CE2;
   scripts\sp\maps\marsbase\marsbase_util::_id_2CDF(var_0, var_1, var_2);
 }
 
 _id_14B2(var_0) {
   var_1 = getEnt("trig_boss_dropship_b_start_shooting", "targetname");
 
-  for(var_2 = 0; !scripts\engine\utility::is_true(var_2); var_2 = var_3 == self)
+  for(var_2 = 0; !scripts\engine\utility::is_true(var_2); var_2 = var_3 == self) {
     var_1 waittill("trigger", var_3);
+  }
 
   thread _id_0BBD::_id_5DB9("right");
   wait 7;
@@ -828,7 +856,7 @@ _id_14B3() {
   var_2["func_shoot"] = ::_id_14B4;
   var_2["hovertime_min"] = 2;
   var_2["hovertime_max"] = 5;
-  var_2["func_exit"] = scripts\sp\maps\marsbase\marsbase_util::_id_2CE2;
+  var_2["func_exit"] = ::scripts\sp\maps\marsbase\marsbase_util::_id_2CE2;
   scripts\sp\maps\marsbase\marsbase_util::_id_2CDF(var_0, var_1, var_2);
 }
 
@@ -880,7 +908,7 @@ _id_14B7() {
   var_2["func_shoot"] = ::_id_14B8;
   var_2["hovertime_min"] = 2;
   var_2["hovertime_max"] = 3;
-  var_2["func_exit"] = scripts\sp\maps\marsbase\marsbase_util::_id_2CE2;
+  var_2["func_exit"] = ::scripts\sp\maps\marsbase\marsbase_util::_id_2CE2;
   scripts\sp\maps\marsbase\marsbase_util::_id_2CDF(var_0, var_1, var_2);
 }
 
@@ -893,8 +921,9 @@ _id_14B8(var_0) {
   while(!scripts\engine\utility::is_true(var_2)) {
     var_1 waittill("trigger", var_3);
 
-    if(var_3 == self)
+    if(var_3 == self) {
       var_2 = 1;
+    }
   }
 
   self.turret thread scripts\sp\maps\marsbase\marsbase_util::_id_035A(var_0);
@@ -916,7 +945,7 @@ _id_14B9() {
   var_2["func_shoot"] = ::_id_14BA;
   var_2["hovertime_min"] = 2;
   var_2["hovertime_max"] = 4;
-  var_2["func_exit"] = scripts\sp\maps\marsbase\marsbase_util::_id_2CE2;
+  var_2["func_exit"] = ::scripts\sp\maps\marsbase\marsbase_util::_id_2CE2;
   scripts\sp\maps\marsbase\marsbase_util::_id_2CDF(var_0, var_1, var_2);
 }
 
@@ -929,8 +958,9 @@ _id_14BA(var_0) {
   while(!scripts\engine\utility::is_true(var_2)) {
     var_1 waittill("trigger", var_3);
 
-    if(var_3 == self)
+    if(var_3 == self) {
       var_2 = 1;
+    }
   }
 
   self.turret thread scripts\sp\maps\marsbase\marsbase_util::_id_035A(var_0);
@@ -962,18 +992,21 @@ _id_B175() {
   scripts\sp\utility::_id_13705();
   scripts\sp\utility::_id_2669("AA2");
 
-  if(!scripts\engine\utility::flag_exist("aa2_destroyed"))
+  if(!scripts\engine\utility::flag_exist("aa2_destroyed")) {
     scripts\engine\utility::flag_init("aa2_destroyed");
+  }
 
-  if(!scripts\engine\utility::flag_exist("player_and_heroes_in_aa2"))
+  if(!scripts\engine\utility::flag_exist("player_and_heroes_in_aa2")) {
     scripts\engine\utility::flag_init("player_and_heroes_in_aa2");
+  }
 
   scripts\sp\maps\marsbase\marsbase_greenhouse::_id_855F();
 
-  if(!scripts\engine\utility::is_true(level._id_2700))
+  if(!scripts\engine\utility::is_true(level._id_2700)) {
     level thread _id_14D2();
-  else
+  } else {
     thread scripts\sp\maps\marsbase\marsbase_greenhouse::_id_8561();
+  }
 
   thread _id_14C0();
   level thread _id_14DA();
@@ -998,8 +1031,9 @@ _id_14C9() {
   var_0 = getEntArray("aa2_destruction", "targetname");
 
   if(isDefined(var_0)) {
-    foreach(var_2 in var_0)
-    var_2 delete();
+    foreach(var_2 in var_0) {
+      var_2 delete();
+    }
   }
 
   thread _id_14D6();
@@ -1030,25 +1064,29 @@ _id_14D2() {
     wait 0.1;
     var_9 = level.player istouching(var_0);
 
-    if(level._id_6754 istouching(var_0))
+    if(level._id_6754 istouching(var_0)) {
       var_4 = 1;
-    else
+    } else {
       var_4 = 0;
+    }
 
-    if(level._id_EA2C istouching(var_0))
+    if(level._id_EA2C istouching(var_0)) {
       var_5 = 1;
-    else
+    } else {
       var_5 = 0;
+    }
 
-    if(level._id_30F6 istouching(var_0))
+    if(level._id_30F6 istouching(var_0)) {
       var_6 = 1;
-    else
+    } else {
       var_6 = 0;
+    }
 
-    if(level._id_8604 istouching(var_0))
+    if(level._id_8604 istouching(var_0)) {
       var_7 = 1;
-    else
+    } else {
       var_7 = 0;
+    }
 
     if(!var_8 && var_4 && var_5 && var_6 && var_7) {
       var_8 = 1;
@@ -1068,11 +1106,11 @@ _id_14D2() {
     var_14 = 1;
 
     foreach(var_17, var_16 in var_11) {
-      if(!isDefined(var_16) || !isalive(var_16))
+      if(!isDefined(var_16) || !isalive(var_16)) {
         continue;
-      else if(var_16.origin[1] >= 18730)
+      } else if(var_16.origin[1] >= 18730) {
         continue;
-      else if(var_16.origin[1] >= 18560 && var_13 <= var_12) {
+      } else if(var_16.origin[1] >= 18560 && var_13 <= var_12) {
         var_13++;
         var_14 = 0;
         wait 1.0;
@@ -1113,8 +1151,9 @@ _id_14C0() {
   level waittill("hill_airlock_opened");
   var_0 delete();
 
-  if(!level.console)
+  if(!level.console) {
     waitfortransient("marsbase_combat_pre_elevator_tr");
+  }
 }
 
 _id_14C8() {
@@ -1124,8 +1163,9 @@ _id_14C8() {
   var_2 = getEnt("trig_aa2_blast", "targetname");
 
   foreach(var_4 in var_1) {
-    if(isDefined(var_4) && isalive(var_4) && var_4 istouching(var_2))
+    if(isDefined(var_4) && isalive(var_4) && var_4 istouching(var_2)) {
       var_4 thread scripts\sp\maps\marsbase\marsbase_killstreak::_id_6F2A(var_0, 0.5);
+    }
   }
 }
 
@@ -1140,8 +1180,9 @@ _id_14C6() {
   foreach(var_2 in var_0) {
     var_3 = getEnt(var_2, "targetname");
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_3 delete();
+    }
   }
 }
 
@@ -1149,16 +1190,18 @@ _id_14D7() {
   var_0 = getEntArray("spawner_aa2_recurring", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    if(isspawner(var_2))
+    if(isspawner(var_2)) {
       var_2 delete();
+    }
   }
 
   for(var_4 = 1; var_4 < 4; var_4++) {
     var_5 = "trig_aa2_spawns_0" + var_4;
     var_6 = getEnt(var_5, "script_noteworthy");
 
-    if(isDefined(var_6))
+    if(isDefined(var_6)) {
       var_6 delete();
+    }
   }
 }
 
@@ -1202,8 +1245,9 @@ _id_14AE(var_0) {
   thread scripts\sp\maps\marsbase\marsbase_util::_id_10685("airlock_aa2_crane", "flag_aa2_end", "aa2_finished", undefined, "aa2");
   thread _id_14CC("trig_aa2_spawns_00");
 
-  if(!scripts\engine\utility::is_true(var_0))
+  if(!scripts\engine\utility::is_true(var_0)) {
     level waittill("exitdoor_boss_dropship_exited");
+  }
 
   level._id_E8E4 thread _id_14D0();
   level._id_E8E4 thread _id_14BE();
@@ -1260,8 +1304,9 @@ _id_14BC() {
   thread scripts\sp\maps\marsbase\marsbase_util::_id_138D6(var_8, 30, 31, 5, 15);
   level waittill("aa2_gun_destroyed");
 
-  if(isDefined(self) && isalive(self))
+  if(isDefined(self) && isalive(self)) {
     self.health = 5;
+  }
 }
 
 _id_14D0() {
@@ -1292,8 +1337,9 @@ _id_14BE() {
   var_0 = getspawnerarray();
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "aa2_cqb")
+    if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "aa2_cqb") {
       var_2 scripts\sp\utility::_id_1747(::_id_14BF);
+    }
   }
 }
 
@@ -1351,13 +1397,15 @@ _id_14CC(var_0, var_1) {
   var_2 = scripts\engine\utility::getStruct(var_0, "targetname");
   var_3 = getspawnerarray(var_2.target);
 
-  foreach(var_5 in var_3)
-  var_5 scripts\sp\utility::_id_1747(::_id_14CD, var_2.target);
+  foreach(var_5 in var_3) {
+    var_5 scripts\sp\utility::_id_1747(::_id_14CD, var_2.target);
+  }
 
   thread scripts\sp\maps\marsbase\marsbase_util::_id_6F56(var_0, "targetname");
 
-  if(scripts\engine\utility::is_true(var_1))
+  if(scripts\engine\utility::is_true(var_1)) {
     thread _id_14CE(var_0);
+  }
 
   level waittill("aa2_flood_spawn_stop");
   scripts\sp\maps\marsbase\marsbase_util::_id_6F57(var_0, "targetname", 1);
@@ -1371,8 +1419,9 @@ _id_14CE(var_0) {
     scripts\engine\utility::flag_wait(var_1);
     scripts\sp\maps\marsbase\marsbase_util::_id_6F57(var_0, "targetname", 0);
 
-    while(scripts\engine\utility::flag(var_1))
+    while(scripts\engine\utility::flag(var_1)) {
       wait 0.5;
+    }
 
     scripts\sp\maps\marsbase\marsbase_util::_id_6F56(var_0, "targetname");
     wait 0.5;
@@ -1428,8 +1477,9 @@ _id_14D3() {
 _id_14D5(var_0) {
   var_1 = getEntArray("aa2_destruction", "targetname");
 
-  if(!scripts\engine\utility::is_true(var_0))
+  if(!scripts\engine\utility::is_true(var_0)) {
     level waittill("aa_gun_2_destroyed");
+  }
 
   thread _id_14D4(var_0);
   thread _id_14AC();
@@ -1437,8 +1487,9 @@ _id_14D5(var_0) {
   level notify("aa2_gun_destroyed");
 
   if(isDefined(var_1)) {
-    foreach(var_3 in var_1)
-    var_3 delete();
+    foreach(var_3 in var_1) {
+      var_3 delete();
+    }
   }
 
   scripts\sp\maps\marsbase\marsbase_util::_id_B3AB("aa2_rubble");
@@ -1449,15 +1500,17 @@ _id_14D6() {
 
   if(isDefined(var_0) && var_0.size > 0) {
     foreach(var_2 in var_0) {
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         var_2 show();
+      }
     }
   }
 }
 
 _id_14D4(var_0) {
-  if(!scripts\engine\utility::is_true(var_0))
+  if(!scripts\engine\utility::is_true(var_0)) {
     wait 1.5;
+  }
 
   thread _id_0BDC::_id_D527("mars_base_jackal_aa1_crash", (32878, 20877, -11401));
   thread _id_329A();
@@ -1469,8 +1522,9 @@ _id_329A() {
   var_1 = [(33069, 21111, -11189), (33867, 21816, -11228), (34083, 21646, -11076), (33106, 21241, -11195), (33184, 21546, -11359), (34178, 21526, -11234), (34607, 21534, -11230)];
   var_2 = [];
 
-  for(var_3 = 0; var_3 < var_1.size; var_3++)
-    var_2[var_3] = scripts\engine\utility::play_loopsound_in_space(var_0[var_3], var_1[var_3]);
+  for(var_3 = 0; var_3 < var_1.size; var_3++) {
+    var_2[var_3] = ::scripts\engine\utility::play_loopsound_in_space(var_0[var_3], var_1[var_3]);
+  }
 
   level waittill("burning_man_done");
 

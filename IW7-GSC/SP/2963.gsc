@@ -97,8 +97,9 @@ _id_1080D(var_0) {
 _id_1080F(var_0) {
   var_1 = _id_1080E(var_0);
 
-  foreach(var_3 in var_1)
-  thread scripts\sp\vehicle_paths::_id_845A(var_3);
+  foreach(var_3 in var_1) {
+    thread scripts\sp\vehicle_paths::_id_845A(var_3);
+  }
 
   return var_1;
 }
@@ -120,8 +121,9 @@ _id_9BC7() {
 }
 
 _id_1320F(var_0, var_1, var_2) {
-  if(!isarray(var_0))
+  if(!isarray(var_0)) {
     var_0 = [var_0];
+  }
 
   scripts\sp\vehicle_aianim::_id_ADA7(var_0, undefined, var_2);
 }
@@ -130,8 +132,9 @@ _id_1080B() {
   var_0 = scripts\sp\utility::_id_10808();
 
   if(isDefined(self.script_speed)) {
-    if(!_id_9E2C())
+    if(!_id_9E2C()) {
       var_0 _meth_83F4(self.script_speed);
+    }
   }
 
   thread scripts\sp\vehicle_paths::_id_845A(var_0);
@@ -153,8 +156,9 @@ _id_2471(var_0) {
   self vehicle_teleport(var_0.origin, var_0.angles);
   scripts\engine\utility::waitframe();
 
-  if(!_id_9E2C())
+  if(!_id_9E2C()) {
     self attachpath(var_0);
+  }
 
   thread _id_1321A(var_0);
   scripts\sp\vehicle_paths::_id_845A(self);
@@ -164,18 +168,21 @@ _id_131DF(var_0) {
   var_1 = [];
   var_2 = self.classname;
 
-  if(!isDefined(level.vehicle._id_116CE._id_12BCF[var_2]))
+  if(!isDefined(level.vehicle._id_116CE._id_12BCF[var_2])) {
     return var_1;
+  }
 
   var_3 = level.vehicle._id_116CE._id_12BCF[var_2];
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return var_1;
+  }
 
   foreach(var_5 in self._id_E4FB) {
     foreach(var_7 in var_3[var_0]) {
-      if(var_5._id_1321D == var_7)
+      if(var_5._id_1321D == var_7) {
         var_1[var_1.size] = var_5;
+      }
     }
   }
 
@@ -195,8 +202,9 @@ _id_131DD() {
   var_0 = [];
   var_1 = self._id_247E;
 
-  if(!isDefined(self._id_247E))
+  if(!isDefined(self._id_247E)) {
     return var_0;
+  }
 
   var_2 = var_1;
   var_2._id_46B3 = 0;
@@ -225,8 +233,9 @@ _id_131DD() {
 }
 
 _id_1320C(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "all";
+  }
 
   scripts\sp\vehicle_lights::lights_on(var_0, var_1);
 }
@@ -258,8 +267,9 @@ _id_9D34() {
 }
 
 _id_3182(var_0) {
-  if(!isDefined(level.vehicle._id_116CE._id_4E12))
+  if(!isDefined(level.vehicle._id_116CE._id_4E12)) {
     level.vehicle._id_116CE._id_4E12 = [];
+  }
 
   var_1 = spawnStruct();
   var_1.delay = var_0;

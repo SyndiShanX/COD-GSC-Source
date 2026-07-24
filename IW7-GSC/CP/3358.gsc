@@ -15,10 +15,11 @@ removetransponder() {
 }
 
 transponder_place(var_0) {
-  if(checkvalidplacementstate(var_0))
+  if(checkvalidplacementstate(var_0)) {
     transponder_throw(var_0);
-  else
+  } else {
     thread placementfailed(var_0);
+  }
 }
 
 transponder_use(var_0) {
@@ -72,8 +73,9 @@ ontacticalequipmentplanted(var_0) {
   if(self.plantedtacticalequip.size) {
     self.plantedtacticalequip = scripts\engine\utility::array_removeundefined(self.plantedtacticalequip);
 
-    if(self.plantedtacticalequip.size >= level.maxperplayerexplosives)
+    if(self.plantedtacticalequip.size >= level.maxperplayerexplosives) {
       self.plantedtacticalequip[0] notify("detonateExplosive");
+    }
   }
 
   self.plantedtacticalequip[self.plantedtacticalequip.size] = var_0;
@@ -126,8 +128,9 @@ killenemiesinfov() {
     if(var_13) {
       var_14 = distance2d(self.origin, var_12);
 
-      if(var_14 < var_2)
+      if(var_14 < var_2) {
         var_11 = 1;
+      }
     }
 
     if(var_11) {
@@ -143,8 +146,9 @@ killenemiesinfov() {
 killtranspondervictim(var_0, var_1, var_2, var_3) {
   self.do_immediate_ragdoll = 1;
 
-  if(var_1 >= self.health)
+  if(var_1 >= self.health) {
     self.customdeath = 1;
+  }
 
   self dodamage(var_1, var_2, var_0, var_0, "MOD_IMPACT", "ztransponder_mp");
 }
@@ -227,8 +231,9 @@ watchtransponderaltdetonate(var_0) {
       if(!self.plantedtacticalequip.size) {
         return;
       }
-      if(self ismantling())
+      if(self ismantling()) {
         self cancelmantle();
+      }
 
       self notify("alt_detonate");
     }
@@ -244,17 +249,19 @@ transponderactivate() {
   var_2 = undefined;
   self waittill("missile_stuck", var_3);
 
-  if(isDefined(self.weapon_name))
+  if(isDefined(self.weapon_name)) {
     var_1 = self.weapon_name;
+  }
 
-  if(isDefined(self.origin))
+  if(isDefined(self.origin)) {
     var_2 = self.origin;
+  }
 
   wait 0.05;
 
-  if(!checkvalidposition(var_0, var_3))
+  if(!checkvalidposition(var_0, var_3)) {
     var_0 placementfailed(self, var_2, var_1);
-  else {
+  } else {
     self.owner notify("powers_transponder_used", 1);
     self notify("activated");
     self.activated = 1;
@@ -292,10 +299,11 @@ activationeffects(var_0, var_1) {
   var_3 = "direction_indicator_far";
   var_4 = length2d(var_0 - var_1);
 
-  if(var_4 < 1024)
+  if(var_4 < 1024) {
     var_3 = "direction_indicator_close";
-  else if(var_4 < 2048)
+  } else if(var_4 < 2048) {
     var_3 = "direction_indicator_mid";
+  }
 
   playFX(scripts\engine\utility::getfx(var_3), var_0, (0, 0, 1), anglesToForward(vectortoangles(var_1 - var_0)));
 }
@@ -321,43 +329,51 @@ transponderwatchfordisuse(var_0) {
 }
 
 checkvalidposition(var_0, var_1) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return 0;
+  }
 
   var_2 = var_0 findpath(var_0.origin, self.origin);
 
-  if(var_2.size < 1)
+  if(var_2.size < 1) {
     return 0;
-  else if(distance2d(var_2[var_2.size - 1], self.origin) >= 12)
+  } else if(distance2d(var_2[var_2.size - 1], self.origin) >= 12) {
     return 0;
+  }
 
   var_3 = getclosestpointonnavmesh(self.origin);
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     return 0;
-
-  if(distance2d(self.origin, var_3) > 18)
-    return 0;
-
-  if(isDefined(level.active_volume_check)) {
-    if(!self[[level.active_volume_check]](var_3))
-      return 0;
   }
 
-  if(!scripts\cp\cp_weapon::isinvalidzone(self.origin, level.invalid_spawn_volume_array, var_0, undefined, 1, var_1))
+  if(distance2d(self.origin, var_3) > 18) {
     return 0;
+  }
+
+  if(isDefined(level.active_volume_check)) {
+    if(!self[[level.active_volume_check]](var_3)) {
+      return 0;
+    }
+  }
+
+  if(!scripts\cp\cp_weapon::isinvalidzone(self.origin, level.invalid_spawn_volume_array, var_0, undefined, 1, var_1)) {
+    return 0;
+  }
 
   if(isDefined(level.invalidtranspondervolumes)) {
     if(isDefined(level.is_in_box_func)) {
       foreach(var_5 in level.invalidtranspondervolumes) {
-        if([[level.is_in_box_func]](var_5[0], var_5[1], var_5[2], var_5[3], self.origin))
+        if([[level.is_in_box_func]](var_5[0], var_5[1], var_5[2], var_5[3], self.origin)) {
           return 0;
+        }
       }
     }
   }
 
-  if(positionwouldtelefrag(self.origin))
+  if(positionwouldtelefrag(self.origin)) {
     return 0;
+  }
 
   return 1;
 }
@@ -374,23 +390,29 @@ placementfailed(var_0, var_1, var_2) {
   var_3 = undefined;
   var_4 = undefined;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 = var_1;
-
-  if(isDefined(var_2))
-    var_4 = var_2;
-
-  if(isDefined(var_0)) {
-    if(isDefined(var_0.origin))
-      var_3 = var_0.origin;
-
-    if(isDefined(var_0.weapon_name))
-      var_4 = var_0.weapon_name;
   }
 
-  if(isDefined(var_3) && isDefined(var_4))
-    scripts\cp\cp_weapon::placeequipmentfailed(var_4, 1, var_3);
+  if(isDefined(var_2)) {
+    var_4 = var_2;
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
+    if(isDefined(var_0.origin)) {
+      var_3 = var_0.origin;
+    }
+
+    if(isDefined(var_0.weapon_name)) {
+      var_4 = var_0.weapon_name;
+    }
+  }
+
+  if(isDefined(var_3) && isDefined(var_4)) {
+    scripts\cp\cp_weapon::placeequipmentfailed(var_4, 1, var_3);
+  }
+
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }

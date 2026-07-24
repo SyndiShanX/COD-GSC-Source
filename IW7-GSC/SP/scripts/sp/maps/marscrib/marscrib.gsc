@@ -55,14 +55,15 @@ _id_570F() {
     var_1 = randomintrange(0, 7);
     var_2 = randomintrange(0, 4);
 
-    if(var_2 == 0)
+    if(var_2 == 0) {
       playworldsound("marscrib_distant_destruction_crumble", var_0[var_1]);
-    else if(var_2 == 1)
+    } else if(var_2 == 1) {
       playworldsound("marscrib_distant_destruction_explo", var_0[var_1]);
-    else if(var_2 == 2)
+    } else if(var_2 == 2) {
       playworldsound("marscrib_distant_destruction_metal", var_0[var_1]);
-    else if(var_2 == 3)
+    } else if(var_2 == 3) {
       playworldsound("marscrib_distant_destruction_metal_groans", var_0[var_1]);
+    }
 
     wait(randomintrange(4, 10));
   }

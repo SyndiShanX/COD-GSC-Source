@@ -123,8 +123,9 @@ _id_E951() {
   scripts\sp\maps\sa_moon\sa_moon_audio::_id_A0BA();
   thread scripts\sp\maps\sa_moon\sa_moon_util::_id_13EF9(1, 1);
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     scripts\sp\specialist_MAYBE::_id_F3FF(1);
+  }
 }
 
 _id_E94C() {
@@ -132,8 +133,9 @@ _id_E94C() {
   scripts\sp\maps\sa_moon\sa_moon_fx::_id_132C5(1);
   scripts\sp\maps\sa_moon\sa_moon_fx::_id_132BF(1);
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     scripts\sp\specialist_MAYBE::_id_F53C(0);
+  }
 
   thread _id_A1C9();
   thread scripts\sp\maps\sa_moon\sa_moon_util::_id_A127();
@@ -352,11 +354,11 @@ _id_891F(var_0, var_1, var_2) {
 _id_A1BB(var_0, var_1, var_2, var_3) {
   var_2 endon("death");
 
-  if(animhasnotetrack(var_0, var_1))
+  if(animhasnotetrack(var_0, var_1)) {
     wait(scripts\engine\utility::get_notetrack_time(var_0, var_1));
-  else if(isDefined(var_3))
+  } else if(isDefined(var_3)) {
     wait(var_3);
-  else {}
+  } else {}
 }
 
 _id_FA60(var_0) {

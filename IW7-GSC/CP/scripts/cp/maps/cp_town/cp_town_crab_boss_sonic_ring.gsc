@@ -9,10 +9,11 @@ do_sonic_ring() {
   var_0 = level scripts\engine\utility::waittill_any_return("sonic_ring_fail", "sonic_ring_success");
   scripts\cp\maps\cp_town\cp_town_crab_boss_fight::remove_icon_on_escort_vehicle();
 
-  if(var_0 == "sonic_ring_fail")
+  if(var_0 == "sonic_ring_fail") {
     scripts\cp\maps\cp_town\cp_town_crab_boss_fight::replay_final_sequence();
-  else
+  } else {
     level thread scripts\cp\maps\cp_town\cp_town_crab_boss_bomb::start_detonate_bomb();
+  }
 }
 
 crab_boss_sonic_ring_logic() {
@@ -55,8 +56,9 @@ activate_sonic_ring(var_0) {
 }
 
 sonic_ring_wail_all_player_trigger_teleporter(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level endon(var_0);
+  }
 
   if(!scripts\engine\utility::is_true(level.escort_vehicle.teleporter_activated)) {
     return;
@@ -117,8 +119,9 @@ sonic_ring_wail_all_player_trigger_teleporter(var_0, var_1) {
     }
 
     if(var_3) {
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         level notify(var_1);
+      }
 
       return;
     }
@@ -133,8 +136,9 @@ start_sonic_ring_timer() {
   wait 7;
 
   for(var_0 = 5; var_0 > 0; var_0--) {
-    if(scripts\engine\utility::is_true(level.escort_vehicle.teleporter_activated))
+    if(scripts\engine\utility::is_true(level.escort_vehicle.teleporter_activated)) {
       iprintln(var_0);
+    }
 
     wait 1;
   }
@@ -176,8 +180,9 @@ player_touch_monitor(var_0) {
   for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(isPlayer(var_1))
+    if(isPlayer(var_1)) {
       var_1 dodamage(40, var_1.origin);
+    }
   }
 }
 
@@ -197,8 +202,9 @@ clean_up_controlling_ent(var_0) {
   var_0.sonic_ring_trigger dontinterpolate();
   var_0.sonic_ring_trigger.origin = var_0.sonic_ring_trigger.original_pos;
 
-  foreach(var_2 in var_0.vfx_ent_list)
-  var_2 delete();
+  foreach(var_2 in var_0.vfx_ent_list) {
+    var_2 delete();
+  }
 
   level notify("cleanup_beam_sfx");
   var_0 delete();
@@ -262,8 +268,9 @@ activate_vfx_on_beam(var_0) {
   for(var_1 = 1; var_1 <= 13; var_1++) {
     var_2 = get_vfx_ents_with_order_number(var_1, var_0);
 
-    foreach(var_4 in var_2)
-    var_4 setscriptablepartstate("sonic_ring_laser", "on");
+    foreach(var_4 in var_2) {
+      var_4 setscriptablepartstate("sonic_ring_laser", "on");
+    }
 
     wait 0.4;
   }
@@ -273,8 +280,9 @@ get_vfx_ents_with_order_number(var_0, var_1) {
   var_2 = [];
 
   foreach(var_4 in var_1.vfx_ent_list) {
-    if(var_4.activation_order == var_0)
+    if(var_4.activation_order == var_0) {
       var_2[var_2.size] = var_4;
+    }
   }
 
   return var_2;

@@ -7,10 +7,11 @@ main() {
   scripts\sp\utility::_id_116CB("prisoner");
   scripts\sp\utility::_id_F305();
 
-  if(getdvarint("greenlight") == 0)
+  if(getdvarint("greenlight") == 0) {
     scripts\sp\utility::_id_F343("collapse_dropship");
-  else
+  } else {
     scripts\sp\utility::_id_F343("alleys");
+  }
 
   level._id_12499 = ["prisoner_pre_church_tr", "prisoner_periph_ground_tr", "pnr_ground_fcollapse_pristine_tr", "pnr_ground_start_alleys_a_tr", "pnr_old_town_first_street_b_tr", "pnr_old_town_first_street_a_tr", "pnr_ground_courtyard_leftside_01_tr", "pnr_ground_courtyard_rightside_01_tr", "pnr_ground_courtyard_top_01_tr"];
   level._id_1249A = ["prisoner_pre_church_tr", "prisoner_periph_ground_tr", "pnr_ground_start_alleys_a_tr", "pnr_old_town_first_street_b_tr", "pnr_old_town_first_street_a_tr", "pnr_ground_courtyard_leftside_01_tr", "pnr_ground_courtyard_rightside_01_tr", "pnr_ground_courtyard_middle_01_tr", "pnr_ground_courtyard_top_01_tr"];
@@ -134,8 +135,9 @@ _id_12647() {
 }
 
 _id_1723(var_0, var_1, var_2, var_3) {
-  if(!scripts\sp\utility::_id_C268(var_0))
+  if(!scripts\sp\utility::_id_C268(var_0)) {
     objective_add(scripts\sp\utility::_id_C264(var_0), var_1, var_2);
+  }
 }
 
 _id_ABE0() {

@@ -41,8 +41,9 @@ add_to_recent_player_vo(var_0) {
 }
 
 get_recent_vo_time(var_0) {
-  if(!isDefined(level.vo_alias_data[var_0].cooldown))
+  if(!isDefined(level.vo_alias_data[var_0].cooldown)) {
     return 0;
+  }
 
   return level.vo_alias_data[var_0].cooldown;
 }
@@ -52,8 +53,9 @@ update_vo_cooldown_list() {
 
   for(;;) {
     foreach(var_2, var_1 in level.recent_vo) {
-      if(scripts\engine\utility::is_true(level.recent_vo[var_2]))
+      if(scripts\engine\utility::is_true(level.recent_vo[var_2])) {
         level.recent_vo[var_2] = level.recent_vo[var_2] - 1;
+      }
     }
 
     wait 1;
@@ -65,8 +67,9 @@ update_self_vo_cooldown_list() {
 
   for(;;) {
     foreach(var_2, var_1 in self.recent_vo) {
-      if(scripts\engine\utility::is_true(self.recent_vo[var_2]))
+      if(scripts\engine\utility::is_true(self.recent_vo[var_2])) {
         self.recent_vo[var_2] = self.recent_vo[var_2] - 1;
+      }
     }
 
     wait 1;
@@ -81,12 +84,14 @@ one_to_one_dialogue_vo_handler(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
   var_10 = undefined;
 
   if(var_9) {
-    if(isDefined(level.vo_alias_data[var_0].chance_to_play))
+    if(isDefined(level.vo_alias_data[var_0].chance_to_play)) {
       var_10 = level.vo_alias_data[var_0].chance_to_play;
+    }
   }
 
-  if(!isDefined(var_10))
+  if(!isDefined(var_10)) {
     var_10 = 100;
+  }
 
   if(randomint(100) > var_10) {
     level.pam_playing = 0;
@@ -124,14 +129,16 @@ one_to_one_dialogue_vo_handler(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
 
       if(isDefined(var_15) && var_8.vo_prefix == var_15 || var_14 || getdvarint("scr_solo_dialogue", 0) == 1) {
         if(isDefined(level.jukebox_playing) && level.jukebox_playing.size > 0) {
-          if(isDefined(level.jukebox_org_struct))
+          if(isDefined(level.jukebox_org_struct)) {
             level.jukebox_org_struct stoploopsound();
+          }
         }
 
         var_17 = scripts\cp\cp_vo::create_vo_data(var_16, var_3, var_5, var_6, var_13);
 
-        if(isDefined(self.current_vo_queue))
+        if(isDefined(self.current_vo_queue)) {
           self.current_vo_queue = scripts\engine\utility::array_add(self.current_vo_queue, var_16);
+        }
 
         var_8 scripts\cp\cp_vo::set_vo_system_playing(1);
         var_8 scripts\cp\cp_vo::set_vo_currently_playing(var_17);
@@ -145,8 +152,9 @@ one_to_one_dialogue_vo_handler(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
 
   level.pam_playing = 0;
 
-  foreach(var_8 in level.players)
-  var_8 scripts\cp\cp_vo::set_vo_system_playing(0);
+  foreach(var_8 in level.players) {
+    var_8 scripts\cp\cp_vo::set_vo_system_playing(0);
+  }
 
   scripts\cp\cp_vo::set_vo_system_busy(0);
 }
@@ -160,8 +168,9 @@ dialogue_vo_handler(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_9 = scripts\cp\cp_music_and_dialog::getarrayofdialoguealiases(var_0, var_8);
   level.dialogue_arr = var_9;
 
-  while(scripts\cp\cp_music_and_dialog::vo_is_playing())
+  while(scripts\cp\cp_music_and_dialog::vo_is_playing()) {
     wait 0.1;
+  }
 
   if(scripts\engine\utility::is_true(var_7)) {
     var_10 = self;
@@ -185,8 +194,9 @@ dialogue_vo_handler(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         if(isDefined(var_14) && var_10.vo_prefix == var_14 || var_13 || getdvarint("scr_solo_dialogue", 0) == 1) {
           var_17 = scripts\cp\cp_vo::create_vo_data(var_15, var_3, var_5, var_6, var_12);
 
-          if(isDefined(var_10.current_vo_queue))
+          if(isDefined(var_10.current_vo_queue)) {
             var_10.current_vo_queue = scripts\engine\utility::array_add(var_10.current_vo_queue, var_15);
+          }
 
           var_10 scripts\cp\cp_vo::set_vo_system_playing(1);
           var_10 scripts\cp\cp_vo::set_vo_currently_playing(var_17);
@@ -201,8 +211,9 @@ dialogue_vo_handler(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     }
   }
 
-  foreach(var_10 in level.players)
-  var_10 scripts\cp\cp_vo::set_vo_system_playing(0);
+  foreach(var_10 in level.players) {
+    var_10 scripts\cp\cp_vo::set_vo_system_playing(0);
+  }
 
   scripts\cp\cp_vo::set_vo_system_busy(0);
 }
@@ -252,8 +263,9 @@ codxp_dialogue_vo_handler(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   wait 6;
   scripts\cp\cp_vo::set_vo_system_busy(1);
 
-  foreach(var_8 in level.players)
-  var_8 thread play_ww_on_each_player(var_8);
+  foreach(var_8 in level.players) {
+    var_8 thread play_ww_on_each_player(var_8);
+  }
 
   scripts\engine\utility::flag_wait("dialogue_done");
   scripts\cp\cp_vo::set_vo_system_busy(0);
@@ -264,9 +276,9 @@ play_ww_on_each_player(var_0) {
   var_0 playplayervo("plr_spawn_alt_first_2", var_0);
   var_0 playwillardvo("ww_spawn_alt_first_6", var_0);
 
-  if(var_0.vo_prefix == "p4_")
+  if(var_0.vo_prefix == "p4_") {
     var_0 playplayervo("plr_spawn_alt_first_7", var_0);
-  else {
+  } else {
     var_0 playlocalsound("p4_spawn_alt_first_7");
     wait(scripts\cp\cp_vo::get_sound_length("p4_spawn_alt_first_7"));
   }
@@ -282,35 +294,36 @@ playwillardvo(var_0, var_1) {
 
 playplayervo(var_0, var_1) {
   if(isDefined(var_1)) {
-    if(isDefined(var_1.vo_prefix))
+    if(isDefined(var_1.vo_prefix)) {
       var_1 playlocalsound(var_1.vo_prefix + var_0);
+    }
   }
 
   wait(scripts\cp\cp_vo::get_sound_length(var_1.vo_prefix + var_0));
 }
 
 pap_vo_handler(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!scripts\cp\cp_vo::should_append_player_prefix(var_0))
+  if(!scripts\cp\cp_vo::should_append_player_prefix(var_0)) {
     thread scripts\cp\cp_vo::play_vo_on_player(var_0, var_2, var_3, var_4, var_5, var_6, var_0);
-  else {
+  } else {
     var_7 = self.vo_prefix + var_0;
     thread scripts\cp\cp_vo::play_vo_on_player(var_7, var_2, var_3, var_4, var_5, var_6, var_0);
   }
 }
 
 rave_vo_handler(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!scripts\cp\cp_vo::should_append_player_prefix(var_0))
+  if(!scripts\cp\cp_vo::should_append_player_prefix(var_0)) {
     thread scripts\cp\cp_vo::play_vo_on_player(var_0, var_2, var_3, var_4, var_5, var_6, var_0);
-  else {
+  } else {
     var_7 = self.vo_prefix + var_0;
     thread scripts\cp\cp_vo::play_vo_on_player(var_7, var_2, var_3, var_4, var_5, var_6, var_0);
   }
 }
 
 afterlife_vo_handler(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!scripts\cp\cp_vo::should_append_player_prefix(var_0))
+  if(!scripts\cp\cp_vo::should_append_player_prefix(var_0)) {
     thread scripts\cp\cp_vo::play_vo_on_player(var_0, var_2, var_3, var_4, var_5, var_6, var_0);
-  else {
+  } else {
     var_7 = self.vo_prefix + var_0;
     thread scripts\cp\cp_vo::play_vo_on_player(var_7, var_2, var_3, var_4, var_5, var_6, var_0);
   }
@@ -321,13 +334,15 @@ ww_vo(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   level endon(var_0 + "_timed_out");
   level thread scripts\cp\cp_vo::timeoutvofunction(var_0, var_3);
 
-  while(scripts\cp\cp_vo::is_vo_system_busy())
+  while(scripts\cp\cp_vo::is_vo_system_busy()) {
     wait 0.1;
+  }
 
   scripts\cp\cp_vo::set_vo_system_busy(1);
 
-  while(scripts\cp\cp_music_and_dialog::vo_is_playing())
+  while(scripts\cp\cp_music_and_dialog::vo_is_playing()) {
     wait 0.1;
+  }
 
   level notify(var_0 + "_about_to_play");
 
@@ -353,8 +368,9 @@ ww_vo(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
     wait(scripts\cp\cp_vo::get_sound_length(var_0));
 
-    foreach(var_10 in level.players)
-    var_10 scripts\cp\cp_vo::set_vo_system_playing(0);
+    foreach(var_10 in level.players) {
+      var_10 scripts\cp\cp_vo::set_vo_system_playing(0);
+    }
   }
 
   scripts\cp\cp_vo::set_vo_system_busy(0);
@@ -366,20 +382,22 @@ announcer_vo(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
 is_vo_in_pap(var_0) {
   if(isDefined(level.vo_alias_data[var_0].pap_approval)) {
-    if(level.vo_alias_data[var_0].pap_approval == 1)
+    if(level.vo_alias_data[var_0].pap_approval == 1) {
       return 0;
-    else
+    } else {
       return 1;
+    }
   } else
     return 1;
 }
 
 is_vo_in_rave(var_0) {
   if(isDefined(level.vo_alias_data[var_0].rave_approval)) {
-    if(level.vo_alias_data[var_0].rave_approval == 1)
+    if(level.vo_alias_data[var_0].rave_approval == 1) {
       return 1;
-    else
+    } else {
       return 0;
+    }
   } else
     return 0;
 }
@@ -453,8 +471,9 @@ play_announcer_vo(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       if(isDefined(var_7) && var_10.vo_prefix == var_7) {
         var_11 = var_7 + var_0;
 
-        if(soundexists(var_11))
+        if(soundexists(var_11)) {
           var_10 playlocalsound(var_11);
+        }
 
         continue;
       } else {
@@ -466,16 +485,18 @@ play_announcer_vo(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   wait(scripts\cp\cp_vo::get_sound_length(var_0));
 
-  foreach(var_10 in level.players)
-  var_10 scripts\cp\cp_vo::set_vo_system_playing(0);
+  foreach(var_10 in level.players) {
+    var_10 scripts\cp\cp_vo::set_vo_system_playing(0);
+  }
 
   special_vo_notify_watcher(var_0);
   level.announcer_vo_playing = 0;
 }
 
 special_vo_notify_watcher(var_0) {
-  if(var_0 == "dj_jingle_intro")
+  if(var_0 == "dj_jingle_intro") {
     level notify("jukebox_start");
+  }
 }
 
 play_vo_for_powerup(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
@@ -484,8 +505,9 @@ play_vo_for_powerup(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_0 = convert_alias_string_for_players(var_0);
 
   foreach(var_8 in level.players) {
-    if(isDefined(var_8) && isalive(var_8))
+    if(isDefined(var_8) && isalive(var_8)) {
       var_8 thread scripts\cp\cp_vo::try_to_play_vo(var_0, "rave_comment_vo");
+    }
   }
 }
 
@@ -530,8 +552,9 @@ volume_activation_check_init() {
 
     switch (var_0) {
       case "moon":
-        foreach(var_2 in level.players)
-        var_2 thread scripts\cp\cp_vo::add_to_nag_vo("nag_board_windows", "rave_comment_vo", 180, 60, 20, 1);
+        foreach(var_2 in level.players) {
+          var_2 thread scripts\cp\cp_vo::add_to_nag_vo("nag_board_windows", "rave_comment_vo", 180, 60, 20, 1);
+        }
 
         break;
       case "mars_3":
@@ -548,20 +571,23 @@ willard_intro_vo() {
   level endon("game_ended");
   level waittill("wave_start_sound_done");
 
-  while(scripts\cp\cp_vo::is_vo_system_busy())
+  while(scripts\cp\cp_vo::is_vo_system_busy()) {
     wait 0.1;
+  }
 
   if(level.players.size > 1) {
     if(randomint(100) > 50) {
-      foreach(var_1 in level.players)
-      var_1 thread scripts\cp\cp_vo::try_to_play_vo("ww_intro", "rave_ww_vo", "highest", 30, 0, 0, 1, 100, 1);
+      foreach(var_1 in level.players) {
+        var_1 thread scripts\cp\cp_vo::try_to_play_vo("ww_intro", "rave_ww_vo", "highest", 30, 0, 0, 1, 100, 1);
+      }
     } else
       level thread scripts\cp\cp_vo::try_to_play_vo("ww_intro", "rave_announcer_vo", "highest", 30, 0, 0, 1, 100);
   } else if(level.players[0].vo_prefix == "p5_") {
-    if(randomint(100) > 50)
+    if(randomint(100) > 50) {
       level.players[0] thread scripts\cp\cp_vo::try_to_play_vo("ww_intro_p5_solo", "rave_ww_vo", "highest", 30, 0, 0, 1, 100);
-    else
+    } else {
       level.players[0] thread scripts\cp\cp_vo::try_to_play_vo("ww_intro" + level.players[0].vo_suffix, "rave_ww_vo", "highest", 30, 0, 0, 1, 100);
+    }
   } else
     level.players[0] thread scripts\cp\cp_vo::try_to_play_vo("ww_intro" + level.players[0].vo_suffix, "rave_ww_vo", "highest", 30, 0, 0, 1, 100);
 
@@ -575,15 +601,17 @@ power_nag() {
     level waittill("wave_start_sound_done");
 
     if(level.wave_num > 0 && level.wave_num % 7 == 0) {
-      foreach(var_1 in level.players)
-      var_1 scripts\cp\cp_vo::add_to_nag_vo("nag_activate_power", "disco_comment_vo", 600, 120, 3, 1);
+      foreach(var_1 in level.players) {
+        var_1 scripts\cp\cp_vo::add_to_nag_vo("nag_activate_power", "disco_comment_vo", 600, 120, 3, 1);
+      }
     }
   }
 }
 
 purchase_area_vo(var_0, var_1, var_2) {
-  if(!isDefined(level.played_area_vos))
+  if(!isDefined(level.played_area_vos)) {
     level.played_area_vos = [];
+  }
 
   if(scripts\engine\utility::is_true(level.open_sesame)) {
     return;
@@ -633,18 +661,20 @@ purchase_area_vo(var_0, var_1, var_2) {
         break;
       default:
         if(level.players.size > 1) {
-          if(soundexists(var_1.vo_prefix + "purchase_area"))
+          if(soundexists(var_1.vo_prefix + "purchase_area")) {
             var_1 thread scripts\cp\cp_vo::try_to_play_vo("purchase_area", "rave_comment_vo", "low", 10, 0, 2, 1, 40);
-          else if(soundexists(var_1.vo_prefix + "purchase_area_misc"))
+          } else if(soundexists(var_1.vo_prefix + "purchase_area_misc")) {
             var_1 thread scripts\cp\cp_vo::try_to_play_vo("purchase_area_misc", "rave_comment_vo", "low", 10, 0, 2, 1, 40);
+          }
         } else if(soundexists(level.players[0].vo_prefix + "purchase_area_misc")) {
           var_3 = ["purchase_area_misc", "purchase_area"];
           var_4 = scripts\engine\utility::random(var_3);
 
-          if(soundexists(level.players[0].vo_prefix + var_4))
+          if(soundexists(level.players[0].vo_prefix + var_4)) {
             level.players[0] thread scripts\cp\cp_vo::try_to_play_vo(var_4, "rave_comment_vo", "low", 10, 0, 2, 1, 40);
-          else
+          } else {
             level.players[0] thread scripts\cp\cp_vo::try_to_play_vo("purchase_area_misc", "rave_comment_vo", "low", 10, 0, 2, 1, 40);
+          }
         } else if(soundexists(level.players[0].vo_prefix + "purchase_area"))
           level.players[0] thread scripts\cp\cp_vo::try_to_play_vo("purchase_area", "rave_comment_vo", "low", 10, 0, 2, 1, 40);
 
@@ -721,10 +751,11 @@ starting_vo() {
       if(var_3 issplitscreenplayer()) {
         if(var_3 isreloading()) {
           if(isDefined(var_3.vo_prefix)) {
-            if(var_3.vo_prefix == "p5_")
+            if(var_3.vo_prefix == "p5_") {
               var_3 multiple_pam_intro_vo(var_3);
-            else
+            } else {
               var_3 thread scripts\cp\cp_vo::try_to_play_vo("spawn_team_first", "rave_comment_vo", "high", 20, 0, 0, 1);
+            }
           }
         }
 
@@ -743,10 +774,11 @@ starting_vo() {
 
     level thread willard_intro_vo();
   } else {
-    if(level.players[0].vo_prefix == "p5_")
+    if(level.players[0].vo_prefix == "p5_") {
       level.players[0] thread scripts\cp\cp_vo::try_to_play_vo("spawn_solo_first", "disco_comment_vo", "high", 20, 0, 0, 1);
-    else
+    } else {
       level.players[0] thread scripts\cp\cp_vo::try_to_play_vo(scripts\engine\utility::random(["spawn_intro", "spawn_solo_first"]), "rave_comment_vo", "high", 20, 0, 0, 1);
+    }
 
     level thread willard_intro_vo();
   }

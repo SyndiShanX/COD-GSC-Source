@@ -47,15 +47,17 @@ main() {
 _id_4F25() {
   wait 10;
 
-  while(getdvarint("test_next_mission") < 1)
+  while(getdvarint("test_next_mission") < 1) {
     wait 3;
+  }
 
   if(getdvarint("test_next_mission_fastload", 0) != 0) {
     _id_1356();
     wait 1;
 
-    while(!ispreloadzonescomplete())
+    while(!ispreloadzonescomplete()) {
       scripts\engine\utility::waitframe();
+    }
   }
 
   _id_1355();
@@ -65,17 +67,19 @@ _id_1355(var_0) {
   if(scripts\sp\utility::_id_93A6()) {
     scripts\sp\specialist_MAYBE::hide_helmet_impacts();
 
-    if(!level.console)
+    if(!level.console) {
       wait 0.05;
+    }
   }
 
   if(scripts\sp\utility::_id_9BB7()) {
     setsaveddvar("ui_nextMission", "0");
 
-    if(isDefined(level._id_BF96))
+    if(isDefined(level._id_BF96)) {
       changelevel("", 0, level._id_BF96);
-    else
+    } else {
       changelevel("", 0);
+    }
   } else {
     level notify("nextmission");
     level._id_BF95 = 1;
@@ -92,8 +96,9 @@ _id_1355(var_0) {
       return;
     }
 
-    if(level.script != "shipcrib_epilogue")
+    if(level.script != "shipcrib_epilogue") {
       scripts\sp\utility::_id_ABD2();
+    }
 
     _id_F77F(var_1);
     scripts\sp\loadout::_id_EB5B();
@@ -101,8 +106,9 @@ _id_1355(var_0) {
     _id_0A2F::_id_12E18();
     updategamerprofile();
 
-    if(_id_8BBF(var_1))
+    if(_id_8BBF(var_1)) {
       scripts\sp\utility::_id_834F(_id_7D92(var_1));
+    }
 
     if(_id_7F6A(var_1)) {
       if(_id_3DEA(var_1, 1, 0)) {
@@ -137,11 +143,13 @@ _id_1355(var_0) {
       }
     }
 
-    if(getitemfromcache(var_1) && _id_3DEB(var_1))
+    if(getitemfromcache(var_1) && _id_3DEB(var_1)) {
       scripts\sp\utility::_id_834F("ALL_SA");
+    }
 
-    if(getitemdroporiginandangles(var_1) && _id_3DE8(var_1))
+    if(getitemdroporiginandangles(var_1) && _id_3DE8(var_1)) {
       scripts\sp\utility::_id_834F("ALL_JA");
+    }
 
     level.player scripts\sp\analytics::_id_B8CE(level.script);
 
@@ -150,11 +158,13 @@ _id_1355(var_0) {
       var_4 = level.player _meth_84C6("missionStateData", "ja_mining");
       var_5 = level.player _meth_84C6("missionStateData", "ja_titan");
 
-      if(isDefined(var_4) && var_4 == "locked")
+      if(isDefined(var_4) && var_4 == "locked") {
         level.player _meth_84C7("missionStateData", "ja_mining", "incomplete");
+      }
 
-      if(isDefined(var_5) && var_5 == "locked")
+      if(isDefined(var_5) && var_5 == "locked") {
         level.player _meth_84C7("missionStateData", "ja_titan", "incomplete");
+      }
 
       return;
     }
@@ -164,8 +174,9 @@ _id_1355(var_0) {
     var_8 = level.player _meth_84C6("lastShipcribMission");
     var_9 = undefined;
 
-    if(var_6 < level._id_B8D2._id_ABFA.size)
+    if(var_6 < level._id_B8D2._id_ABFA.size) {
       var_9 = level._id_B8D2._id_ABFA[var_6]._id_2AD3;
+    }
 
     if(isDefined(var_8) && level.script != "sa_moon") {
       if(getitemfromcache(var_1) || getitemdroporiginandangles(var_1)) {
@@ -188,11 +199,13 @@ _id_1355(var_0) {
     if(isDefined(var_9)) {
       setDvar("last_transition_movie", var_9);
 
-      if(!scripts\engine\utility::flag_exist("nextmission_transition_bink_primed"))
+      if(!scripts\engine\utility::flag_exist("nextmission_transition_bink_primed")) {
         scripts\engine\utility::flag_init("nextmission_transition_bink_primed");
+      }
 
-      if(!isDefined(var_0))
+      if(!isDefined(var_0)) {
         setomnvar("ui_hide_hud", 1);
+      }
 
       if(!level.player islinked()) {
         var_11 = level.player scripts\engine\utility::spawn_tag_origin();
@@ -225,22 +238,25 @@ _id_1355(var_0) {
     if(getdvarint("fastload", 1) != 0) {
       if(waspreloadzonesstarted()) {
         for(var_13 = 0; !ispreloadzonescomplete(); var_13--) {
-          if(var_13 == 0)
+          if(var_13 == 0) {
             var_13 = 60;
+          }
 
           scripts\engine\utility::waitframe();
         }
       }
 
       if(scripts\engine\utility::flag_exist("nextmission_preload_complete")) {
-        while(!scripts\engine\utility::flag_exist("weapons_preloaded"))
+        while(!scripts\engine\utility::flag_exist("weapons_preloaded")) {
           wait 0.05;
+        }
 
         var_13 = 0;
 
         for(var_14 = 200; !scripts\engine\utility::flag("weapons_preloaded"); var_14--) {
-          if(var_13 == 0)
+          if(var_13 == 0) {
             var_13 = 60;
+          }
 
           if(var_14 == 0) {
             break;
@@ -363,20 +379,24 @@ _id_12A8(var_0) {
 }
 
 _id_1356(var_0, var_1, var_2) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "full";
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   var_3 = level._id_B8D2 _id_7F6B(level.script);
   var_4 = var_3 + 1;
 
-  if(var_3 == level._id_B8D2._id_ABFA.size - 1)
+  if(var_3 == level._id_B8D2._id_ABFA.size - 1) {
     var_4 = var_3;
+  }
 
   var_5 = level.player _meth_84C6("lastShipcribMission");
   var_6 = level.player _meth_84C6("lastCompletedMission");
@@ -389,10 +409,11 @@ _id_1356(var_0, var_1, var_2) {
       if(var_8[0] == "sa" || var_8[0] == "ja") {
         var_4 = _id_12A7(var_5);
 
-        if(isDefined(level._id_B8D2._id_ABFA[var_4]._id_D846))
+        if(isDefined(level._id_B8D2._id_ABFA[var_4]._id_D846)) {
           var_7 = level._id_B8D2._id_ABFA[var_4]._id_D846;
-        else
+        } else {
           var_7 = level._id_B8D2._id_ABFA[var_4]._id_D845;
+        }
       }
     }
   }
@@ -408,15 +429,16 @@ _id_1356(var_0, var_1, var_2) {
     }
   }
 
-  if(var_2)
+  if(var_2) {
     level thread scripts\sp\utility::_id_BF98();
+  }
 
   if(getdvarint("fastload", 1) != 0) {
     var_10 = _id_7F6D(var_4);
 
-    if(var_10 == "phspace" && getdvarint("e3", 0) == 1)
+    if(var_10 == "phspace" && getdvarint("e3", 0) == 1) {
       preloadzones([var_10, "phspace_shared_tr", "phspace_ground_tr", "phspace_ground_lite_tr"]);
-    else {
+    } else {
       switch (var_0) {
         case "full":
           if(isDefined(var_7)) {
@@ -430,15 +452,17 @@ _id_1356(var_0, var_1, var_2) {
           preloadzones(var_10);
           break;
         case "transients":
-          if(isDefined(var_7))
+          if(isDefined(var_7)) {
             preloadzones(var_7);
+          }
 
           break;
       }
     }
 
-    while(!ispreloadzonescomplete())
+    while(!ispreloadzonescomplete()) {
       scripts\engine\utility::waitframe();
+    }
 
     if(var_1) {
       level thread _id_1463(var_10, var_1);
@@ -450,18 +474,20 @@ _id_1356(var_0, var_1, var_2) {
 }
 
 _id_1463(var_0, var_1) {
-  if(!scripts\engine\utility::flag_exist("weapons_preloaded"))
+  if(!scripts\engine\utility::flag_exist("weapons_preloaded")) {
     scripts\engine\utility::flag_init("weapons_preloaded");
-  else
+  } else {
     return;
+  }
 
   if(!isDefined(level._id_D9E5)) {
     scripts\engine\utility::flag_set("weapons_preloaded");
     return;
   }
 
-  if(isDefined(var_1) && !var_1)
+  if(isDefined(var_1) && !var_1) {
     scripts\engine\utility::flag_set("weapons_preloaded");
+  }
 
   var_2 = ["iw7_g18", "iw7_m4", "iw7_ripper", "iw7_ake"];
 
@@ -480,10 +506,11 @@ _id_1463(var_0, var_1) {
       var_8 = strtok(level._id_FDFA, "_");
 
       if(var_8.size > 0) {
-        if(var_8[0] == "sa" || var_8[0] == "ja")
+        if(var_8[0] == "sa" || var_8[0] == "ja") {
           var_4 = _id_12A9(level._id_FDFA);
-        else
+        } else {
           var_4 = var_3 + 1;
+        }
       } else
         var_4 = var_3 + 1;
     } else
@@ -492,15 +519,17 @@ _id_1463(var_0, var_1) {
     var_0 = level._id_B8D2._id_ABFA[var_4].name;
   }
 
-  if(scripts\engine\utility::string_starts_with(var_0, "shipcrib"))
+  if(scripts\engine\utility::string_starts_with(var_0, "shipcrib")) {
     var_9 = 1;
-  else
+  } else {
     var_9 = 0;
+  }
 
-  if(scripts\engine\utility::string_starts_with(var_0, "ja_"))
+  if(scripts\engine\utility::string_starts_with(var_0, "ja_")) {
     var_10 = 1;
-  else
+  } else {
     var_10 = 0;
+  }
 
   var_11 = _id_0A2F::_id_DA17();
   var_12 = getaiarray();
@@ -510,8 +539,9 @@ _id_1463(var_0, var_1) {
     var_16 = var_15.weapon;
     var_16 = getweaponbasename(var_16);
 
-    if(var_16 != "none" && scripts\engine\utility::array_contains(var_11, var_16))
+    if(var_16 != "none" && scripts\engine\utility::array_contains(var_11, var_16)) {
       var_13 = scripts\engine\utility::array_add(var_13, var_16);
+    }
   }
 
   var_13 = scripts\engine\utility::array_remove_duplicates(var_13);
@@ -526,14 +556,16 @@ _id_1463(var_0, var_1) {
   var_23 = scripts\engine\utility::array_remove_array(var_19, var_22);
 
   foreach(var_25 in var_19) {
-    if(!_id_0A2F::_id_9B49(var_25))
+    if(!_id_0A2F::_id_9B49(var_25)) {
       var_19 = scripts\engine\utility::array_remove(var_19, var_25);
+    }
   }
 
   var_11 = scripts\engine\utility::array_remove_array(var_11, var_22);
 
-  foreach(var_25 in var_11)
-  level.player _meth_84C7("weaponsLoaded", var_25, 0);
+  foreach(var_25 in var_11) {
+    level.player _meth_84C7("weaponsLoaded", var_25, 0);
+  }
 
   var_29 = [];
   var_30 = [];
@@ -572,14 +604,15 @@ _id_1463(var_0, var_1) {
           var_34 = scripts\engine\utility::weaponclass(var_32);
 
           foreach(var_36 in level._id_D9E5["loaded_weapon_types"][var_34]) {
-            if(var_36.weapon_name == var_32)
-              level._id_D9E5["loaded_weapon_types"][var_34] = scripts\engine\utility::array_remove(level._id_D9E5["loaded_weapon_types"][var_34], var_36);
+            if(var_36.weapon_name == var_32) {
+              level._id_D9E5["loaded_weapon_types"][var_34] = ::scripts\engine\utility::array_remove(level._id_D9E5["loaded_weapon_types"][var_34], var_36);
+            }
           }
 
           var_19 = scripts\engine\utility::array_remove(var_19, var_32);
           thread scripts\sp\utility::_id_1264E("weapon_" + var_32 + "_tr");
           var_30 = scripts\engine\utility::array_add(var_30, "weapon_" + var_32 + "_tr");
-          level._id_D9E5["loaded_weapons"] = scripts\engine\utility::array_remove(level._id_D9E5["loaded_weapons"], var_32);
+          level._id_D9E5["loaded_weapons"] = ::scripts\engine\utility::array_remove(level._id_D9E5["loaded_weapons"], var_32);
           var_23 = scripts\engine\utility::array_remove(var_23, var_32);
           continue;
         }
@@ -594,8 +627,9 @@ _id_1463(var_0, var_1) {
       if(istransientloaded(var_38)) {
         continue;
       }
-      if(!scripts\engine\utility::flag_exist(var_38 + "_loaded"))
+      if(!scripts\engine\utility::flag_exist(var_38 + "_loaded")) {
         scripts\engine\utility::flag_init(var_38 + "_loaded");
+      }
 
       loadtransient(var_38);
       var_19 = scripts\engine\utility::array_add(var_19, var_25);
@@ -610,12 +644,13 @@ _id_1463(var_0, var_1) {
     var_34 = scripts\engine\utility::weaponclass(var_41);
 
     foreach(var_36 in level._id_D9E5["loaded_weapon_types"][var_34]) {
-      if(var_36.weapon_name == var_41)
-        level._id_D9E5["loaded_weapon_types"][var_34] = scripts\engine\utility::array_remove(level._id_D9E5["loaded_weapon_types"][var_34], var_36);
+      if(var_36.weapon_name == var_41) {
+        level._id_D9E5["loaded_weapon_types"][var_34] = ::scripts\engine\utility::array_remove(level._id_D9E5["loaded_weapon_types"][var_34], var_36);
+      }
     }
 
     level.player _meth_84C7("weaponsLoaded", var_41, 0);
-    level._id_D9E5["loaded_weapons"] = scripts\engine\utility::array_remove(level._id_D9E5["loaded_weapons"], var_41);
+    level._id_D9E5["loaded_weapons"] = ::scripts\engine\utility::array_remove(level._id_D9E5["loaded_weapons"], var_41);
   }
 
   level.player _meth_84C7("lastWeaponPreload", var_0);
@@ -641,10 +676,11 @@ _id_1463(var_0, var_1) {
         }
 
         if(!scripts\engine\utility::array_contains(level._id_D9E5["loaded_weapons"], var_25)) {
-          level._id_D9E5["loaded_weapons"] = scripts\engine\utility::array_add(level._id_D9E5["loaded_weapons"], var_25);
+          level._id_D9E5["loaded_weapons"] = ::scripts\engine\utility::array_add(level._id_D9E5["loaded_weapons"], var_25);
 
-          if(isDefined(var_36))
-            level._id_D9E5["loaded_weapon_types"][var_34] = scripts\engine\utility::array_add(level._id_D9E5["loaded_weapon_types"][var_34], var_36);
+          if(isDefined(var_36)) {
+            level._id_D9E5["loaded_weapon_types"][var_34] = ::scripts\engine\utility::array_add(level._id_D9E5["loaded_weapon_types"][var_34], var_36);
+          }
         }
       }
     }
@@ -680,23 +716,26 @@ _id_1357() {
   if(!isDefined(_id_7F6B(level.script)) || !isDefined(_id_7F6B(level.script) + 1)) {
     return;
   }
-  if(!scripts\engine\utility::flag_exist("nextmission_transition_bink_primed"))
+  if(!scripts\engine\utility::flag_exist("nextmission_transition_bink_primed")) {
     scripts\engine\utility::flag_init("nextmission_transition_bink_primed");
+  }
 
   var_0 = _id_7F6B(level.script) + 1;
   var_1 = level.script;
   var_2 = level.player _meth_84C6("lastShipcribMission");
   var_3 = undefined;
 
-  if(var_0 < level._id_B8D2._id_ABFA.size)
+  if(var_0 < level._id_B8D2._id_ABFA.size) {
     var_3 = level._id_B8D2._id_ABFA[var_0]._id_2AD3;
+  }
 
   if(isDefined(var_1) && isDefined(var_2) && level.script != "sa_moon") {
     var_4 = strtok(var_1, "_");
 
     if(var_4.size > 0) {
-      if(var_4[0] == "sa" || var_4[0] == "ja")
+      if(var_4[0] == "sa" || var_4[0] == "ja") {
         var_3 = _id_12A8(var_1);
+      }
     }
   }
 
@@ -717,13 +756,15 @@ _id_1357() {
   stopcinematicingame();
   scripts\engine\utility::waitframe();
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = "default";
+  }
 
   cinematicingame(var_3, 1, 1, 1);
 
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::flag_set("nextmission_transition_bink_primed");
 }
@@ -760,17 +801,21 @@ _id_CCA8(var_0, var_1, var_2, var_3) {
   setsaveddvar("bg_cinematicCanPause", "1");
   cinematicingame(var_0);
 
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     scripts\engine\utility::waitframe();
+  }
 
-  while(level.player _meth_81CE() || level.player useButtonPressed())
+  while(level.player _meth_81CE() || level.player useButtonPressed()) {
     scripts\engine\utility::waitframe();
+  }
 
-  while(iscinematicplaying() && !level.player _meth_81CE() && !level.player useButtonPressed())
+  while(iscinematicplaying() && !level.player _meth_81CE() && !level.player useButtonPressed()) {
     scripts\engine\utility::waitframe();
+  }
 
-  while(level.player _meth_81CE() || level.player useButtonPressed())
+  while(level.player _meth_81CE() || level.player useButtonPressed()) {
     scripts\engine\utility::waitframe();
+  }
 
   if(isDefined(var_2)) {
     for(;;) {
@@ -786,12 +831,14 @@ _id_CCA8(var_0, var_1, var_2, var_3) {
   level notify("nextmission_bink_finished");
 
   if(isDefined(var_3)) {
-    while(level.script != var_3)
+    while(level.script != var_3) {
       scripts\engine\utility::waitframe();
+    }
   }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_1 = var_1 * 0.05;
   level thread scripts\engine\utility::noself_delaycall(var_1, ::stopcinematicingame);
@@ -800,11 +847,13 @@ _id_CCA8(var_0, var_1, var_2, var_3) {
 _id_12F24() {
   var_0 = int(_id_81D4());
 
-  if(getdvarint("mis_cheat") == 0)
+  if(getdvarint("mis_cheat") == 0) {
     level.player _meth_8302("percentCompleteSP", var_0);
+  }
 
-  if(var_0 == 100)
+  if(var_0 == 100) {
     _id_0A2F::_id_EBB3("veh_mil_air_un_jackal_livery_shell_20");
+  }
 
   return var_0;
 }
@@ -845,8 +894,9 @@ _id_816C(var_0) {
     }
     var_2++;
 
-    if(int(var_1[var_6]) >= var_0)
+    if(int(var_1[var_6]) >= var_0) {
       var_3++;
+    }
   }
 
   var_7 = var_3 / var_2 * 100;
@@ -866,8 +916,9 @@ _id_8171() {
     if(!isDefined(var_5)) {
       continue;
     }
-    if(var_5 != "locked")
+    if(var_5 != "locked") {
       var_2++;
+    }
   }
 
   return var_2 / var_1 * 100;
@@ -889,8 +940,9 @@ _id_816E() {
       continue;
     }
 
-    if(var_5 == "upgrade1")
+    if(var_5 == "upgrade1") {
       var_1 = var_1 + 1;
+    }
   }
 
   return var_1 / var_0 * 100;
@@ -907,8 +959,9 @@ _id_8170() {
     var_2++;
 
     if(tolower(var_6) == "salenkoch" || var_6 == "riah") {
-      if(var_4)
+      if(var_4) {
         var_1++;
+      }
 
       continue;
     }
@@ -918,8 +971,9 @@ _id_8170() {
     if(!isDefined(var_7)) {
       continue;
     }
-    if(var_7 == "obtained" || var_7 == "viewed")
+    if(var_7 == "obtained" || var_7 == "viewed") {
       var_1++;
+    }
   }
 
   return var_1 / var_2 * 100;
@@ -933,10 +987,11 @@ _id_F77F(var_0) {
   var_1 = level.player _meth_8139("missionHighestDifficulty");
   var_2 = level._id_7683 + 1;
 
-  if(scripts\sp\utility::_id_93AB())
+  if(scripts\sp\utility::_id_93AB()) {
     var_2 = 6;
-  else if(scripts\sp\utility::_id_93A6())
+  } else if(scripts\sp\utility::_id_93A6()) {
     var_2 = 5;
+  }
 
   var_3 = "";
 
@@ -986,15 +1041,17 @@ _id_7F6F(var_0) {
 }
 
 _id_7FBB(var_0) {
-  if(var_0 < 9)
+  if(var_0 < 9) {
     return "mis_0" + (var_0 + 1);
-  else
+  } else {
     return "mis_" + (var_0 + 1);
+  }
 }
 
 _id_7F89(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   var_1 = level.player _meth_8139("missionHighestDifficulty");
   var_2 = 4;
@@ -1003,8 +1060,9 @@ _id_7F89(var_0) {
     if(var_0 && !getinvultime(var_3)) {
       continue;
     }
-    if(int(var_1[var_3]) < var_2)
+    if(int(var_1[var_3]) < var_2) {
       var_2 = int(var_1[var_3]);
+    }
   }
 
   return var_2;
@@ -1039,12 +1097,14 @@ _id_1814(var_0) {
 }
 
 _id_7F6B(var_0) {
-  if(!isDefined(level._id_B8D2) || !isDefined(level._id_B8D2._id_ABFA))
+  if(!isDefined(level._id_B8D2) || !isDefined(level._id_B8D2._id_ABFA)) {
     return undefined;
+  }
 
   foreach(var_3, var_2 in level._id_B8D2._id_ABFA) {
-    if(var_2.name == var_0)
+    if(var_2.name == var_0) {
       return var_3;
+    }
   }
 
   return undefined;
@@ -1083,77 +1143,88 @@ getitemdroporiginandangles(var_0) {
 }
 
 _id_7EB2(var_0) {
-  if(!isDefined(level._id_B8D2._id_ABFA[var_0]._id_6AB0))
+  if(!isDefined(level._id_B8D2._id_ABFA[var_0]._id_6AB0)) {
     return undefined;
+  }
 
   return level._id_B8D2._id_ABFA[var_0]._id_6AB0;
 }
 
 _id_8BBF(var_0) {
-  if(isDefined(level._id_B8D2._id_ABFA[var_0]._id_1563))
+  if(isDefined(level._id_B8D2._id_ABFA[var_0]._id_1563)) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_80EB(var_0) {
-  if(!isDefined(level._id_B8D2))
+  if(!isDefined(level._id_B8D2)) {
     return undefined;
+  }
 
   var_1 = _id_7F6B(var_0);
 
-  if(isDefined(level._id_B8D2._id_ABFA[var_1]._id_E2B2))
+  if(isDefined(level._id_B8D2._id_ABFA[var_1]._id_E2B2)) {
     return level._id_B8D2._id_ABFA[var_1]._id_E2B2;
+  }
 }
 
 _id_12B0(var_0) {
   var_1 = _id_7F6B(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 0;
-  else
+  } else {
     return level._id_B8D2._id_ABFA[var_1]._id_F88F;
+  }
 }
 
 _id_12AF(var_0) {
   var_1 = _id_7F6B(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 0;
-  else
+  } else {
     return level._id_B8D2._id_ABFA[var_1]._id_41F7;
+  }
 }
 
 _id_12B1(var_0) {
   var_1 = _id_7F6B(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return "";
-  else
+  } else {
     return level._id_B8D2._id_ABFA[var_1]._id_2AD3;
+  }
 }
 
 _id_1455(var_0) {
   var_1 = _id_12B0(var_0);
   var_2 = _id_12AF(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
-  else
+  } else {
     var_2 = var_2 * 0.02;
+  }
 
   var_3 = var_1 + var_2;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     wait(var_3 * 0.05);
+  }
 
-  if(isDefined(var_2) && var_2 <= 0)
+  if(isDefined(var_2) && var_2 <= 0) {
     scripts\engine\utility::waitframe();
-  else if(!isDefined(var_1) || var_1 <= 0)
+  } else if(!isDefined(var_1) || var_1 <= 0) {
     scripts\engine\utility::waitframe();
+  }
 }
 
 _id_3DEA(var_0, var_1, var_2) {
@@ -1164,8 +1235,9 @@ _id_3DEA(var_0, var_1, var_2) {
     if(var_3 == var_0 || !_id_7F6A(var_3)) {
       continue;
     }
-    if(_id_7F69(var_3) < var_1)
+    if(_id_7F69(var_3) < var_1) {
       return 0;
+    }
   }
 
   return 1;
@@ -1176,8 +1248,9 @@ _id_3DEB(var_0) {
     if(var_1 == var_0 || !getitemfromcache(var_1)) {
       continue;
     }
-    if(_id_7F69(var_1) == 0)
+    if(_id_7F69(var_1) == 0) {
       return 0;
+    }
   }
 
   return 1;
@@ -1188,8 +1261,9 @@ _id_3DE8(var_0) {
     if(var_1 == var_0 || !getitemdroporiginandangles(var_1)) {
       continue;
     }
-    if(_id_7F69(var_1) == 0)
+    if(_id_7F69(var_1) == 0) {
       return 0;
+    }
   }
 
   return 1;
@@ -1197,34 +1271,39 @@ _id_3DE8(var_0) {
 
 _id_7FE6() {
   for(var_0 = 0; var_0 < level._id_B8D2._id_ABFA.size; var_0++) {
-    if(!_id_7F6F(var_0))
+    if(!_id_7F6F(var_0)) {
       return var_0;
+    }
   }
 
   return 0;
 }
 
 _id_6CD9() {
-  if(getDvar("mis_cheat") == "1")
+  if(getDvar("mis_cheat") == "1") {
     return 1;
+  }
 
   var_0 = _id_7F6F(_id_7F6B("yard"));
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   return var_0;
 }
 
 _id_725B(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 2;
+  }
 
   var_1 = level.player _meth_8139("missionHighestDifficulty");
   var_2 = "";
 
-  for(var_3 = 0; var_3 < var_1.size; var_3++)
+  for(var_3 = 0; var_3 < var_1.size; var_3++) {
     var_2 = var_2 + var_0;
+  }
 
   level.player _meth_8302("missionHighestDifficulty", var_2);
 
@@ -1233,8 +1312,9 @@ _id_725B(var_0) {
     level.player _meth_84C7("missionStateData", var_5, "complete");
     level.player _meth_84C7("opsmapMissionStateData", var_5, "complete");
 
-    if(var_4 % 3 == 0)
+    if(var_4 % 3 == 0) {
       wait 0.05;
+    }
   }
 
   level.player _meth_84C7("lastCompletedMission", "yard");

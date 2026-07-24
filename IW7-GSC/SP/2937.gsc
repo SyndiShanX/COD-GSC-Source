@@ -35,8 +35,9 @@ _id_57A1() {
   }
   setsaveddvar("ufoHitsTriggers", "1");
 
-  if(isDefined(level._id_4C63))
+  if(isDefined(level._id_4C63)) {
     level[[level._id_4C63]]();
+  }
 
   scripts\sp\loadout::_id_12867();
   _id_0A2F::_id_96FD();
@@ -71,23 +72,25 @@ _id_57A2() {
     if(var_1 != var_4.script_startname) {
       continue;
     }
-    if(isDefined(var_4._id_0287))
+    if(isDefined(var_4._id_0287)) {
       visionsetnaked(var_4._id_0287, 0);
+    }
 
     level.player scripts\sp\utility::_id_11633(var_4);
     var_2 = 1;
     break;
   }
 
-  if(!var_2)
+  if(!var_2) {
     level.player scripts\sp\utility::_id_11633(var_0[0]);
+  }
 }
 
 _id_10CBC() {
   scripts\engine\utility::array_call(getaiarray(), ::delete);
   scripts\engine\utility::array_call(getspawnerarray(), ::delete);
   var_0 = [];
-  var_0["trigger_multiple_createart_transient"] = scripts\sp\trigger::_id_1272E;
+  var_0["trigger_multiple_createart_transient"] = ::scripts\sp\trigger::_id_1272E;
 
   foreach(var_4, var_2 in var_0) {
     var_3 = getEntArray(var_4, "classname");
@@ -100,8 +103,9 @@ _id_10CAD() {}
 _id_7CA2() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < level._id_10C58.size; var_1++)
+  for(var_1 = 0; var_1 < level._id_10C58.size; var_1++) {
     var_0[var_0.size] = level._id_10C58[var_1]["name"];
+  }
 
   return var_0;
 }
@@ -143,8 +147,9 @@ _id_56CC() {
     }
   }
 
-  if(!var_10)
+  if(!var_10) {
     var_7 = var_0.size - 1;
+  }
 
   _id_10C9E(var_1, var_3, var_7);
   var_11 = var_7;
@@ -171,11 +176,13 @@ _id_56CC() {
     } else if(!level.player buttonPressed("DOWNARROW") && !level.player buttonPressed("DPAD_DOWN") && !level.player buttonPressed("APAD_DOWN"))
       var_9 = 0;
 
-    if(var_7 < 0)
+    if(var_7 < 0) {
       var_7 = var_0.size - 1;
+    }
 
-    if(var_7 >= var_0.size)
+    if(var_7 >= var_0.size) {
       var_7 = 0;
+    }
 
     if(level.player buttonPressed("BUTTON_B")) {
       _id_10C18(var_1, var_2);
@@ -211,10 +218,11 @@ _id_10C9E(var_0, var_1, var_2) {
   for(var_3 = 0; var_3 < var_0.size; var_3++) {
     var_4 = var_3 + (var_2 - 5);
 
-    if(isDefined(var_1[var_4]))
+    if(isDefined(var_1[var_4])) {
       var_5 = var_1[var_4];
-    else
+    } else {
       var_5 = "";
+    }
 
     var_0[var_3] settext(var_5);
   }
@@ -223,32 +231,35 @@ _id_10C9E(var_0, var_1, var_2) {
 _id_10C18(var_0, var_1) {
   var_1 destroy();
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++)
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_0[var_2] destroy();
+  }
 }
 
 _id_10C9F() {
   var_0 = [];
 
-  if(isloadingsavegame())
+  if(isloadingsavegame()) {
     var_0 = getsavegametransients();
-  else {
+  } else {
     if(level._id_10CDA != "default") {
       var_1 = level._id_10BA8[level._id_10CDA];
 
       if(isDefined(var_1["transient"])) {
         var_2 = var_1["transient"];
 
-        if(isstring(var_2))
+        if(isstring(var_2)) {
           var_0 = [var_2];
-        else if(isarray(var_2))
+        } else if(isarray(var_2)) {
           var_0 = var_2;
+        }
       }
     }
 
     foreach(var_4 in var_0) {
-      if(!isspleveltransient(var_4))
+      if(!isspleveltransient(var_4)) {
         scripts\engine\utility::error("add_start() list has a non SP level transient in it: " + var_4);
+      }
     }
 
     if(isDefined(level._id_D9E5["loaded_weapons"])) {
@@ -258,20 +269,23 @@ _id_10C9F() {
           continue;
         }
 
-        if(_id_0A2F::_id_9B44(var_7))
+        if(_id_0A2F::_id_9B44(var_7)) {
           var_0[var_0.size] = var_7 + "_tr";
+        }
       }
     }
 
-    if(isDefined(level._id_D9E5["default_weapon_transients"]))
+    if(isDefined(level._id_D9E5["default_weapon_transients"])) {
       var_0 = scripts\engine\utility::array_combine(var_0, level._id_D9E5["default_weapon_transients"]);
+    }
   }
 
   if(var_0.size > 0) {
     loadstartpointtransients(var_0);
 
-    foreach(var_10 in var_0)
-    scripts\engine\utility::flag_set(var_10 + "_loaded");
+    foreach(var_10 in var_0) {
+      scripts\engine\utility::flag_set(var_10 + "_loaded");
+    }
 
     level notify("new_transient_loaded");
   } else
@@ -285,17 +299,20 @@ _id_8960() {
   if(getDvar("scr_generateClipModels") != "" && getDvar("scr_generateClipModels") != "0") {
     return;
   }
-  if(!isDefined(level._id_10C58))
+  if(!isDefined(level._id_10C58)) {
     level._id_10C58 = [];
+  }
 
   var_0 = tolower(getDvar("start"));
   var_1 = _id_7CA2();
 
-  if(isDefined(level._id_10CDA))
+  if(isDefined(level._id_10CDA)) {
     var_0 = level._id_10CDA;
+  }
 
-  if(getdvarint("feedback"))
+  if(getdvarint("feedback")) {
     var_0 = level._id_6BC2;
+  }
 
   var_2 = 0;
 
@@ -338,12 +355,13 @@ _id_8960() {
   }
 
   if(!isDefined(level._id_10CDA)) {
-    if(isDefined(level._id_5018))
+    if(isDefined(level._id_5018)) {
       level._id_10CDA = "default";
-    else if(_id_ABDA())
+    } else if(_id_ABDA()) {
       level._id_10CDA = level._id_10C58[0]["name"];
-    else
+    } else {
       level._id_10CDA = "default";
+    }
   }
 
   scripts\sp\loadout::_id_12867();
@@ -363,8 +381,9 @@ _id_8960() {
     setomnvar("ui_active_hud", "infantry");
 
   if(level._id_10CDA == "default") {
-    if(isDefined(level._id_5018))
+    if(isDefined(level._id_5018)) {
       level thread[[level._id_5018]]();
+    }
   } else {
     var_10 = level._id_10BA8[level._id_10CDA];
     thread[[var_10["start_func"]]]();
@@ -377,8 +396,9 @@ _id_8960() {
 
   waittillframeend;
 
-  if(isloadingsavegame())
+  if(isloadingsavegame()) {
     wait 0.1;
+  }
 
   var_12 = [];
 
@@ -408,21 +428,24 @@ _id_8960() {
     if(_id_1D3E(var_10["logic_func"], var_12)) {
       continue;
     }
-    if(getdvarint("feedback"))
+    if(getdvarint("feedback")) {
       _id_6BBF(var_10, var_3);
+    }
 
     level._id_10D36[[var_10["logic_func"]]]();
     var_12[var_12.size] = var_10["logic_func"];
 
-    if(getdvarint("feedback"))
+    if(getdvarint("feedback")) {
       _id_6BC1();
+    }
   }
 }
 
 _id_1D3E(var_0, var_1) {
   foreach(var_3 in var_1) {
-    if(var_3 == var_0)
+    if(var_3 == var_0) {
       return 1;
+    }
   }
 
   return 0;
@@ -434,8 +457,9 @@ _id_7CB8(var_0) {
   if(var_0.size) {
     var_1 = " ** ";
 
-    for(var_2 = var_0.size - 1; var_2 >= 0; var_2--)
+    for(var_2 = var_0.size - 1; var_2 >= 0; var_2--) {
       var_1 = var_1 + var_0[var_2] + " ";
+    }
   }
 
   setDvar("start", var_1);
@@ -449,14 +473,16 @@ _id_4959(var_0, var_1) {
   if(var_1 != -1) {
     var_4 = 5;
 
-    if(var_1 != var_4)
+    if(var_1 != var_4) {
       var_2 = 1 - abs(var_4 - var_1) / var_4;
-    else
+    } else {
       var_3 = (1, 1, 0);
+    }
   }
 
-  if(var_2 == 0)
+  if(var_2 == 0) {
     var_2 = 0.05;
+  }
 
   var_5 = newhudelem();
   var_5.alignx = "left";
@@ -497,8 +523,9 @@ _id_7292() {
 }
 
 _id_9BE4() {
-  if(!_id_ABDA())
+  if(!_id_ABDA()) {
     return 1;
+  }
 
   return level._id_10CDA == level._id_10C58[0]["name"];
 }
@@ -506,8 +533,9 @@ _id_9BE4() {
 _id_9B52(var_0) {
   var_1 = 0;
 
-  if(level._id_10CDA == var_0)
+  if(level._id_10CDA == var_0) {
     return 0;
+  }
 
   for(var_2 = 0; var_2 < level._id_10C58.size; var_2++) {
     if(level._id_10C58[var_2]["name"] == var_0) {
@@ -515,8 +543,9 @@ _id_9B52(var_0) {
       continue;
     }
 
-    if(level._id_10C58[var_2]["name"] == level._id_10CDA)
+    if(level._id_10C58[var_2]["name"] == level._id_10CDA) {
       return var_1;
+    }
   }
 }
 
@@ -528,14 +557,16 @@ _id_48E4(var_0) {
   setdvarifuninitialized("feedback_index", 0);
   setdvarifuninitialized("setting_feedback_start", 0);
 
-  if(!getdvarint("setting_feedback_start"))
+  if(!getdvarint("setting_feedback_start")) {
     setDvar("feedback_index", 0);
+  }
 
   setDvar("setting_feedback_start", 0);
   var_1 = [];
 
-  foreach(var_4, var_3 in var_0)
-  var_1[var_4] = tolower(var_3);
+  foreach(var_4, var_3 in var_0) {
+    var_1[var_4] = tolower(var_3);
+  }
 
   thread _id_3D73(var_1);
   level._id_6BC3 = var_1;
@@ -548,8 +579,9 @@ _id_48E1(var_0, var_1) {
   }
   var_0 = tolower(var_0);
 
-  if(!isDefined(level._id_6BC0))
+  if(!isDefined(level._id_6BC0)) {
     level._id_6BC0 = [];
+  }
 
   level._id_6BC0[var_0] = "^3" + var_1;
 }
@@ -576,10 +608,11 @@ _id_56B5(var_0) {
 _id_48E3(var_0, var_1, var_2) {
   level waittill("load_finished");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     [[var_1]](var_2);
-  else
+  } else {
     [[var_1]]();
+  }
 
   scripts\engine\utility::flag_set(var_0 + "_endFunc");
 }
@@ -639,8 +672,9 @@ _id_3D73(var_0) {
   level waittill("load_finished");
   var_1 = [];
 
-  foreach(var_3 in level._id_10BA8)
-  var_1[var_1.size] = var_3["name"];
+  foreach(var_3 in level._id_10BA8) {
+    var_1[var_1.size] = var_3["name"];
+  }
 
   foreach(var_6 in var_0) {}
 }
@@ -658,8 +692,9 @@ _id_174B(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 _id_174A() {
-  if(!isDefined(level._id_10C58))
+  if(!isDefined(level._id_10C58)) {
     level._id_10C58 = [];
+  }
 }
 
 _id_ABDA() {
@@ -667,8 +702,9 @@ _id_ABDA() {
 }
 
 _id_9C4B() {
-  if(isDefined(level._id_10CDA))
+  if(isDefined(level._id_10CDA)) {
     return issubstr(level._id_10CDA, "no_game");
-  else
+  } else {
     return getDvar("start") == "no_game";
+  }
 }

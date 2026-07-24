@@ -56,8 +56,9 @@ return_closest_memory_item(var_0) {
 }
 
 ent_near_item(var_0, var_1) {
-  if(level.memory_quest_items.size < 1)
+  if(level.memory_quest_items.size < 1) {
     return 0;
+  }
 
   var_2 = 0;
 
@@ -67,25 +68,28 @@ ent_near_item(var_0, var_1) {
     if(!isDefined(var_4) || scripts\engine\utility::is_true(var_4.fully_charged)) {
       continue;
     }
-    if(distancesquared(var_4.origin, var_0.origin) < var_5)
+    if(distancesquared(var_4.origin, var_0.origin) < var_5) {
       var_2 = 1;
+    }
 
     if(var_2) {
       break;
     }
   }
 
-  if(var_2)
+  if(var_2) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 memories_end_hint_func(var_0, var_1) {
-  if(scripts\engine\utility::is_true(var_0.quest_complete))
+  if(scripts\engine\utility::is_true(var_0.quest_complete)) {
     return &"CP_RAVE_INSPECT_ITEM";
-  else
+  } else {
     return "";
+  }
 }
 
 memories_end_use_func(var_0, var_1) {
@@ -146,15 +150,17 @@ memories_end_use_func(var_0, var_1) {
     } else
       scripts\cp\maps\cp_rave\cp_rave::add_to_current_rave_interaction_list(var_0);
 
-    foreach(var_4 in level.players)
-    var_4 thread scripts\cp\maps\cp_rave\cp_rave_interactions::update_rave_mode_for_player(var_4);
+    foreach(var_4 in level.players) {
+      var_4 thread scripts\cp\maps\cp_rave\cp_rave_interactions::update_rave_mode_for_player(var_4);
+    }
 
     thread run_memory_release_quest(var_0);
   } else if(scripts\engine\utility::is_true(var_0.quest_complete)) {
     var_1 playlocalsound("part_pickup");
 
-    if(isDefined(var_0.currentlyownedby[var_1.name]))
+    if(isDefined(var_0.currentlyownedby[var_1.name])) {
       var_0.currentlyownedby[var_1.name] setscriptablepartstate("quest_effects", "memory_release");
+    }
 
     play_memory_vo(var_0);
     playFX(scripts\engine\utility::getfx("mem_release_lrg"), var_0.origin);
@@ -163,8 +169,9 @@ memories_end_use_func(var_0, var_1) {
       var_6 = level.rave_charm_attachment[var_0.name];
 
       if(scripts\cp\maps\cp_rave\cp_rave::rave_add_attachment_to_weapon(var_6, var_1)) {
-        foreach(var_4 in level.players)
-        var_4 thread scripts\cp\maps\cp_rave\cp_rave_interactions::update_rave_mode_for_player(var_4);
+        foreach(var_4 in level.players) {
+          var_4 thread scripts\cp\maps\cp_rave\cp_rave_interactions::update_rave_mode_for_player(var_4);
+        }
 
         thread watch_for_charm_removed(var_0, var_1, level.rave_charm_attachment[var_0.name]);
       }
@@ -186,12 +193,14 @@ wait_for_charm_disowned(var_0, var_1, var_2) {
   var_0.player_has_charm = 0;
 
   if(isDefined(var_2)) {
-    if(isDefined(level.rave_charm_attachment_perks[var_1]))
+    if(isDefined(level.rave_charm_attachment_perks[var_1])) {
       var_2 scripts\cp\maps\cp_rave\cp_rave::takeraveperk(level.rave_charm_attachment_perks[var_1], var_1);
+    }
   }
 
-  foreach(var_4 in level.players)
-  var_4 thread scripts\cp\maps\cp_rave\cp_rave_interactions::update_rave_mode_for_player(var_4);
+  foreach(var_4 in level.players) {
+    var_4 thread scripts\cp\maps\cp_rave\cp_rave_interactions::update_rave_mode_for_player(var_4);
+  }
 }
 
 watchforcharmweaponremoved(var_0, var_1, var_2) {
@@ -242,8 +251,9 @@ watchforplayerdeath(var_0, var_1, var_2) {
     var_4 = undefined;
     var_1 waittill("last_stand");
 
-    if(isDefined(level.rave_charm_attachment_perks[var_2]))
+    if(isDefined(level.rave_charm_attachment_perks[var_2])) {
       var_1 scripts\cp\maps\cp_rave\cp_rave::takeraveperk(level.rave_charm_attachment_perks[var_2], var_2);
+    }
 
     var_3 = 0;
     var_5 = var_1 scripts\engine\utility::waittill_any_return_no_endon_death("player_entered_ala", "revive", "death");
@@ -251,8 +261,9 @@ watchforplayerdeath(var_0, var_1, var_2) {
     if(var_5 != "revive") {
       var_4 = var_1 scripts\engine\utility::waittill_any_return("lost_and_found_collected", "lost_and_found_time_out");
 
-      if(isDefined(var_4) && var_4 == "lost_and_found_time_out")
+      if(isDefined(var_4) && var_4 == "lost_and_found_time_out") {
         continue;
+      }
     }
 
     var_6 = var_1 getweaponslistall();
@@ -262,8 +273,9 @@ watchforplayerdeath(var_0, var_1, var_2) {
         var_1 thread watchforcharmweaponremoved(var_0, var_1, var_2);
         var_3 = 1;
 
-        if(isDefined(level.rave_charm_attachment_perks[var_2]))
+        if(isDefined(level.rave_charm_attachment_perks[var_2])) {
           var_1 scripts\cp\maps\cp_rave\cp_rave::giveraveperk(level.rave_charm_attachment_perks[var_2], var_2);
+        }
 
         break;
       }
@@ -277,19 +289,23 @@ ring_quest_use_func(var_0, var_1) {
   var_0.model rotateby((0, -90, 0), 0.5);
   var_0.times_rotated++;
 
-  if(var_0.times_rotated == var_0.parent_struct.rotationgoal)
+  if(var_0.times_rotated == var_0.parent_struct.rotationgoal) {
     var_0.parent_struct.correct_positions[var_0.parent_struct.correct_positions.size] = var_0;
-  else if(scripts\engine\utility::array_contains(var_0.parent_struct.correct_positions, var_0))
+  } else if(scripts\engine\utility::array_contains(var_0.parent_struct.correct_positions, var_0)) {
     var_0.parent_struct.correct_positions = scripts\engine\utility::array_remove(var_0.parent_struct.correct_positions, var_0);
+  }
 
-  if(var_0.parent_struct.correct_positions.size == 2)
+  if(var_0.parent_struct.correct_positions.size == 2) {
     level notify("all_ring_pos_correct");
+  }
 
-  if(var_0.parent_struct.correct_positions.size < 0)
+  if(var_0.parent_struct.correct_positions.size < 0) {
     var_0.parent_struct.correct_positions = [];
+  }
 
-  if(var_0.times_rotated > var_0.parent_struct.rotationgoal)
+  if(var_0.times_rotated > var_0.parent_struct.rotationgoal) {
     var_0.times_rotated = 0;
+  }
 
   wait 0.5;
 }
@@ -314,8 +330,9 @@ run_memory_release_quest(var_0) {
 
   var_0.quest_complete = 1;
 
-  foreach(var_3 in level.players)
-  var_3 thread scripts\cp\maps\cp_rave\cp_rave_interactions::update_rave_mode_for_player(var_3);
+  foreach(var_3 in level.players) {
+    var_3 thread scripts\cp\maps\cp_rave\cp_rave_interactions::update_rave_mode_for_player(var_3);
+  }
 
   scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
 }
@@ -361,12 +378,14 @@ play_memory_to_nearby_players(var_0, var_1) {
   var_2 = [];
   var_3 = 512;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 = var_1;
+  }
 
   foreach(var_5 in level.players) {
-    if(distance2d(self.origin, var_5.origin) <= var_3)
+    if(distance2d(self.origin, var_5.origin) <= var_3) {
       var_2[var_2.size] = var_5;
+    }
   }
 
   var_7 = level.memory_quest_vo_progression[var_0];
@@ -378,13 +397,15 @@ play_memory_to_nearby_players(var_0, var_1) {
       var_5 thread scripts\cp\cp_vo::try_to_play_vo(var_8, "rave_memory_vo");
       level.memory_quest_vo_progression[var_0]++;
 
-      if(!soundexists(var_0 + "_" + level.memory_quest_vo_progression[var_0]))
+      if(!soundexists(var_0 + "_" + level.memory_quest_vo_progression[var_0])) {
         level.memory_quest_vo_progression[var_0] = 1;
+      }
 
       wait(scripts\cp\cp_vo::get_sound_length(var_8));
 
-      if(var_7 == 3)
+      if(var_7 == 3) {
         var_5 thread play_memory_reaction_vo(var_8);
+      }
 
       continue;
     }
@@ -393,8 +414,9 @@ play_memory_to_nearby_players(var_0, var_1) {
       var_5 thread scripts\cp\cp_vo::try_to_play_vo(var_0, "rave_memory_vo");
       wait(scripts\cp\cp_vo::get_sound_length(var_0));
 
-      if(var_7 == 3)
+      if(var_7 == 3) {
         var_5 thread play_memory_reaction_vo(var_0);
+      }
     }
   }
 }
@@ -442,17 +464,19 @@ play_memory_reaction_vo(var_0) {
 remove_interaction_for_vo_length(var_0, var_1, var_2) {
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
 
-  if(soundexists(var_2))
+  if(soundexists(var_2)) {
     wait(lookupsoundlength(var_2) / 1000);
-  else if(soundexists(var_1))
+  } else if(soundexists(var_1)) {
     wait(lookupsoundlength(var_1) / 1000);
+  }
 
   scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
 }
 
 getquestfromid(var_0) {
-  if(!isDefined(var_0.name))
+  if(!isDefined(var_0.name)) {
     return scripts\cp\maps\cp_rave\cp_rave_interactions::collect_zombie_souls;
+  }
 
   switch (var_0.name) {
     case "pacifier":
@@ -514,8 +538,9 @@ run_toad_quest(var_0) {
   level waittill("toad_quest_complete");
 
   foreach(var_15 in level.toad_ent_array) {
-    if(isDefined(var_15))
+    if(isDefined(var_15)) {
       var_15 delete();
+    }
   }
 
   level.toad_ent_array = undefined;
@@ -531,22 +556,25 @@ watch_for_ground_pound_on_toad() {
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-    if(var_9 != "zom_groundpound_rave_mp")
+    if(var_9 != "zom_groundpound_rave_mp") {
       self.health = 5;
+    }
 
     if(isPlayer(var_1)) {
       if(var_9 == "zom_groundpound_rave_mp") {
         playFX(scripts\engine\utility::getfx("zombie_freeze_shatter"), var_3);
         level.toads_killed++;
 
-        if(scripts\engine\utility::array_contains(level.toad_ent_array, self))
+        if(scripts\engine\utility::array_contains(level.toad_ent_array, self)) {
           scripts\engine\utility::array_remove(level.toad_ent_array, self);
+        }
 
         self setscriptablepartstate("quest_effects", "neutral");
       }
 
-      if(self.health <= 0)
+      if(self.health <= 0) {
         self delete();
+      }
     }
 
     if(level.toads_killed >= 6) {
@@ -658,8 +686,9 @@ wait_for_area_cleared(var_0) {
     level waittill("zombie_killed", var_7, var_8, var_9, var_10);
 
     if(isDefined(var_10) && isPlayer(var_10)) {
-      if(is_in_box(var_1, var_2, var_3, var_4, var_7))
+      if(is_in_box(var_1, var_2, var_3, var_4, var_7)) {
         var_5++;
+      }
 
       if(var_5 >= var_6) {
         break;
@@ -668,8 +697,9 @@ wait_for_area_cleared(var_0) {
   }
 
   foreach(var_12 in var_0) {
-    if(isDefined(var_12))
+    if(isDefined(var_12)) {
       var_12 delete();
+    }
   }
 
   return 1;
@@ -691,8 +721,9 @@ check_for_players_in_area(var_0, var_1, var_2, var_3, var_4) {
 
     if(!var_5) {
       foreach(var_10 in var_4) {
-        if(isDefined(var_10))
+        if(isDefined(var_10)) {
           var_10 delete();
+        }
       }
 
       level notify("end_pacifier_quest_early");
@@ -710,17 +741,20 @@ make_sure_area_is_clear() {
   var_4 = [(200, 0, 0), (-200, 0, 0), (0, -200, 0), (0, 200, 0), (0, 200, 0), (0, -200, 0)];
 
   foreach(var_6 in level.players) {
-    for(var_7 = 0; var_7 < var_0.size; var_7++)
+    for(var_7 = 0; var_7 < var_0.size; var_7++) {
       var_6 bump_check(var_0[var_7], var_1[var_7], var_2[var_7], var_3[var_7], var_4[var_7], var_7);
+    }
   }
 }
 
 bump_check(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(level.standing_list))
+  if(!isDefined(level.standing_list)) {
     level.standing_list = [];
+  }
 
-  if(!isDefined(level.standing_list[var_5]))
+  if(!isDefined(level.standing_list[var_5])) {
     level.standing_list[var_5] = [];
+  }
 
   var_6 = 0;
 
@@ -730,10 +764,11 @@ bump_check(var_0, var_1, var_2, var_3, var_4, var_5) {
       var_6 = 1;
     }
 
-    if(!var_6)
+    if(!var_6) {
       level.standing_list[var_5][self.name] = 1;
-    else
+    } else {
       level.standing_list[var_5][self.name] = undefined;
+    }
   } else
     level.standing_list[var_5][self.name] = undefined;
 }
@@ -742,10 +777,11 @@ is_in_box(var_0, var_1, var_2, var_3, var_4) {
   var_5 = [var_0, var_1, var_2, var_3];
 
   if(!isDefined(var_4)) {
-    if(isPlayer(self) || isagent(self))
+    if(isPlayer(self) || isagent(self)) {
       var_4 = self.origin;
-    else
+    } else {
       return 0;
+    }
   }
 
   for(var_6 = 0; var_6 < 2; var_6++) {
@@ -761,8 +797,9 @@ is_in_box(var_0, var_1, var_2, var_3, var_4) {
         } else {
           var_9++;
 
-          if(var_9 > 2)
+          if(var_9 > 2) {
             return 0;
+          }
         }
       }
     }
@@ -776,8 +813,9 @@ run_pool_ball_quest(var_0) {
   var_1 = scripts\engine\utility::getStructArray("pool_balls", "targetname");
   var_0.total_pool_balls = 0;
 
-  foreach(var_3 in var_1)
-  thread watch_for_player_damage(var_3, var_0, var_1.size);
+  foreach(var_3 in var_1) {
+    thread watch_for_player_damage(var_3, var_0, var_1.size);
+  }
 
   wait_for_all_pool_balls_destroyed(var_0);
   return 1;
@@ -803,40 +841,46 @@ watch_for_player_damage(var_0, var_1, var_2) {
     break;
   }
 
-  if(var_1.total_pool_balls >= var_2)
+  if(var_1.total_pool_balls >= var_2) {
     var_1 notify("all_pool_balls_destroyed");
+  }
 }
 
 run_ring_quest(var_0) {
   level endon("game_ended");
 
-  if(isDefined(var_0.target))
+  if(isDefined(var_0.target)) {
     var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
-  else
+  } else {
     var_1 = scripts\engine\utility::getStructArray("lanterns", "targetname");
+  }
 
   foreach(var_3 in var_1) {
     var_3.script_noteworthy = "ring_quest_lights";
     scripts\cp\cp_interaction::add_to_current_interaction_list(var_3);
   }
 
-  foreach(var_6 in var_1)
-  var_6.model setscriptablepartstate("model", "lantern_on");
+  foreach(var_6 in var_1) {
+    var_6.model setscriptablepartstate("model", "lantern_on");
+  }
 
   level waittill("all_ring_pos_correct");
 
-  foreach(var_6 in var_1)
-  var_6 thread adjust_light_angles(var_6);
+  foreach(var_6 in var_1) {
+    var_6 thread adjust_light_angles(var_6);
+  }
 
   wait 1;
 
   foreach(var_11 in level.players) {
-    if(isDefined(var_0.currentlyownedby) && isDefined(var_0.currentlyownedby[var_11.name]))
+    if(isDefined(var_0.currentlyownedby) && isDefined(var_0.currentlyownedby[var_11.name])) {
       var_0.currentlyownedby[var_11.name] setscriptablepartstate("idle_effects", "sparkle");
+    }
   }
 
-  foreach(var_14 in level.players)
-  var_14 scripts\cp\cp_interaction::refresh_interaction();
+  foreach(var_14 in level.players) {
+    var_14 scripts\cp\cp_interaction::refresh_interaction();
+  }
 
   return 1;
 }
@@ -854,10 +898,11 @@ set_up_ring_quest_interactions() {
   var_2 = undefined;
 
   foreach(var_2 in var_0) {
-    if(!isDefined(var_2.name) || var_2.name != "ring")
+    if(!isDefined(var_2.name) || var_2.name != "ring") {
       continue;
-    else
+    } else {
       break;
+    }
   }
 
   var_1 = randomintrange(1, 4);
@@ -911,8 +956,9 @@ start_fish_path(var_0) {
     var_2 waittill("movedone");
     var_3++;
 
-    if(var_3 >= var_1.size)
+    if(var_3 >= var_1.size) {
       var_3 = 0;
+    }
   }
 }
 
@@ -942,9 +988,9 @@ run_arrowhead_quest(var_0) {
     foreach(var_5 in var_3) {
       var_5 make_active_target(var_2, var_3);
 
-      if(var_5 == var_3[0])
+      if(var_5 == var_3[0]) {
         var_2 waittill_archery_target_damaged(0, var_0);
-      else {
+      } else {
         var_1 = var_2 waittill_archery_target_damaged(1, var_0);
 
         if(!var_1) {
@@ -976,8 +1022,9 @@ play_archery_fail_buzzer(var_0) {
   var_1 = 418;
 
   foreach(var_3 in level.players) {
-    if(isDefined(var_3.rave_mode) && var_3.rave_mode && distance2d(var_0.origin, var_3.origin) <= var_1)
+    if(isDefined(var_3.rave_mode) && var_3.rave_mode && distance2d(var_0.origin, var_3.origin) <= var_1) {
       var_3 playlocalsound("archery_fail_buzzer");
+    }
   }
 }
 
@@ -985,12 +1032,13 @@ waittill_archery_target_damaged(var_0, var_1) {
   if(var_0) {
     var_2 = 2;
 
-    if(level.players.size == 4)
+    if(level.players.size == 4) {
       var_2 = 0.75;
-    else if(level.players.size == 3)
+    } else if(level.players.size == 3) {
       var_2 = 1;
-    else if(level.players.size == 2)
+    } else if(level.players.size == 2) {
       var_2 = 1.5;
+    }
 
     var_3 = scripts\engine\utility::waittill_any_timeout(var_2, "damage");
     self setCanDamage(0);
@@ -999,8 +1047,9 @@ waittill_archery_target_damaged(var_0, var_1) {
       var_4 = 418;
 
       foreach(var_6 in level.players) {
-        if(isDefined(var_6.rave_mode) && var_6.rave_mode && distance2d(var_1.origin, var_6.origin) <= var_4)
+        if(isDefined(var_6.rave_mode) && var_6.rave_mode && distance2d(var_1.origin, var_6.origin) <= var_4) {
           self playsoundtoplayer("memory_quest_target_hit", var_6);
+        }
       }
 
       return 1;
@@ -1017,8 +1066,9 @@ waittill_archery_target_damaged(var_0, var_1) {
         var_4 = 418;
 
         foreach(var_6 in level.players) {
-          if(isDefined(var_6.rave_mode) && var_6.rave_mode && distance2d(var_1.origin, var_6.origin) <= var_4)
+          if(isDefined(var_6.rave_mode) && var_6.rave_mode && distance2d(var_1.origin, var_6.origin) <= var_4) {
             self playsoundtoplayer("memory_quest_target_hit", var_6);
+          }
         }
 
         return 1;
@@ -1064,8 +1114,9 @@ make_active_target(var_0, var_1) {
   var_0 setCanDamage(1);
 
   foreach(var_4 in level.players) {
-    if(isDefined(var_4.rave_mode) && var_4.rave_mode)
+    if(isDefined(var_4.rave_mode) && var_4.rave_mode) {
       var_2 showtoplayer(var_4);
+    }
   }
 }
 
@@ -1094,8 +1145,9 @@ run_shovel_quest(var_0) {
     var_5 = level.desired_enemy_deaths_this_wave;
     var_6 = level.wave_num;
 
-    while(level.current_enemy_deaths == level.desired_enemy_deaths_this_wave)
+    while(level.current_enemy_deaths == level.desired_enemy_deaths_this_wave) {
       wait 0.05;
+    }
 
     level.current_enemy_deaths = 0;
     level.desired_enemy_deaths_this_wave = 24;
@@ -1115,8 +1167,9 @@ run_shovel_quest(var_0) {
   wait 2;
   var_10 = skeleton_spawner(var_9);
 
-  while(level.skeletons_alive > 0)
+  while(level.skeletons_alive > 0) {
     wait 0.1;
+  }
 
   if(var_2) {
     level.spawndelayoverride = undefined;
@@ -1145,8 +1198,9 @@ determine_best_shovel_spawns(var_0, var_1) {
   var_3 = scripts\engine\utility::getStructArray("camper_to_lake_spawner", "targetname");
   var_3 = sortbydistance(var_3, var_0);
 
-  for(var_4 = 0; var_4 < var_1; var_4++)
+  for(var_4 = 0; var_4 < var_1; var_4++) {
     var_2[var_4] = var_3[var_4];
+  }
 
   var_5 = scripts\engine\utility::array_randomize(var_2);
   return var_2;
@@ -1192,8 +1246,9 @@ spawn_skeleton_solo(var_0) {
     var_5 = var_1 scripts\cp\zombies\zombies_spawning::spawn_wave_enemy("skeleton", 1);
     wait(var_3);
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       return var_5;
+    }
   }
 
   return undefined;
@@ -1283,15 +1338,17 @@ run_binocular_quest(var_0) {
   level thread check_for_beach_structs_shot(var_0, var_10, var_1);
   level thread check_for_totem_poles_shot(var_0, var_11, var_1);
 
-  foreach(var_14 in level.players)
-  var_14 thread run_sniper_watcher(var_14, var_0, var_1, var_12);
+  foreach(var_14 in level.players) {
+    var_14 thread run_sniper_watcher(var_14, var_0, var_1, var_12);
+  }
 
   level scripts\engine\utility::waittill_multiple("totem_part_complete", "sniper_quest_kills_done");
   scripts\engine\utility::waitframe();
   thread play_vfx_between_points_mem_quest_binoculars(var_0.origin, (-1806.99, 1061.74, 913));
 
-  foreach(var_14 in level.players)
-  var_14 scripts\cp\cp_interaction::refresh_interaction();
+  foreach(var_14 in level.players) {
+    var_14 scripts\cp\cp_interaction::refresh_interaction();
+  }
 
   level.sniper_quest_on = undefined;
   level.sniper_kills_for_quest = undefined;
@@ -1302,8 +1359,9 @@ run_binocular_quest(var_0) {
 check_for_beach_structs_shot(var_0, var_1, var_2) {
   var_3 = [];
 
-  if(!isDefined(level.totems_killed))
+  if(!isDefined(level.totems_killed)) {
     level.totems_killed = 0;
+  }
 
   foreach(var_6, var_5 in var_1) {
     var_5 = spawn("script_model", var_5.origin);
@@ -1343,13 +1401,15 @@ watch_for_totem_death(var_0) {
       playFX(level._effect["zombie_freeze_shatter"], var_4);
       var_2 playlocalsound("part_pickup");
 
-      if(self.health < 0)
+      if(self.health < 0) {
         self delete();
+      }
     }
   }
 
-  if(level.totems_killed >= 8)
+  if(level.totems_killed >= 8) {
     level notify("totem_part_complete");
+  }
 }
 
 run_sniper_watcher(var_0, var_1, var_2, var_3) {
@@ -1368,8 +1428,9 @@ run_sniper_watcher(var_0, var_1, var_2, var_3) {
       if(var_4 == "binoculars_ads_in") {
         level.sniper_quest_on = 1;
 
-        if(!isDefined(level.sniper_kills_for_quest))
+        if(!isDefined(level.sniper_kills_for_quest)) {
           level.sniper_kills_for_quest = 0;
+        }
       } else
         level.sniper_quest_on = 0;
     }
@@ -1395,10 +1456,11 @@ sniper_kills_watcher(var_0, var_1, var_2, var_3) {
 
       if(ispointinvolume(var_4.origin, var_2)) {
         if(var_4 == var_1) {
-          if(!isDefined(level.sniper_kills_for_quest))
+          if(!isDefined(level.sniper_kills_for_quest)) {
             level.sniper_kills_for_quest = 1;
-          else
+          } else {
             level.sniper_kills_for_quest++;
+          }
 
           var_4 playlocalsound("part_pickup");
         }
@@ -1406,8 +1468,9 @@ sniper_kills_watcher(var_0, var_1, var_2, var_3) {
     }
 
     if(level.sniper_kills_for_quest >= var_3) {
-      foreach(var_1 in level.players)
-      var_1 playlocalsound("part_pickup");
+      foreach(var_1 in level.players) {
+        var_1 playlocalsound("part_pickup");
+      }
 
       level notify("sniper_quest_kills_done");
     }
@@ -1480,8 +1543,9 @@ run_boots_quest(var_0) {
   var_8 delete();
   var_1 = scripts\engine\utility::getStruct("boot_spooky_guy_2", "targetname");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 1;
+  }
 
   var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
   var_3 = undefined;
@@ -1591,8 +1655,9 @@ bootprint_logic(var_0) {
   var_1 = 0;
   var_2 = "left_footprint";
 
-  if(var_0)
+  if(var_0) {
     var_2 = "right_footprint";
+  }
 
   var_3 = getgroundposition(self.origin, 15, 30, 30);
   self.bootprint = spawnfx(level._effect[var_2], var_3, anglesToForward(self.angles), anglestoup(self.angles));
@@ -1616,10 +1681,11 @@ bootprint_logic(var_0) {
 
   self.bootprint delete();
 
-  if(var_0)
+  if(var_0) {
     return 0;
-  else
+  } else {
     return 1;
+  }
 }
 
 memory_start_hint_func(var_0, var_1) {
@@ -1688,8 +1754,9 @@ watchforstartcharmweaponremoved(var_0, var_1) {
 
     var_1 waittill("charm_switched");
 
-    if(!isDefined(var_1.has_memory_quest_item) || var_1.has_memory_quest_item != var_0.has_memory_quest_item)
+    if(!isDefined(var_1.has_memory_quest_item) || var_1.has_memory_quest_item != var_0.has_memory_quest_item) {
       var_2 = 0;
+    }
   }
 
   var_0 notify("charm_disowned");
@@ -1774,8 +1841,9 @@ mus_slasher_stinger(var_0, var_1, var_2) {
 
   foreach(var_4 in level.players) {
     if(distance2dsquared(var_4.origin, var_0.origin) <= 26896) {
-      if(scripts\engine\utility::within_fov(var_4.origin, var_4 getplayerangles(), var_1.origin, 0.83))
+      if(scripts\engine\utility::within_fov(var_4.origin, var_4 getplayerangles(), var_1.origin, 0.83)) {
         level.player playlocalsound("mus_zmb_rave_slasher_stinger");
+      }
     }
   }
 }

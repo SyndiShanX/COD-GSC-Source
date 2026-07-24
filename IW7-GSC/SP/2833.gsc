@@ -47,21 +47,25 @@ _id_CCBE() {
         var_7 = vectordot(anglesToForward(var_4.angles), level.player.origin - var_4.origin);
         var_8 = undefined;
 
-        if(var_7 > 0 && level._id_37CF._id_3C0A == var_6._id_3C0A)
+        if(var_7 > 0 && level._id_37CF._id_3C0A == var_6._id_3C0A) {
           var_8 = var_5;
+        }
 
-        if(var_7 < 0 && level._id_37CF._id_3C0A == var_5._id_3C0A)
+        if(var_7 < 0 && level._id_37CF._id_3C0A == var_5._id_3C0A) {
           var_8 = var_6;
+        }
 
-        if(isDefined(var_8))
+        if(isDefined(var_8)) {
           _id_12660(var_8, var_0);
+        }
       }
     }
 
     var_9 = [];
 
-    foreach(var_11 in scripts\engine\utility::getStructArray(level._id_37CF.targetname, "target"))
-    var_9[var_9.size] = _id_7A8D(var_11, level._id_37CF);
+    foreach(var_11 in scripts\engine\utility::getStructArray(level._id_37CF.targetname, "target")) {
+      var_9[var_9.size] = _id_7A8D(var_11, level._id_37CF);
+    }
 
     if(isDefined(level._id_37CF.target)) {
       var_13 = scripts\engine\utility::getStructArray(level._id_37CF.target, "targetname");
@@ -72,8 +76,9 @@ _id_CCBE() {
         if(isDefined(var_15.target)) {
           var_16 = scripts\engine\utility::getStructArray(var_15.target, "targetname");
 
-          foreach(var_18 in var_16)
-          var_9[var_9.size] = _id_7A8D(var_15, var_18);
+          foreach(var_18 in var_16) {
+            var_9[var_9.size] = _id_7A8D(var_15, var_18);
+          }
         }
       }
     }

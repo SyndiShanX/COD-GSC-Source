@@ -20,17 +20,19 @@ _id_7AA3() {
 _id_7AA2(var_0) {
   var_1 = undefined;
 
-  if(isDefined(self._blackboard.shootparams))
+  if(isDefined(self._blackboard.shootparams)) {
     var_1 = self._blackboard.shootparams;
-  else if(isDefined(self.asm.shootparams))
+  } else if(isDefined(self.asm.shootparams)) {
     var_1 = self.asm.shootparams;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return undefined;
-  else if(isDefined(var_1.ent))
+  } else if(isDefined(var_1.ent)) {
     return var_1.ent getshootatpos();
-  else if(isDefined(var_1.pos))
+  } else if(isDefined(var_1.pos)) {
     return var_1.pos;
+  }
 
   return undefined;
 }
@@ -65,8 +67,9 @@ _id_4756(var_0, var_1, var_2) {
   self _meth_82D0();
   var_4 = self _meth_8164();
 
-  if(isDefined(var_4) && var_4 == self.asm.turret)
+  if(isDefined(var_4) && var_4 == self.asm.turret) {
     self _meth_83AF();
+  }
 
   self.asm.turret.origin = self.asm._id_12A7E;
   self.asm.turret.angles = self.asm._id_12A57;
@@ -89,8 +92,9 @@ _id_CEB3(var_0, var_1, var_2, var_3) {
 }
 
 _id_AB31(var_0, var_1) {
-  if(self _meth_81B7())
+  if(self _meth_81B7()) {
     return "none";
+  }
 
   self.a.weaponposdropping[var_1] = var_0;
   var_2 = getweaponmodel(var_0);
@@ -107,13 +111,15 @@ _id_AB30(var_0) {
   scripts\anim\shared::_id_5390();
   var_1 = self.weaponinfo[var_0].position;
 
-  if(var_1 != "none")
+  if(var_1 != "none") {
     thread _id_AB31(var_0, var_1);
+  }
 
   scripts\anim\shared::_id_5398(var_0);
 
-  if(var_0 == self.weapon)
+  if(var_0 == self.weapon) {
     self.weapon = "none";
+  }
 
   self._blackboard._id_5D3B = 1;
   scripts\anim\shared::_id_12E61();
@@ -128,8 +134,9 @@ _id_8BCD(var_0, var_1, var_2, var_3) {
 }
 
 _id_3E9E(var_0, var_1, var_2) {
-  if(isDefined(self._blackboard._id_5D3B))
+  if(isDefined(self._blackboard._id_5D3B)) {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "remount");
+  }
 
   return scripts\asm\asm::asm_lookupanimfromalias(var_1, "default");
 }
@@ -202,8 +209,9 @@ _id_CEAF(var_0, var_1, var_2, var_3) {
   _id_0A1E::_id_2369(var_0, var_1, var_4);
   var_7 = _id_0A1E::_id_231F(var_0, var_1, scripts\asm\asm::_id_2341(var_0, var_1));
 
-  if(var_7 == "end")
+  if(var_7 == "end") {
     thread scripts\asm\asm::_id_2310(var_0, var_1, 0);
+  }
 }
 
 _id_116E7(var_0, var_1, var_2) {
@@ -233,8 +241,9 @@ _id_B0E9(var_0, var_1, var_2, var_3) {
   if(isDefined(self.node)) {
     var_4 = self.node _meth_8169();
 
-    if(!scripts\engine\utility::array_contains(var_4, "over"))
+    if(!scripts\engine\utility::array_contains(var_4, "over")) {
       return var_3 == "high";
+    }
 
     return var_3 == "stand";
   }
@@ -243,8 +252,9 @@ _id_B0E9(var_0, var_1, var_2, var_3) {
 }
 
 _id_527F(var_0, var_1, var_2, var_3) {
-  if(isDefined(self._blackboard._id_E1AF))
+  if(isDefined(self._blackboard._id_E1AF)) {
     return self._blackboard._id_E1AF == var_3;
+  }
 
   return 0;
 }

@@ -57,13 +57,13 @@ _id_5A45() {
     var_2._id_AB39 = _id_0EFB::_id_798A(var_2.target, "targetname", "left_col");
     var_2._id_E516 = _id_0EFB::_id_798A(var_2.target, "targetname", "right_col");
 
-    if(!isDefined(var_2.left))
+    if(!isDefined(var_2.left)) {
       continue;
-    else if(!isDefined(var_2.right))
+    } else if(!isDefined(var_2.right)) {
       continue;
-    else if(!isDefined(var_2._id_AB39))
+    } else if(!isDefined(var_2._id_AB39)) {
       continue;
-    else if(!isDefined(var_2._id_E516)) {
+    } else if(!isDefined(var_2._id_E516)) {
       continue;
     }
     var_2._id_AB39 linkTo(var_2.left);
@@ -78,8 +78,9 @@ _id_5A45() {
     var_2._id_EFAE = "[{+activate}] Open";
     var_2._id_EFB8 = "[{+activate}] Open";
 
-    if(isDefined(var_2._id_EFC5))
+    if(isDefined(var_2._id_EFC5)) {
       var_2._id_ECCE = _id_0EFB::_id_7994("shipcrib_door_screen", "script_noteworthy", var_2._id_EFC5);
+    }
 
     var_2._id_ECCA = [];
 
@@ -226,8 +227,9 @@ _id_5A49() {
 }
 
 _id_5A48(var_0) {
-  if(distance2dsquared(level.player.origin, var_0.origin) < var_0._id_EFC4 && var_0._id_5A32 == "open")
+  if(distance2dsquared(level.player.origin, var_0.origin) < var_0._id_EFC4 && var_0._id_5A32 == "open") {
     return 1;
+  }
 
   if(distance2dsquared(level.player.origin, var_0.origin) < var_0._id_EFC4 && scripts\sp\utility::_id_D1DF(var_0.origin + (0, 0, 45), 0.85)) {
     if(var_0._id_5A33 == "unlocked") {
@@ -256,8 +258,9 @@ _id_5A48(var_0) {
     var_1 = sortbydistance(var_1, var_0.origin);
 
     if(isDefined(var_1[0]._id_EFB4) && var_1[0]._id_EFB4) {
-      if(distance2dsquared(var_1[0].origin, var_0.origin) < var_0._id_EFC4 * 0.3)
+      if(distance2dsquared(var_1[0].origin, var_0.origin) < var_0._id_EFC4 * 0.3) {
         return 1;
+      }
     }
   }
 
@@ -267,10 +270,11 @@ _id_5A48(var_0) {
 _id_5A46(var_0) {
   var_1 = scripts\sp\utility::_id_7951(var_0.origin, var_0.angles, level.player.origin);
 
-  if(var_1 > 0)
+  if(var_1 > 0) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_5A44() {

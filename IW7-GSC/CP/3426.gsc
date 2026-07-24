@@ -10,8 +10,9 @@ play_zombie_vo(var_0, var_1, var_2) {
     return;
   }
   if(_id_10397()) {
-    if(scripts\engine\utility::is_true(var_2) || !scripts\engine\utility::is_true(var_0.playing_stumble))
+    if(scripts\engine\utility::is_true(var_2) || !scripts\engine\utility::is_true(var_0.playing_stumble)) {
       var_0 _id_CE9D(var_0.voprefix, var_1);
+    }
   }
 }
 
@@ -23,11 +24,13 @@ _id_BEEB() {
 }
 
 _id_10397() {
-  if(!isDefined(level._id_C1D9))
+  if(!isDefined(level._id_C1D9)) {
     level thread _id_BEEB();
+  }
 
-  if(level._id_C1D9 > 4)
+  if(level._id_C1D9 > 4) {
     return 0;
+  }
 
   level._id_C1D9++;
   return 1;
@@ -38,8 +41,9 @@ zombie_behind_vo() {
   self endon("disconnect");
   self endon("death");
 
-  if(!isDefined(level._id_1469))
+  if(!isDefined(level._id_1469)) {
     level._id_1469 = 0;
+  }
 
   var_0 = 40000;
   var_1 = 90000;
@@ -50,8 +54,9 @@ zombie_behind_vo() {
     scripts\engine\utility::waitframe();
     var_4 = gettime();
 
-    if(var_4 > level._id_1469 + 1000)
+    if(var_4 > level._id_1469 + 1000) {
       level._id_1469 = var_4;
+    }
 
     var_5 = level.spawned_enemies;
     var_6 = 0;
@@ -67,10 +72,11 @@ zombie_behind_vo() {
         }
         var_10 = 200;
 
-        if(isDefined(var_9.asm.cur_move_mode))
+        if(isDefined(var_9.asm.cur_move_mode)) {
           var_11 = var_9.asm.cur_move_mode;
-        else
+        } else {
           var_11 = var_9.movemode;
+        }
 
         var_12 = "walk_front_grunt";
         var_13 = "walk_behind_grunt";
@@ -98,16 +104,18 @@ zombie_behind_vo() {
       }
     }
 
-    if(var_6)
+    if(var_6) {
       wait(var_7);
+    }
   }
 }
 
 play_vo_on_dist(var_0, var_1, var_2, var_3) {
   var_4 = 0;
 
-  if(!isDefined(var_0.next_vo_time))
+  if(!isDefined(var_0.next_vo_time)) {
     var_0.next_vo_time = 0;
+  }
 
   if(distancesquared(var_0.origin, self.origin) < var_1) {
     var_5 = 0;
@@ -123,8 +131,9 @@ play_vo_on_dist(var_0, var_1, var_2, var_3) {
       var_0.next_vo_time = gettime() + 6000;
     }
 
-    if(var_5 || gettime() > var_0.next_vo_time)
+    if(var_5 || gettime() > var_0.next_vo_time) {
       play_zombie_vo(var_0, var_6, var_5);
+    }
   }
 
   return var_4;
@@ -148,8 +157,9 @@ _id_FF72(var_0) {
 }
 
 _id_9D21(var_0, var_1) {
-  if(scripts\engine\utility::is_true(var_1))
+  if(scripts\engine\utility::is_true(var_1)) {
     return _id_9B76(self, var_0.origin, var_1);
+  }
 
   return _id_9B76(self, var_0.origin);
 }
@@ -159,8 +169,9 @@ _id_9B76(var_0, var_1, var_2) {
   var_4 = var_0.origin[2] - var_1[2];
 
   if(scripts\engine\utility::is_true(var_2)) {
-    if(var_3 < -95 || var_3 > 95)
+    if(var_3 < -95 || var_3 > 95) {
       return 1;
+    }
   } else if((var_3 < -95 || var_3 > 95) && abs(var_4) < 50)
     return 1;
 
@@ -180,8 +191,9 @@ _id_7D84(var_0) {
 }
 
 _id_CE9D(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = var_0 + var_1;
+  }
 
   if(soundexists(var_1)) {
     self.playing_stumble = 1;
@@ -196,16 +208,18 @@ play_zombie_death_vo(var_0, var_1, var_2) {
   level endon("game_ended");
   self endon("stop_audio_monitors");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 = var_1;
-  else
+  } else {
     var_3 = 5;
+  }
 
   self waittill("death");
 
   if(!scripts\engine\utility::is_true(var_2)) {
-    if(randomint(100) > var_3)
+    if(randomint(100) > var_3) {
       return;
+    }
   }
 
   var_4 = "death";
@@ -214,8 +228,9 @@ play_zombie_death_vo(var_0, var_1, var_2) {
     if(_id_10397()) {
       var_4 = var_0 + var_4;
 
-      if(soundexists(var_4))
+      if(soundexists(var_4)) {
         self playSound(var_4);
+      }
     }
   }
 }
@@ -233,15 +248,17 @@ _id_13F10() {
     var_2 = scripts\engine\utility::waittill_any_timeout(6, "attack_hit", "attack_miss");
     var_3 = undefined;
 
-    if(!isDefined(self.enemy))
+    if(!isDefined(self.enemy)) {
       var_4 = level.players[0];
-    else
+    } else {
       var_4 = self.enemy;
+    }
 
-    if(isDefined(self.asm.cur_move_mode))
+    if(isDefined(self.asm.cur_move_mode)) {
       var_5 = self.asm.cur_move_mode;
-    else
+    } else {
       var_5 = self.movemode;
+    }
 
     var_6 = "walk_talk";
     var_1 = "walk_front_grunt";
@@ -259,40 +276,45 @@ _id_13F10() {
 
     var_7 = 1;
 
-    if(isDefined(self.is_cop))
+    if(isDefined(self.is_cop)) {
       var_7 = 10;
+    }
 
-    if(randomint(100) < var_7)
+    if(randomint(100) < var_7) {
       var_3 = var_6;
-    else {
+    } else {
       switch (var_2) {
         case "attack_hit":
-          if(var_4 _id_9D21(self))
+          if(var_4 _id_9D21(self)) {
             var_3 = "behind_attack";
-          else if(isDefined(self.is_cop))
+          } else if(isDefined(self.is_cop)) {
             var_3 = "front_attack";
-          else
+          } else {
             var_3 = "male_front_attack";
+          }
 
           break;
         case "attack_miss":
-          if(var_4 _id_9D21(self))
+          if(var_4 _id_9D21(self)) {
             var_3 = "behind_attack";
-          else if(isDefined(self.is_cop))
+          } else if(isDefined(self.is_cop)) {
             var_3 = "front_attack";
-          else
+          } else {
             var_3 = "male_front_attack";
+          }
 
           break;
         case "timeout":
-          if(randomint(100) < 25)
+          if(randomint(100) < 25) {
             level thread play_zombie_vo(self, var_1, 0);
+          }
 
           break;
       }
     }
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       level thread play_zombie_vo(self, var_3, 1);
+    }
   }
 }

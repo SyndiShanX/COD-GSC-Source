@@ -16,8 +16,9 @@ main() {
     return;
   }
 
-  if(isDefined(self.node.turret))
+  if(isDefined(self.node.turret)) {
     scripts\anim\cover_wall::_id_130DF();
+  }
 
   if(isDefined(self.enemy) && lengthsquared(self.origin - self.enemy.origin) < squared(512)) {
     thread scripts\anim\combat::main();
@@ -30,10 +31,11 @@ main() {
   self.a._id_8445 = 1;
   self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_modern, %prone_legs_up);
 
-  if(self.a.pose != "prone")
+  if(self.a.pose != "prone") {
     prone_transitionto("prone");
-  else
+  } else {
     scripts\anim\utility::enterpronewrapper(0);
+  }
 
   thread scripts\anim\combat_utility::_id_1A3E();
   _id_FADE(0.2);
@@ -127,10 +129,11 @@ _id_F924() {
 _id_128AF(var_0, var_1) {
   var_2 = undefined;
 
-  if(isDefined(var_1) && var_1)
+  if(isDefined(var_1) && var_1) {
     var_2 = scripts\anim\utility::_id_1F67("grenade_safe");
-  else
+  } else {
     var_2 = scripts\anim\utility::_id_1F67("grenade_exposed");
+  }
 
   self animmode("zonly_physics");
   self.keepclaimednodeifvalid = 1;
@@ -142,25 +145,30 @@ _id_128AF(var_0, var_1) {
 
 _id_453F() {
   if(isDefined(anim._id_11813) && isalive(level.player)) {
-    if(_id_128AF(level.player, 200))
+    if(_id_128AF(level.player, 200)) {
       return 1;
+    }
   }
 
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     return _id_128AF(self.enemy, 850);
+  }
 
   return 0;
 }
 
 _id_10012() {
-  if(!isDefined(self.weapon) || !weaponisauto(self.weapon) || !weaponisbeam(self.weapon))
+  if(!isDefined(self.weapon) || !weaponisauto(self.weapon) || !weaponisbeam(self.weapon)) {
     return 0;
+  }
 
-  if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 256)
+  if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 256) {
     return 0;
+  }
 
-  if(isDefined(self.enemy) && self cansee(self.enemy) && !isDefined(self.grenade) && scripts\anim\shared::getaimyawtoshootentorpos() < 20)
+  if(isDefined(self.enemy) && self cansee(self.enemy) && !isDefined(self.grenade) && scripts\anim\shared::getaimyawtoshootentorpos() < 20) {
     return scripts\anim\move::_id_B4EC();
+  }
 
   return 0;
 }
@@ -172,10 +180,11 @@ prone_transitionto(var_0) {
   self clearanim(%root, 0.3);
   scripts\anim\combat_utility::_id_631A();
 
-  if(_id_10012())
+  if(_id_10012()) {
     var_1 = scripts\anim\utility::_id_1F64(self.a.pose + "_2_" + var_0 + "_firing");
-  else
+  } else {
     var_1 = scripts\anim\utility::_id_1F64(self.a.pose + "_2_" + var_0);
+  }
 
   if(var_0 == "prone") {}
 
@@ -202,14 +211,17 @@ _id_DA87(var_0, var_1) {
   self clearanim(%root, 0.3);
   var_2 = undefined;
 
-  if(isDefined(self._id_DA78))
+  if(isDefined(self._id_DA78)) {
     var_2 = self._id_DA78;
+  }
 
-  if(isDefined(self.prone_rate_override))
+  if(isDefined(self.prone_rate_override)) {
     var_1 = self.prone_rate_override;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   scripts\anim\utility::exitpronewrapper(getanimlength(var_2) / 2);
   self _meth_82E4("trans", var_2, %body, 1, 0.2, var_1);

@@ -37,8 +37,9 @@ _id_C358() {
   level.player _meth_82C0("phparade_opening_bink", 0.0);
   var_0 = getEntArray("memorial_pillar_end", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
+  }
 
   setsaveddvar("cg_drawPlayerShadow", 1);
   _id_6DE7();
@@ -448,8 +449,9 @@ _id_DB81() {
 _id_DB6F() {
   wait 8;
 
-  if(!scripts\engine\utility::flag("exterior_opened"))
+  if(!scripts\engine\utility::flag("exterior_opened")) {
     level._id_EA2C scripts\sp\utility::_id_10346("phparade_slt_readyweremissin");
+  }
 }
 
 _id_48DF() {
@@ -657,15 +659,17 @@ _id_B05C() {
 }
 
 _id_78F4(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 800;
+  }
 
   var_1 = scripts\engine\utility::getStructArray("parade_crowd_sound_system", "targetname");
   var_2 = [];
 
   foreach(var_4 in var_1) {
-    if(distance2d(level.player.origin, var_4.origin) <= var_0)
+    if(distance2d(level.player.origin, var_4.origin) <= var_0) {
       var_2[var_2.size] = var_4;
+    }
   }
 
   if(var_2.size > 0) {
@@ -700,26 +704,30 @@ _id_6A29() {
   wait 5;
   var_0 = scripts\sp\maps\pearlharbor\pearlharbor_office_ambient::_id_780D("vo_guy_hellyeah");
 
-  if(isDefined(var_0) && distance2d(level.player.origin, var_0.origin) < 700)
+  if(isDefined(var_0) && distance2d(level.player.origin, var_0.origin) < 700) {
     var_0 scripts\sp\utility::_id_10347("phparade_unfw_hellyeah");
+  }
 
   wait 3.5;
   var_1 = scripts\sp\maps\pearlharbor\pearlharbor_office_ambient::_id_780D("vo_guy_wow");
 
-  if(isDefined(var_1) && distance2d(level.player.origin, var_1.origin) < 700)
+  if(isDefined(var_1) && distance2d(level.player.origin, var_1.origin) < 700) {
     var_1 scripts\sp\utility::_id_10347("phparade_unfw_wow");
+  }
 
   wait 3;
   var_2 = scripts\sp\maps\pearlharbor\pearlharbor_office_ambient::_id_780D("vo_guy_threedeployments");
 
-  if(isDefined(var_2) && distance2d(level.player.origin, var_2.origin) < 700)
+  if(isDefined(var_2) && distance2d(level.player.origin, var_2.origin) < 700) {
     var_2 scripts\sp\utility::_id_10347("phparade_unw_didthreedeployment");
+  }
 
   wait 1.5;
   var_3 = scripts\sp\maps\pearlharbor\pearlharbor_office_ambient::_id_780D("vo_guy_unsababy");
 
-  if(isDefined(var_3) && distance2d(level.player.origin, var_3.origin) < 700)
+  if(isDefined(var_3) && distance2d(level.player.origin, var_3.origin) < 700) {
     var_3 scripts\sp\utility::_id_10347("phparade_unw_unsababy");
+  }
 }
 
 _id_6A3D() {
@@ -731,8 +739,9 @@ _id_6A3D() {
 _id_1380F(var_0) {
   self endon("death");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 300;
+  }
 
   var_1 = scripts\engine\utility::getStruct("checkpointscene_animnode", "targetname");
 
@@ -753,8 +762,9 @@ _id_6A3E() {
   scripts\engine\utility::delaythread(4, scripts\engine\utility::play_sound_in_space, "phparade_crowd_dist_cheer", (-23253, -17800, -26332));
   level._id_EA2C _id_1380F(300);
 
-  if(isDefined(level._id_E35D))
+  if(isDefined(level._id_E35D)) {
     level._id_EA2C scripts\sp\utility::_id_7799(level._id_E35D);
+  }
 
   level._id_EA2C scripts\sp\utility::_id_10346("phparade_slt_homesweethome");
   level._id_EA2C scripts\engine\utility::delaythread(1.5, scripts\sp\utility::_id_77B9, 0.7);
@@ -793,14 +803,16 @@ _id_6A3B() {
   wait 7;
   var_0 = scripts\sp\maps\pearlharbor\pearlharbor_office_ambient::_id_780D("vo_guy_atlanticcheer");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 scripts\sp\utility::_id_10347("phparade_grp_cheeringatlantic");
+  }
 
   wait 2;
   var_1 = scripts\sp\maps\pearlharbor\pearlharbor_office_ambient::_id_780D("vo_guy_thatsawesome");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 scripts\sp\utility::_id_10347("phparade_unw_thatsawesome");
+  }
 }
 
 _id_7CF4() {
@@ -833,10 +845,11 @@ _id_6A2E() {
   thread _id_DB6B();
   var_0 = _id_78A2();
 
-  if(var_0 == "fast")
+  if(var_0 == "fast") {
     _id_CD0E();
-  else
+  } else {
     _id_CE12();
+  }
 
   scripts\engine\utility::flag_wait("salter_checkpoint_anim_complete");
 }
@@ -904,8 +917,9 @@ _id_CCCF() {
   var_0 = scripts\engine\utility::getStruct("checkpointscene_animnode", "targetname");
   var_0 notify("end_checkpoint_idle");
 
-  foreach(var_2 in level._id_3E36)
-  var_2 thread _id_CCD1(var_0);
+  foreach(var_2 in level._id_3E36) {
+    var_2 thread _id_CCD1(var_0);
+  }
 
   scripts\engine\utility::flag_set("checkpoint_open");
 }
@@ -919,8 +933,9 @@ _id_CCCE() {
   var_0 = scripts\engine\utility::getStruct("checkpointscene_animnode", "targetname");
   var_0 notify("end_checkpoint_open_idle");
 
-  foreach(var_2 in level._id_3E36)
-  var_2 thread _id_CCD0(var_0);
+  foreach(var_2 in level._id_3E36) {
+    var_2 thread _id_CCD0(var_0);
+  }
 }
 
 _id_CCD0(var_0) {
@@ -952,19 +967,20 @@ _id_CCC5() {
 }
 
 _id_135F9(var_0) {
-  while(distance2d(level.player.origin, self.origin) > var_0)
+  while(distance2d(level.player.origin, self.origin) > var_0) {
     scripts\engine\utility::waitframe();
+  }
 }
 
 _id_ADB5() {
   var_0 = [];
-  var_0["checkpoint_guard_1"] = scripts\sp\utility::_id_107EA("checkpoint_guard_0", 1);
-  var_0["checkpoint_guard_2"] = scripts\sp\utility::_id_107EA("checkpoint_guard_1", 1);
+  var_0["checkpoint_guard_1"] = ::scripts\sp\utility::_id_107EA("checkpoint_guard_0", 1);
+  var_0["checkpoint_guard_2"] = ::scripts\sp\utility::_id_107EA("checkpoint_guard_1", 1);
   scripts\engine\utility::waitframe();
-  var_0["checkpoint_crowd_1"] = scripts\sp\utility::_id_107EA("checkpoint_guy_0", 1);
-  var_0["checkpoint_crowd_2"] = scripts\sp\utility::_id_107EA("checkpoint_guy_1", 1);
-  var_0["checkpoint_crowd_3"] = scripts\sp\utility::_id_107EA("checkpoint_guy_2", 1);
-  var_0["checkpoint_crowd_4"] = scripts\sp\utility::_id_107EA("checkpoint_guy_3", 1);
+  var_0["checkpoint_crowd_1"] = ::scripts\sp\utility::_id_107EA("checkpoint_guy_0", 1);
+  var_0["checkpoint_crowd_2"] = ::scripts\sp\utility::_id_107EA("checkpoint_guy_1", 1);
+  var_0["checkpoint_crowd_3"] = ::scripts\sp\utility::_id_107EA("checkpoint_guy_2", 1);
+  var_0["checkpoint_crowd_4"] = ::scripts\sp\utility::_id_107EA("checkpoint_guy_3", 1);
   var_0["checkpoint_guard_1"]._id_1FBB = "checkpoint_guard_1";
   var_0["checkpoint_guard_2"]._id_1FBB = "checkpoint_guard_2";
   var_0["checkpoint_crowd_1"]._id_1FBB = "checkpoint_crowd_1";
@@ -1002,22 +1018,25 @@ _id_78A1() {
 }
 
 _id_93F6(var_0) {
-  foreach(var_2 in var_0)
-  var_2.count++;
+  foreach(var_2 in var_0) {
+    var_2.count++;
+  }
 }
 
 _id_DFD6() {
   var_0 = getEnt("checkpoint_player_clipbrush1", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 _id_16AD() {
   var_0 = getEnt("checkpoint_player_clipbrush2", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 moveTo(var_0.origin + (0, 0, -96), 0.05);
+  }
 }
 
 _id_DB6B() {
@@ -1082,8 +1101,9 @@ _id_FB7A() {
 _id_FB76() {
   var_0 = 0.6;
 
-  if(!isDefined(self._id_5DAF))
+  if(!isDefined(self._id_5DAF)) {
     self._id_5DAF = spawn("script_origin", (-20898, -21883, -27017));
+  }
 
   wait 0.05;
   self._id_5DAF scripts\sp\utility::_id_10461("dropship_lz_debris_lp", var_0, 1, 1);
@@ -1126,8 +1146,9 @@ _id_5E2C() {
 _id_137FA(var_0) {
   self endon("death");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 300;
+  }
 
   var_1 = scripts\engine\utility::getStruct("salter_rooftop_landingzone_wait3", "targetname");
 
@@ -1193,8 +1214,9 @@ _id_E68D() {
   wait 4;
   var_0 = scripts\sp\maps\pearlharbor\pearlharbor_office_ambient::_id_780D("vo_guy_badass");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 scripts\sp\utility::_id_10347("phparade_unw_badass");
+  }
 }
 
 _id_45AA() {
@@ -1248,8 +1270,9 @@ _id_5DD2() {
   var_0 = 0;
 
   if(var_0) {
-    while(!isDefined(level._id_D03A))
+    while(!isDefined(level._id_D03A)) {
       wait 0.1;
+    }
   } else
     _id_48D5();
 
@@ -1383,8 +1406,9 @@ _id_9850() {
 _id_984F() {}
 
 _id_48D5() {
-  while(!isDefined(level._id_D03A))
+  while(!isDefined(level._id_D03A)) {
     wait 0.1;
+  }
 
   var_0 = scripts\engine\utility::spawn_tag_origin(level._id_D03A gettagorigin("TAG_DOOR_RIGHT_HANDLE"), level._id_D03A gettagangles("TAG_DOOR_RIGHT_HANDLE"));
   wait 0.05;
@@ -1444,16 +1468,19 @@ _id_7BBB(var_0, var_1) {
 }
 
 _id_BC56(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0.5;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 15;
-  else if(!isarray(var_2))
+  } else if(!isarray(var_2)) {
     var_2 = [var_2, var_2, var_2, var_2];
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1;
+  }
 
   level.player scripts\sp\utility::_id_F526("normal");
   level.player _meth_823C(var_0, "tag_player", var_1, var_1 / 2, var_1 / 2);
@@ -1572,8 +1599,9 @@ _id_FB7B() {
 }
 
 _id_ACFE() {
-  foreach(var_1 in level.allies)
-  var_1 linkTo(level._id_D03A);
+  foreach(var_1 in level.allies) {
+    var_1 linkTo(level._id_D03A);
+  }
 }
 
 _id_5DD1() {}
@@ -1582,16 +1610,19 @@ _id_C33A() {
   self endon("death");
   var_0 = self.spawner;
 
-  if(isDefined(var_0.animation))
+  if(isDefined(var_0.animation)) {
     _id_F8AC(var_0);
+  }
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     self waittill("reached_path_end");
+  }
 
   var_1 = self._id_A905;
 
-  if(isDefined(var_1) && isDefined(var_1.animation))
+  if(isDefined(var_1) && isDefined(var_1.animation)) {
     var_1 thread scripts\sp\anim::_id_1ECC(self, var_1.animation);
+  }
 
   scripts\engine\utility::flag_wait("ext_first_stop");
   self delete();
@@ -1602,9 +1633,9 @@ _id_C33B() {
   var_0 = self.spawner;
   self._id_1FBB = "generic";
 
-  if(isDefined(var_0.animation))
+  if(isDefined(var_0.animation)) {
     _id_F8AC(var_0);
-  else if(isDefined(self.target)) {
+  } else if(isDefined(self.target)) {
     var_1 = scripts\engine\utility::get_target_ent();
 
     if(isDefined(var_1.animation)) {
@@ -1620,10 +1651,11 @@ _id_C33B() {
 
 _id_F8AC(var_0) {
   if(isDefined(var_0.animation)) {
-    if(isDefined(var_0.script_linkto))
+    if(isDefined(var_0.script_linkto)) {
       var_1 = scripts\engine\utility::getStruct(var_0.script_linkto, "script_linkname");
-    else
+    } else {
       var_1 = var_0;
+    }
 
     var_1 thread scripts\sp\anim::_id_1ECC(self, var_0.animation);
   }

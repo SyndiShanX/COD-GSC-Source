@@ -102,8 +102,9 @@ _id_FBF6() {
 _id_9499() {
   level waittill("breach_detonation");
 
-  while(isDefined(level._id_3965) == 0)
+  while(isDefined(level._id_3965) == 0) {
     scripts\engine\utility::waitframe();
+  }
 
   thread _id_2F55();
   thread _id_570D();
@@ -359,8 +360,9 @@ _id_83CC() {
   var_0 = scripts\engine\utility::spawn_tag_origin((-1001, -1204, 10));
   var_0 playLoopSound("breach_glass_pieces");
 
-  while(!level.player isonground())
+  while(!level.player isonground()) {
     wait 0.05;
+  }
 
   var_0 stopsounds();
   scripts\engine\utility::waitframe();

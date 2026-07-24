@@ -8,8 +8,9 @@ init() {
   var_0.timeout = 60.0;
   var_0._id_9F43 = 0;
 
-  if(!isDefined(level._id_47B3))
+  if(!isDefined(level._id_47B3)) {
     level._id_47B3 = [];
+  }
 
   level._id_47B3["crafted_entangler"] = var_0;
   level thread watchforentangleractivation();
@@ -113,8 +114,9 @@ give_entangler(var_0) {
   var_0 endon("disconnect");
 
   foreach(var_2 in level.wall_buy_interactions) {
-    if(isDefined(var_2.trigger))
+    if(isDefined(var_2.trigger)) {
       var_2.trigger hidefromplayer(var_0);
+    }
 
     scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(var_2, var_0);
   }
@@ -127,8 +129,9 @@ give_entangler(var_0) {
   var_0.restoreweapon = var_0 scripts\cp\utility::getvalidtakeweapon();
   var_4 = "iw7_entangler2_zm";
 
-  if(scripts\engine\utility::flag("meph_fight"))
+  if(scripts\engine\utility::flag("meph_fight")) {
     var_4 = "iw7_entangler_zm";
+  }
 
   var_0.isusingsupercard = 1;
   var_0 scripts\cp\utility::_giveweapon(var_4, undefined, undefined, 1);
@@ -140,8 +143,9 @@ give_entangler(var_0) {
     if(scripts\engine\utility::is_true(var_2.should_be_hidden)) {
       continue;
     }
-    if(isDefined(var_2.trigger))
+    if(isDefined(var_2.trigger)) {
       var_2.trigger showtoplayer(var_0);
+    }
 
     scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(var_2, var_0);
   }
@@ -174,37 +178,43 @@ watchforputaway() {
       continue;
     }
     if(isDefined(var_0)) {
-      if(var_0 == "death")
+      if(var_0 == "death") {
         self.hascollectedentangler = undefined;
+      }
 
       if(var_0 == "craft_dpad_watcher") {
-        if(!scripts\engine\utility::isweaponswitchallowed())
+        if(!scripts\engine\utility::isweaponswitchallowed()) {
           scripts\engine\utility::allow_weapon_switch(1);
+        }
 
-        if(scripts\engine\utility::flag("meph_fight"))
+        if(scripts\engine\utility::flag("meph_fight")) {
           var_1 = "iw7_entangler_zm";
-        else {
+        } else {
           var_1 = "iw7_entangler2_zm";
           self.hascollectedentangler = undefined;
         }
 
-        if(self hasweapon(var_1))
+        if(self hasweapon(var_1)) {
           self takeweapon(var_1);
+        }
 
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
         self notify("end_Ghost_Idle_Loop");
         break;
       } else {
-        if(!scripts\engine\utility::isweaponswitchallowed())
+        if(!scripts\engine\utility::isweaponswitchallowed()) {
           scripts\engine\utility::allow_weapon_switch(1);
+        }
 
         var_1 = "iw7_entangler2_zm";
 
-        if(scripts\engine\utility::flag("meph_fight"))
+        if(scripts\engine\utility::flag("meph_fight")) {
           var_1 = "iw7_entangler_zm";
+        }
 
-        if(self hasweapon(var_1))
+        if(self hasweapon(var_1)) {
           self takeweapon(var_1);
+        }
 
         self notify("end_Ghost_Idle_Loop");
         thread watch_dpad();
@@ -223,10 +233,11 @@ removeperks() {
 
 restoreweapons() {
   if(isDefined(self.restoreweapon)) {
-    if(self hasweapon(self.restoreweapon))
+    if(self hasweapon(self.restoreweapon)) {
       self switchtoweapon(self.restoreweapon);
-    else
+    } else {
       self switchtoweapon(scripts\cp\utility::getvalidtakeweapon());
+    }
   } else
     self switchtoweapon(scripts\cp\utility::getvalidtakeweapon());
 
@@ -258,14 +269,17 @@ entangleitem(var_0, var_1, var_2) {
 
   var_2 notify("item_entangled");
 
-  if(var_0 scripts\cp\utility::isweaponfireenabled())
+  if(var_0 scripts\cp\utility::isweaponfireenabled()) {
     var_0 scripts\engine\utility::allow_fire(0);
+  }
 
-  if(var_0 scripts\cp\utility::issprintenabled())
+  if(var_0 scripts\cp\utility::issprintenabled()) {
     var_0 scripts\engine\utility::allow_sprint(0);
+  }
 
-  if(var_2.model == "cp_final_brute_mascot_mask")
+  if(var_2.model == "cp_final_brute_mascot_mask") {
     var_2 scripts\cp\maps\cp_final\cp_final_interactions::helmet_not_useable();
+  }
 
   var_3 = gettagfrommodel(var_2);
   var_4 = playfxontagsbetweenclients(level._effect["entangler_beam"], var_0, "tag_flash", var_2, var_3);
@@ -273,29 +287,34 @@ entangleitem(var_0, var_1, var_2) {
   var_2.carriedby = var_0;
   moveitemtowardsplayer(var_0, var_1, var_3);
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_2.forcerelease = 1;
+  }
 
   if(isDefined(var_0)) {
     var_0 notify("end_move_towards_player");
     var_0 setscriptablepartstate("entangler", "fired");
   }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_4 delete();
-
-  if(isDefined(var_0)) {
-    if(!var_0 scripts\cp\utility::isweaponfireenabled())
-      var_0 scripts\engine\utility::allow_fire(1);
-
-    if(!var_0 scripts\cp\utility::issprintenabled())
-      var_0 scripts\engine\utility::allow_sprint(1);
   }
 
-  if(isDefined(var_2.customlaunchfunc))
+  if(isDefined(var_0)) {
+    if(!var_0 scripts\cp\utility::isweaponfireenabled()) {
+      var_0 scripts\engine\utility::allow_fire(1);
+    }
+
+    if(!var_0 scripts\cp\utility::issprintenabled()) {
+      var_0 scripts\engine\utility::allow_sprint(1);
+    }
+  }
+
+  if(isDefined(var_2.customlaunchfunc)) {
     thread[[var_2.customlaunchfunc]](var_0, var_2, var_1);
-  else
+  } else {
     launchitem(var_0, var_2, var_1);
+  }
 }
 
 releaseitemaftertime(var_0, var_1) {
@@ -329,8 +348,9 @@ gettagfrommodel(var_0) {
 initentanglermodels() {
   var_0 = scripts\engine\utility::getStructArray("entangler_structs", "targetname");
 
-  foreach(var_2 in var_0)
-  level thread spawnentanglermodel(var_2);
+  foreach(var_2 in var_0) {
+    level thread spawnentanglermodel(var_2);
+  }
 }
 
 spawnentanglermodel(var_0, var_1, var_2) {
@@ -339,25 +359,28 @@ spawnentanglermodel(var_0, var_1, var_2) {
     var_0.entanglemodel delete();
   }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 = var_1;
-  else
+  } else {
     var_3 = var_0.origin;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_4 = var_2;
-  else if(isDefined(var_0.angles))
+  } else if(isDefined(var_0.angles)) {
     var_4 = var_0.angles;
-  else
+  } else {
     var_4 = (0, 0, 0);
+  }
 
   var_5 = spawn("script_model", var_3);
   var_5.angles = var_4;
 
-  if(isDefined(var_0.script_noteworthy))
+  if(isDefined(var_0.script_noteworthy)) {
     var_5 setModel(var_0.script_noteworthy);
-  else
+  } else {
     var_5 setModel("ref_space_helmet_02");
+  }
 
   var_0.entanglemodel = var_5;
   var_0 notify("new_model_created");
@@ -388,13 +411,14 @@ watchforentanglerdamage(var_0, var_1) {
       var_8 = isDefined(var_0.groupname);
       var_9 = var_1.origin;
 
-      if(var_1 istouching(getEnt("electric_trap_trig", "targetname")))
+      if(var_1 istouching(getEnt("electric_trap_trig", "targetname"))) {
         var_5 = 1;
+      }
 
       if(!scripts\engine\utility::is_true(var_5) && scripts\cp\maps\cp_final\cp_final::validateplayspace(var_9, var_3, var_8, var_8, var_7)) {
-        if(var_1.model == "cp_final_brute_mascot_mask")
+        if(var_1.model == "cp_final_brute_mascot_mask") {
           var_1 scripts\cp\maps\cp_final\cp_final_interactions::helmet_useable();
-        else {
+        } else {
           var_1 physicsstopserver();
 
           if(isDefined(var_0.groupname)) {
@@ -402,8 +426,9 @@ watchforentanglerdamage(var_0, var_1) {
             level notify("vent_fx");
           }
 
-          if(scripts\engine\utility::is_true(var_6))
+          if(scripts\engine\utility::is_true(var_6)) {
             var_1 notify("end_entangler_funcs");
+          }
         }
       } else if(isDefined(var_0._id_1088C))
         thread[[var_0._id_1088C]](var_0.id, var_0);
@@ -450,8 +475,9 @@ moveitemtowardsplayer(var_0, var_1, var_2) {
   while(isDefined(var_0) && var_0 getcurrentweapon() == "iw7_entangler2_zm") {
     var_15 = gettime();
 
-    if(var_7.lasteffecttime + 250 <= var_15)
+    if(var_7.lasteffecttime + 250 <= var_15) {
       var_7.lasteffecttime = var_15;
+    }
 
     var_5 = 72;
     var_16 = var_0 getvelocity();
@@ -460,12 +486,13 @@ moveitemtowardsplayer(var_0, var_1, var_2) {
     if(var_17 >= 1) {
       var_18 = length(var_16);
 
-      if(var_18 >= 250)
+      if(var_18 >= 250) {
         var_5 = var_5 + 48;
-      else if(var_18 >= 185)
+      } else if(var_18 >= 185) {
         var_5 = var_5 + 24;
-      else if(var_18 >= 100)
+      } else if(var_18 >= 100) {
         var_5 = var_5 + 12;
+      }
     }
 
     var_19 = var_12 >= 10;
@@ -497,16 +524,18 @@ moveitemtowardsplayer(var_0, var_1, var_2) {
     } else
       var_35 = vectortoangles(var_0.origin - var_7.origin);
 
-    if(var_7.model == "cp_final_subway_turnstyle_arm")
+    if(var_7.model == "cp_final_subway_turnstyle_arm") {
       var_7.angles = (var_35[0], var_35[1], var_35[2]);
-    else
+    } else {
       var_7.angles = (var_7.angles[0], var_35[1], var_35[2]);
+    }
 
     var_36 = distance(var_7.origin, var_31);
     var_4 = var_36 / var_3;
 
-    if(var_4 < 0.05)
+    if(var_4 < 0.05) {
       var_4 = 0.05;
+    }
 
     if(var_8) {
       if(scripts\engine\utility::is_true(var_0.is_off_grid) || scripts\engine\utility::is_true(var_0.isfasttravelling)) {
@@ -520,9 +549,9 @@ moveitemtowardsplayer(var_0, var_1, var_2) {
           var_31 = var_38["shape_position"] - (0, 0, var_38["shape_position"][2]) + (0, 0, var_32);
         }
 
-        if(var_36 <= 64)
+        if(var_36 <= 64) {
           var_7.origin = var_31;
-        else {
+        } else {
           var_7 moveTo(var_31, var_4);
           var_0 scripts\engine\utility::waittill_any_timeout(var_4, "update_item_pos", "delete_equipment");
         }
@@ -530,9 +559,9 @@ moveitemtowardsplayer(var_0, var_1, var_2) {
         var_19 = 0;
 
         if([[var_1.entanglemovetofunc]](var_1, var_31, var_7, var_0)) {
-          if(var_36 <= 64)
+          if(var_36 <= 64) {
             var_7.origin = var_31;
-          else {
+          } else {
             var_7 moveTo(var_31, var_4);
             var_0 scripts\engine\utility::waittill_any_timeout(var_4, "update_item_pos", "delete_equipment");
           }
@@ -634,8 +663,9 @@ monitorplayerviewangles(var_0, var_1) {
     var_3 = vectorNormalize(anglesToForward(var_0 getplayerangles())) * 72;
     var_4 = var_2 + var_3;
 
-    if(distance(var_1.origin, var_4) >= 5)
+    if(distance(var_1.origin, var_4) >= 5) {
       var_0 notify("update_item_pos");
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -651,29 +681,33 @@ launchitem(var_0, var_1, var_2) {
     var_3 = [var_1];
 
   if(!isDefined(var_1)) {
-    if(isDefined(var_0) && isDefined(var_0.entangledmodel))
+    if(isDefined(var_0) && isDefined(var_0.entangledmodel)) {
       var_1 = var_0.entangledmodel;
-    else
+    } else {
       return;
+    }
   }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0.entangledmodel = undefined;
+  }
 
   var_1.launched = 1;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_4 = var_0 getEye();
-  else
+  } else {
     var_4 = var_1.origin;
+  }
 
   var_5 = var_1.origin;
   var_6 = (0, 10000, 0);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_7 = var_0 getplayerangles();
-  else
+  } else {
     var_7 = anglesToForward(var_1.angles) * -1;
+  }
 
   var_8 = 0;
   var_5 = var_5 + var_6[0] * anglestoright(var_7);
@@ -687,8 +721,9 @@ launchitem(var_0, var_1, var_2) {
   var_14 = vectorNormalize(var_5 - var_12);
   var_14 = var_14 * 10000;
 
-  if(isDefined(var_1.script_parameters) && var_1.script_parameters == "heavy_helmet")
+  if(isDefined(var_1.script_parameters) && var_1.script_parameters == "heavy_helmet") {
     var_14 = var_14 / 2;
+  }
 
   if(scripts\engine\utility::is_true(var_1.forcerelease)) {
     var_15 = scripts\engine\utility::drop_to_ground(var_1.origin, 24, -200);
@@ -700,10 +735,11 @@ launchitem(var_0, var_1, var_2) {
   var_1 physicslaunchserver(var_13, var_14);
   var_1 physics_registerforcollisioncallback();
 
-  if(isDefined(var_1.collisionfunc))
+  if(isDefined(var_1.collisionfunc)) {
     thread[[var_1.collisionfunc]](var_1, var_2, var_0);
-  else
+  } else {
     thread delaykillitem(var_1, var_2, var_0);
+  }
 }
 
 delaykillitem(var_0, var_1, var_2) {
@@ -732,8 +768,9 @@ delaykillitem(var_0, var_1, var_2) {
     }
   }
 
-  if(var_13 >= 20)
+  if(var_13 >= 20) {
     var_0.forcedrespawn = 1;
+  }
 
   var_0.hasbeenthrown = 1;
   var_0.launched = undefined;
@@ -767,14 +804,15 @@ entangleritemoutlinemonitor(var_0, var_1) {
 
   for(;;) {
     if(isDefined(var_1)) {
-      if(isDefined(var_0.entangledmodel) && var_0.entangledmodel == var_1)
+      if(isDefined(var_0.entangledmodel) && var_0.entangledmodel == var_1) {
         var_1 hudoutlinedisableforclient(var_0);
-      else if(scripts\engine\utility::is_true(var_1.launched))
+      } else if(scripts\engine\utility::is_true(var_1.launched)) {
         var_1 hudoutlinedisableforclient(var_0);
-      else if(distance(var_0.origin, var_1.origin) <= 500)
+      } else if(distance(var_0.origin, var_1.origin) <= 500) {
         var_1 hudoutlineenableforclient(var_0, 5, 1, 0, 0);
-      else
+      } else {
         var_1 hudoutlinedisableforclient(var_0);
+      }
     } else
       break;
 

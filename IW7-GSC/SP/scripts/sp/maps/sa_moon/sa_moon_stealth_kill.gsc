@@ -44,8 +44,9 @@ _id_E967() {
   cinematicingameloopresident("sa_moon_fleet_data_loop_1");
   var_1 = getEntArray("fleet_data_screen_static", "targetname");
 
-  foreach(var_3 in var_1)
-  var_3 hide();
+  foreach(var_3 in var_1) {
+    var_3 hide();
+  }
 
   scripts\engine\utility::flag_wait("stealth_kill_done");
   scripts\sp\utility::_id_2679();
@@ -160,8 +161,9 @@ _id_E970() {
 }
 
 _id_E972() {
-  if(scripts\engine\utility::flag_exist("secondary_intro_vo"))
+  if(scripts\engine\utility::flag_exist("secondary_intro_vo")) {
     scripts\engine\utility::flag_wait("secondary_intro_vo");
+  }
 
   scripts\sp\utility::_id_266F();
   level._id_6754 scripts\sp\utility::_id_10346("mn_eth_one_deck_down");
@@ -200,8 +202,9 @@ _id_10ED5() {
       break;
     }
 
-    for(var_0 = 0; var_0 < randomintrange(2, 5); var_0++)
+    for(var_0 = 0; var_0 < randomintrange(2, 5); var_0++) {
       self waittillmatch("looping anim", "end");
+    }
 
     self notify("stop_anim_loop");
     scripts\sp\anim::_id_1EC7(self, self._id_1EF6.script_noteworthy + "_exit");
@@ -227,11 +230,13 @@ _id_10ED4() {
   if(isDefined(self) && isalive(self)) {
     self notify("stop_anim_loop");
 
-    if(isDefined(self._id_1EF6))
+    if(isDefined(self._id_1EF6)) {
       self._id_1EF6 notify("stop_anim_loop");
+    }
 
-    if(self _meth_81A6())
+    if(self _meth_81A6()) {
       scripts\sp\utility::anim_stopanimScripted();
+    }
 
     wait(randomfloatrange(0.5, 1.0));
     var_0 = getEnt("stealth_kill_guys_gv", "targetname");
@@ -253,14 +258,17 @@ _id_E96F() {
   wait 1.0;
   level endon("stealth_kill_guys_alerted");
 
-  if(isDefined(var_0[0]) && isalive(var_0[0]))
+  if(isDefined(var_0[0]) && isalive(var_0[0])) {
     var_0[0] scripts\sp\utility::_id_10347("mn_ss2_bridge_is_down");
+  }
 
-  if(isDefined(var_0[1]) && isalive(var_0[1]))
+  if(isDefined(var_0[1]) && isalive(var_0[1])) {
     var_0[1] scripts\sp\utility::_id_10347("mn_ss3_cordon_and_search");
+  }
 
-  if(isDefined(var_0[0]) && isalive(var_0[0]))
+  if(isDefined(var_0[0]) && isalive(var_0[0])) {
     var_0[0] scripts\sp\utility::_id_10347("mn_ss2_move_out_195");
+  }
 }
 
 _id_10ED6() {
@@ -280,8 +288,9 @@ _id_10ED6() {
 _id_E96D() {
   scripts\sp\maps\sa_moon\sa_moon_util::_id_1723("obj_shutdown_secondary_defenses", "current", &"SA_MOON_OBJ_SHUTDOWN_SECONDARY_DEFENSES");
 
-  if(!isDefined(level._id_9DD0))
+  if(!isDefined(level._id_9DD0)) {
     scripts\engine\utility::flag_wait("open_maintenance_hatch_02");
+  }
 
   objective_position(scripts\sp\utility::_id_C264("obj_shutdown_secondary_defenses"), (0, 0, 0));
 }

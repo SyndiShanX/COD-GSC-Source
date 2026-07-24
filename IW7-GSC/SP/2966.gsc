@@ -6,15 +6,17 @@
 _id_FA79() {
   var_0 = _id_12B8();
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_1323A();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_1323A();
+  }
 }
 
 _id_1323A() {
   self endon("entitydeleted");
 
-  if(isDefined(self._id_ED48))
+  if(isDefined(self._id_ED48)) {
     thread _id_0B77::_id_1323D();
+  }
 
   self.count = 1;
   self._id_10708 = [];
@@ -37,8 +39,9 @@ _id_A629(var_0) {
   var_0 waittill("trigger");
 
   foreach(var_2 in vehicle_getspawnerarray()) {
-    if(isDefined(var_2._id_EDF5) && var_2._id_EDF5 == self._id_EDF5)
+    if(isDefined(var_2._id_EDF5) && var_2._id_EDF5 == self._id_EDF5) {
       var_2 delete();
+    }
   }
 }
 
@@ -67,8 +70,9 @@ _id_1063F(var_0) {
       var_8 setModel(var_4.model);
       var_8 _meth_83D0(#animtree);
 
-      if(isDefined(var_4._id_EEC9))
+      if(isDefined(var_4._id_EEC9)) {
         var_8._id_EEC9 = var_4._id_EEC9;
+      }
 
       var_8._id_9FEF = 1;
       var_8._id_1356F = var_4;
@@ -77,17 +81,20 @@ _id_1063F(var_0) {
       var_9 = (isDefined(var_4._id_EECE) || isDefined(var_4._id_EED1)) && scripts\engine\utility::flag("stealth_enabled") && !scripts\engine\utility::flag("stealth_spotted");
       var_10 = var_4;
 
-      if(isDefined(var_4._id_EEB6))
+      if(isDefined(var_4._id_EEB6)) {
         var_10 = _id_0B77::_id_7C86(var_4, 1);
+      }
 
-      if(isDefined(var_4._id_EDB3) || var_2)
+      if(isDefined(var_4._id_EDB3) || var_2) {
         var_7 = var_10 _meth_8393(var_9);
-      else
+      } else {
         var_7 = var_10 dospawn(var_9);
+      }
 
       if(isDefined(var_4._id_EEB6)) {
-        if(isDefined(var_4._id_EEC9))
+        if(isDefined(var_4._id_EEC9)) {
           var_7._id_EEC9 = var_4._id_EEC9;
+        }
       }
     }
 
@@ -115,45 +122,53 @@ _id_E05D(var_0) {
 }
 
 _id_19E4(var_0) {
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     return 1;
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(!isDefined(var_0.classname))
+  if(!isDefined(var_0.classname)) {
     return 0;
+  }
 
   return var_0.classname == "script_model";
 }
 
 spawn_group() {
-  if(scripts\sp\utility::_id_65DF("no_riders_until_unload") && !scripts\sp\utility::_id_65DB("no_riders_until_unload"))
+  if(scripts\sp\utility::_id_65DF("no_riders_until_unload") && !scripts\sp\utility::_id_65DB("no_riders_until_unload")) {
     return [];
+  }
 
   var_0 = _id_7D47();
 
-  if(!var_0.size)
+  if(!var_0.size) {
     return [];
+  }
 
   var_1 = [];
   var_2 = _id_1063F(var_0);
   var_2 = _id_1041B(var_2);
 
-  foreach(var_4 in var_2)
-  thread scripts\sp\vehicle_aianim::_id_8739(var_4);
+  foreach(var_4 in var_2) {
+    thread scripts\sp\vehicle_aianim::_id_8739(var_4);
+  }
 
   return var_2;
 }
 
 _id_10805(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return spawn_group();
+  }
 
   var_1 = _id_7D47();
 
-  if(!var_1.size)
+  if(!var_1.size) {
     return [];
+  }
 
   var_2 = [];
   var_3 = self.classname;
@@ -163,22 +178,25 @@ _id_10805(var_0) {
 
     foreach(var_6 in var_4) {
       foreach(var_8 in var_1) {
-        if(var_8._id_EEC9 == var_6)
+        if(var_8._id_EEC9 == var_6) {
           var_2[var_2.size] = var_8;
+        }
       }
     }
 
     var_11 = _id_1063F(var_2);
 
     for(var_12 = 0; var_12 < var_4.size; var_12++) {
-      if(isDefined(var_11[var_12]))
+      if(isDefined(var_11[var_12])) {
         var_11[var_12]._id_EEC9 = var_4[var_12];
+      }
     }
 
     var_11 = _id_1041B(var_11);
 
-    foreach(var_14 in var_11)
-    thread scripts\sp\vehicle_aianim::_id_8739(var_14);
+    foreach(var_14 in var_11) {
+      thread scripts\sp\vehicle_aianim::_id_8739(var_14);
+    }
 
     return var_11;
   } else
@@ -215,8 +233,9 @@ _id_131F6(var_0) {
   }
 
   if(isDefined(level.vehicle._id_116CE._id_8E9D[var_1])) {
-    foreach(var_3 in level.vehicle._id_116CE._id_8E9D[var_1])
-    var_0 hidepart(var_3);
+    foreach(var_3 in level.vehicle._id_116CE._id_8E9D[var_1]) {
+      var_0 hidepart(var_3);
+    }
   }
 
   if(var_0.vehicletype == "empty" || var_0.vehicletype == "empty_heli") {
@@ -226,8 +245,9 @@ _id_131F6(var_0) {
 
   var_0 scripts\sp\utility::_id_F294();
 
-  if(!isDefined(var_0._id_B91F))
+  if(!isDefined(var_0._id_B91F)) {
     var_0._id_B91F = 0;
+  }
 
   var_5 = var_0.vehicletype;
   var_0 _id_13203();
@@ -239,12 +259,14 @@ _id_131F6(var_0) {
   var_0 thread _id_B248();
   var_0 thread _id_D546();
 
-  if(!isDefined(var_0._id_ED10))
+  if(!isDefined(var_0._id_ED10)) {
     var_0._id_ED10 = 0;
+  }
 
   if(isDefined(level.vehicle.draw_thermal)) {
-    if(level.vehicle.draw_thermal)
+    if(level.vehicle.draw_thermal) {
       var_0 thermaldrawenable();
+    }
   }
 
   var_0 scripts\sp\utility::_id_65E0("unloaded");
@@ -267,56 +289,66 @@ _id_131F6(var_0) {
 
   var_0 thread vehicle_builds();
 
-  if(isDefined(var_0._id_EF04))
+  if(isDefined(var_0._id_EF04)) {
     var_0 thread scripts\sp\vehicle_lights::lights_on(var_0._id_EF04);
+  }
 
-  if(isDefined(var_0._id_EDD1))
+  if(isDefined(var_0._id_EDD1)) {
     var_0._id_843F = 1;
+  }
 
   var_0._id_4CF5 = [];
   var_0 thread _id_740E();
   var_0 thread scripts\sp\vehicle_aianim::_id_88AE();
 
-  if(isDefined(var_0._id_EDB8))
+  if(isDefined(var_0._id_EDB8)) {
     var_0 setvehiclelookattext(var_0._id_EDB8, &"");
+  }
 
   var_0 thread _id_131EC();
 
-  if(isDefined(var_0._id_ED6C))
+  if(isDefined(var_0._id_ED6C)) {
     var_0._id_5971 = 1;
+  }
 
   var_0 thread _id_1322A();
   var_0 thread scripts\sp\vehicle_treads::_id_1324B();
   var_0 thread _id_92D3();
   var_0 thread _id_1F6E();
 
-  if(isDefined(var_0._id_ED48))
+  if(isDefined(var_0._id_ED48)) {
     var_0 thread _id_0B77::_id_131C1();
+  }
 
   var_0 thread _id_B6B7();
 
-  if(isDefined(level.vehicle._id_1066A))
+  if(isDefined(level.vehicle._id_1066A)) {
     level thread[[level.vehicle._id_1066A]](var_0);
+  }
 
-  if(isDefined(var_0.script_team))
+  if(isDefined(var_0.script_team)) {
     var_0 setvehicleteam(var_0.script_team);
+  }
 
   var_0 thread _id_5636();
   var_0 thread scripts\sp\vehicle_paths::_id_8023();
 
-  if(isDefined(level._id_9334))
+  if(isDefined(level._id_9334)) {
     var_11 = level._id_9334;
-  else
+  } else {
     var_11 = 0;
+  }
 
-  if(var_0 _id_8BFC() && !var_11)
+  if(var_0 _id_8BFC() && !var_11) {
     var_0 thread _id_1A93();
+  }
 
   if(var_0 _meth_83E2()) {
     var_0.veh_pathtype = "constrained";
 
-    if(isDefined(var_0._id_EE7C))
+    if(isDefined(var_0._id_EE7C)) {
       var_0.veh_pathtype = var_0._id_EE7C;
+    }
   }
 
   var_0 spawn_group();
@@ -327,29 +359,34 @@ _id_A5CB(var_0) {
   if(!isDefined(level.vehicle._id_116CE._id_4E1C) || !isDefined(level.vehicle._id_116CE._id_4E1C[var_0])) {
     return;
   }
-  if(isDefined(self._id_4E38))
+  if(isDefined(self._id_4E38)) {
     var_1 = self._id_4E38;
-  else
+  } else {
     var_1 = level.vehicle._id_116CE._id_4E1C[var_0]._id_B48B;
+  }
 
-  if(isDefined(self._id_4E39))
+  if(isDefined(self._id_4E39)) {
     var_2 = self._id_4E39;
-  else
+  } else {
     var_2 = level.vehicle._id_116CE._id_4E1C[var_0]._id_B758;
+  }
 
-  if(isDefined(level.vehicle._id_116CE._id_4E1C[var_0].delay))
+  if(isDefined(level.vehicle._id_116CE._id_4E1C[var_0].delay)) {
     wait(level.vehicle._id_116CE._id_4E1C[var_0].delay);
+  }
 
   if(!isDefined(self)) {
     return;
   }
-  if(level.vehicle._id_116CE._id_4E1C[var_0]._id_2B19)
+  if(level.vehicle._id_116CE._id_4E1C[var_0]._id_2B19) {
     level.player _meth_80D0(0);
+  }
 
   self radiusdamage(self.origin + level.vehicle._id_116CE._id_4E1C[var_0].offset, level.vehicle._id_116CE._id_4E1C[var_0]._id_DCCA, var_1, var_2, self);
 
-  if(level.vehicle._id_116CE._id_4E1C[var_0]._id_2B19)
+  if(level.vehicle._id_116CE._id_4E1C[var_0]._id_2B19) {
     level.player _meth_80D0(1);
+  }
 }
 
 _id_131FA() {
@@ -359,8 +396,9 @@ _id_131FA() {
   for(;;) {
     self waittill("death", var_1, var_2, var_3);
 
-    if(isDefined(self._id_4C49))
+    if(isDefined(self._id_4C49)) {
       self thread[[self._id_4C49]]();
+    }
 
     if(!var_0) {
       var_0 = 1;
@@ -368,15 +406,17 @@ _id_131FA() {
       if(isDefined(var_1) && isDefined(var_2)) {
         var_1 scripts\sp\player_stats::_id_DEBD(self, var_2, var_3);
 
-        if(isDefined(self._id_4D28))
+        if(isDefined(self._id_4D28)) {
           self._id_4D28 = undefined;
+        }
       }
     }
 
     self notify("clear_c4");
 
-    if(isDefined(self._id_E7D2))
+    if(isDefined(self._id_E7D2)) {
       self._id_E7D2 delete();
+    }
 
     if(isDefined(self.mgturret)) {
       scripts\engine\utility::array_levelthread(self.mgturret, ::_id_129E4);
@@ -386,8 +426,9 @@ _id_131FA() {
     if(!isDefined(self) || _id_9BA8()) {
       if(isDefined(self._id_E4FB)) {
         foreach(var_5 in self._id_E4FB) {
-          if(isDefined(var_5))
+          if(isDefined(var_5)) {
             var_5 delete();
+          }
         }
       }
 
@@ -402,16 +443,19 @@ _id_131FA() {
 
     var_7 = undefined;
 
-    if(isDefined(self._id_1322C))
+    if(isDefined(self._id_1322C)) {
       var_7 = self._id_1322C;
-    else if(isDefined(level.vehicle._id_116CE._id_E7BA[self.classname]))
+    } else if(isDefined(level.vehicle._id_116CE._id_E7BA[self.classname])) {
       var_7 = level.vehicle._id_116CE._id_E7BA[self.classname];
+    }
 
-    if(isDefined(var_7))
+    if(isDefined(var_7)) {
       self stoprumble(var_7._id_E7BA);
+    }
 
-    if(isDefined(level.vehicle._id_116CE._id_4E23[self.vehicletype]))
+    if(isDefined(level.vehicle._id_116CE._id_4E23[self.vehicletype])) {
       thread[[level.vehicle._id_116CE._id_4E23[self.vehicletype]]]();
+    }
 
     scripts\engine\utility::array_levelthread(self._id_E4FB, scripts\sp\vehicle_aianim::_id_876B, var_1, self.vehicletype);
     thread _id_A5CB(self.classname);
@@ -419,10 +463,11 @@ _id_131FA() {
     thread scripts\sp\vehicle_lights::_id_A5F2(self.classname);
     _id_5144();
 
-    if(isDefined(level.vehicle._id_116CE._id_4E4E[self.classname]))
+    if(isDefined(level.vehicle._id_116CE._id_4E4E[self.classname])) {
       thread _id_F331(level.vehicle._id_116CE._id_4E4E[self.classname], level.vehicle._id_131C3[self.classname]);
-    else if(isDefined(level.vehicle._id_116CE._id_4E4E[self.model]))
+    } else if(isDefined(level.vehicle._id_116CE._id_4E4E[self.model])) {
       thread _id_F331(level.vehicle._id_116CE._id_4E4E[self.model], level.vehicle._id_131C3[self.model]);
+    }
 
     var_8 = _id_13233(self.model, var_1, var_2);
     var_9 = self.origin;
@@ -436,14 +481,16 @@ _id_131FA() {
     thread _id_A5CC(self.classname);
     thread _id_12FB(self.model, var_8, var_10);
 
-    if(self.code_classname == "script_vehicle")
+    if(self.code_classname == "script_vehicle") {
       thread _id_A5EE(self.classname);
+    }
 
     if(isDefined(self.delete_on_death)) {
       wait 0.05;
 
-      if(!isDefined(self._id_5958) && !self _meth_83E2())
+      if(!isDefined(self._id_5958) && !self _meth_83E2()) {
         self disconnectPaths();
+      }
 
       _freezelookcontrols();
       wait 0.05;
@@ -455,8 +502,9 @@ _id_131FA() {
     if(isDefined(self._id_736A)) {
       self notify("newpath");
 
-      if(!isDefined(self._id_5958))
+      if(!isDefined(self._id_5958)) {
         self disconnectPaths();
+      }
 
       _id_131FB();
       _freezelookcontrols();
@@ -468,11 +516,13 @@ _id_131FA() {
     if(!isDefined(self)) {
       return;
     }
-    if(!var_8)
+    if(!var_8) {
       var_9 = self.origin;
+    }
 
-    if(isDefined(level.vehicle._id_116CE._id_4E02[self.classname]))
+    if(isDefined(level.vehicle._id_116CE._id_4E02[self.classname])) {
       earthquake(level.vehicle._id_116CE._id_4E02[self.classname]._id_EB9C, level.vehicle._id_116CE._id_4E02[self.classname]._id_5F36, var_9, level.vehicle._id_116CE._id_4E02[self.classname].radius);
+    }
 
     wait 0.5;
 
@@ -480,15 +530,17 @@ _id_131FA() {
       continue;
     }
     if(isDefined(self)) {
-      while(isDefined(self._id_5960) && isDefined(self))
+      while(isDefined(self._id_5960) && isDefined(self)) {
         wait 0.05;
+      }
 
       if(!isDefined(self)) {
         continue;
       }
       if(self _meth_83E2()) {
-        while(isDefined(self) && self.veh_speed != 0)
+        while(isDefined(self) && self.veh_speed != 0) {
           wait 1;
+        }
 
         if(!isDefined(self)) {
           return;
@@ -502,8 +554,9 @@ _id_131FA() {
       } else
         _freezelookcontrols();
 
-      if(self._id_B91F)
+      if(self._id_B91F) {
         self hide();
+      }
     }
 
     if(_id_143E()) {
@@ -610,27 +663,33 @@ _id_131D7(var_0) {
   }
   self _meth_83D0(#animtree);
 
-  if(isDefined(level.vehicle._id_116CE._id_5BC3[var_0]))
+  if(isDefined(level.vehicle._id_116CE._id_5BC3[var_0])) {
     self clearanim(level.vehicle._id_116CE._id_5BC3[var_0], 0);
+  }
 
-  if(isDefined(level.vehicle._id_116CE._id_5BC6[var_0]))
+  if(isDefined(level.vehicle._id_116CE._id_5BC6[var_0])) {
     self clearanim(level.vehicle._id_116CE._id_5BC6[var_0], 0);
+  }
 }
 
 _id_13233(var_0, var_1, var_2) {
   if(!isDefined(self._id_1D63) || self._id_1D63 == 0) {
-    if(isDefined(self._id_627C) && self._id_627C == 0)
+    if(isDefined(self._id_627C) && self._id_627C == 0) {
       return 0;
+    }
 
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       return 0;
+    }
 
-    if(!(var_2 == "MOD_PROJECTILE" || var_2 == "MOD_PROJECTILE_SPLASH"))
+    if(!(var_2 == "MOD_PROJECTILE" || var_2 == "MOD_PROJECTILE_SPLASH")) {
       return 0;
+    }
   }
 
-  if(isDefined(self._id_9B65) && self._id_9B65)
+  if(isDefined(self._id_9B65) && self._id_9B65) {
     return 1;
+  }
 
   return _id_131ED(var_0);
 }
@@ -642,21 +701,22 @@ _id_131ED(var_0) {
 _id_131CE(var_0, var_1, var_2, var_3) {
   var_4 = "tank";
 
-  if(self _meth_83E2())
+  if(self _meth_83E2()) {
     var_4 = "physics";
-  else if(_id_12F8())
+  } else if(_id_12F8()) {
     var_4 = "helicopter";
-  else if(isDefined(self._id_4BF7))
+  } else if(isDefined(self._id_4BF7)) {
     var_4 = "none";
+  }
 
   switch (var_4) {
     case "helicopter":
       thread _id_8DA7(var_1, var_2, var_3);
       break;
     case "tank":
-      if(!isDefined(self._id_E683))
+      if(!isDefined(self._id_E683)) {
         self vehicle_setspeed(0, 25);
-      else {
+      } else {
         self vehicle_setspeed(8, 25);
         self waittill("deathrolloff");
         self vehicle_setspeed(0, 25);
@@ -664,35 +724,42 @@ _id_131CE(var_0, var_1, var_2, var_3) {
 
       self notify("deadstop");
 
-      if(!isDefined(self._id_5958))
+      if(!isDefined(self._id_5958)) {
         self disconnectPaths();
+      }
 
-      if(isDefined(self._id_114E0) && self._id_114E0 > 0)
+      if(isDefined(self._id_114E0) && self._id_114E0 > 0) {
         self waittill("animsdone");
+      }
 
       break;
     case "physics":
       self _meth_83EF();
       self notify("deadstop");
 
-      if(!isDefined(self._id_5958))
+      if(!isDefined(self._id_5958)) {
         self disconnectPaths();
+      }
 
-      if(isDefined(self._id_114E0) && self._id_114E0 > 0)
+      if(isDefined(self._id_114E0) && self._id_114E0 > 0) {
         self waittill("animsdone");
+      }
 
       break;
   }
 
-  if(isDefined(level.vehicle._id_116CE._id_8B8F[var_0]) && level.vehicle._id_116CE._id_8B8F[var_0])
+  if(isDefined(level.vehicle._id_116CE._id_8B8F[var_0]) && level.vehicle._id_116CE._id_8B8F[var_0]) {
     self _meth_8080();
+  }
 
   if(_id_12F8()) {
-    if(isDefined(self._id_4828) && self._id_4828 == 1)
+    if(isDefined(self._id_4828) && self._id_4828 == 1) {
       self waittill("crash_done");
+    }
   } else {
-    while(!_id_9BA8() && isDefined(self) && self vehicle_getspeed() > 0)
+    while(!_id_9BA8() && isDefined(self) && self vehicle_getspeed() > 0) {
       wait 0.1;
+    }
   }
 
   self notify("stop_looping_death_fx");
@@ -702,8 +769,9 @@ _id_131CE(var_0, var_1, var_2, var_3) {
 _id_9BA8() {
   var_0 = 0;
 
-  if(isDefined(self) && self.classname == "script_vehicle_corpse")
+  if(isDefined(self) && self.classname == "script_vehicle_corpse") {
     var_0 = 1;
+  }
 
   return var_0;
 }
@@ -712,22 +780,26 @@ _id_F331(var_0, var_1) {
   if(isDefined(self._id_10268) && self._id_10268) {
     return;
   }
-  if(isDefined(var_1) && var_1 > 0)
+  if(isDefined(var_1) && var_1 > 0) {
     wait(var_1);
+  }
 
   if(!isDefined(self)) {
     return;
   }
-  if(isDefined(self._id_412A))
+  if(isDefined(self._id_412A)) {
     self clearanim(%root, 0);
+  }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self setModel(var_0);
+  }
 }
 
 _id_8DA7(var_0, var_1, var_2) {
-  if(isDefined(var_0) && isPlayer(var_0))
+  if(isDefined(var_0) && isPlayer(var_0)) {
     self._id_C720 = var_0;
+  }
 
   self._id_4828 = 1;
 
@@ -736,8 +808,9 @@ _id_8DA7(var_0, var_1, var_2) {
   }
   _id_5389();
 
-  if(!var_2)
+  if(!var_2) {
     thread _id_8DAB(var_0, var_1);
+  }
 }
 
 _id_A60E(var_0) {
@@ -748,8 +821,9 @@ _id_A60E(var_0) {
     if(!isDefined(var_2._id_E500) && !isDefined(var_2._id_5BD6)) {
       continue;
     }
-    if(isDefined(var_2._id_B14F))
+    if(isDefined(var_2._id_B14F)) {
       var_2 scripts\sp\utility::_id_1101B();
+    }
 
     var_2 _meth_81D0();
   }
@@ -788,18 +862,20 @@ _id_143F(var_0, var_1) {
   self endon("death");
   self notify("newpath");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 2;
+  }
 
   self setneargoalnotifydist(var_0);
   self sethoverparams(0, 0, 0);
   self cleargoalyaw();
   self settargetyaw(scripts\engine\utility::flat_angle(self.angles)[1]);
 
-  if(isDefined(self._id_12BC2))
+  if(isDefined(self._id_12BC2)) {
     _setvehgoalpos_wrap(scripts\sp\utility::_id_864C(self.origin) + (0, 0, self._id_12BC2), 1);
-  else
+  } else {
     _setvehgoalpos_wrap(scripts\sp\utility::_id_864C(self.origin), 1);
+  }
 
   self waittill("goal");
 }
@@ -812,16 +888,18 @@ _id_13200(var_0, var_1) {
   }
   var_2 = level.vehicle._id_116CE._id_A7C5[self.classname];
 
-  foreach(var_4 in var_2)
-  self _meth_82A2(var_4.land, 1, 0.2, 1);
+  foreach(var_4 in var_2) {
+    self _meth_82A2(var_4.land, 1, 0.2, 1);
+  }
 
   if(!var_1) {
     return;
   }
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self waittill("unloaded");
-  else
+  } else {
     self waittill("continuepath");
+  }
 
   foreach(var_4 in var_2) {
     self clearanim(var_4.land, 0);
@@ -839,8 +917,9 @@ _id_10809(var_0) {
   }
   var_1 = scripts\sp\utility::_id_10808();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 _meth_83F4(var_0);
+  }
 
   var_1 thread vehicle_caps();
   var_1 endon("death");
@@ -854,8 +933,9 @@ _id_AB23() {
   scripts\engine\utility::waittill_either("enable_spline_path", "reached_end_node");
   var_0 = _id_7B03(self.origin);
 
-  if(isDefined(level._id_5BC2))
+  if(isDefined(level._id_5BC2)) {
     var_0 thread[[level._id_5BC2]](self);
+  }
 }
 
 _id_7B03(var_0) {
@@ -863,13 +943,15 @@ _id_7B03(var_0) {
   var_1 = scripts\engine\utility::get_array_of_closest(var_0, level._id_103D0);
   var_2 = [];
 
-  for(var_3 = 0; var_3 < 3; var_3++)
+  for(var_3 = 0; var_3 < 3; var_3++) {
     var_2[var_3] = var_1[var_3];
+  }
 
   foreach(var_5 in level._id_103D0) {
     foreach(var_7 in var_2) {
-      if(var_7 == var_5)
+      if(var_7 == var_5) {
         return var_7;
+      }
     }
   }
 }
@@ -880,8 +962,9 @@ _id_13804(var_0) {
   var_3 = gettime() + var_2;
 
   while(isDefined(self)) {
-    if(abs(self.angles[0]) > var_1 || abs(self.angles[2]) > var_1)
+    if(abs(self.angles[0]) > var_1 || abs(self.angles[2]) > var_1) {
       var_3 = gettime() + var_2;
+    }
 
     if(gettime() > var_3) {
       break;
@@ -906,18 +989,21 @@ _id_1446(var_0) {
     scripts\sp\utility::_id_65E1("no_riders_until_unload");
     var_1 = _id_10805(var_0);
 
-    foreach(var_3 in var_1)
-    scripts\sp\utility::_id_106ED(var_3);
+    foreach(var_3 in var_1) {
+      scripts\sp\utility::_id_106ED(var_3);
+    }
 
     waittillframeend;
   }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self._id_12BBC = var_0;
+  }
 
   foreach(var_6 in self._id_E4FB) {
-    if(isalive(var_6))
+    if(isalive(var_6)) {
       var_6 notify("unload");
+    }
   }
 
   var_1 = scripts\sp\vehicle_aianim::_id_1F74("unload");
@@ -928,8 +1014,9 @@ _id_1446(var_0) {
     var_9 = scripts\sp\vehicle_aianim::_id_7D2F();
 
     foreach(var_12, var_11 in self._id_E4FB) {
-      if(isDefined(var_9[var_11._id_1321D]))
+      if(isDefined(var_9[var_11._id_1321D])) {
         var_1[var_1.size] = var_11;
+      }
     }
   }
 
@@ -940,8 +1027,9 @@ _setvehgoalpos_wrap(var_0, var_1) {
   if(self.health <= 0) {
     return;
   }
-  if(isDefined(self._id_C737))
+  if(isDefined(self._id_C737)) {
     var_0 = var_0 + (0, 0, self._id_C737);
+  }
 
   self setvehgoalpos(var_0, var_1);
 }
@@ -949,9 +1037,9 @@ _setvehgoalpos_wrap(var_0, var_1) {
 _id_8DAB(var_0, var_1) {
   self endon("in_air_explosion");
 
-  if(isDefined(self._id_CA16))
+  if(isDefined(self._id_CA16)) {
     var_2 = self._id_CA16;
-  else {
+  } else {
     var_3 = _id_7D31();
     var_2 = scripts\engine\utility::getclosest(self.origin, var_3);
   }
@@ -962,8 +1050,9 @@ _id_8DAB(var_0, var_1) {
   var_4 = 0;
   var_5 = 0;
 
-  if(isDefined(var_2.script_parameters) && var_2.script_parameters == "direct")
+  if(isDefined(var_2.script_parameters) && var_2.script_parameters == "direct") {
     var_5 = 1;
+  }
 
   if(isDefined(self._id_8D3C)) {
     var_5 = 0;
@@ -1020,8 +1109,9 @@ _id_8DAC(var_0) {
     var_0 = scripts\engine\utility::getStruct(var_0.target, "targetname");
     var_1 = 56;
 
-    if(isDefined(var_0.radius))
+    if(isDefined(var_0.radius)) {
       var_1 = var_0.radius;
+    }
 
     self setneargoalnotifydist(var_1);
     self setvehgoalpos(var_0.origin, 0);
@@ -1104,10 +1194,11 @@ _id_8DAE() {
     }
     var_1 = randomintrange(20, 120);
 
-    if(var_0)
+    if(var_0) {
       self settargetyaw(self.angles[1] + var_1);
-    else
+    } else {
       self settargetyaw(self.angles[1] - var_1);
+    }
 
     var_0 = 1 - var_0;
     var_2 = randomfloatrange(0.5, 1.0);
@@ -1153,8 +1244,9 @@ _id_5389() {
   }
   var_0 = getarraykeys(self._id_6B9D);
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     self._id_6B9D[var_0[var_1]] unlink();
+  }
 }
 
 _id_131FB() {
@@ -1180,8 +1272,9 @@ _id_A5EE(var_0) {
 }
 
 isdestroyed() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return 0;
+  }
 
   return isDefined(self._id_00ED);
 }
@@ -1210,37 +1303,43 @@ _id_12FB(var_0, var_1, var_2) {
   var_3 = self.vehicletype;
   var_4 = self.classname;
 
-  if(var_1)
+  if(var_1) {
     var_4 = "rocket_death" + var_4;
+  }
 
-  foreach(var_6 in level.vehicle._id_116CE._id_131BC[var_4])
-  thread _id_A5E1(var_0, var_6, var_3, var_2);
+  foreach(var_6 in level.vehicle._id_116CE._id_131BC[var_4]) {
+    thread _id_A5E1(var_0, var_6, var_3, var_2);
+  }
 }
 
 _id_A5E1(var_0, var_1, var_2, var_3) {
   if(isDefined(var_1._id_136A1)) {
-    if(var_1._id_136A1 >= 0)
+    if(var_1._id_136A1 >= 0) {
       wait(var_1._id_136A1);
-    else
+    } else {
       self waittill("death_finished");
+    }
   }
 
   if(!isDefined(self)) {
     return;
   }
-  if(isDefined(var_1._id_C174))
+  if(isDefined(var_1._id_C174)) {
     self notify(var_1._id_C174);
+  }
 
-  if(isDefined(var_1._id_F1EA))
+  if(isDefined(var_1._id_F1EA)) {
     scripts\engine\utility::delaycall(var_1._id_F1EA, ::delete);
+  }
 
   if(isDefined(var_1.effect)) {
     if(var_1._id_2A4E && !isDefined(self.delete_on_death)) {
       if(isDefined(var_1.tag)) {
-        if(isDefined(var_1._id_10E6A) && var_1._id_10E6A == 1)
+        if(isDefined(var_1._id_10E6A) && var_1._id_10E6A == 1) {
           thread _id_B03F(var_1.effect, var_1.delay, var_1.tag);
-        else
+        } else {
           thread _id_D4C4(var_1.effect, var_1.delay, var_1.tag);
+        }
       } else {
         var_4 = self.origin + (0, 0, 100) - self.origin;
         playFX(var_1.effect, self.origin, var_4);
@@ -1252,20 +1351,22 @@ _id_A5E1(var_0, var_1, var_2, var_3) {
         var_5 = _id_4E49();
         playFX(var_1.effect, var_5 gettagorigin(var_1.tag), var_4);
 
-        if(isDefined(var_1._id_DFEC))
+        if(isDefined(var_1._id_DFEC)) {
           var_5 scripts\engine\utility::delaycall(var_1._id_DFEC, ::delete);
+        }
       } else {
         playFXOnTag(var_1.effect, _id_4E49(), var_1.tag);
 
-        if(isDefined(var_1._id_DFEC))
+        if(isDefined(var_1._id_DFEC)) {
           _id_4E49() scripts\engine\utility::delaycall(var_1._id_DFEC, ::delete);
+        }
       }
     } else {
       var_4 = _id_12FC(var_3, var_1._id_24DF);
 
-      if(isDefined(var_4))
+      if(isDefined(var_4)) {
         playFX(var_1.effect, self.origin, var_4);
-      else {
+      } else {
         var_4 = self.origin + (0, 0, 100) - self.origin;
         playFX(var_1.effect, self.origin, var_4);
       }
@@ -1273,10 +1374,11 @@ _id_A5E1(var_0, var_1, var_2, var_3) {
   }
 
   if(isDefined(var_1.sound) && !isDefined(self.delete_on_death)) {
-    if(var_1._id_312E)
+    if(var_1._id_312E) {
       thread _id_4E05(var_1.sound);
-    else
+    } else {
       scripts\engine\utility::play_sound_in_space(var_1.sound);
+    }
   }
 }
 
@@ -1300,8 +1402,9 @@ _id_4E05(var_0) {
 }
 
 _id_4E49() {
-  if(isDefined(self._id_4E0A) && self._id_4E0A)
+  if(isDefined(self._id_4E0A) && self._id_4E0A) {
     return self;
+  }
 
   if(!isDefined(self._id_4E49)) {
     var_0 = spawn("script_model", (0, 0, 0));
@@ -1350,8 +1453,9 @@ _id_A5BF(var_0) {
   }
   var_1 = level.vehicle._id_116CE._id_4DFC[var_0];
 
-  if(isDefined(var_1.delay))
+  if(isDefined(var_1.delay)) {
     wait(var_1.delay);
+  }
 
   if(!isDefined(self)) {
     return;
@@ -1361,12 +1465,14 @@ _id_A5BF(var_0) {
 
 _id_129E4(var_0) {
   if(isDefined(self)) {
-    if(isDefined(var_0._id_51AD))
+    if(isDefined(var_0._id_51AD)) {
       wait(var_0._id_51AD);
+    }
   }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 _id_12B8(var_0, var_1) {
@@ -1384,8 +1490,9 @@ _id_12B8(var_0, var_1) {
     if(var_3 && var_6.code_classname != "script_vehicle") {
       continue;
     }
-    if(isspawner(var_6))
+    if(isspawner(var_6)) {
       var_2[var_2.size] = var_6;
+    }
   }
 
   return var_2;
@@ -1406,8 +1513,9 @@ _id_1322D(var_0) {
 }
 
 _id_12E33(var_0) {
-  if(var_0._id_12E3C == gettime())
+  if(var_0._id_12E3C == gettime()) {
     return var_0._id_10F82;
+  }
 
   var_0._id_12E3C = gettime();
 
@@ -1422,8 +1530,9 @@ _id_12E33(var_0) {
       if(var_1 != 0) {
         var_3 = 1.0 / abs(var_1);
 
-        if(var_3 < 1)
+        if(var_3 < 1) {
           var_1 = var_1 * var_3;
+        }
       }
     }
 
@@ -1432,8 +1541,9 @@ _id_12E33(var_0) {
     if(var_4 != 0) {
       var_5 = var_0._id_10F84 / abs(var_4);
 
-      if(var_5 < 1)
+      if(var_5 < 1) {
         var_4 = var_4 * var_5;
+      }
 
       var_0._id_10F82 = var_0._id_10F82 + var_4;
     }
@@ -1450,8 +1560,9 @@ _id_79D5(var_0) {
 _id_79D3(var_0) {
   var_1 = getEntArray(var_0, "targetname");
 
-  if(isDefined(var_1) && var_1.size > 0)
+  if(isDefined(var_1) && var_1.size > 0) {
     return var_1[randomint(var_1.size)];
+  }
 
   return undefined;
 }
@@ -1501,8 +1612,9 @@ _id_4CFC() {
           wait 4;
           level._id_2184 = 0;
 
-          if(isDefined(self))
+          if(isDefined(self)) {
             self._id_56DE = 0;
+          }
 
           break;
         }
@@ -1540,16 +1652,18 @@ _id_4CFD() {
           level._id_2184 = 1;
           self._id_56DE = 1;
 
-          if(var_4 == "mod_grenade" || var_4 == "mod_grenade_splash")
+          if(var_4 == "mod_grenade" || var_4 == "mod_grenade_splash") {
             var_1 scripts\sp\utility::_id_56BA("invulerable_frags");
-          else
+          } else {
             var_1 scripts\sp\utility::_id_56BA("invulerable_bullets");
+          }
 
           wait 4;
           level._id_2184 = 0;
 
-          if(isDefined(self))
+          if(isDefined(self)) {
             self._id_56DE = 0;
+          }
 
           break;
         }
@@ -1560,8 +1674,9 @@ _id_4CFD() {
 _id_4CFE() {
   self waittill("death");
 
-  if(self._id_56DE)
+  if(self._id_56DE) {
     level._id_2184 = 0;
+  }
 }
 
 _id_1A93(var_0) {
@@ -1571,19 +1686,22 @@ _id_1A93(var_0) {
   self endon("stop_kicking_up_dust");
   var_1 = 2000;
 
-  if(isDefined(level._id_126F3))
+  if(isDefined(level._id_126F3)) {
     var_1 = level._id_126F3;
+  }
 
   var_2 = 80 / var_1;
   var_3 = 0.5;
 
-  if(_id_12F6())
+  if(_id_12F6()) {
     var_3 = 0.15;
+  }
 
   var_4 = self;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_4 = var_0;
+  }
 
   var_5 = 3;
 
@@ -1594,8 +1712,9 @@ _id_1A93(var_0) {
       if(isDefined(self._id_55A4) && self._id_55A4) {
         continue;
       }
-      if(isDefined(self._id_126F3))
+      if(isDefined(self._id_126F3)) {
         var_1 = self._id_126F3;
+      }
 
       var_6 = anglestoup(var_4.angles) * -1;
       var_7 = undefined;
@@ -1630,14 +1749,16 @@ _id_1A93(var_0) {
       var_12 = var_4.origin + (0, 0, var_8);
       var_13 = var_10 - var_12;
 
-      if(isDefined(self._id_126F4))
+      if(isDefined(self._id_126F4)) {
         var_13 = var_10 - level.player.origin;
+      }
 
       if(vectordot(var_7["normal"], (0, 0, 1)) == -1) {
         continue;
       }
-      if(length(var_13) < 1)
+      if(length(var_13) < 1) {
         var_13 = var_4.angles + (0, 180, 0);
+      }
 
       playFX(var_9, var_10, var_11, var_13);
     }
@@ -1649,12 +1770,13 @@ _id_7D53(var_0, var_1, var_2, var_3) {
   var_5 = undefined;
   var_6 = vectordot((0, 0, -1), var_2);
 
-  if(var_6 >= 0.97)
+  if(var_6 >= 0.97) {
     var_5 = undefined;
-  else if(var_6 >= 0.92)
+  } else if(var_6 >= 0.92) {
     var_5 = "_bank";
-  else
+  } else {
     var_5 = "_bank_lg";
+  }
 
   return _id_7D52(var_0.classname, var_4, var_5);
 }
@@ -1663,20 +1785,22 @@ _id_7D52(var_0, var_1, var_2) {
   if(isDefined(var_2)) {
     var_3 = var_1 + var_2;
 
-    if(!isDefined(level.vehicle._id_116CE._id_112D9[var_0][var_3]) && var_1 != "default")
+    if(!isDefined(level.vehicle._id_116CE._id_112D9[var_0][var_3]) && var_1 != "default") {
       return _id_7D52(var_0, "default", var_2);
-    else
+    } else {
       return level.vehicle._id_116CE._id_112D9[var_0][var_3];
+    }
   }
 
   return _id_7D44(var_0, var_1);
 }
 
 _id_7D44(var_0, var_1) {
-  if(!isDefined(level.vehicle._id_116CE._id_112D9[var_0][var_1]) && var_1 != "default")
+  if(!isDefined(level.vehicle._id_116CE._id_112D9[var_0][var_1]) && var_1 != "default") {
     return _id_7D44(var_0, "default");
-  else
+  } else {
     return level.vehicle._id_116CE._id_112D9[var_0][var_1];
+  }
 
   return undefined;
 }
@@ -1694,24 +1818,29 @@ _id_12F6() {
 }
 
 _id_8BFC() {
-  if(!_id_12F8() && !_id_12F6())
+  if(!_id_12F8() && !_id_12F6()) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_8BFD() {
-  if(!isDefined(self.vehicletype))
+  if(!isDefined(self.vehicletype)) {
     return 0;
+  }
 
-  if(self.vehicletype == "cobra")
+  if(self.vehicletype == "cobra") {
     return 1;
+  }
 
-  if(self.vehicletype == "cobra_player")
+  if(self.vehicletype == "cobra_player") {
     return 1;
+  }
 
-  if(self.vehicletype == "viper")
+  if(self.vehicletype == "viper") {
     return 1;
+  }
 
   return 0;
 }
@@ -1720,8 +1849,9 @@ _id_5636() {
   self endon("death");
   var_0 = 0;
 
-  if(isDefined(self.script_disconnectpaths) && !self.script_disconnectpaths)
+  if(isDefined(self.script_disconnectpaths) && !self.script_disconnectpaths) {
     var_0 = 1;
+  }
 
   if(var_0) {
     self._id_5958 = 1;
@@ -1732,9 +1862,9 @@ _id_5636() {
 
   while(isDefined(self)) {
     if(self vehicle_getspeed() < 1) {
-      if(!isDefined(self._id_5958))
+      if(!isDefined(self._id_5958)) {
         self disconnectPaths();
-      else {}
+      } else {}
 
       self notify("speed_zero_path_disconnect");
 
@@ -1763,8 +1893,9 @@ _id_B6B7() {
   }
   var_1 = 0;
 
-  if(isDefined(self._id_EE14))
+  if(isDefined(self._id_EE14)) {
     var_1 = self._id_EE14;
+  }
 
   var_2 = level.vehicle._id_116CE.mgturret[var_0];
 
@@ -1774,8 +1905,9 @@ _id_B6B7() {
   var_3 = isDefined(self.script_noteworthy) && self.script_noteworthy == "onemg";
   var_4 = "";
 
-  if(isDefined(self._id_EEF9))
+  if(isDefined(self._id_EEF9)) {
     var_4 = self._id_EEF9;
+  }
 
   foreach(var_8, var_6 in var_2) {
     if(isDefined(var_6._id_DE46) && !issubstr(var_4, var_6._id_DE46)) {
@@ -1783,10 +1915,11 @@ _id_B6B7() {
     }
     var_7 = spawnturret("misc_turret", (0, 0, 0), var_6.info);
 
-    if(isDefined(var_6._id_C367))
+    if(isDefined(var_6._id_C367)) {
       var_7 linkTo(self, var_6.tag, var_6._id_C367, (0, -1 * var_1, 0));
-    else
+    } else {
       var_7 linkTo(self, var_6.tag, (0, 0, 0), (0, -1 * var_1, 0));
+    }
 
     var_7 setModel(var_6.model);
     var_7.angles = self.angles;
@@ -1798,20 +1931,25 @@ _id_B6B7() {
     _id_F5D8(var_7);
     level thread scripts\sp\mgturret::_id_B6A7(var_7, scripts\sp\utility::_id_7E72());
 
-    if(isDefined(self._id_ED98))
+    if(isDefined(self._id_ED98)) {
       var_7._id_ED98 = self._id_ED98;
+    }
 
-    if(isDefined(var_6._id_51AD))
+    if(isDefined(var_6._id_51AD)) {
       var_7._id_51AD = var_6._id_51AD;
+    }
 
-    if(isDefined(var_6._id_01D2))
+    if(isDefined(var_6._id_01D2)) {
       var_7._id_01D2 = var_6._id_01D2;
+    }
 
-    if(isDefined(var_6._id_5035))
+    if(isDefined(var_6._id_5035)) {
       var_7 setdefaultdroppitch(var_6._id_5035);
+    }
 
-    if(isDefined(var_6._id_DE46))
+    if(isDefined(var_6._id_DE46)) {
       var_7._id_DE46 = var_6._id_DE46;
+    }
 
     self.mgturret[var_8] = var_7;
 
@@ -1823,16 +1961,18 @@ _id_B6B7() {
   foreach(var_11, var_7 in self.mgturret) {
     var_10 = level.vehicle._id_116CE.mgturret[var_0][var_11]._id_5041;
 
-    if(isDefined(var_10))
+    if(isDefined(var_10)) {
       var_7 _id_12A29(var_10);
+    }
   }
 
-  if(!isDefined(self._id_EEF8))
+  if(!isDefined(self._id_EEF8)) {
     self._id_EEF8 = 1;
+  }
 
-  if(self._id_EEF8 == 0)
+  if(self._id_EEF8 == 0) {
     thread _id_134C();
-  else {
+  } else {
     self._id_EEF8 = 1;
     thread _id_134D();
   }
@@ -1863,8 +2003,9 @@ _id_F5D8(var_0) {
 _id_1F6E() {
   self endon("suspend_drive_anims");
 
-  if(!isDefined(self._id_13D02))
+  if(!isDefined(self._id_13D02)) {
     self._id_13D02 = 1;
+  }
 
   var_0 = self.model;
   var_1 = -1;
@@ -1874,15 +2015,17 @@ _id_1F6E() {
   if(!isDefined(level.vehicle._id_116CE._id_5BC3[var_0])) {
     return;
   }
-  if(!isDefined(level.vehicle._id_116CE._id_5BC6[var_0]))
+  if(!isDefined(level.vehicle._id_116CE._id_5BC6[var_0])) {
     level.vehicle._id_116CE._id_5BC6[var_0] = level.vehicle._id_116CE._id_5BC3[var_0];
+  }
 
   self endon("death");
   var_3 = level.vehicle._id_116CE._id_5BC5[var_0];
   var_4 = 1.0;
 
-  if(isDefined(level.vehicle._id_116CE._id_5BC4) && isDefined(level.vehicle._id_116CE._id_5BC4[var_0]))
+  if(isDefined(level.vehicle._id_116CE._id_5BC4) && isDefined(level.vehicle._id_116CE._id_5BC4[var_0])) {
     var_4 = level.vehicle._id_116CE._id_5BC4[var_0];
+  }
 
   var_5 = self._id_13D02;
   var_6 = level.vehicle._id_116CE._id_5BC3[var_0];
@@ -1915,8 +2058,9 @@ _id_1F6E() {
 
       var_2 = 0.01;
 
-      if(var_2 >= 1 || var_2 == 0)
+      if(var_2 >= 1 || var_2 == 0) {
         var_2 = 0.01;
+      }
 
       var_5 = self._id_13D02;
     }
@@ -1941,38 +2085,43 @@ _id_FA7A(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-    if(isspawner(var_3))
+    if(isspawner(var_3)) {
       continue;
-    else
+    } else {
       var_1[var_1.size] = var_3;
+    }
   }
 
-  foreach(var_6 in var_1)
-  thread _id_131F6(var_6);
+  foreach(var_6 in var_1) {
+    thread _id_131F6(var_6);
+  }
 }
 
 _id_13203() {
   var_0 = self.classname;
 
-  if(!isDefined(level.vehicle._id_116CE._id_AC4A) || !isDefined(level.vehicle._id_116CE._id_AC4A[var_0]))
+  if(!isDefined(level.vehicle._id_116CE._id_AC4A) || !isDefined(level.vehicle._id_116CE._id_AC4A[var_0])) {
     wait 2;
+  }
 
-  if(isDefined(self._id_EEC8))
+  if(isDefined(self._id_EEC8)) {
     self.health = self._id_EEC8;
-  else if(level.vehicle._id_116CE._id_AC4A[var_0] == -1)
+  } else if(level.vehicle._id_116CE._id_AC4A[var_0] == -1) {
     return;
-  else if(isDefined(level.vehicle._id_116CE._id_AC4D[var_0]) && isDefined(level.vehicle._id_116CE._id_AC4C[var_0]))
+  } else if(isDefined(level.vehicle._id_116CE._id_AC4D[var_0]) && isDefined(level.vehicle._id_116CE._id_AC4C[var_0])) {
     self.health = randomint(level.vehicle._id_116CE._id_AC4C[var_0] - level.vehicle._id_116CE._id_AC4D[var_0]) + level.vehicle._id_116CE._id_AC4D[var_0];
-  else
+  } else {
     self.health = level.vehicle._id_116CE._id_AC4A[var_0];
+  }
 }
 
 _id_7B21(var_0) {
   var_1 = self islegacyagent(var_0);
   var_2 = getanimlength(var_0);
 
-  if(var_1 == 0)
+  if(var_1 == 0) {
     return 0;
+  }
 
   return self islegacyagent(var_0) / getanimlength(var_0);
 }
@@ -1990,8 +2139,9 @@ _id_92D3() {
   if(!isDefined(level.vehicle._id_116CE._id_92D0[self.model])) {
     return;
   }
-  foreach(var_1 in level.vehicle._id_116CE._id_92D0[self.model])
-  self _meth_82A2(var_1);
+  foreach(var_1 in level.vehicle._id_116CE._id_92D0[self.model]) {
+    self _meth_82A2(var_1);
+  }
 }
 
 _id_1322A() {
@@ -1999,10 +2149,11 @@ _id_1322A() {
   var_0 = self.classname;
   var_1 = undefined;
 
-  if(isDefined(self._id_1322C))
+  if(isDefined(self._id_1322C)) {
     var_1 = self._id_1322C;
-  else if(isDefined(level.vehicle._id_116CE._id_E7BA[var_0]))
+  } else if(isDefined(level.vehicle._id_116CE._id_E7BA[var_0])) {
     var_1 = level.vehicle._id_116CE._id_E7BA[var_0];
+  }
 
   if(!isDefined(var_1)) {
     return;
@@ -2015,33 +2166,39 @@ _id_1322A() {
   self._id_E7D2 = var_4;
   self endon("death");
 
-  if(!isDefined(self._id_E7D0))
+  if(!isDefined(self._id_E7D0)) {
     self._id_E7D0 = 1;
+  }
 
-  if(isDefined(var_1._id_EB9C))
+  if(isDefined(var_1._id_EB9C)) {
     self._id_E7CB = var_1._id_EB9C;
-  else
+  } else {
     self._id_E7CB = 0.15;
+  }
 
-  if(isDefined(var_1._id_5F36))
+  if(isDefined(var_1._id_5F36)) {
     self._id_E7C0 = var_1._id_5F36;
-  else
+  } else {
     self._id_E7C0 = 4.5;
+  }
 
-  if(isDefined(var_1.radius))
+  if(isDefined(var_1.radius)) {
     self._id_E7C6 = var_1.radius;
-  else
+  } else {
     self._id_E7C6 = 600;
+  }
 
-  if(isDefined(var_1._id_28AE))
+  if(isDefined(var_1._id_28AE)) {
     self._id_E7BE = var_1._id_28AE;
-  else
+  } else {
     self._id_E7BE = 1;
+  }
 
-  if(isDefined(var_1._id_DCA5))
+  if(isDefined(var_1._id_DCA5)) {
     self._id_E7CA = var_1._id_DCA5;
-  else
+  } else {
     self._id_E7CA = 1;
+  }
 
   var_4.radius = self._id_E7C6;
 
@@ -2058,8 +2215,9 @@ _id_1322A() {
     if(isDefined(self.vehicletype)) {
       var_5 = self.vehicletype + "_rumble_sfx";
 
-      if(soundexists(var_5))
+      if(soundexists(var_5)) {
         level.player playSound(var_5);
+      }
     }
 
     while(level.player istouching(var_4) && self._id_E7D0 && (self vehicle_getspeed() > 0 || isDefined(self._id_72DB))) {
@@ -2074,27 +2232,30 @@ _id_1322A() {
 _id_1322F() {
   var_0 = self.classname;
 
-  if(!isDefined(self.script_team) && isDefined(level.vehicle._id_116CE.team[var_0]))
+  if(!isDefined(self.script_team) && isDefined(level.vehicle._id_116CE.team[var_0])) {
     self.script_team = level.vehicle._id_116CE.team[var_0];
+  }
 }
 
 _id_131EC() {
   self endon("death");
   var_0 = self.vehicletype;
 
-  if(!scripts\sp\utility::_id_65DF("unloaded"))
+  if(!scripts\sp\utility::_id_65DF("unloaded")) {
     scripts\sp\utility::_id_65E0("unloaded");
+  }
 }
 
 _id_7D48(var_0) {
   var_1 = getvehiclenode(var_0, "targetname");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = getEnt(var_0, "targetname");
-  else if(_id_12F8()) {}
+  } else if(_id_12F8()) {}
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
+  }
 
   return var_1;
 }
@@ -2104,48 +2265,57 @@ _id_8B7F() {
 }
 
 _id_85DA(var_0) {
-  if(!isDefined(self._id_EDD3))
+  if(!isDefined(self._id_EDD3)) {
     return 0;
+  }
 
   var_0 = tolower(var_0);
 
-  if(!isDefined(var_0) || !issubstr(var_0, "grenade"))
+  if(!isDefined(var_0) || !issubstr(var_0, "grenade")) {
     return 0;
+  }
 
-  if(self._id_EDD3)
+  if(self._id_EDD3) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_324F(var_0) {
-  if(!isDefined(self._id_ED22))
+  if(!isDefined(self._id_ED22)) {
     return 0;
+  }
 
   var_0 = tolower(var_0);
 
-  if(!isDefined(var_0) || !issubstr(var_0, "bullet") || issubstr(var_0, "explosive"))
+  if(!isDefined(var_0) || !issubstr(var_0, "bullet") || issubstr(var_0, "explosive")) {
     return 0;
+  }
 
-  if(self._id_ED22)
+  if(self._id_ED22) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_69F8(var_0) {
-  if(!isDefined(self._id_ED87))
+  if(!isDefined(self._id_ED87)) {
     return 0;
+  }
 
   var_0 = tolower(var_0);
 
-  if(!isDefined(var_0) || !issubstr(var_0, "explosive"))
+  if(!isDefined(var_0) || !issubstr(var_0, "explosive")) {
     return 0;
+  }
 
-  if(self._id_ED87)
+  if(self._id_ED87) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_13234(var_0, var_1) {
@@ -2155,14 +2325,17 @@ _id_13234(var_0, var_1) {
 _id_740E() {
   self endon("death");
 
-  if(!isDefined(level._id_12D6B))
+  if(!isDefined(level._id_12D6B)) {
     self endon("stop_friendlyfire_shield");
+  }
 
-  if(isDefined(level.vehicle._id_116CE._id_323D[self.classname]) && !isDefined(self._id_ED22))
+  if(isDefined(level.vehicle._id_116CE._id_323D[self.classname]) && !isDefined(self._id_ED22)) {
     self._id_ED22 = level.vehicle._id_116CE._id_323D[self.classname];
+  }
 
-  if(isDefined(level.vehicle._id_116CE._id_85A0[self.classname]) && !isDefined(self._id_EDD3))
+  if(isDefined(level.vehicle._id_116CE._id_85A0[self.classname]) && !isDefined(self._id_EDD3)) {
     self._id_EDD3 = level.vehicle._id_116CE._id_323D[self.classname];
+  }
 
   if(isDefined(self._id_EE50)) {
     self._id_EE50 = 1;
@@ -2181,15 +2354,17 @@ _id_740E() {
   while(self.health > 0) {
     self waittill("damage", var_3, var_0, var_4, var_5, var_1, var_6, var_7, var_8, var_9, var_2);
 
-    foreach(var_11 in self._id_4CF5)
-    thread[[var_11]](var_3, var_0, var_4, var_5, var_1, var_6, var_7);
+    foreach(var_11 in self._id_4CF5) {
+      thread[[var_11]](var_3, var_0, var_4, var_5, var_1, var_6, var_7);
+    }
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_0 scripts\sp\player_stats::_id_DED8();
+    }
 
-    if(_id_13234(var_0, var_1) || _id_12F0())
+    if(_id_13234(var_0, var_1) || _id_12F0()) {
       self.health = self._id_4BF0;
-    else if(_id_8B7F()) {
+    } else if(_id_8B7F()) {
       _id_DE7F(var_0, var_3);
       self._id_4BF0 = self.health;
     } else if(_id_9029(var_1)) {
@@ -2207,58 +2382,68 @@ _id_740E() {
 }
 
 _id_9029(var_0) {
-  if(!self._id_EE50)
+  if(!self._id_EE50) {
     return 0;
+  }
 
-  if(self._id_3233 <= 0)
+  if(self._id_3233 <= 0) {
     return 0;
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(!issubstr(var_0, "BULLET"))
+  if(!issubstr(var_0, "BULLET")) {
     return 0;
-  else
+  } else {
     return 1;
+  }
 }
 
 _id_DE7F(var_0, var_1) {
   var_2 = anglesToForward(self.angles);
   var_3 = vectorNormalize(var_0.origin - self.origin);
 
-  if(vectordot(var_2, var_3) > 0.86)
+  if(vectordot(var_2, var_3) > 0.86) {
     self.health = self.health + int(var_1 * level.vehicle._id_116CE._id_7448[self.vehicletype]);
+  }
 }
 
 _id_12F0() {
-  if(isDefined(self._id_843F) && self._id_843F)
+  if(isDefined(self._id_843F) && self._id_843F) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_9C29(var_0) {
-  if(!isDefined(self._id_ECE6))
+  if(!isDefined(self._id_ECE6)) {
     return 0;
+  }
 
-  if(isDefined(var_0) && isai(var_0) && self._id_ECE6 == 1)
+  if(isDefined(var_0) && isai(var_0) && self._id_ECE6 == 1) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_24DE(var_0) {
-  if(isDefined(self.script_team) && self.script_team == "allies" && isDefined(var_0) && isPlayer(var_0))
+  if(isDefined(self.script_team) && self.script_team == "allies" && isDefined(var_0) && isPlayer(var_0)) {
     return 1;
-  else if(isai(var_0) && var_0.team == self.script_team)
+  } else if(isai(var_0) && var_0.team == self.script_team) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_24DC(var_0) {
-  if(isDefined(var_0) && isDefined(var_0.script_team) && isDefined(self.script_team) && var_0.script_team == self.script_team)
+  if(isDefined(var_0) && isDefined(var_0.script_team) && isDefined(self.script_team) && var_0.script_team == self.script_team) {
     return 1;
+  }
 
   return 0;
 }
@@ -2322,8 +2507,9 @@ _id_13219() {
 }
 
 _id_4E5C() {
-  if(self.health > 0)
+  if(self.health > 0) {
     self._id_E683 = 1;
+  }
 }
 
 _id_4E5B() {
@@ -2345,8 +2531,9 @@ _id_134C() {
     return;
   }
   foreach(var_2, var_1 in self.mgturret) {
-    if(isDefined(var_1._id_ED98))
+    if(isDefined(var_1._id_ED98)) {
       var_1._id_ED98 = 0;
+    }
 
     var_1 setmode("manual");
   }
@@ -2366,12 +2553,14 @@ _id_134D() {
   foreach(var_1 in self.mgturret) {
     var_1 show();
 
-    if(isDefined(var_1._id_ED98))
+    if(isDefined(var_1._id_ED98)) {
       var_1._id_ED98 = 1;
+    }
 
     if(isDefined(var_1._id_5041)) {
-      if(var_1._id_5041 != "sentry")
+      if(var_1._id_5041 != "sentry") {
         var_1 setmode(var_1._id_5041);
+      }
     } else
       var_1 setmode("auto_nonai");
 
@@ -2390,11 +2579,12 @@ _id_7D47() {
         continue;
       }
       if(issubstr(var_3.code_classname, "actor")) {
-        if(!isspawner(var_3))
+        if(!isspawner(var_3)) {
           continue;
-        else if(issubstr(var_3.code_classname, "vehicle")) {
-          if(!(var_3.spawnflags & 2))
+        } else if(issubstr(var_3.code_classname, "vehicle")) {
+          if(!(var_3.spawnflags & 2)) {
             continue;
+          }
         }
       }
 
@@ -2408,8 +2598,9 @@ _id_7D47() {
       var_1 = scripts\engine\utility::getStructArray(self.target, "targetname");
 
       foreach(var_3 in var_1) {
-        if(isDefined(var_3._id_EEB6))
+        if(isDefined(var_3._id_EEB6)) {
           var_0[var_0.size] = var_3;
+        }
       }
     }
   }
@@ -2425,8 +2616,9 @@ _id_1444(var_0) {
 
   var_1 = var_0 _meth_83DA();
 
-  if(!isDefined(var_0._id_1084E))
+  if(!isDefined(var_0._id_1084E)) {
     var_0._id_1084E = 0;
+  }
 
   var_0._id_1084E++;
   var_0._id_1323B = var_1;
@@ -2434,8 +2626,9 @@ _id_1444(var_0) {
   var_0 thread _id_E0A7();
   var_1._id_1323C = var_0;
 
-  if(isDefined(var_0._id_12841))
+  if(isDefined(var_0._id_12841)) {
     var_1._id_12841 = var_0._id_12841;
+  }
 
   thread _id_131F6(var_1);
   var_0 notify("spawned", var_1);
@@ -2449,8 +2642,9 @@ _id_D808() {
   var_2 = [];
   var_0 = [];
 
-  if(!isDefined(level._id_13261))
+  if(!isDefined(level._id_13261)) {
     level._id_13261 = [];
+  }
 
   foreach(var_4 in var_1) {
     var_4.vehicletype = tolower(var_4.vehicletype);
@@ -2458,13 +2652,15 @@ _id_D808() {
     if(var_4.vehicletype == "empty" || var_4.vehicletype == "empty_heli") {
       continue;
     }
-    if(isDefined(var_4.spawnflags) && var_4.spawnflags & 1)
+    if(isDefined(var_4.spawnflags) && var_4.spawnflags & 1) {
       var_2[var_2.size] = var_4;
+    }
 
     var_0[var_0.size] = var_4;
 
-    if(!isDefined(level._id_13261[var_4.vehicletype]))
+    if(!isDefined(level._id_13261[var_4.vehicletype])) {
       level._id_13261[var_4.vehicletype] = [];
+    }
 
     var_5 = "classname: " + var_4.classname;
     _id_D812(var_5, var_4);
@@ -2492,12 +2688,14 @@ _id_D812(var_0, var_1) {
   var_2 = 0;
 
   foreach(var_4 in level._id_BE91) {
-    if(var_4 == var_0)
+    if(var_4 == var_0) {
       var_2 = 1;
+    }
   }
 
-  if(!var_2)
+  if(!var_2) {
     level._id_BE91[level._id_BE91.size] = var_0;
+  }
 }
 
 _id_F9C7() {
@@ -2538,8 +2736,9 @@ _id_F9C7() {
   level.vehicle._id_116CE._id_4DF9 = [];
   level.vehicle._id_116CE._id_131BC = [];
 
-  if(!isDefined(level.vehicle._id_116CE._id_4E1C))
+  if(!isDefined(level.vehicle._id_116CE._id_4E1C)) {
     level.vehicle._id_116CE._id_4E1C = [];
+  }
 
   scripts\sp\vehicle_aianim::_id_F8AE();
 }
@@ -2549,8 +2748,9 @@ _id_FB0A(var_0, var_1) {
 }
 
 _id_13207(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 512;
+  }
 
   var_1 = self.origin + (0, 0, var_0);
   self setneargoalnotifydist(10);
@@ -2567,8 +2767,9 @@ _id_10810(var_0) {
     if(!isDefined(var_5.code_classname) || var_5.code_classname != "script_vehicle") {
       continue;
     }
-    if(isspawner(var_5))
+    if(isspawner(var_5)) {
       var_1[var_1.size] = _id_1444(var_5);
+    }
   }
 
   return var_1;
@@ -2582,10 +2783,11 @@ _id_A5CC(var_0) {
     return;
   }
   if(isarray(level.vehicle._id_116CE._id_4DF9[var_0])) {
-    if(isDefined(self._id_D832))
+    if(isDefined(self._id_D832)) {
       var_1 = self._id_D832;
-    else
+    } else {
       var_1 = scripts\engine\utility::random(level.vehicle._id_116CE._id_4DF9[var_0]);
+    }
 
     return _id_A5CD(var_1);
   }
@@ -2619,8 +2821,9 @@ _id_A5CD(var_0) {
 _id_50EA(var_0) {
   wait 7;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_5144() {
@@ -2630,7 +2833,8 @@ _id_5144() {
   var_3 = getcorpsearray();
 
   foreach(var_5 in var_3) {
-    if(distance(var_5.origin, var_0) < var_2)
+    if(distance(var_5.origin, var_0) < var_2) {
       var_5 delete();
+    }
   }
 }

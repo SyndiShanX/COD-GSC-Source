@@ -15,11 +15,13 @@ isintrees(var_0) {
 }
 
 updateeveryframe(var_0) {
-  if(!isalive(self))
+  if(!isalive(self)) {
     return anim.failure;
+  }
 
-  if(isDefined(self.scripted) && self.scripted)
+  if(isDefined(self.scripted) && self.scripted) {
     return anim.failure;
+  }
 
   var_1 = getclosestplayer();
   self.bt.enemy = var_1;
@@ -31,22 +33,27 @@ shouldswingaround(var_0) {
 }
 
 shouldthrowrock(var_0) {
-  if(!isDefined(self.bt.enemy))
+  if(!isDefined(self.bt.enemy)) {
     return anim.failure;
+  }
 
-  if(gettime() < self.bt.allowthrowtime)
+  if(gettime() < self.bt.allowthrowtime) {
     return anim.failure;
+  }
 
   var_1 = distance2dsquared(self.bt.enemy.origin, self.origin);
 
-  if(var_1 > 360000)
+  if(var_1 > 360000) {
     return anim.failure;
+  }
 
-  if(var_1 < 16384)
+  if(var_1 < 16384) {
     return anim.failure;
+  }
 
-  if(!self cansee(self.bt.enemy))
+  if(!self cansee(self.bt.enemy)) {
     return anim.failure;
+  }
 
   return anim.success;
 }
@@ -54,14 +61,17 @@ shouldthrowrock(var_0) {
 throwattack_check(var_0) {
   var_1 = scripts\asm\asm_bb::bb_getthrowgrenadetarget();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return anim.failure;
+  }
 
-  if(!isalive(var_1))
+  if(!isalive(var_1)) {
     return anim.failure;
+  }
 
-  if(distancesquared(self.origin, var_1.origin) > 518400)
+  if(distancesquared(self.origin, var_1.origin) > 518400) {
     return anim.failure;
+  }
 
   return anim.success;
 }
@@ -78,11 +88,13 @@ throwattack_init(var_0) {
 throwattack(var_0) {
   var_1 = 5000;
 
-  if(gettime() - self.bt.instancedata[var_0].starttime > var_1)
+  if(gettime() - self.bt.instancedata[var_0].starttime > var_1) {
     return anim.failure;
+  }
 
-  if(scripts\asm\asm::asm_ephemeraleventfired("throwevent", "end"))
+  if(scripts\asm\asm::asm_ephemeraleventfired("throwevent", "end")) {
     return anim.success;
+  }
 
   return anim.running;
 }
@@ -94,22 +106,26 @@ throwattack_cleanup(var_0) {
 }
 
 shouldmelee(var_0) {
-  if(!isDefined(self.bt.enemy))
+  if(!isDefined(self.bt.enemy)) {
     return anim.failure;
+  }
 
   var_1 = self.bt.enemy;
 
-  if(isDefined(self.bt.lastmeleefailtarget) && self.bt.lastmeleefailtarget == var_1 && gettime() - self.bt.lastmeleefailtime < 3000)
+  if(isDefined(self.bt.lastmeleefailtarget) && self.bt.lastmeleefailtarget == var_1 && gettime() - self.bt.lastmeleefailtime < 3000) {
     return anim.failure;
+  }
 
   var_2 = var_1.origin - self.origin;
   var_3 = length2dsquared(var_2);
 
-  if(var_3 > 65536)
+  if(var_3 > 65536) {
     return anim.failure;
+  }
 
-  if(abs(var_2[2]) > 72 && var_3 < 10000)
+  if(abs(var_2[2]) > 72 && var_3 < 10000) {
     return anim.failure;
+  }
 
   return anim.success;
 }
@@ -122,11 +138,13 @@ melee_setup(var_0) {
 melee_shouldabort() {
   var_0 = self.bt.meleetarget;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 1;
+  }
 
-  if(!isalive(var_0))
+  if(!isalive(var_0)) {
     return 1;
+  }
 
   return 0;
 }
@@ -148,8 +166,9 @@ melee_charge_init(var_0) {
 }
 
 melee_charge(var_0) {
-  if(melee_shouldabort())
+  if(melee_shouldabort()) {
     return anim.failure;
+  }
 
   var_1 = self.bt.meleetarget;
   var_2 = gettime() - self.bt.instancedata[var_0].starttime;
@@ -202,8 +221,9 @@ melee_charge(var_0) {
 }
 
 melee_charge_cleanup(var_0) {
-  if(!isDefined(self.bt.instancedata[var_0].bsuccess))
+  if(!isDefined(self.bt.instancedata[var_0].bsuccess)) {
     melee_cleanup();
+  }
 
   self.bt.instancedata[var_0] = undefined;
 }
@@ -217,16 +237,19 @@ melee_attack_init(var_0) {
 }
 
 melee_attack(var_0) {
-  if(melee_shouldabort())
+  if(melee_shouldabort()) {
     return anim.failure;
+  }
 
   var_1 = 10000;
 
-  if(gettime() - self.bt.instancedata[var_0].starttime > var_1)
+  if(gettime() - self.bt.instancedata[var_0].starttime > var_1) {
     return anim.failure;
+  }
 
-  if(scripts\asm\asm::asm_ephemeraleventfired("meleeattack", "end"))
+  if(scripts\asm\asm::asm_ephemeraleventfired("meleeattack", "end")) {
     return anim.success;
+  }
 
   return anim.running;
 }
@@ -240,33 +263,40 @@ melee_attack_cleanup(var_0) {
 shouldrush(var_0) {
   var_1 = self.bt.enemy;
 
-  if(!isDefined(var_1) || !isalive(var_1))
+  if(!isDefined(var_1) || !isalive(var_1)) {
     return anim.failure;
+  }
 
-  if(gettime() < self.bt.allowrushtime)
+  if(gettime() < self.bt.allowrushtime) {
     return anim.failure;
+  }
 
   var_2 = var_1.origin - self.origin;
   var_3 = length2dsquared(var_2);
 
-  if(var_3 > 589824)
+  if(var_3 > 589824) {
     return anim.failure;
+  }
 
-  if(var_3 < 32400)
+  if(var_3 < 32400) {
     return anim.failure;
+  }
 
   if(isDefined(self.pathgoalpos)) {
     var_4 = self _meth_84F9(84);
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       return anim.failure;
+    }
 
-    if(self pathdisttogoal() > 1179648)
+    if(self pathdisttogoal() > 1179648) {
       return anim.failure;
+    }
   }
 
-  if(!self cansee(var_1))
+  if(!self cansee(var_1)) {
     return anim.failure;
+  }
 
   return anim.success;
 }
@@ -287,8 +317,9 @@ rush_charge(var_0) {
   var_2 = 1;
   var_3 = 2;
 
-  if(melee_shouldabort())
+  if(melee_shouldabort()) {
     return anim.success;
+  }
 
   var_4 = gettime();
   var_5 = self.bt.instancedata[var_0].starttime;
@@ -299,8 +330,9 @@ rush_charge(var_0) {
     return anim.failure;
   }
 
-  if(distance2dsquared(self.origin, self.bt.instancedata[var_0].startpos) > 262144)
+  if(distance2dsquared(self.origin, self.bt.instancedata[var_0].startpos) > 262144) {
     return anim.success;
+  }
 
   var_7 = self.bt.meleetarget.origin - self.origin;
 
@@ -334,8 +366,9 @@ rush_charge(var_0) {
         var_13 = self _meth_84AC();
         var_14 = navtrace(var_13, var_12, self, 1);
 
-        if(var_14["fraction"] < 1)
+        if(var_14["fraction"] < 1) {
           var_12 = var_14["position"];
+        }
 
         self scragentsetgoalpos(var_12);
         self scragentsetgoalRadius(24);
@@ -374,8 +407,9 @@ rush_attack(var_0) {
   var_1 = gettime();
   var_2 = 5000;
 
-  if(var_1 > self.bt.instancedata[var_0] + var_2)
+  if(var_1 > self.bt.instancedata[var_0] + var_2) {
     return anim.failure;
+  }
 
   if(scripts\asm\asm::asm_ephemeraleventfired("rushattack", "end")) {
     self.bt.allowrushtime = var_1 + 5000;
@@ -412,11 +446,13 @@ taunt_init(var_0) {
 dotaunt(var_0) {
   var_1 = 6000;
 
-  if(gettime() - self.bt.instancedata[var_0] > var_1)
+  if(gettime() - self.bt.instancedata[var_0] > var_1) {
     return anim.failure;
+  }
 
-  if(scripts\asm\asm::asm_ephemeraleventfired("tauntevent", "end"))
+  if(scripts\asm\asm::asm_ephemeraleventfired("tauntevent", "end")) {
     return anim.success;
+  }
 
   return anim.running;
 }

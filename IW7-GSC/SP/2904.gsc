@@ -10,26 +10,30 @@ _id_918F() {
 }
 
 _id_9197(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 0;
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "default";
+  }
 
-  if(!isDefined(level._id_91AA))
+  if(!isDefined(level._id_91AA)) {
     _id_918F();
+  }
 
-  if(_id_919F(var_0, self))
+  if(_id_919F(var_0, self)) {
     _id_91A7(var_0, self, var_1, var_2, var_3, var_4);
-  else {
+  } else {
     var_5 = level._id_91AA[var_0]._id_6631.size;
     level._id_91AA[var_0]._id_6631[var_5] = _id_9190(self, var_1, var_2, var_3, var_4);
     thread _id_9195(var_0);
   }
 
   if(!isDefined(level._id_91AA[var_0]._id_C8F5)) {
-    if(!isDefined(level._id_91AB))
+    if(!isDefined(level._id_91AB)) {
       _id_9186(var_0);
+    }
 
     var_6 = level._id_91AA[level._id_91AB].priority;
     var_7 = level._id_91AA[var_0].priority;
@@ -48,28 +52,32 @@ _id_9197(var_0, var_1, var_2, var_3, var_4) {
   } else {
     var_8 = level._id_91AA[var_0]._id_C8F5;
 
-    if(!isDefined(level._id_91AB))
+    if(!isDefined(level._id_91AB)) {
       _id_9186(var_8);
+    }
 
     var_6 = level._id_91AA[level._id_91AB].priority;
     var_9 = level._id_91AA[var_8].priority;
 
-    if(level._id_91AB != var_8 && var_6 < var_9)
+    if(level._id_91AB != var_8 && var_6 < var_9) {
       _id_9186(var_8);
-    else if(level._id_91AB == var_8)
+    } else if(level._id_91AB == var_8) {
       _id_1251(self, var_1, var_2, var_3, var_4, var_8);
+    }
   }
 }
 
 _id_9194(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "default";
+  }
 
   if(!isDefined(level._id_91AA)) {
     return;
   }
-  if(isDefined(self))
+  if(isDefined(self)) {
     self notify(var_0 + "hudoutline_disable");
+  }
 
   var_1 = undefined;
 
@@ -101,8 +109,9 @@ _id_9194(var_0) {
     return;
   }
   if(level._id_91AB == var_0) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       _id_11DA(self, var_0);
+    }
 
     if(level._id_91AA[var_0]._id_6631.size == 0) {
       var_8 = 0;
@@ -116,17 +125,20 @@ _id_9194(var_0) {
         }
       }
 
-      if(!var_8)
+      if(!var_8) {
         _id_9185();
+      }
     }
   } else if(isDefined(level._id_91AA[var_0]._id_C8F5) && level._id_91AB == level._id_91AA[var_0]._id_C8F5) {
     var_12 = level._id_91AA[var_0]._id_C8F5;
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       _id_11DA(self, var_12);
+    }
 
-    if(level._id_91AA[var_0]._id_6631.size == 0)
+    if(level._id_91AA[var_0]._id_6631.size == 0) {
       _id_9185();
+    }
   }
 }
 
@@ -147,21 +159,25 @@ _id_9185() {
         continue;
       }
       if(!isDefined(var_3._id_3E65) || var_3._id_3E65.size == 0) {
-        if(var_3._id_6631.size == 0)
+        if(var_3._id_6631.size == 0) {
           continue;
+        }
       } else {
         var_6 = 0;
 
-        if(var_3._id_6631.size > 0)
+        if(var_3._id_6631.size > 0) {
           var_6 = 1;
-
-        foreach(var_8 in var_3._id_3E65) {
-          if(level._id_91AA[var_8]._id_6631.size > 0)
-            var_6 = 1;
         }
 
-        if(!var_6)
+        foreach(var_8 in var_3._id_3E65) {
+          if(level._id_91AA[var_8]._id_6631.size > 0) {
+            var_6 = 1;
+          }
+        }
+
+        if(!var_6) {
           continue;
+        }
       }
 
       if(!isDefined(var_0) || var_3.priority > var_0) {
@@ -171,10 +187,11 @@ _id_9185() {
     }
   }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     _id_9186(var_1);
-  else
+  } else {
     level._id_91AB = undefined;
+  }
 }
 
 _id_9190(var_0, var_1, var_2, var_3, var_4) {
@@ -203,8 +220,9 @@ _id_9186(var_0) {
     _id_9191(level._id_91AB);
 
     if(isDefined(level._id_91AA[level._id_91AB]._id_3E65) && level._id_91AA[level._id_91AB]._id_3E65.size > 0) {
-      foreach(var_2 in level._id_91AA[level._id_91AB]._id_3E65)
-      _id_9191(var_2);
+      foreach(var_2 in level._id_91AA[level._id_91AB]._id_3E65) {
+        _id_9191(var_2);
+      }
     }
   }
 
@@ -225,9 +243,9 @@ _id_1250(var_0) {
 }
 
 _id_1251(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(level._id_91AA[var_5]._id_3E65) || level._id_91AA[var_5]._id_3E65.size == 0)
+  if(!isDefined(level._id_91AA[var_5]._id_3E65) || level._id_91AA[var_5]._id_3E65.size == 0) {
     var_0 hudoutlineenable(var_1, var_2, var_3, var_4);
-  else {
+  } else {
     var_6 = _id_12AA(var_5, 1);
     var_7 = 0;
 
@@ -248,9 +266,9 @@ _id_1251(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_11DA(var_0, var_1) {
-  if(!isDefined(level._id_91AA[var_1]._id_3E65) || level._id_91AA[var_1]._id_3E65.size == 0)
+  if(!isDefined(level._id_91AA[var_1]._id_3E65) || level._id_91AA[var_1]._id_3E65.size == 0) {
     self hudoutlinedisable();
-  else {
+  } else {
     var_2 = _id_12AA(var_1, 1);
     var_3 = 0;
 
@@ -268,8 +286,9 @@ _id_11DA(var_0, var_1) {
       }
     }
 
-    if(!var_3)
+    if(!var_3) {
       self hudoutlinedisable();
+    }
   }
 }
 
@@ -289,8 +308,9 @@ _id_91A5(var_0) {
     setsaveddvar(var_5, var_4);
   }
 
-  if(isDefined(level._id_91AA[var_0]._id_B05E))
+  if(isDefined(level._id_91AA[var_0]._id_B05E)) {
     _id_CC8D(var_0, level._id_91AA[var_0]._id_B05E);
+  }
 }
 
 _id_9191(var_0) {
@@ -301,11 +321,13 @@ _id_9191(var_0) {
 }
 
 _id_9188(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = ::_id_9192;
+  }
 
-  if(!isDefined(level._id_91AA))
+  if(!isDefined(level._id_91AA)) {
     _id_918F();
+  }
 
   if(!isDefined(level._id_91AA[var_0])) {
     level._id_91AA[var_0] = spawnStruct();
@@ -325,8 +347,9 @@ _id_918A(var_0, var_1, var_2) {
     level._id_91AA[var_0]._id_C8F5 = var_2;
   }
 
-  if(!isDefined(level._id_91AA[var_2]._id_3E65))
+  if(!isDefined(level._id_91AA[var_2]._id_3E65)) {
     level._id_91AA[var_2]._id_3E65 = [];
+  }
 
   level._id_91AA[var_2]._id_3E65[level._id_91AA[var_2]._id_3E65.size] = var_0;
 }
@@ -334,27 +357,31 @@ _id_918A(var_0, var_1, var_2) {
 _id_91A1(var_0, var_1) {
   level._id_91AA[var_0]._id_F88E = var_1;
 
-  if(isDefined(level._id_91AB) && level._id_91AB == var_0)
+  if(isDefined(level._id_91AB) && level._id_91AB == var_0) {
     thread _id_91A5(var_0);
+  }
 }
 
 _id_919F(var_0, var_1) {
   foreach(var_3 in level._id_91AA[var_0]._id_6631) {
-    if(var_3.ent == var_1)
+    if(var_3.ent == var_1) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 _id_919A(var_0, var_1) {
-  if(!isDefined(level._id_91AC))
+  if(!isDefined(level._id_91AC)) {
     level._id_91AC = [];
+  }
 
   if(var_1) {
     foreach(var_3 in level._id_91AC) {
-      if(var_3 == var_0)
+      if(var_3 == var_0) {
         return;
+      }
     }
 
     level._id_91AC[level._id_91AC.size] = var_0;
@@ -363,8 +390,9 @@ _id_919A(var_0, var_1) {
     var_5 = [];
 
     foreach(var_3 in level._id_91AC) {
-      if(var_3 != var_0)
+      if(var_3 != var_0) {
         var_5[var_5.size] = var_3;
+      }
     }
 
     level._id_91AC = var_5;
@@ -373,8 +401,9 @@ _id_919A(var_0, var_1) {
 }
 
 _id_9195(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self endon("endonMsg");
+  }
 
   self endon(var_0 + "hudoutline_disable");
   scripts\engine\utility::waittill_any("death", "entitydeleted");
@@ -430,8 +459,9 @@ _id_9192() {
 }
 
 _id_12AA(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_2 = [];
   var_2[0] = var_0;

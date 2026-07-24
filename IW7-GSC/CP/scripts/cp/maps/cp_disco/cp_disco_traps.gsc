@@ -14,13 +14,15 @@ power_on_buffer() {
   if(scripts\engine\utility::is_true(self.requires_power)) {
     var_1 = undefined;
 
-    if(isDefined(self.script_area))
+    if(isDefined(self.script_area)) {
       var_1 = self.script_area;
-    else
+    } else {
       var_1 = scripts\cp\cp_interaction::get_area_for_power(self);
+    }
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       level scripts\engine\utility::waittill_any("power_on", var_1 + " power_on");
+    }
   }
 
   self.powered_on = 1;
@@ -31,8 +33,9 @@ use_buffer_trap(var_0, var_1) {
   var_2 = getEnt(var_0.target, "targetname");
   var_3 = [];
 
-  foreach(var_5 in scripts\engine\utility::getStructArray(var_0.target, "targetname"))
-  var_3[var_3.size] = spawn("trigger_radius", var_5.origin, 0, var_5.radius, var_5.height);
+  foreach(var_5 in scripts\engine\utility::getStructArray(var_0.target, "targetname")) {
+    var_3[var_3.size] = spawn("trigger_radius", var_5.origin, 0, var_5.radius, var_5.height);
+  }
 
   foreach(var_8 in var_3) {
     var_8 enablelinkTo();
@@ -44,8 +47,9 @@ use_buffer_trap(var_0, var_1) {
   var_2 buffer_trap_sfx();
   var_0.trap_kills = 0;
 
-  if(!isDefined(var_0.offset_vector))
+  if(!isDefined(var_0.offset_vector)) {
     var_0.offset_forward = distance2d(var_2.origin, var_0.origin) * -1;
+  }
 
   var_0.offset_up = distance2d(var_2.origin, var_0.origin);
   var_10 = var_2.origin;
@@ -57,8 +61,9 @@ use_buffer_trap(var_0, var_1) {
     wait 0.2;
   }
 
-  foreach(var_8 in var_3)
-  var_2 thread kill_zombies(var_8, var_1, var_0);
+  foreach(var_8 in var_3) {
+    var_2 thread kill_zombies(var_8, var_1, var_0);
+  }
 
   var_2 thread buffer_move();
   wait 16;
@@ -196,8 +201,9 @@ use_hydrant_trap(var_0, var_1) {
         continue;
       }
 
-      if(issubstr(var_7.classname, "trigger"))
+      if(issubstr(var_7.classname, "trigger")) {
         var_5.trigger = var_7;
+      }
     }
 
     var_5.player = var_1;
@@ -226,10 +232,11 @@ use_hydrant_trap(var_0, var_1) {
 }
 
 shoot_water() {
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "2")
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "2") {
     playFX(scripts\engine\utility::getfx("trap_hydrant_spray2"), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
-  else
+  } else {
     playFX(scripts\engine\utility::getfx("trap_hydrant_spray"), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+  }
 
   playsoundatpos(self.origin, "trap_hydrant_spray");
   var_0 = anglesToForward(self.angles);
@@ -302,8 +309,9 @@ power_on_mosh() {
       continue;
     }
 
-    if(var_1.script_area == "speaker")
+    if(var_1.script_area == "speaker") {
       level.punk_speakers[level.punk_speakers.size] = var_1;
+    }
   }
 
   self.aoe_trigger = spawn("trigger_radius", self.aoe.origin + (0, 0, 16), 0, 600, 64);
@@ -360,8 +368,9 @@ clean_array(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-    if(isDefined(var_3) && isalive(var_3))
+    if(isDefined(var_3) && isalive(var_3)) {
       var_1[var_1.size] = var_3;
+    }
   }
 
   return var_1;
@@ -405,8 +414,9 @@ moshdeath(var_0, var_1) {
   } else
     var_3 = undefined;
 
-  if(scripts\engine\utility::is_true(self.is_moshing))
+  if(scripts\engine\utility::is_true(self.is_moshing)) {
     self.team = "axis";
+  }
 
   self setscriptablepartstate("eyes", "yellow_eyes");
   self dodamage(self.health + 1000, self.origin, var_3, var_3, "MOD_UNKNOWN", "iw7_moshtrap_zm");
@@ -455,15 +465,17 @@ release_zombie_on_trap_done(var_0) {
   self endon("rockmode");
   level waittill("stop_mosh_trap");
 
-  if(isDefined(self.og_goalradius))
+  if(isDefined(self.og_goalradius)) {
     self.goalradius = self.og_goalradius;
+  }
 
   self scragentsetgoalRadius(self.goalradius);
   self.og_goalradius = undefined;
   self.scripted_mode = 0;
 
-  if(isDefined(self.og_movemode))
+  if(isDefined(self.og_movemode)) {
     self.movemode = self.og_movemode;
+  }
 
   self.og_movemode = undefined;
   self.ignoreall = 0;
@@ -472,8 +484,9 @@ release_zombie_on_trap_done(var_0) {
   self.is_rocking = undefined;
   self.do_immediate_ragdoll = 0;
 
-  if(isDefined(self.rockspot))
+  if(isDefined(self.rockspot)) {
     self.rockspot.owner = undefined;
+  }
 
   self.rockspot = undefined;
 }
@@ -481,6 +494,7 @@ release_zombie_on_trap_done(var_0) {
 release_rockspot_on_death() {
   self waittill("death");
 
-  if(isDefined(self.rockspot))
+  if(isDefined(self.rockspot)) {
     self.rockspot.owner = undefined;
+  }
 }

@@ -41,8 +41,9 @@ _id_F8CC() {
       continue;
     }
 
-    if(var_3.classname == "script_brushmodel")
+    if(var_3.classname == "script_brushmodel") {
       var_3 delete();
+    }
   }
 
   var_5 = scripts\engine\utility::getStructArray(self.target, "targetname");
@@ -63,14 +64,16 @@ _id_F8CC() {
 
   self._id_5AD7 = 0;
 
-  if(isDefined(self.light))
+  if(isDefined(self.light)) {
     self.light setlightintensity(0);
+  }
 
   for(;;) {
     var_8 = "power_on";
 
-    if(var_0)
+    if(var_0) {
       var_8 = level scripts\engine\utility::waittill_any_return_no_endon_death("power_on", self.power_area + " power_on", "power_off");
+    }
 
     setomnvar("zombie_arcade_skeeball_power_" + self.script_location, 1);
 
@@ -82,16 +85,19 @@ _id_F8CC() {
     if(var_8 != "power_off") {
       self.powered_on = 1;
 
-      if(isDefined(self.light))
+      if(isDefined(self.light)) {
         self.light setlightintensity(5);
+      }
 
-      if(isDefined(self._id_2BAE))
+      if(isDefined(self._id_2BAE)) {
         self._id_2BAE delete();
+      }
     } else {
       self.powered_on = 0;
 
-      if(isDefined(self.light))
+      if(isDefined(self.light)) {
         self.light setlightintensity(0);
+      }
     }
 
     if(!var_0) {
@@ -116,18 +122,21 @@ use_bfp_game(var_0, var_1) {
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
   level.wave_num_at_start_of_game = level.wave_num;
 
-  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade))
+  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade)) {
     scripts\cp\zombies\zombie_analytics::log_times_per_wave("bowling_for_planets", var_1);
-  else
+  } else {
     scripts\cp\zombies\zombie_analytics::log_times_per_wave("bowling_for_planets_afterlife", var_1);
+  }
 
-  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade))
+  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade)) {
     var_0 notify("machine_used");
+  }
 
   var_1 playlocalsound("arcade_insert_coin_01");
 
-  if(!isDefined(var_0._id_10226))
+  if(!isDefined(var_0._id_10226)) {
     var_0._id_10226 = spawn("script_origin", var_0.origin);
+  }
 
   if(!scripts\engine\utility::is_true(var_0.song_playing)) {
     var_0._id_10226 playSound("mus_arcade_skeeball_game_start");
@@ -177,12 +186,14 @@ _id_CE0F(var_0) {
   self endon("spawned");
   self endon("disconnect");
 
-  if(isDefined(level.start_bowling_for_planets_func))
+  if(isDefined(level.start_bowling_for_planets_func)) {
     var_0 thread[[level.start_bowling_for_planets_func]](var_0, self);
+  }
 
   if(!scripts\engine\utility::is_true(self.in_afterlife_arcade)) {
-    while(self getcurrentprimaryweapon() == "none" || self isswitchingweapon())
+    while(self getcurrentprimaryweapon() == "none" || self isswitchingweapon()) {
       wait 0.1;
+    }
   }
 
   self notify("cancel_sentry");
@@ -203,8 +214,9 @@ _id_CE0F(var_0) {
     _id_1397C(var_0);
     var_0._id_2802--;
 
-    if(var_0._id_2802 < 0)
+    if(var_0._id_2802 < 0) {
       var_0._id_2802 = 0;
+    }
 
     setomnvar("zombie_arcade_skeeball_balls_" + var_0.script_location, var_0._id_2802);
     wait 0.25;
@@ -212,8 +224,9 @@ _id_CE0F(var_0) {
 
   self notify("stop_too_far_check");
 
-  while(var_0._id_2801 != 3)
+  while(var_0._id_2801 != 3) {
     wait 1;
+  }
 
   self setclientomnvar("zombie_arcade_game_time", -1);
   self setclientomnvar("zombie_bfp_widget", 0);
@@ -222,8 +235,9 @@ _id_CE0F(var_0) {
   var_0._id_10226 playSound("mus_arcade_skeeball_game_end");
   scripts\engine\utility::allow_weapon_switch(1);
 
-  if(!scripts\engine\utility::isusabilityallowed())
+  if(!scripts\engine\utility::isusabilityallowed()) {
     scripts\engine\utility::allow_usability(1);
+  }
 
   scripts\cp\zombies\arcade_game_utility::give_player_back_weapon(self);
   scripts\cp\zombies\arcade_game_utility::restore_player_grenades_post_game();
@@ -245,10 +259,11 @@ _id_CE0F(var_0) {
 }
 
 get_intro_message(var_0) {
-  if(scripts\engine\utility::is_true(var_0.in_afterlife_arcade))
+  if(scripts\engine\utility::is_true(var_0.in_afterlife_arcade)) {
     return "Score 10 points per basket";
-  else
+  } else {
     return "Win 1 ticket per 10!";
+  }
 }
 
 _id_1397C(var_0) {
@@ -308,8 +323,9 @@ _id_11805(var_0, var_1, var_2, var_3, var_4, var_5) {
   wait 3;
 
   if(isDefined(var_2)) {
-    if(!isDefined(var_2._id_46B3))
+    if(!isDefined(var_2._id_46B3)) {
       var_0._id_2801++;
+    }
 
     var_2 delete();
   }

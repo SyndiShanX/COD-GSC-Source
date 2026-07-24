@@ -6,8 +6,9 @@
 _id_10626(var_0, var_1) {
   var_2 = [];
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = _id_229A(getnodearray(var_1, "script_noteworthy"));
+  }
 
   var_3 = 1;
   var_0 = _id_2289(var_0);
@@ -16,14 +17,15 @@ _id_10626(var_0, var_1) {
   foreach(var_6 in var_0) {
     var_7 = var_6;
 
-    if(isai(var_6) || isspawner(var_6))
+    if(isai(var_6) || isspawner(var_6)) {
       var_7 = var_6.name;
+    }
 
     var_8 = undefined;
 
-    if(isDefined(var_7) && isDefined(var_2[var_7]))
+    if(isDefined(var_7) && isDefined(var_2[var_7])) {
       var_8 = var_2[var_7];
-    else if(isDefined(var_2["NONAME" + var_3])) {
+    } else if(isDefined(var_2["NONAME" + var_3])) {
       var_8 = var_2["NONAME" + var_3];
       var_3++;
     }
@@ -51,19 +53,22 @@ _id_10626(var_0, var_1) {
     if(isspawner(var_6)) {
       var_9 = 1;
 
-      if(isDefined(var_6._id_ECE7) && var_6.count == 0)
+      if(isDefined(var_6._id_ECE7) && var_6.count == 0) {
         var_9 = 0;
+      }
 
       var_6.count = 1;
       var_10 = var_6 scripts\sp\utility::_id_10619(1);
 
-      if(!var_9)
+      if(!var_9) {
         var_10 thread _id_0B77::_id_1A14(level._id_1162[var_6._id_ECE7]);
+      }
 
       var_4 = scripts\engine\utility::array_add(var_4, var_10);
 
-      if(isDefined(var_8))
+      if(isDefined(var_8)) {
         var_10 _id_B399(var_8);
+      }
 
       continue;
     }
@@ -71,8 +76,9 @@ _id_10626(var_0, var_1) {
     if(isai(var_6)) {
       var_4 = scripts\engine\utility::array_add(var_4, var_6);
 
-      if(isDefined(var_8))
+      if(isDefined(var_8)) {
         var_6 _id_B399(var_8);
+      }
 
       continue;
     }
@@ -83,51 +89,61 @@ _id_10626(var_0, var_1) {
 }
 
 _id_107BE(var_0) {
-  if(!isDefined(level._id_EA2C))
+  if(!isDefined(level._id_EA2C)) {
     level._id_EA2C = _id_107D5("salter", "Salter", "iw7_m4");
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level._id_EA2C _id_B399(var_0);
+  }
 
   return level._id_EA2C;
 }
 
 _id_106D9(var_0) {
-  if(!isDefined(level._id_6754))
+  if(!isDefined(level._id_6754)) {
     level._id_6754 = _id_107D5("ethan", "Ethan", "iw7_sdfar");
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level._id_6754 _id_B399(var_0);
+  }
 
   return level._id_6754;
 }
 
 _id_10766(var_0) {
-  if(!isDefined(level._id_B4F1))
+  if(!isDefined(level._id_B4F1)) {
     level._id_B4F1 = _id_107D5("mccallum", "McCallum", "iw7_m4");
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level._id_B4F1 _id_B399(var_0);
+  }
 
   return level._id_B4F1;
 }
 
 _id_1065E(var_0) {
-  if(!isDefined(level._id_30F6))
+  if(!isDefined(level._id_30F6)) {
     level._id_30F6 = _id_107D5("brooks", "Brooks", "iw7_erad");
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level._id_30F6 _id_B399(var_0);
+  }
 
   return level._id_30F6;
 }
 
 _id_10750(var_0) {
-  if(!isDefined(level._id_A6F4))
+  if(!isDefined(level._id_A6F4)) {
     level._id_A6F4 = _id_107D5("kloos", "Kloos", "iw7_erad");
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level._id_A6F4 _id_B399(var_0);
+  }
 
   return level._id_A6F4;
 }
@@ -146,28 +162,33 @@ _id_107D5(var_0, var_1, var_2) {
   var_4._id_C065 = 1;
   var_4 thread scripts\sp\utility::_id_5131();
 
-  if(!isDefined(level._id_1684))
+  if(!isDefined(level._id_1684)) {
     level._id_1684 = [];
+  }
 
   level._id_1684[var_0] = var_4;
   return var_4;
 }
 
 _id_4046(var_0, var_1) {
-  if(isDefined(self.name))
+  if(isDefined(self.name)) {
     level._id_1684 = scripts\sp\utility::_id_22B2(level._id_1684, self.name);
+  }
 
-  if(isDefined(self._id_B14F))
+  if(isDefined(self._id_B14F)) {
     scripts\sp\utility::_id_1101B();
+  }
 
-  if(isDefined(self._id_5D6C) && isDefined(self._id_5D6C._id_4D94) && isDefined(self._id_5D6C._id_4D94.allies))
+  if(isDefined(self._id_5D6C) && isDefined(self._id_5D6C._id_4D94) && isDefined(self._id_5D6C._id_4D94.allies)) {
     self._id_5D6C._id_4D94.allies = scripts\engine\utility::array_remove(self._id_5D6C._id_4D94.allies, self);
+  }
 
   if(isDefined(var_0) && var_0) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       self _meth_81D0(var_1);
-    else
+    } else {
       self _meth_81D0();
+    }
   } else
     self delete();
 }
@@ -268,8 +289,9 @@ _id_8E36() {
   _id_0F27::_id_57C7();
   _id_8E38();
 
-  if(!scripts\engine\utility::flag("stealth_spotted"))
+  if(!scripts\engine\utility::flag("stealth_spotted")) {
     _id_0F18::_id_10E8B("hidden");
+  }
 }
 
 _id_8E38() {
@@ -302,8 +324,9 @@ _id_8E35() {
     var_2 = self.enemy;
 
     if(_id_73E4(var_2)) {
-      if(!scripts\engine\utility::flag(var_0))
+      if(!scripts\engine\utility::flag(var_0)) {
         wait(var_1);
+      }
 
       _id_73DE(var_2);
     }
@@ -315,13 +338,15 @@ _id_8E35() {
 _id_8E37() {
   var_0 = undefined;
 
-  if(isDefined(self._id_A906))
+  if(isDefined(self._id_A906)) {
     var_0 = self._id_A906;
-  else if(isDefined(self._id_A905))
+  } else if(isDefined(self._id_A905)) {
     var_0 = self._id_A905;
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     self._id_E45C = var_0;
+  }
 
   self notify("stop_going_to_node");
   _id_10FD9();
@@ -332,63 +357,76 @@ _id_8E37() {
 }
 
 _id_73E4(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(!isalive(var_0))
+  if(!isalive(var_0)) {
     return 0;
+  }
 
-  if(isDefined(var_0.ignoreme) && var_0.ignoreme == 1)
+  if(isDefined(var_0.ignoreme) && var_0.ignoreme == 1) {
     return 0;
+  }
 
   var_1 = 200;
   var_2 = 850;
   var_3 = distance(self.origin, var_0.origin);
   var_3 = int(var_3);
 
-  if(_id_9BCE(var_0) && var_3 <= var_2)
+  if(_id_9BCE(var_0) && var_3 <= var_2) {
     return 1;
+  }
 
-  if(isDefined(var_0._id_10E6D) && var_0._id_10E6D.state > 0)
+  if(isDefined(var_0._id_10E6D) && var_0._id_10E6D.state > 0) {
     return 1;
+  }
 
-  if(var_3 > var_1)
+  if(var_3 > var_1) {
     return 0;
+  }
 
-  if(isDefined(var_0._id_10E6D) && var_0._id_10E6D.state == 0 && !isDefined(var_0._id_6592))
+  if(isDefined(var_0._id_10E6D) && var_0._id_10E6D.state == 0 && !isDefined(var_0._id_6592)) {
     return 0;
+  }
 
-  if(_id_10A5C(var_0.origin))
+  if(_id_10A5C(var_0.origin)) {
     return 0;
+  }
 
   var_4 = undefined;
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 1;
+  }
 
-  if(isDefined(var_4) && _id_D283(var_4))
+  if(isDefined(var_4) && _id_D283(var_4)) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_9BCE(var_0) {
-  if(var_0 scripts\sp\utility::_id_65DF("stealth_attack") && var_0 scripts\sp\utility::_id_65DB("stealth_attack"))
+  if(var_0 scripts\sp\utility::_id_65DF("stealth_attack") && var_0 scripts\sp\utility::_id_65DB("stealth_attack")) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_10A5C(var_0, var_1) {
   self endon("death");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 70;
+  }
 
   var_2 = abs(self.origin[2] - var_0[2]);
 
-  if(var_2 > var_1)
+  if(var_2 > var_1) {
     return 1;
+  }
 
   return 0;
 }
@@ -398,8 +436,9 @@ _id_D283(var_0) {
     if(!isDefined(var_2)) {
       continue;
     }
-    if(!scripts\sp\utility::_id_CFAC(var_2))
+    if(!scripts\sp\utility::_id_CFAC(var_2)) {
       return 0;
+    }
   }
 
   return 1;
@@ -420,8 +459,9 @@ _id_73DE(var_0) {
   self._id_2894 = self._id_2894 * 10;
   self.dontevershoot = undefined;
 
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     _id_73CF(var_0);
+  }
 
   self._id_2894 = var_2;
   self._id_CA15 = 0;
@@ -441,10 +481,11 @@ _id_8406() {
 
   var_0 = undefined;
 
-  if(isDefined(self._id_A906))
+  if(isDefined(self._id_A906)) {
     var_0 = self._id_A906;
-  else if(isDefined(self._id_A905))
+  } else if(isDefined(self._id_A905)) {
     var_0 = self._id_A905;
+  }
 
   if(!isDefined(var_0)) {
     return;
@@ -479,8 +520,9 @@ _id_73F9(var_0) {
     if(!self cansee(var_0)) {
       var_2 = distance(self.origin, var_0.origin);
 
-      if(var_2 <= var_1)
+      if(var_2 <= var_1) {
         self setgoalpos(var_0.origin);
+      }
     } else
       self setgoalpos(self.origin);
 
@@ -492,15 +534,17 @@ _id_992C(var_0) {
   for(;;) {
     self waittill("damage", var_1, var_2);
 
-    if(var_2 == var_0)
+    if(var_2 == var_0) {
       scripts\sp\utility::_id_54C6();
+    }
   }
 }
 
 _id_10180() {
   foreach(var_1 in getaiarray("allies")) {
-    if(isDefined(var_1._id_73F4))
+    if(isDefined(var_1._id_73F4)) {
       var_1 _id_10FD9();
+    }
   }
 }
 
@@ -539,8 +583,9 @@ _id_D5FC(var_0, var_1, var_2, var_3) {
   if(var_1 == "open") {
     scripts\engine\utility::array_thread(var_7, ::_id_F595);
 
-    if(var_2 == "unlock")
+    if(var_2 == "unlock") {
       wait 1;
+    }
   }
 
   if(var_1 == "open") {
@@ -583,8 +628,9 @@ _id_D5FC(var_0, var_1, var_2, var_3) {
       }
     }
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_7[0] thread scripts\sp\utility::play_sound_on_entity(var_3);
+    }
 
     if(var_2 == "locked") {
       wait 2;
@@ -595,27 +641,33 @@ _id_D5FC(var_0, var_1, var_2, var_3) {
 
 _id_F595() {
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "right" || self.model == "sdf_door_airlock_01") {
-    if(scripts\sp\utility::hastag(self.model, "tag_screen_locked"))
+    if(scripts\sp\utility::hastag(self.model, "tag_screen_locked")) {
       self hidepart("tag_screen_locked", self.model);
+    }
 
-    if(scripts\sp\utility::hastag(self.model, "tag_screen_restricted"))
+    if(scripts\sp\utility::hastag(self.model, "tag_screen_restricted")) {
       self hidepart("tag_screen_restricted", self.model);
+    }
 
-    if(scripts\sp\utility::hastag(self.model, "tag_screen_open"))
+    if(scripts\sp\utility::hastag(self.model, "tag_screen_open")) {
       self showpart("tag_screen_open", self.model);
+    }
   }
 }
 
 _id_F594() {
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "right" || self.model == "sdf_door_airlock_01") {
-    if(scripts\sp\utility::hastag(self.model, "tag_screen_locked"))
+    if(scripts\sp\utility::hastag(self.model, "tag_screen_locked")) {
       self showpart("tag_screen_locked", self.model);
+    }
 
-    if(scripts\sp\utility::hastag(self.model, "tag_screen_open"))
+    if(scripts\sp\utility::hastag(self.model, "tag_screen_open")) {
       self hidepart("tag_screen_open", self.model);
+    }
 
-    if(scripts\sp\utility::hastag(self.model, "tag_screen_restricted"))
+    if(scripts\sp\utility::hastag(self.model, "tag_screen_restricted")) {
       self hidepart("tag_screen_restricted", self.model);
+    }
   }
 }
 
@@ -626,10 +678,11 @@ _id_D08D(var_0, var_1, var_2) {
   for(;;) {
     var_3 = scripts\sp\utility::_id_D08C(var_1, var_2);
 
-    if(var_3)
+    if(var_3) {
       return 1;
-    else
+    } else {
       wait 0.15;
+    }
   }
 }
 
@@ -675,9 +728,9 @@ _id_B399(var_0) {
 _id_6E55(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   scripts\engine\utility::flag_wait(var_0);
 
-  if(isDefined(var_9))
+  if(isDefined(var_9)) {
     self[[var_1]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
-  else {
+  } else {
     if(isDefined(var_8)) {
       self[[var_1]](var_2, var_3, var_4, var_5, var_6, var_7, var_8);
       return;
@@ -721,9 +774,9 @@ _id_6E55(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 _id_127B4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   scripts\sp\utility::_id_127B3(var_0);
 
-  if(isDefined(var_9))
+  if(isDefined(var_9)) {
     self[[var_1]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
-  else {
+  } else {
     if(isDefined(var_8)) {
       self[[var_1]](var_2, var_3, var_4, var_5, var_6, var_7, var_8);
       return;
@@ -766,15 +819,16 @@ _id_127B4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) 
 
 _id_C152(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(isDefined(var_6)) {
-    foreach(var_8 in var_6)
-    self endon(var_8);
+    foreach(var_8 in var_6) {
+      self endon(var_8);
+    }
   }
 
   self waittill(var_0);
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     self[[var_1]](var_2, var_3, var_4, var_5);
-  else {
+  } else {
     if(isDefined(var_4)) {
       self[[var_1]](var_2, var_3, var_4);
       return;
@@ -796,18 +850,21 @@ _id_C152(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 _id_137BA(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_3) && !scripts\engine\utility::flag_exist(var_3))
+  if(isDefined(var_3) && !scripts\engine\utility::flag_exist(var_3)) {
     scripts\engine\utility::flag_init(var_3);
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   var_4 = getnotetracktimes(var_0, var_1)[0];
   var_5 = var_4 * getanimlength(var_0) + var_2;
   wait(var_5);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     scripts\engine\utility::flag_set(var_3);
+  }
 }
 
 _id_22B4(var_0, var_1, var_2) {
@@ -815,8 +872,9 @@ _id_22B4(var_0, var_1, var_2) {
   var_0 = _id_2289(var_0);
   var_4 = _id_2289(var_1);
 
-  if(var_4.size == 0)
+  if(var_4.size == 0) {
     return var_0;
+  }
 
   foreach(var_11, var_6 in var_0) {
     var_7 = 0;
@@ -895,8 +953,9 @@ _id_10641(var_0) {
 }
 
 _id_10731() {
-  if(!isDefined(level.allies))
+  if(!isDefined(level.allies)) {
     level.allies = [];
+  }
 
   var_0 = self.script_noteworthy;
   var_1 = scripts\sp\utility::_id_10619(1, 1);
@@ -921,8 +980,9 @@ _id_59B0(var_0, var_1, var_2, var_3, var_4) {
       var_6 = var_7 scripts\sp\utility::_id_7A8F();
   }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_6[0] thread scripts\sp\utility::play_sound_on_entity(var_3);
+  }
 
   var_8 = 1;
   var_9 = 0.5;
@@ -938,8 +998,9 @@ _id_59B0(var_0, var_1, var_2, var_3, var_4) {
     var_12 = var_2;
 
     if(isDefined(var_11.script_noteworthy)) {
-      if(var_11.script_noteworthy == "left" || var_11.script_noteworthy == "bottom")
+      if(var_11.script_noteworthy == "left" || var_11.script_noteworthy == "bottom") {
         var_12 = var_2 * -1;
+      }
     }
 
     switch (var_1) {
@@ -960,16 +1021,18 @@ _id_59B0(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_59B1() {
-  if(!isDefined(self.script_parameters))
+  if(!isDefined(self.script_parameters)) {
     self connectpaths();
+  }
 }
 
 _id_11685(var_0, var_1, var_2) {
   if(getdvarint("loc_warnings", 0)) {
     return;
   }
-  if(!isDefined(level._id_545A))
+  if(!isDefined(level._id_545A)) {
     level._id_545A = [];
+  }
 
   var_3 = 0;
 
@@ -983,8 +1046,9 @@ _id_11685(var_0, var_1, var_2) {
 
   var_4 = "^3";
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   var_2 = max(1, var_2);
   level._id_545A[var_3] = 1;
@@ -1022,8 +1086,9 @@ _id_40BB(var_0) {
   var_3 = undefined;
 
   foreach(var_5 in var_2) {
-    if(ispointinvolume(var_5.origin, var_1))
+    if(ispointinvolume(var_5.origin, var_1)) {
       var_3 = var_5;
+    }
   }
 
   if(!isDefined(var_3)) {
@@ -1034,8 +1099,9 @@ _id_40BB(var_0) {
 }
 
 _id_1723(var_0, var_1, var_2, var_3) {
-  if(!scripts\sp\utility::_id_C268(var_0))
+  if(!scripts\sp\utility::_id_C268(var_0)) {
     objective_add(scripts\sp\utility::_id_C264(var_0), var_1, var_2);
+  }
 }
 
 _id_13E43() {

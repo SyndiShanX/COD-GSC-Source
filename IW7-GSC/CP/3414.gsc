@@ -14,8 +14,9 @@ init() {
 }
 
 canlogclient(var_0) {
-  if(isagent(var_0))
+  if(isagent(var_0)) {
     return 0;
+  }
 
   return var_0.clientid < level.maxlogclients;
 }
@@ -27,6 +28,7 @@ canlogdeath(var_0) {
 logplayerdeath() {
   var_0 = getclientmatchdata("deathCount");
 
-  if(!canlogclient(self) || !canlogdeath(var_0))
+  if(!canlogclient(self) || !canlogdeath(var_0)) {
     return;
+  }
 }

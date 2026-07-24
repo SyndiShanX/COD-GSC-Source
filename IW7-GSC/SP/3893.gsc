@@ -14,16 +14,18 @@ main() {
 }
 
 _id_FB24(var_0, var_1) {
-  if(!var_1 scripts\sp\utility::_id_65DF("zero_gravity"))
+  if(!var_1 scripts\sp\utility::_id_65DF("zero_gravity")) {
     var_1 scripts\sp\utility::_id_65E0("zero_gravity");
+  }
 
   if(var_0 == var_1 scripts\sp\utility::_id_65DB("zero_gravity")) {
     return;
   }
-  if(var_0)
+  if(var_0) {
     var_1 scripts\sp\utility::_id_65E1("zero_gravity");
-  else
+  } else {
     var_1 scripts\sp\utility::_id_65DD("zero_gravity");
+  }
 
   var_1 _meth_84F0(var_0);
   var_1 allowprone(!var_0);
@@ -34,15 +36,17 @@ _id_FB24(var_0, var_1) {
     var_1 thread _id_13A5();
     setsaveddvar("xanim_physicsGravity", 0);
 
-    if(scripts\engine\utility::flag_exist("highlight_zero_g_ai") && scripts\engine\utility::flag("highlight_zero_g_ai"))
+    if(scripts\engine\utility::flag_exist("highlight_zero_g_ai") && scripts\engine\utility::flag("highlight_zero_g_ai")) {
       var_1 thread _id_12D3();
+    }
   } else {
     physics_setgravity((0, 0, -386.09));
     var_1 thread _id_13A4();
     setsaveddvar("xanim_physicsGravity", 800);
 
-    if(scripts\engine\utility::flag_exist("highlight_zero_g_ai") && scripts\engine\utility::flag("highlight_zero_g_ai"))
+    if(scripts\engine\utility::flag_exist("highlight_zero_g_ai") && scripts\engine\utility::flag("highlight_zero_g_ai")) {
       var_1 thread _id_125D();
+    }
 
     _id_FB25(0, 0);
     var_1 allowmantle(1);
@@ -63,8 +67,9 @@ _id_13EF1(var_0) {
 _id_FB25(var_0, var_1, var_2, var_3) {
   level.player notify("zeroGravityEquipmentWait");
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1;
+  }
 
   if(scripts\engine\utility::is_true(level.player._id_13EEF) && !var_0 && !var_1) {
     _id_0F31::_id_F84E(0, level.player);
@@ -72,15 +77,17 @@ _id_FB25(var_0, var_1, var_2, var_3) {
     level.player _id_0B2A::_id_E2C0();
     level.player._id_13EEF = undefined;
 
-    if(var_3)
+    if(var_3) {
       level.player _id_13EF1(0);
+    }
 
     return;
   } else if(var_0 || var_1) {
-    if(scripts\engine\utility::is_true(var_2))
+    if(scripts\engine\utility::is_true(var_2)) {
       level.player _id_13EF0(var_0, var_1, var_3);
-    else
+    } else {
       level.player thread _id_13EF0(var_0, var_1, var_3);
+    }
   }
 }
 
@@ -94,22 +101,26 @@ _id_13EF0(var_0, var_1, var_2) {
 
   for(;;) {
     if(self getweaponslistall().size > 0 || var_3 >= 0.1) {
-      while(self getweaponslistall().size > 2)
+      while(self getweaponslistall().size > 2) {
         scripts\engine\utility::waitframe();
+      }
 
       self._id_13EEF = 1;
       _id_0B2A::_id_11429();
 
-      if(var_0)
+      if(var_0) {
         _id_0F31::_id_F84E(1, self);
+      }
 
-      if(var_1)
+      if(var_1) {
         thread _id_0F32::_id_D393();
+      }
 
       scripts\engine\utility::waitframe();
 
-      if(var_2)
+      if(var_2) {
         level.player _id_13EF1(1);
+      }
 
       return;
     }
@@ -120,8 +131,9 @@ _id_13EF0(var_0, var_1, var_2) {
 }
 
 _id_FB26(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   setsaveddvar("grapple_max_distance", 512);
   setsaveddvar("grapple_min_distance", 128);
@@ -142,8 +154,9 @@ _id_FB26(var_0, var_1) {
     level.player allowwallrun(0);
   }
 
-  if(scripts\engine\utility::is_true(var_1))
+  if(scripts\engine\utility::is_true(var_1)) {
     setsaveddvar("player_zeroGravWorldUp", (0, 0, 1));
+  }
 }
 
 _id_FB27() {
@@ -176,8 +189,9 @@ _id_D3CD(var_0) {
 
   var_4 = ["ges_grav_jump_combat", "ges_grav_jump_combat_fail", "ges_grav_jump_combat_up", "ges_grav_jump_combat_down", "ges_grav_jump_combat_left", "ges_grav_jump_combat_right"];
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_4 = [var_0, var_0, var_0, var_0, var_0, var_0];
+  }
 
   var_5 = 1;
   var_6 = self getEye();
@@ -210,8 +224,9 @@ _id_D3CD(var_0) {
     break;
   }
 
-  if(!isDefined(var_9))
+  if(!isDefined(var_9)) {
     var_9 = self.origin;
+  }
 
   if(isDefined(var_9)) {
     var_19 = scripts\engine\utility::spawn_tag_origin(var_9, var_8);
@@ -232,15 +247,17 @@ _id_D380() {
 }
 
 _id_D385(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = (0, 0, 1);
+  }
 
   setsaveddvar("player_zeroGravAutoLevel", var_0);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     setsaveddvar("player_zeroGravAutoLevelDeadZone", var_1);
-  else
+  } else {
     setsaveddvar("player_zeroGravAutoLevelDeadZone", 0.1);
+  }
 }
 
 _id_13A5() {
@@ -295,17 +312,20 @@ _id_13A6() {
   self endon("playerZeroGravityDisabled");
 
   for(;;) {
-    while(!self issprinting() || self isonground())
+    while(!self issprinting() || self isonground()) {
       scripts\engine\utility::waitframe();
+    }
 
     self playRumbleOnEntity("damage_light");
     self _meth_8291(0.6, 0.6, 0.6, 0.5, 0, 0.5, 0, 5, 5, 5);
 
-    while(self issprinting() && !self isonground())
+    while(self issprinting() && !self isonground()) {
       scripts\engine\utility::waitframe();
+    }
 
-    while(self adsButtonPressed() && !self isonground())
+    while(self adsButtonPressed() && !self isonground()) {
       scripts\engine\utility::waitframe();
+    }
   }
 }
 
@@ -314,10 +334,11 @@ _id_11A3(var_0, var_1, var_2, var_3) {
   var_5 = 15;
   var_6 = physics_capsulecast(var_0, var_1, var_5, var_4, var_2, _id_12B7(), var_3, "physicsquery_closest");
 
-  if(var_6.size)
+  if(var_6.size) {
     var_6 = var_6[0];
-  else
+  } else {
     var_6 = scripts\common\trace::internal_pack_default_trace(var_1);
+  }
 
   return var_6;
 }
@@ -347,8 +368,9 @@ _id_1370() {
 }
 
 _id_136F() {
-  if(isDefined(self._id_37C7))
+  if(isDefined(self._id_37C7)) {
     self._id_37C7 delete();
+  }
 }
 
 _id_1398() {
@@ -362,8 +384,9 @@ _id_1399() {
   for(;;) {
     if(self isonground() && (self _meth_84F4() == "none" || self _meth_84F4() == "land")) {
       if(!var_0) {
-        if(!self iswallrunning())
+        if(!self iswallrunning()) {
           self playlocalsound("zg_grapple_stop_land_magboots");
+        }
 
         var_0 = 1;
       }
@@ -430,38 +453,43 @@ _id_1396() {
   var_0 = "ges_zg_boost";
   var_1 = self _meth_846E();
 
-  if(var_1.size == 0)
+  if(var_1.size == 0) {
     return 0;
+  }
 
   foreach(var_3 in var_1) {
-    if(!issubstr(var_3, var_0) && var_3 != "ges_zg_sprint")
+    if(!issubstr(var_3, var_0) && var_3 != "ges_zg_sprint") {
       return 1;
+    }
   }
 
   return 0;
 }
 
 _id_1375(var_0) {
-  if(self _meth_843B())
+  if(self _meth_843B()) {
     return "back";
-  else if(self _meth_81CE())
+  } else if(self _meth_81CE()) {
     return "forward";
+  }
 
-  if(abs(var_0[0]) < 0.1 && abs(var_0[1]) < 0.1)
+  if(abs(var_0[0]) < 0.1 && abs(var_0[1]) < 0.1) {
     return "none";
+  }
 
   var_1 = cos(60);
   var_2 = vectorNormalize((var_0[0], var_0[1], 0));
   var_3 = vectordot(var_2, (1, 0, 0));
 
-  if(var_3 > var_1)
+  if(var_3 > var_1) {
     return "forward";
-  else if(var_3 < var_1 * -1)
+  } else if(var_3 < var_1 * -1) {
     return "back";
-  else if(var_0[1] > 0)
+  } else if(var_0[1] > 0) {
     return "right";
-  else
+  } else {
     return "left";
+  }
 }
 
 _id_13A1() {
@@ -480,21 +508,25 @@ _id_13A2() {
     var_5 = "";
     var_6 = self isonground() || self islinked();
 
-    if(!var_6)
+    if(!var_6) {
       var_6 = _id_0F31::_id_9E14() || _id_1396();
+    }
 
-    if(!var_6)
+    if(!var_6) {
       var_6 = self playerads() > 0 || self _meth_819F() || self isthrowinggrenade() || self isreloading() || self isswitchingweapon();
+    }
 
-    if(!var_6)
+    if(!var_6) {
       var_6 = issubstr(self getcurrentweapon(), "akimbo") && issubstr(self getcurrentweapon(), "alt_");
+    }
 
-    if(!var_6)
+    if(!var_6) {
       var_6 = issubstr(self getcurrentweapon(), "+grip") || issubstr(self getcurrentweapon(), "+zeroggrip");
+    }
 
-    if(var_6)
+    if(var_6) {
       thread _id_13A3("none_quick");
-    else {
+    } else {
       var_7 = self getnormalizedmovement();
       var_8 = _id_1375(var_7);
 
@@ -504,10 +536,11 @@ _id_13A2() {
           var_10 = var_9 * getdvarfloat("player_zeroGravBoostScalar");
           var_11 = var_9 + (var_10 - var_9) * 0.05;
 
-          if(lengthsquared(self getvelocity()) > squared(var_11))
+          if(lengthsquared(self getvelocity()) > squared(var_11)) {
             thread _id_13A3(var_4 + var_5);
-          else
+          } else {
             thread _id_13A3(var_0 + var_5);
+          }
 
           break;
         case "back":
@@ -535,8 +568,9 @@ _id_13A3(var_0) {
   }
   var_1 = getdvarfloat("scr_zerog_view_dip_blend_time", 0.3);
 
-  if(var_0 == "none_quick")
+  if(var_0 == "none_quick") {
     var_1 = min(0.2, var_1);
+  }
 
   self notify("_playerViewDipSet");
   self endon("_playerViewDipSet");
@@ -545,10 +579,11 @@ _id_13A3(var_0) {
   if(isDefined(level.player._id_13EEC) && !issubstr(level.player._id_13EEC, "none")) {
     var_2 = var_1;
 
-    if(isDefined(level.player._id_13EED))
+    if(isDefined(level.player._id_13EED)) {
       var_2 = var_1 - (gettime() - level.player._id_13EED) / 1000.0;
-    else
+    } else {
       level.player._id_13EED = gettime();
+    }
 
     var_2 = max(0.0, var_2);
     level.player stopgestureviewmodel(level.player._id_13EEC, var_2);
@@ -558,8 +593,9 @@ _id_13A3(var_0) {
 
   level.player._id_13EEC = var_0;
 
-  if(!issubstr(level.player._id_13EEC, "none"))
+  if(!issubstr(level.player._id_13EEC, "none")) {
     level.player forceplaygestureviewmodel(level.player._id_13EEC, undefined, var_1);
+  }
 }
 
 _id_12D3() {
@@ -568,8 +604,9 @@ _id_12D3() {
   level endon("end_zero_g_highlighting");
   var_0 = 2048;
 
-  if(isDefined(level._id_13E75))
+  if(isDefined(level._id_13E75)) {
     var_0 = level._id_13E75;
+  }
 
   var_0 = var_0 * var_0;
   var_1 = [];
@@ -589,8 +626,9 @@ _id_12D3() {
   var_1[var_1.size - 1].color = (0, 1, 1);
 
   for(;;) {
-    foreach(var_3 in var_1)
-    thread _id_146A(var_3.team, var_3._id_B742, var_3._id_B42E, var_3._id_B743, var_3._id_B42F, var_3.color);
+    foreach(var_3 in var_1) {
+      thread _id_146A(var_3.team, var_3._id_B742, var_3._id_B42E, var_3._id_B743, var_3._id_B42F, var_3.color);
+    }
 
     wait 0.05;
   }
@@ -612,11 +650,13 @@ _id_146A(var_0, var_1, var_2, var_3, var_4, var_5) {
         if(var_12 > var_3 && var_12 <= var_4) {
           var_13 = var_8.origin;
 
-          if(isDefined(var_8.model) && scripts\sp\utility::hastag(var_8.model, "j_mainroot"))
+          if(isDefined(var_8.model) && scripts\sp\utility::hastag(var_8.model, "j_mainroot")) {
             var_13 = var_8 gettagorigin("j_mainroot");
+          }
 
-          if(sighttracepassed(self getEye(), var_13, 1, var_8, self))
+          if(sighttracepassed(self getEye(), var_13, 1, var_8, self)) {
             var_9 = 1;
+          }
         }
       }
     }
@@ -654,21 +694,24 @@ _id_13B4() {
   scripts\engine\utility::waittill_any("death", "zero_g_remove_highlight");
 
   if(isDefined(var_0)) {
-    if(target_istarget(var_0))
+    if(target_istarget(var_0)) {
       target_remove(var_0);
+    }
 
     var_0 delete();
   }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self._id_8EEF = undefined;
+  }
 }
 
 _id_125D() {
   level notify("end_zero_g_highlighting");
 
-  foreach(var_1 in getaiarray("axis", "allies"))
-  var_1 notify("zero_g_remove_highlight");
+  foreach(var_1 in getaiarray("axis", "allies")) {
+    var_1 notify("zero_g_remove_highlight");
+  }
 }
 
 _id_FAFC(var_0, var_1) {
@@ -678,23 +721,27 @@ _id_FAFC(var_0, var_1) {
   thread _id_FAFD();
   var_2 = [];
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_2 = _id_0F31::_id_7EE1();
-  else
+  } else {
     var_2 = getEntArray(var_0, "targetname");
+  }
 
-  if(var_2.size > 0)
+  if(var_2.size > 0) {
     scripts\engine\utility::array_thread(var_2, _id_0F31::_id_13544, 1);
+  }
 
   var_2 = [];
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_2 = _id_0F31::_id_7EE0();
-  else
+  } else {
     var_2 = getEntArray(var_1, "targetname");
+  }
 
-  if(var_2.size > 0)
+  if(var_2.size > 0) {
     scripts\engine\utility::array_thread(var_2, _id_0F31::_id_1353F, 1);
+  }
 }
 
 _id_FAFD() {
@@ -709,15 +756,17 @@ _id_89FD() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(!isDefined(self.script_parameters))
+    if(!isDefined(self.script_parameters)) {
       self.script_parameters = 0.6;
+    }
 
     level._id_13E85++;
     var_1 = level._id_13ED3;
     thread _id_EBB0(self.script_parameters, 1);
 
-    while(isalive(var_0) && isDefined(self) && var_0 istouching(self))
+    while(isalive(var_0) && isDefined(self) && var_0 istouching(self)) {
       wait 0.25;
+    }
 
     level._id_13E85--;
 

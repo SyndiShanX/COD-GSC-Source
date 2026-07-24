@@ -21,16 +21,18 @@ _id_1970() {
     }
     wait(randomfloatrange(1, 3));
 
-    if(self._id_AEDF.locked)
+    if(self._id_AEDF.locked) {
       _id_51FA();
+    }
   }
 }
 
 _id_FF26() {
-  if(randomint(100) < 100 * level._id_D127._id_68AB._id_5BE3)
+  if(randomint(100) < 100 * level._id_D127._id_68AB._id_5BE3) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_51FA() {

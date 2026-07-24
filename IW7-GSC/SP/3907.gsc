@@ -17,10 +17,11 @@ _id_6A70(var_0) {
     if(_id_1000F()) {
       var_2 = distancesquared(self.origin, self.enemy.origin);
 
-      if(var_2 < var_1)
+      if(var_2 < var_1) {
         self orientmode("face enemy");
-      else
+      } else {
         self orientmode("face current");
+      }
 
       continue;
     }
@@ -39,14 +40,17 @@ _id_D46D(var_0, var_1, var_2, var_3) {
   scripts\anim\combat::_id_F296();
   var_4 = self._id_164D[var_0];
 
-  if(isDefined(var_4._id_10E23) && (var_4._id_10E23 == "stand_run_loop" || var_4._id_10E23 == "move_walk_loop"))
+  if(isDefined(var_4._id_10E23) && (var_4._id_10E23 == "stand_run_loop" || var_4._id_10E23 == "move_walk_loop")) {
     childthread scripts\asm\shared\utility::setuseanimgoalweight(var_1, var_2);
+  }
 
-  if(isDefined(self.node))
+  if(isDefined(self.node)) {
     self._blackboard._id_AA3D = self.node;
+  }
 
-  if(self.team != "allies")
+  if(self.team != "allies") {
     thread _id_6A70(var_1);
+  }
 
   _id_0A1E::_id_235F(var_0, var_1, var_2, 1.0);
 }
@@ -56,8 +60,9 @@ reload(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   var_4 = _id_0A1E::asm_getallanimsforstate(var_0, var_1);
 
-  if(weaponclass(self.weapon) == "pistol")
+  if(weaponclass(self.weapon) == "pistol") {
     self orientmode("face enemy");
+  }
 
   self clearanim(_id_0A1E::asm_getbodyknob(), var_2);
   self _meth_82EA(var_1, var_4, 1, var_2, 1.0);
@@ -83,28 +88,32 @@ _id_D56A(var_0, var_1, var_2, var_3) {
   var_4 = _id_0A1E::asm_getallanimsforstate(var_0, var_1);
   self clearanim(_id_0A1E::asm_getbodyknob(), var_2);
 
-  if(scripts\engine\utility::actor_is3d() && isDefined(self.enemy))
+  if(scripts\engine\utility::actor_is3d() && isDefined(self.enemy)) {
     self orientmode("face enemy");
-  else
+  } else {
     self orientmode("face angle 3d", self.angles);
+  }
 
-  if(isDefined(self.node))
+  if(isDefined(self.node)) {
     self animmode("angle deltas");
-  else
+  } else {
     self animmode("zonly_physics");
+  }
 
   _id_0A1E::_id_2369(var_0, var_1, var_4);
   self._id_10F8C = angleclamp180(getangledelta(var_4, 0, 1) + self.angles[1]);
   self.useanimgoalweight = 1;
   self _meth_82E7(var_1, var_4, 1, var_2, 1);
 
-  if(_id_1000F())
+  if(_id_1000F()) {
     thread _id_D56D(var_4, var_1);
+  }
 
   var_5 = _id_0A1E::_id_231F(var_0, var_1);
 
-  if(var_5 == "end")
+  if(var_5 == "end") {
     thread scripts\asm\asm::_id_2310(var_0, var_1, 0);
+  }
 }
 
 _id_D56D(var_0, var_1) {
@@ -139,20 +148,25 @@ _id_9EB9(var_0, var_1, var_2, var_3) {
 }
 
 _id_1007E(var_0, var_1, var_2, var_3) {
-  if(scripts\asm\asm_bb::bb_moverequested())
+  if(scripts\asm\asm_bb::bb_moverequested()) {
     return 0;
+  }
 
-  if(!scripts\asm\shared\utility::isatcovernode())
+  if(!scripts\asm\shared\utility::isatcovernode()) {
     return 0;
+  }
 
-  if(!isDefined(self.node))
+  if(!isDefined(self.node)) {
     return 0;
+  }
 
-  if(isDefined(self.primaryweapon) && scripts\anim\utility_common::isusingsidearm() && weaponclass(self.primaryweapon) != "mg")
+  if(isDefined(self.primaryweapon) && scripts\anim\utility_common::isusingsidearm() && weaponclass(self.primaryweapon) != "mg") {
     return 0;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     return 1;
+  }
 
   return _id_0F3D::_id_9D4C(var_0, var_1, var_2, var_3);
 }
@@ -166,14 +180,16 @@ _id_1007F(var_0, var_1, var_2, var_3) {
 _id_4C03(var_0, var_1, var_2, var_3) {
   var_4 = var_3;
 
-  if(!isDefined(self.node))
+  if(!isDefined(self.node)) {
     return var_4 == "Exposed Crouch";
+  }
 
   if(distance2dsquared(self.origin, self.node.origin) > 225) {
-    if(scripts\asm\asm_bb::_id_292C() == "stand")
+    if(scripts\asm\asm_bb::_id_292C() == "stand") {
       return var_4 == "Exposed";
-    else
+    } else {
       return var_4 == "Exposed Crouch";
+    }
   }
 
   return _id_0F3D::_id_9D4C(var_0, var_1, var_2, var_3);

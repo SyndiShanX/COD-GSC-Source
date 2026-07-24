@@ -53,8 +53,9 @@ register_zombie_perks() {
   scripts\cp\perks\perkmachines::register_perk_callback("perk_machine_deadeye", ::give_deadeye_perk, ::take_deadeye_perk);
   scripts\cp\perks\perkmachines::register_perk_callback("perk_machine_change", ::give_change_perk, ::take_change_perk);
 
-  if(isDefined(level.perk_registration_func))
+  if(isDefined(level.perk_registration_func)) {
     [[level.perk_registration_func]]();
+  }
 
   level.mutilation_perk_func = ::should_mutilate_perk_check;
   level thread update_perk_machines_based_on_num_players();
@@ -115,8 +116,9 @@ init_change_machines_func() {
   level.change_chew_explosion_func = ::change_chew_explosion;
   var_0 = getDvar("ui_mapname");
 
-  if(var_0 == "cp_town" || var_0 == "cp_final")
+  if(var_0 == "cp_town" || var_0 == "cp_final") {
     init_perk_machines_func("perk_machine_change");
+  }
 }
 
 delay_rotate_func(var_0) {
@@ -152,8 +154,9 @@ rotate_loop_by_targetname(var_0, var_1, var_2) {
 init_perk_machines_func(var_0) {
   var_1 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
 
-  foreach(var_4, var_3 in var_1)
-  var_3 thread revive_power_on_func(var_4);
+  foreach(var_4, var_3 in var_1) {
+    var_3 thread revive_power_on_func(var_4);
+  }
 }
 
 revive_power_on_func(var_0) {
@@ -168,8 +171,9 @@ revive_power_on_func(var_0) {
   scripts\engine\utility::flag_wait("player_count_determined");
 
   if(self.script_noteworthy == "perk_machine_revive" && (scripts\cp\utility::isplayingsolo() || level.only_one_player)) {
-    if(var_0 > 0)
+    if(var_0 > 0) {
       wait(0.1 * var_0);
+    }
 
     turn_on_light_and_power();
   } else if(scripts\engine\utility::is_true(self.requires_power) && isDefined(self.power_area)) {
@@ -181,14 +185,16 @@ revive_power_on_func(var_0) {
         continue;
       }
 
-      if(var_0 > 0)
+      if(var_0 > 0) {
         wait(0.1 * var_0);
+      }
 
       turn_on_light_and_power();
     }
   } else {
-    if(var_0 > 0)
+    if(var_0 > 0) {
       wait(0.1 * var_0);
+    }
 
     turn_on_light_and_power();
   }
@@ -197,11 +203,13 @@ revive_power_on_func(var_0) {
 turn_on_light_and_power() {
   self.powered_on = 1;
 
-  if(scripts\cp\utility::map_check(0))
+  if(scripts\cp\utility::map_check(0)) {
     level thread scripts\cp\cp_vo::add_to_nag_vo("dj_perkstation_use_nag", "zmb_dj_vo", 60, 15, 3, 0);
+  }
 
-  foreach(var_1 in level.players)
-  var_1 thread scripts\cp\cp_vo::add_to_nag_vo("nag_try_perk", "zmb_comment_vo", 60, 270, 6, 1);
+  foreach(var_1 in level.players) {
+    var_1 thread scripts\cp\cp_vo::add_to_nag_vo("nag_try_perk", "zmb_comment_vo", 60, 270, 6, 1);
+  }
 
   var_3 = "mus_zmb_tuffnuff_purchase";
 
@@ -253,19 +261,22 @@ turn_on_light_and_power() {
   if(isDefined(self.light)) {
     var_5 = 1;
 
-    if(isDefined(self.light.script_intensity_01))
+    if(isDefined(self.light.script_intensity_01)) {
       var_5 = self.light.script_intensity_01;
+    }
 
     for(var_6 = 0; var_6 < 4; var_6++) {
       self.light setlightintensity(var_5);
 
-      if(isDefined(self.perk_machine_top))
+      if(isDefined(self.perk_machine_top)) {
         self.perk_machine_top setscriptablepartstate("perk_sign", "powered_on");
+      }
 
       wait(randomfloat(1));
 
-      if(isDefined(self.perk_machine_top))
+      if(isDefined(self.perk_machine_top)) {
         self.perk_machine_top setscriptablepartstate("perk_sign", "off");
+      }
 
       self.light setlightintensity(0);
       wait(randomfloat(1));
@@ -273,27 +284,31 @@ turn_on_light_and_power() {
 
     var_5 = 1;
 
-    if(isDefined(self.light.script_intensity_01))
+    if(isDefined(self.light.script_intensity_01)) {
       var_5 = self.light.script_intensity_01;
+    }
 
     self.light setlightintensity(var_5);
   }
 
-  if(isDefined(self.perk_machine_top))
+  if(isDefined(self.perk_machine_top)) {
     self.perk_machine_top setscriptablepartstate("perk_sign", "powered_on");
+  }
 
   if(self.perk_type == "perk_machine_revive") {
     wait 1;
     self.perk_machine_top setscriptablepartstate("perk_sign", "up");
   }
 
-  if(self.perk_type == "perk_machine_change")
+  if(self.perk_type == "perk_machine_change") {
     delay_rotate_func(10);
+  }
 }
 
 turn_off_light_and_power() {
-  if(isDefined(self.light))
+  if(isDefined(self.light)) {
     self.light setlightintensity(0);
+  }
 
   self.powered_on = 0;
 }
@@ -361,8 +376,9 @@ activate_perk_machine(var_0, var_1) {
   var_1 endon("disconnect");
   var_2 = [];
 
-  if(isDefined(var_0.script_noteworthy))
+  if(isDefined(var_0.script_noteworthy)) {
     var_2 = strtok(var_0.script_noteworthy, "_");
+  }
 
   if(isDefined(var_0.last_time_used) && isDefined(var_0.last_time_used[var_1.name])) {
     return;
@@ -370,11 +386,13 @@ activate_perk_machine(var_0, var_1) {
   var_3 = scripts\engine\utility::is_true(var_2[0] == "crafted");
 
   if(!var_3 && var_1 scripts\cp\utility::has_zombie_perk(var_0.perk_type)) {
-    if(soundexists("perk_machine_remove_perk"))
+    if(soundexists("perk_machine_remove_perk")) {
       var_1 playlocalsound("perk_machine_remove_perk");
+    }
 
-    if(var_0.perk_type == "perk_machine_revive")
+    if(var_0.perk_type == "perk_machine_revive") {
       var_1.self_revives_purchased--;
+    }
 
     var_1 take_zombies_perk(var_0.perk_type);
     var_1 scripts\cp\cp_interaction::refresh_interaction();
@@ -404,8 +422,9 @@ activate_perk_machine_gesture_second(var_0, var_1) {
   var_1 endon("disconnect");
   var_2 = [];
 
-  if(isDefined(var_0.script_noteworthy))
+  if(isDefined(var_0.script_noteworthy)) {
     var_2 = strtok(var_0.script_noteworthy, "_");
+  }
 
   if(isDefined(var_0.last_time_used) && isDefined(var_0.last_time_used[var_1.name])) {
     return;
@@ -413,11 +432,13 @@ activate_perk_machine_gesture_second(var_0, var_1) {
   var_3 = scripts\engine\utility::is_true(var_2[0] == "crafted");
 
   if(!var_3 && var_1 scripts\cp\utility::has_zombie_perk(var_0.perk_type)) {
-    if(soundexists("perk_machine_remove_perk"))
+    if(soundexists("perk_machine_remove_perk")) {
       var_1 playlocalsound("perk_machine_remove_perk");
+    }
 
-    if(var_0.perk_type == "perk_machine_revive")
+    if(var_0.perk_type == "perk_machine_revive") {
       var_1.self_revives_purchased--;
+    }
 
     var_1 take_zombies_perk(var_0.perk_type);
     var_1 scripts\cp\cp_interaction::refresh_interaction();
@@ -445,24 +466,28 @@ activate_perk_machine_gesture_second(var_0, var_1) {
 }
 
 give_zombies_perk(var_0, var_1) {
-  if(!isDefined(self.zombies_perks))
+  if(!isDefined(self.zombies_perks)) {
     self.zombies_perks = [];
+  }
 
   self.zombies_perks[var_0] = 1;
   scripts\cp\zombies\zombie_analytics::log_perk_machine_used(level.wave_num, var_0);
   scripts\cp\cp_persistence::increment_player_career_perks_used(self);
   self[[level.coop_perk_callbacks[var_0].set]]();
 
-  if(isDefined(self.sub_perks) && isDefined(self.sub_perks[var_0]))
+  if(isDefined(self.sub_perks) && isDefined(self.sub_perks[var_0])) {
     var_0 = self.sub_perks[var_0];
+  }
 
   thread set_ui_omnvar_for_perks(var_0);
 
-  if(scripts\engine\utility::is_true(var_1))
+  if(scripts\engine\utility::is_true(var_1)) {
     scripts\cp\cp_merits::processmerit("mt_purchase_perks");
+  }
 
-  if(isDefined(level.additional_give_perk))
+  if(isDefined(level.additional_give_perk)) {
     self[[level.additional_give_perk]](var_0);
+  }
 
   return 1;
 }
@@ -471,17 +496,20 @@ give_zombies_perk_immediate(var_0, var_1) {
   if(scripts\cp\utility::has_zombie_perk(var_0)) {
     return;
   }
-  if(!isDefined(self.zombies_perks))
+  if(!isDefined(self.zombies_perks)) {
     self.zombies_perks = [];
+  }
 
   self.zombies_perks[var_0] = 1;
   self[[level.coop_perk_callbacks[var_0].set]]();
 
-  if(isDefined(self.sub_perks) && isDefined(self.sub_perks[var_0]))
+  if(isDefined(self.sub_perks) && isDefined(self.sub_perks[var_0])) {
     var_0 = self.sub_perks[var_0];
+  }
 
-  if(scripts\engine\utility::is_true(var_1))
+  if(scripts\engine\utility::is_true(var_1)) {
     thread set_ui_omnvar_for_perks(var_0);
+  }
 
   return 1;
 }
@@ -544,8 +572,9 @@ play_perk_machine_purchase_sound(var_0, var_1) {
   var_1 thread scripts\cp\cp_vo::try_to_play_vo(var_3, "zmb_comment_vo", "low", 10, 0, 1, 0, 50);
   var_1 thread play_perk_vo_additional(var_3);
 
-  if(!var_2.size)
+  if(!var_2.size) {
     return undefined;
+  }
 
   var_4 = scripts\engine\utility::random(var_2);
 
@@ -562,8 +591,9 @@ play_perk_vo_additional(var_0) {
 }
 
 play_perk_machine_deny_sound(var_0, var_1) {
-  if(soundexists("perk_machine_deny"))
+  if(soundexists("perk_machine_deny")) {
     var_1 playlocalsound("perk_machine_deny");
+  }
 }
 
 set_ui_omnvar_for_perks(var_0) {
@@ -623,20 +653,23 @@ play_perk_gesture(var_0) {
 
   thread scripts\cp\utility::firegesturegrenade(self, var_1);
 
-  while(self getcurrentoffhand() == var_1)
+  while(self getcurrentoffhand() == var_1) {
     wait 0.1;
+  }
 
   self.playingperkgesture = undefined;
 }
 
 take_zombies_perk(var_0) {
-  if(!scripts\cp\utility::has_zombie_perk(var_0))
+  if(!scripts\cp\utility::has_zombie_perk(var_0)) {
     return 0;
+  }
 
   var_1 = var_0;
 
-  if(isDefined(self.sub_perks) && isDefined(self.sub_perks[var_0]))
+  if(isDefined(self.sub_perks) && isDefined(self.sub_perks[var_0])) {
     var_1 = self.sub_perks[var_0];
+  }
 
   scripts\cp\zombies\zombie_analytics::log_perk_returned(level.wave_num, var_0);
   self[[level.coop_perk_callbacks[var_0].unset]]();
@@ -644,8 +677,9 @@ take_zombies_perk(var_0) {
   var_3 = int(var_2);
   self setclientomnvarbit("zm_active_perks", var_3 - 1, 0);
 
-  if(isDefined(level.take_perks_func))
+  if(isDefined(level.take_perks_func)) {
     self[[level.take_perks_func]](var_0);
+  }
 
   return 1;
 }
@@ -657,14 +691,16 @@ sawblade_perk_animation() {
 }
 
 take_zombies_perk_immediate(var_0) {
-  if(!scripts\cp\utility::has_zombie_perk(var_0))
+  if(!scripts\cp\utility::has_zombie_perk(var_0)) {
     return 0;
+  }
 
   self[[level.coop_perk_callbacks[var_0].unset]]();
   var_1 = var_0;
 
-  if(isDefined(self.sub_perks) && isDefined(self.sub_perks[var_0]))
+  if(isDefined(self.sub_perks) && isDefined(self.sub_perks[var_0])) {
     var_1 = self.sub_perks[var_0];
+  }
 
   var_2 = tablelookup("cp/zombies/zombie_perks_bit_mask_table.csv", 1, var_1, 0);
   var_3 = int(var_2);
@@ -674,23 +710,28 @@ take_zombies_perk_immediate(var_0) {
 
 hint_string_func(var_0, var_1) {
   if(!scripts\engine\utility::is_true(var_0.powered_on)) {
-    if(isDefined(level.needspowerstring))
+    if(isDefined(level.needspowerstring)) {
       return level.needspowerstring;
-    else
+    } else {
       return &"COOP_INTERACTIONS_REQUIRES_POWER";
+    }
   }
 
-  if(isDefined(var_0.last_time_used) && isDefined(var_0.last_time_used[var_1.name]))
+  if(isDefined(var_0.last_time_used) && isDefined(var_0.last_time_used[var_1.name])) {
     return "";
+  }
 
-  if(var_1 scripts\cp\utility::has_zombie_perk(var_0.perk_type))
+  if(var_1 scripts\cp\utility::has_zombie_perk(var_0.perk_type)) {
     return &"COOP_PERK_MACHINES_REMOVE_PERK";
+  }
 
-  if(isDefined(self.zombies_perks) && self.zombies_perks.size > 4 && !scripts\engine\utility::is_true(self.have_gns_perk))
+  if(isDefined(self.zombies_perks) && self.zombies_perks.size > 4 && !scripts\engine\utility::is_true(self.have_gns_perk)) {
     return &"COOP_PERK_MACHINES_PERK_SLOTS_FULL";
+  }
 
-  if(var_0.script_noteworthy == "perk_machine_revive" && (scripts\cp\utility::isplayingsolo() || level.only_one_player))
+  if(var_0.script_noteworthy == "perk_machine_revive" && (scripts\cp\utility::isplayingsolo() || level.only_one_player)) {
     return &"COOP_PERK_MACHINES_SELF_REVIVE";
+  }
 
   return level.interaction_hintstrings[var_0.script_noteworthy];
 }
@@ -699,8 +740,9 @@ turn_off_interaction_for_time(var_0, var_1, var_2) {
   var_3 = gettime();
   var_0.last_time_used[var_1.name] = var_3;
 
-  while(gettime() - var_3 < var_2)
+  while(gettime() - var_3 < var_2) {
     wait 0.1;
+  }
 
   var_0.last_time_used[var_1.name] = undefined;
 }
@@ -716,8 +758,9 @@ give_tough_perk() {
 take_tough_perk() {
   self.perk_data["health"].max_health = 100;
 
-  if(self.health > self.perk_data["health"].max_health)
+  if(self.health > self.perk_data["health"].max_health) {
     self.health = self.perk_data["health"].max_health;
+  }
 
   self.maxhealth = self.perk_data["health"].max_health;
   remove_zombies_perk_icon_and_index("perk_machine_tough");
@@ -756,10 +799,11 @@ manage_self_revive() {
 }
 
 take_revive_perk() {
-  if(!scripts\cp\utility::isplayingsolo() && !level.only_one_player)
+  if(!scripts\cp\utility::isplayingsolo() && !level.only_one_player) {
     self.perk_data["medic"].revive_time_scalar = 1.0;
-  else if(scripts\cp\utility::isplayingsolo() || level.only_one_player)
+  } else if(scripts\cp\utility::isplayingsolo() || level.only_one_player) {
     scripts\cp\cp_laststand::set_last_stand_count(self, 0);
+  }
 
   remove_zombies_perk_icon_and_index("perk_machine_revive");
 }
@@ -871,8 +915,9 @@ wait_for_change_chews_update() {
       thread set_ui_omnvar_for_perks(var_2);
     }
 
-    while(self.health < 31)
+    while(self.health < 31) {
       wait 0.1;
+    }
 
     wait 0.1;
   }
@@ -901,8 +946,9 @@ update_change_chews_sub_perk() {
 
   var_2 = var_1 + 1;
 
-  if(var_2 > 4)
+  if(var_2 > 4) {
     var_2 = 1;
+  }
 
   self.sub_perks["perk_machine_change"] = "perk_machine_change" + var_2;
 }
@@ -930,16 +976,18 @@ explode_head_shards(var_0, var_1, var_2, var_3) {
   var_7 = [var_2];
   var_8 = 150;
 
-  if(var_4)
+  if(var_4) {
     var_8 = 300;
+  }
 
   var_9 = scripts\engine\utility::get_array_of_closest(var_1, var_6, var_7, undefined, var_8, 0);
 
   foreach(var_11 in var_9) {
-    if(isDefined(var_11.agent_type) && (var_11.agent_type == "crab_mini" || var_11.agent_type == "crab_brute"))
+    if(isDefined(var_11.agent_type) && (var_11.agent_type == "crab_mini" || var_11.agent_type == "crab_brute")) {
       var_12 = 100;
-    else
+    } else {
       var_12 = 100000;
+    }
 
     var_11 dodamage(var_12, var_1, var_0, var_0, "MOD_EXPLOSIVE", var_5);
   }
@@ -950,12 +998,14 @@ explode_head_with_fx(var_0, var_1, var_2, var_3, var_4) {
   var_4 = self gettagorigin("J_Spine4");
 
   foreach(var_6 in level.players) {
-    if(distance(var_6.origin, var_4) <= 350)
+    if(distance(var_6.origin, var_4) <= 350) {
       var_6 thread scripts\cp\zombies\zombies_weapons::showonscreenbloodeffects();
+    }
   }
 
-  if(isDefined(self.headmodel))
+  if(isDefined(self.headmodel)) {
     self detach(self.headmodel);
+  }
 
   self setscriptablepartstate("head", "hide");
 }
@@ -1011,13 +1061,15 @@ take_more_perk() {
   if(var_0.size > 3) {
     var_3 = var_0[var_0.size - 1];
 
-    if(var_3 == var_2)
+    if(var_3 == var_2) {
       var_1 = 1;
+    }
 
     self takeweapon(var_3);
 
-    if(var_1)
+    if(var_1) {
       self switchtoweaponimmediate(var_0[var_0.size - 2]);
+    }
   }
 
   self.mule_weapon = undefined;
@@ -1043,8 +1095,9 @@ get_culled_primary_list() {
     }
     var_3 = strtok(var_1[var_2], "_");
 
-    if(var_3[0] != "alt")
+    if(var_3[0] != "alt") {
       var_0[var_0.size] = var_1[var_2];
+    }
   }
 
   return var_0;
@@ -1080,9 +1133,9 @@ give_rat_a_tat_perk() {
       var_6 = scripts\cp\utility::_giveweapon(var_6, undefined, undefined, 1);
 
       if(var_7) {
-        if(issubstr(var_6, "akimbofmg"))
+        if(issubstr(var_6, "akimbofmg")) {
           self setweaponammoclip(var_6, var_8 + var_9);
-        else {
+        } else {
           self setweaponammoclip(var_6, var_8, "left");
           self setweaponammoclip(var_6, var_9, "right");
         }
@@ -1091,23 +1144,27 @@ give_rat_a_tat_perk() {
 
       self setweaponammostock(var_6, var_11);
 
-      if(getweaponbasename(var_6) == getweaponbasename(var_1))
+      if(getweaponbasename(var_6) == getweaponbasename(var_1)) {
         var_1 = var_6;
+      }
     }
   }
 
-  if(!scripts\engine\utility::is_true(self.kung_fu_mode))
+  if(!scripts\engine\utility::is_true(self.kung_fu_mode)) {
     self switchtoweaponimmediate(var_1);
+  }
 }
 
 _id_9B58(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   var_1 = issubstr(var_0, "akimbo");
 
-  if(!var_1)
+  if(!var_1) {
     var_1 = issubstr(var_0, "g18pap2");
+  }
 
   return var_1;
 }
@@ -1116,10 +1173,11 @@ take_rat_a_tat_perk() {
   self.perk_data["damagemod"].bullet_damage_scalar = 1.0;
   remove_zombies_perk_icon_and_index("perk_machine_rat_a_tat");
 
-  if(isDefined(level.alt_mode_weapons_allowed) && scripts\engine\utility::array_contains(level.alt_mode_weapons_allowed, getweaponbasename(self getcurrentweapon())))
+  if(isDefined(level.alt_mode_weapons_allowed) && scripts\engine\utility::array_contains(level.alt_mode_weapons_allowed, getweaponbasename(self getcurrentweapon()))) {
     var_0 = self getcurrentweapon();
-  else
+  } else {
     var_0 = self getcurrentprimaryweapon();
+  }
 
   var_1 = self getweaponslistprimaries();
   self.bang_bangs = 1;
@@ -1146,20 +1204,22 @@ take_rat_a_tat_perk() {
     var_9 = getweaponattachments(var_3);
     var_10 = scripts\cp\utility::getcurrentcamoname(var_3);
 
-    if(scripts\engine\utility::array_contains(var_9, "doubletap"))
+    if(scripts\engine\utility::array_contains(var_9, "doubletap")) {
       var_9 = scripts\engine\utility::array_remove(var_9, "doubletap");
+    }
 
-    if(scripts\engine\utility::array_contains(self.rofweaponslist, getweaponbasename(var_3)))
+    if(scripts\engine\utility::array_contains(self.rofweaponslist, getweaponbasename(var_3))) {
       var_9[var_9.size] = "rof";
+    }
 
     var_11 = scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_3, undefined, var_9, undefined, var_10);
     var_11 = scripts\cp\utility::_giveweapon(var_11, undefined, undefined, 1);
 
     if(isDefined(var_11)) {
       if(var_4) {
-        if(issubstr(var_11, "akimbofmg"))
+        if(issubstr(var_11, "akimbofmg")) {
           self setweaponammoclip(var_11, var_7 + var_8);
-        else {
+        } else {
           self setweaponammoclip(var_11, var_7, "left");
           self setweaponammoclip(var_11, var_8, "right");
         }
@@ -1169,8 +1229,9 @@ take_rat_a_tat_perk() {
       self setweaponammostock(var_11, var_5);
     }
 
-    if(getweaponbasename(var_11) == getweaponbasename(var_0))
+    if(getweaponbasename(var_11) == getweaponbasename(var_0)) {
       var_0 = var_11;
+    }
   }
 
   self switchtoweapon(var_0);
@@ -1194,20 +1255,22 @@ give_run_perk() {
   scripts\cp\utility::giveperk("specialty_longersprint");
   scripts\cp\utility::giveperk("specialty_sprintfire");
 
-  if(isDefined(level.player_run_suit))
+  if(isDefined(level.player_run_suit)) {
     self setsuit(level.player_run_suit);
-  else
+  } else {
     self setsuit("zom_suit_sprint");
+  }
 }
 
 take_run_perk() {
   scripts\cp\utility::_unsetperk("specialty_longersprint");
   scripts\cp\utility::_unsetperk("specialty_sprintfire");
 
-  if(isDefined(level.player_suit))
+  if(isDefined(level.player_suit)) {
     self setsuit(level.player_suit);
-  else
+  } else {
     self setsuit("zom_suit");
+  }
 
   remove_zombies_perk_icon_and_index("perk_machine_run");
 }
@@ -1311,8 +1374,9 @@ zap_cooldown_timer(var_0) {
   self endon("disconnect");
   var_1 = 0.25;
 
-  if(scripts\cp\utility::has_zombie_perk("perk_machine_flash"))
+  if(scripts\cp\utility::has_zombie_perk("perk_machine_flash")) {
     var_1 = var_1 * getdvarfloat("perk_weapReloadMultiplier");
+  }
 
   var_2 = var_1 + 3;
   wait(var_2);
@@ -1360,10 +1424,11 @@ create_zap_ring(var_0, var_1) {
   var_2 = var_2 * 100;
   var_3 = "reload_zap_m";
 
-  if(var_0 < 72.0)
+  if(var_0 < 72.0) {
     var_3 = "reload_zap_s";
-  else if(var_0 < 96.0)
+  } else if(var_0 < 96.0) {
     var_3 = "reload_zap_m";
+  }
 
   playsoundatpos(self.origin, "perk_blue_bolts_sparks");
   playFX(level._effect[var_3], self.origin + var_2);
@@ -1371,8 +1436,9 @@ create_zap_ring(var_0, var_1) {
   self notify("blue_bolts_activated");
 
   foreach(var_5 in level.players) {
-    if(var_5 == self)
+    if(var_5 == self) {
       playfxontagforclients(level._effect[var_3], self, "tag_eye", self);
+    }
   }
 
   wait 0.25;
@@ -1384,8 +1450,9 @@ create_zap_ring(var_0, var_1) {
     if(!scripts\cp\utility::should_be_affected_by_trap(var_10)) {
       continue;
     }
-    if(distancesquared(var_10.origin, self.origin) < var_8)
+    if(distancesquared(var_10.origin, self.origin) < var_8) {
       var_10 thread zap_over_time(2, self);
+    }
   }
 }
 
@@ -1397,11 +1464,13 @@ zap_over_time(var_0, var_1) {
   }
   self.stunned = 1;
 
-  if(isDefined(level.special_zap_start_func))
+  if(isDefined(level.special_zap_start_func)) {
     [[level.special_zap_start_func]](var_1);
+  }
 
-  if(self.agent_type != "alien_phantom" && self.agent_type != "alien_goon" && self.agent_type != "alien_rhino" && self.agent_type != "skeleton")
+  if(self.agent_type != "alien_phantom" && self.agent_type != "alien_goon" && self.agent_type != "alien_rhino" && self.agent_type != "skeleton") {
     thread scripts\cp\zombies\zombie_scriptable_states::applyzombiescriptablestate(self);
+  }
 
   while(var_0 > 0) {
     self.stun_hit_time = gettime() + 1000;
@@ -1413,14 +1482,16 @@ zap_over_time(var_0, var_1) {
 
   self.stunned = undefined;
 
-  if(isDefined(level.special_zap_end_func))
+  if(isDefined(level.special_zap_end_func)) {
     [[level.special_zap_end_func]](var_1);
+  }
 }
 
 should_mutilate_perk_check(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
   if(var_6 == "iw7_bluebolts_zm") {
-    if(isDefined(var_2) && isPlayer(var_2) && var_2 scripts\cp\utility::has_zombie_perk("perk_machine_zap"))
+    if(isDefined(var_2) && isPlayer(var_2) && var_2 scripts\cp\utility::has_zombie_perk("perk_machine_zap")) {
       return 0;
+    }
   }
 
   return var_0;
@@ -1485,8 +1556,9 @@ spawn_fire_trail_fx(var_0, var_1) {
   if(var_5 != 0 && var_6 != 0) {
     var_7 = anglesdelta(var_1, var_4);
 
-    if(var_7 > 10)
+    if(var_7 > 10) {
       var_1 = (var_1 + var_4) / 2;
+    }
   }
 
   self.flame_vel = var_1;
@@ -1553,14 +1625,16 @@ remove_perks_from_player() {
   self.stored_zombies_perks = self.zombies_perks;
   var_0 = scripts\cp\utility::is_consumable_active("just_a_flesh_wound");
 
-  if(var_0)
+  if(var_0) {
     thread dontremoveperksuntildeath();
+  }
 
   foreach(var_3, var_2 in self.zombies_perks) {
     if(var_0) {
       if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player)) {
-        if(var_3 != "perk_machine_revive")
+        if(var_3 != "perk_machine_revive") {
           continue;
+        }
       } else
         break;
     }
@@ -1583,8 +1657,9 @@ dontremoveperksuntildeath() {
   if(var_0 == "death") {
     self.stored_zombies_perks = self.zombies_perks;
 
-    foreach(var_3, var_2 in self.zombies_perks)
-    take_zombies_perk(var_3);
+    foreach(var_3, var_2 in self.zombies_perks) {
+      take_zombies_perk(var_3);
+    }
   }
 }
 
@@ -1593,14 +1668,16 @@ get_data_for_all_perks() {
 }
 
 try_restore_zombie_perks(var_0) {
-  if(isDefined(var_0.stored_zombies_perks) && var_0.stored_zombies_perks.size > 0)
+  if(isDefined(var_0.stored_zombies_perks) && var_0.stored_zombies_perks.size > 0) {
     restore_zombie_perks(var_0, var_0.stored_zombies_perks);
+  }
 }
 
 restore_zombie_perks(var_0, var_1) {
   if(!isDefined(var_1)) {
     return;
   }
-  foreach(var_4, var_3 in var_1)
-  var_0 give_zombies_perk(var_4, 0);
+  foreach(var_4, var_3 in var_1) {
+    var_0 give_zombies_perk(var_4, 0);
+  }
 }

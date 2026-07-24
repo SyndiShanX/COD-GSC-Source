@@ -12,8 +12,9 @@ initfx() {
 }
 
 init_fx_thread() {
-  if(!isDefined(level._fx))
+  if(!isDefined(level._fx)) {
     level._fx = spawnStruct();
+  }
 
   scripts\engine\utility::create_lock("createfx_looper", 20);
   level._fx.fireloopmod = 1;
@@ -23,14 +24,17 @@ init_fx_thread() {
   level._fx.exploderfunction = scripts\common\exploder::exploder_after_load;
   level._fx.server_culled_sounds = 0;
 
-  if(getdvarint("serverCulledSounds") == 1)
+  if(getdvarint("serverCulledSounds") == 1) {
     level._fx.server_culled_sounds = 1;
+  }
 
-  if(level.createfx_enabled)
+  if(level.createfx_enabled) {
     level._fx.server_culled_sounds = 0;
+  }
 
-  if(level.createfx_enabled)
+  if(level.createfx_enabled) {
     level waittill("createfx_common_done");
+  }
 
   for(var_0 = 0; var_0 < level.createfxent.size; var_0++) {
     var_1 = level.createfxent[var_0];
@@ -67,8 +71,9 @@ check_createfx_limit() {}
 check_limit_type(var_0, var_1) {}
 
 print_org(var_0, var_1, var_2, var_3) {
-  if(getDvar("debug") == "1")
+  if(getDvar("debug") == "1") {
     return;
+  }
 }
 
 _id_C519(var_0, var_1, var_2, var_3) {}
@@ -78,8 +83,9 @@ loopfx(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7.v["origin"] = var_1;
   var_7.v["angles"] = (0, 0, 0);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_7.v["angles"] = vectortoangles(var_3 - var_1);
+  }
 
   var_7.v["delay"] = var_2;
 }
@@ -102,22 +108,25 @@ create_loopsound() {
   var_1 = undefined;
 
   if(isDefined(self.v["stopable"]) && self.v["stopable"]) {
-    if(isDefined(self.looper))
+    if(isDefined(self.looper)) {
       var_1 = "death";
-    else
+    } else {
       var_1 = "stop_loop";
+    }
   } else if(level._fx.server_culled_sounds && isDefined(self.v["server_culled"]))
     var_0 = self.v["server_culled"];
 
   var_2 = self;
 
-  if(isDefined(self.looper))
+  if(isDefined(self.looper)) {
     var_2 = self.looper;
+  }
 
   var_3 = undefined;
 
-  if(level.createfx_enabled)
+  if(level.createfx_enabled) {
     var_3 = self;
+  }
 
   var_2 scripts\engine\utility::loop_fx_sound_with_angles(self.v["soundalias"], self.v["origin"], self.v["angles"], var_0, var_1, var_3);
 }
@@ -148,22 +157,26 @@ create_interval_sound() {
 loopfxthread() {
   scripts\engine\utility::waitframe();
 
-  if(isDefined(self.fxstart))
+  if(isDefined(self.fxstart)) {
     level waittill("start fx" + self.fxstart);
+  }
 
   for(;;) {
     create_looper();
 
-    if(isDefined(self.timeout))
+    if(isDefined(self.timeout)) {
       thread loopfxstop(self.timeout);
+    }
 
-    if(isDefined(self.fxstop))
+    if(isDefined(self.fxstop)) {
       level waittill("stop fx" + self.fxstop);
-    else
+    } else {
       return;
+    }
 
-    if(isDefined(self.looper))
+    if(isDefined(self.looper)) {
       self.looper delete();
+    }
 
     if(isDefined(self.fxstart)) {
       level waittill("start fx" + self.fxstart);
@@ -226,8 +239,9 @@ gunfireloopfxthread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_14 = var_3 - var_2;
   var_15 = spawnfx(level._effect[var_0], var_1);
 
-  if(!level.createfx_enabled)
+  if(!level.createfx_enabled) {
     var_15 willneverchange();
+  }
 
   for(;;) {
     var_16 = var_13 + randomint(var_14);
@@ -248,18 +262,21 @@ create_triggerfx() {
   self.looper = spawnfx(level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
   triggerfx(self.looper, self.v["delay"]);
 
-  if(!level.createfx_enabled)
+  if(!level.createfx_enabled) {
     self.looper willneverchange();
+  }
 
   create_loopsound();
 }
 
 verify_effects_assignment(var_0) {
-  if(isDefined(level._effect[var_0]))
+  if(isDefined(level._effect[var_0])) {
     return 1;
+  }
 
-  if(!isDefined(level._missing_fx))
+  if(!isDefined(level._missing_fx)) {
     level._missing_fx = [];
+  }
 
   level._missing_fx[self.v["fxid"]] = var_0;
   verify_effects_assignment_print(var_0);
@@ -278,8 +295,9 @@ verify_effects_assignment_print(var_0) {
 oneshotfxthread() {
   wait 0.05;
 
-  if(self.v["delay"] > 0)
+  if(self.v["delay"] > 0) {
     wait(self.v["delay"]);
+  }
 
   [[level.func["create_triggerfx"]]]();
 }
@@ -293,8 +311,9 @@ add_reactive_fx() {
     level thread reactive_fx_thread();
   }
 
-  if(!isDefined(level._fx.reactive_fx_ents))
+  if(!isDefined(level._fx.reactive_fx_ents)) {
     level._fx.reactive_fx_ents = [];
+  }
 
   level._fx.reactive_fx_ents[level._fx.reactive_fx_ents.size] = self;
   self.next_reactive_time = 3000;
@@ -302,8 +321,9 @@ add_reactive_fx() {
 
 reactive_fx_thread() {
   if(!scripts\engine\utility::issp()) {
-    if(getDvar("createfx") == "on")
+    if(getDvar("createfx") == "on") {
       scripts\engine\utility::flag_wait("createfx_started");
+    }
   }
 
   level._fx.reactive_sound_ents = [];
@@ -313,8 +333,9 @@ reactive_fx_thread() {
     level waittill("code_damageradius", var_1, var_0, var_2, var_3, var_4);
     var_5 = sort_reactive_ents(var_2, var_0);
 
-    foreach(var_8, var_7 in var_5)
-    var_7 thread play_reactive_fx(var_8, var_4);
+    foreach(var_8, var_7 in var_5) {
+      var_7 thread play_reactive_fx(var_8, var_4);
+    }
   }
 }
 
@@ -333,8 +354,9 @@ sort_reactive_ents(var_0, var_1) {
     var_6 = var_5.v["reactive_radius"] + var_1;
     var_6 = var_6 * var_6;
 
-    if(distancesquared(var_0, var_5.v["origin"]) < var_6)
+    if(distancesquared(var_0, var_5.v["origin"]) < var_6) {
       var_2[var_2.size] = var_5;
+    }
   }
 
   foreach(var_5 in var_2) {
@@ -360,15 +382,17 @@ sort_reactive_ents(var_0, var_1) {
     var_5.dot = undefined;
   }
 
-  for(var_14 = 4; var_14 < var_2.size; var_14++)
+  for(var_14 = 4; var_14 < var_2.size; var_14++) {
     var_2[var_14] = undefined;
+  }
 
   return var_2;
 }
 
 play_reactive_fx(var_0, var_1) {
-  if(self.v["fxid"] != "No FX")
+  if(self.v["fxid"] != "No FX") {
     playFX(level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
+  }
 
   if(self.v["soundalias"] == "nil") {
     return;
@@ -382,8 +406,9 @@ play_reactive_fx(var_0, var_1) {
   var_2.origin = self.v["origin"];
   var_2.is_playing = 1;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0.0;
+  }
 
   wait(var_0 * randomfloatrange(0.05, 0.1) + var_1);
 
@@ -401,8 +426,9 @@ play_reactive_fx(var_0, var_1) {
 
 get_reactive_sound_ent() {
   foreach(var_1 in level._fx.reactive_sound_ents) {
-    if(!var_1.is_playing)
+    if(!var_1.is_playing) {
       return var_1;
+    }
   }
 
   if(level._fx.reactive_sound_ents.size < 4) {
@@ -429,8 +455,9 @@ playfxnophase(var_0, var_1, var_2, var_3) {
   }
 
   if(var_4) {
-    foreach(var_7 in var_5)
-    playFX(var_0, var_1, var_2, var_3, var_7);
+    foreach(var_7 in var_5) {
+      playFX(var_0, var_1, var_2, var_3, var_7);
+    }
   } else
     playFX(var_0, var_1, var_2, var_3);
 }

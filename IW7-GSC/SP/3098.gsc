@@ -4,13 +4,15 @@
 **************************************/
 
 _id_25C5() {
-  if(!isDefined(self.audio))
+  if(!isDefined(self.audio)) {
     self.audio = spawnStruct();
+  }
 }
 
 _id_A3B3(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = self.spaceship_mode;
+  }
 
   _id_A3B6(var_0, 0);
 }
@@ -25,8 +27,9 @@ _id_A3B6(var_0, var_1) {
   if(isDefined(self.audio.state) && self.audio.state == var_0) {
     return;
   }
-  if(isDefined(self.audio._id_552E))
+  if(isDefined(self.audio._id_552E)) {
     self thread[[self.audio._id_552E]]();
+  }
 
   self.audio._id_552E = undefined;
 
@@ -63,8 +66,9 @@ _id_A3B6(var_0, var_1) {
 
 _id_2396(var_0) {
   if(soundexists("jackal_tread_sfx_lp")) {
-    if(!isDefined(self._id_A381))
+    if(!isDefined(self._id_A381)) {
       thread _id_A381();
+    }
   }
 
   if(!isDefined(self._id_23A5)) {
@@ -87,10 +91,11 @@ _id_11130(var_0) {
     self.audio._id_1113C = _id_31C0();
     var_1 = self.script_team;
 
-    if(var_1 == "axis")
+    if(var_1 == "axis") {
       self.audio._id_1113C thread scripts\sp\utility::_id_10461(_id_0BDC::_id_7A5B("jackal_sdf_thrust_world"), 1, var_0, 1);
-    else
+    } else {
       self.audio._id_1113C thread scripts\sp\utility::_id_10461(_id_0BDC::_id_7A5B("jackal_thrust_world"), 1, var_0, 1);
+    }
 
     self.audio._id_1113C thread scripts\sp\utility::_id_10461(_id_0BDC::_id_7A5B("jackal_thrust_world"), 1, var_0, 1);
     thread _id_A1D5("jackal_flyby", undefined, 1);
@@ -178,8 +183,9 @@ _id_A1D5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self.audio._id_4E1F = 0;
   self.audio._id_20EF = 1;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     thread _id_A13F(var_3);
+  }
 
   if(isDefined(var_4)) {
     var_10 = spawn("script_origin", self.origin);
@@ -190,22 +196,26 @@ _id_A1D5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   self.audio._id_B746 = 2;
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     self.audio._id_B746 = var_5;
+  }
 
   self.audio._id_B745 = 2;
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     self.audio._id_B745 = var_6;
+  }
 
   var_11 = 0.05;
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     var_11 = var_7;
+  }
 
   if(isarray(var_1)) {
-    foreach(var_14, var_13 in var_1)
-    thread _id_A1D7(var_14, var_13);
+    foreach(var_14, var_13 in var_1) {
+      thread _id_A1D7(var_14, var_13);
+    }
   }
 
   if(isarray(var_8)) {
@@ -218,26 +228,30 @@ _id_A1D5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
             if(self.audio._id_20EF && self.audio._id_7008 == 0 && self.audio._id_4E1F == 0) {
               var_17 = _id_A1D1(var_0, var_16, var_9);
 
-              if(isDefined(var_17))
+              if(isDefined(var_17)) {
                 thread _id_A1D4(var_17, var_16);
+              }
             } else if(var_15 < self.audio._id_D889)
               self.audio._id_20EF = 1;
-            else
+            else {
               self.audio._id_20EF = 0;
+            }
           } else if(var_15 > self.audio._id_D889) {
             if(self.audio._id_20EF && self.audio._id_7008 == 0 && self.audio._id_7007 == 0 && self.audio._id_4E1F == 0) {
               self.audio._id_20EF = 0;
               var_17 = _id_A1D1(var_0, var_16, var_9);
 
-              if(isDefined(var_17))
+              if(isDefined(var_17)) {
                 thread _id_A1D4(var_17, var_16);
+              }
             }
           } else if(var_15 < 3500) {
             if(self.audio._id_7008 == 0 && self.audio._id_7007 == 0 && self.audio._id_4E1F == 0) {
               var_17 = _id_A1D1(var_0, var_16, var_9);
 
-              if(isDefined(var_17))
+              if(isDefined(var_17)) {
                 thread _id_A1D4(var_17, var_16);
+              }
             }
           } else
             self.audio._id_20EF = 1;
@@ -264,13 +278,15 @@ _id_A16A(var_0) {
   var_1 = _id_7BA7();
   var_2 = 0;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_2 = var_0;
+  }
 
-  if(var_2)
+  if(var_2) {
     var_3 = distance(self.origin, var_1);
-  else
+  } else {
     var_3 = distance2d(self.origin, var_1);
+  }
 
   return var_3;
 }
@@ -282,16 +298,18 @@ _id_A1D1(var_0, var_1, var_2) {
 
   if(var_5 > 125) {
     if(isarray(var_2)) {
-      if(scripts\engine\utility::player_is_in_jackal())
+      if(scripts\engine\utility::player_is_in_jackal()) {
         var_6 = level._id_D127.spaceship_vel * 17.6;
-      else
+      } else {
         var_6 = level.player getvelocity();
+      }
 
       var_7 = var_4 - var_6;
       var_8 = length(var_7) * 0.0568182;
 
-      if(var_8 < 125)
+      if(var_8 < 125) {
         return undefined;
+      }
 
       for(var_9 = 0; var_9 < var_2.size; var_9++) {
         var_3 = var_9 + 1;
@@ -303,36 +321,41 @@ _id_A1D1(var_0, var_1, var_2) {
       }
     }
 
-    if(var_3 == 0)
+    if(var_3 == 0) {
       var_10 = "fast";
-    else if(var_3 == 1)
+    } else if(var_3 == 1) {
       var_10 = "med";
-    else
+    } else {
       var_10 = "slow";
+    }
 
-    if(var_1 == 0)
+    if(var_1 == 0) {
       var_11 = "close";
-    else if(var_1 == 1)
+    } else if(var_1 == 1) {
       var_11 = "mid";
-    else if(var_1 == 2)
+    } else if(var_1 == 2) {
       var_11 = "far";
-    else
+    } else {
       return undefined;
+    }
 
     var_12 = self.script_team;
 
-    if(var_12 == "axis")
+    if(var_12 == "axis") {
       var_0 = var_0 + "_sdf";
+    }
 
-    if(scripts\engine\utility::player_is_in_jackal())
+    if(scripts\engine\utility::player_is_in_jackal()) {
       var_13 = var_0 + "_" + var_10 + "_" + var_11;
-    else
+    } else {
       var_13 = var_0 + "_" + var_10 + "_" + var_11 + "_grnd";
+    }
 
-    if(var_1 == 0)
+    if(var_1 == 0) {
       self.audio._id_7008 = 1;
-    else
+    } else {
       self.audio._id_7007 = 1;
+    }
 
     return var_13;
   } else
@@ -348,8 +371,9 @@ _id_A1D4(var_0, var_1) {
   self playSound(var_0);
   wait 1;
 
-  if(isDefined(self.audio._id_1113C))
+  if(isDefined(self.audio._id_1113C)) {
     self.audio._id_1113C _meth_8278(1, 5);
+  }
 }
 
 _id_A13F(var_0) {
@@ -375,13 +399,15 @@ _id_A331(var_0) {
     if(var_0 == 0) {
       wait(self.audio._id_B746);
 
-      if(isDefined(self))
+      if(isDefined(self)) {
         self.audio._id_7008 = 0;
+      }
     } else {
       wait(self.audio._id_B745);
 
-      if(isDefined(self))
+      if(isDefined(self)) {
         self.audio._id_7007 = 0;
+      }
     }
   }
 }
@@ -404,8 +430,9 @@ _id_A381() {
         self._id_A381 = spawn("script_origin", var_4);
         wait 0.05;
 
-        if(isDefined(self) && isDefined(self._id_A381))
+        if(isDefined(self) && isDefined(self._id_A381)) {
           self._id_A381 scripts\sp\utility::_id_10461("jackal_tread_sfx_lp", var_0, 1, 1);
+        }
 
         wait 1;
       }
@@ -415,8 +442,9 @@ _id_A381() {
         var_5 = distance(self.origin, var_4);
         var_1 = (var_5 - var_2) / (0 - var_2);
 
-        if(var_1 < var_0)
+        if(var_1 < var_0) {
           var_1 = var_0;
+        }
 
         self._id_A381 _meth_8278(var_1, 0.1);
         self._id_A381 moveTo(var_4, 0.1);
@@ -427,8 +455,9 @@ _id_A381() {
         self._id_A381 _meth_8278(0, 2);
         wait 2;
 
-        if(isDefined(self) && isDefined(self._id_A381))
+        if(isDefined(self) && isDefined(self._id_A381)) {
           self._id_A381 delete();
+        }
       }
     }
 
@@ -439,8 +468,9 @@ _id_A381() {
 _id_A380() {
   self waittill("death");
 
-  if(isDefined(self._id_A381))
+  if(isDefined(self._id_A381)) {
     self._id_A381 delete();
+  }
 }
 
 _id_A1D0(var_0, var_1, var_2) {
@@ -449,8 +479,9 @@ _id_A1D0(var_0, var_1, var_2) {
   if(isDefined(var_0)) {
     var_3 = 0.3;
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_3 = var_2;
+    }
 
     var_0 _meth_8278(0.0, var_3);
     wait(var_3);
@@ -459,15 +490,17 @@ _id_A1D0(var_0, var_1, var_2) {
       var_0 stopsounds();
       wait 0.1;
 
-      if(isDefined(var_0))
+      if(isDefined(var_0)) {
         var_0 delete();
+      }
     }
   }
 }
 
 _id_7BA7() {
-  if(scripts\engine\utility::player_is_in_jackal())
+  if(scripts\engine\utility::player_is_in_jackal()) {
     return level._id_D127.origin;
-  else
+  } else {
     return level.player.origin;
+  }
 }

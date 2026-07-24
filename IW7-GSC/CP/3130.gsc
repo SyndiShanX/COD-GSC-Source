@@ -82,10 +82,11 @@ _id_11701(var_0, var_1) {
   var_2 = anim.asm[var_0].states[var_1];
   var_3 = undefined;
 
-  if(isarray(var_2._id_116FB))
+  if(isarray(var_2._id_116FB)) {
     var_3 = var_2._id_116FB[0];
-  else
+  } else {
     var_3 = var_2._id_116FB;
+  }
 
   scripts\asm\asm::_id_2388(var_0, var_1, var_2, var_2._id_116FB);
   scripts\asm\asm::_id_238A(var_0, var_3, 0.2, undefined, undefined, undefined);

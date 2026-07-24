@@ -4,8 +4,9 @@
 **************************************/
 
 _id_8715(var_0) {
-  if(!isDefined(level._id_FC5D))
+  if(!isDefined(level._id_FC5D)) {
     level._id_FC5D = [];
+  }
 
   self endon("death");
   self notify("end_mg_behavior");
@@ -25,8 +26,9 @@ _id_8715(var_0) {
   thread _id_11513(var_2);
   var_2.origin = var_0.origin + var_1 * 500;
 
-  if(isDefined(self._id_A8BB))
+  if(isDefined(self._id_A8BB)) {
     var_2.origin = self._id_A8BB;
+  }
 
   var_0 settargetentity(var_2);
   var_3 = undefined;
@@ -84,8 +86,9 @@ _id_FE5E(var_0) {
     var_6 = var_0.origin + var_2 * 180;
     var_7 = _id_7CC5(self getEye(), var_0.origin, var_6);
 
-    if(!isDefined(var_7))
+    if(!isDefined(var_7)) {
       var_7 = var_0.origin;
+    }
 
     var_0 moveTo(var_0.origin + var_2 * 80 + (0, 0, randomfloatrange(15, 50) * -1), 3, 1, 1);
     wait 3.5;
@@ -100,8 +103,9 @@ _id_F39D(var_0) {
   if(var_0) {
     self._id_381C = 1;
 
-    if(self._id_138DC)
+    if(self._id_138DC) {
       self.turret notify("startfiring");
+    }
   } else {
     self._id_381C = 0;
     self.turret notify("stopfiring");
@@ -116,8 +120,9 @@ stop_firing_turret() {
 _id_10C4E() {
   self._id_138DC = 1;
 
-  if(self._id_381C)
+  if(self._id_381C) {
     self.turret notify("startfiring");
+  }
 }
 
 _id_491C() {
@@ -160,8 +165,9 @@ _id_103FE(var_0) {
     break;
   }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return;
+  }
 }
 
 _id_103FD() {
@@ -176,18 +182,21 @@ _id_103FD() {
 }
 
 _id_5F0C(var_0) {
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] endon("death");
+  }
 
   var_2 = 0;
   var_3 = 1;
 
   for(;;) {
-    if(isalive(var_0[var_2]))
+    if(isalive(var_0[var_2])) {
       var_0[var_2] _id_F39D(1);
+    }
 
-    if(isalive(var_0[var_3]))
+    if(isalive(var_0[var_3])) {
       var_0[var_3] _id_F39D(0);
+    }
 
     var_4 = var_2;
     var_2 = var_3;
@@ -199,11 +208,13 @@ _id_5F0C(var_0) {
 _id_7CC5(var_0, var_1, var_2) {
   var_3 = distance(var_1, var_2) * 0.05;
 
-  if(var_3 < 5)
+  if(var_3 < 5) {
     var_3 = 5;
+  }
 
-  if(var_3 > 20)
+  if(var_3 > 20) {
     var_3 = 20;
+  }
 
   var_4 = var_2 - var_1;
   var_4 = (var_4[0] / var_3, var_4[1] / var_3, var_4[2] / var_3);

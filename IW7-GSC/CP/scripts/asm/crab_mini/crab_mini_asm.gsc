@@ -47,17 +47,21 @@ playanimandlookatenemy(var_0, var_1, var_2, var_3) {
 }
 
 isanimdone(var_0, var_1, var_2, var_3) {
-  if(scripts\asm\asm::_id_232B(var_1, "end"))
+  if(scripts\asm\asm::_id_232B(var_1, "end")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "early_end"))
+  if(scripts\asm\asm::_id_232B(var_1, "early_end")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "finish_early"))
+  if(scripts\asm\asm::_id_232B(var_1, "finish_early")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "code_move"))
+  if(scripts\asm\asm::_id_232B(var_1, "code_move")) {
     return 1;
+  }
 
   return 0;
 }
@@ -67,23 +71,27 @@ ismyenemyinfrontofme(var_0, var_1) {
   var_3 = anglesToForward(self.angles);
   var_4 = vectordot(var_2, var_3);
 
-  if(var_4 > var_1)
+  if(var_4 > var_1) {
     return 1;
+  }
 
   return 0;
 }
 
 shouldmeleeattackhit(var_0, var_1, var_2) {
-  if(scripts\mp\agents\zombie\zombie_util::_id_9DE0(var_0))
+  if(scripts\mp\agents\zombie\zombie_util::_id_9DE0(var_0)) {
     return 1;
+  }
 
   var_3 = distance2dsquared(var_0.origin, self.origin);
 
-  if(var_3 > var_1)
+  if(var_3 > var_1) {
     return 0;
+  }
 
-  if(!ismyenemyinfrontofme(var_0, var_2))
+  if(!ismyenemyinfrontofme(var_0, var_2)) {
     return 0;
+  }
 
   return 1;
 }
@@ -99,10 +107,11 @@ domeleedamageoncontact(var_0, var_1) {
 
   while(isDefined(var_1) && isalive(var_1)) {
     if(shouldmeleeattackhit(var_1, var_2.moving_melee_attack_damage_radius_sq, var_2.melee_dot)) {
-      if(randomint(100) < var_2.chance_to_get_stuck_if_hit)
+      if(randomint(100) < var_2.chance_to_get_stuck_if_hit) {
         scripts\mp\agents\crab_mini\crab_mini_agent::setisstuck(1);
-      else
+      } else {
         scripts\mp\agents\crab_mini\crab_mini_agent::setisstuck(0);
+      }
 
       scripts\asm\zombie\melee::_id_1106E();
       scripts\asm\zombie\melee::domeleedamage(var_1, self._id_B601, "MOD_IMPACT");
@@ -139,13 +148,15 @@ movingmeleenotehandler(var_0, var_1, var_2, var_3) {
         if(var_15 > var_10 && var_10 > 0) {
           var_16 = var_15 / var_10;
 
-          if(var_16 < 1)
+          if(var_16 < 1) {
             var_16 = 1;
+          }
 
           var_16 = var_16 + var_5.melee_xy_scale_boost;
 
-          if(var_16 > var_5.melee_max_flex_xy_scale)
+          if(var_16 > var_5.melee_max_flex_xy_scale) {
             var_16 = var_5.melee_max_flex_xy_scale;
+          }
         } else
           var_16 = 1 + var_5.melee_xy_scale_boost;
 
@@ -156,8 +167,9 @@ movingmeleenotehandler(var_0, var_1, var_2, var_3) {
       return;
     }
   } else if(var_0 == "check_stuck") {
-    if(scripts\mp\agents\crab_mini\crab_mini_agent::iscrabministuck())
+    if(scripts\mp\agents\crab_mini\crab_mini_agent::iscrabministuck()) {
       scripts\asm\asm::asm_fireevent(var_1, "end");
+    }
   }
 }
 
@@ -176,8 +188,9 @@ meleenotehandler(var_0, var_1, var_2, var_3) {
         self notify("attack_miss", var_4);
     }
 
-    if(!scripts\engine\utility::is_true(self.bmovingmelee))
+    if(!scripts\engine\utility::is_true(self.bmovingmelee)) {
       self notify("stop_melee_face_enemy");
+    }
   }
 }
 
@@ -195,26 +208,31 @@ terminate_movingmelee(var_0, var_1, var_2) {
 }
 
 shouldabortaction(var_0, var_1, var_2, var_3) {
-  if(scripts\engine\utility::is_true(self.btraversalteleport))
+  if(scripts\engine\utility::is_true(self.btraversalteleport)) {
     return 0;
+  }
 
-  if(!isDefined(self.requested_action))
+  if(!isDefined(self.requested_action)) {
     return 1;
+  }
 
   if(isDefined(var_3)) {
-    if(self.requested_action != var_3)
+    if(self.requested_action != var_3) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 shoulddoaction(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.requested_action))
+  if(!isDefined(self.requested_action)) {
     return 0;
+  }
 
-  if(self.requested_action == var_2)
+  if(self.requested_action == var_2) {
     return 1;
+  }
 
   return 0;
 }
@@ -243,13 +261,15 @@ playmovingmeleeattack(var_0, var_1, var_2, var_3) {
   var_10 = randomfloatrange(var_9.min_stop_facing_enemy_time_before_hit, var_9.max_stop_facing_enemy_time_before_hit);
   var_11 = var_8 - var_10;
 
-  if(var_11 < 0)
+  if(var_11 < 0) {
     var_11 = 0.1;
+  }
 
-  if(randomint(100) < var_9.chance_to_get_stuck_if_miss)
+  if(randomint(100) < var_9.chance_to_get_stuck_if_miss) {
     scripts\mp\agents\crab_mini\crab_mini_agent::setisstuck(1);
-  else
+  } else {
     scripts\mp\agents\crab_mini\crab_mini_agent::setisstuck(0);
+  }
 
   thread scripts\asm\zombie\melee::_id_6A6A(var_1, self.curmeleetarget);
   thread stopfacingenemy(var_1, var_11);
@@ -308,8 +328,9 @@ doteleporthack(var_0, var_1, var_2, var_3) {
 }
 
 shouldturn(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.desiredyaw))
+  if(!isDefined(self.desiredyaw)) {
     return 0;
+  }
 
   return 1;
 }
@@ -319,22 +340,24 @@ choosecrabminiturnanim(var_0, var_1, var_2) {
   var_4 = abs(self.desiredyaw);
 
   if(self.desiredyaw < 0) {
-    if(var_4 < 67.5)
+    if(var_4 < 67.5) {
       var_3 = 9;
-    else if(var_4 < 112.5)
+    } else if(var_4 < 112.5) {
       var_3 = 6;
-    else if(var_4 < 157.5)
+    } else if(var_4 < 157.5) {
       var_3 = 3;
-    else
+    } else {
       var_3 = "2r";
+    }
   } else if(self.desiredyaw < 67.5)
     var_3 = 7;
-  else if(self.desiredyaw < 112.5)
+  else if(self.desiredyaw < 112.5) {
     var_3 = 4;
-  else if(self.desiredyaw < 157.5)
+  } else if(self.desiredyaw < 157.5) {
     var_3 = 1;
-  else
+  } else {
     var_3 = "2l";
+  }
 
   self.desiredyaw = undefined;
   return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);

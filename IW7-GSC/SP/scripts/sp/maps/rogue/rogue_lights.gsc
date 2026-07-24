@@ -47,11 +47,13 @@ _id_6F08(var_0, var_1, var_2, var_3) {
   self endon("stop_dynamic_light_behavior");
   self endon("death");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0.2;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1.5;
+  }
 
   var_4 = var_0;
   var_5 = 0;
@@ -60,10 +62,11 @@ _id_6F08(var_0, var_1, var_2, var_3) {
     for(var_5 = randomintrange(1, 10); var_5; var_5--) {
       wait(randomfloatrange(0.05, 0.175));
 
-      if(var_4 > 0.2)
+      if(var_4 > 0.2) {
         var_4 = randomfloatrange(0, 0.3);
-      else
+      } else {
         var_4 = var_0;
+      }
 
       self setlightintensity(var_4);
     }
@@ -74,11 +77,13 @@ _id_6F08(var_0, var_1, var_2, var_3) {
 }
 
 _id_4CBB(var_0, var_1, var_2, var_3, var_4) {
-  if(isDefined(self.script_parameters))
+  if(isDefined(self.script_parameters)) {
     var_0 = float(self.script_parameters);
+  }
 
-  if(scripts\engine\utility::flag(var_2) == 0)
+  if(scripts\engine\utility::flag(var_2) == 0) {
     self setlightintensity(var_1);
+  }
 
   while(scripts\engine\utility::flag(var_4) == 0) {
     scripts\engine\utility::flag_wait(var_2);
@@ -93,17 +98,20 @@ _id_4CBB(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_4CBC(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     _id_4CBB(var_0, var_1, var_2, var_3, var_4);
-  else {
-    if(!isDefined(var_5))
+  } else {
+    if(!isDefined(var_5)) {
       var_5 = self _meth_8131();
+    }
 
-    if(isDefined(self.script_parameters))
+    if(isDefined(self.script_parameters)) {
       var_0 = float(self.script_parameters);
+    }
 
-    if(scripts\engine\utility::flag(var_2) == 0)
+    if(scripts\engine\utility::flag(var_2) == 0) {
       self setlightintensity(var_1);
+    }
 
     while(scripts\engine\utility::flag(var_4) == 0) {
       scripts\engine\utility::flag_wait(var_2);
@@ -122,8 +130,9 @@ _id_4CBC(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
 _id_13441() {
   if(scripts\engine\utility::flag("power_on") == 0) {
-    if(scripts\engine\utility::flag("sun_vision_blend") && !scripts\engine\utility::flag("disable_alt_vision_calls"))
+    if(scripts\engine\utility::flag("sun_vision_blend") && !scripts\engine\utility::flag("disable_alt_vision_calls")) {
       visionsetalternate(1, 1.5);
+    }
 
     wait 0.1;
   }
@@ -142,8 +151,9 @@ _id_13441() {
       continue;
     }
 
-    if(scripts\engine\utility::flag("sun_vision_blend") && scripts\engine\utility::flag("power_off"))
+    if(scripts\engine\utility::flag("sun_vision_blend") && scripts\engine\utility::flag("power_off")) {
       visionsetalternate(1, 1.5);
+    }
   }
 }
 
@@ -181,8 +191,9 @@ _id_AC38() {
   scripts\engine\utility::array_thread(var_3, ::_id_4CBC, 0.5, 0, "power_off", "power_on", "flag_lgt_robot_start", undefined, (0.984314, 0.294118, 0.121569));
   var_4 = getEnt("dorm_tv_model", "targetname");
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_4 thread _id_4CCA("power_on", "power_off", "flag_lgt_robot_start");
+  }
 
   scripts\engine\utility::flag_wait("flag_lgt_robot_start");
 }

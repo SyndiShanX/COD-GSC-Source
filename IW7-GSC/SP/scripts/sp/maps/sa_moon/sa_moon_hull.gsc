@@ -30,8 +30,9 @@ _id_E93E() {
   var_0 hide();
   thread scripts\sp\maps\sa_moon\sa_moon_util::_id_13EF9(1, 1);
 
-  if(isDefined(level._id_9DD0))
+  if(isDefined(level._id_9DD0)) {
     level.player _meth_80CB(1);
+  }
 
   scripts\sp\maps\sa_moon\sa_moon_util::_id_1723("obj_board", "current", &"SA_MOON_BOARD");
 }
@@ -41,8 +42,9 @@ _id_E93A() {
   setsaveddvar("cg_helmetLinearVelocityToAngleRate", (1.2, 1.2, 2));
   setsaveddvar("cg_helmetViewSwayRate", -0.3);
 
-  if(!scripts\engine\utility::flag("game_saving"))
+  if(!scripts\engine\utility::flag("game_saving")) {
     scripts\sp\utility::_id_2679();
+  }
 
   scripts\sp\utility::_id_F44E(0);
   setsaveddvar("antilagAllowHighDetailBroadphaseArchive", 0);
@@ -65,8 +67,9 @@ _id_E93A() {
   level._id_3965 notsolid();
   wait 0.1;
 
-  if(!isDefined(level._id_9DD0))
+  if(!isDefined(level._id_9DD0)) {
     thread scripts\sp\maps\sa_moon\sa_moon_util::_id_E9C8();
+  }
 
   scripts\engine\utility::flag_wait("zerog_combat_space_end");
   scripts\sp\utility::_id_28D7();
@@ -84,8 +87,9 @@ sa01_hull_delete_spawners_e3() {
   var_0 = scripts\engine\utility::array_combine(var_0, scripts\sp\utility::_id_7C84("hull_guys_wave1center_e3", "script_noteworthy"));
   var_0 = scripts\engine\utility::array_combine(var_0, scripts\sp\utility::_id_7C84("hull_guys_wave3_e3", "script_noteworthy"));
 
-  foreach(var_2 in var_0)
-  var_2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
+  }
 }
 
 sa01_hull_delete_spawners() {
@@ -98,8 +102,9 @@ sa01_hull_delete_spawners() {
   var_0 = scripts\engine\utility::array_combine(var_0, scripts\sp\utility::_id_7C84("hull_guys_wave3", "script_noteworthy"));
   var_0 = scripts\engine\utility::array_combine(var_0, scripts\sp\utility::_id_8201("zerog_dropship1", "targetname"));
 
-  foreach(var_2 in var_0)
-  var_2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
+  }
 }
 
 _id_E93F() {
@@ -158,8 +163,9 @@ _id_E929() {
 _id_13E9A() {
   wait 1;
 
-  if(!isDefined(level._id_9DD0))
+  if(!isDefined(level._id_9DD0)) {
     sa01_hull_delete_spawners_e3();
+  }
 
   if(isDefined(level._id_9DD0)) {
     foreach(var_1 in level._id_1C24) {
@@ -169,8 +175,9 @@ _id_13E9A() {
   }
 
   foreach(var_4 in level._id_3965.turrets) {
-    foreach(var_6 in var_4)
-    var_6 setCanDamage(0);
+    foreach(var_6 in var_4) {
+      var_6 setCanDamage(0);
+    }
   }
 
   scripts\engine\utility::flag_set("open_bay");
@@ -206,8 +213,9 @@ _id_13E9A() {
   thread _id_F3A2(5, "hull_combat_wave2kill");
   scripts\engine\utility::flag_wait_any("hull_combat_wave2kill", "hull_combat_wave2spawn");
 
-  if(!scripts\engine\utility::flag("game_saving"))
+  if(!scripts\engine\utility::flag("game_saving")) {
     scripts\sp\utility::_id_2679();
+  }
 
   thread _id_0F16::_id_68BF("hull_combat_wave2", "hull_combat_vol2", undefined, "hull_combat_wave2a", 1);
   thread _id_0F16::_id_68BF("hull_combat_wave2a", "hull_combat_vol2a", undefined, "hull_combat_wave3", 1);
@@ -222,16 +230,18 @@ _id_13E9A() {
   var_9 = getEnt("ally_jackal_hull0", "script_noteworthy");
   thread scripts\sp\maps\sa_moon\sa_moon_audio::_id_91B7(var_9);
 
-  if(!scripts\engine\utility::flag("game_saving"))
+  if(!scripts\engine\utility::flag("game_saving")) {
     scripts\sp\utility::_id_2679();
+  }
 
   var_10 = getaiarray("axis");
 
   if(isDefined(var_10) && var_10.size <= 3) {
-    if(!isDefined(level._id_9DD0))
+    if(!isDefined(level._id_9DD0)) {
       thread _id_0F16::_id_B2CC("hull_combat_wave3", "hull_guys_wave3", "hull_combat_vol3");
-    else
+    } else {
       thread _id_0F16::_id_B2CC("hull_combat_wave3", "hull_guys_wave3_e3", "hull_combat_vol3");
+    }
   }
 
   wait 1;
@@ -239,8 +249,9 @@ _id_13E9A() {
   thread _id_0F16::_id_68BF("hull_combat_wave3", "hull_combat_vol3", undefined, undefined, 1);
   var_10 = getaiarray("axis");
 
-  if(isDefined(var_10) && var_10.size > 0)
+  if(isDefined(var_10) && var_10.size > 0) {
     scripts\sp\utility::_id_13754(var_10, var_10.size, 10);
+  }
 
   foreach(var_1 in level._id_1C24) {
     var_1.accuracy = 10;
@@ -251,8 +262,9 @@ _id_13E9A() {
   thread _id_0F16::_id_68BF("hull_combat_wave3", "hull_combat_vol3", undefined, undefined, 1);
   var_10 = getaiarray("axis");
 
-  if(isDefined(var_10) && var_10.size > 0)
+  if(isDefined(var_10) && var_10.size > 0) {
     scripts\sp\utility::_id_13754(var_10, var_10.size);
+  }
 
   sa01_hull_delete_spawners();
   scripts\sp\utility::_id_266F();
@@ -294,8 +306,9 @@ _id_88F1() {
 _id_F3A2(var_0, var_1) {
   var_2 = getaiarray("axis");
 
-  if(var_0 >= var_2.size - 1)
+  if(var_0 >= var_2.size - 1) {
     var_0 = var_2.size - 1;
+  }
 
   scripts\sp\utility::_id_13753(var_2, var_0);
   scripts\engine\utility::flag_set(var_1);
@@ -304,8 +317,9 @@ _id_F3A2(var_0, var_1) {
 _id_1C18(var_0, var_1, var_2) {
   level endon("death");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level endon(var_2);
+  }
 
   scripts\engine\utility::flag_wait(var_0);
   var_3 = getEnt(var_1, "targetname");
@@ -322,27 +336,33 @@ _id_91B6() {
   var_2 = var_0[2] scripts\engine\utility::get_target_array();
   var_3 = var_1[2] scripts\engine\utility::get_target_array();
 
-  foreach(var_5 in var_2)
-  var_5 linkTo(var_0[2]);
+  foreach(var_5 in var_2) {
+    var_5 linkTo(var_0[2]);
+  }
 
-  foreach(var_5 in var_3)
-  var_5 linkTo(var_1[2]);
+  foreach(var_5 in var_3) {
+    var_5 linkTo(var_1[2]);
+  }
 
-  foreach(var_10 in var_0)
-  var_10 rotateTo((0, 0, -60), 0.05);
+  foreach(var_10 in var_0) {
+    var_10 rotateTo((0, 0, -60), 0.05);
+  }
 
-  foreach(var_10 in var_1)
-  var_10 rotateTo((0, 0, 60), 0.05);
+  foreach(var_10 in var_1) {
+    var_10 rotateTo((0, 0, 60), 0.05);
+  }
 
   scripts\engine\utility::waitframe();
   scripts\engine\utility::flag_wait("open_bay");
   playFX(scripts\engine\utility::getfx("vfx_sa_moon_hull_decomp"), var_0[2].origin);
 
-  foreach(var_10 in var_0)
-  var_10 rotateTo((0, 0, 0), 3, 1, 0.05);
+  foreach(var_10 in var_0) {
+    var_10 rotateTo((0, 0, 0), 3, 1, 0.05);
+  }
 
-  foreach(var_10 in var_1)
-  var_10 rotateTo((0, 0, 0), 3, 1, 0.05);
+  foreach(var_10 in var_1) {
+    var_10 rotateTo((0, 0, 0), 3, 1, 0.05);
+  }
 }
 
 _id_91C3() {
@@ -373,8 +393,9 @@ _id_91C3() {
   var_3[5] = getEnt("missile_kill_trigger5", "targetname");
   var_3[6] = getEnt("missile_kill_trigger6", "targetname");
 
-  for(var_0 = 1; var_0 <= 6; var_0++)
+  for(var_0 = 1; var_0 <= 6; var_0++) {
     var_3[var_0] thread _id_B843();
+  }
 
   for(;;) {
     if(scripts\engine\utility::flag("breach_end")) {
@@ -406,8 +427,9 @@ _id_B80B() {
       scripts\engine\utility::waitframe();
       level.player dodamage(level.player.health + 100, (0, 0, 0));
 
-      if(isalive(level.player))
+      if(isalive(level.player)) {
         level.player _meth_81D0();
+      }
     }
   }
 }
@@ -446,14 +468,16 @@ _id_91C4() {
   var_1 = scripts\sp\maps\sa_moon\sa_moon_util::_id_8004();
   scripts\engine\utility::array_thread(var_1, _id_0F16::_id_310D, 1);
 
-  foreach(var_3 in var_1)
-  var_3 thread _id_0F31::_id_3109(10);
+  foreach(var_3 in var_1) {
+    var_3 thread _id_0F31::_id_3109(10);
+  }
 
   var_5 = getEntArray("tube", "script_noteworthy");
   scripts\engine\utility::array_thread(var_5, _id_0F16::_id_310D, 1);
 
-  foreach(var_3 in var_5)
-  var_3 thread _id_0F31::_id_3109(10);
+  foreach(var_3 in var_5) {
+    var_3 thread _id_0F31::_id_3109(10);
+  }
 
   thread _id_BC48("space_small_movers", 120);
 }

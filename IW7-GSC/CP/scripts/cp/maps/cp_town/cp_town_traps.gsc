@@ -50,14 +50,16 @@ register_traps() {
 }
 
 check_for_trap_master_achievement(var_0) {
-  if(!isDefined(self.used_traps))
+  if(!isDefined(self.used_traps)) {
     self.used_traps = [];
+  }
 
   self.used_traps = scripts\engine\utility::add_to_array(self.used_traps, var_0);
   self.used_traps = scripts\engine\utility::array_remove_duplicates(self.used_traps);
 
-  if(self.used_traps.size > 4)
+  if(self.used_traps.size > 4) {
     scripts\cp\zombies\achievement::update_achievement("BAIT_AND_SWITCH", 1);
+  }
 }
 
 trap_debug_devgui() {
@@ -103,18 +105,20 @@ electric_trap_init() {
   }
 
   foreach(var_8 in var_0) {
-    if(var_8 == var_2)
+    if(var_8 == var_2) {
       continue;
-    else
+    } else {
       scripts\cp\cp_interaction::remove_from_current_interaction_list(var_8);
+    }
   }
 
   var_10 = scripts\engine\utility::getStruct(var_2.target, "targetname");
 
-  if(isDefined(var_10.angles))
+  if(isDefined(var_10.angles)) {
     var_11 = (322.4, 26, -6.6);
-  else
+  } else {
     var_11 = (0, 0, 0);
+  }
 
   var_2.part = spawn("script_model", (5561, -2903, 119));
   var_2.part.angles = var_11;
@@ -140,10 +144,11 @@ elec_trap_sparks() {
 }
 
 electric_trap_fix_hint(var_0, var_1) {
-  if(!scripts\engine\utility::flag("electric_trap_part_taken"))
+  if(!scripts\engine\utility::flag("electric_trap_part_taken")) {
     return level.interaction_hintstrings["fix_electric_trap"];
-  else
+  } else {
     return level.interaction_hintstrings["add_component"];
+  }
 }
 
 electric_trap_fix(var_0, var_1) {
@@ -181,12 +186,13 @@ ww_activate_trap_vo(var_0) {
   }
   wait 1;
 
-  if(randomint(100) >= 50 && randomint(100) < 60)
+  if(randomint(100) >= 50 && randomint(100) < 60) {
     thread scripts\cp\cp_vo::try_to_play_vo("activate_trap_generic", "zmb_comment_vo", "highest", 10, 0, 0, 1, 25);
-  else if(randomint(100) > 60)
+  } else if(randomint(100) > 60) {
     level thread scripts\cp\cp_vo::try_to_play_vo("ww_activate_trap_" + var_0, "rave_announcer_vo", "highest", 70, 0, 0, 1);
-  else
+  } else {
     level thread scripts\cp\cp_vo::try_to_play_vo("ww_activate_trap_generic", "rave_announcer_vo", "highest", 70, 0, 0, 1);
+  }
 }
 
 electric_trap_take_part(var_0, var_1) {
@@ -286,10 +292,11 @@ electrocute_zombie(var_0, var_1) {
   var_0.electrocuted = 1;
   var_0 setscriptablepartstate("electrocuted", "on");
 
-  if(var_1 scripts\cp\utility::is_valid_player(1))
+  if(var_1 scripts\cp\utility::is_valid_player(1)) {
     var_6 = var_1;
-  else
+  } else {
     var_6 = undefined;
+  }
 
   var_7 = ["kill_trap_generic"];
   var_1 thread scripts\cp\cp_vo::try_to_play_vo(scripts\engine\utility::random(var_7), "zmb_comment_vo", "highest", 10, 0, 0, 1, 25);
@@ -320,33 +327,38 @@ freeze_trap_init() {
   var_2 = var_0[var_1];
   var_3 = scripts\engine\utility::getStructArray("trap_freeze", "script_noteworthy");
 
-  foreach(var_5 in var_3)
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(var_5);
+  foreach(var_5 in var_3) {
+    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_5);
+  }
 
   foreach(var_8 in var_0) {
-    if(var_8 == var_2)
+    if(var_8 == var_2) {
       continue;
-    else
+    } else {
       scripts\cp\cp_interaction::remove_from_current_interaction_list(var_8);
+    }
   }
 
   var_10 = scripts\engine\utility::getStruct(var_2.target, "targetname");
 
-  if(isDefined(var_10.angles))
+  if(isDefined(var_10.angles)) {
     var_11 = var_10.angles;
-  else
+  } else {
     var_11 = (0, 0, 0);
+  }
 
   var_2.part = spawn("script_model", var_10.origin);
   var_2.part.angles = var_11;
   var_2.part setModel("ship_hallway_fuse_box");
   level thread freeze_trap_panel_fx();
 
-  foreach(var_5 in var_3)
-  level thread _id_13611(var_5);
+  foreach(var_5 in var_3) {
+    level thread _id_13611(var_5);
+  }
 
-  while(!scripts\engine\utility::is_true(var_3[0].powered_on))
+  while(!scripts\engine\utility::is_true(var_3[0].powered_on)) {
     wait 0.1;
+  }
 
   scripts\engine\utility::exploder(75);
   var_3 = scripts\engine\utility::getStructArray("trap_freeze", "script_noteworthy");
@@ -361,13 +373,15 @@ _id_13611(var_0) {
   if(scripts\engine\utility::is_true(var_0.requires_power)) {
     var_1 = undefined;
 
-    if(isDefined(var_0.script_area))
+    if(isDefined(var_0.script_area)) {
       var_1 = var_0.script_area;
-    else
+    } else {
       var_1 = scripts\cp\cp_interaction::get_area_for_power(var_0);
+    }
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       level scripts\engine\utility::waittill_any("power_on", var_1 + " power_on");
+    }
   }
 
   var_0.powered_on = 1;
@@ -377,8 +391,9 @@ _id_13611(var_0) {
 check_traps_fixed_merit() {
   if(scripts\engine\utility::is_true(level.traps_fixed_freeze) && scripts\engine\utility::is_true(level.traps_fixed_electric) && scripts\engine\utility::is_true(level.traps_fixed_pool) && scripts\engine\utility::is_true(level.traps_fixed_propane)) {
     if(!scripts\engine\utility::is_true(level.traps_fixed_merit_awarded)) {
-      foreach(var_1 in level.players)
-      var_1 scripts\cp\cp_merits::processmerit("mt_dlc3_traps_fixed");
+      foreach(var_1 in level.players) {
+        var_1 scripts\cp\cp_merits::processmerit("mt_dlc3_traps_fixed");
+      }
 
       level.traps_fixed_merit_awarded = 1;
     }
@@ -397,10 +412,11 @@ freeze_trap_panel_fx() {
 }
 
 freeze_trap_fix_hint(var_0, var_1) {
-  if(!scripts\engine\utility::flag("freeze_trap_part_taken"))
+  if(!scripts\engine\utility::flag("freeze_trap_part_taken")) {
     return level.interaction_hintstrings["fix_freeze_trap"];
-  else
+  } else {
     return level.interaction_hintstrings["replace_freeze_panel"];
+  }
 }
 
 freeze_trap_fix(var_0, var_1) {
@@ -414,8 +430,9 @@ freeze_trap_fix(var_0, var_1) {
   playFX(level._effect["elec_trap_sparks"], var_2.origin);
   var_3 = scripts\engine\utility::getStructArray("trap_freeze", "script_noteworthy");
 
-  foreach(var_5 in var_3)
-  scripts\cp\cp_interaction::add_to_current_interaction_list(var_5);
+  foreach(var_5 in var_3) {
+    scripts\cp\cp_interaction::add_to_current_interaction_list(var_5);
+  }
 
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
   var_1 playlocalsound("zmb_coin_sounvenir_place");
@@ -497,8 +514,9 @@ freeze_players() {
         var_0 thread remove_padding_damage();
       }
 
-      if(!isDefined(var_0.scrnfx))
+      if(!isDefined(var_0.scrnfx)) {
         var_0 thread chill_scrnfx();
+      }
 
       continue;
     }
@@ -506,9 +524,9 @@ freeze_players() {
     if(!scripts\cp\utility::should_be_affected_by_trap(var_0) || scripts\engine\utility::is_true(var_0.is_turned)) {
       continue;
     }
-    if(var_0 is_crog())
+    if(var_0 is_crog()) {
       continue;
-    else if(!isDefined(var_0.isfrozen)) {
+    } else if(!isDefined(var_0.isfrozen)) {
       var_0.isfrozen = 1;
       var_0.health = 1;
       var_0 thread kill_frozen_guys_after_time();
@@ -538,22 +556,25 @@ pool_trap_init() {
   var_2 = var_0[var_1];
   var_3 = scripts\engine\utility::getStructArray("trap_pool", "script_noteworthy");
 
-  foreach(var_5 in var_3)
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(var_5);
+  foreach(var_5 in var_3) {
+    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_5);
+  }
 
   foreach(var_8 in var_0) {
-    if(var_8 == var_2)
+    if(var_8 == var_2) {
       continue;
-    else
+    } else {
       scripts\cp\cp_interaction::remove_from_current_interaction_list(var_8);
+    }
   }
 
   var_10 = scripts\engine\utility::getStruct(var_2.target, "targetname");
 
-  if(isDefined(var_10.angles))
+  if(isDefined(var_10.angles)) {
     var_11 = var_10.angles;
-  else
+  } else {
     var_11 = (0, 0, 0);
+  }
 
   var_2.part = spawn("script_model", var_10.origin);
   var_2.part.angles = var_11;
@@ -561,10 +582,11 @@ pool_trap_init() {
 }
 
 pool_trap_fix_hint(var_0, var_1) {
-  if(!scripts\engine\utility::flag("pool_trap_part_taken"))
+  if(!scripts\engine\utility::flag("pool_trap_part_taken")) {
     return level.interaction_hintstrings["fix_pool_trap"];
-  else
+  } else {
     return level.interaction_hintstrings["pool_trap_gas"];
+  }
 }
 
 pool_trap_fix(var_0, var_1) {
@@ -575,8 +597,9 @@ pool_trap_fix(var_0, var_1) {
   scripts\engine\utility::flag_set("pool_trap_part_added");
   var_2 = scripts\engine\utility::getStructArray("trap_pool", "script_noteworthy");
 
-  foreach(var_4 in var_2)
-  scripts\cp\cp_interaction::add_to_current_interaction_list(var_4);
+  foreach(var_4 in var_2) {
+    scripts\cp\cp_interaction::add_to_current_interaction_list(var_4);
+  }
 
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
   var_1 playlocalsound("zmb_coin_sounvenir_place");
@@ -598,8 +621,9 @@ pool_trap_use(var_0, var_1) {
   var_0.cooling_down = 1;
   level thread generator_sfx();
 
-  if(isDefined(level.radiation_extraction_interaction))
+  if(isDefined(level.radiation_extraction_interaction)) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(level.radiation_extraction_interaction);
+  }
 
   level.using_pool_trap = 1;
   var_2 = getEnt("pool_dmg", "targetname");
@@ -613,8 +637,9 @@ pool_trap_use(var_0, var_1) {
   level notify("end_pool_trap");
   var_2 stoploopsound();
 
-  if(isDefined(level.radiation_extraction_interaction))
+  if(isDefined(level.radiation_extraction_interaction)) {
     scripts\cp\cp_interaction::add_to_current_interaction_list(level.radiation_extraction_interaction);
+  }
 
   level notify("pool_trap_kills", level.pool_kills);
   wait 300;
@@ -676,10 +701,11 @@ pool_damage_zombie(var_0, var_1) {
   var_0.electrocuted = 1;
   var_0 setscriptablepartstate("electrocuted", "on");
 
-  if(var_1 scripts\cp\utility::is_valid_player(1))
+  if(var_1 scripts\cp\utility::is_valid_player(1)) {
     var_2 = var_1;
-  else
+  } else {
     var_2 = undefined;
+  }
 
   level.pool_kills++;
   var_0 dodamage(var_0.health + 100, var_0.origin, var_2, var_2, "MOD_UNKNOWN", "iw7_electrictrap_zm");
@@ -691,22 +717,25 @@ propane_trap_init() {
   var_2 = var_0[var_1];
   var_3 = scripts\engine\utility::getStructArray("trap_propane", "script_noteworthy");
 
-  foreach(var_5 in var_3)
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(var_5);
+  foreach(var_5 in var_3) {
+    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_5);
+  }
 
   foreach(var_8 in var_0) {
-    if(var_8 == var_2)
+    if(var_8 == var_2) {
       continue;
-    else
+    } else {
       scripts\cp\cp_interaction::remove_from_current_interaction_list(var_8);
+    }
   }
 
   var_10 = scripts\engine\utility::getStruct(var_2.target, "targetname");
 
-  if(isDefined(var_10.angles))
+  if(isDefined(var_10.angles)) {
     var_11 = var_10.angles;
-  else
+  } else {
     var_11 = (0, 0, 0);
+  }
 
   var_2.part = spawn("script_model", var_10.origin);
   var_2.part.angles = var_11;
@@ -714,10 +743,11 @@ propane_trap_init() {
 }
 
 propane_trap_fix_hint(var_0, var_1) {
-  if(!scripts\engine\utility::flag("propane_trap_part_taken"))
+  if(!scripts\engine\utility::flag("propane_trap_part_taken")) {
     return level.interaction_hintstrings["fix_propane_trap"];
-  else
+  } else {
     return level.interaction_hintstrings["propane_trap_attach_hose"];
+  }
 }
 
 propane_trap_fix(var_0, var_1) {
@@ -728,8 +758,9 @@ propane_trap_fix(var_0, var_1) {
   scripts\engine\utility::flag_set("propane_trap_part_added");
   var_2 = scripts\engine\utility::getStructArray("trap_propane", "script_noteworthy");
 
-  foreach(var_4 in var_2)
-  scripts\cp\cp_interaction::add_to_current_interaction_list(var_4);
+  foreach(var_4 in var_2) {
+    scripts\cp\cp_interaction::add_to_current_interaction_list(var_4);
+  }
 
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
   var_1 playlocalsound("zmb_coin_sounvenir_place");
@@ -834,10 +865,11 @@ propane_damage_zombie(var_0, var_1) {
   var_0.is_burning = 1;
   var_0 setscriptablepartstate("burning", "active");
 
-  if(var_1 scripts\cp\utility::is_valid_player(1))
+  if(var_1 scripts\cp\utility::is_valid_player(1)) {
     var_2 = var_1;
-  else
+  } else {
     var_2 = undefined;
+  }
 
   wait(randomintrange(2, 4));
   var_0 dodamage(var_0.health + 100, var_0.origin, var_2, var_2, "MOD_UNKNOWN", "iw7_electrictrap_zm");
@@ -906,10 +938,11 @@ elvira_trap_damage_zombie(var_0, var_1) {
   var_0.customdeath = 1;
   var_0.nocorpse = 1;
 
-  if(var_1 scripts\cp\utility::is_valid_player(1))
+  if(var_1 scripts\cp\utility::is_valid_player(1)) {
     var_2 = var_1;
-  else
+  } else {
     var_2 = undefined;
+  }
 
   wait(randomfloatrange(0.1, 1));
   var_0 dodamage(var_0.health + 100, var_0.origin, var_2, var_2, "MOD_UNKNOWN", "iw7_electrictrap_zm");
@@ -919,13 +952,15 @@ init_elvira_trap() {
   var_0 = scripts\engine\utility::getStruct("elvira_trap", "script_noteworthy");
   var_1 = undefined;
 
-  if(isDefined(var_0.script_area))
+  if(isDefined(var_0.script_area)) {
     var_1 = var_0.script_area;
-  else
+  } else {
     var_1 = scripts\cp\cp_interaction::get_area_for_power(var_0);
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level scripts\engine\utility::waittill_any("power_on", var_1 + " power_on");
+  }
 
   var_0.powered_on = 1;
   var_2 = getEnt(var_0.target, "targetname");
@@ -956,8 +991,9 @@ taketrapparticon(var_0) {
   }
 
   if(var_1 > 0) {
-    foreach(var_3 in level.players)
-    var_3 setclientomnvarbit("zm_charms_active", var_1, 0);
+    foreach(var_3 in level.players) {
+      var_3 setclientomnvarbit("zm_charms_active", var_1, 0);
+    }
   }
 }
 
@@ -984,6 +1020,7 @@ givetrapparticon(var_0) {
       break;
   }
 
-  foreach(var_3 in level.players)
-  var_3 setclientomnvarbit("zm_charms_active", var_1, 1);
+  foreach(var_3 in level.players) {
+    var_3 setclientomnvarbit("zm_charms_active", var_1, 1);
+  }
 }

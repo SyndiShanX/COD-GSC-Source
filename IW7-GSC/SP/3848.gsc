@@ -18,9 +18,9 @@ _id_6A1F() {
 _id_6A1E() {
   self.collision = scripts\sp\utility::_id_7A8F();
 
-  if(self.collision.size == 0)
+  if(self.collision.size == 0) {
     self.collision = undefined;
-  else {
+  } else {
     self.collision = self.collision[0];
     self.collision linkTo(self);
   }
@@ -29,18 +29,20 @@ _id_6A1E() {
   self setHintString("Hold [{+activate}] to Hack Airlock");
   var_0 = 0;
 
-  if(isDefined(self.script_noteworthy))
+  if(isDefined(self.script_noteworthy)) {
     var_0 = 1;
+  }
 
   var_1 = "breach_point";
   _id_0F14::_id_DAC3(self, 6, 800, 0, "Breach Point", var_0, var_1);
   scripts\engine\utility::flag_set("timer_expired");
   wait 0.5;
 
-  if(!isDefined(self._id_BD0E))
+  if(!isDefined(self._id_BD0E)) {
     self movez(-200, 5);
-  else
+  } else {
     self rotateTo(self._id_BD0E.angles, 5);
+  }
 }
 
 _id_1ADD() {
@@ -62,16 +64,19 @@ _id_1ADD() {
       var_7 = vectorNormalize(var_5 - var_4);
       var_8 = vectordot(var_6, var_7);
 
-      if(var_8 > 0)
+      if(var_8 > 0) {
         self._id_98F6 = var_3;
-      else
+      } else {
         self._id_C75C = var_3;
+      }
 
-      foreach(var_10 in var_3._id_EBBA.doors)
-      var_10 notify("stop_door_logic");
+      foreach(var_10 in var_3._id_EBBA.doors) {
+        var_10 notify("stop_door_logic");
+      }
 
-      foreach(var_13 in var_3._id_C95A)
-      var_13 disconnectPaths();
+      foreach(var_13 in var_3._id_C95A) {
+        var_13 disconnectPaths();
+      }
     }
   }
 
@@ -94,8 +99,9 @@ _id_1ADD() {
   foreach(var_22 in var_20) {
     var_1.origin = var_22.origin;
 
-    if(var_1 istouching(self._id_C75F))
+    if(var_1 istouching(self._id_C75F)) {
       self._id_7577 = scripts\engine\utility::array_add(self._id_7577, var_22);
+    }
   }
 
   var_20 = undefined;
@@ -103,13 +109,15 @@ _id_1ADD() {
   for(;;) {
     self waittill("trigger", var_24);
 
-    if(!scripts\engine\utility::flag("player_in_gravity"))
+    if(!scripts\engine\utility::flag("player_in_gravity")) {
       _id_D870();
-    else
+    } else {
       _id_5253();
+    }
 
-    while(var_24 istouching(self._id_C75F))
+    while(var_24 istouching(self._id_C75F)) {
       scripts\engine\utility::waitframe();
+    }
   }
 }
 
@@ -118,8 +126,9 @@ _id_D870() {
   scripts\engine\utility::array_thread(var_0, ::_id_425D, 0.25, 1);
   wait 1;
 
-  foreach(var_2 in self._id_7577)
-  var_2 thread _id_6129();
+  foreach(var_2 in self._id_7577) {
+    var_2 thread _id_6129();
+  }
 
   wait 2;
   scripts\engine\utility::flag_set("player_in_gravity");
@@ -169,16 +178,18 @@ _id_6129() {
   scripts\sp\utility::script_delay();
   playFX(scripts\engine\utility::getfx(self.script_fxid), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
 
-  if(isDefined(self.script_soundalias))
+  if(isDefined(self.script_soundalias)) {
     playworldsound(self.script_soundalias, self.origin);
+  }
 }
 
 door_setup() {
   var_0 = getEntArray("ship_door_interior", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2 scripts\engine\utility::get_target_ent()))
+    if(isDefined(var_2 scripts\engine\utility::get_target_ent())) {
       var_2 linkTo(var_2 scripts\engine\utility::get_target_ent());
+    }
   }
 
   var_4 = getEntArray("ship_door_interior_left", "script_noteworthy");
@@ -233,8 +244,9 @@ _id_59AD() {
     var_4 thread _id_0F14::_id_882B(self.trigger);
   }
 
-  if(self.script_noteworthy == "ship_door_interior_up")
+  if(self.script_noteworthy == "ship_door_interior_up") {
     self._id_EBBA thread _id_0F14::_id_882B(self.trigger);
+  }
 
   var_5 = 0;
 
@@ -260,16 +272,16 @@ _id_59AD() {
   }
 
   for(;;) {
-    if(self.script_parameters != "lock_open")
+    if(self.script_parameters != "lock_open") {
       self.trigger waittill("trigger", var_6);
-    else {
+    } else {
       var_6 = level.player;
       self.trigger._id_8804 = 1;
     }
 
-    if(!isDefined(var_6._id_597F))
+    if(!isDefined(var_6._id_597F)) {
       var_6._id_597F = 0;
-    else {}
+    } else {}
 
     if(self._id_4284 == 1 && var_6._id_597F >= var_5 || isDefined(self.trigger._id_8804)) {
       _id_C5ED();
@@ -284,8 +296,9 @@ _id_59AD() {
         var_8[var_8.size] = level.player;
 
         foreach(var_10 in var_8) {
-          if(var_10 istouching(self.trigger))
+          if(var_10 istouching(self.trigger)) {
             var_7 = 0;
+          }
         }
 
         if(var_7 == 1) {
@@ -307,42 +320,48 @@ _id_C5ED(var_0) {
   }
   self._id_4284 = 0;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0.25;
+  }
 
-  if(self.script_noteworthy == "ship_door_interior_right")
+  if(self.script_noteworthy == "ship_door_interior_right") {
     self moveTo(self.origin + anglestoright(self.angles) * -56, var_0, 0, 0);
-  else if(self.script_noteworthy == "ship_door_interior_up")
+  } else if(self.script_noteworthy == "ship_door_interior_up") {
     self moveTo(self.origin + (0, 0, 122), var_0, 0, 0);
-  else
+  } else {
     self moveTo(self.origin + anglestoright(self.angles) * 56, var_0, 0, 0);
+  }
 
   wait(var_0);
 
-  foreach(var_2 in self._id_C95A)
-  var_2 connectpaths();
+  foreach(var_2 in self._id_C95A) {
+    var_2 connectpaths();
+  }
 }
 
 _id_425D(var_0, var_1) {
   if(self._id_4284) {
     return;
   }
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0.25;
+  }
 
   self._id_4284 = 1;
 
-  if(self.script_noteworthy == "ship_door_interior_right")
+  if(self.script_noteworthy == "ship_door_interior_right") {
     self moveTo(self.origin + anglestoright(self.angles) * 56, var_0, 0, 0);
-  else if(self.script_noteworthy == "ship_door_interior_up")
+  } else if(self.script_noteworthy == "ship_door_interior_up") {
     self moveTo(self.origin + (0, 0, -122), var_0, 0, 0);
-  else
+  } else {
     self moveTo(self.origin + anglestoright(self.angles) * -56, var_0, 0, 0);
+  }
 
   wait(var_0);
 
   if(isDefined(var_1)) {
-    foreach(var_3 in self._id_C95A)
-    var_3 disconnectPaths();
+    foreach(var_3 in self._id_C95A) {
+      var_3 disconnectPaths();
+    }
   }
 }

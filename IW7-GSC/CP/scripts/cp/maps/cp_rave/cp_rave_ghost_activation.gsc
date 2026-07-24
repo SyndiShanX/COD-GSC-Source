@@ -26,8 +26,9 @@ wait_for_trap_kills(var_0, var_1) {
   for(;;) {
     level waittill(var_0, var_2);
 
-    if(var_2 == var_1)
+    if(var_2 == var_1) {
       return;
+    }
   }
 }
 
@@ -125,8 +126,9 @@ wait_for_player_look_at(var_0) {
 
 any_player_look_at_target(var_0) {
   foreach(var_2 in level.players) {
-    if(player_look_at_target(var_0, var_2))
+    if(player_look_at_target(var_0, var_2)) {
       return 1;
+    }
   }
 
   return 0;
@@ -135,20 +137,24 @@ any_player_look_at_target(var_0) {
 player_look_at_target(var_0, var_1) {
   var_2 = 6400;
 
-  if(!scripts\engine\utility::is_true(var_1.rave_mode))
+  if(!scripts\engine\utility::is_true(var_1.rave_mode)) {
     return 0;
+  }
 
-  if(!var_1 adsButtonPressed())
+  if(!var_1 adsButtonPressed()) {
     return 0;
+  }
 
-  if(!var_1 worldpointinreticle_circle(var_0.origin, 25, 75))
+  if(!var_1 worldpointinreticle_circle(var_0.origin, 25, 75)) {
     return 0;
+  }
 
   var_3 = bulletTrace(var_1 getEye(), var_0.origin, 0, var_1);
   var_4 = var_3["position"];
 
-  if(distancesquared(var_4, var_0.origin) > var_2)
+  if(distancesquared(var_4, var_0.origin) > var_2) {
     return 0;
+  }
 
   return 1;
 }
@@ -167,8 +173,9 @@ complete_match_the_right_symbol() {
 delete_letter_symbols() {
   if(isDefined(level.gns_quest_letter_symbols)) {
     foreach(var_1 in level.gns_quest_letter_symbols) {
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         var_1 delete();
+      }
     }
   }
 }
@@ -210,8 +217,9 @@ clear_skull_on_wheel_of_misfortune() {
   var_0 = scripts\engine\utility::getStructArray("interaction_knife_throw", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.knife_throw_target.skull_target))
+    if(isDefined(var_2.knife_throw_target.skull_target)) {
       var_2.knife_throw_target.skull_target delete();
+    }
   }
 }
 
@@ -300,8 +308,9 @@ player_select_monitor(var_0) {
 clear_gns_spell_letters() {
   if(isDefined(level.gns_spell_character_ents)) {
     foreach(var_1 in level.gns_spell_character_ents) {
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         var_1 delete();
+      }
     }
   }
 }
@@ -332,8 +341,9 @@ activate_scaping_skulls() {
   level.escaping_skulls = [];
 
   for(var_2 = 0; var_2 < 12; var_2++) {
-    if(var_2 % 8 == 0)
+    if(var_2 % 8 == 0) {
       var_1 = scripts\engine\utility::array_randomize(var_0);
+    }
 
     var_3 = var_1[var_2 % 8];
     level thread skull_escape((-2335, 5347, -107) + (146 * var_3, -120 * var_3, 0), 6);
@@ -360,8 +370,9 @@ skull_escape(var_0, var_1) {
 clear_escaping_skulls() {
   if(isDefined(level.escaping_skulls)) {
     foreach(var_1 in level.escaping_skulls) {
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         var_1 delete();
+      }
     }
   }
 }
@@ -382,15 +393,17 @@ show_to_boat_players(var_0) {
   var_0 hide();
 
   foreach(var_2 in level.players) {
-    if(scripts\engine\utility::is_true(var_2.linked_to_boat))
+    if(scripts\engine\utility::is_true(var_2.linked_to_boat)) {
       var_0 showtoplayer(var_2);
+    }
   }
 }
 
 exp_vfx_to_boat_player(var_0) {
   foreach(var_2 in level.players) {
-    if(scripts\engine\utility::is_true(var_2.linked_to_boat))
+    if(scripts\engine\utility::is_true(var_2.linked_to_boat)) {
       playFX(level._effect["ghost_explosion_death_" + var_0.color], var_0.origin, (1, 1, 0), (0, 0, 1), var_2);
+    }
   }
 }
 
@@ -415,8 +428,9 @@ skull_damage_monitor(var_0) {
   exp_vfx_to_boat_player(var_0);
   level.skull_destroyed++;
 
-  if(level.skull_destroyed == 12)
+  if(level.skull_destroyed == 12) {
     level notify("shoot_all_escaping_skulls_during_boat_ride");
+  }
 
   var_0 delete();
 }
@@ -542,15 +556,17 @@ reactivate_cabinet() {
 notify_activation_progress(var_0, var_1) {
   level thread update_num_of_coin_inserted(var_0);
 
-  foreach(var_3 in level.players)
-  var_3 playlocalsound("ghosts_quest_step_notify");
+  foreach(var_3 in level.players) {
+    var_3 playlocalsound("ghosts_quest_step_notify");
+  }
 }
 
 update_num_of_coin_inserted(var_0, var_1) {
   level endon("game_ended");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
   setomnvar("zm_num_ghost_n_skull_coin", var_0);
 }

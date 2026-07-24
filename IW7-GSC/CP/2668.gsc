@@ -81,17 +81,19 @@ givesentry(var_0) {
   thread scripts\cp\utility::wait_restore_player_perk();
   self.iscarrying = 0;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 setcarryingsentry(var_0, var_1) {
   self endon("disconnect");
 
-  if(isDefined(level.forceturretplacement))
+  if(isDefined(level.forceturretplacement)) {
     var_1 = 0;
+  }
 
   var_0 sentry_setcarried(self, var_1);
   scripts\engine\utility::allow_weapon(0);
@@ -113,8 +115,9 @@ setcarryingsentry(var_0, var_1) {
       return 1;
     }
 
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       var_2 = "force_cancel_placement";
+    }
 
     if(var_2 == "cancel_sentry" || var_2 == "force_cancel_placement") {
       if(!var_1 && var_2 == "cancel_sentry") {
@@ -123,10 +126,11 @@ setcarryingsentry(var_0, var_1) {
       scripts\engine\utility::allow_weapon(1);
       var_0 sentry_setcancelled();
 
-      if(var_2 != "force_cancel_placement")
+      if(var_2 != "force_cancel_placement") {
         thread watch_dpad();
-      else if(var_1)
+      } else if(var_1) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
+      }
 
       return 0;
     }
@@ -134,8 +138,9 @@ setcarryingsentry(var_0, var_1) {
     if(!var_0.canbeplaced) {
       continue;
     }
-    if(var_1)
+    if(var_1) {
       scripts\cp\utility::remove_crafted_item_from_inventory(self);
+    }
 
     var_0 sentry_setplaced();
     scripts\engine\utility::allow_weapon(1);
@@ -193,14 +198,16 @@ sentry_handledeath(var_0) {
   sentry_setinactive();
   self setdefaultdroppitch(40);
 
-  if(isDefined(self.carriedby))
+  if(isDefined(self.carriedby)) {
     self setsentrycarrier(undefined);
+  }
 
   self setsentryowner(undefined);
   self playSound("sentry_explode");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     thread _id_F23F();
+  }
 }
 
 _id_F23F() {
@@ -223,11 +230,13 @@ _id_F23F() {
     self notify("deleting");
   }
 
-  if(isDefined(self.killcament))
+  if(isDefined(self.killcament)) {
     self.killcament delete();
+  }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 sentry_handleuse() {
@@ -262,8 +271,9 @@ sentry_setowner(var_0) {
 sentry_setplaced() {
   self setModel(level.sentrysettings[self.sentrytype].modelbase);
 
-  if(self _meth_813D() == "manual")
+  if(self _meth_813D() == "manual") {
     self setmode(level.sentrysettings[self.sentrytype].sentrymodeoff);
+  }
 
   self setsentrycarrier(undefined);
   sentry_makesolid();
@@ -273,8 +283,9 @@ sentry_setplaced() {
   if(isDefined(self.owner)) {
     self.owner.iscarrying = 0;
 
-    if(level.sentrysettings[self.sentrytype]._id_9F43)
+    if(level.sentrysettings[self.sentrytype]._id_9F43) {
       scripts\cp\utility::make_entity_sentient_cp(self.owner.team);
+    }
 
     self.owner notify("new_sentry", self);
   }
@@ -288,8 +299,9 @@ sentry_setplaced() {
 sentry_setcancelled() {
   self.carriedby forceusehintoff();
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.iscarrying = 0;
+  }
 
   self delete();
 }
@@ -328,10 +340,11 @@ updatesentryplacement(var_0, var_1) {
       if(var_0.canbeplaced) {
         var_0 setModel(level.sentrysettings[var_0.sentrytype].modelplacement);
 
-        if(!var_1)
+        if(!var_1) {
           self forceusehinton(&"COOP_CRAFTABLES_PLACE");
-        else
+        } else {
           self forceusehinton(&"COOP_CRAFTABLES_PLACE_CANCELABLE");
+        }
       } else {
         var_0 setModel(level.sentrysettings[var_0.sentrytype].modelplacementfailed);
         self forceusehinton(&"COOP_CRAFTABLES_CANNOT_PLACE");
@@ -348,8 +361,9 @@ _id_3834(var_0) {
   var_0.origin = var_1["origin"];
   var_0.angles = var_1["angles"];
 
-  if(scripts\cp\utility::ent_is_near_equipment(var_0))
+  if(scripts\cp\utility::ent_is_near_equipment(var_0)) {
     return 0;
+  }
 
   return self isonground() && var_1["result"] && abs(var_0.origin[2] - self.origin[2]) < 10;
 }
@@ -499,10 +513,11 @@ sentry_heatmonitor() {
   var_4 = level.sentrysettings[self.sentrytype].cooldowntime;
 
   for(;;) {
-    if(self.heatlevel != var_1)
+    if(self.heatlevel != var_1) {
       wait(var_0);
-    else
+    } else {
       self.heatlevel = max(0, self.heatlevel - 0.05);
+    }
 
     if(self.heatlevel > var_3) {
       self.overheated = 1;
@@ -547,8 +562,9 @@ turret_heatmonitor() {
           break;
       }
 
-      while(self.heatlevel)
+      while(self.heatlevel) {
         wait 0.1;
+      }
 
       self.overheated = 0;
       self notify("not_overheated");
@@ -563,10 +579,11 @@ turret_coolmonitor() {
 
   for(;;) {
     if(self.heatlevel > 0) {
-      if(self.cooldownwaittime <= 0)
+      if(self.cooldownwaittime <= 0) {
         self.heatlevel = max(0, self.heatlevel - 0.05);
-      else
+      } else {
         self.cooldownwaittime = max(0, self.cooldownwaittime - 0.05);
+      }
     }
 
     wait 0.05;
@@ -604,7 +621,8 @@ sentry_beepsounds() {
   for(;;) {
     wait 3.0;
 
-    if(!isDefined(self.carriedby))
+    if(!isDefined(self.carriedby)) {
       self playSound("sentry_gun_beep");
+    }
   }
 }

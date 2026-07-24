@@ -31,8 +31,9 @@ findrandomnavpoint(var_0, var_1) {
     }
     var_12 = distancesquared(var_11, self.origin);
 
-    if(var_12 > var_0 * var_0)
+    if(var_12 > var_0 * var_0) {
       return var_11;
+    }
   }
 
   return undefined;
@@ -43,22 +44,25 @@ wander_begin(var_0) {
   self clearpath();
   var_1 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 
-  if(isDefined(var_1.wander_goal_radius))
+  if(isDefined(var_1.wander_goal_radius)) {
     self.bt.instancedata[var_0].wandergoalradiussq = var_1.wander_goal_radius * var_1.wander_goal_radius;
-  else
+  } else {
     self.bt.instancedata[var_0].wandergoalradiussq = 4096;
+  }
 }
 
 wander_tick(var_0) {
   var_1 = scripts\asm\dlc4\dlc4_asm::getenemy();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     return anim.success;
+  }
 
   var_2 = scripts\aitypes\dlc4\bt_state_api::btstate_getinstancedata(var_0);
 
-  if(isDefined(self.pathgoalpos) && distancesquared(self.pathgoalpos, self.origin) > var_2.wandergoalradiussq)
+  if(isDefined(self.pathgoalpos) && distancesquared(self.pathgoalpos, self.origin) > var_2.wandergoalradiussq) {
     return anim.running;
+  }
 
   if(!isDefined(var_2._id_13845)) {
     var_3 = scripts\asm\dlc4\dlc4_asm::gettunedata();

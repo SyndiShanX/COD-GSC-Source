@@ -12,15 +12,17 @@ init() {
 }
 
 _id_41BB() {
-  if(!isDefined(self._id_10F9D))
+  if(!isDefined(self._id_10F9D)) {
     self._id_10F9D = spawnStruct();
+  }
 
   self._id_10F9D._id_10FA6 = 0;
   self._id_10F9D._id_10FA5 = 0;
   self._id_10F9D._id_10FA3 = 0;
 
-  if(isDefined(self._id_10F9D._id_10FAA))
+  if(isDefined(self._id_10F9D._id_10FAA)) {
     _id_41E3(_id_8195(self._id_10F9D._id_10FAA));
+  }
 
   self._id_10F9D._id_10FAA = undefined;
   self notify("stinger_irt_cleartarget");
@@ -53,10 +55,11 @@ stringemissilefired() {
 
       if(_id_9F7A(var_2)) {
         if(isDefined(var_2.unittype) && !scripts\engine\utility::is_true(var_2.space)) {
-          if(var_2.unittype == "soldier" || var_2.unittype == "c6")
+          if(var_2.unittype == "soldier" || var_2.unittype == "c6") {
             var_0 missile_settargetEnt(self._id_10F9D._id_10FAA, (0, 0, 38));
-          else if(var_2.unittype == "c8")
+          } else if(var_2.unittype == "c8") {
             var_0 missile_settargetEnt(self._id_10F9D._id_10FAA, (0, 0, 60));
+          }
         }
       }
     }
@@ -67,23 +70,26 @@ _id_10FAC() {
   self endon("death");
 
   for(;;) {
-    while(!_id_D42E())
+    while(!_id_D42E()) {
       wait 0.05;
+    }
 
     setomnvar("ui_lockon_ads", 1);
     self._id_10F9D._id_AF2F = [];
     self._id_10F9D._id_11565 = ["0", "1", "2", "3"];
     thread _id_10FA2();
 
-    while(_id_D42E())
+    while(_id_D42E()) {
       wait 0.05;
+    }
 
     setomnvar("ui_lockon_ads", 0);
     self notify("stinger_IRT_off");
     _id_41BB();
 
-    foreach(var_1 in self._id_10F9D._id_AF2F)
-    _id_41E3(var_1);
+    foreach(var_1 in self._id_10F9D._id_AF2F) {
+      _id_41E3(var_1);
+    }
 
     self._id_10F9D._id_AF2F = undefined;
     self._id_10F9D._id_11565 = undefined;
@@ -96,8 +102,9 @@ _id_10F9E() {
   if(isDefined(self._id_10F9D._id_AF2F)) {
     setomnvar("ui_lockon_ads", 0);
 
-    foreach(var_1 in self._id_10F9D._id_AF2F)
-    _id_41E3(var_1);
+    foreach(var_1 in self._id_10F9D._id_AF2F) {
+      _id_41E3(var_1);
+    }
   }
 }
 
@@ -116,8 +123,9 @@ _id_10FA2() {
 
       var_0 = _id_8195(self._id_10F9D._id_10FAA);
 
-      if(isDefined(var_0.ent._id_3508))
+      if(isDefined(var_0.ent._id_3508)) {
         setomnvar("ui_lockon_target_health_" + var_0.id, var_0.ent._id_8CB0);
+      }
 
       _id_F875(self._id_10F9D._id_10FAA);
       continue;
@@ -131,8 +139,9 @@ _id_10FA2() {
 
       var_0 = _id_8195(self._id_10F9D._id_10FAA);
 
-      if(isDefined(var_0.ent._id_3508))
+      if(isDefined(var_0.ent._id_3508)) {
         setomnvar("ui_lockon_target_health_" + var_0.id, var_0.ent._id_8CB0);
+      }
 
       var_1 = gettime() - self._id_10F9D._id_10FA6;
 
@@ -163,16 +172,19 @@ stinger_get_closest_to_player_view(var_0, var_1, var_2, var_3) {
   if(!var_0.size) {
     return;
   }
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level.player;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = -1;
+  }
 
   var_4 = var_1.origin;
 
-  if(isDefined(var_2) && var_2)
+  if(isDefined(var_2) && var_2) {
     var_4 = var_1 getEye();
+  }
 
   var_5 = undefined;
   var_6 = var_1 getplayerangles();
@@ -221,18 +233,21 @@ _id_7E04() {
 
     var_5 = _id_8195(var_4);
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       _id_41E3(var_5);
+    }
   }
 
-  if(var_2.size == 0)
+  if(var_2.size == 0) {
     return undefined;
+  }
 
   var_6 = [];
   var_7 = 4;
 
-  if(isDefined(self._id_10F9D._id_10FAA))
+  if(isDefined(self._id_10F9D._id_10FAA)) {
     var_7--;
+  }
 
   for(var_8 = 0; var_8 < var_7; var_8++) {
     var_4 = stinger_get_closest_to_player_view(var_2, level.player, 1);
@@ -255,12 +270,14 @@ _id_7E04() {
     var_9 = scripts\engine\utility::array_remove(var_9, var_5.ent);
   }
 
-  foreach(var_4 in var_9)
-  _id_1833(var_4);
+  foreach(var_4 in var_9) {
+    _id_1833(var_4);
+  }
 
   foreach(var_15 in var_6) {
-    if(_id_9922(var_15))
+    if(_id_9922(var_15)) {
       return _id_8195(var_15);
+    }
   }
 
   return undefined;
@@ -274,10 +291,11 @@ _id_7E4B() {
       var_0 = scripts\engine\utility::array_remove(var_0, var_2);
       var_3 = var_2._id_C925;
 
-      if(isDefined(var_3["right_leg"]) && !isDefined(var_3["left_leg"]))
+      if(isDefined(var_3["right_leg"]) && !isDefined(var_3["left_leg"])) {
         var_3 = scripts\sp\utility::_id_22B2(var_3, "right_leg");
-      else if(isDefined(var_3["left_leg"]) && !isDefined(var_3["right_leg"]))
+      } else if(isDefined(var_3["left_leg"]) && !isDefined(var_3["right_leg"])) {
         var_3 = scripts\sp\utility::_id_22B2(var_3, "left_leg");
+      }
 
       var_0 = scripts\engine\utility::array_combine(var_0, var_3);
     }
@@ -288,8 +306,9 @@ _id_7E4B() {
 
 _id_8195(var_0) {
   foreach(var_2 in self._id_10F9D._id_AF2F) {
-    if(var_2.ent == var_0)
+    if(var_2.ent == var_0) {
       return var_2;
+    }
   }
 
   return undefined;
@@ -340,8 +359,9 @@ _id_8C0A(var_0) {
   if(isDefined(var_0._id_3508)) {
     var_2[var_2.size] = var_0._id_3508;
 
-    if(isDefined(var_0._id_3508._id_E601))
+    if(isDefined(var_0._id_3508._id_E601)) {
       var_2[var_2.size] = var_0._id_3508._id_E601;
+    }
   }
 
   var_4 = scripts\common\trace::ray_trace(var_1, var_3, var_2);
@@ -352,10 +372,11 @@ _id_7E9A(var_0) {
   var_1 = var_0.origin;
 
   if(!isDefined(var_0._id_3508)) {
-    if(isDefined(var_0.unittype) && tolower(var_0.unittype) == "c8")
+    if(isDefined(var_0.unittype) && tolower(var_0.unittype) == "c8") {
       var_2 = 60;
-    else
+    } else {
       var_2 = 38;
+    }
 
     var_1 = var_1 + var_2 * anglestoup(var_0.angles);
   }
@@ -364,25 +385,31 @@ _id_7E9A(var_0) {
 }
 
 _id_9F7A(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(!isDefined(var_0._id_3508) && !isalive(var_0) || isDefined(var_0._id_3508) && !isalive(var_0._id_3508))
+  if(!isDefined(var_0._id_3508) && !isalive(var_0) || isDefined(var_0._id_3508) && !isalive(var_0._id_3508)) {
     return 0;
+  }
 
-  if(!_id_9920(var_0))
+  if(!_id_9920(var_0)) {
     return 0;
+  }
 
-  if(!_id_8C0A(var_0))
+  if(!_id_8C0A(var_0)) {
     return 0;
+  }
 
-  if(_id_9921(self._id_10F9D._id_10FAA) || self._id_10F9D._id_10FA5 && !self._id_10F9D._id_10FA3)
+  if(_id_9921(self._id_10F9D._id_10FAA) || self._id_10F9D._id_10FA5 && !self._id_10F9D._id_10FA3) {
     return 1;
+  }
 
   var_1 = _id_7E04();
 
-  if(isDefined(var_1) && _id_9921(var_1.ent))
+  if(isDefined(var_1) && _id_9921(var_1.ent)) {
     return 0;
+  }
 
   return 1;
 }
@@ -391,14 +418,17 @@ _id_D42E() {
   var_0 = self getcurrentweapon();
   var_1 = getweaponbasename(var_0);
 
-  if(!isDefined(var_1) || var_1 != "iw7_lockon")
+  if(!isDefined(var_1) || var_1 != "iw7_lockon") {
     return 0;
+  }
 
-  if(self getweaponammoclip(var_0) == 0)
+  if(self getweaponammoclip(var_0) == 0) {
     return 0;
+  }
 
-  if(self playerads() == 1.0)
+  if(self playerads() == 1.0) {
     return 1;
+  }
 
   return 0;
 }
@@ -406,8 +436,9 @@ _id_D42E() {
 _id_F875(var_0) {
   var_1 = 250;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   var_2 = distance2d(self.origin, var_0.origin);
 

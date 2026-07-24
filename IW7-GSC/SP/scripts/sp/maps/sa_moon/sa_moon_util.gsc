@@ -6,13 +6,15 @@
 _id_C0B3() {
   var_0 = getEntArray("rotating_roid", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 notsolid();
+  foreach(var_2 in var_0) {
+    var_2 notsolid();
+  }
 
   var_4 = getEntArray("delete_for_exfil", "targetname");
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     scripts\engine\utility::array_call(var_4, ::notsolid);
+  }
 
   var_0 = getEntArray("tube", "script_noteworthy");
 
@@ -20,8 +22,9 @@ _id_C0B3() {
     var_7 = getEntArray(var_6.target, "targetname");
 
     if(isDefined(var_7)) {
-      foreach(var_2 in var_7)
-      var_2 notsolid();
+      foreach(var_2 in var_7) {
+        var_2 notsolid();
+      }
     }
   }
 }
@@ -42,8 +45,9 @@ _id_8EA5() {
 
   var_5 = getEntArray("delete_for_exfil", "targetname");
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     scripts\engine\utility::array_call(var_5, ::delete);
+  }
 
   var_1 = getEntArray("damage_destroyer_vista", "targetname");
 
@@ -57,8 +61,9 @@ _id_8EA5() {
   foreach(var_10 in var_8) {
     var_11 = var_10 scripts\engine\utility::get_target_array();
 
-    foreach(var_13 in var_11)
-    var_13 delete();
+    foreach(var_13 in var_11) {
+      var_13 delete();
+    }
   }
 
   var_16 = getEntArray("large_maintenance_door_right", "targetname");
@@ -66,8 +71,9 @@ _id_8EA5() {
   foreach(var_10 in var_16) {
     var_11 = var_10 scripts\engine\utility::get_target_array();
 
-    foreach(var_13 in var_11)
-    var_13 delete();
+    foreach(var_13 in var_11) {
+      var_13 delete();
+    }
   }
 
   var_1 = getEntArray("space_small_movers", "targetname");
@@ -138,13 +144,15 @@ _id_8004() {
 
 _id_405F() {
   foreach(var_1 in level._id_1D0A._id_FE2D) {
-    if(isDefined(var_1) && isalive(var_1))
+    if(isDefined(var_1) && isalive(var_1)) {
       var_1 delete();
+    }
   }
 
   foreach(var_1 in level._id_26EB._id_FE2D) {
-    if(isDefined(var_1) && isalive(var_1))
+    if(isDefined(var_1) && isalive(var_1)) {
       var_1 delete();
+    }
   }
 
   if(isDefined(level._id_118A8)) {
@@ -153,8 +161,9 @@ _id_405F() {
 
     if(isDefined(level._id_118A8._id_4074)) {
       foreach(var_6 in level._id_118A8._id_4074) {
-        if(isDefined(var_6))
+        if(isDefined(var_6)) {
           var_6 delete();
+        }
       }
 
       level._id_118A8._id_4074 = [];
@@ -169,8 +178,9 @@ _id_405F() {
 _id_13EF7() {
   level._id_126C9 = scripts\engine\utility::getStructArray("zg_traversal", "script_noteworthy");
 
-  foreach(var_1 in level._id_126C9)
-  var_1._id_1FC9 = scripts\engine\utility::getStruct(var_1.target, "targetname");
+  foreach(var_1 in level._id_126C9) {
+    var_1._id_1FC9 = scripts\engine\utility::getStruct(var_1.target, "targetname");
+  }
 
   level._id_EC85["generic"]["hm_zg_red_exposed_traversal_step_01"] = % hm_zg_red_exposed_traversal_step_01;
 }
@@ -183,15 +193,17 @@ _id_13EF8() {
     var_1 = [];
 
     foreach(var_3 in var_0) {
-      if(var_3.space)
+      if(var_3.space) {
         var_1[var_1.size] = var_3;
+      }
     }
 
     if(var_1.size > 0) {
       var_5 = scripts\engine\utility::random(var_0);
 
-      if(isDefined(var_5) && isalive(var_5))
+      if(isDefined(var_5) && isalive(var_5)) {
         var_6 = var_5 _id_0F34::_id_13E86(5.0);
+      }
 
       var_5.ignoreall = 0;
     }
@@ -210,13 +222,15 @@ _id_A127() {
   wait 3;
 
   foreach(var_1 in level._id_1D0A._id_FE2D) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 _id_0BDC::_id_A324("veh_mil_air_un_jackal_drone_atmos_periph");
+    }
   }
 
   foreach(var_1 in level._id_26EB._id_FE2D) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 _id_0BDC::_id_A324("veh_mil_air_un_jackal_drone_atmos_periph");
+    }
   }
 }
 
@@ -258,19 +272,22 @@ _id_10628(var_0) {
   var_1 = [];
 
   if(isDefined(var_0)) {
-    foreach(var_3 in var_0)
-    var_1[var_1.size] = getEnt(var_3, "targetname");
+    foreach(var_3 in var_0) {
+      var_1[var_1.size] = getEnt(var_3, "targetname");
+    }
   } else {
     var_1[var_1.size] = getEnt("sa01_ethan_zerog", "targetname");
     var_1[var_1.size] = getEnt("sa01_salter_zerog", "targetname");
     var_1[var_1.size] = getEnt("sa01_omar_zerog", "targetname");
   }
 
-  foreach(var_6 in var_1)
-  var_6 scripts\sp\utility::_id_1747(::_id_F8B2);
+  foreach(var_6 in var_1) {
+    var_6 scripts\sp\utility::_id_1747(::_id_F8B2);
+  }
 
-  if(!isDefined(level._id_1C24))
+  if(!isDefined(level._id_1C24)) {
     level._id_1C24 = [];
+  }
 
   if(isDefined(var_0)) {
     foreach(var_3 in var_0) {
@@ -295,7 +312,7 @@ _id_10628(var_0) {
         continue;
       }
 
-      level._id_1C24[level._id_1C24.size] = scripts\sp\utility::_id_107EA(var_3, 1);
+      level._id_1C24[level._id_1C24.size] = ::scripts\sp\utility::_id_107EA(var_3, 1);
     }
   } else {
     level._id_679E = scripts\sp\utility::_id_107EA("sa01_ethan_zerog", 1);
@@ -342,8 +359,9 @@ _id_E352(var_0, var_1, var_2, var_3) {
 
   foreach(var_8 in var_5) {
     if(isDefined(var_8) && isalive(var_8)) {
-      if(isDefined(var_2) && isDefined(var_3))
+      if(isDefined(var_2) && isDefined(var_3)) {
         wait(randomfloatrange(var_2, var_3));
+      }
 
       var_8._id_72C7 = 0;
       var_8.fixednode = 0;
@@ -356,8 +374,9 @@ _id_E352(var_0, var_1, var_2, var_3) {
 _id_FA71() {
   var_0 = getEntArray("turret_targets", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 linkTo(level._id_68FF);
+  foreach(var_2 in var_0) {
+    var_2 linkTo(level._id_68FF);
+  }
 
   return var_0;
 }
@@ -394,8 +413,9 @@ _id_F979(var_0, var_1) {
     level.player _meth_8502();
   }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 delete();
+  }
 }
 
 _id_9716(var_0) {
@@ -467,8 +487,9 @@ _id_1723(var_0, var_1, var_2, var_3) {
   if(!scripts\sp\utility::_id_C268(var_0)) {
     objective_add(scripts\sp\utility::_id_C264(var_0), var_1, var_2);
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       thread _id_0F16::_id_C278(scripts\sp\utility::_id_C264(var_0));
+    }
   }
 }
 
@@ -476,8 +497,9 @@ _id_12DFB(var_0, var_1, var_2) {
   if(scripts\sp\utility::_id_C268(var_0)) {
     objective_position(scripts\sp\utility::_id_C264(var_0), var_1);
 
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       thread _id_0F16::_id_C278(scripts\sp\utility::_id_C264(var_0));
+    }
   }
 }
 
@@ -500,8 +522,9 @@ _id_119C1(var_0, var_1, var_2, var_3) {
 }
 
 _id_E9CA(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   if(var_0) {
     setsaveddvar("cg_helmetLinearVelocityToAngleRate", (0.4, 0.4, 1));
@@ -515,28 +538,32 @@ _id_E9CA(var_0) {
 }
 
 _id_E9C7(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   if(isDefined(level.player.helmet)) {
-    if(scripts\sp\utility::_id_93A6())
+    if(scripts\sp\utility::_id_93A6()) {
       level.player.helmet = level._id_10964.helmet;
-    else
+    } else {
       level _id_0E4B::_id_8E04(1);
+    }
   }
 
   if(getDvar("createfx") != "") {
     return;
   }
   if(getdvarint("no_helmet") == 0 || getdvarint("no_helmet") == 2) {
-    if(!scripts\sp\utility::_id_93A6())
+    if(!scripts\sp\utility::_id_93A6()) {
       level _id_0E4B::_id_8E06();
+    }
 
     if(isDefined(level.player.helmet) && getdvarint("no_helmet") == 0) {
-      if(var_0)
+      if(var_0) {
         level.player.helmet setModel("vm_hero_protagonist_helmet_zerog_empty");
-      else
+      } else {
         level.player.helmet setModel("vm_hero_protagonist_helmet_zerog");
+      }
     }
   }
 }
@@ -544,8 +571,9 @@ _id_E9C7(var_0) {
 _id_88E9(var_0, var_1, var_2) {
   scripts\engine\utility::flag_wait(var_1);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     wait(var_2);
+  }
 
   scripts\engine\utility::exploder(var_0);
 }
@@ -554,56 +582,66 @@ _id_8E92(var_0) {
   var_1 = getEntArray("interior_float_models", "script_noteworthy");
 
   if(var_0 == 1) {
-    foreach(var_3 in var_1)
-    var_3 hide();
+    foreach(var_3 in var_1) {
+      var_3 hide();
+    }
   } else {
-    foreach(var_3 in var_1)
-    var_3 show();
+    foreach(var_3 in var_1) {
+      var_3 show();
+    }
   }
 
   var_7 = getEntArray("exfil_jprops", "targetname");
 
   if(var_0 == 1) {
-    foreach(var_9 in var_7)
-    var_9 hide();
+    foreach(var_9 in var_7) {
+      var_9 hide();
+    }
   } else {
-    foreach(var_9 in var_7)
-    var_9 show();
+    foreach(var_9 in var_7) {
+      var_9 show();
+    }
   }
 
   var_13 = getEntArray("cargo_bay_props", "targetname");
 
   if(var_0 == 1) {
-    foreach(var_15 in var_13)
-    var_15 hide();
+    foreach(var_15 in var_13) {
+      var_15 hide();
+    }
   } else {
-    foreach(var_15 in var_13)
-    var_15 show();
+    foreach(var_15 in var_13) {
+      var_15 show();
+    }
   }
 
   var_19 = getEntArray("bollard_barrier_lights", "targetname");
 
   if(var_0 == 1) {
-    foreach(var_21 in var_19)
-    var_21 hide();
+    foreach(var_21 in var_19) {
+      var_21 hide();
+    }
   } else {
-    foreach(var_21 in var_19)
-    var_21 show();
+    foreach(var_21 in var_19) {
+      var_21 show();
+    }
   }
 
   var_25 = getEnt("cargobay_door_left", "targetname");
 
-  if(var_0 == 1)
+  if(var_0 == 1) {
     var_25 hide();
-  else
+  } else {
     var_25 show();
+  }
 
   var_26 = getEnt("cargobay_door_right", "targetname");
 
-  if(var_0 == 1)
+  if(var_0 == 1) {
     var_26 hide();
-  else
+  } else {
     var_26 show();
+  }
 }
 
 _id_5141() {
@@ -615,23 +653,27 @@ _id_5141() {
 _id_515E() {
   var_0 = getEntArray("interior_float_models", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
+  }
 
   var_4 = getEntArray("exfil_jprops", "targetname");
 
-  foreach(var_6 in var_4)
-  var_6 delete();
+  foreach(var_6 in var_4) {
+    var_6 delete();
+  }
 
   var_8 = getEntArray("cargo_bay_props", "targetname");
 
-  foreach(var_10 in var_8)
-  var_10 delete();
+  foreach(var_10 in var_8) {
+    var_10 delete();
+  }
 
   var_12 = getEntArray("bollard_barrier_lights", "targetname");
 
-  foreach(var_14 in var_12)
-  var_14 delete();
+  foreach(var_14 in var_12) {
+    var_14 delete();
+  }
 
   var_16 = getEnt("cargobay_door_left", "targetname");
   var_16 delete();
@@ -640,10 +682,11 @@ _id_515E() {
 }
 
 _id_13EF9(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
-  else
+  } else {
     scripts\engine\utility::waitframe();
+  }
 
   thread _id_0A2F::_id_13E80(var_0, 1);
 }
@@ -689,8 +732,9 @@ _id_51A1() {
   self endon("death");
   level.player scripts\sp\utility::_id_65E8("zero_gravity");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_12BBE() {

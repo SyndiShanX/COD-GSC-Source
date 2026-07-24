@@ -4,17 +4,19 @@
 **********************************************************/
 
 main() {
-  if(self.type == "dog")
+  if(self.type == "dog") {
     scripts\anim\traverse\shared::_id_586D("wallhop", 40);
-  else
+  } else {
     _id_138A5();
+  }
 }
 
 _id_138A5() {
-  if(getdvarint("ai_iw7", 0) == 0)
+  if(getdvarint("ai_iw7", 0) == 0) {
     scripts\anim\traverse\shared::_id_18D1(_id_7814(), 39.875);
-  else
+  } else {
     self waittill("killanimscript");
+  }
 }
 
 #using_animtree("generic_human");

@@ -6,8 +6,9 @@
 start_escort_sequence() {
   precachempanim("iw7_cp_bosscrab_emerge_slingshot_nuke_01");
 
-  if(scripts\engine\utility::is_true(level.debug_start_crab_boss))
+  if(scripts\engine\utility::is_true(level.debug_start_crab_boss)) {
     level waittill("crab_boss_ready_for_combat");
+  }
 
   teleport_players_to_beach();
   wait 2.3;
@@ -35,8 +36,9 @@ push_bomb(var_0, var_1) {
   enter_bomb_push(var_1, var_0);
   increase_escort_vehicle_speed();
 
-  while(var_1 useButtonPressed())
+  while(var_1 useButtonPressed()) {
     scripts\engine\utility::waitframe();
+  }
 
   decrease_escort_vehicle_speed();
   exit_bomb_push(var_1);
@@ -65,8 +67,9 @@ push_bomb_cart_sfx_stop() {
 init_escort_sequence() {
   var_0 = scripts\engine\utility::getStructArray("push_bomb", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
+  foreach(var_2 in var_0) {
+    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
+  }
 
   var_4 = getvehiclenode("bomb_vehicle_start", "targetname");
   var_5 = spawnVehicle("cp_town_bomb_delivery_vehicle", "bomb_vehicle", "cp_town_bomb_vehicle", var_4.origin, var_4.angles);
@@ -151,10 +154,11 @@ update_escort_vehicle_speed() {
   var_1 = level.escort_vehicle;
   var_1 vehicle_setspeedimmediate(var_0, 1, 1);
 
-  if(var_0 == 0)
+  if(var_0 == 0) {
     var_1 setscriptablepartstate("wheel", "off");
-  else
+  } else {
     var_1 setscriptablepartstate("wheel", "active");
+  }
 }
 
 pair_push_origins_with_interaction_struct(var_0) {
@@ -170,15 +174,17 @@ pair_push_origins_with_interaction_struct(var_0) {
 enable_bomb_push_interactions() {
   var_0 = scripts\engine\utility::getStructArray("push_bomb", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  scripts\cp\cp_interaction::add_to_current_interaction_list(var_2);
+  foreach(var_2 in var_0) {
+    scripts\cp\cp_interaction::add_to_current_interaction_list(var_2);
+  }
 }
 
 disable_bomb_push_interactions() {
   var_0 = scripts\engine\utility::getStructArray("push_bomb", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
+  foreach(var_2 in var_0) {
+    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
+  }
 }
 
 follow_push_origin(var_0, var_1) {
@@ -366,8 +372,9 @@ delete_push_origins() {
   if(isDefined(var_0.push_origins)) {
     var_1 = var_0.push_origins;
 
-    foreach(var_3 in var_1)
-    var_3 delete();
+    foreach(var_3 in var_1) {
+      var_3 delete();
+    }
   }
 }
 
@@ -390,8 +397,9 @@ exit_bomb_push(var_0) {
 teleport_out_of_geo(var_0) {
   var_1 = scripts\engine\utility::drop_to_ground(var_0.origin, 100, -200);
 
-  if(var_1[2] > var_0.origin[2])
+  if(var_1[2] > var_0.origin[2]) {
     var_0 setOrigin(var_1);
+  }
 }
 
 play_bomb_push_gesture(var_0) {
@@ -413,8 +421,9 @@ stop_bomb_push_gesture(var_0) {
 
 players_exit_bomb_push() {
   foreach(var_1 in level.players) {
-    if(scripts\engine\utility::is_true(var_1.is_pushing_bomb))
+    if(scripts\engine\utility::is_true(var_1.is_pushing_bomb)) {
       exit_bomb_push(var_1);
+    }
   }
 }
 
@@ -490,10 +499,11 @@ egg_sac_or_bomb_incoming_delayed(var_0) {
 }
 
 get_egg_sac_model(var_0) {
-  if(scripts\engine\utility::is_true(var_0))
+  if(scripts\engine\utility::is_true(var_0)) {
     return "cp_town_temp_egg_sac_green";
-  else
+  } else {
     return "cp_town_temp_egg_sac_orange";
+  }
 }
 
 egg_sac_fly(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -521,15 +531,17 @@ egg_sac_fly(var_0, var_1, var_2, var_3, var_4, var_5) {
 egg_sac_safe_delete(var_0, var_1) {
   wait(var_1 + 0.1);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 play_launch_muzzle_flash(var_0, var_1, var_2, var_3) {
-  if(scripts\engine\utility::is_true(var_2))
+  if(scripts\engine\utility::is_true(var_2)) {
     var_4 = "egg_sac_spawn_muzzleflash";
-  else
+  } else {
     var_4 = "egg_sac_bomb_muzzleflash";
+  }
 
   playFX(level._effect[var_4], var_0, anglestoup(vectortoangles(var_1)), var_1);
 }
@@ -541,10 +553,11 @@ egg_sac_landing_sequence(var_0, var_1, var_2, var_3) {
   hide_flying_trail(var_0);
   hide_landing_marker(var_0);
 
-  if(scripts\engine\utility::is_true(var_2))
+  if(scripts\engine\utility::is_true(var_2)) {
     var_0 thread egg_sac_spawn(var_0, var_1, var_3);
-  else
+  } else {
     delete_egg_sac(var_0);
+  }
 }
 
 do_earthquake(var_0) {
@@ -570,10 +583,11 @@ set_up_landing_ent(var_0, var_1) {
 }
 
 show_flying_trail(var_0, var_1) {
-  if(scripts\engine\utility::is_true(var_1))
+  if(scripts\engine\utility::is_true(var_1)) {
     var_0 setscriptablepartstate("egg_sac_flying_trail", "spawn");
-  else
+  } else {
     var_0 setscriptablepartstate("egg_sac_flying_trail", "bomb");
+  }
 }
 
 hide_flying_trail(var_0) {
@@ -581,37 +595,41 @@ hide_flying_trail(var_0) {
 }
 
 show_landing_marker(var_0, var_1) {
-  if(scripts\engine\utility::is_true(var_1))
+  if(scripts\engine\utility::is_true(var_1)) {
     var_0.landing_ent setscriptablepartstate("egg_sac_landing_marker", "spawn");
-  else
+  } else {
     var_0.landing_ent setscriptablepartstate("egg_sac_landing_marker", "bomb");
+  }
 }
 
 hide_landing_marker(var_0) {
-  if(isDefined(var_0.landing_ent))
+  if(isDefined(var_0.landing_ent)) {
     var_0.landing_ent setscriptablepartstate("egg_sac_landing_marker", "off");
+  }
 }
 
 play_landing_explosion(var_0, var_1) {
-  if(var_1 == 1)
+  if(var_1 == 1) {
     thread scripts\engine\utility::play_sound_in_space("minion_egg_land", var_0 + (0, 0, 30));
-  else
+  } else {
     thread scripts\engine\utility::play_sound_in_space("town_frag_grenade_explode", var_0 + (0, 0, 30));
+  }
 
   var_2 = get_landing_explosion_vfx_alias(var_0, var_1);
   playFX(level._effect[var_2], var_0);
 }
 
 get_landing_explosion_vfx_alias(var_0, var_1) {
-  if(scripts\engine\utility::is_true(var_1))
+  if(scripts\engine\utility::is_true(var_1)) {
     return "egg_sac_spawn_landing";
-  else {
+  } else {
     var_2 = bulletTrace(var_0 + (0, 0, 10), var_0 + (0, 0, -10), 0);
 
-    if(issubstr(var_2["surfacetype"], "sand"))
+    if(issubstr(var_2["surfacetype"], "sand")) {
       return "egg_sac_bomb_landing_sand";
-    else
+    } else {
       return "egg_sac_bomb_landing_non_sand";
+    }
   }
 }
 
@@ -626,48 +644,55 @@ egg_sac_damage_monitor(var_0, var_1) {
     var_0.health = 999999;
     var_0.fake_health = var_0.fake_health - var_2;
 
-    if(isPlayer(var_3))
+    if(isPlayer(var_3)) {
       show_hit_marker(var_0, var_3);
+    }
 
     if(var_0.fake_health < 0) {
       break;
     }
   }
 
-  if(isDefined(var_3) && isPlayer(var_3))
+  if(isDefined(var_3) && isPlayer(var_3)) {
     var_3 scripts\cp\cp_merits::processmerit("mt_dlc3_eggs_killed");
+  }
 
   play_damage_explosion_fx(var_0, var_1);
   delete_egg_sac(var_0);
 }
 
 play_damage_explosion_fx(var_0, var_1) {
-  if(var_1 == 1)
+  if(var_1 == 1) {
     thread scripts\engine\utility::play_sound_in_space("minion_egg_land", var_0.origin);
-  else
+  } else {
     thread scripts\engine\utility::play_sound_in_space("town_frag_grenade_explode", var_0.origin);
+  }
 
-  if(scripts\engine\utility::is_true(var_1))
+  if(scripts\engine\utility::is_true(var_1)) {
     playFX(level._effect["egg_sac_spawn_aerial_explosion"], var_0.origin);
-  else
+  } else {
     playFX(level._effect["egg_sac_bomb_aerial_explosion"], var_0.origin);
+  }
 }
 
 show_hit_marker(var_0, var_1) {
-  if(var_0.fake_health < 0)
+  if(var_0.fake_health < 0) {
     var_1 scripts\cp\cp_damage::updatedamagefeedback("pink_arcane_cp");
-  else
+  } else {
     var_1 scripts\cp\cp_damage::updatedamagefeedback("standard");
+  }
 }
 
 delete_egg_sac(var_0) {
   scripts\engine\utility::waitframe();
 
-  if(isDefined(var_0.landing_ent))
+  if(isDefined(var_0.landing_ent)) {
     var_0.landing_ent delete();
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 egg_sac_spawn(var_0, var_1, var_2) {
@@ -676,8 +701,9 @@ egg_sac_spawn(var_0, var_1, var_2) {
   var_3 = make_egg_sac_spawner(var_1, var_2);
   var_4 = var_3 scripts\cp\zombies\zombies_spawning::spawn_wave_enemy("crab_mini", 1, var_3);
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     adjust_crab_mini_health(var_4);
+  }
 
   thread delete_egg_sac(var_0);
   return var_4;
@@ -697,14 +723,16 @@ calculate_egg_sac_bomb_pos() {
   var_3 = var_2.angles;
 
   foreach(var_5 in level.players) {
-    if(coin_flip())
+    if(coin_flip()) {
       var_0[var_0.size] = get_point_near_target_within_range(var_5.origin, 30);
+    }
   }
 
   var_7 = var_1 - var_0.size;
 
-  for(var_8 = 0; var_8 < var_7; var_8++)
+  for(var_8 = 0; var_8 < var_7; var_8++) {
     var_0[var_0.size] = get_point_near_target_within_range(var_2.origin, 400);
+  }
 
   var_0 = scripts\engine\utility::array_randomize(var_0);
   return var_0;

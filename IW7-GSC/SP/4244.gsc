@@ -174,6 +174,7 @@ main() {
 _id_CD74(var_0, var_1) {
   var_2 = scripts\engine\utility::getStructArray(var_0, "targetname");
 
-  foreach(var_4 in var_2)
-  playFX(scripts\engine\utility::getfx(var_1), var_4.origin, anglesToForward(var_4.angles), anglestoup(var_4.angles));
+  foreach(var_4 in var_2) {
+    playFX(scripts\engine\utility::getfx(var_1), var_4.origin, anglesToForward(var_4.angles), anglestoup(var_4.angles));
+  }
 }

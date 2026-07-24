@@ -92,8 +92,9 @@ _id_F684(var_0, var_1, var_2) {
   for(;;) {
     var_3 = scripts\engine\utility::waittill_any_return("place_ims", "cancel_ims", "force_cancel_placement", "player_action_slot_restart");
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       var_3 = "force_cancel_placement";
+    }
 
     if(var_3 == "cancel_ims" || var_3 == "force_cancel_placement" || var_3 == "player_action_slot_restart") {
       if(!var_1 && var_3 == "cancel_ims") {
@@ -101,10 +102,11 @@ _id_F684(var_0, var_1, var_2) {
       }
       var_0 _id_6D9F(var_3 == "force_cancel_placement" && !isDefined(var_0.firstplacement));
 
-      if(var_3 != "force_cancel_placement")
+      if(var_3 != "force_cancel_placement") {
         thread watch_dpad();
-      else if(var_1)
+      } else if(var_1) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
+      }
 
       return 0;
     }
@@ -112,8 +114,9 @@ _id_F684(var_0, var_1, var_2) {
     if(!var_0.canbeplaced) {
       continue;
     }
-    if(var_1)
+    if(var_1) {
       scripts\cp\utility::remove_crafted_item_from_inventory(self);
+    }
 
     var_0 thread _id_6DA2(var_2);
     self notify("IMS_placed");
@@ -160,10 +163,11 @@ _id_48EA(var_0, var_1) {
   var_4.config = level._id_6DA3[var_3];
   var_4 thread _id_6D9D();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_4 thread scripts\cp\utility::item_timeout(var_1);
-  else
+  } else {
     var_4 thread scripts\cp\utility::item_timeout(undefined, level._id_6DA3[self._id_6DA4].lifespan);
+  }
 
   return var_4;
 }
@@ -219,8 +223,9 @@ _id_6D9D() {
     }
     _id_6DA1();
 
-    if(isDefined(self getlinkedparent()))
+    if(isDefined(self getlinkedparent())) {
       self unlink();
+    }
 
     var_0 thread _id_F684(var_1, 0, self.lifespan);
     self delete();
@@ -232,13 +237,15 @@ _id_6DA2(var_0) {
   self endon("death");
   level endon("game_ended");
 
-  if(isDefined(self.carriedby))
+  if(isDefined(self.carriedby)) {
     self.carriedby forceusehintoff();
+  }
 
   self.carriedby = undefined;
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.iscarrying = 0;
+  }
 
   self.firstplacement = undefined;
   var_1 = _id_48EA(self, var_0);
@@ -249,8 +256,9 @@ _id_6DA2(var_0) {
   var_1 thread _id_6D9E();
   var_2 = spawnStruct();
 
-  if(isDefined(self.moving_platform))
+  if(isDefined(self.moving_platform)) {
     var_2.linkparent = self.moving_platform;
+  }
 
   var_2.endonstring = "carried";
   var_2.deathoverridecallback = ::_id_936D;
@@ -268,8 +276,9 @@ _id_6D9F(var_0) {
     var_1 scripts\engine\utility::allow_weapon(1);
   }
 
-  if(isDefined(var_0) && var_0)
+  if(isDefined(var_0) && var_0) {
     _id_66A7();
+  }
 
   self.carried_fireworks_trap delete();
   self delete();
@@ -286,8 +295,9 @@ _id_6DA0(var_0) {
   thread _id_936F(var_0);
   thread _id_9371(var_0);
 
-  if(isDefined(level._id_5CF2))
+  if(isDefined(level._id_5CF2)) {
     self thread[[level._id_5CF2]](var_0);
+  }
 
   self notify("carried");
 }
@@ -327,12 +337,13 @@ _id_6D9E() {
   var_6 = var_5;
   self._id_2514 = var_6["position"] - (0, 0, 20) - self.origin;
 
-  if(self._id_2514[2] < 250)
+  if(self._id_2514[2] < 250) {
     self._id_AA7B = "launch_low";
-  else if(self._id_2514[2] < 450)
+  } else if(self._id_2514[2] < 450) {
     self._id_AA7B = "launch_med";
-  else
+  } else {
     self._id_AA7B = "launch_high";
+  }
 
   var_7 = spawn("trigger_radius", self.origin, 0, 256, 100);
   self._id_2536 = var_7;
@@ -348,8 +359,9 @@ _id_6D9E() {
 _id_6DA1() {
   self makeunusable();
 
-  if(isDefined(self._id_2536))
+  if(isDefined(self._id_2536)) {
     self._id_2536 delete();
+  }
 
   if(isDefined(self._id_69F6)) {
     self._id_69F6 delete();
@@ -421,10 +433,11 @@ _id_AA75(var_0, var_1) {
   var_2 setscriptablepartstate("rocket", "explode");
   wait 0.1;
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     magicbullet(var_3, var_2.origin, var_0.origin, var_4);
-  else
+  } else {
     magicbullet(var_3, var_2.origin, var_0.origin, level.players[0]);
+  }
 
   var_2 delete();
   self notify("firework_exploded");

@@ -22,11 +22,13 @@ _id_DE96() {
 }
 
 _id_1A5F(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   if(var_0) {
     var_2 = scripts\engine\utility::getStruct("aircontrol1a", "targetname");

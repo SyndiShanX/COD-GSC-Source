@@ -63,8 +63,9 @@ elvira_interaction_monitor() {
     if(scripts\engine\utility::is_true(level.vo_system_busy)) {
       scripts\cp\cp_interaction::remove_from_current_interaction_list(var_1);
 
-      while(scripts\engine\utility::is_true(level.vo_system_busy))
+      while(scripts\engine\utility::is_true(level.vo_system_busy)) {
         wait 0.05;
+      }
 
       wait 1;
       scripts\cp\cp_interaction::add_to_current_interaction_list(var_1);
@@ -106,15 +107,17 @@ init_elvira_beach() {
 }
 
 elvira_beach_hint(var_0, var_1) {
-  if(isDefined(level.elvira_ai))
+  if(isDefined(level.elvira_ai)) {
     return &"CP_TOWN_INTERACTIONS_ELVIRA_GONE";
+  }
 
-  if(isDefined(level.elvira_available_again) && gettime() < level.elvira_available_again)
+  if(isDefined(level.elvira_available_again) && gettime() < level.elvira_available_again) {
     return &"CP_TOWN_INTERACTIONS_ELVIRA_GONE";
-  else if(scripts\engine\utility::flag("vial_filled"))
+  } else if(scripts\engine\utility::flag("vial_filled")) {
     return &"CP_TOWN_INTERACTIONS_GIVE_VIAL";
-  else
+  } else {
     return level.interaction_hintstrings["elvira_beach"];
+  }
 }
 
 elvira_beach(var_0, var_1) {
@@ -148,20 +151,23 @@ elvira_beach(var_0, var_1) {
 }
 
 elvira_hint(var_0, var_1) {
-  if(isDefined(level.elvira_ai))
+  if(isDefined(level.elvira_ai)) {
     return &"CP_TOWN_INTERACTIONS_ELVIRA_GONE";
+  }
 
-  if(isDefined(level.elvira_available_again) && gettime() < level.elvira_available_again)
+  if(isDefined(level.elvira_available_again) && gettime() < level.elvira_available_again) {
     return &"CP_TOWN_INTERACTIONS_ELVIRA_GONE";
+  }
 
-  if(scripts\engine\utility::flag("spellbook_found") && !scripts\engine\utility::flag("spellbook_placed"))
+  if(scripts\engine\utility::flag("spellbook_found") && !scripts\engine\utility::flag("spellbook_placed")) {
     return &"CP_TOWN_INTERACTIONS_GIVE_BOOK";
-  else if(scripts\engine\utility::flag("spellbook_placed") && scripts\engine\utility::flag("spellbook_page1_found") && !scripts\engine\utility::flag("spellbook_page1_placed"))
+  } else if(scripts\engine\utility::flag("spellbook_placed") && scripts\engine\utility::flag("spellbook_page1_found") && !scripts\engine\utility::flag("spellbook_page1_placed")) {
     return &"CP_TOWN_INTERACTIONS_GIVE_PAGES";
-  else if(scripts\engine\utility::flag("vial_filled"))
+  } else if(scripts\engine\utility::flag("vial_filled")) {
     return &"CP_TOWN_INTERACTIONS_GIVE_VIAL";
-  else
+  } else {
     return level.interaction_hintstrings["elvira_talk"];
+  }
 }
 
 play_elvira_first_meet_vo(var_0) {
@@ -189,11 +195,11 @@ play_elvira_first_meet_vo(var_0) {
 }
 
 interact_with_elvira(var_0, var_1) {
-  if(isDefined(level.elvira_available_again) && gettime() < level.elvira_available_again)
+  if(isDefined(level.elvira_available_again) && gettime() < level.elvira_available_again) {
     elvira_mirror_check(var_1);
-  else if(isDefined(level.elvira_ai))
+  } else if(isDefined(level.elvira_ai)) {
     elvira_mirror_check(var_1);
-  else if(!scripts\engine\utility::is_true(level.first_meeting_elvira) && !scripts\engine\utility::flag("spellbook_found")) {
+  } else if(!scripts\engine\utility::is_true(level.first_meeting_elvira) && !scripts\engine\utility::flag("spellbook_found")) {
     var_1 thread play_elvira_first_meet_vo(var_0);
     level.first_meeting_elvira = 1;
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
@@ -204,9 +210,9 @@ interact_with_elvira(var_0, var_1) {
       playFX(level._effect["vfx_cp_town_book_place"], level.elvira_spellbook.origin + (0, 0, 10), anglesToForward(level.elvira_spellbook.angles), anglestoup(level.elvira_spellbook.angles));
       scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
 
-      if(!scripts\engine\utility::is_true(level.pause_nag_vo) && !scripts\engine\utility::is_true(level.vo_system_busy))
+      if(!scripts\engine\utility::is_true(level.pause_nag_vo) && !scripts\engine\utility::is_true(level.vo_system_busy)) {
         level thread scripts\cp\maps\cp_town\cp_town::play_willard_elvira_exchange("elvira_upgrade2", var_0);
-      else {
+      } else {
         wait 1;
         scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
       }
@@ -504,10 +510,11 @@ elvira_spawned_vo() {
   wait 90;
 
   if(!scripts\engine\utility::is_true(level.anomaly_revealed)) {
-    if(isDefined(level.elvira_ai))
+    if(isDefined(level.elvira_ai)) {
       scripts\engine\utility::play_sound_in_space("el_pap_nag_energy_warn_timeout", level.elvira_ai.origin, 0, level.elvira_ai);
-    else if(isDefined(level.elvira))
+    } else if(isDefined(level.elvira)) {
       scripts\engine\utility::play_sound_in_space("el_pap_nag_energy_warn_timeout", level.elvira.origin, 0, level.elvira);
+    }
   }
 }
 
@@ -520,12 +527,13 @@ crog_vial_meter() {
     if(scripts\engine\utility::flag("vial_filled")) {
       continue;
     }
-    if(var_1 == "cleaver_kill")
+    if(var_1 == "cleaver_kill") {
       var_0 = var_0 + 0.1;
-    else if(var_1 == "cleaver_kill_zombie")
+    } else if(var_1 == "cleaver_kill_zombie") {
       var_0 = var_0 + 0.05;
-    else if(var_1 == "cleaver_damage_zombie")
+    } else if(var_1 == "cleaver_damage_zombie") {
       var_0 = var_0 + 0.01;
+    }
 
     if(var_0 >= 1) {
       setomnvar("zom_general_fill_percent_2", 1);
@@ -557,8 +565,9 @@ elvira_timely_torrent(var_0) {
     if(distancesquared(var_5.origin, self.origin) > 810000) {
       continue;
     }
-    if(scripts\engine\utility::within_fov(self.origin, self.angles, var_5.origin, cos(60)))
+    if(scripts\engine\utility::within_fov(self.origin, self.angles, var_5.origin, cos(60))) {
       level thread torrent_kill_zombie(var_5, var_6);
+    }
   }
 }
 
@@ -566,8 +575,9 @@ torrent_kill_zombie(var_0, var_1) {
   var_0 endon("death");
   level endon("game_ended");
 
-  if(var_1 % 3 == 0)
+  if(var_1 % 3 == 0) {
     playsoundatpos(var_0.origin, "zmb_fnf_timely_torrent_lava");
+  }
 
   playFX(level._effect["lava_torrent"], var_0.origin, undefined, anglestoup((0, 0, 90)));
 
@@ -579,8 +589,9 @@ torrent_kill_zombie(var_0, var_1) {
     var_0 setvelocity((0, 0, 600));
     wait 0.1;
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_0 dodamage(10000, var_0.origin);
+    }
   } else if(isDefined(var_0))
     var_0 dodamage(1000, var_0.origin);
 }

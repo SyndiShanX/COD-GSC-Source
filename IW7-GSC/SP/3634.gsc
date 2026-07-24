@@ -13,11 +13,13 @@ _id_61FD(var_0, var_1) {
   self notifyonplayercommand("gundown_interupt_noout", "+speed_throw");
   self notifyonplayercommand("gundown_reload_hit", "+usereload");
 
-  if(!isDefined(level._id_EC8C["gundown_rig"]))
+  if(!isDefined(level._id_EC8C["gundown_rig"])) {
     _id_86ED();
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level.player thread scripts\sp\utility::_id_D2CD(var_0, 0.1);
+  }
 
   setsaveddvar("player_sprintUnlimited", 1);
   setsaveddvar("bg_sprintLoopTimeScale", 1.3);
@@ -26,8 +28,9 @@ _id_61FD(var_0, var_1) {
   var_2 = 0;
 
   for(;;) {
-    while(level.player getcurrentweapon() == "none")
+    while(level.player getcurrentweapon() == "none") {
       wait 0.05;
+    }
 
     level.player thread _id_5521();
     _id_86F3(var_2);
@@ -83,24 +86,25 @@ _id_86F3(var_0) {
   var_1 = gettime();
 
   while(gettime() - var_1 < var_0) {
-    if(self adsButtonPressed())
+    if(self adsButtonPressed()) {
       var_1 = gettime();
-    else if(self attackButtonPressed())
+    } else if(self attackButtonPressed()) {
       var_1 = gettime();
-    else if(self issprinting())
+    } else if(self issprinting()) {
       var_1 = gettime();
-    else if(self issprintsliding())
+    } else if(self issprintsliding()) {
       var_1 = gettime();
-    else if(self isthrowinggrenade())
+    } else if(self isthrowinggrenade()) {
       var_1 = gettime();
-    else if(self isreloading())
+    } else if(self isreloading()) {
       var_1 = gettime();
-    else if(self isjumping())
+    } else if(self isjumping()) {
       var_1 = gettime();
-    else if(scripts\sp\utility::_id_9F59())
+    } else if(scripts\sp\utility::_id_9F59()) {
       var_1 = gettime();
-    else if(!self _meth_843C())
+    } else if(!self _meth_843C()) {
       var_1 = gettime();
+    }
 
     wait 0.05;
   }
@@ -135,14 +139,17 @@ _id_86F2(var_0, var_1) {
     if(self issprinting() || self issprintsliding()) {
       self notify("gundown_interupt_noout");
 
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         level.player thread scripts\sp\utility::_id_D2CD(var_1, 0.1);
+      }
 
-      while(self _meth_8439())
+      while(self _meth_8439()) {
         wait 0.05;
+      }
 
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         level.player thread scripts\sp\utility::_id_D2CD(var_0, 0.1);
+      }
     }
 
     wait 0.05;
@@ -161,16 +168,18 @@ _id_86F0() {
   for(;;) {
     self waittill("gundown_reload_hit");
 
-    if(self isreloading())
+    if(self isreloading()) {
       self notify("gundown_interupt_noout");
+    }
   }
 }
 
 _id_86EE() {
   self waittill("death");
 
-  if(isDefined(self._id_86F1))
+  if(isDefined(self._id_86F1)) {
     self._id_86F1 delete();
+  }
 }
 
 _id_86ED() {

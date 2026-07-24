@@ -25,11 +25,13 @@ init() {
 }
 
 contractsenabled() {
-  if(isai(self))
+  if(isai(self)) {
     return 0;
+  }
 
-  if(getdvarint("mission_team_contracts_enabled", 0) == 0)
+  if(getdvarint("mission_team_contracts_enabled", 0) == 0) {
     return 0;
+  }
 
   return 1;
 }
@@ -44,8 +46,9 @@ onplayerconnect() {
     var_0.contracts = [];
     var_1 = var_0 getchallengeids();
 
-    foreach(var_4, var_3 in var_1)
-    var_0 givecontractchallenge(var_3, var_4);
+    foreach(var_4, var_3 in var_1) {
+      var_0 givecontractchallenge(var_3, var_4);
+    }
   }
 }
 
@@ -58,8 +61,9 @@ getchallengeids() {
 givecontractchallenge(var_0, var_1) {
   var_2 = lookupcontractchallengeref(var_0);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return undefined;
+  }
 
   var_3 = spawnStruct();
   var_3.slot = var_1;
@@ -80,8 +84,9 @@ givecontractchallenge(var_0, var_1) {
 lookupcontractchallengeref(var_0) {
   var_1 = tablelookup("cp/contractChallengesZM.csv", 0, var_0, 1);
 
-  if(!isDefined(var_1) || var_1 == "")
+  if(!isDefined(var_1) || var_1 == "") {
     return undefined;
+  }
 
   return var_1;
 }
@@ -89,8 +94,9 @@ lookupcontractchallengeref(var_0) {
 lookupcontractchallengetarget(var_0) {
   var_1 = tablelookup("cp/contractChallengesZM.csv", 0, var_0, 3);
 
-  if(!isDefined(var_1) || var_1 == "")
+  if(!isDefined(var_1) || var_1 == "") {
     return undefined;
+  }
 
   return int(var_1);
 }
@@ -98,15 +104,17 @@ lookupcontractchallengetarget(var_0) {
 lookupcontractchallengeteam(var_0) {
   var_1 = tablelookup("cp/contractChallengesZM.csv", 0, var_0, 2);
 
-  if(!isDefined(var_1) || var_1 == "")
+  if(!isDefined(var_1) || var_1 == "") {
     return undefined;
+  }
 
   return int(var_1);
 }
 
 updatecontractprogress(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   var_0.progress = var_0.progress + var_1;
   var_0.progress = int(min(var_0.progress, var_0.target));

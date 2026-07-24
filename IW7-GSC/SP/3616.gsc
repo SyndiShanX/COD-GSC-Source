@@ -15,8 +15,9 @@ _id_DE0F() {
   level._effect["barrel_fire"] = loadfx("vfx/iw7/prop/vfx_dest_barrel_fire.vfx");
   var_0 = getEntArray("phys_barrel_destructible", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_DE0C();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_DE0C();
+  }
 }
 
 _id_DE0C() {
@@ -44,8 +45,9 @@ _id_DE0C() {
 
     var_2 = int(var_2 - var_3);
 
-    if(var_2 <= 0 && !isDefined(self._id_C528))
+    if(var_2 <= 0 && !isDefined(self._id_C528)) {
       var_2 = 50;
+    }
 
     if(var_2 <= 0) {
       break;
@@ -55,8 +57,9 @@ _id_DE0C() {
 
     if(var_2 <= 50) {
       if(!var_1) {
-        if(soundexists("o2_barrel_fire"))
+        if(soundexists("o2_barrel_fire")) {
           thread scripts\engine\utility::play_loop_sound_on_entity("o2_barrel_fire");
+        }
 
         playFXOnTag(scripts\engine\utility::getfx("barrel_fire"), self, "misc_exterior_oxygen_barrel_large");
         playFXOnTag(scripts\engine\utility::getfx("barrel_flame_top"), self, "tag_valve");
@@ -76,8 +79,9 @@ _id_DE0C() {
         var_15 = vectorNormalize(var_5);
         var_16 = 20;
 
-        if(isDefined(var_7) && var_7 == "MOD_IMPACT")
+        if(isDefined(var_7) && var_7 == "MOD_IMPACT") {
           var_16 = 3;
+        }
 
         var_5 = var_15 * var_16;
       }
@@ -99,15 +103,17 @@ _id_DE0C() {
     var_18.angles = scripts\engine\utility::flat_angle(var_20);
     var_18 linkTo(self);
 
-    if(soundexists("o2_barrel_hiss_loop"))
+    if(soundexists("o2_barrel_hiss_loop")) {
       var_18 thread scripts\engine\utility::play_loop_sound_on_entity("o2_barrel_hiss_loop");
+    }
 
     playFXOnTag(scripts\engine\utility::getfx("barrel_flame_small"), var_18, "tag_origin");
     self._id_109DB = scripts\engine\utility::array_add(self._id_109DB, var_18);
   }
 
-  while(isDefined(self._id_5945))
+  while(isDefined(self._id_5945)) {
     scripts\engine\utility::waitframe();
+  }
 
   self notify("barrel_death");
 }
@@ -136,11 +142,13 @@ _id_DE0D() {
     var_6 = var_5 / self._id_CAF6;
     var_7 = var_0 * var_6;
 
-    if(var_4 <= self._id_CAF6)
+    if(var_4 <= self._id_CAF6) {
       var_3 thread _id_0E1D::_id_2837(self.origin, var_4, var_7);
+    }
 
-    if(var_4 <= 340)
+    if(var_4 <= 340) {
       var_3 thread _id_DE0E(self.origin, var_4, var_7);
+    }
   }
 
   var_9 = scripts\sp\utility::_id_81FF();
@@ -159,8 +167,9 @@ _id_DE0D() {
       var_6 = var_14 / 250 * 100;
       var_12 = var_12 - var_6 * var_13;
 
-      if(getdvarint("barrel_debug"))
+      if(getdvarint("barrel_debug")) {
         iprintln("BARREL DID " + var_12 + " TO VEH");
+      }
 
       var_11 dodamage(var_12, self.origin, self, self, "MOD_EXPLOSIVE");
     }
@@ -175,8 +184,9 @@ _id_DE0D() {
     if(!isDefined(var_18.subclass)) {
       continue;
     }
-    if(var_18.subclass == "C6")
+    if(var_18.subclass == "C6") {
       var_12 = var_12 + 20;
+    }
 
     var_19 = distance(self.origin, var_18.origin);
 
@@ -184,8 +194,9 @@ _id_DE0D() {
       var_6 = var_19 / 250;
       var_12 = var_12 - var_6 * var_13;
 
-      if(getdvarint("barrel_debug"))
+      if(getdvarint("barrel_debug")) {
         iprintln("BARREL DID " + var_12 + " TO AI");
+      }
 
       var_18 dodamage(var_12, self.origin, self, self, "MOD_EXPLOSIVE");
     }
@@ -198,30 +209,35 @@ _id_DE0D() {
     var_13 = 420;
     var_12 = 420 - var_6 * var_13;
 
-    if(getdvarint("barrel_debug"))
+    if(getdvarint("barrel_debug")) {
       iprintln("BARREL DID " + var_12 + " TO PLAYER");
+    }
 
-    if(!level.player scripts\sp\utility::_id_65DB("player_retract_shield_active"))
+    if(!level.player scripts\sp\utility::_id_65DB("player_retract_shield_active")) {
       level.player dodamage(var_12, self.origin, self, self, "MOD_EXPLOSIVE");
+    }
   }
 
   radiusdamage(self.origin, 2, 1, 0, self);
   scripts\engine\utility::waitframe();
 
-  if(soundexists("o2_barrel_explode"))
+  if(soundexists("o2_barrel_explode")) {
     thread scripts\engine\utility::play_sound_in_space("o2_barrel_explode", self.origin);
+  }
 
-  if(level.player scripts\sp\utility::_id_65DF("zero_gravity") && level.player scripts\sp\utility::_id_65DB("zero_gravity"))
+  if(level.player scripts\sp\utility::_id_65DF("zero_gravity") && level.player scripts\sp\utility::_id_65DB("zero_gravity")) {
     playFX(scripts\engine\utility::getfx("barrel_explosion_zerog"), self.origin);
-  else
+  } else {
     playFX(scripts\engine\utility::getfx("barrel_explosion"), self.origin);
+  }
 
   foreach(var_23 in self._id_109DB) {
     killfxontag(scripts\engine\utility::getfx("barrel_flame_small"), var_23, "tag_origin");
     scripts\engine\utility::waitframe();
 
-    if(isDefined(var_23))
+    if(isDefined(var_23)) {
       var_23 delete();
+    }
   }
 
   killfxontag(scripts\engine\utility::getfx("barrel_fire"), self, "misc_exterior_oxygen_barrel_large");
@@ -237,8 +253,9 @@ _id_DE0D() {
 _id_50B2(var_0) {
   wait(var_0);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_DE0E(var_0, var_1, var_2) {

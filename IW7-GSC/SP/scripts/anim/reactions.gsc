@@ -68,9 +68,9 @@ _id_BF20() {
   self._id_A9D9 = gettime();
   self.a.movement = "stop";
 
-  if(isDefined(self._stealth) && self.alertlevel != "combat")
+  if(isDefined(self._stealth) && self.alertlevel != "combat") {
     _id_10F51();
-  else {
+  } else {
     var_0 = _id_7FE1();
     self clearanim(%root, 0.2);
     self _meth_82E7("reactanim", var_0, 1, 0.2, 1);
@@ -94,6 +94,7 @@ _id_BF22() {
   }
   self animmode("gravity");
 
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     _id_BF20();
+  }
 }

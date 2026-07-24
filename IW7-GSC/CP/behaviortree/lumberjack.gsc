@@ -24,8 +24,8 @@ _id_2AD0() {
   var_0._id_1581[8] = _id_0C2B::_id_102D4;
   var_0._id_1581[9] = _id_0C2B::_id_3E4F;
   var_0._id_1581[10] = _id_0C2B::_id_3E29;
-  var_0._id_1581[11] = scripts\aitypes\zombie_dlc1\behaviors::chaseenemydlc1;
-  var_0._id_1581[12] = scripts\aitypes\zombie_dlc1\behaviors::seekenemydlc1;
+  var_0._id_1581[11] = ::scripts\aitypes\zombie_dlc1\behaviors::chaseenemydlc1;
+  var_0._id_1581[12] = ::scripts\aitypes\zombie_dlc1\behaviors::seekenemydlc1;
   var_0._id_1581[13] = _id_0C2B::notargetfound;
   level._id_119E["lumberjack"] = var_0;
 }

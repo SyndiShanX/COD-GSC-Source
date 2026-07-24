@@ -50,8 +50,9 @@ superslasher_init(var_0) {
 }
 
 dointro(var_0) {
-  if(!isDefined(self._blackboard.bintrorequested))
+  if(!isDefined(self._blackboard.bintrorequested)) {
     return anim.success;
+  }
 
   if(scripts\asm\asm::asm_ephemeraleventfired("intro_anim", "end")) {
     self._blackboard.bintrorequested = undefined;
@@ -62,8 +63,9 @@ dointro(var_0) {
 }
 
 updateeveryframe(var_0) {
-  if(!isalive(self))
+  if(!isalive(self)) {
     return anim.failure;
+  }
 
   if(isDefined(self.scripted) && self.scripted || isDefined(self._blackboard.bgameended)) {
     self clearpath();
@@ -84,25 +86,30 @@ setnextidlesoundtime() {
 
 updateidlesound() {
   if(gettime() > self.nextidlesoundtime) {
-    if(isDefined(self._blackboard.bmoving) || isDefined(self._blackboard.bidle))
+    if(isDefined(self._blackboard.bmoving) || isDefined(self._blackboard.bidle)) {
       self playsoundonmovingent("zmb_vo_supslasher_idle_grunt");
+    }
 
     setnextidlesoundtime();
   }
 }
 
 isvalidtarget(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(!isalive(var_0))
+  if(!isalive(var_0)) {
     return 0;
+  }
 
-  if(var_0.ignoreme || isDefined(var_0.owner) && var_0.owner.ignoreme)
+  if(var_0.ignoreme || isDefined(var_0.owner) && var_0.owner.ignoreme) {
     return 0;
+  }
 
-  if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_0))
+  if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_0)) {
     return 0;
+  }
 
   return 1;
 }
@@ -123,40 +130,48 @@ updatetarget() {
   if(var_0) {
     var_2 = level.players;
 
-    if(isDefined(self.bt.target))
+    if(isDefined(self.bt.target)) {
       var_2 = scripts\engine\utility::array_remove(var_2, self.bt.target);
+    }
 
     var_3 = [];
 
     foreach(var_5 in var_2) {
-      if(isvalidtarget(var_5))
+      if(isvalidtarget(var_5)) {
         var_3[var_3.size] = var_5;
+      }
     }
 
-    if(var_3.size > 0)
+    if(var_3.size > 0) {
       settarget(var_3[randomint(var_3.size)]);
+    }
   }
 }
 
 dotrapped(var_0) {
-  if(isDefined(self._blackboard.btraprequested))
+  if(isDefined(self._blackboard.btraprequested)) {
     return anim.running;
+  }
 
   return anim.success;
 }
 
 shouldgotoroof(var_0) {
-  if(self.bt.locationstate != 2)
+  if(self.bt.locationstate != 2) {
     return anim.failure;
+  }
 
-  if(superslasher_isfinalstage())
+  if(superslasher_isfinalstage()) {
     return anim.failure;
+  }
 
-  if(isDefined(self._blackboard.bstaggerrequested))
+  if(isDefined(self._blackboard.bstaggerrequested)) {
     return anim.success;
+  }
 
-  if(isDefined(self._blackboard.bgotoroofrequested))
+  if(isDefined(self._blackboard.bgotoroofrequested)) {
     return anim.success;
+  }
 
   return anim.failure;
 }
@@ -166,23 +181,27 @@ walktoroof_init(var_0) {
   self.bt.instancedata[var_0].starttime = gettime();
   self.bt.instancedata[var_0].goalpos = getclosestpointonnavmesh(level.superslashergotogroundspot, self);
 
-  if(distance2dsquared(self.origin, level.superslashergotogroundspot) < 1296)
+  if(distance2dsquared(self.origin, level.superslashergotogroundspot) < 1296) {
     self.bt.instancedata[var_0].bgoodtogo = 1;
+  }
 }
 
 walktoroof(var_0) {
-  if(isDefined(self.bt.instancedata[var_0].bgoodtogo))
+  if(isDefined(self.bt.instancedata[var_0].bgoodtogo)) {
     return anim.success;
+  }
 
   var_1 = gettime();
   var_2 = 10000;
 
-  if(var_1 > self.bt.instancedata[var_0].starttime + var_2)
+  if(var_1 > self.bt.instancedata[var_0].starttime + var_2) {
     return anim.success;
+  }
 
   if(var_1 > self.bt.instancedata[var_0].starttime + 500) {
-    if(!isDefined(self.pathgoalpos))
+    if(!isDefined(self.pathgoalpos)) {
       return anim.success;
+    }
   }
 
   self scragentsetgoalpos(self.bt.instancedata[var_0].goalpos);
@@ -246,16 +265,19 @@ stagger_init(var_0) {
 }
 
 dostagger(var_0) {
-  if(!isDefined(self._blackboard.bstaggerrequested))
+  if(!isDefined(self._blackboard.bstaggerrequested)) {
     return anim.success;
+  }
 
   var_1 = 5000;
 
-  if(gettime() > self.bt.instancedata[var_0] + var_1)
+  if(gettime() > self.bt.instancedata[var_0] + var_1) {
     return anim.success;
+  }
 
-  if(scripts\asm\asm::asm_ephemeraleventfired("staggeranim", "end"))
+  if(scripts\asm\asm::asm_ephemeraleventfired("staggeranim", "end")) {
     return anim.success;
+  }
 
   self clearpath(self.origin);
   self scragentsetgoalRadius(36);
@@ -268,17 +290,21 @@ stagger_cleanup(var_0) {
 }
 
 shouldgotoground(var_0) {
-  if(self.bt.locationstate != 0)
+  if(self.bt.locationstate != 0) {
     return anim.failure;
+  }
 
-  if(isDefined(self._blackboard.bstaggerrequested))
+  if(isDefined(self._blackboard.bstaggerrequested)) {
     return anim.success;
+  }
 
-  if(isDefined(self._blackboard.bgotogroundrequested))
+  if(isDefined(self._blackboard.bgotogroundrequested)) {
     return anim.success;
+  }
 
-  if(superslasher_isonroof())
+  if(superslasher_isonroof()) {
     return anim.success;
+  }
 
   return anim.failure;
 }
@@ -287,10 +313,11 @@ gotoground_init(var_0) {
   self._blackboard.bgroundrequested = 1;
   self.bt.locationstate = 3;
 
-  if(!isDefined(self.bt.igroundphase))
+  if(!isDefined(self.bt.igroundphase)) {
     self.bt.igroundphase = 0;
-  else
+  } else {
     self.bt.igroundphase++;
+  }
 
   scripts\aitypes\superslasher\util::ongotoground_init();
 }
@@ -323,8 +350,9 @@ ground_initbehaviors() {
   self.bt.allowsharktime = var_0 + 29000;
   scripts\aitypes\superslasher\util::onground_init();
 
-  if(isDefined(self.btrophysystem))
+  if(isDefined(self.btrophysystem)) {
     thread dotrophysystem();
+  }
 }
 
 gotoground_cleanup(var_0) {
@@ -332,32 +360,39 @@ gotoground_cleanup(var_0) {
 }
 
 isonroof(var_0) {
-  if(self.bt.locationstate == 0)
+  if(self.bt.locationstate == 0) {
     return anim.success;
+  }
 
   return anim.failure;
 }
 
 shouldtaunt(var_0) {
-  if(!isDefined(self.bmaytaunt) || !self.bmaytaunt)
+  if(!isDefined(self.bmaytaunt) || !self.bmaytaunt) {
     return anim.failure;
+  }
 
   var_1 = gettime();
 
-  if(var_1 < self.bt.allownextaction)
+  if(var_1 < self.bt.allownextaction) {
     return anim.failure;
+  }
 
-  if(var_1 < self.bt.allowtaunttime)
+  if(var_1 < self.bt.allowtaunttime) {
     return anim.failure;
+  }
 
-  if(isDefined(self._blackboard.bcommittedtoanim))
+  if(isDefined(self._blackboard.bcommittedtoanim)) {
     return anim.failure;
+  }
 
-  if(self.bt.locationstate == 2)
+  if(self.bt.locationstate == 2) {
     return anim.failure;
+  }
 
-  if(isanyplayerwithinradius(100))
+  if(isanyplayerwithinradius(100)) {
     return anim.failure;
+  }
 
   return anim.success;
 }
@@ -371,10 +406,11 @@ taunt_init(var_0) {
 taunt_setnextallowedtime() {
   var_0 = gettime();
 
-  if(self.bt.locationstate == 0)
+  if(self.bt.locationstate == 0) {
     self.bt.allowtaunttime = var_0 + 3000;
-  else
+  } else {
     self.bt.allowtaunttime = var_0 + 10000;
+  }
 
   self.bt.allownextaction = var_0 + 1000;
 }
@@ -419,17 +455,21 @@ dotauntcontinuously(var_0) {
 }
 
 shouldgroundpound(var_0) {
-  if(!superslasher_isonground())
+  if(!superslasher_isonground()) {
     return anim.failure;
+  }
 
-  if(gettime() < self.bt.allowgroundpoundtime)
+  if(gettime() < self.bt.allowgroundpoundtime) {
     return anim.failure;
+  }
 
-  if(isDefined(self._blackboard.bcommittedtoanim))
+  if(isDefined(self._blackboard.bcommittedtoanim)) {
     return anim.failure;
+  }
 
-  if(!isanyplayerwithinradius(256))
+  if(!isanyplayerwithinradius(256)) {
     return anim.failure;
+  }
 
   return anim.success;
 }
@@ -471,14 +511,17 @@ groundpound_cleanup(var_0) {
 }
 
 shouldmelee(var_0) {
-  if(!isDefined(self.bt.target))
+  if(!isDefined(self.bt.target)) {
     return anim.failure;
+  }
 
-  if(!superslasher_isonground())
+  if(!superslasher_isonground()) {
     return anim.failure;
+  }
 
-  if(isanyplayerwithinradius(128))
+  if(isanyplayerwithinradius(128)) {
     return anim.success;
+  }
 
   return anim.failure;
 }
@@ -499,10 +542,11 @@ melee_charge_init(var_0) {
 }
 
 melee_charge(var_0) {
-  if(isDefined(self._blackboard.bmoving))
+  if(isDefined(self._blackboard.bmoving)) {
     var_1 = 36864;
-  else
+  } else {
     var_1 = 20736;
+  }
 
   if(isDefined(self.bt.target) && isvalidtarget(self.bt.target)) {
     if(!isDefined(self._blackboard.bcommittedtoanim)) {
@@ -521,13 +565,15 @@ melee_charge(var_0) {
 
   var_4 = gettime();
 
-  if(var_4 > self.bt.instancedata[var_0].starttime + 200 && !isDefined(self.pathgoalpos))
+  if(var_4 > self.bt.instancedata[var_0].starttime + 200 && !isDefined(self.pathgoalpos)) {
     return anim.failure;
+  }
 
   var_5 = 5000;
 
-  if(var_4 > self.bt.instancedata[var_0].starttime + var_5)
+  if(var_4 > self.bt.instancedata[var_0].starttime + var_5) {
     return anim.failure;
+  }
 
   var_6 = 1000;
 
@@ -567,11 +613,13 @@ melee_init(var_0) {
 domelee(var_0) {
   var_1 = 8000;
 
-  if(gettime() > self.bt.instancedata[var_0].starttime + var_1)
+  if(gettime() > self.bt.instancedata[var_0].starttime + var_1) {
     return anim.failure;
+  }
 
-  if(scripts\asm\asm::asm_ephemeraleventfired("meleeanim", "end"))
+  if(scripts\asm\asm::asm_ephemeraleventfired("meleeanim", "end")) {
     return anim.success;
+  }
 
   if(isDefined(self.bt.meleetarget)) {
     var_2 = getclosestpointonnavmesh(self.bt.meleetarget.origin, self);
@@ -595,40 +643,49 @@ melee_cleanup(var_0) {
 }
 
 shouldthrowsaw(var_0) {
-  if(!isDefined(self.bmayfrisbee) || !self.bmayfrisbee)
+  if(!isDefined(self.bmayfrisbee) || !self.bmayfrisbee) {
     return anim.failure;
+  }
 
   var_1 = gettime();
 
-  if(!isDefined(self.bt.target))
+  if(!isDefined(self.bt.target)) {
     return anim.failure;
+  }
 
-  if(!superslasher_isonground())
+  if(!superslasher_isonground()) {
     return anim.failure;
+  }
 
-  if(var_1 < self.bt.allownextaction)
+  if(var_1 < self.bt.allownextaction) {
     return anim.failure;
+  }
 
-  if(var_1 < self.bt.allowthrowsawtime)
+  if(var_1 < self.bt.allowthrowsawtime) {
     return anim.failure;
+  }
 
-  if(isDefined(self._blackboard.bcommittedtoanim))
+  if(isDefined(self._blackboard.bcommittedtoanim)) {
     return anim.failure;
+  }
 
   if(self.bt.locationstate == 2) {
-    if(isanyplayerwithinradius(256))
+    if(isanyplayerwithinradius(256)) {
       return anim.failure;
+    }
 
     var_2 = anglesToForward(self.angles);
     var_3 = self.bt.target.origin - self.origin;
 
-    if(vectordot(var_2, var_3) < 0)
+    if(vectordot(var_2, var_3) < 0) {
       return anim.failure;
+    }
 
     var_4 = getclosestpointonnavmesh(self.bt.target.origin, self);
 
-    if(!_func_2AC(self _meth_84AC(), var_4))
+    if(!_func_2AC(self _meth_84AC(), var_4)) {
       return anim.failure;
+    }
   }
 
   return anim.success;
@@ -645,11 +702,13 @@ throwsaw_init(var_0) {
 dothrowsaw(var_0) {
   var_1 = 6001;
 
-  if(gettime() > self.bt.instancedata[var_0] + var_1)
+  if(gettime() > self.bt.instancedata[var_0] + var_1) {
     return anim.failure;
+  }
 
-  if(scripts\asm\asm::asm_ephemeraleventfired("throwsawanim", "end"))
+  if(scripts\asm\asm::asm_ephemeraleventfired("throwsawanim", "end")) {
     return anim.success;
+  }
 
   self clearpath(self.origin);
   self scragentsetgoalRadius(64);
@@ -659,10 +718,11 @@ dothrowsaw(var_0) {
 throwsaw_setnextallowedtime() {
   var_0 = gettime();
 
-  if(self.bt.locationstate == 0)
+  if(self.bt.locationstate == 0) {
     self.bt.allowthrowsawtime = var_0 + 9000;
-  else
+  } else {
     self.bt.allowthrowsawtime = var_0 + 8000;
+  }
 
   self.bt.allownextaction = var_0 + 1000;
 }
@@ -675,22 +735,27 @@ throwsaw_cleanup(var_0) {
 }
 
 shouldthrowsawfan(var_0) {
-  if(!superslasher_isonground())
+  if(!superslasher_isonground()) {
     return anim.failure;
+  }
 
-  if(!isDefined(self.bmaysawfan) || !self.bmaysawfan)
+  if(!isDefined(self.bmaysawfan) || !self.bmaysawfan) {
     return anim.failure;
+  }
 
   var_1 = gettime();
 
-  if(var_1 < self.bt.allownextaction)
+  if(var_1 < self.bt.allownextaction) {
     return anim.failure;
+  }
 
-  if(var_1 < self.bt.allowthrowsawfantime)
+  if(var_1 < self.bt.allowthrowsawfantime) {
     return anim.failure;
+  }
 
-  if(isDefined(self._blackboard.bcommittedtoanim))
+  if(isDefined(self._blackboard.bcommittedtoanim)) {
     return anim.failure;
+  }
 
   return anim.success;
 }
@@ -709,11 +774,13 @@ throwsawfan_init(var_0) {
 dothrowsawfan(var_0) {
   var_1 = 5000;
 
-  if(gettime() > self.bt.instancedata[var_0] + var_1)
+  if(gettime() > self.bt.instancedata[var_0] + var_1) {
     return anim.failure;
+  }
 
-  if(scripts\asm\asm::asm_ephemeraleventfired("sawfananim", "end"))
+  if(scripts\asm\asm::asm_ephemeraleventfired("sawfananim", "end")) {
     return anim.success;
+  }
 
   self clearpath(self.origin);
   self scragentsetgoalRadius(64);
@@ -727,22 +794,27 @@ throwsawfan_cleanup(var_0) {
 }
 
 shouldstomp(var_0) {
-  if(!isDefined(self.bmaystomp) || !self.bmaystomp)
+  if(!isDefined(self.bmaystomp) || !self.bmaystomp) {
     return anim.failure;
+  }
 
-  if(!superslasher_isonground())
+  if(!superslasher_isonground()) {
     return anim.failure;
+  }
 
   var_1 = gettime();
 
-  if(var_1 < self.bt.allownextaction)
+  if(var_1 < self.bt.allownextaction) {
     return anim.failure;
+  }
 
-  if(var_1 < self.bt.allowstomptime)
+  if(var_1 < self.bt.allowstomptime) {
     return anim.failure;
+  }
 
-  if(isDefined(self._blackboard.bcommittedtoanim))
+  if(isDefined(self._blackboard.bcommittedtoanim)) {
     return anim.failure;
+  }
 
   var_2 = anglesToForward(self.angles);
   var_3 = -1;
@@ -786,11 +858,13 @@ stomp_init(var_0) {
 dostomp(var_0) {
   var_1 = 15000;
 
-  if(gettime() > self.bt.instancedata[var_0] + var_1)
+  if(gettime() > self.bt.instancedata[var_0] + var_1) {
     return anim.failure;
+  }
 
-  if(scripts\asm\asm::asm_ephemeraleventfired("stompanim", "end"))
+  if(scripts\asm\asm::asm_ephemeraleventfired("stompanim", "end")) {
     return anim.success;
+  }
 
   self clearpath();
   return anim.running;
@@ -811,24 +885,29 @@ stomp_cleanup(var_0) {
 }
 
 shouldshockwave(var_0) {
-  if(!isDefined(self.bmayshockwave) || !self.bmayshockwave)
+  if(!isDefined(self.bmayshockwave) || !self.bmayshockwave) {
     return anim.failure;
+  }
 
-  if(!superslasher_isonground())
+  if(!superslasher_isonground()) {
     return anim.failure;
+  }
 
   var_1 = gettime();
 
-  if(var_1 < self.bt.allownextaction)
+  if(var_1 < self.bt.allownextaction) {
     return anim.failure;
+  }
 
-  if(isDefined(self._blackboard.bcommittedtoanim))
+  if(isDefined(self._blackboard.bcommittedtoanim)) {
     return anim.failure;
+  }
 
-  if(isDefined(self.bshockwaverequested))
+  if(isDefined(self.bshockwaverequested)) {
     return anim.success;
-  else
+  } else {
     return anim.failure;
+  }
 }
 
 shockwave_init(var_0) {
@@ -840,11 +919,13 @@ shockwave_init(var_0) {
 doshockwave(var_0) {
   var_1 = 12000;
 
-  if(gettime() > self.bt.instancedata[var_0] + var_1)
+  if(gettime() > self.bt.instancedata[var_0] + var_1) {
     return anim.failure;
+  }
 
-  if(scripts\asm\asm::asm_ephemeraleventfired("shockwaveanim", "end"))
+  if(scripts\asm\asm::asm_ephemeraleventfired("shockwaveanim", "end")) {
     return anim.success;
+  }
 
   return anim.running;
 }
@@ -862,14 +943,17 @@ shockwave_cleanup(var_0) {
 }
 
 shoulddowires(var_0) {
-  if(!isDefined(self.bmaywire) || !self.bmaywire)
+  if(!isDefined(self.bmaywire) || !self.bmaywire) {
     return anim.failure;
+  }
 
-  if(!superslasher_isonroof())
+  if(!superslasher_isonroof()) {
     return anim.failure;
+  }
 
-  if(isDefined(self._blackboard.bwired))
+  if(isDefined(self._blackboard.bwired)) {
     return anim.failure;
+  }
 
   return anim.success;
 }
@@ -882,11 +966,13 @@ wires_init(var_0) {
 dowires(var_0) {
   var_1 = 5000;
 
-  if(gettime() > self.bt.instancedata[var_0] + var_1)
+  if(gettime() > self.bt.instancedata[var_0] + var_1) {
     return anim.failure;
+  }
 
-  if(scripts\asm\asm::asm_ephemeraleventfired("wiresanim", "end"))
+  if(scripts\asm\asm::asm_ephemeraleventfired("wiresanim", "end")) {
     return anim.success;
+  }
 
   return anim.running;
 }
@@ -902,22 +988,27 @@ wires_stop(var_0) {
 }
 
 shoulddosharks(var_0) {
-  if(!isDefined(self.bmayshark) || !self.bmayshark)
+  if(!isDefined(self.bmayshark) || !self.bmayshark) {
     return anim.failure;
+  }
 
-  if(!superslasher_isonground())
+  if(!superslasher_isonground()) {
     return anim.failure;
+  }
 
   var_1 = gettime();
 
-  if(var_1 < self.bt.allownextaction)
+  if(var_1 < self.bt.allownextaction) {
     return anim.failure;
+  }
 
-  if(var_1 < self.bt.allowsharktime)
+  if(var_1 < self.bt.allowsharktime) {
     return anim.failure;
+  }
 
-  if(isDefined(self._blackboard.bcommittedtoanim))
+  if(isDefined(self._blackboard.bcommittedtoanim)) {
     return anim.failure;
+  }
 
   return anim.success;
 }
@@ -930,11 +1021,13 @@ sharks_init(var_0) {
 dosharks(var_0) {
   var_1 = 15000;
 
-  if(gettime() > self.bt.instancedata[var_0] + var_1)
+  if(gettime() > self.bt.instancedata[var_0] + var_1) {
     return anim.failure;
+  }
 
-  if(scripts\asm\asm::asm_ephemeraleventfired("sharksanim", "end"))
+  if(scripts\asm\asm::asm_ephemeraleventfired("sharksanim", "end")) {
     return anim.success;
+  }
 
   self clearpath();
   return anim.running;
@@ -953,22 +1046,27 @@ sharks_cleanup(var_0) {
 }
 
 shouldjumpmove(var_0) {
-  if(!isDefined(self.bmayjumpattack) || !self.bmayjumpattack)
+  if(!isDefined(self.bmayjumpattack) || !self.bmayjumpattack) {
     return anim.failure;
+  }
 
-  if(!superslasher_isonground())
+  if(!superslasher_isonground()) {
     return anim.failure;
+  }
 
   var_1 = gettime();
 
-  if(var_1 < self.bt.allownextaction)
+  if(var_1 < self.bt.allownextaction) {
     return anim.failure;
+  }
 
-  if(var_1 < self.bt.allowgroundjumptime)
+  if(var_1 < self.bt.allowgroundjumptime) {
     return anim.failure;
+  }
 
-  if(isDefined(self._blackboard.bcommittedtoanim))
+  if(isDefined(self._blackboard.bcommittedtoanim)) {
     return anim.failure;
+  }
 
   var_2 = 147456;
 
@@ -978,8 +1076,9 @@ shouldjumpmove(var_0) {
     if(distance2dsquared(self.origin, var_3) >= var_2) {
       var_4 = self _meth_84AC();
 
-      if(_func_2AC(var_4, var_3, self))
+      if(_func_2AC(var_4, var_3, self)) {
         return anim.success;
+      }
     }
   }
 
@@ -996,11 +1095,13 @@ jumpmove_init(var_0) {
 dojumpmove(var_0) {
   var_1 = 4000;
 
-  if(gettime() > self.bt.instancedata[var_0] + var_1)
+  if(gettime() > self.bt.instancedata[var_0] + var_1) {
     return anim.failure;
+  }
 
-  if(scripts\asm\asm::asm_ephemeraleventfired("jumpmoveanim", "end"))
+  if(scripts\asm\asm::asm_ephemeraleventfired("jumpmoveanim", "end")) {
     return anim.success;
+  }
 
   return anim.running;
 }
@@ -1044,8 +1145,9 @@ isanyplayerwithinradius(var_0) {
 
   foreach(var_3 in level.players) {
     if(isvalidtarget(var_3)) {
-      if(distance2dsquared(self.origin, var_3.origin) < var_1)
+      if(distance2dsquared(self.origin, var_3.origin) < var_1) {
         return 1;
+      }
     }
   }
 
@@ -1064,8 +1166,9 @@ dotrophysystem() {
   }
 
   for(;;) {
-    for(var_1 = 0; var_1 < var_0; var_1++)
+    for(var_1 = 0; var_1 < var_0; var_1++) {
       updateshield(self.shields[var_1]);
+    }
 
     self.lastdamagedir = [];
     wait 0.05;
@@ -1127,8 +1230,9 @@ updateshield(var_0) {
 
   var_9 = 3000;
 
-  if(var_2 - var_0.lastdamagetime > var_9)
+  if(var_2 - var_0.lastdamagetime > var_9) {
     var_0.targetangle = var_0.midrange;
+  }
 
   var_10 = angleclamp180(var_0.targetangle - var_0.curangle);
   var_10 = clamp(var_10, -1 * var_1, var_1);
@@ -1144,8 +1248,9 @@ shieldcleanup() {
   if(isDefined(self.shields)) {
     self notify("killshield");
 
-    foreach(var_1 in self.shields)
-    var_1 delete();
+    foreach(var_1 in self.shields) {
+      var_1 delete();
+    }
 
     self.shields = undefined;
   }

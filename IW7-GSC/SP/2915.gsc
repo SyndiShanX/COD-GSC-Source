@@ -18,11 +18,13 @@ _id_9768() {
 }
 
 _id_13901() {
-  if(isDefined(self._id_54CA) && self._id_54CA)
+  if(isDefined(self._id_54CA) && self._id_54CA) {
     return 1;
+  }
 
-  if(!isDefined(self.damagelocation))
+  if(!isDefined(self.damagelocation)) {
     return 0;
+  }
 
   return self.damagelocation == "helmet" || self.damagelocation == "head" || self.damagelocation == "neck";
 }
@@ -30,12 +32,14 @@ _id_13901() {
 _id_DEBD(var_0, var_1, var_2, var_3) {
   var_4 = self;
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     var_4 = self.owner;
+  }
 
   if(!isPlayer(var_4)) {
-    if(isDefined(level._id_D5ED) && level._id_D5ED)
+    if(isDefined(level._id_D5ED) && level._id_D5ED) {
       var_4 = level.players[randomint(level.players.size)];
+    }
   }
 
   if(!isPlayer(var_4)) {
@@ -47,42 +51,50 @@ _id_DEBD(var_0, var_1, var_2, var_3) {
   var_4._id_10E53["kills"]++;
 
   if(isDefined(var_0)) {
-    if(var_0 _id_13901())
+    if(var_0 _id_13901()) {
       var_4._id_10E53["headshots"]++;
+    }
 
-    if(isDefined(var_0._id_A4A3))
+    if(isDefined(var_0._id_A4A3)) {
       var_4._id_10E53["kills_juggernaut"]++;
+    }
 
-    if(isDefined(var_0._id_9F45))
+    if(isDefined(var_0._id_9F45)) {
       var_4._id_10E53["kills_sentry"]++;
+    }
 
     if(var_0.code_classname == "script_vehicle") {
       var_4._id_10E53["kills_vehicle"]++;
 
       if(isDefined(var_0._id_E4FB)) {
         foreach(var_6 in var_0._id_E4FB) {
-          if(isDefined(var_6))
+          if(isDefined(var_6)) {
             var_4 _id_DEBD(var_6, var_1, var_2, var_3);
+          }
         }
       }
     }
   }
 
-  if(_id_3B9F(var_1))
+  if(_id_3B9F(var_1)) {
     var_4._id_10E53["kills_explosives"]++;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = var_4 getcurrentweapon();
+  }
 
   if(issubstr(tolower(var_1), "melee")) {
     var_4._id_10E53["kills_melee"]++;
 
-    if(weaponinventorytype(var_2) == "primary")
+    if(weaponinventorytype(var_2) == "primary") {
       return;
+    }
   }
 
-  if(var_4 _id_9C49(var_2))
+  if(var_4 _id_9C49(var_2)) {
     var_4 _id_DEC5(var_2);
+  }
 
   var_4._id_10E53["weapon"][var_2].kills++;
 }
@@ -98,8 +110,9 @@ _id_DED8() {
   self._id_10E53["shots_hit"]++;
   var_0 = self getcurrentweapon();
 
-  if(_id_9C49(var_0))
+  if(_id_9C49(var_0)) {
     _id_DEC5(var_0);
+  }
 
   self._id_10E53["weapon"][var_0]._id_FF06++;
   waittillframeend;
@@ -118,16 +131,18 @@ _id_FF05() {
     }
     self._id_10E53["shots_fired"]++;
 
-    if(_id_9C49(var_0))
+    if(_id_9C49(var_0)) {
       _id_DEC5(var_0);
+    }
 
     self._id_10E53["weapon"][var_0]._id_FF04++;
   }
 }
 
 _id_9C49(var_0) {
-  if(isDefined(self._id_10E53["weapon"][var_0]))
+  if(isDefined(self._id_10E53["weapon"][var_0])) {
     return 0;
+  }
 
   return 1;
 }
@@ -172,8 +187,9 @@ _id_F5B2() {
     foreach(var_5 in var_3) {
       var_5.accuracy = 0;
 
-      if(var_5._id_FF04 > 0)
+      if(var_5._id_FF04 > 0) {
         var_5.accuracy = int(var_5._id_FF06 / var_5._id_FF04 * 100);
+      }
     }
 
     for(var_7 = 1; var_7 < 6; var_7++) {
@@ -201,15 +217,17 @@ _id_F5B2() {
 _id_7867(var_0) {
   var_1 = [];
 
-  for(var_2 = 0; var_2 < var_0; var_2++)
+  for(var_2 = 0; var_2 < var_0; var_2++) {
     var_1[var_2] = _id_7D73(var_1);
+  }
 
   return var_1;
 }
 
 _id_7D73(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = [];
+  }
 
   var_1 = undefined;
 
@@ -231,8 +249,9 @@ _id_7D73(var_0) {
       continue;
     }
 
-    if(var_3.kills > var_1.kills)
+    if(var_3.kills > var_1.kills) {
       var_1 = var_3;
+    }
   }
 
   return var_1;

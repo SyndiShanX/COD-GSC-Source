@@ -30,8 +30,9 @@ init_player_achievement(var_0) {
     }
   }
 
-  if(isDefined(var_0.achievement_registration_func))
+  if(isDefined(var_0.achievement_registration_func)) {
     [[var_0.achievement_registration_func]]();
+  }
 }
 
 register_default_achievements() {
@@ -100,26 +101,29 @@ default_init(var_0, var_1, var_2) {
 }
 
 update_achievement_arcade(var_0, var_1, var_2) {
-  if(level.arcade_games_progress.size <= 0 || !scripts\engine\utility::array_contains(level.arcade_games_progress, var_1))
+  if(level.arcade_games_progress.size <= 0 || !scripts\engine\utility::array_contains(level.arcade_games_progress, var_1)) {
     var_0 update_achievement_braindead(var_0, 1, var_2);
-  else {
+  } else {
     level.arcade_games_progress = scripts\engine\utility::array_remove(level.arcade_games_progress, var_1);
 
-    foreach(var_0 in level.players)
-    var_0 update_achievement("INSERT_COIN", 1);
+    foreach(var_0 in level.players) {
+      var_0 update_achievement("INSERT_COIN", 1);
+    }
 
     var_0 update_achievement_braindead(var_0, 1, var_2);
   }
 }
 
 update_achievement_braindead(var_0, var_1, var_2) {
-  if(!isDefined(var_0.number_of_games_played))
+  if(!isDefined(var_0.number_of_games_played)) {
     var_0.number_of_games_played = 1;
-  else
+  } else {
     var_0.number_of_games_played++;
+  }
 
-  if(var_0.number_of_games_played >= 30 && var_2 >= 10)
+  if(var_0.number_of_games_played >= 30 && var_2 >= 10) {
     var_0 update_achievement("BRAIN_DEAD", 30);
+  }
 }
 
 default_should_update(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
@@ -173,6 +177,7 @@ update_achievement(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
 }
 
 update_achievement_all_players(var_0, var_1) {
-  foreach(var_3 in level.players)
-  var_3 update_achievement(var_0, var_1);
+  foreach(var_3 in level.players) {
+    var_3 update_achievement(var_0, var_1);
+  }
 }

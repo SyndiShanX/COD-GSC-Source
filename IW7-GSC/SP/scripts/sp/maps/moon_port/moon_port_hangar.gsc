@@ -82,8 +82,9 @@ _id_8A63() {
   level.player _meth_81DE(65, 2);
   thread _id_8A61();
 
-  foreach(var_1 in level.allies)
-  var_1 scripts\sp\utility::_id_F3B5("g");
+  foreach(var_1 in level.allies) {
+    var_1 scripts\sp\utility::_id_F3B5("g");
+  }
 
   scripts\engine\utility::delaythread(4, scripts\engine\utility::flag_set, "player_indoor_p2");
   scripts\sp\maps\moon_port\moon_port_util::_id_15F6("hangar_halls_allies_1");
@@ -97,8 +98,9 @@ _id_8A65() {
   var_0 waittill("trigger");
   var_2 = createnavobstaclebybounds(var_1.origin, (55, 55, 55), (0, 0, 0), "axis", "allies");
 
-  while(level.player istouching(var_0))
+  while(level.player istouching(var_0)) {
     scripts\engine\utility::waitframe();
+  }
 
   destroynavobstacle(var_2);
 }
@@ -115,13 +117,15 @@ _id_8A5C() {
   var_2 scripts\sp\anim::_id_1EC3(var_1, "broken_airlock_push");
   var_3 = scripts\engine\utility::getStruct("buddy_door_animnode", "targetname");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 notify("stop_idle");
+  }
 
   var_3 = scripts\engine\utility::getStruct("infil_airlock_animnode", "targetname");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 notify("stop_idle");
+  }
 
   var_2 = getEnt("broken_airlock_animnode", "targetname");
   level.allies["salter"] thread _id_30EF(var_2, "broken_airlock_xo_enter", "broken_airlock_xo_push_loop", "xo");
@@ -195,8 +199,9 @@ _id_728C() {
   scripts\engine\utility::array_combine(var_0, getEntArray("script_vehicle_capitalship_destroyer_un_cheap", "classname"));
   scripts\engine\utility::array_combine(var_0, getEntArray("script_vehicle_capitalship_retribution_cheap", "classname"));
 
-  foreach(var_2 in var_0)
-  var_2 _id_0BA9::_id_397B();
+  foreach(var_2 in var_0) {
+    var_2 _id_0BA9::_id_397B();
+  }
 }
 
 #using_animtree("player");
@@ -219,13 +224,15 @@ _id_30F1(var_0, var_1, var_2, var_3) {
   scripts\sp\anim::_id_1F27([var_1, var_2], "broken_airlock_push", 0.0);
   level.player._id_8DDB = var_2;
 
-  if(level.player scripts\engine\utility::is_player_gamepad_enabled())
+  if(level.player scripts\engine\utility::is_player_gamepad_enabled()) {
     scripts\sp\utility::_id_56BA("hint_airlock_mash");
-  else
+  } else {
     scripts\sp\utility::_id_56BA("hint_airlock_mash_pc");
+  }
 
-  while(!self useButtonPressed())
+  while(!self useButtonPressed()) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_set("hangar_airlock_push_start");
   level.player notify("reached_airlock");
@@ -246,8 +253,9 @@ _id_30F1(var_0, var_1, var_2, var_3) {
   scripts\engine\utility::delaythread(var_6, scripts\sp\anim::_id_1F27, [var_2], "broken_airlock_push", 1.0);
   var_0 thread scripts\sp\anim::_id_1F2C(var_4, "broken_airlock_push");
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     scripts\engine\utility::delaythread(7.25, scripts\sp\specialist_MAYBE::_id_915F);
+  }
 
   wait(var_5 - var_6);
   level.player _meth_8573("nopack_nohelmet_shadow");
@@ -359,8 +367,9 @@ _id_8A1F() {
   scripts\engine\utility::flag_wait("hangar_at_armory");
   _id_223B(var_1);
 
-  if(isDefined(level.player.helmet))
+  if(isDefined(level.player.helmet)) {
     level.player.helmet delete();
+  }
 
   thread _id_8A1D();
   thread _id_21E1();
@@ -422,8 +431,9 @@ _id_B6AF() {
 }
 
 _id_8A1D(var_0) {
-  if(!scripts\engine\utility::flag("hangar_player_in_armory"))
+  if(!scripts\engine\utility::flag("hangar_player_in_armory")) {
     level.allies["mdf1"] thread _id_8A1E();
+  }
 
   scripts\engine\utility::flag_wait("armory_intro_done");
   scripts\engine\utility::flag_wait("armory_exit_active");
@@ -438,26 +448,30 @@ _id_8A1D(var_0) {
 _id_21E1() {
   var_0 = getEnt("armory_door_blocker", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 notsolid();
+  }
 
   level waittill("armory_door_open");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 solid();
+  }
 
   wait 5.0;
   var_1 = getEntArray("generic_door", "script_noteworthy");
 
   foreach(var_3 in var_1) {
-    if(isDefined(var_3.script_parameters) && var_3.script_parameters == "armory")
+    if(isDefined(var_3.script_parameters) && var_3.script_parameters == "armory") {
       var_3 rotateYaw(90, 0.8, 0.1, 0.1);
+    }
   }
 
   wait 0.5;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 _id_8A1E() {
@@ -475,17 +489,20 @@ _id_221B(var_0) {
   var_0 scripts\sp\anim::_id_1F35(self, "armory_enter");
   var_0 thread scripts\sp\anim::_id_1EEA(self, "armory_mco_idle", "armory_mco_idle_end");
 
-  if(!scripts\engine\utility::flag("armory_exit_active"))
+  if(!scripts\engine\utility::flag("armory_exit_active")) {
     scripts\engine\utility::flag_waitopen("armory_action_active");
+  }
 
-  if(scripts\engine\utility::flag("player_grabbed_emps"))
+  if(scripts\engine\utility::flag("player_grabbed_emps")) {
     var_1 = 1;
-  else
+  } else {
     var_1 = 0;
+  }
 
   for(;;) {
-    if(!scripts\engine\utility::flag("armory_exit_active"))
+    if(!scripts\engine\utility::flag("armory_exit_active")) {
       scripts\engine\utility::flag_wait("armory_action_active");
+    }
 
     if(!scripts\engine\utility::flag("armory_exit_active") && !scripts\engine\utility::flag("armory_intro_done")) {
       if(var_1 == 0 && scripts\engine\utility::flag("player_grabbed_emps") && !scripts\engine\utility::flag("armory_guard_interaction")) {
@@ -540,8 +557,9 @@ _id_223A(var_0) {
   var_0 scripts\sp\anim::_id_1F35(self, "armory_enter");
   var_0 thread scripts\sp\anim::_id_1EEA(self, "armory_xo_idle", "armory_xo_idle_end");
 
-  if(!scripts\engine\utility::flag("armory_exit_active"))
+  if(!scripts\engine\utility::flag("armory_exit_active")) {
     scripts\engine\utility::flag_waitopen("armory_action_active");
+  }
 
   while(!scripts\engine\utility::flag("armory_exit_active")) {
     scripts\engine\utility::flag_wait_any("armory_action_active", "armory_exit_active");
@@ -582,15 +600,17 @@ _id_21EE(var_0) {
   var_0 scripts\sp\anim::_id_1F35(self, "armory_enter");
   var_0 thread scripts\sp\anim::_id_1EEA(self, "armory_c6i_idle", "armory_c6i_idle_end");
 
-  if(!scripts\engine\utility::flag("armory_exit_active"))
+  if(!scripts\engine\utility::flag("armory_exit_active")) {
     scripts\engine\utility::flag_waitopen("armory_action_active");
+  }
 
   thread _id_116E0();
   var_1 = 0;
 
   for(;;) {
-    if(!scripts\engine\utility::flag("armory_exit_active"))
+    if(!scripts\engine\utility::flag("armory_exit_active")) {
       scripts\engine\utility::flag_wait("armory_action_active");
+    }
 
     if(!scripts\engine\utility::flag("armory_exit_active")) {
       if(var_1 == 0 && scripts\engine\utility::flag("player_used_terminal")) {
@@ -657,16 +677,18 @@ _id_2222() {
 _id_222C() {
   var_0 = getEntArray("armory_emp_glow", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 scripts\sp\utility::_id_9196(3, 1, 1, "default");
+  foreach(var_2 in var_0) {
+    var_2 scripts\sp\utility::_id_9196(3, 1, 1, "default");
+  }
 
   wait 1.0;
   var_4 = var_0[0];
   var_5 = scripts\engine\utility::getStructArray("emp_pickup", "script_noteworthy");
 
   foreach(var_7 in var_5) {
-    if(isDefined(var_7.script_linkname) && issubstr(var_7.script_linkname, "armory_emp_interact"))
+    if(isDefined(var_7.script_linkname) && issubstr(var_7.script_linkname, "armory_emp_interact")) {
       var_4 = var_7._id_99F7;
+    }
   }
 
   if(var_4 == var_0[0]) {
@@ -684,8 +706,9 @@ _id_222C() {
 _id_83E3(var_0) {
   self waittill("trigger");
 
-  foreach(var_2 in var_0)
-  var_2 scripts\sp\utility::_id_9193();
+  foreach(var_2 in var_0) {
+    var_2 scripts\sp\utility::_id_9193();
+  }
 }
 
 _id_83E7() {
@@ -728,22 +751,25 @@ _id_222A() {
             scripts\engine\utility::flag_set("player_grabbed_lmg");
           }
 
-          if(var_4 && var_5)
+          if(var_4 && var_5) {
             scripts\engine\utility::flag_set("player_grabbed_weapons");
+          }
         }
       }
     } else if(var_6 == "picked_up_equipment") {
       var_2 = level.player scripts\sp\utility::_id_7BD6();
       var_3 = level.player scripts\sp\utility::_id_7CAF();
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         var_1 = [var_2];
+      }
 
       if(isDefined(var_3)) {
-        if(isDefined(var_1))
+        if(isDefined(var_1)) {
           var_1 = scripts\engine\utility::array_add(var_1, var_3);
-        else
+        } else {
           var_1 = [var_3];
+        }
       }
 
       if(isDefined(var_1) && scripts\engine\utility::array_contains(var_1, "emp")) {
@@ -753,8 +779,9 @@ _id_222A() {
       }
     }
 
-    if(scripts\engine\utility::flag("player_grabbed_weapons") && scripts\engine\utility::flag("player_grabbed_emps"))
+    if(scripts\engine\utility::flag("player_grabbed_weapons") && scripts\engine\utility::flag("player_grabbed_emps")) {
       scripts\engine\utility::flag_set("armory_exit_active");
+    }
 
     scripts\engine\utility::flag_set("armory_action_active");
     scripts\engine\utility::waitframe();
@@ -776,16 +803,18 @@ _id_222B(var_0) {
       wait(var_2[var_1] + randomfloatrange(0, 2));
       var_1 = var_1 + 1;
 
-      if(var_1 >= var_2.size)
+      if(var_1 >= var_2.size) {
         var_1 = var_2.size - 1;
+      }
     }
 
     if(_id_8AA3(var_0)) {
       wait(var_2[var_1] + randomfloatrange(0, 2));
       var_1 = var_1 + 1;
 
-      if(var_1 >= var_2.size)
+      if(var_1 >= var_2.size) {
         var_1 = var_2.size - 1;
+      }
     }
   }
 }
@@ -793,8 +822,9 @@ _id_222B(var_0) {
 _id_8AA4(var_0) {
   scripts\engine\utility::flag_waitopen("armory_action_active");
 
-  if(scripts\engine\utility::flag("player_grabbed_shotgun") && scripts\engine\utility::flag("player_grabbed_lmg"))
+  if(scripts\engine\utility::flag("player_grabbed_shotgun") && scripts\engine\utility::flag("player_grabbed_lmg")) {
     return 0;
+  }
 
   scripts\engine\utility::flag_set("armory_action_active");
   var_0 notify("armory_xo_idle_end");
@@ -814,8 +844,9 @@ _id_8AA3(var_0) {
   scripts\engine\utility::flag_waitopen("armory_action_active");
   scripts\engine\utility::waitframe();
 
-  if(scripts\engine\utility::flag("player_grabbed_emps"))
+  if(scripts\engine\utility::flag("player_grabbed_emps")) {
     return 0;
+  }
 
   scripts\engine\utility::flag_set("armory_action_active");
   var_0 notify("armory_mco_idle_end");
@@ -856,11 +887,13 @@ _id_8A2F() {
 }
 
 _id_EAFC() {
-  for(var_0 = scripts\sp\utility::_id_7951(level.player.origin, level.player.angles, level.allies["salter"].origin); var_0 <= 0.2; var_0 = scripts\sp\utility::_id_7951(level.player.origin, level.player.angles, level.allies["salter"].origin))
+  for(var_0 = scripts\sp\utility::_id_7951(level.player.origin, level.player.angles, level.allies["salter"].origin); var_0 <= 0.2; var_0 = scripts\sp\utility::_id_7951(level.player.origin, level.player.angles, level.allies["salter"].origin)) {
     scripts\engine\utility::waitframe();
+  }
 
-  if(isDefined(level._id_EADC))
+  if(isDefined(level._id_EADC)) {
     level._id_EADC hide();
+  }
 
   level.allies["salter"] thread scripts\sp\utility::_id_19FA("iw7_m4", "iw7_m8+m8scope_sp", 1024, 1);
 }
@@ -883,8 +916,9 @@ _id_8A2D() {
   scripts\sp\utility::_id_CF8D();
   thread _id_618A();
 
-  while(scripts\sp\utility::_id_77DB("hangar_wave_1") > 5 && scripts\engine\utility::flag("hangar_player_at_entrance") && !scripts\engine\utility::flag("hangar_player_rush_wave_1"))
+  while(scripts\sp\utility::_id_77DB("hangar_wave_1") > 5 && scripts\engine\utility::flag("hangar_player_at_entrance") && !scripts\engine\utility::flag("hangar_player_rush_wave_1")) {
     wait 0.2;
+  }
 
   scripts\sp\maps\moon_port\moon_port_util::_id_F293("hangar_wave_1", "goalvol_second_enemy_front");
   wait 1;
@@ -892,8 +926,9 @@ _id_8A2D() {
   scripts\engine\utility::delaythread(4.5, scripts\sp\maps\moon_port\moon_port_util::_id_F293, "hangar_wave_1_top", "goalvol_first_enemy_balcony_backroom");
   wait 3;
 
-  while(scripts\sp\utility::_id_77DB("hangar_wave_1") > 4 && !scripts\engine\utility::flag("hangar_first_full_retreat"))
+  while(scripts\sp\utility::_id_77DB("hangar_wave_1") > 4 && !scripts\engine\utility::flag("hangar_first_full_retreat")) {
     wait 0.2;
+  }
 
   scripts\sp\maps\moon_port\moon_port_util::_id_F293("hangar_wave_1", "goalvol_third_enemy_front");
   var_1 = scripts\sp\maps\moon_port\moon_port_concourse::_id_78AE();
@@ -914,8 +949,9 @@ _id_8A2D() {
   var_2 = scripts\engine\utility::array_remove_array(var_2, var_5);
   var_6 = getEnt("goalvol_third_enemy_front", "targetname");
 
-  foreach(var_8 in var_2)
-  var_8 _meth_82F1(var_6);
+  foreach(var_8 in var_2) {
+    var_8 _meth_82F1(var_6);
+  }
 
   var_10 = getEnt("goalvol_first_enemy_balcony_backroom", "targetname");
   var_6 = getEnt("goalvol_second_enemy_balcony_backroom_1", "targetname");
@@ -962,8 +998,9 @@ _id_8A2D() {
     var_15 = var_14 scripts\sp\utility::_id_77E3("axis");
 
     if(var_15.size <= 4) {
-      foreach(var_8 in var_15)
-      var_8 _meth_82F1(var_6);
+      foreach(var_8 in var_15) {
+        var_8 _meth_82F1(var_6);
+      }
 
       break;
     }
@@ -971,20 +1008,23 @@ _id_8A2D() {
     wait 0.5;
   }
 
-  if(scripts\engine\utility::flag("hangar_player_pushing_on_control_room"))
+  if(scripts\engine\utility::flag("hangar_player_pushing_on_control_room")) {
     setthreatbias("axis", "player", 1000);
+  }
 
   level notify("hangar_skip_truck_front_push");
   var_18 = getEnt("hangar_allies_push_final", "targetname");
   wait 8;
 
-  if(!scripts\engine\utility::flag("hangar_doors_open"))
+  if(!scripts\engine\utility::flag("hangar_doors_open")) {
     scripts\sp\utility::_id_15F5("hangar_allies_push_final");
+  }
 
   var_19 = getnodearray("hangar_node_kill", "script_noteworthy");
 
-  foreach(var_21 in var_19)
-  var_21 _meth_80AC();
+  foreach(var_21 in var_19) {
+    var_21 _meth_80AC();
+  }
 
   scripts\engine\utility::flag_wait("hangar_doors_open");
   thread _id_8A31();
@@ -1031,8 +1071,9 @@ _id_8A3A(var_0) {
 
   thread _id_0B1E::_id_59BE(var_0);
 
-  if(var_0 == "hangar_peek_door_2")
+  if(var_0 == "hangar_peek_door_2") {
     thread _id_59D0(var_0);
+  }
 
   level waittill(var_0 + "door_peek_start");
   level.allies["salter"] scripts\engine\utility::delaythread(1, scripts\sp\utility::_id_10346, "moon_slt_useagrenadereyes");
@@ -1083,8 +1124,9 @@ _id_59D0(var_0) {
   var_1 = getcorpsearray();
 
   foreach(var_3 in var_1) {
-    if(distance(var_3.origin, level._id_5A23[var_0]._id_5A2A.origin) < 100)
+    if(distance(var_3.origin, level._id_5A23[var_0]._id_5A2A.origin) < 100) {
       var_3 delete();
+    }
   }
 
   scripts\engine\utility::waitframe();
@@ -1105,14 +1147,16 @@ _id_D053() {
   _id_0B1E::_id_59D9("hangar_peek_door_2", 0.5);
   var_2 = getaiarray("allies");
 
-  foreach(var_4 in var_2)
-  var_4 scripts\sp\utility::_id_51E1("cqb");
+  foreach(var_4 in var_2) {
+    var_4 scripts\sp\utility::_id_51E1("cqb");
+  }
 
   wait 5.5;
   var_2 = scripts\sp\utility::array_removedeadvehicles(var_2);
 
-  foreach(var_4 in var_2)
-  var_4 scripts\sp\utility::_id_4145();
+  foreach(var_4 in var_2) {
+    var_4 scripts\sp\utility::_id_4145();
+  }
 }
 
 _id_11626(var_0) {
@@ -1123,20 +1167,23 @@ _id_11626(var_0) {
   level.allies["eth3n"] _meth_83B9(var_1[2].origin, var_1[2].angles);
   var_2 = getaiarray("allies");
 
-  foreach(var_4 in var_2)
-  var_4 scripts\sp\utility::_id_51E1("cqb");
+  foreach(var_4 in var_2) {
+    var_4 scripts\sp\utility::_id_51E1("cqb");
+  }
 
   wait 5.5;
 
-  foreach(var_4 in var_2)
-  var_4 scripts\sp\utility::_id_4145();
+  foreach(var_4 in var_2) {
+    var_4 scripts\sp\utility::_id_4145();
+  }
 }
 
 _id_8A52() {
   self endon("death");
 
-  if(scripts\common\trace::ray_trace_passed(level.player getEye(), self getEye()))
+  if(scripts\common\trace::ray_trace_passed(level.player getEye(), self getEye())) {
     wait 5.0;
+  }
 
   var_0 = randomintrange(5, 10);
 
@@ -1146,8 +1193,9 @@ _id_8A52() {
       continue;
     }
 
-    if(isDefined(self._id_B14F) && self._id_B14F)
+    if(isDefined(self._id_B14F) && self._id_B14F) {
       scripts\sp\utility::_id_1101B();
+    }
 
     self _meth_81D0();
   }
@@ -1159,8 +1207,9 @@ _id_618A() {
   scripts\engine\utility::flag_wait("hangar_initial_dialogue_done");
   level.allies["salter"] scripts\sp\utility::_id_10346("moon_slt_botsonthelowerd");
 
-  if(!isDefined(level.player.melee))
+  if(!isDefined(level.player.melee)) {
     scripts\sp\utility::_id_56BE("hint_emp_tutorial", 5);
+  }
 }
 
 _id_615C() {
@@ -1170,8 +1219,9 @@ _id_615C() {
 _id_618C() {
   var_0 = scripts\sp\utility::_id_77DA("hangar_wave_1");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_613F();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_613F();
+  }
 
   level waittill("enemy_EMPd");
   scripts\engine\utility::flag_set("hangar_emps_used");
@@ -1185,8 +1235,9 @@ _id_613F() {
   self endon("death");
 
   for(;;) {
-    if(isDefined(self._id_9DD2) && self._id_9DD2)
+    if(isDefined(self._id_9DD2) && self._id_9DD2) {
       level notify("enemy_EMPd");
+    }
 
     wait 0.1;
   }
@@ -1245,8 +1296,9 @@ _id_8A0F() {
 _id_8AC4() {
   scripts\engine\utility::flag_wait("hangar_spawn_control_room_interior");
 
-  while(getaicount("all") > 20)
+  while(getaicount("all") > 20) {
     wait 0.5;
+  }
 
   scripts\sp\utility::_id_15F3("hangar_control_room_enemies_interior");
   scripts\engine\utility::flag_wait("hangar_spawn_control_room_exterior");
@@ -1258,8 +1310,9 @@ _id_8A31() {
   var_0 = getaiarray("axis");
   var_1 = getEnt("goalvol_hangar_control_room_inner", "targetname");
 
-  foreach(var_3 in var_0)
-  var_3 _meth_82F1(var_1);
+  foreach(var_3 in var_0) {
+    var_3 _meth_82F1(var_1);
+  }
 
   wait 1;
 }
@@ -1316,8 +1369,9 @@ _id_8A2B() {}
 _id_8A2A() {
   var_0 = getEnt("hangar_allies_push_final", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
   _id_8A2B();
 }
@@ -1348,8 +1402,9 @@ _id_8A4A() {
   thread _id_8A49();
   var_3 = getEntArray("hangar_control_room_extra_mdf", "targetname");
 
-  foreach(var_5 in var_3)
-  var_5 scripts\sp\utility::_id_10619();
+  foreach(var_5 in var_3) {
+    var_5 scripts\sp\utility::_id_10619();
+  }
 
   thread _id_A1FD();
   scripts\engine\utility::flag_wait("hangar_player_in_control_room");
@@ -1366,8 +1421,9 @@ _id_8A4A() {
   level.allies["marineCO"] thread _id_F0D9(var_7, var_8);
   var_3 = getEntArray("hangar_control_room_extra_mdf", "targetname");
 
-  foreach(var_5 in var_3)
-  var_5 scripts\sp\utility::_id_10619();
+  foreach(var_5 in var_3) {
+    var_5 scripts\sp\utility::_id_10619();
+  }
 
   level.doors["hangar_door"] waittill("player_at_door");
   wait 0.5;
@@ -1379,8 +1435,9 @@ _id_8A4A() {
   var_12 = getEnt("hangar_elevator", "targetname");
   var_13 = getEntArray("hangar_elevator_wheels", "targetname");
 
-  foreach(var_15 in var_13)
-  var_15 linkTo(var_12);
+  foreach(var_15 in var_13) {
+    var_15 linkTo(var_12);
+  }
 
   level.allies["eth3n"] linkTo(var_12);
   level.allies["salter"] linkTo(var_12);
@@ -1422,8 +1479,9 @@ _id_8A4A() {
   wait 0.1;
   var_25 = getEnt("hangar_window_blocker", "targetname");
 
-  if(isDefined(var_25))
+  if(isDefined(var_25)) {
     var_25 show();
+  }
 
   scripts\engine\utility::flag_set("hangar_end_done");
 }
@@ -1487,8 +1545,9 @@ _id_519B() {
   var_0 = getEntArray("generic_door", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.script_parameters) && var_2.script_parameters == "armory")
+    if(isDefined(var_2.script_parameters) && var_2.script_parameters == "armory") {
       var_2 delete();
+    }
   }
 
   var_2 = getEnt("armory_exit_door", "targetname");
@@ -1503,8 +1562,9 @@ _id_519B() {
     var_9 = getEntArray(var_8.target, "targetname");
 
     foreach(var_11 in var_9) {
-      if(var_11.classname == "script_model")
+      if(var_11.classname == "script_model") {
         var_11 delete();
+      }
     }
   }
 
@@ -1548,8 +1608,9 @@ _id_F0DA(var_0) {
   for(var_1 = 8.0; !scripts\engine\utility::flag("secure_player_opened_door"); self.pushable = 0) {
     wait(var_1);
 
-    if(var_1 < 25)
+    if(var_1 < 25) {
       var_1 = var_1 + 12;
+    }
 
     level.allies["salter"] scripts\sp\utility::_id_10346("moon_slt_letsgetintherer");
   }
@@ -1647,15 +1708,17 @@ _id_599B() {
 }
 
 _id_F34F(var_0, var_1, var_2) {
-  while(distance(self.origin, var_1.origin) > var_0)
+  while(distance(self.origin, var_1.origin) > var_0) {
     wait 0.05;
+  }
 
   scripts\sp\utility::_id_51E1(var_2);
 }
 
 _id_F527(var_0, var_1, var_2) {
-  while(distance(self.origin, var_1.origin) > var_0)
+  while(distance(self.origin, var_1.origin) > var_0) {
     wait 0.05;
+  }
 
   scripts\sp\utility::_id_F526(var_2);
 }
@@ -1675,8 +1738,9 @@ _id_8A46(var_0) {
       break;
     }
 
-    if(var_2 >= var_1.size - 1)
+    if(var_2 >= var_1.size - 1) {
       var_2 = var_1.size - 1;
+    }
   }
 }
 
@@ -1709,8 +1773,9 @@ _id_A1FD(var_0) {
   thread _id_A1FE(var_4, "hangar_jackal_door_1");
   scripts\engine\utility::flag_wait("hangar_elevator_go");
 
-  if(!scripts\engine\utility::is_true(var_0))
+  if(!scripts\engine\utility::is_true(var_0)) {
     wait 5.0;
+  }
 
   thread _id_A1FB(var_1, "hangar_jackal_shield_1", "mn_launch_blastlight_on_4");
   thread _id_A1FB(var_2, "hangar_jackal_shield_2", "mn_launch_blastlight_on_3");
@@ -1849,8 +1914,9 @@ _id_A200(var_0, var_1) {
   thread _id_A256();
   thread _id_A257(var_2, var_1);
 
-  if(var_0 == 1)
+  if(var_0 == 1) {
     thread _id_D14A();
+  }
 
   thread _id_A2D3();
   var_3 scripts\sp\anim::_id_1F35(self, var_2);
@@ -2069,8 +2135,9 @@ _id_F9C3() {
   var_0 = level._id_AA81;
   var_1 = "runway_moon";
 
-  if(scripts\engine\utility::flag("capture_mount"))
+  if(scripts\engine\utility::flag("capture_mount")) {
     var_1 = "runway";
+  }
 
   foreach(var_3 in var_0) {
     var_3 _id_0BDC::_id_F48D("runway_moon");

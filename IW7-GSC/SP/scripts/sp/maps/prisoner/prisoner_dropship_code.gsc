@@ -9,8 +9,9 @@ _id_5EBC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self endon("dropship_new_behavior");
   self clearlookatent();
 
-  if(!isDefined(self._id_3F7B))
+  if(!isDefined(self._id_3F7B)) {
     self._id_3F7B = scripts\engine\utility::spawn_tag_origin();
+  }
 
   self._id_3F7B linkTo(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
   _id_1241(var_1, var_2, var_3, var_4, var_5, var_6, var_7);
@@ -22,8 +23,9 @@ _id_5EBD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self endon("dropship_new_behavior");
   self clearlookatent();
 
-  if(!isDefined(self._id_3F7B))
+  if(!isDefined(self._id_3F7B)) {
     self._id_3F7B = scripts\engine\utility::spawn_tag_origin();
+  }
 
   var_8 = scripts\engine\utility::getStruct(var_0, "targetname");
   self._id_3F7B.origin = var_8.origin;
@@ -33,22 +35,26 @@ _id_5EBD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 _id_5E9E(var_0, var_1, var_2) {
   self notify("new_lookat");
 
-  if(!isDefined(self._id_7333))
+  if(!isDefined(self._id_7333)) {
     self._id_7333 = spawn("script_origin", self.origin);
+  }
 
-  if(!isDefined(self._id_272D))
+  if(!isDefined(self._id_272D)) {
     self._id_272D = spawn("script_origin", self.origin);
+  }
 
-  if(!isDefined(self._id_101B5))
+  if(!isDefined(self._id_101B5)) {
     self._id_101B5 = spawn("script_origin", self.origin);
+  }
 
   self._id_101B7 = var_1;
   self._id_101B6 = var_2;
 
-  if(issubstr(var_0.classname, "temp"))
+  if(issubstr(var_0.classname, "temp")) {
     self._id_101B5 linkTo(var_0, var_0.model, (0, 0, 0), (0, 0, 0));
-  else
+  } else {
     self._id_101B5 linkTo(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
+  }
 
   thread _id_122F();
 }
@@ -65,10 +71,11 @@ _id_122F() {
     var_2 = anglestoright(var_1);
     var_3 = var_2;
 
-    if(isDefined(self._id_101B6) && self._id_101B6)
+    if(isDefined(self._id_101B6) && self._id_101B6) {
       var_3 = anglesToForward(var_1) * -1;
-    else if(self._id_101B7 == 0)
+    } else if(self._id_101B7 == 0) {
       var_3 = var_3 * -1.0;
+    }
 
     var_4 = self.origin + var_3 * 1000;
     self._id_7333.origin = var_4;
@@ -85,15 +92,17 @@ _id_5EBE(var_0, var_1, var_2, var_3, var_4, var_5) {
   self._id_7243 = var_2;
   self._id_7241 = var_3;
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     self._id_7244 = var_4;
-  else
+  } else {
     self._id_7244 = 1;
+  }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     self._id_7242 = var_5;
-  else
+  } else {
     self._id_7242 = 60;
+  }
 
   self._id_7240 = 1;
   self setmaxpitchroll(0, 0);
@@ -105,10 +114,11 @@ _id_5DB6(var_0) {
   self notify("dropship_new_behavior");
   self endon("dropship_new_behavior");
 
-  if(isDefined(var_0) && var_0 == 1)
+  if(isDefined(var_0) && var_0 == 1) {
     var_1 = -1.0;
-  else
+  } else {
     var_1 = 1.0;
+  }
 
   var_2 = self.origin + anglestoright(self.angles) * var_1 * 4000.0 + anglesToForward(self.angles) * -500.0;
   var_3 = self.origin + anglestoright(self.angles) * var_1 * -100.0 + anglesToForward(self.angles) * 50.0;
@@ -130,8 +140,9 @@ _id_5DB6(var_0) {
 _id_5EA0(var_0) {
   self notify("new_lookat");
 
-  if(!isDefined(self._id_7333))
+  if(!isDefined(self._id_7333)) {
     self._id_7333 = spawn("script_origin", self.origin);
+  }
 
   self._id_7333 unlink();
   var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
@@ -142,14 +153,17 @@ _id_5EA0(var_0) {
 _id_5E9F(var_0, var_1, var_2) {
   self notify("new_lookat");
 
-  if(!isDefined(self._id_7333))
+  if(!isDefined(self._id_7333)) {
     self._id_7333 = spawn("script_origin", self.origin);
+  }
 
-  if(!isDefined(self._id_272D))
+  if(!isDefined(self._id_272D)) {
     self._id_272D = spawn("script_origin", self.origin);
+  }
 
-  if(!isDefined(self._id_101B5))
+  if(!isDefined(self._id_101B5)) {
     self._id_101B5 = spawn("script_origin", self.origin);
+  }
 
   self._id_101B7 = var_1;
   self._id_101B6 = var_2;
@@ -179,23 +193,26 @@ _id_1241(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self._id_3F7E = var_2;
   self._id_3F80 = var_3;
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     self._id_3F7F = var_5;
+  }
 
   var_7 = 785 / self._id_3F7E;
   self._id_3F7D = floor(clamp(6.28318 / var_7, 8, 64));
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     self._id_4B2D = _id_1219(var_6);
-  else
+  } else {
     self._id_4B2D = _id_1219(3);
+  }
 
   _id_121D();
   self setmaxpitchroll(0, 0);
   childthread _id_1220();
 
-  if(isDefined(var_4) && var_4 == 1)
+  if(isDefined(var_4) && var_4 == 1) {
     childthread _id_121F();
+  }
 
   _id_5E9E(self._id_3F7B, !var_0);
 }
@@ -206,8 +223,9 @@ _id_1220() {
     _id_121B();
     self._id_4B2D = self._id_4B2D + 1;
 
-    if(self._id_4B2D >= self._id_3F7D)
+    if(self._id_4B2D >= self._id_3F7D) {
       self._id_4B2D = 0;
+    }
   }
 }
 
@@ -215,8 +233,9 @@ _id_121B(var_0) {
   self endon("dropship_near_goal");
   thread _id_1235();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   self._id_3F75 = spawnStruct();
 
@@ -228,11 +247,13 @@ _id_121B(var_0) {
   }
 
   for(;;) {
-    if(var_0)
+    if(var_0) {
       self._id_3F75.origin = _id_121A(self._id_4B2D);
+    }
 
-    if(var_0)
+    if(var_0) {
       self setvehgoalpos(self._id_3F75.origin);
+    }
 
     wait 0.1;
   }
@@ -241,8 +262,9 @@ _id_121B(var_0) {
 _id_121A(var_0) {
   var_1 = 360 / self._id_3F7D;
 
-  if(self._id_3F7A)
+  if(self._id_3F7A) {
     var_1 = var_1 * -1.0;
+  }
 
   var_2 = (0, var_1 * var_0, 0);
   var_3 = anglesToForward(var_2);
@@ -255,8 +277,9 @@ _id_121A(var_0) {
 _id_1218() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < self._id_3F7D; var_1++)
+  for(var_1 = 0; var_1 < self._id_3F7D; var_1++) {
     var_0[var_1] = _id_121A(var_1);
+  }
 
   return var_0;
 }
@@ -282,8 +305,9 @@ _id_1219(var_0) {
   if(isDefined(var_0)) {
     var_4 = var_4 + var_0;
 
-    if(var_4 > self._id_3F7D)
+    if(var_4 > self._id_3F7D) {
       var_4 = var_4 - self._id_3F7D;
+    }
 
     var_9 = var_4;
   } else
@@ -343,46 +367,52 @@ _id_122B() {
     var_1 = _id_1226(var_0);
     var_2 = var_1 * 0.2;
 
-    if(var_1 <= 0.0)
+    if(var_1 <= 0.0) {
       self vehicle_setspeed(var_1);
-    else
+    } else {
       self vehicle_setspeed(var_1, var_2, var_2);
+    }
 
-    if(var_1 > 0.0)
+    if(var_1 > 0.0) {
       self setvehgoalpos(var_0);
+    }
 
     wait 0.1;
   }
 }
 
 _id_1226(var_0) {
-  if(self._id_7244 == 1)
+  if(self._id_7244 == 1) {
     var_1 = self._id_723D.veh_speed;
-  else
+  } else {
     var_1 = self._id_7242;
+  }
 
   if(self._id_7244) {
     var_2 = distance2dsquared(self.origin, var_0) - 16000000;
 
-    if(var_2 < 0.0)
+    if(var_2 < 0.0) {
       var_1 = var_1 * 0.9;
-    else if(var_2 < 640000) {} else if(var_2 < 2250000)
+    } else if(var_2 < 640000) {} else if(var_2 < 2250000) {
       var_1 = var_1 * 1.5;
-    else if(var_2 < 9000000)
+    } else if(var_2 < 9000000) {
       var_1 = var_1 * 2.0;
-    else
+    } else {
       var_1 = var_1 * 2.5;
+    }
   }
 
   return var_1;
 }
 
 _id_122A(var_0) {
-  if(!isDefined(self._id_7333))
+  if(!isDefined(self._id_7333)) {
     self._id_7333 = spawn("script_origin", self.origin);
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   wait(var_0);
   self setlookatent(self._id_7333);
@@ -398,8 +428,9 @@ _id_1229() {
   self._id_7239 = _id_1228();
   self._id_723B = vectorNormalize(scripts\engine\utility::flat_origin(self._id_7239 - self._id_723D.origin));
 
-  if(distance2dsquared(self.origin, self._id_7239) < distance2dsquared(self.origin, self._id_723D.origin))
+  if(distance2dsquared(self.origin, self._id_7239) < distance2dsquared(self.origin, self._id_723D.origin)) {
     self._id_723B = self._id_723B * -1.0;
+  }
 
   self._id_723A = anglestoright(vectortoangles(self._id_723B));
   self._id_723C = self._id_723B * -1.0;
@@ -445,8 +476,9 @@ _id_1227() {
 _id_122D(var_0, var_1) {
   var_2 = [];
 
-  for(var_3 = 0; var_3 < var_0.size - 1; var_3++)
+  for(var_3 = 0; var_3 < var_0.size - 1; var_3++) {
     var_2[var_2.size] = pointonsegmentnearesttopoint(var_0[var_3].origin, var_0[var_3 + 1].origin, var_1);
+  }
 
   var_4 = distancesquared(var_2[0], var_1);
   var_5 = var_2[0];

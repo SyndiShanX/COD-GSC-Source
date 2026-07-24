@@ -12,8 +12,9 @@ _id_35BF(var_0, var_1, var_2, var_3) {
   if(isDefined(var_5)) {
     var_6 = var_5.origin - self.origin;
 
-    if(lengthsquared(var_6) < 7744)
+    if(lengthsquared(var_6) < 7744) {
       var_4 = "near";
+    }
 
     self orientmode("face angle", vectortoyaw(var_6));
   }
@@ -28,13 +29,15 @@ _id_35BF(var_0, var_1, var_2, var_3) {
 }
 
 _id_35C0(var_0, var_1, var_2) {
-  if(_id_35C2() || !isDefined(self.melee._id_2AAE))
+  if(_id_35C2() || !isDefined(self.melee._id_2AAE)) {
     _id_35BB();
+  }
 }
 
 _id_3616(var_0, var_1, var_2, var_3) {
-  if(_id_0C64::melee_shouldabort(var_0, var_1, var_2, var_3))
+  if(_id_0C64::melee_shouldabort(var_0, var_1, var_2, var_3)) {
     return 0;
+  }
 
   return isDefined(self.melee._id_2AAE);
 }
@@ -52,11 +55,13 @@ _id_35C4(var_0, var_1, var_2) {
 }
 
 _id_35BB() {
-  if(isDefined(self.melee) && isDefined(self.melee.target))
+  if(isDefined(self.melee) && isDefined(self.melee.target)) {
     self.melee.target.melee = undefined;
+  }
 
-  if(isDefined(self.melee) && isDefined(self.melee.temp_ent))
+  if(isDefined(self.melee) && isDefined(self.melee.temp_ent)) {
     self.melee.temp_ent delete();
+  }
 
   _id_0C64::_id_B58E();
 }
@@ -66,8 +71,9 @@ _id_35C1(var_0) {
     case "grab":
       break;
     case "lookat":
-      if(isPlayer(self.melee.target))
+      if(isPlayer(self.melee.target)) {
         thread _id_B010();
+      }
 
       break;
     case "throw":
@@ -82,23 +88,29 @@ _id_3584(var_0, var_1, var_2) {
 }
 
 _id_35C2() {
-  if(!isalive(self))
+  if(!isalive(self)) {
     return 1;
+  }
 
-  if(!isDefined(self.melee))
+  if(!isDefined(self.melee)) {
     return 1;
+  }
 
-  if(isDefined(self.melee._id_2720))
+  if(isDefined(self.melee._id_2720)) {
     return 1;
+  }
 
-  if(!isDefined(self.melee.target))
+  if(!isDefined(self.melee.target)) {
     return 1;
+  }
 
-  if(!isalive(self.melee.target))
+  if(!isalive(self.melee.target)) {
     return 1;
+  }
 
-  if(!isDefined(self.melee.target.melee))
+  if(!isDefined(self.melee.target.melee)) {
     return 1;
+  }
 
   return 0;
 }

@@ -14,8 +14,9 @@ _id_95A2() {
 main() {
   self endon("killanimscript");
 
-  if(getdvarint("ai_iw7", 0) != 0)
+  if(getdvarint("ai_iw7", 0) != 0) {
     self waittill("hellfreezesover");
+  }
 
   self _meth_83AC("voice_bchatter_1_3d");
   var_0 = 0.3;
@@ -28,11 +29,13 @@ main() {
   if(isDefined(self._id_4E46)) {
     var_1 = self[[self._id_4E46]]();
 
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       var_1 = 1;
+    }
 
-    if(var_1)
+    if(var_1) {
       return;
+    }
   }
 
   scripts\anim\utility::_id_9832("death");
@@ -40,24 +43,27 @@ main() {
   anim._id_C222--;
   anim._id_C221--;
 
-  if(isDefined(self._id_DC1A) || self.forceragdollimmediate)
+  if(isDefined(self._id_DC1A) || self.forceragdollimmediate) {
     _id_58CB();
+  }
 
   if(isDefined(self._id_4E2A)) {
     _id_CF0E(self._id_4E2A);
 
-    if(isDefined(self._id_4E2E))
+    if(isDefined(self._id_4E2E)) {
       self[[self._id_4E2E]]();
+    }
 
     return;
   }
 
   var_2 = scripts\anim\pain::_id_1390C();
 
-  if(self.damagelocation == "helmet" || self.damagelocation == "head")
+  if(self.damagelocation == "helmet" || self.damagelocation == "head") {
     _id_8E17();
-  else if(var_2 && randomint(3) == 0)
+  } else if(var_2 && randomint(3) == 0) {
     _id_8E17();
+  }
 
   self clearanim(%root, 0.3);
 
@@ -70,8 +76,9 @@ main() {
     return;
   }
   if(isDefined(self._id_10957)) {
-    if([[self._id_10957]]())
+    if([[self._id_10957]]()) {
       return;
+    }
   }
 
   if(_id_10956()) {
@@ -87,28 +94,33 @@ _id_58CB() {
   var_0 = 10;
   var_1 = scripts\engine\utility::getdamagetype(self.damagemod);
 
-  if(isDefined(self.attacker) && self.attacker == level.player && var_1 == "melee")
+  if(isDefined(self.attacker) && self.attacker == level.player && var_1 == "melee") {
     var_0 = 5;
+  }
 
   var_2 = self.damagetaken;
 
-  if(var_1 == "bullet")
+  if(var_1 == "bullet") {
     var_2 = max(var_2, 300);
+  }
 
   var_3 = var_0 * var_2;
   var_4 = max(0.3, self.damagedir[2]);
   var_5 = (self.damagedir[0], self.damagedir[1], var_4);
 
-  if(isDefined(self._id_DC15))
+  if(isDefined(self._id_DC15)) {
     var_5 = var_5 * self._id_DC15;
-  else
+  } else {
     var_5 = var_5 * var_3;
+  }
 
-  if(self.forceragdollimmediate)
+  if(self.forceragdollimmediate) {
     var_5 = var_5 + self.prevanimdelta * 20 * 10;
+  }
 
-  if(isDefined(self._id_DC1D))
+  if(isDefined(self._id_DC1D)) {
     var_5 = var_5 + self._id_DC1D * 10;
+  }
 
   self _meth_839B(self.damagelocation, var_5);
   wait 0.05;
@@ -123,14 +135,16 @@ _id_B60C(var_0, var_1) {
   var_3 = cos(60);
 
   if(squared(var_2) < squared(var_3)) {
-    if(_id_4A7E(var_0, var_1) > 0)
+    if(_id_4A7E(var_0, var_1) > 0) {
       return 1;
-    else
+    } else {
       return 3;
+    }
   } else if(var_2 < 0)
     return 0;
-  else
+  else {
     return 2;
+  }
 }
 
 _id_C703() {
@@ -149,32 +163,36 @@ _id_C703() {
 }
 
 _id_CF0E(var_0) {
-  if(!animhasnotetrack(var_0, "dropgun") && !animhasnotetrack(var_0, "fire_spray"))
+  if(!animhasnotetrack(var_0, "dropgun") && !animhasnotetrack(var_0, "fire_spray")) {
     scripts\anim\shared::_id_5D1A();
+  }
 
   _id_C703();
   self _meth_82E4("deathanim", var_0, %body, 1, 0.1);
   scripts\anim\face::playfacialanim(var_0, "death");
 
   if(isDefined(self._id_10265)) {
-    if(!isDefined(self.noragdoll))
+    if(!isDefined(self.noragdoll)) {
       self startragdoll();
+    }
 
     wait 0.05;
     self animmode("gravity");
   } else if(isDefined(self.ragdolltime))
     thread _id_136DF(self.ragdolltime);
   else if(!animhasnotetrack(var_0, "start_ragdoll")) {
-    if(self.damagemod == "MOD_MELEE")
+    if(self.damagemod == "MOD_MELEE") {
       var_1 = 0.7;
-    else
+    } else {
       var_1 = 0.35;
+    }
 
     thread _id_136DF(getanimlength(var_0) * var_1);
   }
 
-  if(!isDefined(self._id_10265))
+  if(!isDefined(self._id_10265)) {
     thread playdeathfx();
+  }
 
   scripts\anim\shared::donotetracks("deathanim");
   scripts\anim\shared::_id_5D1A();
@@ -184,11 +202,13 @@ _id_CF0E(var_0) {
 _id_136DF(var_0) {
   wait(var_0);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     scripts\anim\shared::_id_5D1A();
+  }
 
-  if(isDefined(self) && !isDefined(self.noragdoll))
+  if(isDefined(self) && !isDefined(self.noragdoll)) {
     self startragdoll();
+  }
 }
 
 playdeathfx() {
@@ -216,16 +236,19 @@ play_blood_pool(var_0, var_1) {
   var_2 = var_2 + var_4 * -8.5 + var_5 * 5 + var_6 * 0;
   var_7 = bulletTrace(var_2 + (0, 0, 30), var_2 - (0, 0, 100), 0, undefined);
 
-  if(var_7["normal"][2] > 0.9)
+  if(var_7["normal"][2] > 0.9) {
     playFX(level._effect["deathfx_bloodpool_generic"], var_2);
+  }
 }
 
 _id_10956() {
-  if(self.a._id_10930 == "none")
+  if(self.a._id_10930 == "none") {
     return 0;
+  }
 
-  if(self.damagemod == "MOD_MELEE")
+  if(self.damagemod == "MOD_MELEE") {
     return 0;
+  }
 
   switch (self.a._id_10930) {
     case "cover_right":
@@ -235,10 +258,11 @@ _id_10956() {
       } else {
         var_0 = [];
 
-        if(scripts\engine\utility::damagelocationisany("head", "neck"))
+        if(scripts\engine\utility::damagelocationisany("head", "neck")) {
           var_0 = scripts\anim\utility::_id_B027("death", "cover_right_crouch_head");
-        else
+        } else {
           var_0 = scripts\anim\utility::_id_B027("death", "cover_right_crouch_default");
+        }
 
         _id_57FC(var_0);
       }
@@ -261,22 +285,25 @@ _id_10956() {
     case "cover_crouch":
       var_0 = [];
 
-      if(scripts\engine\utility::damagelocationisany("head", "neck") && (self.damageyaw > 135 || self.damageyaw <= -45))
-        var_0[var_0.size] = scripts\anim\utility::_id_B027("death", "cover_crouch_head");
+      if(scripts\engine\utility::damagelocationisany("head", "neck") && (self.damageyaw > 135 || self.damageyaw <= -45)) {
+        var_0[var_0.size] = ::scripts\anim\utility::_id_B027("death", "cover_crouch_head");
+      }
 
-      if(self.damageyaw > -45 && self.damageyaw <= 45)
-        var_0[var_0.size] = scripts\anim\utility::_id_B027("death", "cover_crouch_back");
+      if(self.damageyaw > -45 && self.damageyaw <= 45) {
+        var_0[var_0.size] = ::scripts\anim\utility::_id_B027("death", "cover_crouch_back");
+      }
 
-      var_0[var_0.size] = scripts\anim\utility::_id_B027("death", "cover_crouch_default");
+      var_0[var_0.size] = ::scripts\anim\utility::_id_B027("death", "cover_crouch_default");
       _id_57FC(var_0);
       return 1;
     case "saw":
-      if(self.a.pose == "stand")
+      if(self.a.pose == "stand") {
         _id_57FC(scripts\anim\utility::_id_B027("death", "saw_stand"));
-      else if(self.a.pose == "crouch")
+      } else if(self.a.pose == "crouch") {
         _id_57FC(scripts\anim\utility::_id_B027("death", "saw_crouch"));
-      else
+      } else {
         _id_57FC(scripts\anim\utility::_id_B027("death", "saw_prone"));
+      }
 
       return 1;
     case "dying_crawl":
@@ -301,8 +328,9 @@ _id_57FC(var_0) {
   var_1 = var_0[randomint(var_0.size)];
   _id_CF0E(var_1);
 
-  if(isDefined(self._id_4E2E))
+  if(isDefined(self._id_4E2E)) {
     self[[self._id_4E2E]]();
+  }
 }
 
 playdeathsound() {
@@ -312,8 +340,9 @@ playdeathsound() {
 _id_D8ED(var_0, var_1, var_2) {
   var_3 = var_2 * 20;
 
-  for(var_4 = 0; var_4 < var_3; var_4++)
+  for(var_4 = 0; var_4 < var_3; var_4++) {
     wait 0.05;
+  }
 }
 
 _id_8E17() {
@@ -364,8 +393,9 @@ _id_8E13(var_0) {
 }
 
 _id_E166(var_0) {
-  for(var_1 = 0; var_1 < anim._id_10AE5.size; var_1++)
+  for(var_1 = 0; var_1 < anim._id_10AE5.size; var_1++) {
     anim._id_10AE5[var_1] _id_41DC(var_0);
+  }
 }
 
 _id_41DC(var_0) {
@@ -379,64 +409,79 @@ _id_41DC(var_0) {
 }
 
 _id_FFF4() {
-  if(self.a.movement != "run")
+  if(self.a.movement != "run") {
     return 0;
+  }
 
-  if(self _meth_813E() > 60 || self _meth_813E() < -60)
+  if(self _meth_813E() > 60 || self _meth_813E() < -60) {
     return 0;
+  }
 
-  if(self.damagemod == "MOD_MELEE")
+  if(self.damagemod == "MOD_MELEE") {
     return 0;
+  }
 
   return 1;
 }
 
 _id_FFFA(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.a._id_58DA))
+  if(isDefined(self.a._id_58DA)) {
     return 0;
-
-  if(self.a.pose == "prone" || isDefined(self.a.onback))
-    return 0;
-
-  if(var_0 == "none")
-    return 0;
-
-  if(var_2 > 500)
-    return 1;
-
-  if(var_1 == "MOD_MELEE")
-    return 0;
-
-  if(self.a.movement == "run" && !_id_9D59(var_3, 275)) {
-    if(randomint(100) < 65)
-      return 0;
   }
 
-  if(scripts\anim\utility_common::issniperrifle(var_0) && self.maxhealth < var_2)
-    return 1;
+  if(self.a.pose == "prone" || isDefined(self.a.onback)) {
+    return 0;
+  }
 
-  if(scripts\anim\utility_common::isshotgun(var_0) && _id_9D59(var_3, 512))
-    return 1;
+  if(var_0 == "none") {
+    return 0;
+  }
 
-  if(isdepot(var_0) && _id_9D59(var_3, 425))
+  if(var_2 > 500) {
     return 1;
+  }
+
+  if(var_1 == "MOD_MELEE") {
+    return 0;
+  }
+
+  if(self.a.movement == "run" && !_id_9D59(var_3, 275)) {
+    if(randomint(100) < 65) {
+      return 0;
+    }
+  }
+
+  if(scripts\anim\utility_common::issniperrifle(var_0) && self.maxhealth < var_2) {
+    return 1;
+  }
+
+  if(scripts\anim\utility_common::isshotgun(var_0) && _id_9D59(var_3, 512)) {
+    return 1;
+  }
+
+  if(isdepot(var_0) && _id_9D59(var_3, 425)) {
+    return 1;
+  }
 
   return 0;
 }
 
 isdepot(var_0) {
-  if(var_0 == "deserteagle")
+  if(var_0 == "deserteagle") {
     return 1;
+  }
 
   return 0;
 }
 
 _id_9D59(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(distancesquared(self.origin, var_0.origin) > var_1 * var_1)
+  if(distancesquared(self.origin, var_0.origin) > var_1 * var_1) {
     return 0;
+  }
 
   return 1;
 }
@@ -445,26 +490,30 @@ _id_7E5F() {
   if(_id_FFFA(self.damageweapon, self.damagemod, self.damagetaken, self.attacker)) {
     var_0 = _id_817D();
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       return var_0;
+    }
   }
 
   if(isDefined(self.a.onback)) {
-    if(self.a.pose == "crouch")
+    if(self.a.pose == "crouch") {
       return _id_7DF1();
-    else
+    } else {
       scripts\anim\notetracks::stoponback();
+    }
   }
 
   if(self.a.pose == "stand") {
-    if(_id_FFF4())
+    if(_id_FFF4()) {
       return getsafeanimmovedeltapercentage();
-    else
+    } else {
       return _id_815D();
+    }
   } else if(self.a.pose == "crouch")
     return _id_7E45();
-  else if(self.a.pose == "prone")
+  else if(self.a.pose == "prone") {
     return _id_809F();
+  }
 }
 
 _id_817D() {
@@ -474,16 +523,18 @@ _id_817D() {
     return;
   }
   if(var_0 > 150) {
-    if(scripts\engine\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower", "left_foot", "right_foot"))
+    if(scripts\engine\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower", "left_foot", "right_foot")) {
       var_1 = scripts\anim\utility::_id_B027("death", "strong_legs");
-    else if(self.damagelocation == "torso_lower")
+    } else if(self.damagelocation == "torso_lower") {
       var_1 = scripts\anim\utility::_id_B027("death", "strong_torso_lower");
-    else
+    } else {
       var_1 = scripts\anim\utility::_id_B027("death", "strong_default");
+    }
   } else if(self.damageyaw < 0)
     var_1 = scripts\anim\utility::_id_B027("death", "strong_right");
-  else
+  else {
     var_1 = scripts\anim\utility::_id_B027("death", "strong_left");
+  }
 
   return var_1[randomint(var_1.size)];
 }
@@ -493,22 +544,25 @@ getsafeanimmovedeltapercentage() {
     var_0 = scripts\anim\utility::_id_B027("death", "running_forward_f");
     var_1 = _id_80C3(var_0);
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       return var_1;
+    }
   }
 
   var_0 = scripts\anim\utility::_id_B027("death", "running_forward");
   var_1 = _id_80C3(var_0);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     return var_1;
+  }
 
   return _id_815D();
 }
 
 _id_80C3(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return undefined;
+  }
 
   var_1 = undefined;
 
@@ -516,8 +570,9 @@ _id_80C3(var_0) {
     var_3 = randomint(var_2);
     var_1 = var_0[var_3];
 
-    if(!_id_9D42(var_1))
+    if(!_id_9D42(var_1)) {
       return var_1;
+    }
 
     var_0[var_3] = var_0[var_2 - 1];
     var_0[var_2 - 1] = undefined;
@@ -542,8 +597,9 @@ _id_E184(var_0) {
 _id_9D42(var_0) {
   var_1 = 1;
 
-  if(animhasnotetrack(var_0, "code_move"))
+  if(animhasnotetrack(var_0, "code_move")) {
     var_1 = getnotetracktimes(var_0, "code_move")[0];
+  }
 
   var_2 = getmovedelta(var_0, 0, var_1);
   var_3 = self localtoworldcoords(var_2);
@@ -553,22 +609,26 @@ _id_9D42(var_0) {
 _id_815F() {
   var_0 = [];
 
-  if(abs(self.damageyaw) < 50)
+  if(abs(self.damageyaw) < 50) {
     var_0 = scripts\anim\utility::_id_B027("death", "stand_pistol_forward");
-  else {
-    if(abs(self.damageyaw) < 110)
+  } else {
+    if(abs(self.damageyaw) < 110) {
       var_0 = scripts\anim\utility::_id_B027("death", "stand_pistol_front");
+    }
 
-    if(self.damagelocation == "torso_upper")
+    if(self.damagelocation == "torso_upper") {
       var_0 = scripts\engine\utility::array_combine(scripts\anim\utility::_id_B027("death", "stand_pistol_torso_upper"), var_0);
-    else if(scripts\engine\utility::damagelocationisany("torso_lower", "left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower"))
+    } else if(scripts\engine\utility::damagelocationisany("torso_lower", "left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower")) {
       var_0 = scripts\engine\utility::array_combine(scripts\anim\utility::_id_B027("death", "stand_pistol_torso_upper"), var_0);
+    }
 
-    if(!scripts\engine\utility::damagelocationisany("head", "neck", "helmet", "left_foot", "right_foot", "left_hand", "right_hand", "gun") && randomint(2) == 0)
+    if(!scripts\engine\utility::damagelocationisany("head", "neck", "helmet", "left_foot", "right_foot", "left_hand", "right_hand", "gun") && randomint(2) == 0) {
       var_0 = scripts\engine\utility::array_combine(scripts\anim\utility::_id_B027("death", "stand_pistol_upper_body"), var_0);
+    }
 
-    if(var_0.size == 0 || scripts\engine\utility::damagelocationisany("torso_lower", "torso_upper", "neck", "head", "helmet", "right_arm_upper", "left_arm_upper"))
+    if(var_0.size == 0 || scripts\engine\utility::damagelocationisany("torso_lower", "torso_upper", "neck", "head", "helmet", "right_arm_upper", "left_arm_upper")) {
       var_0 = scripts\engine\utility::array_combine(scripts\anim\utility::_id_B027("death", "stand_pistol_default"), var_0);
+    }
   }
 
   return var_0;
@@ -578,27 +638,29 @@ _id_815D() {
   var_0 = [];
   var_1 = [];
 
-  if(scripts\anim\utility_common::isusingsidearm())
+  if(scripts\anim\utility_common::isusingsidearm()) {
     var_0 = _id_815F();
-  else if(isDefined(self.attacker) && self shouldplaymeleedeathanim(self.attacker)) {
-    if(self.damageyaw <= 120 || self.damageyaw > -120)
+  } else if(isDefined(self.attacker) && self shouldplaymeleedeathanim(self.attacker)) {
+    if(self.damageyaw <= 120 || self.damageyaw > -120) {
       var_0 = scripts\anim\utility::_id_B027("death", "melee_standing_front");
-    else if(self.damageyaw <= -60 && self.damageyaw > 60)
+    } else if(self.damageyaw <= -60 && self.damageyaw > 60) {
       var_0 = scripts\anim\utility::_id_B027("death", "melee_standing_back");
-    else if(self.damageyaw < 0)
+    } else if(self.damageyaw < 0) {
       var_0 = scripts\anim\utility::_id_B027("death", "melee_standing_left");
-    else
+    } else {
       var_0 = scripts\anim\utility::_id_B027("death", "melee_standing_right");
+    }
   } else {
     if(scripts\engine\utility::damagelocationisany("torso_lower", "left_leg_upper", "left_leg_lower", "right_leg_lower", "right_leg_lower")) {
       var_0 = scripts\anim\utility::_id_B027("death", "stand_lower_body");
       var_1 = scripts\anim\utility::_id_B027("death", "stand_lower_body_extended");
     } else if(scripts\engine\utility::damagelocationisany("head", "helmet"))
       var_0 = scripts\anim\utility::_id_B027("death", "stand_head");
-    else if(scripts\engine\utility::damagelocationisany("neck"))
+    else if(scripts\engine\utility::damagelocationisany("neck")) {
       var_0 = scripts\anim\utility::_id_B027("death", "stand_neck");
-    else if(scripts\engine\utility::damagelocationisany("torso_upper", "left_arm_upper"))
+    } else if(scripts\engine\utility::damagelocationisany("torso_upper", "left_arm_upper")) {
       var_0 = scripts\anim\utility::_id_B027("death", "stand_left_shoulder");
+    }
 
     if(scripts\engine\utility::damagelocationisany("torso_upper")) {
       var_0 = scripts\engine\utility::array_combine(var_0, scripts\anim\utility::_id_B027("death", "stand_torso_upper"));
@@ -620,8 +682,9 @@ _id_815D() {
 
     var_2 = var_0.size > 0;
 
-    if(!var_2 || randomint(100) < 15)
+    if(!var_2 || randomint(100) < 15) {
       var_0 = scripts\engine\utility::array_combine(var_0, scripts\anim\utility::_id_B027("death", "stand_default"));
+    }
 
     if(randomint(100) < 10 && _id_6DB2()) {
       var_0 = scripts\engine\utility::array_combine(var_0, scripts\anim\utility::_id_B027("death", "stand_default_firing"));
@@ -629,16 +692,18 @@ _id_815D() {
     }
   }
 
-  if(var_0.size == 0)
-    var_0[var_0.size] = scripts\anim\utility::_id_B027("death", "stand_backup_default");
+  if(var_0.size == 0) {
+    var_0[var_0.size] = ::scripts\anim\utility::_id_B027("death", "stand_backup_default");
+  }
 
   if(!self.a.disablelongdeath && self.stairsstate == "none" && !isDefined(self.a._id_C87B)) {
     var_3 = randomint(var_0.size + var_1.size);
 
-    if(var_3 < var_0.size)
+    if(var_3 < var_0.size) {
       return var_0[var_3];
-    else
+    } else {
       return var_1[var_3 - var_0.size];
+    }
   }
 
   return var_0[randomint(var_0.size)];
@@ -648,26 +713,31 @@ _id_7E45() {
   var_0 = [];
 
   if(isDefined(self.attacker) && self shouldplaymeleedeathanim(self.attacker)) {
-    if(self.damageyaw <= 120 || self.damageyaw > -120)
+    if(self.damageyaw <= 120 || self.damageyaw > -120) {
       var_0 = scripts\anim\utility::_id_B027("death", "melee_crouching_front");
-    else if(self.damageyaw <= -60 && self.damageyaw > 60)
+    } else if(self.damageyaw <= -60 && self.damageyaw > 60) {
       var_0 = scripts\anim\utility::_id_B027("death", "melee_crouching_back");
-    else if(self.damageyaw < 0)
+    } else if(self.damageyaw < 0) {
       var_0 = scripts\anim\utility::_id_B027("death", "melee_crouching_left");
-    else
+    } else {
       var_0 = scripts\anim\utility::_id_B027("death", "melee_crouching_right");
+    }
   } else {
-    if(scripts\engine\utility::damagelocationisany("head", "neck"))
+    if(scripts\engine\utility::damagelocationisany("head", "neck")) {
       var_0 = scripts\anim\utility::_id_B027("death", "crouch_head");
+    }
 
-    if(scripts\engine\utility::damagelocationisany("torso_upper", "torso_lower", "left_arm_upper", "right_arm_upper", "neck"))
+    if(scripts\engine\utility::damagelocationisany("torso_upper", "torso_lower", "left_arm_upper", "right_arm_upper", "neck")) {
       var_0 = scripts\engine\utility::array_combine(var_0, scripts\anim\utility::_id_B027("death", "crouch_torso"));
+    }
 
-    if(var_0.size < 2)
+    if(var_0.size < 2) {
       var_0 = scripts\engine\utility::array_combine(var_0, scripts\anim\utility::_id_B027("death", "crouch_default1"));
+    }
 
-    if(var_0.size < 2)
+    if(var_0.size < 2) {
       var_0 = scripts\engine\utility::array_combine(var_0, scripts\anim\utility::_id_B027("death", "crouch_default2"));
+    }
   }
 
   return var_0[randomint(var_0.size)];
@@ -678,11 +748,13 @@ _id_809F() {}
 _id_7DF1() {}
 
 _id_6DB2() {
-  if(!isDefined(self.weapon) || !scripts\anim\utility_common::usingriflelikeweapon() || !weaponisauto(self.weapon) || !weaponisbeam(self.weapon) || self.diequietly)
+  if(!isDefined(self.weapon) || !scripts\anim\utility_common::usingriflelikeweapon() || !weaponisauto(self.weapon) || !weaponisbeam(self.weapon) || self.diequietly) {
     return 0;
+  }
 
-  if(self.a.weaponpos["right"] == "none")
+  if(self.a.weaponpos["right"] == "none") {
     return 0;
+  }
 
   return 1;
 }
@@ -696,9 +768,11 @@ _id_1288E(var_0) {
 }
 
 _id_D469() {
-  if(isDefined(self._id_A4A3))
+  if(isDefined(self._id_A4A3)) {
     return 0;
+  }
 
-  if(self.damagelocation != "none")
+  if(self.damagelocation != "none") {
     return 0;
+  }
 }

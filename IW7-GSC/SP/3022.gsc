@@ -28,8 +28,9 @@ _id_A22F(var_0) {
 _id_1312C(var_0) {
   var_1 = ["script_vehicle_jackal_friendly", "script_vehicle_jackal_friendly_moon", "script_vehicle_jackal_friendly_heist", "script_vehicle_jackal_friendly_pearl", "script_vehicle_jackal_friendly_marsbase_cheap", "script_vehicle_jackal_enemy", "script_vehicle_jackal_enemy_marsbase_cheap", "script_vehicle_jackal_fake_friendly", "script_vehicle_jackal_fake_enemy"];
 
-  if(scripts\engine\utility::array_contains(var_1, var_0.classname))
+  if(scripts\engine\utility::array_contains(var_1, var_0.classname)) {
     return 1;
+  }
 
   return 0;
 }
@@ -64,8 +65,9 @@ _id_A2B2(var_0, var_1, var_2) {
     self setOrigin(var_1);
   }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "fly";
+  }
 
   var_0 _meth_8491(var_2);
   self _meth_8490("disable_pilot_move_assist", 1);
@@ -76,8 +78,9 @@ _id_A2B1(var_0) {
   self notify("exit_jackal");
   self remotecontrolvehicleoff();
 
-  if(isDefined(self._id_E473))
+  if(isDefined(self._id_E473)) {
     self setOrigin(self._id_E473);
+  }
 
   self.ignoreme = 0;
   var_0.owner = undefined;
@@ -117,13 +120,15 @@ monitorboost(var_0, var_1) {
   var_0 endon("death");
 
   for(;;) {
-    while(!var_0.spaceship_boosting)
+    while(!var_0.spaceship_boosting) {
       scripts\engine\utility::waitframe();
+    }
 
     var_1 notify("engage boost");
 
-    while(var_0.spaceship_boosting)
+    while(var_0.spaceship_boosting) {
       scripts\engine\utility::waitframe();
+    }
 
     var_1 notify("disengage boost");
   }
@@ -134,16 +139,18 @@ _id_7DB5() {
   var_1 = vehicle_getarray();
 
   foreach(var_3 in var_1) {
-    if(isaircraft(var_3))
+    if(isaircraft(var_3)) {
       var_0[var_0.size] = var_3;
+    }
   }
 
   return var_0;
 }
 
 _id_10056() {
-  if(isDefined(level._id_241D) && level._id_241D)
+  if(isDefined(level._id_241D) && level._id_241D) {
     return 0;
+  }
 
   return 1;
 }

@@ -58,10 +58,11 @@ _id_D161(var_0) {
   thread _id_F5F7();
   _id_A318(level._id_A056._id_9B6F);
 
-  if(getdvarint("jackalHandbrakeMode"))
+  if(getdvarint("jackalHandbrakeMode")) {
     thread _id_D15A();
-  else
+  } else {
     thread _id_D185();
+  }
 
   level.player scripts\sp\utility::_id_65E1("flag_player_has_jackal");
   level.player thread _id_58B4();
@@ -73,30 +74,35 @@ _id_F5F7() {
 }
 
 _id_11ABD() {
-  for(;;)
+  for(;;) {
     wait 0.1;
+  }
 }
 
 _id_A323() {
   _id_F384();
 
-  foreach(var_1 in level._id_A056._id_12F96)
-  var_1 _meth_84A1("jackal_un_landing");
+  foreach(var_1 in level._id_A056._id_12F96) {
+    var_1 _meth_84A1("jackal_un_landing");
+  }
 }
 
 _id_A318(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   level._id_A056._id_9B6F = var_0;
 
-  if(!var_0)
+  if(!var_0) {
     setomnvar("ui_jackal_show_horizon", 0);
-  else
+  } else {
     setomnvar("ui_jackal_show_horizon", 1);
+  }
 
-  if(scripts\sp\utility::_id_D123())
+  if(scripts\sp\utility::_id_D123()) {
     level._id_D127 _id_A31B();
+  }
 
   _id_F383();
 }
@@ -110,28 +116,32 @@ _id_A1E7() {
   var_0 = _id_A1E6();
   var_1 = level.vehicle._id_116CE._id_2427[level._id_D127.classname][var_0];
 
-  if(!isDefined(level._id_D127))
+  if(!isDefined(level._id_D127)) {
     return var_1;
+  }
 
-  if(isDefined(level._id_D127._id_5F0D) && level._id_D127._id_5F0D)
+  if(isDefined(level._id_D127._id_5F0D) && level._id_D127._id_5F0D) {
     var_2 = "_dualfire";
-  else
+  } else {
     var_2 = "";
+  }
 
-  if(scripts\sp\utility::_id_D15B("thrusters"))
+  if(scripts\sp\utility::_id_D15B("thrusters")) {
     var_3 = "_thrustperk";
-  else
+  } else {
     var_3 = "";
+  }
 
   var_4 = var_1 + var_3 + var_2;
   return var_4;
 }
 
 _id_A1E6() {
-  if(level._id_A056._id_9B6F)
+  if(level._id_A056._id_9B6F) {
     var_0 = "atmo";
-  else
+  } else {
     var_0 = "space";
+  }
 
   return var_0;
 }
@@ -239,10 +249,11 @@ _id_F380() {
     setsaveddvar("spaceshipModulateRedirectWithDesires", 1);
   }
 
-  if(isDefined(level._id_D127) && level._id_D127.spaceship_mode == "hover")
+  if(isDefined(level._id_D127) && level._id_D127.spaceship_mode == "hover") {
     _id_A1D8("hover");
-  else
+  } else {
     _id_A1D8("fly");
+  }
 
   if(isDefined(level._id_A056._id_BBB9)) {
     level._id_A056._id_BBB9["speed"]._id_90F9 = getdvarfloat("spaceshipMinPhysicsBlendSpeed");
@@ -264,10 +275,11 @@ _id_D185() {
     var_5 = 0;
     var_6 = self.spaceship_mode;
 
-    if(level._id_241D)
+    if(level._id_241D) {
       var_7 = getdvarint("spacehship_mode_swich_speed");
-    else
+    } else {
       var_7 = getdvarint("spacehship_mode_swich_speed_space");
+    }
 
     var_7 = var_7 * level._id_A056._id_EBAD;
     var_8 = rotatevectorinverted(self.spaceship_vel, self.angles);
@@ -277,17 +289,21 @@ _id_D185() {
       if(!self.spaceship_boosting) {
         if(!level.player scripts\sp\utility::_id_65DB("disable_jackal_mode_switch")) {
           if(var_6 == "hover") {
-            if(var_9 > var_7 && var_2 == 0)
+            if(var_9 > var_7 && var_2 == 0) {
               var_3 = 1;
+            }
 
-            if(var_0 != var_6 && !var_3)
+            if(var_0 != var_6 && !var_3) {
               var_4 = 1;
+            }
           } else {
-            if(var_9 < var_7 && var_2 == 0)
+            if(var_9 < var_7 && var_2 == 0) {
               var_4 = 1;
+            }
 
-            if(var_0 != var_6 && !var_4)
+            if(var_0 != var_6 && !var_4) {
               var_3 = 1;
+            }
           }
         }
       } else {
@@ -296,15 +312,17 @@ _id_D185() {
       }
     } else if(self._id_72A8 == "fly" && var_6 != self._id_72A8)
       var_3 = 1;
-    else if(self._id_72A8 == "hover" && var_6 != self._id_72A8)
+    else if(self._id_72A8 == "hover" && var_6 != self._id_72A8) {
       var_4 = 1;
-    else if(self._id_72A8 == "land" && var_6 != self._id_72A8)
+    } else if(self._id_72A8 == "land" && var_6 != self._id_72A8) {
       var_5 = 1;
+    }
 
     var_2 = var_2 - 0.05;
 
-    if(var_2 < 0)
+    if(var_2 < 0) {
       var_2 = 0;
+    }
 
     if(var_3) {
       self _meth_8491("fly");
@@ -364,8 +382,9 @@ _id_D15A() {
           var_0 = "fly";
           level._id_D127 _meth_8491("fly");
 
-          if(!level.player scripts\sp\utility::_id_65DB("disable_jackal_pilot_assist"))
+          if(!level.player scripts\sp\utility::_id_65DB("disable_jackal_pilot_assist")) {
             level.player _meth_8490("disable_pilot_aim_assist", 0);
+          }
         }
       } else if(var_0 != "hover") {
         thread _id_0BDC::_id_DBA5(0, 1);
@@ -399,8 +418,9 @@ _id_D14F() {
   thread _id_B8A7();
 
   for(;;) {
-    while(!level.player secondaryoffhandbuttonPressed() || level.player scripts\sp\utility::_id_65DB("disable_jackal_guns") || level.player scripts\sp\utility::_id_65DB("disable_jackal_flares"))
+    while(!level.player secondaryoffhandbuttonPressed() || level.player scripts\sp\utility::_id_65DB("disable_jackal_guns") || level.player scripts\sp\utility::_id_65DB("disable_jackal_flares")) {
       wait 0.05;
+    }
 
     if(self._id_6E9C.count == self._id_6E9C._id_B417) {
       _id_D183();
@@ -409,8 +429,9 @@ _id_D14F() {
     } else
       _id_D150();
 
-    while(level.player secondaryoffhandbuttonPressed())
+    while(level.player secondaryoffhandbuttonPressed()) {
       wait 0.05;
+    }
   }
 }
 
@@ -507,24 +528,27 @@ _id_D181(var_0, var_1) {
   var_4 endon("death");
   var_6 = (0, 0, 0);
 
-  if(isDefined(level._id_D127._id_6E97))
+  if(isDefined(level._id_D127._id_6E97)) {
     var_7 = level._id_D127._id_6E97;
-  else
+  } else {
     var_7 = 1;
+  }
 
-  if(isDefined(level._id_D127._id_6E93))
+  if(isDefined(level._id_D127._id_6E93)) {
     var_8 = level._id_D127._id_6E93 * var_7;
-  else
+  } else {
     var_8 = var_7;
+  }
 
   var_9 = randomfloatrange(0.85, 1.15);
   var_10 = randomfloatrange(0.85, 1.15);
   var_11 = randomfloatrange(0.85, 1.15);
 
-  if(var_0)
+  if(var_0) {
     var_12 = (550 * var_9 * var_7, 85 * var_1 * var_10 * var_8, 130 * var_11 * var_7);
-  else
+  } else {
     var_12 = (400 * var_9 * var_7, 120 * var_1 * var_10 * var_8, 150 * var_11 * var_7);
+  }
 
   var_13 = 1;
   var_14 = 0;
@@ -559,16 +583,18 @@ _id_D181(var_0, var_1) {
     var_33 = scripts\sp\math::_id_6A8E(0.1, 1, var_33);
     var_34 = scripts\sp\math::_id_6A8E(var_27, var_26, var_33);
 
-    if(isDefined(level._id_D127._id_6E8A) && level._id_D127._id_6E8A)
+    if(isDefined(level._id_D127._id_6E8A) && level._id_D127._id_6E8A) {
       var_18["fraction"] = 1;
-    else
+    } else {
       var_18 = scripts\common\trace::ray_trace(var_4.origin, var_34, var_17, undefined, 1);
+    }
 
     if(var_18["fraction"] < 1) {
-      if(isDefined(var_18["normal"]))
+      if(isDefined(var_18["normal"])) {
         var_35 = vectortoangles(var_18["normal"]);
-      else
+      } else {
         var_35 = var_4.angles;
+      }
 
       var_36 = var_18["position"];
       var_4.origin = var_36;
@@ -613,8 +639,9 @@ _id_13984() {
   self endon("player_exit_jackal");
   self endon("stop_shooting_flares");
 
-  while(level.player secondaryoffhandbuttonPressed())
+  while(level.player secondaryoffhandbuttonPressed()) {
     wait 0.05;
+  }
 
   self notify("stop_shooting_flares");
 }
@@ -629,8 +656,9 @@ _id_B8A7() {
     self._id_93D2 = scripts\engine\utility::array_add(self._id_93D2, var_0);
     thread _id_0B76::_id_B840();
 
-    if(!self._id_93D1)
+    if(!self._id_93D1) {
       thread _id_B8A6();
+    }
 
     self._id_6E9C._id_12B86 = scripts\engine\utility::array_removeundefined(self._id_6E9C._id_12B86);
   }
@@ -645,14 +673,16 @@ _id_B8A5() {
     wait 0.1;
   }
 
-  while(scripts\engine\utility::flag("jackal_noflare_hint"))
+  while(scripts\engine\utility::flag("jackal_noflare_hint")) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_set("jackal_flare_hint");
   scripts\sp\utility::_id_56BA("jackal_flare_hint");
 
-  while(self._id_6E9C._id_12B86.size == 0 && self._id_93D2.size > 0)
+  while(self._id_6E9C._id_12B86.size == 0 && self._id_93D2.size > 0) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_clear("jackal_flare_hint");
 }
@@ -673,8 +703,9 @@ _id_B8A6() {
 
   self notify("new_flare_hint");
 
-  if(scripts\engine\utility::flag("jackal_flare_hint"))
+  if(scripts\engine\utility::flag("jackal_flare_hint")) {
     scripts\engine\utility::flag_clear("jackal_flare_hint");
+  }
 
   _id_B808();
 }
@@ -683,8 +714,9 @@ _id_B809() {
   _id_0BDC::_id_A112("jackal_hud_incomingmissile", 0.5, 10);
   self._id_93D1 = 1;
 
-  if(!isDefined(level._id_B8B8))
+  if(!isDefined(level._id_B8B8)) {
     level._id_B8B8 = thread scripts\engine\utility::play_loopsound_in_space("jackal_missile_incoming", (0, 0, 0));
+  }
 
   setomnvar("ui_jackal_missile_incoming", 1);
   _id_0BDC::_id_A10C("incoming_missile");
@@ -728,8 +760,9 @@ _id_D14C() {
   var_20 = 0.075;
   var_21 = 0.065;
 
-  while(!isDefined(level._id_A056._id_BBB9["speed"]._id_6FE8))
+  while(!isDefined(level._id_A056._id_BBB9["speed"]._id_6FE8)) {
     wait 0.05;
+  }
 
   for(;;) {
     waittillframeend;
@@ -737,10 +770,11 @@ _id_D14C() {
     var_23 = self.spaceship_vel;
     var_24 = length(var_23);
 
-    if(length(var_22) > length(var_0))
+    if(length(var_22) > length(var_0)) {
       var_25 = 1;
-    else
+    } else {
       var_25 = 0.3;
+    }
 
     var_14 = scripts\sp\math::_id_AB6F(var_14, var_22, var_15);
 
@@ -751,10 +785,11 @@ _id_D14C() {
     } else
       var_26 = 0;
 
-    if(var_26 > var_5)
+    if(var_26 > var_5) {
       var_27 = var_8;
-    else
+    } else {
       var_27 = var_9;
+    }
 
     var_5 = scripts\sp\math::_id_AB6F(var_5, var_26, var_27);
     var_28 = anglesToForward(level._id_D127.angles);
@@ -762,52 +797,59 @@ _id_D14C() {
     var_30 = 1 - scripts\sp\math::_id_C097(0.5, 1, vectordot(var_28, var_29));
     var_30 = var_30 * var_3;
 
-    if(var_30 > var_6)
+    if(var_30 > var_6) {
       var_27 = var_10;
-    else
+    } else {
       var_27 = var_11;
+    }
 
     var_6 = scripts\sp\math::_id_AB6F(var_6, var_30, var_27);
     var_31 = length(var_1);
 
-    if(var_24 > var_31)
+    if(var_24 > var_31) {
       var_32 = 1.4;
-    else
+    } else {
       var_32 = 0.8;
+    }
 
     var_33 = abs(var_24 - var_31);
     var_34 = scripts\sp\math::_id_C097(2 * level._id_A056._id_EBAD, 30 * level._id_A056._id_EBAD, var_33);
     var_34 = var_34 * var_2;
     var_34 = var_34 * var_32;
 
-    if(level._id_241D)
+    if(level._id_241D) {
       var_34 = var_34 * 1.8;
+    }
 
-    if(var_34 > var_7)
+    if(var_34 > var_7) {
       var_27 = var_12;
-    else
+    } else {
       var_27 = var_13;
+    }
 
     var_7 = scripts\sp\math::_id_AB6F(var_7, var_34, var_27);
     var_35 = scripts\sp\math::_id_C097(100 * level._id_A056._id_EBAD, 500 * level._id_A056._id_EBAD, var_24);
     var_35 = scripts\sp\math::_id_6A8E(0.2, 1.3, var_35);
 
-    if(var_35 > var_18)
+    if(var_35 > var_18) {
       var_27 = var_16;
-    else
+    } else {
       var_27 = var_17;
+    }
 
     var_18 = scripts\sp\math::_id_AB6F(var_18, var_35, var_27);
 
-    if(level._id_D127.spaceship_mode == "fly")
+    if(level._id_D127.spaceship_mode == "fly") {
       var_36 = 1;
-    else
+    } else {
       var_36 = 0.2;
+    }
 
-    if(var_36 > var_19)
+    if(var_36 > var_19) {
       var_27 = var_20;
-    else
+    } else {
       var_27 = var_21;
+    }
 
     var_19 = scripts\sp\math::_id_AB6F(var_19, var_36, var_27);
     var_37 = scripts\sp\math::_id_C09B(var_19);
@@ -837,11 +879,13 @@ _id_F360(var_0) {
   if(!isDefined(self)) {
     return;
   }
-  if(isDefined(self.bt))
+  if(isDefined(self.bt)) {
     self.bt._id_5870 = var_0;
+  }
 
-  if(isDefined(self._blackboard))
+  if(isDefined(self._blackboard)) {
     self._blackboard._id_9DC2 = var_0;
+  }
 }
 
 _id_D17D() {
@@ -851,10 +895,11 @@ _id_D17D() {
 }
 
 _id_D17E() {
-  if(scripts\sp\utility::_id_D15B("weapons"))
+  if(scripts\sp\utility::_id_D15B("weapons")) {
     var_0 = "_weapupgrade";
-  else
+  } else {
     var_0 = "";
+  }
 
   self _meth_849E(self._id_4C15.weapon + var_0);
 }
@@ -940,15 +985,17 @@ _id_D17F() {
 }
 
 _id_F43C() {
-  if(!isDefined(self._id_13BF7))
+  if(!isDefined(self._id_13BF7)) {
     self._id_13BF7 = _id_0BDD::_id_A1F8(_id_0A2F::_id_D9FE());
+  }
 
   setomnvar("ui_jackal_equipped_primary_index", self._id_13BF7._id_12B2A);
 }
 
 _id_F43E() {
-  if(!isDefined(self._id_13BF8))
+  if(!isDefined(self._id_13BF8)) {
     self._id_13BF8 = _id_0BDD::_id_A1F8(_id_0A2F::_id_DA00());
+  }
 
   setomnvar("ui_jackal_equipped_secondary_index", self._id_13BF8._id_12B2A);
 }
@@ -973,16 +1020,18 @@ _id_D19E() {
         self._id_4C15 = self._id_13BF8;
         self._id_110CA = self._id_13BF7;
 
-        if(!level.player scripts\sp\utility::_id_65DB("disable_jackal_overheat"))
+        if(!level.player scripts\sp\utility::_id_65DB("disable_jackal_overheat")) {
           setomnvar("ui_jackal_weapon_secondary", 1);
+        }
 
         thread _id_5D09(0, 1.15);
       } else {
         self._id_4C15 = self._id_13BF7;
         self._id_110CA = self._id_13BF8;
 
-        if(!level.player scripts\sp\utility::_id_65DB("disable_jackal_overheat"))
+        if(!level.player scripts\sp\utility::_id_65DB("disable_jackal_overheat")) {
           setomnvar("ui_jackal_weapon_secondary", 0);
+        }
 
         thread _id_5D09(0, 1.0);
       }
@@ -1029,10 +1078,11 @@ _id_D157(var_0) {
   if(!scripts\engine\utility::player_is_in_jackal()) {
     return;
   }
-  if(issubstr(var_0, "primary"))
+  if(issubstr(var_0, "primary")) {
     var_1 = 1;
-  else
+  } else {
     var_1 = 0;
+  }
 
   if(level._id_D127._id_4C15.class == "primary") {
     if(var_1) {
@@ -1059,25 +1109,29 @@ _id_729D(var_0) {
 }
 
 _id_1136F() {
-  if(isDefined(self._id_4C15._id_105EF))
+  if(isDefined(self._id_4C15._id_105EF)) {
     setsaveddvar("spaceshipTargetLockDistanceScale", self._id_4C15._id_105EF);
-  else
+  } else {
     setsaveddvar("spaceshipTargetLockDistanceScale", 1);
+  }
 
-  if(isDefined(self._id_4C15._id_105EE))
+  if(isDefined(self._id_4C15._id_105EE)) {
     setsaveddvar("spaceshipTargetLockAnglesScale", self._id_4C15._id_105EE * level._id_A48E._id_D3B9);
-  else
+  } else {
     setsaveddvar("spaceshipTargetLockAnglesScale", 1 * level._id_A48E._id_D3B9);
+  }
 
-  if(isDefined(self._id_4C15._id_105F0))
+  if(isDefined(self._id_4C15._id_105F0)) {
     setsaveddvar("spaceshipTargetLockTimeScale", self._id_4C15._id_105F0);
-  else
+  } else {
     setsaveddvar("spaceshipTargetLockTimeScale", 1);
+  }
 
-  if(isDefined(self._id_4C15._id_5F0D) && self._id_4C15._id_5F0D)
+  if(isDefined(self._id_4C15._id_5F0D) && self._id_4C15._id_5F0D) {
     level._id_D127._id_5F0D = 1;
-  else
+  } else {
     level._id_D127._id_5F0D = 0;
+  }
 
   level._id_D127 _id_A31B();
 }
@@ -1086,16 +1140,18 @@ _id_D199() {
   self endon("player_exit_jackal");
   _id_0BDC::_id_137DB();
 
-  while(!isDefined(self._id_110CA))
+  while(!isDefined(self._id_110CA)) {
     wait 0.05;
+  }
 
   var_0 = 0.9;
 
   for(;;) {
-    if(self._id_4C15._id_C7F8)
+    if(self._id_4C15._id_C7F8) {
       self._id_4C15 _id_D198(self._id_4C15._id_1167E);
-    else
+    } else {
       self._id_4C15 _id_D198(self._id_4C15._id_1167C);
+    }
 
     self._id_110CA _id_D198(self._id_110CA._id_11680);
     self._id_4C15 _id_D197(self._id_4C15._id_A5A3);
@@ -1106,28 +1162,34 @@ _id_D199() {
 _id_D198(var_0) {
   self._id_2841 = self._id_2841 - var_0;
 
-  if(self._id_2841 < 0)
+  if(self._id_2841 < 0) {
     self._id_2841 = 0;
+  }
 
   self._id_2844 = self._id_2844 - var_0;
 
-  if(self._id_2844 < 0)
+  if(self._id_2844 < 0) {
     self._id_2844 = 0;
+  }
 
   setomnvar(self._id_2842, self._id_2841);
   setomnvar(self._id_2843, self._id_2844);
 
-  if(self._id_2841 < 0.55 && self._id_2846 && !self._id_283A)
+  if(self._id_2841 < 0.55 && self._id_2846 && !self._id_283A) {
     _id_D193(0);
+  }
 
-  if(self._id_2844 < 0.55 && self._id_2849 && !self._id_283D)
+  if(self._id_2844 < 0.55 && self._id_2849 && !self._id_283D) {
     _id_D194(0);
+  }
 
-  if(self._id_2841 < 0.3 && self._id_283A)
+  if(self._id_2841 < 0.3 && self._id_283A) {
     _id_D171(0);
+  }
 
-  if(self._id_2844 < 0.3 && self._id_283D)
+  if(self._id_2844 < 0.3 && self._id_283D) {
     _id_D172(0);
+  }
 }
 
 _id_D197(var_0) {
@@ -1140,11 +1202,13 @@ _id_D19F() {
   self endon("player_exit_jackal");
   level.player allowads(0);
 
-  while(!level.player _meth_853A())
+  while(!level.player _meth_853A()) {
     wait 0.05;
+  }
 
-  if(!level.player scripts\sp\utility::_id_65DB("disable_jackal_ads"))
+  if(!level.player scripts\sp\utility::_id_65DB("disable_jackal_ads")) {
     level.player allowads(1);
+  }
 }
 
 _id_D19B() {
@@ -1156,8 +1220,9 @@ _id_D19B() {
     self waittill("vehicle_turret_fire", var_0);
     var_1 = 1;
 
-    if(isDefined(self._id_4C15._id_5F0D) && self._id_4C15._id_5F0D)
+    if(isDefined(self._id_4C15._id_5F0D) && self._id_4C15._id_5F0D) {
       var_1 = 0;
+    }
 
     self notify("vehicle_turret_fire_passed");
     self._id_4C15 _id_D197(self._id_4C15._id_A5A6);
@@ -1176,24 +1241,28 @@ _id_D19B() {
         if(var_0) {
           self._id_4C15._id_2841 = self._id_4C15._id_2841 + _id_7CF0();
 
-          if(self._id_4C15._id_2841 > 1)
+          if(self._id_4C15._id_2841 > 1) {
             self._id_4C15._id_2841 = 1;
+          }
         } else {
           self._id_4C15._id_2844 = self._id_4C15._id_2844 + _id_7CF0();
 
-          if(self._id_4C15._id_2844 > 1)
+          if(self._id_4C15._id_2844 > 1) {
             self._id_4C15._id_2844 = 1;
+          }
         }
       } else {
         self._id_4C15._id_2841 = self._id_4C15._id_2841 + _id_7CF0();
 
-        if(self._id_4C15._id_2841 > 1)
+        if(self._id_4C15._id_2841 > 1) {
           self._id_4C15._id_2841 = 1;
+        }
 
         self._id_4C15._id_2844 = self._id_4C15._id_2844 + _id_7CF0();
 
-        if(self._id_4C15._id_2844 > 1)
+        if(self._id_4C15._id_2844 > 1) {
           self._id_4C15._id_2844 = 1;
+        }
       }
 
       _id_D132();
@@ -1202,45 +1271,53 @@ _id_D19B() {
 }
 
 _id_7CF0() {
-  if(scripts\sp\utility::_id_D15B("weapons"))
+  if(scripts\sp\utility::_id_D15B("weapons")) {
     return self._id_4C15._id_116B3 * 0.8;
-  else
+  } else {
     return self._id_4C15._id_116B3;
+  }
 }
 
 _id_D132() {
   var_0 = 0.7;
 
-  if(self._id_4C15._id_2841 > 0.98 && !self._id_4C15._id_283A)
+  if(self._id_4C15._id_2841 > 0.98 && !self._id_4C15._id_283A) {
     self._id_4C15 _id_D171(1);
+  }
 
-  if(self._id_4C15._id_2844 > 0.98 && !self._id_4C15._id_283D)
+  if(self._id_4C15._id_2844 > 0.98 && !self._id_4C15._id_283D) {
     self._id_4C15 _id_D172(1);
+  }
 
-  if(self._id_4C15._id_2841 > 0.55 && !self._id_4C15._id_2846)
+  if(self._id_4C15._id_2841 > 0.55 && !self._id_4C15._id_2846) {
     self._id_4C15 _id_D193(1);
+  }
 
-  if(self._id_4C15._id_2844 > 0.55 && !self._id_4C15._id_2849)
+  if(self._id_4C15._id_2844 > 0.55 && !self._id_4C15._id_2849) {
     self._id_4C15 _id_D194(1);
+  }
 
-  if(self._id_4C15._id_283D && self._id_4C15._id_283A)
+  if(self._id_4C15._id_283D && self._id_4C15._id_283A) {
     _id_D170();
+  }
 }
 
 _id_D193(var_0) {
   self._id_2846 = var_0;
   setomnvar(self._id_2847, var_0);
 
-  if(var_0)
+  if(var_0) {
     _id_D18F();
+  }
 }
 
 _id_D194(var_0) {
   self._id_2849 = var_0;
   setomnvar(self._id_2848, var_0);
 
-  if(var_0)
+  if(var_0) {
     _id_D18F();
+  }
 }
 
 _id_D171(var_0) {
@@ -1274,8 +1351,9 @@ _id_D170() {
   thread _id_D173();
   self._id_4C15._id_C7F8 = 1;
 
-  while(self._id_4C15._id_2841 > 0.3 || self._id_4C15._id_2844 > 0.3)
+  while(self._id_4C15._id_2841 > 0.3 || self._id_4C15._id_2844 > 0.3) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_clear("jackal_weapon_switch_hint");
   self notify("self_weapons_cooled");
@@ -1289,11 +1367,13 @@ _id_D170() {
 _id_D173() {
   self endon("self_weapons_cooled");
 
-  while(level.player attackButtonPressed())
+  while(level.player attackButtonPressed()) {
     wait 0.05;
+  }
 
-  while(!level.player attackButtonPressed())
+  while(!level.player attackButtonPressed()) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_set("jackal_weapon_switch_hint");
   scripts\sp\utility::_id_56BA("jackal_weapon_switch");
@@ -1325,8 +1405,9 @@ _id_D19C() {
 _id_D19D() {
   level.player endon("jackal_switch_weapons");
 
-  while(level.player attackButtonPressed() && !level.player scripts\sp\utility::_id_65DB("disable_jackal_guns"))
+  while(level.player attackButtonPressed() && !level.player scripts\sp\utility::_id_65DB("disable_jackal_guns")) {
     wait 0.05;
+  }
 }
 
 _id_D128() {
@@ -1400,13 +1481,15 @@ _id_DBA4() {
   self.engine_master_volume = 0;
   self._id_FB88 = scripts\engine\utility::array_add(self._id_FB88, self._id_74BD._id_FB87);
 
-  if(level.player scripts\sp\utility::_id_65DB("disable_jackal_quickturn"))
+  if(level.player scripts\sp\utility::_id_65DB("disable_jackal_quickturn")) {
     self._id_DBA2._id_B3D1 = 0;
-  else
+  } else {
     self._id_DBA2._id_B3D1 = 1;
+  }
 
-  if(!isDefined(self._id_5509))
+  if(!isDefined(self._id_5509)) {
     self._id_5509 = 0;
+  }
 
   thread _id_DBA3();
 }
@@ -1470,23 +1553,26 @@ _id_DBA3() {
   for(;;) {
     var_24 = getdvarint("spaceshipFlySpeedScale");
 
-    if(var_24 == 0)
+    if(var_24 == 0) {
       var_24 = 0.01;
+    }
 
     var_25 = level.player _meth_814B();
     var_26 = level.player getnormalizedmovement();
     var_27 = rotatevectorinverted(self.spaceship_vel, self.angles);
     var_27 = var_27[0];
 
-    if(var_27 < 0)
+    if(var_27 < 0) {
       var_27 = 0;
+    }
 
     var_28 = var_26[0];
 
-    if(var_28 > 0)
+    if(var_28 > 0) {
       var_29 = scripts\sp\math::_id_6A8E(0.5, 0, var_28);
-    else
+    } else {
       var_29 = scripts\sp\math::_id_6A8E(0.5, 1, abs(var_28));
+    }
 
     var_30 = abs(var_25[1] - var_26[1]) * 0.5;
     var_30 = var_30 * abs(var_25[1]);
@@ -1494,10 +1580,11 @@ _id_DBA3() {
     var_19 = scripts\sp\math::_id_AB6F(var_19, var_29, var_20);
     var_31 = scripts\sp\math::_id_C097(150 * var_24, 450 * var_24, var_27);
 
-    if(var_31 > var_14)
+    if(var_31 > var_14) {
       var_14 = scripts\sp\math::_id_AB6F(var_14, var_31, 0.35);
-    else
+    } else {
       var_14 = scripts\sp\math::_id_AB6F(var_14, var_31, 0.1);
+    }
 
     var_32 = var_19 * self._id_DBA2._id_B3D1 * abs(var_18) * var_14 * var_24;
     var_33 = scripts\sp\math::_id_6A8E(1, var_0, var_32);
@@ -1526,10 +1613,11 @@ _id_DBA3() {
     self._id_DBA2._id_FB87 _meth_8277(var_37, 0.05);
     var_40 = scripts\sp\math::_id_C097(0, 1, var_26[0]);
 
-    if(var_10 < var_40)
+    if(var_10 < var_40) {
       var_41 = var_1;
-    else
+    } else {
       var_41 = var_2;
+    }
 
     var_10 = scripts\sp\math::_id_AB6F(var_10, var_40, var_41);
     var_11 = scripts\sp\math::_id_AB6F(var_11, var_34, 0.1);
@@ -1582,11 +1670,13 @@ _id_DBA3() {
     var_47 = scripts\sp\math::_id_6A8E(1000, 0, var_45);
     self._id_DBA2._id_E7BA.origin = level._id_D127.origin + (0, 0, var_47);
 
-    if(isDefined(self._id_2CD0))
+    if(isDefined(self._id_2CD0)) {
       var_46 = self._id_2CD0;
+    }
 
-    if(var_46 > 0)
+    if(var_46 > 0) {
       earthquake(var_46, 0.1, level._id_D127.origin, 5000);
+    }
 
     if(self._id_DBA2._id_2B8D) {
       self waittill("quickturn_master_blend_complete");
@@ -1602,23 +1692,27 @@ _id_D176(var_0, var_1, var_2, var_3, var_4) {
   self endon("jackalradialBlurLerp");
   self endon("player_exit_jackal");
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0.05;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 0.1;
+  }
 
   var_5 = 0.05;
   var_0 = clamp(var_0, 0.0, 1.0);
 
-  if(!isDefined(self._id_DBE5))
+  if(!isDefined(self._id_DBE5)) {
     self._id_DBE5 = 0.0;
+  }
 
   var_6 = abs(self._id_DBE5 - var_0);
   var_7 = int(var_2 / var_5);
 
-  if(var_7 == 0)
+  if(var_7 == 0) {
     var_7 = 1;
+  }
 
   var_8 = var_6 / var_7;
   wait(var_1);
@@ -1626,13 +1720,15 @@ _id_D176(var_0, var_1, var_2, var_3, var_4) {
   while(self._id_DBE5 != var_0) {
     var_7--;
 
-    if(!var_7)
+    if(!var_7) {
       self._id_DBE5 = var_0;
+    }
 
-    if(self._id_DBE5 < var_0)
+    if(self._id_DBE5 < var_0) {
       self._id_DBE5 = min(var_0, self._id_DBE5 + var_8);
-    else
+    } else {
       self._id_DBE5 = max(var_0, self._id_DBE5 - var_8);
+    }
 
     setsaveddvar("r_mbRadialOverrideStrength", var_3 * self._id_DBE5);
     setsaveddvar("r_mbRadialOverrideRadius", 1.0 - 0.8 * self._id_DBE5);
@@ -1648,8 +1744,9 @@ _id_D12D() {
   scripts\sp\utility::_id_75C4("jackal_boost_speed", "tag_origin");
   thread _id_DC5E();
 
-  if(!scripts\engine\utility::is_true(level._id_D127._id_6ADB))
+  if(!scripts\engine\utility::is_true(level._id_D127._id_6ADB)) {
     level.player thread _id_D176(0.8, 0, 0.4, 0.01, 0.3);
+  }
 }
 
 _id_DC5E() {
@@ -1671,8 +1768,9 @@ _id_D12C() {
   scripts\sp\utility::_id_75F8("jackal_boost_speed", "tag_origin");
   self._id_2CD0 = undefined;
 
-  if(!scripts\engine\utility::is_true(level._id_D127._id_6ADB))
+  if(!scripts\engine\utility::is_true(level._id_D127._id_6ADB)) {
     level.player _id_D176(0.0, 0, 0.2, 0.01, 0.3);
+  }
 
   setsaveddvar("spaceshipRadialMotionBlurMaxStrength", 0.0);
   setsaveddvar("spaceshipRadialMotionBlurMaxRadius", 0.0);
@@ -1718,10 +1816,11 @@ _id_1023E(var_0, var_1, var_2) {
   var_5 = var_1 + var_2;
 
   for(var_6 = 0.05; var_5 > 0; var_5 = var_5 - var_6) {
-    if(var_5 > var_2)
+    if(var_5 > var_2) {
       var_7 = 1 - scripts\sp\math::_id_C097(0, var_1, var_5 - var_2);
-    else
+    } else {
       var_7 = scripts\sp\math::_id_C097(0, var_2, var_5);
+    }
 
     var_8 = scripts\sp\math::_id_6A8E(0, var_3, var_7);
     var_9 = scripts\sp\math::_id_6A8E(0, var_4, var_7);
@@ -1742,22 +1841,27 @@ _id_1023F(var_0, var_1, var_2) {
   self._id_10239._id_FB87 playSound("jackal_skid");
   wait(var_1 + var_2 - var_3);
 
-  if(isDefined(self) && isDefined(self._id_10239) && isDefined(self._id_10239._id_FB87))
+  if(isDefined(self) && isDefined(self._id_10239) && isDefined(self._id_10239._id_FB87)) {
     self._id_10239._id_FB87 _meth_8278(0, 1);
+  }
 }
 
 _id_968C() {
-  if(!isDefined(self._id_11488))
+  if(!isDefined(self._id_11488)) {
     _id_0BDC::_id_F5BD("vtol");
+  }
 
-  if(!isDefined(self._id_A7C1))
+  if(!isDefined(self._id_A7C1)) {
     _id_0BDC::_id_F448("instant");
+  }
 
-  if(!isDefined(self._id_BBEB))
+  if(!isDefined(self._id_BBEB)) {
     _id_0BDC::_id_F48D("default_landed");
+  }
 
-  if(!isDefined(self._id_56A4))
+  if(!isDefined(self._id_56A4)) {
     _id_0BDC::_id_F358("default_landed");
+  }
 }
 
 _id_A382() {
@@ -1779,8 +1883,9 @@ _id_A382() {
 _id_7D0B(var_0) {
   var_1 = 1;
 
-  foreach(var_4, var_3 in var_0)
-  var_1 = var_1 * var_3;
+  foreach(var_4, var_3 in var_0) {
+    var_1 = var_1 * var_3;
+  }
 
   return var_1;
 }
@@ -1788,8 +1893,9 @@ _id_7D0B(var_0) {
 _id_7D0C(var_0) {
   var_1 = (0, 0, 0);
 
-  foreach(var_3 in var_0)
-  var_1 = var_1 + var_3;
+  foreach(var_3 in var_0) {
+    var_1 = var_1 + var_3;
+  }
 
   return var_1;
 }
@@ -1884,16 +1990,18 @@ _id_104A9() {
       level._id_A056._id_EBAE = var_14;
     }
 
-    if(level._id_A056._id_1C3C)
+    if(level._id_A056._id_1C3C) {
       var_20 = var_20 * var_15;
+    }
 
     var_11 = var_13 * level._id_A056._id_6F90;
     var_10 = var_15 * level._id_A056._id_2CAD;
 
-    if(var_10 > var_11)
+    if(var_10 > var_11) {
       var_23 = var_10;
-    else
+    } else {
       var_23 = var_11;
+    }
 
     var_24 = _id_7D0C(level._id_A056._id_BBB9["force"]._id_3C66);
     var_25 = _id_7D0C(level._id_A056._id_BBB9["ship_rotate"]._id_3C66);
@@ -1963,8 +2071,9 @@ _id_D133() {
   _id_0BDC::_id_137DB();
   _id_0BDC::_id_137D9();
 
-  foreach(var_1 in self._id_4074)
-  var_1 delete();
+  foreach(var_1 in self._id_4074) {
+    var_1 delete();
+  }
 
   objective_delete(scripts\sp\utility::_id_C264("jackal_dogfight"));
 
@@ -1973,8 +2082,9 @@ _id_D133() {
     level.player._id_A178 = undefined;
   }
 
-  foreach(var_4 in self._id_FB88)
-  var_4 thread _id_6A96();
+  foreach(var_4 in self._id_FB88) {
+    var_4 thread _id_6A96();
+  }
 }
 
 _id_6A96() {
@@ -2002,10 +2112,11 @@ _id_1049C() {
   if(!self._id_99F5._id_AB4B && !self._id_99F5._id_E526) {
     return;
   }
-  if(self._id_99F5._id_AB4B && self._id_99F5._id_E526)
+  if(self._id_99F5._id_AB4B && self._id_99F5._id_E526) {
     _id_1049D();
-  else
+  } else {
     _id_1049E();
+  }
 }
 
 _id_1049D() {
@@ -2020,10 +2131,11 @@ _id_1049D() {
     var_2 = rotatevectorinverted(vectorNormalize(level.player.origin - self.origin), self.angles);
 
     if(var_2[1] > 0) {
-      if(self._id_99F5._id_AB4B)
+      if(self._id_99F5._id_AB4B) {
         var_3 = "left";
-      else
+      } else {
         var_3 = "";
+      }
 
       var_4 = 48;
     } else {
@@ -2033,10 +2145,11 @@ _id_1049D() {
 
     var_5 = level.player.origin[2] - (self.origin[2] + self._id_99F5.height);
 
-    if(var_5 > 40 || level.player getstance() == "prone")
+    if(var_5 > 40 || level.player getstance() == "prone") {
       var_0 = 1;
-    else
+    } else {
       var_0 = 0;
+    }
 
     if(self._id_99F5._id_BBE7 != var_3 || var_1 != var_0) {
       _id_104AA(var_4, var_0);
@@ -2062,10 +2175,11 @@ _id_1049E() {
 }
 
 _id_104AA(var_0, var_1) {
-  if(isDefined(var_1) && var_1)
+  if(isDefined(var_1) && var_1) {
     var_2 = 1;
-  else
+  } else {
     var_2 = self._id_99F5._id_12FC3;
+  }
 
   _id_0E46::_id_DFE3();
   _id_0E46::_id_48C4("tag_body", (230, var_0, self._id_99F5.height), undefined, self._id_99F5._id_56B6, self._id_99F5.draw_distance, var_2);
@@ -2100,9 +2214,9 @@ _id_1049A() {
   self _meth_82B0(%jackal_vehicle_weap_primary_raise, 0);
   self _meth_82B1(%jackal_vehicle_weap_primary_raise, 0);
 
-  if(!isDefined(self._id_6B4E))
+  if(!isDefined(self._id_6B4E)) {
     _id_0BDC::_id_6B4C("landed_mode");
-  else {
+  } else {
     var_0 = self._id_6B4E;
     _id_0BDC::_id_6B4D();
     _id_0BDC::_id_6B4C(var_0);
@@ -2156,10 +2270,11 @@ _id_D16E() {
         var_4 = self.origin + var_3 * var_0;
         var_5 = bulletTrace(var_1, var_4, 1, self);
 
-        if(var_5["fraction"] < 1)
+        if(var_5["fraction"] < 1) {
           level._id_D127._id_C2CB = 1;
-        else
+        } else {
           level._id_D127._id_C2CB = 0;
+        }
       } else
         level._id_D127._id_C2CB = 0;
     }
@@ -2187,8 +2302,9 @@ _id_D175(var_0) {
       if(!isalive(var_7) || !issentient(var_7) || !isenemyteam(var_0, var_7.team)) {
         continue;
       }
-      if(!isDefined(var_7._id_DB08))
+      if(!isDefined(var_7._id_DB08)) {
         var_7._id_DB08 = 0;
+      }
 
       var_8 = var_7.origin - self.origin;
       var_8 = vectorNormalize(var_8);
@@ -2240,13 +2356,15 @@ _id_E061(var_0) {
   self._id_AEDF._id_11567 = 0;
   self._id_AEDF._id_2A93 = 0;
 
-  if(self._id_AEDF._id_38A4 && self._id_AEDF._id_9405)
+  if(self._id_AEDF._id_38A4 && self._id_AEDF._id_9405) {
     self notify("not_inDogfightRange");
+  }
 
   self _meth_84A0(0);
 
-  if(self._id_AEDF._id_3A5B)
+  if(self._id_AEDF._id_3A5B) {
     _id_0B76::_id_F42C(var_0);
+  }
 }
 
 _id_D18C() {
@@ -2264,13 +2382,15 @@ _id_D18C() {
     var_3 = _id_7A32(var_2);
 
     foreach(var_5 in var_3) {
-      if(!scripts\engine\utility::array_contains(var_2, var_5))
+      if(!scripts\engine\utility::array_contains(var_2, var_5)) {
         var_5 _id_0BDC::_id_A36B();
+      }
     }
 
     foreach(var_5 in var_2) {
-      if(!scripts\engine\utility::array_contains(var_3, var_5))
+      if(!scripts\engine\utility::array_contains(var_3, var_5)) {
         var_5 _id_0BDC::_id_A368();
+      }
     }
 
     if(var_3.size > 3) {
@@ -2304,13 +2424,15 @@ _id_7A32(var_0) {
   level._id_A056._id_90E3 = scripts\engine\utility::array_removeundefined(level._id_A056._id_90E3);
 
   foreach(var_2 in var_0) {
-    if(!scripts\engine\utility::array_contains(level._id_A056._id_90E3, var_2))
+    if(!scripts\engine\utility::array_contains(level._id_A056._id_90E3, var_2)) {
       var_0 = scripts\engine\utility::array_remove(var_0, var_2);
+    }
 
     var_3 = level._id_D127.origin - var_2.origin;
 
-    if(length(var_3) > 25000)
+    if(length(var_3) > 25000) {
       var_0 = scripts\engine\utility::array_remove(var_0, var_2);
+    }
   }
 
   foreach(var_2 in level._id_A056._id_90E3) {
@@ -2360,31 +2482,36 @@ _id_90E9() {
     var_1 = vectorNormalize(var_0);
     var_2 = rotatevectorinverted(var_1, level._id_D127.angles);
 
-    if(var_2[0] > 0)
+    if(var_2[0] > 0) {
       var_2 = (var_2[0] * 0.8, var_2[1], var_2[2]);
+    }
 
     if(abs(var_2[0]) > abs(var_2[1])) {
       if(var_2[0] > 0) {
         var_1 = "front";
 
-        if(gettime() - level._id_D127._id_D41F > 5000)
+        if(gettime() - level._id_D127._id_D41F > 5000) {
           _id_90E6(var_1);
+        }
       } else {
         var_1 = "rear";
 
-        if(self._blackboard._id_90EC != var_1)
+        if(self._blackboard._id_90EC != var_1) {
           _id_90E6(var_1);
+        }
       }
     } else if(var_2[1] < 0) {
       var_1 = "right";
 
-      if(self._blackboard._id_90EC != var_1)
+      if(self._blackboard._id_90EC != var_1) {
         _id_90E6(var_1);
+      }
     } else {
       var_1 = "left";
 
-      if(self._blackboard._id_90EC != var_1)
+      if(self._blackboard._id_90EC != var_1) {
         _id_90E6(var_1);
+      }
     }
   }
 }
@@ -2454,8 +2581,9 @@ _id_D18B() {
           } else
             var_0 _id_E061(var_0._id_AEDF._id_3A5C);
         } else if(var_1) {
-          if(isDefined(var_0._id_AEDF))
+          if(isDefined(var_0._id_AEDF)) {
             var_0 _id_E061(var_0._id_AEDF._id_3A5C);
+          }
 
           var_1 = 0;
         }
@@ -2470,15 +2598,17 @@ _id_D18B() {
       self._id_4BC8 = var_2[1];
 
       if(isDefined(var_2[0]._id_AEDF)) {
-        if(!var_2[0]._id_AEDF._id_2A93)
+        if(!var_2[0]._id_AEDF._id_2A93) {
           var_2[0]._id_AEDF._id_2A93 = 1;
+        }
 
         if(!var_2[0]._id_AEDF._id_11567) {
           var_2[0]._id_AEDF._id_11567 = 1;
           var_2[0] _id_0B76::_id_F42B(var_2[0]._id_AEDF._id_3782);
 
-          if(!var_2[0]._id_AEDF._id_933E)
+          if(!var_2[0]._id_AEDF._id_933E) {
             var_2[0] _meth_8558();
+          }
         }
       }
     }
@@ -2525,13 +2655,15 @@ _id_D174() {
   var_1 = 0.04;
 
   for(;;) {
-    while(level.player scripts\sp\utility::_id_65DB("disable_jackal_lockon"))
+    while(level.player scripts\sp\utility::_id_65DB("disable_jackal_lockon")) {
       wait 0.05;
+    }
 
     level._id_A056._id_C93E = scripts\engine\utility::array_removeundefined(level._id_A056._id_C93E);
 
-    if(isDefined(self._id_C942) && !scripts\engine\utility::array_contains(level._id_A056._id_C93E, self._id_C942))
+    if(isDefined(self._id_C942) && !scripts\engine\utility::array_contains(level._id_A056._id_C93E, self._id_C942)) {
       self._id_C942 = undefined;
+    }
 
     var_2 = anglesToForward(level._id_D127 gettagangles("tag_camera"));
     var_3 = level._id_A056._id_C93E;
@@ -2580,15 +2712,17 @@ _id_D174() {
 _id_F4B6() {
   _id_0B76::_id_F42B(self._id_AEDF._id_3782);
 
-  if(self._id_AEDF._id_3A5B)
+  if(self._id_AEDF._id_3A5B) {
     self _meth_8558();
+  }
 }
 
 _id_E06A() {
   self _meth_84A0(0);
 
-  if(self._id_AEDF._id_3A5B)
+  if(self._id_AEDF._id_3A5B) {
     _id_0B76::_id_F42C(self._id_AEDF._id_3A5C);
+  }
 }
 
 waittill_near_struct() {
@@ -2607,8 +2741,9 @@ _id_13930(var_0) {
   self endon("fd_notify_ace_mode_disengaged");
   var_0 endon("death");
 
-  while(self adsButtonPressed() && !level.player scripts\sp\utility::_id_65DB("disable_jackal_dogfight"))
+  while(self adsButtonPressed() && !level.player scripts\sp\utility::_id_65DB("disable_jackal_dogfight")) {
     wait 0.05;
+  }
 
   self _meth_8464(undefined);
   var_0 notify("dogfight_ads_released");
@@ -2659,10 +2794,11 @@ stuck_sled_failsafe(var_0, var_1) {
     if(isDefined(level._id_D127) && isDefined(level._id_D127.spaceship_vel)) {
       var_3 = length(level._id_D127.spaceship_vel);
 
-      if(var_3 > 30)
+      if(var_3 > 30) {
         var_2 = gettime();
-      else if(gettime() - var_2 > 1000)
+      } else if(gettime() - var_2 > 1000) {
         var_0 notify("dogfight_disengaged");
+      }
     }
 
     wait 0.05;
@@ -2688,8 +2824,9 @@ _id_5879() {
   for(;;) {
     level.player _meth_8291(0.2, 0.05, 0.05, 1, 0, 0, 0, 20, 30, 30);
 
-    if(!randomint(5))
+    if(!randomint(5)) {
       level.player _meth_8291(1.2, 1.1, 1.1, 0.2, 0, 0, 0, 40, 30, 30);
+    }
 
     wait 1;
   }
@@ -2765,8 +2902,9 @@ _id_E079(var_0) {
   _id_E0EE();
   _id_5894(0);
 
-  if(isDefined(var_0) && var_0)
+  if(isDefined(var_0) && var_0) {
     _id_588F();
+  }
 }
 
 _id_1396C() {
@@ -2817,37 +2955,42 @@ _id_58B4() {
           var_16 = vectordot(var_15, anglesToForward(var_11.angles));
           var_17 = vectordot(var_15, vectorNormalize(var_11.origin - level._id_D127.origin));
 
-          if(!var_11._id_AEDF._id_9405)
+          if(!var_11._id_AEDF._id_9405) {
             var_11 _id_F41A();
+          }
 
           if(isDefined(self._id_4BE7) && self._id_4BE7 != var_11) {
-            if(self._id_4BE7._id_AEDF._id_D826)
+            if(self._id_4BE7._id_AEDF._id_D826) {
               self._id_4BE7 notify("predogfight_disengage");
+            }
           }
 
           _id_F2F0(var_11, "enemy_dogfight");
           self._id_4BE7 = var_11;
 
           if(var_13[1] >= 1.0) {
-            if(!self._id_4BE7._id_AEDF._id_D826)
+            if(!self._id_4BE7._id_AEDF._id_D826) {
               self._id_4BE7 _id_F558();
+            }
 
             _id_F559();
           } else {
-            if(self._id_4BE7._id_AEDF._id_D826)
+            if(self._id_4BE7._id_AEDF._id_D826) {
               self._id_4BE7 notify("predogfight_disengage");
+            }
 
             var_18 = level.player adsButtonPressed();
             _id_E079(var_18);
           }
 
-          if(var_16 > 0.5 && var_17 > 0.8)
+          if(var_16 > 0.5 && var_17 > 0.8) {
             var_14 = 1;
+          }
 
           if(var_14 && var_11._id_AEDF._id_D826 && !var_11 _id_0BDC::_id_9C06()) {
-            if(scripts\engine\utility::is_true(level._id_A18A))
+            if(scripts\engine\utility::is_true(level._id_A18A)) {
               thread _id_5883(var_11);
-            else {
+            } else {
               var_19 = 65;
               var_20 = 2.55;
               setsaveddvar("spaceshipForceSetFovBlendStrength", var_20 / 2);
@@ -2860,8 +3003,9 @@ _id_58B4() {
             level._id_D127._id_58B5 = 1;
             _id_F6D0();
 
-            if(getdvarint("spaceshipDogfightModeUsingPhysics") == 0)
+            if(getdvarint("spaceshipDogfightModeUsingPhysics") == 0) {
               thread _id_87A5(var_21, var_11);
+            }
 
             setsaveddvar("spaceshipSpringCameraMaxAngle", 10);
 
@@ -2911,8 +3055,9 @@ _id_58B4() {
             if(var_22 == "dogfight_disengaged" || var_22 == "dogfight_blocked") {
               _id_588F();
 
-              if(isDefined(var_11))
+              if(isDefined(var_11)) {
                 var_11 playSound("jackal_sdf_lock_broke");
+              }
             }
 
             _id_587B();
@@ -2970,8 +3115,9 @@ _id_587B() {
       break;
     }
 
-    if(!level.player adsButtonPressed() && var_1)
+    if(!level.player adsButtonPressed() && var_1) {
       var_4 = 0;
+    }
 
     wait 0.05;
   }
@@ -2981,25 +3127,29 @@ _id_587B() {
     level.player allowads(1);
   }
 
-  if(!level.player scripts\sp\utility::_id_65DB("disable_jackal_lockon"))
+  if(!level.player scripts\sp\utility::_id_65DB("disable_jackal_lockon")) {
     level.player _meth_8490("disable_lockon", 0);
+  }
 }
 
 _id_5894(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_1 = 1;
+  }
 
-  if(var_0 == 1)
+  if(var_0 == 1) {
     level.player playSound("jackal_dogfight_lockon");
+  }
 
   setomnvar("ui_jackal_dogfight", var_0);
 }
 
 _id_3815() {
-  if(isDefined(self._id_AEDF) && self._id_AEDF._id_38A4)
+  if(isDefined(self._id_AEDF) && self._id_AEDF._id_38A4) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_F2F0(var_0, var_1) {
@@ -3009,14 +3159,16 @@ _id_F2F0(var_0, var_1) {
   if(var_0._id_AEDF._id_3782 == var_1) {
     return;
   }
-  if(var_1 == "enemy_dogfight")
+  if(var_1 == "enemy_dogfight") {
     thread _id_1396B(var_0);
+  }
 
   var_0._id_AEDF._id_3782 = var_1;
   var_2 = level.player _meth_848A();
 
-  if(isDefined(var_2) && isDefined(var_2[0]) && var_2[0] == var_0)
+  if(isDefined(var_2) && isDefined(var_2[0]) && var_2[0] == var_0) {
     var_0 _id_0B76::_id_F42B(var_0._id_AEDF._id_3782);
+  }
 }
 
 _id_1396B(var_0) {
@@ -3079,9 +3231,9 @@ _id_114F4() {
   if(level.player scripts\sp\utility::_id_65DB("disable_jackal_targetAid_update")) {
     return;
   }
-  if(isDefined(level._id_A056._id_4C2C) && isDefined(level._id_A056._id_4C2C[0]))
+  if(isDefined(level._id_A056._id_4C2C) && isDefined(level._id_A056._id_4C2C[0])) {
     level notify("jackal_target_aid_callout", level._id_A056._id_4C2C[1]);
-  else {
+  } else {
     var_0 = _id_1423();
 
     if(isDefined(var_0)) {
@@ -3095,10 +3247,11 @@ _id_114F4() {
 }
 
 _id_EF45() {
-  if(isDefined(level._id_A056._id_4C2C) && isDefined(level._id_A056._id_4C2C[0]))
+  if(isDefined(level._id_A056._id_4C2C) && isDefined(level._id_A056._id_4C2C[0])) {
     var_0 = 1;
-  else
+  } else {
     var_0 = 0;
+  }
 
   return level._id_A056._id_D92C.size > var_0;
 }
@@ -3148,13 +3301,15 @@ _id_1423() {
         continue;
       }
 
-      if(isDefined(var_14.script_team) && var_14.script_team != "axis")
+      if(isDefined(var_14.script_team) && var_14.script_team != "axis") {
         var_12 = scripts\engine\utility::array_remove(var_12, var_14);
+      }
     }
   }
 
-  if(var_12.size == 0)
+  if(var_12.size == 0) {
     return undefined;
+  }
 
   var_16 = 0;
   var_17 = [];
@@ -3167,17 +3322,19 @@ _id_1423() {
     var_21 = undefined;
     var_22 = _id_0B76::_id_7A60(var_14.origin);
 
-    if(var_22 >= var_0)
+    if(var_22 >= var_0) {
       var_20 = var_20 + var_8;
-    else if(var_22 >= var_1)
+    } else if(var_22 >= var_1) {
       var_20 = var_20 + var_9;
+    }
 
     var_23 = distance(level._id_D127.origin, var_14.origin);
 
-    if(var_23 <= var_2)
+    if(var_23 <= var_2) {
       var_20 = var_20 + var_10;
-    else if(var_23 <= var_3)
+    } else if(var_23 <= var_3) {
       var_20 = var_20 + var_11;
+    }
 
     if(issubstr(var_14.classname, "ace")) {
       var_21 = "ace";
@@ -3247,8 +3404,9 @@ _id_1424() {
 _id_D39E() {
   var_0 = level.player _meth_848A();
 
-  if(isDefined(var_0) && isDefined(var_0[0]))
+  if(isDefined(var_0) && isDefined(var_0[0])) {
     return 1;
+  }
 
   return 0;
 }
@@ -3274,11 +3432,13 @@ _id_1095F() {
   level._id_A056.targets = scripts\engine\utility::array_removeundefined(level._id_A056.targets);
   level.player scripts\sp\utility::_id_65E1("disable_jackal_lockon");
 
-  foreach(var_1 in level._id_A056.targets)
-  var_1 _id_0BDC::_id_105D9();
+  foreach(var_1 in level._id_A056.targets) {
+    var_1 _id_0BDC::_id_105D9();
+  }
 
   setomnvar("ui_jackal_callouts_enabled", 0);
 
-  if(scripts\engine\utility::player_is_in_jackal())
+  if(scripts\engine\utility::player_is_in_jackal()) {
     level.player _meth_8490("disable_lockon", 1);
+  }
 }

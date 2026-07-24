@@ -87,8 +87,9 @@ set_carrying_mindcontrol(var_0, var_1, var_2) {
   for(;;) {
     var_3 = scripts\engine\utility::waittill_any_return("place_ims", "cancel_ims", "force_cancel_placement", "player_action_slot_restart");
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       var_3 = "force_cancel_placement";
+    }
 
     if(var_3 == "cancel_ims" || var_3 == "force_cancel_placement" || var_3 == "player_action_slot_restart") {
       if(!var_1 && var_3 == "cancel_ims") {
@@ -96,10 +97,11 @@ set_carrying_mindcontrol(var_0, var_1, var_2) {
       }
       var_0 mindcontrol_trap_setcancelled(var_3 == "force_cancel_placement" && !isDefined(var_0.firstplacement));
 
-      if(var_3 != "force_cancel_placement")
+      if(var_3 != "force_cancel_placement") {
         thread watch_dpad();
-      else if(var_1)
+      } else if(var_1) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
+      }
 
       return 0;
     }
@@ -107,8 +109,9 @@ set_carrying_mindcontrol(var_0, var_1, var_2) {
     if(!var_0.canbeplaced) {
       continue;
     }
-    if(var_1)
+    if(var_1) {
       scripts\cp\utility::remove_crafted_item_from_inventory(self);
+    }
 
     var_0 thread mindcontrol_trap_setplaced(var_2);
     self notify("IMS_placed");
@@ -153,10 +156,11 @@ create_mindcontrol_trap(var_0, var_1) {
   var_4.config = level.mindcontrol_trap_settings[var_3];
   var_4 thread mindcontrol_trap_handleuse();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_4 thread scripts\cp\utility::item_timeout(var_1);
-  else
+  } else {
     var_4 thread scripts\cp\utility::item_timeout(undefined, level.mindcontrol_trap_settings[self.mindcontrol_trap_type].lifespan);
+  }
 
   return var_4;
 }
@@ -218,8 +222,9 @@ mindcontrol_trap_handleuse() {
     }
     mindcontrol_trap_setinactive();
 
-    if(isDefined(self getlinkedparent()))
+    if(isDefined(self getlinkedparent())) {
       self unlink();
+    }
 
     var_0 thread set_carrying_mindcontrol(var_1, 0, self.lifespan);
     self delete();
@@ -231,13 +236,15 @@ mindcontrol_trap_setplaced(var_0) {
   self endon("death");
   level endon("game_ended");
 
-  if(isDefined(self.carriedby))
+  if(isDefined(self.carriedby)) {
     self.carriedby forceusehintoff();
+  }
 
   self.carriedby = undefined;
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.iscarrying = 0;
+  }
 
   self.firstplacement = undefined;
   var_1 = create_mindcontrol_trap(self, var_0);
@@ -248,8 +255,9 @@ mindcontrol_trap_setplaced(var_0) {
   var_1 thread mindcontrol_trap_setactive();
   var_2 = spawnStruct();
 
-  if(isDefined(self.moving_platform))
+  if(isDefined(self.moving_platform)) {
     var_2.linkparent = self.moving_platform;
+  }
 
   var_2.endonstring = "carried";
   var_2.deathoverridecallback = ::_id_936D;
@@ -267,8 +275,9 @@ mindcontrol_trap_setcancelled(var_0) {
     var_1 scripts\engine\utility::allow_weapon(1);
   }
 
-  if(isDefined(var_0) && var_0)
+  if(isDefined(var_0) && var_0) {
     _id_66A7();
+  }
 
   self.carried_mindcontrol_trap delete();
   self delete();
@@ -285,8 +294,9 @@ mindcontrol_trap_setcarried(var_0) {
   thread _id_936F(var_0);
   thread _id_9371(var_0);
 
-  if(isDefined(level._id_5CF2))
+  if(isDefined(level._id_5CF2)) {
     self thread[[level._id_5CF2]](var_0);
+  }
 
   self notify("carried");
 }
@@ -320,23 +330,26 @@ mindcontrol_trap_setactive() {
   thread mindcontrol_trap_kill_zombies();
   thread scripts\cp\utility::item_handleownerdisconnect("mindcontrol_disconnect");
 
-  if(!isDefined(var_0.next_trap_time))
+  if(!isDefined(var_0.next_trap_time)) {
     var_0.next_trap_time = gettime();
+  }
 
   wait 1;
 
   if(isDefined(var_0)) {
-    if(gettime() >= var_0.next_trap_time)
+    if(gettime() >= var_0.next_trap_time) {
       self setscriptablepartstate("mindcontrol", "on");
-    else {
-      while(gettime() <= var_0.next_trap_time)
+    } else {
+      while(gettime() <= var_0.next_trap_time) {
         wait 0.05;
+      }
 
       self setscriptablepartstate("mindcontrol", "on");
     }
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_0.next_trap_time = gettime() + 3000;
+    }
   } else
     self notify("death");
 }
@@ -346,8 +359,9 @@ mindcontrol_trap_setinactive() {
   self stoploopsound();
   self setscriptablepartstate("mindcontrol", "off");
 
-  if(isDefined(self.dmg_trig))
+  if(isDefined(self.dmg_trig)) {
     self.dmg_trig delete();
+  }
 
   scripts\cp\utility::removefromtraplist();
 }
@@ -429,8 +443,9 @@ kill_intersecting_zombies(var_0) {
       var_3.customdeath = 1;
       var_3 dodamage(var_3.health + 100, var_3.origin, self, self, "MOD_MELEE", "none");
 
-      if(isDefined(var_0.owner))
+      if(isDefined(var_0.owner)) {
         var_0.owner scripts\cp\cp_merits::processmerit("mt_dlc3_crafted_kills");
+      }
     }
 
     wait 0.05;

@@ -49,8 +49,9 @@ _id_F9EE(var_0) {
         var_7 = 1;
       }
 
-      if(var_3.spawnflags & 128)
+      if(var_3.spawnflags & 128) {
         var_8 = 1;
+      }
     }
 
     var_5._id_C2A5 = var_3.script_noteworthy;
@@ -62,8 +63,9 @@ _id_F9EE(var_0) {
     var_5._id_111A3 = var_6;
     var_5._id_4469 = 0;
 
-    if(var_8)
+    if(var_8) {
       var_5._id_BDBD = 1;
+    }
 
     level._id_FD5B[level._id_FD5B.size] = var_5;
     var_1[var_1.size] = var_5;
@@ -76,7 +78,7 @@ _id_F9EE(var_0) {
       }
 
       if(isDefined(level._id_FD50[var_11._id_C2A5])) {
-        level._id_FD50[var_11._id_C2A5] = scripts\engine\utility::array_add(level._id_FD50[var_11._id_C2A5], var_11);
+        level._id_FD50[var_11._id_C2A5] = ::scripts\engine\utility::array_add(level._id_FD50[var_11._id_C2A5], var_11);
         continue;
       }
 
@@ -91,8 +93,9 @@ _id_FD02(var_0, var_1, var_2) {
   var_3 = level._id_FD50[var_0];
   var_4 = var_3[0]._id_C2A5;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "Objective";
+  }
 
   for(var_5 = 0; var_5 < var_3.size; var_5++) {
     var_6 = var_3[var_5];
@@ -104,8 +107,9 @@ _id_FD02(var_0, var_1, var_2) {
     }
 
     if(isDefined(var_7)) {
-      if(var_5 == 0)
+      if(var_5 == 0) {
         objective_add(scripts\sp\utility::_id_C264(var_4), "current", var_1, (0, 0, 0));
+      }
 
       objective_additionalposition(scripts\sp\utility::_id_C264(var_4), var_7, var_6.origin);
       var_6 thread _id_13F4();
@@ -113,15 +117,17 @@ _id_FD02(var_0, var_1, var_2) {
     }
 
     if(isDefined(var_6._id_BDBD)) {
-      if(var_5 == 0)
+      if(var_5 == 0) {
         objective_add(scripts\sp\utility::_id_C264(var_4), "current", var_1, (0, 0, 0));
+      }
 
       objective_additionalposition(scripts\sp\utility::_id_C264(var_4), var_5, var_6.origin);
     }
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     objective_setpointertextoverride(scripts\sp\utility::_id_C264(var_4), var_2);
+  }
 }
 
 _id_13F3(var_0) {
@@ -138,12 +144,14 @@ _id_13F4() {
   var_0 = 1;
 
   foreach(var_2 in level._id_FD50[self._id_C2A5]) {
-    if(var_2._id_4469 == 0)
+    if(var_2._id_4469 == 0) {
       var_0 = 0;
+    }
   }
 
-  if(var_0)
+  if(var_0) {
     _id_FD00(self._id_C2A5);
+  }
 }
 
 _id_FD01(var_0) {
@@ -271,10 +279,11 @@ _id_FCD8() {
       level._id_454B[var_14] = var_3[var_14];
       var_15 = (0, 0, 0);
 
-      if(var_3[var_14]._id_C29D == "rss")
+      if(var_3[var_14]._id_C29D == "rss") {
         var_15 = (0, 0, -10) + anglestoright(var_3[var_14].angles) * 15;
-      else
+      } else {
         var_15 = (0, 0, 40) + anglesToForward(var_3[var_14].angles) * 25;
+      }
 
       objective_additionalentity(var_0, 0, var_3[var_14], var_15);
       objective_icon(var_0, level._id_4548[var_3[var_14]._id_C29D]);
@@ -298,11 +307,13 @@ _id_FD0D(var_0) {
 }
 
 _id_FD0E() {
-  for(var_0 = 30; var_0 > level._id_4549; var_0--)
+  for(var_0 = 30; var_0 > level._id_4549; var_0--) {
     objective_delete(var_0);
+  }
 
-  foreach(var_2 in level._id_454A)
-  var_2 delete();
+  foreach(var_2 in level._id_454A) {
+    var_2 delete();
+  }
 
   level._id_454A = undefined;
 }
@@ -320,8 +331,9 @@ _id_FD16() {
   wait 1.5;
   var_0 = level.player.origin;
 
-  while(var_0 == level.player.origin)
+  while(var_0 == level.player.origin) {
     wait 0.05;
+  }
 
   _id_FCF6();
 }

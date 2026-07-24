@@ -14,15 +14,17 @@ start_detonate_bomb() {
     var_2 thread enter_detonate_bomb_sequence(var_2, var_0[var_3]);
   }
 
-  if(!isDefined(level.bomb_detonation_attempts))
+  if(!isDefined(level.bomb_detonation_attempts)) {
     level.bomb_detonation_attempts = 0;
+  }
 
   level.bomb_detonation_attempts = level.bomb_detonation_attempts + 1;
 }
 
 exit_early_from_all_active_consumables(var_0) {
-  foreach(var_3, var_2 in var_0.consumables)
-  var_0 notify(var_3 + "_exited_early");
+  foreach(var_3, var_2 in var_0.consumables) {
+    var_0 notify(var_3 + "_exited_early");
+  }
 }
 
 enter_bomb_code(var_0, var_1) {
@@ -71,8 +73,9 @@ bomb_counter_selected_monitor(var_0, var_1) {
       var_4 = nuclear_code_completed(var_0);
       correct_sfx(var_0, var_4);
 
-      if(var_4)
+      if(var_4) {
         player_complete_nuclear_code(var_1, var_0);
+      }
 
       continue;
     }
@@ -82,10 +85,11 @@ bomb_counter_selected_monitor(var_0, var_1) {
 }
 
 correct_sfx(var_0, var_1) {
-  if(var_1)
+  if(var_1) {
     var_0 playlocalsound("cp_town_timer_final_pass");
-  else
+  } else {
     var_0 playlocalsound("cp_town_timer_single_pass");
+  }
 }
 
 player_exit_monitor(var_0, var_1) {
@@ -142,18 +146,21 @@ enter_detonate_bomb_sequence(var_0, var_1) {
 }
 
 end_detonate_bomb(var_0) {
-  foreach(var_3, var_2 in level.players)
-  var_2 thread exit_detonate_bomb_sequence(var_2);
+  foreach(var_3, var_2 in level.players) {
+    var_2 thread exit_detonate_bomb_sequence(var_2);
+  }
 
-  foreach(var_5 in level.bomb_interaction_structs)
-  clean_up_bomb_interaction_struct(var_5);
+  foreach(var_5 in level.bomb_interaction_structs) {
+    clean_up_bomb_interaction_struct(var_5);
+  }
 
   delete_bomb_lights();
 
-  if(scripts\engine\utility::is_true(var_0))
+  if(scripts\engine\utility::is_true(var_0)) {
     level thread crab_boss_death_sequence();
-  else
+  } else {
     scripts\cp\maps\cp_town\cp_town_crab_boss_fight::replay_final_sequence();
+  }
 
   level notify("end_detonate_bomb");
 }
@@ -218,23 +225,26 @@ delay_give_rewards() {
     var_1 setplayerdata("cp", "haveSoulKeys", "soul_key_4", 1);
     var_1 scripts\cp\zombies\achievement::update_achievement("SOUL_LESS", 1);
 
-    if(!var_1 scripts\cp\utility::isteleportenabled())
+    if(!var_1 scripts\cp\utility::isteleportenabled()) {
       var_1 scripts\cp\utility::allow_player_teleport(1);
+    }
 
-    if(var_1.vo_prefix == "p5_")
+    if(var_1.vo_prefix == "p5_") {
       var_1 scripts\cp\zombies\achievement::update_achievement("UNPLEASANT_DREAMS", 1);
+    }
   }
 
   level scripts\cp\utility::set_completed_quest_mark(4);
   level thread scripts\cp\cp_vo::try_to_play_vo("ww_easteregg_complete", "rave_announcer_vo", "highest", 70, 0, 0, 1);
   wait(scripts\cp\cp_vo::get_sound_length("ww_easteregg_complete") + 5);
 
-  if(scripts\cp\cp_music_and_dialog::can_play_dialogue_system())
+  if(scripts\cp\cp_music_and_dialog::can_play_dialogue_system()) {
     level thread scripts\cp\cp_vo::try_to_play_vo("sally_soul_key_1", "rave_dialogue_vo", "highest", 666, 0, 0, 0, 100);
-  else {
+  } else {
     foreach(var_1 in level.players) {
-      if(var_1.vo_prefix == "p5_")
+      if(var_1.vo_prefix == "p5_") {
         var_1 thread scripts\cp\cp_vo::try_to_play_vo("defeat_radboss", "town_comment_vo", "low", 10, 0, 0, 0, 10);
+      }
     }
 
     wait(scripts\cp\cp_vo::get_sound_length("el_defeat_radboss"));
@@ -254,14 +264,17 @@ crab_boss_death_anim_sequence(var_0) {
 }
 
 clean_up_bomb_interaction_struct(var_0) {
-  if(isDefined(var_0.bomb_counter_ent))
+  if(isDefined(var_0.bomb_counter_ent)) {
     var_0.bomb_counter_ent delete();
+  }
 
-  if(isDefined(var_0.bomb_status_light))
+  if(isDefined(var_0.bomb_status_light)) {
     var_0.bomb_status_light delete();
+  }
 
-  if(isDefined(var_0.bomb_panel_model))
+  if(isDefined(var_0.bomb_panel_model)) {
     var_0.bomb_panel_model delete();
+  }
 }
 
 exit_detonate_bomb_sequence(var_0) {
@@ -271,8 +284,9 @@ exit_detonate_bomb_sequence(var_0) {
   var_0 scripts\engine\utility::allow_weapon_switch(1);
   var_0 takeweapon("iw7_gunless_zm");
 
-  if(!var_0 hasweapon(var_0.weapon_before_bomb_sequence))
+  if(!var_0 hasweapon(var_0.weapon_before_bomb_sequence)) {
     var_0 scripts\cp\utility::_giveweapon(var_0.weapon_before_bomb_sequence, undefined, undefined, 1);
+  }
 
   var_0 switchtoweapon(var_0.weapon_before_bomb_sequence);
   var_0 scripts\cp\powers\coop_powers::restore_powers(var_0, var_0.powers_before_entangler);
@@ -327,8 +341,9 @@ should_be_removed_for_bomb_sequence(var_0) {
 }
 
 restore_all_previous_perks(var_0) {
-  foreach(var_2 in var_0.pre_ghost_perks)
-  var_0 scripts\cp\zombies\zombies_perk_machines::give_zombies_perk(var_2, 0);
+  foreach(var_2 in var_0.pre_ghost_perks) {
+    var_0 scripts\cp\zombies\zombies_perk_machines::give_zombies_perk(var_2, 0);
+  }
 }
 
 teleport_into_boss_crab(var_0, var_1) {
@@ -407,15 +422,17 @@ generate_nuclear_code() {
 assign_nuclear_code(var_0, var_1) {
   var_0.nuclear_code = [];
 
-  for(var_2 = 0; var_2 < 5; var_2++)
+  for(var_2 = 0; var_2 < 5; var_2++) {
     var_0.nuclear_code[var_2] = var_1[var_2];
+  }
 }
 
 reset_bomb_interaction_struct() {
   level.num_of_nuclear_code_entered = 0;
 
-  foreach(var_1 in level.bomb_interaction_structs)
-  scripts\cp\cp_interaction::add_to_current_interaction_list(var_1);
+  foreach(var_1 in level.bomb_interaction_structs) {
+    scripts\cp\cp_interaction::add_to_current_interaction_list(var_1);
+  }
 }
 
 init_bomb_interaction() {
@@ -471,10 +488,11 @@ input_wrong_digit(var_0, var_1) {
 }
 
 wrong_sfx(var_0) {
-  if(var_0.times_input_wrong_digits == 3)
+  if(var_0.times_input_wrong_digits == 3) {
     var_0 playlocalsound("cp_town_timer_final_fail");
-  else
+  } else {
     var_0 playlocalsound("cp_town_timer_single_fail");
+  }
 }
 
 flashing_red_strikes(var_0) {
@@ -503,8 +521,9 @@ player_complete_nuclear_code(var_0, var_1) {
 }
 
 check_all_nuclear_code_entered() {
-  if(all_nuclear_code_entered())
+  if(all_nuclear_code_entered()) {
     level thread nuclear_bomb_armed_sequence();
+  }
 }
 
 all_nuclear_code_entered() {
@@ -515,8 +534,9 @@ nuclear_bomb_armed_sequence() {
   level notify("nuclear_bomb_armed");
 
   foreach(var_1 in level.players) {
-    if(level.bomb_detonation_attempts == 1)
+    if(level.bomb_detonation_attempts == 1) {
       var_1 scripts\cp\zombies\achievement::update_achievement("BELLY_OF_BEAST", 1);
+    }
   }
 
   wait 3;
@@ -527,12 +547,14 @@ delay_move_status_lights_down() {
   wait 2;
   var_0 = scripts\engine\utility::getStruct("bomb_lights", "script_noteworthy");
 
-  if(isDefined(var_0.bomb_lights))
+  if(isDefined(var_0.bomb_lights)) {
     var_0.bomb_lights moveTo(var_0.bomb_lights.origin - (0, 0, 8), 1.5);
+  }
 
   foreach(var_2 in level.bomb_interaction_structs) {
-    if(isDefined(var_2.bomb_status_light))
+    if(isDefined(var_2.bomb_status_light)) {
       var_2.bomb_status_light moveTo(var_2.bomb_status_light.origin - (0, 0, 8), 1.5);
+    }
   }
 }
 
@@ -544,17 +566,19 @@ teleport_out_of_crab_boss(var_0) {
 }
 
 get_player_post_bomb_code_pos(var_0) {
-  if(isDefined(var_0.pre_bomb_code_pos))
+  if(isDefined(var_0.pre_bomb_code_pos)) {
     return var_0.pre_bomb_code_pos;
-  else
+  } else {
     return (2991, 2803, -134);
+  }
 }
 
 get_player_post_bomb_code_angles(var_0) {
-  if(isDefined(var_0.pre_bomb_code_angles))
+  if(isDefined(var_0.pre_bomb_code_angles)) {
     return var_0.pre_bomb_code_angles;
-  else
+  } else {
     return vectortoangles((530, 1733, -97));
+  }
 }
 
 detonate_bomb_timer() {
@@ -563,12 +587,14 @@ detonate_bomb_timer() {
   level endon("nuclear_bomb_armed");
   wait 30;
 
-  foreach(var_1 in level.bomb_interaction_structs)
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(var_1);
+  foreach(var_1 in level.bomb_interaction_structs) {
+    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_1);
+  }
 
   foreach(var_4 in level.players) {
-    if(is_entering_bomb_code(var_4))
+    if(is_entering_bomb_code(var_4)) {
       var_4.bomb_interaction_struct thread exit_enter_bomb_code(var_4.bomb_interaction_struct, var_4);
+    }
   }
 
   wait 2;
@@ -624,8 +650,9 @@ move_up(var_0) {
 delete_bomb_lights() {
   var_0 = scripts\engine\utility::getStruct("bomb_lights", "script_noteworthy");
 
-  if(isDefined(var_0.bomb_lights))
+  if(isDefined(var_0.bomb_lights)) {
     var_0.bomb_lights delete();
+  }
 }
 
 detonate_bomb_test() {}

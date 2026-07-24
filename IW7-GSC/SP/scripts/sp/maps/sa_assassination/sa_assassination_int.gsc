@@ -204,8 +204,9 @@ _id_451A() {
   _id_0F16::_id_C278(scripts\sp\utility::_id_C264("BYPASS_SECURITY_TERMINAL"));
   scripts\engine\utility::flag_wait("sa_bowupper_roomb_start");
 
-  if(isDefined(level._id_DBBE))
+  if(isDefined(level._id_DBBE)) {
     scripts\engine\utility::array_thread(level._id_DBBE, _id_0EFC::_id_4097);
+  }
 
   thread scripts\sp\utility::_id_2679();
   var_1 = scripts\sp\utility::_id_C264("KILL_COMMANDERS");
@@ -258,74 +259,97 @@ _id_1D8A() {
   var_1 = var_0 scripts\sp\utility::_id_77E3();
 
   for(;;) {
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf1_ijustreadthe");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf4_thatsthesecondtime");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf1_thereporttestifiesthat");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf4_earlyearthhowearly");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf1_oldenoughthatthe");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf4_couldhavebeenone");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf1_theyranthesignal");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf4_whatthehellhappened");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf1_theemergencytransmissionfrom");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf4_whatdidtheydo");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf1_theyplayeditmusic");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf4_thelegionsheardthe");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf1_theywerebroadcastship");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf4_whatdidhighcommand");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf1_thevalliswasordered");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf4_asamatterof");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf1_butvallisdidntarrive");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf4_theymusthavedefected");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf1_thatsthepointof");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf4_youareanimbecile");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf1_iamcarefulto");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf4_ifthereisdefection");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf1_youdonotdecide");
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -339,28 +363,33 @@ _id_1D8B() {
   var_1 = var_0 scripts\sp\utility::_id_77E3();
 
   for(;;) {
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf4_hasnegretecheckedin");
+    }
 
     wait 1;
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf4_noisentthe");
+    }
 
     wait 1;
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf4_imlookingitup");
+    }
 
     wait 1;
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf4_sendhavillsteamto");
+    }
 
     wait 1;
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf4_copythat42462out");
+    }
 
     wait(randomintrange(17, 25));
   }
@@ -372,50 +401,65 @@ _id_1D8E() {
   var_1 = var_0 scripts\sp\utility::_id_77E3();
 
   for(;;) {
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf3_hasthemeetingstarted");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf4_ithinksoi");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf4_yeskashiksaidtheyve");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf3_whyhavewenot");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf4_aftertheconferencefurther");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf3_butwhymeethere");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf4_therecouldbereconnaissance");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf3_therehavebeencounterattacks");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf4_lowerrankingguardsmanwanting");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf3_theearthbornhave");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf4_manyinthelegions");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf3_youreclaimingthecouncil");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf4_lowerrankingguardsmanwanting");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf4_ididntsaythey");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf3_youcanfinishthe");
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -609,8 +653,9 @@ _id_F8C7() {
     var_0._id_872A thread _id_88B1(var_0);
   }
 
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "barracks_guy3")
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "barracks_guy3") {
     thread _id_88D6();
+  }
 }
 
 #using_animtree("generic_human");
@@ -647,8 +692,9 @@ _id_88D6() {
   var_2 = getanimlength(%sa_assassin_enter_barracks_sdf_start);
   wait(var_2);
 
-  if(isDefined(self) && isalive(self))
+  if(isDefined(self) && isalive(self)) {
     thread _id_88D7(var_0);
+  }
 }
 
 _id_F5B3() {
@@ -756,8 +802,9 @@ _id_F8BB(var_0, var_1) {
             break;
           }
 
-          if(scripts\sp\utility::_id_65DB("ent_stealth_alert"))
+          if(scripts\sp\utility::_id_65DB("ent_stealth_alert")) {
             var_0._id_872A scripts\sp\utility::_id_1101B();
+          }
       }
 
       break;
@@ -939,8 +986,9 @@ _id_88C1() {
   wait 0.5;
 
   foreach(var_1 in level._id_2825) {
-    if(isDefined(var_1) && isalive(var_1) && var_1.script_noteworthy != "barracks_guy2")
+    if(isDefined(var_1) && isalive(var_1) && var_1.script_noteworthy != "barracks_guy2") {
       var_1 scripts\sp\utility::_id_54C6();
+    }
   }
 
   wait 0.5;
@@ -995,8 +1043,9 @@ _id_88D5(var_0) {
   var_3._id_D267 delete();
   wait 1.5;
 
-  foreach(var_5 in var_2)
-  var_5 delete();
+  foreach(var_5 in var_2) {
+    var_5 delete();
+  }
 
   scripts\sp\maps\sa_assassination\sa_assassination_util::_id_E986(1);
   var_3._id_D266 = scripts\sp\utility::_id_10639("player_rig_disguise", var_3.pos.origin, var_3.pos.angles);
@@ -1090,8 +1139,9 @@ _id_6615() {
   scripts\sp\utility::_id_10350("asn_slt_keepyouhidden");
   scripts\engine\utility::flag_wait("flag_hub_halfway");
 
-  if(!scripts\engine\utility::flag("ship_in_lockdown"))
+  if(!scripts\engine\utility::flag("ship_in_lockdown")) {
     scripts\sp\utility::_id_10350("asn_slt_goodstealthchattersclean");
+  }
 }
 
 _id_F02B() {
@@ -1124,26 +1174,33 @@ _id_1EA5(var_0) {
 _id_2F2D(var_0) {
   level endon("stop_boxing_conv");
 
-  if(isDefined(var_0[0]) && isalive(var_0[0]))
+  if(isDefined(var_0[0]) && isalive(var_0[0])) {
     var_0[0] scripts\sp\utility::_id_10347("asn_sdf1_strongsuit");
+  }
 
-  if(isDefined(var_0[1]) && isalive(var_0[1]))
+  if(isDefined(var_0[1]) && isalive(var_0[1])) {
     var_0[1] scripts\sp\utility::_id_10347("asn_sdf2_teachlesson");
+  }
 
-  if(isDefined(var_0[2]) && isalive(var_0[2]))
+  if(isDefined(var_0[2]) && isalive(var_0[2])) {
     var_0[2] scripts\sp\utility::_id_10347("asn_sdf3_handtohand");
+  }
 
-  if(isDefined(var_0[0]) && isalive(var_0[0]))
+  if(isDefined(var_0[0]) && isalive(var_0[0])) {
     var_0[0] scripts\sp\utility::_id_10347("asn_sdf1_guardup");
+  }
 
-  if(isDefined(var_0[1]) && isalive(var_0[1]))
+  if(isDefined(var_0[1]) && isalive(var_0[1])) {
     var_0[1] scripts\sp\utility::_id_10347("asn_sdf3_lowstance");
+  }
 
-  if(isDefined(var_0[2]) && isalive(var_0[2]))
+  if(isDefined(var_0[2]) && isalive(var_0[2])) {
     var_0[2] scripts\sp\utility::_id_10347("asn_sdf1_badposition");
+  }
 
-  if(isDefined(var_0[0]) && isalive(var_0[0]))
+  if(isDefined(var_0[0]) && isalive(var_0[0])) {
     var_0[0] scripts\sp\utility::_id_10347("asn_sdf1_letsspar");
+  }
 }
 
 _id_BDAC(var_0) {
@@ -1189,8 +1246,9 @@ _id_BDAD(var_0) {
   level.player scripts\sp\utility::_id_F416(0);
   _id_0F27::_id_F397("combat", undefined);
 
-  if(!scripts\engine\utility::flag("stealth_spotted"))
+  if(!scripts\engine\utility::flag("stealth_spotted")) {
     self _meth_84F7("reset", self, self.origin);
+  }
 }
 
 _id_C126() {
@@ -1251,32 +1309,41 @@ _id_1D8C() {
   var_1 = var_0 scripts\sp\utility::_id_77E3();
 
   for(;;) {
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf4_iheardweremoving");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf3_soundslikeitwe");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf4_anyideawherewere");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf3_idontthinkthey");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf4_theresnowaythe");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf3_noshitiheard");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf4_justlegionguardsblowing");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf3_imhopingweget");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf4_letsmakesurewere");
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -1289,50 +1356,65 @@ _id_1D8D() {
   var_1 = var_0 scripts\sp\utility::_id_77E3();
 
   for(;;) {
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf3_hasthemeetingstarted");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf4_ithinksoi");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[2] scripts\sp\utility::_id_10347("asn_sdf4_yeskashiksaidtheyve");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf3_whyhavewenot");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf4_aftertheconferencefurther");
+    }
 
-    if(isDefined(var_1[2]) && isalive(var_1[2]))
+    if(isDefined(var_1[2]) && isalive(var_1[2])) {
       var_1[2] scripts\sp\utility::_id_10347("asn_sdf3_butwhymeethere");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf4_therecouldbereconnaissance");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf3_therehavebeencounterattacks");
+    }
 
-    if(isDefined(var_1[2]) && isalive(var_1[2]))
+    if(isDefined(var_1[2]) && isalive(var_1[2])) {
       var_1[2] scripts\sp\utility::_id_10347("asn_sdf4_lowerrankingguardsmanwanting");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf3_theearthbornhave");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf4_manyinthelegions");
+    }
 
-    if(isDefined(var_1[2]) && isalive(var_1[2]))
+    if(isDefined(var_1[2]) && isalive(var_1[2])) {
       var_1[2] scripts\sp\utility::_id_10347("asn_sdf3_youreclaimingthecouncil");
+    }
 
-    if(isDefined(var_1[0]) && isalive(var_1[0]))
+    if(isDefined(var_1[0]) && isalive(var_1[0])) {
       var_1[0] scripts\sp\utility::_id_10347("asn_sdf4_lowerrankingguardsmanwanting");
+    }
 
-    if(isDefined(var_1[1]) && isalive(var_1[1]))
+    if(isDefined(var_1[1]) && isalive(var_1[1])) {
       var_1[1] scripts\sp\utility::_id_10347("asn_sdf4_ididntsaythey");
+    }
 
-    if(isDefined(var_1[2]) && isalive(var_1[2]))
+    if(isDefined(var_1[2]) && isalive(var_1[2])) {
       var_1[2] scripts\sp\utility::_id_10347("asn_sdf3_youcanfinishthe");
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -1392,8 +1474,9 @@ _id_21CA() {
   wait(var_3);
   level notify("cart_stopped");
 
-  if(isDefined(var_2._id_872A))
+  if(isDefined(var_2._id_872A)) {
     var_2.pos thread scripts\sp\anim::_id_1EE7(var_2._id_1684, "armory_cart_loop");
+  }
 }
 
 _id_3B09() {
@@ -1434,11 +1517,13 @@ _id_7375(var_0) {
 _id_21CB(var_0) {
   scripts\engine\utility::flag_wait("flag_commanders_killed");
 
-  if(isDefined(var_0._id_872A))
+  if(isDefined(var_0._id_872A)) {
     var_0._id_872A delete();
+  }
 
-  if(isDefined(var_0._id_3B04))
+  if(isDefined(var_0._id_3B04)) {
     var_0._id_3B04 delete();
+  }
 }
 
 _id_88D3() {
@@ -1473,59 +1558,77 @@ _id_1D88() {
   var_0 = getEnt("armory_conv1_vol", "targetname");
   var_1 = var_0 scripts\sp\utility::_id_77E3();
 
-  if(isDefined(var_1[0]) && isalive(var_1[0]))
+  if(isDefined(var_1[0]) && isalive(var_1[0])) {
     var_1[0] scripts\sp\utility::_id_10347("asn_sdf2_nothingsshowingonmy");
+  }
 
-  if(isDefined(var_1[1]) && isalive(var_1[1]))
+  if(isDefined(var_1[1]) && isalive(var_1[1])) {
     var_1[1] scripts\sp\utility::_id_10347("asn_sdf3_whatsthestatushere");
+  }
 
-  if(isDefined(var_1[0]) && isalive(var_1[0]))
+  if(isDefined(var_1[0]) && isalive(var_1[0])) {
     var_1[0] scripts\sp\utility::_id_10347("asn_sdf2_starboardtaccontrolreports");
+  }
 
-  if(isDefined(var_1[1]) && isalive(var_1[1]))
+  if(isDefined(var_1[1]) && isalive(var_1[1])) {
     var_1[1] scripts\sp\utility::_id_10347("asn_sdf3_youwantmeto");
+  }
 
-  if(isDefined(var_1[0]) && isalive(var_1[0]))
+  if(isDefined(var_1[0]) && isalive(var_1[0])) {
     var_1[0] scripts\sp\utility::_id_10347("asn_sdf2_standbytheyre");
+  }
 
-  if(isDefined(var_1[1]) && isalive(var_1[1]))
+  if(isDefined(var_1[1]) && isalive(var_1[1])) {
     var_1[1] scripts\sp\utility::_id_10347("asn_sdf3_tellemwesaw");
+  }
 
-  if(isDefined(var_1[0]) && isalive(var_1[0]))
+  if(isDefined(var_1[0]) && isalive(var_1[0])) {
     var_1[0] scripts\sp\utility::_id_10347("asn_sdf2_wesawitlast");
+  }
 
-  if(isDefined(var_1[1]) && isalive(var_1[1]))
+  if(isDefined(var_1[1]) && isalive(var_1[1])) {
     var_1[1] scripts\sp\utility::_id_10347("asn_sdf3_taccontrolteamsbeen");
+  }
 
-  if(isDefined(var_1[0]) && isalive(var_1[0]))
+  if(isDefined(var_1[0]) && isalive(var_1[0])) {
     var_1[0] scripts\sp\utility::_id_10347("asn_sdf2_procreationpermitswillbe");
+  }
 
-  if(isDefined(var_1[0]) && isalive(var_1[0]))
+  if(isDefined(var_1[0]) && isalive(var_1[0])) {
     var_1[0] scripts\sp\utility::_id_10347("asn_sdf3_foreverylegion");
+  }
 
-  if(isDefined(var_1[1]) && isalive(var_1[1]))
+  if(isDefined(var_1[1]) && isalive(var_1[1])) {
     var_1[1] scripts\sp\utility::_id_10347("asn_sdf2_officerscouncilandhigh");
+  }
 
-  if(isDefined(var_1[0]) && isalive(var_1[0]))
+  if(isDefined(var_1[0]) && isalive(var_1[0])) {
     var_1[0] scripts\sp\utility::_id_10347("asn_sdf3_theprocreassemblyshould");
+  }
 
-  if(isDefined(var_1[1]) && isalive(var_1[1]))
+  if(isDefined(var_1[1]) && isalive(var_1[1])) {
     var_1[1] scripts\sp\utility::_id_10347("asn_sdf2_iknowhowyou");
+  }
 
-  if(isDefined(var_1[0]) && isalive(var_1[0]))
+  if(isDefined(var_1[0]) && isalive(var_1[0])) {
     var_1[0] scripts\sp\utility::_id_10347("asn_sdf3_tellme");
+  }
 
-  if(isDefined(var_1[1]) && isalive(var_1[1]))
+  if(isDefined(var_1[1]) && isalive(var_1[1])) {
     var_1[1] scripts\sp\utility::_id_10347("asn_sdf2_thatinformationwillcost");
+  }
 
-  if(isDefined(var_1[0]) && isalive(var_1[0]))
+  if(isDefined(var_1[0]) && isalive(var_1[0])) {
     var_1[0] scripts\sp\utility::_id_10347("asn_sdf3_ivegotcreditsto");
+  }
 
-  if(isDefined(var_1[1]) && isalive(var_1[1]))
+  if(isDefined(var_1[1]) && isalive(var_1[1])) {
     var_1[1] scripts\sp\utility::_id_10347("asn_sdf2_confirmedwellspeakin");
+  }
 
-  if(isDefined(var_1[0]) && isalive(var_1[0]))
+  if(isDefined(var_1[0]) && isalive(var_1[0])) {
     var_1[0] scripts\sp\utility::_id_10347("asn_sdf3_pledged");
+  }
 
   scripts\engine\utility::waitframe();
 }
@@ -1537,62 +1640,81 @@ _id_1D89() {
   var_0 = getEnt("armory_conv2_vol", "targetname");
   var_1 = var_0 scripts\sp\utility::_id_77E3();
 
-  if(isDefined(var_1[0]) && isalive(var_1[0]))
+  if(isDefined(var_1[0]) && isalive(var_1[0])) {
     var_1[0] scripts\sp\utility::_id_10347("asn_sdf1_itwasrecountedto");
+  }
 
-  if(isDefined(var_1[1]) && isalive(var_1[1]))
+  if(isDefined(var_1[1]) && isalive(var_1[1])) {
     var_1[1] scripts\sp\utility::_id_10347("asn_sdf2_thatsnotwhatis");
+  }
 
-  if(isDefined(var_1[0]) && isalive(var_1[0]))
+  if(isDefined(var_1[0]) && isalive(var_1[0])) {
     var_1[0] scripts\sp\utility::_id_10347("asn_sdf1_ifyouhaveinformation");
+  }
 
-  if(isDefined(var_1[1]) && isalive(var_1[1]))
+  if(isDefined(var_1[1]) && isalive(var_1[1])) {
     var_1[1] scripts\sp\utility::_id_10347("asn_sdf2_theunsamounteda");
+  }
 
-  if(isDefined(var_1[0]) && isalive(var_1[0]))
+  if(isDefined(var_1[0]) && isalive(var_1[0])) {
     var_1[0] scripts\sp\utility::_id_10347("asn_sdf1_thisiswellknown");
+  }
 
-  if(isDefined(var_1[1]) && isalive(var_1[1]))
+  if(isDefined(var_1[1]) && isalive(var_1[1])) {
     var_1[1] scripts\sp\utility::_id_10347("asn_sdf2_asmallscarteam");
+  }
 
-  if(isDefined(var_1[0]) && isalive(var_1[0]))
+  if(isDefined(var_1[0]) && isalive(var_1[0])) {
     var_1[0] scripts\sp\utility::_id_10347("asn_sdf1_impossiblethatcannotbe");
+  }
 
-  if(isDefined(var_1[1]) && isalive(var_1[1]))
+  if(isDefined(var_1[1]) && isalive(var_1[1])) {
     var_1[1] scripts\sp\utility::_id_10347("asn_sdf2_thereisrecordthat");
+  }
 
-  if(isDefined(var_1[0]) && isalive(var_1[0]))
+  if(isDefined(var_1[0]) && isalive(var_1[0])) {
     var_1[0] scripts\sp\utility::_id_10347("asn_sdf1_therewerefireteamsand");
+  }
 
-  if(isDefined(var_1[1]) && isalive(var_1[1]))
+  if(isDefined(var_1[1]) && isalive(var_1[1])) {
     var_1[1] scripts\sp\utility::_id_10347("asn_sdf2_theyfellallslain");
+  }
 
-  if(isDefined(var_1[0]) && isalive(var_1[0]))
+  if(isDefined(var_1[0]) && isalive(var_1[0])) {
     var_1[0] scripts\sp\utility::_id_10347("asn_sdf1_youbelievethistale");
+  }
 
-  if(isDefined(var_1[1]) && isalive(var_1[1]))
+  if(isDefined(var_1[1]) && isalive(var_1[1])) {
     var_1[1] scripts\sp\utility::_id_10347("asn_sdf2_imrecountingwhathas");
+  }
 
-  if(isDefined(var_1[0]) && isalive(var_1[0]))
+  if(isDefined(var_1[0]) && isalive(var_1[0])) {
     var_1[0] scripts\sp\utility::_id_10347("asn_sdf1_youarespeakingof");
+  }
 
-  if(isDefined(var_1[1]) && isalive(var_1[1]))
+  if(isDefined(var_1[1]) && isalive(var_1[1])) {
     var_1[1] scripts\sp\utility::_id_10347("asn_sdf2_forgivebutyouinquired");
+  }
 
-  if(isDefined(var_1[0]) && isalive(var_1[0]))
+  if(isDefined(var_1[0]) && isalive(var_1[0])) {
     var_1[0] scripts\sp\utility::_id_10347("asn_sdf1_concurwhataboutthe");
+  }
 
-  if(isDefined(var_1[1]) && isalive(var_1[1]))
+  if(isDefined(var_1[1]) && isalive(var_1[1])) {
     var_1[1] scripts\sp\utility::_id_10347("asn_sdf2_theyleftthevessel");
+  }
 
-  if(isDefined(var_1[0]) && isalive(var_1[0]))
+  if(isDefined(var_1[0]) && isalive(var_1[0])) {
     var_1[0] scripts\sp\utility::_id_10347("asn_sdf1_thisintelligenceisdisreputable");
+  }
 
-  if(isDefined(var_1[1]) && isalive(var_1[1]))
+  if(isDefined(var_1[1]) && isalive(var_1[1])) {
     var_1[1] scripts\sp\utility::_id_10347("asn_sdf2_whateverinbornfoolwas");
+  }
 
-  if(isDefined(var_1[0]) && isalive(var_1[0]))
+  if(isDefined(var_1[0]) && isalive(var_1[0])) {
     var_1[0] scripts\sp\utility::_id_10347("asn_sdf1_enoughreturntoyour");
+  }
 
   scripts\engine\utility::waitframe();
 }
@@ -1623,8 +1745,9 @@ _id_8963() {
   level notify("grabbed_keycard");
   level._id_3A1C delete();
 
-  if(scripts\engine\utility::flag("stealth_spotted"))
+  if(scripts\engine\utility::flag("stealth_spotted")) {
     scripts\engine\utility::flag_waitopen("stealth_spotted");
+  }
 
   level._id_E99E["trig_armory_door_exit"] _id_0F05::_id_12BD3(1);
   scripts\sp\maps\sa_assassination\sa_assassination_fx::_id_132BE(1);
@@ -1689,8 +1812,9 @@ disable_depricated_trigger_plantgas() {
   var_0 = getEntArray("trigger_use_flag_set", "classname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2._id_ED9A) && var_2._id_ED9A == "flag_plant_gas_event")
+    if(isDefined(var_2._id_ED9A) && var_2._id_ED9A == "flag_plant_gas_event") {
       var_2 scripts\engine\utility::trigger_off();
+    }
   }
 }
 
@@ -1699,8 +1823,9 @@ _id_1068D() {
   var_0 = scripts\sp\utility::_id_77DA("conf_grunt_patrol");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2) && isalive(var_2))
+    if(isDefined(var_2) && isalive(var_2)) {
       var_2 delete();
+    }
   }
 
   scripts\engine\utility::flag_wait("flag_kill_commanders_event");
@@ -1781,19 +1906,23 @@ _id_8940() {
 
   for(;;) {
     if(scripts\engine\utility::flag("flag_player_in_rafters")) {
-      if(level.player scripts\sp\utility::_id_7B8C() != "safe")
+      if(level.player scripts\sp\utility::_id_7B8C() != "safe") {
         level.player scripts\sp\utility::_id_F526("safe");
+      }
 
-      foreach(var_2 in var_0)
-      var_2 setlightintensity(50);
+      foreach(var_2 in var_0) {
+        var_2 setlightintensity(50);
+      }
     }
 
     if(!scripts\engine\utility::flag("flag_player_in_rafters")) {
-      if(level.player scripts\sp\utility::_id_7B8C() != "relaxed")
+      if(level.player scripts\sp\utility::_id_7B8C() != "relaxed") {
         level.player scripts\sp\utility::_id_F526("relaxed");
+      }
 
-      foreach(var_2 in var_0)
-      var_2 setlightintensity(0.01);
+      foreach(var_2 in var_0) {
+        var_2 setlightintensity(0.01);
+      }
     }
 
     wait 1;
@@ -1803,13 +1932,15 @@ _id_8940() {
 player_in_server_room() {
   for(;;) {
     if(scripts\engine\utility::flag("flag_player_in_server")) {
-      if(level.player scripts\sp\utility::_id_7B8C() != "safe")
+      if(level.player scripts\sp\utility::_id_7B8C() != "safe") {
         level.player scripts\sp\utility::_id_F526("safe");
+      }
     }
 
     if(!scripts\engine\utility::flag("flag_player_in_server")) {
-      if(level.player scripts\sp\utility::_id_7B8C() != "normal")
+      if(level.player scripts\sp\utility::_id_7B8C() != "normal") {
         level.player scripts\sp\utility::_id_F526("normal");
+      }
     }
 
     wait 1;
@@ -1880,8 +2011,9 @@ _id_F91D(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     var_9._id_DA92._id_1F61 = var_5;
   }
 
-  if(isDefined(var_7) && scripts\engine\utility::is_true(var_7))
+  if(isDefined(var_7) && scripts\engine\utility::is_true(var_7)) {
     var_9._id_872A scripts\sp\utility::_id_86E4();
+  }
 
   var_9._id_B036 = var_0;
   var_9._id_DD29 = var_1;
@@ -1906,14 +2038,17 @@ _id_F91E(var_0, var_1, var_2, var_3) {
   var_4._id_872A._id_1FBB = "generic";
   var_4._id_872A scripts\sp\utility::_id_F2A8(1);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_4._id_DD29 = var_0;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_4._id_B036 = var_1;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_4._id_B035 = var_2;
+  }
 
   if(var_4._id_872A.script_noteworthy == "conf_grunt1" || var_4._id_872A.script_noteworthy == "conf_grunt2") {
     scripts\engine\utility::flag_wait("flag_kill_commanders_event");
@@ -1946,8 +2081,9 @@ _id_F91E(var_0, var_1, var_2, var_3) {
       var_4.node scripts\sp\anim::_id_1EEA(var_4._id_872A, var_4._id_B035);
     }
 
-    if(scripts\engine\utility::flag("flag_conference_room_gas_hot"))
+    if(scripts\engine\utility::flag("flag_conference_room_gas_hot")) {
       thread handle_grunt4_breakout(var_4._id_872A);
+    }
 
     var_4.node scripts\sp\anim::_id_1F35(var_4._id_872A, var_4._id_DD29);
     var_4.node scripts\sp\anim::_id_1EEA(var_4._id_872A, var_4._id_B035);
@@ -1959,8 +2095,9 @@ handle_grunt3_breakout(var_0, var_1) {
   wait(randomintrange(1, 3));
 
   foreach(var_3 in var_0) {
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_3 scripts\sp\utility::anim_stopanimScripted();
+    }
   }
 }
 
@@ -1975,8 +2112,9 @@ _id_88A8(var_0) {
   var_1[var_1.size] = var_0._id_872A;
   var_1[var_1.size] = var_0._id_DA93;
 
-  if(isDefined(var_0._id_DA92))
+  if(isDefined(var_0._id_DA92)) {
     var_1[var_1.size] = var_0._id_DA92;
+  }
 
   var_0.node scripts\sp\anim::_id_1EE7(var_1, var_0._id_B036, "stop_loop");
 }
@@ -1998,8 +2136,9 @@ _id_88AA(var_0) {
   var_1[var_1.size] = var_0._id_872A;
   var_1[var_1.size] = var_0._id_DA93;
 
-  if(isDefined(var_0._id_DA92))
+  if(isDefined(var_0._id_DA92)) {
     var_1[var_1.size] = var_0._id_DA92;
+  }
 
   var_0.node scripts\sp\anim::_id_1F2C(var_1, var_0._id_DD29);
   var_0.node scripts\sp\anim::_id_1EE7(var_1, var_0._id_DD5D);
@@ -2161,53 +2300,63 @@ _id_4517() {
   for(;;) {
     scripts\engine\utility::flag_wait("flag_player_in_rafters");
 
-    if(isDefined(level._id_4427) && isalive(level._id_4427))
+    if(isDefined(level._id_4427) && isalive(level._id_4427)) {
       level._id_4427 scripts\sp\utility::_id_10346("asn_sdl2_lookingatthelatest");
+    }
 
     scripts\engine\utility::flag_wait("flag_player_in_rafters");
 
-    if(isDefined(level._id_4428) && isalive(level._id_4428))
+    if(isDefined(level._id_4428) && isalive(level._id_4428)) {
       level._id_4428 scripts\sp\utility::_id_10346("asn_sdl3_thesefiguresdolend");
+    }
 
     scripts\engine\utility::flag_wait("flag_player_in_rafters");
 
-    if(isDefined(level._id_4429) && isalive(level._id_4429))
+    if(isDefined(level._id_4429) && isalive(level._id_4429)) {
       level._id_4429 scripts\sp\utility::_id_10346("asn_sdl1_ourobjectiveisplanet");
+    }
 
     scripts\engine\utility::flag_wait("flag_player_in_rafters");
 
-    if(isDefined(level._id_4427) && isalive(level._id_4427))
+    if(isDefined(level._id_4427) && isalive(level._id_4427)) {
       level._id_4427 scripts\sp\utility::_id_10346("asn_sdl2_wehaveintelligencethat");
+    }
 
     scripts\engine\utility::flag_wait("flag_player_in_rafters");
 
-    if(isDefined(level._id_4428) && isalive(level._id_4428))
+    if(isDefined(level._id_4428) && isalive(level._id_4428)) {
       level._id_4428 scripts\sp\utility::_id_10346("asn_sdl1_nowitisi");
+    }
 
     scripts\engine\utility::flag_wait("flag_player_in_rafters");
 
-    if(isDefined(level._id_4429) && isalive(level._id_4429))
+    if(isDefined(level._id_4429) && isalive(level._id_4429)) {
       level._id_4429 scripts\sp\utility::_id_10346("asn_sdl3_ourfleetdatais");
+    }
 
     scripts\engine\utility::flag_wait("flag_player_in_rafters");
 
-    if(isDefined(level._id_4427) && isalive(level._id_4427))
+    if(isDefined(level._id_4427) && isalive(level._id_4427)) {
       level._id_4427 scripts\sp\utility::_id_10346("asn_sdl2_weshouldinvestigateimmediately");
+    }
 
     scripts\engine\utility::flag_wait("flag_player_in_rafters");
 
-    if(isDefined(level._id_4428) && isalive(level._id_4428))
+    if(isDefined(level._id_4428) && isalive(level._id_4428)) {
       level._id_4428 scripts\sp\utility::_id_10346("asn_sdl1_tothecontrarywe");
+    }
 
     scripts\engine\utility::flag_wait("flag_player_in_rafters");
 
-    if(isDefined(level._id_4429) && isalive(level._id_4429))
+    if(isDefined(level._id_4429) && isalive(level._id_4429)) {
       level._id_4429 scripts\sp\utility::_id_10346("asn_sdl3_concurwecannotallow");
+    }
 
     scripts\engine\utility::flag_wait("flag_player_in_rafters");
 
-    if(isDefined(level._id_4427) && isalive(level._id_4427))
+    if(isDefined(level._id_4427) && isalive(level._id_4427)) {
       level._id_4427 scripts\sp\utility::_id_10346("asn_sdl2_irulewesend");
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -2221,83 +2370,99 @@ _id_4518() {
   for(;;) {
     scripts\engine\utility::flag_waitopen("flag_player_in_rafters");
 
-    if(isDefined(level._id_4427) && isalive(level._id_4427))
+    if(isDefined(level._id_4427) && isalive(level._id_4427)) {
       level._id_4427 scripts\sp\utility::_id_10346("asn_sdl1_theirdefensivepotencyis");
+    }
 
     scripts\engine\utility::flag_waitopen("flag_player_in_rafters");
 
-    if(isDefined(level._id_4427) && isalive(level._id_4427))
+    if(isDefined(level._id_4427) && isalive(level._id_4427)) {
       level._id_4427 scripts\sp\utility::_id_10346("asn_sdl1_thegenevaconquestcannot");
+    }
 
     scripts\engine\utility::flag_waitopen("flag_player_in_rafters");
 
-    if(isDefined(level._id_4428) && isalive(level._id_4428))
+    if(isDefined(level._id_4428) && isalive(level._id_4428)) {
       level._id_4428 scripts\sp\utility::_id_10346("asn_sdl2_earthforcesare");
+    }
 
     scripts\engine\utility::flag_waitopen("flag_player_in_rafters");
 
-    if(isDefined(level._id_4429) && isalive(level._id_4429))
+    if(isDefined(level._id_4429) && isalive(level._id_4429)) {
       level._id_4429 scripts\sp\utility::_id_10346("asn_sdl3_satoispicking");
+    }
 
     scripts\engine\utility::flag_waitopen("flag_player_in_rafters");
 
-    if(isDefined(level._id_4427) && isalive(level._id_4427))
+    if(isDefined(level._id_4427) && isalive(level._id_4427)) {
       level._id_4427 scripts\sp\utility::_id_10346("asn_sdl2_thatstrategyisnot");
+    }
 
     scripts\engine\utility::flag_waitopen("flag_player_in_rafters");
 
-    if(isDefined(level._id_4428) && isalive(level._id_4428))
+    if(isDefined(level._id_4428) && isalive(level._id_4428)) {
       level._id_4428 scripts\sp\utility::_id_10346("asn_sdl1_agreedourresourcedominance");
+    }
 
     scripts\engine\utility::flag_waitopen("flag_player_in_rafters");
 
-    if(isDefined(level._id_4429) && isalive(level._id_4429))
+    if(isDefined(level._id_4429) && isalive(level._id_4429)) {
       level._id_4429 scripts\sp\utility::_id_10346("asn_sdl3_theolympusmonsshould");
+    }
 
     scripts\engine\utility::flag_waitopen("flag_player_in_rafters");
 
-    if(isDefined(level._id_4427) && isalive(level._id_4427))
+    if(isDefined(level._id_4427) && isalive(level._id_4427)) {
       level._id_4427 scripts\sp\utility::_id_10346("asn_sdl2_itisimperativethat");
+    }
 
     scripts\engine\utility::flag_waitopen("flag_player_in_rafters");
 
-    if(isDefined(level._id_4428) && isalive(level._id_4428))
+    if(isDefined(level._id_4428) && isalive(level._id_4428)) {
       level._id_4428 scripts\sp\utility::_id_10346("asn_sdl3_tothatendmarss");
+    }
 
     scripts\engine\utility::flag_waitopen("flag_player_in_rafters");
 
-    if(isDefined(level._id_4429) && isalive(level._id_4429))
+    if(isDefined(level._id_4429) && isalive(level._id_4429)) {
       level._id_4429 scripts\sp\utility::_id_10346("asn_sdl1_shipyardauthoritieswillscrap");
+    }
 
     scripts\engine\utility::flag_waitopen("flag_player_in_rafters");
 
-    if(isDefined(level._id_4427) && isalive(level._id_4427))
+    if(isDefined(level._id_4427) && isalive(level._id_4427)) {
       level._id_4427 scripts\sp\utility::_id_10346("asn_sdl2_ifoughton");
+    }
 
     scripts\engine\utility::flag_waitopen("flag_player_in_rafters");
 
-    if(isDefined(level._id_4428) && isalive(level._id_4428))
+    if(isDefined(level._id_4428) && isalive(level._id_4428)) {
       level._id_4428 scripts\sp\utility::_id_10346("asn_sdl1_amimistaken");
+    }
 
     scripts\engine\utility::flag_waitopen("flag_player_in_rafters");
 
-    if(isDefined(level._id_4429) && isalive(level._id_4429))
+    if(isDefined(level._id_4429) && isalive(level._id_4429)) {
       level._id_4429 scripts\sp\utility::_id_10346("asn_sdl2_yourascensiontothe");
+    }
 
     scripts\engine\utility::flag_waitopen("flag_player_in_rafters");
 
-    if(isDefined(level._id_4427) && isalive(level._id_4427))
+    if(isDefined(level._id_4427) && isalive(level._id_4427)) {
       level._id_4427 scripts\sp\utility::_id_10346("asn_sdl3_letusfocuson");
+    }
 
     scripts\engine\utility::flag_waitopen("flag_player_in_rafters");
 
-    if(isDefined(level._id_4428) && isalive(level._id_4428))
+    if(isDefined(level._id_4428) && isalive(level._id_4428)) {
       level._id_4428 scripts\sp\utility::_id_10346("asn_sdl2_iconcurspreadingthe");
+    }
 
     scripts\engine\utility::flag_waitopen("flag_player_in_rafters");
 
-    if(isDefined(level._id_4429) && isalive(level._id_4429))
+    if(isDefined(level._id_4429) && isalive(level._id_4429)) {
       level._id_4429 scripts\sp\utility::_id_10346("asn_sdl1_currentsurveillancetestifiesthat");
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -2308,89 +2473,113 @@ _id_4514() {
   scripts\engine\utility::flag_wait("flag_kill_commanders_event");
   thread _id_86A8();
 
-  if(isDefined(level._id_4427) && isalive(level._id_4427))
+  if(isDefined(level._id_4427) && isalive(level._id_4427)) {
     level._id_4427 scripts\sp\utility::_id_10346("asn_sdl2_whatisthat");
+  }
 
-  if(isDefined(level._id_4428) && isalive(level._id_4428))
+  if(isDefined(level._id_4428) && isalive(level._id_4428)) {
     level._id_4428 scripts\sp\utility::_id_10346("asn_sdl1_isthatsmoke");
+  }
 
-  if(isDefined(level._id_4429) && isalive(level._id_4429))
+  if(isDefined(level._id_4429) && isalive(level._id_4429)) {
     level._id_4429 scripts\sp\utility::_id_10346("asn_sdl3_whatthebluedeath");
+  }
 
-  if(isDefined(level._id_4427) && isalive(level._id_4427))
+  if(isDefined(level._id_4427) && isalive(level._id_4427)) {
     level._id_4427 scripts\sp\utility::_id_10346("asn_sdl1_werelockedin");
+  }
 
-  if(isDefined(level._id_4428) && isalive(level._id_4428))
+  if(isDefined(level._id_4428) && isalive(level._id_4428)) {
     level._id_4428 scripts\sp\utility::_id_10346("asn_sdl2_getusoutof");
+  }
 
-  if(isDefined(level._id_4429) && isalive(level._id_4429))
+  if(isDefined(level._id_4429) && isalive(level._id_4429)) {
     level._id_4429 scripts\sp\utility::_id_10346("asn_sdl1_icantbreath");
+  }
 
-  if(isDefined(level._id_4427) && isalive(level._id_4427))
+  if(isDefined(level._id_4427) && isalive(level._id_4427)) {
     level._id_4427 scripts\sp\utility::_id_10346("asn_sdl3_tryandbreakthe");
+  }
 
-  if(isDefined(level._id_4428) && isalive(level._id_4428))
+  if(isDefined(level._id_4428) && isalive(level._id_4428)) {
     level._id_4428 scripts\sp\utility::_id_10346("asn_sdl2_icantsee");
+  }
 
-  if(isDefined(level._id_4429) && isalive(level._id_4429))
+  if(isDefined(level._id_4429) && isalive(level._id_4429)) {
     level._id_4429 scripts\sp\utility::_id_10346("asn_sdl2_helpopenthedoors");
+  }
 }
 
 _id_86A8() {
   level endon("gas_gone_hot");
   scripts\engine\utility::flag_wait("flag_all_reacting_grunts_spawned");
 
-  if(isDefined(level._id_450A) && isalive(level._id_450A))
+  if(isDefined(level._id_450A) && isalive(level._id_450A)) {
     level._id_450A scripts\sp\utility::_id_10346("asn_sdf3_idontknow");
+  }
 
-  if(isDefined(level._id_4508) && isalive(level._id_4508))
+  if(isDefined(level._id_4508) && isalive(level._id_4508)) {
     level._id_4508 scripts\sp\utility::_id_10346("asn_sdf3_openthedoors");
+  }
 
-  if(isDefined(level._id_450A) && isalive(level._id_450A))
+  if(isDefined(level._id_450A) && isalive(level._id_450A)) {
     level._id_450A scripts\sp\utility::_id_10346("asn_sdf2_theyresealedicant");
+  }
 
-  if(isDefined(level._id_4508) && isalive(level._id_4508))
+  if(isDefined(level._id_4508) && isalive(level._id_4508)) {
     level._id_4508 scripts\sp\utility::_id_10346("asn_sdf1_isitsmoke");
+  }
 
-  if(isDefined(level._id_450A) && isalive(level._id_450A))
+  if(isDefined(level._id_450A) && isalive(level._id_450A)) {
     level._id_450A scripts\sp\utility::_id_10346("asn_sdf3_itscomingfromthe");
+  }
 
   scripts\engine\utility::flag_set("flag_red_alert");
 
-  if(isDefined(level._id_4508) && isalive(level._id_4508))
+  if(isDefined(level._id_4508) && isalive(level._id_4508)) {
     level._id_4508 scripts\sp\utility::_id_10346("asn_sdf2_thecouncilisin");
+  }
 
-  if(isDefined(level._id_450A) && isalive(level._id_450A))
+  if(isDefined(level._id_450A) && isalive(level._id_450A)) {
     level._id_450A scripts\sp\utility::_id_10346("asn_sdf1_shouldweshootthe");
+  }
 
-  if(isDefined(level._id_4508) && isalive(level._id_4508))
+  if(isDefined(level._id_4508) && isalive(level._id_4508)) {
     level._id_4508 scripts\sp\utility::_id_10346("asn_sdf2_itmightspreadthrough");
+  }
 
-  if(isDefined(level._id_450A) && isalive(level._id_450A))
+  if(isDefined(level._id_450A) && isalive(level._id_450A)) {
     level._id_450A scripts\sp\utility::_id_10346("asn_sdf3_contactthebridge");
+  }
 
-  if(isDefined(level._id_4508) && isalive(level._id_4508))
+  if(isDefined(level._id_4508) && isalive(level._id_4508)) {
     level._id_4508 scripts\sp\utility::_id_10346("asn_sdf2_wecantsavethem");
+  }
 }
 
 _id_4515() {
   level endon("gas_venting");
   scripts\engine\utility::flag_wait("flag_conference_room_gas_hot");
 
-  if(isDefined(level._id_4509) && isalive(level._id_4509))
+  if(isDefined(level._id_4509) && isalive(level._id_4509)) {
     level._id_4509 scripts\sp\utility::_id_10346("asn_sdf1_intruder");
+  }
 
-  if(isDefined(level._id_450B) && isalive(level._id_450B))
+  if(isDefined(level._id_450B) && isalive(level._id_450B)) {
     level._id_450B scripts\sp\utility::_id_10346("asn_sdf1_securethecommanders");
+  }
 
-  if(isDefined(level._id_4509) && isalive(level._id_4509))
+  if(isDefined(level._id_4509) && isalive(level._id_4509)) {
     level._id_4509 scripts\sp\utility::_id_10346("asn_sdf2_hesoneofours");
+  }
 
-  if(isDefined(level._id_450B) && isalive(level._id_450B))
+  if(isDefined(level._id_450B) && isalive(level._id_450B)) {
     level._id_450B scripts\sp\utility::_id_10346("asn_sdf2_shoottokill");
+  }
 
-  if(isDefined(level._id_4509) && isalive(level._id_4509))
+  if(isDefined(level._id_4509) && isalive(level._id_4509)) {
     level._id_4509 scripts\sp\utility::_id_10346("asn_sdf3_alertthebridgeshots");
+  }
 }
 
 _id_88F9() {
@@ -2436,8 +2625,9 @@ _id_D235() {
   var_0.pos scripts\sp\anim::_id_1EC3(var_0._id_91F8, "plr_gasplant");
   scripts\engine\utility::flag_wait("flag_setup_hvac_use");
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_2683();
+  }
 
   scripts\sp\maps\sa_assassination\sa_assassination_util::_id_D85D();
   var_0._id_76A5 = scripts\sp\utility::_id_10639("gasplant", var_0.pos.origin, var_0.pos.angles);
@@ -2465,13 +2655,15 @@ _id_D235() {
 }
 
 _id_12983(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait(var_0);
+  }
 
-  if(var_1 == 1)
+  if(var_1 == 1) {
     var_2 = scripts\engine\utility::getfx("vfx_light_emp_grenade_handoff");
-  else
+  } else {
     var_2 = scripts\engine\utility::getfx("vfx_light_emp_grenade_blue");
+  }
 
   playFXOnTag(var_2, self, "tag_light");
 }
@@ -2498,14 +2690,16 @@ _id_894D() {
   thread scripts\sp\maps\sa_assassination\sa_assassination_audio::_id_DE0B();
   var_0 = getEntArray("redalert_klaxon", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread scripts\sp\maps\sa_assassination\sa_assassination_util::_id_E709(25);
+  foreach(var_2 in var_0) {
+    var_2 thread scripts\sp\maps\sa_assassination\sa_assassination_util::_id_E709(25);
+  }
 
   if(scripts\engine\utility::flag("flag_conference_room_hot")) {
     wait 2;
 
-    if(!scripts\engine\utility::flag("flag_kill_commanders_event"))
+    if(!scripts\engine\utility::flag("flag_kill_commanders_event")) {
       thread _id_C5E8();
+    }
 
     var_4 = scripts\sp\utility::_id_22CD("gone_hot_reinforcements");
   }
@@ -2521,8 +2715,9 @@ _id_8946() {
   scripts\engine\utility::array_thread(getspawnerarray("hubbow_post_gas_runners"), scripts\sp\utility::_id_1747, ::_id_FA20, 1);
   scripts\engine\utility::array_thread(getspawnerarray("salter_exfil_enemies1"), scripts\sp\utility::_id_1747, ::_id_FA20);
 
-  if(istransientloaded("sa_assassination_destroyer_keel_tr"))
+  if(istransientloaded("sa_assassination_destroyer_keel_tr")) {
     unloadtransient("sa_assassination_destroyer_keel_tr");
+  }
 
   scripts\engine\utility::flag_wait("flag_post_gas_enemies1");
   level.player scripts\sp\utility::_id_F416(1);
@@ -2530,8 +2725,9 @@ _id_8946() {
   scripts\engine\utility::flag_wait("flag_hubbow_post_gas");
   thread _id_F049();
 
-  if(scripts\engine\utility::flag("death_post_gas_enemies1"))
+  if(scripts\engine\utility::flag("death_post_gas_enemies1")) {
     level.player scripts\sp\utility::_id_F416(1);
+  }
 
   var_1 = scripts\sp\utility::_id_22CD("hubbow_post_gas_enemies", 1, 1);
   var_2 = scripts\sp\utility::_id_22CD("hubbow_post_gas_runners", 1, 1);
@@ -2544,8 +2740,9 @@ _id_8946() {
   level._id_EA2C scripts\sp\utility::_id_F39F();
   scripts\engine\utility::flag_wait("flag_salter_exfil_enemies1");
 
-  if(scripts\engine\utility::flag("death_post_gas_enemies2"))
+  if(scripts\engine\utility::flag("death_post_gas_enemies2")) {
     level.player scripts\sp\utility::_id_F416(1);
+  }
 
   var_4 = scripts\sp\utility::_id_22CD("salter_exfil_enemies1");
   thread cleanup_conference_room_ents();
@@ -2569,8 +2766,9 @@ _id_895A() {
   var_1[var_1.size] = level._id_9129;
   var_1[var_1.size] = level._id_912A;
 
-  foreach(var_3 in var_1)
-  var_3 scripts\sp\utility::_id_F2A8(1);
+  foreach(var_3 in var_1) {
+    var_3 scripts\sp\utility::_id_F2A8(1);
+  }
 
   var_0 scripts\sp\anim::_id_1F2C(var_1, "sdf_meetup");
 }
@@ -2578,8 +2776,9 @@ _id_895A() {
 _id_EA64() {
   scripts\engine\utility::flag_wait_any("flag_salter_exfil_vo", "flag_conference_room_hot");
 
-  if(scripts\engine\utility::flag("flag_conference_room_hot"))
+  if(scripts\engine\utility::flag("flag_conference_room_hot")) {
     wait 2.5;
+  }
 
   scripts\sp\utility::_id_10350("asn_slt_reyesigotcompany");
   level.player scripts\sp\utility::_id_1034D("asn_plr_copymovingtosecondary");
@@ -2594,24 +2793,27 @@ _id_F049() {
   level.player _id_0E45::_id_5524();
   wait 4;
 
-  if(isDefined(level._id_9126) && isalive(level._id_9126))
+  if(isDefined(level._id_9126) && isalive(level._id_9126)) {
     level._id_9126 scripts\sp\utility::_id_10347("asn_sdf2_moveitwecant");
+  }
 
   level.player scripts\sp\utility::_id_1034D("asn_plr_comply");
   wait 3;
   level.player scripts\sp\utility::_id_1034D("asn_plr_comingtoyasalt");
   scripts\engine\utility::flag_wait("flag_near_salter");
 
-  if(isDefined(level._id_9126) && isalive(level._id_9126))
+  if(isDefined(level._id_9126) && isalive(level._id_9126)) {
     level._id_9126 scripts\sp\utility::_id_10347("asn_sdf2_weaponsready");
+  }
 }
 
 _id_FA20(var_0) {
   thread _id_86A7();
   scripts\sp\utility::_id_65E0("provoked");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     thread _id_513B();
+  }
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "hub_captain") {
     level._id_9126 = self;
@@ -2719,28 +2921,33 @@ _id_8915() {
 
   switch (var_0) {
     case 1:
-      if(isDefined(self) && isalive(self))
+      if(isDefined(self) && isalive(self)) {
         scripts\sp\utility::_id_10347("asn_sdf1_intruder");
+      }
 
       break;
     case 2:
-      if(isDefined(self) && isalive(self))
+      if(isDefined(self) && isalive(self)) {
         scripts\sp\utility::_id_10347("asn_sdf1_securethecommanders");
+      }
 
       break;
     case 3:
-      if(isDefined(self) && isalive(self))
+      if(isDefined(self) && isalive(self)) {
         scripts\sp\utility::_id_10347("asn_sdf2_hesoneofours");
+      }
 
       break;
     case 4:
-      if(isDefined(self) && isalive(self))
+      if(isDefined(self) && isalive(self)) {
         scripts\sp\utility::_id_10347("asn_sdf2_shoottokill");
+      }
 
       break;
     case 5:
-      if(isDefined(self) && isalive(self))
+      if(isDefined(self) && isalive(self)) {
         scripts\sp\utility::_id_10347("asn_sdf3_alertthebridgeshots");
+      }
 
       break;
   }
@@ -2759,8 +2966,9 @@ _id_8958() {
   level.player scripts\sp\utility::_id_1034D("asn_plr_salterimbehindem");
 
   if(!scripts\engine\utility::flag("flag_to_salter_hot")) {
-    while(scripts\sp\utility::_id_77DB("salter_enemies") > 0)
+    while(scripts\sp\utility::_id_77DB("salter_enemies") > 0) {
       wait 0.2;
+    }
   }
 
   scripts\engine\utility::flag_set("flag_rescued_salter");
@@ -2826,8 +3034,9 @@ _id_8922() {
 _id_8948(var_0, var_1) {
   self waittill("death");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0.5;
+  }
 
   _id_0A2F::_id_DA45(var_0, var_1);
 }

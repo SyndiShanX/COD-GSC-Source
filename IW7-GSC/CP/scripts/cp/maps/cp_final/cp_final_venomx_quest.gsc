@@ -138,10 +138,11 @@ init_timer_texture() {
 move_venomx_locker_door(var_0) {
   var_1 = getEnt("venomx_locker_door", "script_noteworthy");
 
-  if(var_0)
+  if(var_0) {
     var_1 rotateTo((0, 105, 0), 0.1);
-  else
+  } else {
     var_1 rotateTo((0, 315, 0), 0.1);
+  }
 }
 
 setup_wire_models() {
@@ -268,11 +269,13 @@ start_maze_instance_on_model(var_0, var_1, var_2) {
 }
 
 createmazeonmodel(var_0, var_1, var_2) {
-  foreach(var_4 in level.players)
-  var_4 thread control_puzzle_cursor(var_0);
+  foreach(var_4 in level.players) {
+    var_4 thread control_puzzle_cursor(var_0);
+  }
 
-  if(!isDefined(level.maze_attributes))
+  if(!isDefined(level.maze_attributes)) {
     level.maze_attributes = [];
+  }
 
   level.random_maze_roll = [];
   level.maze_attributes[var_0.mod_name] = spawnStruct();
@@ -292,11 +295,13 @@ createmazeonmodel(var_0, var_1, var_2) {
 
   var_0 setscriptablepartstate("maze_puzzle", "cursor");
 
-  foreach(var_13, var_12 in level.array_of_small_crt_script_models)
-  var_12 setscriptablepartstate("solved_grid", "solved_puzzle_" + var_13);
+  foreach(var_13, var_12 in level.array_of_small_crt_script_models) {
+    var_12 setscriptablepartstate("solved_grid", "solved_puzzle_" + var_13);
+  }
 
-  if(!isDefined(level.mazerollsarray))
+  if(!isDefined(level.mazerollsarray)) {
     level.mazerollsarray = [];
+  }
 
   foreach(var_13, var_15 in level.maze_attributes) {
     if(var_13 == var_0.mod_name) {
@@ -320,20 +325,23 @@ disable_scriptables_for_mazes(var_0) {
 }
 
 disable_solved_grids() {
-  foreach(var_1 in level.array_of_small_crt_script_models)
-  var_1 setscriptablepartstate("solved_grid", "neutral");
+  foreach(var_1 in level.array_of_small_crt_script_models) {
+    var_1 setscriptablepartstate("solved_grid", "neutral");
+  }
 }
 
 return_position_x_y(var_0, var_1, var_2) {
   if(var_2.mod_name == "maze1") {
     foreach(var_4 in level.unsolved_struct_positions_array) {
-      if(var_4.x_coord == var_0 && var_4.y_coord == var_1)
+      if(var_4.x_coord == var_0 && var_4.y_coord == var_1) {
         return var_4.origin;
+      }
     }
   } else {
     foreach(var_7 in level.unsolved_struct_positions_array_2) {
-      if(var_7.x_coord == var_0 && var_7.y_coord == var_1)
+      if(var_7.x_coord == var_0 && var_7.y_coord == var_1) {
         return var_7.origin;
+      }
     }
   }
 }
@@ -577,11 +585,13 @@ player_clock_tick_sfx(var_0) {
 timer_progress(var_0, var_1, var_2, var_3) {
   var_4 = level.puzzles_duration;
 
-  if(getDvar("scr_puzzles_timer", "") != "")
+  if(getDvar("scr_puzzles_timer", "") != "") {
     var_4 = 500000;
+  }
 
-  if(level.players.size < 2)
+  if(level.players.size < 2) {
     var_4 = 300000;
+  }
 
   setomnvar("zombie_venomxTimer", int(var_4 / 1000));
   wait 1;
@@ -615,8 +625,9 @@ timer_progress(var_0, var_1, var_2, var_3) {
   setomnvar("zombie_venomxTimer", -1);
   scripts\cp\cp_interaction::add_to_current_interaction_list(var_3);
 
-  if(isDefined(level.masterpcinteraction))
+  if(isDefined(level.masterpcinteraction)) {
     scripts\cp\cp_interaction::add_to_current_interaction_list(level.masterpcinteraction);
+  }
 
   var_1.stop_triggering_zombies = 0;
 
@@ -644,11 +655,13 @@ timer_progress(var_0, var_1, var_2, var_3) {
     return;
   }
   if(isDefined(level.maze_completed)) {
-    if(scripts\engine\utility::is_true(level.maze_completed["maze1"]))
+    if(scripts\engine\utility::is_true(level.maze_completed["maze1"])) {
       level.maze_completed["maze1"] = 0;
+    }
 
-    if(scripts\engine\utility::is_true(level.maze_completed["maze2"]))
+    if(scripts\engine\utility::is_true(level.maze_completed["maze2"])) {
       level.maze_completed["maze2"] = 0;
+    }
   }
 
   level.test_model.newmodelsspawned = 1;
@@ -790,10 +803,11 @@ watch_for_input_entered_on_button(var_0) {
         continue;
       }
 
-      if(randomint(100) > 50)
+      if(randomint(100) > 50) {
         thread scripts\cp\cp_vo::try_to_play_vo("quest_venx_safe_input_fail", "final_comment_vo", "highest", 999, 1, 0, 1, 100);
-      else
+      } else {
         thread scripts\cp\cp_vo::try_to_play_vo("quest_venx_fusebox_fail", "final_comment_vo", "highest", 999, 1, 0, 1, 100);
+      }
 
       playsoundatpos(var_0.model.origin, "mpq_fail_buzzer");
       var_2 = getrandomnavpoints((255, 4960, 120), 500, 5);
@@ -809,8 +823,9 @@ wire_color_count_func(var_0) {
   var_1 = 0;
 
   foreach(var_3 in level.wire_models) {
-    if(var_3.color == var_0)
+    if(var_3.color == var_0) {
       var_1++;
+    }
   }
 
   return var_1;
@@ -820,15 +835,17 @@ validate_wire_logic(var_0) {
   switch (level.number_of_wires) {
     case 3:
       if(wire_color_count_func("black") == 0) {
-        if(var_0.wire_num == 3)
+        if(var_0.wire_num == 3) {
           return 1;
-        else
+        } else {
           return 0;
+        }
       } else if(level.wire_models[level.wire_models.size - 1].color == "green") {
-        if(var_0.wire_num == 1)
+        if(var_0.wire_num == 1) {
           return 1;
-        else
+        } else {
           return 0;
+        }
       } else if(wire_color_count_func("red") > 1) {
         var_1 = level.wire_models[0];
 
@@ -839,14 +856,16 @@ validate_wire_logic(var_0) {
           }
         }
 
-        if(var_1 == var_0)
+        if(var_1 == var_0) {
           return 1;
-        else
+        } else {
           return 0;
+        }
       } else if(var_0.wire_num == 2)
         return 1;
-      else
+      else {
         return 0;
+      }
 
       break;
     case 4:
@@ -860,72 +879,84 @@ validate_wire_logic(var_0) {
           }
         }
 
-        if(var_1 == var_0)
+        if(var_1 == var_0) {
           return 1;
-        else
+        } else {
           return 0;
+        }
       } else {
         var_3 = level.wire_models[level.wire_models.size - 1];
 
         if(var_3.color == "white" && wire_color_count_func("blue") == 0) {
-          if(var_0.wire_num == 1)
+          if(var_0.wire_num == 1) {
             return 1;
-          else
+          } else {
             return 0;
+          }
         } else if(wire_color_count_func("black") > 1) {
-          if(var_0.wire_num == level.number_of_wires)
+          if(var_0.wire_num == level.number_of_wires) {
             return 1;
-          else
+          } else {
             return 0;
+          }
         } else if(var_0.wire_num == 3)
           return 1;
-        else
+        else {
           return 0;
+        }
       }
 
       break;
     case 5:
       if(level.wave_num <= 3) {
-        if(var_0.wire_num == 1)
+        if(var_0.wire_num == 1) {
           return 1;
-        else
+        } else {
           return 0;
+        }
       } else if(wire_color_count_func("white") == 1 && wire_color_count_func("blue") > 1) {
-        if(var_0.wire_num == 2)
+        if(var_0.wire_num == 2) {
           return 1;
-        else
+        } else {
           return 0;
+        }
       } else if(wire_color_count_func("red") == 0 && level.wave_num % 2 == 0 && level.specialwavescompleted < 4) {
-        if(var_0.wire_num == level.number_of_wires)
+        if(var_0.wire_num == level.number_of_wires) {
           return 1;
-        else
+        } else {
           return 0;
+        }
       } else if(var_0.wire_num == 1)
         return 1;
-      else
+      else {
         return 0;
+      }
 
       break;
     case 6:
       if(wire_color_count_func("yellow") != 0) {
-        if(var_0.wire_num == 3)
+        if(var_0.wire_num == 3) {
           return 1;
-        else
+        } else {
           return 0;
+        }
       } else if(wire_color_count_func("black") == 1 && wire_color_count_func("white") > 1) {
-        if(var_0.wire_num == 4)
+        if(var_0.wire_num == 4) {
           return 1;
-        else
+        } else {
           return 0;
+        }
       } else if(level.specialwavescompleted >= 1 && wire_color_count_func("red") > 1) {
-        if(var_0.wire_num == 5)
+        if(var_0.wire_num == 5) {
           return 1;
-        else
+        } else {
           return 0;
+        }
       } else if(var_0.wire_num == level.number_of_wires)
         return 1;
-      else
+      else {
         return 0;
+      }
 
       break;
     default:
@@ -936,11 +967,13 @@ validate_wire_logic(var_0) {
 enable_wire_struct_next_wave() {
   level thread move_fuse_box_door(0);
 
-  foreach(var_1 in level.wire_models)
-  var_1.model delete();
+  foreach(var_1 in level.wire_models) {
+    var_1.model delete();
+  }
 
-  if(isDefined(level.wire_active_fx))
+  if(isDefined(level.wire_active_fx)) {
     level.wire_active_fx delete();
+  }
 
   level.wire_models = [];
   level notify("end_wire_threads");
@@ -972,8 +1005,9 @@ setup_backstory_interaction(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
   var_10.disable_guided_interactions = 0;
   var_10.script_parameters = "default";
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     var_6 = 0;
+  }
 
   var_10.cost = var_6;
   var_10.requires_power = 0;
@@ -1123,8 +1157,9 @@ init_venomx_models_interactions() {
   level.zombie_venomx_containment_trigger thread watch_for_containment_trigger();
   level.hidden_figures_volume = getEnt("hidden_figures_volume", "script_noteworthy");
 
-  if(!isDefined(level.hidden_figures))
+  if(!isDefined(level.hidden_figures)) {
     level.hidden_figures = [];
+  }
 
   level.hidden_figures[0] = spawnStruct();
   level.hidden_figures[0].origin = (3764, 6940, 227);
@@ -1173,8 +1208,9 @@ init_venomx_models_interactions() {
 get_chars_of_word_with_spaces_between_letters(var_0) {
   var_1 = [];
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++)
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_1[var_2] = var_0[var_2] + ",";
+  }
 
   return var_1;
 }
@@ -1231,9 +1267,9 @@ containmentinteractionusefunc(var_0, var_1) {
   if(scripts\engine\utility::flag_exist("disablesecurity_step3") && !scripts\engine\utility::flag("disablesecurity_step3")) {
     return;
   }
-  if(scripts\engine\utility::is_true(level.disable_containment))
+  if(scripts\engine\utility::is_true(level.disable_containment)) {
     var_1 playlocalsound("perk_machine_deny");
-  else {
+  } else {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
 
     if(isDefined(level.trapped_zombie) && level.trapped_zombie istouching(level.zombie_venomx_containment_trigger)) {
@@ -1271,24 +1307,27 @@ containmentinteractionusefunc(var_0, var_1) {
 }
 
 containmentinteractionhintfunc(var_0, var_1) {
-  if(scripts\engine\utility::flag("disablesecurity_step3"))
+  if(scripts\engine\utility::flag("disablesecurity_step3")) {
     return &"CP_FINAL_CONTAINMENT_CHAMBER";
-  else
+  } else {
     return "";
+  }
 }
 
 master_pcinteractionusefunc(var_0, var_1) {
   var_1 endon("disconnect");
   level.masterpcinteraction = var_0;
 
-  if(!isDefined(var_1.samcrossvoarr))
+  if(!isDefined(var_1.samcrossvoarr)) {
     var_1.samcrossvoarr = ["final_cross_log_1", "final_cross_log_2", "final_cross_log_3"];
+  }
 
   var_1.chosensamcrossvo = scripts\engine\utility::random(var_1.samcrossvoarr);
 
   if(scripts\engine\utility::flag("completepuzzles_step4")) {
-    if(var_1.samcrossvoarr.size > 0)
+    if(var_1.samcrossvoarr.size > 0) {
       var_1 thread scripts\cp\cp_vo::try_to_play_vo(var_1.chosensamcrossvo, "final_backstory_vo", "highest", 999, 1, 0, 1, 100);
+    }
   } else if(scripts\engine\utility::is_true(level.zombie_venomx_containment_trigger.stop_triggering_zombies) && !scripts\engine\utility::is_true(level.masterpcinteraction.triggeredsuser)) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(level.masterpcinteraction);
     var_1 playlocalsound("cp_final_venom_quest_turn_on_console");
@@ -1301,10 +1340,11 @@ master_pcinteractionusefunc(var_0, var_1) {
 }
 
 master_pcinteractionhintfunc(var_0, var_1) {
-  if(scripts\engine\utility::flag("disablesecurity_step3"))
+  if(scripts\engine\utility::flag("disablesecurity_step3")) {
     return &"CP_FINAL_SUPER_USER";
-  else
+  } else {
     return "";
+  }
 }
 
 watch_for_player_laststand(var_0, var_1) {
@@ -1326,8 +1366,9 @@ start_timing_sequence(var_0, var_1, var_2) {
 
   while(gettime() <= var_2 + 50000) {
     if(var_1.hidden_figures_hit >= level.chosen_number_for_morse_code_pap2) {
-      foreach(var_5 in level.players)
-      var_5 playlocalsound("part_pickup");
+      foreach(var_5 in level.players) {
+        var_5 playlocalsound("part_pickup");
+      }
 
       foreach(var_8 in var_1.personalents) {
         if(isDefined(var_8.model) && var_8.model == "tag_origin_hidden_figure_final") {
@@ -1371,8 +1412,9 @@ timeperiodinteractionusefunc(var_0, var_1) {
   var_2 = var_0.time_periods[var_0.pointer];
   var_0.pointer++;
 
-  if(var_0.pointer == var_0.time_periods.size - 1)
+  if(var_0.pointer == var_0.time_periods.size - 1) {
     var_0.pointer = 0;
+  }
 
   level thread changetimeperiodmodel(var_2);
 
@@ -1432,13 +1474,15 @@ morsecodeinteractionusefunc(var_0, var_1) {
   level.morsecodecomponent setscriptablepartstate("morse_code", "off");
 
   if(!scripts\engine\utility::is_true(level.completed_venomx_pap1_challenges)) {
-    foreach(var_4 in level.players)
-    var_4 thread keyconversiontomorse(level.chosennumtext);
+    foreach(var_4 in level.players) {
+      var_4 thread keyconversiontomorse(level.chosennumtext);
+    }
 
     var_1 thread venomx_morse_code(level.morsecodemessagesarray, level.morsecodekeypap1, var_0);
   } else {
-    foreach(var_4 in level.players)
-    var_4 thread keyconversiontomorse(level.chosennumtextpap2);
+    foreach(var_4 in level.players) {
+      var_4 thread keyconversiontomorse(level.chosennumtextpap2);
+    }
 
     var_1 thread venomx_morse_code(level.morsecodemessagesarray, level.morsecodekeypap2, var_0);
   }
@@ -1467,21 +1511,25 @@ keyinteractionusefunc(var_0, var_1) {
   }
 
   if(!scripts\engine\utility::is_true(level.completed_venomx_pap1_challenges)) {
-    foreach(var_4 in level.players)
-    var_4 thread keyconversiontomorse(level.chosennumtext);
+    foreach(var_4 in level.players) {
+      var_4 thread keyconversiontomorse(level.chosennumtext);
+    }
 
-    if(randomint(100) > 50)
+    if(randomint(100) > 50) {
       var_1 convertwordintomorse(scripts\engine\utility::random(level.mission_intel_array), 0, level.keycodecomponent);
-    else
+    } else {
       var_1 convertwordintomorse(level.morsecodekeypap1, 0, level.keycodecomponent);
+    }
   } else if(!scripts\engine\utility::is_true(level.completed_venomx_pap2_challenges)) {
-    foreach(var_4 in level.players)
-    var_4 thread keyconversiontomorse(level.chosennumtextpap2);
+    foreach(var_4 in level.players) {
+      var_4 thread keyconversiontomorse(level.chosennumtextpap2);
+    }
 
-    if(randomint(100) > 50)
+    if(randomint(100) > 50) {
       var_1 convertwordintomorse(scripts\engine\utility::random(level.mission_intel_array), 0, level.keycodecomponent);
-    else
+    } else {
       var_1 convertwordintomorse(level.morsecodekeypap2, 0, level.keycodecomponent);
+    }
   }
 
   scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
@@ -1497,13 +1545,15 @@ dotinteractionusefunc(var_0, var_1) {
   if(!scripts\engine\utility::flag("completepuzzles_step4")) {
     return;
   }
-  if(!isDefined(level.dotinteraction))
+  if(!isDefined(level.dotinteraction)) {
     level.dotinteraction = var_0;
+  }
 
   scripts\cp\utility::playsoundinspace("payphone_plr_morse_dot", var_0.origin);
 
-  if(!isDefined(level.inputkeyword))
+  if(!isDefined(level.inputkeyword)) {
     level.inputkeyword = "";
+  }
 
   level.inputkeyword = level.inputkeyword + ".";
 
@@ -1513,8 +1563,9 @@ dotinteractionusefunc(var_0, var_1) {
         if(level.convertedword == level.inputkeyword) {
           var_1 playlocalsound("part_pickup");
 
-          foreach(var_3 in level.players)
-          var_3 thread spawnthreadsforvenomxchallenges(var_3);
+          foreach(var_3 in level.players) {
+            var_3 thread spawnthreadsforvenomxchallenges(var_3);
+          }
 
           level.inputkeyword = "";
           var_0.entered_key = 1;
@@ -1522,14 +1573,16 @@ dotinteractionusefunc(var_0, var_1) {
         }
       }
     } else if(!scripts\engine\utility::is_true(level.completed_venomx_pap1_challenges)) {
-      foreach(var_3 in level.players)
-      var_3 thread keyconversiontomorse(level.chosennumtext);
+      foreach(var_3 in level.players) {
+        var_3 thread keyconversiontomorse(level.chosennumtext);
+      }
 
       level.dotinteraction.entered_key = 0;
       level.dashinteraction.entered_key = 0;
     } else {
-      foreach(var_3 in level.players)
-      var_3 thread keyconversiontomorse(level.chosennumtextpap2);
+      foreach(var_3 in level.players) {
+        var_3 thread keyconversiontomorse(level.chosennumtextpap2);
+      }
 
       level.dotinteraction.entered_key = 0;
       level.dashinteraction.entered_key = 0;
@@ -1545,8 +1598,9 @@ clearinputafterwaveend() {
   level waittill("spawn_wave_done");
   level.inputkeyword = "";
 
-  foreach(var_1 in level.players)
-  var_1 playlocalsound("part_pickup");
+  foreach(var_1 in level.players) {
+    var_1 playlocalsound("part_pickup");
+  }
 }
 
 dotinteractionhintfunc(var_0, var_1) {
@@ -1559,13 +1613,15 @@ dashinteractionusefunc(var_0, var_1) {
   if(!scripts\engine\utility::flag("completepuzzles_step4")) {
     return;
   }
-  if(!isDefined(level.dashinteraction))
+  if(!isDefined(level.dashinteraction)) {
     level.dashinteraction = var_0;
+  }
 
   scripts\cp\utility::playsoundinspace("payphone_plr_morse_dash", var_0.origin);
 
-  if(!isDefined(level.inputkeyword))
+  if(!isDefined(level.inputkeyword)) {
     level.inputkeyword = "";
+  }
 
   level.inputkeyword = level.inputkeyword + "-";
 
@@ -1575,8 +1631,9 @@ dashinteractionusefunc(var_0, var_1) {
         if(level.convertedword == level.inputkeyword) {
           var_1 playlocalsound("part_pickup");
 
-          foreach(var_3 in level.players)
-          var_3 thread spawnthreadsforvenomxchallenges(var_3);
+          foreach(var_3 in level.players) {
+            var_3 thread spawnthreadsforvenomxchallenges(var_3);
+          }
 
           level.inputkeyword = "";
           var_0.entered_key = 1;
@@ -1584,14 +1641,16 @@ dashinteractionusefunc(var_0, var_1) {
         }
       }
     } else if(!scripts\engine\utility::is_true(level.completed_venomx_pap1_challenges)) {
-      foreach(var_3 in level.players)
-      var_3 thread keyconversiontomorse(level.chosennumtext);
+      foreach(var_3 in level.players) {
+        var_3 thread keyconversiontomorse(level.chosennumtext);
+      }
 
       level.dotinteraction.entered_key = 0;
       level.dashinteraction.entered_key = 0;
     } else {
-      foreach(var_3 in level.players)
-      var_3 thread keyconversiontomorse(level.chosennumtextpap2);
+      foreach(var_3 in level.players) {
+        var_3 thread keyconversiontomorse(level.chosennumtextpap2);
+      }
 
       level.dotinteraction.entered_key = 0;
       level.dashinteraction.entered_key = 0;
@@ -1609,8 +1668,9 @@ backstoryinteractionusefunc(var_0, var_1) {
   var_1 endon("disconnect");
   level.backstoryinteraction = var_0;
 
-  if(!isDefined(var_1.backstoryvoarr))
+  if(!isDefined(var_1.backstoryvoarr)) {
     var_1.backstoryvoarr = ["crew1_quest", "crew3_quest", "crew4_quest", "final_crew_shen_log_1", "final_crew_shen_log_2", "final_crew_shen_log_3", "final_crew_shen_log_4", "final_crew_adamson_log_1", "final_crew_adamson_log_2", "final_crew_adamson_log_3", "final_crew_adamson_log_4"];
+  }
 
   var_1.chosenbackstoryvo = scripts\engine\utility::random(var_1.backstoryvoarr);
 
@@ -1695,8 +1755,9 @@ runkillswatcherforcryptidspap2() {
 
   for(;;) {
     if(level.cryptidkillswithvenomxpap2 >= level.chosen_number_for_morse_code_pap2 && (isDefined(level.hidden_figures_killed) && level.hidden_figures_killed >= level.chosen_number_for_morse_code_pap2)) {
-      foreach(var_1 in level.players)
-      var_1 playlocalsound("part_pickup");
+      foreach(var_1 in level.players) {
+        var_1 playlocalsound("part_pickup");
+      }
 
       level.completed_venomx_pap2_challenges = 1;
       break;
@@ -1715,8 +1776,9 @@ runkillswatcherforcryptids() {
       level.inputkeyword = "";
       level.morsecodemessagesarray = scripts\engine\utility::array_remove(level.morsecodemessagesarray, level.morsecodemessagesarray[0]);
 
-      foreach(var_1 in level.players)
-      var_1 thread keyconversiontomorse(level.chosennumtextpap2);
+      foreach(var_1 in level.players) {
+        var_1 thread keyconversiontomorse(level.chosennumtextpap2);
+      }
 
       break;
     }
@@ -1733,13 +1795,14 @@ venomx_charge_meter() {
     var_0 = level scripts\engine\utility::waittill_any_return("venomx_kill", "venomx_pap1_kill");
     var_1 = 0;
 
-    if(var_0 == "venomx_kill")
+    if(var_0 == "venomx_kill") {
       var_1 = level.cryptidkillswithvenomx / level.chosen_number_for_morse_code;
-    else if(var_0 == "venomx_pap1_kill") {
-      if(isDefined(level.hidden_figures_killed))
+    } else if(var_0 == "venomx_pap1_kill") {
+      if(isDefined(level.hidden_figures_killed)) {
         var_1 = (level.cryptidkillswithvenomxpap2 + level.hidden_figures_killed) / (level.chosen_number_for_morse_code_pap2 * 2);
-      else
+      } else {
         var_1 = level.cryptidkillswithvenomxpap2 / level.chosen_number_for_morse_code_pap2;
+      }
     }
 
     if(var_1 >= 1) {
@@ -1803,11 +1866,13 @@ disable_security_protocol() {
 complete_disable_security_protocol() {
   move_fuse_box_door(0);
 
-  foreach(var_1 in level.wire_models)
-  var_1.model delete();
+  foreach(var_1 in level.wire_models) {
+    var_1.model delete();
+  }
 
-  if(isDefined(level.wire_active_fx))
+  if(isDefined(level.wire_active_fx)) {
     level.wire_active_fx delete();
+  }
 
   level.wire_models = [];
   level notify("end_wire_threads");
@@ -1857,8 +1922,9 @@ venomx_weapon_logic_start(var_0) {
   if(!isDefined(var_0)) {
     return;
   }
-  if(!isDefined(var_0.owner.basetriggercount))
+  if(!isDefined(var_0.owner.basetriggercount)) {
     var_0.owner.basetriggercount = 0;
+  }
 
   if(issubstr(var_0.weapon_name, "pap1")) {
     var_0.owner thread explode_venomx_projectile_early(var_0, 2);
@@ -1927,8 +1993,9 @@ deal_venomx_projectile_damage(var_0, var_1) {
   var_4 = var_0.origin;
   var_5 = 200;
 
-  if(var_1 == 1)
+  if(var_1 == 1) {
     var_5 = 200;
+  }
 
   var_0 scripts\engine\utility::waittill_any("missile_stuck", "death");
 
@@ -1995,12 +2062,14 @@ delete_venomx_trigger_after_time(var_0, var_1) {
   var_0 notify("delete_venomx_trigger_after_time" + self.name);
   var_0 endon("delete_venomx_trigger_after_time" + self.name);
 
-  while(gettime() <= var_1 + 5000)
+  while(gettime() <= var_1 + 5000) {
     scripts\engine\utility::waitframe();
+  }
 
   foreach(var_3 in scripts\cp\cp_agent_utils::getaliveagentsofteam("axis")) {
-    if(isalive(var_3))
+    if(isalive(var_3)) {
       var_3.flame_damage_time = undefined;
+    }
   }
 
   self delete();
@@ -2050,14 +2119,16 @@ remove_frozen_effects_on_disconnect(var_0) {
   scripts\engine\utility::waittill_any("disconnect", "death");
 
   if(isDefined(self.sacred_grounds)) {
-    foreach(var_2 in self.sacred_grounds)
-    var_2 delete();
+    foreach(var_2 in self.sacred_grounds) {
+      var_2 delete();
+    }
   }
 
-  if(var_0 == 1)
+  if(var_0 == 1) {
     self.slow_mo_active = 0;
-  else
+  } else {
     self.slow_mo_active_pap2 = 0;
+  }
 
   level.frozenzombiefunc = scripts\cp\zombies\zombie_scriptable_states::freeze_zombie;
   level.thawzombiefunc = scripts\cp\zombies\zombie_scriptable_states::unfreeze_zombie;
@@ -2067,8 +2138,9 @@ delete_venomxpap_effects_after_time(var_0, var_1) {
   self endon("death");
   self endon("disconnect");
 
-  while(gettime() <= var_0 + var_1 * 1000)
+  while(gettime() <= var_0 + var_1 * 1000) {
     scripts\engine\utility::waitframe();
+  }
 
   level.frozenzombiefunc = scripts\cp\zombies\zombie_scriptable_states::freeze_zombie;
   level.thawzombiefunc = scripts\cp\zombies\zombie_scriptable_states::unfreeze_zombie;
@@ -2077,13 +2149,15 @@ delete_venomxpap_effects_after_time(var_0, var_1) {
 slow_mo_sphere(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon("disconnect");
 
-  if(!isDefined(self.sacred_ground))
+  if(!isDefined(self.sacred_ground)) {
     self.sacred_grounds = [];
+  }
 
-  if(var_4 == 1)
+  if(var_4 == 1) {
     self.slow_mo_active = 1;
-  else
+  } else {
     self.slow_mo_active_pap2 = 1;
+  }
 
   level.frozenzombiefunc = ::custom_slow_time_func;
   level.thawzombiefunc = ::custom_unslow_func;
@@ -2091,22 +2165,25 @@ slow_mo_sphere(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7 = spawn("trigger_rotatable_radius", var_1, 0, var_2, 256);
   self.sacred_grounds[self.sacred_grounds.size] = var_7;
 
-  if(var_4 == 1)
+  if(var_4 == 1) {
     playFX(level._effect["pap1_slowtime"], var_1 + (0, 0, 5), anglesToForward(var_5), anglestoup(var_5 + (-90, 0, 0)));
-  else
+  } else {
     playFX(level._effect["pap2_slowtime"], var_1 + (0, 0, 5), anglesToForward(var_5), anglestoup(var_5 + (-90, 0, 0)));
+  }
 
   self.zombie_list = [];
   var_7 thread apply_slow_mo_on_trigger(var_0, var_4);
   wait(var_3);
 
-  if(var_4 == 1)
+  if(var_4 == 1) {
     self.slow_mo_active = 0;
-  else
+  } else {
     self.slow_mo_active_pap2 = 0;
+  }
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     var_7 delete();
+  }
 
   level.frozenzombiefunc = scripts\cp\zombies\zombie_scriptable_states::freeze_zombie;
   level.thawzombiefunc = scripts\cp\zombies\zombie_scriptable_states::unfreeze_zombie;
@@ -2196,29 +2273,33 @@ apply_slow_mo_on_trigger(var_0, var_1) {
         if(!scripts\engine\utility::is_true(var_7.dot_triggered)) {
           if(issubstr(var_7.agent_type, "alien")) {
             if(var_7.agent_type == "alien_rhino") {
-              if(var_1 == 1)
+              if(var_1 == 1) {
                 var_7 thread scripts\cp\utility::damage_over_time(var_7, var_0, 7, var_7.health / 3, "MOD_EXPLOSIVE", "iw7_venomx_zm_pap1");
-              else
+              } else {
                 var_7 thread scripts\cp\utility::damage_over_time(var_7, undefined, 3, var_7.health / 2, "MOD_EXPLOSIVE", "iw7_venomx_zm_pap2");
+              }
             }
 
             if(var_7.agent_type == "alien_phantom") {
-              if(var_1 == 1)
+              if(var_1 == 1) {
                 var_7 thread scripts\cp\utility::damage_over_time(var_7, var_0, 7, var_7.health / 2, "MOD_EXPLOSIVE", "iw7_venomx_zm_pap1");
-              else
+              } else {
                 var_7 thread scripts\cp\utility::damage_over_time(var_7, undefined, 3, var_7.health, "MOD_EXPLOSIVE", "iw7_venomx_zm_pap2");
+              }
             } else if(var_1 == 1)
               var_7 thread scripts\cp\utility::damage_over_time(var_7, undefined, 7, var_7.health + 10000, "MOD_EXPLOSIVE", "iw7_venomx_zm_pap1");
-            else
+            else {
               var_7 thread scripts\cp\utility::damage_over_time(var_7, undefined, 3, var_7.health + 10000, "MOD_EXPLOSIVE", "iw7_venomx_zm_pap2");
+            }
 
             var_7.moveratescale = 0.2;
             var_7._id_C081 = 0.1;
             var_7.traverseratescale = 0.1;
           } else if(var_1 == 1)
             var_7 thread scripts\cp\utility::damage_over_time(var_7, undefined, 7, var_7.health + 10000, "MOD_EXPLOSIVE", "iw7_venomx_zm_pap1");
-          else
+          else {
             var_7 thread scripts\cp\utility::damage_over_time(var_7, undefined, 3, var_7.health + 10000, "MOD_EXPLOSIVE", "iw7_venomx_zm_pap2");
+          }
         }
 
         var_7 scripts\anim\notetracks_mp::setstatelocked(1, "DoAttack");
@@ -2243,11 +2324,13 @@ apply_slow_mo_on_trigger(var_0, var_1) {
 }
 
 finalqueststepregistration(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  if(!isDefined(level._id_13F4D[var_0]))
+  if(!isDefined(level._id_13F4D[var_0])) {
     level._id_13F4D[var_0] = [];
+  }
 
-  if(!isDefined(level._id_13F4C[var_0]))
+  if(!isDefined(level._id_13F4C[var_0])) {
     level._id_13F4C[var_0] = -1;
+  }
 
   var_8 = spawnStruct();
   var_8.init_func = var_2;
@@ -2286,8 +2369,9 @@ spawn_egg_interaction_for_players(var_0) {
 deletemodelaftertimeout(var_0, var_1) {
   self endon("death");
 
-  while(gettime() <= var_1 + 20000)
+  while(gettime() <= var_1 + 20000) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
   level notify("delete_this_eggthread");
@@ -2305,15 +2389,17 @@ venomx_pickup_hint_func(var_0, var_1) {
     }
   }
 
-  if(scripts\engine\utility::is_true(var_2))
+  if(scripts\engine\utility::is_true(var_2)) {
     return &"CP_FINAL_VENOMX_AMMO";
-  else
+  } else {
     return "";
+  }
 }
 
 cangive_ammo(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   var_1 = var_0;
   var_2 = self getweaponammoclip(var_1);
@@ -2321,10 +2407,11 @@ cangive_ammo(var_0) {
   var_4 = weaponmaxammo(var_1);
   var_5 = self getweaponammostock(var_1);
 
-  if(var_5 < var_4 || var_2 < var_3)
+  if(var_5 < var_4 || var_2 < var_3) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 give_ammo_to_player_through_egg(var_0) {
@@ -2394,14 +2481,17 @@ venomx_add_ammo(var_0, var_1) {
 questdevguientries(var_0, var_1, var_2, var_3) {}
 
 is_this_position_safe(var_0, var_1, var_2, var_3, var_4) {
-  if(var_1 < 0 || var_1 >= 6)
+  if(var_1 < 0 || var_1 >= 6) {
     return 0;
+  }
 
-  if(var_2 < 0 || var_2 >= 6)
+  if(var_2 < 0 || var_2 >= 6) {
     return 0;
+  }
 
-  if(scripts\engine\utility::array_contains(var_0[var_4.xcoord][var_4.ycoord].wall_directions, var_3))
+  if(scripts\engine\utility::array_contains(var_0[var_4.xcoord][var_4.ycoord].wall_directions, var_3)) {
     return 0;
+  }
 
   return 1;
 }
@@ -2414,12 +2504,13 @@ runmazeinstanceforpoint(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       var_5 thread scripts\cp\cp_vo::try_to_play_vo("quest_venx_puzzle_success", "final_comment_vo");
       level.puzzles_solved++;
 
-      if(var_4.newmodelsspawned == 3 && var_4.othermodel.newmodelsspawned == 1)
+      if(var_4.newmodelsspawned == 3 && var_4.othermodel.newmodelsspawned == 1) {
         level.maze_completed[var_4.mod_name] = 1;
-      else if(var_4.newmodelsspawned == 2 && var_4.othermodel.newmodelsspawned == 2)
+      } else if(var_4.newmodelsspawned == 2 && var_4.othermodel.newmodelsspawned == 2) {
         level.maze_completed[var_4.mod_name] = 1;
-      else if(var_4.newmodelsspawned == 1 && var_4.othermodel.newmodelsspawned == 3)
+      } else if(var_4.newmodelsspawned == 1 && var_4.othermodel.newmodelsspawned == 3) {
         level.maze_completed[var_4.mod_name] = 1;
+      }
 
       if(level.puzzles_solved >= 4) {
         level.maze_completed["maze1"] = 1;
@@ -2472,16 +2563,18 @@ show_unsolved_mazes_on_crt() {
 display_maze_hints_on_crt() {
   wait 10;
 
-  foreach(var_2, var_1 in level.array_of_small_crt_script_models)
-  var_1 setscriptablepartstate("solved_grid", "neutral");
+  foreach(var_2, var_1 in level.array_of_small_crt_script_models) {
+    var_1 setscriptablepartstate("solved_grid", "neutral");
+  }
 }
 
 random_maze_roll() {
   for(;;) {
     var_0 = randomintrange(0, 16);
 
-    if(level.mazerollsarray.size >= 16)
+    if(level.mazerollsarray.size >= 16) {
       level.mazerollsarray = [];
+    }
 
     if(!scripts\engine\utility::array_contains(level.mazerollsarray, var_0)) {
       level.mazerollsarray[level.mazerollsarray.size] = var_0;
@@ -3244,11 +3337,13 @@ createmaze(var_0, var_1, var_2) {
   var_0 setscriptablepartstate("maze_puzzle", "cursor");
   var_1 setscriptablepartstate("maze_puzzle", "cursor");
 
-  foreach(var_13, var_12 in level.array_of_small_crt_script_models)
-  var_12 setscriptablepartstate("solved_grid", "solved_puzzle_" + var_13);
+  foreach(var_13, var_12 in level.array_of_small_crt_script_models) {
+    var_12 setscriptablepartstate("solved_grid", "solved_puzzle_" + var_13);
+  }
 
-  if(!isDefined(level.mazerollsarray))
+  if(!isDefined(level.mazerollsarray)) {
     level.mazerollsarray = [];
+  }
 
   foreach(var_13, var_15 in level.maze_attributes) {
     level.random_maze_roll[var_13] = random_maze_roll();
@@ -3276,17 +3371,19 @@ player_disconnect_during_maze(var_0) {
 control_puzzle_cursor(var_0) {
   level thread player_disconnect_during_maze(self);
 
-  if(var_0.mod_name == "maze2")
+  if(var_0.mod_name == "maze2") {
     thread input_cursor_maze2(var_0, level.unsolved_crt_model_2);
-  else
+  } else {
     thread input_cursor(var_0, level.unsolved_crt_model);
+  }
 }
 
 get_chars_of_word_as_array(var_0) {
   var_1 = [];
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++)
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_1[var_2] = var_0[var_2];
+  }
 
   return var_1;
 }
@@ -3303,84 +3400,100 @@ solvecipher(var_0, var_1, var_2) {
 convertwordintomorse(var_0, var_1, var_2) {
   self endon("disconnect");
 
-  if(var_1)
+  if(var_1) {
     level.convertedword = "";
+  }
 
   var_3 = get_chars_of_word_as_array(var_0);
   var_4 = undefined;
 
   for(var_5 = 0; var_5 < var_3.size; var_5++) {
-    if(var_5 + 1 == var_3.size)
+    if(var_5 + 1 == var_3.size) {
       var_4 = getsubstr(var_0, var_5);
-    else
+    } else {
       var_4 = getsubstr(var_0, var_5, var_5 + 1);
+    }
 
     switch (var_4) {
       case "0":
-        for(var_6 = 0; var_6 < 5; var_6++)
+        for(var_6 = 0; var_6 < 5; var_6++) {
           play_morse_dash(var_1, var_2);
+        }
 
         break;
       case "1":
         play_morse_dot(var_1, var_2);
 
-        for(var_6 = 0; var_6 < 4; var_6++)
+        for(var_6 = 0; var_6 < 4; var_6++) {
           play_morse_dash(var_1, var_2);
+        }
 
         break;
       case "2":
-        for(var_6 = 0; var_6 < 2; var_6++)
+        for(var_6 = 0; var_6 < 2; var_6++) {
           play_morse_dot(var_1, var_2);
+        }
 
-        for(var_6 = 0; var_6 < 3; var_6++)
+        for(var_6 = 0; var_6 < 3; var_6++) {
           play_morse_dash(var_1, var_2);
+        }
 
         break;
       case "3":
-        for(var_6 = 0; var_6 < 3; var_6++)
+        for(var_6 = 0; var_6 < 3; var_6++) {
           play_morse_dot(var_1, var_2);
+        }
 
-        for(var_6 = 0; var_6 < 2; var_6++)
+        for(var_6 = 0; var_6 < 2; var_6++) {
           play_morse_dash(var_1, var_2);
+        }
 
         break;
       case "4":
-        for(var_6 = 0; var_6 < 4; var_6++)
+        for(var_6 = 0; var_6 < 4; var_6++) {
           play_morse_dot(var_1, var_2);
+        }
 
         play_morse_dash(var_1, var_2);
         break;
       case "5":
-        for(var_6 = 0; var_6 < 5; var_6++)
+        for(var_6 = 0; var_6 < 5; var_6++) {
           play_morse_dot(var_1, var_2);
+        }
 
         break;
       case "6":
         play_morse_dash(var_1, var_2);
 
-        for(var_6 = 0; var_6 < 4; var_6++)
+        for(var_6 = 0; var_6 < 4; var_6++) {
           play_morse_dot(var_1, var_2);
+        }
 
         break;
       case "7":
-        for(var_6 = 0; var_6 < 2; var_6++)
+        for(var_6 = 0; var_6 < 2; var_6++) {
           play_morse_dash(var_1, var_2);
+        }
 
-        for(var_6 = 0; var_6 < 3; var_6++)
+        for(var_6 = 0; var_6 < 3; var_6++) {
           play_morse_dot(var_1, var_2);
+        }
 
         break;
       case "8":
-        for(var_6 = 0; var_6 < 3; var_6++)
+        for(var_6 = 0; var_6 < 3; var_6++) {
           play_morse_dash(var_1, var_2);
+        }
 
-        for(var_6 = 0; var_6 < 2; var_6++)
+        for(var_6 = 0; var_6 < 2; var_6++) {
           play_morse_dot(var_1, var_2);
+        }
 
         break;
       case "9":
-        for(var_6 = 0; var_6 < 4; var_6++)
+        for(var_6 = 0; var_6 < 4; var_6++) {
           play_morse_dash(var_1, var_2);
+        }
 
         play_morse_dot(var_1, var_2);
         break;
@@ -3388,38 +3501,44 @@ convertwordintomorse(var_0, var_1, var_2) {
       case "a":
         play_morse_dot(var_1, var_2);
 
-        for(var_6 = 0; var_6 < 1; var_6++)
+        for(var_6 = 0; var_6 < 1; var_6++) {
           play_morse_dash(var_1, var_2);
+        }
 
         break;
       case "B":
       case "b":
         play_morse_dash(var_1, var_2);
 
-        for(var_6 = 0; var_6 < 3; var_6++)
+        for(var_6 = 0; var_6 < 3; var_6++) {
           play_morse_dot(var_1, var_2);
+        }
 
         break;
       case "C":
       case "c":
         play_morse_dash(var_1, var_2);
 
-        for(var_6 = 0; var_6 < 1; var_6++)
+        for(var_6 = 0; var_6 < 1; var_6++) {
           play_morse_dot(var_1, var_2);
+        }
 
-        for(var_6 = 0; var_6 < 1; var_6++)
+        for(var_6 = 0; var_6 < 1; var_6++) {
           play_morse_dash(var_1, var_2);
+        }
 
-        for(var_6 = 0; var_6 < 1; var_6++)
+        for(var_6 = 0; var_6 < 1; var_6++) {
           play_morse_dot(var_1, var_2);
+        }
 
         break;
       case "D":
       case "d":
         play_morse_dash(var_1, var_2);
 
-        for(var_6 = 0; var_6 < 2; var_6++)
+        for(var_6 = 0; var_6 < 2; var_6++) {
           play_morse_dot(var_1, var_2);
+        }
 
         break;
       case "E":
@@ -3428,37 +3547,42 @@ convertwordintomorse(var_0, var_1, var_2) {
         break;
       case "F":
       case "f":
-        for(var_6 = 0; var_6 < 2; var_6++)
+        for(var_6 = 0; var_6 < 2; var_6++) {
           play_morse_dot(var_1, var_2);
+        }
 
         play_morse_dash(var_1, var_2);
         play_morse_dot(var_1, var_2);
         break;
       case "G":
       case "g":
-        for(var_6 = 0; var_6 < 2; var_6++)
+        for(var_6 = 0; var_6 < 2; var_6++) {
           play_morse_dash(var_1, var_2);
+        }
 
         play_morse_dot(var_1, var_2);
         break;
       case "H":
       case "h":
-        for(var_6 = 0; var_6 < 4; var_6++)
+        for(var_6 = 0; var_6 < 4; var_6++) {
           play_morse_dot(var_1, var_2);
+        }
 
         break;
       case "I":
       case "i":
-        for(var_6 = 0; var_6 < 2; var_6++)
+        for(var_6 = 0; var_6 < 2; var_6++) {
           play_morse_dot(var_1, var_2);
+        }
 
         break;
       case "J":
       case "j":
         play_morse_dot(var_1, var_2);
 
-        for(var_6 = 0; var_6 < 3; var_6++)
+        for(var_6 = 0; var_6 < 3; var_6++) {
           play_morse_dash(var_1, var_2);
+        }
 
         break;
       case "K":
@@ -3472,14 +3596,16 @@ convertwordintomorse(var_0, var_1, var_2) {
         play_morse_dot(var_1, var_2);
         play_morse_dash(var_1, var_2);
 
-        for(var_6 = 0; var_6 < 2; var_6++)
+        for(var_6 = 0; var_6 < 2; var_6++) {
           play_morse_dot(var_1, var_2);
+        }
 
         break;
       case "M":
       case "m":
-        for(var_6 = 0; var_6 < 2; var_6++)
+        for(var_6 = 0; var_6 < 2; var_6++) {
           play_morse_dash(var_1, var_2);
+        }
 
         break;
       case "N":
@@ -3489,23 +3615,26 @@ convertwordintomorse(var_0, var_1, var_2) {
         break;
       case "O":
       case "o":
-        for(var_6 = 0; var_6 < 3; var_6++)
+        for(var_6 = 0; var_6 < 3; var_6++) {
           play_morse_dash(var_1, var_2);
+        }
 
         break;
       case "P":
       case "p":
         play_morse_dot(var_1, var_2);
 
-        for(var_6 = 0; var_6 < 2; var_6++)
+        for(var_6 = 0; var_6 < 2; var_6++) {
           play_morse_dash(var_1, var_2);
+        }
 
         play_morse_dot(var_1, var_2);
         break;
       case "Q":
       case "q":
-        for(var_6 = 0; var_6 < 2; var_6++)
+        for(var_6 = 0; var_6 < 2; var_6++) {
           play_morse_dash(var_1, var_2);
+        }
 
         play_morse_dot(var_1, var_2);
         play_morse_dash(var_1, var_2);
@@ -3518,8 +3647,9 @@ convertwordintomorse(var_0, var_1, var_2) {
         break;
       case "S":
       case "s":
-        for(var_6 = 0; var_6 < 3; var_6++)
+        for(var_6 = 0; var_6 < 3; var_6++) {
           play_morse_dot(var_1, var_2);
+        }
 
         break;
       case "T":
@@ -3528,15 +3658,17 @@ convertwordintomorse(var_0, var_1, var_2) {
         break;
       case "U":
       case "u":
-        for(var_6 = 0; var_6 < 2; var_6++)
+        for(var_6 = 0; var_6 < 2; var_6++) {
           play_morse_dot(var_1, var_2);
+        }
 
         play_morse_dash(var_1, var_2);
         break;
       case "V":
       case "v":
-        for(var_6 = 0; var_6 < 3; var_6++)
+        for(var_6 = 0; var_6 < 3; var_6++) {
           play_morse_dot(var_1, var_2);
+        }
 
         play_morse_dash(var_1, var_2);
         break;
@@ -3544,16 +3676,18 @@ convertwordintomorse(var_0, var_1, var_2) {
       case "w":
         play_morse_dot(var_1, var_2);
 
-        for(var_6 = 0; var_6 < 2; var_6++)
+        for(var_6 = 0; var_6 < 2; var_6++) {
           play_morse_dash(var_1, var_2);
+        }
 
         break;
       case "X":
       case "x":
         play_morse_dash(var_1, var_2);
 
-        for(var_6 = 0; var_6 < 2; var_6++)
+        for(var_6 = 0; var_6 < 2; var_6++) {
           play_morse_dot(var_1, var_2);
+        }
 
         play_morse_dash(var_1, var_2);
         break;
@@ -3562,17 +3696,20 @@ convertwordintomorse(var_0, var_1, var_2) {
         play_morse_dash(var_1, var_2);
         play_morse_dot(var_1, var_2);
 
-        for(var_6 = 0; var_6 < 2; var_6++)
+        for(var_6 = 0; var_6 < 2; var_6++) {
           play_morse_dash(var_1, var_2);
+        }
 
         break;
       case "Z":
       case "z":
-        for(var_6 = 0; var_6 < 2; var_6++)
+        for(var_6 = 0; var_6 < 2; var_6++) {
           play_morse_dash(var_1, var_2);
+        }
 
-        for(var_6 = 0; var_6 < 2; var_6++)
+        for(var_6 = 0; var_6 < 2; var_6++) {
           play_morse_dot(var_1, var_2);
+        }
 
         break;
       case ".":
@@ -3582,14 +3719,17 @@ convertwordintomorse(var_0, var_1, var_2) {
         wait 1;
         break;
       case "?":
-        for(var_6 = 0; var_6 < 2; var_6++)
+        for(var_6 = 0; var_6 < 2; var_6++) {
           play_morse_dot(var_1, var_2);
+        }
 
-        for(var_6 = 0; var_6 < 2; var_6++)
+        for(var_6 = 0; var_6 < 2; var_6++) {
           play_morse_dash(var_1, var_2);
+        }
 
-        for(var_6 = 0; var_6 < 2; var_6++)
+        for(var_6 = 0; var_6 < 2; var_6++) {
           play_morse_dot(var_1, var_2);
+        }
 
         break;
       case " ":
@@ -3600,8 +3740,9 @@ convertwordintomorse(var_0, var_1, var_2) {
     }
   }
 
-  if(!var_1)
+  if(!var_1) {
     var_2 setscriptablepartstate("morse_code", "off");
+  }
 }
 
 venomx_morse_code(var_0, var_1, var_2) {
@@ -3699,8 +3840,9 @@ start_fake_spawn_sequence(var_0, var_1) {
   wait 2;
   var_10 = skeleton_spawner(var_9, var_0);
 
-  while(level.goons_alive > 0)
+  while(level.goons_alive > 0) {
     wait 0.1;
+  }
 
   scripts\cp\zombies\zombies_spawning::decrease_reserved_spawn_slots(var_3);
   return 1;
@@ -3769,8 +3911,9 @@ spawn_skeleton_solo(var_0, var_1) {
     earthquake(0.3, 0.2, var_0, 500);
     var_7 = var_2 scripts\cp\zombies\cp_final_spawning::spawn_brute_wave_enemy("alien_phantom");
 
-    if(isDefined(var_7))
+    if(isDefined(var_7)) {
       return var_7;
+    }
 
     wait(var_4);
   }
@@ -3784,8 +3927,9 @@ set_skeleton_attributes() {
   self.dont_cleanup = 1;
   self.movemode = "sprint";
 
-  if(!scripts\engine\utility::is_true(self.aj_goon))
+  if(!scripts\engine\utility::is_true(self.aj_goon)) {
     self.aj_goon = 1;
+  }
 
   self.health = scripts\cp\zombies\cp_final_spawning::calculatezombiehealth("alien_phantom");
   self.maxhealth = scripts\cp\zombies\cp_final_spawning::calculatezombiehealth("alien_phantom");
@@ -3895,14 +4039,15 @@ activatefiguredamage(var_0, var_1, var_2) {
     if(isDefined(var_4.hidden_figures_hit)) {
       var_4.hidden_figures_hit++;
 
-      if(var_4.hidden_figures_hit >= 4)
+      if(var_4.hidden_figures_hit >= 4) {
         var_4 thread scripts\cp\maps\cp_final\cp_final::update_special_mode_for_player(var_4);
+      }
     }
 
     if(isDefined(level.hidden_figures_killed)) {
-      if(level.hidden_figures_killed >= level.chosen_number_for_morse_code_pap2)
+      if(level.hidden_figures_killed >= level.chosen_number_for_morse_code_pap2) {
         level.hidden_figures_killed = level.chosen_number_for_morse_code_pap2;
-      else {
+      } else {
         level thread scripts\cp\utility::add_to_notify_queue("venomx_pap1_kill", var_2, var_2.origin, var_12);
         level.hidden_figures_killed++;
       }
@@ -3936,11 +4081,13 @@ showhiddenfigurestoplayer(var_0, var_1, var_2, var_3) {
   var_7 = gettime();
   var_0.got_hit_by_player = 0;
 
-  if(!isDefined(var_3.hidden_figures_hit))
+  if(!isDefined(var_3.hidden_figures_hit)) {
     var_3.hidden_figures_hit = 0;
+  }
 
-  if(!isDefined(level.hidden_figures_killed))
+  if(!isDefined(level.hidden_figures_killed)) {
     level.hidden_figures_killed = 0;
+  }
 
   thread activatefiguredamage(var_1, var_3, var_0);
   var_0 showtoplayer(var_3);
@@ -3996,8 +4143,9 @@ showhiddenfigurestoplayer(var_0, var_1, var_2, var_3) {
 
     if(int(distance(var_0.origin, var_3.origin)) <= 120) {
       if(var_3 _meth_843B()) {
-        if(randomint(100) > 50)
+        if(randomint(100) > 50) {
           var_3 dodamage(int(var_3.health / 4), var_3.origin);
+        }
       } else
         var_3 dodamage(int(var_3.health / 4), var_3.origin);
     }
@@ -4031,8 +4179,9 @@ modfunc(var_0, var_1) {
 
 isalphabet(var_0) {
   foreach(var_3, var_2 in level.alphabets) {
-    if(var_0 == var_3)
+    if(var_0 == var_3) {
       return 1;
+    }
   }
 
   return 0;
@@ -4049,10 +4198,11 @@ cipher(var_0, var_1, var_2) {
       var_8 = (var_7 - var_5) % var_3;
       var_9 = var_1[var_8];
 
-      if(!var_2)
+      if(!var_2) {
         var_9 = -1 * derivenumberfromletter(var_9);
-      else
+      } else {
         var_9 = derivenumberfromletter(var_9);
+      }
 
       var_10 = modfunc(derivenumberfromletter(var_0[var_7]) + var_9, 26);
       var_6[var_7] = deriveletterfromnumber(var_10);
@@ -4068,25 +4218,29 @@ cipher(var_0, var_1, var_2) {
 
 derivenumberfromletter(var_0) {
   foreach(var_3, var_2 in level.alphabets) {
-    if(var_0 == var_3)
+    if(var_0 == var_3) {
       return var_2;
+    }
   }
 
   foreach(var_6, var_5 in level.alphabets_capped) {
-    if(var_0 == var_6)
+    if(var_0 == var_6) {
       return var_5;
+    }
   }
 }
 
 deriveletterfromnumber(var_0) {
   foreach(var_3, var_2 in level.alphabets) {
-    if(var_2 == var_0)
+    if(var_2 == var_0) {
       return var_3;
+    }
   }
 
   foreach(var_6, var_5 in level.alphabets_capped) {
-    if(var_5 == var_0)
+    if(var_5 == var_0) {
       return var_6;
+    }
   }
 }
 

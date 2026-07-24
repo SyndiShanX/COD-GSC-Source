@@ -4,13 +4,15 @@
 **************************************/
 
 _id_107D9(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = "spawner_mech_weld";
+  }
 
-  if(isDefined(var_4) && var_4 == "female")
+  if(isDefined(var_4) && var_4 == "female") {
     var_5 = _id_0EF8::_id_FDFD(var_3, var_0, "cheap");
-  else
+  } else {
     var_5 = _id_0EF8::_id_FE01(var_3, var_0, "cheap");
+  }
 
   var_5 thread _id_E82C(var_2);
   var_5 scripts\engine\utility::delaycall(0.05, ::_meth_82B0, level._id_EC85["generic"][var_1][0], randomfloatrange(0, 0.9));
@@ -54,19 +56,21 @@ _id_40DD(var_0, var_1) {
   self waittill("death");
   killfxontag(scripts\engine\utility::getfx(var_1), var_0, "tag_flame");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 _id_7D79(var_0) {
   var_1 = "welding_sparks_small";
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return var_1;
-  else if(isDefined(scripts\engine\utility::getfx(var_0)))
+  } else if(isDefined(scripts\engine\utility::getfx(var_0))) {
     return var_0;
-  else
+  } else {
     return var_1;
+  }
 }
 
 _id_6258(var_0) {
@@ -78,8 +82,9 @@ _id_55A7(var_0) {
 }
 
 _id_3DE0() {
-  if(!scripts\engine\utility::flag_exist("welders_initialized"))
+  if(!scripts\engine\utility::flag_exist("welders_initialized")) {
     _id_97A5();
+  }
 }
 
 _id_97A5() {

@@ -4,39 +4,45 @@
 **************************************/
 
 _id_13F64() {
-  if(scripts\asm\asm_bb::bb_movetyperequested("fly"))
+  if(scripts\asm\asm_bb::bb_movetyperequested("fly")) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_13F66() {
-  if(scripts\asm\asm_bb::bb_meleerequested())
+  if(scripts\asm\asm_bb::bb_meleerequested()) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_13F67() {
-  if(scripts\asm\asm_bb::bb_movetyperequested("entangled"))
+  if(scripts\asm\asm_bb::bb_movetyperequested("entangled")) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_13F68() {
-  if(scripts\aitypes\zombie_ghost\behaviors::getghostnavmode() == "launched")
+  if(scripts\aitypes\zombie_ghost\behaviors::getghostnavmode() == "launched") {
     return 1;
+  }
 
   return 0;
 }
 
 _id_13F65() {
-  if(!isDefined(self.ghost_target_position))
+  if(!isDefined(self.ghost_target_position)) {
     return 0;
+  }
 
-  if(scripts\aitypes\zombie_ghost\behaviors::getghostnavmode() == "entangled")
+  if(scripts\aitypes\zombie_ghost\behaviors::getghostnavmode() == "entangled") {
     return 0;
+  }
 
   var_0 = self.ghost_target_position - self.origin;
   var_1 = calculate_final_spider_score(var_0);
@@ -49,8 +55,9 @@ _id_13F65() {
 }
 
 _id_13F6D(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.zombie_ghost_target))
+  if(isDefined(self.zombie_ghost_target)) {
     _id_1299A(self.zombie_ghost_target.origin);
+  }
 
   _id_CECF(var_0, var_1, var_2, var_3);
   self notify("ghost_played_melee_anim");
@@ -88,8 +95,9 @@ _id_13F6A(var_0, var_1, var_2, var_3) {
 _id_826A(var_0, var_1, var_2, var_3, var_4) {
   self endon(var_1 + "_finished");
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1;
+  }
 
   self.currentanimstate = var_1;
   var_5 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
@@ -110,16 +118,18 @@ zombieghost_constantanglesadjust() {
   for(;;) {
     scripts\engine\utility::waitframe();
 
-    if(isDefined(self.ghost_target_position))
+    if(isDefined(self.ghost_target_position)) {
       _id_1299A(self.ghost_target_position);
+    }
   }
 }
 
 _id_13F6B(var_0, var_1, var_2, var_3) {
   _id_CECF(var_0, var_1, var_2, var_3);
 
-  if(isDefined(self.ghost_target_position))
+  if(isDefined(self.ghost_target_position)) {
     _id_1299A(self.ghost_target_position);
+  }
 }
 
 calculate_final_spider_score(var_0) {
@@ -128,8 +138,9 @@ calculate_final_spider_score(var_0) {
   var_3 = angleclamp180(var_2[1] - self.angles[1]);
   var_4 = getangleindex(var_3, var_1);
 
-  if(var_4 == 4 || var_4 < 0 || var_4 > 8)
+  if(var_4 == 4 || var_4 < 0 || var_4 > 8) {
     return undefined;
+  }
 
   var_5 = _id_79C4();
   return var_5[var_4];

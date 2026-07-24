@@ -16,8 +16,9 @@ get_closest_zipline_traversal(var_0) {
   var_1 = 16384;
 
   foreach(var_3 in level.zipline_traversals) {
-    if(distance2dsquared(var_3.traversal_start, var_0) < var_1)
+    if(distance2dsquared(var_3.traversal_start, var_0) < var_1) {
       return var_3;
+    }
   }
 
   return undefined;
@@ -65,8 +66,9 @@ playtraverseziplineloop(var_0, var_1, var_2, var_3) {
   self setanimstate(var_1, var_4, 1.0);
   var_6 = self.zipline._id_6393 - gettime();
 
-  if(var_6 > 0)
+  if(var_6 > 0) {
     wait(var_6 / 1000);
+  }
 
   scripts\asm\asm::asm_fireevent(var_1, "loop_finished");
 }
@@ -118,12 +120,13 @@ chooseanimzipline(var_0, var_1, var_2) {
   var_3 = ["left", "right"];
 
   if(!isDefined(self.zipline_arm)) {
-    if(_id_0C72::_id_9EA4())
+    if(_id_0C72::_id_9EA4()) {
       self.zipline_arm = "right";
-    else if(_id_0C72::_id_9EA5())
+    } else if(_id_0C72::_id_9EA5()) {
       self.zipline_arm = "left";
-    else
+    } else {
       self.zipline_arm = var_3[randomint(var_3.size)];
+    }
   }
 
   return scripts\asm\asm::asm_lookupanimfromalias(var_1, self.zipline_arm);

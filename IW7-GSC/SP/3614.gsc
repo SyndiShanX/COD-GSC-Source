@@ -13,8 +13,9 @@ _id_5375() {
   var_0 = getEntArray("scriptable", "code_classname");
 
   foreach(var_2 in var_0) {
-    if(issubstr(var_2.model, "veh_"))
+    if(issubstr(var_2.model, "veh_")) {
       var_2 thread _id_5376();
+    }
   }
 }
 
@@ -32,8 +33,9 @@ _id_5376() {
       case "vehicle_death":
         self notify("destroyed");
 
-        if(isDefined(self._id_329F))
+        if(isDefined(self._id_329F)) {
           self._id_329F delete();
+        }
 
         self._id_C528 = undefined;
         return;

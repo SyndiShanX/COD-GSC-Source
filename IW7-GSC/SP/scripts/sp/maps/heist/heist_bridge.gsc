@@ -15,8 +15,8 @@ _id_10C94() {
   level._id_A70E.ignoreme = 1;
   var_0 = scripts\engine\utility::getStruct("scene_mons_breach", "targetname");
   var_0 thread scripts\sp\anim::_id_1EEA(level._id_6754, "postbreach_idle", "ethan_stop_loop");
-  var_1[0] = scripts\engine\utility::getStruct("struct_robothack1", "targetname");
-  var_1[1] = scripts\engine\utility::getStruct("struct_robothack2", "targetname");
+  var_1[0] = ::scripts\engine\utility::getStruct("struct_robothack1", "targetname");
+  var_1[1] = ::scripts\engine\utility::getStruct("struct_robothack2", "targetname");
   var_2 = scripts\sp\utility::_id_22CD("robots_to_hack");
   level._id_3029 = var_2;
 
@@ -69,8 +69,9 @@ _id_B207() {
 
 _id_A71A() {
   foreach(var_1 in level.allies) {
-    if(var_1 != level._id_6754)
+    if(var_1 != level._id_6754) {
       var_1 _meth_83A1();
+    }
 
     var_1.ignoreall = 1;
     var_1.ignoreme = 1;
@@ -133,21 +134,25 @@ _id_A715(var_0) {
   var_1 = cos(40);
   var_2 = anglestoright(level._id_A70E.angles) * -1;
 
-  if(distance2d(level.player.origin, level._id_A70E.origin) > 64)
+  if(distance2d(level.player.origin, level._id_A70E.origin) > 64) {
     return 0;
+  }
 
-  if(!scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_0.origin, var_1))
+  if(!scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_0.origin, var_1)) {
     return 0;
+  }
 
-  if(vectordot(var_2, vectorNormalize(level.player.origin - level._id_A70E.origin)) < 0.65)
+  if(vectordot(var_2, vectorNormalize(level.player.origin - level._id_A70E.origin)) < 0.65) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_A718() {
-  if(!level.player scripts\sp\utility::_id_65DB("hack_control_outro_done"))
+  if(!level.player scripts\sp\utility::_id_65DB("hack_control_outro_done")) {
     level.player scripts\sp\utility::_id_65E3("hack_control_outro_done");
+  }
 
   scripts\sp\utility::_id_1034D("heist_plr_targetisstillal");
   level._id_6754 scripts\sp\utility::_id_10346("heist_eth_ayesir3");
@@ -172,8 +177,9 @@ _id_2FF1() {
   var_0 = [level.player, level._id_EA2C, level._id_30F6, level._id_A54E];
   scripts\sp\maps\heist\heist_util::_id_1378F("on_the_bridge", var_0);
 
-  while(distance(level.player.origin, level._id_A70E.origin) > 550)
+  while(distance(level.player.origin, level._id_A70E.origin) > 550) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\sp\maps\heist\heist_util::_id_4264("door_bridge_left", "door_bridge_right", 0.5);
   scripts\engine\utility::flag_set("transient_mons_launch");
@@ -282,8 +288,9 @@ _id_EBF0() {
   var_3 = getanimlength(level._id_A70E scripts\sp\utility::_id_7DC1("kotch_grab"));
   var_4 = level scripts\engine\utility::waittill_notify_or_timeout_return("player_knife_kotch", var_3);
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     level waittill("kotch_death_complete");
+  }
 
   level.player._id_A6FB delete();
   level._id_A70E.a.nodeath = 1;
@@ -381,8 +388,9 @@ _id_B211() {
   var_1 = getEntArray("bridge_robots_front", "script_noteworthy");
 
   for(var_2 = 0; var_2 < level._id_306D.size; var_2++) {
-    if(isDefined(level._id_306D[var_2]))
+    if(isDefined(level._id_306D[var_2])) {
       level._id_306D[var_2] delete();
+    }
   }
 
   if(isDefined(level._id_BA7F)) {
@@ -391,8 +399,9 @@ _id_B211() {
     var_3 setModel(level._id_BA7F.model);
   }
 
-  if(isDefined(level._id_EA2C._id_13C4D))
+  if(isDefined(level._id_EA2C._id_13C4D)) {
     level._id_EA2C._id_13C4D delete();
+  }
 
   scripts\engine\utility::delaythread(5, scripts\sp\utility::_id_BF98);
   scripts\engine\utility::flag_set("transient_mons_launch");
@@ -553,8 +562,9 @@ _id_BAC3(var_0, var_1) {
   var_3 scripts\engine\utility::delaythread(var_0, scripts\sp\vehicle::_id_1080B);
   wait(var_1);
 
-  if(isDefined(var_2._id_ED46))
+  if(isDefined(var_2._id_ED46)) {
     self._id_72B1 = scripts\sp\utility::_id_7DC3(var_2._id_ED46);
+  }
 
   self notify("death");
 }
@@ -569,8 +579,9 @@ _id_306B(var_0, var_1, var_2) {
     var_4.origin = var_4.origin + var_5 * 3000;
     var_4 thread _id_0B76::_id_A332(var_0, 1, undefined, "vfx_heist_player_missile");
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       wait(var_2);
+    }
   }
 }
 
@@ -639,8 +650,9 @@ _id_BC44() {
   level._id_C413 = var_0 scripts\sp\utility::_id_10808();
   var_1 = scripts\engine\utility::getStruct("loc_bridge_mover_1", "targetname");
 
-  if(level._id_BA52.origin == var_1.origin && level._id_BA52.angles == var_1.angles)
+  if(level._id_BA52.origin == var_1.origin && level._id_BA52.angles == var_1.angles) {
     level._id_BA52 _meth_83C9(undefined);
+  }
 
   var_1 = scripts\engine\utility::getStruct("om_link_point", "script_noteworthy");
   level._id_BA52 dontinterpolate();

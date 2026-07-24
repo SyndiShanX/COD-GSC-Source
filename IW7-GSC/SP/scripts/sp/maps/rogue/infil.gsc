@@ -59,8 +59,9 @@ _id_9465() {
   level.player _meth_82C0("rogue_dropship", 0.05);
   level.player _meth_8573("nopack_nohelmet_shadow");
 
-  while(!isDefined(level._id_5D6C))
+  while(!isDefined(level._id_5D6C)) {
     scripts\engine\utility::waitframe();
+  }
 
   level._id_5D6C _meth_83E8();
   level._id_5D6C notify("stop_monitor_player_in_dropship");
@@ -181,8 +182,9 @@ _id_1130A() {
     var_2 = 0;
 
     foreach(var_4 in level._id_10AC8) {
-      if(var_4 scripts\sp\utility::_id_65DF("ready_for_Hangar"))
+      if(var_4 scripts\sp\utility::_id_65DF("ready_for_Hangar")) {
         var_2++;
+      }
     }
 
     wait 0.05;
@@ -193,8 +195,9 @@ _id_1130A() {
 }
 
 _id_30F9() {
-  while(!isDefined(level._id_5D6C))
+  while(!isDefined(level._id_5D6C)) {
     wait 0.05;
+  }
 
   level._id_B33B scripts\sp\utility::_id_86E4();
   var_0 = getweaponmodel("iw7_ake");
@@ -221,11 +224,13 @@ clear_script_origin_other_on_ai() {
 }
 
 _id_B502() {
-  while(!isDefined(level._id_5D6C))
+  while(!isDefined(level._id_5D6C)) {
     wait 0.05;
+  }
 
-  while(!isDefined(level._id_5D6C._id_4D94._id_F08B) || level._id_5D6C._id_4D94._id_F08B.size == 0)
+  while(!isDefined(level._id_5D6C._id_4D94._id_F08B) || level._id_5D6C._id_4D94._id_F08B.size == 0) {
     wait 0.05;
+  }
 
   level._id_B4F9 detach(level._id_B4F9.hatmodel);
   var_0 = level._id_5D6C _id_0BBF::_id_796D("right_02");
@@ -246,8 +251,9 @@ _id_E660() {
 _id_10AC9() {
   wait 7.5;
 
-  foreach(var_1 in level._id_10AC8)
-  thread _id_944D(var_1);
+  foreach(var_1 in level._id_10AC8) {
+    thread _id_944D(var_1);
+  }
 
   level._id_5D6C._id_4D94._id_5A13._id_4348 scripts\engine\utility::delaycall(17, ::notsolid);
   level._id_5D6C scripts\sp\anim::_id_1F35(level._id_5D6C, "infil_scene_c3");
@@ -267,8 +273,9 @@ _id_2CB2() {
 _id_16A1() {
   self endon("booster_on");
 
-  while(!isDefined(level.player.seat))
+  while(!isDefined(level.player.seat)) {
     wait 0.05;
+  }
 
   thread _id_106F1();
   level.player.seat waittill("trigger");
@@ -296,8 +303,9 @@ _id_106F1() {
 }
 
 _id_106EE() {
-  while(!isDefined(level.player.seat))
+  while(!isDefined(level.player.seat)) {
     wait 0.05;
+  }
 
   var_0 = spawn("script_model", (0, 0, 0));
   var_0.origin = level.player.seat gettagorigin("tag_jetpack");
@@ -328,8 +336,9 @@ _id_9472() {
   level thread scripts\sp\maps\rogue\rogue_util::_id_C152("grab_helmet", ::_id_847A);
   level._id_5D6C scripts\sp\anim::_id_1F2C([level.player._id_E505, level.player.seat], "infil_scene_c1");
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     scripts\engine\utility::delaythread(4.5, scripts\sp\specialist_MAYBE::_id_F3FF, 1);
+  }
 
   level.player _meth_82C0("rogue_dropship", 0.5);
   level._id_5D6C scripts\sp\anim::_id_1F2C([level.player._id_E505, level.player.seat], "infil_scene_c2");
@@ -359,8 +368,9 @@ _id_9467() {
   thread _id_0E4B::_id_8E06();
   _id_9630();
 
-  while(!isDefined(level._id_5D6C))
+  while(!isDefined(level._id_5D6C)) {
     wait 0.05;
+  }
 
   var_0 = level.player _meth_84C6("loadouts", 0, "weaponSetups", 0, "weapon");
   var_1 = getweaponmodel(var_0);
@@ -376,8 +386,9 @@ _id_9467() {
   var_3 = getanimlength(%rogue_infil_plr_exit_seat);
   var_4 = getanimlength(level._id_5D6C scripts\sp\utility::_id_7DC1("infil_scene_c"));
 
-  foreach(var_6 in level._id_10AC8)
-  level._id_5D6C thread scripts\sp\maps\rogue\rogue_util::_id_1E94(var_6, "infil_scene_c", undefined, undefined, undefined, undefined, scripts\sp\utility::_id_61C7);
+  foreach(var_6 in level._id_10AC8) {
+    level._id_5D6C thread scripts\sp\maps\rogue\rogue_util::_id_1E94(var_6, "infil_scene_c", undefined, undefined, undefined, undefined, scripts\sp\utility::_id_61C7);
+  }
 
   level._id_5D6C thread scripts\sp\anim::_id_1F2C([level.player._id_E505, level._id_5D6C, var_2], "infil_scene_c");
   level._id_5D6C._id_4D94._id_5A13._id_4348 scripts\engine\utility::delaycall(17, ::notsolid);

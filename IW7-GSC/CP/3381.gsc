@@ -78,18 +78,20 @@ _id_F9BE(var_0) {
   for(;;) {
     var_13 = "power_on";
 
-    if(var_12)
+    if(var_12) {
       var_13 = level scripts\engine\utility::waittill_any_return_no_endon_death("power_on", self.power_area + " power_on", "power_off");
+    }
 
     if(var_13 == "power_off" && !scripts\engine\utility::is_true(self.powered_on)) {
       wait 0.25;
       continue;
     }
 
-    if(var_13 != "power_off" && !isDefined(var_0))
+    if(var_13 != "power_off" && !isDefined(var_0)) {
       self.powered_on = 1;
-    else
+    } else {
       self.powered_on = 0;
+    }
 
     if(!var_12) {
       break;
@@ -101,8 +103,9 @@ interaction_usability_manager_per_wave(var_0) {
   for(;;) {
     level scripts\engine\utility::waittill_any("regular_wave_starting", "event_wave_starting");
 
-    foreach(var_2 in level.players)
-    scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(var_0, var_2);
+    foreach(var_2 in level.players) {
+      scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(var_0, var_2);
+    }
   }
 }
 
@@ -120,8 +123,9 @@ use_knife_throw(var_0, var_1) {
   scripts\cp\zombies\arcade_game_utility::set_arcade_game_award_type(var_1);
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
 
-  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade))
+  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade)) {
     var_0 notify("machine_used");
+  }
 
   var_1.playing_game = 1;
   var_1.pre_arcade_game_weapon = var_1 scripts\cp\zombies\arcade_game_utility::saveplayerpregameweapon(var_1);
@@ -224,13 +228,15 @@ _id_A701(var_0, var_1) {
     if(var_3 != "iw7_cpknifethrow_mp") {
       continue;
     }
-    if(!isDefined(var_1.disabledusability) || var_1.disabledusability == 0)
+    if(!isDefined(var_1.disabledusability) || var_1.disabledusability == 0) {
       var_1 scripts\engine\utility::allow_usability(0);
+    }
 
     var_1 waittill("grenade_fire", var_4, var_3);
 
-    if(var_3 == "iw7_cpknifethrow_mp")
+    if(var_3 == "iw7_cpknifethrow_mp") {
       var_2--;
+    }
 
     if(var_2 == 0) {
       break;
@@ -283,27 +289,31 @@ _id_6955(var_0, var_1, var_2) {
     var_1.playing_game = undefined;
     var_1 scripts\engine\utility::allow_weapon_switch(1);
 
-    if(!var_1 scripts\engine\utility::isusabilityallowed())
+    if(!var_1 scripts\engine\utility::isusabilityallowed()) {
       var_1 scripts\engine\utility::allow_usability(1);
+    }
 
     var_1 scripts\cp\zombies\arcade_game_utility::give_player_back_weapon(var_1);
     var_1 scripts\cp\zombies\arcade_game_utility::restore_player_grenades_post_game();
     playsoundatpos(var_0.origin, "mp_slot_machine_coins");
     var_3 = var_0.score;
 
-    if(var_1.arcade_game_award_type == "soul_power")
+    if(var_1.arcade_game_award_type == "soul_power") {
       var_1 scripts\cp\zombies\zombie_afterlife_arcade::give_soul_power(var_1, var_3);
-    else
+    } else {
       var_1 scripts\cp\zombies\arcade_game_utility::give_player_tickets(var_1, var_3);
+    }
 
-    if(!var_1 scripts\cp\utility::areinteractionsenabled())
+    if(!var_1 scripts\cp\utility::areinteractionsenabled()) {
       var_1 scripts\cp\utility::allow_player_interactions(1);
+    }
   }
 
   var_1 notify("arcade_game_over_for_player");
 
-  if(var_0.knife_throw_target.head_hit == 6)
+  if(var_0.knife_throw_target.head_hit == 6) {
     scripts\cp\loot::give_max_ammo_to_player(var_1);
+  }
 
   stop_wheel_sfx(var_0);
   wait 3;
@@ -311,30 +321,34 @@ _id_6955(var_0, var_1, var_2) {
   wait 3;
   scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(var_0, var_1);
+  }
 }
 
 turn_on_knife_throw_light(var_0) {
   var_1 = getEntArray(var_0._id_EF20, "targetname");
 
-  foreach(var_3 in var_1)
-  var_3 setscriptablepartstate("knife_throw_light", "light_on");
+  foreach(var_3 in var_1) {
+    var_3 setscriptablepartstate("knife_throw_light", "light_on");
+  }
 }
 
 turn_off_knife_throw_light(var_0) {
   var_1 = getEntArray(var_0._id_EF20, "targetname");
 
-  foreach(var_3 in var_1)
-  var_3 setscriptablepartstate("knife_throw_light", "light_off");
+  foreach(var_3 in var_1) {
+    var_3 setscriptablepartstate("knife_throw_light", "light_off");
+  }
 }
 
 give_knife_throw_rewards(var_0, var_1, var_2) {
   var_3 = get_knife_hit_location(var_0, var_1);
   var_4 = get_knife_hit_reward_point(var_3);
 
-  if(var_3 == "j_helmet")
+  if(var_3 == "j_helmet") {
     var_0.head_hit++;
+  }
 
   var_2 iprintlnbold("+$" + var_4);
   var_2 scripts\cp\cp_persistence::give_player_currency(var_4);
@@ -344,8 +358,9 @@ get_knife_hit_location(var_0, var_1) {
   for(var_2 = 0; var_2 < var_0.damage_location.size; var_2++) {
     var_3 = var_0.damage_location[var_2];
 
-    if(distancesquared(var_1, var_3.origin) <= var_3.damage_location_range)
+    if(distancesquared(var_1, var_3.origin) <= var_3.damage_location_range) {
       return var_3.tag_location;
+    }
   }
 
   return "body";

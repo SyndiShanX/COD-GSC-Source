@@ -36,8 +36,9 @@ _id_7D4A() {
   level._id_B0C1 = getEntArray("lounge_view_image", "script_noteworthy");
   level._id_B0B3 = getEntArray("lounge_flight_record_image", "script_noteworthy");
 
-  foreach(var_1 in level._id_B0C1)
-  var_1 delete();
+  foreach(var_1 in level._id_B0C1) {
+    var_1 delete();
+  }
 
   setomnvar("ui_inworld_viewer_ent", level._id_B0C0._id_99FB);
 }
@@ -179,8 +180,9 @@ _id_3C4E() {
     }
 
     if(var_3 == "change_view") {
-      if(isDefined(level._id_B0C0._id_30E5))
+      if(isDefined(level._id_B0C0._id_30E5)) {
         level._id_B0C0._id_30E5 notify("trigger");
+      }
 
       self notify("change_view");
       level._id_B0C0._id_30E3 hide();
@@ -208,18 +210,21 @@ _id_CCB1(var_0, var_1) {
   var_0 = _id_0EE9::_id_7C5D();
   var_1 = "bink3d_broadcast_news";
 
-  if(!isDefined(level.broadcast_counter))
+  if(!isDefined(level.broadcast_counter)) {
     level.broadcast_counter = 0;
+  }
 
-  if(!isDefined(level.viewer_broadcasts))
+  if(!isDefined(level.viewer_broadcasts)) {
     level.viewer_broadcasts = [];
+  }
 
   var_2 = _id_0EE9::_id_7BDD();
   var_3 = getarraykeys(var_2);
 
   foreach(var_6, var_5 in var_2) {
-    if(var_5 == "watched")
+    if(var_5 == "watched") {
       level.viewer_broadcasts = scripts\engine\utility::array_add(level.viewer_broadcasts, var_6);
+    }
   }
 
   level.viewer_broadcasts = scripts\engine\utility::array_remove_duplicates(level.viewer_broadcasts);
@@ -234,14 +239,15 @@ _id_CCB1(var_0, var_1) {
     if(var_7 == "play_broadcast") {
       stopcinematicingame();
 
-      if(var_0 == "none")
+      if(var_0 == "none") {
         level._id_B0C0._id_30E3 show();
-      else {
+      } else {
         _id_62C5();
         level.broadcast_counter++;
 
-        if(level.broadcast_counter > level.viewer_broadcasts.size - 1)
+        if(level.broadcast_counter > level.viewer_broadcasts.size - 1) {
           level.broadcast_counter = 0;
+        }
 
         var_0 = _id_0EE9::_id_7C5D(level.viewer_broadcasts[level.broadcast_counter]);
         _id_2A5C(var_0, var_1);
@@ -289,11 +295,13 @@ _id_2A5C(var_0, var_1) {
 _id_E271() {
   self endon("reset_broadcast");
 
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     scripts\engine\utility::waitframe();
+  }
 
-  while(iscinematicplaying())
+  while(iscinematicplaying()) {
     scripts\engine\utility::waitframe();
+  }
 
   self._id_2AE5 hide();
   self._id_30E3 show();
@@ -412,8 +420,9 @@ _id_C615() {
   setomnvar("ui_lounge_record_invoke", 0);
   level.player unlink();
 
-  if(isDefined(level._id_B0C0._id_BC0E))
+  if(isDefined(level._id_B0C0._id_BC0E)) {
     level._id_B0C0._id_BC0E delete();
+  }
 
   level thread _id_6F1C();
 }
@@ -423,8 +432,9 @@ _id_13654(var_0, var_1, var_2, var_3) {
   var_4 hide();
   var_5 = 1.0;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_5 = var_3;
+  }
 
   var_6 = undefined;
 
@@ -440,18 +450,20 @@ _id_13654(var_0, var_1, var_2, var_3) {
   var_4.origin = var_6.origin;
   var_4.angles = var_6.angles;
 
-  if(var_1)
+  if(var_1) {
     level.player freezecontrols(1);
-  else
+  } else {
     level.player freezecontrols(0);
+  }
 
   level.player _meth_823C(var_4, "tag_player", var_2);
   wait(var_2);
 
-  if(var_1)
+  if(var_1) {
     level.player playerlinktodelta(var_4, "tag_player", 0.0, 30.0, 30.0, 30.0, 30.0);
-  else
+  } else {
     level.player unlink();
+  }
 
   var_6 delete();
   level._id_EFED = "inside";

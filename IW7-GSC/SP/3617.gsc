@@ -48,15 +48,17 @@ _id_2013(var_0) {
   var_2._id_5F36 = var_1 _id_1293();
   var_2._id_112DF = var_3;
 
-  if(isDefined(var_1) && isDefined(var_1._id_202A) && var_1._id_202A == 1)
+  if(isDefined(var_1) && isDefined(var_1._id_202A) && var_1._id_202A == 1) {
     var_2._id_5F37 = 1;
-  else
+  } else {
     var_2._id_5F37 = 0;
+  }
 
-  if(isDefined(var_1) && isDefined(level.player) && var_1 == level.player)
+  if(isDefined(var_1) && isDefined(level.player) && var_1 == level.player) {
     var_2._id_D43A = 1;
-  else
+  } else {
     var_2._id_D43A = 0;
+  }
 
   var_2 thread _id_200F();
 }
@@ -69,15 +71,18 @@ _id_201A() {
 }
 
 _id_FF4F(var_0, var_1) {
-  if(var_0 scripts\sp\utility::isactorwallrunning())
+  if(var_0 scripts\sp\utility::isactorwallrunning()) {
     return 0;
+  }
 
   if(_id_3CB0(var_0, var_1)) {
-    if(isDefined(var_0._id_1C78))
+    if(isDefined(var_0._id_1C78)) {
       return var_0._id_1C78;
+    }
 
-    if(var_0 _meth_81A6())
+    if(var_0 _meth_81A6()) {
       return 0;
+    }
 
     return 1;
   }
@@ -99,25 +104,29 @@ _id_2017() {
 }
 
 _id_200F() {
-  if(!isDefined(self._id_5F37))
+  if(!isDefined(self._id_5F37)) {
     self._id_5F37 = 0;
+  }
 
-  if(!isDefined(self._id_112DF))
+  if(!isDefined(self._id_112DF)) {
     self._id_112DF = "default";
+  }
 
   self.angles = (0, 0, 0);
   self._id_132AA = [];
   thread _id_2017();
 
   if(!self._id_5F37) {
-    if(level._id_2006._id_522B.size > 1)
+    if(level._id_2006._id_522B.size > 1) {
       var_0 = "antigrav_detonate_cheap";
-    else
+    } else {
       var_0 = "antigrav_detonate";
+    }
   } else if(level._id_2006._id_522B.size > 1)
     var_0 = "antigrav_detonate_up_cheap";
-  else
+  else {
     var_0 = "antigrav_detonate_up";
+  }
 
   if(scripts\engine\utility::flag_exist("in_vr_mode") && scripts\engine\utility::flag("in_vr_mode")) {
     var_1 = spawnfx(level._effect[var_0], self.origin, (1, 0, 0), (0, 0, 1));
@@ -133,8 +142,9 @@ _id_200F() {
   var_2 = [];
 
   foreach(var_4 in getaiarray()) {
-    if(_id_FF4F(var_4, self))
+    if(_id_FF4F(var_4, self)) {
       var_2[var_2.size] = var_4;
+    }
   }
 
   thread scripts\engine\utility::play_loop_sound_on_entity("gravity_field_lp");
@@ -146,11 +156,13 @@ _id_200F() {
     if(var_9._id_5F15 == 1) {
       continue;
     }
-    if(self.origin[2] - var_9.origin[2] > var_6)
+    if(self.origin[2] - var_9.origin[2] > var_6) {
       var_6 = self.origin[2] - var_9.origin[2];
+    }
 
-    if(var_9.origin[2] - self.origin[2] > var_7)
+    if(var_9.origin[2] - self.origin[2] > var_7) {
       var_7 = var_9.origin[2] - self.origin[2];
+    }
   }
 
   var_11 = self.origin[2] - var_6 - 24;
@@ -202,8 +214,9 @@ _id_FB3E() {
   if(!isDefined(self)) {
     return;
   }
-  if(!isDefined(self.grenade))
+  if(!isDefined(self.grenade)) {
     thread scripts\sp\utility::play_sound_on_entity("gravity_field_off");
+  }
 
   thread scripts\engine\utility::stop_loop_sound_on_entity("gravity_field_lp");
 }
@@ -215,16 +228,19 @@ _id_DFC5() {
   level notify("antigrav_done");
   thread _id_E057();
 
-  if(scripts\engine\utility::flag("antigrav_force_delete"))
+  if(scripts\engine\utility::flag("antigrav_force_delete")) {
     scripts\engine\utility::waitframe();
+  }
 
   thread scripts\engine\utility::stop_loop_sound_on_entity("gravity_field_lp");
 
-  if(isDefined(self.new))
+  if(isDefined(self.new)) {
     _id_D25C();
+  }
 
-  if(isDefined(self._id_CB13))
+  if(isDefined(self._id_CB13)) {
     _id_52B3(self._id_CB13);
+  }
 
   if(isDefined(self._id_C2CA)) {
     destroynavobstacle(self._id_C2CA);
@@ -232,15 +248,17 @@ _id_DFC5() {
   }
 
   if(isDefined(self._id_132AA)) {
-    foreach(var_1 in self._id_132AA)
-    var_1 delete();
+    foreach(var_1 in self._id_132AA) {
+      var_1 delete();
+    }
   }
 
   if(isDefined(self._id_378D)) {
     var_3 = self._id_378D;
 
-    foreach(var_5 in var_3)
-    _id_DFC4(var_5);
+    foreach(var_5 in var_3) {
+      _id_DFC4(var_5);
+    }
   }
 
   level._id_2006._id_522B = scripts\engine\utility::array_remove(level._id_2006._id_522B, self);
@@ -257,8 +275,9 @@ _id_E057() {
 
 _id_DFC4(var_0) {
   if(isDefined(var_0._id_132AA)) {
-    foreach(var_2 in var_0._id_132AA)
-    var_2 delete();
+    foreach(var_2 in var_0._id_132AA) {
+      var_2 delete();
+    }
   }
 
   killfxontag(level._effect["antigrav_caltrop_trail"], var_0, "tag_origin");
@@ -271,8 +290,9 @@ _id_DFBA() {
   level endon("removing_all_antigravs_instantly");
   scripts\engine\utility::flag_set("antigrav_force_delete");
 
-  foreach(var_1 in level._id_2006._id_522B)
-  var_1 thread _id_E057();
+  foreach(var_1 in level._id_2006._id_522B) {
+    var_1 thread _id_E057();
+  }
 
   for(;;) {
     if(level._id_2006._id_522B.size > 0) {
@@ -290,14 +310,15 @@ _id_197D(var_0) {
   if(!isDefined(self) || !isalive(self)) {
     return;
   }
-  if(isDefined(self.a) && isDefined(self.a._id_58DA))
+  if(isDefined(self.a) && isDefined(self.a._id_58DA)) {
     self _meth_81D0();
-  else {
+  } else {
     if(self.unittype == "c12") {
       return;
     }
-    if(scripts\asm\asm_bb::bb_isanimScripted())
+    if(scripts\asm\asm_bb::bb_isanimScripted()) {
       self _meth_83A1();
+    }
 
     if(!isDefined(self._id_2023)) {
       _id_1978(var_0);
@@ -349,8 +370,9 @@ _id_365A() {
       if(!isalive(var_2)) {
         continue;
       }
-      if(!isDefined(var_2._id_93B5))
+      if(!isDefined(var_2._id_93B5)) {
         var_2._id_93B5 = 0;
+      }
 
       var_3 = 0;
 
@@ -409,8 +431,9 @@ _id_D0EB() {
           var_0 = 1;
           self._id_4B16 = var_3;
 
-          if(var_3.new == 1)
+          if(var_3.new == 1) {
             var_1 = 1;
+          }
         }
       }
     }
@@ -479,8 +502,9 @@ _id_6228() {
 _id_5567() {
   level.player notify("disable_player_antigrav_gren");
 
-  if(level.player scripts\sp\utility::_id_65DF("player_gravity_off"))
+  if(level.player scripts\sp\utility::_id_65DF("player_gravity_off")) {
     level.player scripts\sp\utility::_id_65DD("player_gravity_off");
+  }
 
   level.player.playing_terrorist_respawn_music = undefined;
   level.player scripts\engine\utility::allow_usability(1);
@@ -527,8 +551,9 @@ _id_CF64() {
       break;
     }
 
-    if(!level.player.playing_terrorist_respawn_music)
+    if(!level.player.playing_terrorist_respawn_music) {
       level.player playgestureviewmodel("ges_antigrav_idle");
+    }
 
     var_0 = level.player.origin[2] - self._id_4B16.origin[2];
     var_1 = clamp((100 - var_0) / 100, 0.0, 1.0);
@@ -545,8 +570,9 @@ _id_CF64() {
   _id_0E4F::_id_40A6();
 
   if(isDefined(level.player._id_9BF5)) {
-    while(level.player._id_9BF5 == 1)
+    while(level.player._id_9BF5 == 1) {
       scripts\engine\utility::waitframe();
+    }
   }
 }
 
@@ -563,8 +589,9 @@ _id_CF65() {
     }
   }
 
-  if(isDefined(self.playing_terrorist_respawn_music))
+  if(isDefined(self.playing_terrorist_respawn_music)) {
     self.playing_terrorist_respawn_music = 0;
+  }
 }
 
 _id_CF66() {
@@ -572,8 +599,9 @@ _id_CF66() {
   wait 5;
   self notify("antigrav_reaction_think_timeout");
 
-  if(isDefined(self.playing_terrorist_respawn_music))
+  if(isDefined(self.playing_terrorist_respawn_music)) {
     self.playing_terrorist_respawn_music = 0;
+  }
 }
 
 _id_CF67() {
@@ -609,8 +637,9 @@ _id_36E1() {
       var_5.origin = var_4;
       var_5._id_5F15 = 0;
 
-      if(var_4[2] + 256 < var_0[2])
+      if(var_4[2] + 256 < var_0[2]) {
         var_5._id_5F15 = 1;
+      }
 
       self._id_378E[self._id_378E.size] = var_5;
     }
@@ -620,8 +649,9 @@ _id_36E1() {
 }
 
 _id_1066C(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   var_1 = self.origin;
   var_2 = [];
@@ -631,15 +661,17 @@ _id_1066C(var_0) {
     var_4 = 0;
     var_5 = 0;
 
-    if(var_3 > 0)
+    if(var_3 > 0) {
       var_5 = var_3 - 1;
-    else
+    } else {
       var_5 = self._id_378E.size - 1;
+    }
 
-    if(var_3 < self._id_378E.size - 1)
+    if(var_3 < self._id_378E.size - 1) {
       var_4 = var_3 + 1;
-    else
+    } else {
       var_4 = 0;
+    }
 
     var_6 = self._id_378E[var_4].origin;
     var_7 = self._id_378E[var_5].origin;
@@ -649,26 +681,30 @@ _id_1066C(var_0) {
     if(length(var_9) == 0) {
       var_9 = vectorNormalize(var_1 - self._id_378E[var_3].origin);
 
-      if(length(var_9) == 0)
+      if(length(var_9) == 0) {
         var_9 = (0, 0, 1);
+      }
     }
 
-    if(var_0)
+    if(var_0) {
       self._id_378E[var_3]._id_5F15 = 1;
+    }
 
     self._id_378D[self._id_378D.size] = _id_1066B(var_1, self._id_378E[var_3].origin, var_9, self._id_378E[var_3]._id_5F15);
   }
 
   if(!var_0) {
     if(!self._id_5F37) {
-      if(level._id_2006._id_522B.size > 1)
+      if(level._id_2006._id_522B.size > 1) {
         var_10 = "antigrav_area_small_cheap";
-      else
+      } else {
         var_10 = "antigrav_area_small";
+      }
     } else if(level._id_2006._id_522B.size > 1)
       var_10 = "antigrav_area_small_up_cheap";
-    else
+    else {
       var_10 = "antigrav_area_small_up";
+    }
 
     if(scripts\engine\utility::flag_exist("in_vr_mode") && scripts\engine\utility::flag("in_vr_mode")) {
       var_11 = spawnfx(level._effect[var_10], var_1, (1, 0, 0), (0, 0, 1));
@@ -687,8 +723,9 @@ _id_1066C(var_0) {
       var_14 = distance(self._id_378E[var_3].origin, var_1);
       var_15 = vectorNormalize(self._id_378E[var_3].origin - var_1);
 
-      if(self._id_378E[var_3].origin[2] < var_1[2])
+      if(self._id_378E[var_3].origin[2] < var_1[2]) {
         var_15 = scripts\engine\utility::flatten_vector(var_15);
+      }
 
       var_16 = anglestoright(vectortoangles(var_15));
       var_17 = var_12;
@@ -697,10 +734,10 @@ _id_1066C(var_0) {
       for(var_19 = 0; var_17 < var_14; var_17 = var_17 + var_12) {
         if(var_19 == 0 && !var_13) {
           var_20 = 0;
-          var_18[var_18.size] = scripts\engine\utility::drop_to_ground(var_1 + rotatevector(var_15, (0, var_20, 0)) * var_17, 12, -1000);
+          var_18[var_18.size] = ::scripts\engine\utility::drop_to_ground(var_1 + rotatevector(var_15, (0, var_20, 0)) * var_17, 12, -1000);
         } else if(var_19 == 1) {
           var_20 = 0;
-          var_18[var_18.size] = scripts\engine\utility::drop_to_ground(var_1 + rotatevector(var_15, (0, var_20, 0)) * var_17, 12, -1000);
+          var_18[var_18.size] = ::scripts\engine\utility::drop_to_ground(var_1 + rotatevector(var_15, (0, var_20, 0)) * var_17, 12, -1000);
         }
 
         var_19++;
@@ -750,8 +787,9 @@ _id_378C(var_0, var_1, var_2) {
 #using_animtree("script_model");
 
 _id_1066B(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
   var_4 = vectorNormalize(var_1 - var_0);
   var_5 = var_1;
@@ -767,14 +805,16 @@ _id_1066B(var_0, var_1, var_2, var_3) {
 
   if(!var_3) {
     if(!self._id_5F37) {
-      if(level._id_2006._id_522B.size > 1)
+      if(level._id_2006._id_522B.size > 1) {
         var_9 = "antigrav_caltrop_barrier_cheap";
-      else
+      } else {
         var_9 = "antigrav_caltrop_barrier";
+      }
     } else if(level._id_2006._id_522B.size > 1)
       var_9 = "antigrav_caltrop_barrier_up_cheap";
-    else
+    else {
       var_9 = "antigrav_caltrop_barrier_up";
+    }
 
     if(scripts\engine\utility::flag_exist("in_vr_mode") && scripts\engine\utility::flag("in_vr_mode")) {
       var_10 = spawnfx(level._effect[var_9], var_1, var_2, (0, 0, 1));
@@ -812,8 +852,9 @@ _id_3789(var_0, var_1, var_2, var_3) {
   var_11 = var_2;
   var_12 = 0;
 
-  if(var_2[2] < var_1[2] - 50)
+  if(var_2[2] < var_1[2] - 50) {
     var_12 = 1;
+  }
 
   var_0 rotateby((randomfloatrange(360, 900), 0, randomfloatrange(360, 900)), var_3 - 0.05);
   var_0 moveTo(var_8, var_3 / 4.0, 0.0, 0.0);
@@ -841,13 +882,15 @@ _id_3CB0(var_0, var_1) {
       var_3 = 24;
       var_4 = scripts\common\trace::ray_trace_passed(var_1.origin + (0, 0, var_2), var_0.origin + (0, 0, var_2), undefined, scripts\common\trace::create_world_contents());
 
-      if(var_4)
+      if(var_4) {
         return 1;
+      }
 
       var_4 = scripts\common\trace::ray_trace_passed(var_1.origin + (0, 0, var_3), var_0.origin + (0, 0, var_3), undefined, scripts\common\trace::create_world_contents());
 
-      if(var_4)
+      if(var_4) {
         return 1;
+      }
 
       var_5 = var_0.origin - var_1.origin;
       var_5 = (var_5[0], var_5[1], 0);
@@ -857,8 +900,9 @@ _id_3CB0(var_0, var_1) {
       if(var_4) {
         var_4 = scripts\common\trace::ray_trace_passed(var_6, var_0.origin + (0, 0, var_2), undefined, scripts\common\trace::create_world_contents());
 
-        if(var_4)
+        if(var_4) {
           return 1;
+        }
       }
 
       var_5 = var_0.origin - var_1.origin;
@@ -869,8 +913,9 @@ _id_3CB0(var_0, var_1) {
       if(var_4) {
         var_4 = scripts\common\trace::ray_trace_passed(var_6, var_0.origin + (0, 0, var_3), undefined, scripts\common\trace::create_world_contents());
 
-        if(var_4)
+        if(var_4) {
           return 1;
+        }
       }
     }
   }
@@ -901,17 +946,19 @@ _id_52B3(var_0) {
 }
 
 _id_1293() {
-  if(isDefined(self) && isDefined(self._id_202A))
+  if(isDefined(self) && isDefined(self._id_202A)) {
     return 11.0;
-  else
+  } else {
     return 7.0;
+  }
 }
 
 _id_1294() {
-  if(isDefined(self) && isDefined(self._id_202B))
+  if(isDefined(self) && isDefined(self._id_202B)) {
     return 196;
-  else
+  } else {
     return 148;
+  }
 }
 
 _id_C0A7(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -921,16 +968,17 @@ _id_C0A7(var_0, var_1, var_2, var_3, var_4, var_5) {
 _id_C0A8(var_0, var_1, var_2, var_3, var_4, var_5) {
   scripts\engine\utility::flag_wait_or_timeout("antigrav_force_delete", var_1);
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     call[[var_0]](var_2, var_3, var_4, var_5);
-  else if(isDefined(var_4))
+  } else if(isDefined(var_4)) {
     call[[var_0]](var_2, var_3, var_4);
-  else if(isDefined(var_3))
+  } else if(isDefined(var_3)) {
     call[[var_0]](var_2, var_3);
-  else if(isDefined(var_2))
+  } else if(isDefined(var_2)) {
     call[[var_0]](var_2);
-  else
+  } else {
     call[[var_0]]();
+  }
 }
 
 _id_5128(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
@@ -942,20 +990,21 @@ _id_5129(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self endon("stop_delay_thread");
   scripts\engine\utility::flag_wait_or_timeout("antigrav_force_delete", var_1);
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     thread[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7);
-  else if(isDefined(var_6))
+  } else if(isDefined(var_6)) {
     thread[[var_0]](var_2, var_3, var_4, var_5, var_6);
-  else if(isDefined(var_5))
+  } else if(isDefined(var_5)) {
     thread[[var_0]](var_2, var_3, var_4, var_5);
-  else if(isDefined(var_4))
+  } else if(isDefined(var_4)) {
     thread[[var_0]](var_2, var_3, var_4);
-  else if(isDefined(var_3))
+  } else if(isDefined(var_3)) {
     thread[[var_0]](var_2, var_3);
-  else if(isDefined(var_2))
+  } else if(isDefined(var_2)) {
     thread[[var_0]](var_2);
-  else
+  } else {
     thread[[var_0]]();
+  }
 }
 
 _id_CE2E(var_0) {

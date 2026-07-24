@@ -19,8 +19,9 @@ init_all_debris_and_door_positions() {
 _id_F945(var_0) {
   var_1 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
 
-  foreach(var_3 in var_1)
-  set_nonstick(var_3);
+  foreach(var_3 in var_1) {
+    set_nonstick(var_3);
+  }
 }
 
 set_nonstick(var_0) {
@@ -46,39 +47,44 @@ _id_102F3(var_0, var_1) {
 
   scripts\cp\cp_interaction::disable_linked_interactions(var_0);
 
-  if(level.players.size > 1)
+  if(level.players.size > 1) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("purchase_area", "zmb_comment_vo", "low", 10, 0, 0, 1, 40);
-  else
+  } else {
     level.players[0] thread scripts\cp\cp_vo::try_to_play_vo("purchase_area", "zmb_comment_vo", "low", 10, 0, 1, 1, 40);
+  }
 }
 
 use_team_door_switch(var_0, var_1) {
   var_2 = undefined;
   var_3 = undefined;
 
-  if(!isDefined(level._id_115C8))
+  if(!isDefined(level._id_115C8)) {
     level._id_115C8 = 0;
+  }
 
   switch (var_0.script_side) {
     case "moon":
-      if(!isDefined(level.moon_donations))
+      if(!isDefined(level.moon_donations)) {
         level.moon_donations = -1;
+      }
 
       level.moon_donations++;
       var_3 = level.moon_donations;
       scripts\cp\zombies\zombie_analytics::log_purchasingforateamdoor(1, var_1, var_0.script_side, 1000, level.wave_num);
       break;
     case "kepler":
-      if(!isDefined(level.kepler_donations))
+      if(!isDefined(level.kepler_donations)) {
         level.kepler_donations = -1;
+      }
 
       level.kepler_donations++;
       var_3 = level.kepler_donations;
       scripts\cp\zombies\zombie_analytics::log_purchasingforateamdoor(1, var_1, var_0.script_side, 1000, level.wave_num);
       break;
     case "triton":
-      if(!isDefined(level.triton_donations))
+      if(!isDefined(level.triton_donations)) {
         level.triton_donations = -1;
+      }
 
       level.triton_donations++;
       var_3 = level.triton_donations;
@@ -89,9 +95,9 @@ use_team_door_switch(var_0, var_1) {
   var_4 = getEntArray(var_0.target, "targetname");
 
   foreach(var_6 in var_4) {
-    if(!isDefined(var_6.script_noteworthy))
+    if(!isDefined(var_6.script_noteworthy)) {
       continue;
-    else if(var_6.script_noteworthy == "progress") {
+    } else if(var_6.script_noteworthy == "progress") {
       var_6 movez(4, 0.1);
       var_6 waittill("movedone");
     }
@@ -103,14 +109,16 @@ use_team_door_switch(var_0, var_1) {
     var_1 notify("door_opened_notify");
     level._id_115C8++;
 
-    if(level._id_115C8 == 2)
+    if(level._id_115C8 == 2) {
       scripts\engine\utility::flag_set("canFiresale");
+    }
   }
 
-  if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player))
+  if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player)) {
     var_1 scripts\cp\cp_persistence::give_player_xp(250, 1);
-  else
+  } else {
     var_1 scripts\cp\cp_persistence::give_player_xp(75, 1);
+  }
 
   var_1 scripts\cp\cp_interaction::refresh_interaction();
 }
@@ -122,8 +130,9 @@ _id_C61B(var_0, var_1, var_2, var_3) {
   var_4 = scripts\cp\cp_interaction::get_linked_interactions(var_0);
 
   foreach(var_6 in var_4) {
-    if(!level.spawn_volume_array[var_6.script_area].active)
+    if(!level.spawn_volume_array[var_6.script_area].active) {
       level thread[[level.team_buy_vos]](var_6, var_3);
+    }
   }
 
   foreach(var_9 in var_4) {
@@ -131,8 +140,9 @@ _id_C61B(var_0, var_1, var_2, var_3) {
     scripts\cp\zombies\zombies_spawning::activate_volume_by_name(var_9.script_area);
   }
 
-  if(isDefined(var_0._id_ED83))
+  if(isDefined(var_0._id_ED83)) {
     scripts\engine\utility::exploder(var_0._id_ED83);
+  }
 
   var_11 = getEntArray(var_4[0].target, "targetname");
 
@@ -162,13 +172,15 @@ _id_115B2(var_0) {
 init_sliding_power_doors() {
   var_0 = scripts\engine\utility::getStructArray("power_door_sliding", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 thread sliding_power_door();
+  foreach(var_2 in var_0) {
+    var_2 thread sliding_power_door();
+  }
 }
 
 sliding_power_door() {
-  if(scripts\engine\utility::is_true(self.requires_power))
+  if(scripts\engine\utility::is_true(self.requires_power)) {
     level scripts\engine\utility::waittill_any("power_on", self.power_area + " power_on");
+  }
 
   self.powered_on = 1;
   playsoundatpos(self.origin, "zmb_sliding_door_open");
@@ -196,10 +208,11 @@ clear_debris(var_0, var_1) {
   scripts\cp\cp_interaction::disable_linked_interactions(var_0);
 
   if(isDefined(level.script) && level.script == "cp_disco") {
-    if(isDefined(var_0) && issubstr(var_0.name, "chi_"))
+    if(isDefined(var_0) && issubstr(var_0.name, "chi_")) {
       playsoundatpos(var_0.origin, "cp_disco_doorbuy_chi_gongs");
-    else
+    } else {
       playsoundatpos(var_0.origin, "cp_disco_doorbuy_caution_tape");
+    }
   } else
     playsoundatpos(var_0.origin, "zmb_clear_barricade");
 
@@ -227,6 +240,7 @@ move_up_and_delete(var_0) {
   self movez(1000, 3, 2, 1);
   wait 2;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }

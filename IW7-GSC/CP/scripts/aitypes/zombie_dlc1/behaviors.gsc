@@ -15,11 +15,13 @@ chaseenemydlc1(var_0) {
     return anim.failure;
   }
 
-  if(isDefined(self.hastraversed) && self.hastraversed)
+  if(isDefined(self.hastraversed) && self.hastraversed) {
     self.noturnanims = 0;
+  }
 
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return anim.failure;
+  }
 
   if(isDefined(self.enemy.is_fast_traveling) || isDefined(self.enemy.is_off_grid)) {
     self.curmeleetarget = undefined;
@@ -33,16 +35,18 @@ chaseenemydlc1(var_0) {
 
   var_1 = undefined;
 
-  if(isDefined(self._id_571B) && scripts\mp\agents\zombie\zombie_util::_id_100AB())
+  if(isDefined(self._id_571B) && scripts\mp\agents\zombie\zombie_util::_id_100AB()) {
     var_1 = self._id_571B;
-  else if(isDefined(self.attackent))
+  } else if(isDefined(self.attackent)) {
     var_1 = self.attackent;
-  else if(isDefined(self.enemy) && !scripts\mp\agents\zombie\zombie_util::shouldignoreent(self.enemy))
+  } else if(isDefined(self.enemy) && !scripts\mp\agents\zombie\zombie_util::shouldignoreent(self.enemy)) {
     var_1 = self.enemy;
+  }
 
   if(!isDefined(var_1)) {
-    if(isDefined(self.curmeleetarget))
+    if(isDefined(self.curmeleetarget)) {
       self._id_2AB8 = 1;
+    }
 
     self.curmeleetarget = undefined;
     return anim.failure;
@@ -64,12 +68,14 @@ chaseenemydlc1(var_0) {
     self notify("attack_anim", "end");
   }
 
-  if(!var_11 && var_10 > var_4 && var_9 > var_6)
+  if(!var_11 && var_10 > var_4 && var_9 > var_6) {
     var_11 = 1;
+  }
 
   if(var_7._id_1312B) {
-    if(!var_11 && var_10 <= var_4 && var_9 > squared(self.defaultgoalradius))
+    if(!var_11 && var_10 <= var_4 && var_9 > squared(self.defaultgoalradius)) {
       var_11 = 1;
+    }
 
     self scragentsetgoalRadius(self.defaultgoalradius);
   } else if(!scripts\mp\agents\zombie\zombie_util::_id_8C39(var_1, self._id_B640)) {
@@ -87,8 +93,9 @@ chaseenemydlc1(var_0) {
   if(var_11) {
     var_2 = getclosestpointonnavmesh(var_7.origin);
 
-    if(distancesquared(var_2, var_7.origin) > 10000)
+    if(distancesquared(var_2, var_7.origin) > 10000) {
       return anim.failure;
+    }
 
     self scragentsetgoalpos(var_2);
   }
@@ -97,8 +104,9 @@ chaseenemydlc1(var_0) {
 }
 
 seekenemydlc1(var_0) {
-  if(isDefined(self.dontseekenemies))
+  if(isDefined(self.dontseekenemies)) {
     return anim.failure;
+  }
 
   var_1 = [];
 
@@ -117,15 +125,17 @@ seekenemydlc1(var_0) {
 
   var_5 = undefined;
 
-  if(var_1.size > 0)
+  if(var_1.size > 0) {
     var_5 = sortbydistance(var_1, self.origin);
+  }
 
   if(isDefined(var_5) && var_5.size > 0) {
     var_6 = 300;
     var_7 = distancesquared(var_5[0].origin, self.origin);
 
-    if(var_7 < var_6 * var_6)
+    if(var_7 < var_6 * var_6) {
       var_6 = 16;
+    }
 
     var_8 = var_6 * var_6;
 
@@ -133,13 +143,15 @@ seekenemydlc1(var_0) {
       var_9 = isDefined(var_5[0].zipline);
       var_10 = var_5[0].origin;
 
-      if(var_9)
+      if(var_9) {
         var_10 = var_5[0].zipline.traversal_end;
+      }
 
       var_11 = getclosestpointonnavmesh(var_10, self);
 
-      if(!var_9 && distancesquared(var_11, var_5[0].origin) > var_8)
+      if(!var_9 && distancesquared(var_11, var_5[0].origin) > var_8) {
         return anim.failure;
+      }
 
       self scragentsetgoalpos(var_11);
       self._id_2AB8 = 0;

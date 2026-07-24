@@ -57,37 +57,45 @@ attack_player(var_0) {
 }
 
 _id_7842(var_0) {
-  if(player_under_overhead_bridge(var_0))
+  if(player_under_overhead_bridge(var_0)) {
     return "beam";
+  }
 
-  if(player_near_left_or_right_cannon(var_0))
+  if(player_near_left_or_right_cannon(var_0)) {
     return "beam";
+  }
 
-  if(player_near_center_cannon(var_0))
+  if(player_near_center_cannon(var_0)) {
     return scripts\engine\utility::random(["beam", "smash"]);
+  }
 
-  if(player_on_overhead_bridge(var_0))
+  if(player_on_overhead_bridge(var_0)) {
     return scripts\engine\utility::random(["spawn"]);
+  }
 
-  if(player_near_crab_boss(var_0))
+  if(player_near_crab_boss(var_0)) {
     return scripts\engine\utility::random(["beam", "smash"]);
-  else
+  } else {
     return scripts\engine\utility::random(["spawn", "bomb"]);
+  }
 }
 
 player_under_overhead_bridge(var_0) {
-  if(var_0.origin[2] >= 161)
+  if(var_0.origin[2] >= 161) {
     return 0;
+  }
 
   return var_0.origin[1] >= -300 &var_0.origin[1] <= 1400;
 }
 
 player_near_left_or_right_cannon(var_0) {
-  if(distancesquared(var_0.origin, (2135, 3746, 164)) <= 90000)
+  if(distancesquared(var_0.origin, (2135, 3746, 164)) <= 90000) {
     return 1;
+  }
 
-  if(distancesquared(var_0.origin, (4265, 2933, 164)) <= 90000)
+  if(distancesquared(var_0.origin, (4265, 2933, 164)) <= 90000) {
     return 1;
+  }
 
   return 0;
 }
@@ -152,8 +160,9 @@ crab_boss_move_to(var_0) {
 }
 
 crab_boss_face_point(var_0) {
-  if(level.crab_boss scripts\aitypes\crab_boss\behaviors::facepoint(0, var_0))
+  if(level.crab_boss scripts\aitypes\crab_boss\behaviors::facepoint(0, var_0)) {
     level.crab_boss waittill("turn_done");
+  }
 }
 
 crab_boss_smash() {
@@ -169,9 +178,9 @@ crab_boss_beam(var_0) {
 crab_boss_spawn(var_0) {
   var_1 = scripts\cp\maps\cp_town\cp_town_crab_boss_fight::get_num_alive_agent_of_type("crab_mini");
 
-  if(var_1 >= 8)
+  if(var_1 >= 8) {
     level.crab_boss crab_boss_bomb(var_0);
-  else {
+  } else {
     level.crab_boss scripts\aitypes\crab_boss\behaviors::dodeathrayspawn(var_0);
     level.crab_boss waittill("toxic_spawn_done");
   }
@@ -301,8 +310,9 @@ update_charge_progress(var_0, var_1) {
 leave_death_ray_cannon_monitor(var_0) {
   var_0 endon("disconnect");
 
-  while(var_0 isusingturret())
+  while(var_0 isusingturret()) {
     scripts\engine\utility::waitframe();
+  }
 
   var_0 playlocalsound("town_weap_unmount_turret_plr");
   hide_charge_progress(var_0);
@@ -422,25 +432,29 @@ play_impact_vfx(var_0, var_1) {
   var_3 = get_vfx_loc(var_0, var_1);
   var_4 = vectortoangles(var_0["normal"]);
 
-  if(var_2 == "death_ray_cannon_weak_spot_impact")
+  if(var_2 == "death_ray_cannon_weak_spot_impact") {
     playFXOnTag(level._effect["death_ray_cannon_weak_spot_impact"], level.crab_boss.crab_boss_weak_spot, "tag_origin");
-  else
+  } else {
     playFX(level._effect[var_2], var_3, anglestoright(var_4), var_0["normal"]);
+  }
 }
 
 get_vfx_loc(var_0, var_1) {
-  if(is_crab_boss(var_1))
+  if(is_crab_boss(var_1)) {
     return var_1["position"];
-  else
+  } else {
     return var_0["position"];
+  }
 }
 
 get_vfx_alias(var_0, var_1) {
-  if(is_crab_boss_weak_spot(var_0))
+  if(is_crab_boss_weak_spot(var_0)) {
     return "death_ray_cannon_weak_spot_impact";
+  }
 
-  if(is_crab_boss(var_1))
+  if(is_crab_boss(var_1)) {
     return "death_ray_cannon_ricochet";
+  }
 
   switch (var_0["surfacetype"]) {
     case "wood_solid":
@@ -485,17 +499,21 @@ get_death_ray_cannon_location(var_0) {
   var_4 = (2679, 835, 476);
   var_5 = 90000;
 
-  if(distance2dsquared(var_1, var_0.origin) < var_5)
+  if(distance2dsquared(var_1, var_0.origin) < var_5) {
     return "left";
+  }
 
-  if(distance2dsquared(var_2, var_0.origin) < var_5)
+  if(distance2dsquared(var_2, var_0.origin) < var_5) {
     return "right";
+  }
 
-  if(distance2dsquared(var_3, var_0.origin) < var_5)
+  if(distance2dsquared(var_3, var_0.origin) < var_5) {
     return "center";
+  }
 
-  if(distance2dsquared(var_4, var_0.origin) < var_5)
+  if(distance2dsquared(var_4, var_0.origin) < var_5) {
     return "back";
+  }
 }
 
 mini_crab_spawning_logic() {
@@ -597,8 +615,9 @@ get_target_player() {
   var_5 = gettime();
 
   foreach(var_3 in var_1) {
-    if(!isDefined(var_3.last_attacked_by_crab_boss_time))
+    if(!isDefined(var_3.last_attacked_by_crab_boss_time)) {
       var_3.last_attacked_by_crab_boss_time = var_5;
+    }
   }
 
   var_8 = undefined;
@@ -616,8 +635,9 @@ get_target_player() {
     }
   }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0.last_attacked_by_crab_boss_time = var_5;
+  }
 
   return var_0;
 }

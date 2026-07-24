@@ -4,8 +4,9 @@
 **************************************/
 
 _id_98CA(var_0) {
-  if(isDefined(self.bt._id_9882))
+  if(isDefined(self.bt._id_9882)) {
     return anim.success;
+  }
 
   self.bt._id_F15D = undefined;
   self.bt._id_1152B = 0;
@@ -28,15 +29,17 @@ _id_98CA(var_0) {
 }
 
 _id_6744() {
-  while(!isDefined(self.owner))
+  while(!isDefined(self.owner)) {
     wait 0.05;
+  }
 
-  if(self.team == "allies")
+  if(self.team == "allies") {
     self.bt._id_652A = "axis";
-  else if(self.team == "team3" && isDefined(self._id_C93D))
+  } else if(self.team == "team3" && isDefined(self._id_C93D)) {
     self.bt._id_652A = "team3";
-  else
+  } else {
     self.bt._id_652A = "allies";
+  }
 
   self.bt._id_F15D = self.owner;
   self.bt._id_9882 = 1;
@@ -105,8 +108,9 @@ _id_F16F() {
 }
 
 _id_9B71() {
-  if(self.bt._id_F15D != self.owner && distancesquared(self.origin, self.bt._id_F15D.origin) < 640000 && self._id_164D["seeker"]._id_4BC0 == "run_loop")
+  if(self.bt._id_F15D != self.owner && distancesquared(self.origin, self.bt._id_F15D.origin) < 640000 && self._id_164D["seeker"]._id_4BC0 == "run_loop") {
     return 1;
+  }
 
   return 0;
 }
@@ -117,8 +121,9 @@ _id_EA0E() {
   self _meth_8484();
   self _meth_8481(self.origin);
 
-  if(isDefined(self._id_B14F))
+  if(isDefined(self._id_B14F)) {
     scripts\sp\utility::_id_1101B();
+  }
 
   playFXOnTag(level._id_7649["seeker_sparks"], self, "tag_fx");
   playworldsound("seeker_expire", self.origin);
@@ -131,8 +136,9 @@ _id_EB63() {
   self endon("death");
 
   for(;;) {
-    if(isDefined(self.bt._id_F15D) && self.bt._id_F15D != self.owner && isDefined(self.pathgoalpos))
+    if(isDefined(self.bt._id_F15D) && self.bt._id_F15D != self.owner && isDefined(self.pathgoalpos)) {
       self._id_A9CB = self.pathgoalpos;
+    }
 
     wait 0.25;
   }
@@ -162,23 +168,27 @@ _id_13940() {
 }
 
 _id_1572(var_0) {
-  if(!isDefined(self.bt._id_9882))
+  if(!isDefined(self.bt._id_9882)) {
     return anim.failure;
+  }
 
-  if(isDefined(self._id_EA0E) || isDefined(self._id_C93D) || isDefined(self._id_9BB9) || isDefined(self._id_50EB))
+  if(isDefined(self._id_EA0E) || isDefined(self._id_C93D) || isDefined(self._id_9BB9) || isDefined(self._id_50EB)) {
     return anim.success;
+  }
 
   if(isDefined(self.bt._id_F15D) && !isDefined(self._id_728A)) {
-    if(!isalive(self.bt._id_F15D) || self.bt._id_F15D.ignoreme || isDefined(self.bt._id_F15D._id_C012))
+    if(!isalive(self.bt._id_F15D) || self.bt._id_F15D.ignoreme || isDefined(self.bt._id_F15D._id_C012)) {
       clear_scripted_anim(0);
+    }
   }
 
   if(!self.bt._id_1152B) {
     var_1 = !isDefined(self.bt._id_F15D) || self.bt._id_F15D == self.owner;
     var_2 = _id_0E26::_id_7C41(!var_1);
 
-    if(isDefined(var_2) && var_2 != self.owner)
+    if(isDefined(var_2) && var_2 != self.owner) {
       _id_DED7(var_2);
+    }
   }
 
   _id_8420();
@@ -188,8 +198,9 @@ _id_1572(var_0) {
     self notify("stop soundseeker_seek_lp");
     playworldsound("seeker_acquire_target", self.origin);
 
-    if(self._id_2A4B)
+    if(self._id_2A4B) {
       thread _id_CE01();
+    }
   }
 
   return anim.success;
@@ -203,17 +214,21 @@ _id_CE01() {
 }
 
 _id_F177(var_0) {
-  if(isDefined(self._id_55B1) && self._id_55B1)
+  if(isDefined(self._id_55B1) && self._id_55B1) {
     return anim.failure;
+  }
 
-  if(isDefined(self._id_9BB9) || isDefined(self._id_C93D) || isDefined(self._id_50EB))
+  if(isDefined(self._id_9BB9) || isDefined(self._id_C93D) || isDefined(self._id_50EB)) {
     return anim.failure;
+  }
 
-  if(self.bt._id_F15D == self.owner)
+  if(self.bt._id_F15D == self.owner) {
     return anim.failure;
+  }
 
-  if(isDefined(self._id_8425) || isDefined(self._id_391C))
+  if(isDefined(self._id_8425) || isDefined(self._id_391C)) {
     return anim.failure;
+  }
 
   if(isDefined(self.bt._id_F15D.unittype)) {
     var_1 = 0;
@@ -226,38 +241,44 @@ _id_F177(var_0) {
         break;
     }
 
-    if(!var_1)
+    if(!var_1) {
       return anim.failure;
+    }
   }
 
-  if(issubstr(self.bt._id_F15D.classname, "worker"))
+  if(issubstr(self.bt._id_F15D.classname, "worker")) {
     return anim.failure;
+  }
 
   return scripts\aitypes\melee::shouldmelee(var_0, self.bt._id_F15D);
 }
 
 _id_13850(var_0) {
   if(!isalive(self.bt._id_F15D)) {
-    if(isPlayer(self.bt._id_F15D))
+    if(isPlayer(self.bt._id_F15D)) {
       self _meth_8481(self.origin);
+    }
 
     return anim.failure;
   }
 
-  if(isDefined(self._id_EA0E))
+  if(isDefined(self._id_EA0E)) {
     return anim.success;
+  }
 
   var_1 = distancesquared(self.origin, self.bt._id_F15D.origin);
 
-  if(isDefined(self._id_8425) && isDefined(self._id_A9CB))
+  if(isDefined(self._id_8425) && isDefined(self._id_A9CB)) {
     var_1 = distancesquared(self.origin, self._id_A9CB);
-  else if(isDefined(self._id_391C) && isDefined(self._id_7296))
+  } else if(isDefined(self._id_391C) && isDefined(self._id_7296)) {
     var_1 = distancesquared(self.origin, self._id_7296);
+  }
 
   var_2 = 72;
 
-  if(isPlayer(self.bt._id_F15D))
+  if(isPlayer(self.bt._id_F15D)) {
     var_2 = 25;
+  }
 
   if(var_1 <= squared(var_2)) {
     self _meth_8484();
@@ -270,17 +291,21 @@ _id_13850(var_0) {
 }
 
 _id_2BD3(var_0) {
-  if(isDefined(self._id_55B1) && self._id_55B1)
+  if(isDefined(self._id_55B1) && self._id_55B1) {
     return anim.failure;
+  }
 
-  if(self.bt._id_F15D == self.owner)
+  if(self.bt._id_F15D == self.owner) {
     return anim.failure;
+  }
 
-  if(isDefined(self.melee))
+  if(isDefined(self.melee)) {
     return anim.failure;
+  }
 
-  if(isDefined(self._id_9BB9) || isDefined(self._id_C93D) || isDefined(self._id_50EB))
+  if(isDefined(self._id_9BB9) || isDefined(self._id_C93D) || isDefined(self._id_50EB)) {
     return anim.failure;
+  }
 
   thread _id_0E26::_id_F11C();
   return anim.running;
@@ -291,14 +316,16 @@ _id_8420() {
     return;
   }
   if(isPlayer(self.bt._id_F15D)) {
-    if(self.bt._id_F15D == self.owner)
+    if(self.bt._id_F15D == self.owner) {
       self.btgoalradius = 120;
-    else
+    } else {
       self.btgoalradius = 13;
+    }
   } else if(isDefined(self.bt._id_F15D) && self.bt._id_F15D == self.owner)
     self.btgoalradius = 120;
-  else
+  else {
     self.btgoalradius = 60;
+  }
 
   if(isDefined(self._id_8425)) {
     return;
@@ -363,8 +390,9 @@ _id_E098(var_0, var_1) {
 }
 
 _id_F15F(var_0) {
-  if(scripts\engine\utility::array_contains(level._id_F10A.targets, var_0))
+  if(scripts\engine\utility::array_contains(level._id_F10A.targets, var_0)) {
     return 0;
+  }
 
   return 1;
 }
@@ -376,8 +404,9 @@ _id_DED7(var_0) {
   if(isDefined(self.bt._id_F15D) && self.bt._id_F15D == var_0) {
     return;
   }
-  if(isDefined(self.bt._id_F15D) && self.bt._id_F15D != var_0 && scripts\engine\utility::array_contains(level._id_F10A.targets, self.bt._id_F15D))
+  if(isDefined(self.bt._id_F15D) && self.bt._id_F15D != var_0 && scripts\engine\utility::array_contains(level._id_F10A.targets, self.bt._id_F15D)) {
     clear_scripted_anim(0);
+  }
 
   level._id_F10A.targets[level._id_F10A.targets.size] = var_0;
   self.favoriteenemy = var_0;
@@ -386,8 +415,9 @@ _id_DED7(var_0) {
   var_0._id_F126 = self;
   self notify("set_bt_target");
 
-  if(isai(var_0) && isDefined(self.owner) && isPlayer(self.owner))
+  if(isai(var_0) && isDefined(self.owner) && isPlayer(self.owner)) {
     thread _id_F120(var_0);
+  }
 
   level thread _id_E098(self, var_0);
 }
@@ -397,15 +427,17 @@ clear_scripted_anim(var_0) {
   self.bt._id_F15D notify("seeker_stop_outline");
   self notify("stop soundseeker_target_acquire_lp");
 
-  if(var_0)
+  if(var_0) {
     self._id_2745 = scripts\engine\utility::array_add(self._id_2745, self.bt._id_F15D);
+  }
 
   level._id_F10A.targets = scripts\engine\utility::array_remove(level._id_F10A.targets, self.bt._id_F15D);
 
-  if(isalive(self.owner))
+  if(isalive(self.owner)) {
     self.bt._id_F15D = self.owner;
-  else
+  } else {
     self.bt._id_F15D = undefined;
+  }
 
   self.bt._id_1152B = 0;
   self.favoriteenemy = undefined;

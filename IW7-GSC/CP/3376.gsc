@@ -67,8 +67,9 @@ use_blackhole_trap(var_0, var_1) {
   var_0 thread _id_2B35(int(21), var_0.body.origin);
   level thread _id_2B34(var_2);
 
-  while(gettime() < var_2)
+  while(gettime() < var_2) {
     wait 1;
+  }
 
   var_0 notify("stop_dmg");
   var_0._id_2B30.fx delete();
@@ -166,8 +167,9 @@ suck_zombie(var_0, var_1) {
     self.anchor rotateTo((-90, 0, 0), 0.2);
     var_6 = 360;
 
-    if(randomint(100) > 50)
+    if(randomint(100) > 50) {
       var_6 = -360;
+    }
 
     self.anchor rotateroll(var_6, 1.5);
     self.anchor moveTo(var_2.origin, 1.5);
@@ -178,14 +180,16 @@ suck_zombie(var_0, var_1) {
     self.disable_armor = 1;
     var_1.trap_kills = var_1.trap_kills + 2;
 
-    if(scripts\engine\utility::flag("mini_ufo_red_ready"))
+    if(scripts\engine\utility::flag("mini_ufo_red_ready")) {
       level.angry_mike_trap_kills++;
+    }
 
     if(isDefined(var_0)) {
-      if(!isDefined(var_0.trapkills["trap_gravitron"]))
+      if(!isDefined(var_0.trapkills["trap_gravitron"])) {
         var_0.trapkills["trap_gravitron"] = 1;
-      else
+      } else {
         var_0.trapkills["trap_gravitron"]++;
+      }
 
       var_7 = ["kill_trap_generic", "kill_trap_gravitron"];
       var_0 thread scripts\cp\cp_vo::try_to_play_vo(scripts\engine\utility::random(var_7), "zmb_comment_vo", "highest", 10, 0, 0, 1, 25);

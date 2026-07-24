@@ -48,10 +48,11 @@ _id_A4C3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 }
 
 _id_A4DA(var_0, var_1) {
-  if(scripts\engine\utility::is_true(self.activated_venomx_sphere))
+  if(scripts\engine\utility::is_true(self.activated_venomx_sphere)) {
     self scragentsetanimscale(0.2, 0.2);
-  else
+  } else {
     self scragentsetanimscale(1.0, 1.0);
+  }
 
   self _meth_8288(var_0);
   self scragentsetphysicsmode("gravity");
@@ -68,8 +69,9 @@ _id_A4E3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_10 = _id_7F2B(var_2, var_3, var_4, var_5, var_6);
   _id_7F28(var_10, var_9);
 
-  if(isDefined(var_7) && isDefined(var_7._id_71CD))
+  if(isDefined(var_7) && isDefined(var_7._id_71CD)) {
     self[[var_7._id_71CD]](var_10, var_9);
+  }
 
   var_11 = _id_7F2F(var_2, var_3, var_4);
   self scragentsetphysicsmode("noclip");
@@ -79,10 +81,11 @@ _id_A4E3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_14 = self getanimentry(var_9._id_A7C6, var_9._id_A7C4);
   var_15 = getnotetracktimes(var_14, "finish");
 
-  if(var_15.size > 0)
+  if(var_15.size > 0) {
     var_16 = var_15[0] * getanimlength(var_14);
-  else
+  } else {
     var_16 = getanimlength(var_14);
+  }
 
   var_17 = var_16 / var_9._id_CEE4;
   var_18 = floor(var_17 * 20.0);
@@ -107,10 +110,11 @@ _id_A4E3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self _meth_8281("anim deltas");
   self playsoundonmovingent(_id_7A62());
 
-  if(animhasnotetrack(var_13, "start_teleport"))
+  if(animhasnotetrack(var_13, "start_teleport")) {
     scripts\anim\notetracks_mp::_id_CED2(var_9._id_AAA5, var_9._id_AAA4, var_9._id_CEE4, "jump_launch", "start_teleport");
-  else
+  } else {
     scripts\anim\notetracks_mp::_id_CED1(var_9._id_AAA5, var_9._id_AAA4, var_9._id_CE9E, 0.5 * getanimlength(var_13) / var_9._id_CEE4);
+  }
 
   var_27 = gettime();
   var_12 = self _meth_827D(self.origin, var_26, var_10._id_A4EB);
@@ -132,36 +136,41 @@ _id_A4E3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 
   var_30 = var_12 - var_29 - var_21;
 
-  if(var_30 > 0)
+  if(var_30 > 0) {
     scripts\anim\notetracks_mp::_id_CED1(var_9._id_93B3, var_9._id_93B2, var_9._id_CEE4, var_30);
+  }
 
-  if(isDefined(var_7) && isDefined(var_7._id_71BB))
+  if(isDefined(var_7) && isDefined(var_7._id_71BB)) {
     self[[var_7._id_71BB]](var_10, var_9);
+  }
 
-  if(scripts\engine\utility::is_true(self.activated_venomx_sphere))
+  if(scripts\engine\utility::is_true(self.activated_venomx_sphere)) {
     self setanimstate(var_9._id_A7C6, var_9._id_A7C4, 0.2);
-  else
+  } else {
     self setanimstate(var_9._id_A7C6, var_9._id_A7C4, var_9._id_CEE4);
+  }
 
   var_31 = scripts\asm\asm::_id_2341(var_0, var_1);
   thread handlejumpnotetracks("jump_land", "end", var_9._id_A7C6, var_9._id_A7C4, var_31);
   self waittill("traverse_complete");
   self._id_11B2F = 0;
 
-  if(scripts\engine\utility::is_true(self.activated_venomx_sphere))
+  if(scripts\engine\utility::is_true(self.activated_venomx_sphere)) {
     self scragentsetanimscale(0.2, 0.2);
-  else
+  } else {
     self scragentsetanimscale(1.0, 0.0);
+  }
 
   self _meth_8288(20.2832);
   self _meth_8281("anim deltas");
   self orientmode("face angle abs", var_5);
   scripts\anim\notetracks_mp::_id_1384C("jump_land", "end");
 
-  if(scripts\engine\utility::is_true(self.activated_venomx_sphere))
+  if(scripts\engine\utility::is_true(self.activated_venomx_sphere)) {
     self scragentsetanimscale(0.2, 0.2);
-  else
+  } else {
     self scragentsetanimscale(1.0, 1.0);
+  }
 
   self setOrigin(var_4, 0);
 }
@@ -197,8 +206,9 @@ _id_A4E9(var_0, var_1, var_2, var_3) {
 
   var_10 = var_9 - var_8;
 
-  if(var_8 > 0)
+  if(var_8 > 0) {
     wait(var_3 * var_8);
+  }
 
   var_11 = 1.0;
 
@@ -225,12 +235,13 @@ _id_7F2B(var_0, var_1, var_2, var_3, var_4) {
   var_5._id_A4DC = length(var_5._id_A4F7);
   var_5._id_A4DB = var_5._id_A4F7 / var_5._id_A4DC;
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_5._id_A844 = var_4 - var_2;
-  else if(isDefined(self.curmeleetarget))
+  } else if(isDefined(self.curmeleetarget)) {
     var_5._id_A844 = self.curmeleetarget.origin - var_2;
-  else
+  } else {
     var_5._id_A844 = anglesToForward(self.angles);
+  }
 
   var_5._id_10D6D = _id_7F27(var_5._id_A4F8, anglestoup(var_1));
   var_5._id_630B = _id_7F27(var_5._id_A4F8, anglestoup(var_3));
@@ -272,21 +283,23 @@ _id_7F30(var_0) {
 }
 
 _id_7F2E(var_0) {
-  if(isDefined(self._id_B59D) && self._id_B59D)
+  if(isDefined(self._id_B59D) && self._id_B59D) {
     return level._id_1B74;
-  else if(var_0)
+  } else if(var_0) {
     return getdvarfloat("agent_jumpWallSpeed");
-  else
+  } else {
     return getdvarfloat("agent_jumpSpeed");
+  }
 }
 
 _id_7F2A(var_0) {
-  if(isDefined(self._id_B59D) && self._id_B59D)
+  if(isDefined(self._id_B59D) && self._id_B59D) {
     return level._id_1B73;
-  else if(var_0)
+  } else if(var_0) {
     return getdvarfloat("agent_jumpWallGravity");
-  else
+  } else {
     return getdvarfloat("agent_jumpGravity");
+  }
 }
 
 _id_7F2D(var_0, var_1) {
@@ -297,15 +310,17 @@ _id_7F2D(var_0, var_1) {
   var_6 = var_5 * 0.5;
   var_7 = getnotetracktimes(var_2, "start_teleport");
 
-  if(isDefined(var_7) && var_7.size > 0)
+  if(isDefined(var_7) && var_7.size > 0) {
     var_6 = var_5 - var_7[0] * var_5;
+  }
 
   var_8 = getanimlength(var_4);
   var_9 = var_8 * 0.5;
   var_10 = getnotetracktimes(var_4, "stop_teleport");
 
-  if(isDefined(var_10) && var_10.size > 0)
+  if(isDefined(var_10) && var_10.size > 0) {
     var_9 = var_10[0] * var_8;
+  }
 
   var_11 = getanimlength(var_3);
   var_12 = ceil(var_0._id_A4ED * 20.0);
@@ -331,8 +346,9 @@ _id_7F2F(var_0, var_1, var_2) {
   var_3 = anglestoup(var_1);
   var_4 = vectorNormalize(var_2 - var_0);
 
-  if(vectordot(var_3, var_4) > 0.98)
+  if(vectordot(var_3, var_4) > 0.98) {
     var_4 = (0, 0, 1);
+  }
 
   var_5 = vectorcross(var_3, var_4);
   var_4 = vectorcross(var_5, var_3);
@@ -345,12 +361,13 @@ _id_7F64(var_0) {
   var_3 = vectorNormalize(var_0._id_A4F8);
   var_4 = vectordot(var_3, var_0._id_10E05);
 
-  if(abs(var_4) <= var_2)
+  if(abs(var_4) <= var_2) {
     return "jump_launch_level";
-  else if(var_4 > 0)
+  } else if(var_4 > 0) {
     return "jump_launch_up";
-  else if(var_4 < 0)
+  } else if(var_4 < 0) {
     return "jump_launch_down";
+  }
 }
 
 _id_7F63(var_0, var_1) {
@@ -384,8 +401,9 @@ _id_7F29(var_0, var_1, var_2) {
   var_3 = anglestoup(var_2);
   var_4 = vectorNormalize(var_1 - var_0);
 
-  if(vectordot(var_3, var_4) > 0.98)
+  if(vectordot(var_3, var_4) > 0.98) {
     var_4 = (0, 0, 1);
+  }
 
   var_5 = vectorcross(var_3, var_4);
   var_4 = vectorcross(var_5, var_3);
@@ -400,20 +418,22 @@ getlaserstartpoint(var_0) {
     var_3 = (0, 0, 1);
     var_4 = vectordot(var_0._id_A4F8, var_3) / var_1;
 
-    if(var_4 > var_2)
+    if(var_4 > var_2) {
       return "jump_land_sidewall_low";
-    else
+    } else {
       return "jump_land_sidewall_high";
+    }
   }
 
   var_4 = vectordot(var_0._id_A4F8, var_0._id_6397) / var_1;
 
-  if(var_4 > var_2)
+  if(var_4 > var_2) {
     return "jump_land_down";
-  else if(var_4 < var_2 * -1)
+  } else if(var_4 < var_2 * -1) {
     return "jump_land_up";
-  else
+  } else {
     return "jump_land_level";
+  }
 }
 
 getlaserdirection(var_0, var_1) {
@@ -428,39 +448,42 @@ getlaserdirection(var_0, var_1) {
   var_10 = length(var_4);
   var_11 = 0.001;
 
-  if(var_8 < var_11 || var_9 < var_11)
+  if(var_8 < var_11 || var_9 < var_11) {
     return 1;
+  }
 
   var_12 = (var_8 * var_8 + var_9 * var_9 - var_10 * var_10) / (2 * var_8 * var_9);
 
-  if(var_12 <= -1)
+  if(var_12 <= -1) {
     return 6;
-  else if(var_12 >= 1)
+  } else if(var_12 >= 1) {
     return 1;
-  else {
+  } else {
     var_13 = acos(var_12);
 
     if(var_7 > 0) {
-      if(0 <= var_13 && var_13 < 22.5)
+      if(0 <= var_13 && var_13 < 22.5) {
         return 1;
-      else if(22.5 <= var_13 && var_13 < 67.5)
+      } else if(22.5 <= var_13 && var_13 < 67.5) {
         return 2;
-      else if(67.5 <= var_13 && var_13 < 112.5)
+      } else if(67.5 <= var_13 && var_13 < 112.5) {
         return 4;
-      else if(112.5 <= var_13 && var_13 < 157.5)
+      } else if(112.5 <= var_13 && var_13 < 157.5) {
         return 7;
-      else
+      } else {
         return 6;
+      }
     } else if(0 <= var_13 && var_13 < 22.5)
       return 1;
-    else if(22.5 <= var_13 && var_13 < 67.5)
+    else if(22.5 <= var_13 && var_13 < 67.5) {
       return 0;
-    else if(67.5 <= var_13 && var_13 < 112.5)
+    } else if(67.5 <= var_13 && var_13 < 112.5) {
       return 3;
-    else if(112.5 <= var_13 && var_13 < 157.5)
+    } else if(112.5 <= var_13 && var_13 < 157.5) {
       return 5;
-    else
+    } else {
       return 6;
+    }
   }
 }
 
@@ -471,10 +494,11 @@ _id_D4A2(var_0, var_1, var_2, var_3) {
   self endon("killanimscript");
   self endon("jump_finished");
 
-  if(scripts\engine\utility::is_true(self.activated_venomx_sphere))
+  if(scripts\engine\utility::is_true(self.activated_venomx_sphere)) {
     self setanimstate(var_0, var_1, 0.2);
-  else
+  } else {
     self setanimstate(var_0, var_1, 1.0);
+  }
 
   var_4 = scripts\engine\utility::waittill_any_return("jump_pain", "traverse_complete");
 
@@ -490,10 +514,11 @@ _id_D4A2(var_0, var_1, var_2, var_3) {
     var_9 = getanimlength(var_8);
     var_10 = min(var_6, var_9 / var_5);
 
-    if(scripts\engine\utility::is_true(self.activated_venomx_sphere))
+    if(scripts\engine\utility::is_true(self.activated_venomx_sphere)) {
       self setanimstate(var_7, var_1, 0.2);
-    else
+    } else {
       self setanimstate(var_7, var_1, var_10);
+    }
   }
 
   self waittill("traverse_complete");

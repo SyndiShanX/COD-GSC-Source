@@ -99,8 +99,9 @@ setup_heat_pressure_buttons() {
     var_5 = strtok(var_3.name, "_");
     var_3.numeric_value = int(var_5[3]);
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_3.model = var_4;
+    }
 
     var_3.model hide();
     level.h_p_button_objects[var_6] = var_3;
@@ -111,8 +112,9 @@ update_player_monitor_buttons(var_0) {
   level endon("game_ended");
 
   for(;;) {
-    foreach(var_2 in level.players)
-    update_button_state_for_player(var_2, var_0);
+    foreach(var_2 in level.players) {
+      update_button_state_for_player(var_2, var_0);
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -190,11 +192,13 @@ watch_for_input_entered_on_button(var_0) {
 }
 
 add_button_value_to_list(var_0, var_1) {
-  if(!isDefined(level.h_p_buttons_value))
+  if(!isDefined(level.h_p_buttons_value)) {
     level.h_p_buttons_value = [];
+  }
 
-  if(!isDefined(level.buttons_pointer))
+  if(!isDefined(level.buttons_pointer)) {
     level.buttons_pointer = 0;
+  }
 
   if(level.buttons_pointer > 1) {
     level.buttons_pointer = 0;
@@ -231,10 +235,11 @@ setup_chemical_object_interactions() {
 }
 
 parse_compounds_table() {
-  if(isDefined(level.compound_table))
+  if(isDefined(level.compound_table)) {
     var_0 = level.compound_table;
-  else
+  } else {
     var_0 = "cp/zombies/compounds.csv";
+  }
 
   var_1 = 0;
 
@@ -261,8 +266,9 @@ register_compound(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7.displayname = var_1;
   var_7.type = var_2;
 
-  if(var_7.type == "final")
+  if(var_7.type == "final") {
     level.final_compounds[level.final_compounds.size] = var_0;
+  }
 
   var_7.parta = var_3;
   var_7.partb = var_4;
@@ -272,10 +278,11 @@ register_compound(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 parse_elements_table() {
-  if(isDefined(level.element_table))
+  if(isDefined(level.element_table)) {
     var_0 = level.element_table;
-  else
+  } else {
     var_0 = "cp/zombies/elements.csv";
+  }
 
   var_1 = 0;
 
@@ -441,10 +448,11 @@ register_element(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 
 }
 
 setup_radio_vo_from_elements() {
-  if(isDefined(level.element_table))
+  if(isDefined(level.element_table)) {
     var_0 = level.element_table;
-  else
+  } else {
     var_0 = "cp/zombies/elements.csv";
+  }
 
   var_1 = 0;
 
@@ -503,21 +511,22 @@ watch_for_melee_on_chemical_object() {
     if(!isPlayer(var_1)) {
       continue;
     }
-    if(self.chemical_object_name == "animalfat" && !issubstr(var_9, "cleaver"))
+    if(self.chemical_object_name == "animalfat" && !issubstr(var_9, "cleaver")) {
       continue;
-    else if(self.chemical_object_name == "silver" && !issubstr(var_9, "crowbar"))
+    } else if(self.chemical_object_name == "silver" && !issubstr(var_9, "crowbar")) {
       continue;
-    else if(self.chemical_object_name == "copper" && !issubstr(var_9, "crowbar")) {
+    } else if(self.chemical_object_name == "copper" && !issubstr(var_9, "crowbar")) {
       continue;
     }
     playFX(level._effect["sb_quest_item_pickup"], var_3);
     var_10 = get_chemistry_object_value(self, 0);
     var_11 = get_chemical_carried_by_player(var_1);
 
-    if(var_11 == "")
+    if(var_11 == "") {
       set_chemical_carried_by_player(var_1, var_10);
-    else
+    } else {
       set_chemical_carried_by_player(var_1, var_10);
+    }
 
     if(self.model.health < 0) {
       self.model.health = 5;
@@ -530,9 +539,9 @@ create_chemical_object_interaction(var_0) {
   var_1 = spawnStruct();
   var_1.script_noteworthy = "element_pickup";
 
-  if(var_0.chemical_object_name == "sulfuricacid")
+  if(var_0.chemical_object_name == "sulfuricacid") {
     var_1.origin = var_0.chemical_model_object.origin + (60, -31, 21);
-  else {
+  } else {
     var_1.origin = var_0.chemical_model_object.origin;
     var_1.angles = var_0.chemical_model_object.angles;
   }
@@ -705,8 +714,9 @@ update_player_monitor_reaction_start(var_0) {
   level endon("game_ended");
 
   for(;;) {
-    foreach(var_2 in level.players)
-    update_reaction_button_state_for_player(var_2, var_0);
+    foreach(var_2 in level.players) {
+      update_reaction_button_state_for_player(var_2, var_0);
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -756,17 +766,21 @@ watch_for_reaction_start_pressed(var_0) {
 }
 
 player_use_reaction_start_struct(var_0, var_1) {
-  if(!isDefined(var_0.model))
+  if(!isDefined(var_0.model)) {
     return 0;
+  }
 
-  if(distance2dsquared(var_0.model.origin, var_1.origin) > 4900)
+  if(distance2dsquared(var_0.model.origin, var_1.origin) > 4900) {
     return 0;
+  }
 
-  if(!var_1 worldpointinreticle_circle(var_0.model.origin, 65, 70))
+  if(!var_1 worldpointinreticle_circle(var_0.model.origin, 65, 70)) {
     return 0;
+  }
 
-  if(!var_1 useButtonPressed())
+  if(!var_1 useButtonPressed()) {
     return 0;
+  }
 
   return 1;
 }
@@ -774,8 +788,9 @@ player_use_reaction_start_struct(var_0, var_1) {
 play_failure_fx(var_0) {
   var_0 endon("disconnect");
 
-  foreach(var_2 in level.chemical_containers)
-  playFX(level._effect["fail_reaction_fx"], var_2.model.origin);
+  foreach(var_2 in level.chemical_containers) {
+    playFX(level._effect["fail_reaction_fx"], var_2.model.origin);
+  }
 
   scripts\engine\utility::waitframe();
   playfxontagforclients(level._effect["fail_reaction_screenfx"], var_0, "tag_eye", var_0);
@@ -807,8 +822,9 @@ watch_for_player_interaction_with_reaction_storage(var_0) {
       break;
   }
 
-  foreach(var_2 in level.players)
-  var_2 thread watch_for_input_entered_on_reaction_storage(var_0);
+  foreach(var_2 in level.players) {
+    var_2 thread watch_for_input_entered_on_reaction_storage(var_0);
+  }
 }
 
 watch_for_input_entered_on_reaction_storage(var_0) {
@@ -851,8 +867,9 @@ discard_reaction_contents(var_0, var_1) {
   if(isDefined(var_0.compound_contained) && var_0.compound_contained != "") {
     var_0.compound_contained = "";
 
-    if(isDefined(var_0.filled_fx))
+    if(isDefined(var_0.filled_fx)) {
       var_0.filled_fx delete();
+    }
   } else {}
 }
 
@@ -860,9 +877,9 @@ add_swap_compound(var_0, var_1) {
   var_2 = get_compound_object_value(var_0);
   var_3 = get_chemical_carried_by_player(var_1);
 
-  if(var_2 == "" && var_3 == "")
+  if(var_2 == "" && var_3 == "") {
     return;
-  else if(var_2 != "") {
+  } else if(var_2 != "") {
     set_chemical_carried_by_player(var_1, var_2);
 
     if(var_2 == level.bomb_compound.name) {
@@ -890,16 +907,18 @@ soundloop_bubbles() {
 
     foreach(var_1 in level.chemical_compounds_created) {
       if(var_1.compound_contained != "" && !scripts\engine\utility::is_true(var_1.should_play_bubbles_sfx)) {
-        if(!isDefined(var_1.soundent))
+        if(!isDefined(var_1.soundent)) {
           var_1.soundent = spawn("script_origin", var_1.model.origin);
+        }
 
         var_1.model playSound("chemistry_final_yellow");
         var_1.should_play_bubbles_sfx = 1;
         continue;
       }
 
-      if(isDefined(var_1.soundent))
+      if(isDefined(var_1.soundent)) {
         var_1.soundent delete();
+      }
 
       var_1.should_play_bubbles_sfx = 0;
     }
@@ -951,9 +970,9 @@ reaction_activation(var_0, var_1) {
     var_7 = var_5 + var_6 - var_4;
   }
 
-  if(level.heat_pressure_machine_value == var_7)
+  if(level.heat_pressure_machine_value == var_7) {
     setomnvar("zm_chem_number_entry_1", -1);
-  else {
+  } else {
     scripts\engine\utility::play_sound_in_space("chemistry_reaction_failure", var_0.origin);
     var_1 thread play_failure_fx(var_1);
     var_1 thread chem_failure_debuff(var_0, var_1);
@@ -987,17 +1006,21 @@ reaction_activation(var_0, var_1) {
     var_13 = "";
     var_14 = "";
 
-    if(var_20.parta != "")
+    if(var_20.parta != "") {
       var_11 = var_20.parta;
+    }
 
-    if(var_20.partb != "")
+    if(var_20.partb != "") {
       var_12 = var_20.partb;
+    }
 
-    if(var_20.partc != "")
+    if(var_20.partc != "") {
       var_13 = var_20.partc;
+    }
 
-    if(var_20.partd != "")
+    if(var_20.partd != "") {
       var_14 = var_20.partd;
+    }
 
     if(isDefined(var_11) && var_11 != "") {
       foreach(var_10, var_23 in level.chemical_containers) {
@@ -1121,8 +1144,9 @@ reaction_activation(var_0, var_1) {
       level.chemical_compounds_created[var_32 + 1].compound_contained = level.chemical_compounds_created[var_32].compound_contained;
 
       if(level.chemical_compounds_created[var_32 + 1].compound_contained != "") {
-        if(isDefined(level.chemical_compounds_created[var_32 + 1].filled_fx))
+        if(isDefined(level.chemical_compounds_created[var_32 + 1].filled_fx)) {
           level.chemical_compounds_created[var_32 + 1].filled_fx delete();
+        }
 
         foreach(var_31, var_34 in level.elements) {
           if(var_31 == level.chemical_compounds_created[var_32 + 1].compound_contained) {
@@ -1136,15 +1160,17 @@ reaction_activation(var_0, var_1) {
         continue;
       }
 
-      if(isDefined(level.chemical_compounds_created[var_32 + 1].filled_fx))
+      if(isDefined(level.chemical_compounds_created[var_32 + 1].filled_fx)) {
         level.chemical_compounds_created[var_32 + 1].filled_fx delete();
+      }
     }
   }
 
   level.chemical_compounds_created[0].compound_contained = var_2;
 
-  if(isDefined(level.chemical_compounds_created[0].filled_fx))
+  if(isDefined(level.chemical_compounds_created[0].filled_fx)) {
     level.chemical_compounds_created[0].filled_fx delete();
+  }
 
   foreach(var_31, var_36 in level.elements) {
     if(var_31 == level.chemical_compounds_created[0].compound_contained) {
@@ -1156,9 +1182,9 @@ reaction_activation(var_0, var_1) {
   }
 
   if(level.chemical_compounds_created[0].compound_contained != "") {
-    if(isDefined(level.chemical_compounds_created[0].filled_fx))
+    if(isDefined(level.chemical_compounds_created[0].filled_fx)) {
       triggerfx(level.chemical_compounds_created[0].filled_fx);
-    else {
+    } else {
       level.chemical_compounds_created[0].filled_fx = spawnfx(level.chemical_compounds_created[0].fx_trigger, level.chemical_compounds_created[0].model.origin);
       triggerfx(level.chemical_compounds_created[0].filled_fx);
     }
@@ -1166,8 +1192,9 @@ reaction_activation(var_0, var_1) {
 
   level thread update_beaker_omnvars();
 
-  foreach(var_38 in level.chemical_containers)
-  discard_beaker_chemical(var_38, var_1);
+  foreach(var_38 in level.chemical_containers) {
+    discard_beaker_chemical(var_38, var_1);
+  }
 }
 
 update_beaker_omnvars() {
@@ -1203,8 +1230,9 @@ update_beaker_omnvars() {
 chem_failure_debuff(var_0, var_1) {
   var_1 dodamage(var_1.maxhealth * 0.95, var_1.origin);
 
-  foreach(var_3 in level.chemical_containers)
-  discard_beaker_chemical(var_3, var_1);
+  foreach(var_3 in level.chemical_containers) {
+    discard_beaker_chemical(var_3, var_1);
+  }
 }
 
 element_pickup_hint_func(var_0, var_1) {
@@ -1245,8 +1273,9 @@ init_beakers() {
     var_3 hide();
     var_2.chemical_contained = "";
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_2.model = var_3;
+    }
 
     level.chemical_containers[var_4] = var_2;
   }
@@ -1284,8 +1313,9 @@ init_compound_storage_objects() {
 
     var_3 hide();
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_2.model = var_3;
+    }
 
     var_2.compound_contained = "";
     var_2.compound_container_filled = 0;
@@ -1338,8 +1368,9 @@ discard_compound(var_0, var_1) {
     var_0.compound_contained = "";
     level thread update_beaker_omnvars();
 
-    if(isDefined(var_0.filled_fx))
+    if(isDefined(var_0.filled_fx)) {
       var_0.filled_fx delete();
+    }
   } else {}
 }
 
@@ -1418,8 +1449,9 @@ watch_for_input_entered_on_beaker(var_0) {
 
 discard_beaker_chemical(var_0, var_1) {
   if(isDefined(var_0.chemical_contained) && var_0.chemical_contained != "") {
-    if(isDefined(var_0.filled_fx))
+    if(isDefined(var_0.filled_fx)) {
       var_0.filled_fx delete();
+    }
 
     var_0.chemical_contained = "";
     var_0.model setModel("tag_origin");
@@ -1429,10 +1461,11 @@ discard_beaker_chemical(var_0, var_1) {
 }
 
 get_chemistry_object_value(var_0, var_1) {
-  if(scripts\engine\utility::is_true(var_1))
+  if(scripts\engine\utility::is_true(var_1)) {
     return var_0.chemical_contained;
-  else
+  } else {
     return var_0.chemical_object_name;
+  }
 }
 
 try_play_swap_vfx(var_0, var_1, var_2) {
@@ -1474,8 +1507,9 @@ try_play_swap_vfx(var_0, var_1, var_2) {
           var_0.model setModel(var_9.model);
 
           if(var_9.type == "componant" || var_9.type == "final") {
-            if(isDefined(var_0.filled_fx))
+            if(isDefined(var_0.filled_fx)) {
               var_0.filled_fx delete();
+            }
 
             if(isDefined(var_9.fx_trigger)) {
               var_0.filled_fx = spawnfx(var_9.fx_trigger, var_0.model.origin);
@@ -1489,8 +1523,9 @@ try_play_swap_vfx(var_0, var_1, var_2) {
             foreach(var_14, var_13 in level.elements) {
               if(var_4 == var_14) {
                 if(var_13.type != "componant" || var_13.type != "final") {
-                  if(isDefined(var_11.filled_fx))
+                  if(isDefined(var_11.filled_fx)) {
                     var_11.filled_fx delete();
+                  }
                 }
               }
             }
@@ -1539,8 +1574,9 @@ display_elements_in_beakers(var_0, var_1, var_2) {
       break;
   }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     setomnvar(var_4, int(var_3));
+  }
 }
 
 set_chemical_in_beaker(var_0, var_1, var_2) {
@@ -1560,8 +1596,9 @@ swap_chemistry_object_with_player_chemical(var_0, var_1, var_2) {
 }
 
 get_chemical_carried_by_player(var_0) {
-  if(!isDefined(var_0.chemical_base_picked))
+  if(!isDefined(var_0.chemical_base_picked)) {
     var_0.chemical_base_picked = "";
+  }
 
   return var_0.chemical_base_picked;
 }
@@ -1611,8 +1648,9 @@ init_chem_radios() {
     var_2.radio = spawn("script_origin", var_2.origin);
     var_3 = undefined;
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_2.model = var_3;
+    }
   }
 
   setup_radio_vo_from_elements();
@@ -1631,15 +1669,17 @@ radios_activation_function(var_0, var_1) {
         level.element_intro_played = 1;
       }
 
-      if(!isDefined(level.chem_radio_1_current))
+      if(!isDefined(level.chem_radio_1_current)) {
         level.chem_radio_1_current = 0;
+      }
 
       var_3 = level.chem_radio_1_sounds[level.chem_radio_1_current];
       var_2 playSound(var_3);
       level.chem_radio_1_current = level.chem_radio_1_current + 1;
 
-      if(level.chem_radio_1_current == level.chem_radio_1_sounds.size)
+      if(level.chem_radio_1_current == level.chem_radio_1_sounds.size) {
         level.chem_radio_1_current = 0;
+      }
 
       break;
     case "chem_radio_2":
@@ -1649,15 +1689,17 @@ radios_activation_function(var_0, var_1) {
         level.element_intro_played = 1;
       }
 
-      if(!isDefined(level.chem_radio_2_current))
+      if(!isDefined(level.chem_radio_2_current)) {
         level.chem_radio_2_current = 0;
+      }
 
       var_3 = level.chem_radio_2_sounds[level.chem_radio_2_current];
       var_2 playSound(var_3);
       level.chem_radio_2_current = level.chem_radio_2_current + 1;
 
-      if(level.chem_radio_2_current == level.chem_radio_2_sounds.size)
+      if(level.chem_radio_2_current == level.chem_radio_2_sounds.size) {
         level.chem_radio_2_current = 0;
+      }
 
       break;
     case "chem_radio_3":
@@ -1667,15 +1709,17 @@ radios_activation_function(var_0, var_1) {
         level.element_intro_played = 1;
       }
 
-      if(!isDefined(level.chem_radio_3_current))
+      if(!isDefined(level.chem_radio_3_current)) {
         level.chem_radio_3_current = 0;
+      }
 
       var_3 = level.chem_radio_3_sounds[level.chem_radio_3_current];
       var_2 playSound(var_3);
       level.chem_radio_3_current = level.chem_radio_3_current + 1;
 
-      if(level.chem_radio_3_current == level.chem_radio_3_sounds.size)
+      if(level.chem_radio_3_current == level.chem_radio_3_sounds.size) {
         level.chem_radio_3_current = 0;
+      }
 
       break;
     case "chem_radio_4":
@@ -1685,15 +1729,17 @@ radios_activation_function(var_0, var_1) {
         level.element_intro_played = 1;
       }
 
-      if(!isDefined(level.chem_radio_4_current))
+      if(!isDefined(level.chem_radio_4_current)) {
         level.chem_radio_4_current = 0;
+      }
 
       var_3 = level.chem_radio_4_sounds[level.chem_radio_4_current];
       var_2 playSound(var_3);
       level.chem_radio_4_current = level.chem_radio_4_current + 1;
 
-      if(level.chem_radio_4_current == level.chem_radio_4_sounds.size)
+      if(level.chem_radio_4_current == level.chem_radio_4_sounds.size) {
         level.chem_radio_4_current = 0;
+      }
 
       break;
     case "chem_radio_5":
@@ -1703,15 +1749,17 @@ radios_activation_function(var_0, var_1) {
         level.compound_intro_played = 1;
       }
 
-      if(!isDefined(level.chem_radio_5_current))
+      if(!isDefined(level.chem_radio_5_current)) {
         level.chem_radio_5_current = 0;
+      }
 
       var_3 = level.chem_radio_5_sounds[level.chem_radio_5_current];
       var_2 playSound(var_3);
       level.chem_radio_5_current = level.chem_radio_5_current + 1;
 
-      if(level.chem_radio_5_current == level.chem_radio_5_sounds.size)
+      if(level.chem_radio_5_current == level.chem_radio_5_sounds.size) {
         level.chem_radio_5_current = 0;
+      }
 
       break;
     case "chem_radio_6":
@@ -1721,56 +1769,64 @@ radios_activation_function(var_0, var_1) {
         level.compound_intro_played = 1;
       }
 
-      if(!isDefined(level.chem_radio_6_current))
+      if(!isDefined(level.chem_radio_6_current)) {
         level.chem_radio_6_current = 0;
+      }
 
       var_3 = level.chem_radio_6_sounds[level.chem_radio_6_current];
       var_2 playSound(var_3);
       level.chem_radio_6_current = level.chem_radio_6_current + 1;
 
-      if(level.chem_radio_6_current == level.chem_radio_6_sounds.size)
+      if(level.chem_radio_6_current == level.chem_radio_6_sounds.size) {
         level.chem_radio_6_current = 0;
+      }
 
       break;
     case "chem_radio_7":
-      if(!isDefined(level.chem_radio_7_current))
+      if(!isDefined(level.chem_radio_7_current)) {
         level.chem_radio_7_current = 0;
+      }
 
       if(scripts\engine\utility::is_true(level.radio_flip)) {
         var_3 = level.bomb_compound.radio2[level.chem_radio_7_current]._id_10475;
         var_2 playSound(var_3);
         level.chem_radio_7_current = level.chem_radio_7_current + 1;
 
-        if(level.chem_radio_7_current == level.bomb_compound.radio2.size)
+        if(level.chem_radio_7_current == level.bomb_compound.radio2.size) {
           level.chem_radio_7_current = 0;
+        }
       } else {
         var_3 = level.bomb_compound.radio1[level.chem_radio_7_current]._id_10475;
         var_2 playSound(var_3);
         level.chem_radio_7_current = level.chem_radio_7_current + 1;
 
-        if(level.chem_radio_7_current == level.bomb_compound.radio1.size)
+        if(level.chem_radio_7_current == level.bomb_compound.radio1.size) {
           level.chem_radio_7_current = 0;
+        }
       }
 
       break;
     case "chem_radio_8":
-      if(!isDefined(level.chem_radio_8_current))
+      if(!isDefined(level.chem_radio_8_current)) {
         level.chem_radio_8_current = 0;
+      }
 
       if(scripts\engine\utility::is_true(level.radio_flip)) {
         var_3 = level.bomb_compound.radio1[level.chem_radio_8_current]._id_10475;
         var_2 playSound(var_3);
         level.chem_radio_8_current = level.chem_radio_8_current + 1;
 
-        if(level.chem_radio_8_current == level.bomb_compound.radio1.size)
+        if(level.chem_radio_8_current == level.bomb_compound.radio1.size) {
           level.chem_radio_8_current = 0;
+        }
       } else {
         var_3 = level.bomb_compound.radio2[level.chem_radio_8_current]._id_10475;
         var_2 playSound(var_3);
         level.chem_radio_8_current = level.chem_radio_8_current + 1;
 
-        if(level.chem_radio_8_current == level.bomb_compound.radio2.size)
+        if(level.chem_radio_8_current == level.bomb_compound.radio2.size) {
           level.chem_radio_8_current = 0;
+        }
       }
 
       break;
@@ -1797,12 +1853,13 @@ setup_final_compound() {
 determine_proper_color() {
   var_0 = randomintrange(1, 4);
 
-  if(var_0 == 1)
+  if(var_0 == 1) {
     level.bomb_compound.color = "red";
-  else if(var_0 == 2)
+  } else if(var_0 == 2) {
     level.bomb_compound.color = "green";
-  else
+  } else {
     level.bomb_compound.color = "blue";
+  }
 
   setomnvar("zm_chem_correct_color", var_0);
 }
@@ -1965,32 +2022,35 @@ choose_constant_locations() {
   set_constant_omnvars(var_2, level.constant_bad_value_3);
   set_bad_loc_colors();
 
-  if(level.bad_constants_loc1.value == 1)
+  if(level.bad_constants_loc1.value == 1) {
     level.bad_constants_loc1.omnvar = "zm_chem_const_bad_loc_1";
-  else if(level.bad_constants_loc1.value == 2)
+  } else if(level.bad_constants_loc1.value == 2) {
     level.bad_constants_loc1.omnvar = "zm_chem_const_bad_loc_2";
-  else if(level.bad_constants_loc1.value == 3)
+  } else if(level.bad_constants_loc1.value == 3) {
     level.bad_constants_loc1.omnvar = "zm_chem_const_bad_loc_3";
-  else if(level.bad_constants_loc1.value == 4)
+  } else if(level.bad_constants_loc1.value == 4) {
     level.bad_constants_loc1.omnvar = "zm_chem_const_bad_loc_4";
+  }
 
-  if(level.bad_constants_loc2.value == 1)
+  if(level.bad_constants_loc2.value == 1) {
     level.bad_constants_loc2.omnvar = "zm_chem_const_bad_loc_1";
-  else if(level.bad_constants_loc2.value == 2)
+  } else if(level.bad_constants_loc2.value == 2) {
     level.bad_constants_loc2.omnvar = "zm_chem_const_bad_loc_2";
-  else if(level.bad_constants_loc2.value == 3)
+  } else if(level.bad_constants_loc2.value == 3) {
     level.bad_constants_loc2.omnvar = "zm_chem_const_bad_loc_3";
-  else if(level.bad_constants_loc2.value == 4)
+  } else if(level.bad_constants_loc2.value == 4) {
     level.bad_constants_loc2.omnvar = "zm_chem_const_bad_loc_4";
+  }
 
-  if(level.bad_constants_loc3.value == 1)
+  if(level.bad_constants_loc3.value == 1) {
     level.bad_constants_loc3.omnvar = "zm_chem_const_bad_loc_1";
-  else if(level.bad_constants_loc3.value == 2)
+  } else if(level.bad_constants_loc3.value == 2) {
     level.bad_constants_loc3.omnvar = "zm_chem_const_bad_loc_2";
-  else if(level.bad_constants_loc3.value == 3)
+  } else if(level.bad_constants_loc3.value == 3) {
     level.bad_constants_loc3.omnvar = "zm_chem_const_bad_loc_3";
-  else if(level.bad_constants_loc3.value == 4)
+  } else if(level.bad_constants_loc3.value == 4) {
     level.bad_constants_loc3.omnvar = "zm_chem_const_bad_loc_4";
+  }
 
   select_pi_value();
 }
@@ -2015,12 +2075,13 @@ set_constant_omnvars(var_0, var_1) {
 set_bad_loc_colors() {
   var_0 = randomintrange(1, 4);
 
-  if(var_0 == 1)
+  if(var_0 == 1) {
     level.bad_constants_loc1.color = "red";
-  else if(var_0 == 2)
+  } else if(var_0 == 2) {
     level.bad_constants_loc1.color = "green";
-  else
+  } else {
     level.bad_constants_loc1.color = "blue";
+  }
 
   var_1 = randomintrange(1, 4);
 
@@ -2033,12 +2094,13 @@ set_bad_loc_colors() {
     break;
   }
 
-  if(var_1 == 1)
+  if(var_1 == 1) {
     level.bad_constants_loc2.color = "red";
-  else if(var_1 == 2)
+  } else if(var_1 == 2) {
     level.bad_constants_loc2.color = "green";
-  else
+  } else {
     level.bad_constants_loc2.color = "blue";
+  }
 
   var_2 = randomintrange(1, 4);
 
@@ -2051,12 +2113,13 @@ set_bad_loc_colors() {
     break;
   }
 
-  if(var_2 == 1)
+  if(var_2 == 1) {
     level.bad_constants_loc3.color = "red";
-  else if(var_2 == 2)
+  } else if(var_2 == 2) {
     level.bad_constants_loc3.color = "green";
-  else
+  } else {
     level.bad_constants_loc3.color = "blue";
+  }
 }
 
 set_not_equal_constant(var_0) {
@@ -2118,13 +2181,15 @@ parse_compound_vo_table() {
   level.bomb_compound.radio2 = [];
   var_0 = randomintrange(1, 3);
 
-  if(var_0 == 2)
+  if(var_0 == 2) {
     level.radio_flip = 1;
+  }
 
-  if(isDefined(level.final_compound_vo_table))
+  if(isDefined(level.final_compound_vo_table)) {
     var_1 = level.final_compound_vo_table;
-  else
+  } else {
     var_1 = "cp/zombies/chem_vo.csv";
+  }
 
   level.intro_chem_vo = [];
   var_2 = 0;

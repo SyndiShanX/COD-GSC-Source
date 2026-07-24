@@ -56,10 +56,11 @@ _id_12F49() {
 _id_7E73() {
   var_0 = getdvarint("g_gameskill") + 1;
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     var_0 = 5;
-  else if(scripts\sp\utility::_id_93AB())
+  } else if(scripts\sp\utility::_id_93AB()) {
     var_0 = 6;
+  }
 
   return var_0;
 }

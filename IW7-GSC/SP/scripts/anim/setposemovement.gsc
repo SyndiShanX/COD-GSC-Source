@@ -5,14 +5,16 @@
 
 setposemovement(var_0, var_1) {
   if(var_0 == "") {
-    if(self.a.pose == "prone" && (var_1 == "walk" || var_1 == "run"))
+    if(self.a.pose == "prone" && (var_1 == "walk" || var_1 == "run")) {
       var_0 = "crouch";
-    else
+    } else {
       var_0 = self.a.pose;
+    }
   }
 
-  if(!isDefined(var_1) || var_1 == "")
+  if(!isDefined(var_1) || var_1 == "") {
     var_1 = self.a.movement;
+  }
 
   [[anim.setposemovementfnarray[var_0][var_1]]]();
 }
@@ -382,8 +384,9 @@ _id_DA84() {
 _id_CEED(var_0, var_1, var_2, var_3) {
   var_4 = gettime() + var_1 * 1000;
 
-  if(isarray(var_0))
+  if(isarray(var_0)) {
     var_0 = var_0[randomint(var_0.size)];
+  }
 
   self _meth_82E3("blendTransition", var_0, %body, 1, var_1, 1);
   scripts\anim\notetracks::donotetracksfortime(var_1 / 2, "blendTransition");
@@ -391,8 +394,9 @@ _id_CEED(var_0, var_1, var_2, var_3) {
   self.a.movement = var_3;
   var_5 = (var_4 - gettime()) / 1000;
 
-  if(var_5 < 0.05)
+  if(var_5 < 0.05) {
     var_5 = 0.05;
+  }
 
   scripts\anim\notetracks::donotetracksfortime(var_5, "blendTransition");
 }
@@ -444,13 +448,15 @@ _id_2B91() {
 
   var_0 = 0.1;
 
-  if(self.a.movement != "stop" && self.stairsstate == "none")
+  if(self.a.movement != "stop" && self.stairsstate == "none") {
     var_0 = 0.5;
+  }
 
-  if(isDefined(self._id_10AB7))
+  if(isDefined(self._id_10AB7)) {
     self _meth_82A9(scripts\anim\utility::_id_7FCC("sprint"), 1, var_0, 1);
-  else
+  } else {
     self _meth_82A9(scripts\anim\run::getrunningforwardpainanim(), 1, var_0, 1);
+  }
 
   scripts\anim\run::_id_F7A9(scripts\anim\utility::_id_7FCC("move_b"), scripts\anim\utility::_id_7FCC("move_l"), scripts\anim\utility::_id_7FCC("move_r"), self._id_101BB);
   thread scripts\anim\run::setcombatstandmoveanimweights("run");
@@ -460,11 +466,13 @@ _id_2B91() {
 }
 
 _id_2B92() {
-  if(self.a.movement != "stop")
+  if(self.a.movement != "stop") {
     self endon("movemode");
+  }
 
-  if(!isDefined(self.alwaysrunforward) && self.a.pose != "prone")
+  if(!isDefined(self.alwaysrunforward) && self.a.pose != "prone") {
     scripts\anim\run::_id_F7A9(scripts\anim\utility::_id_7FCC("move_b"), scripts\anim\utility::_id_7FCC("move_l"), scripts\anim\utility::_id_7FCC("move_r"));
+  }
 
   self.a.pose = "stand";
   self.a.movement = "walk";
@@ -521,9 +529,9 @@ _id_4AAE() {
 }
 
 _id_2B8F() {
-  if(isDefined(self._id_4A9F))
+  if(isDefined(self._id_4A9F)) {
     _id_CEED(self._id_4A9F, 0.6, "crouch", "run");
-  else {
+  } else {
     self setanimknob(%crouchrun, 1, 0.4, self.moveplaybackrate);
     thread scripts\anim\run::_id_12ED3("crouchrun", scripts\anim\utility::_id_7FCC("crouch"), scripts\anim\utility::_id_7FCC("crouch_b"), scripts\anim\utility::_id_7FCC("crouch_l"), scripts\anim\utility::_id_7FCC("crouch_r"));
     wait 0.05;
@@ -651,19 +659,23 @@ _id_D554(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_D555(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 1;
+  }
 
-  if(var_5)
+  if(var_5) {
     thread _id_13712(getanimlength(var_0) / 2.0, "killtimerscript", var_1);
+  }
 
   self _meth_82E4("transAnimDone2", var_0, %body, 1, 0.2, var_4);
 
-  if(!isDefined(self.a.pose))
+  if(!isDefined(self.a.pose)) {
     self.pose = "undefined";
+  }
 
-  if(!isDefined(self.a.movement))
+  if(!isDefined(self.a.movement)) {
     self.movement = "undefined";
+  }
 
   var_6 = "";
   scripts\anim\shared::donotetracks("transAnimDone2", undefined, var_6);
@@ -672,8 +684,9 @@ _id_D555(var_0, var_1, var_2, var_3, var_4, var_5) {
   self notify("entered_pose" + var_1);
   self.a.movement = var_2;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     self _meth_82A5(var_3, %body, 1, 0.3, var_4);
+  }
 }
 
 _id_13712(var_0, var_1, var_2) {

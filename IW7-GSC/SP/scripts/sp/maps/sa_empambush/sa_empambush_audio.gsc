@@ -14,8 +14,9 @@ _id_25AC() {
   scripts\engine\utility::flag_init("ignore_charge_up");
   level._id_1D66 = ["exterior_ambience_battle", "interior_ambience"];
 
-  foreach(var_1 in level._id_1D66)
-  scripts\engine\utility::flag_init(var_1);
+  foreach(var_1 in level._id_1D66) {
+    scripts\engine\utility::flag_init(var_1);
+  }
 }
 
 _id_5E15() {}
@@ -172,8 +173,9 @@ _id_993B() {
     wait 0.05;
     var_0 = scripts\sp\utility::_id_2290(level._id_1D66, [var_1]);
 
-    foreach(var_3 in var_0)
-    scripts\engine\utility::flag_clear(var_3);
+    foreach(var_3 in var_0) {
+      scripts\engine\utility::flag_clear(var_3);
+    }
   }
 }
 
@@ -260,8 +262,9 @@ _id_13EA5() {
 }
 
 _id_C989(var_0) {
-  if(var_0 == "jackal_patrol1")
+  if(var_0 == "jackal_patrol1") {
     self playSound("sa_emp_jackal_patrol_by");
+  }
 }
 
 _id_6149() {
@@ -444,8 +447,9 @@ _id_A107() {
 _id_8A37() {
   level._id_2576 = level._id_2576 + 1;
 
-  if(level._id_2576 == 1)
+  if(level._id_2576 == 1) {
     level.player _id_0F00::_id_CE24("hangar_door_explosion");
+  }
 }
 
 _id_8AA1() {
@@ -508,8 +512,9 @@ _id_ACE2(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_7 = max(var_4, 0);
   }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_7 = max(var_5, 0);
+  }
 
   var_8 = spawn("script_origin", (0, 0, 0));
   var_8.alias = var_1;

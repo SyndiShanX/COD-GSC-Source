@@ -114,8 +114,9 @@ _id_23FC() {
     var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
     var_2 = 0;
 
-    if(!isDefined(var_1.target))
+    if(!isDefined(var_1.target)) {
       var_2 = 1;
+    }
 
     _id_10AE::_id_E3A7(var_0, 1400, 0, var_2);
 
@@ -167,8 +168,9 @@ _id_10CE4() {
   level._id_EA2C _id_0BDC::_id_19AE("dont_shoot");
   level._id_EA2C thread _id_10AE::_id_A1F1("salter_spline_post_decoy");
 
-  if(getdvarint("ja_skip_preload", 0) == 0)
+  if(getdvarint("ja_skip_preload", 0) == 0) {
     level thread scripts\sp\utility::_id_BF97();
+  }
 
   scripts\engine\utility::flag_set("jackal_objectives_can_display");
   scripts\engine\utility::flag_set("destroyer_vo_done");
@@ -179,8 +181,9 @@ _id_10CE4() {
 }
 
 _id_B216() {
-  while(!isDefined(level._id_E35D))
+  while(!isDefined(level._id_E35D)) {
     wait 0.05;
+  }
 
   wait 5.0;
   scripts\engine\utility::flag_set("sdf_ambush");
@@ -251,8 +254,9 @@ _id_E315() {
 
 _id_B883() {
   foreach(var_1 in level._id_A3A8["missileBoats"]._id_FE2D) {
-    if(isDefined(var_1) && isalive(var_1))
+    if(isDefined(var_1) && isalive(var_1)) {
       var_1 thread _id_B86C();
+    }
   }
 }
 
@@ -277,18 +281,20 @@ _id_B86C() {
           var_5.occupied = 1;
           var_2 = 1;
 
-          while(self._id_24CE != var_5)
+          while(self._id_24CE != var_5) {
             wait 0.1;
+          }
 
           break;
         }
       }
     }
 
-    if(var_2)
+    if(var_2) {
       var_0 = randomfloatrange(3.0, 8.0);
-    else
+    } else {
       var_0 = var_1;
+    }
 
     wait(var_0);
   }
@@ -297,8 +303,9 @@ _id_B86C() {
 _id_B86B() {
   self waittill("death");
 
-  if(isDefined(self) && isDefined(self._id_24CE))
+  if(isDefined(self) && isDefined(self._id_24CE)) {
     self._id_24CE.occupied = 0;
+  }
 }
 
 _id_C505() {
@@ -308,17 +315,19 @@ _id_C505() {
     var_2 = [];
 
     foreach(var_4 in var_0) {
-      if(!scripts\engine\utility::flag_exist(var_4) || !scripts\engine\utility::flag(var_4))
+      if(!scripts\engine\utility::flag_exist(var_4) || !scripts\engine\utility::flag(var_4)) {
         var_2[var_2.size] = var_4;
+      }
     }
 
     if(var_2.size == 1) {
       var_6 = 0.8;
 
-      if(var_2[0] == "destroyerscomplete_vo_finished")
+      if(var_2[0] == "destroyerscomplete_vo_finished") {
         thread _id_10AE::_id_CE80(::_id_52FE, 0, var_6);
-      else
+      } else {
         thread _id_10AE::_id_CE80(::_id_C074, 0, var_6);
+      }
 
       break;
     }
@@ -337,13 +346,15 @@ _id_10CAE() {
   thread _id_10AE::_id_E3B6(1);
   scripts\engine\utility::delaythread(0.05, _id_10AE::_id_E3FA, "ret_goal_ambush");
 
-  if(getdvarint("ja_skip_preload", 0) == 0)
+  if(getdvarint("ja_skip_preload", 0) == 0) {
     level thread scripts\sp\utility::_id_BF97();
+  }
 }
 
 _id_B20F() {
-  while(!isDefined(level._id_E35D))
+  while(!isDefined(level._id_E35D)) {
     wait 0.05;
+  }
 
   thread jackass_victory_music();
   scripts\sp\utility::_id_6EEA();
@@ -389,8 +400,9 @@ _id_B1E5() {
 }
 
 _id_5316() {
-  foreach(var_1 in level._id_A3A8["destroyers"]._id_FE2D)
-  var_1 thread _id_5300();
+  foreach(var_1 in level._id_A3A8["destroyers"]._id_FE2D) {
+    var_1 thread _id_5300();
+  }
 }
 
 _id_5300() {
@@ -631,16 +643,18 @@ _id_BC43() {
   var_0 = getEntArray("sdf_missileboats", "targetname");
   var_1 = _id_10AE::_id_6C7B("missileboat_ftl_point", var_0.size, 15000, 25000, 0.9);
 
-  foreach(var_4, var_3 in var_0)
-  var_3 scripts\sp\utility::_id_11624(var_1[var_4]);
+  foreach(var_4, var_3 in var_0) {
+    var_3 scripts\sp\utility::_id_11624(var_1[var_4]);
+  }
 }
 
 _id_BC20() {
   var_0 = getEntArray("sdf_destroyers", "targetname");
   var_1 = _id_10AE::_id_6C7B("destroyer_ftl_point", var_0.size, 20000, 55000, 0.9);
 
-  foreach(var_4, var_3 in var_0)
-  var_3 scripts\sp\utility::_id_11624(var_1[var_4]);
+  foreach(var_4, var_3 in var_0) {
+    var_3 scripts\sp\utility::_id_11624(var_1[var_4]);
+  }
 }
 
 _id_BBF9() {
@@ -665,8 +679,9 @@ _id_BBF9() {
     }
   }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = var_2[randomint(var_2.size)];
+  }
 
   var_0 scripts\sp\utility::_id_11624(var_1);
 }
@@ -674,8 +689,9 @@ _id_BBF9() {
 _id_13331() {
   var_0 = getEntArray("ambient_rotate_object", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  playFX(scripts\engine\utility::getfx("vfx_ja_space_gas_cloud_03"), var_2.origin);
+  foreach(var_2 in var_0) {
+    playFX(scripts\engine\utility::getfx("vfx_ja_space_gas_cloud_03"), var_2.origin);
+  }
 }
 
 _id_1DE7() {
@@ -686,8 +702,9 @@ _id_1DE7() {
     if(!issubstr(var_2.classname, "script_brushmodel")) {
       var_3 = getEntArray(var_2.target, "targetname");
 
-      if(isDefined(var_2.target))
+      if(isDefined(var_2.target)) {
         scripts\engine\utility::array_call(var_3, ::linkto, var_2);
+      }
 
       level._id_E736[level._id_E736.size] = var_2;
       var_2 thread _id_1DE6();
@@ -701,8 +718,9 @@ _id_1DE6() {
   var_2 = 2;
   var_3 = [];
 
-  if(isDefined(self.script_parameters))
+  if(isDefined(self.script_parameters)) {
     var_3 = strtok(self.script_parameters, " ");
+  }
 
   var_4 = [];
   var_5 = [];
@@ -710,14 +728,15 @@ _id_1DE6() {
 
   for(var_6 = 0; var_6 < var_2; var_6++) {
     if(!isDefined(var_3[var_6])) {
-      if(var_3.size == 1)
+      if(var_3.size == 1) {
         var_4[var_6] = float(var_3[0]);
-      else
+      } else {
         var_4[var_6] = randomintrange(var_0, var_1);
+      }
     } else
       var_4[var_6] = float(var_3[var_6]);
 
-    var_5[var_6] = scripts\engine\utility::random([-1, 1]);
+    var_5[var_6] = ::scripts\engine\utility::random([-1, 1]);
   }
 
   for(;;) {
@@ -731,8 +750,9 @@ _id_1DE6() {
 
     self.angles = (var_7[0], var_7[1], self.angles[2]);
 
-    if(getdvarint("debug_rotate") == 1)
+    if(getdvarint("debug_rotate") == 1) {
       thread scripts\engine\utility::draw_ent_axis((1, 0, 0), 2, 1000);
+    }
 
     scripts\engine\utility::waitframe();
   }

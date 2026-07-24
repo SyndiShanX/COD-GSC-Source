@@ -53,16 +53,18 @@ hint_manager() {
 
 jackal_hintmanager_run_action_watchers() {
   foreach(var_1 in level._id_A056.hintmanager.hints) {
-    if(isDefined(var_1.action_note))
+    if(isDefined(var_1.action_note)) {
       level thread hintmanager_action_watcher(var_1);
+    }
   }
 }
 
 hintmanager_action_watcher(var_0) {
   level._id_D127 endon("player_exit_jackal");
 
-  foreach(var_2 in var_0.hint_terminator_actions)
-  level.player notifyonplayercommand(var_0.action_note, var_2);
+  foreach(var_2 in var_0.hint_terminator_actions) {
+    level.player notifyonplayercommand(var_0.action_note, var_2);
+  }
 
   var_0.last_action_time = gettime();
 
@@ -88,8 +90,9 @@ jackal_hint(var_0) {
 }
 
 jackal_hint_waittill_termination(var_0) {
-  if(isDefined(var_0.action_note))
+  if(isDefined(var_0.action_note)) {
     level.player endon(var_0.action_note);
+  }
 
   var_1 = var_0.hint_display_time;
 
@@ -108,21 +111,25 @@ jackal_hint_waittill_termination(var_0) {
 }
 
 jackal_hint_common_conditions(var_0) {
-  if(self._id_54F1)
+  if(self._id_54F1) {
     return 0;
+  }
 
-  if(level._id_A056._id_68B3.running)
+  if(level._id_A056._id_68B3.running) {
     return 0;
+  }
 
-  if(var_0._id_54F1)
+  if(var_0._id_54F1) {
     return 0;
+  }
 
   return 1;
 }
 
 jackal_hint_common_terminators() {
-  if(self._id_54F1)
+  if(self._id_54F1) {
     return 1;
+  }
 
   return 0;
 }
@@ -132,8 +139,9 @@ jackal_hint_common_cooldown(var_0) {
 }
 
 do_progression_specific_tutorials() {
-  if(scripts\sp\gameskill::map_has_jackal_arena() && scripts\sp\gameskill::get_num_jackal_arenas_completed() == 2)
+  if(scripts\sp\gameskill::map_has_jackal_arena() && scripts\sp\gameskill::get_num_jackal_arenas_completed() == 2) {
     tutorial_oneoff_roll();
+  }
 }
 
 tutorial_oneoff_roll() {
@@ -168,32 +176,39 @@ tutorial_oneoff_roll() {
 
   level.player notify("completed_roll_tutorial");
 
-  if(scripts\engine\utility::flag("flag_jackal_hintmanaged_hint"))
+  if(scripts\engine\utility::flag("flag_jackal_hintmanaged_hint")) {
     scripts\engine\utility::flag_clear("flag_jackal_hintmanaged_hint");
+  }
 }
 
 tutorial_roll_pass_conditions() {
-  if(!level.player.holding_roll)
+  if(!level.player.holding_roll) {
     return 0;
+  }
 
-  if(level._id_241D && level._id_D127.spaceship_mode == "hover")
+  if(level._id_241D && level._id_D127.spaceship_mode == "hover") {
     return 0;
+  }
 
-  if(level._id_A056.hintmanager._id_54F1)
+  if(level._id_A056.hintmanager._id_54F1) {
     return 0;
+  }
 
   return 1;
 }
 
 tutorial_roll_hint_conditions() {
-  if(level.player.holding_roll)
+  if(level.player.holding_roll) {
     return 0;
+  }
 
-  if(level._id_241D && level._id_D127.spaceship_mode == "hover")
+  if(level._id_241D && level._id_D127.spaceship_mode == "hover") {
     return 0;
+  }
 
-  if(level._id_A056.hintmanager._id_54F1)
+  if(level._id_A056.hintmanager._id_54F1) {
     return 0;
+  }
 
   return 1;
 }
@@ -215,28 +230,34 @@ tutorial_oneoff_watch_roll() {
 }
 
 hint_roll_conditions(var_0) {
-  if(!scripts\sp\utility::_id_D123())
+  if(!scripts\sp\utility::_id_D123()) {
     return 0;
+  }
 
   var_1 = gettime();
 
   if(abs(level._id_D127.angles[2]) > 110) {
-    if(!isDefined(var_0.inverted_time))
+    if(!isDefined(var_0.inverted_time)) {
       var_0.inverted_time = var_1;
+    }
   } else
     var_0.inverted_time = undefined;
 
-  if(_id_0BD1::_id_D30D())
+  if(_id_0BD1::_id_D30D()) {
     return 0;
+  }
 
-  if(level._id_D127 _id_0BDC::_id_8B87())
+  if(level._id_D127 _id_0BDC::_id_8B87()) {
     return 0;
+  }
 
-  if(scripts\sp\utility::_id_7B9D() < 0.5)
+  if(scripts\sp\utility::_id_7B9D() < 0.5) {
     return 0;
+  }
 
-  if(gettime() - var_0.last_time < 30000)
+  if(gettime() - var_0.last_time < 30000) {
     return 0;
+  }
 
   if(isDefined(var_0.inverted_time) && var_1 - var_0.inverted_time > 1000 && var_1 - var_0.last_action_time > 45000) {
     var_0.inverted_time = 1;
@@ -247,38 +268,47 @@ hint_roll_conditions(var_0) {
 }
 
 hint_roll_terminator(var_0) {
-  if(!scripts\sp\utility::_id_D123())
+  if(!scripts\sp\utility::_id_D123()) {
     return 0;
+  }
 
-  if(_id_0BD1::_id_D30D())
+  if(_id_0BD1::_id_D30D()) {
     return 0;
+  }
 
-  if(level._id_D127 _id_0BDC::_id_8B87())
+  if(level._id_D127 _id_0BDC::_id_8B87()) {
     return 1;
+  }
 
-  if(scripts\sp\utility::_id_7B9D() < 0.5)
+  if(scripts\sp\utility::_id_7B9D() < 0.5) {
     return 1;
+  }
 
   return 0;
 }
 
 hint_missile_conditions(var_0) {
-  if(level._id_D127.missiles.count <= 0)
+  if(level._id_D127.missiles.count <= 0) {
     return 0;
+  }
 
-  if(!scripts\sp\utility::_id_D123())
+  if(!scripts\sp\utility::_id_D123()) {
     return 0;
+  }
 
   var_1 = level.player _meth_848A();
 
-  if(!isDefined(var_1) || !isDefined(var_1[0]))
+  if(!isDefined(var_1) || !isDefined(var_1[0])) {
     return 0;
+  }
 
-  if(gettime() - var_0.last_time < 30000)
+  if(gettime() - var_0.last_time < 30000) {
     return 0;
+  }
 
-  if(gettime() - var_0.last_action_time < 140000)
+  if(gettime() - var_0.last_action_time < 140000) {
     return 0;
+  }
 
   return 1;
 }
@@ -288,66 +318,82 @@ hint_missile_terminator(var_0) {
 }
 
 hint_weapdrone_conditions(var_0) {
-  if(!scripts\engine\utility::flag("jackal_missile_drone_primed"))
+  if(!scripts\engine\utility::flag("jackal_missile_drone_primed")) {
     return 0;
+  }
 
-  if(gettime() - var_0.last_time < 90000)
+  if(gettime() - var_0.last_time < 90000) {
     return 0;
+  }
 
-  if(gettime() - level._id_D127.missiles._id_A8E8 < 90000)
+  if(gettime() - level._id_D127.missiles._id_A8E8 < 90000) {
     return 0;
+  }
 
-  if(level._id_A056._id_933B.size > 0)
+  if(level._id_A056._id_933B.size > 0) {
     return 0;
+  }
 
-  if(!scripts\sp\utility::_id_D123())
+  if(!scripts\sp\utility::_id_D123()) {
     return 0;
+  }
 
   var_1 = level.player _meth_848A();
 
-  if(isDefined(var_1) && isDefined(var_1[0]))
+  if(isDefined(var_1) && isDefined(var_1[0])) {
     return 0;
+  }
 
-  if(level._id_D127 _id_0BDC::_id_8B87())
+  if(level._id_D127 _id_0BDC::_id_8B87()) {
     return 0;
+  }
 
-  if(scripts\sp\utility::_id_7B9D() < 0.5)
+  if(scripts\sp\utility::_id_7B9D() < 0.5) {
     return 0;
+  }
 
-  if(level.player adsButtonPressed())
+  if(level.player adsButtonPressed()) {
     return 0;
+  }
 
-  if(level.player attackButtonPressed())
+  if(level.player attackButtonPressed()) {
     return 0;
+  }
 
   return 1;
 }
 
 hint_weapdrone_terminator(var_0) {
-  if(scripts\engine\utility::flag("jackal_missile_drone_active"))
+  if(scripts\engine\utility::flag("jackal_missile_drone_active")) {
     return 1;
+  }
 
-  if(level._id_A056._id_933B.size > 3)
+  if(level._id_A056._id_933B.size > 3) {
     return 0;
+  }
 
   return 0;
 }
 
 hint_dogfight_conditions(var_0) {
-  if(!isDefined(level.player._id_4BE7))
+  if(!isDefined(level.player._id_4BE7)) {
     return 0;
+  }
 
   var_1 = vectordot(anglesToForward(level._id_D127.angles), vectorNormalize(level.player._id_4BE7.origin - level._id_D127.origin));
   var_2 = distance(level.player._id_4BE7.origin, level._id_D127.origin);
 
-  if(var_2 > 18000 || var_1 < 0.85)
+  if(var_2 > 18000 || var_1 < 0.85) {
     return 0;
+  }
 
-  if(gettime() - var_0.last_time < 45000)
+  if(gettime() - var_0.last_time < 45000) {
     return 0;
+  }
 
-  if(gettime() - level._id_A056._id_A976 < 140000)
+  if(gettime() - level._id_A056._id_A976 < 140000) {
     return 0;
+  }
 
   return 1;
 }
@@ -357,17 +403,21 @@ hint_dogfight_terminator(var_0) {
 }
 
 hint_ascend_conditions(var_0) {
-  if(gettime() - var_0.last_time < 10000)
+  if(gettime() - var_0.last_time < 10000) {
     return 0;
+  }
 
-  if(gettime() - var_0.last_action_time < 90000)
+  if(gettime() - var_0.last_action_time < 90000) {
     return 0;
+  }
 
-  if(!common_ascend_descend_conditions())
+  if(!common_ascend_descend_conditions()) {
     return 0;
+  }
 
-  if(get_target_capship_local_z() > -2000)
+  if(get_target_capship_local_z() > -2000) {
     return 0;
+  }
 
   return 1;
 }
@@ -377,17 +427,21 @@ hint_ascend_terminator(var_0) {
 }
 
 hint_descend_conditions(var_0) {
-  if(gettime() - var_0.last_time < 10000)
+  if(gettime() - var_0.last_time < 10000) {
     return 0;
+  }
 
-  if(gettime() - var_0.last_action_time < 90000)
+  if(gettime() - var_0.last_action_time < 90000) {
     return 0;
+  }
 
-  if(!common_ascend_descend_conditions())
+  if(!common_ascend_descend_conditions()) {
     return 0;
+  }
 
-  if(get_target_capship_local_z() < 5000)
+  if(get_target_capship_local_z() < 5000) {
     return 0;
+  }
 
   return 1;
 }
@@ -397,17 +451,20 @@ hint_descend_terminator(var_0) {
 }
 
 common_ascend_descend_conditions() {
-  if(level._id_D127.spaceship_mode != "hover")
+  if(level._id_D127.spaceship_mode != "hover") {
     return 0;
+  }
 
-  if(!isDefined(level._id_A056.target_capitalship))
+  if(!isDefined(level._id_A056.target_capitalship)) {
     return 0;
+  }
 
   var_0 = vectordot(anglesToForward(level._id_D127.angles), vectorNormalize(level._id_A056.target_capitalship.origin - level._id_D127.origin));
   var_1 = distance(level._id_A056.target_capitalship.origin, level._id_D127.origin);
 
-  if(var_1 > 30000 || var_0 < 0.75)
+  if(var_1 > 30000 || var_0 < 0.75) {
     return 0;
+  }
 
   return 1;
 }

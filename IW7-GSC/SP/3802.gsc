@@ -55,10 +55,11 @@ _id_29DD(var_0) {
 }
 
 _id_2A0F(var_0) {
-  if(isDefined(self._id_117EF))
+  if(isDefined(self._id_117EF)) {
     var_1 = scripts\engine\utility::getStruct("apc_dropoff_anim_ent2", "targetname").origin;
-  else
+  } else {
     var_1 = scripts\engine\utility::getStruct("apc_dropoff_anim_ent", "targetname").origin;
+  }
 
   self._id_117EF = 1;
   var_2 = "j_thumb_ri_2";

@@ -57,8 +57,9 @@ toxic_gas_attack() {
     if(scripts\engine\utility::is_true(level.first_wall_of_death_complete)) {
       level.crab_boss_toxic_attack_index = var_0;
 
-      if(var_0 == 3)
+      if(var_0 == 3) {
         scripts\engine\utility::flag_clear("crab_boss_zombie_spawn");
+      }
 
       level.crab_boss toxic_attack();
       level.crab_boss do_toxic_spawn();
@@ -69,8 +70,9 @@ toxic_gas_attack() {
     level.crab_boss toxic_attack();
     level.crab_boss do_toxic_spawn();
 
-    if(var_0 == 3)
+    if(var_0 == 3) {
       scripts\engine\utility::flag_clear("crab_boss_zombie_spawn");
+    }
 
     level.crab_boss do_taunt();
     level.crab_boss do_toxic_spawn();
@@ -91,54 +93,69 @@ wall_goo_geiger_sfx(var_0) {
       level.boss_goo_bubble_2 = thread scripts\engine\utility::play_loopsound_in_space("boss_goo_bubble_large_lp_02", (3325, 2627, -106));
       break;
     case 2:
-      if(isDefined(level.boss_goo_geiger_1))
+      if(isDefined(level.boss_goo_geiger_1)) {
         level.boss_goo_geiger_1 moveTo((2638, 2200, -130), 2.0);
+      }
 
-      if(isDefined(level.boss_goo_geiger_2))
+      if(isDefined(level.boss_goo_geiger_2)) {
         level.boss_goo_geiger_2 moveTo((3545, 2058, -113), 2.0);
+      }
 
-      if(isDefined(level.boss_goo_geiger_3))
+      if(isDefined(level.boss_goo_geiger_3)) {
         level.boss_goo_geiger_3 moveTo((3461, 1862, -50), 2.0);
+      }
 
-      if(isDefined(level.boss_goo_bubble_1))
+      if(isDefined(level.boss_goo_bubble_1)) {
         level.boss_goo_bubble_1 moveTo((2638, 2200, -130), 2.0);
+      }
 
-      if(isDefined(level.boss_goo_bubble_2))
+      if(isDefined(level.boss_goo_bubble_2)) {
         level.boss_goo_bubble_2 moveTo((3480, 2310, -102), 2.0);
+      }
 
       break;
     case 3:
-      if(isDefined(level.boss_goo_geiger_1))
+      if(isDefined(level.boss_goo_geiger_1)) {
         level.boss_goo_geiger_1 moveTo((2818, 1258, -40), 2.0);
+      }
 
-      if(isDefined(level.boss_goo_bubble_1))
+      if(isDefined(level.boss_goo_bubble_1)) {
         level.boss_goo_bubble_1 moveTo((2818, 1258, -40), 2.0);
+      }
 
-      if(isDefined(level.boss_goo_geiger_2))
+      if(isDefined(level.boss_goo_geiger_2)) {
         level.boss_goo_geiger_2 delete();
+      }
 
-      if(isDefined(level.boss_goo_geiger_3))
+      if(isDefined(level.boss_goo_geiger_3)) {
         level.boss_goo_geiger_3 delete();
+      }
 
-      if(isDefined(level.boss_goo_bubble_2))
+      if(isDefined(level.boss_goo_bubble_2)) {
         level.boss_goo_bubble_2 delete();
+      }
 
       break;
     case 4:
-      if(isDefined(level.boss_goo_geiger_1))
+      if(isDefined(level.boss_goo_geiger_1)) {
         level.boss_goo_geiger_1 delete();
+      }
 
-      if(isDefined(level.boss_goo_geiger_2))
+      if(isDefined(level.boss_goo_geiger_2)) {
         level.boss_goo_geiger_2 delete();
+      }
 
-      if(isDefined(level.boss_goo_geiger_3))
+      if(isDefined(level.boss_goo_geiger_3)) {
         level.boss_goo_geiger_3 delete();
+      }
 
-      if(isDefined(level.boss_goo_bubble_1))
+      if(isDefined(level.boss_goo_bubble_1)) {
         level.boss_goo_bubble_1 delete();
+      }
 
-      if(isDefined(level.boss_goo_bubble_2))
+      if(isDefined(level.boss_goo_bubble_2)) {
         level.boss_goo_bubble_2 delete();
+      }
 
       break;
   }
@@ -193,13 +210,15 @@ play_charged_up_sfx(var_0) {
 stop_charged_up_sfx(var_0, var_1) {
   var_0 stoploopsound("cp_town_bomb_charged_up_lp");
 
-  if(var_1 == "sonic_ring_fail")
+  if(var_1 == "sonic_ring_fail") {
     var_0 playSound("cp_town_bomb_charge_fail");
+  }
 }
 
 refresh_interaction_for_all_players() {
-  foreach(var_1 in level.players)
-  var_1 scripts\cp\cp_interaction::refresh_interaction();
+  foreach(var_1 in level.players) {
+    var_1 scripts\cp\cp_interaction::refresh_interaction();
+  }
 }
 
 make_vehicle_teleporter_interaction() {
@@ -279,8 +298,9 @@ activate_toxic_patch_and_trigger(var_0) {
   var_4.origin = var_4.origin + (0, 0, 1024);
   var_4 thread _id_D051(var_4);
 
-  if(var_0 > 1)
+  if(var_0 > 1) {
     deactivate_toxic_patch_and_trigger(var_0 - 1);
+  }
 }
 
 get_toxic_patch_offset(var_0) {
@@ -321,8 +341,9 @@ _id_D051(var_0) {
 }
 
 try_sonic_beam_damage_player(var_0) {
-  if(!isDefined(var_0.next_toxic_trigger_damage_time))
+  if(!isDefined(var_0.next_toxic_trigger_damage_time)) {
     var_0.next_toxic_trigger_damage_time = 0;
+  }
 
   var_1 = gettime();
 
@@ -401,15 +422,17 @@ activate_final_sequence_blocker() {
 deactivate_final_sequence_blocker() {
   if(isDefined(level.wall_of_death_blocker_models)) {
     foreach(var_1 in level.wall_of_death_blocker_models) {
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         var_1 delete();
+      }
     }
   }
 
   var_3 = getEnt("death_wall_door_clip", "targetname");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 delete();
+  }
 }
 
 end_wall_of_death() {
@@ -421,8 +444,9 @@ end_wall_of_death() {
 debug_beat_wall_of_death() {}
 
 wail_all_player_trigger_teleporter(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level endon(var_0);
+  }
 
   var_2 = 22500;
 
@@ -480,8 +504,9 @@ wail_all_player_trigger_teleporter(var_0, var_1) {
     }
 
     if(var_3) {
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         level notify(var_1);
+      }
 
       return;
     }
@@ -495,8 +520,9 @@ death_wall_zombie_spawning_logic() {
   wait 1.5;
   var_0 = [(2744, 3725, -197), (3498, 2990, -197)];
 
-  foreach(var_3, var_2 in var_0)
-  var_0[var_3] = scripts\engine\utility::drop_to_ground(var_0[var_3], 0, -500);
+  foreach(var_3, var_2 in var_0) {
+    var_0[var_3] = ::scripts\engine\utility::drop_to_ground(var_0[var_3], 0, -500);
+  }
 
   var_4 = randomint(2);
 
@@ -554,8 +580,9 @@ load_death_wall_vfx() {
 play_toxic_ground_vfx(var_0) {
   var_1 = get_toxic_ground_vfx_locs(var_0);
 
-  foreach(var_3 in var_1)
-  level thread play_toxic_ground_vfx_at_pos(var_3);
+  foreach(var_3 in var_1) {
+    level thread play_toxic_ground_vfx_at_pos(var_3);
+  }
 }
 
 get_toxic_ground_vfx_locs(var_0) {
@@ -580,14 +607,16 @@ play_toxic_ground_vfx_at_pos(var_0) {
 
 revive_players_from_afterlife() {
   foreach(var_1 in level.players) {
-    if(scripts\cp\zombies\zombie_afterlife_arcade::is_in_afterlife_arcade(var_1))
+    if(scripts\cp\zombies\zombie_afterlife_arcade::is_in_afterlife_arcade(var_1)) {
       var_1 scripts\cp\cp_laststand::instant_revive(var_1);
+    }
   }
 }
 
 vehicle_teleporter_hint_func(var_0, var_1) {
-  if(scripts\engine\utility::is_true(level.vehicle_teleporter_is_charged))
+  if(scripts\engine\utility::is_true(level.vehicle_teleporter_is_charged)) {
     return &"CP_TOWN_INTERACTIONS_VEHICLE_TELEPORT_READY";
+  }
 
   return &"CP_TOWN_INTERACTIONS_ACTIVATE_TELEPORT";
 }

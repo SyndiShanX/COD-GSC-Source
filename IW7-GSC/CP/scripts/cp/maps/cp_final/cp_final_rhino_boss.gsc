@@ -4,8 +4,9 @@
 ************************************************************/
 
 rhino_boss_init() {
-  if(getdvarint("mammoth_fight") == 1)
+  if(getdvarint("mammoth_fight") == 1) {
     level.jump_to_mammoth = 1;
+  }
 
   rh_boss_stepregistration();
   init_rh_boss_flags();
@@ -61,8 +62,9 @@ init_rh_boss_flags() {
 }
 
 rh_boss_interactions() {
-  while(!scripts\engine\utility::flag_exist("interactions_initialized"))
+  while(!scripts\engine\utility::flag_exist("interactions_initialized")) {
     wait 0.1;
+  }
 
   scripts\engine\utility::flag_wait("interactions_initialized");
   scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(0, "rhino_ammo_crate", undefined, undefined, ::rhino_ammo_crate_hint, ::rhino_ammo_crate_act, 0, 0, undefined);
@@ -91,8 +93,9 @@ start_rhino_fight() {
   move_players_to_rhino_fight();
   update_spawning_for_rhino_fight();
 
-  foreach(var_1 in level.players)
-  var_1 scripts\cp\utility::allow_player_teleport(0);
+  foreach(var_1 in level.players) {
+    var_1 scripts\cp\utility::allow_player_teleport(0);
+  }
 }
 
 move_players_to_rhino_fight() {
@@ -183,27 +186,31 @@ setupplayerloadouts() {
     var_4 takeweapon(var_4 scripts\cp\utility::getvalidtakeweapon());
     var_7 = scripts\cp\utility::getrawbaseweaponname(var_1[var_5]);
 
-    if(isDefined(var_4.weapon_build_models[var_7]))
+    if(isDefined(var_4.weapon_build_models[var_7])) {
       scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_4, var_4.weapon_build_models[var_7]);
-    else
+    } else {
       scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_4, var_1[var_5]);
+    }
 
     var_8 = scripts\cp\utility::getrawbaseweaponname(var_0[var_6]);
 
-    if(isDefined(var_4.weapon_build_models[var_8]))
+    if(isDefined(var_4.weapon_build_models[var_8])) {
       scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_4, var_4.weapon_build_models[var_8]);
-    else
+    } else {
       scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_4, var_1[var_5]);
+    }
 
     var_4.total_currency_earned = min(10000, var_4 scripts\cp\cp_persistence::get_player_max_currency());
     var_4 scripts\cp\cp_persistence::set_player_currency(10000);
 
-    foreach(var_10 in var_2)
-    var_4 thread scripts\cp\zombies\zombies_perk_machines::give_zombies_perk_immediate(var_10, 1);
+    foreach(var_10 in var_2) {
+      var_4 thread scripts\cp\zombies\zombies_perk_machines::give_zombies_perk_immediate(var_10, 1);
+    }
   }
 
-  if(isDefined(level.pap_max) && level.pap_max < 3)
+  if(isDefined(level.pap_max) && level.pap_max < 3) {
     level.pap_max++;
+  }
 
   level[[level.upgrade_weapons_func]]();
   level thread[[level.upgrade_weapons_func]]();
@@ -255,10 +262,11 @@ initial_door_layout() {
   level thread move_laser();
   level thread init_cargo_doors();
 
-  if(!isDefined(level.jump_to_mammoth))
+  if(!isDefined(level.jump_to_mammoth)) {
     level thread rhino_fight_sequence();
-  else
+  } else {
     level thread debug_to_mammoth();
+  }
 }
 
 rhino_fight_sequence() {
@@ -278,14 +286,16 @@ rhino_fight_sequence() {
 }
 
 _id_10B42() {
-  while(level.rhino_array.size < 1)
+  while(level.rhino_array.size < 1) {
     wait 0.1;
+  }
 
   level thread rhino_boss_fight_vo();
   scripts\engine\utility::flag_wait("init_rhinos_spawned");
 
-  while(level.rhino_array.size > 0)
+  while(level.rhino_array.size > 0) {
     wait 0.1;
+  }
 }
 
 _id_10B43() {
@@ -373,8 +383,9 @@ init_door_clip() {
   foreach(var_2 in var_0) {
     var_3 = getEntArray(var_2, "targetname");
 
-    foreach(var_5 in var_3)
-    wait 0.1;
+    foreach(var_5 in var_3) {
+      wait 0.1;
+    }
   }
 
   foreach(var_2 in var_0) {
@@ -401,26 +412,30 @@ open_stage_2_area() {
   var_0 = getEntArray("rhino_door_stage_2_clip", "targetname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.nav_id))
+    if(isDefined(var_2.nav_id)) {
       destroynavobstacle(var_2.nav_id);
+    }
 
     var_2 notsolid();
   }
 
   var_0 = getEntArray("rhino_door_stage_2", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
+  }
 
   var_0 = getEntArray("stage_3_bollard", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 movez(-34, 2, 0.1, 0.1);
+  foreach(var_2 in var_0) {
+    var_2 movez(-34, 2, 0.1, 0.1);
+  }
 }
 
 listen_for_rhino_trigger() {
-  while(!isDefined(level.players))
+  while(!isDefined(level.players)) {
     wait 0.1;
+  }
 
   var_0 = scripts\engine\utility::getStructArray("initial_rhino_spawn", "targetname");
   var_1 = var_0[0].origin;
@@ -430,8 +445,9 @@ listen_for_rhino_trigger() {
 
   while(!var_4) {
     foreach(var_6 in level.players) {
-      if(distance2dsquared(var_1, var_6.origin) < var_3)
+      if(distance2dsquared(var_1, var_6.origin) < var_3) {
         var_4 = 1;
+      }
     }
 
     wait 0.1;
@@ -448,10 +464,11 @@ listen_for_rhino_trigger() {
   level.specialroundcounter = 3;
   wait 3;
 
-  if(!isDefined(level.jump_to_mammoth))
+  if(!isDefined(level.jump_to_mammoth)) {
     spawn_initial_rhino();
-  else
+  } else {
     scripts\engine\utility::flag_set("spawning_ready");
+  }
 }
 
 spawn_initial_rhino() {
@@ -533,12 +550,14 @@ break_door(var_0) {
 
   foreach(var_3 in var_1) {
     if(var_0 == "rhino_sentry_door") {
-      if(var_3 == var_5)
+      if(var_3 == var_5) {
         continue;
+      }
     }
 
-    if(isDefined(var_3.nav_id))
+    if(isDefined(var_3.nav_id)) {
       destroynavobstacle(var_3.nav_id);
+    }
 
     var_3 notsolid();
     var_3 hide();
@@ -568,16 +587,18 @@ _id_1071B() {
         var_6 = scripts\engine\utility::random(var_5);
         var_7 = _id_10719(var_6);
 
-        if(isDefined(var_7))
+        if(isDefined(var_7)) {
           var_0++;
+        }
       }
     }
 
     wait(var_3[level.players.size - 1]);
   }
 
-  while(level.current_num_spawned_enemies > 0)
+  while(level.current_num_spawned_enemies > 0) {
     wait 0.1;
+  }
 }
 
 get_current_spawners() {
@@ -587,8 +608,9 @@ get_current_spawners() {
   var_2 = [];
 
   foreach(var_4 in var_0) {
-    if(scripts\engine\utility::is_true(var_4.active))
+    if(scripts\engine\utility::is_true(var_4.active)) {
       var_2[var_2.size] = var_4;
+    }
   }
 
   return var_2;
@@ -604,8 +626,9 @@ update_spawn_portals() {
     }
     var_2 = scripts\engine\utility::getStruct(var_0[var_1].target, "targetname");
 
-    if(!isDefined(var_2.angles))
+    if(!isDefined(var_2.angles)) {
       var_2.angles = (0, 0, 0);
+    }
 
     var_3 = var_2.origin;
     var_2.fx = spawn("script_model", var_3 + (0, 0, 50));
@@ -625,8 +648,9 @@ update_spawn_portals() {
     }
     var_2 = scripts\engine\utility::getStruct(var_0[var_1].target, "targetname");
 
-    if(!isDefined(var_2.angles))
+    if(!isDefined(var_2.angles)) {
       var_2.angles = (0, 0, 0);
+    }
 
     var_3 = var_2.origin;
     var_2.fx = spawn("script_model", var_3 + (0, 0, 50));
@@ -642,15 +666,17 @@ delete_portal_models() {
   var_0 = scripts\engine\utility::getStructArray("spawner_1", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.portal_struct) && isDefined(var_2.portal_struct.fx))
+    if(isDefined(var_2.portal_struct) && isDefined(var_2.portal_struct.fx)) {
       var_2.portal_struct.fx delete();
+    }
   }
 
   var_0 = scripts\engine\utility::getStructArray("spawner_2", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.portal_struct) && isDefined(var_2.portal_struct.fx))
+    if(isDefined(var_2.portal_struct) && isDefined(var_2.portal_struct.fx)) {
       var_2.portal_struct.fx delete();
+    }
   }
 }
 
@@ -686,21 +712,24 @@ spawn_phantoms() {
       if(var_0.size > 0) {
         var_6 = scripts\engine\utility::random(var_0);
 
-        if(var_1 % 2 == 0)
+        if(var_1 % 2 == 0) {
           var_7 = _id_10719(var_6);
-        else
+        } else {
           var_7 = spawn_phantom(var_6);
+        }
 
-        if(isDefined(var_7))
+        if(isDefined(var_7)) {
           var_1++;
+        }
       }
     }
 
     wait(var_3[level.players.size - 1]);
   }
 
-  while(level.current_num_spawned_enemies > 0)
+  while(level.current_num_spawned_enemies > 0) {
     wait 0.1;
+  }
 }
 
 spawn_phantom(var_0) {
@@ -772,8 +801,9 @@ rhino_audio_monitor() {
 move_laser() {
   wait 10;
 
-  while(!isDefined(level.portal_gun))
+  while(!isDefined(level.portal_gun)) {
     wait 0.1;
+  }
 
   scripts\engine\utility::flag_wait("start_rhino_sequence");
   level.portal_gun rotateTo(level.portal_gun._id_10B9F, 3, 0.1, 0.1);
@@ -835,16 +865,19 @@ run_tracking_laser() {
 play_laser_fx(var_0) {
   wait 1;
 
-  foreach(var_2 in level.players)
-  level.target_laser_fx = playfxontagsbetweenclients(level._effect["target_laser"], level.portal_gun.laser_node_start, "tag_origin", level.portal_gun.laser_node_end, "tag_origin", var_2);
+  foreach(var_2 in level.players) {
+    level.target_laser_fx = playfxontagsbetweenclients(level._effect["target_laser"], level.portal_gun.laser_node_start, "tag_origin", level.portal_gun.laser_node_end, "tag_origin", var_2);
+  }
 }
 
 make_laser_angry() {
-  if(isDefined(level.target_laser_fx))
+  if(isDefined(level.target_laser_fx)) {
     level.target_laser_fx delete();
+  }
 
-  foreach(var_1 in level.players)
-  level.target_laser_fx = playfxontagsbetweenclients(level._effect["target_laser_angry"], level.portal_gun.laser_node_start, "tag_origin", level.portal_gun.laser_node_end, "tag_origin", var_1);
+  foreach(var_1 in level.players) {
+    level.target_laser_fx = playfxontagsbetweenclients(level._effect["target_laser_angry"], level.portal_gun.laser_node_start, "tag_origin", level.portal_gun.laser_node_end, "tag_origin", var_1);
+  }
 }
 
 aim_and_fire_laser() {
@@ -929,8 +962,9 @@ _id_6D02(var_0) {
   var_9 = var_0;
 
   foreach(var_6 in var_4) {
-    if(!isDefined(var_6.angles))
+    if(!isDefined(var_6.angles)) {
       var_6.angles = (0, 0, 0);
+    }
 
     playfxbetweenpoints(level._effect[var_1], var_6.origin, var_6.angles, var_9);
   }
@@ -938,8 +972,9 @@ _id_6D02(var_0) {
   playsoundatpos(level.portal_gun.origin, "zmb_railgun_fire");
   wait 0.1;
 
-  foreach(var_6 in var_4)
-  var_6.fx_spot delete();
+  foreach(var_6 in var_4) {
+    var_6.fx_spot delete();
+  }
 
   playFX(level._effect[var_3], var_9);
   level.portal_gun radiusdamage(var_9, 100, 180, 180);
@@ -961,13 +996,15 @@ rhino_ammo_crate_hint(var_0, var_1) {
 rhino_ammo_crate_act(var_0, var_1) {
   var_2 = var_1 getcurrentweapon();
 
-  if(!issubstr(var_2, "venom"))
+  if(!issubstr(var_2, "venom")) {
     var_1 givemaxammo(var_2);
+  }
 }
 
 fake_console_timer(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait(var_0);
+  }
 
   show_console_to_activate();
   turn_on_spawners("spawner_1", undefined, 1);
@@ -975,8 +1012,9 @@ fake_console_timer(var_0) {
   var_1 = scripts\engine\utility::random(level.players);
   var_1 thread scripts\cp\cp_vo::try_to_play_vo("rhino_area_console", "final_comment_vo", "highest", 5, 1, 0, 0, 100);
 
-  while(level.rhino_consoles_activated < 3)
+  while(level.rhino_consoles_activated < 3) {
     wait 0.1;
+  }
 
   scripts\engine\utility::flag_set("all_buttons_pressed");
 }
@@ -999,15 +1037,17 @@ endless_wave() {
       if(var_7.size > 0) {
         var_8 = scripts\engine\utility::random(var_7);
 
-        if(var_0 > 10 && var_0 % 15 == 0 && level.rhino_array.size < level.players.size)
+        if(var_0 > 10 && var_0 % 15 == 0 && level.rhino_array.size < level.players.size) {
           var_9 = spawn_rhino(var_8);
-        else if(var_0 % 5 == 0)
+        } else if(var_0 % 5 == 0) {
           var_9 = spawn_phantom(var_8);
-        else
+        } else {
           var_9 = _id_10719(var_8);
+        }
 
-        if(isDefined(var_9))
+        if(isDefined(var_9)) {
           var_0++;
+        }
       }
     }
 
@@ -1038,15 +1078,17 @@ emp_wave() {
       if(var_6.size > 0) {
         var_7 = scripts\engine\utility::random(var_6);
 
-        if(var_0 > 10 && var_0 % 15 == 0 && level.rhino_array.size < level.players.size)
+        if(var_0 > 10 && var_0 % 15 == 0 && level.rhino_array.size < level.players.size) {
           var_8 = spawn_rhino(var_7);
-        else if(var_0 % 5 == 0)
+        } else if(var_0 % 5 == 0) {
           var_8 = spawn_phantom(var_7);
-        else
+        } else {
           var_8 = _id_10719(var_7);
+        }
 
-        if(isDefined(var_8))
+        if(isDefined(var_8)) {
           var_0++;
+        }
       }
     }
 
@@ -1091,8 +1133,9 @@ turn_off_spawners(var_0, var_1) {
 
     if(isDefined(var_5.script_parameters)) {
       foreach(var_7 in var_2) {
-        if(var_7.script_parameters == var_5.script_parameters)
+        if(var_7.script_parameters == var_5.script_parameters) {
           var_7 show();
+        }
       }
     }
   }
@@ -1106,8 +1149,9 @@ turn_off_spawners(var_0, var_1) {
 
       if(isDefined(var_5.script_parameters)) {
         foreach(var_7 in var_2) {
-          if(var_7.script_parameters == var_5.script_parameters)
+          if(var_7.script_parameters == var_5.script_parameters) {
             var_7 show();
+          }
         }
       }
     }
@@ -1124,8 +1168,9 @@ turn_on_spawners(var_0, var_1, var_2) {
 
     if(scripts\engine\utility::is_true(var_2) && isDefined(var_6.script_parameters)) {
       foreach(var_8 in var_3) {
-        if(var_8.script_parameters == var_6.script_parameters)
+        if(var_8.script_parameters == var_6.script_parameters) {
           var_8 hide();
+        }
       }
     }
 
@@ -1141,8 +1186,9 @@ turn_on_spawners(var_0, var_1, var_2) {
 
       if(scripts\engine\utility::is_true(var_2) && isDefined(var_6.script_parameters)) {
         foreach(var_8 in var_3) {
-          if(var_8.script_parameters == var_6.script_parameters)
+          if(var_8.script_parameters == var_6.script_parameters) {
             var_8 hide();
+          }
         }
       }
 
@@ -1201,8 +1247,9 @@ damage_monitor(var_0, var_1) {
     if(var_4 >= var_0.nextdamagetime) {
       var_0.nextdamagetime = var_4 + 1000;
 
-      if(level.emp_charge > 1)
+      if(level.emp_charge > 1) {
         level.emp_charge--;
+      }
     }
   }
 }
@@ -1241,29 +1288,33 @@ turn_on_lights(var_0) {
   wait(var_0);
   var_1 = getEntArray("rhinofight", "script_noteworthy");
 
-  foreach(var_3 in var_1)
-  var_3 setscriptablepartstate("lights", "on");
+  foreach(var_3 in var_1) {
+    var_3 setscriptablepartstate("lights", "on");
+  }
 }
 
 turn_off_lights() {
   var_0 = getEntArray("rhinofight", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("lights", "off");
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("lights", "off");
+  }
 }
 
 turn_on_monitors() {
   level.currentneilstate = "angry";
 
-  for(var_0 = 0; var_0 < level.players.size; var_0++)
+  for(var_0 = 0; var_0 < level.players.size; var_0++) {
     level.players[var_0] thread scripts\cp\maps\cp_final\cp_final::update_special_mode_for_player(level.players[var_0]);
+  }
 }
 
 turn_off_monitors() {
   level.currentneilstate = "blank";
 
-  for(var_0 = 0; var_0 < level.players.size; var_0++)
+  for(var_0 = 0; var_0 < level.players.size; var_0++) {
     level.players[var_0] thread scripts\cp\maps\cp_final\cp_final::update_special_mode_for_player(level.players[var_0]);
+  }
 }
 
 debug_to_mammoth() {
@@ -1284,8 +1335,9 @@ release_mammoths() {
   spawn_mammoth("mammoth_spawn", (0, 100, 0));
   spawn_mammoth("mammoth_spawn");
 
-  foreach(var_1 in level.players)
-  var_1 thread check_player_for_damage();
+  foreach(var_1 in level.players) {
+    var_1 thread check_player_for_damage();
+  }
 
   var_3 = "mammoth_spawn_door_1";
   var_4 = getEntArray(var_3, "targetname");
@@ -1294,8 +1346,9 @@ release_mammoths() {
   _id_6D02(var_5);
   break_door(var_3);
 
-  if(isDefined(level.target_laser_fx))
+  if(isDefined(level.target_laser_fx)) {
     level.target_laser_fx delete();
+  }
 
   var_1 = scripts\engine\utility::random(level.players);
   var_1 thread scripts\cp\cp_vo::try_to_play_vo("rhino_behemoth_spawn", "final_comment_vo", "highest", 5, 1, 0, 0, 100);
@@ -1305,8 +1358,9 @@ spawn_mammoth(var_0, var_1) {
   var_2 = scripts\engine\utility::getStruct(var_0, "targetname");
   var_3 = spawn_rhino(var_2);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3.origin = var_3.origin + var_1;
+  }
 
   var_3.is_mammoth = 1;
   var_3.mammoth_health_threshold = 0.8;
@@ -1333,11 +1387,13 @@ check_player_for_damage() {
   var_2 = 50;
   var_3 = var_2 * var_2;
 
-  while(!isDefined(level.mammoth_spawned_fx))
+  while(!isDefined(level.mammoth_spawned_fx)) {
     wait 0.1;
+  }
 
-  while(!isDefined(level.mammoth_spawned_fx_small))
+  while(!isDefined(level.mammoth_spawned_fx_small)) {
     wait 0.1;
+  }
 
   for(;;) {
     if(isDefined(level.meph_fight_started)) {
@@ -1405,8 +1461,9 @@ mammoth_hit_fx() {
       }
     }
 
-    if(!var_2)
+    if(!var_2) {
       level thread trigger_mammoth_small_fx(var_4);
+    }
 
     self.health = self.maxhealth;
   }
@@ -1417,8 +1474,9 @@ mammoth_hit_fx() {
 rhino_fight_over() {
   level notify("rhino_fight_over");
 
-  foreach(var_1 in level.mammoth_fx)
-  var_1 delete();
+  foreach(var_1 in level.mammoth_fx) {
+    var_1 delete();
+  }
 
   level thread delete_portal_models();
   level.no_loot_drop = undefined;
@@ -1435,8 +1493,9 @@ rhino_fight_over() {
       scripts\cp\cp_laststand::clear_last_stand_timer(var_5);
       var_5 notify("revive_success");
 
-      if(isDefined(var_5.reviveent))
+      if(isDefined(var_5.reviveent)) {
         var_5.reviveent notify("revive_success");
+      }
     }
 
     scripts\cp\maps\cp_final\cp_final_vo::clear_up_all_vo(var_5);
@@ -1446,8 +1505,9 @@ rhino_fight_over() {
   scripts\cp\utility::play_bink_video("sysload_o1", 106, 1);
   wait 106.5;
 
-  foreach(var_5 in level.players)
-  var_5 clearclienttriggeraudiozone(0.3);
+  foreach(var_5 in level.players) {
+    var_5 clearclienttriggeraudiozone(0.3);
+  }
 
   if(var_3) {
     var_9 = 0;
@@ -1458,8 +1518,9 @@ rhino_fight_over() {
       var_13 = var_5 getrankedplayerdata("cp", "haveItems", "item_3");
       var_14 = var_5 getrankedplayerdata("cp", "haveItems", "item_4");
 
-      if(var_11 && var_12 && var_13 && var_14)
+      if(var_11 && var_12 && var_13 && var_14) {
         var_9 = 1;
+      }
     }
 
     if(var_9) {
@@ -1475,8 +1536,9 @@ rhino_fight_over() {
   preloadcinematicforall(level.movie_playing);
   playcinematicforalllooping(level.movie_playing);
 
-  foreach(var_5 in level.players)
-  var_5 scripts\cp\zombies\achievement::update_achievement("THE_END", 1);
+  foreach(var_5 in level.players) {
+    var_5 scripts\cp\zombies\achievement::update_achievement("THE_END", 1);
+  }
 
   level.pause_nag_vo = 0;
 }
@@ -1515,8 +1577,9 @@ delay_give_rewards() {
 
   level thread eecompletevo();
 
-  foreach(var_1 in level.players)
-  var_1 scripts\cp\utility::allow_player_teleport(1);
+  foreach(var_1 in level.players) {
+    var_1 scripts\cp\utility::allow_player_teleport(1);
+  }
 }
 
 eecompletevo() {
@@ -1545,8 +1608,9 @@ trigger_mammoth_small_fx(var_0, var_1) {
   level endon("rhino_fight_over");
   var_2 = spawn("script_model", var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = (0, 0, 0);
+  }
 
   var_2.angles = var_1;
   level.mammoth_fx[level.mammoth_fx.size] = var_2;
@@ -1619,8 +1683,9 @@ rhino_sentry_act(var_0, var_1) {
   if(isDefined(var_1.allow_carry) && var_1.allow_carry == 0) {
     return;
   }
-  if(var_1 scripts\cp\utility::is_valid_player())
+  if(var_1 scripts\cp\utility::is_valid_player()) {
     var_1 thread scripts\cp\cp_weapon_autosentry::givesentry("crafted_autosentry");
+  }
 
   var_2 = getEntArray("rhino_sentry_model", "targetname");
   var_2 = sortbydistance(var_2, var_0.origin);
@@ -1633,15 +1698,17 @@ init_rk_candy_interactions() {
   level.available_crate_perks = scripts\engine\utility::array_randomize_objects(["perk_machine_revive", "perk_machine_flash", "perk_machine_tough", "perk_machine_run", "perk_machine_rat_a_tat"]);
   var_0 = scripts\engine\utility::getStructArray("perk_candy_box", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
+  foreach(var_2 in var_0) {
+    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
+  }
 }
 
 turn_on_perk_boxes() {
   var_0 = scripts\engine\utility::getStructArray("perk_candy_box", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  createperkboxes(var_2);
+  foreach(var_2 in var_0) {
+    createperkboxes(var_2);
+  }
 }
 
 createperkboxes(var_0) {
@@ -1651,8 +1718,9 @@ createperkboxes(var_0) {
   level.available_crate_perks = scripts\engine\utility::array_remove(level.available_crate_perks, var_3);
   var_4 = spawn("script_model", var_1.origin);
 
-  if(isDefined(var_1.angles))
+  if(isDefined(var_1.angles)) {
     var_4.angles = var_1.angles;
+  }
 
   var_4 setModel("tag_origin_rk_perks");
   var_1.model = var_4;
@@ -1764,14 +1832,17 @@ restockperkafternextrelic(var_0, var_1, var_2) {
 }
 
 perkbox_hintfunc(var_0, var_1) {
-  if(!isDefined(var_0.perk))
+  if(!isDefined(var_0.perk)) {
     return "";
+  }
 
-  if(isDefined(var_1.zombies_perks) && var_1.zombies_perks.size > 4)
+  if(isDefined(var_1.zombies_perks) && var_1.zombies_perks.size > 4) {
     return "";
+  }
 
-  if(var_1 scripts\cp\utility::has_zombie_perk(var_0.perk))
+  if(var_1 scripts\cp\utility::has_zombie_perk(var_0.perk)) {
     return "";
+  }
 
   level thread perkbox_usefunc(var_0, var_1);
   return "";
@@ -1782,15 +1853,17 @@ perkboxuse(var_0, var_1) {
 }
 
 init_rh_neil_monitors() {
-  while(!isDefined(level.current_personal_interaction_structs))
+  while(!isDefined(level.current_personal_interaction_structs)) {
     wait 0.1;
+  }
 
   var_0 = scripts\engine\utility::getStructArray("rhino_neil_monitors", "script_noteworthy");
   level.special_mode_activation_funcs["rhino_neil_monitors"] = ::setrhinoneilstatepent;
   level.normal_mode_activation_funcs["rhino_neil_monitors"] = ::setrhinoneilstatepent;
 
-  foreach(var_2 in var_0)
-  scripts\cp\maps\cp_final\cp_final::addtopersonalinteractionlist(var_2);
+  foreach(var_2 in var_0) {
+    scripts\cp\maps\cp_final\cp_final::addtopersonalinteractionlist(var_2);
+  }
 }
 
 setrhinoneilstatepent(var_0, var_1, var_2, var_3) {
@@ -1812,13 +1885,15 @@ setrhinoneilstatepent(var_0, var_1, var_2, var_3) {
       break;
   }
 
-  if(!isDefined(level.neil_monitors))
+  if(!isDefined(level.neil_monitors)) {
     level.neil_monitors = [];
+  }
 
   level.neil_monitors[level.neil_monitors.size] = var_0;
 
-  if(!isDefined(var_3.neil_monitors))
+  if(!isDefined(var_3.neil_monitors)) {
     var_3.neil_monitors = [];
+  }
 
   var_3.neil_monitors[var_3.neil_monitors.size] = var_0;
 }
@@ -1826,8 +1901,9 @@ setrhinoneilstatepent(var_0, var_1, var_2, var_3) {
 show_console_to_activate() {
   var_0 = getEntArray("rhino_console_screen", "targetname");
 
-  foreach(var_2 in var_0)
-  update_neil_face_model("cp_final_monitor_large_screen_happy", var_2.origin);
+  foreach(var_2 in var_0) {
+    update_neil_face_model("cp_final_monitor_large_screen_happy", var_2.origin);
+  }
 }
 
 update_neil_face_model(var_0, var_1) {
@@ -1838,10 +1914,11 @@ update_neil_face_model(var_0, var_1) {
 }
 
 getmodelfromstruct(var_0) {
-  if(isDefined(var_0.script_label))
+  if(isDefined(var_0.script_label)) {
     return var_0.script_label;
-  else
+  } else {
     return "cp_final_monitor_large_screen_black";
+  }
 }
 
 setuplnfinteractions() {
@@ -1898,15 +1975,17 @@ empconsoleuse(var_0, var_1) {
   playFX(level._effect["rhino_emp"], var_2);
   playsoundatpos(var_2, "emp_grenade_explode_default");
 
-  foreach(var_4 in level.spawned_enemies)
-  var_4 dodamage(var_4.health, var_2);
+  foreach(var_4 in level.spawned_enemies) {
+    var_4 dodamage(var_4.health, var_2);
+  }
 
   wait 0.1;
   playsoundatpos(var_2, "zmb_emp_poweroff");
   var_6 = getEntArray("rhino_sentry_model", "targetname");
 
-  foreach(var_8 in var_6)
-  var_8 notify("death");
+  foreach(var_8 in var_6) {
+    var_8 notify("death");
+  }
 
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
 }

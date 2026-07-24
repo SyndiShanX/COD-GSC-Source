@@ -151,8 +151,9 @@ _id_6F1A() {
 
   for(;;) {
     if(var_1 < var_0.size) {
-      foreach(var_4 in var_2)
-      var_4 playSound(var_0[var_1]);
+      foreach(var_4 in var_2) {
+        var_4 playSound(var_0[var_1]);
+      }
 
       wait(randomfloatrange(7.5, 15.0));
       var_1 = var_1 + 1;
@@ -256,8 +257,9 @@ _id_E834() {
   level endon("game_ended");
   var_0 = getEntArray("anim_hydroponics", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_1F9A();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_1F9A();
+  }
 }
 
 _id_1F9A() {
@@ -288,8 +290,9 @@ _id_E835() {
 
     foreach(var_7 in var_2) {
       foreach(var_4 in var_1[var_0]) {
-        if(isDefined(var_4.target))
+        if(isDefined(var_4.target)) {
           var_4 linkTo(var_2[var_4.target]);
+        }
       }
     }
   }
@@ -324,8 +327,9 @@ _id_E836() {
 }
 
 _id_1F9B(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 waittill("trigger");
+  }
 
   self playSound("frontier_cover_move_sfx");
   self setscriptablepartstate("root", "raise", 0);

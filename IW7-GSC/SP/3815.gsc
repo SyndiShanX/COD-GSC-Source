@@ -50,30 +50,31 @@ _id_13C2A() {
 
     foreach(var_6 in var_4) {
       if(isDefined(var_6.script_parameters)) {
-        if(var_6.script_parameters == "lounge_terminal" || var_6.script_parameters == "lounge_terminal_2")
+        if(var_6.script_parameters == "lounge_terminal" || var_6.script_parameters == "lounge_terminal_2") {
           var_6 hide();
+        }
       }
     }
 
     foreach(var_9 in var_3) {
       switch (var_9.script_noteworthy) {
         case "locker_body_pieces":
-          var_2._id_13C28["locker_body_pieces"] = scripts\engine\utility::array_add(var_2._id_13C28["locker_body_pieces"], var_9);
+          var_2._id_13C28["locker_body_pieces"] = ::scripts\engine\utility::array_add(var_2._id_13C28["locker_body_pieces"], var_9);
           break;
         case "primary":
-          var_2._id_13C28["locker_primary_weapons"] = scripts\engine\utility::array_add(var_2._id_13C28["locker_primary_weapons"], var_9);
+          var_2._id_13C28["locker_primary_weapons"] = ::scripts\engine\utility::array_add(var_2._id_13C28["locker_primary_weapons"], var_9);
           var_2._id_D8D3 = var_9;
           break;
         case "secondary":
-          var_2._id_13C28["locker_primary_weapons"] = scripts\engine\utility::array_add(var_2._id_13C28["locker_primary_weapons"], var_9);
+          var_2._id_13C28["locker_primary_weapons"] = ::scripts\engine\utility::array_add(var_2._id_13C28["locker_primary_weapons"], var_9);
           var_2._id_F0BA = var_9;
           break;
         case "heavy":
-          var_2._id_13C28["locker_primary_weapons"] = scripts\engine\utility::array_add(var_2._id_13C28["locker_primary_weapons"], var_9);
+          var_2._id_13C28["locker_primary_weapons"] = ::scripts\engine\utility::array_add(var_2._id_13C28["locker_primary_weapons"], var_9);
           var_2._id_8CED = var_9;
           break;
         case "locker_misc_weapons":
-          var_2._id_13C28["locker_misc_weapons"] = scripts\engine\utility::array_add(var_2._id_13C28["locker_misc_weapons"], var_9);
+          var_2._id_13C28["locker_misc_weapons"] = ::scripts\engine\utility::array_add(var_2._id_13C28["locker_misc_weapons"], var_9);
           break;
         case "locker_object":
           var_2._id_AF14 = var_9;
@@ -91,19 +92,22 @@ _id_13C2A() {
   var_12 = level._id_13C29._id_AF20["player_locker"]._id_13C28["locker_primary_weapons"];
 
   if(isDefined(var_12)) {
-    foreach(var_14 in var_12)
-    var_14 hide();
+    foreach(var_14 in var_12) {
+      var_14 hide();
+    }
   }
 }
 
 _id_966E() {
   self._id_F0BA.angles = self._id_F0BA.angles + (0, 180, 0);
 
-  foreach(var_1 in self._id_13C28["locker_primary_weapons"])
-  var_1 linkTo(self._id_AF14, "gun_rack_jt");
+  foreach(var_1 in self._id_13C28["locker_primary_weapons"]) {
+    var_1 linkTo(self._id_AF14, "gun_rack_jt");
+  }
 
-  if(isDefined(self._id_8A0A))
+  if(isDefined(self._id_8A0A)) {
     self._id_8A0A linkTo(self._id_AF14, "gun_rack_jt");
+  }
 
   scripts\engine\utility::waitframe();
 
@@ -128,18 +132,21 @@ _id_966E() {
 _id_BC9E(var_0, var_1, var_2) {
   var_3 = 0.5;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_3 = var_2;
+  }
 
   var_4 = [];
 
-  if(var_1 == "up")
+  if(var_1 == "up") {
     var_5 = (0, 0, 38);
-  else
+  } else {
     var_5 = (0, 0, -38);
+  }
 
-  foreach(var_7 in var_0)
-  var_4 = scripts\engine\utility::array_add(var_4, var_7.origin);
+  foreach(var_7 in var_0) {
+    var_4 = scripts\engine\utility::array_add(var_4, var_7.origin);
+  }
 
   foreach(var_12, var_10 in var_0) {
     var_11 = var_4[var_12] + var_5;
@@ -150,13 +157,15 @@ _id_BC9E(var_0, var_1, var_2) {
 _id_BC3D(var_0, var_1) {
   var_2 = [];
 
-  if(var_1 == "right")
+  if(var_1 == "right") {
     var_3 = anglestoright(self.angles) * -24.0;
-  else
+  } else {
     var_3 = anglestoright(self.angles) * 24.0;
+  }
 
-  foreach(var_5 in var_0)
-  var_2 = scripts\engine\utility::array_add(var_2, var_5.origin);
+  foreach(var_5 in var_0) {
+    var_2 = scripts\engine\utility::array_add(var_2, var_5.origin);
+  }
 
   foreach(var_10, var_8 in var_0) {
     var_9 = var_2[var_10] + var_3;
@@ -185,10 +194,11 @@ _id_7D64(var_0) {
       break;
   }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return undefined;
-  else
+  } else {
     return var_1;
+  }
 }
 
 _id_CD79() {

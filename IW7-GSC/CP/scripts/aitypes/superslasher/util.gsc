@@ -11,13 +11,15 @@ forcestagger(var_0) {
   if(!isDefined(self._blackboard.bstaggerrequested)) {
     self._blackboard.bstaggerrequested = 1;
 
-    if(scripts\aitypes\superslasher\behaviors::superslasher_isonground())
+    if(scripts\aitypes\superslasher\behaviors::superslasher_isonground()) {
       thread queueinterruptible("ground_stagger");
-    else if(isonroof())
+    } else if(isonroof()) {
       thread queueinterruptible("roof_stagger");
+    }
 
-    if(var_0)
+    if(var_0) {
       drop_max_ammo();
+    }
   }
 }
 
@@ -36,8 +38,9 @@ queueinterruptible(var_0) {
   self endon("death");
   self endon("queue_interruptible");
 
-  while(isDefined(self._blackboard.buninterruptibleanim))
+  while(isDefined(self._blackboard.buninterruptibleanim)) {
     wait 0.05;
+  }
 
   scripts\asm\asm::asm_setstate(var_0);
 }
@@ -53,13 +56,15 @@ requestshockwave() {
 }
 
 requestgotoroof() {
-  if(scripts\aitypes\superslasher\behaviors::superslasher_isonground() || scripts\aitypes\superslasher\behaviors::superslasher_isgoingtoground())
+  if(scripts\aitypes\superslasher\behaviors::superslasher_isonground() || scripts\aitypes\superslasher\behaviors::superslasher_isgoingtoground()) {
     self._blackboard.bgotoroofrequested = 1;
+  }
 }
 
 requestgotoground() {
-  if(scripts\aitypes\superslasher\behaviors::superslasher_isonroof() || scripts\aitypes\superslasher\behaviors::superslasher_isgoingtoroof())
+  if(scripts\aitypes\superslasher\behaviors::superslasher_isonroof() || scripts\aitypes\superslasher\behaviors::superslasher_isgoingtoroof()) {
     self._blackboard.bgotogroundrequested = 1;
+  }
 }
 
 ongotoroof_init() {

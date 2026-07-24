@@ -25,8 +25,9 @@ main() {
   _id_0F21::main();
   _id_0E4B::_id_8E06();
 
-  if(level._id_10CDA == "flyin")
+  if(level._id_10CDA == "flyin") {
     _id_0E4B::_id_1348D(1);
+  }
 
   scripts\engine\utility::delaythread(5, _id_0E4B::_id_8DEA);
   scripts\sp\maps\titan\titan_anim::main();
@@ -357,8 +358,9 @@ _id_13482() {
   level.player notifyonplayercommand("toggle_vision", "+breath_sprint");
 
   for(;;) {
-    foreach(var_2 in var_0)
-    level.player waittill("toggle_vision");
+    foreach(var_2 in var_0) {
+      level.player waittill("toggle_vision");
+    }
   }
 
   wait 0.05;
@@ -401,8 +403,9 @@ _id_11983() {
     if(level.player.health < 25) {
       level.player _meth_80D1();
 
-      while(level.player.health < 40)
+      while(level.player.health < 40) {
         wait 0.3;
+      }
 
       level.player _meth_80A1();
     }

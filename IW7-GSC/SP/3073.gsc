@@ -17,8 +17,9 @@ _id_346D(var_0) {
   self._id_FCA2 = var_1 + randomintrange(8000, 12000);
   self._id_BF80 = var_1 + randomintrange(15000, 17000);
 
-  if(!isDefined(self._id_290A))
+  if(!isDefined(self._id_290A)) {
     self._id_290A = 1;
+  }
 
   self._id_3138 = 0;
   self._id_10E67 = 128;
@@ -65,8 +66,9 @@ _id_34EF(var_0) {
   var_3 = gettime();
   var_4 = undefined;
 
-  if(isDefined(self.bt.enemies[0]))
+  if(isDefined(self.bt.enemies[0])) {
     var_4 = self.bt.enemies[0];
+  }
 
   var_5 = 0;
 
@@ -81,16 +83,18 @@ _id_34EF(var_0) {
     var_5 = 1;
   }
 
-  if(isDefined(self.enemy) && (!var_5 || self.enemy != level.player))
+  if(isDefined(self.enemy) && (!var_5 || self.enemy != level.player)) {
     var_1[var_1.size] = self.enemy;
+  }
 
   if(!self._id_3138) {
     var_6 = self _meth_848B();
 
     if(isDefined(var_6)) {
       foreach(var_8 in var_6) {
-        if(!var_5 || var_8 != level.player)
+        if(!var_5 || var_8 != level.player) {
           var_1[var_1.size] = var_8;
+        }
       }
     }
   }
@@ -108,22 +112,24 @@ _id_34EF(var_0) {
   self.bt._id_656C = var_2;
 
   if(isDefined(self.bt.enemies[0]) && (!isDefined(var_4) || self.bt.enemies[0] != var_4)) {
-    if(isPlayer(self.bt.enemies[0]))
+    if(isPlayer(self.bt.enemies[0])) {
       _id_34A0("vox_c8_threatdetected");
-    else
+    } else {
       _id_34A0("vox_c8_engaging");
+    }
   }
 
   var_13 = var_1.size;
 
-  if(var_13 == 0) {} else if(var_13 == 1)
+  if(var_13 == 0) {} else if(var_13 == 1) {
     self.bt._id_26A7 = var_2[0];
-  else if(var_13 > 1) {
+  } else if(var_13 > 1) {
     self.bt._id_26A7 = (0, 0, 0);
     var_14 = var_13;
 
-    foreach(var_16 in var_2)
-    self.bt._id_26A7 = self.bt._id_26A7 + var_16;
+    foreach(var_16 in var_2) {
+      self.bt._id_26A7 = self.bt._id_26A7 + var_16;
+    }
 
     if(self.bt.enemies[0] == level.player) {
       self.bt._id_26A7 = self.bt._id_26A7 + (var_2[0] + var_2[0]);
@@ -142,16 +148,18 @@ _id_347B() {
   var_1 = 0;
 
   for(var_2 = 0; var_2 < 30; var_2++) {
-    if(var_0 - self._blackboard._id_D41A[var_2] <= 2000)
+    if(var_0 - self._blackboard._id_D41A[var_2] <= 2000) {
       var_1 = var_1 + self._blackboard._id_D418[var_2];
+    }
   }
 
   return var_1 >= 200;
 }
 
 _id_34D8(var_0) {
-  if(isDefined(self.asm._id_2AD2) || scripts\sp\utility::_id_9C11())
+  if(isDefined(self.asm._id_2AD2) || scripts\sp\utility::_id_9C11()) {
     return anim.failure;
+  }
 
   if(gettime() > self._id_BF80 && !scripts\asm\asm_bb::bb_isheadless()) {
     var_1 = self.bt.enemies[0];
@@ -159,8 +167,9 @@ _id_34D8(var_0) {
     if(distancesquared(var_1.origin, self.origin) < 810000) {
       var_2 = var_1 getshootatpos();
 
-      if(self cansee(var_1) && self canshoot(var_2))
+      if(self cansee(var_1) && self canshoot(var_2)) {
         return anim.success;
+      }
     }
   }
 
@@ -168,18 +177,22 @@ _id_34D8(var_0) {
 }
 
 _id_FFB4() {
-  if(!isDefined(self._blackboard.shootparams.target))
+  if(!isDefined(self._blackboard.shootparams.target)) {
     return 1;
+  }
 
-  if(!isalive(self._blackboard.shootparams.target))
+  if(!isalive(self._blackboard.shootparams.target)) {
     return 1;
+  }
 
-  if(isDefined(self.asm._id_2AD2) || scripts\sp\utility::_id_9C11())
+  if(isDefined(self.asm._id_2AD2) || scripts\sp\utility::_id_9C11()) {
     return 1;
+  }
 
   if(isDefined(self.bt.enemies) && isDefined(self.bt.enemies[0])) {
-    if(isPlayer(self.bt.enemies[0]) && self.bt.enemies[0] != self._blackboard.shootparams.target && gettime() - self.bt.lasttimekidnapped < 100)
+    if(isPlayer(self.bt.enemies[0]) && self.bt.enemies[0] != self._blackboard.shootparams.target && gettime() - self.bt.lasttimekidnapped < 100) {
       return 1;
+    }
   }
 
   return 0;
@@ -217,13 +230,15 @@ _id_345E(var_0) {
 _id_345F() {
   wait 0.05;
 
-  if(isDefined(self) && isDefined(self._id_7211))
+  if(isDefined(self) && isDefined(self._id_7211)) {
     playFXOnTag(self._id_7211, self, "tag_weapon_right");
+  }
 }
 
 _id_345C(var_0) {
-  if(_id_FFB4())
+  if(_id_FFB4()) {
     return anim.failure;
+  }
 
   var_1 = gettime();
   var_2 = self._blackboard.shootparams;
@@ -234,26 +249,31 @@ _id_345C(var_0) {
     if(self cansee(var_2.target) && self canshoot(var_3)) {
       var_4 = undefined;
 
-      if(isDefined(var_2._id_A9EA))
+      if(isDefined(var_2._id_A9EA)) {
         var_4 = var_2._id_A9EA;
+      }
 
       var_2._id_A9EA = var_3;
 
-      if(isDefined(var_4))
+      if(isDefined(var_4)) {
         var_2._id_E751 = vectorNormalize(var_2._id_A9EA - var_4);
+      }
     }
   }
 
   self.bt.instancedata[var_0]++;
 
-  if(var_1 < var_2._id_3D2A)
+  if(var_1 < var_2._id_3D2A) {
     return anim.running;
+  }
 
-  if(self.bt.instancedata[var_0] > 80)
+  if(self.bt.instancedata[var_0] > 80) {
     return anim.failure;
+  }
 
-  if(!scripts\aitypes\combat::isaimedataimtarget())
+  if(!scripts\aitypes\combat::isaimedataimtarget()) {
     return anim.running;
+  }
 
   var_2._id_11935 = var_1;
   var_2._id_2AA7 = 1;
@@ -275,11 +295,13 @@ _id_345D(var_0) {
 
 _id_10014(var_0, var_1) {
   if(isDefined(var_0.damageshield) && var_0.damageshield) {
-    if(isDefined(var_0.script) && var_0.script == "pain")
+    if(isDefined(var_0.script) && var_0.script == "pain") {
       return 0;
+    }
 
-    if(isDefined(var_0.asm) && isDefined(var_0.asm._id_2AD2) && var_0.asm._id_2AD2)
+    if(isDefined(var_0.asm) && isDefined(var_0.asm._id_2AD2) && var_0.asm._id_2AD2) {
       return 0;
+    }
   }
 
   return self cansee(var_0) && self canshoot(var_1);
@@ -290,16 +312,19 @@ _id_345A(var_0) {
   var_1.taskid = var_0;
   var_2 = var_1.target;
 
-  if(_id_FFB4())
+  if(_id_FFB4()) {
     return anim.failure;
+  }
 
   var_3 = gettime();
 
-  if(var_3 > var_1._id_11935 + var_1._id_32C5)
+  if(var_3 > var_1._id_11935 + var_1._id_32C5) {
     return anim.success;
+  }
 
-  if(!isDefined(self.bt.instancedata[var_0]))
+  if(!isDefined(self.bt.instancedata[var_0])) {
     self.bt.instancedata[var_0] = 0;
+  }
 
   var_4 = var_2 getshootatpos();
 
@@ -307,8 +332,9 @@ _id_345A(var_0) {
     var_1.pos = var_4;
     var_1.ent = var_2;
 
-    if(self.bt.instancedata[var_0] % 4 == 0)
+    if(self.bt.instancedata[var_0] % 4 == 0) {
       var_1._id_E751 = vectorNormalize(var_1.pos - var_1._id_A9EA);
+    }
 
     var_1._id_A9EA = var_1.pos;
     var_1._id_A9EB = undefined;
@@ -329,8 +355,9 @@ _id_345A(var_0) {
 }
 
 _id_3460(var_0) {
-  if(self._blackboard.shootparams.taskid == var_0)
+  if(self._blackboard.shootparams.taskid == var_0) {
     self._blackboard.shootparams = undefined;
+  }
 
   scripts\asm\asm_bb::bb_requestfire(0);
   self.weapon = self.primaryweapon;
@@ -355,80 +382,93 @@ _id_34CE(var_0) {
 }
 
 _id_34CD(var_0) {
-  if(!isDefined(self.bt.enemies) || !isDefined(self.bt.enemies[0]))
+  if(!isDefined(self.bt.enemies) || !isDefined(self.bt.enemies[0])) {
     return anim.failure;
+  }
 
   var_1 = self._blackboard.shootparams.target;
   var_2 = self.bt.enemies[0];
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return anim.failure;
+  }
 
   if(var_2 != self._blackboard.shootparams.target) {
-    if(isPlayer(var_2) || gettime() - self._blackboard.shootparams._id_11935 > 4000)
+    if(isPlayer(var_2) || gettime() - self._blackboard.shootparams._id_11935 > 4000) {
       return anim.failure;
+    }
   }
 
   if(self cansee(var_1)) {
     self._blackboard.shootparams.pos = var_1 getshootatpos();
     self._blackboard.shootparams.ent = var_1;
   } else {
-    if(issentient(var_1))
+    if(issentient(var_1)) {
       self._blackboard.shootparams.pos = self lastknownpos(var_1);
-    else
+    } else {
       self._blackboard.shootparams.pos = var_1.origin;
+    }
 
     self._blackboard.shootparams.ent = undefined;
   }
 
-  if(scripts\aitypes\combat::isaimedataimtarget() && self seerecently(var_1, 4))
+  if(scripts\aitypes\combat::isaimedataimtarget() && self seerecently(var_1, 4)) {
     scripts\asm\asm_bb::bb_requestfire(1);
-  else
+  } else {
     scripts\asm\asm_bb::bb_requestfire(0);
+  }
 
   return anim.running;
 }
 
 _id_34CF(var_0) {
-  if(self._blackboard.shootparams.taskid == var_0)
+  if(self._blackboard.shootparams.taskid == var_0) {
     self._blackboard.shootparams = undefined;
+  }
 
   scripts\asm\asm_bb::bb_requestfire(0);
 }
 
 _id_34DE(var_0) {
-  if(_id_3479())
+  if(_id_3479()) {
     return anim.failure;
+  }
 
   var_1 = gettime();
 
-  if(gettime() - self.bt._id_118F2 < 500)
+  if(gettime() - self.bt._id_118F2 < 500) {
     return anim.failure;
+  }
 
-  if(var_1 - self.bt._id_118F6 < 6000 || var_1 - self.bt._id_118F5 < 6000)
+  if(var_1 - self.bt._id_118F6 < 6000 || var_1 - self.bt._id_118F5 < 6000) {
     return anim.failure;
+  }
 
   var_2 = self.bt.enemies[0];
   var_3 = var_2.origin - self.origin;
   var_4 = lengthsquared(var_3);
 
-  if(var_4 < 40000)
+  if(var_4 < 40000) {
     return anim.failure;
+  }
 
   self.bt._id_118F1 = gettime();
   var_5 = var_2 getshootatpos();
 
-  if(isPlayer(var_2))
+  if(isPlayer(var_2)) {
     var_5 = var_5 - (0, 0, 6);
+  }
 
-  if(self canshoot(var_5))
+  if(self canshoot(var_5)) {
     return anim.failure;
+  }
 
   var_6 = 128;
   var_7 = sqrt(var_4);
 
-  if(var_7 < 800)
+  if(var_7 < 800) {
     var_6 = var_6 * (1 - (800 - var_7) / 800);
+  }
 
   var_6 = randomfloat(var_6);
   var_8 = randomfloat(360);
@@ -436,8 +476,9 @@ _id_34DE(var_0) {
   var_10 = _id_3462();
   var_11 = self _meth_806C(var_10, var_9, 0, "min energy", "min time", "max time");
 
-  if(!isDefined(var_11))
+  if(!isDefined(var_11)) {
     return anim.failure;
+  }
 
   self._blackboard._id_1182B = var_9;
   self._blackboard._id_11833 = var_11;
@@ -445,8 +486,9 @@ _id_34DE(var_0) {
 }
 
 _id_34DF(var_0) {
-  if(gettime() - self.bt._id_118F5 > 10000 && randomint(100) < 20)
+  if(gettime() - self.bt._id_118F5 > 10000 && randomint(100) < 20) {
     return anim.success;
+  }
 
   return anim.failure;
 }
@@ -489,8 +531,9 @@ _id_34F0(var_0) {
     return anim.success;
   }
 
-  if(scripts\asm\asm::asm_ephemeraleventfired("throwgrenade", "start"))
+  if(scripts\asm\asm::asm_ephemeraleventfired("throwgrenade", "start")) {
     return anim.success;
+  }
 
   return anim.running;
 }
@@ -512,16 +555,18 @@ _id_34E8(var_0) {
 }
 
 _id_34E6(var_0) {
-  if(!isDefined(self._blackboard._id_313C))
+  if(!isDefined(self._blackboard._id_313C)) {
     return anim.success;
+  }
 
   if(scripts\asm\asm::asm_ephemeraleventfired("throwgrenade", "end")) {
     self.bt._id_118F6 = gettime();
     return anim.success;
   }
 
-  if(gettime() > self.bt.instancedata[var_0])
+  if(gettime() > self.bt.instancedata[var_0]) {
     return anim.success;
+  }
 
   return anim.running;
 }
@@ -538,19 +583,22 @@ _id_3462() {
   var_3 = "exposed_grenade";
 
   if(isDefined(anim._id_85DF) && isDefined(anim._id_85DF[var_1])) {
-    if(isDefined(anim._id_85E1[var_1][var_2]) && isDefined(anim._id_85E1[var_1][var_2][var_3]))
+    if(isDefined(anim._id_85E1[var_1][var_2]) && isDefined(anim._id_85E1[var_1][var_2][var_3])) {
       var_0 = anim._id_85E1[var_1][var_2][var_3][0];
+    }
   }
 
   return var_0;
 }
 
 _id_3427(var_0) {
-  if(!_id_0C3D::_id_3427())
+  if(!_id_0C3D::_id_3427()) {
     return anim.failure;
+  }
 
-  if(isDefined(self._blackboard.btstate_addsubstate))
+  if(isDefined(self._blackboard.btstate_addsubstate)) {
     return anim.failure;
+  }
 
   return anim.success;
 }
@@ -560,11 +608,13 @@ _id_3477() {
 }
 
 _id_347A(var_0, var_1) {
-  if(isDefined(self.script) && self.script == "cover_arrival")
+  if(isDefined(self.script) && self.script == "cover_arrival") {
     return 0;
+  }
 
-  if(!self seerecently(var_0, 2))
+  if(!self seerecently(var_0, 2)) {
     return 0;
+  }
 
   return _id_0A10::ismeleevalid(var_0, var_1);
 }
@@ -589,20 +639,25 @@ _id_3480(var_0) {
 _id_347D(var_0, var_1) {
   var_2 = 8000;
 
-  if(self.health < self.maxhealth)
+  if(self.health < self.maxhealth) {
     var_2 = 4000;
+  }
 
-  if(isDefined(self._blackboard.timeoffset) && gettime() - self._blackboard.timeoffset < var_2)
+  if(isDefined(self._blackboard.timeoffset) && gettime() - self._blackboard.timeoffset < var_2) {
     return 0;
+  }
 
-  if(isDefined(self.script) && self.script == "cover_arrival")
+  if(isDefined(self.script) && self.script == "cover_arrival") {
     return 0;
+  }
 
-  if(isDefined(self.asm._id_2AD2))
+  if(isDefined(self.asm._id_2AD2)) {
     return 0;
+  }
 
-  if(!self cansee(var_0))
+  if(!self cansee(var_0)) {
     return 0;
+  }
 
   return _id_0A10::ismeleevalid(var_0, var_1);
 }
@@ -624,13 +679,14 @@ _id_34B3(var_0) {
 _id_34B2(var_0) {
   self._blackboard._id_2BE1 = 1;
 
-  if(scripts\asm\asm::asm_ephemeraleventfired("melee_charge_state", "started"))
+  if(scripts\asm\asm::asm_ephemeraleventfired("melee_charge_state", "started")) {
     self._blackboard._id_2BE0 = 1;
+  }
 
   if(gettime() >= self.bt.instancedata[var_0]._id_3E45) {
-    if(!isDefined(self.bt.instancedata[var_0]._id_10D9D))
+    if(!isDefined(self.bt.instancedata[var_0]._id_10D9D)) {
       self.bt.instancedata[var_0]._id_10D9D = anglesToForward(self.angles);
-    else {
+    } else {
       var_1 = anglesToForward(self.angles);
 
       if(vectordot(var_1, self.bt.instancedata[var_0]._id_10D9D) < 0.966) {
@@ -658,8 +714,9 @@ _id_34B2(var_0) {
       var_3 = self _meth_84AC();
       var_1 = anglesToForward(self.angles);
 
-      if(self maymovefrompointtopoint(var_3, var_3 + 24 * var_1, 1, 1))
+      if(self maymovefrompointtopoint(var_3, var_3 + 24 * var_1, 1, 1)) {
         self._blackboard._id_3105 = 1;
+      }
 
       self.melee._id_2720 = undefined;
       self.melee._id_29A8 = 1;
@@ -682,12 +739,14 @@ _id_34B7(var_0) {
 }
 
 _id_34B5(var_0) {
-  if(!isDefined(self._blackboard._id_3105))
+  if(!isDefined(self._blackboard._id_3105)) {
     return anim.success;
+  }
 
   if(scripts\aitypes\melee::melee_shouldabort() || scripts\sp\utility::_id_9C11()) {
-    if(isDefined(self.melee))
+    if(isDefined(self.melee)) {
       self.melee._id_2720 = 1;
+    }
 
     return anim.failure;
   }
@@ -714,8 +773,9 @@ _id_34B8(var_0) {
 }
 
 _id_34DC(var_0) {
-  if(isDefined(self._id_EDE3))
+  if(isDefined(self._id_EDE3)) {
     return anim.failure;
+  }
 
   if(!self._id_290A) {
     if(!_id_3479()) {
@@ -766,8 +826,9 @@ _id_3426() {
     return undefined;
   }
 
-  if(_id_347C())
+  if(_id_347C()) {
     return undefined;
+  }
 
   if(_id_34DB()) {
     if(isDefined(self._blackboard._id_11936) && gettime() - self._blackboard._id_11936 > 2000) {
@@ -801,19 +862,22 @@ _id_3426() {
       if(randomint(100) < 20) {
         var_7 = anglesToForward(self.angles);
 
-        if(distancesquared(self.bt.enemies[0].origin, self.origin) < 22500 || scripts\engine\utility::cointoss())
+        if(distancesquared(self.bt.enemies[0].origin, self.origin) < 22500 || scripts\engine\utility::cointoss()) {
           var_6 = -1;
+        }
       } else {
         var_7 = anglestoright(self.angles);
 
-        if(scripts\engine\utility::cointoss())
+        if(scripts\engine\utility::cointoss()) {
           var_6 = -1;
+        }
       }
 
       var_8 = randomintrange(64, 80);
 
-      if(!var_5)
+      if(!var_5) {
         var_8 = var_8 + 60;
+      }
 
       var_1.radius = 30;
       var_9 = var_8 + 18;
@@ -862,26 +926,30 @@ _id_3426() {
         var_15 = var_21 - self.origin;
         var_22 = vectordot(var_17, var_15);
 
-        if(var_22 < var_19)
+        if(var_22 < var_19) {
           var_19 = var_22;
+        }
       }
     }
 
     var_23 = self._id_10E67 + self._id_10E68 * self.bt.enemies.size;
 
-    if(var_18 > 72)
+    if(var_18 > 72) {
       var_23 = var_23 + var_18 * 0.5;
+    }
 
     var_14 = self.origin + var_17 * (var_19 - var_23);
   }
 
   var_24 = getnodesinradius(var_14, 36, 0, 80);
 
-  if(var_24.size > 0)
+  if(var_24.size > 0) {
     var_14 = _id_34BA(var_24[0], var_14);
+  }
 
-  if(self._blackboard.movemode == 0 && distancesquared(var_14, self.origin) < 576)
+  if(self._blackboard.movemode == 0 && distancesquared(var_14, self.origin) < 576) {
     return undefined;
+  }
 
   self.bt._id_A944 = self.bt._id_26A7;
   var_1 = spawnStruct();
@@ -902,8 +970,9 @@ _id_34BA(var_0, var_1) {
   var_4 = var_3[var_2];
 
   if(isDefined(var_4)) {
-    if(isarray(var_4))
+    if(isarray(var_4)) {
       var_4 = var_4[self._id_6A0B % var_4.size];
+    }
 
     return var_0.origin + rotatevector(var_4, var_0.angles);
   }
@@ -928,15 +997,17 @@ _id_34BB(var_0) {
 
   var_1 = _id_3426();
 
-  if(self._blackboard.movemode == 1 || self._blackboard.movemode == 2)
+  if(self._blackboard.movemode == 1 || self._blackboard.movemode == 2) {
     _id_34A0("vox_c8_seeking");
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return anim.failure;
+  }
 
-  if(var_1.movetype == 6)
+  if(var_1.movetype == 6) {
     self _meth_8484();
-  else {
+  } else {
     var_2 = getclosestpointonnavmesh(var_1.pos, self);
     self _meth_8481(var_2);
     self.btgoalradius = var_1.radius;
@@ -947,11 +1018,13 @@ _id_34BB(var_0) {
 }
 
 _id_34EC(var_0) {
-  if(!isDefined(self.pathgoalpos))
+  if(!isDefined(self.pathgoalpos)) {
     return anim.failure;
+  }
 
-  if(self._blackboard.movemode == 6 || self._blackboard.movemode == 4)
+  if(self._blackboard.movemode == 6 || self._blackboard.movemode == 4) {
     return anim.success;
+  }
 
   var_1 = self _meth_84B6();
 
@@ -966,26 +1039,31 @@ _id_34EC(var_0) {
 }
 
 _id_34DB() {
-  if(isDefined(self.pathgoalpos))
+  if(isDefined(self.pathgoalpos)) {
     return 0;
+  }
 
   foreach(var_1 in self.bt.enemies) {
-    if(self seerecently(var_1, 2))
+    if(self seerecently(var_1, 2)) {
       return 0;
+    }
   }
 
   return 1;
 }
 
 _id_347C() {
-  if(!isDefined(self.pathgoalpos))
+  if(!isDefined(self.pathgoalpos)) {
     return 0;
+  }
 
-  if(self._blackboard.movemode != 1 && self._blackboard.movemode != 2)
+  if(self._blackboard.movemode != 1 && self._blackboard.movemode != 2) {
     return 0;
+  }
 
-  if(issentient(self.bt.enemies[0]) && gettime() - self lastknowntime(self.bt.enemies[0]) < 1000)
+  if(issentient(self.bt.enemies[0]) && gettime() - self lastknowntime(self.bt.enemies[0]) < 1000) {
     return 0;
+  }
 
   return 1;
 }
@@ -1001,8 +1079,9 @@ _id_3469(var_0) {
 
   var_2 = randomint(2);
 
-  if(var_2 == 0)
+  if(var_2 == 0) {
     var_2 = -1;
+  }
 
   self._blackboard.shootparams._id_10E0E = var_1 + var_2 * randomintrange(40, 60);
   self._blackboard.shootparams._id_639C = var_1 - var_2 * randomintrange(40, 60);
@@ -1016,8 +1095,9 @@ _id_3468(var_0) {
   var_1 = self._blackboard.shootparams._id_639C - self._blackboard.shootparams._id_10E0E;
   var_2 = (gettime() - self._blackboard.shootparams._id_32C4) / self._blackboard.shootparams._id_32C5;
 
-  if(var_2 > 1)
+  if(var_2 > 1) {
     return anim.success;
+  }
 
   var_3 = self._blackboard.shootparams._id_10E0E + var_1 * var_2;
   var_3 = var_3 + self.angles[1];
@@ -1026,17 +1106,19 @@ _id_3468(var_0) {
   var_5 = self getmuzzleangle();
   var_6 = angleclamp180(var_3 - var_5[1]);
 
-  if(abs(var_6 < 15))
+  if(abs(var_6 < 15)) {
     scripts\asm\asm_bb::bb_requestfire(1);
-  else
+  } else {
     scripts\asm\asm_bb::bb_requestfire(0);
+  }
 
   return anim.running;
 }
 
 _id_346A(var_0) {
-  if(self._blackboard.shootparams.taskid == var_0)
+  if(self._blackboard.shootparams.taskid == var_0) {
     self._blackboard.shootparams = undefined;
+  }
 
   scripts\asm\asm_bb::bb_requestfire(0);
 }
@@ -1046,34 +1128,41 @@ _id_346C(var_0) {
 }
 
 _id_346B(var_0) {
-  if(gettime() >= self.bt.instancedata[var_0])
+  if(gettime() >= self.bt.instancedata[var_0]) {
     return anim.success;
+  }
 
   return anim.running;
 }
 
 _id_34DA(var_0) {
-  if(!_id_0C3D::_id_3428(self._blackboard._id_B0E3))
+  if(!_id_0C3D::_id_3428(self._blackboard._id_B0E3)) {
     return anim.failure;
+  }
 
-  if(isDefined(self._id_5580) && self._id_5580)
+  if(isDefined(self._id_5580) && self._id_5580) {
     return anim.failure;
+  }
 
-  if(gettime() < self._id_FCA2)
+  if(gettime() < self._id_FCA2) {
     return anim.failure;
+  }
 
-  if(isDefined(self._blackboard.btstate_addsubstate))
+  if(isDefined(self._blackboard.btstate_addsubstate)) {
     return anim.failure;
+  }
 
   var_2 = getaiunittypearray(self.team, "soldier");
 
-  if(var_2.size == 0)
+  if(var_2.size == 0) {
     return anim.failure;
+  }
 
   var_3 = getaicount(scripts\engine\utility::get_enemy_team(self.team));
 
-  if(var_3 < 4)
+  if(var_3 < 4) {
     return anim.failure;
+  }
 
   var_4 = 4194304;
   var_5 = anglesToForward(self.angles);
@@ -1087,26 +1176,29 @@ _id_34DA(var_0) {
       var_11 = vectordot(var_5, var_10);
       var_12 = scripts\asm\asm_bb::bb_getcovernode();
 
-      if(isDefined(var_12))
+      if(isDefined(var_12)) {
         var_13 = anglesToForward(var_12.angles);
-      else
+      } else {
         var_13 = anglesToForward(var_9.angles);
+      }
 
       var_14 = vectorNormalize(-1 * var_10);
       var_15 = vectordot(var_13, var_14);
 
-      if(var_11 < 24 && var_15 > 0.5)
+      if(var_11 < 24 && var_15 > 0.5) {
         var_6++;
-      else
+      } else {
         var_7++;
+      }
     }
   }
 
   if(var_6 > 1) {
     var_17 = _id_342E(self.origin, self.angles, 72, 192);
 
-    if(var_17)
+    if(var_17) {
       return anim.success;
+    }
   }
 
   return anim.failure;
@@ -1119,11 +1211,13 @@ _id_348D(var_0) {
 }
 
 _id_348C(var_0) {
-  if(!isDefined(self._blackboard._id_2F36))
+  if(!isDefined(self._blackboard._id_2F36)) {
     return anim.success;
+  }
 
-  if(gettime() > self.bt.instancedata[var_0] + 5000)
+  if(gettime() > self.bt.instancedata[var_0] + 5000) {
     return anim.failure;
+  }
 
   return anim.running;
 }
@@ -1149,14 +1243,17 @@ _id_342E(var_0, var_1, var_2, var_3) {
   var_8 = anglesToForward(var_1);
   var_9 = anglestoright(var_1);
 
-  if(navtrace(var_0, var_0 + var_8 * var_3, self, 0))
+  if(navtrace(var_0, var_0 + var_8 * var_3, self, 0)) {
     return 0;
+  }
 
-  if(navtrace(var_0, var_0 + var_9 * var_2, self, 0))
+  if(navtrace(var_0, var_0 + var_9 * var_2, self, 0)) {
     return 0;
+  }
 
-  if(navtrace(var_0, var_0 - var_9 * var_2, self, 0))
+  if(navtrace(var_0, var_0 - var_9 * var_2, self, 0)) {
     return 0;
+  }
 
   return 1;
 }
@@ -1238,8 +1335,9 @@ _id_344E(var_0) {
 }
 
 _id_3470(var_0) {
-  if(!isDefined(self._blackboard.scriptableparts))
+  if(!isDefined(self._blackboard.scriptableparts)) {
     self._blackboard.scriptableparts = [];
+  }
 
   if(!isDefined(self._blackboard.scriptableparts[var_0])) {
     self._blackboard.scriptableparts[var_0] = spawnStruct();
@@ -1256,38 +1354,44 @@ _id_34BE(var_0, var_1) {
   if(self._blackboard.scriptableparts[var_0].state == "dismember") {
     return;
   }
-  if(self._blackboard.scriptableparts[var_0].state != "normal" && var_1 != "dismember")
+  if(self._blackboard.scriptableparts[var_0].state != "normal" && var_1 != "dismember") {
     self._blackboard.scriptableparts[var_0].state = "dmg_both";
-  else
+  } else {
     self._blackboard.scriptableparts[var_0].state = var_1;
+  }
 }
 
 _id_34BF(var_0, var_1, var_2) {
   self endon("entitydeleted");
 
-  if(isDefined(var_2) && _id_3467(var_2))
+  if(isDefined(var_2) && _id_3467(var_2)) {
     self setscriptablepartstate(var_2, "disabled");
+  }
 
   _id_34BE(var_0, var_1);
 
-  if(isDefined(self._id_EF39))
+  if(isDefined(self._id_EF39)) {
     return 1;
+  }
 
   self setscriptablepartstate(var_0, self._blackboard.scriptableparts[var_0].state);
 
-  if(isDefined(var_2) && _id_3467(var_2))
+  if(isDefined(var_2) && _id_3467(var_2)) {
     self setscriptablepartstate(var_2, self._blackboard.scriptableparts[var_2].state);
+  }
 
   _id_0A0B::_id_98C9(var_0 + "_dmg_fx");
   self setscriptablepartstate(var_0 + "_dmg_fx", var_1);
 }
 
 _id_3467(var_0) {
-  if(!isDefined(self._blackboard.scriptableparts))
+  if(!isDefined(self._blackboard.scriptableparts)) {
     return 1;
+  }
 
-  if(!isDefined(self._blackboard.scriptableparts[var_0]))
+  if(!isDefined(self._blackboard.scriptableparts[var_0])) {
     return 1;
+  }
 
   var_1 = self._blackboard.scriptableparts[var_0].state;
   return var_1 != "disabled" && var_1 != "planted";
@@ -1442,8 +1546,9 @@ _id_10883(var_0, var_1) {
 }
 
 _id_5D56(var_0, var_1) {
-  if(var_1)
+  if(var_1) {
     wait 0.1;
+  }
 
   level notify("c8_shield_dropped", var_0);
 }
@@ -1468,8 +1573,9 @@ _id_3434(var_0) {
     self.bt._id_8C94 = var_1[var_6];
     scripts\asm\asm_bb::_id_297B("haywire");
 
-    if(self.bt._id_8C94 == "selfdestruct_running")
+    if(self.bt._id_8C94 == "selfdestruct_running") {
       scripts\asm\asm_bb::_id_297B("haywire_walk");
+    }
   }
 
   return anim.success;
@@ -1482,14 +1588,17 @@ _id_34BD(var_0, var_1, var_2, var_3) {
   var_4 = var_0.origin;
   var_0.bt._id_F1F4 = 1;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 250;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 170;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 20;
+  }
 
   physicsexplosionsphere(var_4, 400, 50, 1);
   earthquake(2, 0.3, var_4, 400);
@@ -1541,11 +1650,13 @@ _id_3445() {
     }
   }
 
-  if(isDefined(self._id_12F8D))
+  if(isDefined(self._id_12F8D)) {
     self._id_12F8D delete();
+  }
 
-  if(isDefined(self._id_B0DB))
+  if(isDefined(self._id_B0DB)) {
     self._id_B0DB delete();
+  }
 
   thread scripts\engine\utility::play_sound_in_space("c8_destruct", self.origin);
   playFX(level._id_7649["vfx_c8_explode_core"], self gettagorigin("j_spineupper"));
@@ -1554,19 +1665,22 @@ _id_3445() {
 
 _id_342C(var_0, var_1) {
   if(var_1 == "open") {
-    if(var_0 == "shield_upper")
+    if(var_0 == "shield_upper") {
       _id_0C3D::_id_348B();
-    else
+    } else {
       _id_0C3D::_id_348A();
+    }
   } else if(var_1 == "closed" || var_1 == "disabled") {
     if(var_0 == "shield_upper") {
-      if(var_1 == "disabled")
+      if(var_1 == "disabled") {
         self._blackboard._id_12F90 = 1;
+      }
 
       _id_0C3D::_id_343B();
     } else {
-      if(var_1 == "disabled")
+      if(var_1 == "disabled") {
         self._blackboard._id_B0E2 = 1;
+      }
 
       _id_0C3D::_id_343A();
     }
@@ -1600,22 +1714,26 @@ _id_34A0(var_0) {
 }
 
 _id_3476() {
-  if(!isDefined(self._blackboard.shootparams))
+  if(!isDefined(self._blackboard.shootparams)) {
     return 1;
+  }
 
-  if(!isDefined(self._blackboard.shootparams.pos) && !isDefined(self._blackboard.shootparams.ent))
+  if(!isDefined(self._blackboard.shootparams.pos) && !isDefined(self._blackboard.shootparams.ent)) {
     return 1;
+  }
 
-  if(scripts\asm\asm_bb::_id_293E())
+  if(scripts\asm\asm_bb::_id_293E()) {
     return 1;
+  }
 
   var_0 = scripts\anim\shared::_id_811C();
   var_1 = undefined;
 
-  if(isDefined(self._blackboard.shootparams.ent))
+  if(isDefined(self._blackboard.shootparams.ent)) {
     var_1 = self._blackboard.shootparams.ent getshootatpos();
-  else if(isDefined(self._blackboard.shootparams.pos))
+  } else if(isDefined(self._blackboard.shootparams.pos)) {
     var_1 = self._blackboard.shootparams.pos;
+  }
 
   var_2 = self getmuzzleangle();
   var_3 = vectortoangles(var_1 - var_0);
@@ -1625,14 +1743,16 @@ _id_3476() {
   var_7 = abs(angleclamp180(var_2[1] - var_3[1]));
 
   if(var_7 > var_4) {
-    if(var_7 > var_5 || distancesquared(self getEye(), var_1) > anim._id_1A50)
+    if(var_7 > var_5 || distancesquared(self getEye(), var_1) > anim._id_1A50) {
       return 0;
+    }
   }
 
   var_8 = abs(angleclamp180(var_2[0] - var_3[0]));
 
-  if(var_8 > var_6)
+  if(var_8 > var_6) {
     return 0;
+  }
 
   return 1;
 }

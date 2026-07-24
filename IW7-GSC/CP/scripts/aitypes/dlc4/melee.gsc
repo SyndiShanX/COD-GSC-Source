@@ -4,27 +4,33 @@
 ******************************************/
 
 setupstandmeleebtaction(var_0, var_1, var_2) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = ::melee_begin;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = ::melee_tick;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = ::melee_end;
+  }
 
   scripts\aitypes\dlc4\bt_action_api::setupbtaction("stand_melee", var_0, var_1, var_2);
 }
 
 setupmovingmeleebtaction(var_0, var_1, var_2) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = ::melee_begin;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = ::melee_tick;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = ::melee_end;
+  }
 
   scripts\aitypes\dlc4\bt_action_api::setupbtaction("moving_melee", var_0, var_1, var_2);
 }
@@ -42,8 +48,9 @@ melee_begin(var_0) {
 melee_tick(var_0) {
   self clearpath();
 
-  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.failure;
 }
@@ -68,8 +75,9 @@ movingmelee_begin(var_0) {
 movingmelee_tick(var_0) {
   self clearpath();
 
-  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.failure;
 }
@@ -89,21 +97,25 @@ movingmelee_attackdone(var_0, var_1) {
 trymeleeattacks(var_0) {
   var_1 = scripts\asm\dlc4\dlc4_asm::getenemy();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 0;
+  }
 
   var_2 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 
-  if(isDefined(self._id_A9B8) && gettime() - self._id_A9B8 < var_2.min_time_between_melee_attacks_ms)
+  if(isDefined(self._id_A9B8) && gettime() - self._id_A9B8 < var_2.min_time_between_melee_attacks_ms) {
     return 0;
+  }
 
-  if(abs(var_1.origin[2] - self.origin[2]) > var_2.melee_max_z_diff)
+  if(abs(var_1.origin[2] - self.origin[2]) > var_2.melee_max_z_diff) {
     return 0;
+  }
 
   var_3 = var_1.origin;
 
-  if(isDefined(self.pathgoalpos))
+  if(isDefined(self.pathgoalpos)) {
     var_3 = scripts\aitypes\dlc4\behavior_utils::getpredictedenemypos(var_1, var_2.avg_time_to_impact);
+  }
 
   var_4 = distancesquared(var_3, self.origin);
 
@@ -116,16 +128,18 @@ trymeleeattacks(var_0) {
   var_6 = distancesquared(self.origin, var_1.origin);
 
   if(var_6 > var_2.non_predicted_move_melee_dist_sq) {
-    if(var_4 > var_2.movingattackdisttoattacksq[var_5])
+    if(var_4 > var_2.movingattackdisttoattacksq[var_5]) {
       return 0;
+    }
   }
 
   if(var_6 > var_2.check_reachable_dist_sq) {
     var_7 = self _meth_84AC();
     var_8 = getclosestpointonnavmesh(var_1.origin, self);
 
-    if(!_func_2AC(var_7, var_8, self))
+    if(!_func_2AC(var_7, var_8, self)) {
       return 0;
+    }
   }
 
   self._blackboard.movingmeleeattackindex = var_5;

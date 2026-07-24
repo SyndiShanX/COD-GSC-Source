@@ -36,17 +36,20 @@ charge_begin(var_0) {
 }
 
 charge_tick(var_0) {
-  if(!isDefined(self.curmeleetarget) || scripts\aitypes\dlc4\behavior_utils::shouldignoreenemy(self.curmeleetarget))
+  if(!isDefined(self.curmeleetarget) || scripts\aitypes\dlc4\behavior_utils::shouldignoreenemy(self.curmeleetarget)) {
     return anim.failure;
+  }
 
-  if(scripts\engine\utility::is_true(self.bchargeaborted))
+  if(scripts\engine\utility::is_true(self.bchargeaborted)) {
     return anim.failure;
+  }
 
   var_1 = getclosestpointonnavmesh(self.curmeleetarget.origin);
   self scragentsetgoalpos(var_1);
 
-  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.success;
 }
@@ -83,24 +86,29 @@ charge_enddone(var_0, var_1) {
 
 trycharge(var_0, var_1, var_2) {
   if(!scripts\engine\utility::is_true(var_2)) {
-    if(isDefined(self.nextchargeattacktesttime) && gettime() < self.nextchargeattacktesttime)
+    if(isDefined(self.nextchargeattacktesttime) && gettime() < self.nextchargeattacktesttime) {
       return 0;
+    }
   }
 
   var_3 = scripts\asm\dlc4\dlc4_asm::gettunedata();
   var_4 = scripts\asm\dlc4\dlc4_asm::getenemy();
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = distancesquared(var_4.origin, self.origin);
+  }
 
-  if(var_1 < var_3.charge_attack_mindist_sq)
+  if(var_1 < var_3.charge_attack_mindist_sq) {
     return 0;
+  }
 
-  if(var_1 > var_3.charge_attack_maxdist_sq)
+  if(var_1 > var_3.charge_attack_maxdist_sq) {
     return 0;
+  }
 
   self.nextchargeattacktesttime = gettime() + 2000;
   var_5 = randomint(var_3.chargeintroanimtimes.size);
@@ -111,8 +119,9 @@ trycharge(var_0, var_1, var_2) {
   var_8 = vectorNormalize((var_8[0], var_8[1], 0));
   var_9 = vectordot(var_7, var_8);
 
-  if(var_9 < 0.707)
+  if(var_9 < 0.707) {
     return 0;
+  }
 
   if(!_func_2AC(self.origin, var_6, self)) {
     self.nextchargeattacktesttime = gettime() + 500;
@@ -131,8 +140,9 @@ taunt(var_0) {
 trytaunt(var_0) {
   var_1 = scripts\asm\dlc4\dlc4_asm::getenemy();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 0;
+  }
 
   var_2 = scripts\asm\dlc4\dlc4_asm::gettunedata();
   var_3 = gettime();
@@ -142,8 +152,9 @@ trytaunt(var_0) {
     return 0;
   }
 
-  if(var_3 < self.nexttaunttime)
+  if(var_3 < self.nexttaunttime) {
     return 0;
+  }
 
   var_4 = distancesquared(self.origin, var_1.origin);
 
@@ -169,8 +180,9 @@ trytaunt(var_0) {
 }
 
 decideaction(var_0) {
-  if(isDefined(self.desiredaction))
+  if(isDefined(self.desiredaction)) {
     return anim.success;
+  }
 
   if(isDefined(self.nextaction)) {
     scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(var_0, self.nextaction);
@@ -180,8 +192,9 @@ decideaction(var_0) {
 
   var_1 = scripts\asm\dlc4\dlc4_asm::getenemy();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return anim.failure;
+  }
 
   var_2 = gettime();
 
@@ -191,11 +204,13 @@ decideaction(var_0) {
       return anim.success;
     }
 
-    if(trycharge(var_0))
+    if(trycharge(var_0)) {
       return anim.success;
+    }
 
-    if(trytaunt(var_0))
+    if(trytaunt(var_0)) {
       return anim.success;
+    }
   } else {
     var_3 = scripts\asm\dlc4\dlc4_asm::gettunedata();
     var_4 = distancesquared(var_1.origin, self.origin);
@@ -218,8 +233,9 @@ followenemy_begin(var_0) {
 followenemy_tick(var_0) {
   var_1 = scripts\asm\dlc4\dlc4_asm::getenemy();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return anim.failure;
+  }
 
   var_2 = scripts\asm\dlc4\dlc4_asm::gettunedata();
   var_3 = getclosestpointonnavmesh(var_1.origin, self);
@@ -229,8 +245,9 @@ followenemy_tick(var_0) {
     self scragentsetgoalpos(var_3);
 
     if(!self cansee(var_1)) {
-      if(!isDefined(self.pathgoalpos))
+      if(!isDefined(self.pathgoalpos)) {
         scripts\aitypes\dlc4\behavior_utils::facepoint(var_1.origin);
+      }
 
       return anim.running;
     }

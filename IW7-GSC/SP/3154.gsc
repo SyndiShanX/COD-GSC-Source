@@ -16,8 +16,9 @@ _id_F130() {
 _id_F127(var_0, var_1, var_2, var_3) {
   var_4 = self.melee.target;
 
-  if(isPlayer(var_4))
+  if(isPlayer(var_4)) {
     return 0;
+  }
 
   self.melee._id_13D8A = 1;
   var_4.melee._id_13D8A = 0;
@@ -42,14 +43,15 @@ _id_F14B(var_0, var_1) {
   var_5 = vectortoangles(var_4 - var_3);
   var_6 = angleclamp(var_2[1] - var_5[1]);
 
-  if(var_6 > 315 || var_6 < 45)
+  if(var_6 > 315 || var_6 < 45) {
     return ["front", 0];
-  else if(var_6 < 135)
+  } else if(var_6 < 135) {
     return ["right", 90];
-  else if(var_6 > 225)
+  } else if(var_6 > 225) {
     return ["left", -90];
-  else
+  } else {
     return ["back", 180];
+  }
 }
 
 _id_3EB4(var_0, var_1, var_2) {
@@ -141,8 +143,9 @@ _id_D4CF(var_0, var_1, var_2) {
   destroynavrepulsor("ent_" + self getentitynumber() + "_seeker_repulsor");
 
   if(isDefined(self.melee.target)) {
-    if(isDefined(self.melee.target.melee))
+    if(isDefined(self.melee.target.melee)) {
       self.melee.target.melee._id_2720 = 1;
+    }
 
     self.melee.target.ignoreme = 0;
   }
@@ -160,9 +163,9 @@ _id_F148(var_0, var_1, var_2, var_3) {
 }
 
 _id_F153() {
-  if(isDefined(self._id_72CE))
+  if(isDefined(self._id_72CE)) {
     var_0 = (0, self._id_72CE, 0);
-  else {
+  } else {
     var_0 = vectortoangles(self.origin - level.player.origin);
     var_0 = (0, var_0[1], 0);
   }
@@ -216,11 +219,13 @@ _id_F13F(var_0) {
       break;
     }
 
-    if(!isDefined(var_4))
+    if(!isDefined(var_4)) {
       var_4 = gettime();
+    }
 
-    if(gettime() - var_4 > var_0)
+    if(gettime() - var_4 > var_0) {
       return 1;
+    }
 
     var_3 = var_2;
   }
@@ -252,8 +257,9 @@ _id_F141(var_0) {
   var_2 = 0.3;
   wait(var_0 - var_1 - 0.05);
 
-  if(isDefined(self.melee._id_B5FE))
+  if(isDefined(self.melee._id_B5FE)) {
     self.melee._id_B5FE destroy();
+  }
 
   self.melee._id_B5FE = newclienthudelem(level.player);
   self.melee._id_B5FE.color = (1, 1, 1);
@@ -332,13 +338,15 @@ _id_F144(var_0) {
   self endon("death");
   level.player endon("bt_stop_meleegrab");
 
-  while(!_id_F140(var_0))
+  while(!_id_F140(var_0)) {
     wait 0.05;
+  }
 
   level.player notify("meleegrab_interupt");
 
-  if(isDefined(level.player.melee) && isDefined(level.player.melee._id_B5FE))
+  if(isDefined(level.player.melee) && isDefined(level.player.melee._id_B5FE)) {
     level.player.melee._id_B5FE destroy();
+  }
 
   thread _id_0F3D::_id_50E8(0.2);
   thread _id_0F3D::_id_510F(0.25, 65, 0.4);
@@ -351,11 +359,13 @@ _id_F144(var_0) {
 }
 
 _id_F140(var_0) {
-  if(!isalive(var_0))
+  if(!isalive(var_0)) {
     return 1;
+  }
 
-  if(isDefined(var_0._id_2029))
+  if(isDefined(var_0._id_2029)) {
     return 1;
+  }
 
   return 0;
 }

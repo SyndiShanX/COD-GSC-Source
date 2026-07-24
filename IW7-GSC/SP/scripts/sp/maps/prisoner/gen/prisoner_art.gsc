@@ -109,14 +109,17 @@ _id_1193E() {
 
     if(var_1 > 250) {
       if(scripts\engine\utility::flag("aiming_mode")) {
-        if(!scripts\engine\utility::flag("portal_mdlf_courtyard_view"))
+        if(!scripts\engine\utility::flag("portal_mdlf_courtyard_view")) {
           setumbraportalstate("umbra_mdlf_courtyard_view", 0);
+        }
 
-        if(!scripts\engine\utility::flag("portal_mdrt_courtyard_view"))
+        if(!scripts\engine\utility::flag("portal_mdrt_courtyard_view")) {
           setumbraportalstate("umbra_mdrt_courtyard_view", 0);
+        }
 
-        if(!scripts\engine\utility::flag("portal_purseshop_view"))
+        if(!scripts\engine\utility::flag("portal_purseshop_view")) {
           setumbraportalstate("umbra_purseshop_view", 0);
+        }
 
         if(!scripts\engine\utility::flag("portal_churchroad_view")) {
           setumbraportalstate("umbra_l_churchroad_view", 0);
@@ -184,23 +187,29 @@ _id_8789() {
     if(var_0 == "end") {
       scripts\engine\utility::flag_clear("robot_hacking_mode");
 
-      if(!scripts\engine\utility::flag("portal_purseshop_view"))
+      if(!scripts\engine\utility::flag("portal_purseshop_view")) {
         setumbraportalstate("umbra_purseshop_view", 0);
+      }
 
-      if(!scripts\engine\utility::flag("portal_bedroom_view"))
+      if(!scripts\engine\utility::flag("portal_bedroom_view")) {
         setumbraportalstate("umbra_bedroom_view", 0);
+      }
 
-      if(!scripts\engine\utility::flag("portal_mdlf_courtyard_view"))
+      if(!scripts\engine\utility::flag("portal_mdlf_courtyard_view")) {
         setumbraportalstate("umbra_mdlf_courtyard_view", 0);
+      }
 
-      if(!scripts\engine\utility::flag("portal_mdrt_courtyard_view"))
+      if(!scripts\engine\utility::flag("portal_mdrt_courtyard_view")) {
         setumbraportalstate("umbra_mdrt_courtyard_view", 0);
+      }
 
-      if(!scripts\engine\utility::flag("portal_apartment_view"))
+      if(!scripts\engine\utility::flag("portal_apartment_view")) {
         setumbraportalstate("umbra_apartment_view", 0);
+      }
 
-      if(!scripts\engine\utility::flag("portal_cafe_view"))
+      if(!scripts\engine\utility::flag("portal_cafe_view")) {
         setumbraportalstate("umbra_cafe_view", 0);
+      }
 
       if(!scripts\engine\utility::flag("portal_churchroad_view")) {
         setumbraportalstate("umbra_l_churchroad_view", 0);
@@ -260,8 +269,9 @@ _id_12B3C() {
     return;
   }
 
-  if(!scripts\engine\utility::flag("aiming_mode"))
+  if(!scripts\engine\utility::flag("aiming_mode")) {
     setumbraportalstate("umbra_purseshop_view", 0);
+  }
 
   scripts\engine\utility::flag_clear("portal_purseshop_view");
   scripts\engine\utility::flag_clear("umbra_purseshop_view_close");
@@ -347,8 +357,9 @@ _id_12B38() {
     return;
   }
 
-  if(!scripts\engine\utility::flag("aiming_mode"))
+  if(!scripts\engine\utility::flag("aiming_mode")) {
     setumbraportalstate("umbra_mdlf_courtyard_view", 0);
+  }
 
   scripts\engine\utility::flag_clear("portal_mdlf_courtyard_view");
   scripts\engine\utility::flag_clear("umbra_mdlf_courtyard_view_close");
@@ -366,8 +377,9 @@ _id_12B3A() {
     return;
   }
 
-  if(!scripts\engine\utility::flag("aiming_mode"))
+  if(!scripts\engine\utility::flag("aiming_mode")) {
     setumbraportalstate("umbra_mdrt_courtyard_view", 0);
+  }
 
   scripts\engine\utility::flag_clear("portal_mdrt_courtyard_view");
   scripts\engine\utility::flag_clear("umbra_mdrt_courtyard_view_close");
@@ -526,11 +538,13 @@ _id_8EAC() {
   var_0 = getEnt("model_terrace_truck", "targetname");
   var_1 = getscriptablearray("scriptable_churchroad_destroy", "script_noteworthy")[0];
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 hide();
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 hide();
+  }
 }
 
 _id_10104() {
@@ -542,11 +556,13 @@ _id_10105() {
   var_0 = getEnt("model_terrace_truck", "targetname");
   var_1 = getscriptablearray("scriptable_churchroad_destroy", "script_noteworthy")[0];
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 show();
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 show();
+  }
 }
 
 _id_111FC() {
@@ -870,9 +886,9 @@ _id_CC2A() {
   var_4[1] = (600, -400, 45);
   var_4[2] = (725, -420, 45);
   var_5 = [];
-  var_5[0] = scripts\engine\utility::getfx("vfx_pr_fire_crash_ship_debris_med");
-  var_5[1] = scripts\engine\utility::getfx("vfx_pr_fire_drips_r");
-  var_5[2] = scripts\engine\utility::getfx("vfx_pr_crash_ship_debris_smk_sm");
+  var_5[0] = ::scripts\engine\utility::getfx("vfx_pr_fire_crash_ship_debris_med");
+  var_5[1] = ::scripts\engine\utility::getfx("vfx_pr_fire_drips_r");
+  var_5[2] = ::scripts\engine\utility::getfx("vfx_pr_crash_ship_debris_smk_sm");
   var_6 = [];
   var_6[0] = (270, 90, 180);
   var_6[1] = (0, 0, 0);
@@ -917,17 +933,21 @@ _id_6E0D() {
   self.max_intensity = 150;
   self.min_intensity = 5;
 
-  if(isDefined(var_0["frequency"]))
+  if(isDefined(var_0["frequency"])) {
     self.frequency = float(var_0["frequency"]);
+  }
 
-  if(isDefined(var_0["randomness"]))
+  if(isDefined(var_0["randomness"])) {
     self._id_DCBE = float(var_0["randomness"]);
+  }
 
-  if(isDefined(var_0["max_intensity"]))
+  if(isDefined(var_0["max_intensity"])) {
     self.max_intensity = float(var_0["max_intensity"]);
+  }
 
-  if(isDefined(var_0["min_intensity"]))
+  if(isDefined(var_0["min_intensity"])) {
     self.min_intensity = float(var_0["min_intensity"]);
+  }
 
   thread _id_6E0C();
 }
@@ -967,20 +987,25 @@ _id_6F0F() {
   self.min_intensity = 5;
   self._id_10C4F = "hm_flicker_light_start";
 
-  if(isDefined(var_0["frequency"]))
+  if(isDefined(var_0["frequency"])) {
     self.frequency = float(var_0["frequency"]);
+  }
 
-  if(isDefined(var_0["randomness"]))
+  if(isDefined(var_0["randomness"])) {
     self._id_DCBE = float(var_0["randomness"]);
+  }
 
-  if(isDefined(var_0["max_intensity"]))
+  if(isDefined(var_0["max_intensity"])) {
     self.max_intensity = float(var_0["max_intensity"]);
+  }
 
-  if(isDefined(var_0["min_intensity"]))
+  if(isDefined(var_0["min_intensity"])) {
     self.min_intensity = float(var_0["min_intensity"]);
+  }
 
-  if(isDefined(var_0["start_flag"]))
+  if(isDefined(var_0["start_flag"])) {
     self._id_10C4F = var_0["start_flag"];
+  }
 
   thread _id_6F0C();
 }
@@ -995,26 +1020,33 @@ _id_1021D() {
   self._id_54DA = 1;
   self._id_10C4F = "hm_siren_light_start";
 
-  if(isDefined(var_0["heading"]))
+  if(isDefined(var_0["heading"])) {
     self._id_8C7B = float(var_0["heading"]);
+  }
 
-  if(isDefined(var_0["pitch"]))
+  if(isDefined(var_0["pitch"])) {
     self._id_CBE9 = float(var_0["pitch"]);
+  }
 
-  if(isDefined(var_0["roll"]))
+  if(isDefined(var_0["roll"])) {
     self._id_E67D = float(var_0["roll"]);
+  }
 
-  if(isDefined(var_0["frequency"]))
+  if(isDefined(var_0["frequency"])) {
     self.frequency = float(var_0["frequency"]);
+  }
 
-  if(isDefined(var_0["intensity"]))
+  if(isDefined(var_0["intensity"])) {
     self._id_99E5 = float(var_0["intensity"]);
+  }
 
-  if(isDefined(var_0["dir"]))
+  if(isDefined(var_0["dir"])) {
     self._id_54DA = float(var_0["dir"]);
+  }
 
-  if(isDefined(var_0["start_flag"]))
+  if(isDefined(var_0["start_flag"])) {
     self._id_10C4F = var_0["start_flag"];
+  }
 
   thread _id_1021C();
 }
@@ -1026,8 +1058,9 @@ _id_1021C() {
   self setlightintensity(self._id_99E5);
 
   while(scripts\engine\utility::flag(self._id_10C4F)) {
-    if(var_1 > 360)
+    if(var_1 > 360) {
       var_1 = var_1 - 360;
+    }
 
     var_2 = var_0[0] + var_1 * self._id_CBE9 * self._id_54DA;
     var_3 = var_0[1] + var_1 * self._id_8C7B * self._id_54DA;
@@ -1097,8 +1130,9 @@ _id_5520(var_0) {
   scripts\engine\utility::flag_wait("collapse_out_of_dropship");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "dropship_rain_blocker")
+    if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "dropship_rain_blocker") {
       var_2.origin = var_2.origin - (0, 0, 1000);
+    }
   }
 
   _id_5D96();
@@ -1108,13 +1142,15 @@ _id_5D96() {
   wait 1.8;
   var_0 = getEnt("dropship_window_shadow", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 _id_5E37() {
   wait 2.0;
 
-  if(isDefined(level._id_5D6C))
+  if(isDefined(level._id_5D6C)) {
     level._id_5D6C _id_0BBF::_id_F451(1);
+  }
 }

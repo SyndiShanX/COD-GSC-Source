@@ -428,8 +428,9 @@ _id_A80C() {
 }
 
 landing_transients() {
-  if(!scripts\engine\utility::flag("shipcrib_europa_hangar_tr_loaded") || !scripts\engine\utility::flag("shipcrib_europa_prime_tr_loaded") || !scripts\engine\utility::flag("shipcrib_europa_mezz_tr_loaded") || !scripts\engine\utility::flag("shipcrib_europa_ambient_tr_loaded") || !scripts\engine\utility::flag("shipcrib_europa_ambientmr_tr_loaded"))
+  if(!scripts\engine\utility::flag("shipcrib_europa_hangar_tr_loaded") || !scripts\engine\utility::flag("shipcrib_europa_prime_tr_loaded") || !scripts\engine\utility::flag("shipcrib_europa_mezz_tr_loaded") || !scripts\engine\utility::flag("shipcrib_europa_ambient_tr_loaded") || !scripts\engine\utility::flag("shipcrib_europa_ambientmr_tr_loaded")) {
     waitforalltransients();
+  }
 }
 
 _id_A806() {
@@ -438,8 +439,9 @@ _id_A806() {
   var_2 = getEntArray("lgt_jackal_land_salter", "script_noteworthy");
   var_3 = _id_0EE1::_id_7C10("b")._id_A056;
 
-  foreach(var_5 in var_2)
-  var_5 linkTo(var_1);
+  foreach(var_5 in var_2) {
+    var_5 linkTo(var_1);
+  }
 
   var_1 linkTo(var_3, "tag_origin", (0, 0, 0), (0, 0, 0));
 }
@@ -450,11 +452,13 @@ _id_CD63() {
   cinematicingame("sc_europa_hud_jackal_return_kotch_hvt");
   setmusicstate("mx_415_kotch_bink");
 
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     scripts\engine\utility::waitframe();
+  }
 
-  while(iscinematicplaying())
+  while(iscinematicplaying()) {
     scripts\engine\utility::waitframe();
+  }
 
   stopcinematicingame();
 }
@@ -541,8 +545,9 @@ _id_A35C() {
   var_0 _id_0EE4::_id_68D1(var_1, var_2);
   level.player scripts\sp\utility::_id_F526("safe");
 
-  if(isDefined(level.player.helmet))
+  if(isDefined(level.player.helmet)) {
     level.player.helmet delete();
+  }
 
   var_0 _id_0BDB::_id_A0F9();
   var_0 scripts\engine\utility::delaycall(0.75, ::clearanim, %sh3_1b_eur_tablet_jackal_intro, 0.0);
@@ -619,8 +624,9 @@ _id_569E() {
   level._id_EA2C scripts\sp\anim::_id_1EC7(level._id_EA2C, "shipcrib_stand_idle03_exit");
   scripts\engine\utility::flag_set("salter_returndeck_ready");
 
-  if(!scripts\engine\utility::flag("europa_walking_onto_returndeck"))
+  if(!scripts\engine\utility::flag("europa_walking_onto_returndeck")) {
     return;
+  }
 }
 
 _id_5692() {
@@ -690,8 +696,9 @@ _id_56A5() {
 _id_568C() {
   wait 12.5;
 
-  if(isDefined(level.player.helmet))
+  if(isDefined(level.player.helmet)) {
     level.player.helmet delete();
+  }
 }
 
 _id_AB77(var_0, var_1) {
@@ -817,8 +824,9 @@ _id_CDF6(var_0) {
 _id_EABC() {
   level._id_EA2C scripts\sp\utility::_id_7799(level._id_828C, 2, 0.75);
 
-  while(!level._id_828C _id_9D65(level._id_EA2C))
+  while(!level._id_828C _id_9D65(level._id_EA2C)) {
     scripts\engine\utility::waitframe();
+  }
 
   level._id_EA2C scripts\sp\utility::_id_77B9(0.5);
 }
@@ -826,10 +834,11 @@ _id_EABC() {
 _id_9D65(var_0) {
   var_1 = scripts\sp\utility::_id_7951(var_0.origin, var_0.angles, self.origin);
 
-  if(var_1 < 0)
+  if(var_1 < 0) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_CD28() {
@@ -849,13 +858,15 @@ _id_CD2A() {
 _id_13617() {
   var_0 = undefined;
 
-  if(scripts\engine\utility::flag("in_vo_conversation"))
+  if(scripts\engine\utility::flag("in_vo_conversation")) {
     var_0 = 1;
+  }
 
   scripts\engine\utility::flag_waitopen("in_vo_conversation");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait 0.4;
+  }
 }
 
 _id_DB82() {}
@@ -942,8 +953,9 @@ _id_DB85(var_0) {
 }
 
 _id_CE1C(var_0) {
-  if(self == level._id_EA2C)
+  if(self == level._id_EA2C) {
     level endon("entering_bridge_scene");
+  }
 
   var_0 orientmode("face angle", var_0.angles[1]);
   var_0.goalradius = 16;
@@ -961,15 +973,17 @@ _id_F9E9() {
 }
 
 _id_40B0() {
-  if(isDefined(level._id_A6F4) && isDefined(level._id_A6F4._id_113CA))
+  if(isDefined(level._id_A6F4) && isDefined(level._id_A6F4._id_113CA)) {
     level._id_A6F4._id_113CA delete();
+  }
 
   _id_0EFB::_id_FDBA(level._id_828C);
   _id_0EFB::_id_FDBA(level._id_A6F4);
 
   if(isDefined(level._id_1312A)) {
-    if(isDefined(level._id_1312A._id_A071))
+    if(isDefined(level._id_1312A._id_A071)) {
       level._id_1312A._id_A071 delete();
+    }
   }
 
   _id_0EFB::_id_FDBA(level._id_1312A);
@@ -1003,8 +1017,9 @@ _id_CDAB() {
   level._id_BF2A thread _id_0B6A::_id_EC0A("newsguy1_end");
   var_2 = scripts\engine\utility::getStruct("newsguy1_end", "targetname");
 
-  while(distance2d(level._id_BF2A.origin, var_2.origin) > 300)
+  while(distance2d(level._id_BF2A.origin, var_2.origin) > 300) {
     scripts\engine\utility::waitframe();
+  }
 
   level._id_BF2A scripts\sp\utility::_id_7799(var_0);
   level._id_BF2A waittill("sceneblock_reach_finished");
@@ -1064,8 +1079,9 @@ _id_1375F(var_0, var_1) {
   var_2 = scripts\engine\utility::getStruct(var_1, "targetname");
 
   if(isDefined(self.origin) && isDefined(var_2.origin)) {
-    while(distance2d(self.origin, var_2.origin) > var_0)
+    while(distance2d(self.origin, var_2.origin) > var_0) {
       scripts\engine\utility::waitframe();
+    }
   }
 }
 
@@ -1102,10 +1118,11 @@ _id_1F39(var_0, var_1, var_2, var_3) {
   level endon("mac_scene_started");
 
   if(issubstr(var_3, "opsmap")) {
-    if(self._id_1FBB == "salter" || self._id_1FBB == "gator" || self._id_1FBB == "drop_officer")
+    if(self._id_1FBB == "salter" || self._id_1FBB == "gator" || self._id_1FBB == "drop_officer") {
       thread _id_0EFB::_id_CD3F(var_3);
-    else
+    } else {
       thread scripts\sp\interaction::_id_CD50(var_3);
+    }
   }
 
   if(isDefined(var_2)) {
@@ -1251,8 +1268,9 @@ _id_B13F(var_0, var_1) {
   var_2 = gettime();
   scripts\sp\utility::_id_65E3("ready_for_mac_scene");
 
-  if(scripts\sp\utility::_id_65DF("mac_nag"))
+  if(scripts\sp\utility::_id_65DF("mac_nag")) {
     scripts\sp\utility::_id_65E8("mac_nag");
+  }
 
   var_3 = gettime();
   level notify("mac_scene_started");
@@ -1445,10 +1463,11 @@ _id_7703(var_0) {
   var_0 scripts\sp\anim::_id_1F35(self, "SH3_12_EUR_SH_BR_BRIEF_NAV_checkrange");
   level._id_76FB thread _id_7704();
 
-  if(scripts\sp\interaction::_id_9CD7(level._id_C6AA["retribution"]._id_10E52["nav"]))
+  if(scripts\sp\interaction::_id_9CD7(level._id_C6AA["retribution"]._id_10E52["nav"])) {
     thread scripts\sp\interaction_manager::_id_CE40(level._id_C6AA["retribution"]._id_10E52["nav"]._id_EE92);
-  else
+  } else {
     thread _id_0EFB::_id_CD3F(level._id_C6AA["retribution"]._id_10E52["nav"]._id_EE92);
+  }
 }
 
 _id_7705(var_0, var_1) {
@@ -1462,8 +1481,9 @@ _id_7705(var_0, var_1) {
   var_0 thread scripts\sp\anim::_id_1EEA(self, "SH3_13_EUR_SH_BR_JUMP_NAV_idle", "stop_gator_loop");
   var_2 = squared(180);
 
-  for(var_3 = scripts\engine\utility::distance_2d_squared(self.origin, level.player.origin); var_3 < var_2; var_3 = scripts\engine\utility::distance_2d_squared(self.origin, level.player.origin))
+  for(var_3 = scripts\engine\utility::distance_2d_squared(self.origin, level.player.origin); var_3 < var_2; var_3 = scripts\engine\utility::distance_2d_squared(self.origin, level.player.origin)) {
     scripts\engine\utility::waitframe();
+  }
 
   var_0 notify("stop_gator_loop");
   var_0 scripts\sp\anim::_id_1F35(self, "SH3_13_EUR_SH_BR_JUMP_NAV_move_plr_station");
@@ -1804,16 +1824,18 @@ _id_2185() {
 _id_CC9A(var_0) {
   _id_3D5F();
 
-  foreach(var_2 in level._id_2249)
-  thread scripts\engine\utility::play_sound_in_space(var_0, var_2.origin);
+  foreach(var_2 in level._id_2249) {
+    thread scripts\engine\utility::play_sound_in_space(var_0, var_2.origin);
+  }
 
   var_4 = lookupsoundlength(var_0) / 1000;
   wait(var_4);
 }
 
 _id_3D5F() {
-  if(!isDefined(level._id_2249))
+  if(!isDefined(level._id_2249)) {
     _id_9534();
+  }
 }
 
 _id_9534() {
@@ -1919,8 +1941,9 @@ _id_A6F7() {
       if(scripts\sp\utility::_id_D1DF(var_2, var_3, 1)) {
         return;
       }
-      if(var_4 < var_0)
+      if(var_4 < var_0) {
         return;
+      }
     }
 
     scripts\engine\utility::waitframe();
@@ -2003,8 +2026,9 @@ _id_DB75() {
     scripts\sp\utility::_id_F305();
 
     if(scripts\sp\utility::_id_9BEE()) {
-      if(level._id_DADC)
+      if(level._id_DADC) {
         setsaveddvar("r_postaa", 1);
+      }
     }
   }
 
@@ -2013,11 +2037,13 @@ _id_DB75() {
 }
 
 _id_D8E2() {
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     scripts\engine\utility::waitframe();
+  }
 
-  while(iscinematicplaying())
+  while(iscinematicplaying()) {
     scripts\engine\utility::waitframe();
+  }
 
   level thread scripts\sp\utility::_id_BF98();
 }
@@ -2164,8 +2190,9 @@ _id_D840() {
   _id_10A5::_id_5E9A(_id_0EFB::_id_FD9C("dropship_service"));
   level notify("screens_stop_thinking");
 
-  if(scripts\engine\utility::flag("shipcrib_europa_vr_tr_loaded"))
+  if(scripts\engine\utility::flag("shipcrib_europa_vr_tr_loaded")) {
     _id_0F2D::_id_12BA8();
+  }
 
   _id_0EFB::_id_FDCD();
   _id_0EFB::_id_FDBB("all");

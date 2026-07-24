@@ -6,11 +6,13 @@
 #using_animtree("player");
 
 _id_96E9(var_0, var_1, var_2) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     precachemodel(var_0);
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     precachemodel(var_1);
+  }
 
   if(isDefined(var_0)) {
     level._id_EC87["player_rig"] = #animtree;
@@ -22,8 +24,9 @@ _id_96E9(var_0, var_1, var_2) {
     level._id_EC8C["player_legs"] = var_1;
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     _id_96DA(var_2);
+  }
 }
 
 _id_96EA(var_0, var_1, var_2) {
@@ -37,8 +40,9 @@ _id_96EA(var_0, var_1, var_2) {
     level._id_EC8C["player_legs"] = var_1;
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     _id_96DA(var_2);
+  }
 }
 
 #using_animtree("generic_human");
@@ -83,17 +87,21 @@ _id_7B88() {
 }
 
 _id_AD09(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 30;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 30;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 30;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 30;
+  }
 
   var_4 = get_player_score();
   var_4 show();
@@ -102,8 +110,9 @@ _id_AD09(var_0, var_1, var_2, var_3) {
 }
 
 _id_2B7C(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0.7;
+  }
 
   var_1 = get_player_score();
   var_1 show();

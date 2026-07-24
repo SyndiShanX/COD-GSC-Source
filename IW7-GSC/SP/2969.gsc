@@ -12,9 +12,9 @@ _id_1324B() {
   if(scripts\sp\vehicle_code::_id_C018()) {
     return;
   }
-  if(isDefined(level._id_126F0))
+  if(isDefined(level._id_126F0)) {
     self thread[[level._id_126F0]]("tag_origin", "back_left", (160, 0, 0));
-  else {
+  } else {
     if(isDefined(level.vehicle._id_116CE._id_1020A) && isDefined(level.vehicle._id_116CE._id_1020A[self.vehicletype])) {
       thread _id_57BE();
       return;
@@ -46,15 +46,17 @@ _id_579F() {
 _id_126F1() {
   var_0 = self vehicle_getspeed();
 
-  if(!var_0)
+  if(!var_0) {
     return -1;
+  }
 
   var_0 = var_0 * 17.6;
   var_1 = 1 / var_0;
   var_1 = clamp(var_1 * 35, 0.1, 0.3);
 
-  if(isDefined(self._id_126F2))
+  if(isDefined(self._id_126F2)) {
     var_1 = var_1 * self._id_126F2;
+  }
 
   wait(var_1);
   return var_1;

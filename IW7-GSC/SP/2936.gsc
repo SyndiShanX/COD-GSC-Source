@@ -11,8 +11,9 @@ unlockspecialist() {
     wait 1;
     var_0 = gettime() + 10000;
 
-    while(gettime() < var_0 && (level.player buttonPressed("BUTTON_LSTICK") || level.player buttonPressed("m")))
+    while(gettime() < var_0 && (level.player buttonPressed("BUTTON_LSTICK") || level.player buttonPressed("m"))) {
       wait 0.05;
+    }
 
     if(gettime() >= var_0) {
       level.player _meth_84C7("unlockedRealism", 1);
@@ -78,8 +79,9 @@ init() {
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2.script_parameters)) {
-      if(var_2.script_parameters == "notsolid")
+      if(var_2.script_parameters == "notsolid") {
         var_2 notsolid();
+      }
     }
   }
 
@@ -177,16 +179,18 @@ _id_4D05() {
     if(var_8 > 0.79) {
       var_9 = var_1.origin;
 
-      if(isai(var_1))
+      if(isai(var_1)) {
         var_9 = var_1 getEye();
-      else if(var_1.classname != "worldspawn" && isDefined(var_1.model) && scripts\sp\utility::hastag(var_1.model, "j_head"))
+      } else if(var_1.classname != "worldspawn" && isDefined(var_1.model) && scripts\sp\utility::hastag(var_1.model, "j_head")) {
         var_9 = var_1 gettagorigin("j_head");
+      }
 
       thread _id_4D14(var_0, var_4, var_9, var_6);
     } else if(var_8 > 0.61)
       thread _id_4D18(_id_4CFA(var_3, 1), var_0);
-    else
+    else {
       thread _id_4D16(_id_4CFA(var_3, 0), var_0);
+    }
 
     _id_F531(0.55);
     _id_F49E(1);
@@ -200,19 +204,21 @@ _id_4CFA(var_0, var_1) {
   var_4 = scripts\sp\math::_id_EB9B(anglestoright(level.player.angles), var_2);
   var_5 = max(var_3, var_4);
 
-  if(var_5 <= 1.35 && var_1)
+  if(var_5 <= 1.35 && var_1) {
     return "chest";
-  else if(var_5 == var_3)
+  } else if(var_5 == var_3) {
     return "left";
+  }
 
   return "right";
 }
 
 _id_4D14(var_0, var_1, var_2, var_3) {
-  if(var_1 == "MOD_MELEE")
+  if(var_1 == "MOD_MELEE") {
     var_4 = 0;
-  else
+  } else {
     var_4 = 0.422618;
+  }
 
   if(!scripts\engine\utility::within_fov(level.player.origin, level.player.angles, var_2, var_4)) {
     var_5 = ["chest", "left", "right"];
@@ -234,12 +240,13 @@ _id_4D14(var_0, var_1, var_2, var_3) {
 
       thread _id_25E9("injury", "helmet");
 
-      if(level._id_10964._id_8E1B == 3)
+      if(level._id_10964._id_8E1B == 3) {
         thread _id_9147(1);
-      else if(var_1 == "MOD_MELEE")
+      } else if(var_1 == "MOD_MELEE") {
         _id_4CFB(0, 1, var_2);
-      else
+      } else {
         _id_4CFB(1, 1, var_2);
+      }
 
       if(!self._id_8E12) {
         thread _id_9146();
@@ -257,9 +264,9 @@ _id_4D14(var_0, var_1, var_2, var_3) {
 _id_4D16(var_0, var_1) {
   level.player endon("death");
 
-  if(level.player getstance() == "prone")
+  if(level.player getstance() == "prone") {
     thread _id_4D18(var_0, var_1);
-  else {
+  } else {
     screenshake(level.player.origin, 10, 20, 5, 0.75);
     var_2 = "leg_" + var_0;
     var_3 = _id_2C94(var_2);
@@ -327,10 +334,11 @@ damage_leg_view_dvar_thread() {
   for(;;) {
     var_0 = getdvarint("bg_viewBobConstantAmplitude");
 
-    if(level.player islinked() && var_0 == 1)
+    if(level.player islinked() && var_0 == 1) {
       setsaveddvar("bg_viewBobConstantAmplitude", 0);
-    else if(!level.player islinked() && var_0 == 0)
+    } else if(!level.player islinked() && var_0 == 0) {
       setsaveddvar("bg_viewBobConstantAmplitude", 1);
+    }
 
     wait 0.05;
   }
@@ -369,14 +377,16 @@ _id_4D12() {
 }
 
 not_able_to_prone() {
-  if(isDefined(level.player.disabledprone) && level.player.disabledprone > 0)
+  if(isDefined(level.player.disabledprone) && level.player.disabledprone > 0) {
     return 1;
+  }
 
   var_0 = getEntArray("trigger_multiple_no_prone", "classname");
 
   foreach(var_2 in var_0) {
-    if(level.player istouching(var_2))
+    if(level.player istouching(var_2)) {
       return 1;
+    }
   }
 
   return 0;
@@ -385,9 +395,9 @@ not_able_to_prone() {
 _id_4D18(var_0, var_1) {
   level.player endon("death");
 
-  if(var_0 == "chest")
+  if(var_0 == "chest") {
     thread _id_4D11(var_1);
-  else {
+  } else {
     var_2 = "arm_" + var_0;
 
     if(_id_2C8A() && var_2 == "arm_right") {
@@ -413,13 +423,15 @@ _id_4D18(var_0, var_1) {
     if(var_2 == "arm_left") {
       thread _id_4D36();
 
-      if(_id_2C94("arm_right"))
+      if(_id_2C94("arm_right")) {
         thread _id_4D31();
+      }
     } else if(var_2 == "arm_right") {
-      if(_id_2C94("arm_left"))
+      if(_id_2C94("arm_left")) {
         thread _id_4D31();
-      else
+      } else {
         thread _id_4D3E();
+      }
     }
 
     var_4 = _id_2C94("arm_right") && _id_2C94("arm_left");
@@ -454,8 +466,9 @@ _id_4D13(var_0) {
   level.player stopgestureviewmodel("ges_hold_here");
   level.player scripts\engine\utility::allow_stances(1);
 
-  if(var_0)
+  if(var_0) {
     level.player scripts\engine\utility::allow_crouch(1);
+  }
 
   level.player scripts\engine\utility::allow_jump(1);
 }
@@ -544,10 +557,11 @@ damageed_left_arm_reload_internal() {
   level.player scripts\engine\utility::allow_fire(0);
   wait 2.7;
 
-  if(_id_2C94("arm_right") && _id_2C94("arm_left"))
+  if(_id_2C94("arm_right") && _id_2C94("arm_left")) {
     level.player forceplaygestureviewmodel("ges_both_arm_damage", undefined, 0.5, 0, 1, 1);
-  else if(_id_2C94("arm_left"))
+  } else if(_id_2C94("arm_left")) {
     level.player forceplaygestureviewmodel("ges_left_arm_damage", undefined, 0.2, 1, 1, 1);
+  }
 
   var_0 = level.player getcurrentprimaryweapon();
   var_1 = weaponclipsize(var_0);
@@ -605,8 +619,9 @@ _id_4D1D() {
 _id_86CB(var_0) {
   var_1 = level.player getcurrentprimaryweapon();
 
-  if(level.player _meth_8519(var_1, 1) && !issubstr(var_1, "iw7_fmg"))
+  if(level.player _meth_8519(var_1, 1) && !issubstr(var_1, "iw7_fmg")) {
     var_1 = weaponaltweaponname(var_1);
+  }
 
   var_2 = level.player iswallrunning() || !level.player isonground();
 
@@ -621,9 +636,9 @@ _id_86CB(var_0) {
   var_4 = spawn("weapon_" + var_1, var_3);
   var_4.angles = level.player.angles;
 
-  if(!var_0)
+  if(!var_0) {
     var_4 thread _id_86CC(var_1, var_2);
-  else {
+  } else {
     level.player takeweapon(var_1);
     var_4 _meth_8226(var_4.origin, var_4.origin + anglesToForward(level.player.angles) * 30);
   }
@@ -633,10 +648,11 @@ _id_86CC(var_0, var_1) {
   var_2 = level.player getcurrentweaponclipammo();
   var_3 = level.player getweaponammostock(var_0);
 
-  if(!var_1)
+  if(!var_1) {
     thread _id_86CE(0.5);
-  else
+  } else {
     thread gun_drop_while_wallrunning();
+  }
 
   level.player takeweapon(level.player getcurrentprimaryweapon());
   var_4 = level.player getplayerangles();
@@ -670,8 +686,9 @@ _id_86CD(var_0, var_1, var_2) {
     if(isDefined(var_3) && (var_3 == "none" || var_3 == "iw7_fists_specialist_mode")) {
       continue;
     }
-    if(scripts\sp\utility::_id_D0CA("iw7_fists_specialist_mode"))
+    if(scripts\sp\utility::_id_D0CA("iw7_fists_specialist_mode")) {
       level.player takeweapon("iw7_fists_specialist_mode");
+    }
 
     if(isDefined(self)) {
       if(distance2dsquared(self.origin, level.player.origin) > 1000000) {
@@ -735,10 +752,11 @@ gun_drop_while_wallrunning() {
 }
 
 _id_86C9() {
-  if(level.console || level.player usinggamepad())
+  if(level.console || level.player usinggamepad()) {
     scripts\sp\utility::_id_56BE("press_use_console", 0.5);
-  else
+  } else {
     scripts\sp\utility::_id_56BE("press_use_pc", 0.5);
+  }
 }
 
 _id_86C8() {
@@ -765,8 +783,9 @@ _id_86CF(var_0) {
   level.player giveweapon(var_0);
   level.player switchtoweapon(var_0);
 
-  if(scripts\sp\utility::_id_D0CA("iw7_fists_specialist_mode"))
+  if(scripts\sp\utility::_id_D0CA("iw7_fists_specialist_mode")) {
     level.player takeweapon("iw7_fists_specialist_mode");
+  }
 }
 
 _id_86CA() {
@@ -786,8 +805,9 @@ _id_86CA() {
     wait 0.05;
   }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_BE50() {
@@ -830,8 +850,9 @@ _id_BE54() {
   thread announce_healed();
   var_0 = _id_2296(0);
 
-  foreach(var_2 in var_0)
-  thread _id_BE52(var_2);
+  foreach(var_2 in var_0) {
+    thread _id_BE52(var_2);
+  }
 
   _id_F52C(level.player.maxhealth);
 }
@@ -841,28 +862,32 @@ announce_healed() {
   var_1 = 0;
   var_2 = _id_2C94("leg_left") || _id_2C94("leg_right");
 
-  if(var_2)
+  if(var_2) {
     var_0 = _id_2C94("leg_left") && _id_2C94("leg_right");
+  }
 
   var_3 = _id_2C94("arm_left") || _id_2C94("arm_right");
 
-  if(var_3)
+  if(var_3) {
     var_1 = _id_2C94("arm_left") && _id_2C94("arm_right");
+  }
 
   if(!var_2 && var_3) {
     if(var_1) {
-      if(scripts\engine\utility::cointoss())
+      if(scripts\engine\utility::cointoss()) {
         thread _id_25E9("repair", "arms");
-      else
+      } else {
         thread _id_25E9("repair", "status");
+      }
     } else
       thread _id_25E9("repair", "arm");
   } else if(var_2 && !var_3) {
     if(var_0) {
-      if(scripts\engine\utility::cointoss())
+      if(scripts\engine\utility::cointoss()) {
         thread _id_25E9("repair", "legs");
-      else
+      } else {
         thread _id_25E9("repair", "status");
+      }
     } else
       thread _id_25E9("repair", "leg");
   } else
@@ -890,8 +915,9 @@ _id_BE51() {
     level.player scripts\sp\utility::_id_1C72(1);
     level.player scripts\sp\utility::_id_1C34(1);
 
-    if(scripts\sp\utility::_id_D0BD("grapplingdevice", 1))
+    if(scripts\sp\utility::_id_D0BD("grapplingdevice", 1)) {
       level.player _meth_8503("ges_grapple", "ges_grav_jump_combat_fail", level._id_10533, level._id_10532);
+    }
   }
 }
 
@@ -908,8 +934,9 @@ _id_8DE3() {
     }
     level._id_10964.togglinghelmet = 1;
 
-    if(bool_player_helmet_damaged_enough())
+    if(bool_player_helmet_damaged_enough()) {
       _id_F3FF(0);
+    }
 
     var_0 = level.player getweaponammostock("helmet");
     level.player setweaponammostock("helmet", var_0 - 1);
@@ -931,16 +958,18 @@ _id_8DE1() {
     level.player waittill("secondary_equipment_change", var_1);
 
     if(var_1 == "helmet") {
-      if(scripts\sp\utility::_id_D0BD("grapplingdevice", 1) && !_id_2C94("arm_left"))
+      if(scripts\sp\utility::_id_D0BD("grapplingdevice", 1) && !_id_2C94("arm_left")) {
         level.player _meth_8507();
+      }
 
       level.player scripts\engine\utility::allow_offhand_secondary_weapons(0);
       continue;
     }
 
     if(var_0 == "helmet") {
-      if(scripts\sp\utility::_id_D0BD("grapplingdevice", 0) && !_id_2C94("arm_left"))
+      if(scripts\sp\utility::_id_D0BD("grapplingdevice", 0) && !_id_2C94("arm_left")) {
         level.player _meth_8503("ges_grapple", "ges_grav_jump_combat_fail", level._id_10533, level._id_10532);
+      }
 
       level.player scripts\engine\utility::allow_offhand_secondary_weapons(1);
     }
@@ -965,8 +994,9 @@ _id_4CE0(var_0, var_1) {
   var_2.health = var_2.health - var_1;
   var_2.health = clamp(var_2.health, 0, var_2.maxhealth);
 
-  if(_id_2C95())
+  if(_id_2C95()) {
     level._id_10964 thread _id_9151();
+  }
 
   var_5 = var_2.health / var_2.maxhealth;
   self._id_98F1[var_0] notify("hud_flicker_stop");
@@ -987,8 +1017,9 @@ _id_4CFB(var_0, var_1, var_2) {
     playworldsound("plr_helmet_glass_break", level.player getEye());
   }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = level.player.origin + scripts\engine\utility::randomvector(500);
+  }
 
   var_3 = scripts\engine\utility::within_fov(level.player getEye(), level.player.angles, var_2, 0.866025);
   var_4 = level.player scripts\sp\math::_id_9C86(var_2);
@@ -1004,10 +1035,11 @@ _id_4CFB(var_0, var_1, var_2) {
   if(isDefined(level._id_10964._id_A99C)) {
     var_7 = (var_6[1] - var_6[0]) * 0.5;
 
-    if(level._id_10964._id_A99C > var_7)
+    if(level._id_10964._id_A99C > var_7) {
       var_6[1] = var_6[1] - int(var_7);
-    else
+    } else {
       var_6[0] = var_6[0] + int(var_7);
+    }
   }
 
   var_8 = randomintrange(var_5[0], var_5[1]);
@@ -1019,10 +1051,11 @@ _id_4CFB(var_0, var_1, var_2) {
 _id_914F(var_0, var_1, var_2, var_3) {
   var_4 = [];
 
-  if(var_2)
+  if(var_2) {
     var_5 = ["crack", "burn"];
-  else
+  } else {
     var_5 = ["crack"];
+  }
 
   var_6 = randomintrange(270, 350);
 
@@ -1048,8 +1081,9 @@ _id_914F(var_0, var_1, var_2, var_3) {
 
   _id_137D1();
 
-  if(isDefined(level._id_10964._id_BB4A) && level._id_10964._id_BB4A)
+  if(isDefined(level._id_10964._id_BB4A) && level._id_10964._id_BB4A) {
     level._id_10964 _id_915F(var_4);
+  }
 
   if(scripts\engine\utility::is_true(level._id_10964.jackalhelmetcrackfade)) {
     level._id_10964 hud_fade_cracks(var_4, var_5, 4);
@@ -1058,8 +1092,9 @@ _id_914F(var_0, var_1, var_2, var_3) {
 
   var_4["crack"] destroy();
 
-  if(var_2 && isDefined(var_4["burn"]))
+  if(var_2 && isDefined(var_4["burn"])) {
     var_4["burn"] destroy();
+  }
 
   scripts\engine\utility::array_removeundefined(level._id_10964.helmetimpacts);
 }
@@ -1093,8 +1128,9 @@ _id_4CE1() {
   level.player scripts\engine\utility::allow_ads(0);
   playFX(level._effect["vfx_gun_sparks"], level.player getEye(), anglesToForward(level.player.angles), anglestoup(level.player.angles));
 
-  if(isDefined(level._id_10964.helmet))
+  if(isDefined(level._id_10964.helmet)) {
     level._id_10964.helmet hide();
+  }
 
   thread _id_4D17();
   wait 0.5;
@@ -1108,8 +1144,9 @@ _id_4D17() {
   level.player endon("death");
   level.player endon("headshot_death");
 
-  if(!level.player._id_8C0F)
+  if(!level.player._id_8C0F) {
     level.player playSound("player_death_helmet_decomp");
+  }
 
   for(;;) {
     if(level.player._id_8C0F) {
@@ -1119,8 +1156,9 @@ _id_4D17() {
 
     self._id_D430 = 1;
 
-    if(!_id_2C94("arm_left"))
+    if(!_id_2C94("arm_left")) {
       level.player scripts\engine\utility::delaycall(0.2, ::playgestureviewmodel, "ges_neck_grab", undefined, 1, 0.3, 0.2, 0);
+    }
 
     level.player shellshock("plane_sway", 12);
     level.player _meth_82C2("phstreets_building_hvt_breach", "reverb", "mix", "filter");
@@ -1259,8 +1297,9 @@ _id_4E1A(var_0) {
   thread _id_4E0F();
   var_1 = level.player getcurrentprimaryweapon();
 
-  if(isDefined(var_1) && var_1 != "none" && var_1 != "iw7_fists_specialist_mode" && var_1 != "mars_killstreak")
+  if(isDefined(var_1) && var_1 != "none" && var_1 != "iw7_fists_specialist_mode" && var_1 != "mars_killstreak") {
     thread _id_86CB(1);
+  }
 
   if(var_0) {
     level.player disableweapons();
@@ -1284,19 +1323,21 @@ _id_4E10() {
   var_0 = level.player isonground();
   var_1 = level.player getstance();
 
-  if(var_1 == "stand")
+  if(var_1 == "stand") {
     var_2 = -43;
-  else
+  } else {
     var_2 = -30;
+  }
 
   level.player takeweapon(level.player getcurrentprimaryweapon());
   var_3 = anglesToForward(level.player.angles) * -30;
   self rotatepitch(-20, 0.25);
 
-  if(var_1 == "crouch")
+  if(var_1 == "crouch") {
     self moveTo(self.origin + (0, 0, 15) + anglesToForward(level.player.angles) * -10, 0.35);
-  else if(var_1 == "stand")
+  } else if(var_1 == "stand") {
     self moveTo(self.origin + (0, 0, 25) + anglesToForward(level.player.angles) * -10, 0.35);
+  }
 
   wait 0.35;
   level.player disableweapons();
@@ -1361,8 +1402,9 @@ _id_4E1B() {
       var_1 = randomintrange(var_3, var_4);
       var_9++;
 
-      if(var_9 % 20)
+      if(var_9 % 20) {
         wait 0.05;
+      }
     }
   } else if(var_8 <= var_5) {
     var_1 = randomintrange(var_2, var_3);
@@ -1372,39 +1414,46 @@ _id_4E1B() {
       var_1 = randomintrange(var_2, var_3);
       var_9++;
 
-      if(var_9 % 20)
+      if(var_9 % 20) {
         wait 0.05;
+      }
     }
   }
 
-  if(scripts\sp\utility::_id_93AB())
+  if(scripts\sp\utility::_id_93AB()) {
     var_1 = 230;
-  else if(!_id_2C97()) {
-    if(_id_2C96("nanoshot", 0, 1))
+  } else if(!_id_2C97()) {
+    if(_id_2C96("nanoshot", 0, 1)) {
       var_1 = 200;
+    }
 
     if(randomint(100) < 40) {
-      if(var_0 == "headshot_death" && !_id_2C96("helmet", 0, 1))
+      if(var_0 == "headshot_death" && !_id_2C96("helmet", 0, 1)) {
         var_1 = 203;
+      }
 
-      if(var_0 == "headshot_death" && _id_2C96("helmet", 0, 1))
+      if(var_0 == "headshot_death" && _id_2C96("helmet", 0, 1)) {
         var_1 = 201;
+      }
 
-      if(var_0 == "headshot_death" && var_7)
+      if(var_0 == "headshot_death" && var_7) {
         var_1 = 226;
+      }
     }
 
     if(level._id_10964._id_D430) {
-      if(_id_2C96("helmet", 0, 1))
+      if(_id_2C96("helmet", 0, 1)) {
         var_1 = 202;
-      else
+      } else {
         var_1 = 208;
+      }
     }
 
-    if(level.script == "europa" && var_7 && randomint(100) < 20)
+    if(level.script == "europa" && var_7 && randomint(100) < 20) {
       var_1 = 228;
-    else if(level.script == "yard" && var_7 && randomint(100) < 20)
+    } else if(level.script == "yard" && var_7 && randomint(100) < 20) {
       var_1 = 229;
+    }
   }
 
   setomnvar("ui_death_hint", var_1);
@@ -1417,8 +1466,9 @@ _id_12AAF() {
   thread _id_12AB2();
   thread _id_12AAA();
 
-  if(_id_2C91())
+  if(_id_2C91()) {
     thread _id_12AB1();
+  }
 }
 
 _id_12AAC() {
@@ -1566,8 +1616,9 @@ _id_12AB1() {
     if(!_id_2C96("nanoshot", 0, 0)) {
       continue;
     }
-    if(_id_2C96("nanoshot", 0, 1) && !scripts\sp\utility::_id_D0BD("nanoshot", 0))
+    if(_id_2C96("nanoshot", 0, 1) && !scripts\sp\utility::_id_D0BD("nanoshot", 0)) {
       level.player _id_0B2A::_id_1418();
+    }
 
     if(isDefined(level.player.inrodeo) && level.player.inrodeo) {
       continue;
@@ -1615,18 +1666,20 @@ _id_12AAA() {
     if(isDefined(level.player.inrodeo) && level.player.inrodeo) {
       continue;
     }
-    if(_id_2C96("helmet", 1, 1))
+    if(_id_2C96("helmet", 1, 1)) {
       var_1 = "helmet_tutorial_hint";
-    else if(_id_2C96("helmet", 0, 1))
+    } else if(_id_2C96("helmet", 0, 1)) {
       var_1 = "helmet_equip";
-    else
+    } else {
       var_1 = "helmet_find";
+    }
 
     var_2 = 0;
 
     if(_id_2C91() && _id_2C96("helmet", 0, 1) && !var_0) {
-      if(!scripts\sp\utility::_id_D0BD("helmet", 0))
+      if(!scripts\sp\utility::_id_D0BD("helmet", 0)) {
         level.player _id_0B2A::_id_1419();
+      }
 
       var_1 = "helmet_tutorial_hint";
       level.player specialist_allow_invulnerability(1);
@@ -1641,8 +1694,9 @@ _id_12AAA() {
     settimescale(1);
     wait 2;
 
-    if(var_2)
+    if(var_2) {
       level.player specialist_allow_invulnerability(0);
+    }
 
     level._id_10964._id_58DE = 0;
     level._id_10964 notify("tutorial_over");
@@ -1677,29 +1731,33 @@ audio_request_suit_vo_internal(var_0, var_1, var_2) {
       if(!level._id_10964._id_8E1B) {
         return;
       }
-      if(isDefined(level._id_10964.togglinghelmet))
+      if(isDefined(level._id_10964.togglinghelmet)) {
         return;
+      }
     }
 
     if(isDefined(var_1) && (var_1 == "nano" || var_1 == "status")) {
-      if(!_id_2C98())
+      if(!_id_2C98()) {
         return;
+      }
     }
   } else
     wait 0.7;
 
   if(isDefined(var_0) && var_0 == "injury") {
     if(isDefined(var_1)) {
-      if(!level._id_10964 ispartinjured(var_1))
+      if(!level._id_10964 ispartinjured(var_1)) {
         return;
+      }
     }
   } else if(isDefined(var_0) && var_0 == "repair") {
     if(isDefined(var_1) && var_1 == "status") {
       var_3 = ["legs", "arms", "chest"];
 
       foreach(var_5 in var_3) {
-        if(level._id_10964 ispartinjured(var_5))
+        if(level._id_10964 ispartinjured(var_5)) {
           return;
+        }
       }
     }
   }
@@ -1709,15 +1767,17 @@ audio_request_suit_vo_internal(var_0, var_1, var_2) {
   }
   level._id_10964._id_10B3B++;
 
-  while(level._id_10964._id_111BE)
+  while(level._id_10964._id_111BE) {
     wait 0.05;
+  }
 
   level._id_10964._id_111BE = 1;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level._id_10964._id_2610 playSound("specialist_mode_" + var_0 + "_" + var_1 + "_" + var_2, "vo_over");
-  else
+  } else {
     level._id_10964._id_2610 playSound("specialist_mode_" + var_0 + "_" + var_1, "vo_over");
+  }
 
   level._id_10964._id_2610 waittill("vo_over");
   level._id_10964._id_111BE = 0;
@@ -1760,8 +1820,9 @@ _id_25FD() {
     if(_id_2C90() && var_0 > 0) {
       continue;
     }
-    if(_id_2C98())
+    if(_id_2C98()) {
       level._id_10964._id_2610 _id_25E1(var_0);
+    }
   }
 }
 
@@ -1776,13 +1837,14 @@ _id_2608() {
       continue;
     }
     if(!_id_2C95()) {
-      if(level._id_10964._id_D430)
+      if(level._id_10964._id_D430) {
         thread _id_25E9("injury", "oxygen");
-      else {
+      } else {
         thread _id_25E9("nag", "helmet");
 
-        if(!_id_2C96("helmet", 0, 0))
+        if(!_id_2C96("helmet", 0, 0)) {
           wait 13;
+        }
       }
 
       wait 13;
@@ -1790,9 +1852,9 @@ _id_2608() {
     }
 
     if(_id_2C98()) {
-      if(_id_2C96("nanoshot", 0, 1))
+      if(_id_2C96("nanoshot", 0, 1)) {
         thread _id_25E9("nag", "nano");
-      else {
+      } else {
         thread _id_25E9("nag", "status");
         wait 13;
       }
@@ -1807,14 +1869,15 @@ _id_25E1(var_0) {
   var_2 = _id_25FE(var_1);
   var_3 = randomint(100);
 
-  if(var_1 == "sprint" || var_3 > 75)
+  if(var_1 == "sprint" || var_3 > 75) {
     var_4 = "breathing_limp";
-  else if(var_1 == "run" || var_3 > 50)
+  } else if(var_1 == "run" || var_3 > 50) {
     var_4 = "breathing_limp_better";
-  else if(var_1 == "walk" || var_3 > 25)
+  } else if(var_1 == "walk" || var_3 > 25) {
     var_4 = "breathing_hurt";
-  else
+  } else {
     var_4 = "breathing_hurt_alt";
+  }
 
   if(randomint(100) > 50) {
     self playSound(var_4);
@@ -1829,24 +1892,27 @@ _id_25BD(var_0) {
   wait(var_0 * 0.5);
   level.player playRumbleOnEntity("damage_light");
 
-  if(randomint(100) > 50)
+  if(randomint(100) > 50) {
     self playSound("breathing_heartbeat_fade1");
-  else
+  } else {
     self playSound("breathing_heartbeat_fade2");
+  }
 
   wait(var_0 * 0.5);
 }
 
 _id_25E2(var_0) {
-  if(level.player issprinting())
+  if(level.player issprinting()) {
     return "sprint";
+  }
 
-  if(var_0 <= 0.1)
+  if(var_0 <= 0.1) {
     return "idle";
-  else if(var_0 <= 0.5)
+  } else if(var_0 <= 0.5) {
     return "walk";
-  else
+  } else {
     return "run";
+  }
 }
 
 _id_25FE(var_0) {
@@ -1870,10 +1936,11 @@ _id_25E3() {
     self._id_D467 = 1;
     scripts\sp\utility::_id_D020();
 
-    if(scripts\engine\utility::cointoss())
+    if(scripts\engine\utility::cointoss()) {
       var_0 = "plr_death_generic";
-    else
+    } else {
       var_0 = "plr_death_explosion";
+    }
 
     level.player playSound(var_0, "player_done_yelling");
     level.player waittill("player_done_yelling");
@@ -1914,36 +1981,43 @@ _id_9150(var_0) {
 }
 
 hudcanshow() {
-  if(!level.player _meth_843C())
+  if(!level.player _meth_843C()) {
     return 0;
+  }
 
   var_0 = level.player getcurrentweapon();
 
-  if(var_0 == "none" || var_0 == "iw7_gunless")
+  if(var_0 == "none" || var_0 == "iw7_gunless") {
     return 0;
+  }
 
-  if(getomnvar("ui_hide_hud"))
+  if(getomnvar("ui_hide_hud")) {
     return 0;
+  }
 
-  if(!isalive(level.player))
+  if(!isalive(level.player)) {
     return 0;
+  }
 
-  if(scripts\sp\utility::_id_7B8C() == "safe")
+  if(scripts\sp\utility::_id_7B8C() == "safe") {
     return 0;
+  }
 
   return 1;
 }
 
 usingspecialequipment() {
-  if(level._id_10964.hidehelmetimpacts)
+  if(level._id_10964.hidehelmetimpacts) {
     return 1;
+  }
 
   var_0 = ["transitiontorobot", "controllingrobot", "selfdestruct"];
   var_1 = _id_0E29::_id_87A7();
 
   foreach(var_3 in var_0) {
-    if(var_1 == var_3)
+    if(var_1 == var_3) {
       return 1;
+    }
   }
 
   return 0;
@@ -1959,15 +2033,17 @@ hud_thread() {
       foreach(var_2 in level._id_10964._id_98F1) {
         var_2 fadeovertime(0.3);
 
-        if(var_2.alpha != var_2.alpha_req)
+        if(var_2.alpha != var_2.alpha_req) {
           var_2.alpha = var_2.alpha_req;
+        }
       }
     } else {
       foreach(var_2 in level._id_10964._id_98F1) {
         var_2 fadeovertime(0.3);
 
-        if(var_2.alpha != 0)
+        if(var_2.alpha != 0) {
           var_2.alpha = 0;
+        }
       }
     }
 
@@ -2019,8 +2095,9 @@ _id_9160(var_0, var_1) {
   if(!isDefined(level._id_10964._id_98F1)) {
     return;
   }
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
   foreach(var_3 in level._id_10964._id_98F1) {
     if(var_0) {
@@ -2036,8 +2113,9 @@ _id_9151() {
   level notify("kill_injury_hud_scanner");
   level endon("kill_injury_hud_scanner");
 
-  if(isDefined(self._id_914B))
+  if(isDefined(self._id_914B)) {
     self._id_914B destroy();
+  }
 
   var_0 = scripts\sp\hud_util::createicon("hud_injury_scanner", 70, 20);
   var_0.x = 15;
@@ -2068,8 +2146,9 @@ _id_9146() {
 
   self._id_8E12 = 1;
 
-  foreach(var_1 in self._id_98F1)
-  var_1 thread _id_9144(3);
+  foreach(var_1 in self._id_98F1) {
+    var_1 thread _id_9144(3);
+  }
 
   for(var_3 = 0; var_3 < 3; var_3++) {
     setomnvar("ui_hide_hud", 1);
@@ -2098,10 +2177,11 @@ _id_9144(var_0, var_1) {
 
   wait(randomfloatrange(0.05, 0.15));
 
-  if(isDefined(var_1) && var_1)
+  if(isDefined(var_1) && var_1) {
     self.alpha_req = 1;
-  else
+  } else {
     self.alpha_req = var_2;
+  }
 
   self._id_8E12 = 0;
 }
@@ -2166,14 +2246,16 @@ _id_2296(var_0) {
 
   foreach(var_3 in level._id_10964._id_2C19) {
     if(var_0) {
-      if(_id_2C94(var_3.name))
+      if(_id_2C94(var_3.name)) {
         var_1 = scripts\engine\utility::add_to_array(var_1, var_3);
+      }
 
       continue;
     }
 
-    if(var_3.health < var_3.maxhealth)
+    if(var_3.health < var_3.maxhealth) {
       var_1 = scripts\engine\utility::add_to_array(var_1, var_3);
+    }
   }
 
   return var_1;
@@ -2184,202 +2266,256 @@ _id_2683() {
 }
 
 _id_2C87() {
-  if(!_id_2C96("nanoshot", 1, 1))
+  if(!_id_2C96("nanoshot", 1, 1)) {
     return 0;
+  }
 
-  if(_id_2C97())
+  if(_id_2C97()) {
     return 0;
+  }
 
   var_0 = level.player getweaponammostock("nanoshot");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(isDefined(var_0) && var_0 <= 0)
+  if(isDefined(var_0) && var_0 <= 0) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_2C88() {
-  if(level.player isgestureplaying())
+  if(level.player isgestureplaying()) {
     return 0;
+  }
 
-  if(_id_2C97())
+  if(_id_2C97()) {
     return 0;
+  }
 
-  if(level._id_10964._id_4C97)
+  if(level._id_10964._id_4C97) {
     return 0;
+  }
 
-  if(level.player isthrowinggrenade())
+  if(level.player isthrowinggrenade()) {
     return 0;
+  }
 
-  if(level.player fragButtonPressed())
+  if(level.player fragButtonPressed()) {
     return 0;
+  }
 
-  if(level.player islinked())
+  if(level.player islinked()) {
     return 0;
+  }
 
-  if(!level.player _meth_843C())
+  if(!level.player _meth_843C()) {
     return 0;
+  }
 
-  if(isDefined(level.player.inrodeo) && level.player.inrodeo)
+  if(isDefined(level.player.inrodeo) && level.player.inrodeo) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_2C89() {
-  if(level.player.disabledreload > 1)
+  if(level.player.disabledreload > 1) {
     return 0;
+  }
 
-  if(self._id_4C97)
+  if(self._id_4C97) {
     return 0;
+  }
 
-  if(_id_2C97())
+  if(_id_2C97()) {
     return 0;
+  }
 
   var_0 = level.player getcurrentprimaryweapon();
   var_1 = weaponclipsize(var_0);
   var_2 = level.player getcurrentweaponclipammo();
 
-  if(var_2 >= var_1)
+  if(var_2 >= var_1) {
     return 0;
+  }
 
   var_3 = level.player getweaponammostock(var_0);
 
-  if(var_3 <= 0)
+  if(var_3 <= 0) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_2C8A() {
-  if(self._id_BF7E >= gettime())
+  if(self._id_BF7E >= gettime()) {
     return 0;
+  }
 
-  if(self._id_86F4 <= 0)
+  if(self._id_86F4 <= 0) {
     return 0;
+  }
 
-  if(_id_2C94("arm_left"))
+  if(_id_2C94("arm_left")) {
     return 0;
+  }
 
-  if(!isalive(level.player))
+  if(!isalive(level.player)) {
     return 0;
+  }
 
-  if(scripts\sp\utility::_id_93AC())
+  if(scripts\sp\utility::_id_93AC()) {
     return 0;
+  }
 
-  if(level.player issprinting())
+  if(level.player issprinting()) {
     return 0;
+  }
 
-  if(level.player isthrowinggrenade())
+  if(level.player isthrowinggrenade()) {
     return 0;
+  }
 
-  if(level.player _meth_8448())
+  if(level.player _meth_8448()) {
     return 0;
+  }
 
-  if(level.player ismeleeing())
+  if(level.player ismeleeing()) {
     return 0;
+  }
 
-  if(level.player islinked())
+  if(level.player islinked()) {
     return 0;
+  }
 
-  if(level.player._id_C337.active)
+  if(level.player._id_C337.active) {
     return 0;
+  }
 
   var_0 = _id_0E29::_id_87A7();
 
-  if(var_0 != "none")
+  if(var_0 != "none") {
     return 0;
+  }
 
-  if(getomnvar("ui_jackal_call_down_active") > 0)
+  if(getomnvar("ui_jackal_call_down_active") > 0) {
     return 0;
+  }
 
-  if(getomnvar("ui_c12_active") > 0)
+  if(getomnvar("ui_c12_active") > 0) {
     return 0;
+  }
 
-  if(scripts\engine\utility::flag_exist("player_in_mars_killstreak") && scripts\engine\utility::flag("player_in_mars_killstreak"))
+  if(scripts\engine\utility::flag_exist("player_in_mars_killstreak") && scripts\engine\utility::flag("player_in_mars_killstreak")) {
     return 0;
+  }
 
   var_1 = level.player getEye();
   var_2 = anglesToForward(level.player.angles);
 
-  if(!scripts\common\trace::ray_trace_passed(var_1, var_1 + var_2 * 40, level.player))
+  if(!scripts\common\trace::ray_trace_passed(var_1, var_1 + var_2 * 40, level.player)) {
     return 0;
+  }
 
   var_3 = level.player getcurrentweapon();
 
-  if(var_3 == "none")
+  if(var_3 == "none") {
     return 0;
+  }
 
-  if(issubstr(var_3, "steeldragon"))
+  if(issubstr(var_3, "steeldragon")) {
     return 0;
+  }
 
-  if(issubstr(var_3, "fist"))
+  if(issubstr(var_3, "fist")) {
     return 0;
+  }
 
-  if(issubstr(var_3, "gunless"))
+  if(issubstr(var_3, "gunless")) {
     return 0;
+  }
 
-  if(issubstr(var_3, "knife"))
+  if(issubstr(var_3, "knife")) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_2C8B() {
-  if(!_id_2C8E())
+  if(!_id_2C8E()) {
     return 0;
+  }
 
-  if(_id_2C95() && !bool_player_helmet_damaged_enough())
+  if(_id_2C95() && !bool_player_helmet_damaged_enough()) {
     return 0;
+  }
 
-  if(!_id_2C96("helmet", 1, 1))
+  if(!_id_2C96("helmet", 1, 1)) {
     return 0;
+  }
 
-  if(!isalive(level.player))
+  if(!isalive(level.player)) {
     return 0;
+  }
 
-  if(level.player isthrowinggrenade())
+  if(level.player isthrowinggrenade()) {
     return 0;
+  }
 
-  if(level.player _meth_8448())
+  if(level.player _meth_8448()) {
     return 0;
+  }
 
-  if(level.player ismeleeing())
+  if(level.player ismeleeing()) {
     return 0;
+  }
 
-  if(level.player islinked())
+  if(level.player islinked()) {
     return 0;
+  }
 
-  if(!level.player _meth_843C())
+  if(!level.player _meth_843C()) {
     return 0;
+  }
 
-  if(!level.player scripts\engine\utility::isoffhandweaponsallowed())
+  if(!level.player scripts\engine\utility::isoffhandweaponsallowed()) {
     return 0;
+  }
 
-  if(_id_2C97())
+  if(_id_2C97()) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_2C8C() {
-  if(_id_0E29::_id_87A7() != "none")
+  if(_id_0E29::_id_87A7() != "none") {
     return 0;
+  }
 
-  if(_id_2C97())
+  if(_id_2C97()) {
     return 0;
+  }
 
-  if(getomnvar("ui_jackal_call_down_active") > 0)
+  if(getomnvar("ui_jackal_call_down_active") > 0) {
     return 0;
+  }
 
-  if(getomnvar("ui_c12_active") > 0)
+  if(getomnvar("ui_c12_active") > 0) {
     return 0;
+  }
 
-  if(scripts\engine\utility::flag_exist("player_in_mars_killstreak") && scripts\engine\utility::flag("player_in_mars_killstreak"))
+  if(scripts\engine\utility::flag_exist("player_in_mars_killstreak") && scripts\engine\utility::flag("player_in_mars_killstreak")) {
     return 0;
+  }
 
   return 1;
 }
@@ -2409,8 +2545,9 @@ _id_2C91() {
 }
 
 _id_2C93() {
-  if(_id_2C8F() || level.script == "heist" || level.script == "sa_wounded" || level.script == "sa_empambush")
+  if(_id_2C8F() || level.script == "heist" || level.script == "sa_wounded" || level.script == "sa_empambush") {
     return 1;
+  }
 
   return 0;
 }
@@ -2424,21 +2561,25 @@ _id_2C95() {
 }
 
 bool_player_helmet_damaged_enough() {
-  if(level._id_10964._id_8E1B > 0)
+  if(level._id_10964._id_8E1B > 0) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_2C96(var_0, var_1, var_2) {
-  if(!scripts\sp\utility::_id_D0BD(var_0, 1))
+  if(!scripts\sp\utility::_id_D0BD(var_0, 1)) {
     return 0;
+  }
 
-  if(var_1 && !scripts\sp\utility::_id_D0BD(var_0, 0))
+  if(var_1 && !scripts\sp\utility::_id_D0BD(var_0, 0)) {
     return 0;
+  }
 
-  if(var_2 && !scripts\sp\utility::_id_799C(var_0))
+  if(var_2 && !scripts\sp\utility::_id_799C(var_0)) {
     return 0;
+  }
 
   return 1;
 }
@@ -2448,13 +2589,15 @@ _id_2C97() {
 }
 
 halt_specialist_hints() {
-  if(isDefined(level._id_10964))
+  if(isDefined(level._id_10964)) {
     level._id_10964.allowhints = undefined;
+  }
 }
 
 continue_specialist_hints() {
-  if(isDefined(level._id_10964))
+  if(isDefined(level._id_10964)) {
     level._id_10964.allowhints = 1;
+  }
 }
 
 _id_2C98() {
@@ -2464,20 +2607,25 @@ _id_2C98() {
 _id_2C99() {
   var_0 = level.player scripts\sp\utility::_id_7BD6();
 
-  if(_id_2C97())
+  if(_id_2C97()) {
     return 0;
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(var_0 != "nanoshot")
+  if(var_0 != "nanoshot") {
     return 0;
+  }
 
-  if(level.player.health != level.player.maxhealth)
+  if(level.player.health != level.player.maxhealth) {
     return 0;
+  }
 
-  if(scripts\engine\utility::is_true(level.player.disable_nanoshot_hint))
+  if(scripts\engine\utility::is_true(level.player.disable_nanoshot_hint)) {
     return 0;
+  }
 
   return 1;
 }
@@ -2515,8 +2663,9 @@ _id_F400(var_0) {
 _id_F49E(var_0, var_1) {
   level.player endon("damage");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
   level._id_10964._id_BFAA = var_0;
 }
@@ -2530,10 +2679,11 @@ _id_F52F(var_0) {
   if(!isDefined(level._id_10964.helmet)) {
     return;
   }
-  if(var_0)
+  if(var_0) {
     level._id_10964.helmet show();
-  else
+  } else {
     level._id_10964.helmet hide();
+  }
 }
 
 _id_F530(var_0) {
@@ -2542,10 +2692,11 @@ _id_F530(var_0) {
   level._id_10964.jackalhelmetcrackfade = var_0;
   _id_F3FF(!var_0);
 
-  if(var_0)
+  if(var_0) {
     level._id_10964 notify("in_jackal");
-  else
+  } else {
     level._id_10964 notify("out_of_jackal");
+  }
 }
 
 _id_F531(var_0) {
@@ -2555,8 +2706,9 @@ _id_F531(var_0) {
 }
 
 specialist_allow_invulnerability(var_0) {
-  if(!isDefined(level._id_10964.allowinvulnerability))
+  if(!isDefined(level._id_10964.allowinvulnerability)) {
     level._id_10964.allowinvulnerability = 0;
+  }
 
   if(var_0) {
     level._id_10964.allowinvulnerability++;
@@ -2564,8 +2716,9 @@ specialist_allow_invulnerability(var_0) {
   } else {
     level._id_10964.allowinvulnerability--;
 
-    if(level._id_10964.allowinvulnerability == 0)
+    if(level._id_10964.allowinvulnerability == 0) {
       self _meth_80A1();
+    }
   }
 }
 
@@ -2616,19 +2769,23 @@ _id_137D0() {
 }
 
 _id_137F1() {
-  while(!_id_2C98())
+  while(!_id_2C98()) {
     wait 0.05;
+  }
 }
 
 spawn_nanoshot() {
-  if(level.player scripts\sp\utility::_id_65DF("zero_gravity") && level.player scripts\sp\utility::_id_65DB("zero_gravity"))
+  if(level.player scripts\sp\utility::_id_65DF("zero_gravity") && level.player scripts\sp\utility::_id_65DB("zero_gravity")) {
     return 0;
+  }
 
-  if(isDefined(level.last_nanoshot_drop) && gettime() - level.last_nanoshot_drop < 5000)
+  if(isDefined(level.last_nanoshot_drop) && gettime() - level.last_nanoshot_drop < 5000) {
     return 0;
+  }
 
-  if(randomint(100) > 10)
+  if(randomint(100) > 10) {
     return 0;
+  }
 
   level.last_nanoshot_drop = gettime();
   var_0 = vectorNormalize(level.player.origin - self.origin);
@@ -2652,8 +2809,9 @@ nanoshot_pickup() {
   var_0 _id_0E46::_id_48C4(undefined, undefined, &"EQUIPMENT_PICKUP_NANOSHOT", 40, 300, undefined, undefined, undefined, 0, &"hud_interaction_prompt_center_equipment");
   var_0 makeunusable();
 
-  if(!scripts\sp\utility::_id_D0BD("nanoshot", 1))
+  if(!scripts\sp\utility::_id_D0BD("nanoshot", 1)) {
     var_0 makeusable();
+  }
 
   nanoshot_waittill_trigger_or_delete(var_0);
   var_0 delete();
@@ -2663,8 +2821,9 @@ nanoshot_pickup() {
   }
   var_1 = 0;
 
-  if(level.player._id_110BD == "")
+  if(level.player._id_110BD == "") {
     var_1 = 1;
+  }
 
   var_2 = scripts\sp\loadout::_id_7C27(scripts\sp\utility::_id_7BD6());
   var_3 = scripts\sp\utility::_id_7BD7();
@@ -2700,8 +2859,9 @@ drop_equipment_crate(var_0, var_1) {
     var_3 delete();
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 }
 
 nanoshot_waittill_trigger_or_delete(var_0) {
@@ -2727,8 +2887,9 @@ nanoshot_pickup_watcher() {
     }
 
     foreach(var_1 in level._id_8580["axis"]) {
-      if(isDefined(var_1) && var_1.classname == "weapon_nanoshot")
+      if(isDefined(var_1) && var_1.classname == "weapon_nanoshot") {
         var_1._id_9027 makeusable();
+      }
     }
 
     while(!scripts\sp\utility::_id_D0BD("nanoshot", 1)) {
@@ -2737,8 +2898,9 @@ nanoshot_pickup_watcher() {
     }
 
     foreach(var_1 in level._id_8580["axis"]) {
-      if(isDefined(var_1) && var_1.classname == "weapon_nanoshot")
+      if(isDefined(var_1) && var_1.classname == "weapon_nanoshot") {
         var_1._id_9027 makeunusable();
+      }
     }
   }
 }
@@ -2894,11 +3056,13 @@ specialist_crate_move(var_0, var_1, var_2, var_3, var_4) {
   var_6 = scripts\engine\utility::getStructArray("equipment_pickup", "targetname");
   var_7 = scripts\engine\utility::getclosest(var_1, var_6);
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = var_7.angles;
+  }
 
-  if(!isDefined(var_4) && isDefined(var_7._id_EDE7))
+  if(!isDefined(var_4) && isDefined(var_7._id_EDE7)) {
     var_4 = var_7._id_EDE7;
+  }
 
   var_8 = getEntArray("specialist_mode_only", "targetname");
   var_9 = sortbydistance(var_8, var_7.origin);
@@ -2906,10 +3070,11 @@ specialist_crate_move(var_0, var_1, var_2, var_3, var_4) {
   var_11 = undefined;
 
   foreach(var_13 in var_9) {
-    if(!isDefined(var_10) && var_13.classname == "script_model")
+    if(!isDefined(var_10) && var_13.classname == "script_model") {
       var_10 = var_13;
-    else if(!isDefined(var_11) && var_13.classname == "script_brushmodel")
+    } else if(!isDefined(var_11) && var_13.classname == "script_brushmodel") {
       var_11 = var_13;
+    }
 
     if(isDefined(var_10) && isDefined(var_11)) {
       break;
@@ -2918,8 +3083,9 @@ specialist_crate_move(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_7._id_99F7._id_6698)) {
     foreach(var_16 in var_7._id_99F7._id_6698) {
-      if(isDefined(var_16))
+      if(isDefined(var_16)) {
         var_16 delete();
+      }
     }
   }
 
@@ -2942,10 +3108,11 @@ specialist_crate_delete(var_0) {
   var_7 = undefined;
 
   foreach(var_9 in var_5) {
-    if(!isDefined(var_6) && var_9.classname == "script_model")
+    if(!isDefined(var_6) && var_9.classname == "script_model") {
       var_6 = var_9;
-    else if(!isDefined(var_7) && var_9.classname == "script_brushmodel")
+    } else if(!isDefined(var_7) && var_9.classname == "script_brushmodel") {
       var_7 = var_9;
+    }
 
     if(isDefined(var_6) && isDefined(var_7)) {
       break;
@@ -2954,8 +3121,9 @@ specialist_crate_delete(var_0) {
 
   if(isDefined(var_3._id_99F7._id_6698)) {
     foreach(var_12 in var_3._id_99F7._id_6698) {
-      if(isDefined(var_12))
+      if(isDefined(var_12)) {
         var_12 delete();
+      }
     }
   }
 

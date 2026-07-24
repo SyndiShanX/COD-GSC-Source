@@ -37,8 +37,9 @@ main(var_0, var_1, var_2) {
 #using_animtree("vehicles");
 
 _id_317C(var_0) {
-  if(!isDefined(level._id_3979))
+  if(!isDefined(level._id_3979)) {
     level._id_3979 = [];
+  }
 
   level._effect["capship_death_linger_sparks_bg"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_damage_sparks_bg.vfx");
   level._effect["capship_death_linger_sparks_md"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_damage_sparks_md.vfx");
@@ -65,8 +66,9 @@ _id_317C(var_0) {
   var_1._id_1FAF = % ph_mil_air_ca_destroyer_space_explosion;
   var_1._id_7570 = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_death_debris.vfx");
 
-  if(getdvarint("e3", 0))
+  if(getdvarint("e3", 0)) {
     var_1._id_7571 = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_death_debris_e3.vfx");
+  }
 
   var_1._id_7582 = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_death_explosion.vfx");
   var_1._id_FB8C = "capital_ship_explo";
@@ -149,14 +151,17 @@ _id_1EDC() {
 }
 
 _id_F030(var_0, var_1, var_2) {
-  while(isDefined(self._id_74A6))
+  while(isDefined(self._id_74A6)) {
     wait 0.05;
+  }
 
-  if(!isDefined(level._id_F033))
+  if(!isDefined(level._id_F033)) {
     level._id_F033 = [];
+  }
 
-  if(!isDefined(level._id_F02D))
+  if(!isDefined(level._id_F02D)) {
     level._id_F02D = [];
+  }
 
   level._id_F033 = scripts\engine\utility::array_add(level._id_F033, self);
   level._id_F02D = scripts\engine\utility::array_add(level._id_F02D, self);
@@ -168,23 +173,26 @@ _id_F030(var_0, var_1, var_2) {
   self._id_10250 = 1;
   self._id_D436 = 0;
 
-  if(scripts\sp\utility::_id_B324())
+  if(scripts\sp\utility::_id_B324()) {
     self[[level._id_A056._id_11543]]("capitalship", "JACKAL_SDF_DESTROYER", "none", "none", 0, 1, 1);
+  }
 
   self.team = "axis";
   _id_0BB6::_id_39E1();
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self._id_EEF9 = var_2;
-  else
+  } else {
     self._id_EEF9 = "cannon_missile_ca_hardpoint cannon_small_ca,3,1,amb_turret_sml_l_ts_1,amb_turret_sml_l_ts_5,amb_turret_sml_r_ts_1,amb_turret_sml_r_ts_5,amb_turret_sml_r_ts_6,amb_turret_sml_r_ts_7,amb_turret_sml_l_ts_6,amb_turret_sml_l_ts_7 cannon_flak_ca,3,1 cannon_phalanx";
+  }
 
   _id_0BB6::_id_39E8();
   self solid();
   self setCanDamage(1);
 
-  if(scripts\engine\utility::is_true(var_0))
+  if(scripts\engine\utility::is_true(var_0)) {
     thread _id_0BA9::_id_39C9();
+  }
 
   _id_0BB8::_id_39CE("high");
   thread _id_0BB8::_id_39D0("idle");
@@ -202,8 +210,9 @@ _id_F030(var_0, var_1, var_2) {
   thread _id_52FB();
   _id_0BA9::_id_52FD();
 
-  if(!isDefined(var_1) || !var_1)
+  if(!isDefined(var_1) || !var_1) {
     self._id_12FBA = 1;
+  }
 
   thread _id_0BA9::_id_396F(var_1);
 }
@@ -236,14 +245,17 @@ _id_52FB() {
 _id_52FA() {
   var_0 = 0;
 
-  if(isDefined(self.turrets) && isDefined(self.turrets["cap_turret_med_flak"]))
+  if(isDefined(self.turrets) && isDefined(self.turrets["cap_turret_med_flak"])) {
     var_0 = scripts\engine\utility::array_removeundefined(self.turrets["cap_turret_med_flak"]).size;
+  }
 
-  if(isDefined(self.turrets) && isDefined(self.turrets["cap_turret_phalanx"]))
+  if(isDefined(self.turrets) && isDefined(self.turrets["cap_turret_phalanx"])) {
     var_0 = var_0 + scripts\engine\utility::array_removeundefined(self.turrets["cap_turret_phalanx"]).size;
+  }
 
-  if(isDefined(self.turrets) && isDefined(self.turrets["cap_turret_small_constant"]))
+  if(isDefined(self.turrets) && isDefined(self.turrets["cap_turret_small_constant"])) {
     var_0 = var_0 + scripts\engine\utility::array_removeundefined(self.turrets["cap_turret_small_constant"]).size;
+  }
 
   return var_0;
 }
@@ -251,8 +263,9 @@ _id_52FA() {
 _id_52F9() {
   var_0 = 0;
 
-  if(isDefined(self._id_8B4F) && isDefined(self._id_8B4F["cap_hardpoint_missile_barrage"]))
+  if(isDefined(self._id_8B4F) && isDefined(self._id_8B4F["cap_hardpoint_missile_barrage"])) {
     var_0 = scripts\engine\utility::array_removeundefined(self._id_8B4F["cap_hardpoint_missile_barrage"]).size;
+  }
 
   return var_0;
 }

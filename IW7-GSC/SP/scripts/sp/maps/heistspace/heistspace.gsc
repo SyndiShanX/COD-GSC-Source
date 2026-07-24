@@ -27,8 +27,9 @@ main() {
   _id_AE35();
   _id_9771();
 
-  if(getDvar("createfx") != "")
+  if(getDvar("createfx") != "") {
     level thread _id_88CA();
+  }
 
   scripts\sp\load::main();
   level thread _id_0F35::main();
@@ -237,8 +238,9 @@ _id_1078A() {
   level._id_C413 notsolid();
   wait 0.5;
 
-  if(isDefined(level._id_C413))
+  if(isDefined(level._id_C413)) {
     level._id_C413 thread _id_0BB8::_id_39CE("off");
+  }
 }
 
 _id_A11C() {
@@ -329,13 +331,15 @@ _id_9770() {
 _id_DE5A() {
   var_0 = getEntArray("reflection_probe_door", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     scripts\sp\utility::_id_228A(var_0);
+  }
 }
 
 _id_1723(var_0, var_1, var_2, var_3) {
-  if(!scripts\sp\utility::_id_C268(var_0))
+  if(!scripts\sp\utility::_id_C268(var_0)) {
     objective_add(scripts\sp\utility::_id_C264(var_0), var_1, var_2);
+  }
 }
 
 _id_8D26() {
@@ -366,12 +370,14 @@ _id_88CA() {
   var_0 = getEnt("ext_bridge_geo", "targetname");
   var_2 = getEnt("ext_bridge_pos", "targetname");
 
-  foreach(var_4 in var_1)
-  var_4 linkTo(var_0);
+  foreach(var_4 in var_1) {
+    var_4 linkTo(var_0);
+  }
 
   for(;;) {
-    while(getDvar("toggle_ship_visibility") == "0")
+    while(getDvar("toggle_ship_visibility") == "0") {
       wait 0.05;
+    }
 
     thread scripts\sp\utility::_id_1264E("heistspace_om_bridge_tr");
     thread scripts\sp\utility::_id_12641("heistspace_om_ordnance_tr");
@@ -381,8 +387,9 @@ _id_88CA() {
     level._id_C413 _id_0BB8::_id_39D0("heavy");
     level._id_C413 _id_0BB8::_id_39CE("high");
 
-    while(getDvar("toggle_ship_visibility") == "1")
+    while(getDvar("toggle_ship_visibility") == "1") {
       wait 0.05;
+    }
 
     thread scripts\sp\utility::_id_1264E("heistspace_om_ordnance_tr");
     thread scripts\sp\utility::_id_12641("heistspace_om_bridge_tr");

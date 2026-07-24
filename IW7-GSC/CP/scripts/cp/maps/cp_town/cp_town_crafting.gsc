@@ -55,15 +55,17 @@ init_crafting_pieces() {
   foreach(var_2 in var_0) {
     var_3 = strtok(var_2.name, "_");
 
-    if(!isDefined(level.crafting_pieces[var_3[0]]))
+    if(!isDefined(level.crafting_pieces[var_3[0]])) {
       level.crafting_pieces[var_3[0]] = [];
+    }
 
-    if(!isDefined(level.crafting_pieces[var_3[0]][var_3[1]]))
+    if(!isDefined(level.crafting_pieces[var_3[0]][var_3[1]])) {
       level.crafting_pieces[var_3[0]][var_3[1]] = [];
+    }
 
     var_2.part_location_struct = scripts\engine\utility::getStruct(var_2.target, "targetname");
     var_2.part_model = var_2.part_location_struct.script_parameters;
-    level.crafting_pieces[var_3[0]][var_3[1]] = scripts\engine\utility::add_to_array(level.crafting_pieces[var_3[0]][var_3[1]], var_2);
+    level.crafting_pieces[var_3[0]][var_3[1]] = ::scripts\engine\utility::add_to_array(level.crafting_pieces[var_3[0]][var_3[1]], var_2);
   }
 
   spawn_crafting_pieces("chem", "beaker", "clamp", "burner");
@@ -86,11 +88,13 @@ spawn_crafting_piece(var_0) {
   var_0.item = spawn("script_model", var_0.part_location_struct.origin);
   var_0.item setModel(var_0.part_model);
 
-  if(isDefined(var_0.part_location_struct.angles))
+  if(isDefined(var_0.part_location_struct.angles)) {
     var_0.item.angles = var_0.part_location_struct.angles;
+  }
 
-  if(var_0.part_model == "cp_town_seismic_wave_device_leg")
+  if(var_0.part_model == "cp_town_seismic_wave_device_leg") {
     var_0.item.origin = var_0.item.origin + (15, -1, 6.2);
+  }
 }
 
 init_crafting_blueprints() {
@@ -196,19 +200,22 @@ use_crafting_station(var_0, var_1) {
 
       foreach(var_7 in var_5) {
         if(var_1.crafting_piece == var_7.name) {
-          if(!isDefined(var_0.added_parts))
+          if(!isDefined(var_0.added_parts)) {
             var_0.added_parts = [];
+          }
 
           var_8 = spawn("script_model", var_7.origin);
           var_8.angles = var_7.angles;
 
-          if(isDefined(var_7.script_noteworthy))
+          if(isDefined(var_7.script_noteworthy)) {
             var_8 setModel(var_7.script_noteworthy);
-          else if(isDefined(var_7.script_parameters))
+          } else if(isDefined(var_7.script_parameters)) {
             var_8 setModel(var_7.script_parameters);
+          }
 
-          if(var_8.model == "cp_town_seismic_wave_device_leg")
+          if(var_8.model == "cp_town_seismic_wave_device_leg") {
             var_8.angles = var_8.angles + (0, -100, 0);
+          }
 
           var_0.added_parts = scripts\engine\utility::add_to_array(var_0.added_parts, var_8);
           var_1 playlocalsound("town_crafting_placement");
@@ -224,8 +231,9 @@ use_crafting_station(var_0, var_1) {
 
       if(var_0.parts_added == 3) {
         if(isDefined(var_0.added_parts)) {
-          foreach(var_11 in var_0.added_parts)
-          var_11 delete();
+          foreach(var_11 in var_0.added_parts) {
+            var_11 delete();
+          }
         }
 
         var_1 scripts\cp\cp_merits::processmerit("mt_used_crafting");
@@ -256,8 +264,9 @@ use_crafting_station(var_0, var_1) {
 }
 
 use_crafting_station_chem_set(var_0, var_1) {
-  if(!isDefined(var_0.parts_added))
+  if(!isDefined(var_0.parts_added)) {
     var_0.parts_added = 0;
+  }
 
   if(isDefined(level.chem_pieces) && level.chem_pieces.size > var_0.parts_added) {
     foreach(var_3 in level.chem_pieces) {
@@ -312,8 +321,9 @@ use_crafting_station_chem_set(var_0, var_1) {
 }
 
 give_chem_item_debug(var_0, var_1) {
-  foreach(var_3 in level.players)
-  var_3.crafting_piece = var_0;
+  foreach(var_3 in level.players) {
+    var_3.crafting_piece = var_0;
+  }
 
   level scripts\cp\utility::set_quest_icon(var_1);
 }
@@ -321,8 +331,9 @@ give_chem_item_debug(var_0, var_1) {
 show_chem_parts_based_on_found_piece(var_0) {
   foreach(var_2 in level.chemistry_set_parts) {
     if(!isDefined(var_2.targetname)) {
-      if(level.chem_pieces.size == 2)
+      if(level.chem_pieces.size == 2) {
         var_2 show();
+      }
 
       continue;
     }
@@ -346,8 +357,9 @@ show_chem_parts_based_on_found_piece(var_0) {
 show_crafted_item(var_0, var_1, var_2, var_3) {
   var_0 scripts\cp\cp_interaction::refresh_interaction();
 
-  if(scripts\engine\utility::is_true(var_3))
+  if(scripts\engine\utility::is_true(var_3)) {
     var_0 playlocalsound("town_craft_magic");
+  }
 
   var_4 = scripts\engine\utility::getStructArray("crafting_fx_spot", "targetname");
   var_1.crafting_fx = spawnfx(level._effect[var_2], scripts\engine\utility::getclosest(var_1.origin, var_4).origin + (0, 0, 5));
@@ -359,8 +371,9 @@ show_crafted_item(var_0, var_1, var_2, var_3) {
 is_valid_crafting_piece(var_0, var_1) {
   var_2 = strtok(var_0.crafting_piece, "_");
 
-  if(var_2[0] == var_1.active_blueprint)
+  if(var_2[0] == var_1.active_blueprint) {
     return 1;
+  }
 
   return 0;
 }
@@ -379,8 +392,9 @@ pickup_crafting_piece(var_0, var_1) {
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
 
   if(is_chem_piece(var_0)) {
-    if(!isDefined(level.chem_pieces))
+    if(!isDefined(level.chem_pieces)) {
       level.chem_pieces = [];
+    }
 
     level.chem_pieces = scripts\engine\utility::add_to_array(level.chem_pieces, var_0.name);
     var_2 = 0;
@@ -453,10 +467,11 @@ pickup_crafting_piece(var_0, var_1) {
 }
 
 is_chem_piece(var_0) {
-  if(issubstr(var_0.name, "chem"))
+  if(issubstr(var_0.name, "chem")) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 reset_crafting_piece_on_disconnect_or_bad_part() {
@@ -485,20 +500,22 @@ reset_blueprint_on_disconnect() {
 }
 
 crafting_station_chem_hint(var_0, var_1) {
-  if(isDefined(var_1.crafting_piece))
+  if(isDefined(var_1.crafting_piece)) {
     return level.interaction_hintstrings["crafting_station_add_part"];
-  else
+  } else {
     return "";
+  }
 }
 
 crafting_station_hint(var_0, var_1) {
-  if(scripts\engine\utility::is_true(var_0.cooling_down))
+  if(scripts\engine\utility::is_true(var_0.cooling_down)) {
     return &"COOP_INTERACTIONS_COOLDOWN";
+  }
 
   if(scripts\engine\utility::is_true(var_0.blueprint_added)) {
-    if(isDefined(var_1.crafting_piece) && is_valid_crafting_piece(var_1, var_0))
+    if(isDefined(var_1.crafting_piece) && is_valid_crafting_piece(var_1, var_0)) {
       return level.interaction_hintstrings["crafting_station_add_part"];
-    else if(isDefined(var_0.parts_added) && var_0.parts_added == 3) {
+    } else if(isDefined(var_0.parts_added) && var_0.parts_added == 3) {
       switch (var_0.active_blueprint) {
         case "violetray":
           return &"CP_TOWN_INTERACTIONS_TAKE_VIOLETRAY";
@@ -515,8 +532,9 @@ crafting_station_hint(var_0, var_1) {
       return "";
   } else if(!isDefined(var_1.has_blueprint))
     return &"CP_TOWN_INTERACTIONS_CRAFTING_MISSING_BLUEPRINT";
-  else
+  else {
     return level.interaction_hintstrings["crafting_station_add_blueprint"];
+  }
 }
 
 pickup_crafting_blueprint(var_0, var_1) {

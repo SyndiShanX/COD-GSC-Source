@@ -20,13 +20,15 @@ _id_51E8(var_0, var_1, var_2, var_3) {
   _id_9810();
   _id_97C3(var_0);
 
-  if(weaponclass(self.weapon) == "mg")
+  if(weaponclass(self.weapon) == "mg") {
     self.combatmode = "cover_lmg";
+  }
 }
 
 _id_98A7(var_0) {
-  if(!isDefined(anim._id_C05A))
+  if(!isDefined(anim._id_C05A)) {
     anim._id_C05A = [];
+  }
 
   if(isDefined(anim._id_C05A[var_0])) {
     return;
@@ -181,8 +183,9 @@ _id_97C3(var_0) {
 }
 
 _id_9810() {
-  if(!isDefined(anim._id_85DF))
+  if(!isDefined(anim._id_85DF)) {
     anim._id_85DF = [];
+  }
 
   if(isDefined(anim._id_85DF["soldier"])) {
     return;
@@ -269,11 +272,13 @@ _id_9810() {
 _id_100A9(var_0, var_1, var_2, var_3) {
   var_4 = scripts\asm\asm_bb::bb_getrequestedweapon();
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
-  if(weaponclass(self.weapon) == var_4)
+  if(weaponclass(self.weapon) == var_4) {
     return 0;
+  }
 
   return 1;
 }
@@ -282,20 +287,24 @@ _id_BEA0(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
 
   if(scripts\asm\asm_bb::_id_2985()) {
-    if(isDefined(self._blackboard.shootparams.pos))
+    if(isDefined(self._blackboard.shootparams.pos)) {
       var_4 = self._blackboard.shootparams.pos;
-    else if(isDefined(self._blackboard.shootparams.ent))
+    } else if(isDefined(self._blackboard.shootparams.ent)) {
       var_4 = self._blackboard.shootparams.ent.origin;
+    }
   }
 
-  if(!isDefined(var_4) && scripts\engine\utility::_id_9DA3())
+  if(!isDefined(var_4) && scripts\engine\utility::_id_9DA3()) {
     var_4 = self.enemy.origin;
+  }
 
-  if(!isDefined(var_4) && isDefined(self.node) && self.node.type == "Exposed" && distancesquared(self.node.origin, self.origin) < 36)
+  if(!isDefined(var_4) && isDefined(self.node) && self.node.type == "Exposed" && distancesquared(self.node.origin, self.origin) < 36) {
     var_4 = self.node.origin + anglesToForward(self.node.angles) * 384;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
   var_5 = self.angles[1] - vectortoyaw(var_4 - self.origin);
   var_6 = distancesquared(self.origin, var_4);
@@ -303,26 +312,30 @@ _id_BEA0(var_0, var_1, var_2, var_3) {
   if(var_6 < 65536) {
     var_7 = sqrt(var_6);
 
-    if(var_7 > 3)
+    if(var_7 > 3) {
       var_5 = var_5 + asin(-3 / var_7);
+    }
   }
 
   return abs(angleclamp180(var_5)) > self._id_129AF;
 }
 
 _id_BE9F(var_0, var_1, var_2, var_3) {
-  if(scripts\engine\utility::is_true(self._id_B3E9) && isDefined(self.node))
+  if(scripts\engine\utility::is_true(self._id_B3E9) && isDefined(self.node)) {
     return 0;
+  }
 
   var_4 = _id_81DD();
 
-  if(abs(var_4) > self._id_129AF)
+  if(abs(var_4) > self._id_129AF) {
     return 1;
+  }
 
   var_5 = _id_81DC();
 
-  if(abs(var_5) > self._id_CBF8)
+  if(abs(var_5) > self._id_CBF8) {
     return 1;
+  }
 
   return 0;
 }
@@ -333,15 +346,17 @@ _id_81DE() {
   var_2 = undefined;
 
   if(scripts\asm\asm_bb::_id_2985()) {
-    if(isDefined(self._blackboard.shootparams.ent))
+    if(isDefined(self._blackboard.shootparams.ent)) {
       var_1 = self._blackboard.shootparams.ent;
-    else if(isDefined(self._blackboard.shootparams.pos))
+    } else if(isDefined(self._blackboard.shootparams.pos)) {
       var_2 = self._blackboard.shootparams.pos;
+    }
   } else if(isDefined(self.enemy) && scripts\engine\utility::_id_9DA3())
     var_1 = self.enemy;
 
-  if(isDefined(var_1) && !issentient(var_1))
+  if(isDefined(var_1) && !issentient(var_1)) {
     var_0 = 1.5;
+  }
 
   var_3 = scripts\engine\utility::getpredictedaimyawtoshootentorpos(var_0, var_1, var_2);
   return var_3;
@@ -353,15 +368,17 @@ _id_81DD() {
   var_2 = undefined;
 
   if(scripts\asm\asm_bb::_id_2985()) {
-    if(isDefined(self._blackboard.shootparams.ent))
+    if(isDefined(self._blackboard.shootparams.ent)) {
       var_1 = self._blackboard.shootparams.ent;
-    else if(isDefined(self._blackboard.shootparams.pos))
+    } else if(isDefined(self._blackboard.shootparams.pos)) {
       var_2 = self._blackboard.shootparams.pos;
+    }
   } else if(isDefined(self.enemy))
     var_1 = self.enemy;
 
-  if(isDefined(var_1) && !issentient(var_1))
+  if(isDefined(var_1) && !issentient(var_1)) {
     var_0 = 1.5;
+  }
 
   var_3 = scripts\engine\utility::getpredictedaimyawtoshootentorpos3d(var_0, var_1, var_2);
   return var_3;
@@ -373,15 +390,17 @@ _id_81DC() {
   var_2 = undefined;
 
   if(scripts\asm\asm_bb::_id_2985()) {
-    if(isDefined(self._blackboard.shootparams.ent))
+    if(isDefined(self._blackboard.shootparams.ent)) {
       var_1 = self._blackboard.shootparams.ent;
-    else if(isDefined(self._blackboard.shootparams.pos))
+    } else if(isDefined(self._blackboard.shootparams.pos)) {
       var_2 = self._blackboard.shootparams.pos;
+    }
   } else if(isDefined(self.enemy))
     var_1 = self.enemy;
 
-  if(isDefined(var_1) && !issentient(var_1))
+  if(isDefined(var_1) && !issentient(var_1)) {
     var_0 = 1.5;
+  }
 
   var_3 = scripts\engine\utility::getpredictedaimpitchtoshootentorpos3d(var_0, var_1, var_2);
   return var_3;
@@ -390,22 +409,24 @@ _id_81DC() {
 _id_3F0A(var_0, var_1, var_2) {
   var_3 = _id_81DE();
 
-  if(var_3 < 0)
+  if(var_3 < 0) {
     var_4 = "right";
-  else
+  } else {
     var_4 = "left";
+  }
 
   var_3 = abs(var_3);
   var_5 = 0;
 
-  if(var_3 > 157.5)
+  if(var_3 > 157.5) {
     var_5 = 180;
-  else if(var_3 > 112.5)
+  } else if(var_3 > 112.5) {
     var_5 = 135;
-  else if(var_3 > 67.5)
+  } else if(var_3 > 67.5) {
     var_5 = 90;
-  else
+  } else {
     var_5 = 45;
+  }
 
   var_6 = var_4 + "_" + var_5;
   var_7 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_6);
@@ -417,43 +438,47 @@ _id_3F09(var_0, var_1, var_2) {
   var_4 = _id_81DC();
 
   if(abs(var_3) > self._id_129AF && abs(var_3) > abs(var_4)) {
-    if(var_3 < 0)
+    if(var_3 < 0) {
       var_5 = "right";
-    else
+    } else {
       var_5 = "left";
+    }
 
     var_3 = abs(var_3);
     var_6 = 0;
 
-    if(var_3 > 157.5)
+    if(var_3 > 157.5) {
       var_6 = 180;
-    else if(var_3 > 112.5)
+    } else if(var_3 > 112.5) {
       var_6 = 135;
-    else if(var_3 > 67.5)
+    } else if(var_3 > 67.5) {
       var_6 = 90;
-    else
+    } else {
       var_6 = 45;
+    }
 
     var_7 = var_5 + "_" + var_6;
     var_8 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_7);
     return var_8;
   } else {
-    if(var_4 < 0)
+    if(var_4 < 0) {
       var_5 = "up";
-    else
+    } else {
       var_5 = "down";
+    }
 
     var_4 = abs(var_4);
     var_6 = 0;
 
-    if(var_4 > 157.5)
+    if(var_4 > 157.5) {
       var_6 = 180;
-    else if(var_4 > 112.5)
+    } else if(var_4 > 112.5) {
       var_6 = 135;
-    else if(var_4 > 67.5)
+    } else if(var_4 > 67.5) {
       var_6 = 90;
-    else
+    } else {
       var_6 = 45;
+    }
 
     var_7 = var_5 + "_" + var_6;
     var_8 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_7);
@@ -472,14 +497,15 @@ _id_2B9A(var_0, var_1, var_2, var_3) {
 _id_3ECC(var_0, var_1, var_2) {
   var_3 = _id_81DE();
 
-  if(var_3 < -135)
+  if(var_3 < -135) {
     var_4 = "2r";
-  else if(var_3 > 135)
+  } else if(var_3 > 135) {
     var_4 = "2l";
-  else if(var_3 < 0)
+  } else if(var_3 < 0) {
     var_4 = "6";
-  else
+  } else {
     var_4 = "4";
+  }
 
   var_5 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_4);
   return var_5;
@@ -499,13 +525,14 @@ _id_DF4F(var_0, var_1, var_2) {
       var_4 = scripts\asm\asm::_id_232B(var_1, "attach clip left") || scripts\asm\asm::_id_232B(var_1, "attach clip right");
       var_5 = scripts\asm\asm::_id_232B(var_1, "detach clip left") || scripts\asm\asm::_id_232B(var_1, "detach clip right") || scripts\asm\asm::_id_232B(var_1, "detach clip nohand");
 
-      if(!var_4)
+      if(!var_4) {
         self notify("abort_reload");
-      else if(var_4 && !var_5) {
-        if(scripts\asm\asm::_id_232B(var_1, "attach clip left"))
+      } else if(var_4 && !var_5) {
+        if(scripts\asm\asm::_id_232B(var_1, "attach clip left")) {
           var_6 = "tag_accessory_left";
-        else
+        } else {
           var_6 = "tag_accessory_right";
+        }
 
         self detach(var_3, var_6);
         self showpart("tag_clip");

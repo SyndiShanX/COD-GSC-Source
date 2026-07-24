@@ -8,8 +8,9 @@ _id_98B1() {
 }
 
 init_perks_from_table() {
-  if(!isDefined(level._id_1B8F))
+  if(!isDefined(level._id_1B8F)) {
     level._id_1B8F = "cp/alien/perks_tree.csv";
+  }
 
   level.alien_perks = [];
   _id_12E03(0, "perk_0");
@@ -154,8 +155,9 @@ init_zombie_perks_callback() {
   register_perk_callback("perk_none_3", ::blank, ::blank);
   register_perk_callback("perk_none_4", ::blank, ::blank);
 
-  if(isDefined(level.gamemode_perk_callback_init_func))
+  if(isDefined(level.gamemode_perk_callback_init_func)) {
     [[level.gamemode_perk_callback_init_func]]();
+  }
 }
 
 blank() {}
@@ -214,21 +216,25 @@ _id_12E03(var_0, var_1) {
 }
 
 _id_9C63(var_0, var_1) {
-  if(var_0 == var_1)
+  if(var_0 == var_1) {
     return 0;
+  }
 
-  if(!issubstr(var_1, var_0))
+  if(!issubstr(var_1, var_0)) {
     return 0;
+  }
 
   var_2 = strtok(var_0, "_");
   var_3 = strtok(var_1, "_");
 
-  if(var_3.size - var_2.size != 1)
+  if(var_3.size - var_2.size != 1) {
     return 0;
+  }
 
   for(var_4 = 0; var_4 < var_3.size - 1; var_4++) {
-    if(var_3[var_4] != var_2[var_4])
+    if(var_3[var_4] != var_2[var_4]) {
       return 0;
+    }
   }
 
   return 1;
@@ -295,8 +301,9 @@ _id_E863() {
       _id_848B();
       self.movespeedscaler = 1;
 
-      if(isDefined(level.move_speed_scale))
+      if(isDefined(level.move_speed_scale)) {
         self[[level.move_speed_scale]]();
+      }
     }
 
     wait 0.1;
@@ -314,8 +321,9 @@ _id_848B() {
   for(var_0 = 0; var_0 < 0.08; var_0 = var_0 + 0.01) {
     self.movespeedscaler = self.movespeedscaler + 0.01;
 
-    if(isDefined(level.move_speed_scale))
+    if(isDefined(level.move_speed_scale)) {
       self[[level.move_speed_scale]]();
+    }
 
     wait 0.4375;
   }

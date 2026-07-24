@@ -7,17 +7,20 @@ _id_D5F9(var_0, var_1, var_2, var_3, var_4, var_5) {
   level endon(var_0 + "door_peek_finished");
   level endon(var_0 + "door_peek_restarted");
 
-  if(!scripts\engine\utility::flag_exist(var_0 + "door_peek_handle_down"))
+  if(!scripts\engine\utility::flag_exist(var_0 + "door_peek_handle_down")) {
     scripts\engine\utility::flag_init(var_0 + "door_peek_handle_down");
+  }
 
-  if(!scripts\engine\utility::flag_exist(var_0 + "did_kick_interrupt_input"))
+  if(!scripts\engine\utility::flag_exist(var_0 + "did_kick_interrupt_input")) {
     scripts\engine\utility::flag_init(var_0 + "did_kick_interrupt_input");
+  }
 
   thread _id_D5FB(var_0, var_1, var_2, var_3, var_4, var_5);
   level waittill(var_0 + "door_peek_start");
 
-  while(level.player useButtonPressed())
+  while(level.player useButtonPressed()) {
     wait 0.05;
+  }
 
   thread _id_59A1(var_0);
   level._id_CA00 = scripts\sp\hud_util::createfontstring("objective", 0.7);
@@ -32,10 +35,11 @@ _id_D5F9(var_0, var_1, var_2, var_3, var_4, var_5) {
   level notify(var_0 + "door_peek_kick");
   scripts\engine\utility::waitframe();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     thread _id_D5F6(var_0, 1);
-  else
+  } else {
     thread _id_D5F6(var_0);
+  }
 }
 
 _id_D5F7(var_0) {
@@ -47,8 +51,9 @@ _id_D5F7(var_0) {
   var_1 = scripts\engine\utility::getStruct("hvr_finale_anim_origin", "targetname");
   var_2 = angleclamp180(self.angles[1]);
 
-  for(;;)
+  for(;;) {
     scripts\engine\utility::waitframe();
+  }
 }
 
 _id_D5FB(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -84,8 +89,9 @@ _id_D5FB(var_0, var_1, var_2, var_3, var_4, var_5) {
   level notify(var_0 + "door_peek_start");
   _id_59CE();
 
-  if(!scripts\engine\utility::flag_exist(var_0 + "door_peek_handle_down"))
+  if(!scripts\engine\utility::flag_exist(var_0 + "door_peek_handle_down")) {
     scripts\engine\utility::flag_init(var_0 + "door_peek_handle_down");
+  }
 
   if(!scripts\engine\utility::flag(var_0 + "door_peek_handle_down")) {
     level.player._id_C9FD = scripts\sp\utility::_id_10639("player_rig", level.player._id_59FF.origin, level.player._id_59FF.angles);
@@ -132,8 +138,9 @@ _id_D5FB(var_0, var_1, var_2, var_3, var_4, var_5) {
     level._id_5A21 = max(level._id_5A21 + var_21, 0.0);
     level._id_5A21 = scripts\sp\utility::_id_E753(level._id_5A21, 1);
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       level._id_5A21 = min(level._id_5A21 + var_21, var_1);
+    }
 
     if(level._id_5A21 != var_14) {
       var_19 = 1;
@@ -249,10 +256,11 @@ _id_D5F5(var_0, var_1, var_2, var_3, var_4) {
   for(;;) {
     var_7 = _id_794E(var_1, var_4);
 
-    if(var_5 < -0.5 && var_7 < -0.5)
+    if(var_5 < -0.5 && var_7 < -0.5) {
       var_6++;
-    else
+    } else {
       var_6 = 0;
+    }
 
     if(var_6 >= 5) {
       break;
@@ -290,8 +298,9 @@ _id_D5FA(var_0, var_1, var_2, var_3) {
 }
 
 _id_D5F8(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   level.player stopgestureviewmodel("ges_doorpeek_bulkhead");
   level notify(var_0 + "door_peek_finished");
@@ -461,8 +470,9 @@ _id_BF1D() {
 _id_6B50(var_0, var_1, var_2) {
   level endon("stop_fake_origin_link");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = (0, 0, 0);
+  }
 
   var_3 = (0, 0, 0);
   var_4 = (0, 0, 0);
@@ -479,8 +489,9 @@ _id_6B50(var_0, var_1, var_2) {
     var_4 = var_3;
     var_3 = var_5.origin;
 
-    if(var_3 != var_4)
+    if(var_3 != var_4) {
       self moveTo(var_3, 0.06);
+    }
 
     wait 0.05;
   }
@@ -524,8 +535,9 @@ _id_59DA(var_0, var_1) {
   level notify(var_0 + "door_peek_start");
   _id_59CE();
 
-  if(!scripts\engine\utility::flag_exist(var_0 + "door_peek_handle_down"))
+  if(!scripts\engine\utility::flag_exist(var_0 + "door_peek_handle_down")) {
     scripts\engine\utility::flag_init(var_0 + "door_peek_handle_down");
+  }
 
   if(!scripts\engine\utility::flag(var_0 + "door_peek_handle_down")) {
     level.player._id_C9FD = scripts\sp\utility::_id_10639("player_rig", level.player._id_59FF.origin, level.player._id_59FF.angles);
@@ -572,8 +584,9 @@ _id_59DA(var_0, var_1) {
     level._id_5A21 = max(level._id_5A21 + var_17, 0.0);
     level._id_5A21 = scripts\sp\utility::_id_E753(level._id_5A21, 1);
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       level._id_5A21 = min(level._id_5A21 + var_17, var_1);
+    }
 
     if(level._id_5A21 != var_10) {
       var_15 = 1;
@@ -651,8 +664,9 @@ _id_59D3(var_0, var_1, var_2) {
 }
 
 _id_59C5(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   level.player stopgestureviewmodel("ges_doorpeek_bulkhead");
   level notify(var_0 + "door_peek_finished");
@@ -712,10 +726,11 @@ _id_5984(var_0, var_1, var_2, var_3, var_4) {
   for(;;) {
     var_7 = _id_794E(var_1, var_4);
 
-    if(var_5 < -0.5 && var_7 < -0.5)
+    if(var_5 < -0.5 && var_7 < -0.5) {
       var_6++;
-    else
+    } else {
       var_6 = 0;
+    }
 
     if(var_6 >= 5) {
       break;
@@ -762,10 +777,11 @@ _id_59C4(var_0, var_1, var_2, var_3, var_4) {
   for(;;) {
     var_7 = _id_794E(var_1, var_3);
 
-    if(level._id_5A21 <= 0 && var_5 < -0.5 && var_7 < -0.5)
+    if(level._id_5A21 <= 0 && var_5 < -0.5 && var_7 < -0.5) {
       var_6++;
-    else
+    } else {
       var_6 = 0;
+    }
 
     if(var_6 >= 6) {
       break;
@@ -791,11 +807,13 @@ _id_794E(var_0, var_1) {
   var_9 = anglesToForward(var_8);
   var_10 = min(1.0, sqrt(squared(var_2[0]) + squared(var_2[1])));
 
-  if(var_10 <= 0.1)
+  if(var_10 <= 0.1) {
     return 0;
+  }
 
-  if(var_10 >= 0.95)
+  if(var_10 >= 0.95) {
     var_10 = 1.0;
+  }
 
   var_11 = acos(vectordot(var_4, var_9));
   var_12 = 0.25;
@@ -829,17 +847,20 @@ _id_59D2(var_0, var_1) {
   level endon(var_0 + "door_peek_finished");
   level endon(var_0 + "door_peek_restarted");
 
-  if(!scripts\engine\utility::flag_exist(var_0 + "door_peek_handle_down"))
+  if(!scripts\engine\utility::flag_exist(var_0 + "door_peek_handle_down")) {
     scripts\engine\utility::flag_init(var_0 + "door_peek_handle_down");
+  }
 
-  if(!scripts\engine\utility::flag_exist(var_0 + "did_kick_interrupt_input"))
+  if(!scripts\engine\utility::flag_exist(var_0 + "did_kick_interrupt_input")) {
     scripts\engine\utility::flag_init(var_0 + "did_kick_interrupt_input");
+  }
 
   thread _id_59DA(var_0, var_1);
   level waittill(var_0 + "door_peek_start");
 
-  while(level.player useButtonPressed())
+  while(level.player useButtonPressed()) {
     wait 0.05;
+  }
 
   thread _id_59A1(var_0);
   level._id_CA00 = scripts\sp\hud_util::createfontstring("objective", 0.7);
@@ -854,10 +875,11 @@ _id_59D2(var_0, var_1) {
   level notify(var_0 + "door_peek_kick");
   scripts\engine\utility::waitframe();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     thread _id_59A0(var_0, 1);
-  else
+  } else {
     thread _id_59A0(var_0);
+  }
 }
 
 _id_59A1(var_0) {
@@ -907,8 +929,9 @@ _id_59CD() {
 _id_7C3A(var_0, var_1) {
   foreach(var_3 in var_0) {
     if(isDefined(var_3.script_noteworthy)) {
-      if(var_3.script_noteworthy == var_1)
+      if(var_3.script_noteworthy == var_1) {
         return var_3;
+      }
     }
   }
 }

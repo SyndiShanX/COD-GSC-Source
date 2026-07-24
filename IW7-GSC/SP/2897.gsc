@@ -4,8 +4,9 @@
 **************************************/
 
 _id_B8CB() {
-  if(!isDefined(level._id_FD6E))
+  if(!isDefined(level._id_FD6E)) {
     level._id_FD6E = spawnStruct();
+  }
 
   return level._id_FD6E;
 }
@@ -14,13 +15,15 @@ _id_E3C6(var_0, var_1, var_2, var_3, var_4) {
   level notify("stop jackal landing");
   level endon("stop jackal landing");
 
-  if(getdvarint("skip_nextmission", 0))
+  if(getdvarint("skip_nextmission", 0)) {
     var_0 = 0;
-  else if(!isDefined(var_0))
+  } else if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   _id_0BDC::_id_137CF();
   level._id_FD6E._id_E35D thread _id_0BDB::_id_A2F2(undefined, var_4);
@@ -57,8 +60,9 @@ _id_E3C7(var_0) {
   level.player endon("death");
   var_1 = level._id_FD6E._id_E35D.unique_id;
 
-  if(!isDefined(level._id_FD6E._id_E35D.unique_id))
+  if(!isDefined(level._id_FD6E._id_E35D.unique_id)) {
     var_1 = "_ignore_last_sparam";
+  }
 
   var_2 = _id_0EFB::_id_7994("ret_jackal_spawner_1", "targetname", var_1);
 
@@ -93,8 +97,9 @@ _id_B8CA(var_0) {
 }
 
 _id_ACE8() {
-  while(!isDefined(level._id_D127))
+  while(!isDefined(level._id_D127)) {
     wait 0.05;
+  }
 }
 
 #using_animtree("script_model");
@@ -102,10 +107,11 @@ _id_ACE8() {
 _id_973A(var_0, var_1) {
   var_2 = getEntArray(var_0 + "_shipcrib", "script_noteworthy");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = _id_0EFB::_id_7994(var_0 + "_shipcrib", "script_noteworthy", var_1);
-  else
+  } else {
     var_1 = "_ignore_last_sparam";
+  }
 
   var_3 = var_2;
   var_4 = undefined;
@@ -171,8 +177,9 @@ _id_973A(var_0, var_1) {
           var_4._id_E8AD._id_12713 = var_6;
           break;
         case "runway_light":
-          if(!scripts\engine\utility::fxexists("vfx_glow_red_light_400_strobe"))
+          if(!scripts\engine\utility::fxexists("vfx_glow_red_light_400_strobe")) {
             scripts\engine\utility::add_fx("vfx_glow_red_light_400_strobe", "vfx/misc/lights/vfx_glow_red_light_400_strobe.vfx");
+          }
 
           playFXOnTag(scripts\engine\utility::getfx("vfx_glow_red_light_400_strobe"), var_6, "light_on_LOD0");
           break;
@@ -312,8 +319,9 @@ _id_FDCB(var_0) {
   var_2 = ["trigger_multiple", "reflection_probe", "locator_volume"];
 
   foreach(var_4 in self.partnerheli) {
-    if(!scripts\engine\utility::array_contains(var_2, var_4.code_classname))
+    if(!scripts\engine\utility::array_contains(var_2, var_4.code_classname)) {
       var_1 = scripts\engine\utility::array_add(var_1, var_4);
+    }
   }
 
   switch (var_0) {
@@ -335,18 +343,20 @@ _id_FDCB(var_0) {
 }
 
 _id_10635() {
-  if(isDefined(level._id_E3FB))
+  if(isDefined(level._id_E3FB)) {
     scripts\engine\utility::flag_wait(level._id_E3FB);
+  }
 
   self._id_74A1 = scripts\engine\utility::spawn_tag_origin();
   self._id_74A1.origin = self._id_74A1.origin + anglesToForward(self.angles) * 13000;
   self._id_74A1.origin = self._id_74A1.origin + anglestoup(self.angles) * 1500;
   self._id_74A1 linkTo(self);
 
-  if(isDefined(self._id_E505))
+  if(isDefined(self._id_E505)) {
     var_0 = self._id_E505;
-  else
+  } else {
     var_0 = self.model;
+  }
 
   var_1 = getnumparts(var_0);
 
@@ -400,19 +410,21 @@ _id_10635() {
     var_13 = getarraykeys(self._id_747E);
 
     if(isDefined(scripts\engine\utility::array_find(var_13, var_12))) {
-      if(getsubstr(var_12, 0, 1) == "a")
+      if(getsubstr(var_12, 0, 1) == "a") {
         self._id_747F[var_11]._id_EB9C = "_small";
-      else
+      } else {
         self._id_747F[var_11]._id_EB9C = "_large";
+      }
 
-      self._id_747E[var_12] = scripts\engine\utility::array_add(self._id_747E[var_12], self._id_747F[var_11]);
+      self._id_747E[var_12] = ::scripts\engine\utility::array_add(self._id_747E[var_12], self._id_747F[var_11]);
       continue;
     }
 
-    if(getsubstr(var_12, 0, 1) == "a")
+    if(getsubstr(var_12, 0, 1) == "a") {
       self._id_747F[var_11]._id_EB9C = "_small";
-    else
+    } else {
       self._id_747F[var_11]._id_EB9C = "_large";
+    }
 
     self._id_747E[var_12] = [self._id_747F[var_11]];
   }
@@ -421,8 +433,9 @@ _id_10635() {
 _id_E403() {
   self endon("death");
 
-  for(;;)
+  for(;;) {
     scripts\engine\utility::flag_waitopen(level.script + "_prime_tr");
+  }
 }
 
 _id_C5FE(var_0) {
@@ -466,8 +479,9 @@ _id_747A(var_0) {
 }
 
 _id_C5FC(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   thread _id_C5FE("b_a");
   wait(var_0);
@@ -518,13 +532,15 @@ _id_C5FD() {
 _id_10C56() {
   var_0 = getarraykeys(self._id_747E);
 
-  foreach(var_2 in var_0)
-  thread _id_747B(var_2);
+  foreach(var_2 in var_0) {
+    thread _id_747B(var_2);
+  }
 }
 
 _id_4268(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   thread _id_4269("a_d");
   wait(var_0);
@@ -558,27 +574,31 @@ _id_4268(var_0) {
 stop_func() {
   var_0 = getarraykeys(self._id_747E);
 
-  foreach(var_2 in var_0)
-  thread _id_747A(var_2);
+  foreach(var_2 in var_0) {
+    thread _id_747A(var_2);
+  }
 }
 
 _id_8E84() {
-  while(!isDefined(self._id_747F))
+  while(!isDefined(self._id_747F)) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::array_call(self._id_747F, ::hide);
 }
 
 _id_100DD() {
-  while(!isDefined(self._id_747F))
+  while(!isDefined(self._id_747F)) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::array_call(self._id_747F, ::show);
 }
 
 _id_5155() {
-  while(!isDefined(self._id_747F))
+  while(!isDefined(self._id_747F)) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::array_call(self._id_747F, ::delete);
 }

@@ -4,8 +4,9 @@
 **************************************/
 
 init() {
-  if(!isDefined(level._id_A056._id_19FB))
+  if(!isDefined(level._id_A056._id_19FB)) {
     level._id_A056._id_19FB = ["spaceship_cannon_projectile", "spaceship_cleaver_projectile", "spaceship_anvil_projectile", "spaceship_30mm_projectile", "spaceship_30mm_growler", "spaceship_30mm_slow", "spaceship_cannon_projectile_weapupgrade", "spaceship_cleaver_projectile_weapupgrade", "spaceship_anvil_projectile_weapupgrade", "spaceship_30mm_projectile_weapupgrade", "spaceship_30mm_growler_weapupgrade", "spaceship_30mm_slow_weapupgrade", "spaceship_ai_30mm_projectile", "spaceship_forward_missile", "spaceship_homing_missile", "magic_spaceship_30mm_projectile", "magic_spaceship_20mm_bullet", "iw7_steeldragon"];
+  }
 
   self._id_4CF6 = [];
   self.health = 53800;
@@ -39,14 +40,17 @@ _id_72F9() {
 }
 
 _id_FF27() {
-  if(self._id_9B4C || self._id_9CB8)
+  if(self._id_9B4C || self._id_9CB8) {
     return 0;
+  }
 
-  if(isDefined(self._id_843F) && self._id_843F)
+  if(isDefined(self._id_843F) && self._id_843F) {
     return 0;
+  }
 
-  if(isDefined(self._id_51E6) && self._id_51E6)
+  if(isDefined(self._id_51E6) && self._id_51E6) {
     return 0;
+  }
 
   return 1;
 }
@@ -114,25 +118,29 @@ damage_monitor() {
     self._id_4B43 = var_1;
     var_10 = _id_24DC(var_1);
 
-    if(!var_10 && isDefined(level._id_D127) && var_1 == level._id_D127)
+    if(!var_10 && isDefined(level._id_D127) && var_1 == level._id_D127) {
       thread _id_D96C(var_4);
+    }
 
     var_11 = _id_9D1C(var_9);
     var_12 = 0;
 
-    if(isDefined(self._id_843F) && self._id_843F)
+    if(isDefined(self._id_843F) && self._id_843F) {
       var_12 = 1;
+    }
 
     var_13 = 0;
 
-    if(isDefined(self._id_51E6) && self._id_51E6)
+    if(isDefined(self._id_51E6) && self._id_51E6) {
       var_13 = 1;
+    }
 
     if(!var_10 && var_11 && !var_12) {
       thread _id_4CF9(var_3, var_1);
 
-      if(var_13)
+      if(var_13) {
         self.health = 53800;
+      }
     } else
       self.health = 53800;
 
@@ -170,24 +178,28 @@ _id_4D1B() {
     wait 0.1;
   }
 
-  if(self.health > 53800)
+  if(self.health > 53800) {
     self.health = 53800;
+  }
 }
 
 _id_24DC(var_0) {
-  if(isDefined(var_0) && isDefined(var_0.script_team) && isDefined(self.script_team) && var_0.script_team == self.script_team)
+  if(isDefined(var_0) && isDefined(var_0.script_team) && isDefined(self.script_team) && var_0.script_team == self.script_team) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_9D1C(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   foreach(var_2 in level._id_A056._id_19FB) {
-    if(var_2 == var_0)
+    if(var_2 == var_0) {
       return 1;
+    }
   }
 
   return 0;
@@ -201,16 +213,18 @@ _id_4CF9(var_0, var_1) {
   playFXOnTag(scripts\engine\utility::getfx("fighter_spaceship_damage_med_linger"), var_2, "tag_origin");
   _id_0BDC::_id_13675(randomfloatrange(2, 4));
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 thread _id_10FF8();
+  }
 }
 
 _id_4D34(var_0, var_1) {
   scripts\sp\utility::_id_75C4("fighter_spaceship_damaged", "j_mainroot_ship");
   scripts\engine\utility::waittill_either("death", "stop_damaged_fx");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     scripts\sp\utility::_id_75F8("fighter_spaceship_damaged", "j_mainroot_ship");
+  }
 }
 
 #using_animtree("jackal");
@@ -228,20 +242,23 @@ death_monitor() {
   var_4 = rotatevectorinverted(var_3, self.angles);
   var_5 = var_4[0];
 
-  if(isDefined(self._id_862D))
+  if(isDefined(self._id_862D)) {
     var_6 = self._id_862D;
-  else
+  } else {
     var_6 = undefined;
+  }
 
-  if(isDefined(self._id_90D1))
+  if(isDefined(self._id_90D1)) {
     var_7 = 1;
-  else
+  } else {
     var_7 = 0;
+  }
 
-  if(isDefined(self._id_3D4F))
+  if(isDefined(self._id_3D4F)) {
     var_8 = 1;
-  else
+  } else {
     var_8 = 0;
+  }
 
   if(isDefined(self._id_4B43) && isDefined(level._id_D127) && self._id_4B43 == level._id_D127) {
     var_8 = 0;
@@ -259,8 +276,9 @@ death_monitor() {
   if(isDefined(self._id_700B)) {
     _id_A1DA();
 
-    if(isDefined(self))
+    if(isDefined(self)) {
       self delete();
+    }
 
     return;
   }
@@ -282,13 +300,15 @@ death_monitor() {
     var_12 = [%jackal_death_01, %jackal_death_02, %jackal_death_03, %jackal_death_04];
     level._id_A8D7++;
 
-    if(level._id_A8D7 >= var_12.size)
+    if(level._id_A8D7 >= var_12.size) {
       level._id_A8D7 = 0;
+    }
 
     var_13 = var_12[level._id_A8D7];
 
-    if(isDefined(self._id_72B1))
+    if(isDefined(self._id_72B1)) {
       var_13 = self._id_72B1;
+    }
 
     var_14 = _id_7819();
     var_10 _meth_82A2(%jackal_state_anims_ai);
@@ -299,8 +319,9 @@ death_monitor() {
 
     if(isDefined(self._id_93D2)) {
       foreach(var_16 in self._id_93D2) {
-        if(isDefined(var_16))
+        if(isDefined(var_16)) {
           var_16._id_114F9 = var_10;
+        }
       }
     }
 
@@ -326,34 +347,40 @@ death_monitor() {
   if(var_9) {
     _id_56FF(var_10.origin, 16000, 39000, 0.45, 1.1);
 
-    if(!isDefined(self._id_C045))
+    if(!isDefined(self._id_C045)) {
       playworldsound("jackal_death_by_plr", var_20);
+    }
 
     level.player playRumbleOnEntity("damage_heavy");
   }
 
-  if(!isDefined(self._id_C045))
+  if(!isDefined(self._id_C045)) {
     thread scripts\engine\utility::play_sound_in_space(_id_0BDC::_id_7A5B("jackal_explode"), var_20);
+  }
 
-  if(scripts\engine\utility::player_is_in_jackal())
+  if(scripts\engine\utility::player_is_in_jackal()) {
     thread _id_107D8(var_20);
+  }
 
   var_10 delete();
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_7819() {
-  if(self.spaceship_mode == "fly")
+  if(self.spaceship_mode == "fly") {
     var_0 = "_fly";
-  else
+  } else {
     var_0 = "_hover";
+  }
 
-  if(level._id_241D)
+  if(level._id_241D) {
     var_1 = "";
-  else
+  } else {
     var_1 = "_space";
+  }
 
   return level._id_A065[self.script_team + var_0 + var_1];
 }
@@ -361,56 +388,68 @@ _id_7819() {
 _id_5164() {
   level._id_A056._id_1630 = scripts\engine\utility::array_remove(level._id_A056._id_1630, self);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_FF6C(var_0, var_1, var_2) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     return 0;
+  }
 
-  if(isDefined(self._id_9930) && self._id_9930)
+  if(isDefined(self._id_9930) && self._id_9930) {
     return 0;
+  }
 
-  if(isDefined(self._id_90D1) && self._id_90D1)
+  if(isDefined(self._id_90D1) && self._id_90D1) {
     return 0;
+  }
 
-  if(isDefined(self._id_72B1))
+  if(isDefined(self._id_72B1)) {
     return 1;
+  }
 
-  if(isDefined(var_1) && var_1 == "spaceship_cannon_projectile")
+  if(isDefined(var_1) && var_1 == "spaceship_cannon_projectile") {
     return 0;
+  }
 
-  if(_id_119DE(var_2))
+  if(_id_119DE(var_2)) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_3E80(var_0, var_1, var_2, var_3) {
-  if(var_1)
+  if(var_1) {
     return var_0 + "_spaceship_explosion_cheap";
+  }
 
-  if(level._id_241D)
+  if(level._id_241D) {
     var_4 = "";
-  else
+  } else {
     var_4 = "_space";
+  }
 
   var_5 = var_0 + "_spaceship_explosion" + var_4;
   var_6 = var_0 + "_spaceship_explosion_hov" + var_4;
 
-  if(_id_119DE(var_3))
+  if(_id_119DE(var_3)) {
     return var_6;
+  }
 
-  if(var_2)
+  if(var_2) {
     return var_6;
+  }
 
   return var_5;
 }
 
 _id_119DE(var_0) {
-  if(var_0 < 150)
+  if(var_0 < 150) {
     return 1;
+  }
 
   return 0;
 }
@@ -423,11 +462,13 @@ _id_7B23(var_0) {
 }
 
 _id_4E11() {
-  if(!scripts\sp\utility::_id_65DF("is_dying"))
+  if(!scripts\sp\utility::_id_65DF("is_dying")) {
     scripts\sp\utility::_id_65E0("is_dying");
+  }
 
-  if(!isDefined(level._id_A8D7))
+  if(!isDefined(level._id_A8D7)) {
     level._id_A8D7 = 0;
+  }
 }
 
 _id_646F() {
@@ -455,8 +496,9 @@ _id_4E16(var_0, var_1, var_2, var_3) {
     var_0.origin = var_0.origin + anglesToForward(var_0.angles) * var_2;
     var_4 = var_0 _id_C0A2(var_2, var_3);
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_1 = 0;
+    }
 
     var_1 = var_1 - 0.05;
     wait 0.05;
@@ -472,8 +514,9 @@ _id_C0A2(var_0, var_1) {
   var_5 = var_2 + anglesToForward(var_3) * (var_0 * 0.1);
   var_6 = scripts\common\trace::capsule_trace(var_4, var_5, 150, 300, var_3, [self, var_1], undefined, 1);
 
-  if(var_6["fraction"] < 1)
+  if(var_6["fraction"] < 1) {
     return var_6;
+  }
 }
 
 _id_C0A3(var_0) {}
@@ -512,16 +555,18 @@ _id_6170() {
     wait(var_7);
     self._id_615D._id_619D = 0;
 
-    if(self._id_AEDF._id_AEEA)
+    if(self._id_AEDF._id_AEEA) {
       _id_0BDC::_id_105D6();
+    }
 
     self notify("emp_complete");
     _id_0BDC::_id_19A0(0);
     _id_0BDC::_id_6B4C(var_8, 1);
     self unlink();
 
-    if(var_9)
+    if(var_9) {
       _id_0BDC::_id_A19F();
+    }
   }
 }
 
@@ -552,8 +597,9 @@ _id_6174(var_0, var_1, var_2) {
     wait 0.05;
     var_7 = var_7 - var_9;
 
-    if(var_7 > var_8)
+    if(var_7 > var_8) {
       var_7 = var_8;
+    }
 
     var_11 = var_1 * var_0;
     var_12 = var_4 + var_11 + (0, 0, var_7);
@@ -567,8 +613,9 @@ _id_6174(var_0, var_1, var_2) {
 
     var_0 = var_0 * var_5;
 
-    if(var_0 < 0)
+    if(var_0 < 0) {
       var_0 = 0;
+    }
   }
 
   var_10 delete();
@@ -590,8 +637,9 @@ _id_10FF8() {
   stopFXOnTag(scripts\engine\utility::getfx("fighter_spaceship_damage_med_linger"), self, "tag_origin");
   wait 6;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_56FF(var_0, var_1, var_2, var_3, var_4) {
@@ -608,10 +656,11 @@ _id_107D8(var_0) {
   var_3 = 3400;
 
   while(var_1 > 0) {
-    if(isDefined(level._id_D127))
+    if(isDefined(level._id_D127)) {
       var_4 = distance(level._id_D127.origin, var_0);
-    else
+    } else {
       break;
+    }
 
     if(var_4 < var_3) {
       _id_D0DB(var_0);
@@ -629,8 +678,9 @@ _id_D0DB(var_0) {
   var_1 = "jackal_debris_impact";
   var_2 = 2;
 
-  if(scripts\engine\utility::player_is_in_jackal())
+  if(scripts\engine\utility::player_is_in_jackal()) {
     playFXOnTag(scripts\engine\utility::getfx("jackal_debris_impact"), level.player _meth_8473(), "j_mainroot_ship");
+  }
 
   level.player playRumbleOnEntity("steady_rumble");
   earthquake(0.33, var_2, level.player.origin, 5000);
@@ -660,8 +710,9 @@ _id_A340(var_0) {
     self._id_4E15 rotateYaw(90, 1);
     wait(var_1);
 
-    if(var_1 - 0.1 > 0.5)
+    if(var_1 - 0.1 > 0.5) {
       var_1 = var_1 - 0.1;
+    }
   }
 }
 

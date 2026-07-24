@@ -10,15 +10,17 @@ cover() {
   self clearanim(%root, 0.2);
   scripts\anim\utility::_id_12EB9();
 
-  if(scripts\anim\utility::_id_9E40())
+  if(scripts\anim\utility::_id_9E40()) {
     var_0 = "idle_combat";
-  else
+  } else {
     var_0 = "idle_noncombat";
+  }
 
   var_1 = undefined;
 
-  if(isDefined(self._id_1FBB) && isDefined(level._id_EC85[self._id_1FBB]))
+  if(isDefined(self._id_1FBB) && isDefined(level._id_EC85[self._id_1FBB])) {
     var_1 = level._id_EC85[self._id_1FBB][var_0];
+  }
 
   if(!isDefined(var_1)) {
     if(!isDefined(level._id_EC85["default_civilian"])) {
@@ -38,8 +40,9 @@ cover() {
 _id_BC1C() {
   self endon("killanimscript");
 
-  while(!isDefined(self._id_3C34))
+  while(!isDefined(self._id_3C34)) {
     wait 1;
+  }
 }
 
 _id_02C8() {

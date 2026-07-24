@@ -69,8 +69,9 @@ setup_basketball_game() {
   for(;;) {
     var_8 = "power_on";
 
-    if(var_0)
+    if(var_0) {
       var_8 = level scripts\engine\utility::waittill_any_return_no_endon_death("power_on", self.power_area + " power_on", "power_off");
+    }
 
     if(var_8 == "power_off" && !scripts\engine\utility::is_true(self.powered_on)) {
       wait 0.25;
@@ -80,13 +81,15 @@ setup_basketball_game() {
     if(var_8 != "power_off") {
       self.powered_on = 1;
 
-      if(isDefined(self.light))
+      if(isDefined(self.light)) {
         self.light setlightintensity(100);
+      }
     } else {
       self.powered_on = 0;
 
-      if(isDefined(self.light))
+      if(isDefined(self.light)) {
         self.light setlightintensity(0);
+      }
     }
 
     if(!var_0) {
@@ -96,8 +99,9 @@ setup_basketball_game() {
 }
 
 move_hoop(var_0, var_1) {
-  if(scripts\engine\utility::is_true(var_1))
+  if(scripts\engine\utility::is_true(var_1)) {
     level scripts\engine\utility::waittill_any("power_on", var_0.power_area + " power_on");
+  }
 
   wait(randomintrange(1, 4));
   var_2 = self.origin;
@@ -138,19 +142,21 @@ use_basketball_game(var_0, var_1) {
   var_0 notify("machine_used");
   level.wave_num_at_start_of_game = level.wave_num;
 
-  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade))
+  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade)) {
     scripts\cp\zombies\zombie_analytics::log_times_per_wave("basketball_game", var_1);
-  else
+  } else {
     scripts\cp\zombies\zombie_analytics::log_times_per_wave("basketball_game_afterlife", var_1);
+  }
 
   var_1 playlocalsound("arcade_insert_coin_01");
   playsoundatpos(var_0.music_ent.origin, "basketball_anc_activate");
 
   if(!isDefined(var_0.basketball_game_music)) {
-    if(isDefined(var_0.music_ent))
+    if(isDefined(var_0.music_ent)) {
       var_0.basketball_game_music = var_0.music_ent;
-    else
+    } else {
       var_0.basketball_game_music = spawn("script_origin", var_0.origin);
+    }
   }
 
   playsoundatpos(var_0.basketball_game_music.origin, "mus_arcade_basketball_charge");
@@ -179,8 +185,9 @@ basketball_reset_player_omnvar(var_0, var_1) {
   var_1 setclientomnvar("zombie_bball_widget", 0);
   var_1.playing_game = undefined;
 
-  if(!var_1 scripts\cp\utility::areinteractionsenabled())
+  if(!var_1 scripts\cp\utility::areinteractionsenabled()) {
     var_1 scripts\cp\utility::allow_player_interactions(1);
+  }
 }
 
 play_basketball_game(var_0, var_1) {
@@ -189,14 +196,16 @@ play_basketball_game(var_0, var_1) {
   self endon("spawned");
   self endon("disconnect");
 
-  if(isDefined(level.start_rings_of_saturn_func))
+  if(isDefined(level.start_rings_of_saturn_func)) {
     var_0 thread[[level.start_rings_of_saturn_func]](var_0, self);
+  }
 
   var_0.bball_game_score = 0;
 
   if(!scripts\engine\utility::is_true(self.in_afterlife_arcade)) {
-    while(self getcurrentprimaryweapon() == "none" || self isswitchingweapon())
+    while(self getcurrentprimaryweapon() == "none" || self isswitchingweapon()) {
       wait 0.1;
+    }
   }
 
   self notify("cancel_sentry");
@@ -228,10 +237,11 @@ play_basketball_game(var_0, var_1) {
 }
 
 get_intro_message(var_0) {
-  if(scripts\engine\utility::is_true(var_0.in_afterlife_arcade))
+  if(scripts\engine\utility::is_true(var_0.in_afterlife_arcade)) {
     return "Score ^3 15 ^7 soul power per basket";
-  else
+  } else {
     return "Win 15 tickets per basket!";
+  }
 }
 
 _id_28BA(var_0, var_1, var_2) {
@@ -253,8 +263,9 @@ _id_28BA(var_0, var_1, var_2) {
   var_0 takeweapon("iw7_cpbasketball_mp");
   var_0 scripts\engine\utility::allow_weapon_switch(1);
 
-  if(!var_0 scripts\engine\utility::isusabilityallowed())
+  if(!var_0 scripts\engine\utility::isusabilityallowed()) {
     var_0 scripts\engine\utility::allow_usability(1);
+  }
 
   var_0 scripts\cp\zombies\arcade_game_utility::give_player_back_weapon(var_0);
   var_0 scripts\cp\zombies\arcade_game_utility::restore_player_grenades_post_game();
@@ -263,9 +274,9 @@ _id_28BA(var_0, var_1, var_2) {
   if(var_1.bball_game_score >= 1) {
     var_3 = var_1.bball_game_score * 15;
 
-    if(var_0.arcade_game_award_type == "soul_power")
+    if(var_0.arcade_game_award_type == "soul_power") {
       scripts\cp\zombies\zombie_analytics::log_finished_mini_game(1, var_0, level.wave_num_at_start_of_game, var_1.name, 1, var_3, var_0.pers["timesPerWave"]._id_11930[level.wave_num_at_start_of_game]["basketball_game_afterlife"]);
-    else {
+    } else {
       scripts\cp\zombies\zombie_analytics::log_finished_mini_game(1, var_0, level.wave_num_at_start_of_game, var_1.name, 0, var_3, var_0.pers["timesPerWave"]._id_11930[level.wave_num_at_start_of_game]["basketball_game"]);
       var_0 scripts\cp\zombies\arcade_game_utility::give_player_tickets(var_0, var_1.bball_game_score * 15);
     }
@@ -280,8 +291,9 @@ _id_28BA(var_0, var_1, var_2) {
   wait 2;
   scripts\cp\cp_interaction::add_to_current_interaction_list(var_1);
 
-  if(!var_0 scripts\cp\utility::areinteractionsenabled())
+  if(!var_0 scripts\cp\utility::areinteractionsenabled()) {
     var_0 scripts\cp\utility::allow_player_interactions(1);
+  }
 }
 
 basketball_game_timer(var_0, var_1) {
@@ -316,8 +328,9 @@ watch_basketball_throw(var_0, var_1) {
     var_8 delete();
     var_9 = (gettime() - var_7) / 1000;
 
-    if(var_9 < 0.2)
+    if(var_9 < 0.2) {
       wait(0.2 - var_9);
+    }
 
     thread throw_basketball(var_0, var_5, var_1);
     self takeweapon("iw7_cpbasketball_mp");
@@ -341,8 +354,9 @@ throw_basketball(var_0, var_1, var_2) {
   var_1 thread watch_basketball_landing(var_0, self, var_2);
   wait 5;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 delete();
+  }
 }
 
 watch_basketball_landing(var_0, var_1, var_2) {
@@ -364,11 +378,13 @@ watch_basketball_landing(var_0, var_1, var_2) {
   var_0.bball_game_score++;
   playsoundatpos(var_0.music_ent.origin, "basketball_anc_quickshot");
 
-  if(var_0.bball_game_score * 15 > level._id_28BF)
+  if(var_0.bball_game_score * 15 > level._id_28BF) {
     level._id_28BF = var_0.bball_game_score * 15;
+  }
 
-  if(scripts\engine\utility::is_true(var_1.in_afterlife_arcade))
+  if(scripts\engine\utility::is_true(var_1.in_afterlife_arcade)) {
     var_1 scripts\cp\zombies\zombie_afterlife_arcade::give_soul_power(var_1, 15);
+  }
 
   var_1 setclientomnvar("zombie_arcade_game_ticket_earned", var_0.bball_game_score * 15);
   var_1 setclientomnvar("zombie_bball_game_" + var_2 + "_score", var_0.bball_game_score * 15);
@@ -384,10 +400,11 @@ basketball_impact_sounds(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
   var_0.playing_sound = 1;
   var_9 = "arcade_basketball_bounce";
 
-  if(isDefined(var_8) && isDefined(var_8.script_noteworthy) && var_8.script_noteworthy == "rim")
+  if(isDefined(var_8) && isDefined(var_8.script_noteworthy) && var_8.script_noteworthy == "rim") {
     var_9 = "arcade_basketball_rim";
-  else if(isDefined(var_8) && isDefined(var_8.script_noteworthy) && var_8.script_noteworthy == "hoop_clip")
+  } else if(isDefined(var_8) && isDefined(var_8.script_noteworthy) && var_8.script_noteworthy == "hoop_clip") {
     var_9 = "arcade_basketball_backboard";
+  }
 
   var_0 playSound(var_9);
   wait(lookupsoundlength(var_9) / 1000);

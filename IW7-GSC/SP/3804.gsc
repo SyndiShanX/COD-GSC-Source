@@ -28,16 +28,18 @@ _id_54FA() {
   level._id_448C._id_99FC _id_0E46::_id_DFE3();
   level._id_BBA5._id_99FD _id_0E46::_id_DFE3();
 
-  if(isDefined(level._id_3A24) && isDefined(level._id_3A24._id_99F4))
+  if(isDefined(level._id_3A24) && isDefined(level._id_3A24._id_99F4)) {
     level._id_3A24._id_99F4 _id_0E46::_id_DFE3();
+  }
 }
 
 _id_61CE() {
   level thread _id_448C();
   level thread _id_BBA6();
 
-  if(isDefined(level._id_3A24))
+  if(isDefined(level._id_3A24)) {
     level._id_3A24._id_99F4 thread _id_0E46::_id_48C4(undefined, undefined, &"SHIPCRIB_LISTEN", 180, 240, 70, 0, undefined, undefined, undefined, 0);
+  }
 }
 
 _id_622E(var_0) {
@@ -71,8 +73,9 @@ _id_448B(var_0) {
   level._id_EB94 = undefined;
   _id_39FE();
 
-  if(!isDefined(var_0) || !var_0)
+  if(!isDefined(var_0) || !var_0) {
     level thread _id_448C();
+  }
 
   level thread _id_F91C(var_0);
   level thread _id_448A();
@@ -148,8 +151,9 @@ _id_DBF9() {
 _id_DBFB() {
   self._id_4BB2 = 0;
 
-  if(isDefined(self._id_4BB1))
+  if(isDefined(self._id_4BB1)) {
     self._id_10468 scripts\engine\utility::stop_loop_sound_on_entity(self._id_4BB1);
+  }
 
   self._id_4BB1 = undefined;
 }
@@ -159,8 +163,9 @@ _id_448C() {
   wait 1.0;
   var_0 = scripts\engine\utility::getStruct("captains_computer_moveto", "targetname");
 
-  if(!isDefined(level._id_1FBD))
+  if(!isDefined(level._id_1FBD)) {
     level._id_1FBD = var_0 scripts\engine\utility::spawn_tag_origin();
+  }
 
   var_1 = level._id_448C._id_99FC;
   var_1 thread _id_0E46::_id_48C4(undefined, undefined, &"SHIPCRIB_COMPUTER", 180, 240, 70, 0, undefined, undefined, undefined, 0);
@@ -205,8 +210,9 @@ _id_39FC() {
 }
 
 _id_448D(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "on";
+  }
 
   level notify("capops_stop_message");
 
@@ -283,8 +289,9 @@ _id_F91C(var_0) {
   if(isDefined(var_0) && var_0) {
     return;
   }
-  while(!isDefined(level._id_1FBD))
+  while(!isDefined(level._id_1FBD)) {
     wait 0.05;
+  }
 
   _id_448D("on");
   level._id_1FBD scripts\sp\anim::_id_1EC3(level._id_3A2C, "computer_enter");
@@ -385,18 +392,20 @@ _id_BBB0() {
 }
 
 _id_BBAF(var_0) {
-  if(var_0 == "salenkoch")
+  if(var_0 == "salenkoch") {
     var_1 = "salenKoch";
-  else
+  } else {
     var_1 = var_0;
+  }
 
   var_2 = level._id_D9E5["wanted_cards"][var_1];
 
   if(isDefined(var_2)) {
-    if(var_2 == "locked")
+    if(var_2 == "locked") {
       var_3 = "most_wanted_cards_" + var_0 + "_locked";
-    else
+    } else {
       var_3 = "most_wanted_cards_" + var_0;
+    }
   } else
     var_3 = undefined;
 
@@ -558,22 +567,25 @@ _id_C60C() {
     level._id_3A2D show();
     cinematicingame("sc_world_capops_boot");
 
-    while(!iscinematicplaying())
+    while(!iscinematicplaying()) {
       wait 0.05;
+    }
 
     wait 1.75;
     setomnvar("ui_terminal_invoke", 1);
 
-    while(iscinematicplaying())
+    while(iscinematicplaying()) {
       wait 0.05;
+    }
 
     stopcinematicingame();
     level._id_3A2D hide();
   } else
     setomnvar("ui_terminal_invoke", 1);
 
-  if(isDefined(level._id_3A2E))
+  if(isDefined(level._id_3A2E)) {
     childthread _id_9962();
+  }
 
   for(;;) {
     if(getdvarint("leave_menu") == 1) {
@@ -631,11 +643,13 @@ _id_4489() {
     level._id_3A2D show();
     cinematicingame("sc_world_capops_boot");
 
-    while(!iscinematicplaying())
+    while(!iscinematicplaying()) {
       wait 0.05;
+    }
 
-    while(iscinematicplaying())
+    while(iscinematicplaying()) {
       wait 0.05;
+    }
 
     stopcinematicingame();
     level._id_3A2D hide();
@@ -663,8 +677,9 @@ _id_9962() {
     var_5 = undefined;
     var_0 = var_3;
 
-    if(issubstr(var_3, "news"))
+    if(issubstr(var_3, "news")) {
       var_1 = 1;
+    }
 
     if(!issubstr(var_3, "tab")) {
       if(var_3 != var_2) {
@@ -674,8 +689,9 @@ _id_9962() {
         var_2 = "";
     }
 
-    if(issubstr(var_3, "tab"))
+    if(issubstr(var_3, "tab")) {
       var_2 = "";
+    }
 
     wait 0.05;
   }
@@ -689,10 +705,11 @@ _id_CD49(var_0, var_1, var_2) {
   var_3 = undefined;
   setomnvar("ui_capops_is_audio", 0);
 
-  if(isDefined(var_0) && var_0)
+  if(isDefined(var_0) && var_0) {
     var_3 = level._id_3A2F;
-  else
+  } else {
     var_3 = level._id_3A2E;
+  }
 
   if(issubstr(var_1, "news") || issubstr(var_1, "kotch") || issubstr(var_1, "hvt")) {
     var_3 show();
@@ -708,11 +725,13 @@ _id_CD49(var_0, var_1, var_2) {
   wait 0.05;
   cinematicingame(var_1);
 
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     wait 0.05;
+  }
 
-  while(iscinematicplaying())
+  while(iscinematicplaying()) {
     wait 0.05;
+  }
 
   var_3 hide();
   setomnvar("ui_capops_is_audio", 0);
@@ -721,14 +740,16 @@ _id_CD49(var_0, var_1, var_2) {
 _id_994F(var_0, var_1) {
   level endon("stop_intel_bink");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   setomnvar("ui_capops_playback_bar", 0.0);
   wait 0.05;
 
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     wait 0.05;
+  }
 
   var_2 = tablelookupbyrow("sp/capcomp_intel.csv", var_1, 8);
   var_2 = float(var_2);
@@ -905,15 +926,18 @@ _id_448A() {
       foreach(var_9 in var_0) {
         var_10 = strtok(var_9, "_");
 
-        if(var_9 != "sa_moon" && var_10[0] != "sa" && var_10[0] != "ja")
+        if(var_9 != "sa_moon" && var_10[0] != "sa" && var_10[0] != "ja") {
           level.player _meth_84C7("captainComputerMissionState", var_9, "open");
+        }
       }
 
-      foreach(var_9 in var_1)
-      level.player _meth_84C7("captainComputerAudioState", var_9, "open");
+      foreach(var_9 in var_1) {
+        level.player _meth_84C7("captainComputerAudioState", var_9, "open");
+      }
 
-      foreach(var_9 in var_3)
-      level.player _meth_84C7("captainComputerPersonnelState", var_9, "open");
+      foreach(var_9 in var_3) {
+        level.player _meth_84C7("captainComputerPersonnelState", var_9, "open");
+      }
 
       level.player _meth_84C7("captainComputerPersonnelState", "personnelOmar1", "locked");
       level.player _meth_84C7("captainComputerPersonnelState", "personnelReyes1", "locked");
@@ -965,8 +989,9 @@ _id_12BDB() {
       var_4 = var_2 + "Report";
       var_5 = level.player _meth_84C6("captainComputerMissionState", var_4);
 
-      if(isDefined(var_5) && var_5 == "locked")
+      if(isDefined(var_5) && var_5 == "locked") {
         level.player _meth_84C7("captainComputerMissionState", var_4, "open");
+      }
 
       _id_12BD9(var_2);
     }
@@ -1007,8 +1032,9 @@ _id_12BD9(var_0) {
     if(isDefined(var_3)) {
       var_4 = level.player _meth_84C6("scNewsReels", var_1[var_2]);
 
-      if(isDefined(var_4) && var_4 == "watched")
+      if(isDefined(var_4) && var_4 == "watched") {
         level.player _meth_84C7("captainComputerAudioState", var_1[var_2], "open");
+      }
     }
   }
 }
@@ -1016,13 +1042,15 @@ _id_12BD9(var_0) {
 _id_39FA(var_0, var_1, var_2) {
   var_3 = level.player _meth_84C6(var_2, var_0);
 
-  if(!isDefined(var_3) || var_3 == "locked")
+  if(!isDefined(var_3) || var_3 == "locked") {
     level.player _meth_84C7(var_2, var_0, "open");
+  }
 }
 
 _id_F576(var_0, var_1) {
-  foreach(var_3 in var_0)
-  level.player _meth_84C7(var_1, var_3, "locked");
+  foreach(var_3 in var_0) {
+    level.player _meth_84C7(var_1, var_3, "locked");
+  }
 }
 
 _id_2FF7() {

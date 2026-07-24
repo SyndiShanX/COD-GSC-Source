@@ -8,8 +8,9 @@ processepictaunt(var_0, var_1, var_2) {
     var_3 = level.camera_bro_shot.char_loc[var_1].origin;
     var_4 = level.camera_bro_shot.char_loc[var_1].angles;
 
-    if(isDefined(level.overridebroslot))
+    if(isDefined(level.overridebroslot)) {
       var_1 = level.overridebroslot - 1;
+    }
   } else {
     var_3 = level.charactercac.origin;
     var_4 = level.charactercac.angles;
@@ -25,8 +26,9 @@ processepictaunt(var_0, var_1, var_2) {
     if(var_2 && (!isDefined(level.losersinteractable) || level.losersinteractable == 1)) {
       var_5 = "IW7_mp_taunt_drone_crush_01_nohit";
 
-      if(isDefined(level.topplayers[3]))
+      if(isDefined(level.topplayers[3])) {
         var_5 = "IW7_mp_taunt_drone_crush_01_hit";
+      }
     }
   }
 
@@ -66,16 +68,18 @@ processepictaunt(var_0, var_1, var_2) {
     var_35 = getteamscore("allies");
     var_36 = getteamscore("axis");
 
-    if(var_35 < var_36)
+    if(var_35 < var_36) {
       var_34 = "axis";
+    }
   }
 
   switch (var_0) {
     case "iw7_mp_taunt_flag_plant":
-      if(var_34 == "allies")
+      if(var_34 == "allies") {
         var_6[0] = "ctf_game_flag_noStand_blue_mp";
-      else
+      } else {
         var_6[0] = "ctf_game_flag_noStand_red_mp";
+      }
 
       var_7[0] = "iw7_mp_taunt_flag_plant_flag";
       var_8[0] = 21.9;
@@ -180,8 +184,9 @@ processepictaunt(var_0, var_1, var_2) {
     case "iw7_mp_taunt_super_blackhole":
       var_8[0] = 7.0;
 
-      for(var_40 = 0; var_40 < 20; var_40++)
+      for(var_40 = 0; var_40 < 20; var_40++) {
         var_23[var_40] = 2.6 + var_40 * 0.1;
+      }
 
       break;
     case "iw7_mp_taunt_epic_grenade_toss_back01":
@@ -359,14 +364,16 @@ processepictaunt(var_0, var_1, var_2) {
   level.broshotepictauntsubprops[var_1] = [];
 
   if(var_2 && var_14) {
-    if(!isDefined(level.queuedtaunts))
+    if(!isDefined(level.queuedtaunts)) {
       level.queuedtaunts = [];
+    }
 
     if(isDefined(level.queuedtaunts[var_0])) {
       var_41 = gettime() - level.queuedtaunts[var_0];
 
-      if(var_41 < var_15 * 1000)
+      if(var_41 < var_15 * 1000) {
         wait(var_15 - var_41 / 1000);
+      }
     }
 
     level.queuedtaunts[var_0] = gettime();
@@ -374,15 +381,17 @@ processepictaunt(var_0, var_1, var_2) {
 
   var_42 = (0, 0, 0);
 
-  if(var_33 && isDefined(level.upsidedowntaunts) && level.upsidedowntaunts == 1)
+  if(var_33 && isDefined(level.upsidedowntaunts) && level.upsidedowntaunts == 1) {
     var_42 = (180, 180, 0);
+  }
 
-  if(var_30 > 0)
+  if(var_30 > 0) {
     thread spawndelayedprop(var_30, var_1, var_3, var_6, var_4, var_42, var_7, var_32);
-  else {
+  } else {
     for(var_40 = 0; var_40 < var_6.size; var_40++) {
-      if(isDefined(var_32) && isDefined(var_32[var_40]))
+      if(isDefined(var_32) && isDefined(var_32[var_40])) {
         var_3 = var_32[var_40];
+      }
 
       var_43 = spawn("script_model", var_3);
       var_43 setModel(var_6[var_40]);
@@ -391,8 +400,9 @@ processepictaunt(var_0, var_1, var_2) {
       var_43 dontinterpolate();
       var_43 scriptmodelplayanimdeltamotion(var_7[var_40]);
 
-      if(!isDefined(level.broshotepictauntprops))
+      if(!isDefined(level.broshotepictauntprops)) {
         level.broshotepictauntprops = [];
+      }
 
       level.broshotepictauntprops[var_1][var_40] = var_43;
 
@@ -415,38 +425,47 @@ processepictaunt(var_0, var_1, var_2) {
 
   var_46 = 0;
 
-  for(var_40 = 0; var_40 < var_8.size; var_40++)
+  for(var_40 = 0; var_40 < var_8.size; var_40++) {
     var_46 = max(var_46, var_8[var_40]);
+  }
 
-  for(var_40 = 0; var_40 < var_11.size; var_40++)
+  for(var_40 = 0; var_40 < var_11.size; var_40++) {
     thread doepictauntscriptablestep(var_2, var_1, var_11[var_40], var_12[var_40], var_13[var_40]);
+  }
 
-  if(var_2 == 0)
+  if(var_2 == 0) {
     var_47 = getplayercharacter(-1);
-  else
+  } else {
     var_47 = getplayercharacter(var_1);
+  }
 
   if(var_2 != 0) {
-    for(var_40 = 0; var_40 < var_16.size; var_40++)
+    for(var_40 = 0; var_40 < var_16.size; var_40++) {
       thread playbeamfx(var_16[var_40], var_17[var_40], var_20[var_40], var_18[var_40], var_19[var_40], var_47);
+    }
   }
 
   if(var_2 != 0) {
-    if(var_29 > 0)
+    if(var_29 > 0) {
       thread playloseranimation(var_30, var_29, var_8[0]);
+    }
   }
 
-  if(var_2 != 0 && var_21 > 0)
+  if(var_2 != 0 && var_21 > 0) {
     thread doshellshock(var_21);
+  }
 
-  if(var_2 != 0 && var_22 > 0)
+  if(var_2 != 0 && var_22 > 0) {
     thread doearthquake(var_22, 1);
+  }
 
-  for(var_40 = 0; var_40 < var_23.size; var_40++)
+  for(var_40 = 0; var_40 < var_23.size; var_40++) {
     thread doearthquake(var_23[var_40], 0);
+  }
 
-  for(var_40 = 0; var_40 < var_24.size; var_40++)
+  for(var_40 = 0; var_40 < var_24.size; var_40++) {
     thread dodisintegrate(var_24[var_40], var_40);
+  }
 
   for(var_40 = 0; var_40 < var_26.size; var_40++) {
     var_37 = anglesToForward(level.camera_bro_shot.basecam.angles);
@@ -456,13 +475,15 @@ processepictaunt(var_0, var_1, var_2) {
     var_49 = var_39 * var_26[var_40][0];
     var_50 = var_48 + var_49;
 
-    if(var_2 != 0)
+    if(var_2 != 0) {
       var_51 = level.camera_bro_shot.char_loc[0].origin;
-    else
+    } else {
       var_51 = var_3;
+    }
 
-    for(var_44 = 0; var_44 < var_25.size; var_44++)
+    for(var_44 = 0; var_44 < var_25.size; var_44++) {
       thread dospawnvfx(var_25[var_44], var_28[var_44] + var_27 * var_40, var_50, var_51);
+    }
   }
 
   thread cleanupepictauntprops(var_1, var_46 + var_31, var_0);
@@ -473,8 +494,9 @@ spawndelayedprop(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   wait(var_0);
 
   for(var_8 = 0; var_8 < var_3.size; var_8++) {
-    if(isDefined(var_7) && isDefined(var_7[var_8]))
+    if(isDefined(var_7) && isDefined(var_7[var_8])) {
       var_2 = var_7[var_8];
+    }
 
     var_9 = spawn("script_model", var_2);
     var_9 setModel(var_3[var_8]);
@@ -483,8 +505,9 @@ spawndelayedprop(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_9 dontinterpolate();
     var_9 scriptmodelplayanimdeltamotion(var_6[var_8]);
 
-    if(!isDefined(level.broshotepictauntprops))
+    if(!isDefined(level.broshotepictauntprops)) {
       level.broshotepictauntprops = [];
+    }
 
     level.broshotepictauntprops[var_1][var_8] = var_9;
   }
@@ -506,16 +529,18 @@ delayfxdelete(var_0) {
   self endon("cancel_taunt_cleanup");
   wait(var_0);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 playloseranimation(var_0, var_1, var_2) {
   self endon("cancel_taunt_cleanup");
   wait(var_0);
 
-  if(isDefined(level.topplayers[3]) || isDefined(level.topplayers[4]) || isDefined(level.topplayers[5]))
+  if(isDefined(level.topplayers[3]) || isDefined(level.topplayers[4]) || isDefined(level.topplayers[5])) {
     sendloseranim(var_1, var_2);
+  }
 }
 
 sendloseranim(var_0, var_1) {
@@ -584,17 +609,19 @@ doshellshock(var_0) {
 }
 
 getplayercharacter(var_0) {
-  if(var_0 == -1)
+  if(var_0 == -1) {
     var_1 = level.charactercac;
-  else
+  } else {
     var_1 = level.topplayers[var_0].bro;
+  }
 
   return var_1;
 }
 
 doepictauntscriptablestep(var_0, var_1, var_2, var_3, var_4) {
-  if(var_0 == 0)
+  if(var_0 == 0) {
     var_1 = -1;
+  }
 
   self endon("cancel_taunt_cleanup");
   thread listenepictauntscriptablecancel(var_1, var_2);
@@ -624,11 +651,13 @@ respawnclientcharacter() {
   if(isDefined(level.last_taunt_sfx)) {
     self stoplocalsound(level.last_taunt_sfx);
 
-    if(soundexists(level.last_taunt_sfx + "_lsrs"))
+    if(soundexists(level.last_taunt_sfx + "_lsrs")) {
       self stoplocalsound(level.last_taunt_sfx + "_lsrs");
+    }
 
-    if(soundexists(level.last_taunt_sfx + "_lfe"))
+    if(soundexists(level.last_taunt_sfx + "_lfe")) {
       self stoplocalsound(level.last_taunt_sfx + "_lfe");
+    }
 
     level.last_taunt_sfx = undefined;
   }
@@ -675,21 +704,25 @@ processtauntsound(var_0) {
   if(!soundexists(var_0)) {
     return;
   }
-  if(!isDefined(level.taunts_done))
+  if(!isDefined(level.taunts_done)) {
     level.taunts_done = 0;
+  }
 
-  if(!isDefined(level.taunts_used))
+  if(!isDefined(level.taunts_used)) {
     level.taunts_used = [];
+  }
 
   if(soundexists(var_0)) {
     if(isDefined(level.last_taunt_sfx)) {
       self stoplocalsound(level.last_taunt_sfx);
 
-      if(soundexists(level.last_taunt_sfx + "_lsrs"))
+      if(soundexists(level.last_taunt_sfx + "_lsrs")) {
         self stoplocalsound(level.last_taunt_sfx + "_lsrs");
+      }
 
-      if(soundexists(level.last_taunt_sfx + "_lfe"))
+      if(soundexists(level.last_taunt_sfx + "_lfe")) {
         self stoplocalsound(level.last_taunt_sfx + "_lfe");
+      }
 
       level.last_taunt_sfx = undefined;
     }
@@ -709,20 +742,23 @@ processtauntsound(var_0) {
 playepicbroshotsound(var_0) {
   if(isDefined(level.players)) {
     foreach(var_2 in level.players) {
-      if(!isbot(var_2))
+      if(!isbot(var_2)) {
         var_2 playlocalsound(var_0);
+      }
     }
   } else
     self playlocalsound(var_0);
 }
 
 array_contains(var_0, var_1) {
-  if(var_0.size <= 0)
+  if(var_0.size <= 0) {
     return 0;
+  }
 
   foreach(var_3 in var_0) {
-    if(var_3 == var_1)
+    if(var_3 == var_1) {
       return 1;
+    }
   }
 
   return 0;

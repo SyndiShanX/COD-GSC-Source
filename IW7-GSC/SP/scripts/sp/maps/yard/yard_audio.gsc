@@ -37,8 +37,9 @@ _id_953B() {
 }
 
 _id_25EF(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_3) == 0)
+  if(isDefined(var_3) == 0) {
     var_3 = 0;
+  }
 
   var_4 = spawnStruct();
   var_4.name = var_1;
@@ -53,8 +54,9 @@ _id_25F4(var_0) {
   for(var_1 = 0; var_1 < level._id_1188._id_10DED.size; var_1++) {
     var_2 = level._id_1188._id_10DED[var_1];
 
-    if(isDefined(var_2) == 1 && var_2.name == var_0)
+    if(isDefined(var_2) == 1 && var_2.name == var_0) {
       return var_2;
+    }
   }
 
   return undefined;
@@ -73,10 +75,11 @@ _id_25EE(var_0, var_1) {
     }
     thread[[var_3._id_373B]]();
 
-    if(isDefined(var_1) == 1)
+    if(isDefined(var_1) == 1) {
       var_3._id_10D8F = var_1;
-    else
+    } else {
       var_3._id_10D8F = 1;
+    }
   } else {}
 }
 
@@ -110,11 +113,13 @@ _id_2584() {}
 _id_1214(var_0, var_1) {}
 
 _id_8203() {
-  if(!isDefined(self.velocity))
+  if(!isDefined(self.velocity)) {
     self.velocity = (0, 0, 0);
+  }
 
-  if(!isDefined(self._id_C717))
+  if(!isDefined(self._id_C717)) {
     self._id_C717 = self.origin;
+  }
 
   self.velocity = self.origin - self._id_C717;
   self._id_C717 = self.origin;
@@ -190,8 +195,9 @@ _id_259F() {
   level._id_EA2C thread _id_0F00::_id_CE35("scn_elevator_seat_display_salt", 835, -0.5);
   level._id_EA2C thread _id_0F00::_id_CE35("scn_elevator_harness_salt", 847);
 
-  while(!isDefined(level._id_D267))
+  while(!isDefined(level._id_D267)) {
     scripts\engine\utility::waitframe();
+  }
 
   level._id_D267 waittillmatch("single anim", "end");
   level._id_D267 thread _id_0F00::_id_CE35("scn_elevator_seat_display_plr", 23, -0.5);
@@ -231,8 +237,9 @@ _id_25DA(var_0, var_1) {
   var_2 _meth_8278(1.0, 2.0);
   scripts\engine\utility::waitframe();
 
-  while(isent(self) == 1 && self._id_1326E <= 0.001)
+  while(isent(self) == 1 && self._id_1326E <= 0.001) {
     scripts\engine\utility::waitframe();
+  }
 
   thread _id_25D9(var_2);
 
@@ -240,8 +247,9 @@ _id_25DA(var_0, var_1) {
     var_3 = var_0 - var_1;
     wait(var_3);
 
-    if(isent(self) == 1)
+    if(isent(self) == 1) {
       self._id_D615 playSound("scn_storage_pod_move_end");
+    }
 
     var_2 _meth_8278(0.0, var_1 - 0.05);
     wait(var_1);
@@ -276,8 +284,9 @@ _id_2597() {
 }
 
 _id_2598() {
-  if(isDefined(level._id_1188._id_10E38) == 1)
+  if(isDefined(level._id_1188._id_10E38) == 1) {
     level._id_1188._id_10E38 notify("stop_sfx_line_loop");
+  }
 
   level notify("stop_sfx_emitter_line");
 }
@@ -287,11 +296,13 @@ _id_25D3() {
   self endon("dont_tell_mom_the_babysitters_dead");
 
   for(;;) {
-    if(isDefined(self._blackboard) && self._blackboard.movetype != "walk")
+    if(isDefined(self._blackboard) && self._blackboard.movetype != "walk") {
       self._blackboard.movetype = "walk";
+    }
 
-    if(isDefined(self.a) && self.a.movement != "walk")
+    if(isDefined(self.a) && self.a.movement != "walk") {
       self.a.movement = "walk";
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -310,8 +321,9 @@ _id_25D0(var_0, var_1) {
 _id_25D1(var_0, var_1, var_2) {
   _id_0F00::_id_1358F(var_0, var_1);
 
-  if(isDefined(var_2) == 0)
+  if(isDefined(var_2) == 0) {
     var_2 = 0.0;
+  }
 
   level._id_D61B _meth_8278(0.0, var_2);
   wait(var_2);
@@ -321,10 +333,11 @@ _id_25D1(var_0, var_1, var_2) {
 _id_117B(var_0, var_1, var_2) {
   var_3 = strtok(var_0, ",");
 
-  if(var_3.size < 2)
+  if(var_3.size < 2) {
     thread scripts\sp\utility::play_sound_on_tag(var_0, "j_head", 1);
-  else
+  } else {
     thread scripts\sp\utility::play_sound_on_tag(var_3[0], var_3[1], 1);
+  }
 }
 
 _id_25D7() {
@@ -434,8 +447,9 @@ _id_2579(var_0) {
   wait 0.666;
   setaudiotriggerstate("airlock_droppod", "mute_emitters", 0.1);
 
-  while(isDefined(level._id_D7D8) == 0)
+  while(isDefined(level._id_D7D8) == 0) {
     scripts\engine\utility::waitframe();
+  }
 
   level._id_D7D8 scripts\sp\utility::_id_65E3("begin_opening");
   wait 1.9666;
@@ -487,8 +501,9 @@ _id_25CD() {
   var_3._id_10475 = "scn_tram_satellite_whoosh_by";
   var_3 _meth_8278(1.0, 0.0);
 
-  while(distance(var_3.origin, level.player getvieworigin()) > var_0)
+  while(distance(var_3.origin, level.player getvieworigin()) > var_0) {
     scripts\engine\utility::waitframe();
+  }
 
   var_3 thread _id_0F00::_id_FB6F(var_1, var_2, 1.0, 1);
   scripts\engine\utility::waitframe();
@@ -568,8 +583,9 @@ _id_2582() {
 }
 
 _id_2606() {
-  if(isDefined(self.end._id_2A3E) == 0)
+  if(isDefined(self.end._id_2A3E) == 0) {
     self.end._id_2A3E = [];
+  }
 
   if(isDefined(self.end._id_2A3E) && self.end._id_2A3E.size >= 4) {
     var_0 = self.end._id_2A3E[0];
@@ -625,8 +641,9 @@ _id_258A() {
   scripts\engine\utility::flag_wait("central_hack_hatch_pulled");
   level.player thread _id_0F00::_id_CE35("scn_hack_floor_eth_servos", 0);
 
-  while(isDefined(level._id_1189) == 0)
+  while(isDefined(level._id_1189) == 0) {
     scripts\engine\utility::waitframe();
+  }
 
   level._id_1189 thread _id_0F00::_id_CE35("scn_hack_floor_pull_off", 26);
   level._id_1189 thread _id_0F00::_id_CE35("scn_hack_floor_toss_aside", 146);
@@ -730,13 +747,15 @@ _id_118C() {
 }
 
 _id_118A() {
-  if(isDefined(level._id_2571._id_11910))
+  if(isDefined(level._id_2571._id_11910)) {
     level._id_2571._id_11910 = undefined;
+  }
 
   level._id_2571._id_11910 = spawnStruct();
 
-  if(isDefined(level._id_2571._id_11910._id_912F))
+  if(isDefined(level._id_2571._id_11910._id_912F)) {
     level._id_2571._id_11910._id_912F destroy();
+  }
 
   level._id_2571._id_11910._id_912F = newhudelem();
   level._id_2571._id_11910._id_912F.x = 320;
@@ -801,8 +820,9 @@ _id_258B(var_0) {
 _id_25AB(var_0, var_1, var_2) {
   var_3 = 2;
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   if(var_2 < var_3) {
     var_4 = 96.0;
@@ -853,8 +873,9 @@ _id_25E6() {
   var_0 playLoopSound("radio_bg_fire_amb_lp");
   wait 1;
 
-  while(iscinematicplaying() == 1)
+  while(iscinematicplaying() == 1) {
     scripts\engine\utility::waitframe();
+  }
 
   var_0 stoploopsound();
   scripts\engine\utility::waitframe();

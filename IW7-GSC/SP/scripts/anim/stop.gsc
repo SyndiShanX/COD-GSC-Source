@@ -24,8 +24,9 @@ main() {
   thread _id_50FE();
   scripts\anim\utility::_id_9832("stop");
 
-  if(isDefined(self._id_1095A))
+  if(isDefined(self._id_1095A)) {
     _id_1095B();
+  }
 
   scripts\anim\utility::_id_DCB7();
   thread _id_F77E();
@@ -33,10 +34,11 @@ main() {
   var_0 = isDefined(self._id_4C8C);
 
   if(!var_0) {
-    if(self.a.weaponpos["right"] == "none" && self.a.weaponpos["left"] == "none")
+    if(self.a.weaponpos["right"] == "none" && self.a.weaponpos["left"] == "none") {
       var_0 = 1;
-    else if(angleclamp180(self getmuzzleangle()[0]) > 20)
+    } else if(angleclamp180(self getmuzzleangle()[0]) > 20) {
       var_0 = 1;
+    }
   }
 
   for(;;) {
@@ -68,8 +70,9 @@ main() {
 _id_E732(var_0, var_1) {
   self orientmode("face angle", var_0);
 
-  while(angleclamp(var_0 - self.angles[1]) > var_1)
+  while(angleclamp(var_0 - self.angles[1]) > var_1) {
     wait 0.1;
+  }
 }
 
 _id_F77E() {
@@ -104,19 +107,21 @@ _id_7E6F() {
 
   var_3 = scripts\anim\utility::_id_3EF2();
 
-  if(var_2 == "Cover Stand" || var_2 == "Conceal Stand")
+  if(var_2 == "Cover Stand" || var_2 == "Conceal Stand") {
     var_3 = scripts\anim\utility::_id_3EF2("stand");
-  else if(var_2 == "Cover Crouch" || var_2 == "Conceal Crouch")
+  } else if(var_2 == "Cover Crouch" || var_2 == "Conceal Crouch") {
     var_3 = scripts\anim\utility::_id_3EF2("crouch");
-  else if(var_2 == "Cover Prone" || var_2 == "Conceal Prone")
+  } else if(var_2 == "Cover Prone" || var_2 == "Conceal Prone") {
     var_3 = scripts\anim\utility::_id_3EF2("prone");
+  }
 
   return var_3;
 }
 
 transitiontoidle(var_0, var_1) {
-  if(scripts\anim\utility::_id_9D9B() && self.a.pose == "stand")
+  if(scripts\anim\utility::_id_9D9B() && self.a.pose == "stand") {
     var_0 = "stand_cqb";
+  }
 
   var_2 = scripts\anim\utility::_id_B028("idle_transitions");
 
@@ -128,20 +133,22 @@ transitiontoidle(var_0, var_1) {
 }
 
 _id_D49C(var_0, var_1) {
-  if(scripts\anim\utility::_id_9D9B() && self.a.pose == "stand")
+  if(scripts\anim\utility::_id_9D9B() && self.a.pose == "stand") {
     var_0 = "stand_cqb";
+  }
 
   var_2 = undefined;
 
   if(isDefined(self._id_4C8C) && isDefined(self._id_4C8C[var_0])) {
-    if(isarray(self._id_4C8C[var_0]))
+    if(isarray(self._id_4C8C[var_0])) {
       var_3 = scripts\anim\utility::_id_1E9D(self._id_4C8C[var_0], self._id_4C8D[var_0]);
-    else {
+    } else {
       var_3 = self._id_4C8C[var_0];
       var_4 = var_0 + "_add";
 
-      if(isDefined(self._id_4C8C[var_4]))
+      if(isDefined(self._id_4C8C[var_4])) {
         var_2 = self._id_4C8C[var_4];
+      }
     }
   } else if(isDefined(anim._id_DD76) && (var_0 == "stand" || var_0 == "stand_cqb") && isDefined(self._id_32D4) && self._id_32D4 == 1)
     var_3 = scripts\anim\utility::_id_1E9D(anim._id_DD76["stand"][0], anim._id_DD77["stand"][0]);
@@ -154,8 +161,9 @@ _id_D49C(var_0, var_1) {
 
   var_7 = 0.2;
 
-  if(gettime() == self.a._id_EF87)
+  if(gettime() == self.a._id_EF87) {
     var_7 = 0.5;
+  }
 
   if(isDefined(var_2)) {
     self _meth_82A5(var_3, %body, 1, var_7, 1);

@@ -138,8 +138,9 @@ _id_9A9E() {
 }
 
 _id_A0B8() {
-  if(!isDefined(level._id_9DD0))
+  if(!isDefined(level._id_9DD0)) {
     thread _id_EB17();
+  }
 
   thread _id_9AB7();
   thread _id_9AE0();
@@ -311,20 +312,25 @@ _id_BB22() {
   level._id_2571._id_A37B playSound("dogfight_high_thrust_end");
   wait 1;
 
-  if(isDefined(level._id_2571._id_A379))
+  if(isDefined(level._id_2571._id_A379)) {
     level._id_2571._id_A379 scripts\sp\utility::_id_10460(1);
+  }
 
-  if(isDefined(level._id_2571._id_A37A))
+  if(isDefined(level._id_2571._id_A37A)) {
     level._id_2571._id_A37A scripts\sp\utility::_id_10460(1);
+  }
 
-  if(isDefined(level._id_2571._id_A37B))
+  if(isDefined(level._id_2571._id_A37B)) {
     level._id_2571._id_A37B scripts\sp\utility::_id_10460(1);
+  }
 
-  if(isDefined(level._id_2571._id_A375))
+  if(isDefined(level._id_2571._id_A375)) {
     level._id_2571._id_A375 scripts\sp\utility::_id_10460(1);
+  }
 
-  if(isDefined(level._id_2571._id_A103))
+  if(isDefined(level._id_2571._id_A103)) {
     level._id_2571._id_A103 scripts\sp\utility::_id_10460(1);
+  }
 }
 
 _id_38E7() {
@@ -530,8 +536,9 @@ _id_BB13(var_0) {
 }
 
 _id_91B7(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 playSound("chase_by");
+  }
 }
 
 _id_2F58() {
@@ -554,8 +561,9 @@ _id_2F57() {
   _id_0F00::_id_CD7B("amb_bridge_broken_com_console", (4705, 0, 1425));
   thread _id_8895();
 
-  if(!isDefined(level._id_9DD0))
+  if(!isDefined(level._id_9DD0)) {
     setmusicstate("");
+  }
 }
 
 _id_8895() {
@@ -733,8 +741,9 @@ _id_8512() {
 _id_8518() {
   self endon("death");
 
-  while(!level.player isonground())
+  while(!level.player isonground()) {
     wait 0.05;
+  }
 
   var_0 = scripts\engine\utility::spawn_tag_origin();
   var_0 playSound("gravity_on_plr_imp_metal", "sounddone");
@@ -746,8 +755,9 @@ _id_83CC() {
   var_0 = scripts\engine\utility::spawn_tag_origin((4705, 50, 1400));
   var_0 playLoopSound("bridge_glass_pieces");
 
-  while(!level.player isonground())
+  while(!level.player isonground()) {
     wait 0.05;
+  }
 
   var_0 stopsounds();
   scripts\engine\utility::waitframe();
@@ -994,11 +1004,13 @@ _id_6913() {
 }
 
 _id_CE2A(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 10000;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
   var_3 = level.player.origin + anglesToForward(level.player.angles) * var_2;
   _id_0F00::_id_CE21(var_0, var_3);

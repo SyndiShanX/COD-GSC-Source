@@ -6,8 +6,9 @@
 init_fishtrap() {
   var_0 = scripts\engine\utility::getStructArray("trap_electric", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  level thread _id_F956(var_2);
+  foreach(var_2 in var_0) {
+    level thread _id_F956(var_2);
+  }
 
   wait 10;
   scripts\engine\utility::exploder(30);
@@ -17,8 +18,9 @@ _id_F956(var_0) {
   var_1 = getEntArray(var_0.target, "targetname");
 
   foreach(var_3 in var_1) {
-    if(var_3.classname == "trigger_multiple")
+    if(var_3.classname == "trigger_multiple") {
       var_0.dmg_trig = var_3;
+    }
   }
 }
 
@@ -46,8 +48,9 @@ fish_trap_splash_sfx_init(var_0) {
   var_1[5] = (-2396, 1924, -155);
   var_1[6] = (-2776, 1684, -155);
 
-  foreach(var_3 in var_1)
-  thread fish_trap_splash_sfx_spawn(var_0, var_3);
+  foreach(var_3 in var_1) {
+    thread fish_trap_splash_sfx_spawn(var_0, var_3);
+  }
 }
 
 fish_trap_splash_sfx_spawn(var_0, var_1) {
@@ -63,8 +66,9 @@ fish_trap_splash_sfx_spawn(var_0, var_1) {
 fish_trap_timer(var_0) {
   var_1 = gettime() + 25000;
 
-  while(gettime() < var_1)
+  while(gettime() < var_1) {
     wait 1;
+  }
 
   var_0 notify("trap_done");
   scripts\cp\cp_interaction::enable_linked_interactions(var_0);
@@ -107,10 +111,11 @@ fish_kill_zombie(var_0, var_1) {
   var_0.customdeath = 1;
   var_0.scripted_mode = 1;
 
-  if(scripts\engine\utility::is_true(var_0.dismember_crawl))
+  if(scripts\engine\utility::is_true(var_0.dismember_crawl)) {
     var_0.anchor movez(-10, 2);
-  else
+  } else {
     var_0.anchor movez(-60, 4);
+  }
 
   var_0.anchor waittill("movedone");
 

@@ -15,26 +15,30 @@ _id_13010(var_0, var_1) {
 
   level.wave_num_at_start_of_game = level.wave_num;
 
-  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade))
+  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade)) {
     scripts\cp\zombies\zombie_analytics::log_times_per_wave("shooting_gallery", var_1);
-  else
+  } else {
     scripts\cp\zombies\zombie_analytics::log_times_per_wave("shooting_gallery_afterlife", var_1);
+  }
 
   _id_5581(var_0);
 
-  if(!_id_9CBE(var_0._id_45C5))
+  if(!_id_9CBE(var_0._id_45C5)) {
     _id_E210(var_0._id_45C5);
+  }
 
   _id_1771(var_0._id_45C5, var_1);
   _id_CE0B(var_0, var_1);
 
-  if(!_id_9CBE(var_0._id_45C5))
+  if(!_id_9CBE(var_0._id_45C5)) {
     _id_10D1E(var_0._id_45C5);
+  }
 }
 
 _id_CE0B(var_0, var_1) {
-  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade))
+  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade)) {
     var_0 notify("machine_used");
+  }
 
   var_1.pre_arcade_game_weapon = var_1 scripts\cp\zombies\arcade_game_utility::saveplayerpregameweapon(var_1);
   var_2 = var_0.weapon;
@@ -68,8 +72,9 @@ _id_94DA() {
 _id_9741(var_0) {
   var_1 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
 
-  foreach(var_4, var_3 in var_1)
-  var_3 thread _id_FA41(var_4);
+  foreach(var_4, var_3 in var_1) {
+    var_3 thread _id_FA41(var_4);
+  }
 }
 
 _id_FA41(var_0) {
@@ -201,10 +206,11 @@ _id_BD47(var_0, var_1) {
 }
 
 _id_9F4E(var_0) {
-  if(var_0 == "iw7_shootgallery_zm_red" || var_0 == "iw7_shootgallery_zm_blue" || var_0 == "iw7_shootgallery_zm_green" || var_0 == "iw7_shootgallery_zm_yellow")
+  if(var_0 == "iw7_shootgallery_zm_red" || var_0 == "iw7_shootgallery_zm_blue" || var_0 == "iw7_shootgallery_zm_green" || var_0 == "iw7_shootgallery_zm_yellow") {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_FEB5(var_0, var_1) {
@@ -296,8 +302,9 @@ _id_C927(var_0) {
     var_0 waittill("shooting_gallery_player_left", var_1);
     _id_E027(var_0, var_1);
 
-    if(_id_7B3A(var_0) == 0)
+    if(_id_7B3A(var_0) == 0) {
       _id_10173(var_0);
+    }
   }
 }
 
@@ -307,8 +314,9 @@ _id_6961(var_0, var_1, var_2) {
     var_2._id_7654 = undefined;
     var_2 scripts\engine\utility::allow_weapon_switch(1);
 
-    if(!var_2 scripts\engine\utility::isusabilityallowed())
+    if(!var_2 scripts\engine\utility::isusabilityallowed()) {
       var_2 scripts\engine\utility::allow_usability(1);
+    }
 
     var_2 allowmelee(1);
     var_2 scripts\cp\powers\coop_powers::power_enablepower();
@@ -319,8 +327,9 @@ _id_6961(var_0, var_1, var_2) {
     var_2 _id_832F(var_0, var_2);
   }
 
-  if(!var_1._id_45C5.in_afterlife_arcade)
+  if(!var_1._id_45C5.in_afterlife_arcade) {
     level notify("gallery_used");
+  }
 
   _id_6237(var_1);
   var_0 notify("shooting_gallery_player_left", var_2);
@@ -376,15 +385,17 @@ _id_553F(var_0) {
 }
 
 _id_6208(var_0) {
-  if(!var_0 scripts\cp\utility::areinteractionsenabled())
+  if(!var_0 scripts\cp\utility::areinteractionsenabled()) {
     var_0 scripts\cp\utility::allow_player_interactions(1);
+  }
 }
 
 _id_9740() {
   var_0 = scripts\engine\utility::getStructArray("shooting_gallery_controlling_struct", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  _id_973F(var_2);
+  foreach(var_2 in var_0) {
+    _id_973F(var_2);
+  }
 }
 
 _id_973F(var_0) {
@@ -420,11 +431,13 @@ _id_973F(var_0) {
     var_5 = strtok(var_5, " ");
 
     foreach(var_7 in var_5) {
-      if(issubstr(var_7, "power_on"))
+      if(issubstr(var_7, "power_on")) {
         var_0._id_FEBE = var_7;
+      }
 
-      if(issubstr(var_7, "activation"))
+      if(issubstr(var_7, "activation")) {
         var_0._id_FEB1 = var_7;
+      }
     }
   }
 
@@ -446,16 +459,18 @@ _id_F5F2(var_0) {
   var_1 = [];
   var_2 = ["alien", "alien", "alien", "alien_king", "hostage"];
 
-  for(var_3 = 0; var_3 < 3; var_3++)
+  for(var_3 = 0; var_3 < 3; var_3++) {
     var_1 = scripts\engine\utility::array_combine(var_1, scripts\engine\utility::array_randomize(var_2));
+  }
 
   var_1[var_1.size] = "ufo";
   var_0._id_1154F = var_1;
 }
 
 _id_784F(var_0) {
-  if(var_0._id_26A1.size == 0)
+  if(var_0._id_26A1.size == 0) {
     _id_F5E4(var_0);
+  }
 
   var_1 = var_0._id_26A1[0];
   var_0._id_26A1 = scripts\engine\utility::array_remove(var_0._id_26A1, var_1);
@@ -463,8 +478,9 @@ _id_784F(var_0) {
 }
 
 _id_7849(var_0) {
-  if(var_0._id_269E.size == 0)
+  if(var_0._id_269E.size == 0) {
     _id_F5E3(var_0);
+  }
 
   var_1 = var_0._id_269E[0];
   var_0._id_269E = scripts\engine\utility::array_remove(var_0._id_269E, var_1);
@@ -472,8 +488,9 @@ _id_7849(var_0) {
 }
 
 _id_7CE1(var_0) {
-  if(var_0._id_1154F.size == 0)
+  if(var_0._id_1154F.size == 0) {
     _id_F5F2(var_0);
+  }
 
   var_1 = var_0._id_1154F[0];
   var_0._id_1154F = scripts\cp\utility::array_remove_index(var_0._id_1154F, 0, 0);
@@ -518,8 +535,9 @@ _id_FEBB(var_0, var_1) {
     if(distancesquared(var_1.origin, var_0.origin) > var_2) {
       wait 2;
 
-      if(distancesquared(self.origin, var_0.origin) > var_2)
+      if(distancesquared(self.origin, var_0.origin) > var_2) {
         var_1 notify("shooting_gallery_player_gets_away");
+      }
     }
   }
 }
@@ -598,8 +616,9 @@ _id_10775(var_0) {
 }
 
 _id_56D0(var_0, var_1, var_2) {
-  if(!isDefined(var_2._id_FEC3))
+  if(!isDefined(var_2._id_FEC3)) {
     var_2._id_FEC3 = spawn("script_origin", var_2.origin);
+  }
 
   if(var_1 > 0) {
     var_0 iprintlnbold("^3+" + var_1);
@@ -616,15 +635,17 @@ _id_56D0(var_0, var_1, var_2) {
 _id_10D20(var_0) {
   wait 1;
 
-  if(!isDefined(var_0._id_FEB9))
+  if(!isDefined(var_0._id_FEB9)) {
     var_0._id_FEB9 = spawn("script_origin", var_0.origin);
+  }
 }
 
 _id_1103E(var_0) {
   wait 1;
 
-  if(isDefined(var_0._id_FEB9))
+  if(isDefined(var_0._id_FEB9)) {
     var_0._id_FEB9 stoploopsound("mus_arcade_alienattack");
+  }
 }
 
 _id_832F(var_0, var_1) {
@@ -664,11 +685,13 @@ _id_CC05(var_0, var_1) {
   var_2 = ["weapon_shootinggallery_wm_red", "weapon_shootinggallery_wm_blue", "weapon_shootinggallery_wm_green", "weapon_shootinggallery_wm_yellow"];
   var_3 = ["iw7_shootgallery_zm_red", "iw7_shootgallery_zm_blue", "iw7_shootgallery_zm_green", "iw7_shootgallery_zm_yellow"];
 
-  if(!isDefined(var_0.model))
+  if(!isDefined(var_0.model)) {
     var_0.model = var_2[var_1];
+  }
 
-  if(!isDefined(var_0.weapon))
+  if(!isDefined(var_0.weapon)) {
     var_0.weapon = var_3[var_1];
+  }
 
   var_0._id_13C2C setModel(var_0.model);
   var_0._id_13C2C.angles = var_0._id_13BFE;
@@ -729,8 +752,9 @@ _id_12967(var_0) {
 _id_F590(var_0, var_1, var_2) {
   var_3 = getEntArray(var_0, "targetname");
 
-  foreach(var_5 in var_3)
-  var_5 setscriptablepartstate(var_1, var_2);
+  foreach(var_5 in var_3) {
+    var_5 setscriptablepartstate(var_1, var_2);
+  }
 }
 
 _id_5555(var_0) {
@@ -743,18 +767,21 @@ _id_5555(var_0) {
     if(level._id_210D == var_0) {
       var_1 = scripts\engine\utility::getStructArray("shooting_gallery", "script_noteworthy");
 
-      foreach(var_3 in var_1)
-      var_3.out_of_order = 1;
+      foreach(var_3 in var_1) {
+        var_3.out_of_order = 1;
+      }
 
       level scripts\engine\utility::waittill_any("regular_wave_starting", "event_wave_starting");
 
-      foreach(var_3 in var_1)
-      var_3.out_of_order = 0;
+      foreach(var_3 in var_1) {
+        var_3.out_of_order = 0;
+      }
 
       foreach(var_8 in level.players) {
         foreach(var_3 in var_1) {
-          if(isDefined(var_8.last_interaction_point) && var_8.last_interaction_point == var_3)
+          if(isDefined(var_8.last_interaction_point) && var_8.last_interaction_point == var_3) {
             var_8 thread scripts\cp\cp_interaction::refresh_interaction();
+          }
         }
       }
 

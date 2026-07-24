@@ -47,8 +47,9 @@ _id_B608(var_0, var_1, var_2, var_3) {
     var_4 = self.origin;
     var_5 = self.melee.target.origin;
 
-    if(int(var_5[2]) > int(var_4[2]) + 1)
+    if(int(var_5[2]) > int(var_4[2]) + 1) {
       return 0;
+    }
 
     var_6 = vectorNormalize(var_5 - var_4);
     var_7 = var_4 - var_6 * 36;
@@ -65,8 +66,9 @@ _id_B61B(var_0, var_1, var_2, var_3) {
   _id_0F3D::_id_B60F();
   scripts\asm\asm::asm_fireephemeralevent("melee_attack", "begin");
 
-  if(isDefined(self.weapon))
+  if(isDefined(self.weapon)) {
     self.meleegrabweapon = self.weapon;
+  }
 
   scripts\anim\shared::placeweaponon(self.weapon, "none");
   scripts\aitypes\melee::_id_B5B4(self.unittype);
@@ -76,9 +78,9 @@ _id_B61B(var_0, var_1, var_2, var_3) {
 }
 
 _id_D3F9() {
-  if(isDefined(self._id_72CE))
+  if(isDefined(self._id_72CE)) {
     var_0 = (0, self._id_72CE, 0);
-  else {
+  } else {
     var_0 = vectortoangles(self.origin - level.player.origin);
     var_0 = (0, var_0[1], 0);
   }
@@ -96,8 +98,9 @@ _id_D3F9() {
   var_4 = getanimlength(var_2["chokePlayer"]);
   level.player thread _id_0F3D::_id_B611(var_4);
 
-  if(getdvarint("exec_review") > 0)
+  if(getdvarint("exec_review") > 0) {
     thread _id_68D0(var_4);
+  }
 
   var_1 thread scripts\sp\anim::_id_10CBF(var_1, var_3);
   var_1 scripts\anim\shared::donotetracks(var_3);
@@ -107,8 +110,9 @@ _id_68D0(var_0) {
   wait(var_0 - 0.1);
   level.player.melee._id_46B6 = 1;
 
-  if(isDefined(level.player.melee._id_B5FE))
+  if(isDefined(level.player.melee._id_B5FE)) {
     level.player thread _id_0F3D::_id_46B5(0.1);
+  }
 
   level.player notify("bt_meleegrab_slowmo");
 }
@@ -140,17 +144,19 @@ _id_B615(var_0) {
   self endon("death");
   level.player endon("bt_stop_meleegrab");
 
-  while(!_id_B60E(var_0))
+  while(!_id_B60E(var_0)) {
     wait 0.05;
+  }
 
   level.player notify("meleegrab_interupt");
 
-  if(isDefined(level.player.melee) && isDefined(level.player.melee._id_B5FE))
+  if(isDefined(level.player.melee) && isDefined(level.player.melee._id_B5FE)) {
     level.player _id_0F3D::_id_46B5();
+  }
 
-  if(!isalive(var_0))
+  if(!isalive(var_0)) {
     var_0 _id_B5FA();
-  else {
+  } else {
     var_0.damageshield = 0;
     var_0.ignoreme = 0;
     var_0 scripts\anim\shared::placeweaponon(var_0.weapon, "right");
@@ -166,14 +172,17 @@ _id_B615(var_0) {
 }
 
 _id_B60E(var_0) {
-  if(!isalive(var_0))
+  if(!isalive(var_0)) {
     return 1;
+  }
 
-  if(isDefined(var_0._id_2029))
+  if(isDefined(var_0._id_2029)) {
     return 1;
+  }
 
-  if(isDefined(level.player._id_93B5) && level.player._id_93B5 == 1)
+  if(isDefined(level.player._id_93B5) && level.player._id_93B5 == 1) {
     return 1;
+  }
 
   return 0;
 }
@@ -193,28 +202,33 @@ _id_B61E(var_0, var_1, var_2, var_3) {
     return 1;
   }
 
-  if(scripts\sp\utility::_id_7E72() == "fu")
+  if(scripts\sp\utility::_id_7E72() == "fu") {
     return 0;
+  }
 
   var_4 = gettime();
 
-  if(isDefined(level.player.gs._id_B639._id_B63B) && var_4 < level.player.gs._id_B639._id_B63B)
+  if(isDefined(level.player.gs._id_B639._id_B63B) && var_4 < level.player.gs._id_B639._id_B63B) {
     return 0;
+  }
 
-  if(level.player.gs._id_B63C <= 0)
+  if(level.player.gs._id_B63C <= 0) {
     return 0;
+  }
 
   var_5 = _id_7BCF();
 
-  if(var_5.size == 0)
+  if(var_5.size == 0) {
     return 0;
+  }
 
   var_5 = scripts\sp\utility::array_removedeadvehicles(var_5);
   var_6 = (40, -55, 0);
   var_7 = self.origin + rotatevector(var_6, self.angles);
 
-  if(!_func_2AC(self _meth_84AC(), var_7, self))
+  if(!_func_2AC(self _meth_84AC(), var_7, self)) {
     return 0;
+  }
 
   var_8 = squared(2000);
   var_9 = [];
@@ -249,8 +263,9 @@ _id_B61E(var_0, var_1, var_2, var_3) {
     level.player.gs._id_B63C--;
     level.player.gs._id_B639._id_B63B = var_4 + level.player.gs._id_B63A;
 
-    if(isDefined(level.player.melee._id_B5FE))
+    if(isDefined(level.player.melee._id_B5FE)) {
       level.player thread _id_0F3D::_id_46B5();
+    }
 
     return 1;
   }
@@ -265,8 +280,9 @@ _id_7BCF() {
 
   foreach(var_4 in var_1) {
     foreach(var_6 in var_2) {
-      if(var_4.npcid == var_6)
+      if(var_4.npcid == var_6) {
         var_0[var_0.size] = var_4;
+      }
     }
   }
 
@@ -279,10 +295,11 @@ _id_B61D(var_0, var_1, var_2, var_3) {
 
 _id_B60D(var_0, var_1, var_2, var_3) {
   if(isDefined(anim)) {
-    if(isPlayer(self.melee.target))
+    if(isPlayer(self.melee.target)) {
       anim._id_B5F7[self.unittype] = gettime();
-    else
+    } else {
       anim._id_B5F8[self.unittype] = gettime();
+    }
   }
 
   _id_B5FA();
@@ -331,8 +348,9 @@ _id_B61F(var_0, var_1, var_2, var_3) {
   thread scripts\sp\anim::_id_10CBF(self, var_1);
   var_14 = _id_0A1E::_id_231F(var_0, var_1, scripts\asm\asm::_id_2341(var_0, var_1));
 
-  if(var_14 == "end")
+  if(var_14 == "end") {
     thread scripts\asm\asm::_id_2310(var_0, var_1, 0);
+  }
 }
 
 _id_B062() {
@@ -374,8 +392,9 @@ _id_B61C(var_0, var_1, var_2, var_3) {
   var_12 thread scripts\anim\shared::donotetracks(var_10, ::_id_B617);
   self clearanim(_id_0A1E::asm_getbodyknob(), var_2);
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     thread _id_3675(var_1, var_5, var_2);
+  }
 
   self _meth_82E7(var_1, var_8, 1.0, var_2, 1.0);
   thread scripts\sp\anim::_id_10CBF(self, var_1);
@@ -395,8 +414,9 @@ _id_3675(var_0, var_1, var_2) {
   var_3 _meth_82E7(var_0, var_1, 1.0, var_2, 1);
   scripts\engine\utility::waittill_notify_or_timeout("death", 7);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 delete();
+  }
 }
 
 _id_EB7C() {
@@ -416,8 +436,9 @@ saviorcleanup() {
   self unlink();
   self notify("melee_save_complete");
 
-  if(isDefined(self._id_B650))
+  if(isDefined(self._id_B650)) {
     self._id_B650 delete();
+  }
 }
 
 _id_B61A(var_0, var_1, var_2, var_3) {
@@ -464,8 +485,9 @@ _id_B617(var_0) {
       self.asm._id_4E40 = ::_id_B614;
       self _meth_81D0();
 
-      if(isDefined(self._id_B63D))
+      if(isDefined(self._id_B63D)) {
         self._id_B63D unlink();
+      }
 
       break;
     case "player_kick_off":
@@ -510,8 +532,9 @@ _id_A707() {
   var_0 = ["c6_grapple_knife_pain_01", "c6_grapple_knife_pain_02", "c6_grapple_knife_pain_03"];
 
   if(isalive(level.player)) {
-    if(isDefined(level.player.melee) && isDefined(level.player.melee.partner))
+    if(isDefined(level.player.melee) && isDefined(level.player.melee.partner)) {
       level.player.melee.partner playSound(var_0[randomintrange(0, 3)]);
+    }
   }
 }
 
@@ -520,8 +543,9 @@ _id_D456() {
   level.player unlink();
   level.player _meth_84FD();
 
-  if(isDefined(level.player.melee) && isDefined(level.player.melee._id_E505))
+  if(isDefined(level.player.melee) && isDefined(level.player.melee._id_E505)) {
     level.player.melee._id_E505 delete();
+  }
 
   level.player notify("bt_stop_loopscreenshake");
   level.player notify("bt_stop_meleegrab");
@@ -541,21 +565,24 @@ _id_B614() {
   _id_B5FA();
   self waittillmatch("melee_savePlayer", "start_ragdoll");
 
-  if(isDefined(self._id_71C8))
+  if(isDefined(self._id_71C8)) {
     self[[self._id_71C8]]();
+  }
 
   wait 0.2;
   return 1;
 }
 
 _id_B613() {
-  if(isDefined(self.meleegrabweapon))
+  if(isDefined(self.meleegrabweapon)) {
     self dropweapon(self.meleegrabweapon, "right", 0);
+  }
 
   _id_B5FA();
 
-  if(isDefined(self._id_71C8))
+  if(isDefined(self._id_71C8)) {
     self[[self._id_71C8]]();
+  }
 
   self startragdoll();
   wait 0.05;
@@ -579,21 +606,25 @@ _id_335A(var_0, var_1) {
 _id_3366(var_0, var_1, var_2, var_3) {
   var_4 = self.melee.target;
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
-  if(!isalive(var_4))
+  if(!isalive(var_4)) {
     return 0;
+  }
 
   var_5 = var_3;
 
-  if(self.melee._id_13D8A != var_5)
+  if(self.melee._id_13D8A != var_5) {
     return 0;
+  }
 
   var_6 = self[[self._id_7191]](var_0, var_2);
 
-  if(!_id_335A(var_1 + "_victim", var_6))
+  if(!_id_335A(var_1 + "_victim", var_6)) {
     return 0;
+  }
 
   self.melee.target.melee._id_331C = 1;
   return 1;
@@ -668,8 +699,9 @@ _id_487D(var_0) {
       var_6 = level.player getweaponammoclip(var_2);
       var_7 = int(var_5 * 0.35);
 
-      if(var_6 <= int(var_5 * 0.4))
+      if(var_6 <= int(var_5 * 0.4)) {
         level.player setweaponammoclip(var_2, var_6 + var_7);
+      }
     }
   }
 
@@ -686,19 +718,22 @@ _id_4884(var_0) {
   self endon("death");
   thread _id_933D();
 
-  while(!_id_4883(var_0))
+  while(!_id_4883(var_0)) {
     wait 0.05;
+  }
 
   level.player notify("crawlmeleegrab_interrupt");
 
-  if(isDefined(level.player.melee) && isDefined(level.player.melee._id_B5FE))
+  if(isDefined(level.player.melee) && isDefined(level.player.melee._id_B5FE)) {
     level.player _id_0F3D::_id_46B5();
+  }
 
-  if(!isalive(var_0))
+  if(!isalive(var_0)) {
     var_0 _id_B5FA();
-  else {
-    if(isDefined(var_0.bt._id_6B4B))
+  } else {
+    if(isDefined(var_0.bt._id_6B4B)) {
       var_0.health = var_0.bt._id_6B4B;
+    }
 
     var_0.damageshield = 0;
     var_0 scripts\anim\shared::placeweaponon(var_0.weapon, "right");
@@ -729,11 +764,13 @@ _id_933D() {
 }
 
 _id_4883(var_0) {
-  if(isDefined(var_0._id_2029))
+  if(isDefined(var_0._id_2029)) {
     return 1;
+  }
 
-  if(isDefined(level.player._id_93B5) && level.player._id_93B5 == 1)
+  if(isDefined(level.player._id_93B5) && level.player._id_93B5 == 1) {
     return 1;
+  }
 
   return 0;
 }
@@ -780,8 +817,9 @@ _id_4887(var_0) {
         var_3 = var_4;
       } else if(scripts\engine\utility::cointoss())
         var_0 playSound("c6_grapple_shot_pain_01");
-      else
+      else {
         var_0 playSound("c6_grapple_shot_pain_02");
+      }
     }
 
     if(var_4 >= var_0.bt._id_6B4B) {

@@ -19,11 +19,13 @@ pop_all_balloons_in_beginning_area() {
   wait 3;
   var_0 = getscriptablearray("beginning_area_balloons", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread balloon_pop_monitor(var_2);
+  foreach(var_2 in var_0) {
+    var_2 thread balloon_pop_monitor(var_2);
+  }
 
-  for(var_4 = var_0.size; var_4 > 0; var_4--)
+  for(var_4 = var_0.size; var_4 > 0; var_4--) {
     level waittill("balloon_popped");
+  }
 
   scripts\cp\zombies\zombie_analytics::log_balloons_popped(level.wave_num);
 }
@@ -173,8 +175,9 @@ require_player_look_at_skull(var_0, var_1) {
 
 any_player_look_at_skull(var_0) {
   foreach(var_2 in level.players) {
-    if(player_look_at_skull(var_0, var_2))
+    if(player_look_at_skull(var_0, var_2)) {
       return 1;
+    }
   }
 
   return 0;
@@ -183,14 +186,16 @@ any_player_look_at_skull(var_0) {
 player_look_at_skull(var_0, var_1) {
   var_2 = 6400;
 
-  if(!var_1 worldpointinreticle_circle(var_0.origin, 25, 75))
+  if(!var_1 worldpointinreticle_circle(var_0.origin, 25, 75)) {
     return 0;
+  }
 
   var_3 = bulletTrace(var_1 getEye(), var_0.origin, 0, var_1);
   var_4 = var_3["position"];
 
-  if(distancesquared(var_4, var_0.origin) > var_2)
+  if(distancesquared(var_4, var_0.origin) > var_2) {
     return 0;
+  }
 
   return 1;
 }
@@ -215,8 +220,9 @@ check_kill_on_dance_floor(var_0, var_1) {
     if(is_correct_color(var_2)) {
       update_kill_order_on_dance_floor();
 
-      if(kill_sequence_completed())
+      if(kill_sequence_completed()) {
         level notify("got_1_9_8_4_kills");
+      }
     }
   }
 }
@@ -232,8 +238,9 @@ kill_sequence_completed() {
 update_kill_order_on_dance_floor() {
   var_0 = [];
 
-  for(var_1 = 1; var_1 < level.kill_order_on_dance_floor.size; var_1++)
+  for(var_1 = 1; var_1 < level.kill_order_on_dance_floor.size; var_1++) {
     var_0[var_0.size] = level.kill_order_on_dance_floor[var_1];
+  }
 
   level.kill_order_on_dance_floor = var_0;
 }
@@ -245,8 +252,9 @@ get_dance_floor_tile_color(var_0) {
     var_4 = getEntArray("astrocade_" + var_3 + "_tile", "targetname");
 
     foreach(var_6 in var_4) {
-      if(ispointinvolume(var_0, var_6))
+      if(ispointinvolume(var_0, var_6)) {
         return var_3;
+      }
     }
   }
 
@@ -304,13 +312,15 @@ arcade_games_performance_monitor() {
 }
 
 check_arcade_game_performance_at_most(var_0, var_1, var_2) {
-  if(var_1 <= var_2)
+  if(var_1 <= var_2) {
     level notify("beat_arcade_game", var_0);
+  }
 }
 
 check_arcade_game_performance_at_least(var_0, var_1, var_2) {
-  if(var_1 >= var_2)
+  if(var_1 >= var_2) {
     level notify("beat_arcade_game", var_0);
+  }
 }
 
 complete_play_arcade_games_and_make_critical_shot() {
@@ -388,16 +398,18 @@ start_bowling_for_planets(var_0, var_1) {
   }
   var_5 = randomintrange(1, var_2 + 1);
 
-  for(var_6 = 1; var_6 < var_5; var_6++)
+  for(var_6 = 1; var_6 < var_5; var_6++) {
     var_1 waittill("throw_a_bowling_for_planet");
+  }
 
   var_7 = scripts\engine\utility::random(var_4);
   var_8 = get_bowling_skull_spawn_info(var_7);
   var_0 thread critical_shot_watcher(var_1, "bowling_for_planets", "hit_the_target_planet", var_3, var_8);
   var_1 waittill("score_in_bowling_for_planet", var_9);
 
-  if(var_9 == var_7)
+  if(var_9 == var_7) {
     var_1 notify("hit_the_target_planet");
+  }
 }
 
 get_bowling_skull_spawn_info(var_0) {
@@ -443,8 +455,9 @@ start_cryptid_attack(var_0, var_1) {
   }
   var_4 = randomintrange(1, var_2 + 1);
 
-  for(var_5 = 1; var_5 < var_4; var_5++)
+  for(var_5 = 1; var_5 < var_4; var_5++) {
     var_1 waittill("throw_a_ball_at_cryptid_attack");
+  }
 
   wait 0.5;
   var_6 = scripts\engine\utility::random(var_0.remaining_teeth);
@@ -452,8 +465,9 @@ start_cryptid_attack(var_0, var_1) {
   var_0 thread critical_shot_watcher(var_1, "cryptid_attack", "hit_the_target_tooth", var_3, var_7);
   var_1 waittill("hit_a_cryptid_tooth", var_8);
 
-  if(var_6 == var_8)
+  if(var_6 == var_8) {
     var_1 notify("hit_the_target_tooth");
+  }
 }
 
 get_cryptid_skull_spawn_info(var_0) {
@@ -504,8 +518,9 @@ start_black_hole(var_0, var_1) {
   var_0 thread critical_shot_watcher(var_1, "black_hole", "hit_black_hole_50", var_2, var_3);
   var_1 waittill("hit_black_hole", var_4);
 
-  if(var_4 == 50)
+  if(var_4 == 50) {
     var_1 notify("hit_black_hole_50");
+  }
 }
 
 get_black_hole_skull_spawn_info() {
@@ -533,8 +548,9 @@ start_zombie_zoom(var_0, var_1) {
   var_0 thread critical_shot_watcher(var_1, "zombie_zoom", "hit_zombie_zoom_skull", var_6, var_7);
   wait(var_6);
 
-  if(distance2d(var_0.horse.og_origin, var_0.horse.origin) + 2 >= var_5)
+  if(distance2d(var_0.horse.og_origin, var_0.horse.origin) + 2 >= var_5) {
     var_1 notify("hit_zombie_zoom_skull");
+  }
 }
 
 get_zombie_zoom_skull_spawn_info(var_0, var_1) {
@@ -628,16 +644,18 @@ hit_the_floating_skull_with_spaceland_laser() {
 can_floating_skull_be_destroyed(var_0) {
   var_1 = "iw7_spaceland_wmd";
 
-  if(var_0 == var_1 && at_least_one_player_wearing_glasses())
+  if(var_0 == var_1 && at_least_one_player_wearing_glasses()) {
     return 1;
+  }
 
   return 0;
 }
 
 at_least_one_player_wearing_glasses() {
   foreach(var_1 in level.players) {
-    if(scripts\engine\utility::is_true(var_1.wearing_dischord_glasses))
+    if(scripts\engine\utility::is_true(var_1.wearing_dischord_glasses)) {
       return 1;
+    }
   }
 
   return 0;
@@ -666,8 +684,9 @@ movement_logic(var_0) {
 visibility_monitor(var_0) {
   var_0 endon("death");
 
-  foreach(var_2 in level.players)
-  var_0 hidefromplayer(var_2);
+  foreach(var_2 in level.players) {
+    var_0 hidefromplayer(var_2);
+  }
 
   for(;;) {
     foreach(var_2 in level.players) {
@@ -804,8 +823,9 @@ get_arcade_interaction_next_to_ghost_n_skull() {
   var_0 = (2829, -538, 241);
 
   foreach(var_2 in level.current_interaction_structs) {
-    if(distancesquared(var_2.origin, var_0) < 100)
+    if(distancesquared(var_2.origin, var_0) < 100) {
       return var_2;
+    }
   }
 }
 

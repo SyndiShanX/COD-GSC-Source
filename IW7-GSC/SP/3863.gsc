@@ -11,8 +11,9 @@ _id_2FA4() {
   _id_2F9C();
   _id_2F9E();
 
-  if(!level.player scripts\sp\utility::_id_65DF("player_gravity_off"))
+  if(!level.player scripts\sp\utility::_id_65DF("player_gravity_off")) {
     level.player scripts\sp\utility::_id_65E0("player_gravity_off");
+  }
 
   level.player scripts\sp\utility::_id_65E0("player_window_event");
   scripts\engine\utility::flag_init("window_breach_windows_off");
@@ -73,8 +74,9 @@ _id_2F9A() {
 _id_2F9B() {}
 
 _id_2F9F() {
-  if(isDefined(self._id_E9F6) && isDefined(self._id_E9F6._id_EF20))
+  if(isDefined(self._id_E9F6) && isDefined(self._id_E9F6._id_EF20)) {
     level._id_2FA5[self._id_E9F6._id_EF20] = self;
+  }
 
   var_0 = [];
   var_1 = undefined;
@@ -164,8 +166,9 @@ _id_2F9F() {
   foreach(var_17 in level._id_E6E0) {
     if(isDefined(self._id_84B7)) {
       if(ispointinvolume(self._id_84B7.origin, var_17)) {
-        if(!isDefined(var_17._id_13D76))
+        if(!isDefined(var_17._id_13D76)) {
           var_17._id_13D76 = [];
+        }
 
         var_17._id_13D76 = scripts\engine\utility::array_add(var_17._id_13D76, self);
         self._id_E6E4 = var_17;
@@ -176,8 +179,9 @@ _id_2F9F() {
 
 _id_2FA1(var_0) {
   if(isDefined(self._id_13D74)) {
-    while(!isglassdestroyed(self._id_13D74))
+    while(!isglassdestroyed(self._id_13D74)) {
       wait 0.05;
+    }
   } else {
     var_1 = 0;
 
@@ -188,20 +192,23 @@ _id_2FA1(var_0) {
         continue;
       }
       if(var_3 == level.player && isDefined(var_6) && isDefined(level.player._id_4B21)) {
-        if(level.player._id_4B21 == "offhandshield" && var_6 == "MOD_MELEE")
+        if(level.player._id_4B21 == "offhandshield" && var_6 == "MOD_MELEE") {
           continue;
+        }
       }
 
       if(var_3 != level.player) {
         var_7 = distance(level.player.origin, self.origin);
         var_8 = distance(var_3.origin, self.origin);
 
-        if(var_8 > 1024 || var_7 > 512)
+        if(var_8 > 1024 || var_7 > 512) {
           continue;
+        }
       }
 
-      if(scripts\engine\utility::is_true(self._id_13D5C) || !scripts\engine\utility::flag("holdGravityShift"))
+      if(scripts\engine\utility::is_true(self._id_13D5C) || !scripts\engine\utility::flag("holdGravityShift")) {
         var_1 = var_1 + var_2;
+      }
     }
   }
 
@@ -210,30 +217,34 @@ _id_2FA1(var_0) {
   self notify("window_breached");
   self._id_3244 delete();
 
-  if(isDefined(self._id_83CD))
+  if(isDefined(self._id_83CD)) {
     self._id_83CD delete();
+  }
 
-  if(isDefined(self._id_83CE))
+  if(isDefined(self._id_83CE)) {
     self._id_83CE delete();
+  }
 
-  if(isDefined(self._id_6AED))
+  if(isDefined(self._id_6AED)) {
     self._id_6AED delete();
+  }
 
   self._id_83C8 show();
 
   if(scripts\engine\utility::is_true(self._id_2FA7._id_4284)) {
     return;
   }
-  if(scripts\engine\utility::is_true(self._id_13DBC))
+  if(scripts\engine\utility::is_true(self._id_13DBC)) {
     thread _id_13D41(var_0);
-  else if(scripts\engine\utility::is_true(self._id_13D5C))
+  } else if(scripts\engine\utility::is_true(self._id_13D5C)) {
     thread _id_13D40();
-  else if(!(level.player scripts\sp\utility::_id_65DF("player_inside_ship") && level.player scripts\sp\utility::_id_65DB("player_inside_ship")))
+  } else if(!(level.player scripts\sp\utility::_id_65DF("player_inside_ship") && level.player scripts\sp\utility::_id_65DB("player_inside_ship"))) {
     thread _id_13D40();
-  else if(scripts\engine\utility::player_is_in_jackal())
+  } else if(scripts\engine\utility::player_is_in_jackal()) {
     thread _id_13D40();
-  else
+  } else {
     thread _id_13D41(var_0);
+  }
 }
 
 _id_13D41(var_0) {
@@ -247,8 +258,9 @@ _id_13D41(var_0) {
     thread _id_13D39(self._id_735F);
     var_2 = scripts\engine\utility::waittill_notify_or_timeout_return("player_thrown_out", 2.5);
 
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       self waittill("player_window_event_done");
+    }
 
     self notify("breach_event_done");
     level notify("breach_event_done");
@@ -258,10 +270,11 @@ _id_13D41(var_0) {
     scripts\engine\utility::flag_clear("holdGravityShift");
   }
 
-  if(scripts\engine\utility::is_true(self._id_13D5E) && scripts\engine\utility::is_true(self._id_51A8))
+  if(scripts\engine\utility::is_true(self._id_13D5E) && scripts\engine\utility::is_true(self._id_51A8)) {
     self._id_2FA7 delete();
-  else if(!scripts\engine\utility::is_true(self._id_2FA7._id_4284))
+  } else if(!scripts\engine\utility::is_true(self._id_2FA7._id_4284)) {
     thread _id_13D3F();
+  }
 
   if(scripts\engine\utility::is_true(level._id_8845) || scripts\engine\utility::flag("player_in_gravity")) {
     physics_setgravity((0, 0, -386.09));
@@ -295,8 +308,9 @@ _id_13D43(var_0, var_1, var_2, var_3, var_4) {
     return;
   }
 
-  if(!isDefined(level._id_72EF) || level._id_72EF == 0)
+  if(!isDefined(level._id_72EF) || level._id_72EF == 0) {
     thread _id_13D44(var_2, var_5, var_6);
+  }
 
   _id_13D4E(var_0, var_1, var_3, var_4);
 }
@@ -362,8 +376,9 @@ _id_13D4E(var_0, var_1, var_2, var_3) {
   _id_0F35::_id_FB25(0, 0);
   level.player _id_0F31::_id_D35F(1);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     thread _id_0BDC::_id_10CD1(var_3);
+  }
 }
 
 _id_13D4C(var_0, var_1, var_2) {
@@ -418,10 +433,11 @@ _id_13D4A() {
   var_1 = vectorNormalize(level.player getplayerangles());
   var_2 = vectordot(var_0, var_1);
 
-  if(var_2 < -0.5 || var_2 > 0.5)
+  if(var_2 < -0.5 || var_2 > 0.5) {
     level.player forceplaygestureviewmodel("ges_window_break_near_b1", undefined, 0.05);
-  else if(var_2 <= 0.5 && var_2 >= -0.5)
+  } else if(var_2 <= 0.5 && var_2 >= -0.5) {
     level.player forceplaygestureviewmodel("ges_window_break_near_f1", undefined, 0.05);
+  }
 
   wait 1;
   _id_13D49();
@@ -455,8 +471,9 @@ _id_13D47(var_0) {
   var_1 = 0;
 
   foreach(var_3 in var_0) {
-    if(var_1 == 0)
+    if(var_1 == 0) {
       var_1 = 1;
+    }
   }
 
   level.player _meth_82C0("window_breach_space", 1.0);
@@ -473,8 +490,9 @@ _id_13D4D() {
   _id_0B0B::_id_F5A0();
   setslowmotion(1, 0.25, 0.5);
 
-  if(!isDefined(level._id_72EF) || level._id_72EF == 0)
+  if(!isDefined(level._id_72EF) || level._id_72EF == 0) {
     var_0 = level.player scripts\engine\utility::waittill_either("grapple_used", "death");
+  }
 
   level.player thread scripts\sp\utility::play_sound_on_entity("window_breach_slowmo_out");
   setslowmotion(0.25, 1, 0.5);
@@ -502,8 +520,9 @@ _id_13D44(var_0, var_1, var_2) {
   var_10 moveTo(var_9, 0.4);
   var_10 rotateTo((randomint(360), randomint(360), randomint(360)), 0.4);
 
-  while(distance(var_6.origin, level.player getEye()) > 57)
+  while(distance(var_6.origin, level.player getEye()) > 57) {
     scripts\engine\utility::waitframe();
+  }
 
   var_6 unlink();
   var_10 delete();
@@ -530,8 +549,9 @@ _id_13D46() {
   level.player endon("stop_heartbeat");
   level.player endon("death");
 
-  for(;;)
+  for(;;) {
     level.player scripts\sp\utility::play_sound_on_entity("window_breach_heartbeat");
+  }
 }
 
 _id_13D39(var_0) {
@@ -541,9 +561,9 @@ _id_13D39(var_0) {
   foreach(var_3 in var_1) {
     var_4 = distance(var_3.origin, self.origin);
 
-    if(var_4 > level._id_2FA3[self._id_13D77]["radius_max"])
+    if(var_4 > level._id_2FA3[self._id_13D77]["radius_max"]) {
       continue;
-    else {
+    } else {
       if(var_4 > level._id_2FA3[self._id_13D77]["radius_disabled"]) {
         thread _id_13D3A(var_3, "window_breach_far");
         continue;
@@ -599,8 +619,9 @@ _id_13D3C(var_0, var_1) {
   var_12 = var_8 * var_11;
   wait(var_12);
 
-  if(isDefined(var_0._id_B14F))
+  if(isDefined(var_0._id_B14F)) {
     var_0 scripts\sp\utility::_id_1101B();
+  }
 
   var_0._id_13D68 = var_7 * 5000;
   var_0._id_4E46 = ::_id_13D3B;
@@ -617,8 +638,9 @@ _id_13D3B() {
 _id_13D5D(var_0) {
   wait 0.5;
 
-  foreach(var_2 in var_0)
-  level._id_2FA5[var_2] thread _id_13D5C();
+  foreach(var_2 in var_0) {
+    level._id_2FA5[var_2] thread _id_13D5C();
+  }
 }
 
 _id_13D5C() {
@@ -634,11 +656,13 @@ _id_13D5C() {
 _id_13D5E(var_0, var_1) {
   self._id_13D5E = 1;
 
-  if(scripts\engine\utility::is_true(var_0))
+  if(scripts\engine\utility::is_true(var_0)) {
     self._id_51A8 = 1;
+  }
 
-  if(scripts\engine\utility::is_true(var_1))
+  if(scripts\engine\utility::is_true(var_1)) {
     self._id_C023 = 1;
+  }
 
   if(isDefined(self._id_6AED)) {
     self._id_6AED notify("damage", 999, level.player);
@@ -646,8 +670,9 @@ _id_13D5E(var_0, var_1) {
     self._id_6AED delete();
   }
 
-  if(isDefined(self._id_13D74))
+  if(isDefined(self._id_13D74)) {
     destroyglass(self._id_13D74);
+  }
 }
 
 _id_88C2() {
@@ -694,8 +719,9 @@ _id_CE98(var_0) {
     var_4.angles = var_4.angles + (90, 90, 0);
     playFXOnTag(scripts\engine\utility::getfx("breach_wind"), var_4, "tag_origin");
 
-    if(var_1 == 0)
+    if(var_1 == 0) {
       var_1 = 1;
+    }
 
     var_0[var_0.size] = var_4;
   }
@@ -709,8 +735,9 @@ _id_40DE(var_0) {
   var_1 = 0;
 
   foreach(var_3 in var_0) {
-    if(var_1 == 0)
+    if(var_1 == 0) {
       var_1 = 1;
+    }
   }
 
   level.player clearclienttriggeraudiozone(0.2);
@@ -725,14 +752,17 @@ _id_13D3F() {
   }
   self._id_2FA7._id_4284 = 1;
 
-  if(isDefined(self._id_2FA7.delay))
+  if(isDefined(self._id_2FA7.delay)) {
     wait(self._id_2FA7.delay);
+  }
 
-  while(level.player scripts\sp\utility::_id_65DB("player_window_event"))
+  while(level.player scripts\sp\utility::_id_65DB("player_window_event")) {
     wait 0.05;
+  }
 
-  if(isDefined(self._id_3244))
+  if(isDefined(self._id_3244)) {
     self._id_3244 solid();
+  }
 
   var_0 = self._id_2FA7;
   var_1 = self._id_10186;
@@ -752,8 +782,9 @@ _id_13D40() {
   }
   self._id_2FA7._id_4284 = 1;
 
-  if(isDefined(self._id_3244))
+  if(isDefined(self._id_3244)) {
     self._id_3244 solid();
+  }
 
   var_0 = self._id_2FA7;
   var_1 = self._id_10186;

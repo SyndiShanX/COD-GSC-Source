@@ -46,11 +46,13 @@ _id_5365() {
     return;
   }
 
-  while(!isglassdestroyed(var_0))
+  while(!isglassdestroyed(var_0)) {
     wait 0.05;
+  }
 
-  if(!isDefined(self._id_ED83))
+  if(!isDefined(self._id_ED83)) {
     playFX(scripts\engine\utility::getfx("vfx_moon_adscreen_sparks_runner"), self.origin);
+  }
 
   self delete();
 }

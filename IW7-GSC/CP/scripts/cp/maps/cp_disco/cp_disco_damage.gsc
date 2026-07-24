@@ -33,13 +33,15 @@ cp_disco_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
       if(scripts\mp\mp_agent::is_friendly_damage(var_12, var_1)) {
         return;
       }
-      if(scripts\mp\mp_agent::is_friendly_damage(var_12, var_0))
+      if(scripts\mp\mp_agent::is_friendly_damage(var_12, var_0)) {
         return;
+      }
     }
   }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = self;
+  }
 
   var_13 = scripts\cp\agents\gametype_zombie::should_do_damage_checks(var_1, var_2, var_4, var_5, var_8, var_12);
 
@@ -72,17 +74,20 @@ cp_disco_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
 
     self.damaged_by_player = 1;
 
-    if(scripts\engine\utility::is_true(var_1.snake_super))
+    if(scripts\engine\utility::is_true(var_1.snake_super)) {
       var_1 playlocalsound("kungfu_snake_super_hit_zombie");
+    }
   }
 
-  if(isDefined(var_1.is_turned) && var_1.is_turned && var_4 != "MOD_SUICIDE")
+  if(isDefined(var_1.is_turned) && var_1.is_turned && var_4 != "MOD_SUICIDE") {
     var_2 = var_1.melee_damage_amt;
+  }
 
   var_33 = 0;
 
-  if(!var_14 && scripts\cp\agents\gametype_zombie::checkaltmodestatus(var_5) && var_17 && !isDefined(var_1.linked_to_coaster) && var_1 scripts\cp\utility::is_consumable_active("sniper_soft_upgrade"))
+  if(!var_14 && scripts\cp\agents\gametype_zombie::checkaltmodestatus(var_5) && var_17 && !isDefined(var_1.linked_to_coaster) && var_1 scripts\cp\utility::is_consumable_active("sniper_soft_upgrade")) {
     var_33 = var_1 scripts\cp\utility::coop_getweaponclass(var_5) == "weapon_sniper";
+  }
 
   var_34 = !var_27 && scripts\engine\utility::is_true(level.explosive_touch) && isDefined(var_4) && var_4 == "MOD_UNKNOWN";
   var_35 = !var_28 && (var_20 || var_21 || var_25 || var_34 || var_23 || var_24 || var_33);
@@ -92,35 +97,40 @@ cp_disco_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
     thread scripts\cp\powers\coop_armageddon::fling_zombie_from_meteor(var_0.origin, var_6, var_7);
     return;
   } else if(var_35 && !var_27) {
-    if(var_33)
+    if(var_33) {
       var_1 scripts\cp\utility::notify_used_consumable("sniper_soft_upgrade");
+    }
 
-    if(var_31)
+    if(var_31) {
       var_1 thread scripts\cp\maps\cp_disco\cp_disco::do_damage_cone_nunchucks(var_5, var_1, self, var_4, var_8);
+    }
 
     if(var_32) {
       var_1 thread scripts\cp\maps\cp_disco\cp_disco::do_damage_cone_nunchucks(var_5, var_1, self, var_4, var_8);
       var_1 thread scripts\cp\maps\cp_disco\cp_disco::nunchucks_recent_kills(self, var_5);
 
       if(scripts\engine\utility::is_true(var_1.isreaping)) {
-        if(var_1.health + var_2 <= var_1.maxhealth)
+        if(var_1.health + var_2 <= var_1.maxhealth) {
           var_1.health = var_1.health + var_2;
-        else
+        } else {
           var_1.health = var_1.maxhealth;
+        }
       }
     }
 
     var_2 = int(self.maxhealth);
 
     if(var_25) {
-      if(isDefined(var_6))
+      if(isDefined(var_6)) {
         playFX(level._effect["shock_melee_impact"], var_6);
+      }
 
       var_1 thread scripts\cp\zombies\zombie_damage::stun_zap(self getEye(), self, self.maxhealth, "MOD_UNKNOWN", undefined, var_25);
     }
 
-    if(var_18)
+    if(var_18) {
       var_1 thread scripts\cp\utility::add_to_notify_queue("weapon_hit_enemy", self, var_1, var_5, var_2, var_8, var_4);
+    }
   } else if(!var_27) {
     var_8 = scripts\cp\agents\gametype_zombie::shitloc_mods(var_1, var_4, var_5, var_8);
     var_37 = level.wave_num;
@@ -141,11 +151,13 @@ cp_disco_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
     var_51 = weaponclass(var_5) == "spread" && !var_50 && (var_1 scripts\cp\cp_weapon::has_attachment(var_5, "arkpink") || scripts\cp\cp_weapon::has_attachment(var_5, "arkyellow"));
     var_52 = var_19 && var_18 && var_1 scripts\cp\cp_weapon::has_attachment(var_5, "highcal");
 
-    if(var_26 && issubstr(var_5, "+gl"))
+    if(var_26 && issubstr(var_5, "+gl")) {
       var_2 = scripts\cp\agents\gametype_zombie::scalegldamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
+    }
 
-    if(var_50)
+    if(var_50) {
       var_2 = var_2 * 0.5;
+    }
 
     if(isDefined(var_2) && isDefined(var_8) && !var_21 && var_18) {
       var_53 = scripts\cp\zombies\zombie_armor::process_damage_to_armor(var_12, var_1, var_2, var_8, var_7);
@@ -158,47 +170,56 @@ cp_disco_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
 
     var_2 = scripts\cp\agents\gametype_zombie::initial_weapon_scale(undefined, var_1, var_2, undefined, var_4, var_5, undefined, undefined, var_8, undefined, undefined, undefined);
 
-    if(var_51)
+    if(var_51) {
       var_2 = var_2 * 4;
+    }
 
     if(var_17) {
       if(var_14) {
-        if(var_1 scripts\cp\cp_weapon::has_attachment(var_5, "meleervn"))
+        if(var_1 scripts\cp\cp_weapon::has_attachment(var_5, "meleervn")) {
           var_2 = var_2 + int(1500 * var_1 scripts\cp\cp_weapon::get_weapon_level(var_5));
+        }
 
         var_2 = int(var_2 * var_1 scripts\cp\perks\perk_utility::perk_getmeleescalar());
 
         if(scripts\engine\utility::is_true(var_1.kung_fu_mode)) {
-          if(is_kung_fu_punch(var_1, var_5))
+          if(is_kung_fu_punch(var_1, var_5)) {
             var_2 = 10000;
+          }
         }
 
-        if(isDefined(var_1.passive_melee_kill_damage))
+        if(isDefined(var_1.passive_melee_kill_damage)) {
           var_2 = var_2 + var_1.passive_melee_kill_damage;
+        }
 
-        if(var_45)
+        if(var_45) {
           var_2 = var_2 + 1500;
+        }
 
         var_54 = 0;
 
-        if(var_2 >= self.health)
+        if(var_2 >= self.health) {
           var_54 = 1;
+        }
 
-        if(isDefined(var_1.increased_melee_damage))
+        if(isDefined(var_1.increased_melee_damage)) {
           var_2 = var_2 + var_1.increased_melee_damage;
+        }
 
-        if(var_31)
+        if(var_31) {
           var_1 thread scripts\cp\maps\cp_disco\cp_disco::do_damage_cone_nunchucks(var_5, var_1, self, var_4, var_8);
+        }
 
         if(var_32) {
           var_1 thread scripts\cp\maps\cp_disco\cp_disco::do_damage_cone_nunchucks(var_5, var_1, self, var_4, var_8);
           var_1 thread scripts\cp\maps\cp_disco\cp_disco::nunchucks_recent_kills(self, var_5);
 
           if(scripts\engine\utility::is_true(var_1.isreaping)) {
-            if(var_1.health + var_2 <= var_1.maxhealth)
+            if(var_1.health + var_2 <= var_1.maxhealth) {
               var_1.health = var_1.health + var_2;
-            else
+            } else {
               var_1.health = var_1.maxhealth;
+            }
           }
         }
 
@@ -206,13 +227,15 @@ cp_disco_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
           var_1 thread scripts\cp\utility::add_to_notify_queue("katana_melee_hit", var_5, self, var_2);
 
           if(var_12.agent_type != "skater" && var_12.agent_type != "karatemaster") {
-            if(var_2 >= self.health)
+            if(var_2 >= self.health) {
               level thread handlegoreeffect(self, var_1, var_5);
+            }
           }
         }
 
-        if(var_47 && var_54)
+        if(var_47 && var_54) {
           var_1 thread scripts\cp\utility::add_to_notify_queue("melee_weapon_hit", var_5, self, var_2);
+        }
 
         if(scripts\engine\utility::is_true(var_1.kung_fu_mode)) {
           if(var_54 && !isDefined(self.launched)) {
@@ -245,8 +268,9 @@ cp_disco_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
         }
       }
 
-      if(var_49)
+      if(var_49) {
         var_2 = 100000000;
+      }
 
       if(scripts\engine\utility::is_true(var_1.crane_super)) {
         var_55 = 3500;
@@ -262,100 +286,122 @@ cp_disco_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
         var_58 = playfxontagforclients(level._effect["screen_blood"], var_1, "tag_eye", var_1);
       }
 
-      if(var_43)
+      if(var_43) {
         var_1 thread scripts\cp\zombies\zombie_damage::stun_zap(self getEye(), self, var_2, var_4, 128);
+      }
 
-      if(var_44 && var_22)
+      if(var_44 && var_22) {
         var_2 = int(var_2 * 2);
+      }
 
-      if(scripts\engine\utility::is_true(var_1.rave_mode))
+      if(scripts\engine\utility::is_true(var_1.rave_mode)) {
         var_2 = int(var_2 * 2);
+      }
     }
 
-    if(var_40)
+    if(var_40) {
       var_2 = var_2 * 3.0;
+    }
 
     if(var_41) {
       var_59 = int(var_1 getweaponammoclip(var_1 getcurrentweapon()) + 1);
       var_60 = weaponclipsize(var_1 getcurrentweapon());
 
-      if(var_59 <= 4)
+      if(var_59 <= 4) {
         var_2 = var_2 * 2;
+      }
     }
 
-    if(var_18 && scripts\engine\utility::is_true(var_1.reload_damage_increase))
+    if(var_18 && scripts\engine\utility::is_true(var_1.reload_damage_increase)) {
       var_2 = var_2 * 2;
+    }
 
-    if(var_38)
+    if(var_38) {
       var_2 = var_2 * min(2 + var_37 * 0.5, 10);
+    }
 
-    if(var_42)
+    if(var_42) {
       var_2 = int(var_2 * 2);
+    }
 
-    if(var_52)
+    if(var_52) {
       var_2 = var_2 * 1.2;
+    }
   }
 
-  if(isDefined(var_1.perk_data) && var_1.perk_data["damagemod"].bullet_damage_scalar == 2.0 && var_18)
+  if(isDefined(var_1.perk_data) && var_1.perk_data["damagemod"].bullet_damage_scalar == 2.0 && var_18) {
     var_2 = var_2 * 1.33;
+  }
 
-  if(scripts\engine\utility::is_true(var_1.deadeye_charge))
+  if(scripts\engine\utility::is_true(var_1.deadeye_charge)) {
     var_2 = var_2 * 1.25;
+  }
 
   if(isDefined(level.damage_per_second)) {
-    if(!scripts\engine\utility::flag("start_tracking_dps"))
+    if(!scripts\engine\utility::flag("start_tracking_dps")) {
       scripts\engine\utility::flag_set("start_tracking_dps");
+    }
 
-    if(isDefined(level.dpstime))
+    if(isDefined(level.dpstime)) {
       level.dpstime = gettime();
+    }
 
-    if(isDefined(var_1.total_damage))
+    if(isDefined(var_1.total_damage)) {
       var_1.total_damage = var_1.total_damage + var_2;
+    }
   }
 
   var_2 = scripts\cp\agents\gametype_zombie::shouldapplycrotchdamagemultiplier(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
   var_2 = scripts\cp\agents\gametype_zombie::fateandfortuneweaponscale(self, var_5, var_2, 0, 0, 0, 0);
 
-  if(isDefined(level.onzombiedamage_func))
+  if(isDefined(level.onzombiedamage_func)) {
     var_2 = [[level.onzombiedamage_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
+  }
 
-  if(isDefined(var_1.special_zombie_damage) && scripts\cp\utility::agentisspecialzombie())
+  if(isDefined(var_1.special_zombie_damage) && scripts\cp\utility::agentisspecialzombie()) {
     var_2 = var_2 * var_1.special_zombie_damage;
+  }
 
   var_2 = int(min(var_2, self.health));
 
-  if(isPlayer(var_1) && scripts\cp\utility::is_melee_weapon(var_5, 1))
+  if(isPlayer(var_1) && scripts\cp\utility::is_melee_weapon(var_5, 1)) {
     playFX(level._effect["melee_impact"], self gettagorigin("j_neck"), vectortoangles(self.origin - var_1.origin), anglestoup(self.angles), var_1);
+  }
 
   if(self.health > 0 && self.health - var_2 <= 0) {
-    if(self.died_poorly)
+    if(self.died_poorly) {
       self.died_poorly_health = self.health;
+    }
 
-    if(isDefined(self.has_backpack))
+    if(isDefined(self.has_backpack)) {
       scripts\cp\zombies\zombies_pillage::pillageable_piece_lethal_monitor(self, self.has_backpack, var_1);
+    }
   }
 
   if(var_17) {
-    if(isDefined(level.updateondamagepassivesfunc))
+    if(isDefined(level.updateondamagepassivesfunc)) {
       level thread[[level.updateondamagepassivesfunc]](var_1, var_5, self);
+    }
 
     var_1 thread scripts\cp\utility::add_to_notify_queue("weapon_hit_enemy", self, var_1, var_5, var_2, var_8, var_4);
     var_1 thread scripts\cp\agents\gametype_zombie::updatemaghits(getweaponbasename(var_5));
 
     if(var_18) {
-      if(!isDefined(var_1.accuracy_shots_on_target))
+      if(!isDefined(var_1.accuracy_shots_on_target)) {
         var_1.accuracy_shots_on_target = 1;
-      else
+      } else {
         var_1.accuracy_shots_on_target++;
+      }
 
       scripts\cp\cp_persistence::increment_player_career_shots_on_target(var_1);
       scripts\cp\zombies\zombie_analytics::log_playershotsontarget(1, var_1, var_1.accuracy_shots_on_target);
     }
 
-    if(!isDefined(var_1.shotsontargetwithweapon[getweaponbasename(var_5)]))
+    if(!isDefined(var_1.shotsontargetwithweapon[getweaponbasename(var_5)])) {
       var_1.shotsontargetwithweapon[getweaponbasename(var_5)] = 1;
-    else
+    } else {
       var_1.shotsontargetwithweapon[getweaponbasename(var_5)]++;
+    }
   }
 
   scripts\cp\zombies\zombies_gamescore::update_agent_damage_performance(var_1, var_2, var_4);
@@ -364,8 +410,9 @@ cp_disco_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
   scripts\cp\cp_agent_utils::store_attacker_info(var_1, var_2);
   scripts\cp\zombies\zombies_weapons::special_weapon_logic(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 
-  if(var_17)
+  if(var_17) {
     thread scripts\cp\agents\gametype_zombie::new_enemy_damage_check(var_1);
+  }
 
   var_12[[level.agent_funcs[var_12.agent_type]["on_damaged_finished"]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0.0, var_10, var_11);
 }
@@ -388,34 +435,39 @@ handlegoreeffect(var_0, var_1, var_2) {
   var_4 = scripts\engine\utility::array_randomize(var_4);
 
   foreach(var_6 in level.players) {
-    if(distance(var_6.origin, var_0.origin) <= 512)
+    if(distance(var_6.origin, var_0.origin) <= 512) {
       var_6 thread scripts\cp\zombies\zombies_weapons::showonscreenbloodeffects();
+    }
   }
 
   if(!scripts\engine\utility::is_true(var_0.is_cop)) {
     var_3 = var_0 gettagorigin("j_spine4");
     playFX(level._effect["bloody_death"], var_3, (1, 0, 0));
 
-    if(issubstr(var_2, "katana"))
+    if(issubstr(var_2, "katana")) {
       playsoundatpos(var_3, "gib_fullbody_katana");
-    else
+    } else {
       playsoundatpos(var_3, "gib_fullbody");
+    }
 
     var_0 setscriptablepartstate("head", "detached", 1);
 
-    foreach(var_9 in var_4)
-    var_0 setscriptablepartstate(var_9, "detached", 1);
+    foreach(var_9 in var_4) {
+      var_0 setscriptablepartstate(var_9, "detached", 1);
+    }
   } else {
-    foreach(var_9 in var_4)
-    var_0 setscriptablepartstate(var_9, "detached", 1);
+    foreach(var_9 in var_4) {
+      var_0 setscriptablepartstate(var_9, "detached", 1);
+    }
   }
 
   wait 2;
   var_4 = ["right_leg", "left_leg"];
   var_4 = scripts\engine\utility::array_randomize(var_4);
 
-  foreach(var_9 in var_4)
-  var_0 setscriptablepartstate(var_9, "detached", 1);
+  foreach(var_9 in var_4) {
+    var_0 setscriptablepartstate(var_9, "detached", 1);
+  }
 
   var_0.full_gib = 1;
   var_0.katanadeath = 0;
@@ -424,20 +476,22 @@ handlegoreeffect(var_0, var_1, var_2) {
 }
 
 cp_disco_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(isDefined(self.spawn_fx))
+  if(isDefined(self.spawn_fx)) {
     self.spawn_fx delete();
+  }
 
   if(isDefined(self.scrnfx)) {
     self.scrnfx delete();
     self.scrnfx = undefined;
   }
 
-  if(issubstr(var_4, "iw7_knife") && isPlayer(var_1) && scripts\cp\utility::is_melee_weapon(var_4))
+  if(issubstr(var_4, "iw7_knife") && isPlayer(var_1) && scripts\cp\utility::is_melee_weapon(var_4)) {
     var_1 thread scripts\cp\agents\gametype_zombie::setandunsetmeleekill(var_1);
-  else if((var_4 == "iw7_axe_zm" || var_4 == "iw7_axe_zm_pap1" || var_4 == "iw7_axe_zm_pap2") && isPlayer(var_1) && scripts\cp\utility::is_melee_weapon(var_4))
+  } else if((var_4 == "iw7_axe_zm" || var_4 == "iw7_axe_zm_pap1" || var_4 == "iw7_axe_zm_pap2") && isPlayer(var_1) && scripts\cp\utility::is_melee_weapon(var_4)) {
     var_1 thread scripts\cp\agents\gametype_zombie::setandunsetmeleekill(var_1);
-  else if(issubstr(var_4, "golf") || issubstr(var_4, "machete") || issubstr(var_4, "spiked_bat") || issubstr(var_4, "two_headed_axe"))
+  } else if(issubstr(var_4, "golf") || issubstr(var_4, "machete") || issubstr(var_4, "spiked_bat") || issubstr(var_4, "two_headed_axe")) {
     var_1 thread scripts\cp\agents\gametype_zombie::setandunsetmeleekill(var_1);
+  }
 
   if(isDefined(self.linked_to_boat)) {
     self.linked_to_boat.zombie = undefined;
@@ -447,8 +501,9 @@ cp_disco_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   if(!isPlayer(var_1)) {
     if(isDefined(var_1.name)) {
       if(var_1.name == var_1.owner.itemtype) {
-        if(isDefined(var_1.owner.killswithitem[var_1.owner.itemtype]))
+        if(isDefined(var_1.owner.killswithitem[var_1.owner.itemtype])) {
           var_1.owner.killswithitem[var_1.owner.itemtype]++;
+        }
       }
     }
   }
@@ -478,8 +533,9 @@ cp_disco_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
       self.full_gib = 1;
       self.nocorpse = 1;
 
-      if(isDefined(self.body))
+      if(isDefined(self.body)) {
         self.body hide(1);
+      }
     }
 
     if(scripts\engine\utility::is_true(self.marked_shared_fate_fnf)) {
@@ -489,16 +545,18 @@ cp_disco_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
       self setscriptablepartstate("shared_fate_fx", "inactive", 1);
     }
 
-    if(isDefined(var_1.weapon_passive_xp_multiplier) && var_1.weapon_passive_xp_multiplier > 1)
+    if(isDefined(var_1.weapon_passive_xp_multiplier) && var_1.weapon_passive_xp_multiplier > 1) {
       var_1.kill_with_extra_xp_passive = 1;
+    }
 
     var_14 = var_3 == "MOD_EXPLOSIVE_BULLET" && (isDefined(var_6) && var_6 == "none") || var_3 == "MOD_EXPLOSIVE" || var_3 == "MOD_GRENADE_SPLASH" || var_3 == "MOD_PROJECTILE" || var_3 == "MOD_PROJECTILE_SPLASH";
 
     if(var_14) {
-      if(!isDefined(var_1.explosive_kills))
+      if(!isDefined(var_1.explosive_kills)) {
         var_1.explosive_kills = 1;
-      else
+      } else {
         var_1.explosive_kills++;
+      }
 
       scripts\cp\cp_persistence::increment_player_career_explosive_kills(var_1);
     }
@@ -506,16 +564,18 @@ cp_disco_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     var_1.kills++;
     var_1.weapon_name_log = scripts\cp\utility::getbaseweaponname(var_4);
 
-    if(!isDefined(var_1.aggregateweaponkills[var_1.weapon_name_log]))
+    if(!isDefined(var_1.aggregateweaponkills[var_1.weapon_name_log])) {
       var_1.aggregateweaponkills[var_1.weapon_name_log] = 1;
-    else
+    } else {
       var_1.aggregateweaponkills[var_1.weapon_name_log]++;
+    }
 
     scripts\cp\zombies\zombie_analytics::log_zombiedeath(1, level.wave_num, var_1, var_4, self.agent_type, self.origin);
 
     if(scripts\engine\utility::isbulletdamage(var_3) && var_4 != "incendiary_ammo_mp" && var_4 != "slayer_ammo_mp") {
-      if(isDefined(var_6) && scripts\cp\utility::isheadshot(var_4, var_6, var_3, var_1))
+      if(isDefined(var_6) && scripts\cp\utility::isheadshot(var_4, var_6, var_3, var_1)) {
         self playsoundtoplayer("zmb_player_achieve_headshot", var_1);
+      }
     }
 
     if(isDefined(var_1.itempicked)) {
@@ -552,8 +612,9 @@ cp_disco_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   scripts\cp\zombies\zombie_scriptable_states::turn_off_states_on_death(self);
 
   if(scripts\engine\utility::flag_exist("force_drop_max_ammo") && scripts\engine\utility::flag("force_drop_max_ammo") && var_3 != "MOD_SUICIDE") {
-    if(isDefined(level.drop_max_ammo_func))
+    if(isDefined(level.drop_max_ammo_func)) {
       level thread[[level.drop_max_ammo_func]](self.origin, var_1, "ammo_max");
+    }
 
     scripts\engine\utility::flag_clear("force_drop_max_ammo");
   }
@@ -563,8 +624,9 @@ cp_disco_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   var_20 = 0;
   var_21 = scripts\engine\utility::is_true(self.is_suicide_bomber);
 
-  if(isDefined(level.updaterecentkills_func) && isPlayer(var_1))
+  if(isDefined(level.updaterecentkills_func) && isPlayer(var_1)) {
     var_1 thread[[level.updaterecentkills_func]](self, var_4);
+  }
 
   if(scripts\engine\utility::isbulletdamage(var_3) && (getweaponbasename(var_4) == "iw7_atomizer_mp" || scripts\engine\utility::is_true(self.atomize_me)) || var_3 == "MOD_UNKNOWN" && getweaponbasename(var_4) == "iw7_harpoon3_zm") {
     if(!var_21 && !var_18 && !var_19 && !var_20) {
@@ -577,33 +639,38 @@ cp_disco_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     }
   }
 
-  if(isPlayer(var_1))
+  if(isPlayer(var_1)) {
     var_1 thread scripts\cp\utility::add_to_notify_queue("zombie_killed", self, self.origin, var_4, var_3);
+  }
 
-  if(isDefined(level.on_zombie_killed_quests_func))
+  if(isDefined(level.on_zombie_killed_quests_func)) {
     [[level.on_zombie_killed_quests_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+  }
 
   if(!scripts\cp\agents\gametype_zombie::isonhumanteam(self)) {
     scripts\cp\agents\gametype_zombie::enemykilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 
-    if(isDefined(level.onzombiekilledfunc))
+    if(isDefined(level.onzombiekilledfunc)) {
       [[level.onzombiekilledfunc]](var_1, var_4);
+    }
   }
 
   var_1 scripts\cp\zombies\zombies_consumables::headshot_reload_check(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 
-  if(isDefined(level.spawnloopupdatefunc))
+  if(isDefined(level.spawnloopupdatefunc)) {
     [[level.spawnloopupdatefunc]](var_1, var_4);
+  }
 
   if(isDefined(self.near_medusa) && !isDefined(self.soul_claimed)) {
     self.soul_claimed = 1;
 
     if(isDefined(var_1.itemtype)) {
       if(var_1.itemtype == "crafted_medusa") {
-        if(!isDefined(var_1.killswithitem[var_1.itemtype]))
+        if(!isDefined(var_1.killswithitem[var_1.itemtype])) {
           var_1.killswithitem[var_1.itemtype] = 1;
-        else
+        } else {
           var_1.killswithitem[var_1.itemtype]++;
+        }
       }
     }
 
@@ -611,30 +678,36 @@ cp_disco_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   }
 
   if(isDefined(self.near_crystal) && !var_21) {
-    if(isDefined(level.closest_crystal_func))
+    if(isDefined(level.closest_crystal_func)) {
       var_22 = level[[level.closest_crystal_func]](self);
-    else
+    } else {
       var_22 = undefined;
+    }
 
     if(isDefined(var_22)) {
-      if(isDefined(level.crystal_killed_notify))
+      if(isDefined(level.crystal_killed_notify)) {
         thread scripts\cp\agents\gametype_zombie::delayminiufocollection(self.origin, var_4, var_22);
+      }
     }
   }
 
-  if(isDefined(level.quest_death_update_func))
+  if(isDefined(level.quest_death_update_func)) {
     level thread[[level.quest_death_update_func]](self);
+  }
 
-  if(isPlayer(var_1) && isDefined(level.updateonkillpassivesfunc))
+  if(isPlayer(var_1) && isDefined(level.updateonkillpassivesfunc)) {
     level thread[[level.updateonkillpassivesfunc]](var_4, var_1, self, var_3, var_6);
+  }
 
   self hudoutlinedisable();
 
-  if(isDefined(self.anchor))
+  if(isDefined(self.anchor)) {
     self.anchor delete();
+  }
 
-  if(isDefined(self.attack_spot))
+  if(isDefined(self.attack_spot)) {
     scripts\cp\zombies\zombie_entrances::release_attack_spot(self.attack_spot);
+  }
 
   self.closest_entrance = undefined;
   self.attack_spot = undefined;
@@ -649,17 +722,19 @@ cp_disco_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   scripts\cp\agents\gametype_zombie::process_assist_rewards(var_1);
   scripts\cp\cp_weaponrank::try_give_weapon_xp_zombie_killed(var_1, var_4, var_6, var_3, self.agent_type);
 
-  if(isDefined(level.death_challenge_update_func))
+  if(isDefined(level.death_challenge_update_func)) {
     [[level.death_challenge_update_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
-  else
+  } else {
     scripts\cp\cp_challenge::update_death_challenges(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+  }
 
   scripts\cp\cp_merits::process_agent_on_killed_merits(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
   scripts\cp\cp_agent_utils::deactivateagent();
   scripts\cp\zombies\zombie_armor::clean_up_zombie_armor(self);
 
-  if(isDefined(level.cp_rave_zombie_death_pos_record_func))
+  if(isDefined(level.cp_rave_zombie_death_pos_record_func)) {
     [[level.cp_rave_zombie_death_pos_record_func]](self.origin);
+  }
 
   level thread scripts\cp\utility::add_to_notify_queue("zombie_killed", self.origin, var_4, var_3, var_1, self);
 }
@@ -691,58 +766,65 @@ disco_process_kill_rewards(var_0, var_1, var_2, var_3, var_4, var_5) {
 
       var_7.total_match_headshots++;
 
-      if(issubstr(var_5, "heart"))
+      if(issubstr(var_5, "heart")) {
         var_7 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_ww_heart", "disco_comment_vo", "high", 10, 0, 0, 0, 10);
-      else
+      } else {
         var_7 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_headshot", "disco_comment_vo", "low", 10, 0, 0, 0, 10);
+      }
     } else {
       if(scripts\engine\utility::is_true(var_7.kung_fu_mode)) {
-        if(randomint(100) > 30)
+        if(randomint(100) > 30) {
           var_7 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_kungfumode", "disco_comment_vo", "high", 10, 0, 0, 0, 10);
-        else {
+        } else {
           var_10 = 1;
 
-          if(issubstr(var_5, "nunchucks"))
+          if(issubstr(var_5, "nunchucks")) {
             var_7 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_ww_nunchuck", "disco_comment_vo", "high", 10, 0, 0, 0, 10);
-          else if(issubstr(var_5, "katana"))
+          } else if(issubstr(var_5, "katana")) {
             var_7 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_ww_katana", "disco_comment_vo", "high", 10, 0, 0, 0, 10);
-          else if(issubstr(var_5, "heart"))
+          } else if(issubstr(var_5, "heart")) {
             var_7 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_ww_heart", "disco_comment_vo", "high", 10, 0, 0, 0, 10);
+          }
         }
       }
 
       if(var_10 != 1) {
-        if(issubstr(var_5, "nunchucks"))
+        if(issubstr(var_5, "nunchucks")) {
           var_7 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_ww_nunchuck", "disco_comment_vo", "high", 10, 0, 0, 0, 10);
-        else if(issubstr(var_5, "katana"))
+        } else if(issubstr(var_5, "katana")) {
           var_7 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_ww_katana", "disco_comment_vo", "high", 10, 0, 0, 0, 10);
-        else if(issubstr(var_5, "heart"))
+        } else if(issubstr(var_5, "heart")) {
           var_7 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_ww_heart", "disco_comment_vo", "high", 10, 0, 0, 0, 10);
+        }
       }
     }
 
     if(var_10 == 0) {
       if(var_2.agent_type == "skater") {
-        if(randomint(100) > 60)
+        if(randomint(100) > 60) {
           var_7 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_skater", "disco_comment_vo", "low", 10, 0, 0, 0, 20);
-        else
+        } else {
           var_7 thread scripts\cp\cp_vo::try_to_play_vo("killfirm", "disco_comment_vo", "low", 10, 0, 0, 0, 20);
+        }
       } else if(var_2.agent_type == "karatemaster") {
-        if(randomint(100) > 60)
+        if(randomint(100) > 60) {
           var_7 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_kungfumode", "disco_comment_vo", "low", 10, 0, 0, 0, 20);
-        else
+        } else {
           var_7 thread scripts\cp\cp_vo::try_to_play_vo("killfirm", "disco_comment_vo", "low", 10, 0, 0, 0, 20);
+        }
       } else
         var_7 thread scripts\cp\cp_vo::try_to_play_vo("killfirm", "disco_comment_vo", "low", 10, 0, 0, 0, 20);
     }
   }
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     scripts\cp\cp_persistence::record_player_kills(var_5, var_3, var_4, var_7);
+  }
 
   if(isDefined(level.zombie_killed_loot_func)) {
-    if([[level.zombie_killed_loot_func]](var_6, self.origin, var_1))
+    if([[level.zombie_killed_loot_func]](var_6, self.origin, var_1)) {
       return;
+    }
   }
 
   if(isDefined(var_7)) {
@@ -772,10 +854,11 @@ disco_process_kill_rewards(var_0, var_1, var_2, var_3, var_4, var_5) {
 play_rave_death_fx(var_0) {
   var_1 = ["j_spineupper", "j_spinelower"];
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_2 = level._effect["atomize_body"];
-  else
+  } else {
     var_2 = level._effect[var_0];
+  }
 
   var_3 = spawnfx(var_2, self gettagorigin("j_spinelower"));
 
@@ -796,8 +879,9 @@ delete_death_fx(var_0) {
   level endon("game_ended");
   wait 2.5;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 callback_discozombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
@@ -807,8 +891,9 @@ callback_discozombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6
     return;
   }
   if(var_4 == "MOD_SUICIDE") {
-    if(isDefined(level.overcook_func[var_5]))
+    if(isDefined(level.overcook_func[var_5])) {
       level thread[[level.overcook_func[var_5]]](var_12, var_5);
+    }
   }
 
   var_13 = isDefined(var_4) && (var_4 == "MOD_EXPLOSIVE" || var_4 == "MOD_GRENADE_SPLASH" || var_4 == "MOD_PROJECTILE_SPLASH");
@@ -830,10 +915,11 @@ callback_discozombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6
   if(var_19) {
     if(var_1 == self) {
       if(var_13) {
-        if(var_18)
+        if(var_18) {
           var_2 = 0;
-        else
+        } else {
           var_2 = scripts\cp\zombies\zombie_damage::get_explosive_damage_on_player(var_0, var_1, var_2, var_3, var_4, var_5);
+        }
       }
 
       switch (var_5) {
@@ -863,10 +949,11 @@ callback_discozombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6
       if(var_17) {
         if(scripts\cp\utility::is_ricochet_damage()) {
           if(isPlayer(var_1) && isDefined(var_8) && var_8 != "shield") {
-            if(isDefined(var_0))
+            if(isDefined(var_0)) {
               var_1 dodamage(var_2, var_1.origin - (0, 0, 50), var_1, var_0, var_4);
-            else
+            } else {
               var_1 dodamage(var_2, var_1.origin, var_1);
+            }
           }
 
           var_2 = 0;
@@ -887,44 +974,50 @@ callback_discozombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6
 
       var_28 = gettime();
 
-      if(!isDefined(self.last_zombie_hit_time) || var_28 - self.last_zombie_hit_time > 20)
+      if(!isDefined(self.last_zombie_hit_time) || var_28 - self.last_zombie_hit_time > 20) {
         self.last_zombie_hit_time = var_28;
-      else
+      } else {
         return;
+      }
 
       var_29 = 500;
 
-      if(getdvarint("zom_damage_shield_duration") != 0)
+      if(getdvarint("zom_damage_shield_duration") != 0) {
         var_29 = getdvarint("zom_damage_shield_duration");
+      }
 
       if(isDefined(var_1.last_damage_time_on_player[self.vo_prefix])) {
         var_30 = var_1.last_damage_time_on_player[self.vo_prefix];
 
-        if(var_30 + var_29 > gettime())
+        if(var_30 + var_29 > gettime()) {
           var_2 = 0;
-        else
+        } else {
           var_1.last_damage_time_on_player[self.vo_prefix] = gettime();
+        }
       } else
         var_1.last_damage_time_on_player[self.vo_prefix] = gettime();
     }
 
     if(var_14) {
-      if(var_18)
+      if(var_18) {
         var_2 = 0;
-      else if(!var_17 || var_1 == self && var_8 == "none")
+      } else if(!var_17 || var_1 == self && var_8 == "none") {
         var_2 = 0;
+      }
     }
   } else if(var_18 && var_4 == "MOD_SUICIDE") {
-    if(var_5 == "frag_grenade_zm" || var_5 == "cluster_grenade_zm")
+    if(var_5 == "frag_grenade_zm" || var_5 == "cluster_grenade_zm") {
       var_2 = 0;
+    }
   }
 
   if(var_4 == "MOD_FALLING") {
-    if(scripts\cp\utility::_hasperk("specialty_falldamage"))
+    if(scripts\cp\utility::_hasperk("specialty_falldamage")) {
       var_2 = 0;
-    else if(var_2 > 10) {
-      if(var_2 > self.health * 0.15)
+    } else if(var_2 > 10) {
+      if(var_2 > self.health * 0.15) {
         var_2 = int(self.health * 0.15);
+      }
     } else
       var_2 = 0;
   }
@@ -932,25 +1025,29 @@ callback_discozombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6
   var_31 = 0.0;
 
   if(var_19 && var_1 scripts\cp\utility::is_zombie_agent() && scripts\engine\utility::is_true(self.linked_to_player)) {
-    if(self.health - var_2 < 1)
+    if(self.health - var_2 < 1) {
       var_2 = self.health - 1;
+    }
   }
 
-  if(var_20 || var_21 || var_22 || var_23 && !var_27)
+  if(var_20 || var_21 || var_22 || var_23 && !var_27) {
     var_2 = int(var_2 * var_12 scripts\cp\utility::getdamagemodifiertotal());
+  }
 
-  if(isDefined(self.linked_to_coaster))
+  if(isDefined(self.linked_to_coaster)) {
     var_2 = int(max(self.maxhealth / 2.75, var_2));
+  }
 
   if(var_12 scripts\cp\utility::is_consumable_active("secret_service") && isalive(var_1)) {
     var_32 = 0;
 
-    if(isDefined(var_1.agent_type) && (var_1.agent_type == "zombie_sasquatch" || var_1.agent_type == "slasher" || var_1.agent_type == "superslasher"))
+    if(isDefined(var_1.agent_type) && (var_1.agent_type == "zombie_sasquatch" || var_1.agent_type == "slasher" || var_1.agent_type == "superslasher")) {
       var_32 = 0;
-    else if(var_1 scripts\cp\utility::agentisfnfimmune())
+    } else if(var_1 scripts\cp\utility::agentisfnfimmune()) {
       var_32 = 0;
-    else
+    } else {
       var_32 = 1;
+    }
 
     if(var_32) {
       var_1 thread scripts\cp\crafted_trap_revocator::turn_zombie(var_12);
@@ -970,16 +1067,18 @@ callback_discozombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6
   if(var_2 <= 0) {
     return;
   }
-  if(var_16)
+  if(var_16) {
     playfxontagforclients(level._effect["sasquatch_rock_hit"], self, "tag_eye", self);
+  }
 
   thread scripts\cp\utility::player_pain_vo(var_1);
   thread scripts\cp\zombies\zombie_damage::play_pain_photo(self);
 
-  if(isDefined(var_5) && var_5 == "iw7_ratking_shield_projectile")
+  if(isDefined(var_5) && var_5 == "iw7_ratking_shield_projectile") {
     self playlocalsound("rk_shield_throw_hit_plr");
-  else
+  } else {
     self playlocalsound("zmb_player_impact_hit");
+  }
 
   thread scripts\cp\utility::player_pain_breathing_sfx();
 
@@ -987,18 +1086,21 @@ callback_discozombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6
     thread scripts\cp\cp_hud_util::zom_player_damage_flash();
 
     if(isagent(var_1)) {
-      if(var_2 > self.health)
+      if(var_2 > self.health) {
         var_1.killed_player = 1;
+      }
 
-      if(!isDefined(var_1.damage_done))
+      if(!isDefined(var_1.damage_done)) {
         var_1.damage_done = 0;
-      else
+      } else {
         var_1.damage_done = var_1.damage_done + var_2;
+      }
 
       self.recent_attacker = var_1;
 
-      if(isDefined(level.current_challenge))
+      if(isDefined(level.current_challenge)) {
         self[[level.custom_playerdamage_challenge_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+      }
     }
   }
 }
@@ -1019,16 +1121,18 @@ playbodyfx_ww(var_0, var_1, var_2) {
     var_5 = level._effect["acid_rain_death"];
   } else if(issubstr(var_0, "iw7_harpoon2_zm"))
     var_4 = level._effect["wrecked_by_ben"];
-  else
+  else {
     var_4 = level._effect["wrecked_cheap"];
+  }
 
   foreach(var_7 in var_3) {
     foreach(var_9 in var_7) {
       if((issubstr(var_0, "iw7_harpoon1_zm") || issubstr(var_0, "iw7_acid_rain_projectile_zm")) && !scripts\engine\utility::is_true(level.played_acid_rain_effect)) {
         level.played_acid_rain_effect = 1;
 
-        if(isDefined(var_4))
+        if(isDefined(var_4)) {
           playFX(var_4, var_9["org"], anglesToForward(var_9["angles"]));
+        }
 
         scripts\engine\utility::waitframe();
 
@@ -1043,15 +1147,17 @@ playbodyfx_ww(var_0, var_1, var_2) {
       if((issubstr(var_0, "iw7_harpoon2_zm") || issubstr(var_0, "iw7_harpoon2_zm_stun")) && !scripts\engine\utility::is_true(level.played_ben_franklin_effect)) {
         level.played_ben_franklin_effect = 1;
 
-        if(isDefined(var_4))
+        if(isDefined(var_4)) {
           playFX(var_4, var_9["org"], anglesToForward(var_9["angles"]));
+        }
 
         scripts\engine\utility::waitframe();
         continue;
       }
 
-      if(isDefined(var_4))
+      if(isDefined(var_4)) {
         playFX(var_4, var_9["org"], anglesToForward(var_9["angles"]));
+      }
 
       scripts\engine\utility::waitframe();
     }
@@ -1085,8 +1191,9 @@ kung_fu_damage_everyone_in_radius(var_0, var_1, var_2, var_3) {
     if(distancesquared(var_6.origin, var_0) < var_4) {
       var_7 = var_6.health + 1000;
 
-      if(var_3)
+      if(var_3) {
         var_7 = 1;
+      }
 
       var_6 dodamage(var_7, var_2.origin, var_2, var_2, "MOD_MELEE", "iw7_fists_zm_base");
       scripts\engine\utility::waitframe();

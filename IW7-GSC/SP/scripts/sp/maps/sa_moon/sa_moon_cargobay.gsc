@@ -15,8 +15,9 @@ _id_E938() {
   level._id_E99E["server_room_exit_door"]._id_C611 = 1;
   scripts\engine\utility::flag_set("fleet_data_downloaded");
 
-  if(isDefined(level._id_9DD0))
+  if(isDefined(level._id_9DD0)) {
     scripts\engine\utility::flag_set("start_e3_from_hallway");
+  }
 
   thread scripts\sp\maps\sa_moon\sa_moon_util::_id_13EF9(0, 1);
   scripts\engine\utility::waitframe();
@@ -24,8 +25,9 @@ _id_E938() {
   level thread _id_0E4B::_id_1348D(1);
   var_0 = getEntArray("delete_for_exfil", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     scripts\engine\utility::array_call(var_0, ::delete);
+  }
 
   scripts\sp\utility::_id_F44E(1);
 }
@@ -54,8 +56,9 @@ _id_E936() {
   level._id_EA2C.ignoreall = 0;
   var_0 = getEnt("hallway_ally_move2", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     scripts\sp\utility::_id_15F1("hallway_ally_move2", "targetname");
+  }
 
   scripts\engine\utility::flag_wait("hallway_wave3");
   var_1 = scripts\sp\utility::_id_22CD("hallway_runners3", 1);
@@ -135,8 +138,9 @@ _id_E978() {
 _id_C9F2() {
   scripts\engine\utility::flag_wait("turkeyshoot_alerted");
 
-  if(!scripts\engine\utility::flag("turkeyshoot_over"))
+  if(!scripts\engine\utility::flag("turkeyshoot_over")) {
     scripts\sp\utility::_id_1034D("mn_plr_go_232");
+  }
 
   scripts\engine\utility::flag_wait("turkeyshoot_over");
   wait 0.25;
@@ -329,8 +333,9 @@ _id_E913() {
   scripts\sp\utility::_id_15F1("cargobay_entrance_ally_move2", "targetname");
   var_0 = getEntArray("delete_for_exfil", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     scripts\engine\utility::array_call(var_0, ::delete);
+  }
 
   scripts\sp\utility::_id_F44E(1);
 }
@@ -350,8 +355,9 @@ _id_E90F() {
   thread _id_3A86();
   thread _id_3A84();
 
-  if(!scripts\engine\utility::flag("cargobay_checkpoint_start"))
+  if(!scripts\engine\utility::flag("cargobay_checkpoint_start")) {
     thread _id_3A81();
+  }
 
   scripts\engine\utility::flag_wait("turkeyshoot_over");
   thread _id_3A8A();
@@ -362,8 +368,9 @@ _id_E90F() {
   scripts\engine\utility::waitframe();
   thread scripts\sp\maps\sa_moon\sa_moon_lighting::_id_138F3(0);
 
-  if(!scripts\engine\utility::flag("cargobay_checkpoint_start"))
+  if(!scripts\engine\utility::flag("cargobay_checkpoint_start")) {
     thread _id_6788();
+  }
 
   level._id_C47F.ignoreall = 1;
   level._id_EA2C.ignoreall = 1;
@@ -570,14 +577,16 @@ _id_3A85() {
   for(;;) {
     var_0 = scripts\sp\utility::_id_22CD("combat_runners1", 1);
 
-    foreach(var_2 in var_0)
-    var_2 thread _id_3A91("runner_vol3", undefined, "dropbay_triggered");
+    foreach(var_2 in var_0) {
+      var_2 thread _id_3A91("runner_vol3", undefined, "dropbay_triggered");
+    }
 
     wait(randomintrange(8, 16));
     var_0 = scripts\sp\utility::_id_22CD("combat_runners2", 1);
 
-    foreach(var_2 in var_0)
-    var_2 thread _id_3A91("runner_vol1", undefined, "dropbay_triggered");
+    foreach(var_2 in var_0) {
+      var_2 thread _id_3A91("runner_vol1", undefined, "dropbay_triggered");
+    }
 
     wait(randomintrange(8, 16));
   }
@@ -612,8 +621,9 @@ _id_3A8D() {
   var_0 _meth_82F1(var_1);
   var_0 waittill("goal");
 
-  if(isDefined(var_0) && isalive(var_0))
+  if(isDefined(var_0) && isalive(var_0)) {
     var_0 delete();
+  }
 }
 
 _id_3A8E() {
@@ -651,11 +661,13 @@ _id_12F8E() {
 
   wait 1.5;
 
-  if(isDefined(var_1[0]) && isalive(var_1[0]))
+  if(isDefined(var_1[0]) && isalive(var_1[0])) {
     var_1[0].ignoreall = 0;
+  }
 
-  if(isDefined(var_1[1]) && isalive(var_1[1]))
+  if(isDefined(var_1[1]) && isalive(var_1[1])) {
     var_1[1].ignoreall = 0;
+  }
 }
 
 _id_12F8F() {
@@ -689,8 +701,9 @@ _id_12F8C() {
   scripts\sp\utility::_id_127B3("upper_lmg_gunner_trig");
   var_0 = scripts\sp\utility::_id_22CD("cargobay_lmg_upper_wave", 1);
 
-  foreach(var_2 in var_0)
-  var_2.accuracy = 0.5;
+  foreach(var_2 in var_0) {
+    var_2.accuracy = 0.5;
+  }
 }
 
 _id_5FA6() {
@@ -770,8 +783,9 @@ _id_E912() {
   wait 0.25;
   level._id_6754 scripts\sp\utility::_id_10346("mn_eth_control_on_panel");
 
-  if(!scripts\engine\utility::flag("dropbay_triggered"))
+  if(!scripts\engine\utility::flag("dropbay_triggered")) {
     level thread _id_E915();
+  }
 }
 
 _id_E915() {
@@ -788,10 +802,11 @@ _id_59C0(var_0, var_1, var_2) {
   self._id_1FBB = "generic";
   var_0 = scripts\engine\utility::getStruct(var_0, "targetname");
 
-  if(var_1 == "react_cargo_soldier_3_idle")
+  if(var_1 == "react_cargo_soldier_3_idle") {
     var_0 thread scripts\sp\anim::_id_1EC3(self, var_2);
-  else
+  } else {
     thread scripts\sp\anim::_id_1EEA(self, var_1, "stop_idle", "tag_origin");
+  }
 
   scripts\sp\utility::_id_F2A8(1);
   self.health = 10;
@@ -802,26 +817,29 @@ _id_59C0(var_0, var_1, var_2) {
   self notify("stop_idle");
   scripts\engine\utility::waitframe();
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     scripts\sp\utility::anim_stopanimScripted();
+  }
 
   scripts\engine\utility::waitframe();
 
   if(isDefined(self) && isalive(self)) {
     scripts\engine\utility::waitframe();
 
-    if(!isDefined(level._id_2006._id_522B) || level._id_2006._id_522B.size == 0)
+    if(!isDefined(level._id_2006._id_522B) || level._id_2006._id_522B.size == 0) {
       var_0 scripts\sp\anim::_id_1F35(self, var_2);
-    else if(isDefined(level._id_2006._id_522B) && level._id_2006._id_522B.size > 0) {
+    } else if(isDefined(level._id_2006._id_522B) && level._id_2006._id_522B.size > 0) {
       level scripts\engine\utility::flag_wait_or_timeout("antigrav_force_delete", 0.55);
 
-      if(!_id_0E21::_id_FF4F(self, level._id_2006._id_522B[level._id_2006._id_522B.size - 1]))
+      if(!_id_0E21::_id_FF4F(self, level._id_2006._id_522B[level._id_2006._id_522B.size - 1])) {
         var_0 scripts\sp\anim::_id_1F35(self, var_2);
+      }
     }
 
     if(isDefined(self) && isalive(self)) {
-      if(!scripts\engine\utility::flag("turkeyshoot_grenade"))
+      if(!scripts\engine\utility::flag("turkeyshoot_grenade")) {
         scripts\sp\utility::anim_stopanimScripted();
+      }
 
       scripts\engine\utility::waitframe();
       scripts\sp\utility::_id_9326(0);
@@ -894,32 +912,36 @@ _id_3A91(var_0, var_1, var_2, var_3) {
 
   self waittill("goal");
 
-  if(isDefined(self) && isalive(self))
+  if(isDefined(self) && isalive(self)) {
     self delete();
+  }
 }
 
 _id_E86A() {
   level endon("cargobay_amb_end");
   var_0 = scripts\sp\utility::_id_22CD("drone_wave3", 1);
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_3A91("runner_vol3", undefined, "cargobay_amb_end");
+  foreach(var_2 in var_0) {
+    var_2 thread _id_3A91("runner_vol3", undefined, "cargobay_amb_end");
+  }
 }
 
 _id_E86B() {
   level endon("cargobay_amb_end");
   var_0 = scripts\sp\utility::_id_22CD("drone_wave4", 1);
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_3A91("runner_vol1", undefined, "cargobay_amb_end");
+  foreach(var_2 in var_0) {
+    var_2 thread _id_3A91("runner_vol1", undefined, "cargobay_amb_end");
+  }
 }
 
 _id_E86D() {
   level endon("cargobay_amb_end");
   var_0 = scripts\sp\utility::_id_22CD("drone_wave6", 1);
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_3A91("runner_vol6", undefined, "cargobay_amb_end");
+  foreach(var_2 in var_0) {
+    var_2 thread _id_3A91("runner_vol6", undefined, "cargobay_amb_end");
+  }
 }
 
 _id_1CC8() {
@@ -993,16 +1015,18 @@ _id_C9F3() {
   level.player _meth_80D1();
   wait 0.06;
 
-  if(!scripts\engine\utility::flag("turkeyshoot_over"))
+  if(!scripts\engine\utility::flag("turkeyshoot_over")) {
     thread _id_A5A8(1, 0.25, 1);
+  }
 
   wait 0.1;
   playFXOnTag(level._effect["vfx_sa_falling_dust_rumble_ch"], var_1, "tag_origin");
   wait 0.4;
   playFXOnTag(level._effect["vfx_sa_int_sparks_heavywet_child_emit_02"], var_3, "tag_origin");
 
-  if(!scripts\engine\utility::flag("turkeyshoot_over"))
+  if(!scripts\engine\utility::flag("turkeyshoot_over")) {
     level scripts\engine\utility::waittill_any_timeout(3, "turkeyshoot_over");
+  }
 
   level.player _meth_80A1();
   thread _id_A5A7(0.25);
@@ -1074,10 +1098,11 @@ _id_672D(var_0, var_1, var_2) {
   var_3 = var_0 - (gettime() - level._id_10C40) / 1000;
 
   if(var_3 >= var_1) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       scripts\sp\utility::_id_266F();
-    else
+    } else {
       scripts\sp\utility::_id_2679();
+    }
   }
 }
 

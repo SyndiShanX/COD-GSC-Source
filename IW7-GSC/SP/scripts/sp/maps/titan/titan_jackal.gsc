@@ -32,8 +32,9 @@ _id_A084() {
   level._id_D127 _id_0BDC::_id_F5BD("vtol");
   level._id_11A70 = _id_0BDC::_id_7BBA();
 
-  if(!isDefined(level._id_EAD6))
+  if(!isDefined(level._id_EAD6)) {
     scripts\sp\maps\titan\titan_code::_id_10732();
+  }
 
   level._id_EAD6 thread _id_73C2();
 }

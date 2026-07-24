@@ -35,8 +35,9 @@ clearaction() {
 }
 
 shouldendblock(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.requested_action) || self.requested_action != "block")
+  if(!isDefined(self.requested_action) || self.requested_action != "block") {
     return 1;
+  }
 
   return 0;
 }
@@ -52,17 +53,21 @@ playanimandlookatenemy(var_0, var_1, var_2, var_3) {
 }
 
 isanimdone(var_0, var_1, var_2, var_3) {
-  if(scripts\asm\asm::_id_232B(var_1, "end"))
+  if(scripts\asm\asm::_id_232B(var_1, "end")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "early_end"))
+  if(scripts\asm\asm::_id_232B(var_1, "early_end")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "finish_early"))
+  if(scripts\asm\asm::_id_232B(var_1, "finish_early")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "code_move"))
+  if(scripts\asm\asm::_id_232B(var_1, "code_move")) {
     return 1;
+  }
 
   return 0;
 }
@@ -102,23 +107,27 @@ damagezombies(var_0, var_1) {
 }
 
 dostaffstompdamage(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self endon(var_0 + "_finished");
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
   var_2 = scripts\mp\agents\ratking\ratking_tunedata::gettunedata();
   self setscriptablepartstate("attacks", "staff_stomp");
   self radiusdamage(self.origin, var_2.staff_stomp_damage_radius, var_2.staff_stomp_max_damage, var_2.staff_stomp_min_damage, self, "MOD_IMPACT");
 
-  if(scripts\engine\utility::is_true(self.battackzombies))
+  if(scripts\engine\utility::is_true(self.battackzombies)) {
     damagezombies(self.origin, var_2.staff_stomp_damage_radius);
+  }
 }
 
 staffstompnotehandler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "hit")
+  if(var_0 == "hit") {
     dostaffstompdamage(var_1);
+  }
 }
 
 dostaffstomp(var_0, var_1, var_2, var_3) {
@@ -159,16 +168,18 @@ meleenotehandler(var_0, var_1, var_2, var_3) {
       if(distancesquared(var_4.origin, self.origin) < 40000) {
         self notify("attack_hit", var_4);
 
-        if(var_4.team == "axis" && scripts\engine\utility::is_true(self.battackzombies))
+        if(var_4.team == "axis" && scripts\engine\utility::is_true(self.battackzombies)) {
           scripts\asm\zombie\melee::domeleedamage(var_4, var_4.health * 10, "MOD_IMPACT");
-        else
+        } else {
           scripts\asm\zombie\melee::domeleedamage(var_4, self._id_B601, "MOD_IMPACT");
+        }
       } else
         self notify("attack_miss", var_4);
     }
 
-    if(!scripts\engine\utility::is_true(self.bmovingmelee))
+    if(!scripts\engine\utility::is_true(self.bmovingmelee)) {
       self notify("stop_melee_face_enemy");
+    }
   }
 }
 
@@ -212,8 +223,9 @@ doshieldthrowatspot(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   var_4 = scripts\mp\agents\ratking\ratking_agent::getstructpos();
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     self.lookposition = var_4.origin;
+  }
 
   scripts\mp\agents\ratking\ratking_agent::lookatspot();
   self notify("shield_throw");
@@ -243,26 +255,31 @@ doshieldthrow(var_0, var_1, var_2, var_3) {
 }
 
 shouldabortaction(var_0, var_1, var_2, var_3) {
-  if(scripts\engine\utility::is_true(self.btraversalteleport))
+  if(scripts\engine\utility::is_true(self.btraversalteleport)) {
     return 0;
+  }
 
-  if(!isDefined(self.requested_action))
+  if(!isDefined(self.requested_action)) {
     return 1;
+  }
 
   if(isDefined(var_3)) {
-    if(self.requested_action != var_3)
+    if(self.requested_action != var_3) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 shoulddoaction(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.requested_action))
+  if(!isDefined(self.requested_action)) {
     return 0;
+  }
 
-  if(self.requested_action == var_2)
+  if(self.requested_action == var_2) {
     return 1;
+  }
 
   return 0;
 }
@@ -287,15 +304,17 @@ _id_BEA0(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
   var_5 = scripts\mp\agents\ratking\ratking_agent::getenemy();
 
-  if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.ent))
+  if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.ent)) {
     var_4 = self._blackboard.shootparams.ent.origin;
-  else if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.pos))
+  } else if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.pos)) {
     var_4 = self._blackboard.shootparams.pos;
-  else if(isDefined(var_5))
+  } else if(isDefined(var_5)) {
     var_4 = var_5.origin;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
   var_6 = self.angles[1] - vectortoyaw(var_4 - self.origin);
   var_7 = distancesquared(self.origin, var_4);
@@ -303,12 +322,14 @@ _id_BEA0(var_0, var_1, var_2, var_3) {
   if(var_7 < 65536) {
     var_8 = sqrt(var_7);
 
-    if(var_8 > 3)
+    if(var_8 > 3) {
       var_6 = var_6 + asin(-3 / var_8);
+    }
   }
 
-  if(abs(angleclamp180(var_6)) > self._id_129AF)
+  if(abs(angleclamp180(var_6)) > self._id_129AF) {
     return 1;
+  }
 
   return 0;
 }
@@ -319,36 +340,41 @@ _id_81DE() {
   var_2 = undefined;
 
   if(isDefined(self._blackboard.shootparams)) {
-    if(isDefined(self._blackboard.shootparams.ent))
+    if(isDefined(self._blackboard.shootparams.ent)) {
       var_1 = self._blackboard.shootparams.ent;
-    else if(isDefined(self._blackboard.shootparams.pos))
+    } else if(isDefined(self._blackboard.shootparams.pos)) {
       var_2 = self._blackboard.shootparams.pos;
+    }
   }
 
   var_3 = scripts\mp\agents\ratking\ratking_agent::getenemy();
 
   if(isDefined(var_3)) {
-    if(!isDefined(var_1) && !isDefined(var_2))
+    if(!isDefined(var_1) && !isDefined(var_2)) {
       var_1 = var_3;
+    }
   }
 
-  if(isDefined(var_1) && !issentient(var_1))
+  if(isDefined(var_1) && !issentient(var_1)) {
     var_0 = 1.5;
+  }
 
   var_4 = scripts\engine\utility::getpredictedaimyawtoshootentorpos(var_0, var_1, var_2);
   return var_4;
 }
 
 choosestaffornostaffanim(var_0, var_1, var_2) {
-  if(scripts\engine\utility::is_true(self.nostaff))
+  if(scripts\engine\utility::is_true(self.nostaff)) {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "nostaff");
+  }
 
   return scripts\asm\asm::asm_lookupanimfromalias(var_1, "staff");
 }
 
 chooseshieldornoshieldanim(var_0, var_1, var_2) {
-  if(self.asm.shieldstate == "equipped")
+  if(self.asm.shieldstate == "equipped") {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "shield");
+  }
 
   return scripts\asm\asm::asm_lookupanimfromalias(var_1, "noshield");
 }
@@ -356,22 +382,24 @@ chooseshieldornoshieldanim(var_0, var_1, var_2) {
 _id_3F0A(var_0, var_1, var_2) {
   var_3 = _id_81DE();
 
-  if(var_3 < 0)
+  if(var_3 < 0) {
     var_4 = "right";
-  else
+  } else {
     var_4 = "left";
+  }
 
   var_3 = abs(var_3);
   var_5 = 0;
 
-  if(var_3 > 157.5)
+  if(var_3 > 157.5) {
     var_5 = 180;
-  else if(var_3 > 112.5)
+  } else if(var_3 > 112.5) {
     var_5 = 135;
-  else if(var_3 > 67.5)
+  } else if(var_3 > 67.5) {
     var_5 = 90;
-  else
+  } else {
     var_5 = 45;
+  }
 
   var_6 = var_4 + "_" + var_5;
   var_7 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_6);
@@ -387,8 +415,9 @@ _id_D56A(var_0, var_1, var_2, var_3) {
   self _meth_8281("anim deltas");
   scripts\asm\asm_mp::_id_2365(var_0, var_1, var_2, var_4);
 
-  if(!isDefined(var_5) && isDefined(self.pathgoalpos))
+  if(!isDefined(var_5) && isDefined(self.pathgoalpos)) {
     self clearpath();
+  }
 
   scripts\asm\asm_mp::_id_237F("face current");
   scripts\asm\asm_mp::_id_237E("code_move");
@@ -403,10 +432,11 @@ playmeleeattack(var_0, var_1, var_2, var_3) {
 }
 
 choosemeleeattack(var_0, var_1, var_2) {
-  if(scripts\asm\asm_bb::bb_moverequested())
+  if(scripts\asm\asm_bb::bb_moverequested()) {
     var_3 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "attack_moving");
-  else
+  } else {
     var_3 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "attack");
+  }
 
   return var_3;
 }
@@ -433,8 +463,9 @@ playmovingpainanim(var_0, var_1, var_2, var_3) {
 playteleportin(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
 
-  if(!scripts\aitypes\ratking\behaviors::rk_isonplatform())
+  if(!scripts\aitypes\ratking\behaviors::rk_isonplatform()) {
     self setscriptablepartstate("movement", "dematerialize");
+  }
 
   playanimwithplaybackrate(var_0, var_1, var_2, var_3);
 }
@@ -442,8 +473,9 @@ playteleportin(var_0, var_1, var_2, var_3) {
 terminate_teleportout(var_0, var_1, var_2) {}
 
 shouldconsiderabortingteleport(var_0, var_1, var_2, var_3) {
-  if(scripts\engine\utility::is_true(self.ishidden))
+  if(scripts\engine\utility::is_true(self.ishidden)) {
     return 0;
+  }
 
   return shouldabortaction(var_0, var_1, var_2, "teleport");
 }
@@ -458,8 +490,9 @@ playteleportout(var_0, var_1, var_2, var_3) {
   self dontinterpolate();
   self hide();
 
-  if(scripts\engine\utility::is_true(self.fake_death))
+  if(scripts\engine\utility::is_true(self.fake_death)) {
     scripts\mp\agents\ratking\ratking_agent::executefakedeath();
+  }
 
   scripts\aitypes\ratking\behaviors::setplatformstate();
   var_6 = undefined;
@@ -471,16 +504,18 @@ playteleportout(var_0, var_1, var_2, var_3) {
 
   self setOrigin(self.teleportpos, 0);
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     self.angles = vectortoangles(var_5.origin - self.origin);
+  }
 
   self.teleportpos = undefined;
   self scragentsetgoalpos(self.origin);
   self clearpath();
   thread showmelater(var_6);
 
-  if(!scripts\engine\utility::is_true(self.btraversalteleport))
+  if(!scripts\engine\utility::is_true(self.btraversalteleport)) {
     scripts\mp\agents\ratking\ratking_agent::lookatenemy();
+  }
 
   scripts\asm\asm_mp::_id_2365(var_0, var_1, var_2, var_4, 1);
 
@@ -493,9 +528,9 @@ playteleportout(var_0, var_1, var_2, var_3) {
 }
 
 showmelater(var_0) {
-  if(scripts\aitypes\ratking\behaviors::rk_isonplatform())
+  if(scripts\aitypes\ratking\behaviors::rk_isonplatform()) {
     self setscriptablepartstate("rat_skirt", "platform");
-  else {
+  } else {
     self setscriptablepartstate("movement", "materialize");
     self setscriptablepartstate("rat_skirt", "active");
   }
@@ -506,16 +541,19 @@ showmelater(var_0) {
   thread gibnearbyzombies(0.1);
   wait 1;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
-  if(scripts\aitypes\ratking\behaviors::rk_isonplatform())
+  if(scripts\aitypes\ratking\behaviors::rk_isonplatform()) {
     self setscriptablepartstate("movement", "neutral");
+  }
 }
 
 gibnearbyzombies(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait(var_0);
+  }
 
   var_1 = scripts\mp\mp_agent::getaliveagents();
   var_2 = scripts\mp\agents\ratking\ratking_agent::getenemy();
@@ -548,8 +586,9 @@ gibthyself() {
 
 play_teleport_sound_to_players(var_0) {
   foreach(var_2 in level.players) {
-    if(!self isethereal() || scripts\engine\utility::is_true(var_2.rave_mode))
+    if(!self isethereal() || scripts\engine\utility::is_true(var_2.rave_mode)) {
       self playsoundtoplayer(var_0, var_2);
+    }
   }
 }
 
@@ -565,8 +604,9 @@ platformfaceenemy(var_0) {
   for(;;) {
     var_1 = scripts\mp\agents\ratking\ratking_agent::getenemy();
 
-    if(isDefined(var_1) && isalive(var_1))
+    if(isDefined(var_1) && isalive(var_1)) {
       self orientmode("face angle abs", (0, vectortoyaw(var_1.origin - self.origin), 0));
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -647,8 +687,9 @@ delayprojectileloopsound(var_0, var_1) {
 }
 
 staffprojectilenotehandler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "hit")
+  if(var_0 == "hit") {
     handlestaffprojectile();
+  }
 }
 
 lostorfoundstaff(var_0, var_1, var_2, var_3) {
@@ -661,14 +702,17 @@ lostorfoundstaff(var_0, var_1, var_2, var_3) {
 }
 
 lostorfoundshield(var_0, var_1, var_2, var_3) {
-  if(self._blackboard.requestedshieldstate == self.asm.shieldstate)
+  if(self._blackboard.requestedshieldstate == self.asm.shieldstate) {
     return 0;
+  }
 
-  if(self._blackboard.requestedshieldstate == "equipped" && self.asm.shieldstate != "equipped")
+  if(self._blackboard.requestedshieldstate == "equipped" && self.asm.shieldstate != "equipped") {
     return 1;
+  }
 
-  if(self._blackboard.requestedshieldstate == "dropped" && self.asm.shieldstate == "equipped")
+  if(self._blackboard.requestedshieldstate == "dropped" && self.asm.shieldstate == "equipped") {
     return 1;
+  }
 
   self.asm.shieldstate = self._blackboard.requestedshieldstate;
   return 0;

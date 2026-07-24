@@ -6,8 +6,9 @@
 _id_234D(var_0, var_1) {
   scripts\asm\asm::_id_234E();
 
-  if(var_1 == "hero_salter" || var_1 == "hero_boats")
+  if(var_1 == "hero_salter" || var_1 == "hero_boats") {
     scripts\asm\asm_bb::_id_2984(1);
+  }
 
   self.asm = spawnStruct();
   self.asm.archetype = var_1;
@@ -28,8 +29,9 @@ _id_234D(var_0, var_1) {
 }
 
 _id_2382(var_0, var_1) {
-  if(!isDefined(var_1._id_4E6D))
+  if(!isDefined(var_1._id_4E6D)) {
     return 0;
+  }
 
   return !isalive(self);
 }
@@ -38,28 +40,34 @@ _id_12EE7(var_0) {
   if(self.damageshield && !isDefined(self._id_55BF)) {
     var_1 = 1500;
 
-    if(!isDefined(self.a._id_A9C8))
+    if(!isDefined(self.a._id_A9C8)) {
       self.a._id_A9C8 = 0;
+    }
 
-    if(!isDefined(self.damageshieldcounter) || gettime() - self.a._id_A9C8 > var_1)
+    if(!isDefined(self.damageshieldcounter) || gettime() - self.a._id_A9C8 > var_1) {
       self.damageshieldcounter = randomintrange(2, 3);
+    }
 
-    if(isDefined(self.lastattacker) && distancesquared(self.origin, self.lastattacker.origin) < squared(512))
+    if(isDefined(self.lastattacker) && distancesquared(self.origin, self.lastattacker.origin) < squared(512)) {
       self.damageshieldcounter = 0;
+    }
 
-    if(self.damageshieldcounter > 0)
+    if(self.damageshieldcounter > 0) {
       self.damageshieldcounter--;
+    }
   }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self.damagedsubpart = var_0;
-  else
+  } else {
     self.damagedsubpart = undefined;
+  }
 }
 
 _id_1004C() {
-  if(isDefined(self._id_71D0))
+  if(isDefined(self._id_71D0)) {
     return self[[self._id_71D0]]();
+  }
 
   return _id_1004D();
 }
@@ -67,11 +75,13 @@ _id_1004C() {
 _id_1004D() {
   var_0 = 4096;
 
-  if(self.a._id_5605)
+  if(self.a._id_5605) {
     return 0;
+  }
 
-  if(isDefined(self.pathgoalpos) && self pathdisttogoal() < var_0)
+  if(isDefined(self.pathgoalpos) && self pathdisttogoal() < var_0) {
     return 0;
+  }
 
   return 1;
 }
@@ -93,8 +103,9 @@ _id_C879() {
     _id_12EE7();
 
     if(!_id_1004C()) {
-      if(isDefined(self.script) && self.script == "pain")
+      if(isDefined(self.script) && self.script == "pain") {
         self notify("killanimscript");
+      }
 
       return;
     }
@@ -112,19 +123,22 @@ _id_C879() {
       scripts\asm\asm::_id_2388(var_9, var_3, var_4, var_4._id_116FB);
       var_6 = var_4._id_C87F;
 
-      if(isDefined(var_5._id_C94B) && var_5._id_C94B)
-        [var_6, var_8] = scripts\asm\asm::_id_2310(var_9, var_4._id_C87F, 1);
+      if(isDefined(var_5._id_C94B) && var_5._id_C94B) {
+        [var_6, var_8] = ::scripts\asm\asm::_id_2310(var_9, var_4._id_C87F, 1);
+      }
 
       scripts\asm\asm::_id_238A(var_9, var_6, 0.05, undefined, undefined, var_4._id_C87C);
 
-      if(isDefined(self.unittype) && self.unittype == "c6")
+      if(isDefined(self.unittype) && self.unittype == "c6") {
         self playSound("shield_death_c6_1");
+      }
 
       var_0 = 1;
     }
 
-    if(!var_0 && self.script == "pain")
+    if(!var_0 && self.script == "pain") {
       self notify("killanimscript");
+    }
   }
 
   self endon("killanimscript");
@@ -142,8 +156,9 @@ traversehandler() {
       var_2 = self.asmname;
       var_3 = anim.asm[var_2];
 
-      if(!_id_234B(self.asm.archetype, var_0))
+      if(!_id_234B(self.asm.archetype, var_0)) {
         var_0 = "traverse_external";
+      }
 
       var_4 = self._id_164D[var_2]._id_4BC0;
       var_5 = var_3.states[var_4];
@@ -168,8 +183,9 @@ _id_111A9() {
       _id_12EE7(var_2.subpartname);
 
       if(!_id_1004C()) {
-        if(isDefined(self.script) && self.script == "pain")
+        if(isDefined(self.script) && self.script == "pain") {
           self notify("killanimscript");
+        }
 
         continue;
       }
@@ -187,15 +203,17 @@ _id_111A9() {
         scripts\asm\asm::_id_2388(var_12, var_6, var_7, var_7._id_116FB);
         var_9 = var_7._id_C87F;
 
-        if(isDefined(var_8._id_C94B) && var_8._id_C94B)
-          [var_9, var_11] = scripts\asm\asm::_id_2310(var_12, var_7._id_C87F, 1);
+        if(isDefined(var_8._id_C94B) && var_8._id_C94B) {
+          [var_9, var_11] = ::scripts\asm\asm::_id_2310(var_12, var_7._id_C87F, 1);
+        }
 
         scripts\asm\asm::_id_238A(var_12, var_9, 0.05, undefined, undefined, var_7._id_C87C);
         var_3 = 1;
       }
 
-      if(!var_3 && self.script == "pain")
+      if(!var_3 && self.script == "pain") {
         self notify("killanimscript");
+      }
     }
   }
 }
@@ -208,15 +226,17 @@ _id_237F(var_0) {
       if(scripts\engine\utility::actor_is3d()) {
         var_2 = self.angles;
 
-        if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < var_1)
+        if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < var_1) {
           var_2 = scripts\asm\shared\utility::getnodeforwardangles(self.node);
+        }
 
         self orientmode("face angle 3d", var_2);
       } else {
         var_3 = self.angles[1];
 
-        if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < var_1)
+        if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < var_1) {
           var_3 = scripts\asm\shared\utility::getnodeforwardyaw(self.node);
+        }
 
         self orientmode("face angle", var_3);
       }
@@ -236,14 +256,16 @@ _id_237E(var_0) {
 }
 
 _id_230E(var_0, var_1) {
-  if(scripts\asm\asm::_id_231B(var_0, "gesture"))
+  if(scripts\asm\asm::_id_231B(var_0, "gesture")) {
     _id_2381(var_0, var_1);
+  }
 }
 
 _id_238D(var_0) {
   if(isDefined(var_0._id_10B53) && var_0._id_10B53 != "") {
-    if(var_0._id_10B53 != "prone" && self.a.pose != var_0._id_10B53)
+    if(var_0._id_10B53 != "prone" && self.a.pose != var_0._id_10B53) {
       scripts\anim\utility::exitpronewrapper(1.0);
+    }
 
     self.a.pose = var_0._id_10B53;
     scripts\asm\asm_bb::bb_requestsmartobject(var_0._id_10B53);
@@ -251,23 +273,27 @@ _id_238D(var_0) {
 }
 
 _id_230D(var_0, var_1, var_2, var_3) {
-  if(scripts\asm\asm::_id_231B(var_0, "aim"))
+  if(scripts\asm\asm::_id_231B(var_0, "aim")) {
     _id_2380(var_0, var_2, var_3);
+  }
 }
 
 _id_2326(var_0, var_1, var_2, var_3, var_4) {
   var_5 = var_1;
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_5 = var_4;
+  }
 
   self waittill(var_5, var_6);
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     var_6 = ["undefined"];
+  }
 
-  if(!isarray(var_6))
+  if(!isarray(var_6)) {
     var_6 = [var_6];
+  }
 
   var_7 = undefined;
 
@@ -275,11 +301,13 @@ _id_2326(var_0, var_1, var_2, var_3, var_4) {
     scripts\asm\asm::asm_fireevent(var_1, var_9);
     var_10 = scripts\anim\notetracks::handlenotetrack(var_9, var_5, var_2, var_3);
 
-    if(!isDefined(var_10))
+    if(!isDefined(var_10)) {
       var_10 = _id_2344(var_0, var_9, var_1);
+    }
 
-    if(isDefined(var_10))
+    if(isDefined(var_10)) {
       var_7 = var_10;
+    }
   }
 
   return var_7;
@@ -293,23 +321,26 @@ _id_2344(var_0, var_1, var_2) {
     case "start_aim":
       var_3 = anim.asm[var_0].states[var_2];
 
-      if(isDefined(var_3.flags) && scripts\engine\utility::array_contains(var_3.flags, "notetrackAim"))
+      if(isDefined(var_3.flags) && scripts\engine\utility::array_contains(var_3.flags, "notetrackAim")) {
         _id_2380(var_0, var_2, 0.2);
+      }
 
       break;
   }
 }
 
 _id_238B(var_0) {
-  if(!scripts\engine\utility::string_starts_with(var_0, "ds "))
+  if(!scripts\engine\utility::string_starts_with(var_0, "ds ")) {
     return 0;
+  }
 
   var_1 = 3;
   self.asm._id_4E6E = spawnStruct();
   var_1 = var_1 + 1;
 
-  for(var_2 = ""; var_1 < var_0.size && var_0[var_1] != "]"; var_1 = var_1 + 1)
+  for(var_2 = ""; var_1 < var_0.size && var_0[var_1] != "]"; var_1 = var_1 + 1) {
     var_2 = var_2 + var_0[var_1];
+  }
 
   self.asm._id_4E6E._id_10E2C = var_2;
   var_1 = var_1 + 1;
@@ -317,8 +348,9 @@ _id_238B(var_0) {
   if(var_1 < var_0.size) {
     var_1 = var_1 + 2;
 
-    for(var_3 = ""; var_1 < var_0.size && var_0[var_1] != "]"; var_1 = var_1 + 1)
+    for(var_3 = ""; var_1 < var_0.size && var_0[var_1] != "]"; var_1 = var_1 + 1) {
       var_3 = var_3 + var_0[var_1];
+    }
 
     self.asm._id_4E6E.params = var_3;
   }
@@ -343,15 +375,17 @@ _id_2323(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_231F(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 1;
+  }
 
   for(;;) {
     var_6 = _id_2326(var_0, var_1, var_2, var_3, var_4);
 
     if(isDefined(var_6)) {
-      if(var_5 && !scripts\asm\asm::_id_232B(var_1, "end"))
+      if(var_5 && !scripts\asm\asm::_id_232B(var_1, "end")) {
         scripts\asm\asm::asm_fireevent(var_1, "end");
+      }
 
       return var_6;
     }
@@ -362,11 +396,13 @@ _id_2322(var_0, var_1, var_2, var_3) {
   for(;;) {
     self waittill(var_1, var_4);
 
-    if(!isDefined(var_4))
+    if(!isDefined(var_4)) {
       var_4 = ["undefined"];
+    }
 
-    if(!isarray(var_4))
+    if(!isarray(var_4)) {
       var_4 = [var_4];
+    }
 
     var_5 = undefined;
 
@@ -379,12 +415,14 @@ _id_2322(var_0, var_1, var_2, var_3) {
       scripts\asm\asm::asm_fireevent(var_1, var_7);
       var_9 = scripts\anim\notetracks::handlenotetrack(var_7, var_1, undefined, undefined);
 
-      if(isDefined(var_9))
+      if(isDefined(var_9)) {
         var_5 = var_9;
+      }
     }
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       return var_5;
+    }
   }
 }
 
@@ -432,9 +470,9 @@ _id_2369(var_0, var_1, var_2) {
   if(var_0 != self.asmname) {
     return;
   }
-  if(isDefined(anim.asm[var_0].states[var_1]._id_6A8B))
+  if(isDefined(anim.asm[var_0].states[var_1]._id_6A8B)) {
     _id_236B(var_2, anim.asm[var_0].states[var_1]._id_6A8B, self.facialidx);
-  else {
+  } else {
     _id_2318();
     self.asm._id_6A86 = "";
   }
@@ -452,8 +490,9 @@ _id_236B(var_0, var_1, var_2) {
   if(isDefined(var_0) && _id_2309(var_0)) {
     return;
   }
-  if(!isDefined(self.asm._id_6A86))
+  if(!isDefined(self.asm._id_6A86)) {
     self.asm._id_6A86 = "";
+  }
 
   scripts\sp\utility::_id_F6FE("asm");
 
@@ -474,11 +513,13 @@ _id_236A(var_0) {
   self endon("death");
   var_1 = "";
 
-  if(isDefined(self.asm))
+  if(isDefined(self.asm)) {
     var_1 = self.asm.archetype;
+  }
 
-  if(isDefined(self._id_1FA8))
+  if(isDefined(self._id_1FA8)) {
     var_1 = self._id_1FA8;
+  }
 
   if(!scripts\sp\utility::isfacialstateallowed("asm") && var_0 != "facial_death") {
     return;
@@ -490,8 +531,9 @@ _id_236A(var_0) {
     if(var_0 == "facial_death") {
       if(isDefined(self._id_6A84)) {
         if(self._id_6A84 == var_0) {
-          if(isDefined(self._id_6A83))
+          if(isDefined(self._id_6A83)) {
             var_2 = self._id_6A83;
+          }
         }
       }
     }
@@ -508,8 +550,9 @@ _id_236C(var_0) {
   var_1 = "soldier";
   var_2 = _func_2EF(var_1, "facial_animation", "facial_death", 0);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_0 setanimknob(var_2, 1, 0, 0);
+  }
 }
 
 _id_234F() {
@@ -573,8 +616,9 @@ _id_234F() {
 _id_234C(var_0) {
   var_1 = scripts\anim\utility::_id_7DA1();
 
-  if(var_1 == "none")
+  if(var_1 == "none") {
     _id_2319(var_0);
+  }
 
   _id_236D(var_0);
 }
@@ -595,8 +639,9 @@ _id_236D(var_0) {
     var_5 = getweaponattachments(var_1);
 
     if(isDefined(var_5)) {
-      if(scripts\engine\utility::array_contains(var_5, "foregrip"))
+      if(scripts\engine\utility::array_contains(var_5, "foregrip")) {
         var_4 = "foregrip";
+      }
     }
   }
 
@@ -604,8 +649,9 @@ _id_236D(var_0) {
     return;
   }
   if(!isDefined(var_4) || !scripts\asm\asm::asm_hasalias(var_2, var_4)) {
-    if(!isDefined(var_4))
+    if(!isDefined(var_4)) {
       var_4 = "UNDEFINED";
+    }
 
     return;
   }
@@ -619,8 +665,9 @@ _id_236D(var_0) {
 _id_2319(var_0) {
   var_1 = "ik_fingers_l";
 
-  if(var_0 == "right")
+  if(var_0 == "right") {
     var_1 = "ik_fingers_r";
+  }
 
   if(!scripts\asm\asm::asm_hasalias("Knobs", var_1)) {
     return;
@@ -634,8 +681,9 @@ _id_2355() {
   var_1 = getweaponbasename(var_0);
   var_2 = ["iw7_cheytac", "iw7_kbs", "iw7_m1", "iw7_m8", "iw7_mauler", "iw7_sdflmg", "iw7_ameli", "iw7_steeldragon", "iw7_sonic", "iw7_sdfshotty", "iw7_spas"];
 
-  if(isDefined(var_1) && scripts\engine\utility::array_contains(var_2, var_1))
+  if(isDefined(var_1) && scripts\engine\utility::array_contains(var_2, var_1)) {
     return 1;
+  }
 
   return 0;
 }
@@ -644,9 +692,9 @@ _id_236E() {
   _id_231A();
   var_0 = scripts\asm\asm::asm_lookupanimfromalias("Visor", "helmet_visor_up");
 
-  if(self.asm._id_DC48 == 1)
+  if(self.asm._id_DC48 == 1) {
     self _meth_82A2(var_0, 1, 0, 1.0);
-  else {
+  } else {
     var_1 = scripts\asm\asm::asm_lookupanimfromalias("Visor", "helmet_visor_down");
     self _meth_82A2(var_1, 1, 0, 1.0);
     wait(getanimlength(var_1) - 0.1);
@@ -669,19 +717,22 @@ _id_235E(var_0, var_1, var_2, var_3) {
   var_6 = undefined;
   var_7 = -1;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_7 = var_2.size;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return undefined;
+  }
 
   foreach(var_10 in var_4) {
     if(var_7 < 0 || getsubstr(var_10, 0, var_7) == var_2) {
       var_5 = var_5 + 1.0;
       var_11 = 1.0 / var_5;
 
-      if(randomfloat(1.0) <= var_11)
+      if(randomfloat(1.0) <= var_11) {
         var_6 = var_10;
+      }
     }
   }
 
@@ -695,22 +746,25 @@ _id_235D(var_0, var_1, var_2) {
 _id_2357(var_0, var_1, var_2) {
   var_3 = undefined;
 
-  if(isDefined(self._id_1FA8))
+  if(isDefined(self._id_1FA8)) {
     var_3 = _func_2EE(var_0, var_1, var_2, 0);
-  else
+  } else {
     var_3 = _func_2EE(var_0, var_1, var_2, scripts\asm\asm::asm_getdemeanor());
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     return var_3.anims;
-  else
+  } else {
     return undefined;
+  }
 }
 
 _id_2356(var_0, var_1) {
-  if(isDefined(self._id_1FA8))
+  if(isDefined(self._id_1FA8)) {
     var_2 = _id_2357(self._id_1FA8, var_0, var_1);
-  else
+  } else {
     var_2 = _id_2357(self.asm.archetype, var_0, var_1);
+  }
 
   return var_2;
 }
@@ -718,10 +772,11 @@ _id_2356(var_0, var_1) {
 _id_2305(var_0, var_1, var_2) {
   var_3 = _func_2EE(var_0, var_1, var_2, scripts\asm\asm::asm_getdemeanor());
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_2359(var_0, var_1, var_2) {
@@ -734,10 +789,11 @@ _id_235B(var_0, var_1) {
 }
 
 _id_234B(var_0, var_1) {
-  if(_func_2ED(var_0))
+  if(_func_2ED(var_0)) {
     return _func_2F1(var_0, var_1);
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_2348(var_0, var_1) {
@@ -748,23 +804,27 @@ _id_2348(var_0, var_1) {
 asm_getallanimsforalias(var_0, var_1, var_2) {
   var_3 = _func_2EE(var_0, var_1, var_2, 1);
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     return undefined;
+  }
 
   var_4 = var_3.anims;
 
-  if(!isarray(var_4))
+  if(!isarray(var_4)) {
     var_4 = [var_4];
+  }
 
   var_5 = _func_2EE(var_0, var_1, var_2, 0);
   var_6 = var_5.anims;
 
-  if(!isarray(var_6))
+  if(!isarray(var_6)) {
     var_6 = [var_6];
+  }
 
   foreach(var_8 in var_6) {
-    if(!scripts\engine\utility::array_contains(var_4, var_8))
+    if(!scripts\engine\utility::array_contains(var_4, var_8)) {
       var_4[var_4.size] = var_8;
+    }
   }
 
   return var_4;
@@ -810,13 +870,15 @@ _id_235F(var_0, var_1, var_2, var_3, var_4) {
       self _meth_84F1(var_3);
     }
 
-    if(isDefined(var_7) && var_7 != var_11)
+    if(isDefined(var_7) && var_7 != var_11) {
       self clearanim(var_7, var_2);
+    }
 
-    if(self _meth_8103(var_11) > 0)
+    if(self _meth_8103(var_11) > 0) {
       self _meth_82E1(var_1, var_11, 1, var_2, var_3);
-    else
+    } else {
       self _meth_82EA(var_1, var_11, 1.0, var_2, var_3);
+    }
 
     _id_2369(var_0, var_1, var_11);
     var_12 = getanimlength(var_11);
@@ -853,8 +915,9 @@ _id_2368(var_0, var_1, var_2, var_3, var_4) {
   var_6 = _id_2322(var_0, var_1, var_3, var_4);
 
   if(var_6 == "end") {
-    if(!scripts\asm\asm::_id_232B(var_1, "end"))
+    if(!scripts\asm\asm::_id_232B(var_1, "end")) {
       scripts\asm\asm::asm_fireevent(var_1, "end");
+    }
 
     thread scripts\asm\asm::_id_2310(var_0, var_1, 0);
   }
@@ -877,21 +940,24 @@ _id_2364(var_0, var_1, var_2) {
   _id_2369(var_0, var_1, var_3);
   var_4 = _id_231F(var_0, var_1, scripts\asm\asm::_id_2341(var_0, var_1));
 
-  if(var_4 == "code_move")
+  if(var_4 == "code_move") {
     var_4 = _id_231F(var_0, var_1, scripts\asm\asm::_id_2341(var_0, var_1));
+  }
 
-  if(var_4 == "end")
+  if(var_4 == "end") {
     thread scripts\asm\asm::_id_2310(var_0, var_1, 0);
+  }
 }
 
 _id_2363(var_0, var_1, var_2, var_3) {
   var_4 = asm_getallanimsforstate(var_0, var_1);
   var_5 = isDefined(var_3) && var_3 == "limited";
 
-  if(var_5)
+  if(var_5) {
     self _meth_82E6(var_1, var_4, 1.0, var_2, 1.0);
-  else
+  } else {
     self _meth_82E7(var_1, var_4, 1.0, var_2, 1.0);
+  }
 
   _id_2369(var_0, var_1, var_4);
   _id_231F(var_0, var_1, scripts\asm\asm::_id_2341(var_0, var_1));
@@ -906,10 +972,11 @@ _id_2361(var_0, var_1, var_2, var_3) {
     var_6 = asm_getallanimsforstate(var_0, var_1);
 
     if(var_4 != var_6) {
-      if(var_5)
+      if(var_5) {
         self _meth_82E6(var_1, var_6, 1.0, var_2, 1.0);
-      else
+      } else {
         self _meth_82E7(var_1, var_6, 1.0, var_2, 1.0);
+      }
 
       var_4 = var_6;
     }
@@ -938,41 +1005,47 @@ _id_2362(var_0, var_1, var_2) {
 }
 
 _id_2377(var_0) {
-  if(isDefined(var_0["left"]))
+  if(isDefined(var_0["left"])) {
     self.leftaimlimit = var_0["left"];
-  else if(scripts\engine\utility::actor_is3d())
+  } else if(scripts\engine\utility::actor_is3d()) {
     self.leftaimlimit = 56;
-  else
+  } else {
     self.leftaimlimit = 45;
+  }
 
-  if(isDefined(var_0["right"]))
+  if(isDefined(var_0["right"])) {
     self.rightaimlimit = var_0["right"];
-  else if(scripts\engine\utility::actor_is3d())
+  } else if(scripts\engine\utility::actor_is3d()) {
     self.rightaimlimit = -56;
-  else
+  } else {
     self.rightaimlimit = -45;
+  }
 
-  if(isDefined(var_0["up"]))
+  if(isDefined(var_0["up"])) {
     self.upaimlimit = var_0["up"];
-  else if(scripts\engine\utility::actor_is3d())
+  } else if(scripts\engine\utility::actor_is3d()) {
     self.upaimlimit = -65;
-  else
+  } else {
     self.upaimlimit = -45;
+  }
 
-  if(isDefined(var_0["down"]))
+  if(isDefined(var_0["down"])) {
     self.downaimlimit = var_0["down"];
-  else if(scripts\engine\utility::actor_is3d())
+  } else if(scripts\engine\utility::actor_is3d()) {
     self.downaimlimit = 65;
-  else
+  } else {
     self.downaimlimit = 45;
+  }
 }
 
 asm_generichandler(var_0, var_1) {
-  if(!isDefined(level._id_1A43[var_0]))
+  if(!isDefined(level._id_1A43[var_0])) {
     return "default";
+  }
 
-  if(!isDefined(level._id_1A43[var_0][var_1]))
+  if(!isDefined(level._id_1A43[var_0][var_1])) {
     return "default";
+  }
 
   return level._id_1A43[var_0][var_1];
 }
@@ -1010,28 +1083,32 @@ _id_2380(var_0, var_1, var_2, var_3, var_4) {
   if(scripts\asm\asm::asm_hasalias(var_1, "aim_1")) {
     return;
   }
-  if(!scripts\asm\asm::asm_hasalias(var_1, var_5 + "_aim_8"))
+  if(!scripts\asm\asm::asm_hasalias(var_1, var_5 + "_aim_8")) {
     var_5 = "rifle";
+  }
 
   _id_237D(var_0, var_1);
   var_6 = var_5 + "_aim_5";
   var_7 = undefined;
 
-  if((!isDefined(var_3) || var_3) && scripts\asm\asm::asm_hasalias(var_1, var_6))
+  if((!isDefined(var_3) || var_3) && scripts\asm\asm::asm_hasalias(var_1, var_6)) {
     var_7 = _id_235B(var_1, var_5 + "_aim_5");
+  }
 
   self _meth_82A9(_id_235B(var_1, var_5 + "_aim_8"), 1, var_2);
   self _meth_82A9(_id_235B(var_1, var_5 + "_aim_2"), 1, var_2);
   self _meth_82A9(_id_235B(var_1, var_5 + "_aim_4"), 1, var_2);
   self _meth_82A9(_id_235B(var_1, var_5 + "_aim_6"), 1, var_2);
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     self _meth_82AC(var_7, 1, var_2);
+  }
 
-  if(scripts\asm\asm::asm_hasalias(var_1, "aim_root"))
+  if(scripts\asm\asm::asm_hasalias(var_1, "aim_root")) {
     self _meth_82A2(_id_235B(var_1, "aim_root"), 1, var_2);
-  else if(scripts\asm\asm::asm_hasalias("Knobs", "aim_root"))
+  } else if(scripts\asm\asm::asm_hasalias("Knobs", "aim_root")) {
     self _meth_82A2(_id_235B("Knobs", "aim_root"), 1, var_2);
+  }
 
   var_8 = _id_2348(var_1, "aim_knob_2");
 
@@ -1042,8 +1119,9 @@ _id_2380(var_0, var_1, var_2, var_3, var_4) {
     self.asm._id_11A90._id_1A22 = _id_235B(var_1, "aim_knob_6");
     self.asm._id_11A90._id_1A24 = _id_235B(var_1, "aim_knob_8");
 
-    if(isDefined(var_7))
+    if(isDefined(var_7)) {
       self.asm._id_11A90._id_1A21 = _id_235B(var_1, "aim_knob_5");
+    }
 
     thread _id_2312(var_1);
   }
@@ -1134,8 +1212,9 @@ _id_238E(var_0, var_1, var_2) {
   while(!var_3) {
     self waittill(var_1, var_4);
 
-    if(!isarray(var_4))
+    if(!isarray(var_4)) {
       var_4 = [var_4];
+    }
 
     foreach(var_6 in var_4) {
       if(var_6 == "start_aim") {
@@ -1161,10 +1240,11 @@ _id_2386() {
 
 _id_2307(var_0, var_1) {
   if(getdvarint("ai_iw7", 0) == 0) {
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       self animcustom(var_0);
-    else
+    } else {
       self animcustom(var_0, var_1);
+    }
 
     return;
   }
@@ -1194,45 +1274,55 @@ _id_2385() {
 }
 
 _id_230F(var_0) {
-  if(isDefined(var_0._id_C704))
+  if(isDefined(var_0._id_C704)) {
     _id_237F(var_0._id_C704);
+  }
 
-  if(isDefined(var_0._id_1FBA))
+  if(isDefined(var_0._id_1FBA)) {
     _id_237E(var_0._id_1FBA);
+  }
 }
 
 _id_9F70(var_0, var_1, var_2, var_3) {
   if(isDefined(self.damageweapon)) {
-    if(self.damageweapon == "none")
+    if(self.damageweapon == "none") {
       return 0;
+    }
 
-    if(scripts\sp\utility::_id_9DB4("emp"))
+    if(scripts\sp\utility::_id_9DB4("emp")) {
       return 1;
+    }
 
-    if(scripts\sp\utility::_id_9DB4("iw7_sonic"))
+    if(scripts\sp\utility::_id_9DB4("iw7_sonic")) {
       return 1;
+    }
 
-    if(_id_FFBD())
+    if(_id_FFBD()) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 _id_9F4C(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.damagemod) && self.damagemod == "MOD_IMPACT")
+  if(isDefined(self.damagemod) && self.damagemod == "MOD_IMPACT") {
     return 0;
-
-  if(scripts\sp\utility::_id_9DB4("emp"))
-    return 1;
-
-  if(self.unittype == "c6" || self.unittype == "c8") {
-    if(scripts\sp\utility::_id_9DB4("iw7_sonic") && scripts\sp\utility::_id_9FFE(self.damageweapon))
-      return 1;
   }
 
-  if(scripts\sp\utility::_id_9DB4("iw7_atomizer") && self.damagemod != "MOD_MELEE" && self.health <= 0)
+  if(scripts\sp\utility::_id_9DB4("emp")) {
     return 1;
+  }
+
+  if(self.unittype == "c6" || self.unittype == "c8") {
+    if(scripts\sp\utility::_id_9DB4("iw7_sonic") && scripts\sp\utility::_id_9FFE(self.damageweapon)) {
+      return 1;
+    }
+  }
+
+  if(scripts\sp\utility::_id_9DB4("iw7_atomizer") && self.damagemod != "MOD_MELEE" && self.health <= 0) {
+    return 1;
+  }
 
   return 0;
 }
@@ -1247,32 +1337,39 @@ _id_D521() {
 _id_9DB5(var_0, var_1, var_2, var_3) {
   var_4 = self.damagetaken;
 
-  if(isDefined(self._id_C873))
+  if(isDefined(self._id_C873)) {
     var_4 = self._id_C873;
+  }
 
-  if(scripts\sp\utility::_id_9DB4("iw7_sonic") && self.damagemod != "MOD_MELEE" && var_4 >= 75)
+  if(scripts\sp\utility::_id_9DB4("iw7_sonic") && self.damagemod != "MOD_MELEE" && var_4 >= 75) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_FFBD() {
-  if(self.damagemod == "MOD_MELEE")
+  if(self.damagemod == "MOD_MELEE") {
     return 0;
+  }
 
-  if(!isDefined(self.damageweapon))
+  if(!isDefined(self.damageweapon)) {
     return 0;
+  }
 
-  if(self.damageweapon == "none")
+  if(self.damageweapon == "none") {
     return 0;
+  }
 
   var_0 = getweaponbasename(self.damageweapon);
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(isDefined(self.lastattacker) && isDefined(self.lastattacker.team) && isDefined(self.team) && self.lastattacker.team == self.team)
+  if(isDefined(self.lastattacker) && isDefined(self.lastattacker.team) && isDefined(self.team) && self.lastattacker.team == self.team) {
     return 0;
+  }
 
   return var_0 == "iw7_atomizer";
 }
@@ -1282,17 +1379,18 @@ _id_7E5A() {
   var_1 = anglesToForward(self.angles);
   var_2 = vectordot(var_1, var_0);
 
-  if(var_2 > 0.707)
+  if(var_2 > 0.707) {
     return "front";
-  else if(var_2 < -0.707)
+  } else if(var_2 < -0.707) {
     return "back";
-  else {
+  } else {
     var_3 = vectorcross(var_1, var_0);
 
-    if(var_3[2] > 0)
+    if(var_3[2] > 0) {
       return "left";
-    else
+    } else {
       return "right";
+    }
   }
 }
 
@@ -1301,8 +1399,9 @@ _id_7F08() {
   var_1 = anglesToForward(self.angles);
   var_2 = vectordot(var_1, var_0);
 
-  if(var_2 < -0.5)
+  if(var_2 < -0.5) {
     return 1;
+  }
 
   return 0;
 }

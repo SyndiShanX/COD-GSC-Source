@@ -6,17 +6,21 @@
 _id_FE04(var_0, var_1) {
   level _id_0EFB::_id_FE05();
 
-  if(!isDefined(level._id_FD6E.spawners))
+  if(!isDefined(level._id_FD6E.spawners)) {
     level._id_FD6E.spawners = [];
+  }
 
-  if(!isDefined(level._id_FD6E._id_1087F))
+  if(!isDefined(level._id_FD6E._id_1087F)) {
     level._id_FD6E._id_1087F = [];
+  }
 
-  if(!isDefined(level._id_FD6E._id_1087D))
+  if(!isDefined(level._id_FD6E._id_1087D)) {
     level._id_FD6E._id_1087D = [];
+  }
 
-  if(!isDefined(level._id_FD6E._id_1912))
+  if(!isDefined(level._id_FD6E._id_1912)) {
     level._id_FD6E._id_1912 = [];
+  }
 
   level._id_FD6E.spawners[var_0] = [];
   level._id_FD6E.spawners[var_0] = getspawnerarray(var_0);
@@ -25,35 +29,41 @@ _id_FE04(var_0, var_1) {
 
   foreach(var_3 in level._id_FD6E._id_1087D[var_0]) {
     if(!isDefined(var_3.script_parameters)) {
-      level._id_FD6E._id_1087D[var_0] = scripts\engine\utility::array_remove(level._id_FD6E._id_1087D[var_0], var_3);
+      level._id_FD6E._id_1087D[var_0] = ::scripts\engine\utility::array_remove(level._id_FD6E._id_1087D[var_0], var_3);
       continue;
     }
 
-    if(var_3.script_parameters != "female")
-      level._id_FD6E._id_1087D[var_0] = scripts\engine\utility::array_remove(level._id_FD6E._id_1087D[var_0], var_3);
+    if(var_3.script_parameters != "female") {
+      level._id_FD6E._id_1087D[var_0] = ::scripts\engine\utility::array_remove(level._id_FD6E._id_1087D[var_0], var_3);
+    }
   }
 
-  if(level._id_FD6E._id_1087D[var_0].size < 1)
+  if(level._id_FD6E._id_1087D[var_0].size < 1) {
     level._id_FD6E._id_1087D[var_0] = undefined;
+  }
 
   level._id_FD6E._id_1087F[var_0] = level._id_FD6E.spawners[var_0];
 
   foreach(var_3 in level._id_FD6E._id_1087F[var_0]) {
-    if(isDefined(var_3.script_parameters) && var_3.script_parameters != "male")
-      level._id_FD6E._id_1087F[var_0] = scripts\engine\utility::array_remove(level._id_FD6E._id_1087F[var_0], var_3);
+    if(isDefined(var_3.script_parameters) && var_3.script_parameters != "male") {
+      level._id_FD6E._id_1087F[var_0] = ::scripts\engine\utility::array_remove(level._id_FD6E._id_1087F[var_0], var_3);
+    }
   }
 
-  if(level._id_FD6E._id_1087F[var_0].size < 1)
+  if(level._id_FD6E._id_1087F[var_0].size < 1) {
     level._id_FD6E._id_1087F[var_0] = undefined;
+  }
 
   if(isDefined(var_1)) {
-    if(issubstr(var_1, "female"))
+    if(issubstr(var_1, "female")) {
       return level._id_FD6E._id_1087D[var_0];
+    }
 
-    if(issubstr(var_1, "male"))
+    if(issubstr(var_1, "male")) {
       return level._id_FD6E._id_1087F[var_0];
-    else
+    } else {
       return level._id_FD6E.spawners[var_0];
+    }
   } else
     return level._id_FD6E.spawners[var_0];
 }
@@ -73,8 +83,9 @@ _id_FDFD(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 _id_FDFC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = (0, 0, 0);
+  }
 
   var_8 = 0;
 
@@ -83,22 +94,27 @@ _id_FDFC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_1 = (0, 0, 0);
   }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "default";
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 0;
+  }
 
   if(var_4 && var_3) {}
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 0;
+  }
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     var_6 = 1;
+  }
 
   var_9 = undefined;
   var_10 = _id_0EFB::_id_7D7A(var_1);
@@ -109,8 +125,9 @@ _id_FDFC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   for(;;) {
     if(var_11 > 10) {
-      if(var_12 > 3)
+      if(var_12 > 3) {
         return undefined;
+      }
 
       level _id_FE04(var_0, var_7);
     }
@@ -121,11 +138,13 @@ _id_FDFC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
     if(isDefined(var_7)) {
       if(issubstr(var_7, "female")) {
-        if(isDefined(level._id_FD6E._id_1087D[var_0]))
+        if(isDefined(level._id_FD6E._id_1087D[var_0])) {
           var_13 = level._id_FD6E._id_1087D[var_0];
+        }
       } else if(issubstr(var_7, "male")) {
-        if(isDefined(level._id_FD6E._id_1087F[var_0]))
+        if(isDefined(level._id_FD6E._id_1087F[var_0])) {
           var_13 = level._id_FD6E._id_1087F[var_0];
+        }
       }
     }
 
@@ -377,8 +396,9 @@ _id_FDFC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       break;
   }
 
-  if(var_8)
+  if(var_8) {
     var_10 = var_9._id_907D;
+  }
 
   if(!isDefined(var_9._id_9B89)) {
     var_9 _meth_80F1(var_10.origin, var_10.angles);
@@ -390,25 +410,27 @@ _id_FDFC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_9.angles = var_10.angles;
   }
 
-  level._id_FD6E._id_1912["all"] = scripts\engine\utility::add_to_array(level._id_FD6E._id_1912["all"], var_9);
+  level._id_FD6E._id_1912["all"] = ::scripts\engine\utility::add_to_array(level._id_FD6E._id_1912["all"], var_9);
 
-  if(isDefined(var_10._id_ECE7))
-    level._id_FD6E._id_1912[var_10._id_ECE7] = scripts\engine\utility::add_to_array(level._id_FD6E._id_1912[var_10._id_ECE7], var_9);
-  else if(isDefined(var_9._id_ECE7))
-    level._id_FD6E._id_1912[var_9._id_ECE7] = scripts\engine\utility::add_to_array(level._id_FD6E._id_1912[var_9._id_ECE7], var_9);
+  if(isDefined(var_10._id_ECE7)) {
+    level._id_FD6E._id_1912[var_10._id_ECE7] = ::scripts\engine\utility::add_to_array(level._id_FD6E._id_1912[var_10._id_ECE7], var_9);
+  } else if(isDefined(var_9._id_ECE7)) {
+    level._id_FD6E._id_1912[var_9._id_ECE7] = ::scripts\engine\utility::add_to_array(level._id_FD6E._id_1912[var_9._id_ECE7], var_9);
+  }
 
   level thread _id_0EFB::_id_FD72(var_9);
 
   if(var_3 && scripts\sp\interaction::_id_9C26(var_10)) {
     if(isDefined(var_10._id_EE92)) {
-      if(issubstr(var_10._id_EE92, "opsmap"))
+      if(issubstr(var_10._id_EE92, "opsmap")) {
         var_9 thread scripts\sp\interaction::_id_CD50(var_10._id_EE92);
-      else {
+      } else {
         var_9._id_D6E2 = var_9 _id_0EF1::_id_789F();
         var_18 = var_9._id_D6E2[0];
 
-        if(isDefined(var_10.script_parameters) && soundexists(var_10.script_parameters))
+        if(isDefined(var_10.script_parameters) && soundexists(var_10.script_parameters)) {
           var_18 = var_10.script_parameters;
+        }
 
         var_9 thread scripts\sp\interaction::_id_CE18(var_10._id_EE92, var_18, var_9._id_D6E2);
       }
@@ -416,18 +438,21 @@ _id_FDFC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       var_9._id_D6E2 = var_9 _id_0EF1::_id_789F();
       var_18 = var_9._id_D6E2[0];
 
-      if(isDefined(var_10.script_parameters) && soundexists(var_10.script_parameters))
+      if(isDefined(var_10.script_parameters) && soundexists(var_10.script_parameters)) {
         var_18 = var_10.script_parameters;
+      }
 
       var_9 thread scripts\sp\interaction::_id_CE18(var_10.script_noteworthy, var_18, var_9._id_D6E2);
     }
   } else if(var_4 && scripts\sp\idles::_id_9B62(var_10))
     var_9 thread scripts\sp\idles::_id_CC7F(var_10.script_noteworthy);
-  else if(var_3 && scripts\sp\interaction::_id_9CD7(var_10))
+  else if(var_3 && scripts\sp\interaction::_id_9CD7(var_10)) {
     var_9 thread scripts\sp\interaction_manager::_id_CE40(var_10._id_EE92);
+  }
 
-  if(isDefined(var_6) && var_6)
+  if(isDefined(var_6) && var_6) {
     var_9._id_1ED4 = ::_id_FD9E;
+  }
 
   return var_9;
 }
@@ -444,51 +469,60 @@ _id_FDFE() {
   scripts\sp\utility::_id_5131();
   scripts\anim\shared::placeweaponon(self.secondaryweapon, "none");
 
-  if(isDefined(self._id_A489))
+  if(isDefined(self._id_A489)) {
     self detach(self._id_A489);
+  }
 }
 
 _id_FDFF(var_0) {
   self._id_8E08 = ["j_helmet", "J_Visor", "J_Visor_Inner"];
 
   if(isDefined(var_0)) {
-    if(isarray(var_0))
+    if(isarray(var_0)) {
       self._id_8E08 = scripts\engine\utility::array_combine(self._id_8E08, var_0);
-    else
+    } else {
       self._id_8E08[self._id_8E08.size] = var_0;
+    }
   }
 
-  foreach(var_2 in self._id_8E08)
-  self hidepart(var_2);
+  foreach(var_2 in self._id_8E08) {
+    self hidepart(var_2);
+  }
 }
 
 _id_FE00() {
-  foreach(var_1 in self._id_8E08)
-  self showpart(var_1);
+  foreach(var_1 in self._id_8E08) {
+    self showpart(var_1);
+  }
 }
 
 _id_FDC1(var_0, var_1) {
   _id_0EFB::_id_FE05();
 
-  if(!isDefined(level._id_FD6E._id_3D53))
+  if(!isDefined(level._id_FD6E._id_3D53)) {
     level._id_FD6E._id_3D53 = [];
+  }
 
   var_2 = scripts\sp\utility::_id_5CC9(var_0);
   var_2._id_1FBB = "generic";
   var_2._id_9B89 = 1;
   var_2._id_6B14 = 1;
 
-  if(!isDefined(level._id_EC85["generic"]["head_knob"]))
+  if(!isDefined(level._id_EC85["generic"]["head_knob"])) {
     thread _id_0EF2::_id_3D4D();
+  }
 
-  if(isDefined(var_2.weapon) && var_2.weapon != "none")
+  if(isDefined(var_2.weapon) && var_2.weapon != "none") {
     var_2 scripts\sp\utility::_id_86E4();
+  }
 
-  if(var_1)
+  if(var_1) {
     createnavrepulsor("", 0, var_2, 15);
+  }
 
-  if(getdvarint("show_cheap", 0) != 0)
+  if(getdvarint("show_cheap", 0) != 0) {
     var_2 thread _id_100CC();
+  }
 
   return var_2;
 }
@@ -496,8 +530,9 @@ _id_FDC1(var_0, var_1) {
 _id_100CC() {
   self endon("death");
 
-  for(;;)
+  for(;;) {
     scripts\engine\utility::waitframe();
+  }
 }
 
 _id_DB10() {

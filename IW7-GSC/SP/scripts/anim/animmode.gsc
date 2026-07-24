@@ -36,12 +36,13 @@ main() {
   var_5 = getstartangles(self._id_141C.origin, self._id_141C.angles, var_3);
   var_6 = self _meth_811F(var_4);
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_4 = var_6;
-  else {}
+  } else {}
 
-  if(!isDefined(self._id_C0C1))
+  if(!isDefined(self._id_C0C1)) {
     self _meth_83B9(var_4, var_5);
+  }
 
   self.pushable = 0;
   var_7 = 0.3;
@@ -54,10 +55,11 @@ main() {
 
   self animmode(self._id_117F);
 
-  if(getdvarint("ai_iw7") == 1)
+  if(getdvarint("ai_iw7") == 1) {
     self clearanim(_id_0A1E::_id_2342(), 0.3);
-  else
+  } else {
     self clearanim(self._id_E6E6, var_7);
+  }
 
   self orientmode("face angle", var_5[1]);
   var_9 = "custom_animmode";
@@ -71,10 +73,11 @@ main() {
   var_11 = "end";
 
   if(!var_0) {
-    if(animhasnotetrack(var_3, "finish"))
+    if(animhasnotetrack(var_3, "finish")) {
       var_11 = "finish";
-    else if(animhasnotetrack(var_3, "stop anim"))
+    } else if(animhasnotetrack(var_3, "stop anim")) {
       var_11 = "stop anim";
+    }
   }
 
   for(;;) {
@@ -95,8 +98,9 @@ main() {
     break;
   }
 
-  if(var_11 != "end")
+  if(var_11 != "end") {
     self orientmode("face motion");
+  }
 
   self notify("finished_custom_animmode" + var_1);
 }

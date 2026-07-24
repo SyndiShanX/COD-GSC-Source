@@ -7,29 +7,34 @@ _id_5C21() {
   _id_23C7();
   self _meth_839E();
 
-  if(isDefined(self._id_EE2C))
+  if(isDefined(self._id_EE2C)) {
     self.moveplaybackrate = self._id_EE2C;
-  else
+  } else {
     self.moveplaybackrate = 1;
+  }
 
   if(self.team == "allies") {
     scripts\sp\names::_id_7B05();
     self _meth_8307(self.name, &"");
   }
 
-  if(isDefined(level._id_5CA7))
+  if(isDefined(level._id_5CA7)) {
     self thread[[level._id_5CA7]]();
+  }
 
-  if(!isDefined(self._id_EDB7))
+  if(!isDefined(self._id_EDB7)) {
     level thread scripts\sp\friendlyfire::_id_73B1(self);
+  }
 
-  if(!isDefined(level._id_193D))
+  if(!isDefined(level._id_193D)) {
     _id_1177B();
+  }
 }
 
 _id_1177B() {
-  if(!isDefined(level._id_5CCB))
+  if(!isDefined(level._id_5CCB)) {
     level._id_5CCB = "all";
+  }
 
   var_0 = 0;
 
@@ -44,8 +49,9 @@ _id_1177B() {
       break;
   }
 
-  if(var_0)
+  if(var_0) {
     self thermaldrawenable();
+  }
 }
 
 _id_5C3A() {
@@ -163,10 +169,11 @@ _id_5C3A() {
 
 _id_23C7() {
   if(isDefined(self.type)) {
-    if(self.type == "dog")
+    if(self.type == "dog") {
       _id_23B5();
-    else
+    } else {
       _id_23C9();
+    }
   }
 }
 

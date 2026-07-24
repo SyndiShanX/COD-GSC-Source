@@ -15,10 +15,11 @@ init() {
   level.uiparent.height = 0;
   level.uiparent.children = [];
 
-  if(level.console)
+  if(level.console) {
     level.fontheight = 12;
-  else
+  } else {
     level.fontheight = 12;
+  }
 
   setDvar("ui_remotemissile_playernum", 0);
   setDvar("ui_pmc_won", 0);
@@ -133,8 +134,9 @@ _id_8DFD(var_0, var_1, var_2) {
     return;
   }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = randomfloatrange(3, 4);
+  }
 
   _id_8DFA("oxygen", var_1, var_0);
   _id_8E00("oxygen");
@@ -146,8 +148,9 @@ _id_8DFF(var_0, var_1, var_2) {
     return;
   }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = randomfloatrange(3, 4);
+  }
 
   _id_8DFA("temperature", var_1, var_0);
   _id_8E00("temperature");
@@ -159,8 +162,9 @@ _id_8DFE(var_0, var_1, var_2) {
     return;
   }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = randomfloatrange(3, 4);
+  }
 
   _id_8DFA("pressure", var_1, var_0);
   _id_8E00("pressure");
@@ -171,18 +175,21 @@ _id_8DF2(var_0) {
   var_2 = randomintrange(18, 22);
   var_3 = randomfloatrange(14.5, 14.9);
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = randomfloatrange(3, 4);
+  }
 
   thread _id_8DFB("oxygen", var_0, var_1);
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = randomfloatrange(3, 4);
+  }
 
   thread _id_8DFB("temperature", var_0, var_2);
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = randomfloatrange(3, 4);
+  }
 
   thread _id_8DFB("pressure", var_0, var_3);
 }
@@ -192,18 +199,21 @@ _id_8DF3(var_0) {
   var_2 = randomintrange(18, 22);
   var_3 = randomfloatrange(8.2, 8.4);
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = randomfloatrange(3, 4);
+  }
 
   thread _id_8DFB("oxygen", var_0, var_1);
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = randomfloatrange(3, 4);
+  }
 
   thread _id_8DFB("temperature", var_0, var_2);
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = randomfloatrange(3, 4);
+  }
 
   thread _id_8DFB("pressure", var_0, var_3);
 }
@@ -219,18 +229,21 @@ _id_8DF4(var_0, var_1) {
     var_4 = randomfloatrange(4, 6);
   }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = randomfloatrange(2, 3);
+  }
 
   thread _id_8DFB("oxygen", var_1, var_2);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = randomfloatrange(2, 3);
+  }
 
   thread _id_8DFB("temperature", var_1, var_3);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = randomfloatrange(2, 3);
+  }
 
   thread _id_8DFB("pressure", var_1, var_4);
 }
@@ -257,16 +270,18 @@ _id_8DFA(var_0, var_1, var_2) {
   var_9 = var_4 * 0.05;
   var_10 = 1;
 
-  if(var_2 == level._id_8DF1[var_0])
+  if(var_2 == level._id_8DF1[var_0]) {
     return;
-  else if(var_2 < level._id_8DF1[var_0])
+  } else if(var_2 < level._id_8DF1[var_0]) {
     var_10 = 0;
+  }
 
   for(var_11 = 0; var_11 < var_1; var_11 = var_11 + 0.05) {
-    if(var_10)
+    if(var_10) {
       level._id_8DF1[var_0] = level._id_8DF1[var_0] + var_6;
-    else
+    } else {
       level._id_8DF1[var_0] = level._id_8DF1[var_0] - var_6;
+    }
 
     var_12 = _id_8DFC(var_0, level._id_8DF1[var_0]);
     setomnvar(var_7, var_12);
@@ -280,12 +295,13 @@ _id_8DFA(var_0, var_1, var_2) {
 _id_8E00(var_0) {
   var_1 = 0;
 
-  if(var_0 == "oxygen")
+  if(var_0 == "oxygen") {
     var_1 = randomfloatrange(-0.5, 0.5) + level._id_8DF1[var_0];
-  else if(var_0 == "temperature")
+  } else if(var_0 == "temperature") {
     var_1 = randomintrange(-1, 1) + level._id_8DF1[var_0];
-  else if(var_0 == "pressure")
+  } else if(var_0 == "pressure") {
     var_1 = randomfloatrange(-0.5, 0.5) + level._id_8DF1[var_0];
+  }
 
   var_2 = level._id_8DF1[var_0];
   var_3 = randomfloatrange(1, 3);

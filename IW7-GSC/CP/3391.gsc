@@ -6,15 +6,17 @@
 init_arcade_counter_ammo_slot() {
   var_0 = scripts\engine\utility::getStructArray("arcade_counter_ammo", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_9593();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_9593();
+  }
 }
 
 init_arcade_grenade_slot() {
   var_0 = scripts\engine\utility::getStructArray("arcade_counter_grenade", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_9593();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_9593();
+  }
 }
 
 init_small_counter_slot() {
@@ -40,8 +42,9 @@ init_large_counter_slot() {
   level._id_A857 = ["attachment_zmb_arcane_muzzlebrake_wm"];
   var_0 = scripts\engine\utility::getStructArray("large_ticket_prize", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_9593();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_9593();
+  }
 }
 
 _id_136DE(var_0) {
@@ -80,8 +83,9 @@ _id_9593() {
 _id_3E93() {
   var_0 = ["power_rewind", "power_transponder", "power_tripMine", "power_blackholeGrenade"];
 
-  if(scripts\cp\utility::is_codxp())
+  if(scripts\cp\utility::is_codxp()) {
     var_0 = ["power_rewind", "power_tripMine", "power_blackholeGrenade"];
+  }
 
   level._id_1033F = var_0;
   var_1 = ["power_armageddon", "power_portalGenerator", "power_repulsor"];
@@ -91,8 +95,9 @@ _id_3E93() {
     level waittill("ticket_counter_choose_power", var_2);
 
     if(var_2.script_noteworthy == "small_ticket_prize") {
-      if(level._id_1033F.size < 1)
+      if(level._id_1033F.size < 1) {
         level._id_1033F = var_0;
+      }
 
       var_2.power = scripts\engine\utility::random(level._id_1033F);
       level._id_1033F = scripts\engine\utility::array_remove(level._id_1033F, var_2.power);
@@ -106,8 +111,9 @@ _id_3E93() {
     }
 
     if(var_2.script_noteworthy == "medium_ticket_prize") {
-      if(level._id_B534.size < 1)
+      if(level._id_B534.size < 1) {
         level._id_B534 = var_1;
+      }
 
       var_2.power = scripts\engine\utility::random(level._id_B534);
       level._id_B534 = scripts\engine\utility::array_remove(level._id_B534, var_2.power);
@@ -162,10 +168,11 @@ ticket_counter_slot_activation(var_0, var_1) {
   if(var_0.script_noteworthy == "small_ticket_prize" || var_0.script_noteworthy == "medium_ticket_prize") {
     var_2 = var_0.power;
 
-    if(isDefined(level.powers[var_2].defaultslot))
+    if(isDefined(level.powers[var_2].defaultslot)) {
       var_3 = level.powers[var_2].defaultslot;
-    else
+    } else {
       var_3 = "secondary";
+    }
 
     var_1 scripts\cp\powers\coop_powers::givepower(var_2, var_3, undefined, undefined, undefined, 0, 0);
     thread deactivate_ticket_counter_slot(var_0, var_1, 1);
@@ -182,11 +189,13 @@ deactivate_ticket_counter_slot(var_0, var_1, var_2) {
     var_0.item hide();
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
   } else {
-    if(isDefined(var_0.item))
+    if(isDefined(var_0.item)) {
       var_0.item hidefromplayer(var_1);
+    }
 
-    if(isDefined(var_0.trigger))
+    if(isDefined(var_0.trigger)) {
       var_0.trigger hidefromplayer(var_1);
+    }
 
     scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(var_0, var_1);
   }
@@ -210,11 +219,13 @@ _id_10149(var_0, var_1, var_2) {
     var_0.item show();
     scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
   } else if(isDefined(var_1)) {
-    if(isDefined(var_0.item))
+    if(isDefined(var_0.item)) {
       var_0.item showtoplayer(var_1);
+    }
 
-    if(isDefined(var_0.trigger))
+    if(isDefined(var_0.trigger)) {
       var_0.trigger showtoplayer(var_1);
+    }
 
     scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(var_0, var_1);
   }
@@ -237,8 +248,9 @@ _id_7CF9(var_0) {
       var_1 = "equipment_oxygen_tank_01";
       break;
     case "large_ticket_prize":
-      if(!isDefined(level._id_A857) || level._id_A857.size < 1)
+      if(!isDefined(level._id_A857) || level._id_A857.size < 1) {
         level._id_A857 = ["attachment_zmb_arcane_muzzlebrake_wm"];
+      }
 
       var_1 = scripts\engine\utility::random(level._id_A857);
       level._id_A857 = scripts\engine\utility::array_remove(level._id_A857, var_1);
@@ -329,8 +341,9 @@ _id_2761(var_0, var_1) {
   foreach(var_4 in var_2) {
     var_1 givemaxammo(var_4);
 
-    if(weaponmaxammo(var_4) == weaponclipsize(var_4))
+    if(weaponmaxammo(var_4) == weaponclipsize(var_4)) {
       var_1 setweaponammoclip(var_4, weaponclipsize(var_4));
+    }
   }
 
   return 1;
@@ -346,20 +359,24 @@ _id_10931(var_0, var_1) {
   var_2 = scripts\cp\utility::get_attachment_from_interaction(var_0);
   var_3 = var_1 getcurrentweapon();
 
-  if(var_1 scripts\cp\utility::weaponhasattachment(var_3, var_2))
+  if(var_1 scripts\cp\utility::weaponhasattachment(var_3, var_2)) {
     return 0;
+  }
 
-  if(!var_1 scripts\cp\cp_weapon::can_use_attachment(var_2, var_3))
+  if(!var_1 scripts\cp\cp_weapon::can_use_attachment(var_2, var_3)) {
     return 0;
+  }
 
   thread deactivate_ticket_counter_slot(var_0, var_1, 1);
   var_4 = var_1 scripts\cp\cp_weapon::add_attachment_to_weapon(var_2, var_3, 1);
 
-  if(var_4)
+  if(var_4) {
     var_1 notify("weapon_purchased");
+  }
 
-  if(var_2 == "arcane_base" && var_4 == 1)
+  if(var_2 == "arcane_base" && var_4 == 1) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("part_collect_arcane", "zmb_comment_vo", "medium", 10, 0, 0, 0, 50);
+  }
 
   return var_4;
 }
@@ -375,33 +392,35 @@ _id_7CF8(var_0, var_1) {
 
   switch (var_1) {
     case "foam_grenade_vm":
-      if(var_0.power == "power_phaseShift")
+      if(var_0.power == "power_phaseShift") {
         var_2 = &"CP_ZMB_INTERACTIONS_TICKET_PHASESHIFT";
-      else if(var_0.power == "power_kineticPulse")
+      } else if(var_0.power == "power_kineticPulse") {
         var_2 = &"CP_ZMB_INTERACTIONS_TICKET_KINETICPULSE";
-      else if(var_0.power == "power_rewind")
+      } else if(var_0.power == "power_rewind") {
         var_2 = &"CP_ZMB_INTERACTIONS_TICKET_REWIND";
-      else if(var_0.power == "power_transponder")
+      } else if(var_0.power == "power_transponder") {
         var_2 = &"CP_ZMB_INTERACTIONS_TICKET_TRANSPONDER";
-      else if(var_0.power == "power_tripMine")
+      } else if(var_0.power == "power_tripMine") {
         var_2 = &"CP_ZMB_INTERACTIONS_TICKET_TRIPMINE";
-      else if(var_0.power == "power_blackholeGrenade")
+      } else if(var_0.power == "power_blackholeGrenade") {
         var_2 = &"CP_ZMB_INTERACTIONS_TICKET_BHGRENADE";
-      else if(var_0.power == "power_repulsor")
+      } else if(var_0.power == "power_repulsor") {
         var_2 = &"CP_ZMB_INTERACTIONS_TICKET_REPULSOR";
+      }
 
       break;
     case "equipment_oxygen_tank_01":
-      if(var_0.power == "power_armageddon")
+      if(var_0.power == "power_armageddon") {
         var_2 = &"CP_ZMB_INTERACTIONS_TICKET_ARMAGEDDON";
-      else if(var_0.power == "power_microTurret")
+      } else if(var_0.power == "power_microTurret") {
         var_2 = &"CP_ZMB_INTERACTIONS_TICKET_MICROTURRRET";
-      else if(var_0.power == "power_portalGenerator")
+      } else if(var_0.power == "power_portalGenerator") {
         var_2 = &"CP_ZMB_INTERACTIONS_TICKET_PORTALGENERATOR";
-      else if(var_0.power == "power_deployableCover")
+      } else if(var_0.power == "power_deployableCover") {
         var_2 = &"CP_ZMB_INTERACTIONS_TICKET_DEPLOYABLECOVER";
-      else if(var_0.power == "power_repulsor")
+      } else if(var_0.power == "power_repulsor") {
         var_2 = &"CP_ZMB_INTERACTIONS_TICKET_REPULSOR";
+      }
 
       break;
     case "food_trash_bag_paper_01":
@@ -424,18 +443,20 @@ ticket_counter_slot_hint_func(var_0, var_1) {
   if(!isDefined(var_1.last_ticket_item_outlined)) {
     var_1.last_ticket_item_outlined = var_0.item;
 
-    if(self.num_tickets >= level.interactions[var_0.script_noteworthy].cost)
+    if(self.num_tickets >= level.interactions[var_0.script_noteworthy].cost) {
       var_1.last_ticket_item_outlined hudoutlineenableforclient(var_1, 3, 1, 0);
-    else
+    } else {
       var_1.last_ticket_item_outlined hudoutlineenableforclient(var_1, 1, 1, 0);
+    }
   } else if(var_1.last_ticket_item_outlined != var_0.item) {
     var_1.last_ticket_item_outlined hudoutlinedisableforclient(var_1);
     var_1.last_ticket_item_outlined = var_0.item;
 
-    if(self.num_tickets >= level.interactions[var_0.script_noteworthy].cost)
+    if(self.num_tickets >= level.interactions[var_0.script_noteworthy].cost) {
       var_1.last_ticket_item_outlined hudoutlineenableforclient(var_1, 3, 1, 0);
-    else
+    } else {
       var_1.last_ticket_item_outlined hudoutlineenableforclient(var_1, 1, 1, 0);
+    }
   }
 
   return var_0.item.hint_string;

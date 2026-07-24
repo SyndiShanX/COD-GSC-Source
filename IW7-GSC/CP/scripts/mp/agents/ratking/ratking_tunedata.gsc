@@ -4,8 +4,9 @@
 **********************************************************/
 
 setuptunedata() {
-  if(!isDefined(level.agenttunedata))
+  if(!isDefined(level.agenttunedata)) {
     level.agenttunedata = [];
+  }
 
   level.soloratkingtuning = ::setupsoloratkingtunedata;
   level.ratkingtuning = ::setupratkingtunedata;
@@ -88,8 +89,9 @@ setupratkingtunedata(var_0) {
   var_0.max_num_agents_to_allow_summon = 1;
   var_0.min_time_between_summon_rounds = 5000;
 
-  if(isDefined(level.rk_tuning_override))
+  if(isDefined(level.rk_tuning_override)) {
     [[level.rk_tuning_override]](var_0);
+  }
 }
 
 setupsoloratkingtunedata(var_0) {
@@ -167,8 +169,9 @@ setupsoloratkingtunedata(var_0) {
   var_0.max_num_agents_to_allow_summon = 0;
   var_0.min_time_between_summon_rounds = 3000;
 
-  if(isDefined(level.rk_solo_tuning_override))
+  if(isDefined(level.rk_solo_tuning_override)) {
     [[level.rk_solo_tuning_override]](var_0);
+  }
 }
 
 gettunedata() {

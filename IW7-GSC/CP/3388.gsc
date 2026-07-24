@@ -30,16 +30,18 @@ init_scrambler() {
         continue;
       }
 
-      if(var_7.script_noteworthy == "scrambler_clip")
+      if(var_7.script_noteworthy == "scrambler_clip") {
         var_4.clip = var_7;
+      }
     }
   }
 
   var_2[0]._id_1270F enablelinkTo();
   var_2[0]._id_1270F linkTo(var_2[0].body);
 
-  foreach(var_11 in var_2[0].rockets)
-  var_11 linkTo(var_2[0].body);
+  foreach(var_11 in var_2[0].rockets) {
+    var_11 linkTo(var_2[0].body);
+  }
 
   var_2[0].clip disconnectPaths();
 }
@@ -51,8 +53,9 @@ _id_EC9E() {
   for(;;) {
     var_2 = "power_on";
 
-    if(var_0)
+    if(var_0) {
       var_2 = level scripts\engine\utility::waittill_any_return_no_endon_death("power_on", self.power_area + " power_on", "power_off");
+    }
 
     if(var_2 != "power_off") {
       self.powered_on = 1;
@@ -99,8 +102,9 @@ use_scrambler(var_0, var_1) {
   var_4 = gettime();
   var_5 = var_4 + var_3 * 1000;
 
-  while(gettime() < var_5)
+  while(gettime() < var_5) {
     wait 1;
+  }
 
   var_2 setscriptablepartstate("fx", "idle");
   var_0.body setModel("zmb_escape_velocity_ride_center_activated");
@@ -139,10 +143,11 @@ kill_zombies(var_0, var_1) {
     }
 
     if(var_3.agent_type == "zombie_brute" || var_3.team == "allies") {
-      if(var_3.agent_type == "zombie_brute")
+      if(var_3.agent_type == "zombie_brute") {
         var_3 notify("no_path_to_targets");
-      else
+      } else {
         var_3 setvelocity(vectorNormalize(var_3.origin - self.body.origin) * 500);
+      }
 
       continue;
     }
@@ -155,18 +160,20 @@ kill_zombies(var_0, var_1) {
     var_0.trap_kills = var_0.trap_kills + 2;
 
     if(isDefined(var_1)) {
-      if(!isDefined(var_1.trapkills["trap_spin"]))
+      if(!isDefined(var_1.trapkills["trap_spin"])) {
         var_1.trapkills["trap_spin"] = 1;
-      else
+      } else {
         var_1.trapkills["trap_spin"]++;
+      }
 
       var_5 = ["kill_trap_generic", "kill_trap_spin"];
       var_1 thread scripts\cp\cp_vo::try_to_play_vo(scripts\engine\utility::random(var_5), "zmb_comment_vo", "highest", 10, 0, 0, 1, 10);
     }
 
     if(scripts\engine\utility::is_true(var_3.is_suicide_bomber)) {
-      if(!isDefined(level.spinner_trap_kills))
+      if(!isDefined(level.spinner_trap_kills)) {
         level.spinner_trap_kills = 0;
+      }
 
       level.spinner_trap_kills++;
       var_3 dodamage(var_3.health + 1000, var_4.origin, var_1, var_1, "MOD_UNKNOWN", "iw7_escapevelocity_zm");
@@ -188,8 +195,9 @@ fling_zombie(var_0, var_1) {
   self setvelocity(vectorNormalize(self.origin - var_0.origin) * 200 + (0, 0, 300));
   wait 0.1;
 
-  if(!isDefined(level.spinner_trap_kills))
+  if(!isDefined(level.spinner_trap_kills)) {
     level.spinner_trap_kills = 0;
+  }
 
   level.spinner_trap_kills++;
   self dodamage(self.health + 1000, var_0.origin, var_1, var_1, "MOD_UNKNOWN", "iw7_escapevelocity_zm");
@@ -234,8 +242,9 @@ _id_DF46(var_0) {
   self endon("death");
   var_0 waittill("stop_dmg");
 
-  if(isDefined(self.og_goalradius))
+  if(isDefined(self.og_goalradius)) {
     self.goalradius = self.og_goalradius;
+  }
 
   self.og_goalradius = undefined;
   self.scripted_mode = 0;

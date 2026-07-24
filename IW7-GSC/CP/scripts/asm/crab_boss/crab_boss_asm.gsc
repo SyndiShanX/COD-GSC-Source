@@ -6,8 +6,9 @@
 asminit(var_0, var_1, var_2, var_3) {
   scripts\asm\zombie\zombie::_id_13F9A(var_0, var_1, var_2, var_3);
 
-  if(!isDefined(level.crab_boss_arrival_data))
+  if(!isDefined(level.crab_boss_arrival_data)) {
     analyzecrabbossmovement();
+  }
 }
 
 analyzecrabbossmovement() {
@@ -78,17 +79,21 @@ shouldplayentranceanim(var_0, var_1, var_2, var_3) {
 }
 
 isanimdone(var_0, var_1, var_2, var_3) {
-  if(scripts\asm\asm::_id_232B(var_1, "end"))
+  if(scripts\asm\asm::_id_232B(var_1, "end")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "early_end"))
+  if(scripts\asm\asm::_id_232B(var_1, "early_end")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "finish_early"))
+  if(scripts\asm\asm::_id_232B(var_1, "finish_early")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "code_move"))
+  if(scripts\asm\asm::_id_232B(var_1, "code_move")) {
     return 1;
+  }
 
   return 0;
 }
@@ -111,10 +116,11 @@ isbeamdone(var_0, var_1, var_2, var_3) {
 launchegg(var_0, var_1, var_2) {
   var_3 = scripts\mp\agents\crab_boss\crab_boss_tunedata::gettunedata();
 
-  if(scripts\engine\utility::is_true(var_2))
+  if(scripts\engine\utility::is_true(var_2)) {
     scripts\cp\maps\cp_town\cp_town_crab_boss_escort::launch_egg_sac(var_0, var_1, var_3.egg_sac_spawn_fly_time, 0);
-  else
+  } else {
     scripts\cp\maps\cp_town\cp_town_crab_boss_escort::launch_egg_sac(var_0, var_1, var_3.egg_sac_spawn_fly_time, 1);
+  }
 }
 
 doroarbomb() {
@@ -138,8 +144,9 @@ doroarbombnearplayer(var_0, var_1) {
 getroarbombloc(var_0, var_1) {
   var_2 = [];
 
-  if(players_commit_to_the_run() && level.players.size == 1)
+  if(players_commit_to_the_run() && level.players.size == 1) {
     var_2[var_2.size] = var_0.origin;
+  }
 
   var_3 = vectortoangles(var_1.origin - var_0.origin);
   var_2[var_2.size] = gettargetbombloc(var_0.origin, var_3, 30 + randomintrange(-5, 5), adjust_roar_bomb_dist(145) + randomintrange(5, 10));
@@ -149,8 +156,9 @@ getroarbombloc(var_0, var_1) {
 }
 
 adjust_roar_bomb_dist(var_0) {
-  if(!players_commit_to_the_run())
+  if(!players_commit_to_the_run()) {
     return 1000;
+  }
 
   var_1 = 35;
   var_2 = 0;
@@ -224,8 +232,9 @@ stopspawnsovertime() {
 _id_5AAE() {
   var_0 = ["j_thumb_ri_3", "j_thumb_le_3"];
 
-  foreach(var_2 in var_0)
-  level thread trycrabbosssmashattack(var_2, self);
+  foreach(var_2 in var_0) {
+    level thread trycrabbosssmashattack(var_2, self);
+  }
 }
 
 trycrabbosssmashattack(var_0, var_1) {
@@ -247,16 +256,18 @@ trycrabbosssmashattack(var_0, var_1) {
   for(var_11 = 0; var_11 <= var_3; var_11++) {
     var_12 = scripts\engine\utility::drop_to_ground(var_1.origin + anglesToForward(var_10) * var_4 * var_11, 1000, -3000);
 
-    if(var_11 == 0)
+    if(var_11 == 0) {
       playFX(level._effect["claw_trail"], var_12);
-    else
+    } else {
       playFX(level._effect["claw_trail_sand"], var_12);
+    }
 
     earthquake(0.8, 1, var_12, var_6);
 
     foreach(var_14 in level.players) {
-      if(distancesquared(var_14.origin, var_12) < var_6 * var_6)
+      if(distancesquared(var_14.origin, var_12) < var_6 * var_6) {
         var_14 dodamage(var_7, var_12);
+      }
     }
 
     wait(var_5);
@@ -411,8 +422,9 @@ calculatetargetpos() {
 getbombingradius() {
   var_0 = 100;
 
-  if(isDefined(self.bombing_radius))
+  if(isDefined(self.bombing_radius)) {
     return self.bombing_radius;
+  }
 
   return var_0;
 }
@@ -420,8 +432,9 @@ getbombingradius() {
 getnumofbombs() {
   var_0 = 10;
 
-  if(isDefined(self.num_of_bombs))
+  if(isDefined(self.num_of_bombs)) {
     return self.num_of_bombs;
+  }
 
   return var_0;
 }
@@ -449,8 +462,9 @@ dobeamattackposition(var_0, var_1) {
   earthquake(0.7, 1, var_1, var_3);
 
   foreach(var_10 in level.players) {
-    if(distancesquared(var_10.origin, var_1) < var_3 * var_3)
+    if(distancesquared(var_10.origin, var_1) < var_3 * var_3) {
       var_10 dodamage(var_4, var_1);
+    }
   }
 }
 
@@ -546,8 +560,9 @@ dosubmergebomb_asm(var_0) {
   var_1 = geteggsaclaunchpos();
   var_2 = 0;
 
-  if(isDefined(self.submergebombspawnindex) && scripts\engine\utility::array_contains(self.submergebombspawnindex, self.numofbombrequested))
+  if(isDefined(self.submergebombspawnindex) && scripts\engine\utility::array_contains(self.submergebombspawnindex, self.numofbombrequested)) {
     var_2 = 1;
+  }
 
   thread launchonebomb(var_1, var_2);
 }
@@ -594,8 +609,9 @@ launchonebomb(var_0, var_1) {
 }
 
 geteggsaclaunchpos() {
-  if(!isDefined(self.eggsaclaunchtagcounter))
+  if(!isDefined(self.eggsaclaunchtagcounter)) {
     self.eggsaclaunchtagcounter = 0;
+  }
 
   var_0 = scripts\mp\agents\crab_boss\crab_boss_tunedata::gettunedata();
   var_1 = var_0.egg_sack_launching_tags;
@@ -605,23 +621,27 @@ geteggsaclaunchpos() {
 }
 
 shouldabortaction(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.requested_action))
+  if(!isDefined(self.requested_action)) {
     return 1;
+  }
 
   if(isDefined(var_3)) {
-    if(self.requested_action != var_3)
+    if(self.requested_action != var_3) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 shoulddoaction(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.requested_action))
+  if(!isDefined(self.requested_action)) {
     return 0;
+  }
 
-  if(self.requested_action == var_2)
+  if(self.requested_action == var_2) {
     return 1;
+  }
 
   return 0;
 }
@@ -634,8 +654,9 @@ playanimwithplaybackrate(var_0, var_1, var_2, var_3) {
 }
 
 chooseidleanim(var_0, var_1, var_2) {
-  if(scripts\engine\utility::is_true(self.blookatplayer))
+  if(scripts\engine\utility::is_true(self.blookatplayer)) {
     return 0;
+  }
 
   return scripts\asm\asm::asm_lookupanimfromalias(var_1, "idle");
 }
@@ -645,14 +666,16 @@ choosecrabbossturnanim(var_0, var_1, var_2) {
   var_4 = abs(self.desiredyaw);
 
   if(self.desiredyaw < 0) {
-    if(var_4 < 67.5)
+    if(var_4 < 67.5) {
       var_3 = 9;
-    else
+    } else {
       var_3 = 6;
+    }
   } else if(var_4 < 67.5)
     var_3 = 7;
-  else
+  else {
     var_3 = 4;
+  }
 
   var_5 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
   var_6 = self getanimentry(var_1, var_5);
@@ -663,8 +686,9 @@ choosecrabbossturnanim(var_0, var_1, var_2) {
 }
 
 shouldturn(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.desiredyaw))
+  if(!isDefined(self.desiredyaw)) {
     return 0;
+  }
 
   return 1;
 }
@@ -689,8 +713,9 @@ playcrabbossturnanim(var_0, var_1, var_2, var_3) {
   var_5 = self getanimentry(var_1, var_4);
   var_6 = getanimlength(var_5);
 
-  if(isDefined(self.additionalyaw))
+  if(isDefined(self.additionalyaw)) {
     thread handleadditionalyaw(var_1, ceil(var_6 * 20));
+  }
 
   return scripts\asm\asm_mp::_id_2365(var_0, var_1, var_2, var_4, 1);
 }
@@ -713,8 +738,9 @@ loophealanim(var_0, var_1, var_2, var_3) {
 }
 
 isdonehealing(var_0, var_1, var_2, var_3) {
-  if(!scripts\engine\utility::is_true(self.bhealing))
+  if(!scripts\engine\utility::is_true(self.bhealing)) {
     return 1;
+  }
 
   return 0;
 }
@@ -737,8 +763,9 @@ playmovearrival(var_0, var_1, var_2, var_3) {
 applyallmotiontowards(var_0, var_1, var_2, var_3) {
   self endon(var_0 + "_finished");
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1;
+  }
 
   var_4 = 0;
 

@@ -6,13 +6,14 @@
 zombie_cop_init() {
   registerscriptedagent();
 
-  if(!isDefined(level.cop_spawn_percent))
+  if(!isDefined(level.cop_spawn_percent)) {
     level.cop_spawn_percent = 5;
+  }
 
-  level.agent_funcs["zombie_cop"]["on_damaged"] = scripts\cp\agents\gametype_zombie::onzombiedamaged;
-  level.agent_funcs["zombie_cop"]["gametype_on_damage_finished"] = scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
-  level.agent_funcs["zombie_cop"]["gametype_on_killed"] = scripts\cp\agents\gametype_zombie::onzombiekilled;
-  level.movemodefunc["zombie_cop"] = scripts\cp\agents\gametype_zombie::run_if_last_zombie;
+  level.agent_funcs["zombie_cop"]["on_damaged"] = ::scripts\cp\agents\gametype_zombie::onzombiedamaged;
+  level.agent_funcs["zombie_cop"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+  level.agent_funcs["zombie_cop"]["gametype_on_killed"] = ::scripts\cp\agents\gametype_zombie::onzombiekilled;
+  level.movemodefunc["zombie_cop"] = ::scripts\cp\agents\gametype_zombie::run_if_last_zombie;
 }
 
 registerscriptedagent() {
@@ -26,13 +27,14 @@ registerscriptedagent() {
 _id_FAB0() {
   level endon("game_ended");
 
-  if(!isDefined(level.agent_definition))
+  if(!isDefined(level.agent_definition)) {
     level waittill("scripted_agents_initialized");
+  }
 
   level.agent_definition["zombie_cop"]["setup_func"] = ::setupagent;
   level.agent_definition["zombie_cop"]["setup_model_func"] = ::_id_FACE;
-  level.agent_funcs["zombie_cop"]["on_damaged_finished"] = scripts\mp\agents\zombie\zombie_agent::onzombiedamagefinished;
-  level.agent_funcs["zombie_cop"]["on_killed"] = scripts\mp\agents\zombie\zombie_agent::onzombiekilled;
+  level.agent_funcs["zombie_cop"]["on_damaged_finished"] = ::scripts\mp\agents\zombie\zombie_agent::onzombiedamagefinished;
+  level.agent_funcs["zombie_cop"]["on_killed"] = ::scripts\mp\agents\zombie\zombie_agent::onzombiekilled;
   level._id_1094E["zombie_cop"] = ::_id_FF94;
 }
 
@@ -62,10 +64,11 @@ _id_FACE(var_0) {
 _id_AEB0() {}
 
 _id_FF94() {
-  if(level.wave_num >= 20)
+  if(level.wave_num >= 20) {
     var_0 = min(level.wave_num - 10, 20);
-  else
+  } else {
     var_0 = level.cop_spawn_percent;
+  }
 
   var_1 = 5;
   var_2 = "zombie_cop";
@@ -81,8 +84,9 @@ _id_FF94() {
   }
 
   if(level.wave_num > var_1) {
-    if(randomint(100) < var_0)
+    if(randomint(100) < var_0) {
       return var_2;
+    }
 
     return undefined;
   }

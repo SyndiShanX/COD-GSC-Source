@@ -15,8 +15,9 @@ init_all_debris_and_door_positions() {
 _id_F945(var_0) {
   var_1 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
 
-  foreach(var_3 in var_1)
-  set_nonstick(var_3);
+  foreach(var_3 in var_1) {
+    set_nonstick(var_3);
+  }
 }
 
 set_nonstick(var_0) {
@@ -42,22 +43,25 @@ _id_102F3(var_0, var_1) {
 
   scripts\cp\cp_interaction::disable_linked_interactions(var_0);
 
-  if(level.players.size > 1)
+  if(level.players.size > 1) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("purchase_area", "zmb_comment_vo", "low", 10, 0, 0, 1, 40);
-  else
+  } else {
     level.players[0] thread scripts\cp\cp_vo::try_to_play_vo("purchase_area", "zmb_comment_vo", "low", 10, 0, 1, 1, 40);
+  }
 }
 
 init_sliding_power_doors() {
   var_0 = scripts\engine\utility::getStructArray("power_door_sliding", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 thread sliding_power_door();
+  foreach(var_2 in var_0) {
+    var_2 thread sliding_power_door();
+  }
 }
 
 sliding_power_door() {
-  if(scripts\engine\utility::is_true(self.requires_power))
+  if(scripts\engine\utility::is_true(self.requires_power)) {
     level scripts\engine\utility::waittill_any("power_on", self.power_area + " power_on");
+  }
 
   self.powered_on = 1;
   playsoundatpos(self.origin, "zmb_sliding_door_open");
@@ -104,8 +108,9 @@ clear_debris(var_0, var_1) {
 
     if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == "rave_objects") {
       if(isDefined(var_4.spawnedfx)) {
-        foreach(var_6 in var_4.spawnedfx)
-        var_6 delete();
+        foreach(var_6 in var_4.spawnedfx) {
+          var_6 delete();
+        }
       }
 
       var_4 delete();
@@ -115,8 +120,9 @@ clear_debris(var_0, var_1) {
     var_4 setscriptablepartstate("default", "hide");
   }
 
-  if(isDefined(level.purchase_area_vo))
+  if(isDefined(level.purchase_area_vo)) {
     thread[[level.purchase_area_vo]](var_0.script_area, var_1);
+  }
 }
 
 rave_trap_door() {
@@ -142,8 +148,9 @@ rave_trap_door() {
 init_rave_door_buys() {
   var_0 = getEntArray("rave_door_buy", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread rave_door_buy();
+  foreach(var_2 in var_0) {
+    var_2 thread rave_door_buy();
+  }
 }
 
 show_fail_hint() {

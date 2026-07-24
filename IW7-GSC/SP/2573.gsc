@@ -6,8 +6,9 @@
 _id_A00E(var_0, var_1) {
   var_2 = var_1 * var_1;
 
-  if(distancesquared(self.origin, self.enemy.origin) < var_2)
+  if(distancesquared(self.origin, self.enemy.origin) < var_2) {
     return anim.success;
+  }
 
   return anim.failure;
 }
@@ -17,8 +18,9 @@ _id_2529(var_0) {
 }
 
 _id_8C3A(var_0) {
-  if(isalive(self.enemy))
+  if(isalive(self.enemy)) {
     return anim.success;
+  }
 
   return anim.failure;
 }
@@ -34,14 +36,17 @@ _id_FFBE(var_0) {
   var_3 = vectordot(var_1, var_2);
   var_4 = distancesquared(self.enemy.origin, self.origin);
 
-  if(var_4 < 16000000 && var_3 < 0.8)
+  if(var_4 < 16000000 && var_3 < 0.8) {
     return anim.failure;
+  }
 
-  if(_id_9D6A(var_0) == anim.success && isDefined(self._id_DB08) && self._id_DB08 > 20.0)
+  if(_id_9D6A(var_0) == anim.success && isDefined(self._id_DB08) && self._id_DB08 > 20.0) {
     return anim.failure;
+  }
 
-  if(var_3 < 0.3)
+  if(var_3 < 0.3) {
     return anim.failure;
+  }
 
   return anim.success;
 }
@@ -85,10 +90,11 @@ _id_7DEB() {
 _id_371B(var_0) {
   var_1 = undefined;
 
-  if(isPlayer(var_0))
+  if(isPlayer(var_0)) {
     var_1 = var_0 _id_7DEB();
-  else
+  } else {
     var_1 = anglesToForward(self.angles);
+  }
 
   var_1 = _id_1815(var_1, 75);
   var_2 = randomfloatrange(7500.0, 12500.0);
@@ -139,18 +145,21 @@ _id_F6C2(var_0, var_1) {
 _id_7F23(var_0) {}
 
 _id_7E02(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 20000;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1500;
+  }
 
   var_2 = undefined;
 
-  if(isDefined(self._blackboard._id_10A4D) && isDefined(self._blackboard._id_10A4A))
+  if(isDefined(self._blackboard._id_10A4D) && isDefined(self._blackboard._id_10A4A)) {
     var_2 = self _meth_8486(var_0, var_1, self._blackboard._id_10A4D[self._blackboard._id_10A4A]);
-  else
+  } else {
     var_2 = self _meth_8486(var_0, var_1);
+  }
 
   if(!isDefined(var_2) && var_0 < 100000) {
     var_0 = 100000;
@@ -170,25 +179,28 @@ _id_3713(var_0) {
     var_3 = _id_0C21::_id_814A();
     var_4 = randomfloatrange(2.0, 4.0);
 
-    if(isaircraft(var_0) && isDefined(var_0.spaceship_vel))
+    if(isaircraft(var_0) && isDefined(var_0.spaceship_vel)) {
       var_5 = var_0.origin + var_0.spaceship_vel * var_4;
-    else
+    } else {
       var_5 = var_0.origin;
+    }
 
     var_6 = getclosestpointonnavmesh3d(var_5);
     var_7 = (512, 0, 0);
     var_7 = rotatevector(var_7, var_0.angles);
     var_8 = navtrace3d(var_6, var_6 + var_7, 1);
 
-    if(var_8["fraction"] < 0.5)
+    if(var_8["fraction"] < 0.5) {
       return var_0.origin;
+    }
 
     var_9 = 3000.0;
     var_10 = var_8["position"] - self.origin;
     var_11 = length(var_10);
 
-    if(var_11 < var_9)
+    if(var_11 < var_9) {
       return self.origin;
+    }
 
     var_12 = var_10 * ((var_11 - var_9) / var_11) + self.origin;
     var_12 = _id_78C3(var_12, 1200);
@@ -199,8 +211,9 @@ _id_3713(var_0) {
 _id_3714(var_0) {
   var_1 = undefined;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return undefined;
+  }
 
   var_2 = 5;
   var_3 = 30;
@@ -261,11 +274,13 @@ _id_78C3(var_0, var_1) {
 _id_13D94(var_0) {
   var_1 = distancesquared(self.origin, var_0.origin);
 
-  if(var_1 > 144000000)
+  if(var_1 > 144000000) {
     return 0;
+  }
 
-  if(var_1 < 16000000)
+  if(var_1 < 16000000) {
     return 0;
+  }
 
   return 1;
 }
@@ -273,11 +288,13 @@ _id_13D94(var_0) {
 _id_13D95(var_0) {
   var_1 = distancesquared(self.origin, var_0.origin);
 
-  if(var_1 > 256000000)
+  if(var_1 > 256000000) {
     return 0;
+  }
 
-  if(var_1 < 81000000)
+  if(var_1 < 81000000) {
     return 0;
+  }
 
   return 1;
 }
@@ -324,9 +341,9 @@ _id_E7B7(var_0) {
   var_4 = vectorNormalize(self.spaceship_vel);
   var_5 = vectordot(var_3, var_4);
 
-  if(var_5 > 0)
+  if(var_5 > 0) {
     var_6 = scripts\sp\math::_id_6A8E(1.9, 0.7, var_5);
-  else {
+  } else {
     var_5 = var_5 * -1;
 
     if(var_2 < 9000) {
@@ -352,18 +369,21 @@ _id_10029(var_0, var_1) {
   var_5 = vectordot(var_3, var_4);
   var_6 = _id_9D6A(var_0);
 
-  if(var_2 && var_5 > 0.7 && !var_6)
+  if(var_2 && var_5 > 0.7 && !var_6) {
     return anim.success;
+  }
 
   return anim.failure;
 }
 
 _id_FFD6(var_0, var_1) {
-  if(!isalive(self.enemy))
+  if(!isalive(self.enemy)) {
     return anim.failure;
+  }
 
-  if(_id_10027(var_0) == anim.success || _id_10015(var_0) == anim.success || _id_8C2C(var_0) == anim.success)
+  if(_id_10027(var_0) == anim.success || _id_10015(var_0) == anim.success || _id_8C2C(var_0) == anim.success) {
     return anim.failure;
+  }
 
   if(!self._blackboard._id_2521) {
     var_2 = distancesquared(self.origin, self.enemy.origin);
@@ -375,52 +395,61 @@ _id_FFD6(var_0, var_1) {
   }
 
   if(self._blackboard._id_2521) {
-    if(self._blackboard._id_2531 + 4000 < gettime())
+    if(self._blackboard._id_2531 + 4000 < gettime()) {
       return anim.failure;
+    }
 
-    if(!_id_13D94(self.enemy))
+    if(!_id_13D94(self.enemy)) {
       return anim.failure;
+    }
 
-    if(vectordot(anglesToForward(self.angles), self.enemy.origin - self.origin) < 0.0)
+    if(vectordot(anglesToForward(self.angles), self.enemy.origin - self.origin) < 0.0) {
       return anim.failure;
+    }
   }
 
   return anim.success;
 }
 
 _id_1003E(var_0, var_1) {
-  if(!isalive(self.enemy))
+  if(!isalive(self.enemy)) {
     return anim.failure;
+  }
 
   var_2 = anglesToForward(self.enemy.angles);
   var_3 = vectorNormalize(self.enemy.origin - self.origin);
 
-  if(vectordot(var_2, var_3) < 0)
+  if(vectordot(var_2, var_3) < 0) {
     return anim.failure;
+  }
 
   var_4 = anglesToForward(self.angles);
 
-  if(vectordot(var_4, var_3) < 0.7)
+  if(vectordot(var_4, var_3) < 0.7) {
     return anim.failure;
+  }
 
   return anim.success;
 }
 
 _id_10E66(var_0, var_1) {
-  if(isaircraft(self.enemy))
+  if(isaircraft(self.enemy)) {
     _id_10E63(self.enemy);
+  }
 
   return anim.success;
 }
 
 _id_E7B8(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = var_1;
-  else
+  } else {
     var_2 = 1;
+  }
 
-  if(isDefined(level._id_D127))
+  if(isDefined(level._id_D127)) {
     _id_E7B7(var_2);
+  }
 
   return anim.success;
 }
@@ -431,8 +460,9 @@ _id_419A(var_0, var_1) {
 }
 
 _id_C936(var_0, var_1) {
-  if(!isalive(self.enemy))
+  if(!isalive(self.enemy)) {
     return anim.success;
+  }
 
   self._blackboard._id_2CCF = 1;
   return anim.success;
@@ -443,23 +473,26 @@ _id_6CAB(var_0, var_1) {
 
   switch (var_1) {
     case "attack":
-      if(self.bt._id_BFA2 > gettime())
+      if(self.bt._id_BFA2 > gettime()) {
         return anim.success;
+      }
 
       self.enemy._id_A941 = gettime();
       self.bt._id_BFA2 = gettime() + 400;
       var_2 = _id_370C(self.enemy);
       break;
     case "retreat":
-      if(self.bt._id_BFA2 > gettime())
+      if(self.bt._id_BFA2 > gettime()) {
         return anim.success;
+      }
 
       self.bt._id_BFA2 = gettime() + 400;
       var_2 = _id_371B(self.enemy);
       break;
     case "hover_approach":
-      if(self.bt._id_BFA2 > gettime())
+      if(self.bt._id_BFA2 > gettime()) {
         return anim.success;
+      }
 
       self.bt._id_BFA2 = gettime() + 400;
       var_2 = _id_3713(self.enemy);
@@ -467,8 +500,9 @@ _id_6CAB(var_0, var_1) {
     case "escape":
       self.bt._id_3F28 = _id_7E02();
 
-      if(!isDefined(self.bt._id_3F28))
+      if(!isDefined(self.bt._id_3F28)) {
         return anim.failure;
+      }
     case "spline":
       var_2 = getcsplinepointposition(self.bt._id_3F28["spline"], self.bt._id_3F28["node"]);
       self setneargoalnotifydist(2048);
@@ -482,8 +516,9 @@ _id_6CAB(var_0, var_1) {
 }
 
 _id_9D44(var_0) {
-  if(self._blackboard._id_EF72)
+  if(self._blackboard._id_EF72) {
     return anim.success;
+  }
 
   return anim.failure;
 }
@@ -501,8 +536,9 @@ _id_136C1(var_0) {
 }
 
 _id_136C0(var_0) {
-  if(self.bt.instancedata[var_0]["wait_finished"] == 1)
+  if(self.bt.instancedata[var_0]["wait_finished"] == 1) {
     return anim.success;
+  }
 
   return anim.running;
 }
@@ -523,11 +559,13 @@ _id_11703(var_0) {
 }
 
 _id_9D6A(var_0) {
-  if(isalive(self.bt._id_DB05) && !isDefined(self._id_932F))
+  if(isalive(self.bt._id_DB05) && !isDefined(self._id_932F)) {
     return anim.success;
+  }
 
-  if(isDefined(self._id_DB08) && self._id_DB08 > 20.0)
+  if(isDefined(self._id_DB08) && self._id_DB08 > 20.0) {
     return anim.success;
+  }
 
   return anim.failure;
 }
@@ -535,8 +573,9 @@ _id_9D6A(var_0) {
 _id_F85B(var_0, var_1) {
   var_2 = var_1;
 
-  if(isDefined(self._blackboard._id_10A4D[var_2]))
+  if(isDefined(self._blackboard._id_10A4D[var_2])) {
     self._blackboard._id_10A4A = var_2;
+  }
 
   return anim.success;
 }
@@ -544,23 +583,27 @@ _id_F85B(var_0, var_1) {
 _id_9CE7(var_0) {
   var_1 = 0;
 
-  if(isDefined(var_0._id_A941))
+  if(isDefined(var_0._id_A941)) {
     var_1 = var_0._id_A941;
+  }
 
   return var_1 + 3500 < gettime();
 }
 
 _id_B4DB(var_0) {
-  if(!isalive(self.enemy))
+  if(!isalive(self.enemy)) {
     return anim.failure;
+  }
 
-  if(self._blackboard._id_C97C)
+  if(self._blackboard._id_C97C) {
     return anim.failure;
+  }
 
   var_1 = ispointonnavmesh3d(self.origin, self);
 
-  if(!var_1)
+  if(!var_1) {
     return anim.failure;
+  }
 
   var_2 = isPlayer(self.enemy.owner);
   var_3 = _id_9CE7(self.enemy);
@@ -591,10 +634,11 @@ _id_724A(var_0) {
     self _meth_847B(1.0, getcsplinepointposition(self.bt._id_3F28["spline"], self.bt._id_3F28["node"]));
 
     if(!self._blackboard._id_2CCD) {
-      if(isDefined(self.bt._id_DB05))
+      if(isDefined(self.bt._id_DB05)) {
         _id_0C21::_id_20DE(1.25);
-      else
+      } else {
         _id_0C21::_id_20DE(1.0);
+      }
     }
 
     self.bt.instancedata[var_0] = [];
@@ -603,8 +647,9 @@ _id_724A(var_0) {
 }
 
 _id_7248(var_0) {
-  if(!isDefined(self.bt._id_3F28) || self.bt.instancedata[var_0]["new_spline"])
+  if(!isDefined(self.bt._id_3F28) || self.bt.instancedata[var_0]["new_spline"]) {
     return anim.success;
+  }
 
   var_1 = getcsplinepointcount(self.bt._id_3F28["spline"]);
   var_2 = distancesquared(self.origin, getcsplinepointposition(self.bt._id_3F28["spline"], var_1 - 1));
@@ -619,41 +664,49 @@ _id_7248(var_0) {
 }
 
 _id_D3B2(var_0) {
-  if(!scripts\sp\utility::_id_D123())
+  if(!scripts\sp\utility::_id_D123()) {
     return anim.failure;
+  }
 
   var_1 = level.player _meth_848A();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = var_1[0];
-  else
+  } else {
     return anim.failure;
+  }
 
-  if(var_2 != self)
+  if(var_2 != self) {
     return anim.failure;
+  }
 
-  if(!level._id_D127._id_4C15._id_9DF4)
+  if(!level._id_D127._id_4C15._id_9DF4) {
     return anim.failure;
+  }
 
   return anim.success;
 }
 
 _id_D3B5(var_0) {
-  if(!scripts\sp\utility::_id_D123())
+  if(!scripts\sp\utility::_id_D123()) {
     return anim.failure;
+  }
 
   var_1 = level.player _meth_848A();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = var_1[0];
-  else
+  } else {
     return anim.failure;
+  }
 
-  if(var_2 != self)
+  if(var_2 != self) {
     return anim.failure;
+  }
 
-  if(var_1[1] <= 0.01)
+  if(var_1[1] <= 0.01) {
     return anim.failure;
+  }
 
   return anim.success;
 }
@@ -661,17 +714,21 @@ _id_D3B5(var_0) {
 _id_1289A(var_0) {
   var_1 = 0;
 
-  if(isDefined(self._id_67C7) && self._id_67C7)
+  if(isDefined(self._id_67C7) && self._id_67C7) {
     return anim.success;
+  }
 
-  if(_id_A533() == anim.success)
+  if(_id_A533() == anim.success) {
     var_1 = 1;
+  }
 
-  if(_id_D3B2() == anim.success)
+  if(_id_D3B2() == anim.success) {
     var_1 = 1;
+  }
 
-  if(var_1)
+  if(var_1) {
     thread _id_0C1B::_id_12899();
+  }
 
   return anim.success;
 }
@@ -682,23 +739,26 @@ _id_724B(var_0) {
 }
 
 _id_8C2C(var_0) {
-  if(isDefined(self.bt._id_3F28))
+  if(isDefined(self.bt._id_3F28)) {
     return anim.success;
+  }
 
   return anim.failure;
 }
 
 _id_10017(var_0) {
-  if(!isDefined(self.bt._id_3F28))
+  if(!isDefined(self.bt._id_3F28)) {
     return anim.failure;
+  }
 
   var_1 = _id_0BDC::_id_1996();
   var_2 = var_1.speed;
   var_3 = 1.0 * scripts\engine\utility::mph_to_ips(var_2);
   var_4 = distancesquared(self.origin, getcsplinepointposition(self.bt._id_3F28["spline"], self.bt._id_3F28["node"]));
 
-  if(var_4 < var_3 * var_3)
+  if(var_4 < var_3 * var_3) {
     return anim.success;
+  }
 
   return anim.failure;
 }
@@ -706,11 +766,13 @@ _id_10017(var_0) {
 _id_10015(var_0) {
   var_1 = self._blackboard._id_7235.target;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return anim.failure;
+  }
 
-  if(issentient(var_1) && !isalive(var_1))
+  if(issentient(var_1) && !isalive(var_1)) {
     return anim.failure;
+  }
 
   return anim.success;
 }
@@ -719,26 +781,29 @@ _id_7221(var_0) {
   if(!self._blackboard._id_7235._id_7237) {
     self notify("in_follow_position");
 
-    if(isDefined(self._blackboard._id_7235._id_98F9))
+    if(isDefined(self._blackboard._id_7235._id_98F9)) {
       self _meth_848D(self._blackboard._id_7235.target, self._blackboard._id_7235.offset, 1.0, self._blackboard._id_7235._id_98F9, self._blackboard._id_7235._id_98FE, self._blackboard._id_7235._id_C760, self._blackboard._id_7235._id_C765);
-    else
+    } else {
       self _meth_848D(self._blackboard._id_7235.target, self._blackboard._id_7235.offset, 1.0);
+    }
 
     self._blackboard._id_7235._id_7237 = 1;
   }
 }
 
 _id_7231(var_0) {
-  if(!isalive(self._blackboard._id_7235.target) && !self._blackboard.animscriptedactive)
+  if(!isalive(self._blackboard._id_7235.target) && !self._blackboard.animscriptedactive) {
     self _meth_8455(self.origin, 1);
+  }
 
   self._blackboard._id_7235._id_7237 = 0;
 }
 
 follow(var_0) {
   if(isalive(self._blackboard._id_7235.target) && self._blackboard._id_7235._id_7237) {
-    if(isDefined(self._blackboard._id_7235.target.bt) && self._blackboard._id_7235.target.bt._id_673F)
+    if(isDefined(self._blackboard._id_7235.target.bt) && self._blackboard._id_7235.target.bt._id_673F) {
       return anim.success;
+    }
 
     var_1 = self _meth_8493();
     return anim.running;
@@ -762,8 +827,9 @@ _id_10016(var_0) {
   var_4 = var_3 * 1.0;
   var_4 = max(16000000, var_4);
 
-  if(distancesquared(self.origin, var_1) > var_4)
+  if(distancesquared(self.origin, var_1) > var_4) {
     return anim.success;
+  }
 
   return anim.failure;
 }
@@ -772,8 +838,9 @@ _id_A299(var_0, var_1) {
   if(isDefined(self._blackboard._id_C705)) {
     var_0 = self._blackboard._id_C705;
 
-    if(isDefined(self._blackboard._id_C702))
+    if(isDefined(self._blackboard._id_C702)) {
       var_1 = self._blackboard._id_C702;
+    }
   }
 
   self _meth_8457(var_0, var_1);
@@ -804,10 +871,11 @@ _id_7232(var_0) {
       self _meth_8459("always");
     }
 
-    if(var_9 > 0 && var_8 * 1.5 > var_6)
+    if(var_9 > 0 && var_8 * 1.5 > var_6) {
       self _meth_8459("always");
-    else
+    } else {
       self _meth_8459("never");
+    }
 
     self _meth_845F(var_6);
   }
@@ -826,45 +894,54 @@ _id_7E67(var_0) {
 }
 
 _id_10027(var_0) {
-  if(self._blackboard._id_90F3)
+  if(self._blackboard._id_90F3) {
     return anim.success;
+  }
 
-  if(_id_D3B5())
+  if(_id_D3B5()) {
     return anim.failure;
+  }
 
-  if(isalive(self._blackboard._id_90EE) && isalive(self.enemy) && self._blackboard._id_90EE == self.enemy)
+  if(isalive(self._blackboard._id_90EE) && isalive(self.enemy) && self._blackboard._id_90EE == self.enemy) {
     return anim.success;
+  }
 
   return anim.failure;
 }
 
 _id_10075(var_0) {
-  if(!isalive(self.enemy))
+  if(!isalive(self.enemy)) {
     return anim.failure;
+  }
 
-  if(!isDefined(self._blackboard._id_90DC))
+  if(!isDefined(self._blackboard._id_90DC)) {
     return anim.success;
+  }
 
-  if(!isalive(self._blackboard._id_90DA) || self.enemy != self._blackboard._id_90DA)
+  if(!isalive(self._blackboard._id_90DA) || self.enemy != self._blackboard._id_90DA) {
     return anim.success;
+  }
 
-  if(distancesquared(self._blackboard._id_90DB, self._blackboard._id_90DA.origin) > 1000000)
+  if(distancesquared(self._blackboard._id_90DB, self._blackboard._id_90DA.origin) > 1000000) {
     return anim.success;
+  }
 
   return anim.failure;
 }
 
 _id_F748(var_0) {
-  if(self.bt._id_BFA2 > gettime())
+  if(self.bt._id_BFA2 > gettime()) {
     return anim.success;
+  }
 
   self.bt._id_BFA2 = gettime() + 400;
   self._blackboard._id_90DB = self.enemy.origin;
   self._blackboard._id_90DA = self.enemy;
   var_1 = _id_3713(self.enemy);
 
-  if(distancesquared(self.origin, var_1) <= 9000000)
+  if(distancesquared(self.origin, var_1) <= 9000000) {
     return anim.failure;
+  }
 
   self._blackboard._id_90DC = var_1;
   self setneargoalnotifydist(3000);
@@ -881,14 +958,16 @@ _id_41B6(var_0) {
 }
 
 _id_10028(var_0) {
-  if(!isalive(self.enemy))
+  if(!isalive(self.enemy)) {
     return anim.failure;
+  }
 
   var_1 = distancesquared(self.origin, self.enemy.origin);
   var_2 = distance(self.origin, self.enemy.origin);
 
-  if(var_1 > 100000000)
+  if(var_1 > 100000000) {
     return anim.success;
+  }
 
   return anim.failure;
 }
@@ -897,8 +976,9 @@ _id_1002B(var_0) {
   var_1 = 2000;
   var_2 = 4000;
 
-  if(!isalive(self.enemy))
+  if(!isalive(self.enemy)) {
     return anim.failure;
+  }
 
   var_3 = level.player _meth_8473();
 
@@ -949,8 +1029,9 @@ _id_9E00(var_0) {
   var_1 = self _meth_8493();
   var_2 = var_1 == "follow" && self._blackboard._id_7235._id_7237;
 
-  if(var_2)
+  if(var_2) {
     return anim.success;
+  }
 
   return anim.failure;
 }
@@ -960,109 +1041,128 @@ _id_61C4(var_0) {
 }
 
 _id_9E77(var_0) {
-  if(isaircraft(self._blackboard._id_7235.target) && self._blackboard._id_7235.target.spaceship_mode == "hover")
+  if(isaircraft(self._blackboard._id_7235.target) && self._blackboard._id_7235.target.spaceship_mode == "hover") {
     return anim.success;
+  }
 
   return anim.failure;
 }
 
 _id_9DE3(var_0) {
-  if(self.bt._id_673F)
+  if(self.bt._id_673F) {
     return anim.success;
-  else
+  } else {
     return anim.failure;
+  }
 }
 
 _id_9F39() {
-  if(self.bt._id_EF78)
+  if(self.bt._id_EF78) {
     return anim.success;
-  else
+  } else {
     return anim.failure;
+  }
 }
 
 _id_9F74(var_0) {
-  if(!isDefined(self._id_A420))
+  if(!isDefined(self._id_A420)) {
     return anim.failure;
+  }
 
   foreach(var_2 in self._id_A420) {
-    if(isalive(var_2) && var_2 _id_9FBB() == anim.success)
+    if(isalive(var_2) && var_2 _id_9FBB() == anim.success) {
       return anim.success;
+    }
   }
 
   return anim.failure;
 }
 
 _id_9FBB(var_0) {
-  if(self.bt.attackerdata._id_24D3 && _id_9FD0() == anim.success)
+  if(self.bt.attackerdata._id_24D3 && _id_9FD0() == anim.success) {
     return anim.success;
+  }
 
   return anim.failure;
 }
 
 _id_9EE9(var_0) {
-  if(self.bt._id_5870)
+  if(self.bt._id_5870) {
     return anim.success;
+  }
 
   return anim.failure;
 }
 
 _id_A533(var_0) {
-  if(self.bt._id_A533)
+  if(self.bt._id_A533) {
     return anim.success;
+  }
 
   return anim.failure;
 }
 
 _id_9E76(var_0) {
-  if(isaircraft(self._blackboard._id_7235.target) && isDefined(self._blackboard._id_7235.target.bt) && self._blackboard._id_7235.target.bt._id_673F)
+  if(isaircraft(self._blackboard._id_7235.target) && isDefined(self._blackboard._id_7235.target.bt) && self._blackboard._id_7235.target.bt._id_673F) {
     return anim.success;
+  }
 
   return anim.failure;
 }
 
 _id_1000C(var_0) {
-  if(_id_9DE3(var_0) == anim.success && _id_673D() == anim.success)
+  if(_id_9DE3(var_0) == anim.success && _id_673D() == anim.success) {
     return anim.success;
+  }
 
-  if(_id_9FBB() == anim.success)
+  if(_id_9FBB() == anim.success) {
     return anim.success;
+  }
 
-  if(_id_9F39() == anim.success)
+  if(_id_9F39() == anim.success) {
     return anim.success;
+  }
 
-  if(_id_A533() == anim.success)
+  if(_id_A533() == anim.success) {
     return anim.success;
+  }
 
-  if(_id_9EE9() == anim.success)
+  if(_id_9EE9() == anim.success) {
     return anim.success;
+  }
 
-  if(_id_9F74() == anim.success)
+  if(_id_9F74() == anim.success) {
     return anim.success;
+  }
 
   _id_1106C();
   return anim.failure;
 }
 
 _id_673D(var_0) {
-  if(_id_118CD(self.bt._id_673E) < 4)
+  if(_id_118CD(self.bt._id_673E) < 4) {
     return anim.success;
+  }
 
   return anim.failure;
 }
 
 _id_9FD0(var_0) {
-  if(!isDefined(self.bt.attackerdata.attacker))
+  if(!isDefined(self.bt.attackerdata.attacker)) {
     return anim.failure;
+  }
 
-  if(isDefined(level._id_D127) && self.bt.attackerdata.attacker == level._id_D127)
+  if(isDefined(level._id_D127) && self.bt.attackerdata.attacker == level._id_D127) {
     return anim.success;
+  }
 
   return anim.failure;
 }
 
 _id_1106C(var_0) {
-  if(self.bt._id_673F)
+  if(self.bt._id_673F) {
     self.bt._id_673F = 0;
+  }
 
   return anim.success;
 }
@@ -1079,14 +1179,17 @@ validatehighpriorityflag(var_0) {
 }
 
 _id_1003F(var_0) {
-  if(!isalive(self.enemy))
+  if(!isalive(self.enemy)) {
     return anim.success;
+  }
 
-  if(isDefined(self._blackboard._id_7002))
+  if(isDefined(self._blackboard._id_7002)) {
     return anim.failure;
+  }
 
-  if(self._blackboard._id_C97C)
+  if(self._blackboard._id_C97C) {
     return anim.success;
+  }
 
   return anim.failure;
 }
@@ -1097,48 +1200,56 @@ _id_118CD(var_0) {
 }
 
 _id_24D5(var_0) {
-  if(_id_118CD(self.bt.attackerdata._id_2535) < 6)
+  if(_id_118CD(self.bt.attackerdata._id_2535) < 6) {
     return anim.success;
+  }
 
   return anim.failure;
 }
 
 _id_FFD7(var_0) {
-  if(_id_9D6A() == anim.success)
+  if(_id_9D6A() == anim.success) {
     return anim.success;
+  }
 
-  if(_id_24D5() == anim.success)
+  if(_id_24D5() == anim.success) {
     return anim.success;
+  }
 
   _id_1106C(var_0);
   return anim.failure;
 }
 
 _id_FFD8(var_0) {
-  if(!isalive(self.enemy))
+  if(!isalive(self.enemy)) {
     return anim.success;
+  }
 
-  if(isDefined(self._blackboard._id_7002))
+  if(isDefined(self._blackboard._id_7002)) {
     return anim.failure;
+  }
 
-  if(self._blackboard._id_C97C)
+  if(self._blackboard._id_C97C) {
     return anim.success;
+  }
 
   return anim.failure;
 }
 
 _id_41E4(var_0) {
-  if(isDefined(self._blackboard._id_10A4B))
+  if(isDefined(self._blackboard._id_10A4B)) {
     self._blackboard._id_10A4A = self._blackboard._id_10A4B;
-  else
+  } else {
     self._blackboard._id_10A4A = undefined;
+  }
 
   return anim.success;
 }
 
 _id_8BEC(var_0) {
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     return anim.success;
+  }
 
   return anim.failure;
 }

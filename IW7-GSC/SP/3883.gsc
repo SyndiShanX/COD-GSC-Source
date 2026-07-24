@@ -78,9 +78,9 @@ _id_6CF8(var_0) {
   var_4 = var_1 + anglesToForward(var_2) * level._id_864B[self.classname]._id_B436 + var_3;
   self playSound(level._id_864B[self.classname]._id_6D80);
 
-  if(scripts\engine\utility::is_true(level._id_12FB7))
+  if(scripts\engine\utility::is_true(level._id_12FB7)) {
     playFX(level._id_864B[self.classname]._id_3D52, var_1, anglesToForward(var_2), anglestoup(var_2));
-  else {
+  } else {
     playFX(level._id_864B[self.classname]._id_BDFE, var_1, anglesToForward(var_2), anglestoup(var_2));
     var_5 = magicbullet("magic_ground_turret_30mm_projectile", var_1, var_4);
     playFXOnTag(level._id_864B[self.classname]._id_11A8B, var_5, "tag_fx");

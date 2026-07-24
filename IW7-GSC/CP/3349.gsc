@@ -11,9 +11,9 @@ init() {
   thread scripts\cp_mp\powershud::powershud_init();
   _id_D77D();
 
-  if(isDefined(level.power_setup_init))
+  if(isDefined(level.power_setup_init)) {
     level[[level.power_setup_init]]();
-  else {
+  } else {
     powersetupfunctions("power_phaseShift", ::_id_F7E2, ::_id_12D07, ::usephaseshift, "powers_phase_shift_update", undefined, "phaseshift_interrupted");
     powersetupfunctions("power_kineticPulse", ::_id_F776, ::unsetkillstreaktoscorestreak, ::_id_1309C, undefined, undefined, undefined);
     powersetupfunctions("power_transponder", ::settransponder, ::unsettransponder, undefined, "transponder_update", "powers_transponder_used", undefined);
@@ -109,8 +109,9 @@ _id_7358(var_0, var_1) {
     if(distancesquared(var_3, var_5.origin) > 360000) {
       continue;
     }
-    if(var_5 damageconetrace(var_3))
+    if(var_5 damageconetrace(var_3)) {
       var_5 thread scripts\cp\cp_weapon::dirteffect(var_3);
+    }
 
     var_5 setclientomnvar("ui_hud_shake", 1);
   }
@@ -123,8 +124,9 @@ _id_E1F1() {
   self endon("death");
   self disableoffhandweapons();
 
-  while(self fragButtonPressed())
+  while(self fragButtonPressed()) {
     wait 0.1;
+  }
 
   wait 0.1;
   self enableoffhandweapons();
@@ -166,10 +168,11 @@ _id_D724(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 _id_D77D() {
   var_0 = 1;
 
-  if(isDefined(level.power_table))
+  if(isDefined(level.power_table)) {
     var_1 = level.power_table;
-  else
+  } else {
     var_1 = "cp/cp_powertable.csv";
+  }
 
   for(;;) {
     var_2 = tablelookupbyrow(var_1, var_0, 0);
@@ -206,8 +209,9 @@ _id_D77D() {
 }
 
 _id_D780() {
-  if(!isDefined(level._id_D77F))
+  if(!isDefined(level._id_D77F)) {
     level._id_D77F = [];
+  }
 
   var_0 = 0;
 
@@ -228,8 +232,9 @@ _id_D780() {
       level._id_D7A4[var_4] = var_2;
     }
 
-    if(!isDefined(level._id_D77F[var_2]))
+    if(!isDefined(level._id_D77F[var_2])) {
       level._id_D77F[var_2] = [];
+    }
 
     var_6 = level._id_D77F[var_2];
 
@@ -243,23 +248,27 @@ _id_D780() {
 }
 
 _id_8091(var_0, var_1) {
-  if(!isDefined(level._id_D77F))
+  if(!isDefined(level._id_D77F)) {
     return undefined;
+  }
 
-  if(!isDefined(level._id_D77F[var_0]))
+  if(!isDefined(level._id_D77F[var_0])) {
     return undefined;
+  }
 
   var_2 = level._id_D77F[var_0];
 
-  if(!isDefined(var_2[var_1]))
+  if(!isDefined(var_2[var_1])) {
     return undefined;
+  }
 
   return var_2[var_1];
 }
 
 _id_8090(var_0) {
-  if(!isDefined(self.powers[var_0]))
+  if(!isDefined(self.powers[var_0])) {
     return undefined;
+  }
 
   var_1 = self.powers[var_0];
   var_2 = getDvar("scr_debug_power_passive");
@@ -268,8 +277,9 @@ _id_8090(var_0) {
     var_3 = _id_8091(var_0, var_2);
 
     if(isDefined(var_3)) {
-      if(isDefined(var_3._id_23B1))
+      if(isDefined(var_3._id_23B1)) {
         return var_3._id_23B1;
+      }
     }
   }
 
@@ -279,8 +289,9 @@ _id_8090(var_0) {
     if(!isDefined(var_3)) {
       continue;
     }
-    if(isDefined(var_3._id_23B1))
+    if(isDefined(var_3._id_23B1)) {
       return var_3._id_23B1;
+    }
   }
 
   return undefined;
@@ -289,23 +300,28 @@ _id_8090(var_0) {
 powersetupfunctions(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = level.powers[var_0];
 
-  if(!isDefined(var_7))
+  if(!isDefined(var_7)) {
     scripts\engine\utility::error("No configuration data for " + var_0 + " found! Is it in powertable.csv? Or make sure powerSetupFunctions is called after the table is initialized.");
+  }
 
   level._id_D786[var_0] = var_1;
   level._id_D79B[var_0] = var_2;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_7.usefunc = var_3;
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_7._id_12ED9 = var_4;
+  }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_7.usednotify = var_5;
+  }
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_7._id_9A90 = var_6;
+  }
 }
 
 _id_D750(var_0, var_1) {
@@ -318,8 +334,9 @@ _id_D750(var_0, var_1) {
   if(isDefined(var_5) && var_5 == var_1) {
     return;
   }
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     _id_D75E(var_0);
+  }
 
   switch (var_1) {
     case 0:
@@ -387,17 +404,20 @@ _id_D75F(var_0) {
 givepower(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = 2;
 
-  if(!isDefined(self.powers))
+  if(!isDefined(self.powers)) {
     self.powers = [];
+  }
 
   if(var_0 == "none") {
     return;
   }
-  if(var_1 == "scripted")
+  if(var_1 == "scripted") {
     var_7++;
+  }
 
-  for(var_8 = self _meth_854D(); var_8 != "none"; var_8 = self _meth_854D())
+  for(var_8 = self _meth_854D(); var_8 != "none"; var_8 = self _meth_854D()) {
     scripts\engine\utility::waitframe();
+  }
 
   var_9 = getarraykeys(self.powers);
 
@@ -415,8 +435,9 @@ givepower(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_14 = level.powers[var_0];
   self notify("delete_equipment " + var_1);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_13.passives = var_3;
+  }
 
   var_15 = 0.0;
 
@@ -428,8 +449,9 @@ givepower(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       var_18 = var_13.charges * var_14.cooldowntime;
       var_13.charges = int((var_18 - var_17) / var_14.cooldowntime);
 
-      if(var_13.charges < 0)
+      if(var_13.charges < 0) {
         var_13.charges = 0;
+      }
 
       for(var_15 = var_17; var_15 > var_14.cooldowntime; var_15 = var_15 - var_14.cooldowntime) {}
     }
@@ -440,10 +462,11 @@ givepower(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
   var_13.weaponuse = undefined;
 
-  if(var_14.weaponuse == "<power_script_generic_weapon>")
+  if(var_14.weaponuse == "<power_script_generic_weapon>") {
     var_13.weaponuse = scripts\engine\utility::ter_op(var_1 == "primary", "power_script_generic_primary_mp", "power_script_generic_secondary_mp");
-  else
+  } else {
     var_13.weaponuse = var_14.weaponuse;
+  }
 
   var_19 = _id_8090(var_0);
   var_20 = scripts\engine\utility::ter_op(isDefined(var_19), var_19, var_13.weaponuse);
@@ -459,11 +482,13 @@ givepower(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     self.powersecondarygrenade = var_20;
   }
 
-  if(isDefined(level._id_D786[var_0]))
+  if(isDefined(level._id_D786[var_0])) {
     self[[level._id_D786[var_0]]](var_0);
+  }
 
-  if(isDefined(var_6) && !var_6)
+  if(isDefined(var_6) && !var_6) {
     thread _id_E0AD(var_0);
+  }
 
   if(!isai(self)) {
     thread _id_D73D(var_0);
@@ -472,11 +497,13 @@ givepower(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 removepower(var_0) {
-  if(isDefined(level._id_D79B[var_0]))
+  if(isDefined(level._id_D79B[var_0])) {
     self[[level._id_D79B[var_0]]]();
+  }
 
-  if(isDefined(self.powers[var_0].weaponuse))
+  if(isDefined(self.powers[var_0].weaponuse)) {
     self takeweapon(self.powers[var_0].weaponuse);
+  }
 
   if(self.powers[var_0].slot == "primary") {
     self _meth_844D();
@@ -503,20 +530,23 @@ _id_13F00(var_0) {
 
 _id_110C2() {
   if(isDefined(self.powers)) {
-    if(!isDefined(self._id_D76F))
+    if(!isDefined(self._id_D76F)) {
       self._id_D76F = [];
-    else
+    } else {
       _id_4042();
+    }
 
     foreach(var_3, var_1 in self.powers) {
-      if(isDefined(level._id_C81F) && level._id_C81F == 1)
+      if(isDefined(level._id_C81F) && level._id_C81F == 1) {
         continue;
-      else if(isDefined(level._id_C81F) && level._id_C81F != 0) {
-        if(level.powers[var_3]._id_4E5A == 1)
+      } else if(isDefined(level._id_C81F) && level._id_C81F != 0) {
+        if(level.powers[var_3]._id_4E5A == 1) {
           continue;
+        }
       } else if(!isDefined(level._id_C81F)) {
-        if(level.powers[var_3]._id_4E5A == 1)
+        if(level.powers[var_3]._id_4E5A == 1) {
           continue;
+        }
       }
 
       if(var_1._id_4619 > 0) {
@@ -538,8 +568,9 @@ _id_4042() {
     var_0 = self._id_D76F;
 
     foreach(var_3, var_2 in var_0) {
-      if(_id_D720(var_2) == 0.0)
+      if(_id_D720(var_2) == 0.0) {
         self._id_D76F[var_3] = undefined;
+      }
     }
   }
 }
@@ -557,20 +588,23 @@ clearpowers() {
   if(isDefined(self.powers)) {
     var_0 = self.powers;
 
-    foreach(var_3, var_2 in var_0)
-    removepower(var_3);
+    foreach(var_3, var_2 in var_0) {
+      removepower(var_3);
+    }
 
     self.powers = [];
   }
 }
 
 getcurrentequipment(var_0) {
-  if(!isDefined(self.powers))
+  if(!isDefined(self.powers)) {
     return undefined;
+  }
 
   foreach(var_3, var_2 in self.powers) {
-    if(var_2.slot == var_0)
+    if(var_2.slot == var_0) {
       return var_3;
+    }
   }
 
   return undefined;
@@ -616,8 +650,9 @@ _id_D725(var_0, var_1, var_2, var_3, var_4) {
   var_6.slot = var_1;
   var_6.charges = var_5.maxcharges;
 
-  if(scripts\engine\utility::is_true(var_2))
+  if(scripts\engine\utility::is_true(var_2)) {
     var_6.charges++;
+  }
 
   var_6.maxcharges = var_6.charges;
   var_6._id_93DD = 0;
@@ -637,8 +672,9 @@ _id_B2F0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self endon("power_removed_" + var_1);
   level endon("game_ended");
 
-  if(isDefined(var_8) && var_8 || var_1 == "power_copycatGrenade")
+  if(isDefined(var_8) && var_8 || var_1 == "power_copycatGrenade") {
     self endon("start_copycat");
+  }
 
   self endon("clear_power_slot" + var_1);
   scripts\cp_mp\powershud::powershud_assignpower(var_2, int(var_0.id), 1, int(self.powers[var_1].charges));
@@ -646,8 +682,9 @@ _id_B2F0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   _id_D750(var_2, 2);
 
   for(;;) {
-    if(scripts\cp\cp_laststand::player_in_laststand(self))
+    if(scripts\cp\cp_laststand::player_in_laststand(self)) {
       scripts\engine\utility::waittill_any("revive", "revive_success", "challenge_complete_revive");
+    }
 
     _id_D765(var_1);
     var_9 = var_6 + "_success";
@@ -667,25 +704,29 @@ _id_B2F0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       if(isDefined(var_0.usefunc)) {
         var_12 = self thread[[var_0.usefunc]]();
 
-        if(isDefined(var_12) && var_12 == 0)
+        if(isDefined(var_12) && var_12 == 0) {
           continue;
+        }
       }
 
       if(isDefined(var_5)) {
         self waittill(var_5, var_12);
 
-        if(isDefined(var_12) && var_12 == 0)
+        if(isDefined(var_12) && var_12 == 0) {
           continue;
+        }
       }
 
       if(!isDefined(self.dont_use_charges) || self.dont_use_charges != var_1) {
-        if(!(_id_9EE3(var_1) && !isDefined(self.throwinggrenade)))
+        if(!(_id_9EE3(var_1) && !isDefined(self.throwinggrenade))) {
           power_adjustcharges(-1, self.powers[var_1].slot);
+        }
       }
     }
 
-    if(isDefined(var_4) && level.powers[var_1]._id_12B2B == "drain" && !scripts\engine\utility::is_true(self.powers[var_1]._id_940B))
+    if(isDefined(var_4) && level.powers[var_1]._id_12B2B == "drain" && !scripts\engine\utility::is_true(self.powers[var_1]._id_940B)) {
       _id_D72B(var_1);
+    }
 
     thread _id_D72A(var_1, var_3, var_8);
   }
@@ -702,14 +743,15 @@ _id_9EE3(var_0) {
 }
 
 _id_808D(var_0) {
-  if(scripts\engine\utility::is_true(level._id_D788))
+  if(scripts\engine\utility::is_true(level._id_D788)) {
     return 0.1;
-  else if(scripts\engine\utility::is_true(level.infinite_grenades))
+  } else if(scripts\engine\utility::is_true(level.infinite_grenades)) {
     return 2.5;
-  else if(scripts\cp\utility::is_consumable_active("grenade_cooldown"))
+  } else if(scripts\cp\utility::is_consumable_active("grenade_cooldown")) {
     return var_0.cooldowntime;
-  else
+  } else {
     return var_0.cooldowntime;
+  }
 }
 
 _id_D73F(var_0) {
@@ -740,13 +782,15 @@ _id_D73D(var_0) {
   for(;;) {
     self waittill("scavenged_ammo", var_4);
 
-    if(var_4 == var_2)
+    if(var_4 == var_2) {
       power_adjustcharges(1, var_3);
+    }
 
     var_5 = var_1._id_91B1;
 
-    if(var_5 == 1)
+    if(var_5 == 1) {
       _id_D750(var_3, 2);
+    }
   }
 }
 
@@ -756,8 +800,9 @@ _id_D74F(var_0, var_1) {
   var_2._id_4617 = min(var_1, var_3.cooldowntime);
   var_2._id_4619 = var_3.cooldowntime - var_1;
 
-  if(var_2._id_4619 <= 0.0)
+  if(var_2._id_4619 <= 0.0) {
     self notify("finish_power_cooldown_" + var_0);
+  }
 }
 
 _id_E0AD(var_0) {
@@ -773,8 +818,9 @@ _id_E0AD(var_0) {
       continue;
     }
     if(var_1.charges < 1) {
-      while(self isswitchingweapon() || scripts\engine\utility::array_contains(self.powers_active, var_0))
+      while(self isswitchingweapon() || scripts\engine\utility::array_contains(self.powers_active, var_0)) {
         wait 0.25;
+      }
 
       wait 0.25;
       thread removepower(var_0);
@@ -783,26 +829,33 @@ _id_E0AD(var_0) {
 }
 
 _id_D752(var_0) {
-  if(!isDefined(self.powers[var_0]))
+  if(!isDefined(self.powers[var_0])) {
     return 0;
+  }
 
-  if(scripts\engine\utility::is_true(self.powers[var_0].cooldown))
+  if(scripts\engine\utility::is_true(self.powers[var_0].cooldown)) {
     return 1;
+  }
 
-  if(scripts\engine\utility::is_true(level._id_D788))
+  if(scripts\engine\utility::is_true(level._id_D788)) {
     return 1;
+  }
 
-  if(level.powers[var_0]._id_13058)
+  if(level.powers[var_0]._id_13058) {
     return 1;
+  }
 
-  if(isDefined(self.powers[var_0].slot) && self.powers[var_0].slot != "primary")
+  if(isDefined(self.powers[var_0].slot) && self.powers[var_0].slot != "primary") {
     return 0;
+  }
 
-  if(scripts\cp\utility::is_consumable_active("grenade_cooldown") && level.powers[var_0].defaultslot != "secondary")
+  if(scripts\cp\utility::is_consumable_active("grenade_cooldown") && level.powers[var_0].defaultslot != "secondary") {
     return 1;
+  }
 
-  if(scripts\engine\utility::is_true(level.infinite_grenades))
+  if(scripts\engine\utility::is_true(level.infinite_grenades)) {
     return 1;
+  }
 
   return 0;
 }
@@ -812,8 +865,9 @@ activatepower(var_0) {
 }
 
 deactivatepower(var_0) {
-  if(scripts\engine\utility::array_contains(self.powers_active, var_0))
+  if(scripts\engine\utility::array_contains(self.powers_active, var_0)) {
     self.powers_active = scripts\engine\utility::array_remove(self.powers_active, var_0);
+  }
 }
 
 _id_D72A(var_0, var_1, var_2) {
@@ -823,8 +877,9 @@ _id_D72A(var_0, var_1, var_2) {
   self endon("power_removed_" + var_0);
   self endon("power_cooldown_ended" + var_0);
 
-  if(isDefined(var_2) && var_2 || var_0 == "power_copycatGrenade")
+  if(isDefined(var_2) && var_2 || var_0 == "power_copycatGrenade") {
     self endon("start_copycat");
+  }
 
   self endon("clear_power_slot" + var_0);
   self notify("power_cooldown_begin_" + var_0);
@@ -836,27 +891,31 @@ _id_D72A(var_0, var_1, var_2) {
   var_6 = var_0 + "_cooldown_update";
   var_4._id_93DD = 1;
 
-  if(!isDefined(var_4._id_461C))
+  if(!isDefined(var_4._id_461C)) {
     var_4._id_461C = 0;
+  }
 
   var_4._id_461C++;
 
-  if(!isDefined(var_4._id_4617))
+  if(!isDefined(var_4._id_4617)) {
     var_4._id_4617 = 0;
+  }
 
-  if(!isDefined(var_4._id_4619))
+  if(!isDefined(var_4._id_4619)) {
     var_4._id_4619 = 0;
+  }
 
   var_4._id_4619 = var_4._id_4619 + var_1;
   var_7 = var_4._id_91B1;
 
-  if(isDefined(var_7) && var_7 != 0 && var_4.charges == 0)
+  if(isDefined(var_7) && var_7 != 0 && var_4.charges == 0) {
     _id_D750(var_5, 1);
+  }
 
   while(var_4.charges < var_4.maxcharges) {
-    if(_id_D752(var_0))
+    if(_id_D752(var_0)) {
       wait 0.1;
-    else {
+    } else {
       level scripts\engine\utility::waittill_any("grenade_cooldown activated", "infinite_grenade_active", "start_power_cooldown");
       var_1 = _id_808D(var_3);
     }
@@ -865,15 +924,17 @@ _id_D72A(var_0, var_1, var_2) {
       power_adjustcharges(1, var_5);
       _id_D765(var_0);
 
-      if(var_4.charges == var_4.maxcharges)
+      if(var_4.charges == var_4.maxcharges) {
         thread _id_D730(var_0, var_2);
+      }
 
       var_4._id_4617 = var_4._id_4617 - var_1;
       var_4._id_4619 = var_4._id_4619 - var_1;
       var_4._id_461C--;
 
-      if(isDefined(var_7) && var_7 != 0)
+      if(isDefined(var_7) && var_7 != 0) {
         _id_D750(var_5, 2);
+      }
     } else {
       var_4._id_4617 = var_4._id_4617 + 0.1;
       var_4._id_4619 = var_4._id_4619 - 0.1;
@@ -894,8 +955,9 @@ _id_D730(var_0, var_1) {
   var_2._id_4619 = 0;
   var_2._id_461C = 0;
 
-  if(isDefined(var_1) && var_1)
+  if(isDefined(var_1) && var_1) {
     self notify("copycat_reset");
+  }
 
   var_3 = var_2._id_91B1;
   var_4 = var_2.slot;
@@ -919,8 +981,9 @@ _id_D72B(var_0) {
   _id_D727(var_0);
   _id_D750(var_5, 0);
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     thread _id_D732(var_0, var_5, var_4);
+  }
 
   for(;;) {
     self waittill(var_3, var_6);
@@ -949,10 +1012,11 @@ _id_D731(var_0) {
   var_1._id_940B = 0;
   _id_D72D(var_0);
 
-  if(var_1.charges > 0)
+  if(var_1.charges > 0) {
     _id_D750(var_2, 2);
-  else
+  } else {
     _id_D750(var_2, 1);
+  }
 }
 
 _id_F85A(var_0) {
@@ -1111,8 +1175,9 @@ userepulsor() {
 }
 
 hasequipment(var_0) {
-  if(!isDefined(self.powers[var_0]))
+  if(!isDefined(self.powers[var_0])) {
     return 0;
+  }
 
   return 1;
 }
@@ -1121,10 +1186,11 @@ _id_13709(var_0) {
   self endon("death");
   self endon("disconnect");
 
-  if(var_0 == "primary")
+  if(var_0 == "primary") {
     var_1 = "power_primary_used";
-  else
+  } else {
     var_1 = "power_secondary_used";
+  }
 
   for(;;) {
     if(!isDefined(self)) {
@@ -1138,47 +1204,54 @@ _id_13709(var_0) {
 }
 
 power_modifycooldownrate(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "all";
+  }
 
   var_2 = _id_D739();
 
   foreach(var_4 in var_2) {
-    if(isDefined(self.powers[var_4].slot) && self.powers[var_4].slot == var_1 || var_1 == "all")
+    if(isDefined(self.powers[var_4].slot) && self.powers[var_4].slot == var_1 || var_1 == "all") {
       self.powers[var_4].cooldownratemod = var_0;
+    }
   }
 }
 
 _id_D74E(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "all";
+  }
 
   var_1 = _id_D739();
 
   foreach(var_3 in var_1) {
-    if(self.powers[var_3].slot == var_0 || var_0 == "all")
+    if(self.powers[var_3].slot == var_0 || var_0 == "all") {
       self.powers[var_3].cooldownratemod = 1.0;
+    }
   }
 }
 
 power_adjustcharges(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "all";
+  }
 
   var_3 = _id_D739();
   var_4 = var_0;
 
   foreach(var_6 in var_3) {
-    if(!isDefined(var_0))
+    if(!isDefined(var_0)) {
       var_4 = level.powers[var_6].maxcharges;
+    }
 
     if(self.powers[var_6].slot == var_1 || var_1 == "all") {
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         self.powers[var_6].charges = int(min(var_4, level.powers[var_6].maxcharges));
-      else if(self.powers[var_6].charges + var_4 >= 0)
+      } else if(self.powers[var_6].charges + var_4 >= 0) {
         self.powers[var_6].charges = self.powers[var_6].charges + var_4;
-      else
+      } else {
         self.powers[var_6].charges = 0;
+      }
 
       self.powers[var_6].charges = int(clamp(self.powers[var_6].charges, 0, level.powers[var_6].maxcharges));
       self setweaponammoclip(self.powers[var_6].weaponuse, self.powers[var_6].charges);
@@ -1208,13 +1281,15 @@ _id_D739() {
 }
 
 power_disablepower(var_0) {
-  if(scripts\engine\utility::isoffhandweaponsallowed())
+  if(scripts\engine\utility::isoffhandweaponsallowed()) {
     scripts\engine\utility::allow_offhand_weapons(0);
+  }
 }
 
 power_enablepower(var_0) {
-  if(!scripts\engine\utility::isoffhandweaponsallowed())
+  if(!scripts\engine\utility::isoffhandweaponsallowed()) {
     scripts\engine\utility::allow_offhand_weapons(1);
+  }
 }
 
 usequickslothealitem(var_0) {
@@ -1226,11 +1301,13 @@ usequickslothealitem(var_0) {
 }
 
 _id_50A4(var_0) {
-  if(!isDefined(self._id_D775))
+  if(!isDefined(self._id_D775)) {
     self._id_D775 = [];
+  }
 
-  if(!isDefined(self._id_D775[var_0]))
+  if(!isDefined(self._id_D775[var_0])) {
     self._id_D775[var_0] = 0.0;
+  }
 }
 
 _id_808F(var_0) {
@@ -1248,8 +1325,9 @@ _id_4575(var_0, var_1, var_2) {
   self endon("disconnect");
   self endon("cancel_" + var_1);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self endon(var_2);
+  }
 
   var_0 = var_0 * 1000;
   var_3 = 1.0 / var_0;
@@ -1291,8 +1369,9 @@ _id_13A0E(var_0, var_1, var_2) {
 
   if(isDefined(var_3) && var_3 == var_4.weaponuse) {
     if(!isalive(self)) {
-      if(var_4.charges > 0)
+      if(var_4.charges > 0) {
         power_adjustcharges(-1, var_4.slot);
+      }
 
       if(!var_4._id_93DD) {
         var_4._id_4619 = level.powers[var_1].cooldowntime;
@@ -1303,8 +1382,9 @@ _id_13A0E(var_0, var_1, var_2) {
 }
 
 _id_136DD(var_0, var_1, var_2) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     thread _id_13A68(var_0, var_2);
+  }
 
   thread _id_13A7D(var_0, var_1);
   self waittill("power_use_update_" + var_0, var_3);
@@ -1347,8 +1427,9 @@ _id_D767(var_0, var_1, var_2, var_3) {
     if(_id_9F09(var_7)) {
       while(_id_9F09(var_7)) {
         if(self useButtonPressed()) {
-          if(var_5 == 0)
+          if(var_5 == 0) {
             var_6 = 0.05;
+          }
 
           var_10 = 0;
 
@@ -1382,10 +1463,11 @@ _id_D767(var_0, var_1, var_2, var_3) {
   }
 
   if(!var_4) {
-    if(var_1 == var_2)
+    if(var_1 == var_2) {
       var_1 = 0;
-    else
+    } else {
       var_1++;
+    }
 
     self[[var_9]](var_1);
   }
@@ -1394,36 +1476,40 @@ _id_D767(var_0, var_1, var_2, var_3) {
 }
 
 _id_9F09(var_0) {
-  if(var_0 == "+frag" && self fragButtonPressed() || var_0 == "+smoke" && self secondaryoffhandbuttonPressed())
+  if(var_0 == "+frag" && self fragButtonPressed() || var_0 == "+smoke" && self secondaryoffhandbuttonPressed()) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_D769(var_0, var_1) {
   self endon("death");
   self endon("disconnect");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 2000;
-  else
+  } else {
     var_1 = var_1 * 1000;
+  }
 
   var_2 = _id_D735(var_0);
   var_3 = gettime();
   var_4 = var_3 + var_1;
 
-  while(_id_9F09(var_2) && gettime() < var_4)
+  while(_id_9F09(var_2) && gettime() < var_4) {
     wait 0.05;
+  }
 
   return (gettime() - var_3) / 1000;
 }
 
 _id_93FD(var_0, var_1, var_2) {
-  if(var_0 < var_1)
+  if(var_0 < var_1) {
     var_0++;
-  else
+  } else {
     var_0 = 0;
+  }
 
   return var_0;
 }
@@ -1472,13 +1558,15 @@ _id_9F0A(var_0) {
 }
 
 _id_F808(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(var_1 > 0)
+  if(var_1 > 0) {
     _id_4575(var_1, var_0);
-  else
+  } else {
     _id_3885(var_0);
+  }
 }
 
 _id_D76C(var_0) {
@@ -1501,8 +1589,9 @@ _id_D76E(var_0) {
   var_3 = var_1.slot;
   var_4 = var_2._id_12ED9;
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = var_0 + "_update";
+  }
 
   for(;;) {
     self waittill(var_4, var_5);
@@ -1529,21 +1618,24 @@ _id_D76D(var_0) {
 _id_D727(var_0) {
   var_1 = self.powers[var_0];
 
-  if(!isDefined(var_1._id_55AB))
+  if(!isDefined(var_1._id_55AB)) {
     var_1._id_55AB = 0;
+  }
 
   var_1._id_55AB++;
 
-  if(var_1._id_55AB == 1)
+  if(var_1._id_55AB == 1) {
     _id_D765(var_0);
+  }
 }
 
 _id_D72D(var_0) {
   var_1 = self.powers[var_0];
   var_1._id_55AB--;
 
-  if(var_1._id_55AB == 0)
+  if(var_1._id_55AB == 0) {
     _id_D765(var_0);
+  }
 }
 
 _id_D765(var_0) {
@@ -1551,24 +1643,27 @@ _id_D765(var_0) {
   var_2 = isDefined(var_1._id_55AB) && var_1._id_55AB;
   var_3 = var_1.charges > 0;
 
-  if(!var_2 && var_3)
+  if(!var_2 && var_3) {
     self setweaponammoclip(var_1.weaponuse, 1);
-  else
+  } else {
     self setweaponammoclip(var_1.weaponuse, 0);
+  }
 }
 
 _id_7952(var_0, var_1, var_2, var_3, var_4) {
   var_5 = var_2.origin;
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     return 0;
+  }
 
   var_6 = vectorNormalize(var_5 - var_0);
 
-  if(!isDefined(var_4) || var_4 == "forward")
+  if(!isDefined(var_4) || var_4 == "forward") {
     var_7 = anglesToForward(var_1);
-  else
+  } else {
     var_7 = anglestoright(var_1);
+  }
 
   var_8 = vectordot(var_7, var_6);
   return var_8 >= var_3;
@@ -1802,17 +1897,20 @@ restore_powers(var_0, var_1) {
     var_4 = undefined;
     var_5 = 0;
 
-    if(scripts\engine\utility::is_true(var_3.cooldown))
+    if(scripts\engine\utility::is_true(var_3.cooldown)) {
       var_4 = 1;
+    }
 
-    if(scripts\engine\utility::is_true(var_3.permanent))
+    if(scripts\engine\utility::is_true(var_3.permanent)) {
       var_5 = 1;
+    }
 
     if(var_3.slot == "secondary") {
-      if(var_6 == "power_bait")
+      if(var_6 == "power_bait") {
         var_0 givepower(var_6, var_3.slot, undefined, undefined, undefined, 1, 1);
-      else
+      } else {
         var_0 givepower(var_6, var_3.slot, undefined, undefined, undefined, var_4, var_5);
+      }
 
       var_0 power_adjustcharges(var_3.charges, var_3.slot, 1);
       continue;

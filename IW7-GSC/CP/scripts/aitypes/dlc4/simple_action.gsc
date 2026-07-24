@@ -4,14 +4,17 @@
 **************************************************/
 
 setupsimplebtaction(var_0, var_1, var_2) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = ::simpleaction_begin;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = ::simpleaction_tick;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = ::simpleaction_end;
+  }
 
   scripts\aitypes\dlc4\bt_action_api::setupbtaction("simple_action", var_0, var_1, var_2);
 }
@@ -26,8 +29,9 @@ simpleaction_begin(var_0) {
 }
 
 simpleaction_tick(var_0) {
-  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.success;
 }

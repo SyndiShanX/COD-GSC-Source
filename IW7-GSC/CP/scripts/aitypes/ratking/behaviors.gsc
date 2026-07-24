@@ -22,8 +22,9 @@ setupbtaction(var_0, var_1, var_2, var_3) {
   var_4.fntick = var_2;
   var_4.fnend = var_3;
 
-  if(!isDefined(self.actions))
+  if(!isDefined(self.actions)) {
     self.actions = [];
+  }
 
   self.actions[var_0] = var_4;
 }
@@ -43,11 +44,13 @@ setupbehaviorstates() {
 pickbetterenemy(var_0, var_1) {
   if(isDefined(self.ratkingenemy)) {
     if(var_0 == self.ratkingenemy) {
-      if(gettime() - self.ratkingenemystarttime < 3000)
+      if(gettime() - self.ratkingenemystarttime < 3000) {
         return var_0;
+      }
     } else if(var_1 == self.ratkingenemy) {
-      if(gettime() - self.ratkingenemystarttime < 3000)
+      if(gettime() - self.ratkingenemystarttime < 3000) {
         return var_1;
+      }
     }
   }
 
@@ -55,8 +58,9 @@ pickbetterenemy(var_0, var_1) {
   var_3 = self cansee(var_1);
 
   if(var_2 != var_3) {
-    if(var_2)
+    if(var_2) {
       return var_0;
+    }
 
     return var_1;
   }
@@ -64,8 +68,9 @@ pickbetterenemy(var_0, var_1) {
   var_4 = distancesquared(self.origin, var_0.origin);
   var_5 = distancesquared(self.origin, var_1.origin);
 
-  if(var_4 < var_5)
+  if(var_4 < var_5) {
     return var_0;
+  }
 
   return var_1;
 }
@@ -78,21 +83,24 @@ updateenemy() {
 
   if(scripts\engine\utility::is_true(self.battackzombies) && isDefined(self.zombietarget)) {
     if(isalive(self.zombietarget) && self.zombietarget.health >= 1) {
-      if(isDefined(self.ratkingenemy) && self.zombietarget == self.ratkingenemy)
+      if(isDefined(self.ratkingenemy) && self.zombietarget == self.ratkingenemy) {
         return self.ratkingenemy;
+      }
     }
   }
 
   if(isDefined(self.ratkingenemy) && !shouldignoreenemy(self.ratkingenemy)) {
-    if(gettime() - self.ratkingenemystarttime < 3000)
+    if(gettime() - self.ratkingenemystarttime < 3000) {
       return self.ratkingenemy;
+    }
   } else
     self.ratkingenemy = undefined;
 
-  if(isDefined(self.ratkingenemy))
+  if(isDefined(self.ratkingenemy)) {
     var_0 = self.ratkingenemy;
-  else
+  } else {
     var_0 = undefined;
+  }
 
   foreach(var_2 in level.players) {
     if(shouldignoreenemy(var_2)) {
@@ -101,9 +109,9 @@ updateenemy() {
     if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_2)) {
       continue;
     }
-    if(isDefined(var_0) && isDefined(self.ratkingenemy) && self.ratkingenemy == var_2)
+    if(isDefined(var_0) && isDefined(self.ratkingenemy) && self.ratkingenemy == var_2) {
       continue;
-    else {
+    } else {
       if(!isDefined(var_0)) {
         var_0 = var_2;
         continue;
@@ -134,8 +142,9 @@ updateeveryframe(var_0) {
       self.lastenemysighttime = gettime();
       self.lastenemysightpos = var_1.origin;
 
-      if(!isDefined(self.enemyreacquiredtime))
+      if(!isDefined(self.enemyreacquiredtime)) {
         self.enemyreacquiredtime = self.lastenemysighttime;
+      }
     } else
       self.enemyreacquiredtime = undefined;
   } else {
@@ -158,10 +167,11 @@ melee_begin(var_0) {
   var_3 = var_2 getvelocity();
   var_4 = length2dsquared(var_3);
 
-  if(var_4 < 144)
+  if(var_4 < 144) {
     self clearpath();
-  else
+  } else {
     self.bmovingmelee = 1;
+  }
 
   self.curmeleetarget = var_2;
   scripts\aitypes\ratking\bt_state_api::asm_wait_state_setup(var_0, var_1, var_1);
@@ -177,8 +187,9 @@ melee_tick(var_0) {
 
   self clearpath();
 
-  if(scripts\aitypes\ratking\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\ratking\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.failure;
 }
@@ -265,8 +276,9 @@ summon_tick(var_0) {
     return anim.failure;
   }
 
-  if(scripts\aitypes\ratking\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\ratking\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   self.remove_staff = undefined;
   return anim.failure;
@@ -282,8 +294,9 @@ summon_end(var_0) {
 debughandler_begin(var_0) {}
 
 debughandler_tick(var_0) {
-  if(!isDefined(level.ratkingdebugdestination))
+  if(!isDefined(level.ratkingdebugdestination)) {
     return anim.failure;
+  }
 
   self scragentsetgoalRadius(16);
   self scragentsetgoalpos(level.ratkingdebugdestination);
@@ -325,8 +338,9 @@ shieldattackspot_tick(var_0) {
     return anim.failure;
   }
 
-  if(scripts\aitypes\ratking\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\ratking\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   self.remove_shield = undefined;
   return anim.failure;
@@ -349,8 +363,9 @@ shieldattack_tick(var_0) {
     return anim.failure;
   }
 
-  if(scripts\aitypes\ratking\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\ratking\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   self.remove_shield = undefined;
   return anim.failure;
@@ -397,8 +412,9 @@ staffprojectile_tick(var_0) {
     return anim.failure;
   }
 
-  if(scripts\aitypes\ratking\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\ratking\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   self.remove_staff = undefined;
   return anim.failure;
@@ -438,8 +454,9 @@ staffstompattack_tick(var_0) {
     return anim.failure;
   }
 
-  if(scripts\aitypes\ratking\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\ratking\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   self.remove_staff = undefined;
   return anim.failure;
@@ -461,8 +478,9 @@ teleport_begin(var_0) {
 }
 
 teleport_tick(var_0) {
-  if(scripts\aitypes\ratking\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\ratking\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.failure;
 }
@@ -494,8 +512,9 @@ isnearanypointinarray(var_0, var_1, var_2) {
   foreach(var_4 in var_1) {
     var_5 = distancesquared(var_4, var_0);
 
-    if(var_5 < var_2)
+    if(var_5 < var_2) {
       return 1;
+    }
   }
 
   return 0;
@@ -505,8 +524,9 @@ isnearagents(var_0, var_1, var_2) {
   foreach(var_4 in var_1) {
     var_5 = distancesquared(var_4.origin, var_0);
 
-    if(var_5 < var_2)
+    if(var_5 < var_2) {
       return 1;
+    }
   }
 
   return 0;
@@ -516,12 +536,13 @@ calcsummonspawnpoints(var_0, var_1) {
   var_2 = scripts\mp\agents\ratking\ratking_tunedata::gettunedata();
   var_3 = scripts\mp\agents\ratking\ratking_agent::getenemy();
 
-  if(scripts\engine\utility::flag("rk_fight_started"))
+  if(scripts\engine\utility::flag("rk_fight_started")) {
     var_4 = getrandomnavpoints(level.rk_center_arena_struct.origin, var_2.summon_max_radius, 64, self);
-  else if(isDefined(var_3))
+  } else if(isDefined(var_3)) {
     var_4 = getrandomnavpoints(var_3.origin, var_2.summon_max_radius, 64, self);
-  else
+  } else {
     var_4 = getrandomnavpoints(self.origin, var_2.summon_max_radius, 64, self);
+  }
 
   scripts\engine\utility::array_randomize(var_4);
   var_5 = var_2.summon_min_radius * var_2.summon_min_radius;
@@ -536,8 +557,9 @@ calcsummonspawnpoints(var_0, var_1) {
     if(isDefined(level.pam_grier)) {
       var_8 = distancesquared(var_7, level.pam_grier.origin);
 
-      if(var_8 < var_5)
+      if(var_8 < var_5) {
         continue;
+      }
     }
 
     if(is_near_any_player(var_7)) {
@@ -556,8 +578,9 @@ calcsummonspawnpoints(var_0, var_1) {
     }
   }
 
-  if(self.spawnpoints.size > 0)
+  if(self.spawnpoints.size > 0) {
     return 1;
+  }
 
   return 0;
 }
@@ -565,11 +588,13 @@ calcsummonspawnpoints(var_0, var_1) {
 trysummon(var_0) {
   var_1 = scripts\mp\agents\ratking\ratking_tunedata::gettunedata();
 
-  if(!isDefined(self.nextsummontime))
+  if(!isDefined(self.nextsummontime)) {
     self.nextsummontime = gettime() + randomintrange(var_1.min_summon_interval, var_1.max_summon_interval);
+  }
 
-  if(gettime() < self.nextsummontime)
+  if(gettime() < self.nextsummontime) {
     return 0;
+  }
 
   var_2 = scripts\mp\mp_agent::getactiveagentsoftype(var_1.summon_agent_type);
 
@@ -598,14 +623,17 @@ trysummon(var_0) {
 }
 
 tryblock() {
-  if(!scripts\mp\agents\ratking\ratking_agent::rkhasshield())
+  if(!scripts\mp\agents\ratking\ratking_agent::rkhasshield()) {
     return 0;
+  }
 
-  if(!isDefined(self.damageaccumulator))
+  if(!isDefined(self.damageaccumulator)) {
     return 0;
+  }
 
-  if(isDefined(self.nextblocktime) && gettime() < self.nextblocktime)
+  if(isDefined(self.nextblocktime) && gettime() < self.nextblocktime) {
     return 0;
+  }
 
   var_0 = scripts\mp\agents\ratking\ratking_tunedata::gettunedata();
 
@@ -629,31 +657,37 @@ tryblock() {
 }
 
 tryshieldattackatpos(var_0) {
-  if(!scripts\mp\agents\ratking\ratking_agent::rkhasshield())
+  if(!scripts\mp\agents\ratking\ratking_agent::rkhasshield()) {
     return 0;
+  }
 
   var_1 = level.rat_king_bounce_structs;
 
-  if(isDefined(level.inactive_eye_targets))
+  if(isDefined(level.inactive_eye_targets)) {
     var_1 = level.inactive_eye_targets;
+  }
 
   var_2 = gettime();
 
   if(isDefined(self.nextshieldattacktime)) {
-    if(var_2 < self.nextshieldattacktime)
+    if(var_2 < self.nextshieldattacktime) {
       return 0;
+    }
   }
 
   var_3 = scripts\mp\agents\ratking\ratking_tunedata::gettunedata();
 
-  if(var_0 < var_3.staff_shield_attack_min_dist_sq)
+  if(var_0 < var_3.staff_shield_attack_min_dist_sq) {
     return 0;
+  }
 
-  if(var_0 > var_3.staff_shield_attack_max_dist_sq)
+  if(var_0 > var_3.staff_shield_attack_max_dist_sq) {
     return 0;
+  }
 
-  if(!isDefined(self.enemyreacquiredtime) || var_2 - self.enemyreacquiredtime < var_3.min_clear_los_time_before_shield_attack)
+  if(!isDefined(self.enemyreacquiredtime) || var_2 - self.enemyreacquiredtime < var_3.min_clear_los_time_before_shield_attack) {
     return 0;
+  }
 
   var_1 = scripts\engine\utility::array_randomize_objects(var_1);
 
@@ -675,8 +709,9 @@ tryshieldattackatpos(var_0) {
     var_13 = physics_spherecast(var_12, var_11, 10, var_9, var_10, "physicsquery_closest");
 
     if(isDefined(var_13) && var_13.size > 0) {
-      if(var_13[0]["fraction"] < 0.95)
+      if(var_13[0]["fraction"] < 0.95) {
         continue;
+      }
     }
 
     self.desiredaction = "shield_attack_spot";
@@ -689,27 +724,32 @@ tryshieldattackatpos(var_0) {
 }
 
 tryshieldattack(var_0) {
-  if(!scripts\mp\agents\ratking\ratking_agent::rkhasshield())
+  if(!scripts\mp\agents\ratking\ratking_agent::rkhasshield()) {
     return 0;
+  }
 
   var_1 = scripts\mp\agents\ratking\ratking_agent::getenemy();
   var_2 = gettime();
 
   if(isDefined(self.nextshieldattacktime)) {
-    if(var_2 < self.nextshieldattacktime)
+    if(var_2 < self.nextshieldattacktime) {
       return 0;
+    }
   }
 
   var_3 = scripts\mp\agents\ratking\ratking_tunedata::gettunedata();
 
-  if(var_0 < var_3.staff_shield_attack_min_dist_sq)
+  if(var_0 < var_3.staff_shield_attack_min_dist_sq) {
     return 0;
+  }
 
-  if(var_0 > var_3.staff_shield_attack_max_dist_sq)
+  if(var_0 > var_3.staff_shield_attack_max_dist_sq) {
     return 0;
+  }
 
-  if(!isDefined(self.enemyreacquiredtime) || var_2 - self.enemyreacquiredtime < var_3.min_clear_los_time_before_shield_attack)
+  if(!isDefined(self.enemyreacquiredtime) || var_2 - self.enemyreacquiredtime < var_3.min_clear_los_time_before_shield_attack) {
     return 0;
+  }
 
   var_4 = anglesToForward(self.angles);
   var_5 = var_1.origin - self.origin;
@@ -744,17 +784,20 @@ trystaffprojectile(var_0) {
   var_1 = scripts\mp\agents\ratking\ratking_agent::getenemy();
 
   if(isDefined(self.nextstaffprojectiletime)) {
-    if(gettime() < self.nextstaffprojectiletime)
+    if(gettime() < self.nextstaffprojectiletime) {
       return 0;
+    }
   }
 
   var_2 = scripts\mp\agents\ratking\ratking_tunedata::gettunedata();
 
-  if(var_0 < var_2.staff_projectile_min_dist_sq)
+  if(var_0 < var_2.staff_projectile_min_dist_sq) {
     return 0;
+  }
 
-  if(var_0 > var_2.staff_projectile_max_dist_sq)
+  if(var_0 > var_2.staff_projectile_max_dist_sq) {
     return 0;
+  }
 
   if(!_func_2AC(self.origin, var_1.origin, self)) {
     self.nextstaffprojectiletime = gettime() + 500;
@@ -766,31 +809,36 @@ trystaffprojectile(var_0) {
 }
 
 trystaffstomp(var_0) {
-  if(rk_isonplatform())
+  if(rk_isonplatform()) {
     return 0;
+  }
 
   var_1 = scripts\mp\agents\ratking\ratking_agent::getenemy();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = distancesquared(self.origin, var_1.origin);
+  }
 
   var_2 = scripts\mp\agents\ratking\ratking_tunedata::gettunedata();
 
-  if(var_0 > var_2.staff_stomp_outer_radius_sq)
+  if(var_0 > var_2.staff_stomp_outer_radius_sq) {
     return 0;
+  }
 
   self.desiredaction = "staff_stomp";
   return 1;
 }
 
 trymeleeattacks(var_0) {
-  if(rk_isonplatform())
+  if(rk_isonplatform()) {
     return 0;
+  }
 
   var_1 = scripts\mp\agents\ratking\ratking_agent::getenemy();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = distancesquared(self.origin, var_1.origin);
+  }
 
   var_2 = scripts\mp\agents\ratking\ratking_tunedata::gettunedata();
   var_3 = gettime();
@@ -799,17 +847,20 @@ trymeleeattacks(var_0) {
   var_6 = 0;
 
   if(var_0 > var_2.staff_stomp_inner_radius_sq) {
-    if(var_0 > var_2.staff_stomp_outer_radius_sq)
+    if(var_0 > var_2.staff_stomp_outer_radius_sq) {
       return 0;
+    }
 
-    if(isDefined(self.nextstaffstomptime) && var_3 < self.nextstaffstomptime)
+    if(isDefined(self.nextstaffstomptime) && var_3 < self.nextstaffstomptime) {
       return 0;
+    }
   } else if(isDefined(self.nextstaffstompinnertime) && var_3 < self.nextstaffstompinnertime)
     var_6 = 1;
 
   if(!ispointonnavmesh(var_1.origin)) {
-    if(var_0 > self.meleeradiuswhentargetnotonnavmesh * self.meleeradiuswhentargetnotonnavmesh)
+    if(var_0 > self.meleeradiuswhentargetnotonnavmesh * self.meleeradiuswhentargetnotonnavmesh) {
       var_6 = 1;
+    }
   } else if(var_0 > self.meleeradiusbasesq)
     var_6 = 1;
 
@@ -825,11 +876,13 @@ trymeleeattacks(var_0) {
   var_10 = vectordot(var_8, var_9);
 
   if(var_10 < self.meleedot) {
-    if(var_4)
+    if(var_4) {
       return 0;
+    }
 
-    if(var_5)
+    if(var_5) {
       return 0;
+    }
 
     self.desiredaction = "staff_stomp";
     return 1;
@@ -856,8 +909,9 @@ distancecompare(var_0, var_1) {
 tryattackzombies() {
   var_0 = gettime();
 
-  if(isDefined(self.nextstaffstomptime) && var_0 < self.nextstaffstomptime)
+  if(isDefined(self.nextstaffstomptime) && var_0 < self.nextstaffstomptime) {
     return 0;
+  }
 
   var_1 = scripts\cp\maps\cp_disco\rat_king_fight::getbrainattractorzombies();
   var_2 = scripts\engine\utility::array_sort_with_func(var_1, ::distancecompare);
@@ -880,22 +934,25 @@ tryattackzombies() {
       continue;
     }
     if(isDefined(var_4.enemy)) {
-      if(isPlayer(var_4.enemy))
+      if(isPlayer(var_4.enemy)) {
         continue;
+      }
     }
 
     self.zombietarget = var_4;
     break;
   }
 
-  if(!isDefined(self.zombietarget))
+  if(!isDefined(self.zombietarget)) {
     return 0;
+  }
 
   self.ratkingenemy = self.zombietarget;
   var_6 = distancesquared(self.origin, self.zombietarget.origin);
 
-  if(trystaffstomp(var_6))
+  if(trystaffstomp(var_6)) {
     return 1;
+  }
 
   self.teleportpos = self.zombietarget.origin - anglesToForward(self.zombietarget.angles) * 48;
   self.findteleportposstatus = undefined;
@@ -905,8 +962,9 @@ tryattackzombies() {
 
 tryteleport(var_0) {
   if(!scripts\engine\utility::is_true(self.force_teleport)) {
-    if(isDefined(self.nextteleporttesttime) && gettime() < self.nextteleporttesttime)
+    if(isDefined(self.nextteleporttesttime) && gettime() < self.nextteleporttesttime) {
       return 0;
+    }
   }
 
   var_1 = scripts\mp\agents\ratking\ratking_tunedata::gettunedata();
@@ -936,8 +994,9 @@ tryteleport(var_0) {
         var_10 = anim.asm[var_9];
         var_11 = var_10.states[var_8];
 
-        if(!isDefined(var_11))
+        if(!isDefined(var_11)) {
           var_8 = "traverse_external";
+        }
 
         if(var_8 == "traverse_external") {
           self.teleportpos = var_7;
@@ -948,24 +1007,26 @@ tryteleport(var_0) {
     }
   }
 
-  if(!isDefined(self.lastenemyengagetime))
+  if(!isDefined(self.lastenemyengagetime)) {
     self.lastenemyengagetime = var_2;
+  }
 
-  if(rk_shouldbeonplatform())
+  if(rk_shouldbeonplatform()) {
     var_3 = 1;
-  else if(var_2 - self.lastenemysighttime > var_1.no_los_wait_time_before_teleport)
+  } else if(var_2 - self.lastenemysighttime > var_1.no_los_wait_time_before_teleport) {
     var_3 = 1;
-  else if(var_2 - self.lastenemyengagetime > var_1.attempt_teleport_if_no_engagement_within_time) {
+  } else if(var_2 - self.lastenemyengagetime > var_1.attempt_teleport_if_no_engagement_within_time) {
     if(!isDefined(var_0)) {
       var_12 = scripts\mp\agents\ratking\ratking_agent::getenemy();
       var_0 = distancesquared(self.origin, var_12.origin);
     }
 
-    if(var_0 > var_1.teleport_min_dist_to_enemy_to_teleport_sq)
+    if(var_0 > var_1.teleport_min_dist_to_enemy_to_teleport_sq) {
       var_3 = 1;
-    else if(isDefined(var_4)) {
-      if(var_4 * var_4 > var_1.teleport_min_dist_to_enemy_to_teleport_sq)
+    } else if(isDefined(var_4)) {
+      if(var_4 * var_4 > var_1.teleport_min_dist_to_enemy_to_teleport_sq) {
         var_3 = 1;
+      }
     }
   }
 
@@ -996,16 +1057,18 @@ tryteleport(var_0) {
     return 0;
   }
 
-  if(!scripts\engine\utility::flag("rk_fight_started"))
+  if(!scripts\engine\utility::flag("rk_fight_started")) {
     self.findteleportposstatus = "invalid";
+  }
 
   if(!isDefined(self.findteleportposstatus)) {
     thread findteleportpos(scripts\mp\agents\ratking\ratking_agent::getenemy(), var_1.min_teleport_dist_to_player, var_1.max_teleport_dist_to_player, var_1.telefrag_dist_sq, var_1);
     return 0;
   }
 
-  if(self.findteleportposstatus == "working")
+  if(self.findteleportposstatus == "working") {
     return 0;
+  }
 
   if(self.findteleportposstatus == "invalid") {
     self.findteleportposstatus = undefined;
@@ -1014,19 +1077,22 @@ tryteleport(var_0) {
     if(isDefined(var_16)) {
       var_12 = scripts\mp\agents\ratking\ratking_agent::getenemy();
 
-      if(!isDefined(var_12))
+      if(!isDefined(var_12)) {
         return 0;
+      }
 
       var_17 = self findpath(var_16, var_12.origin);
 
-      if(!isDefined(var_17) || var_17.size < 2)
+      if(!isDefined(var_17) || var_17.size < 2) {
         return 0;
+      }
 
       var_18 = distance(var_16, var_12.origin);
       var_4 = calcpathdist(var_17);
 
-      if(var_4 > var_18 * 3)
+      if(var_4 > var_18 * 3) {
         return 0;
+      }
 
       self.teleportpos = var_16;
       self.desiredaction = "teleport";
@@ -1049,15 +1115,17 @@ findteleportspotinenemyview(var_0, var_1) {
   var_3 = var_0.angles;
   var_4 = randomintrange(var_1.cfastteleportminangledelta, var_1.cfastteleportmaxangledelta);
 
-  if(randomint(100) < 50)
+  if(randomint(100) < 50) {
     var_4 = var_4 * -1;
+  }
 
   var_5 = distance(self.origin, var_0.origin);
   var_6 = randomfloatrange(var_1.cfastteleportcloseindistpctmin, var_1.cfastteleportcloseindistpctmax);
   var_7 = var_5 * var_6;
 
-  if(var_7 < var_1.cfastteleportmindisttoenemytoteleport)
+  if(var_7 < var_1.cfastteleportmindisttoenemytoteleport) {
     var_7 = var_1.cfastteleportmindisttoenemytoteleport;
+  }
 
   var_8 = angleclamp180(var_3[1] + var_4);
   var_9 = anglesToForward((0, var_8, 0));
@@ -1084,8 +1152,9 @@ getdamageaccumulator() {
     self.damageaccumulator.lastdamagetime = 0;
   }
 
-  if(self.damageaccumulator.accumulateddamage == 0)
+  if(self.damageaccumulator.accumulateddamage == 0) {
     return undefined;
+  }
 
   return self.damageaccumulator;
 }
@@ -1105,8 +1174,9 @@ findteleportpos(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_5)) {
     var_5 = [];
 
-    foreach(var_7 in getnodearray("ratking_teleport", "targetname"))
-    var_5[var_5.size] = var_7.origin;
+    foreach(var_7 in getnodearray("ratking_teleport", "targetname")) {
+      var_5[var_5.size] = var_7.origin;
+    }
   }
 
   if(var_5.size == 0) {
@@ -1137,15 +1207,16 @@ findteleportpos(var_0, var_1, var_2, var_3, var_4) {
     if(var_17 > var_1 * var_1 && var_17 < var_2 * var_2) {
       var_14[var_14.size] = var_16;
 
-      if(!is_near_any_targets(var_16))
+      if(!is_near_any_targets(var_16)) {
         var_13[var_13.size] = var_16;
+      }
     }
   }
 
   if(var_13.size == 0) {
-    if(scripts\engine\utility::is_true(self.force_teleport))
+    if(scripts\engine\utility::is_true(self.force_teleport)) {
       var_13 = var_14;
-    else if(var_14.size <= 0) {
+    } else if(var_14.size <= 0) {
       self.findteleportposstatus = "failure";
       return;
     } else
@@ -1158,8 +1229,9 @@ findteleportpos(var_0, var_1, var_2, var_3, var_4) {
     if(isDefined(level.pam_grier)) {
       var_17 = distancesquared(var_16, level.pam_grier.origin);
 
-      if(var_17 < var_3)
+      if(var_17 < var_3) {
         continue;
+      }
     }
 
     var_20 = getclosestpointonnavmesh(var_16);
@@ -1229,17 +1301,19 @@ getvalidteleportpoints() {
 calcpathdist(var_0) {
   var_1 = 0;
 
-  for(var_2 = 0; var_2 < var_0.size - 1; var_2++)
+  for(var_2 = 0; var_2 < var_0.size - 1; var_2++) {
     var_1 = var_1 + distance(var_0[var_2], var_0[var_2 + 1]);
+  }
 
   return var_1;
 }
 
 is_near_any_targets(var_0) {
-  if(isDefined(level.active_eye_targets))
+  if(isDefined(level.active_eye_targets)) {
     var_1 = scripts\engine\utility::array_combine(level.players, level.active_eye_targets);
-  else
+  } else {
     var_1 = level.players;
+  }
 
   var_2 = 250000;
 
@@ -1251,12 +1325,14 @@ is_near_any_targets(var_0) {
       if(var_4.ignoreme || isDefined(var_4.owner) && var_4.owner.ignoreme) {
         continue;
       }
-      if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_4))
+      if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_4)) {
         continue;
+      }
     }
 
-    if(distancesquared(var_0, var_4.origin) < var_2)
+    if(distancesquared(var_0, var_4.origin) < var_2) {
       return 1;
+    }
   }
 
   return 0;
@@ -1275,8 +1351,9 @@ is_near_any_player(var_0) {
     if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_3)) {
       continue;
     }
-    if(distancesquared(var_0, var_3.origin) < var_1)
+    if(distancesquared(var_0, var_3.origin) < var_1) {
       return 1;
+    }
   }
 
   return 0;
@@ -1349,25 +1426,29 @@ shouldtrymelee() {
 }
 
 shouldtrystomp() {
-  if(!scripts\mp\agents\ratking\ratking_agent::rkhasstaff())
+  if(!scripts\mp\agents\ratking\ratking_agent::rkhasstaff()) {
     return 0;
+  }
 
   return level.rat_king_toggles["staff_stomp"];
 }
 
 shouldtrysummon() {
-  if(!scripts\mp\agents\ratking\ratking_agent::rkhasstaff())
+  if(!scripts\mp\agents\ratking\ratking_agent::rkhasstaff()) {
     return 0;
+  }
 
   return level.rat_king_toggles["summon"];
 }
 
 shouldtrystaffprojectile() {
-  if(!scripts\mp\agents\ratking\ratking_agent::rkhasstaff())
+  if(!scripts\mp\agents\ratking\ratking_agent::rkhasstaff()) {
     return 0;
+  }
 
-  if(rk_isonplatform())
+  if(rk_isonplatform()) {
     return 0;
+  }
 
   return level.rat_king_toggles["staff_projectile"];
 }
@@ -1378,10 +1459,11 @@ shouldtryshieldattack() {
 
 shouldtryshieldattackatpos() {
   if(level.rat_king_toggles["shield_attack_spot"]) {
-    if(scripts\cp\maps\cp_disco\rat_king_fight::canspawneyetarget())
+    if(scripts\cp\maps\cp_disco\rat_king_fight::canspawneyetarget()) {
       return 1;
-    else
+    } else {
       return 0;
+    }
   } else
     return 0;
 }
@@ -1395,8 +1477,9 @@ shouldtryteleport() {
 }
 
 tryforcedteleport() {
-  if(!scripts\engine\utility::is_true(self.force_teleport))
+  if(!scripts\engine\utility::is_true(self.force_teleport)) {
     return 0;
+  }
 
   var_0 = getvalidteleportpoints();
   var_1 = scripts\engine\utility::array_randomize_objects(var_0);
@@ -1406,15 +1489,17 @@ tryforcedteleport() {
 }
 
 shouldtrytraversalteleport() {
-  if(scripts\engine\utility::flag_exist("rk_fight_started") && scripts\engine\utility::flag("rk_fight_started"))
+  if(scripts\engine\utility::flag_exist("rk_fight_started") && scripts\engine\utility::flag("rk_fight_started")) {
     return 0;
-  else
+  } else {
     return 1;
+  }
 }
 
 trytraversalteleport() {
-  if(isDefined(self.nexttraversalteleporttesttime) && gettime() < self.nexttraversalteleporttesttime)
+  if(isDefined(self.nexttraversalteleporttesttime) && gettime() < self.nexttraversalteleporttesttime) {
     return 0;
+  }
 
   if(isDefined(self.pathgoalpos)) {
     var_0 = self pathdisttogoal();
@@ -1430,8 +1515,9 @@ trytraversalteleport() {
         var_6 = anim.asm[var_5];
         var_7 = var_6.states[var_4];
 
-        if(!isDefined(var_7))
+        if(!isDefined(var_7)) {
           var_4 = "traverse_external";
+        }
 
         if(var_4 == "traverse_external") {
           self.teleportpos = var_3;
@@ -1450,16 +1536,19 @@ shouldtryattackzombies() {
 }
 
 decideaction(var_0) {
-  if(tryforcedteleport())
+  if(tryforcedteleport()) {
     return anim.success;
+  }
 
-  if(shouldtrytraversalteleport() && trytraversalteleport())
+  if(shouldtrytraversalteleport() && trytraversalteleport()) {
     return anim.success;
+  }
 
   var_1 = scripts\mp\agents\ratking\ratking_agent::getenemy();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return anim.failure;
+  }
 
   var_2 = gettime();
 
@@ -1469,10 +1558,11 @@ decideaction(var_0) {
     foreach(var_5 in level.rat_king_attack_priorities) {
       switch (var_5) {
         case "attack_zombies":
-          if(shouldtryattackzombies() && tryattackzombies())
+          if(shouldtryattackzombies() && tryattackzombies()) {
             return anim.success;
-          else
+          } else {
             break;
+          }
         case "block":
           if(shouldtryblock() && tryblock()) {
             self.lastenemyengagetime = var_2;
@@ -1492,10 +1582,11 @@ decideaction(var_0) {
           } else
             break;
         case "summon":
-          if(shouldtrysummon() && trysummon(var_3))
+          if(shouldtrysummon() && trysummon(var_3)) {
             return anim.success;
-          else
+          } else {
             break;
+          }
         case "staff_projectile":
           if(shouldtrystaffprojectile() && trystaffprojectile(var_3)) {
             self.lastenemyengagetime = var_2;
@@ -1539,8 +1630,9 @@ doaction_begin(var_0) {
   var_1 = self.actions[self.desiredaction].fnbegin;
   self.desiredaction = undefined;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     [[var_1]](var_0);
+  }
 }
 
 doaction_tick(var_0) {
@@ -1549,8 +1641,9 @@ doaction_tick(var_0) {
   if(var_1 != "debug_handler") {
     var_2 = scripts\mp\agents\ratking\ratking_agent::getenemy();
 
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       return anim.failure;
+    }
   }
 
   var_3 = self.actions[var_1].fntick;
@@ -1558,8 +1651,9 @@ doaction_tick(var_0) {
   if(isDefined(var_3)) {
     var_4 = [[var_3]](var_0);
 
-    if(!isDefined(self.desiredaction))
+    if(!isDefined(self.desiredaction)) {
       return var_4;
+    }
   }
 
   if(isDefined(self.desiredaction)) {
@@ -1575,8 +1669,9 @@ doaction_end(var_0) {
   var_1 = getcurrentdesiredaction(var_0);
   var_2 = self.actions[var_1].fnend;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     [[var_2]](var_0);
+  }
 
   scripts\aitypes\ratking\bt_state_api::btstate_endstates(var_0);
   self.bt.instancedata[var_0] = undefined;
@@ -1589,8 +1684,9 @@ followenemy_begin(var_0) {
 followenemy_tick(var_0) {
   var_1 = scripts\mp\agents\ratking\ratking_agent::getenemy();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return anim.failure;
+  }
 
   var_2 = getclosestpointonnavmesh(var_1.origin, self);
   self scragentsetgoalpos(var_2);
@@ -1602,10 +1698,11 @@ followenemy_end(var_0) {
 }
 
 rk_isonplatform() {
-  if(scripts\engine\utility::is_true(self.isonplatform))
+  if(scripts\engine\utility::is_true(self.isonplatform)) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 rk_setonplatform(var_0) {
@@ -1613,10 +1710,11 @@ rk_setonplatform(var_0) {
 }
 
 rk_shouldbeonplatform() {
-  if(scripts\engine\utility::is_true(self.shouldbeonplatform))
+  if(scripts\engine\utility::is_true(self.shouldbeonplatform)) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 getrkstage() {
@@ -1624,10 +1722,11 @@ getrkstage() {
 }
 
 bt_rk_isonplatform(var_0) {
-  if(scripts\engine\utility::is_true(self.isonplatform))
+  if(scripts\engine\utility::is_true(self.isonplatform)) {
     return anim.success;
-  else
+  } else {
     return anim.failure;
+  }
 }
 
 setplatformstate() {
@@ -1670,10 +1769,11 @@ retrieveshieldaftertime(var_0) {
     rkdropshield();
   }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait(var_0);
-  else
+  } else {
     wait 60;
+  }
 
   rkretrieveshield();
   scripts\cp\maps\cp_disco\rat_king_fight::addblockcooldown(10000);
@@ -1686,13 +1786,15 @@ throwandrecovershield(var_0) {
   self notify("retrieveShieldAfterTime");
   self endon("retrieveShieldAfterTime");
 
-  if(scripts\mp\agents\ratking\ratking_agent::rkhasshield())
+  if(scripts\mp\agents\ratking\ratking_agent::rkhasshield()) {
     rkthrowshield();
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait(var_0);
-  else
+  } else {
     wait 60;
+  }
 
   rkretrieveshield();
 }
@@ -1700,28 +1802,31 @@ throwandrecovershield(var_0) {
 rkisstaffstomp() {
   var_0 = scripts\asm\asm::asm_getcurrentstate("ratking");
 
-  if(var_0 == "staff_stomp")
+  if(var_0 == "staff_stomp") {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 rkisblocking() {
   var_0 = scripts\asm\asm::asm_getcurrentstate("ratking");
 
-  if(isDefined(var_0) && (var_0 == "block_intro" || var_0 == "block_loop"))
+  if(isDefined(var_0) && (var_0 == "block_intro" || var_0 == "block_loop")) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 rkissummoning() {
   var_0 = scripts\asm\asm::asm_getcurrentstate("ratking");
 
-  if(isDefined(var_0) && var_0 == "summon")
+  if(isDefined(var_0) && var_0 == "summon") {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 retrievestaffaftertime(var_0) {
@@ -1737,10 +1842,11 @@ retrievestaffaftertime(var_0) {
     self setscriptablepartstate("staff", "staff_dissolve");
   }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait(var_0);
-  else
+  } else {
     wait 60;
+  }
 
   togglerkhasstaff(1);
   self setscriptablepartstate("staff", "staff_activate");
@@ -1750,17 +1856,21 @@ retrievestaffaftertime(var_0) {
 }
 
 shouldignoreenemy(var_0) {
-  if(!isalive(var_0))
+  if(!isalive(var_0)) {
     return 1;
+  }
 
-  if(var_0.ignoreme || isDefined(var_0.owner) && var_0.owner.ignoreme)
+  if(var_0.ignoreme || isDefined(var_0.owner) && var_0.owner.ignoreme) {
     return 1;
+  }
 
-  if(scripts\engine\utility::is_true(var_0.isfasttravelling))
+  if(scripts\engine\utility::is_true(var_0.isfasttravelling)) {
     return 1;
+  }
 
-  if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_0))
+  if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_0)) {
     return 1;
+  }
 
   return 0;
 }

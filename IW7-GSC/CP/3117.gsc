@@ -18,8 +18,9 @@ initzombieghost(var_0) {
 
 ghostlaunched(var_0) {
   if(getghostnavmode() == "launched") {
-    if(ghostshouldexplode(self))
+    if(ghostshouldexplode(self)) {
       ghostexplode(self, self.player_entangled_by, getghostdetonateexplosionrange());
+    }
 
     return anim.running;
   }
@@ -36,9 +37,9 @@ ghostentangled(var_0) {
       var_4 = var_3 + var_2 * get_ghost_entangled_dist_from_player();
       var_5 = bulletTrace(var_3, var_4, 0, var_1)["position"];
 
-      if(distancesquared(self.origin, var_5) < 360000)
+      if(distancesquared(self.origin, var_5) < 360000) {
         var_6 = var_5;
-      else {
+      } else {
         var_7 = vectorNormalize(var_5 - self.origin);
         var_6 = self.origin + var_7 * 600;
       }
@@ -76,10 +77,11 @@ ghosthover(var_0) {
       var_1 = scripts\engine\utility::array_remove(level.zombie_ghost_hover_nodes, self.ghost_hover_node);
       var_2 = getaliveenemies();
 
-      if(var_2.size > 0)
+      if(var_2.size > 0) {
         var_3 = scripts\engine\utility::random(var_2).origin;
-      else
+      } else {
         var_3 = self.origin;
+      }
 
       self.ghost_hover_node = getrandomhovernodesaroundtargetpos(var_3, var_1);
       self.ghost_target_position = self.ghost_hover_node.origin;
@@ -117,45 +119,55 @@ ghosthide(var_0) {
 checkattack(var_0) {
   scripts\asm\asm_bb::bb_clearmeleerequest();
 
-  if(!(getghostnavmode() == "attack"))
+  if(!(getghostnavmode() == "attack")) {
     return anim.failure;
+  }
 
-  if(self.ignoreall)
+  if(self.ignoreall) {
     return anim.failure;
+  }
 
-  if(!isDefined(self.zombie_ghost_target))
+  if(!isDefined(self.zombie_ghost_target)) {
     return anim.failure;
+  }
 
-  if(!scripts\cp\utility::isreallyalive(self.zombie_ghost_target))
+  if(!scripts\cp\utility::isreallyalive(self.zombie_ghost_target)) {
     return anim.failure;
+  }
 
-  if(isDefined(self.zombie_ghost_target.ignoreme) && self.zombie_ghost_target.ignoreme == 1)
+  if(isDefined(self.zombie_ghost_target.ignoreme) && self.zombie_ghost_target.ignoreme == 1) {
     return anim.failure;
+  }
 
-  if(self.aistate == "melee" || scripts\anim\notetracks_mp::isstatelocked())
+  if(self.aistate == "melee" || scripts\anim\notetracks_mp::isstatelocked()) {
     return anim.failure;
+  }
 
-  if(distancesquared(self.zombie_ghost_target.origin, self.origin) > 9216)
+  if(distancesquared(self.zombie_ghost_target.origin, self.origin) > 9216) {
     return anim.failure;
+  }
 
   scripts\asm\asm_bb::bb_requestmelee(self.zombie_ghost_target);
   return anim.failure;
 }
 
 chaseenemy(var_0) {
-  if(!(getghostnavmode() == "attack"))
+  if(!(getghostnavmode() == "attack")) {
     return anim.failure;
+  }
 
   if(self.ignoreall) {
     self.curmeleetarget = undefined;
     return anim.failure;
   }
 
-  if(!isDefined(self.zombie_ghost_target))
+  if(!isDefined(self.zombie_ghost_target)) {
     return anim.failure;
+  }
 
-  if(distancesquared(self.zombie_ghost_target.origin, self.origin) > 147456)
+  if(distancesquared(self.zombie_ghost_target.origin, self.origin) > 147456) {
     return anim.failure;
+  }
 
   self.ghost_target_position = self.zombie_ghost_target.origin;
   try_request_fly_type();
@@ -163,14 +175,17 @@ chaseenemy(var_0) {
 }
 
 seekenemy(var_0) {
-  if(!(getghostnavmode() == "attack"))
+  if(!(getghostnavmode() == "attack")) {
     return anim.failure;
+  }
 
-  if(isDefined(self.dontseekenemies))
+  if(isDefined(self.dontseekenemies)) {
     return anim.failure;
+  }
 
-  if(!isDefined(self.zombie_ghost_target))
+  if(!isDefined(self.zombie_ghost_target)) {
     return anim.failure;
+  }
 
   self.ghost_target_position = self.zombie_ghost_target.origin;
   try_request_fly_type(1024);
@@ -187,11 +202,13 @@ ghostattack(var_0) {
   var_3 = get_max_num_of_attacks();
   var_4 = randomintrange(get_min_num_of_attacks(), get_max_num_of_attacks() + 1);
 
-  for(var_5 = 0; var_5 < var_4; var_5++)
+  for(var_5 = 0; var_5 < var_4; var_5++) {
     var_1 waittill("ghost_played_melee_anim");
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0.num_of_ghosts_attacking_me--;
+  }
 
   var_1 scripts\asm\asm_bb::bb_clearmeleerequest();
   var_1 clearhovernode();
@@ -239,13 +256,15 @@ getaliveenemies() {
 }
 
 try_request_fly_type(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(isDefined(self.ghost_target_position) && distancesquared(self.ghost_target_position, self.origin) > var_0)
+  if(isDefined(self.ghost_target_position) && distancesquared(self.ghost_target_position, self.origin) > var_0) {
     scripts\asm\asm_bb::bb_requestmovetype("fly");
-  else
+  } else {
     scripts\asm\asm_bb::bb_requestmovetype("");
+  }
 }
 
 entangleghost(var_0, var_1) {
@@ -261,8 +280,9 @@ entangleghost(var_0, var_1) {
   var_0 scripts\asm\asm_bb::bb_clearmeleerequest();
   var_0 setmisttrailscriptable("off", var_0);
 
-  if(isDefined(level.fbd) && isDefined(level.fbd.fightstarted) && level.fbd.fightstarted)
+  if(isDefined(level.fbd) && isDefined(level.fbd.fightstarted) && level.fbd.fightstarted) {
     var_0 setscriptablepartstate("soul", "captured");
+  }
 }
 
 escapefromentanglement(var_0) {
@@ -290,10 +310,11 @@ launchfakeghost(var_0, var_1, var_2, var_3) {
   var_4 setModel(get_fake_ghost_model(var_4.color));
   var_4 setscriptablepartstate("animation", "on");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_5 = anglesToForward(var_3 getplayerangles());
-  else
+  } else {
     var_5 = (0, 0, 1);
+  }
 
   var_5 = var_5 * 9000;
   var_4 physicslaunchserver(var_4.origin, var_5);
@@ -312,8 +333,9 @@ get_fake_ghost_color(var_0) {
 }
 
 get_fake_ghost_model(var_0) {
-  if(isDefined(level.get_fake_ghost_model_func))
+  if(isDefined(level.get_fake_ghost_model_func)) {
     return [[level.get_fake_ghost_model_func]](var_0);
+  }
 
   return "fake_zombie_ghost_" + var_0;
 }
@@ -343,18 +365,21 @@ fake_ghost_explode(var_0, var_1, var_2) {
 }
 
 get_exp_vfx_color(var_0) {
-  if(issubstr(var_0, "bomb"))
+  if(issubstr(var_0, "bomb")) {
     return strtok(var_0, "_")[0];
+  }
 
   return var_0;
 }
 
 ghostshouldexplode(var_0) {
-  if(isDefined(var_0.player_entangled_by) && var_0.player_entangled_by secondaryoffhandbuttonPressed())
+  if(isDefined(var_0.player_entangled_by) && var_0.player_entangled_by secondaryoffhandbuttonPressed()) {
     return 1;
+  }
 
-  if(gettime() - var_0.start_being_launched > 5000)
+  if(gettime() - var_0.start_being_launched > 5000) {
     return 1;
+  }
 
   return 0;
 }
@@ -374,8 +399,9 @@ ghostexplosionradiusdamage(var_0, var_1, var_2) {
       var_1 thread scripts\cp\cp_damage::updatedamagefeedback("hitcritical");
 
       if([[level.should_moving_target_explode]](var_0, var_3)) {
-        if(isDefined(level.process_player_gns_combo_func))
+        if(isDefined(level.process_player_gns_combo_func)) {
           [[level.process_player_gns_combo_func]](var_1, var_3);
+        }
 
         process_moving_target_hit(var_3, var_1, var_0);
       } else if(isDefined(level.hit_wrong_moving_target_func))
@@ -386,10 +412,11 @@ ghostexplosionradiusdamage(var_0, var_1, var_2) {
 }
 
 process_moving_target_hit(var_0, var_1, var_2) {
-  if(isDefined(level.process_moving_target_hit_func))
+  if(isDefined(level.process_moving_target_hit_func)) {
     [[level.process_moving_target_hit_func]](var_0, var_1, var_2);
-  else
+  } else {
     remove_moving_target_default(var_0, var_1);
+  }
 }
 
 remove_moving_target_default(var_0, var_1) {
@@ -405,8 +432,9 @@ remove_moving_target(var_0, var_1) {
 }
 
 getclosestactivemovingtargetwithinrange(var_0, var_1) {
-  if(!isDefined(level.moving_target_groups))
+  if(!isDefined(level.moving_target_groups)) {
     return undefined;
+  }
 
   var_2 = [];
 
@@ -415,8 +443,9 @@ getclosestactivemovingtargetwithinrange(var_0, var_1) {
       if(!isDefined(var_6)) {
         continue;
       }
-      if(distancesquared(var_0.origin, var_6.origin) < var_1)
+      if(distancesquared(var_0.origin, var_6.origin) < var_1) {
         var_2[var_2.size] = var_6;
+      }
     }
   }
 
@@ -434,8 +463,9 @@ getactiveghostswithinrange(var_0, var_1) {
     if(isentangled(var_4)) {
       continue;
     }
-    if(distancesquared(var_0.origin, var_4.origin) < var_1)
+    if(distancesquared(var_0.origin, var_4.origin) < var_1) {
       var_2[var_2.size] = var_4;
+    }
   }
 
   return var_2;
@@ -507,8 +537,9 @@ getrandomhovernodesaroundtargetpos(var_0, var_1) {
 playghostexplosionvfx(var_0) {
   var_1 = vectorNormalize(var_0.velocity);
 
-  if(var_1 == (0, 0, 0))
+  if(var_1 == (0, 0, 0)) {
     var_1 = (0, 0, 1);
+  }
 
   var_2 = vectortoangles(var_1);
   playFX(level._effect["ghost_explosion_death"], var_0.origin, var_1, anglestoup(var_2));

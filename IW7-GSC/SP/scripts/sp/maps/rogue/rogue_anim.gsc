@@ -784,8 +784,9 @@ _id_6C49(var_0) {
   scripts\engine\utility::flag_set("omar_down");
   var_2 = scripts\engine\utility::get_array_of_closest(level._id_B4F9.origin, getaiarray("axis"), undefined, 2, 350, 10);
 
-  if(var_2.size)
+  if(var_2.size) {
     scripts\engine\utility::array_thread(var_2, scripts\sp\utility::_id_54C6);
+  }
 }
 
 _id_6C48(var_0) {
@@ -891,20 +892,23 @@ _id_21C0(var_0) {
 }
 
 _id_2F44(var_0) {
-  if(scripts\engine\utility::flag("player_visited_kitchen") && !isDefined(level._id_B33E._id_1512))
+  if(scripts\engine\utility::flag("player_visited_kitchen") && !isDefined(level._id_B33E._id_1512)) {
     level.player scripts\sp\utility::_id_10350("asteroid_plr_betterbeer");
-  else
+  } else {
     level.player scripts\sp\utility::_id_10350("asteroid_plr_betterthantitan");
+  }
 }
 
 _id_2F42(var_0) {
-  if(!scripts\engine\utility::flag("array1_nag"))
+  if(!scripts\engine\utility::flag("array1_nag")) {
     level._id_B33B scripts\sp\utility::_id_10346("asteroid_brk_Shitthatwasclose");
+  }
 }
 
 _id_2F43(var_0) {
-  if(!scripts\engine\utility::flag("array2_nag"))
+  if(!scripts\engine\utility::flag("array2_nag")) {
     level._id_B4F9 scripts\sp\utility::_id_10346("asteroid_usf_Catchyourbreath");
+  }
 }
 
 _id_F995(var_0) {
@@ -976,10 +980,11 @@ _id_6C47(var_0) {
   level.player _meth_82C0("fade_to_black_minus_music", 0.1);
   wait 0.2;
 
-  if(getdvarint("loop_finale", 0) == 0)
+  if(getdvarint("loop_finale", 0) == 0) {
     scripts\sp\utility::_id_BF95();
-  else
+  } else {
     map_restart();
+  }
 }
 
 _id_9476(var_0) {

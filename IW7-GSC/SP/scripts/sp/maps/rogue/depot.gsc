@@ -42,8 +42,9 @@ _id_F0CB() {
 _id_F0D2() {}
 
 _id_3B54() {
-  foreach(var_1 in level.allies)
-  var_1.disableplayeradsloscheck = 0;
+  foreach(var_1 in level.allies) {
+    var_1.disableplayeradsloscheck = 0;
+  }
 }
 
 _id_5244() {
@@ -59,8 +60,9 @@ _id_5244() {
   _id_1ABA();
   level.player scripts\sp\utility::_id_F526("normal");
 
-  foreach(var_1 in level._id_10AC8)
-  var_1 _meth_8250(1);
+  foreach(var_1 in level._id_10AC8) {
+    var_1 _meth_8250(1);
+  }
 
   thread _id_0B1F::_id_1AAA("depot_exit_airlock");
   thread _id_1D12();
@@ -77,8 +79,9 @@ _id_5244() {
   _id_523C();
   scripts\engine\utility::flag_wait("depot_combat_finished");
 
-  foreach(var_1 in level._id_10AC8)
-  var_1 _meth_8250(0);
+  foreach(var_1 in level._id_10AC8) {
+    var_1 _meth_8250(0);
+  }
 
   thread scripts\sp\maps\rogue\rogue_util::_id_B344(1, undefined, "stratcom");
   _id_F0CA();
@@ -94,10 +97,11 @@ _id_6ED3() {
   while(!scripts\engine\utility::flag("player_in_depot_pit")) {
     wait(randomfloatrange(0.75, 1.5));
 
-    if(scripts\engine\utility::flag("power_on"))
+    if(scripts\engine\utility::flag("power_on")) {
       killfxontag(level._effect["ra_flashlight"], self._id_AC92, "tag_origin");
-    else
+    } else {
       playFXOnTag(level._effect["ra_flashlight"], self._id_AC92, "tag_origin");
+    }
 
     var_0 = level scripts\engine\utility::waittill_any_return("power_on", "power_off", "player_in_depot_pit");
   }
@@ -111,23 +115,25 @@ _id_524C() {
   var_1 = (80, 800, 500);
 
   while(!scripts\engine\utility::flag("breaking_bridge")) {
-    if(scripts\engine\utility::cointoss())
+    if(scripts\engine\utility::cointoss()) {
       var_0 = "rogue_steam_hiss_medium_close_deep";
-    else if(scripts\engine\utility::cointoss())
+    } else if(scripts\engine\utility::cointoss()) {
       var_0 = "scn_rogue_finale_dropship_impt_shake";
-    else if(scripts\engine\utility::cointoss())
+    } else if(scripts\engine\utility::cointoss()) {
       var_0 = "pnr_capship_settle";
-    else
+    } else {
       var_0 = "finale_doors_open_fast";
+    }
 
-    if(scripts\engine\utility::cointoss())
+    if(scripts\engine\utility::cointoss()) {
       var_1 = (80, 800, 500);
-    else if(scripts\engine\utility::cointoss())
+    } else if(scripts\engine\utility::cointoss()) {
       var_1 = (-800, 0, -800);
-    else if(scripts\engine\utility::cointoss())
+    } else if(scripts\engine\utility::cointoss()) {
       var_1 = (-10, -800, 800);
-    else
+    } else {
       var_1 = (0, 0, 800);
+    }
 
     thread scripts\engine\utility::play_sound_in_space(var_0, level.player.origin + var_1);
     wait(randomfloatrange(0.3, 9.5));
@@ -158,8 +164,9 @@ _id_523E() {
 _id_5239(var_0) {
   var_1 = getaiarray("axis");
 
-  if(isDefined(var_1) && var_1.size > 0 && isDefined(var_0))
+  if(isDefined(var_1) && var_1.size > 0 && isDefined(var_0)) {
     var_1[randomint(var_1.size)] playSound(var_0);
+  }
 }
 
 _id_523D() {
@@ -189,8 +196,9 @@ _id_59C1(var_0) {
   var_0.ignoreme = 1;
   var_0.fixednode = 1;
 
-  while(_id_0B1E::_id_794C("depot_airlock_door") <= 32)
+  while(_id_0B1E::_id_794C("depot_airlock_door") <= 32) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_set("activate_peek_bots");
   scripts\engine\utility::flag_set("combat_section_active");
@@ -227,8 +235,9 @@ _id_523B() {
   var_1 = getEntArray("initial_depot_snipers", "targetname");
   var_2 = getglassarray("depot_sniper_glass");
 
-  foreach(var_4 in var_0)
-  var_4.count = 5;
+  foreach(var_4 in var_0) {
+    var_4.count = 5;
+  }
 
   scripts\sp\utility::_id_6F54(var_0);
 
@@ -253,8 +262,9 @@ _id_523B() {
   thread _id_5241();
   wait 2.5;
 
-  foreach(var_13 in var_2)
-  destroyglass(var_13, (0, 90, 0));
+  foreach(var_13 in var_2) {
+    destroyglass(var_13, (0, 90, 0));
+  }
 }
 
 _id_5241() {
@@ -263,8 +273,9 @@ _id_5241() {
   var_0 = scripts\sp\utility::array_removedeadvehicles(var_0);
 
   foreach(var_2 in var_0) {
-    if(var_2.classname == "actor_enemy_c6_sniper")
+    if(var_2.classname == "actor_enemy_c6_sniper") {
       var_2.fixednode = 1;
+    }
   }
 }
 
@@ -278,8 +289,9 @@ _id_523C() {
   scripts\engine\utility::flag_wait("depot_spawn_wave_2");
   var_0 = getEntArray("depot_wave_2_spawner", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2.count = 3;
+  foreach(var_2 in var_0) {
+    var_2.count = 3;
+  }
 
   scripts\sp\utility::_id_6F54(var_0);
 }
@@ -317,8 +329,9 @@ _id_F5A7() {
       self._id_2894 = 9999;
       thread _id_9359();
 
-      while(distance(level.player.origin, self.origin) <= 150)
+      while(distance(level.player.origin, self.origin) <= 150) {
         wait 0.1;
+      }
 
       self._id_2894 = var_2;
       self notify("stop_improving_damage");
@@ -333,8 +346,9 @@ _id_9359() {
   for(;;) {
     level.player waittill("damage", var_0, var_1);
 
-    if(var_1 == self)
+    if(var_1 == self) {
       level.player dodamage(var_0 * 2, self.origin, self);
+    }
   }
 }
 
@@ -363,8 +377,9 @@ _id_2D15() {
 }
 
 _id_1ABA() {
-  foreach(var_1 in level._id_10AC8)
-  var_1 _meth_82EE(getnode("depot_start" + var_1._id_111B7, "targetname"));
+  foreach(var_1 in level._id_10AC8) {
+    var_1 _meth_82EE(getnode("depot_start" + var_1._id_111B7, "targetname"));
+  }
 
   var_3 = scripts\sp\maps\rogue\rogue_util::_id_F943("canyon_airlock_door");
   var_4 = getEnt("cr_exit_clip", "targetname");
@@ -377,14 +392,16 @@ _id_1ABA() {
   var_3 rotateYaw(120, 0.05, 0, 0);
   thread _id_11612();
 
-  while(_id_0B1E::_id_794C("depot_airlock_door") <= 42)
+  while(_id_0B1E::_id_794C("depot_airlock_door") <= 42) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_set("player_in_depot");
 
   foreach(var_1 in level._id_10AC8) {
-    if(isDefined(var_1._id_1FBD))
+    if(isDefined(var_1._id_1FBD)) {
       var_1._id_1FBD notify("stop_cr_loop");
+    }
   }
 
   wait 0.05;
@@ -410,16 +427,18 @@ _id_523F() {
   var_0 = gettime();
   scripts\engine\utility::flag_wait("power_off_depot_stairs");
 
-  if(var_0 < 5000)
+  if(var_0 < 5000) {
     wait(5000 - var_0);
+  }
 
   thread scripts\sp\maps\rogue\rogue_util::_id_9A6C(30, 4, 0, "kickoff_enemy_bots_depot", 0.05);
   level waittill("kickoff_enemy_bots_depot");
 }
 
 _id_1D12() {
-  foreach(var_1 in level._id_10AC8)
-  var_1 scripts\sp\utility::_id_54F7();
+  foreach(var_1 in level._id_10AC8) {
+    var_1 scripts\sp\utility::_id_54F7();
+  }
 
   var_3 = getEnt("initial_depot_color_trig", "targetname");
   var_3 notify("trigger");
@@ -442,8 +461,9 @@ _id_5250() {
 _id_524B() {
   var_0 = scripts\engine\utility::getStructArray("depot_fx_topper", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_CE6C();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_CE6C();
+  }
 }
 
 _id_CE6C() {
@@ -499,8 +519,9 @@ _id_7AD4() {
   var_1 = 0;
 
   foreach(var_3 in var_0) {
-    if(var_3.classname == "actor_enemy_c6_worker")
+    if(var_3.classname == "actor_enemy_c6_worker") {
       var_1++;
+    }
   }
 
   return var_1;
@@ -513,13 +534,15 @@ _id_EF27() {
   while(!scripts\engine\utility::flag("flag_cvl_door")) {
     scripts\engine\utility::flag_wait("power_on");
 
-    foreach(var_2 in var_0)
-    var_2 setscriptablepartstate("onoff", "on");
+    foreach(var_2 in var_0) {
+      var_2 setscriptablepartstate("onoff", "on");
+    }
 
     scripts\engine\utility::flag_waitopen("power_on");
 
-    foreach(var_2 in var_0)
-    var_2 setscriptablepartstate("onoff", "off");
+    foreach(var_2 in var_0) {
+      var_2 setscriptablepartstate("onoff", "off");
+    }
   }
 }
 
@@ -532,13 +555,15 @@ _id_F922() {
   var_0 = scripts\engine\utility::getStruct("depot_corpse_node1", "targetname");
   var_1 = scripts\sp\maps\rogue\rogue_util::_id_F9D4("miner_corpse", 3, "head_rorke_assault_injured");
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_0 scripts\sp\anim::_id_1EC3(var_1[var_2], "depot_corpse_" + var_2);
+  }
 }
 
 _id_11613() {
-  if(!scripts\engine\utility::flag("tp_depot_flag_catwalk") || !scripts\engine\utility::flag("tp_depot_flag_stairs"))
+  if(!scripts\engine\utility::flag("tp_depot_flag_catwalk") || !scripts\engine\utility::flag("tp_depot_flag_stairs")) {
     scripts\engine\utility::flag_wait_any("tp_depot_flag_catwalk", "tp_depot_flag_stairs");
+  }
 
   if(scripts\engine\utility::flag("tp_depot_flag_catwalk")) {
     var_0 = getnode("tp_depot_nodeMCO_catwalk", "targetname");
@@ -561,11 +586,13 @@ _id_1161D(var_0, var_1) {
   level endon("player_in_depot_pit");
 
   if(scripts\sp\utility::_id_65DF(var_1) == 0) {
-    while(scripts\sp\utility::_id_CFAC(self))
+    while(scripts\sp\utility::_id_CFAC(self)) {
       wait 0.1;
+    }
 
-    if(isDefined(self.melee))
+    if(isDefined(self.melee)) {
       self.melee._id_2720 = 1;
+    }
 
     wait 0.1;
     self _meth_80F1(var_0.origin, var_0.angles);
@@ -605,8 +632,9 @@ _id_F0CA() {
 _id_3B55() {
   scripts\engine\utility::flag_set("depot_finished");
 
-  foreach(var_1 in level.allies)
-  var_1.disableplayeradsloscheck = 1;
+  foreach(var_1 in level.allies) {
+    var_1.disableplayeradsloscheck = 1;
+  }
 }
 
 _id_5249() {
@@ -624,8 +652,9 @@ _id_5249() {
 }
 
 _id_5248() {
-  foreach(var_1 in level.allies)
-  var_1.disableplayeradsloscheck = 1;
+  foreach(var_1 in level.allies) {
+    var_1.disableplayeradsloscheck = 1;
+  }
 
   thread _id_4069();
   scripts\sp\maps\rogue\rogue_util::_id_119AF(1);
@@ -654,8 +683,9 @@ _id_4069() {
   var_0 = getaiarray("axis");
   var_0 = scripts\sp\utility::array_removedeadvehicles(var_0);
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_A5D1();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_A5D1();
+  }
 }
 
 _id_A5D1() {
@@ -691,8 +721,9 @@ _id_6873() {
   var_2 scripts\sp\anim::_id_1EC3(var_0, "pit_collapse");
   scripts\engine\utility::flag_wait("clean_up_depot_enemies");
 
-  if(!level.console)
+  if(!level.console) {
     waitforalltransients();
+  }
 
   scripts\engine\utility::flag_clear("combat_section_active");
   var_2 thread scripts\sp\anim::_id_1F35(var_0, "pit_collapse");
@@ -704,8 +735,9 @@ _id_6873() {
   scripts\engine\utility::exploder("exploder_tank_sink");
   scripts\engine\utility::array_call(level._id_5247, ::show);
 
-  foreach(var_4 in level._id_5246)
-  var_4 rotatevelocity((randomfloatrange(50, 100), randomfloatrange(50, 100), randomfloatrange(50, 100)), 1);
+  foreach(var_4 in level._id_5246) {
+    var_4 rotatevelocity((randomfloatrange(50, 100), randomfloatrange(50, 100), randomfloatrange(50, 100)), 1);
+  }
 
   scripts\engine\utility::array_call(level._id_5246, ::movegravity, (100, -100, 0), 1);
   scripts\engine\utility::flag_wait_or_timeout("flag_depot_pit_jump", 5);
@@ -728,8 +760,9 @@ _id_5471() {
   level._id_B33E scripts\sp\utility::_id_10346("rogue_ksh_cmonmanwhyyou");
   scripts\engine\utility::flag_wait("flag_depot_pit_jump");
 
-  while(!level.player isonground())
+  while(!level.player isonground()) {
     scripts\engine\utility::waitframe();
+  }
 
   level.player scripts\sp\utility::_id_D090("ges_radio");
   level.player scripts\engine\utility::delaycall(0.5, ::playsound, "ges_plr_radio_on");
@@ -787,16 +820,18 @@ _id_CBE4() {
 
   level.doors["civilian_buddydoor"] waittill("buddydoor_pull_complete");
 
-  foreach(var_2 in var_0)
-  var_2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
+  }
 }
 
 _id_524F() {
   wait 0.2;
   var_0 = getscriptablearray("depot_screen_scriptable", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_524E();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_524E();
+  }
 }
 
 _id_524E() {
@@ -825,13 +860,15 @@ additional_light_fixtures() {
         continue;
       }
 
-      if(isDefined(var_0["jLight"]["ent"]))
+      if(isDefined(var_0["jLight"]["ent"])) {
         var_0["jLight"]["ent"] setModel(var_0["jLight"]["off"]);
+      }
     }
 
     level scripts\engine\utility::waittill_any("power_on", "power_off", "flag_cvl_start");
   }
 
-  foreach(var_2 in var_0)
-  var_0["jLight"]["ent"] delete();
+  foreach(var_2 in var_0) {
+    var_0["jLight"]["ent"] delete();
+  }
 }

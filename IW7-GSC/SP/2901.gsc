@@ -43,14 +43,16 @@ _id_113B2(var_0, var_1) {
   var_2 = tablelookuprownum("sp/names.csv", var_1, "__END__");
   var_3 = [];
 
-  for(var_4 = 0; var_4 < var_2; var_4++)
+  for(var_4 = 0; var_4 < var_2; var_4++) {
     var_3[var_4] = var_4;
+  }
 
   var_3 = scripts\engine\utility::array_randomize(var_3);
   var_5 = min(50, var_2);
 
-  for(var_4 = 0; var_4 < var_5; var_4++)
+  for(var_4 = 0; var_4 < var_5; var_4++) {
     _id_1719(var_0, var_3[var_4], var_1);
+  }
 
   var_3 = undefined;
 }
@@ -69,12 +71,13 @@ _id_1718(var_0, var_1) {
 }
 
 _id_171A(var_0, var_1) {
-  foreach(var_3 in var_1)
-  level._id_BE4D[var_0][level._id_BE4D[var_0].size] = var_3;
+  foreach(var_3 in var_1) {
+    level._id_BE4D[var_0][level._id_BE4D[var_0].size] = var_3;
+  }
 }
 
 _id_E05B(var_0, var_1) {
-  level._id_BE4D[var_0] = scripts\engine\utility::array_remove(level._id_BE4D[var_0], var_1);
+  level._id_BE4D[var_0] = ::scripts\engine\utility::array_remove(level._id_BE4D[var_0], var_1);
 }
 
 _id_9725() {
@@ -102,8 +105,9 @@ _id_9725() {
 _id_C096(var_0) {
   var_1 = strtok(var_0, " ");
 
-  if(var_1.size > 1)
+  if(var_1.size > 1) {
     var_0 = var_1[1];
+  }
 
   return var_0;
 }
@@ -111,8 +115,9 @@ _id_C096(var_0) {
 _id_E081(var_0) {
   foreach(var_2 in level._id_EDB9) {
     foreach(var_4 in level._id_BE4D[var_0]) {
-      if(var_2 == var_4)
+      if(var_2 == var_4) {
         _id_E05B(var_0, var_4);
+      }
     }
   }
 }
@@ -133,10 +138,11 @@ _id_7B05(var_0) {
     return;
   }
   if(isDefined(self._id_29B8) && self._id_29B8) {
-    if(self.script_team == "axis")
+    if(self.script_team == "axis") {
       return;
-    else
+    } else {
       self.voice = "unitednationsjackal";
+    }
   }
 
   if(isDefined(self._id_EDB8)) {
@@ -184,20 +190,22 @@ _id_7B07(var_0) {
     self._id_1A70 = "sergeant";
   }
 
-  if(isai(self) && self isbadguy())
+  if(isai(self) && self isbadguy()) {
     self._id_1A53 = var_4;
-  else
+  } else {
     self.name = var_4;
+  }
 }
 
 _id_7E38(var_0) {
   if(var_0 > 5) {
     self._id_1A70 = "private";
 
-    if(scripts\engine\utility::cointoss())
+    if(scripts\engine\utility::cointoss()) {
       return "SN ";
-    else
+    } else {
       return "AN ";
+    }
   } else if(var_0 == 5) {
     self._id_1A70 = "private";
     return "PO3 ";
@@ -230,8 +238,9 @@ _id_8060(var_0) {
 }
 
 getrankfromname(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     self._id_1A70 = "private";
+  }
 
   var_1 = strtok(var_0, " ");
   var_2 = var_1[0];

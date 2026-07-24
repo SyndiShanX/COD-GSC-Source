@@ -79,8 +79,9 @@ main() {
   level._id_FD6E._id_E35D _id_0B51::_id_FDCB("hide");
   scripts\engine\utility::flag_set("hide_hull");
 
-  if(isDefined(level._id_9DD0))
+  if(isDefined(level._id_9DD0)) {
     level.player _meth_84FE();
+  }
 
   thread scripts\sp\maps\sa_moon\sa_moon_util::_id_C0B3();
   thread _id_0F16::_id_FA47();
@@ -212,8 +213,9 @@ init_flags() {
   scripts\engine\utility::flag_init("sa01_flag_start_exfil");
   _id_0F0E::_id_F902();
 
-  if(!scripts\engine\utility::flag_exist("flag_armory_defend"))
+  if(!scripts\engine\utility::flag_exist("flag_armory_defend")) {
     scripts\engine\utility::flag_init("flag_armory_defend");
+  }
 }
 
 _id_96F8() {
@@ -341,6 +343,7 @@ _id_E954() {
 }
 
 _id_E94D() {
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     scripts\sp\specialist_MAYBE::_id_F53C(0);
+  }
 }

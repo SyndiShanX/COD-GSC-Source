@@ -8,14 +8,17 @@ init_waterfall_trap() {
   var_1 = getEntArray(var_0.target, "targetname");
 
   foreach(var_3 in var_1) {
-    if(var_3.classname == "script_model")
+    if(var_3.classname == "script_model") {
       var_0.valve = var_3;
+    }
 
-    if(var_3.classname == "physicsvolume")
+    if(var_3.classname == "physicsvolume") {
       var_0.physvolume = var_3;
+    }
 
-    if(var_3.classname == "trigger_multiple")
+    if(var_3.classname == "trigger_multiple") {
       var_0.trigger = var_3;
+    }
   }
 }
 
@@ -100,10 +103,11 @@ fling_zombie(var_0, var_1) {
   self.disable_armor = 1;
   wait(randomfloatrange(0.5, 1.5));
 
-  if(var_1 scripts\cp\utility::is_valid_player())
+  if(var_1 scripts\cp\utility::is_valid_player()) {
     var_2 = var_1;
-  else
+  } else {
     var_2 = undefined;
+  }
 
   self dodamage(self.health + 100, var_0.trigger.origin, var_2, var_2, "MOD_UNKNOWN", "zmb_imsprojectile_mp");
 }

@@ -48,8 +48,9 @@ _id_475F(var_0) {
   if(isDefined(level._id_93A9) && level.player._id_4759.active.size > 3) {
     var_3 = level.player._id_4759.active.size - 3;
 
-    for(var_4 = 0; var_4 < var_3; var_4++)
+    for(var_4 = 0; var_4 < var_3; var_4++) {
       level.player._id_4759.active[var_4] notify("expired");
+    }
   }
 
   var_5 = (0, level.player.angles[1] - 90, 0);
@@ -86,8 +87,9 @@ _id_DFDF(var_0) {
   if(!scripts\engine\utility::array_contains(level.player._id_4759._id_11168, self)) {
     return;
   }
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   if(isDefined(self.grenade)) {
     self.origin = self.grenade.origin;
@@ -96,8 +98,9 @@ _id_DFDF(var_0) {
     self.grenade delete();
   }
 
-  if(var_0)
+  if(var_0) {
     level.player._id_4759._id_11168 = scripts\engine\utility::array_remove(level.player._id_4759._id_11168, self);
+  }
 }
 
 _id_DFBD() {
@@ -109,8 +112,9 @@ _id_DFBD() {
   foreach(var_2 in var_0) {
     var_2 _id_DFDF(1);
 
-    if(isDefined(var_2._id_BE07))
+    if(isDefined(var_2._id_BE07)) {
       var_2._id_BE07 notify("death");
+    }
   }
 
   for(;;) {
@@ -132,8 +136,9 @@ _id_4763(var_0, var_1, var_2, var_3) {
   var_4 = spawncoverwall(var_0, var_1, var_2);
 
   if(!isDefined(var_4)) {
-    if(isDefined(var_3.origin))
+    if(isDefined(var_3.origin)) {
       playFX(level._id_7649["coverwall_dud"], var_3.origin);
+    }
 
     level.player._id_4759._id_11168 = scripts\engine\utility::array_remove(level.player._id_4759._id_11168, var_3);
     return;
@@ -155,14 +160,17 @@ _id_4763(var_0, var_1, var_2, var_3) {
   var_3 thread _id_475E(35);
   var_4 thread _id_475A();
 
-  if(1)
+  if(1) {
     var_4 thread _id_475D();
+  }
 
-  if(isDefined(level.player._id_4759) && level.player._id_4759._id_389C)
+  if(isDefined(level.player._id_4759) && level.player._id_4759._id_389C) {
     thread _id_B9C4();
+  }
 
-  if(getdvarint("debug_coverwall"))
+  if(getdvarint("debug_coverwall")) {
     var_4 thread draw_cool_circle_til_notify();
+  }
 
   thread _id_10696(var_4);
   _id_0F18::_id_10E8A("broadcast", "attack", var_0, 1000);
@@ -183,8 +191,9 @@ _id_475A() {
     self waittill("coverwall_expand_hit_actor", var_0);
 
     if(var_0.team == "axis") {
-      if(var_0 _id_3870())
+      if(var_0 _id_3870()) {
         var_0 _meth_81D0();
+      }
     }
   }
 }
@@ -193,8 +202,9 @@ _id_3870() {
   var_0["c8"] = 1;
   var_0["c12"] = 1;
 
-  if(isDefined(self.unittype) && isDefined(var_0[self.unittype]))
+  if(isDefined(self.unittype) && isDefined(var_0[self.unittype])) {
     return 0;
+  }
 
   return 1;
 }
@@ -233,16 +243,18 @@ _id_10696(var_0) {
     var_15 = anglestoright(var_0.angles) * var_11;
     var_16 = var_1 + var_10 + var_15;
 
-    if(var_0 _id_3913(var_16, var_12))
+    if(var_0 _id_3913(var_16, var_12)) {
       var_0._id_473D[var_7 + "_" + var_8] = spawncovernode(var_16, var_12, "cover stand", 512, var_14);
-    else
+    } else {
       var_13 = var_2;
+    }
 
     var_8 = scripts\engine\utility::ter_op(var_8 == "a", "b", "a");
     var_7 = scripts\engine\utility::ter_op(var_9 >= 2, "left", "right");
 
-    if(var_9 == 2)
+    if(var_9 == 2) {
       wait 0.05;
+    }
   }
 
   var_0 thread _id_B9FB();
@@ -263,8 +275,9 @@ _id_3913(var_0, var_1) {
   var_4 = scripts\common\trace::capsule_trace(var_0 + (0, 0, 20), var_0, 18, 72, var_1, self, scripts\common\trace::create_solid_ai_contents(1));
 
   if(isDefined(var_4["fraction"]) && var_4["fraction"] < 0.5) {
-    if(getdvarint("debug_coverwall"))
+    if(getdvarint("debug_coverwall")) {
       scripts\common\trace::draw_trace(var_4, (1, 0, 0), 0, 200);
+    }
 
     return 0;
   }
@@ -274,14 +287,16 @@ _id_3913(var_0, var_1) {
   var_4 = scripts\common\trace::ray_trace(var_5, var_6);
 
   if(isDefined(var_4["fraction"]) && var_4["fraction"] < 1) {
-    if(getdvarint("debug_coverwall"))
+    if(getdvarint("debug_coverwall")) {
       scripts\common\trace::draw_trace(var_4, (1, 0, 0), 1, 200);
+    }
 
     return 0;
   }
 
-  if(getdvarint("debug_coverwall"))
+  if(getdvarint("debug_coverwall")) {
     scripts\common\trace::draw_trace(var_4, (0, 1, 0), 1, 200);
+  }
 
   return 1;
 }
@@ -298,21 +313,25 @@ _id_B9FB() {
   var_1 = undefined;
   var_2 = [];
 
-  if(isDefined(self._id_473D["right_a"]))
+  if(isDefined(self._id_473D["right_a"])) {
     var_0 = self._id_473D["right_a"];
-  else if(isDefined(self._id_473D["left_a"]))
+  } else if(isDefined(self._id_473D["left_a"])) {
     var_0 = self._id_473D["left_a"];
+  }
 
-  if(isDefined(self._id_473D["right_b"]))
+  if(isDefined(self._id_473D["right_b"])) {
     var_1 = self._id_473D["right_b"];
-  else if(isDefined(self._id_473D["left_b"]))
+  } else if(isDefined(self._id_473D["left_b"])) {
     var_1 = self._id_473D["left_b"];
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_2[var_2.size] = var_0;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2[var_2.size] = var_1;
+  }
 
   for(;;) {
     var_2 = scripts\engine\utility::array_removeundefined(var_2);
@@ -361,8 +380,9 @@ _id_E16A(var_0) {
 _id_E0E1(var_0) {
   foreach(var_4, var_2 in self._id_473D) {
     if(var_0 == self._id_473D[var_4]) {
-      if(getdvarint("debug_coverwall"))
+      if(getdvarint("debug_coverwall")) {
         var_3 = var_0.origin;
+      }
 
       despawncovernode(var_0);
       self._id_473D = scripts\sp\utility::_id_22B2(self._id_473D, var_4);
@@ -393,8 +413,9 @@ _id_C049() {
         continue;
       }
 
-      if(getdvarint("debug_coverwall"))
+      if(getdvarint("debug_coverwall")) {
         scripts\common\trace::draw_trace(var_7, (0, 1, 0), 0, 20);
+      }
     }
   }
 
@@ -417,25 +438,30 @@ _id_475E(var_0) {
   var_3 = self._id_BE07.origin;
   var_4 = self._id_BE07.owner;
 
-  if(scripts\engine\utility::flag("coverwall_force_delete"))
+  if(scripts\engine\utility::flag("coverwall_force_delete")) {
     scripts\engine\utility::waitframe();
+  }
 
   if(isDefined(self._id_BE07) && isDefined(self._id_BE07._id_473D)) {
     foreach(var_6 in self._id_BE07._id_473D) {
-      if(isDefined(var_6))
+      if(isDefined(var_6)) {
         despawncovernode(var_6);
+      }
     }
   }
 
-  if(isDefined(self._id_BE07._id_BE64))
+  if(isDefined(self._id_BE07._id_BE64)) {
     destroynavobstacle(self._id_BE07._id_BE64);
+  }
 
-  if(isDefined(self._id_BE07))
+  if(isDefined(self._id_BE07)) {
     self._id_BE07 _meth_8514(var_2);
+  }
 
   if(isDefined(self._id_BE07._id_132AA)) {
-    foreach(var_9 in self._id_BE07._id_132AA)
-    var_9 delete();
+    foreach(var_9 in self._id_BE07._id_132AA) {
+      var_9 delete();
+    }
   }
 
   if(!var_2) {
@@ -518,10 +544,11 @@ _id_475C(var_0, var_1) {
   var_2 = var_0.origin;
   var_3 = var_2 + (0, 0, 32);
 
-  if(scripts\engine\utility::flag_exist("in_vr_mode") && scripts\engine\utility::flag("in_vr_mode"))
+  if(scripts\engine\utility::flag_exist("in_vr_mode") && scripts\engine\utility::flag("in_vr_mode")) {
     playFX(level._id_7649["coverwall_explosion_vr"], var_2);
-  else
+  } else {
     playFX(level._id_7649["coverwall_explosion"], var_2);
+  }
 
   playworldsound("deployable_cover_explode", var_2);
   earthquake(0.4, 0.6, var_0.owner.origin, 450);
@@ -529,8 +556,9 @@ _id_475C(var_0, var_1) {
   var_0 notify("death");
   scripts\engine\utility::flag_wait_or_timeout("coverwall_force_delete", 0.1);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     radiusdamage(var_3, 150, 250, 120, var_0.owner, "MOD_EXPLOSIVE", "coverwall");
+  }
 }
 
 _id_596D() {
@@ -545,13 +573,15 @@ _id_596D() {
     var_0 = getEntArray("script_coverwall", "classname");
 
     foreach(var_2 in var_0) {
-      if(isDefined(var_2._id_BE64))
+      if(isDefined(var_2._id_BE64)) {
         destroynavobstacle(var_2._id_BE64);
+      }
 
       var_3 = distancesquared(self.origin, var_2.origin);
 
-      if(var_3 < squared(200))
+      if(var_3 < squared(200)) {
         var_2 notify("expired");
+      }
     }
 
     wait 0.75;

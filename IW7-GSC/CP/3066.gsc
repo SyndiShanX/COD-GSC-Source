@@ -10,8 +10,9 @@ _id_8987(var_0) {
   }
 
   if(var_0 == 1 || var_0 == 2) {
-    if(self.bulletsinclip <= 0)
+    if(self.bulletsinclip <= 0) {
       var_0 = 0;
+    }
   }
 
   switch (var_0) {
@@ -28,14 +29,16 @@ _id_8987(var_0) {
 }
 
 _id_3E49(var_0) {
-  if(!isDefined(self._id_EF7D) && !isDefined(self._id_EF7A) && !isDefined(self._id_EF7C))
+  if(!isDefined(self._id_EF7D) && !isDefined(self._id_EF7A) && !isDefined(self._id_EF7C)) {
     return anim.failure;
+  }
 
   _id_8987(self._id_EF73);
 
   if(isDefined(self.enemy)) {
-    if(isDefined(self._id_3123))
+    if(isDefined(self._id_3123)) {
       return anim.failure;
+    }
 
     if(isDefined(self._id_EF79) && self._id_EF79 > 0) {
       var_1 = self._id_EF79 * self._id_EF79;
@@ -75,33 +78,39 @@ _id_3E49(var_0) {
 }
 
 _id_930A(var_0) {
-  if(scripts\asm\asm_bb::bb_ismissingaleg())
+  if(scripts\asm\asm_bb::bb_ismissingaleg()) {
     return anim.success;
+  }
 
   return anim.failure;
 }
 
 _id_930D(var_0) {
-  if(!scripts\asm\asm_bb::bb_ismissingaleg() || !isDefined(self.enemy))
+  if(!scripts\asm\asm_bb::bb_ismissingaleg() || !isDefined(self.enemy)) {
     return anim.failure;
+  }
 
   var_1 = 0;
 
-  if(scripts\asm\asm_bb::bb_moverequested())
+  if(scripts\asm\asm_bb::bb_moverequested()) {
     var_1 = self pathdisttogoal();
+  }
 
-  if(var_1 == 0)
+  if(var_1 == 0) {
     var_1 = distance2d(self.origin, self.enemy.origin);
+  }
 
-  if(!scripts\aitypes\combat::hasammoinclip() || var_1 < self.forcefastcrawldist)
+  if(!scripts\aitypes\combat::hasammoinclip() || var_1 < self.forcefastcrawldist) {
     return anim.success;
+  }
 
   return anim.failure;
 }
 
 _id_97FA(var_0) {
-  if(self.health > self.fastcrawlmaxhealth)
+  if(self.health > self.fastcrawlmaxhealth) {
     self.health = self.fastcrawlmaxhealth;
+  }
 
   scripts\asm\asm_bb::_id_2979(1);
   return anim.success;
@@ -115,8 +124,9 @@ _id_5814() {
 }
 
 _id_5813(var_0) {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return anim.failure;
+  }
 
   var_1 = distancesquared(self.origin, self.enemy.origin);
 
@@ -161,8 +171,9 @@ _id_9ED8() {
 
 _id_3DE6(var_0) {
   if(!isDefined(self.enemy)) {
-    if(isDefined(self._id_6571))
+    if(isDefined(self._id_6571)) {
       return anim.failure;
+    }
 
     if(!_id_9ED8()) {
       scripts\asm\asm_bb::bb_setshootparams(undefined);
@@ -175,15 +186,17 @@ _id_3DE6(var_0) {
   var_1 = gettime();
 
   if(isDefined(self._id_A938)) {
-    if(var_1 < self._id_A938 + 250)
+    if(var_1 < self._id_A938 + 250) {
       return anim.success;
+    }
   }
 
   self._id_A938 = var_1;
 
   if(isDefined(self.last_enemy_seen) && isDefined(self.enemy)) {
-    if(self.last_enemy_seen != self.enemy)
+    if(self.last_enemy_seen != self.enemy) {
       self.last_enemy_sight_time = -99;
+    }
   } else
     self.last_enemy_sight_time = -99;
 
@@ -191,10 +204,11 @@ _id_3DE6(var_0) {
   var_3 = self cansee(self.enemy);
   var_4 = distance2d(self.origin, self.enemy.origin);
 
-  if(var_3)
+  if(var_3) {
     var_2 = self canshoot(getdefaultenemychestpos());
-  else
+  } else {
     var_2 = 0;
+  }
 
   if(!var_2) {
     if(!scripts\engine\utility::is_true(self._id_3320)) {
@@ -220,8 +234,9 @@ _id_3DE6(var_0) {
   if(var_4 < self.backawayenemydist) {
     var_1 = gettime();
 
-    if(isDefined(self._id_A88C) && var_1 - self._id_A88C < 500 && isDefined(self.pathgoalpos))
+    if(isDefined(self._id_A88C) && var_1 - self._id_A88C < 500 && isDefined(self.pathgoalpos)) {
       return anim.success;
+    }
 
     var_5 = vectorNormalize(self.origin - self.enemy.origin);
     var_6 = 100;
@@ -241,8 +256,9 @@ _id_3DE6(var_0) {
   }
 
   if(var_4 < self.desiredenemydistmin) {
-    if(!_id_9ED8())
+    if(!_id_9ED8()) {
       self clearpath();
+    }
 
     return anim.success;
   }
@@ -252,8 +268,9 @@ _id_3DE6(var_0) {
 
 picktargetingfunction() {
   if(isDefined(self.enemy) && isDefined(self.enemy.dismember_crawl) && self.enemy.dismember_crawl) {
-    if(isDefined(self._id_3402))
+    if(isDefined(self._id_3402)) {
       return self._id_3402;
+    }
   }
 
   var_0 = 0;
@@ -262,8 +279,9 @@ picktargetingfunction() {
   for(var_2 = 0; var_2 < self._id_3403.size; var_2++) {
     var_3 = self._id_3403[var_2];
 
-    if(var_1 < var_3 + var_0)
+    if(var_1 < var_3 + var_0) {
       return self._id_3404[var_2];
+    }
 
     var_0 = var_0 + var_3;
   }
@@ -277,8 +295,9 @@ _id_7E8E() {
 }
 
 getdefaultenemychestpos() {
-  if(scripts\engine\utility::is_true(self.dismember_crawl))
+  if(scripts\engine\utility::is_true(self.dismember_crawl)) {
     return _id_7E8E();
+  }
 
   var_0 = 70;
   var_1 = 15;
@@ -295,8 +314,9 @@ getdefaultenemychestpos() {
 }
 
 updatetarget(var_0) {
-  if(!isDefined(self._id_3404))
+  if(!isDefined(self._id_3404)) {
     return scripts\aitypes\combat::_id_12EC2(var_0);
+  }
 
   if(isDefined(self.enemy)) {
     self.looktarget = undefined;
@@ -309,8 +329,9 @@ updatetarget(var_0) {
     if(isDefined(self.fncustomtargetingfunc)) {
       var_1 = self[[self.fncustomtargetingfunc]]();
 
-      if(!self canshoot(var_1))
+      if(!self canshoot(var_1)) {
         var_1 = getdefaultenemychestpos();
+      }
     } else
       var_1 = getdefaultenemychestpos();
 
@@ -325,11 +346,13 @@ updatetarget(var_0) {
 }
 
 _id_3401(var_0) {
-  if(!isDefined(self.lookposition))
+  if(!isDefined(self.lookposition)) {
     return scripts\aitypes\combat::_id_FE88(var_0);
+  }
 
-  if(scripts\asm\asm::asm_ephemeraleventfired("shoot", "shoot_finished"))
+  if(scripts\asm\asm::asm_ephemeraleventfired("shoot", "shoot_finished")) {
     return anim.success;
+  }
 
   var_1 = self.bt.shootparams;
 
@@ -343,8 +366,9 @@ _id_3401(var_0) {
   } else
     return anim.success;
 
-  if(!isDefined(var_1.objective))
+  if(!isDefined(var_1.objective)) {
     var_1.objective = "normal";
+  }
 
   scripts\asm\asm_bb::bb_setshootparams(var_1, self.enemy);
 
@@ -360,8 +384,9 @@ _id_3401(var_0) {
   } else
     self.bt.m_bfiring = 0;
 
-  if(!isDefined(var_1.pos) && !isDefined(var_1.ent))
+  if(!isDefined(var_1.pos) && !isDefined(var_1.ent)) {
     return anim.success;
+  }
 
   scripts\asm\asm_bb::bb_requestfire(self.bt.m_bfiring);
   return anim.running;

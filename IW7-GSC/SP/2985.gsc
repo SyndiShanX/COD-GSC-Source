@@ -6,10 +6,11 @@
 _id_39B3(var_0, var_1, var_2) {
   scripts\sp\vehicle_build::_id_31A3(999, 500, 1500);
 
-  if(issubstr(var_2, "mons") && level.script != "marscrash")
+  if(issubstr(var_2, "mons") && level.script != "marscrash") {
     scripts\sp\vehicle_build::_id_31B8("mig_rumble", 0.2, 0.15, 1000000, 0.05, 0.05);
-  else
+  } else {
     scripts\sp\vehicle_build::_id_31B8("mig_rumble", 0.2, 0.15, 20300, 0.05, 0.05);
+  }
 
   scripts\sp\vehicle_build::_id_31C4("axis");
   scripts\sp\vehicle_build::_id_319F();
@@ -17,12 +18,13 @@ _id_39B3(var_0, var_1, var_2) {
   scripts\sp\vehicle_build::_id_3186(var_0, "tag_origin");
   _id_39C7(var_0);
 
-  if(issubstr(var_2, "cheap"))
+  if(issubstr(var_2, "cheap")) {
     _id_3995(var_1, var_2);
-  else if(issubstr(var_2, "periph"))
+  } else if(issubstr(var_2, "periph")) {
     _id_3995(var_1, var_2);
-  else
+  } else {
     _id_3994(var_1);
+  }
 }
 
 _id_396E(var_0) {
@@ -32,17 +34,18 @@ _id_396E(var_0) {
   thread _id_3998();
   thread _id_39D4();
 
-  if(self.classname != "script_vehicle_capitalship_missileboat_ca")
+  if(self.classname != "script_vehicle_capitalship_missileboat_ca") {
     thread _id_0BB6::_id_39E8();
+  }
 
   thread _id_3981();
   thread _id_3972();
   thread _id_396C();
   thread _id_39A6();
 
-  if(issubstr(self.classname, "periph"))
+  if(issubstr(self.classname, "periph")) {
     thread _id_246C(self.model);
-  else if(issubstr(self.classname, "cheap")) {
+  } else if(issubstr(self.classname, "cheap")) {
     thread _id_246C(self.model);
     thread scripts\engine\utility::delaythread(0.1, _id_0BB8::_id_397F, 1, 0);
   } else {
@@ -70,10 +73,11 @@ _id_3972() {
   _id_0BB8::_id_39CE("off");
 
   if(isDefined(self._id_12FF3)) {
-    if(isDefined(self._id_10250))
+    if(isDefined(self._id_10250)) {
       var_0 = 1;
-    else
+    } else {
       var_0 = 0;
+    }
 
     _id_39AA(self.origin, var_0);
     self delete();
@@ -117,8 +121,9 @@ _id_396C() {
 
   if(isDefined(self._id_4074)) {
     foreach(var_1 in self._id_4074) {
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         var_1 delete();
+      }
     }
 
     self._id_4074 = [];
@@ -141,8 +146,9 @@ _id_397B() {
       }
 
       foreach(var_5 in var_0) {
-        if(isDefined(var_5))
+        if(isDefined(var_5)) {
           var_5 delete();
+        }
       }
     }
 
@@ -154,9 +160,9 @@ _id_246C(var_0) {
   wait 0.2;
 
   if(issubstr(var_0, "_rig") && !issubstr(var_0, "_sa_")) {
-    if(isDefined(self._id_B210))
+    if(isDefined(self._id_B210)) {
       self attach(self._id_B210, "TAG_ORIGIN");
-    else if(issubstr(self.classname, "_cheap")) {
+    } else if(issubstr(self.classname, "_cheap")) {
       var_0 = getsubstr(var_0, 0, var_0.size - 4);
       var_0 = var_0 + "_periph";
       self attach(var_0, "TAG_ORIGIN");
@@ -290,8 +296,9 @@ _id_3995(var_0, var_1) {
 _id_3998() {
   var_0 = "blue";
 
-  if(self._id_6A8D == "ca")
+  if(self._id_6A8D == "ca") {
     var_0 = "red";
+  }
 
   _id_0BB8::_id_7561("light_lod_high", "fx_light_main_a_1", "light_" + var_0 + "_large");
   _id_0BB8::_id_7562("light_lod_high", "fx_light_running_lrg_b1", "light_" + var_0 + "_small");
@@ -333,8 +340,9 @@ _id_39C7(var_0) {
   if(!isDefined(var_3) || var_3.size == 0) {
     return;
   }
-  foreach(var_5 in var_3)
-  precachemodel(var_5.script_parameters);
+  foreach(var_5 in var_3) {
+    precachemodel(var_5.script_parameters);
+  }
 }
 
 _id_7C33(var_0) {
@@ -363,29 +371,33 @@ _id_7C33(var_0) {
 _id_39C9() {
   var_0 = _id_7C33(self.model);
 
-  if(isDefined(self._id_EF30))
+  if(isDefined(self._id_EF30)) {
     var_0 = _id_7C33(self._id_EF30);
+  }
 
   var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
 
   if(!isDefined(var_1)) {}
 
-  if(!isDefined(var_1.angles))
+  if(!isDefined(var_1.angles)) {
     var_1.angles = (0, 0, 0);
+  }
 
   var_2 = scripts\engine\utility::getStructArray(var_1.target, "targetname");
 
   if(!isDefined(var_2) || var_2.size == 0) {}
 
-  if(!isDefined(self._id_EF3C))
+  if(!isDefined(self._id_EF3C)) {
     self._id_EF3C = [];
+  }
 
   foreach(var_4 in var_2) {
     var_5 = var_4.origin - var_1.origin;
     var_5 = rotatevector(var_5, self.angles);
 
-    if(!isDefined(var_4.angles))
+    if(!isDefined(var_4.angles)) {
       var_4.angles = (0, 0, 0);
+    }
 
     var_6 = transformmove(self.origin, self.angles, var_1.origin, var_1.angles, var_4.origin, var_4.angles);
     var_7 = spawn("script_model", var_6["origin"]);
@@ -404,10 +416,11 @@ _id_39C9() {
 
 _id_48AF(var_0) {
   for(var_1 = 1; var_1 <= self._id_C1FB; var_1++) {
-    if(var_1 < 10)
+    if(var_1 < 10) {
       var_2 = "0";
-    else
+    } else {
       var_2 = "";
+    }
 
     precachemodel(self._id_CB56 + var_2 + var_1);
   }
@@ -417,24 +430,29 @@ _id_48AF(var_0) {
 }
 
 _id_ACEB(var_0) {
-  while(!isDefined(level._id_D127))
+  while(!isDefined(level._id_D127)) {
     wait 0.05;
+  }
 
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 _id_39AA(var_0, var_1, var_2) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = self.origin;
+  }
 
   self._id_BFE3 = 1;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(!var_1)
+  if(!var_1) {
     _id_39BE(var_0);
+  }
 
   var_3 = _id_3977();
   var_3 _meth_82A2(level._id_3979[var_3.type]._id_1FAF);
@@ -442,8 +460,9 @@ _id_39AA(var_0, var_1, var_2) {
   var_3 thread _id_3975();
   self notify("death");
 
-  if(!isDefined(level._id_3971))
+  if(!isDefined(level._id_3971)) {
     level._id_3971 = [];
+  }
 
   level._id_3971 = scripts\engine\utility::array_add(level._id_3971, var_3);
   return var_3;
@@ -461,8 +480,9 @@ _id_39AC() {
 _id_39AD() {}
 
 _id_39AB() {
-  foreach(var_1 in self._id_CB53)
-  var_1 delete();
+  foreach(var_1 in self._id_CB53) {
+    var_1 delete();
+  }
 
   self delete();
 }
@@ -472,10 +492,11 @@ _id_3974(var_0, var_1) {
   playFX(level._id_3979[self.type]._id_7582, self.origin, anglesToForward(self.angles), anglestoup(self.angles));
 
   if(!isDefined(level._id_1024A)) {
-    if(scripts\engine\utility::is_true(level._id_12FB6) == 1)
+    if(scripts\engine\utility::is_true(level._id_12FB6) == 1) {
       playFX(level._id_3979[self.type]._id_7571, self.origin, anglesToForward(self.angles), anglestoup(self.angles));
-    else
+    } else {
       playFX(level._id_3979[self.type]._id_7570, self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+    }
   }
 
   if(scripts\engine\utility::player_is_in_jackal()) {
@@ -493,8 +514,9 @@ _id_3974(var_0, var_1) {
     var_10 = scripts\sp\math::_id_6A8E(0.75, 2.5, var_5);
     scripts\engine\utility::delaycall(var_10, ::playsound, "capital_ship_explo_jackal_debris");
 
-    if(isDefined(level._id_A056) && isDefined(var_1) && var_1)
+    if(isDefined(level._id_A056) && isDefined(var_1) && var_1) {
       [[level._id_A056._id_3A02]](var_0, var_6, var_7, var_8, var_2, var_3);
+    }
   }
 }
 
@@ -519,15 +541,17 @@ _id_395F() {
           var_2 = scripts\sp\math::_id_C097(2500, 20000, var_1);
           var_2 = (var_2 - 1) * -1;
 
-          if(isDefined(level._id_D127._id_4E93))
+          if(isDefined(level._id_D127._id_4E93)) {
             level._id_D127._id_4E93 _meth_8278(var_2, 0.1);
+          }
 
           wait 0.1;
           var_0 = distancesquared(level._id_D127.origin, self.origin);
         }
 
-        if(isDefined(level._id_D127._id_4E93))
+        if(isDefined(level._id_D127._id_4E93)) {
           level._id_D127._id_4E93 _meth_8278(0, 0.5);
+        }
 
         wait 0.5;
 
@@ -563,8 +587,9 @@ _id_3975() {
 }
 
 _id_3978(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0.05;
+  }
 
   foreach(var_2 in self._id_CB53) {
     var_3 = getnumparts(var_2.model);
@@ -597,8 +622,9 @@ _id_7D02(var_0, var_1) {
   var_4 = scripts\sp\math::_id_6A8E(0, var_1, var_3);
   var_4 = var_4 + randomfloatrange(-0.2, 0.2);
 
-  if(var_4 < 0)
+  if(var_4 < 0) {
     var_4 = 0;
+  }
 
   return var_4;
 }
@@ -691,10 +717,11 @@ _id_3977() {
     }
   } else {
     for(var_8 = 1; var_8 <= var_0._id_C1FB; var_8++) {
-      if(var_8 < 10)
+      if(var_8 < 10) {
         var_9 = "0";
-      else
+      } else {
         var_9 = "";
+      }
 
       var_4 = var_0._id_CB56 + var_9 + var_8;
       var_6 = "tag_" + var_4;
@@ -714,17 +741,21 @@ _id_396F(var_0) {
 }
 
 _id_9799(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1.0;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 3.0;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0.3;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0.75;
+  }
 
   var_4 = spawnStruct();
   var_4._id_DCE5 = var_0;
@@ -735,15 +766,17 @@ _id_9799(var_0, var_1, var_2, var_3) {
 }
 
 _id_3985(var_0, var_1) {
-  if(!isDefined(self._id_B797))
+  if(!isDefined(self._id_B797)) {
     _id_9799();
+  }
 
   if(var_0) {
     thread _id_39BD();
 
     if(!isDefined(var_1) || !var_1) {
-      if(isDefined(self._id_8B4F) && isDefined(self._id_8B4F["cap_hardpoint_missile_barrage"]))
+      if(isDefined(self._id_8B4F) && isDefined(self._id_8B4F["cap_hardpoint_missile_barrage"])) {
         thread _id_39B4();
+      }
 
       thread _id_0BB6::_id_398A(0);
       thread _id_0BB6::_id_398A(1);
@@ -764,8 +797,9 @@ _id_B2E5() {
   }
   scripts\engine\utility::flag_init("flag_capitalship_targeting_init");
 
-  while(!isDefined(level._id_D127))
+  while(!isDefined(level._id_D127)) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_init("flag_changing_capitalship_targets");
   var_0 = undefined;
@@ -785,8 +819,9 @@ _id_B2E5() {
 
     level._id_F02D = scripts\engine\utility::array_removeundefined(level._id_F02D);
 
-    while(level._id_F02D.size == 0)
+    while(level._id_F02D.size == 0) {
       wait 0.05;
+    }
 
     var_8 = anglesToForward(level._id_D127.angles);
     var_9 = undefined;
@@ -802,8 +837,9 @@ _id_B2E5() {
 
       if(var_11._id_1153F > 0) {
         if(isDefined(var_9)) {
-          if(var_11._id_1153F > var_9._id_1153F)
+          if(var_11._id_1153F > var_9._id_1153F) {
             var_9 = var_11;
+          }
         } else
           var_9 = var_11;
       }
@@ -858,20 +894,23 @@ _id_11308(var_0) {
   var_0._id_12A8B = 0;
   var_0._id_D436 = 0;
 
-  if(isDefined(self) && isalive(self))
+  if(isDefined(self) && isalive(self)) {
     _id_F2F7();
+  }
 }
 
 _id_F2F7() {
-  if(!scripts\engine\utility::flag("flag_changing_capitalship_targets"))
+  if(!scripts\engine\utility::flag("flag_changing_capitalship_targets")) {
     scripts\engine\utility::flag_set("flag_changing_capitalship_targets");
+  }
 
   self._id_D436 = 1;
 
-  if(isDefined(self._id_C825))
+  if(isDefined(self._id_C825)) {
     var_0 = self._id_C825;
-  else
+  } else {
     var_0 = "turret_ja";
+  }
 
   _id_0BB6::_id_39CA(0, 1, var_0);
   wait 1;
@@ -888,8 +927,9 @@ _id_3968(var_0) {
   self notify("new_callout_timer");
   self endon("new_callout_timer");
 
-  for(self._id_3775 = var_0; self._id_3775 > 0; self._id_3775 = self._id_3775 - 0.05)
+  for(self._id_3775 = var_0; self._id_3775 > 0; self._id_3775 = self._id_3775 - 0.05) {
     wait 0.05;
+  }
 
   self._id_3775 = 0;
 }
@@ -942,8 +982,9 @@ _id_39B4() {
 
     var_0 = undefined;
 
-    if(_id_9C74() && _id_396B())
+    if(_id_9C74() && _id_396B()) {
       var_0 = level._id_D127;
+    }
 
     if(isDefined(var_0)) {
       if(_id_396A(var_0, self._id_9278)) {
@@ -972,75 +1013,88 @@ _id_3987(var_0) {
   var_3 = vectorNormalize(var_0.origin - self.origin);
   var_4 = vectordot(var_1, var_3);
   var_5 = vectordot(var_2, var_3);
-  self._id_8B50["cap_hardpoint_missile_barrage"] = scripts\engine\utility::array_removeundefined(self._id_8B50["cap_hardpoint_missile_barrage"]);
-  self._id_8B51["cap_hardpoint_missile_barrage"] = scripts\engine\utility::array_removeundefined(self._id_8B51["cap_hardpoint_missile_barrage"]);
+  self._id_8B50["cap_hardpoint_missile_barrage"] = ::scripts\engine\utility::array_removeundefined(self._id_8B50["cap_hardpoint_missile_barrage"]);
+  self._id_8B51["cap_hardpoint_missile_barrage"] = ::scripts\engine\utility::array_removeundefined(self._id_8B51["cap_hardpoint_missile_barrage"]);
 
-  if(var_4 < 0)
+  if(var_4 < 0) {
     var_6 = self._id_8B50["cap_hardpoint_missile_barrage"];
-  else
+  } else {
     var_6 = self._id_8B51["cap_hardpoint_missile_barrage"];
+  }
 
   if(!isDefined(var_6)) {
     return;
   }
   if(var_6.size == 0) {
-    if(var_4 < 0)
+    if(var_4 < 0) {
       var_6 = self._id_8B51["cap_hardpoint_missile_barrage"];
-    else
+    } else {
       var_6 = self._id_8B50["cap_hardpoint_missile_barrage"];
+    }
 
-    if(var_6.size == 0)
+    if(var_6.size == 0) {
       return;
+    }
   }
 
   thread _id_0BB6::_id_39A0(var_0, var_6, 5);
   self._id_A8EA = gettime();
 
   if(isDefined(self._id_B89A) && isDefined(self._id_B899)) {
-    if(self._id_B89A == self._id_B899)
+    if(self._id_B89A == self._id_B899) {
       var_7 = self._id_B89A * 1000;
-    else
+    } else {
       var_7 = randomfloatrange(self._id_B89A, self._id_B899) * 1000;
+    }
 
     self._id_B83F = var_7;
   }
 
-  while(level._id_D127._id_93D2.size > 0)
+  while(level._id_D127._id_93D2.size > 0) {
     wait 0.05;
+  }
 }
 
 _id_396B() {
-  if(!isDefined(level._id_D127))
+  if(!isDefined(level._id_D127)) {
     return 0;
+  }
 
-  if(level._id_D127._id_58B5)
+  if(level._id_D127._id_58B5) {
     return 0;
+  }
 
-  if(_id_0B76::_id_7B95() > 0)
+  if(_id_0B76::_id_7B95() > 0) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_396A(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   var_2 = gettime() - self._id_A8EA;
 
-  if(var_2 < self._id_B83F)
+  if(var_2 < self._id_B83F) {
     return 0;
+  }
 
-  if(isDefined(self._id_38B5) && ![[self._id_38B5]]())
+  if(isDefined(self._id_38B5) && ![[self._id_38B5]]()) {
     return 0;
+  }
 
   if(isDefined(level._id_D127) && var_0 == level._id_D127) {
-    if(level._id_A056._id_68B3.running)
+    if(level._id_A056._id_68B3.running) {
       return 0;
+    }
 
     if(!isDefined(var_1) || !var_1) {
-      if(!level.player scripts\sp\utility::_id_65DB("jackal_enemy_homing_missile_allowed"))
+      if(!level.player scripts\sp\utility::_id_65DB("jackal_enemy_homing_missile_allowed")) {
         return 0;
+      }
     } else if(!level.player scripts\sp\utility::_id_65DB("jackal_enemy_homing_missile_allowed_hyperaggressive"))
       return 0;
   }
@@ -1049,15 +1103,17 @@ _id_396A(var_0, var_1) {
 }
 
 _id_3969(var_0) {
-  if(isDefined(level._id_D127) && isDefined(var_0) && var_0 == level._id_D127 && _id_0B76::_id_7B95() > 0)
+  if(isDefined(level._id_D127) && isDefined(var_0) && var_0 == level._id_D127 && _id_0B76::_id_7B95() > 0) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_9C74() {
-  if(!scripts\sp\utility::_id_65DF("player_is_near"))
+  if(!scripts\sp\utility::_id_65DF("player_is_near")) {
     return 0;
+  }
 
   return scripts\sp\utility::_id_65DB("player_is_near");
 }
@@ -1117,8 +1173,9 @@ _id_FF48() {
   for(;;) {
     if(self._id_5ABB >= self._id_B89C) {
       if(isDefined(var_0)) {
-        if(gettime() - self._id_B89D * 1000 >= var_0)
+        if(gettime() - self._id_B89D * 1000 >= var_0) {
           scripts\sp\utility::_id_65E1("missiles_player_looking");
+        }
       } else
         var_0 = gettime();
     } else {
@@ -1141,15 +1198,17 @@ _id_FF47() {
 
     var_0 = abs(self.origin[2] - level._id_D127.origin[2]);
 
-    if(self._id_56EA <= self._id_B89E && var_0 <= self._id_B89F)
+    if(self._id_56EA <= self._id_B89E && var_0 <= self._id_B89F) {
       scripts\sp\utility::_id_65E1("missiles_player_close_force");
-    else
+    } else {
       scripts\sp\utility::_id_65DD("missiles_player_close_force");
+    }
 
-    if(self._id_56EA <= self._id_B89B)
+    if(self._id_56EA <= self._id_B89B) {
       scripts\sp\utility::_id_65E1("missiles_player_close");
-    else
+    } else {
       scripts\sp\utility::_id_65DD("missiles_player_close");
+    }
 
     wait 0.05;
   }
@@ -1183,8 +1242,9 @@ _id_FF6E() {
   for(;;) {
     if(self._id_5ABB < self._id_B8A1) {
       if(isDefined(var_0)) {
-        if(gettime() - self._id_B8A2 * 1000 >= var_0)
+        if(gettime() - self._id_B8A2 * 1000 >= var_0) {
           scripts\sp\utility::_id_65DD("missiles_player_looking");
+        }
       } else
         var_0 = gettime();
     } else {
@@ -1201,15 +1261,17 @@ _id_FF6D() {
   self endon("death");
 
   for(;;) {
-    if(self._id_56EA >= self._id_B8A3)
+    if(self._id_56EA >= self._id_B8A3) {
       scripts\sp\utility::_id_65E1("missiles_player_far_force");
-    else
+    } else {
       scripts\sp\utility::_id_65DD("missiles_player_far_force");
+    }
 
-    if(self._id_56EA >= self._id_B8A0)
+    if(self._id_56EA >= self._id_B8A0) {
       scripts\sp\utility::_id_65DD("missiles_player_close");
-    else
+    } else {
       scripts\sp\utility::_id_65E1("missiles_player_close");
+    }
 
     wait 0.05;
   }
@@ -1230,16 +1292,19 @@ _id_12A1E() {
 
     var_1 = distance(level._id_D127.origin, self.origin);
 
-    if(var_1 < 18000 && randomint(100) < 90)
+    if(var_1 < 18000 && randomint(100) < 90) {
       var_0 = 1;
+    }
 
-    if(var_1 <= 8000)
+    if(var_1 <= 8000) {
       var_0 = 1;
+    }
 
-    if(scripts\sp\utility::_id_7B9D() <= 0.1)
+    if(scripts\sp\utility::_id_7B9D() <= 0.1) {
       var_0 = 0;
-    else if(scripts\sp\utility::_id_7B9D() >= 0.6)
+    } else if(scripts\sp\utility::_id_7B9D() >= 0.6) {
       var_0 = 1;
+    }
 
     self._id_1D62 = var_0;
     self._id_11578 = var_0;
@@ -1248,19 +1313,22 @@ _id_12A1E() {
 }
 
 _id_39D6(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(isDefined(level._id_A056))
+  if(isDefined(level._id_A056)) {
     self[[level._id_A056._id_A16E]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, 0);
+  }
 }
 
 _id_EA01() {
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_EA02(var_0) {
   if(isDefined(var_0)) {
-    foreach(var_2 in var_0)
-    var_2 _id_EA01();
+    foreach(var_2 in var_0) {
+      var_2 _id_EA01();
+    }
   }
 }
 

@@ -51,8 +51,9 @@ patchoutofboundstrigger() {
   level waittill("game_ended");
 
   foreach(var_0 in level.outofboundstriggerpatches) {
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_0 delete();
+    }
   }
 }
 
@@ -63,8 +64,9 @@ _id_D80C() {
   precachemodel("shipyard_drone_01_paths");
   level._id_1D93 = ["ship_wall_panel", "ship_wall_panel_a_32", "ship_wall_panel_a_32_clean", "ship_wall_panel_a_64", "ship_wall_panel_a_64_clean"];
 
-  foreach(var_1 in level._id_1D93)
-  precachemodel(var_1);
+  foreach(var_1 in level._id_1D93) {
+    precachemodel(var_1);
+  }
 
   precachempanim("mp_rivet_drone_path_01");
   precachempanim("mp_rivet_drone_path_02");
@@ -91,8 +93,9 @@ _id_E563() {
     waittillframeend;
     var_0 = getscriptablearray("rivet_scriptable_light", "script_noteworthy");
 
-    foreach(var_2 in var_0)
-    var_2 setscriptablepartstate("onoff", "off");
+    foreach(var_2 in var_0) {
+      var_2 setscriptablepartstate("onoff", "off");
+    }
   }
 }
 
@@ -138,8 +141,9 @@ _id_FA3A() {
 _id_1DA5() {
   level._id_1D99 = _id_1D9F();
 
-  if(level._id_1D99.size != 0)
+  if(level._id_1D99.size != 0) {
     level thread _id_1DA2();
+  }
 }
 
 _id_1D9F() {
@@ -178,8 +182,9 @@ _id_1D9F() {
 #using_animtree("mp_script_model");
 
 _id_1D92(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return undefined;
+  }
 
   switch (var_0) {
     case "mp_rivet_drone_path_01":
@@ -222,11 +227,13 @@ _id_1DA2() {
 
   for(;;) {
     foreach(var_1 in level._id_1D99) {
-      if(!isDefined(var_1.running))
+      if(!isDefined(var_1.running)) {
         var_1.running = 0;
+      }
 
-      if(var_1.running == 0)
+      if(var_1.running == 0) {
         var_1 thread _id_1DA3();
+      }
     }
 
     wait 10;
@@ -242,19 +249,22 @@ _id_1DA3() {
   self.origin = self._id_10DC1;
   self.angles = self._id_10D6D;
 
-  if(_id_4346() == 1)
+  if(_id_4346() == 1) {
     _id_1D95();
+  }
 
   self show();
   thread scripts\mp\maps\mp_rivet\mp_rivet_fx::_id_CCEB();
 
-  if(isDefined(self.script_parameters))
+  if(isDefined(self.script_parameters)) {
     self scriptmodelplayanimdeltamotion(self.script_parameters);
+  }
 
-  if(isDefined(self._id_1FB8))
+  if(isDefined(self._id_1FB8)) {
     wait(self._id_1FB8);
-  else
+  } else {
     wait 20;
+  }
 
   _id_1D94();
   scripts\mp\maps\mp_rivet\mp_rivet_fx::_id_10FDF();
@@ -284,8 +294,9 @@ _id_F03C() {
   waittillframeend;
   var_0 = getscriptablearray("mp_rivet_rocket", "targetname")[0];
 
-  if(!isDefined(level._id_E5E1))
+  if(!isDefined(level._id_E5E1)) {
     level._id_E5E1 = 0;
+  }
 
   if(isDefined(var_0)) {
     var_0._id_4D29 = getEnt("mp_rivet_rocket_damage_vol", "targetname");
@@ -311,13 +322,15 @@ fire_rocket() {
     level notify("rivet_rocket_firing");
     self setscriptablepartstate("base", "fire");
 
-    foreach(var_1 in self._id_75A4)
-    var_1 setscriptablepartstate("onoff", "on");
+    foreach(var_1 in self._id_75A4) {
+      var_1 setscriptablepartstate("onoff", "on");
+    }
 
     wait 14.8;
 
-    foreach(var_1 in self._id_75A4)
-    var_1 setscriptablepartstate("onoff", "off");
+    foreach(var_1 in self._id_75A4) {
+      var_1 setscriptablepartstate("onoff", "off");
+    }
 
     wait 0.2;
     self setscriptablepartstate("base", "idle");
@@ -344,8 +357,9 @@ _id_6D22() {
       if(scripts\mp\utility::isreallyalive(var_0)) {
         var_0 dodamage(var_0.maxhealth, self.origin, var_0, undefined, "MOD_EXPLOSIVE");
 
-        if(isPlayer(var_0) || isagent(var_0))
+        if(isPlayer(var_0) || isagent(var_0)) {
           thread _id_57D4(var_0 _meth_8113());
+        }
       }
     }
   }
@@ -355,14 +369,17 @@ _id_6D26() {
   level endon("game_ended");
   self endon("death");
 
-  if(!isDefined(level.grenades))
+  if(!isDefined(level.grenades)) {
     level.grenades = [];
+  }
 
-  if(!isDefined(level.missiles))
+  if(!isDefined(level.missiles)) {
     level.missiles = [];
+  }
 
-  if(!isDefined(level.mines))
+  if(!isDefined(level.mines)) {
     level.mines = [];
+  }
 
   for(;;) {
     level waittill("rivet_rocket_firing");
@@ -371,8 +388,9 @@ _id_6D26() {
       var_0 = scripts\engine\utility::array_combine(self getistouchingentities(level.grenades), self getistouchingentities(level.missiles));
       var_0 = scripts\engine\utility::array_combine(self getistouchingentities(level.mines), var_0);
 
-      foreach(var_2 in var_0)
-      var_2 scripts\mp\weapons::deleteexplosive();
+      foreach(var_2 in var_0) {
+        var_2 scripts\mp\weapons::deleteexplosive();
+      }
 
       scripts\engine\utility::waitframe();
     }
@@ -382,13 +400,15 @@ _id_6D26() {
 _id_57D4(var_0) {
   waittillframeend;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 hide();
+  }
 }
 
 _id_4346() {
-  if(randomint(100) > 50)
+  if(randomint(100) > 50) {
     return -1;
-  else
+  } else {
     return 1;
+  }
 }

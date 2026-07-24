@@ -19,8 +19,9 @@ _id_47DA() {
 _id_E3D8(var_0) {
   level _id_47DA();
 
-  if(!isDefined(level._id_E35D))
+  if(!isDefined(level._id_E35D)) {
     level._id_E35D = spawnStruct();
+  }
 
   if(!isDefined(var_0)) {
     var_0 = "_ignore_last_sparam";
@@ -105,8 +106,9 @@ _id_25C7() {
 _id_6C94() {
   self endon("death");
 
-  for(;;)
+  for(;;) {
     wait 1000;
+  }
 }
 
 _id_E3DA(var_0) {
@@ -146,8 +148,9 @@ _id_E3D9(var_0, var_1, var_2, var_3, var_4) {
   var_0 vehicle_teleport(var_1._id_3FFD gettagorigin("j_cranebase"), var_1._id_3FFD gettagangles("j_cranebase"));
 
   if(isDefined(var_2)) {
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       var_3 = "crib_craneride";
+    }
 
     var_0 _id_0BDC::_id_A07D();
     var_0 thread _id_0BDC::_id_F43D("player");
@@ -157,10 +160,11 @@ _id_E3D9(var_0, var_1, var_2, var_3, var_4) {
 
   var_5 = length(var_1._id_3FFB.origin - var_1._id_3FFD gettagorigin("j_cranebase"));
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_0 linkTo(var_1._id_3FFD, "j_cranebase", (0, 0, -39.3664), (0, 180, 0));
-  else
+  } else {
     var_0 linkTo(var_1._id_3FFD, "j_cranebase", (0, 0, -39.3664), (0, 0, 0));
+  }
 }
 
 _id_E3CB() {
@@ -197,8 +201,9 @@ _id_E3D1(var_0, var_1, var_2, var_3, var_4) {
       level._id_E35D._id_A2EA moveTo(level._id_E35D._id_A2EA.origin + anglestoright(level._id_E35D._id_A2EA.angles) * 816, var_5);
       wait(var_5 - 0.25);
 
-      if(var_0 == "a")
+      if(var_0 == "a") {
         level._id_E35D._id_A2E8[var_0] thread _id_E3CC(var_4);
+      }
 
       level._id_E35D._id_A2E8[var_0] moveTo(level._id_E35D._id_A2E8[var_0]._id_1ACA, var_4);
       level._id_E35D._id_A2EA thread _id_E3D2(var_6, var_0);
@@ -220,10 +225,11 @@ _id_E3D1(var_0, var_1, var_2, var_3, var_4) {
       level._id_E35D._id_A2E9 moveTo(level._id_E35D._id_A2E9.origin + anglestoright(level._id_E35D._id_A2E9.angles) * 816, var_7);
       wait(var_7);
 
-      if(var_0 == "a")
+      if(var_0 == "a") {
         level._id_E35D._id_A2E8[var_0] thread _id_E3CC(var_3);
-      else
+      } else {
         level._id_E35D._id_A2E8[var_0] thread _id_E3CC(var_3, 1);
+      }
 
       level._id_E35D._id_A2E8[var_0] moveTo(level._id_E35D._id_A2E8[var_0]._id_62EB, var_3);
       wait(var_3);
@@ -247,16 +253,18 @@ _id_E3D1(var_0, var_1, var_2, var_3, var_4) {
     case "returned":
       var_12 = 90;
 
-      if(var_0 == "a")
+      if(var_0 == "a") {
         var_12 = -90;
+      }
 
       level._id_E35D._id_A2E8[var_0]._id_3FFB unlink();
       level._id_E35D._id_A2E8[var_0]._id_3FFB rotateby((0, var_12, 0), 0.05);
       scripts\engine\utility::waitframe();
       scripts\engine\utility::waitframe();
 
-      if(var_0 == "b")
+      if(var_0 == "b") {
         level._id_E35D._id_A2E8[var_0]._id_3FFB.origin = level._id_E35D._id_A2E8[var_0]._id_3FFB.origin + anglesToForward(level._id_E35D._id_A2E8["b"]._id_3FFB.angles) * level._id_E35D._id_A2E8[var_0]._id_3FFB._id_EACA;
+      }
 
       level._id_E35D._id_A2E8[var_0]._id_3FFB linkTo(level._id_E35D._id_A2E8[var_0]);
       level._id_E35D._id_A2E8[var_0] moveTo(level._id_E35D._id_A2E8[var_0]._id_62EB, 0.05);
@@ -273,8 +281,9 @@ _id_E3D2(var_0, var_1) {
   self._id_9B94 = 1;
 
   if(isDefined(var_1)) {
-    while(level._id_E35D._id_A2E8[var_1].origin[2] + 20 > self.origin[2])
+    while(level._id_E35D._id_A2E8[var_1].origin[2] + 20 > self.origin[2]) {
       scripts\engine\utility::waitframe();
+    }
   }
 
   thread _id_E3D4(var_0);
@@ -285,9 +294,9 @@ _id_E3D2(var_0, var_1) {
 }
 
 _id_E3CE(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level._id_E35D._id_A2E8[var_0]._id_3FFD _meth_82A2(level._id_EC85["crane"][var_3], 10, 0, 1 / var_1);
-  else if(var_0 == "a") {
+  } else if(var_0 == "a") {
     var_1 = getanimlength(%shipcrib_crane_clamp_extended_rotate_cc) / 0.45;
     level._id_E35D._id_A2E8[var_0]._id_3FFD playSound("scn_ship_titan_jackal_lower_plr_start_lr");
     level._id_E35D._id_A2E8[var_0]._id_3FFD playLoopSound("scn_ship_titan_jackal_lower_plr_lp_lr");
@@ -299,20 +308,23 @@ _id_E3CE(var_0, var_1, var_2, var_3) {
 }
 
 _id_E3CD(var_0, var_1, var_2, var_3) {
-  if(!isDefined(level._id_E35D._id_A2E8[var_0]._id_3FFB._id_8BA3))
+  if(!isDefined(level._id_E35D._id_A2E8[var_0]._id_3FFB._id_8BA3)) {
     level._id_E35D._id_A2E8[var_0]._id_3FFB._id_8BA3 = 1;
-  else
+  } else {
     level._id_E35D._id_A2E8[var_0]._id_3FFB._id_8BA3 = level._id_E35D._id_A2E8[var_0]._id_3FFB._id_8BA3 + 1;
+  }
 
   var_3 = 1;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 = 1;
+  }
 
   var_4 = 90 * var_3;
 
-  if(var_0 == "a")
+  if(var_0 == "a") {
     var_4 = -90 * var_3;
+  }
 
   var_4 = var_4 * level._id_E35D._id_A2E8[var_0]._id_3FFB._id_8BA3;
   var_5 = undefined;
@@ -322,17 +334,19 @@ _id_E3CD(var_0, var_1, var_2, var_3) {
     var_1 = var_1 * 0.7;
   }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_6 = 1;
-  else
+  } else {
     var_6 = -1;
+  }
 
   var_7 = var_1 / 0.05;
   var_8 = var_4 / var_7;
   var_9 = undefined;
 
-  if(var_0 == "b")
+  if(var_0 == "b") {
     var_9 = level._id_E35D._id_A2E8[var_0]._id_3FFB._id_EACA / var_7;
+  }
 
   level._id_E35D._id_A2E8[var_0]._id_3FFB _meth_826F((0, var_4, 0), var_1);
 
@@ -347,8 +361,9 @@ _id_E3CD(var_0, var_1, var_2, var_3) {
     scripts\engine\utility::waitframe();
   }
 
-  if(var_0 == "b")
+  if(var_0 == "b") {
     wait(var_5 - var_1);
+  }
 
   level._id_E35D._id_A2E8[var_0] thread _id_E3D0();
 }
@@ -375,15 +390,17 @@ _id_E3D4(var_0) {
 }
 
 _id_E3CF(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     self playSound("scn_ship_titan_jackal_lower_plr_start2_lr");
+  }
 
   screenshake(level.player.origin, 0.35, 0.35, 0.35, 0.3, 0, 0, 1024, 9, 9, 9);
 }
 
 _id_E3D0(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     self playSound("scn_ship_titan_jackal_lower_plr_stop2_lr");
+  }
 
   screenshake(level.player.origin, 0.5, 0.5, 0.5, 0.35, 0, 0, 1024, 9, 9, 9);
 }

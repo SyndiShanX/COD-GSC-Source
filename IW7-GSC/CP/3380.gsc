@@ -4,10 +4,11 @@
 **************************************/
 
 init_discoball_trap() {
-  if(scripts\engine\utility::flag_exist("pre_game_over"))
+  if(scripts\engine\utility::flag_exist("pre_game_over")) {
     scripts\engine\utility::flag_wait("pre_game_over");
-  else
+  } else {
     wait 3;
+  }
 
   level.discotrapuses = 0;
   level._id_562E = scripts\engine\utility::getStructArray("discoball_switch_fx_spot", "script_noteworthy");
@@ -19,8 +20,9 @@ init_discoball_trap() {
   level._id_5630 setModel("zmb_spaceland_discoball_scriptable");
   level.dance_floor_volume = getEnt("dance_floor_volume", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_5632();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_5632();
+  }
 
   wait 1;
   level._id_4D7A = scripts\engine\utility::getStructArray("dance_floor_attract_spots", "targetname");
@@ -33,8 +35,9 @@ _id_5632() {
   for(;;) {
     var_1 = "power_on";
 
-    if(var_0)
+    if(var_0) {
       var_1 = level scripts\engine\utility::waittill_any_return_no_endon_death("power_on", self.power_area + " power_on", "power_off");
+    }
 
     if(var_1 == "power_off" && !scripts\engine\utility::is_true(self.powered_on)) {
       wait 0.25;
@@ -153,8 +156,9 @@ _id_78B3(var_0) {
 }
 
 _id_E1E0() {
-  foreach(var_1 in level._id_4D7A)
-  var_1.occupied = 0;
+  foreach(var_1 in level._id_4D7A) {
+    var_1.occupied = 0;
+  }
 }
 
 _id_8401(var_0) {
@@ -214,8 +218,9 @@ release_zombie_on_trap_done() {
   self endon("death");
   level waittill("ball_trap_done");
 
-  if(isDefined(self.og_goalradius))
+  if(isDefined(self.og_goalradius)) {
     self scragentsetgoalRadius(self.og_goalradius);
+  }
 
   self.og_goalradius = undefined;
   self.about_to_dance = 0;
@@ -252,17 +257,19 @@ _id_27C9(var_0, var_1, var_2, var_3) {
       var_4.trap_killed_by = var_2;
       var_3.trap_kills = var_3.trap_kills + 2;
 
-      if(scripts\engine\utility::flag("mini_ufo_green_ready"))
+      if(scripts\engine\utility::flag("mini_ufo_green_ready")) {
         level.disco_trap_kills++;
+      }
 
       if(isDefined(var_2)) {
         var_5 = ["kill_trap_generic", "kill_trap_danceparty"];
         var_2 thread scripts\cp\cp_vo::try_to_play_vo(scripts\engine\utility::random(var_5), "zmb_comment_vo", "highest", 10, 0, 0, 1, 20);
 
-        if(!isDefined(var_2.trapkills["trap_danceparty"]))
+        if(!isDefined(var_2.trapkills["trap_danceparty"])) {
           var_2.trapkills["trap_danceparty"] = 1;
-        else
+        } else {
           var_2.trapkills["trap_danceparty"]++;
+        }
 
         var_4 dodamage(var_4.health + 100, var_4.origin, var_2, var_2, "MOD_UNKNOWN", "iw7_discotrap_zm");
         continue;

@@ -4,12 +4,13 @@
 *************************************************/
 
 main() {
-  if(self.type == "dog")
+  if(self.type == "dog") {
     scripts\anim\traverse\shared::_id_5867(3, 1.0);
-  else if(self.unittype == "seeker")
+  } else if(self.unittype == "seeker") {
     scripts\anim\traverse\shared::_id_F163();
-  else
+  } else {
     _id_B0CC();
+  }
 }
 
 #using_animtree("generic_human");

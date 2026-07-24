@@ -18,19 +18,21 @@ registerscriptedagent() {
 _id_FAB0() {
   level endon("game_ended");
 
-  if(!isDefined(level.agent_definition))
+  if(!isDefined(level.agent_definition)) {
     level waittill("scripted_agents_initialized");
+  }
 
-  if(!isDefined(level.species_funcs))
+  if(!isDefined(level.species_funcs)) {
     level.species_funcs = [];
+  }
 
   level.species_funcs["zombie_sasquatch"] = [];
   level.agent_definition["zombie_sasquatch"]["setup_func"] = ::setupagent;
   level.agent_definition["zombie_sasquatch"]["setup_model_func"] = ::_id_FACE;
   level.agent_funcs["zombie_sasquatch"] = [];
-  level.agent_funcs["zombie_sasquatch"]["on_damaged"] = scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiedamaged;
-  level.agent_funcs["zombie_sasquatch"]["gametype_on_damage_finished"] = scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
-  level.agent_funcs["zombie_sasquatch"]["gametype_on_killed"] = scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiekilled;
+  level.agent_funcs["zombie_sasquatch"]["on_damaged"] = ::scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiedamaged;
+  level.agent_funcs["zombie_sasquatch"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+  level.agent_funcs["zombie_sasquatch"]["gametype_on_killed"] = ::scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiekilled;
   level.agent_funcs["zombie_sasquatch"]["on_killed"] = ::onsasquatchkilled;
   level.agent_funcs["zombie_sasquatch"]["on_damaged_finished"] = ::onsasquatchdamagefinished;
 }
@@ -104,8 +106,9 @@ setupagent() {
   self.allowpain = 1;
   self setavoidanceradius(45);
 
-  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1)
+  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1) {
     self._id_AB3F = 1;
+  }
 
   self.entered_playspace = 1;
   thread _id_899C();

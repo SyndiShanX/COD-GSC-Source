@@ -39,14 +39,15 @@ _id_E801(var_0) {
 _id_E81E(var_0) {
   self._id_10A5F endon("death");
 
-  if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "proximity")
+  if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "proximity") {
     self._id_10A5F thread _id_DAC7(var_0);
-  else if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "trigger")
+  } else if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "trigger") {
     self._id_10A5F thread _id_127A0(var_0, self);
-  else if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "trigger_drag")
+  } else if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "trigger_drag") {
     self._id_10A5F thread _id_1154A(var_0, self);
-  else
+  } else {
     self._id_10A5F thread _id_118E8(var_0);
+  }
 }
 
 _id_118E8(var_0) {
@@ -78,8 +79,9 @@ _id_DAC7(var_0) {
   while(isDefined(var_1.target)) {
     self._id_12707.origin = var_1.origin;
 
-    while(1600 < distance(self._id_12707.origin, var_1.origin) && vectordot(self.forward, self.origin - self._id_12707.origin) < 0)
+    while(1600 < distance(self._id_12707.origin, var_1.origin) && vectordot(self.forward, self.origin - self._id_12707.origin) < 0) {
       wait 0.5;
+    }
 
     var_1 = scripts\engine\utility::getStruct(var_1.target, "targetname");
   }
@@ -112,8 +114,9 @@ _id_127A0(var_0, var_1) {
 }
 
 _id_118EA(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 endon("trigger");
+  }
 
   for(;;) {
     wait 1.25;
@@ -157,14 +160,16 @@ _id_1154A(var_0, var_1) {
 _id_118EB(var_0, var_1) {
   self endon("death");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 endon("trigger");
+  }
 
   for(;;) {
-    if(isDefined(level._id_A344))
+    if(isDefined(level._id_A344)) {
       wait(level._id_A344);
-    else
+    } else {
       wait 1.25;
+    }
 
     if(isDefined(var_0.target)) {
       var_0 = scripts\engine\utility::getStruct(var_0.target, "targetname");

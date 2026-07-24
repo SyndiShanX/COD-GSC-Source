@@ -10,8 +10,9 @@ init_all_race_games() {
   var_1 = 2;
   var_2 = 3;
 
-  foreach(var_4 in var_0)
-  var_4 thread _id_9701(var_0);
+  foreach(var_4 in var_0) {
+    var_4 thread _id_9701(var_0);
+  }
 
   level thread _id_5555(var_1, var_2);
   level._id_DBB4 = ["iw7_horseracepistol_zm_blue", "iw7_horseracepistol_zm_yellow", "iw7_horseracepistol_zm_red", "iw7_horseracepistol_zm_green"];
@@ -36,16 +37,18 @@ _id_9701(var_0) {
       continue;
     }
 
-    if(scripts\engine\utility::string_starts_with(var_3.classname, "scriptable"))
+    if(scripts\engine\utility::string_starts_with(var_3.classname, "scriptable")) {
       self.fx = var_3;
+    }
   }
 
   self.horse.og_origin = self.horse.origin;
   self._id_870F.og_origin = self._id_870F.origin;
   self._id_870F.og_angles = self._id_870F.angles;
 
-  if(scripts\cp\cp_interaction::_id_9A3A(self) && !isDefined(level._id_DBB8))
+  if(scripts\cp\cp_interaction::_id_9A3A(self) && !isDefined(level._id_DBB8)) {
     thread _id_DBB7(var_0);
+  }
 }
 
 _id_DBB7(var_0) {
@@ -57,8 +60,9 @@ _id_DBB7(var_0) {
     if(var_1 != "power_off") {
       setomnvar("zombie_arcade_race_power", 1);
 
-      foreach(var_3 in var_0)
-      var_3.powered_on = 1;
+      foreach(var_3 in var_0) {
+        var_3.powered_on = 1;
+      }
 
       var_5 = getEnt("arcade_zz_neon_light", "targetname");
       var_5 setModel("zmb_theater_sign_05");
@@ -67,15 +71,16 @@ _id_DBB7(var_0) {
 
     setomnvar("zombie_arcade_race_power", 0);
 
-    foreach(var_3 in var_0)
-    var_3.powered_on = 0;
+    foreach(var_3 in var_0) {
+      var_3.powered_on = 0;
+    }
   }
 }
 
 use_race_game(var_0, var_1) {
-  if(var_1 getstance() != "stand")
+  if(var_1 getstance() != "stand") {
     var_1 scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"COOP_INTERACTIONS_MUST_BE_STANDING");
-  else {
+  } else {
     var_1 notify("cancel_sentry");
     var_1 notify("cancel_medusa");
     var_1 notify("cancel_trap");
@@ -86,8 +91,9 @@ use_race_game(var_0, var_1) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
 
     if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade)) {
-      while(var_1 getcurrentprimaryweapon() == "none" || var_1 isswitchingweapon())
+      while(var_1 getcurrentprimaryweapon() == "none" || var_1 isswitchingweapon()) {
         wait 0.1;
+      }
     }
 
     var_1 notify("cancel_sentry");
@@ -130,8 +136,9 @@ _id_E1F4(var_0, var_1) {
   var_3 = [];
 
   foreach(var_5 in var_2) {
-    if(var_5.script_location == var_0)
+    if(var_5.script_location == var_0) {
       var_3[var_3.size] = var_5;
+    }
   }
 
   foreach(var_5 in var_3) {
@@ -143,8 +150,9 @@ _id_E1F4(var_0, var_1) {
     var_5.horse moveTo(var_5.horse.og_origin + (0, 0.25, 0), 1);
   }
 
-  if(var_1.origin != var_1.og_origin)
+  if(var_1.origin != var_1.og_origin) {
     thread scripts\engine\utility::play_sound_in_space("arcade_horserace_reset", var_1.origin);
+  }
 
   var_1 moveTo(var_1.og_origin, 1);
 }
@@ -153,8 +161,9 @@ _id_DBB2(var_0, var_1) {
   var_2 = getEntArray("pace_horse", "script_noteworthy");
   var_3 = scripts\engine\utility::getclosest(var_1.origin, var_2, 500);
 
-  if(!isDefined(var_3.og_origin))
+  if(!isDefined(var_3.og_origin)) {
     var_3.og_origin = var_3.origin;
+  }
 
   level thread _id_E1F4(var_0, var_3);
   wait 1;
@@ -216,8 +225,9 @@ _id_E1EE(var_0) {
   var_2 = [];
 
   foreach(var_4 in var_1) {
-    if(var_4.script_location == var_0)
+    if(var_4.script_location == var_0) {
       var_2[var_2.size] = var_4;
+    }
   }
 
   foreach(var_4 in var_2) {
@@ -269,8 +279,9 @@ _id_D2D9(var_0, var_1, var_2) {
   self._id_4B87 = var_0;
   level endon(var_1 + "_pace_horse_finished");
 
-  if(isDefined(level.start_zombie_zoom_func))
+  if(isDefined(level.start_zombie_zoom_func)) {
     var_0 thread[[level.start_zombie_zoom_func]](var_0, self);
+  }
 
   for(;;) {
     var_0._id_325F waittill("damage", var_4, var_5);
@@ -304,8 +315,9 @@ _id_D2D9(var_0, var_1, var_2) {
       var_0.fx setscriptablepartstate("light_fx", "on");
       var_7 = var_1 == "afterlife";
 
-      if(!var_7)
+      if(!var_7) {
         level notify("update_arcade_game_performance", "zombie_zoom", gettime() - var_3);
+      }
 
       _id_830E(self, var_7, 100);
       return;
@@ -320,15 +332,17 @@ _id_D047(var_0, var_1, var_2) {
   self endon("disconnect");
   level waittill(var_1 + "_pace_horse_finished");
 
-  if(!scripts\cp\utility::areinteractionsenabled())
+  if(!scripts\cp\utility::areinteractionsenabled()) {
     scripts\cp\utility::allow_player_interactions(1);
+  }
 
   self setclientomnvar("zombie_arcade_game_time", -1);
   self setclientomnvar("zombie_zz_widget", 0);
   self takeweapon(var_2);
 
-  if(!scripts\engine\utility::isusabilityallowed())
+  if(!scripts\engine\utility::isusabilityallowed()) {
     scripts\engine\utility::allow_usability(1);
+  }
 
   scripts\engine\utility::allow_weapon_switch(1);
   scripts\cp\zombies\arcade_game_utility::give_player_back_weapon(self);
@@ -352,13 +366,15 @@ _id_E219(var_0, var_1) {
   var_1 setclientomnvar("zombie_zz_widget", 0);
   wait 3;
 
-  if(!var_1 scripts\cp\utility::areinteractionsenabled())
+  if(!var_1 scripts\cp\utility::areinteractionsenabled()) {
     var_1 scripts\cp\utility::allow_player_interactions(1);
+  }
 }
 
 _id_FF2B(var_0, var_1) {
-  if(var_1 && !scripts\engine\utility::is_true(var_0.in_afterlife_arcade))
+  if(var_1 && !scripts\engine\utility::is_true(var_0.in_afterlife_arcade)) {
     return 0;
+  }
 
   return 1;
 }
@@ -381,10 +397,11 @@ get_intro_message(var_0) {
 
 race_game_hint_logic(var_0, var_1) {
   if(var_0.requires_power && !var_0.powered_on) {
-    if(isDefined(level.needspowerstring))
+    if(isDefined(level.needspowerstring)) {
       return level.needspowerstring;
-    else
+    } else {
       return &"COOP_INTERACTIONS_REQUIRES_POWER";
+    }
   }
 
   if(var_0.script_location == "afterlife") {
@@ -392,10 +409,11 @@ race_game_hint_logic(var_0, var_1) {
     return &"COOP_INTERACTIONS_PLAY_GAME";
   }
 
-  if(scripts\engine\utility::is_true(var_0.out_of_order))
+  if(scripts\engine\utility::is_true(var_0.out_of_order)) {
     return &"CP_ZMB_INTERACTIONS_MACHINE_OUT_OF_ORDER";
-  else
+  } else {
     return level.interaction_hintstrings[var_0.script_noteworthy];
+  }
 }
 
 _id_FBEB(var_0) {
@@ -404,10 +422,11 @@ _id_FBEB(var_0) {
   if(var_1.size > 0) {
     var_2 = scripts\engine\utility::getclosest(var_0.origin, var_1);
 
-    if(var_0.script_location == "arcade" && !isDefined(level._id_2118))
+    if(var_0.script_location == "arcade" && !isDefined(level._id_2118)) {
       level._id_2118 = spawn("script_origin", var_2.origin);
-    else if(var_0.script_location != "arcade" && !isDefined(level._id_18E6))
+    } else if(var_0.script_location != "arcade" && !isDefined(level._id_18E6)) {
       level._id_18E6 = spawn("script_origin", var_2.origin);
+    }
 
     playsoundatpos(var_2.origin, "arcade_horserace_bell_start");
     wait 0.2;
@@ -415,17 +434,19 @@ _id_FBEB(var_0) {
     wait 0.1;
   }
 
-  if(var_0.script_location == "arcade")
+  if(var_0.script_location == "arcade") {
     level._id_2118 playLoopSound("arcade_horserace_crowd_lp");
-  else
+  } else {
     level._id_18E6 playLoopSound("arcade_horserace_crowd_lp");
+  }
 }
 
 _id_FBEA(var_0) {
-  if(var_0.script_location == "arcade")
+  if(var_0.script_location == "arcade") {
     level._id_2118 stoploopsound();
-  else
+  } else {
     level._id_18E6 stoploopsound();
+  }
 
   thread scripts\engine\utility::play_sound_in_space("arcade_horserace_bell_end", var_0.origin);
 }
@@ -434,15 +455,16 @@ _id_DBB5(var_0, var_1, var_2, var_3) {
   var_0 endon("arcade_game_over_for_player");
   var_4 = var_0 scripts\engine\utility::waittill_any_return("disconnect", "last_stand", "spawned");
 
-  if(var_4 == "disconnect")
+  if(var_4 == "disconnect") {
     var_1.active_player = undefined;
-  else {
+  } else {
     [[var_3]](var_1, var_0);
     var_0 takeweapon(var_2);
     var_0 scripts\engine\utility::allow_weapon_switch(1);
 
-    if(!var_0 scripts\engine\utility::isusabilityallowed())
+    if(!var_0 scripts\engine\utility::isusabilityallowed()) {
       var_0 scripts\engine\utility::allow_usability(1);
+    }
   }
 
   var_0 notify("arcade_game_over_for_player");
@@ -463,15 +485,17 @@ _id_DBB6(var_0, var_1, var_2, var_3, var_4) {
       wait 1;
 
       if(distancesquared(var_0.origin, var_1.origin) > var_5) {
-        if(isDefined(var_2))
+        if(isDefined(var_2)) {
           var_0 takeweapon(var_2);
+        }
 
         [[var_3]](var_1, var_0);
         var_1.active_player = undefined;
         var_0 scripts\engine\utility::allow_weapon_switch(1);
 
-        if(!var_0 scripts\engine\utility::isusabilityallowed())
+        if(!var_0 scripts\engine\utility::isusabilityallowed()) {
           var_0 scripts\engine\utility::allow_usability(1);
+        }
 
         var_0 scripts\cp\zombies\arcade_game_utility::give_player_back_weapon(var_0);
         var_0 scripts\cp\zombies\arcade_game_utility::restore_player_grenades_post_game();
@@ -509,8 +533,9 @@ _id_5555(var_0, var_1) {
           continue;
         }
         foreach(var_9 in level.players) {
-          if(isDefined(var_9.last_interaction_point) && var_9.last_interaction_point == var_5)
+          if(isDefined(var_9.last_interaction_point) && var_9.last_interaction_point == var_5) {
             var_9 thread scripts\cp\cp_interaction::refresh_interaction();
+          }
         }
 
         var_5.out_of_order = 0;

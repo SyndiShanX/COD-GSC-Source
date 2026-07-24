@@ -27,8 +27,9 @@ _id_BAF3() {
   level thread _id_119E7();
   scripts\engine\utility::flag_wait("slide_scene_done");
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_2683();
+  }
 
   wait 0.5;
 }
@@ -65,8 +66,9 @@ _id_102E6() {
   var_1 dontinterpolate();
   var_2 = scripts\engine\utility::get_target_ent("mons_slide_scene");
 
-  if(isDefined(level._id_31FE))
+  if(isDefined(level._id_31FE)) {
     scripts\sp\maps\heist\heist_util::_id_100CD();
+  }
 
   scripts\sp\utility::_id_127B3("mons_start_frigate_scene");
   setomnvar("ui_hide_hud", 1);
@@ -131,21 +133,25 @@ _id_102E5(var_0, var_1) {
     if((var_7 <= 100.0 || var_6 <= 0.1) && level.player isonground()) {
       level.player thread scripts\sp\utility::_id_D2CD(75, 0.2);
 
-      foreach(var_9 in var_1)
-      var_9 _meth_82B1(var_9 scripts\sp\utility::_id_7DC1("frigate_slide_debris"), 1.3);
+      foreach(var_9 in var_1) {
+        var_9 _meth_82B1(var_9 scripts\sp\utility::_id_7DC1("frigate_slide_debris"), 1.3);
+      }
 
-      foreach(var_12 in level.allies)
-      var_12 _meth_82B1(var_12 scripts\sp\utility::_id_7DC1("mons_run"), 1.3);
+      foreach(var_12 in level.allies) {
+        var_12 _meth_82B1(var_12 scripts\sp\utility::_id_7DC1("mons_run"), 1.3);
+      }
 
       level._id_FC89 _meth_82B1(level._id_FC89 scripts\sp\utility::_id_7DC1("mons_run"), 1.3);
     } else {
       level.player thread scripts\sp\utility::_id_D2CD(90, 0.2);
 
-      foreach(var_9 in var_1)
-      var_9 _meth_82B1(var_9 scripts\sp\utility::_id_7DC1("frigate_slide_debris"), 1.1);
+      foreach(var_9 in var_1) {
+        var_9 _meth_82B1(var_9 scripts\sp\utility::_id_7DC1("frigate_slide_debris"), 1.1);
+      }
 
-      foreach(var_12 in level.allies)
-      var_12 _meth_82B1(var_12 scripts\sp\utility::_id_7DC1("mons_run"), 1.1);
+      foreach(var_12 in level.allies) {
+        var_12 _meth_82B1(var_12 scripts\sp\utility::_id_7DC1("mons_run"), 1.1);
+      }
 
       level._id_FC89 _meth_82B1(level._id_FC89 scripts\sp\utility::_id_7DC1("mons_run"), 1.1);
     }
@@ -158,8 +164,9 @@ _id_F2AA() {
   level waittill("hit_ground3");
   wait 2.0;
 
-  foreach(var_1 in level.allies)
-  var_1 _meth_82B1(var_1 scripts\sp\utility::_id_7DC1("mons_run"), 1.0);
+  foreach(var_1 in level.allies) {
+    var_1 _meth_82B1(var_1 scripts\sp\utility::_id_7DC1("mons_run"), 1.0);
+  }
 }
 
 _id_102E4(var_0, var_1) {
@@ -185,8 +192,9 @@ _id_102E4(var_0, var_1) {
   wait 2.5;
   level._id_EA2C thread scripts\sp\utility::_id_10346("heist_slt_reyesboost");
 
-  while(!level.player _meth_81CE())
+  while(!level.player _meth_81CE()) {
     wait 0.1;
+  }
 
   if(isalive(level.player)) {
     level notify("player_boosted");
@@ -198,8 +206,9 @@ _id_102E4(var_0, var_1) {
     scripts\engine\utility::flag_set("slide_scene_done");
     scripts\engine\utility::delaythread(6.5, ::_id_DD01);
 
-    foreach(var_3 in level.allies)
-    var_3 thread _id_F295();
+    foreach(var_3 in level.allies) {
+      var_3 thread _id_F295();
+    }
 
     var_0 thread scripts\sp\anim::_id_1F2C(level.allies, "mons_run");
     var_0 thread _id_C138();
@@ -287,8 +296,9 @@ _id_6ADA() {
   setomnvar("ui_hud_heist_boost_amount", var_3);
 
   while(gettime() / 1000 - var_1 < var_0) {
-    if(level.player _meth_81CE())
+    if(level.player _meth_81CE()) {
       var_3 = var_3 - 0.025;
+    }
 
     var_3 = clamp(var_3, 0, 1);
     setomnvar("ui_hud_heist_boost_amount", var_3);
@@ -348,20 +358,24 @@ _id_4E87(var_0) {
   var_1 = getEntArray("slide_debris_ground_dmg_1", "targetname");
   var_2 = getEntArray("slide_debris_ground_prst_1", "targetname");
 
-  foreach(var_4 in var_1)
-  var_4 show();
+  foreach(var_4 in var_1) {
+    var_4 show();
+  }
 
-  foreach(var_4 in var_2)
-  var_4 hide();
+  foreach(var_4 in var_2) {
+    var_4 hide();
+  }
 
   var_8 = getEntArray("slide_debris_ground_dmg_2", "targetname");
   var_9 = getEntArray("slide_debris_ground_prst_2", "targetname");
 
-  foreach(var_4 in var_8)
-  var_4 show();
+  foreach(var_4 in var_8) {
+    var_4 show();
+  }
 
-  foreach(var_4 in var_9)
-  var_4 hide();
+  foreach(var_4 in var_9) {
+    var_4 hide();
+  }
 
   level waittill("hit_ground");
   wait 0.25;
@@ -447,8 +461,9 @@ _id_D06E() {
 }
 
 _id_6AAC(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "black";
+  }
 
   var_2 = scripts\sp\hud_util::_id_7B4F(var_1);
   var_2 fadeovertime(var_0);
@@ -463,8 +478,9 @@ _id_6AAC(var_0, var_1) {
 }
 
 _id_6AAD(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "black";
+  }
 
   var_3 = scripts\sp\hud_util::_id_7B4F(var_1);
   var_3 fadeovertime(var_0);
@@ -608,8 +624,9 @@ _id_743B(var_0) {
   var_1 thread _id_0BB8::_id_39D0("idle");
 
   foreach(var_3 in var_1.turrets) {
-    foreach(var_5 in var_3)
-    var_5 delete();
+    foreach(var_5 in var_3) {
+      var_5 delete();
+    }
   }
 
   var_1._id_1FBB = "slide_frigate";
@@ -761,25 +778,30 @@ _id_F08F() {
   playFXOnTag(scripts\engine\utility::getfx("vfx_heist_building_second_roof"), var_18, "tag_origin");
   wait 1.0;
 
-  foreach(var_28, var_20 in var_13)
-  var_20 show();
+  foreach(var_28, var_20 in var_13) {
+    var_20 show();
+  }
 
-  foreach(var_20 in var_7)
-  var_20 hide();
+  foreach(var_20 in var_7) {
+    var_20 hide();
+  }
 
-  foreach(var_32 in level._id_31FF)
-  var_32 show();
+  foreach(var_32 in level._id_31FF) {
+    var_32 show();
+  }
 
-  foreach(var_32 in level._id_31FE)
-  var_32 hide();
+  foreach(var_32 in level._id_31FE) {
+    var_32 hide();
+  }
 
   wait 1.5;
 
   for(var_28 = 4; var_28 > -1; var_28--) {
     var_24[var_28] hide();
 
-    foreach(var_20 in var_25[var_28])
-    var_20 show();
+    foreach(var_20 in var_25[var_28]) {
+      var_20 show();
+    }
 
     playFXOnTag(scripts\engine\utility::getfx("vfx_heist_building_whole_floor_glass_breaking"), var_26[var_28], "tag_origin");
     wait 1.25;
@@ -859,8 +881,9 @@ _id_A608(var_0, var_1) {
 }
 
 _id_BA4F() {
-  if(scripts\engine\utility::flag("mons_boost") || scripts\engine\utility::flag("mons_boost_failed"))
+  if(scripts\engine\utility::flag("mons_boost") || scripts\engine\utility::flag("mons_boost_failed")) {
     return 1;
+  }
 
   return 0;
 }
@@ -880,8 +903,9 @@ _id_A0EB() {
   level._id_4822 moveTo(var_3.origin + (var_0, var_1, var_2), 0.05);
   level._id_4822.origin = level._id_4822.origin + (var_0, var_1, var_2);
 
-  if(isDefined(level._id_31FD))
+  if(isDefined(level._id_31FD)) {
     return;
+  }
 }
 
 _id_320B() {
@@ -921,8 +945,9 @@ _id_A0EC() {
   var_5 = scripts\engine\utility::getStruct("collapse_pos_3", "targetname");
   scripts\engine\utility::flag_wait("deck_wallrun");
 
-  if(isDefined(level._id_31FD))
+  if(isDefined(level._id_31FD)) {
     level._id_31FD moveTo(var_5.origin + (var_0, 2000, var_2), 40);
+  }
 }
 
 _id_119E9() {
@@ -969,8 +994,9 @@ _id_BACD() {
 }
 
 _id_BACC() {
-  foreach(var_1 in level.allies)
-  var_1.ignoreall = 1;
+  foreach(var_1 in level.allies) {
+    var_1.ignoreall = 1;
+  }
 
   thread _id_6740();
   thread _id_5468();
@@ -1004,8 +1030,9 @@ _id_5468() {
 }
 
 _id_3205() {
-  while(!self isonground())
+  while(!self isonground()) {
     wait 0.05;
+  }
 
   self playgestureviewmodel("ges_antigrav_reaction");
   var_0 = randomfloatrange(2.7, 3.3);
@@ -1101,8 +1128,9 @@ _id_BA7B() {
   scripts\engine\utility::delaythread(12, ::_id_5437);
   var_0 = getaiarray("axis");
 
-  foreach(var_2 in var_0)
-  var_2 _meth_83A1();
+  foreach(var_2 in var_0) {
+    var_2 _meth_83A1();
+  }
 
   scripts\sp\utility::_id_228A(getaiarray("axis"));
   thread _id_106C4();
@@ -1128,8 +1156,9 @@ _id_106C4() {
   var_3 = scripts\engine\utility::array_combine(var_3, var_2);
 
   foreach(var_5 in var_3) {
-    if(isalive(var_5))
+    if(isalive(var_5)) {
       var_5 scripts\sp\utility::_id_72EC("iw7_erad+eradscope+shotgunerad_sp", "primary");
+    }
   }
 
   scripts\engine\utility::array_add(var_3, var_0);
@@ -1144,8 +1173,9 @@ _id_106C4() {
 
   var_9 = getaiarray("axis", "all");
 
-  foreach(var_11 in var_9)
-  var_11.grenadeammo = 0;
+  foreach(var_11 in var_9) {
+    var_11.grenadeammo = 0;
+  }
 
   foreach(var_11 in var_9) {
     var_11.ignoreall = 1;
@@ -1190,8 +1220,9 @@ _id_4A66() {
 }
 
 _id_1C0A() {
-  foreach(var_1 in level.allies)
-  var_1 set_ally_color_enddeck();
+  foreach(var_1 in level.allies) {
+    var_1 set_ally_color_enddeck();
+  }
 }
 
 _id_1C1E() {
@@ -1202,14 +1233,15 @@ _id_1C1E() {
 }
 
 set_ally_color_enddeck() {
-  if(self == level._id_6754)
+  if(self == level._id_6754) {
     scripts\sp\utility::_id_F3B5("g");
-  else if(self == level._id_EA2C)
+  } else if(self == level._id_EA2C) {
     scripts\sp\utility::_id_F3B5("b");
-  else if(self == level._id_30F6)
+  } else if(self == level._id_30F6) {
     scripts\sp\utility::_id_F3B5("o");
-  else if(self == level._id_A54E)
+  } else if(self == level._id_A54E) {
     scripts\sp\utility::_id_F3B5("y");
+  }
 }
 
 _id_BD36() {
@@ -1239,8 +1271,9 @@ _id_BD36() {
   var_0 movez(var_6, 0.4);
   wait 0.4;
 
-  if(level.player istouching(level._id_4F6A))
+  if(level.player istouching(level._id_4F6A)) {
     level.player _meth_81D0();
+  }
 
   level notify("deck_door_closed");
   scripts\engine\utility::flag_set("close_deck_door");
@@ -1260,8 +1293,9 @@ hangar_door_lighting() {
 }
 
 _id_59B2() {
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 _id_BD37() {
@@ -1281,8 +1315,9 @@ _id_BD37() {
 }
 
 _id_6740() {
-  foreach(var_1 in level.allies)
-  var_1.ignoreall = 1;
+  foreach(var_1 in level.allies) {
+    var_1.ignoreall = 1;
+  }
 
   wait 1;
   var_3 = scripts\sp\utility::_id_107EA("deck_slide_runner", 1);
@@ -1301,13 +1336,15 @@ _id_6740() {
   var_3 setgoalpos(var_5.origin);
   wait 2.0;
 
-  if(isalive(var_3))
+  if(isalive(var_3)) {
     var_3 delete();
+  }
 
   var_6 = [level._id_EA2C, level._id_6754, level._id_30F6, level._id_A54E];
 
-  foreach(var_1 in level.allies)
-  var_1.ignoreall = 0;
+  foreach(var_1 in level.allies) {
+    var_1.ignoreall = 0;
+  }
 }
 
 _id_DD01() {
@@ -1341,20 +1378,24 @@ _id_DD01() {
   var_7 playLoopSound("veh_capitol_ship_rcs_lp");
 
   while(!scripts\engine\utility::flag("close_deck_door")) {
-    foreach(var_11 in var_8)
-    playFXOnTag(scripts\engine\utility::getfx("vfx_heist_rcs_thruster_small"), var_11, "tag_origin");
+    foreach(var_11 in var_8) {
+      playFXOnTag(scripts\engine\utility::getfx("vfx_heist_rcs_thruster_small"), var_11, "tag_origin");
+    }
 
-    foreach(var_11 in var_9)
-    playFXOnTag(scripts\engine\utility::getfx("vfx_heist_rcs_thruster_small"), var_11, "tag_origin");
+    foreach(var_11 in var_9) {
+      playFXOnTag(scripts\engine\utility::getfx("vfx_heist_rcs_thruster_small"), var_11, "tag_origin");
+    }
 
     wait 10;
   }
 
-  foreach(var_11 in var_8)
-  var_11 delete();
+  foreach(var_11 in var_8) {
+    var_11 delete();
+  }
 
-  foreach(var_11 in var_9)
-  var_11 delete();
+  foreach(var_11 in var_9) {
+    var_11 delete();
+  }
 }
 
 _id_DD02() {
@@ -1403,14 +1444,16 @@ _id_D102() {
   var_1 = getEntArray("vol_upper_deck_inside", "targetname");
 
   foreach(var_3 in var_1) {
-    if(level.player istouching(var_3))
+    if(level.player istouching(var_3)) {
       var_0 = 1;
+    }
   }
 
   scripts\engine\utility::waitframe();
 
-  if(var_0 == 0)
+  if(var_0 == 0) {
     _id_B152();
+  }
 }
 
 _id_639E() {
@@ -1420,8 +1463,9 @@ _id_639E() {
   while(var_0) {
     var_1 = getaicount("axis", "all");
 
-    if(var_1 == 0)
+    if(var_1 == 0) {
       var_0 = 0;
+    }
 
     wait 0.1;
   }
@@ -1438,8 +1482,9 @@ _id_A8B6() {
   while(var_0) {
     var_1 = getaicount("axis", "human");
 
-    if(var_1 == 1)
+    if(var_1 == 1) {
       var_0 = 0;
+    }
 
     wait 0.1;
   }
@@ -1447,8 +1492,9 @@ _id_A8B6() {
   var_1 = getaispeciesarray("axis", "human");
 
   if(var_1.size > 0) {
-    foreach(var_3 in var_1)
-    var_3 scripts\sp\maps\heist\heist_util::_id_19DB();
+    foreach(var_3 in var_1) {
+      var_3 scripts\sp\maps\heist\heist_util::_id_19DB();
+    }
   }
 }
 
@@ -1477,20 +1523,24 @@ _id_3C33() {
   var_1 = getaiarray("axis");
 
   foreach(var_3 in var_1) {
-    if(var_3 istouching(var_0))
+    if(var_3 istouching(var_0)) {
       var_3 scripts\sp\maps\heist\heist_util::_id_19DB();
+    }
   }
 }
 
 _id_1D23() {
-  if(self == level._id_30F6)
+  if(self == level._id_30F6) {
     wait 6;
+  }
 
-  if(self == level._id_A54E)
+  if(self == level._id_A54E) {
     wait 5.5;
+  }
 
-  if(self == level._id_EA2C)
+  if(self == level._id_EA2C) {
     wait 5;
+  }
 
   scripts\sp\utility::_id_414F();
   scripts\sp\utility::_id_F3B5("r");
@@ -1509,8 +1559,9 @@ _id_F112() {
   var_6 = getEnt("seeker_crate_2", "targetname");
   var_7 = getEnt("seeker_crate_3", "targetname");
 
-  while(!level.player scripts\sp\utility::_id_D1DF(var_0.origin, 0.75))
+  while(!level.player scripts\sp\utility::_id_D1DF(var_0.origin, 0.75)) {
     wait 1;
+  }
 
   var_8 = 0.05;
   var_9 = 0.02;
@@ -1560,8 +1611,9 @@ _id_E5A7() {
   wait 1;
   var_1 = getaiarray("axis", "all");
 
-  foreach(var_3 in var_1)
-  var_3.grenadeammo = 0;
+  foreach(var_3 in var_1) {
+    var_3.grenadeammo = 0;
+  }
 }
 
 _id_678A() {
@@ -1597,8 +1649,9 @@ _id_548F() {
 }
 
 _id_5437() {
-  if(level._id_10CDA != "mons_end_deck")
+  if(level._id_10CDA != "mons_end_deck") {
     scripts\engine\utility::flag_wait("dialogue_mid_deck_complete");
+  }
 
   wait 2;
   var_0 = scripts\engine\utility::getStruct("deck_loudhorn", "targetname") scripts\engine\utility::spawn_tag_origin();

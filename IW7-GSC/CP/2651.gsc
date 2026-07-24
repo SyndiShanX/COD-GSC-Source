@@ -10,18 +10,21 @@ callback_defaultplayerlaststand(var_0, var_1, var_2, var_3, var_4, var_5, var_6,
 default_playerlaststand(var_0) {
   var_1 = gameshouldend(self);
 
-  if(var_1 && isDefined(level.endgame) && isDefined(level.end_game_string_index))
+  if(var_1 && isDefined(level.endgame) && isDefined(level.end_game_string_index)) {
     level thread[[level.endgame]]("axis", level.end_game_string_index["kia"]);
+  }
 
-  if(player_in_laststand(self))
+  if(player_in_laststand(self)) {
     forcebleedout(var_0);
-  else
+  } else {
     dropintolaststand(var_0, var_1);
+  }
 }
 
 forcebleedout(var_0) {
-  if(scripts\cp\utility::isplayingsolo() || level.only_one_player)
+  if(scripts\cp\utility::isplayingsolo() || level.only_one_player) {
     self setOrigin(var_0.origin);
+  }
 
   self.bleedoutspawnentityoverride = var_0;
   self notify("force_bleed_out");
@@ -38,17 +41,19 @@ dropintolaststand(var_0, var_1) {
   enter_laststand();
 
   if((scripts\cp\utility::isplayingsolo() || level.only_one_player) && haveselfrevive()) {
-    if(scripts\cp\utility::is_consumable_active("self_revive") || scripts\engine\utility::is_true(level.the_hoff_revive))
+    if(scripts\cp\utility::is_consumable_active("self_revive") || scripts\engine\utility::is_true(level.the_hoff_revive)) {
       waitinlaststand(var_0, var_1, var_2);
-    else
+    } else {
       waitinspectator(var_0, var_1);
+    }
   } else if(debugafterlifearcadeenabled())
     waitinspectator(var_0, var_1);
   else if(maydolaststand(var_1, var_0)) {
     var_3 = waitinlaststand(var_0, var_1);
 
-    if(!var_3)
+    if(!var_3) {
       waitinspectator(var_0, var_1);
+    }
   } else
     waitinspectator(var_0, var_1);
 
@@ -82,17 +87,20 @@ enter_globaldefaultaction() {
   scripts\cp\cp_gamescore::update_team_encounter_performance(scripts\cp\cp_gamescore::get_team_score_component_name(), "num_players_enter_laststand");
   var_0 = ["iw7_gunless_zm"];
 
-  if(isDefined(level.additional_laststand_weapon_exclusion))
+  if(isDefined(level.additional_laststand_weapon_exclusion)) {
     var_0 = scripts\engine\utility::array_combine(var_0, level.additional_laststand_weapon_exclusion);
+  }
 
-  if(isDefined(self.former_mule_weapon))
+  if(isDefined(self.former_mule_weapon)) {
     var_0[var_0.size] = self.former_mule_weapon;
+  }
 
   var_1 = [];
 
   foreach(var_3 in self getweaponslistprimaries()) {
-    if(!scripts\cp\utility::isstrstart(var_3, "alt_"))
+    if(!scripts\cp\utility::isstrstart(var_3, "alt_")) {
       var_1[var_1.size] = var_3;
+    }
   }
 
   self.lost_and_found_primary_count = var_1;
@@ -123,8 +131,9 @@ check_for_invalid_attachments() {
   }
   var_0 = undefined;
 
-  if(isDefined(self.lastweapon) && !scripts\engine\utility::exist_in_array_MAYBE(self.copy_fullweaponlist, self.lastweapon))
+  if(isDefined(self.lastweapon) && !scripts\engine\utility::exist_in_array_MAYBE(self.copy_fullweaponlist, self.lastweapon)) {
     self.copy_fullweaponlist = scripts\engine\utility::array_add(self.copy_fullweaponlist, self.lastweapon);
+  }
 
   foreach(var_2 in self.copy_fullweaponlist) {
     if(scripts\cp\cp_weapon::has_attachment(var_2, "doubletap")) {
@@ -143,8 +152,9 @@ check_for_invalid_attachments() {
         self.copy_fullweaponlist[self.copy_fullweaponlist.size] = var_0;
       }
 
-      if(issubstr(self.copy_weapon_current, var_3[0]))
+      if(issubstr(self.copy_weapon_current, var_3[0])) {
         self.copy_weapon_current = var_0;
+      }
 
       var_5 = getarraykeys(self.copy_weapon_ammo_clip);
       var_6 = getarraykeys(self.copy_weapon_ammo_stock);
@@ -167,11 +177,13 @@ check_for_invalid_attachments() {
         }
       }
 
-      if(issubstr(self.lastweapon, var_3[0]))
+      if(issubstr(self.lastweapon, var_3[0])) {
         self.lastweapon = var_0;
+      }
 
-      if(issubstr(self.pre_laststand_weapon, var_3[0]))
+      if(issubstr(self.pre_laststand_weapon, var_3[0])) {
         self.pre_laststand_weapon = var_0;
+      }
     }
   }
 }
@@ -179,41 +191,46 @@ check_for_invalid_attachments() {
 enter_globaldefaultaction_getcurrentweapon(var_0, var_1) {
   var_2 = scripts\cp\utility::getvalidtakeweapon(var_0);
 
-  if(isDefined(self.pre_arcade_game_weapon))
+  if(isDefined(self.pre_arcade_game_weapon)) {
     var_2 = self.pre_arcade_game_weapon;
+  }
 
   var_3 = 0;
 
-  if(var_2 == "none")
+  if(var_2 == "none") {
     var_3 = 1;
-  else if(scripts\engine\utility::array_contains(var_0, var_2))
+  } else if(scripts\engine\utility::array_contains(var_0, var_2)) {
     var_3 = 1;
-  else if(scripts\engine\utility::array_contains(var_0, getweaponbasename(var_2)))
+  } else if(scripts\engine\utility::array_contains(var_0, getweaponbasename(var_2))) {
     var_3 = 1;
-  else if(scripts\engine\utility::is_true(var_1) && scripts\cp\utility::is_melee_weapon(var_2, 1))
+  } else if(scripts\engine\utility::is_true(var_1) && scripts\cp\utility::is_melee_weapon(var_2, 1)) {
     var_3 = 1;
+  }
 
-  if(scripts\cp\utility::is_primary_melee_weapon(var_2))
+  if(scripts\cp\utility::is_primary_melee_weapon(var_2)) {
     var_3 = 0;
+  }
 
-  if(var_3)
+  if(var_3) {
     return choose_last_weapon(var_0, var_1, 1);
-  else
+  } else {
     return var_2;
+  }
 }
 
 choose_last_weapon(var_0, var_1, var_2) {
   for(var_3 = 0; var_3 < self.copy_fullweaponlist.size; var_3++) {
-    if(self.copy_fullweaponlist[var_3] == "none")
+    if(self.copy_fullweaponlist[var_3] == "none") {
       continue;
-    else if(scripts\engine\utility::array_contains(var_0, self.copy_fullweaponlist[var_3]))
+    } else if(scripts\engine\utility::array_contains(var_0, self.copy_fullweaponlist[var_3])) {
       continue;
-    else if(scripts\engine\utility::array_contains(var_0, getweaponbasename(self.copy_fullweaponlist[var_3])))
+    } else if(scripts\engine\utility::array_contains(var_0, getweaponbasename(self.copy_fullweaponlist[var_3]))) {
       continue;
-    else if(scripts\engine\utility::is_true(var_1) && scripts\cp\utility::is_melee_weapon(self.copy_fullweaponlist[var_3], var_2))
+    } else if(scripts\engine\utility::is_true(var_1) && scripts\cp\utility::is_melee_weapon(self.copy_fullweaponlist[var_3], var_2)) {
       continue;
-    else
+    } else {
       return self.copy_fullweaponlist[var_3];
+    }
   }
 }
 
@@ -223,11 +240,13 @@ exit_globaldefaultaction() {
   var_0 = [];
   scripts\cp\utility::restore_weapons_status(var_0);
 
-  if(isDefined(self.pre_laststand_weapon_stock))
+  if(isDefined(self.pre_laststand_weapon_stock)) {
     self setweaponammostock(self.pre_laststand_weapon, self.pre_laststand_weapon_stock);
+  }
 
-  if(isDefined(self.pre_laststand_weapon_ammo_clip))
+  if(isDefined(self.pre_laststand_weapon_ammo_clip)) {
     self setweaponammoclip(self.pre_laststand_weapon, self.pre_laststand_weapon_ammo_clip);
+  }
 
   self setspawnweapon(self.lastweapon, 1);
   give_fists_if_no_real_weapon(self);
@@ -243,16 +262,19 @@ exit_globaldefaultaction() {
 }
 
 enter_gamemodespecificaction() {
-  if(isDefined(level.laststand_enter_gamemodespecificaction))
+  if(isDefined(level.laststand_enter_gamemodespecificaction)) {
     [[level.laststand_enter_gamemodespecificaction]](self);
+  }
 
-  if(isDefined(level.laststand_enter_levelspecificaction))
+  if(isDefined(level.laststand_enter_levelspecificaction)) {
     [[level.laststand_enter_levelspecificaction]](self);
+  }
 }
 
 exit_gamemodespecificaction() {
-  if(isDefined(level.laststand_exit_gamemodespecificaction))
+  if(isDefined(level.laststand_exit_gamemodespecificaction)) {
     [[level.laststand_exit_gamemodespecificaction]](self);
+  }
 }
 
 waitinlaststand(var_0, var_1, var_2) {
@@ -260,8 +282,9 @@ waitinlaststand(var_0, var_1, var_2) {
   self endon("revive");
   level endon("game_ended");
 
-  if(self_revive_activated())
+  if(self_revive_activated()) {
     return self_revive(self);
+  }
 
   var_3 = 35;
 
@@ -284,20 +307,23 @@ waitinlaststand(var_0, var_1, var_2) {
     if(scripts\cp\utility::isplayingsolo() || level.only_one_player) {
       take_laststand(self, 1);
 
-      if(scripts\engine\utility::is_true(level.the_hoff_revive))
+      if(scripts\engine\utility::is_true(level.the_hoff_revive)) {
         set_last_stand_timer(self, 35);
-      else
+      } else {
         set_last_stand_timer(self, 5);
+      }
     } else if(!scripts\engine\utility::flag_exist("meph_fight") || scripts\engine\utility::flag_exist("meph_fight") && !scripts\engine\utility::flag("meph_fight"))
       set_last_stand_timer(self, var_3);
-    else
+    else {
       var_3 = undefined;
+    }
   }
 
-  if(scripts\cp\utility::isplayingsolo() || level.only_one_player && !isDefined(level.the_hoff_revive))
+  if(scripts\cp\utility::isplayingsolo() || level.only_one_player && !isDefined(level.the_hoff_revive)) {
     return wait_for_self_revive(var_0, var_1);
-  else
+  } else {
     return wait_to_be_revived(self, self.origin, undefined, undefined, 1, get_normal_revive_time(), (0.33, 0.75, 0.24), var_3, 0, var_1, 1, var_2);
+  }
 }
 
 waitinspectator(var_0, var_1) {
@@ -340,8 +366,9 @@ waitinspectator(var_0, var_1) {
   self.forcespawnorigin = var_2;
   self.forcespawnangles = var_3;
 
-  if(isDefined(level.prespawnfromspectaorfunc))
+  if(isDefined(level.prespawnfromspectaorfunc)) {
     [[level.prespawnfromspectaorfunc]](self);
+  }
 
   scripts\cp\cp_globallogic::spawnplayer();
 }
@@ -363,10 +390,11 @@ wait_for_self_revive(var_0, var_1) {
     return 0;
   }
 
-  if(is_killed_by_kill_trigger(var_0))
+  if(is_killed_by_kill_trigger(var_0)) {
     self setOrigin(var_0.origin);
-  else
+  } else {
     wait 5;
+  }
 
   clear_last_stand_timer(self);
   return 1;
@@ -375,8 +403,9 @@ wait_for_self_revive(var_0, var_1) {
 wait_to_be_revived(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   var_12 = makereviveentity(var_0, var_1, var_2, var_3, var_4);
 
-  if(var_8)
+  if(var_8) {
     thread enter_spectate(var_0, var_1, var_12);
+  }
 
   if(var_9) {
     level waittill("forever");
@@ -384,11 +413,13 @@ wait_to_be_revived(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
   } else {
     var_13 = var_12;
 
-    if(var_8)
+    if(var_8) {
       var_13 = makereviveiconentity(var_0, var_12);
+    }
 
-    if(var_10)
+    if(var_10) {
       var_13 makereviveicon(var_13, var_0, var_6, var_7);
+    }
 
     var_0.reviveent = var_12;
     var_0.reviveiconent = var_13;
@@ -396,25 +427,30 @@ wait_to_be_revived(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
     if(isDefined(level.wait_to_be_revived_func)) {
       var_14 = [[level.wait_to_be_revived_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 
-      if(isDefined(var_14))
+      if(isDefined(var_14)) {
         return var_14;
+      }
     }
 
-    if(var_10)
+    if(var_10) {
       var_12 thread laststandwaittillrevivebyteammate(var_0, var_5);
+    }
 
-    if(isDefined(var_7))
+    if(isDefined(var_7)) {
       var_14 = var_12 scripts\cp\utility::waittill_any_ents_or_timeout_return(var_7, var_12, "revive_success", var_0, "force_bleed_out", var_0, "revive_success", var_0, "challenge_complete_revive");
-    else
+    } else {
       var_14 = var_12 scripts\cp\utility::waittill_any_ents_return(var_12, "revive_success", var_0, "challenge_complete_revive");
+    }
 
-    if(var_14 == "timeout" && is_being_revived(var_0))
+    if(var_14 == "timeout" && is_being_revived(var_0)) {
       var_14 = var_12 scripts\engine\utility::waittill_any_return("revive_success", "revive_fail");
+    }
 
-    if(var_14 == "revive_success" || var_14 == "challenge_complete_revive")
+    if(var_14 == "revive_success" || var_14 == "challenge_complete_revive") {
       return 1;
-    else
+    } else {
       return 0;
+    }
   }
 }
 
@@ -449,14 +485,16 @@ laststandwaittillrevivebyteammate(var_0, var_1) {
           var_2 thread scripts\cp\cp_vo::try_to_play_vo("respawn_laststand_aj", "zmb_comment_vo", "medium", 10, 0, 0, 0, 50);
           var_0 thread scripts\cp\cp_vo::try_to_play_vo("respawn_laststand", "zmb_comment_vo", "medium", 10, 0, 0, 1, 50);
         } else if(level.script == "cp_town") {
-          if(var_2.vo_prefix == "p1_")
+          if(var_2.vo_prefix == "p1_") {
             var_0 thread scripts\cp\cp_vo::try_to_play_vo("respawn_laststand_sally", "town_comment_vo");
+          }
         } else
           var_0 thread scripts\cp\cp_vo::try_to_play_vo("respawn_laststand", "zmb_comment_vo", "medium", 10, 0, 0, 1, 50);
       }
 
-      if(var_0 scripts\cp\utility::is_consumable_active("faster_revive_upgrade"))
+      if(var_0 scripts\cp\utility::is_consumable_active("faster_revive_upgrade")) {
         var_0 scripts\cp\utility::notify_used_consumable("faster_revive_upgrade");
+      }
 
       var_2 playlocalsound("revive_teammate");
       record_revive_success(var_2, var_0);
@@ -479,13 +517,15 @@ laststandwaittillrevivebyteammate(var_0, var_1) {
 }
 
 getrevivetimescaler(var_0, var_1) {
-  if(scripts\engine\utility::is_true(var_0.can_revive))
+  if(scripts\engine\utility::is_true(var_0.can_revive)) {
     return 2;
+  }
 
   var_2 = var_0 scripts\cp\perks\perk_utility::perk_getrevivetimescalar();
 
-  if(var_1 scripts\cp\utility::is_consumable_active("faster_revive_upgrade"))
+  if(var_1 scripts\cp\utility::is_consumable_active("faster_revive_upgrade")) {
     var_2 = var_2 * 2;
+  }
 
   return var_2;
 }
@@ -503,8 +543,9 @@ record_revive_success(var_0, var_1) {
     var_0 scripts\cp\cp_persistence::eog_player_update_stat("revives", 1);
     var_1 thread scripts\cp\cp_hud_message::showsplash("revived", undefined, var_0);
 
-    if(isDefined(level.revive_success_analytics_func))
+    if(isDefined(level.revive_success_analytics_func)) {
       [[level.revive_success_analytics_func]](var_0);
+    }
   }
 }
 
@@ -518,14 +559,17 @@ makereviveentity(var_0, var_1, var_2, var_3, var_4) {
   var_6.inuse = 0;
   var_6.targetname = "revive_trigger";
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_6 setModel(var_2);
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_6 scriptmodelplayanim(var_3);
+  }
 
-  if(var_4)
+  if(var_4) {
     var_6 linkTo(var_0, "tag_origin", var_5, (0, 0, 0));
+  }
 
   var_6 thread cleanupreviveent(var_0);
   return var_6;
@@ -539,41 +583,47 @@ makereviveiconentity(var_0, var_1) {
 }
 
 maydolaststand(var_0, var_1) {
-  if(scripts\cp\utility::isplayingsolo() || level.only_one_player)
+  if(scripts\cp\utility::isplayingsolo() || level.only_one_player) {
     return solo_maydolaststand(var_0, var_1);
-  else
+  } else {
     return coop_maydolaststand(var_1);
+  }
 }
 
 solo_maydolaststand(var_0, var_1) {
-  if(var_0 && is_killed_by_kill_trigger(var_1))
+  if(var_0 && is_killed_by_kill_trigger(var_1)) {
     return 0;
+  }
 
   return 1;
 }
 
 coop_maydolaststand(var_0) {
-  if(is_killed_by_kill_trigger(var_0))
+  if(is_killed_by_kill_trigger(var_0)) {
     return 0;
+  }
 
   return 1;
 }
 
 only_use_weapon() {
-  if(scripts\engine\utility::is_true(self.iscarrying))
+  if(scripts\engine\utility::is_true(self.iscarrying)) {
     wait 0.5;
+  }
 
   var_0 = get_last_stand_pistol();
 
-  if(self hasweapon(var_0))
+  if(self hasweapon(var_0)) {
     self takeweapon(var_0);
+  }
 
   scripts\cp\utility::_giveweapon(var_0, scripts\cp\utility::get_weapon_variant_id(self, var_0), 0, 1);
   var_1 = ["iw7_knife_zm", "iw7_knife_zm_hoff", "iw7_knife_zm_jock", "iw7_knife_zm_vgirl", "iw7_knife_zm_rapper", "iw7_knife_zm_nerd", "iw7_knife_zm_wyler", "iw7_knife_zm_schoolgirl", "iw7_knife_zm_scientist", "iw7_knife_zm_soldier", "iw7_knife_zm_rebel", "iw7_knife_zm_elvira", "iw7_knife_zm_crowbar", "iw7_knife_zm_cleaver", "iw7_knife_zm_disco"];
   var_2 = can_use_pistol_during_last_stand(self);
 
-  if(var_2)
+  if(var_2) {
     var_1[var_1.size] = var_0;
+  }
 
   _takeweaponsexceptlist(var_1);
   var_3 = get_number_of_last_stand_clips();
@@ -592,23 +642,26 @@ get_number_of_last_stand_clips() {
 }
 
 get_last_stand_pistol() {
-  if(isDefined(self.last_stand_pistol))
+  if(isDefined(self.last_stand_pistol)) {
     return self.last_stand_pistol;
+  }
 
   var_0 = self.default_starting_pistol;
   var_1 = self getweaponslistprimaries()[0];
 
-  if(scripts\cp\utility::getbaseweaponname(var_0) == scripts\cp\utility::getbaseweaponname(var_1))
+  if(scripts\cp\utility::getbaseweaponname(var_0) == scripts\cp\utility::getbaseweaponname(var_1)) {
     return var_1;
-  else
+  } else {
     return var_0;
+  }
 }
 
 can_use_pistol_during_last_stand(var_0) {
-  if(isDefined(level.can_use_pistol_during_laststand_func))
+  if(isDefined(level.can_use_pistol_during_laststand_func)) {
     return [[level.can_use_pistol_during_laststand_func]](var_0);
-  else
+  } else {
     return 1;
+  }
 }
 
 cleanupreviveent(var_0) {
@@ -637,37 +690,43 @@ _id_9730(var_0) {
 }
 
 give_laststand(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   var_2 = var_0 get_last_stand_count() + var_1;
   set_last_stand_count(var_0, var_2);
 }
 
 take_laststand(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   var_2 = var_0 get_last_stand_count() - var_1;
   set_last_stand_count(var_0, max(var_2, 0));
 }
 
 gameshouldend(var_0) {
-  if(var_0 self_revive_activated())
+  if(var_0 self_revive_activated()) {
     return 0;
+  }
 
-  if((scripts\cp\utility::isplayingsolo() || level.only_one_player) && (var_0 scripts\cp\utility::has_zombie_perk("perk_machine_revive") || scripts\engine\utility::is_true(level.the_hoff_revive)))
+  if((scripts\cp\utility::isplayingsolo() || level.only_one_player) && (var_0 scripts\cp\utility::has_zombie_perk("perk_machine_revive") || scripts\engine\utility::is_true(level.the_hoff_revive))) {
     return 0;
+  }
 
-  if(scripts\cp\utility::isplayingsolo() || level.only_one_player)
+  if(scripts\cp\utility::isplayingsolo() || level.only_one_player) {
     return solo_gameshouldend(var_0);
-  else
+  } else {
     return coop_gameshouldend(var_0);
+  }
 }
 
 solo_gameshouldend(var_0) {
-  if(player_in_laststand(var_0))
+  if(player_in_laststand(var_0)) {
     return 0;
+  }
 
   return var_0 get_last_stand_count() == 0;
 }
@@ -681,8 +740,9 @@ everyone_else_all_in_laststand(var_0) {
     if(var_2 == var_0) {
       continue;
     }
-    if(!player_in_laststand(var_2))
+    if(!player_in_laststand(var_2)) {
       return 0;
+    }
   }
 
   return 1;
@@ -720,8 +780,9 @@ enter_spectate(var_0, var_1, var_2) {
   var_0 endon("disconnect");
   level endon("game_ended");
 
-  if(isDefined(var_0.carryicon))
+  if(isDefined(var_0.carryicon)) {
     var_0.carryicon destroy();
+  }
 
   var_0.has_building_upgrade = 0;
   enter_camera_zoomout();
@@ -756,10 +817,11 @@ camera_zoomout(var_0, var_1, var_2) {
 enter_bleed_out(var_0) {
   hide_all_revive_icons(var_0);
 
-  if(isDefined(level.player_bleed_out_func))
+  if(isDefined(level.player_bleed_out_func)) {
     var_0[[level.player_bleed_out_func]](var_0);
-  else
+  } else {
     var_0 scripts\cp\cp_globallogic::enterspectator();
+  }
 }
 
 enter_camera_zoomout() {
@@ -776,18 +838,20 @@ exit_camera_zoomout() {
 
 revive_use_hold_think(var_0, var_1, var_2, var_3) {
   if(isDefined(var_1.vo_prefix)) {
-    if(var_0.vo_prefix == "p1_" && soundexists(var_1.vo_prefix + "reviving_valleygirl"))
+    if(var_0.vo_prefix == "p1_" && soundexists(var_1.vo_prefix + "reviving_valleygirl")) {
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("reviving_valleygirl", "zmb_comment_vo");
-    else if(var_0.vo_prefix == "p1_" && soundexists(var_1.vo_prefix + "reviving_sally"))
+    } else if(var_0.vo_prefix == "p1_" && soundexists(var_1.vo_prefix + "reviving_sally")) {
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("reviving_sally", "zmb_comment_vo");
-    else
+    } else {
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("reviving", "zmb_comment_vo");
+    }
   }
 
   enter_revive_use_hold_think(var_0, var_1, var_2, var_3);
 
-  if(!isDefined(level.the_hoff) || isDefined(level.the_hoff) && var_1 != level.the_hoff)
+  if(!isDefined(level.the_hoff) || isDefined(level.the_hoff) && var_1 != level.the_hoff) {
     play_revive_gesture(var_1, var_0);
+  }
 
   thread wait_for_exit_revive_use_hold_think(var_0, var_1, var_2, var_1 scripts\cp\utility::getvalidtakeweapon());
   var_0.reviver = var_1;
@@ -795,8 +859,9 @@ revive_use_hold_think(var_0, var_1, var_2, var_3) {
   var_5 = 0;
   enable_on_world_progress_bar_for_other_players(var_0, var_1);
 
-  if(isPlayer(var_1))
+  if(isPlayer(var_1)) {
     var_0 notify("reviving");
+  }
 
   while(should_revive_continue(var_1)) {
     if(var_4 >= var_3) {
@@ -839,10 +904,11 @@ stop_revive_gesture(var_0, var_1) {
 }
 
 get_revive_gesture(var_0) {
-  if(isDefined(var_0.revive_gesture))
+  if(isDefined(var_0.revive_gesture)) {
     return var_0.revive_gesture;
-  else
+  } else {
     return "ges_zombies_revive_nerd";
+  }
 }
 
 update_players_revive_progress_bar(var_0, var_1, var_2) {
@@ -899,8 +965,9 @@ play_rescue_anim(var_0) {
 }
 
 should_revive_continue(var_0) {
-  if(scripts\engine\utility::is_true(var_0.can_revive))
+  if(scripts\engine\utility::is_true(var_0.can_revive)) {
     return 1;
+  }
 
   return !level.gameended && scripts\cp\utility::isreallyalive(var_0) && var_0 useButtonPressed() && !player_in_laststand(var_0);
 }
@@ -909,10 +976,11 @@ _takeweaponsexceptlist(var_0) {
   var_1 = self getweaponslistall();
 
   foreach(var_3 in var_1) {
-    if(scripts\engine\utility::array_contains(var_0, var_3))
+    if(scripts\engine\utility::array_contains(var_0, var_3)) {
       continue;
-    else if(!scripts\cp\utility::isstrstart(var_3, "alt_"))
+    } else if(!scripts\cp\utility::isstrstart(var_3, "alt_")) {
       self takeweapon(var_3);
+    }
   }
 }
 
@@ -936,35 +1004,41 @@ clear_last_stand_timer(var_0) {
 instant_revive(var_0) {
   var_0 notify("revive_success");
 
-  if(isDefined(var_0.reviveent))
+  if(isDefined(var_0.reviveent)) {
     var_0.reviveent notify("revive_success");
+  }
 
-  if(is_being_revived(var_0))
+  if(is_being_revived(var_0)) {
     disable_on_world_progress_bar_for_other_players(var_0, var_0.reviver);
+  }
 
   clear_last_stand_timer(var_0);
 }
 
 set_revive_time(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level.normal_revive_time = var_0;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level.spectator_revive_time = var_1;
+  }
 }
 
 get_normal_revive_time() {
-  if(isDefined(level.normal_revive_time))
+  if(isDefined(level.normal_revive_time)) {
     return level.normal_revive_time;
-  else
+  } else {
     return 5000;
+  }
 }
 
 get_spectator_revive_time() {
-  if(isDefined(level.spectator_revive_time))
+  if(isDefined(level.spectator_revive_time)) {
     return level.spectator_revive_time;
-  else
+  } else {
     return 6000;
+  }
 }
 
 updatemovespeedscale() {
@@ -972,8 +1046,9 @@ updatemovespeedscale() {
 }
 
 get_currency_penalty_amount(var_0) {
-  if(isDefined(level.laststand_currency_penalty_amount_func))
+  if(isDefined(level.laststand_currency_penalty_amount_func)) {
     return [[level.laststand_currency_penalty_amount_func]](var_0);
+  }
 
   return 500;
 }
@@ -992,8 +1067,9 @@ makereviveicon(var_0, var_1, var_2, var_3) {
     add_to_revive_icon_ent_icon_list(var_0, var_4);
   }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_0 thread revive_icon_color_management(var_3);
+  }
 
   return var_4;
 }
@@ -1019,8 +1095,9 @@ reviveiconcleanup(var_0, var_1) {
   scripts\cp\utility::waittill_any_ents_return(var_0, "death", var_1, "disconnect");
   remove_from_owner_revive_icon_list(self, var_1);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self destroy();
+  }
 }
 
 revive_icon_color_management(var_0) {
@@ -1036,8 +1113,9 @@ set_revive_icon_color(var_0, var_1) {
   var_0.current_revive_icon_color = var_1;
   var_0.revive_icons = scripts\engine\utility::array_removeundefined(var_0.revive_icons);
 
-  foreach(var_3 in var_0.revive_icons)
-  var_3.color = var_1;
+  foreach(var_3 in var_0.revive_icons) {
+    var_3.color = var_1;
+  }
 }
 
 init_laststand() {
@@ -1061,12 +1139,14 @@ revive_icon_player_connect_monitor() {
   for(;;) {
     level waittill("connected", var_0);
 
-    foreach(var_2 in level.revive_icon_entities)
-    show_revive_icon_to_player(var_2, var_0);
+    foreach(var_2 in level.revive_icon_entities) {
+      show_revive_icon_to_player(var_2, var_0);
+    }
 
     foreach(var_5 in level.players_being_revived) {
-      if(isDefined(var_5))
+      if(isDefined(var_5)) {
         var_0 setclientomnvar("zm_revive_bar_" + var_5.revive_progress_bar_id + "_target", var_5);
+      }
     }
   }
 }
@@ -1093,20 +1173,23 @@ remove_from_player_revive_icon_list(var_0, var_1) {
 }
 
 get_revive_icon_initial_alpha(var_0) {
-  if(isDefined(level._id_E49D))
+  if(isDefined(level._id_E49D)) {
     return [[level._id_E49D]](var_0);
-  else
+  } else {
     return 1;
+  }
 }
 
 show_all_revive_icons(var_0) {
-  foreach(var_2 in var_0.revive_icons)
-  var_2.alpha = 1;
+  foreach(var_2 in var_0.revive_icons) {
+    var_2.alpha = 1;
+  }
 }
 
 hide_all_revive_icons(var_0) {
-  foreach(var_2 in var_0.revive_icons)
-  var_2.alpha = 0;
+  foreach(var_2 in var_0.revive_icons) {
+    var_2.alpha = 0;
+  }
 }
 
 enable_on_world_progress_bar_for_other_players(var_0, var_1) {
@@ -1179,8 +1262,9 @@ player_in_laststand(var_0) {
 }
 
 enable_self_revive(var_0) {
-  if(!isDefined(var_0.self_revive))
+  if(!isDefined(var_0.self_revive)) {
     var_0.self_revive = 0;
+  }
 
   var_0.self_revive++;
 }

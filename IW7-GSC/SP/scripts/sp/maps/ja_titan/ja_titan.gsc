@@ -129,8 +129,9 @@ _id_B880() {
 }
 
 _id_E2C9() {
-  if(isDefined(self) && isalive(self))
+  if(isDefined(self) && isalive(self)) {
     self._id_E35C = 60;
+  }
 }
 
 _id_10234() {
@@ -142,8 +143,9 @@ _id_10234() {
 }
 
 _id_10236(var_0) {
-  foreach(var_2 in level._id_A3A8[var_0]._id_FE2D)
-  var_2 thread _id_0BDC::_id_1983();
+  foreach(var_2 in level._id_A3A8[var_0]._id_FE2D) {
+    var_2 thread _id_0BDC::_id_1983();
+  }
 }
 
 _id_155D() {
@@ -159,8 +161,9 @@ _id_EAAD() {
   wait 5.0;
   level._id_A3A8["missileboats"]._id_FE2D = scripts\engine\utility::array_removeundefined(level._id_A3A8["missileboats"]._id_FE2D);
 
-  foreach(var_1 in level._id_A3A8["missileboats"]._id_FE2D)
-  var_1 thread _id_137A7();
+  foreach(var_1 in level._id_A3A8["missileboats"]._id_FE2D) {
+    var_1 thread _id_137A7();
+  }
 
   level waittill("missileboat_in_pov", var_1);
   var_1 _id_0BB1::_id_B85F();
@@ -203,8 +206,9 @@ _id_137A7() {
 }
 
 _id_B886() {
-  foreach(var_1 in level._id_A3A8["missileboats"]._id_FE2D)
-  var_1 thread _id_B86A();
+  foreach(var_1 in level._id_A3A8["missileboats"]._id_FE2D) {
+    var_1 thread _id_B86A();
+  }
 }
 
 _id_B86A() {
@@ -212,16 +216,19 @@ _id_B86A() {
   self endon("entitydeleted");
   level.player endon("death");
 
-  if(!isDefined(self._id_E35C))
+  if(!isDefined(self._id_E35C)) {
     self._id_E35C = 60;
+  }
 
-  while(isDefined(self._id_8CCA) && self._id_8CCA > self._id_E35C)
+  while(isDefined(self._id_8CCA) && self._id_8CCA > self._id_E35C) {
     wait 0.05;
+  }
 
   var_0 = _id_0BB1::_id_77D2(getEntArray("missileboat_volume", "targetname"));
 
-  if(var_0.size > 0)
+  if(var_0.size > 0) {
     _id_0BB1::_id_F486(var_0[randomint(var_0.size)]);
+  }
 }
 
 _id_C505() {
@@ -231,17 +238,19 @@ _id_C505() {
     var_2 = [];
 
     foreach(var_4 in var_0) {
-      if(!scripts\engine\utility::flag_exist(var_4) || !scripts\engine\utility::flag(var_4))
+      if(!scripts\engine\utility::flag_exist(var_4) || !scripts\engine\utility::flag(var_4)) {
         var_2[var_2.size] = var_4;
+      }
     }
 
     if(var_2.size == 1) {
       var_6 = 0.8;
 
-      if(var_2[0] == "missileboatscomplete_vo_finished")
+      if(var_2[0] == "missileboatscomplete_vo_finished") {
         thread _id_10AE::_id_CE80(::_id_B884, 0, var_6);
-      else
+      } else {
         thread _id_10AE::_id_CE80(::_id_C077, 0, var_6);
+      }
 
       break;
     }
@@ -262,15 +271,17 @@ _id_10CAE() {
   scripts\sp\utility::_id_6EEB();
   thread _id_10AE::_id_E3B6(1);
 
-  if(getdvarint("ja_skip_preload", 0) == 0)
+  if(getdvarint("ja_skip_preload", 0) == 0) {
     level thread scripts\sp\utility::_id_BF97();
+  }
 
   _id_10AE::_id_E3FA("ret_goal2");
 }
 
 _id_B20F() {
-  while(!isDefined(level._id_E35D))
+  while(!isDefined(level._id_E35D)) {
     wait 0.05;
+  }
 
   scripts\sp\utility::_id_28D7();
   scripts\sp\utility::_id_CF8B();
@@ -329,8 +340,9 @@ _id_10235() {
 _id_10237() {
   scripts\sp\utility::_id_10350("ja_titan_eth_allskeltersacco");
 
-  if(scripts\engine\utility::flag_exist("acescomplete") && !scripts\engine\utility::flag("acescomplete"))
+  if(scripts\engine\utility::flag_exist("acescomplete") && !scripts\engine\utility::flag("acescomplete")) {
     scripts\sp\utility::_id_10350("ja_titan_eth_acesarestillout");
+  }
 }
 
 _id_1562() {

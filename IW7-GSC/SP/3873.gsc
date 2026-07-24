@@ -9,8 +9,9 @@ main() {
 
 _id_F5B6(var_0, var_1, var_2) {
   if(var_0) {
-    if(isDefined(var_1) && isDefined(var_2))
+    if(isDefined(var_1) && isDefined(var_2)) {
       level thread _id_0F27::_id_10ED8(var_1, var_2);
+    }
 
     level thread _id_0F26::_id_117D3(1);
 

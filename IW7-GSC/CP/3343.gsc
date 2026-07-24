@@ -4,13 +4,15 @@
 **************************************/
 
 init() {
-  if(!isDefined(level.sentrysettings))
+  if(!isDefined(level.sentrysettings)) {
     level.sentrysettings = [];
+  }
 
   level._effect["microturret_lockon"] = loadfx("vfx/iw7/_requests/mp/super/vfx_microturret_lockon.vfx");
 
-  if(!isDefined(level.microturrets))
+  if(!isDefined(level.microturrets)) {
     level.microturrets = [];
+  }
 
   level._effect["shoulder_cannon_charge"] = loadfx("vfx/old/misc/shoulder_cannon_charge");
   level.sentrysettings["sentry_microturret"] = spawnStruct();
@@ -84,8 +86,9 @@ microturret_use(var_0) {
   self.vehicle = var_3;
   var_3._id_1E2D = 100;
 
-  if(level.teambased)
+  if(level.teambased) {
     var_3 setturretteam(self.team);
+  }
 
   var_3.sentrytype = "sentry_microturret";
   var_3 setmode("sentry_offline");
@@ -100,8 +103,9 @@ microturret_use(var_0) {
   var_3 thread _id_B6EA();
   var_3 setotherent(self);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_3 scripts\cp\cp_weapon::explosivehandlemovers(var_2);
+  }
 
   var_3._id_1A4A = scripts\engine\utility::spawn_tag_origin(var_3.origin, var_3.angles);
   var_3._id_1A4A linkTo(var_3, "tag_origin", (0, 0, 0), (0, 0, 0));
@@ -128,32 +132,38 @@ sentry_handledamage() {
     if(!scripts\cp\cp_damage::friendlyfirecheck(self.owner, var_1, 0)) {
       continue;
     }
-    if(isDefined(var_8) && var_8 &level.idflags_penetration)
+    if(isDefined(var_8) && var_8 &level.idflags_penetration) {
       self.wasdamagedfrombulletpenetration = 1;
+    }
 
-    if(var_4 == "MOD_MELEE")
+    if(var_4 == "MOD_MELEE") {
       self.damagetaken = self.damagetaken + self.maxhealth;
+    }
 
     var_10 = var_0;
 
     if(isPlayer(var_1)) {
       var_1 scripts\cp\cp_damage::updatedamagefeedback("sentry");
 
-      if(var_1 scripts\cp\utility::_hasperk("specialty_armorpiercing"))
+      if(var_1 scripts\cp\utility::_hasperk("specialty_armorpiercing")) {
         var_10 = var_0 * level.armorpiercingmod;
+      }
     }
 
-    if(isDefined(var_1.owner) && isPlayer(var_1.owner))
+    if(isDefined(var_1.owner) && isPlayer(var_1.owner)) {
       var_1.owner scripts\cp\cp_damage::updatedamagefeedback("sentry");
+    }
 
     self.damagetaken = self.damagetaken + var_10;
 
     if(self.damagetaken >= self.maxhealth) {
-      if(isPlayer(var_1) && (!isDefined(self.owner) || var_1 != self.owner))
+      if(isPlayer(var_1) && (!isDefined(self.owner) || var_1 != self.owner)) {
         var_1 notify("destroyed_killstreak");
+      }
 
-      if(isDefined(self.owner))
+      if(isDefined(self.owner)) {
         self.owner thread scripts\cp\utility::leaderdialogonplayer(level.sentrysettings[self.sentrytype].vodestroyed, undefined, undefined, self.origin);
+      }
 
       self notify("death");
       return;
@@ -172,14 +182,16 @@ sentry_handledeath() {
   sentry_setinactive();
   self setdefaultdroppitch(40);
 
-  if(isDefined(self.carriedby))
+  if(isDefined(self.carriedby)) {
     self setsentrycarrier(undefined);
+  }
 
   self setsentryowner(undefined);
   self setturretminimapvisible(0);
 
-  if(isDefined(self.ownertrigger))
+  if(isDefined(self.ownertrigger)) {
     self.ownertrigger delete();
+  }
 
   self playSound("sentry_explode");
 
@@ -193,8 +205,9 @@ sentry_handledeath() {
       break;
   }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     thread _id_F23F();
+  }
 }
 
 sentry_setinactive() {
@@ -210,10 +223,11 @@ sentry_setinactive() {
       break;
   }
 
-  if(level.teambased)
+  if(level.teambased) {
     scripts\cp\utility::setteamheadicon("none", (0, 0, 0));
-  else if(isDefined(self.owner))
+  } else if(isDefined(self.owner)) {
     scripts\cp\utility::setplayerheadicon(undefined, (0, 0, 0));
+  }
 }
 
 _id_E11F(var_0) {
@@ -237,11 +251,13 @@ _id_F23F() {
     self notify("deleting");
   }
 
-  if(isDefined(self.killcament))
+  if(isDefined(self.killcament)) {
     self.killcament delete();
+  }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 restoreperks() {
@@ -294,14 +310,17 @@ _id_B6EA() {
   wait 1;
 
   for(;;) {
-    if(!self.stunned && !_id_B701())
+    if(!self.stunned && !_id_B701()) {
       _id_B717();
+    }
 
-    if(!self.stunned && _id_B701())
+    if(!self.stunned && _id_B701()) {
       _id_B6EB();
+    }
 
-    if(self.stunned)
+    if(self.stunned) {
       _id_B713();
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -315,14 +334,16 @@ _id_B717() {
   self endon("stunned");
   self endon("death");
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner endon("disconnect");
+  }
 
   self setmode("manual");
   self laseroff();
 
-  if(_id_B701())
+  if(_id_B701()) {
     _id_B6F1();
+  }
 
   for(;;) {
     var_0 = anglesToForward(self gettagangles("tag_flash"));
@@ -381,8 +402,9 @@ _id_B717() {
 }
 
 _id_B70D(var_0, var_1) {
-  if(!isDefined(self._id_1A4A))
+  if(!isDefined(self._id_1A4A)) {
     return 0;
+  }
 
   self._id_1A4A._id_23EA = var_0;
   self._id_1A4A._id_23EB = var_1;
@@ -395,8 +417,9 @@ _id_B714(var_0) {
   var_2 = physics_createcontents(["physicscontents_solid", "physicscontents_vehicle", "physicscontents_glass", "physicscontents_ainosight", "physicscontents_sky"]);
   var_3 = self gettagorigin("tag_dummy");
 
-  if(isDefined(var_0.agent_type) && var_0.agent_type == "zombie_brute")
+  if(isDefined(var_0.agent_type) && var_0.agent_type == "zombie_brute") {
     return undefined;
+  }
 
   if(isPlayer(var_0) || isagent(var_0)) {
     var_4 = "j_spine4";
@@ -409,8 +432,9 @@ _id_B714(var_0) {
     }
 
     if(!isDefined(var_1)) {
-      if(!scripts\cp\utility::has_tag(var_0.model, "tag_eye"))
+      if(!scripts\cp\utility::has_tag(var_0.model, "tag_eye")) {
         return undefined;
+      }
 
       var_4 = "tag_eye";
       var_5 = var_0 gettagorigin(var_4);
@@ -457,15 +481,18 @@ _id_B6F1() {
 
 _id_B71A(var_0) {
   if(isPlayer(var_0) || isagent(var_0)) {
-    if(!isalive(var_0))
+    if(!isalive(var_0)) {
       return 0;
+    }
   }
 
-  if(self.team == var_0.team)
+  if(self.team == var_0.team) {
     return 0;
+  }
 
-  if(distancesquared(var_0.origin, self.origin) > 640000)
+  if(distancesquared(var_0.origin, self.origin) > 640000) {
     return 0;
+  }
 
   return 1;
 }
@@ -487,15 +514,17 @@ _id_B6EC() {
     if(_id_B701()) {
       var_1 = self _meth_8161(0);
 
-      if(!isDefined(self._id_1A4A))
+      if(!isDefined(self._id_1A4A)) {
         self settargetentity(self._id_1A4A);
+      }
 
       if(_id_B715()) {
         self shootturret();
         self._id_1E2D--;
 
-        if(self._id_1E2D <= 0)
+        if(self._id_1E2D <= 0) {
           self.owner thread _id_B6F4(self);
+        }
       }
 
       wait(var_0);
@@ -518,8 +547,9 @@ _id_B6F5() {
   self notify("microTurret_destroyAll");
 
   if(isDefined(self.microturrets)) {
-    foreach(var_1 in self.microturrets)
-    _id_B6F4(var_1);
+    foreach(var_1 in self.microturrets) {
+      _id_B6F4(var_1);
+    }
   }
 
   self.microturrets = undefined;
@@ -538,8 +568,9 @@ _id_B704() {
   playFXOnTag(scripts\engine\utility::getfx("microturret_lockon"), self, "tag_flash");
   var_0 = _id_B6FD();
 
-  if(isPlayer(var_0) || isagent(var_0))
+  if(isPlayer(var_0) || isagent(var_0)) {
     thread _id_B705(var_0);
+  }
 
   wait 0.6;
   self notify("lockOnEnded");
@@ -562,8 +593,9 @@ _id_B705(var_0) {
 }
 
 _id_B6FD() {
-  if(_id_B701())
+  if(_id_B701()) {
     return self._id_1A4A._id_23EA;
+  }
 
   return undefined;
 }
@@ -593,8 +625,9 @@ _id_B722() {
     var_3 = _id_B714(var_2);
 
     if(!isDefined(var_3)) {
-      if(!isDefined(var_1))
+      if(!isDefined(var_1)) {
         var_1 = gettime() + 1000;
+      }
 
       wait 0.1;
       continue;
@@ -617,10 +650,11 @@ _id_B6EE(var_0) {
   var_4 = 0.01;
 
   while(self._id_1E2D > 0) {
-    if(self._id_1E2D <= 20)
+    if(self._id_1E2D <= 20) {
       var_5 = self._id_1E2D;
-    else
+    } else {
       var_5 = randomintrange(10, 20);
+    }
 
     for(var_6 = 0; var_6 < var_5; var_6++) {
       if(isDefined(var_1.inactive) && var_1.inactive) {
@@ -634,13 +668,15 @@ _id_B6EE(var_0) {
         wait(var_3);
         self._id_1E2D--;
 
-        if(self._id_1E2D < 0)
+        if(self._id_1E2D < 0) {
           self._id_1E2D = 0;
+        }
 
         var_0 notify("microTurret_update", self._id_1E2D * var_4);
 
-        if(isDefined(var_0._id_38D8))
+        if(isDefined(var_0._id_38D8)) {
           var_0._id_38D8 delete();
+        }
       }
     }
 
@@ -669,38 +705,47 @@ balldrone_burstfirestop(var_0, var_1) {
 _id_B6EF() {
   self notify("stop_shooting");
 
-  if(isDefined(self.idletarget))
+  if(isDefined(self.idletarget)) {
     self setlookatent(self.idletarget);
+  }
 }
 
 canbetargeted(var_0) {
   var_1 = 1;
 
   if(isPlayer(var_0)) {
-    if(!scripts\cp\utility::isreallyalive(var_0) || var_0.sessionstate != "playing")
+    if(!scripts\cp\utility::isreallyalive(var_0) || var_0.sessionstate != "playing") {
       return 0;
+    }
   }
 
-  if(level.teambased && isDefined(var_0.team) && var_0.team == self.team)
+  if(level.teambased && isDefined(var_0.team) && var_0.team == self.team) {
     return 0;
+  }
 
-  if(isDefined(var_0.team) && var_0.team == "spectator")
+  if(isDefined(var_0.team) && var_0.team == "spectator") {
     return 0;
+  }
 
-  if(isPlayer(var_0) && var_0 == self.owner)
+  if(isPlayer(var_0) && var_0 == self.owner) {
     return 0;
+  }
 
-  if(isPlayer(var_0) && isDefined(var_0.spawntime) && (gettime() - var_0.spawntime) / 1000 <= 5)
+  if(isPlayer(var_0) && isDefined(var_0.spawntime) && (gettime() - var_0.spawntime) / 1000 <= 5) {
     return 0;
+  }
 
-  if(isPlayer(var_0) && var_0 scripts\cp\utility::_hasperk("specialty_blindeye"))
+  if(isPlayer(var_0) && var_0 scripts\cp\utility::_hasperk("specialty_blindeye")) {
     return 0;
+  }
 
-  if(distancesquared(var_0.origin, self.origin) > 4000000)
+  if(distancesquared(var_0.origin, self.origin) > 4000000) {
     return 0;
+  }
 
-  if(isDefined(var_0._id_9EE2) && var_0._id_9EE2)
+  if(isDefined(var_0._id_9EE2) && var_0._id_9EE2) {
     return 0;
+  }
 
   return var_1;
 }

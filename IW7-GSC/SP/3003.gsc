@@ -41,8 +41,9 @@ _id_215E() {
 _id_D629() {
   self endon("death");
 
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "no_doors_pop")
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "no_doors_pop") {
     self._id_BFEB = 1;
+  }
 
   self motionblurhqenable();
   scripts\sp\vehicle::_id_8441();
@@ -53,9 +54,9 @@ _id_D629() {
   thread _id_D60B();
   thread _id_5FF0();
 
-  if(isDefined(self.script_animation))
+  if(isDefined(self.script_animation)) {
     _id_1F82();
-  else {
+  } else {
     _id_BC59();
 
     if(isDefined(self.script_delay)) {
@@ -76,8 +77,9 @@ _id_D629() {
     _id_514A();
   }
 
-  if(isDefined(self._id_E4FB) && self._id_E4FB.size)
+  if(isDefined(self._id_E4FB) && self._id_E4FB.size) {
     thread _id_D62B();
+  }
 
   wait 0.05;
   self._id_4D94 = undefined;
@@ -93,14 +95,16 @@ _id_5D49() {
   }
   var_0 = self._id_E4FB;
 
-  foreach(var_2 in var_0)
-  var_2 scripts\sp\utility::_id_B14F();
+  foreach(var_2 in var_0) {
+    var_2 scripts\sp\utility::_id_B14F();
+  }
 
   self waittill("landed");
   var_0 = scripts\sp\utility::_id_22B9(var_0);
 
-  foreach(var_2 in var_0)
-  var_2 scripts\sp\utility::_id_1101B();
+  foreach(var_2 in var_0) {
+    var_2 scripts\sp\utility::_id_1101B();
+  }
 }
 
 _id_FA1E() {
@@ -110,15 +114,16 @@ _id_FA1E() {
   var_0 = [];
 
   for(var_1 = 0; var_1 < 4; var_1++) {
-    var_0[var_1] = scripts\sp\utility::_id_10639("droppod_arm");
+    var_0[var_1] = ::scripts\sp\utility::_id_10639("droppod_arm");
     var_0[var_1]._id_1FBB = "droppod_arm_" + var_1;
   }
 
   self._id_226D = var_0;
   scripts\sp\anim::_id_1EC1(self._id_226D, "pod_exit");
 
-  foreach(var_3 in self._id_226D)
-  var_3 linkTo(self);
+  foreach(var_3 in self._id_226D) {
+    var_3 linkTo(self);
+  }
 
   self attach("veh_mil_air_ca_drop_pod_large_static_rail_c6", "tag_origin");
 }
@@ -137,8 +142,9 @@ _id_FB98() {
   var_0 = spawn("script_origin", self.origin);
   var_0 linkTo(self);
 
-  if(!isDefined(self._id_4D94.droptime))
+  if(!isDefined(self._id_4D94.droptime)) {
     self._id_4D94.droptime = 1.41;
+  }
 
   if(self._id_4D94.droptime > 1.4) {
     var_1 = self._id_4D94.droptime - 1.35;
@@ -147,8 +153,9 @@ _id_FB98() {
 
   var_2 = "droppod_incoming";
 
-  if(isDefined(self._id_93D4))
+  if(isDefined(self._id_93D4)) {
     var_2 = self._id_93D4;
+  }
 
   var_0 playSound(var_2);
   scripts\engine\utility::waittill_any("death", "landed");
@@ -156,8 +163,9 @@ _id_FB98() {
   if(isDefined(self)) {
     var_3 = "droppod_land_impact";
 
-    if(isDefined(self._id_934A))
+    if(isDefined(self._id_934A)) {
       var_3 = self._id_934A;
+    }
 
     playworldsound(var_3, self.origin);
   }
@@ -169,8 +177,9 @@ _id_FB98() {
     var_0 delete();
   }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self notify("stop sounddroppod_descend_lp");
+  }
 }
 
 _id_5FF0() {
@@ -181,16 +190,19 @@ _id_5FF0() {
   thread _id_FB98();
   var_0 = "drop_pod_thruster";
 
-  if(isDefined(self._id_1186F))
+  if(isDefined(self._id_1186F)) {
     var_0 = self._id_1186F;
+  }
 
-  foreach(var_2 in self._id_4D94._id_75C6)
-  thread scripts\sp\utility::_id_75C4(var_0, var_2);
+  foreach(var_2 in self._id_4D94._id_75C6) {
+    thread scripts\sp\utility::_id_75C4(var_0, var_2);
+  }
 
   scripts\engine\utility::waittill_any("landed", "death");
 
-  foreach(var_2 in self._id_4D94._id_75C6)
-  thread scripts\sp\utility::_id_75F8(var_0, var_2);
+  foreach(var_2 in self._id_4D94._id_75C6) {
+    thread scripts\sp\utility::_id_75F8(var_0, var_2);
+  }
 }
 
 _id_D60C() {
@@ -212,8 +224,9 @@ _id_D614() {
   }
   var_0 = self.origin + (0, 0, 32);
 
-  if(!isDefined(self.script_damage) || isDefined(self.script_damage) && self.script_damage)
+  if(!isDefined(self.script_damage) || isDefined(self.script_damage) && self.script_damage) {
     radiusdamage(var_0, 128, 500, 250, self, "MOD_EXPLOSIVE");
+  }
 
   physicsexplosionsphere(var_0, 500, 1, 1);
   stopFXOnTag(scripts\engine\utility::getfx("drop_pod_trail"), self, "tag_fx");
@@ -225,11 +238,13 @@ _id_D614() {
 }
 
 _id_D62B() {
-  if(isDefined(self._id_10819))
+  if(isDefined(self._id_10819)) {
     self waittill(self._id_10819);
+  }
 
-  if(isDefined(self._id_226D))
+  if(isDefined(self._id_226D)) {
     thread scripts\sp\anim::_id_1F2C(self._id_226D, "pod_exit");
+  }
 
   thread scripts\sp\vehicle::_id_13253();
 }
@@ -240,9 +255,9 @@ _id_D60B(var_0) {
   if(isDefined(self._id_BFEB) && self._id_BFEB) {
     return;
   }
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self waittill("pop_doors");
-  else {
+  } else {
     self waittill("dropping");
     scripts\engine\utility::waittill_any_timeout(self._id_4D94.droptime * 0.9, "pop_doors");
   }
@@ -254,17 +269,19 @@ _id_D60B(var_0) {
 }
 
 _id_514A() {
-  if(isDefined(self._id_226D))
+  if(isDefined(self._id_226D)) {
     scripts\sp\utility::_id_228A(self._id_226D);
+  }
 
   self delete();
 }
 
 _id_36E8() {
-  if(isDefined(self.speed))
+  if(isDefined(self.speed)) {
     var_0 = self.speed;
-  else
+  } else {
     var_0 = 1000;
+  }
 
   var_1 = var_0 * 5280 / 3600;
   var_2 = self._id_4D94._id_56F3;
@@ -279,8 +296,9 @@ _id_1F82() {
   self._id_4D94.droptime = getanimlength(scripts\sp\utility::_id_7DC1(var_0));
   var_1 = self;
 
-  if(isDefined(self._id_1FBE))
+  if(isDefined(self._id_1FBE)) {
     var_1 = self._id_1FBE;
+  }
 
   thread _id_C12A();
   var_1 scripts\sp\anim::_id_1EC3(self, var_0);
@@ -295,10 +313,11 @@ _id_C12A(var_0) {
 }
 
 _id_BC59() {
-  if(isDefined(self.script_parameters))
+  if(isDefined(self.script_parameters)) {
     self._id_4D94._id_56F3 = int(self.script_parameters);
-  else
+  } else {
     self._id_4D94._id_56F3 = 4000;
+  }
 
   self._id_4D94._id_A843 = self.origin;
   self._id_4D94._id_5EF2 = (0, 0, 1);

@@ -22,13 +22,15 @@ init_crafting() {
 init_crafting_station() {
   var_0 = scripts\engine\utility::getStructArray("crafting_station", "script_noteworthy");
 
-  foreach(var_3, var_2 in var_0)
-  var_2 thread crafting_station_power(var_3);
+  foreach(var_3, var_2 in var_0) {
+    var_2 thread crafting_station_power(var_3);
+  }
 }
 
 crafting_station_power(var_0) {
-  if(var_0 > 0)
+  if(var_0 > 0) {
     wait(0.1 * var_0);
+  }
 
   var_1 = scripts\engine\utility::getStructArray(self.target, "targetname");
 
@@ -38,8 +40,9 @@ crafting_station_power(var_0) {
       continue;
     }
 
-    if(var_3.script_noteworthy == "egg_land_spot")
+    if(var_3.script_noteworthy == "egg_land_spot") {
       self.egg_land_spot = var_3;
+    }
   }
 
   var_1 = getEntArray(self.target, "targetname");
@@ -55,18 +58,22 @@ crafting_station_power(var_0) {
       continue;
     }
 
-    if(var_3.script_noteworthy == "station")
+    if(var_3.script_noteworthy == "station") {
       self.souvenir_station = var_3;
+    }
   }
 
-  if(isDefined(self.light))
+  if(isDefined(self.light)) {
     self.light setlightintensity(0);
+  }
 
-  if(scripts\engine\utility::is_true(self.requires_power) && isDefined(self.power_area))
+  if(scripts\engine\utility::is_true(self.requires_power) && isDefined(self.power_area)) {
     level scripts\engine\utility::waittill_any("power_on", self.power_area + " power_on");
+  }
 
-  if(isDefined(self.light))
+  if(isDefined(self.light)) {
     self.light setlightintensity(0.65);
+  }
 
   self.powered_on = 1;
   self.enabled = 0;
@@ -85,14 +92,15 @@ use_crafting_station(var_0, var_1) {
     return;
   }
   if(var_0.available_ingredient_slots > 0) {
-    if(!isDefined(var_1.current_crafting_struct))
+    if(!isDefined(var_1.current_crafting_struct)) {
       return;
-    else {
+    } else {
       var_1 playlocalsound("zmb_coin_sounvenir_place");
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("souvenir_coin_station", "zmb_comment_vo", "medium", 10, 0, 0, 1, 50);
 
-      if(getweaponbasename(var_1 getcurrentweapon()) != "iw7_penetrationrail_mp")
+      if(getweaponbasename(var_1 getcurrentweapon()) != "iw7_penetrationrail_mp") {
         thread scripts\cp\utility::firegesturegrenade(var_1, "iw7_souvenircoin_zm");
+      }
 
       var_2 = "logo";
       level.souvenircointype = var_1.current_crafting_struct.crafting_model;
@@ -152,8 +160,9 @@ use_crafting_station(var_0, var_1) {
       scripts\cp\zombies\zombie_analytics::log_souvenircoindeposited(level.wave_num, level.souvenircointype);
       craft_souvenir(var_0, var_1);
 
-      if(var_1 scripts\cp\utility::is_valid_player())
+      if(var_1 scripts\cp\utility::is_valid_player()) {
         var_1 thread scripts\cp\cp_vo::try_to_play_vo("souvenir_craft_success", "zmb_comment_vo", "low", 10, 0, 0, 0, 50);
+      }
 
       scripts\cp\cp_vo::remove_from_nag_vo("dj_souvenircoin_collect_nag");
       var_0.souvenir_station setscriptablepartstate("monitor_3", "logo");
@@ -164,15 +173,17 @@ use_crafting_station(var_0, var_1) {
       wait 0.1;
       scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
 
-      while(isDefined(var_0.souvenir))
+      while(isDefined(var_0.souvenir)) {
         wait 0.1;
+      }
 
       playFX(level._effect["souvenir_pickup"], var_0.souvenir_toy.origin + (0, 0, -45));
       var_0.available_ingredient_slots = 3;
       var_0.ingredient_list = [];
 
-      if(var_1 scripts\cp\utility::is_valid_player())
+      if(var_1 scripts\cp\utility::is_valid_player()) {
         var_1.last_interaction_point = undefined;
+      }
     }
   }
 }
@@ -212,9 +223,9 @@ souvenir_vo(var_0) {
 }
 
 zmb_crafting_item_drop_func(var_0, var_1, var_2) {
-  if(!should_drop_crafting_item(var_1))
+  if(!should_drop_crafting_item(var_1)) {
     return 0;
-  else {
+  } else {
     level thread spawn_crafting_item(var_1);
     return 1;
   }
@@ -233,17 +244,19 @@ spawn_crafting_item(var_0, var_1) {
   var_2.og_angles = (90, 0, 0);
   var_3 = scripts\engine\utility::random(level.crafting_item_ordered_list);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 = var_1;
+  }
 
   var_2 setModel(var_3);
   var_2.script_noteworthy = "crafting_item";
   var_4 = "red";
 
-  if(var_2.model == "zmb_coin_space")
+  if(var_2.model == "zmb_coin_space") {
     var_4 = "blue";
-  else if(var_2.model == "zmb_coin_ice")
+  } else if(var_2.model == "zmb_coin_ice") {
     var_4 = "green";
+  }
 
   var_2 setscriptablepartstate("fx", var_4);
   var_5 = create_crafting_pickup_interaction(var_2, 25);
@@ -310,10 +323,11 @@ crafting_item_pickup(var_0, var_1) {
     wait 0.3;
     var_4 = "red";
 
-    if(var_3.item.model == "zmb_coin_space")
+    if(var_3.item.model == "zmb_coin_space") {
       var_4 = "blue";
-    else if(var_3.item.model == "zmb_coin_ice")
+    } else if(var_3.item.model == "zmb_coin_ice") {
       var_4 = "green";
+    }
 
     var_3.item setscriptablepartstate("fx", var_4);
   } else {
@@ -323,8 +337,9 @@ crafting_item_pickup(var_0, var_1) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("pillage_craft", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
     var_1 create_player_crafting_item_icon(var_0);
 
-    if(isDefined(var_0.item))
+    if(isDefined(var_0.item)) {
       var_0.item delete();
+    }
   }
 }
 
@@ -340,8 +355,9 @@ crafting_item_timeout(var_0) {
   self endon("timeout");
   var_1 = 25;
 
-  if(isDefined(var_0.time_remaining))
+  if(isDefined(var_0.time_remaining)) {
     var_1 = int(var_0.time_remaining);
+  }
 
   var_2 = gettime() + var_1 * 1000;
   var_3 = 0;
@@ -372,36 +388,43 @@ crafting_item_timeout(var_0) {
   playFX(level._effect["souvenir_pickup"], self.origin);
   level.num_crafting_drops--;
 
-  if(level.num_crafting_drops < 0)
+  if(level.num_crafting_drops < 0) {
     level.num_crafting_drops = 0;
+  }
 
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
   self delete();
 }
 
 should_drop_crafting_item(var_0) {
-  if(level.num_crafting_drops >= level.max_crafting_drops)
+  if(level.num_crafting_drops >= level.max_crafting_drops) {
     return 0;
+  }
 
-  if(!self.entered_playspace)
+  if(!self.entered_playspace) {
     return 0;
+  }
 
   if(isDefined(level.active_volume_check)) {
-    if(![[level.active_volume_check]](var_0))
+    if(![[level.active_volume_check]](var_0)) {
       return 0;
+    }
   }
 
   if(isDefined(level.invalid_spawn_volume_array)) {
-    if(!scripts\cp\cp_weapon::isinvalidzone(var_0, level.invalid_spawn_volume_array, undefined, undefined, 1))
+    if(!scripts\cp\cp_weapon::isinvalidzone(var_0, level.invalid_spawn_volume_array, undefined, undefined, 1)) {
       return 0;
+    }
   } else if(!scripts\cp\cp_weapon::isinvalidzone(var_0, undefined, undefined, undefined, 1))
     return 0;
 
-  if(randomint(100) < 30)
+  if(randomint(100) < 30) {
     return 0;
+  }
 
-  if(level.next_crafting_item_drop_time > gettime())
+  if(level.next_crafting_item_drop_time > gettime()) {
     return 0;
+  }
 
   return 1;
 }
@@ -409,8 +432,9 @@ should_drop_crafting_item(var_0) {
 craft_souvenir(var_0, var_1) {
   var_2 = get_crafted_souvenir(var_0);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "money";
+  }
 
   switch (var_2) {
     case "crafted_gascan":
@@ -440,8 +464,9 @@ craft_souvenir(var_0, var_1) {
 
   scripts\cp\zombies\zombie_analytics::log_itemcrafted(level.wave_num, var_2);
 
-  if(isDefined(var_1) && isalive(var_1))
+  if(isDefined(var_1) && isalive(var_1)) {
     var_1.itemtype = var_2;
+  }
 }
 
 get_crafted_souvenir(var_0) {
@@ -456,8 +481,9 @@ get_crafted_souvenir(var_0) {
       }
     }
 
-    if(var_3 == 3)
+    if(var_3 == 3) {
       return var_2[0];
+    }
   }
 
   return undefined;

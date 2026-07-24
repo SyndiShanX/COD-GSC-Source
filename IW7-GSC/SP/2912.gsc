@@ -34,8 +34,9 @@ _id_96D9() {
   level.player.death.deaths = [];
   level.player.death.anims = [];
 
-  foreach(var_1 in level.player.death._id_12AEA)
-  level.player.death.anims[var_1] = [];
+  foreach(var_1 in level.player.death._id_12AEA) {
+    level.player.death.anims[var_1] = [];
+  }
 
   _id_DEA9();
   setDvar("player_death_animated", 1);
@@ -63,16 +64,18 @@ _id_DED1(var_0, var_1, var_2, var_3, var_4) {
   var_5._id_10475 = var_2;
   var_5.type = _id_792C(var_0);
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_5._id_1C4B = var_4;
-  else
+  } else {
     var_5._id_1C4B = 0;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_5._id_74D6 = var_3;
+  }
 
   level.player.death.deaths = scripts\engine\utility::add_to_array(level.player.death.deaths, var_5);
-  level.player.death.anims[var_5.type] = scripts\engine\utility::add_to_array(level.player.death.anims[var_5.type], var_5._id_7789);
+  level.player.death.anims[var_5.type] = ::scripts\engine\utility::add_to_array(level.player.death.anims[var_5.type], var_5._id_7789);
   return var_5;
 }
 
@@ -105,8 +108,9 @@ main() {
 
   level.player _meth_84FE();
 
-  if(!scripts\sp\utility::_id_93A6())
+  if(!scripts\sp\utility::_id_93A6()) {
     setomnvar("ui_death_hint", 0);
+  }
 
   setomnvar("ui_hide_weapon_info", 1);
   setomnvar("ui_player_dead", 1);
@@ -114,8 +118,9 @@ main() {
   setsaveddvar("actionSlotsHide", 1);
   setsaveddvar("cg_drawcrosshair", 0);
 
-  if(level.player scripts\sp\utility::_id_7B93() < 2)
+  if(level.player scripts\sp\utility::_id_7B93() < 2) {
     thread scripts\sp\gameskill::_id_4766(5, 1);
+  }
 
   level.player scripts\sp\utility::_id_1C49(0);
   var_5 = level.player getstance();
@@ -123,8 +128,9 @@ main() {
   var_7 = undefined;
   var_8 = level.player scripts\sp\utility::_id_65DF("zero_gravity") && level.player scripts\sp\utility::_id_65DB("zero_gravity");
 
-  if(level.player getnormalizedmovement()[0] > 0.7)
+  if(level.player getnormalizedmovement()[0] > 0.7) {
     var_6 = 1;
+  }
 
   if(level.player iswallrunning()) {
     var_7 = 1;
@@ -146,18 +152,19 @@ main() {
     level.player playerlinkTo(var_11);
   }
 
-  if(!scripts\sp\utility::_id_93A6())
+  if(!scripts\sp\utility::_id_93A6()) {
     scripts\engine\utility::delaythread(0.05, ::_id_F32D, undefined, var_0, var_1, var_2, var_4);
-  else {
+  } else {
     setomnvar("ui_death_hint", 0);
     level notify("do_death_hint");
     wait 2;
   }
 
-  if(!var_9)
+  if(!var_9) {
     wait 1.7;
-  else
+  } else {
     wait 0.45;
+  }
 
   setomnvar("ui_player_dead", 0);
   setDvar("player_death_animated", 1);
@@ -170,39 +177,44 @@ _id_10FD3() {
     level._id_4E61 _meth_8278(0, 2);
     wait 2;
 
-    if(isDefined(level._id_4E61))
+    if(isDefined(level._id_4E61)) {
       level._id_4E61 stoploopsound("deaths_door_lp");
+    }
 
     wait 0.05;
 
-    if(isDefined(level._id_4E61))
+    if(isDefined(level._id_4E61)) {
       level._id_4E61 delete();
+    }
   }
 }
 
 _id_12849(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!_id_CFF2())
+  if(!_id_CFF2()) {
     return 0;
+  }
 
   if(isDefined(level.player.death._id_D838)) {
-    if(isstring(level.player.death._id_D838))
+    if(isstring(level.player.death._id_D838)) {
       var_6 = _id_792B(level.player.death._id_D838);
-    else
+    } else {
       var_6 = level.player.death._id_D838;
+    }
   } else
     var_6 = _id_CB1D(var_0, var_1, var_2, var_4, var_5);
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     return 0;
-  else {
+  } else {
     setDvar("player_death_last_anim", var_6._id_7789);
     var_8 = _id_96DE(var_0, var_4, var_6._id_1C4B);
 
     if(var_8) {
       thread _id_77B0(var_6, var_3);
 
-      if(!isDefined(level.player._id_111B8) || !level.player._id_111B8)
+      if(!isDefined(level.player._id_111B8) || !level.player._id_111B8) {
         level.player thread _id_ECC6();
+      }
 
       _id_CCD7(var_6);
       return 1;
@@ -215,63 +227,73 @@ _id_12849(var_0, var_1, var_2, var_3, var_4, var_5) {
 _id_CB1D(var_0, var_1, var_2, var_3, var_4) {
   var_5 = undefined;
 
-  if(_id_9BDA(var_2))
+  if(_id_9BDA(var_2)) {
     return undefined;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     return undefined;
+  }
 
   if(var_4) {
     var_5 = _id_12854(level.player.death.anims["zerog"], var_0, var_1);
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       return var_5;
+    }
   }
 
   if(isDefined(var_2) && _id_4D03(var_2) && var_0 == "stand") {
     var_5 = _id_12854(level.player.death.anims["explo"], var_0, var_1);
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       return var_5;
+    }
   }
 
   if(isDefined(var_1) && var_0 == "stand") {
     var_5 = _id_12854(level.player.death.anims["running"], var_0, var_1);
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       return var_5;
+    }
   }
 
   if(var_0 == "stand") {
     var_5 = _id_12854(level.player.death.anims["stand"], var_0, var_1);
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       return var_5;
+    }
   }
 
   if(var_0 == "crouch") {
     var_5 = _id_12854(level.player.death.anims["crouch"], var_0, var_1);
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       return var_5;
+    }
   }
 
   if(var_0 == "prone") {
     var_5 = _id_12854(level.player.death.anims["prone"], var_0, var_1);
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       return var_5;
+    }
   }
 
   return undefined;
 }
 
 _id_9BDA(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 1;
+  }
 
-  if(var_0 == "MOD_SUICIDE" || var_0 == "MOD_TRIGGER_HURT")
+  if(var_0 == "MOD_SUICIDE" || var_0 == "MOD_TRIGGER_HURT") {
     return 1;
+  }
 
   return 0;
 }
@@ -290,8 +312,9 @@ _id_12854(var_0, var_1, var_2, var_3) {
 }
 
 _id_11A18(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = getweaponmodel(level.player getcurrentprimaryweapon());
+  }
 
   var_1 = spawn("script_model", level.player.origin + (0, -7, 20));
   var_1 setModel(var_0);
@@ -318,29 +341,33 @@ _id_CCD7(var_0) {
   level.player.ignoreme = 1;
   var_1 = level.player getgestureanimlength(var_0._id_7789);
 
-  if(isDefined(var_0._id_74D6))
+  if(isDefined(var_0._id_74D6)) {
     level thread[[var_0._id_74D6]]();
+  }
 
   if(!scripts\sp\utility::_id_93A6()) {
     if(isarray(var_0._id_10475)) {
-      foreach(var_3 in var_0._id_10475)
-      level.player playSound(var_3);
+      foreach(var_3 in var_0._id_10475) {
+        level.player playSound(var_3);
+      }
     } else
       level.player playSound(var_0._id_10475);
   }
 
   var_5 = level.player forceplaygestureviewmodel(var_0._id_7789, undefined, 0.15, undefined, 1, 1);
 
-  if(var_5)
+  if(var_5) {
     level.player thread _id_F32B(var_0);
+  }
 
   level.player scripts\engine\utility::waittill_notify_or_timeout("gesture_stopped", 3);
   level.player scripts\sp\utility::_id_65E1("finished_death_anim");
 }
 
 _id_F32B(var_0) {
-  while(!isDefined(var_0._id_7789) || !isDefined(var_0.anchor))
+  while(!isDefined(var_0._id_7789) || !isDefined(var_0.anchor)) {
     wait 0.05;
+  }
 
   var_1 = var_0._id_7789;
   var_2 = var_0.anchor;
@@ -395,23 +422,26 @@ _id_79F3(var_0) {
   var_3 = scripts\common\trace::ray_trace(self.origin + var_2 + var_1, self.origin + var_2 - var_1, [self]);
   var_4 = scripts\common\trace::ray_trace(self.origin - var_2 + var_1, self.origin - var_2 - var_1, [self]);
 
-  if(var_3["hittype"] == "hittype_none")
+  if(var_3["hittype"] == "hittype_none") {
     var_5 = self.origin;
-  else
+  } else {
     var_5 = var_3["position"];
+  }
 
-  if(var_4["hittype"] == "hittype_none")
+  if(var_4["hittype"] == "hittype_none") {
     var_6 = self.origin;
-  else
+  } else {
     var_6 = var_4["position"];
+  }
 
   var_7 = distance2d(var_5, var_6);
 
   if(var_7 > 0) {
     var_8 = atan((var_6[2] - var_5[2]) / var_7);
 
-    if(abs(var_8) > 45)
+    if(abs(var_8) > 45) {
       return 0;
+    }
 
     return var_8;
   }
@@ -433,8 +463,9 @@ _id_77B0(var_0, var_1) {
   var_2 = 1.5;
   var_0.anchor = level.player scripts\engine\utility::spawn_tag_origin();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_0.anchor linkTo(var_1);
+  }
 
   level.player playerlinkTo(var_0.anchor, "tag_origin", 0, 20, 20, 20, 20);
   level.player lerpviewangleclamp(var_2, var_2 * 0.5, var_2 * 0.5, 0, 0, 0, 0);
@@ -448,9 +479,9 @@ _id_AB8E(var_0) {
   var_5 = var_4;
 
   for(var_6 = 0; var_6 < var_1; var_6++) {
-    if(var_4 > var_2)
+    if(var_4 > var_2) {
       var_5 = var_5 - var_3;
-    else if(var_4 == var_2) {
+    } else if(var_4 == var_2) {
       break;
     }
 
@@ -468,8 +499,9 @@ _id_96DE(var_0, var_1, var_2) {
     level.player thread scripts\sp\utility::_id_C12D("falling_timeout", 1);
     var_3 = level.player scripts\engine\utility::waittill_any_return("falling_timeout", "on_ground");
 
-    if(var_3 == "falling_timeout")
+    if(var_3 == "falling_timeout") {
       return 0;
+    }
   }
 
   level._id_7684 = ::empty_breathing_func;
@@ -503,13 +535,15 @@ _id_ECC6() {
   if(isDefined(level.player.death._id_1025C)) {
     return;
   }
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     return 0;
+  }
 
-  if(_id_FF31())
+  if(_id_FF31()) {
     thread _id_8DDF();
-  else
+  } else {
     thread _id_2BC7();
+  }
 }
 
 _id_2BC7() {
@@ -517,8 +551,9 @@ _id_2BC7() {
   level.player.death._id_91AF = [];
   var_0 = ["blood_splat1", "blood_splat2", "blood_drip", "blood_splat_large", "death_overlay"];
 
-  foreach(var_2 in var_0)
-  level.player.death._id_91AF[var_2] = _id_48C9();
+  foreach(var_2 in var_0) {
+    level.player.death._id_91AF[var_2] = _id_48C9();
+  }
 
   level.player.death._id_91AF["death_overlay"] thread _id_4E19();
   level.player.death._id_91AF["blood_drip"] thread _id_2BBF();
@@ -527,20 +562,25 @@ _id_2BC7() {
 }
 
 _id_FF31() {
-  if(getdvarint("player_did_helmet_death"))
+  if(getdvarint("player_did_helmet_death")) {
     return 0;
+  }
 
-  if(isDefined(level._id_BFF4))
+  if(isDefined(level._id_BFF4)) {
     return 0;
+  }
 
-  if(!isDefined(level.player.helmet) || scripts\sp\utility::_id_93A6() && !scripts\sp\specialist_MAYBE::_id_2C95)
+  if(!isDefined(level.player.helmet) || scripts\sp\utility::_id_93A6() && !scripts\sp\specialist_MAYBE::_id_2C95) {
     return 0;
+  }
 
-  if(isDefined(level.player.helmet) && isDefined(level.player.helmet._id_13487) && level.player.helmet._id_13487 == "up")
+  if(isDefined(level.player.helmet) && isDefined(level.player.helmet._id_13487) && level.player.helmet._id_13487 == "up") {
     return 0;
+  }
 
-  if(!_id_CFAE())
+  if(!_id_CFAE()) {
     return 0;
+  }
 
   return 1;
 }
@@ -552,8 +592,9 @@ _id_CFAE() {
     if(!scripts\engine\utility::within_fov(level.player.origin, level.player.angles, var_2.origin, 0.173648)) {
       continue;
     }
-    if(_id_0B1D::_id_385C(level.player getEye(), var_2))
+    if(_id_0B1D::_id_385C(level.player getEye(), var_2)) {
       return 1;
+    }
   }
 
   return 0;
@@ -581,8 +622,9 @@ _id_8DDF() {
     var_3 = 270;
   }
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     level.player.helmet = level._id_10964.helmet;
+  }
 
   level.player.helmet _meth_83CB(level.player);
   level.player.helmet setModel("vm_hero_protagonist_helmet_glass_crack_03");
@@ -681,22 +723,25 @@ _id_11493() {
   var_0[var_0.size] = var_1;
 
   if(isDefined(var_1) && issubstr(var_1, "akimbofmg")) {
-    while(level.player isswitchingweapon())
+    while(level.player isswitchingweapon()) {
       wait 0.05;
+    }
   }
 
-  if(weaponinventorytype(var_1) == "altmode")
+  if(weaponinventorytype(var_1) == "altmode") {
     var_0[var_0.size] = _id_8005(var_1);
-  else {
+  } else {
     var_2 = weaponaltweaponname(var_1);
 
-    if(var_2 != "none")
+    if(var_2 != "none") {
       var_0[var_0.size] = var_2;
+    }
   }
 
   foreach(var_4 in level.player getweaponslistall()) {
-    if(!scripts\engine\utility::array_contains(var_0, var_4))
+    if(!scripts\engine\utility::array_contains(var_0, var_4)) {
       level.player takeweapon(var_4);
+    }
   }
 }
 
@@ -706,8 +751,9 @@ _id_8005(var_0) {
 }
 
 _id_BB02() {
-  while(!level.player isonground())
+  while(!level.player isonground()) {
     wait 0.05;
+  }
 
   level.player notify("on_ground");
 }
@@ -717,25 +763,30 @@ _id_D2FB() {
   self._id_A994 = 0;
 
   for(;;) {
-    while(!self isthrowinggrenade())
+    while(!self isthrowinggrenade()) {
       wait 0.05;
+    }
 
     self._id_A994 = gettime();
 
-    while(self isthrowinggrenade())
+    while(self isthrowinggrenade()) {
       wait 0.05;
+    }
   }
 }
 
 _id_131B8(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(var_0.code_classname != "scriptable")
+  if(var_0.code_classname != "scriptable") {
     return 0;
+  }
 
-  if(!isDefined(var_0._id_00ED) || var_0._id_00ED != "vehicle")
+  if(!isDefined(var_0._id_00ED) || var_0._id_00ED != "vehicle") {
     return 0;
+  }
 
   level notify("new_quote_string4");
   setomnvar("ui_death_hint", 3);
@@ -743,25 +794,29 @@ _id_131B8(var_0) {
 }
 
 _id_5346(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(!isDefined(var_0._id_00ED))
+  if(!isDefined(var_0._id_00ED)) {
     return 0;
+  }
 
   level notify("new_quote_string");
 
-  if(issubstr(var_0._id_00ED, "vehicle"))
+  if(issubstr(var_0._id_00ED, "vehicle")) {
     setomnvar("ui_death_hint", 3);
-  else
+  } else {
     setomnvar("ui_death_hint", 4);
+  }
 
   return 1;
 }
 
 _id_69BB(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   if(var_0 _id_9C9C()) {
     level notify("new_quote_string");
@@ -773,11 +828,13 @@ _id_69BB(var_0, var_1) {
 }
 
 _id_9C9C() {
-  if(isDefined(self.targetname) && self.targetname == "phys_barrel_destructible")
+  if(isDefined(self.targetname) && self.targetname == "phys_barrel_destructible") {
     return 1;
+  }
 
-  if(isDefined(self.model) && issubstr(self.model, "barrel") && issubstr(self.model, "red"))
+  if(isDefined(self.model) && issubstr(self.model, "barrel") && issubstr(self.model, "red")) {
     return 1;
+  }
 
   return 0;
 }
@@ -833,8 +890,9 @@ _id_F32D(var_0, var_1, var_2, var_3, var_4) {
   }
   setomnvar("ui_death_hint", 0);
 
-  if(isDefined(level._id_4C48))
+  if(isDefined(level._id_4C48)) {
     var_0 = level._id_4C48;
+  }
 
   if(isDefined(var_0)) {
     var_5 = int(tablelookup("sp/death_hints.csv", 1, var_0, 0));
@@ -881,10 +939,11 @@ _id_F32D(var_0, var_1, var_2, var_3, var_4) {
         }
 
         if(isDefined(var_3) && issubstr(var_3, "seeker")) {
-          if(level._id_7683 == 0)
+          if(level._id_7683 == 0) {
             setomnvar("ui_death_hint", 44);
-          else
+          } else {
             setomnvar("ui_death_hint", 45);
+          }
 
           break;
         }
@@ -905,14 +964,17 @@ _id_F32D(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_4DF6(var_0) {
-  if(var_0 == getdvarint("ui_deadquote_v1"))
+  if(var_0 == getdvarint("ui_deadquote_v1")) {
     return 1;
+  }
 
-  if(var_0 == getdvarint("ui_deadquote_v2"))
+  if(var_0 == getdvarint("ui_deadquote_v2")) {
     return 1;
+  }
 
-  if(var_0 == getdvarint("ui_deadquote_v3"))
+  if(var_0 == getdvarint("ui_deadquote_v3")) {
     return 1;
+  }
 
   return 0;
 }
@@ -920,15 +982,17 @@ _id_4DF6(var_0) {
 _id_B02A(var_0) {
   var_1 = tablelookup("sp/deathQuoteTable.csv", 0, var_0, 1);
 
-  if(tolower(var_1[0]) != tolower("@"))
+  if(tolower(var_1[0]) != tolower("@")) {
     var_1 = "@" + var_1;
+  }
 
   return var_1;
 }
 
 _id_F330(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1.5;
+  }
 
   wait(var_3);
   var_4 = newhudelem();
@@ -949,8 +1013,9 @@ _id_792C(var_0) {
   var_1 = 0;
 
   foreach(var_3 in level.player.death._id_12AEA) {
-    if(issubstr(var_0, var_3))
+    if(issubstr(var_0, var_3)) {
       return var_3;
+    }
   }
 
   return "stand";
@@ -958,8 +1023,9 @@ _id_792C(var_0) {
 
 _id_792B(var_0) {
   foreach(var_2 in level.player.death.deaths) {
-    if(var_2.name == var_0)
+    if(var_2.name == var_0) {
       return var_2;
+    }
   }
 
   return undefined;
@@ -967,17 +1033,20 @@ _id_792B(var_0) {
 
 _id_792A(var_0) {
   foreach(var_2 in level.player.death.deaths) {
-    if(var_2._id_7789 == var_0)
+    if(var_2._id_7789 == var_0) {
       return var_2;
+    }
   }
 }
 
 _id_4D03(var_0) {
-  if(issubstr(var_0, "SPLASH"))
+  if(issubstr(var_0, "SPLASH")) {
     return 1;
+  }
 
-  if(issubstr(var_0, "GRENADE"))
+  if(issubstr(var_0, "GRENADE")) {
     return 1;
+  }
 
   return 0;
 }

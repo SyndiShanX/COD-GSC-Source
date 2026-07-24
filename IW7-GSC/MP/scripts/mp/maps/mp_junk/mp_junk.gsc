@@ -124,8 +124,9 @@ magupvector(var_0, var_1, var_2) {
   var_2 playRumbleOnEntity("damage_heavy");
   var_3 delete();
 
-  while(isDefined(var_2) && isalive(var_2) && var_2 istouching(var_0))
+  while(isDefined(var_2) && isalive(var_2) && var_2 istouching(var_0)) {
     scripts\engine\utility::waitframe();
+  }
 
   if(isDefined(var_2) && isalive(var_2)) {
     var_4 = var_2 getvelocity();
@@ -153,8 +154,9 @@ apex_not_outofbounds() {
   level waittill("game_ended");
 
   foreach(var_0 in level.outofboundstriggerpatches) {
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_0 delete();
+    }
   }
 }
 
@@ -171,10 +173,11 @@ killtriggerloop(var_0) {
         var_2 hide(1);
         var_2.permanentcustommovetransition = 1;
 
-        if(var_1.loadoutarchetype == "archetype_scout")
+        if(var_1.loadoutarchetype == "archetype_scout") {
           playFX(level._effect["reaper_kill_robot"], var_1.origin + (0, 0, 12));
-        else
+        } else {
           playFX(level._effect["grinder_kill"], var_1.origin + (0, 0, 12));
+        }
 
         continue;
       }
@@ -186,8 +189,9 @@ killtriggerloop(var_0) {
             continue;
           }
 
-          if(var_1.streakname == "venom")
+          if(var_1.streakname == "venom") {
             var_1 notify("venom_end", var_1.origin);
+          }
         }
       }
     }
@@ -207,11 +211,13 @@ move_frontline_spawns() {
     var_0 = scripts\mp\spawnlogic::getspawnpointarray("mp_front_spawn_axis");
 
     foreach(var_2 in var_0) {
-      if(distance(var_2.origin, (-1664, -2368, 32)) < 10)
+      if(distance(var_2.origin, (-1664, -2368, 32)) < 10) {
         var_2.origin = (-1664, -2368, 40);
+      }
 
-      if(distance(var_2.origin, (-1136, -1376, 32)) < 10)
+      if(distance(var_2.origin, (-1136, -1376, 32)) < 10) {
         var_2.origin = (-1136, -1376, 40);
+      }
     }
   }
 }

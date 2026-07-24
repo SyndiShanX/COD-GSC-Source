@@ -6,8 +6,9 @@
 _id_BD2B() {
   var_0 = undefined;
 
-  if(isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) > 4096)
+  if(isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) > 4096) {
     var_0 = "stand";
+  }
 
   var_1 = [[self._id_3EF3]](var_0);
 
@@ -47,10 +48,11 @@ _id_5AEC(var_0) {
   self _meth_82A5(%combatrun, %body, 1, 0.5, self.moveplaybackrate);
 
   if(isarray(self._id_13872)) {
-    if(isDefined(self._id_13871))
+    if(isDefined(self._id_13871)) {
       var_1 = scripts\engine\utility::choose_from_weighted_array(self._id_13872, self._id_13871);
-    else
+    } else {
       var_1 = self._id_13872[randomint(self._id_13872.size)];
+    }
   } else
     var_1 = self._id_13872;
 
@@ -59,15 +61,17 @@ _id_5AEC(var_0) {
 }
 
 _id_820B(var_0) {
-  if(self.stairsstate == "up")
+  if(self.stairsstate == "up") {
     return scripts\anim\utility::_id_7FCC("stairs_up");
-  else if(self.stairsstate == "down")
+  } else if(self.stairsstate == "down") {
     return scripts\anim\utility::_id_7FCC("stairs_down");
+  }
 
   var_1 = scripts\anim\utility::_id_7FCC(var_0);
 
-  if(isarray(var_1))
+  if(isarray(var_1)) {
     var_1 = var_1[randomint(var_1.size)];
+  }
 
   return var_1;
 }
@@ -76,8 +80,9 @@ _id_5AEB(var_0) {
   self endon("movemode");
   var_1 = self.moveplaybackrate;
 
-  if(self.stairsstate != "none")
+  if(self.stairsstate != "none") {
     var_1 = var_1 * 0.6;
+  }
 
   if(self.a.pose == "stand") {
     if(isDefined(self.enemy)) {

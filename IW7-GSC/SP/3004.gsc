@@ -10,10 +10,11 @@ main(var_0, var_1, var_2) {
   _id_0BBE::_id_774E(var_2);
   var_3 = "vfx/code/tread/heli_dust_default.vfx";
 
-  if(!isDefined(level.plant_anims) || level.plant_anims == "earth")
+  if(!isDefined(level.plant_anims) || level.plant_anims == "earth") {
     var_3 = "vfx/code/tread/heli_dust_default.vfx";
-  else if(level.plant_anims == "titan")
+  } else if(level.plant_anims == "titan") {
     var_3 = "vfx/iw7/core/tread/tread_airship_small_titan.vfx";
+  }
 
   scripts\sp\vehicle_build::_id_31C6(var_2, "default", var_3, 0);
   scripts\sp\vehicle_build::_id_3184("vfx/iw7/core/vehicle/jackal/vfx_jackal_dying_01.vfx", "j_frontlandinggear", "dropship_helicopter_dying_loop", undefined, undefined, 1, undefined, undefined, undefined, 10, 5);
@@ -30,10 +31,11 @@ main(var_0, var_1, var_2) {
   scripts\sp\vehicle_build::build_ace(::_id_F8A1, ::_id_F5FC);
   scripts\sp\vehicle_build::_id_31CC(::_id_12BBD);
 
-  if(issubstr(var_2, "plane"))
+  if(issubstr(var_2, "plane")) {
     scripts\sp\vehicle_build::_id_319F();
-  else
+  } else {
     scripts\sp\vehicle_build::_id_31A0();
+  }
 
   if(!issubstr(var_2, "cheap")) {
     if(issubstr(var_2, "player")) {
@@ -67,8 +69,9 @@ init_location() {
   self._id_7724 = % vh_dropship_landing_gear_up;
   self._id_7723 = % vh_dropship_landing_gear_down;
 
-  if(isDefined(level.plant_anims) && level.plant_anims == "titan")
+  if(isDefined(level.plant_anims) && level.plant_anims == "titan") {
     self._id_126F4 = 1;
+  }
 
   var_0 = ["tag_frontsidethrsuter_ri", "tag_frontsidethruster_le"];
   _id_0BBE::_id_FA5F("side_front", var_0, undefined, undefined, undefined, undefined, "side_thrusters_out");
@@ -79,8 +82,9 @@ init_location() {
   thread _id_0BBE::_id_774D();
   var_3 = self.script_team;
 
-  if(var_3 == "axis")
+  if(var_3 == "axis") {
     thread _id_0BBE::_id_774C();
+  }
 
   self._id_101B2 = 0;
   thread _id_0BBE::_id_5EC8(%vh_dropship_thrusters_up, %vh_dropship_thrusters_down, ::_id_12B58);
@@ -99,16 +103,16 @@ init_location() {
     }
 
     self._id_4D94._id_9A62 = [];
-    self._id_4D94._id_9A62[self._id_4D94._id_9A62.size] = scripts\sp\anim::_id_1EE5("veh_mil_air_un_dropship_hero_interior", "tag_connect");
-    self._id_4D94._id_9A62[self._id_4D94._id_9A62.size] = scripts\sp\anim::_id_1EE5("veh_mil_air_un_dropship_hero_interior_cockpit_dash", "TAG_COCKPIT_DASH");
-    self._id_4D94._id_9A62[self._id_4D94._id_9A62.size] = scripts\sp\anim::_id_1EE5("veh_mil_air_un_dropship_hero_interior_pilot_seat", "TAG_PILOT_SEAT_LE");
-    self._id_4D94._id_9A62[self._id_4D94._id_9A62.size] = scripts\sp\anim::_id_1EE5("veh_mil_air_un_dropship_hero_interior_pilot_seat", "TAG_PILOT_SEAT_RI");
-    self._id_4D94._id_9A62[self._id_4D94._id_9A62.size] = scripts\sp\anim::_id_1EE5("veh_mil_air_un_dropship_hero_interior_screens", "TAG_COCKPIT_SCREENS");
-    self._id_4D94._id_9A62[self._id_4D94._id_9A62.size] = scripts\sp\anim::_id_1EE5("veh_mil_air_un_dropship_hero_interior_props_rear", "TAG_PROPS_REAR");
-    self._id_4D94._id_9A62[self._id_4D94._id_9A62.size] = scripts\sp\anim::_id_1EE5("veh_mil_air_un_dropship_hero_interior_props_cockpit", "TAG_PROPS_COCKPIT");
-    self._id_4D94._id_9A62[self._id_4D94._id_9A62.size] = scripts\sp\anim::_id_1EE5("veh_mil_air_un_dropship_hero_interior_metal_beams_rear", "TAG_METAL_BEAMS_REAR");
-    self._id_4D94._id_9A62[self._id_4D94._id_9A62.size] = scripts\sp\anim::_id_1EE5("veh_mil_air_un_dropship_hero_interior_seat_bays_le", "TAG_SEAT_BAYS_LE");
-    self._id_4D94._id_9A62[self._id_4D94._id_9A62.size] = scripts\sp\anim::_id_1EE5("veh_mil_air_un_dropship_hero_interior_seat_bays_ri", "TAG_SEAT_BAYS_RI");
+    self._id_4D94._id_9A62[self._id_4D94._id_9A62.size] = ::scripts\sp\anim::_id_1EE5("veh_mil_air_un_dropship_hero_interior", "tag_connect");
+    self._id_4D94._id_9A62[self._id_4D94._id_9A62.size] = ::scripts\sp\anim::_id_1EE5("veh_mil_air_un_dropship_hero_interior_cockpit_dash", "TAG_COCKPIT_DASH");
+    self._id_4D94._id_9A62[self._id_4D94._id_9A62.size] = ::scripts\sp\anim::_id_1EE5("veh_mil_air_un_dropship_hero_interior_pilot_seat", "TAG_PILOT_SEAT_LE");
+    self._id_4D94._id_9A62[self._id_4D94._id_9A62.size] = ::scripts\sp\anim::_id_1EE5("veh_mil_air_un_dropship_hero_interior_pilot_seat", "TAG_PILOT_SEAT_RI");
+    self._id_4D94._id_9A62[self._id_4D94._id_9A62.size] = ::scripts\sp\anim::_id_1EE5("veh_mil_air_un_dropship_hero_interior_screens", "TAG_COCKPIT_SCREENS");
+    self._id_4D94._id_9A62[self._id_4D94._id_9A62.size] = ::scripts\sp\anim::_id_1EE5("veh_mil_air_un_dropship_hero_interior_props_rear", "TAG_PROPS_REAR");
+    self._id_4D94._id_9A62[self._id_4D94._id_9A62.size] = ::scripts\sp\anim::_id_1EE5("veh_mil_air_un_dropship_hero_interior_props_cockpit", "TAG_PROPS_COCKPIT");
+    self._id_4D94._id_9A62[self._id_4D94._id_9A62.size] = ::scripts\sp\anim::_id_1EE5("veh_mil_air_un_dropship_hero_interior_metal_beams_rear", "TAG_METAL_BEAMS_REAR");
+    self._id_4D94._id_9A62[self._id_4D94._id_9A62.size] = ::scripts\sp\anim::_id_1EE5("veh_mil_air_un_dropship_hero_interior_seat_bays_le", "TAG_SEAT_BAYS_LE");
+    self._id_4D94._id_9A62[self._id_4D94._id_9A62.size] = ::scripts\sp\anim::_id_1EE5("veh_mil_air_un_dropship_hero_interior_seat_bays_ri", "TAG_SEAT_BAYS_RI");
     self._id_4D94.parts = [];
     self._id_4D94.parts["straps"] = [];
 
@@ -194,8 +198,9 @@ _id_5ECA() {
         var_5 = distance(self.origin, var_4);
         var_1 = (var_5 - var_2) / (0 - var_2);
 
-        if(var_1 < var_0)
+        if(var_1 < var_0) {
           var_1 = var_0;
+        }
 
         self._id_5ECA _meth_8278(var_1, 0.1);
         self._id_5ECA moveTo(var_4, 0.1);
@@ -222,11 +227,13 @@ _id_5DC2() {
 }
 
 _id_E752(var_0) {
-  if(var_0 < 0)
+  if(var_0 < 0) {
     return 0;
+  }
 
-  if(var_0 > 1)
+  if(var_0 > 1) {
     return 1;
+  }
 
   return var_0;
 }
@@ -365,8 +372,9 @@ _id_12BBD() {
 _id_F77B() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 1; var_1++)
+  for(var_1 = 0; var_1 < 1; var_1++) {
     var_0[var_1] = spawnStruct();
+  }
 
   var_0[0].land = % vh_dropship_landing_gear_down;
   var_0[0]._id_11472 = % vh_dropship_landing_gear_up;
@@ -374,20 +382,25 @@ _id_F77B() {
 }
 
 _id_C5F1(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 = scripts\engine\utility::ter_op(!isarray(var_0), [var_0], var_0);
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
-  if(!isDefined(var_0) || !isDefined(var_0[0]) || var_0[0] == "all")
+  if(!isDefined(var_0) || !isDefined(var_0[0]) || var_0[0] == "all") {
     var_0 = ["left", "right", "back"];
+  }
 
   var_4 = [];
 
@@ -396,19 +409,23 @@ _id_C5F1(var_0, var_1, var_2, var_3) {
     thread _id_1236(var_6, var_1, var_2, var_3);
   }
 
-  if(!var_2)
+  if(!var_2) {
     scripts\sp\utility::_id_22D8(var_4, "open");
+  }
 }
 
 _id_1236(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self._id_4D94._id_5A13._id_1EF5))
+  if(!isDefined(self._id_4D94._id_5A13._id_1EF5)) {
     self._id_4D94._id_5A13._id_1EF5 = % vh_dropship_front_door_left_open;
+  }
 
-  if(!isDefined(self._id_4D94._id_5A27._id_1EF5))
+  if(!isDefined(self._id_4D94._id_5A27._id_1EF5)) {
     self._id_4D94._id_5A27._id_1EF5 = % vh_dropship_front_door_right_open;
+  }
 
-  if(!isDefined(self._id_4D94._id_5A01._id_1EF5))
+  if(!isDefined(self._id_4D94._id_5A01._id_1EF5)) {
     self._id_4D94._id_5A01._id_1EF5 = % vh_dropship_rear_doors_open;
+  }
 
   scripts\sp\utility::_id_65E8(var_0 + "_door_animating");
 
@@ -423,8 +440,9 @@ _id_1236(var_0, var_1, var_2, var_3) {
       scripts\sp\utility::_id_65E1(var_0 + "_door_animating");
       _id_1242(self._id_4D94._id_5A13, self._id_4D94._id_5A13._id_1EF5, 0, var_2, var_1);
 
-      if(var_3)
+      if(var_3) {
         self._id_4D94._id_5A13._id_4348 playLoopSound("dropship_door_wind_lp");
+      }
 
       self._id_4D94._id_5A13 notify("open");
       break;
@@ -438,8 +456,9 @@ _id_1236(var_0, var_1, var_2, var_3) {
       scripts\sp\utility::_id_65E1(var_0 + "_door_animating");
       _id_1242(self._id_4D94._id_5A27, self._id_4D94._id_5A27._id_1EF5, 0, var_2, var_1);
 
-      if(var_3)
+      if(var_3) {
         self._id_4D94._id_5A27._id_4348 playLoopSound("dropship_door_wind_lp");
+      }
 
       self._id_4D94._id_5A27 notify("open");
       break;
@@ -453,8 +472,9 @@ _id_1236(var_0, var_1, var_2, var_3) {
       scripts\sp\utility::_id_65E1(var_0 + "_door_animating");
       _id_1242(self._id_4D94._id_5A01, self._id_4D94._id_5A01._id_1EF5, 0, var_2);
 
-      if(var_3)
+      if(var_3) {
         self._id_4D94._id_5A01._id_4348 playLoopSound("dropship_door_wind_lp");
+      }
 
       self._id_4D94._id_5A01 notify("open");
       break;
@@ -465,31 +485,36 @@ _id_1236(var_0, var_1, var_2, var_3) {
 }
 
 _id_1242(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 0;
+  }
 
   if(isDefined(var_0._id_4348)) {
     _id_12E7(var_0._id_4348);
 
-    if(var_2)
+    if(var_2) {
       var_0._id_4348 solid();
+    }
   }
 
-  if(isDefined(var_0._id_D89D))
+  if(isDefined(var_0._id_D89D)) {
     self clearanim(var_0._id_D89D, 0);
+  }
 
   self _meth_82AE(var_1, 1);
   var_5 = getanimlength(var_1);
 
-  if(isDefined(var_3) && var_3)
+  if(isDefined(var_3) && var_3) {
     self _meth_82B0(var_1, 1);
-  else
+  } else {
     wait(var_5);
+  }
 
   var_0._id_D89D = var_1;
 
-  if(isDefined(var_0._id_4348) && !var_2 && !var_4)
+  if(isDefined(var_0._id_4348) && !var_2 && !var_4) {
     var_0._id_4348 notsolid();
+  }
 }
 
 _id_12E7(var_0) {
@@ -515,8 +540,9 @@ _id_12E7(var_0) {
 }
 
 _id_F365(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 = scripts\engine\utility::ter_op(!isarray(var_0), [var_0], var_0);
+  }
 
   foreach(var_3 in var_0) {
     switch (var_3) {
@@ -535,8 +561,9 @@ _id_F365(var_0, var_1) {
 }
 
 _id_F362(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 = scripts\engine\utility::ter_op(!isarray(var_0), [var_0], var_0);
+  }
 
   foreach(var_3 in var_0) {
     switch (var_3) {
@@ -555,14 +582,17 @@ _id_F362(var_0, var_1) {
 }
 
 _id_4265(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 = scripts\engine\utility::ter_op(!isarray(var_0), [var_0], var_0);
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(!isDefined(var_0) || !isDefined(var_0[0]) || var_0[0] == "all")
+  if(!isDefined(var_0) || !isDefined(var_0[0]) || var_0[0] == "all") {
     var_0 = ["left", "right", "back"];
+  }
 
   var_2 = [];
 
@@ -571,22 +601,26 @@ _id_4265(var_0, var_1) {
     thread _id_1221(var_4, var_1);
   }
 
-  if(!var_1)
+  if(!var_1) {
     scripts\sp\utility::_id_22D8(var_2, "close");
+  }
 }
 
 _id_1221(var_0, var_1) {
   scripts\sp\utility::_id_65E8(var_0 + "_door_animating");
   scripts\sp\utility::_id_65E1(var_0 + "_door_animating");
 
-  if(!isDefined(self._id_4D94._id_5A13._id_1EA9))
+  if(!isDefined(self._id_4D94._id_5A13._id_1EA9)) {
     self._id_4D94._id_5A13._id_1EA9 = % vh_dropship_front_door_left_close;
+  }
 
-  if(!isDefined(self._id_4D94._id_5A27._id_1EA9))
+  if(!isDefined(self._id_4D94._id_5A27._id_1EA9)) {
     self._id_4D94._id_5A27._id_1EA9 = % vh_dropship_front_door_right_close;
+  }
 
-  if(!isDefined(self._id_4D94._id_5A01._id_1EA9))
+  if(!isDefined(self._id_4D94._id_5A01._id_1EA9)) {
     self._id_4D94._id_5A01._id_1EA9 = % vh_dropship_rear_doors_close;
+  }
 
   switch (var_0) {
     case "left":
@@ -601,8 +635,9 @@ _id_1221(var_0, var_1) {
       scripts\sp\utility::_id_65DD("left_door_open");
       _id_1242(self._id_4D94._id_5A13, self._id_4D94._id_5A13._id_1EA9, 1, var_1);
 
-      if(isDefined(self._id_4D94._id_5A13._id_4348))
+      if(isDefined(self._id_4D94._id_5A13._id_4348)) {
         self._id_4D94._id_5A13._id_4348 stoploopsound();
+      }
 
       self._id_4D94._id_5A13 notify("close");
       break;
@@ -618,8 +653,9 @@ _id_1221(var_0, var_1) {
       scripts\sp\utility::_id_65DD("right_door_open");
       _id_1242(self._id_4D94._id_5A27, self._id_4D94._id_5A27._id_1EA9, 1, var_1);
 
-      if(isDefined(self._id_4D94._id_5A27._id_4348))
+      if(isDefined(self._id_4D94._id_5A27._id_4348)) {
         self._id_4D94._id_5A27._id_4348 stoploopsound();
+      }
 
       self._id_4D94._id_5A27 notify("close");
       break;
@@ -635,8 +671,9 @@ _id_1221(var_0, var_1) {
       scripts\sp\utility::_id_65DD("back_door_open");
       _id_1242(self._id_4D94._id_5A01, self._id_4D94._id_5A01._id_1EA9, 1, var_1);
 
-      if(isDefined(self._id_4D94._id_5A01._id_4348))
+      if(isDefined(self._id_4D94._id_5A01._id_4348)) {
         self._id_4D94._id_5A01._id_4348 stoploopsound();
+      }
 
       self._id_4D94._id_5A01 notify("close");
       break;

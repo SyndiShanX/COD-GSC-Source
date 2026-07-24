@@ -22,30 +22,37 @@ _id_D50D(var_0, var_1, var_2, var_3) {
 }
 
 _id_E875() {
-  if(isalive(self.enemy))
+  if(isalive(self.enemy)) {
     return self.enemy;
+  }
 }
 
 _id_1006E() {
-  if(!self.facemotion)
+  if(!self.facemotion) {
     return 0;
+  }
 
-  if(!scripts\asm\asm_bb::_id_298D())
+  if(!scripts\asm\asm_bb::_id_298D()) {
     return 0;
+  }
 
-  if(!_id_B4EC())
+  if(!_id_B4EC()) {
     return 0;
+  }
 
-  if(!scripts\asm\asm_bb::bb_movetyperequested("combat"))
+  if(!scripts\asm\asm_bb::bb_movetyperequested("combat")) {
     return 0;
+  }
 
-  if(self pathdisttogoal() < 200)
+  if(self pathdisttogoal() < 200) {
     return 0;
+  }
 
   var_0 = _id_E875();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   return 1;
 }
@@ -75,26 +82,31 @@ canshoottarget() {
 }
 
 _id_B4EC() {
-  if(!isDefined(self.weapon))
+  if(!isDefined(self.weapon)) {
     return 0;
+  }
 
-  if(self.weapon == "none")
+  if(self.weapon == "none") {
     return 0;
+  }
 
   var_0 = weaponclass(self.weapon);
 
-  if(!scripts\anim\utility_common::usingriflelikeweapon())
+  if(!scripts\anim\utility_common::usingriflelikeweapon()) {
     return 0;
+  }
 
-  if(isDefined(self._id_596C))
+  if(isDefined(self._id_596C)) {
     return 0;
+  }
 
   return 1;
 }
 
 canshootinvehicle() {
-  if(isDefined(self.enemy) && (canshoottargetfrompos() || canshoottarget()))
+  if(isDefined(self.enemy) && (canshoottargetfrompos() || canshoottarget())) {
     return 1;
+  }
 
   return 0;
 }
@@ -163,8 +175,9 @@ _id_E877(var_0, var_1, var_2, var_3) {
 
     self setanimstate(var_1, var_15);
 
-    if(isDefined(var_12) && isPlayer(var_12))
+    if(isDefined(var_12) && isPlayer(var_12)) {
       self _meth_83CE();
+    }
 
     wait 0.2;
   }
@@ -179,8 +192,9 @@ _id_E874(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
 
   for(;;) {
-    if(isPlayer(self.enemy))
+    if(isPlayer(self.enemy)) {
       self _meth_83CE();
+    }
 
     var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
     self setanimstate(var_1, var_4);
@@ -193,16 +207,19 @@ _id_3EFF(var_0, var_1, var_2) {
 }
 
 _id_FFF5(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.disablebulletwhizbyreaction))
+  if(isDefined(self.disablebulletwhizbyreaction)) {
     return 0;
+  }
 
   var_4 = scripts\asm\asm_bb::bb_getrequestedwhizby();
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
-  if(!isDefined(self.pathgoalpos) || distancesquared(self.pathgoalpos, self.origin) < 160000)
+  if(!isDefined(self.pathgoalpos) || distancesquared(self.pathgoalpos, self.origin) < 160000) {
     return 0;
+  }
 
   return 1;
 }

@@ -51,8 +51,9 @@ main() {
   if(level.createfx_enabled) {
     var_0 = getEntArray("script_brushmodel", "classname");
 
-    foreach(var_2 in var_0)
-    var_2 delete();
+    foreach(var_2 in var_0) {
+      var_2 delete();
+    }
 
     return;
   }
@@ -124,8 +125,9 @@ main() {
   cp_zmb_ghost_n_skull_setup();
   level thread setup_pap_camos();
 
-  if(scripts\cp\utility::is_codxp())
+  if(scripts\cp\utility::is_codxp()) {
     level thread codxp_timer();
+  }
 
   scripts\engine\utility::flag_init("team_doors_initialized");
   level thread player_standing_on_nothing_check();
@@ -152,8 +154,9 @@ registerscriptedagents() {
 }
 
 adjust_interaction_structs() {
-  while(!isDefined(level.struct))
+  while(!isDefined(level.struct)) {
     wait 1;
+  }
 
   cp_zmb_interaction_struct_adjustment("iw7_m1c_zm");
 }
@@ -239,15 +242,17 @@ init_hidden_song_quest() {
     var_5 = var_4.origin;
     var_6 = spawn("script_model", var_5);
 
-    if(isDefined(var_4.angles))
+    if(isDefined(var_4.angles)) {
       var_6.angles = var_4.angles;
-    else
+    } else {
       var_6.angles = (0, 0, 0);
+    }
 
-    if(isDefined(var_4.script_noteworthy))
+    if(isDefined(var_4.script_noteworthy)) {
       var_7 = var_4.script_noteworthy;
-    else
+    } else {
       var_7 = scripts\engine\utility::random(["toy_teddy_bear_01", "toy_teddy_bear_sitting_01"]);
+    }
 
     var_6 setModel(var_7);
     var_6 thread waitfordamage(var_6);
@@ -275,8 +280,9 @@ init_hidden_song_2_quest() {
     var_8 = getEntArray(var_7.target, "targetname");
 
     foreach(var_6 in var_8) {
-      if(isDefined(var_6.script_noteworthy) && var_6.script_noteworthy == "blank_photo")
+      if(isDefined(var_6.script_noteworthy) && var_6.script_noteworthy == "blank_photo") {
         var_7.blank_photo = var_6;
+      }
 
       var_6 hide();
     }
@@ -360,10 +366,11 @@ waitfordamage(var_0) {
 play_hidden_song(var_0, var_1) {
   level endon("game_ended");
 
-  if(var_1 == "mus_pa_mw2_80s_cover")
+  if(var_1 == "mus_pa_mw2_80s_cover") {
     level endon("add_hidden_song_2_to_playlist");
-  else if(var_1 == "mus_pa_mw1_80s_cover")
+  } else if(var_1 == "mus_pa_mw1_80s_cover") {
     level endon("add_hidden_song_to_playlist");
+  }
 
   wait 2.5;
 
@@ -376,8 +383,9 @@ play_hidden_song(var_0, var_1) {
         continue;
       }
 
-      if(var_1 == "mus_pa_mw1_80s_cover")
+      if(var_1 == "mus_pa_mw1_80s_cover") {
         var_3 setplayerdata("cp", "hasSongsUnlocked", "song_2", 1);
+      }
     }
   }
 
@@ -394,8 +402,9 @@ play_hidden_song(var_0, var_1) {
   var_8 = "ee";
   var_9 = 1;
 
-  foreach(var_3 in level.players)
-  var_3 scripts\cp\cp_persistence::give_player_xp(500, 1);
+  foreach(var_3 in level.players) {
+    var_3 scripts\cp\cp_persistence::give_player_xp(500, 1);
+  }
 
   var_7 playLoopSound(var_1);
   var_7 thread earlyendon(var_7);
@@ -463,8 +472,9 @@ cp_zmb_pillage_init() {
 }
 
 wait_for_pre_game_period() {
-  if(!isDefined(level.agent_funcs))
+  if(!isDefined(level.agent_funcs)) {
     level.agent_funcs = [];
+  }
 
   wait 0.2;
   scripts\cp\zombies\zombie_entrances::enable_windows_in_area("front_gate");
@@ -475,8 +485,9 @@ wait_for_pre_game_period() {
   init_magic_wheel();
   thread scripts\cp\zombies\zombies_mini_ufo_quest::init();
 
-  if(!scripts\cp\utility::is_escape_gametype())
+  if(!scripts\cp\utility::is_escape_gametype()) {
     level thread zmb_power_gate_handler();
+  }
 
   scripts\engine\utility::flag_set("pre_game_over");
 }
@@ -484,10 +495,11 @@ wait_for_pre_game_period() {
 setup_tutorial_requirements(var_0) {
   switch (var_0) {
     case "quest_neil":
-      if(scripts\engine\utility::is_true(level.neil_head_added))
+      if(scripts\engine\utility::is_true(level.neil_head_added)) {
         return 1;
-      else
+      } else {
         return 0;
+      }
     default:
       return 1;
   }
@@ -501,64 +513,73 @@ init_magic_wheel() {
 }
 
 gametype_level_init() {
-  if(scripts\cp\utility::is_escape_gametype())
+  if(scripts\cp\utility::is_escape_gametype()) {
     scripts\cp\maps\cp_zmb\cp_zmb_escape::cp_zmb_escape_init();
-  else
+  } else {
     cp_zmb_zombie_init();
+  }
 }
 
 cp_zmb_zombie_init() {
   level.initial_active_volumes = ["front_gate"];
   level.escape_interaction_registration_func = ::remove_escape_entities;
 
-  if(getDvar("createfx") != "")
+  if(getDvar("createfx") != "") {
     level thread free_ents_for_createfx();
+  }
 }
 
 free_ents_for_createfx() {
   var_0 = getEntArray("trigger_multiple", "classname");
 
-  foreach(var_2 in var_0)
-  var_2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
+  }
 
   var_4 = getEntArray("spawn_volume", "targetname");
 
-  foreach(var_6 in var_4)
-  var_6 delete();
+  foreach(var_6 in var_4) {
+    var_6 delete();
+  }
 }
 
 remove_escape_entities() {
   var_0 = scripts\engine\utility::getStructArray("escape_exit", "script_noteworthy");
 
   if(isDefined(var_0)) {
-    foreach(var_2 in var_0)
-    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
+    foreach(var_2 in var_0) {
+      scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
+    }
   }
 
   var_4 = getEnt("escape_1_blocker_brush", "targetname");
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_4 delete();
+  }
 
   var_5 = getEntArray("escape_door", "targetname");
 
   if(isDefined(var_5)) {
-    foreach(var_7 in var_5)
-    var_7 delete();
+    foreach(var_7 in var_5) {
+      var_7 delete();
+    }
   }
 
   var_9 = getEntArray("escape_spawn_trigger", "targetname");
 
   if(isDefined(var_9)) {
-    foreach(var_11 in var_9)
-    var_11 delete();
+    foreach(var_11 in var_9) {
+      var_11 delete();
+    }
   }
 
   var_13 = getEntArray("escape_exit_path", "targetname");
 
   if(isDefined(var_13)) {
-    foreach(var_15 in var_13)
-    var_15 delete();
+    foreach(var_15 in var_13) {
+      var_15 delete();
+    }
   }
 }
 
@@ -595,8 +616,9 @@ player_down_slide(var_0) {
     return;
   }
 
-  while(self isjumping())
+  while(self isjumping()) {
     wait 0.05;
+  }
 
   scripts\engine\utility::allow_weapon(0);
   scripts\engine\utility::allow_jump(0);
@@ -647,8 +669,9 @@ player_down_slide(var_0) {
   self setstance("stand");
   thread scripts\cp\cp_vo::try_to_play_vo("hyperslopes_slide", "zmb_comment_vo", "medium", 3, 0, 0, 1, 50);
 
-  if(!scripts\cp\utility::isteleportenabled())
+  if(!scripts\cp\utility::isteleportenabled()) {
     scripts\cp\utility::allow_player_teleport(1, "slide");
+  }
 
   self.onslide = undefined;
   self notify("can_teleport");
@@ -703,8 +726,9 @@ last_stand_player_down_slide(var_0) {
 reset_slide_variables() {
   self unlink();
 
-  if(isDefined(self.anchor))
+  if(isDefined(self.anchor)) {
     self.anchor delete();
+  }
 
   self limitedmovement(0);
   self.disable_consumables = undefined;
@@ -716,8 +740,9 @@ reset_slide_variables() {
   self allowcrouch(1);
   scripts\engine\utility::allow_weapon(1);
 
-  if(!scripts\cp\utility::isteleportenabled())
+  if(!scripts\cp\utility::isteleportenabled()) {
     scripts\cp\utility::allow_player_teleport(1, "slide");
+  }
 
   self.onslide = undefined;
   self notify("can_teleport");
@@ -769,8 +794,9 @@ gator_mouth() {
   for(;;) {
     var_3 = level scripts\engine\utility::waittill_any_return_no_endon_death("power_on", "mars power_on", "power_off");
 
-    if(var_3 != "power_off")
+    if(var_3 != "power_off") {
       level thread activate_gator_mouth(var_2, var_0, var_1, var_0.origin);
+    }
   }
 }
 
@@ -925,10 +951,11 @@ mouth_trig_kill(var_0) {
     var_2 dodamage(var_2.health + 100, var_2.origin, self, self, "MOD_UNKNOWN");
 
     if(isDefined(var_0)) {
-      if(!isDefined(var_0.trapkills["trap_gator"]))
+      if(!isDefined(var_0.trapkills["trap_gator"])) {
         var_0.trapkills["trap_gator"] = 1;
-      else
+      } else {
         var_0.trapkills["trap_gator"]++;
+      }
 
       var_3 = ["kill_trap_generic", "kill_trap_gator"];
       var_0 thread scripts\cp\cp_vo::try_to_play_vo(scripts\engine\utility::random(var_3), "zmb_comment_vo", "high", 10, 0, 0, 1, 25);
@@ -940,10 +967,11 @@ listen_for_old_spawning_dvar() {
   level endon("game_ended");
 
   for(;;) {
-    if(getdvarint("scr_use_old_spawning") == 1)
+    if(getdvarint("scr_use_old_spawning") == 1) {
       level.use_adjacent_volumes = 0;
-    else
+    } else {
       level.use_adjacent_volumes = 1;
+    }
 
     wait 1.0;
   }
@@ -953,16 +981,18 @@ cp_zmb_onplayerconnect(var_0) {
   var_0.num_tickets = 0;
   var_0 scripts\cp\zombies\zombies_wor::wor_init();
 
-  if(var_0 scripts\cp\utility::isplayingsolo() || level.only_one_player)
+  if(var_0 scripts\cp\utility::isplayingsolo() || level.only_one_player) {
     var_0 setclientomnvar("zombie_afterlife_self_revive_count", 3);
-  else
+  } else {
     var_0 setclientomnvar("zombie_afterlife_self_revive_count", 1);
+  }
 
   var_0 thread update_team_door_buy_on_spawn();
   var_0 thread scripts\cp\zombies\zombie_afterlife_arcade::update_player_revives_every_ten_waves(var_0);
 
-  if(!isDefined(level.kick_player_queue))
+  if(!isDefined(level.kick_player_queue)) {
     level thread kick_player_queue_loop();
+  }
 
   var_0 thread kick_for_inactivity(var_0);
 }
@@ -1006,8 +1036,9 @@ kick_for_inactivity(var_0) {
         continue;
       }
 
-      if(!scripts\engine\utility::is_true(var_0.in_afterlife_arcade) && !scripts\engine\utility::is_true(var_0.inlaststand))
+      if(!scripts\engine\utility::is_true(var_0.in_afterlife_arcade) && !scripts\engine\utility::is_true(var_0.inlaststand)) {
         var_3 = var_3 - var_4;
+      }
 
       if(var_3 < 0) {
         if(level.players.size > 1) {
@@ -1038,8 +1069,9 @@ check_for_movement() {
       var_3 = self getnormalizedmovement();
 
       if(var_3[0] == var_1[0] && var_3[1] == var_1[1]) {
-        if(gettime() - var_2 > 90000 && level.players.size > 1)
+        if(gettime() - var_2 > 90000 && level.players.size > 1) {
           add_to_kick_queue(self);
+        }
 
         continue;
       }
@@ -1050,8 +1082,9 @@ check_for_movement() {
 }
 
 add_to_kick_queue(var_0) {
-  if(!scripts\engine\utility::exist_in_array_MAYBE(level.kick_player_queue, var_0))
+  if(!scripts\engine\utility::exist_in_array_MAYBE(level.kick_player_queue, var_0)) {
     level.kick_player_queue = scripts\engine\utility::add_to_array(level.kick_player_queue, var_0);
+  }
 }
 
 kick_player_queue_loop() {
@@ -1063,8 +1096,9 @@ kick_player_queue_loop() {
         if(!isDefined(var_1)) {
           continue;
         }
-        if(!var_1 ishost())
+        if(!var_1 ishost()) {
           kick(var_1 getentitynumber(), "EXE_PLAYERKICKED_INACTIVE");
+        }
       }
 
       if(level.kick_player_queue.size > 0) {
@@ -1088,8 +1122,9 @@ check_for_move_change() {
   self endon("disconnect");
   self endon("done_inactivity_check");
 
-  while(!isDefined(self.model))
+  while(!isDefined(self.model)) {
     wait 0.1;
+  }
 
   var_0 = 1;
   var_1 = var_0;
@@ -1120,25 +1155,30 @@ get_move_direction_from_vectors(var_0) {
   var_9 = var_1;
 
   if(var_0[0] > 0) {
-    if(var_0[1] <= 0.7 && var_0[1] >= -0.7)
+    if(var_0[1] <= 0.7 && var_0[1] >= -0.7) {
       var_9 = var_1;
+    }
 
-    if(var_0[0] > 0.5 && var_0[1] > 0.7)
+    if(var_0[0] > 0.5 && var_0[1] > 0.7) {
       var_9 = var_2;
-    else if(var_0[0] > 0.5 && var_0[1] < -0.7)
+    } else if(var_0[0] > 0.5 && var_0[1] < -0.7) {
       var_9 = var_3;
+    }
   } else if(var_0[0] < 0) {
-    if(var_0[1] < 0.4 && var_0[1] > -0.4)
+    if(var_0[1] < 0.4 && var_0[1] > -0.4) {
       var_9 = var_4;
+    }
 
-    if(var_0[0] < -0.5 && var_0[1] > 0.5)
+    if(var_0[0] < -0.5 && var_0[1] > 0.5) {
       var_9 = var_5;
-    else if(var_0[0] < -0.5 && var_0[1] < -0.5)
+    } else if(var_0[0] < -0.5 && var_0[1] < -0.5) {
       var_9 = var_6;
+    }
   } else if(var_0[1] > 0.4)
     var_9 = var_7;
-  else if(var_0[1] < -0.4)
+  else if(var_0[1] < -0.4) {
     var_9 = var_8;
+  }
 
   return var_9;
 }
@@ -1192,9 +1232,9 @@ update_team_door_buy_on_spawn() {
     var_6 = getEntArray(var_5.target, "targetname");
 
     foreach(var_8 in var_6) {
-      if(!isDefined(var_8.script_noteworthy))
+      if(!isDefined(var_8.script_noteworthy)) {
         continue;
-      else {
+      } else {
         if(scripts\engine\utility::string_starts_with(var_8.classname, "scriptable")) {
           var_8 setscriptablepartstate("fx", "adjust");
           continue;
@@ -1213,8 +1253,9 @@ update_team_door_buy_on_spawn() {
 }
 
 cp_zmb_should_continue_progress_bar_think(var_0) {
-  if(scripts\engine\utility::is_true(var_0.in_afterlife_arcade))
+  if(scripts\engine\utility::is_true(var_0.in_afterlife_arcade)) {
     return 1;
+  }
 
   return !scripts\cp\cp_laststand::player_in_laststand(var_0);
 }
@@ -1226,8 +1267,9 @@ boat_ride() {
     var_1 attachpath(var_0);
     var_1 startpath(var_0);
 
-    if(!isDefined(level.shredder_battery))
+    if(!isDefined(level.shredder_battery)) {
       var_1 thread shredder_battery_spawn();
+    }
 
     var_1 waittill("reached_end_node");
     var_1 delete();
@@ -1241,8 +1283,9 @@ shredder_battery_spawn() {
   self endon("reached_end_node");
   var_0 = spawn("script_model", self.origin);
 
-  while(!isDefined(var_0))
+  while(!isDefined(var_0)) {
     scripts\engine\utility::waitframe();
+  }
 
   thread delete_battery_at_end_node(var_0);
   var_0 setModel("alien_crafting_battery_single_01");
@@ -1260,8 +1303,9 @@ shredder_battery_spawn() {
     }
   }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 delete_battery_at_end_node(var_0) {
@@ -1269,8 +1313,9 @@ delete_battery_at_end_node(var_0) {
   scripts\engine\utility::waitframe();
   self waittill("reached_end_node");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 knock_off_battery(var_0) {
@@ -1327,8 +1372,9 @@ get_geyser(var_0) {
   var_1 = scripts\engine\utility::getStructArray("geyser", "targetname");
 
   foreach(var_3 in var_1) {
-    if(var_3.script_noteworthy == var_0)
+    if(var_3.script_noteworthy == var_0) {
       return var_3;
+    }
   }
 }
 
@@ -1336,15 +1382,17 @@ geyser_erupt() {
   for(;;) {
     self waittill("erupt");
 
-    if(self.script_noteworthy == "a")
+    if(self.script_noteworthy == "a") {
       playFX(level._effect["geyser_blast_side"], self.origin, anglesToForward(self.angles + (90, 0, 90)), anglestoup(self.angles + (90, 0, 90)));
-    else
+    } else {
       playFX(level._effect["geyser_blast"], self.origin, anglesToForward((0, 0, 0)), anglestoup((0, 0, 0)));
+    }
 
     playsoundatpos(self.origin, "trap_geyser_launch");
 
-    if(self.script_noteworthy != "a" && isDefined(level.battery_in_geyser) && !isDefined(level.battery_launched))
+    if(self.script_noteworthy != "a" && isDefined(level.battery_in_geyser) && !isDefined(level.battery_launched)) {
       level thread launch_battery_from_geyser(self);
+    }
 
     level thread launch_players(self);
     level thread launch_zombies(self.origin);
@@ -1451,8 +1499,9 @@ launch_player_to_kepler(var_0, var_1) {
     var_6 = 850;
     var_7 = var_5 / var_6;
 
-    if(var_7 < 0.05)
+    if(var_7 < 0.05) {
       var_7 = 0.05;
+    }
 
     self.anchor moveTo(var_3.origin, var_7);
     wait(var_7 + 0.05);
@@ -1491,8 +1540,9 @@ launch_player(var_0, var_1, var_2) {
   self shellshock("zm_geyser_launch", 2);
   thread unset_player_flung(2);
 
-  if(var_0.script_noteworthy == "a")
+  if(var_0.script_noteworthy == "a") {
     self setplayerangles((-2549.5, -163.5, 0));
+  }
 
   self setvelocity(var_1);
   playfxontagforclients(level._effect["geyser_fullscreen_fx"], self, "tag_eye", self);
@@ -1509,8 +1559,9 @@ watch_player_landing(var_0, var_1, var_2) {
   level endon("host_migration_end");
   self endon("disconnect");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     wait(var_2);
+  }
 
   var_3 = 2304;
 
@@ -1526,8 +1577,9 @@ watch_player_landing(var_0, var_1, var_2) {
   var_6 = gettime();
 
   while(!self isonground()) {
-    if(scripts\engine\utility::is_true(self.isrewinding))
+    if(scripts\engine\utility::is_true(self.isrewinding)) {
       var_5 = 0;
+    }
 
     var_7 = scripts\cp\cp_agent_utils::get_alive_enemies();
 
@@ -1535,8 +1587,9 @@ watch_player_landing(var_0, var_1, var_2) {
       if(isDefined(var_9.agent_type) && (var_9.agent_type == "zombie_brute" || var_9.agent_type == "zombie_ghost" || var_9.agent_type == "zombie_grey")) {
         continue;
       }
-      if(distancesquared(self.origin, var_9.origin) < var_3)
+      if(distancesquared(self.origin, var_9.origin) < var_3) {
         var_9 dodamage(var_9.health, var_9.origin, self, self, "MOD_CRUSH");
+      }
     }
 
     wait 0.05;
@@ -1554,8 +1607,9 @@ watch_player_landing(var_0, var_1, var_2) {
       if(isDefined(var_12.anchor)) {
         continue;
       }
-      if(self istouching(var_12))
+      if(self istouching(var_12)) {
         var_12 setvelocity(vectorNormalize(var_12.origin - self.origin) * 800 + (0, 0, 50));
+      }
     }
 
     wait 0.05;
@@ -1563,8 +1617,9 @@ watch_player_landing(var_0, var_1, var_2) {
 
   var_14 = gettime();
 
-  if(isDefined(self.abh_used) && self.abh_used > var_6 && self.abh_used < var_14)
+  if(isDefined(self.abh_used) && self.abh_used > var_6 && self.abh_used < var_14) {
     var_5 = 0;
+  }
 
   if(var_5) {
     self shellshock("frag_grenade_mp", 1);
@@ -1573,8 +1628,9 @@ watch_player_landing(var_0, var_1, var_2) {
 
   self.flung = undefined;
 
-  if(!scripts\cp\utility::isteleportenabled())
+  if(!scripts\cp\utility::isteleportenabled()) {
     scripts\cp\utility::allow_player_teleport(1);
+  }
 
   self notify("can_teleport");
   self allowmelee(1);
@@ -1611,8 +1667,9 @@ handle_host_migration_during_launch() {
   var_5 = gettime();
 
   while(!self isonground()) {
-    if(scripts\engine\utility::is_true(self.isrewinding))
+    if(scripts\engine\utility::is_true(self.isrewinding)) {
       var_4 = 0;
+    }
 
     var_6 = scripts\cp\cp_agent_utils::get_alive_enemies();
 
@@ -1620,8 +1677,9 @@ handle_host_migration_during_launch() {
       if(isDefined(var_8.agent_type) && (var_8.agent_type == "zombie_brute" || var_8.agent_type == "zombie_ghost" || var_8.agent_type == "zombie_grey")) {
         continue;
       }
-      if(distancesquared(self.origin, var_8.origin) < var_3)
+      if(distancesquared(self.origin, var_8.origin) < var_3) {
         var_8 dodamage(var_8.health, var_8.origin, self, self, "MOD_CRUSH");
+      }
     }
 
     wait 0.05;
@@ -1630,8 +1688,9 @@ handle_host_migration_during_launch() {
       if(var_11 == self) {
         continue;
       }
-      if(self istouching(var_11))
+      if(self istouching(var_11)) {
         var_11 setvelocity(vectorNormalize(var_11.origin - self.origin) * 800 + (0, 0, 50));
+      }
     }
 
     wait 0.05;
@@ -1639,8 +1698,9 @@ handle_host_migration_during_launch() {
 
   var_13 = gettime();
 
-  if(isDefined(self.abh_used) && self.abh_used > var_5 && self.abh_used < var_13)
+  if(isDefined(self.abh_used) && self.abh_used > var_5 && self.abh_used < var_13) {
     var_4 = 0;
+  }
 
   if(var_4) {
     self shellshock("frag_grenade_mp", 1);
@@ -1649,8 +1709,9 @@ handle_host_migration_during_launch() {
 
   self.flung = undefined;
 
-  if(!scripts\cp\utility::isteleportenabled())
+  if(!scripts\cp\utility::isteleportenabled()) {
     scripts\cp\utility::allow_player_teleport(1);
+  }
 
   self notify("can_teleport");
   self allowmelee(1);
@@ -1672,8 +1733,9 @@ launch_zombies(var_0) {
       if(isDefined(var_3.flung) || isDefined(var_3.agent_type) && (var_3.agent_type == "zombie_brute" || var_3.agent_type == "zombie_ghost" || var_3.agent_type == "zombie_grey")) {
         continue;
       }
-      if(distancesquared(var_3.origin, var_0) < 576)
+      if(distancesquared(var_3.origin, var_0) < 576) {
         var_3 thread zombie_geyser_fling(var_0);
+      }
     }
 
     wait 0.1;
@@ -1697,8 +1759,9 @@ cp_zmb_mutilation_mask_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 zombies_should_mutilate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
   var_7 = getweaponbasename(var_1);
   var_8 = var_3 >= 1;
@@ -1710,22 +1773,25 @@ zombies_should_mutilate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       case "MOD_GRENADE_SPLASH":
       case "MOD_EXPLOSIVE":
         if(is_mutilate_explosion(var_1)) {
-          if(var_8 && isDefined(var_6) && distance2dsquared(self.origin, var_6.origin) < 1600)
+          if(var_8 && isDefined(var_6) && distance2dsquared(self.origin, var_6.origin) < 1600) {
             return 31;
-          else
+          } else {
             return 12;
+          }
         } else
           return 0;
 
         break;
       case "MOD_MELEE":
-        if(!var_8 && isDefined(var_7) && (var_7 == "iw7_axe_zm" || var_7 == "iw7_axe_zm_pap1" || var_7 == "iw7_axe_zm_pap2"))
+        if(!var_8 && isDefined(var_7) && (var_7 == "iw7_axe_zm" || var_7 == "iw7_axe_zm_pap1" || var_7 == "iw7_axe_zm_pap2")) {
           return var_0;
-        else
+        } else {
           return 0;
+        }
       case "MOD_UNKNOWN":
-        if(isDefined(var_4) && isDefined(var_4.agent_type) && var_4.agent_type == "c6")
+        if(isDefined(var_4) && isDefined(var_4.agent_type) && var_4.agent_type == "c6") {
           return 31;
+        }
       default:
         break;
     }
@@ -1736,20 +1802,23 @@ zombies_should_mutilate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_7 = getweaponbasename(var_1);
 
     if(isDefined(var_9) && var_9 == "spread" && var_2 != "mod_melee") {
-      if(isDefined(var_7) && (var_7 == "iw7_nrg_zm" || var_7 == "iw7_forgefreeze_zm"))
+      if(isDefined(var_7) && (var_7 == "iw7_nrg_zm" || var_7 == "iw7_forgefreeze_zm")) {
         return 0;
+      }
 
-      if(var_8 && isDefined(var_6) && distance2dsquared(self.origin, var_6.origin) < 10000)
+      if(var_8 && isDefined(var_6) && distance2dsquared(self.origin, var_6.origin) < 10000) {
         return 31;
-      else
+      } else {
         return var_0;
+      }
     }
 
     if(isDefined(var_7)) {
       switch (var_7) {
         case "iw7_chargeshot_zm":
-          if(var_8 && isDefined(var_2) && var_2 == "MOD_PROJECTILE")
+          if(var_8 && isDefined(var_2) && var_2 == "MOD_PROJECTILE") {
             return 31;
+          }
         case "iw7_sdflmg_zm":
         case "iw7_mauler_zm":
         case "iw7_m8_zm":
@@ -1760,13 +1829,15 @@ zombies_should_mutilate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
           return var_0;
         case "iw7_shredder_zm_pap1":
         case "iw7_shredder_zm":
-          if(var_8 && !is_arm_or_head_damage(var_0))
+          if(var_8 && !is_arm_or_head_damage(var_0)) {
             return 31;
+          }
 
           return var_0;
         default:
-          if(is_arm_or_head_damage(var_0))
+          if(is_arm_or_head_damage(var_0)) {
             return var_0;
+          }
       }
     }
   }
@@ -1831,8 +1902,9 @@ gator_tooth_init() {
   level.gator_mouth_light setlightintensity(0);
   level.gator_tooth_use_trig = spawn("script_origin", level.gator_teeth_array[0].origin + (0, 0, -75));
 
-  foreach(var_6 in level.gator_teeth_array)
-  var_6 linkTo(var_4);
+  foreach(var_6 in level.gator_teeth_array) {
+    var_6 linkTo(var_4);
+  }
 
   level thread gator_tooth_broken();
 
@@ -1876,8 +1948,9 @@ gator_tooth_broken() {
 break_gator_teeth(var_0) {
   level endon("game_ended");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait(var_0);
+  }
 
   playsoundatpos((-1616, 1502, 360), "zmb_croc_trap_teeth_shatter_01");
   playsoundatpos((-1897, 1508, 360), "zmb_croc_trap_teeth_shatter_02");
@@ -1897,8 +1970,9 @@ gold_teeth_pickup_debug() {
 }
 
 gold_teeth_pickup(var_0, var_1) {
-  foreach(var_3 in level.gold_tooth_3_pickup)
-  var_3 delete();
+  foreach(var_3 in level.gold_tooth_3_pickup) {
+    var_3 delete();
+  }
 
   var_1 playlocalsound("purchase_ticket");
   scripts\engine\utility::flag_set("gator_gold_tooth_pickup");
@@ -1911,18 +1985,20 @@ gold_teeth_hint_func(var_0, var_1) {
   if(!isDefined(var_1.last_ticket_item_outlined)) {
     var_1.last_ticket_item_outlined = level.gold_tooth_3_pickup[0];
 
-    if(self.num_tickets >= level.interactions[var_0.script_noteworthy].cost)
+    if(self.num_tickets >= level.interactions[var_0.script_noteworthy].cost) {
       var_1.last_ticket_item_outlined hudoutlineenableforclient(var_1, 3, 1, 0);
-    else
+    } else {
       var_1.last_ticket_item_outlined hudoutlineenableforclient(var_1, 1, 1, 0);
+    }
   } else if(var_1.last_ticket_item_outlined != level.gold_tooth_3_pickup[0]) {
     var_1.last_ticket_item_outlined hudoutlinedisableforclient(var_1);
     var_1.last_ticket_item_outlined = level.gold_tooth_3_pickup[0];
 
-    if(self.num_tickets >= level.interactions[var_0.script_noteworthy].cost)
+    if(self.num_tickets >= level.interactions[var_0.script_noteworthy].cost) {
       var_1.last_ticket_item_outlined hudoutlineenableforclient(var_1, 3, 1, 0);
-    else
+    } else {
       var_1.last_ticket_item_outlined hudoutlineenableforclient(var_1, 1, 1, 0);
+    }
   }
 
   return level.interaction_hintstrings[var_0.script_noteworthy];
@@ -1933,8 +2009,9 @@ gator_tooth_placement_init() {
 }
 
 gator_mouth_hint_func(var_0, var_1) {
-  if(scripts\engine\utility::flag("gator_tooth_broken") && scripts\engine\utility::flag("gator_gold_tooth_pickup"))
+  if(scripts\engine\utility::flag("gator_tooth_broken") && scripts\engine\utility::flag("gator_gold_tooth_pickup")) {
     return "";
+  }
 
   return "";
 }
@@ -1956,8 +2033,9 @@ gator_mouth_activation_func(var_0, var_1) {
 
     var_5 = scripts\engine\utility::getStructArray("gator_teeth_placement", "script_noteworthy");
 
-    foreach(var_7 in var_5)
-    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_7);
+    foreach(var_7 in var_5) {
+      scripts\cp\cp_interaction::remove_from_current_interaction_list(var_7);
+    }
   }
 }
 
@@ -1984,23 +2062,29 @@ gator_quest_debug() {
 }
 
 cp_zmb_should_allow_far_search_dist_func(var_0) {
-  if(interaction_is_shootinggallery(var_0))
+  if(interaction_is_shootinggallery(var_0)) {
     return 1;
+  }
 
-  if(weapon_not_on_wall(var_0))
+  if(weapon_not_on_wall(var_0)) {
     return 1;
+  }
 
-  if(var_0.script_noteworthy == "dj_quest_speaker")
+  if(var_0.script_noteworthy == "dj_quest_speaker") {
     return 1;
+  }
 
-  if(var_0.script_noteworthy == "ark_quest_station")
+  if(var_0.script_noteworthy == "ark_quest_station") {
     return 1;
+  }
 
-  if(var_0.script_noteworthy == "dj_quest_speaker_mid")
+  if(var_0.script_noteworthy == "dj_quest_speaker_mid") {
     return 1;
+  }
 
-  if(var_0.script_noteworthy == "coaster")
+  if(var_0.script_noteworthy == "coaster") {
     return 1;
+  }
 
   return 0;
 }
@@ -2023,17 +2107,19 @@ interaction_is_shootinggallery(var_0) {
 
 zmb_last_stand_handler(var_0) {
   if(var_0 scripts\cp\utility::isplayingsolo() || level.only_one_player) {
-    if(!scripts\engine\utility::is_true(var_0.have_self_revive))
+    if(!scripts\engine\utility::is_true(var_0.have_self_revive)) {
       var_0 thread scripts\cp\cp_vo::try_to_play_vo("laststand", "zmb_comment_vo");
-    else if(isDefined(var_0.times_self_revived)) {
-      if(var_0.times_self_revived > 3)
+    } else if(isDefined(var_0.times_self_revived)) {
+      if(var_0.times_self_revived > 3) {
         var_0 thread scripts\cp\cp_vo::try_to_play_vo("laststand", "zmb_comment_vo");
+      }
     }
   }
 
   if(level.players.size == 1) {
-    if(isDefined(level.current_speaker))
+    if(isDefined(level.current_speaker)) {
       level notify("destroy_speaker");
+    }
   }
 
   zmb_last_stand_weapon_handler(var_0);
@@ -2055,8 +2141,9 @@ zmb_power_gate_handler() {
   scripts\engine\utility::flag_wait("doors_initialized");
   var_0 = getEntArray("bollard_trigger", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setHintString(&"COOP_INTERACTIONS_REQUIRES_POWER");
+  foreach(var_2 in var_0) {
+    var_2 setHintString(&"COOP_INTERACTIONS_REQUIRES_POWER");
+  }
 
   var_4 = getEntArray("first_gate_bollard", "targetname");
   var_5 = [];
@@ -2064,15 +2151,17 @@ zmb_power_gate_handler() {
 
   foreach(var_8 in level.current_interaction_structs) {
     if(isDefined(var_8.script_area) && (var_8.script_area == "moon" || var_8.script_area == "front_gate")) {
-      if(isDefined(var_8.script_noteworthy) && var_8.script_noteworthy == "debris_750")
+      if(isDefined(var_8.script_noteworthy) && var_8.script_noteworthy == "debris_750") {
         var_5[var_5.size] = var_8;
+      }
     }
   }
 
   var_10 = getEntArray("door_buy", "targetname");
 
-  foreach(var_2 in var_10)
-  var_2 scripts\engine\utility::trigger_off();
+  foreach(var_2 in var_10) {
+    var_2 scripts\engine\utility::trigger_off();
+  }
 
   foreach(var_14 in var_5) {
     level thread scripts\cp\cp_interaction::remove_from_current_interaction_list(var_14);
@@ -2081,11 +2170,13 @@ zmb_power_gate_handler() {
 
   level waittill("moon power_on");
 
-  foreach(var_2 in var_0)
-  var_2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
+  }
 
-  foreach(var_19 in var_4)
-  var_19 moveTo(var_19.origin - (0, 0, 37), 2, 0.1, 0.1);
+  foreach(var_19 in var_4) {
+    var_19 moveTo(var_19.origin - (0, 0, 37), 2, 0.1, 0.1);
+  }
 
   wait 1;
   var_21 = getEntArray("first_gate_bollard_clip", "targetname");
@@ -2100,8 +2191,9 @@ zmb_power_gate_handler() {
     level thread scripts\cp\cp_interaction::add_to_current_interaction_list(var_14);
   }
 
-  foreach(var_2 in var_10)
-  var_2 scripts\engine\utility::trigger_on();
+  foreach(var_2 in var_10) {
+    var_2 scripts\engine\utility::trigger_on();
+  }
 }
 
 setupc6agent() {
@@ -2238,9 +2330,9 @@ post_nondeterministic_func() {
     var_3 = getEntArray(var_2.target, "targetname");
 
     foreach(var_5 in var_3) {
-      if(!isDefined(var_5.script_noteworthy))
+      if(!isDefined(var_5.script_noteworthy)) {
         continue;
-      else if(var_5.script_noteworthy == "progress" && !isDefined(var_5.adjusted)) {
+      } else if(var_5.script_noteworthy == "progress" && !isDefined(var_5.adjusted)) {
         var_5.adjusted = 1;
         var_6 = undefined;
 
@@ -2291,79 +2383,101 @@ cp_zmb_global_clientmatchdata_func() {
 }
 
 cp_zmb_should_drop_pillage(var_0, var_1) {
-  if(isDefined(self.entered_playspace) && !self.entered_playspace)
+  if(isDefined(self.entered_playspace) && !self.entered_playspace) {
     return 0;
+  }
 
-  if(!scripts\cp\zombies\zombies_pillage::is_in_active_volume(var_1))
+  if(!scripts\cp\zombies\zombies_pillage::is_in_active_volume(var_1)) {
     return 0;
+  }
 
-  if(isDefined(self.hasplayedvignetteanim) && !self.hasplayedvignetteanim)
+  if(isDefined(self.hasplayedvignetteanim) && !self.hasplayedvignetteanim) {
     return 0;
+  }
 
-  if(isDefined(self.shredder_death))
+  if(isDefined(self.shredder_death)) {
     return 0;
+  }
 
-  if(isDefined(self.rocket_feet))
+  if(isDefined(self.rocket_feet)) {
     return 0;
+  }
 
-  if(isDefined(self.head_is_exploding))
+  if(isDefined(self.head_is_exploding)) {
     return 0;
+  }
 
-  if(isDefined(self.dischord_spin))
+  if(isDefined(self.dischord_spin)) {
     return 0;
+  }
 
-  if(scripts\cp\utility::too_close_to_other_interactions(var_1))
+  if(scripts\cp\utility::too_close_to_other_interactions(var_1)) {
     return 0;
+  }
 
-  if(isDefined(var_0) && isPlayer(var_0))
+  if(isDefined(var_0) && isPlayer(var_0)) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 cp_zmb_eligable_for_reward_func(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(isDefined(var_4.shredder_death))
+  if(isDefined(var_4.shredder_death)) {
     return 0;
+  }
 
-  if(isDefined(var_4.rocket_feet))
+  if(isDefined(var_4.rocket_feet)) {
     return 0;
+  }
 
-  if(isDefined(var_4.head_is_exploding))
+  if(isDefined(var_4.head_is_exploding)) {
     return 0;
+  }
 
-  if(isDefined(var_4.dischord_spin))
+  if(isDefined(var_4.dischord_spin)) {
     return 0;
+  }
 
   return 1;
 }
 
 cp_zmb_should_do_damage_check_func(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(scripts\engine\utility::is_true(var_5.rocket_feet))
+  if(scripts\engine\utility::is_true(var_5.rocket_feet)) {
     return 0;
+  }
 
-  if(scripts\engine\utility::is_true(var_5.shredder_death))
+  if(scripts\engine\utility::is_true(var_5.shredder_death)) {
     return 0;
+  }
 
-  if(scripts\engine\utility::is_true(var_5.dischord_spin))
+  if(scripts\engine\utility::is_true(var_5.dischord_spin)) {
     return 0;
+  }
 
-  if(scripts\engine\utility::is_true(var_5.head_is_exploding) && var_3 != "iw7_headcutterdummy_zm")
+  if(scripts\engine\utility::is_true(var_5.head_is_exploding) && var_3 != "iw7_headcutterdummy_zm") {
     return 0;
+  }
 
-  if(isDefined(var_0) && isDefined(var_0.is_neil))
+  if(isDefined(var_0) && isDefined(var_0.is_neil)) {
     return 0;
+  }
 
-  if(isDefined(var_0.agent_type) && var_0.agent_type == "zombie_grey" && scripts\cp\zombies\zombie_damage::isfriendlyfire(var_5, var_0))
+  if(isDefined(var_0.agent_type) && var_0.agent_type == "zombie_grey" && scripts\cp\zombies\zombie_damage::isfriendlyfire(var_5, var_0)) {
     return 0;
+  }
 
-  if(!isDefined(self.is_coaster_zombie) && var_3 == "iw7_zm1coaster_zm")
+  if(!isDefined(self.is_coaster_zombie) && var_3 == "iw7_zm1coaster_zm") {
     return 0;
+  }
 
-  if(var_3 == "iw7_ufo_proj")
+  if(var_3 == "iw7_ufo_proj") {
     return 0;
+  }
 
-  if(var_3 == "zmb_grey_teleport_attack")
+  if(var_3 == "zmb_grey_teleport_attack") {
     return 0;
+  }
 
   return 1;
 }
@@ -2384,12 +2498,14 @@ cp_zmb_traversal_dismember_check(var_0) {
   var_1 = 75;
   var_2 = var_1 * var_1;
 
-  if(!isDefined(level.traversal_dismember_locs))
+  if(!isDefined(level.traversal_dismember_locs)) {
     level.traversal_dismember_locs = [(1005, -936, 157), (1452, -1035, 190), (1346, -924, 192), (2378, 1377, 339), (3252, 1045, 133), (3330, 2253, 188), (3366, 542, 150), (3385, 211, 149), (2844, -981, 300), (-1161, -3361, 568), (-1534, -589, 440), (-2565, -1032, 427), (-2717, 1262, 428), (-2280, 1732, 427), (-2706, 2067, 465), (-2822, 1896, 465)];
+  }
 
   foreach(var_4 in level.traversal_dismember_locs) {
-    if(distancesquared(var_0.origin, var_4) < var_2)
+    if(distancesquared(var_0.origin, var_4) < var_2) {
       return 0;
+    }
   }
 
   return 1;
@@ -2418,8 +2534,9 @@ create_afterlife_arcade_start_point(var_0, var_1) {
 }
 
 player_standing_on_nothing_check() {
-  while(!isDefined(level.players))
+  while(!isDefined(level.players)) {
     wait 0.1;
+  }
 
   level.standing_list = [];
 
@@ -2434,8 +2551,9 @@ player_standing_on_nothing_check() {
 }
 
 bump_check(var_0, var_1, var_2, var_3) {
-  if(!isDefined(level.standing_list[var_3]))
+  if(!isDefined(level.standing_list[var_3])) {
     level.standing_list[var_3] = [];
+  }
 
   var_4 = 0;
 
@@ -2445,10 +2563,11 @@ bump_check(var_0, var_1, var_2, var_3) {
       var_4 = 1;
     }
 
-    if(!var_4)
+    if(!var_4) {
       level.standing_list[var_3][self.name] = 1;
-    else
+    } else {
       level.standing_list[var_3][self.name] = undefined;
+    }
   } else
     level.standing_list[var_3][self.name] = undefined;
 }
@@ -2456,8 +2575,9 @@ bump_check(var_0, var_1, var_2, var_3) {
 is_in_box(var_0, var_1) {
   if(self.origin[2] > var_0[2] && self.origin[2] < var_1[2]) {
     if(self.origin[1] > var_0[1] && self.origin[1] < var_1[1]) {
-      if(self.origin[0] > var_0[0] && self.origin[0] < var_1[0])
+      if(self.origin[0] > var_0[0] && self.origin[0] < var_1[0]) {
         return 1;
+      }
     }
   }
 
@@ -2472,8 +2592,9 @@ cp_zmb_idle_spot_patch_func() {
   scripts\cp\zombies\zombies_spawning::move_idle_spot((-34, -2417, 605), (20, -2344, 605));
   var_0 = [(844, -2322, 523), (-963, -3220, 477), (268, -1920, 229), (-586, -1168, -98), (1576, -873, -128), (2355, -265, -128), (3914, -357, 197), (4615, 1057, 207), (3440, 957, 182), (-2162, 519, 309), (-2167, -1201, 405), (-583, -2886, 643)];
 
-  foreach(var_2 in var_0)
-  scripts\cp\zombies\zombies_spawning::add_idle_spot(var_2);
+  foreach(var_2 in var_0) {
+    scripts\cp\zombies\zombies_spawning::add_idle_spot(var_2);
+  }
 }
 
 cp_zmb_goon_spawner_patch_func(var_0) {
@@ -2489,8 +2610,9 @@ cp_zmb_goon_spawner_patch_func(var_0) {
 cp_zmb_interaction_struct_adjustment(var_0) {
   var_1 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
 
-  foreach(var_3 in var_1)
-  var_3.origin = var_3.origin + anglesToForward(var_3.angles) * 2;
+  foreach(var_3 in var_1) {
+    var_3.origin = var_3.origin + anglesToForward(var_3.angles) * 2;
+  }
 }
 
 cp_zmb_wait_to_be_revived_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
@@ -2526,10 +2648,11 @@ wait_for_hoff_revive(var_0, var_1) {
   var_0 endon("disconnect");
   var_2 = var_0.reviveent scripts\engine\utility::waittill_any_timeout(var_1, "trigger");
 
-  if(var_2 != "trigger")
+  if(var_2 != "trigger") {
     return undefined;
-  else
+  } else {
     return 1;
+  }
 }
 
 cp_zmb_ghost_n_skull_setup() {
@@ -2620,10 +2743,11 @@ vectors_are_in_box(var_0, var_1, var_2, var_3, var_4) {
   var_5 = [var_0, var_1, var_2, var_3];
 
   if(!isDefined(var_4)) {
-    if(isPlayer(self) || isagent(self))
+    if(isPlayer(self) || isagent(self)) {
       var_4 = self.origin;
-    else
+    } else {
       return 0;
+    }
   }
 
   for(var_6 = 0; var_6 < 2; var_6++) {
@@ -2639,8 +2763,9 @@ vectors_are_in_box(var_0, var_1, var_2, var_3, var_4) {
         } else {
           var_9++;
 
-          if(var_9 > 2)
+          if(var_9 > 2) {
             return 0;
+          }
         }
       }
     }

@@ -720,8 +720,9 @@ _id_28ED() {
 }
 
 _id_28F5(var_0) {
-  if(!isDefined(self._id_28F7))
+  if(!isDefined(self._id_28F7)) {
     self._id_28F7 = [];
+  }
 
   if(!_id_28EA(var_0)) {
     self._id_28F7[self._id_28F7.size] = var_0 getentitynumber();
@@ -765,8 +766,9 @@ _id_28E8(var_0, var_1) {
 _id_28E7(var_0, var_1, var_2) {
   var_3 = physics_raycast(var_1, var_0 gettagorigin("j_mainroot"), var_2, undefined, 0, "physicsquery_closest");
 
-  if(isDefined(var_3) && var_3.size > 0)
+  if(isDefined(var_3) && var_3.size > 0) {
     return 1;
+  }
 
   return 0;
 }
@@ -779,8 +781,9 @@ _id_28E9(var_0, var_1) {
     var_5 = vectordot(var_4, var_2);
 
     if(var_0.hasriotshieldequipped) {
-      if(var_5 > 0.766)
+      if(var_5 > 0.766) {
         return 1;
+      }
     } else if(var_5 < -0.766)
       return 1;
   }
@@ -789,8 +792,9 @@ _id_28E9(var_0, var_1) {
 }
 
 _id_28EA(var_0) {
-  if(!isDefined(self._id_28F7))
+  if(!isDefined(self._id_28F7)) {
     return 0;
+  }
 
   var_1 = var_0 getentitynumber();
   return scripts\engine\utility::array_contains(self._id_28F7, var_1);
@@ -833,8 +837,9 @@ _id_28F3() {
 _id_28F4(var_0, var_1) {
   wait(var_1);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 _id_28F0(var_0) {
@@ -849,14 +854,16 @@ _id_D64A(var_0, var_1, var_2, var_3, var_4) {
   var_5 = var_4 - var_2;
   var_6 = vectordot(var_5, var_3);
 
-  if(var_6 < 0 || var_6 > var_1)
+  if(var_6 < 0 || var_6 > var_1) {
     return 0;
+  }
 
   var_5 = var_5 - var_6 * var_3;
   var_7 = lengthsquared(var_5);
 
-  if(var_7 > var_0)
+  if(var_7 > var_0) {
     return 0;
+  }
 
   return 1;
 }
@@ -916,8 +923,9 @@ _id_5AD3() {
       wait 0.2;
       earthquake(0.25, 0.75, self.origin + (0, 0, 60), 100);
 
-      while(self _meth_81CE() && !self isonground())
+      while(self _meth_81CE() && !self isonground()) {
         wait 0.05;
+      }
     }
 
     wait 0.05;
@@ -944,8 +952,9 @@ _id_82F0(var_0) {
   self setweaponammostock(var_1, self._id_CBD7);
   var_2 = self getweaponslistprimaries();
 
-  if(!self hasweapon(self.lastweapon) && !scripts\cp\utility::has_special_weapon() && !scripts\cp\utility::is_holding_deployable())
+  if(!self hasweapon(self.lastweapon) && !scripts\cp\utility::has_special_weapon() && !scripts\cp\utility::is_holding_deployable()) {
     self switchtoweapon(var_1);
+  }
 }
 
 _id_F50B() {}
@@ -1138,10 +1147,11 @@ watchcombatspeedscaler() {
     var_2 = scripts\cp\utility::getrawbaseweaponname(var_1);
 
     if(isDefined(var_2)) {
-      if(var_2 == "nrg" || var_2 == "zmagnum" || var_2 == "zg18" || var_2 == "emc")
+      if(var_2 == "nrg" || var_2 == "zmagnum" || var_2 == "zg18" || var_2 == "emc") {
         self._id_CBE0 = 1.1;
-      else
+      } else {
         self._id_CBE0 = 1.0;
+      }
 
       wait 0.05;
       _id_12E78();
@@ -1181,10 +1191,11 @@ _id_13A29() {
 }
 
 has_fragile_relic_and_is_sprinting() {
-  if(scripts\cp\perks\prestige::prestige_getslowhealthregenscalar() != 1.0 && self issprinting())
+  if(scripts\cp\perks\prestige::prestige_getslowhealthregenscalar() != 1.0 && self issprinting()) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_7907() {
@@ -1193,14 +1204,16 @@ _id_7907() {
   foreach(var_2 in var_0) {
     var_3 = scripts\cp\utility::coop_getweaponclass(var_2);
 
-    if(var_3 == "weapon_pistol")
+    if(var_3 == "weapon_pistol") {
       return var_2;
+    }
   }
 }
 
 applystunresistence(var_0) {
-  if(isDefined(self._id_1119B))
+  if(isDefined(self._id_1119B)) {
     return self._id_1119B * var_0;
-  else
+  } else {
     return var_0;
+  }
 }

@@ -77,7 +77,7 @@ registernotetracks() {
   anim.notetracks["ragdollblendrootragdoll"] = ::notetrackragdollblendrootragdoll;
   anim.notetracks["fire"] = ::notetrackfire;
   anim.notetracks["fire_spray"] = ::notetrackfirespray;
-  anim.notetracks["bloodpool"] = scripts\anim\death::play_blood_pool;
+  anim.notetracks["bloodpool"] = ::scripts\anim\death::play_blood_pool;
   anim.notetracks["space_jet_top"] = ::notetrackspacejet;
   anim.notetracks["space_jet_top_1"] = ::notetrackspacejet;
   anim.notetracks["space_jet_top_2"] = ::notetrackspacejet;
@@ -120,50 +120,57 @@ registernotetracks() {
   if(isDefined(level._notetrackfx)) {
     var_0 = getarraykeys(level._notetrackfx);
 
-    foreach(var_2 in var_0)
-    anim.notetracks[var_2] = ::customnotetrackfx;
+    foreach(var_2 in var_0) {
+      anim.notetracks[var_2] = ::customnotetrackfx;
+    }
   }
 }
 
 _id_3538(var_0, var_1) {
-  if(soundexists("generic_death_c12"))
+  if(soundexists("generic_death_c12")) {
     self playSound("generic_death_c12");
+  }
 }
 
 _id_3537(var_0, var_1) {
-  if(soundexists("c12_death_generic_bf"))
+  if(soundexists("c12_death_generic_bf")) {
     self playSound("c12_death_generic_bf");
+  }
 }
 
 notetrackfire(var_0, var_1) {
-  if(isDefined(anim.fire_notetrack_functions[self.script]))
+  if(isDefined(anim.fire_notetrack_functions[self.script])) {
     thread[[anim.fire_notetrack_functions[self.script]]]();
-  else
+  } else {
     thread shootnotetrack();
+  }
 }
 
 shootnotetrack() {
   waittillframeend;
 
   if(isDefined(self) && gettime() > self.a._id_A9ED) {
-    if(isDefined(self.asm.shootparams))
+    if(isDefined(self.asm.shootparams)) {
       var_0 = self.asm.shootparams._id_FF0B == 1;
-    else
+    } else {
       var_0 = 1;
+    }
 
     scripts\anim\utility_common::shootenemywrapper(var_0);
     scripts\anim\combat_utility::decrementbulletsinclip();
 
-    if(weaponclass(self.weapon) == "rocketlauncher")
+    if(weaponclass(self.weapon) == "rocketlauncher") {
       self.a.rockets--;
+    }
   }
 }
 
 notetracklaser(var_0, var_1) {
-  if(issubstr(var_0, "on"))
+  if(issubstr(var_0, "on")) {
     self.a.laseron = 1;
-  else
+  } else {
     self.a.laseron = 0;
+  }
 
   scripts\anim\shared::updatelaserstatus();
 }
@@ -173,8 +180,9 @@ notetrackstopanim(var_0, var_1) {}
 unlinknextframe() {
   wait 0.1;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self unlink();
+  }
 }
 
 notetrackstartragdoll(var_0, var_1) {
@@ -184,8 +192,9 @@ notetrackstartragdoll(var_0, var_1) {
   if(isDefined(self.ragdolltime)) {
     return;
   }
-  if(!isDefined(self.dont_unlink_ragdoll))
+  if(!isDefined(self.dont_unlink_ragdoll)) {
     thread unlinknextframe();
+  }
 
   if(isDefined(self._blackboard)) {
     if(isDefined(self._blackboard._id_26C6) && self._blackboard._id_26C6 == 1) {
@@ -194,11 +203,13 @@ notetrackstartragdoll(var_0, var_1) {
     }
   }
 
-  if(isDefined(self._id_71C8))
+  if(isDefined(self._id_71C8)) {
     self[[self._id_71C8]]();
+  }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self startragdoll();
+  }
 }
 
 notetrackragdollblendinit(var_0, var_1) {
@@ -208,8 +219,9 @@ notetrackragdollblendinit(var_0, var_1) {
   if(isDefined(self.ragdolltime)) {
     return;
   }
-  if(!isDefined(self.dont_unlink_ragdoll))
+  if(!isDefined(self.dont_unlink_ragdoll)) {
     thread unlinknextframe();
+  }
 
   if(isDefined(self._blackboard)) {
     if(isDefined(self._blackboard._id_26C6) && self._blackboard._id_26C6 == 1) {
@@ -218,8 +230,9 @@ notetrackragdollblendinit(var_0, var_1) {
     }
   }
 
-  if(isDefined(self._id_71C8))
+  if(isDefined(self._id_71C8)) {
     self[[self._id_71C8]]();
+  }
 
   self _meth_8576();
 }
@@ -262,23 +275,26 @@ stoponback() {
 setpose(var_0) {
   self.a.pose = var_0;
 
-  if(isDefined(self.a.onback))
+  if(isDefined(self.a.onback)) {
     stoponback();
+  }
 
   scripts\asm\asm_bb::bb_requestsmartobject(var_0);
   self notify("entered_pose" + var_0);
 }
 
 notetrackposestand(var_0, var_1) {
-  if(self.a.pose == "prone")
+  if(self.a.pose == "prone") {
     scripts\anim\utility::exitpronewrapper(1.0);
+  }
 
   setpose("stand");
 }
 
 notetrackposecrouch(var_0, var_1) {
-  if(self.a.pose == "prone")
+  if(self.a.pose == "prone") {
     scripts\anim\utility::exitpronewrapper(1.0);
+  }
 
   setpose("crouch");
 }
@@ -293,10 +309,11 @@ notetrackposeprone(var_0, var_1) {
   scripts\anim\utility::enterpronewrapper(1.0);
   setpose("prone");
 
-  if(isDefined(self.a._id_8445))
+  if(isDefined(self.a._id_8445)) {
     self.a.proneaiming = 1;
-  else
+  } else {
     self.a.proneaiming = undefined;
+  }
 }
 
 notetrackposecrawl(var_0, var_1) {
@@ -354,10 +371,11 @@ notetrackpistolpickup(var_0, var_1) {
 }
 
 notetrackpistolputaway(var_0, var_1) {
-  if(isDefined(self._id_110CB))
+  if(isDefined(self._id_110CB)) {
     scripts\anim\shared::placeweaponon(self.weapon, "thigh");
-  else
+  } else {
     scripts\anim\shared::placeweaponon(self.weapon, "none");
+  }
 
   self.weapon = scripts\anim\utility::_id_8097();
   self.bulletsinclip = weaponclipsize(self.weapon);
@@ -381,10 +399,11 @@ notetrackpistolrechamber(var_0, var_1) {
 }
 
 notetrackgravity(var_0, var_1) {
-  if(issubstr(var_0, "on"))
+  if(issubstr(var_0, "on")) {
     self animmode("gravity");
-  else if(issubstr(var_0, "off"))
+  } else if(issubstr(var_0, "off")) {
     self animmode("nogravity");
+  }
 }
 
 notetrackfootstep(var_0, var_1) {
@@ -392,8 +411,9 @@ notetrackfootstep(var_0, var_1) {
   var_3 = issubstr(var_0, "large");
   var_4 = "right";
 
-  if(var_2)
+  if(var_2) {
     var_4 = "left";
+  }
 
   if(isai(self)) {
     self.asm.footsteps.foot = var_4;
@@ -409,8 +429,9 @@ notetrackfootstep(var_0, var_1) {
   if(isDefined(self.classname) && self.classname != "script_model") {
     self _meth_8584(var_5);
 
-    if(isDefined(self.weapon))
+    if(isDefined(self.weapon)) {
       var_6 = self _meth_8583(var_5, self.weapon);
+    }
   }
 }
 
@@ -419,8 +440,9 @@ notetrackhandstep(var_0, var_1) {
   var_3 = issubstr(var_0, "large");
   var_4 = "right";
 
-  if(var_2)
+  if(var_2) {
     var_4 = "left";
+  }
 
   if(isai(self)) {
     self.asm.footsteps.foot = var_4;
@@ -433,24 +455,29 @@ notetrackhandstep(var_0, var_1) {
 get_notetrack_movement() {
   var_0 = "run";
 
-  if(isDefined(self._id_10AB7))
+  if(isDefined(self._id_10AB7)) {
     var_0 = "sprint";
+  }
 
   if(isDefined(self._blackboard)) {
-    if(self._blackboard.movetype == "walk" || self._blackboard.movetype == "casual_gun" || self._blackboard.movetype == "patrol" || self._blackboard.movetype == "casual")
+    if(self._blackboard.movetype == "walk" || self._blackboard.movetype == "casual_gun" || self._blackboard.movetype == "patrol" || self._blackboard.movetype == "casual") {
       var_0 = "walk";
+    }
 
-    if(scripts\asm\asm_bb::_id_292C() == "prone")
+    if(scripts\asm\asm_bb::_id_292C() == "prone") {
       var_0 = "prone";
+    }
   } else if(isDefined(self.a)) {
     if(isDefined(self.a.movement)) {
-      if(self.a.movement == "walk")
+      if(self.a.movement == "walk") {
         var_0 = "walk";
+      }
     }
 
     if(isDefined(self.a.pose)) {
-      if(self.a.pose == "prone")
+      if(self.a.pose == "prone") {
         var_0 = "prone";
+      }
     }
   }
 
@@ -540,16 +567,19 @@ notetrackspacejet_proc(var_0, var_1) {
           var_6 = var_2[var_5];
 
           if(scripts\sp\utility::hastag(self.model, var_6)) {
-            if(!isDefined(self._id_25C8))
+            if(!isDefined(self._id_25C8)) {
               self._id_25C8 = 0;
+            }
 
             self._id_25C8++;
 
-            if(self._id_25C8 > 5)
+            if(self._id_25C8 > 5) {
               self._id_25C8 = 0;
+            }
 
-            if(self._id_25C8 == 1)
+            if(self._id_25C8 == 1) {
               self playSound("space_npc_jetpack_boost_ss");
+            }
 
             playFXOnTag(level._effect["space_jet_small"], self, var_6);
           }
@@ -559,16 +589,19 @@ notetrackspacejet_proc(var_0, var_1) {
       } else {
         foreach(var_6 in var_2) {
           if(isDefined(var_6) && scripts\sp\utility::hastag(self.model, var_6)) {
-            if(!isDefined(self._id_25C8))
+            if(!isDefined(self._id_25C8)) {
               self._id_25C8 = 0;
+            }
 
             self._id_25C8++;
 
-            if(self._id_25C8 > 5)
+            if(self._id_25C8 > 5) {
               self._id_25C8 = 0;
+            }
 
-            if(self._id_25C8 == 1)
+            if(self._id_25C8 == 1) {
               self playSound("space_npc_jetpack_boost_ss");
+            }
 
             playFXOnTag(level._effect["space_jet_small"], self, var_6);
             wait 0.1;
@@ -648,47 +681,53 @@ notetrackfacialangry(var_0, var_1) {
 }
 
 customnotetrackfx(var_0, var_1) {
-  if(isDefined(self.groundtype))
+  if(isDefined(self.groundtype)) {
     var_2 = self.groundtype;
-  else
+  } else {
     var_2 = "dirt";
+  }
 
   var_3 = undefined;
 
-  if(isDefined(level._notetrackfx[var_0][var_2]))
+  if(isDefined(level._notetrackfx[var_0][var_2])) {
     var_3 = level._notetrackfx[var_0][var_2];
-  else if(isDefined(level._notetrackfx[var_0]["all"]))
+  } else if(isDefined(level._notetrackfx[var_0]["all"])) {
     var_3 = level._notetrackfx[var_0]["all"];
+  }
 
   if(!isDefined(var_3)) {
     return;
   }
-  if(isai(self) && isDefined(var_3.fx))
+  if(isai(self) && isDefined(var_3.fx)) {
     playFXOnTag(var_3.fx, self, var_3.tag);
+  }
 
   if(!isDefined(var_3.sound_prefix) && !isDefined(var_3.sound_suffix)) {
     return;
   }
   var_4 = "" + var_3.sound_prefix + var_2 + var_3.sound_suffix;
 
-  if(soundexists(var_4))
+  if(soundexists(var_4)) {
     self playSound(var_4);
+  }
 }
 
 notetrackfootscrape(var_0, var_1) {
-  if(isDefined(self.groundtype))
+  if(isDefined(self.groundtype)) {
     var_2 = self.groundtype;
-  else
+  } else {
     var_2 = "dirt";
+  }
 
   self _meth_824E("step_scrape", var_2);
 }
 
 notetrackland(var_0, var_1) {
-  if(isDefined(self.groundtype))
+  if(isDefined(self.groundtype)) {
     var_2 = self.groundtype;
-  else
+  } else {
     var_2 = "dirt";
+  }
 
   self _meth_824E("default_step_land", var_2);
   self _meth_8584("land");
@@ -700,35 +739,40 @@ notetrackcodemove(var_0, var_1) {
 }
 
 notetrackfaceenemy(var_0, var_1) {
-  if(self.script != "reactions")
+  if(self.script != "reactions") {
     self orientmode("face enemy");
-  else if(isDefined(self.enemy) && distancesquared(self.enemy.origin, self.reactiontargetpos) < 4096)
+  } else if(isDefined(self.enemy) && distancesquared(self.enemy.origin, self.reactiontargetpos) < 4096) {
     self orientmode("face enemy");
-  else
+  } else {
     self orientmode("face point", self.reactiontargetpos);
+  }
 }
 
 notetrackbodyfall(var_0, var_1) {
   var_2 = "_small";
 
-  if(issubstr(var_0, "large"))
+  if(issubstr(var_0, "large")) {
     var_2 = "_large";
+  }
 
-  if(isDefined(self.groundtype))
+  if(isDefined(self.groundtype)) {
     var_3 = self.groundtype;
-  else
+  } else {
     var_3 = "dirt";
+  }
 
-  if(soundexists("bodyfall_" + var_3 + var_2))
+  if(soundexists("bodyfall_" + var_3 + var_2)) {
     self playSound("bodyfall_" + var_3 + var_2);
+  }
 }
 
 handlerocketlauncherammoondeath() {
   self endon("detached");
   self waittill("death");
 
-  if(isDefined(self.rocketlauncherammo))
+  if(isDefined(self.rocketlauncherammo)) {
     self.rocketlauncherammo delete();
+  }
 }
 
 notetrackrocketlauncherammoattach() {
@@ -740,12 +784,13 @@ notetrackrocketlauncherammoattach() {
   }
   self.rocketlauncherammo = spawn("script_model", self.origin);
 
-  if(issubstr(tolower(self.weapon), "lockon"))
+  if(issubstr(tolower(self.weapon), "lockon")) {
     self.rocketlauncherammo setModel("weapon_launcher_missile_wm");
-  else if(issubstr(tolower(self.weapon), "panzerfaust"))
+  } else if(issubstr(tolower(self.weapon), "panzerfaust")) {
     self.rocketlauncherammo setModel("weapon_panzerfaust3_missle");
-  else
+  } else {
     self.rocketlauncherammo setModel("projectile_rpg7");
+  }
 
   self.rocketlauncherammo linkTo(self, "tag_accessory_right", (0, 0, 0), (0, 0, 0));
   thread handlerocketlauncherammoondeath();
@@ -754,28 +799,31 @@ notetrackrocketlauncherammoattach() {
 notetrackrocketlauncherammodelete() {
   self notify("detached");
 
-  if(isDefined(self.rocketlauncherammo))
+  if(isDefined(self.rocketlauncherammo)) {
     self.rocketlauncherammo delete();
+  }
 
   self.a.rocketvisible = 1;
 
   if(isai(self) && !isalive(self)) {
     return;
   }
-  if(scripts\sp\utility::hastag(getweaponmodel(self.weapon), "tag_rocket"))
+  if(scripts\sp\utility::hastag(getweaponmodel(self.weapon), "tag_rocket")) {
     self showpart("tag_rocket");
+  }
 }
 
 handlenotetrack(var_0, var_1, var_2, var_3) {
   var_4 = anim.notetracks[var_0];
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     return [[var_4]](var_0, var_1);
-  else if(isDefined(self._id_4C93)) {
-    if(isDefined(var_3))
+  } else if(isDefined(self._id_4C93)) {
+    if(isDefined(var_3)) {
       return [[self._id_4C93]](var_0, var_1, var_2, var_3);
-    else
+    } else {
       return [[self._id_4C93]](var_0, var_1, var_2);
+    }
   }
 
   switch (var_0) {
@@ -784,8 +832,9 @@ handlenotetrack(var_0, var_1, var_2, var_3) {
     case "end":
       return var_0;
     case "finish early":
-      if(isDefined(self.enemy))
+      if(isDefined(self.enemy)) {
         return var_0;
+      }
 
       break;
     case "swish small":
@@ -795,8 +844,9 @@ handlenotetrack(var_0, var_1, var_2, var_3) {
       thread scripts\engine\utility::play_sound_in_space("melee_swing_large", self gettagorigin("TAG_WEAPON_RIGHT"));
       break;
     case "rechamber":
-      if(scripts\anim\utility_common::weapon_pump_action_shotgun())
+      if(scripts\anim\utility_common::weapon_pump_action_shotgun()) {
         self playSound("weap_reload_shotgun_pump_npc");
+      }
 
       self.a.needstorechamber = 0;
       break;
@@ -840,13 +890,15 @@ handlenotetrack(var_0, var_1, var_2, var_3) {
       level notify("glass_break", self);
       break;
     case "attach clip left":
-      if(scripts\anim\utility_common::usingrocketlauncher())
+      if(scripts\anim\utility_common::usingrocketlauncher()) {
         notetrackrocketlauncherammoattach();
+      }
 
       break;
     case "detach clip left":
-      if(scripts\anim\utility_common::usingrocketlauncher())
+      if(scripts\anim\utility_common::usingrocketlauncher()) {
         notetrackrocketlauncherammodelete();
+      }
 
       break;
     case "jetpack_boost":
@@ -872,8 +924,9 @@ handlenotetrack(var_0, var_1, var_2, var_3) {
       playFXOnTag(scripts\engine\utility::getfx("zerog_jetpack_death"), self, "tag_fx_bottom");
       break;
     case "start_drift":
-      if(!self.fixednode)
+      if(!self.fixednode) {
         self animmode("physics_drift");
+      }
 
       break;
     case "c6_punch":
@@ -881,10 +934,11 @@ handlenotetrack(var_0, var_1, var_2, var_3) {
       break;
     default:
       if(isDefined(var_2)) {
-        if(isDefined(var_3))
+        if(isDefined(var_3)) {
           return [[var_2]](var_0, var_3);
-        else
+        } else {
           return [[var_2]](var_0);
+        }
       }
 
       break;
@@ -895,11 +949,13 @@ donotetracksintercept(var_0, var_1, var_2) {
   for(;;) {
     self waittill(var_0, var_3);
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       var_3 = ["undefined"];
+    }
 
-    if(!isarray(var_3))
+    if(!isarray(var_3)) {
       var_3 = [var_3];
+    }
 
     scripts\anim\utility::validatenotetracks(var_0, var_3);
     var_4 = [[var_1]](var_3);
@@ -918,8 +974,9 @@ donotetracksintercept(var_0, var_1, var_2) {
       }
     }
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       return var_5;
+    }
   }
 }
 
@@ -927,11 +984,13 @@ donotetrackspostcallback(var_0, var_1) {
   for(;;) {
     self waittill(var_0, var_2);
 
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       var_2 = ["undefined"];
+    }
 
-    if(!isarray(var_2))
+    if(!isarray(var_2)) {
       var_2 = [var_2];
+    }
 
     scripts\anim\utility::validatenotetracks(var_0, var_2);
     var_3 = undefined;
@@ -947,8 +1006,9 @@ donotetrackspostcallback(var_0, var_1) {
 
     [[var_1]](var_2);
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       return var_3;
+    }
   }
 }
 
@@ -965,13 +1025,15 @@ donotetracksforeverintercept(var_0, var_1, var_2, var_3) {
 }
 
 donotetracksforeverproc(var_0, var_1, var_2, var_3, var_4) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self endon(var_2);
+  }
 
   self endon("killanimscript");
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = "undefined";
+  }
 
   for(;;) {
     var_5 = gettime();
@@ -983,8 +1045,9 @@ donotetracksforeverproc(var_0, var_1, var_2, var_3, var_4) {
       var_6 = [[var_0]](var_1, var_3, var_4);
       var_7 = gettime() - var_5;
 
-      if(var_7 < 0.05)
+      if(var_7 < 0.05) {
         wait(0.05 - var_7);
+      }
     }
   }
 }
@@ -1018,9 +1081,9 @@ donotetracksfortimeendnotify(var_0) {
 }
 
 playfootstep(var_0, var_1) {
-  if(!isai(self))
+  if(!isai(self)) {
     self _meth_824E("default_step_run", "dirt");
-  else {
+  } else {
     var_2 = undefined;
 
     if(!isDefined(self.groundtype)) {
@@ -1037,20 +1100,23 @@ playfootstep(var_0, var_1) {
 
     var_3 = "J_Ball_RI";
 
-    if(var_0)
+    if(var_0) {
       var_3 = "J_Ball_LE";
+    }
 
     var_4 = get_notetrack_movement();
 
-    if(self.unittype == "soldier" || self.unittype == "civilian")
+    if(self.unittype == "soldier" || self.unittype == "civilian") {
       var_5 = "";
-    else
+    } else {
       var_5 = tolower(self.unittype + "_");
+    }
 
-    if(self.unittype == "c6i" || self.unittype == "c6" || self.unittype == "c8" || self.unittype == "c12")
+    if(self.unittype == "c6i" || self.unittype == "c6" || self.unittype == "c8" || self.unittype == "c12") {
       var_6 = var_5 + "step_" + var_4;
-    else
+    } else {
       var_6 = var_5 + "default_step_" + var_4;
+    }
 
     if(soundexists(var_6)) {
       if(self.unittype == "c8") {
@@ -1065,11 +1131,13 @@ playfootstep(var_0, var_1) {
     }
 
     if(isDefined(self._id_164D[self.asmname]._id_4BC0)) {
-      if(issubstr(self._id_164D[self.asmname]._id_4BC0, "wall_run"))
+      if(issubstr(self._id_164D[self.asmname]._id_4BC0, "wall_run")) {
         self playSound("wall_run_tech_lyr_npc");
+      }
 
-      if(self.unittype == "c8" && self._id_164D[self.asmname]._id_4BC0 == "melee_charge")
+      if(self.unittype == "c8" && self._id_164D[self.asmname]._id_4BC0 == "melee_charge") {
         thread scripts\sp\utility::play_sound_on_tag("c8_step_charge_lyr", var_3);
+      }
     }
 
     if(self.unittype == "c12") {
@@ -1109,8 +1177,9 @@ playfootstep(var_0, var_1) {
       return;
     }
 
-    if(![[anim.optionalstepeffectsmallfunction]](var_3, var_2))
+    if(![[anim.optionalstepeffectsmallfunction]](var_3, var_2)) {
       playfootstepeffect(var_3, var_2);
+    }
   }
 }
 
@@ -1123,13 +1192,15 @@ _id_D492(var_0, var_1) {
   if(var_0) {
     var_2 = "J_MID_LE_1";
 
-    if(_id_0A0B::_id_7C35("left_arm") == "dismember")
+    if(_id_0A0B::_id_7C35("left_arm") == "dismember") {
       return;
+    }
   } else {
     var_2 = "J_MID_RI_1";
 
-    if(_id_0A0B::_id_7C35("right_arm") == "dismember")
+    if(_id_0A0B::_id_7C35("right_arm") == "dismember") {
       return;
+    }
   }
 
   var_3 = undefined;
@@ -1149,40 +1220,46 @@ _id_D492(var_0, var_1) {
   var_4 = get_notetrack_movement();
   var_5 = "c6_handstep";
 
-  if(soundexists(var_5))
+  if(soundexists(var_5)) {
     self _meth_824E(var_5, var_3);
+  }
 
-  if(![[anim.optionalstepeffectsmallfunction]](var_2, var_3))
+  if(![[anim.optionalstepeffectsmallfunction]](var_2, var_3)) {
     playfootstepeffect(var_2, var_3);
+  }
 }
 
 playfootstepeffect(var_0, var_1) {
-  if(!isDefined(anim.optionalstepeffects[var_1]))
+  if(!isDefined(anim.optionalstepeffects[var_1])) {
     return 0;
+  }
 
   var_2 = self gettagorigin(var_0);
   var_3 = self.angles;
   var_4 = anglesToForward(var_3);
   var_5 = anglestoup(var_3);
 
-  if(!isDefined(level._effect["step_" + var_1][self.unittype]))
+  if(!isDefined(level._effect["step_" + var_1][self.unittype])) {
     level._effect["step_" + var_1][self.unittype] = level._effect["step_" + var_1]["soldier"];
+  }
 
   playFX(level._effect["step_" + var_1][self.unittype], var_2, var_4, var_5);
   return 1;
 }
 
 _id_D480(var_0, var_1) {
-  if(!isDefined(anim.optionalstepeffectssmall[var_1]))
+  if(!isDefined(anim.optionalstepeffectssmall[var_1])) {
     return 0;
+  }
 
   var_2 = self gettagorigin(var_0);
   var_3 = self.angles;
   var_4 = anglesToForward(var_3);
   var_5 = anglestoup(var_3);
 
-  if(!isDefined(level._effect["step_small_" + var_1][self.unittype]))
+  if(!isDefined(level._effect["step_small_" + var_1][self.unittype])) {
     level._effect["step_small_" + var_1][self.unittype] = level._effect["step_small_" + var_1]["soldier"];
+  }
 
   playFX(level._effect["step_small_" + var_1][self.unittype], var_2, var_4, var_5);
   return 1;
@@ -1197,10 +1274,11 @@ fire_straight() {
     return;
   }
 
-  if(scripts\sp\utility::hastag(self.model, "tag_weapon"))
+  if(scripts\sp\utility::hastag(self.model, "tag_weapon")) {
     var_0 = self gettagorigin("tag_weapon");
-  else
+  } else {
     var_0 = self gettagorigin("tag_weapon_right");
+  }
 
   var_1 = anglesToForward(self getmuzzleangle());
   var_2 = var_0 + var_1 * 1000;
@@ -1231,21 +1309,23 @@ notetrackfirespray(var_0, var_1) {
   var_4 = anglesToForward(self getmuzzleangle());
   var_5 = 10;
 
-  if(isDefined(self._id_9F15))
+  if(isDefined(self._id_9F15)) {
     var_5 = 20;
+  }
 
   var_6 = 0;
 
   if(isalive(self.enemy) && issentient(self.enemy) && self canshootenemy()) {
     var_7 = vectorNormalize(self.enemy getEye() - var_3);
 
-    if(vectordot(var_4, var_7) > cos(var_5))
+    if(vectordot(var_4, var_7) > cos(var_5)) {
       var_6 = 1;
+    }
   }
 
-  if(var_6)
+  if(var_6) {
     scripts\anim\utility_common::shootenemywrapper();
-  else {
+  } else {
     var_4 = var_4 + ((randomfloat(2) - 1) * 0.1, (randomfloat(2) - 1) * 0.1, (randomfloat(2) - 1) * 0.1);
     var_8 = var_3 + var_4 * 1000;
     self[[anim._id_FED3]](var_8);
@@ -1257,29 +1337,32 @@ notetrackfirespray(var_0, var_1) {
 _id_CCAB(var_0, var_1) {
   var_2 = [];
 
-  if(var_0 == "boost_on_forward" || var_0 == "boost_on_forward_short")
+  if(var_0 == "boost_on_forward" || var_0 == "boost_on_forward_short") {
     var_2[var_2.size] = "tag_fx_back";
-  else if(var_0 == "boost_on_back" || var_0 == "boost_on_back_short") {
+  } else if(var_0 == "boost_on_back" || var_0 == "boost_on_back_short") {
     var_2[var_2.size] = "tag_fx_left";
     var_2[var_2.size] = "tag_fx_right";
   } else if(var_0 == "boost_on_up" || var_0 == "boost_on_up_short")
     var_2[var_2.size] = "tag_fx_bottom";
-  else if(var_0 == "boost_on_down" || var_0 == "boost_on_down_short")
+  else if(var_0 == "boost_on_down" || var_0 == "boost_on_down_short") {
     var_2[var_2.size] = "tag_fx_top";
-  else if(var_0 == "boost_on_left" || var_0 == "boost_on_left_short")
+  } else if(var_0 == "boost_on_left" || var_0 == "boost_on_left_short") {
     var_2[var_2.size] = "tag_fx_right";
-  else if(var_0 == "boost_on_right" || var_0 == "boost_on_right_short")
+  } else if(var_0 == "boost_on_right" || var_0 == "boost_on_right_short") {
     var_2[var_2.size] = "tag_fx_left";
+  }
 
   var_3 = undefined;
 
-  if(var_1 == "large")
+  if(var_1 == "large") {
     var_3 = scripts\engine\utility::ter_op(isDefined(level._id_E977), level._id_13EE8, ::_id_CD6B);
-  else if(var_1 == "small")
+  } else if(var_1 == "small") {
     var_3 = scripts\engine\utility::ter_op(isDefined(level._id_E977), level._id_13EE9, ::_id_CE13);
+  }
 
-  foreach(var_5 in var_2)
-  self[[var_3]](var_5);
+  foreach(var_5 in var_2) {
+    self[[var_3]](var_5);
+  }
 }
 
 _id_CD6B(var_0) {
@@ -1293,20 +1376,23 @@ _id_CE13(var_0) {
 _id_CE37(var_0, var_1, var_2) {
   self endon("death");
 
-  if(self.team == "neutral")
+  if(self.team == "neutral") {
     return undefined;
+  }
 
   var_3 = self.team;
 
-  if(var_3 == "dead")
+  if(var_3 == "dead") {
     var_3 = self._id_C733;
+  }
 
   var_4 = undefined;
 
-  if(var_3 == "axis")
+  if(var_3 == "axis") {
     var_4 = scripts\engine\utility::getfx(var_0);
-  else if(var_3 == "allies")
+  } else if(var_3 == "allies") {
     var_4 = scripts\engine\utility::getfx(var_1);
+  }
 
   var_5 = scripts\engine\utility::ter_op(self.team == "axis", "double_jump_boost_enemy", "double_jump_boost_npc");
   childthread scripts\sp\utility::play_sound_on_entity(var_5);

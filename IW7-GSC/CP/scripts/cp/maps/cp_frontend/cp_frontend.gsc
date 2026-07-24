@@ -11,10 +11,11 @@ _id_CDA4(var_0) {
 _id_1067E(var_0, var_1, var_2) {
   var_3 = randomint(100) > 50;
 
-  if(isDefined(var_2) && var_2 == "male")
+  if(isDefined(var_2) && var_2 == "male") {
     var_3 = 1;
-  else if(isDefined(var_2) && var_2 == "female")
+  } else if(isDefined(var_2) && var_2 == "female") {
     var_3 = 0;
+  }
 
   if(var_3) {
     var_4 = scripts\engine\utility::random(level._id_3FA3);
@@ -45,27 +46,30 @@ _id_1067E(var_0, var_1, var_2) {
 _id_10823(var_0, var_1) {
   var_2 = randomint(100) > 50;
 
-  if(isDefined(var_1) && var_1 == "male")
+  if(isDefined(var_1) && var_1 == "male") {
     var_2 = 1;
-  else if(isDefined(var_1) && var_1 == "female")
+  } else if(isDefined(var_1) && var_1 == "female") {
     var_2 = 0;
+  }
 
   if(var_2) {
     var_3 = scripts\engine\utility::random(level._id_13F3B);
     var_4 = scripts\engine\utility::random(level._id_13F3D);
 
-    if(randomint(100) > 70)
+    if(randomint(100) > 70) {
       var_5 = undefined;
-    else
+    } else {
       var_5 = scripts\engine\utility::random(level._id_13F3C);
+    }
   } else {
     var_3 = scripts\engine\utility::random(level._id_13F21);
     var_4 = scripts\engine\utility::random(level._id_13F23);
 
-    if(randomint(100) > 70)
+    if(randomint(100) > 70) {
       var_5 = undefined;
-    else
+    } else {
       var_5 = scripts\engine\utility::random(level._id_13F22);
+    }
   }
 
   var_6 = spawn("script_model", (0, 0, 0));
@@ -76,10 +80,11 @@ _id_10823(var_0, var_1) {
   var_6.head setModel(var_4);
 
   if(isDefined(var_5)) {
-    if(var_2)
+    if(var_2) {
       var_7 = "j_spine4";
-    else
+    } else {
       var_7 = "j_neck";
+    }
 
     var_6._id_8861 = spawn("script_model", var_6.head gettagorigin(var_7));
     var_6._id_8861.angles = var_6.head gettagangles(var_7);
@@ -168,8 +173,9 @@ _id_4EA7() {
 _id_71A4() {
   level endon("stop_fnf_machine");
 
-  if(!isDefined(level._id_71A3))
+  if(!isDefined(level._id_71A3)) {
     level._id_71A3 = spawnfx(level._effect["fnfeyes"], (1881, 176, -942), anglesToForward((0, -90, 0)), anglestoup((0, -90, 0)));
+  }
 
   wait 0.1;
   triggerfx(level._id_71A3);
@@ -185,17 +191,19 @@ _id_71A4() {
 }
 
 should_use_alt_machine() {
-  if(getdvarint("loc_language") == 15 || getdvarint("loc_language") == 1)
+  if(getdvarint("loc_language") == 15 || getdvarint("loc_language") == 1) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_F47A(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_1 = "map_select_0";
-  else
+  } else {
     var_1 = "map_select_" + var_0;
+  }
 
   var_2 = getEnt(var_1, "targetname").origin;
   var_3 = getEnt(var_1, "targetname").angles;
@@ -225,8 +233,9 @@ _id_F2D6() {
 }
 
 _id_F46B() {
-  if(isDefined(level.weapon))
+  if(isDefined(level.weapon)) {
     level.weapon delete();
+  }
 
   frontendscenecamerafade(0, 0.2);
   wait 0.25;
@@ -344,8 +353,9 @@ _id_11771(var_0, var_1) {
 _id_51A3(var_0) {
   var_0.head delete();
 
-  if(isDefined(var_0._id_8861))
+  if(isDefined(var_0._id_8861)) {
     var_0._id_8861 delete();
+  }
 
   var_0 delete();
 }
@@ -353,8 +363,9 @@ _id_51A3(var_0) {
 _id_5143(var_0) {
   var_0.head delete();
 
-  if(isDefined(var_0.gun))
+  if(isDefined(var_0.gun)) {
     var_0.gun delete();
+  }
 
   var_0 delete();
 }
@@ -380,8 +391,9 @@ _id_BDA9(var_0) {
   var_2 scriptmodelclearanim();
   var_2.head scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_" + var_1.targetname, var_1.origin, var_1.angles, 1);
 
-  if(isDefined(var_2._id_8861))
+  if(isDefined(var_2._id_8861)) {
     var_2._id_8861 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_" + var_1.targetname, var_1.origin, var_1.angles, 1);
+  }
 
   var_2 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_" + var_1.targetname, var_1.origin, var_1.angles, 1);
   wait 30;
@@ -400,8 +412,9 @@ _id_FEC4() {
   var_4 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_shoot_civ_01", var_2.origin, var_2.angles);
   var_3.head scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_shoot_zom_01", var_2.origin, var_2.angles);
 
-  if(isDefined(var_3._id_8861))
+  if(isDefined(var_3._id_8861)) {
     var_3._id_8861 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_shoot_zom_01", var_2.origin, var_2.angles);
+  }
 
   var_4.head scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_shoot_civ_01", var_2.origin, var_2.angles);
   wait 3.5;
@@ -430,8 +443,9 @@ _id_5B17() {
   var_2 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_civ_01", var_0.origin, var_0.angles, 1);
   var_1.head scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_zom_01", var_0.origin, var_0.angles, 1);
 
-  if(isDefined(var_1._id_8861))
+  if(isDefined(var_1._id_8861)) {
     var_1._id_8861 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_zom_01", var_0.origin, var_0.angles);
+  }
 
   var_2.head scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_civ_01", var_0.origin, var_0.angles, 1);
   wait 10;
@@ -446,8 +460,9 @@ _id_5B18() {
   var_2 = _id_1067E(var_0, undefined, "male");
   var_1 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_zom_02", var_0.origin, var_0.angles, 1);
 
-  if(isDefined(var_1._id_8861))
+  if(isDefined(var_1._id_8861)) {
     var_1._id_8861 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_zom_02", var_0.origin, var_0.angles);
+  }
 
   var_2 scriptmodelplayanimdeltamotionfrompos("IW7_cp_frontend_dragging_civ_02", var_0.origin, var_0.angles, 1);
   wait 10.5;
@@ -481,8 +496,9 @@ _id_1067F() {
     var_9 = scripts\engine\utility::random(var_0);
     var_0 = scripts\engine\utility::array_remove(var_0, var_9);
 
-    if(var_0.size < 1)
+    if(var_0.size < 1) {
       var_0 = ["shooting", "mugging1", "mugging2", "mugging3", "dragging1", "dragging2"];
+    }
 
     switch (var_9) {
       case "shooting":
@@ -517,8 +533,9 @@ _id_13F52(var_0) {
   wait(randomfloatrange(1, 2));
   self.head scriptmodelplayanimdeltamotion(var_0, 1);
 
-  if(isDefined(self._id_8861))
+  if(isDefined(self._id_8861)) {
     self._id_8861 scriptmodelplayanimdeltamotion(var_0, 1);
+  }
 
   self scriptmodelplayanimdeltamotion(var_0, 1);
   wait 45;
@@ -529,28 +546,32 @@ _id_37BA(var_0) {
   if(var_0.name != "zm_consumable_selection") {
     level notify("stop_fnf_machine");
 
-    if(isDefined(level._id_71A3))
+    if(isDefined(level._id_71A3)) {
       level._id_71A3 delete();
+    }
   }
 
   switch (var_0.name) {
     case "zm_buildkit_selection":
-      if(_id_A8E7("weapon_select"))
+      if(_id_A8E7("weapon_select")) {
         thread _id_13EFF("weapon_to_buildkit", 250, ::_id_F46C);
-      else
+      } else {
         thread _id_13EFF("loadout_to_buildkit", 250, ::_id_F46C);
+      }
 
       break;
     case "zm_main":
-      if(!isDefined(self._id_A8E6) || _id_A8E7("zm_main"))
+      if(!isDefined(self._id_A8E6) || _id_A8E7("zm_main")) {
         _id_F41D();
-      else
+      } else {
         thread _id_BC0F();
+      }
 
       break;
     case "zm_play_online":
-      if(_id_A8E7("zm_main") || _id_A8E7("barracks_menu") || _id_A8E7("loadout_menu"))
+      if(_id_A8E7("zm_main") || _id_A8E7("barracks_menu") || _id_A8E7("loadout_menu")) {
         thread _id_13EFF("main_to_online", undefined, ::_id_BC8F);
+      }
 
       break;
     case "zm_map_selection":
@@ -599,8 +620,9 @@ _id_37BA(var_0) {
         thread _id_13EFF("player_card_cam", 250);
       } else if(_id_A8E7("zm_consumable_selection"))
         _id_F522("player_card_cam_static");
-      else
+      else {
         thread _id_13EFF("player_card_cam", 250);
+      }
 
       break;
     case "zm_lobby":
@@ -623,23 +645,25 @@ _id_37BA(var_0) {
       frontendscenecamerafade(1, 0.2);
       break;
     case "weapon_select":
-      if(_id_A8E7("zm_buildkit_selection"))
+      if(_id_A8E7("zm_buildkit_selection")) {
         thread _id_13EFF("buildkit_to_weaponselect", 250, ::_id_F619);
-      else
+      } else {
         thread _id_F61A();
+      }
 
       break;
     case "loadout_menu":
-      if(_id_A8E7("zm_main"))
+      if(_id_A8E7("zm_main")) {
         thread _id_13EFF("main_to_online", undefined, ::_id_F46B);
-      else if(_id_A8E7("loadout_menu"))
+      } else if(_id_A8E7("loadout_menu")) {
         _id_F522("player_loadout_cam");
-      else if(_id_A8E7("zm_consumable_selection"))
+      } else if(_id_A8E7("zm_consumable_selection")) {
         thread _id_13EFF("consumable_to_loadout", 250);
-      else if(_id_A8E7("zm_buildkit_selection"))
+      } else if(_id_A8E7("zm_buildkit_selection")) {
         _id_F46C();
-      else
+      } else {
         thread _id_F46B();
+      }
 
       break;
     case "barracks_menu":

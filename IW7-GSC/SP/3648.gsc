@@ -54,15 +54,17 @@ _id_A072() {
 _id_A0CE(var_0) {
   scripts\engine\utility::flag_set("jackal_shooting");
 
-  if(!isDefined(level._id_A0BB))
+  if(!isDefined(level._id_A0BB)) {
     level._id_A0BB = 0;
+  }
 
   var_0 scripts\sp\utility::_id_9196(6, 0, 1, "jackalStreakFiring");
 
-  if(level._id_A0BB == 0)
+  if(level._id_A0BB == 0) {
     level.player scripts\sp\utility::_id_10350("dps_s31_shotsoutshotsou");
-  else
+  } else {
     level.player scripts\sp\utility::_id_10350("dps_s31_gunsgunsguns");
+  }
 
   var_0 _id_0BDC::_id_19AE("shoot_now");
   wait 0.1;
@@ -78,8 +80,9 @@ _id_1074A() {
   _id_6C92();
   setomnvar("ui_jackal_cooldown_done", 2);
 
-  if(!isDefined(level._id_A0BB))
+  if(!isDefined(level._id_A0BB)) {
     level._id_A0BB = 0;
+  }
 
   if(level._id_A0BB == 0) {
     level.player scripts\sp\utility::_id_10350("phstreets_plr_requestforfiret");
@@ -116,8 +119,9 @@ _id_1074A() {
 _id_A352() {
   level._id_A351 endon("death");
 
-  while(isDefined(level.player._id_20F8))
+  while(isDefined(level.player._id_20F8)) {
     wait 0.15;
+  }
 
   level._id_A351 scripts\sp\utility::_id_918B("ar_callouts_unsa_jackal", 1, (0, 0, 0));
   level._id_A351 scripts\sp\utility::_id_9196(6, 1, 0, "default");
@@ -129,8 +133,9 @@ _id_6C92() {
   }
   var_0 = 0;
 
-  foreach(var_2 in level._id_1093E)
-  var_2._id_63A2 = 0;
+  foreach(var_2 in level._id_1093E) {
+    var_2._id_63A2 = 0;
+  }
 
   var_4 = level._id_1312F;
   var_4 = _id_110DE(var_4);
@@ -146,8 +151,9 @@ _id_6C92() {
       }
     }
 
-    if(var_7 == 0)
+    if(var_7 == 0) {
       var_0++;
+    }
   }
 
   var_11 = scripts\engine\utility::array_sort_with_func(level._id_1093E, ::_id_1041C);
@@ -220,10 +226,11 @@ _id_A12C() {
   level._id_1312F = [];
   setomnvar("ui_jackal_cooldown_done", 0);
 
-  if(isDefined(level._id_A29E["cooldown"]))
+  if(isDefined(level._id_A29E["cooldown"])) {
     _id_110DF(level._id_A29E["cooldown"]);
-  else
+  } else {
     _id_110DF(30);
+  }
 
   scripts\engine\utility::flag_clear("streak_cooling_down");
   level.player notify("jackal_ready");
@@ -285,8 +292,9 @@ _id_418D() {
   setomnvar("ui_jackal_call_down_active", 0);
   var_0 = getaiarray("axis");
 
-  foreach(var_2 in var_0)
-  var_2 scripts\sp\utility::_id_9193("jackalStreakTargeting");
+  foreach(var_2 in var_0) {
+    var_2 scripts\sp\utility::_id_9193("jackalStreakTargeting");
+  }
 }
 
 _id_A234() {
@@ -346,10 +354,11 @@ _id_A0B2() {
     wait 1;
 
     while(scripts\engine\utility::flag("player_has_used_designator")) {
-      if(level._id_1312F.size <= 0)
+      if(level._id_1312F.size <= 0) {
         level.player _meth_8497();
-      else
+      } else {
         level.player _meth_8496(&"PHSTREETS_JACKAL_TARGET_FIRE");
+      }
 
       wait 0.1;
     }
@@ -381,17 +390,19 @@ _id_110DD() {
   var_1 = _id_A232();
   self notify("arrived");
 
-  if(isDefined(level._id_A29E["max_time_up"]))
+  if(isDefined(level._id_A29E["max_time_up"])) {
     thread _id_0BDC::_id_B155(level._id_A29E["max_time_up"], undefined, undefined, 0.05);
-  else
+  } else {
     thread _id_0BDC::_id_B155(8, undefined, undefined, 0.05);
+  }
 
   var_2 = "jackal_streak_gatling_fire";
   thread scripts\sp\utility::play_loop_sound_on_tag(var_2, "tag_spotlight", 1, 1, "jackal_streak_gatling_release");
   var_3 = 1;
 
-  if(scripts\engine\utility::cointoss())
+  if(scripts\engine\utility::cointoss()) {
     var_3 = 0;
+  }
 
   _id_0BDC::_id_19AB(20, 20, 25, 5);
   var_4 = 96;
@@ -424,10 +435,11 @@ _id_1093D() {
   thread _id_A0CE(self);
   self notify("arrived");
 
-  if(isDefined(level._id_A29E["max_time_up"]))
+  if(isDefined(level._id_A29E["max_time_up"])) {
     thread _id_10D33(level._id_A29E["max_time_up"]);
-  else
+  } else {
     thread _id_10D33(8);
+  }
 
   while(scripts\engine\utility::flag("special_jackal_streak_path")) {
     _id_0BDC::_id_A1EC(var_1.origin, 0);
@@ -458,8 +470,9 @@ _id_110E3() {
     }
     var_2 thread _id_A360(self, var_3);
 
-    if(var_2.classname != "actor_enemy_c6_ar")
+    if(var_2.classname != "actor_enemy_c6_ar") {
       var_2 thread _id_A2CF(self);
+    }
   }
 
   var_4 = "tag_flash";
@@ -473,10 +486,11 @@ _id_110E3() {
   level._id_1312F = _id_110DE(level._id_1312F);
   level._id_1312F = sortbydistance(level._id_1312F, self.origin);
 
-  if(isDefined(level._id_A29E["accuracy"]))
+  if(isDefined(level._id_A29E["accuracy"])) {
     var_8 = level._id_A29E["accuracy"];
-  else
+  } else {
     var_8 = 0.1;
+  }
 
   level._id_1312F = _id_10428(level._id_1312F);
   thread _id_6D3D();
@@ -504,8 +518,9 @@ _id_110E3() {
     if(isDefined(level._id_A29E["bDontFindMore"])) {
       continue;
     }
-    if(!isDefined(var_7))
+    if(!isDefined(var_7)) {
       var_7 = level._id_114F0;
+    }
 
     thread _id_6CBB(var_7);
   }
@@ -545,8 +560,9 @@ _id_A38A(var_0) {
     _id_0B76::_id_1992("TAG_FLASH_right", var_2[0]);
     var_7 = scripts\engine\utility::waittill_any_timeout(2, "missile_explode");
 
-    if(var_7 == "missile_explode")
+    if(var_7 == "missile_explode") {
       var_0 _id_0BBD::_id_D973(var_2[0].script_noteworthy, 750, undefined);
+    }
 
     wait(randomfloatrange(0.7, 1));
   }
@@ -558,8 +574,9 @@ _id_4031() {
   var_0 = self._id_110E4;
   scripts\engine\utility::waittill_any("death", "delete");
 
-  foreach(var_2 in var_0)
-  var_2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
+  }
 }
 
 _id_A38B(var_0) {
@@ -590,11 +607,13 @@ _id_10428(var_0) {
     var_1[var_1.size] = var_5;
   }
 
-  foreach(var_8 in var_2)
-  var_3[var_3.size] = var_8;
+  foreach(var_8 in var_2) {
+    var_3[var_3.size] = var_8;
+  }
 
-  foreach(var_11 in var_1)
-  var_3[var_3.size] = var_11;
+  foreach(var_11 in var_1) {
+    var_3[var_3.size] = var_11;
+  }
 
   return var_3;
 }
@@ -625,18 +644,20 @@ _id_6CBB(var_0) {
     break;
   }
 
-  if(level._id_1312F.size > 0)
+  if(level._id_1312F.size > 0) {
     thread _id_110E3();
-  else
+  } else {
     self notify("no_more_targets");
+  }
 }
 
 _id_10432(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-    if(isDefined(var_3.team) && var_3.team == "axis")
+    if(isDefined(var_3.team) && var_3.team == "axis") {
       var_1[var_1.size] = var_3;
+    }
   }
 
   return var_1;
@@ -653,8 +674,9 @@ _id_A2CF(var_0) {
     self waittill("damage", var_1, var_1, var_1, var_1, var_1, var_1, var_1, var_1, var_1, var_2);
 
     if(isDefined(var_2) && var_2 == "magic_spaceship_20mm_bullet") {
-      if(isDefined(self._id_71C8))
+      if(isDefined(self._id_71C8)) {
         self[[self._id_71C8]]();
+      }
 
       if(isalive(self)) {
         self._id_4E46 = ::jackal_ragdoll_deathfunc;
@@ -724,8 +746,9 @@ _id_6D3D() {
     var_0 = [];
 
     foreach(var_2 in level._id_1312F) {
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         var_0[var_0.size] = var_2;
+      }
     }
 
     var_0 = scripts\sp\utility::array_removedeadvehicles(var_0);
@@ -739,10 +762,11 @@ _id_6D3D() {
       _id_0B76::_id_1992("TAG_FLASH_right", var_2, 1);
       self waittill("missile_explode");
 
-      if(isDefined(level._id_A29E["max_time_up"]))
+      if(isDefined(level._id_A29E["max_time_up"])) {
         thread _id_0BDC::_id_B155(level._id_A29E["max_time_up"], undefined, undefined, 0.05);
-      else
+      } else {
         thread _id_0BDC::_id_B155(8, undefined, undefined, 0.05);
+      }
 
       var_4 = "jackal_streak_gatling_fire";
       thread scripts\sp\utility::play_loop_sound_on_tag(var_4, "tag_spotlight", 1, 1, "jackal_streak_gatling_release");
@@ -764,8 +788,9 @@ _id_B82D(var_0) {
     var_3 = self gettagorigin(var_1) + (var_2 - (0, 0, 90));
     var_4 = var_0.origin;
 
-    if(scripts\common\trace::ray_trace_passed(var_3, var_4))
+    if(scripts\common\trace::ray_trace_passed(var_3, var_4)) {
       _id_0B76::_id_1992("TAG_FLASH_right", var_0);
+    }
 
     wait(randomfloatrange(4, 7));
   }
@@ -780,7 +805,7 @@ _id_7CB7(var_0) {
       continue;
     }
 
-    var_1[var_2] = scripts\engine\utility::getStruct(var_1[var_2 - 1].target, "targetname");
+    var_1[var_2] = ::scripts\engine\utility::getStruct(var_1[var_2 - 1].target, "targetname");
   }
 
   return var_1;
@@ -816,8 +841,9 @@ bufferedweapons() {
   _id_0BDC::_id_A1EC(var_1, 0);
   scripts\engine\utility::flag_clear("bugging_out");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 
   scripts\engine\utility::flag_clear("jackal_streak_spawned");
 }
@@ -862,8 +888,9 @@ _id_13C5F() {
   for(;;) {
     scripts\engine\utility::waittill_any("weapon_change", "weapon_dropped");
 
-    if(issubstr(self getcurrentweapon(), "iw7_jackal_support_designator") == 0)
+    if(issubstr(self getcurrentweapon(), "iw7_jackal_support_designator") == 0) {
       level.player._id_4C14 = level.player getcurrentweapon();
+    }
   }
 }
 
@@ -909,12 +936,13 @@ _id_A363() {
 }
 
 _id_9EF2() {
-  if(!isDefined(self.melee))
+  if(!isDefined(self.melee)) {
     return 1;
-  else if(!isDefined(self.melee._id_B5FE))
+  } else if(!isDefined(self.melee._id_B5FE)) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_1100F() {
@@ -977,10 +1005,11 @@ _id_11500() {
     foreach(var_4 in var_0) {
       if(var_4 _id_9FD9()) {
         if(isDefined(var_4._id_9E91)) {} else {
-          if(isDefined(level._id_A29E["max_enemies"]))
+          if(isDefined(level._id_A29E["max_enemies"])) {
             var_5 = level._id_A29E["max_enemies"];
-          else
+          } else {
             var_5 = 8;
+          }
 
           for(var_6 = 0; var_6 < var_5; var_6++) {
             var_7 = 0;
@@ -1010,8 +1039,9 @@ _id_11500() {
         var_4 scripts\sp\utility::_id_9193("jackalStreakTargeting");
         var_4 notify("outline_off");
 
-        if(var_4 _id_9FD9() == 0)
+        if(var_4 _id_9FD9() == 0) {
           level._id_1312F = scripts\engine\utility::array_remove(level._id_1312F, var_4);
+        }
 
         var_4._id_9E91 = undefined;
       }
@@ -1028,10 +1058,11 @@ _id_11A91() {
   level.player endon("death");
 
   for(;;) {
-    if(level._id_1312F.size >= 12)
+    if(level._id_1312F.size >= 12) {
       setomnvar("ui_active_targets", 12);
-    else
+    } else {
       setomnvar("ui_active_targets", level._id_1312F.size);
+    }
 
     wait 0.1;
   }
@@ -1083,40 +1114,47 @@ _id_12BE1() {
 }
 
 _id_9FD9() {
-  if(isDefined(level._id_A29E["max_target_dist"]))
+  if(isDefined(level._id_A29E["max_target_dist"])) {
     var_0 = level._id_A29E["max_target_dist"];
-  else
+  } else {
     var_0 = 2048;
+  }
 
-  if(isDefined(self.vehicletype))
+  if(isDefined(self.vehicletype)) {
     var_0 = var_0 * 1.3;
+  }
 
-  if(isDefined(level._id_A29E["min_target_dist"]))
+  if(isDefined(level._id_A29E["min_target_dist"])) {
     var_1 = level._id_A29E["min_target_dist"];
-  else
+  } else {
     var_1 = 100;
+  }
 
   var_2 = distance2d(level.player.origin, self.origin);
 
-  if(var_2 > var_0 || var_2 < var_1)
+  if(var_2 > var_0 || var_2 < var_1) {
     return 0;
+  }
 
   var_3 = scripts\sp\utility::_id_7951(level.player.origin, level.player getplayerangles(), self.origin);
 
-  if(isDefined(level._id_A29E["FOV"]))
+  if(isDefined(level._id_A29E["FOV"])) {
     var_4 = level._id_A29E["FOV"];
-  else
+  } else {
     var_4 = 0.9;
+  }
 
-  if(var_3 <= var_4)
+  if(var_3 <= var_4) {
     return 0;
+  }
 
   if(scripts\sp\vehicle::_id_9FEF()) {
     if(isDefined(self.model)) {
-      if(self.model == "veh_mil_air_ca_dropship" && !isDefined(self._id_65CD))
+      if(self.model == "veh_mil_air_ca_dropship" && !isDefined(self._id_65CD)) {
         return 0;
-      else if(self.model == "veh_mil_air_ca_dropship" && scripts\engine\utility::flag("hill_dropship_boss_dead"))
+      } else if(self.model == "veh_mil_air_ca_dropship" && scripts\engine\utility::flag("hill_dropship_boss_dead")) {
         return 0;
+      }
     } else
       return 0;
   }
@@ -1147,14 +1185,16 @@ _id_1294E() {
     scripts\sp\utility::_id_9199("jackalStreakTargeting", 0);
     level.cansave = undefined;
 
-    if(!scripts\engine\utility::flag("jackal_successful_call"))
+    if(!scripts\engine\utility::flag("jackal_successful_call")) {
       level._id_1312F = [];
+    }
 
     _id_4162();
     setomnvar("ui_jackal_call_down_active", 0);
 
-    if(isDefined(level._id_1153A))
+    if(isDefined(level._id_1153A)) {
       level._id_1153A delete();
+    }
   }
 }
 
@@ -1179,8 +1219,9 @@ _id_6C97(var_0, var_1) {
               var_2.origin = var_7.origin;
               var_9 = var_2 istouching(level._id_110E0);
 
-              if(var_6 >= 0.2 && var_8 > 768 && var_9)
+              if(var_6 >= 0.2 && var_8 > 768 && var_9) {
                 return var_1[var_3];
+              }
             } else if(var_6 >= 0.2 && var_8 > 768)
               return var_1[var_3];
 
@@ -1188,14 +1229,16 @@ _id_6C97(var_0, var_1) {
           }
 
           if(isDefined(level._id_110E0)) {
-            if(var_6 >= 0.2)
+            if(var_6 >= 0.2) {
               return var_1[var_3];
+            }
           } else {
             var_2.origin = var_7.origin;
             var_9 = var_2 istouching(level._id_110E0);
 
-            if(var_6 >= 0.2 && var_9)
+            if(var_6 >= 0.2 && var_9) {
               return var_1[var_3];
+            }
           }
         }
 
@@ -1220,8 +1263,9 @@ _id_6C97(var_0, var_1) {
             var_2.origin = var_7.origin;
             var_9 = var_2 istouching(level._id_110E0);
 
-            if(var_6 >= 0.2 && var_8 > 768 && var_9)
+            if(var_6 >= 0.2 && var_8 > 768 && var_9) {
               return var_7;
+            }
           } else if(var_6 >= 0.2 && var_8 > 768)
             return var_1[var_3];
 
@@ -1232,14 +1276,16 @@ _id_6C97(var_0, var_1) {
           var_2.origin = var_7.origin;
           var_9 = var_2 istouching(level._id_110E0);
 
-          if(var_6 >= 0.2 && var_9)
+          if(var_6 >= 0.2 && var_9) {
             return var_1[var_3];
+          }
 
           continue;
         }
 
-        if(var_6 >= 0.2)
+        if(var_6 >= 0.2) {
           return var_1[var_3];
+        }
       }
 
       var_0 = 1;
@@ -1290,14 +1336,16 @@ _id_110E1() {
   thread _id_10D33(var_0);
   var_3 = 1;
 
-  if(scripts\engine\utility::cointoss())
+  if(scripts\engine\utility::cointoss()) {
     var_3 = -1;
+  }
 
   for(;;) {
-    if(var_3 == 1 && var_2 == var_1.size - 1)
+    if(var_3 == 1 && var_2 == var_1.size - 1) {
       var_2 = 0;
-    else if(var_3 == -1 && var_2 == 0)
+    } else if(var_3 == -1 && var_2 == 0) {
       var_2 = var_1.size;
+    }
 
     var_2 = var_2 + var_3;
     _id_0BDC::_id_A1EC(var_1[var_2].origin, 0);
@@ -1341,8 +1389,9 @@ _id_110DE(var_0) {
     }
 
     if(isDefined(var_3.vehicletype)) {
-      if(isDefined(var_3.health) && var_3.health > 1)
+      if(isDefined(var_3.health) && var_3.health > 1) {
         var_1[var_1.size] = var_3;
+      }
     }
   }
 

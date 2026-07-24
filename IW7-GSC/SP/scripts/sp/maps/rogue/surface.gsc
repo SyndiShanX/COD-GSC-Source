@@ -120,12 +120,13 @@ _id_112DE() {
     scripts\engine\utility::flag_waitopen("sun_safe_zone");
     var_1 = scripts\engine\utility::anglebetweenvectorssigned(var_0, anglesToForward(level.player.angles), (0, 0, 1));
 
-    if(var_1 >= -45 && var_1 <= 45)
+    if(var_1 >= -45 && var_1 <= 45) {
       scripts\engine\utility::exploder(69);
-    else if(var_1 < -45 && var_1 > -135)
+    } else if(var_1 < -45 && var_1 > -135) {
       scripts\engine\utility::exploder(70);
-    else if(var_1 > 45 && var_1 < 135)
+    } else if(var_1 > 45 && var_1 < 135) {
       scripts\engine\utility::exploder(68);
+    }
 
     wait 0.5;
     scripts\sp\utility::_id_10FEC(69);
@@ -277,8 +278,9 @@ _id_7697() {
 _id_7C15(var_0, var_1) {
   var_2 = anglestoright(self.angles);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = var_2 * -1;
+  }
 
   var_3 = self.origin;
   return var_3 + var_2 * var_0;
@@ -287,8 +289,9 @@ _id_7C15(var_0, var_1) {
 _id_79D8(var_0, var_1) {
   var_2 = anglesToForward(self.angles);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = var_2 * -1;
+  }
 
   var_3 = self.origin;
   return var_3 + var_2 * var_0;
@@ -308,13 +311,15 @@ _id_2277() {
   thread scripts\sp\maps\rogue\rogue_util::_id_517F([level._id_B4F9._id_5978, var_0._id_466C], "dorm_airlock_door_shut");
   scripts\engine\utility::array_thread(level._id_10AC8, ::_id_226F, var_0);
 
-  while(!isDefined(level._id_13E12._id_2272) && !isDefined(level._id_B33B._id_2272) && !isDefined(level._id_B33E._id_2272))
+  while(!isDefined(level._id_13E12._id_2272) && !isDefined(level._id_B33B._id_2272) && !isDefined(level._id_B33E._id_2272)) {
     wait 0.05;
+  }
 
   var_1 = getEnt("player_stuck_fixer_array", "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 scripts\engine\utility::delaycall(2, ::delete);
+  }
 
   foreach(var_3 in level._id_10AC8) {
     wait 0.1;
@@ -336,8 +341,9 @@ _id_2277() {
   scripts\sp\maps\rogue\rogue_util::_id_1120C(15, 1);
   level._id_B4F9 thread scripts\sp\utility::_id_10346("asteroid_omr_onyoucorporal");
 
-  while(level._id_2270 != 4)
+  while(level._id_2270 != 4) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_clear("flashlight_desired");
   thread scripts\sp\maps\rogue\rogue_util::_id_54FF();
@@ -352,8 +358,9 @@ _id_2277() {
   foreach(var_3 in level._id_10AC8) {
     var_3._id_2271 notify("stop_array_idle");
 
-    if(getdvarint("debug_array"))
+    if(getdvarint("debug_array")) {
       var_3 notify("stop_print3d");
+    }
   }
 }
 
@@ -380,8 +387,9 @@ _id_AABC() {
   var_0 = scripts\engine\utility::getStruct("lava_moment_fx", "targetname");
   var_1 = getnode("marine1_array_stop", "targetname");
 
-  while(distance2d(var_0.origin, level.player.origin) > 700)
+  while(distance2d(var_0.origin, level.player.origin) > 700) {
     wait 0.05;
+  }
 
   scripts\sp\utility::_id_10FEC("100");
   scripts\sp\utility::_id_10FEC("101");
@@ -400,8 +408,9 @@ _id_AABC() {
     if(level.allies[var_9] istouching(var_2)) {
       var_8 = vectordot(var_5, anglesToForward(level.allies[var_9].angles));
 
-      if(var_8 > 0.8 && var_8 > var_4)
+      if(var_8 > 0.8 && var_8 > var_4) {
         var_3[var_3.size] = level.allies[var_9];
+      }
     }
   }
 
@@ -417,8 +426,9 @@ _id_AABD(var_0) {
     wait 1.5;
     level._id_B33B scripts\sp\utility::_id_10346("asteroid_slt_whoa");
 
-    if(var_1)
+    if(var_1) {
       level.player stopgestureviewmodel("ges_block_heat_left", 0.3);
+    }
   }
 }
 
@@ -429,8 +439,9 @@ _id_AABF(var_0) {
   for(;;) {
     if(self.a.pose == "stand") {
       if(isDefined(self.node) && self.node == var_0) {
-        while(distance2d(self.origin, var_0.origin) > 40)
+        while(distance2d(self.origin, var_0.origin) > 40) {
           wait 0.05;
+        }
 
         return 1;
       }
@@ -459,33 +470,38 @@ _id_226F(var_0) {
   self.target = tolower(self._id_1FBB) + "_array_spline";
   _id_0B77::_id_8409(undefined, undefined, undefined, undefined, ::_id_22BE);
 
-  if(getdvarint("debug_array"))
+  if(getdvarint("debug_array")) {
     thread scripts\sp\maps\rogue\rogue_util::_id_D8E9("reaching");
+  }
 
   self._id_2271 scripts\sp\anim::_id_1F17(self, "array_2_enter");
 
-  if(getdvarint("debug_array"))
+  if(getdvarint("debug_array")) {
     thread scripts\sp\maps\rogue\rogue_util::_id_D8E9("arrive single");
+  }
 
   if(self == level._id_B4F9) {
     self._id_2271 scripts\sp\anim::_id_1F2C([self, self._id_5978], "array_2_enter");
     scripts\engine\utility::flag_set("flag_array2_enter_done_mco");
   } else {
-    if(self == level._id_13E12)
+    if(self == level._id_13E12) {
       var_0 thread scripts\sp\anim::_id_1F35(var_0._id_466C, "array_2_scene");
+    }
 
     self._id_2271 scripts\sp\anim::_id_1F35(self, "array_2_enter");
 
-    if(self == level._id_13E12)
+    if(self == level._id_13E12) {
       scripts\engine\utility::flag_set("flag_array2_enter_done_xo");
-    else if(self == level._id_B33B)
+    } else if(self == level._id_B33B) {
       scripts\engine\utility::flag_set("flag_array2_enter_done_marine1");
-    else if(self == level._id_B33E)
+    } else if(self == level._id_B33E) {
       scripts\engine\utility::flag_set("flag_array2_enter_done_marine2");
+    }
   }
 
-  if(getdvarint("debug_array"))
+  if(getdvarint("debug_array")) {
     thread scripts\sp\maps\rogue\rogue_util::_id_D8E9("idle");
+  }
 
   self._id_2271 thread scripts\sp\anim::_id_1EEA(self, "array_2_enter_idle", "stop_array_enter_idle");
   self._id_2272 = 1;
@@ -496,40 +512,46 @@ _id_226F(var_0) {
   scripts\engine\utility::flag_wait("flag_array2_enter_done_marine2");
 
   if(self == level._id_13E12) {
-    if(getdvarint("debug_array"))
+    if(getdvarint("debug_array")) {
       thread scripts\sp\maps\rogue\rogue_util::_id_D8E9("corpse scene");
+    }
 
     self._id_2271 notify("stop_array_enter_idle");
     self._id_2271 scripts\sp\anim::_id_1F35(self, "array_2_scene");
   } else if(self == level._id_B4F9) {
-    if(getdvarint("debug_array"))
+    if(getdvarint("debug_array")) {
       thread scripts\sp\maps\rogue\rogue_util::_id_D8E9("waiting for notify");
+    }
 
     level waittill("start_mco");
 
-    if(getdvarint("debug_array"))
+    if(getdvarint("debug_array")) {
       thread scripts\sp\maps\rogue\rogue_util::_id_D8E9("corpse scene");
+    }
 
     self._id_2271 notify("stop_array_enter_idle");
     self._id_2271 scripts\sp\anim::_id_1F35(self, "array_2_scene");
   } else {
-    if(getdvarint("debug_array"))
+    if(getdvarint("debug_array")) {
       thread scripts\sp\maps\rogue\rogue_util::_id_D8E9("corpse scene");
+    }
 
     self._id_2271 notify("stop_array_enter_idle");
     self._id_2271 scripts\sp\anim::_id_1F35(self, "array_2_scene");
   }
 
-  if(getdvarint("debug_array"))
+  if(getdvarint("debug_array")) {
     thread scripts\sp\maps\rogue\rogue_util::_id_D8E9("idle");
+  }
 
   self._id_2271 thread scripts\sp\anim::_id_1EEA(self, "array_2_idle", "stop_array_idle");
   level._id_2270++;
 }
 
 _id_22BE(var_0) {
-  if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "stairs_start")
+  if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "stairs_start") {
     _id_10B4C();
+  }
 }
 
 _id_10B4C() {
@@ -543,8 +565,9 @@ _id_10B4C() {
 _id_846B(var_0, var_1) {
   level endon("array_vignette_approach");
 
-  if(isDefined(var_0.radius))
+  if(isDefined(var_0.radius)) {
     self.goalradius = var_0.radius;
+  }
 
   self _meth_82EE(var_0);
   self waittill("goal");
@@ -553,17 +576,19 @@ _id_846B(var_0, var_1) {
 _id_2276() {
   var_0 = undefined;
 
-  if(self == level._id_B33B)
+  if(self == level._id_B33B) {
     var_0 = 2100;
-  else if(self == level._id_B33E)
+  } else if(self == level._id_B33E) {
     var_0 = 1800;
-  else if(self == level._id_B4F9)
+  } else if(self == level._id_B4F9) {
     var_0 = 1500;
-  else
+  } else {
     var_0 = 1200;
+  }
 
-  while(distance2d(self.origin, self._id_2271.origin) > var_0)
+  while(distance2d(self.origin, self._id_2271.origin) > var_0) {
     wait 0.05;
+  }
 
   scripts\sp\utility::_id_5522();
   scripts\sp\utility::_id_51E1("combat");
@@ -611,13 +636,15 @@ _id_227C(var_0, var_1, var_2) {
   while(!scripts\engine\utility::flag("dorm_run_over")) {
     scripts\engine\utility::flag_wait("power_on");
 
-    while(level._id_111C3.time <= 12.5)
+    while(level._id_111C3.time <= 12.5) {
       wait 0.05;
+    }
 
     self moveTo(var_1, 15, 0, 0);
 
-    while(level._id_111C3.time <= 15.5)
+    while(level._id_111C3.time <= 15.5) {
       wait 0.05;
+    }
 
     self moveTo(var_0, 0.1, 0, 0);
     scripts\engine\utility::flag_waitopen("power_on");
@@ -626,18 +653,20 @@ _id_227C(var_0, var_1, var_2) {
 
 _id_227B(var_0) {
   while(!scripts\engine\utility::flag("dorm_run_over")) {
-    if(level.player istouching(var_0))
+    if(level.player istouching(var_0)) {
       scripts\engine\utility::flag_set("fake_array_burn");
-    else
+    } else {
       scripts\engine\utility::flag_clear("fake_array_burn");
+    }
 
     wait 0.05;
   }
 }
 
 _id_22CF(var_0) {
-  while(!scripts\engine\utility::flag("dorm_run_over"))
+  while(!scripts\engine\utility::flag("dorm_run_over")) {
     wait 0.15;
+  }
 }
 
 _id_22C0() {
@@ -664,8 +693,9 @@ _id_22C0() {
   foreach(var_2 in var_0) {
     var_2 notify("stop_surface_mover");
 
-    if(isDefined(var_2._id_AD34))
+    if(isDefined(var_2._id_AD34)) {
       var_2._id_AD34 delete();
+    }
 
     var_2 delete();
   }
@@ -703,8 +733,9 @@ _id_22BF(var_0) {
       wait(var_4);
       var_4 = var_4 + 0.1;
 
-      if(var_4 > 0.5)
+      if(var_4 > 0.5) {
         var_7 = var_4 * 0.5;
+      }
     }
 
     self moveTo(var_1, 1, 0, 1);
@@ -742,8 +773,9 @@ _id_227A() {
       wait(var_5);
       var_5 = var_5 + 0.1;
 
-      if(var_5 > 0.5)
+      if(var_5 > 0.5) {
         var_7 = var_5 * 0.5;
+      }
     }
   }
 }
@@ -751,18 +783,20 @@ _id_227A() {
 _id_D1B2() {
   scripts\engine\utility::flag_wait("power_on");
 
-  if(scripts\engine\utility::flag("player_still_in_hangar"))
+  if(scripts\engine\utility::flag("player_still_in_hangar")) {
     level._id_B4F9 scripts\sp\utility::_id_10350("rogue_omr_tryandgettouson");
+  }
 }
 
 _id_112D6() {
   thread _id_5A7B();
 
   while(!scripts\engine\utility::flag("fake_burn_player")) {
-    if(level.player issprinting() || scripts\engine\utility::flag("player_jumped_chasm"))
+    if(level.player issprinting() || scripts\engine\utility::flag("player_jumped_chasm")) {
       var_0 = randomfloatrange(0.75, 1.15);
-    else
+    } else {
       var_0 = randomfloatrange(1.5, 1.75);
+    }
 
     if(!scripts\engine\utility::flag("sun_safe_zone")) {
       level.player playSound("rogue_surface_inhale_fast");

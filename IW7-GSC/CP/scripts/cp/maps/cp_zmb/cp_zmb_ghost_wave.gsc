@@ -18,15 +18,17 @@ init() {
 init_available_formations() {
   level.available_formations = [];
 
-  for(var_0 = 1; var_0 <= level.gns_num_of_wave; var_0++)
+  for(var_0 = 1; var_0 <= level.gns_num_of_wave; var_0++) {
     level.available_formations[var_0] = [];
+  }
 }
 
 init_formation_movements() {
-  if(isDefined(level.init_formation_movement_func))
+  if(isDefined(level.init_formation_movement_func)) {
     [[level.init_formation_movement_func]]();
-  else
+  } else {
     init_formation_movements_default();
+  }
 }
 
 init_formation_movements_default() {
@@ -76,8 +78,9 @@ stop_using_entangler(var_0) {
   var_0 scripts\engine\utility::allow_weapon_switch(1);
   var_0 takeweapon("iw7_entangler_zm");
 
-  if(!var_0 hasweapon(var_0.weapon_before_entangler))
+  if(!var_0 hasweapon(var_0.weapon_before_entangler)) {
     var_0 scripts\cp\utility::_giveweapon(var_0.weapon_before_entangler, undefined, undefined, 1);
+  }
 
   var_0 switchtoweapon(var_0.weapon_before_entangler);
   var_0 scripts\cp\powers\coop_powers::restore_powers(var_0, var_0.powers_before_entangler);
@@ -101,8 +104,9 @@ entangler_hit_monitor(var_0) {
         var_3 = min(var_1 / get_entangler_track_time(), 1);
         record_entangler_progress_percent(var_0, var_3);
 
-        if(var_3 == 1 && isalive(var_0.current_entangler_target) && !scripts\aitypes\zombie_ghost\behaviors::isentangled(var_0.current_entangler_target) && !isDefined(var_0.ghost_in_entanglement))
+        if(var_3 == 1 && isalive(var_0.current_entangler_target) && !scripts\aitypes\zombie_ghost\behaviors::isentangled(var_0.current_entangler_target) && !isDefined(var_0.ghost_in_entanglement)) {
           var_0.current_entangler_target scripts\aitypes\zombie_ghost\behaviors::entangleghost(var_0.current_entangler_target, var_0);
+        }
 
         continue;
       }
@@ -212,8 +216,9 @@ ghost_trail_to_scu(var_0, var_1, var_2) {
 
 clear_up_previous_scu(var_0) {
   if(isDefined(var_0.deployed_scu)) {
-    if(isDefined(var_0.deployed_scu.light_fx))
+    if(isDefined(var_0.deployed_scu.light_fx)) {
       var_0.deployed_scu.light_fx delete();
+    }
 
     var_0.deployed_scu delete();
   }
@@ -225,13 +230,15 @@ scu_vfx_manager(var_0, var_1) {
   var_0.light_fx = spawnfx(level._effect["zombie_ghost_scu"], var_0.origin);
   scripts\engine\utility::waitframe();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     triggerfx(var_0.light_fx);
+  }
 }
 
 ghost_can_be_contained(var_0, var_1) {
-  if(distancesquared(var_0.origin, var_1.origin) < 6400)
+  if(distancesquared(var_0.origin, var_1.origin) < 6400) {
     return 1;
+  }
 
   return 0;
 }
@@ -250,11 +257,13 @@ init_ghost_spawn_loc() {
 }
 
 spawn_zombie_ghost(var_0, var_1, var_2) {
-  if(!isDefined(level.zombie_ghosts))
+  if(!isDefined(level.zombie_ghosts)) {
     level.zombie_ghosts = [];
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "axis";
+  }
 
   var_3 = scripts\mp\mp_agent::spawnnewagent("zombie_ghost", var_2, var_0, var_1);
   level.zombie_ghosts[level.zombie_ghosts.size] = var_3;
@@ -289,23 +298,29 @@ ghosts_attack_logic() {
 }
 
 can_be_attacked_by_ghost(var_0) {
-  if(var_0 scripts\cp\utility::isignoremeenabled())
+  if(var_0 scripts\cp\utility::isignoremeenabled()) {
     return 0;
+  }
 
-  if(scripts\cp\cp_laststand::player_in_laststand(var_0))
+  if(scripts\cp\cp_laststand::player_in_laststand(var_0)) {
     return 0;
+  }
 
-  if(scripts\mp\agents\zombie\zombie_util::isplayerteleporting(var_0))
+  if(scripts\mp\agents\zombie\zombie_util::isplayerteleporting(var_0)) {
     return 0;
+  }
 
-  if(!isalive(var_0))
+  if(!isalive(var_0)) {
     return 0;
+  }
 
-  if(get_num_of_ghosts_attacking_me(var_0) > get_max_num_ghosts_per_player())
+  if(get_num_of_ghosts_attacking_me(var_0) > get_max_num_ghosts_per_player()) {
     return 0;
+  }
 
-  if(time_since_last_ghost_attack(var_0) < get_min_player_attack_by_frequency())
+  if(time_since_last_ghost_attack(var_0) < get_min_player_attack_by_frequency()) {
     return 0;
+  }
 
   return 1;
 }
@@ -319,19 +334,23 @@ get_min_player_attack_by_frequency() {
 }
 
 can_attack() {
-  if(is_ghost_attack_disabled())
+  if(is_ghost_attack_disabled()) {
     return 0;
+  }
 
   var_0 = self;
 
-  if(scripts\aitypes\zombie_ghost\behaviors::isentangled(var_0))
+  if(scripts\aitypes\zombie_ghost\behaviors::isentangled(var_0)) {
     return 0;
+  }
 
-  if(var_0 scripts\aitypes\zombie_ghost\behaviors::getghostnavmode() == "attack")
+  if(var_0 scripts\aitypes\zombie_ghost\behaviors::getghostnavmode() == "attack") {
     return 0;
+  }
 
-  if(time_since_last_attack(var_0) < 7)
+  if(time_since_last_attack(var_0) < 7) {
     return 0;
+  }
 
   return 1;
 }
@@ -341,22 +360,25 @@ is_ghost_attack_disabled() {
 }
 
 get_num_of_ghosts_attacking_me(var_0) {
-  if(!isDefined(var_0.num_of_ghosts_attacking_me))
+  if(!isDefined(var_0.num_of_ghosts_attacking_me)) {
     var_0.num_of_ghosts_attacking_me = 0;
+  }
 
   return var_0.num_of_ghosts_attacking_me;
 }
 
 time_since_last_ghost_attack(var_0) {
-  if(!isDefined(var_0.last_ghost_attack_time))
+  if(!isDefined(var_0.last_ghost_attack_time)) {
     var_0.last_ghost_attack_time = 0;
+  }
 
   return (gettime() - var_0.last_ghost_attack_time) / 1000;
 }
 
 time_since_last_attack(var_0) {
-  if(!isDefined(var_0.last_attack_time))
+  if(!isDefined(var_0.last_attack_time)) {
     var_0.last_attack_time = 0;
+  }
 
   return (gettime() - var_0.last_attack_time) / 1000;
 }
@@ -404,21 +426,25 @@ start_ghost_wave() {
   level thread start_ghosts_spawning();
   level thread player_connect_monitor();
 
-  if(isDefined(level.gns_start_func))
+  if(isDefined(level.gns_start_func)) {
     [[level.gns_start_func]]();
+  }
 
-  foreach(var_1 in level.players)
-  enter_ghosts_n_skulls(var_1);
+  foreach(var_1 in level.players) {
+    enter_ghosts_n_skulls(var_1);
+  }
 }
 
 play_start_ghost_vo_to_players() {
-  foreach(var_1 in level.players)
-  var_1 thread scripts\cp\cp_vo::try_to_play_vo("ghost_start", "zmb_comment_vo", "low", 3, 0, 0, 1);
+  foreach(var_1 in level.players) {
+    var_1 thread scripts\cp\cp_vo::try_to_play_vo("ghost_start", "zmb_comment_vo", "low", 3, 0, 0, 1);
+  }
 }
 
 enter_ghosts_n_skulls(var_0) {
-  if(isDefined(level.enter_ghosts_n_skulls_func))
+  if(isDefined(level.enter_ghosts_n_skulls_func)) {
     [[level.enter_ghosts_n_skulls_func]](var_0);
+  }
 
   var_0.dontremoveperks = 1;
   var_0 scripts\cp\cp_laststand::enable_self_revive(var_0);
@@ -437,8 +463,9 @@ enter_ghosts_n_skulls(var_0) {
   var_0 store_and_reset_currency(var_0);
   var_0 allowmelee(0);
 
-  if(isDefined(level.gns_laststand_monitor))
+  if(isDefined(level.gns_laststand_monitor)) {
     var_0 thread[[level.gns_laststand_monitor]](var_0);
+  }
 }
 
 player_connect_monitor() {
@@ -456,8 +483,9 @@ delay_enter_ghosts_n_skulls(var_0) {
   level endon("delay_end_ghost");
   var_0 endon("disconnect");
 
-  if(isDefined(level.gns_hotjoin_wait_notify))
+  if(isDefined(level.gns_hotjoin_wait_notify)) {
     var_0 waittill(level.gns_hotjoin_wait_notify);
+  }
 
   wait 5.0;
   enter_ghosts_n_skulls(var_0);
@@ -531,8 +559,9 @@ end_ghost_sequence(var_0) {
   var_0.playing_ghosts_n_skulls = undefined;
   var_0 allowmelee(1);
 
-  if(isDefined(level.end_ghosts_n_skulls_func))
+  if(isDefined(level.end_ghosts_n_skulls_func)) {
     [[level.end_ghosts_n_skulls_func]](var_0);
+  }
 }
 
 start_ghosts_spawning() {
@@ -585,8 +614,9 @@ moving_targets_sequence() {
       level.ghostskulls_total_waves++;
       run_moving_target_wave(var_0, var_1);
 
-      if(isDefined(level.complete_one_gns_wave_func))
+      if(isDefined(level.complete_one_gns_wave_func)) {
         level thread[[level.complete_one_gns_wave_func]]();
+      }
 
       continue;
     }
@@ -607,8 +637,9 @@ run_moving_target_wave(var_0, var_1) {
   activate_death_grid_lines_and_trigger();
   level thread moving_targets_attack_logic();
 
-  if(isDefined(level.moving_target_activation_func))
+  if(isDefined(level.moving_target_activation_func)) {
     level thread[[level.moving_target_activation_func]](var_0);
+  }
 
   var_2 = get_wave_move_time(var_0);
   var_3 = get_wave_wait_time_between_group(var_0);
@@ -628,8 +659,9 @@ move_group(var_0, var_1, var_2, var_3) {
   var_4 = get_group_move_direction(var_0);
   var_5 = get_active_moving_target_in_group(var_1);
 
-  if(isDefined(var_5) && isDefined(var_5.origin))
+  if(isDefined(var_5) && isDefined(var_5.origin)) {
     try_advance_death_grid_lines_and_trigger(var_5.origin + var_4);
+  }
 
   foreach(var_7 in var_1) {
     if(!isDefined(var_7)) {
@@ -668,8 +700,9 @@ reset_moving_target_wave_data() {
   level.num_moving_target_escaped = 0;
   update_num_targets_escaped_hud();
 
-  if(isDefined(level.reset_moving_target_wave_data))
+  if(isDefined(level.reset_moving_target_wave_data)) {
     [[level.reset_moving_target_wave_data]]();
+  }
 }
 
 moving_target_intro_sequence(var_0, var_1) {
@@ -678,8 +711,9 @@ moving_target_intro_sequence(var_0, var_1) {
     level.moving_target_groups[level.moving_target_groups.size] = var_4;
   }
 
-  foreach(var_7, var_4 in level.moving_target_groups)
-  level.moving_target_pattern[var_7] = get_moving_target_pattern(var_1, var_4);
+  foreach(var_7, var_4 in level.moving_target_groups) {
+    level.moving_target_pattern[var_7] = get_moving_target_pattern(var_1, var_4);
+  }
 
   wait 1.0;
 }
@@ -711,8 +745,9 @@ spawn_moving_target(var_0) {
   var_2.script_parameters = var_0.script_parameters;
   var_2.angles_to_face_when_activated = var_0.angles;
 
-  if(isDefined(level.assign_moving_target_flags_func))
+  if(isDefined(level.assign_moving_target_flags_func)) {
     [[level.assign_moving_target_flags_func]](var_0, var_2);
+  }
 
   var_2 moveTo(var_0.origin, 1.0);
   var_3 = var_0.script_noteworthy;
@@ -721,17 +756,19 @@ spawn_moving_target(var_0) {
 }
 
 get_moving_target_model() {
-  if(isDefined(level.gns_moving_target_model))
+  if(isDefined(level.gns_moving_target_model)) {
     return level.gns_moving_target_model;
+  }
 
   return "zmb_pixel_skull";
 }
 
 activate_moving_targets(var_0) {
-  if(isDefined(level.activate_moving_targets_func))
+  if(isDefined(level.activate_moving_targets_func)) {
     [[level.activate_moving_targets_func]](var_0);
-  else
+  } else {
     activate_moving_targets_default(var_0);
+  }
 }
 
 activate_moving_targets_default(var_0) {
@@ -744,8 +781,9 @@ activate_moving_targets_default(var_0) {
 
   wait 1.0;
 
-  if(isDefined(level.post_moving_target_rotate_func))
+  if(isDefined(level.post_moving_target_rotate_func)) {
     level thread[[level.post_moving_target_rotate_func]]();
+  }
 
   foreach(var_2 in level.moving_target_groups) {
     foreach(var_4 in var_2)[[level.set_moving_target_color_func]](var_4, var_0);
@@ -804,8 +842,9 @@ start_ghost_portal_vfx() {
 }
 
 stop_ghost_portal_vfx() {
-  if(isDefined(level.ghost_portal_vfx))
+  if(isDefined(level.ghost_portal_vfx)) {
     level.ghost_portal_vfx delete();
+  }
 }
 
 activate_red_moving_target(var_0) {
@@ -814,8 +853,9 @@ activate_red_moving_target(var_0) {
   set_moving_target_color(var_0, "red");
   var_1 = var_0 scripts\engine\utility::waittill_any_timeout_no_endon_death(level.moving_target_pre_fly_time, "death");
 
-  if(var_1 == "timeout")
+  if(var_1 == "timeout") {
     var_0 fly_back_into_portal(var_0);
+  }
 }
 
 set_moving_target_color(var_0, var_1) {
@@ -853,8 +893,9 @@ moving_targets_attack_logic() {
 }
 
 get_moving_target_attack_interval() {
-  if(isDefined(level.moving_target_attack_interval))
+  if(isDefined(level.moving_target_attack_interval)) {
     return level.moving_target_attack_interval;
+  }
 
   return 1500;
 }
@@ -871,15 +912,17 @@ shoot_8bit_lasers(var_0, var_1) {
 }
 
 select_moving_target_player_pair(var_0) {
-  if(var_0.size == 0)
+  if(var_0.size == 0) {
     return undefined;
+  }
 
   var_1 = spawnStruct();
   var_2 = [];
 
   foreach(var_4 in var_0) {
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_2[var_2.size] = var_4;
+    }
   }
 
   var_2 = scripts\engine\utility::array_randomize(var_2);
@@ -918,8 +961,9 @@ stop_moving_targets_sequence() {
 
   foreach(var_1 in level.moving_target_groups) {
     foreach(var_3 in var_1) {
-      if(isDefined(var_3))
+      if(isDefined(var_3)) {
         var_3 delete();
+      }
     }
   }
 
@@ -927,11 +971,13 @@ stop_moving_targets_sequence() {
 }
 
 purge_undefined_from_moving_target_array() {
-  foreach(var_2, var_1 in level.moving_target_groups)
-  level.moving_target_groups[var_2] = scripts\engine\utility::array_removeundefined(var_1);
+  foreach(var_2, var_1 in level.moving_target_groups) {
+    level.moving_target_groups[var_2] = ::scripts\engine\utility::array_removeundefined(var_1);
+  }
 
-  foreach(var_4, var_1 in level.moving_target_priority)
-  level.moving_target_priority[var_4] = scripts\engine\utility::array_removeundefined(var_1);
+  foreach(var_4, var_1 in level.moving_target_priority) {
+    level.moving_target_priority[var_4] = ::scripts\engine\utility::array_removeundefined(var_1);
+  }
 }
 
 game_won_sequence() {
@@ -944,8 +990,9 @@ delay_end_ghost_when_won() {
   level.ghostskulls_complete_status = 1;
   scripts\cp\zombies\zombie_analytics::log_player_exits_ghostskulls_games(level.ghostskulls_total_waves, level.ghostskulls_complete_status, (gettime() - level.ghostskullstimestart) / 1000);
 
-  if(isDefined(level.gns_reward_func))
+  if(isDefined(level.gns_reward_func)) {
     level thread[[level.gns_reward_func]]();
+  }
 }
 
 delay_end_ghost(var_0) {
@@ -956,28 +1003,33 @@ delay_end_ghost(var_0) {
   show_ghost_arcade_scores(var_0);
   stop_death_trigger_monitor();
 
-  if(isDefined(level.pre_gns_end_func))
+  if(isDefined(level.pre_gns_end_func)) {
     level thread[[level.pre_gns_end_func]]();
+  }
 
   wait 5;
 
-  foreach(var_2 in level.players)
-  var_2 thread end_ghost_sequence(var_2);
+  foreach(var_2 in level.players) {
+    var_2 thread end_ghost_sequence(var_2);
+  }
 
   scripts\engine\utility::waitframe();
   reset_death_grid_lines_and_trigger();
   level.gns_active = 0;
 
-  if(var_0 == 2)
+  if(var_0 == 2) {
     level notify("end_this_thread_of_gns_fnf_card");
+  }
 
-  if(isDefined(level.gns_end_func))
+  if(isDefined(level.gns_end_func)) {
     [[level.gns_end_func]]();
+  }
 }
 
 _id_8E9F() {
-  foreach(var_1 in level.players)
-  var_1 thread hide_entangler_hud(var_1);
+  foreach(var_1 in level.players) {
+    var_1 thread hide_entangler_hud(var_1);
+  }
 }
 
 hide_entangler_hud(var_0) {
@@ -1023,8 +1075,9 @@ should_be_removed_for_gns(var_0) {
 }
 
 restore_all_previous_perks(var_0) {
-  foreach(var_2 in var_0.pre_ghost_perks)
-  var_0 scripts\cp\zombies\zombies_perk_machines::give_zombies_perk(var_2, 0);
+  foreach(var_2 in var_0.pre_ghost_perks) {
+    var_0 scripts\cp\zombies\zombies_perk_machines::give_zombies_perk(var_2, 0);
+  }
 }
 
 display_objective_message(var_0) {
@@ -1059,8 +1112,9 @@ active_moving_target_available() {
 get_num_of_active_moving_target() {
   var_0 = 0;
 
-  foreach(var_2 in level.moving_target_priority)
-  var_0 = var_0 + var_2.size;
+  foreach(var_2 in level.moving_target_priority) {
+    var_0 = var_0 + var_2.size;
+  }
 
   return var_0;
 }
@@ -1072,8 +1126,9 @@ get_group_move_direction(var_0) {
   if(var_1.size > 1) {
     var_3 = [];
 
-    for(var_4 = 1; var_4 < var_1.size; var_4++)
+    for(var_4 = 1; var_4 < var_1.size; var_4++) {
       var_3[var_3.size] = var_1[var_4];
+    }
 
     var_3[var_3.size] = var_2;
     level.moving_target_pattern[var_0] = var_3;
@@ -1083,10 +1138,11 @@ get_group_move_direction(var_0) {
 }
 
 get_wave_move_time(var_0) {
-  if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player))
+  if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player)) {
     return level.moving_target_wave_info[var_0].solo_move_time;
-  else
+  } else {
     return level.moving_target_wave_info[var_0].move_time;
+  }
 }
 
 get_wave_wait_time_between_group(var_0) {
@@ -1118,14 +1174,17 @@ translate_direction_to_vector(var_0) {
 }
 
 get_active_moving_target_based_on_priority() {
-  if(level.moving_target_priority["high"].size > 0)
+  if(level.moving_target_priority["high"].size > 0) {
     return scripts\engine\utility::random(level.moving_target_priority["high"]);
+  }
 
-  if(level.moving_target_priority["medium"].size > 0)
+  if(level.moving_target_priority["medium"].size > 0) {
     return scripts\engine\utility::random(level.moving_target_priority["medium"]);
+  }
 
-  if(level.moving_target_priority["low"].size > 0)
+  if(level.moving_target_priority["low"].size > 0) {
     return scripts\engine\utility::random(level.moving_target_priority["low"]);
+  }
 
   return undefined;
 }
@@ -1149,8 +1208,9 @@ display_target_escaped_message() {
 }
 
 display_skull_escaped_message() {
-  foreach(var_1 in level.players)
-  var_1 thread display_ghost_arcade_message(var_1, get_skull_escaped_message_id(), 4);
+  foreach(var_1 in level.players) {
+    var_1 thread display_ghost_arcade_message(var_1, get_skull_escaped_message_id(), 4);
+  }
 }
 
 get_skull_escaped_message_id() {
@@ -1165,21 +1225,25 @@ get_skull_escaped_message_id() {
 }
 
 update_num_targets_escaped_hud() {
-  foreach(var_1 in level.players)
-  var_1 setclientomnvar("zm_ui_num_targets_escaped", level.num_moving_target_escaped);
+  foreach(var_1 in level.players) {
+    var_1 setclientomnvar("zm_ui_num_targets_escaped", level.num_moving_target_escaped);
+  }
 }
 
 remove_undefined_from_moving_target_array(var_0) {
-  foreach(var_3, var_2 in level.moving_target_groups)
-  level.moving_target_groups[var_3] = scripts\engine\utility::array_remove(var_2, var_0);
+  foreach(var_3, var_2 in level.moving_target_groups) {
+    level.moving_target_groups[var_3] = ::scripts\engine\utility::array_remove(var_2, var_0);
+  }
 
-  foreach(var_5, var_2 in level.moving_target_priority)
-  level.moving_target_priority[var_5] = scripts\engine\utility::array_remove(var_2, var_0);
+  foreach(var_5, var_2 in level.moving_target_priority) {
+    level.moving_target_priority[var_5] = ::scripts\engine\utility::array_remove(var_2, var_0);
+  }
 }
 
 determine_game_fail() {
-  if(level.num_moving_target_escaped >= 3)
+  if(level.num_moving_target_escaped >= 3) {
     level thread delay_end_ghost_wave_on_fail();
+  }
 }
 
 delay_end_ghost_wave_on_fail() {
@@ -1191,13 +1255,15 @@ delay_end_ghost_wave_on_fail() {
   level.processing_ghost_wave_failing = 1;
   level.ghostskulls_complete_status = 0;
 
-  foreach(var_1 in level.players)
-  var_1 thread scripts\cp\cp_vo::try_to_play_vo("ghost_end", "zmb_comment_vo", "highest", 3, 0, 0, 1);
+  foreach(var_1 in level.players) {
+    var_1 thread scripts\cp\cp_vo::try_to_play_vo("ghost_end", "zmb_comment_vo", "highest", 3, 0, 0, 1);
+  }
 
   scripts\cp\zombies\zombie_analytics::log_player_exits_ghostskulls_games(level.ghostskulls_total_waves, level.ghostskulls_complete_status, (gettime() - level.ghostskullstimestart) / 1000);
 
-  if(isDefined(level.ghost_n_skull_reactivate_func))
+  if(isDefined(level.ghost_n_skull_reactivate_func)) {
     level thread[[level.ghost_n_skull_reactivate_func]]();
+  }
 
   delay_end_ghost(2);
 }
@@ -1226,8 +1292,9 @@ turn_off_ghost_arcade_hud(var_0) {
 
 show_ghost_arcade_scores(var_0) {
   foreach(var_2 in level.players) {
-    if(scripts\engine\utility::is_true(var_2.playing_ghosts_n_skulls))
+    if(scripts\engine\utility::is_true(var_2.playing_ghosts_n_skulls)) {
       turn_on_ghost_arcade_scores(var_2, var_0);
+    }
   }
 }
 
@@ -1240,7 +1307,7 @@ turn_off_ghost_arcade_scores(var_0) {
 }
 
 register_available_formation(var_0, var_1) {
-  level.available_formations[var_0] = scripts\engine\utility::array_add(level.available_formations[var_0], var_1);
+  level.available_formations[var_0] = ::scripts\engine\utility::array_add(level.available_formations[var_0], var_1);
 }
 
 register_formation_movements(var_0, var_1) {
@@ -1303,18 +1370,20 @@ advance_death_grid_lines_and_trigger() {
   var_2 = var_1 + 217;
   var_3 = level.death_trigger_activate_y_pos + 217 * get_max_num_of_death_trigger_advance();
 
-  if(var_2 >= var_3)
+  if(var_2 >= var_3) {
     level thread delay_end_ghost_wave_on_fail();
+  }
 
   level.current_death_grid_lines_front_y_pos = level.current_death_grid_lines_front_y_pos + 217;
   set_death_grid_lines_and_trigger_y_pos(var_2);
 }
 
 get_max_num_of_death_trigger_advance() {
-  if(isDefined(level.max_num_of_death_trigger_advance))
+  if(isDefined(level.max_num_of_death_trigger_advance)) {
     return level.max_num_of_death_trigger_advance;
-  else
+  } else {
     return 13;
+  }
 }
 
 set_death_grid_lines_and_trigger_y_pos(var_0) {
@@ -1504,8 +1573,9 @@ earn_all_perks(var_0) {
   var_0 endon("disconnect");
   var_1 = ["perk_machine_boom", "perk_machine_flash", "perk_machine_fwoosh", "perk_machine_more", "perk_machine_rat_a_tat", "perk_machine_revive", "perk_machine_run", "perk_machine_smack", "perk_machine_tough", "perk_machine_zap"];
 
-  if(isDefined(level.all_perk_list))
+  if(isDefined(level.all_perk_list)) {
     var_1 = level.all_perk_list;
+  }
 
   foreach(var_3 in var_1) {
     if(var_0 scripts\cp\utility::has_zombie_perk(var_3)) {
@@ -1520,8 +1590,9 @@ notify_activation_progress(var_0, var_1) {
   level thread update_num_of_coin_inserted(var_0);
 
   if(soundexists("ghosts_quest_step_notify")) {
-    foreach(var_3 in level.players)
-    var_3 playlocalsound("ghosts_quest_step_notify");
+    foreach(var_3 in level.players) {
+      var_3 playlocalsound("ghosts_quest_step_notify");
+    }
   }
 }
 
@@ -1537,8 +1608,9 @@ update_num_of_coin_inserted(var_0, var_1) {
     }
   }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
   setomnvar("zm_num_ghost_n_skull_coin", var_0);
   level.skulls_before_activation = var_0;

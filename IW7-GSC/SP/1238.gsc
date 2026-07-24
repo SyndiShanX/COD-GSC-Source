@@ -15,8 +15,9 @@ main() {
   self.voice = "setdef";
   self _meth_82C6("vestlight");
 
-  if(issentient(self))
+  if(issentient(self)) {
     self sethitlocdamagetable("locdmgtable/ai_lochit_dmgtable");
+  }
 
   self._id_8E1A = level._id_7649["iw7/prop/vfx_sdf_army_ftl_helmet_split"];
 

@@ -46,8 +46,9 @@ _id_83DD() {
   scripts\sp\utility::_id_F44E(1);
   level._id_1307 = 1;
 
-  if(!isDefined(level._id_7649))
+  if(!isDefined(level._id_7649)) {
     level._id_7649 = [];
+  }
 
   thread _id_579A();
 }
@@ -88,7 +89,8 @@ _id_51C4() {
     scripts\sp\utility::_id_51D5("nanoshot_pickup", "script_noteworthy");
     var_0 = getEntArray("specialist_mode_only", "targetname");
 
-    if(isDefined(var_0) && isarray(var_0) && var_0.size > 0)
+    if(isDefined(var_0) && isarray(var_0) && var_0.size > 0) {
       scripts\sp\utility::_id_228A(var_0);
+    }
   }
 }

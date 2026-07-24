@@ -6,9 +6,9 @@
 #using_animtree("generic_human");
 
 main() {
-  if(getdvarint("ai_iw7", 0) == 1)
+  if(getdvarint("ai_iw7", 0) == 1) {
     self waittill("killanimscript");
-  else {
+  } else {
     self._id_5270 = "stand";
     scripts\anim\utility::_id_12E5F();
     self endon("killanimscript");

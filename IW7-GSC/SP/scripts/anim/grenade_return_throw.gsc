@@ -20,20 +20,23 @@ main() {
   var_0 = undefined;
   var_1 = 1000;
 
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     var_1 = distance(self.origin, self.enemy.origin);
+  }
 
   var_2 = [];
 
   if(var_1 < 600 && _id_9E8C()) {
-    if(var_1 < 300)
+    if(var_1 < 300) {
       var_2 = scripts\anim\utility::_id_B027("grenade", "return_throw_short");
-    else
+    } else {
       var_2 = scripts\anim\utility::_id_B027("grenade", "return_throw_long");
+    }
   }
 
-  if(var_2.size == 0)
+  if(var_2.size == 0) {
     var_2 = scripts\anim\utility::_id_B027("grenade", "return_throw_default");
+  }
 
   var_0 = var_2[randomint(var_2.size)];
   self _meth_82E4("throwanim", var_0, %body, 1, 0.3);
@@ -54,8 +57,9 @@ main() {
     scripts\anim\battlechatter_ai::_id_67CF("frag");
   }
 
-  if(isDefined(self.grenade))
+  if(isDefined(self.grenade)) {
     self _meth_83C2();
+  }
 
   wait 1;
 

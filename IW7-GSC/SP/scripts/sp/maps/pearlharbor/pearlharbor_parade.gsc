@@ -78,8 +78,9 @@ _id_13273() {
 
   scripts\engine\utility::waitframe();
 
-  foreach(var_6 in var_3)
-  var_6 thread scripts\sp\anim::_id_1EEA(var_6, "intro", "stop_vengeance_idles");
+  foreach(var_6 in var_3) {
+    var_6 thread scripts\sp\anim::_id_1EEA(var_6, "intro", "stop_vengeance_idles");
+  }
 
   level._id_D03A waittill("reached_dynamic_path_end");
   wait 5;
@@ -134,8 +135,9 @@ _id_10CCD(var_0) {
   foreach(var_2 in level._id_C8D8) {
     var_3 = getvehiclenode(var_2.script_parameters + "_" + var_0, "targetname");
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       var_3 = getvehiclenode(var_2.target, "targetname");
+    }
 
     if(isDefined(var_2.script_noteworthy)) {
       var_2._id_C121 = strtok(var_2.script_noteworthy, ",");
@@ -174,8 +176,9 @@ _id_D211(var_0) {
   level.player disableweapons();
   var_1 = 1;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = 0;
+  }
 
   level.player _meth_823C(level._id_D267, "tag_player", var_1);
   wait 1;
@@ -194,15 +197,17 @@ _id_892C() {
   while(!scripts\engine\utility::flag("kill_handle_scripts")) {
     var_1 = level.player _meth_814B();
 
-    if(var_1[1] >= 0.3)
+    if(var_1[1] >= 0.3) {
       var_0 = scripts\sp\math::_id_6A8E(0, 1, scripts\sp\math::_id_C097(0, 1, var_1[1])) * -1;
-    else if(var_1[1] <= -0.3)
+    } else if(var_1[1] <= -0.3) {
       var_0 = scripts\sp\math::_id_6A8E(-1, 0, scripts\sp\math::_id_C097(-1, 0, var_1[1])) * -1;
-    else
+    } else {
       var_0 = 0;
+    }
 
-    if(var_0 < 0 && self islegacyagent(%ph_parade_dropship_plr) <= 0.05)
+    if(var_0 < 0 && self islegacyagent(%ph_parade_dropship_plr) <= 0.05) {
       var_0 = 0;
+    }
 
     self _meth_82B1(%ph_parade_dropship_plr, var_0);
     wait 0.05;
@@ -220,19 +225,22 @@ _id_10484() {
   if(isDefined(var_0.animation)) {
     var_1 = var_0;
 
-    if(isDefined(var_0.script_linkto))
+    if(isDefined(var_0.script_linkto)) {
       var_1 = scripts\engine\utility::getStruct(var_0.script_linkto, "script_linkname");
+    }
 
     var_1 thread scripts\sp\anim::_id_1ECC(self, var_0.animation);
   }
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     self waittill("reached_path_end");
+  }
 
   var_2 = self._id_A905;
 
-  if(isDefined(var_2) && isDefined(var_2.animation))
+  if(isDefined(var_2) && isDefined(var_2.animation)) {
     var_2 thread scripts\sp\anim::_id_1ECC(self, var_2.animation);
+  }
 
   wait 15;
   scripts\engine\utility::flag_set("delete_roof_guys");

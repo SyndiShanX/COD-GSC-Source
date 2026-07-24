@@ -18,8 +18,9 @@ _id_3535() {
 
     var_1 = isexplosivedamagemod(self.damagemod);
 
-    if(var_0)
+    if(var_0) {
       _id_3559(1);
+    }
   }
 }
 
@@ -35,16 +36,19 @@ _id_3620() {
     var_4 = 0;
 
     foreach(var_6 in var_0) {
-      if(isexplosivedamagemod(var_6.type))
+      if(isexplosivedamagemod(var_6.type)) {
         var_2 = var_2 + var_6.amount;
+      }
 
       var_1 = var_1 + var_6.amount;
 
-      if(self _meth_850C(var_6.partname, var_6.subpartname) <= 0)
+      if(self _meth_850C(var_6.partname, var_6.subpartname) <= 0) {
         var_3 = 1;
+      }
 
-      if(var_6.type != "MOD_IMPACT")
+      if(var_6.type != "MOD_IMPACT") {
         var_4 = 1;
+      }
     }
 
     if(!isDefined(self._blackboard._id_2ABA) && var_4) {
@@ -53,8 +57,9 @@ _id_3620() {
     } else
       var_8 = var_2 > 50 || var_3;
 
-    if(var_8)
+    if(var_8) {
       _id_3559(1);
+    }
   }
 }
 
@@ -78,8 +83,9 @@ _id_3559(var_0) {
       }
       var_5 = anim.asm[var_6].states[var_4._id_C87F];
 
-      if(var_0)
+      if(var_0) {
         self._blackboard._id_A983 = gettime();
+      }
 
       self._blackboard.timeoff = gettime();
       scripts\asm\asm::asm_setstate(var_4._id_C87F);
@@ -104,15 +110,17 @@ _id_3EE4(var_0, var_1, var_2) {
   var_3 = self._blackboard._id_A983 == gettime();
   var_4 = _id_0A1E::_id_7E5A();
 
-  if(var_3)
+  if(var_3) {
     var_5 = var_4;
-  else
+  } else {
     var_5 = var_4 + "_small";
+  }
 
   var_6 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_5);
 
-  if(!var_3 || _id_8C21(var_6))
+  if(!var_3 || _id_8C21(var_6)) {
     return var_6;
+  }
 
   return _id_0A1E::_id_2356(var_1, "default");
 }
@@ -164,16 +172,17 @@ _id_8C21(var_0) {
   var_3 = rotatevector(var_1, self.angles);
   var_4 = var_2 + var_3;
 
-  if(self maymovefrompointtopoint(var_2, var_4, 0, 1))
+  if(self maymovefrompointtopoint(var_2, var_4, 0, 1)) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_3527(var_0, var_1, var_2) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_2);
-  else {
+  } else {
     var_3 = _id_0A1E::_id_7E5A();
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
   }
@@ -182,11 +191,13 @@ _id_3527(var_0, var_1, var_2) {
 _id_35D7(var_0, var_1, var_2, var_3) {
   self stoploopsound();
 
-  if(isDefined(self.bt._id_71C9))
+  if(isDefined(self.bt._id_71C9)) {
     [[self.bt._id_71C9]]();
+  }
 
-  if(isDefined(self._id_E601))
+  if(isDefined(self._id_E601)) {
     self._id_E601 delete();
+  }
 
   if(isDefined(self.asm._id_F1FD)) {
     _id_F1FD();
@@ -201,22 +212,25 @@ _id_35D7(var_0, var_1, var_2, var_3) {
   if(isDefined(self._id_4E46)) {
     var_4 = self[[self._id_4E46]]();
 
-    if(!isDefined(var_4))
+    if(!isDefined(var_4)) {
       var_4 = 1;
+    }
 
-    if(var_4)
+    if(var_4) {
       return;
+    }
   }
 
-  if(isDefined(self._id_4E2A))
+  if(isDefined(self._id_4E2A)) {
     var_5 = self._id_4E2A;
-  else {
+  } else {
     var_6 = anim.asm[var_0].states[var_1]._id_71A5;
     var_5 = self[[var_6]](var_0, var_1, var_3);
   }
 
-  if(!isDefined(self.asm._id_4E73))
+  if(!isDefined(self.asm._id_4E73)) {
     self _meth_824A("vox_c12_death", "vox_c12_death", 1);
+  }
 
   playFXOnTag(level._id_7649["c12_implode_buildup"], self, "j_spinelowerbottom");
   self clearanim(_id_0A1E::_id_2342(), var_2);
@@ -240,8 +254,9 @@ _id_F1FD() {
   _id_35FD();
   scripts\engine\utility::waitframe();
 
-  if(isDefined(self.bt._id_71C9))
+  if(isDefined(self.bt._id_71C9)) {
     [[self.bt._id_71C9]]();
+  }
 
   var_0 = self.origin + (0, 0, 60);
   radiusdamage(var_0 + (0, 0, 32), 512, 150, 20, self);
@@ -269,8 +284,9 @@ _id_35A5() {
 _id_35FD() {
   var_0 = [];
 
-  if(self getscriptablepartstate("head") == "rodeofinal")
+  if(self getscriptablepartstate("head") == "rodeofinal") {
     var_0[var_0.size] = "head";
+  }
 
   _id_3539("selfdestruct");
 }
@@ -279,14 +295,16 @@ _id_3539(var_0, var_1) {
   var_2 = ["head", "torso", "left_arm", "right_arm", "left_leg", "right_leg", "hip_pack_left", "hip_pack_right"];
 
   if(isDefined(self.asm._id_4E73)) {
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       var_1 = [];
+    }
 
     var_1 = scripts\engine\utility::array_combine(var_1, ["head", "torso", "left_arm", "right_arm", "hip_pack_left", "hip_pack_right"]);
   }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = scripts\engine\utility::array_remove_array(var_2, var_1);
+  }
 
   foreach(var_4 in var_2) {
     if(self getscriptablepartstate(var_4) == "dismember") {

@@ -7,11 +7,13 @@ _id_49FE(var_0, var_1, var_2) {
   var_3 = scripts\sp\utility::_id_10639("door_player_rig");
   var_0 thread scripts\sp\anim::_id_1EC3(var_3, var_1);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
-  if(var_2)
+  if(var_2) {
     var_3 hide();
+  }
 
   return var_3;
 }
@@ -54,24 +56,28 @@ _id_6229() {
 }
 
 _id_5B35(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "tag_origin";
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = (0, 0, 0);
+  }
 
   _id_0E46::_id_48C4(var_0, var_1, &"SHIPCRIB_USETERMINAL");
   _id_0E46::_id_9016();
 }
 
 _id_137D5(var_0) {
-  while(distance(self.origin, level.player.origin) > var_0)
+  while(distance(self.origin, level.player.origin) > var_0) {
     wait 0.1;
+  }
 }
 
 _id_DD33(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 256;
+  }
 
   while(!scripts\engine\utility::flag(var_2)) {
     scripts\engine\utility::waitframe();
@@ -84,8 +90,9 @@ _id_DD33(var_0, var_1, var_2, var_3) {
 }
 
 _id_DD34(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 256;
+  }
 
   var_4 = var_0.origin + (0, 0, 64);
 
@@ -107,8 +114,9 @@ _id_F70A(var_0, var_1) {
 }
 
 _id_F709(var_0, var_1) {
-  while(distance(level.player.origin, self.origin) > var_1)
+  while(distance(level.player.origin, self.origin) > var_1) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::flag_set(var_0);
 }
@@ -116,8 +124,9 @@ _id_F709(var_0, var_1) {
 _id_49E5(var_0, var_1, var_2) {}
 
 _id_E851(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = level;
+  }
 
   var_2 waittill(var_1);
   [[var_0]]();

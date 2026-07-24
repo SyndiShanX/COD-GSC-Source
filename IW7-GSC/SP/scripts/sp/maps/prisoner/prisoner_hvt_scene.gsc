@@ -23,10 +23,11 @@ _id_924A() {
 
   if(level.script == "heist") {
     for(var_0 = 0; var_0 < level._id_871C.size; var_0++) {
-      if(var_0 == 0)
+      if(var_0 == 0) {
         level._id_871C[var_0].angles = level._id_871C[var_0].angles + (0, -90, 0);
-      else if(var_0 == 2)
+      } else if(var_0 == 2) {
         level._id_871C[var_0].angles = level._id_871C[var_0].angles - (0, 90, 0);
+      }
 
       level._id_871C[var_0] setModel("building_aatis_planetary_defense_gun_large");
       level._id_871C[var_0] scripts\sp\utility::_id_23B7("aatis_gun_" + var_0);
@@ -42,8 +43,9 @@ _id_8D20() {
     if(isDefined(level._id_E6C3)) {
       return;
     }
-    while(!isDefined(level._id_9265))
+    while(!isDefined(level._id_9265)) {
       scripts\engine\utility::waitframe();
+    }
 
     level._id_E6C3 = scripts\sp\utility::_id_10639("rooftop_rubble");
     level._id_E690 = scripts\sp\utility::_id_10639("rooftop_bucket");
@@ -182,12 +184,14 @@ _id_5F7D(var_0) {
   var_1 = 2;
   level._id_B439 = 200;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 5;
+  }
 
   for(;;) {
-    while(scripts\engine\utility::flag("pause_dynamic_dof"))
+    while(scripts\engine\utility::flag("pause_dynamic_dof")) {
       wait 0.05;
+    }
 
     var_2 = anglesToForward(level.player getplayerangles());
     var_3 = level.player getEye() + var_2 * 20;
@@ -252,10 +256,11 @@ _id_9240() {
   level.player _meth_823C(level.player._id_E505, "tag_player", 1.1, 0.3, 0.3);
   wait 1.1;
 
-  if(getdvarint("bink_capture") == 1)
+  if(getdvarint("bink_capture") == 1) {
     level.player playerlinktodelta(level.player._id_E505, "tag_player", 1, 0, 0, 0, 0, 1);
-  else
+  } else {
     level.player playerlinktodelta(level.player._id_E505, "tag_player", 1, 10, 10, 10, 10, 1);
+  }
 
   level.player _meth_8392(0, 5, 5);
   level.player._id_E505 show();
@@ -271,8 +276,9 @@ _id_9240() {
     var_1 = level._id_B8D2 scripts\sp\endmission::_id_7F6B(level.script);
     var_2 = var_1 + 1;
 
-    if(var_1 == level._id_B8D2._id_ABFA.size - 1)
+    if(var_1 == level._id_B8D2._id_ABFA.size - 1) {
       var_2 = var_1;
+    }
 
     var_3 = scripts\sp\endmission::_id_7F6D(var_2);
     thread scripts\sp\utility::_id_13C3C(var_3);
@@ -300,20 +306,24 @@ _id_9247() {
   if(getdvarint("bink_capture") == 1) {
     cinematicingame("heist_screen_riah_laptop");
 
-    while(!iscinematicplaying())
+    while(!iscinematicplaying()) {
       wait 0.05;
+    }
 
-    while(iscinematicplaying())
+    while(iscinematicplaying()) {
       wait 0.05;
+    }
   }
 
   cinematicingame("heist_screen_riah_laptop_end");
 
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     wait 0.05;
+  }
 
-  while(iscinematicplaying())
+  while(iscinematicplaying()) {
     wait 0.05;
+  }
 
   stopcinematicingame();
   thread _id_9248();
@@ -322,8 +332,9 @@ _id_9247() {
 _id_9248() {
   var_0 = getEnt("heist_church_laptop_screen", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 _id_9246() {
@@ -439,8 +450,9 @@ _id_9223() {
 _id_59DB() {
   level endon("door_peek_finished");
 
-  while(level._id_5A23["hvr_finale_door"]._id_5A21 < 80)
+  while(level._id_5A23["hvr_finale_door"]._id_5A21 < 80) {
     scripts\engine\utility::waitframe();
+  }
 }
 
 _id_F270() {
@@ -478,8 +490,9 @@ _id_6C4C() {
   level._id_9262 = getdvarfloat("sv_znear", 0);
   setsaveddvar("sv_znear", 0.01);
 
-  if(level.script == "heist" && getdvarint("bink_capture") == 0)
+  if(level.script == "heist" && getdvarint("bink_capture") == 0) {
     level.player._id_8D24 = scripts\sp\hud_util::_id_48B7("black", 1);
+  }
 
   level._id_924B = 1;
 }
@@ -511,18 +524,19 @@ _id_1073C() {
 struggle_hint() {
   scripts\engine\utility::flag_set("flag_hint_crawl");
 
-  if(level.player scripts\engine\utility::is_player_gamepad_enabled())
+  if(level.player scripts\engine\utility::is_player_gamepad_enabled()) {
     scripts\sp\utility::_id_56BE("hint_crawl");
-  else
+  } else {
     scripts\sp\utility::_id_56BE("hint_crawl_pc");
+  }
 }
 
 _id_3F45() {
   var_0 = level._id_9267;
 
-  if(level.script == "heist" && getdvarint("bink_capture") == 1 || level.script == "prisoner")
+  if(level.script == "heist" && getdvarint("bink_capture") == 1 || level.script == "prisoner") {
     var_0 scripts\sp\anim::_id_1F35(level.player._id_E505, "churchfall_door_open");
-  else {
+  } else {
     scripts\engine\utility::delaythread(4, ::struggle_hint);
     var_0 scripts\sp\anim::_id_1EC1([level.player._id_E505], "churchfall_crawl");
     wait 1.5;
@@ -538,8 +552,9 @@ _id_3F45() {
   level waittill("stop");
   var_0 scripts\sp\anim::_id_1F27([level.player._id_E505], "churchfall_crawl", 0);
 
-  while(level.player getnormalizedmovement()[0] <= 0)
+  while(level.player getnormalizedmovement()[0] <= 0) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::flag_clear("flag_hint_crawl");
   level.player playSound("pnr_churchfall_hvt_plr_crawl_01");
@@ -549,8 +564,9 @@ _id_3F45() {
   struggle_hint();
   var_0 scripts\sp\anim::_id_1F27([level.player._id_E505], "churchfall_crawl", 0);
 
-  while(level.player getnormalizedmovement()[0] <= 0)
+  while(level.player getnormalizedmovement()[0] <= 0) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::flag_clear("flag_hint_crawl");
   level.player playSound("pnr_churchfall_hvt_plr_crawl_02");
@@ -560,8 +576,9 @@ _id_3F45() {
   struggle_hint();
   var_0 scripts\sp\anim::_id_1F27([level.player._id_E505], "churchfall_crawl", 0);
 
-  while(level.player getnormalizedmovement()[0] <= 0)
+  while(level.player getnormalizedmovement()[0] <= 0) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::flag_clear("flag_hint_crawl");
   level.player playSound("pnr_churchfall_hvt_plr_crawl_03");
@@ -596,28 +613,33 @@ _id_5442() {
 }
 
 _id_100C5(var_0) {
-  foreach(var_2 in var_0)
-  var_2 show();
+  foreach(var_2 in var_0) {
+    var_2 show();
+  }
 }
 
 _id_8E6E(var_0) {
-  foreach(var_2 in var_0)
-  var_2 hide();
+  foreach(var_2 in var_0) {
+    var_2 hide();
+  }
 }
 
 _id_8E83(var_0) {
-  foreach(var_2 in var_0)
-  var_2 hide();
+  foreach(var_2 in var_0) {
+    var_2 hide();
+  }
 
   wait 0.05;
 
-  foreach(var_2 in var_0)
-  var_2 show();
+  foreach(var_2 in var_0) {
+    var_2 show();
+  }
 
   wait 0.05;
 
-  foreach(var_2 in var_0)
-  var_2 hide();
+  foreach(var_2 in var_0) {
+    var_2 hide();
+  }
 }
 
 _id_6F09(var_0) {
@@ -626,13 +648,15 @@ _id_6F09(var_0) {
   wait(var_1);
 
   for(;;) {
-    foreach(var_3 in var_0)
-    var_3 hide();
+    foreach(var_3 in var_0) {
+      var_3 hide();
+    }
 
     wait 0.05;
 
-    foreach(var_3 in var_0)
-    var_3 show();
+    foreach(var_3 in var_0) {
+      var_3 show();
+    }
 
     var_1 = randomfloatrange(0.05, 0.4);
     wait(var_1);
@@ -649,8 +673,9 @@ _id_D75A() {
 _id_91F9() {
   scripts\engine\utility::delaythread(0.0, scripts\engine\utility::exploder, "powersurgeloop1");
 
-  if(scripts\sp\utility::_id_79A6("runvirus").size > 0)
+  if(scripts\sp\utility::_id_79A6("runvirus").size > 0) {
     scripts\engine\utility::delaythread(0.0, scripts\sp\utility::_id_10FEC, "runvirus");
+  }
 
   level notify("stop_flicker_city_lights");
   thread _id_D756();
@@ -667,14 +692,16 @@ _id_D756() {
   for(var_1 = 1; var_1 < 15; var_1++) {
     var_2 = "" + var_1;
 
-    if(var_1 < 10)
+    if(var_1 < 10) {
       var_2 = "0" + var_2;
+    }
 
     var_0[var_0.size] = getEntArray("citylights" + var_2, "targetname");
   }
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     thread _id_100C5(var_0[var_1]);
+  }
 }
 
 _id_D75B() {
@@ -684,8 +711,9 @@ _id_D75B() {
 }
 
 _id_D757(var_0) {
-  if(!scripts\engine\utility::is_true(var_0))
+  if(!scripts\engine\utility::is_true(var_0)) {
     level waittill("punch_heist_start");
+  }
 
   scripts\engine\utility::delaythread(0.0, scripts\sp\utility::_id_10FEC, "powersurgeloop1");
 
@@ -706,8 +734,9 @@ _id_D754() {
   for(var_1 = 1; var_1 < 15; var_1++) {
     var_2 = "" + var_1;
 
-    if(var_1 < 10)
+    if(var_1 < 10) {
       var_2 = "0" + var_2;
+    }
 
     var_0[var_0.size] = getEntArray("citylights" + var_2, "targetname");
   }
@@ -734,8 +763,9 @@ _id_D755() {
   for(var_1 = 1; var_1 < 15; var_1++) {
     var_2 = "" + var_1;
 
-    if(var_1 < 10)
+    if(var_1 < 10) {
       var_2 = "0" + var_2;
+    }
 
     var_0[var_0.size] = getEntArray("citylights" + var_2, "targetname");
   }
@@ -757,11 +787,13 @@ _id_D755() {
 }
 
 _id_C0C7(var_0) {
-  if(isDefined(var_0._id_B14F))
+  if(isDefined(var_0._id_B14F)) {
     var_0 scripts\sp\utility::_id_1101B();
+  }
 
-  if(!isDefined(var_0._id_EE5F) || !var_0._id_EE5F)
+  if(!isDefined(var_0._id_EE5F) || !var_0._id_EE5F) {
     var_0.forceragdollimmediate = 1;
+  }
 
   var_0 scripts\sp\utility::_id_F2A8(1);
   var_0._id_10265 = 1;

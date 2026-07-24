@@ -23,8 +23,9 @@ _id_139A() {
   self endon("death");
   self endon("take_trackingfragzerog");
 
-  if(isDefined(self._id_EB73) && self._id_EB73 == gettime())
+  if(isDefined(self._id_EB73) && self._id_EB73 == gettime()) {
     scripts\engine\utility::waitframe();
+  }
 
   self giveweapon("trackingfragzerog");
   self assignweaponoffhandprimary("trackingfragzerog");
@@ -32,8 +33,9 @@ _id_139A() {
   for(;;) {
     self waittill("grenade_fire", var_0, var_1);
 
-    if(isDefined(var_0) && issubstr(var_1, "trackingfragzerog"))
+    if(isDefined(var_0) && issubstr(var_1, "trackingfragzerog")) {
       thread _id_11AE6(var_0);
+    }
   }
 }
 
@@ -53,8 +55,9 @@ _id_11861(var_0, var_1, var_2, var_3) {
   var_4 = scripts\engine\utility::spawn_tag_origin();
   var_4.fx = var_1;
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "";
+  }
 
   var_4 linkTo(var_0, var_2, (0, 0, 0), (0, 0, 0));
 
@@ -73,10 +76,11 @@ _id_11861(var_0, var_1, var_2, var_3) {
 }
 
 _id_1185F(var_0, var_1) {
-  if(var_1 && !var_0.enabled)
+  if(var_1 && !var_0.enabled) {
     playFXOnTag(_id_7ED1(var_0.fx), var_0, "tag_origin");
-  else if(!var_1 && var_0.enabled)
+  } else if(!var_1 && var_0.enabled) {
     stopFXOnTag(_id_7ED1(var_0.fx), var_0, "tag_origin");
+  }
 
   var_0.enabled = var_1;
 }
@@ -95,10 +99,11 @@ _id_11860(var_0, var_1, var_2) {
       if(abs(var_7) > 0.05) {
         var_9 = var_4 - var_0[var_5]._id_AEC2;
 
-        if(vectordot(var_9, (0, 0, 1)) < 0)
+        if(vectordot(var_9, (0, 0, 1)) < 0) {
           var_8 = var_7 < 0;
-        else
+        } else {
           var_8 = var_7 > 0;
+        }
       }
 
       _id_1185F(var_0[var_5], var_8);
@@ -141,15 +146,17 @@ _id_11AE6(var_0) {
   var_18 = 100;
   var_19 = var_18 * var_18;
 
-  if(soundexists(_id_812F("tracking_grenade_throw")))
+  if(soundexists(_id_812F("tracking_grenade_throw"))) {
     var_3 thread _id_11AE7();
+  }
 
   playFXOnTag(_id_7ED1("tracking_grenade_thrown"), var_4["fx"], "tag_origin");
 
   for(var_20 = 0; var_20 < 4.25; var_20 = var_20 + var_2) {
     if(gettime() > var_15 && (!isDefined(var_12) || !isalive(var_12))) {
-      if(isDefined(var_12))
+      if(isDefined(var_12)) {
         var_20 = min(0.25, var_20);
+      }
 
       var_12 = var_3 _id_11AE2(var_1);
       var_15 = gettime() + 500;
@@ -171,11 +178,13 @@ _id_11AE6(var_0) {
       var_13 = 1;
       var_14 = var_3.origin;
 
-      if(isDefined(var_12) && soundexists(_id_812F("tracking_grenade_tgt_acquired")))
+      if(isDefined(var_12) && soundexists(_id_812F("tracking_grenade_tgt_acquired"))) {
         var_3 thread _id_11AE5();
+      }
 
-      if(soundexists(_id_812F("tracking_grenade_track_start")))
+      if(soundexists(_id_812F("tracking_grenade_track_start"))) {
         var_3 playLoopSound(_id_812F("tracking_grenade_track_start"));
+      }
 
       stopFXOnTag(_id_7ED1("tracking_grenade_thrown"), var_4["fx"], "tag_origin");
       playFXOnTag(_id_7ED1("tracking_grenade_track_start"), var_4["fx"], "tag_origin");
@@ -186,11 +195,13 @@ _id_11AE6(var_0) {
       var_21 = clamp((var_20 - 0.25) / var_11, 0.0, 1.0);
       var_22 = 0.0;
 
-      if(var_20 > 0.25 + var_11)
+      if(var_20 > 0.25 + var_11) {
         var_22 = clamp((var_20 - (0.25 + var_11)) / (4.25 - (0.25 + var_11)), 0.0, 1.0);
+      }
 
-      if(isDefined(var_12) && isalive(var_12))
+      if(isDefined(var_12) && isalive(var_12)) {
         var_7 = var_12.origin;
+      }
 
       var_23 = rotatevector(var_4["main"]._id_AEC1 * -1, var_3.angles);
       var_24 = var_21 * var_17;
@@ -241,11 +252,13 @@ _id_11AE1(var_0) {
   radiusdamage(self.origin, var_1, var_2, var_3, var_0, "MOD_GRENADE", "trackingfragzerog");
   playFX(_id_7ED1("tracking_grenade_impact"), self.origin);
 
-  if(soundexists(_id_812F("tracking_grenade_detonate")))
+  if(soundexists(_id_812F("tracking_grenade_detonate"))) {
     thread scripts\engine\utility::play_sound_in_space(_id_812F("tracking_grenade_detonate"), self.origin);
+  }
 
-  foreach(var_5 in self._id_11881)
-  var_5 delete();
+  foreach(var_5 in self._id_11881) {
+    var_5 delete();
+  }
 
   scripts\engine\utility::waitframe();
   self delete();
@@ -255,8 +268,9 @@ _id_11AE3(var_0) {
   if(!isPlayer(var_0)) {
     return;
   }
-  if(!isDefined(var_0._id_C1D7))
+  if(!isDefined(var_0._id_C1D7)) {
     var_0._id_C1D7 = 0;
+  }
 
   var_0._id_C1D7++;
   scripts\sp\utility::_id_16D5("no_tracking_grenades_active", ::_id_C017, "tracking grenades are active");
@@ -298,8 +312,9 @@ _id_11AE2(var_0) {
       }
       var_13 = var_12.origin;
 
-      if(isai(var_12))
+      if(isai(var_12)) {
         var_13 = var_12 getEye();
+      }
 
       if(distancesquared(var_13, var_2) > var_1) {
         continue;
@@ -341,8 +356,9 @@ _id_11AE5() {
   self playSound(_id_812F("tracking_grenade_tgt_acquired"));
   var_0 = scripts\engine\utility::waittill_any_timeout(5, "tracking_grenade_deactivate");
 
-  if(isDefined(var_0) && var_0 != "timeout")
+  if(isDefined(var_0) && var_0 != "timeout") {
     self stopsounds();
+  }
 }
 
 _id_7ED1(var_0) {

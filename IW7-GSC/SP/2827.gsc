@@ -16,8 +16,9 @@ init_audio() {
 }
 
 _id_9BB3() {
-  if(!isDefined(level._id_1188._id_4E60))
+  if(!isDefined(level._id_1188._id_4E60)) {
     return 1;
+  }
 
   return level._id_1188._id_4E60;
 }
@@ -32,13 +33,15 @@ _id_E2BB() {
       level._id_4E61 _meth_8278(0, 2);
       wait 2;
 
-      if(isDefined(level._id_4E61))
+      if(isDefined(level._id_4E61)) {
         level._id_4E61 stoploopsound("deaths_door_lp");
+      }
 
       wait 0.05;
 
-      if(isDefined(level._id_4E61))
+      if(isDefined(level._id_4E61)) {
         level._id_4E61 delete();
+      }
     }
   }
 }
@@ -74,10 +77,11 @@ _id_D0D0() {
   wait 0.2;
 
   for(;;) {
-    if(scripts\sp\utility::_id_65DB("player_has_red_flashing_overlay"))
+    if(scripts\sp\utility::_id_65DB("player_has_red_flashing_overlay")) {
       self playlocalsound("breathing_heartbeat");
-    else
+    } else {
       break;
+    }
 
     wait(var_0);
   }
@@ -88,8 +92,9 @@ _id_D0D0() {
 }
 
 _id_ABD5() {
-  if(!isDefined(level._id_1188._id_ABD4))
+  if(!isDefined(level._id_1188._id_ABD4)) {
     level._id_1188._id_ABD4 = 1.0;
+  }
 
   wait 0.05;
   levelsoundfade(1, level._id_1188._id_ABD4);
@@ -99,26 +104,32 @@ _id_257D(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isDefined(var_0)) {
     return;
   }
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 2;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 2;
+  }
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     var_6 = 2;
+  }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     thread _id_2AE8(var_0, var_5, var_6);
+  }
 
   var_7 = var_4 + 0.05;
   var_8 = 1;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level.player _meth_82C0(var_1);
+  }
 
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     wait 0.05;
+  }
 
   level.player _meth_82C0("fade_to_black_minus_music", var_2);
 
@@ -149,8 +160,9 @@ _id_2AE8(var_0, var_1, var_2) {
   var_3 = 1;
   var_4 = var_2 + 0.05;
 
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     wait 0.05;
+  }
 
   while(1 && iscinematicplaying()) {
     var_5 = cinematicgettimeinmsec() / 1000;
@@ -164,19 +176,23 @@ _id_2AE8(var_0, var_1, var_2) {
     wait 0.05;
   }
 
-  if(var_3 == 0)
+  if(var_3 == 0) {
     setmusicstate(var_1);
+  }
 }
 
 _id_257C(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 2;
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level.player _meth_82C0(var_0);
+  }
 
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     wait 0.05;
+  }
 
   level.player _meth_82C0("fade_to_black_minus_music", var_1);
 }
@@ -185,21 +201,25 @@ _id_257B(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_0)) {
     return;
   }
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 2;
+  }
 
   var_5 = var_2 + 0.05;
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 2;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     thread _id_2AE8(var_0, var_3, var_4);
+  }
 
   var_6 = 1;
 
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     wait 0.05;
+  }
 
   while(1 && iscinematicplaying()) {
     var_7 = cinematicgettimeinmsec() / 1000;
@@ -266,14 +286,17 @@ _id_F59F() {
 }
 
 _id_25C0(var_0, var_1, var_2) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 2.5;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "normal";
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "clear_all";
+  }
 
   level.player playSound("plr_helmet_on_visor_down_lr");
 
@@ -281,43 +304,50 @@ _id_25C0(var_0, var_1, var_2) {
     level.player scripts\engine\utility::delaycall(0.5, ::setclienttriggeraudiozonepartialwithfade, "helmet_on_visor_down", 0.2, "mix", "filter");
     wait(var_0);
 
-    if(var_1 == "normal")
+    if(var_1 == "normal") {
       level.player scripts\engine\utility::delaycall(0.1, ::playsound, "plr_helmet_short_boot_up_lr");
-    else
+    } else {
       level.player scripts\engine\utility::delaycall(0.1, ::playsound, "plr_helmet_boot_up_fast_lr");
+    }
 
-    if(var_2 == "clear_all")
+    if(var_2 == "clear_all") {
       level.player scripts\engine\utility::delaycall(0.45, ::clearclienttriggeraudiozone, 0.2);
-    else
+    } else {
       level.player scripts\engine\utility::delaycall(0.45, ::_meth_82C0, var_2, 0.2);
+    }
   }
 }
 
 _id_25C1() {}
 
 _id_25C2(var_0, var_1, var_2) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 2.5;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "normal";
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "clear_all";
+  }
 
   level.player playSound("plr_helmet_visor_pull_down_w_air_lr");
   level.player scripts\engine\utility::delaycall(0.5, ::setclienttriggeraudiozonepartialwithfade, "helmet_on_visor_down", 0.2, "mix", "filter");
   wait(var_0);
 
-  if(var_1 == "normal")
+  if(var_1 == "normal") {
     level.player scripts\engine\utility::delaycall(0.1, ::playsound, "plr_helmet_short_boot_up_lr");
-  else
+  } else {
     level.player scripts\engine\utility::delaycall(0.1, ::playsound, "plr_helmet_boot_up_fast_lr");
+  }
 
-  if(var_2 == "clear_all")
+  if(var_2 == "clear_all") {
     level.player scripts\engine\utility::delaycall(0.45, ::clearclienttriggeraudiozone, 0.2);
-  else
+  } else {
     level.player scripts\engine\utility::delaycall(0.45, ::_meth_82C0, var_2, 0.2);
+  }
 }
 
 _id_25C3() {

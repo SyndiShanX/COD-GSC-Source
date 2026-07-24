@@ -24,13 +24,15 @@ _id_F8E7() {
   level._id_2F80 = [];
   var_0 = getEntArray("hull_breach_point", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_F8E6();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_F8E6();
+  }
 }
 
 _id_F8E6() {
-  if(isDefined(self.targetname))
+  if(isDefined(self.targetname)) {
     level._id_2F80[self.targetname] = self;
+  }
 
   level._id_2F7F[level._id_2F7F.size] = self;
   self._id_53D5 = 2;
@@ -40,15 +42,17 @@ _id_F8E6() {
   var_0 = scripts\sp\utility::_id_7A8F();
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.script_exploder) && !isDefined(self._id_69AE))
+    if(isDefined(var_2.script_exploder) && !isDefined(self._id_69AE)) {
       self._id_69AE = var_2.script_exploder;
+    }
 
     if(isDefined(var_2.classname) && scripts\engine\utility::string_starts_with(var_2.classname, "actor")) {
-      if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "hull_breach_xray")
+      if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "hull_breach_xray") {
         var_2 thread _id_8EF1();
-      else {
-        if(!isDefined(self._id_DC22))
+      } else {
+        if(!isDefined(self._id_DC22)) {
           self._id_DC22 = [];
+        }
 
         var_2 scripts\sp\utility::_id_1747(::_id_DC1C);
         self._id_DC22 = scripts\engine\utility::array_add(self._id_DC22, var_2);
@@ -79,23 +83,27 @@ _id_DC1C() {
 }
 
 _id_1592(var_0, var_1, var_2, var_3, var_4) {
-  if(!isarray(self))
+  if(!isarray(self)) {
     _id_1593(var_0, var_1, var_2, var_3, var_4);
-  else {
-    foreach(var_6 in self)
-    var_6 _id_1593(var_0, var_1, var_2, var_3, var_4);
+  } else {
+    foreach(var_6 in self) {
+      var_6 _id_1593(var_0, var_1, var_2, var_3, var_4);
+    }
   }
 }
 
 _id_1593(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = &"SHIP_ASSAULT_OBJ_BREACH_TEXT";
+  }
 
-  if(!isDefined(level._id_C265))
+  if(!isDefined(level._id_C265)) {
     level._id_C265 = [];
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 = scripts\engine\utility::getStruct(var_1, "targetname");
+  }
 
   for(var_5 = 1; isDefined(level._id_C265["breach_hull_" + var_5]); var_5++) {}
 
@@ -124,10 +132,11 @@ _id_1593(var_0, var_1, var_2, var_3, var_4) {
   var_10 = scripts\sp\utility::_id_10639("player_arms");
   var_10 hide();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 thread scripts\sp\anim::_id_1EC3(var_10, var_2);
-  else
+  } else {
     thread scripts\sp\anim::_id_1EC3(var_10, "plant_breach_player");
+  }
 
   var_11 = scripts\engine\utility::spawn_tag_origin();
   var_11.origin = level.player.origin;
@@ -143,10 +152,11 @@ _id_1593(var_0, var_1, var_2, var_3, var_4) {
   var_12 = scripts\sp\utility::_id_10639("charge", self.origin, self.angles);
   var_12 playSound("sa_hull_breach_device");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 thread scripts\sp\anim::_id_1F35(var_12, var_2);
-  else
+  } else {
     thread scripts\sp\anim::_id_1F35(var_12, "plant_breach_charge");
+  }
 
   if(isDefined(var_3)) {
     level.player _meth_8545();
@@ -156,10 +166,11 @@ _id_1593(var_0, var_1, var_2, var_3, var_4) {
     level.player forceplaygestureviewmodel("ges_zg_wallbreach");
   }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 scripts\sp\anim::_id_1F35(var_10, var_2);
-  else
+  } else {
     scripts\sp\anim::_id_1F35(var_10, "plant_breach_player");
+  }
 
   level.player unlink();
   var_10 delete();
@@ -177,8 +188,9 @@ _id_1593(var_0, var_1, var_2, var_3, var_4) {
   thread _id_69EC(level.script);
   wait 2;
 
-  if(isDefined(self._id_B308))
+  if(isDefined(self._id_B308)) {
     self._id_B308[[self._id_B308.init_func]]();
+  }
 }
 
 _id_69EC(var_0) {
@@ -258,8 +270,9 @@ _id_2F5B() {
             var_1 thread _id_DC13(var_2[var_5]);
             break;
           case "grab":
-            if(!isDefined(var_1._id_847E))
+            if(!isDefined(var_1._id_847E)) {
               var_1._id_847E = [];
+            }
 
             var_1._id_847E[var_1._id_847E.size] = var_2[var_5];
             break;
@@ -270,8 +283,9 @@ _id_2F5B() {
       scripts\engine\utility::waitframe();
     }
 
-    if(isDefined(var_1._id_847E))
+    if(isDefined(var_1._id_847E)) {
       var_1 thread _id_735C();
+    }
   }
 }
 
@@ -288,14 +302,16 @@ _id_735C() {
 
     var_5 = scripts\sp\utility::_id_10619(1);
 
-    if(isai(var_5))
+    if(isai(var_5)) {
       var_5 _id_0F31::_id_6553();
+    }
 
     var_5 dontinterpolate();
     var_5 scripts\sp\utility::_id_11624(var_1);
 
-    if(isai(var_5))
+    if(isai(var_5)) {
       var_5 scripts\sp\utility::_id_F2A8(1);
+    }
 
     var_5._id_1FBB = "breach_guy";
     var_6 = var_1 scripts\engine\utility::spawn_tag_origin();
@@ -319,8 +335,9 @@ _id_735C() {
 }
 
 _id_DC13(var_0) {
-  if(isDefined(var_0.script_delay))
+  if(isDefined(var_0.script_delay)) {
     wait(var_0.script_delay);
+  }
 
   self.origin = var_0.origin;
   var_1 = scripts\sp\utility::_id_10619(1);
@@ -346,13 +363,15 @@ _id_1F69(var_0) {
   var_1 = scripts\sp\utility::_id_10619(1);
   var_1 motionblurhqenable();
 
-  if(isai(var_1))
+  if(isai(var_1)) {
     var_1 _id_0F31::_id_6553();
+  }
 
   var_1 scripts\sp\utility::_id_11624(var_0);
 
-  if(isai(var_1))
+  if(isai(var_1)) {
     var_1 scripts\sp\utility::_id_F2A8(1);
+  }
 
   var_1._id_1FBB = "breach_guy";
   var_2 = ["choke01", "choke02"];
@@ -360,8 +379,9 @@ _id_1F69(var_0) {
   var_4 = var_0 scripts\engine\utility::spawn_tag_origin();
   var_1 linkTo(var_4, "tag_origin");
 
-  if(isDefined(var_0.script_delay))
+  if(isDefined(var_0.script_delay)) {
     wait(var_0.script_delay);
+  }
 
   var_1 thread scripts\sp\anim::_id_1F35(var_1, var_3, "tag_origin");
 
@@ -398,8 +418,9 @@ _id_1F68(var_0) {
   var_1._id_BCDA = var_0 scripts\engine\utility::spawn_tag_origin();
   var_1 linkTo(var_1._id_BCDA, "tag_origin", (0, 0, 0), (0, 0, 0));
 
-  if(isDefined(var_0.script_delay))
+  if(isDefined(var_0.script_delay)) {
     wait(var_0.script_delay);
+  }
 
   var_1._id_BCDA thread scripts\sp\anim::_id_1EEA(var_1, var_1._id_6F39[0], "float_loop_stop", "tag_origin");
   var_1 scripts\sp\utility::_id_F2A8(1);
@@ -470,14 +491,16 @@ _id_9675(var_0) {
   foreach(var_4, var_3 in var_1) {
     self._id_D648[var_4] = [var_3];
 
-    if(isDefined(var_3.target))
-      self._id_D648[var_4][1] = scripts\engine\utility::getStruct(var_3.target, "targetname");
+    if(isDefined(var_3.target)) {
+      self._id_D648[var_4][1] = ::scripts\engine\utility::getStruct(var_3.target, "targetname");
+    }
   }
 
-  if(isDefined(self._id_D648[0]))
+  if(isDefined(self._id_D648[0])) {
     var_4 = 0;
-  else
+  } else {
     var_4 = 1;
+  }
 
   self._id_4296 = spawn("script_origin", self._id_D648[var_4][0].origin);
   self._id_4296.angles = self._id_D648[var_4][0].angles;
@@ -487,8 +510,9 @@ _id_9675(var_0) {
   self._id_6D67 = 0;
   thread _id_B311();
 
-  if(self._id_4EA1)
+  if(self._id_4EA1) {
     thread _id_B30A();
+  }
 }
 
 _id_977C() {
@@ -496,16 +520,18 @@ _id_977C() {
   var_1 = undefined;
 
   foreach(var_3 in var_0) {
-    if(var_3.classname == "trigger_multiple")
+    if(var_3.classname == "trigger_multiple") {
       var_1 = var_3;
+    }
   }
 
   if(!isDefined(var_1)) {
     return;
   }
   foreach(var_3 in var_0) {
-    if(var_3.classname == "trigger_multiple_flag_set_touching")
+    if(var_3.classname == "trigger_multiple_flag_set_touching") {
       var_1._id_BFFB = var_3;
+    }
   }
 
   var_7 = scripts\engine\utility::getStructArray(var_1.target, "targetname");
@@ -514,8 +540,9 @@ _id_977C() {
   foreach(var_10, var_9 in var_7) {
     var_1._id_D648[var_10] = [var_9];
 
-    if(isDefined(var_9.target))
-      var_1._id_D648[var_10][1] = scripts\engine\utility::getStruct(var_9.target, "targetname");
+    if(isDefined(var_9.target)) {
+      var_1._id_D648[var_10][1] = ::scripts\engine\utility::getStruct(var_9.target, "targetname");
+    }
   }
 
   var_1._id_4296 = spawn("script_origin", var_1._id_D648[0][0].origin);
@@ -560,8 +587,9 @@ _id_B30F() {
       var_0.origin = var_5[0].origin;
       var_0.angles = var_5[0].angles;
 
-      if(var_5.size == 2)
+      if(var_5.size == 2) {
         var_0.origin = pointonsegmentnearesttopoint(var_5[0].origin, var_5[1].origin, var_1);
+      }
 
       if(distance(var_0.origin, var_1) <= distance(self._id_4296.origin, var_1)) {
         self._id_4296.origin = var_0.origin;
@@ -600,8 +628,9 @@ _id_B310() {
     var_0.origin = var_5[0].origin;
     var_0.angles = var_5[0].angles;
 
-    if(var_5.size == 2)
+    if(var_5.size == 2) {
       var_0.origin = pointonsegmentnearesttopoint(var_5[0].origin, var_5[1].origin, var_1);
+    }
 
     if(distance(var_0.origin, var_1) <= distance(self._id_4296.origin, var_1)) {
       self._id_4296.origin = var_0.origin;
@@ -701,8 +730,9 @@ _id_B30A() {
 
   for(;;) {
     foreach(var_1 in self._id_D648) {
-      foreach(var_3 in var_1)
-      scripts\sp\debug::_id_5B24(var_3.origin, (1, 0, 0), var_3.angles, 16);
+      foreach(var_3 in var_1) {
+        scripts\sp\debug::_id_5B24(var_3.origin, (1, 0, 0), var_3.angles, 16);
+      }
     }
 
     var_6 = (1, 1, 1);
@@ -733,8 +763,9 @@ _id_B30B(var_0) {
   self endon("death");
 
   for(;;) {
-    if(self._id_BFFB._id_10E65 == 1)
+    if(self._id_BFFB._id_10E65 == 1) {
       self._id_BFFB delete();
+    }
 
     level notify("zero_g_mantle_started");
     _id_B310();
@@ -780,8 +811,9 @@ _id_B30B(var_0) {
 _id_B309() {
   self endon("death");
 
-  if(!scripts\engine\utility::flag_exist("no_mantle_zone"))
+  if(!scripts\engine\utility::flag_exist("no_mantle_zone")) {
     scripts\engine\utility::flag_init("no_mantle_zone");
+  }
 
   for(;;) {
     scripts\engine\utility::flag_wait("no_mantle_zone");
@@ -832,8 +864,9 @@ _id_3BAE() {
 }
 
 _id_8EF1() {
-  if(!scripts\engine\utility::flag_exist("no_mantle_zone"))
+  if(!scripts\engine\utility::flag_exist("no_mantle_zone")) {
     scripts\engine\utility::flag_init("no_mantle_zone");
+  }
 
   scripts\engine\utility::flag_wait("no_mantle_zone");
   level waittill("breach_started");

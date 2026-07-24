@@ -67,8 +67,9 @@ holywater_projectile_instance() {
   self notify("aod_removed");
   level.powers["power_holyWater"]._id_AD4E = scripts\engine\utility::array_remove(level.powers["power_holyWater"]._id_AD4E, self);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 
   level.zbg_active = undefined;
   self delete();
@@ -85,8 +86,9 @@ create_aod(var_0) {
 
   var_6 = createnavobstaclebybounds(self.origin, (72, 72, 12), (0, 0, 0), "axis");
 
-  while(isDefined(self))
+  while(isDefined(self)) {
     wait 0.05;
+  }
 
   destroynavobstacle(var_6);
 }

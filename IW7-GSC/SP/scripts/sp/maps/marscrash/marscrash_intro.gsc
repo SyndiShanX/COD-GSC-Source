@@ -41,8 +41,9 @@ _id_9ACD() {
   precacheitem("iw7_gunlessinjured");
   var_0 = ["veh_mil_air_un_dropship_hero_wing_right_dmg", "veh_mil_air_un_dropship_hero_wing_left_dmg", "veh_mil_air_un_dropship_hero_cockpit_dmg", "veh_mil_air_un_dropship_hero_body_dmg", "veh_mil_air_un_dropship_hero_interior_dmg", "veh_mil_air_un_dropship_hero_door_right_dmg", "veh_mil_air_un_dropship_hero_door_left_dmg", "veh_mil_air_un_dropship_hero_side_piece_dmg", "veh_mil_air_un_dropship_hero_door_rear_dmg", "veh_mil_air_un_dropship_hero_tail_dmg", "airplane_debris_destroyed_03", "vm_hero_protagonist_arms_blood", "vm_hero_protagonist_arms"];
 
-  foreach(var_2 in var_0)
-  precachemodel(var_2);
+  foreach(var_2 in var_0) {
+    precachemodel(var_2);
+  }
 
   precacherumble("mars_kashima_grab_arm");
   precacheshader("hud_jackal_overlay_damage");
@@ -80,8 +81,9 @@ _id_FA16(var_0) {
   level.player allowprone(0);
   setsaveddvar("player_viewmodelMoveAnimScale", 0.4);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     thread _id_5F7D();
+  }
 }
 
 _id_FA15(var_0) {
@@ -94,10 +96,11 @@ _id_FA15(var_0) {
   level.player allowprone(1);
   setsaveddvar("player_viewmodelMoveAnimScale", 0.6);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = level._id_D2D0;
-  else
+  } else {
     var_1 = 50;
+  }
 
   while(var_1 <= 50) {
     level.player thread scripts\sp\utility::_id_D2CD(50, 2);
@@ -133,12 +136,14 @@ _id_5F7D(var_0) {
   var_1 = 2;
   level._id_B439 = 200;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 5;
+  }
 
   for(;;) {
-    while(scripts\engine\utility::flag("pause_dynamic_dof"))
+    while(scripts\engine\utility::flag("pause_dynamic_dof")) {
       wait 0.05;
+    }
 
     var_2 = anglesToForward(level.player getplayerangles());
     var_3 = level.player getEye() + var_2 * 20;
@@ -224,8 +229,9 @@ _id_4814() {
   level._id_6ABB = scripts\sp\hud_util::_id_7B4F();
   level._id_6ABB.alpha = 1;
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     level._id_6ABB.sort = 2;
+  }
 
   level thread _id_4817();
   scripts\engine\utility::flag_set("o2_start");
@@ -301,8 +307,9 @@ _id_4813() {
   level._id_D127 _id_0BDC::_id_A110();
   level._id_D127 scripts\engine\utility::delaythread(0.2, _id_0BDC::_id_A10D, "damage_alarm");
 
-  if(!scripts\sp\utility::_id_93A6())
+  if(!scripts\sp\utility::_id_93A6()) {
     level._id_D127 scripts\engine\utility::delaythread(2, _id_0BDC::_id_A112, "jackal_hud_warningcritical", 2);
+  }
 
   level.player _id_D85C();
   var_0 = 2;
@@ -342,8 +349,9 @@ _id_4813() {
   scripts\engine\utility::flag_set("player_exiting_crashed_jackal");
   scripts\engine\utility::flag_set("oxygen_grab_started");
 
-  if(isDefined(level.player._id_FB50))
+  if(isDefined(level.player._id_FB50)) {
     level.player._id_FB50 delete();
+  }
 
   thread _id_E393();
   level._id_126B1 notify("stop_loop");
@@ -421,8 +429,9 @@ _id_81D0() {
     var_1 = var_1 + var_2;
     var_1 = clamp(var_1, 0, var_3);
 
-    if(var_1 == var_3)
+    if(var_1 == var_3) {
       scripts\engine\utility::flag_set("max_heat_threshold");
+    }
 
     level.player setclientomnvar("ui_helmet_meter_temperature", var_1);
   }
@@ -474,8 +483,9 @@ _id_B441() {
     wait 0.15;
     level.player thread scripts\sp\utility::_id_1034D("marscrash_plr_burnedtodeath");
 
-    if(isDefined(level._id_126B8))
+    if(isDefined(level._id_126B8)) {
       level._id_126B8 thread scripts\sp\utility::_id_E7C7(0.25);
+    }
 
     level._id_99FD _id_0E46::_id_DFE3();
 
@@ -518,8 +528,9 @@ _id_D0A3() {
   while(var_0 > 0) {
     var_0 = var_0 - 0.05;
 
-    if(var_0 < 0)
+    if(var_0 < 0) {
       var_0 = 0;
+    }
 
     level.player _meth_809A(var_0, 1);
     wait 0.15;
@@ -605,10 +616,11 @@ _id_126B5() {
   thread _id_126BB();
 
   for(;;) {
-    if(level._id_126B3 && !scripts\engine\utility::flag("time_to_die"))
+    if(level._id_126B3 && !scripts\engine\utility::flag("time_to_die")) {
       _id_126B6();
-    else if(level._id_126B9 != "idle" && !scripts\engine\utility::flag("time_to_die"))
+    } else if(level._id_126B9 != "idle" && !scripts\engine\utility::flag("time_to_die")) {
       _id_126B7();
+    }
 
     wait 0.05;
   }
@@ -618,15 +630,16 @@ _id_126BB() {
   level endon("trapped_done");
 
   for(;;) {
-    if(level._id_126B9 == "idle" && !scripts\engine\utility::flag("time_to_die"))
+    if(level._id_126B9 == "idle" && !scripts\engine\utility::flag("time_to_die")) {
       level._id_126BA = 0;
-    else if(level._id_126B9 == "pushing" && !scripts\engine\utility::flag("time_to_die"))
+    } else if(level._id_126B9 == "pushing" && !scripts\engine\utility::flag("time_to_die")) {
       level._id_126BA++;
-    else if(level._id_126B9 == "releasing" && !scripts\engine\utility::flag("time_to_die")) {
-      if(level._id_126BA > 5)
+    } else if(level._id_126B9 == "releasing" && !scripts\engine\utility::flag("time_to_die")) {
+      if(level._id_126BA > 5) {
         level._id_126BA = level._id_126BA - 5;
-      else
+      } else {
         level._id_126BA = 0;
+      }
     }
 
     wait 0.05;
@@ -642,9 +655,9 @@ _id_126B6() {
     level._id_126B8 thread scripts\sp\utility::_id_E7C8(0.25);
     level._id_126B9 = "pushing";
   } else if(level._id_126B9 == "pushing" && !scripts\engine\utility::flag("time_to_die")) {
-    if(level._id_126BA >= 50)
+    if(level._id_126BA >= 50) {
       level notify("trapped_done");
-    else if(level._id_126BA < 50) {
+    } else if(level._id_126BA < 50) {
       level._id_126B8 thread scripts\sp\utility::_id_E7C9(1.0, 2.5);
       screenshake(level.player.origin, 0.4, 0, 0, 0.5, -1, 0, 0, 6);
     } else if(level._id_126BA < 25) {
@@ -814,10 +827,11 @@ _id_398B(var_0) {
   }
 
   for(;;) {
-    if(scripts\engine\utility::cointoss())
+    if(scripts\engine\utility::cointoss()) {
       var_2 = "heavy";
-    else
+    } else {
       var_2 = "idle";
+    }
 
     self[[var_1]](var_2);
     wait(randomfloatrange(0.05, 1));
@@ -868,11 +882,13 @@ _id_12F7D() {
   var_0[0] scripts\engine\utility::delaycall(1.8, ::playsound, "mars_crash_jackal_flyby_swt_02");
   var_0 = scripts\sp\utility::_id_22B9(var_0);
 
-  foreach(var_2 in var_0)
-  var_2._id_2714 = 1;
+  foreach(var_2 in var_0) {
+    var_2._id_2714 = 1;
+  }
 
-  foreach(var_2 in var_0)
-  var_2 notify("notify_stop_thrust_audio");
+  foreach(var_2 in var_0) {
+    var_2 notify("notify_stop_thrust_audio");
+  }
 
   if(isDefined(var_0[0])) {
     var_0[0] waittill("uphill_jackal_overhead");
@@ -912,8 +928,9 @@ _id_C5A3() {
       level.player scripts\sp\utility::_id_D2CD(55, 0.5);
       wait 1.0;
 
-      if(level._id_386C)
+      if(level._id_386C) {
         level.player thread scripts\sp\utility::_id_1034D(scripts\engine\utility::random(level._id_C861));
+      }
 
       level._id_386C = 0;
       _id_C5A7(1);
@@ -940,8 +957,9 @@ _id_C543() {
     if(level.player _meth_81CE() && !level._id_D0F0) {
       level._id_D0F0 = 1;
 
-      if(level._id_386C)
+      if(level._id_386C) {
         level.player thread scripts\sp\utility::_id_1034D(scripts\engine\utility::random(level._id_C861));
+      }
 
       level._id_386C = 0;
       _id_C5A7(1);
@@ -956,8 +974,9 @@ _id_C5A7(var_0) {
   level endon("debris_lift_started");
   level.player playRumbleOnEntity("damage_heavy");
 
-  if(isDefined(var_0) && var_0)
+  if(isDefined(var_0) && var_0) {
     thread _id_C876();
+  }
 
   level._id_C253 = 0;
   level.player scripts\sp\utility::_id_D08C("ges_stumble_" + level._id_11184);
@@ -983,15 +1002,17 @@ _id_102EA() {
 }
 
 _id_D256(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = level.player.origin;
+  }
 
   earthquake(0.25, 2, var_0, 20000);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level._id_D2D0 = var_1;
-  else
+  } else {
     level._id_D2D0 = 50;
+  }
 
   level.player scripts\sp\utility::_id_D2CD(level._id_D2D0, 3);
   _id_C5A7();
@@ -1050,8 +1071,9 @@ _id_C254() {
   scripts\engine\utility::flag_set("o2_level4_finished");
   wait 7.0;
 
-  if(!scripts\engine\utility::flag("oxygen_grab_started"))
+  if(!scripts\engine\utility::flag("oxygen_grab_started")) {
     scripts\sp\utility::_id_B8D1();
+  }
 }
 
 _id_C257(var_0, var_1) {
@@ -1061,11 +1083,13 @@ _id_C257(var_0, var_1) {
 }
 
 _id_C256(var_0) {
-  while(!level._id_C253)
+  while(!level._id_C253) {
     wait 0.1;
+  }
 
-  if(!scripts\engine\utility::flag("oxygen_grab"))
+  if(!scripts\engine\utility::flag("oxygen_grab")) {
     thread scripts\sp\utility::_id_10347(var_0);
+  }
 }
 
 _id_C25E() {
@@ -1077,8 +1101,9 @@ _id_C25E() {
   wait 1;
 
   while(!scripts\engine\utility::flag("oxygen_grab") && !scripts\engine\utility::flag("missionfailed")) {
-    if(scripts\engine\utility::flag("o2_level2_finished"))
+    if(scripts\engine\utility::flag("o2_level2_finished")) {
       var_0 = "oxygenCriticalWarning";
+    }
 
     if(scripts\engine\utility::flag("o2_level4_finished") && var_2) {
       var_2 = 0;
@@ -1135,13 +1160,15 @@ _id_C258() {
     wait(level._id_C25B + 0.1);
     level._id_C259 = level._id_C259 - 0.1;
 
-    if(level._id_C259 <= 0)
+    if(level._id_C259 <= 0) {
       level._id_C259 = 0;
+    }
 
     level._id_C25A = level._id_C25A - 0.1;
 
-    if(level._id_C25A <= 0)
+    if(level._id_C25A <= 0) {
       level._id_C25A = 0;
+    }
 
     level._id_C25B = level._id_C25B + 0.1;
   }
@@ -1156,8 +1183,9 @@ _id_C25C() {
   var_1 = 4;
 
   if(!isDefined(level._id_1386D)) {
-    for(var_2 = 0; var_2 < var_1; var_2++)
+    for(var_2 = 0; var_2 < var_1; var_2++) {
       level.player scripts\sp\utility::play_sound_on_entity(scripts\engine\utility::random(var_0));
+    }
   }
 
   while(!scripts\engine\utility::flag("oxygen_grab")) {
@@ -1179,17 +1207,19 @@ _id_C876(var_0, var_1) {
   var_2._id_02B4 = 1;
   var_2.enablehudlighting = 1;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0.5;
+  }
 
   var_2 fadeovertime(var_1);
   var_2.alpha = 0.7;
   var_3 = scripts\engine\utility::ter_op(isDefined(var_0), var_0, 1);
 
-  if(isstring(var_3))
+  if(isstring(var_3)) {
     level waittill(var_3);
-  else
+  } else {
     wait(var_3);
+  }
 
   var_2 fadeovertime(1.5);
   var_2.alpha = 0;
@@ -1233,10 +1263,11 @@ _id_2FC4() {
     level.player._id_FB50 _meth_8277(level.player._id_FB50._id_CBE9);
     level.player._id_FB50 _meth_8278(level.player._id_FB50._id_1352E);
 
-    if(scripts\engine\utility::flag("o2_level1_finished"))
+    if(scripts\engine\utility::flag("o2_level1_finished")) {
       var_4 = var_2;
-    else if(scripts\engine\utility::flag("o2_level2_finished"))
+    } else if(scripts\engine\utility::flag("o2_level2_finished")) {
       var_4 = var_3;
+    }
 
     if(var_0) {
       var_13 = var_4._id_94D0;
@@ -1247,15 +1278,17 @@ _id_2FC4() {
     }
 
     if(var_4 != var_1 && var_13 == var_4._id_94D0 && randomint(100) < level.player._id_FB50._id_1B00) {
-      if(!scripts\engine\utility::flag("oxygen_grab_started"))
+      if(!scripts\engine\utility::flag("oxygen_grab_started")) {
         _id_1AFF();
+      }
     } else {
       level.player._id_FB50 playSound(var_13, "sounddone", 1);
       level.player._id_FB50 scripts\engine\utility::waittill_any("sounddone", "interupted");
     }
 
-    while(isDefined(level.player._id_FB50._id_9A92) || level.player scripts\sp\utility::_id_65DB("pause_breathing"))
+    while(isDefined(level.player._id_FB50._id_9A92) || level.player scripts\sp\utility::_id_65DB("pause_breathing")) {
       wait 0.05;
+    }
   }
 }
 
@@ -1445,8 +1478,9 @@ _id_5ECB(var_0) {
     var_3 thread scripts\sp\anim::_id_1EEA(level._id_1270C, "triage_idle");
     var_3 thread scripts\sp\anim::_id_1EEA(level._id_1270A, "triage_idle");
 
-    while(distance(level.player.origin, level._id_1270C.origin) > 160)
+    while(distance(level.player.origin, level._id_1270C.origin) > 160) {
       wait 0.1;
+    }
 
     level._id_1270C notify("player_near");
     var_3 notify("stop_loop");
@@ -1503,10 +1537,11 @@ _id_5ECD(var_0, var_1) {
   }
   level._id_12708 = 1;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     scripts\sp\utility::_id_1034D(var_0);
-  else
+  } else {
     scripts\sp\utility::_id_10346(var_0);
+  }
 
   level._id_12708 = 0;
   wait 0.05;
@@ -1534,8 +1569,9 @@ _id_A53E() {
   level._id_10274 = 0.4;
   var_0 = level._id_A54A;
 
-  while(level._id_12708)
+  while(level._id_12708) {
     wait 0.05;
+  }
 
   level._id_12709 = 1;
   thread _id_30F7();
@@ -1548,8 +1584,9 @@ _id_A53E() {
   wait 0.5;
   var_1 = scripts\engine\utility::getStruct("kash_scene_interact", "targetname").origin;
 
-  while(!scripts\sp\utility::_id_D40E(400, var_1))
+  while(!scripts\sp\utility::_id_D40E(400, var_1)) {
     scripts\engine\utility::waitframe();
+  }
 
   level._id_30F6 scripts\engine\utility::delaythread(3, scripts\sp\utility::_id_10346, "marscrash_brk_hangintherebuddy");
   level._id_A54E scripts\engine\utility::delaythread(6, scripts\sp\utility::_id_10346, "marscrash_ksh_noproblemsir");
@@ -1644,8 +1681,9 @@ _id_2B73(var_0) {
 _id_30F7() {
   var_0 = scripts\engine\utility::getStruct("kash_scene_interact", "targetname").origin;
 
-  while(!scripts\sp\utility::_id_D40E(600, var_0))
+  while(!scripts\sp\utility::_id_D40E(600, var_0)) {
     scripts\engine\utility::waitframe();
+  }
 
   level._id_30F6 thread scripts\sp\utility::_id_10346("marscrash_brk_captain");
 }
@@ -1708,8 +1746,9 @@ _id_4872() {
   var_0 scripts\sp\anim::_id_1EC3(var_2, "crash_site_crawler");
   scripts\engine\utility::flag_wait("flag_crawler_guy");
 
-  while(!level.player scripts\sp\utility::_id_3849(var_2 gettagorigin("j_head")))
+  while(!level.player scripts\sp\utility::_id_3849(var_2 gettagorigin("j_head"))) {
     scripts\engine\utility::waitframe();
+  }
 
   var_0 scripts\sp\anim::_id_1F35(var_2, "crash_site_crawler");
   var_2 _meth_81D0();
@@ -1818,11 +1857,11 @@ _id_A552() {
   var_0._id_99F4 = scripts\engine\utility::getStruct("kash_scene_interact", "targetname");
   var_0._id_1684 = [];
   var_0._id_4E7A = [];
-  var_0._id_4E7A[0] = scripts\sp\utility::_id_10639("door", var_0.node.origin);
+  var_0._id_4E7A[0] = ::scripts\sp\utility::_id_10639("door", var_0.node.origin);
   playFXOnTag(scripts\engine\utility::getfx("vfx_marscrash_door_dmg"), var_0._id_4E7A[0], "tag_origin");
-  var_0._id_1684["player"] = scripts\sp\utility::_id_10639("player_rig", var_0.node.origin);
+  var_0._id_1684["player"] = ::scripts\sp\utility::_id_10639("player_rig", var_0.node.origin);
   level.player._id_D267 = var_0._id_1684["player"];
-  var_0._id_1684["player_bloody"] = scripts\sp\utility::_id_10639("player_rig_bloody", var_0.node.origin);
+  var_0._id_1684["player_bloody"] = ::scripts\sp\utility::_id_10639("player_rig_bloody", var_0.node.origin);
   level.player._id_D267 = var_0._id_1684["player"];
   var_0._id_1684["player_bloody"] _id_489D(var_0.node);
   var_0._id_1684["player_bloody"] hide();
@@ -1831,7 +1870,7 @@ _id_A552() {
   scripts\sp\maps\marscrash\marscrash_util::_id_1065E("kash_death_anim_ent");
   var_0._id_1684["brooks"] = level._id_30F6;
   var_0._id_1684["brooks"]._id_1FBB = "brooks";
-  var_0._id_1684["kashima"] = scripts\sp\utility::_id_107EA("kashima", 1);
+  var_0._id_1684["kashima"] = ::scripts\sp\utility::_id_107EA("kashima", 1);
   var_0._id_1684["kashima"] _id_A55E();
   var_0._id_1684["kash_brooks"] = [var_0._id_1684["brooks"], var_0._id_1684["kashima"]];
   var_0._id_1684["everyone"] = [var_0._id_1684["player"], var_0._id_1684["brooks"], var_0._id_1684["kashima"], var_0._id_4E7A[0]];
@@ -2046,8 +2085,9 @@ _id_A553() {
     }
     var_0.node notify("stop_loop");
 
-    foreach(var_6 in var_1)
-    var_6 _meth_83A1();
+    foreach(var_6 in var_1) {
+      var_6 _meth_83A1();
+    }
 
     var_0.node scripts\sp\anim::_id_1F2C(var_1, "kash_death_lift");
     level.player playRumbleOnEntity("damage_heavy");
@@ -2176,8 +2216,9 @@ _id_4C3D(var_0) {
   var_1 = var_1 + var_3 * -8.5 + var_4 * 5 + var_5 * 0;
   var_6 = bulletTrace(var_1 + (0, 0, 30), var_1 - (0, 0, 100), 0, undefined);
 
-  if(var_6["normal"][2] > 0.9)
+  if(var_6["normal"][2] > 0.9) {
     playFX(level._effect["kashima_blood_pool"], var_1);
+  }
 }
 
 _id_4C3E(var_0) {
@@ -2275,13 +2316,15 @@ _id_5D9E() {
   foreach(var_4 in var_1) {
     self.partnerheli[var_4.script_noteworthy] = var_4;
 
-    if(var_4.script_noteworthy == "cockpit" || var_4.script_noteworthy == "side_cover" || var_4.script_noteworthy == "body_inner")
+    if(var_4.script_noteworthy == "cockpit" || var_4.script_noteworthy == "side_cover" || var_4.script_noteworthy == "body_inner") {
       var_4._id_C008 = 1;
+    }
 
-    if(var_4.script_noteworthy == "body_outer")
+    if(var_4.script_noteworthy == "body_outer") {
       continue;
-    else
+    } else {
       var_4 linkTo(self._id_E6E5, "tag_origin");
+    }
 
     var_4 show();
   }
@@ -2295,8 +2338,9 @@ _id_5D9B(var_0) {
     _id_5D9C(var_2);
   }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     _id_5D9C(self._id_E6E5);
+  }
 }
 
 _id_5D9D(var_0) {
@@ -2311,8 +2355,9 @@ _id_5D9C(var_0) {
   if(isDefined(var_0._id_C008)) {
     self.partnerheli[var_0.script_noteworthy] = undefined;
 
-    if(var_0.script_noteworthy != "body_inner")
+    if(var_0.script_noteworthy != "body_inner") {
       var_0 delete();
+    }
   } else {
     if(!isDefined(var_0)) {
       return;
@@ -2320,8 +2365,9 @@ _id_5D9C(var_0) {
     self.partnerheli[var_0.script_noteworthy] = undefined;
     var_1 = anglesToForward(self.angles);
 
-    if(var_0.script_noteworthy != "body_outer")
+    if(var_0.script_noteworthy != "body_outer") {
       var_1 = var_1 + (randomfloat(1), 0, randomfloat(1));
+    }
 
     var_2 = self.origin + var_1 * 800;
     var_3 = var_1 * 70000;
@@ -2334,10 +2380,11 @@ _id_5D9C(var_0) {
       var_4 = undefined;
       var_5 = var_0 _meth_843F();
 
-      if(isDefined(var_5["unscaled"]))
+      if(isDefined(var_5["unscaled"])) {
         var_4 = var_5["unscaled"];
-      else if(isDefined(var_5["scaled"]))
+      } else if(isDefined(var_5["scaled"])) {
         var_4 = var_5["scaled"];
+      }
 
       var_4 = scripts\engine\utility::ter_op(isDefined(var_4), var_4, var_0.origin + (0, 0, 70));
       var_0 physicslaunchserver(var_4, var_3);

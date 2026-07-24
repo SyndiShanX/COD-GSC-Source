@@ -38,8 +38,9 @@ vehicle_clearpreventcollisiondamagefortimeafterexit() {
         continue;
       }
 
-      if(issubstr(var_3.classname, "jackal"))
+      if(issubstr(var_3.classname, "jackal")) {
         var_1[var_1.size] = var_3;
+      }
     }
   }
 
@@ -72,10 +73,11 @@ _id_BABD() {
     wait 3;
 
     for(;;) {
-      if(level.player meleeButtonPressed())
+      if(level.player meleeButtonPressed()) {
         _id_684A();
-      else if(level.player _meth_8439())
+      } else if(level.player _meth_8439()) {
         _id_684B();
+      }
 
       scripts\engine\utility::waitframe();
     }
@@ -106,14 +108,16 @@ _id_BABD() {
   level thread scripts\sp\maps\heist\heist_util::_id_127B1("hangar_lift_2b", scripts\sp\utility::_id_F225, "robocrate_light_02");
   thread scripts\sp\utility::_id_F3AB(getEnt("hangar_lift_end_big", "script_noteworthy"), "retreat_to_c12");
 
-  foreach(var_1 in getEntArray("trig_stop_listing", "targetname"))
-  thread scripts\sp\maps\heist\heist_util::_id_127B1(var_1, scripts\sp\maps\heist\heist_util::_id_1103D);
+  foreach(var_1 in getEntArray("trig_stop_listing", "targetname")) {
+    thread scripts\sp\maps\heist\heist_util::_id_127B1(var_1, scripts\sp\maps\heist\heist_util::_id_1103D);
+  }
 
   thread scripts\sp\maps\heist\heist_util::_id_6E55("hangar_shift_1", ::_id_684A);
   thread scripts\sp\maps\heist\heist_util::_id_6E55("hangar_shift_2", ::_id_684B);
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_2683();
+  }
 
   wait 5;
   scripts\sp\utility::_id_22CD("hangar_wave_one");
@@ -126,8 +130,9 @@ _id_BABD() {
   scripts\sp\utility::_id_2669("end_of_first_hangar");
   scripts\engine\utility::flag_wait_either("retreat_to_middle", "hangar_lift_1_triggered");
 
-  if(!scripts\engine\utility::flag("hangar_lift_1_triggered"))
+  if(!scripts\engine\utility::flag("hangar_lift_1_triggered")) {
     scripts\sp\utility::_id_15F3("hangar_lift_1");
+  }
 
   scripts\engine\utility::delaythread(1, ::_id_5464);
   level.respawn = 0;
@@ -146,8 +151,9 @@ _id_4084() {
   scripts\sp\utility::_id_15F3("hangar_lift_2b");
 
   foreach(var_1 in getEntArray("trigger_multiple_friendly", "classname")) {
-    if(isDefined(var_1._id_EE52) && var_1._id_EE52 == "allytrig_hangar")
+    if(isDefined(var_1._id_EE52) && var_1._id_EE52 == "allytrig_hangar") {
       var_1 scripts\engine\utility::trigger_off();
+    }
   }
 
   setsuncolorandintensity(0);
@@ -156,29 +162,34 @@ _id_4084() {
 _id_4085() {
   if(isDefined(level._id_8A35)) {
     foreach(var_1 in level._id_8A35) {
-      if(isDefined(var_1.front_right._id_4348))
+      if(isDefined(var_1.front_right._id_4348)) {
         var_1.front_right._id_4348 delete();
+      }
 
       var_1.front_right delete();
 
-      if(isDefined(var_1.front_right._id_4348))
+      if(isDefined(var_1.front_right._id_4348)) {
         var_1.front_right._id_4348 delete();
+      }
 
       var_1.front_left delete();
 
-      if(isDefined(var_1._id_005A._id_4348))
+      if(isDefined(var_1._id_005A._id_4348)) {
         var_1._id_005A._id_4348 delete();
+      }
 
       var_1._id_005A delete();
 
-      if(isDefined(var_1._id_0057._id_4348))
+      if(isDefined(var_1._id_0057._id_4348)) {
         var_1._id_0057._id_4348 delete();
+      }
 
       var_1._id_0057 delete();
 
       if(isDefined(var_1._id_101AD)) {
-        if(isDefined(var_1._id_101AD._id_4348))
+        if(isDefined(var_1._id_101AD._id_4348)) {
           var_1._id_101AD._id_4348 delete();
+        }
 
         var_1._id_101AD delete();
       }
@@ -188,8 +199,9 @@ _id_4085() {
   }
 
   foreach(var_4 in getEntArray("trigger_multiple_friendly", "classname")) {
-    if(isDefined(var_4._id_EE52) && var_4._id_EE52 == "allytrig_hangar_c12")
+    if(isDefined(var_4._id_EE52) && var_4._id_EE52 == "allytrig_hangar_c12") {
       var_4 scripts\engine\utility::trigger_off();
+    }
   }
 
   level._id_FD4C = undefined;
@@ -254,8 +266,9 @@ _id_684A() {
   scripts\engine\utility::flag_waitopen("ship_list_stopping");
   var_0 = scripts\engine\utility::getStruct("lift_01", "script_noteworthy");
 
-  while((!level.player scripts\sp\utility::_id_D1DF(var_0.origin + (0, 0, 256), 0.5) || isDefined(level.player.melee)) && distance(level.player.origin, var_0.origin) > 600)
+  while((!level.player scripts\sp\utility::_id_D1DF(var_0.origin + (0, 0, 256), 0.5) || isDefined(level.player.melee)) && distance(level.player.origin, var_0.origin) > 600) {
     wait 0.5;
+  }
 
   _id_0E29::_id_87A1();
   level._id_AD4F = -15;
@@ -284,11 +297,13 @@ _id_684A() {
     var_3 delete();
   }
 
-  foreach(var_6 in getEntArray("pathblocker_hangar_shift_1_player", "targetname"))
-  var_6 delete();
+  foreach(var_6 in getEntArray("pathblocker_hangar_shift_1_player", "targetname")) {
+    var_6 delete();
+  }
 
-  foreach(var_6 in getEntArray("pathblocker_hangar_shift_1_main", "targetname"))
-  var_6 solid();
+  foreach(var_6 in getEntArray("pathblocker_hangar_shift_1_main", "targetname")) {
+    var_6 solid();
+  }
 
   thread scripts\sp\maps\heist\heist_util::_id_1103D();
   scripts\engine\utility::flag_set("event_hangar_bank_left_done");
@@ -300,8 +315,9 @@ _id_684B() {
   scripts\engine\utility::flag_waitopen("ship_list_stopping");
   var_0 = scripts\engine\utility::getStruct("big_lift", "script_noteworthy");
 
-  while((!level.player scripts\sp\utility::_id_D1DF(var_0.origin + (0, 0, 256), 0.5) || distance(level.player.origin, var_0.origin) > 1100 || isDefined(level.player.melee)) && !scripts\engine\utility::flag("hangar_lift_2b_triggered"))
+  while((!level.player scripts\sp\utility::_id_D1DF(var_0.origin + (0, 0, 256), 0.5) || distance(level.player.origin, var_0.origin) > 1100 || isDefined(level.player.melee)) && !scripts\engine\utility::flag("hangar_lift_2b_triggered")) {
     wait 0.1;
+  }
 
   _id_0E29::_id_87A1();
   level._id_AD4F = 15;
@@ -329,11 +345,13 @@ _id_684B() {
     var_3 delete();
   }
 
-  foreach(var_6 in getEntArray("pathblocker_hangar_shift_2_player", "targetname"))
-  var_6 delete();
+  foreach(var_6 in getEntArray("pathblocker_hangar_shift_2_player", "targetname")) {
+    var_6 delete();
+  }
 
-  foreach(var_6 in getEntArray("pathblocker_hangar_shift_2_main", "targetname"))
-  var_6 solid();
+  foreach(var_6 in getEntArray("pathblocker_hangar_shift_2_main", "targetname")) {
+    var_6 solid();
+  }
 
   thread scripts\sp\maps\heist\heist_util::_id_10D16();
 }
@@ -365,8 +383,9 @@ _id_684D() {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-    if(!isspawner(var_3))
+    if(!isspawner(var_3)) {
       var_1[var_1.size] = var_3;
+    }
   }
 
   for(var_5 = 0; var_5 < 5; var_5 = var_5 + 0.05) {
@@ -417,8 +436,9 @@ _id_C603() {
   thread scripts\sp\maps\heist\heist_util::_id_59B0("door_hangarbay_1_bottom", "down", 0.05, 244);
   var_0 = getEntArray("door_hangarbay_col", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 notsolid();
+  foreach(var_2 in var_0) {
+    var_2 notsolid();
+  }
 }
 
 _id_426F(var_0) {
@@ -430,8 +450,9 @@ _id_426F(var_0) {
   thread _id_111E4();
   var_2 = 5;
 
-  if(isDefined(var_0) && var_0)
+  if(isDefined(var_0) && var_0) {
     var_2 = 0.05;
+  }
 
   thread scripts\sp\maps\heist\heist_util::_id_59B0("door_hangarbay_1_top", "down", var_2, 244);
   thread scripts\sp\maps\heist\heist_util::_id_59B0("door_hangarbay_1_bottom", "up", var_2, 244);
@@ -492,8 +513,9 @@ _id_C1A1(var_0) {
   var_1 = getnode("node_retreat_final", "targetname");
   var_2 = squared(1024);
 
-  while(distancesquared(level.player.origin, var_1.origin) > var_2)
+  while(distancesquared(level.player.origin, var_1.origin) > var_2) {
     wait 0.1;
+  }
 
   level notify("closing_lift_doors_player");
   thread scripts\sp\maps\heist\heist_util::_id_4264("door_lift_lower_outer_left", "door_lift_lower_outer_right", 1);
@@ -528,8 +550,9 @@ _id_1072C(var_0) {
   var_14 = undefined;
 
   foreach(var_16 in var_6) {
-    if(isDefined(var_16.classname) && scripts\engine\utility::string_starts_with(var_16.classname, "actor_enemy"))
+    if(isDefined(var_16.classname) && scripts\engine\utility::string_starts_with(var_16.classname, "actor_enemy")) {
       var_7 = scripts\engine\utility::array_add(var_7, var_16);
+    }
 
     if(isDefined(var_16._id_EE52)) {
       switch (var_16._id_EE52) {
@@ -575,11 +598,13 @@ _id_1072C(var_0) {
 
   self waittill("trigger");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level notify(var_0);
+  }
 
-  if(issubstr(var_11.targetname, "big_lift"))
+  if(issubstr(var_11.targetname, "big_lift")) {
     scripts\engine\utility::delaythread(1, scripts\engine\utility::flag_set, "retreat_to_c12");
+  }
 
   if(var_7.size > 0) {
     var_8 = [];
@@ -587,8 +612,9 @@ _id_1072C(var_0) {
     foreach(var_20 in var_7) {
       var_26 = var_20 scripts\sp\utility::_id_10619(1);
 
-      if(issubstr(var_11.targetname, "big_lift"))
+      if(issubstr(var_11.targetname, "big_lift")) {
         var_26 linkTo(var_20.linkpoint, "tag_origin", (0, 0, 0), (0, 0, 0));
+      }
 
       var_8[var_8.size] = var_26;
     }
@@ -622,8 +648,9 @@ _id_1072C(var_0) {
 
   foreach(var_31 in var_6) {
     if(isDefined(var_31.classname) && var_31.classname == "script_brushmodel") {
-      if(isDefined(var_31.targetname) && !issubstr(var_31.targetname, "big_lift"))
+      if(isDefined(var_31.targetname) && !issubstr(var_31.targetname, "big_lift")) {
         var_31 _meth_80AF(undefined);
+      }
     }
   }
 
@@ -634,8 +661,9 @@ _id_1072C(var_0) {
       }
       var_26 scripts\sp\utility::_id_F415(0);
 
-      if(issubstr(var_11.targetname, "big_lift"))
+      if(issubstr(var_11.targetname, "big_lift")) {
         var_26 unlink();
+      }
 
       if(isDefined(var_26.classname) && var_26.classname == "actor_enemy_c12") {
         var_26 thread scripts\sp\utility::_id_F2DA(0);
@@ -646,8 +674,9 @@ _id_1072C(var_0) {
         var_26 setgoalpos(var_26.origin);
         var_34 = getnode(var_26.target, "targetname");
 
-        if(!isDefined(var_34))
+        if(!isDefined(var_34)) {
           var_34 = getEnt(var_26.target, "targetname");
+        }
 
         var_26 thread scripts\sp\utility::_id_7226(var_34);
       }
@@ -662,13 +691,15 @@ _id_10896(var_0, var_1, var_2, var_3) {
   var_3 = scripts\sp\maps\heist\heist_util::_id_2289(var_3);
 
   if(!isDefined(var_3)) {
-    for(var_4 = 0; var_4 < var_0.size; var_4++)
+    for(var_4 = 0; var_4 < var_0.size; var_4++) {
       var_3[var_4] = 0;
+    }
   }
 
   for(var_4 = 0; var_4 < var_0.size; var_4++) {
-    if(isDefined(var_2) && isDefined(var_2[var_4]))
+    if(isDefined(var_2) && isDefined(var_2[var_4])) {
       self thread[[var_2[var_4]]]();
+    }
 
     scripts\engine\utility::delaythread(var_3[var_4], ::_id_C5E9, var_0[var_4], var_1[var_4]);
   }
@@ -705,11 +736,13 @@ _id_9613() {
 }
 
 _id_317F(var_0, var_1, var_2, var_3) {
-  if(!isDefined(level._id_8A35))
+  if(!isDefined(level._id_8A35)) {
     level._id_8A35 = [];
+  }
 
-  if(isDefined(level._id_8A35[var_0]))
+  if(isDefined(level._id_8A35[var_0])) {
     return level._id_8A35[var_0];
+  }
 
   var_4 = spawnStruct();
   var_4._id_C743 = [];
@@ -728,16 +761,17 @@ _id_317F(var_0, var_1, var_2, var_3) {
         var_6._id_4348 disconnectPaths();
       }
 
-      if(var_6.script_parameters == "front_right")
+      if(var_6.script_parameters == "front_right") {
         var_4.front_right = var_6;
-      else if(var_6.script_parameters == "front_left")
+      } else if(var_6.script_parameters == "front_left") {
         var_4.front_left = var_6;
-      else if(var_6.script_parameters == "back_right")
+      } else if(var_6.script_parameters == "back_right") {
         var_4._id_005A = var_6;
-      else if(var_6.script_parameters == "back_left")
+      } else if(var_6.script_parameters == "back_left") {
         var_4._id_0057 = var_6;
-      else if(var_6.script_parameters == "side")
+      } else if(var_6.script_parameters == "side") {
         var_4._id_101AD = var_6;
+      }
 
       continue;
     }
@@ -745,12 +779,14 @@ _id_317F(var_0, var_1, var_2, var_3) {
     var_4._id_C743[var_4._id_C743.size] = var_6;
   }
 
-  if(isDefined(var_4._id_101AD))
+  if(isDefined(var_4._id_101AD)) {
     var_4._id_101AD._id_4348 linkTo(var_4._id_101AD);
+  }
 
   foreach(var_9 in scripts\engine\utility::getStructArray(var_0, "script_noteworthy")) {
-    if(isDefined(var_9.targetname) && var_9.targetname == "robot_distro")
+    if(isDefined(var_9.targetname) && var_9.targetname == "robot_distro") {
       var_4._id_571C[var_9.script_index] = var_9;
+    }
   }
 
   level._id_8A35[var_0] = var_4;
@@ -759,10 +795,11 @@ _id_317F(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_1)) {
     foreach(var_13 in var_1) {
-      if(var_13 == "front")
+      if(var_13 == "front") {
         thread _id_C5E9(var_0, var_13, var_2, 0.05);
-      else
+      } else {
         thread _id_C5E9(var_0, var_13, var_3, 0.05);
+      }
 
       var_11 = 2;
     }
@@ -777,18 +814,21 @@ _id_C5E9(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_5)) {
     return;
   }
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = [120, 120];
-  else
+  } else {
     var_2 = scripts\sp\maps\heist\heist_util::_id_2289(var_2);
+  }
 
-  if(!isDefined(var_2[1]))
+  if(!isDefined(var_2[1])) {
     var_2[1] = var_2[0];
+  }
 
   var_6 = [0, 0];
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = [180, 180];
+  }
 
   for(var_7 = 0; var_7 < 2; var_7++) {
     if(var_2[var_7] > var_4[var_7]) {
@@ -797,18 +837,21 @@ _id_C5E9(var_0, var_1, var_2, var_3, var_4) {
     }
   }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = [0.65, 0.65];
-  else
+  } else {
     var_3 = scripts\sp\maps\heist\heist_util::_id_2289(var_3);
+  }
 
-  if(!isDefined(var_3[1]))
+  if(!isDefined(var_3[1])) {
     var_3[1] = var_3[0];
+  }
 
   var_8 = [0, 0];
 
-  for(var_7 = 0; var_7 < 2; var_7++)
+  for(var_7 = 0; var_7 < 2; var_7++) {
     var_8[var_7] = var_6[var_7] / var_4[var_7] * var_3[var_7];
+  }
 
   if(var_1 == "front") {
     var_5.front_left thread _id_C5EA(var_2[0] * -1, var_3[0], var_6[0], var_8[0]);
@@ -824,8 +867,9 @@ _id_C5EA(var_0, var_1, var_2, var_3) {
   var_4 = 0;
   var_5 = 0;
 
-  if(var_2 == 0)
+  if(var_2 == 0) {
     var_5 = var_1 * 0.25;
+  }
 
   self rotateYaw(var_0, var_1, var_4, var_5);
   self._id_4348 rotateYaw(var_0, var_1, var_4, var_5);
@@ -833,8 +877,9 @@ _id_C5EA(var_0, var_1, var_2, var_3) {
   self._id_4348 scripts\engine\utility::delaycall(var_6, ::connectpaths);
 
   if(var_2 != 0) {
-    if(var_0 > 0)
+    if(var_0 > 0) {
       var_2 = var_2 * -1;
+    }
 
     scripts\engine\utility::delaycall(var_1, ::rotateyaw, var_2, var_1 * 2, 0, var_1 * 2);
     self._id_4348 scripts\engine\utility::delaycall(var_1, ::rotateyaw, var_2, var_1 * 2, 0, var_1 * 2);
@@ -867,8 +912,9 @@ _id_52A4(var_0, var_1) {
   self._id_4348 delete();
   self unlink();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   var_2 = anglesToForward(self.angles) * 64;
   var_2 = var_2 + anglestoright(self.angles) * 128 * var_1;
@@ -883,8 +929,9 @@ _id_E582(var_0, var_1) {
   if(!isDefined(var_2)) {
     return;
   }
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = [1, 2, 3, 4, 5];
+  }
 
   if(var_2.spawners.size < var_1.size) {
     return;
@@ -956,14 +1003,16 @@ _id_47E0() {
   foreach(var_1 in level._id_8A34) {
     var_1 endon("death");
 
-    if(!isDefined(var_1._id_11360))
+    if(!isDefined(var_1._id_11360)) {
       var_1._id_11360 = randomfloatrange(2, 2.05);
+    }
 
     wait(var_1._id_11360);
     var_2 = "crane_left";
 
-    if(level._id_AD4F < 0)
+    if(level._id_AD4F < 0) {
       var_2 = "crane_right";
+    }
 
     level._id_4B5F = var_2;
     var_1 thread scripts\sp\anim::_id_1F35(var_1, var_2);
@@ -973,31 +1022,35 @@ _id_47E0() {
 _id_47E1() {
   var_0 = "crane_left_hard_10";
 
-  if(issubstr(level._id_4B5F, "left"))
+  if(issubstr(level._id_4B5F, "left")) {
     var_0 = "crane_right_hard_20";
+  }
 
   if(getdvarint("debug_cranes", 0)) {
     iprintln(level._id_4B5F);
     iprintln(var_0);
   }
 
-  foreach(var_2 in level._id_8A34)
-  var_2 thread scripts\sp\anim::_id_1F35(var_2, var_0);
+  foreach(var_2 in level._id_8A34) {
+    var_2 thread scripts\sp\anim::_id_1F35(var_2, var_0);
+  }
 }
 
 _id_47E2() {
   var_0 = "crane_right_hard_10";
 
-  if(issubstr(level._id_4B5F, "right"))
+  if(issubstr(level._id_4B5F, "right")) {
     var_0 = "crane_left_hard_20";
+  }
 
   if(getdvarint("debug_cranes", 0)) {
     iprintln(level._id_4B5F);
     iprintln(var_0);
   }
 
-  foreach(var_2 in level._id_8A34)
-  var_2 thread scripts\sp\anim::_id_1F35(var_2, var_0);
+  foreach(var_2 in level._id_8A34) {
+    var_2 thread scripts\sp\anim::_id_1F35(var_2, var_0);
+  }
 }
 
 _id_5ACB(var_0) {
@@ -1049,8 +1102,9 @@ respawn_test_trig_setup() {
   self endon("death");
   self waittill("reached_path_end");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 respawn_test() {
@@ -1100,24 +1154,28 @@ _id_157B(var_0, var_1, var_2) {
     }
   }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self thread[[var_1]]();
+  }
 
   self waittill("reached_path_end");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self thread[[var_0]]();
+  }
 }
 
 _id_13777() {
   self endon("death");
 
   for(;;) {
-    if(isDefined(self._id_A906))
+    if(isDefined(self._id_A906)) {
       return self._id_A906;
+    }
 
-    if(isDefined(self._id_A905))
+    if(isDefined(self._id_A905)) {
       return self._id_A905;
+    }
 
     self waittill("go_to_node_new_goal");
   }

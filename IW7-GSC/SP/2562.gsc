@@ -19,9 +19,9 @@ init() {
 bt_init() {
   self.bt = spawnStruct();
 
-  if(isDefined(self.behaviortreeasset))
+  if(isDefined(self.behaviortreeasset)) {
     self btregistertreeinstance(self.behaviortreeasset);
-  else {
+  } else {
     self.bt._id_E87F = [];
     self.bt._id_D8BE = [];
     self.bt._id_BE5D = 0;
@@ -98,25 +98,29 @@ bt_terminateprevrunningaction(var_0, var_1, var_2, var_3) {
 }
 
 bt_negateresult(var_0) {
-  if(var_0 == anim.success)
+  if(var_0 == anim.success) {
     return anim.failure;
-  else if(var_0 == anim.failure)
+  } else if(var_0 == anim.failure) {
     return anim.success;
+  }
 
   return var_0;
 }
 
 bt_tick() {
-  if(isDefined(self.behaviortreeasset))
+  if(isDefined(self.behaviortreeasset)) {
     self bttick();
+  }
 }
 
 bt_getdemeanor() {
-  if(isDefined(self.demeanoroverride))
+  if(isDefined(self.demeanoroverride)) {
     return self.demeanoroverride;
+  }
 
-  if(isDefined(self._blackboard._id_7366))
+  if(isDefined(self._blackboard._id_7366)) {
     return self._blackboard._id_7366;
+  }
 
   return "combat";
 }

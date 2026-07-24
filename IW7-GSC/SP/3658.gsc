@@ -19,11 +19,13 @@ _id_84B9() {
 
   level.player scripts\engine\utility::allow_offhand_secondary_weapons(1);
 
-  if(isDefined(self.marker))
+  if(isDefined(self.marker)) {
     self.marker delete();
+  }
 
-  if(isDefined(self.icon))
+  if(isDefined(self.icon)) {
     self.icon destroy();
+  }
 
   self notify("disable_grappling_hook");
   self._id_849A = undefined;
@@ -102,8 +104,9 @@ _id_84BA() {
       if(isDefined(var_7._id_84A4)) {
         var_12 = self[[var_7._id_84A4]](var_9, var_11, var_2);
 
-        if(!isDefined(var_12) || !var_12)
+        if(!isDefined(var_12) || !var_12) {
           continue;
+        }
       }
 
       var_13 = 600;
@@ -130,8 +133,9 @@ _id_84BA() {
       var_20 = (0, 0, 96) * (1 - var_19["fraction"]);
       var_3 = var_3 + var_20;
 
-      if(!scripts\sp\utility::_id_D0F4())
+      if(!scripts\sp\utility::_id_D0F4()) {
         var_3 = var_3 + (0, 0, 32);
+      }
 
       self _meth_81DE(80, var_15 * 0.4);
       var_21 = var_7;
@@ -168,8 +172,9 @@ _id_84BA() {
         thread _id_3D62(var_9, var_21.origin - var_3);
         var_28 = var_9 scripts\engine\utility::waittill_any_return("movedone", "cancel");
 
-        if(var_28 == "movedone")
+        if(var_28 == "movedone") {
           self notify("grapple_complete");
+        }
       }
 
       self _meth_81DE(65, 0.3);
@@ -193,8 +198,9 @@ _id_84BA() {
 
       var_29 = self getlinkedparent();
 
-      if(isDefined(var_29) && var_29 == var_10)
+      if(isDefined(var_29) && var_29 == var_10) {
         self unlink();
+      }
 
       scripts\engine\utility::waitframe();
       var_11 delete();
@@ -238,8 +244,9 @@ _id_3D62(var_0, var_1) {
 }
 
 _id_D124() {
-  if(scripts\sp\utility::_id_65DF("player_indoors") && scripts\sp\utility::_id_65DB("player_indoors"))
+  if(scripts\sp\utility::_id_65DF("player_indoors") && scripts\sp\utility::_id_65DB("player_indoors")) {
     return 0;
+  }
 
   return 1;
 }
@@ -248,8 +255,9 @@ _id_BCDC(var_0) {
   self endon("death");
   self endon("stop_damage");
 
-  for(;;)
+  for(;;) {
     scripts\engine\utility::waitframe();
+  }
 }
 
 _id_11A9F() {
@@ -280,8 +288,9 @@ _id_11A9F() {
     foreach(var_5 in var_2) {
       var_6 = 0;
 
-      if(isDefined(var_5._id_8494))
+      if(isDefined(var_5._id_8494)) {
         var_6 = var_5[[var_5._id_8494]](self);
+      }
 
       if(!var_6 && (distance2d(var_5.origin, self.origin) > 400 || abs(var_5.origin[2] - self.origin[2]) > 256)) {
         break;
@@ -289,8 +298,9 @@ _id_11A9F() {
 
       var_7 = 0.8;
 
-      if(isDefined(var_5._id_84A1))
+      if(isDefined(var_5._id_84A1)) {
         var_7 = var_5._id_84A1;
+      }
 
       var_8 = var_5.origin - (0, 0, var_5.origin[2]);
       var_9 = self getEye();
@@ -303,8 +313,9 @@ _id_11A9F() {
       var_14 = vectordot(var_11, var_13);
       var_5.dot = var_14;
 
-      if(var_14 > var_7)
+      if(var_14 > var_7) {
         var_3 = scripts\engine\utility::array_add(var_3, var_5);
+      }
     }
 
     var_2 = [];
@@ -312,8 +323,9 @@ _id_11A9F() {
     foreach(var_5 in var_3) {
       var_7 = 0.5;
 
-      if(isDefined(var_5._id_84A2))
+      if(isDefined(var_5._id_84A2)) {
         var_7 = var_5._id_84A2;
+      }
 
       var_8 = var_5.origin;
       var_11 = anglesToForward(var_5.angles);
@@ -321,8 +333,9 @@ _id_11A9F() {
       var_13 = anglesToForward(var_12);
       var_14 = vectordot(var_11, var_13);
 
-      if(var_14 > var_7)
+      if(var_14 > var_7) {
         var_2 = scripts\engine\utility::array_add(var_2, var_5);
+      }
     }
 
     for(var_18 = 0; var_18 < var_2.size; var_18++) {
@@ -339,8 +352,9 @@ _id_11A9F() {
       var_22 = scripts\common\trace::ray_trace(self getEye(), var_5.origin, self);
       var_23 = 0.9;
 
-      if(isDefined(var_5._id_84A3))
+      if(isDefined(var_5._id_84A3)) {
         var_23 = var_5._id_84A3;
+      }
 
       if(var_22["fraction"] > var_23) {
         self._id_4B7C = var_5;
@@ -351,8 +365,9 @@ _id_11A9F() {
     if(isDefined(self._id_4B7C)) {
       var_25 = (0, 0, 0);
 
-      if(isDefined(self._id_4B7C._id_84A5))
+      if(isDefined(self._id_4B7C._id_84A5)) {
         var_25 = self._id_4B7C._id_84A5;
+      }
 
       var_0.origin = self._id_4B7C.origin + var_25;
       var_1.alpha = 1;
@@ -426,8 +441,9 @@ _id_8B80() {
   var_0 = self getweaponslistall();
 
   foreach(var_2 in var_0) {
-    if(var_2 == "grappling_hook" && self getweaponammostock(var_2) > 0)
+    if(var_2 == "grappling_hook" && self getweaponammostock(var_2) > 0) {
       return 1;
+    }
   }
 
   return 0;
@@ -440,8 +456,9 @@ _id_DDD0() {
     var_0 = scripts\engine\utility::waittill_any_return("start_grappling", "replenish_ammo");
     var_1 = getdvarint("grapple_recharge_time", 15);
 
-    if(var_0 == "start_grappling")
+    if(var_0 == "start_grappling") {
       _id_13658(2);
+    }
 
     self givemaxammo("grappling_hook");
     self notify("give_ammo", "grappling_hook", 1);
@@ -477,8 +494,9 @@ _id_10DE1(var_0) {
 }
 
 _id_F80E(var_0) {
-  if(var_0 > 1)
+  if(var_0 > 1) {
     var_0 = 1;
+  }
 
   self._id_84A7 scripts\sp\hud_util::updatebar(var_0);
 }
@@ -497,8 +515,9 @@ _id_4A0D() {
 _id_CD2F(var_0) {
   var_1 = "grapple_start";
 
-  if(_id_D124())
+  if(_id_D124()) {
     var_1 = var_1 + "_space";
+  }
 
   var_0 playSound(var_1);
 }
@@ -506,8 +525,9 @@ _id_CD2F(var_0) {
 _id_CD2E(var_0) {
   var_1 = "grapple_end";
 
-  if(_id_D124())
+  if(_id_D124()) {
     var_1 = var_1 + "_space";
+  }
 
   self playSound(var_1);
 }

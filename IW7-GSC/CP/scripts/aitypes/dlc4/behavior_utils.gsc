@@ -8,8 +8,9 @@ pickbetterenemy(var_0, var_1) {
   var_3 = self cansee(var_1);
 
   if(var_2 != var_3) {
-    if(var_2)
+    if(var_2) {
       return var_0;
+    }
 
     return var_1;
   }
@@ -17,29 +18,34 @@ pickbetterenemy(var_0, var_1) {
   var_4 = distancesquared(self.origin, var_0.origin);
   var_5 = distancesquared(self.origin, var_1.origin);
 
-  if(var_4 < var_5)
+  if(var_4 < var_5) {
     return var_0;
+  }
 
   return var_1;
 }
 
 shouldignoreenemy(var_0) {
-  if(!isalive(var_0))
+  if(!isalive(var_0)) {
     return 1;
+  }
 
-  if(var_0.ignoreme || isDefined(var_0.owner) && var_0.owner.ignoreme)
+  if(var_0.ignoreme || isDefined(var_0.owner) && var_0.owner.ignoreme) {
     return 1;
+  }
 
-  if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_0))
+  if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_0)) {
     return 1;
+  }
 
   return 0;
 }
 
 updateenemy() {
   if(isDefined(self.myenemy) && !shouldignoreenemy(self.myenemy)) {
-    if(gettime() - self.myenemystarttime < 3000)
+    if(gettime() - self.myenemystarttime < 3000) {
       return self.myenemy;
+    }
   }
 
   var_0 = undefined;

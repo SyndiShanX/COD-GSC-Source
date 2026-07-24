@@ -4,10 +4,11 @@
 ***********************************************/
 
 main() {
-  if(self.type == "dog")
+  if(self.type == "dog") {
     scripts\anim\traverse\shared::_id_5868(38.0, 5);
-  else
+  } else {
     _id_B0CC();
+  }
 }
 
 #using_animtree("generic_human");

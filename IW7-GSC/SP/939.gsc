@@ -30,7 +30,7 @@ _id_2AD0() {
   var_0._id_1581[2] = _id_0C01::_id_346D;
   var_0._id_1581[3] = _id_0C01::_id_34EE;
   var_0._id_1581[4] = _id_0A09::_id_9307;
-  var_0._id_1581[5] = scripts\aitypes\combat::_id_9E40;
+  var_0._id_1581[5] = ::scripts\aitypes\combat::_id_9E40;
   var_0._id_1581[6] = _id_0C01::_id_34EF;
   var_0._id_1581[7] = _id_0BFE::_id_8BE3;
   var_0._id_1581[8] = _id_0BFE::_id_9E21;
@@ -42,13 +42,13 @@ _id_2AD0() {
   var_0._id_1581[14] = _id_0C01::_id_3427;
   var_0._id_1581[15] = _id_0C01::_id_34C3;
   var_0._id_1581[16] = ::_id_34FA;
-  var_0._id_1581[17] = scripts\aitypes\melee::melee_init;
-  var_0._id_1581[18] = scripts\aitypes\melee::_id_B5F0;
+  var_0._id_1581[17] = ::scripts\aitypes\melee::melee_init;
+  var_0._id_1581[18] = ::scripts\aitypes\melee::_id_B5F0;
   var_0._id_1581[19] = _id_0C01::_id_347F;
   var_0._id_1581[20] = _id_0C01::_id_3480;
-  var_0._id_1581[21] = scripts\aitypes\melee::_id_5903;
-  var_0._id_1581[22] = scripts\aitypes\melee::_id_9896;
-  var_0._id_1581[23] = scripts\aitypes\melee::_id_41C6;
+  var_0._id_1581[21] = ::scripts\aitypes\melee::_id_5903;
+  var_0._id_1581[22] = ::scripts\aitypes\melee::_id_9896;
+  var_0._id_1581[23] = ::scripts\aitypes\melee::_id_41C6;
   var_0._id_1581[24] = _id_0C01::_id_34DA;
   var_0._id_1581[25] = _id_0C01::_id_348C;
   var_0._id_1581[26] = _id_0C01::_id_348D;
@@ -77,7 +77,7 @@ _id_2AD0() {
   var_0._id_1581[49] = _id_0C01::_id_345D;
   var_0._id_1581[50] = _id_0C01::_id_345A;
   var_0._id_1581[51] = _id_0C01::_id_3460;
-  var_0._id_1581[52] = scripts\aitypes\combat::_id_B4EB;
+  var_0._id_1581[52] = ::scripts\aitypes\combat::_id_B4EB;
   var_0._id_1581[53] = _id_0C01::_id_34CD;
   var_0._id_1581[54] = _id_0C01::_id_34CE;
   var_0._id_1581[55] = _id_0C01::_id_34CF;

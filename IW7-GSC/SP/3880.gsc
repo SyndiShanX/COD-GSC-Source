@@ -43,33 +43,40 @@ _id_3180(var_0) {
   level._id_864B[level._id_86AB]._id_4E63 = var_0._id_4E63;
   level._id_864B[level._id_86AB]._id_4E66 = loadfx(var_0._id_4E66);
 
-  if(isDefined(var_0._id_4E56))
+  if(isDefined(var_0._id_4E56)) {
     level._id_864B[level._id_86AB]._id_4E56 = var_0._id_4E56;
+  }
 
-  if(isDefined(var_0._id_4E57))
+  if(isDefined(var_0._id_4E57)) {
     level._id_864B[level._id_86AB]._id_4E57 = var_0._id_4E57;
+  }
 }
 
 _id_3199(var_0) {
-  if(isDefined(var_0._id_BDFE))
+  if(isDefined(var_0._id_BDFE)) {
     level._id_864B[level._id_86AB]._id_BDFE = loadfx(var_0._id_BDFE);
+  }
 
-  if(isDefined(var_0._id_11A8B))
+  if(isDefined(var_0._id_11A8B)) {
     level._id_864B[level._id_86AB]._id_11A8B = loadfx(var_0._id_11A8B);
+  }
 
-  if(isDefined(var_0._id_6D80))
+  if(isDefined(var_0._id_6D80)) {
     level._id_864B[level._id_86AB]._id_6D80 = var_0._id_6D80;
+  }
 
-  if(isDefined(var_0._id_3D52))
+  if(isDefined(var_0._id_3D52)) {
     level._id_864B[level._id_86AB]._id_3D52 = loadfx(var_0._id_3D52);
+  }
 }
 
 _id_96F9() {
   var_0 = getEntArray(level._id_86AB, "classname");
   level._id_864B[level._id_86AB].turrets = [];
 
-  foreach(var_2 in var_0)
-  var_2 _id_960F();
+  foreach(var_2 in var_0) {
+    var_2 _id_960F();
+  }
 }
 
 _id_960F() {
@@ -91,8 +98,9 @@ _id_960F() {
 }
 
 _id_3184(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "tag_origin";
+  }
 
   level._id_864B[level._id_86AB]._id_4E48 = var_0;
   level._id_864B[level._id_86AB]._id_4E71 = var_0;

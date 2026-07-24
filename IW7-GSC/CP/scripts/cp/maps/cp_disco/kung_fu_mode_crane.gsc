@@ -23,8 +23,9 @@ crane_super_use(var_0) {
   self disableoffhandweapons();
   var_1 = 500;
 
-  if(self.chi_meter_amount - var_1 <= 0)
+  if(self.chi_meter_amount - var_1 <= 0) {
     self.kung_fu_exit_delay = 1;
+  }
 
   self playgestureviewmodel("ges_crane_super_air_short", undefined, 1);
   self playanimscriptevent("power_active_cp", "gesture023");
@@ -49,8 +50,9 @@ stay_in_kung_fu_till_gesture_done(var_0) {
   self endon("disconnect");
   var_1 = 500;
 
-  if(self.chi_meter_amount - var_1 <= 0)
+  if(self.chi_meter_amount - var_1 <= 0) {
     self.kung_fu_exit_delay = 1;
+  }
 
   var_2 = self getgestureanimlength(var_0);
   wait(var_2);
@@ -68,8 +70,9 @@ crane_super_pose() {
   self.is_slide_sfx_playing = 0;
   self.is_slide_land_sfx_playing = 0;
 
-  while(self isjumping())
+  while(self isjumping()) {
     wait 0.05;
+  }
 
   scripts\engine\utility::allow_weapon(0);
   scripts\engine\utility::allow_jump(0);
@@ -84,8 +87,9 @@ crane_super_pose() {
   self notify("offslide");
   self.is_slide_sfx_playing = 0;
 
-  if(self.is_slide_land_sfx_playing == 0)
+  if(self.is_slide_land_sfx_playing == 0) {
     self.is_slide_land_sfx_playing = 1;
+  }
 
   self unlink();
   self limitedmovement(0);
@@ -97,8 +101,9 @@ crane_super_pose() {
   self allowstand(1);
   self setstance("stand");
 
-  if(!scripts\cp\utility::isteleportenabled())
+  if(!scripts\cp\utility::isteleportenabled()) {
     scripts\cp\utility::allow_player_teleport(1, "slide");
+  }
 
   self.onslide = undefined;
   self notify("can_teleport");
@@ -171,8 +176,9 @@ drop_points_on_path(var_0, var_1, var_2) {
   var_7 = [];
 
   for(var_8 = 0; var_8 < var_2; var_8++) {
-    if(var_8 > 0)
+    if(var_8 > 0) {
       var_0 = var_7[var_8 - 1];
+    }
 
     var_9 = var_0 + var_5 * var_4;
     var_10 = scripts\common\trace::sphere_trace(var_9 + (0, 0, 30), var_9 + (0, 0, -5000), 15, var_6);
@@ -230,8 +236,9 @@ check_invalid_landing_place_and_teleport(var_0) {
   var_1 = get_teleport_spot_n_landing_z_coordinate(var_0);
 
   if(isDefined(var_1.landing_z_coordinate)) {
-    while(var_0.origin[2] > var_1.landing_z_coordinate)
+    while(var_0.origin[2] > var_1.landing_z_coordinate) {
       scripts\engine\utility::waitframe();
+    }
   }
 
   if(isDefined(var_1.teleport_spot)) {
@@ -260,8 +267,9 @@ get_teleport_spot_n_landing_z_coordinate(var_0) {
   if(!scripts\engine\utility::flag("rooftop_walkway_open")) {
     var_1.landing_z_coordinate = 990;
 
-    if(var_0.origin[0] > -567)
+    if(var_0.origin[0] > -567) {
       var_1.teleport_spot = getclosestpointonnavmesh((-597, var_0.origin[1], var_0.origin[2]));
+    }
   }
 
   return var_1;

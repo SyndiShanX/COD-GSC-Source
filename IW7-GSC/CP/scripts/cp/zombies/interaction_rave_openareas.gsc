@@ -15,8 +15,9 @@ init_all_debris_and_door_positions() {
 _id_F945(var_0) {
   var_1 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
 
-  foreach(var_3 in var_1)
-  set_nonstick(var_3);
+  foreach(var_3 in var_1) {
+    set_nonstick(var_3);
+  }
 }
 
 set_nonstick(var_0) {
@@ -31,18 +32,21 @@ set_nonstick(var_0) {
 init_sliding_power_doors() {
   var_0 = scripts\engine\utility::getStructArray("power_door_sliding", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 thread sliding_power_door();
+  foreach(var_2 in var_0) {
+    var_2 thread sliding_power_door();
+  }
 }
 
 sliding_power_door() {
-  if(scripts\engine\utility::is_true(self.requires_power))
+  if(scripts\engine\utility::is_true(self.requires_power)) {
     level scripts\engine\utility::waittill_any("power_on", self.power_area + " power_on");
+  }
 
   self.powered_on = 1;
 
-  if(isDefined(self.script_sound))
+  if(isDefined(self.script_sound)) {
     playsoundatpos(self.origin, self.script_sound);
+  }
 
   var_0 = getEntArray(self.target, "targetname");
 

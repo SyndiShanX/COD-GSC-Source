@@ -24,8 +24,9 @@ init_jaroslav() {
       }
 
       if(var_5.script_noteworthy == "fnf_light") {
-        if(!isDefined(var_2.lights))
+        if(!isDefined(var_2.lights)) {
           var_2.lights = [];
+        }
 
         var_2.lights[var_2.lights.size] = var_5;
       }
@@ -38,8 +39,9 @@ init_jaroslav() {
 }
 
 should_use_alt_machine() {
-  if(getdvarint("loc_language") != 15 && getdvarint("loc_language") != 1)
+  if(getdvarint("loc_language") != 15 && getdvarint("loc_language") != 1) {
     return 0;
+  }
 
   return 0;
 }
@@ -48,8 +50,9 @@ power_on_func() {
   foreach(var_1 in self.lights) {
     var_1 setlightintensity(0);
 
-    if(scripts\engine\utility::is_true(self.requires_power))
+    if(scripts\engine\utility::is_true(self.requires_power)) {
       var_1 thread turn_on_light(self);
+    }
   }
 }
 
@@ -67,8 +70,9 @@ turn_on_light(var_0) {
     var_0.machine setscriptablepartstate("machine", "default_on");
     var_0.machine setscriptablepartstate("teller", "safe_on");
 
-    if(!var_0.powered_on)
+    if(!var_0.powered_on) {
       level thread scripts\cp\cp_music_and_dialog::add_to_ambient_sound_queue("jaroslav_anc_attract", var_0.jaw.origin, 120, 120, 250000, 100);
+    }
 
     var_0.powered_on = 1;
   }
@@ -82,8 +86,9 @@ interaction_jaroslav(var_0, var_1) {
   var_1 notify("cards_replenished");
 
   if(var_1 scripts\cp\utility::are_any_consumables_active()) {
-    foreach(var_4 in var_2)
-    var_1 notify(var_4 + "_exited_early");
+    foreach(var_4 in var_2) {
+      var_1 notify(var_4 + "_exited_early");
+    }
   }
 
   wait 0.5;
@@ -110,8 +115,9 @@ move_jaw(var_0, var_1) {
   if(isDefined(var_0.jaw.moving)) {
     return;
   }
-  if(!scripts\engine\utility::is_true(var_0.machine.hidden))
+  if(!scripts\engine\utility::is_true(var_0.machine.hidden)) {
     var_0.machine setscriptablepartstate("mouth", "smoke");
+  }
 
   for(var_2 = 0; var_2 < var_1; var_2++) {
     var_0.jaw.moving = 1;
@@ -126,25 +132,29 @@ move_jaw(var_0, var_1) {
 }
 
 jaroslav_hint_logic(var_0, var_1) {
-  if(scripts\engine\utility::is_true(var_0.machine.hidden))
+  if(scripts\engine\utility::is_true(var_0.machine.hidden)) {
     return "";
+  }
 
   if(var_0.requires_power && !var_0.powered_on) {
-    if(isDefined(level.needspowerstring))
+    if(isDefined(level.needspowerstring)) {
       return level.needspowerstring;
-    else
+    } else {
       return &"COOP_INTERACTIONS_REQUIRES_POWER";
+    }
   }
 
   level thread move_jaw(var_0, 1);
 
-  if(var_1 scripts\cp\utility::are_any_consumables_active())
+  if(var_1 scripts\cp\utility::are_any_consumables_active()) {
     var_2 = &"COOP_INTERACTIONS_FNF_WHILE_ACTIVE";
-  else
+  } else {
     var_2 = level.interaction_hintstrings[var_0.script_noteworthy];
+  }
 
-  if(scripts\engine\utility::is_true(level.unlimited_fnf))
+  if(scripts\engine\utility::is_true(level.unlimited_fnf)) {
     return var_2;
+  }
 
   switch (var_1.card_refills) {
     case 1:

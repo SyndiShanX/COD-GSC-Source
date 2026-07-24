@@ -131,11 +131,13 @@ _id_D6FD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 }
 
 _id_13351(var_0, var_1) {
-  if(!isarray(level._id_1290))
+  if(!isarray(level._id_1290)) {
     level._id_1290 = [];
+  }
 
-  if(!isDefined(level._id_1290[var_0]))
+  if(!isDefined(level._id_1290[var_0])) {
     level._id_1290[var_0] = 0;
+  }
 
   if(scripts\engine\utility::is_true(var_1) && !level._id_1290[var_0]) {
     scripts\engine\utility::exploder(var_0);
@@ -209,8 +211,9 @@ _id_132F7() {
   level waittill("something happens...");
   self notify("vfx_debris_moving_loop_stop");
 
-  if(isDefined(self._id_132E7))
+  if(isDefined(self._id_132E7)) {
     self._id_132E7 delete();
+  }
 }
 
 _id_1334D() {
@@ -338,17 +341,17 @@ _id_D6FE(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_D6FF(var_0, var_1, var_2) {
-  if(var_1 <= 0)
+  if(var_1 <= 0) {
     setsaveddvar("r_mbRadialOverrideDistortion", var_0);
-  else {
+  } else {
     thread scripts\sp\utility::_id_AB9A("r_mbRadialOverrideDistortion", var_0, var_1);
     wait(var_1);
   }
 
   if(var_2 >= 0) {
-    if(var_2 == 0)
+    if(var_2 == 0) {
       setsaveddvar("r_mbRadialOverrideDistortion", 0);
-    else {
+    } else {
       thread scripts\sp\utility::_id_AB9A("r_mbRadialOverrideDistortion", 0, var_2);
       wait(var_2);
     }

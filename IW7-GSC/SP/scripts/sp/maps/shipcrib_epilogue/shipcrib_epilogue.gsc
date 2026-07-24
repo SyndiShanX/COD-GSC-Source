@@ -103,8 +103,9 @@ credits_pan() {
 }
 
 eth_flyby(var_0, var_1, var_2) {
-  while(!scripts\engine\utility::within_fov(level.player.origin, level.player getplayerangles(), var_0.origin, -0.087155))
+  while(!scripts\engine\utility::within_fov(level.player.origin, level.player getplayerangles(), var_0.origin, -0.087155)) {
     wait 1;
+  }
 
   thread remove_spaceparticles(var_0);
   var_3 = spawn("script_model", var_0.origin);
@@ -132,10 +133,11 @@ eth_flyby(var_0, var_1, var_2) {
   var_3._id_BCDA.end = var_6;
   var_7 = gettime();
 
-  if(getdvarint("credits_test_fast"))
+  if(getdvarint("credits_test_fast")) {
     level.flybttime = 15;
-  else
+  } else {
     level.flybttime = 180;
+  }
 
   var_3._id_BCDA moveTo(var_6, level.flybttime);
   var_8 = (108, 36, 72);
@@ -164,10 +166,11 @@ eth_flyby(var_0, var_1, var_2) {
     var_21 = (angleclamp180(var_21[0]), angleclamp180(var_21[1]), angleclamp180(var_21[2]));
     var_9.angles = var_21 + (0, 0, var_19);
 
-    if(level.player adsButtonPressed(1))
+    if(level.player adsButtonPressed(1)) {
       var_11 = 1;
-    else
+    } else {
       var_11 = 0;
+    }
 
     if(var_16 && var_11) {
       wait 0.05;
@@ -219,11 +222,13 @@ eth_flyby(var_0, var_1, var_2) {
 }
 
 remove_spaceparticles(var_0) {
-  while(!scripts\engine\utility::within_fov(level.player.origin, level.player _meth_857C(), var_0.origin, 0.642787))
+  while(!scripts\engine\utility::within_fov(level.player.origin, level.player _meth_857C(), var_0.origin, 0.642787)) {
     wait 1;
+  }
 
-  while(scripts\engine\utility::within_fov(level.player.origin, level.player _meth_857C(), var_0.origin, 0.642787))
+  while(scripts\engine\utility::within_fov(level.player.origin, level.player _meth_857C(), var_0.origin, 0.642787)) {
     wait 1;
+  }
 
   stopFXOnTag(scripts\engine\utility::getfx("space_particle"), level.spaceparticles, "tag_origin");
   playFX(scripts\engine\utility::getfx("space_particle_end"), (0, 0, 0));
@@ -276,10 +281,11 @@ _id_62C3(var_0) {
   level.player _meth_82C0("shipcrib_epilogue_bridge_credits", 10.0);
   setDvar("credits_active", 1);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait 1;
-  else
+  } else {
     wait 5;
+  }
 
   _id_0B18::_id_CF09();
 }

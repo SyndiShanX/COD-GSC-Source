@@ -21,8 +21,9 @@ init() {
   var_0.carriedtrapoffset = (0, 0, 10);
   var_0.carriedtrapangles = (0, 0, 0);
 
-  if(!isDefined(level._id_47B3))
+  if(!isDefined(level._id_47B3)) {
     level._id_47B3 = [];
+  }
 
   level._id_47B3["crafted_trap_balloon"] = var_0;
 }
@@ -70,21 +71,24 @@ _id_8342(var_0, var_1) {
   removeperks();
   self.carriedsentry = var_2;
 
-  if(var_0)
+  if(var_0) {
     var_2.firstplacement = 1;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level._id_47B3["crafted_trap_balloon"].timeout;
+  }
 
   var_3 = _id_F68A(var_2, var_0, var_1);
   self.carriedsentry = undefined;
   thread waitrestoreperks();
   self.iscarrying = 0;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_F68A(var_0, var_1, var_2) {
@@ -109,8 +113,9 @@ _id_F68A(var_0, var_1, var_2) {
       return 1;
     }
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       var_3 = "force_cancel_placement";
+    }
 
     if(var_3 == "cancel_trap" || var_3 == "force_cancel_placement") {
       if(!var_1 && var_3 == "cancel_trap") {
@@ -119,10 +124,11 @@ _id_F68A(var_0, var_1, var_2) {
       scripts\engine\utility::allow_weapon(1);
       var_0 _id_126A7();
 
-      if(var_3 != "force_cancel_placement")
+      if(var_3 != "force_cancel_placement") {
         thread watch_dpad();
-      else if(var_1)
+      } else if(var_1) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
+      }
 
       return 0;
     }
@@ -130,8 +136,9 @@ _id_F68A(var_0, var_1, var_2) {
     if(!var_0.canbeplaced) {
       continue;
     }
-    if(var_1)
+    if(var_1) {
       scripts\cp\utility::remove_crafted_item_from_inventory(self);
+    }
 
     var_0 _id_126AA(var_2, self);
     scripts\engine\utility::allow_weapon(1);
@@ -221,8 +228,9 @@ _id_126A0(var_0) {
     wait 0.1;
 
     if(isDefined(self)) {
-      if(isDefined(self.carried_trap))
+      if(isDefined(self.carried_trap)) {
         self.carried_trap delete();
+      }
 
       self delete();
     }
@@ -244,8 +252,9 @@ _id_126A1() {
     }
     var_0 thread _id_8342(0, self.lifespan);
 
-    if(isDefined(self.charge_fx))
+    if(isDefined(self.charge_fx)) {
       self.charge_fx delete();
+    }
 
     self.balloons delete();
     scripts\cp\utility::removefromtraplist();
@@ -281,11 +290,13 @@ _id_126AA(var_0, var_1) {
 _id_126A7() {
   self.carriedby forceusehintoff();
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.iscarrying = 0;
+  }
 
-  if(isDefined(self.repulsor))
+  if(isDefined(self.repulsor)) {
     destroynavrepulsor(self.repulsor);
+  }
 
   self.carried_trap delete();
   self delete();
@@ -323,8 +334,9 @@ _id_126A6(var_0) {
 _id_126A9() {
   self makeunusable();
 
-  if(isDefined(self.repulsor))
+  if(isDefined(self.repulsor)) {
     destroynavrepulsor(self.repulsor);
+  }
 
   if(isDefined(self.dmg_trigger)) {
     self.dmg_trigger notify("stop_dmg");
@@ -396,8 +408,9 @@ release_zombie_on_trap_death(var_0) {
   self endon("death");
   var_0 waittill("death");
 
-  if(isDefined(self.og_goalradius))
+  if(isDefined(self.og_goalradius)) {
     self.goalradius = self.og_goalradius;
+  }
 
   self.og_goalradius = undefined;
   self.about_to_dance = 0;

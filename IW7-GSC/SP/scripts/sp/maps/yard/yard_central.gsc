@@ -75,12 +75,14 @@ _id_B19F() {
   level._id_3BD3 = getEntArray("central_elevator_model_pieces", "targetname");
 
   if(level._id_3BD3.size > 0) {
-    foreach(var_1 in level._id_3BD3)
-    var_1 linkTo(level._id_3BCF);
+    foreach(var_1 in level._id_3BD3) {
+      var_1 linkTo(level._id_3BCF);
+    }
   }
 
-  foreach(var_4 in level._id_3BD2)
-  var_4 linkTo(level._id_3BCF);
+  foreach(var_4 in level._id_3BD2) {
+    var_4 linkTo(level._id_3BCF);
+  }
 
   level._id_3BD1 = getEnt("lift_light", "targetname");
   level._id_3BD1 linkTo(level._id_3BCF);
@@ -183,8 +185,9 @@ _id_3BD7() {
   wait 1.75;
   scripts\sp\pip_util::_id_2ADF("yard_hud_salter_pip_02");
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_2683();
+  }
 
   wait 1;
   scripts\sp\utility::_id_1034D("yard_plr_ethanhostileforces");
@@ -250,8 +253,9 @@ _id_21B6() {
   if(var_4.size) {
     var_5 = scripts\sp\utility::_id_22CD("yard_armory_walker", 1);
 
-    foreach(var_2 in var_5)
-    var_2 thread _id_2260();
+    foreach(var_2 in var_5) {
+      var_2 thread _id_2260();
+    }
   }
 }
 
@@ -273,15 +277,17 @@ _id_2214() {
   var_2 = getEntArray("armory_pieces", "targetname");
 
   if(var_2.size) {
-    foreach(var_4 in var_2)
-    var_4 linkTo(var_0);
+    foreach(var_4 in var_2) {
+      var_4 linkTo(var_0);
+    }
   }
 
   level waittill("player_going_up");
   wait 2;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_0 moveTo(var_1.origin, 8, 2, 2);
+  }
 
   scripts\engine\utility::flag_wait("central_defend_wave_1_combat_started");
 
@@ -308,10 +314,11 @@ _id_21B5() {
 }
 
 _id_3BDB(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = var_0;
-  else
+  } else {
     var_1 = 27;
+  }
 
   level._id_3BCF _meth_83C9();
   level._id_3BCF.ready = 0;
@@ -346,8 +353,9 @@ _id_3BDB(var_0) {
   level.closet_runner_ignore_manager._id_12ACE solid();
   var_11 = getEnt("lift_light", "targetname");
 
-  if(isDefined(var_11))
+  if(isDefined(var_11)) {
     var_11 delete();
+  }
 
   var_2 = scripts\engine\utility::getStruct("elevator_1_start", "targetname");
   level._id_3BCF moveTo(var_2.origin, 2, 1, 1);
@@ -373,8 +381,9 @@ _id_10BDC() {
   scripts\sp\utility::_id_CF8B();
   var_1 = getEnt("lift_light", "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 delete();
+  }
 }
 
 _id_B19E() {
@@ -396,14 +405,17 @@ _id_8E71() {
   var_2 = getEntArray("barriers_clean_01", "targetname");
   var_3 = getEntArray("command_window_cracks", "targetname");
 
-  foreach(var_5 in var_1)
-  var_5 hide();
+  foreach(var_5 in var_1) {
+    var_5 hide();
+  }
 
-  foreach(var_5 in var_2)
-  var_5 show();
+  foreach(var_5 in var_2) {
+    var_5 show();
+  }
 
-  foreach(var_10 in var_3)
-  var_10 hide();
+  foreach(var_10 in var_3) {
+    var_10 hide();
+  }
 }
 
 _id_3BCA() {
@@ -523,10 +535,11 @@ _id_3BC8() {
   level.closet_runner_ignore_manager.type = "elevator";
   level.closet_runner_ignore_manager._id_3673 = getEnt("central_control_room_elevator", "targetname");
 
-  if(!isDefined(level.closet_runner_ignore_manager._id_3673.ready) || !level.closet_runner_ignore_manager._id_3673.ready)
+  if(!isDefined(level.closet_runner_ignore_manager._id_3673.ready) || !level.closet_runner_ignore_manager._id_3673.ready) {
     level.closet_runner_ignore_manager.ready = 0;
-  else
+  } else {
     level.closet_runner_ignore_manager.ready = 1;
+  }
 
   level.closet_runner_ignore_manager.spawners = [];
   var_0 = scripts\engine\utility::getStructArray("elevator_1_spawn", "targetname");
@@ -693,8 +706,9 @@ _id_3BBF() {
   scripts\sp\utility::_id_28D8("axis");
   scripts\sp\utility::_id_CF8B();
 
-  foreach(var_1 in level._id_C192)
-  var_1 notify("central_defend_wave_1_combat_started");
+  foreach(var_1 in level._id_C192) {
+    var_1 notify("central_defend_wave_1_combat_started");
+  }
 
   _id_6435(5);
   _id_4424();
@@ -717,8 +731,9 @@ _id_3BBF() {
   var_4 = getaiarray("axis");
 
   if(var_4.size) {
-    foreach(var_6 in var_4)
-    var_6 _meth_81D0();
+    foreach(var_6 in var_4) {
+      var_6 _meth_81D0();
+    }
   }
 
   scripts\engine\utility::flag_set("central_defend_end");
@@ -762,22 +777,25 @@ _id_679D() {
   scripts\sp\maps\yard\yard_util::_id_11685("Ethan", "Sir, I've hacked into the room's security, I'll support with the turrets", 3);
   var_0 = getEntArray("ethan_turret", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_679C();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_679C();
+  }
 }
 
 _id_679C() {
   var_0 = self;
 
-  if(isDefined(var_0) && isDefined(var_0.target))
+  if(isDefined(var_0) && isDefined(var_0.target)) {
     var_1 = getEnt(var_0.target, "targetname");
-  else
+  } else {
     return;
+  }
 
-  if(isDefined(var_1) && isDefined(var_1.target))
+  if(isDefined(var_1) && isDefined(var_1.target)) {
     var_2 = getEnt(var_1.target, "targetname");
-  else
+  } else {
     return;
+  }
 
   var_3 = self.angles;
   var_1 linkTo(var_0);
@@ -839,8 +857,9 @@ _id_DD32(var_0) {
 }
 
 _id_3BC0() {
-  while(getaicount("axis", "all") > 4)
+  while(getaicount("axis", "all") > 4) {
     wait 0.5;
+  }
 
   level notify("final_four");
   scripts\engine\utility::flag_set("final_four");
@@ -886,8 +905,9 @@ _id_3BC5(var_0, var_1) {
       var_2[var_3].ignoresuppression = 1;
     }
 
-    if(isDefined(var_2[var_3].script_noteworthy))
+    if(isDefined(var_2[var_3].script_noteworthy)) {
       var_2[var_3] thread[[level._id_C199[var_2[var_3].script_noteworthy]]]();
+    }
   }
 
   switch (var_1.type) {
@@ -903,8 +923,9 @@ _id_3BC5(var_0, var_1) {
       while(!var_4) {
         var_5 = var_1.trigger scripts\sp\utility::_id_77E3("axis", "all");
 
-        if(var_5.size == 0)
+        if(var_5.size == 0) {
           var_4 = 1;
+        }
 
         wait 0.05;
       }
@@ -949,8 +970,9 @@ _id_3BC5(var_0, var_1) {
       while(!var_4) {
         var_5 = var_1 scripts\sp\utility::_id_77E3("axis", "all");
 
-        if(var_5.size == 0)
+        if(var_5.size == 0) {
           var_4 = 1;
+        }
 
         wait 0.05;
       }
@@ -997,8 +1019,9 @@ closetargetsinouterradius(var_0) {
 
   var_1 = getEnt(var_0, "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     scripts\sp\utility::_id_11624(var_1);
+  }
 }
 
 _id_3BC4() {
@@ -1017,8 +1040,9 @@ _id_3BC4() {
       }
     }
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       return var_0;
+    }
 
     wait 0.5;
   }
@@ -1044,8 +1068,9 @@ _id_4420() {
 _id_4422() {
   var_0 = getEntArray("test_turret_node", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_4421();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_4421();
+  }
 }
 
 _id_441F() {
@@ -1110,21 +1135,23 @@ _id_10BDF() {
   scripts\sp\utility::_id_CF8B();
   var_0 = getEnt("lift_light", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 _id_B1A1() {
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_2683();
+  }
 
   scripts\sp\utility::_id_2669("central_hack_ethan");
   scripts\sp\maps\yard\yard_audio::_id_25EE("central_hack_ethan", "main");
   var_0 = scripts\engine\utility::getStruct("org_ethan_hack", "targetname");
 
-  if(!isDefined(level._id_6754))
+  if(!isDefined(level._id_6754)) {
     scripts\sp\maps\yard\yard_util::_id_106D9("org_ethan_hack");
-  else {
+  } else {
     if(isDefined(level._id_6037)) {
       level._id_6754 unlink();
       level._id_6037 notify("elevator_end_idle");
@@ -1139,9 +1166,9 @@ _id_B1A1() {
 
   var_1 = scripts\engine\utility::getStruct("org_salter_ship", "targetname");
 
-  if(!isDefined(level._id_EA2C))
+  if(!isDefined(level._id_EA2C)) {
     scripts\sp\maps\yard\yard_util::_id_107BE("org_salter_ship");
-  else {
+  } else {
     level._id_EA2C dontinterpolate();
     level._id_EA2C _meth_80F1(var_1.origin, var_1.angles, 500000.0);
     level._id_EA2C setgoalpos(level._id_EA2C.origin);
@@ -1166,8 +1193,9 @@ _id_3B4A() {
 }
 
 _id_3BDF() {
-  while(level.player._id_9BFA)
+  while(level.player._id_9BFA) {
     scripts\engine\utility::waitframe();
+  }
 
   wait 1;
   level.player thread scripts\sp\utility::_id_D08C("ges_radio");
@@ -1197,8 +1225,9 @@ _id_3BDF() {
   level.player scripts\engine\utility::allow_crouch(0);
   level.player freezecontrols(1);
 
-  if(isDefined(level.player._id_1586))
+  if(isDefined(level.player._id_1586)) {
     level.player scripts\sp\utility::_id_11425();
+  }
 
   level.player _meth_823C(var_2, "tag_player", 0.5, 0.25, 0.25);
   wait 0.5;
@@ -1221,8 +1250,9 @@ _id_3BDF() {
   level.player disableoffhandsecondaryweapons();
 
   foreach(var_5 in var_3) {
-    if(var_5 == "hackingdevice")
+    if(var_5 == "hackingdevice") {
       level.player assignweaponoffhandsecondary("hackingdevice");
+    }
   }
 
   _id_0E29::_id_87CA(1, 0.75);
@@ -1315,8 +1345,9 @@ _id_3BE0() {
   var_6 = getEntArray("power_relay_door_03", "targetname");
   var_7 = [var_4, var_5, var_6];
 
-  foreach(var_9 in var_7)
-  scripts\engine\utility::array_thread(var_9, scripts\sp\maps\yard\yard_util::_id_F595);
+  foreach(var_9 in var_7) {
+    scripts\engine\utility::array_thread(var_9, scripts\sp\maps\yard\yard_util::_id_F595);
+  }
 
   var_11 = scripts\engine\utility::getStruct("org_anim_power_core", "targetname");
   level._id_66C4 = scripts\engine\utility::getStruct("org_escape", "targetname");
@@ -1327,15 +1358,17 @@ _id_3BE0() {
   thread scripts\sp\hud_util::_id_6AA3(2.0, "white");
   _id_87AB();
 
-  if(isDefined(level._id_6764))
+  if(isDefined(level._id_6764)) {
     level._id_6764 delete();
+  }
 
   scripts\sp\maps\yard\yard_fx::_id_132B7(0);
   level.player _meth_823B(level._id_D267, "tag_player");
   level.player unlink();
 
-  if(isDefined(level._id_D267))
+  if(isDefined(level._id_D267)) {
     level._id_D267 delete();
+  }
 
   level.player setstance("stand");
   level.player scripts\sp\utility::_id_F526("normal");
@@ -1449,8 +1482,9 @@ _id_677C() {
   var_7 = getaiarray("axis");
 
   if(isDefined(var_7) && var_7.size) {
-    foreach(var_9 in var_7)
-    var_9 delete();
+    foreach(var_9 in var_7) {
+      var_9 delete();
+    }
   }
 
   level.player _meth_823C(var_3, "tag_player", 0.5, 0.25, 0.25);
@@ -1564,8 +1598,9 @@ _id_6775(var_0) {
 _id_6445() {
   var_0 = getEntArray("enemy_destroyers", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2._id_EEF9 = "cannon_small_ca,1,1,amb_turret_sml_l_ts_1,amb_turret_sml_l_ts_5,amb_turret_sml_l_ts_6,amb_turret_sml_l_ts_7";
+  foreach(var_2 in var_0) {
+    var_2._id_EEF9 = "cannon_small_ca,1,1,amb_turret_sml_l_ts_1,amb_turret_sml_l_ts_5,amb_turret_sml_l_ts_6,amb_turret_sml_l_ts_7";
+  }
 
   level._id_1678 = [];
   level._id_6506 = scripts\sp\vehicle::_id_1080F("enemy_destroyers");
@@ -1582,8 +1617,9 @@ _id_FD34() {
   self endon("deleted");
   scripts\engine\utility::flag_wait("remove_enemy_ships");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_129C8() {
@@ -1591,8 +1627,9 @@ _id_129C8() {
     foreach(var_3 in var_1) {
       var_3._id_4D1E._id_DCCA = 70000;
 
-      if(var_3.type == "cannon_flak_ca")
+      if(var_3.type == "cannon_flak_ca") {
         var_3.angles = var_3.angles + (0, 90, 0);
+      }
 
       var_4 = randomfloatrange(-1000, 1000);
       var_5 = randomfloatrange(-1000, 1000);
@@ -1640,8 +1677,9 @@ _id_63DF() {
   scripts\engine\utility::waitframe();
 
   foreach(var_4 in self.turrets) {
-    foreach(var_6 in var_4)
-    scripts\engine\utility::waitframe();
+    foreach(var_6 in var_4) {
+      scripts\engine\utility::waitframe();
+    }
   }
 }
 
@@ -1691,8 +1729,9 @@ _id_13E42() {
   self endon("deleted");
   wait 4;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self _meth_81D0();
+  }
 }
 
 _id_91E6() {
@@ -1713,8 +1752,9 @@ _id_87AA(var_0) {
   level notify("yard_defend_ammo_cleanup");
   var_1 = level.player getweaponslistall();
 
-  foreach(var_3 in var_1)
-  level.player takeweapon(var_3);
+  foreach(var_3 in var_1) {
+    level.player takeweapon(var_3);
+  }
 
   level.player scripts\engine\utility::allow_ads(0);
   level.player scripts\engine\utility::allow_melee(0);
@@ -1870,8 +1910,9 @@ _id_E77C() {
   var_1 thread scripts\sp\anim::_id_1EEA(var_1, "idle_console");
   wait 1;
 
-  if(isalive(var_1))
+  if(isalive(var_1)) {
     var_1 _meth_83A1();
+  }
 }
 
 _id_6762() {
@@ -1890,8 +1931,9 @@ _id_6763() {
   scripts\engine\utility::flag_wait("flag_core_enter");
   var_0 = scripts\sp\utility::_id_22CD("ethan_moment_wave_5", 1);
 
-  foreach(var_2 in var_0)
-  var_2 _id_6771();
+  foreach(var_2 in var_0) {
+    var_2 _id_6771();
+  }
 
   level notify("ai_aware_of_hacked_drone");
 }
@@ -1901,8 +1943,9 @@ _id_13BC5(var_0, var_1) {
   self endon("deleted");
   scripts\engine\utility::flag_wait(var_0);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
   self delete();
 }
@@ -1915,23 +1958,29 @@ _id_7726(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   level endon(var_1);
   level.player endon(var_1);
 
-  if(!isarray(var_0))
+  if(!isarray(var_0)) {
     var_0 = [var_0];
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 5;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 10;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 45;
+  }
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = var_2;
+  }
 
-  if(!isDefined(var_7))
+  if(!isDefined(var_7)) {
     var_7 = 0;
+  }
 
   wait(var_5);
 
@@ -1943,8 +1992,9 @@ _id_7726(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 }
 
 _id_677A() {
-  while(!scripts\engine\utility::within_fov(level.player.origin, level.player.angles, level._id_6754.origin, 0.98))
+  while(!scripts\engine\utility::within_fov(level.player.origin, level.player.angles, level._id_6754.origin, 0.98)) {
     wait 0.05;
+  }
 
   thread scripts\sp\utility::_id_1034D("yard_plr_iseeyouhackingn");
   level.player waittill("hack_control_target");
@@ -2008,8 +2058,9 @@ _id_BB51(var_0) {
 _id_6785() {
   var_0 = getEntArray("ethan_pipes", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 scripts\sp\utility::_id_9196(1, 0, 1, "fuse");
+  foreach(var_2 in var_0) {
+    var_2 scripts\sp\utility::_id_9196(1, 0, 1, "fuse");
+  }
 
   scripts\engine\utility::flag_wait("flag_core_downstairs");
 
@@ -2098,8 +2149,9 @@ _id_D293(var_0, var_1) {
   if(var_0) {
     playFX(level._id_7649["player_shock"], (0, 0, 0));
 
-    if(isDefined(var_1) && var_1)
+    if(isDefined(var_1) && var_1) {
       setomnvar("ui_hack_control_signal_failing", 1);
+    }
 
     self _meth_80D8(0.3, 0.3);
     self playRumbleOnEntity("damage_light");
@@ -2292,8 +2344,9 @@ _id_10C9C() {
   var_0["roll"]["max"] = 10;
   _id_0B61::_id_F324(var_0["pitch"], var_0["yaw"], var_0["roll"]);
 
-  while(length(level.player getvelocity()) < 15)
+  while(length(level.player getvelocity()) < 15) {
     scripts\engine\utility::waitframe();
+  }
 
   _id_0B61::_id_ACDE("leg_right", 0, 1.25, 0);
 }
@@ -2303,8 +2356,9 @@ _id_4076(var_0) {
   wait 3;
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2 delete();
+    }
   }
 }
 
@@ -2362,9 +2416,9 @@ _id_895C() {
   var_2 = undefined;
   var_3 = _id_4922();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = var_0 scripts\engine\utility::spawn_tag_origin();
-  else {
+  } else {
     var_0 = scripts\engine\utility::getStruct("power_relay_struct", "targetname");
 
     if(isDefined(var_0)) {
@@ -2531,13 +2585,15 @@ _id_465A(var_0) {
   var_4 = 0.75;
   var_5 = 0.5;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 2;
+  }
 
   var_6 = getEnt("relay_shadow_tube", "targetname");
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_6 linkTo(var_1);
+  }
 
   wait(var_0);
   level notify("vfx_core_exposed");
@@ -2578,11 +2634,13 @@ _id_10A08(var_0) {
 }
 
 _id_8CAD(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 100;
+  }
 
-  for(var_1 = 0; var_1 < var_0; var_1 = var_2 + var_1)
+  for(var_1 = 0; var_1 < var_0; var_1 = var_2 + var_1) {
     self waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
+  }
 }
 
 _id_DF33(var_0) {
@@ -2709,8 +2767,9 @@ _id_DF37() {
 _id_AD03() {
   var_0 = scripts\sp\utility::_id_7A8F();
 
-  foreach(var_2 in var_0)
-  var_2 linkTo(self);
+  foreach(var_2 in var_0) {
+    var_2 linkTo(self);
+  }
 }
 
 _id_10BDE() {
@@ -2724,8 +2783,9 @@ _id_10BDE() {
   scripts\sp\maps\yard\yard_audio::_id_25EE("central_escape", "start");
   var_0 = getEnt("lift_light", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
   scripts\sp\maps\yard\yard_util::_id_106D9("org_ethan_hack");
   scripts\sp\maps\yard\yard_util::_id_107BE("org_salter_ship");
@@ -2797,8 +2857,9 @@ _id_8AEB(var_0) {
 _id_516F(var_0) {
   wait(var_0);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_8AED(var_0, var_1) {
@@ -2991,30 +3052,36 @@ _id_13D67() {
   var_4 = getEntArray("command_window_cracks", "targetname");
   var_5 = getEntArray("yard_debris_field", "targetname");
 
-  foreach(var_7 in var_2)
-  var_7 show();
+  foreach(var_7 in var_2) {
+    var_7 show();
+  }
 
-  foreach(var_7 in var_3)
-  var_7 hide();
+  foreach(var_7 in var_3) {
+    var_7 hide();
+  }
 
-  foreach(var_12 in var_4)
-  var_12 show();
+  foreach(var_12 in var_4) {
+    var_12 show();
+  }
 
-  foreach(var_15 in var_5)
-  var_15 show();
+  foreach(var_15 in var_5) {
+    var_15 show();
+  }
 
   var_17 = getEntArray("yard_debris_field_spinny", "script_noteworthy");
 
-  foreach(var_19 in var_17)
-  var_19 thread _id_4E9A();
+  foreach(var_19 in var_17) {
+    var_19 thread _id_4E9A();
+  }
 }
 
 _id_100D2() {
   var_0 = getEntArray("control_room_vista_dome_01", "targetname");
 
   if(isDefined(var_0) && var_0.size) {
-    foreach(var_2 in var_0)
-    var_2 show();
+    foreach(var_2 in var_0) {
+      var_2 show();
+    }
   }
 }
 
@@ -3022,16 +3089,18 @@ _id_4E9A() {
   level endon("player_landed");
   var_0 = 1;
 
-  if(isDefined(self.script_parameters))
+  if(isDefined(self.script_parameters)) {
     var_0 = float(self.script_parameters);
+  }
 
   var_1 = 8;
 
   for(;;) {
     var_2 = 1.0;
 
-    if(isDefined(self))
+    if(isDefined(self)) {
       self rotatepitch(var_1 * var_0, var_2, 0, 0);
+    }
 
     wait(var_2);
   }
@@ -3063,10 +3132,11 @@ _id_87A9(var_0, var_1) {
   self._id_848F["model_rope_fire"] = _id_10908("grapple_rope");
   self._id_848F["model_rope_fire"] _meth_81E4(self, "j_wrist_le", (0, 0, 0), (0, 180, 0), 1, 1, 1, 0, "none");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self._id_848F["model_rope_fire"] _meth_850D(var_1);
-  else
+  } else {
     self._id_848F["model_rope_fire"] _meth_850D(var_0);
+  }
 
   self._id_848F["model_rope_idle"] = _id_10908("grapple_rope_stretch");
 }
@@ -3141,10 +3211,11 @@ _id_13E36(var_0, var_1, var_2, var_3, var_4) {
   var_0 _meth_8239(1);
 
   if(isDefined(var_4) && !var_4) {
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       wait(var_3);
-    else
+    } else {
       wait 5;
+    }
 
     level.player unlink();
     var_1 hide();
@@ -3155,8 +3226,9 @@ _id_13E36(var_0, var_1, var_2, var_3, var_4) {
   var_6 = vectorNormalize(var_5);
   var_7 = length(var_5);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 200;
+  }
 
   var_8 = var_7 / var_2;
   var_9 = var_8;
@@ -3216,8 +3288,9 @@ _id_5EFC(var_0) {
     wait(var_2);
   }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self missile_settargetpos(var_0 + var_8);
+  }
 }
 
 _id_6CF4(var_0, var_1, var_2) {
@@ -3256,22 +3329,25 @@ _id_8DDC(var_0, var_1) {
   scripts\engine\utility::flag_set("end_scene_player_unlink");
   _id_0E4B::_id_8E06();
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     level._id_10964.helmet attach("vm_hero_protagonist_helmet_glass_crack_04", "tag_origin");
-  else
+  } else {
     level.player.helmet attach("vm_hero_protagonist_helmet_glass_crack_04", "tag_origin");
+  }
 }
 
 _id_100F9() {
   var_0 = getEntArray("salter_deck_geo", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 show();
+  foreach(var_2 in var_0) {
+    var_2 show();
+  }
 
   var_4 = getEntArray("salter_deck_models", "targetname");
 
-  foreach(var_6 in var_4)
-  var_6 show();
+  foreach(var_6 in var_4) {
+    var_6 show();
+  }
 }
 
 _id_13E33() {
@@ -3284,37 +3360,43 @@ _id_13E33() {
 _id_13E2F() {
   var_0 = getEntArray("yard_end_door_cleanup", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
+  }
 
   var_0 = getEntArray("yard_end_door_cleanup", "script_parameters");
 
-  foreach(var_2 in var_0)
-  var_2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
+  }
 }
 
 _id_13E35() {
   var_0 = getEntArray("yard_end_server_cleanup", "script_parameters");
 
-  foreach(var_2 in var_0)
-  var_2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
+  }
 }
 
 _id_13E32() {
   var_0 = getEntArray("phys_battery_destructible", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
+  }
 
   var_4 = getEntArray("phys_antigrav_destructible", "targetname");
 
-  foreach(var_2 in var_4)
-  var_2 delete();
+  foreach(var_2 in var_4) {
+    var_2 delete();
+  }
 
   var_7 = getEntArray("phys_barrel_destructible", "targetname");
 
-  foreach(var_2 in var_7)
-  var_2 delete();
+  foreach(var_2 in var_7) {
+    var_2 delete();
+  }
 }
 
 _id_13E31() {
@@ -3370,8 +3452,9 @@ _id_13E37() {
 _id_13E41(var_0, var_1) {
   var_2 = spawnStruct();
 
-  if(!isDefined(var_2._id_111D7))
+  if(!isDefined(var_2._id_111D7)) {
     var_2._id_111D7 = getmapsuncolorandintensity()[3];
+  }
 
   var_3 = var_1 / 0.05;
   var_4 = var_0 - var_2._id_111D7;

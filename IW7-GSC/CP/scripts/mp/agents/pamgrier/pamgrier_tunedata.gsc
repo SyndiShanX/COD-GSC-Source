@@ -4,8 +4,9 @@
 ************************************************************/
 
 setuptunedata() {
-  if(!isDefined(level.agenttunedata))
+  if(!isDefined(level.agenttunedata)) {
     level.agenttunedata = [];
+  }
 
   level.agenttunedata["pamgrier"] = spawnStruct();
   setuppamgriertunedata(level.agenttunedata["pamgrier"]);

@@ -16,8 +16,9 @@ _id_138BB() {
 #using_animtree("generic_human");
 
 _id_7814() {
-  if(scripts\engine\utility::cointoss())
+  if(scripts\engine\utility::cointoss()) {
     return % moon_curved_wallrun_1;
-  else
+  } else {
     return % moon_curved_wallrun_2;
+  }
 }

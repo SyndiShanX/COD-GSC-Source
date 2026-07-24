@@ -17,8 +17,9 @@ init_pap_boat() {
   level.boat_vehicle setnonstick(0);
   level.boat_vehicle.attach_points = getEntArray(level.boat_start_node.target, "targetname");
 
-  foreach(var_1 in level.boat_vehicle.attach_points)
-  var_1 linkTo(level.boat_vehicle);
+  foreach(var_1 in level.boat_vehicle.attach_points) {
+    var_1 linkTo(level.boat_vehicle);
+  }
 
   level.boat_vehicle hidepart("tag_motor");
   wait 1;
@@ -76,12 +77,13 @@ teleport_from_hidden_room_before_time_up(var_0) {
 }
 
 pap_portal_hint_logic(var_0, var_1) {
-  if(scripts\engine\utility::flag("disable_portals"))
+  if(scripts\engine\utility::flag("disable_portals")) {
     return "";
-  else if(isDefined(var_0.cooling_down))
+  } else if(isDefined(var_0.cooling_down)) {
     return &"COOP_INTERACTIONS_COOLDOWN";
-  else
+  } else {
     return &"CP_RAVE_HIDDEN_TELEPORT";
+  }
 }
 
 pap_portal_use_func(var_0, var_1) {
@@ -206,8 +208,9 @@ teleport_to_safe_spot(var_0) {
 
   while(!isDefined(var_2)) {
     foreach(var_4 in var_1) {
-      if(!positionwouldtelefrag(var_4.origin))
+      if(!positionwouldtelefrag(var_4.origin)) {
         var_2 = var_4;
+      }
     }
 
     if(!isDefined(var_2)) {
@@ -233,8 +236,9 @@ hidden_room_timer() {
   self endon("last_stand");
   self.kicked_out = undefined;
 
-  if(!scripts\engine\utility::flag("pap_portal_used"))
+  if(!scripts\engine\utility::flag("pap_portal_used")) {
     scripts\engine\utility::flag_set("pap_portal_used");
+  }
 
   thread pap_timer_start();
   level thread pap_vo(self);
@@ -244,8 +248,9 @@ hidden_room_timer() {
 }
 
 pap_vo(var_0) {
-  if(level.pap_firsttime != 1)
+  if(level.pap_firsttime != 1) {
     var_0 thread scripts\cp\cp_vo::try_to_play_vo("pap_room_first", "rave_pap_vo");
+  }
 
   level.pap_firsttime = 1;
   wait 4;
@@ -278,8 +283,9 @@ move_through_tube(var_0, var_1, var_2, var_3) {
   var_0.is_fast_traveling = undefined;
   var_0 scripts\cp\utility::removedamagemodifier("fast_travel", 0);
 
-  if(var_0 scripts\cp\utility::isignoremeenabled())
+  if(var_0 scripts\cp\utility::isignoremeenabled()) {
     var_0 scripts\cp\utility::allow_player_ignore_me(0);
+  }
 
   var_0.is_fast_traveling = undefined;
   var_0.no_outline = 0;
@@ -294,17 +300,19 @@ disable_teleportation(var_0, var_1, var_2) {
   var_0 waittill(var_2);
   wait(var_1);
 
-  if(!var_0 scripts\cp\utility::isteleportenabled())
+  if(!var_0 scripts\cp\utility::isteleportenabled()) {
     var_0 scripts\cp\utility::allow_player_teleport(1);
+  }
 
   var_0 notify("can_teleport");
 }
 
 packboat_hint_func(var_0, var_1) {
-  if(level.boat_pieces_found < 3)
+  if(level.boat_pieces_found < 3) {
     return "";
-  else
+  } else {
     return &"CP_RAVE_USEBOAT";
+  }
 }
 
 use_packboat(var_0, var_1) {
@@ -325,12 +333,14 @@ use_packboat(var_0, var_1) {
     } else {
       level.boat_survivor notify("stop_boat_nag");
 
-      foreach(var_3 in level.players)
-      link_player_to_boat(var_3, var_0);
+      foreach(var_3 in level.players) {
+        link_player_to_boat(var_3, var_0);
+      }
     }
   } else {
-    if(isDefined(level.start_boat_ride_func))
+    if(isDefined(level.start_boat_ride_func)) {
       var_0 thread[[level.start_boat_ride_func]]();
+    }
 
     var_1 playlocalsound("scn_boatride_board");
     level.boat_vehicle thread setup_boat_sounds();
@@ -349,25 +359,29 @@ use_packboat(var_0, var_1) {
   reset_player_spots(var_0);
 
   if(!isDefined(level.packboat_logic_started)) {
-    if(!scripts\engine\utility::flag("survivor_released"))
+    if(!scripts\engine\utility::flag("survivor_released")) {
       level.boat_vehicle thread packboat_path(var_0);
-    else
+    } else {
       level thread survivor_boat_ride();
+    }
 
     level.boat_vehicle startpath();
     level.packboat_logic_started = 1;
   } else if(scripts\engine\utility::flag("survivor_released"))
     level thread survivor_boat_ride();
-  else
+  else {
     level notify("boat_used");
+  }
 }
 
 setup_boat_sounds() {
-  if(!isDefined(level.boat_vehicle.sfx_front))
+  if(!isDefined(level.boat_vehicle.sfx_front)) {
     level.boat_vehicle.sfx_front = spawn("script_model", level.boat_vehicle.origin);
+  }
 
-  if(!isDefined(level.boat_vehicle.sfx_rear))
+  if(!isDefined(level.boat_vehicle.sfx_rear)) {
     level.boat_vehicle.sfx_rear = spawn("script_model", level.boat_vehicle.origin);
+  }
 
   wait 0.05;
   level.boat_vehicle.sfx_front linkTo(level.boat_vehicle, "tag_body");
@@ -383,11 +397,13 @@ all_players_near_boat(var_0) {
   var_1 = 19600;
 
   foreach(var_3 in level.players) {
-    if(!var_3 scripts\cp\utility::is_valid_player())
+    if(!var_3 scripts\cp\utility::is_valid_player()) {
       return 0;
+    }
 
-    if(distance2dsquared(var_3.origin, var_0.origin) > var_1)
+    if(distance2dsquared(var_3.origin, var_0.origin) > var_1) {
       return 0;
+    }
   }
 
   return 1;
@@ -396,8 +412,9 @@ all_players_near_boat(var_0) {
 reset_player_spots(var_0) {
   var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
 
-  foreach(var_3 in var_1)
-  var_3.linked_player = undefined;
+  foreach(var_3 in var_1) {
+    var_3.linked_player = undefined;
+  }
 }
 
 link_player_to_boat(var_0, var_1, var_2) {
@@ -417,8 +434,9 @@ link_player_to_boat(var_0, var_1, var_2) {
   var_0 playerlinkedoffsetenable();
   var_0.ignoreme = 1;
 
-  if(!isDefined(level.boat_vehicle.first_player))
+  if(!isDefined(level.boat_vehicle.first_player)) {
     level.boat_vehicle.first_player = var_0;
+  }
 
   var_0 setseatedanimconditional("seat", 1);
   var_0 allowcrouch(1);
@@ -499,11 +517,13 @@ stop_and_wait_for_boat_use(var_0) {
   level.boat_vehicle vehicle_setspeedimmediate(0, 1, 1);
   scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
 
-  if(isDefined(level.boat_vehicle.sfx_front))
+  if(isDefined(level.boat_vehicle.sfx_front)) {
     level.boat_vehicle.sfx_front delete();
+  }
 
-  if(isDefined(level.boat_vehicle.sfx_rear))
+  if(isDefined(level.boat_vehicle.sfx_rear)) {
     level.boat_vehicle.sfx_rear delete();
+  }
 
   level.boat_vehicle.docked = 1;
   level waittill("boat_used");
@@ -515,8 +535,9 @@ stop_and_drop_players(var_0) {
   level.boat_vehicle vehicle_setspeedimmediate(0, 1, 1);
   wait 1;
 
-  foreach(var_2 in level.boat_vehicle.linked_players)
-  level drop_off_player(var_2, var_0);
+  foreach(var_2 in level.boat_vehicle.linked_players) {
+    level drop_off_player(var_2, var_0);
+  }
 
   if(var_0 == "island_dropoff_player") {
     if(isDefined(level.boat_vehicle.sfx_front)) {
@@ -537,14 +558,16 @@ drop_off_player(var_0, var_1) {
   var_4 = undefined;
 
   foreach(var_6 in var_3) {
-    if(var_6.script_count == var_2)
+    if(var_6.script_count == var_2) {
       var_4 = var_6;
+    }
   }
 
   var_8 = getgroundposition(var_4.origin, 8, 32, 32);
 
-  if(!isDefined(var_8))
+  if(!isDefined(var_8)) {
     var_8 = var_4.origin;
+  }
 
   var_0 setOrigin(var_8 + (0, 0, 1));
   var_0 setplayerangles(var_4.angles);
@@ -573,8 +596,9 @@ boat_last_stand_monitor(var_0) {
   var_3 = undefined;
 
   foreach(var_5 in var_2) {
-    if(var_5.script_count == var_1)
+    if(var_5.script_count == var_1) {
       var_3 = var_5;
+    }
   }
 
   var_0 setOrigin(var_3.origin);
@@ -601,13 +625,15 @@ packboat_countdown() {
 }
 
 pap_repair_hint_func(var_0, var_1) {
-  if(level.pap_pieces_found < 2)
+  if(level.pap_pieces_found < 2) {
     return "";
+  }
 
-  if(!scripts\engine\utility::flag("pap_fixed"))
+  if(!scripts\engine\utility::flag("pap_fixed")) {
     return &"CP_RAVE_FIX_PAP";
-  else
+  } else {
     return &"CP_RAVE_USE_PAP";
+  }
 }
 
 fix_pap(var_0, var_1) {
@@ -618,16 +644,18 @@ fix_pap(var_0, var_1) {
     scripts\engine\utility::flag_set("pap_fixed");
     var_2 = scripts\engine\utility::getStructArray(var_0.script_noteworthy, "script_noteworthy");
 
-    foreach(var_4 in var_2)
-    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_4);
+    foreach(var_4 in var_2) {
+      scripts\cp\cp_interaction::remove_from_current_interaction_list(var_4);
+    }
 
     level scripts\cp\utility::set_completed_quest_mark(3);
     level.projector_struct setModel("cp_rave_projector_with_reels");
     level thread play_pap_vo(var_1);
     level thread activate_pap(var_0);
 
-    foreach(var_7 in level.players)
-    var_7 scripts\cp\cp_interaction::refresh_interaction();
+    foreach(var_7 in level.players) {
+      var_7 scripts\cp\cp_interaction::refresh_interaction();
+    }
   }
 }
 
@@ -675,8 +703,9 @@ spawn_survivor_on_boat() {
   }
   level.boat_survivor_spawned = 1;
 
-  while(!scripts\engine\utility::is_true(level.boat_vehicle.docked))
+  while(!scripts\engine\utility::is_true(level.boat_vehicle.docked)) {
     wait 0.25;
+  }
 
   var_0 = spawnStruct();
   var_0.origin = (-3803.9, 1589.5, -159);
@@ -714,8 +743,9 @@ survivor_boat_filler() {
     var_2 = scripts\engine\utility::random(var_1);
     var_1 = scripts\engine\utility::array_remove(var_1, var_2);
 
-    if(var_1.size < 1)
+    if(var_1.size < 1) {
       var_1 = var_0;
+    }
 
     level.boat_survivor playsoundonmovingent(var_2);
     wait(randomintrange(5, 9));
@@ -727,13 +757,15 @@ survivor_boat_ride() {
   level.pause_nag_vo = 1;
   level.boat_vehicle resumespeed(3);
 
-  foreach(var_1 in level.players)
-  var_1 scripts\cp\utility::allow_player_teleport(0);
+  foreach(var_1 in level.players) {
+    var_1 scripts\cp\utility::allow_player_teleport(0);
+  }
 
   level.no_slasher = 1;
 
-  if(isDefined(level.slasher))
+  if(isDefined(level.slasher)) {
     level.slasher suicide();
+  }
 
   level.boat_vehicle thread survivor_boat_ride_sfx();
   wait 1;
@@ -756,13 +788,15 @@ survivor_boat_ride() {
   level.boat_survivor playSound("scn_slashride_survivor_splash");
   playFX(level._effect["boat_fall_splash"], level.boat_survivor.origin);
 
-  foreach(var_1 in level.players)
-  var_1 playlocalsound("scn_slashride_03");
+  foreach(var_1 in level.players) {
+    var_1 playlocalsound("scn_slashride_03");
+  }
 
   wait 1.25;
 
-  foreach(var_1 in level.players)
-  var_1 playlocalsound("scn_slashride_slasher_water");
+  foreach(var_1 in level.players) {
+    var_1 playlocalsound("scn_slashride_slasher_water");
+  }
 
   wait 1;
   level thread super_slasher_intro();
@@ -772,21 +806,24 @@ survivor_boat_ride() {
 }
 
 survivor_boat_ride_music_01() {
-  foreach(var_1 in level.players)
-  var_1 playlocalsound("mus_zmb_rave_slasher_boat_01");
+  foreach(var_1 in level.players) {
+    var_1 playlocalsound("mus_zmb_rave_slasher_boat_01");
+  }
 }
 
 survivor_boat_ride_music_02() {
-  foreach(var_1 in level.players)
-  var_1 playlocalsound("mus_zmb_rave_slasher_boat_02");
+  foreach(var_1 in level.players) {
+    var_1 playlocalsound("mus_zmb_rave_slasher_boat_02");
+  }
 }
 
 survivor_boat_ride_sfx() {
   level endon("boatride_over");
   level endon("gamed_ended");
 
-  foreach(var_1 in level.players)
-  var_1 playlocalsound("scn_slashride_01");
+  foreach(var_1 in level.players) {
+    var_1 playlocalsound("scn_slashride_01");
+  }
 
   var_3 = getvehiclenode(level.boat_start_node.target, "targetname");
 
@@ -796,8 +833,9 @@ survivor_boat_ride_sfx() {
     if(isDefined(var_3.name)) {
       switch (var_3.name) {
         case "slasher_boat_sound_2":
-          foreach(var_1 in level.players)
-          var_1 playlocalsound("scn_slashride_02");
+          foreach(var_1 in level.players) {
+            var_1 playlocalsound("scn_slashride_02");
+          }
 
           break;
         default:
@@ -872,15 +910,17 @@ water_fx() {
 }
 
 fade_screen_after_ss_intro() {
-  foreach(var_1 in level.players)
-  var_1 thread ss_intro_black_screen();
+  foreach(var_1 in level.players) {
+    var_1 thread ss_intro_black_screen();
+  }
 
   wait 1;
 }
 
 move_players_to_shore() {
-  foreach(var_1 in level.players)
-  var_1 thread move_player_to_shore(var_1, "island_dropoff_player");
+  foreach(var_1 in level.players) {
+    var_1 thread move_player_to_shore(var_1, "island_dropoff_player");
+  }
 }
 
 fade_in_for_ss_fight() {
@@ -894,8 +934,9 @@ move_player_to_shore(var_0, var_1) {
   var_4 = undefined;
 
   foreach(var_6 in var_3) {
-    if(var_6.script_count == var_2)
+    if(var_6.script_count == var_2) {
       var_4 = var_6;
+    }
   }
 
   var_0 setOrigin(var_4.origin);

@@ -10,11 +10,13 @@ _id_98C5(var_0) {
 }
 
 setupdestructibledoors() {
-  if(isDefined(self._id_2AB4))
+  if(isDefined(self._id_2AB4)) {
     thread _id_4D5E();
+  }
 
-  if(isDefined(self._id_2AB5))
+  if(isDefined(self._id_2AB5)) {
     thread _id_5670();
+  }
 }
 
 _id_4D5E() {
@@ -49,8 +51,9 @@ _id_5670() {
   for(;;) {
     self waittill("dismemberment_part_died", var_0);
 
-    foreach(var_2 in var_0)
-    _id_5673(var_2);
+    foreach(var_2 in var_0) {
+      _id_5673(var_2);
+    }
 
     var_0 = undefined;
   }

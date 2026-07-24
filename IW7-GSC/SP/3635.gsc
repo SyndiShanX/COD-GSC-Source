@@ -68,8 +68,9 @@ _id_8CFB(var_0) {
       level.player scripts\sp\utility::_id_65DD("player_heavy_weapon_active");
       self switchtoweaponimmediate(var_2);
     } else {
-      if(isDefined(self._id_8CED) && isDefined(self._id_8D0B))
+      if(isDefined(self._id_8CED) && isDefined(self._id_8D0B)) {
         self._id_8D0B[self._id_8CED]._id_9070 scripts\sp\hud_util::updatebar(0);
+      }
 
       var_3 = self getweaponslistprimaries();
 
@@ -87,8 +88,9 @@ _id_8CFB(var_0) {
       }
     }
 
-    while(self buttonPressed("BUTTON_Y"))
+    while(self buttonPressed("BUTTON_Y")) {
       scripts\engine\utility::waitframe();
+    }
   }
 }
 
@@ -105,8 +107,9 @@ _id_8CEF() {
   if(isDefined(self._id_8CED) && self getcurrentweapon() != self._id_8CED) {
     childthread _id_C137();
 
-    while(self buttonPressed("BUTTON_Y"))
+    while(self buttonPressed("BUTTON_Y")) {
       scripts\engine\utility::waitframe();
+    }
   }
 
   self notify("give_next_weapon");
@@ -116,8 +119,9 @@ _id_C137() {
   self endon("give_next_weapon");
   wait 0.15;
 
-  if(isDefined(self._id_8D0B))
+  if(isDefined(self._id_8D0B)) {
     self._id_8D0B[self._id_8CED] _id_9071(0.8);
+  }
 
   var_0 = 0.2;
   var_0 = var_0 * 1000;
@@ -127,8 +131,9 @@ _id_C137() {
     var_2 = gettime() - var_1;
     var_3 = var_2 / var_0;
 
-    if(isDefined(self._id_8D0B))
+    if(isDefined(self._id_8D0B)) {
       self._id_8D0B[self._id_8CED] scripts\sp\hud_util::updatebar(var_3);
+    }
 
     wait 0.05;
   }
@@ -146,14 +151,16 @@ _id_8CF0() {
   var_6 = [0, 65, 30];
   var_2 = [];
 
-  foreach(var_9, var_8 in var_6)
-  var_2[var_9] = var_4 + var_8;
+  foreach(var_9, var_8 in var_6) {
+    var_2[var_9] = var_4 + var_8;
+  }
 
   var_6 = [0, 0, 30];
   var_3 = [];
 
-  foreach(var_9, var_8 in var_6)
-  var_3[var_9] = var_5 + var_8;
+  foreach(var_9, var_8 in var_6) {
+    var_3[var_9] = var_5 + var_8;
+  }
 
   var_11 = level.player getweaponslistprimaries();
 
@@ -169,8 +176,9 @@ _id_8CF0() {
     var_15 = 60;
     var_16 = "hud_ar57";
 
-    if(isDefined(var_12) && isDefined(var_0[var_12]))
+    if(isDefined(var_12) && isDefined(var_0[var_12])) {
       var_16 = var_0[var_12];
+    }
 
     var_17 = level.player scripts\sp\hud_util::createicon(var_16, var_15, int(var_15 / 2));
     var_17 scripts\sp\hud_util::setpoint("CENTER", "CENTER", var_2[var_9], var_3[var_9]);
@@ -188,8 +196,9 @@ _id_8CF0() {
     if(!isDefined(var_12)) {
       var_17.alpha = 0;
 
-      if(isDefined(var_17._id_9070))
+      if(isDefined(var_17._id_9070)) {
         var_17._id_9070 _id_9071(0.3);
+      }
 
       var_17._id_13CFB = "undefined";
       var_1["undefined"] = var_17;
@@ -214,8 +223,9 @@ _id_8CF3() {
   var_0 = "none";
 
   for(;;) {
-    while(level.player getcurrentweapon() == "none")
+    while(level.player getcurrentweapon() == "none") {
       wait 0.05;
+    }
 
     var_1 = level.player getcurrentweapon();
 
@@ -247,8 +257,9 @@ _id_8CF2(var_0) {
   if(!isDefined(level.player._id_8D0B)) {
     return;
   }
-  if(!isDefined(level.player._id_8D0B[var_0]))
+  if(!isDefined(level.player._id_8D0B[var_0])) {
     _id_8CF1(var_0);
+  }
 
   var_2 = _id_7A28();
   var_3 = _id_7BFC();
@@ -264,15 +275,17 @@ _id_8CF2(var_0) {
 
     var_8 = "hud_ar57";
 
-    if(isDefined(var_2[var_5]))
+    if(isDefined(var_2[var_5])) {
       var_8 = var_2[var_5];
+    }
 
     level.player._id_8D0B[var_5] setshader(var_8, var_7, int(var_7 / 2));
     level.player._id_8D0B[var_5].alpha = var_6;
 
     if(isDefined(level.player._id_8D0B[var_5]._id_9070)) {
-      if(var_0 == var_5)
+      if(var_0 == var_5) {
         level.player._id_8D0B[var_5]._id_9070 _id_9071(0);
+      }
     }
   }
 }
@@ -291,8 +304,9 @@ _id_8CF1(var_0) {
     if(var_5._id_13CFB == "undefined") {
       continue;
     }
-    if(!scripts\engine\utility::array_contains(var_1, var_5._id_13CFB))
+    if(!scripts\engine\utility::array_contains(var_1, var_5._id_13CFB)) {
       var_3 = var_5._id_13CFB;
+    }
   }
 
   level.player._id_8D0B[var_0] = level.player._id_8D0B[var_3];
@@ -323,8 +337,9 @@ _id_7A28() {
 }
 
 _id_8CF9() {
-  if(level.player scripts\sp\utility::_id_65DB("player_heavy_weapon_active"))
+  if(level.player scripts\sp\utility::_id_65DB("player_heavy_weapon_active")) {
     return 1;
+  }
 
   return 0;
 }

@@ -99,8 +99,9 @@ _id_3950() {
 }
 
 _id_394F() {
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_2683();
+  }
 
   thread _id_5F66();
   thread _id_D7D5();
@@ -109,13 +110,15 @@ _id_394F() {
   level.allies["admiral"] scripts\sp\utility::_id_F3B5("b");
   var_0 = getEntArray("before_dust_triggers", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 scripts\engine\utility::trigger_off();
+  foreach(var_2 in var_0) {
+    var_2 scripts\engine\utility::trigger_off();
+  }
 
   var_4 = getEntArray("dust_moment_swap_after", "targetname");
 
-  foreach(var_6 in var_4)
-  var_6 hide();
+  foreach(var_6 in var_4) {
+    var_6 hide();
+  }
 
   thread _id_5F5D();
   thread _id_6755();
@@ -131,8 +134,9 @@ _id_394F() {
   scripts\engine\utility::flag_set("dust_cloud_triggered");
 
   foreach(var_9 in level.allies) {
-    if(var_9._id_1FBB != "eth3n")
+    if(var_9._id_1FBB != "eth3n") {
       var_9 scripts\sp\utility::_id_51E1("frantic");
+    }
   }
 
   thread _id_42BA();
@@ -141,8 +145,9 @@ _id_394F() {
   _id_13747();
   scripts\engine\utility::flag_set("dust_cloud_hit");
 
-  foreach(var_9 in level.allies)
-  var_9 scripts\sp\utility::_id_51E1("cqb");
+  foreach(var_9 in level.allies) {
+    var_9 scripts\sp\utility::_id_51E1("cqb");
+  }
 
   thread _id_D6CB();
   thread _id_5F68();
@@ -166,8 +171,9 @@ _id_D7D5() {
 _id_394E() {
   scripts\engine\utility::flag_wait("cap_crash_dust_complete");
 
-  foreach(var_1 in level.allies)
-  var_1 scripts\sp\utility::_id_4145();
+  foreach(var_1 in level.allies) {
+    var_1 scripts\sp\utility::_id_4145();
+  }
 
   level.allies["eth3n"] _id_A5DB();
   level.player notify("dust_complete");
@@ -241,16 +247,18 @@ _id_5F63() {
   var_0 = getscriptablearray("foliage_tree_beech", "targetname");
   wait 3.5;
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("root", "hit");
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("root", "hit");
+  }
 }
 
 _id_5F3B() {
   var_0 = getEntArray("dust_street_car", "targetname");
   scripts\engine\utility::flag_wait("dust_cloud_triggered");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_5F62();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_5F62();
+  }
 }
 
 _id_5F62() {
@@ -258,8 +266,9 @@ _id_5F62() {
   self._id_1FBB = "car";
   var_1 = scripts\engine\utility::spawn_tag_origin();
 
-  for(var_2 = 9999; var_2 > 3250; var_2 = distance(var_0.origin, self.origin))
+  for(var_2 = 9999; var_2 > 3250; var_2 = distance(var_0.origin, self.origin)) {
     wait 0.05;
+  }
 
   radiusdamage(self.origin, 32, 2, 2);
   self _meth_82A2(scripts\sp\utility::_id_7DC1("dust_push"));
@@ -278,8 +287,9 @@ _id_5F52(var_0) {
     var_3[var_3.size] = var_6;
     var_7 = var_4 + 1;
 
-    if(var_7 < 10)
+    if(var_7 < 10) {
       var_7 = "0" + var_7;
+    }
 
     var_1 thread scripts\sp\anim::_id_1EC7(var_6, "ph_dust_civi_run_" + var_7);
     wait 0.05;
@@ -378,10 +388,11 @@ _id_674A(var_0) {
   while(!scripts\engine\utility::flag("start_dust_area")) {
     var_1 = level.player.origin + anglesToForward(level.player.angles) * -50;
 
-    if(scripts\engine\utility::within_fov(var_1, level.player.angles, var_0, 0.5))
+    if(scripts\engine\utility::within_fov(var_1, level.player.angles, var_0, 0.5)) {
       scripts\engine\utility::trigger_on("player_touching_eth3n_jump_trig", "targetname");
-    else
+    } else {
       scripts\engine\utility::trigger_off("player_touching_eth3n_jump_trig", "targetname");
+    }
 
     wait 0.05;
   }
@@ -475,8 +486,9 @@ _id_B032(var_0) {
   var_2[3] thread _id_B033(var_0, 4.0, "phstreets_fcv1_itsgonnacrash");
   level waittill("blackfade");
 
-  foreach(var_5 in var_2)
-  var_5 delete();
+  foreach(var_5 in var_2) {
+    var_5 delete();
+  }
 }
 
 _id_B033(var_0, var_1, var_2) {
@@ -574,8 +586,9 @@ _id_5F59() {
   scripts\engine\utility::flag_wait("dust_ethan_move_2");
   wait 6;
 
-  if(!scripts\engine\utility::flag("cap_crash_dust_complete"))
+  if(!scripts\engine\utility::flag("cap_crash_dust_complete")) {
     level.allies["eth3n"] scripts\sp\utility::_id_10346("phstreets_eth_leftupthestairs");
+  }
 }
 
 _id_EA90() {
@@ -685,8 +698,9 @@ _id_5F5E() {
   var_0 = scripts\engine\utility::getStruct("dust_runner_civs_" + self._id_C03F, "targetname");
   scripts\sp\maps\pearlharbor\pearlharbor_util::_id_19C5(var_0);
 
-  for(var_1 = scripts\sp\utility::_id_7951(level.player.origin, level.player.angles, self.origin); var_1 >= 0.4; var_1 = scripts\sp\utility::_id_7951(level.player.origin, level.player.angles, self.origin))
+  for(var_1 = scripts\sp\utility::_id_7951(level.player.origin, level.player.angles, self.origin); var_1 >= 0.4; var_1 = scripts\sp\utility::_id_7951(level.player.origin, level.player.angles, self.origin)) {
     scripts\engine\utility::waitframe();
+  }
 
   self delete();
 }
@@ -774,8 +788,9 @@ _id_5F39() {
   self.fixednode = 0;
   scripts\sp\maps\pearlharbor\pearlharbor_util::_id_19C5(var_0);
 
-  for(var_1 = scripts\sp\utility::_id_7951(level.player.origin, level.player.angles, self.origin); var_1 >= 0.2; var_1 = scripts\sp\utility::_id_7951(level.player.origin, level.player.angles, self.origin))
+  for(var_1 = scripts\sp\utility::_id_7951(level.player.origin, level.player.angles, self.origin); var_1 >= 0.2; var_1 = scripts\sp\utility::_id_7951(level.player.origin, level.player.angles, self.origin)) {
     scripts\engine\utility::waitframe();
+  }
 
   self delete();
 }
@@ -783,8 +798,9 @@ _id_5F39() {
 dvarintvalue() {
   var_0 = getspawnerarray("dust_running_civs");
 
-  foreach(var_2 in var_0)
-  var_2 scripts\sp\utility::_id_1747(::_id_5F5F);
+  foreach(var_2 in var_0) {
+    var_2 scripts\sp\utility::_id_1747(::_id_5F5F);
+  }
 
   foreach(var_2 in var_0) {
     var_2 scripts\sp\utility::_id_10619();
@@ -947,8 +963,9 @@ _id_5F67() {
 _id_13747() {
   var_0 = getEnt("smoke", "targetname");
 
-  for(var_1 = 9999; var_1 > 4000; var_1 = distance(var_0.origin, level.player.origin))
+  for(var_1 = 9999; var_1 > 4000; var_1 = distance(var_0.origin, level.player.origin)) {
     wait 0.05;
+  }
 
   level.player _meth_8244("steady_rumble");
   earthquake(0.35, 2.5, level.player.origin, 9999);
@@ -1135,17 +1152,20 @@ _id_676E(var_0, var_1) {
   var_6 notify("actor_go");
   var_3 scripts\sp\anim::_id_1F35(var_4, "ethan_dust_walk_2");
 
-  if(!scripts\engine\utility::flag("robot_alley_paths_started"))
+  if(!scripts\engine\utility::flag("robot_alley_paths_started")) {
     var_4 scripts\sp\utility::_id_61C7();
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 scripts\sp\utility::_id_15F1();
+  }
 
   var_7 = getEntArray("after_dust_triggers", "targetname");
 
   foreach(var_9 in var_7) {
-    if(isDefined(var_9))
+    if(isDefined(var_9)) {
       var_9 scripts\engine\utility::trigger_off();
+    }
   }
 }
 
@@ -1153,32 +1173,36 @@ _id_678B(var_0, var_1, var_2) {
   self endon("death");
   self._id_1FBB = "civ";
 
-  if(var_1 == "stun_walk_3_loop")
+  if(var_1 == "stun_walk_3_loop") {
     var_2 thread scripts\sp\anim::_id_1EEA(self, "ethan_civ_pre_dust_idle_2", "stop_loop_2");
-  else
+  } else {
     var_2 thread scripts\sp\anim::_id_1EEA(self, "ethan_civ_pre_dust_idle_1", "stop_loop_1");
+  }
 
   self waittill("actor_go");
 
-  if(var_1 == "stun_walk_3_loop")
+  if(var_1 == "stun_walk_3_loop") {
     var_2 notify("stop_loop_2");
-  else
+  } else {
     var_2 notify("stop_loop_1");
+  }
 
   var_2 scripts\sp\anim::_id_1F35(self, var_0);
 
-  if(var_1 == "stun_walk_3_loop")
+  if(var_1 == "stun_walk_3_loop") {
     thread scripts\sp\anim::_id_1EEA(self, var_1);
-  else
+  } else {
     var_2 thread scripts\sp\anim::_id_1EEA(self, var_1);
+  }
 
   scripts\sp\utility::_id_F2A8(1);
   self setCanDamage(1);
   self.forceragdollimmediate = 1;
   scripts\engine\utility::flag_wait("c6_reveal");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_D6C9(var_0) {
@@ -1202,14 +1226,16 @@ _id_5F53() {
 
   var_1 scripts\sp\anim::_id_1F2C(var_0, "dust_help_walk");
 
-  if(isDefined(var_0[0]))
+  if(isDefined(var_0[0])) {
     var_1 thread scripts\sp\anim::_id_1EE7(var_0, "dust_help_walk_loop");
+  }
 
   scripts\engine\utility::flag_wait("c6_reveal");
 
   foreach(var_3 in var_0) {
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_3 delete();
+    }
   }
 }
 
@@ -1224,15 +1250,17 @@ _id_5F55(var_0, var_1, var_2) {
   var_1 scripts\sp\anim::_id_1EC1(var_3, var_0);
   var_4 waittill("trigger");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_5 thread scripts\sp\utility::_id_10346(var_2);
+  }
 
   var_1 scripts\sp\anim::_id_1F30(var_3, var_0);
 
-  if(var_0 == "stun_walk_1" || var_0 == "stun_walk_6")
+  if(var_0 == "stun_walk_1" || var_0 == "stun_walk_6") {
     var_3[0] thread scripts\sp\anim::_id_1EE7(var_3, "stun_walk_1_loop");
-  else
+  } else {
     var_3[0] thread scripts\sp\anim::_id_1EE7(var_3, "stun_walk_2_loop");
+  }
 
   scripts\engine\utility::flag_wait("c6_reveal");
   var_5 delete();
@@ -1255,11 +1283,13 @@ _id_5F5B() {
   var_1 = getEntArray("dust_moment_swap_after", "targetname");
   wait 4.5;
 
-  foreach(var_3 in var_0)
-  var_3 scripts\sp\utility::_id_8E7E();
+  foreach(var_3 in var_0) {
+    var_3 scripts\sp\utility::_id_8E7E();
+  }
 
-  foreach(var_3 in var_1)
-  var_3 scripts\sp\utility::_id_100D7();
+  foreach(var_3 in var_1) {
+    var_3 scripts\sp\utility::_id_100D7();
+  }
 }
 
 _id_42C1() {
@@ -1339,8 +1369,9 @@ _id_337B() {
   scripts\sp\utility::_id_28D7("allies");
   scripts\sp\utility::_id_28D7("axis");
 
-  foreach(var_1 in level.allies)
-  var_1.ignoreall = 1;
+  foreach(var_1 in level.allies) {
+    var_1.ignoreall = 1;
+  }
 
   _id_3397();
 
@@ -1356,16 +1387,19 @@ _id_337B() {
   scripts\sp\utility::_id_178D(scripts\engine\utility::flag_wait, "c6_reveal_done");
   scripts\sp\utility::_id_57D6();
 
-  foreach(var_1 in level.allies)
-  var_1 scripts\sp\utility::_id_F417(0);
-
-  foreach(var_8 in level._id_33A4) {
-    if(isDefined(var_8) && isalive(var_8))
-      var_8 scripts\engine\utility::delaythread(randomfloatrange(0, 1.5), scripts\sp\utility::_id_54C6);
+  foreach(var_1 in level.allies) {
+    var_1 scripts\sp\utility::_id_F417(0);
   }
 
-  if(!scripts\engine\utility::flag("c6_reveal_done"))
+  foreach(var_8 in level._id_33A4) {
+    if(isDefined(var_8) && isalive(var_8)) {
+      var_8 scripts\engine\utility::delaythread(randomfloatrange(0, 1.5), scripts\sp\utility::_id_54C6);
+    }
+  }
+
+  if(!scripts\engine\utility::flag("c6_reveal_done")) {
     scripts\sp\utility::_id_15F5("post_c6_reveal_colortrig");
+  }
 
   scripts\engine\utility::flag_wait("c6_reveal_done");
 }
@@ -1416,8 +1450,9 @@ _id_E574() {
   level.allies["salter"] scripts\sp\utility::_id_F3B5("b");
   level.allies["admiral"] scripts\sp\utility::_id_F3B5("g");
 
-  foreach(var_1 in level.allies)
-  var_1 thread _id_E572();
+  foreach(var_1 in level.allies) {
+    var_1 thread _id_E572();
+  }
 
   scripts\sp\utility::_id_15F5("initial_pod_color_trig");
   scripts\engine\utility::flag_wait_all("robot_alley_runner01_pass", "robot_alley_runner02_pass");
@@ -1460,8 +1495,9 @@ _id_33A6() {
   var_0 scripts\sp\anim::_id_1EC1(var_2, "c6_reveal");
   scripts\engine\utility::waitframe();
 
-  if(isDefined(var_1.clip))
+  if(isDefined(var_1.clip)) {
     var_1.clip disconnectPaths();
+  }
 
   scripts\sp\lights::_id_ACD0("robot_alley_fire", "script_noteworthy", 0, (1, 1, 1));
 }
@@ -1485,16 +1521,18 @@ _id_3397() {
   scripts\engine\utility::flag_set("c6_reveal_started");
   var_6 = ["TAG_THRUSTER_1", "TAG_THRUSTER_2", "TAG_THRUSTER_3", "TAG_THRUSTER_4"];
 
-  foreach(var_8 in var_6)
-  var_2 thread scripts\sp\utility::_id_75C4("droppod_thruster_c6_reveal", var_8);
+  foreach(var_8 in var_6) {
+    var_2 thread scripts\sp\utility::_id_75C4("droppod_thruster_c6_reveal", var_8);
+  }
 
   thread _id_339B();
   scripts\engine\utility::array_call(var_4, ::show);
   var_2 thread _id_339D();
   var_0 _id_33A0(var_4, var_1);
 
-  foreach(var_8 in var_6)
-  var_2 thread scripts\sp\utility::_id_75F8("droppod_thruster_c6_reveal", var_8);
+  foreach(var_8 in var_6) {
+    var_2 thread scripts\sp\utility::_id_75F8("droppod_thruster_c6_reveal", var_8);
+  }
 
   scripts\engine\utility::flag_set("c6_reveal");
   setsaveddvar("cg_drawplayershadow", 0);
@@ -1507,8 +1545,9 @@ _id_3397() {
   thread _id_33A3(var_1, var_2);
   level waittill("c6_reveal_plr_start");
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     scripts\sp\specialist_MAYBE::_id_F52F(0);
+  }
 
   level.allies["salter"] thread scripts\sp\utility::_id_4125(1, 1, "iw7_m4");
   getEnt("c6_reveal_sun_trig", "targetname") notify("trigger", level.player);
@@ -1516,8 +1555,9 @@ _id_3397() {
   thread _id_0B0F::_id_19FE("c6_reveal_aiambient");
   setsaveddvar("r_dof_hq", 1);
 
-  if(level.player ismantling())
+  if(level.player ismantling()) {
     level.player cancelmantle();
+  }
 
   level.player _id_0F3D::_id_D394();
   var_5.clip connectpaths();
@@ -1530,8 +1570,9 @@ _id_3397() {
   if(!scripts\engine\utility::flag("c6_reveal_player_interacted")) {
     level.player notify("c6_reveal_player_interact_fail");
 
-    if(isDefined(level.player.melee._id_B5FE))
+    if(isDefined(level.player.melee._id_B5FE)) {
       level.player.melee._id_B5FE destroy();
+    }
 
     var_1 waittill("player_reveal_anim_done");
     scripts\engine\utility::flag_set("c6_reveal_complete");
@@ -1539,8 +1580,9 @@ _id_3397() {
 
   scripts\engine\utility::flag_wait("c6_reveal_complete");
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     scripts\sp\specialist_MAYBE::_id_F52F(1);
+  }
 
   level.allies["salter"] thread scripts\sp\utility::_id_19FA("iw7_m4", "iw7_m8+m8scope_sp", 512, 0);
 
@@ -1576,8 +1618,9 @@ _id_276D() {
 _id_33A0(var_0, var_1) {
   var_2 = scripts\engine\utility::spawn_tag_origin();
 
-  foreach(var_4 in var_0)
-  var_4 linkTo(var_2);
+  foreach(var_4 in var_0) {
+    var_4 linkTo(var_2);
+  }
 
   var_2 thread scripts\sp\anim::_id_1F2C(var_0, "c6_reveal_land");
   var_6 = getanimlength(var_0[0] scripts\sp\utility::_id_7DC1("c6_reveal_land")) * 1000;
@@ -1615,8 +1658,9 @@ _id_33A2(var_0) {
   level waittill("c6_reveal_player_interact_start");
   level.player waittill("c6_reveal_player_interact");
 
-  if(isDefined(level.player.melee._id_B5FE))
+  if(isDefined(level.player.melee._id_B5FE)) {
     level.player.melee._id_B5FE destroy();
+  }
 
   scripts\engine\utility::flag_set("c6_reveal_player_interacted");
   level notify("notetrack_fire_stop");
@@ -1631,11 +1675,13 @@ _id_33A2(var_0) {
   level._id_339E _id_0A1E::_id_2307(::_id_E57F);
   var_0 scripts\sp\anim::_id_1F35(var_0, "c6_reveal_counter");
 
-  if(isDefined(level._id_339E) && isalive(level._id_339E))
+  if(isDefined(level._id_339E) && isalive(level._id_339E)) {
     level._id_339E scripts\sp\utility::_id_54C6();
+  }
 
-  if(isDefined(level.player.melee))
+  if(isDefined(level.player.melee)) {
     level.player.melee = undefined;
+  }
 
   scripts\engine\utility::flag_set("c6_reveal_complete");
 }
@@ -1675,7 +1721,7 @@ _id_33A4() {
   var_0 = [];
 
   for(var_1 = 0; var_1 < 4; var_1++) {
-    var_0[var_1] = scripts\sp\utility::_id_10639("droppod_arm");
+    var_0[var_1] = ::scripts\sp\utility::_id_10639("droppod_arm");
     var_0[var_1]._id_1FBB = "droppod_arm_" + var_1;
   }
 
@@ -1698,8 +1744,9 @@ _id_33A4() {
     var_3[var_3.size] = var_7;
 
     if(var_7._id_1FBB != "c6_reveal_02") {
-      if(isDefined(var_7.melee))
+      if(isDefined(var_7.melee)) {
         var_7 scripts\aitypes\melee::melee_destroy();
+      }
 
       var_7 scripts\sp\utility::_id_B14F();
       level._id_33A4[level._id_33A4.size] = var_7;
@@ -1811,14 +1858,16 @@ _id_3399() {
   var_1 = var_0.script_index;
   level notify("c6_droppod_spawned_" + var_1);
 
-  if(scripts\engine\utility::flag_exist("c6_reveal_ambient_pod_spawned_" + var_1))
+  if(scripts\engine\utility::flag_exist("c6_reveal_ambient_pod_spawned_" + var_1)) {
     scripts\engine\utility::flag_set("c6_reveal_ambient_pod_spawned_" + var_1);
+  }
 
   self waittill("death");
   level.player playRumbleOnEntity("artillery_rumble");
 
-  if(level._id_4B3B == self)
+  if(level._id_4B3B == self) {
     level._id_4B3B = undefined;
+  }
 
   level notify("c6_droppod_landed_" + var_1);
 }
@@ -1861,8 +1910,9 @@ _id_3379() {
 
   var_0 = getEnt("player_reveal_clip", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
   level._id_3397 = undefined;
   level._id_339F = undefined;
@@ -1889,8 +1939,9 @@ _id_5D50() {
 }
 
 _id_5D4E() {
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_2683();
+  }
 
   visionsetnaked("", 6);
   level.old_reactive_setting = getdvarint("r_reactiveMotionEffectorStrengthScale");
@@ -1931,8 +1982,9 @@ _id_46EA() {
   if(!isDefined(self) || !isalive(self)) {
     return;
   }
-  if(!isDefined(level._id_46EA))
+  if(!isDefined(level._id_46EA)) {
     level._id_46EA = [];
+  }
 
   level._id_46EA[level._id_46EA.size] = self;
   var_0 = cos(80);
@@ -1954,11 +2006,13 @@ _id_46EA() {
 
   level._id_46EA = scripts\engine\utility::array_remove(level._id_46EA, self);
 
-  if(!level._id_46EA.size)
+  if(!level._id_46EA.size) {
     level._id_46EA = undefined;
+  }
 
-  if(isDefined(self) && isalive(self))
+  if(isDefined(self) && isalive(self)) {
     scripts\sp\utility::_id_54C6();
+  }
 }
 
 _id_5D46() {
@@ -1977,16 +2031,19 @@ _id_46E6() {
 _id_513B(var_0) {
   self endon("death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait(var_0);
+  }
 
   self waittill("reached_path_end");
 
-  while(isDefined(self) && scripts\sp\utility::_id_CFAC(self))
+  while(isDefined(self) && scripts\sp\utility::_id_CFAC(self)) {
     wait 0.1;
+  }
 
-  if(isalive(self))
+  if(isalive(self)) {
     self delete();
+  }
 }
 
 _id_3FAD() {
@@ -2023,20 +2080,23 @@ _id_5D47() {
 _id_10429() {
   var_0 = getaiarray("axis");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_33A9();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_33A9();
+  }
 
-  while(getaiarray("axis").size > 3)
+  while(getaiarray("axis").size > 3) {
     wait 0.05;
+  }
 
   scripts\engine\utility::array_thread(getaiarray("axis"), ::_id_19DB);
 }
 
 _id_33A9() {
-  if(issubstr(self.model, "red"))
+  if(issubstr(self.model, "red")) {
     var_0 = level._effect["vfx_c6_scanner_green"];
-  else
+  } else {
     var_0 = level._effect["vfx_c6_scanner_green"];
+  }
 
   playFXOnTag(var_0, self, "tag_eye");
 
@@ -2126,7 +2186,7 @@ _id_106F0() {
   level._id_6AFE = [];
 
   for(var_0 = 0; var_0 < 2; var_0++) {
-    level._id_6AFE[var_0] = scripts\sp\vehicle::_id_1080C("robots_alley_pod_0" + var_0);
+    level._id_6AFE[var_0] = ::scripts\sp\vehicle::_id_1080C("robots_alley_pod_0" + var_0);
     level._id_6AFE[var_0]._id_594A = 1;
     level._id_6AFE[var_0] thread _id_E7C4();
     wait 0.25;
@@ -2163,8 +2223,9 @@ _id_46D1() {
     var_4 delete();
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 }
 
 _id_5D4A() {}
@@ -2179,8 +2240,9 @@ _id_E576() {
 }
 
 _id_E573() {
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_2683();
+  }
 
   thread _id_E56C();
   thread _id_E56A();
@@ -2245,11 +2307,13 @@ _id_E575() {
   }
   var_2 endon("death");
 
-  if(isDefined(self) && isalive(self))
+  if(isDefined(self) && isalive(self)) {
     self waittill("death");
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 scripts\sp\utility::_id_1101B();
+  }
 }
 
 _id_E56D() {
@@ -2282,8 +2346,9 @@ _id_E56F() {
   var_0 = scripts\sp\maps\pearlharbor\pearlharbor_util::_id_B284(level.player);
   var_0 scripts\sp\utility::_id_E7C9(0.2, 5);
 
-  while(isDefined(self) && isalive(self) && distance2dsquared(self.origin, level.player.origin) < squared(2400))
+  while(isDefined(self) && isalive(self) && distance2dsquared(self.origin, level.player.origin) < squared(2400)) {
     wait 0.05;
+  }
 
   var_0 scripts\sp\utility::_id_E7C9(0, 5);
   var_0 delete();
@@ -2392,8 +2457,9 @@ _id_36C7() {
 }
 
 _id_36C4() {
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_2683();
+  }
 
   var_0 = _id_0B1E::_id_794D("cafe_peek_door");
   level._id_36CC = var_0.angles;
@@ -2403,24 +2469,28 @@ _id_36C4() {
   thread _id_36C9();
   var_1 = getspawnerarray("cafe_civrunner");
 
-  foreach(var_3 in var_1)
-  var_3 scripts\sp\utility::_id_1747(::_id_3FE4);
+  foreach(var_3 in var_1) {
+    var_3 scripts\sp\utility::_id_1747(::_id_3FE4);
+  }
 
   var_1 = getspawnerarray("cafe_civrunner_mainroom");
 
-  foreach(var_3 in var_1)
-  var_3 scripts\sp\utility::_id_1747(::_id_3FE3);
+  foreach(var_3 in var_1) {
+    var_3 scripts\sp\utility::_id_1747(::_id_3FE3);
+  }
 
   thread _id_36AE();
   var_7 = getEntArray("cafe_hack_pristine_damage_door", "targetname");
 
-  foreach(var_9 in var_7)
-  var_9 hide();
+  foreach(var_9 in var_7) {
+    var_9 hide();
+  }
 
   var_11 = getEntArray("cafe_hack_door_clip", "targetname");
 
-  foreach(var_13 in var_11)
-  var_13 hide();
+  foreach(var_13 in var_11) {
+    var_13 hide();
+  }
 
   if(getdvarint("e3", 0) == 1) {
     scripts\engine\utility::delaythread(0.05, ::_id_10197, "dmg2");
@@ -2497,8 +2567,9 @@ _id_3FE3() {
   scripts\engine\utility::flag_wait("cafe_player_in_mainroom");
   thread scripts\sp\maps\pearlharbor\pearlharbor_util::_id_3FAC();
 
-  if(self.script_index == 3)
+  if(self.script_index == 3) {
     wait 0.25;
+  }
 
   self _meth_82EE(getnode("civrunner_mainroom_goal" + self.script_index, "targetname"));
 }
@@ -2524,8 +2595,9 @@ _id_36C9() {
   var_1 scripts\sp\utility::_id_10346("phstreets_slt_reyesopenitillc");
   wait 6.0;
 
-  if(!scripts\engine\utility::flag("cafe_player_start_peek"))
+  if(!scripts\engine\utility::flag("cafe_player_start_peek")) {
     var_1 scripts\sp\utility::_id_10346("phstreets_slt_letsgetgoing");
+  }
 }
 
 _id_36B5() {
@@ -2552,21 +2624,24 @@ _id_36AE() {
   level._id_87BF = [];
   level._id_878A = [];
 
-  foreach(var_2 in var_0)
-  level._id_878B[level._id_878B.size] = var_2 _id_3FAE();
+  foreach(var_2 in var_0) {
+    level._id_878B[level._id_878B.size] = var_2 _id_3FAE();
+  }
 
   var_0 = getspawnerarray("cafe_civrunner_mainroom");
 
-  foreach(var_2 in var_0)
-  level._id_878B[level._id_878B.size] = var_2 _id_3FAE();
+  foreach(var_2 in var_0) {
+    level._id_878B[level._id_878B.size] = var_2 _id_3FAE();
+  }
 
   scripts\engine\utility::flag_wait("pod_2_landed");
   scripts\engine\utility::flag_wait("pod_1_landed");
   wait 3.0;
   var_0 = getspawnerarray("hack_civ_exterior");
 
-  foreach(var_2 in var_0)
-  level._id_878A[level._id_878A.size] = var_2 _id_3FAE();
+  foreach(var_2 in var_0) {
+    level._id_878A[level._id_878A.size] = var_2 _id_3FAE();
+  }
 }
 
 _id_3FAE() {
@@ -2697,8 +2772,9 @@ _id_EB56() {
   level endon("failed_to_save_civies");
   level endon("player_saved_cafe_guys");
 
-  while(_id_0B1E::_id_794C("cafe_peek_door") <= 45)
+  while(_id_0B1E::_id_794C("cafe_peek_door") <= 45) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_set("player_saved_cafe_guys");
 }
@@ -2727,8 +2803,9 @@ _id_59C3(var_0, var_1) {
   wait 0.25;
   var_0[1] scripts\sp\utility::_id_10346("phstreets_fcv1_screamsatguns");
 
-  if(!scripts\engine\utility::flag("start_peek_execution"))
+  if(!scripts\engine\utility::flag("start_peek_execution")) {
     thread _id_36CA(var_0, var_1);
+  }
 
   scripts\engine\utility::flag_wait("start_peek_execution");
   var_1[1] thread scripts\sp\utility::_id_10346("phstreets_sf2_himfirst");
@@ -2767,16 +2844,18 @@ _id_11027(var_0) {
   level waittill("player_saved_cafe_guys");
 
   foreach(var_2 in var_0) {
-    if(isalive(var_2))
+    if(isalive(var_2)) {
       var_2 stopsounds();
+    }
   }
 }
 
 _id_3F97() {
   scripts\engine\utility::flag_wait("hill_player_in_bddy_door");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_C9F6(var_0, var_1, var_2, var_3) {
@@ -2791,10 +2870,11 @@ _id_C9F6(var_0, var_1, var_2, var_3) {
   } else
     level waittill("start_peek_execution");
 
-  if(var_1)
+  if(var_1) {
     var_5 = 3.8;
-  else
+  } else {
     var_5 = 4.1;
+  }
 
   var_4 = var_2 gettagorigin("j_spine4");
   var_0 thread _id_68E8(var_5, var_4);
@@ -2841,8 +2921,9 @@ _id_C9F5(var_0, var_1) {
   var_0 endon("death");
   scripts\engine\utility::flag_wait("player_saved_cafe_guys");
 
-  if(!var_1)
+  if(!var_1) {
     var_0 scripts\engine\utility::delaythread(0.25, scripts\sp\utility::_id_10346, "SD_2_callout_contactclock_10");
+  }
 
   var_0 scripts\sp\anim::_id_1F35(var_0, "peek_execution_react");
 }
@@ -2850,9 +2931,9 @@ _id_C9F5(var_0, var_1) {
 _id_C9F4(var_0) {
   var_0 endon("death");
 
-  if(var_0._id_1FBB == "peek_civ_1")
+  if(var_0._id_1FBB == "peek_civ_1") {
     scripts\sp\anim::_id_1EE0(var_0, "peek_execution");
-  else {
+  } else {
     scripts\sp\anim::_id_1EC3(var_0, "peek_execution");
     level waittill("start_peek_execution");
     thread scripts\sp\anim::_id_1F35(var_0, "peek_execution");
@@ -2888,8 +2969,9 @@ _id_C9F4(var_0) {
 _id_F9FC(var_0, var_1, var_2) {
   var_3 = getspawner(var_0, "targetname");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_3._id_ED1B = 1;
+  }
 
   var_4 = var_3 scripts\sp\utility::_id_10619(1);
   var_4._id_1FBB = var_1;
@@ -2930,13 +3012,15 @@ _id_36C2() {
   scripts\sp\maps\pearlharbor\pearlharbor_util::_id_BC05("start_cafe_hacking", var_0);
   var_1 = getEntArray("cafe_hack_pristine_damage_door", "targetname");
 
-  foreach(var_3 in var_1)
-  var_3 hide();
+  foreach(var_3 in var_1) {
+    var_3 hide();
+  }
 
   var_5 = getEntArray("cafe_hack_door_clip", "targetname");
 
-  foreach(var_7 in var_5)
-  var_7 hide();
+  foreach(var_7 in var_5) {
+    var_7 hide();
+  }
 
   if(getdvarint("e3", 0) == 1) {
     scripts\engine\utility::delaythread(0.05, ::_id_10197, "dmg2");
@@ -2955,8 +3039,9 @@ _id_36C2() {
 
   var_12 = getspawnerarray("cafe_civrunner_mainroom");
 
-  foreach(var_14 in var_12)
-  var_14 scripts\sp\utility::_id_1747(::_id_3FE3);
+  foreach(var_14 in var_12) {
+    var_14 scripts\sp\utility::_id_1747(::_id_3FE3);
+  }
 
   thread _id_36AE();
   _id_8E73();
@@ -2985,21 +3070,24 @@ _id_36C1() {
   level.allies["admiral"] scripts\sp\utility::_id_61ED();
   var_0 = getEntArray("cafe_hack_pristine_door", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 hide();
+  foreach(var_2 in var_0) {
+    var_2 hide();
+  }
 
   var_4 = getEntArray("cafe_hack_pristine_damage_door", "targetname");
 
-  foreach(var_2 in var_4)
-  var_2 show();
+  foreach(var_2 in var_4) {
+    var_2 show();
+  }
 
   scripts\engine\utility::flag_set("cafe_eth3n_flip_table");
   var_7 = getaiarray("axis");
   var_7 = scripts\sp\utility::array_removedeadvehicles(var_7);
 
   if(var_7.size > 0) {
-    foreach(var_9 in var_7)
-    var_9 _meth_81D0();
+    foreach(var_9 in var_7) {
+      var_9 _meth_81D0();
+    }
   }
 
   scripts\engine\utility::flag_wait("cafe_eth3n_holding_table");
@@ -3039,8 +3127,9 @@ _id_425F() {
 _id_1378B(var_0, var_1) {
   var_0 endon("death");
 
-  if(!isarray(var_1))
+  if(!isarray(var_1)) {
     var_1 = [var_1];
+  }
 
   for(;;) {
     wait 0.1;
@@ -3087,8 +3176,9 @@ _id_36C3() {
   scripts\engine\utility::flag_set("cafe_vo_done");
   wait 4.0;
 
-  if(!scripts\engine\utility::flag("cafe_complete"))
+  if(!scripts\engine\utility::flag("cafe_complete")) {
     var_2 scripts\sp\utility::_id_10346("phstreets_adm_letsadvance");
+  }
 }
 
 _id_67A3() {
@@ -3098,13 +3188,15 @@ _id_67A3() {
   for(var_1 = 0.0; !scripts\engine\utility::flag("player_got_hackdevice"); var_1 = var_1 + var_0) {
     wait(randomfloatrange(5 + var_1, 7 + var_1));
 
-    if(!level.player scripts\sp\utility::_id_65DB("is_hacked_robot"))
+    if(!level.player scripts\sp\utility::_id_65DB("is_hacked_robot")) {
       level.allies["eth3n"] thread scripts\sp\utility::_id_10346("phstreets_eth_lieutenantthisl");
+    }
 
     wait(randomfloatrange(7 + var_1, 9 + var_1));
 
-    if(!level.player scripts\sp\utility::_id_65DB("is_hacked_robot"))
+    if(!level.player scripts\sp\utility::_id_65DB("is_hacked_robot")) {
       level.allies["eth3n"] thread scripts\sp\utility::_id_10346("phstreets_eth_usethishijackth");
+    }
   }
 }
 
@@ -3164,8 +3256,9 @@ _id_36B3() {
   var_16 = vectordot(var_14, var_15);
   var_17 = -60;
 
-  if(var_16 < 0)
+  if(var_16 < 0) {
     var_17 = 0 - var_17;
+  }
 
   var_18 = 0.3;
   var_19 = 0.3;
@@ -3227,8 +3320,9 @@ ph_player_blend_push(var_0, var_1) {
   level.player notify("new_push_impulse");
   level.player endon("new_push_impulse");
 
-  if(!isDefined(level.player._id_DB0C))
+  if(!isDefined(level.player._id_DB0C)) {
     level.player._id_DB0C = (0, 0, 0);
+  }
 
   var_2 = level.player._id_DB0C;
 
@@ -3252,10 +3346,11 @@ ph_player_blend_push(var_0, var_1) {
 ph_set_player_push(var_0) {
   level.player._id_DB0C = var_0;
 
-  if(level.player isonground())
+  if(level.player isonground()) {
     level.player _meth_8251(var_0, 1);
-  else
+  } else {
     level.player _meth_8251(var_0 * 0.3, 1);
+  }
 }
 
 _id_36BE() {
@@ -3331,10 +3426,11 @@ _id_3D87() {
   level.player scripts\sp\utility::_id_65E3("is_hacked_robot");
   level.player scripts\sp\utility::_id_65E8("is_controlling_robot");
 
-  if(level.player istouching(var_0))
+  if(level.player istouching(var_0)) {
     level._id_36BB = 1;
-  else
+  } else {
     return;
+  }
 
   var_1 = scripts\engine\utility::getStruct("cafe_hack_return_pos", "targetname");
   _id_0E29::_id_87E1(var_1.origin, var_1.angles);
@@ -3343,8 +3439,9 @@ _id_3D87() {
 _id_3D7A() {
   var_0 = getaiarray("axis");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_3D7B();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_3D7B();
+  }
 }
 
 _id_3D7B() {
@@ -3378,8 +3475,9 @@ _id_24CF() {
     scripts\engine\utility::flag_wait("hacked_robot_dealt_damage");
     var_0 = getaiarray("axis");
 
-    foreach(var_2 in var_0)
-    var_2 thread _id_15E3();
+    foreach(var_2 in var_0) {
+      var_2 thread _id_15E3();
+    }
 
     scripts\engine\utility::flag_waitopen("hacked_robot_dealt_damage");
   }
@@ -3397,8 +3495,9 @@ _id_15E3() {
 
   scripts\engine\utility::flag_waitopen("hacked_robot_dealt_damage");
 
-  if(isalive(self))
+  if(isalive(self)) {
     thread _id_24B5();
+  }
 }
 
 _id_87D2() {
@@ -3445,8 +3544,9 @@ _id_33FD() {
   var_7 stoploopsound();
   var_9 = getaiarray("axis");
 
-  foreach(var_11 in var_9)
-  var_11 _meth_81D0();
+  foreach(var_11 in var_9) {
+    var_11 _meth_81D0();
+  }
 
   var_0 notify("stop_table_loop");
   scripts\engine\utility::delaythread(0.05, ::_id_10197, "dmg2");
@@ -3535,15 +3635,17 @@ _id_10883() {
 }
 
 _id_900B() {
-  if(scripts\engine\utility::flag("player_used_hackdevice"))
+  if(scripts\engine\utility::flag("player_used_hackdevice")) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_D31D() {
-  while(!level.player secondaryoffhandbuttonPressed())
+  while(!level.player secondaryoffhandbuttonPressed()) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_set("player_used_hackdevice");
 }
@@ -3555,10 +3657,11 @@ _id_33FC() {
   for(var_1 = 0.0; !scripts\engine\utility::flag("stop_cafe_nags"); var_1 = var_1 + var_0) {
     wait(randomfloatrange(7 + var_1, 10 + var_1));
 
-    if(!level.player scripts\sp\utility::_id_65DB("is_hacked_robot"))
+    if(!level.player scripts\sp\utility::_id_65DB("is_hacked_robot")) {
       level.allies["eth3n"] thread scripts\sp\utility::_id_10346("phstreets_eth_hijackonethroug");
-    else
+    } else {
       level.player scripts\sp\utility::_id_65E8("is_hacked_robot");
+    }
 
     wait(randomfloatrange(7 + var_1, 10 + var_1));
 
@@ -3617,13 +3720,15 @@ _id_8E73() {
   var_1 = getEntArray("cafe_pod_destruction_02", "targetname");
   var_2 = scripts\sp\utility::_id_22A2(var_0, var_1);
 
-  foreach(var_4 in var_2)
-  var_4 hide();
+  foreach(var_4 in var_2) {
+    var_4 hide();
+  }
 
   var_6 = getEntArray("cafe_pod_destruction_door", "targetname");
 
-  foreach(var_8 in var_6)
-  var_8 hide();
+  foreach(var_8 in var_6) {
+    var_8 hide();
+  }
 }
 
 _id_D60A() {
@@ -3642,13 +3747,15 @@ _id_D60A() {
   scripts\engine\utility::exploder("hacking_droppod_door_debris");
   var_2 = getEntArray("cafe_hack_door_clip", "targetname");
 
-  foreach(var_4 in var_2)
-  var_4 show();
+  foreach(var_4 in var_2) {
+    var_4 show();
+  }
 
   var_6 = getEntArray("cafe_pod_destruction_door", "targetname");
 
-  foreach(var_8 in var_6)
-  var_8 show();
+  foreach(var_8 in var_6) {
+    var_8 show();
+  }
 
   var_10 = getEnt("cafe_pod_prestine_03", "targetname");
   var_10 hide();
@@ -3665,13 +3772,15 @@ _id_D603() {
   scripts\engine\utility::flag_set("pod_1_landed");
   var_0 = getEntArray("cafe_pod_destruction_02", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 show();
+  foreach(var_2 in var_0) {
+    var_2 show();
+  }
 
   var_4 = getEntArray("cafe_pod_prestine_02", "targetname");
 
-  foreach(var_2 in var_4)
-  var_2 hide();
+  foreach(var_2 in var_4) {
+    var_2 hide();
+  }
 
   self waittill("entitydeleted");
   scripts\sp\maps\pearlharbor\pearlharbor_util::_id_EA02(var_0);
@@ -3684,13 +3793,15 @@ _id_D604() {
   scripts\engine\utility::flag_set("pod_2_landed");
   var_0 = getEntArray("cafe_pod_destruction_01", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 show();
+  foreach(var_2 in var_0) {
+    var_2 show();
+  }
 
   var_4 = getEntArray("cafe_pod_prestine_01", "targetname");
 
-  foreach(var_2 in var_4)
-  var_2 hide();
+  foreach(var_2 in var_4) {
+    var_2 hide();
+  }
 
   self waittill("entitydeleted");
   scripts\sp\maps\pearlharbor\pearlharbor_util::_id_EA02(var_0);
@@ -3709,8 +3820,9 @@ _id_E5B6() {
 _id_B264() {
   var_0 = getEntArray("cafe_fake_target", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 makeentitysentient("allies");
+  foreach(var_2 in var_0) {
+    var_2 makeentitysentient("allies");
+  }
 }
 
 _id_24B5() {
@@ -3718,10 +3830,11 @@ _id_24B5() {
   self endon("stop_attack_fake_cafe_target");
   thread _id_24B6();
 
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "hack_robot")
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "hack_robot") {
     var_0 = scripts\engine\utility::getStructArray("cafe_fake_target", "targetname");
-  else
+  } else {
     var_0 = scripts\engine\utility::getStructArray("cafe_fake_target_left", "targetname");
+  }
 
   self._id_6B56 = scripts\engine\utility::spawn_tag_origin();
 
@@ -3729,10 +3842,11 @@ _id_24B5() {
     if(var_0.size == 0) {
       wait 0.2;
 
-      if(isDefined(self.script_noteworthy) && self.script_noteworthy == "hack_robot")
+      if(isDefined(self.script_noteworthy) && self.script_noteworthy == "hack_robot") {
         var_0 = scripts\engine\utility::getStructArray("cafe_fake_target", "targetname");
-      else
+      } else {
         var_0 = scripts\engine\utility::getStructArray("cafe_fake_target_left", "targetname");
+      }
 
       continue;
     }
@@ -3745,8 +3859,9 @@ _id_24B5() {
       continue;
     }
 
-    if(!isDefined(self._id_6B56))
+    if(!isDefined(self._id_6B56)) {
       self._id_6B56 = scripts\engine\utility::spawn_tag_origin();
+    }
 
     self._id_6B56.origin = var_1.origin;
     self _meth_82DE(self._id_6B56);
@@ -3830,17 +3945,21 @@ _id_36B0() {
   scripts\sp\maps\pearlharbor\pearlharbor_util::_id_EA01(var_3);
   wait 0.05;
 
-  if(isDefined(level._id_D5FD))
+  if(isDefined(level._id_D5FD)) {
     level._id_D5FD _id_0BBB::_id_514A();
+  }
 
-  if(isDefined(level._id_D5FE))
+  if(isDefined(level._id_D5FE)) {
     level._id_D5FE _id_0BBB::_id_514A();
+  }
 
-  if(isDefined(level._id_D5FF))
+  if(isDefined(level._id_D5FF)) {
     level._id_D5FF _id_0BBB::_id_514A();
+  }
 
-  if(isDefined(level._id_D600))
+  if(isDefined(level._id_D600)) {
     level._id_D600 _id_0BBB::_id_514A();
+  }
 
   level._id_D5FD = undefined;
   level._id_D5FE = undefined;
@@ -3848,8 +3967,9 @@ _id_36B0() {
   level._id_D600 = undefined;
 
   if(isDefined(level._id_36C6)) {
-    foreach(var_8 in level._id_36C6)
-    var_8 _id_0BBB::_id_514A();
+    foreach(var_8 in level._id_36C6) {
+      var_8 _id_0BBB::_id_514A();
+    }
   }
 
   level._id_36C6 = undefined;
@@ -3865,8 +3985,9 @@ _id_36B0() {
   scripts\sp\maps\pearlharbor\pearlharbor_util::_id_EA02(var_11);
 
   if(isDefined(level._id_878B)) {
-    foreach(var_13 in level._id_878B)
-    scripts\sp\maps\pearlharbor\pearlharbor_util::_id_EA01(var_13);
+    foreach(var_13 in level._id_878B) {
+      scripts\sp\maps\pearlharbor\pearlharbor_util::_id_EA01(var_13);
+    }
   }
 
   scripts\engine\utility::flag_set("pod_door_landed");
@@ -3884,17 +4005,21 @@ _id_E57C() {
   var_0 = getEntArray("robot_combat_turrets", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2._id_0349))
+    if(isDefined(var_2._id_0349)) {
       var_2 settoparc(var_2._id_0349);
+    }
 
-    if(isDefined(var_2._id_006B))
+    if(isDefined(var_2._id_006B)) {
       var_2 setbottomarc(var_2._id_006B);
+    }
 
-    if(isDefined(var_2._id_01B8))
+    if(isDefined(var_2._id_01B8)) {
       var_2 setleftarc(var_2._id_01B8);
+    }
 
-    if(isDefined(var_2.rightarc))
+    if(isDefined(var_2.rightarc)) {
       var_2 setrightarc(var_2.rightarc);
+    }
   }
 }
 

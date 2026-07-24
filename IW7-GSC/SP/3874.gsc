@@ -6,14 +6,16 @@
 _id_9B1E(var_0, var_1) {
   self endon("death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 endon("death");
+  }
 
   self notify("investigate_forget");
   self endon("investigate_forget");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = randomfloatrange(30, 45);
+  }
 
   wait(var_1);
 
@@ -35,10 +37,11 @@ _id_9B1E(var_0, var_1) {
 _id_9B28(var_0) {
   self._id_10E6D._id_9B1F = var_0;
 
-  if(scripts\engine\utility::is_true(var_0))
+  if(scripts\engine\utility::is_true(var_0)) {
     self._id_10E6D._id_C985 = undefined;
-  else
+  } else {
     self._id_10E6D._id_C985 = gettime() + randomfloatrange(20, 55);
+  }
 }
 
 _id_9B26(var_0) {
@@ -54,14 +57,15 @@ _id_9B26(var_0) {
       var_6 = anglesToForward(self.angles);
       var_7 = vectorNormalize(var_1 - self.origin);
 
-      if(isPlayer(var_0.entity) && !isPlayer(self._id_10E6D._id_9B1D))
+      if(isPlayer(var_0.entity) && !isPlayer(self._id_10E6D._id_9B1D)) {
         var_4 = 1;
-      else if(vectordot(var_5, var_7) < 0 && vectordot(var_6, var_7) < 0)
+      } else if(vectordot(var_5, var_7) < 0 && vectordot(var_6, var_7) < 0) {
         var_4 = 1;
-      else if(var_0._id_12AE9 == "saw_corpse")
+      } else if(var_0._id_12AE9 == "saw_corpse") {
         var_4 = 1;
-      else if(var_4 && distancesquared(self.goalpos, var_1) < squared(var_2))
+      } else if(var_4 && distancesquared(self.goalpos, var_1) < squared(var_2)) {
         var_4 = 0;
+      }
     }
 
     if(var_4) {
@@ -69,8 +73,9 @@ _id_9B26(var_0) {
       var_8 = _id_F079(var_1, 1, 0, 200);
 
       if(isDefined(var_8) && var_8.size) {
-        if(var_0._id_12AE9 == "saw_corpse")
+        if(var_0._id_12AE9 == "saw_corpse") {
           var_8[0].origin = var_0._id_9B22;
+        }
 
         self._id_10E6D._id_9B20 = var_8[0];
         _id_F075(var_8);
@@ -96,15 +101,17 @@ _id_9B25() {
 }
 
 _id_9B2C() {
-  if(!isDefined(self._id_10E6D))
+  if(!isDefined(self._id_10E6D)) {
     return 0;
+  }
 
   return scripts\engine\utility::is_true(self._id_10E6D._id_9B1F);
 }
 
 _id_9B2B(var_0) {
-  if(isPlayer(self._id_10E6D._id_9B1D) && !isPlayer(var_0.entity))
+  if(isPlayer(self._id_10E6D._id_9B1D) && !isPlayer(var_0.entity)) {
     return 1;
+  }
 
   if(isDefined(self._id_10E6D._id_9B29)) {
     var_1 = _id_0F1C::_id_6894(self._id_10E6D._id_9B29, var_0.type);
@@ -151,8 +158,9 @@ _id_9B23(var_0) {
   var_2 = var_1.origin;
   _id_0F27::_id_10EE4(1);
 
-  if(self._id_10E6D.state > 1)
+  if(self._id_10E6D.state > 1) {
     _id_0F27::_id_F4C8("seek", 1, var_2);
+  }
 
   wait(randomfloatrange(0.2, 0.4));
 
@@ -168,16 +176,19 @@ _id_9B23(var_0) {
       var_4 = !self._id_10E6D._id_DD1D && distancesquared(self._id_10E6D._id_9B20.origin, self.origin) > squared(512);
       var_5 = _id_E8A7(self._id_10E6D._id_9B20.origin, var_4);
 
-      if(!self._id_10E6D._id_DD1D)
+      if(!self._id_10E6D._id_DD1D) {
         self._id_10E6D._id_DD1D = isDefined(var_5) && var_5 != "bad_path";
+      }
 
-      if(isDefined(var_5) && var_5 == "bad_path")
+      if(isDefined(var_5) && var_5 == "bad_path") {
         _id_9B28(0);
-      else
+      } else {
         _id_9B28(!self._id_10E6D._id_DD1D);
+      }
 
-      if(scripts\engine\utility::is_true(self._id_10E6D._id_F077))
+      if(scripts\engine\utility::is_true(self._id_10E6D._id_F077)) {
         self waittill("got_search_points");
+      }
 
       if(self._id_10E6D._id_9B21.size <= 0) {
         _id_9B25();
@@ -187,8 +198,9 @@ _id_9B23(var_0) {
 
     var_6 = _id_7B1A();
 
-    if(!isDefined(var_6))
+    if(!isDefined(var_6)) {
       var_6 = _id_7A7E(self._id_10E6D._id_9B21, var_3);
+    }
 
     if(!isDefined(var_6)) {
       self._id_10E6D._id_9B21 = _id_7C3B(var_2, 300, 1000);
@@ -206,8 +218,9 @@ _id_9B23(var_0) {
     var_4 = !self._id_10E6D._id_DD1D && distancesquared(var_6.origin, self.origin) > squared(512);
     var_5 = _id_E8A7(var_6.origin, var_4);
 
-    if(!self._id_10E6D._id_DD1D)
+    if(!self._id_10E6D._id_DD1D) {
       self._id_10E6D._id_DD1D = isDefined(var_5) && var_5 != "bad_path";
+    }
   }
 }
 
@@ -235,8 +248,9 @@ _id_7A7E(var_0, var_1) {
   self._id_10E6D._id_9B27 = undefined;
 
   foreach(var_3 in var_0) {
-    if(!isDefined(var_3._id_13070))
+    if(!isDefined(var_3._id_13070)) {
       var_3._id_13070 = 0;
+    }
   }
 
   var_0 = scripts\engine\utility::array_randomize(var_0);
@@ -251,15 +265,17 @@ _id_7A7E(var_0, var_1) {
       continue;
     }
 
-    if(isDefined(var_5) && var_3._id_13070 < var_5._id_13070)
+    if(isDefined(var_5) && var_3._id_13070 < var_5._id_13070) {
       var_5 = var_3;
+    }
   }
 
   if(isDefined(var_5)) {
     var_5._id_13070 = gettime();
 
-    if(isDefined(var_5.targetname) && var_5.targetname == "seek_patrol")
+    if(isDefined(var_5.targetname) && var_5.targetname == "seek_patrol") {
       self._id_10E6D._id_9B27 = var_5;
+    }
   }
 
   return var_5;
@@ -268,15 +284,17 @@ _id_7A7E(var_0, var_1) {
 _id_F07B(var_0) {
   var_1 = squared(100);
 
-  if(!isDefined(level._id_10E6D._id_F074))
+  if(!isDefined(level._id_10E6D._id_F074)) {
     level._id_10E6D._id_F074 = [];
+  }
 
   foreach(var_3 in level._id_10E6D._id_F074) {
     if(isalive(var_3._id_10EF6) && var_3._id_10EF6 != self) {
       var_4 = distancesquared(var_3.origin, var_0);
 
-      if(var_4 < var_1)
+      if(var_4 < var_1) {
         return 1;
+      }
     }
   }
 
@@ -315,8 +333,9 @@ _id_F075(var_0) {
     var_0 = var_1;
   }
 
-  if(!isDefined(level._id_10E6D._id_F074))
+  if(!isDefined(level._id_10E6D._id_F074)) {
     level._id_10E6D._id_F074 = [];
+  }
 
   level._id_10E6D._id_F074 = scripts\engine\utility::array_combine(level._id_10E6D._id_F074, var_0);
 }
@@ -326,8 +345,9 @@ _id_F079(var_0, var_1, var_2, var_3) {
   thread _id_F07A(var_0, var_1, var_2, var_3);
   self waittill("search_points_random_near_complete");
 
-  if(isDefined(self._id_10E6D._id_F078))
+  if(isDefined(self._id_10E6D._id_F078)) {
     var_4 = self._id_10E6D._id_F078;
+  }
 
   self._id_10E6D._id_F078 = undefined;
   return var_4;
@@ -338,28 +358,33 @@ _id_F07A(var_0, var_1, var_2, var_3) {
   self endon("search_points_random_near_thread");
   self endon("death");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1000;
+  }
 
   var_4 = squared(var_3);
   var_5 = squared(var_2);
   var_6 = [];
 
-  if(!isDefined(level._id_10E6D._id_F07C))
+  if(!isDefined(level._id_10E6D._id_F07C)) {
     level._id_10E6D._id_F07C = [];
+  }
 
   level._id_10E6D._id_F07C = scripts\sp\utility::_id_DFEB(level._id_10E6D._id_F07C);
 
-  if(!scripts\engine\utility::array_contains(level._id_10E6D._id_F07C, self))
+  if(!scripts\engine\utility::array_contains(level._id_10E6D._id_F07C, self)) {
     level._id_10E6D._id_F07C[level._id_10E6D._id_F07C.size] = self;
+  }
 
   wait 0.05;
 
-  while(level._id_10E6D._id_F07C.size > 0 && level._id_10E6D._id_F07C[0] != self)
+  while(level._id_10E6D._id_F07C.size > 0 && level._id_10E6D._id_F07C[0] != self) {
     wait 0.05;
+  }
 
   var_7 = getrandomnavpoints(var_0, var_3, 64, self);
 
@@ -394,11 +419,13 @@ _id_7C3B(var_0, var_1, var_2) {
   self._id_10E6D._id_F077 = 1;
   var_0 = getclosestpointonnavmesh(var_0, self);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1000;
+  }
 
   var_4 = squared(var_2);
   var_5 = squared(var_1);
@@ -430,8 +457,9 @@ _id_7C3B(var_0, var_1, var_2) {
   if(var_7.size < var_3) {
     var_13 = _id_F079(var_0, var_3 - var_7.size, var_1, var_2);
 
-    if(isDefined(var_13) && var_13.size)
+    if(isDefined(var_13) && var_13.size) {
       var_7 = scripts\engine\utility::array_combine(var_7, var_13);
+    }
   }
 
   _id_F075(var_7);
@@ -447,15 +475,17 @@ _id_E8A7(var_0, var_1) {
   var_2 = _id_0F27::_id_79F6("stealth_spotted");
   level endon(var_2);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   self._id_10E6D._id_4684 = undefined;
   _id_0F27::_id_10EE4(1);
   _id_0F27::_id_F4C8("seek", 1, var_0);
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = self.origin;
+  }
 
   if(var_1) {
     _id_0F27::_id_F4C8("run");
@@ -471,8 +501,9 @@ _id_E8A7(var_0, var_1) {
   _id_0F27::_id_F4C8("seek");
   self.goalradius = 100;
 
-  if(var_3 == "goal")
+  if(var_3 == "goal") {
     _id_B001(randomfloatrange(5, 8));
+  }
 
   return var_3;
 }

@@ -18,12 +18,14 @@ setup_kung_fu_powers() {
 }
 
 iskungfuweapon(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   for(var_1 = 0; var_1 < level.kungfu_weapons.size; var_1++) {
-    if(scripts\engine\utility::array_contains(level.kungfu_weapons[var_1], var_0))
+    if(scripts\engine\utility::array_contains(level.kungfu_weapons[var_1], var_0)) {
       return 1;
+    }
   }
 
   return 0;
@@ -45,21 +47,24 @@ use_gourd(var_0) {
   var_0 endon("last_stand");
   var_0 endon("disconnect");
 
-  if(var_0 getstance() == "prone")
+  if(var_0 getstance() == "prone") {
     var_0 setstance("crouch");
+  }
 
   var_0 scripts\engine\utility::allow_melee(0);
   var_1 = var_0 getcurrentweapon();
 
-  if(issubstr(var_1, "nunchucks") || issubstr(var_1, "katana"))
+  if(issubstr(var_1, "nunchucks") || issubstr(var_1, "katana")) {
     wait 0.75;
+  }
 
   var_0 thread unset_gourd(var_0);
   var_0 thread playgourdgesture(var_0);
   var_0 thread sfx_use_gourd();
 
-  if(isDefined(level.use_gourd_func))
+  if(isDefined(level.use_gourd_func)) {
     thread[[level.use_gourd_func]](var_0);
+  }
 
   wait 3.5;
   var_0 scripts\engine\utility::allow_melee(1);
@@ -74,8 +79,9 @@ sfx_use_gourd() {
 playgourdgesture(var_0) {
   var_1 = "crane";
 
-  if(isDefined(self.kung_fu_progression.active_discipline))
+  if(isDefined(self.kung_fu_progression.active_discipline)) {
     var_1 = self.kung_fu_progression.active_discipline;
+  }
 
   thread play_gourd_vo(var_0, var_1);
   thread scripts\cp\utility::firegesturegrenade(var_0, "iw7_gourd_zm_" + var_1);
@@ -141,47 +147,59 @@ watchforrightdpad(var_0, var_1) {
 }
 
 can_enter_kung_fu_mode(var_0) {
-  if(scripts\engine\utility::is_true(var_0.playing_ghosts_n_skulls))
+  if(scripts\engine\utility::is_true(var_0.playing_ghosts_n_skulls)) {
     return 0;
+  }
 
-  if(scripts\engine\utility::is_true(var_0.inlaststand))
+  if(scripts\engine\utility::is_true(var_0.inlaststand)) {
     return 0;
+  }
 
-  if(!isalive(var_0))
+  if(!isalive(var_0)) {
     return 0;
+  }
 
-  if(scripts\engine\utility::is_true(var_0.in_afterlife_arcade))
+  if(scripts\engine\utility::is_true(var_0.in_afterlife_arcade)) {
     return 0;
+  }
 
-  if(scripts\engine\utility::is_true(var_0.isusingsupercard))
+  if(scripts\engine\utility::is_true(var_0.isusingsupercard)) {
     return 0;
+  }
 
-  if(scripts\engine\utility::is_true(var_0.playing_game))
+  if(scripts\engine\utility::is_true(var_0.playing_game)) {
     return 0;
+  }
 
-  if(scripts\engine\utility::is_true(var_0.isrewinding))
+  if(scripts\engine\utility::is_true(var_0.isrewinding)) {
     return 0;
+  }
 
-  if(scripts\mp\agents\zombie\zombie_util::isplayerteleporting(var_0))
+  if(scripts\mp\agents\zombie\zombie_util::isplayerteleporting(var_0)) {
     return 0;
+  }
 
   if(isDefined(level.clock_interaction)) {
-    if(isDefined(level.clock_interaction.clock_owner) && level.clock_interaction.clock_owner == var_0)
+    if(isDefined(level.clock_interaction.clock_owner) && level.clock_interaction.clock_owner == var_0) {
       return 0;
+    }
   }
 
   if(isDefined(level.clock_interaction_q2)) {
-    if(isDefined(level.clock_interaction_q2.clock_owner) && level.clock_interaction_q2.clock_owner == var_0)
+    if(isDefined(level.clock_interaction_q2.clock_owner) && level.clock_interaction_q2.clock_owner == var_0) {
       return 0;
+    }
   }
 
   if(isDefined(level.clock_interaction_q3)) {
-    if(isDefined(level.clock_interaction_q3.clock_owner) && level.clock_interaction_q3.clock_owner == var_0)
+    if(isDefined(level.clock_interaction_q3.clock_owner) && level.clock_interaction_q3.clock_owner == var_0) {
       return 0;
+    }
   }
 
-  if(scripts\engine\utility::is_true(self.start_breaking_clock))
+  if(scripts\engine\utility::is_true(self.start_breaking_clock)) {
     return 0;
+  }
 
   return 1;
 }
@@ -205,8 +223,9 @@ use_wipe_away(var_0) {
   scripts\cp\powers\coop_powers::power_disablepower();
   var_1 = 250;
 
-  if(self.chi_meter_amount - var_1 <= 0)
+  if(self.chi_meter_amount - var_1 <= 0) {
     self.kung_fu_exit_delay = 1;
+  }
 
   self playlocalsound("disco_gest_push_away");
 
@@ -234,21 +253,24 @@ run_wipe_away_effects(var_0, var_1) {
   var_2 = getenemiesleftofcenter(20, 750, 3);
 
   foreach(var_4 in var_2) {
-    if(!var_4 scripts\cp\utility::agentisinstakillimmune())
+    if(!var_4 scripts\cp\utility::agentisinstakillimmune()) {
       var_4 thread throw_zombie_left(var_4.maxhealth, var_0, var_0, var_1);
+    }
   }
 
   wait 0.6;
   var_2 = getenemiesleftofcenter(15, 750, 2);
 
-  foreach(var_4 in var_2)
-  var_4 thread throw_zombie_left(var_4.maxhealth, var_0, var_0, var_1);
+  foreach(var_4 in var_2) {
+    var_4 thread throw_zombie_left(var_4.maxhealth, var_0, var_0, var_1);
+  }
 
   wait 0.3;
   var_2 = getenemiesleftofcenter(10, 750, 1);
 
-  foreach(var_4 in var_2)
-  var_4 thread throw_zombie_left(var_4.maxhealth, var_0, var_0, var_1);
+  foreach(var_4 in var_2) {
+    var_4 thread throw_zombie_left(var_4.maxhealth, var_0, var_0, var_1);
+  }
 }
 
 throw_zombie_left(var_0, var_1, var_2, var_3) {
@@ -283,8 +305,9 @@ run_hold_here_effects(var_0, var_1) {
   }
   var_2 = 250;
 
-  if(self.chi_meter_amount - var_2 <= 0)
+  if(self.chi_meter_amount - var_2 <= 0) {
     self.kung_fu_exit_delay = 1;
+  }
 
   scripts\cp\zombies\zombies_chi_meter::chi_meter_kill_decrement(250);
 
@@ -309,8 +332,9 @@ freeze_and_kill(var_0, var_1, var_2, var_3) {
   self.isfrozen = 1;
   self.crane_chi_kill = 1;
 
-  if(self.agent_type == "karatemaster")
+  if(self.agent_type == "karatemaster") {
     thread freeze_zombie(self);
+  }
 
   wait 1;
   self.isfrozen = undefined;
@@ -343,8 +367,9 @@ use_head_pinch(var_0) {
   scripts\cp\powers\coop_powers::power_disablepower();
   var_1 = 250;
 
-  if(self.chi_meter_amount - var_1 <= 0)
+  if(self.chi_meter_amount - var_1 <= 0) {
     self.kung_fu_exit_delay = 1;
+  }
 
   if(isDefined(self.kung_fu_progression.active_discipline)) {
     var_2 = self.kung_fu_progression.active_discipline;
@@ -367,29 +392,33 @@ run_head_pinch_effects(var_0, var_1) {
   var_2 = get_enemies_within_reticle(750, 10);
 
   foreach(var_5, var_4 in var_2) {
-    if(!var_4 scripts\cp\utility::agentisinstakillimmune())
+    if(!var_4 scripts\cp\utility::agentisinstakillimmune()) {
       thread apply_head_pinch_effects(var_4, var_5, var_1, var_0);
+    }
   }
 
   wait 0.75;
   var_2 = get_enemies_within_reticle(750, 10);
 
-  foreach(var_5, var_4 in var_2)
-  thread apply_head_pinch_effects(var_4, var_5, var_1, var_0);
+  foreach(var_5, var_4 in var_2) {
+    thread apply_head_pinch_effects(var_4, var_5, var_1, var_0);
+  }
 
   wait 0.4;
   var_2 = get_enemies_within_reticle(750, 10);
 
-  foreach(var_5, var_4 in var_2)
-  thread apply_head_pinch_effects(var_4, var_5, var_1, var_0);
+  foreach(var_5, var_4 in var_2) {
+    thread apply_head_pinch_effects(var_4, var_5, var_1, var_0);
+  }
 }
 
 apply_head_pinch_effects(var_0, var_1, var_2, var_3) {
   var_0 endon("death");
   var_0.pinched = 1;
 
-  if(isDefined(var_0.headmodel))
+  if(isDefined(var_0.headmodel)) {
     var_0 detach(var_0.headmodel);
+  }
 
   var_0.ignoreall = 1;
   var_0 dodamage(1, var_0.origin, var_3, var_3, "MOD_UNKNOWN", var_2);
@@ -400,8 +429,9 @@ apply_head_pinch_effects(var_0, var_1, var_2, var_3) {
 }
 
 get_enemies_within_reticle(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 6;
+  }
 
   var_2 = [];
   var_3 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
@@ -422,8 +452,9 @@ get_enemies_within_reticle(var_0, var_1) {
       if(isDefined(var_0)) {
         var_13 = distance2d(self.origin, var_11);
 
-        if(var_13 < var_0)
+        if(var_13 < var_0) {
           var_10 = 1;
+        }
       } else
         var_10 = 1;
     }
@@ -446,8 +477,9 @@ use_finger_gun(var_0) {
   scripts\cp\powers\coop_powers::power_disablepower();
   var_1 = 250;
 
-  if(self.chi_meter_amount - var_1 <= 0)
+  if(self.chi_meter_amount - var_1 <= 0) {
     self.kung_fu_exit_delay = 1;
+  }
 
   self playlocalsound("disco_gest_fingergun");
 
@@ -460,8 +492,9 @@ use_finger_gun(var_0) {
   var_4 = get_enemies_within_fov(15, 750, 2);
 
   foreach(var_7, var_6 in var_4) {
-    if(!var_6 scripts\cp\utility::agentisinstakillimmune())
+    if(!var_6 scripts\cp\utility::agentisinstakillimmune()) {
       thread apply_finger_gun_effects(var_6, var_7, var_3);
+    }
   }
 
   scripts\cp\zombies\zombies_chi_meter::chi_meter_kill_decrement(100);
@@ -492,8 +525,9 @@ wait_for_gesture_length(var_0) {
   self endon("disconnect");
   self endon("last_stand");
 
-  while(self isgestureplaying(var_0))
+  while(self isgestureplaying(var_0)) {
     scripts\engine\utility::waitframe();
+  }
 }
 
 throw_zombie(var_0, var_1, var_2, var_3, var_4) {
@@ -506,18 +540,20 @@ throw_zombie(var_0, var_1, var_2, var_3, var_4) {
     self.nocorpse = 1;
     self.full_gib = 1;
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       self dodamage(self.health + 1000, self.origin, var_2, var_2, "MOD_UNKNOWN", var_4);
-    else
+    } else {
       self dodamage(self.health + 1000, self.origin, level.players[0], level.players[0], "MOD_UNKNOWN", var_4);
+    }
   } else {
     self setvelocity(vectorNormalize(self.origin - var_1.origin) * 500 + (0, 0, 100));
     wait 0.1;
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       self dodamage(self.health + 1000, var_1.origin, var_2, var_1, "MOD_UNKNOWN", var_4);
-    else
+    } else {
       self dodamage(self.health + 1000, var_1.origin, var_1, var_1, "MOD_UNKNOWN", var_4);
+    }
   }
 }
 
@@ -541,8 +577,9 @@ run_neck_slice_logic() {
   }
   var_0 = 250;
 
-  if(self.chi_meter_amount - var_0 <= 0)
+  if(self.chi_meter_amount - var_0 <= 0) {
     self.kung_fu_exit_delay = 1;
+  }
 
   self playlocalsound("chi_dragon_activate");
 
@@ -564,8 +601,9 @@ run_neck_slice_logic() {
     var_6 = [];
 
     foreach(var_8 in var_5) {
-      if(!scripts\engine\utility::is_true(var_8.dragon_chi))
+      if(!scripts\engine\utility::is_true(var_8.dragon_chi)) {
         var_6[var_6.size] = var_8;
+      }
     }
 
     var_5 = var_6;
@@ -575,10 +613,11 @@ run_neck_slice_logic() {
       var_10 = var_5[0];
 
       if(!var_10 scripts\cp\utility::agentisinstakillimmune()) {
-        if(var_3 == 0)
+        if(var_3 == 0) {
           thread scripts\engine\utility::play_sound_in_space("chi_dragon_strike_first", var_10.origin);
-        else
+        } else {
           thread scripts\engine\utility::play_sound_in_space("chi_dragon_strike", var_10.origin);
+        }
 
         thread remove_head_and_kill(var_10, var_2);
       }
@@ -614,15 +653,17 @@ kill_zombie(var_0, var_1) {
   self.dragon_chi = undefined;
   wait 0.05;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self dodamage(self.health + 1000, self.origin, var_0, var_0, "MOD_UNKNOWN", var_1);
-  else
+  } else {
     self dodamage(self.health + 1000, self.origin, level.players[0], level.players[0], "MOD_UNKNOWN", var_1);
+  }
 }
 
 getenemiesleftofcenter(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 6;
+  }
 
   var_3 = [];
   var_4 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
@@ -653,8 +694,9 @@ getenemiesleftofcenter(var_0, var_1, var_2) {
         if(isDefined(var_1)) {
           var_18 = distance2d(self.origin, var_15);
 
-          if(var_18 < var_1)
+          if(var_18 < var_1) {
             var_14 = 1;
+          }
         } else
           var_14 = 1;
       }
@@ -675,8 +717,9 @@ getenemiesleftofcenter(var_0, var_1, var_2) {
 }
 
 get_enemies_within_fov(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 6;
+  }
 
   var_3 = [];
   var_4 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
@@ -705,8 +748,9 @@ get_enemies_within_fov(var_0, var_1, var_2) {
         if(isDefined(var_1)) {
           var_16 = distance2d(self.origin, var_14);
 
-          if(var_16 < var_1)
+          if(var_16 < var_1) {
             var_13 = 1;
+          }
         } else
           var_13 = 1;
       }
@@ -818,18 +862,21 @@ setstylescriptables(var_0, var_1, var_2, var_3) {
   var_4 = scripts\engine\utility::is_true(var_3.kung_fu_mode);
   var_5 = scripts\engine\utility::is_true(var_3.kung_fu_cooldown);
 
-  if(!isDefined(var_0.model) || isDefined(var_0.model) && var_0.model != var_1.gourd_model)
+  if(!isDefined(var_0.model) || isDefined(var_0.model) && var_0.model != var_1.gourd_model) {
     var_0 setModel(var_1.gourd_model);
+  }
 
   var_6 = 0;
 
-  if(isDefined(var_3.kung_fu_progression.active_discipline) && getactivekungfustyle(var_3) == var_1.name)
+  if(isDefined(var_3.kung_fu_progression.active_discipline) && getactivekungfustyle(var_3) == var_1.name) {
     var_6 = 1;
+  }
 
-  if(!scripts\engine\utility::flag("skq_phase_1") || var_4 || var_5 || var_6 && isDefined(var_3.has_gourd))
+  if(!scripts\engine\utility::flag("skq_phase_1") || var_4 || var_5 || var_6 && isDefined(var_3.has_gourd)) {
     var_0 setscriptablepartstate("base_model", var_1.name);
-  else
+  } else {
     var_0 setscriptablepartstate("base_model", "alt_" + var_1.name);
+  }
 }
 
 guord_interaction_init() {
@@ -859,8 +906,9 @@ setgourdonplayerconnect() {
   level endon("game_ended");
 
   foreach(var_1 in level.players) {
-    foreach(var_3 in level.all_gourds)
-    scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(var_3, var_1);
+    foreach(var_3 in level.all_gourds) {
+      scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(var_3, var_1);
+    }
   }
 
   for(;;) {
@@ -873,29 +921,33 @@ removegourdswhenable(var_0) {
   level endon("game_ended");
   var_0 endon("disconnect");
 
-  while(!isDefined(var_0.disabled_interactions))
+  while(!isDefined(var_0.disabled_interactions)) {
     scripts\engine\utility::waitframe();
+  }
 
-  foreach(var_2 in level.all_gourds)
-  scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(var_2, var_0);
+  foreach(var_2 in level.all_gourds) {
+    scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(var_2, var_0);
+  }
 }
 
 setgourdstationscriptables(var_0, var_1, var_2, var_3) {
   var_4 = scripts\engine\utility::is_true(var_3.kung_fu_mode);
   var_5 = scripts\engine\utility::is_true(var_3.kung_fu_cooldown);
 
-  if(!isDefined(var_0.model) || isDefined(var_0.model) && var_0.model != "tag_origin_ma_selection")
+  if(!isDefined(var_0.model) || isDefined(var_0.model) && var_0.model != "tag_origin_ma_selection") {
     var_0 setModel("tag_origin_ma_selection");
+  }
 
   var_6 = getactivekungfustyle(var_3);
   var_7 = isDefined(var_6) && isDefined(var_1.alt) && var_3.kung_fu_progression.disciplines_levels[var_6] >= 2;
   var_7 = !var_5 && !var_4 && !isDefined(var_3.has_gourd);
 
   if(isDefined(var_6)) {
-    if(var_7)
+    if(var_7) {
       var_0 setscriptablepartstate("base_model", "alt_" + var_6);
-    else
+    } else {
       var_0 setscriptablepartstate("base_model", var_6);
+    }
   } else
     var_0 setscriptablepartstate("base_model", "dragon");
 }
@@ -915,8 +967,9 @@ init_martial_arts_trainer() {
   level.trainer = getEnt("ma_trainer", "targetname");
   level.trainer.origin = level.trainer.origin + (25, 0, -25);
 
-  if(isDefined(level.trainer))
+  if(isDefined(level.trainer)) {
     level.trainer thread handle_trainer_anims();
+  }
 }
 
 first_trainer_interaction() {
@@ -931,8 +984,9 @@ complete_trainer_quest_1() {
     foreach(var_1 in level.players) {
       var_2 = ["pam_generic_response", "pam_return_nothing"];
 
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         var_1 thread scripts\cp\cp_vo::try_to_play_vo(scripts\engine\utility::random(var_2), "pam_dialogue_vo", "highest", 100, 1);
+      }
     }
 
     disable_trainer_interactions();
@@ -1019,8 +1073,9 @@ talk_to_trainer(var_0, var_1) {
 
   level.spoke_to_pam_first_after_wave_five = var_1;
 
-  foreach(var_4 in level.players)
-  var_4 thread scripts\cp\maps\cp_disco\cp_disco::update_special_mode_for_player(var_4);
+  foreach(var_4 in level.players) {
+    var_4 thread scripts\cp\maps\cp_disco\cp_disco::update_special_mode_for_player(var_4);
+  }
 
   if(scripts\engine\utility::flag_exist("heart_picked") && scripts\engine\utility::flag("heart_picked") && !scripts\engine\utility::is_true(var_1.played_heart_vo)) {
     if(var_1.vo_prefix == "p5_") {
@@ -1034,11 +1089,11 @@ talk_to_trainer(var_0, var_1) {
     }
   }
 
-  if(isDefined(level.trainer_quests[level.current_trainer_quest]))
+  if(isDefined(level.trainer_quests[level.current_trainer_quest])) {
     [[level.trainer_quests[level.current_trainer_quest]]]();
-  else if(isDefined(level.current_trainer_quest) && level.current_trainer_quest == -1)
+  } else if(isDefined(level.current_trainer_quest) && level.current_trainer_quest == -1) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("pam_quest_return_none", "pam_dialogue_vo", "highest", 100, 1);
-  else {
+  } else {
     var_2 = ["pam_generic_response", "pam_return_nothing"];
     var_1 thread scripts\cp\cp_vo::try_to_play_vo(scripts\engine\utility::random(var_2), "pam_dialogue_vo", "highest", 100, 1);
   }
@@ -1051,10 +1106,11 @@ blackcathintfunc(var_0, var_1) {
 }
 
 blackcatusefunc(var_0, var_1) {
-  if(isDefined(var_1.kung_fu_progression.active_discipline))
+  if(isDefined(var_1.kung_fu_progression.active_discipline)) {
     var_2 = var_1.kung_fu_progression.active_discipline;
-  else
+  } else {
     return;
+  }
 
   var_1 playlocalsound("part_pickup");
   var_3 = scripts\engine\utility::random(["power_fingerGun", "power_wipeAway", "power_headPinch"]);
@@ -1074,8 +1130,9 @@ blackcatinitfunc() {
     var_2.groupname = "locOverride";
     var_2 scripts\cp\maps\cp_disco\cp_disco::addtopersonalinteractionlist(var_2);
 
-    foreach(var_4 in level.players)
-    var_4 scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(var_2, var_4);
+    foreach(var_4 in level.players) {
+      var_4 scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(var_2, var_4);
+    }
   }
 }
 
@@ -1092,11 +1149,13 @@ removeblackcatsfrompents(var_0, var_1) {
   level endon("game_ended");
   var_0 endon("disconnect");
 
-  while(!isDefined(var_0.disabled_interactions))
+  while(!isDefined(var_0.disabled_interactions)) {
     scripts\engine\utility::waitframe();
+  }
 
-  foreach(var_3 in var_1)
-  var_0 scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(var_3, var_0);
+  foreach(var_3 in var_1) {
+    var_0 scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(var_3, var_0);
+  }
 }
 
 blackcatblank(var_0, var_1, var_2, var_3) {
@@ -1106,11 +1165,13 @@ blackcatblank(var_0, var_1, var_2, var_3) {
 blackcatinteractions(var_0, var_1, var_2, var_3) {
   var_4 = scripts\engine\utility::is_true(var_3.kung_fu_mode);
 
-  if(!isDefined(var_0.model) || isDefined(var_0.model) && var_0.model != "tag_origin_black_cat")
+  if(!isDefined(var_0.model) || isDefined(var_0.model) && var_0.model != "tag_origin_black_cat") {
     var_0 setModel("tag_origin_black_cat");
+  }
 
-  if(var_4)
+  if(var_4) {
     var_0 setscriptablepartstate("effects", "active");
+  }
 }
 
 trainer_hint_func(var_0, var_1) {
@@ -1132,32 +1193,38 @@ start_phase_2_task3() {
 completephase3() {
   scripts\engine\utility::flag_set("skq_p2t3_6");
 
-  if(level.players.size == 4)
+  if(level.players.size == 4) {
     level thread scripts\cp\cp_vo::try_to_play_vo("final_rat_king_1", "rave_dialogue_vo");
-  else {
-    foreach(var_1 in level.players)
-    var_1 playlocalsound("pg_final_rat_king_1");
+  } else {
+    foreach(var_1 in level.players) {
+      var_1 playlocalsound("pg_final_rat_king_1");
+    }
   }
 }
 
 style_hint_func(var_0, var_1) {
-  if(scripts\engine\utility::is_true(var_1.kung_fu_mode))
+  if(scripts\engine\utility::is_true(var_1.kung_fu_mode)) {
     return "";
+  }
 
-  if(scripts\engine\utility::is_true(var_1.kung_fu_cooldown))
+  if(scripts\engine\utility::is_true(var_1.kung_fu_cooldown)) {
     return "";
+  }
 
-  if(!scripts\engine\utility::flag("skq_phase_1"))
+  if(!scripts\engine\utility::flag("skq_phase_1")) {
     return "";
+  }
 
   var_2 = var_1.kung_fu_progression.disciplines_levels[var_0.name];
   var_3 = undefined;
 
-  if(isDefined(var_1.kung_fu_progression.active_discipline))
+  if(isDefined(var_1.kung_fu_progression.active_discipline)) {
     var_3 = var_1.kung_fu_progression.active_discipline;
+  }
 
-  if(isDefined(var_3) && getactivekungfustyle(var_1) == var_0.name && isDefined(var_1.has_gourd))
+  if(isDefined(var_3) && getactivekungfustyle(var_1) == var_0.name && isDefined(var_1.has_gourd)) {
     return "";
+  }
 
   switch (var_0.name) {
     case "snake":
@@ -1174,26 +1241,31 @@ style_hint_func(var_0, var_1) {
       break;
   }
 
-  if(var_2 < 1 && (!isDefined(var_3) || var_3 != var_0.name))
+  if(var_2 < 1 && (!isDefined(var_3) || var_3 != var_0.name)) {
     return &"CP_DISCO_CHALLENGES_TRAINING_BEGIN";
-  else if(var_2 < 3)
+  } else if(var_2 < 3) {
     return &"CP_DISCO_CHALLENGES_CONTINUE";
-  else
+  } else {
     return &"CP_DISCO_CHALLENGES_DRINK_GOURD";
+  }
 }
 
 usegourd_hint_func(var_0, var_1) {
-  if(!isDefined(var_1.kung_fu_progression.active_discipline))
+  if(!isDefined(var_1.kung_fu_progression.active_discipline)) {
     return "";
+  }
 
-  if(scripts\engine\utility::is_true(var_1.has_gourd))
+  if(scripts\engine\utility::is_true(var_1.has_gourd)) {
     return "";
+  }
 
-  if(scripts\engine\utility::is_true(var_1.kung_fu_mode))
+  if(scripts\engine\utility::is_true(var_1.kung_fu_mode)) {
     return "";
+  }
 
-  if(scripts\engine\utility::is_true(var_1.kung_fu_cooldown))
+  if(scripts\engine\utility::is_true(var_1.kung_fu_cooldown)) {
     return "";
+  }
 
   var_2 = var_1.kung_fu_progression.active_discipline;
 
@@ -1212,8 +1284,9 @@ usegourd_hint_func(var_0, var_1) {
       break;
   }
 
-  if(!scripts\engine\utility::is_true(var_1.kung_fu_mode))
+  if(!scripts\engine\utility::is_true(var_1.kung_fu_mode)) {
     return &"CP_DISCO_CHALLENGES_DRINK_GOURD";
+  }
 }
 
 choose_martial_arts_style(var_0, var_1) {
@@ -1225,8 +1298,9 @@ choose_martial_arts_style(var_0, var_1) {
   }
   var_1.kung_fu_progression.active_discipline = var_0.name;
 
-  if(isDefined(var_1.last_animal_interaction))
+  if(isDefined(var_1.last_animal_interaction)) {
     var_1 setclientomnvar("zm_ui_show_general", 0);
+  }
 
   var_1.last_animal_interaction = var_0;
   var_1 unset_gourd(var_1);
@@ -1260,8 +1334,9 @@ choose_martial_arts_style(var_0, var_1) {
 
   var_6 = var_4 + var_3 * 4;
 
-  if(var_3 == 3)
+  if(var_3 == 3) {
     var_6 = var_4;
+  }
 
   var_1 setclientomnvar("ui_intel_active_index", var_6);
   var_1 thread set_gourd(var_1);
@@ -1281,8 +1356,9 @@ checkgourdstates(var_0, var_1) {
   if(scripts\engine\utility::is_true(var_1.kung_fu_mode)) {
     return;
   }
-  foreach(var_3 in level.all_gourds)
-  scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(var_3, var_1);
+  foreach(var_3 in level.all_gourds) {
+    scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(var_3, var_1);
+  }
 }
 
 usegourdstation(var_0, var_1) {
@@ -1314,11 +1390,13 @@ updategourdinteractions(var_0, var_1) {
   var_1 endon("disconnect");
   var_1 waittill("spawn_gourds");
 
-  foreach(var_3 in level.all_gourds)
-  scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(var_3, var_1);
+  foreach(var_3 in level.all_gourds) {
+    scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(var_3, var_1);
+  }
 
-  foreach(var_3 in level.all_animal_structs)
-  scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(var_3, var_1);
+  foreach(var_3 in level.all_animal_structs) {
+    scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(var_3, var_1);
+  }
 
   var_1 scripts\cp\cp_interaction::refresh_interaction();
   var_1 thread scripts\cp\maps\cp_disco\cp_disco::update_special_mode_for_player(var_1);
@@ -1329,39 +1407,44 @@ start_tracking_kung_fu_discipline(var_0) {
 }
 
 update_player_abilities(var_0, var_1) {
-  if(var_0.kung_fu_progression.disciplines_levels[var_1] < 3)
+  if(var_0.kung_fu_progression.disciplines_levels[var_1] < 3) {
     var_0.kung_fu_progression.disciplines_levels[var_1]++;
+  }
 
   var_2 = var_0.kung_fu_progression.disciplines_levels[var_1];
 
   switch (var_2) {
     case 1:
-      if(!scripts\engine\utility::flag("skq_phase_1"))
+      if(!scripts\engine\utility::flag("skq_phase_1")) {
         scripts\engine\utility::flag_set("skq_phase_1");
+      }
 
       var_3 = level.kung_fu_upgrades[var_1].rb;
 
-      if(!scripts\engine\utility::is_true(var_0.kung_fu_exit_delay) && scripts\engine\utility::is_true(var_0.kung_fu_mode))
+      if(!scripts\engine\utility::is_true(var_0.kung_fu_exit_delay) && scripts\engine\utility::is_true(var_0.kung_fu_mode)) {
         var_0 thread scripts\cp\powers\coop_powers::givepower(var_3, "primary", undefined, undefined, undefined, 1, 1);
+      }
 
       break;
     case 2:
       var_3 = level.kung_fu_upgrades[var_1].lb;
 
-      if(!scripts\engine\utility::is_true(var_0.kung_fu_exit_delay) && scripts\engine\utility::is_true(var_0.kung_fu_mode))
+      if(!scripts\engine\utility::is_true(var_0.kung_fu_exit_delay) && scripts\engine\utility::is_true(var_0.kung_fu_mode)) {
         var_0 thread scripts\cp\powers\coop_powers::givepower(var_3, "secondary", undefined, undefined, undefined, 1, 1);
+      }
 
       break;
     case 3:
       if(!scripts\engine\utility::is_true(var_0.kung_fu_exit_delay) && scripts\engine\utility::is_true(var_0.kung_fu_mode)) {
-        if(var_1 == "snake")
+        if(var_1 == "snake") {
           var_0 setclientomnvar("zm_hud_inventory_1", 1);
-        else if(var_1 == "tiger")
+        } else if(var_1 == "tiger") {
           var_0 setclientomnvar("zm_hud_inventory_1", 2);
-        else if(var_1 == "crane")
+        } else if(var_1 == "crane") {
           var_0 setclientomnvar("zm_hud_inventory_1", 3);
-        else if(var_1 == "dragon")
+        } else if(var_1 == "dragon") {
           var_0 setclientomnvar("zm_hud_inventory_1", 4);
+        }
 
         var_0 thread activate_level_3_power(var_0, var_1);
         level thread activateblackcats(var_0);
@@ -1374,8 +1457,9 @@ update_player_abilities(var_0, var_1) {
 }
 
 activateblackcats(var_0) {
-  foreach(var_2 in level.allcatstructs)
-  scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(var_2, var_0);
+  foreach(var_2 in level.allcatstructs) {
+    scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(var_2, var_0);
+  }
 
   var_0 thread scripts\cp\maps\cp_disco\cp_disco::update_special_mode_for_player(var_0);
 }
@@ -1384,8 +1468,9 @@ deactivateblackcats(var_0) {
   if(scripts\engine\utility::flag("rk_fight_started")) {
     return;
   }
-  foreach(var_2 in level.allcatstructs)
-  scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(var_2, var_0);
+  foreach(var_2 in level.allcatstructs) {
+    scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(var_2, var_0);
+  }
 
   var_0 thread scripts\cp\maps\cp_disco\cp_disco::update_special_mode_for_player(var_0);
 }
@@ -1408,8 +1493,9 @@ watch_for_kung_fu_super_button(var_0, var_1) {
   var_0 notify("end_super_watcher");
   var_0 endon("end_super_watcher");
 
-  if(var_0 hasweapon("super_default_zm"))
+  if(var_0 hasweapon("super_default_zm")) {
     var_0 takeweapon("super_default_zm");
+  }
 
   var_2 = "kung_fu_super_zm";
   var_0 giveweapon(var_2);
@@ -1419,8 +1505,9 @@ watch_for_kung_fu_super_button(var_0, var_1) {
   for(;;) {
     var_0 waittill("offhand_fired", var_3);
 
-    if(var_3 == var_2)
+    if(var_3 == var_2) {
       var_0 notify("super_fired");
+    }
 
     if(scripts\engine\utility::is_true(self.tiger_super_use) || scripts\engine\utility::is_true(self.crane_super_use) || scripts\engine\utility::is_true(self.snake_super_use) || scripts\engine\utility::is_true(self.dragon_super_use)) {
       wait 0.1;
@@ -1484,8 +1571,9 @@ enter_kung_fu(var_0, var_1) {
   }
   var_0.pre_kung_fu_powers = var_0 scripts\cp\powers\coop_powers::get_info_for_player_powers(var_0);
 
-  foreach(var_3 in getarraykeys(var_0.powers))
-  var_0 scripts\cp\powers\coop_powers::removepower(var_3);
+  foreach(var_3 in getarraykeys(var_0.powers)) {
+    var_0 scripts\cp\powers\coop_powers::removepower(var_3);
+  }
 
   level thread play_kung_fu_enter_vo(var_0);
   level.pause_nag_vo = 1;
@@ -1500,10 +1588,11 @@ enter_kung_fu(var_0, var_1) {
   var_0 allowprone(0);
   var_5 = 0;
 
-  if(playerhasusedstyle(var_0))
+  if(playerhasusedstyle(var_0)) {
     var_5 = 1;
-  else
+  } else {
     var_0.kung_fu_progression.has_used[var_1]++;
+  }
 
   var_6 = level.kung_fu_upgrades[var_1].melee_weapon;
   var_0 scripts\cp\utility::_giveweapon(var_6, undefined, undefined, var_5);
@@ -1524,14 +1613,15 @@ enter_kung_fu(var_0, var_1) {
     thread activateblackcats(var_0);
     var_0 thread watch_for_kung_fu_super_button(var_0, var_1);
 
-    if(var_1 == "snake")
+    if(var_1 == "snake") {
       var_0 setclientomnvar("zm_hud_inventory_1", 1);
-    else if(var_1 == "tiger")
+    } else if(var_1 == "tiger") {
       var_0 setclientomnvar("zm_hud_inventory_1", 2);
-    else if(var_1 == "crane")
+    } else if(var_1 == "crane") {
       var_0 setclientomnvar("zm_hud_inventory_1", 3);
-    else if(var_1 == "dragon")
+    } else if(var_1 == "dragon") {
       var_0 setclientomnvar("zm_hud_inventory_1", 4);
+    }
   } else
     var_0 setclientomnvar("zm_hud_inventory_1", 0);
 
@@ -1550,8 +1640,9 @@ turn_off_wall_buys(var_0) {
     if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "iw7_katana_zm") {
       continue;
     }
-    if(isDefined(var_2.trigger))
+    if(isDefined(var_2.trigger)) {
       var_2.trigger hidefromplayer(var_0);
+    }
 
     scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(var_2, var_0);
   }
@@ -1561,8 +1652,9 @@ turn_on_wall_buys(var_0) {
   var_0 endon("disconnect");
 
   foreach(var_2 in level.wall_buy_interactions) {
-    if(isDefined(var_2.trigger))
+    if(isDefined(var_2.trigger)) {
       var_2.trigger showtoplayer(var_0);
+    }
 
     scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(var_2, var_0);
   }
@@ -1606,8 +1698,9 @@ unset_kung_fu_mode(var_0, var_1) {
   var_0.allow_carry = undefined;
   [[level.kung_fu_interaction_func]](var_0);
 
-  if(!var_0 hasweapon(var_1))
+  if(!var_0 hasweapon(var_1)) {
     var_1 = var_0 scripts\cp\utility::getvalidtakeweapon();
+  }
 
   var_0.disable_consumables = undefined;
   var_0.pre_kung_fu_weapon = undefined;
@@ -1616,8 +1709,9 @@ unset_kung_fu_mode(var_0, var_1) {
   var_0 enableweaponswitch();
   var_0 switchtoweapon(var_1);
 
-  if(var_0 hasweapon("kung_fu_super_zm"))
+  if(var_0 hasweapon("kung_fu_super_zm")) {
     var_0 takeweapon("kung_fu_super_zm");
+  }
 
   var_0 scripts\cp\utility::restore_super_weapon();
   var_0 kungfu_buff_cleanup();
@@ -1632,8 +1726,9 @@ unset_kung_fu_mode(var_0, var_1) {
 restoreknifeweapon(var_0) {
   var_1 = var_0.melee_weapon;
 
-  if(!var_0 hasweapon(var_1))
+  if(!var_0 hasweapon(var_1)) {
     var_0 giveweapon(var_1);
+  }
 }
 
 disable_grenades_for_time(var_0) {
@@ -1655,18 +1750,21 @@ applykungfucooldown(var_0) {
 }
 
 restore_pre_kung_fu_powers(var_0, var_1) {
-  foreach(var_3 in getarraykeys(var_0.powers))
-  scripts\cp\powers\coop_powers::removepower(var_3);
+  foreach(var_3 in getarraykeys(var_0.powers)) {
+    scripts\cp\powers\coop_powers::removepower(var_3);
+  }
 
   foreach(var_3, var_6 in var_1) {
     var_7 = undefined;
     var_8 = 0;
 
-    if(scripts\engine\utility::is_true(var_6.cooldown))
+    if(scripts\engine\utility::is_true(var_6.cooldown)) {
       var_7 = 1;
+    }
 
-    if(scripts\engine\utility::is_true(var_6.permanent))
+    if(scripts\engine\utility::is_true(var_6.permanent)) {
       var_8 = 1;
+    }
 
     if(var_6.slot == "secondary") {
       var_0 scripts\cp\powers\coop_powers::givepower(var_3, var_6.slot, undefined, undefined, undefined, var_7, var_8);
@@ -1834,10 +1932,11 @@ kungfu_buff_cleanup() {
 }
 
 setkungfubuffstate(var_0, var_1) {
-  if(!isDefined(var_1) || var_1 == "on")
+  if(!isDefined(var_1) || var_1 == "on") {
     self setscriptablepartstate("kungfu_seal_" + var_0, "on");
-  else
+  } else {
     self setscriptablepartstate("kungfu_seal_" + var_0, "off");
+  }
 }
 
 watchforforcedexit(var_0) {
@@ -1877,8 +1976,9 @@ playerhasusedstyle(var_0) {
 }
 
 getactivekungfustyle(var_0) {
-  if(isDefined(var_0.kung_fu_progression.active_discipline))
+  if(isDefined(var_0.kung_fu_progression.active_discipline)) {
     return var_0.kung_fu_progression.active_discipline;
-  else
+  } else {
     return undefined;
+  }
 }

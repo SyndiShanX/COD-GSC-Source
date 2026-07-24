@@ -45,8 +45,9 @@ _id_C26C() {
 }
 
 _id_11402() {
-  if(!isDefined(level._id_11403))
+  if(!isDefined(level._id_11403)) {
     level._id_11403 = gettime();
+  }
 
   return scripts\engine\utility::is_true(level.player._id_113F4) || gettime() >= level._id_11403 + 6000;
 }
@@ -73,8 +74,9 @@ _id_7C24(var_0) {
   var_2 = [];
   var_3 = "sp/sa_radio_conversations.csv";
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "";
+  }
 
   var_4 = "";
   var_5 = 0;
@@ -91,8 +93,9 @@ _id_7C24(var_0) {
 
     var_4 = var_7;
 
-    if(var_0 == var_8 && var_6 != "")
+    if(var_0 == var_8 && var_6 != "") {
       var_1[var_1.size] = var_6;
+    }
 
     if(var_6 == "") {
       break;

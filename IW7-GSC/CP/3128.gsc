@@ -28,11 +28,13 @@ _id_98A7() {
 }
 
 _id_10088(var_0, var_1, var_2, var_3) {
-  if(scripts\asm\asm_bb::bb_isincombat())
+  if(scripts\asm\asm_bb::bb_isincombat()) {
     return 0;
+  }
 
-  if(isDefined(self._id_6571))
+  if(isDefined(self._id_6571)) {
     return 0;
+  }
 
   return 1;
 }
@@ -53,11 +55,13 @@ reload(var_0, var_1, var_2, var_3) {
 _id_100A9(var_0, var_1, var_2, var_3) {
   var_4 = scripts\asm\asm_bb::bb_getrequestedweapon();
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
-  if(weaponclass(self.weapon) == var_4)
+  if(weaponclass(self.weapon) == var_4) {
     return 0;
+  }
 
   return 1;
 }
@@ -65,15 +69,17 @@ _id_100A9(var_0, var_1, var_2, var_3) {
 _id_BEA0(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
 
-  if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.ent))
+  if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.ent)) {
     var_4 = self._blackboard.shootparams.ent.origin;
-  else if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.pos))
+  } else if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.pos)) {
     var_4 = self._blackboard.shootparams.pos;
-  else if(isDefined(self.enemy))
+  } else if(isDefined(self.enemy)) {
     var_4 = self.enemy.origin;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
   var_5 = self.angles[1] - vectortoyaw(var_4 - self.origin);
   var_6 = distancesquared(self.origin, var_4);
@@ -81,12 +87,14 @@ _id_BEA0(var_0, var_1, var_2, var_3) {
   if(var_6 < 65536) {
     var_7 = sqrt(var_6);
 
-    if(var_7 > 3)
+    if(var_7 > 3) {
       var_5 = var_5 + asin(-3 / var_7);
+    }
   }
 
-  if(abs(angleclamp180(var_5)) > self._id_129AF)
+  if(abs(angleclamp180(var_5)) > self._id_129AF) {
     return 1;
+  }
 
   return 0;
 }
@@ -97,19 +105,22 @@ _id_81DE() {
   var_2 = undefined;
 
   if(isDefined(self._blackboard.shootparams)) {
-    if(isDefined(self._blackboard.shootparams.ent))
+    if(isDefined(self._blackboard.shootparams.ent)) {
       var_1 = self._blackboard.shootparams.ent;
-    else if(isDefined(self._blackboard.shootparams.pos))
+    } else if(isDefined(self._blackboard.shootparams.pos)) {
       var_2 = self._blackboard.shootparams.pos;
+    }
   }
 
   if(isDefined(self.enemy)) {
-    if(!isDefined(var_1) && !isDefined(var_2))
+    if(!isDefined(var_1) && !isDefined(var_2)) {
       var_1 = self.enemy;
+    }
   }
 
-  if(isDefined(var_1) && !issentient(var_1))
+  if(isDefined(var_1) && !issentient(var_1)) {
     var_0 = 1.5;
+  }
 
   var_3 = scripts\engine\utility::getpredictedaimyawtoshootentorpos(var_0, var_1, var_2);
   return var_3;
@@ -118,22 +129,24 @@ _id_81DE() {
 _id_3F0A(var_0, var_1, var_2) {
   var_3 = _id_81DE();
 
-  if(var_3 < 0)
+  if(var_3 < 0) {
     var_4 = "right";
-  else
+  } else {
     var_4 = "left";
+  }
 
   var_3 = abs(var_3);
   var_5 = 0;
 
-  if(var_3 > 157.5)
+  if(var_3 > 157.5) {
     var_5 = 180;
-  else if(var_3 > 112.5)
+  } else if(var_3 > 112.5) {
     var_5 = 135;
-  else if(var_3 > 67.5)
+  } else if(var_3 > 67.5) {
     var_5 = 90;
-  else
+  } else {
     var_5 = 45;
+  }
 
   var_6 = var_4 + "_" + var_5;
   var_7 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_6);
@@ -151,8 +164,9 @@ _id_D56A(var_0, var_1, var_2, var_3) {
   self _meth_8281("anim deltas");
   scripts\asm\asm_mp::_id_2365(var_0, var_1, var_2, var_4);
 
-  if(!isDefined(var_5) && isDefined(self.pathgoalpos))
+  if(!isDefined(var_5) && isDefined(self.pathgoalpos)) {
     self clearpath();
+  }
 
   scripts\asm\asm_mp::_id_237F("face current");
   scripts\asm\asm_mp::_id_237E("code_move");
@@ -161,14 +175,17 @@ _id_D56A(var_0, var_1, var_2, var_3) {
 _id_1007E(var_0, var_1, var_2, var_3) {
   var_4 = !scripts\asm\asm_bb::bb_moverequested() && scripts\asm\shared\utility::isatcovernode();
 
-  if(!var_4)
+  if(!var_4) {
     return 0;
+  }
 
-  if(!isDefined(self.node))
+  if(!isDefined(self.node)) {
     return 0;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     return 1;
+  }
 
   return _id_0F3A::_id_9D4C(var_0, var_1, var_2, var_3);
 }
@@ -194,8 +211,9 @@ _id_D4B3(var_0, var_1, var_2, var_3) {
 }
 
 _id_FFEF(var_0, var_1, var_2, var_3) {
-  if(isDefined(self._id_FFEF))
+  if(isDefined(self._id_FFEF)) {
     return 1;
+  }
 
   return 0;
 }

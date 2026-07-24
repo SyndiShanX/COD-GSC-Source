@@ -14,8 +14,9 @@ btstate_setupstate(var_0, var_1, var_2, var_3) {
   var_4.fntick = var_2;
   var_4.fnend = var_3;
 
-  if(!isDefined(self.bt_states))
+  if(!isDefined(self.bt_states)) {
     self.bt_states = [];
+  }
 
   self.bt_states[var_0] = var_4;
   return var_4;
@@ -24,11 +25,13 @@ btstate_setupstate(var_0, var_1, var_2, var_3) {
 btstate_getcurrentstatename(var_0) {
   var_1 = btstate_getinstancedata(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return undefined;
+  }
 
-  if(!isDefined(var_1.currentstate))
+  if(!isDefined(var_1.currentstate)) {
     return undefined;
+  }
 
   return var_1.currentstate.name;
 }
@@ -36,15 +39,17 @@ btstate_getcurrentstatename(var_0) {
 btstate_tickstates(var_0) {
   var_1 = btstate_getinstancedata(var_0);
 
-  if(!isDefined(var_1.currentstate))
+  if(!isDefined(var_1.currentstate)) {
     return 0;
+  }
 
   if(isDefined(var_1.currentstate.fntick)) {
     var_2 = var_1.currentstate.name;
     var_3 = self[[var_1.currentstate.fntick]](var_0);
 
-    if(isDefined(var_1.currentstate) && var_1.currentstate.name != var_2)
+    if(isDefined(var_1.currentstate) && var_1.currentstate.name != var_2) {
       return btstate_tickstates(var_0);
+    }
 
     return var_3;
   }
@@ -70,8 +75,9 @@ btstate_destroystates() {
 btstate_endcurrentstate(var_0) {
   var_1 = btstate_getinstancedata(var_0);
 
-  if(isDefined(var_1.currentstate) && isDefined(var_1.currentstate.fnend))
+  if(isDefined(var_1.currentstate) && isDefined(var_1.currentstate.fnend)) {
     self[[var_1.currentstate.fnend]](var_0, undefined);
+  }
 
   var_1.currentstate = undefined;
 }
@@ -83,15 +89,17 @@ btstate_transitionstate(var_0, var_1) {
   if(isDefined(var_2.currentstate)) {
     var_3 = var_2.currentstate.name;
 
-    if(isDefined(var_2.currentstate.fnend))
+    if(isDefined(var_2.currentstate.fnend)) {
       [[var_2.currentstate.fnend]](var_0, var_1);
+    }
   }
 
   var_4 = self.bt_states[var_1];
   var_2.currentstate = var_4;
 
-  if(isDefined(var_4.fnbegin))
+  if(isDefined(var_4.fnbegin)) {
     self[[var_4.fnbegin]](var_0, var_3);
+  }
 }
 
 chase_target_state_setup(var_0, var_1, var_2, var_3, var_4) {
@@ -115,8 +123,9 @@ chase_target_state_done(var_0, var_1) {
   var_3 = var_2.fncallback;
   btstate_endcurrentstate(var_0);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     [[var_3]](var_0, var_1);
+  }
 }
 
 chase_target_state_tick(var_0) {
@@ -136,11 +145,13 @@ chase_target_state_tick(var_0) {
 
   var_2 = distance2dsquared(self.origin, var_1.target.origin);
 
-  if(var_2 > squared(var_1.goalradius))
+  if(var_2 > squared(var_1.goalradius)) {
     return 1;
+  }
 
-  if(abs(self.origin[2] - var_1.target.origin[2] > 32))
+  if(abs(self.origin[2] - var_1.target.origin[2] > 32)) {
     return 1;
+  }
 
   chase_target_state_done(var_0, "arrived");
   return 1;
@@ -154,8 +165,9 @@ chase_target_state_end(var_0, var_1) {
 }
 
 asm_wait_state_setup(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = "ASM_Finished";
+  }
 
   btstate_setupstate(var_1, ::asm_wait_state_begin, ::asm_wait_state_tick, ::asm_wait_state_end);
   var_7 = btstate_getinstancedata(var_0);
@@ -163,13 +175,15 @@ asm_wait_state_setup(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7.asmstate = var_2;
   var_7.fncallback = var_3;
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_7.timeouttime = gettime() + var_6;
-  else
+  } else {
     var_7.timeouttime = gettime() + 2000;
+  }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_7._id_6393 = gettime() + var_5;
+  }
 }
 
 asm_wait_state_begin(var_0, var_1) {
@@ -181,8 +195,9 @@ asm_wait_state_tick(var_0) {
   var_1 = btstate_getinstancedata(var_0);
   var_2 = scripts\asm\asm::asm_isinstate(var_1.asmstate);
 
-  if(var_2 && !var_1.bisinasmstate)
+  if(var_2 && !var_1.bisinasmstate) {
     var_1.bisinasmstate = 1;
+  }
 
   var_3 = 0;
   var_4 = undefined;
@@ -211,8 +226,9 @@ asm_wait_state_tick(var_0) {
     var_5 = var_1.fncallback;
     btstate_endcurrentstate(var_0);
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       [[var_5]](var_0, var_4);
+    }
   }
 
   return !var_3;

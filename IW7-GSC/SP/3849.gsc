@@ -15,8 +15,9 @@ _id_88FA(var_0) {
   self endon("death");
   level endon("gravity_special_case");
 
-  if(!scripts\engine\utility::flag_exist("holdGravityShift"))
+  if(!scripts\engine\utility::flag_exist("holdGravityShift")) {
     scripts\engine\utility::flag_init("holdGravityShift");
+  }
 
   if(!scripts\engine\utility::is_true(var_0)) {
     _id_0F35::_id_FB24(1, level.player);
@@ -26,8 +27,9 @@ _id_88FA(var_0) {
     _id_0F31::_id_17A4();
   }
 
-  if(!scripts\sp\utility::_id_65DF("player_gravity_off"))
+  if(!scripts\sp\utility::_id_65DF("player_gravity_off")) {
     scripts\sp\utility::_id_65E0("player_gravity_off");
+  }
 
   scripts\sp\utility::_id_65E1("player_gravity_off");
 
@@ -38,8 +40,9 @@ _id_88FA(var_0) {
       scripts\engine\utility::flag_wait("player_in_gravity");
       scripts\engine\utility::flag_waitopen("holdGravityShift");
 
-      if(scripts\sp\utility::_id_65DB("player_gravity_off"))
+      if(scripts\sp\utility::_id_65DB("player_gravity_off")) {
         scripts\sp\utility::_id_65DD("player_gravity_off");
+      }
 
       _id_0F35::_id_FB24(0, level.player);
       _id_0F35::_id_FB25(0, 0);
@@ -52,8 +55,9 @@ _id_88FA(var_0) {
       if(scripts\engine\utility::flag("player_in_gravity")) {
         continue;
       }
-      if(!scripts\sp\utility::_id_65DB("player_gravity_off"))
+      if(!scripts\sp\utility::_id_65DB("player_gravity_off")) {
         scripts\sp\utility::_id_65E1("player_gravity_off");
+      }
 
       _id_0F35::_id_FB24(1, level.player);
       _id_0F35::_id_FB25(1, 1);

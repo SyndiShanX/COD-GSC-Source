@@ -23,8 +23,9 @@ pickbetterenemy(var_0, var_1) {
   var_3 = self cansee(var_1);
 
   if(var_2 != var_3) {
-    if(var_2)
+    if(var_2) {
       return var_0;
+    }
 
     return var_1;
   }
@@ -32,29 +33,34 @@ pickbetterenemy(var_0, var_1) {
   var_4 = distancesquared(self.origin, var_0.origin);
   var_5 = distancesquared(self.origin, var_1.origin);
 
-  if(var_4 < var_5)
+  if(var_4 < var_5) {
     return var_0;
+  }
 
   return var_1;
 }
 
 shouldignoreenemy(var_0) {
-  if(!isalive(var_0))
+  if(!isalive(var_0)) {
     return 1;
+  }
 
-  if(var_0.ignoreme || isDefined(var_0.owner) && var_0.owner.ignoreme)
+  if(var_0.ignoreme || isDefined(var_0.owner) && var_0.owner.ignoreme) {
     return 1;
+  }
 
-  if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_0))
+  if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_0)) {
     return 1;
+  }
 
   return 0;
 }
 
 updateenemy() {
   if(isDefined(self.myenemy) && !shouldignoreenemy(self.myenemy)) {
-    if(gettime() - self.myenemystarttime < 3000)
+    if(gettime() - self.myenemystarttime < 3000) {
       return self.myenemy;
+    }
   }
 
   var_0 = undefined;
@@ -98,8 +104,9 @@ stuck_begin(var_0) {
 }
 
 stuck_tick(var_0) {
-  if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.success;
 }
@@ -128,25 +135,30 @@ facepoint(var_0, var_1) {
 stuck_decideturn(var_0, var_1) {
   var_2 = scripts\mp\agents\crab_mini\crab_mini_agent::getenemy();
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return 0;
+  }
 
   var_3 = distancesquared(self.origin, var_2.origin);
   var_4 = scripts\mp\agents\crab_mini\crab_mini_tunedata::gettunedata();
 
-  if(var_3 < var_4.min_dist_to_enemy_to_allow_turn_sq)
+  if(var_3 < var_4.min_dist_to_enemy_to_allow_turn_sq) {
     return 0;
+  }
 
-  if(var_3 > var_4.max_dist_to_enemy_to_allow_turn_sq)
+  if(var_3 > var_4.max_dist_to_enemy_to_allow_turn_sq) {
     return 0;
+  }
 
-  if(!_func_2AC(self.origin, var_2.origin, self))
+  if(!_func_2AC(self.origin, var_2.origin, self)) {
     return 0;
+  }
 
   var_5 = scripts\engine\utility::getyawtospot(var_2.origin);
 
-  if(abs(var_5) < 45)
+  if(abs(var_5) < 45) {
     return 0;
+  }
 
   self.desiredyaw = var_5;
   return 1;
@@ -166,8 +178,9 @@ melee_begin(var_0) {
 melee_tick(var_0) {
   self clearpath();
 
-  if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.failure;
 }
@@ -194,8 +207,9 @@ movingmelee_begin(var_0) {
 movingmelee_tick(var_0) {
   self clearpath();
 
-  if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.failure;
 }
@@ -227,18 +241,21 @@ getpredictedenemypos(var_0, var_1) {
 trymeleeattacks(var_0) {
   var_1 = scripts\mp\agents\crab_mini\crab_mini_agent::getenemy();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return anim.failure;
+  }
 
   var_2 = scripts\mp\agents\crab_mini\crab_mini_tunedata::gettunedata();
 
-  if(abs(var_1.origin[2] - self.origin[2]) > var_2.melee_max_z_diff)
+  if(abs(var_1.origin[2] - self.origin[2]) > var_2.melee_max_z_diff) {
     return anim.failure;
+  }
 
   var_3 = var_1.origin;
 
-  if(isDefined(self.pathgoalpos))
+  if(isDefined(self.pathgoalpos)) {
     var_3 = getpredictedenemypos(var_1, var_2);
+  }
 
   var_4 = distancesquared(var_3, self.origin);
 
@@ -250,16 +267,18 @@ trymeleeattacks(var_0) {
   var_5 = distancesquared(self.origin, var_1.origin);
 
   if(var_5 > var_2.non_predicted_move_melee_dist_sq) {
-    if(var_4 > var_2.move_melee_dist_sq)
+    if(var_4 > var_2.move_melee_dist_sq) {
       return 0;
+    }
   }
 
   if(var_5 > var_2.check_reachable_dist_sq) {
     var_6 = self _meth_84AC();
     var_7 = getclosestpointonnavmesh(var_1.origin, self);
 
-    if(!_func_2AC(var_6, var_7, self))
+    if(!_func_2AC(var_6, var_7, self)) {
       return 0;
+    }
   }
 
   scripts\aitypes\dlc3\bt_action_api::setdesiredaction(var_0, "moving_melee");
@@ -269,26 +288,30 @@ trymeleeattacks(var_0) {
 trymeleeattacks_old(var_0, var_1) {
   var_2 = scripts\mp\agents\crab_mini\crab_mini_agent::getenemy();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = distancesquared(self.origin, var_2.origin);
+  }
 
   var_3 = scripts\mp\agents\crab_mini\crab_mini_tunedata::gettunedata();
 
-  if(var_1 > var_3.move_melee_dist_sq)
+  if(var_1 > var_3.move_melee_dist_sq) {
     return 0;
+  }
 
   var_4 = (var_2.origin - self.origin) * (1, 1, 0);
   var_5 = anglesToForward(self.angles);
   var_6 = vectorNormalize(var_4);
   var_7 = vectordot(var_5, var_6);
 
-  if(var_7 < var_3.stand_melee_attack_dot)
+  if(var_7 < var_3.stand_melee_attack_dot) {
     return 0;
+  }
 
-  if(var_1 < var_3.stand_melee_dist_sq)
+  if(var_1 < var_3.stand_melee_dist_sq) {
     scripts\aitypes\dlc3\bt_action_api::setdesiredaction(var_0, "stand_melee");
-  else
+  } else {
     scripts\aitypes\dlc3\bt_action_api::setdesiredaction(var_0, "moving_melee");
+  }
 
   return 1;
 }
@@ -296,8 +319,9 @@ trymeleeattacks_old(var_0, var_1) {
 decideaction(var_0) {
   var_1 = scripts\mp\agents\crab_mini\crab_mini_agent::getenemy();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return anim.failure;
+  }
 
   var_2 = gettime();
 
@@ -316,14 +340,16 @@ followenemy_begin(var_0) {
 followenemy_tick(var_0) {
   var_1 = scripts\mp\agents\crab_mini\crab_mini_agent::getenemy();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return anim.failure;
+  }
 
   var_2 = getclosestpointonnavmesh(var_1.origin, self);
   self scragentsetgoalpos(var_2);
 
-  if(!self cansee(var_1))
+  if(!self cansee(var_1)) {
     return anim.running;
+  }
 
   return anim.success;
 }

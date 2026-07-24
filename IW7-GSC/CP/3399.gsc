@@ -42,8 +42,9 @@ wait_for_all_arks_deposited() {
   var_3 makeunusable();
   var_4 = getomnvarvalue("pink");
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     level scripts\cp\utility::set_quest_icon(var_4);
+  }
 
   var_5 = scripts\engine\utility::getStruct("ark_quest_station", "script_noteworthy");
   var_5.buy_loc = var_1;
@@ -77,13 +78,15 @@ flytogatormouth(var_0, var_1, var_2) {
       var_5 = undefined;
     }
 
-    if(isDefined(var_3.target))
+    if(isDefined(var_3.target)) {
       var_4 = scripts\engine\utility::getStruct(var_3.target, "targetname");
-    else
+    } else {
       break;
+    }
 
-    if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == "arcane_struct_portal")
+    if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == "arcane_struct_portal") {
       var_5 = scripts\engine\utility::getStruct(var_4.target, "targetname");
+    }
   }
 
   scripts\engine\utility::flag_set("pink_essence_arrived");
@@ -92,13 +95,15 @@ flytogatormouth(var_0, var_1, var_2) {
 get_move_rate(var_0, var_1, var_2, var_3) {
   var_4 = distance(var_1, var_2);
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = min(10 + level.wave_num * 5, 150);
+  }
 
   var_5 = var_4 / var_3;
 
-  if(var_5 < 0.05)
+  if(var_5 < 0.05) {
     var_5 = 0.05;
+  }
 
   return var_5;
 }
@@ -181,8 +186,9 @@ wait_for_ark_placed(var_0, var_1) {
 
   var_14 = getomnvarvalue(var_3);
 
-  if(isDefined(var_14))
+  if(isDefined(var_14)) {
     level scripts\cp\utility::set_quest_icon(var_14);
+  }
 
   var_1.model makeunusable();
   var_15 = var_3 + "_ark_quest";
@@ -216,19 +222,21 @@ getomnvarvalue(var_0) {
 }
 
 ark_quest_hint_func(var_0, var_1) {
-  if(isDefined(var_0.crystals) && var_0.crystals.size >= 1)
+  if(isDefined(var_0.crystals) && var_0.crystals.size >= 1) {
     return &"CP_QUEST_WOR_PART";
-  else
+  } else {
     return level.interaction_hintstrings[var_0.script_noteworthy];
+  }
 }
 
 has_white_ark_hint_func(var_0, var_1) {
-  if(scripts\engine\utility::is_true(var_1.has_white_ark))
+  if(scripts\engine\utility::is_true(var_1.has_white_ark)) {
     return;
-  else if(!scripts\cp\cp_weapon::can_use_attachment("arkpink", var_1 getcurrentweapon()))
+  } else if(!scripts\cp\cp_weapon::can_use_attachment("arkpink", var_1 getcurrentweapon())) {
     return;
-  else
+  } else {
     return level.interaction_hintstrings[var_0.script_noteworthy];
+  }
 }
 
 ark_quest_activation(var_0, var_1) {
@@ -260,8 +268,9 @@ add_white_ark_to_weapon(var_0, var_1) {
   }
   var_1 disableweaponswitch();
 
-  while(var_1 isswitchingweapon())
+  while(var_1 isswitchingweapon()) {
     wait 0.05;
+  }
 
   var_1 enableweaponswitch();
   var_1.has_white_ark = 1;
@@ -303,8 +312,9 @@ watchforplayerdeath(var_0) {
     var_1 = 0;
     var_3 = var_0 scripts\engine\utility::waittill_any_return_no_endon_death("player_entered_ala", "revive");
 
-    if(var_3 == "player_entered_ala")
+    if(var_3 == "player_entered_ala") {
       var_2 = var_0 scripts\engine\utility::waittill_any_return("lost_and_found_collected", "lost_and_found_time_out");
+    }
 
     if(isDefined(var_2) && var_2 == "lost_and_found_time_out") {
       continue;

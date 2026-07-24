@@ -14,31 +14,35 @@ registerscriptedagent() {
 _id_FAB0() {
   level endon("game_ended");
 
-  if(!isDefined(level.agent_definition))
+  if(!isDefined(level.agent_definition)) {
     level waittill("scripted_agents_initialized");
+  }
 
   level.agent_definition["alien_rhino"]["setup_func"] = ::setupagent;
   level.agent_definition["alien_rhino"]["setup_model_func"] = ::_id_FACE;
   level.agent_funcs["alien_rhino"]["on_damaged"] = ::_id_C4E0;
-  level.agent_funcs["alien_rhino"]["gametype_on_damage_finished"] = scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
-  level.agent_funcs["alien_rhino"]["gametype_on_killed"] = scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiekilled;
-  level.agent_funcs["alien_rhino"]["on_damaged_finished"] = scripts\mp\agents\zombie\zombie_agent::onzombiedamagefinished;
-  level.agent_funcs["alien_rhino"]["on_killed"] = scripts\mp\agents\zombie\zombie_agent::onzombiekilled;
+  level.agent_funcs["alien_rhino"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+  level.agent_funcs["alien_rhino"]["gametype_on_killed"] = ::scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiekilled;
+  level.agent_funcs["alien_rhino"]["on_damaged_finished"] = ::scripts\mp\agents\zombie\zombie_agent::onzombiedamagefinished;
+  level.agent_funcs["alien_rhino"]["on_killed"] = ::scripts\mp\agents\zombie\zombie_agent::onzombiekilled;
 
-  if(!isDefined(level._id_8CBD))
+  if(!isDefined(level._id_8CBD)) {
     level._id_8CBD = [];
+  }
 
   level._id_8CBD["alien_rhino"] = ::calculatealienrhinohealth;
 
-  if(!isDefined(level.damage_feedback_overrride))
+  if(!isDefined(level.damage_feedback_overrride)) {
     level.damage_feedback_overrride = [];
+  }
 }
 
 _id_FACE(var_0) {
-  if(should_spawn_mammoth())
+  if(should_spawn_mammoth()) {
     self setModel("alien_queen_blue");
-  else
+  } else {
     self setModel("alien_queen");
+  }
 }
 
 setupzombiegametypevars() {
@@ -125,8 +129,9 @@ setupzombiegametypevars() {
   self.allowpain = 0;
   self setavoidanceradius(65);
 
-  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1)
+  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1) {
     self._id_AB3F = 1;
+  }
 }
 
 setupagent() {
@@ -153,11 +158,13 @@ setupagent() {
   self.ignoreall = 1;
   self.dontmutilate = 1;
 
-  if(scripts\engine\utility::is_true(self.activated_venomx_sphere))
+  if(scripts\engine\utility::is_true(self.activated_venomx_sphere)) {
     self.activated_venomx_sphere = undefined;
+  }
 
-  if(scripts\engine\utility::is_true(self.dot_triggered))
+  if(scripts\engine\utility::is_true(self.dot_triggered)) {
     self.dot_triggered = undefined;
+  }
 
   self.preventplayerpushdist = 12;
 }
@@ -177,8 +184,9 @@ accumulatedamage(var_0, var_1) {
 
   self.damageaccumulator.lastdamagetime = gettime();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = (1, 1, 1);
+  }
 
   self.damageaccumulator.lastdir = var_1;
 
@@ -190,21 +198,24 @@ accumulatedamage(var_0, var_1) {
 }
 
 _id_C4E0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
-  if(isDefined(self.is_mammoth) && self.is_mammoth)
+  if(isDefined(self.is_mammoth) && self.is_mammoth) {
     var_2 = var_2 / 4;
+  }
 
   var_12 = weaponclass(var_5);
 
-  if(var_12 == "smg" || var_12 == "spread")
+  if(var_12 == "smg" || var_12 == "spread") {
     var_2 = var_2 / 2;
+  }
 
   accumulatedamage(var_2, var_7);
   scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 }
 
 should_spawn_mammoth() {
-  if(isDefined(level.mammoth_spawn) && level.mammoth_spawn)
+  if(isDefined(level.mammoth_spawn) && level.mammoth_spawn) {
     return 1;
+  }
 
   return 0;
 }

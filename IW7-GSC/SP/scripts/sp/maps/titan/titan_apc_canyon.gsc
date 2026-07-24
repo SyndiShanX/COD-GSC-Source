@@ -6,12 +6,13 @@
 _id_206B(var_0) {
   var_1 = 1.0;
 
-  if(var_0 == "canyon_begin")
+  if(var_0 == "canyon_begin") {
     var_2 = 0.8;
-  else if(var_0 == "canyon_movement")
+  } else if(var_0 == "canyon_movement") {
     var_2 = 0.8;
-  else
+  } else {
     var_2 = 0.5;
+  }
 }
 
 _id_206D() {
@@ -48,8 +49,9 @@ _id_206A() {
   thread _id_5D2F();
   thread _id_B987("player_ceiling");
 
-  foreach(var_1 in level._id_10AC8)
-  var_1 scripts\sp\utility::_id_51E1("casual_gun");
+  foreach(var_1 in level._id_10AC8) {
+    var_1 scripts\sp\utility::_id_51E1("casual_gun");
+  }
 
   scripts\engine\utility::array_thread(level._id_10AC8, scripts\sp\utility::_id_F3DD, 32);
   level._id_C47F scripts\sp\utility::_id_F3B5("purple");
@@ -159,10 +161,11 @@ _id_5E07(var_0) {
   var_1.angles = self.angles;
   var_1 scripts\sp\anim::_id_1F35(var_0, "apc_dropoff");
 
-  if(var_0._id_1FBB == "nunez")
+  if(var_0._id_1FBB == "nunez") {
     var_0 scripts\sp\utility::_id_F3B5("blue");
-  else
+  } else {
     var_0 scripts\sp\utility::_id_F3B5("red");
+  }
 
   var_0 scripts\sp\utility::_id_51E1("casual_gun");
 }
@@ -192,10 +195,11 @@ _id_D23F(var_0, var_1) {
     if(var_4 < var_0) {
       earthquake(var_1 * var_5, var_3, self.origin, var_2);
 
-      if(var_4 > var_0 / 2.5)
+      if(var_4 > var_0 / 2.5) {
         playrumbleonposition("c12_footstep_small", level.player.origin);
-      else
+      } else {
         playrumbleonposition("c12_footstep_large", level.player.origin);
+      }
     }
 
     scripts\engine\utility::waitframe();
@@ -294,8 +298,9 @@ sfx_c12_palette_steps() {
 _id_10C7A(var_0) {
   scripts\engine\utility::flag_wait("canyon_begin");
 
-  while(level._id_739C islegacyagent(%titan_first_gate_breakthrough_c12) <= 0.85)
+  while(level._id_739C islegacyagent(%titan_first_gate_breakthrough_c12) <= 0.85) {
     wait 0.05;
+  }
 
   foreach(var_2 in level._id_10AC8) {
     var_2 scripts\sp\utility::_id_F3B5("orange");
@@ -321,11 +326,13 @@ _id_2069(var_0) {
 }
 
 _id_1130E() {
-  while(!isDefined(level._id_6AD7))
+  while(!isDefined(level._id_6AD7)) {
     wait 0.05;
+  }
 
-  while(!isDefined(level._id_6AD7._id_1FBD))
+  while(!isDefined(level._id_6AD7._id_1FBD)) {
     wait 0.05;
+  }
 
   level waittill("move_apcs_up");
   level._id_2050 = _id_10784();
@@ -359,8 +366,9 @@ _id_3947() {
   scripts\engine\utility::flag_set("apc_gate_crash_1");
   var_0 = getaiarray("allies");
 
-  foreach(var_2 in var_0)
-  var_2 scripts\sp\utility::_id_51E1("sprint");
+  foreach(var_2 in var_0) {
+    var_2 scripts\sp\utility::_id_51E1("sprint");
+  }
 
   level._id_739C scripts\sp\utility::_id_51E1("sprint");
   scripts\sp\utility::_id_127AE("start_canyon_convo", "targetname");
@@ -412,15 +420,17 @@ _id_3943() {
 _id_40D7() {
   scripts\engine\utility::flag_wait("c12_fight_transition");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_3949() {
   scripts\engine\utility::flag_wait("freighter_flyby");
 
-  if(isDefined(self.target) && self.classname != "script_vehicle_dropship_enemy")
+  if(isDefined(self.target) && self.classname != "script_vehicle_dropship_enemy") {
     self startpath(getvehiclenode(self.target, "targetname"));
+  }
 }
 
 _id_3942(var_0, var_1) {
@@ -447,8 +457,9 @@ _id_106B0() {
   wait 1;
   level._id_E511 = scripts\sp\utility::_id_22CD("dropoff_friendlies_right");
 
-  foreach(var_1 in level._id_E511)
-  var_1 thread _id_B976("friendlies_sp");
+  foreach(var_1 in level._id_E511) {
+    var_1 thread _id_B976("friendlies_sp");
+  }
 
   level._id_B67D = scripts\sp\utility::_id_22A2(level._id_E511, level._id_AB34);
 
@@ -493,8 +504,9 @@ _id_B966(var_0) {
 
   for(;;) {
     foreach(var_3 in var_1) {
-      if(level.player istouching(var_3))
+      if(level.player istouching(var_3)) {
         level.player dodamage(500, level.player.origin);
+      }
     }
 
     scripts\engine\utility::waitframe();
@@ -511,13 +523,15 @@ _id_B965(var_0, var_1, var_2) {
 
   scripts\engine\utility::flag_wait(var_1);
 
-  foreach(var_5 in var_3)
-  var_5 solid();
+  foreach(var_5 in var_3) {
+    var_5 solid();
+  }
 
   scripts\engine\utility::flag_wait(var_2);
 
-  foreach(var_5 in var_3)
-  var_5 notsolid();
+  foreach(var_5 in var_3) {
+    var_5 notsolid();
+  }
 }
 
 _id_119B6(var_0, var_1, var_2) {
@@ -531,14 +545,16 @@ _id_119B6(var_0, var_1, var_2) {
   scripts\engine\utility::flag_wait(var_1);
   level notify("toggle_dropship_coll_on");
 
-  foreach(var_5 in var_3)
-  var_5 disconnectPaths();
+  foreach(var_5 in var_3) {
+    var_5 disconnectPaths();
+  }
 
   scripts\engine\utility::flag_wait(var_2);
   level notify("toggle_dropships_coll_off");
 
-  foreach(var_5 in var_3)
-  var_5 connectpaths();
+  foreach(var_5 in var_3) {
+    var_5 connectpaths();
+  }
 }
 
 _id_5D99(var_0, var_1, var_2, var_3) {
@@ -626,11 +642,13 @@ _id_10784(var_0) {
 }
 
 _id_73AD(var_0, var_1, var_2, var_3, var_4) {
-  if(isstring(var_0))
+  if(isstring(var_0)) {
     var_0 = scripts\sp\maps\titan\titan_code::_id_7988(var_0);
+  }
 
-  if(!isDefined(var_0.angles))
+  if(!isDefined(var_0.angles)) {
     var_0.angles = (0, 0, 0);
+  }
 
   var_5 = spawnStruct();
   var_5._id_1EB7 = var_0;
@@ -652,8 +670,9 @@ _id_73AD(var_0, var_1, var_2, var_3, var_4) {
   var_5._id_5D6C thread _id_119B7("dropship2_rear_door_coll");
   var_5._id_5D6C castspotshadows(0);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_5._id_5D6C playSound(var_3);
+  }
 
   var_5._id_2054 = scripts\sp\utility::_id_10639("apc");
   var_5._id_2054 attach("veh_mil_lnd_un_apc_turret", "tag_turret");
@@ -662,10 +681,11 @@ _id_73AD(var_0, var_1, var_2, var_3, var_4) {
   var_5._id_1684 = scripts\engine\utility::add_to_array(var_5._id_1684, var_5._id_5D6C);
   var_5._id_1684 = scripts\engine\utility::add_to_array(var_5._id_1684, var_5._id_2054);
 
-  if(isstring(var_1))
+  if(isstring(var_1)) {
     var_10 = scripts\sp\maps\titan\titan_code::_id_7988(var_1);
-  else
+  } else {
     var_10 = var_1;
+  }
 
   foreach(var_13, var_12 in var_2) {
     var_12._id_1FBB = "dropship1_ally" + var_13;
@@ -678,14 +698,16 @@ _id_73AD(var_0, var_1, var_2, var_3, var_4) {
     var_15._id_1EB7.angles = var_0.angles;
   }
 
-  foreach(var_15 in var_5._id_1684)
-  var_15._id_1EB7 thread scripts\sp\anim::_id_1F35(var_15, "dropoff1");
+  foreach(var_15 in var_5._id_1684) {
+    var_15._id_1EB7 thread scripts\sp\anim::_id_1F35(var_15, "dropoff1");
+  }
 
   level._id_6AD7._id_1FBD = var_5._id_2054._id_1EB7;
 
   foreach(var_15 in var_5._id_1684) {
-    if(var_15 != level._id_6AD7)
+    if(var_15 != level._id_6AD7) {
       var_15._id_1EB7 scripts\engine\utility::delaycall(10, ::delete);
+    }
   }
 
   var_5._id_5D6C thread scripts\sp\utility::_id_C12D("dropship_exit", 15);
@@ -694,24 +716,28 @@ _id_73AD(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_B92B(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(isstring(var_0))
+  if(isstring(var_0)) {
     var_0 = scripts\sp\maps\titan\titan_code::_id_7988(var_0);
+  }
 
-  if(!isDefined(var_0.angles))
+  if(!isDefined(var_0.angles)) {
     var_0.angles = (0, 0, 0);
+  }
 
   var_6 = spawnStruct();
   var_6._id_1EB7 = var_0;
   var_6._id_9079 = scripts\engine\utility::getStruct(var_0.targetname, "script_noteworthy");
   var_6._id_1684 = [];
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_5 playSound(var_3);
+  }
 
-  if(isstring(var_1))
+  if(isstring(var_1)) {
     var_7 = scripts\sp\maps\titan\titan_code::_id_7988(var_1);
-  else
+  } else {
     var_7 = var_1;
+  }
 
   foreach(var_9 in var_6._id_1684) {
     var_9._id_1EB7 = spawn("script_origin", var_0.origin);
@@ -720,11 +746,13 @@ _id_B92B(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   var_5._id_1EB7 = var_6._id_1EB7;
 
-  foreach(var_9 in var_6._id_1684)
-  var_9._id_1EB7 thread scripts\sp\anim::_id_1F35(var_9, "dropoff1");
+  foreach(var_9 in var_6._id_1684) {
+    var_9._id_1EB7 thread scripts\sp\anim::_id_1F35(var_9, "dropoff1");
+  }
 
-  foreach(var_9 in var_6._id_1684)
-  var_9._id_1EB7 scripts\engine\utility::delaycall(10, ::delete);
+  foreach(var_9 in var_6._id_1684) {
+    var_9._id_1EB7 scripts\engine\utility::delaycall(10, ::delete);
+  }
 
   return var_6._id_1684;
 }
@@ -733,8 +761,9 @@ _id_B976(var_0) {
   var_1 = scripts\engine\utility::getStructArray(var_0, "targetname");
 
   foreach(var_3 in var_1) {
-    if(!scripts\engine\utility::within_fov(level.player getEye(), level.player.angles, var_3.origin, 0.422618))
+    if(!scripts\engine\utility::within_fov(level.player getEye(), level.player.angles, var_3.origin, 0.422618)) {
       self _meth_80F1(var_3.origin, var_3.angles);
+    }
   }
 }
 
@@ -745,8 +774,9 @@ _id_B987(var_0) {
   for(;;) {
     var_1 waittill("trigger", var_2);
 
-    if(isDefined(level.player) && level.player istouching(var_1))
+    if(isDefined(level.player) && level.player istouching(var_1)) {
       level.player dodamage(100, level.player.origin);
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -788,8 +818,9 @@ _id_B9A6(var_0) {
 
 _id_3801(var_0) {
   if(!scripts\engine\utility::within_fov(level.player.origin, level.player.angles, var_0.origin, 0.422618)) {
-    if(!scripts\engine\utility::within_fov(level.player.origin, level.player.angles, level._id_739C.origin, 0.422618))
+    if(!scripts\engine\utility::within_fov(level.player.origin, level.player.angles, level._id_739C.origin, 0.422618)) {
       return 1;
+    }
   }
 
   return 0;

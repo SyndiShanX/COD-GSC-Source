@@ -8,10 +8,11 @@ _id_98E1(var_0) {
   self.weaponinfo[var_0].position = "none";
   self.weaponinfo[var_0]._id_8BDE = 1;
 
-  if(getweaponclipmodel(var_0) != "")
+  if(getweaponclipmodel(var_0) != "") {
     self.weaponinfo[var_0]._id_13053 = 1;
-  else
+  } else {
     self.weaponinfo[var_0]._id_13053 = 0;
+  }
 }
 
 _id_A000(var_0) {
@@ -33,11 +34,13 @@ _id_F724() {
 }
 
 _id_68BD() {
-  if(scripts\anim\utility_common::isshotgun(self.secondaryweapon))
+  if(scripts\anim\utility_common::isshotgun(self.secondaryweapon)) {
     return 1;
+  }
 
-  if(weaponclass(self.primaryweapon) == "rocketlauncher")
+  if(weaponclass(self.primaryweapon) == "rocketlauncher") {
     return 1;
+  }
 
   return 0;
 }
@@ -46,10 +49,11 @@ _id_FAFB() {
   self endon("death");
   scripts\engine\utility::flag_wait("load_finished");
 
-  if(isDefined(anim._id_13CC8) && isDefined(anim._id_13CC8[self.unittype]))
+  if(isDefined(anim._id_13CC8) && isDefined(anim._id_13CC8[self.unittype])) {
     self[[anim._id_13CC8[self.unittype]]]();
-  else
+  } else {
     _id_5031();
+  }
 }
 
 #using_animtree("generic_human");
@@ -60,17 +64,21 @@ main() {
   self.primaryweapon = self.weapon;
   _id_6DE9();
 
-  if(!scripts\engine\utility::flag_exist("load_finished"))
+  if(!scripts\engine\utility::flag_exist("load_finished")) {
     scripts\engine\utility::flag_init("load_finished");
+  }
 
-  if(self.primaryweapon == "")
+  if(self.primaryweapon == "") {
     self.primaryweapon = "none";
+  }
 
-  if(self.secondaryweapon == "")
+  if(self.secondaryweapon == "") {
     self.secondaryweapon = "none";
+  }
 
-  if(self._id_101B4 == "")
+  if(self._id_101B4 == "") {
     self._id_101B4 = "none";
+  }
 
   self._id_E6E6 = % root;
   self.a._id_2C13 = % body;
@@ -116,8 +124,9 @@ main() {
   scripts\sp\utility::_id_F6FE("asm");
   self.a._id_BFAF = 0;
 
-  if(!isDefined(self.script_forcegrenade))
+  if(!isDefined(self.script_forcegrenade)) {
     self.script_forcegrenade = 0;
+  }
 
   _id_FAF2();
   self.lastenemysighttime = 0;
@@ -125,15 +134,17 @@ main() {
   self._id_112C8 = 0;
   self._id_112CA = 0;
 
-  if(self.team == "allies")
+  if(self.team == "allies") {
     self.suppressionthreshold = 0.5;
-  else
+  } else {
     self.suppressionthreshold = 0.0;
+  }
 
-  if(self.team == "allies")
+  if(self.team == "allies") {
     self._id_DCAF = 0;
-  else
+  } else {
     self._id_DCAF = 256;
+  }
 
   self.ammocheatinterval = 8000;
   self.ammocheattime = 0;
@@ -148,14 +159,16 @@ main() {
   self.exception["corner_normal"] = 1;
   var_0 = getarraykeys(self.exception);
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     scripts\engine\utility::clear_exception(var_0[var_1]);
+  }
 
   self._id_DD23 = 0;
   self._id_FFD3 = 0;
 
-  if(!isDefined(level._id_55FE))
+  if(!isDefined(level._id_55FE)) {
     thread scripts\anim\combat_utility::_id_B9D9();
+  }
 
   thread ondeath_clearscriptedanim();
 
@@ -176,8 +189,9 @@ _id_1929() {
 }
 
 _id_100B4(var_0, var_1) {
-  if(!var_0 || self.unittype != "soldier" && self.unittype != "c6")
+  if(!var_0 || self.unittype != "soldier" && self.unittype != "c6") {
     return 1;
+  }
 
   var_2 = int(gettime() / 50) % 2;
   return var_1 == var_2;
@@ -209,8 +223,9 @@ _id_19F7() {
       }
     }
 
-    if(var_2)
+    if(var_2) {
       scripts\asm\asm::_id_2314();
+    }
 
     if(isDefined(self.asm._id_10E23)) {
       scripts\asm\asm::asm_clearevents(self.asm._id_10E23);
@@ -234,12 +249,14 @@ _id_13CC7(var_0) {
   var_1[2] = "m4_silencer";
   var_1[3] = "m4m203";
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(issubstr(var_0, var_1[var_2]))
+    if(issubstr(var_0, var_1[var_2])) {
       return 1;
+    }
   }
 
   return 0;
@@ -248,8 +265,9 @@ _id_13CC7(var_0) {
 _id_F7AC() {
   self endon("death");
 
-  if(!isDefined(level._id_AE64))
+  if(!isDefined(level._id_AE64)) {
     level waittill("loadout complete");
+  }
 
   scripts\sp\names::_id_7B05();
   thread scripts\anim\squadmanager::_id_185C();
@@ -284,16 +302,18 @@ pollallowedstancesthread() {
     var_2 = self getshootatpos() + (0, 0, 30);
     var_3 = (0, 0, -10);
 
-    for(var_4 = 0; var_4 < var_0.size; var_4++)
+    for(var_4 = 0; var_4 < var_0.size; var_4++) {
       var_5 = (var_2[0] + var_3[0] * var_4, var_2[1] + var_3[1] * var_4, var_2[2] + var_3[2] * var_4);
+    }
 
     wait 0.05;
   }
 }
 
 _id_FAF2() {
-  if(!isDefined(self.animplaybackrate) || !isDefined(self.moveplaybackrate))
+  if(!isDefined(self.animplaybackrate) || !isDefined(self.moveplaybackrate)) {
     _id_F2B0();
+  }
 }
 
 _id_F2B0() {
@@ -322,8 +342,9 @@ _id_6568() {
       continue;
     }
     while(isPlayer(self.enemy)) {
-      if(scripts\anim\utility::_id_8BED())
+      if(scripts\anim\utility::_id_8BED()) {
         level._id_A9D0 = gettime();
+      }
 
       wait 2;
     }
@@ -376,28 +397,33 @@ _id_6DE9() {
     anim.optionalstepeffectfunction = scripts\anim\notetracks::playfootstepeffect;
   }
 
-  if(!isDefined(anim.optionalstepeffects))
+  if(!isDefined(anim.optionalstepeffects)) {
     anim.optionalstepeffects = [];
+  }
 
-  if(!isDefined(anim.optionalstepeffectssmall))
+  if(!isDefined(anim.optionalstepeffectssmall)) {
     anim.optionalstepeffectssmall = [];
+  }
 
-  if(!isDefined(anim.shootenemywrapper_func))
+  if(!isDefined(anim.shootenemywrapper_func)) {
     anim.shootenemywrapper_func = scripts\anim\utility::_id_FE9D;
+  }
 
-  if(!isDefined(anim._id_FED3))
+  if(!isDefined(anim._id_FED3)) {
     anim._id_FED3 = scripts\anim\utility::_id_FED2;
+  }
 
-  anim.fire_notetrack_functions["scripted"] = scripts\anim\notetracks::fire_straight;
-  anim.fire_notetrack_functions["cover_right"] = scripts\anim\notetracks::shootnotetrack;
-  anim.fire_notetrack_functions["cover_left"] = scripts\anim\notetracks::shootnotetrack;
-  anim.fire_notetrack_functions["cover_crouch"] = scripts\anim\notetracks::shootnotetrack;
-  anim.fire_notetrack_functions["cover_stand"] = scripts\anim\notetracks::shootnotetrack;
-  anim.fire_notetrack_functions["move"] = scripts\anim\notetracks::shootnotetrack;
+  anim.fire_notetrack_functions["scripted"] = ::scripts\anim\notetracks::fire_straight;
+  anim.fire_notetrack_functions["cover_right"] = ::scripts\anim\notetracks::shootnotetrack;
+  anim.fire_notetrack_functions["cover_left"] = ::scripts\anim\notetracks::shootnotetrack;
+  anim.fire_notetrack_functions["cover_crouch"] = ::scripts\anim\notetracks::shootnotetrack;
+  anim.fire_notetrack_functions["cover_stand"] = ::scripts\anim\notetracks::shootnotetrack;
+  anim.fire_notetrack_functions["move"] = ::scripts\anim\notetracks::shootnotetrack;
   scripts\anim\notetracks::registernotetracks();
 
-  if(!isDefined(level.flag))
+  if(!isDefined(level.flag)) {
     scripts\common\flags::init_flags();
+  }
 
   scripts\sp\gameskill::_id_F848();
   level._id_C870 = undefined;
@@ -424,8 +450,9 @@ _id_6DE9() {
 _id_97F8() {}
 
 _id_97DA() {
-  if(!isDefined(anim.player.team))
+  if(!isDefined(anim.player.team)) {
     anim.player.team = "allies";
+  }
 
   scripts\anim\squadmanager::_id_9763();
   anim.player thread scripts\anim\squadmanager::_id_1811();
@@ -547,8 +574,9 @@ _id_F7B3() {
   if(isDefined(self.gs._id_D397)) {
     var_0 = int(self.gs._id_D397 * 0.7);
 
-    if(var_0 < 1)
+    if(var_0 < 1) {
       var_0 = 1;
+    }
 
     self.grenadetimers["frag"] = randomintrange(0, var_0);
     self.grenadetimers["flash_grenade"] = randomintrange(0, var_0);
@@ -559,8 +587,9 @@ _id_F7B3() {
     var_0 = int(self.gs._id_D382);
     var_1 = int(var_0 / 2);
 
-    if(var_0 <= var_1)
+    if(var_0 <= var_1) {
       var_0 = var_1 + 1;
+    }
 
     self.grenadetimers["double_grenade"] = randomintrange(var_1, var_0);
   }
@@ -578,8 +607,9 @@ begingrenadetracking() {
     if(isDefined(var_0) && scripts\engine\utility::is_true(var_0._id_8589)) {
       continue;
     }
-    if(isDefined(level.func["ai_grenade_thrown"]))
+    if(isDefined(level.func["ai_grenade_thrown"])) {
       level thread[[level.func["ai_grenade_thrown"]]](var_0);
+    }
 
     switch (var_1) {
       case "frag":
@@ -605,8 +635,9 @@ _id_FAE3() {
   anim._id_DCB3 = 60;
   anim._id_DCB2 = [];
 
-  for(var_0 = 0; var_0 < anim._id_DCB3; var_0++)
+  for(var_0 = 0; var_0 < anim._id_DCB3; var_0++) {
     anim._id_DCB2[var_0] = var_0;
+  }
 
   for(var_0 = 0; var_0 < anim._id_DCB3; var_0++) {
     var_1 = randomint(anim._id_DCB3);
@@ -623,8 +654,9 @@ ondeath_clearscriptedanim() {
   self waittill("death");
 
   if(!isDefined(self)) {
-    if(isDefined(self.a.usingworldspacehitmarkers))
+    if(isDefined(self.a.usingworldspacehitmarkers)) {
       self.a.usingworldspacehitmarkers delete();
+    }
   }
 }
 
@@ -639,8 +671,9 @@ _id_6DEA() {
   level._id_A9D0 = 100;
   anim.defaultexception = ::empty;
 
-  if(!isDefined(level._id_7649))
+  if(!isDefined(level._id_7649)) {
     level._id_7649 = [];
+  }
 
   _id_97F8();
   scripts\sp\names::_id_F9E6();
@@ -660,23 +693,28 @@ _id_6DEA() {
     anim.optionalstepeffectfunction = scripts\anim\notetracks::playfootstepeffect;
   }
 
-  if(!isDefined(anim.optionalstepeffects))
+  if(!isDefined(anim.optionalstepeffects)) {
     anim.optionalstepeffects = [];
+  }
 
-  if(!isDefined(anim.optionalstepeffectssmall))
+  if(!isDefined(anim.optionalstepeffectssmall)) {
     anim.optionalstepeffectssmall = [];
+  }
 
-  if(!isDefined(anim.shootenemywrapper_func))
+  if(!isDefined(anim.shootenemywrapper_func)) {
     anim.shootenemywrapper_func = scripts\anim\utility::_id_FE9D;
+  }
 
-  if(!isDefined(anim._id_FED3))
+  if(!isDefined(anim._id_FED3)) {
     anim._id_FED3 = scripts\anim\utility::_id_FED2;
+  }
 
   anim.fire_notetrack_functions = [];
   scripts\anim\notetracks::registernotetracks();
 
-  if(!isDefined(level.flag))
+  if(!isDefined(level.flag)) {
     scripts\common\flags::init_flags();
+  }
 
   scripts\sp\gameskill::_id_F848();
   level._id_C870 = undefined;
@@ -689,10 +727,11 @@ _id_6DEA() {
   anim._id_2755 = 0;
 
   if(!isDefined(anim._id_3D4B)) {
-    if(scripts\engine\utility::player_is_in_jackal())
+    if(scripts\engine\utility::player_is_in_jackal()) {
       anim.player = level._id_D127;
-    else
+    } else {
       anim.player = getEntArray("player", "classname")[0];
+    }
 
     _id_97DA();
   }
@@ -722,27 +761,31 @@ _id_5031() {
   var_0 = scripts\anim\utility_common::usingrocketlauncher();
   self.a._id_BEF9 = var_0;
 
-  if(var_0)
+  if(var_0) {
     thread scripts\anim\shared::_id_E775();
+  }
 
   self.a.rockets = 3;
   self.a.rocketvisible = 1;
   scripts\anim\shared::placeweaponon(self.primaryweapon, "right");
 
-  if(scripts\anim\utility_common::isshotgun(self.secondaryweapon))
+  if(scripts\anim\utility_common::isshotgun(self.secondaryweapon)) {
     scripts\anim\shared::placeweaponon(self.secondaryweapon, "back");
+  }
 
-  if(self.team != "allies")
+  if(self.team != "allies") {
     self._id_8B95 = 1;
+  }
 
   scripts\anim\weaponlist::refillclip();
 }
 
 _id_3597() {
-  if(scripts\anim\utility_common::usingrocketlauncher())
+  if(scripts\anim\utility_common::usingrocketlauncher()) {
     return "rocket";
-  else if(scripts\anim\utility_common::usingriflelikeweapon())
+  } else if(scripts\anim\utility_common::usingriflelikeweapon()) {
     return "minigun";
+  }
 
   return undefined;
 }

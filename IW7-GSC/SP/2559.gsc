@@ -10,8 +10,9 @@ _id_006E(var_0, var_1, var_2, var_3) {
   var_7 = var_6._id_1581[var_1];
   var_4 = [[var_7]](var_2);
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 3;
+  }
 
   return var_4;
 }
@@ -58,17 +59,19 @@ bt_nativeexecaction(var_0, var_1, var_2, var_3) {
   } else
     var_4 = [[var_1]](var_2);
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 3;
+  }
 
-  if(var_4 == anim.failure)
+  if(var_4 == anim.failure) {
     return 0;
-  else if(var_4 == anim.success)
+  } else if(var_4 == anim.success) {
     return 1;
-  else if(var_4 == anim.running)
+  } else if(var_4 == anim.running) {
     return 2;
-  else
+  } else {
     return 3;
+  }
 }
 
 bt_nativecopyaction(var_0) {}

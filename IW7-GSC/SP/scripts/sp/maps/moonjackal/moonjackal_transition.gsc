@@ -46,8 +46,9 @@ _id_1266D() {
 _id_12664() {
   scripts\sp\utility::_id_13705();
 
-  if(!scripts\engine\utility::is_true(level._id_12665))
+  if(!scripts\engine\utility::is_true(level._id_12665)) {
     thread _id_BB4C();
+  }
 
   wait 0.2;
   thread _id_1265D();
@@ -55,8 +56,9 @@ _id_12664() {
   thread _id_12667();
   thread _id_1265C();
 
-  while(!(scripts\engine\utility::flag("launch_area_clear") && level.player useButtonPressed()) && !scripts\engine\utility::is_true(level._id_12658))
+  while(!(scripts\engine\utility::flag("launch_area_clear") && level.player useButtonPressed()) && !scripts\engine\utility::is_true(level._id_12658)) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::flag_set("started_transition");
   thread moonjack_music_end();
@@ -76,8 +78,9 @@ _id_12664() {
   _id_0BDC::_id_A226(1);
   wait 1.0;
 
-  if(!scripts\engine\utility::is_true(level._id_12665))
+  if(!scripts\engine\utility::is_true(level._id_12665)) {
     scripts\sp\utility::_id_BF95();
+  }
 }
 
 moonjack_music_end() {
@@ -147,10 +150,11 @@ _id_12663() {
   var_3 = undefined;
 
   for(;;) {
-    if(level._id_D127 istouching(var_1) && !scripts\engine\utility::flag("launch_area_clear"))
+    if(level._id_D127 istouching(var_1) && !scripts\engine\utility::flag("launch_area_clear")) {
       scripts\engine\utility::flag_set("launch_area_clear");
-    else if(!level._id_D127 istouching(var_1) && scripts\engine\utility::flag("launch_area_clear"))
+    } else if(!level._id_D127 istouching(var_1) && scripts\engine\utility::flag("launch_area_clear")) {
       scripts\engine\utility::flag_clear("launch_area_clear");
+    }
 
     var_0 = sortbydistance(var_0, level._id_D127.origin);
 
@@ -207,10 +211,11 @@ _id_12662() {
   thread _id_579E();
 
   for(;;) {
-    if(scripts\engine\utility::flag("launch_area_clear_up") && scripts\engine\utility::flag("launch_area_clear_down") && scripts\engine\utility::flag("launch_area_clear_left") && scripts\engine\utility::flag("launch_area_clear_right") && !scripts\engine\utility::flag("player_moving"))
+    if(scripts\engine\utility::flag("launch_area_clear_up") && scripts\engine\utility::flag("launch_area_clear_down") && scripts\engine\utility::flag("launch_area_clear_left") && scripts\engine\utility::flag("launch_area_clear_right") && !scripts\engine\utility::flag("player_moving")) {
       scripts\engine\utility::flag_set("launch_area_clear");
-    else
+    } else {
       scripts\engine\utility::flag_clear("launch_area_clear");
+    }
 
     wait 0.15;
   }
@@ -234,22 +239,24 @@ _id_57D0(var_0, var_1, var_2, var_3) {
       var_14 = level._id_D127.origin + var_10 * (var_13[0] + var_2) + var_8 * var_13[1] + var_9 * (var_13[2] + var_3);
       var_15 = bullettracepassed(var_5, var_14, 0, level._id_D127);
 
-      if(!var_15)
+      if(!var_15) {
         var_11 = 0;
-      else {}
+      } else {}
 
       var_5 = var_14;
     }
 
     var_15 = bullettracepassed(level._id_D127.origin, level._id_D127.origin + (0, 0, 20000), 0, level._id_D127);
 
-    if(!var_15)
+    if(!var_15) {
       var_11 = 0;
+    }
 
-    if(var_11)
+    if(var_11) {
       scripts\engine\utility::flag_set(var_1);
-    else
+    } else {
       scripts\engine\utility::flag_clear(var_1);
+    }
 
     wait 0.2;
   }
@@ -259,10 +266,11 @@ _id_579E() {
   level endon("started_transition");
 
   for(;;) {
-    if(_id_0BDC::_id_7B9E() > 50)
+    if(_id_0BDC::_id_7B9E() > 50) {
       scripts\engine\utility::flag_set("player_moving");
-    else
+    } else {
       scripts\engine\utility::flag_clear("player_moving");
+    }
 
     wait 0.1;
   }
@@ -293,10 +301,11 @@ _id_12666() {
     var_7 = 3;
     var_8 = 4300 - level._id_D127.origin[2];
 
-    if(var_8 > 12000)
+    if(var_8 > 12000) {
       var_7 = 6;
-    else if(var_8 > 6000)
+    } else if(var_8 > 6000) {
       var_7 = 4;
+    }
 
     thread _id_0BDC::_id_D165(var_5, 1.0, 0, var_6);
     thread _id_0BDC::_id_D16C(var_4, 1.0, var_7, 0);
@@ -327,13 +336,15 @@ _id_12666() {
   level._id_D299 thread scripts\sp\anim::_id_1F35(level._id_D299, var_1);
   var_9 = 10;
 
-  if(scripts\engine\utility::is_true(level._id_12658))
+  if(scripts\engine\utility::is_true(level._id_12658)) {
     var_9 = 0;
+  }
 
   thread _id_0BDB::_id_CFE0(var_9);
 
-  if(!scripts\engine\utility::is_true(level._id_12658))
+  if(!scripts\engine\utility::is_true(level._id_12658)) {
     level._id_D127 waittill("notify_player_launch");
+  }
 
   scripts\engine\utility::flag_set("did_transition_boost");
   _id_0BDC::_id_A38E(16, 0.7, 0.7, 1.5);
@@ -509,11 +520,13 @@ _id_12656() {
   var_0[3] = [1.3, (1500, -3100, 1200), (3000, -1500, 1200), (1, 1, 0)];
   var_1 = scripts\engine\utility::getStruct("sdf_fleet_location", "targetname");
 
-  while(_id_0B76::_id_7A60(var_1.origin - (0, 0, 85000)) < 0.9)
+  while(_id_0B76::_id_7A60(var_1.origin - (0, 0, 85000)) < 0.9) {
     wait 0.05;
+  }
 
-  foreach(var_4, var_3 in level._id_1D0A._id_FE2D)
-  var_3 thread _id_C7B6(var_0[var_4][0], var_0[var_4][1], var_0[var_4][2], var_0[var_4][3]);
+  foreach(var_4, var_3 in level._id_1D0A._id_FE2D) {
+    var_3 thread _id_C7B6(var_0[var_4][0], var_0[var_4][1], var_0[var_4][2], var_0[var_4][3]);
+  }
 }
 
 _id_C7B6(var_0, var_1, var_2, var_3) {
@@ -541,24 +554,29 @@ _id_12657() {
   level._id_1D0A._id_FE2D = scripts\engine\utility::array_add(level._id_1D0A._id_FE2D, level._id_DE1C);
   level._id_1D0A._id_FE2D = scripts\engine\utility::array_add(level._id_1D0A._id_FE2D, level._id_DE1F);
 
-  if(isDefined(level._id_1D0A._id_FE2D[0]))
+  if(isDefined(level._id_1D0A._id_FE2D[0])) {
     level._id_1D0A._id_FE2D[0] thread _id_C7B5(0.4, (-1350, 600, -100));
+  }
 
-  if(isDefined(level._id_1D0A._id_FE2D[1]))
+  if(isDefined(level._id_1D0A._id_FE2D[1])) {
     level._id_1D0A._id_FE2D[1] thread _id_C7B5(0.7, (-1050, 200, 500));
+  }
 
-  if(isDefined(level._id_1D0A._id_FE2D[2]))
+  if(isDefined(level._id_1D0A._id_FE2D[2])) {
     level._id_1D0A._id_FE2D[2] thread _id_C7B5(0.8, (500, 2000, 1000));
+  }
 
-  if(isDefined(level._id_1D0A._id_FE2D[3]))
+  if(isDefined(level._id_1D0A._id_FE2D[3])) {
     level._id_1D0A._id_FE2D[3] thread _id_C7B5(1.1, (-400, 2800, -350));
+  }
 }
 
 _id_C7B5(var_0, var_1) {
   scripts\engine\utility::flag_wait("start_outro_allies");
 
-  if(isDefined(var_0) && var_0 > 0)
+  if(isDefined(var_0) && var_0 > 0) {
     wait(var_0);
+  }
 
   var_2 = spawn("script_origin", level._id_D299.origin);
   var_2.angles = level._id_D299.angles;
@@ -598,8 +616,9 @@ _id_D2A6(var_0, var_1, var_2) {
   var_4 notsolid();
   var_4 thread _id_0BDC::_id_D29D();
 
-  if(scripts\engine\utility::is_true(var_2))
+  if(scripts\engine\utility::is_true(var_2)) {
     var_4 setModel("veh_mil_air_un_jackal_02");
+  }
 
   return var_4;
 }
@@ -633,8 +652,9 @@ _id_11721() {
   thread scripts\sp\maps\moonjackal\moonjackal_dogfight::_id_589B("player_jackal", 1);
   scripts\sp\maps\moonjackal\moonjackal_util::sunsettings_dogfight();
 
-  while(!level.player buttonPressed("DPAD_DOWN"))
+  while(!level.player buttonPressed("DPAD_DOWN")) {
     wait 0.05;
+  }
 
   level._id_D127 notify("script_death");
 }

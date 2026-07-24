@@ -38,10 +38,11 @@ use_arcade_game(var_0, var_1) {
   level thread _id_61D6(var_1, var_0);
   level thread _id_5653(var_1, var_0);
 
-  if(scripts\engine\utility::is_true(var_1.in_afterlife_arcade))
+  if(scripts\engine\utility::is_true(var_1.in_afterlife_arcade)) {
     level thread _id_61D8(var_1, var_0);
-  else
+  } else {
     level thread _id_61D7(var_1, var_0);
+  }
 
   level thread _id_5FB8(var_1, var_0);
   var_1 setplayerangles(var_0.angles + (29, 0, 0));
@@ -52,19 +53,22 @@ use_arcade_game(var_0, var_1) {
   var_1.anchor.angles = var_0.angles + (29, 0, 0);
   var_1.anchor.origin = scripts\engine\utility::getStruct(var_0.target, "targetname").origin + scripts\cp\utility::vec_multiply(anglesToForward(var_0.angles), 3);
 
-  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade))
+  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade)) {
     var_1 scripts\engine\utility::allow_weapon(0);
+  }
 
   var_1 scripts\engine\utility::allow_weapon_switch(0);
   var_1.disable_consumables = 1;
   var_1 playlocalsound("arcadeSound");
   var_2 = var_0.script_noteworthy;
 
-  if(var_0.script_noteworthy == "arcade_starmaster")
+  if(var_0.script_noteworthy == "arcade_starmaster") {
     var_2 = "arcade_chopper";
+  }
 
-  while(var_1 useButtonPressed())
+  while(var_1 useButtonPressed()) {
     wait 0.05;
+  }
 
   var_1 setclientomnvar("zm_arcade_emulator", var_2);
   var_1 lerpfovbypreset("zombiearcade");
@@ -85,10 +89,11 @@ use_arcade_game(var_0, var_1) {
   for(;;) {
     var_1 waittill("adjustedStance");
 
-    if(var_1 _meth_81CE())
+    if(var_1 _meth_81CE()) {
       continue;
-    else
+    } else {
       break;
+    }
   }
 
   var_1 notify("exit_arcade_game");
@@ -108,8 +113,9 @@ use_arcade_game(var_0, var_1) {
   var_1 setplayerangles(var_0.angles);
   var_1 scripts\engine\utility::allow_weapon_switch(1);
 
-  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade))
+  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade)) {
     var_1 scripts\engine\utility::allow_weapon(1);
+  }
 
   var_1 setmovespeedscale(1);
   var_1 lerpfovbypreset("zombiedefault");
@@ -145,16 +151,18 @@ _id_5FB8(var_0, var_1) {
   var_0 unlink();
   wait 1.5;
 
-  if(!var_0 scripts\cp\utility::areinteractionsenabled())
+  if(!var_0 scripts\cp\utility::areinteractionsenabled()) {
     var_0 scripts\cp\utility::allow_player_interactions(1);
+  }
 }
 
 _id_211A(var_0) {
   var_0 endon("stop_arcade_timer");
   var_0 endon("disconnect");
 
-  if(!isDefined(var_0._id_2113))
+  if(!isDefined(var_0._id_2113)) {
     var_0._id_2113 = 0;
+  }
 
   var_1 = 0;
   var_0._id_210F = 0;
@@ -269,13 +277,15 @@ _id_5653(var_0, var_1) {
 
   var_0 setplayerangles(var_1.angles);
 
-  if(!var_0 scripts\engine\utility::isweaponswitchallowed())
+  if(!var_0 scripts\engine\utility::isweaponswitchallowed()) {
     var_0 scripts\engine\utility::allow_weapon_switch(1);
+  }
 
   var_0 scripts\cp\utility::freezecontrolswrapper(0);
 
-  if(!var_0 scripts\engine\utility::isweaponallowed())
+  if(!var_0 scripts\engine\utility::isweaponallowed()) {
     var_0 scripts\engine\utility::allow_weapon(1);
+  }
 
   var_0 setmovespeedscale(1);
   var_0 lerpfovbypreset("zombiedefault");

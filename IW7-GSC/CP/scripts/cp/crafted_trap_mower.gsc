@@ -25,8 +25,9 @@ init() {
   var_0.carriedtrapoffset = (0, 0, 35);
   var_0.carriedtrapangles = (90, 270, 90);
 
-  if(!isDefined(level._id_47B3))
+  if(!isDefined(level._id_47B3)) {
     level._id_47B3 = [];
+  }
 
   level._id_47B3["crafted_trap_mower"] = var_0;
 }
@@ -74,21 +75,24 @@ _id_8342(var_0, var_1) {
   removeperks();
   self.carriedsentry = var_2;
 
-  if(var_0)
+  if(var_0) {
     var_2.firstplacement = 1;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level._id_47B3["crafted_trap_mower"].timeout;
+  }
 
   var_3 = _id_F68A(var_2, var_0, var_1);
   self.carriedsentry = undefined;
   thread waitrestoreperks();
   self.iscarrying = 0;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_F68A(var_0, var_1, var_2) {
@@ -118,8 +122,9 @@ _id_F68A(var_0, var_1, var_2) {
       return 1;
     }
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       var_3 = "force_cancel_placement";
+    }
 
     if(var_3 == "cancel_trap" || var_3 == "force_cancel_placement") {
       if(!var_1 && var_3 == "cancel_trap") {
@@ -129,20 +134,23 @@ _id_F68A(var_0, var_1, var_2) {
       self.carriedsentry.carried_trap playSound("craftable_lawn_mower_end");
       scripts\engine\utility::allow_weapon_switch(1);
 
-      if(!scripts\cp\cp_laststand::player_in_laststand(self))
+      if(!scripts\cp\cp_laststand::player_in_laststand(self)) {
         self switchtoweapon(self.switch_to_weapon_after_mower);
+      }
 
-      if(scripts\engine\utility::is_true(self.disabledsprint))
+      if(scripts\engine\utility::is_true(self.disabledsprint)) {
         scripts\engine\utility::allow_sprint(1);
+      }
 
       self.customweaponspeedscalar = 1;
       scripts\cp\maps\cp_rave\cp_rave::cp_rave_updatemovespeedscale();
       var_0 _id_126A7();
 
-      if(var_3 != "force_cancel_placement")
+      if(var_3 != "force_cancel_placement") {
         thread watch_dpad();
-      else if(var_1)
+      } else if(var_1) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
+      }
 
       return 0;
     }
@@ -150,13 +158,15 @@ _id_F68A(var_0, var_1, var_2) {
     if(!var_0.canbeplaced) {
       continue;
     }
-    if(var_1)
+    if(var_1) {
       scripts\cp\utility::remove_crafted_item_from_inventory(self);
+    }
 
     var_0 _id_126AA(var_2, self);
 
-    if(scripts\engine\utility::is_true(self.disabledsprint))
+    if(scripts\engine\utility::is_true(self.disabledsprint)) {
       scripts\engine\utility::allow_sprint(1);
+    }
 
     self.customweaponspeedscalar = 1;
     scripts\cp\maps\cp_rave\cp_rave::cp_rave_updatemovespeedscale();
@@ -247,8 +257,9 @@ _id_126A0(var_0) {
     wait 0.1;
 
     if(isDefined(self)) {
-      if(isDefined(self.carried_trap))
+      if(isDefined(self.carried_trap)) {
         self.carried_trap delete();
+      }
 
       self delete();
     }
@@ -270,8 +281,9 @@ _id_126A1() {
     }
     var_0 thread _id_8342(0, self.lifespan);
 
-    if(isDefined(self.charge_fx))
+    if(isDefined(self.charge_fx)) {
       self.charge_fx delete();
+    }
 
     playsoundatpos(self.origin, "craftable_lawn_mower_end");
     scripts\cp\utility::removefromtraplist();
@@ -302,8 +314,9 @@ _id_126AA(var_0, var_1) {
     if(isDefined(var_0)) {
       var_0 = var_0 - self.carried_trap.timeused;
 
-      if(var_0 < 1)
+      if(var_0 < 1) {
         var_0 = 1;
+      }
     }
   }
 
@@ -316,11 +329,13 @@ _id_126AA(var_0, var_1) {
 _id_126A7() {
   self.carriedby forceusehintoff();
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.iscarrying = 0;
+  }
 
-  if(isDefined(self.repulsor))
+  if(isDefined(self.repulsor)) {
     destroynavrepulsor(self.repulsor);
+  }
 
   self.carried_trap delete();
   self delete();
@@ -351,8 +366,9 @@ adswatcher(var_0, var_1, var_2) {
   var_0.timeused = 0;
   var_4 = 0;
 
-  if(scripts\engine\utility::is_true(var_2))
+  if(scripts\engine\utility::is_true(var_2)) {
     var_0 playSound("craftable_lawn_mower_start");
+  }
 
   var_0 playLoopSound("craftable_lawn_mower_lp");
   var_5 = gettime();
@@ -399,8 +415,9 @@ adswatcher(var_0, var_1, var_2) {
       }
 
       if(!var_4) {
-        if(scripts\engine\utility::is_true(self.disabledsprint))
+        if(scripts\engine\utility::is_true(self.disabledsprint)) {
           scripts\engine\utility::allow_sprint(0);
+        }
 
         self.customweaponspeedscalar = 0.5;
         scripts\cp\maps\cp_rave\cp_rave::cp_rave_updatemovespeedscale();
@@ -427,15 +444,16 @@ adswatcher(var_0, var_1, var_2) {
         var_6.disable_armor = 1;
         var_7 = var_6.health + 100;
 
-        if(isDefined(var_6.is_skeleton))
+        if(isDefined(var_6.is_skeleton)) {
           var_0.timeused = var_0.timeused + 15;
-        else if(isDefined(var_6.agent_type)) {
-          if(var_6.agent_type == "zombie_sasquatch")
+        } else if(isDefined(var_6.agent_type)) {
+          if(var_6.agent_type == "zombie_sasquatch") {
             var_0.timeused = var_0.timeused + 15;
-          else if(var_6.agent_type == "lumberjack")
+          } else if(var_6.agent_type == "lumberjack") {
             var_0.timeused = var_0.timeused + 20;
-          else if(var_6.agent_type == "slasher" || var_6.agent_type == "superslasher")
+          } else if(var_6.agent_type == "slasher" || var_6.agent_type == "superslasher") {
             var_7 = 0;
+          }
         }
 
         if(var_7 > 0) {
@@ -447,8 +465,9 @@ adswatcher(var_0, var_1, var_2) {
       continue;
     }
 
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       var_1 = level._id_47B3["crafted_trap_mower"].lifespan;
+    }
 
     if(var_1 - var_0.timeused <= 0) {
       var_0 stopsounds();
@@ -462,8 +481,9 @@ adswatcher(var_0, var_1, var_2) {
     var_3 = 0;
 
     if(var_4) {
-      if(scripts\engine\utility::is_true(self.disabledsprint))
+      if(scripts\engine\utility::is_true(self.disabledsprint)) {
         scripts\engine\utility::allow_sprint(1);
+      }
 
       self.customweaponspeedscalar = 1;
       scripts\cp\maps\cp_rave\cp_rave::cp_rave_updatemovespeedscale();
@@ -493,8 +513,9 @@ _id_126A6(var_0) {
 _id_126A9() {
   self makeunusable();
 
-  if(isDefined(self.repulsor))
+  if(isDefined(self.repulsor)) {
     destroynavrepulsor(self.repulsor);
+  }
 
   if(isDefined(self.dmg_trigger)) {
     self.dmg_trigger notify("stop_dmg");
@@ -549,8 +570,9 @@ release_zombie_on_trap_death(var_0) {
   self.flung = undefined;
   self.ignoreall = 0;
 
-  if(isDefined(self.anchor))
+  if(isDefined(self.anchor)) {
     self.anchor delete();
+  }
 }
 
 suck_zombie(var_0, var_1, var_2) {
@@ -569,10 +591,11 @@ suck_zombie(var_0, var_1, var_2) {
   var_0.disable_armor = 1;
   level thread woodchipper_spray(var_2);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_0 dodamage(var_0.health + 100, var_2.origin, var_1, var_1, "MOD_UNKNOWN", "iw7_lawnmower_zm");
-  else
+  } else {
     var_0 dodamage(var_0.health + 100, var_2.origin, undefined, undefined, "MOD_UNKNOWN", "iw7_lawnmower_zm");
+  }
 }
 
 woodchipper_spray(var_0) {
@@ -585,6 +608,7 @@ woodchipper_spray(var_0) {
   var_0 setscriptablepartstate("guts", "grind");
   wait 3;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0.spraying = 0;
+  }
 }

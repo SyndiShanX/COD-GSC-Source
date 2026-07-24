@@ -14,8 +14,9 @@ registerscriptedagent() {
 _id_FAB0() {
   level endon("game_ended");
 
-  if(!isDefined(level.agent_definition))
+  if(!isDefined(level.agent_definition)) {
     level waittill("scripted_agents_initialized");
+  }
 
   level.agent_definition["zombie_brute"]["setup_func"] = ::setupagent;
   level.agent_definition["zombie_brute"]["setup_model_func"] = ::_id_FACE;
@@ -98,8 +99,9 @@ setupagent() {
   self.footstepdetectdistsprint = 600;
   self.allowpain = 1;
 
-  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1)
+  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1) {
     self._id_AB3F = 1;
+  }
 
   self._id_1009D = ::_id_3121;
   thread _id_B9B9();
@@ -107,8 +109,9 @@ setupagent() {
   thread _id_899C();
   var_0 = getdvarint("scr_zombie_traversal_push", 1);
 
-  if(var_0 == 1)
+  if(var_0 == 1) {
     thread _id_311D();
+  }
 
   thread _id_89C9();
   _id_108D6();
@@ -166,21 +169,24 @@ _id_3110(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   var_14 = self gettagorigin("tag_eye");
   var_15 = (var_8 == "head" || var_8 == "helmet" || var_8 == "neck") && var_4 != "MOD_MELEE" && var_4 != "MOD_IMPACT" && var_4 != "MOD_CRUSH";
 
-  if(!var_15 && var_8 == "torso_upper" && self.helmetlocation == "hand" && distancesquared(var_6, var_14) < var_13)
+  if(!var_15 && var_8 == "torso_upper" && self.helmetlocation == "hand" && distancesquared(var_6, var_14) < var_13) {
     var_15 = 1;
+  }
 
   if(var_15) {
     var_2 = scale_ww_damage(var_2, var_5);
     var_16 = var_2 / 3;
 
-    if(isDefined(var_5) && (var_5 == "zmb_imsprojectile_mp" || var_5 == "zmb_fireworksprojectile_mp"))
+    if(isDefined(var_5) && (var_5 == "zmb_imsprojectile_mp" || var_5 == "zmb_fireworksprojectile_mp")) {
       var_2 = 0;
-    else
+    } else {
       var_2 = max(10, var_16);
+    }
 
     if(self.helmetlocation == "head") {
-      if(!isDefined(self._id_8DDE))
+      if(!isDefined(self._id_8DDE)) {
         self._id_8DDE = 0;
+      }
 
       self._id_8DDE = self._id_8DDE + var_2;
       var_2 = 1;
@@ -239,18 +245,21 @@ _id_DB25(var_0) {
   self endon("reset_helmet_timer");
   wait(var_0);
 
-  if(self.helmetlocation == "hand")
+  if(self.helmetlocation == "hand") {
     self.desiredhelmetlocation = "head";
+  }
 }
 
 _id_3112() {
   self endon("death");
 
-  if(!isDefined(self._id_8DDE))
+  if(!isDefined(self._id_8DDE)) {
     self._id_8DDE = 0;
+  }
 
-  while(!isDefined(self.maxhealth))
+  while(!isDefined(self.maxhealth)) {
     wait 0.1;
+  }
 
   self._id_8E09 = 0;
 
@@ -258,8 +267,9 @@ _id_3112() {
     var_0 = self.health / self.maxhealth;
     var_1 = max(self._id_8DF0 * var_0, 1000);
 
-    if(self._id_8E09 == 1)
+    if(self._id_8E09 == 1) {
       var_1 = var_1 * 0.5;
+    }
 
     self waittill("helmet_damage");
 
@@ -268,47 +278,54 @@ _id_3112() {
       self.desiredhelmetlocation = "hand";
       self._id_8DDE = 0;
 
-      if(self._id_8E09 < 2)
+      if(self._id_8E09 < 2) {
         thread _id_DB25(20);
+      }
     }
   }
 }
 
 _id_C4D0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
-  if(!isDefined(self._id_8E09))
+  if(!isDefined(self._id_8E09)) {
     self._id_8E09 = 0;
+  }
 
-  if(self.croc_chomp)
+  if(self.croc_chomp) {
     var_2 = 1;
-  else if(var_8 == "head" || var_2 > 1) {
+  } else if(var_8 == "head" || var_2 > 1) {
     var_13 = "standard";
 
     if(self.helmetlocation == "head") {
-      if(!isDefined(self._id_8DDE))
+      if(!isDefined(self._id_8DDE)) {
         self._id_8DDE = 0;
+      }
 
       self notify("helmet_damage");
       var_2 = 0;
     } else {
       var_13 = "hitcritical";
 
-      if(self._id_8E09 < 2)
+      if(self._id_8E09 < 2) {
         thread _id_DB25(5);
+      }
     }
 
-    if(isPlayer(var_1))
+    if(isPlayer(var_1)) {
       var_1 thread scripts\cp\cp_damage::updatedamagefeedback(var_13, undefined, var_2);
+    }
   } else if(var_8 == "helmet") {
     var_13 = "standard";
 
     if(self.helmetlocation == "head") {
-      if(!isDefined(self._id_8DDE))
+      if(!isDefined(self._id_8DDE)) {
         self._id_8DDE = 0;
+      }
 
       self notify("helmet_damage");
 
-      if(isPlayer(var_1))
+      if(isPlayer(var_1)) {
         var_1 thread scripts\cp\cp_damage::updatedamagefeedback(var_13, undefined, var_2);
+      }
 
       var_2 = 0;
     } else
@@ -320,8 +337,9 @@ _id_C4D0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 }
 
 brute_killed_vo(var_0) {
-  if(isPlayer(var_0))
+  if(isPlayer(var_0)) {
     var_0 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_brute", "zmb_comment_vo", "medium", 10, 0, 0, 0, 20);
+  }
 
   wait 4;
   level thread scripts\cp\cp_vo::try_to_play_vo("ww_brute_death", "zmb_ww_vo", "highest", 60, 0, 0, 1);
@@ -366,8 +384,9 @@ _id_BA27() {
 }
 
 _id_A012() {
-  if(!isDefined(level._id_13F60))
+  if(!isDefined(level._id_13F60)) {
     return 0;
+  }
 
   return level._id_13F60;
 }
@@ -395,8 +414,9 @@ _id_311E(var_0, var_1) {
         var_8 = (var_8[0], var_8[1], 0);
         var_9 = vectorNormalize(var_8);
 
-        if(var_7 < 60)
+        if(var_7 < 60) {
           var_7 = 60;
+        }
 
         var_10 = var_3 getvelocity();
         var_10 = (var_10[0], var_10[1], 0);
@@ -422,8 +442,9 @@ _id_311E(var_0, var_1) {
             var_13 = var_10 + var_12;
             var_7 = length2d(var_13);
           } else {
-            if(var_11 > var_7)
+            if(var_11 > var_7) {
               var_7 = var_11;
+            }
 
             var_9 = vectorNormalize(var_13);
           }
@@ -457,11 +478,13 @@ _id_311D() {
 }
 
 _id_3121() {
-  if(!isDefined(self.desiredhelmetlocation) || !isDefined(self.helmetlocation))
+  if(!isDefined(self.desiredhelmetlocation) || !isDefined(self.helmetlocation)) {
     return 0;
+  }
 
-  if(self.helmetlocation != self.desiredhelmetlocation)
+  if(self.helmetlocation != self.desiredhelmetlocation) {
     return 1;
+  }
 
   return 0;
 }
@@ -532,10 +555,11 @@ _id_3116() {
           }
         }
 
-        if(!var_7)
+        if(!var_7) {
           var_0++;
-        else
+        } else {
           var_0 = 0;
+        }
       } else
         var_0 = 0;
 

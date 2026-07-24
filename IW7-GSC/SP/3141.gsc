@@ -82,8 +82,9 @@ _id_35DE(var_0, var_1, var_2, var_3) {
   var_4 = self._id_164D[var_0];
 
   if(isDefined(var_4._id_10E23)) {
-    if(var_4._id_10E23 == "run" || var_4._id_10E23 == "walk" || var_4._id_10E23 == "walk_backward")
+    if(var_4._id_10E23 == "run" || var_4._id_10E23 == "walk" || var_4._id_10E23 == "walk_backward") {
       childthread scripts\asm\shared\utility::setuseanimgoalweight(var_1, var_2);
+    }
   }
 
   _id_0A1E::_id_235F(var_0, var_1, var_2, 1.0);
@@ -94,8 +95,9 @@ _id_35DF(var_0, var_1, var_2) {
 }
 
 _id_7EAE() {
-  if(!isDefined(self._blackboard.shootparams))
+  if(!isDefined(self._blackboard.shootparams)) {
     return undefined;
+  }
 
   var_0 = 0;
   var_1 = (0, 0, 0);
@@ -143,8 +145,9 @@ _id_B32D(var_0) {
 _id_3EA7(var_0, var_1, var_2) {
   var_3 = self._blackboard._id_5279;
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     return undefined;
+  }
 
   var_4 = vectortoangles(var_3);
   var_5 = var_4[1];
@@ -153,16 +156,18 @@ _id_3EA7(var_0, var_1, var_2) {
   var_8 = getangleindex(var_7, 15);
   var_9 = _id_B32D(var_8);
 
-  if(var_9 == 8)
+  if(var_9 == 8) {
     return undefined;
+  }
 
   var_10 = "turn_" + var_9;
 
   if(var_9 == 2) {
-    if(var_8 == 0)
+    if(var_8 == 0) {
       var_10 = var_10 + "r";
-    else
+    } else {
       var_10 = var_10 + "l";
+    }
   }
 
   var_11 = _id_0A1E::_id_2356(var_1, var_10);
@@ -184,66 +189,78 @@ _id_CEC3(var_0, var_1, var_2, var_3) {
 }
 
 _id_7DD5() {
-  if(isDefined(self.scriptedarrivalent))
+  if(isDefined(self.scriptedarrivalent)) {
     return self.scriptedarrivalent.origin;
+  }
 
-  if(isDefined(self.node))
+  if(isDefined(self.node)) {
     return self.node.origin;
+  }
 
   return self.goalpos;
 }
 
 _id_7DD4() {
-  if(isDefined(self.scriptedarrivalent))
+  if(isDefined(self.scriptedarrivalent)) {
     return self.scriptedarrivalent.angles;
+  }
 
-  if(isDefined(self.node))
+  if(isDefined(self.node)) {
     return self.node.angles;
+  }
 
   return self.angles;
 }
 
 _id_1008C(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.disablearrivals) && self.disablearrivals)
+  if(isDefined(self.disablearrivals) && self.disablearrivals) {
     return 0;
+  }
 
-  if(!isDefined(self.pathgoalpos))
+  if(!isDefined(self.pathgoalpos)) {
     return 0;
+  }
 
-  if(!scripts\asm\asm::_id_232B(var_1, "cover_approach"))
+  if(!scripts\asm\asm::_id_232B(var_1, "cover_approach")) {
     return 0;
+  }
 
   var_4 = _id_7DD5();
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
   var_5 = 128;
   var_6 = var_4 - self.origin;
   var_7 = length(var_6);
 
-  if(var_7 > var_5)
+  if(var_7 > var_5) {
     return 0;
+  }
 
   var_8 = 1;
 
   if(var_8) {
     var_9 = gettime() - self.asm.footsteps.time;
 
-    if(var_9 < 250 || var_9 > 400)
+    if(var_9 < 250 || var_9 > 400) {
       return 0;
+    }
 
     var_10 = self.goalradius;
 
-    if(isDefined(self.node) || isDefined(self.scriptedarrivalent))
+    if(isDefined(self.node) || isDefined(self.scriptedarrivalent)) {
       var_10 = 0;
+    }
 
     self.asm._id_11068 = _id_3722(var_2, var_4, var_10, 0);
   } else
     self.asm._id_11068 = _id_0C5D::_id_3721(var_0, var_1, var_2, "Exposed", 1);
 
-  if(!isDefined(self.asm._id_11068))
+  if(!isDefined(self.asm._id_11068)) {
     return 0;
+  }
 
   return 1;
 }
@@ -253,11 +270,11 @@ _id_3722(var_0, var_1, var_2, var_3) {
   var_4 = _id_7DD4();
   var_5 = var_1 - self.origin;
 
-  if(var_3)
+  if(var_3) {
     var_6 = 0;
-  else if(length2dsquared(var_5) < 144)
+  } else if(length2dsquared(var_5) < 144) {
     var_6 = 4;
-  else {
+  } else {
     var_7 = self.angles[1];
     var_8 = angleclamp180(var_4[1] - var_7);
     var_6 = getangleindex(var_8, 22.5);
@@ -265,8 +282,9 @@ _id_3722(var_0, var_1, var_2, var_3) {
 
   var_9 = _id_0C5D::_id_8174(var_0, undefined, 1);
 
-  if(!isDefined(var_9[var_6]))
+  if(!isDefined(var_9[var_6])) {
     return undefined;
+  }
 
   var_10 = getmovedelta(var_9[var_6]);
   var_11 = getangledelta3d(var_9[var_6]);
@@ -278,8 +296,9 @@ _id_3722(var_0, var_1, var_2, var_3) {
   if(var_15 > var_2 * var_2) {
     var_16 = distancesquared(var_13 + var_12, var_1);
 
-    if(var_16 < var_15)
+    if(var_16 < var_15) {
       return undefined;
+    }
 
     var_14 = 1;
   }
@@ -287,8 +306,9 @@ _id_3722(var_0, var_1, var_2, var_3) {
   var_17 = getclosestpointonnavmesh(var_13, self);
   var_18 = self _meth_84AC();
 
-  if(!_func_2AC(var_18, var_17, self))
+  if(!_func_2AC(var_18, var_17, self)) {
     return undefined;
+  }
 
   if(var_14) {
     var_12 = rotatevector(var_10, var_4 - var_11);
@@ -310,10 +330,11 @@ _id_3722(var_0, var_1, var_2, var_3) {
 }
 
 _id_3E99(var_0, var_1, var_2) {
-  if(self.asm.footsteps.foot == "right")
+  if(self.asm.footsteps.foot == "right") {
     var_3 = "right";
-  else
+  } else {
     var_3 = "left";
+  }
 
   var_4 = var_3 + "2";
   var_5 = _id_0A1E::_id_2356(var_1, var_4);
@@ -345,115 +366,137 @@ _id_CEAD(var_0, var_1, var_2, var_3) {
   self _meth_82EA(var_1, var_5, 1, var_2, 1);
   var_12 = var_6[1] - var_8;
 
-  if(isDefined(self.asm._id_11068))
+  if(isDefined(self.asm._id_11068)) {
     self _meth_8396(var_7, var_12);
-  else
+  } else {
     self orientmode("face angle", self.angles[1]);
+  }
 
   _id_0A1E::_id_231F(var_0, var_1, scripts\asm\asm::_id_2341(var_0, var_1));
   self.a.movement = "stop";
 }
 
 _id_1008B(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.disablearrivals) && self.disablearrivals)
+  if(isDefined(self.disablearrivals) && self.disablearrivals) {
     return 0;
+  }
 
-  if(!isDefined(self.pathgoalpos))
+  if(!isDefined(self.pathgoalpos)) {
     return 0;
+  }
 
-  if(!scripts\asm\asm::_id_232B(var_1, "cover_approach"))
+  if(!scripts\asm\asm::_id_232B(var_1, "cover_approach")) {
     return 0;
+  }
 
   var_4 = _id_7DD5();
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
   var_5 = 48;
   var_6 = 96;
   var_7 = var_4 - self.origin;
   var_8 = length(var_7);
 
-  if(var_8 > var_6)
+  if(var_8 > var_6) {
     return 0;
+  }
 
   var_9 = 1;
 
   if(var_9) {
     var_10 = gettime() - self.asm.footsteps.time;
 
-    if(var_10 > 850 || var_10 < 700)
+    if(var_10 > 850 || var_10 < 700) {
       return 0;
+    }
 
     var_11 = self.goalradius;
 
-    if(isDefined(self.node) || isDefined(self.scriptedarrivalent))
+    if(isDefined(self.node) || isDefined(self.scriptedarrivalent)) {
       var_11 = 0;
+    }
 
     self.asm._id_11068 = _id_3722(var_2, var_4, var_11, 1);
   } else {
-    if(var_8 < var_5)
+    if(var_8 < var_5) {
       return 0;
+    }
 
     return 1;
   }
 
-  if(!isDefined(self.asm._id_11068))
+  if(!isDefined(self.asm._id_11068)) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_3E98(var_0, var_1, var_2) {
-  if(self.asm.footsteps.foot == "right")
+  if(self.asm.footsteps.foot == "right") {
     var_3 = "right8";
-  else
+  } else {
     var_3 = "left8";
+  }
 
   var_4 = _id_0A1E::_id_2356(var_1, var_3);
   return var_4;
 }
 
 _id_10047(var_0, var_1, var_2, var_3) {
-  if(isDefined(self._id_55ED) && self._id_55ED)
+  if(isDefined(self._id_55ED) && self._id_55ED) {
     return 0;
+  }
 
-  if(!isDefined(self.pathgoalpos))
+  if(!isDefined(self.pathgoalpos)) {
     return 0;
+  }
 
-  if(distancesquared(self.origin, self.pathgoalpos) < 10000)
+  if(distancesquared(self.origin, self.pathgoalpos) < 10000) {
     return 0;
+  }
 
-  if(lengthsquared(self.velocity) > 1)
+  if(lengthsquared(self.velocity) > 1) {
     return 0;
+  }
 
-  if(self.useanimgoalweight)
+  if(self.useanimgoalweight) {
     return 0;
+  }
 
   self.asm._id_10D84 = _id_0C65::_id_53CA(var_2, undefined, 1);
   return isDefined(self.asm._id_10D84);
 }
 
 _id_10048(var_0, var_1, var_2, var_3) {
-  if(isDefined(self._id_55ED) && self._id_55ED)
+  if(isDefined(self._id_55ED) && self._id_55ED) {
     return 0;
+  }
 
-  if(!isDefined(self.pathgoalpos))
+  if(!isDefined(self.pathgoalpos)) {
     return 0;
+  }
 
-  if(distancesquared(self.origin, self.pathgoalpos) < 10000)
+  if(distancesquared(self.origin, self.pathgoalpos) < 10000) {
     return 0;
+  }
 
-  if(lengthsquared(self.velocity) > 1)
+  if(lengthsquared(self.velocity) > 1) {
     return 0;
+  }
 
-  if(self.useanimgoalweight)
+  if(self.useanimgoalweight) {
     return 0;
+  }
 
   var_4 = scripts\asm\asm::asm_getdemeanor();
 
-  if(var_4 != "walk" && var_4 != "casual")
+  if(var_4 != "walk" && var_4 != "casual") {
     return 0;
+  }
 
   return 1;
 }
@@ -465,11 +508,13 @@ _id_3524(var_0, var_1, var_2) {
 }
 
 _id_100BE(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.pathgoalpos))
+  if(!isDefined(self.pathgoalpos)) {
     return 0;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1;
+  }
 
   var_4 = scripts\engine\utility::flatten_vector(self.lookaheaddir);
   var_5 = self.pathgoalpos - self.origin;
@@ -477,8 +522,9 @@ _id_100BE(var_0, var_1, var_2, var_3) {
   if(var_3 && lengthsquared(var_5) < 32400) {
     var_6 = anglesToForward(self.angles);
 
-    if(vectordot(var_6, var_4) > 0)
+    if(vectordot(var_6, var_4) > 0) {
       return 0;
+    }
   }
 
   var_7 = _id_0C08::_id_7E30();
@@ -486,49 +532,58 @@ _id_100BE(var_0, var_1, var_2, var_3) {
   if(isDefined(var_7)) {
     var_8 = var_7.origin - self.origin;
 
-    if(lengthsquared(var_8) > self.maxfaceenemydist * self.maxfaceenemydist)
+    if(lengthsquared(var_8) > self.maxfaceenemydist * self.maxfaceenemydist) {
       return 0;
+    }
 
     var_9 = 6;
 
-    if(self.lookaheaddist < var_9)
+    if(self.lookaheaddist < var_9) {
       return 0;
+    }
 
     var_8 = vectorNormalize(var_8);
 
-    if(vectordot(var_8, var_4) > -0.342)
+    if(vectordot(var_8, var_4) > -0.342) {
       return 0;
+    }
 
     var_10 = var_7 getlinkedparent();
 
-    if(isDefined(var_10) && var_10 == self)
+    if(isDefined(var_10) && var_10 == self) {
       return 0;
+    }
 
-    if(isPlayer(var_7) && isDefined(self._blackboard._id_E5FD) && self._blackboard._id_E5FD)
+    if(isPlayer(var_7) && isDefined(self._blackboard._id_E5FD) && self._blackboard._id_E5FD) {
       return 0;
+    }
   } else {
     var_11 = anglesToForward(self.angles);
 
-    if(vectordot(var_4, var_11) > -0.707)
+    if(vectordot(var_4, var_11) > -0.707) {
       return 0;
+    }
 
     var_12 = lengthsquared(var_5);
 
-    if(var_12 > 65536)
+    if(var_12 > 65536) {
       return 0;
+    }
 
     var_5 = scripts\engine\utility::flatten_vector(var_5);
 
-    if(vectordot(var_5, var_4) < 0.966)
+    if(vectordot(var_5, var_4) < 0.966) {
       return 0;
+    }
   }
 
   return 1;
 }
 
 _id_100A2(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.pathgoalpos))
+  if(!isDefined(self.pathgoalpos)) {
     return 1;
+  }
 
   var_4 = self.goalpos - self.origin;
   var_5 = lengthsquared(var_4);
@@ -542,16 +597,19 @@ _id_100A2(var_0, var_1, var_2, var_3) {
     if(isDefined(var_8)) {
       var_9 = scripts\engine\utility::flatten_vector(var_8.origin - self.origin);
 
-      if(vectordot(var_9, var_6) > 0.5)
+      if(vectordot(var_9, var_6) > 0.5) {
         return 1;
+      }
     } else if(var_5 > 90000)
       return 1;
 
-    if(vectordot(var_4, var_6) < 0.866)
+    if(vectordot(var_4, var_6) < 0.866) {
       return 1;
+    }
 
-    if(vectordot(var_6, var_7) > 0)
+    if(vectordot(var_6, var_7) > 0) {
       return 1;
+    }
   }
 
   return 0;
@@ -566,8 +624,9 @@ _id_CEBB(var_0, var_1, var_2, var_3) {
   self _meth_82EA(var_1, var_4, 1, var_2, 1);
   childthread _id_CEBC();
 
-  for(;;)
+  for(;;) {
     _id_0A1E::_id_231F(var_0, var_1);
+  }
 }
 
 _id_CEBC() {
@@ -600,10 +659,11 @@ _id_CEB6(var_0, var_1, var_2, var_3) {
     var_8 = var_7.origin - self.origin;
     var_9 = vectorcross(var_5, var_8);
 
-    if(var_9[2] < 0)
+    if(var_9[2] < 0) {
       var_6 = var_6 - 10;
-    else
+    } else {
       var_6 = var_6 + 10;
+    }
   }
 
   self orientmode("face angle", var_6);
@@ -625,10 +685,11 @@ _id_CEAC(var_0, var_1, var_2, var_3) {
     var_7 = _id_0A1E::asm_getallanimsforstate(var_0, var_1);
     var_9 = getmovedelta(var_7);
 
-    if(var_4)
+    if(var_4) {
       var_8 = self.origin;
-    else
+    } else {
       var_8 = var_5 - rotatevector(var_9, self.angles);
+    }
   }
 
   var_10 = var_5 - self.origin;
@@ -637,15 +698,16 @@ _id_CEAC(var_0, var_1, var_2, var_3) {
   self clearanim(_id_0A1E::asm_getbodyknob(), var_2);
   self _meth_82EA(var_1, var_7, 1, var_2, 1);
 
-  if(!var_4)
+  if(!var_4) {
     self _meth_8396(var_8, self.angles[1]);
-  else {
+  } else {
     var_13 = self.origin + rotatevector(var_9, self.angles);
 
-    if(!self maymovefrompointtopoint(self.origin, var_13))
+    if(!self maymovefrompointtopoint(self.origin, var_13)) {
       self _meth_8396(var_8, self.angles[1]);
-    else
+    } else {
       self orientmode("face current");
+    }
   }
 
   _id_0A1E::_id_231F(var_0, var_1);

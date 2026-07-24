@@ -9,8 +9,9 @@ _id_94FD() {
   }
   anim._id_1FD2 = 1;
 
-  if(!isDefined(anim.archetypes))
+  if(!isDefined(anim.archetypes)) {
     anim.archetypes = [];
+  }
 
   anim.archetypes["soldier"] = [];
   scripts\anim\cover_left::_id_9507();
@@ -52,11 +53,13 @@ _id_DEE7(var_0, var_1, var_2) {
   _id_94FD();
   anim.archetypes[var_0] = var_1;
 
-  if(isDefined(var_1["flashed"]))
+  if(isDefined(var_1["flashed"])) {
     anim._id_6EC0[var_0] = 0;
+  }
 
-  if(isDefined(var_2) && var_2)
+  if(isDefined(var_2) && var_2) {
     scripts\anim\init_move_transitions::_id_814D(var_0);
+  }
 }
 
 _id_2126(var_0) {
@@ -129,39 +132,43 @@ _id_F2B3() {}
 _id_F2B2() {}
 
 _id_F2BE() {
-  if(scripts\anim\utility_common::isusingsidearm())
+  if(scripts\anim\utility_common::isusingsidearm()) {
     self.a._id_2274 = scripts\anim\utility::_id_B028("pistol_stand");
-  else if(isDefined(self._id_440C))
+  } else if(isDefined(self._id_440C)) {
     self.a._id_2274 = self._id_440C;
-  else if(isDefined(self.heat))
+  } else if(isDefined(self.heat)) {
     self.a._id_2274 = scripts\anim\utility::_id_B028("heat_stand");
-  else if(scripts\anim\utility_common::usingrocketlauncher())
+  } else if(scripts\anim\utility_common::usingrocketlauncher()) {
     self.a._id_2274 = scripts\anim\utility::_id_B028("rpg_stand");
-  else if(isDefined(self.weapon) && scripts\anim\utility_common::weapon_pump_action_shotgun())
+  } else if(isDefined(self.weapon) && scripts\anim\utility_common::weapon_pump_action_shotgun()) {
     self.a._id_2274 = scripts\anim\utility::_id_B028("shotgun_stand");
-  else if(scripts\anim\utility::_id_9D9B())
+  } else if(scripts\anim\utility::_id_9D9B()) {
     self.a._id_2274 = scripts\anim\utility::_id_B028("cqb_stand");
-  else
+  } else {
     self.a._id_2274 = scripts\anim\utility::_id_B028("default_stand");
+  }
 }
 
 _id_F2B6() {
-  if(scripts\anim\utility_common::isusingsidearm())
+  if(scripts\anim\utility_common::isusingsidearm()) {
     scripts\anim\shared::placeweaponon(self.primaryweapon, "right");
+  }
 
-  if(isDefined(self._id_4400))
+  if(isDefined(self._id_4400)) {
     self.a._id_2274 = self._id_4400;
-  else if(scripts\anim\utility_common::usingrocketlauncher())
+  } else if(scripts\anim\utility_common::usingrocketlauncher()) {
     self.a._id_2274 = scripts\anim\utility::_id_B028("rpg_crouch");
-  else if(isDefined(self.weapon) && scripts\anim\utility_common::weapon_pump_action_shotgun())
+  } else if(isDefined(self.weapon) && scripts\anim\utility_common::weapon_pump_action_shotgun()) {
     self.a._id_2274 = scripts\anim\utility::_id_B028("shotgun_crouch");
-  else
+  } else {
     self.a._id_2274 = scripts\anim\utility::_id_B028("default_crouch");
+  }
 }
 
 _id_F2BC() {
-  if(scripts\anim\utility_common::isusingsidearm())
+  if(scripts\anim\utility_common::isusingsidearm()) {
     scripts\anim\shared::placeweaponon(self.primaryweapon, "right");
+  }
 
   self.a._id_2274 = scripts\anim\utility::_id_B028("default_prone");
 }
@@ -183,26 +190,29 @@ _id_FA33() {
 _id_9503() {}
 
 _id_F2AC() {
-  self.a._id_BCA5["move_l"] = scripts\anim\utility::_id_B027("ambush", "move_l");
-  self.a._id_BCA5["move_r"] = scripts\anim\utility::_id_B027("ambush", "move_r");
-  self.a._id_BCA5["move_b"] = scripts\anim\utility::_id_B027("ambush", "move_b");
+  self.a._id_BCA5["move_l"] = ::scripts\anim\utility::_id_B027("ambush", "move_l");
+  self.a._id_BCA5["move_r"] = ::scripts\anim\utility::_id_B027("ambush", "move_r");
+  self.a._id_BCA5["move_b"] = ::scripts\anim\utility::_id_B027("ambush", "move_b");
 }
 
 _id_8CD8() {
-  if(self.weapon != self.primaryweapon)
+  if(self.weapon != self.primaryweapon) {
     return scripts\anim\utility::_id_1F67("reload");
+  }
 
   if(isDefined(self.node)) {
     if(self _meth_8214()) {
       var_0 = undefined;
 
-      if(self.node.type == "Cover Left")
+      if(self.node.type == "Cover Left") {
         var_0 = scripts\anim\utility::_id_B027("heat_reload", "reload_cover_left");
-      else if(self.node.type == "Cover Right")
+      } else if(self.node.type == "Cover Right") {
         var_0 = scripts\anim\utility::_id_B027("heat_reload", "reload_cover_right");
+      }
 
-      if(isDefined(var_0))
+      if(isDefined(var_0)) {
         return var_0;
+      }
     }
   }
 

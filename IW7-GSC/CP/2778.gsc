@@ -9,8 +9,9 @@ init() {
 }
 
 passiveparsetable() {
-  if(!isDefined(level.passivemap))
+  if(!isDefined(level.passivemap)) {
     level.passivemap = [];
+  }
 
   var_0 = 0;
 
@@ -32,32 +33,38 @@ passiveparsetable() {
     var_6._id_ABCA = scripts\engine\utility::ter_op(tablelookupbyrow("mp/passivetable.csv", var_0, 10) == "", 0, 1);
     var_6._id_113D1 = scripts\engine\utility::ter_op(tablelookupbyrow("mp/passivetable.csv", var_0, 11) == "", 0, 1);
 
-    if(var_3 != "")
+    if(var_3 != "") {
       var_6.attachmentroll = var_3;
+    }
 
     if(getDvar("ui_gametype") == "zombie") {
       var_7 = tablelookupbyrow("mp/passivetable.csv", var_0, 22);
 
-      if(var_7 != "")
+      if(var_7 != "") {
         var_6.attachmentroll = var_7;
+      }
     }
 
-    if(var_4 != "")
+    if(var_4 != "") {
       var_6._id_CA59 = var_4;
+    }
 
-    if(var_5 != "")
+    if(var_5 != "") {
       var_6._id_B689 = var_5;
+    }
 
-    if(!isDefined(level.passivemap[var_2]))
+    if(!isDefined(level.passivemap[var_2])) {
       level.passivemap[var_2] = var_6;
+    }
 
     var_0++;
   }
 }
 
 getpassivestruct(var_0) {
-  if(!isDefined(level.passivemap[var_0]))
+  if(!isDefined(level.passivemap[var_0])) {
     return undefined;
+  }
 
   var_1 = level.passivemap[var_0];
   return var_1;
@@ -66,8 +73,9 @@ getpassivestruct(var_0) {
 getpassiveattachment(var_0) {
   var_1 = getpassivestruct(var_0);
 
-  if(!isDefined(var_1) || !isDefined(var_1.attachmentroll))
+  if(!isDefined(var_1) || !isDefined(var_1.attachmentroll)) {
     return undefined;
+  }
 
   return var_1.attachmentroll;
 }
@@ -75,8 +83,9 @@ getpassiveattachment(var_0) {
 getpassivemessage(var_0) {
   var_1 = getpassivestruct(var_0);
 
-  if(!isDefined(var_1) || !isDefined(var_1._id_CA59))
+  if(!isDefined(var_1) || !isDefined(var_1._id_CA59)) {
     return undefined;
+  }
 
   return var_1._id_CA59;
 }
@@ -84,8 +93,9 @@ getpassivemessage(var_0) {
 getpassivedeathwatching(var_0) {
   var_1 = getpassivestruct(var_0);
 
-  if(!isDefined(var_1) || !isDefined(var_1._id_B689))
+  if(!isDefined(var_1) || !isDefined(var_1._id_B689)) {
     return undefined;
+  }
 
   return var_1._id_B689;
 }
@@ -94,8 +104,9 @@ _id_8239() {
   var_0 = [];
 
   foreach(var_2 in level.passivemap) {
-    if(var_2._id_13CDE)
+    if(var_2._id_13CDE) {
       var_0[var_0.size] = var_2.name;
+    }
   }
 
   return var_0;
@@ -105,8 +116,9 @@ _id_7F52() {
   var_0 = [];
 
   foreach(var_2 in level.passivemap) {
-    if(var_2.killstreaktype)
+    if(var_2.killstreaktype) {
       var_0[var_0.size] = var_2.name;
+    }
   }
 
   return var_0;
@@ -116,8 +128,9 @@ _id_7F67() {
   var_0 = [];
 
   foreach(var_2 in level.passivemap) {
-    if(var_2._id_ABCA)
+    if(var_2._id_ABCA) {
       var_0[var_0.size] = var_2.name;
+    }
   }
 
   return var_0;
@@ -127,8 +140,9 @@ _id_8190() {
   var_0 = [];
 
   foreach(var_2 in level.passivemap) {
-    if(var_2._id_113D1)
+    if(var_2._id_113D1) {
       var_0[var_0.size] = var_2.name;
+    }
   }
 
   return var_0;

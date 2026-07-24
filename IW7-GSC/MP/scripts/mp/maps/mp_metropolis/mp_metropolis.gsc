@@ -131,8 +131,9 @@ trainanims() {
     var_3 linkTo(var_2);
     var_2 thread animatetraincar();
 
-    if(var_2.targetname == "train01" || var_2.targetname == "train03" || var_2.targetname == "train05")
+    if(var_2.targetname == "train01" || var_2.targetname == "train03" || var_2.targetname == "train05") {
       var_2 thread animatetraincaraudio();
+    }
   }
 }
 
@@ -197,8 +198,9 @@ animatetraincaraudio() {
 traininit() {
   var_0 = getEntArray("train", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 setModel("veh_civ_train_fn_01");
+  foreach(var_2 in var_0) {
+    var_2 setModel("veh_civ_train_fn_01");
+  }
 
   return var_0;
 }

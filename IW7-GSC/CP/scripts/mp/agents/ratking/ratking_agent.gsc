@@ -14,8 +14,9 @@ registerscriptedagent() {
 _id_FAB0() {
   level endon("game_ended");
 
-  if(!isDefined(level.agent_definition))
+  if(!isDefined(level.agent_definition)) {
     level waittill("scripted_agents_initialized");
+  }
 
   level.agent_definition["ratking"]["setup_func"] = ::setupagent;
   level.agent_definition["ratking"]["setup_model_func"] = ::_id_FACE;
@@ -123,8 +124,9 @@ setupzombiegametypevars() {
   self.next_forced_teleport_time = 0;
   self.fake_death = undefined;
 
-  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1)
+  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1) {
     self._id_AB3F = 1;
+  }
 }
 
 setupagent() {
@@ -167,8 +169,9 @@ accumulatedamage(var_0, var_1) {
 
   self.damageaccumulator.lastdamagetime = gettime();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = (1, 1, 1);
+  }
 
   self.damageaccumulator.lastdir = var_1;
 
@@ -180,8 +183,9 @@ accumulatedamage(var_0, var_1) {
 }
 
 isinravemode() {
-  if(self isethereal())
+  if(self isethereal()) {
     return 1;
+  }
 
   return 0;
 }
@@ -213,22 +217,25 @@ ratking_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
     var_2 = 0;
     level.rat_king_death_pos = self.origin;
 
-    if(scripts\engine\utility::array_contains(level.spawned_enemies, self))
+    if(scripts\engine\utility::array_contains(level.spawned_enemies, self)) {
       level.spawned_enemies = scripts\engine\utility::array_remove(level.spawned_enemies, self);
+    }
 
     self notify("fake_death");
   }
 
   self finishagentdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0.0, var_11, var_12, 0, 1);
 
-  if(self.health > 0 && self.health < var_13)
+  if(self.health > 0 && self.health < var_13) {
     self notify("pain");
+  }
 
   if(isalive(self) && isDefined(self.agent_type)) {
     var_16 = level.agent_funcs[self.agent_type]["gametype_on_damage_finished"];
 
-    if(isDefined(var_16))
+    if(isDefined(var_16)) {
       [[var_16]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
+    }
   }
 }
 
@@ -250,15 +257,17 @@ shouldratkingplaypainanim() {
 }
 
 getstructpos() {
-  if(isDefined(self.ratkingbouncetarget))
+  if(isDefined(self.ratkingbouncetarget)) {
     return self.ratkingbouncetarget;
+  }
 
   return undefined;
 }
 
 getenemy() {
-  if(isDefined(self.ratkingenemy) && isalive(self.ratkingenemy))
+  if(isDefined(self.ratkingenemy) && isalive(self.ratkingenemy)) {
     return self.ratkingenemy;
+  }
 
   return undefined;
 }
@@ -308,8 +317,9 @@ listen_for_fake_death() {
       self.ignoreall = 1;
       self.scripted_mode = 1;
 
-      foreach(var_1 in level.players)
-      var_1 thread scripts\cp\maps\cp_disco\rat_king_fight::outroblackscreen();
+      foreach(var_1 in level.players) {
+        var_1 thread scripts\cp\maps\cp_disco\rat_king_fight::outroblackscreen();
+      }
 
       wait 2;
       self suicide();

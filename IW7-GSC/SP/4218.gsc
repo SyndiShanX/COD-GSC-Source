@@ -388,26 +388,30 @@ _id_132EB() {
   self endon("death");
   var_0 = getEntArray("bollard_barrier_lights", "targetname");
 
-  foreach(var_2 in var_0)
-  playFXOnTag(level._effect["vfx_sa_moon_bollard_light_loop"], var_2, "barrier_bollard_rising_01_lod0");
+  foreach(var_2 in var_0) {
+    playFXOnTag(level._effect["vfx_sa_moon_bollard_light_loop"], var_2, "barrier_bollard_rising_01_lod0");
+  }
 
   scripts\engine\utility::flag_wait("exfil_player_clear");
 
-  foreach(var_2 in var_0)
-  killfxontag(level._effect["vfx_sa_moon_bollard_light_loop"], var_2, "barrier_bollard_rising_01_lod0");
+  foreach(var_2 in var_0) {
+    killfxontag(level._effect["vfx_sa_moon_bollard_light_loop"], var_2, "barrier_bollard_rising_01_lod0");
+  }
 }
 
 _id_132EA() {
   self endon("death");
   var_0 = getEntArray("bollard_barrier_lights", "targetname");
 
-  foreach(var_2 in var_0)
-  playFXOnTag(level._effect["vfx_sa_moon_bollard_light_blink"], var_2, "barrier_bollard_rising_01_lod0");
+  foreach(var_2 in var_0) {
+    playFXOnTag(level._effect["vfx_sa_moon_bollard_light_blink"], var_2, "barrier_bollard_rising_01_lod0");
+  }
 
   scripts\engine\utility::flag_wait("exfil_player_clear");
 
-  foreach(var_2 in var_0)
-  killfxontag(level._effect["vfx_sa_moon_bollard_light_blink"], var_2, "barrier_bollard_rising_01_lod0");
+  foreach(var_2 in var_0) {
+    killfxontag(level._effect["vfx_sa_moon_bollard_light_blink"], var_2, "barrier_bollard_rising_01_lod0");
+  }
 }
 
 _id_132EF() {
@@ -564,10 +568,11 @@ _id_13304() {
   self waittillmatch("single anim", "end");
 
   foreach(var_6 in var_0) {
-    if(var_6._id_6F17)
+    if(var_6._id_6F17) {
       killfxontag(var_2, var_6, "tag_origin");
-    else
+    } else {
       killfxontag(var_1, var_6, "tag_origin");
+    }
 
     var_6 delete();
   }
@@ -597,20 +602,23 @@ _id_13335() {
   var_4 = scripts\engine\utility::getfx("vfx_jackal_maneuver_roll_left");
   var_5 = scripts\engine\utility::getfx("vfx_jackal_maneuver_roll_right");
 
-  if(isDefined(self._id_1448))
+  if(isDefined(self._id_1448)) {
     var_6 = self._id_1448;
-  else
+  } else {
     var_6 = 20;
+  }
 
-  if(isDefined(self._id_144B))
+  if(isDefined(self._id_144B)) {
     var_7 = self._id_144B;
-  else
+  } else {
     var_7 = 10;
+  }
 
-  if(isDefined(self._id_1449))
+  if(isDefined(self._id_1449)) {
     var_8 = self._id_1449;
-  else
+  } else {
     var_8 = 15;
+  }
 
   var_9 = 0.2;
   var_10 = var_6 * var_9;
@@ -637,10 +645,11 @@ _id_13335() {
   var_23 = var_21;
 
   for(;;) {
-    if(var_22)
+    if(var_22) {
       var_21 = self gettagangles(self._id_144A);
-    else
+    } else {
       var_21 = self.angles;
+    }
 
     var_24 = combineangles(invertangles(var_23), var_21);
     var_24 = (angleclamp180(var_24[0]), angleclamp180(var_24[1]), angleclamp180(var_24[2]));

@@ -12,8 +12,9 @@ main() {
     scripts\sp\utility::_id_F305();
 
     if(scripts\sp\utility::_id_9BEE()) {
-      if(level._id_DADC)
+      if(level._id_DADC) {
         setsaveddvar("r_postaa", 5);
+      }
     }
   }
 
@@ -48,8 +49,9 @@ main() {
   _id_CAE3();
   scripts\sp\maps\phspace\phspace_lights::main();
 
-  if(getdvarint("r_reflectionProbeGenerate") != 1)
+  if(getdvarint("r_reflectionProbeGenerate") != 1) {
     _id_CAE4();
+  }
 
   setsaveddvar("fx_lighting_shscale", "1 0.5 1 1");
 }
@@ -126,11 +128,13 @@ _id_CAE4() {
   var_0 = getEnt("jackal_callin_player_clip", "targetname");
   var_1 = getEnt("jackal_callin_salter_clip", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 notsolid();
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 notsolid();
+  }
 
   level.player scripts\engine\utility::allow_doublejump(0);
   level.player scripts\engine\utility::allow_wallrun(0);
@@ -146,8 +150,9 @@ _id_CAE4() {
     var_3 notsolid();
   }
 
-  if(level._id_10CDA != "test_lighttweaks_enabled")
+  if(level._id_10CDA != "test_lighttweaks_enabled") {
     thread _id_CADF();
+  }
 
   if(level._id_10CDA != "hvt_handoff" && level._id_10CDA != "jackals" && level._id_10CDA != "jackals_reveal") {
     thread _id_CA28();
@@ -206,11 +211,13 @@ _id_CAE4() {
   var_9 = getEnt("runway_hangar_door", "targetname");
   var_7 = getEnt(var_9.target, "targetname");
 
-  if(isDefined(var_9))
+  if(isDefined(var_9)) {
     var_9 delete();
+  }
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     var_7 delete();
+  }
 }
 
 _id_970B() {
@@ -221,22 +228,25 @@ _id_970B() {
 }
 
 _id_8FFB() {
-  if(scripts\engine\utility::flag("hint_did_basics"))
+  if(scripts\engine\utility::flag("hint_did_basics")) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_8FFC() {
-  if(scripts\engine\utility::flag("hint_did_boosters"))
+  if(scripts\engine\utility::flag("hint_did_boosters")) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_9002() {
-  if(scripts\engine\utility::flag("hint_did_updown"))
+  if(scripts\engine\utility::flag("hint_did_updown")) {
     return 1;
+  }
 
   return 0;
 }
@@ -257,15 +267,17 @@ _id_8FFF() {
 }
 
 _id_9001() {
-  if(!isDefined(level._id_A8B9) || !isalive(level._id_A8B9))
+  if(!isDefined(level._id_A8B9) || !isalive(level._id_A8B9)) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_9000() {
-  if(scripts\engine\utility::flag("olympus_arrived"))
+  if(scripts\engine\utility::flag("olympus_arrived")) {
     return 1;
+  }
 
   return 0;
 }
@@ -275,8 +287,9 @@ _id_8FFE() {
 }
 
 _id_9012() {
-  if(scripts\engine\utility::flag("hint_did_cannons"))
+  if(scripts\engine\utility::flag("hint_did_cannons")) {
     return 1;
+  }
 
   return 0;
 }
@@ -307,8 +320,9 @@ _id_1062E() {
 }
 
 _id_1062B() {
-  if(!isDefined(level._id_1D0B))
+  if(!isDefined(level._id_1D0B)) {
     level._id_1D0B = [];
+  }
 
   level._id_1D0B[level._id_1D0B.size] = _id_1062D("jackal_ally_ambient1", 1);
   level._id_1D0B[level._id_1D0B.size] = _id_1062D("jackal_ally_ambient2", 1);
@@ -329,8 +343,9 @@ _id_1062D(var_0, var_1) {
   var_2 _id_0BDC::_id_19AE("shoot_at_will");
   var_2 _id_0BDC::_id_A144();
 
-  if(scripts\engine\utility::is_true(var_1))
+  if(scripts\engine\utility::is_true(var_1)) {
     var_2 setModel("veh_mil_air_un_jackal_drone_space_periph");
+  }
 
   return var_2;
 }
@@ -379,20 +394,23 @@ _id_107F6() {
 }
 
 _id_10801() {
-  if(!isDefined(level._id_395A))
+  if(!isDefined(level._id_395A)) {
     level._id_395A = scripts\sp\vehicle::_id_1080C("cap_ship_escort1");
+  }
 }
 
 _id_CA28() {
   var_0 = getEnt("periph_mountains1", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
   var_1 = getEnt("geneva_periph", "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 delete();
+  }
 }
 
 _id_D91E() {
@@ -433,10 +451,11 @@ _id_CADF() {
       continue;
     }
 
-    if(isDefined(level._id_D127) && level._id_D127 _id_0BDC::_id_A2A7())
+    if(isDefined(level._id_D127) && level._id_D127 _id_0BDC::_id_A2A7()) {
       var_0 = level._id_D127.origin;
-    else
+    } else {
       var_0 = level.player.origin;
+    }
 
     var_1 = (200000, 0, 0);
     var_1 = rotatevector(var_1, level._id_111D0._id_1120D + level._id_111D0._id_75AC);
@@ -461,16 +480,18 @@ _id_CF3C() {
   setdvarifuninitialized("player_helmet", 0);
 
   for(;;) {
-    if(!getdvarint("player_helmet"))
+    if(!getdvarint("player_helmet")) {
       wait 0.05;
+    }
 
     var_0 = spawn("script_model", (0, 0, 0));
     var_0 setModel("vm_hero_protagonist_helmet");
     var_0 _meth_81E2(level.player, "tag_camera", (0, 0, 0), (0, 0, 0), 1, "view_jostle");
     level.player setviewmodeldepthoffield(2, 10);
 
-    while(getdvarint("player_helmet"))
+    while(getdvarint("player_helmet")) {
       wait 0.05;
+    }
 
     level.player setviewmodeldepthoffield(0, 0);
     var_0 delete();
@@ -488,8 +509,9 @@ _id_B8C5() {
   waittillframeend;
   var_0 = 0;
 
-  if(level._id_10CDA != "default")
+  if(level._id_10CDA != "default") {
     var_0 = 1;
+  }
 
   switch (level._id_10CDA) {
     case "default":
@@ -524,8 +546,9 @@ _id_B8C5() {
       scripts\engine\utility::flag_wait("olympus_arrived");
       objective_string(scripts\sp\utility::_id_C264("OBJ_RET_MONS"), &"PHSPACE_OBJ_MONS");
 
-      while(!scripts\engine\utility::flag_exist("flag_player_land"))
+      while(!scripts\engine\utility::flag_exist("flag_player_land")) {
         wait 0.05;
+      }
 
       scripts\engine\utility::flag_wait("flag_player_land");
     case "landing":

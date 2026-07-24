@@ -16,22 +16,26 @@ _id_FA23(var_0) {
     var_3._id_11168 = var_3 _id_7A98();
 
     foreach(var_5 in var_3._id_6664) {
-      if(isDefined(var_5.model) && var_5.model == "ship_exterior_ca_railgun_a_25p")
+      if(isDefined(var_5.model) && var_5.model == "ship_exterior_ca_railgun_a_25p") {
         var_3.turret = var_5;
+      }
     }
 
     foreach(var_8 in var_3._id_11168) {
-      if(var_8.targetname == "asteroid_root")
+      if(var_8.targetname == "asteroid_root") {
         var_3._id_23EC = var_8;
+      }
     }
 
-    if(!isDefined(var_3.turret._id_6EBF))
+    if(!isDefined(var_3.turret._id_6EBF)) {
       var_3.turret thread _id_9537();
+    }
 
-    if(isDefined(var_3._id_23EC.script_noteworthy) && var_3._id_23EC.script_noteworthy == "fx_chained")
+    if(isDefined(var_3._id_23EC.script_noteworthy) && var_3._id_23EC.script_noteworthy == "fx_chained") {
       var_3._id_23EC thread _id_2400();
-    else
+    } else {
       var_3._id_23EC thread _id_2401();
+    }
 
     var_3 thread _id_9703();
   }
@@ -52,8 +56,9 @@ _id_7A98() {
       }
 
       if(var_3.size > 1) {
-        foreach(var_5 in var_3)
-        var_0[var_0.size] = var_5;
+        foreach(var_5 in var_3) {
+          var_0[var_0.size] = var_5;
+        }
       }
     }
   }
@@ -86,8 +91,9 @@ _id_9537() {
 }
 
 _id_DC2A(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 3;
+  }
 
   self rotateTo(vectortoangles(var_0 - self.origin), var_1, var_1 * 0.4, var_1 * 0.4);
   self waittill("rotatedone");
@@ -108,15 +114,17 @@ _id_2401() {
 
   self._id_3F2C = getEntArray(self.target, "targetname");
 
-  foreach(var_6 in self._id_3F2C)
-  var_6 linkTo(self._id_E6E5);
+  foreach(var_6 in self._id_3F2C) {
+    var_6 linkTo(self._id_E6E5);
+  }
 
   self._id_321D = 2;
   self waittill("hit");
   self._id_E6E5 notify("stop_rotation");
 
-  foreach(var_3 in self._id_6999)
-  var_3 thread _id_23FF(self._id_321D);
+  foreach(var_3 in self._id_6999) {
+    var_3 thread _id_23FF(self._id_321D);
+  }
 
   foreach(var_6 in self._id_3F2C) {
     var_6 unlink();
@@ -138,8 +146,9 @@ _id_2400() {
     var_1 thread _id_23EE();
   }
 
-  foreach(var_4 in getEntArray(self.target, "targetname"))
-  thread _id_56AA(var_4, 20, 4096);
+  foreach(var_4 in getEntArray(self.target, "targetname")) {
+    thread _id_56AA(var_4, 20, 4096);
+  }
 }
 
 _id_23FB() {

@@ -14,8 +14,9 @@ registerscriptedagent() {
 _id_FAB0() {
   level endon("game_ended");
 
-  if(!isDefined(level.agent_definition))
+  if(!isDefined(level.agent_definition)) {
     level waittill("scripted_agents_initialized");
+  }
 
   level.agent_definition["pamgrier"]["setup_func"] = ::setupagent;
   level.agent_definition["pamgrier"]["setup_model_func"] = ::_id_FACE;
@@ -108,8 +109,9 @@ setupzombiegametypevars() {
   self.death_anim_no_ragdoll = undefined;
   self.dont_cleanup = 1;
 
-  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1)
+  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1) {
     self._id_AB3F = 1;
+  }
 }
 
 setupagent() {

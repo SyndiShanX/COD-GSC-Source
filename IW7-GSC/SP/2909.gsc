@@ -11,8 +11,9 @@ pausemenu_think() {
   for(;;) {
     level.player waittill("luinotifyserver", var_0, var_1);
 
-    if(var_0 == "restartMission")
+    if(var_0 == "restartMission") {
       _id_E2B3();
+    }
   }
 }
 

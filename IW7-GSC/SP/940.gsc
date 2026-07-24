@@ -45,7 +45,7 @@ _id_2AD0() {
   var_0._id_1581[5] = _id_0C08::_id_12F13;
   var_0._id_1581[6] = _id_0C08::_id_128A9;
   var_0._id_1581[7] = _id_0C08::_id_E602;
-  var_0._id_1581[8] = scripts\aitypes\combat::_id_9E40;
+  var_0._id_1581[8] = ::scripts\aitypes\combat::_id_9E40;
   var_0._id_1581[9] = _id_0C08::_id_97EB;
   var_0._id_1581[10] = _id_0C08::_id_12E77;
   var_0._id_1581[11] = _id_0C08::_id_9D5B;

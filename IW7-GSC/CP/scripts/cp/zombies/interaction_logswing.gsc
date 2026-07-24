@@ -15,8 +15,9 @@ init_logswing_trap() {
   var_1 linkTo(var_0, "tag_trigger");
   var_2 = getEntArray("swing_trap_pole", "targetname");
 
-  foreach(var_4 in var_2)
-  var_4 setscriptablepartstate("light", "on");
+  foreach(var_4 in var_2) {
+    var_4 setscriptablepartstate("light", "on");
+  }
 }
 
 #using_animtree("mp_script_model");
@@ -27,8 +28,9 @@ use_logswing_trap(var_0, var_1) {
   var_2 = getEnt("logswing_trig", "targetname");
   var_3 = getEntArray("swing_trap_pole", "targetname");
 
-  foreach(var_5 in var_3)
-  var_5 setscriptablepartstate("light", "off");
+  foreach(var_5 in var_3) {
+    var_5 setscriptablepartstate("light", "off");
+  }
 
   var_7 = getEnt("logswing_trap", "targetname");
   var_7 thread log_swing_trap_sfx();
@@ -44,8 +46,9 @@ use_logswing_trap(var_0, var_1) {
   scripts\cp\cp_interaction::enable_linked_interactions(var_0);
   scripts\cp\cp_interaction::interaction_cooldown(var_0, 45);
 
-  foreach(var_5 in var_3)
-  var_5 setscriptablepartstate("light", "on");
+  foreach(var_5 in var_3) {
+    var_5 setscriptablepartstate("light", "on");
+  }
 }
 
 log_swing_trap_sfx() {

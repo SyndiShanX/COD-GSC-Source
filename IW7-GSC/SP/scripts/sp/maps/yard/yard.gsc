@@ -41,8 +41,9 @@ main() {
   scripts\sp\utility::_id_1749("ending_yard_crash_test", scripts\sp\maps\yard\yard_ending::_id_6359, "", undefined, ["yard_base_tr", "yard_base_capitalship_tr", "yard_vista_tr", "yard_central_tr", "yard_end_dont_unload_tr"], undefined);
   _id_D83F();
 
-  if(getDvar("createfx") != "")
+  if(getDvar("createfx") != "") {
     level thread _id_88CA();
+  }
 
   scripts\sp\load::main();
   scripts\sp\maps\yard\yard_audio::main();
@@ -132,8 +133,9 @@ _id_D704() {
 _id_88CA() {
   thread _id_49BE();
 
-  while(!istransientloaded("yard_pod_chamber_tr"))
+  while(!istransientloaded("yard_pod_chamber_tr")) {
     wait 0.05;
+  }
 
   wait 1;
   level._id_B11F = scripts\engine\utility::getStruct("mac_death_ap", "targetname");
@@ -146,8 +148,9 @@ _id_88CA() {
 }
 
 _id_49BE() {
-  while(!istransientloaded("yard_server_tr"))
+  while(!istransientloaded("yard_server_tr")) {
     wait 0.05;
+  }
 
   wait 1;
   var_0 = scripts\engine\utility::getStruct("org_anim_power_core", "targetname");
@@ -179,25 +182,29 @@ _id_49BE() {
 _id_8E7C() {
   var_0 = getEntArray("salter_deck_geo", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 hide();
+  foreach(var_2 in var_0) {
+    var_2 hide();
+  }
 
   var_4 = getEntArray("salter_deck_models", "targetname");
 
-  foreach(var_6 in var_4)
-  var_6 hide();
+  foreach(var_6 in var_4) {
+    var_6 hide();
+  }
 
   var_8 = getEntArray("yard_debris_field", "targetname");
 
-  foreach(var_6 in var_8)
-  var_6 hide();
+  foreach(var_6 in var_8) {
+    var_6 hide();
+  }
 }
 
 _id_8EB5() {
   var_0 = getEntArray("control_room_vista_dome_01", "targetname");
 
   if(isDefined(var_0) && var_0.size) {
-    foreach(var_2 in var_0)
-    var_2 hide();
+    foreach(var_2 in var_0) {
+      var_2 hide();
+    }
   }
 }

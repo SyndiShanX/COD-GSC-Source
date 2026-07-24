@@ -141,10 +141,11 @@ _id_F4A5(var_0, var_1, var_2) {
   if(isDefined(var_1)) {
     scripts\engine\utility::flag_wait(var_1);
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       thread _id_50F3(var_2, var_0);
-    else
+    } else {
       scripts\sp\utility::_id_C27C(scripts\sp\utility::_id_C264(var_0));
+    }
   }
 }
 

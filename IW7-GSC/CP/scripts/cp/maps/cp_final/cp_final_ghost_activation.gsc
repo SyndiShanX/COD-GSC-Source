@@ -73,8 +73,9 @@ wait_for_explosive_damage(var_0) {
     var_1 waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
     var_1.health = 999999;
 
-    if(isDefined(var_6) && is_explosive_damage(var_6))
+    if(isDefined(var_6) && is_explosive_damage(var_6)) {
       return;
+    }
   }
 }
 
@@ -133,8 +134,9 @@ stay_on_pressure_plates() {
     if(level.players.size == 1) {
       var_0 = level scripts\engine\utility::waittill_any_timeout(1.5, "not_all_player_on_pressure_plate");
 
-      if(var_0 == "not_all_player_on_pressure_plate")
+      if(var_0 == "not_all_player_on_pressure_plate") {
         continue;
+      }
     }
 
     turn_off_map_marker();
@@ -156,8 +158,9 @@ stay_on_pressure_plates() {
       turn_off_skull_meter();
       stop_pressure_plate_zombie_spawn();
 
-      if(var_0 == "skull_picked_up")
+      if(var_0 == "skull_picked_up") {
         return;
+      }
     } else {
       turn_off_skull_meter();
       stop_pressure_plate_zombie_spawn();
@@ -174,15 +177,17 @@ play_charge_complete_sfx() {
 turn_on_map_marker() {
   var_0 = scripts\engine\utility::getStructArray("pressure_plate_center", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2.vfx_ent setscriptablepartstate("map_marker", "on");
+  foreach(var_2 in var_0) {
+    var_2.vfx_ent setscriptablepartstate("map_marker", "on");
+  }
 }
 
 turn_off_map_marker() {
   var_0 = scripts\engine\utility::getStructArray("pressure_plate_center", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2.vfx_ent setscriptablepartstate("map_marker", "off");
+  foreach(var_2 in var_0) {
+    var_2.vfx_ent setscriptablepartstate("map_marker", "off");
+  }
 }
 
 skull_picked_up_monitor() {
@@ -280,8 +285,9 @@ keep_rotate(var_0) {
 turn_off_skull_meter() {
   turn_off_rise_loop_sfx();
 
-  if(isDefined(level.skull_meter))
+  if(isDefined(level.skull_meter)) {
     level.skull_meter delete();
+  }
 }
 
 turn_on_pressure_beam_vfx() {
@@ -293,8 +299,9 @@ turn_off_pressure_beam_vfx() {
 }
 
 clean_up_pressure_beam_vfx() {
-  if(isDefined(level.pressure_beam_vfx_ent))
+  if(isDefined(level.pressure_beam_vfx_ent)) {
     level.pressure_beam_vfx_ent delete();
+  }
 }
 
 debug_stay_on_pressure_plates() {}
@@ -304,10 +311,11 @@ all_players_on_pressure_plate_monitor() {
   var_0 = getEnt("pressure_plate_volume", "targetname");
 
   for(;;) {
-    if(all_players_touch_volume(var_0))
+    if(all_players_touch_volume(var_0)) {
       level notify("all_player_on_pressure_plate");
-    else
+    } else {
       level notify("not_all_player_on_pressure_plate");
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -315,21 +323,23 @@ all_players_on_pressure_plate_monitor() {
 
 all_players_touch_volume(var_0) {
   foreach(var_2 in level.players) {
-    if(!var_2 istouching(var_0))
+    if(!var_2 istouching(var_0)) {
       return 0;
+    }
   }
 
   var_4 = level.players.size;
 
-  if(var_4 == 1)
+  if(var_4 == 1) {
     return 1;
-  else {
+  } else {
     for(var_5 = 0; var_5 < var_4 - 1; var_5++) {
       var_6 = level.players[var_5];
       var_7 = level.players[var_5 + 1];
 
-      if(distance2dsquared(var_6.origin, var_7.origin) < 10000)
+      if(distance2dsquared(var_6.origin, var_7.origin) < 10000) {
         return 0;
+      }
     }
 
     return 1;
@@ -350,22 +360,25 @@ turn_on_plate_center_vfx() {
   var_0 = scripts\engine\utility::getStructArray("pressure_plate_center", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    if(player_standing_on_plate(var_2))
+    if(player_standing_on_plate(var_2)) {
       var_2.vfx_ent setscriptablepartstate("pressure_plate", "on");
+    }
   }
 }
 
 turn_off_plate_center_vfx() {
   var_0 = scripts\engine\utility::getStructArray("pressure_plate_center", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2.vfx_ent setscriptablepartstate("pressure_plate", "off");
+  foreach(var_2 in var_0) {
+    var_2.vfx_ent setscriptablepartstate("pressure_plate", "off");
+  }
 }
 
 player_standing_on_plate(var_0) {
   foreach(var_2 in level.players) {
-    if(distance2dsquared(var_0.vfx_ent.origin, var_2.origin) <= 6400)
+    if(distance2dsquared(var_0.vfx_ent.origin, var_2.origin) <= 6400) {
       return 1;
+    }
   }
 
   return 0;
@@ -375,8 +388,9 @@ clean_up_vfx_ent() {
   var_0 = scripts\engine\utility::getStructArray("pressure_plate_center", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.vfx_ent))
+    if(isDefined(var_2.vfx_ent)) {
       var_2.vfx_ent delete();
+    }
   }
 }
 
@@ -521,10 +535,11 @@ get_zombie_spawner() {
 can_spawn_zombie() {
   var_0 = 20;
 
-  if(isDefined(level.pressure_plate_max_zombie_spawn))
+  if(isDefined(level.pressure_plate_max_zombie_spawn)) {
     var_1 = level.pressure_plate_max_zombie_spawn;
-  else
+  } else {
     var_1 = var_0;
+  }
 
   return get_num_alive_agent_of_type("generic_zombie") < var_1;
 }
@@ -533,8 +548,9 @@ get_num_alive_agent_of_type(var_0) {
   var_1 = 0;
 
   foreach(var_3 in level.spawned_enemies) {
-    if(isDefined(var_3.agent_type) && var_3.agent_type == var_0)
+    if(isDefined(var_3.agent_type) && var_3.agent_type == var_0) {
       var_1++;
+    }
   }
 
   return var_1;
@@ -553,18 +569,20 @@ resume_spawn_wave() {
 }
 
 get_zombie_spawn_delay() {
-  if(isDefined(level.pressure_plate_zombie_spawn_delay))
+  if(isDefined(level.pressure_plate_zombie_spawn_delay)) {
     return level.pressure_plate_zombie_spawn_delay;
-  else
+  } else {
     return 2;
+  }
 }
 
 should_do_wave_spawn() {
   if(scripts\engine\utility::is_true(level.allow_wave_spawn)) {
-    if(level.players.size == 1)
+    if(level.players.size == 1) {
       return 1;
-    else
+    } else {
       return 0;
+    }
   } else
     return 0;
 }
@@ -576,10 +594,11 @@ should_do_wait_between_wave(var_0) {
 wait_between_wave() {
   var_0 = 10;
 
-  if(isDefined(level.wait_time_between_wave))
+  if(isDefined(level.wait_time_between_wave)) {
     wait(level.wait_time_between_wave);
-  else
+  } else {
     wait(var_0);
+  }
 }
 
 wait_one_wave() {
@@ -603,8 +622,9 @@ select_odd_cipher() {
     var_10 = scripts\engine\utility::random(var_8);
     var_11 = [];
 
-    for(var_12 = 0; var_12 < 3; var_12++)
+    for(var_12 = 0; var_12 < 3; var_12++) {
       var_11[var_12] = var_9[var_12];
+    }
 
     level.gns_ciphers = [];
 
@@ -631,8 +651,9 @@ get_cipher_group_index(var_0) {
   var_1 = spawnStruct();
   var_2 = [];
 
-  for(var_3 = 0; var_3 < var_0.size; var_3++)
+  for(var_3 = 0; var_3 < var_0.size; var_3++) {
     var_2[var_3] = var_3;
+  }
 
   var_1.target_index = scripts\engine\utility::random(var_2);
   var_2 = scripts\engine\utility::array_remove(var_2, var_1.target_index);
@@ -646,8 +667,9 @@ clean_up_ciphers() {
       if(scripts\engine\utility::is_true(var_1.fading_out)) {
         continue;
       }
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         var_1 delete();
+      }
     }
   }
 }
@@ -667,8 +689,9 @@ wait_for_selection(var_0, var_1) {
   wait_for_player_look_at(var_0);
   var_0 thread cipher_vfx_fade_out(var_0);
 
-  if(var_1 == "wrong_choice")
+  if(var_1 == "wrong_choice") {
     playsoundatpos(var_0.origin, "mpq_fail_buzzer");
+  }
 
   level notify("GnS_cipher_selected", var_1);
 }
@@ -707,8 +730,9 @@ wait_for_player_look_at(var_0) {
 
 any_player_look_at_target(var_0) {
   foreach(var_2 in level.players) {
-    if(player_look_at_target(var_0, var_2))
+    if(player_look_at_target(var_0, var_2)) {
       return 1;
+    }
   }
 
   return 0;
@@ -717,17 +741,20 @@ any_player_look_at_target(var_0) {
 player_look_at_target(var_0, var_1) {
   var_2 = 6400;
 
-  if(!var_1 adsButtonPressed())
+  if(!var_1 adsButtonPressed()) {
     return 0;
+  }
 
-  if(!var_1 worldpointinreticle_circle(var_0.origin, 25, 75))
+  if(!var_1 worldpointinreticle_circle(var_0.origin, 25, 75)) {
     return 0;
+  }
 
   var_3 = bulletTrace(var_1 getEye(), var_0.origin, 0, var_1);
   var_4 = var_3["position"];
 
-  if(distancesquared(var_4, var_0.origin) > var_2)
+  if(distancesquared(var_4, var_0.origin) > var_2) {
     return 0;
+  }
 
   return 1;
 }
@@ -744,10 +771,11 @@ follow_the_light() {
     level thread follow_the_light_manager();
     var_0 = level scripts\engine\utility::waittill_any_return("succeed_follow_the_light", "fail_follow_the_light");
 
-    if(var_0 == "succeed_follow_the_light")
+    if(var_0 == "succeed_follow_the_light") {
       return;
-    else
+    } else {
       wait_one_wave();
+    }
   }
 }
 
@@ -814,21 +842,24 @@ expand_light_node_path() {
   var_0 = get_light_node_structs_to_expand();
 
   if(var_0.size == 1) {
-    foreach(var_2 in var_0)
-    var_2.light_color = level.follow_the_light_target_color;
+    foreach(var_2 in var_0) {
+      var_2.light_color = level.follow_the_light_target_color;
+    }
   }
 
-  foreach(var_2 in var_0)
-  create_follow_the_light_node(var_2);
+  foreach(var_2 in var_0) {
+    create_follow_the_light_node(var_2);
+  }
 }
 
 get_light_node_structs_to_expand() {
   var_0 = scripts\engine\utility::getStructArray(level.leading_light_node_struct.target, "targetname");
 
-  if(isDefined(level.leading_light_node_struct.script_parameters) && level.leading_light_node_struct.script_parameters == "gns_path_split")
+  if(isDefined(level.leading_light_node_struct.script_parameters) && level.leading_light_node_struct.script_parameters == "gns_path_split") {
     return [scripts\engine\utility::random(var_0)];
-  else
+  } else {
     return var_0;
+  }
 }
 
 create_follow_the_light_node(var_0) {
@@ -838,11 +869,13 @@ create_follow_the_light_node(var_0) {
   var_1 apply_node_scriptable_state(var_1, var_0);
   add_to_active_light_nodes(var_1);
 
-  if(isDefined(var_0.angles))
+  if(isDefined(var_0.angles)) {
     var_1.angles = var_0.angles;
+  }
 
-  if(isDefined(var_0.script_noteworthy))
+  if(isDefined(var_0.script_noteworthy)) {
     var_1.progress_index = int(var_0.script_noteworthy);
+  }
 
   var_1 thread player_pick_up_monitor(var_1, var_0);
 }
@@ -861,12 +894,13 @@ remove_active_light_nodes_with_index(var_0) {
 }
 
 player_pick_up_monitor(var_0, var_1) {
-  if(isDefined(var_1.targetname) && var_1.targetname == "gns_path_start")
+  if(isDefined(var_1.targetname) && var_1.targetname == "gns_path_start") {
     var_0 thread path_start_pick_up_monitor(var_0);
-  else if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy == "gns_path_end")
+  } else if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy == "gns_path_end") {
     var_0 thread path_end_pick_up_monitor(var_0);
-  else
+  } else {
     var_0 thread regular_node_pick_up_monitor(var_0);
+  }
 }
 
 path_start_pick_up_monitor(var_0) {
@@ -878,8 +912,9 @@ path_start_pick_up_monitor(var_0) {
         level.follow_the_light_player = var_2;
         level.current_light_node_progress_index++;
 
-        for(var_3 = 0; var_3 < 3; var_3++)
+        for(var_3 = 0; var_3 < 3; var_3++) {
           expand_light_node_path();
+        }
 
         var_2 turn_on_timer_hud(var_2);
         var_2 thread follow_the_light_timer_logic(var_2);
@@ -900,8 +935,9 @@ turn_on_timer_hud(var_0) {
 }
 
 turn_off_timer_hud(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 setclientomnvar("zom_show_gns_timer", 0);
+  }
 }
 
 follow_the_light_timer_logic(var_0) {
@@ -950,10 +986,11 @@ path_end_pick_up_monitor(var_0) {
 
 any_other_active_light_node(var_0) {
   foreach(var_2 in level.active_light_nodes) {
-    if(var_2 == var_0)
+    if(var_2 == var_0) {
       continue;
-    else
+    } else {
       return 1;
+    }
   }
 
   return 0;
@@ -1005,8 +1042,9 @@ fail_follow_the_light() {
 delete_all_active_light_nodes() {
   if(isDefined(level.active_light_nodes)) {
     foreach(var_1 in level.active_light_nodes) {
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         var_1 delete();
+      }
     }
 
     level.active_light_nodes = [];
@@ -1014,12 +1052,13 @@ delete_all_active_light_nodes() {
 }
 
 get_follow_the_light_node_model(var_0) {
-  if(isDefined(var_0.targetname) && var_0.targetname == "gns_path_start")
+  if(isDefined(var_0.targetname) && var_0.targetname == "gns_path_start") {
     return "zmb_8_bit_price_unlit";
-  else if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "gns_path_end")
+  } else if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "gns_path_end") {
     return "zmb_8_bit_price_unlit";
-  else
+  } else {
     return "final_gns_quest_origin";
+  }
 }
 
 apply_node_scriptable_state(var_0, var_1) {
@@ -1037,11 +1076,13 @@ apply_node_scriptable_state(var_0, var_1) {
 }
 
 get_regular_light_path_color(var_0) {
-  if(isDefined(var_0.light_color))
+  if(isDefined(var_0.light_color)) {
     return var_0.light_color;
+  }
 
-  if(level.paired_light_node_color.size == 0)
+  if(level.paired_light_node_color.size == 0) {
     level.paired_light_node_color = ["green", "yellow"];
+  }
 
   var_1 = scripts\engine\utility::random(level.paired_light_node_color);
   level.paired_light_node_color = scripts\engine\utility::array_remove(level.paired_light_node_color, var_1);
@@ -1057,8 +1098,9 @@ wait_players_trigger_start() {
     if(any_player_touch_volume(var_1)) {
       var_2++;
 
-      if(var_2 == var_0)
+      if(var_2 == var_0) {
         return;
+      }
     } else
       var_2 = 0;
 
@@ -1068,8 +1110,9 @@ wait_players_trigger_start() {
 
 any_player_touch_volume(var_0) {
   foreach(var_2 in level.players) {
-    if(var_2 istouching(var_0))
+    if(var_2 istouching(var_0)) {
       return 1;
+    }
   }
 
   return 0;
@@ -1107,8 +1150,9 @@ player_interact_monitor(var_0) {
           var_4 = place_a_queen_on_board_internal(var_3, 1, 0);
           var_4 hudoutlineenableforclient(var_2, 1, 1, 0);
 
-          if(check_eight_queen_solution())
+          if(check_eight_queen_solution()) {
             level notify("solve_eight_queen_problem");
+          }
         }
 
         wait 1;
@@ -1120,23 +1164,29 @@ player_interact_monitor(var_0) {
 }
 
 player_interact_with_chess_board(var_0, var_1) {
-  if(!isDefined(var_0.num_of_queen_pieces_on_me))
+  if(!isDefined(var_0.num_of_queen_pieces_on_me)) {
     return 0;
+  }
 
-  if(var_0.num_of_queen_pieces_on_me == 0)
+  if(var_0.num_of_queen_pieces_on_me == 0) {
     return 0;
+  }
 
-  if(isDefined(var_0.next_queen_piece_place_time) && gettime() < var_0.next_queen_piece_place_time)
+  if(isDefined(var_0.next_queen_piece_place_time) && gettime() < var_0.next_queen_piece_place_time) {
     return 0;
+  }
 
-  if(!player_in_play_space(var_0, var_1))
+  if(!player_in_play_space(var_0, var_1)) {
     return 0;
+  }
 
-  if(!player_looking_at_any_queen_piece(var_0))
+  if(!player_looking_at_any_queen_piece(var_0)) {
     return 0;
+  }
 
-  if(!var_0 useButtonPressed())
+  if(!var_0 useButtonPressed()) {
     return 0;
+  }
 
   return 1;
 }
@@ -1145,8 +1195,9 @@ update_player_monitor(var_0) {
   level endon("complete_solve_eight_queen");
 
   for(;;) {
-    foreach(var_2 in level.players)
-    update_queen_piece_state_for_player(var_2, var_0);
+    foreach(var_2 in level.players) {
+      update_queen_piece_state_for_player(var_2, var_0);
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -1154,8 +1205,9 @@ update_player_monitor(var_0) {
 
 update_queen_piece_state_for_player(var_0, var_1) {
   if(!player_in_play_space(var_0, var_1)) {
-    if(player_looking_at_any_queen_piece_struct(var_0))
+    if(player_looking_at_any_queen_piece_struct(var_0)) {
       clear_queen_piece_state_for_player(var_0);
+    }
 
     return;
   }
@@ -1164,8 +1216,9 @@ update_queen_piece_state_for_player(var_0, var_1) {
 
   if(isDefined(var_2)) {
     if(!looking_at_the_same_queen_piece(var_0, var_2)) {
-      if(player_looking_at_any_queen_piece(var_0))
+      if(player_looking_at_any_queen_piece(var_0)) {
         clear_queen_piece_state_for_player(var_0);
+      }
 
       set_queen_piece_struct_currently_looking_at(var_0, var_2);
     }
@@ -1173,10 +1226,11 @@ update_queen_piece_state_for_player(var_0, var_1) {
 }
 
 set_queen_piece_struct_currently_looking_at(var_0, var_1) {
-  if(is_empty_queen_piece_struct(var_1))
+  if(is_empty_queen_piece_struct(var_1)) {
     show_empty_queen_piece_for_player(var_0, var_1);
-  else
+  } else {
     show_queen_piece_outline_for_player(var_0, var_1);
+  }
 
   var_0.queen_piece_struct_currently_looking_at = var_1;
 }
@@ -1214,8 +1268,9 @@ get_queen_piece_struct_currently_looking_at(var_0, var_1) {
       if(isDefined(var_6.allow_pick_up) && var_6.allow_pick_up == 0) {
         continue;
       }
-      if(var_0 worldpointinreticle_circle(var_6.origin, 25, 75))
+      if(var_0 worldpointinreticle_circle(var_6.origin, 25, 75)) {
         var_2[var_2.size] = var_6;
+      }
     }
   }
 
@@ -1225,10 +1280,11 @@ get_queen_piece_struct_currently_looking_at(var_0, var_1) {
 clear_queen_piece_state_for_player(var_0) {
   var_1 = var_0.queen_piece_struct_currently_looking_at;
 
-  if(is_empty_queen_piece_struct(var_1))
+  if(is_empty_queen_piece_struct(var_1)) {
     clear_empty_queen_piece_for_player(var_0, var_1);
-  else
+  } else {
     hide_queen_piece_outline_for_player(var_0, var_1);
+  }
 
   var_0.queen_piece_struct_currently_looking_at = undefined;
 }
@@ -1241,8 +1297,9 @@ clear_empty_queen_piece_for_player(var_0, var_1) {
   if(any_other_player_looking_at_it(var_0, var_1)) {
     return;
   }
-  if(isDefined(var_1.empty_queen_piece))
+  if(isDefined(var_1.empty_queen_piece)) {
     var_1.empty_queen_piece delete();
+  }
 }
 
 any_other_player_looking_at_it(var_0, var_1) {
@@ -1250,8 +1307,9 @@ any_other_player_looking_at_it(var_0, var_1) {
     if(var_3 == var_0) {
       continue;
     }
-    if(isDefined(var_3.queen_piece_struct_currently_looking_at) && var_3.queen_piece_struct_currently_looking_at == var_1)
+    if(isDefined(var_3.queen_piece_struct_currently_looking_at) && var_3.queen_piece_struct_currently_looking_at == var_1) {
       return 1;
+    }
   }
 
   return 0;
@@ -1273,11 +1331,13 @@ place_a_queen_on_board(var_0) {
 }
 
 place_a_queen_on_board_internal(var_0, var_1, var_2) {
-  if(!isDefined(level.eight_queen_struct.active_queen_pieces))
+  if(!isDefined(level.eight_queen_struct.active_queen_pieces)) {
     level.eight_queen_struct.active_queen_pieces = [];
+  }
 
-  if(isDefined(var_0.empty_queen_piece))
+  if(isDefined(var_0.empty_queen_piece)) {
     var_0.empty_queen_piece delete();
+  }
 
   level.eight_queen_struct.active_queen_pieces[level.eight_queen_struct.active_queen_pieces.size] = var_0;
   return place_a_queen_piece_at(var_0, var_1, var_2, 1);
@@ -1308,13 +1368,15 @@ place_a_queen_piece_at(var_0, var_1, var_2, var_3) {
   var_4 = spawn("script_model", var_0.origin);
   var_4 setModel(get_queen_piece_model(var_1));
 
-  if(isDefined(var_0.angles))
+  if(isDefined(var_0.angles)) {
     var_4.angles = var_0.angles;
+  }
 
   var_0.queen_piece = var_4;
 
-  if(scripts\engine\utility::is_true(var_1))
+  if(scripts\engine\utility::is_true(var_1)) {
     var_0 thread player_pick_up_queen_piece_monitor(var_0, var_3);
+  }
 
   return var_4;
 }
@@ -1329,8 +1391,9 @@ player_pick_up_queen_piece_monitor(var_0, var_1) {
       if(player_use_queen_piece_struct(var_0, var_3)) {
         play_pick_up_vfx(var_0, var_3);
 
-        if(!isDefined(var_3.num_of_queen_pieces_on_me))
+        if(!isDefined(var_3.num_of_queen_pieces_on_me)) {
           var_3.num_of_queen_pieces_on_me = 0;
+        }
 
         if(scripts\engine\utility::is_true(var_1)) {
           var_3.next_queen_piece_place_time = gettime() + 1000;
@@ -1362,8 +1425,9 @@ eight_queen_player_disconnect_monitor(var_0) {
   var_0 endon("eight_queen_player_disconnect_monitor");
   var_0 waittill("disconnect");
 
-  if(isDefined(var_0.num_of_queen_pieces_on_me) && var_0.num_of_queen_pieces_on_me > 0)
+  if(isDefined(var_0.num_of_queen_pieces_on_me) && var_0.num_of_queen_pieces_on_me > 0) {
     level thread create_queen_pieces_for_pick_up(var_0.num_of_queen_pieces_on_me);
+  }
 }
 
 play_pick_up_vfx(var_0, var_1) {
@@ -1371,29 +1435,35 @@ play_pick_up_vfx(var_0, var_1) {
 }
 
 player_use_queen_piece_struct(var_0, var_1) {
-  if(isDefined(var_1.queen_piece_struct_currently_looking_at) && var_1.queen_piece_struct_currently_looking_at != var_0)
+  if(isDefined(var_1.queen_piece_struct_currently_looking_at) && var_1.queen_piece_struct_currently_looking_at != var_0) {
     return 0;
+  }
 
-  if(distance2dsquared(var_0.origin, var_1.origin) > 6400)
+  if(distance2dsquared(var_0.origin, var_1.origin) > 6400) {
     return 0;
+  }
 
-  if(!var_1 useButtonPressed())
+  if(!var_1 useButtonPressed()) {
     return 0;
+  }
 
-  if(!var_1 worldpointinreticle_circle(var_0.origin, 55, 75))
+  if(!var_1 worldpointinreticle_circle(var_0.origin, 55, 75)) {
     return 0;
+  }
 
   return 1;
 }
 
 remove_a_queen_piece_from(var_0) {
-  if(isDefined(var_0.queen_piece))
+  if(isDefined(var_0.queen_piece)) {
     var_0.queen_piece delete();
+  }
 }
 
 get_queen_piece_model(var_0) {
-  if(scripts\engine\utility::is_true(var_0))
+  if(scripts\engine\utility::is_true(var_0)) {
     return "misc_interior_chess_game_white_queen";
+  }
 
   return "misc_interior_chess_game_black_queen";
 }
@@ -1402,8 +1472,9 @@ remove_non_empty_queen_struct(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-    if(is_empty_queen_piece_struct(var_3))
+    if(is_empty_queen_piece_struct(var_3)) {
       var_1[var_1.size] = var_3;
+    }
   }
 
   return var_1;
@@ -1417,8 +1488,9 @@ set_up_controlling_struct() {
   var_0 = scripts\engine\utility::getStruct("eight_queen_control", "targetname");
   var_0.queen_piece_struct = [];
 
-  for(var_1 = 1; var_1 <= 8; var_1++)
+  for(var_1 = 1; var_1 <= 8; var_1++) {
     var_0.queen_piece_struct[var_1 + ""] = [];
+  }
 
   var_2 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
 
@@ -1458,28 +1530,34 @@ clear_queen_piece_outline_for_players() {
   if(isDefined(level.eight_queen_struct) && isDefined(level.eight_queen_struct.active_queen_pieces)) {
     foreach(var_1 in level.eight_queen_struct.active_queen_pieces) {
       if(isDefined(var_1.queen_piece)) {
-        foreach(var_3 in level.players)
-        var_1.queen_piece hudoutlinedisableforclient(var_3);
+        foreach(var_3 in level.players) {
+          var_1.queen_piece hudoutlinedisableforclient(var_3);
+        }
       }
     }
   }
 }
 
 check_eight_queen_solution() {
-  if(level.eight_queen_struct.active_queen_pieces.size < 8)
+  if(level.eight_queen_struct.active_queen_pieces.size < 8) {
     return 0;
+  }
 
-  if(fail_row_check())
+  if(fail_row_check()) {
     return 0;
+  }
 
-  if(fail_column_check())
+  if(fail_column_check()) {
     return 0;
+  }
 
-  if(fail_up_down_check())
+  if(fail_up_down_check()) {
     return 0;
+  }
 
-  if(fail_down_up_check())
+  if(fail_down_up_check()) {
     return 0;
+  }
 
   return 1;
 }
@@ -1488,8 +1566,9 @@ fail_row_check() {
   for(var_0 = 1; var_0 <= 8; var_0++) {
     var_1 = get_num_of_queen_along_path(var_0, 1, 0, 1);
 
-    if(var_1 > 1)
+    if(var_1 > 1) {
       return 1;
+    }
   }
 
   return 0;
@@ -1499,8 +1578,9 @@ fail_column_check() {
   for(var_0 = 1; var_0 <= 8; var_0++) {
     var_1 = get_num_of_queen_along_path(1, var_0, 1, 0);
 
-    if(var_1 > 1)
+    if(var_1 > 1) {
       return 1;
+    }
   }
 
   return 0;
@@ -1510,15 +1590,17 @@ fail_up_down_check() {
   for(var_0 = 1; var_0 <= 8; var_0++) {
     var_1 = get_num_of_queen_along_path(var_0, 1, 1, 1);
 
-    if(var_1 > 1)
+    if(var_1 > 1) {
       return 1;
+    }
   }
 
   for(var_0 = 1; var_0 <= 8; var_0++) {
     var_1 = get_num_of_queen_along_path(1, var_0, 1, 1);
 
-    if(var_1 > 1)
+    if(var_1 > 1) {
       return 1;
+    }
   }
 
   return 0;
@@ -1528,15 +1610,17 @@ fail_down_up_check() {
   for(var_0 = 1; var_0 <= 8; var_0++) {
     var_1 = get_num_of_queen_along_path(var_0, 1, -1, 1);
 
-    if(var_1 > 1)
+    if(var_1 > 1) {
       return 1;
+    }
   }
 
   for(var_0 = 1; var_0 <= 8; var_0++) {
     var_1 = get_num_of_queen_along_path(8, var_0, -1, 1);
 
-    if(var_1 > 1)
+    if(var_1 > 1) {
       return 1;
+    }
   }
 
   return 0;
@@ -1548,16 +1632,19 @@ get_num_of_queen_along_path(var_0, var_1, var_2, var_3) {
   var_6 = var_1;
 
   for(;;) {
-    if(var_5 > 8 || var_5 < 1)
+    if(var_5 > 8 || var_5 < 1) {
       return var_4;
+    }
 
-    if(var_6 > 8 || var_6 < 1)
+    if(var_6 > 8 || var_6 < 1) {
       return var_4;
+    }
 
     var_7 = get_queen_piece_struct_at("" + var_5, "" + var_6);
 
-    if(!is_empty_queen_piece_struct(var_7))
+    if(!is_empty_queen_piece_struct(var_7)) {
       var_4++;
+    }
 
     var_5 = var_5 + var_2;
     var_6 = var_6 + var_3;
@@ -1674,8 +1761,9 @@ secret_button_combo_watcher(var_0) {
         break;
       }
 
-      if(var_3 == level.gns_secret_button_combo.size - 1 && var_4 == var_2)
+      if(var_3 == level.gns_secret_button_combo.size - 1 && var_4 == var_2) {
         var_1 = 1;
+      }
     }
 
     if(var_1 == 1) {
@@ -1701,8 +1789,9 @@ set_up_secret_button_notify(var_0) {
 complete_secret_button_combo() {
   level notify("complete_secret_button_bombo");
 
-  foreach(var_1 in level.players)
-  var_1 thread scripts\cp\cp_vo::try_to_play_vo("access_ghostnskulls", "final_comment_vo");
+  foreach(var_1 in level.players) {
+    var_1 thread scripts\cp\cp_vo::try_to_play_vo("access_ghostnskulls", "final_comment_vo");
+  }
 
   scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::notify_activation_progress(6);
 }
@@ -1780,8 +1869,9 @@ wait_for_player_activation() {
     }
 
     if(var_2) {
-      if(isDefined(level.gns_game_console_vfx))
+      if(isDefined(level.gns_game_console_vfx)) {
         level.gns_game_console_vfx delete();
+      }
 
       return;
     }
@@ -1904,17 +1994,19 @@ get_moving_targets_in_combo(var_0) {
 cp_final_should_moving_target_explode(var_0, var_1) {
   var_2 = get_ghost_color(var_0);
 
-  if(isDefined(var_1.color) && var_1.color != var_2)
+  if(isDefined(var_1.color) && var_1.color != var_2) {
     return 0;
+  }
 
   return 1;
 }
 
 get_ghost_color(var_0) {
-  if(is_bomb(var_0))
+  if(is_bomb(var_0)) {
     return strtok(var_0.color, "_")[0];
-  else
+  } else {
     return var_0.color;
+  }
 }
 
 cp_final_ghost_color_manager() {
@@ -1931,42 +2023,50 @@ cp_final_ghost_color_manager() {
   var_10 = 0;
 
   foreach(var_12 in level.zombie_ghosts) {
-    if(var_12.color == "red_bomb")
+    if(var_12.color == "red_bomb") {
       var_7++;
+    }
 
-    if(var_12.color == "green_bomb")
+    if(var_12.color == "green_bomb") {
       var_8++;
+    }
 
-    if(var_12.color == "yellow_bomb")
+    if(var_12.color == "yellow_bomb") {
       var_9++;
+    }
 
-    if(var_12.color == "blue_bomb")
+    if(var_12.color == "blue_bomb") {
       var_10++;
+    }
 
-    if(var_12.color == "green")
+    if(var_12.color == "green") {
       var_4++;
+    }
 
-    if(var_12.color == "yellow")
+    if(var_12.color == "yellow") {
       var_5++;
+    }
 
-    if(var_12.color == "blue")
+    if(var_12.color == "blue") {
       var_6++;
+    }
   }
 
-  if(var_4 < var_0)
+  if(var_4 < var_0) {
     level.zombie_ghost_model = "zombie_ghost_cube_green";
-  else if(var_5 < var_1)
+  } else if(var_5 < var_1) {
     level.zombie_ghost_model = "zombie_ghost_cube_yellow";
-  else if(var_6 < var_2)
+  } else if(var_6 < var_2) {
     level.zombie_ghost_model = "zombie_ghost_cube_blue";
-  else if(var_7 < var_3)
+  } else if(var_7 < var_3) {
     level.zombie_ghost_model = "zombie_ghost_bomb_red";
-  else if(var_8 < var_3)
+  } else if(var_8 < var_3) {
     level.zombie_ghost_model = "zombie_ghost_bomb_green";
-  else if(var_9 < var_3)
+  } else if(var_9 < var_3) {
     level.zombie_ghost_model = "zombie_ghost_bomb_yellow";
-  else
+  } else {
     level.zombie_ghost_model = "zombie_ghost_bomb_blue";
+  }
 }
 
 final_get_fake_ghost_model_func(var_0) {
@@ -1978,10 +2078,11 @@ final_get_fake_ghost_model_func(var_0) {
 }
 
 cp_final_process_moving_target_hit_with_right_color(var_0, var_1, var_2) {
-  if(is_bomb(var_2))
+  if(is_bomb(var_2)) {
     level thread explode_combo_group(var_0, var_1);
-  else
+  } else {
     moving_target_hit_by_cube(var_0, var_1, var_2);
+  }
 }
 
 explode_combo_group(var_0, var_1) {
@@ -2022,9 +2123,9 @@ moving_target_hit_by_cube(var_0, var_1, var_2) {
 
   var_3 = get_same_color_moving_targets_in_same_group(var_0);
 
-  if(var_3.size == 1)
+  if(var_3.size == 1) {
     create_new_combo_group([var_0]);
-  else {
+  } else {
     add_to_combo_group(var_3, var_0);
 
     foreach(var_5 in var_3) {
@@ -2043,8 +2144,9 @@ create_new_combo_group(var_0) {
 
 get_available_combo_group_index() {
   for(var_0 = 0; var_0 < 100; var_0++) {
-    if(!isDefined(level.moving_target_combo_group[var_0]))
+    if(!isDefined(level.moving_target_combo_group[var_0])) {
       return var_0;
+    }
   }
 }
 
@@ -2067,14 +2169,15 @@ get_combo_group_index(var_0) {
     var_4 = get_combo_group_index_for(var_3);
 
     if(isDefined(var_4)) {
-      if(!scripts\engine\utility::array_contains(var_1, var_4))
+      if(!scripts\engine\utility::array_contains(var_1, var_4)) {
         var_1[var_1.size] = var_4;
+      }
     }
   }
 
-  if(var_1.size == 1)
+  if(var_1.size == 1) {
     return var_1[0];
-  else {
+  } else {
     var_6 = [];
 
     foreach(var_4 in var_1) {
@@ -2101,8 +2204,9 @@ get_combo_group_at_index(var_0) {
 
 get_combo_group_index_for(var_0) {
   foreach(var_3, var_2 in level.moving_target_combo_group) {
-    if(scripts\engine\utility::array_contains(var_2, var_0))
+    if(scripts\engine\utility::array_contains(var_2, var_0)) {
       return var_3;
+    }
   }
 
   return undefined;
@@ -2114,13 +2218,15 @@ get_same_color_moving_targets_in_same_group(var_0) {
   var_3 = undefined;
 
   foreach(var_6, var_5 in level.moving_target_groups) {
-    if(scripts\engine\utility::array_contains(var_5, var_0))
+    if(scripts\engine\utility::array_contains(var_5, var_0)) {
       var_3 = var_5;
+    }
   }
 
   foreach(var_8 in var_3) {
-    if(isDefined(var_8.color) && var_8.color == var_0.color && distancesquared(var_8.origin, var_0.origin) <= var_1)
+    if(isDefined(var_8.color) && var_8.color == var_0.color && distancesquared(var_8.origin, var_0.origin) <= var_1) {
       var_2[var_2.size] = var_8;
+    }
   }
 
   return var_2;
@@ -2131,8 +2237,9 @@ break_combo_group_for(var_0) {
 
   if(isDefined(var_0.linked_moving_targets)) {
     foreach(var_2 in var_0.linked_moving_targets) {
-      if(isDefined(var_2.linked_moving_targets))
+      if(isDefined(var_2.linked_moving_targets)) {
         var_2.linked_moving_targets = scripts\engine\utility::array_remove(var_2.linked_moving_targets, var_0);
+      }
     }
   }
 }
@@ -2158,8 +2265,9 @@ final_gns_player_reward_func() {
     var_1 thread scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::give_gns_base_reward(var_1);
     var_1 scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::set_consumable_meter_scalar(var_1, 2);
 
-    if(!scripts\engine\utility::is_true(level.entered_thru_card))
+    if(!scripts\engine\utility::is_true(level.entered_thru_card)) {
       var_1 scripts\cp\zombies\achievement::update_achievement("CRACKING_SKULLS", 1);
+    }
   }
 
   level notify("end_this_thread_of_gns_fnf_card");

@@ -39,11 +39,13 @@ _id_E7FF() {
   var_1 thread _id_C9B7(var_2);
   level._id_13EF6 thread scripts\sp\maps\sa_assassination\sa_assassination_util::_id_3C0C("salter_intro_path");
 
-  if(!level.player scripts\sp\utility::_id_65DF("player_inside_ship"))
+  if(!level.player scripts\sp\utility::_id_65DF("player_inside_ship")) {
     level.player scripts\sp\utility::_id_65E0("player_inside_ship");
+  }
 
-  while(!level.player scripts\sp\utility::_id_65DB("player_inside_ship"))
+  while(!level.player scripts\sp\utility::_id_65DB("player_inside_ship")) {
     wait 1;
+  }
 
   var_3 delete();
   var_4 delete();
@@ -68,14 +70,16 @@ _id_10668() {
   level._id_A359 = scripts\sp\utility::_id_8200("jackal_swarm_spawner", "targetname");
   level._id_A35A = scripts\engine\utility::getStructArray("space_intro_sweep", "targetname");
 
-  if(!isDefined(level._id_7477))
+  if(!isDefined(level._id_7477)) {
     level._id_7477 = [];
+  }
 
   var_1 = var_0 scripts\sp\utility::_id_7A97();
 
   foreach(var_3 in var_1) {
-    while(isDefined(var_0._id_1323B))
+    while(isDefined(var_0._id_1323B)) {
       scripts\engine\utility::waitframe();
+    }
 
     var_0.origin = var_3.origin;
     var_0.angles = var_3.angles;
@@ -83,16 +87,18 @@ _id_10668() {
     level._id_7477[level._id_7477.size] = var_4;
     var_5 = [];
 
-    if(isDefined(var_3.target))
+    if(isDefined(var_3.target)) {
       var_5 = getcsplineidarray(var_3.target);
+    }
 
-    if(var_5.size > 0)
+    if(var_5.size > 0) {
       var_4 thread _id_5207(var_5);
+    }
   }
 }
 
 _id_7477() {
-  var_0["destroyer"] = scripts\sp\utility::_id_8200("cadre_destroyer", "targetname");
+  var_0["destroyer"] = ::scripts\sp\utility::_id_8200("cadre_destroyer", "targetname");
   level._id_A35A = scripts\engine\utility::getStructArray("space_intro_sweep", "targetname");
   level._id_7477 = [];
   thread scripts\sp\maps\sa_assassination\sa_assassination_audio::_id_395B();
@@ -101,8 +107,9 @@ _id_7477() {
     var_3 = var_2 scripts\sp\utility::_id_7A97();
 
     foreach(var_5 in var_3) {
-      while(isDefined(var_2._id_1323B))
+      while(isDefined(var_2._id_1323B)) {
         scripts\engine\utility::waitframe();
+      }
 
       if(isDefined(var_5.script_delay)) {
         var_2 scripts\engine\utility::delaythread(var_5.script_delay, ::_id_749B, var_5, 0);
@@ -135,12 +142,14 @@ _id_749B(var_0, var_1) {
     self dontinterpolate();
     self.origin = var_0.origin;
 
-    if(isDefined(var_0.angles))
+    if(isDefined(var_0.angles)) {
       self.angles = var_0.angles;
+    }
   }
 
-  while(isDefined(self._id_1323B))
+  while(isDefined(self._id_1323B)) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\sp\utility::_id_1747(scripts\sp\maps\sa_assassination\sa_assassination_util::_id_F3C2, ::_id_74A3);
   self._id_ED7C = "off off";
@@ -150,23 +159,27 @@ _id_749B(var_0, var_1) {
   if(!var_1) {
     var_3 = [];
 
-    if(isDefined(var_0.target))
+    if(isDefined(var_0.target)) {
       var_3 = getcsplineidarray(var_0.target);
+    }
 
-    if(var_3.size > 0)
+    if(var_3.size > 0) {
       var_2 thread _id_5207(var_3);
+    }
 
-    if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "carrier")
+    if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "carrier") {
       _id_5200();
+    }
 
     var_4 = spawn("script_origin", var_2.origin);
     var_4.angles = var_2.angles;
     var_2 linkTo(var_4);
 
-    if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "frigate")
+    if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "frigate") {
       var_4 moveTo(var_2.origin + anglesToForward(var_2.angles) * 32000, 120, 0, 30);
-    else
+    } else {
       var_4 moveTo(var_2.origin + anglesToForward(var_2.angles) * 19000, 120, 0, 30);
+    }
   }
 
   return var_2;
@@ -248,8 +261,9 @@ _id_74A4() {
 
 _id_5207(var_0) {
   foreach(var_2 in var_0) {
-    while(isDefined(level._id_A359._id_1323B))
+    while(isDefined(level._id_A359._id_1323B)) {
       scripts\engine\utility::waitframe();
+    }
 
     level._id_A359.origin = getcsplinepointposition(var_2, 0);
     var_3 = level._id_A359 scripts\sp\utility::_id_10808();
@@ -271,11 +285,13 @@ _id_5200() {
     var_0.angles = var_3.angles;
     var_5 = var_0 scripts\sp\utility::_id_10808();
 
-    while(isDefined(var_0._id_1323B))
+    while(isDefined(var_0._id_1323B)) {
       scripts\engine\utility::waitframe();
+    }
 
-    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "raise")
+    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "raise") {
       var_4 = 1;
+    }
 
     var_5 thread _id_AA70(var_3.target, var_4);
     level._id_7477[level._id_7477.size] = var_5;
@@ -299,10 +315,11 @@ _id_AA70(var_0, var_1) {
   var_4 = getvehiclenode(var_0, "targetname");
   var_5 = scripts\engine\utility::getStruct(var_0, "targetname");
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     thread scripts\sp\vehicle::_id_1321A(var_5, 1);
-  else if(isDefined(var_4))
+  } else if(isDefined(var_4)) {
     thread scripts\sp\vehicle::_id_1321A(var_4);
+  }
 
   scripts\sp\vehicle_paths::_id_845A(self);
   self waittill("reached_dynamic_path_end");
@@ -314,8 +331,9 @@ _id_5201() {
   var_0 = getcsplineidarray("jackal_spotlight_spline");
 
   foreach(var_2 in var_0) {
-    while(isDefined(level._id_A359._id_1323B))
+    while(isDefined(level._id_A359._id_1323B)) {
       scripts\engine\utility::waitframe();
+    }
 
     level._id_A359.origin = getcsplinepointposition(var_2, 0);
     var_3 = level._id_A359 scripts\sp\utility::_id_10808();
@@ -338,8 +356,9 @@ _id_6AE4() {
     var_1 = level.player getvelocity();
     var_2 = distance(level.player.origin, var_0.origin);
 
-    if(var_1[0] > -100 && var_2 > 512)
+    if(var_1[0] > -100 && var_2 > 512) {
       level.player setvelocity(var_1 + (-10, 0, 0));
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -351,8 +370,9 @@ _id_949D() {
   objective_add(scripts\sp\utility::_id_C264("infil_destroyer"), "current", &"SA_ASSASSINATION_ENTER_SDF_GALAXIUS", var_1.origin);
   _id_0F16::_id_C278(scripts\sp\utility::_id_C264("infil_destroyer"));
 
-  while(!scripts\engine\utility::flag("hatch_used"))
+  while(!scripts\engine\utility::flag("hatch_used")) {
     wait 0.2;
+  }
 
   scripts\sp\utility::_id_C27C(scripts\sp\utility::_id_C264("infil_destroyer"));
 }
@@ -616,8 +636,9 @@ _id_76B5(var_0) {
 _id_1296A() {
   var_0 = getEntArray("salt_light", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setlightintensity(0);
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(0);
+  }
 }
 
 _id_76B6() {
@@ -690,8 +711,9 @@ _id_15B2() {
   var_0 = undefined;
   var_0 = scripts\engine\utility::getStruct("ftl_destroyer_panel", "script_noteworthy");
 
-  while(!scripts\engine\utility::flag("hatch_ready"))
+  while(!scripts\engine\utility::flag("hatch_ready")) {
     wait 0.5;
+  }
 
   var_0 _id_0E46::_id_48C4(undefined, (0, 0, 0), &"sa_assassination_open_hatch", undefined, 650, 156, 1);
   var_0 thread _id_8C41();
@@ -732,13 +754,15 @@ _id_4271() {
 }
 
 _id_4F6D() {
-  if(!level.player scripts\sp\utility::_id_65DF("player_inside_ship"))
+  if(!level.player scripts\sp\utility::_id_65DF("player_inside_ship")) {
     level.player scripts\sp\utility::_id_65E0("player_inside_ship");
+  }
 
   level.player scripts\sp\utility::_id_65E1("player_inside_ship");
 
-  if(isDefined(level._id_3965) && !level._id_3965 scripts\sp\utility::_id_65DF("player_inside_ship"))
+  if(isDefined(level._id_3965) && !level._id_3965 scripts\sp\utility::_id_65DF("player_inside_ship")) {
     level._id_3965 scripts\sp\utility::_id_65E0("player_inside_ship");
+  }
 
   level._id_3965 scripts\sp\utility::_id_65E1("player_inside_ship");
 }
@@ -751,11 +775,13 @@ _id_9648() {
 
   foreach(var_3 in var_1) {
     if(isDefined(var_3.script_noteworthy)) {
-      if(var_3.script_noteworthy == "start")
+      if(var_3.script_noteworthy == "start") {
         level._id_A56A.start = var_3;
+      }
 
-      if(var_3.script_noteworthy == "end")
+      if(var_3.script_noteworthy == "end") {
         level._id_A56A.end = var_3;
+      }
     }
   }
 
@@ -766,8 +792,9 @@ _id_9648() {
 }
 
 _id_E803() {
-  foreach(var_1 in self)
-  var_1.origin = var_1._id_C73A + self.start - self.origin;
+  foreach(var_1 in self) {
+    var_1.origin = var_1._id_C73A + self.start - self.origin;
+  }
 }
 
 _id_DC97() {
@@ -794,11 +821,13 @@ _id_23F2() {
         var_1 linkTo(self);
       }
 
-      if(var_6.script_noteworthy == "blowoff_fx")
+      if(var_6.script_noteworthy == "blowoff_fx") {
         var_2[var_2.size] = var_6 scripts\engine\utility::spawn_tag_origin();
+      }
 
-      if(var_6.script_noteworthy == "move_dest")
+      if(var_6.script_noteworthy == "move_dest") {
         var_3 = var_6;
+      }
     }
   }
 
@@ -812,8 +841,9 @@ _id_23F2() {
   foreach(var_9 in var_2) {
     playFXOnTag(scripts\engine\utility::getfx("ftl_dust_blowoff"), var_9, "tag_origin");
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_9 moveTo(var_3.origin, var_4, 0, var_4);
+    }
 
     var_9 thread _id_50B2(4);
   }

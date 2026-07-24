@@ -20,8 +20,9 @@ setupslasheraction(var_0, var_1, var_2, var_3) {
   var_4.fntick = var_2;
   var_4.fnend = var_3;
 
-  if(!isDefined(self.actions))
+  if(!isDefined(self.actions)) {
     self.actions = [];
+  }
 
   self.actions[var_0] = var_4;
 }
@@ -45,11 +46,13 @@ setupslasherstates() {
 pickbetterenemy(var_0, var_1) {
   if(isDefined(self.slasherenemy)) {
     if(var_0 == self.slasherenemy) {
-      if(gettime() - self.slasherenemystarttime < 3000)
+      if(gettime() - self.slasherenemystarttime < 3000) {
         return var_0;
+      }
     } else if(var_1 == self.slasherenemy) {
-      if(gettime() - self.slasherenemystarttime < 3000)
+      if(gettime() - self.slasherenemystarttime < 3000) {
         return var_1;
+      }
     }
   }
 
@@ -57,8 +60,9 @@ pickbetterenemy(var_0, var_1) {
   var_3 = self cansee(var_1);
 
   if(var_2 != var_3) {
-    if(var_2)
+    if(var_2) {
       return var_0;
+    }
 
     return var_1;
   }
@@ -66,8 +70,9 @@ pickbetterenemy(var_0, var_1) {
   var_4 = distancesquared(self.origin, var_0.origin);
   var_5 = distancesquared(self.origin, var_1.origin);
 
-  if(var_4 < var_5)
+  if(var_4 < var_5) {
     return var_0;
+  }
 
   return var_1;
 }
@@ -118,8 +123,9 @@ updateslashereveryframe(var_0) {
       self.lastenemysighttime = gettime();
       self.lastenemysightpos = var_1.origin;
 
-      if(!isDefined(self.enemyreacquiredtime))
+      if(!isDefined(self.enemyreacquiredtime)) {
         self.enemyreacquiredtime = self.lastenemysighttime;
+      }
     } else
       self.enemyreacquiredtime = undefined;
   } else {
@@ -157,17 +163,19 @@ sawbladeattack_aim_begin(var_0, var_1) {
 sawbladeattack_aim_tick(var_0) {
   var_1 = scripts\mp\agents\slasher\slasher_agent::getenemy();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return anim.failure;
+  }
 
   var_2 = scripts\mp\agents\slasher\slasher_tunedata::gettunedata();
   self.lookposition = calcenemytargetpos(var_2.sawblade_min_randomness, var_2.sawblade_max_randomness);
 
   if(gettime() >= self.aim_done_time) {
-    if(self cansee(var_1))
+    if(self cansee(var_1)) {
       scripts\aitypes\slasher\bt_state_api::btstate_transitionstate(var_0, "shoot");
-    else
+    } else {
       self.aim_done_time = gettime() + 100;
+    }
   }
 
   return 1;
@@ -208,8 +216,9 @@ grenadethrow_begin(var_0) {
 }
 
 grenadethrow_tick(var_0) {
-  if(scripts\aitypes\slasher\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\slasher\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.failure;
 }
@@ -232,10 +241,11 @@ melee_begin(var_0) {
     var_3 = var_2 getvelocity();
     var_4 = length2dsquared(var_3);
 
-    if(var_4 < 144)
+    if(var_4 < 144) {
       self clearpath();
-    else
+    } else {
       self.bmovingmelee = 1;
+    }
   } else
     self clearpath();
 
@@ -247,8 +257,9 @@ melee_begin(var_0) {
 melee_tick(var_0) {
   self clearpath();
 
-  if(scripts\aitypes\slasher\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\slasher\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.failure;
 }
@@ -271,11 +282,13 @@ block_begin(var_0) {
 block_tick(var_0) {
   var_1 = scripts\aitypes\slasher\bt_state_api::btstate_getinstancedata(var_0);
 
-  if(gettime() > var_1.blockendtime)
+  if(gettime() > var_1.blockendtime) {
     return anim.failure;
+  }
 
-  if(gettime() - self.damageaccumulator.lastdamagetime > scripts\mp\agents\slasher\slasher_tunedata::gettunedata().quit_block_if_no_damage_time)
+  if(gettime() - self.damageaccumulator.lastdamagetime > scripts\mp\agents\slasher\slasher_tunedata::gettunedata().quit_block_if_no_damage_time) {
     return anim.failure;
+  }
 
   return anim.running;
 }
@@ -294,8 +307,9 @@ summon_begin(var_0) {
 }
 
 summon_tick(var_0) {
-  if(scripts\aitypes\slasher\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\slasher\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.failure;
 }
@@ -315,8 +329,9 @@ teleport_begin(var_0) {
 }
 
 teleport_tick(var_0) {
-  if(scripts\aitypes\slasher\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\slasher\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.failure;
 }
@@ -344,14 +359,17 @@ taunt_begin(var_0) {
 }
 
 taunt_tick(var_0) {
-  if(tryblock())
+  if(tryblock()) {
     return anim.failure;
+  }
 
-  if(trymeleeattacks())
+  if(trymeleeattacks()) {
     return anim.failure;
+  }
 
-  if(scripts\aitypes\slasher\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\slasher\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.failure;
 }
@@ -366,8 +384,9 @@ taunt_end(var_0) {
 debughandler_begin(var_0) {}
 
 debughandler_tick(var_0) {
-  if(!isDefined(level.slasherdebugdestination))
+  if(!isDefined(level.slasherdebugdestination)) {
     return anim.failure;
+  }
 
   self scragentsetgoalRadius(16);
   self scragentsetgoalpos(level.slasherdebugdestination);
@@ -390,20 +409,24 @@ ramattack_begin(var_0) {
 ramattack_tick(var_0) {
   var_1 = scripts\mp\agents\slasher\slasher_agent::getenemy();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return anim.failure;
+  }
 
-  if(!isDefined(self.curmeleetarget))
+  if(!isDefined(self.curmeleetarget)) {
     return anim.failure;
+  }
 
-  if(var_1 != self.curmeleetarget)
+  if(var_1 != self.curmeleetarget) {
     return anim.failure;
+  }
 
   var_2 = distancesquared(self.origin, var_1.origin);
   var_3 = scripts\mp\agents\slasher\slasher_tunedata::gettunedata();
 
-  if(var_2 > var_3.ram_attack_abort_dist_sq)
+  if(var_2 > var_3.ram_attack_abort_dist_sq) {
     return anim.failure;
+  }
 
   if(scripts\aitypes\slasher\bt_state_api::btstate_tickstates(var_0)) {
     var_4 = scripts\aitypes\slasher\bt_state_api::btstate_getcurrentstatename(var_0);
@@ -413,8 +436,9 @@ ramattack_tick(var_0) {
       var_6 = self getvelocity();
 
       if(vectordot(var_5, var_6) < 0) {
-        if(var_2 < var_3.ram_attack_chase_radius_if_playing_chicken * var_3.ram_attack_chase_radius_if_playing_chicken)
+        if(var_2 < var_3.ram_attack_chase_radius_if_playing_chicken * var_3.ram_attack_chase_radius_if_playing_chicken) {
           ramattack_chasedone(var_0, "success");
+        }
       }
     }
 
@@ -464,8 +488,9 @@ groundpoundattack_begin(var_0) {
 }
 
 groundpoundattack_tick(var_0) {
-  if(scripts\aitypes\slasher\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\slasher\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.failure;
 }
@@ -489,18 +514,21 @@ sawbladeattack_tick(var_0) {
   if(isDefined(var_1)) {
     var_2 = distancesquared(self.origin, var_1.origin);
 
-    if(trymeleeattacks(var_2))
+    if(trymeleeattacks(var_2)) {
       return anim.failure;
+    }
 
-    if(tryblock())
+    if(tryblock()) {
       return anim.failure;
+    }
   } else
     return anim.failure;
 
   scripts\aitypes\slasher\bt_state_api::btstate_tickstates(var_0);
 
-  if(gettime() >= scripts\aitypes\slasher\bt_state_api::btstate_getinstancedata(var_0).attackendtime)
+  if(gettime() >= scripts\aitypes\slasher\bt_state_api::btstate_getinstancedata(var_0).attackendtime) {
     return anim.failure;
+  }
 
   return anim.running;
 }
@@ -518,22 +546,27 @@ trysawbladeattack(var_0) {
   var_1 = scripts\mp\agents\slasher\slasher_tunedata::gettunedata();
   var_2 = gettime();
 
-  if(!isDefined(self.nextsawbladeattacktime))
+  if(!isDefined(self.nextsawbladeattacktime)) {
     self.nextsawbladeattacktime = var_2 + randomintrange(var_1.min_sawblade_attack_interval, var_1.max_sawblade_attack_interval);
+  }
 
-  if(var_2 < self.nextsawbladeattacktime)
+  if(var_2 < self.nextsawbladeattacktime) {
     return 0;
+  }
 
-  if(var_0 < var_1.min_sawblade_attack_dist_sq)
+  if(var_0 < var_1.min_sawblade_attack_dist_sq) {
     return 0;
+  }
 
-  if(var_0 > var_1.max_sawblade_attack_dist_sq)
+  if(var_0 > var_1.max_sawblade_attack_dist_sq) {
     return 0;
+  }
 
   var_3 = scripts\mp\agents\slasher\slasher_agent::getenemy();
 
-  if(!isDefined(self.enemyreacquiredtime) || var_2 - self.enemyreacquiredtime < var_1.min_clear_los_time_before_firing_saw)
+  if(!isDefined(self.enemyreacquiredtime) || var_2 - self.enemyreacquiredtime < var_1.min_clear_los_time_before_firing_saw) {
     return 0;
+  }
 
   var_4 = anglesToForward(self.angles);
   var_5 = var_3.origin - self.origin;
@@ -542,8 +575,9 @@ trysawbladeattack(var_0) {
   var_5 = vectorNormalize(var_5);
   var_6 = vectordot(var_4, var_5);
 
-  if(var_6 < -0.259)
+  if(var_6 < -0.259) {
     return 0;
+  }
 
   var_7 = scripts\common\trace::create_contents(0, 1, 1, 0, 1, 0, 0);
   var_8 = [];
@@ -563,16 +597,19 @@ trysawbladeattack(var_0) {
 }
 
 tryramattack(var_0) {
-  if(isDefined(self.nextramattacktesttime) && gettime() < self.nextramattacktesttime)
+  if(isDefined(self.nextramattacktesttime) && gettime() < self.nextramattacktesttime) {
     return 0;
+  }
 
   var_1 = scripts\mp\agents\slasher\slasher_tunedata::gettunedata();
 
-  if(var_0 < var_1.ram_attack_mindist_sq)
+  if(var_0 < var_1.ram_attack_mindist_sq) {
     return 0;
+  }
 
-  if(var_0 > var_1.ram_attack_maxdist_sq)
+  if(var_0 > var_1.ram_attack_maxdist_sq) {
     return 0;
+  }
 
   self.nextramattacktesttime = gettime() + 5000;
   var_2 = scripts\mp\agents\slasher\slasher_agent::getenemy();
@@ -583,8 +620,9 @@ tryramattack(var_0) {
   var_5 = vectorNormalize((var_5[0], var_5[1], 0));
   var_6 = vectordot(var_3, var_5);
 
-  if(var_6 < 0.707)
+  if(var_6 < 0.707) {
     return 0;
+  }
 
   if(!_func_2AC(self.origin, var_4, self)) {
     self.nextramattacktesttime = gettime() + 500;
@@ -598,12 +636,14 @@ tryramattack(var_0) {
 trytaunt(var_0) {
   var_1 = scripts\mp\agents\slasher\slasher_tunedata::gettunedata();
 
-  if(!isDefined(self.nexttaunttime))
+  if(!isDefined(self.nexttaunttime)) {
     self.nexttaunttime = gettime() + randomintrange(var_1.min_taunt_interval, var_1.max_taunt_interval);
+  }
 
   if(!scripts\engine\utility::is_true(self.brecentlyteleported)) {
-    if(var_0 < var_1.min_dist_to_enemy_for_taunt_sq)
+    if(var_0 < var_1.min_dist_to_enemy_for_taunt_sq) {
       return 0;
+    }
   }
 
   if(gettime() > self.nexttaunttime) {
@@ -620,11 +660,13 @@ trytaunt(var_0) {
 trysummon(var_0) {
   var_1 = scripts\mp\agents\slasher\slasher_tunedata::gettunedata();
 
-  if(!isDefined(self.nextsummontime))
+  if(!isDefined(self.nextsummontime)) {
     self.nextsummontime = gettime() + randomintrange(var_1.min_summon_interval, var_1.max_summon_interval);
+  }
 
-  if(gettime() < self.nextsummontime)
+  if(gettime() < self.nextsummontime) {
     return 0;
+  }
 
   if(randomint(100) < var_1.summon_chance) {
     self.desiredaction = "summon";
@@ -636,11 +678,13 @@ trysummon(var_0) {
 }
 
 tryblock() {
-  if(!isDefined(self.damageaccumulator))
+  if(!isDefined(self.damageaccumulator)) {
     return 0;
+  }
 
-  if(isDefined(self.nextblocktime) && gettime() < self.nextblocktime)
+  if(isDefined(self.nextblocktime) && gettime() < self.nextblocktime) {
     return 0;
+  }
 
   var_0 = scripts\mp\agents\slasher\slasher_tunedata::gettunedata();
 
@@ -688,14 +732,16 @@ findteleportdest() {
 }
 
 tryemergencyteleport(var_0) {
-  if(isDefined(self.nextteleporttesttime) && gettime() < self.nextteleporttesttime)
+  if(isDefined(self.nextteleporttesttime) && gettime() < self.nextteleporttesttime) {
     return 0;
+  }
 
   var_1 = scripts\mp\agents\slasher\slasher_tunedata::gettunedata();
   var_2 = gettime();
 
-  if(self.health >= self.last_health)
+  if(self.health >= self.last_health) {
     return 0;
+  }
 
   self.last_health = self.health;
   var_3 = 0;
@@ -712,16 +758,18 @@ tryemergencyteleport(var_0) {
     }
   }
 
-  if(!isDefined(self.lastenemyengagetime))
+  if(!isDefined(self.lastenemyengagetime)) {
     self.lastenemyengagetime = var_2;
+  }
 
   if(!isDefined(self.findteleportposstatus)) {
     thread findjumpscareteleportpos(scripts\mp\agents\slasher\slasher_agent::getenemy(), var_1.min_jump_scare_dist_to_player, var_1.max_jump_scare_dist_to_player);
     return 0;
   }
 
-  if(self.findteleportposstatus == "working")
+  if(self.findteleportposstatus == "working") {
     return 0;
+  }
 
   if(self.findteleportposstatus == "invalid") {
     self.findteleportposstatus = undefined;
@@ -745,8 +793,9 @@ tryemergencyteleport(var_0) {
 }
 
 tryteleport(var_0) {
-  if(isDefined(self.nextteleporttesttime) && gettime() < self.nextteleporttesttime)
+  if(isDefined(self.nextteleporttesttime) && gettime() < self.nextteleporttesttime) {
     return 0;
+  }
 
   var_1 = scripts\mp\agents\slasher\slasher_tunedata::gettunedata();
   var_2 = gettime();
@@ -764,22 +813,24 @@ tryteleport(var_0) {
     }
   }
 
-  if(!isDefined(self.lastenemyengagetime))
+  if(!isDefined(self.lastenemyengagetime)) {
     self.lastenemyengagetime = var_2;
+  }
 
-  if(var_2 - self.lastenemysighttime > var_1.no_los_wait_time_before_teleport)
+  if(var_2 - self.lastenemysighttime > var_1.no_los_wait_time_before_teleport) {
     var_3 = 1;
-  else if(var_2 - self.lastenemyengagetime > var_1.attempt_teleport_if_no_engagement_within_time) {
+  } else if(var_2 - self.lastenemyengagetime > var_1.attempt_teleport_if_no_engagement_within_time) {
     if(!isDefined(var_0)) {
       var_5 = scripts\mp\agents\slasher\slasher_agent::getenemy();
       var_0 = distancesquared(self.origin, var_5.origin);
     }
 
-    if(var_0 > var_1.teleport_min_dist_to_enemy_to_teleport_sq)
+    if(var_0 > var_1.teleport_min_dist_to_enemy_to_teleport_sq) {
       var_3 = 1;
-    else if(isDefined(var_4)) {
-      if(var_4 * var_4 > var_1.teleport_min_dist_to_enemy_to_teleport_sq)
+    } else if(isDefined(var_4)) {
+      if(var_4 * var_4 > var_1.teleport_min_dist_to_enemy_to_teleport_sq) {
         var_3 = 1;
+      }
     }
   }
 
@@ -795,8 +846,9 @@ tryteleport(var_0) {
     return 0;
   }
 
-  if(self.findteleportposstatus == "working")
+  if(self.findteleportposstatus == "working") {
     return 0;
+  }
 
   if(self.findteleportposstatus == "invalid") {
     self.findteleportposstatus = undefined;
@@ -822,24 +874,28 @@ tryteleport(var_0) {
 trymeleeattacks(var_0) {
   var_1 = scripts\mp\agents\slasher\slasher_agent::getenemy();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = distancesquared(self.origin, var_1.origin);
+  }
 
   var_2 = scripts\mp\agents\slasher\slasher_tunedata::gettunedata();
 
-  if(var_0 > var_2.ground_pound_radius_sq)
+  if(var_0 > var_2.ground_pound_radius_sq) {
     return 0;
+  }
 
   var_3 = 0;
 
   if(!ispointonnavmesh(var_1.origin)) {
-    if(var_0 > self.meleeradiuswhentargetnotonnavmesh * self.meleeradiuswhentargetnotonnavmesh)
+    if(var_0 > self.meleeradiuswhentargetnotonnavmesh * self.meleeradiuswhentargetnotonnavmesh) {
       var_3 = 1;
+    }
   } else if(var_0 > self.meleeradiusbasesq)
     var_3 = 1;
 
-  if(var_3)
+  if(var_3) {
     return 0;
+  }
 
   var_4 = var_1.origin - self.origin;
   var_4 = (var_4[0], var_4[1], 0);
@@ -865,30 +921,37 @@ trygrenadethrow(var_0, var_1) {
   var_2 = scripts\mp\agents\slasher\slasher_tunedata::gettunedata();
   var_3 = scripts\mp\agents\slasher\slasher_agent::getenemy();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = var_3.origin;
+  }
 
-  if(!isDefined(self.next_grenade_throw_time))
+  if(!isDefined(self.next_grenade_throw_time)) {
     self.next_grenade_throw_time = gettime() + randomintrange(var_2.min_grenade_throw_interval, var_2.max_grenade_throw_interval);
+  }
 
-  if(isDefined(self.next_grenade_throw_time) && gettime() < self.next_grenade_throw_time)
+  if(isDefined(self.next_grenade_throw_time) && gettime() < self.next_grenade_throw_time) {
     return 0;
+  }
 
   self.next_grenade_throw_time = gettime() + 1000;
 
-  if(var_0 < var_2.min_grenade_throw_dist_sq)
+  if(var_0 < var_2.min_grenade_throw_dist_sq) {
     return 0;
+  }
 
-  if(var_0 > var_2.max_grenade_throw_dist_sq)
+  if(var_0 > var_2.max_grenade_throw_dist_sq) {
     return 0;
+  }
 
   var_4 = scripts\engine\utility::getyawtospot(var_1);
 
-  if(abs(var_4) > 60)
+  if(abs(var_4) > 60) {
     return 0;
+  }
 
-  if(!self _meth_81A2(var_3, var_1))
+  if(!self _meth_81A2(var_3, var_1)) {
     return 0;
+  }
 
   var_5 = var_1;
   var_6 = scripts\mp\agents\slasher\slasher_agent::getslashergrenadehandoffset();
@@ -905,22 +968,25 @@ trygrenadethrow(var_0, var_1) {
 }
 
 shouldtryramattack() {
-  if(!isDefined(level.slasher_level) || level.slasher_level > 3)
+  if(!isDefined(level.slasher_level) || level.slasher_level > 3) {
     return 1;
+  }
 
   return level.slasher_level >= 1;
 }
 
 shouldtrygrenadethrow() {
-  if(!isDefined(level.slasher_level) || level.slasher_level > 3)
+  if(!isDefined(level.slasher_level) || level.slasher_level > 3) {
     return 1;
+  }
 
   return level.slasher_level >= 3;
 }
 
 shouldtrysawbladeattack() {
-  if(!isDefined(level.slasher_level) || level.slasher_level > 3)
+  if(!isDefined(level.slasher_level) || level.slasher_level > 3) {
     return 1;
+  }
 
   return level.slasher_level >= 2;
 }
@@ -933,8 +999,9 @@ decideslasheraction(var_0) {
 
   var_1 = scripts\mp\agents\slasher\slasher_agent::getenemy();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return anim.failure;
+  }
 
   var_2 = gettime();
 
@@ -974,8 +1041,9 @@ decideslasheraction(var_0) {
     }
 
     if(!scripts\engine\utility::is_true(self.brecentlyteleported)) {
-      if(trytaunt(var_3))
+      if(trytaunt(var_3)) {
         return anim.success;
+      }
     }
 
     if(tryteleport(var_3)) {
@@ -1007,8 +1075,9 @@ doslasheraction_begin(var_0) {
   var_1 = self.actions[self.desiredaction].fnbegin;
   self.desiredaction = undefined;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     [[var_1]](var_0);
+  }
 }
 
 doslasheraction_tick(var_0) {
@@ -1017,8 +1086,9 @@ doslasheraction_tick(var_0) {
   if(var_1 != "debug_handler") {
     var_2 = scripts\mp\agents\slasher\slasher_agent::getenemy();
 
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       return anim.failure;
+    }
   }
 
   var_3 = self.actions[var_1].fntick;
@@ -1026,8 +1096,9 @@ doslasheraction_tick(var_0) {
   if(isDefined(var_3)) {
     var_4 = [[var_3]](var_0);
 
-    if(!isDefined(self.desiredaction))
+    if(!isDefined(self.desiredaction)) {
       return var_4;
+    }
   }
 
   if(isDefined(self.desiredaction)) {
@@ -1043,8 +1114,9 @@ doslasheraction_end(var_0) {
   var_1 = getcurrentdesiredaction(var_0);
   var_2 = self.actions[var_1].fnend;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     [[var_2]](var_0);
+  }
 
   scripts\aitypes\slasher\bt_state_api::btstate_endstates(var_0);
   self.bt.instancedata[var_0] = undefined;
@@ -1057,8 +1129,9 @@ followenemy_begin(var_0) {
 followenemy_tick(var_0) {
   var_1 = scripts\mp\agents\slasher\slasher_agent::getenemy();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return anim.failure;
+  }
 
   var_2 = getclosestpointonnavmesh(var_1.origin, self);
   self scragentsetgoalpos(var_2);
@@ -1089,8 +1162,9 @@ findjumpscareteleportpos(var_0, var_1, var_2) {
   if(!isDefined(level.slasherteleportpoints)) {
     level.slasherteleportpoints = [];
 
-    foreach(var_4 in getnodearray("slasher_teleport", "targetname"))
-    level.slasherteleportpoints[level.slasherteleportpoints.size] = var_4.origin;
+    foreach(var_4 in getnodearray("slasher_teleport", "targetname")) {
+      level.slasherteleportpoints[level.slasherteleportpoints.size] = var_4.origin;
+    }
   }
 
   if(level.slasherteleportpoints.size == 0) {
@@ -1114,8 +1188,9 @@ findjumpscareteleportpos(var_0, var_1, var_2) {
     var_12 = distance2dsquared(var_11, var_8);
 
     if(var_12 > var_1 * var_1 && var_12 < var_2 * var_2) {
-      if(!is_near_any_player(var_11))
+      if(!is_near_any_player(var_11)) {
         var_9[var_9.size] = var_11;
+      }
     }
   }
 
@@ -1162,8 +1237,9 @@ findjumpscareteleportpos(var_0, var_1, var_2) {
 calcpathdist(var_0) {
   var_1 = 0;
 
-  for(var_2 = 0; var_2 < var_0.size - 1; var_2++)
+  for(var_2 = 0; var_2 < var_0.size - 1; var_2++) {
     var_1 = var_1 + distance(var_0[var_2], var_0[var_2 + 1]);
+  }
 
   return var_1;
 }
@@ -1172,8 +1248,9 @@ is_near_any_player(var_0) {
   var_1 = 90000;
 
   foreach(var_3 in level.players) {
-    if(distancesquared(var_0, var_3.origin) < var_1)
+    if(distancesquared(var_0, var_3.origin) < var_1) {
       return 1;
+    }
   }
 
   return 0;

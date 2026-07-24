@@ -4,17 +4,19 @@
 **********************************************************/
 
 _id_48BF(var_0) {
-  if(!isDefined(level.allies))
+  if(!isDefined(level.allies)) {
     level.allies = [];
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = ["salter", "eth3n"];
+  }
 
   foreach(var_2 in var_0) {
     if(isDefined(level.allies[var_2]) && isalive(level.allies[var_2])) {
       continue;
     }
-    level.allies[var_2] = scripts\sp\utility::_id_107EA(var_2, 1);
+    level.allies[var_2] = ::scripts\sp\utility::_id_107EA(var_2, 1);
     level.allies[var_2] scripts\sp\utility::_id_B14F();
     level.allies[var_2] scripts\sp\utility::_id_5564();
     level.allies[var_2] _meth_8250(0);
@@ -25,16 +27,18 @@ _id_48BF(var_0) {
       continue;
     }
 
-    if(var_2 == "eth3n")
+    if(var_2 == "eth3n") {
       level.allies["eth3n"].name = "Eth.3n";
+    }
   }
 }
 
 _id_13248() {
   self endon("death");
 
-  if(!isDefined(level._id_118DC))
+  if(!isDefined(level._id_118DC)) {
     level._id_118DC = gettime() / 1000;
+  }
 
   for(var_0 = self._id_4BF7; isDefined(self) && isDefined(self._id_4BF7); var_7 = abs(var_2 - _id_13247())) {
     if(!isDefined(var_0.target)) {
@@ -60,13 +64,15 @@ _id_13248() {
     var_5 = distance(self.origin, var_1.origin);
     var_6 = var_5 / var_4 / 17.6;
 
-    if(var_6 < 0)
+    if(var_6 < 0) {
       var_6 = 10;
+    }
 
     self vehicle_setspeed(var_6, var_6 / 4, var_6 / 4);
 
-    while(self._id_4BF7 == var_0)
+    while(self._id_4BF7 == var_0) {
       wait 0.05;
+    }
 
     var_5 = distance(self.origin, self._id_4BF7.origin);
     var_0 = self._id_4BF7;
@@ -78,16 +84,18 @@ _id_13247() {
 }
 
 _id_13249(var_0) {
-  while(_id_13247() < var_0)
+  while(_id_13247() < var_0) {
     wait 0.05;
+  }
 }
 
 _id_16BD(var_0, var_1, var_2) {
   if(getdvarint("loc_warnings", 0)) {
     return;
   }
-  if(!isDefined(level._id_4EC3))
+  if(!isDefined(level._id_4EC3)) {
     level._id_4EC3 = [];
+  }
 
   var_3 = "^3";
 
@@ -147,8 +155,9 @@ _id_16BD(var_0, var_1, var_2) {
     if(var_7 == 0) {
       continue;
     }
-    if(isDefined(var_6))
+    if(isDefined(var_6)) {
       var_6.y = 325 - var_7 * 18;
+    }
   }
 
   wait 2;
@@ -168,8 +177,9 @@ _id_16BD(var_0, var_1, var_2) {
 
 _id_EF4B(var_0) {
   if(isDefined(anim._id_EF75) && isDefined(anim._id_EF74)) {
-    if(anim._id_EF75 + anim._id_EF74 > gettime())
+    if(anim._id_EF75 + anim._id_EF74 > gettime()) {
       return 0;
+    }
   }
 
   for(var_1 = 0; var_1 < 40; var_1++) {
@@ -265,9 +275,9 @@ _id_3C45(var_0) {
 _id_AB9F(var_0, var_1) {
   var_2 = int(var_0 * 20);
 
-  if(isDefined(level._id_111D0) && isDefined(level._id_111D0._id_99E5))
+  if(isDefined(level._id_111D0) && isDefined(level._id_111D0._id_99E5)) {
     var_3 = level._id_111D0._id_99E5;
-  else {
+  } else {
     var_3 = getmapsuncolorandintensity();
     var_3 = var_3[3];
   }
@@ -279,22 +289,25 @@ _id_AB9F(var_0, var_1) {
       var_1 = var_3 + var_5 * var_4;
       setsuncolorandintensity(var_1);
 
-      if(isDefined(level._id_111D0) && isDefined(level._id_111D0._id_99E5))
+      if(isDefined(level._id_111D0) && isDefined(level._id_111D0._id_99E5)) {
         level._id_111D0._id_99E5 = var_1;
+      }
 
       wait 0.05;
     }
   }
 
-  if(isDefined(level._id_111D0) && isDefined(level._id_111D0._id_99E5))
+  if(isDefined(level._id_111D0) && isDefined(level._id_111D0._id_99E5)) {
     level._id_111D0._id_99E5 = var_1;
+  }
 
   setsuncolorandintensity(var_1);
 }
 
 sunsettings_dogfight(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   thread scripts\sp\utility::_id_AB9A("sm_sunSampleSizeNear", 9.82, var_0);
   setsaveddvar("sm_suncascadeSizeMultiplier1", 3);
@@ -305,21 +318,24 @@ capitalship_dontcastshadows_moonjackal() {
   self dontcastshadows();
 
   if(isDefined(self._id_EF3C)) {
-    foreach(var_1 in self._id_EF3C)
-    var_1 dontcastshadows();
+    foreach(var_1 in self._id_EF3C) {
+      var_1 dontcastshadows();
+    }
   }
 
   foreach(var_4 in self._id_8B4F) {
     foreach(var_6 in var_4) {
-      if(isDefined(var_6) && !isstruct(var_6))
+      if(isDefined(var_6) && !isstruct(var_6)) {
         var_6 dontcastshadows();
+      }
     }
   }
 
   foreach(var_10 in self.turrets) {
     foreach(var_12 in var_10) {
-      if(isDefined(var_12) && !isent(var_12))
+      if(isDefined(var_12) && !isent(var_12)) {
         var_12 dontcastshadows();
+      }
     }
   }
 }

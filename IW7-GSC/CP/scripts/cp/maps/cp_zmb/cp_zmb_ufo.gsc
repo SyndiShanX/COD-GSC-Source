@@ -118,8 +118,9 @@ ufo_suicide_bomber_sequence() {
     wait(randomfloatrange(0.05, 1));
   }
 
-  while(level.num_ufo_zombies_killed < var_5)
+  while(level.num_ufo_zombies_killed < var_5) {
     wait 1;
+  }
 
   level.beam_trap_vfx delete();
   wait 1;
@@ -135,23 +136,26 @@ ufostopwavefromprogressing() {
   level.current_enemy_deaths = 0;
   level.max_static_spawned_enemies = 24;
 
-  if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player))
+  if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player)) {
     level.spawndelayoverride = 0.7;
-  else
+  } else {
     level.spawndelayoverride = 0.35;
+  }
 
   level thread force_zombie_sprint();
   scripts\engine\utility::flag_set("pause_wave_progression");
 
-  if(scripts\engine\utility::flag_exist("tones_played_successfully"))
+  if(scripts\engine\utility::flag_exist("tones_played_successfully")) {
     scripts\engine\utility::flag_wait("tones_played_successfully");
+  }
 }
 
 force_zombie_sprint() {
   level endon("complete_alien_grey_fight");
 
-  foreach(var_1 in scripts\cp\cp_agent_utils::getaliveagentsofteam("axis"))
-  var_1 thread scripts\cp\maps\cp_zmb\cp_zmb_dj::adjustmovespeed(var_1);
+  foreach(var_1 in scripts\cp\cp_agent_utils::getaliveagentsofteam("axis")) {
+    var_1 thread scripts\cp\maps\cp_zmb\cp_zmb_dj::adjustmovespeed(var_1);
+  }
 
   for(;;) {
     level waittill("agent_spawned", var_3);
@@ -175,18 +179,21 @@ deactivateadjacentvolumes() {
     var_3 scripts\cp\zombies\zombies_spawning::make_volume_inactive();
 
     foreach(var_5 in var_1) {
-      if(ispointinvolume(var_5.origin, var_3))
+      if(ispointinvolume(var_5.origin, var_3)) {
         var_5 notify("detonateExplosive");
+      }
     }
   }
 
-  while(!scripts\engine\utility::flag("disable_portals"))
+  while(!scripts\engine\utility::flag("disable_portals")) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_waitopen("disable_portals");
 
-  foreach(var_9 in var_0)
-  var_9 scripts\cp\zombies\zombies_spawning::make_volume_active();
+  foreach(var_9 in var_0) {
+    var_9 scripts\cp\zombies\zombies_spawning::make_volume_active();
+  }
 }
 
 ufo_intro_fly_to_center_portal() {
@@ -248,8 +255,9 @@ play_match_tone_sequence() {
     var_6 = distance(var_1.origin, (647, 621, 901));
     var_7 = var_6 / 150;
 
-    if(var_7 < 0.05)
+    if(var_7 < 0.05) {
       var_7 = 0.05;
+    }
 
     var_1 playSound("ufo_movement_start");
     var_1 moveTo((647, 621, 901), var_7);
@@ -270,20 +278,23 @@ disableportals() {
 enableportals() {
   scripts\engine\utility::flag_clear("disable_portals");
 
-  foreach(var_1 in level.fast_travel_spots)
-  var_1.disabled = undefined;
+  foreach(var_1 in level.fast_travel_spots) {
+    var_1.disabled = undefined;
+  }
 }
 
 play_fail_sound() {
   level endon("game_ended");
 
-  foreach(var_1 in level.players)
-  var_1 playlocalsound("dj_deny");
+  foreach(var_1 in level.players) {
+    var_1 playlocalsound("dj_deny");
+  }
 
   wait 2;
 
-  foreach(var_1 in level.players)
-  var_1 playlocalsound("ww_magicbox_laughter");
+  foreach(var_1 in level.players) {
+    var_1 playlocalsound("ww_magicbox_laughter");
+  }
 }
 
 listenjump() {
@@ -384,8 +395,9 @@ setalltonestructstoneutralstate() {
 
 destroyalltonestructs() {
   foreach(var_1 in level.alldjcenterstructs) {
-    if(isDefined(var_1.model))
+    if(isDefined(var_1.model)) {
       var_1.model setscriptablepartstate("tone", "explode");
+    }
   }
 
   wait 0.1;
@@ -399,14 +411,16 @@ destroyalltonestructs() {
 
 setalltonestructstostate(var_0) {
   foreach(var_2 in level.alldjcenterstructs) {
-    if(isDefined(var_2.model))
+    if(isDefined(var_2.model)) {
       var_2.model setscriptablepartstate("tone", var_0);
+    }
   }
 }
 
 turn_off_exit_portal_fx() {
-  if(isDefined(level.exit_portal_fx))
+  if(isDefined(level.exit_portal_fx)) {
     level.exit_portal_fx delete();
+  }
 }
 
 settonestructtostate(var_0, var_1) {
@@ -551,8 +565,9 @@ playsequence(var_0, var_1) {
 set_ufo_model_with_thrusters(var_0, var_1, var_2) {
   var_0 setModel(var_1);
 
-  if(scripts\engine\utility::is_true(var_2))
+  if(scripts\engine\utility::is_true(var_2)) {
     var_0 thread delay_turn_on_thrusters(var_0);
+  }
 }
 
 delay_turn_on_thrusters(var_0) {
@@ -613,10 +628,11 @@ setplaybacktimer() {
 }
 
 play_fx_with_delay(var_0, var_1, var_2, var_3, var_4) {
-  if(isDefined(var_3) && isDefined(var_4))
+  if(isDefined(var_3) && isDefined(var_4)) {
     var_5 = spawnfx(level._effect[var_1], var_2, var_3, var_4);
-  else
+  } else {
     var_5 = spawnfx(level._effect[var_1], var_2);
+  }
 
   wait(var_0);
   triggerfx(var_5);
@@ -712,8 +728,9 @@ start_grey_sequence() {
 }
 
 get_info_for_all_players(var_0) {
-  foreach(var_2 in level.players)
-  var_0 getenemyinfo(var_2);
+  foreach(var_2 in level.players) {
+    var_0 getenemyinfo(var_2);
+  }
 }
 
 intro_anim_timer(var_0) {
@@ -728,8 +745,9 @@ intro_anim_timer(var_0) {
 play_start_grey_sequence_vo() {
   level thread scripts\cp\cp_vo::try_to_play_vo("ww_alien_spawn", "zmb_ww_vo", "highest", 60, 1, 0, 1);
 
-  foreach(var_1 in level.players)
-  var_1 thread scripts\cp\cp_vo::try_to_play_vo("alien_first", "zmb_comment_vo", "low", 10, 0, 0, 0, 50);
+  foreach(var_1 in level.players) {
+    var_1 thread scripts\cp\cp_vo::try_to_play_vo("alien_first", "zmb_comment_vo", "low", 10, 0, 0, 0, 50);
+  }
 }
 
 grey_on_killed_func(var_0, var_1, var_2, var_3, var_4) {
@@ -747,8 +765,9 @@ grey_on_killed_func(var_0, var_1, var_2, var_3, var_4) {
 grey_killed_vo(var_0) {
   level endon("game_ended");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 thread scripts\cp\cp_vo::try_to_play_vo("alien_defeat", "zmb_comment_vo", "highest", 10, 0, 0, 1);
+  }
 
   wait 4;
   level thread scripts\cp\cp_vo::try_to_play_vo("ww_alien_death", "zmb_ww_vo", "highest", 60, 0, 0, 1);
@@ -789,8 +808,9 @@ ufo_damage_monitor(var_0) {
   level thread destroy_ufo_vo();
 
   if(isDefined(var_0.turrets)) {
-    foreach(var_13 in var_0.turrets)
-    var_13 delete();
+    foreach(var_13 in var_0.turrets) {
+      var_13 delete();
+    }
   }
 
   playFX(level._effect["ufo_explosion"], var_0.origin);
@@ -819,8 +839,9 @@ destroy_ufo_vo() {
 }
 
 weapon_can_damage_ufo(var_0) {
-  if(var_0 == "iw7_spaceland_wmd")
+  if(var_0 == "iw7_spaceland_wmd") {
     return 1;
+  }
 
   return 0;
 }
@@ -845,8 +866,9 @@ create_alien_fuse(var_0, var_1) {
 remove_alien_fuse(var_0, var_1) {
   var_1.owner.available_fuse = scripts\engine\utility::array_remove(var_1.owner.available_fuse, var_1);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 delete();
+  }
 }
 
 drop_alien_fuses() {
@@ -884,8 +906,9 @@ fuse_pick_up_monitor(var_0, var_1) {
   var_0 makeusable();
   var_0 setHintString(&"CP_ZMB_UFO_PICK_UP_FUSE");
 
-  foreach(var_3 in level.players)
-  var_3 thread scripts\cp\cp_vo::add_to_nag_vo("nag_ufo_fusefail", "zmb_comment_vo", 60, 15, 6, 1);
+  foreach(var_3 in level.players) {
+    var_3 thread scripts\cp\cp_vo::add_to_nag_vo("nag_ufo_fusefail", "zmb_comment_vo", 60, 15, 6, 1);
+  }
 
   for(;;) {
     var_0 waittill("trigger", var_3);
@@ -902,8 +925,9 @@ fuse_pick_up_monitor(var_0, var_1) {
   scripts\cp\cp_interaction::remove_from_current_interaction_list(scripts\engine\utility::getStruct("weapon_upgrade", "script_noteworthy"));
   level thread scripts\cp\cp_vo::remove_from_nag_vo("nag_ufo_fusefail");
 
-  foreach(var_3 in level.players)
-  var_3 setclientomnvar("zm_special_item", 1);
+  foreach(var_3 in level.players) {
+    var_3 setclientomnvar("zm_special_item", 1);
+  }
 
   var_1 delete();
   var_0 delete();
@@ -952,10 +976,11 @@ soulkey_quest_vo(var_0) {
 }
 
 pap_upgrade_hintstring(var_0, var_1) {
-  if(isDefined(level.num_fuse_in_possession) && level.num_fuse_in_possession > 0)
+  if(isDefined(level.num_fuse_in_possession) && level.num_fuse_in_possession > 0) {
     return &"CP_ZMB_INTERACTIONS_PAP_UPGRADE";
-  else
+  } else {
     return "";
+  }
 }
 
 upgrade_pap(var_0, var_1) {
@@ -965,8 +990,9 @@ upgrade_pap(var_0, var_1) {
   scripts\engine\utility::flag_set("fuses_inserted");
   level.pap_max++;
 
-  foreach(var_1 in level.players)
-  var_1 setclientomnvar("zm_special_item", 0);
+  foreach(var_1 in level.players) {
+    var_1 setclientomnvar("zm_special_item", 0);
+  }
 
   wait 3;
   scripts\cp\cp_interaction::add_to_current_interaction_list(scripts\engine\utility::getStruct("weapon_upgrade", "script_noteworthy"));
@@ -988,15 +1014,17 @@ insert_alien_fuses() {
 init_pap_upgrade() {
   var_0 = scripts\engine\utility::getStructArray("pap_upgrade", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
+  foreach(var_2 in var_0) {
+    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
+  }
 }
 
 can_use_pap_upgrade(var_0, var_1) {
-  if(isDefined(level.num_fuse_in_possession) && level.num_fuse_in_possession > 0)
+  if(isDefined(level.num_fuse_in_possession) && level.num_fuse_in_possession > 0) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 activate_ufo_turret(var_0) {
@@ -1069,11 +1097,13 @@ get_ufo_turret_target() {
 }
 
 can_be_attacked_by_ufo_turret(var_0) {
-  if(!isPlayer(var_0))
+  if(!isPlayer(var_0)) {
     return 0;
+  }
 
-  if(scripts\cp\cp_laststand::player_in_laststand(var_0))
+  if(scripts\cp\cp_laststand::player_in_laststand(var_0)) {
     return 0;
+  }
 
   return 1;
 }
@@ -1084,8 +1114,9 @@ start_ufo_zombie_spawn_sequence() {
   level endon("stop_ufo_zombie_spawn");
   var_0 endon("death");
 
-  if(!scripts\engine\utility::flag("ufo_intro_reach_center_portal"))
+  if(!scripts\engine\utility::flag("ufo_intro_reach_center_portal")) {
     scripts\engine\utility::flag_wait("ufo_intro_reach_center_portal");
+  }
 
   level thread max_ufo_zombie_spawn_number_logic();
 
@@ -1295,8 +1326,9 @@ stop_grey_fight_blocker_vfx() {
   if(!isDefined(level.grey_fight_vfx)) {
     return;
   }
-  foreach(var_1 in level.grey_fight_vfx)
-  var_1 delete();
+  foreach(var_1 in level.grey_fight_vfx) {
+    var_1 delete();
+  }
 }
 
 stop_grey_fight_blocker_sfx() {
@@ -1319,8 +1351,9 @@ fly_around_main_street(var_0) {
   level endon("game_ended");
   var_0 endon("death");
 
-  if(!scripts\engine\utility::flag("ufo_intro_reach_center_portal"))
+  if(!scripts\engine\utility::flag("ufo_intro_reach_center_portal")) {
     scripts\engine\utility::flag_wait("ufo_intro_reach_center_portal");
+  }
 
   for(;;) {
     var_1 = get_beam_down_ground_location();
@@ -1341,8 +1374,9 @@ shoot_slow_projectiles(var_0) {
     if(var_2.size > 0) {
       var_3 = get_spread_out_points(level.ufo, var_1);
 
-      foreach(var_5 in var_3)
-      level thread fire_slow_projectile_from(var_5, var_2[randomint(var_2.size)]);
+      foreach(var_5 in var_3) {
+        level thread fire_slow_projectile_from(var_5, var_2[randomint(var_2.size)]);
+      }
     }
   }
 }
@@ -1367,8 +1401,9 @@ fire_slow_projectile_from(var_0, var_1) {
   var_2 = magicbullet("iw7_ufo_proj", var_0, var_0 + (0, 0, -100));
   wait 0.6;
 
-  if(isDefined(var_2) && isDefined(var_1) && !scripts\cp\cp_laststand::player_in_laststand(var_1))
+  if(isDefined(var_2) && isDefined(var_1) && !scripts\cp\cp_laststand::player_in_laststand(var_1)) {
     var_2 missile_settargetEnt(var_1);
+  }
 }
 
 get_slow_projectile_targets(var_0) {
@@ -1385,11 +1420,13 @@ get_slow_projectile_targets(var_0) {
 }
 
 can_be_slow_projectile_target(var_0, var_1) {
-  if(scripts\cp\cp_laststand::player_in_laststand(var_0))
+  if(scripts\cp\cp_laststand::player_in_laststand(var_0)) {
     return 0;
+  }
 
-  if(!bullettracepassed(var_1.origin, var_0 getEye(), 0, var_1))
+  if(!bullettracepassed(var_1.origin, var_0 getEye(), 0, var_1)) {
     return 0;
+  }
 
   return 1;
 }
@@ -1420,8 +1457,9 @@ spaceland_powernode_damage_monitor() {
     var_11 = get_power_node_struct(var_4);
 
     if(!isDefined(var_11)) {
-      if(randomint(100) > 85)
+      if(randomint(100) > 85) {
         scripts\cp\cp_vo::try_to_play_vo_on_all_players("nag_ufo_signfail");
+      }
 
       continue;
     }
@@ -1442,15 +1480,17 @@ spaceland_powernode_damage_monitor() {
         level thread play_arc_vfx_between_points("powernode_arc_small", var_12, var_14, "spaceland_arc_fired");
       }
 
-      if(all_power_nodes_are_activated())
+      if(all_power_nodes_are_activated()) {
         level thread trigger_wmd();
+      }
     }
   }
 }
 
 should_play_arc_vfx(var_0) {
-  if(var_0.targetname == "main_gate_powernode_5")
+  if(var_0.targetname == "main_gate_powernode_5") {
     return 0;
+  }
 
   return 1;
 }
@@ -1466,14 +1506,16 @@ get_nearby_gate_light_scriptable(var_0) {
   for(var_2 = 1; var_2 <= 5; var_2++) {
     var_3 = getEnt("gate_light_0" + var_2, "targetname");
 
-    if(distancesquared(var_0.origin, var_3.origin) < var_1)
+    if(distancesquared(var_0.origin, var_3.origin) < var_1) {
       return var_3;
+    }
   }
 }
 
 can_charge_power_nodes(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   var_2 = getweaponbasename(var_0);
 
@@ -1486,10 +1528,11 @@ can_charge_power_nodes(var_0, var_1) {
     case "iw7_dischord_zm":
     case "iw7_shredder_zm_pap1":
     case "iw7_shredder_zm":
-      if(var_1 scripts\cp\cp_weapon::get_weapon_level(var_0) == 2)
+      if(var_1 scripts\cp\cp_weapon::get_weapon_level(var_0) == 2) {
         return 1;
-      else
+      } else {
         return 0;
+      }
     default:
       return 0;
   }
@@ -1522,8 +1565,9 @@ all_power_nodes_are_activated() {
   foreach(var_2 in var_0) {
     var_3 = scripts\engine\utility::getStruct(var_2, "targetname");
 
-    if(!scripts\engine\utility::is_true(var_3.is_activated))
+    if(!scripts\engine\utility::is_true(var_3.is_activated)) {
       return 0;
+    }
   }
 
   return 1;
@@ -1575,8 +1619,9 @@ change_gate_light_scriptable_to_on_state() {
 play_trigger_wmd_vo() {
   wait 0.1;
 
-  foreach(var_1 in level.players)
-  var_1 thread scripts\cp\cp_vo::try_to_play_vo("quest_ufo_signhit_5", "zmb_comment_vo", "highest", 10, 0, 0, 0, 50);
+  foreach(var_1 in level.players) {
+    var_1 thread scripts\cp\cp_vo::try_to_play_vo("quest_ufo_signhit_5", "zmb_comment_vo", "highest", 10, 0, 0, 0, 50);
+  }
 }
 
 get_power_node_struct(var_0) {
@@ -1586,8 +1631,9 @@ get_power_node_struct(var_0) {
   foreach(var_4 in var_2) {
     var_5 = scripts\engine\utility::getStruct(var_4, "targetname");
 
-    if(distancesquared(var_5.origin, var_0) < var_1)
+    if(distancesquared(var_5.origin, var_0) < var_1) {
       return var_5;
+    }
   }
 }
 

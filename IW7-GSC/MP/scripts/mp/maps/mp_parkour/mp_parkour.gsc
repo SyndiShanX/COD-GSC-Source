@@ -58,8 +58,9 @@ _id_90EF(var_0, var_1) {
   var_2._id_BE1E = getEntArray("vfx_drop_ship_thrusters", "script_noteworthy");
   var_2._id_BE10 = scripts\engine\utility::array_combine(var_2._id_BE10, var_2._id_BE1E);
 
-  foreach(var_4 in var_2._id_BE10)
-  var_4 linkTo(var_2);
+  foreach(var_4 in var_2._id_BE10) {
+    var_4 linkTo(var_2);
+  }
 
   thread _id_5EE7(var_2);
   thread _id_5EE1(var_2);
@@ -85,8 +86,9 @@ _id_5EE9(var_0) {
 }
 
 _id_5EE7(var_0) {
-  foreach(var_2 in var_0._id_BE1E)
-  var_2 thread _id_5EE8();
+  foreach(var_2 in var_0._id_BE1E) {
+    var_2 thread _id_5EE8();
+  }
 }
 
 _id_5EE8() {
@@ -96,8 +98,9 @@ _id_5EE8() {
   var_0 linkTo(self);
   scripts\engine\utility::waitframe();
 
-  if(isDefined(self.targetname))
+  if(isDefined(self.targetname)) {
     playFXOnTag(scripts\engine\utility::getfx(self.targetname), var_0, "tag_origin");
+  }
 }
 
 _id_CDA4(var_0) {

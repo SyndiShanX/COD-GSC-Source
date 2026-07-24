@@ -80,8 +80,9 @@ _id_F94D() {
   level._id_5D2E scripts\sp\utility::_id_86E4();
   level._id_EA2C scripts\sp\utility::_id_72EC("iw7_m4", "primary");
 
-  if(isDefined(level._id_EA2C._id_A489))
+  if(isDefined(level._id_EA2C._id_A489)) {
     level._id_EA2C detach(level._id_EA2C._id_A489);
+  }
 
   level._id_5D6C thread scripts\sp\anim::_id_1EEA(level._id_2C23, "dropship_idle", "stop_boggs", "tag_detach");
   level._id_5EFD = scripts\sp\utility::_id_107EA("player_dropship_marine01", 1);
@@ -120,16 +121,18 @@ _id_5E80() {
   level._id_5D6C thread scripts\sp\anim::_id_1EEA(level._id_5EFE, "dropship_idle", "stop_ally2");
   wait 0.05;
 
-  while(!scripts\sp\maps\marscrib\marscrib_staging::_id_FC56(level._id_EA2C, 640, 1) || !scripts\engine\utility::within_fov(level.player.origin, level.player.angles, level._id_EA2C.origin, 0.9))
+  while(!scripts\sp\maps\marscrib\marscrib_staging::_id_FC56(level._id_EA2C, 640, 1) || !scripts\engine\utility::within_fov(level.player.origin, level.player.angles, level._id_EA2C.origin, 0.9)) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_set("flag_dropship_reached");
   level thread _id_5ED4();
   level thread _id_5E7E();
   level waittill("dropoff_anim_ready");
 
-  while(!scripts\sp\maps\marscrib\marscrib_staging::_id_FC56(level._id_5D2E, 320, 1) || !scripts\engine\utility::within_fov(level.player.origin, level.player.angles, level._id_5D2E.origin, 0.9))
+  while(!scripts\sp\maps\marscrib\marscrib_staging::_id_FC56(level._id_5D2E, 320, 1) || !scripts\engine\utility::within_fov(level.player.origin, level.player.angles, level._id_5D2E.origin, 0.9)) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_set("dropship_scene_continue");
   level thread _id_5DC1();
@@ -171,8 +174,9 @@ _id_5E7E() {
 _id_5E7F() {
   level endon("dropship_scene_continue");
 
-  if(scripts\engine\utility::flag("dropship_scene_continue"))
+  if(scripts\engine\utility::flag("dropship_scene_continue")) {
     return 0;
+  }
 
   wait 0.5;
   level._id_EA2C scripts\sp\utility::_id_10346("marscrib_slt_whosgotmyboostr");
@@ -324,11 +328,13 @@ _id_5DAD() {
 
   foreach(var_4 in var_2) {
     if(isDefined(var_4._id_EE52)) {
-      if(var_4._id_EE52 == "decompression_claxon_rr")
+      if(var_4._id_EE52 == "decompression_claxon_rr") {
         var_0 = var_4;
+      }
 
-      if(var_4._id_EE52 == "klaxon_light_rr")
+      if(var_4._id_EE52 == "klaxon_light_rr") {
         var_1 = scripts\engine\utility::array_add(var_1, var_4);
+      }
     }
   }
 
@@ -382,32 +388,41 @@ _id_5FCB(var_0, var_1, var_2) {
 _id_B3AF() {
   level notify("sa_dropship_cleanup");
 
-  if(isDefined(level._id_A6F4))
+  if(isDefined(level._id_A6F4)) {
     level._id_A6F4 scripts\sp\maps\marscrib\marscrib_util::_id_4046();
+  }
 
-  if(isDefined(level._id_EA29))
+  if(isDefined(level._id_EA29)) {
     level._id_EA29 scripts\sp\maps\marscrib\marscrib_util::_id_4046();
+  }
 
-  if(isDefined(level._id_76FB))
+  if(isDefined(level._id_76FB)) {
     level._id_76FB scripts\sp\maps\marscrib\marscrib_util::_id_4046();
+  }
 
-  if(isDefined(level._id_444D))
+  if(isDefined(level._id_444D)) {
     level._id_444D scripts\sp\maps\marscrib\marscrib_util::_id_4046();
+  }
 
-  if(isDefined(level._id_2BFF))
+  if(isDefined(level._id_2BFF)) {
     level._id_2BFF scripts\sp\maps\marscrib\marscrib_util::_id_4046();
+  }
 
-  if(isDefined(level._id_30F6))
+  if(isDefined(level._id_30F6)) {
     level._id_30F6 scripts\sp\maps\marscrib\marscrib_util::_id_4046();
+  }
 
-  if(isDefined(level._id_8604))
+  if(isDefined(level._id_8604)) {
     level._id_8604 scripts\sp\maps\marscrib\marscrib_util::_id_4046();
+  }
 
-  if(isDefined(level._id_B4F1))
+  if(isDefined(level._id_B4F1)) {
     level._id_B4F1 scripts\sp\maps\marscrib\marscrib_util::_id_4046();
+  }
 
-  if(isDefined(level._id_6754))
+  if(isDefined(level._id_6754)) {
     level._id_6754 scripts\sp\maps\marscrib\marscrib_util::_id_4046();
+  }
 
   var_0 = scripts\engine\utility::array_removeundefined(level._id_E97A);
   scripts\sp\utility::_id_228A(var_0);
@@ -416,8 +431,9 @@ _id_B3AF() {
   var_2 = scripts\engine\utility::array_removeundefined(level._id_E9BD);
 
   foreach(var_4 in var_2) {
-    if(isDefined(var_4.gun))
+    if(isDefined(var_4.gun)) {
       var_4.gun delete();
+    }
   }
 
   scripts\sp\utility::_id_228A(var_2);

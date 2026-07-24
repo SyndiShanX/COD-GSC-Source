@@ -8,14 +8,17 @@
 _id_FE03(var_0, var_1, var_2, var_3, var_4) {
   _id_0EFB::_id_FE05();
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = "landed_mode";
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "fake";
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 0;
+  }
 
   var_5 = undefined;
 
@@ -38,10 +41,11 @@ _id_FE03(var_0, var_1, var_2, var_3, var_4) {
         var_5 = _id_0EFB::_id_7CBC(var_1, "script_noteworthy", "dropship_pos1");
         break;
       default:
-        if(!isDefined(_id_0EFB::_id_7D7A(var_1, 1)))
+        if(!isDefined(_id_0EFB::_id_7D7A(var_1, 1))) {
           var_5 = level._id_E35D._id_3BB6;
-        else
+        } else {
           var_5 = _id_0EFB::_id_7D7A(var_1);
+        }
 
         break;
     }
@@ -80,8 +84,9 @@ _id_FE03(var_0, var_1, var_2, var_3, var_4) {
       level._id_FD6E.jackals[var_1] setModel("veh_mil_air_un_jackal_landed_03b");
       level._id_FD6E.jackals[var_1] _id_A317();
 
-      if(var_4)
+      if(var_4) {
         level._id_FD6E.jackals[var_1].collision = level._id_FD6E.jackals[var_1] _id_A0AE();
+      }
 
       var_6 = level._id_FD6E.jackals[var_1];
       break;
@@ -154,15 +159,17 @@ _id_FE03(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_7C9E(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "normal";
+  }
 
   var_2 = undefined;
 
-  if(var_1 == "dropship")
+  if(var_1 == "dropship") {
     var_3 = getEntArray(var_0, "script_noteworthy");
-  else
+  } else {
     var_3 = getEntArray(var_0, "targetname");
+  }
 
   for(;;) {
     foreach(var_5 in var_3) {
@@ -217,13 +224,15 @@ _id_A0AE() {
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2.in_use)) {
-      if(var_2.in_use)
+      if(var_2.in_use) {
         continue;
+      }
     } else {
       var_2.in_use = 1;
 
-      if(var_2 islinked())
+      if(var_2 islinked()) {
         var_2 unlink();
+      }
 
       var_2 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
       return var_2;

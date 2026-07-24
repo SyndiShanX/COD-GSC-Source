@@ -20,13 +20,15 @@ _id_4F32() {
     foreach(var_3 in var_1) {
       var_4 = 0;
 
-      if(isDefined(var_3.angles))
+      if(isDefined(var_3.angles)) {
         var_4 = var_3.angles[1];
+      }
 
       var_5 = (0, 1, 0);
 
-      if(_id_9CD3(var_3))
+      if(_id_9CD3(var_3)) {
         var_5 = (1, 0, 0);
+      }
     }
 
     wait 0.25;
@@ -75,8 +77,9 @@ _id_97A8() {
   self.script_noteworthy = _id_7D7E(var_8);
   self.script_label = "mid";
 
-  if(isDefined(self._id_EED9) && self._id_EED9 == "extended")
+  if(isDefined(self._id_EED9) && self._id_EED9 == "extended") {
     self._id_2A9F = 1;
+  }
 
   var_9 = anglestoright(self.angles);
 
@@ -84,13 +87,15 @@ _id_97A8() {
     var_11 = var_6.origin - self.origin;
     var_12 = vectordot(var_11, var_9);
 
-    if(var_12 > 0)
+    if(var_12 > 0) {
       var_6.script_label = "left";
-    else
+    } else {
       var_6.script_label = "right";
+    }
 
-    if(scripts\engine\utility::is_true(self._id_2A9F))
+    if(scripts\engine\utility::is_true(self._id_2A9F)) {
       var_6._id_2A9F = 1;
+    }
   }
 }
 
@@ -98,8 +103,9 @@ _id_7D7E(var_0) {
   var_1 = getEntArray("spawn_volume", "targetname");
 
   foreach(var_3 in var_1) {
-    if(ispointinvolume(var_0.origin, var_3))
+    if(ispointinvolume(var_0.origin, var_3)) {
       return var_3.script_linkname;
+    }
   }
 
   return undefined;
@@ -130,14 +136,16 @@ _id_55A8(var_0) {
 enable_windows_in_area(var_0) {
   var_1 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
 
-  foreach(var_3 in var_1)
-  _id_6259(var_3);
+  foreach(var_3 in var_1) {
+    _id_6259(var_3);
+  }
 }
 
 _id_7998(var_0, var_1) {
   for(var_2 = 0; var_2 < var_0._id_130C8; var_2++) {
-    if(var_0._id_130D0[var_2] == var_1)
+    if(var_0._id_130D0[var_2] == var_1) {
       return var_2;
+    }
   }
 
   return undefined;
@@ -176,16 +184,18 @@ _id_16D1(var_0) {
 }
 
 _id_61D1() {
-  foreach(var_1 in level.window_entrances)
-  _id_6259(var_1);
+  foreach(var_1 in level.window_entrances) {
+    _id_6259(var_1);
+  }
 }
 
 _id_7B4D(var_0) {
   var_1 = scripts\engine\utility::get_array_of_closest(var_0, level.window_entrances);
 
   foreach(var_3 in var_1) {
-    if(!entrance_has_barriers(var_3))
+    if(!entrance_has_barriers(var_3)) {
       return var_3;
+    }
   }
 
   return undefined;
@@ -196,14 +206,16 @@ _id_7B14(var_0, var_1) {
 
   foreach(var_4 in var_2) {
     if(isDefined(var_1)) {
-      if(var_4 == var_1)
+      if(var_4 == var_1) {
         var_1 = undefined;
+      }
 
       continue;
     }
 
-    if(var_4.enabled)
+    if(var_4.enabled) {
       return var_4;
+    }
   }
 
   return undefined;
@@ -214,8 +226,9 @@ _id_9BD6(var_0) {
 }
 
 entrance_has_barriers(var_0) {
-  if(isDefined(var_0.barrier) && var_0.barrier._id_C1DE > 0)
+  if(isDefined(var_0.barrier) && var_0.barrier._id_C1DE > 0) {
     return 1;
+  }
 
   return 0;
 }
@@ -229,8 +242,9 @@ _id_3FF0(var_0) {
 }
 
 _id_9CD3(var_0) {
-  if(isDefined(var_0._id_C2D0) && isalive(var_0._id_C2D0))
+  if(isDefined(var_0._id_C2D0) && isalive(var_0._id_C2D0)) {
     return 1;
+  }
 
   return 0;
 }
@@ -259,8 +273,9 @@ _id_F95E() {
 _id_36CF() {
   var_0 = (0, 0, 0);
 
-  foreach(var_2 in self._id_130D0)
-  var_0 = var_0 + var_2.origin;
+  foreach(var_2 in self._id_130D0) {
+    var_0 = var_0 + var_2.origin;
+  }
 
   var_4 = (var_0[0] / self._id_130C8, var_0[1] / self._id_130C8, var_0[2] / self._id_130C8);
   var_5 = sortbydistance(self._id_130D0, var_4);
@@ -272,32 +287,38 @@ _id_9CF6(var_0, var_1) {
   var_3 = (var_2[0], var_2[1], 0);
   var_4 = vectordot(var_3, var_1);
 
-  if(var_4 > 0)
+  if(var_4 > 0) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_7A29(var_0) {
-  if(!isDefined(var_0._id_AB4E) && !isDefined(var_0._id_E529))
+  if(!isDefined(var_0._id_AB4E) && !isDefined(var_0._id_E529)) {
     var_0 _id_F95E();
+  }
 
-  if(var_0._id_130C8 <= 1)
+  if(var_0._id_130C8 <= 1) {
     return var_0;
+  }
 
   if(var_0._id_130C8 > 1) {
     var_2 = var_0 _id_36CF();
     var_3 = anglestoright(var_0.angles);
     var_4 = anglestoleft(var_0.angles);
 
-    if(self == var_2)
+    if(self == var_2) {
       return var_0;
+    }
 
-    if(isDefined(var_0._id_E529) && _id_9CF6(var_2, var_3))
+    if(isDefined(var_0._id_E529) && _id_9CF6(var_2, var_3)) {
       return var_0._id_E529;
+    }
 
-    if(isDefined(var_0._id_AB4E) && _id_9CF6(var_2, var_4))
+    if(isDefined(var_0._id_AB4E) && _id_9CF6(var_2, var_4)) {
       return var_0._id_AB4E;
+    }
   }
 
   var_5 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
@@ -309,20 +330,23 @@ _id_7A29(var_0) {
 get_open_attack_spot(var_0) {
   var_1 = _id_7A29(var_0);
 
-  if(isDefined(var_1) && _id_9CD2(var_1))
+  if(isDefined(var_1) && _id_9CD2(var_1)) {
     return var_1;
+  }
 
   var_2 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   var_2 = scripts\engine\utility::add_to_array(var_2, var_0);
   var_2 = scripts\engine\utility::array_randomize(var_2);
 
   foreach(var_4 in var_2) {
-    if(_id_9CD2(var_4))
+    if(_id_9CD2(var_4)) {
       return var_4;
+    }
   }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     return var_1;
+  }
 
   return scripts\engine\utility::random(var_2);
 }
@@ -337,15 +361,17 @@ _id_7872(var_0, var_1) {
 
 _id_7B12(var_0) {
   for(var_1 = 0; var_1 < 6; var_1++) {
-    if(var_0.barrier._id_2BEB[var_1] == "boarded")
+    if(var_0.barrier._id_2BEB[var_1] == "boarded") {
       return var_1 + 1;
+    }
   }
 }
 
 _id_7B13(var_0) {
   for(var_1 = 5; var_1 >= 0; var_1--) {
-    if(var_0.barrier._id_2BEB[var_1] == "destroyed")
+    if(var_0.barrier._id_2BEB[var_1] == "destroyed") {
       return var_1 + 1;
+    }
   }
 }
 
@@ -359,22 +385,25 @@ remove_barrier_from_entrance(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = var_0.barrier._id_C1DE;
 
-    if(var_1 > 6)
+    if(var_1 > 6) {
       var_1 = 6;
-    else if(var_1 < 1)
+    } else if(var_1 < 1) {
       var_1 = 1;
+    }
   }
 
   var_0.barrier _id_F2D7("board_" + var_1, "destroy");
   var_0.barrier._id_C1DE--;
 
-  if(!scripts\engine\utility::array_contains(level.current_interaction_structs, var_3))
+  if(!scripts\engine\utility::array_contains(level.current_interaction_structs, var_3)) {
     level.current_interaction_structs = scripts\engine\utility::array_add(level.current_interaction_structs, var_3);
+  }
 
   var_3.disabled = 0;
 
-  if(var_0.barrier._id_C1DE < 1)
+  if(var_0.barrier._id_C1DE < 1) {
     var_3.disabled = 0;
+  }
 }
 
 _id_F2D7(var_0, var_1) {

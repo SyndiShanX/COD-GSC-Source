@@ -15,8 +15,9 @@ main() {
   scripts\sp\utility::_id_1749("destroyer_test", ::_id_10C16, "destroyer_test", ::_id_B1C0, undefined, undefined, 1);
   scripts\sp\load::main();
 
-  if(getdvarint("shipcrib_nameplates", 22) == 0)
+  if(getdvarint("shipcrib_nameplates", 22) == 0) {
     setDvar("shipcrib_nameplates", 1);
+  }
 
   scripts\sp\utility::_id_241F(0);
   _id_10AE::_id_9637();
@@ -148,8 +149,9 @@ _id_52E8(var_0) {
   var_5 = vectorcross(var_3, var_4);
   var_6 = 1.0;
 
-  if(vectordot(var_5, (0, 0, 1)) < 0)
+  if(vectordot(var_5, (0, 0, 1)) < 0) {
     var_6 = -1.0;
+  }
 
   self._id_E720 = 0.08 * var_6;
   var_1.angles = (var_1.angles[0], self.angles[1], var_1.angles[2]);
@@ -172,8 +174,9 @@ _id_C507() {
     var_3 = [];
 
     foreach(var_5 in var_1) {
-      if(!scripts\engine\utility::flag_exist(var_5) || !scripts\engine\utility::flag(var_5))
+      if(!scripts\engine\utility::flag_exist(var_5) || !scripts\engine\utility::flag(var_5)) {
         var_3[var_3.size] = var_5;
+      }
     }
 
     if(!var_0 && var_3.size == 2) {
@@ -202,15 +205,17 @@ _id_10CAE() {
   thread _id_10AE::_id_E3B6(1);
   thread _id_10AE::_id_E382("ret_pivot");
 
-  if(getdvarint("ja_skip_preload", 0) == 0)
+  if(getdvarint("ja_skip_preload", 0) == 0) {
     level thread scripts\sp\utility::_id_BF97();
+  }
 
   scripts\engine\utility::flag_set("jackal_objectives_can_display");
 }
 
 _id_B20F() {
-  while(!isDefined(level._id_E35D))
+  while(!isDefined(level._id_E35D)) {
     wait 0.05;
+  }
 
   scripts\sp\utility::_id_CF8B();
   scripts\sp\utility::_id_28D7();
@@ -260,8 +265,9 @@ _id_B1C0() {
   scripts\engine\utility::flag_set("jackal_objectives_can_display");
   thread _id_10AE::_id_56B3("destroyers", "jackal_objective_destroyer");
 
-  while(!level.player buttonPressed("DPAD_DOWN"))
+  while(!level.player buttonPressed("DPAD_DOWN")) {
     wait 0.05;
+  }
 
   _id_10AE::_id_E3DD(level._id_A3A8["destroyers"]._id_FE2D[0], 1, 30.0);
   level waittill("never");
@@ -372,8 +378,9 @@ _id_1DE7() {
     if(!issubstr(var_2.classname, "script_brushmodel")) {
       var_3 = getEntArray(var_2.target, "targetname");
 
-      if(isDefined(var_2.target))
+      if(isDefined(var_2.target)) {
         scripts\engine\utility::array_call(var_3, ::linkto, var_2);
+      }
 
       level._id_E736[level._id_E736.size] = var_2;
       var_2 thread _id_1DE6();
@@ -387,8 +394,9 @@ _id_1DE6() {
   var_2 = 2;
   var_3 = [];
 
-  if(isDefined(self.script_parameters))
+  if(isDefined(self.script_parameters)) {
     var_3 = strtok(self.script_parameters, " ");
+  }
 
   var_4 = [];
   var_5 = [];
@@ -396,14 +404,15 @@ _id_1DE6() {
 
   for(var_6 = 0; var_6 < var_2; var_6++) {
     if(!isDefined(var_3[var_6])) {
-      if(var_3.size == 1)
+      if(var_3.size == 1) {
         var_4[var_6] = float(var_3[0]);
-      else
+      } else {
         var_4[var_6] = randomintrange(var_0, var_1);
+      }
     } else
       var_4[var_6] = float(var_3[var_6]);
 
-    var_5[var_6] = scripts\engine\utility::random([-1, 1]);
+    var_5[var_6] = ::scripts\engine\utility::random([-1, 1]);
   }
 
   for(;;) {
@@ -417,8 +426,9 @@ _id_1DE6() {
 
     self.angles = (var_7[0], var_7[1], self.angles[2]);
 
-    if(getdvarint("debug_rotate") == 1)
+    if(getdvarint("debug_rotate") == 1) {
       thread scripts\engine\utility::draw_ent_axis((1, 0, 0), 2, 1000);
+    }
 
     scripts\engine\utility::waitframe();
   }

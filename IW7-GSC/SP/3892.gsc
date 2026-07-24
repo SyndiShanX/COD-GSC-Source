@@ -45,28 +45,32 @@ _id_CE60(var_0) {
 }
 
 _id_CCF2(var_0, var_1, var_2) {
-  if(self.team == "neutral")
+  if(self.team == "neutral") {
     return undefined;
+  }
 
   var_3 = self.team;
 
-  if(var_3 == "dead")
+  if(var_3 == "dead") {
     var_3 = self._id_C733;
+  }
 
   var_4 = undefined;
 
-  if(var_3 == "axis")
+  if(var_3 == "axis") {
     var_4 = scripts\engine\utility::getfx(var_0);
-  else if(var_3 == "allies")
+  } else if(var_3 == "allies") {
     var_4 = scripts\engine\utility::getfx(var_1);
+  }
 
   playFXOnTag(var_4, self, var_2);
 
   if(isDefined(level._id_1248[var_1])) {
     var_5 = level._id_1248[var_1];
 
-    if(soundexists(var_5))
+    if(soundexists(var_5)) {
       self playSound(var_5);
+    }
   }
 
   return [var_4, var_2];
@@ -86,8 +90,9 @@ _id_13E86(var_0) {
   self endon("find_traversal");
   self endon("death");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 10;
+  }
 
   var_1 = gettime() + var_0 * 1000;
 
@@ -106,20 +111,25 @@ _id_13E87(var_0, var_1, var_2) {
   self notify("zg_find_new_traversal");
   self endon("zg_find_new_traversal");
 
-  if(scripts\engine\utility::is_true(self._id_93AD))
+  if(scripts\engine\utility::is_true(self._id_93AD)) {
     return undefined;
+  }
 
-  if(scripts\asm\asm_bb::bb_isanimScripted())
+  if(scripts\asm\asm_bb::bb_isanimScripted()) {
     return undefined;
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1024;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0.7;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0.7;
+  }
 
   var_3 = 10000;
 
@@ -191,23 +201,26 @@ _id_13EAF(var_0) {
   self._id_93AD = 1;
   var_4 scripts\sp\anim::_id_1F17(self, var_3);
 
-  if(distancesquared(self.origin, var_0.origin) < 100)
+  if(distancesquared(self.origin, var_0.origin) < 100) {
     var_4 scripts\sp\anim::_id_1F37(self, var_3);
+  }
 
   self.ignoreall = var_7;
   self[[self._id_41AF]]();
   var_0.in_use = 0;
   var_0._id_A922 = gettime();
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     self _meth_82EE(var_5);
-  else if(isDefined(var_6))
+  } else if(isDefined(var_6)) {
     self setgoalpos(var_6);
-  else
+  } else {
     self setgoalpos(self.origin);
+  }
 
-  if(var_1)
+  if(var_1) {
     scripts\sp\utility::_id_61C7();
+  }
 
   self._id_93AD = 0;
 }

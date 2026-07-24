@@ -79,8 +79,9 @@ patchablecollision() {
 setup_vista_driving_cars() {
   var_0 = getEntArray("vista_car", "targetname");
 
-  foreach(var_2 in var_0)
-  thread vista_car_drive(var_2);
+  foreach(var_2 in var_0) {
+    thread vista_car_drive(var_2);
+  }
 }
 
 vista_car_drive(var_0) {

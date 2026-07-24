@@ -461,8 +461,9 @@ script_model() {
   level._id_EC85["airlock_door"]["infil_airlock_close"] = % moon_crash_airlock_door_close;
   level._id_EC85["airlock_door"]["open_airlock"] = % airlock_open_door;
 
-  for(var_0 = 0; var_0 < 17; var_0++)
+  for(var_0 = 0; var_0 < 17; var_0++) {
     level._id_EC87["tut_decomp_prop_" + var_0] = #animtree;
+  }
 
   level._id_EC87["tut_decomp_prop_charger"] = #animtree;
   level._id_EC87["tut_decomp_prop_table_0"] = #animtree;
@@ -703,8 +704,9 @@ _id_A1C4(var_0) {
   level endon("stop_firing_turrets_" + var_0._id_1FBB);
 
   for(;;) {
-    if(isDefined(level._id_9463))
+    if(isDefined(level._id_9463)) {
       var_0 _id_0C1B::_id_6D30(level._id_9463);
+    }
 
     wait 0.1;
   }
@@ -718,8 +720,9 @@ _id_9AC0() {
   var_0 = getdvarint("jeep_crash_anim", 1);
   var_1 = "a";
 
-  if(var_0 == 2)
+  if(var_0 == 2) {
     var_1 = "b";
+  }
 
   level thread _id_9AC2(var_1);
   level.allies["marineCO"] thread _id_9AC1(var_1);
@@ -729,8 +732,9 @@ _id_9AC0() {
 _id_9454(var_0) {
   var_1 = getEntArray("explosion_infil_02", "targetname");
 
-  foreach(var_3 in var_1)
-  var_3 setlightintensity(var_3._id_C3C2);
+  foreach(var_3 in var_1) {
+    var_3 setlightintensity(var_3._id_C3C2);
+  }
 }
 
 _id_9AC2(var_0) {
@@ -792,8 +796,9 @@ _id_71EE() {
   level._id_71F4._id_1FBB = "generic";
   level._id_71F5._id_1FBB = "generic";
 
-  while(scripts\sp\utility::_id_77DB("fob_cafe_enemies") + scripts\sp\utility::_id_77DB("fob_cafe_enemy_bots") > 4)
+  while(scripts\sp\utility::_id_77DB("fob_cafe_enemies") + scripts\sp\utility::_id_77DB("fob_cafe_enemy_bots") > 4) {
     wait 0.1;
+  }
 
   var_0 scripts\sp\anim::_id_1F35(level._id_71F4, "FoB_help_1_A_hit");
   var_0 thread scripts\sp\anim::_id_1EEA(level._id_71F4, "FoB_help_1_A_hit_idle", "stop_loop");
@@ -877,13 +882,15 @@ _id_7201(var_0) {
 _id_730F(var_0) {
   var_1 = getEntArray("explosion_harass_01", "targetname");
 
-  foreach(var_3 in var_1)
-  var_3 setlightintensity(10000);
+  foreach(var_3 in var_1) {
+    var_3 setlightintensity(10000);
+  }
 
   level waittill("explo_lights_off");
 
-  foreach(var_3 in var_1)
-  var_3 setlightintensity(0);
+  foreach(var_3 in var_1) {
+    var_3 setlightintensity(0);
+  }
 }
 
 _id_4685(var_0) {
@@ -895,11 +902,13 @@ _id_CD99(var_0) {
 }
 
 _id_C0C7(var_0) {
-  if(isDefined(var_0._id_B14F))
+  if(isDefined(var_0._id_B14F)) {
     var_0 scripts\sp\utility::_id_1101B();
+  }
 
-  if(!isDefined(var_0._id_EE5F) || !var_0._id_EE5F)
+  if(!isDefined(var_0._id_EE5F) || !var_0._id_EE5F) {
     var_0.forceragdollimmediate = 1;
+  }
 
   var_0 scripts\sp\utility::_id_F2A8(1);
   var_0._id_10265 = 1;
@@ -957,8 +966,9 @@ _id_8E0C(var_0) {
   wait 1;
   _id_0E4B::helmethud_off();
 
-  if(isDefined(level.player._id_8DDB))
+  if(isDefined(level.player._id_8DDB)) {
     level.player._id_8DDB show();
+  }
 }
 
 _id_CFEA() {

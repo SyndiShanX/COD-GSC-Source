@@ -26,11 +26,13 @@ start_directors_cut() {
 }
 
 allow_directors_cut() {
-  if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight())
+  if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
     return 0;
+  }
 
-  if(!level.onlinegame)
+  if(!level.onlinegame) {
     return 0;
+  }
 
   return 1;
 }
@@ -41,8 +43,9 @@ directors_cut_player_connect_monitor() {
   for(;;) {
     level waittill("connected", var_0);
 
-    if(directors_cut_activated_for(var_0))
+    if(directors_cut_activated_for(var_0)) {
       var_0 thread give_directors_cut_benefits_to(var_0);
+    }
   }
 }
 
@@ -106,8 +109,9 @@ drop_talisman(var_0, var_1) {
 
 should_drop_talisman() {
   foreach(var_1 in level.players) {
-    if(player_can_earn_talisman(var_1))
+    if(player_can_earn_talisman(var_1)) {
       return 1;
+    }
   }
 
   return 0;
@@ -115,14 +119,16 @@ should_drop_talisman() {
 
 enable_talisman_pick_up_for_players(var_0) {
   foreach(var_2 in level.players) {
-    if(player_can_earn_talisman(var_2))
+    if(player_can_earn_talisman(var_2)) {
       enable_talisman_pick_up_for(var_0, var_2);
+    }
   }
 }
 
 enable_talisman_pick_up_for(var_0, var_1) {
-  if(!isDefined(var_0.players_who_can_pick_up))
+  if(!isDefined(var_0.players_who_can_pick_up)) {
     var_0.players_who_can_pick_up = [];
+  }
 
   var_0.players_who_can_pick_up[var_0.players_who_can_pick_up.size] = var_1;
 }
@@ -159,8 +165,9 @@ set_up_soul_jar_interaction() {
 }
 
 try_open_soul_jar(var_0, var_1) {
-  if(can_open_soul_jar(var_1))
+  if(can_open_soul_jar(var_1)) {
     open_soul_jar(var_0, var_1);
+  }
 }
 
 make_talisman_pick_up_interaction(var_0) {
@@ -200,10 +207,11 @@ remove_talisman_interaction(var_0, var_1) {
 }
 
 talisman_hint_func(var_0, var_1) {
-  if(player_can_earn_talisman(var_1))
+  if(player_can_earn_talisman(var_1)) {
     return &"DIRECTORS_CUT_PICK_UP_TALISMAN";
-  else
+  } else {
     return &"DIRECTORS_CUT_UNABLE_PICK_UP_TALISMAN";
+  }
 }
 
 soul_jar_hint_func(var_0, var_1) {
@@ -305,8 +313,9 @@ insert_fuses_into_pap_machine() {
       var_1 setscriptablepartstate("door", "open_idle");
       break;
     default:
-      foreach(var_1 in level.player_pap_machines)
-      var_1 setscriptablepartstate("machine", "upgraded");
+      foreach(var_1 in level.player_pap_machines) {
+        var_1 setscriptablepartstate("machine", "upgraded");
+      }
 
       break;
   }
@@ -343,8 +352,9 @@ add_wonder_weapons_to_magic_wheel() {
       return;
   }
 
-  foreach(var_1 in level._id_B163)
-  var_1._id_13C25 = scripts\cp\zombies\interaction_magicwheel::_id_7ABF();
+  foreach(var_1 in level._id_B163) {
+    var_1._id_13C25 = scripts\cp\zombies\interaction_magicwheel::_id_7ABF();
+  }
 }
 
 get_pre_perkaholic_wait_time() {
@@ -412,23 +422,29 @@ make_lost_reel(var_0) {
 }
 
 can_open_soul_jar(var_0) {
-  if(var_0 getrankedplayerdata("cp", "dc_available"))
+  if(var_0 getrankedplayerdata("cp", "dc_available")) {
     return 0;
+  }
 
-  if(!var_0 getrankedplayerdata("cp", "haveSoulKeys", "soul_key_1"))
+  if(!var_0 getrankedplayerdata("cp", "haveSoulKeys", "soul_key_1")) {
     return 0;
+  }
 
-  if(!var_0 getrankedplayerdata("cp", "haveSoulKeys", "soul_key_2"))
+  if(!var_0 getrankedplayerdata("cp", "haveSoulKeys", "soul_key_2")) {
     return 0;
+  }
 
-  if(!var_0 getrankedplayerdata("cp", "haveSoulKeys", "soul_key_3"))
+  if(!var_0 getrankedplayerdata("cp", "haveSoulKeys", "soul_key_3")) {
     return 0;
+  }
 
-  if(!var_0 getrankedplayerdata("cp", "haveSoulKeys", "soul_key_4"))
+  if(!var_0 getrankedplayerdata("cp", "haveSoulKeys", "soul_key_4")) {
     return 0;
+  }
 
-  if(!var_0 getrankedplayerdata("cp", "haveSoulKeys", "soul_key_5"))
+  if(!var_0 getrankedplayerdata("cp", "haveSoulKeys", "soul_key_5")) {
     return 0;
+  }
 
   return 1;
 }
@@ -448,8 +464,9 @@ set_directors_cut_is_activated() {
   level.directors_cut_is_activated = 0;
 
   foreach(var_1 in level.players) {
-    if(directors_cut_activated_for(var_1))
+    if(directors_cut_activated_for(var_1)) {
       level.directors_cut_is_activated = 1;
+    }
   }
 }
 
@@ -492,8 +509,9 @@ give_dc_player_extra_xp_for_carrying_newb() {
   var_1 = var_0 * 50000;
 
   foreach(var_3 in level.players) {
-    if(directors_cut_activated_for(var_3))
+    if(directors_cut_activated_for(var_3)) {
       var_3 scripts\cp\cp_persistence::give_player_xp(var_1, 1);
+    }
   }
 }
 
@@ -520,8 +538,9 @@ get_num_of_newbs_in_game() {
   }
 
   foreach(var_3 in level.players) {
-    if(!var_3 getrankedplayerdata("cp", "haveSoulKeys", var_1))
+    if(!var_3 getrankedplayerdata("cp", "haveSoulKeys", var_1)) {
       var_0++;
+    }
   }
 
   return var_0;
@@ -546,30 +565,35 @@ coaster_monitor() {
     var_2 = [];
 
     foreach(var_4 in level.players) {
-      if(isDefined(var_4.linked_coaster) && var_4.linked_coaster == var_0)
+      if(isDefined(var_4.linked_coaster) && var_4.linked_coaster == var_0) {
         var_2[var_2.size] = var_4;
+      }
     }
 
     talisman_visibility_manager(var_1, var_2);
 
-    foreach(var_4 in var_2)
-    var_4 thread shoot_talisman_monitor(var_4, var_0, var_1);
+    foreach(var_4 in var_2) {
+      var_4 thread shoot_talisman_monitor(var_4, var_0, var_1);
+    }
 
     var_0 waittill("ride_finished");
     var_1 delete();
 
-    if(isDefined(level.wave_num) && level.wave_num > 1)
+    if(isDefined(level.wave_num) && level.wave_num > 1) {
       return;
+    }
   }
 }
 
 talisman_visibility_manager(var_0, var_1) {
   foreach(var_3 in var_1) {
-    if(!directors_cut_activated_for(var_3))
+    if(!directors_cut_activated_for(var_3)) {
       var_0 hidefromplayer(var_3);
+    }
 
-    if(!scripts\engine\utility::is_true(var_3.wearing_dischord_glasses))
+    if(!scripts\engine\utility::is_true(var_3.wearing_dischord_glasses)) {
       var_0 hidefromplayer(var_3);
+    }
   }
 }
 
@@ -708,8 +732,9 @@ talisman_clean_up_monitor(var_0) {
   for(;;) {
     level waittill("regular_wave_starting");
 
-    if(isDefined(level.wave_num) && level.wave_num > 1)
+    if(isDefined(level.wave_num) && level.wave_num > 1) {
       var_0 delete();
+    }
   }
 }
 
@@ -717,8 +742,9 @@ disco_talisman_visibility_manager(var_0) {
   var_0 hide();
 
   foreach(var_2 in level.players) {
-    if(directors_cut_activated_for(var_2))
+    if(directors_cut_activated_for(var_2)) {
       var_0 showtoplayer(var_2);
+    }
   }
 }
 
@@ -744,15 +770,17 @@ town_talisman_visibility_manager(var_0) {
   var_0 hide();
 
   foreach(var_2 in level.players) {
-    if(directors_cut_activated_for(var_2))
+    if(directors_cut_activated_for(var_2)) {
       var_0 showtoplayer(var_2);
+    }
   }
 }
 
 town_talisman_player_shoot_manager(var_0) {
   foreach(var_2 in level.players) {
-    if(directors_cut_activated_for(var_2))
+    if(directors_cut_activated_for(var_2)) {
       var_2 thread shoot_small_talisman_monitor(var_2, var_0);
+    }
   }
 }
 
@@ -796,15 +824,17 @@ cp_final_directors_cut_easter_egg() {
   var_0 = [(4917, -5852, 71), (4910.5, -5859.5, 71), (4910.5, -5873, 71), (4910.5, -5897, 71), (4910.5, -5921, 71), (4910.5, -5945, 71), (4910.5, -5969, 71), (4910.5, -5993, 71), (4910.5, -6017, 71), (4910.5, -6041, 71), (4910.5, -6065, 71), (4910.5, -6089, 71), (4910.5, -6113, 71), (4911.5, -6126.5, 71), (4922.5, -6138.5, 71)];
   level.abandoned_shooting_gallery_interactions = [];
 
-  foreach(var_2 in var_0)
-  set_up_abandoned_shooting_gallery_interaction_at(var_2);
+  foreach(var_2 in var_0) {
+    set_up_abandoned_shooting_gallery_interaction_at(var_2);
+  }
 
   for(;;) {
     level scripts\engine\utility::waittill_any("event_wave_starting", "regular_wave_starting");
 
     if(isDefined(level.wave_num) && level.wave_num > 1) {
-      foreach(var_5 in level.abandoned_shooting_gallery_interactions)
-      scripts\cp\cp_interaction::remove_from_current_interaction_list(var_5);
+      foreach(var_5 in level.abandoned_shooting_gallery_interactions) {
+        scripts\cp\cp_interaction::remove_from_current_interaction_list(var_5);
+      }
     }
   }
 }

@@ -7,8 +7,9 @@ init_rockettrap() {
   level.rockettrapuses = 0;
   var_0 = scripts\engine\utility::getStructArray("rockettrap", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_E5D9();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_E5D9();
+  }
 }
 
 _id_E5D9() {
@@ -17,11 +18,13 @@ _id_E5D9() {
   var_2 = undefined;
 
   foreach(var_4 in var_0) {
-    if(var_4.script_noteworthy == "rocket_blast_fx")
+    if(var_4.script_noteworthy == "rocket_blast_fx") {
       self.rocket = var_4;
+    }
 
-    if(var_4.script_noteworthy == "rocket_blast_trigger")
+    if(var_4.script_noteworthy == "rocket_blast_trigger") {
       self._id_4CDF = var_4;
+    }
   }
 
   var_6 = getEntArray(self.target, "targetname");
@@ -30,15 +33,17 @@ _id_E5D9() {
   var_9 = "power_on";
 
   foreach(var_11 in var_6) {
-    if(var_11.classname == "light_spot")
+    if(var_11.classname == "light_spot") {
       var_7 = var_11;
+    }
   }
 
   var_7 setlightintensity(0);
 
   for(;;) {
-    if(var_8)
+    if(var_8) {
       var_9 = level scripts\engine\utility::waittill_any_return_no_endon_death("power_on", self.power_area + " power_on", "power_off");
+    }
 
     if(var_9 != "power_off") {
       for(var_13 = 0; var_13 < 3; var_13++) {
@@ -84,8 +89,9 @@ use_rocket_trap(var_0, var_1) {
   scripts\engine\utility::exploder(56);
   level thread _id_E5D4(level._id_E5D5, var_1, var_0);
 
-  if(scripts\engine\utility::flag("mini_ufo_blue_ready"))
+  if(scripts\engine\utility::flag("mini_ufo_blue_ready")) {
     level thread _id_13622();
+  }
 
   level._id_E5D8 playSound("trap_rocket_start");
   wait 1.95;
@@ -151,10 +157,11 @@ _id_E5D4(var_0, var_1, var_2) {
       var_3.trap_killed_by = var_1;
 
       if(isDefined(var_1)) {
-        if(!isDefined(var_1.trapkills["trap_rocket"]))
+        if(!isDefined(var_1.trapkills["trap_rocket"])) {
           var_1.trapkills["trap_rocket"] = 1;
-        else
+        } else {
           var_1.trapkills["trap_rocket"]++;
+        }
 
         var_2.trap_kills++;
         var_3 thread scripts\cp\utility::damage_over_time(var_3, var_1, 1.5, int(var_3.health + 100), "MOD_UNKNOWN", "iw7_rockettrap_zm", 1, "burning", "rocket_trap_kill");

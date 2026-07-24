@@ -51,8 +51,9 @@ _id_E941() {
   level notify("hull_ammo_crate");
   scripts\sp\utility::_id_F44E(1);
 
-  if(isDefined(level._id_118A8))
+  if(isDefined(level._id_118A8)) {
     thread scripts\sp\maps\sa_moon\sa_moon_util::_id_405F();
+  }
 
   thread scripts\sp\maps\sa_moon\sa_moon_util::_id_8EA5();
   wait 0.1;
@@ -109,8 +110,9 @@ _id_2F67() {
   self._id_438A thread scripts\sp\maps\sa_moon\sa_moon_util::_id_51A1();
   var_1 = level._id_2FD7;
 
-  if(self.script_noteworthy == "breach_enemy_05")
+  if(self.script_noteworthy == "breach_enemy_05") {
     var_1 scripts\sp\anim::_id_1F35(self, "breach_enter_new");
+  }
 
   if(self.script_noteworthy == "breach_captain") {
     level._id_3A1E = scripts\sp\utility::_id_10639("keycard");
@@ -120,14 +122,17 @@ _id_2F67() {
   if(isDefined(self._id_2F5F)) {
     var_1 thread scripts\sp\anim::_id_1EEA(self, "breach_death_loop_new", self._id_1FBB + "stop_breach_death_loop");
 
-    if(self.script_noteworthy == "breach_captain")
+    if(self.script_noteworthy == "breach_captain") {
       var_1 thread scripts\sp\anim::_id_1EEA(level._id_3A1E, "breach_enter_loop", "keycard_stop_breach_loop");
+    }
   } else {
-    if(isDefined(self._id_B14F) && self._id_B14F)
+    if(isDefined(self._id_B14F) && self._id_B14F) {
       scripts\sp\utility::_id_1101B();
+    }
 
-    if(isDefined(self._id_438A))
+    if(isDefined(self._id_438A)) {
       self._id_438A delete();
+    }
 
     scripts\engine\utility::waitframe();
     self delete();
@@ -141,8 +146,9 @@ _id_E2C4() {
   var_0 = getEnt("bridge_revert_gravity", "targetname");
 
   if(!level.player istouching(var_0)) {
-    while(!level.player istouching(var_0))
+    while(!level.player istouching(var_0)) {
       wait 0.05;
+    }
   }
 
   _id_0F0A::life_support_cleanup_equipment_disable_use();
@@ -174,8 +180,9 @@ _id_E2C4() {
 }
 
 _id_8527() {
-  while(!level.player isonground() || level.player _meth_84F4() != "none")
+  while(!level.player isonground() || level.player _meth_84F4() != "none") {
     scripts\engine\utility::waitframe();
+  }
 
   level.player forceplaygestureviewmodel("ges_samoon_bridge_gravity_land");
   level thread _id_5D42();
@@ -239,8 +246,9 @@ _id_A59D() {
   var_1[var_1.size] = level._id_2F5C;
   var_1[var_1.size] = level._id_3A1E;
 
-  if(!isDefined(level._id_9DD0))
+  if(!isDefined(level._id_9DD0)) {
     level._id_3A1E _id_0E46::_id_48C4(undefined, undefined, undefined, undefined, 1000, 64, 1);
+  }
 
   level._id_3A1E waittill("trigger");
   level thread scripts\sp\maps\sa_moon\sa_moon_audio::_id_3A1D();
@@ -329,13 +337,15 @@ _id_9A7D() {
   level._id_2F65 = scripts\sp\utility::_id_22B9(level._id_2F65);
   level._id_2F65 = scripts\engine\utility::array_removeundefined(level._id_2F65);
 
-  foreach(var_1 in level._id_2F65)
-  var_1 thread _id_9A7E();
+  foreach(var_1 in level._id_2F65) {
+    var_1 thread _id_9A7E();
+  }
 }
 
 _id_9A7E() {
-  if(self.script_noteworthy == "breach_enemy_05" || self.script_noteworthy == "breach_captain")
+  if(self.script_noteworthy == "breach_enemy_05" || self.script_noteworthy == "breach_captain") {
     scripts\engine\utility::flag_wait("bridge_gravity_restored");
+  }
 
   if(self == level._id_2F5C) {
     level._id_2FD7 notify("keycard_stop_breach_loop");
@@ -350,13 +360,15 @@ _id_9A7E() {
     level._id_2FD7 thread scripts\sp\anim::_id_1EEA(level._id_2F5C, "grab_captain_loop", "stop_breach_captain_breach_enter_loop");
     scripts\engine\utility::flag_set("captain_key_card_spawned");
   } else {
-    if(isDefined(self._id_B14F) && self._id_B14F)
+    if(isDefined(self._id_B14F) && self._id_B14F) {
       scripts\sp\utility::_id_1101B();
+    }
 
     self _meth_83F7();
 
-    if(isDefined(self._id_438A))
+    if(isDefined(self._id_438A)) {
       self._id_438A delete();
+    }
 
     self _meth_81D0();
   }
@@ -381,8 +393,9 @@ _id_E943() {
   var_0 scripts\sp\anim::_id_1F35(self, "breach_enter_new");
   scripts\engine\utility::flag_set("breach_entry_ethan_inside");
 
-  if(!scripts\engine\utility::flag("bridge_gravity_restoring"))
+  if(!scripts\engine\utility::flag("bridge_gravity_restoring")) {
     var_0 thread scripts\sp\anim::_id_1EEA(self, "breach_enter_loop", "stop_ethan_breach_enter_loop");
+  }
 
   scripts\engine\utility::flag_wait("bridge_gravity_restoring");
   var_0 notify("stop_ethan_breach_enter_loop");
@@ -426,8 +439,9 @@ _id_E945() {
   thread _id_2FF8(var_4);
   var_0 scripts\sp\anim::_id_1F35(self, "breach_enter_new");
 
-  if(!scripts\engine\utility::flag("bridge_gravity_restored"))
+  if(!scripts\engine\utility::flag("bridge_gravity_restored")) {
     var_0 thread scripts\sp\anim::_id_1EEA(self, "breach_enter_loop", "stop_omar_breach_enter_loop");
+  }
 
   scripts\engine\utility::flag_wait("bridge_gravity_restored");
   var_0 notify("stop_omar_breach_enter_loop");
@@ -446,10 +460,11 @@ _id_E945() {
   var_0 thread scripts\sp\anim::_id_1F35(self, "elevator_down");
   var_7 = 1;
 
-  if(var_7)
+  if(var_7) {
     wait 5.133;
-  else
+  } else {
     self waittillmatch("single anim", "allow_player");
+  }
 
   scripts\engine\utility::flag_set("move_player_down_elevator_enabled");
   scripts\engine\utility::flag_set("player_wait_elevator_scene");
@@ -481,8 +496,9 @@ _id_E947() {
   var_0 = scripts\engine\utility::getStruct("bridge_breach_anim_struct", "targetname");
   var_0 scripts\sp\anim::_id_1F35(self, "breach_enter_new");
 
-  if(!scripts\engine\utility::flag("bridge_gravity_restoring"))
+  if(!scripts\engine\utility::flag("bridge_gravity_restoring")) {
     var_0 thread scripts\sp\anim::_id_1EEA(self, "breach_enter_loop", "stop_salter_breach_enter_loop");
+  }
 
   scripts\engine\utility::flag_wait("bridge_gravity_restoring");
   var_0 notify("stop_salter_breach_enter_loop");
@@ -510,8 +526,9 @@ _id_E949() {
   level._id_6754 thread scripts\sp\utility::_id_10346("mn_eth_aye_sir");
   wait 1.5;
 
-  if(!scripts\engine\utility::flag("bridge_gravity_restoring"))
+  if(!scripts\engine\utility::flag("bridge_gravity_restoring")) {
     level.player scripts\sp\utility::_id_1034D("mn_plr_scope_windows");
+  }
 
   level thread _id_E946();
   scripts\engine\utility::flag_wait("bridge_gravity_restored");

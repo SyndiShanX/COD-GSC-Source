@@ -64,8 +64,9 @@ _id_1199A() {
     self waittill("trigger");
     level.player clearclienttriggeraudiozone(0.75);
 
-    while(level.player istouching(self))
+    while(level.player istouching(self)) {
       wait 0.5;
+    }
   }
 }
 
@@ -127,14 +128,17 @@ _id_1194A() {
 _id_2063() {
   self waittill("death");
 
-  if(isDefined(self._id_207C))
+  if(isDefined(self._id_207C)) {
     self._id_207C delete();
+  }
 
-  if(isDefined(self._id_2073))
+  if(isDefined(self._id_2073)) {
     self._id_2073 delete();
+  }
 
-  if(isDefined(self._id_2096))
+  if(isDefined(self._id_2096)) {
     self._id_2096 delete();
+  }
 }
 
 _id_1194B() {
@@ -153,14 +157,17 @@ _id_1194B() {
     var_3 = self vehicle_getspeed();
     var_4 = var_3 / 8;
 
-    if(var_1 < var_4)
+    if(var_1 < var_4) {
       var_2 = var_1 + (var_4 - var_1) / 30;
+    }
 
-    if(var_1 > var_4)
+    if(var_1 > var_4) {
       var_2 = var_1 - (var_1 - var_4) / 30;
+    }
 
-    if(var_2 > 1)
+    if(var_2 > 1) {
       var_2 = 1;
+    }
 
     var_1 = var_2;
     self._id_2096 _meth_8278(var_1, 0.1);
@@ -241,12 +248,13 @@ _id_1194E() {
   self endon("stop_move_along_struct_path");
   var_0 = self vehicle_getspeed();
 
-  if(var_0 < 4)
+  if(var_0 < 4) {
     self playSound("veh_apc_slow_stop_from_slow");
-  else if(var_0 < 8)
+  } else if(var_0 < 8) {
     self playSound("veh_apc_slow_stop_from_med");
-  else
+  } else {
     self playSound("veh_apc_slow_stop_from_fast");
+  }
 
   self._id_207C scripts\sp\utility::_id_10461("veh_apc_idle_lp", 1, 2, 1);
   self._id_2096 _meth_8278(0, 3);
@@ -265,14 +273,17 @@ _id_1194D() {
     var_2 = self vehicle_getspeed();
     var_3 = var_2 / 15;
 
-    if(var_0 < var_3)
+    if(var_0 < var_3) {
       var_1 = var_0 + (var_3 - var_0) / 30;
+    }
 
-    if(var_0 > var_3)
+    if(var_0 > var_3) {
       var_1 = var_0 - (var_0 - var_3) / 30;
+    }
 
-    if(var_1 > 1)
+    if(var_1 > 1) {
       var_1 = 1;
+    }
 
     var_0 = var_1;
     self._id_2073 _meth_8278(var_0, 0.1);
@@ -289,16 +300,18 @@ _id_1194C() {
   self._id_207C scripts\sp\utility::_id_10461("veh_apc_idle_lp", 1, 2, 1);
 
   for(;;) {
-    while(!self vehicle_getspeed() > 0)
+    while(!self vehicle_getspeed() > 0) {
       wait 0.1;
+    }
 
     thread _id_1194B();
     thread _id_1194D();
     self waittill("apc_sfx_stop");
     thread _id_1194E();
 
-    while(self vehicle_getspeed() != 0)
+    while(self vehicle_getspeed() != 0) {
       wait 0.1;
+    }
 
     self notify("apc_stopped");
     self._id_2073 stoploopsound();

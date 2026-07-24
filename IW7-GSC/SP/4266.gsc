@@ -6,37 +6,46 @@
 _id_A314(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   _id_DEB9();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level thread _id_FDB5(var_0, var_1, "shipcrib_jackal_serv_grnd_A");
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level thread _id_FDB5(var_0, var_2, "shipcrib_jackal_serv_grnd_B");
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level thread _id_FDB5(var_0, var_3, "shipcrib_jackal_serv_grnd_C");
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     level thread _id_FDB9(var_0, var_4, "shipcrib_jackal_serv_top_01");
+  }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     level thread _id_FDB9(var_0, var_5, "shipcrib_jackal_serv_top_02");
+  }
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     level thread _id_FDB9(var_0, var_6, "shipcrib_jackal_serv_top_03");
+  }
 }
 
 _id_A315(var_0) {
   foreach(var_2 in var_0) {
-    if(isDefined(var_2._id_1F1C))
+    if(isDefined(var_2._id_1F1C)) {
       var_2._id_1F1C notify("ambient_idle_scene_end");
+    }
 
     var_2 notify("cleaned");
 
-    if(isDefined(var_2._id_B14F))
+    if(isDefined(var_2._id_B14F)) {
       var_2 scripts\sp\utility::_id_1101B();
+    }
 
-    if(isai(var_2))
+    if(isai(var_2)) {
       var_2 _meth_81D0();
+    }
 
     var_2 delete();
   }

@@ -83,8 +83,9 @@ begingrenadetracking() {
     if(isDefined(var_0) && scripts\engine\utility::is_true(var_0._id_8589)) {
       continue;
     }
-    if(isDefined(level.func["player_grenade_thrown"]))
+    if(isDefined(level.func["player_grenade_thrown"])) {
       level thread[[level.func["player_grenade_thrown"]]](var_0);
+    }
 
     switch (var_1) {
       case "seeker_autohold":
@@ -104,8 +105,9 @@ begingrenadetracking() {
       case "frag":
         thread _id_734F(var_0);
 
-        if(self == level.player)
+        if(self == level.player) {
           level.player thread scripts\anim\battlechatter_ai::_id_67CF("frag");
+        }
 
         break;
       case "c8_grenade":
@@ -183,8 +185,9 @@ _id_734F(var_0) {
   if(self == level.player) {
     thread _id_734D(var_4, var_2, 256);
 
-    if(isDefined(level.player._id_735A))
+    if(isDefined(level.player._id_735A)) {
       thread _id_7352(var_4, var_1._id_4D40);
+    }
   }
 
   thread _id_DBDB(var_4);
@@ -197,31 +200,36 @@ _id_734F(var_0) {
   var_5 = 1;
   var_6 = distance2dsquared(level.player.origin, var_4);
 
-  if(var_5 && var_6 > 102400)
+  if(var_5 && var_6 > 102400) {
     var_5 = 0;
+  }
 
   if(var_5 && var_6 > 4096) {
     var_7 = vectordot(scripts\engine\utility::flatten_vector(vectorNormalize(var_4 - level.player.origin)), anglesToForward(level.player.angles));
 
-    if(var_7 < 0.0)
+    if(var_7 < 0.0) {
       var_5 = 0;
+    }
   }
 
   if(var_5) {
-    if(!scripts\common\trace::ray_trace_passed(var_4 + (0, 0, 12), level.player getEye(), undefined, scripts\common\trace::create_world_contents()))
+    if(!scripts\common\trace::ray_trace_passed(var_4 + (0, 0, 12), level.player getEye(), undefined, scripts\common\trace::create_world_contents())) {
       var_5 = 0;
+    }
   }
 
-  if(var_5)
+  if(var_5) {
     level.player thread _id_859C(var_4);
+  }
 }
 
 _id_13771(var_0) {
   thread _id_1376E(var_0);
   thread _id_13582(var_0);
 
-  while(isDefined(self))
+  while(isDefined(self)) {
     wait 0.05;
+  }
 }
 
 _id_1376E(var_0) {
@@ -259,8 +267,9 @@ _id_DFBF() {
   level endon("removing_all_frags_instantly");
   scripts\engine\utility::flag_set("frag_force_delete");
 
-  foreach(var_1 in level._id_0149._id_B37A)
-  var_1 _id_E012();
+  foreach(var_1 in level._id_0149._id_B37A) {
+    var_1 _id_E012();
+  }
 
   scripts\engine\utility::waitframe();
 
@@ -297,17 +306,18 @@ _id_734D(var_0, var_1, var_2, var_3) {
   level.player notify("new_frag_info_reticles");
   level.player endon("new_frag_info_reticles");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     scripts\engine\utility::flag_wait_or_timeout("frag_force_delete", var_3);
+  }
 
   var_4 = [];
   var_5 = [];
   var_6 = [];
 
   for(var_7 = 0; var_7 < var_1.size; var_7++) {
-    if(distance(var_1[var_7].origin, var_0) > var_2)
+    if(distance(var_1[var_7].origin, var_0) > var_2) {
       continue;
-    else if(!isDefined(var_1[var_7].ent) || !isalive(var_1[var_7].ent)) {
+    } else if(!isDefined(var_1[var_7].ent) || !isalive(var_1[var_7].ent)) {
       var_4[var_4.size] = var_1[var_7];
       continue;
     } else if(var_1[var_7].ent.health < var_1[var_7].health) {
@@ -335,9 +345,9 @@ _id_734D(var_0, var_1, var_2, var_3) {
       var_13[var_13.size] = var_15;
       setomnvar("ui_fragreticles_" + var_7 + "_target_ent", var_15);
 
-      if(var_7 < var_8)
+      if(var_7 < var_8) {
         setomnvar("ui_fragreticles_" + var_7 + "_lock_state", 1);
-      else if(var_7 < var_8 + var_9) {
+      } else if(var_7 < var_8 + var_9) {
         if(!isalive(var_11[var_7])) {
           setomnvar("ui_fragreticles_" + var_7 + "_lock_state", 2);
           var_15 linkTo(var_11[var_7].ent, _id_129D(var_11[var_7].ent), (0, 0, 0), (0, 0, 0));
@@ -359,15 +369,17 @@ _id_734D(var_0, var_1, var_2, var_3) {
     setomnvar("ui_fragreticles_" + var_7 + "_lock_state", 0);
   }
 
-  for(var_7 = 0; var_7 < var_13.size; var_7++)
+  for(var_7 = 0; var_7 < var_13.size; var_7++) {
     var_13[var_7] delete();
+  }
 }
 
 _id_129D(var_0) {
-  if(isDefined(var_0.classname) && !issubstr(var_0.classname, "seeker"))
+  if(isDefined(var_0.classname) && !issubstr(var_0.classname, "seeker")) {
     return "j_SpineUpper";
-  else
+  } else {
     return "tag_origin";
+  }
 }
 
 _id_7352(var_0, var_1) {
@@ -383,14 +395,16 @@ _id_7352(var_0, var_1) {
     }
   }
 
-  if(var_2.size > 0)
+  if(var_2.size > 0) {
     playFX(level._id_7649["frag_tel_radius"], var_0);
+  }
 
   scripts\engine\utility::flag_wait_or_timeout("frag_force_delete", var_1);
   scripts\engine\utility::flag_wait_or_timeout("frag_force_delete", 2.0);
 
-  foreach(var_4 in var_2)
-  var_4 notify("frag_outline_display_done");
+  foreach(var_4 in var_2) {
+    var_4 notify("frag_outline_display_done");
+  }
 }
 
 _id_7353() {
@@ -451,35 +465,43 @@ _id_1339D(var_0) {
 }
 
 _id_385C(var_0, var_1) {
-  if(isent(self) || isai(self))
+  if(isent(self) || isai(self)) {
     var_2 = [self, var_1, level.player];
-  else
+  } else {
     var_2 = [var_1, level.player];
+  }
 
-  if(scripts\common\trace::ray_trace_passed(var_0, var_1.origin, var_2))
+  if(scripts\common\trace::ray_trace_passed(var_0, var_1.origin, var_2)) {
     return 1;
+  }
 
-  if(scripts\common\trace::ray_trace_passed(var_0, var_1 gettagorigin("j_spine4"), var_2))
+  if(scripts\common\trace::ray_trace_passed(var_0, var_1 gettagorigin("j_spine4"), var_2)) {
     return 1;
+  }
 
-  if(scripts\common\trace::ray_trace_passed(var_0, var_1 getEye(), var_2))
+  if(scripts\common\trace::ray_trace_passed(var_0, var_1 getEye(), var_2)) {
     return 1;
+  }
 
-  if(scripts\common\trace::ray_trace_passed(var_0, var_1 gettagorigin("j_helmet"), var_2))
+  if(scripts\common\trace::ray_trace_passed(var_0, var_1 gettagorigin("j_helmet"), var_2)) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_385D(var_0) {
-  if(scripts\common\trace::ray_trace_passed(var_0, level.player.origin, level.player))
+  if(scripts\common\trace::ray_trace_passed(var_0, level.player.origin, level.player)) {
     return 1;
+  }
 
-  if(scripts\common\trace::ray_trace_passed(var_0, level.player.origin + (0, 0, 30), level.player))
+  if(scripts\common\trace::ray_trace_passed(var_0, level.player.origin + (0, 0, 30), level.player)) {
     return 1;
+  }
 
-  if(scripts\common\trace::ray_trace_passed(var_0, level.player getEye(), level.player))
+  if(scripts\common\trace::ray_trace_passed(var_0, level.player getEye(), level.player)) {
     return 1;
+  }
 
   return 0;
 }
@@ -487,11 +509,13 @@ _id_385D(var_0) {
 getdamageableents(var_0, var_1, var_2, var_3) {
   var_4 = [];
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
   for(var_5 = 0; var_5 < level.players.size; var_5++) {
     if(!isalive(level.players[var_5]) || level.players[var_5].sessionstate != "playing") {
@@ -549,17 +573,18 @@ _id_13C7E(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
   var_5 = var_1 - var_0;
 
-  if(lengthsquared(var_5) < var_2 * var_2)
+  if(lengthsquared(var_5) < var_2 * var_2) {
     var_4 = var_1;
+  }
 
   var_6 = vectorNormalize(var_5);
   var_4 = var_0 + (var_6[0] * var_2, var_6[1] * var_2, var_6[2] * var_2);
   var_7 = bulletTrace(var_4, var_1, 0, var_3);
 
   if(getdvarint("scr_damage_debug") != 0) {
-    if(var_7["fraction"] == 1)
+    if(var_7["fraction"] == 1) {
       thread debugline(var_4, var_1, (1, 1, 1));
-    else {
+    } else {
       thread debugline(var_4, var_7["position"], (1, 0.9, 0.8));
       thread debugline(var_7["position"], var_1, (1, 0.4, 0.3));
     }
@@ -581,8 +606,9 @@ damageent(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 debugline(var_0, var_1, var_2) {
-  for(var_3 = 0; var_3 < 600; var_3++)
+  for(var_3 = 0; var_3 < 600; var_3++) {
     wait 0.05;
+  }
 }
 
 onweapondamage(var_0, var_1, var_2, var_3) {
@@ -624,8 +650,9 @@ _id_3D27() {
     var_3 = scripts\common\trace::sphere_trace_get_all_results(var_1, self.origin, var_0, self.owner, scripts\common\trace::create_character_contents());
 
     foreach(var_5 in var_3) {
-      if(isDefined(var_5["entity"]) && isai(var_5["entity"]))
+      if(isDefined(var_5["entity"]) && isai(var_5["entity"])) {
         var_5["entity"] thread _id_0E25::_id_5772(self, var_0);
+      }
     }
 
     var_1 = self.origin;

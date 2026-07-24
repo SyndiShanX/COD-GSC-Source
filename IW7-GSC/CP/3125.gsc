@@ -22,11 +22,11 @@ _id_B643(var_0, var_1, var_2) {
 _id_D4D7(var_0, var_1, var_2, var_3) {
   var_4 = scripts\asm\asm_bb::bb_getmeleetarget();
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     self orientmode("face angle abs", self.angles);
-  else if(isPlayer(var_4) && var_4 == self.enemy)
+  } else if(isPlayer(var_4) && var_4 == self.enemy) {
     self orientmode("face enemy");
-  else {
+  } else {
     var_5 = var_4.origin - self.origin;
     var_6 = vectorNormalize(var_5);
     var_7 = vectortoangles(var_6);
@@ -43,8 +43,9 @@ donotetracks_vsplayer(var_0, var_1) {
   for(;;) {
     self waittill(var_1, var_2);
 
-    if(!isarray(var_2))
+    if(!isarray(var_2)) {
       var_2 = [var_2];
+    }
 
     foreach(var_4 in var_2) {
       switch (var_4) {
@@ -72,8 +73,9 @@ donotetracks_vsplayer(var_0, var_1) {
           if(!isDefined(var_5)) {
             return;
           }
-          if(isalive(var_5))
+          if(isalive(var_5)) {
             _id_CA1F(var_5);
+          }
 
           break;
         default:
@@ -104,9 +106,9 @@ _id_CA1F(var_0) {
     var_4 = _id_3D76(var_0);
     var_5 = _id_3D95(var_0);
 
-    if(var_4 || var_5)
+    if(var_4 || var_5) {
       return;
-    else {
+    } else {
       if(isDefined(var_0.isjuggernaut) && var_0.isjuggernaut) {
         var_1 = var_1 * 0.65;
         earthquake(0.25, 0.25, var_0.origin, 100);
@@ -117,8 +119,9 @@ _id_CA1F(var_0) {
     }
   }
 
-  if(isDefined(self._id_B62B))
+  if(isDefined(self._id_B62B)) {
     [[self._id_B62B]](self, var_0);
+  }
 
   var_0 dodamage(var_1, self.origin, self, self);
   var_0 thread _id_F5FE(var_2);
@@ -134,10 +137,11 @@ _id_3D95(var_0) {
   var_2 = vectorNormalize(self.origin - var_0.origin);
   var_3 = vectordot(var_2, var_1);
 
-  if(var_0 meleeButtonPressed() && isDefined(var_0.meleestrength) && var_0.meleestrength == 1 && var_3 > 0.5)
+  if(var_0 meleeButtonPressed() && isDefined(var_0.meleestrength) && var_0.meleestrength == 1 && var_3 > 0.5) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_3D76(var_0) {

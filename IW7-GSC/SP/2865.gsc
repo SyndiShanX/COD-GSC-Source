@@ -75,8 +75,9 @@ _id_4FF0() {
   scripts\anim\utility::_id_F7B9(var_1, var_2, "rock", loadfx("vfx/core/impacts/bodyfall_default_large_runner.vfx"), var_3, var_4);
   var_5 = ["brick", "carpet", "foliage", "grass", "gravel", "ice", "metal", "painted metal", "mud", "plaster", "sand", "snow", "slush", "water", "wood", "ceramic"];
 
-  foreach(var_7 in var_5)
-  scripts\anim\utility::_id_F7BA(var_1, var_7, var_3, var_4);
+  foreach(var_7 in var_5) {
+    scripts\anim\utility::_id_F7BA(var_1, var_7, var_3, var_4);
+  }
 
   var_1 = "bodyfall small";
   var_2 = "J_SpineLower";
@@ -87,8 +88,9 @@ _id_4FF0() {
   scripts\anim\utility::_id_F7B9(var_1, var_2, "asphalt_dry", loadfx("vfx/core/impacts/bodyfall_default_large_runner.vfx"), var_3, var_4);
   scripts\anim\utility::_id_F7B9(var_1, var_2, "rock", loadfx("vfx/core/impacts/bodyfall_default_large_runner.vfx"), var_3, var_4);
 
-  foreach(var_7 in var_5)
-  scripts\anim\utility::_id_F7BA(var_1, var_7, var_3, var_4);
+  foreach(var_7 in var_5) {
+    scripts\anim\utility::_id_F7BA(var_1, var_7, var_3, var_4);
+  }
 
   if(!isDefined(level.plant_anims)) {
     return;

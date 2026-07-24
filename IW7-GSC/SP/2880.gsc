@@ -8,8 +8,9 @@ _id_DEB8(var_0, var_1) {
 }
 
 _id_7A2D(var_0) {
-  if(!isDefined(level._id_1DBE) || !isDefined(level._id_1DBE[var_0]))
+  if(!isDefined(level._id_1DBE) || !isDefined(level._id_1DBE[var_0])) {
     return undefined;
+  }
 
   return level._id_1DBE[var_0];
 }
@@ -19,8 +20,9 @@ _id_7A2D(var_0) {
 _id_CC7F(var_0, var_1) {
   self._id_DC6F = 0;
 
-  if(isai(var_0) && !isDefined(var_0._id_9B89))
+  if(isai(var_0) && !isDefined(var_0._id_9B89)) {
     var_0 animmode("noclip");
+  }
 
   wait 0.1;
   var_0 clearanim(%root, 0.0);
@@ -45,14 +47,17 @@ _id_CC7F(var_0, var_1) {
 }
 
 _id_CC80(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
-  if(isDefined(self._id_1DBC))
+  if(isDefined(self._id_1DBC)) {
     self._id_1DBC = scripts\engine\utility::spawn_script_origin();
+  }
 
   var_3 = [];
 
@@ -130,8 +135,9 @@ _id_DC81(var_0) {
 
     var_9 = undefined;
 
-    if(isDefined(var_0._id_1ED4))
+    if(isDefined(var_0._id_1ED4)) {
       var_9 = [[var_0._id_1ED4]]();
+    }
 
     var_10 = getanimlength(var_3);
     var_11 = randomintrange(1, 4);
@@ -198,8 +204,9 @@ _id_DC84(var_0) {
   self notify("ambient_idle_scene_start");
 
   foreach(var_7 in var_0) {
-    if(!isDefined(var_7._id_1FEC))
+    if(!isDefined(var_7._id_1FEC)) {
       var_7 scripts\sp\anim::_id_F64A();
+    }
 
     thread scripts\sp\anim::_id_10CBF(var_7, "single anim");
     thread scripts\sp\anim::_id_1FCA(var_7, "single anim");
@@ -241,8 +248,9 @@ _id_DC84(var_0) {
 
       var_14 = undefined;
 
-      if(isDefined(var_7._id_1ED4))
+      if(isDefined(var_7._id_1ED4)) {
         var_14 = [[var_7._id_1ED4]]();
+      }
 
       var_15 = getanimlength(var_3);
       var_16 = randomintrange(1, 4);
@@ -253,8 +261,9 @@ _id_DC84(var_0) {
     wait(var_9);
     var_18 = [];
 
-    foreach(var_7 in var_0)
-    var_18 = scripts\engine\utility::array_add(var_18, level._id_EC85[var_7._id_1FBB]["idle_anims"][var_5][0]);
+    foreach(var_7 in var_0) {
+      var_18 = scripts\engine\utility::array_add(var_18, level._id_EC85[var_7._id_1FBB]["idle_anims"][var_5][0]);
+    }
 
     _id_13597(var_3, var_18, var_0);
 
@@ -280,8 +289,9 @@ _id_DC84(var_0) {
     wait(var_9);
     var_18 = [];
 
-    foreach(var_7 in var_0)
-    var_18 = scripts\engine\utility::array_add(var_18, level._id_EC85[var_7._id_1FBB]["idle_anims"][var_5][2]);
+    foreach(var_7 in var_0) {
+      var_18 = scripts\engine\utility::array_add(var_18, level._id_EC85[var_7._id_1FBB]["idle_anims"][var_5][2]);
+    }
 
     _id_13597(var_10[1], var_18, var_0);
 
@@ -322,8 +332,9 @@ _id_DC86(var_0) {
   self endon("death");
   self waittill("ambient_scene_end");
 
-  if(isent(var_0))
+  if(isent(var_0)) {
     var_0 _id_4179();
+  }
 
   self notify("ambient_idle_scene_end");
 }
@@ -333,8 +344,9 @@ _id_DC87(var_0) {
   self waittill("ambient_scene_end");
 
   foreach(var_2 in var_0) {
-    if(isent(var_2))
+    if(isent(var_2)) {
       var_2 _meth_83A1();
+    }
   }
 
   self notify("ambient_idle_scene_end");
@@ -382,8 +394,9 @@ _id_DC82(var_0) {
 
     var_8 = undefined;
 
-    if(isDefined(var_0._id_1ED4))
+    if(isDefined(var_0._id_1ED4)) {
       var_8 = [[var_0._id_1ED4]]();
+    }
 
     var_9 = getanimlength(var_2);
     var_10 = randomintrange(1, 4);
@@ -418,8 +431,9 @@ _id_DC83(var_0) {
     thread scripts\sp\anim::_id_1FCA(var_6, "single anim");
     var_10 = undefined;
 
-    if(isDefined(var_6._id_1ED4))
+    if(isDefined(var_6._id_1ED4)) {
       var_10 = [[var_6._id_1ED4]]();
+    }
 
     var_6 animScripted("single anim", self.origin, self.angles, var_7, undefined, var_10, 0.0);
   }
@@ -455,8 +469,9 @@ _id_DC83(var_0) {
       var_6.angles = var_9;
       var_10 = undefined;
 
-      if(isDefined(var_6._id_1ED4))
+      if(isDefined(var_6._id_1ED4)) {
         var_10 = [[var_6._id_1ED4]]();
+      }
 
       var_16 = getanimlength(var_7);
       var_13 = var_16;
@@ -475,8 +490,9 @@ _id_DC83(var_0) {
       var_6.angles = var_9;
       var_10 = undefined;
 
-      if(isDefined(var_6._id_1ED4))
+      if(isDefined(var_6._id_1ED4)) {
         var_10 = [[var_6._id_1ED4]]();
+      }
 
       var_6 animScripted("single anim", self.origin, self.angles, var_20, undefined, var_10, 0.2);
       var_18 = getanimlength(var_20);
@@ -491,8 +507,9 @@ _id_9B63(var_0) {
 }
 
 _id_9B62(var_0) {
-  if(isDefined(var_0.script_noteworthy) && _id_9B63(var_0.script_noteworthy))
+  if(isDefined(var_0.script_noteworthy) && _id_9B63(var_0.script_noteworthy)) {
     return 1;
+  }
 
   return 0;
 }
@@ -541,8 +558,9 @@ _id_13597(var_0, var_1, var_2) {
       var_4 = length2d(level.player.origin - var_8 scripts\anim\utility::_id_7DC6(var_1[var_7]));
       var_5 = float(getDvar("g_speed")) * 0.25;
 
-      if(var_3 / var_5 > getanimlength(var_1[var_7]) && var_4 / var_5 > getanimlength(var_1[var_7]))
+      if(var_3 / var_5 > getanimlength(var_1[var_7]) && var_4 / var_5 > getanimlength(var_1[var_7])) {
         var_6++;
+      }
     }
 
     if(var_6 >= var_2.size) {
@@ -566,8 +584,9 @@ _id_CDD6(var_0, var_1, var_2) {
   for(;;) {
     scripts\sp\anim::_id_1F35(var_0, var_1);
 
-    if(var_4.size < 1)
+    if(var_4.size < 1) {
       var_4 = var_3;
+    }
 
     var_5 = randomint(var_4.size);
     scripts\sp\anim::_id_1F35(var_0, var_4[var_5]);

@@ -27,17 +27,21 @@ _id_8A27() {
     var_1 delete();
   }
 
-  foreach(var_4 in getEntArray("pathblocker_hangar_shift_1_player", "targetname"))
-  var_4 delete();
+  foreach(var_4 in getEntArray("pathblocker_hangar_shift_1_player", "targetname")) {
+    var_4 delete();
+  }
 
-  foreach(var_4 in getEntArray("pathblocker_hangar_shift_1_main", "targetname"))
-  var_4 solid();
+  foreach(var_4 in getEntArray("pathblocker_hangar_shift_1_main", "targetname")) {
+    var_4 solid();
+  }
 
-  foreach(var_4 in getEntArray("pathblocker_hangar_shift_2_player", "targetname"))
-  var_4 delete();
+  foreach(var_4 in getEntArray("pathblocker_hangar_shift_2_player", "targetname")) {
+    var_4 delete();
+  }
 
-  foreach(var_4 in getEntArray("pathblocker_hangar_shift_2_main", "targetname"))
-  var_4 solid();
+  foreach(var_4 in getEntArray("pathblocker_hangar_shift_2_main", "targetname")) {
+    var_4 solid();
+  }
 
   setsaveddvar("sm_roundRobinPrioritySpotShadows", 6);
 }
@@ -53,8 +57,9 @@ _id_8A26() {
     if(!level.player scripts\sp\utility::_id_65DB("is_hacked_robot")) {
       if(scripts\engine\utility::flag("retreat_to_c12") || scripts\engine\utility::flag("early_final_retreat")) {
         if(distance2dsquared(level.player.origin, var_1.origin) <= var_2) {
-          if(level.player scripts\sp\utility::_id_D1DF(var_1.origin + (0, 0, 64), 0.65))
+          if(level.player scripts\sp\utility::_id_D1DF(var_1.origin + (0, 0, 64), 0.65)) {
             var_0 scripts\engine\utility::delaythread(1, scripts\sp\utility::_id_F225, "trigger");
+          }
         }
       }
     }
@@ -73,12 +78,14 @@ _id_8A26() {
     var_5 = getspawnerarray("c12_backup");
     var_6 = min(8 - var_3.size, var_5.size);
 
-    for(var_7 = 0; var_7 < var_6; var_7++)
+    for(var_7 = 0; var_7 < var_6; var_7++) {
       var_3[var_3.size] = var_5[var_7] scripts\sp\utility::_id_10619();
+    }
   }
 
-  foreach(var_9 in var_3)
-  var_9.threatbias = 500;
+  foreach(var_9 in var_3) {
+    var_9.threatbias = 500;
+  }
 
   var_11 = spawnStruct();
   var_11._id_3508 = level._id_8A26;
@@ -86,8 +93,9 @@ _id_8A26() {
   var_12 = getEntArray("weapon_iw7_lockon+lockonscope", "classname");
 
   foreach(var_14 in var_12) {
-    if(!isDefined(var_14.targetname) || var_14.targetname != "c12fight_lockon_pickup")
+    if(!isDefined(var_14.targetname) || var_14.targetname != "c12fight_lockon_pickup") {
       var_14 delete();
+    }
   }
 
   var_16 = getEntArray("c12_fight_trick_crate_trig", "targetname");
@@ -105,8 +113,9 @@ _id_8A26() {
   wait 1;
 
   foreach(var_18 in getEntArray("trigger_multiple_friendly", "classname")) {
-    if(isDefined(var_18._id_EE52) && var_18._id_EE52 == "allytrig_hangar_c12")
+    if(isDefined(var_18._id_EE52) && var_18._id_EE52 == "allytrig_hangar_c12") {
       var_18 scripts\engine\utility::trigger_off();
+    }
   }
 
   wait 0.1;
@@ -181,8 +190,9 @@ _id_350B(var_0) {
   self.favoriteenemy = var_0;
   self._id_2894 = 9000;
 
-  while(isDefined(var_0) && isalive(var_0))
+  while(isDefined(var_0) && isalive(var_0)) {
     scripts\engine\utility::waitframe();
+  }
 
   self.favoriteenemy = undefined;
   self._id_2894 = var_1;
@@ -221,8 +231,9 @@ _id_1270E(var_0) {
     var_0.goalradius = var_3.radius;
     var_0 _meth_82EE(var_3);
 
-    while(!var_0 _meth_84BA() && level.player istouching(self))
+    while(!var_0 _meth_84BA() && level.player istouching(self)) {
       scripts\engine\utility::waitframe();
+    }
 
     var_0.ignoreall = 0;
 
@@ -241,10 +252,11 @@ _id_1270E(var_0) {
       var_0 waittill("rocket_fired", var_5);
       var_6 = level._id_8A35[self._id_EE52];
 
-      if(self.script_parameters == "front")
+      if(self.script_parameters == "front") {
         var_7 = (var_6.front_left.origin + var_6.front_right.origin) / 2;
-      else
+      } else {
         var_7 = (var_6._id_0057.origin + var_6._id_005A.origin) / 2;
+      }
 
       while(!var_4 && isDefined(var_5)) {
         var_4 = distance2dsquared(var_5.origin, var_7) <= squared(64);
@@ -298,8 +310,9 @@ _id_5450() {
   level._id_EA2C scripts\sp\utility::_id_10346("heist_slt_c12mega");
   var_0 = _id_137E9();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level.player scripts\sp\utility::_id_1034D("heist_plr_iseehim");
+  }
 
   scripts\engine\utility::flag_set("obj_killc12");
   wait 0.15;
@@ -312,8 +325,9 @@ _id_5450() {
       level._id_30F6 scripts\sp\utility::_id_10346("UN_brk_inform_incoming_c12");
       var_0 = _id_137E9();
 
-      if(isDefined(var_0))
+      if(isDefined(var_0)) {
         level.player scripts\sp\utility::_id_1034D("heist_plr_iseehim");
+      }
     }
   }
 }
@@ -324,8 +338,9 @@ _id_137E9() {
 
   while(isalive(level._id_8A26)) {
     if(scripts\engine\utility::within_fov(level.player.origin, level.player getplayerangles(), level._id_8A26.origin, cos(40))) {
-      if(_id_0B1D::_id_385C(level.player getEye(), level._id_8A26))
+      if(_id_0B1D::_id_385C(level.player getEye(), level._id_8A26)) {
         return 1;
+      }
     }
 
     wait 0.1;

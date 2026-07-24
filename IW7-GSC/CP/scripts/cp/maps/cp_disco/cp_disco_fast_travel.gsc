@@ -22,22 +22,25 @@ trigger_when_player_close_by() {
   self.teleport_door = scripts\engine\utility::getclosest(self.origin, getEntArray("chi_door_fast_travel", "targetname"));
   var_1 = getEntArray("chi_door_fast_travel_symbol", "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self.teleport_door_symbol = scripts\engine\utility::getclosest(self.origin, var_1);
+  }
 
   self.recently_used = [];
   self.cooldown = 0;
   self.opened = 0;
 
-  if(!isDefined(self.angles))
+  if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
+  }
 
   self.teleport_spots = scripts\engine\utility::getStructArray(self.end_point.target, "targetname");
   script_add_teleport_spots();
 
   foreach(var_3 in self.teleport_spots) {
-    if(!isDefined(var_3.angles))
+    if(!isDefined(var_3.angles)) {
       var_3.angles = (0, 0, 0);
+    }
   }
 
   self.teleport_door setCanDamage(1);
@@ -61,8 +64,9 @@ trigger_when_player_close_by() {
   self.opened = 1;
   self.teleport_door hide();
 
-  if(isDefined(self.teleport_door_symbol))
+  if(isDefined(self.teleport_door_symbol)) {
     self.teleport_door_symbol hide();
+  }
 
   var_15 = scripts\engine\utility::getStructArray("chi_door_fast_travel_portal_spot", "targetname");
   self.portal_spot = scripts\engine\utility::getclosest(self.origin, var_15, 500);
@@ -121,8 +125,9 @@ trigger_when_player_close_by() {
 
 is_shuriken(var_0) {
   if(isDefined(var_0)) {
-    if(issubstr(var_0, "shuriken"))
+    if(issubstr(var_0, "shuriken")) {
       return 1;
+    }
   }
 
   return 0;
@@ -131,14 +136,15 @@ is_shuriken(var_0) {
 script_add_teleport_spots() {
   var_0 = [];
 
-  if(self.teleport_spots[0].origin == (-758, 1902, 800))
+  if(self.teleport_spots[0].origin == (-758, 1902, 800)) {
     var_0 = [(-758, 1928, 800), (-730, 1902, 800), (-758, 1878, 800)];
-  else if(self.teleport_spots[0].origin == (-2332, 3146, 266))
+  } else if(self.teleport_spots[0].origin == (-2332, 3146, 266)) {
     var_0 = [(-2308, 3146, 266), (-2332, 3122, 266), (-2356, 3146, 266)];
-  else if(self.teleport_spots[0].origin == (-970, 514, 944))
+  } else if(self.teleport_spots[0].origin == (-970, 514, 944)) {
     var_0 = [(-1004, 514, 944), (-970, 542, 944), (-938, 514, 944)];
-  else if(self.teleport_spots[0].origin == (-2288, 4728, 784))
+  } else if(self.teleport_spots[0].origin == (-2288, 4728, 784)) {
     var_0 = [(-2314, 4728, 784), (-2288, 4700, 784), (-2264, 4728, 784)];
+  }
 
   var_1 = self.teleport_spots[0].angles;
 
@@ -203,13 +209,15 @@ move_player_through_portal_tube(var_0) {
 
   if(scripts\engine\utility::is_true(var_0.travelled_thru_portal)) {
     if(isDefined(level.clock_interaction_q2)) {
-      if(!scripts\engine\utility::is_true(level.clock_interaction_q2.clock_active))
+      if(!scripts\engine\utility::is_true(level.clock_interaction_q2.clock_active)) {
         var_0.travelled_thru_portal = undefined;
+      }
     }
   } else if(scripts\engine\utility::is_true(var_0.travelled_thru_portal)) {
     if(isDefined(level.clock_interaction_q3)) {
-      if(!scripts\engine\utility::is_true(level.clock_interaction_q3.clock_active))
+      if(!scripts\engine\utility::is_true(level.clock_interaction_q3.clock_active)) {
         var_0.travelled_thru_portal = undefined;
+      }
     }
   }
 
@@ -227,8 +235,9 @@ move_player_through_portal_tube(var_0) {
   var_0 scripts\cp\powers\coop_powers::power_enablepower();
   var_0 thread update_personal_ents_after_delay();
 
-  if(var_0.vo_prefix == "p5_")
+  if(var_0.vo_prefix == "p5_") {
     var_0 thread scripts\cp\cp_vo::try_to_play_vo("fasttravel_exit", "disco_comment_vo");
+  }
 }
 
 move_zombie_through_portal_tube(var_0) {
@@ -248,8 +257,9 @@ update_personal_ents_after_delay() {
 }
 
 unlinkplayerafterduration() {
-  while(scripts\engine\utility::is_true(self.isrewinding) || isDefined(self.rewindmover))
+  while(scripts\engine\utility::is_true(self.isrewinding) || isDefined(self.rewindmover)) {
     wait 0.1;
+  }
 
   self unlink();
 }
@@ -260,13 +270,15 @@ teleport_to_portal_safe_spot(var_0) {
 
   while(!isDefined(var_2)) {
     foreach(var_4 in var_1) {
-      if(!positionwouldtelefrag(var_4.origin))
+      if(!positionwouldtelefrag(var_4.origin)) {
         var_2 = var_4;
+      }
     }
 
     if(!isDefined(var_2)) {
-      if(!isDefined(var_1[0].angles))
+      if(!isDefined(var_1[0].angles)) {
         var_1[0].angles = (0, 0, 0);
+      }
 
       var_6 = scripts\cp\utility::vec_multiply(anglesToForward(var_1[0].angles), 64);
       var_2 = spawnStruct();
@@ -279,10 +291,11 @@ teleport_to_portal_safe_spot(var_0) {
 
   var_0 playershow();
 
-  if(scripts\engine\utility::is_true(var_0.isrewinding) || isDefined(self.rewindmover))
+  if(scripts\engine\utility::is_true(var_0.isrewinding) || isDefined(self.rewindmover)) {
     var_0 thread unlinkplayerafterduration();
-  else
+  } else {
     var_0 unlink();
+  }
 
   var_0 dontinterpolate();
   var_0 setOrigin(var_2.origin);
@@ -302,8 +315,9 @@ delay_portal_trigger_on_player(var_0, var_1) {
 portal_cooldown_monitor() {
   self.portal_scriptable setscriptablepartstate("portal", "cooldown");
 
-  while(!self.end_point.opened)
+  while(!self.end_point.opened) {
     wait 0.1;
+  }
 
   var_0 = 0.1;
 
@@ -311,13 +325,15 @@ portal_cooldown_monitor() {
     if(self.cooldown > 0) {
       self.cooldown = self.cooldown - var_0;
 
-      if(self.portal_scriptable getscriptablepartstate("portal") != "cooldown")
+      if(self.portal_scriptable getscriptablepartstate("portal") != "cooldown") {
         self.portal_scriptable setscriptablepartstate("portal", "cooldown");
+      }
     } else
       self.portal_scriptable setscriptablepartstate("portal", self.end_point_name);
 
-    if(self.cooldown < 0)
+    if(self.cooldown < 0) {
       self.cooldown = 0;
+    }
 
     wait(var_0);
   }

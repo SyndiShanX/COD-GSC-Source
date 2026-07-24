@@ -11,8 +11,9 @@ _id_BCB1() {
   if(self.a.pose != "stand") {
     self clearanim(%root, 0.2);
 
-    if(self.a.pose == "prone")
+    if(self.a.pose == "prone") {
       scripts\anim\utility::exitpronewrapper(1);
+    }
 
     self.a.pose = "stand";
   }
@@ -28,24 +29,27 @@ _id_BCB1() {
   if(scripts\anim\run::_id_10B78()) {
     return;
   }
-  if(isDefined(self.timeoflaststatechange))
+  if(isDefined(self.timeoflaststatechange)) {
     var_0 = self.timeoflaststatechange;
-  else
+  } else {
     var_0 = 0;
+  }
 
   self.timeoflaststatechange = gettime();
   var_1 = _id_53C3();
 
-  if(self.stairsstate == "none")
+  if(self.stairsstate == "none") {
     var_2 = 0.3;
-  else
+  } else {
     var_2 = 0.1;
+  }
 
   var_3 = 0.2;
   var_4 = % walk_and_run_loops;
 
-  if(self.timeoflaststatechange - var_0 > var_3 * 1000)
+  if(self.timeoflaststatechange - var_0 > var_3 * 1000) {
     var_4 = % stand_and_crouch;
+  }
 
   self _meth_82E3("runanim", var_1, var_4, 1, var_2, self.moveplaybackrate, 1);
   _id_478E(var_1);
@@ -55,25 +59,31 @@ _id_BCB1() {
 }
 
 _id_53C3() {
-  if(isDefined(self.custommoveanimset) && isDefined(self.custommoveanimset["cqb"]))
+  if(isDefined(self.custommoveanimset) && isDefined(self.custommoveanimset["cqb"])) {
     return scripts\anim\run::getrunningforwardpainanim();
+  }
 
-  if(self.stairsstate == "up")
+  if(self.stairsstate == "up") {
     return scripts\anim\utility::_id_B027("cqb", "stairs_up");
+  }
 
-  if(self.stairsstate == "down")
+  if(self.stairsstate == "down") {
     return scripts\anim\utility::_id_B027("cqb", "stairs_down");
+  }
 
-  if(self.movemode == "walk")
+  if(self.movemode == "walk") {
     return scripts\anim\utility::_id_B027("cqb", "move_f");
+  }
 
-  if(isDefined(self.a._id_29CE) && self.a._id_29CE)
+  if(isDefined(self.a._id_29CE) && self.a._id_29CE) {
     return scripts\anim\utility::_id_B027("cqb", "straight");
+  }
 
   var_0 = scripts\anim\utility::_id_B027("cqb", "straight_twitch");
 
-  if(!isDefined(var_0) || var_0.size == 0)
+  if(!isDefined(var_0) || var_0.size == 0) {
     return scripts\anim\utility::_id_B027("cqb", "straight");
+  }
 
   var_1 = scripts\anim\utility::_id_80BD(self.a._id_E860, 4);
 
@@ -91,8 +101,9 @@ _id_4790() {
   var_0 = "reload_" + scripts\anim\combat_utility::_id_81EB();
   var_1 = scripts\anim\utility::_id_B027("cqb", "reload");
 
-  if(isarray(var_1))
+  if(isarray(var_1)) {
     var_1 = var_1[randomint(var_1.size)];
+  }
 
   self _meth_82E4(var_0, var_1, %body, 1, 0.25);
   _id_478E(var_1);
@@ -106,10 +117,11 @@ _id_479B() {
   var_1 = !var_0 && scripts\anim\move::_id_B4EC();
   scripts\anim\run::_id_F843(var_1);
 
-  if(var_0)
+  if(var_0) {
     scripts\anim\run::_id_6318();
-  else
+  } else {
     thread scripts\anim\run::_id_6A6B();
+  }
 }
 
 _id_FA9F() {
@@ -175,8 +187,9 @@ _id_6CB4() {
               }
               var_14 = vectordot(vectorNormalize(var_12 - var_5), var_7);
 
-              if(var_14 < 0.643 || var_14 > 0.966)
+              if(var_14 < 0.643 || var_14 > 0.966) {
                 continue;
+              }
             } else if(var_13 < 2500) {
               continue;
             }
@@ -188,18 +201,20 @@ _id_6CB4() {
           }
         }
 
-        if(var_9 < 0)
+        if(var_9 < 0) {
           var_3._id_478F = undefined;
-        else
+        } else {
           var_3._id_478F = level._id_479A[var_9];
+        }
 
         wait 0.05;
         var_1 = 1;
       }
     }
 
-    if(!var_1)
+    if(!var_1) {
       wait 0.25;
+    }
   }
 }
 

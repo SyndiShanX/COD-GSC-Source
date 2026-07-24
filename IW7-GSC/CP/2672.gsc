@@ -51,8 +51,9 @@ init() {
 init_weapon_rank_events() {
   var_0 = "scripts/cp/maps/cp_zmb/cp_zmb_weaponrank_event.csv";
 
-  if(isDefined(level.weapon_rank_event_table))
+  if(isDefined(level.weapon_rank_event_table)) {
     var_0 = level.weapon_rank_event_table;
+  }
 
   level.weapon_rank_event = [];
   var_1 = 1;
@@ -95,21 +96,24 @@ give_player_weapon_xp(var_0, var_1, var_2) {
   var_9 = var_8 - var_4;
   var_10 = var_3 + var_2;
 
-  if(var_10 > var_9)
+  if(var_10 > var_9) {
     var_10 = var_9;
+  }
 
   var_11 = var_10 + var_4;
   var_12 = var_0 getrankedplayerdata("common", "sharedProgression", "weaponLevel", var_1, "prestige");
   var_13 = int(min(get_weapon_rank_for_xp(var_11), var_7));
   var_0 setplayerdata("common", "sharedProgression", "weaponLevel", var_1, "cpXP", var_10);
 
-  if(var_6 < var_13)
+  if(var_6 < var_13) {
     var_0 scripts\cp\cp_hud_message::showsplash("ranked_up_weapon_" + var_1, var_13 + 1);
+  }
 }
 
 weapon_progression_enabled() {
-  if(scripts\engine\utility::is_true(level.disable_weapon_progression))
+  if(scripts\engine\utility::is_true(level.disable_weapon_progression)) {
     return 0;
+  }
 
   return 1;
 }
@@ -119,10 +123,11 @@ is_weapon_unlocked(var_0, var_1) {
   var_3 = scripts\cp\utility::getbaseweaponname(var_1);
   var_4 = int(tablelookup("mp/unlocks/CPWeaponUnlocks.csv", 0, var_3, 7));
 
-  if(var_2 >= var_4)
+  if(var_2 >= var_4) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 get_player_weapon_rank_cp_xp(var_0, var_1) {
@@ -140,19 +145,22 @@ weapon_should_get_xp(var_0) {
 }
 
 weapon_has_ranks(var_0) {
-  if(!isDefined(level.weaponranktable.maxweaponranks[var_0]))
+  if(!isDefined(level.weaponranktable.maxweaponranks[var_0])) {
     return 0;
+  }
 
   return 1;
 }
 
 get_weapon_rank_for_xp(var_0) {
-  if(var_0 == 0)
+  if(var_0 == 0) {
     return 0;
+  }
 
   for(var_1 = get_max_weapon_rank() - 1; var_1 >= 0; var_1--) {
-    if(var_0 >= get_weapon_rank_info_min_xp(var_1))
+    if(var_0 >= get_weapon_rank_info_min_xp(var_1)) {
       return var_1;
+    }
   }
 
   return var_1;
@@ -192,29 +200,33 @@ try_give_weapon_xp_zombie_killed(var_0, var_1, var_2, var_3, var_4) {
 }
 
 get_zombie_killed_weapon_xp_multiplier_type(var_0, var_1, var_2, var_3) {
-  if(scripts\cp\utility::isheadshot(var_0, var_1, var_2, var_3))
+  if(scripts\cp\utility::isheadshot(var_0, var_1, var_2, var_3)) {
     return "headshot";
+  }
 
   return undefined;
 }
 
 get_player_weapon_xp_scalar(var_0) {
-  if(isDefined(var_0.weaponxpscale))
+  if(isDefined(var_0.weaponxpscale)) {
     return var_0.weaponxpscale;
-  else
+  } else {
     return 1;
+  }
 }
 
 get_event_xp_base_value(var_0) {
-  if(!isDefined(level.weapon_rank_event[var_0]))
+  if(!isDefined(level.weapon_rank_event[var_0])) {
     return 0;
+  }
 
   return level.weapon_rank_event[var_0];
 }
 
 get_event_xp_multiplier_value(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 1;
+  }
 
   switch (var_0) {
     case "headshot":

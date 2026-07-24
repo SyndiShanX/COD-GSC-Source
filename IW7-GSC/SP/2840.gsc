@@ -17,15 +17,17 @@ _id_CF09() {
   level._id_A9AD = scripts\sp\endmission::_id_6CD9();
   level._id_4A40 = _id_49A0();
 
-  if(!getdvarint("credits_test_fast"))
+  if(!getdvarint("credits_test_fast")) {
     _id_1013C("CREDITS_MEMORY", 5);
+  }
 
   level.memoirplaying = 0;
   thread _id_56DF();
   var_0 = tablelookuprownum("sp/credits.csv", 0, "__END__");
 
-  if(getdvarint("credits_test_fast"))
+  if(getdvarint("credits_test_fast")) {
     var_0 = 500;
+  }
 
   var_1 = 0;
   var_2 = [];
@@ -43,13 +45,15 @@ _id_CF09() {
     var_8 = tablelookupbyrow("sp/credits.csv", var_5, 2);
     var_7 = tolower(var_7);
 
-    if(var_7 == "")
+    if(var_7 == "") {
       var_7 = undefined;
+    }
 
     var_8 = tolower(var_8);
 
-    if(var_8 == "")
+    if(var_8 == "") {
       var_8 = undefined;
+    }
 
     if(isDefined(var_8)) {
       if(var_8 == "localized") {
@@ -104,18 +108,20 @@ get_pan_time(var_0) {
     var_6 = tablelookupbyrow("sp/credits.csv", var_3, 2);
     var_5 = tolower(var_5);
 
-    if(var_5 == "")
+    if(var_5 == "") {
       var_5 = undefined;
+    }
 
     if(isDefined(var_5)) {
-      if(var_5 == "title")
+      if(var_5 == "title") {
         var_1 = var_1 + 0.7;
-      else if(var_5 == "subtitle")
+      } else if(var_5 == "subtitle") {
         var_1 = var_1 + 0.5;
-      else if(var_5 == "image")
+      } else if(var_5 == "image") {
         var_1 = var_1 + 1.0;
-      else if(var_5 == "small_image")
+      } else if(var_5 == "small_image") {
         var_1 = var_1 + 0.5;
+      }
 
       continue;
     }
@@ -146,10 +152,11 @@ _id_990A() {
     wait 0.05;
 
     if(gettime() > var_0) {
-      if(level.player attackButtonPressed())
+      if(level.player attackButtonPressed()) {
         var_2 = 3;
-      else
+      } else {
         var_2 = 1;
+      }
 
       if(var_2 != var_1) {
         setslowmotion(var_1, var_2, 1);
@@ -163,8 +170,9 @@ _id_990A() {
 }
 
 _id_1013C(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   var_5 = newhudelem();
   var_5.x = 0;
@@ -185,8 +193,9 @@ _id_1013C(var_0, var_1, var_2, var_3, var_4) {
     var_5.x = 320;
   }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     return var_5;
+  }
 
   var_5 hud_fadeovertime(2.0, 1);
   var_6 = undefined;
@@ -208,8 +217,9 @@ _id_1013C(var_0, var_1, var_2, var_3, var_4) {
   wait 2;
   var_5 _id_913E();
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_6 destroy();
+  }
 }
 
 createiwsignature() {
@@ -312,13 +322,15 @@ _id_4A34(var_0, var_1, var_2) {
       var_4 = 0.5;
     } else if(var_2 == "music")
       var_3[var_3.size] = _id_499F(var_0, var_2);
-    else
+    else {
       var_3[var_3.size] = _id_499F(var_0, var_2);
+    }
   } else {
     var_3[var_3.size] = _id_499F(var_0, "left");
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_3[var_3.size] = _id_499F(var_1, "right");
+    }
   }
 
   scripts\engine\utility::array_thread(var_3, ::_id_4A38);
@@ -343,34 +355,39 @@ hud_fadeovertime(var_0, var_1) {
   self fadeovertime(var_0);
   self.alpha = var_1;
 
-  if(isDefined(self.dropshadow))
+  if(isDefined(self.dropshadow)) {
     self.dropshadow hud_fadeovertime(var_0, var_1 * 0.8);
+  }
 }
 
 hud_moveovertime(var_0, var_1, var_2) {
   self moveovertime(var_0);
 
   if(isDefined(var_1)) {
-    if(isDefined(self.isdropshadow))
+    if(isDefined(self.isdropshadow)) {
       var_1 = var_1 + 1;
+    }
 
     self.x = var_1;
   }
 
   if(isDefined(var_2)) {
-    if(isDefined(self.isdropshadow))
+    if(isDefined(self.isdropshadow)) {
       var_2 = var_2 + 1;
+    }
 
     self.y = var_2;
   }
 
-  if(isDefined(self.dropshadow))
+  if(isDefined(self.dropshadow)) {
     self.dropshadow hud_moveovertime(var_0, var_1, var_2);
+  }
 }
 
 _id_913E(var_0, var_1) {
-  if(isDefined(self.dropshadow))
+  if(isDefined(self.dropshadow)) {
     self.dropshadow destroy();
+  }
 
   self destroy();
 }
@@ -454,10 +471,11 @@ _id_499F(var_0, var_1) {
     var_12 = int(var_13.height * 0.5);
   } else if(var_1 == "center")
     var_3 = 0;
-  else if(var_1 == "left")
+  else if(var_1 == "left") {
     var_3 = -150;
-  else if(var_1 == "right")
+  } else if(var_1 == "right") {
     var_3 = 150;
+  }
 
   var_2.x = var_3;
   var_2.y = 480;
@@ -474,10 +492,11 @@ _id_499F(var_0, var_1) {
   var_2.foreground = 0;
   var_2.sort = 5;
 
-  if(!isDefined(var_10))
+  if(!isDefined(var_10)) {
     var_2 settext(var_0);
-  else
+  } else {
     var_2 setshader(var_10, var_11, var_12);
+  }
 
   return var_2;
 }
@@ -500,8 +519,9 @@ _id_49A0() {
 _id_4A37(var_0) {
   var_0 = scripts\engine\utility::alphabetize(var_0);
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     _id_4A34(var_0[var_1], undefined, "center");
+  }
 
   wait 3.0;
 }
@@ -510,15 +530,17 @@ _id_411D(var_0) {
   var_1 = strtok(var_0, " ");
   var_2 = var_1[0];
 
-  for(var_3 = 1; var_3 < var_1.size; var_3++)
+  for(var_3 = 1; var_3 < var_1.size; var_3++) {
     var_2 = var_2 + (" " + var_1[var_3]);
+  }
 
   return var_2;
 }
 
 _id_97F4() {
-  if(!isDefined(level._id_4A39))
+  if(!isDefined(level._id_4A39)) {
     level._id_4A39 = spawnStruct();
+  }
 }
 
 _id_9893() {
@@ -726,8 +748,9 @@ _id_9883() {
   level._id_4A39._id_9339["demon"] = _id_9336("logo_demon", 886, 120);
   level._id_4A39._id_9339["beenox"] = _id_9336("logo_beenox", 784, 374);
 
-  foreach(var_1 in level._id_4A39._id_9339)
-  precacheshader(var_1._id_9335);
+  foreach(var_1 in level._id_4A39._id_9339) {
+    precacheshader(var_1._id_9335);
+  }
 }
 
 _id_9336(var_0, var_1, var_2) {
@@ -754,15 +777,17 @@ _id_9336(var_0, var_1, var_2) {
 }
 
 _id_7F0F(var_0) {
-  if(!isDefined(level._id_4A39._id_9339) || !isDefined(level._id_4A39._id_9339[var_0]))
+  if(!isDefined(level._id_4A39._id_9339) || !isDefined(level._id_4A39._id_9339[var_0])) {
     return _id_9336("white", 1280, 256);
+  }
 
   return level._id_4A39._id_9339[var_0];
 }
 
 _id_7F7D(var_0) {
-  if(!isDefined(level._id_4A39._id_1114E) || !isDefined(level._id_4A39._id_1114E[var_0]))
+  if(!isDefined(level._id_4A39._id_1114E) || !isDefined(level._id_4A39._id_1114E[var_0])) {
     return "(NO SCRIPT REF): " + var_0;
+  }
 
   return level._id_4A39._id_1114E[var_0];
 }
@@ -793,11 +818,13 @@ _id_49E9(var_0, var_1, var_2, var_3) {
   var_4._id_2AD3 = var_1;
   var_4.info = var_2;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_4._id_BCD0 = var_3;
+  }
 
-  if(!isDefined(level._id_4A39._id_B662))
+  if(!isDefined(level._id_4A39._id_B662)) {
     level._id_4A39._id_B662 = [];
+  }
 
   level._id_4A39._id_B662[level._id_4A39._id_B662.size] = var_4;
 }
@@ -939,8 +966,9 @@ _id_B664(var_0) {
   level notify("memoirs_active");
   var_1 = "buttonPress" + var_0;
 
-  foreach(var_3 in self._id_313E.actions)
-  notifyoncommand(var_1, var_3);
+  foreach(var_3 in self._id_313E.actions) {
+    notifyoncommand(var_1, var_3);
+  }
 
   for(;;) {
     level.player waittill(var_1);
@@ -969,21 +997,23 @@ _id_B664(var_0) {
   var_5 = 0;
 
   while(iscinematicplaying() && var_5 != 100) {
-    if(level.player useButtonPressed())
+    if(level.player useButtonPressed()) {
       var_5++;
-    else
+    } else {
       var_5 = 0;
+    }
 
     wait 0.05;
   }
 
-  if(var_5 > 0)
+  if(var_5 > 0) {
     stopcinematicingame();
-  else {
+  } else {
     level.memoircount--;
 
-    if(level.memoircount == 0)
+    if(level.memoircount == 0) {
       scripts\sp\utility::_id_834F("FIND_MP_GUN", 1);
+    }
   }
 
   level.player clearclienttriggeraudiozone(3.0);
@@ -1010,10 +1040,11 @@ updatebtn_text() {
   if(!level.player scripts\engine\utility::is_player_gamepad_enabled()) {
     self._id_313F.fontscale = 1;
 
-    if(self._id_912F._id_101AD == "left")
+    if(self._id_912F._id_101AD == "left") {
       self._id_313F.alignx = "left";
-    else if(self._id_912F._id_101AD == "right")
+    } else if(self._id_912F._id_101AD == "right") {
       self._id_313F.alignx = "right";
+    }
   }
 
   level waittill("memoirs_active");
@@ -1028,10 +1059,11 @@ updatebtn_text() {
       if(!var_1) {
         self._id_313F.fontscale = 1;
 
-        if(self._id_912F._id_101AD == "left")
+        if(self._id_912F._id_101AD == "left") {
           self._id_313F.alignx = "left";
-        else if(self._id_912F._id_101AD == "right")
+        } else if(self._id_912F._id_101AD == "right") {
           self._id_313F.alignx = "right";
+        }
       } else {
         self._id_313F.fontscale = 1.5;
         self._id_313F.alignx = "center";
@@ -1051,20 +1083,24 @@ _id_41C7() {
   foreach(var_1 in level._id_4A39._id_B662) {
     if(isDefined(var_1._id_94BC)) {
       foreach(var_3 in var_1._id_94BC) {
-        if(isDefined(var_3))
+        if(isDefined(var_3)) {
           var_3 thread _id_6AB4();
+        }
       }
     }
 
-    if(isDefined(var_1._id_313F))
+    if(isDefined(var_1._id_313F)) {
       var_1._id_313F thread _id_6AB4();
+    }
 
-    if(isDefined(var_1._id_912F))
+    if(isDefined(var_1._id_912F)) {
       var_1._id_912F thread _id_6AB4();
+    }
   }
 
-  if(iscinematicplaying())
+  if(iscinematicplaying()) {
     stopcinematicingame();
+  }
 
   wait 3;
 }
@@ -1074,8 +1110,9 @@ _id_6AB4() {
   hud_fadeovertime(var_0, 0);
   wait(var_0 + 0.1);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     _id_913E();
+  }
 }
 
 _id_B663() {
@@ -1098,28 +1135,32 @@ _id_1013B() {
   level endon("clearing_memoirs");
   self._id_94BC = [];
 
-  if(self._id_912F.alignx == "left")
+  if(self._id_912F.alignx == "left") {
     var_0 = self._id_912F.x + 100 + 10;
-  else
+  } else {
     var_0 = self._id_912F.x + 10;
+  }
 
-  if(self._id_912F.aligny == "top")
+  if(self._id_912F.aligny == "top") {
     var_1 = self._id_912F.y + 10;
-  else
+  } else {
     var_1 = self._id_912F.y - 100 + 10;
+  }
 
   var_2 = 0;
 
   foreach(var_6, var_4 in self.info) {
     var_5 = 0;
 
-    if(var_6 == 0)
+    if(var_6 == 0) {
       var_5 = 1;
+    }
 
-    if(var_2)
+    if(var_2) {
       var_1 = var_1 + var_6 * 20;
-    else
+    } else {
       var_1 = var_1 + var_6 * 6;
+    }
 
     self._id_94BC[self._id_94BC.size] = _id_49EB(var_4, var_0, var_1, var_5);
     var_2 = var_5;
@@ -1148,8 +1189,9 @@ _id_49EB(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   var_7 = 1;
 
-  if(var_3)
+  if(var_3) {
     var_7 = 1.35;
+  }
 
   var_6.fontscale = var_7;
   var_6.alpha = 0;
@@ -1215,10 +1257,11 @@ _id_6F16(var_0, var_1) {
 
   var_7 = randomfloatrange(var_2, var_3);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     hud_fadeovertime(var_7, var_0);
-  else
+  } else {
     hud_fadeovertime(var_7, 1);
+  }
 
   self notify("flicker_done");
 }

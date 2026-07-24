@@ -31,15 +31,17 @@ item_outline_weapon_monitor() {
     var_2 = 1;
     var_3 = _id_7D69(var_1);
 
-    if(var_3 == 3)
+    if(var_3 == 3) {
       enable_outline_for_player(var_1, self, get_hudoutline_item(var_1, var_2), 1, 0, "high");
-    else if(var_3 == 1)
+    } else if(var_3 == 1) {
       enable_outline_for_player(var_1, self, 4, 1, 0, "high");
-    else
+    } else {
       disable_outline_for_player(var_1, self);
+    }
 
-    if(var_4 & 0)
+    if(var_4 & 0) {
       scripts\engine\utility::waitframe();
+    }
   }
 }
 
@@ -50,31 +52,36 @@ get_hudoutline_item(var_0, var_1) {
     if(isDefined(level.get_weapon_level_func)) {
       var_3 = self[[level.get_weapon_level_func]](var_0.struct.weapon);
 
-      if(var_3 > 1)
+      if(var_3 > 1) {
         var_2 = 4500;
-      else
+      } else {
         var_2 = var_0.cost * 0.5;
+      }
     } else
       var_2 = var_0.cost * 0.5;
   }
 
-  if(scripts\cp\cp_persistence::player_has_enough_currency(var_2) || scripts\engine\utility::is_true(var_0.enabled))
+  if(scripts\cp\cp_persistence::player_has_enough_currency(var_2) || scripts\engine\utility::is_true(var_0.enabled)) {
     return 3;
-  else
+  } else {
     return 1;
+  }
 }
 
 _id_7D69(var_0) {
   var_1 = distancesquared(self.origin, var_0.origin) < 1000000;
 
-  if(!var_1)
+  if(!var_1) {
     return 0;
+  }
 
-  if(scripts\cp\utility::is_holding_deployable())
+  if(scripts\cp\utility::is_holding_deployable()) {
     return 1;
+  }
 
-  if(scripts\cp\utility::has_special_weapon())
+  if(scripts\cp\utility::has_special_weapon()) {
     return 1;
+  }
 
   return 3;
 }
@@ -100,21 +107,25 @@ playeroutlinemonitor() {
 }
 
 should_put_player_outline_on(var_0) {
-  if(self.no_team_outlines)
+  if(self.no_team_outlines) {
     return 0;
+  }
 
-  if(!isalive(var_0) || !isDefined(var_0.maxhealth) || !var_0.maxhealth || var_0.no_outline)
+  if(!isalive(var_0) || !isDefined(var_0.maxhealth) || !var_0.maxhealth || var_0.no_outline) {
     return 0;
+  }
 
   if(isDefined(level.shouldplayeroutline)) {
-    if(![[level.shouldplayeroutline]](self, var_0))
+    if(![[level.shouldplayeroutline]](self, var_0)) {
       return 0;
+    }
   }
 
   var_1 = distancesquared(self.origin, var_0.origin) > 2250000;
 
-  if(var_1)
+  if(var_1) {
     return 1;
+  }
 
   var_2 = !bullettracepassed(self getEye(), var_0 getEye(), 0, self);
   return var_2;
@@ -123,14 +134,15 @@ should_put_player_outline_on(var_0) {
 get_hudoutline_for_player_health(var_0) {
   var_1 = var_0.health / 100;
 
-  if(var_1 <= 0.33 || scripts\cp\cp_laststand::player_in_laststand(var_0))
+  if(var_1 <= 0.33 || scripts\cp\cp_laststand::player_in_laststand(var_0)) {
     return 4;
-  else if(var_1 <= 0.66)
+  } else if(var_1 <= 0.66) {
     return 5;
-  else if(var_1 <= 1.0)
+  } else if(var_1 <= 1.0) {
     return 3;
-  else
+  } else {
     return 0;
+  }
 }
 
 enable_outline_for_players(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -161,14 +173,17 @@ set_outline(var_0, var_1, var_2) {
   level endon("game_ended");
   level endon("outline_disabled");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 4;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   for(;;) {
     foreach(var_4 in scripts\cp\cp_agent_utils::get_alive_enemies()) {
@@ -194,14 +209,17 @@ set_outline_for_player(var_0, var_1, var_2) {
   level endon("game_ended");
   self endon("outline_disabled");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 4;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   for(;;) {
     foreach(var_4 in scripts\cp\cp_agent_utils::get_alive_enemies()) {
@@ -252,11 +270,13 @@ unset_outline_for_player() {
 save_outline_settings() {
   var_0 = ["r_hudoutlineFillColor0", "r_hudoutlineFillColor1", "r_hudoutlinewidth", "r_hudoutlineOccludedOutlineColor", "r_hudoutlineOccludedInlineColor", "r_hudoutlineOccludedInteriorColor", "r_hudOutlineOccludedColorFromFill", "cg_hud_outline_colors_0", "cg_hud_outline_colors_1", "cg_hud_outline_colors_2", "cg_hud_outline_colors_3", "cg_hud_outline_colors_4", "cg_hud_outline_colors_5", "cg_hud_outline_colors_6"];
 
-  if(!isDefined(level.hudoutlinesettings))
+  if(!isDefined(level.hudoutlinesettings)) {
     level.hudoutlinesettings = [];
+  }
 
-  foreach(var_2 in var_0)
-  level.hudoutlinesettings[var_2] = getDvar(var_2);
+  foreach(var_2 in var_0) {
+    level.hudoutlinesettings[var_2] = getDvar(var_2);
+  }
 }
 
 restore_outline_settings() {
@@ -265,6 +285,7 @@ restore_outline_settings() {
   if(!isDefined(level.hudoutlinesettings)) {
     return;
   }
-  foreach(var_2 in var_0)
-  setDvar(var_2, level.hudoutlinesettings[var_2]);
+  foreach(var_2 in var_0) {
+    setDvar(var_2, level.hudoutlinesettings[var_2]);
+  }
 }

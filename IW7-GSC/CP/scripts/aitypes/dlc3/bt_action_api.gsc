@@ -9,28 +9,32 @@ setupbtaction(var_0, var_1, var_2, var_3) {
   var_4.fntick = var_2;
   var_4.fnend = var_3;
 
-  if(!isDefined(self.actions))
+  if(!isDefined(self.actions)) {
     self.actions = [];
+  }
 
   self.actions[var_0] = var_4;
 }
 
 setdesiredaction(var_0, var_1) {
-  if(isDefined(var_1) && !isDefined(self.actions[var_1]))
+  if(isDefined(var_1) && !isDefined(self.actions[var_1])) {
     return 0;
+  }
 
   var_2 = getcurrentdesiredaction(var_0);
   self.desiredaction = var_1;
 
-  if(isDefined(var_2) && var_2 != var_1)
+  if(isDefined(var_2) && var_2 != var_1) {
     self notify("newaction");
+  }
 
   return 1;
 }
 
 getcurrentdesiredaction(var_0) {
-  if(!isDefined(self.bt.instancedata[var_0]))
+  if(!isDefined(self.bt.instancedata[var_0])) {
     return undefined;
+  }
 
   return self.bt.instancedata[var_0].currentaction;
 }
@@ -41,8 +45,9 @@ doaction_begin(var_0) {
   var_1 = self.actions[self.desiredaction].fnbegin;
   self.desiredaction = undefined;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     [[var_1]](var_0);
+  }
 }
 
 doaction_tick(var_0) {
@@ -53,8 +58,9 @@ doaction_tick(var_0) {
     var_3 = [[var_2]](var_0);
 
     if(!isDefined(self.desiredaction)) {
-      if(isDefined(var_3))
+      if(isDefined(var_3)) {
         return var_3;
+      }
 
       return anim.failure;
     }
@@ -73,8 +79,9 @@ doaction_end(var_0) {
   var_1 = getcurrentdesiredaction(var_0);
   var_2 = self.actions[var_1].fnend;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     [[var_2]](var_0);
+  }
 
   scripts\aitypes\dlc3\bt_state_api::btstate_endstates(var_0);
   self.bt.instancedata[var_0] = undefined;

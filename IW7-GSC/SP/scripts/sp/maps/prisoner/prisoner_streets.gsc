@@ -46,15 +46,17 @@ _id_10BF2() {
   level.player disableweapons();
   level._id_5D6C = scripts\sp\maps\prisoner\prisoner_util::_id_106B5("vehicle_dropship", "collapse_dropship_spot1");
 
-  if(getdvarint("dropship_lighting", 0))
+  if(getdvarint("dropship_lighting", 0)) {
     level waittill("forever");
+  }
 
   var_0 = scripts\engine\utility::spawn_tag_origin(level._id_5D6C._id_4D94._id_1FC0["salter"].origin + (4, 10, 18), level._id_5D6C._id_4D94._id_1FC0["salter"].angles);
   var_0 linkTo(level._id_5D6C);
   level._id_EA2C linkTo(var_0);
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_8E06();
+  }
 
   level._id_EA2C scripts\sp\utility::_id_86E4();
   var_0 thread scripts\sp\anim::_id_1EEA(level._id_EA2C, "intro_sit_idle");
@@ -72,11 +74,13 @@ _id_10BF2() {
 #using_animtree("vehicles");
 
 _id_B1AC() {
-  if(getdvarint("dropship_lighting", 0))
+  if(getdvarint("dropship_lighting", 0)) {
     level waittill("forever");
+  }
 
-  while(!isDefined(level._id_5D6C))
+  while(!isDefined(level._id_5D6C)) {
     scripts\engine\utility::waitframe();
+  }
 
   thread _id_9AB3();
   thread dof_intro_blend();
@@ -203,15 +207,17 @@ _id_C7DE() {
       var_0 = var_3;
       wait 10;
 
-      while(level.player istouching(var_0))
+      while(level.player istouching(var_0)) {
         scripts\engine\utility::waitframe();
+      }
 
       level._id_FD47 = 0;
     }
   }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return;
+  }
 }
 
 _id_110C7(var_0) {
@@ -295,8 +301,9 @@ _id_675D() {
   scripts\sp\utility::_id_15F1("collapse_color_01", "targetname");
   var_0 = getEnt("dropship_rain_blocker", "script_noteworthy");
 
-  while(level.player istouching(var_0))
+  while(level.player istouching(var_0)) {
     wait 0.05;
+  }
 
   var_1 = scripts\engine\utility::getStruct("anim_org_ethan_debris", "targetname");
   var_1 scripts\sp\anim::_id_1F17(level._id_2429, "prisoner_ally_debris_jump");
@@ -358,8 +365,9 @@ _id_10BF5() {
 }
 
 _id_10BF3() {
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_8E06();
+  }
 
   _id_406B();
 }
@@ -375,8 +383,9 @@ _id_B1AE() {
   var_0 = distance2dsquared(level._id_2429.origin, level.player.origin);
   var_1 = squared(500);
 
-  if(var_0 < var_1)
+  if(var_0 < var_1) {
     level._id_2429 scripts\engine\utility::delaythread(1.5, scripts\sp\utility::_id_10346, "prisoner_eth_carefulsir");
+  }
 
   thread _id_4365();
   level._id_436C thread scripts\sp\anim::_id_1EC3(level._id_1283E, "collapse_truck_anim");
@@ -441,8 +450,9 @@ _id_10BF6() {
 _id_B1AF() {
   level.player scripts\sp\utility::_id_2B76(1.0, 0.5);
 
-  while(!isDefined(level._id_2429))
+  while(!isDefined(level._id_2429)) {
     scripts\engine\utility::waitframe();
+  }
 
   level._id_2429 notify("stop_collapse_walk_think");
   scripts\sp\utility::_id_15F5("trig_allies_crashedvehicle");
@@ -577,10 +587,11 @@ _id_D6ED() {
 }
 
 _id_406B() {
-  if(isDefined(level._id_5D6C))
+  if(isDefined(level._id_5D6C)) {
     level._id_5D6C delete();
-  else
+  } else {
     thread _id_0BBF::_id_5D92("vehicle_dropship", "dropship_player_parts");
+  }
 }
 
 _id_10B9A() {
@@ -592,8 +603,9 @@ _id_10B9A() {
 }
 
 _id_B183() {
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_2683();
+  }
 
   scripts\engine\utility::array_thread(scripts\sp\utility::_id_77DF("enemy_alleys"), scripts\sp\utility::_id_1747, ::_id_1088F);
   thread _id_925A();
@@ -660,8 +672,9 @@ _id_86B6(var_0) {
   scripts\engine\utility::flag_wait("salter_done_talking");
   wait 0.75;
 
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     thread scripts\engine\utility::play_sound_in_space("prisoner_sf1_radiocheckradio", var_0.origin + (0, 0, 70));
+  }
 
   scripts\engine\utility::flag_wait("hvt_dropped_down");
 
@@ -705,10 +718,11 @@ _id_6ED2() {
     var_2 moveTo(var_1.origin, 2);
     var_2 rotateTo(var_1.angles - (var_3, var_4, 0), 2);
 
-    if(!scripts\engine\utility::flag("railing_runner_go"))
+    if(!scripts\engine\utility::flag("railing_runner_go")) {
       var_2 waittill("movedone");
-    else
+    } else {
       break;
+    }
 
     wait 0.2;
     var_2 moveTo(var_0.origin, 2);
@@ -740,8 +754,9 @@ _id_1C02() {
   var_1 = scripts\sp\utility::_id_107EA("wood_balcony_guys");
   level._id_1C07 = [scripts\sp\utility::_id_77DA("enemy_alleys")];
 
-  foreach(var_3 in var_0)
-  var_3 scripts\sp\utility::_id_51E1("cqb");
+  foreach(var_3 in var_0) {
+    var_3 scripts\sp\utility::_id_51E1("cqb");
+  }
 
   wait 0.5;
   _id_2004();
@@ -756,22 +771,25 @@ _id_1C02() {
   var_10 = scripts\sp\utility::_id_107EA("exit_revealer", 1);
   var_11 = scripts\sp\utility::_id_107EA("alley_pit");
 
-  if(isDefined(var_11))
+  if(isDefined(var_11)) {
     var_11 _meth_82F1(getEnt("exit_fall_back", "targetname"));
+  }
 
   var_11 thread _id_CBE5();
   thread _id_695F(var_10);
 
-  if(scripts\engine\utility::flag("alley_high_path"))
+  if(scripts\engine\utility::flag("alley_high_path")) {
     var_12 = scripts\sp\utility::_id_107EA("shotgun_fighter_high", 1);
-  else
+  } else {
     var_12 = scripts\sp\utility::_id_107EA("shotgun_fighter_low", 1);
+  }
 
   var_12 scripts\sp\utility::_id_51E1("cqb");
   thread _id_9221();
 
-  while(!scripts\engine\utility::flag("alley_hvt_go") && !scripts\engine\utility::flag("alley_high_path") && !level.player scripts\sp\utility::_id_D1DF(var_8.origin, 0.5))
+  while(!scripts\engine\utility::flag("alley_hvt_go") && !scripts\engine\utility::flag("alley_high_path") && !level.player scripts\sp\utility::_id_D1DF(var_8.origin, 0.5)) {
     scripts\engine\utility::waitframe();
+  }
 
   level._id_920F setgoalpos(var_6.origin);
   level._id_920F.moveplaybackrate = 1.3;
@@ -784,14 +802,16 @@ _id_1C02() {
   var_14 = distance2dsquared(level.player.origin, level._id_920F.origin);
   var_15 = squared(600);
 
-  if(var_14 > var_15)
+  if(var_14 > var_15) {
     var_13 = 1;
+  }
 
   level._id_920F.moveplaybackrate = var_13;
   level._id_920F scripts\sp\utility::_id_F3E0(60);
 
-  while(!scripts\engine\utility::flag("hvt_street_run"))
+  while(!scripts\engine\utility::flag("hvt_street_run")) {
     scripts\engine\utility::waitframe();
+  }
 
   level._id_920F scripts\sp\utility::_id_51E1("sprint");
   level._id_920F setgoalpos(var_7.origin);
@@ -816,8 +836,9 @@ _id_2004() {
 _id_C349() {
   scripts\engine\utility::flag_wait("alley_high_path");
 
-  if(isalive(self))
+  if(isalive(self)) {
     self _meth_82F1(getEnt("alley_corner", "targetname"));
+  }
 }
 
 _id_695F(var_0) {
@@ -868,8 +889,9 @@ _id_B239() {
   scripts\sp\utility::_id_127AE("ship_slide_trig", "targetname");
   wait 0.5;
 
-  while(!level.player scripts\sp\utility::_id_D1DF(var_0.origin, 0.1))
+  while(!level.player scripts\sp\utility::_id_D1DF(var_0.origin, 0.1)) {
     scripts\engine\utility::waitframe();
+  }
 
   playworldsound("scn_street_capital_ship_settle", (2809, -10493, -1660));
   scripts\sp\utility::_id_15F1("ship_mover", "targetname");
@@ -920,8 +942,9 @@ _id_2ACE() {
       var_3 = distance2dsquared(level.player.origin, var_0.origin);
       var_4 = squared(500);
 
-      if(var_4 > var_3)
+      if(var_4 > var_3) {
         var_2 = 0;
+      }
     } else
       var_2 = 0;
 
@@ -935,8 +958,9 @@ _id_2ACE() {
     var_0 playLoopSound("prisoner_fem_civ_wimper_loop");
     scripts\engine\utility::flag_wait("flag_hvt_terrace_run");
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_0 stoploopsound("prisoner_fem_civ_wimper_loop");
+    }
   }
 }
 
@@ -992,8 +1016,9 @@ _id_5A1D() {
   var_2 = getEntArray("bike_shop_door", "targetname");
 
   foreach(var_4 in var_2) {
-    if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == "door_peek_clip")
+    if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == "door_peek_clip") {
       var_0.clip = var_4;
+    }
   }
 
   var_0 hide();
@@ -1030,12 +1055,14 @@ _id_11121() {
   scripts\engine\utility::flag_wait("hvt_street_escape");
 
   foreach(var_4 in var_2) {
-    if(isalive(var_4))
+    if(isalive(var_4)) {
       var_4.ignoreall = 0;
+    }
   }
 
-  if(!scripts\engine\utility::flag("street_jumped"))
+  if(!scripts\engine\utility::flag("street_jumped")) {
     level._id_920F waittill("goal");
+  }
 
   level._id_920F scripts\sp\utility::_id_51E1("sprint");
   level._id_920F setgoalpos(var_1.origin);
@@ -1058,8 +1085,9 @@ _id_4E43() {
   level._id_13158 waittill("death");
   level notify("lights_off");
 
-  foreach(var_3 in var_0)
-  var_3 setlightintensity(0.0);
+  foreach(var_3 in var_0) {
+    var_3 setlightintensity(0.0);
+  }
 }
 
 _id_13159() {
@@ -1126,8 +1154,9 @@ _id_B192() {
   var_2 = scripts\sp\utility::_id_22CD("biker_boys_backroom", 1);
 
   foreach(var_4 in var_2) {
-    if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == "hvt_guard")
+    if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == "hvt_guard") {
       level._id_9252 = var_4;
+    }
   }
 
   level._id_9252.allowdeath = 1;
@@ -1173,8 +1202,9 @@ _id_8806() {
   level endon("flag_cy_spawn_jeeps");
   var_0 = _id_0E29::_id_87F3();
 
-  if(isDefined(var_0._id_ECE7) && var_0._id_ECE7 == "enemy_bike_shop")
+  if(isDefined(var_0._id_ECE7) && var_0._id_ECE7 == "enemy_bike_shop") {
     _id_0E29::_id_87E0(3);
+  }
 }
 
 _id_59D4() {
@@ -1188,10 +1218,11 @@ _id_5711() {
   for(;;) {
     var_0 = randomintrange(1, 4);
 
-    if(var_0 < 3)
+    if(var_0 < 3) {
       thread scripts\engine\utility::play_sound_in_space("scn_collapse_distant_destruction_metal", (-2149, -14710, -742));
-    else
+    } else {
       thread scripts\engine\utility::play_sound_in_space("scn_collapse_distant_destruction", (-2149, -14710, -742));
+    }
 
     wait 9.0;
   }
@@ -1267,13 +1298,15 @@ _id_548B() {
   thread _id_12840();
   wait 3;
 
-  if(!scripts\engine\utility::flag("august_door_open"))
+  if(!scripts\engine\utility::flag("august_door_open")) {
     level._id_2429 scripts\sp\utility::_id_10346("prisoner_eth_doorsyourssiril");
+  }
 
   wait 6;
 
-  if(!scripts\engine\utility::flag("august_door_open"))
+  if(!scripts\engine\utility::flag("august_door_open")) {
     level._id_2429 scripts\sp\utility::_id_10346("prisoner_eth_readywhenyouare");
+  }
 }
 
 _id_12840() {
@@ -1296,8 +1329,9 @@ _id_540E() {
   scripts\engine\utility::flag_set("salter_done_talking");
   wait 5;
 
-  if(!scripts\engine\utility::flag("flag_exit_truck"))
+  if(!scripts\engine\utility::flag("flag_exit_truck")) {
     level._id_2429 scripts\sp\utility::_id_10346("prisoner_eth_sirthetransponder");
+  }
 }
 
 _id_540B() {
@@ -1316,8 +1350,9 @@ _id_5421() {
   scripts\engine\utility::play_sound_in_space("prisoner_sf1_dariangroundisd", level._id_920F.origin + (0, 0, 50));
   scripts\engine\utility::flag_wait("hvt_street_escape");
 
-  if(isalive(level._id_920F))
+  if(isalive(level._id_920F)) {
     level._id_920F scripts\sp\utility::_id_10346("prisoner_sf1_dontletthemnear");
+  }
 
   var_1 delete();
   scripts\sp\utility::_id_28D8("axis");
@@ -1351,20 +1386,23 @@ _id_CBE5() {
   scripts\engine\utility::flag_wait("alley_chatter_2_played");
   wait 13;
 
-  if(isDefined(self) && !scripts\engine\utility::flag("hvt_street_run"))
+  if(isDefined(self) && !scripts\engine\utility::flag("hvt_street_run")) {
     thread scripts\engine\utility::play_sound_in_space("pris_sd_0_callout_contactclock_8", self.origin + (0, 0, 70));
+  }
 }
 
 _id_5EC0(var_0) {
   var_1 = [];
 
-  if(isarray(var_0))
+  if(isarray(var_0)) {
     var_1 = var_0;
-  else
+  } else {
     var_1[0] = var_0;
+  }
 
-  if(!isDefined(var_1[0]) || var_1[0] == "all")
+  if(!isDefined(var_1[0]) || var_1[0] == "all") {
     var_1 = ["left", "right", "back"];
+  }
 
   foreach(var_3 in var_1) {
     switch (var_3) {
@@ -1412,8 +1450,9 @@ _id_4362() {
   var_5 = distance2dsquared(level._id_2429.origin, level.player.origin);
   var_6 = squared(400);
 
-  if(var_5 < var_6)
+  if(var_5 < var_6) {
     level.player _meth_8291(0.2, 0.2, 0.1, 1, 0.25, 0, 300, 10, 0, 5);
+  }
 
   wait 0.15;
   var_1 waittillmatch("single anim", "shake");

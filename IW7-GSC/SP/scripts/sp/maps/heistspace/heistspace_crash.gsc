@@ -17,8 +17,9 @@ _id_A12F() {
   visionsetalternate(7, 0.5);
   setglobalsoundcontext("atmosphere", "space");
 
-  if(isDefined(level._id_A132))
+  if(isDefined(level._id_A132)) {
     wait 0.5;
+  }
 
   scripts\engine\utility::flag_set("jackal_crash_begin");
   thread scripts\sp\maps\heistspace\heistspace_audio::_id_C7B8();
@@ -40,8 +41,9 @@ _id_A12F() {
 
   if(_id_0B76::_id_7B95() > 0) {
     foreach(var_1 in level._id_D127._id_93D2) {
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         var_1 delete();
+      }
     }
   }
 
@@ -66,9 +68,9 @@ _id_A12F() {
   _id_0BDC::_id_A156();
   var_5 = scripts\engine\utility::getStruct("retribution_crash_animnode", "targetname");
   var_6 = [];
-  var_6[0] = scripts\sp\utility::_id_10639("crash_mons");
-  var_6[1] = scripts\sp\utility::_id_10639("crash_ret");
-  var_6[2] = scripts\sp\utility::_id_10639("crash_shipyard");
+  var_6[0] = ::scripts\sp\utility::_id_10639("crash_mons");
+  var_6[1] = ::scripts\sp\utility::_id_10639("crash_ret");
+  var_6[2] = ::scripts\sp\utility::_id_10639("crash_shipyard");
   var_6[3] = var_4;
   level thread _id_13492();
   var_7 = scripts\sp\utility::_id_10639("crash_vista_destroyer", var_5.origin, var_5.angles);
@@ -88,8 +90,9 @@ _id_A12F() {
   var_9 = undefined;
 
   foreach(var_11 in var_8) {
-    if(isDefined(var_11.script_noteworthy) && var_11.script_noteworthy == "shipyard_model")
+    if(isDefined(var_11.script_noteworthy) && var_11.script_noteworthy == "shipyard_model") {
       var_9 = var_11;
+    }
   }
 
   if(isDefined(var_9)) {
@@ -168,8 +171,9 @@ _id_13492() {
   var_0 = getEntArray("shipyard_capitalship", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2 delete();
+    }
   }
 }
 
@@ -217,8 +221,9 @@ _id_ACB9() {
 }
 
 _id_E074(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   if(!var_0) {
     level.player scripts\sp\utility::_id_65E1("flag_player_dismounting");
@@ -237,8 +242,9 @@ _id_E074(var_0) {
   _id_0BDB::_id_569C();
   level._id_A056 notify("player_left_jackal");
 
-  if(scripts\engine\utility::is_true(self._id_FF24))
+  if(scripts\engine\utility::is_true(self._id_FF24)) {
     _id_0BDC::_id_A07D();
+  }
 
   _id_0BDC::_id_A208();
   _id_0BDC::_id_A0AF();
@@ -246,8 +252,9 @@ _id_E074(var_0) {
   _id_0BDC::_id_104A6(1);
   self freeentitysentient();
 
-  if(isDefined(self._id_AD34))
+  if(isDefined(self._id_AD34)) {
     self._id_AD34 delete();
+  }
 }
 
 _id_62E0() {

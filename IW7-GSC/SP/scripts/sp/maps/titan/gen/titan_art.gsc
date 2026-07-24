@@ -28,14 +28,17 @@ _id_4FE8(var_0, var_1, var_2) {
   var_8 = 1.08;
   var_9 = 1.0;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_8 = var_0;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_6 = var_1;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_7 = var_2;
+  }
 
   thread _id_0B0A::_id_583F(var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 }
@@ -49,23 +52,27 @@ _id_99F6(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_10 = 90;
   var_11 = 2.0;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_9 = var_3;
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_10 = var_4;
+  }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_11 = var_5;
+  }
 
   var_12 = 2.0;
   wait(var_0);
   thread _id_0B0A::_id_583F(var_6, var_7, var_8, var_9, var_10, var_11, var_12);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
-  else if(isDefined(var_2))
+  } else if(isDefined(var_2)) {
     scripts\engine\utility::flag_wait(var_2);
+  }
 
   setsaveddvar("r_dof_hq", 0);
   thread _id_0B0A::_id_583D(1.0);
@@ -200,8 +207,9 @@ _id_D6D0() {
 _id_F4A0() {
   var_0 = getEnt("destroyed_refinery_bridge", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 castspotshadows(0);
+  }
 }
 
 _id_96A8() {
@@ -259,13 +267,15 @@ _id_D07E() {
         var_3 = 1;
       } else if(var_3 < 3)
         var_3 = var_3 + 1;
-      else if(var_3 >= 3)
+      else if(var_3 >= 3) {
         var_3 = 0;
+      }
 
       var_8 = (level.player.origin[0], level.player.origin[1], var_4[2]);
 
-      if(distance(var_2, level.player.origin) > 10)
+      if(distance(var_2, level.player.origin) > 10) {
         playFX(var_0, var_8);
+      }
 
       playFX(var_1, var_8);
     }
@@ -297,8 +307,9 @@ _id_5DB8() {
   var_6 = scripts\engine\utility::spawn_tag_origin();
   var_6 linkTo(level._id_5D6C, level._id_5D6C._id_E6E8, (140, -16, 118), (0, 0, 0));
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_5 linkTo(var_6, "tag_origin");
+  }
 
   var_7 = scripts\engine\utility::spawn_tag_origin();
   var_7 linkTo(level._id_5D6C, level._id_5D6C._id_E6E8, (0, 0, 0), (0, 0, 0));
@@ -322,8 +333,9 @@ _id_5DB8() {
   var_5 thread _id_ABB6(100, 12);
   wait 12.0;
 
-  foreach(var_2 in var_0)
-  var_2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
+  }
 
   var_5 delete();
 }
@@ -370,8 +382,9 @@ _id_6253() {
   scripts\engine\utility::flag_wait("enable_volumetrics_first_steps");
   wait 0.05;
 
-  if(!level.console)
+  if(!level.console) {
     waitforalltransients();
+  }
 
   setsaveddvar("r_volumetrics", 1);
   scripts\engine\utility::flag_clear("enable_volumetrics_first_steps");
@@ -391,8 +404,9 @@ _id_10BD8() {
   scripts\engine\utility::flag_wait("start_canyon_to_pod_a_vision_fx");
   wait 0.05;
 
-  if(!level.console)
+  if(!level.console) {
     waitforalltransients();
+  }
 
   setsaveddvar("sm_sunSampleSizeNear", 0.3);
   setsaveddvar("sm_sunCascadeSizeMultiplier1", 3);
@@ -423,8 +437,9 @@ _id_11957() {
     var_2++;
   }
 
-  foreach(var_4 in var_0)
-  var_4 setlightintensity(0.0);
+  foreach(var_4 in var_0) {
+    var_4 setlightintensity(0.0);
+  }
 
   scripts\engine\utility::flag_wait("titan_building_1_turn_on_lights");
 
@@ -579,8 +594,9 @@ _id_10B26() {
   var_0.angles = (325, 323, -18);
   var_0 hide();
 
-  if(isDefined(level._id_6457))
+  if(isDefined(level._id_6457)) {
     level._id_6457 castspotshadows(0);
+  }
 
   var_1 = getEnt("sky_background_clouds", "targetname");
   var_1 show();
@@ -664,8 +680,9 @@ _id_F0A1() {
   var_1 = getEnt("sky_background_clouds", "targetname");
   var_1 hide();
 
-  if(isDefined(level._id_EF4E))
+  if(isDefined(level._id_EF4E)) {
     level._id_EF4E castspotshadows(0);
+  }
 }
 
 _id_F09B() {
@@ -702,8 +719,9 @@ _id_2A13() {
   var_1 = getEnt("sky_background_clouds", "targetname");
   var_1 hide();
 
-  if(isDefined(level._id_EF4E))
+  if(isDefined(level._id_EF4E)) {
     level._id_EF4E castspotshadows(0);
+  }
 }
 
 _id_206E() {
@@ -739,8 +757,9 @@ _id_2070() {
   var_1 = getEnt("sky_background_clouds", "targetname");
   var_1 hide();
 
-  if(isDefined(level._id_EF4E))
+  if(isDefined(level._id_EF4E)) {
     level._id_EF4E castspotshadows(0);
+  }
 }
 
 _id_205B() {
@@ -762,8 +781,9 @@ _id_205B() {
   var_1 = getEnt("sky_background_clouds", "targetname");
   var_1 show();
 
-  if(isDefined(level._id_EF4E))
+  if(isDefined(level._id_EF4E)) {
     level._id_EF4E castspotshadows(0);
+  }
 
   thread _id_5F94();
 }
@@ -980,16 +1000,18 @@ _id_11244() {
   scripts\engine\utility::flag_wait("supercell_methane_storm_fx_part_1");
   scripts\engine\utility::flag_set("enable_building_1_sirens");
 
-  if(!scripts\engine\utility::flag("supercell_methane_storm_ents_moving"))
+  if(!scripts\engine\utility::flag("supercell_methane_storm_ents_moving")) {
     thread _id_11246(100);
+  }
 }
 
 _id_11245() {
   level endon("squeeze_through");
   scripts\engine\utility::flag_wait("supercell_methane_storm_fx_part_2");
 
-  if(!scripts\engine\utility::flag("supercell_methane_storm_ents_moving"))
+  if(!scripts\engine\utility::flag("supercell_methane_storm_ents_moving")) {
     _id_11246(100);
+  }
 
   thread _id_11249(0.8, 0.001);
   thread _id_1124A(100);
@@ -1038,8 +1060,9 @@ _id_1123A() {
   scripts\engine\utility::flag_clear("supercell_methane_storm_ents_moving");
   scripts\sp\utility::_id_10FEC("cell_storm_2");
 
-  if(isDefined(level._id_EB1B) && isDefined(level._id_EB1B.enabled))
+  if(isDefined(level._id_EB1B) && isDefined(level._id_EB1B.enabled)) {
     level._id_EB1B.enabled = 0;
+  }
 }
 
 _id_11246(var_0) {
@@ -1052,8 +1075,9 @@ _id_11246(var_0) {
 }
 
 _id_1124A(var_0) {
-  foreach(var_2 in level._id_11253)
-  var_2._id_BCED = var_0;
+  foreach(var_2 in level._id_11253) {
+    var_2._id_BCED = var_0;
+  }
 }
 
 _id_11249(var_0, var_1) {
@@ -1099,8 +1123,9 @@ _id_11243() {
     if(var_5.size > 0) {
       var_6 = randomintrange(0, var_5.size);
 
-      if(var_4 == var_6)
+      if(var_4 == var_6) {
         var_6 = randomintrange(0, var_5.size);
+      }
 
       var_7 = (1, -1, 0);
       _id_11241("vfx_duststorm_lightning_02", "emt_titan_lightning_strike_pre_ground", "emt_titan_lightning_strike_ground", var_5[var_6].origin, var_7, var_1, var_3, "titan_storm_heavy_lightning", level._id_4BCE, 0.1);
@@ -1294,10 +1319,11 @@ _id_11240() {
 
     if(var_0 != var_1) {
       if(var_1) {
-        if(isDefined(var_2))
+        if(isDefined(var_2)) {
           setglobalsoundcontext("storm", var_2, 0.5);
-        else
+        } else {
           setglobalsoundcontext("storm", "storm_int", 0.5);
+        }
       } else
         setglobalsoundcontext("storm", "storm_ext", 0.5);
 
@@ -1320,11 +1346,13 @@ _id_11242() {
     foreach(var_3 in self.fxtag) {
       var_4 = randomintrange(0, 100);
 
-      if(var_4 <= level._id_1124C)
+      if(var_4 <= level._id_1124C) {
         thread _id_1124E(self.origin, var_3);
+      }
 
-      if(var_3._id_12FA0 && !var_3._id_1D4D)
+      if(var_3._id_12FA0 && !var_3._id_1D4D) {
         thread _id_1124D(self.origin, var_3);
+      }
     }
 
     wait 1.01;
@@ -1344,8 +1372,9 @@ _id_1124E(var_0, var_1) {
   for(var_3 = 0; var_3 < var_2; var_3++) {
     var_4 = _id_1124B(var_0, var_1);
 
-    if(isDefined(var_1._id_7640) && !var_1._id_12FA0)
+    if(isDefined(var_1._id_7640) && !var_1._id_12FA0) {
       thread _id_D527(var_1._id_7640, var_4);
+    }
 
     playFX(var_1.fx, var_4, var_1.forward, var_1.up);
     var_5 = randomfloatrange(0.05, 0.5);
@@ -1367,8 +1396,9 @@ _id_1124F() {
   var_0 = _id_11252(level._id_11254);
   var_1 = min(4, var_0.size);
 
-  for(var_2 = 0; var_2 < var_1; var_2++)
+  for(var_2 = 0; var_2 < var_1; var_2++) {
     thread _id_D527(var_0[var_2].sound, var_0[var_2].pos);
+  }
 }
 
 _id_11250(var_0, var_1, var_2) {
@@ -1424,20 +1454,25 @@ _id_6F0F() {
   self.min_intensity = 5;
   self._id_10C4F = "hm_flicker_light_start";
 
-  if(isDefined(var_0["frequency"]))
+  if(isDefined(var_0["frequency"])) {
     self.frequency = float(var_0["frequency"]);
+  }
 
-  if(isDefined(var_0["randomness"]))
+  if(isDefined(var_0["randomness"])) {
     self._id_DCBE = float(var_0["randomness"]);
+  }
 
-  if(isDefined(var_0["max_intensity"]))
+  if(isDefined(var_0["max_intensity"])) {
     self.max_intensity = float(var_0["max_intensity"]);
+  }
 
-  if(isDefined(var_0["min_intensity"]))
+  if(isDefined(var_0["min_intensity"])) {
     self.min_intensity = float(var_0["min_intensity"]);
+  }
 
-  if(isDefined(var_0["start_flag"]))
+  if(isDefined(var_0["start_flag"])) {
     self._id_10C4F = var_0["start_flag"];
+  }
 
   thread _id_6F0C();
 }
@@ -1452,26 +1487,33 @@ _id_1021D() {
   self._id_54DA = 1;
   self._id_10C4F = "hm_siren_light_start";
 
-  if(isDefined(var_0["heading"]))
+  if(isDefined(var_0["heading"])) {
     self._id_8C7B = float(var_0["heading"]);
+  }
 
-  if(isDefined(var_0["pitch"]))
+  if(isDefined(var_0["pitch"])) {
     self._id_CBE9 = float(var_0["pitch"]);
+  }
 
-  if(isDefined(var_0["roll"]))
+  if(isDefined(var_0["roll"])) {
     self._id_E67D = float(var_0["roll"]);
+  }
 
-  if(isDefined(var_0["frequency"]))
+  if(isDefined(var_0["frequency"])) {
     self.frequency = float(var_0["frequency"]);
+  }
 
-  if(isDefined(var_0["intensity"]))
+  if(isDefined(var_0["intensity"])) {
     self._id_99E5 = float(var_0["intensity"]);
+  }
 
-  if(isDefined(var_0["dir"]))
+  if(isDefined(var_0["dir"])) {
     self._id_54DA = float(var_0["dir"]);
+  }
 
-  if(isDefined(var_0["start_flag"]))
+  if(isDefined(var_0["start_flag"])) {
     self._id_10C4F = var_0["start_flag"];
+  }
 
   thread _id_1021C();
 }
@@ -1483,8 +1525,9 @@ _id_1021C() {
   self setlightintensity(self._id_99E5);
 
   while(scripts\engine\utility::flag(self._id_10C4F)) {
-    if(var_1 > 360)
+    if(var_1 > 360) {
       var_1 = var_1 - 360;
+    }
 
     var_2 = var_0[0] + var_1 * self._id_CBE9 * self._id_54DA;
     var_3 = var_0[1] + var_1 * self._id_8C7B * self._id_54DA;
@@ -1571,15 +1614,17 @@ _id_6F0D(var_0, var_1, var_2, var_3) {
   var_6 = getEnt(var_3, "targetname");
   var_7 = [];
 
-  for(var_8 = 0; var_8 < var_4.size; var_8++)
+  for(var_8 = 0; var_8 < var_4.size; var_8++) {
     var_7[var_8] = var_4[var_8] _meth_8134();
+  }
 
   var_9 = "on";
 
   while(scripts\engine\utility::flag(var_0)) {
     if(var_9 == "on") {
-      foreach(var_11 in var_4)
-      var_11 setlightintensity(0);
+      foreach(var_11 in var_4) {
+        var_11 setlightintensity(0);
+      }
 
       if(isDefined(var_5) && isDefined(var_6)) {
         var_5 hide();
@@ -1588,8 +1633,9 @@ _id_6F0D(var_0, var_1, var_2, var_3) {
 
       var_9 = "off";
     } else {
-      for(var_8 = 0; var_8 < var_4.size; var_8++)
+      for(var_8 = 0; var_8 < var_4.size; var_8++) {
         var_4[var_8] setlightintensity(var_7[var_8]);
+      }
 
       if(isDefined(var_5) && isDefined(var_6)) {
         var_5 show();
@@ -1624,10 +1670,11 @@ _id_FB10(var_0, var_1, var_2) {
   scripts\engine\utility::flag_wait("titan_apc_targetting_off");
   visionsetnaked(var_0, var_1);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     level._id_4BCE = var_0;
-  else if(var_2)
+  } else if(var_2) {
     level._id_4BCE = var_0;
+  }
 }
 
 _id_6252() {
@@ -1708,14 +1755,17 @@ _id_D527(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawn("script_origin", var_1);
   var_5 playSound(var_0, "sounddone");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_5 _meth_8277(var_2, 0);
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_5 _meth_8278(var_3, 0);
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_5 linkTo(var_4);
+  }
 
   var_5 waittill("sounddone");
   var_5 delete();
@@ -1730,8 +1780,9 @@ _id_96F0() {
   var_5 = [];
   var_6 = getnumparts(level.player.model);
 
-  for(var_7 = 0; var_7 < var_6; var_7++)
+  for(var_7 = 0; var_7 < var_6; var_7++) {
     var_5[var_7] = getpartname(level.player.model, var_7);
+  }
 
   for(;;) {
     var_8 = scripts\engine\utility::spawn_tag_origin();

@@ -14,8 +14,9 @@ _id_10CEF() {
   if(scripts\cp\utility::is_codxp()) {
     return;
   }
-  foreach(var_2, var_1 in level._id_13F4D)
-  level thread start_quest_line(var_2);
+  foreach(var_2, var_1 in level._id_13F4D) {
+    level thread start_quest_line(var_2);
+  }
 }
 
 start_quest_line(var_0) {
@@ -26,19 +27,22 @@ start_quest_line(var_0) {
     level._id_13F1B[var_0] = var_4;
     [[var_3.init_func]]();
 
-    if(_id_FF37(var_0, var_4))
+    if(_id_FF37(var_0, var_4)) {
       [[var_3._id_DB5D]]();
+    }
 
     [[var_3._id_446D]]();
   }
 }
 
 register_quest_step(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  if(!isDefined(level._id_13F4D[var_0]))
+  if(!isDefined(level._id_13F4D[var_0])) {
     level._id_13F4D[var_0] = [];
+  }
 
-  if(!isDefined(level._id_13F4C[var_0]))
+  if(!isDefined(level._id_13F4C[var_0])) {
     level._id_13F4C[var_0] = -1;
+  }
 
   var_8 = spawnStruct();
   var_8.init_func = var_2;
@@ -52,11 +56,13 @@ register_quest_step(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 add_devgui_entries(var_0, var_1, var_2, var_3) {
   wait 3;
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "";
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = "";
+  }
 
   if(level.script == "cp_town") {
     if(var_1 == 0) {

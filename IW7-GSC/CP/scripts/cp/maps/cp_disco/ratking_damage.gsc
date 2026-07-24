@@ -19,8 +19,9 @@ onratkingdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 
     return;
   }
   if(!isPlayer(var_1)) {
-    if(!isDefined(var_1.owner) || isDefined(var_1.owner) && !isPlayer(var_1.owner))
+    if(!isDefined(var_1.owner) || isDefined(var_1.owner) && !isPlayer(var_1.owner)) {
       return;
+    }
   }
 
   var_13 = gettime();
@@ -56,23 +57,26 @@ onratkingdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 
       playFX(level._effect["rk_blocking"], var_6 + var_7 * -50, var_7 * -150);
     }
 
-    if(!scripts\engine\utility::array_contains(level.kungfu_weapons[1], getweaponbasename(var_5)))
+    if(!scripts\engine\utility::array_contains(level.kungfu_weapons[1], getweaponbasename(var_5))) {
       var_2 = 0;
+    }
   }
 
   var_2 = int(min(var_2, self.health));
 
   if(isPlayer(var_1)) {
-    if(isDefined(level.updateondamagepassivesfunc))
+    if(isDefined(level.updateondamagepassivesfunc)) {
       level thread[[level.updateondamagepassivesfunc]](var_1, var_5, self);
+    }
 
     var_1 thread scripts\cp\utility::add_to_notify_queue("rat_king_damaged", self, var_1, var_5, var_2, var_8, var_4);
     var_1 thread scripts\cp\agents\gametype_zombie::updatemaghits(getweaponbasename(var_5));
 
-    if(!isDefined(var_1.shotsontargetwithweapon[getweaponbasename(var_5)]))
+    if(!isDefined(var_1.shotsontargetwithweapon[getweaponbasename(var_5)])) {
       var_1.shotsontargetwithweapon[getweaponbasename(var_5)] = 1;
-    else
+    } else {
       var_1.shotsontargetwithweapon[getweaponbasename(var_5)]++;
+    }
   }
 
   level thread scripts\cp\utility::add_to_notify_queue("rat_king_damaged", self, var_1, var_5, var_2, var_8, var_4);
@@ -90,8 +94,9 @@ rkprocessdamagefeedback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   }
   if(scripts\engine\utility::is_true(var_10.disabledamage)) {
     if(scripts\engine\utility::flag_exist("relic_active")) {
-      if(!scripts\engine\utility::flag("relic_active"))
+      if(!scripts\engine\utility::flag("relic_active")) {
         return;
+      }
     } else
       return;
   }
@@ -102,22 +107,25 @@ rkprocessdamagefeedback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     }
     var_11 = gettime();
 
-    if(isDefined(var_1.nexthittime) && var_1.nexthittime > var_11)
+    if(isDefined(var_1.nexthittime) && var_1.nexthittime > var_11) {
       return;
-    else
+    } else {
       var_1.nexthittime = var_11 + 250;
+    }
   }
 
   var_12 = "standard";
   var_13 = undefined;
 
-  if(var_10.health <= var_2)
+  if(var_10.health <= var_2) {
     var_13 = 1;
+  }
 
   var_14 = scripts\cp\utility::isheadshot(var_5, var_8, var_4, var_1);
 
-  if(var_14)
+  if(var_14) {
     var_12 = "hitcritical";
+  }
 
   var_15 = scripts\engine\utility::isbulletdamage(var_4);
   var_16 = var_14 && var_1 scripts\cp\utility::is_consumable_active("sharp_shooter_upgrade");
@@ -129,24 +137,26 @@ rkprocessdamagefeedback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   var_22 = var_4 == "MOD_EXPLOSIVE_BULLET" || var_4 == "MOD_EXPLOSIVE" || var_4 == "MOD_GRENADE_SPLASH" || var_4 == "MOD_PROJECTILE" || var_4 == "MOD_PROJECTILE_SPLASH";
   var_23 = var_4 == "MOD_MELEE";
 
-  if(var_10 scripts\aitypes\ratking\behaviors::rkisblocking())
+  if(var_10 scripts\aitypes\ratking\behaviors::rkisblocking()) {
     var_12 = "hitalienarmor";
-  else if(var_16 || var_17 || var_18 || var_20)
+  } else if(var_16 || var_17 || var_18 || var_20) {
     var_12 = "card_boosted";
-  else if(isPlayer(var_1) && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_boom") && var_22)
+  } else if(isPlayer(var_1) && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_boom") && var_22) {
     var_12 = "high_damage";
-  else if(isPlayer(var_1) && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_smack") && var_23)
+  } else if(isPlayer(var_1) && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_smack") && var_23) {
     var_12 = "high_damage";
-  else if(isPlayer(var_1) && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_rat_a_tat") && var_15)
+  } else if(isPlayer(var_1) && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_rat_a_tat") && var_15) {
     var_12 = "high_damage";
-  else if(isPlayer(var_1) && scripts\engine\utility::is_true(var_1.deadeye_charge) && var_15)
+  } else if(isPlayer(var_1) && scripts\engine\utility::is_true(var_1.deadeye_charge) && var_15) {
     var_12 = "special_weapon";
+  }
 
   if(isDefined(var_1)) {
-    if(isDefined(var_1.owner))
+    if(isDefined(var_1.owner)) {
       var_1.owner thread rkupdatedamagefeedback(var_12, var_13, var_2, var_10.riotblock);
-    else
+    } else {
       var_1 thread rkupdatedamagefeedback(var_12, var_13, var_2, var_10.riotblock);
+    }
   }
 }
 
@@ -160,12 +170,13 @@ rkupdatedamagefeedback(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = "standard_cp";
   var_8 = undefined;
 
-  if(isDefined(var_1) && var_1)
+  if(isDefined(var_1) && var_1) {
     self playlocalsound("cp_hit_alert_strong");
-  else if(scripts\engine\utility::is_true(self.deadeye_charge))
+  } else if(scripts\engine\utility::is_true(self.deadeye_charge)) {
     self playlocalsound("cp_hit_alert_perk");
-  else
+  } else {
     self playlocalsound("cp_hit_alert");
+  }
 
   switch (var_0) {
     case "hitalienarmor":
@@ -226,24 +237,29 @@ rkupdatehitmarker(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_0)) {
     return;
   }
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 0;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
   self setclientomnvar("damage_scale_type", "standard");
 
-  if(var_4)
+  if(var_4) {
     self setclientomnvar("damage_feedback_kill", 1);
-  else
+  } else {
     self setclientomnvar("damage_feedback_kill", 0);
+  }
 
-  if(var_3)
+  if(var_3) {
     self setclientomnvar("damage_scale_type", "hitalienarmor");
+  }
 
   if(var_1) {
     self setclientomnvar("damage_scale_type", "hitaliensoft");
@@ -251,8 +267,9 @@ rkupdatehitmarker(var_0, var_1, var_2, var_3, var_4) {
   } else
     self setclientomnvar("damage_feedback_headshot", 0);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self setclientomnvar("ui_damage_amount", int(var_2));
+  }
 
   self setclientomnvar("damage_feedback", var_0);
   self setclientomnvar("damage_feedback_notify", gettime());
@@ -261,8 +278,9 @@ rkupdatehitmarker(var_0, var_1, var_2, var_3, var_4) {
 adjustrkcooldowns() {
   var_0 = gettime();
 
-  if(scripts\engine\utility::is_true(scripts\aitypes\ratking\behaviors::rk_shouldbeonplatform()))
+  if(scripts\engine\utility::is_true(scripts\aitypes\ratking\behaviors::rk_shouldbeonplatform())) {
     scripts\cp\maps\cp_disco\rat_king_fight::forcerkteleport();
+  }
 }
 
 onratkingdamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
@@ -280,10 +298,11 @@ onratkingkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   scripts\cp\agents\gametype_zombie::process_assist_rewards(var_1);
   scripts\cp\cp_weaponrank::try_give_weapon_xp_zombie_killed(var_1, var_4, var_6, var_3, self.agent_type);
 
-  if(isDefined(level.death_challenge_update_func))
+  if(isDefined(level.death_challenge_update_func)) {
     [[level.death_challenge_update_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
-  else
+  } else {
     scripts\cp\cp_challenge::update_death_challenges(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+  }
 
   scripts\cp\cp_merits::process_agent_on_killed_merits(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
   scripts\cp\cp_agent_utils::deactivateagent();
@@ -292,10 +311,11 @@ onratkingkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   level notify("rat_king_killed", self.origin);
 
   if(isPlayer(var_1)) {
-    if(var_1.vo_prefix == "p5_")
+    if(var_1.vo_prefix == "p5_") {
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("ww_ratking_death", "rave_ww_vo", "highest", 70, 0, 0, 1);
-    else
+    } else {
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("ww_ratking_death_p5", "rave_ww_vo", "highest", 70, 0, 0, 1);
+    }
   }
 }
 
@@ -330,11 +350,13 @@ weapondamageadjustments(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     var_19 = var_1 scripts\cp\cp_weapon::get_weapon_level(var_5);
     var_2 = var_2 * var_19;
 
-    if(var_18)
+    if(var_18) {
       var_12 = var_12 + 5;
+    }
 
-    if(var_16)
+    if(var_16) {
       var_12 = var_12 + 5;
+    }
 
     var_12 = returnkungfuweaponadjustments(var_5, var_12);
   }
@@ -343,27 +365,29 @@ weapondamageadjustments(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
 }
 
 returnkungfuweaponadjustments(var_0, var_1) {
-  if(scripts\engine\utility::array_contains(level.kungfu_weapons[0], getweaponbasename(var_0)))
+  if(scripts\engine\utility::array_contains(level.kungfu_weapons[0], getweaponbasename(var_0))) {
     var_1 = var_1 + 5;
-  else if(scripts\engine\utility::array_contains(level.kungfu_weapons[2], getweaponbasename(var_0))) {
+  } else if(scripts\engine\utility::array_contains(level.kungfu_weapons[2], getweaponbasename(var_0))) {
     var_1 = var_1 + 20;
     scripts\cp\maps\cp_disco\rat_king_fight::forcerkteleport();
   } else if(scripts\engine\utility::array_contains(level.kungfu_weapons[1], getweaponbasename(var_0))) {
     var_1 = var_1 + 10;
     var_2 = scripts\asm\asm::asm_getcurrentstate("ratking");
 
-    if(isDefined(var_2) && (var_2 == "staff_stomp" || var_2 == "staff_projectile"))
+    if(isDefined(var_2) && (var_2 == "staff_stomp" || var_2 == "staff_projectile")) {
       thread scripts\aitypes\ratking\behaviors::retrievestaffaftertime();
-    else if(scripts\aitypes\ratking\behaviors::rkissummoning()) {
-      if(scripts\engine\utility::flag("relic_active"))
+    } else if(scripts\aitypes\ratking\behaviors::rkissummoning()) {
+      if(scripts\engine\utility::flag("relic_active")) {
         thread scripts\aitypes\ratking\behaviors::retrieveshieldaftertime(5);
-      else
+      } else {
         thread scripts\aitypes\ratking\behaviors::retrieveshieldaftertime();
+      }
     } else if(scripts\aitypes\ratking\behaviors::rkisblocking()) {
-      if(scripts\engine\utility::flag("relic_active"))
+      if(scripts\engine\utility::flag("relic_active")) {
         thread scripts\aitypes\ratking\behaviors::retrieveshieldaftertime(5);
-      else
+      } else {
         thread scripts\aitypes\ratking\behaviors::retrieveshieldaftertime();
+      }
     }
   }
 
@@ -371,10 +395,11 @@ returnkungfuweaponadjustments(var_0, var_1) {
 }
 
 isexplosivedamage(var_0, var_1) {
-  if(var_0 == "MOD_EXPLOSIVE_BULLET" && (isDefined(var_1) && var_1 == "none") || var_0 == "MOD_EXPLOSIVE" || var_0 == "MOD_GRENADE_SPLASH" || var_0 == "MOD_PROJECTILE" || var_0 == "MOD_PROJECTILE_SPLASH")
+  if(var_0 == "MOD_EXPLOSIVE_BULLET" && (isDefined(var_1) && var_1 == "none") || var_0 == "MOD_EXPLOSIVE" || var_0 == "MOD_GRENADE_SPLASH" || var_0 == "MOD_PROJECTILE" || var_0 == "MOD_PROJECTILE_SPLASH") {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 fnfdamageadjustments(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {

@@ -16,20 +16,25 @@ _id_11811(var_0) {
 _id_11812(var_0) {
   var_1 = scripts\asm\asm_bb::bb_getthrowgrenadetarget();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return anim.failure;
+  }
 
-  if(self.a.pose != self.a._id_85E2)
+  if(self.a.pose != self.a._id_85E2) {
     return anim.failure;
+  }
 
-  if(scripts\asm\asm::asm_ephemeraleventfired("throwgrenade", "start", 0))
+  if(scripts\asm\asm::asm_ephemeraleventfired("throwgrenade", "start", 0)) {
     self.bt.instancedata[var_0] = self.bt.instancedata[var_0] + 10000;
+  }
 
-  if(scripts\asm\asm::asm_ephemeraleventfired("throwgrenade", "end"))
+  if(scripts\asm\asm::asm_ephemeraleventfired("throwgrenade", "end")) {
     return anim.success;
+  }
 
-  if(gettime() > self.bt.instancedata[var_0])
+  if(gettime() > self.bt.instancedata[var_0]) {
     return anim.failure;
+  }
 
   return anim.running;
 }
@@ -44,31 +49,39 @@ _id_8BF7(var_0) {
 }
 
 _id_3928(var_0) {
-  if(isDefined(self.pathgoalpos) || isDefined(self.script) && self.script == "cover_arrival")
+  if(isDefined(self.pathgoalpos) || isDefined(self.script) && self.script == "cover_arrival") {
     return anim.failure;
-
-  if(self.grenadeweapon == "none")
-    return anim.failure;
-
-  if(isDefined(self.enemy) && isDefined(self.enemy._id_5963) && self.enemy._id_5963)
-    return anim.failure;
-
-  if(isDefined(self.dontevershoot) && self.dontevershoot)
-    return anim.failure;
-
-  if(scripts\engine\utility::actor_is3d())
-    return anim.failure;
-
-  if(scripts\anim\utility_common::usingmg())
-    return anim.failure;
-
-  if(isDefined(anim._id_11813) && isalive(level.player)) {
-    if(_id_85E3(level.player, 200))
-      return anim.success;
   }
 
-  if(isDefined(self.enemy) && _id_85E3(self.enemy, self._id_B781))
+  if(self.grenadeweapon == "none") {
+    return anim.failure;
+  }
+
+  if(isDefined(self.enemy) && isDefined(self.enemy._id_5963) && self.enemy._id_5963) {
+    return anim.failure;
+  }
+
+  if(isDefined(self.dontevershoot) && self.dontevershoot) {
+    return anim.failure;
+  }
+
+  if(scripts\engine\utility::actor_is3d()) {
+    return anim.failure;
+  }
+
+  if(scripts\anim\utility_common::usingmg()) {
+    return anim.failure;
+  }
+
+  if(isDefined(anim._id_11813) && isalive(level.player)) {
+    if(_id_85E3(level.player, 200)) {
+      return anim.success;
+    }
+  }
+
+  if(isDefined(self.enemy) && _id_85E3(self.enemy, self._id_B781)) {
     return anim.success;
+  }
 
   return anim.failure;
 }
@@ -77,48 +90,58 @@ _id_85E3(var_0, var_1) {
   var_2 = var_0.origin;
 
   if(!self cansee(var_0)) {
-    if(isDefined(self.enemy) && var_0 == self.enemy && isDefined(self._id_FECF))
+    if(isDefined(self.enemy) && var_0 == self.enemy && isDefined(self._id_FECF)) {
       var_2 = self._id_FECF;
+    }
 
     var_1 = 100;
   } else if(!isDefined(var_1))
     var_1 = 100;
 
-  if(distancesquared(self.origin, var_2) < var_1 * var_1)
+  if(distancesquared(self.origin, var_2) < var_1 * var_1) {
     return 0;
+  }
 
-  if(self.a.pose != self.a._id_85E2)
+  if(self.a.pose != self.a._id_85E2) {
     return 0;
+  }
 
   _id_F62B(var_0);
 
-  if(!_id_85B5(var_0))
+  if(!_id_85B5(var_0)) {
     return 0;
+  }
 
   var_3 = scripts\engine\utility::getyawtospot(var_2);
 
-  if(abs(var_3) > 60)
+  if(abs(var_3) > 60) {
     return 0;
+  }
 
-  if(self.weapon == "mg42" || self.grenadeammo <= 0)
+  if(self.weapon == "mg42" || self.grenadeammo <= 0) {
     return 0;
+  }
 
   if(isDefined(self.enemy) && var_0 == self.enemy) {
-    if(!_id_3E1C())
+    if(!_id_3E1C()) {
       return 0;
+    }
 
     if(scripts\anim\utility_common::canseeenemyfromexposed()) {
-      if(!self _meth_81A2(var_0, var_0.origin))
+      if(!self _meth_81A2(var_0, var_0.origin)) {
         return 0;
+      }
 
       return 1;
     }
 
-    if(scripts\anim\utility_common::cansuppressenemyfromexposed())
+    if(scripts\anim\utility_common::cansuppressenemyfromexposed()) {
       return 1;
+    }
 
-    if(!self _meth_81A2(var_0, var_0.origin))
+    if(!self _meth_81A2(var_0, var_0.origin)) {
       return 0;
+    }
   }
 
   return 1;
@@ -132,31 +155,37 @@ _id_3E1C() {
   var_0 = self.enemy.origin - self.origin;
   var_1 = lengthsquared((var_0[0], var_0[1], 0));
 
-  if(self.grenadeweapon == "flash_grenade")
+  if(self.grenadeweapon == "flash_grenade") {
     return var_1 < 589824;
+  }
 
   return var_1 >= 40000 && var_1 <= 1562500;
 }
 
 _id_D022() {
-  if(isDefined(self._id_71C7))
+  if(isDefined(self._id_71C7)) {
     return [[self._id_71C7]]();
+  }
 
   return 0;
 }
 
 _id_85B5(var_0) {
-  if(_id_D022())
+  if(_id_D022()) {
     return 0;
+  }
 
-  if(isDefined(self.script_forcegrenade) && self.script_forcegrenade == 1)
+  if(isDefined(self.script_forcegrenade) && self.script_forcegrenade == 1) {
     return 1;
+  }
 
-  if(gettime() >= _id_7EE9(self._id_1652))
+  if(gettime() >= _id_7EE9(self._id_1652)) {
     return 1;
+  }
 
-  if(self._id_1652.isplayertimer && self._id_1652.timername == "fraggrenade")
+  if(self._id_1652.isplayertimer && self._id_1652.timername == "fraggrenade") {
     return _id_B4EF(var_0);
+  }
 
   return 0;
 }
@@ -175,31 +204,37 @@ _id_F62B(var_0) {
 }
 
 _id_B4EF(var_0) {
-  if(_id_D022())
+  if(_id_D022()) {
     return 0;
+  }
 
-  if(!var_0.gs.double_grenades_allowed)
+  if(!var_0.gs.double_grenades_allowed) {
     return 0;
+  }
 
   var_1 = gettime();
 
-  if(var_1 < var_0.grenadetimers["double_grenade"])
+  if(var_1 < var_0.grenadetimers["double_grenade"]) {
     return 0;
+  }
 
-  if(var_1 > var_0.lastfraggrenadetoplayerstart + 3000)
+  if(var_1 > var_0.lastfraggrenadetoplayerstart + 3000) {
     return 0;
+  }
 
-  if(var_1 < var_0.lastfraggrenadetoplayerstart + 500)
+  if(var_1 < var_0.lastfraggrenadetoplayerstart + 500) {
     return 0;
+  }
 
   return var_0.numgrenadesinprogresstowardsplayer < 2;
 }
 
 _id_7EE9(var_0) {
-  if(var_0.isplayertimer)
+  if(var_0.isplayertimer) {
     return var_0.player.grenadetimers[var_0.timername];
-  else
+  } else {
     return anim.grenadetimers[var_0.timername];
+  }
 }
 
 _id_1182C(var_0) {
@@ -215,41 +250,51 @@ _id_1182D(var_0) {
 _id_1182E(var_0) {
   var_1 = scripts\asm\asm_bb::_id_2931();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return anim.failure;
+  }
 
-  if(scripts\asm\asm::asm_ephemeraleventfired("throwSeeker", "start", 0))
+  if(scripts\asm\asm::asm_ephemeraleventfired("throwSeeker", "start", 0)) {
     self.bt.instancedata[var_0] = self.bt.instancedata[var_0] + 10000;
+  }
 
-  if(scripts\asm\asm::asm_ephemeraleventfired("throwSeeker", "end"))
+  if(scripts\asm\asm::asm_ephemeraleventfired("throwSeeker", "end")) {
     return anim.success;
+  }
 
-  if(gettime() > self.bt.instancedata[var_0])
+  if(gettime() > self.bt.instancedata[var_0]) {
     return anim.failure;
+  }
 
   return anim.running;
 }
 
 _id_3929(var_0) {
-  if(isDefined(self.pathgoalpos))
+  if(isDefined(self.pathgoalpos)) {
     return anim.failure;
+  }
 
-  if(self.grenadeweapon == "none")
+  if(self.grenadeweapon == "none") {
     return anim.failure;
+  }
 
-  if(isDefined(self.enemy) && isDefined(self.enemy._id_5963) && self.enemy._id_5963)
+  if(isDefined(self.enemy) && isDefined(self.enemy._id_5963) && self.enemy._id_5963) {
     return anim.failure;
+  }
 
-  if(isDefined(self.dontevershoot) && self.dontevershoot)
+  if(isDefined(self.dontevershoot) && self.dontevershoot) {
     return anim.failure;
+  }
 
-  if(scripts\engine\utility::actor_is3d())
+  if(scripts\engine\utility::actor_is3d()) {
     return anim.failure;
+  }
 
   _id_F62B(self.enemy);
 
-  if(!_id_85B5(self.enemy))
+  if(!_id_85B5(self.enemy)) {
     return 0;
+  }
 
   return anim.success;
 }

@@ -76,8 +76,9 @@ asm_fireephemeralevent(var_0, var_1, var_2) {
   var_3.name = var_1;
   var_3.params = var_2;
 
-  if(!isDefined(self._blackboard._id_2329[var_0]))
+  if(!isDefined(self._blackboard._id_2329[var_0])) {
     self._blackboard._id_2329[var_0] = [];
+  }
 
   self._blackboard._id_2329[var_0][self._blackboard._id_2329[var_0].size] = var_3;
 
@@ -92,11 +93,13 @@ _id_2351(var_0, var_1) {
   self._id_164D[var_0] = spawnStruct();
   self._id_164D[var_0]._id_4BC0 = undefined;
 
-  if(var_1)
+  if(var_1) {
     self._id_164D[var_0]._id_2F3C = 1;
+  }
 
-  foreach(var_4 in var_2._id_F281)
-  self thread[[var_4]](var_0);
+  foreach(var_4 in var_2._id_F281) {
+    self thread[[var_4]](var_0);
+  }
 
   _id_238A(var_0, var_2._id_9881, 0.0);
 }
@@ -116,19 +119,22 @@ _id_234E() {
 }
 
 asm_clearevents(var_0) {
-  if(isDefined(self._blackboard.asm_events[var_0]))
+  if(isDefined(self._blackboard.asm_events[var_0])) {
     self._blackboard.asm_events[var_0] = undefined;
+  }
 }
 
 _id_2388(var_0, var_1, var_2, var_3) {
   self notify(var_1 + "_finished");
   asm_fireevent(var_1, "ASM_Finished");
 
-  if(isDefined(var_2._id_71D2))
+  if(isDefined(var_2._id_71D2)) {
     self[[var_2._id_71D2]](var_0, var_1, var_3);
+  }
 
-  if(isDefined(var_2._id_116FA))
+  if(isDefined(var_2._id_116FA)) {
     asm_fireephemeralevent(var_2._id_116FA, "end");
+  }
 }
 
 _id_2387(var_0) {
@@ -154,46 +160,54 @@ _id_238A(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     if(isDefined(var_10)) {
       foreach(var_12 in var_10) {
-        if(!isDefined(var_9) || !scripts\engine\utility::array_contains(var_9, var_12))
+        if(!isDefined(var_9) || !scripts\engine\utility::array_contains(var_9, var_12)) {
           _id_2387(var_12);
+        }
       }
     }
   }
 
-  if(isDefined(self._id_7195))
+  if(isDefined(self._id_7195)) {
     self[[self._id_7195]](var_7);
+  }
 
   self[[self._id_718F]](var_7);
 
-  if(isDefined(var_8._id_2F3C) && var_8._id_2F3C)
+  if(isDefined(var_8._id_2F3C) && var_8._id_2F3C) {
     self.allowpain_internal = isDefined(var_7._id_C87F);
+  }
 
   var_14 = undefined;
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_14 = var_5;
-  else if(isDefined(var_7._id_E88A))
+  } else if(isDefined(var_7._id_E88A)) {
     var_14 = var_7._id_E88A;
+  }
 
   self thread[[var_7._id_7048]](var_0, var_1, var_2, var_14);
 
-  if(isDefined(self._id_718D))
+  if(isDefined(self._id_718D)) {
     self[[self._id_718D]](var_0, var_8._id_10E23, var_1, var_2);
+  }
 
-  if(isDefined(self._id_718E))
+  if(isDefined(self._id_718E)) {
     self[[self._id_718E]](var_0, var_1);
+  }
 
   if(isDefined(var_7._id_111AC)) {
     foreach(var_12 in var_7._id_111AC) {
-      if(!isDefined(var_10) || !scripts\engine\utility::array_contains(var_10, var_12))
+      if(!isDefined(var_10) || !scripts\engine\utility::array_contains(var_10, var_12)) {
         _id_2351(var_12, 0);
+      }
     }
   }
 }
 
 _id_2341(var_0, var_1) {
-  if(isDefined(anim.asm[var_0].states[var_1]._id_71C5))
+  if(isDefined(anim.asm[var_0].states[var_1]._id_71C5)) {
     return anim.asm[var_0].states[var_1]._id_71C5;
+  }
 
   return undefined;
 }
@@ -211,8 +225,9 @@ _id_231E(var_0, var_1, var_2) {
   _id_2388(var_0, var_2, var_1, var_1._id_116FB);
   var_6 = var_3;
 
-  if(isDefined(var_5._id_C94B) && var_5._id_C94B)
+  if(isDefined(var_5._id_C94B) && var_5._id_C94B) {
     [var_6, var_8] = _id_2310(var_0, var_3, 1);
+  }
 
   _id_238A(var_0, var_6, 0.2, undefined, undefined, var_4);
 }
@@ -220,13 +235,15 @@ _id_231E(var_0, var_1, var_2) {
 _id_231B(var_0, var_1) {
   var_2 = self._id_164D[var_0];
 
-  if(!isDefined(var_2._id_4BC0))
+  if(!isDefined(var_2._id_4BC0)) {
     return 0;
+  }
 
   var_3 = anim.asm[var_0].states[var_2._id_4BC0].flags;
 
-  if(isDefined(var_3) && scripts\engine\utility::array_contains(var_3, var_1))
+  if(isDefined(var_3) && scripts\engine\utility::array_contains(var_3, var_1)) {
     return 1;
+  }
 
   return 0;
 }
@@ -235,20 +252,23 @@ _id_2384(var_0, var_1, var_2) {
   var_3 = self._id_164D[var_0];
   var_4 = anim.asm[var_0].states[var_1].flags;
 
-  if(isDefined(var_4) && scripts\engine\utility::array_contains(var_4, var_2))
+  if(isDefined(var_4) && scripts\engine\utility::array_contains(var_4, var_2)) {
     return 1;
+  }
 
   return 0;
 }
 
 asm_fireevent_internal(var_0, var_1, var_2) {
-  if(!isDefined(self._blackboard.asm_events[var_0]))
+  if(!isDefined(self._blackboard.asm_events[var_0])) {
     self._blackboard.asm_events[var_0] = [];
+  }
 
   var_3 = _id_233F(var_0, var_1);
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = spawnStruct();
+  }
 
   var_3._id_7686 = gettime();
   var_3.params = var_2;
@@ -272,13 +292,15 @@ asm_addephemeraleventtowatchlist(var_0, var_1) {
 asm_ephemeraleventfired(var_0, var_1, var_2) {
   if(isDefined(self._blackboard._id_2329[var_0])) {
     foreach(var_4 in self._blackboard._id_2329[var_0]) {
-      if(var_4.name == var_1)
+      if(var_4.name == var_1) {
         return 1;
+      }
     }
   }
 
-  if(!isDefined(var_2) || var_2)
+  if(!isDefined(var_2) || var_2) {
     asm_addephemeraleventtowatchlist(var_0, var_1);
+  }
 
   return 0;
 }
@@ -287,32 +309,37 @@ _id_232C(var_0, var_1) {
   var_2 = _id_233F(var_0, var_1);
 
   if(isDefined(var_2)) {
-    if(var_2._id_7686 >= gettime() - 50)
+    if(var_2._id_7686 >= gettime() - 50) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 _id_233F(var_0, var_1) {
-  if(!isDefined(self._blackboard.asm_events[var_0]))
+  if(!isDefined(self._blackboard.asm_events[var_0])) {
     return undefined;
+  }
 
   foreach(var_4, var_3 in self._blackboard.asm_events[var_0]) {
-    if(var_4 == var_1)
+    if(var_4 == var_1) {
       return var_3;
+    }
   }
 
   return undefined;
 }
 
 _id_233E(var_0, var_1) {
-  if(!isDefined(self._blackboard._id_2329[var_0]) || self._blackboard._id_2329[var_0].size == 0)
+  if(!isDefined(self._blackboard._id_2329[var_0]) || self._blackboard._id_2329[var_0].size == 0) {
     return undefined;
+  }
 
   foreach(var_3 in self._blackboard._id_2329[var_0]) {
-    if(var_3.name == var_1)
+    if(var_3.name == var_1) {
       return var_3;
+    }
   }
 
   return undefined;
@@ -323,23 +350,29 @@ _id_2314() {
 }
 
 asm_shouldpowerdown(var_0, var_1) {
-  if(!isDefined(self.bpowerdown) || !self.bpowerdown)
+  if(!isDefined(self.bpowerdown) || !self.bpowerdown) {
     return 0;
+  }
 
-  if(isDefined(self.asm.bpowereddown) && self.asm.bpowereddown)
+  if(isDefined(self.asm.bpowereddown) && self.asm.bpowereddown) {
     return 0;
+  }
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     return 0;
+  }
 
-  if(scripts\asm\asm_bb::bb_isanimScripted())
+  if(scripts\asm\asm_bb::bb_isanimScripted()) {
     return 0;
+  }
 
-  if(isDefined(self._blackboard.btraversing))
+  if(isDefined(self._blackboard.btraversing)) {
     return 0;
+  }
 
-  if(isDefined(self.melee))
+  if(isDefined(self.melee)) {
     return 0;
+  }
 
   return 1;
 }
@@ -348,8 +381,9 @@ _id_2325(var_0, var_1, var_2) {
   var_3 = 1.0;
   var_4 = var_1._id_D773;
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = "powerdown_default";
+  }
 
   _id_2388(var_0, var_2, var_1, var_1._id_116FB);
   _id_238A(var_0, var_4, var_3, undefined, undefined, var_1._id_D772);
@@ -357,20 +391,23 @@ _id_2325(var_0, var_1, var_2) {
 
 asm_isinstate(var_0) {
   foreach(var_3, var_2 in self._id_164D) {
-    if(var_2._id_4BC0 == var_0)
+    if(var_2._id_4BC0 == var_0) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 _id_232B(var_0, var_1) {
-  if(!isDefined(self._blackboard.asm_events[var_0]) || self._blackboard.asm_events[var_0].size == 0)
+  if(!isDefined(self._blackboard.asm_events[var_0]) || self._blackboard.asm_events[var_0].size == 0) {
     return 0;
+  }
 
   foreach(var_4, var_3 in self._blackboard.asm_events[var_0]) {
-    if(var_4 == var_1)
+    if(var_4 == var_1) {
       return 1;
+    }
   }
 
   return 0;
@@ -396,11 +433,13 @@ _id_2310(var_0, var_1, var_2) {
       var_9 = anim.asm[var_0].states[var_6._id_11A1A];
       var_10 = var_6._id_2B93;
 
-      if(!isDefined(var_10))
+      if(!isDefined(var_10)) {
         var_10 = 0.2;
+      }
 
-      if(isDefined(var_9._id_C94B) && var_9._id_C94B)
+      if(isDefined(var_9._id_C94B) && var_9._id_C94B) {
         [var_7, var_10] = _id_2310(var_0, var_7, 1);
+      }
 
       if(isDefined(var_7)) {
         if(!var_2) {
@@ -430,8 +469,9 @@ asm_setstate(var_0, var_1) {
     if(isDefined(var_6._id_C94B) && var_6._id_C94B) {
       [var_7, var_9] = _id_2310(var_10, var_0, 1);
 
-      if(!isDefined(var_7))
+      if(!isDefined(var_7)) {
         continue;
+      }
     }
 
     _id_2388(var_10, var_4, var_5, var_5._id_116FB);
@@ -461,26 +501,30 @@ _id_2389() {
     var_0 = var_5._id_4BC0;
     [var_7, var_8] = _id_2310(var_9, var_0, 0);
 
-    if(isDefined(var_7))
+    if(isDefined(var_7)) {
       var_3 = 1;
+    }
 
-    if(var_3)
+    if(var_3) {
       return;
+    }
   }
 }
 
 _id_6A18(var_0, var_1, var_2, var_3) {
   if(weaponclass(self.weapon) == "pistol") {
-    if(weaponclass(self.primaryweapon) != "mg" && weaponclass(self.primaryweapon) != "rocketlauncher" && weaponclass(self.primaryweapon) != "pistol")
+    if(weaponclass(self.primaryweapon) != "mg" && weaponclass(self.primaryweapon) != "rocketlauncher" && weaponclass(self.primaryweapon) != "pistol") {
       return 0;
+    }
   }
 
   return _id_BCE7(var_0, var_1, var_2, var_3);
 }
 
 _id_BCE7(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_3) && asm_getdemeanor() != var_3)
+  if(isDefined(var_3) && asm_getdemeanor() != var_3) {
     return 0;
+  }
 
   return scripts\asm\asm_bb::bb_moverequested() && distancesquared(self.pathgoalpos, self.origin) > 4.0;
 }
@@ -493,8 +537,9 @@ _id_BCE8(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3)) {
     var_4 = self[[self._id_71A6]]();
 
-    if(var_4 != var_3)
+    if(var_4 != var_3) {
       return 0;
+    }
   }
 
   return _id_BCE7(var_0, var_1, var_2, undefined);
@@ -503,36 +548,41 @@ _id_BCE8(var_0, var_1, var_2, var_3) {
 _id_9E41(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
 
-  if(isarray(var_3))
+  if(isarray(var_3)) {
     var_4 = var_3[0];
-  else
+  } else {
     var_4 = var_3;
+  }
 
-  if(scripts\asm\asm_bb::bb_isincombat() != var_4)
+  if(scripts\asm\asm_bb::bb_isincombat() != var_4) {
     return 0;
+  }
 
   var_5 = undefined;
 
-  if(isarray(var_3) && isDefined(var_3[1]))
+  if(isarray(var_3) && isDefined(var_3[1])) {
     var_5 = var_3[1];
+  }
 
   return _id_BCE7(var_0, var_1, var_2, var_5);
 }
 
 asm_getdemeanor() {
-  if(asm_getdemeanor())
+  if(asm_getdemeanor()) {
     return "frantic";
-  else if(scripts\asm\asm_bb::bb_isfrantic())
+  } else if(scripts\asm\asm_bb::bb_isfrantic()) {
     return "combat";
-  else if(isDefined(self.demeanoroverride) && self.demeanoroverride == "cqb" && !isDefined(self.grenade))
+  } else if(isDefined(self.demeanoroverride) && self.demeanoroverride == "cqb" && !isDefined(self.grenade)) {
     return "cqb";
+  }
 
   return self._blackboard.movetype;
 }
 
 asm_updatefrantic() {
-  if(!isDefined(self.pathgoalpos) || distancesquared(self.origin, self.pathgoalpos) > 4096.0)
+  if(!isDefined(self.pathgoalpos) || distancesquared(self.origin, self.pathgoalpos) > 4096.0) {
     self.asm._id_7360 = scripts\asm\asm_bb::bb_isfrantic();
+  }
 }
 
 asm_getdemeanor() {
@@ -552,8 +602,9 @@ asm_setdemeanoranimoverride(var_0, var_1, var_2) {
 }
 
 asm_cleardemeanoranimoverride(var_0, var_1) {
-  if(asm_hasdemeanoranimoverride(var_0, var_1))
+  if(asm_hasdemeanoranimoverride(var_0, var_1)) {
     self.asm.animoverrides[var_0][var_1] = undefined;
+  }
 }
 
 asm_hasdemeanoranimoverride(var_0, var_1) {
@@ -584,26 +635,30 @@ asm_getallanimindicesforalias(var_0, var_1, var_2) {
 _id_235C(var_0, var_1, var_2, var_3) {
   var_4 = "";
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_4 = var_3;
+  }
 
   if(var_2) {
-    if(_id_232C(var_1, "pass_left"))
+    if(_id_232C(var_1, "pass_left")) {
       var_5 = var_4 + "left";
-    else if(_id_232C(var_1, "pass_right"))
+    } else if(_id_232C(var_1, "pass_right")) {
       var_5 = var_4 + "right";
-    else if(self.asm.footsteps.foot == "right")
+    } else if(self.asm.footsteps.foot == "right") {
       var_5 = var_4 + "right";
-    else
+    } else {
       var_5 = var_4 + "left";
+    }
   } else
     var_5 = var_4;
 
-  if(asm_hasalias(var_1, var_5 + var_0))
+  if(asm_hasalias(var_1, var_5 + var_0)) {
     return asm_lookupanimfromalias(var_1, var_5 + var_0);
+  }
 
-  if(var_4 != var_5 && asm_hasalias(var_1, var_4 + var_0))
+  if(var_4 != var_5 && asm_hasalias(var_1, var_4 + var_0)) {
     return asm_lookupanimfromalias(var_1, var_4 + var_0);
+  }
 
   return undefined;
 }
@@ -634,8 +689,9 @@ _id_231D(var_0, var_1, var_2, var_3) {
 
     var_10 = 1;
 
-    if(var_7.size > 2)
+    if(var_7.size > 2) {
       var_10 = var_7[3];
+    }
 
     var_5 = var_5 + var_10;
   }
@@ -649,8 +705,9 @@ _id_231D(var_0, var_1, var_2, var_3) {
     var_12 = var_7[1];
     var_10 = 1;
 
-    if(var_7.size > 2)
+    if(var_7.size > 2) {
       var_10 = var_7[3];
+    }
 
     if(var_11 < var_10) {
       break;

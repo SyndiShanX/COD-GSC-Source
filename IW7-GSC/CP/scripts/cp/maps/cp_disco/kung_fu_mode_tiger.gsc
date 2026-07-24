@@ -50,8 +50,9 @@ run_black_hole_logic() {
   var_1 = getclosestpointonnavmesh(var_1);
   var_12 = 250;
 
-  if(self.chi_meter_amount - var_12 <= 0)
+  if(self.chi_meter_amount - var_12 <= 0) {
     self.kung_fu_exit_delay = 1;
+  }
 
   thread scripts\cp\zombies\zombies_chi_meter::chi_meter_kill_decrement(var_12);
   var_13 = scripts\engine\utility::spawn_tag_origin(var_1 + (0, 0, 60));
@@ -147,8 +148,9 @@ stay_in_kung_fu_till_gesture_done(var_0) {
   self endon("disconnect");
   var_1 = 500;
 
-  if(self.chi_meter_amount - var_1 <= 0)
+  if(self.chi_meter_amount - var_1 <= 0) {
     self.kung_fu_exit_delay = 1;
+  }
 
   var_2 = self getgestureanimlength(var_0);
   wait(var_2);
@@ -187,10 +189,11 @@ fling_enemy(var_0, var_1, var_2, var_3, var_4) {
   var_5 = isDefined(self.agent_type) && self.agent_type == "ratking";
 
   if(var_5) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       self dodamage(self.health + 1000, self.origin, var_2, var_2, "MOD_UNKNOWN", var_4);
-    else
+    } else {
       self dodamage(self.health + 1000, self.origin, level.players[0], level.players[0], "MOD_UNKNOWN", var_4);
+    }
   } else {
     self.do_immediate_ragdoll = 1;
     self.customdeath = 1;
@@ -201,18 +204,20 @@ fling_enemy(var_0, var_1, var_2, var_3, var_4) {
       self.nocorpse = 1;
       self.full_gib = 1;
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         self dodamage(self.health + 1000, self.origin, var_2, var_2, "MOD_UNKNOWN", var_4);
-      else
+      } else {
         self dodamage(self.health + 1000, self.origin, level.players[0], level.players[0], "MOD_UNKNOWN", var_4);
+      }
     } else {
       self setvelocity(vectorNormalize(var_1) * 500);
       wait 0.1;
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         self dodamage(self.health + 1000, self.origin, var_2, var_2, "MOD_UNKNOWN", var_4);
-      else
+      } else {
         self dodamage(self.health + 1000, self.origin, level.players[0], level.players[0], "MOD_UNKNOWN", var_4);
+      }
     }
   }
 }
@@ -224,8 +229,9 @@ slam_execute(var_0, var_1, var_2) {
     if(var_3 < 65536) {
       return;
     }
-    if(var_3 > squared(600))
+    if(var_3 > squared(600)) {
       return;
+    }
   }
 
   var_4 = var_0 scripts\engine\utility::spawn_tag_origin();
@@ -269,17 +275,19 @@ slam_executeinternal(var_0, var_1, var_2, var_3) {
     var_12 = undefined;
     var_13 = distancesquared(var_1, var_11.origin);
 
-    if(var_13 <= var_6)
+    if(var_13 <= var_6) {
       var_12 = 1000000;
-    else if(var_13 <= var_7)
+    } else if(var_13 <= var_7) {
       var_12 = 1000000;
-    else
+    } else {
       continue;
+    }
 
     var_11 scripts\cp\cp_weapon::shellshockondamage("MOD_EXPLOSIVE", var_12);
 
-    if(var_12 >= var_11.health)
+    if(var_12 >= var_11.health) {
       var_11.customdeath = 1;
+    }
 
     var_11 dodamage(var_12, var_1, var_0, var_0, "MOD_CRUSH");
   }

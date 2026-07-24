@@ -15,8 +15,9 @@ main() {
 
     var_5 = getEnt("base_door", "targetname");
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       var_5 hide();
+    }
 
     scripts\sp\maps\europa\europa_armory::_id_8EAA();
   }
@@ -62,9 +63,9 @@ main() {
   thread footsteps();
   level.player setweaponammostock("seeker", 0);
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     level.player _id_0E42::giveperk("specialty_extraequipment");
-  else {
+  } else {
     setomnvar("ui_hud_ability_primary", 0);
     setomnvar("ui_hud_ability_secondary", 0);
   }
@@ -254,8 +255,9 @@ _id_6E3A() {
 }
 
 _id_1122F() {
-  if(!isDefined(level._id_4BC5))
+  if(!isDefined(level._id_4BC5)) {
     level._id_4BC5 = 3;
+  }
 
   for(;;) {
     self waittill("trigger");
@@ -270,8 +272,9 @@ _id_1122F() {
 }
 
 _id_A6F3() {
-  if(isDefined(self._id_EDA0))
+  if(isDefined(self._id_EDA0)) {
     scripts\engine\utility::flag_wait(self._id_EDA0);
+  }
 
   scripts\engine\utility::trigger_on();
 }

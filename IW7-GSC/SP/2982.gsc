@@ -13,8 +13,9 @@ main(var_0, var_1, var_2) {
   scripts\sp\vehicle_build::_id_31B3((0, 0, 53), 256, 300, 20, 0);
   var_3 = var_0;
 
-  if(var_0 == "veh_mil_lnd_ca_4x4_atv_drive")
+  if(var_0 == "veh_mil_lnd_ca_4x4_atv_drive") {
     var_3 = "veh_mil_lnd_ca_4x4_atv_dst";
+  }
 
   scripts\sp\vehicle_build::_id_3186(var_0, var_3);
   scripts\sp\vehicle_build::_id_3184("vfx/iw7/core/vehicle/cars/vfx_veh_explosion_civ.vfx", undefined, "car_explode");

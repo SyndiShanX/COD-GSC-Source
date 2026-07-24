@@ -20,8 +20,9 @@ _id_D4CD(var_0) {
     var_3 = distancesquared(self.origin, var_2.origin);
 
     if(var_3 <= var_1) {
-      if(isDefined(self.melee))
+      if(isDefined(self.melee)) {
         self.melee._id_2FB1 = 1;
+      }
 
       break;
     }
@@ -34,8 +35,9 @@ donotetracks_vsplayer(var_0, var_1) {
   for(;;) {
     self waittill(var_1, var_2);
 
-    if(!isarray(var_2))
+    if(!isarray(var_2)) {
       var_2 = [var_2];
+    }
 
     foreach(var_4 in var_2) {
       switch (var_4) {
@@ -67,15 +69,17 @@ donotetracks_vsplayer(var_0, var_1) {
           }
           if(isalive(var_5)) {
             if(isPlayer(var_5)) {
-              if(isDefined(self._id_B621))
+              if(isDefined(self._id_B621)) {
                 var_7 = distance2dsquared(var_5.origin, self.origin);
-              else
+              } else {
                 var_7 = distancesquared(var_5.origin, self.origin);
+              }
 
               var_8 = 4096;
 
-              if(isDefined(self._id_B5E1))
+              if(isDefined(self._id_B5E1)) {
                 var_8 = self._id_B5E1;
+              }
 
               if(var_7 <= var_8) {
                 var_9 = undefined;
@@ -86,8 +90,9 @@ donotetracks_vsplayer(var_0, var_1) {
                 var_14 = 0.35;
                 var_15 = isDefined(level.player._id_C337) && level.player._id_C337.active;
 
-                if(self.weapon == "none")
+                if(self.weapon == "none") {
                   var_9 = self._id_12B7F;
+                }
 
                 if(self.unittype == "c8") {
                   var_9 = self._id_3507;
@@ -105,13 +110,15 @@ donotetracks_vsplayer(var_0, var_1) {
 
                 self melee(undefined, var_9, sqrt(var_8), var_10, var_11);
 
-                if(var_15 && self.unittype == "soldier")
+                if(var_15 && self.unittype == "soldier") {
                   self playSound("ai_melee_vs_shield");
+                }
 
-                if(isDefined(self.unittype) && self.unittype == "c6")
+                if(isDefined(self.unittype) && self.unittype == "c6") {
                   self playSound("c6_punch_impact_plr");
-                else if(isDefined(self.unittype) && self.unittype == "c8")
+                } else if(isDefined(self.unittype) && self.unittype == "c8") {
                   self playSound("c8_melee_shield_impact");
+                }
 
                 level.player _id_D0EA(self.origin, var_12);
                 earthquake(0.45, 0.35, level.player.origin, 1000);
@@ -136,8 +143,9 @@ donotetracks_vsplayer(var_0, var_1) {
 }
 
 _id_D0EA(var_0, var_1) {
-  if(!self isonground())
+  if(!self isonground()) {
     var_1 = var_1 * 0.1;
+  }
 
   var_2 = vectorNormalize(self.origin + (0, 0, 45) - var_0);
   var_3 = var_2 * var_1 * 10;
@@ -170,34 +178,41 @@ _id_B57F() {
 }
 
 _id_B5B6(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.melee))
+  if(!isDefined(self.melee)) {
     return 1;
+  }
 
-  if(isDefined(self.melee._id_2720))
+  if(isDefined(self.melee._id_2720)) {
     return 1;
+  }
 
-  if(!isDefined(self.melee.target))
+  if(!isDefined(self.melee.target)) {
     return 1;
+  }
 
-  if(!isalive(self.melee.target))
+  if(!isalive(self.melee.target)) {
     return 1;
+  }
 
-  if(isDefined(self.melee.target.dontmelee) && self.melee.target.dontmelee)
+  if(isDefined(self.melee.target.dontmelee) && self.melee.target.dontmelee) {
     return 1;
+  }
 
   return 0;
 }
 
 melee_shouldabort(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.melee))
+  if(!isDefined(self.melee)) {
     return 1;
+  }
 
   if(isDefined(self.melee._id_2720)) {
     if(isDefined(self.melee._id_3321)) {
       var_4 = scripts\asm\asm::_id_232B(var_1, "melee_stop");
 
-      if(var_4)
+      if(var_4) {
         self.melee._id_312C = 1;
+      }
 
       return var_4;
     } else if(isDefined(self.melee._id_11095)) {
@@ -232,8 +247,9 @@ _id_B571() {
 }
 
 _id_B59A(var_0, var_1, var_2, var_3) {
-  if(self.melee._id_13D8A != var_3)
+  if(self.melee._id_13D8A != var_3) {
     return 0;
+  }
 
   return !_id_B573();
 }
@@ -252,32 +268,38 @@ _id_38A0(var_0, var_1, var_2, var_3) {}
 _id_67D6(var_0, var_1, var_2, var_3) {
   var_4 = self.melee.target;
 
-  if(isPlayer(var_4))
+  if(isPlayer(var_4)) {
     return 0;
+  }
 
-  if(isDefined(var_4._id_596E) && var_4._id_596E)
+  if(isDefined(var_4._id_596E) && var_4._id_596E) {
     return 0;
+  }
 
-  if(!isDefined(self.melee._id_13D8A) || !isDefined(var_4.melee._id_13D8A))
+  if(!isDefined(self.melee._id_13D8A) || !isDefined(var_4.melee._id_13D8A)) {
     _id_B57F();
+  }
 
   var_5 = var_3[0];
 
-  if(self.melee._id_13D8A != var_5)
+  if(self.melee._id_13D8A != var_5) {
     return 0;
+  }
 
   var_6 = self[[self._id_7191]](var_0, var_2);
   var_7 = _id_38A7(var_6);
 
-  if(!var_7)
+  if(!var_7) {
     return 0;
+  }
 
   var_8 = var_3[1];
   var_9 = 30;
   var_10 = angleclamp180(self.melee._id_10D6D[1] - self.angles[1]);
 
-  if(abs(var_10) > var_9)
+  if(abs(var_10) > var_9) {
     return 0;
+  }
 
   if(var_8) {
     var_11 = var_4.angles - (0, var_10 * 0.5, 0);
@@ -291,8 +313,9 @@ _id_67D6(var_0, var_1, var_2, var_3) {
   var_14 = vectorNormalize(var_4.origin - var_12);
   var_15 = vectordot(var_14, var_13);
 
-  if(var_15 > 12)
+  if(var_15 > 12) {
     return 0;
+  }
 
   if(var_8) {
     self.melee._id_10D6D = self.angles + (0, var_10 * 0.5, 0);
@@ -337,14 +360,16 @@ _id_D4D6(var_0) {
   self unlink();
 
   if(scripts\asm\asm::_id_232B(var_0, "melee_interact") && !scripts\asm\asm::_id_232B(var_0, "melee_death")) {
-    if(isDefined(self.melee._id_9A08))
+    if(isDefined(self.melee._id_9A08)) {
       self.melee._id_112E2 = !scripts\asm\asm::_id_232B(var_0, "drop");
-    else
+    } else {
       self.melee._id_112E2 = 1;
+    }
   }
 
-  if(!isDefined(self.melee._id_2BE6))
+  if(!isDefined(self.melee._id_2BE6)) {
     self.melee._id_2720 = 1;
+  }
 }
 
 _id_B5B7(var_0, var_1, var_2, var_3) {
@@ -359,8 +384,9 @@ _id_B5D7(var_0) {
   self endon(var_0 + "_finished");
   self waittill("weapon_dropped", var_1);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self.melee._id_5D3E = var_1;
+  }
 }
 
 _id_B58E() {
@@ -380,28 +406,32 @@ _id_B590(var_0) {
     case "sync":
       if(!isDefined(self.melee._id_2720)) {
         if(isDefined(self.melee.target)) {
-          if(isalive(self.melee.target))
+          if(isalive(self.melee.target)) {
             self _meth_81E1(self.melee.target, "tag_sync", 1, 1);
+          }
         } else if(isDefined(self.melee._id_331C) && isDefined(self.melee.partner)) {
-          if(isalive(self.melee.partner))
+          if(isalive(self.melee.partner)) {
             self _meth_81E1(self.melee.partner, "tag_sync", 1, 1);
+          }
         }
       }
 
       break;
     case "unsync":
-      if(isDefined(self.melee._id_71D3))
+      if(isDefined(self.melee._id_71D3)) {
         self[[self.melee._id_71D3]]();
-      else
+      } else {
         self unlink();
+      }
 
       break;
     case "melee_interact":
       self.melee._id_112E3 = 1;
       break;
     case "melee_death":
-      if(isDefined(self.melee._id_112E2))
+      if(isDefined(self.melee._id_112E2)) {
         return var_0;
+      }
 
       return var_0;
     case "attach_knife":

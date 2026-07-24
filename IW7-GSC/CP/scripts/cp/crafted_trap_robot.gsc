@@ -91,8 +91,9 @@ _id_F684(var_0, var_1, var_2) {
   for(;;) {
     var_3 = scripts\engine\utility::waittill_any_return("place_ims", "cancel_ims", "force_cancel_placement", "player_action_slot_restart");
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       var_3 = "force_cancel_placement";
+    }
 
     if(var_3 == "cancel_ims" || var_3 == "force_cancel_placement" || var_3 == "player_action_slot_restart") {
       if(!var_1 && var_3 == "cancel_ims") {
@@ -100,10 +101,11 @@ _id_F684(var_0, var_1, var_2) {
       }
       var_0 robot_trap_setcancelled(var_3 == "force_cancel_placement" && !isDefined(var_0.firstplacement));
 
-      if(var_3 != "force_cancel_placement")
+      if(var_3 != "force_cancel_placement") {
         thread watch_dpad();
-      else if(var_1)
+      } else if(var_1) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
+      }
 
       return 0;
     }
@@ -111,8 +113,9 @@ _id_F684(var_0, var_1, var_2) {
     if(!var_0.canbeplaced) {
       continue;
     }
-    if(var_1)
+    if(var_1) {
       scripts\cp\utility::remove_crafted_item_from_inventory(self);
+    }
 
     var_0 thread robot_trap_setplaced(var_2);
     self notify("IMS_placed");
@@ -159,10 +162,11 @@ create_robot_trap(var_0, var_1) {
   var_4.config = level.robot_trap_settings[var_3];
   var_4 thread robot_trap_handleuse();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_4 thread scripts\cp\utility::item_timeout(var_1);
-  else
+  } else {
     var_4 thread scripts\cp\utility::item_timeout(undefined, level.robot_trap_settings[self.robot_trap_type].lifespan);
+  }
 
   return var_4;
 }
@@ -225,8 +229,9 @@ robot_trap_handleuse() {
     }
     robot_trap_setinactive();
 
-    if(isDefined(self getlinkedparent()))
+    if(isDefined(self getlinkedparent())) {
       self unlink();
+    }
 
     var_0 thread _id_F684(var_1, 0, self.lifespan);
     self delete();
@@ -238,13 +243,15 @@ robot_trap_setplaced(var_0) {
   self endon("death");
   level endon("game_ended");
 
-  if(isDefined(self.carriedby))
+  if(isDefined(self.carriedby)) {
     self.carriedby forceusehintoff();
+  }
 
   self.carriedby = undefined;
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.iscarrying = 0;
+  }
 
   self.firstplacement = undefined;
   var_1 = create_robot_trap(self, var_0);
@@ -255,8 +262,9 @@ robot_trap_setplaced(var_0) {
   var_1 thread robot_trap_setactive();
   var_2 = spawnStruct();
 
-  if(isDefined(self.moving_platform))
+  if(isDefined(self.moving_platform)) {
     var_2.linkparent = self.moving_platform;
+  }
 
   var_2.endonstring = "carried";
   var_2.deathoverridecallback = ::_id_936D;
@@ -274,8 +282,9 @@ robot_trap_setcancelled(var_0) {
     var_1 scripts\engine\utility::allow_weapon(1);
   }
 
-  if(isDefined(var_0) && var_0)
+  if(isDefined(var_0) && var_0) {
     _id_66A7();
+  }
 
   self.carried_robot_trap delete();
   self delete();
@@ -292,8 +301,9 @@ robot_trap_setcarried(var_0) {
   thread _id_936F(var_0);
   thread _id_9371(var_0);
 
-  if(isDefined(level._id_5CF2))
+  if(isDefined(level._id_5CF2)) {
     self thread[[level._id_5CF2]](var_0);
+  }
 
   self notify("carried");
 }
@@ -329,8 +339,9 @@ robot_trap_setactive() {
   var_1 = bulletTrace(self._id_2514, self._id_2514 + (0, 0, 500), 0, self);
   var_2 = var_1["position"] - (0, 0, 20) - self.origin;
 
-  if(var_2[2] > 250)
+  if(var_2[2] > 250) {
     self._id_2514 = self gettagorigin("tag_rocket_tube_01") + (0, 0, 250);
+  }
 
   self.attacklaunchpos = [];
   self.attacklaunchpos[0] = self gettagorigin("tag_rocket_tube_01") + (0, 0, -10);
@@ -346,8 +357,9 @@ robot_trap_setactive() {
   self setscriptablepartstate("LED_Panel", "Idle");
   thread rotate_robot();
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     thread robot_usability_monitor(self.owner);
+  }
 
   thread robot_trap_attackzombies();
   thread scripts\cp\utility::item_handleownerdisconnect("robot_disconnect");
@@ -367,8 +379,9 @@ robot_trap_setinactive() {
   self makeunusable();
   self stoploopsound();
 
-  if(isDefined(self._id_2536))
+  if(isDefined(self._id_2536)) {
     self._id_2536 delete();
+  }
 
   if(isDefined(self._id_69F6)) {
     self._id_69F6 delete();
@@ -462,8 +475,9 @@ robot_trap_attackzombies() {
       thread launch_rocket(var_0, self._id_252E, var_2);
     }
 
-    if(self._id_252E % 2)
+    if(self._id_252E % 2) {
       self waittill("firework_exploded");
+    }
 
     wait(self.config._id_DDAC);
 
@@ -488,10 +502,11 @@ robot_zap(var_0) {
   thread electrocute_zombie(var_0);
   var_0 setscriptablepartstate("electrocuted", "on");
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     var_1 = self.owner;
-  else
+  } else {
     var_1 = undefined;
+  }
 
   var_0 dodamage(var_0.health + 100, self.origin, var_1, self, "MOD_UNKNOWN", "iw7_robotzap_zm");
 }
@@ -507,8 +522,9 @@ electrocute_zombie(var_0) {
 }
 
 launch_rocket(var_0, var_1, var_2) {
-  if(!isDefined(self.last_launch_tube))
+  if(!isDefined(self.last_launch_tube)) {
     self.last_launch_tube = 0;
+  }
 
   if(self.last_launch_tube == 0) {
     var_3 = self.attacklaunchpos[1];
@@ -520,10 +536,11 @@ launch_rocket(var_0, var_1, var_2) {
 
   thread launch_anim();
 
-  if(self.last_launch_tube == 0)
+  if(self.last_launch_tube == 0) {
     self.last_launch_tube = 1;
-  else
+  } else {
     self.last_launch_tube = 0;
+  }
 
   var_4 = spawn("script_model", var_3);
   var_4 setModel(self.config._id_6A03);
@@ -532,17 +549,19 @@ launch_rocket(var_0, var_1, var_2) {
   var_6 = self.owner;
   var_7 = self._id_2514;
 
-  if(var_2)
+  if(var_2) {
     var_7 = self.alt_attackheightpos;
+  }
 
   var_4 moveTo(var_7, self._id_2528, self._id_2528 * 0.5, 0);
   wait(self._id_2528);
   var_4 setscriptablepartstate("rocket", "explode");
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_8 = magicbullet(var_5, var_4.origin, (var_0.origin[0], var_0.origin[1], var_4.origin[2] - 5), var_6);
-  else
+  } else {
     var_8 = magicbullet(var_5, var_4.origin, var_0.origin, level.players[0]);
+  }
 
   var_8 thread watch_for_death();
   wait 0.1;

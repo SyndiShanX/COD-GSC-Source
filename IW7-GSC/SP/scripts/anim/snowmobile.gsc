@@ -8,10 +8,11 @@ main() {
   self._id_FE91 = undefined;
   _id_103C8();
 
-  if(isDefined(self._id_5BD6))
+  if(isDefined(self._id_5BD6)) {
     _id_B1C3();
-  else
+  } else {
     _id_B213();
+  }
 }
 
 _id_103C8() {
@@ -90,8 +91,9 @@ _id_103CA() {
       var_2 = 0.5 * (1 + scripts\sp\vehicle_code::_id_12E33(self._id_E500));
       var_3 = self islegacyagent(scripts\anim\utility::_id_1F64(var_0));
 
-      if(var_0 == "right2left")
+      if(var_0 == "right2left") {
         var_3 = 1 - var_3;
+      }
 
       var_4 = 20 * abs(var_3 - var_2);
 
@@ -125,10 +127,11 @@ _id_103CC() {
     var_0 = scripts\sp\vehicle_code::_id_12E33(self._id_E500);
     self _meth_82AC(%sm_lean, abs(var_0), 0.05);
 
-    if(var_0 >= 0)
+    if(var_0 >= 0) {
       self _meth_82A9(scripts\anim\utility::_id_1F64("lean_right"), 1, 0.05);
-    else
+    } else {
       self _meth_82A9(scripts\anim\utility::_id_1F64("lean_left"), 1, 0.05);
+    }
 
     wait 0.05;
   }
@@ -161,8 +164,9 @@ _id_103CB() {
       var_1 = gettime() + 3000;
     }
 
-    if(var_1 <= gettime())
+    if(var_1 <= gettime()) {
       _id_103D7();
+    }
 
     self _meth_82A9(scripts\anim\utility::_id_1F64("add_aim_left_center"), var_3, var_0);
     self _meth_82AC(scripts\anim\utility::_id_1F64("add_aim_left_left"), var_4, var_0);
@@ -212,8 +216,9 @@ _id_103CD() {
     self _meth_82AC(scripts\anim\utility::_id_1F64("add_aim_backright_left"), var_3, var_0);
     self _meth_82AC(scripts\anim\utility::_id_1F64("add_aim_backright_right"), var_4, var_0);
 
-    if(isPlayer(self.enemy))
+    if(isPlayer(self.enemy)) {
       self _meth_83CE();
+    }
 
     wait 0.05;
     thread _id_103D8();
@@ -249,8 +254,9 @@ _id_103C9(var_0) {
       var_1._id_67E5["bump"][var_0] = 0;
       self notify("snowmobile_event_occurred");
 
-      if(self._id_4B71 != "bump_big")
+      if(self._id_4B71 != "bump_big") {
         thread _id_103C5(scripts\anim\utility::_id_1F64("event_bump"));
+      }
     }
 
     if(var_1._id_67E5["bump_big"][var_0]) {
@@ -264,16 +270,18 @@ _id_103C9(var_0) {
       var_1._id_67E5["sway_left"][var_0] = 0;
       self notify("snowmobile_event_occurred");
 
-      if(self._id_4B71 != "bump_big")
+      if(self._id_4B71 != "bump_big") {
         thread _id_103C5(scripts\anim\utility::_id_1F64("event_sway")["left"]);
+      }
     }
 
     if(var_1._id_67E5["sway_right"][var_0]) {
       var_1._id_67E5["sway_right"][var_0] = 0;
       self notify("snowmobile_event_occurred");
 
-      if(self._id_4B71 != "bump_big")
+      if(self._id_4B71 != "bump_big") {
         thread _id_103C5(scripts\anim\utility::_id_1F64("event_sway")["right"]);
+      }
     }
 
     wait 0.05;
@@ -326,12 +334,13 @@ _id_103DE() {
   self._id_FECF = self.enemy getshootatpos();
   var_0 = distancesquared(self.origin, self.enemy.origin);
 
-  if(var_0 < 1000000)
+  if(var_0 < 1000000) {
     self._id_FED7 = "full";
-  else if(var_0 < 4000000)
+  } else if(var_0 < 4000000) {
     self._id_FED7 = "burst";
-  else
+  } else {
     self._id_FED7 = "single";
+  }
 
   if(isDefined(self.enemy.vehicle)) {
     var_1 = 0.5;
@@ -350,15 +359,17 @@ _id_103DE() {
         var_9 = vectordot(var_4, var_6);
         var_9 = var_9 / 3;
 
-        if(var_9 > 128)
+        if(var_9 > 128) {
           var_9 = 128;
-        else if(var_9 < -128)
+        } else if(var_9 < -128) {
           var_9 = -128;
+        }
 
-        if(var_9 > 0)
+        if(var_9 > 0) {
           var_9 = 128 - var_9;
-        else
+        } else {
           var_9 = -128 - var_9;
+        }
 
         self._id_FE9E = undefined;
         self._id_FECF = var_2.origin + var_8 * var_5 + var_9 * var_6;
@@ -385,14 +396,17 @@ _id_103D6() {
 }
 
 _id_103D1() {
-  if(!self._id_E500._id_10F83)
+  if(!self._id_E500._id_10F83) {
     return 0;
+  }
 
-  if(!scripts\anim\utility_common::needtoreload(0))
+  if(!scripts\anim\utility_common::needtoreload(0)) {
     return 0;
+  }
 
-  if(!scripts\anim\utility_common::usingriflelikeweapon())
+  if(!scripts\anim\utility_common::usingriflelikeweapon()) {
     return 0;
+  }
 
   _id_103D2();
   self notify("abort_reload");
@@ -425,18 +439,21 @@ _id_103D2() {
 }
 
 _id_103DC(var_0) {
-  if(var_0 == "start_aim")
+  if(var_0 == "start_aim") {
     return 1;
+  }
 }
 
 _id_103DB(var_0) {
-  if(var_0 == "end")
+  if(var_0 == "end") {
     return 1;
+  }
 }
 
 _id_103DD(var_0) {
-  if(var_0 == "start_lean")
+  if(var_0 == "start_lean") {
     return 1;
+  }
 }
 
 _id_103D9() {
@@ -453,15 +470,17 @@ _id_103D9() {
     var_5 = (self.origin[0], self.origin[1], self getEye()[2]);
     var_6 = self._id_FECF;
 
-    if(isDefined(self._id_FE9E))
+    if(isDefined(self._id_FE9E)) {
       var_6 = self._id_FE9E getshootatpos();
+    }
 
     if(!isDefined(var_6)) {
       var_3 = 0;
       var_7 = self _meth_80FC();
 
-      if(isDefined(var_7))
+      if(isDefined(var_7)) {
         var_3 = angleclamp180(var_7[1] - self.angles[1]);
+      }
     } else {
       var_8 = var_6 - var_5;
       var_9 = vectortoangles(var_8);
@@ -469,16 +488,18 @@ _id_103D9() {
       var_3 = angleclamp180(var_3);
     }
 
-    if(var_3 < self.rightaimlimit || var_3 > self.leftaimlimit)
+    if(var_3 < self.rightaimlimit || var_3 > self.leftaimlimit) {
       var_3 = 0;
+    }
 
-    if(var_4)
+    if(var_4) {
       var_4 = 0;
-    else {
+    } else {
       var_10 = var_3 - var_2;
 
-      if(abs(var_10) > var_1)
+      if(abs(var_10) > var_1) {
         var_3 = var_2 + var_1 * scripts\engine\utility::sign(var_10);
+      }
     }
 
     var_2 = var_3;
@@ -508,15 +529,17 @@ _id_103DA() {
     var_9 = (self.origin[0], self.origin[1], self getEye()[2]);
     var_10 = self._id_FECF;
 
-    if(isDefined(self._id_FE9E))
+    if(isDefined(self._id_FE9E)) {
       var_10 = self._id_FE9E getshootatpos();
+    }
 
     if(!isDefined(var_10)) {
       var_7 = 0;
       var_11 = self _meth_80FC();
 
-      if(isDefined(var_11))
+      if(isDefined(var_11)) {
         var_7 = angleclamp180(var_11[1] - self.angles[1]);
+      }
     } else {
       var_12 = var_10 - var_9;
       var_13 = vectortoangles(var_12);
@@ -524,17 +547,20 @@ _id_103DA() {
       var_7 = angleclamp180(var_7);
     }
 
-    if(isDefined(self._id_10FB2) || var_7 < 0 && (var_7 - self.rightaimlimit) * self._id_54DB > 0 || var_7 > 0 && (var_7 - self.leftaimlimit) * self._id_54DB < 0)
+    if(isDefined(self._id_10FB2) || var_7 < 0 && (var_7 - self.rightaimlimit) * self._id_54DB > 0 || var_7 > 0 && (var_7 - self.leftaimlimit) * self._id_54DB < 0) {
       var_7 = 0;
+    }
 
-    if(var_8)
+    if(var_8) {
       var_8 = 0;
-    else {
-      if(var_6 < -180 + var_4 && var_7 > 180 - var_5)
+    } else {
+      if(var_6 < -180 + var_4 && var_7 > 180 - var_5) {
         var_7 = -179;
+      }
 
-      if(var_6 > 180 - var_4 && var_7 < -180 + var_5)
+      if(var_6 > 180 - var_4 && var_7 < -180 + var_5) {
         var_7 = 179;
+      }
 
       var_14 = var_7 - var_6;
       var_15 = (var_2 - var_1) * abs(var_14) / 180 + var_1;
@@ -542,12 +568,14 @@ _id_103DA() {
       if(isDefined(self._id_10FB2)) {
         var_15 = var_3;
 
-        if(abs(var_6) < 45)
+        if(abs(var_6) < 45) {
           self notify("start_blending_reload");
+        }
       }
 
-      if(abs(var_14) > var_15)
+      if(abs(var_14) > var_15) {
         var_7 = var_6 + var_15 * scripts\engine\utility::sign(var_14);
+      }
     }
 
     var_6 = var_7;
@@ -580,14 +608,16 @@ _id_103C6(var_0, var_1, var_2) {
       continue;
     }
 
-    if(!isDefined(var_4))
+    if(!isDefined(var_4)) {
       var_4 = var_0[var_6];
+    }
   }
 
   var_8 = var_3;
 
-  if(isDefined(anim._id_D8BF) && var_8 == anim._id_D8BF && gettime() - anim._id_D8C0 < 500)
+  if(isDefined(anim._id_D8BF) && var_8 == anim._id_D8BF && gettime() - anim._id_D8C0 < 500) {
     var_8 = var_4;
+  }
 
   anim._id_D8BF = var_8;
   anim._id_D8C0 = gettime();
@@ -599,8 +629,9 @@ _id_103C2() {
   var_1 = var_0._id_D89A;
   var_1 = (var_1[0], var_1[1], randomfloatrange(200, 400)) * 0.75;
 
-  if(lengthsquared(var_1) > 1000000)
+  if(lengthsquared(var_1) > 1000000) {
     var_1 = vectorNormalize(var_1) * 1000;
+  }
 
   var_2 = spawn("script_origin", self.origin);
   var_2 moveslide((0, 0, 40), 15, var_1);
@@ -625,8 +656,9 @@ _id_103CF() {
 _id_103C1() {
   var_0 = self._id_E500;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return _id_103CF();
+  }
 
   var_1 = var_0._id_D89A;
   _id_103C2();
@@ -657,15 +689,16 @@ _id_51D1() {
 
   wait 3;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_103D3(var_0) {
   self.a._id_2274["idle"] = level._id_EC85["snowmobile"][var_0]["idle"];
   self.a._id_2274["drive"] = level._id_EC85["snowmobile"][var_0]["drive"];
   self.a._id_2274["fire"] = level._id_EC85["snowmobile"][var_0]["fire"];
-  self.a._id_2274["single"] = scripts\anim\utility::_id_2274(level._id_EC85["snowmobile"][var_0]["single"]);
+  self.a._id_2274["single"] = ::scripts\anim\utility::_id_2274(level._id_EC85["snowmobile"][var_0]["single"]);
   self.a._id_2274["burst2"] = level._id_EC85["snowmobile"][var_0]["fire"];
   self.a._id_2274["burst3"] = level._id_EC85["snowmobile"][var_0]["fire"];
   self.a._id_2274["burst4"] = level._id_EC85["snowmobile"][var_0]["fire"];

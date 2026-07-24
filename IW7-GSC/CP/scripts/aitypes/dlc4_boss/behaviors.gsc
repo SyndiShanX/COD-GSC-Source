@@ -272,8 +272,9 @@ entrance_tick(var_0) {
   var_3 = self.traversallength;
 
   if(!var_1.movereadyforarrival) {
-    if(var_2 + var_1.movearrivaldist >= var_3)
+    if(var_2 + var_1.movearrivaldist >= var_3) {
       var_1.movereadyforarrival = 1;
+    }
   } else {
     if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0)) {
       self._blackboard._id_4BF7 = self._blackboard.desirednode;
@@ -304,8 +305,9 @@ updatetimers(var_0) {
   var_1 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 
   if(isDefined(self.bossactions)) {
-    foreach(var_3 in self.bossactions)
-    var_3._id_11910 = max(var_3._id_11910 - 50, 0);
+    foreach(var_3 in self.bossactions) {
+      var_3._id_11910 = max(var_3._id_11910 - 50, 0);
+    }
   }
 
   self.passivetimer = max(self.passivetimer - 50, 0);
@@ -336,8 +338,9 @@ fireball(var_0) {
 }
 
 clap(var_0) {
-  if(self.forcingaction)
+  if(self.forcingaction) {
     restoreweights();
+  }
 
   self.specialactiontimer = scripts\asm\dlc4\dlc4_asm::gettunedata().special_cooldown;
   scripts\asm\dlc4_boss\dlc4_boss_asm::facearenacenter();
@@ -345,16 +348,18 @@ clap(var_0) {
 }
 
 throw (var_0) {
-  if(self.forcingaction)
+  if(self.forcingaction) {
     restoreweights();
+  }
 
   self.specialactiontimer = scripts\asm\dlc4\dlc4_asm::gettunedata().special_cooldown;
   scripts\aitypes\dlc4\simple_action::dosimpleaction_immediate(var_0, "throw");
 }
 
 tornado(var_0) {
-  if(self.forcingaction)
+  if(self.forcingaction) {
     restoreweights();
+  }
 
   self.specialactiontimer = scripts\asm\dlc4\dlc4_asm::gettunedata().special_cooldown;
   scripts\aitypes\dlc4\simple_action::dosimpleaction_immediate(var_0, "tornado");
@@ -455,8 +460,9 @@ moveclapright(var_0) {
 }
 
 airpound(var_0) {
-  if(self.forcingaction)
+  if(self.forcingaction) {
     restoreweights();
+  }
 
   self.specialactiontimer = scripts\asm\dlc4\dlc4_asm::gettunedata().special_cooldown + 5;
   scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(var_0, "air_pound");
@@ -475,8 +481,9 @@ dropmove(var_0) {
 }
 
 flyover(var_0) {
-  if(self.forcingaction)
+  if(self.forcingaction) {
     restoreweights();
+  }
 
   self.specialactiontimer = scripts\asm\dlc4\dlc4_asm::gettunedata().special_cooldown;
   var_1 = self._blackboard;
@@ -502,12 +509,14 @@ eclipse(var_0) {
 }
 
 cooldownfinished(var_0) {
-  if(!isDefined(self.bossactions))
+  if(!isDefined(self.bossactions)) {
     return 0;
+  }
 
   foreach(var_2 in self.bossactions) {
-    if(var_2.name == var_0)
+    if(var_2.name == var_0) {
       return var_2._id_11910 <= 0;
+    }
   }
 
   return 1;
@@ -518,8 +527,9 @@ canfireball() {
   var_1 = scripts\asm\dlc4_boss\dlc4_boss_asm::getspecialenemy();
   var_0 = self.arenacenter;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_0 = var_1.origin;
+  }
 
   var_2 = scripts\common\trace::create_default_contents(1);
   var_3 = scripts\common\trace::sphere_trace_passed(self.origin + (0, 0, 250), var_0 + (0, 0, 12), 10, undefined, var_2);
@@ -533,14 +543,17 @@ canfireball() {
 }
 
 canclap() {
-  if(self.specialactiontimer > 0)
+  if(self.specialactiontimer > 0) {
     return 0;
+  }
 
-  if(level.fbd.bossstate == "FRENZIED" && self.frenziedhealth < 10000)
+  if(level.fbd.bossstate == "FRENZIED" && self.frenziedhealth < 10000) {
     return 0;
+  }
 
-  if(level.fbd.bossstate == "MAIN" && self.soulhealth <= 1)
+  if(level.fbd.bossstate == "MAIN" && self.soulhealth <= 1) {
     return 0;
+  }
 
   var_0 = scripts\asm\dlc4\dlc4_asm::gettunedata();
   var_1 = anglesToForward(self.angles);
@@ -554,15 +567,17 @@ canclap() {
 }
 
 canthrow() {
-  if(self.specialactiontimer > 0)
+  if(self.specialactiontimer > 0) {
     return 0;
+  }
 
   return 1;
 }
 
 cantornado() {
-  if(self.specialactiontimer > 0)
+  if(self.specialactiontimer > 0) {
     return 0;
+  }
 
   return 1;
 }
@@ -582,15 +597,17 @@ cansummon() {
 }
 
 canmoveleft() {
-  if(self.passivetimer > 0)
+  if(self.passivetimer > 0) {
     return 0;
+  }
 
   return 1;
 }
 
 canmoveright() {
-  if(self.passivetimer > 0)
+  if(self.passivetimer > 0) {
     return 0;
+  }
 
   return 1;
 }
@@ -616,14 +633,17 @@ canmoveclapright() {
 }
 
 canairpound() {
-  if(self.specialactiontimer > 0)
+  if(self.specialactiontimer > 0) {
     return 0;
+  }
 
-  if(self.claponarena)
+  if(self.claponarena) {
     return 0;
+  }
 
-  if(level.fbd.bossstate == "FRENZIED" && self.frenziedhealth < 100000)
+  if(level.fbd.bossstate == "FRENZIED" && self.frenziedhealth < 100000) {
     return 0;
+  }
 
   return 1;
 }
@@ -633,21 +653,25 @@ cangroundvul() {
 }
 
 candropmove() {
-  if(self.passivetimer > 0)
+  if(self.passivetimer > 0) {
     return 0;
+  }
 
-  if(level.fbd.bossstate == "FRENZIED" && self.frenziedhealth < 100000)
+  if(level.fbd.bossstate == "FRENZIED" && self.frenziedhealth < 100000) {
     return 0;
+  }
 
   return 1;
 }
 
 canflyover() {
-  if(self.specialactiontimer > 0)
+  if(self.specialactiontimer > 0) {
     return 0;
+  }
 
-  if(level.fbd.bossstate == "FRENZIED" && self.frenziedhealth < 100000)
+  if(level.fbd.bossstate == "FRENZIED" && self.frenziedhealth < 100000) {
     return 0;
+  }
 
   var_0 = self._blackboard;
   var_1 = (var_0._id_4BF7 + scripts\asm\dlc4\dlc4_asm::gettunedata().fly_over_nodes_travelled) % var_0.nodes.size;
@@ -672,8 +696,9 @@ cantaunt() {
 decideaction(var_0) {
   self.terminateaction = 0;
 
-  if(isDefined(self.desiredaction))
+  if(isDefined(self.desiredaction)) {
     return anim.success;
+  }
 
   if(isDefined(self.nextaction)) {
     scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(var_0, self.nextaction);
@@ -702,8 +727,9 @@ pickrandomvalidaction(var_0) {
     }
   }
 
-  if(var_2 == 0)
+  if(var_2 == 0) {
     return 0;
+  }
 
   var_6 = randomfloat(var_2);
 
@@ -745,18 +771,20 @@ moveaction_tick(var_0) {
   var_2 = distance(self.origin, var_1.previousposition);
   var_3 = self.traversallength;
 
-  if(scripts\asm\dlc4_boss\dlc4_boss_asm::shouldterminateaction())
+  if(scripts\asm\dlc4_boss\dlc4_boss_asm::shouldterminateaction()) {
     return anim.success;
+  }
 
   if(var_1.nodestomove > 1) {
     if(var_2 >= var_3) {
       var_1._id_4BF7 = var_1.desirednode;
       var_1.nodestomove--;
 
-      if(var_1.currentmovedirindex == 4)
+      if(var_1.currentmovedirindex == 4) {
         var_1.desirednode = (var_1._id_4BF7 + 1) % var_1.nodes.size;
-      else
+      } else {
         var_1.desirednode = (var_1._id_4BF7 - 1 + var_1.nodes.size) % var_1.nodes.size;
+      }
 
       moveaction_internalsetup(var_0);
       var_1.desireddir = vectorNormalize(var_1.nodes[var_1.desirednode].origin - self.origin);
@@ -790,11 +818,13 @@ tempidle_begin(var_0) {
 }
 
 tempidle_tick(var_0) {
-  if(scripts\asm\dlc4\dlc4_asm::checkpainnotify())
+  if(scripts\asm\dlc4\dlc4_asm::checkpainnotify()) {
     return anim.failure;
+  }
 
-  if(self.timers.idletimer <= 0)
+  if(self.timers.idletimer <= 0) {
     return anim.success;
+  }
 
   self.timers.idletimer = self.timers.idletimer - 50;
   return anim.running;
@@ -813,8 +843,9 @@ groundpound_begin(var_0) {
 }
 
 groundpound_tick(var_0) {
-  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.success;
 }
@@ -832,8 +863,9 @@ airpound_begin(var_0) {
 }
 
 airpound_tick(var_0) {
-  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.success;
 }
@@ -853,13 +885,15 @@ groundvul_begin(var_0) {
   self.teleportedin = 0;
   self._id_FCA5 = 0;
 
-  if(level.fbd.bossstate == "MAIN")
+  if(level.fbd.bossstate == "MAIN") {
     thread scripts\cp\maps\cp_final\cp_final_final_boss::setupweakspot(level.fbd.activecircle);
+  }
 }
 
 groundvul_tick(var_0) {
-  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.success;
 }
@@ -871,9 +905,9 @@ groundvul_end(var_0) {
   self._id_FCA5 = 1;
 
   if(isDefined(level.fbd.sectioncomplete) && level.fbd.sectioncomplete) {
-    if(level.fbd.bossstate == "MAIN")
+    if(level.fbd.bossstate == "MAIN") {
       setnextaction("eclipse");
-    else if(level.fbd.bossstate == "FRENZIED") {
+    } else if(level.fbd.bossstate == "FRENZIED") {
       setupfrenziedmode();
       self._id_FCA5 = 0;
     }
@@ -901,8 +935,9 @@ setupfrenziedmode() {
   var_1["fly_over"].weight = var_0.frenzied_fly_over_weight;
   var_1["summon"].weight = var_0.frenzied_summon_weight;
 
-  foreach(var_3 in self.unlockedactions)
-  var_1[var_3].weight = var_0.frenzied_special_weight;
+  foreach(var_3 in self.unlockedactions) {
+    var_1[var_3].weight = var_0.frenzied_special_weight;
+  }
 
   thread frenzydamagecap();
   thread scripts\cp\maps\cp_final\cp_final_final_boss::frenzyprogressmonitor();
@@ -919,8 +954,9 @@ frenzyspawnmonitor() {
   var_4 = var_3;
   var_5 = [];
 
-  foreach(var_7 in var_0.frenzied_summon_agents)
-  var_5[var_7] = 0;
+  foreach(var_7 in var_0.frenzied_summon_agents) {
+    var_5[var_7] = 0;
+  }
 
   for(;;) {
     var_9 = scripts\mp\mp_agent::getaliveagentsofteam("axis");
@@ -937,8 +973,9 @@ frenzyspawnmonitor() {
           var_10[var_10.size] = var_7;
           var_11[var_11.size] = var_0.frenzied_summon_data[var_7][0];
 
-          if(var_11.size > 1)
+          if(var_11.size > 1) {
             var_11[var_11.size - 1] = var_11[var_11.size - 1] + var_11[var_11.size - 2];
+          }
         }
       }
 
@@ -948,8 +985,9 @@ frenzyspawnmonitor() {
       var_5[var_7] = var_5[var_7] + var_0.frenzied_summon_data[var_7][1];
       var_4 = max(var_4 - 1, 0);
 
-      foreach(var_7 in var_0.frenzied_summon_agents)
-      var_5[var_7] = max(var_5[var_7] - 1, 0);
+      foreach(var_7 in var_0.frenzied_summon_agents) {
+        var_5[var_7] = max(var_5[var_7] - 1, 0);
+      }
     }
 
     var_15 = randomfloatrange(var_0.frenzied_summon_min_interval, var_0.frenzied_summon_max_interval);
@@ -1010,8 +1048,9 @@ dropmove_begin(var_0) {
 dropmove_tick(var_0) {
   self clearpath();
 
-  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   return anim.success;
 }
@@ -1039,8 +1078,9 @@ computespawnpoints(var_0, var_1) {
       }
       var_2.spawnpoints[var_2.spawnpoints.size] = var_6;
 
-      if(var_2.spawnpoints.size >= var_0)
+      if(var_2.spawnpoints.size >= var_0) {
         return 1;
+      }
     }
   }
 
@@ -1110,8 +1150,9 @@ eclipse_begin(var_0) {
 }
 
 eclipse_tick(var_0) {
-  if(!scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0))
+  if(!scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0)) {
     self.eclipseanimfinished = 1;
+  }
 
   return scripts\engine\utility::ter_op(self.eclipseanimfinished && !self.eclipseactive, anim.success, anim.running);
 }
@@ -1128,8 +1169,9 @@ clearweights() {
   if(!isDefined(self.bossactions)) {
     return;
   }
-  foreach(var_1 in self.bossactions)
-  var_1.weight = 0;
+  foreach(var_1 in self.bossactions) {
+    var_1.weight = 0;
+  }
 }
 
 setweight(var_0, var_1) {
@@ -1137,8 +1179,9 @@ setweight(var_0, var_1) {
     return;
   }
   foreach(var_3 in self.bossactions) {
-    if(var_3.name == var_0)
+    if(var_3.name == var_0) {
       var_3.weight = var_1;
+    }
   }
 }
 
@@ -1161,8 +1204,9 @@ updateweights() {
   var_2["black_hole"].weight = var_3;
   var_2["fly_over"].weight = var_0.fly_over_base_weight + var_1 * var_0.fly_over_stage_multiplier;
 
-  foreach(var_5 in self.unlockedactions)
-  var_2[var_5].weight = var_0.special_base_weight + var_1 * var_0.special_stage_multiplier;
+  foreach(var_5 in self.unlockedactions) {
+    var_2[var_5].weight = var_0.special_base_weight + var_1 * var_0.special_stage_multiplier;
+  }
 }
 
 setnextaction(var_0) {
@@ -1170,16 +1214,18 @@ setnextaction(var_0) {
     self.weightcopies[var_2.name] = var_2.weight;
     var_2.weight = 0;
 
-    if(var_2.name == var_0)
+    if(var_2.name == var_0) {
       var_2.weight = 1;
+    }
   }
 
   self.forcingaction = 1;
 }
 
 restoreweights() {
-  foreach(var_1 in self.bossactions)
-  var_1.weight = self.weightcopies[var_1.name];
+  foreach(var_1 in self.bossactions) {
+    var_1.weight = self.weightcopies[var_1.name];
+  }
 
   self.forcingaction = 0;
 }
@@ -1213,8 +1259,9 @@ pointnearanyplayer(var_0, var_1) {
     if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_4)) {
       continue;
     }
-    if(distancesquared(var_0, var_4.origin) < var_2)
+    if(distancesquared(var_0, var_4.origin) < var_2) {
       return 1;
+    }
   }
 
   return 0;
@@ -1224,8 +1271,9 @@ isnearanypointinarray(var_0, var_1, var_2) {
   foreach(var_4 in var_1) {
     var_5 = distancesquared(var_4, var_0);
 
-    if(var_5 < var_2)
+    if(var_5 < var_2) {
       return 1;
+    }
   }
 
   return 0;
@@ -1235,16 +1283,18 @@ isnearagents(var_0, var_1, var_2) {
   foreach(var_4 in var_1) {
     var_5 = distancesquared(var_4.origin, var_0);
 
-    if(var_5 < var_2)
+    if(var_5 < var_2) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 resettimer(var_0, var_1) {
-  if(!isDefined(self.bossactions))
+  if(!isDefined(self.bossactions)) {
     return 0;
+  }
 
   foreach(var_3 in self.bossactions) {
     if(var_3.name == var_0) {
@@ -1263,8 +1313,9 @@ simplesetup_begin(var_0) {
 }
 
 simplesetup_tick(var_0) {
-  if(scripts\asm\dlc4_boss\dlc4_boss_asm::shouldterminateaction())
+  if(scripts\asm\dlc4_boss\dlc4_boss_asm::shouldterminateaction()) {
     return anim.success;
+  }
 
   return scripts\engine\utility::ter_op(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0), anim.running, anim.success);
 }

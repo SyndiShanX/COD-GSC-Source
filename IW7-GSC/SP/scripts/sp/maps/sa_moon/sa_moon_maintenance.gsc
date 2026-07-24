@@ -243,6 +243,7 @@ _id_E95B() {
 }
 
 _id_E957() {
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     scripts\sp\specialist_MAYBE::_id_F53C(1);
+  }
 }

@@ -22,18 +22,21 @@ _id_FA2A(var_0, var_1) {
   var_4 = undefined;
 
   foreach(var_6 in var_3) {
-    if(ispointinvolume(var_6.origin, var_2))
+    if(ispointinvolume(var_6.origin, var_2)) {
       var_4 = var_6;
+    }
   }
 
   if(!isDefined(var_4)) {
     return;
   }
-  if(!var_4 scripts\sp\utility::_id_65DF("rss_activated"))
+  if(!var_4 scripts\sp\utility::_id_65DF("rss_activated")) {
     var_4 scripts\sp\utility::_id_65E0("rss_activated");
+  }
 
-  if(!var_4 scripts\sp\utility::_id_65DF("rss_deactivated"))
+  if(!var_4 scripts\sp\utility::_id_65DF("rss_deactivated")) {
     var_4 scripts\sp\utility::_id_65E0("rss_deactivated");
+  }
 
   var_4._id_E57E = 0;
   var_4._id_10E43 = [];
@@ -44,11 +47,13 @@ _id_FA2A(var_0, var_1) {
   var_4._id_C891 = [];
   var_4.team = "axis";
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_4.spawners = var_1;
+  }
 
-  if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "allies")
+  if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "allies") {
     var_4.team = "allies";
+  }
 
   var_8 = getEntArray(var_4.target, "targetname");
   var_9 = scripts\engine\utility::getStructArray(var_4.target, "targetname");
@@ -115,26 +120,31 @@ _id_FA2A(var_0, var_1) {
       if(!isDefined(var_17.script_parameters)) {
         continue;
       }
-      if(var_17.script_parameters == var_23.script_parameters)
+      if(var_17.script_parameters == var_23.script_parameters) {
         var_17._id_101E1 = var_23;
+      }
     }
   }
 
-  foreach(var_28 in var_4._id_DBBA)
-  var_4 _id_D852(var_28);
+  foreach(var_28 in var_4._id_DBBA) {
+    var_4 _id_D852(var_28);
+  }
 
-  if(isDefined(var_2.target))
+  if(isDefined(var_2.target)) {
     var_4.goal = getEnt(var_2.target, "targetname");
+  }
 
-  if(isDefined(var_2._id_EECE))
+  if(isDefined(var_2._id_EECE)) {
     var_4._id_10E6D = 1;
+  }
 
-  if(isDefined(var_2._id_EED1))
+  if(isDefined(var_2._id_EED1)) {
     var_4._id_10F48 = var_2._id_EED1;
+  }
 
-  if(isDefined(var_4.script_index) && var_4.script_index == 0)
+  if(isDefined(var_4.script_index) && var_4.script_index == 0) {
     var_4 thread _id_8954();
-  else {
+  } else {
     foreach(var_31 in var_4._id_10E43) {
       foreach(var_23 in var_4._id_DBBE) {
         if(isDefined(var_31.script_parameters) && isDefined(var_23.script_parameters) && var_31.script_parameters == var_23.script_parameters) {
@@ -154,8 +164,9 @@ _id_8953() {
   }
   self notify("kill_deactivation");
 
-  for(var_0 = 0; var_0 < self._id_107A5.size; var_0++)
+  for(var_0 = 0; var_0 < self._id_107A5.size; var_0++) {
     self._id_107A5[var_0] thread _id_E780(self);
+  }
 
   thread _id_E782();
 }
@@ -166,63 +177,74 @@ _id_E780(var_0) {
   if(var_0 scripts\sp\utility::_id_65DF("rss_deactivated") && var_0 scripts\sp\utility::_id_65DB("rss_deactivated")) {
     return;
   }
-  if(isDefined(self.script_delay))
+  if(isDefined(self.script_delay)) {
     wait(self.script_delay);
+  }
 
   var_1 = undefined;
   var_2 = undefined;
 
-  if(isDefined(var_0.spawners))
+  if(isDefined(var_0.spawners)) {
     var_2 = scripts\engine\utility::random(var_0.spawners);
-  else
+  } else {
     var_2 = getEnt("c6_rss_spawner", "targetname");
+  }
 
-  if(isDefined(var_0._id_10E6D) && var_0._id_10E6D == 1)
+  if(isDefined(var_0._id_10E6D) && var_0._id_10E6D == 1) {
     var_2._id_EECE = 1;
+  }
 
-  if(isDefined(var_0._id_10F48))
+  if(isDefined(var_0._id_10F48)) {
     var_2._id_EED1 = var_0._id_10F48;
+  }
 
   while(!isDefined(var_1)) {
     var_2.origin = self.origin;
 
-    if(isDefined(self.angles))
+    if(isDefined(self.angles)) {
       var_2.angles = self.angles;
+    }
 
     var_2.count = 99;
     var_1 = var_2 scripts\sp\utility::_id_10619(1);
 
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       scripts\engine\utility::waitframe();
+    }
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1.team = var_0.team;
+    }
   }
 
   waittillframeend;
 
   foreach(var_4 in var_0._id_10E43) {
-    if(isDefined(var_4) && var_4.script_parameters == self.script_parameters)
+    if(isDefined(var_4) && var_4.script_parameters == self.script_parameters) {
       var_4 delete();
+    }
   }
 
   var_1.script_parameters = self.script_parameters;
   var_6 = undefined;
 
   foreach(var_8 in var_0._id_DBBE) {
-    if(var_1.script_parameters == var_8.script_parameters)
+    if(var_1.script_parameters == var_8.script_parameters) {
       var_6 = var_8;
+    }
   }
 
   var_0 thread _id_CDD2(var_1);
   var_6 scripts\sp\anim::_id_1EC7(var_1, "sa_c6_rack_exit");
 
   if(isalive(var_1)) {
-    if(isDefined(var_0.goal))
+    if(isDefined(var_0.goal)) {
       var_1 _meth_82F1(var_0.goal);
+    }
 
-    if(isDefined(var_1._id_EECE) && var_1._id_EECE == 1)
+    if(isDefined(var_1._id_EECE) && var_1._id_EECE == 1) {
       var_1 scripts\sp\utility::_id_61E7();
+    }
 
     var_1 scripts\sp\utility::_id_F415(0);
     var_1 scripts\sp\utility::_id_F416(0);
@@ -230,8 +252,9 @@ _id_E780(var_0) {
 
   if(var_0.lights.size > 0) {
     foreach(var_11 in var_0.lights) {
-      if(var_11.script_parameters == self.script_parameters)
+      if(var_11.script_parameters == self.script_parameters) {
         var_11 thread _id_557C();
+      }
     }
   }
 
@@ -247,8 +270,9 @@ _id_D852(var_0) {
   var_0._id_DBB9 = undefined;
 
   foreach(var_2 in self._id_DBBE) {
-    if(var_2.script_parameters == var_0.script_parameters)
+    if(var_2.script_parameters == var_0.script_parameters) {
       var_0._id_DBB9 = var_2;
+    }
   }
 
   var_0._id_1FBB = "arm";
@@ -263,8 +287,9 @@ _id_CDD2(var_0) {
   var_1 = undefined;
 
   foreach(var_3 in self._id_DBBA) {
-    if(var_3.script_parameters == var_0.script_parameters)
+    if(var_3.script_parameters == var_0.script_parameters) {
       var_1 = var_3;
+    }
   }
 
   var_1._id_1FBB = "arm";
@@ -272,18 +297,21 @@ _id_CDD2(var_0) {
 }
 
 _id_8954() {
-  if(self.lights.size > 0)
+  if(self.lights.size > 0) {
     scripts\engine\utility::array_thread(self.lights, ::_id_557C);
+  }
 
   wait 0.25;
 
   foreach(var_1 in self._id_DBBE) {
-    if(isDefined(var_1._id_75AD) && var_1._id_75AD == 1)
+    if(isDefined(var_1._id_75AD) && var_1._id_75AD == 1) {
       stopFXOnTag(scripts\engine\utility::getfx("locker_set_white"), var_1, "tag_origin");
+    }
   }
 
-  foreach(var_4 in self._id_C891)
-  var_4 setModel("equipment_sdf_kiosk_01_off");
+  foreach(var_4 in self._id_C891) {
+    var_4 setModel("equipment_sdf_kiosk_01_off");
+  }
 
   scripts\sp\utility::_id_65E1("rss_deactivated");
 }
@@ -296,22 +324,26 @@ _id_E782() {
     }
   }
 
-  foreach(var_4 in self._id_C891)
-  var_4 setModel("equipment_sdf_kiosk_01_c6_deploy");
+  foreach(var_4 in self._id_C891) {
+    var_4 setModel("equipment_sdf_kiosk_01_c6_deploy");
+  }
 
-  while(self._id_E57E > 0)
+  while(self._id_E57E > 0) {
     wait 0.05;
+  }
 
   scripts\sp\utility::_id_65E1("rss_deactivated");
   wait 0.25;
 
   foreach(var_1 in self._id_DBBE) {
-    if(isDefined(var_1._id_75AD) && var_1._id_75AD == 1)
+    if(isDefined(var_1._id_75AD) && var_1._id_75AD == 1) {
       stopFXOnTag(scripts\engine\utility::getfx("locker_set_red"), var_1, "tag_origin");
+    }
   }
 
-  foreach(var_4 in self._id_C891)
-  var_4 setModel("equipment_sdf_kiosk_01_off");
+  foreach(var_4 in self._id_C891) {
+    var_4 setModel("equipment_sdf_kiosk_01_off");
+  }
 }
 
 _id_557C() {

@@ -83,13 +83,15 @@ saygenericdialogue(var_0) {
   var_7 = undefined;
 
   if(!isDefined(var_7)) {
-    if(isDefined(self.generic_voice_override))
+    if(isDefined(self.generic_voice_override)) {
       var_7 = self.generic_voice_override + "_" + var_0 + "_" + var_5;
-    else
+    } else {
       var_7 = var_4 + var_0 + "_" + var_5;
+    }
 
-    if(!soundexists(var_7))
+    if(!soundexists(var_7)) {
       var_7 = "generic_" + var_0 + "_" + var_5;
+    }
   }
 
   thread playfacethread(var_7, undefined);
@@ -116,18 +118,20 @@ playfacethread(var_0, var_1) {
 
 playfacesound(var_0, var_1, var_2) {
   if(isai(self)) {
-    if(isDefined(var_1) && isDefined(var_2))
+    if(isDefined(var_1) && isDefined(var_2)) {
       self _meth_824A(var_0, var_1, var_2);
-    else if(isDefined(var_1))
+    } else if(isDefined(var_1)) {
       self _meth_824A(var_0, var_1);
-    else
+    } else {
       self _meth_824A(var_0);
+    }
   } else if(isDefined(var_1) && isDefined(var_2))
     self playSound(var_0, var_1, var_2);
-  else if(isDefined(var_1))
+  else if(isDefined(var_1)) {
     self playSound(var_0, var_1);
-  else
+  } else {
     self playSound(var_0);
+  }
 }
 
 waitforfacesound(var_0) {
@@ -154,9 +158,9 @@ animhasfacialoverride(var_0) {
 #using_animtree("generic_human");
 
 playfacialanim(var_0, var_1, var_2) {
-  if(isDefined(self.bdisabledefaultfacialanims) && self.bdisabledefaultfacialanims)
+  if(isDefined(self.bdisabledefaultfacialanims) && self.bdisabledefaultfacialanims) {
     self clearanim(%head, 0.2);
-  else {
+  } else {
     if(isDefined(var_0) && animhasfacialoverride(var_0)) {
       self clearanim(%head, 0.2);
       return;
@@ -165,10 +169,11 @@ playfacialanim(var_0, var_1, var_2) {
     if(!isDefined(anim.facial[var_1])) {
       return;
     }
-    if(isDefined(var_2) && var_2 >= 0 && var_2 < anim.facial[var_1].size)
+    if(isDefined(var_2) && var_2 >= 0 && var_2 < anim.facial[var_1].size) {
       var_3 = var_2;
-    else
+    } else {
       var_3 = randomint(anim.facial[var_1].size);
+    }
 
     var_4 = anim.facial[var_1][var_3];
     self setanimknob(var_4);

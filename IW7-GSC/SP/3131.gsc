@@ -28,18 +28,20 @@ _id_13DC4(var_0, var_1, var_2, var_3) {
 }
 
 _id_808E() {
-  if(!isDefined(anim._id_13DBF))
+  if(!isDefined(anim._id_13DBF)) {
     return 1;
-  else
+  } else {
     return anim._id_13DBF;
+  }
 }
 
 _id_7E70() {
   var_0 = _id_808E();
   var_1 = 25 + var_0 * 175;
 
-  if(isDefined(self.melee) && isDefined(self.melee.target))
+  if(isDefined(self.melee) && isDefined(self.melee.target)) {
     var_1 = var_1 + 20;
+  }
 
   return var_1;
 }
@@ -108,63 +110,72 @@ _id_3415(var_0, var_1, var_2, var_3) {
 _id_BC22(var_0, var_1, var_2) {
   self endon(var_1 + "_newanim");
 
-  for(;;)
+  for(;;) {
     _id_0A1E::_id_231F(var_0, var_1, var_2);
+  }
 }
 
 _id_3407() {
   var_0 = _id_7E70();
 
-  if(var_0 < 70)
+  if(var_0 < 70) {
     return "walk";
-  else if(var_0 < 110)
+  } else if(var_0 < 110) {
     return "fastwalk";
-  else if(var_0 < 160)
+  } else if(var_0 < 160) {
     return "jog";
-  else
+  } else {
     return "run";
+  }
 }
 
 _id_3406(var_0, var_1, var_2, var_3) {
   var_4 = !_id_0A0B::_id_E52D();
   var_5 = !_id_0A0B::_id_AB53();
 
-  if(var_4 && var_5)
+  if(var_4 && var_5) {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "both");
-  else if(var_4)
+  } else if(var_4) {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "right");
-  else
+  } else {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "left");
+  }
 }
 
 _id_340A(var_0, var_1, var_2, var_3) {
   var_4 = self.melee.target;
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
-  if(!isalive(var_4))
+  if(!isalive(var_4)) {
     return 0;
+  }
 
-  if(isPlayer(var_4))
+  if(isPlayer(var_4)) {
     return 0;
+  }
 
   var_5 = var_3;
 
-  if(self.melee._id_13D8A != var_5)
+  if(self.melee._id_13D8A != var_5) {
     return 0;
+  }
 
   var_6 = self[[self._id_7191]](var_0, var_2);
 
-  if(!_id_0C30::_id_335A(var_1 + "_victim", var_6))
+  if(!_id_0C30::_id_335A(var_1 + "_victim", var_6)) {
     return 0;
+  }
 
   var_7 = self _meth_84AC();
   var_8 = vectorNormalize(var_4.origin - self.origin);
   var_9 = var_7 + var_8 * 64;
 
-  if(!self[[self.fncanmovefrompointtopoint]](var_7, var_9))
+  if(!self[[self.fncanmovefrompointtopoint]](var_7, var_9)) {
     return 0;
+  }
 
   self.melee.target.melee._id_331C = 1;
   return 1;
@@ -194,8 +205,9 @@ _id_126D6(var_0, var_1, var_2, var_3) {
   var_17 = var_15 - var_14;
   var_18 = 1;
 
-  if(var_17[2] < var_16[2])
+  if(var_17[2] < var_16[2]) {
     var_18 = var_18 * 1.1;
+  }
 
   self _meth_82B1(var_4, var_18);
   var_19 = self islegacyagent(var_4);
@@ -218,44 +230,52 @@ _id_126D7(var_0, var_1, var_2, var_3) {
     wait 0.05;
   }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     self _meth_82B1(var_3, 1);
+  }
 }
 
 _id_341C(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.disablearrivals))
+  if(isDefined(self.disablearrivals)) {
     return 0;
+  }
 
-  if(!isDefined(self.pathgoalpos))
+  if(!isDefined(self.pathgoalpos)) {
     return 0;
+  }
 
-  if(!scripts\asm\asm::_id_232B(var_1, "cover_approach"))
+  if(!scripts\asm\asm::_id_232B(var_1, "cover_approach")) {
     return 0;
+  }
 
-  if(isDefined(self.melee))
+  if(isDefined(self.melee)) {
     return 0;
+  }
 
   var_4 = 40;
   var_5 = distance(self.origin, self.pathgoalpos);
   var_6 = abs(var_5 - var_4);
 
-  if(var_6 > 12)
+  if(var_6 > 12) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_341B(var_0, var_1, var_2, var_3) {
-  if(!scripts\asm\asm::_id_232B(var_1, "sharp_turn"))
+  if(!scripts\asm\asm::_id_232B(var_1, "sharp_turn")) {
     return 0;
+  }
 
   var_4 = scripts\asm\asm::_id_233F(var_1, "sharp_turn");
   var_5 = var_4.params;
   var_6 = var_5[1];
   var_7 = anglesToForward(self.angles);
 
-  if(vectordot(var_7, var_6) > 0.866)
+  if(vectordot(var_7, var_6) > 0.866) {
     return 0;
+  }
 
   return 1;
 }
@@ -266,17 +286,19 @@ _id_341A(var_0, var_1, var_2, var_3) {
   var_6 = length(var_5) * 2.25;
   var_7 = self getposonpath(var_6);
 
-  if(distance2dsquared(var_7, self.pathgoalpos) < 4)
+  if(distance2dsquared(var_7, self.pathgoalpos) < 4) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_3405(var_0, var_1, var_2) {
-  if(self.asm.footsteps.foot == "right")
+  if(self.asm.footsteps.foot == "right") {
     var_3 = "right";
-  else
+  } else {
     var_3 = "left";
+  }
 
   return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3 + "2");
 }
@@ -307,8 +329,9 @@ _id_340F(var_0, var_1, var_2, var_3) {
     if(distancesquared(self.pathgoalpos, self.origin) > 144) {
       var_5 = vectorNormalize((self.lookaheaddir[0], self.lookaheaddir[1], 0));
 
-      if(vectordot(var_5, var_4) <= 0.866)
+      if(vectordot(var_5, var_4) <= 0.866) {
         return 1;
+      }
     }
 
     return 0;
@@ -316,8 +339,9 @@ _id_340F(var_0, var_1, var_2, var_3) {
     if(distancesquared(self.enemy.origin, self.origin) < self.meleechargedist * self.meleechargedist) {
       var_6 = vectorNormalize(self.enemy.origin - self.origin);
 
-      if(vectordot(var_6, var_4) <= 0.866)
+      if(vectordot(var_6, var_4) <= 0.866) {
         return 1;
+      }
     }
   }
 
@@ -327,21 +351,23 @@ _id_340F(var_0, var_1, var_2, var_3) {
 _id_3408(var_0, var_1, var_2) {
   var_3 = undefined;
 
-  if(isDefined(self.pathgoalpos))
+  if(isDefined(self.pathgoalpos)) {
     var_3 = vectortoangles(self.lookaheaddir);
-  else if(isDefined(self.enemy))
+  } else if(isDefined(self.enemy)) {
     var_3 = vectortoangles(self.enemy.origin - self.origin);
+  }
 
   var_4 = angleclamp180(var_3[1] - self.angles[1]);
 
-  if(var_4 < -135)
+  if(var_4 < -135) {
     return _id_0A1E::_id_2357(var_0, var_1, "2l");
-  else if(var_4 < 0)
+  } else if(var_4 < 0) {
     return _id_0A1E::_id_2357(var_0, var_1, "6");
-  else if(var_4 > 135)
+  } else if(var_4 > 135) {
     return _id_0A1E::_id_2357(var_0, var_1, "2r");
-  else if(var_4 >= 0)
+  } else if(var_4 >= 0) {
     return _id_0A1E::_id_2357(var_0, var_1, "4");
+  }
 }
 
 _id_3418(var_0, var_1, var_2, var_3) {
@@ -360,8 +386,9 @@ _id_3418(var_0, var_1, var_2, var_3) {
     var_6 = var_9[1] - var_5;
   }
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     self orientmode("face angle", var_6);
+  }
 
   _id_0A1E::_id_231F(var_0, var_1);
 }
@@ -383,8 +410,9 @@ _id_3413(var_0, var_1, var_2, var_3) {
   self _meth_82EA(var_1, var_4, 1.0, var_2, var_5);
   var_6 = _id_0A1E::_id_231F(var_0, var_1, scripts\asm\asm::_id_2341(var_0, var_1));
 
-  if(var_6 == "end")
+  if(var_6 == "end") {
     thread scripts\asm\asm::_id_2310(var_0, var_1, 0);
+  }
 }
 
 _id_3411(var_0, var_1, var_2, var_3) {
@@ -407,8 +435,9 @@ _id_3417(var_0, var_1, var_2) {
 
 _id_9ED1(var_0) {
   foreach(var_2 in var_0) {
-    if(var_2 == "end")
+    if(var_2 == "end") {
       return 1;
+    }
   }
 
   return 0;
@@ -422,8 +451,9 @@ _id_3410(var_0) {
   for(;;) {
     self waittill(var_1, var_3);
 
-    if(!isarray(var_3))
+    if(!isarray(var_3)) {
       var_3 = [var_3];
+    }
 
     if(_id_9ED1(var_3)) {
       break;
@@ -456,7 +486,7 @@ _id_3409(var_0) {
     var_3 = anim.asm[var_0].states[var_2];
 
     if(isDefined(var_3._id_C87F)) {
-      [var_5, var_6] = scripts\asm\asm::_id_2310(var_0, var_3._id_C87F, 1);
+      [var_5, var_6] = ::scripts\asm\asm::_id_2310(var_0, var_3._id_C87F, 1);
 
       if(isDefined(var_5)) {
         scripts\asm\asm::asm_setstate(var_5, var_3._id_C87C);

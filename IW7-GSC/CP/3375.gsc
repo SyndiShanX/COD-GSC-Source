@@ -7,13 +7,15 @@ init_beam_trap() {
   level.beamtrapuses = 0;
   var_0 = scripts\engine\utility::getStructArray("beamtrap", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_2A39();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_2A39();
+  }
 }
 
 _id_2A39() {
-  if(scripts\engine\utility::is_true(self.requires_power))
+  if(scripts\engine\utility::is_true(self.requires_power)) {
     level scripts\engine\utility::waittill_any("power_on", self.power_area + " power_on");
+  }
 
   self.powered_on = 1;
   level thread scripts\cp\cp_vo::add_to_nag_vo("dj_traps_use_nag", "zmb_dj_vo", 60, 15, 2, 1);
@@ -109,14 +111,16 @@ _id_3286(var_0) {
     self.disable_armor = 1;
   }
 
-  if(scripts\engine\utility::flag("mini_ufo_yellow_ready"))
+  if(scripts\engine\utility::flag("mini_ufo_yellow_ready")) {
     level.head_cutter_trap_kills++;
+  }
 
   if(isDefined(var_0)) {
-    if(!isDefined(var_0.trapkills["trap_dragon"]))
+    if(!isDefined(var_0.trapkills["trap_dragon"])) {
       var_0.trapkills["trap_dragon"] = 1;
-    else
+    } else {
       var_0.trapkills["trap_dragon"]++;
+    }
 
     var_1 = ["kill_trap_generic", "kill_trap_dragon"];
     var_0 thread scripts\cp\cp_vo::try_to_play_vo(scripts\engine\utility::random(var_1), "zmb_comment_vo", "highest", 10, 0, 0, 1, 25);

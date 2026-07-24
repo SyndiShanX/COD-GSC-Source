@@ -43,8 +43,9 @@ song_quest_interactions() {
   self.radios_heard = 0;
   scripts\engine\utility::flag_wait("radios_constructed");
 
-  while(self.radios_heard < level.radios.size)
+  while(self.radios_heard < level.radios.size) {
     scripts\engine\utility::waittill_any_timeout(10, "radio_heard");
+  }
 
   thread scripts\cp\cp_vo::try_to_play_vo("song_quest_success", "disco_comment_vo");
   scripts\cp\zombies\achievement::update_achievement("BEAT_OF_THE_DRUM", 1);
@@ -56,8 +57,9 @@ song_quest_interactions() {
 play_hidden_song(var_0, var_1) {
   level endon("game_ended");
 
-  if(var_1 == "mus_pa_disco_hidden_track")
+  if(var_1 == "mus_pa_disco_hidden_track") {
     level endon("add_hidden_song_to_playlist");
+  }
 
   if(soundexists(var_1)) {
     wait 2.5;
@@ -66,8 +68,9 @@ play_hidden_song(var_0, var_1) {
       if(scripts\engine\utility::is_true(level.onlinegame)) {
         var_3 setplayerdata("cp", "hasSongsUnlocked", "any_song", 1);
 
-        if(var_1 == "mus_pa_disco_hidden_track")
+        if(var_1 == "mus_pa_disco_hidden_track") {
           var_3 setplayerdata("cp", "hasSongsUnlocked", "song_4", 1);
+        }
       }
     }
 
@@ -84,8 +87,9 @@ play_hidden_song(var_0, var_1) {
     var_8 = "ee";
     var_9 = 1;
 
-    foreach(var_3 in level.players)
-    var_3 scripts\cp\cp_persistence::give_player_xp(500, 1);
+    foreach(var_3 in level.players) {
+      var_3 scripts\cp\cp_persistence::give_player_xp(500, 1);
+    }
 
     var_7 playLoopSound(var_1);
     var_7 thread scripts\cp\zombies\zombie_jukebox::earlyendon(var_7);
@@ -103,10 +107,11 @@ radio_use_logic(var_0) {
   level endon("game_ended");
   var_1 = spawn("script_model", var_0.origin);
 
-  if(!isDefined(var_0.angles))
+  if(!isDefined(var_0.angles)) {
     var_1.angles = (0, 0, 0);
-  else
+  } else {
     var_1.angles = var_0.angles;
+  }
 
   var_1 setModel("com_transistor_radio");
   var_2 = var_0.sound_alias;
@@ -119,8 +124,9 @@ radio_use_logic(var_0) {
     var_1 waittill("trigger", var_3);
 
     if(!scripts\engine\utility::array_contains(var_1.players_used, var_3)) {
-      if(var_2 == "disco_dj_eligiblebachelor" && !scripts\engine\utility::flag("savage_treasure"))
+      if(var_2 == "disco_dj_eligiblebachelor" && !scripts\engine\utility::flag("savage_treasure")) {
         scripts\engine\utility::flag_set("savage_treasure");
+      }
 
       var_3 playsoundtoplayer(var_2, var_3);
       var_1.players_used[var_1.players_used.size] = var_3;
@@ -128,8 +134,9 @@ radio_use_logic(var_0) {
       if(isDefined(var_3.radios_heard)) {
         var_3.radios_heard++;
 
-        if(var_3.radios_heard == 1)
+        if(var_3.radios_heard == 1) {
           var_3 thread scripts\cp\cp_vo::try_to_play_vo("song_quest_start", "disco_comment_vo");
+        }
       }
 
       var_3 notify("radio_heard");
@@ -184,8 +191,9 @@ savage_hot_coffee() {
   var_0[5].stepname = "sewer_wall_s_treasure";
   var_0[6].stepname = "kings_lair_s_treasure";
 
-  foreach(var_2 in var_0)
-  var_2 setup_treasure_step();
+  foreach(var_2 in var_0) {
+    var_2 setup_treasure_step();
+  }
 
   level.time_quest_steps = var_0;
   thread flag_set_events();
@@ -218,8 +226,9 @@ treasure_quest_step_1(var_0) {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(!scripts\engine\utility::flag("savageCipherDebug"))
+  if(!scripts\engine\utility::flag("savageCipherDebug")) {
     scripts\engine\utility::flag_wait("savage_treasure");
+  }
 
   var_1 = self getrankedplayerdata("cp", "coopCareerStats", "dlc2_quest");
 
@@ -229,11 +238,13 @@ treasure_quest_step_1(var_0) {
     self.first_cipher_seen = 1;
     var_3 = scripts\engine\utility::getStructArray("trash_cans", "script_noteworthy");
 
-    if(scripts\engine\utility::flag("savageCipherDebug"))
+    if(scripts\engine\utility::flag("savageCipherDebug")) {
       thread debug_the_trashcans();
+    }
 
-    while(self.treasure_cans_used < var_3.size)
+    while(self.treasure_cans_used < var_3.size) {
       self waittill("player_used_trashcan");
+    }
 
     self notify("cipher_1_done");
     self setplayerdata("cp", "coopCareerStats", "dlc2_quest", int(1));
@@ -426,25 +437,27 @@ flag_set_events() {
   for(;;) {
     level waittill("time_check", var_1, var_2, var_3, var_4, var_5, var_6);
 
-    if(var_4 == 0 && !scripts\engine\utility::flag("midnight"))
+    if(var_4 == 0 && !scripts\engine\utility::flag("midnight")) {
       scripts\engine\utility::flag_set("midnight");
-    else if(var_4 != 0 && scripts\engine\utility::flag("midnight"))
+    } else if(var_4 != 0 && scripts\engine\utility::flag("midnight")) {
       scripts\engine\utility::flag_clear("midnight");
+    }
 
     if(var_4 == 2 && !var_0) {
       level.isdaylightsavings = undefined;
       var_0 = 1;
     }
 
-    if(var_4 != 2 && var_0)
+    if(var_4 != 2 && var_0) {
       var_0 = 0;
+    }
 
     var_7 = is_after_june_5_2017(var_1, var_2, var_3);
 
     if(var_7 && !scripts\engine\utility::flag("june6")) {
-      if(scripts\engine\utility::flag("noCheatTimeQuest"))
+      if(scripts\engine\utility::flag("noCheatTimeQuest")) {
         scripts\engine\utility::flag_set("june6");
-      else if(!isDefined(level.time_cheater)) {
+      } else if(!isDefined(level.time_cheater)) {
         level.time_cheater = 1;
         scripts\engine\utility::flag_set("june6");
       }
@@ -452,22 +465,24 @@ flag_set_events() {
       continue;
     }
 
-    if(!var_7)
+    if(!var_7) {
       scripts\engine\utility::flag_clear("june6");
+    }
   }
 }
 
 is_after_june_5_2017(var_0, var_1, var_2) {
   level endon("game_ended");
 
-  if(var_0 > 2017)
+  if(var_0 > 2017) {
     return 1;
-  else if(var_0 == 2017 && (var_1 == "July" || var_1 == "August" || var_1 == "September" || var_1 == "October" || var_1 == "November" || var_1 == "December"))
+  } else if(var_0 == 2017 && (var_1 == "July" || var_1 == "August" || var_1 == "September" || var_1 == "October" || var_1 == "November" || var_1 == "December")) {
     return 1;
-  else if(var_0 == 2017 && var_1 == "June" && var_2 >= 6)
+  } else if(var_0 == 2017 && var_1 == "June" && var_2 >= 6) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 display_cipher_to_player(var_0, var_1, var_2, var_3, var_4) {
@@ -475,35 +490,40 @@ display_cipher_to_player(var_0, var_1, var_2, var_3, var_4) {
   var_4 endon("disconnect");
   var_5 = 0;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_6 = var_1;
-  else
+  } else {
     var_6 = 60;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_7 = var_2 * var_2;
-  else
+  } else {
     var_7 = 16384;
+  }
 
   while(!var_5) {
     var_8 = distancesquared(var_4.origin, self.origin);
 
-    if(var_8 <= var_7)
+    if(var_8 <= var_7) {
       var_5 = 1;
-    else
+    } else {
       var_5 = 0;
+    }
 
     if(var_5) {
       var_9 = get_disco_dot(var_4.origin, var_4 getplayerangles(), self.origin);
 
-      if(var_9 >= cos(var_6))
+      if(var_9 >= cos(var_6)) {
         var_5 = 1;
-      else
+      } else {
         var_5 = 0;
+      }
     }
 
-    if(isDefined(var_3) && !scripts\engine\utility::flag(var_3) && !scripts\engine\utility::flag(var_3 + "_dbg"))
+    if(isDefined(var_3) && !scripts\engine\utility::flag(var_3) && !scripts\engine\utility::flag(var_3 + "_dbg")) {
       var_5 = 0;
+    }
 
     wait 1;
   }
@@ -535,11 +555,13 @@ setup_working_clocks() {
     var_1[var_1.size] = var_4;
   }
 
-  foreach(var_3 in var_1)
-  var_3 thread clock_hand_logic(1);
+  foreach(var_3 in var_1) {
+    var_3 thread clock_hand_logic(1);
+  }
 
-  foreach(var_3 in var_0)
-  var_3 thread clock_hand_logic(0);
+  foreach(var_3 in var_0) {
+    var_3 thread clock_hand_logic(0);
+  }
 }
 
 clock_hand_logic(var_0) {
@@ -551,10 +573,11 @@ clock_hand_logic(var_0) {
     self.angles = var_1;
 
     if(var_0) {
-      if(var_2["hours"] >= 12)
+      if(var_2["hours"] >= 12) {
         var_3 = var_2["hours"] - 12;
-      else
+      } else {
         var_3 = var_2["hours"];
+      }
 
       var_4 = cp_disco_factor_value(0, 1, cp_disco_normalize_value(0, 60, var_2["minutes"]));
       var_3 = var_3 + var_4;
@@ -617,26 +640,29 @@ setup_treasure_step() {
 get_actual_time_from_civil(var_0, var_1, var_2) {
   level endon("game_ended");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 = var_1;
-  else {
+  } else {
     var_3 = getsystemtime();
 
-    if(isDefined(level.isdaylightsavings) && level.isdaylightsavings)
+    if(isDefined(level.isdaylightsavings) && level.isdaylightsavings) {
       var_3 = var_3 + 3600;
+    }
   }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_3 = var_3 - 3600 * var_0;
+  }
 
   var_3 = var_3 - 1456790400;
   var_4 = 2016;
   var_5 = floor(var_3 / 31536000);
 
-  if(var_5 != 0)
+  if(var_5 != 0) {
     var_6 = floor(var_5 / 4);
-  else
+  } else {
     var_6 = 0;
+  }
 
   var_3 = var_3 - var_5 * 31536000;
   var_3 = var_3 - var_6 * 86400;
@@ -647,10 +673,11 @@ get_actual_time_from_civil(var_0, var_1, var_2) {
     var_8 = var_5 / 4;
     var_9 = var_8 - var_7;
 
-    if(var_9 >= 0.75)
+    if(var_9 >= 0.75) {
       var_10 = 1;
-    else
+    } else {
       var_10 = 0;
+    }
   } else
     var_10 = 0;
 
@@ -678,8 +705,9 @@ get_actual_time_from_civil(var_0, var_1, var_2) {
   var_14["minutes"] = var_13;
   var_14["seconds"] = var_3;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     return var_14;
+  }
 
   if(isDefined(level.isdaylightsavings)) {
     level notify("time_check", var_4, var_14["month"], var_14["days"], var_12, var_13, var_3);
@@ -694,18 +722,19 @@ get_actual_time_from_civil(var_0, var_1, var_2) {
 is_daylight_savings(var_0, var_1, var_2) {
   var_3 = 0;
 
-  if(var_0["month"] == "March" && var_0["year"] == 2017)
+  if(var_0["month"] == "March" && var_0["year"] == 2017) {
     var_3 = 1;
-  else if(var_0["month"] == "December" || var_0["month"] == "January" || var_0["month"] == "February")
+  } else if(var_0["month"] == "December" || var_0["month"] == "January" || var_0["month"] == "February") {
     var_3 = 0;
-  else if(var_0["month"] != "March" && var_0["month"] != "April")
+  } else if(var_0["month"] != "March" && var_0["month"] != "April") {
     var_3 = 1;
-  else if(var_0["month"] == "March" && var_0["days"] >= 14)
+  } else if(var_0["month"] == "March" && var_0["days"] >= 14) {
     var_3 = 1;
-  else if(var_0["month"] == "November" && var_0["days"] <= 6)
+  } else if(var_0["month"] == "November" && var_0["days"] <= 6) {
     var_3 = 0;
-  else
+  } else {
     var_3 = 0;
+  }
 
   if(var_3) {
     level.isdaylightsavings = 1;
@@ -724,10 +753,11 @@ does_day_fit_in_current_month(var_0, var_1, var_2) {
       var_3 = 31;
       break;
     case "February":
-      if(var_2)
+      if(var_2) {
         var_3 = 29;
-      else
+      } else {
         var_3 = 28;
+      }
 
       break;
     case "March":
@@ -764,10 +794,11 @@ does_day_fit_in_current_month(var_0, var_1, var_2) {
       break;
   }
 
-  if(var_0 > var_3)
+  if(var_0 > var_3) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 determine_correct_month(var_0) {
@@ -827,19 +858,21 @@ determine_correct_month(var_0) {
 }
 
 is_divisible_by(var_0, var_1) {
-  if(floor(var_0 / var_1) > var_0 / var_1)
+  if(floor(var_0 / var_1) > var_0 / var_1) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 build_treasure_cipher_word(var_0, var_1) {
   level endon("game_ended");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = var_1;
-  else
+  } else {
     var_2 = var_0.words;
+  }
 
   var_3 = [];
   var_4 = 0;
@@ -882,11 +915,11 @@ cp_disco_normalize_value(var_0, var_1, var_2) {
     var_1 = var_3;
   }
 
-  if(var_2 > var_1)
+  if(var_2 > var_1) {
     return 1.0;
-  else if(var_2 < var_0)
+  } else if(var_2 < var_0) {
     return 0.0;
-  else if(var_0 == var_1) {}
+  } else if(var_0 == var_1) {}
 
   return (var_2 - var_0) / (var_1 - var_0);
 }

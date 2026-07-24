@@ -17,8 +17,9 @@ activate_zero_g_on_character(var_0) {
 deactivate_zero_g_on_character(var_0) {
   var_0 unlink();
 
-  if(isDefined(level.deactivate_zerog_func))
+  if(isDefined(level.deactivate_zerog_func)) {
     [[level.deactivate_zerog_func]](var_0);
+  }
 }
 
 agent_float_in_air(var_0) {
@@ -34,8 +35,9 @@ agent_float_in_air(var_0) {
   var_6 moveTo(var_0.origin + (0, 0, var_5), var_1);
   var_7 = var_6 scripts\cp\utility::waittill_any_ents_return(level, "deactivate zero g", var_0, "death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0.do_immediate_ragdoll = 0;
+  }
 
   var_6 delete();
 }
@@ -137,14 +139,16 @@ special_weapon_logic(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
   }
 
   if(self.health - var_2 < 1) {
-    if(isDefined(level.lethaldamage_func))
+    if(isDefined(level.lethaldamage_func)) {
       [[level.lethaldamage_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
+    }
 
     if(!var_12 && !var_15) {
-      if(var_1 scripts\cp\utility::is_consumable_active("headshot_explosion"))
+      if(var_1 scripts\cp\utility::is_consumable_active("headshot_explosion")) {
         check_to_use_headshot_explosion(var_1, var_6, var_2, var_4, var_5, var_8, var_13);
-      else if(var_1 scripts\cp\utility::has_zombie_perk("perk_machine_change"))
+      } else if(var_1 scripts\cp\utility::has_zombie_perk("perk_machine_change")) {
         [[level.change_chew_explosion_func]](var_1, var_6, var_2, var_4, var_5, var_8);
+      }
     }
   }
 }
@@ -177,23 +181,26 @@ dischord_death_logic(var_0, var_1, var_2, var_3, var_4) {
     playFXOnTag(level._effect["dischord_tornado"], self, "tag_origin");
     var_5 = 1;
 
-    while(scripts\engine\utility::is_true(self.is_traversing))
+    while(scripts\engine\utility::is_true(self.is_traversing)) {
       wait 0.1;
+    }
 
     self notify("stop_spin");
   }
 
   thread kill_me_after_timeout(5, "ready_to_spin");
 
-  if(!var_5)
+  if(!var_5) {
     self setscriptablepartstate("dischord_spin_fx", "active", 1);
+  }
 
   self waittill("ready_to_spin");
   self.link_ent = spawn("script_origin", self.origin);
   self.link_ent thread kill_link_ent_on_death(self);
 
-  if(!var_6)
+  if(!var_6) {
     self linkTo(self.link_ent);
+  }
 
   thread dischord_spin_attack(var_0, var_1, var_2, var_3, var_7, 0.5);
   self.link_ent rotateYaw(360, 1.0);
@@ -221,13 +228,15 @@ dischord_death_logic(var_0, var_1, var_2, var_3, var_4) {
   self setscriptablepartstate("dischord_spin_fx", "inactive", 1);
   var_8 = 128;
 
-  if(var_6)
+  if(var_6) {
     var_8 = 256;
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 radiusdamage(self.origin, var_8, 2000, 2000, var_0, "MOD_GRENADE_SPLASH", "iw7_dischorddummy_zm");
-  else
+  } else {
     level.players[0] radiusdamage(self.origin, var_8, 2000, 2000, level.players[0], "MOD_GRENADE_SPLASH", "iw7_dischorddummy_zm");
+  }
 
   if(isDefined(self.link_ent)) {
     self.dischord_spin = 0;
@@ -243,8 +252,9 @@ kill_link_ent_on_death(var_0) {
 }
 
 kill_me_after_timeout(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self endon(var_1);
+  }
 
   wait(var_0);
   self suicide();
@@ -258,8 +268,9 @@ dischord_spin_attack(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_8 = 2;
   var_3 = 3000;
 
-  if(var_4 == 100)
+  if(var_4 == 100) {
     var_3 = 7000;
+  }
 
   while(var_6 > 0) {
     var_9 = 0;
@@ -275,14 +286,16 @@ dischord_spin_attack(var_0, var_1, var_2, var_3, var_4, var_5) {
         }
         var_13 = undefined;
 
-        if(scripts\engine\utility::is_true(self.is_traversing))
+        if(scripts\engine\utility::is_true(self.is_traversing)) {
           var_13 = 1;
+        }
 
         if(!scripts\engine\utility::is_true(var_12.customdeath)) {
           var_9++;
 
-          if(var_9 >= var_8)
+          if(var_9 >= var_8) {
             var_13 = 1;
+          }
 
           var_12 thread fling_zombie(var_3, self.link_ent, var_0, var_13);
         }
@@ -305,26 +318,29 @@ fling_zombie(var_0, var_1, var_2, var_3) {
     self.nocorpse = 1;
     self.full_gib = 1;
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       self dodamage(self.health + 1000, self.origin, var_2, var_2, "MOD_UNKNOWN", "iw7_dischorddummy_zm");
-    else
+    } else {
       self dodamage(self.health + 1000, self.origin, level.players[0], level.players[0], "MOD_UNKNOWN", "iw7_dischorddummy_zm");
+    }
   } else {
     self setvelocity(vectorNormalize(self.origin - var_1.origin) * 200 + (0, 0, 800));
     wait 0.1;
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       self dodamage(self.health + 1000, var_1.origin, var_2, var_1, "MOD_UNKNOWN", "iw7_dischorddummy_zm");
-    else
+    } else {
       self dodamage(self.health + 1000, var_1.origin, var_1, var_1, "MOD_UNKNOWN", "iw7_dischorddummy_zm");
+    }
   }
 }
 
 should_take_players_current_weapon(var_0) {
   var_1 = 3;
 
-  if(var_0 scripts\cp\utility::has_zombie_perk("perk_machine_more"))
+  if(var_0 scripts\cp\utility::has_zombie_perk("perk_machine_more")) {
     var_1 = 4;
+  }
 
   var_2 = var_0 getweaponslist("primary");
   return var_2.size >= var_1;
@@ -360,14 +376,16 @@ facemelter_death_logic(var_0, var_1, var_2, var_3, var_4) {
     level thread facemelter_fire_pool(self, 5, var_0, var_5, 1);
     self setscriptablepartstate("burning", "active", 1);
 
-    while(scripts\engine\utility::is_true(self.is_traversing))
+    while(scripts\engine\utility::is_true(self.is_traversing)) {
       wait 0.1;
+    }
   }
 
   self.rocket_feet = 1;
 
-  if(isDefined(self.pooltrigger))
+  if(isDefined(self.pooltrigger)) {
     self.pooltrigger notify("fire_pool_done");
+  }
 
   thread remove_rocket_feet_failsafe();
   level thread facemelter_fire_pool(self, 5, var_0, var_5);
@@ -426,10 +444,11 @@ facemelter_death_logic(var_0, var_1, var_2, var_3, var_4) {
       var_18.team = var_0.team;
       var_18.trophy_name = "zmb_globproj_zm";
 
-      if(var_13 == 0)
+      if(var_13 == 0) {
         var_18 setscriptablepartstate("explosion", "active");
-      else
+      } else {
         var_18 setscriptablepartstate("explosion", "neutral");
+      }
 
       var_18 setscriptablepartstate("trail", "active");
       level.facemelter_globs = scripts\engine\utility::add_to_array(level.facemelter_globs, var_18);
@@ -445,14 +464,16 @@ facemelter_death_logic(var_0, var_1, var_2, var_3, var_4) {
     self setscriptablepartstate("rocket_feet", "inactive", 1);
     self setscriptablepartstate("rocket_explosion", "inactive", 1);
 
-    if(!isDefined(var_0))
+    if(!isDefined(var_0)) {
       var_0 = undefined;
+    }
 
     self dodamage(self.health + 1000, self.origin, var_0, self.link_ent, "MOD_GRENADE_SPLASH", "iw7_facemelterdummy_zm");
   }
 
-  if(isDefined(var_19))
+  if(isDefined(var_19)) {
     var_19 delete();
+  }
 }
 
 turn_on_rocket_feet() {
@@ -460,10 +481,11 @@ turn_on_rocket_feet() {
   self playSound("zombie_facemelter_rocket_feet");
   self waittill("facemelter_launch_chosen");
 
-  if(scripts\engine\utility::is_true(self.dismember_crawl))
+  if(scripts\engine\utility::is_true(self.dismember_crawl)) {
     wait 0.3;
-  else
+  } else {
     wait 0.1;
+  }
 
   self setscriptablepartstate("rocket_feet", "active", 1);
 }
@@ -530,8 +552,9 @@ dodamageandunsetburnstate(var_0, var_1) {
   var_0 endon("doDamageAndUnsetBurnState");
   var_0 endon("disconnect");
 
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     var_0 dodamage(int(var_0.maxhealth * 0.15), var_1.origin, var_1, var_1, "MOD_UNKNOWN", "iw7_facemelterdummy_zm");
+  }
 
   wait 1;
   var_0.burning = undefined;
@@ -623,15 +646,18 @@ explode_head_with_fx(var_0, var_1, var_2, var_3, var_4, var_5) {
   playFX(level._effect[var_3], var_4);
 
   foreach(var_7 in level.players) {
-    if(distance(var_7.origin, var_4) <= 350)
+    if(distance(var_7.origin, var_4) <= 350) {
       var_7 thread showonscreenbloodeffects();
+    }
   }
 
-  if(isDefined(self.headmodel))
+  if(isDefined(self.headmodel)) {
     self detach(self.headmodel);
+  }
 
-  if(!var_5)
+  if(!var_5) {
     self setscriptablepartstate("head", "hide");
+  }
 }
 
 showonscreenbloodeffects() {
@@ -657,8 +683,9 @@ head_exploder(var_0, var_1, var_2, var_3, var_4) {
   self.head_is_exploding = 1;
   wait(randomfloatrange(0.0, 0.5));
 
-  if(!scripts\engine\utility::is_true(self.is_cop))
+  if(!scripts\engine\utility::is_true(self.is_cop)) {
     self setscriptablepartstate("eyes", "headcutter_eyes");
+  }
 
   self.ignoreall = 1;
   self clearpath();
@@ -689,17 +716,19 @@ explode_head_shards(var_0, var_1, var_2, var_3) {
   switch (var_5) {
     case "iw7_headcutter_zm_pap1":
     case "iw7_headcutter_zm":
-      if(var_4)
+      if(var_4) {
         var_6 = "iw7_headcutter2_zm+hcpap1";
-      else
+      } else {
         var_6 = "iw7_headcutter2_zm";
+      }
 
       break;
     case "iw7_headcutter2_zm":
-      if(var_4)
+      if(var_4) {
         var_6 = "iw7_headcutter3_zm+hcpap1";
-      else
+      } else {
         var_6 = "iw7_headcutterdummy_zm";
+      }
 
       break;
   }
@@ -709,16 +738,18 @@ explode_head_shards(var_0, var_1, var_2, var_3) {
   var_9 = [var_2];
   var_10 = 128;
 
-  if(var_4)
+  if(var_4) {
     var_10 = 256;
+  }
 
   var_11 = scripts\engine\utility::get_array_of_closest(var_1, var_8, var_9, undefined, var_10, 0);
 
   foreach(var_13 in var_11) {
-    if(isDefined(var_13.agent_type) && (var_13.agent_type == "zombie_grey" || var_13.agent_type == "zombie_brute"))
+    if(isDefined(var_13.agent_type) && (var_13.agent_type == "zombie_grey" || var_13.agent_type == "zombie_brute")) {
       var_14 = 100;
-    else
+    } else {
       var_14 = 100000;
+    }
 
     var_13 dodamage(var_14, var_1, var_0, var_0, "MOD_EXPLOSIVE", var_6);
   }
@@ -760,21 +791,25 @@ weapon_watch_hint() {
 }
 
 updatecamoscripts(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_2 = getweaponcamoname(var_0);
-  else
+  } else {
     var_2 = undefined;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 = getweaponcamoname(var_1);
-  else
+  } else {
     var_3 = undefined;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "none";
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = "none";
+  }
 
   clearcamoscripts(var_1, var_3);
   runcamoscripts(var_0, var_2);
@@ -849,8 +884,9 @@ mw2_camo_31() {
   self endon("death");
   self endon("mw2_camo_31");
 
-  if(!isDefined(self.mw2camokillcount))
+  if(!isDefined(self.mw2camokillcount)) {
     self.mw2camokillcount = 0;
+  }
 
   var_0 = int(self.mw2camokillcount / 5);
   self setscriptablepartstate("camo_31", var_0 + "_kills");
@@ -877,8 +913,9 @@ blood_camo_84() {
   self endon("death");
   self endon("blood_camo_84");
 
-  if(!isDefined(self.bloodcamokillcount))
+  if(!isDefined(self.bloodcamokillcount)) {
     self.bloodcamokillcount = 0;
+  }
 
   var_0 = 1;
 
@@ -965,8 +1002,9 @@ setaxescriptablestate(var_0) {
 }
 
 get_melee_weapon_fov(var_0, var_1) {
-  if(!isDefined(var_0) && !isDefined(var_1))
+  if(!isDefined(var_0) && !isDefined(var_1)) {
     return 45;
+  }
 
   switch (var_1) {
     case 2:
@@ -979,8 +1017,9 @@ get_melee_weapon_fov(var_0, var_1) {
 }
 
 get_melee_weapon_hit_distance(var_0, var_1) {
-  if(!isDefined(var_0) && !isDefined(var_1))
+  if(!isDefined(var_0) && !isDefined(var_1)) {
     return 125;
+  }
 
   switch (var_1) {
     case 2:
@@ -993,8 +1032,9 @@ get_melee_weapon_hit_distance(var_0, var_1) {
 }
 
 get_melee_weapon_max_enemies(var_0, var_1) {
-  if(!isDefined(var_0) && !isDefined(var_1))
+  if(!isDefined(var_0) && !isDefined(var_1)) {
     return 1;
+  }
 
   switch (var_1) {
     case 2:
@@ -1007,8 +1047,9 @@ get_melee_weapon_max_enemies(var_0, var_1) {
 }
 
 get_melee_weapon_melee_damage(var_0, var_1) {
-  if(!isDefined(var_0) && !isDefined(var_1))
+  if(!isDefined(var_0) && !isDefined(var_1)) {
     return 1100;
+  }
 
   switch (var_1) {
     case 2:
@@ -1037,8 +1078,9 @@ playredrepulsorfx() {
 }
 
 checkenemiesinfov(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 6;
+  }
 
   var_3 = cos(var_0);
   var_4 = [];
@@ -1056,14 +1098,16 @@ checkenemiesinfov(var_0, var_1, var_2) {
       if(isDefined(var_1)) {
         var_14 = distance2d(self.origin, var_12);
 
-        if(var_14 < var_1)
+        if(var_14 < var_1) {
           var_11 = 1;
+        }
       } else
         var_11 = 1;
     }
 
-    if(var_11 && var_4.size < var_2)
+    if(var_11 && var_4.size < var_2) {
       var_4[var_4.size] = var_8;
+    }
   }
 
   return var_4;
@@ -1072,14 +1116,16 @@ checkenemiesinfov(var_0, var_1, var_2) {
 axe_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_0 endon("death");
 
-  if(var_0 scripts\cp\agents\gametype_zombie::is_non_standard_zombie())
+  if(var_0 scripts\cp\agents\gametype_zombie::is_non_standard_zombie()) {
     var_0.allowpain = 1;
+  }
 
   var_0 dodamage(var_2, var_3, var_1, var_1, "MOD_MELEE", var_5);
   wait(var_6);
 
-  if(scripts\engine\utility::is_true(var_0.allowpain))
+  if(scripts\engine\utility::is_true(var_0.allowpain)) {
     var_0.allowpain = 0;
+  }
 }
 
 reload_watcher() {
@@ -1106,8 +1152,9 @@ arcane_attachment_watcher(var_0) {
   var_0 endon("disconnect");
   var_0 endon("death");
 
-  while(!isDefined(var_0.suit))
+  while(!isDefined(var_0.suit)) {
     wait 0.1;
+  }
 
   var_0 thread unsetstatewhenadswithsniper(var_0);
 
@@ -1163,14 +1210,17 @@ clear_arcane_effects(var_0) {
   var_0.special_ammo_type = undefined;
   var_0 setscriptablepartstate("arcane", "neutral", 1);
 
-  if(var_0 scripts\cp\utility::_hasperk("specialty_explosivebullets"))
+  if(var_0 scripts\cp\utility::_hasperk("specialty_explosivebullets")) {
     var_0 scripts\cp\utility::_unsetperk("specialty_explosivebullets");
+  }
 
-  if(var_0 scripts\cp\utility::_hasperk("specialty_armorpiercing"))
+  if(var_0 scripts\cp\utility::_hasperk("specialty_armorpiercing")) {
     var_0 scripts\cp\utility::_unsetperk("specialty_armorpiercing");
+  }
 
-  if(var_0 scripts\cp\utility::_hasperk("specialty_bulletdamage"))
+  if(var_0 scripts\cp\utility::_hasperk("specialty_bulletdamage")) {
     var_0 scripts\cp\utility::_unsetperk("specialty_bulletdamage");
+  }
 }
 
 wait_for_weapon_switch_done(var_0, var_1) {
@@ -1180,8 +1230,9 @@ wait_for_weapon_switch_done(var_0, var_1) {
   var_0 endon("disconnect");
   var_0 endon("weapon_switch_started");
 
-  while(var_0 isswitchingweapon())
+  while(var_0 isswitchingweapon()) {
     wait 0.05;
+  }
 
   var_2 = var_0 getcurrentweapon();
   var_0 notify("weapon_switch_done", var_2);
@@ -1194,8 +1245,9 @@ assign_ark_attachment_properties(var_0, var_1, var_2) {
     return;
   }
   if(!isDefined(var_1)) {
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       var_2 = self getcurrentweapon();
+    }
 
     if(!issubstr(var_2, "ark")) {
       return;
@@ -1210,8 +1262,9 @@ assign_ark_attachment_properties(var_0, var_1, var_2) {
     }
   }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "blank";
+  }
 
   switch (var_1) {
     case "arkblue_sm":
@@ -1222,8 +1275,9 @@ assign_ark_attachment_properties(var_0, var_1, var_2) {
       self.special_ammo_type = "stun_ammo";
       self.special_ammo_weapon = var_2;
 
-      if(!scripts\cp\utility::_hasperk("specialty_bulletdamage"))
+      if(!scripts\cp\utility::_hasperk("specialty_bulletdamage")) {
         scripts\cp\utility::giveperk("specialty_bulletdamage");
+      }
 
       scripts\cp\utility::_unsetperk("specialty_explosivebullets");
       scripts\cp\utility::_unsetperk("specialty_armorpiercing");
@@ -1247,8 +1301,9 @@ assign_ark_attachment_properties(var_0, var_1, var_2) {
       self setclientomnvar("zm_ui_specialammo", 3);
       self.special_ammo_type = "explosive_ammo";
 
-      if(!scripts\cp\utility::_hasperk("specialty_explosivebullets"))
+      if(!scripts\cp\utility::_hasperk("specialty_explosivebullets")) {
         scripts\cp\utility::giveperk("specialty_explosivebullets");
+      }
 
       scripts\cp\utility::_unsetperk("specialty_armorpiercing");
       scripts\cp\utility::_unsetperk("specialty_bulletdamage");
@@ -1273,11 +1328,13 @@ assign_ark_attachment_properties(var_0, var_1, var_2) {
       self setclientomnvar("zm_ui_specialammo", 5);
       self.special_ammo_type = "combined_ammo";
 
-      if(!scripts\cp\utility::_hasperk("specialty_bulletdamage"))
+      if(!scripts\cp\utility::_hasperk("specialty_bulletdamage")) {
         scripts\cp\utility::giveperk("specialty_bulletdamage");
+      }
 
-      if(!scripts\cp\utility::_hasperk("specialty_armorpiercing"))
+      if(!scripts\cp\utility::_hasperk("specialty_armorpiercing")) {
         scripts\cp\utility::giveperk("specialty_armorpiercing");
+      }
 
       self setscriptablepartstate("arcane", "pink_on", 0);
       break;
@@ -1293,8 +1350,9 @@ assign_ark_attachment_properties(var_0, var_1, var_2) {
 }
 
 handle_zapper_fx(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = self getcurrentweapon();
+  }
 
   var_2 = getweaponbasename(var_1);
   turn_off_zapper_fx();
@@ -1383,8 +1441,9 @@ weapon_in_inventory(var_0) {
   var_1 = self getweaponslistprimaries();
 
   foreach(var_3 in var_1) {
-    if(var_3 == var_0)
+    if(var_3 == var_0) {
       return 1;
+    }
   }
 
   return 0;
@@ -1437,9 +1496,9 @@ startdamageovertime(var_0, var_1, var_2, var_3, var_4) {
   thread watchgrenadedotend();
   thread watchstartlingerdamage(var_0, var_1);
 
-  if(isDefined(level.splash_grenade_victim_scriptable_state_func) && isalive(self) && isDefined(self.species) && self.species == "zombie")
+  if(isDefined(level.splash_grenade_victim_scriptable_state_func) && isalive(self) && isDefined(self.species) && self.species == "zombie") {
     self thread[[level.splash_grenade_victim_scriptable_state_func]](self);
-  else {}
+  } else {}
 
   thread standingdotdamage(var_0, var_1, var_2, var_3, var_4);
 }
@@ -1448,8 +1507,9 @@ play_fx_for_time(var_0, var_1, var_2) {
   var_3 = undefined;
   var_3 = spawnfx(scripts\engine\utility::getfx(var_1), var_0);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     triggerfx(var_3);
+  }
 
   var_3 thread scripts\cp\utility::delayentdelete(var_2);
   return var_3;
@@ -1464,8 +1524,9 @@ watchplayerstouchingpool(var_0, var_1) {
 
     if(scripts\cp\utility::isreallyalive(var_2) && !isDefined(var_2.startedplasmastand) && (var_2.team != self.owner.team || var_2 == self.owner)) {
       if(var_1) {
-        if(var_2 == self.owner)
+        if(var_2 == self.owner) {
           continue;
+        }
       }
 
       var_2 notify("start_plasma_stand");
@@ -1527,16 +1588,18 @@ deleteonlingerstart(var_0) {
   var_0 endon("disconnect");
   var_0 waittill("plasma_dot_end");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 delayplayfxontagforclients(var_0, var_1, var_2, var_3) {
   var_2 endon("death");
   wait(var_0);
 
-  if(isDefined(var_2) && isDefined(self))
+  if(isDefined(var_2) && isDefined(self)) {
     playfxontagforclients(scripts\engine\utility::getfx(var_1), var_2, var_3, self);
+  }
 }
 
 standingdotdamage(var_0, var_1, var_2, var_3, var_4) {
@@ -1544,8 +1607,9 @@ standingdotdamage(var_0, var_1, var_2, var_3, var_4) {
   self endon("disconnect");
   var_1 endon("disconnect");
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_4 endon("death");
+  }
 
   var_5 = int(var_2 / 4);
   var_6 = var_3;
@@ -1566,8 +1630,9 @@ damageplayerovertime(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self endon("death");
   self endon("disconnect");
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     self endon(var_5);
+  }
 
   var_1 endon("disconnect");
 
@@ -1589,11 +1654,13 @@ damageplayerovertime(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
 
     while(var_4 > 0) {
-      if(self.health > 15 && self.health - var_2 < 15)
+      if(self.health > 15 && self.health - var_2 < 15) {
         var_2 = var_2 - (15 - (self.health - var_2));
+      }
 
-      if(self.health > var_7 && self.health <= 15)
+      if(self.health > var_7 && self.health <= 15) {
         var_2 = 1;
+      }
 
       if(var_2 > 0) {
         self dodamage(var_2, self.origin, var_1, undefined, "MOD_EXPLOSIVE", var_0);
@@ -1604,8 +1671,9 @@ damageplayerovertime(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       wait(var_3);
     }
 
-    if(isDefined(var_6))
+    if(isDefined(var_6)) {
       self notify(var_6);
+    }
   }
 }
 
@@ -1615,8 +1683,9 @@ deletepentsondisconnect(var_0) {
   var_0 endon("disconnect");
   var_0 waittill("start_plasma_stand");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 delayplaySound(var_0, var_1) {

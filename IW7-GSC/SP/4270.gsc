@@ -70,8 +70,9 @@ _id_104D0(var_0, var_1, var_2) {
   if(isDefined(var_2)) {
     scripts\engine\utility::flag_wait(var_2);
 
-    foreach(var_10 in var_5)
-    var_10 delete();
+    foreach(var_10 in var_5) {
+      var_10 delete();
+    }
   }
 }
 
@@ -97,14 +98,16 @@ _id_57C4(var_0, var_1, var_2, var_3) {
   var_5 = 2.0;
   level.player freezecontrols(1);
 
-  while(iscinematicplaying())
+  while(iscinematicplaying()) {
     scripts\engine\utility::waitframe();
+  }
 
   level.player freezecontrols(0);
   scripts\engine\utility::flag_set("intro_start");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     wait(var_3);
+  }
 
   scripts\engine\utility::flag_set("intro_hold_on_black_done");
   scripts\engine\utility::delaythread(var_4, _id_10AF::_id_10A42, level.player._id_A04E, var_5);
@@ -164,8 +167,9 @@ intro_preload_autosave() {
   scripts\sp\utility::_id_266F(0);
   wait 2;
 
-  if(!getdvarint("ja_skip_preload"))
+  if(!getdvarint("ja_skip_preload")) {
     level thread scripts\sp\utility::_id_BF97();
+  }
 }
 
 _id_5796() {
@@ -208,8 +212,9 @@ _id_56B3(var_0, var_1, var_2, var_3) {
   }
 
   if(scripts\engine\utility::flag_exist("jackal_objectives_can_display")) {
-    while(!scripts\engine\utility::flag("jackal_objectives_can_display"))
+    while(!scripts\engine\utility::flag("jackal_objectives_can_display")) {
       wait 0.05;
+    }
   }
 
   if(isDefined(var_2) && var_2) {
@@ -226,18 +231,21 @@ _id_8E7F(var_0) {
 _id_F396(var_0, var_1) {
   level.player endon("death");
 
-  while(!scripts\engine\utility::flag("jackal_objectives_can_display"))
+  while(!scripts\engine\utility::flag("jackal_objectives_can_display")) {
     wait 0.05;
+  }
 
   _id_0B76::_id_F433(level._id_A3A8[var_0]._id_C27F, var_1);
 }
 
 _id_C2A0(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = (0, 0, 1200);
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = " ";
+  }
 
   objective_setpointertextoverride(scripts\sp\utility::_id_C264(level._id_A3A8[var_0]._id_C288), var_2);
 
@@ -263,8 +271,9 @@ _id_57AC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   level.player endon(var_0 + "force_event_complete");
   _id_10AF::_id_96A4(var_0, var_4);
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     thread _id_CE80(var_6);
+  }
 
   level._id_A3A8[var_0] = spawnStruct();
   level._id_A3A8[var_0]._id_4469 = 0;
@@ -280,23 +289,27 @@ _id_57AC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   level._id_A3A8[var_0]._id_1354E = _id_10B0::_id_1350D;
   level._id_A3A8[var_0]._id_1354F = _id_10B0::_id_1350D;
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     level._id_A3A8[var_0]._id_13522 = var_7;
+  }
 
   var_8 = 1;
 
-  if(scripts\engine\utility::flag("intro_done"))
+  if(scripts\engine\utility::flag("intro_done")) {
     var_8 = 0;
+  }
 
   level._id_A3A8[var_0] thread _id_10AF::_id_B2E1(var_0, var_8);
   scripts\engine\utility::flag_set(var_0 + "start");
 
   for(var_9 = var_4; var_9 > 0; var_9--) {
-    while(level._id_A3A8[var_0]._id_A683 - level._id_A3A8[var_0].kills >= var_9)
+    while(level._id_A3A8[var_0]._id_A683 - level._id_A3A8[var_0].kills >= var_9) {
       wait 0.05;
+    }
 
-    if(var_9 > 1)
+    if(var_9 > 1) {
       scripts\engine\utility::flag_set(var_0 + (var_9 - 1) + "_left");
+    }
 
     level notify("player_killed_enemy");
     level notify("player_killed_enemyskelter");
@@ -321,8 +334,9 @@ _id_57AA(var_0, var_1, var_2, var_3, var_4) {
     }
   }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     thread _id_CE80(var_3);
+  }
 
   _id_10AF::_id_96A4(var_0, var_2);
   level._id_A3A8[var_0] = spawnStruct();
@@ -336,8 +350,9 @@ _id_57AA(var_0, var_1, var_2, var_3, var_4) {
   level._id_A3A8[var_0]._id_1354E = _id_10B0::_id_1350D;
   level._id_A3A8[var_0]._id_1354F = _id_10B0::_id_1350D;
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     level._id_A3A8[var_0]._id_13522 = var_4;
+  }
 
   var_10 = 0;
   level._id_A3A8[var_0]._id_FE2D = [];
@@ -357,8 +372,9 @@ _id_57AA(var_0, var_1, var_2, var_3, var_4) {
     }
   }
 
-  while(level._id_A3A8[var_0]._id_10854 < var_2)
+  while(level._id_A3A8[var_0]._id_10854 < var_2) {
     wait 0.05;
+  }
 
   _id_10AF::_id_11AAC(var_0, "skelter");
 }
@@ -379,8 +395,9 @@ _id_57AB(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     }
   }
 
-  if(isDefined(var_9))
+  if(isDefined(var_9)) {
     thread _id_CE80(var_9);
+  }
 
   _id_10AF::_id_96A4(var_0, var_7);
   level._id_A3A8[var_0] = spawnStruct();
@@ -399,8 +416,9 @@ _id_57AB(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   level._id_A3A8[var_0]._id_1354E = _id_10B0::_id_1350D;
   level._id_A3A8[var_0]._id_1354F = _id_10B0::_id_1350D;
 
-  if(isDefined(var_10))
+  if(isDefined(var_10)) {
     level._id_A3A8[var_0]._id_13522 = var_10;
+  }
 
   var_16 = 0;
   level._id_A3A8[var_0]._id_FE2D = [];
@@ -420,8 +438,9 @@ _id_57AB(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     }
   }
 
-  while(level._id_A3A8[var_0]._id_10854 < var_3)
+  while(level._id_A3A8[var_0]._id_10854 < var_3) {
     wait 0.05;
+  }
 
   wait(var_4);
   level._id_A3A8[var_0]._id_FE2D = scripts\engine\utility::array_removeundefined(level._id_A3A8[var_0]._id_FE2D);
@@ -430,11 +449,13 @@ _id_57AB(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   scripts\engine\utility::flag_set(var_0 + "start");
 
   for(var_19 = var_7; var_19 > 0; var_19--) {
-    while(level._id_A3A8[var_0]._id_A683 - level._id_A3A8[var_0].kills >= var_19)
+    while(level._id_A3A8[var_0]._id_A683 - level._id_A3A8[var_0].kills >= var_19) {
       wait 0.05;
+    }
 
-    if(var_19 > 1)
+    if(var_19 > 1) {
       scripts\engine\utility::flag_set(var_0 + (var_19 - 1) + "_left");
+    }
 
     level notify("player_killed_enemy");
     level notify("player_killed_enemyskelter");
@@ -458,11 +479,13 @@ _id_57A7(var_0, var_1, var_2, var_3, var_4) {
   level.player endon(var_0 + "force_event_complete");
   var_5 = getEntArray(var_1, "targetname");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = var_5.size;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     thread _id_CE80(var_3);
+  }
 
   _id_10AF::_id_96A4(var_0, var_2);
   level._id_A3A8[var_0] = spawnStruct();
@@ -475,8 +498,9 @@ _id_57A7(var_0, var_1, var_2, var_3, var_4) {
   level._id_A3A8[var_0]._id_1354E = _id_10B0::_id_134B1;
   level._id_A3A8[var_0]._id_1354F = _id_10B0::_id_134B0;
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     level._id_A3A8[var_0]._id_13522 = var_4;
+  }
 
   level._id_A3A8[var_0]._id_FE2D = [];
 
@@ -490,8 +514,9 @@ _id_57A7(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_1700(var_0, var_1) {
-  foreach(var_3 in var_0)
-  _id_10AF::_id_67E7(var_3, var_1, 0, 1);
+  foreach(var_3 in var_0) {
+    _id_10AF::_id_67E7(var_3, var_1, 0, 1);
+  }
 }
 
 _id_57A8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
@@ -499,20 +524,25 @@ _id_57A8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   level.player endon(var_0 + "force_event_complete");
   var_8 = getEntArray(var_1, "targetname");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = var_8.size;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     thread _id_CE80(var_3);
+  }
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 0;
+  }
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     var_6 = 0;
+  }
 
-  if(!isDefined(var_7))
+  if(!isDefined(var_7)) {
     var_7 = 0;
+  }
 
   _id_10AF::_id_96A4(var_0, var_2);
   level._id_A3A8[var_0] = spawnStruct();
@@ -525,8 +555,9 @@ _id_57A8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   level._id_A3A8[var_0]._id_1354E = _id_10B0::_id_134C9;
   level._id_A3A8[var_0]._id_1354F = _id_10B0::_id_134C8;
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     level._id_A3A8[var_0]._id_13522 = var_4;
+  }
 
   level._id_A3A8[var_0]._id_FE2D = [];
   var_9 = 0.0;
@@ -556,17 +587,21 @@ _id_57A9(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   level.player endon(var_0 + "force_event_complete");
   var_7 = getEntArray(var_1, "targetname");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = var_7.size;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     thread _id_CE80(var_3);
+  }
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 0;
+  }
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     var_6 = 0;
+  }
 
   _id_10AF::_id_96A4(var_0, var_2);
   level._id_A3A8[var_0] = spawnStruct();
@@ -579,8 +614,9 @@ _id_57A9(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   level._id_A3A8[var_0]._id_1354E = _id_10B0::_id_134F0;
   level._id_A3A8[var_0]._id_1354F = _id_10B0::_id_134EF;
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     level._id_A3A8[var_0]._id_13522 = var_4;
+  }
 
   level._id_A3A8[var_0]._id_FE2D = [];
   var_8 = 0.0;
@@ -628,11 +664,13 @@ _id_5769(var_0, var_1, var_2) {
 _id_5768(var_0, var_1, var_2, var_3) {
   var_4 = getEntArray(var_1, "targetname");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = var_4.size;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
   level._id_A3A8[var_0] = spawnStruct();
   level._id_A3A8[var_0]._id_68B1 = var_0;
@@ -643,13 +681,15 @@ _id_5768(var_0, var_1, var_2, var_3) {
   for(var_5 = 0; var_5 < var_2; var_5++) {
     var_6 = var_4[var_5] scripts\sp\utility::_id_10808();
 
-    if(isDefined(var_6._id_EDB8) && var_6._id_EDB8 == "Salter")
+    if(isDefined(var_6._id_EDB8) && var_6._id_EDB8 == "Salter") {
       var_6 _id_0BDC::_id_1998();
+    }
 
-    if(var_3)
+    if(var_3) {
       var_6 thread _id_10AF::_id_A2A3(1);
-    else
+    } else {
       var_6 thread _id_10AF::_id_A123(1);
+    }
 
     level._id_A3A8[var_0].jackals._id_FE2D[level._id_A3A8[var_0].jackals._id_FE2D.size] = var_6;
   }
@@ -667,18 +707,21 @@ _id_52F3(var_0, var_1, var_2, var_3, var_4) {
   var_6 = acos(vectordot(anglesToForward(self.angles), anglesToForward(var_1)));
   var_7 = var_6 * 144.0;
 
-  if(var_7 > var_5)
+  if(var_7 > var_5) {
     var_5 = var_7;
+  }
 
   var_8 = var_5 / var_2;
   var_9 = 0;
   var_10 = 0;
 
-  if(isDefined(var_3) && var_3)
+  if(isDefined(var_3) && var_3) {
     var_9 = var_8 * 0.25;
+  }
 
-  if(isDefined(var_4) && var_4)
+  if(isDefined(var_4) && var_4) {
     var_10 = var_8 * 0.25;
+  }
 
   self._id_BCDA moveTo(var_0, var_8, var_9, var_10);
   self._id_BCDA rotateTo(var_1, var_8, var_9, var_10);
@@ -722,8 +765,9 @@ _id_E3B6(var_0) {
   var_8 = 1000;
   level._id_E35D _id_0BA9::_id_39D6(var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 
-  if(isDefined(var_0) && var_0)
+  if(isDefined(var_0) && var_0) {
     level._id_E35D _id_E36F();
+  }
 }
 
 _id_E3A7(var_0, var_1, var_2, var_3) {
@@ -733,11 +777,13 @@ _id_E3A7(var_0, var_1, var_2, var_3) {
   var_7 = 0;
   var_8 = 0;
 
-  if(isDefined(var_2) && var_2)
+  if(isDefined(var_2) && var_2) {
     var_7 = var_6 * 0.25;
+  }
 
-  if(isDefined(var_3) && var_3)
+  if(isDefined(var_3) && var_3) {
     var_8 = var_6 * 0.25;
+  }
 
   level._id_FD6E._id_E35D moveTo(var_4.origin, var_6, var_7, var_8);
   level._id_FD6E._id_E35D rotateTo(var_4.angles, var_6, var_7, var_8);
@@ -751,11 +797,13 @@ _id_E3FA(var_0) {
 }
 
 _id_E36F() {
-  while(!isDefined(level._id_F033))
+  while(!isDefined(level._id_F033)) {
     wait 0.05;
+  }
 
-  while(!level._id_F033.size)
+  while(!level._id_F033.size) {
     wait 0.05;
+  }
 
   thread _id_0BB6::_id_39F0();
   _id_0BB6::_id_3966(1, 1, level._id_F033[0], level._id_F033[1], level._id_F033[2], level._id_F033[3]);
@@ -767,11 +815,13 @@ _id_E3F9() {
 }
 
 _id_E3DD(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = -1;
+  }
 
   thread _id_10AF::_id_E3DF(var_0);
   thread _id_10AF::_id_E3DE(var_0);
@@ -783,8 +833,9 @@ _id_E3DD(var_0, var_1, var_2) {
   level scripts\engine\utility::waittill_any("retribution_kill_destroyer_hit", "retribution_kill_destroyer_timeout");
   level._id_39DD[var_3]._id_10241._id_6CF8 = _id_0BB6::_id_6D0E;
 
-  if(isDefined(var_0) && isalive(var_0))
+  if(isDefined(var_0) && isalive(var_0)) {
     var_0 _id_10AF::_id_52EF(var_1, var_2);
+  }
 }
 
 _id_E382(var_0) {
@@ -833,10 +884,11 @@ _id_BC19(var_0) {
   for(;;) {
     var_1 = 0;
 
-    if(level.player buttonPressed("BUTTON_LSHLDR"))
+    if(level.player buttonPressed("BUTTON_LSHLDR")) {
       var_1 = -100;
-    else if(level.player buttonPressed("BUTTON_RSHLDR"))
+    } else if(level.player buttonPressed("BUTTON_RSHLDR")) {
       var_1 = 100;
+    }
 
     var_2 = anglestoup(var_0.angles);
     var_0.origin = var_0.origin + var_2 * var_1;
@@ -848,10 +900,11 @@ _id_BC1A(var_0) {
   for(;;) {
     var_1 = 0;
 
-    if(level.player buttonPressed("BUTTON_LTRIG"))
+    if(level.player buttonPressed("BUTTON_LTRIG")) {
       var_1 = -2;
-    else if(level.player buttonPressed("BUTTON_RTRIG"))
+    } else if(level.player buttonPressed("BUTTON_RTRIG")) {
       var_1 = 2;
+    }
 
     var_0 addyaw(var_1);
     wait 0.05;
@@ -871,14 +924,17 @@ _id_BC17(var_0) {
 }
 
 _id_6C7B(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 15000;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 25000;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 0.9;
+  }
 
   var_5 = scripts\engine\utility::getStructArray(var_0, "targetname");
   var_5 = scripts\engine\utility::array_randomize(var_5);
@@ -896,8 +952,9 @@ _id_6C7B(var_0, var_1, var_2, var_3, var_4) {
   var_15 = [];
 
   foreach(var_17 in var_5) {
-    if(isDefined(var_17.used) && var_17.used)
+    if(isDefined(var_17.used) && var_17.used) {
       var_5 = scripts\engine\utility::array_remove(var_5, var_17);
+    }
 
     var_18 = distancesquared(level._id_D127.origin, var_17.origin);
 
@@ -911,21 +968,24 @@ _id_6C7B(var_0, var_1, var_2, var_3, var_4) {
       var_15[var_15.size] = var_17;
   }
 
-  if(var_14.size >= var_1)
+  if(var_14.size >= var_1) {
     return var_14;
+  }
 
   foreach(var_21 in var_15) {
     var_14[var_14.size] = var_21;
 
-    if(var_14.size >= var_1)
+    if(var_14.size >= var_1) {
       return var_14;
+    }
   }
 
   foreach(var_17 in var_5) {
     var_14[var_14.size] = var_17;
 
-    if(var_14.size >= var_1)
+    if(var_14.size >= var_1) {
       return var_14;
+    }
   }
 
   return var_14;

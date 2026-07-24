@@ -22,8 +22,9 @@ summon_skeleton_pet() {
   scripts\cp\powers\coop_powers::power_disablepower();
   var_0 = 250;
 
-  if(self.chi_meter_amount - var_0 <= 0)
+  if(self.chi_meter_amount - var_0 <= 0) {
     self.kung_fu_exit_delay = 1;
+  }
 
   scripts\cp\zombies\zombies_spawning::increase_reserved_spawn_slots(1);
   self playlocalsound("chi_snake_skeleton_summon");
@@ -38,10 +39,11 @@ summon_skeleton_pet() {
 
   self.pet_skeleton = skeleton_spawner();
 
-  if(isDefined(self.pet_skeleton))
+  if(isDefined(self.pet_skeleton)) {
     scripts\cp\zombies\zombies_chi_meter::chi_meter_kill_decrement(250);
-  else
+  } else {
     scripts\cp\zombies\zombies_spawning::decrease_reserved_spawn_slots(1);
+  }
 
   self.kung_fu_exit_delay = 0;
   scripts\cp\powers\coop_powers::power_enablepower();
@@ -124,9 +126,9 @@ set_skeleton_attributes(var_0) {
   var_1 thread remove_zombie_from_turned_list_on_death();
   var_1 thread watch_zombie_collision();
 
-  if(isDefined(level.turned_zombies))
+  if(isDefined(level.turned_zombies)) {
     level.turned_zombies = scripts\engine\utility::array_add(level.turned_zombies, var_1);
-  else {
+  } else {
     level.turned_zombies = [];
     level.turned_zombies = scripts\engine\utility::array_add(level.turned_zombies, var_1);
   }
@@ -190,10 +192,11 @@ determine_skeleton_spawn_point(var_0) {
     var_3 = var_3 + 15;
   }
 
-  if(var_3 >= 360)
+  if(var_3 >= 360) {
     return self.origin;
-  else
+  } else {
     return var_2;
+  }
 }
 
 zombie_movement_update(var_0) {
@@ -234,17 +237,19 @@ determine_skeleton_mode(var_0) {
   var_0 endon("death");
   self endon("death");
 
-  if(distance2dsquared(self.origin, var_0.origin) >= 1048576)
+  if(distance2dsquared(self.origin, var_0.origin) >= 1048576) {
     return "move";
+  }
 
   var_1 = sortbydistance(level.spawned_enemies, var_0.origin);
 
-  if(!isDefined(var_1) || var_1.size == 0)
+  if(!isDefined(var_1) || var_1.size == 0) {
     return "move";
-  else if(distance2dsquared(var_1[0].origin, var_0.origin) >= 1048576)
+  } else if(distance2dsquared(var_1[0].origin, var_0.origin) >= 1048576) {
     return "move";
-  else
+  } else {
     return "fight";
+  }
 }
 
 snake_super_use(var_0) {
@@ -252,8 +257,9 @@ snake_super_use(var_0) {
   scripts\engine\utility::allow_melee(0);
   var_1 = 500;
 
-  if(self.chi_meter_amount - var_1 <= 0)
+  if(self.chi_meter_amount - var_1 <= 0) {
     self.kung_fu_exit_delay = 1;
+  }
 
   self playgestureviewmodel("ges_snake_melee_super", undefined, 1);
   thread play_snake_hand_fx();
@@ -296,8 +302,9 @@ snake_super_damage_nearby_enemies() {
       break;
     }
 
-    if(scripts\engine\utility::within_fov(self.origin, self getplayerangles(), var_5.origin, cos(90)))
+    if(scripts\engine\utility::within_fov(self.origin, self getplayerangles(), var_5.origin, cos(90))) {
       var_1[var_1.size] = var_5;
+    }
   }
 
   var_7 = 0;
@@ -306,8 +313,9 @@ snake_super_damage_nearby_enemies() {
     if(var_7 >= 3) {
       return;
     }
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       var_5 dodamage(var_5.maxhealth + 1000, self.origin, self, undefined, "MOD_EXPLOSIVE");
+    }
 
     var_7++;
   }

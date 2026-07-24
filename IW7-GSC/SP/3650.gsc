@@ -104,8 +104,9 @@ init() {
 _id_98B0() {}
 
 giveperks(var_0) {
-  foreach(var_2 in var_0)
-  giveperk(var_2);
+  foreach(var_2 in var_0) {
+    giveperk(var_2);
+  }
 }
 
 giveperk(var_0) {
@@ -117,16 +118,18 @@ removeperk(var_0) {
 }
 
 _id_83B7(var_0) {
-  foreach(var_2 in var_0)
-  _id_83B6(var_2);
+  foreach(var_2 in var_0) {
+    _id_83B6(var_2);
+  }
 }
 
 _id_83B6(var_0) {
   if(isDefined(level._id_12F75[var_0])) {
     var_1 = level._id_12F75[var_0];
 
-    while(_hasperk(var_1))
+    while(_hasperk(var_1)) {
       _unsetperk(var_1);
+    }
   }
 
   _setperk(var_0);
@@ -137,20 +140,23 @@ _id_E187(var_0) {
 }
 
 _setperk(var_0) {
-  if(!isDefined(self.perks[var_0]))
+  if(!isDefined(self.perks[var_0])) {
     self.perks[var_0] = 1;
-  else
+  } else {
     self.perks[var_0]++;
+  }
 
-  if(self.perks[var_0] == 1 && !isDefined(self.perksblocked[var_0]))
+  if(self.perks[var_0] == 1 && !isDefined(self.perksblocked[var_0])) {
     _id_13D2(var_0);
+  }
 }
 
 _id_13D2(var_0) {
   var_1 = level.perksetfuncs[var_0];
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self thread[[var_1]]();
+  }
 
   self setperk(var_0, !isDefined(level.scriptperks[var_0]));
 }
@@ -162,16 +168,18 @@ _unsetperk(var_0) {
   self.perks[var_0]--;
 
   if(self.perks[var_0] == 0) {
-    if(!isDefined(self.perksblocked[var_0]))
+    if(!isDefined(self.perksblocked[var_0])) {
       _id_1431(var_0);
+    }
 
     self.perks[var_0] = undefined;
   }
 }
 
 _id_1431(var_0) {
-  if(isDefined(level.perkunsetfuncs[var_0]))
+  if(isDefined(level.perkunsetfuncs[var_0])) {
     self thread[[level.perkunsetfuncs[var_0]]]();
+  }
 }
 
 _hasperk(var_0) {
@@ -183,8 +191,9 @@ _clearperks() {
     if(_id_12F9(var_2)) {
       continue;
     }
-    if(isDefined(level.perkunsetfuncs[var_2]))
+    if(isDefined(level.perkunsetfuncs[var_2])) {
       self[[level.perkunsetfuncs[var_2]]]();
+    }
 
     self.perks[var_2] = undefined;
   }
@@ -197,8 +206,9 @@ _id_11AB() {
     if(!_id_12F9(var_2)) {
       continue;
     }
-    if(isDefined(level.perkunsetfuncs[var_2]))
+    if(isDefined(level.perkunsetfuncs[var_2])) {
       self[[level.perkunsetfuncs[var_2]]]();
+    }
 
     self.perks[var_2] = undefined;
   }
@@ -207,8 +217,9 @@ _id_11AB() {
 }
 
 _id_12F9(var_0) {
-  if(scripts\engine\utility::array_contains(level._id_12F79, var_0))
+  if(scripts\engine\utility::array_contains(level._id_12F79, var_0)) {
     return 1;
+  }
 
   return 0;
 }
@@ -222,13 +233,15 @@ _id_805B(var_0) {
 }
 
 blockperkfunction(var_0) {
-  if(!isDefined(self.perksblocked[var_0]))
+  if(!isDefined(self.perksblocked[var_0])) {
     self.perksblocked[var_0] = 1;
-  else
+  } else {
     self.perksblocked[var_0]++;
+  }
 
-  if(self.perksblocked[var_0] == 1 && _hasperk(var_0))
+  if(self.perksblocked[var_0] == 1 && _hasperk(var_0)) {
     _id_1431(var_0);
+  }
 }
 
 unblockperkfunction(var_0) {
@@ -237,7 +250,8 @@ unblockperkfunction(var_0) {
   if(self.perksblocked[var_0] == 0) {
     self.perksblocked[var_0] = undefined;
 
-    if(_hasperk(var_0))
+    if(_hasperk(var_0)) {
       _id_13D2(var_0);
+    }
   }
 }

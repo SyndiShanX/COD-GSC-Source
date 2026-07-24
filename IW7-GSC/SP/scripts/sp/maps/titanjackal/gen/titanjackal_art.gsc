@@ -62,14 +62,17 @@ _id_4FE8(var_0, var_1, var_2) {
   var_8 = 1.08;
   var_9 = 2.0;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_8 = var_0;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_6 = var_1;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_7 = var_2;
+  }
 
   thread _id_0B0A::_id_583F(var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 }
@@ -102,8 +105,9 @@ _id_A30F() {
 }
 
 _id_51CF() {
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_11A5B() {

@@ -29,8 +29,9 @@ main() {
   setsaveddvar("player_isInZeroGLevel", 1);
   _id_FA53();
 
-  if(getDvar("createfx") != "")
+  if(getDvar("createfx") != "") {
     level thread _id_0F16::_id_88CA();
+  }
 
   _id_0B51::_id_B8CA();
   level._id_FD6E._id_E35D hide();
@@ -244,8 +245,9 @@ _id_104E3() {
   level.player disableweapons();
   level.player freezecontrols(1);
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     scripts\sp\specialist_MAYBE::_id_8E06();
+  }
 
   level._id_13EF6 scripts\sp\utility::_id_413D();
   level._id_13EF6.ignoreall = 1;
@@ -273,8 +275,9 @@ _id_104E3() {
   var_1 = scripts\sp\utility::_id_8200("ftl_destroyer", "targetname");
   var_1 thread scripts\sp\maps\sa_assassination\sa_assassination_infil::_id_748E();
 
-  while(!isDefined(level._id_2391))
+  while(!isDefined(level._id_2391)) {
     wait 0.02;
+  }
 
   level._id_2391 thread scripts\sp\maps\sa_assassination\sa_assassination_util::_id_2472();
   level._id_2391 thread scripts\sp\maps\sa_assassination\sa_assassination_util::_id_10109();
@@ -312,8 +315,9 @@ _id_F3C1(var_0) {
 }
 
 _id_104E2() {
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     scripts\sp\specialist_MAYBE::_id_8E06();
+  }
 }
 
 _id_9489() {
@@ -358,16 +362,18 @@ _id_946C() {
   level._id_13EF6.ignoreall = 1;
   var_0 = scripts\engine\utility::getStruct("hatch_panel_before", "targetname");
 
-  while(distance(level.player.origin, var_0.origin) > 512)
+  while(distance(level.player.origin, var_0.origin) > 512) {
     wait 0.2;
+  }
 
   scripts\sp\utility::_id_1034D("asn_plr_illgetusin");
   level._id_13EF6 scripts\sp\utility::_id_10346("asn_slt_copy");
   setmusicstate("mx_194_assassination_moods");
   thread scripts\sp\maps\sa_assassination\sa_assassination_infil::_id_944C();
 
-  while(!scripts\engine\utility::flag("hatch_used"))
+  while(!scripts\engine\utility::flag("hatch_used")) {
     wait 0.2;
+  }
 
   thread scripts\sp\maps\sa_assassination\sa_assassination_audio::_id_6624();
   scripts\engine\utility::flag_set("infil_zero_g_end");
@@ -450,8 +456,9 @@ _id_845B() {
   scripts\engine\utility::flag_set("flag_got_disguise");
   scripts\engine\utility::flag_set("flag_kill_tech_officer");
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_2683();
+  }
 
   level thread _id_0F16::_id_991E(1);
   thread _id_0F16::_id_88EC();
@@ -532,8 +539,9 @@ assist_onenduse() {
 }
 
 _id_E887() {
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_2683();
+  }
 
   thread _id_0F16::_id_3E3E("sa02_runout_pstart");
   thread _id_0F16::_id_8EA3();
@@ -584,8 +592,9 @@ _id_692B() {
 }
 
 _id_691E() {
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_2683();
+  }
 
   scripts\sp\maps\sa_assassination\sa_assassination_fx::_id_132C1(0);
   scripts\sp\maps\sa_assassination\sa_assassination_fx::_id_132BE(0);
@@ -661,8 +670,9 @@ _id_691E() {
   wait 1;
   level._id_EA2C scripts\sp\utility::_id_F3B5("r");
 
-  foreach(var_5 in level._id_68FE)
-  var_5 _id_0BB6::_id_39F0();
+  foreach(var_5 in level._id_68FE) {
+    var_5 _id_0BB6::_id_39F0();
+  }
 
   level._id_3965 _id_0BB6::_id_39F0();
   wait 1.5;
@@ -713,8 +723,9 @@ _id_691E() {
   scripts\sp\utility::_id_241F(0);
   scripts\engine\utility::delaythread(0.2, scripts\sp\utility::_id_2669, "aces");
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     _id_0BD9::_id_FA4F();
+  }
 
   scripts\sp\maps\sa_assassination\sa_assassination_exfil::_id_E7D5();
   level notify("dogfighting_ended");

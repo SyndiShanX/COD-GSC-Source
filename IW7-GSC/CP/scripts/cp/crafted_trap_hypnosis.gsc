@@ -69,10 +69,11 @@ give_hypnosis(var_0, var_1) {
   thread waitrestoreperks();
   self.iscarrying = 0;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 setcarryinghypnosis(var_0, var_1, var_2) {
@@ -97,8 +98,9 @@ setcarryinghypnosis(var_0, var_1, var_2) {
       return 1;
     }
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       var_3 = "force_cancel_placement";
+    }
 
     if(var_3 == "cancel_hypnosis" || var_3 == "force_cancel_placement") {
       if(!var_1 && var_3 == "cancel_hypnosis") {
@@ -107,10 +109,11 @@ setcarryinghypnosis(var_0, var_1, var_2) {
       scripts\engine\utility::allow_weapon(1);
       var_0 hypnosis_setcancelled();
 
-      if(var_3 != "force_cancel_placement")
+      if(var_3 != "force_cancel_placement") {
         thread watch_dpad();
-      else if(var_1)
+      } else if(var_1) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
+      }
 
       return 0;
     }
@@ -118,8 +121,9 @@ setcarryinghypnosis(var_0, var_1, var_2) {
     if(!var_0.canbeplaced) {
       continue;
     }
-    if(var_1)
+    if(var_1) {
       scripts\cp\utility::remove_crafted_item_from_inventory(self);
+    }
 
     var_0 hypnosis_setplaced(var_2, self);
     scripts\engine\utility::allow_weapon(1);
@@ -201,16 +205,19 @@ hypnosis_handledeath(var_0) {
   hypnosis_setinactive();
   self playSound("sentry_explode");
 
-  if(isDefined(self.charge_fx))
+  if(isDefined(self.charge_fx)) {
     self.charge_fx delete();
+  }
 
-  if(isDefined(self.zap_model))
+  if(isDefined(self.zap_model)) {
     self.zap_model delete();
+  }
 
   scripts\cp\utility::removefromtraplist();
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 hypnosis_setplaced(var_0, var_1) {
@@ -237,8 +244,9 @@ hypnosis_setplaced(var_0, var_1) {
 hypnosis_setcancelled() {
   self.carriedby forceusehintoff();
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.iscarrying = 0;
+  }
 
   self.carriedhypnosis delete();
   self delete();
@@ -316,8 +324,9 @@ hypnosis_sfx() {
   self playLoopSound("town_hypnosis_tone_head_crush_lp");
   wait 1.15;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self stoploopsound();
+  }
 
   thread _id_66A7();
 }
@@ -348,8 +357,9 @@ release_zombie_on_radio_death(var_0) {
   self endon("death");
   var_0 scripts\engine\utility::waittill_any("death", "explode");
 
-  if(isDefined(self.og_goalradius))
+  if(isDefined(self.og_goalradius)) {
     self.goalradius = self.og_goalradius;
+  }
 
   self.movemode = self.og_movemode;
   self.og_goalradius = undefined;
@@ -364,8 +374,9 @@ hypnosis_explode() {
   foreach(var_3, var_2 in var_0) {
     var_2 thread hypnosis_delayed_death(var_3, self);
 
-    if(isDefined(self.owner))
+    if(isDefined(self.owner)) {
       self.owner scripts\cp\cp_merits::processmerit("mt_dlc3_crafted_kills");
+    }
   }
 }
 
@@ -386,10 +397,11 @@ hypnosis_delayed_death(var_0, var_1) {
   wait(var_0 * 0.05);
   self.deathmethod = "hypnosis";
 
-  if(!scripts\engine\utility::is_true(self.is_crawler))
+  if(!scripts\engine\utility::is_true(self.is_crawler)) {
     scripts\asm\asm::asm_setstate("hypnosisdeath");
-  else
+  } else {
     scripts\asm\asm::asm_setstate("hypnosisdeathcrawling");
+  }
 }
 
 get_closest_attract_position(var_0, var_1) {
@@ -420,9 +432,9 @@ create_attract_positions(var_0, var_1, var_2, var_3) {
     if(!scripts\cp\loot::is_in_active_volume(var_10)) {
       continue;
     }
-    if(isDefined(var_10) && distancesquared(var_10, self.origin) > var_4)
+    if(isDefined(var_10) && distancesquared(var_10, self.origin) > var_4) {
       continue;
-    else {
+    } else {
       if(abs(var_10[2] - self.origin[2]) < 60) {
         var_11 = spawnStruct();
         var_11.origin = var_10;
@@ -443,9 +455,9 @@ create_attract_positions(var_0, var_1, var_2, var_3) {
     if(!scripts\cp\loot::is_in_active_volume(var_10)) {
       continue;
     }
-    if(isDefined(var_10) && distancesquared(var_10, self.origin) > var_4)
+    if(isDefined(var_10) && distancesquared(var_10, self.origin) > var_4) {
       continue;
-    else {
+    } else {
       if(abs(var_10[2] - self.origin[2]) < 60) {
         var_11 = spawnStruct();
         var_11.origin = var_10;

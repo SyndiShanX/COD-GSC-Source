@@ -27,26 +27,30 @@ _id_F391(var_0, var_1) {
   var_5 = level.player getweaponslistall();
 
   for(var_6 = 0; var_6 < var_5.size; var_6++) {
-    if(_id_12F5(var_5[var_6]))
+    if(_id_12F5(var_5[var_6])) {
       var_3 = strtok(var_5[var_6], "_");
+    }
 
-    if(_id_12F1(var_5[var_6]))
+    if(_id_12F1(var_5[var_6])) {
       var_4 = strtok(var_5[var_6], "_");
+    }
   }
 
   var_7 = _freeze_until_phototaken(var_1, 0.0, 1.0, -1, 1000);
   var_8 = 0;
 
   if(isDefined(var_3) && var_2[0] == var_3[0]) {
-    if(level._id_66AC > var_7)
+    if(level._id_66AC > var_7) {
       var_8 = 1;
+    }
 
     setomnvar("ui_power_recharge", int(var_7));
     setomnvar("ui_power_consume", var_8);
     level._id_66AC = var_7;
   } else if(isDefined(var_4) && var_2[0] == var_4[0]) {
-    if(level._id_66AB > var_7)
+    if(level._id_66AB > var_7) {
       var_8 = 1;
+    }
 
     setomnvar("ui_power_secondary_recharge", int(var_7));
     setomnvar("ui_power_secondary_consume", var_8);
@@ -61,18 +65,20 @@ _id_F392(var_0, var_1) {
   var_5 = level.player getweaponslistall();
 
   for(var_6 = 0; var_6 < var_5.size; var_6++) {
-    if(_id_12F5(var_5[var_6]))
+    if(_id_12F5(var_5[var_6])) {
       var_3 = strtok(var_5[var_6], "_");
+    }
 
-    if(_id_12F1(var_5[var_6]))
+    if(_id_12F1(var_5[var_6])) {
       var_4 = strtok(var_5[var_6], "_");
+    }
   }
 
-  if(isDefined(var_3) && var_2[0] == var_3[0])
+  if(isDefined(var_3) && var_2[0] == var_3[0]) {
     setomnvar("ui_power_disabled", var_1);
-  else if(isDefined(var_4) && var_2[0] == var_4[0])
+  } else if(isDefined(var_4) && var_2[0] == var_4[0]) {
     setomnvar("ui_power_secondary_disabled", var_1);
-  else {}
+  } else {}
 }
 
 _id_11456(var_0) {
@@ -167,8 +173,9 @@ _id_11B9() {
     }
 
     if(var_3 != var_1) {
-      if(var_3 > var_1)
+      if(var_3 > var_1) {
         level.player notify("current_primary_ammo");
+      }
 
       var_1 = var_3;
     }
@@ -183,8 +190,9 @@ _id_1270(var_0) {
   foreach(var_3 in var_0) {
     var_4 = level.player _meth_854C(var_3);
 
-    if(var_4 != "scriptoffhand")
+    if(var_4 != "scriptoffhand") {
       var_1 = scripts\engine\utility::array_add(var_1, var_3);
+    }
   }
 
   if(isDefined(level.player._id_1180A) && level.player._id_1180A == 1) {
@@ -205,8 +213,9 @@ _id_1270(var_0) {
       var_1 = scripts\engine\utility::array_remove(var_1, level.player._id_AA2B);
     }
   } else if(level.player._id_1180B != "none") {
-    if(level.player._id_1180B != level.player.curobjid && level.player._id_1180B != level.player._id_4B21)
+    if(level.player._id_1180B != level.player.curobjid && level.player._id_1180B != level.player._id_4B21) {
       var_1 = scripts\engine\utility::array_remove(var_1, level.player._id_1180B);
+    }
   }
 
   return var_1;
@@ -255,11 +264,13 @@ _id_1271() {
     var_17 = 0;
 
     for(var_18 = 0; var_18 < var_9.size; var_18++) {
-      if(_id_12F5(var_9[var_18]))
+      if(_id_12F5(var_9[var_18])) {
         var_10 = var_9[var_18];
+      }
 
-      if(_id_12F1(var_9[var_18]))
+      if(_id_12F1(var_9[var_18])) {
         var_11 = var_9[var_18];
+      }
     }
 
     var_12 = level.player._id_110BD;
@@ -287,12 +298,13 @@ _id_1271() {
       level.player notify("stored_secondary_equipment_change", var_13);
     }
 
-    if(var_14 == 1 || var_15 == 1)
+    if(var_14 == 1 || var_15 == 1) {
       level.player notify("equipment_change");
+    }
 
-    if(var_10 == "")
+    if(var_10 == "") {
       _id_11A6();
-    else {
+    } else {
       var_19 = level.player getammocount(var_10);
 
       if(var_14 == 0 && var_19 != var_3) {
@@ -303,9 +315,9 @@ _id_1271() {
       _id_1434(var_10, var_19, var_14);
     }
 
-    if(var_11 == "")
+    if(var_11 == "") {
       _id_11A5();
-    else {
+    } else {
       var_19 = level.player getammocount(var_11);
 
       if(var_15 == 0 && var_19 != var_4) {
@@ -316,15 +328,17 @@ _id_1271() {
       _id_1433(var_11, var_19, var_15);
     }
 
-    if(var_12 == "")
+    if(var_12 == "") {
       _id_11A8();
-    else
+    } else {
       _id_1436(var_12, level.player._id_110BE, var_16);
+    }
 
-    if(var_13 == "")
+    if(var_13 == "") {
       _id_11A7();
-    else
+    } else {
       _id_1435(var_13, level.player._id_110BB, var_17);
+    }
 
     var_0 = var_9;
     var_1 = var_10;
@@ -342,11 +356,13 @@ _id_142E(var_0, var_1) {
   var_5 = 0;
 
   for(var_6 = 0; var_6 < var_0.size; var_6++) {
-    if(_id_12F5(var_0[var_6]))
+    if(_id_12F5(var_0[var_6])) {
       var_4 = 1;
+    }
 
-    if(_id_12F1(var_0[var_6]))
+    if(_id_12F1(var_0[var_6])) {
       var_5 = 1;
+    }
   }
 
   if(level.player._id_110C0 && var_4 == 0 && level.player._id_110BD != "") {
@@ -402,8 +418,9 @@ _id_142E(var_0, var_1) {
       continue;
     }
 
-    if(_id_12F1(var_8))
+    if(_id_12F1(var_8)) {
       var_11 = var_8;
+    }
   }
 
   if(var_2.size > 0) {
@@ -476,8 +493,9 @@ _id_142E(var_0, var_1) {
 }
 
 _id_1434(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   setomnvar("ui_power_num_charges", int(var_1));
   setomnvar("ui_power_id", int(_id_12A4(var_0).id));
@@ -492,8 +510,9 @@ _id_1434(var_0, var_1, var_2) {
 _id_1436(var_0, var_1, var_2) {
   setomnvar("ui_power_stored_show", 1);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   setomnvar("ui_power_stored_num_charges", int(var_1));
   setomnvar("ui_power_id_stored", int(_id_12A4(var_0).id));
@@ -503,8 +522,9 @@ _id_1436(var_0, var_1, var_2) {
 }
 
 _id_1433(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   setomnvar("ui_power_secondary_num_charges", int(var_1));
   setomnvar("ui_power_id_secondary", int(_id_12A4(var_0).id));
@@ -519,8 +539,9 @@ _id_1433(var_0, var_1, var_2) {
 _id_1435(var_0, var_1, var_2) {
   setomnvar("ui_power_secondary_stored_show", 1);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   setomnvar("ui_power_secondary_stored_num_charges", int(var_1));
   setomnvar("ui_power_id_secondary_stored", int(_id_12A4(var_0).id));
@@ -588,8 +609,9 @@ _id_1401() {
   var_0 = scripts\sp\utility::_id_7B8C();
   var_1 = self getcurrentprimaryweapon();
 
-  if(var_0 != "safe" && var_1 != "iw7_gunless")
+  if(var_0 != "safe" && var_1 != "iw7_gunless") {
     setomnvar("ui_hide_weapon_info", 0);
+  }
 
   self notify("cancel_hide_hud");
   setomnvar("ui_hud_hidden_by_timer", 0);
@@ -611,8 +633,9 @@ _id_12E0() {
   var_0 = getomnvar("ui_hide_hud");
   var_1 = getomnvar("ui_hide_weapon_info");
 
-  while(getomnvar("ui_hide_hud") == var_0 && getomnvar("ui_hide_weapon_info") == var_1)
+  while(getomnvar("ui_hide_hud") == var_0 && getomnvar("ui_hide_weapon_info") == var_1) {
     scripts\engine\utility::waitframe();
+  }
 
   self notify("hide_hud_omnvar_changed");
 }
@@ -621,11 +644,13 @@ _id_11A0() {
   self endon("death");
 
   for(;;) {
-    if(self adsButtonPressed())
+    if(self adsButtonPressed()) {
       self notify("aim");
+    }
 
-    if(self meleeButtonPressed())
+    if(self meleeButtonPressed()) {
       self notify("melee");
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -642,8 +667,9 @@ _id_1295(var_0) {
   if(issubstr(var_2, "up1") || issubstr(var_2, "up2")) {
     var_3 = "";
 
-    for(var_4 = 0; var_4 < var_1.size - 1; var_4++)
+    for(var_4 = 0; var_4 < var_1.size - 1; var_4++) {
       var_3 = var_3 + var_1[var_4];
+    }
 
     return var_3;
   } else

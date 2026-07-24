@@ -29,8 +29,9 @@ _id_2167(var_0, var_1, var_2, var_3) {
     }
     if(scripts\sp\utility::_id_65DB("using_arm_device") || isDefined(var_3) && var_5 == var_3) {
       if(var_4 == 1 && (isDefined(var_2) || isDefined(var_3))) {
-        if(isDefined(var_2))
+        if(isDefined(var_2)) {
           level thread[[var_2]]();
+        }
 
         var_4 = 0;
         continue;

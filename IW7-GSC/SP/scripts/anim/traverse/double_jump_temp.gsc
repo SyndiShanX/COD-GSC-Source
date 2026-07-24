@@ -11,8 +11,9 @@ main() {
     self endon("killanimscript");
     self endon("death");
 
-    for(;;)
+    for(;;) {
       wait 0.05;
+    }
 
     return;
   }

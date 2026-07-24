@@ -142,11 +142,13 @@ _id_CD64() {
   setsaveddvar("bg_cinematicCanPause", "1");
   cinematicingame("titan_hud_kotch_pip_01_full");
 
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     scripts\engine\utility::waitframe();
+  }
 
-  while(iscinematicplaying())
+  while(iscinematicplaying()) {
     scripts\engine\utility::waitframe();
+  }
 
   stopcinematicingame();
 }
@@ -274,11 +276,13 @@ _id_D1FE() {
   var_0 = getEnt("elevator_door", "targetname");
   var_1 = getEnt("elevator_door_col", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 delete();
+  }
 
   var_2 = scripts\engine\utility::getStruct("bunker_exit", "targetname");
   var_3 = getEnt("ai_exit_door_col", "targetname");
@@ -323,8 +327,9 @@ _id_D1FE() {
   var_8 playSound("scn_titan_elevator_gate_close");
   var_4 scripts\sp\anim::_id_1F2C(var_0, "elevator_door_close");
 
-  foreach(var_10 in var_0)
-  var_10 linkTo(var_4);
+  foreach(var_10 in var_0) {
+    var_10 linkTo(var_4);
+  }
 
   level._id_2429 linkTo(var_4);
   var_3 notsolid();
@@ -349,13 +354,15 @@ _id_D1FE() {
   var_13 = getaiarray("axis");
 
   foreach(var_15 in var_12) {
-    if(isDefined(var_15) && isalive(var_15))
+    if(isDefined(var_15) && isalive(var_15)) {
       var_15 delete();
+    }
   }
 
   foreach(var_15 in var_13) {
-    if(isDefined(var_15) && isalive(var_15))
+    if(isDefined(var_15) && isalive(var_15)) {
       var_15 delete();
+    }
   }
 
   level._id_2429 thread _id_0C4C::_id_19BE();
@@ -391,11 +398,13 @@ _id_CD65() {
   setsaveddvar("bg_cinematicCanPause", "1");
   cinematicingame("titan_hud_kotch_pip_02_full");
 
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     scripts\engine\utility::waitframe();
+  }
 
-  while(iscinematicplaying())
+  while(iscinematicplaying()) {
     scripts\engine\utility::waitframe();
+  }
 
   stopcinematicingame();
 }
@@ -403,8 +412,9 @@ _id_CD65() {
 _id_7885() {
   var_0 = [];
 
-  for(var_1 = 1; var_1 < 6; var_1++)
+  for(var_1 = 1; var_1 < 6; var_1++) {
     var_0[var_1] = _id_F958("elevator_panel_0" + var_1);
+  }
 
   return var_0;
 }
@@ -473,8 +483,9 @@ _id_3273() {
   var_1 = getEntArray("script_vehicle_capitalship_freighter_small", "classname");
 
   foreach(var_3 in var_1) {
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_3 delete();
+    }
   }
 
   thread _id_D1FF(var_0);
@@ -577,15 +588,17 @@ _id_CBEB() {
 _id_191C() {
   var_0 = getaiarray("allies", "axis");
 
-  foreach(var_2 in var_0)
-  var_2.ignoreall = 1;
+  foreach(var_2 in var_0) {
+    var_2.ignoreall = 1;
+  }
 }
 
 _id_191D() {
   var_0 = getaiarray("allies", "axis");
 
-  foreach(var_2 in var_0)
-  var_2.ignoreall = 0;
+  foreach(var_2 in var_0) {
+    var_2.ignoreall = 0;
+  }
 }
 
 _id_D23D() {
@@ -601,8 +614,9 @@ _id_D23D() {
     scripts\engine\utility::delaythread(5.0, ::_id_C82D);
     wait 5.0;
 
-    foreach(var_3 in var_1)
-    var_3 thread _id_0B77::_id_12799();
+    foreach(var_3 in var_1) {
+      var_3 thread _id_0B77::_id_12799();
+    }
 
     _id_13766(4, 2.0, 10.0);
     scripts\sp\utility::_id_15F5("ow_enemy_dropship1");
@@ -709,8 +723,9 @@ _id_40A2() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-    if(isalive(var_2))
+    if(isalive(var_2)) {
       var_2 _meth_81D0();
+    }
 
     wait(randomfloatrange(0.4, 1));
   }
@@ -735,8 +750,9 @@ _id_A0DF() {
   level._id_B33E scripts\sp\utility::_id_1160F(getnode("marine1_overwatch_node", "targetname"));
   var_0 = getnodearray("redshirt_overwatch_node", "targetname");
 
-  foreach(var_3, var_2 in level._id_DE2F)
-  var_2 scripts\sp\utility::_id_1160F(var_0[var_3]);
+  foreach(var_3, var_2 in level._id_DE2F) {
+    var_2 scripts\sp\utility::_id_1160F(var_0[var_3]);
+  }
 
   foreach(var_5 in level._id_10AC8) {
     var_5 scripts\sp\utility::_id_61C7();
@@ -760,8 +776,9 @@ _id_A0DB() {
   level.player notify("jackal_boss_start");
   var_0 = getaiarray("axis");
 
-  foreach(var_2 in var_0)
-  var_2 scripts\sp\utility::_id_F39C(undefined);
+  foreach(var_2 in var_0) {
+    var_2 scripts\sp\utility::_id_F39C(undefined);
+  }
 
   wait 0.5;
 }
@@ -841,9 +858,9 @@ _id_A0E0() {
     var_1 thread _id_A0D7();
     var_3 = var_1 scripts\engine\utility::waittill_any_return("jackal_boss_fired_at", "jackal_boss_fire_at_allies_timeout");
 
-    if(var_3 == "jackal_boss_fired_at")
+    if(var_3 == "jackal_boss_fired_at") {
       var_1 _id_A0D8(0);
-    else if(var_3 == "jackal_boss_fire_at_allies_timeout") {
+    } else if(var_3 == "jackal_boss_fire_at_allies_timeout") {
       var_2 = int(clamp(var_2 + 1, 1, 5));
       var_1 _id_A0DE(var_2);
       var_1 _id_A0D8(1);
@@ -905,8 +922,9 @@ _id_A0D6() {
   _id_0BDC::_id_19AE("dont_shoot");
   var_0 = [level._id_C47F, level._id_2429, level._id_B33B, level._id_B33E];
 
-  foreach(var_2 in var_0)
-  var_2 scripts\sp\utility::_id_F415(1);
+  foreach(var_2 in var_0) {
+    var_2 scripts\sp\utility::_id_F415(1);
+  }
 
   for(;;) {
     var_4 = randomint(var_0.size);
@@ -935,8 +953,9 @@ _id_A0D8(var_0) {
   _id_0BDC::_id_19B5(level.player._id_A423);
   var_1 = [level._id_C47F, level._id_2429, level._id_B33B, level._id_B33E];
 
-  foreach(var_3 in var_1)
-  var_3 scripts\sp\utility::_id_F415(0);
+  foreach(var_3 in var_1) {
+    var_3 scripts\sp\utility::_id_F415(0);
+  }
 
   wait 0.3;
 
@@ -984,10 +1003,11 @@ _id_A0D3() {
   for(;;) {
     self waittill("damage", var_0, var_1);
 
-    if(isDefined(var_1) && isDefined(var_1.classname))
+    if(isDefined(var_1) && isDefined(var_1.classname)) {
       iprintlnbold("health: " + self.health + ", damage: " + var_0 + ", " + var_1.classname);
-    else
+    } else {
       iprintlnbold("health: " + self.health + ", damage: " + var_0);
+    }
 
     wait 0.05;
   }
@@ -1036,8 +1056,9 @@ _id_A0DC(var_0) {
   self endon("stop_maintaining_health");
 
   for(;;) {
-    if(self.health < var_0)
+    if(self.health < var_0) {
       self.health = var_0;
+    }
 
     wait 0.05;
   }
@@ -1055,8 +1076,9 @@ _id_1A59() {
   level._id_B33E scripts\sp\utility::_id_1160F(getnode("marine1_overwatch_node", "targetname"));
   var_0 = getnodearray("redshirt_overwatch_node", "targetname");
 
-  foreach(var_3, var_2 in level._id_DE2F)
-  var_2 scripts\sp\utility::_id_1160F(var_0[var_3]);
+  foreach(var_3, var_2 in level._id_DE2F) {
+    var_2 scripts\sp\utility::_id_1160F(var_0[var_3]);
+  }
 
   foreach(var_5 in level._id_10AC8) {
     var_5 scripts\sp\utility::_id_61C7();
@@ -1085,8 +1107,9 @@ _id_1A58() {
 _id_6FEA(var_0) {
   wait 1;
 
-  foreach(var_2 in var_0)
-  var_2 _id_0BDC::_id_6B4C("fly", 1);
+  foreach(var_2 in var_0) {
+    var_2 _id_0BDC::_id_6B4C("fly", 1);
+  }
 }
 
 _id_A1CF(var_0) {
@@ -1112,8 +1135,9 @@ _id_50BD(var_0, var_1) {
 
 _id_1F7A(var_0, var_1, var_2) {
   foreach(var_4 in var_0) {
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       thread _id_1F79(var_4, var_1, var_2);
+    }
   }
 }
 
@@ -1128,9 +1152,9 @@ _id_1F79(var_0, var_1, var_2) {
   var_3.origin = self.origin;
   var_3.angles = self.angles;
 
-  if(!var_2)
+  if(!var_2) {
     var_3 scripts\sp\anim::_id_1F35(var_0, var_1);
-  else {
+  } else {
     var_3 thread scripts\sp\anim::_id_1F35(var_0, var_1);
 
     for(;;) {
@@ -1191,8 +1215,9 @@ _id_3792() {
   level._id_B33E scripts\sp\utility::_id_1160F(getnode("marine1_overwatch_node", "targetname"));
   var_4 = getnodearray("redshirt_overwatch_node", "targetname");
 
-  foreach(var_7, var_6 in level._id_DE2F)
-  var_6 scripts\sp\utility::_id_1160F(var_4[var_7]);
+  foreach(var_7, var_6 in level._id_DE2F) {
+    var_6 scripts\sp\utility::_id_1160F(var_4[var_7]);
+  }
 
   thread _id_3B80();
   scripts\engine\utility::delaythread(1, ::_id_12BB8);
@@ -1275,18 +1300,21 @@ _id_E397() {
 }
 
 _id_EA7B(var_0) {
-  if(var_0._id_1FBB == "plyr_jackal_mons_arrival")
+  if(var_0._id_1FBB == "plyr_jackal_mons_arrival") {
     thread _id_D180(var_0);
+  }
 
   scripts\sp\anim::_id_1F35(var_0, "salter_arrival");
 }
 
 _id_EA34(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait(var_0);
+  }
 
-  if(!isDefined(level._id_EAD6))
+  if(!isDefined(level._id_EAD6)) {
     scripts\sp\maps\titan\titan_code::_id_10732();
+  }
 
   level._id_EAD6 _id_0BDC::_id_19A0();
   level._id_EAD6 thread _id_0C1A::_id_A3B6("fly", 1.0);
@@ -1304,8 +1332,9 @@ _id_EA34(var_0) {
 #using_animtree("jackal");
 
 _id_CF75(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait(var_0);
+  }
 
   var_1 = scripts\sp\utility::_id_8201("ow_bunker_ally_jackal_anim", "targetname");
   var_2 = var_1[0] scripts\sp\utility::_id_10808();
@@ -1358,8 +1387,9 @@ _id_C831(var_0) {
   for(;;) {
     var_1 waittill("trigger", var_2);
 
-    if(isDefined(level.player) && level.player istouching(var_1))
+    if(isDefined(level.player) && level.player istouching(var_1)) {
       level.player dodamage(10000, level.player.origin);
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -1377,8 +1407,9 @@ _id_A22C() {
 }
 
 _id_2F2A() {
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 _id_D180(var_0) {

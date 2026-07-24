@@ -17,8 +17,9 @@ blackholemineexplode() {}
 blackholegrenadeused(var_0, var_1) {
   var_0 endon("death");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_2 = createkillcam(var_0);
   var_0.killcament = var_2;
@@ -29,8 +30,9 @@ blackholegrenadeused(var_0, var_1) {
   if(!var_1) {
     var_0 waittill("blackhole_grenade_stuck");
 
-    if(!isDefined(var_0))
+    if(!isDefined(var_0)) {
       return;
+    }
   }
 
   var_0.state = 1;
@@ -44,8 +46,9 @@ blackholegrenadeused(var_0, var_1) {
   thread _id_12E56(var_0);
   var_0 waittill("blackhole_grenade_finished");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return;
+  }
 }
 
 _id_2B3E(var_0) {
@@ -71,8 +74,9 @@ _id_12EB1(var_0, var_1, var_2) {
   self endon("disconnect");
   var_0 endon("death");
 
-  if(!var_2)
+  if(!var_2) {
     var_0 waittill("missile_stuck", var_3);
+  }
 
   if(var_0 checkvalidposition(self)) {
     self notify("powers_blackholeGrenade_used", 1);
@@ -95,34 +99,41 @@ _id_12EB1(var_0, var_1, var_2) {
 }
 
 checkvalidposition(var_0) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return 0;
+  }
 
   var_1 = var_0 findpath(var_0.origin, self.origin);
 
-  if(var_1.size < 1)
+  if(var_1.size < 1) {
     return 0;
-  else if(distance(var_1[var_1.size - 1], self.origin) >= 12)
+  } else if(distance(var_1[var_1.size - 1], self.origin) >= 12) {
     return 0;
+  }
 
   var_2 = getclosestpointonnavmesh(self.origin);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return 0;
-
-  if(distance(self.origin, var_2) > 18)
-    return 0;
-
-  if(isDefined(level.active_volume_check)) {
-    if(!self[[level.active_volume_check]](var_2))
-      return 0;
   }
 
-  if(!scripts\cp\cp_weapon::isinvalidzone(self.origin, level.invalid_spawn_volume_array, var_0, undefined, 1))
+  if(distance(self.origin, var_2) > 18) {
     return 0;
+  }
 
-  if(positionwouldtelefrag(self.origin))
+  if(isDefined(level.active_volume_check)) {
+    if(!self[[level.active_volume_check]](var_2)) {
+      return 0;
+    }
+  }
+
+  if(!scripts\cp\cp_weapon::isinvalidzone(self.origin, level.invalid_spawn_volume_array, var_0, undefined, 1)) {
     return 0;
+  }
+
+  if(positionwouldtelefrag(self.origin)) {
+    return 0;
+  }
 
   return 1;
 }
@@ -200,10 +211,11 @@ suck_zombie(var_0, var_1, var_2) {
   var_1 endon("death");
   thread killzombieongrenadedeath(var_1);
 
-  if(scripts\engine\utility::is_true(var_2))
+  if(scripts\engine\utility::is_true(var_2)) {
     var_3 = var_1.origin;
-  else
+  } else {
     var_3 = var_1.origin + (0, 0, 32);
+  }
 
   self.scripted_mode = 1;
   wait(randomfloatrange(0, 1));
@@ -223,8 +235,9 @@ suck_zombie(var_0, var_1, var_2) {
   self.anchor moveTo(var_3, 0.5);
   wait 0.5;
 
-  if(soundexists("trap_blackhole_body_gore"))
+  if(soundexists("trap_blackhole_body_gore")) {
     playsoundatpos(self.origin, "trap_blackhole_body_gore");
+  }
 
   playFX(level._effect["blackhole_trap_death"], self.origin, anglesToForward((-90, 0, 0)), anglestoup((-90, 0, 0)));
   self.anchor delete();
@@ -240,8 +253,9 @@ killzombieongrenadedeath(var_0) {
   self.nocorpse = 1;
   self.ignoreall = 1;
 
-  if(isDefined(self.anchor))
+  if(isDefined(self.anchor)) {
     self.anchor delete();
+  }
 
   self dodamage(self.health + 1000, var_1, var_2, var_2, "MOD_EXPLOSIVE", "blackhole_grenade_mp");
 }
@@ -312,8 +326,9 @@ _id_13A5E() {
 }
 
 _id_DA65(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.owner) && var_0 != self.owner)
+  if(isDefined(self.owner) && var_0 != self.owner) {
     var_0 notify("destroyed_equipment");
+  }
 
   playsoundatpos(self.grenade.origin, "mp_killstreak_disappear");
   self.grenade delete();
@@ -323,8 +338,9 @@ _id_DA65(var_0, var_1, var_2, var_3) {
 _id_DA66(var_0, var_1, var_2, var_3, var_4) {
   var_5 = var_3;
 
-  if(scripts\cp\powers\coop_phaseshift::isentityphaseshifted(var_0))
+  if(scripts\cp\powers\coop_phaseshift::isentityphaseshifted(var_0)) {
     return 0;
+  }
 
   return var_5;
 }
@@ -363,8 +379,9 @@ spawnblackholephysicsvolume(var_0, var_1, var_2, var_3) {
     }
   }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_5 delete();
+  }
 
   level._id_2ABC[var_6] = var_4;
   var_4 thread _id_139AD();
@@ -421,11 +438,13 @@ cleanuponparentdeath(var_0, var_1) {
   self notify("cleanupOnParentDeath");
   self endon("cleanupOnParentDeath");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 waittill("death");
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
   self delete();
 }

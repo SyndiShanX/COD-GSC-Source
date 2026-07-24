@@ -123,8 +123,9 @@ _id_1FA7() {
 }
 
 _id_B7FD(var_0) {
-  if(!isDefined(level._id_B7FE))
+  if(!isDefined(level._id_B7FE)) {
     level._id_B7FE = 1;
+  }
 
   var_1 = scripts\engine\utility::getStruct("cargobay_door_hit_" + level._id_B7FE, "targetname");
   var_2 = scripts\engine\utility::spawn_tag_origin(var_1.origin);
@@ -132,8 +133,9 @@ _id_B7FD(var_0) {
   level._id_B7FE++;
   wait 5;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 }
 
 #using_animtree("generic_human");
@@ -351,8 +353,9 @@ _id_23F4() {
   level._id_D7C4 = 1;
   thread scripts\sp\maps\sa_empambush\sa_empambush_audio::_id_13EB7();
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     scripts\sp\specialist_MAYBE::_id_F3FF(1);
+  }
 }
 
 _id_F8C4() {
@@ -403,8 +406,9 @@ _id_F95A() {
 _id_615E() {
   thread _id_2F4F();
 
-  if(isDefined(level._id_6163))
+  if(isDefined(level._id_6163)) {
     scripts\engine\utility::flag_wait("made_it_across");
+  }
 
   scripts\engine\utility::flag_set("emp_intro_begin");
   scripts\sp\maps\sa_empambush\sa_empambush_fx::_id_132C0(1);
@@ -435,8 +439,9 @@ _id_1136E() {
 }
 
 _id_266D(var_0) {
-  if(!scripts\engine\utility::flag("player_too_close_emp_enemies_alert"))
+  if(!scripts\engine\utility::flag("player_too_close_emp_enemies_alert")) {
     scripts\sp\utility::_id_2669(var_0);
+  }
 }
 
 #using_animtree("script_model");
@@ -474,8 +479,9 @@ _id_6148() {
   var_3 = scripts\sp\utility::_id_22CD("emp_dropship_enemies", 1);
   scripts\engine\utility::waitframe();
 
-  foreach(var_5 in var_3)
-  var_1[var_1.size] = var_5;
+  foreach(var_5 in var_3) {
+    var_1[var_1.size] = var_5;
+  }
 
   level._id_C6EA thread scripts\sp\anim::_id_1F2C(var_1, "emp_dropship_unload");
   var_0 thread _id_0BBD::_id_5DB9("back");
@@ -497,14 +503,17 @@ _id_6148() {
   _id_266D("engine_guys3");
   var_2 waittillmatch("single anim", "end");
 
-  if(isDefined(level._id_614A))
+  if(isDefined(level._id_614A)) {
     level._id_614A unlink();
+  }
 
-  if(isDefined(level._id_614B))
+  if(isDefined(level._id_614B)) {
     level._id_614B unlink();
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 }
 
 _id_88DF() {
@@ -514,11 +523,13 @@ _id_88DF() {
   self endon(self._id_ECE7 + "_alert");
   level endon(self._id_ECE7 + "_alert");
 
-  if(self._id_EEC9 == 10)
+  if(self._id_EEC9 == 10) {
     self._id_1FBB = "dropship_enemy_1";
+  }
 
-  if(self._id_EEC9 == 11)
+  if(self._id_EEC9 == 11) {
     self._id_1FBB = "dropship_enemy_2";
+  }
 
   if(self._id_EEC9 == 12) {
     self._id_1FBB = "dropship_enemy_3";
@@ -530,11 +541,13 @@ _id_88DF() {
     self._id_482E = level._id_614B;
   }
 
-  if(self.script_noteworthy == "emp_dropship_guys")
+  if(self.script_noteworthy == "emp_dropship_guys") {
     thread _id_88E1();
+  }
 
-  if(self.script_noteworthy == "emp_dropship_engine_guys")
+  if(self.script_noteworthy == "emp_dropship_engine_guys") {
     thread _id_88E0();
+  }
 
   self linkTo(level._id_C6EA, "tag_origin");
   scripts\engine\utility::flag_wait_all("emp_dropship_unload_ready", "emp_dropship_start_unload");
@@ -542,17 +555,21 @@ _id_88DF() {
   self.allowdeath = 1;
   wait 14;
 
-  if(self._id_EEC9 == 10)
+  if(self._id_EEC9 == 10) {
     self._id_482E = level._id_614A;
+  }
 
-  if(self._id_EEC9 == 11)
+  if(self._id_EEC9 == 11) {
     self._id_482E = level._id_614B;
+  }
 
-  if(self._id_EEC9 == 12)
+  if(self._id_EEC9 == 12) {
     self._id_482E = undefined;
+  }
 
-  if(self._id_EEC9 == 13)
+  if(self._id_EEC9 == 13) {
     self._id_482E = undefined;
+  }
 
   self waittillmatch("single anim", "end");
   var_0 = self._id_1FBB + "_done";
@@ -572,15 +589,17 @@ _id_88DF() {
   self notify("dropship_anim_done");
 
   if(self._id_EEC9 == 12 || self._id_EEC9 == 13) {
-    if(!scripts\engine\utility::flag("emp_dropship_engine_guys_at_engines"))
+    if(!scripts\engine\utility::flag("emp_dropship_engine_guys_at_engines")) {
       scripts\engine\utility::flag_set("emp_dropship_engine_guys_at_engines");
+    }
   }
 
   if(self.script_noteworthy == "emp_dropship_guys") {
     var_1 = getEnt("emp_dropship_guys_volume", "targetname");
 
-    if(self._id_EEC9 == 10)
+    if(self._id_EEC9 == 10) {
       var_1 = getEnt("emp_dropship_guys_top_volume", "targetname");
+    }
 
     self _meth_82F1(var_1);
   }
@@ -592,11 +611,13 @@ _id_12BA9() {
   thread _id_0F16::_id_6F40();
   level waittill("emp_planting");
 
-  if(isDefined(self.clip))
+  if(isDefined(self.clip)) {
     self.clip delete();
+  }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_DC9F(var_0, var_1) {
@@ -867,12 +888,13 @@ _id_13942() {
 _id_113D8() {}
 
 _id_6480() {
-  if(!isDefined(level._id_876E))
+  if(!isDefined(level._id_876E)) {
     level._id_876E = [];
+  }
 
   _id_113D8();
   var_0 = self.script_noteworthy;
-  level._id_876E[self.script_noteworthy] = scripts\engine\utility::add_to_array(level._id_876E[self.script_noteworthy], self);
+  level._id_876E[self.script_noteworthy] = ::scripts\engine\utility::add_to_array(level._id_876E[self.script_noteworthy], self);
   thread _id_13942();
   level waittill(self.script_noteworthy + "_damaged");
   wait 1;
@@ -883,21 +905,23 @@ _id_6480() {
   self.ignoreall = 0;
   self waittill("death");
   level notify(var_0 + "_dead");
-  level._id_876E[var_0] = scripts\sp\utility::array_removedeadvehicles(level._id_876E[var_0]);
+  level._id_876E[var_0] = ::scripts\sp\utility::array_removedeadvehicles(level._id_876E[var_0]);
 
-  if(level._id_876E[var_0].size == 0)
+  if(level._id_876E[var_0].size == 0) {
     level notify("all_" + var_0 + "_dead");
+  }
 }
 
 _id_88E6() {
   self endon("death");
 
-  if(!isDefined(level._id_876E))
+  if(!isDefined(level._id_876E)) {
     level._id_876E = [];
+  }
 
   self._id_C010 = 1;
-  level._id_876E[self.script_noteworthy] = scripts\engine\utility::add_to_array(level._id_876E[self.script_noteworthy], self);
-  level._id_876E[self._id_ECE7] = scripts\engine\utility::add_to_array(level._id_876E[self._id_ECE7], self);
+  level._id_876E[self.script_noteworthy] = ::scripts\engine\utility::add_to_array(level._id_876E[self.script_noteworthy], self);
+  level._id_876E[self._id_ECE7] = ::scripts\engine\utility::add_to_array(level._id_876E[self._id_ECE7], self);
   self.health = 1;
   scripts\engine\utility::delaythread(0.5, ::_id_13678);
   thread _id_135C0();
@@ -910,19 +934,23 @@ _id_88E6() {
   scripts\sp\utility::_id_57D6();
   wait 0.5;
 
-  if(!scripts\engine\utility::flag("emp_dropship_engine_guys_at_engines"))
+  if(!scripts\engine\utility::flag("emp_dropship_engine_guys_at_engines")) {
     level notify(self.script_noteworthy + "_alert");
+  }
 
-  if(isDefined(self._id_4BC2))
+  if(isDefined(self._id_4BC2)) {
     self._id_4BC2 notify("stop_loop");
+  }
 
   _id_11057(self);
 
-  if(isDefined(self._id_13CF3))
+  if(isDefined(self._id_13CF3)) {
     self._id_13CF3 delete();
+  }
 
-  if(isDefined(self._id_13CF4))
+  if(isDefined(self._id_13CF4)) {
     self._id_13CF4 delete();
+  }
 
   scripts\sp\utility::anim_stopanimScripted();
   scripts\engine\utility::waitframe();
@@ -933,11 +961,12 @@ _id_88E6() {
 _id_88E1() {
   self endon("death");
 
-  if(!isDefined(level._id_876E))
+  if(!isDefined(level._id_876E)) {
     level._id_876E = [];
+  }
 
-  level._id_876E[self.script_noteworthy] = scripts\engine\utility::add_to_array(level._id_876E[self.script_noteworthy], self);
-  level._id_876E[self._id_ECE7] = scripts\engine\utility::add_to_array(level._id_876E[self._id_ECE7], self);
+  level._id_876E[self.script_noteworthy] = ::scripts\engine\utility::add_to_array(level._id_876E[self.script_noteworthy], self);
+  level._id_876E[self._id_ECE7] = ::scripts\engine\utility::add_to_array(level._id_876E[self._id_ECE7], self);
   level waittill("emp_dropship_unloading");
   self.health = 1;
   _id_113D8();
@@ -948,8 +977,9 @@ _id_88E1() {
     thread _id_135BE();
     var_0 = getEnt("emp_dropship_guys_volume", "targetname");
 
-    if(self._id_EEC9 == 10)
+    if(self._id_EEC9 == 10) {
       var_0 = getEnt("emp_dropship_guys_top_volume", "targetname");
+    }
 
     self _meth_82F1(var_0);
     level scripts\sp\utility::_id_178D(scripts\sp\utility::_id_137AA, self._id_ECE7 + "_alert");
@@ -962,8 +992,9 @@ _id_88E1() {
 
   wait 0.5;
 
-  if(isDefined(self._id_482E) && !isDefined(self._id_482E._id_12BB3))
+  if(isDefined(self._id_482E) && !isDefined(self._id_482E._id_12BB3)) {
     self._id_482E thread _id_12BA9();
+  }
 
   self unlink();
   scripts\sp\utility::anim_stopanimScripted();
@@ -978,12 +1009,13 @@ _id_88E1() {
 _id_88E0() {
   self endon("death");
 
-  if(!isDefined(level._id_876E))
+  if(!isDefined(level._id_876E)) {
     level._id_876E = [];
+  }
 
   self._id_C010 = 1;
-  level._id_876E[self.script_noteworthy] = scripts\engine\utility::add_to_array(level._id_876E[self.script_noteworthy], self);
-  level._id_876E[self._id_ECE7] = scripts\engine\utility::add_to_array(level._id_876E[self._id_ECE7], self);
+  level._id_876E[self.script_noteworthy] = ::scripts\engine\utility::add_to_array(level._id_876E[self.script_noteworthy], self);
+  level._id_876E[self._id_ECE7] = ::scripts\engine\utility::add_to_array(level._id_876E[self._id_ECE7], self);
   level waittill("emp_dropship_unloading");
   self.health = 1;
   _id_113D8();
@@ -1003,25 +1035,30 @@ _id_88E0() {
 
   wait 0.5;
 
-  if(!scripts\engine\utility::flag("emp_dropship_engine_guys_at_engines"))
+  if(!scripts\engine\utility::flag("emp_dropship_engine_guys_at_engines")) {
     level notify(self.script_noteworthy + "_alert");
+  }
 
-  if(isDefined(self._id_4BC2))
+  if(isDefined(self._id_4BC2)) {
     self._id_4BC2 notify("stop_loop");
+  }
 
   _id_11057(self);
 
-  if(isDefined(self._id_13CF3))
+  if(isDefined(self._id_13CF3)) {
     self._id_13CF3 delete();
+  }
 
-  if(isDefined(self._id_13CF4))
+  if(isDefined(self._id_13CF4)) {
     self._id_13CF4 delete();
+  }
 
   self unlink();
   scripts\sp\utility::anim_stopanimScripted();
 
-  if(isDefined(self._id_482E) && !isDefined(self._id_482E._id_12BB3))
+  if(isDefined(self._id_482E) && !isDefined(self._id_482E._id_12BB3)) {
     self._id_482E thread _id_12BA9();
+  }
 
   scripts\engine\utility::waitframe();
   thread _id_F22A();
@@ -1087,8 +1124,9 @@ _id_65A6() {
     if(var_8 == var_6) {
       var_8++;
 
-      if(var_8 >= var_7.size)
+      if(var_8 >= var_7.size) {
         var_8 = 0;
+      }
     }
 
     var_9 = var_7[var_8];
@@ -1127,10 +1165,11 @@ _id_13678() {
   scripts\sp\utility::_id_178D(scripts\engine\utility::flag_wait, "player_too_close_emp_enemies_alert");
   scripts\sp\utility::_id_57D6();
 
-  if(!scripts\engine\utility::flag("emp_dropship_engine_guys_at_engines"))
+  if(!scripts\engine\utility::flag("emp_dropship_engine_guys_at_engines")) {
     self notify(self.script_noteworthy + "_alert");
-  else
+  } else {
     self notify(self._id_ECE7 + "_alert");
+  }
 }
 
 _id_11718(var_0) {
@@ -1140,45 +1179,53 @@ _id_11718(var_0) {
 _id_135C0() {
   self waittill("death", var_0);
 
-  if(isDefined(var_0) && var_0 == level.player)
+  if(isDefined(var_0) && var_0 == level.player) {
     level notify("engine_guy_dead");
+  }
 
   if(!isDefined(self)) {
     return;
   }
   _id_11057(self);
 
-  if(isDefined(self._id_13CF3))
+  if(isDefined(self._id_13CF3)) {
     self._id_13CF3 delete();
+  }
 
-  if(isDefined(self._id_13CF4))
+  if(isDefined(self._id_13CF4)) {
     self._id_13CF4 delete();
+  }
 
   var_1 = self.script_noteworthy;
   var_2 = self._id_ECE7;
 
   if(self.script_noteworthy == "emp_dropship_guys") {
-    if(isDefined(self._id_482E) && !isDefined(self._id_482E._id_12BB3))
+    if(isDefined(self._id_482E) && !isDefined(self._id_482E._id_12BB3)) {
       self._id_482E thread _id_12BA9();
+    }
 
     wait 2.0;
 
-    if(!scripts\engine\utility::flag("emp_dropship_guys_dead"))
+    if(!scripts\engine\utility::flag("emp_dropship_guys_dead")) {
       level notify(var_1 + "_alert");
+    }
   } else if(self.script_noteworthy == "emp_dropship_engine_guys") {
-    if(isDefined(self._id_482E) && !isDefined(self._id_482E._id_12BB3))
+    if(isDefined(self._id_482E) && !isDefined(self._id_482E._id_12BB3)) {
       self._id_482E thread _id_12BA9();
+    }
 
     if(!scripts\engine\utility::flag("emp_dropship_engine_guys_at_engines")) {
       wait 2.0;
 
-      if(!scripts\engine\utility::flag("emp_dropship_engine_guys_dead"))
+      if(!scripts\engine\utility::flag("emp_dropship_engine_guys_dead")) {
         level notify(var_1 + "_alert");
+      }
     } else {
       wait 2.0;
 
-      if(!scripts\engine\utility::flag("emp_dropship_engine_guys_dead"))
+      if(!scripts\engine\utility::flag("emp_dropship_engine_guys_dead")) {
         level notify(var_2 + "_alert");
+      }
     }
   } else if(self.script_noteworthy == "engine_guys") {
     if(!scripts\engine\utility::flag("emp_dropship_engine_guys_at_engines")) {
@@ -1186,9 +1233,9 @@ _id_135C0() {
     }
     wait 2.0;
 
-    if(!scripts\engine\utility::flag("engine_guys_dead"))
+    if(!scripts\engine\utility::flag("engine_guys_dead")) {
       level notify(var_2 + "_alert");
-    else {}
+    } else {}
   }
 }
 
@@ -1200,12 +1247,13 @@ _id_135BE() {
   if(!scripts\engine\utility::flag("emp_dropship_start_unload")) {
     return;
   }
-  if(!scripts\engine\utility::flag("emp_dropship_engine_guys_at_engines"))
+  if(!scripts\engine\utility::flag("emp_dropship_engine_guys_at_engines")) {
     var_0 = self.script_noteworthy;
-  else
+  } else {
     var_0 = self._id_ECE7;
+  }
 
-  level._id_876E[var_0] = scripts\sp\utility::_id_22B9(level._id_876E[var_0]);
+  level._id_876E[var_0] = ::scripts\sp\utility::_id_22B9(level._id_876E[var_0]);
 
   if(level._id_876E[var_0].size == 0) {
     return;
@@ -1214,8 +1262,9 @@ _id_135BE() {
 
   if(level._id_876E[var_0].size > 1) {
     foreach(var_3 in level._id_876E[var_0]) {
-      if(var_3 != self)
+      if(var_3 != self) {
         var_1 = var_3;
+      }
     }
 
     if(isDefined(var_1) && isalive(var_1)) {
@@ -1244,7 +1293,7 @@ _id_135BE() {
       wait 0.1;
     }
 
-    level._id_876E[var_0] = scripts\sp\utility::_id_22B9(level._id_876E[var_0]);
+    level._id_876E[var_0] = ::scripts\sp\utility::_id_22B9(level._id_876E[var_0]);
   }
 }
 
@@ -1274,8 +1323,9 @@ _id_3AA9() {
   var_0 = getEnt("carrier_deck_trigger", "targetname");
 
   for(;;) {
-    if(self istouching(var_0))
+    if(self istouching(var_0)) {
       level notify("emp_dropship_guys_alert");
+    }
 
     wait 0.1;
   }
@@ -1420,8 +1470,9 @@ _id_B517() {
 }
 
 _id_23F5() {
-  if(isDefined(level._id_6192))
+  if(isDefined(level._id_6192)) {
     level waittill("release_player");
+  }
 
   var_0 = scripts\engine\utility::spawn_tag_origin();
   var_0 linkTo(level._id_EA2C, "tag_eye", (0, 0, 20), (0, 0, 0));
@@ -1432,8 +1483,9 @@ _id_23F5() {
   scripts\engine\utility::flag_wait("emp_ready_to_set");
   scripts\sp\utility::_id_C27C(scripts\sp\utility::_id_C264("obj_follow_salter"));
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
   var_1 = scripts\engine\utility::getStruct("emp_obj2", "targetname");
   objective_add(scripts\sp\utility::_id_C264("emp_carrier"), "current", &"SA_EMPAMBUSH_PLACE_EMP_CHARGE_ON_THE");
@@ -1510,8 +1562,9 @@ _id_23F3() {
   level scripts\engine\utility::waittill_any("dropship1_guys_damaged", "got_spotted");
 
   foreach(var_5 in level._id_876E["dropship1_guys"]) {
-    if(scripts\engine\utility::is_true(var_5._id_84AF))
+    if(scripts\engine\utility::is_true(var_5._id_84AF)) {
       level.player waittill("kill_release", var_9);
+    }
   }
 
   wait 1;
@@ -1519,8 +1572,9 @@ _id_23F3() {
   if(isalive(level._id_876E["dropship1_guys"][0])) {
     var_11 = undefined;
 
-    if(level._id_876E["dropship1_guys"].size > 1)
+    if(level._id_876E["dropship1_guys"].size > 1) {
       var_11 = level._id_876E["dropship1_guys"][1];
+    }
 
     _id_EAAC(level._id_876E["dropship1_guys"][0]);
 
@@ -1530,8 +1584,9 @@ _id_23F3() {
     }
   }
 
-  if(isDefined(level._id_876E["dropship1_guys"][1]) && isalive(level._id_876E["dropship1_guys"][1]))
+  if(isDefined(level._id_876E["dropship1_guys"][1]) && isalive(level._id_876E["dropship1_guys"][1])) {
     _id_EAAC(level._id_876E["dropship1_guys"][1]);
+  }
 
   scripts\engine\utility::flag_set("guys1_dead");
   scripts\sp\utility::_id_2669("1st_patrol");
@@ -1559,8 +1614,9 @@ _id_EAAC(var_0) {
   scripts\engine\utility::waitframe();
 
   if(isalive(var_0)) {
-    if(scripts\engine\utility::is_true(var_0._id_B14F))
+    if(scripts\engine\utility::is_true(var_0._id_B14F)) {
       var_0 scripts\sp\utility::_id_1101B();
+    }
 
     var_0 _meth_81D0(level._id_EA2C.origin, level._id_EA2C);
   }
@@ -1570,13 +1626,15 @@ _id_13EC0(var_0, var_1) {
   if(var_0) {
     scripts\sp\utility::_id_51E1("casual");
 
-    if(var_1)
+    if(var_1) {
       thread _id_0F35::_id_EBB0(0.75, 2);
+    }
   } else {
     scripts\sp\utility::_id_4145();
 
-    if(var_1)
+    if(var_1) {
       thread _id_0F35::_id_EBB0(1.0, 2);
+    }
   }
 }
 
@@ -1615,8 +1673,9 @@ _id_88F2() {
   scripts\engine\utility::flag_wait_any("hot_spot", "in_the_gap");
   level notify("hot_spot");
 
-  foreach(var_1 in level._id_876E["dropship1_guys"])
-  var_1.ignoreall = 0;
+  foreach(var_1 in level._id_876E["dropship1_guys"]) {
+    var_1.ignoreall = 0;
+  }
 
   wait 5;
   level notify("got_spotted");
@@ -1631,8 +1690,9 @@ _id_8957() {
   level._id_EA2C _meth_82EE(var_0);
   scripts\engine\utility::flag_wait("emp_set");
 
-  if(isDefined(level._id_EA2C._id_10DB1) && level._id_EA2C.primaryweapon != level._id_EA2C._id_10DB1)
+  if(isDefined(level._id_EA2C._id_10DB1) && level._id_EA2C.primaryweapon != level._id_EA2C._id_10DB1) {
     level._id_EA2C scripts\sp\utility::_id_72EC(level._id_EA2C._id_10DB1, "primary");
+  }
 
   level._id_EA2C waittillmatch("single anim", "end");
   level._id_EA2C setgoalpos(level._id_EA2C.origin);
@@ -1649,10 +1709,11 @@ _id_EA5E() {
 _id_88E2() {
   thread _id_0F16::_id_6E41(level._id_876E["engine_guys"], level._id_876E["engine_guys"].size, "engine_guys_dead");
   scripts\engine\utility::flag_wait("near_carrier");
-  level._id_876E["engine_guys"] = scripts\sp\utility::_id_22B9(level._id_876E["engine_guys"]);
+  level._id_876E["engine_guys"] = ::scripts\sp\utility::_id_22B9(level._id_876E["engine_guys"]);
 
-  foreach(var_1 in level._id_876E["engine_guys"])
-  var_1 _id_113D8();
+  foreach(var_1 in level._id_876E["engine_guys"]) {
+    var_1 _id_113D8();
+  }
 
   scripts\engine\utility::flag_wait("emp_dropship_unload_ready");
   wait 0.1;
@@ -1678,8 +1739,9 @@ _id_6173() {
   level endon("emp_set");
   wait 20;
 
-  if(!scripts\engine\utility::flag("emp_set"))
+  if(!scripts\engine\utility::flag("emp_set")) {
     level._id_EA2C scripts\sp\utility::_id_10346("sa_empambush_slt_letssettheseemp");
+  }
 }
 
 _id_A2A2(var_0) {
@@ -1703,19 +1765,23 @@ _id_1394F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   level.player endon("death");
   scripts\engine\utility::array_thread(var_0, ::_id_A240, var_2);
 
-  if(!isDefined(var_7))
+  if(!isDefined(var_7)) {
     var_7 = 0.5;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 10000;
+  }
 
   var_3 = var_3 * var_3;
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 0.17;
+  }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_5 = var_5 * var_5;
+  }
 
   while(!scripts\engine\utility::flag(var_2)) {
     if(scripts\engine\utility::flag(var_1) && !scripts\engine\utility::flag("hiding")) {
@@ -1727,17 +1793,20 @@ _id_1394F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         if(isDefined(var_5) && isDefined(var_6) && !isDefined(var_9._id_2524) && var_11 < var_5) {
           var_13 = scripts\sp\utility::_id_7951(var_9.origin, var_9.angles, level.player.origin);
 
-          if(var_13 > var_6)
+          if(var_13 > var_6) {
             var_12 = 1;
+          }
         } else if(!isDefined(var_9._id_2524) && var_11 < var_3) {
           var_13 = scripts\sp\utility::_id_7951(var_9.origin, var_9.angles, level.player.origin);
 
-          if(var_13 > var_4)
+          if(var_13 > var_4) {
             var_12 = 1;
+          }
         }
 
-        if(var_12)
+        if(var_12) {
           var_10 = scripts\common\trace::ray_trace(var_9 gettagorigin("tag_spotlight"), level.player.origin + (0, 0, 32), var_9);
+        }
 
         if(isDefined(var_10) && isDefined(var_10["entity"]) && var_10["entity"] == level.player) {
           var_9 _id_A345(var_7);
@@ -1769,8 +1838,9 @@ _id_A240(var_0) {
   while(!scripts\engine\utility::flag(var_0)) {
     self waittill("damage", var_1, var_2);
 
-    if(var_2 == level.player && !scripts\engine\utility::flag(var_0))
+    if(var_2 == level.player && !scripts\engine\utility::flag(var_0)) {
       _id_A345(0.5);
+    }
   }
 }
 
@@ -1968,11 +2038,13 @@ _id_3ABD() {
     var_0 = _id_0F31::_id_7EDE();
 
     foreach(var_2 in var_0) {
-      if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "radar_left")
+      if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "radar_left") {
         level._id_DBCE = var_2;
+      }
 
-      if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "radar_right")
+      if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "radar_right") {
         level._id_DBD1 = var_2;
+      }
     }
 
     level._id_DBCE _id_0F31::_id_310C(1);
@@ -1981,15 +2053,17 @@ _id_3ABD() {
     level._id_DBD1 thread _id_0F31::_id_3109(22);
   }
 
-  if(isDefined(level._id_6192) || isDefined(level._id_D7B9))
+  if(isDefined(level._id_6192) || isDefined(level._id_D7B9)) {
     level waittill("emp_detonate");
+  }
 
   thread _id_3ABC();
   thread scripts\sp\maps\sa_empambush\sa_empambush_audio::_id_6150();
   var_4 = getEntArray("engine_hurt_triggers", "targetname");
 
-  foreach(var_6 in var_4)
-  var_6 scripts\engine\utility::trigger_off();
+  foreach(var_6 in var_4) {
+    var_6 scripts\engine\utility::trigger_off();
+  }
 }
 
 _id_F909(var_0, var_1) {
@@ -2017,8 +2091,9 @@ _id_3AB2(var_0) {
   stopFXOnTag(level._effect[var_0], self, "tag_origin");
   playFXOnTag(scripts\engine\utility::getfx("vfx_carrier_engine_glow_power_down"), self, "tag_origin");
 
-  if(isDefined(self._id_FC51))
+  if(isDefined(self._id_FC51)) {
     self._id_FC51 notify("vfx_carrier_fx_shake_stop");
+  }
 
   scripts\engine\utility::flag_wait("deck1");
   thread _id_514E();
@@ -2027,28 +2102,33 @@ _id_3AB2(var_0) {
 _id_3ABC() {
   thread scripts\sp\maps\sa_empambush\sa_empambush_audio::_id_613A((11450, -2650, 500), "l");
 
-  if(isDefined(level._id_6192) || isDefined(level._id_D7B9))
+  if(isDefined(level._id_6192) || isDefined(level._id_D7B9)) {
     wait 1;
+  }
 
   _id_3ABA();
 
-  if(isDefined(level._id_6192) || isDefined(level._id_D7B9))
+  if(isDefined(level._id_6192) || isDefined(level._id_D7B9)) {
     wait 0.5;
+  }
 
   _id_3AB9();
 
-  if(isDefined(level._id_6192) || isDefined(level._id_D7B9))
+  if(isDefined(level._id_6192) || isDefined(level._id_D7B9)) {
     wait 0.5;
+  }
 
   _id_3AB8();
 
-  if(isDefined(level._id_6192) || isDefined(level._id_D7B9))
+  if(isDefined(level._id_6192) || isDefined(level._id_D7B9)) {
     wait 0.5;
+  }
 
   _id_3ABB();
 
-  if(isDefined(level._id_6192) || isDefined(level._id_D7B9))
+  if(isDefined(level._id_6192) || isDefined(level._id_D7B9)) {
     wait 0.5;
+  }
 
   var_0 = scripts\engine\utility::getStruct("group_02_sfx_struct", "targetname");
   level._id_867E = scripts\engine\utility::spawn_tag_origin(var_0.origin);
@@ -2060,8 +2140,9 @@ _id_3ABC() {
   scripts\engine\utility::array_thread(var_2, ::_id_AC96);
   thread _id_AC94("light_group_02_volume");
 
-  if(isDefined(level._id_6192) || isDefined(level._id_D7B9))
+  if(isDefined(level._id_6192) || isDefined(level._id_D7B9)) {
     wait 0.5;
+  }
 
   var_0 = scripts\engine\utility::getStruct("group_03_sfx_struct", "targetname");
   level._id_867F = scripts\engine\utility::spawn_tag_origin(var_0.origin);
@@ -2073,8 +2154,9 @@ _id_3ABC() {
   scripts\engine\utility::array_thread(var_4, ::_id_AC96);
   thread _id_AC94("light_group_03_volume");
 
-  if(isDefined(level._id_6192) || isDefined(level._id_D7B9))
+  if(isDefined(level._id_6192) || isDefined(level._id_D7B9)) {
     wait 0.5;
+  }
 
   var_0 = scripts\engine\utility::getStruct("group_04_sfx_struct", "targetname");
   level._id_8680 = scripts\engine\utility::spawn_tag_origin(var_0.origin);
@@ -2112,8 +2194,9 @@ _id_3ABA() {
   } else {
     scripts\engine\utility::array_thread(var_0, ::_id_ACA1);
 
-    if(isDefined(level._id_E518))
+    if(isDefined(level._id_E518)) {
       scripts\engine\utility::array_thread(level._id_E518, ::_id_3AB2, "vfx_carrier_engine_glow_powered");
+    }
   }
 
   if(isDefined(level._id_6192) || isDefined(level._id_D7B9)) {
@@ -2172,8 +2255,9 @@ _id_3AB8() {
   } else {
     scripts\engine\utility::array_thread(var_0, ::_id_ACA1);
 
-    if(isDefined(level._id_AB3C))
+    if(isDefined(level._id_AB3C)) {
       scripts\engine\utility::array_thread(level._id_AB3C, ::_id_3AB2, "vfx_carrier_engine_glow_powered");
+    }
   }
 
   if(isDefined(level._id_6192) || isDefined(level._id_D7B9)) {
@@ -2221,8 +2305,9 @@ _id_3ABB() {
   scripts\engine\utility::array_thread(var_1, ::_id_ACA1);
   scripts\engine\utility::array_thread(var_4, ::_id_AC96);
 
-  if(isDefined(level._id_6192) || isDefined(level._id_D7B9))
+  if(isDefined(level._id_6192) || isDefined(level._id_D7B9)) {
     wait 0.25;
+  }
 
   var_7 = scripts\engine\utility::getStruct("group_01_side_02_sfx_struct", "targetname");
   level._id_867C = scripts\engine\utility::spawn_tag_origin(var_7.origin);
@@ -2231,8 +2316,9 @@ _id_3ABB() {
   scripts\engine\utility::array_thread(var_2, ::_id_ACA1);
   scripts\engine\utility::array_thread(var_5, ::_id_AC96);
 
-  if(isDefined(level._id_6192) || isDefined(level._id_D7B9))
+  if(isDefined(level._id_6192) || isDefined(level._id_D7B9)) {
     wait 0.25;
+  }
 
   var_7 = scripts\engine\utility::getStruct("group_01_side_03_sfx_struct", "targetname");
   level._id_867D = scripts\engine\utility::spawn_tag_origin(var_7.origin);
@@ -2270,51 +2356,63 @@ _id_8A9D() {
 
   scripts\engine\utility::array_thread(var_0, ::_id_ACA1, 1);
 
-  foreach(var_13 in var_4)
-  var_13 thread _id_AC96(undefined, undefined, 1);
+  foreach(var_13 in var_4) {
+    var_13 thread _id_AC96(undefined, undefined, 1);
+  }
 
-  foreach(var_16 in var_8)
-  var_16 thread _id_AC96(undefined, 1);
+  foreach(var_16 in var_8) {
+    var_16 thread _id_AC96(undefined, 1);
+  }
 
-  if(isDefined(level._id_6192) || isDefined(level._id_D7C4))
+  if(isDefined(level._id_6192) || isDefined(level._id_D7C4)) {
     scripts\engine\utility::flag_wait("hangar_lights_trigger2");
+  }
 
   scripts\engine\utility::array_thread(var_1, ::_id_ACA1, 1);
 
-  foreach(var_13 in var_5)
-  var_13 thread _id_AC96(undefined, undefined, 1);
+  foreach(var_13 in var_5) {
+    var_13 thread _id_AC96(undefined, undefined, 1);
+  }
 
-  foreach(var_16 in var_9)
-  var_16 thread _id_AC96(undefined, 1);
+  foreach(var_16 in var_9) {
+    var_16 thread _id_AC96(undefined, 1);
+  }
 
-  if(isDefined(level._id_6192) || isDefined(level._id_D7C4))
+  if(isDefined(level._id_6192) || isDefined(level._id_D7C4)) {
     wait 0.5;
+  }
 
   scripts\engine\utility::array_thread(var_2, ::_id_ACA1, 1);
 
-  foreach(var_13 in var_6)
-  var_13 thread _id_AC96(undefined, undefined, 1);
+  foreach(var_13 in var_6) {
+    var_13 thread _id_AC96(undefined, undefined, 1);
+  }
 
-  foreach(var_16 in var_10)
-  var_16 thread _id_AC96(undefined, 1);
+  foreach(var_16 in var_10) {
+    var_16 thread _id_AC96(undefined, 1);
+  }
 
-  if(isDefined(level._id_6192) || isDefined(level._id_D7C4))
+  if(isDefined(level._id_6192) || isDefined(level._id_D7C4)) {
     wait 0.5;
+  }
 
   scripts\engine\utility::array_thread(var_3, ::_id_ACA1, 1);
 
-  foreach(var_13 in var_7)
-  var_13 thread _id_AC96(undefined, undefined, 1);
+  foreach(var_13 in var_7) {
+    var_13 thread _id_AC96(undefined, undefined, 1);
+  }
 
-  foreach(var_16 in var_11)
-  var_16 thread _id_AC96(undefined, 1);
+  foreach(var_16 in var_11) {
+    var_16 thread _id_AC96(undefined, 1);
+  }
 }
 
 _id_ACA1(var_0) {
   if(isDefined(self)) {
     if(isDefined(var_0)) {
-      if(isDefined(self._id_C724))
+      if(isDefined(self._id_C724)) {
         self setlightintensity(self._id_C724);
+      }
     } else {
       self._id_C724 = self _meth_8134();
       self setlightintensity(0.0);
@@ -2335,11 +2433,13 @@ _id_AC94(var_0) {
 
 _id_AC96(var_0, var_1, var_2) {
   if(isDefined(var_0)) {
-    if(isDefined(self))
+    if(isDefined(self)) {
       self hide();
+    }
   } else if(isDefined(var_1)) {
-    if(isDefined(self))
+    if(isDefined(self)) {
       self show();
+    }
   } else if(isDefined(var_2)) {
     if(isDefined(self)) {
       var_3 = _id_AC95(self.model);
@@ -2415,8 +2515,9 @@ _id_65AC(var_0, var_1) {
     var_2 setlightintensity(0.0);
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 _id_ACA1();
+  }
 
   scripts\engine\utility::array_thread(var_0, ::_id_AC9A);
   var_1 _id_3AB2(var_1.fx);
@@ -2425,11 +2526,13 @@ _id_65AC(var_0, var_1) {
 _id_514E() {
   wait 20;
 
-  if(isDefined(self._id_FC51))
+  if(isDefined(self._id_FC51)) {
     self._id_FC51 delete();
+  }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_727B() {
@@ -2501,8 +2604,9 @@ _id_91B8() {
   level scripts\engine\utility::waittill_any_timeout(10, "gone_hot", "deck2a");
   var_1 = getaiarray("axis");
 
-  foreach(var_3 in var_1)
-  var_3 notify("gone_hot");
+  foreach(var_3 in var_1) {
+    var_3 notify("gone_hot");
+  }
 
   thread _id_0F16::_id_68BF("deck1a", "hull_combat_vol1a");
   scripts\engine\utility::flag_set("hot_combat");
@@ -2528,8 +2632,9 @@ _id_4063() {
   scripts\engine\utility::flag_wait("entering_ship_interior");
   var_0 = getaiarray("axis");
 
-  if(isDefined(level._id_A1FA))
+  if(isDefined(level._id_A1FA)) {
     var_0 = scripts\engine\utility::array_remove_array(var_0, level._id_A1FA);
+  }
 
   scripts\engine\utility::array_call(var_0, ::delete);
   scripts\sp\utility::_id_2669("enter_carrier");
@@ -2596,8 +2701,9 @@ _id_BE76() {
   wait 2;
   var_0 = getaiarray("axis");
 
-  if(var_0.size > 0)
+  if(var_0.size > 0) {
     scripts\sp\utility::_id_13754(var_0, var_0.size, 30);
+  }
 
   level._id_EA2C scripts\sp\utility::_id_10346("sa_empambush_slt_yourecleartoinf");
   wait 2;
@@ -2641,8 +2747,9 @@ _id_91B9() {
 }
 
 _id_1692(var_0) {
-  if(!isDefined(level._id_1D67))
+  if(!isDefined(level._id_1D67)) {
     level._id_1D67 = [];
+  }
 
   level._id_1D67[level._id_1D67.size] = var_0;
 }
@@ -2665,8 +2772,9 @@ _id_88A4() {
     if(var_2 == var_0) {
       var_1++;
 
-      if(var_1 >= level._id_1D67.size)
+      if(var_1 >= level._id_1D67.size) {
         var_1 = 0;
+      }
 
       var_2 = level._id_1D67[var_1];
     }
@@ -2678,8 +2786,9 @@ _id_88A4() {
 _id_79DF(var_0) {
   var_1 = "vfx_hull_fire_";
 
-  if(var_0 < 10)
+  if(var_0 < 10) {
     var_1 = var_1 + "0";
+  }
 
   var_1 = var_1 + scripts\sp\utility::string(var_0);
   return var_1;
@@ -2761,8 +2870,9 @@ _id_E39E() {
     level.player scripts\sp\utility::_id_1034D("sa_empambush_plr_copywegotskelte");
     wait 0.5;
 
-    if(!scripts\engine\utility::flag("deck2"))
+    if(!scripts\engine\utility::flag("deck2")) {
       scripts\sp\utility::_id_10350("sa_empambush_gtr_rogerthatlaunch");
+    }
   }
 
   scripts\engine\utility::flag_set("ret_vo_over");
@@ -2814,8 +2924,9 @@ _id_AA81(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   foreach(var_12 in var_8) {
     var_13 = scripts\sp\utility::_id_7C9A(var_12.target);
 
-    if(!isDefined(var_4))
+    if(!isDefined(var_4)) {
       var_4 = var_12.targetname;
+    }
 
     var_14 = var_12 scripts\sp\utility::_id_10808();
     var_14 thread _id_0BDC::_id_A1EF(var_13);
@@ -2825,22 +2936,25 @@ _id_AA81(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       var_14 _id_0BDC::_id_19B3("combat", var_4);
       var_14 _id_0BDC::_id_19B3("patrol", var_4);
 
-      if(isDefined(var_5))
+      if(isDefined(var_5)) {
         var_14 _id_0BDC::_id_19B3("escape", var_5);
-      else
+      } else {
         var_14 _id_0BDC::_id_19B3("escape", var_4);
+      }
 
       var_14 _id_0BDC::_id_1990(1);
     }
 
-    if(scripts\engine\utility::is_true(var_6))
+    if(scripts\engine\utility::is_true(var_6)) {
       var_14 thread _id_168E();
-    else
+    } else {
       var_14 thread _id_DF1F();
+    }
 
     if(isDefined(var_2) && var_2 > 0) {
-      if(isDefined(var_3) && var_3 > 0)
+      if(isDefined(var_3) && var_3 > 0) {
         var_3 = randomfloatrange(-1 * var_3, var_3);
+      }
 
       wait(var_2 + var_3);
     }
@@ -2860,8 +2974,9 @@ _id_1062C(var_0, var_1) {
 }
 
 _id_1062A(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_2 = getEnt(var_0, "targetname");
   var_3 = var_2 scripts\sp\utility::_id_10808();
@@ -2869,8 +2984,9 @@ _id_1062A(var_0, var_1) {
   var_3 _id_0BDC::_id_19B3("escape", "axis_patrol");
   var_3 _id_0BDC::_id_19B3("combat", "axis_patrol");
 
-  if(var_1)
+  if(var_1) {
     var_3 _id_0BDC::_id_1990(1);
+  }
 
   return var_3;
 }
@@ -2906,8 +3022,9 @@ _id_9A79() {
   var_0 = scripts\engine\utility::getStruct("prototype_jackal_obj", "targetname");
   objective_position(scripts\sp\utility::_id_C264("hangar_obj"), var_0.origin);
 
-  while(distance(level.player.origin, var_0.origin) > 500)
+  while(distance(level.player.origin, var_0.origin) > 500) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\sp\utility::_id_C27C(scripts\sp\utility::_id_C264("hangar_obj"));
 }
@@ -2993,8 +3110,9 @@ _id_10C1A() {
 
   _id_0BDC::_id_CF50(1);
 
-  if(isDefined(level._id_E35D))
+  if(isDefined(level._id_E35D)) {
     level._id_E35D _id_0BA9::_id_397B();
+  }
 
   thread scripts\sp\utility::_id_12641("sa_emp_ret_land_tr");
   level._id_FD6E._id_E35D _id_0B51::_id_FDCB("show");
@@ -3020,11 +3138,13 @@ _id_10C1A() {
   thread _id_52A8();
   var_0 = getEnt("prototype_glass_clip", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     _id_0BD9::_id_FA4F();
+  }
 
   visionsetalternate(3, 1);
   setsaveddvar("r_fog", "0");
@@ -3104,8 +3224,9 @@ _id_10C1A() {
   thread _id_88BF();
   scripts\engine\utility::flag_wait("enemies_done_spawning");
 
-  while(level._id_1559.size > 0)
+  while(level._id_1559.size > 0) {
     wait 1;
+  }
 
   clearallcorpses();
   scripts\engine\utility::waitframe();
@@ -3124,8 +3245,9 @@ _id_E307() {
   self._id_11856 = [];
   var_1 = getnumparts(self._id_E505);
 
-  for(var_2 = 0; var_2 < var_1; var_2++)
+  for(var_2 = 0; var_2 < var_1; var_2++) {
     var_0[var_0.size] = getpartname(self._id_E505, var_2);
+  }
 
   foreach(var_4 in var_0) {
     var_5 = strtok(var_4, "_");
@@ -3134,8 +3256,9 @@ _id_E307() {
       continue;
     }
     if(var_5[1] == "engine" && var_5.size >= 5) {
-      if(var_5[4] == "in" || var_5[4] == "out" && var_5.size != 7)
+      if(var_5[4] == "in" || var_5[4] == "out" && var_5.size != 7) {
         self._id_11856[self._id_11856.size] = playFXOnTag(scripts\engine\utility::getfx("retribution_thrust_rear_idle"), self, var_4);
+      }
     }
 
     scripts\engine\utility::waitframe();
@@ -3164,8 +3287,9 @@ _id_69E2() {
 }
 
 _id_894A() {
-  while(!isDefined(level._id_DAA9.missiles))
+  while(!isDefined(level._id_DAA9.missiles)) {
     wait 0.1;
+  }
 
   level._id_DAA9.missiles._id_B446 = 25;
   setomnvar("ui_jackal_missile_total", level._id_DAA9.missiles._id_B446);
@@ -3196,8 +3320,9 @@ _id_DAA6() {
   level.player endon("flag_player_is_flying");
 
   for(;;) {
-    if(level.player attackButtonPressed())
+    if(level.player attackButtonPressed()) {
       level._id_DAA9 _id_0BDC::_id_B155(0.2);
+    }
 
     wait 0.05;
   }
@@ -3207,8 +3332,9 @@ _id_618E() {
   level.player endon("bust_out");
 
   for(;;) {
-    if(level.player fragButtonPressed())
+    if(level.player fragButtonPressed()) {
       level.player notify("start_bust_out");
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -3273,8 +3399,9 @@ _id_DAAC(var_0) {
   var_2 = scripts\engine\utility::spawn_tag_origin(var_1.origin);
   wait 5;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 }
 
 _id_106D2() {
@@ -3542,27 +3669,32 @@ _id_94D3() {
 }
 
 _id_5889(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 0;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level endon(var_3);
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   var_0 = getEnt(var_0, "targetname");
 
   if(isDefined(var_0)) {
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       var_1 = var_0.target;
+    }
 
     for(;;) {
       var_5 = var_0 scripts\sp\utility::_id_10808();
       var_5 _id_0BDC::_id_19B1(0);
 
-      if(var_2)
+      if(var_2) {
         var_5 thread _id_168E();
+      }
 
       var_5 thread _id_0BDC::_id_A1EF(scripts\sp\utility::_id_7C9A(var_1));
       wait 1;
@@ -3570,8 +3702,9 @@ _id_5889(var_0, var_1, var_2, var_3, var_4) {
       var_5 _id_0BDC::_id_19B3("combat", "axis_patrol");
       var_5 _id_0BDC::_id_19B3("escape", "axis_dogfight");
 
-      if(var_4)
+      if(var_4) {
         var_5 _id_0BDC::_id_1990(1);
+      }
 
       var_5 waittill("death");
       var_2 = 0;
@@ -3614,8 +3747,9 @@ _id_6F3E() {
   var_0 = getEntArray(self.target, "targetname");
 
   if(isDefined(var_0)) {
-    foreach(var_2 in var_0)
-    var_2 linkTo(self);
+    foreach(var_2 in var_0) {
+      var_2 linkTo(self);
+    }
   }
 
   var_4 = scripts\sp\utility::_id_10639("ship_floater", self.origin, self.angles);
@@ -3650,11 +3784,13 @@ _id_13E96() {
       var_2 moveTo(var_5.origin, 0.05);
       var_2 rotateTo(var_5.angles, 0.05);
 
-      if(isDefined(var_5.script_noteworthy))
+      if(isDefined(var_5.script_noteworthy)) {
         var_2._id_BF0C = var_5.script_noteworthy;
+      }
 
-      if(isDefined(var_5.script_angles))
+      if(isDefined(var_5.script_angles)) {
         var_2._id_5CE1 = var_5.script_angles;
+      }
 
       wait 0.05;
     }
@@ -3678,8 +3814,9 @@ _id_AA8A() {
   wait 0.05;
   var_0 = 1;
 
-  if(isDefined(self.script_index))
+  if(isDefined(self.script_index)) {
     var_0 = self.script_index;
+  }
 
   var_1 = self.origin;
   var_2 = undefined;
@@ -3687,24 +3824,30 @@ _id_AA8A() {
   var_4 = undefined;
 
   if(isDefined(self.script_angles)) {
-    if(self.script_angles[0] != 0)
+    if(self.script_angles[0] != 0) {
       var_2 = anglestoup(self.angles) * self.script_angles[0];
+    }
 
-    if(self.script_angles[1] != 0)
+    if(self.script_angles[1] != 0) {
       var_3 = anglesToForward(self.angles) * self.script_angles[1];
+    }
 
-    if(self.script_angles[2] != 0)
+    if(self.script_angles[2] != 0) {
       var_4 = anglestoright(self.angles) * self.script_angles[2];
+    }
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_1 = var_1 + var_2;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_1 = var_1 + var_3;
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_1 = var_1 + var_4;
+  }
 
   var_5 = var_1 + (0, 0, -24);
 
@@ -3729,8 +3872,9 @@ _id_AA8A() {
 
   if(isDefined(self._id_EF20)) {}
 
-  if(isDefined(self._id_EF15))
+  if(isDefined(self._id_EF15)) {
     wait(self._id_EF15);
+  }
 
   self physicslaunchserver(var_1, var_11);
 }
@@ -3745,8 +3889,9 @@ _id_FA6C() {
     foreach(var_5 in var_3) {
       var_6 = var_1;
 
-      if(var_5.type == "cap_turret_small_constant")
+      if(var_5.type == "cap_turret_small_constant") {
         var_6 = var_0;
+      }
 
       var_5 setCanDamage(0);
       var_7 = spawn("script_model", var_5.origin);
@@ -3779,22 +3924,25 @@ _id_88E3() {
 }
 
 _id_A23F() {
-  if(isDefined(self.script_parameters))
+  if(isDefined(self.script_parameters)) {
     wait(float(self.script_parameters));
+  }
 
   var_0 = scripts\sp\vehicle::_id_1080B();
 
-  if(isDefined(self.script_noteworthy))
+  if(isDefined(self.script_noteworthy)) {
     wait(float(self.script_noteworthy));
-  else
+  } else {
     wait(randomfloatrange(0.5, 1.5));
+  }
 
   var_0 _id_A345(0.75);
 }
 
 _id_8E91(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   var_1 = getEntArray("0g_floater", "targetname");
   var_2 = getEnt("cargobay_doors", "targetname");
@@ -3810,8 +3958,9 @@ _id_8949() {
   var_0 = getEntArray("0g_floater", "targetname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "prototype_colllision")
+    if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "prototype_colllision") {
       var_2 delete();
+    }
   }
 }
 
@@ -3819,7 +3968,8 @@ _id_52A8() {
   var_0 = getEntArray("script_model", "classname");
 
   foreach(var_2 in var_0) {
-    if(var_2.model == "ship_exterior_light_unit_e_off")
+    if(var_2.model == "ship_exterior_light_unit_e_off") {
       var_2 delete();
+    }
   }
 }

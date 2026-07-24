@@ -32,8 +32,9 @@ init_crab_boss_quest() {
 hide_lost_n_found_sign() {
   var_0 = getEnt("crab_boss_lnf_sign", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 hide();
+  }
 }
 
 crab_boss_pre_combat_sequence(var_0) {
@@ -80,8 +81,9 @@ move_to_taunt_loc(var_0) {
   for(;;) {
     var_0 scripts\cp\maps\cp_town\cp_town_crab_boss_death_wall::do_taunt();
 
-    if(scripts\engine\utility::is_true(level.crab_boss_swim_to_combat_position))
+    if(scripts\engine\utility::is_true(level.crab_boss_swim_to_combat_position)) {
       return;
+    }
   }
 }
 
@@ -108,8 +110,9 @@ play_vo_at_start_of_boss_fight() {
   }
 
   foreach(var_2 in level.players) {
-    if(var_2.vo_prefix == "p5_")
+    if(var_2.vo_prefix == "p5_") {
       var_2 thread scripts\cp\cp_vo::try_to_play_vo("encounter_radthing", "town_comment_vo", "low", 10, 0, 0, 0, 10);
+    }
   }
 }
 
@@ -188,15 +191,17 @@ crab_boss_disable_teleport_monitor() {
   level endon("game_ended");
 
   foreach(var_1 in level.players) {
-    if(var_1 scripts\cp\utility::isteleportenabled())
+    if(var_1 scripts\cp\utility::isteleportenabled()) {
       var_1 scripts\cp\utility::allow_player_teleport(0);
+    }
   }
 
   for(;;) {
     level waittill("connected", var_1);
 
-    if(var_1 scripts\cp\utility::isteleportenabled())
+    if(var_1 scripts\cp\utility::isteleportenabled()) {
       var_1 scripts\cp\utility::allow_player_teleport(0);
+    }
   }
 }
 
@@ -261,14 +266,16 @@ move_lost_and_found(var_0) {
     level.lnf_struct.origin = var_1;
     var_3 = getEnt("crab_boss_lnf_sign", "targetname");
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_3 show();
+    }
   } else {
     level.lnf_struct.origin = level.lnf_struct.og_origin;
     var_3 = getEnt("crab_boss_lnf_sign", "targetname");
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_3 hide();
+    }
   }
 
   foreach(var_5 in level.players) {
@@ -316,8 +323,9 @@ crab_boss_zombie_spawn_manager() {
         var_2.dont_cleanup = 1;
         var_2.movemode = "sprint";
 
-        if(isDefined(level.cb_zmb_spawn_func))
+        if(isDefined(level.cb_zmb_spawn_func)) {
           [[level.cb_zmb_spawn_func]](var_2);
+        }
 
         var_2 thread play_intro(var_2);
       }
@@ -342,10 +350,11 @@ crab_boss_zombie_spawn_manager() {
 wait_between_wave() {
   var_0 = 10;
 
-  if(isDefined(level.wait_time_between_wave))
+  if(isDefined(level.wait_time_between_wave)) {
     wait(level.wait_time_between_wave);
-  else
+  } else {
     wait(var_0);
+  }
 }
 
 should_do_wait_between_wave(var_0) {
@@ -354,10 +363,11 @@ should_do_wait_between_wave(var_0) {
 
 should_do_wave_spawn() {
   if(scripts\engine\utility::is_true(level.allow_wave_spawn)) {
-    if(level.players.size == 1)
+    if(level.players.size == 1) {
       return 1;
-    else
+    } else {
       return 0;
+    }
   } else
     return 0;
 }
@@ -406,8 +416,9 @@ get_zmb_target_player() {
   var_5 = gettime();
 
   foreach(var_3 in var_1) {
-    if(!isDefined(var_3.last_attacked_by_crab_boss_zombie_time))
+    if(!isDefined(var_3.last_attacked_by_crab_boss_zombie_time)) {
       var_3.last_attacked_by_crab_boss_zombie_time = var_5;
+    }
   }
 
   var_8 = undefined;
@@ -425,8 +436,9 @@ get_zmb_target_player() {
     }
   }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0.last_attacked_by_crab_boss_zombie_time = var_5;
+  }
 
   return var_0;
 }
@@ -436,10 +448,11 @@ get_zombie_spawner() {
   var_1 = undefined;
   var_2 = [(2736, 3630, -179), (2781, 3459, -179), (2867, 3334, -182), (2987, 3214, -181), (3196, 3094, -179), (3376, 3070, -179), (3518, 3093, -180), (3669, 3162, -183)];
 
-  if(isDefined(level.crab_boss_zombie_spawn_pos_list))
+  if(isDefined(level.crab_boss_zombie_spawn_pos_list)) {
     var_1 = scripts\engine\utility::random(level.crab_boss_zombie_spawn_pos_list);
-  else
+  } else {
     var_1 = scripts\engine\utility::random(var_2);
+  }
 
   var_3 = randomfloatrange(var_0 * -1, var_0);
   var_4 = randomfloatrange(var_0 * -1, var_0);
@@ -456,10 +469,11 @@ get_zombie_spawner() {
 can_spawn_zombie() {
   var_0 = 15;
 
-  if(isDefined(level.crab_boss_max_zombie_spawn))
+  if(isDefined(level.crab_boss_max_zombie_spawn)) {
     var_1 = level.crab_boss_max_zombie_spawn;
-  else
+  } else {
     var_1 = var_0;
+  }
 
   return get_num_alive_agent_of_type("generic_zombie") < var_1;
 }
@@ -468,18 +482,20 @@ get_num_alive_agent_of_type(var_0) {
   var_1 = 0;
 
   foreach(var_3 in level.spawned_enemies) {
-    if(isDefined(var_3.agent_type) && var_3.agent_type == var_0)
+    if(isDefined(var_3.agent_type) && var_3.agent_type == var_0) {
       var_1++;
+    }
   }
 
   return var_1;
 }
 
 get_zombie_spawn_delay() {
-  if(isDefined(level.crab_boss_zombie_spawn_delay))
+  if(isDefined(level.crab_boss_zombie_spawn_delay)) {
     return level.crab_boss_zombie_spawn_delay;
-  else
+  } else {
     return 2;
+  }
 }
 
 death_ray_cannon() {
@@ -516,11 +532,13 @@ death_ray_cannon() {
 }
 
 delete_weak_spot() {
-  if(isDefined(level.crab_boss.crab_boss_weak_spot))
+  if(isDefined(level.crab_boss.crab_boss_weak_spot)) {
     level.crab_boss.crab_boss_weak_spot delete();
+  }
 
-  if(isDefined(level.crab_boss.crab_boss_weak_vfx))
+  if(isDefined(level.crab_boss.crab_boss_weak_vfx)) {
     level.crab_boss.crab_boss_weak_vfx delete();
+  }
 }
 
 adjust_zombie_spawning(var_0, var_1) {
@@ -608,15 +626,17 @@ activate_crab_boss_fight_blocker() {
 deactivate_crab_boss_fight_blocker() {
   if(isDefined(level.crab_boss_fight_blocker_models)) {
     foreach(var_1 in level.crab_boss_fight_blocker_models) {
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         var_1 delete();
+      }
     }
   }
 
   var_3 = getEnt("crab_boss_fight_door_clip", "targetname");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 delete();
+  }
 }
 
 show_icon_on_escort_vehicle() {
@@ -633,8 +653,9 @@ show_icon_on_escort_vehicle() {
 
 remove_icon_on_escort_vehicle() {
   foreach(var_1 in level.players) {
-    if(isDefined(var_1.escort_vehicle_icon))
+    if(isDefined(var_1.escort_vehicle_icon)) {
       var_1.escort_vehicle_icon destroy();
+    }
   }
 }
 
@@ -646,42 +667,46 @@ setupplayerloadouts() {
   var_2 = ["perk_machine_revive", "perk_machine_flash", "perk_machine_tough", "perk_machine_run", "perk_machine_rat_a_tat"];
 
   foreach(var_4 in level.players) {
-    foreach(var_6 in var_2)
-    var_4 thread scripts\cp\zombies\zombies_perk_machines::give_zombies_perk_immediate(var_6, 1);
+    foreach(var_6 in var_2) {
+      var_4 thread scripts\cp\zombies\zombies_perk_machines::give_zombies_perk_immediate(var_6, 1);
+    }
 
     var_8 = randomint(var_1.size);
     var_9 = randomint(var_0.size);
     var_4 takeweapon(var_4 scripts\cp\utility::getvalidtakeweapon());
     var_10 = scripts\cp\utility::getrawbaseweaponname(var_1[var_8]);
 
-    if(isDefined(var_4.weapon_build_models[var_10]))
+    if(isDefined(var_4.weapon_build_models[var_10])) {
       scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_4, var_4.weapon_build_models[var_10]);
-    else
+    } else {
       scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_4, var_1[var_8]);
+    }
 
     var_11 = scripts\cp\utility::getrawbaseweaponname(var_0[var_9]);
 
-    if(isDefined(var_4.weapon_build_models[var_11]))
+    if(isDefined(var_4.weapon_build_models[var_11])) {
       scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_4, var_4.weapon_build_models[var_11]);
-    else
+    } else {
       scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_4, var_1[var_8]);
+    }
 
     var_4.total_currency_earned = min(10000, var_4 scripts\cp\cp_persistence::get_player_max_currency());
     var_4 scripts\cp\cp_persistence::set_player_currency(10000);
     var_4 scripts\cp\cp_interaction::refresh_interaction();
   }
 
-  if(isDefined(level.pap_max) && level.pap_max < 3)
+  if(isDefined(level.pap_max) && level.pap_max < 3) {
     level.pap_max++;
+  }
 
   level[[level.upgrade_weapons_func]]();
   level thread[[level.upgrade_weapons_func]]();
 }
 
 open_sesame(var_0) {
-  if(scripts\engine\utility::is_true(var_0))
+  if(scripts\engine\utility::is_true(var_0)) {
     level.open_sesame = undefined;
-  else if(scripts\engine\utility::is_true(level.open_sesame)) {
+  } else if(scripts\engine\utility::is_true(level.open_sesame)) {
     level.open_sesame = undefined;
     return;
   } else
@@ -693,8 +718,9 @@ open_sesame(var_0) {
   }
 
   if(isDefined(level.fast_travel_spots)) {
-    foreach(var_5 in level.fast_travel_spots)
-    var_5.used_once = 1;
+    foreach(var_5 in level.fast_travel_spots) {
+      var_5.used_once = 1;
+    }
   }
 
   var_7 = getEntArray("door_buy", "targetname");
@@ -716,8 +742,9 @@ open_sesame(var_0) {
   level.triton_donations = 3;
 
   if(isDefined(level.team_killdoors)) {
-    foreach(var_15 in level.team_killdoors)
-    var_15 scripts\cp\zombies\zombie_doors::open_team_killdoor(level.players[0]);
+    foreach(var_15 in level.team_killdoors) {
+      var_15 scripts\cp\zombies\zombie_doors::open_team_killdoor(level.players[0]);
+    }
   }
 
   var_17 = scripts\engine\utility::getStructArray("interaction", "targetname");
@@ -728,8 +755,9 @@ open_sesame(var_0) {
     foreach(var_22 in var_20) {
       if(isDefined(var_22.target) && isDefined(var_19.target)) {
         if(var_22.target == var_19.target && var_22 != var_19) {
-          if(scripts\engine\utility::array_contains(var_17, var_22))
+          if(scripts\engine\utility::array_contains(var_17, var_22)) {
             var_17 = scripts\engine\utility::array_remove(var_17, var_22);
+          }
         }
       }
     }
@@ -738,8 +766,9 @@ open_sesame(var_0) {
       if(!isDefined(var_19.script_noteworthy)) {
         continue;
       }
-      if(var_19.script_noteworthy == "team_door_switch")
+      if(var_19.script_noteworthy == "team_door_switch") {
         scripts\cp\zombies\interaction_openareas::use_team_door_switch(var_19, level.players[0]);
+      }
     }
   }
 }

@@ -104,8 +104,9 @@ _id_10686(var_0, var_1) {
 
   foreach(var_5 in var_3) {
     if(var_5 istouching(var_2)) {
-      if(scripts\engine\utility::is_true(var_5.damageshield))
+      if(scripts\engine\utility::is_true(var_5.damageshield)) {
         var_5 scripts\sp\utility::_id_1101B();
+      }
 
       var_5 _meth_81D0();
     }
@@ -205,23 +206,27 @@ _id_8F20() {
   var_1 = getEntArray("elevator_railing_small", "script_noteworthy");
   var_2 = getEntArray("elevator_railing_small", "targetname");
 
-  foreach(var_4 in var_0.partnerheli)
-  var_4 linkTo(var_0);
+  foreach(var_4 in var_0.partnerheli) {
+    var_4 linkTo(var_0);
+  }
 
   foreach(var_8, var_7 in var_0._id_DC2B) {
-    if(isDefined(var_0._id_DC2C[var_8]))
+    if(isDefined(var_0._id_DC2C[var_8])) {
       var_0._id_DC2C[var_8] linkTo(var_7);
+    }
   }
 
   foreach(var_11, var_10 in var_1) {
-    if(isDefined(var_2[var_11]))
+    if(isDefined(var_2[var_11])) {
       var_2[var_11] linkTo(var_10);
+    }
   }
 
   var_0.origin = var_0.origin + (0, 0, -256);
 
-  foreach(var_7 in var_1)
-  var_7.origin = var_7.origin + (0, 0, -40);
+  foreach(var_7 in var_1) {
+    var_7.origin = var_7.origin + (0, 0, -40);
+  }
 }
 
 _id_8F21() {
@@ -238,21 +243,24 @@ _id_8F21() {
   var_0 playLoopSound("mars_cargo_lift_loop");
   var_0 movez(256, 3, 0.1, 0.1);
 
-  foreach(var_3 in var_1)
-  var_3 movez(40, 0.6, 0.2, 0.2);
+  foreach(var_3 in var_1) {
+    var_3 movez(40, 0.6, 0.2, 0.2);
+  }
 
   var_0 waittill("movedone");
   var_0 playSound("mars_cargo_lift_stop");
   var_0 stoploopsound();
 
-  foreach(var_6 in var_0._id_DC2B)
-  var_6 movez(-40, 0.6, 0.3, 0.1);
+  foreach(var_6 in var_0._id_DC2B) {
+    var_6 movez(-40, 0.6, 0.3, 0.1);
+  }
 
   scripts\sp\utility::_id_22D8(var_0._id_DC2B, "movedone");
 
   foreach(var_9, var_6 in var_0._id_DC2B) {
-    if(isDefined(var_0._id_DC2C[var_9]))
+    if(isDefined(var_0._id_DC2C[var_9])) {
       var_0._id_DC2C[var_9] connectpaths();
+    }
   }
 }
 
@@ -264,12 +272,14 @@ _id_3B6F() {
   if(isDefined(var_0)) {
     var_0.origin = var_0.origin + (0, 0, 256);
 
-    foreach(var_2 in var_0._id_DC2B)
-    var_2.origin = var_2.origin + (0, 0, -40);
+    foreach(var_2 in var_0._id_DC2B) {
+      var_2.origin = var_2.origin + (0, 0, -40);
+    }
 
     foreach(var_5, var_2 in var_0._id_DC2B) {
-      if(isDefined(var_0._id_DC2C[var_5]))
+      if(isDefined(var_0._id_DC2C[var_5])) {
         var_0._id_DC2C[var_5] connectpaths();
+      }
     }
   }
 
@@ -277,8 +287,9 @@ _id_3B6F() {
 }
 
 _id_8F1F() {
-  while(!scripts\engine\utility::flag_exist("flag_hill_battle_elevator_started"))
+  while(!scripts\engine\utility::flag_exist("flag_hill_battle_elevator_started")) {
     wait 2;
+  }
 
   scripts\engine\utility::flag_wait("flag_hill_battle_elevator_started");
   var_0 = getEnt("elevator", "targetname");
@@ -317,8 +328,9 @@ _id_BA42() {
 }
 
 _id_F037(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "auto_nonai";
+  }
 
   self.health = 100000;
   scripts\sp\utility::_id_16B7(::_id_F03B);
@@ -331,8 +343,9 @@ _id_F037(var_0) {
 }
 
 _id_F03B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(!isPlayer(self.attacker))
+  if(!isPlayer(self.attacker)) {
     self.health = self.health + var_0;
+  }
 }
 
 _id_5ECF(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
@@ -407,8 +420,9 @@ _id_8F37() {
   foreach(var_6, var_5 in var_0) {
     var_1[var_6] = var_5 scripts\sp\utility::_id_10619();
 
-    if(isalive(var_1[var_6]))
+    if(isalive(var_1[var_6])) {
       var_2++;
+    }
 
     if(var_2 >= var_3) {
       break;
@@ -430,8 +444,9 @@ _id_8F37() {
   var_8 _id_13741();
   scripts\engine\utility::flag_set("flag_hill_c8s_destroyed");
 
-  if(!level.console)
+  if(!level.console) {
     waitfortransient("marsbase_combat_elevator_tr");
+  }
 }
 
 _id_8F2E() {
@@ -511,15 +526,17 @@ _id_8F31() {
 
   foreach(var_4 in var_2) {
     if(var_4 istouching(var_0)) {
-      if(!isDefined(var_4.dontdeletemehacking) || !var_4.dontdeletemehacking)
+      if(!isDefined(var_4.dontdeletemehacking) || !var_4.dontdeletemehacking) {
         var_4 delete();
+      }
     }
   }
 
   foreach(var_7 in var_1) {
     if(var_7 istouching(var_0)) {
-      if(!scripts\engine\utility::is_true(var_7.damageshield))
+      if(!scripts\engine\utility::is_true(var_7.damageshield)) {
         var_7 _meth_81D0();
+      }
     }
   }
 
@@ -623,17 +640,20 @@ _id_88EA() {
 }
 
 _id_107B8() {
-  if(!scripts\engine\utility::flag_exist("flag_ridge_reinforcements_spawning"))
+  if(!scripts\engine\utility::flag_exist("flag_ridge_reinforcements_spawning")) {
     scripts\engine\utility::flag_init("flag_ridge_reinforcements_spawning");
+  }
 
-  if(scripts\engine\utility::flag("flag_ridge_reinforcements_spawning"))
+  if(scripts\engine\utility::flag("flag_ridge_reinforcements_spawning")) {
     scripts\engine\utility::flag_waitopen("flag_ridge_reinforcements_spawning");
+  }
 
   scripts\engine\utility::flag_set("flag_ridge_reinforcements_spawning");
   var_0 = sortbydistance(getEntArray("droppod_ridge", "script_noteworthy"), level.player.origin);
 
-  for(var_1 = var_0.size - 1; var_1 > -1; var_1--)
+  for(var_1 = var_0.size - 1; var_1 > -1; var_1--) {
     var_0[var_1] scripts\engine\utility::delaythread((var_0.size - var_1) * 0.6, ::_id_10795);
+  }
 
   wait 3;
   scripts\engine\utility::flag_clear("flag_ridge_reinforcements_spawning");

@@ -38,8 +38,9 @@ _id_C9E3() {
   scripts\sp\utility::_id_22C9("third_story_guys", ::_id_10B17);
   var_0 = getEntArray("street_sniper1", "script_noteworthy");
 
-  if(var_0.size)
+  if(var_0.size) {
     scripts\sp\utility::_id_22C9("street_sniper1", scripts\sp\maps\pearlharbor\pearlharbor_util::_id_103BE);
+  }
 
   scripts\engine\utility::array_call(getEntArray("streets_lake_movers", "targetname"), ::notsolid);
   thread _id_A7B1();
@@ -61,8 +62,9 @@ _id_3FEA() {
   scripts\engine\utility::flag_wait("civ_street_dropship_spawned");
   scripts\engine\utility::exploder("streets_dropship_explosion");
 
-  foreach(var_1 in level.allies)
-  var_1 scripts\sp\utility::_id_F417(1);
+  foreach(var_1 in level.allies) {
+    var_1 scripts\sp\utility::_id_F417(1);
+  }
 
   scripts\engine\utility::flag_wait("civ_street_dropship_leaving");
   scripts\sp\vehicle::_id_1080F("civ_street_dropship_flybys");
@@ -74,8 +76,9 @@ _id_3FEA() {
 
   scripts\sp\maps\pearlharbor\pearlharbor_util::_id_15F4("civ_street_dropship_ally_enemy_trig");
 
-  if(!scripts\engine\utility::flag("player_movedup_civ_street"))
+  if(!scripts\engine\utility::flag("player_movedup_civ_street")) {
     scripts\sp\utility::_id_15F3("civ_street_postdropship_colortrig");
+  }
 
   scripts\engine\utility::flag_wait("civs_complete");
 }
@@ -105,21 +108,24 @@ _id_3F98() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-    if(!scripts\sp\utility::_id_CFAC(var_2))
+    if(!scripts\sp\utility::_id_CFAC(var_2)) {
       var_2 scripts\sp\utility::_id_54C6();
+    }
   }
 }
 
 _id_115B1() {
   scripts\sp\utility::_id_127B3("civs_execution_alerted_colortrig");
 
-  foreach(var_1 in level.allies)
-  var_1 scripts\sp\utility::_id_51E1("sprint");
+  foreach(var_1 in level.allies) {
+    var_1 scripts\sp\utility::_id_51E1("sprint");
+  }
 
   scripts\sp\utility::_id_127B3("post_boat_crash_color_trig");
 
-  foreach(var_1 in level.allies)
-  var_1 scripts\sp\utility::_id_51E1("combat");
+  foreach(var_1 in level.allies) {
+    var_1 scripts\sp\utility::_id_51E1("combat");
+  }
 }
 
 _id_3FB2() {
@@ -166,8 +172,9 @@ _id_3FB2() {
   var_7 scripts\sp\utility::_id_178D(scripts\sp\utility::_id_137AA, "death");
   scripts\sp\utility::_id_57D6();
 
-  if(isDefined(var_7) && isalive(var_7))
+  if(isDefined(var_7) && isalive(var_7)) {
     var_7 scripts\sp\utility::_id_54C6();
+  }
 
   var_1 setmode("manual");
   var_1 notify("stop_fire");
@@ -178,8 +185,9 @@ _id_3FB2() {
   self waittill("death");
   var_1 delete();
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     var_7 delete();
+  }
 }
 
 _id_5ED1(var_0) {
@@ -195,11 +203,13 @@ _id_3FB4(var_0) {
   var_1 = scripts\sp\maps\pearlharbor\pearlharbor_util::_id_B284(level.player);
   var_1 scripts\sp\utility::_id_E7C9(0.4, var_0);
 
-  while(isDefined(self) && isalive(self) && distance2dsquared(self.origin, level.player.origin) < squared(1500))
+  while(isDefined(self) && isalive(self) && distance2dsquared(self.origin, level.player.origin) < squared(1500)) {
     wait 0.05;
+  }
 
-  if(isDefined(self) && isalive(self))
+  if(isDefined(self) && isalive(self)) {
     thread _id_3FB5();
+  }
 
   var_1 scripts\sp\utility::_id_E7C9(0, 5);
   var_1 delete();
@@ -208,8 +218,9 @@ _id_3FB4(var_0) {
 _id_3FB5() {
   self endon("death");
 
-  while(distance2dsquared(self.origin, level.player.origin) > squared(1500))
+  while(distance2dsquared(self.origin, level.player.origin) > squared(1500)) {
     wait 0.05;
+  }
 
   thread _id_3FB4(1);
 }
@@ -244,8 +255,9 @@ _id_3FB6(var_0) {
         continue;
       }
 
-      if(var_15 scripts\sp\maps\pearlharbor\pearlharbor_util::_id_C120("glass"))
+      if(var_15 scripts\sp\maps\pearlharbor\pearlharbor_util::_id_C120("glass")) {
         var_15 thread _id_3FB7();
+      }
     }
 
     if(!isDefined(var_4.target)) {
@@ -263,15 +275,17 @@ _id_3FB0() {
   scripts\sp\utility::script_delay();
   var_0 = 0;
 
-  if(isDefined(self._id_ED75))
+  if(isDefined(self._id_ED75)) {
     var_0 = self._id_ED75 * 1000;
+  }
 
   var_1 = gettime();
 
   for(;;) {
     if(isDefined(self._id_ED48)) {
-      if(scripts\engine\utility::flag(self._id_ED48))
+      if(scripts\engine\utility::flag(self._id_ED48)) {
         return;
+      }
     } else if(gettime() - var_1 >= var_0) {
       return;
     }
@@ -279,8 +293,9 @@ _id_3FB0() {
     var_2 = scripts\sp\utility::_id_864C(var_2);
     var_3 = scripts\common\trace::ray_trace(self.origin, var_2);
 
-    if(isDefined(var_3["entity"]))
+    if(isDefined(var_3["entity"])) {
       playFX(scripts\engine\utility::getfx("hill_c6_bullet_impact"), var_3["position"], var_3["normal"]);
+    }
 
     wait(randomfloatrange(0.05, 0.1));
   }
@@ -504,11 +519,13 @@ _id_68E6(var_0, var_1) {
     wait(randomfloatrange(0.25, 1));
   }
 
-  if(isalive(self))
+  if(isalive(self)) {
     self _meth_83A1();
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     scripts\sp\maps\pearlharbor\pearlharbor_util::_id_19C5(var_0);
+  }
 }
 
 _id_68E0() {
@@ -548,8 +565,9 @@ _id_3953() {
 _id_A7A7() {
   var_0 = getEnt("run_from_boat_trigger", "targetname");
 
-  if(!isDefined(level._id_CAE6) && isDefined(level._id_1C5B))
+  if(!isDefined(level._id_CAE6) && isDefined(level._id_1C5B)) {
     level.player thread scripts\sp\utility::_id_10350("phstreets_plr_ouratisgunsare");
+  }
 
   level._id_CAE6 = undefined;
   level._id_1C5B = undefined;
@@ -564,8 +582,9 @@ _id_A7A7() {
   level.allies["eth3n"] scripts\sp\utility::_id_10346("phstreets_eth_gotcha");
   wait 2;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 notify("trigger");
+  }
 
   scripts\engine\utility::flag_wait("lake_crash_wave_started");
   wait 0.75;
@@ -582,8 +601,9 @@ _id_A7A7() {
   level.allies["eth3n"] scripts\sp\utility::_id_10347("phstreets_eth_northupthestree");
   var_1 = getEnt("into_square_colors", "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 waittill("trigger");
+  }
 
   level.player scripts\sp\utility::_id_10350("phstreets_plr_openfire");
   scripts\sp\utility::_id_28D8("allies");
@@ -622,18 +642,21 @@ _id_A7B1() {
   var_4 scripts\sp\anim::_id_1EC3(var_4, "lake_ship_crash");
   level._id_A7AD["street_prestine"] = getEntArray("lake_crash_street_prestine", "targetname");
 
-  foreach(var_6 in level._id_A7AD["street_prestine"])
-  var_6 dontcastshadows();
+  foreach(var_6 in level._id_A7AD["street_prestine"]) {
+    var_6 dontcastshadows();
+  }
 
   level._id_A7AD["street_destroyed"] = getEntArray("lake_crash_street_destroyed", "targetname");
 
-  foreach(var_6 in level._id_A7AD["street_destroyed"])
-  var_6 dontcastshadows();
+  foreach(var_6 in level._id_A7AD["street_destroyed"]) {
+    var_6 dontcastshadows();
+  }
 
   level._id_A7AD["movers"] = getEntArray("lake_crash_movers", "targetname");
 
-  foreach(var_6 in level._id_A7AD["movers"])
-  var_6 dontcastshadows();
+  foreach(var_6 in level._id_A7AD["movers"]) {
+    var_6 dontcastshadows();
+  }
 }
 
 _id_AD02() {
@@ -659,8 +682,9 @@ _id_7AF4() {
   for(var_1 = 1; var_1 < self.size - 1; var_1++) {
     var_0 = var_0 + self[var_1];
 
-    if(var_1 != self.size - 2)
+    if(var_1 != self.size - 2) {
       var_0 = var_0 + "_";
+    }
   }
 
   return var_0;
@@ -670,8 +694,9 @@ _id_A7A6() {
   var_0 = level._id_A7AD["aatis"];
   var_1 = scripts\sp\utility::_id_10639("aatis", var_0.origin, var_0.angles);
 
-  if(isDefined(var_0._id_11583))
+  if(isDefined(var_0._id_11583)) {
     var_0._id_11583 delete();
+  }
 
   var_0 delete();
   var_1 thread scripts\sp\anim::_id_1EEA(var_1, "lake_ship_crash_loop", "fire_now");
@@ -732,8 +757,9 @@ _id_A7AD() {
     var_0 delete();
   }
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_2683();
+  }
 
   scripts\engine\utility::flag_wait("start_dust_area");
   level._id_A7AD["yacht"] delete();
@@ -763,8 +789,9 @@ _id_A7AA() {
       if(var_6 < var_5) {
         var_2 = var_2 - 3;
 
-        if(var_2 < var_3)
+        if(var_2 < var_3) {
           var_2 = var_3;
+        }
 
         level.player scripts\sp\utility::_id_D2CD(var_2, 0.05);
       }
@@ -899,8 +926,9 @@ _id_A7A9() {
     var_2._id_4C09 = var_3;
   }
 
-  foreach(var_6 in level._id_A7AD["street_destroyed"])
-  var_6 scripts\sp\utility::_id_100D7();
+  foreach(var_6 in level._id_A7AD["street_destroyed"]) {
+    var_6 scripts\sp\utility::_id_100D7();
+  }
 
   foreach(var_2 in var_0) {
     var_2 scripts\sp\utility::_id_100D7();
@@ -908,8 +936,9 @@ _id_A7A9() {
     var_2 scripts\engine\utility::delaycall(randomfloatrange(0, 0.25), ::moveto, var_3.origin, 2, 0, 0.5);
   }
 
-  foreach(var_6 in level._id_A7AD["street_prestine"])
-  var_6 delete();
+  foreach(var_6 in level._id_A7AD["street_prestine"]) {
+    var_6 delete();
+  }
 }
 
 _id_A7AC() {
@@ -937,8 +966,9 @@ _id_A7AC() {
     scripts\sp\utility::_id_178D(scripts\engine\utility::flag_wait, "dropship_lake_fly_away");
     scripts\sp\utility::_id_57D6();
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_4 scripts\sp\utility::_id_54C6();
+    }
   }
 
   var_0 notify("stop_fire");
@@ -951,8 +981,9 @@ _id_3951() {
   scripts\engine\utility::flag_set("cap_crash_lake_complete");
   var_0 = getEntArray("lakeside_ship_prefab", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
+  }
 }
 
 _id_10B15() {
@@ -995,8 +1026,9 @@ _id_10B0C() {
   level endon("ethan_rocket_prep");
   scripts\engine\utility::flag_wait("cap_crash_lake_complete");
 
-  while(scripts\sp\utility::_id_77DD("square_intro_guys_upper") > 1)
+  while(scripts\sp\utility::_id_77DD("square_intro_guys_upper") > 1) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\sp\utility::_id_15F5("square_street_allies_moveup");
   scripts\engine\utility::waitframe();
@@ -1008,15 +1040,17 @@ _id_10B02() {
 
   while(!scripts\engine\utility::flag("square_complete")) {
     foreach(var_2 in level.allies) {
-      if(var_2 istouching(var_0))
+      if(var_2 istouching(var_0)) {
         var_2 scripts\sp\utility::_id_61E7();
+      }
     }
 
     wait 1;
   }
 
-  foreach(var_2 in level.allies)
-  var_2 scripts\sp\utility::_id_5514();
+  foreach(var_2 in level.allies) {
+    var_2 scripts\sp\utility::_id_5514();
+  }
 }
 
 _id_10B0E() {
@@ -1053,18 +1087,21 @@ _id_10B08() {
     var_4 scripts\sp\utility::_id_1747(::_id_10B05);
   }
 
-  while(level._id_10B07 < 6)
+  while(level._id_10B07 < 6) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::flag_set("first_fallback_cqb_combat");
 
-  while(level._id_10B07 < 10)
+  while(level._id_10B07 < 10) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::flag_set("fallback_into_cqb_room");
 
-  while(level._id_10B07 < 11)
+  while(level._id_10B07 < 11) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::flag_set("fallback_out_of_cqb_room");
   var_6 = getaiarray("axis");
@@ -1075,8 +1112,9 @@ _id_10B08() {
   }
 
   foreach(var_8 in var_1) {
-    if(isDefined(var_8))
+    if(isDefined(var_8)) {
       var_8 scripts\engine\utility::trigger_off();
+    }
   }
 
   var_2 scripts\sp\utility::_id_15F1();
@@ -1091,13 +1129,15 @@ _id_10B03() {
     var_4 = scripts\sp\utility::_id_2C17(var_3);
     var_1[var_1.size] = var_4;
 
-    if(isDefined(var_3.script_parameters) && var_3.script_parameters == "friendlyfire")
+    if(isDefined(var_3.script_parameters) && var_3.script_parameters == "friendlyfire") {
       var_4 thread _id_0B0F::_id_19FC(1, 1);
-    else
+    } else {
       var_4 notsolid();
+    }
 
-    if(var_4.weapon != "none")
+    if(var_4.weapon != "none") {
       var_4 scripts\sp\utility::_id_86E4();
+    }
 
     if(isDefined(var_4.animation)) {
       var_4._id_1FBB = "civilian";
@@ -1110,8 +1150,9 @@ _id_10B03() {
 
   scripts\engine\utility::flag_wait("start_dust_area");
 
-  foreach(var_7 in var_1)
-  var_7 delete();
+  foreach(var_7 in var_1) {
+    var_7 delete();
+  }
 }
 
 _id_6756(var_0) {
@@ -1120,8 +1161,9 @@ _id_6756(var_0) {
   wait 1;
   level.player scripts\sp\utility::_id_10350("phstreets_plr_itsadeadendetha");
 
-  if(!scripts\engine\utility::flag("eth3n_boost_jump"))
+  if(!scripts\engine\utility::flag("eth3n_boost_jump")) {
     level.allies["eth3n"] scripts\sp\utility::_id_10346("phstreets_eth_icangetusoverth");
+  }
 }
 
 _id_EA48() {
@@ -1132,13 +1174,15 @@ _id_EA48() {
   var_0 = 16384;
   var_1 = getnode("start_cap_crash_dust_eth3n", "targetname");
 
-  while(distance2dsquared(level.allies["salter"].origin, var_1.origin) > var_0)
+  while(distance2dsquared(level.allies["salter"].origin, var_1.origin) > var_0) {
     wait 0.25;
+  }
 
   var_0 = 176400;
 
-  while(distance2dsquared(level.allies["salter"].origin, level.player.origin) < var_0)
+  while(distance2dsquared(level.allies["salter"].origin, level.player.origin) < var_0) {
     wait 0.25;
+  }
 
   level.allies["salter"] scripts\sp\utility::_id_10346("phstreets_slt_catchupreyesweneedto");
 }
@@ -1158,8 +1202,9 @@ _id_10B1A() {
   var_0 = getEnt("combat_square_upstairs_volume", "targetname");
   var_1 = var_0 scripts\sp\utility::_id_77E3("axis");
 
-  foreach(var_3 in var_1)
-  var_3 delete();
+  foreach(var_3 in var_1) {
+    var_3 delete();
+  }
 }
 
 _id_10B0A() {
@@ -1242,15 +1287,17 @@ _id_10192() {
 }
 
 _id_6F63() {
-  while(scripts\sp\utility::_id_77DB("2nd_story_guys") >= 3)
+  while(scripts\sp\utility::_id_77DB("2nd_story_guys") >= 3) {
     wait 0.2;
+  }
 
   wait 2.0;
   var_0 = scripts\sp\utility::_id_77DA("2nd_story_guys");
   var_1 = getEnt("second_story_delete", "targetname");
 
-  foreach(var_3 in var_0)
-  var_3 _meth_82F1(var_1);
+  foreach(var_3 in var_0) {
+    var_3 _meth_82F1(var_1);
+  }
 }
 
 _id_5180() {
@@ -1263,8 +1310,9 @@ _id_2818() {
   var_0 = getEntArray("square_bar_fan", "targetname");
 
   foreach(var_2 in var_0) {
-    if(var_2.script_speed != 0)
+    if(var_2.script_speed != 0) {
       var_2 rotatevelocity((0, var_2.script_speed * -1, 0), 9999);
+    }
   }
 }
 
@@ -1326,18 +1374,21 @@ _id_D6E6() {
   level.allies["salter"] scripts\sp\utility::_id_10346("phstreets_slt_tryandflankem");
   level.allies["admiral"] scripts\sp\utility::_id_10346("phstreets_adm_wellcoveryou");
 
-  while(getaiarray("axis").size > 1)
+  while(getaiarray("axis").size > 1) {
     wait 0.1;
+  }
 
-  if(!scripts\engine\utility::flag("square_complete"))
+  if(!scripts\engine\utility::flag("square_complete")) {
     level.allies["eth3n"] scripts\sp\utility::_id_10346("phstreets_eth_nothreats");
+  }
 
   wait 1;
 
-  if(!scripts\engine\utility::flag("player_entering_square_store") && !scripts\engine\utility::flag("square_complete"))
+  if(!scripts\engine\utility::flag("player_entering_square_store") && !scripts\engine\utility::flag("square_complete")) {
     level.allies["eth3n"] scripts\sp\utility::_id_10346("phstreets_eth_optimalrouteist");
-  else if(!scripts\engine\utility::flag("square_complete"))
+  } else if(!scripts\engine\utility::flag("square_complete")) {
     level.player scripts\sp\utility::_id_10350("phstreets_plr_throughhere");
+  }
 
   thread _id_EA48();
 }
@@ -1474,18 +1525,21 @@ _id_10B01() {
   level._id_10B13 = undefined;
   var_6 = getEnt("square_table_clip", "targetname");
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_6 delete();
+  }
 
   var_6 = getEnt("square_table_flip_clip", "targetname");
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_6 delete();
+  }
 
   var_7 = getEntArray("square_bar_fan", "targetname");
 
-  foreach(var_9 in var_7)
-  scripts\sp\maps\pearlharbor\pearlharbor_util::_id_EA01(var_9);
+  foreach(var_9 in var_7) {
+    scripts\sp\maps\pearlharbor\pearlharbor_util::_id_EA01(var_9);
+  }
 
   scripts\sp\maps\pearlharbor\pearlharbor_util::_id_EA01(var_5);
   thread _id_1112D();
@@ -1497,8 +1551,9 @@ _id_1112D() {
   _id_0B0F::_id_40C5("harbor_vista_airbattle");
   _id_0B0F::_id_40C5("combat_3_ambient_battle");
 
-  if(isDefined(level._id_4820))
+  if(isDefined(level._id_4820)) {
     level._id_4820 delete();
+  }
 
   level._id_4820 = undefined;
   level._id_13853 = undefined;
@@ -1506,8 +1561,9 @@ _id_1112D() {
   level._id_B2BA = undefined;
 
   if(isDefined(level._id_8590)) {
-    foreach(var_1 in level._id_8590)
-    scripts\sp\maps\pearlharbor\pearlharbor_util::_id_EA02(var_1);
+    foreach(var_1 in level._id_8590) {
+      scripts\sp\maps\pearlharbor\pearlharbor_util::_id_EA02(var_1);
+    }
   }
 
   level._id_8590 = undefined;
@@ -1526,25 +1582,31 @@ _id_1112D() {
     level._id_8B26 = undefined;
   }
 
-  if(isDefined(level._id_A7AD["yacht"]))
+  if(isDefined(level._id_A7AD["yacht"])) {
     level._id_A7AD["yacht"] delete();
+  }
 
   var_3 = getEnt("lakecrash_yacht_clip", "targetname");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 delete();
+  }
 
-  if(isDefined(level._id_A7AD["street_prestine"]))
+  if(isDefined(level._id_A7AD["street_prestine"])) {
     scripts\sp\maps\pearlharbor\pearlharbor_util::_id_EA02(level._id_A7AD["street_prestine"]);
+  }
 
-  if(isDefined(level._id_A7AD["street_destroyed"]))
+  if(isDefined(level._id_A7AD["street_destroyed"])) {
     scripts\sp\maps\pearlharbor\pearlharbor_util::_id_EA02(level._id_A7AD["street_destroyed"]);
+  }
 
-  if(isDefined(level._id_A7AD["movers"]))
+  if(isDefined(level._id_A7AD["movers"])) {
     scripts\sp\maps\pearlharbor\pearlharbor_util::_id_EA02(level._id_A7AD["movers"]);
+  }
 
-  if(isDefined(level._id_A7AD["aatis"]))
+  if(isDefined(level._id_A7AD["aatis"])) {
     level._id_A7AD["aatis"] delete();
+  }
 
   level._id_A7AD = undefined;
 }

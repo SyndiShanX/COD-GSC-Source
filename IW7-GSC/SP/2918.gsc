@@ -38,8 +38,9 @@ _id_DAC1(var_0, var_1, var_2) {
     if(var_5 != var_6) {
       level.player notify("proximity_hack_state_change", var_5, var_6);
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         var_2 notify("proximity_hack_state_change", var_5, var_6);
+      }
 
       var_6 = var_5;
     }
@@ -57,30 +58,35 @@ _id_DAC2() {
 }
 
 _id_DABC() {
-  if(scripts\engine\utility::flag("proximity_hacking"))
+  if(scripts\engine\utility::flag("proximity_hacking")) {
     setomnvar("ui_hacking_time", -1);
+  }
 }
 
 _id_DABD(var_0) {
   if(scripts\engine\utility::flag("proximity_hacking")) {
-    if(scripts\engine\utility::flag("proximity_hacking_nodegrade"))
+    if(scripts\engine\utility::flag("proximity_hacking_nodegrade")) {
       setomnvar("ui_hacking_time", -3);
-    else
+    } else {
       setomnvar("ui_hacking_time", -2);
+    }
   }
 }
 
 _id_DABA() {
-  if(scripts\engine\utility::flag("proximity_hacking"))
+  if(scripts\engine\utility::flag("proximity_hacking")) {
     setomnvar("ui_hacking_time", 1);
+  }
 }
 
 _id_DAC0(var_0, var_1, var_2, var_3) {
-  if(!scripts\engine\utility::flag_exist("proximity_hacking_nodegrade"))
+  if(!scripts\engine\utility::flag_exist("proximity_hacking_nodegrade")) {
     scripts\engine\utility::flag_init("proximity_hacking_nodegrade");
+  }
 
-  if(!scripts\engine\utility::flag_exist("proximity_hacking"))
+  if(!scripts\engine\utility::flag_exist("proximity_hacking")) {
     scripts\engine\utility::flag_init("proximity_hacking");
+  }
 
   var_4 = 1 / (var_0 * 20);
   var_5 = 0;
@@ -99,12 +105,14 @@ _id_DAC0(var_0, var_1, var_2, var_3) {
 
     var_8 = 1;
 
-    if(var_7 == 2)
+    if(var_7 == 2) {
       var_8 = 0.5;
+    }
 
     if(var_7 == 3) {
-      if(!scripts\engine\utility::flag("proximity_hacking_nodegrade"))
+      if(!scripts\engine\utility::flag("proximity_hacking_nodegrade")) {
         var_5 = var_5 - var_4 * 0.5;
+      }
     } else
       var_5 = var_5 + var_4 * var_8;
 
@@ -154,12 +162,13 @@ get_proximity_state(var_0, var_1, var_2) {
   var_4 = squared(var_1 * 0.75);
   var_5 = distance2dsquared(level.player.origin, var_2);
 
-  if(var_5 > var_3)
+  if(var_5 > var_3) {
     return 3;
-  else if(var_5 > var_4 && var_5 < var_3)
+  } else if(var_5 > var_4 && var_5 < var_3) {
     return 2;
-  else if(var_5 < var_4)
+  } else if(var_5 < var_4) {
     return 1;
+  }
 }
 
 reset_hack_state() {

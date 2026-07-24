@@ -116,26 +116,30 @@ _id_F34E(var_0) {
 _id_D092(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
   self endon("death");
 
-  if(!isDefined(self._id_77C1))
+  if(!isDefined(self._id_77C1)) {
     self._id_77C1 = spawnStruct();
+  }
 
   if(isDefined(var_1) && var_1 == 1) {
     if(level.player getstance() == "prone") {
-      if(isDefined(self._id_77C1._id_DA82)) {} else if(isDefined(level.player._id_BCF5))
+      if(isDefined(self._id_77C1._id_DA82)) {} else if(isDefined(level.player._id_BCF5)) {
         self._id_77C1._id_DA82 = level.player._id_BCF5;
-      else
+      } else {
         self._id_77C1._id_DA82 = 1.0;
+      }
 
       scripts\sp\utility::_id_2B76(0.0);
       thread _id_D094(var_0);
 
-      if(!isDefined(self._id_77C1._id_E2F4))
+      if(!isDefined(self._id_77C1._id_E2F4)) {
         self._id_77C1._id_E2F4 = 0;
+      }
 
       self._id_77C1._id_E2F4++;
     } else {
-      if(!isDefined(self._id_77C1._id_E2F5))
+      if(!isDefined(self._id_77C1._id_E2F5)) {
         self._id_77C1._id_E2F5 = 0;
+      }
 
       self._id_77C1._id_E2F5++;
       scripts\engine\utility::allow_prone(0);
@@ -145,88 +149,98 @@ _id_D092(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 
   if(isDefined(var_2) && var_2 == 1) {
-    if(!isDefined(self._id_77C1._id_E2F0))
+    if(!isDefined(self._id_77C1._id_E2F0)) {
       self._id_77C1._id_E2F0 = 0;
+    }
 
     self._id_77C1._id_E2F0++;
     scripts\engine\utility::allow_mantle(0);
   }
 
   if(isDefined(var_3) && var_3 == 1) {
-    if(!isDefined(self._id_77C1._id_E2F7))
+    if(!isDefined(self._id_77C1._id_E2F7)) {
       self._id_77C1._id_E2F7 = 0;
+    }
 
     self._id_77C1._id_E2F7++;
     scripts\engine\utility::allow_sprint(0);
   }
 
   if(isDefined(var_4) && var_4 == 1) {
-    if(!isDefined(self._id_77C1._id_E2EF))
+    if(!isDefined(self._id_77C1._id_E2EF)) {
       self._id_77C1._id_E2EF = 0;
+    }
 
     self._id_77C1._id_E2EF++;
     scripts\engine\utility::allow_fire(0);
   }
 
   if(isDefined(var_5) && var_5 == 1) {
-    if(!isDefined(self._id_77C1._id_E2F6))
+    if(!isDefined(self._id_77C1._id_E2F6)) {
       self._id_77C1._id_E2F6 = 0;
+    }
 
     self._id_77C1._id_E2F6++;
     scripts\engine\utility::allow_reload(0);
   }
 
   if(isDefined(var_6) && var_6 == 1) {
-    if(!isDefined(self._id_77C1._id_E2F9))
+    if(!isDefined(self._id_77C1._id_E2F9)) {
       self._id_77C1._id_E2F9 = 0;
+    }
 
     self._id_77C1._id_E2F9++;
     scripts\engine\utility::allow_weapon_switch(0);
   }
 
   if(isDefined(var_7) && var_7 == 1) {
-    if(!isDefined(self._id_77C1._id_E2ED))
+    if(!isDefined(self._id_77C1._id_E2ED)) {
       self._id_77C1._id_E2ED = 0;
+    }
 
     self._id_77C1._id_E2ED++;
     scripts\engine\utility::allow_ads(0);
   }
 
   if(isDefined(var_8) && var_8 == 1) {
-    if(!isDefined(self._id_77C1._id_E2F8))
+    if(!isDefined(self._id_77C1._id_E2F8)) {
       self._id_77C1._id_E2F8 = 0;
+    }
 
     self._id_77C1._id_E2F8++;
     scripts\engine\utility::allow_wallrun(0);
   }
 
   if(isDefined(var_9) && var_9 == 1) {
-    if(!isDefined(self._id_77C1._id_E2EE))
+    if(!isDefined(self._id_77C1._id_E2EE)) {
       self._id_77C1._id_E2EE = 0;
+    }
 
     self._id_77C1._id_E2EE++;
     scripts\engine\utility::allow_doublejump(0);
   }
 
   if(isDefined(var_10) && var_10 == 1) {
-    if(!isDefined(self._id_77C1._id_E2F1))
+    if(!isDefined(self._id_77C1._id_E2F1)) {
       self._id_77C1._id_E2F1 = 0;
+    }
 
     self._id_77C1._id_E2F1++;
     scripts\engine\utility::allow_melee(0);
   }
 
   if(isDefined(var_11) && var_11 == 1) {
-    if(!isDefined(self._id_77C1._id_E2F2))
+    if(!isDefined(self._id_77C1._id_E2F2)) {
       self._id_77C1._id_E2F2 = 0;
+    }
 
     self._id_77C1._id_E2F2++;
     scripts\engine\utility::allow_offhand_weapons(0);
   }
 
-  if(isDefined(var_12))
+  if(isDefined(var_12)) {
     wait(var_12);
-  else {
+  } else {
     self waittill("gesture_stopped", var_13);
 
     if(var_13 != var_0) {
@@ -245,8 +259,9 @@ _id_D092(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 }
 
 _id_D093(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
-  if(!isDefined(self._id_77C1))
+  if(!isDefined(self._id_77C1)) {
     self._id_77C1 = spawnStruct();
+  }
 
   if(isDefined(var_0) && var_0 > 0) {
     if(isDefined(self._id_77C1._id_E2F4) && self._id_77C1._id_E2F4 > 0) {
@@ -266,35 +281,45 @@ _id_D093(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     }
   }
 
-  if(isDefined(var_1) && var_1 == 1)
+  if(isDefined(var_1) && var_1 == 1) {
     scripts\engine\utility::allow_mantle(1);
+  }
 
-  if(isDefined(var_2) && var_2 == 1)
+  if(isDefined(var_2) && var_2 == 1) {
     scripts\engine\utility::allow_sprint(1);
+  }
 
-  if(isDefined(var_3) && var_3 == 1)
+  if(isDefined(var_3) && var_3 == 1) {
     scripts\engine\utility::allow_fire(1);
+  }
 
-  if(isDefined(var_4) && var_4 == 1)
+  if(isDefined(var_4) && var_4 == 1) {
     scripts\engine\utility::allow_reload(1);
+  }
 
-  if(isDefined(var_5) && var_5 == 1)
+  if(isDefined(var_5) && var_5 == 1) {
     scripts\engine\utility::allow_weapon_switch(1);
+  }
 
-  if(isDefined(var_6) && var_6 == 1)
+  if(isDefined(var_6) && var_6 == 1) {
     scripts\engine\utility::allow_ads(1);
+  }
 
-  if(isDefined(var_7) && var_7 == 1)
+  if(isDefined(var_7) && var_7 == 1) {
     scripts\engine\utility::allow_wallrun(1);
+  }
 
-  if(isDefined(var_8) && var_8 == 1)
+  if(isDefined(var_8) && var_8 == 1) {
     scripts\engine\utility::allow_doublejump(1);
+  }
 
-  if(isDefined(var_9) && var_9 == 1)
+  if(isDefined(var_9) && var_9 == 1) {
     scripts\engine\utility::allow_melee(1);
+  }
 
-  if(isDefined(var_10) && var_10 == 1)
+  if(isDefined(var_10) && var_10 == 1) {
     scripts\engine\utility::allow_offhand_weapons(1);
+  }
 }
 
 _id_D094(var_0) {
@@ -315,8 +340,9 @@ _id_D094(var_0) {
         }
       }
 
-      if(!isDefined(self._id_77C1._id_E2F5))
+      if(!isDefined(self._id_77C1._id_E2F5)) {
         self._id_77C1._id_E2F5 = 0;
+      }
 
       self._id_77C1._id_E2F5++;
       scripts\engine\utility::allow_prone(0);

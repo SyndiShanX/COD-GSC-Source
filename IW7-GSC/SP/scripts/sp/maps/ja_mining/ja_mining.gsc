@@ -59,15 +59,17 @@ _id_A046() {
     var_10 = scripts\engine\utility::waittill_any_in_array_return(var_9);
     var_11 = 0;
 
-    if(var_10 == "player_completed_objective")
+    if(var_10 == "player_completed_objective") {
       var_11 = 1;
-    else if(var_10 == "player_killed_enemyskelter")
+    } else if(var_10 == "player_killed_enemyskelter") {
       var_8 = var_8 + var_1;
-    else if(var_10 == "player_killed_enemyace")
+    } else if(var_10 == "player_killed_enemyace") {
       var_8 = var_8 + var_2;
+    }
 
-    if(var_8 >= var_0)
+    if(var_8 >= var_0) {
       var_11 = 1;
+    }
 
     if(var_11) {
       level._id_A3A8["skelters"]._id_FE2D = scripts\engine\utility::array_removeundefined(level._id_A3A8["skelters"]._id_FE2D);
@@ -97,15 +99,17 @@ _id_A045() {
 }
 
 _id_900C() {
-  if(scripts\engine\utility::flag("launch_started") || !scripts\engine\utility::flag("launch_area_clear"))
+  if(scripts\engine\utility::flag("launch_started") || !scripts\engine\utility::flag("launch_area_clear")) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_9006() {
-  if(scripts\engine\utility::flag("launch_started") || scripts\engine\utility::flag("launch_area_clear"))
+  if(scripts\engine\utility::flag("launch_started") || scripts\engine\utility::flag("launch_area_clear")) {
     return 1;
+  }
 
   return 0;
 }
@@ -136,10 +140,11 @@ _id_B209() {
   scripts\engine\utility::flag_wait("acescomplete");
   scripts\engine\utility::flag_wait("skelterscomplete");
 
-  if(scripts\engine\utility::flag("heat_death_started"))
+  if(scripts\engine\utility::flag("heat_death_started")) {
     scripts\engine\utility::flag_waitopen("heat_death_started");
-  else
+  } else {
     _id_F3FE(40);
+  }
 
   level notify("stop_heat_nags");
   scripts\engine\utility::flag_wait("acescomplete_vo_finished");
@@ -171,17 +176,19 @@ _id_C505() {
     var_2 = [];
 
     foreach(var_4 in var_0) {
-      if(!scripts\engine\utility::flag_exist(var_4) || !scripts\engine\utility::flag(var_4))
+      if(!scripts\engine\utility::flag_exist(var_4) || !scripts\engine\utility::flag(var_4)) {
         var_2[var_2.size] = var_4;
+      }
     }
 
     if(var_2.size == 1) {
       var_6 = 0.7;
 
-      if(var_2[0] == "skelterscomplete_vo_finished")
+      if(var_2[0] == "skelterscomplete_vo_finished") {
         thread _id_10AE::_id_CE80(::_id_10238, 0, var_6);
-      else
+      } else {
         thread _id_10AE::_id_CE80(::_id_1561, 0, var_6);
+      }
 
       break;
     }
@@ -240,8 +247,9 @@ _id_B20F() {
   thread _id_AA95();
   thread _id_AA57();
 
-  while(!(scripts\engine\utility::flag("launch_area_clear") && level.player useButtonPressed()))
+  while(!(scripts\engine\utility::flag("launch_area_clear") && level.player useButtonPressed())) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::flag_set("launch_started");
   level._id_D299 = _id_D2A6("player_sled", undefined, 0);
@@ -312,17 +320,18 @@ _id_AA57() {
       var_11 = level._id_D127.origin + var_7 * var_10[0] + var_2 * var_10[1] + var_6 * var_10[2];
       var_12 = bullettracepassed(var_1, var_11, 0, level._id_D127);
 
-      if(!var_12)
+      if(!var_12) {
         var_8 = 0;
-      else {}
+      } else {}
 
       var_1 = var_11;
     }
 
-    if(var_8)
+    if(var_8) {
       scripts\engine\utility::flag_set("launch_area_clear");
-    else
+    } else {
       scripts\engine\utility::flag_clear("launch_area_clear");
+    }
 
     wait 0.1;
   }
@@ -334,8 +343,9 @@ _id_AAA1() {
   wait 0.7;
   scripts\sp\utility::_id_10350("ja_mining_eth_startingcountdo");
 
-  if(!scripts\sp\utility::_id_93A6())
+  if(!scripts\sp\utility::_id_93A6()) {
     _id_0BDC::_id_A228();
+  }
 
   scripts\engine\utility::flag_set("start_heat_death_timer");
   scripts\sp\utility::_id_10350("ja_mining_slt_eyesonenemyskel");
@@ -414,8 +424,9 @@ _id_1DE7() {
     if(!issubstr(var_2.classname, "script_brushmodel")) {
       var_3 = getEntArray(var_2.target, "targetname");
 
-      if(isDefined(var_2.target))
+      if(isDefined(var_2.target)) {
         scripts\engine\utility::array_call(var_3, ::linkto, var_2);
+      }
 
       level._id_E736[level._id_E736.size] = var_2;
       var_2 thread _id_1DE6();
@@ -429,8 +440,9 @@ _id_1DE6() {
   var_2 = 2;
   var_3 = [];
 
-  if(isDefined(self.script_parameters))
+  if(isDefined(self.script_parameters)) {
     var_3 = strtok(self.script_parameters, " ");
+  }
 
   var_4 = [];
   var_5 = [];
@@ -438,14 +450,15 @@ _id_1DE6() {
 
   for(var_6 = 0; var_6 < var_2; var_6++) {
     if(!isDefined(var_3[var_6])) {
-      if(var_3.size == 1)
+      if(var_3.size == 1) {
         var_4[var_6] = float(var_3[0]);
-      else
+      } else {
         var_4[var_6] = randomintrange(var_0, var_1);
+      }
     } else
       var_4[var_6] = float(var_3[var_6]);
 
-    var_5[var_6] = scripts\engine\utility::random([-1, 1]);
+    var_5[var_6] = ::scripts\engine\utility::random([-1, 1]);
   }
 
   for(;;) {
@@ -459,8 +472,9 @@ _id_1DE6() {
 
     self.angles = (var_7[0], var_7[1], self.angles[2]);
 
-    if(getdvarint("debug_rotate") == 1)
+    if(getdvarint("debug_rotate") == 1) {
       thread scripts\engine\utility::draw_ent_axis((1, 0, 0), 2, 1000);
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -470,10 +484,11 @@ _id_111D3() {
   level endon("stop_heat_timer");
   scripts\engine\utility::flag_wait("start_heat_death_timer");
 
-  if(level._id_10CDA != "test_death")
+  if(level._id_10CDA != "test_death") {
     level._id_11912 = level._id_7683;
-  else
+  } else {
     level._id_11912 = 4;
+  }
 
   level._id_DF63 = level._id_118CF[level._id_11912][0] * 1000;
   level._id_8CE3 = 0;
@@ -534,8 +549,9 @@ _id_8CD6() {
     var_3 = scripts\sp\math::_id_6A8E(-1500, -250, scripts\sp\math::_id_C09A(var_0));
     var_4 = scripts\sp\math::_id_6A8E(0, 2, var_0);
 
-    if(var_1 > 0)
+    if(var_1 > 0) {
       earthquake(var_1, randomfloatrange(0.1, 0.25), level._id_D127.origin, 20000);
+    }
 
     level._id_8CE1 _meth_8278(var_4, 0.05);
     var_5 = level._id_D127 gettagorigin("j_mainroot_ship");
@@ -665,13 +681,15 @@ _id_12E42() {
 }
 
 _id_13787(var_0) {
-  while(_id_7A00() / 1000 > var_0)
+  while(_id_7A00() / 1000 > var_0) {
     wait 0.2;
+  }
 }
 
 _id_13788(var_0) {
-  while(_id_7A01() / 1000 > var_0)
+  while(_id_7A01() / 1000 > var_0) {
     wait 0.2;
+  }
 }
 
 _id_CA27(var_0, var_1, var_2) {
@@ -684,13 +702,15 @@ _id_CA27(var_0, var_1, var_2) {
   for(;;) {
     var_4 = randomfloatrange(var_3 * -1, var_3);
 
-    if(level._id_D127._id_B154 > var_1 + var_4)
+    if(level._id_D127._id_B154 > var_1 + var_4) {
       self dodamage(var_1 + var_4, self.origin + (0, 0, 0), undefined, undefined, "MOD_GRENADE_SPLASH");
+    }
 
     var_4 = 0;
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_4 = randomfloatrange(var_2 * -1, var_2);
+    }
 
     wait(var_0 + var_4);
   }
@@ -744,13 +764,15 @@ _id_CFDE() {
   level._id_D299 thread scripts\sp\anim::_id_1F35(level._id_D299, var_1);
   var_8 = 14;
 
-  if(scripts\engine\utility::is_true(level._id_12658))
+  if(scripts\engine\utility::is_true(level._id_12658)) {
     var_8 = 0;
+  }
 
   thread _id_0BDB::_id_CFE0(var_8);
 
-  if(!scripts\engine\utility::is_true(level._id_12658))
+  if(!scripts\engine\utility::is_true(level._id_12658)) {
     level._id_D127 waittill("notify_player_launch");
+  }
 
   scripts\engine\utility::flag_set("launch_boost");
   _id_0BDC::_id_A38E(16, 0.7, 0.7, 1.5);
@@ -906,8 +928,9 @@ _id_D2A6(var_0, var_1, var_2) {
   var_4 notsolid();
   var_4 thread _id_0BDC::_id_D29D();
 
-  if(scripts\engine\utility::is_true(var_2))
+  if(scripts\engine\utility::is_true(var_2)) {
     var_4 setModel("veh_mil_air_un_jackal_02");
+  }
 
   return var_4;
 }
@@ -930,8 +953,9 @@ _id_16BD(var_0, var_1, var_2) {
   if(getdvarint("loc_warnings", 0)) {
     return;
   }
-  if(!isDefined(level._id_4EC3))
+  if(!isDefined(level._id_4EC3)) {
     level._id_4EC3 = [];
+  }
 
   var_3 = "^3";
 
@@ -991,8 +1015,9 @@ _id_16BD(var_0, var_1, var_2) {
     if(var_7 == 0) {
       continue;
     }
-    if(isDefined(var_6))
+    if(isDefined(var_6)) {
       var_6.y = 325 - var_7 * 18;
+    }
   }
 
   wait 2;

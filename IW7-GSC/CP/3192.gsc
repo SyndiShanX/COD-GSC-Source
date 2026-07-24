@@ -18,11 +18,13 @@ _id_FE6A(var_0, var_1, var_2, var_3) {
 }
 
 _id_8602() {
-  if(scripts\asm\asm_bb::bb_moverequested())
+  if(scripts\asm\asm_bb::bb_moverequested()) {
     return 0;
+  }
 
-  if(!scripts\asm\asm_bb::_id_291C())
+  if(!scripts\asm\asm_bb::_id_291C()) {
     return 0;
+  }
 
   return 1;
 }
@@ -69,10 +71,11 @@ _id_13F8E(var_0, var_1, var_2, var_3) {
 }
 
 _id_13F6F(var_0, var_1, var_2) {
-  if(scripts\engine\utility::is_true(self.i_am_clone))
+  if(scripts\engine\utility::is_true(self.i_am_clone)) {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "cloneGreyIdle");
-  else
+  } else {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "masterGreyIdle");
+  }
 }
 
 _id_13F71(var_0, var_1, var_2, var_3) {
@@ -82,8 +85,9 @@ _id_13F71(var_0, var_1, var_2, var_3) {
   level thread _id_10BF0(self);
   scripts\cp\cp_vo::try_to_play_vo_on_all_players("quest_ufo_spawn_minialiens");
 
-  if(!scripts\engine\utility::flag("clone_complete"))
+  if(!scripts\engine\utility::flag("clone_complete")) {
     scripts\engine\utility::flag_wait("clone_complete");
+  }
 
   self.doing_duplicating_attack = 0;
   _id_4131();
@@ -120,17 +124,20 @@ _id_23D7(var_0) {
   foreach(var_8, var_4 in level.spawned_grey) {
     var_4 setthreatbiasgroup("grey" + (var_8 % var_2 + 1));
 
-    foreach(var_6 in level.players)
-    var_4 getenemyinfo(var_6);
+    foreach(var_6 in level.players) {
+      var_4 getenemyinfo(var_6);
+    }
   }
 
-  foreach(var_10, var_6 in var_1)
-  var_6 setthreatbiasgroup("player" + (var_10 + 1));
+  foreach(var_10, var_6 in var_1) {
+    var_6 setthreatbiasgroup("player" + (var_10 + 1));
+  }
 }
 
 _id_8E85() {
-  foreach(var_1 in level.spawned_grey)
-  var_1 notify("update_mobile_shield_visibility", 0);
+  foreach(var_1 in level.spawned_grey) {
+    var_1 notify("update_mobile_shield_visibility", 0);
+  }
 }
 
 _id_7CDC() {
@@ -157,8 +164,9 @@ _id_7813(var_0, var_1) {
   var_3 = var_0.angles;
   var_4 = [];
 
-  for(var_5 = 0; var_5 < var_1; var_5++)
+  for(var_5 = 0; var_5 < var_1; var_5++) {
     var_4[var_4.size] = var_2 / 2 + var_5 * var_2;
+  }
 
   return var_4;
 }
@@ -198,8 +206,9 @@ _id_F5F3(var_0) {
   var_1 thread _id_CD2C(var_1, var_0);
   var_1 thread _id_13340(var_1, var_0);
 
-  if(!isDefined(level._id_85EB))
+  if(!isDefined(level._id_85EB)) {
     level._id_85EB = [];
+  }
 
   level._id_85EB[level._id_85EB.size] = var_1;
 }
@@ -228,8 +237,9 @@ _id_13340(var_0, var_1) {
 }
 
 set_grey_clone(var_0) {
-  foreach(var_2 in var_0.available_fuse)
-  var_2 hide();
+  foreach(var_2 in var_0.available_fuse) {
+    var_2 hide();
+  }
 
   var_0 notify("stop_health_light_monitor");
   var_0.i_am_clone = 1;
@@ -248,32 +258,37 @@ _id_4131() {
 }
 
 _id_1870() {
-  foreach(var_1 in level.spawned_grey)
-  var_1.health = level.clone_health;
+  foreach(var_1 in level.spawned_grey) {
+    var_1.health = level.clone_health;
+  }
 }
 
 _id_1872() {
-  foreach(var_1 in level.spawned_grey)
-  _id_F3E9(var_1, 1.0);
+  foreach(var_1 in level.spawned_grey) {
+    _id_F3E9(var_1, 1.0);
+  }
 }
 
 _id_F3E9(var_0, var_1) {
-  if(isDefined(var_0.moveplaybackrate))
+  if(isDefined(var_0.moveplaybackrate)) {
     var_0._id_D8A4 = var_0.moveplaybackrate;
+  }
 
   var_0.moveplaybackrate = var_1;
 }
 
 _id_E2FB(var_0) {
-  if(isDefined(var_0._id_D8A4))
+  if(isDefined(var_0._id_D8A4)) {
     var_0.moveplaybackrate = var_0._id_D8A4;
-  else
+  } else {
     var_0.moveplaybackrate = undefined;
+  }
 }
 
 _id_1871() {
-  foreach(var_1 in level.spawned_grey)
-  _id_F3E8(var_1, 90000);
+  foreach(var_1 in level.spawned_grey) {
+    _id_F3E8(var_1, 90000);
+  }
 }
 
 _id_F3E8(var_0, var_1) {
@@ -289,8 +304,9 @@ _id_424F() {
   wait 0.1;
   var_0 = ["jump_left", "jump_right", "jump_back", "jump_left"];
 
-  foreach(var_3, var_2 in level.spawned_grey)
-  var_2 thread _id_CE3B(var_2, var_0[var_3]);
+  foreach(var_3, var_2 in level.spawned_grey) {
+    var_2 thread _id_CE3B(var_2, var_0[var_3]);
+  }
 }
 
 _id_CE3B(var_0, var_1) {
@@ -334,10 +350,11 @@ _id_13F76(var_0, var_1, var_2, var_3) {
 }
 
 _id_3EDC(var_0, var_1, var_2) {
-  if(scripts\engine\utility::is_true(self.i_am_clone))
+  if(scripts\engine\utility::is_true(self.i_am_clone)) {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "mini_grey_melee");
-  else
+  } else {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "master_grey_melee");
+  }
 }
 
 _id_13F75(var_0, var_1, var_2, var_3) {
@@ -352,8 +369,9 @@ _id_111C2(var_0) {
   try_kill_off_zombies(6);
   var_1 = _id_818D(var_0, 6, 128);
 
-  foreach(var_3 in var_1)
-  level thread summon_a_zombie_at(var_3, 0);
+  foreach(var_3 in var_1) {
+    level thread summon_a_zombie_at(var_3, 0);
+  }
 }
 
 summon_a_zombie_at(var_0, var_1) {
@@ -364,8 +382,9 @@ summon_a_zombie_at(var_0, var_1) {
   var_3 = var_2 scripts\cp\zombies\zombies_spawning::spawn_wave_enemy("generic_zombie", 1);
 
   if(isDefined(var_3)) {
-    if(scripts\engine\utility::is_true(var_1))
+    if(scripts\engine\utility::is_true(var_1)) {
       var_3 scragentsetanimscale(0.0, 1.0);
+    }
 
     var_4 = spawnfx(level._effect["summon_zombie_energy_ring"], var_0 + (0, 0, -11), (0, 0, 1), (1, 0, 0));
     playsoundatpos(var_0 + (0, 0, -11), "zmb_grey_energy_ring_activate");
@@ -373,8 +392,9 @@ summon_a_zombie_at(var_0, var_1) {
     triggerfx(var_4);
     var_3 scripts\engine\utility::waittill_any("death", "intro_vignette_done");
 
-    if(scripts\engine\utility::is_true(var_1) && isDefined(var_3))
+    if(scripts\engine\utility::is_true(var_1) && isDefined(var_3)) {
       var_3 scragentsetanimscale(1.0, 1.0);
+    }
 
     playsoundatpos(var_0 + (0, 0, -11), "zmb_grey_energy_ring_deactivate");
     var_5 stoploopsound();
@@ -404,8 +424,9 @@ _id_CE0A(var_0) {
   var_5 = var_0 scripts\engine\utility::waittill_any_return("shockwave_deploy");
   var_4 delete();
 
-  if(isDefined(var_5) && var_5 == "shockwave_deploy")
+  if(isDefined(var_5) && var_5 == "shockwave_deploy") {
     playFX(level._effect["zombie_grey_shockwave_deploy"], var_3);
+  }
 }
 
 _id_5D40(var_0, var_1, var_2) {
@@ -496,8 +517,9 @@ _id_13F77(var_0, var_1, var_2, var_3) {
     if(isDefined(var_7)) {
       var_8 = _id_7CEF(self, var_7);
 
-      if(isDefined(var_8))
+      if(isDefined(var_8)) {
         _id_57CC(self, var_8, var_7);
+      }
     }
   }
 
@@ -513,8 +535,9 @@ _id_13F77(var_0, var_1, var_2, var_3) {
 }
 
 get_teleport_end_pos(var_0) {
-  if(clear_from_players(var_0))
+  if(clear_from_players(var_0)) {
     return var_0;
+  }
 
   var_1 = "ufo_zombie_spawn_loc";
   var_2 = 300;
@@ -524,8 +547,9 @@ get_teleport_end_pos(var_0) {
   foreach(var_5 in var_3) {
     var_6 = scripts\engine\utility::drop_to_ground(var_5.origin, 5, -50);
 
-    if(clear_from_players(var_6))
+    if(clear_from_players(var_6)) {
       return var_6;
+    }
   }
 
   return var_0;
@@ -535,8 +559,9 @@ clear_from_players(var_0) {
   var_1 = 10000;
 
   foreach(var_3 in level.players) {
-    if(distancesquared(var_3.origin, var_0) < var_1)
+    if(distancesquared(var_3.origin, var_0) < var_1) {
       return 0;
+    }
   }
 
   return 1;
@@ -573,8 +598,9 @@ _id_1164C(var_0, var_1, var_2, var_3) {
   var_6 waittill("movedone");
   var_0 playSound("grey_teleport_end");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 thread scripts\cp\cp_vo::try_to_play_vo("quest_ufo_alien_teleport", "zmb_comment_vo", "low", 3, 0, 0, 1, 5);
+  }
 
   var_0 unlink();
   var_6 delete();
@@ -617,15 +643,17 @@ _id_11642(var_0, var_1, var_2, var_3) {
 }
 
 _id_7CED(var_0) {
-  if(isDefined(var_0.target_player) && !scripts\engine\utility::is_true(var_0.target_player.in_afterlife_arcade))
+  if(isDefined(var_0.target_player) && !scripts\engine\utility::is_true(var_0.target_player.in_afterlife_arcade)) {
     return var_0.target_player;
+  }
 
   return undefined;
 }
 
 _id_7CEC(var_0) {
-  if(isDefined(var_0.target_player) && !scripts\cp\cp_laststand::player_in_laststand(var_0.target_player))
+  if(isDefined(var_0.target_player) && !scripts\cp\cp_laststand::player_in_laststand(var_0.target_player)) {
     return var_0.target_player;
+  }
 
   return undefined;
 }
@@ -730,9 +758,9 @@ _id_7B0B(var_0) {
   var_1 = scripts\engine\utility::drop_to_ground(var_0, 0, -200);
   var_2 = getclosestpointonnavmesh(var_1);
 
-  if(var_1 == var_2)
+  if(var_1 == var_2) {
     return var_2;
-  else {
+  } else {
     var_3 = vectorNormalize(var_2 - var_1);
     var_4 = var_2 + var_3;
     return getclosestpointonnavmesh(var_4);
@@ -826,8 +854,9 @@ _id_58F8(var_0, var_1) {
 }
 
 set_up_grey(var_0) {
-  if(!isDefined(level.spawned_grey))
+  if(!isDefined(level.spawned_grey)) {
     level.spawned_grey = [];
+  }
 
   var_0.a.rockets = 3;
   var_0.entered_playspace = 1;
@@ -858,11 +887,11 @@ _id_8601(var_0, var_1, var_2, var_3) {
 _id_85FF(var_0, var_1, var_2, var_3) {
   var_4 = scripts\asm\asm_bb::bb_getmeleetarget();
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     self orientmode("face angle abs", self.angles);
-  else if(isPlayer(var_4) && isDefined(self.enemy) && var_4 == self.enemy)
+  } else if(isPlayer(var_4) && isDefined(self.enemy) && var_4 == self.enemy) {
     self orientmode("face enemy");
-  else {
+  } else {
     var_5 = var_4.origin - self.origin;
     var_6 = vectorNormalize(var_5);
     var_7 = vectortoangles(var_6);
@@ -882,8 +911,9 @@ _id_58BB(var_0, var_1) {
   for(;;) {
     self waittill(var_1, var_2);
 
-    if(!isarray(var_2))
+    if(!isarray(var_2)) {
       var_2 = [var_2];
+    }
 
     foreach(var_4 in var_2) {
       switch (var_4) {
@@ -913,10 +943,11 @@ _id_58BB(var_0, var_1) {
             return;
           }
           if(isalive(var_5)) {
-            if(scripts\engine\utility::is_true(self.i_am_clone))
+            if(scripts\engine\utility::is_true(self.i_am_clone)) {
               _id_B787(self, var_5);
-            else
+            } else {
               _id_0C35::_id_CA1F(var_5);
+            }
           }
 
           break;
@@ -942,8 +973,9 @@ _id_B787(var_0, var_1) {
 }
 
 _id_FF46(var_0, var_1) {
-  if(!isalive(var_1))
+  if(!isalive(var_1)) {
     return 0;
+  }
 
   return 1;
 }
@@ -952,8 +984,9 @@ _id_9B68(var_0) {
   var_1 = getEntArray("mini_grey_shock_arc_trigger", "targetname");
 
   foreach(var_3 in var_1) {
-    if(scripts\engine\utility::is_true(var_3.in_use) && distancesquared(var_0.origin, var_3.origin) < 640000)
+    if(scripts\engine\utility::is_true(var_3.in_use) && distancesquared(var_0.origin, var_3.origin) < 640000) {
       return 1;
+    }
   }
 
   return 0;
@@ -1026,8 +1059,9 @@ _id_FE3A(var_0) {
     if(!isPlayer(var_1)) {
       continue;
     }
-    if(_id_37FC(var_1))
+    if(_id_37FC(var_1)) {
       var_1 dodamage(60, var_0.origin);
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -1051,12 +1085,13 @@ _id_7AE5() {
 _id_37FC(var_0) {
   var_1 = gettime();
 
-  if(!isDefined(var_0._id_D8A5))
+  if(!isDefined(var_0._id_D8A5)) {
     var_0._id_D8A5 = 0;
+  }
 
-  if(var_1 - var_0._id_D8A5 < 1000)
+  if(var_1 - var_0._id_D8A5 < 1000) {
     return 0;
-  else {
+  } else {
     var_0._id_D8A5 = var_1;
     return 1;
   }
@@ -1083,8 +1118,9 @@ _id_4644(var_0, var_1) {
 _id_463D(var_0, var_1) {
   var_1._id_269D = [];
 
-  foreach(var_3 in var_1.available_fuse)
-  var_1._id_269D[var_1._id_269D.size] = var_3.tag_name;
+  foreach(var_3 in var_1.available_fuse) {
+    var_1._id_269D[var_1._id_269D.size] = var_3.tag_name;
+  }
 
   var_0._id_269D = var_1._id_269D;
 }

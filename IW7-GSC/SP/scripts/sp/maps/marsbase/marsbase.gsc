@@ -95,8 +95,9 @@ _id_9809() {
 }
 
 _id_D704() {
-  foreach(var_1 in getspawnerteamarray("axis", "allies"))
-  var_1._id_EDB0 = 1;
+  foreach(var_1 in getspawnerteamarray("axis", "allies")) {
+    var_1._id_EDB0 = 1;
+  }
 
   scripts\sp\maps\marsbase\marsbase_code::_id_D704();
   thread scripts\sp\maps\marsbase\marsbase_code::_id_C2A9();
@@ -126,8 +127,9 @@ _id_D704() {
   var_3 = getEntArray("rocket_launcher_pickups", "targetname");
 
   if(var_3.size > 0) {
-    foreach(var_5 in var_3)
-    var_5 itemweaponsetammo(1, 2);
+    foreach(var_5 in var_3) {
+      var_5 itemweaponsetammo(1, 2);
+    }
   }
 
   scripts\sp\utility::_id_F44E(0);

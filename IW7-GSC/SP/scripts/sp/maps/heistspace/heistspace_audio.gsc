@@ -16,8 +16,9 @@ _id_25AC() {
   scripts\engine\utility::flag_init("map_room_ambience_shift");
   level._id_1D66 = ["random_amb_normal", "random_amb_semi_deep", "random_amb_deep"];
 
-  foreach(var_1 in level._id_1D66)
-  scripts\engine\utility::flag_init(var_1);
+  foreach(var_1 in level._id_1D66) {
+    scripts\engine\utility::flag_init(var_1);
+  }
 
   wait 4;
   soundsettimescalefactor("music_lr", 0);
@@ -107,8 +108,9 @@ _id_DC6D() {
     wait 0.05;
     var_0 = scripts\sp\utility::_id_2290(level._id_1D66, [var_1]);
 
-    foreach(var_3 in var_0)
-    scripts\engine\utility::flag_clear(var_3);
+    foreach(var_3 in var_0) {
+      scripts\engine\utility::flag_clear(var_3);
+    }
   }
 }
 
@@ -357,8 +359,9 @@ _id_8D28(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 
   for(;;) {
-    if(scripts\engine\utility::flag("mons_under_attack_sounds"))
+    if(scripts\engine\utility::flag("mons_under_attack_sounds")) {
       thread _id_8D27(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
+    }
 
     var_15 = _id_0F00::_id_7D78(var_14, var_13);
     wait(var_15);
@@ -370,10 +373,11 @@ _id_8D27(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_11 = randomintrange(var_1, var_2);
   var_12 = randomintrange(-180, 180);
 
-  if(var_4 != var_5)
+  if(var_4 != var_5) {
     var_13 = randomintrange(var_4, var_5);
-  else
+  } else {
     var_13 = var_4;
+  }
 
   var_13 = var_13 * (randomintrange(0, 2) * 2 - 1);
   level.player thread _id_0F00::_id_FBC5(var_0, var_12, var_11, var_13, var_10, var_6);
@@ -387,8 +391,9 @@ _id_8D27(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 
 _id_8D29(var_0, var_1) {
   if(isDefined(var_0) && isDefined(var_1)) {
-    if(var_1 < 1)
+    if(var_1 < 1) {
       var_1 = 1;
+    }
 
     screenshake(level.player.origin, var_0, var_0, var_0 * 0.25, var_1, 0, var_1 * 0.5, 128, 8, 6, 3);
   }

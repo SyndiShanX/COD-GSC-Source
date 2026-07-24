@@ -4,8 +4,9 @@
 **************************************/
 
 _id_138E4(var_0, var_1, var_2, var_3) {
-  if(scripts\asm\asm_bb::bb_meleerequested())
+  if(scripts\asm\asm_bb::bb_meleerequested()) {
     return 1;
+  }
 
   return 0;
 }
@@ -15,27 +16,33 @@ _id_138E0() {
 }
 
 _id_138E1() {
-  if(!scripts\asm\asm_bb::bb_moverequested())
+  if(!scripts\asm\asm_bb::bb_moverequested()) {
     return 0;
+  }
 
-  if(!isDefined(self._id_B629))
+  if(!isDefined(self._id_B629)) {
     return 0;
+  }
 
-  if(self._id_B629 == "run" || self._id_B629 == "sprint")
+  if(self._id_B629 == "run" || self._id_B629 == "sprint") {
     return 1;
+  }
 
   return 0;
 }
 
 shouldplayarenaintro() {
-  if(isDefined(self.agent_type) && self.agent_type == "zombie_brute")
+  if(isDefined(self.agent_type) && self.agent_type == "zombie_brute") {
     return 0;
+  }
 
-  if(isDefined(self.enemy) && self.enemy.health < 91)
+  if(isDefined(self.enemy) && self.enemy.health < 91) {
     return 0;
+  }
 
-  if(isDefined(level.wave_num) && level.wave_num < 10)
+  if(isDefined(level.wave_num) && level.wave_num < 10) {
     return 0;
+  }
 
   var_0 = _id_0C72::_id_9EA5();
   var_1 = _id_0C72::_id_9EA4();
@@ -51,16 +58,19 @@ _id_3EB9(var_0, var_1, var_2) {
   var_6 = !(var_4 || var_3);
   var_7 = self getanimentrycount(var_1);
 
-  if(var_6)
+  if(var_6) {
     return randomint(var_7);
+  }
 
-  if(var_5)
+  if(var_5) {
     return 0;
+  }
 
   var_8 = int(var_7 / 2);
 
-  if(var_3)
+  if(var_3) {
     return randomint(var_8);
+  }
 
   return var_8 + randomint(var_8);
 }
@@ -113,8 +123,9 @@ _id_2989(var_0, var_1, var_2, var_3) {
 }
 
 _id_138E5() {
-  if(_id_2989())
+  if(_id_2989()) {
     return 1;
+  }
 
   return 0;
 }
@@ -128,16 +139,18 @@ _id_D543(var_0, var_1, var_2, var_3) {
   self endon("terminate_ai_threads");
   self endon(var_1 + "_finished");
 
-  if(isDefined(self.agent_type) && self.agent_type == "skater")
+  if(isDefined(self.agent_type) && self.agent_type == "skater") {
     playsoundatpos(self gettagorigin("tag_eye"), "zmb_skater_pre_explo");
-  else
+  } else {
     playsoundatpos(self gettagorigin("tag_eye"), "zmb_clown_pre_explo");
+  }
 
   var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   scripts\anim\notetracks_mp::_id_CED2(var_1, var_4, 2.0, var_1, "explode");
 
-  if(isDefined(self.agent_type) && self.agent_type != "skater")
+  if(isDefined(self.agent_type) && self.agent_type != "skater") {
     playsoundatpos(self gettagorigin("tag_eye"), "zmb_vo_clown_death");
+  }
 
   wait 0.25;
   self stopsounds();
@@ -160,10 +173,11 @@ _id_6A6A(var_0, var_1) {
   self endon("stop_melee_face_enemy");
 
   for(;;) {
-    if(isDefined(var_1) && isalive(var_1))
+    if(isDefined(var_1) && isalive(var_1)) {
       self orientmode("face angle abs", (0, vectortoyaw(var_1.origin - self.origin), 0));
-    else
+    } else {
       break;
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -180,8 +194,9 @@ _id_57E5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self._id_A9B6 = undefined;
   self._id_A9B7 = undefined;
 
-  if(!isDefined(var_7))
+  if(!isDefined(var_7)) {
     var_7 = 0;
+  }
 
   var_9 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   var_10 = self getanimentry(var_1, var_9);
@@ -189,26 +204,29 @@ _id_57E5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_12 = getnotetracktimes(var_10, "hit");
   var_13 = var_11 / var_6 * 0.33;
 
-  if(var_12.size > 0)
+  if(var_12.size > 0) {
     var_13 = var_11 / var_6 * var_12[0];
+  }
 
   var_14 = getnotetracktimes(var_10, "finish");
   var_15 = 0.9;
 
-  if(var_14.size > 0)
+  if(var_14.size > 0) {
     var_15 = var_14[0];
-  else
+  } else {
     var_15 = 0.9;
+  }
 
   var_16 = var_11 / var_6 * var_15;
   self scragentsetphysicsmode("gravity");
 
-  if(var_5 && isDefined(self.enemy))
+  if(var_5 && isDefined(self.enemy)) {
     thread _id_6A6A(var_1, self.enemy);
-  else if(isDefined(var_2))
+  } else if(isDefined(var_2)) {
     self orientmode("face angle abs", (0, vectortoyaw(var_2.origin - self.origin), 0));
-  else
+  } else {
     self orientmode("face angle abs", self.angles);
+  }
 
   self _meth_8281("anim deltas");
   scripts\anim\notetracks_mp::_id_F2B1(var_1, var_9, var_6);
@@ -217,13 +235,15 @@ _id_57E5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     var_17 = getnotetracktimes(var_10, "lunge_start");
     var_18 = 0;
 
-    if(var_17.size > 0)
+    if(var_17.size > 0) {
       var_18 = var_11 / var_6 * var_17[0];
+    }
 
     var_13 = var_13 - var_18;
 
-    if(var_18 > 0)
+    if(var_18 > 0) {
       wait(var_18);
+    }
 
     if(self._id_B0FC) {
       var_19 = var_3 - self.origin;
@@ -247,38 +267,44 @@ _id_57E5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   scripts\asm\asm_bb::bb_clearmeleerequest();
   self notify("cancel_updatelerppos");
 
-  if(var_5 && isDefined(self.enemy))
+  if(var_5 && isDefined(self.enemy)) {
     thread _id_6A6A(var_1, self.enemy);
-  else {
+  } else {
     _id_1106E();
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       self orientmode("face angle abs", (0, vectortoyaw(var_2.origin - self.origin), 0));
-    else
+    } else {
       self orientmode("face angle abs", self.angles);
+    }
   }
 
   self _meth_8281("anim deltas");
   self scragentsetanimscale(1, 1);
 
-  if(var_4)
+  if(var_4) {
     scripts\anim\notetracks_mp::setstatelocked(0, "DoAttack");
+  }
 
   if(_id_252F(var_2)) {
     self notify("attack_hit", var_2, var_3);
     var_22 = 0;
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_22 = get_melee_damage_dealt();
+    }
 
-    if(isDefined(self._id_B601))
+    if(isDefined(self._id_B601)) {
       var_22 = self._id_B601;
+    }
 
-    if(isDefined(var_8))
+    if(isDefined(var_8)) {
       thread _id_F08D(var_2, var_3, 0.5);
+    }
 
-    if(isalive(var_2))
+    if(isalive(var_2)) {
       domeleedamage(var_2, var_22, "MOD_IMPACT");
+    }
 
     level notify("attack_hit", self, var_2);
   } else
@@ -287,8 +313,9 @@ _id_57E5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self._id_A9B9 = self.origin;
   var_23 = var_16 - var_13;
 
-  if(var_23 > 0)
+  if(var_23 > 0) {
     scripts\anim\notetracks_mp::_id_1384D(var_1, "end", var_23);
+  }
 
   self._id_A9B8 = gettime();
 }
@@ -301,14 +328,17 @@ _id_F08D(var_0, var_1, var_2) {
     self notify("attack_hit", var_0, var_1);
     var_3 = 0;
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_3 = get_melee_damage_dealt();
+    }
 
-    if(isDefined(self._id_B601))
+    if(isDefined(self._id_B601)) {
       var_3 = self._id_B601;
+    }
 
-    if(isalive(var_0))
+    if(isalive(var_0)) {
       domeleedamage(var_0, var_3, "MOD_IMPACT");
+    }
 
     level notify("attack_hit", self, var_0);
   } else
@@ -316,8 +346,9 @@ _id_F08D(var_0, var_1, var_2) {
 }
 
 get_melee_damage_dealt() {
-  if(self.agent_type == "zombie_brute")
+  if(self.agent_type == "zombie_brute") {
     return 90;
+  }
 
   return 45;
 }
@@ -327,8 +358,9 @@ domeleedamage(var_0, var_1, var_2) {
     return;
   }
   if(isPlayer(var_0)) {
-    if(var_0 scripts\engine\utility::isprotectedbyaxeblock(self))
+    if(var_0 scripts\engine\utility::isprotectedbyaxeblock(self)) {
       return;
+    }
   }
 
   var_0 dodamage(var_1, self.origin, self, self, var_2);
@@ -358,15 +390,17 @@ _id_12EC0(var_0, var_1, var_2, var_3) {
       break;
     }
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_8 = var_3;
-    else
+    } else {
       var_8 = scripts\mp\agents\zombie\zombie_util::_id_7FAE() - self.radius;
+    }
 
     var_9 = var_7 - var_4;
 
-    if(lengthsquared(var_9) > var_8 * var_8)
+    if(lengthsquared(var_9) > var_8 * var_8) {
       var_7 = var_4 + vectorNormalize(var_9) * var_8;
+    }
 
     self orientmode("face enemy");
     self _meth_827B(self.origin, var_7, var_5);
@@ -374,8 +408,9 @@ _id_12EC0(var_0, var_1, var_2, var_3) {
 }
 
 _id_81F1(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return undefined;
+  }
 
   if(!var_1) {
     var_2 = scripts\anim\notetracks_mp::_id_5D51(var_0.origin);
@@ -384,26 +419,29 @@ _id_81F1(var_0, var_1) {
     var_3 = var_0.origin - self.origin;
     var_4 = length(var_3);
 
-    if(var_4 < self._id_252B)
+    if(var_4 < self._id_252B) {
       return self.origin;
-    else {
+    } else {
       var_3 = var_3 / var_4;
       var_5 = scripts\mp\agents\zombie\zombie_util::_id_7FAA(var_0);
 
-      if(scripts\mp\agents\zombie\zombie_util::_id_38C2(self.origin, var_5.origin))
+      if(scripts\mp\agents\zombie\zombie_util::_id_38C2(self.origin, var_5.origin)) {
         return var_5.origin;
-      else
+      } else {
         return undefined;
+      }
     }
   }
 }
 
 _id_252F(var_0) {
-  if(!isalive(var_0))
+  if(!isalive(var_0)) {
     return 0;
+  }
 
-  if(!_id_13D99())
+  if(!_id_13D99()) {
     return 0;
+  }
 
   if(isPlayer(var_0) || isai(var_0)) {
     if(scripts\engine\utility::is_true(self._id_29D2) && !scripts\engine\utility::is_true(self.dismember_crawl)) {
@@ -418,19 +456,22 @@ _id_252F(var_0) {
 
         if(isDefined(var_5) && isai(var_5)) {
           if(isDefined(var_5.team) && var_5.team == self.team) {
-            if(distance(self.origin, var_5.origin) > 12)
+            if(distance(self.origin, var_5.origin) > 12) {
               return 0;
+            }
           }
         }
       }
     }
   }
 
-  if(isenemyinfrontofme(var_0, self.meleedot))
+  if(isenemyinfrontofme(var_0, self.meleedot)) {
     return 1;
+  }
 
-  if(scripts\mp\agents\zombie\zombie_util::_id_9DE0(var_0))
+  if(scripts\mp\agents\zombie\zombie_util::_id_9DE0(var_0)) {
     return 1;
+  }
 
   return 0;
 }
@@ -446,15 +487,18 @@ _id_13D99() {
   var_0 = self.entered_playspace;
 
   if(isDefined(self.enemy) && !ispointonnavmesh(self.enemy.origin) && !scripts\asm\asm_bb::bb_moverequested()) {
-    if(scripts\mp\agents\zombie\zombie_util::_id_DD7C("offmesh", var_0))
+    if(scripts\mp\agents\zombie\zombie_util::_id_DD7C("offmesh", var_0)) {
       return 1;
+    }
   }
 
-  if(!scripts\mp\agents\zombie\zombie_util::_id_DD7C("normal", var_0))
+  if(!scripts\mp\agents\zombie\zombie_util::_id_DD7C("normal", var_0)) {
     return 0;
+  }
 
-  if(scripts\mp\agents\zombie\zombie_util::_id_7FAE() > self._id_B62E && !scripts\mp\agents\zombie\zombie_util::_id_13D9B())
+  if(scripts\mp\agents\zombie\zombie_util::_id_7FAE() > self._id_B62E && !scripts\mp\agents\zombie\zombie_util::_id_13D9B()) {
     return 0;
+  }
 
   return 1;
 }

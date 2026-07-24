@@ -75,11 +75,13 @@ player_init() {
 }
 
 set_player_count() {
-  if(!isDefined(level.max_concurrent_player_count))
+  if(!isDefined(level.max_concurrent_player_count)) {
     level.max_concurrent_player_count = 0;
+  }
 
-  if(level.players.size >= level.max_concurrent_player_count)
+  if(level.players.size >= level.max_concurrent_player_count) {
     level.max_concurrent_player_count = level.players.size + 1;
+  }
 }
 
 set_split_screen() {
@@ -87,13 +89,15 @@ set_split_screen() {
 }
 
 set_join_in_progress() {
-  if(prematch_over())
+  if(prematch_over()) {
     setmatchdata("players", self.clientid, "joinInProgress", 1);
+  }
 }
 
 prematch_over() {
-  if(scripts\engine\utility::flag_exist("introscreen_over") && scripts\engine\utility::flag("introscreen_over"))
+  if(scripts\engine\utility::flag_exist("introscreen_over") && scripts\engine\utility::flag("introscreen_over")) {
     return 1;
+  }
 
   return 0;
 }
@@ -121,8 +125,9 @@ inc_bleedout_counts() {
 }
 
 inc_laststand_record(var_0) {
-  if(!isDefined(self._id_13F0B.laststand_record[var_0][level.wave_num]))
+  if(!isDefined(self._id_13F0B.laststand_record[var_0][level.wave_num])) {
     self._id_13F0B.laststand_record[var_0][level.wave_num] = 0;
+  }
 
   self._id_13F0B.laststand_record[var_0][level.wave_num]++;
 }
@@ -156,8 +161,9 @@ endgame(var_0, var_1) {
     var_3 write_clientmatchdata_for_player(var_3, var_4);
   }
 
-  if(isDefined(level.analyticsendgame))
+  if(isDefined(level.analyticsendgame)) {
     [[level.analyticsendgame]]();
+  }
 
   sendmatchdata();
   sendclientmatchdata();
@@ -167,11 +173,13 @@ set_player_data(var_0) {
   var_1 = self getrankedplayerdata("cp", "coopCareerStats", "totalGameplayTime");
   var_2 = self getrankedplayerdata("cp", "coopCareerStats", "gamesPlayed");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   var_1 = var_1 + var_0 / 1000;
   var_2 = var_2 + 1;
@@ -183,8 +191,9 @@ set_game_data(var_0, var_1) {
   var_2 = "challengesCompleted";
   var_3 = level._id_13F0B;
 
-  foreach(var_7, var_5 in var_3.single_value_stats)
-  var_6 = validate_value(var_5.value, var_5.value_type);
+  foreach(var_7, var_5 in var_3.single_value_stats) {
+    var_6 = validate_value(var_5.value, var_5.value_type);
+  }
 
   foreach(var_10, var_9 in var_3.challenge_results) {}
 
@@ -203,8 +212,9 @@ set_player_game_data() {
 }
 
 get_player_matchdata(var_0, var_1) {
-  if(isDefined(level.matchdata["player"][self.clientid]) && isDefined(level.matchdata["player"][self.clientid][var_0]))
+  if(isDefined(level.matchdata["player"][self.clientid]) && isDefined(level.matchdata["player"][self.clientid][var_0])) {
     return level.matchdata["player"][self.clientid][var_0];
+  }
 
   return var_1;
 }
@@ -215,10 +225,11 @@ set_custom_stats() {
   var_2 = self getrankedplayerdata("cp", "progression", "playerLevel", "rank");
   var_3 = self getrankedplayerdata("cp", "progression", "playerLevel", "prestige");
 
-  if(isDefined(self.wave_num_when_joined))
+  if(isDefined(self.wave_num_when_joined)) {
     setmatchdata("players", self.clientid, "waveEnd", level.wave_num - self.wave_num_when_joined);
-  else
+  } else {
     setmatchdata("players", self.clientid, "waveEnd", level.wave_num);
+  }
 
   setmatchdata("players", self.clientid, "doorsOpened", get_player_matchdata("opening_the_doors", 0));
   setmatchdata("players", self.clientid, "moneyEarned", int(get_player_matchdata("currency_earned", 0)));
@@ -301,13 +312,15 @@ init_analytics(var_0) {
     }
     var_16 = tablelookup(var_0, var_1, var_14, var_5);
 
-    if(var_16 != "")
+    if(var_16 != "") {
       level.blackbox_data_type[var_15] = var_16;
+    }
 
     var_17 = tablelookup(var_0, var_1, var_14, var_6);
 
-    if(var_17 != "")
+    if(var_17 != "") {
       level.matchdata_data_type[var_15] = var_17;
+    }
 
     var_18 = tablelookup(var_0, var_1, var_14, var_7);
 
@@ -318,8 +331,9 @@ init_analytics(var_0) {
 
     var_19 = tablelookup(var_0, var_1, var_14, var_8);
 
-    if(var_19 != "")
+    if(var_19 != "") {
       level.clientmatchdata_data_type[var_15] = var_19;
+    }
 
     var_20 = tablelookup(var_0, var_1, var_14, var_9);
 
@@ -343,11 +357,13 @@ init_analytics(var_0) {
     var_23 = strtok(var_22, " ");
 
     foreach(var_25 in var_23) {
-      if(isDefined(level.matchdata_struct[var_25]))
+      if(isDefined(level.matchdata_struct[var_25])) {
         level.matchdata_struct[var_25][var_21] = 0;
+      }
 
-      if(isDefined(level.clientmatchdata_struct[var_25]) && isDefined(level.clientmatchdata_data_type[var_21]))
+      if(isDefined(level.clientmatchdata_struct[var_25]) && isDefined(level.clientmatchdata_data_type[var_21])) {
         level.clientmatchdata_struct[var_25][var_21] = 0;
+      }
     }
   }
 }
@@ -417,8 +433,9 @@ get_bb_string(var_0) {
   foreach(var_4, var_3 in var_0) {
     var_1 = var_1 + (var_3 + " " + level.blackbox_data_type[var_3]);
 
-    if(var_4 != var_0.size - 1)
+    if(var_4 != var_0.size - 1) {
       var_1 = var_1 + " ";
+    }
   }
 
   return var_1;
@@ -436,8 +453,9 @@ log_matchdata(var_0, var_1, var_2, var_3) {
     if(is_matchdata_struct(var_6)) {
       var_7 = var_3[var_4];
 
-      if(!isDefined(level.matchdata[var_6][var_7]))
+      if(!isDefined(level.matchdata[var_6][var_7])) {
         level.matchdata[var_6][var_7] = level.matchdata_struct[var_6];
+      }
 
       level.matchdata[var_6][var_7][var_0] = level.matchdata[var_6][var_7][var_0] + var_2;
       var_4++;
@@ -456,8 +474,9 @@ _id_AF65(var_0, var_1, var_2, var_3) {
       if(is_clientmatchdata_struct(var_6)) {
         var_7 = var_3[var_4];
 
-        if(!isDefined(level.clientmatchdata[var_6][var_7]))
+        if(!isDefined(level.clientmatchdata[var_6][var_7])) {
           level.clientmatchdata[var_6][var_7] = level.clientmatchdata_struct[var_6];
+        }
 
         level.clientmatchdata[var_6][var_7][var_0] = level.clientmatchdata[var_6][var_7][var_0] + var_2;
         var_4++;
@@ -484,8 +503,9 @@ write_global_clientmatchdata() {
   setclientmatchdata("scoreboardPlayerCount", level.players.size);
   setclientmatchdata("map", level.script);
 
-  if(isDefined(level.write_global_clientmatchdata_func))
+  if(isDefined(level.write_global_clientmatchdata_func)) {
     [[level.write_global_clientmatchdata_func]]();
+  }
 }
 
 write_clientmatchdata_for_player(var_0, var_1) {
@@ -499,10 +519,12 @@ write_clientmatchdata_for_player(var_0, var_1) {
   var_2 = level.clientmatchdata["player"][var_0.clientid];
 
   if(isDefined(var_2)) {
-    foreach(var_5, var_4 in var_2)
-    setclientmatchdata("player", var_1, var_5, int(var_4));
+    foreach(var_5, var_4 in var_2) {
+      setclientmatchdata("player", var_1, var_5, int(var_4));
+    }
   }
 
-  if(isDefined(level.endgame_write_clientmatchdata_for_player_func))
+  if(isDefined(level.endgame_write_clientmatchdata_for_player_func)) {
     [[level.endgame_write_clientmatchdata_for_player_func]](var_0, var_1);
+  }
 }

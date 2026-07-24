@@ -28,7 +28,7 @@ main() {
   _id_FA4C();
   level._id_74D5 = [];
   level._id_74D5["sa04_life_support_custom"] = ::_id_94B2;
-  level._id_74D5["sa04_doorsmoke"] = scripts\sp\maps\sa_wounded\sa_wounded_fx::_id_13DD6;
+  level._id_74D5["sa04_doorsmoke"] = ::scripts\sp\maps\sa_wounded\sa_wounded_fx::_id_13DD6;
   level._id_265A = scripts\sp\maps\sa_wounded\sa_wounded_util::_id_13DD0;
   level._id_13FB1 = ::_id_13DE4;
   level._id_AC72 = "ges_samoon_bridge_gravity_land";
@@ -66,12 +66,14 @@ _id_13DE4(var_0) {
   }
 
   if(isDefined(level._id_1640) && level._id_1640.size >= 1) {
-    foreach(var_5 in level._id_1640)
-    var_3 = scripts\engine\utility::array_add(var_3, getEnt(var_5, "targetname"));
+    foreach(var_5 in level._id_1640) {
+      var_3 = scripts\engine\utility::array_add(var_3, getEnt(var_5, "targetname"));
+    }
   }
 
-  if(!isDefined(var_0) || var_0 == 0)
+  if(!isDefined(var_0) || var_0 == 0) {
     level thread _id_0F0A::_id_AC50(var_3);
+  }
 
   level thread _id_0F0A::_id_AC5C(var_3);
   scripts\engine\utility::flag_wait("hack_life_support_cooling");
@@ -177,10 +179,11 @@ _id_9321() {
 
 _id_3D8D() {
   if(scripts\engine\utility::flag("hack_life_support_active")) {
-    if(issubstr(self.unittype, "c6"))
+    if(issubstr(self.unittype, "c6")) {
       thread _id_0F0A::_id_AC52(1);
-    else
+    } else {
       thread _id_0F0A::_id_AC4F(1);
+    }
   }
 }
 
@@ -214,23 +217,26 @@ _id_FA53() {
 _id_F9FF() {
   var_0 = getEntArray("zone_wakeup_physics", "script_noteworthy");
 
-  if(var_0.size)
+  if(var_0.size) {
     scripts\engine\utility::array_thread(var_0, ::_id_CB17);
+  }
 }
 
 _id_CB17() {
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     self._id_935E = getEntArray(self.target, "targetname");
+  }
 
   self waittill("trigger");
   var_0 = undefined;
 
   if(self._id_935E.size) {
     foreach(var_2 in self._id_935E) {
-      if(isDefined(var_2.radius))
+      if(isDefined(var_2.radius)) {
         var_0 = var_2.radius;
-      else
+      } else {
         var_0 = 600;
+      }
 
       physicsexplosionsphere(var_2.origin, var_0, 0, 10.0);
     }
@@ -242,8 +248,9 @@ _id_CB17() {
 _id_F916() {
   var_0 = getEnt("wounded_cloudscroll_origin", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level._id_42D5 = scripts\engine\utility::spawn_tag_origin(var_0.origin, var_0.angles);
+  }
 
   var_0 delete();
   level._id_42D5 thread _id_42D4();
@@ -389,8 +396,9 @@ _id_9A58() {
   level thread _id_1DCB();
   scripts\engine\utility::flag_wait("intro_dialogue_done");
 
-  if(isDefined(level._id_9ADD))
+  if(isDefined(level._id_9ADD)) {
     level._id_9ADD delete();
+  }
 }
 
 _id_9A57() {
@@ -417,8 +425,9 @@ _id_9A57() {
   wait 1;
   scripts\sp\maps\sa_wounded\sa_wounded_fx::_id_A0F5(undefined);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 delete();
+  }
 }
 
 _id_9A5D() {
@@ -455,8 +464,9 @@ _id_9A93(var_0) {
   var_1 = scripts\engine\utility::getfx("vfx_venus_lightning_bolt_01");
 
   if(isDefined(level.player) && isalive(level.player)) {
-    if(!scripts\engine\utility::is_true(var_0))
+    if(!scripts\engine\utility::is_true(var_0)) {
       _id_0BDC::_id_A112("jackal_hud_cautiondamage", 0.3);
+    }
 
     level.player playSound("emt_wounded_lightning_intro");
     level.player playRumbleOnEntity("damage_heavy");
@@ -467,8 +477,9 @@ _id_9A93(var_0) {
       var_3 = var_3 + (randomint(8000), randomint(8000), randomint(4000));
       playFX(var_1, var_3);
 
-      if(scripts\engine\utility::cointoss())
+      if(scripts\engine\utility::cointoss()) {
         level.player playRumbleOnEntity("damage_heavy");
+      }
 
       wait(randomfloatrange(0.05, 0.2));
     }
@@ -492,8 +503,9 @@ _id_1DCB() {
       var_2 = randomintrange(2, 4) * 1000;
       var_0 = gettime() + (var_1 + var_2);
 
-      if(var_3 < 3)
+      if(var_3 < 3) {
         var_3++;
+      }
     }
 
     if(var_3 == 3 && !scripts\engine\utility::is_true(var_4)) {
@@ -673,8 +685,9 @@ _id_3D3D() {
   var_0 _id_0BDC::_id_136A6(level._id_D127);
   var_1 = getEnt("wounded_hanger_blocker", "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 delete();
+  }
 
   level._id_A06C notify("door_destroyed");
   level notify("jackal_landing");
@@ -690,8 +703,9 @@ _id_3D3D() {
   level thread _id_0BDC::_id_A303(0, 0);
   level thread _id_0BDC::_id_A224(1);
 
-  if(level._id_D127._id_4C15 == level._id_D127._id_13BF7)
+  if(level._id_D127._id_4C15 == level._id_D127._id_13BF7) {
     level.player notify("jackal_switch_weapons");
+  }
 
   var_2 = getEnt("empty_vehicle_test_spawner", "targetname");
   var_2.origin = level._id_D127.origin;
@@ -716,8 +730,9 @@ _id_3D3D() {
   scripts\engine\utility::flag_wait("hanger_slaughter_done");
   var_8 = getEnt("hanger_clip_brushes", "targetname");
 
-  if(isDefined(var_8))
+  if(isDefined(var_8)) {
     var_8 delete();
+  }
 
   var_9 = level._id_D127.origin;
   var_10 = scripts\engine\utility::getclosest(var_9, level._id_A056._id_1632);
@@ -729,8 +744,9 @@ _id_3D3D() {
   scripts\sp\utility::_id_10FEC(3000);
   level._id_A056 waittill("player_left_jackal");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 delete();
+  }
 }
 
 _id_3D34() {
@@ -752,8 +768,9 @@ _id_3D34() {
     }
 
     if(!scripts\engine\utility::is_true(var_4)) {
-      if(var_6 >= var_2 && var_6 <= var_3)
+      if(var_6 >= var_2 && var_6 <= var_3) {
         var_5 = (-150, 0, 0);
+      }
     }
 
     _id_0BDC::_id_A080(var_5, 0.05);
@@ -833,8 +850,9 @@ _id_1FFE() {
 _id_3D3B() {
   var_0 = getEnt("behind_carrier", "targetname");
 
-  while(!level._id_D127 istouching(var_0))
+  while(!level._id_D127 istouching(var_0)) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::flag_set("jack_behind_ship");
   var_1 = getEntArray("chase_triggers", "targetname");
@@ -905,10 +923,11 @@ _id_3D35() {
     var_8 = distancesquared(var_0.origin, var_6);
 
     if(var_8 >= var_2 || var_8 <= var_3) {
-      if(var_8 >= var_2)
+      if(var_8 >= var_2) {
         _id_0BDC::_id_A078((level._id_DB0E, 0, 0), 0.5);
-      else
+      } else {
         _id_0BDC::_id_A078((level._id_DB0D, 0, 0), 0.5);
+      }
 
       wait 0.6;
       continue;
@@ -962,8 +981,9 @@ _id_3D43() {
   scripts\sp\utility::_id_10350("sa_wounded_slt_enemypersonnela");
   scripts\sp\utility::_id_1034D("sa_wounded_plr_letsclearemout");
 
-  if(!scripts\engine\utility::flag("hangar_c12_dead"))
+  if(!scripts\engine\utility::flag("hangar_c12_dead")) {
     level thread _id_35A2();
+  }
 
   scripts\engine\utility::flag_wait("hanger_slaughter_done");
   scripts\sp\utility::_id_10350("sa_wounded_slt_wereclear");
@@ -980,18 +1000,20 @@ _id_35A2() {
   for(;;) {
     wait(var_1);
 
-    if(var_0 == 0)
+    if(var_0 == 0) {
       scripts\sp\utility::_id_10350("sa_wounded_brk_targetthatc12ca");
-    else if(var_0 == 1)
+    } else if(var_0 == 1) {
       scripts\sp\utility::_id_10350("sa_wounded_brk_captainhitthatm");
-    else if(var_0 == 2)
+    } else if(var_0 == 2) {
       scripts\sp\utility::_id_10350("sa_wounded_brk_destroyitcaptai");
+    }
 
     var_1 = var_1 * 1.5;
     var_0++;
 
-    if(var_0 > 2)
+    if(var_0 > 2) {
       var_0 = 0;
+    }
 
     if(var_1 >= 60) {
       break;
@@ -1059,15 +1081,17 @@ _id_9915() {
   level._id_E99E["hubstern_north_door"] _id_0F05::_id_12BD3();
   scripts\sp\maps\sa_wounded\sa_wounded_fx::_id_132C3(0);
 
-  if(isDefined(getEnt("insertion_combat_final_ally_color", "targetname")))
+  if(isDefined(getEnt("insertion_combat_final_ally_color", "targetname"))) {
     scripts\sp\utility::_id_15F5("insertion_combat_final_ally_color");
+  }
 }
 
 _id_6CFE() {
   var_0 = getEntArray("fire_hurt_triggers", "script_noteworthy");
 
-  if(var_0.size)
+  if(var_0.size) {
     scripts\engine\utility::array_thread(var_0, ::_id_6D04);
+  }
 }
 
 _id_6D04() {
@@ -1141,8 +1165,9 @@ _id_9913() {
 
     foreach(var_4 in var_1) {
       if(isDefined(var_4)) {
-        if(!var_4 istouching(var_0))
+        if(!var_4 istouching(var_0)) {
           var_2 = 1;
+        }
       }
     }
 
@@ -1162,14 +1187,17 @@ _id_9913() {
 }
 
 _id_408E() {
-  if(isDefined(level._id_A06B))
+  if(isDefined(level._id_A06B)) {
     level._id_A06B delete();
+  }
 
-  if(isDefined(level._id_A06C))
+  if(isDefined(level._id_A06C)) {
     level._id_A06C delete();
+  }
 
-  if(isDefined(level._id_A06D))
+  if(isDefined(level._id_A06D)) {
     level._id_A06D delete();
+  }
 }
 
 _id_9610() {
@@ -1196,8 +1224,9 @@ _id_8670() {
   level notify("kill_groundref_sway");
   level endon("kill_groundref_sway");
 
-  if(!isDefined(level._id_13DE0))
+  if(!isDefined(level._id_13DE0)) {
     level._id_13DE0 = 1.0;
+  }
 
   level._id_13DE1 = 4.0;
   level._id_13DE2 = 2.0;
@@ -1317,8 +1346,9 @@ _id_9912() {
   var_0 = scripts\sp\utility::_id_22CD("insertion_combat_guys", 1);
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.classname) && issubstr(var_2.classname, "crew"))
+    if(isDefined(var_2.classname) && issubstr(var_2.classname, "crew")) {
       var_2 scripts\sp\utility::_id_5550();
+    }
   }
 
   level thread scripts\sp\maps\sa_wounded\sa_wounded_util::_id_19BA(var_0, var_0.size, "wounded_firstCombat_finished");
@@ -1333,10 +1363,11 @@ _id_9917() {
   level._id_EA2C scripts\sp\utility::_id_10346("sa_wounded_slt_wegotchemicalwe");
   level._id_1CB7 scripts\sp\utility::_id_10346("sa_wounded_brk_yesmaam");
 
-  if(scripts\engine\utility::flag_exist("got_movers_vo"))
+  if(scripts\engine\utility::flag_exist("got_movers_vo")) {
     scripts\engine\utility::flag_wait("got_movers_vo");
-  else
+  } else {
     scripts\engine\utility::flag_wait("temp_explain_hubstern");
+  }
 
   level._id_1CB7 scripts\sp\utility::_id_10346("sa_wounded_brk_wegotmovers");
   scripts\sp\utility::_id_1034D("sa_wounded_plr_fanout");
@@ -1352,8 +1383,9 @@ _id_9917() {
   level._id_EA2C scripts\sp\utility::_id_10346("sa_wounded_slt_clear");
   var_0 = getEnt("begin_infirmary_hall", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     scripts\sp\utility::_id_127B3("begin_infirmary_hall");
+  }
 
   scripts\sp\utility::_id_10350("sa_wounded_eth_infirmaryshould");
 }
@@ -1428,8 +1460,9 @@ _id_94B1() {
         continue;
       }
       if(isDefined(var_5)) {
-        if(!var_5 touching_either_volume(var_0, var_1))
+        if(!var_5 touching_either_volume(var_0, var_1)) {
           var_3 = 1;
+        }
       }
     }
 
@@ -1446,13 +1479,15 @@ _id_94B1() {
 
 touching_either_volume(var_0, var_1) {
   if(isDefined(var_0)) {
-    if(self istouching(var_0))
+    if(self istouching(var_0)) {
       return 1;
+    }
   }
 
   if(isDefined(var_1)) {
-    if(self istouching(var_1))
+    if(self istouching(var_1)) {
       return 1;
+    }
   }
 
   return 0;
@@ -1461,8 +1496,9 @@ touching_either_volume(var_0, var_1) {
 _id_94AF() {
   var_0 = getEntArray("inf_maintenance_fan", "script_noteworthy");
 
-  if(var_0.size)
+  if(var_0.size) {
     scripts\engine\utility::array_thread(var_0, ::_id_7A91);
+  }
 
   scripts\engine\utility::array_thread(var_0, ::_id_94B0, randomintrange(90, 100));
   level waittill("infirmary_locked");
@@ -1491,8 +1527,9 @@ _id_7A91() {
   }
   var_0 = getEntArray(self.target, "targetname");
 
-  if(var_0.size)
+  if(var_0.size) {
     scripts\engine\utility::array_call(var_0, ::linkto, self);
+  }
 
   self._id_AD24 = [];
   self._id_AD24 = scripts\engine\utility::array_combine(self._id_AD24, var_0);
@@ -1525,8 +1562,9 @@ _id_AC54() {
   level thread _id_AC64(var_0);
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.classname) && issubstr(var_2.classname, "crew"))
+    if(isDefined(var_2.classname) && issubstr(var_2.classname, "crew")) {
       var_2 scripts\sp\utility::_id_5550();
+    }
   }
 
   scripts\engine\utility::array_thread(var_0, scripts\sp\utility::_id_F415, 1);
@@ -1549,16 +1587,18 @@ _id_AC54() {
   var_7 = scripts\engine\utility::array_combine(var_7, var_0);
 
   foreach(var_2 in var_7) {
-    if(isDefined(var_2.classname) && issubstr(var_2.classname, "crew"))
+    if(isDefined(var_2.classname) && issubstr(var_2.classname, "crew")) {
       var_2 scripts\sp\utility::_id_5550();
+    }
   }
 
   scripts\sp\utility::_id_13754(var_7, var_7.size);
   scripts\engine\utility::flag_set("infirmary_clear");
   var_10 = getEnt("post_infirm_trig", "targetname");
 
-  if(isDefined(var_10))
+  if(isDefined(var_10)) {
     scripts\sp\utility::_id_15F5("post_infirm_trig");
+  }
 }
 
 _id_AC64(var_0) {
@@ -1580,8 +1620,9 @@ _id_D23E() {
   for(;;) {
     var_0 = distancesquared(self.origin, level.player.origin);
 
-    if(var_0 <= 48400)
+    if(var_0 <= 48400) {
       self notify("alert");
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -1594,8 +1635,9 @@ _id_AC62(var_0) {
   var_4 = undefined;
   var_5 = undefined;
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     var_5 = scripts\engine\utility::getStruct(self.target, "targetname");
+  }
 
   switch (self.script_noteworthy) {
     case "shipcrib_moon_injured_table_01_A":
@@ -1660,10 +1702,11 @@ _id_AC62(var_0) {
       break;
   }
 
-  if(!scripts\engine\utility::is_true(var_1))
+  if(!scripts\engine\utility::is_true(var_1)) {
     var_5 thread scripts\sp\anim::_id_1F35(self, self.script_noteworthy);
-  else
+  } else {
     var_5 thread scripts\sp\anim::_id_1EEA(self, self.script_noteworthy, "stop_loop");
+  }
 
   if(scripts\engine\utility::is_true(var_2)) {
     scripts\engine\utility::waitframe();
@@ -1672,8 +1715,9 @@ _id_AC62(var_0) {
 
   scripts\engine\utility::waittill_any("damage", "bulletwhizby", "death", "alert", "gunshot", "gunshot_teammate", "enemy", "wounded_wakeup");
 
-  foreach(var_7 in var_0)
-  var_7 notify("wounded_wakeup");
+  foreach(var_7 in var_0) {
+    var_7 notify("wounded_wakeup");
+  }
 
   if(!scripts\engine\utility::is_true(var_3)) {
     self _meth_83A1();
@@ -1682,12 +1726,14 @@ _id_AC62(var_0) {
   } else {
     wait(randomfloat(0.1));
 
-    if(isDefined(self) && isalive(self))
+    if(isDefined(self) && isalive(self)) {
       self _meth_81D0();
+    }
   }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_4 notify("alert");
+  }
 }
 
 _id_193A() {
@@ -1725,21 +1771,23 @@ _id_AC5F() {
   var_1 = 0;
 
   for(;;) {
-    if(var_1 == 0)
+    if(var_1 == 0) {
       level._id_EA2C scripts\sp\utility::_id_10346("sa_wounded_slt_wellcoveryourey");
-    else if(var_1 == 1)
+    } else if(var_1 == 1) {
       scripts\sp\utility::_id_10350("sa_wounded_eth_patchintothecon");
-    else if(var_1 == 2)
+    } else if(var_1 == 2) {
       level._id_EA2C scripts\sp\utility::_id_10346("sa_wounded_slt_wereontheclockh");
-    else if(var_1 == 3)
+    } else if(var_1 == 3) {
       scripts\sp\utility::_id_10350("sa_wounded_eth_sirimreadytoacc");
+    }
 
     wait(var_0);
     var_0 = var_0 * 1.5;
     var_1++;
 
-    if(var_1 > 3)
+    if(var_1 > 3) {
       var_1 = 0;
+    }
 
     if(var_0 >= 60) {
       break;
@@ -1837,8 +1885,9 @@ _id_221E() {
   var_0 = getEnt("armory_hack_door_trigger", "targetname");
 
   if(isDefined(var_0)) {
-    while(!isDefined(var_0._id_5978._id_4D94))
+    while(!isDefined(var_0._id_5978._id_4D94)) {
       scripts\engine\utility::waitframe();
+    }
 
     var_0._id_5978._id_4D94._id_8851 = 1000;
     var_0._id_5978._id_4D94._id_885A = 60;
@@ -1854,10 +1903,11 @@ _id_12D70() {
   level endon("chemical_obj_done");
 
   for(;;) {
-    if(scripts\engine\utility::flag("hack_life_support_active"))
+    if(scripts\engine\utility::flag("hack_life_support_active")) {
       self makeunusable();
-    else
+    } else {
       self makeusable();
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -1872,9 +1922,9 @@ _id_21D2() {
   var_1 _id_0E46::_id_48C4(undefined, undefined, &"SA_WOUNDED_PICKUP_CHEMICAL", undefined, 512, 128, 1);
   var_1 thread _id_12D70();
   var_2 = [];
-  var_2[0] = scripts\sp\utility::_id_10639("player_rig");
-  var_2[1] = scripts\sp\utility::_id_10639("chemical_weapon");
-  var_2[2] = scripts\sp\utility::_id_10639("chemical_doors");
+  var_2[0] = ::scripts\sp\utility::_id_10639("player_rig");
+  var_2[1] = ::scripts\sp\utility::_id_10639("chemical_weapon");
+  var_2[2] = ::scripts\sp\utility::_id_10639("chemical_doors");
   var_2[0] hide();
   var_2[2]._id_59AF = spawn("script_model", var_0.origin);
   var_2[2]._id_59AF setModel("sdf_vault_cabinet_01_door_right_01");
@@ -1885,8 +1935,9 @@ _id_21D2() {
   var_2[2]._id_59AF linkTo(var_2[2], "J_prop_1");
   var_3 = getEnt("vault_chemdoor_col", "targetname");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 notsolid();
+  }
 
   var_1 _id_0E46::_id_9016();
   var_1 _id_0E46::_id_DFE3();
@@ -1901,8 +1952,9 @@ _id_21D2() {
   var_2[0] show();
   var_0 scripts\sp\anim::_id_1F2C(var_2, "armory_pickup_chemical");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 solid();
+  }
 
   level.player unlink();
   scripts\sp\maps\sa_wounded\sa_wounded_util::_id_6227();
@@ -1914,8 +1966,9 @@ _id_21D2() {
   var_2[2]._id_59AF delete();
   var_2[2] delete();
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 delete();
+  }
 }
 
 _id_21D1() {
@@ -1938,8 +1991,8 @@ _id_21D1() {
   var_2 _id_0E46::_id_48C4(undefined, undefined, &"SA_WOUNDED_PLANT_CHARGE", undefined, 512, 128, 1);
   var_4 = scripts\engine\utility::getStruct("charge_plant_struct1", "targetname");
   var_5 = [];
-  var_5[0] = scripts\sp\utility::_id_10639("player_rig");
-  var_5[1] = scripts\sp\utility::_id_10639("armory_charge");
+  var_5[0] = ::scripts\sp\utility::_id_10639("player_rig");
+  var_5[1] = ::scripts\sp\utility::_id_10639("armory_charge");
   scripts\engine\utility::array_call(var_5, ::hide);
   var_4 scripts\sp\anim::_id_1EC1(var_5, "armory_charge_plant");
   var_2 _id_0E46::_id_9016();
@@ -1960,8 +2013,8 @@ _id_21D1() {
   var_3 _id_0E46::_id_48C4(undefined, undefined, &"SA_WOUNDED_PLANT_CHARGE", undefined, 512, 90, 1);
   var_4 = scripts\engine\utility::getStruct("charge_plant_struct2", "targetname");
   var_8 = [];
-  var_8[0] = scripts\sp\utility::_id_10639("player_rig");
-  var_8[1] = scripts\sp\utility::_id_10639("armory_charge");
+  var_8[0] = ::scripts\sp\utility::_id_10639("player_rig");
+  var_8[1] = ::scripts\sp\utility::_id_10639("armory_charge");
   scripts\engine\utility::array_call(var_8, ::hide);
   var_4 scripts\sp\anim::_id_1EC1(var_8, "armory_charge_plant");
   var_3 _id_0E46::_id_9016();
@@ -2023,8 +2076,9 @@ _id_21B2() {
   scripts\engine\utility::flag_wait("wounded_spawn_armory_enemies");
   var_0 = getEnt("outside_armory_trigger", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     scripts\sp\utility::_id_15F5("outside_armory_trigger");
+  }
 
   level._id_EA2C._id_2894 = 1000;
   level._id_EA2C.accuracy = level._id_EA2C._id_2894;
@@ -2033,11 +2087,13 @@ _id_21B2() {
   var_1 = scripts\sp\utility::_id_22CD("armory_ambush_enemy", 1);
 
   foreach(var_3 in var_1) {
-    if(isDefined(var_3.script_parameters))
+    if(isDefined(var_3.script_parameters)) {
       var_3 thread _id_21B4();
+    }
 
-    if(isDefined(var_3.classname) && issubstr(var_3.classname, "crew"))
+    if(isDefined(var_3.classname) && issubstr(var_3.classname, "crew")) {
       var_3 scripts\sp\utility::_id_5550();
+    }
   }
 
   level thread scripts\sp\maps\sa_wounded\sa_wounded_util::_id_19BA(var_1, var_1.size, "wounded_armory_ambush_done");
@@ -2066,8 +2122,9 @@ _id_225E() {
 
     foreach(var_4 in var_1) {
       if(isDefined(var_4)) {
-        if(!var_4 istouching(var_0))
+        if(!var_4 istouching(var_0)) {
           var_2 = 1;
+        }
       }
     }
 
@@ -2139,8 +2196,9 @@ _id_88CF() {
   var_0 = scripts\sp\utility::_id_22CD("armory_defend_north_guys", 1);
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.classname) && issubstr(var_2.classname, "crew"))
+    if(isDefined(var_2.classname) && issubstr(var_2.classname, "crew")) {
       var_2 scripts\sp\utility::_id_5550();
+    }
   }
 
   level.currenthunter = undefined;
@@ -2209,8 +2267,9 @@ _id_225D() {
   scripts\sp\utility::_id_10350("sa_wounded_eth_captainenemiesa");
   level thread scripts\sp\utility::_id_1034D("sa_wounded_plr_copyeveryonedig");
 
-  while(scripts\engine\utility::flag("hack_life_support_active"))
+  while(scripts\engine\utility::flag("hack_life_support_active")) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::flag_set("hack_prep_vo_done");
   level thread _id_8785();
@@ -2240,20 +2299,22 @@ _id_8785() {
   while(!scripts\engine\utility::flag("armory_hack_started")) {
     wait(var_0);
 
-    if(var_1 == 0)
+    if(var_1 == 0) {
       level._id_EA2C scripts\sp\utility::_id_10346("sa_wounded_slt_startthehackrey");
-    else if(var_1 == 1)
+    } else if(var_1 == 1) {
       scripts\sp\utility::_id_10350("sa_wounded_eth_proximityhackwi");
-    else if(var_1 == 2)
+    } else if(var_1 == 2) {
       level._id_EA2C scripts\sp\utility::_id_10346("sa_wounded_slt_weresetslickhit");
-    else if(var_1 == 3)
+    } else if(var_1 == 3) {
       level._id_EA2C scripts\sp\utility::_id_10346("sa_wounded_slt_letsgetintherer");
+    }
 
     var_0 = var_0 * 1.5;
     var_1++;
 
-    if(var_1 > 3)
+    if(var_1 > 3) {
       var_1 = 0;
+    }
 
     if(var_0 >= 60) {
       break;
@@ -2297,8 +2358,9 @@ _id_E45A() {
   thread scripts\sp\maps\sa_wounded\sa_wounded_audio::_id_E40F();
   level thread scripts\sp\utility::_id_2669("runout_start");
 
-  if(isDefined(level._id_10CDA) && level._id_10CDA == "return")
+  if(isDefined(level._id_10CDA) && level._id_10CDA == "return") {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\sp\maps\sa_wounded\sa_wounded_fx::_id_132D1(1);
   scripts\sp\maps\sa_wounded\sa_wounded_fx::_id_132B8(1);
@@ -2339,8 +2401,9 @@ _id_E884() {
   var_0 = scripts\sp\utility::_id_22CD("runout_combat_guys", 1);
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.classname) && issubstr(var_2.classname, "crew"))
+    if(isDefined(var_2.classname) && issubstr(var_2.classname, "crew")) {
       var_2 scripts\sp\utility::_id_5550();
+    }
   }
 
   level thread scripts\sp\maps\sa_wounded\sa_wounded_util::_id_19BA(var_0, int(var_0.size), "wounded_runout_combat_done");
@@ -2382,10 +2445,11 @@ _id_E888() {
 
 _id_E889() {
   foreach(var_1 in level.allies) {
-    if(var_1 == level._id_EA2C)
+    if(var_1 == level._id_EA2C) {
       var_1 thread scripts\sp\anim::_id_1ED1(var_1, "run_pain_fallonknee_02");
-    else
+    } else {
       var_1 thread scripts\sp\anim::_id_1ED1(var_1, "run_pain_fallonknee");
+    }
 
     wait(randomfloatrange(0.2, 0.3));
   }
@@ -2424,8 +2488,9 @@ _id_6963() {
   scripts\sp\utility::_id_15F5("move_to_dropbay2");
   _id_0F16::_id_3E3F("exit_start");
 
-  while(!isDefined(level._id_3965))
+  while(!isDefined(level._id_3965)) {
     scripts\engine\utility::waitframe();
+  }
 
   level thread _id_9610();
   level._id_3965 notify("hide_hull");
@@ -2464,10 +2529,11 @@ _id_106C6() {
     _id_0BDC::_id_A156();
     var_0 _id_0BDB::_id_A330();
 
-    if(isDefined(level._id_10CDA) && level._id_10CDA == "exit")
+    if(isDefined(level._id_10CDA) && level._id_10CDA == "exit") {
       var_0 _id_0BDC::_id_104A6(1);
-    else
+    } else {
       var_0 _id_0BDC::_id_104A6(0);
+    }
 
     level._id_D127 _id_0BDC::_id_A07D();
   }
@@ -2484,8 +2550,9 @@ _id_106C7() {
 }
 
 _id_6966() {
-  while(!isDefined(level._id_EA2C))
+  while(!isDefined(level._id_EA2C)) {
     scripts\engine\utility::waitframe();
+  }
 
   level._id_EA2C scripts\sp\utility::_id_10346("sa_wounded_slt_letsgo");
   level thread _id_BBEE();
@@ -2507,11 +2574,13 @@ _id_6966() {
 _id_BBEE() {
   level endon("ship_reached");
 
-  if(isDefined(level._id_D127))
+  if(isDefined(level._id_D127)) {
     level._id_D127 endon("trigger");
+  }
 
-  if(isDefined(level._id_D223))
+  if(isDefined(level._id_D223)) {
     level._id_D223 endon("trigger");
+  }
 
   level waittill("start_hangar_nag");
   wait 12.0;
@@ -2519,17 +2588,19 @@ _id_BBEE() {
   var_1 = 0;
 
   for(;;) {
-    if(var_1 == 0)
+    if(var_1 == 0) {
       level._id_EA2C scripts\sp\utility::_id_10346("sa_wounded_slt_reyesmountuplet");
-    else if(var_1 == 1)
+    } else if(var_1 == 1) {
       level._id_1CB7 scripts\sp\utility::_id_10346("sa_wounded_brk_loadincaptain");
+    }
 
     wait(var_0);
     var_0 = var_0 * 1.5;
     var_1++;
 
-    if(var_1 > 1)
+    if(var_1 > 1) {
       var_1 = 0;
+    }
 
     if(var_0 >= 60) {
       break;
@@ -2563,8 +2634,9 @@ _id_6957() {
   level thread _id_6953();
   _id_0BDC::_id_A06A(0);
 
-  if(!isDefined(level._id_A06B) || !isDefined(level._id_A06D))
+  if(!isDefined(level._id_A06B) || !isDefined(level._id_A06D)) {
     _id_106C7();
+  }
 
   level._id_A06B thread _id_891D();
   level._id_A06D thread _id_891D();
@@ -2583,16 +2655,18 @@ _id_6957() {
 
   scripts\engine\utility::flag_set("exit_started");
 
-  while(!isDefined(level._id_D223))
+  while(!isDefined(level._id_D223)) {
     scripts\engine\utility::waitframe();
+  }
 
   level thread scripts\sp\maps\sa_wounded\sa_wounded_fx::_id_3AEA("exploding_wounded_carrier_death");
   level._id_D223._id_11474 = ::_id_13DE3;
   level thread _id_F9F3();
   level._id_D223 _id_0BDC::_id_104A6(1);
 
-  if(isDefined(level._id_D127))
+  if(isDefined(level._id_D127)) {
     level._id_D127 _id_0BDC::_id_104A6(1);
+  }
 
   var_0 = getEnt("player_jackal", "targetname");
   var_0 _id_0BDC::_id_104A6(1);
@@ -2615,14 +2689,16 @@ _id_6953() {
           var_3 = 1;
 
           if(isai(var_5)) {
-            if(distancesquared(var_5.origin, level._id_D223.origin) <= var_2)
+            if(distancesquared(var_5.origin, level._id_D223.origin) <= var_2) {
               var_3 = 0;
+            }
 
             continue;
           }
 
-          if(scripts\engine\utility::flag("ship_reached"))
+          if(scripts\engine\utility::flag("ship_reached")) {
             var_3 = 0;
+          }
         }
       }
     }
@@ -2736,13 +2812,15 @@ _id_F9F3() {
   level thread _id_1EFC();
   level thread _id_C7B9();
 
-  if(isDefined(level._id_3965))
+  if(isDefined(level._id_3965)) {
     level._id_3965 notify("show_hull");
+  }
 
   level._id_1FD3 waittillmatch("single anim", "end");
 
-  while(level._id_13DD9)
+  while(level._id_13DD9) {
     scripts\engine\utility::waitframe();
+  }
 
   wait 3;
   var_3 = 5;
@@ -2755,8 +2833,9 @@ _id_F9F3() {
 hackout_fastsmoke_exploders() {
   if(isDefined(level.createfxent)) {
     foreach(var_1 in level.createfxent) {
-      if(isDefined(var_1.v["fxid"]) && var_1.v["fxid"] == "vfx_wounded_trailfast_smoke")
+      if(isDefined(var_1.v["fxid"]) && var_1.v["fxid"] == "vfx_wounded_trailfast_smoke") {
         var_1.looper delete();
+      }
     }
   }
 }
@@ -2766,8 +2845,9 @@ exit_handle_cleanup_heroes() {
   var_0 = 1;
 
   while(var_0) {
-    if(!level.player scripts\sp\utility::_id_CFAC(self))
+    if(!level.player scripts\sp\utility::_id_CFAC(self)) {
       var_0 = 0;
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -2778,8 +2858,9 @@ exit_handle_cleanup_heroes() {
 }
 
 _id_40AC(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait(var_0);
+  }
 
   var_1 = getaiarray("axis");
 
@@ -2837,15 +2918,17 @@ _id_13DD2() {
   var_0 = scripts\engine\utility::array_combine(var_0, getEntArray("animated_missile_silo", "targetname"));
   var_0 = scripts\engine\utility::array_combine(var_0, getEntArray("exterior_maintenance_hatches", "script_noteworthy"));
 
-  if(var_0.size)
+  if(var_0.size) {
     scripts\engine\utility::array_call(var_0, ::delete);
+  }
 }
 
 _id_DFD3() {
   foreach(var_1 in self.turrets) {
     for(var_2 = 0; var_2 < var_1.size; var_2++) {
-      if(isDefined(var_1[var_2]))
+      if(isDefined(var_1[var_2])) {
         var_1[var_2] delete();
+      }
     }
   }
 }
@@ -2858,8 +2941,9 @@ _id_13DE3() {
   _id_0BDC::_id_A302(0.1, 0, "vtol_turn_takeoff");
   level.player _meth_8462(level._id_D127._id_BC85, "moveto", "absolute_player", 0.2, 0);
 
-  if(!scripts\engine\utility::flag("exit_transients_locked_in"))
+  if(!scripts\engine\utility::flag("exit_transients_locked_in")) {
     level thread hack_fix_exit_lock();
+  }
 
   _id_0BDC::_id_A14D();
   _id_0BDC::_id_A15C();
@@ -2878,8 +2962,9 @@ _id_13DE3() {
   if(!level.player scripts\sp\utility::_id_65DB("disable_jackal_guns")) {
     level._id_D127 _meth_849F(1);
 
-    if(!level.player scripts\sp\utility::_id_65DB("disable_jackal_lockon"))
+    if(!level.player scripts\sp\utility::_id_65DB("disable_jackal_lockon")) {
       level.player _meth_8490("disable_lockon", 0);
+    }
   }
 
   level.player scripts\sp\utility::_id_65E1("flag_takeoff_cooldown");
@@ -2901,19 +2986,23 @@ hack_fix_exit_lock() {
 
   foreach(var_4 in var_2) {
     if(isDefined(var_4._id_ED33)) {
-      if(var_4._id_ED33 == "y15")
+      if(var_4._id_ED33 == "y15") {
         var_0 = var_4;
+      }
 
-      if(var_4._id_ED33 == "y0")
+      if(var_4._id_ED33 == "y0") {
         var_1 = var_4;
+      }
     }
   }
 
-  if(isDefined(level._id_EA2C) && isDefined(var_0))
+  if(isDefined(level._id_EA2C) && isDefined(var_0)) {
     level._id_EA2C _meth_83B9(var_0.origin, var_0.angles);
+  }
 
-  if(isDefined(level._id_1CB7) && isDefined(var_1))
+  if(isDefined(level._id_1CB7) && isDefined(var_1)) {
     level._id_1CB7 _meth_83B9(var_1.origin, var_1.angles);
+  }
 
   scripts\engine\utility::flag_set("force_end_transient_lock_hack");
 }
@@ -2927,8 +3016,9 @@ _id_C290() {
 _id_C289() {
   thread _id_E9FB();
 
-  while(!isDefined(level._id_9ADD))
+  while(!isDefined(level._id_9ADD)) {
     scripts\engine\utility::waitframe();
+  }
 
   level._id_9ADD scripts\sp\utility::_id_65E3("hellas_jackals_spawned");
   objective_add(scripts\sp\utility::_id_C264("OBJ_JACKAL_INTERCEPT"), "current", &"SA_WOUNDED_DESTROY_SKELTERS");

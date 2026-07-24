@@ -169,14 +169,15 @@ _id_4660(var_0, var_1, var_2) {
   foreach(var_4 in var_0) {
     if(isent(var_4)) {
       if(isDefined(var_4.script_noteworthy)) {
-        if(var_4.script_noteworthy == "pivot")
+        if(var_4.script_noteworthy == "pivot") {
           var_2._id_CBFA = var_4;
-        else if(var_4.script_noteworthy == "emissive_passive")
+        } else if(var_4.script_noteworthy == "emissive_passive") {
           var_2._id_6128 = var_4;
-        else if(var_4.script_noteworthy == "emissive_active")
+        } else if(var_4.script_noteworthy == "emissive_active") {
           var_2._id_6123 = var_4;
-        else if(var_4.script_noteworthy == "light_center")
+        } else if(var_4.script_noteworthy == "light_center") {
           var_2._id_AC84 = var_4;
+        }
       }
 
       continue;
@@ -184,8 +185,9 @@ _id_4660(var_0, var_1, var_2) {
 
     if(isstruct(var_4)) {
       if(isDefined(var_4.script_noteworthy)) {
-        if(var_4.script_noteworthy == "spawn_org")
+        if(var_4.script_noteworthy == "spawn_org") {
           var_2._id_1078F = var_4;
+        }
       }
     }
   }
@@ -196,10 +198,11 @@ _id_FA3C() {
     var_2 = _id_7834("vr_segment_helper", "targetname", var_1._id_EDD5);
 
     foreach(var_4 in var_2) {
-      if(isDefined(var_4.target))
+      if(isDefined(var_4.target)) {
         var_5 = _id_7AFE(var_4.target, "targetname");
-      else
+      } else {
         var_5 = [];
+      }
 
       var_1.segments[var_4.script_index] = getEnt("vr_ring" + var_1._id_EDD5 + "_" + var_4.script_index, "targetname");
       var_6 = _id_7835("traverse", "targetname", var_1._id_EDD5, var_4.script_index);
@@ -211,14 +214,15 @@ _id_FA3C() {
       var_7.collision = undefined;
 
       if(var_1._id_EDD5 == 0) {
-        if(var_7.script_index == 0 || var_7.script_index == 2)
+        if(var_7.script_index == 0 || var_7.script_index == 2) {
           var_7._id_6E86 = getEnt("vr_cap" + var_7.script_index, "targetname");
-        else {
+        } else {
           var_8 = getEntArray("vr_cap" + var_7.script_index, "targetname");
 
           foreach(var_10 in var_8) {
-            if(var_10.script_parameters == "flap")
+            if(var_10.script_parameters == "flap") {
               var_7._id_6E86 = var_10;
+            }
           }
 
           foreach(var_10 in var_8) {
@@ -259,15 +263,18 @@ _id_FA3C() {
       _id_F18A(var_5, var_1, var_7);
       var_7 linkTo(var_7._id_CBFA);
 
-      foreach(var_15 in var_7._id_10870)
-      var_15._id_F187 = var_15.origin - var_7._id_CBFA.origin;
+      foreach(var_15 in var_7._id_10870) {
+        var_15._id_F187 = var_15.origin - var_7._id_CBFA.origin;
+      }
 
-      foreach(var_15 in var_7._id_B7D5)
-      var_15._id_F187 = var_15.origin - var_7._id_CBFA.origin;
+      foreach(var_15 in var_7._id_B7D5) {
+        var_15._id_F187 = var_15.origin - var_7._id_CBFA.origin;
+      }
 
       if(isDefined(var_7._id_75B5)) {
-        foreach(var_15 in var_7._id_75B5)
-        var_15._id_F187 = var_15.origin - var_7._id_CBFA.origin;
+        foreach(var_15 in var_7._id_75B5) {
+          var_15._id_F187 = var_15.origin - var_7._id_CBFA.origin;
+        }
       }
 
       if(isDefined(var_7._id_6E86)) {
@@ -282,11 +289,13 @@ _id_FA3C() {
         var_7._id_6E86 linkTo(var_7._id_CBFA, "", var_7._id_6E86._id_D6A0, var_7._id_6E86.angles_offset);
       }
 
-      if(isDefined(var_7._id_6128))
+      if(isDefined(var_7._id_6128)) {
         var_7._id_6128 linkTo(var_7._id_CBFA, "", (0, 0, 0), (0, 0, 0));
+      }
 
-      if(isDefined(var_7._id_6123))
+      if(isDefined(var_7._id_6123)) {
         var_7._id_6123 linkTo(var_7._id_CBFA, "", (0, 0, 0), (0, 0, 0));
+      }
 
       if(isDefined(var_7._id_6B71)) {
         var_21 = [];
@@ -300,11 +309,11 @@ _id_FA3C() {
           var_23._id_7595 = "vfx_vr_blockdrop";
 
           if(isDefined(var_23.script_parameters)) {
-            if(var_23.script_parameters == "vfx_3block")
+            if(var_23.script_parameters == "vfx_3block") {
               var_23._id_7595 = "vfx_vr_blockdrop_small";
-            else if(var_23.script_parameters == "unfold")
+            } else if(var_23.script_parameters == "unfold") {
               var_23._id_7595 = "vfx_vr_blockdrop_extra_small";
-            else if(var_23.script_parameters == "angled") {
+            } else if(var_23.script_parameters == "angled") {
               var_15 = scripts\engine\utility::getStruct(var_23.target, "targetname");
               var_23._id_7587 = anglesToForward(var_15.angles);
             }
@@ -316,8 +325,9 @@ _id_FA3C() {
         var_7._id_6B71 = var_21;
       }
 
-      if(isDefined(var_7.collision))
+      if(isDefined(var_7.collision)) {
         var_7.collision linkTo(var_7._id_CBFA);
+      }
 
       var_7._id_CBFA linkTo(var_1, "j_segment" + var_7.script_index, (0, 0, 0), (0, 0, 0));
     }
@@ -328,18 +338,20 @@ _id_F18A(var_0, var_1, var_2) {
   foreach(var_4 in var_0) {
     if(isent(var_4)) {
       if(isDefined(var_4.script_noteworthy)) {
-        if(var_4.script_noteworthy == "pivot")
+        if(var_4.script_noteworthy == "pivot") {
           var_2._id_CBFA = var_4;
-        else if(var_4.script_noteworthy == "collision")
+        } else if(var_4.script_noteworthy == "collision") {
           var_2.collision = var_4;
+        }
       }
 
       continue;
     }
 
     if(isstruct(var_4)) {
-      if(var_4.script_noteworthy == "spawn_org")
+      if(var_4.script_noteworthy == "spawn_org") {
         _id_FA4A(var_4, var_1, var_2);
+      }
     }
   }
 }
@@ -348,16 +360,18 @@ _id_FA4A(var_0, var_1, var_2) {
   var_3 = var_2._id_10870.size;
   var_2._id_10870[var_3] = var_0;
 
-  if(!isDefined(var_2._id_10870[var_3]._id_EEBA))
+  if(!isDefined(var_2._id_10870[var_3]._id_EEBA)) {
     var_2._id_10870[var_3]._id_EEBA = 1;
+  }
 }
 
 _id_F9EB(var_0, var_1, var_2) {
   if(isDefined(var_0.script_noteworthy)) {
-    if(var_0.script_noteworthy == "left")
+    if(var_0.script_noteworthy == "left") {
       var_2._id_12B96 = var_0;
-    else
+    } else {
       var_2._id_12B97 = var_0;
+    }
   }
 }
 
@@ -416,8 +430,9 @@ _id_7834(var_0, var_1, var_2) {
     if(!isDefined(var_6._id_EDD5)) {
       continue;
     }
-    if(var_6._id_EDD5 == var_2)
+    if(var_6._id_EDD5 == var_2) {
       var_3[var_3.size] = var_6;
+    }
   }
 
   return var_3;
@@ -431,8 +446,9 @@ _id_7835(var_0, var_1, var_2, var_3) {
     if(!isDefined(var_7.script_index)) {
       continue;
     }
-    if(var_7.script_index == var_3)
+    if(var_7.script_index == var_3) {
       var_4[var_4.size] = var_7;
+    }
   }
 
   return var_4;
@@ -440,8 +456,9 @@ _id_7835(var_0, var_1, var_2, var_3) {
 
 _id_7989(var_0, var_1) {
   foreach(var_3 in var_0) {
-    if(var_3.script_index == var_1)
+    if(var_3.script_index == var_1) {
       return var_3;
+    }
   }
 }
 
@@ -454,8 +471,9 @@ _id_7AFE(var_0, var_1) {
   var_6 = scripts\engine\utility::array_combine(var_5, var_6);
 
   foreach(var_8 in var_6) {
-    if(isDefined(var_8))
+    if(isDefined(var_8)) {
       var_2[var_2.size] = var_8;
+    }
   }
 
   return var_2;

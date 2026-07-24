@@ -30,8 +30,9 @@ _id_1D07() {
 _id_1D04() {
   self endon("death");
 
-  while(!isDefined(level._id_9ADD))
+  while(!isDefined(level._id_9ADD)) {
     scripts\engine\utility::waitframe();
+  }
 
   var_0 = undefined;
   var_1 = undefined;
@@ -146,26 +147,33 @@ _id_19B6(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon("intro_path_done");
   self endon("death");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1.5;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1.0;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0.5;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 2.5;
+  }
 
-  while(!isDefined(level._id_D127))
+  while(!isDefined(level._id_D127)) {
     wait 0.1;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 5000;
+  }
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 9000;
+  }
 
   for(;;) {
     var_6 = vectorNormalize(level._id_D127.origin - self.origin);
@@ -174,12 +182,13 @@ _id_19B6(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_9 = distance2d(level._id_D127.origin, self.origin);
 
     if(var_8 < 0) {
-      if(var_9 <= var_4)
+      if(var_9 <= var_4) {
         self _meth_8485(var_0);
-      else if(var_9 > var_4 && var_9 <= var_5)
+      } else if(var_9 > var_4 && var_9 <= var_5) {
         self _meth_8485(var_1);
-      else if(var_9 > var_5)
+      } else if(var_9 > var_5) {
         self _meth_8485(var_2);
+      }
     } else if(var_8 >= 0)
       self _meth_8485(var_3);
 
@@ -188,8 +197,9 @@ _id_19B6(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_5889(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   var_0 = getEnt(var_0, "targetname");
 
@@ -210,17 +220,19 @@ _id_52BA() {
   level._id_3965 waittill("turrets_spawned");
 
   for(var_1 = 0; var_1 < level._id_3965.turrets["cap_turret_med_flak"].size; var_1++) {
-    if(level._id_3965.turrets["cap_turret_med_flak"][var_1] istouching(var_0))
+    if(level._id_3965.turrets["cap_turret_med_flak"][var_1] istouching(var_0)) {
       level._id_3965.turrets["cap_turret_med_flak"][var_1] delete();
+    }
   }
 
   for(var_1 = 0; var_1 < level._id_3965.turrets["cap_turret_small_constant"].size; var_1++) {
-    if(level._id_3965.turrets["cap_turret_small_constant"][var_1] istouching(var_0))
+    if(level._id_3965.turrets["cap_turret_small_constant"][var_1] istouching(var_0)) {
       level._id_3965.turrets["cap_turret_small_constant"][var_1] delete();
+    }
   }
 
-  level._id_3965.turrets["cap_turret_med_flak"] = scripts\engine\utility::array_removeundefined(level._id_3965.turrets["cap_turret_med_flak"]);
-  level._id_3965.turrets["cap_turret_small_constant"] = scripts\engine\utility::array_removeundefined(level._id_3965.turrets["cap_turret_small_constant"]);
+  level._id_3965.turrets["cap_turret_med_flak"] = ::scripts\engine\utility::array_removeundefined(level._id_3965.turrets["cap_turret_med_flak"]);
+  level._id_3965.turrets["cap_turret_small_constant"] = ::scripts\engine\utility::array_removeundefined(level._id_3965.turrets["cap_turret_small_constant"]);
   scripts\engine\utility::waitframe();
   scripts\engine\utility::flag_set("wounded_turrets_destroyed");
 }
@@ -309,8 +321,9 @@ _id_5EFC(var_0) {
     wait(var_2);
   }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self missile_settargetpos(var_0 + var_8);
+  }
 }
 
 _id_91C3() {
@@ -364,23 +377,26 @@ _id_B80B() {
   wait 0.75;
   var_0 = scripts\engine\utility::waittill_any_timeout(0.25, "trigger");
 
-  if(isDefined(var_0) && var_0 != "timeout")
+  if(isDefined(var_0) && var_0 != "timeout") {
     level.player _meth_81D0();
+  }
 }
 
 _id_1062A(var_0, var_1, var_2, var_3) {
-  if(isstring(var_0))
+  if(isstring(var_0)) {
     var_4 = scripts\engine\utility::getStruct(var_0, "targetname");
-  else
+  } else {
     var_4 = var_0;
+  }
 
   var_5 = getEnt(var_1, "targetname");
   var_5.origin = var_4.origin;
 
-  if(isDefined(var_4.angles))
+  if(isDefined(var_4.angles)) {
     var_5.angles = var_4.angles;
-  else
+  } else {
     var_5.angles = (0, 0, 0);
+  }
 
   var_6 = scripts\sp\utility::_id_107EA(var_1, 1);
   var_6._id_1FBB = var_2;
@@ -509,8 +525,9 @@ _id_13DD0(var_0) {
   for(;;) {
     var_4 = level._id_D127.origin[2] - var_0.origin[2];
 
-    if(!isDefined(var_16))
+    if(!isDefined(var_16)) {
       var_16 = var_4 - var_6;
+    }
 
     var_17 = scripts\sp\math::_id_C097(20, var_16, var_4 - var_6);
     var_15 = scripts\sp\math::_id_6A8E(0.6, 0.625, var_17);
@@ -545,8 +562,9 @@ _id_E353(var_0, var_1, var_2, var_3) {
   var_6 = getEnt(var_1, "targetname");
   var_7 = getnode(var_6.target, "targetname");
 
-  foreach(var_9 in var_5)
-  var_9 thread _id_E355(var_7, var_6, var_2, var_3);
+  foreach(var_9 in var_5) {
+    var_9 thread _id_E355(var_7, var_6, var_2, var_3);
+  }
 }
 
 _id_E355(var_0, var_1, var_2, var_3) {
@@ -556,16 +574,18 @@ _id_E355(var_0, var_1, var_2, var_3) {
     self.fixednode = 0;
     self.pathrandompercent = randomintrange(50, 100);
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       self _meth_82EE(var_0);
+    }
 
     self _meth_82F0(var_1);
   }
 }
 
 _id_19BA(var_0, var_1, var_2, var_3) {
-  if(!scripts\engine\utility::flag_exist(var_2))
+  if(!scripts\engine\utility::flag_exist(var_2)) {
     scripts\engine\utility::flag_init(var_2);
+  }
 
   scripts\sp\utility::_id_13754(var_0, var_1, var_3);
   scripts\engine\utility::flag_set(var_2);
@@ -575,8 +595,9 @@ _id_11685(var_0, var_1, var_2, var_3) {
   if(getdvarint("loc_warnings", 0)) {
     return;
   }
-  if(!isDefined(level._id_545A))
+  if(!isDefined(level._id_545A)) {
     level._id_545A = [];
+  }
 
   var_4 = 0;
 
@@ -590,8 +611,9 @@ _id_11685(var_0, var_1, var_2, var_3) {
 
   var_5 = "^3";
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   var_2 = max(1, var_2);
   level._id_545A[var_4] = 1;
@@ -609,8 +631,9 @@ _id_11685(var_0, var_1, var_2, var_3) {
   var_6.label = " " + var_5 + "< " + var_0 + " > ^7" + var_1;
   var_6.color = (1, 1, 1);
 
-  if(isDefined(level.player) && !scripts\engine\utility::is_true(var_3))
+  if(isDefined(level.player) && !scripts\engine\utility::is_true(var_3)) {
     level.player thread _id_116C1();
+  }
 
   wait(var_2);
   var_7 = 10.0;

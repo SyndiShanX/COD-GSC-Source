@@ -31,8 +31,9 @@ _id_B1F9() {
   _id_16E9();
   level thread scripts\sp\maps\marsbase\marsbase_hill_battle::_id_3A80();
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_2683();
+  }
 
   scripts\engine\utility::flag_wait("flag_airlock_door_open");
   scripts\engine\utility::delaythread(1.5, scripts\sp\utility::_id_15F5, "hill_intro_allies_enter_colortrig");
@@ -46,14 +47,16 @@ _id_B1F9() {
   var_0 = scripts\sp\utility::_id_77DA("enemies_aa2");
 
   foreach(var_2 in var_0) {
-    if(isalive(var_2))
+    if(isalive(var_2)) {
       var_2 delete();
+    }
   }
 
   level notify("aa2_jackals_stop");
 
-  if(scripts\engine\utility::flag_exist("flag_hill_intro_init"))
+  if(scripts\engine\utility::flag_exist("flag_hill_intro_init")) {
     scripts\engine\utility::flag_wait("flag_hill_intro_init");
+  }
 
   scripts\sp\maps\marsbase\marsbase_util::_id_F3B6();
   level thread scripts\sp\maps\marsbase\marsbase_dialogue::_id_5458();
@@ -124,8 +127,9 @@ _id_8F93() {
     var_2 = 0;
 
     foreach(var_4 in var_1) {
-      if(isalive(var_4) && var_4 istouching(self))
+      if(isalive(var_4) && var_4 istouching(self)) {
         var_2++;
+      }
     }
 
     if(var_2 > 0) {
@@ -139,8 +143,9 @@ _id_8F93() {
   var_1 = getaiarray("axis");
 
   foreach(var_4 in var_1) {
-    if(isalive(var_4) && var_4 istouching(self))
+    if(isalive(var_4) && var_4 istouching(self)) {
       var_4 dodamage(var_4.maxhealth, var_0.origin);
+    }
   }
 
   self delete();
@@ -152,8 +157,9 @@ _id_CDDA() {
   var_2 = [];
   scripts\engine\utility::array_thread(var_1, scripts\sp\utility::_id_1747, ::_id_8F90);
 
-  foreach(var_5, var_4 in var_1)
-  var_2[var_5] = var_4 scripts\sp\utility::_id_10619(1);
+  foreach(var_5, var_4 in var_1) {
+    var_2[var_5] = var_4 scripts\sp\utility::_id_10619(1);
+  }
 
   var_6 = getEnt("hill_intro_c12_hero_redshirt", "targetname");
   var_7 = var_6 scripts\sp\utility::_id_10619(1, 1);
@@ -179,8 +185,9 @@ _id_CDDA() {
   var_14 _id_0A05::_id_3540();
   var_14 _id_0C09::_id_5673(var_15);
 
-  for(var_5 = 0; var_5 < 4; var_5++)
+  for(var_5 = 0; var_5 < 4; var_5++) {
     var_10 thread _id_6AD6(var_14);
+  }
 
   scripts\engine\utility::flag_wait("flag_airlock_door_open_clear");
   var_14 scripts\sp\utility::_id_1101B();
@@ -237,8 +244,9 @@ _id_8F8C(var_0, var_1) {
   var_3 = undefined;
   var_4 = undefined;
 
-  if(!isarray(var_1))
+  if(!isarray(var_1)) {
     var_1 = [var_1];
+  }
 
   for(var_5 = 0; var_5 < var_0; var_5++) {
     var_6 = scripts\engine\utility::ter_op(isDefined(var_1[var_5]), var_1[var_5], var_3);
@@ -331,11 +339,13 @@ _id_8F95(var_0) {
   wait 4.0;
   scripts\sp\utility::_id_65E0("flag_hill_intro_player_pickup_steeldragon");
 
-  if(!level.player hasweapon("iw7_steeldragon"))
+  if(!level.player hasweapon("iw7_steeldragon")) {
     thread scripts\sp\maps\marsbase\marsbase_dialogue::_id_5459();
+  }
 
-  while(!level.player hasweapon("iw7_steeldragon"))
+  while(!level.player hasweapon("iw7_steeldragon")) {
     self waittill("weapon_change", var_1);
+  }
 
   scripts\sp\utility::_id_65E1("flag_hill_intro_player_pickup_steeldragon");
 }
@@ -347,8 +357,9 @@ _id_3B74() {
   var_2 = var_1 scripts\sp\utility::_id_10808();
   var_2 scripts\engine\utility::delaythread(0.5, ::_id_B39C, var_0);
 
-  foreach(var_4 in var_2._id_E4FB)
-  var_4 _meth_81D0();
+  foreach(var_4 in var_2._id_E4FB) {
+    var_4 _meth_81D0();
+  }
 }
 
 _id_B39C(var_0) {

@@ -21,8 +21,9 @@ ss_play(var_0, var_1, var_2, var_3, var_4) {
   self endon(var_1 + "_finished");
   var_5 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = scripts\asm\asm::_id_2341(var_0, var_1);
+  }
 
   scripts\anim\notetracks_mp::_id_CED2(var_1, var_5, self.moveratescale, var_1, "end", var_4);
 }
@@ -88,8 +89,9 @@ ss_play_jumptoground_clean(var_0, var_1, var_2) {
 }
 
 ss_play_jumptoground_nt(var_0, var_1, var_2, var_3) {
-  if(var_0 == "land")
+  if(var_0 == "land") {
     thread scripts\asm\superslasher\superslasher_actions::superslasher_dogroundpoundimpact();
+  }
 }
 
 ss_play_jumpscale(var_0, var_1, var_2, var_3, var_4) {
@@ -150,8 +152,9 @@ ss_play_groundpound(var_0, var_1, var_2, var_3) {
 }
 
 ss_play_groundpound_nt(var_0, var_1, var_2, var_3) {
-  if(var_0 == "hit")
+  if(var_0 == "hit") {
     thread scripts\asm\superslasher\superslasher_actions::superslasher_dogroundpoundimpact();
+  }
 }
 
 ss_play_summonsawblades(var_0, var_1, var_2, var_3) {
@@ -194,15 +197,17 @@ ss_play_throwsaw(var_0, var_1, var_2, var_3) {
   var_4 = 1;
   self.throwsawprevturnspeed = self _meth_827F();
 
-  if(isDefined(self._blackboard.throwsawtarget))
+  if(isDefined(self._blackboard.throwsawtarget)) {
     thread superslasher_faceenemyhelper(self._blackboard.throwsawtarget, var_4 * 1000, var_1);
+  }
 
   ss_play(var_0, var_1, var_2, var_3, ::ss_play_throwsaw_nt);
 }
 
 ss_play_throwsaw_nt(var_0, var_1, var_2, var_3) {
-  if(var_0 == "throw")
+  if(var_0 == "throw") {
     scripts\asm\superslasher\superslasher_actions::superslasher_dothrownsaw();
+  }
 }
 
 ss_play_throwsaw_clean(var_0, var_1, var_2) {
@@ -211,8 +216,9 @@ ss_play_throwsaw_clean(var_0, var_1, var_2) {
 }
 
 ss_play_throwsawfan_nt(var_0, var_1, var_2, var_3) {
-  if(var_0 == "throw")
+  if(var_0 == "throw") {
     thread scripts\asm\superslasher\superslasher_actions::superslasher_dosawfan();
+  }
 }
 
 ss_play_summon(var_0, var_1, var_2, var_3) {
@@ -248,8 +254,9 @@ ss_play_shockwave_finish(var_0, var_1, var_2, var_3) {
 }
 
 ss_play_shockwave_nt(var_0, var_1, var_2, var_3) {
-  if(var_0 == "hit")
+  if(var_0 == "hit") {
     thread scripts\asm\superslasher\superslasher_actions::domaskattack(0, "roof");
+  }
 }
 
 ss_play_summonsharks(var_0, var_1, var_2, var_3) {
@@ -291,9 +298,9 @@ ss_play_jumpmove_start(var_0, var_1, var_2, var_3) {
 }
 
 ss_play_jumpmove_nt(var_0, var_1, var_2, var_3) {
-  if(var_0 == "takeoff")
+  if(var_0 == "takeoff") {
     self._blackboard.binair = 1;
-  else if(var_0 == "land") {
+  } else if(var_0 == "land") {
     thread scripts\asm\superslasher\superslasher_actions::superslasher_dogroundpoundimpact();
     self._blackboard.binair = undefined;
     scripts\asm\superslasher\superslasher_actions::groundjumpattackfxcleanup();
@@ -312,8 +319,9 @@ _id_A4DA() {
 ss_play_jumpmove_start_clean(var_0, var_1, var_2) {
   self scragentsetanimscale(1, 1);
 
-  if(!scripts\asm\asm::_id_232B(var_1, "end"))
+  if(!scripts\asm\asm::_id_232B(var_1, "end")) {
     _id_A4DA();
+  }
 }
 
 ss_play_jumpmove(var_0, var_1, var_2, var_3) {
@@ -331,8 +339,9 @@ ss_play_jumpmove(var_0, var_1, var_2, var_3) {
 ss_play_jumpmove_clean(var_0, var_1, var_2) {
   self._blackboard.buninterruptibleanim = undefined;
 
-  if(!scripts\asm\asm::_id_232B(var_1, "end"))
+  if(!scripts\asm\asm::_id_232B(var_1, "end")) {
     _id_A4DA();
+  }
 }
 
 ss_play_jumpmove_end(var_0, var_1, var_2, var_3) {
@@ -344,8 +353,9 @@ ss_play_jumpmove_end(var_0, var_1, var_2, var_3) {
   var_8 = self._blackboard.jumptargetpos;
   var_9 = scripts\common\trace::capsule_trace(self.origin, self.origin - (0, 0, 60), self.radius, self.height, self.angles, self, var_7);
 
-  if(var_9["fraction"] < 1 && var_9["normal"][2] > 0)
+  if(var_9["fraction"] < 1 && var_9["normal"][2] > 0) {
     var_8 = var_9["position"];
+  }
 
   var_10 = max((var_8[2] - self.origin[2]) / var_6[2], 0);
   self scragentsetanimscale(1, var_10);
@@ -360,39 +370,46 @@ ss_play_jumpmove_end_clean(var_0, var_1, var_2) {
 }
 
 superslasher_shouldstartarrival(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.pathgoalpos))
+  if(!isDefined(self.pathgoalpos)) {
     return 0;
+  }
 
-  if(!scripts\asm\asm::_id_232B(var_1, "cover_approach"))
+  if(!scripts\asm\asm::_id_232B(var_1, "cover_approach")) {
     return 0;
+  }
 
   var_4 = gettime();
   var_5 = 250;
 
-  if(var_4 - self.asm.footsteps.time > var_5)
+  if(var_4 - self.asm.footsteps.time > var_5) {
     return 0;
+  }
 
   var_6 = 128;
   var_7 = self.pathgoalpos - self.origin;
   var_8 = length(var_7);
 
-  if(var_8 > var_6)
+  if(var_8 > var_6) {
     return 0;
+  }
 
   var_9 = gettime() - self.asm.footsteps.time;
 
-  if(var_9 < 250 || var_9 > 400)
+  if(var_9 < 250 || var_9 > 400) {
     return 0;
+  }
 
   var_10 = self.goalradius;
 
-  if(isDefined(self.node) || isDefined(self.scriptedarrivalent))
+  if(isDefined(self.node) || isDefined(self.scriptedarrivalent)) {
     var_10 = 0;
+  }
 
   self.asm._id_11068 = _id_3722(var_0, var_2, self.pathgoalpos, var_10, 0);
 
-  if(!isDefined(self.asm._id_11068))
+  if(!isDefined(self.asm._id_11068)) {
     return 0;
+  }
 
   return 1;
 }
@@ -411,14 +428,16 @@ _id_3722(var_0, var_1, var_2, var_3, var_4) {
   var_14 = 0;
   var_15 = distancesquared(var_13, var_2);
 
-  if(var_15 > var_3 * var_3)
+  if(var_15 > var_3 * var_3) {
     var_14 = 1;
+  }
 
   var_16 = getclosestpointonnavmesh(var_13, self);
   var_17 = self _meth_84AC();
 
-  if(!_func_2AC(var_17, var_16, self))
+  if(!_func_2AC(var_17, var_16, self)) {
     return undefined;
+  }
 
   if(var_14) {
     var_12 = rotatevector(var_10, var_5 - var_11);
@@ -478,18 +497,21 @@ ss_play_meleecharge_clean(var_0, var_1, var_2) {
 }
 
 superslasher_shouldmovemelee(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.pathgoalpos))
+  if(!isDefined(self.pathgoalpos)) {
     return 0;
+  }
 
-  if(!scripts\asm\asm_bb::bb_meleerequested())
+  if(!scripts\asm\asm_bb::bb_meleerequested()) {
     return 0;
+  }
 
   return 1;
 }
 
 superslasher_faceenemyhelper(var_0, var_1, var_2) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self endon(var_2 + "_finished");
+  }
 
   var_3 = gettime() + var_1;
 
@@ -513,17 +535,19 @@ ss_play_standmelee(var_0, var_1, var_2, var_3) {
 }
 
 ss_play_movemelee(var_0, var_1, var_2, var_3) {
-  if(scripts\asm\asm_bb::_id_2957(var_0, var_1))
+  if(scripts\asm\asm_bb::_id_2957(var_0, var_1)) {
     thread superslasher_faceenemyhelper(self.bt.meleetarget, 1000, var_1);
-  else
+  } else {
     self orientmode("face angle abs", self.angles);
+  }
 
   ss_play(var_0, var_1, var_2, var_3);
 }
 
 ss_play_movemelee_nt(var_0, var_1, var_2, var_3) {
-  if(var_0 == "hit")
+  if(var_0 == "hit") {
     scripts\asm\superslasher\superslasher_actions::superslasher_domeleedamage();
+  }
 }
 
 ss_play_stomp(var_0, var_1, var_2, var_3) {
@@ -535,8 +559,9 @@ ss_play_stomp(var_0, var_1, var_2, var_3) {
 }
 
 ss_play_stomp_nt(var_0, var_1, var_2, var_3) {
-  if(var_0 == "hit")
+  if(var_0 == "hit") {
     scripts\asm\superslasher\superslasher_actions::superslasher_dostompattack(self._blackboard.stompdist);
+  }
 }
 
 superslasher_needstoturn(var_0, var_1, var_2, var_3) {
@@ -572,10 +597,11 @@ superslasher_needstoturn(var_0, var_1, var_2, var_3) {
 superslasher_chooseanim_turn(var_0, var_1, var_2) {
   var_3 = self.asm.turndata;
 
-  if(var_3 > 0)
+  if(var_3 > 0) {
     var_4 = int((180 + var_3 + 10) / 45);
-  else
+  } else {
     var_4 = int((180 + var_3 - 10) / 45);
+  }
 
   var_5 = ["2r", "3", "6", "9", "8", "7", "4", "1", "2l"];
   return var_5[var_4];

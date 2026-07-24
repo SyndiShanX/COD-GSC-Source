@@ -6,8 +6,9 @@
 _id_60A6() {
   var_0 = scripts\engine\utility::getStructArray("spaceelevator_modelspawn", "targetname");
 
-  foreach(var_2 in var_0)
-  precachemodel(var_2.script_noteworthy);
+  foreach(var_2 in var_0) {
+    precachemodel(var_2.script_noteworthy);
+  }
 }
 
 _id_6E6C() {
@@ -82,8 +83,9 @@ _id_6096() {
   var_0 = getEntArray("mdl_elevator_louver", "targetname");
 
   if(var_0.size > 0) {
-    foreach(var_2 in var_0)
-    var_2 delete();
+    foreach(var_2 in var_0) {
+      var_2 delete();
+    }
   }
 }
 
@@ -92,8 +94,9 @@ _id_608C(var_0) {
 }
 
 _id_6094(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 4;
+  }
 
   var_1 = getdvarfloat("r_tonemapexposure");
   level thread scripts\sp\utility::_id_AB9A("r_tonemapExposure", 7, var_0);
@@ -121,8 +124,9 @@ _id_6095() {
     if(isDefined(var_1._id_A90E)) {
       if(isDefined(var_1._id_A90E._id_226D)) {
         foreach(var_3 in var_1._id_A90E._id_226D) {
-          if(isDefined(var_3))
+          if(isDefined(var_3)) {
             var_3 delete();
+          }
         }
       }
 
@@ -137,18 +141,21 @@ _id_6095() {
   var_5 = getaiarray("axis");
 
   foreach(var_7 in var_5) {
-    if(isDefined(var_7) && isalive(var_7))
+    if(isDefined(var_7) && isalive(var_7)) {
       var_7 delete();
+    }
   }
 
   foreach(var_10 in level._id_6067) {
-    if(isDefined(var_10) && isalive(var_10))
+    if(isDefined(var_10) && isalive(var_10)) {
       var_10 delete();
+    }
   }
 
   foreach(var_10 in level._id_76E5) {
-    if(isDefined(var_10) && isalive(var_10))
+    if(isDefined(var_10) && isalive(var_10)) {
       var_10 delete();
+    }
   }
 
   level._id_8604 delete();
@@ -166,8 +173,9 @@ _id_6091() {
     level thread _id_F086();
   }
 
-  if(!scripts\engine\utility::is_true(level._id_2712))
+  if(!scripts\engine\utility::is_true(level._id_2712)) {
     level thread _id_60CB();
+  }
 
   level._id_113D5 thread scripts\sp\anim::_id_1EE0(level._id_60C5, "elevator_player_get_in");
   level._id_60C5 thread scripts\sp\anim::_id_1EE0(level._id_D267, "elevator_player_get_in");
@@ -225,8 +233,9 @@ _id_6049(var_0, var_1) {
 }
 
 _id_604B(var_0) {
-  if(!isent(var_0))
+  if(!isent(var_0)) {
     var_0 = getEnt(var_0, "targetname");
+  }
 
   if(!isDefined(var_0._id_9C9A)) {
     var_0._id_1FBB = "elevator_seat";
@@ -234,8 +243,9 @@ _id_604B(var_0) {
     var_0._id_9C9A = 1;
   }
 
-  if(!isDefined(level._id_6048))
+  if(!isDefined(level._id_6048)) {
     level._id_6048 = [];
+  }
 
   return var_0;
 }
@@ -244,8 +254,9 @@ _id_5198() {
   var_0 = getEntArray("temp_elevator_defend_soldiers", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2 delete();
+    }
   }
 }
 
@@ -307,8 +318,9 @@ _id_607D() {
   level._id_113D5 thread scripts\sp\anim::_id_1F2C(var_7, var_5);
   wait 0.1;
 
-  foreach(var_9 in var_7)
-  var_9 _meth_83A1();
+  foreach(var_9 in var_7) {
+    var_9 _meth_83A1();
+  }
 
   level._id_113D5 thread scripts\sp\anim::_id_1EC1(var_7, var_5);
   var_11 = scripts\engine\utility::getStruct("s_sceneref_elevator_hall_director", "targetname");
@@ -320,8 +332,9 @@ _id_607D() {
   var_0 notify("stop_loop");
   var_11 scripts\sp\anim::_id_1F35(self, "elevator_hall_director_enter");
 
-  while(level.player scripts\sp\maps\marsbase\marsbase_util::_id_9BDD(var_0, 0.45, 1) || level.player scripts\sp\maps\marsbase\marsbase_util::_id_9BDD(var_0._id_BBC7, 0.45, 1))
+  while(level.player scripts\sp\maps\marsbase\marsbase_util::_id_9BDD(var_0, 0.45, 1) || level.player scripts\sp\maps\marsbase\marsbase_util::_id_9BDD(var_0._id_BBC7, 0.45, 1)) {
     wait 0.1;
+  }
 
   level._id_113D5 thread scripts\sp\anim::_id_1F2C(var_7, var_5);
   level._id_113D5 scripts\sp\anim::_id_1F35(var_0, var_3);
@@ -358,8 +371,9 @@ _id_F086() {
 }
 
 _id_606C(var_0) {
-  if(!scripts\engine\utility::is_true(level._id_2712))
+  if(!scripts\engine\utility::is_true(level._id_2712)) {
     level thread _id_60CB(1);
+  }
 
   level thread _id_F086();
   thread elevator_enter_sequence_sun_monitor();
@@ -412,8 +426,9 @@ _id_606C(var_0) {
   wait 2.0;
 
   foreach(var_11 in level._id_6048) {
-    if(isDefined(var_11) && isalive(var_11))
+    if(isDefined(var_11) && isalive(var_11)) {
       var_11 delete();
+    }
   }
 
   scripts\engine\utility::flag_set("elevator_enter_end");
@@ -461,8 +476,9 @@ _id_60CB(var_0) {
   if(!scripts\engine\utility::is_true(level._id_2712)) {
     level._id_2712 = 1;
 
-    if(!isDefined(level._id_603C))
+    if(!isDefined(level._id_603C)) {
       level._id_603C = getEnt("elevator_cab_clip", "targetname");
+    }
 
     if(!isDefined(level._id_EA2C)) {
       scripts\sp\maps\marsbase\marsbase_util::_id_107BE("seat_elevator_salter");
@@ -477,8 +493,9 @@ _id_60CB(var_0) {
     level._id_1915._id_1FBB = "generic";
     var_1 = scripts\engine\utility::getStruct("s_exitdoor_ref", "targetname");
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 notify("stop_loop");
+    }
 
     level._id_EA2C notify("stop_loop");
     thread _id_60C3(level._id_EA2C, "seat_elevator_salter", "mount_elevator_salter", undefined, "elevator_ride_wait_idle", undefined, "idle_xo");
@@ -526,9 +543,9 @@ _id_60C3(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_0 linkTo(level._id_603C);
   }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     level._id_113D5 thread scripts\sp\anim::_id_1EC3(var_0, "elevator_rideup");
-  else {
+  } else {
     var_7 = [var_0.seat, var_0._id_BBC7];
 
     if(isDefined(var_3)) {
@@ -546,8 +563,9 @@ _id_60C3(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       if(var_0 != level._id_EA2C) {
         level._id_113D5 thread scripts\sp\anim::_id_1EEA(var_0, var_4);
 
-        if(isDefined(var_6))
+        if(isDefined(var_6)) {
           level._id_113D5 thread scripts\sp\anim::_id_1EE7(var_7, var_6);
+        }
       } else
         level._id_EA2C thread _id_60C8();
     }
@@ -605,10 +623,11 @@ _id_3B61() {}
 _id_6053() {}
 
 _id_BE0E(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     thread scripts\sp\utility::_id_E7C9(var_1, var_0);
-  else
+  } else {
     thread scripts\sp\utility::_id_E7C9(1, var_0);
+  }
 
   wait(var_0);
   thread scripts\sp\utility::_id_E7C7(var_0);
@@ -662,8 +681,9 @@ _id_608F() {
     var_3 = scripts\engine\utility::spawn_tag_origin(var_2.origin, var_2.angles);
     var_3 linkTo(level._id_603C);
 
-    if(var_2._id_EE52 == "corner_red")
+    if(var_2._id_EE52 == "corner_red") {
       var_3 thread _id_60BD();
+    }
   }
 }
 
@@ -716,10 +736,11 @@ _id_60C1(var_0) {
       level._id_113D5 thread scripts\sp\anim::_id_1F35(level._id_1915, "elevator_rideup");
     }
 
-    if(!scripts\engine\utility::is_true(level._id_8604._id_2707))
+    if(!scripts\engine\utility::is_true(level._id_8604._id_2707)) {
       var_1 = [level._id_30F6, level._id_EA2C, level._id_B4F1, level._id_6754, level._id_8604];
-    else
+    } else {
       var_1 = [level._id_30F6, level._id_EA2C, level._id_B4F1, level._id_6754];
+    }
 
     level._id_113D5 scripts\sp\anim::_id_1F2C(var_1, "elevator_rideup");
   }
@@ -786,8 +807,9 @@ _id_5D48(var_0) {
   var_1 = getEntArray(var_0, "script_noteworthy");
 
   foreach(var_3 in var_1) {
-    if(issubstr(var_3.classname, "droppod"))
+    if(issubstr(var_3.classname, "droppod")) {
       var_3 scripts\engine\utility::delaythread(randomfloatrange(0, 2), scripts\sp\utility::_id_10808);
+    }
   }
 }
 

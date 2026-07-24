@@ -115,7 +115,7 @@ _id_C9DF() {
   level._id_28A6 = [];
   level._id_19C4 = [];
   level._id_19C4["mortar"] = ::_id_8FBB;
-  level._id_19C4["blood_impact"] = scripts\sp\maps\pearlharbor\pearlharbor_util::_id_19C3;
+  level._id_19C4["blood_impact"] = ::scripts\sp\maps\pearlharbor\pearlharbor_util::_id_19C3;
   level.scr_sound["mortar"]["incomming"] = "phstreets_hill_mortar_incoming";
   level.scr_sound["mortar"]["hill_mortar_impact_instant"] = "phstreets_hill_mortar_explo";
   level.scr_sound["mortar"]["hill_mortar_impact"] = "phstreets_hill_mortar_explo";
@@ -140,13 +140,15 @@ _id_8FCE() {
   if(getdvarint("e3", 0) == 1) {
     var_1 = getEntArray("cafe_hack_pristine_damage_door", "targetname");
 
-    foreach(var_3 in var_1)
-    var_3 hide();
+    foreach(var_3 in var_1) {
+      var_3 hide();
+    }
 
     var_5 = getEntArray("cafe_hack_door_clip", "targetname");
 
-    foreach(var_7 in var_5)
-    var_7 hide();
+    foreach(var_7 in var_5) {
+      var_7 hide();
+    }
 
     scripts\engine\utility::delaythread(0.05, scripts\sp\maps\pearlharbor\pearlharbor_robots::_id_10197, "dmg2");
     var_9 = getEnt("hack_window_clip", "targetname");
@@ -165,8 +167,9 @@ _id_8FCE() {
 }
 
 _id_8FCD() {
-  if(!level.console)
+  if(!level.console) {
     waitforalltransients();
+  }
 
   level._id_B460 = 20;
 
@@ -174,8 +177,9 @@ _id_8FCD() {
     scripts\sp\utility::_id_F305();
 
     if(scripts\sp\utility::_id_9BEE()) {
-      if(level._id_DADC)
+      if(level._id_DADC) {
         setsaveddvar("r_postaa", 1);
+      }
     }
   }
 
@@ -307,13 +311,15 @@ _id_8F18() {
   if(getdvarint("e3", 0) == 1) {
     var_1 = getEntArray("cafe_hack_pristine_damage_door", "targetname");
 
-    foreach(var_3 in var_1)
-    var_3 hide();
+    foreach(var_3 in var_1) {
+      var_3 hide();
+    }
 
     var_5 = getEntArray("cafe_hack_door_clip", "targetname");
 
-    foreach(var_7 in var_5)
-    var_7 hide();
+    foreach(var_7 in var_5) {
+      var_7 hide();
+    }
 
     scripts\engine\utility::delaythread(0.05, scripts\sp\maps\pearlharbor\pearlharbor_robots::_id_10197, "dmg2");
     var_9 = getEnt("hack_window_clip", "targetname");
@@ -337,8 +343,9 @@ _id_8F15() {
   thread _id_8F08();
   thread _id_8FD1();
 
-  if(!isDefined(level._id_28A7))
+  if(!isDefined(level._id_28A7)) {
     _id_8F16();
+  }
 
   thread _id_8F17();
   thread _id_8F0D();
@@ -371,8 +378,9 @@ _id_8F15() {
   clearallcorpses();
   setsaveddvar("r_dof_hq", 1);
 
-  if(isDefined(level.allies["salter"]._id_13C4D))
+  if(isDefined(level.allies["salter"]._id_13C4D)) {
     level.allies["salter"]._id_13C4D hide();
+  }
 
   scripts\engine\utility::array_thread(level.allies, scripts\sp\utility::_id_BE49);
   var_0 scripts\sp\utility::_id_65E3("player_at_door");
@@ -390,8 +398,9 @@ _id_8F15() {
     level.old_reactive_setting = undefined;
   }
 
-  if(isDefined(level.allies["salter"]._id_13C4D))
+  if(isDefined(level.allies["salter"]._id_13C4D)) {
     level.allies["salter"]._id_13C4D show();
+  }
 
   setsaveddvar("r_dof_hq", 0);
   scripts\engine\utility::array_thread(level.allies, scripts\sp\utility::_id_BE4A);
@@ -411,15 +420,17 @@ _id_8F15() {
   level.player scripts\sp\utility::_id_D2CD(40, 0.05);
   scripts\engine\utility::flag_wait("hill_player_basement_dialogue_done");
 
-  if(getdvarint("e3", 0))
+  if(getdvarint("e3", 0)) {
     scripts\sp\utility::_id_12643(["phstreets_fountain_tr", "geneva_periph_lake_tr"]);
+  }
 
   level.player thread scripts\sp\utility::_id_D2CA(1);
   level.player playSound("ges_plr_radio_off");
   level.player scripts\sp\utility::_id_1102B("ges_radio_safe");
 
-  foreach(var_4 in level.allies)
-  var_4 scripts\sp\utility::_id_61C7();
+  foreach(var_4 in level.allies) {
+    var_4 scripts\sp\utility::_id_61C7();
+  }
 
   scripts\sp\utility::_id_15F5("hill_trench_color_trig");
   _id_0E40::_id_5542();
@@ -517,13 +528,15 @@ _id_8F1A() {
   level.player notifyonplayercommand("use_button_pressed", "+usereload");
   var_0 = gettime();
 
-  for(;;)
+  for(;;) {
     level.player waittill("use_button_pressed");
+  }
 }
 
 _id_8F11(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait(var_0);
+  }
 
   var_2 = "emt_basement_dist_explosion";
   var_3 = randomfloatrange(0.12, 0.15);
@@ -559,8 +572,9 @@ _id_8F09() {
     var_1 delete();
     var_0 notify("stop_loop_salter");
 
-    if(scripts\engine\utility::flag("hill_street_dialogue_done"))
+    if(scripts\engine\utility::flag("hill_street_dialogue_done")) {
       var_0 scripts\sp\anim::_id_1F35(self, "basement_debris_nag");
+    }
 
     var_0 thread _id_0B1F::_id_59DE(self, var_0 _id_0B1F::_id_5997("idle"), 1);
   }
@@ -582,8 +596,9 @@ _id_2A21() {
   var_2 = var_0;
 
   for(;;) {
-    while(distance2d(level.allies["admiral"].origin, level.player.origin) < 300)
+    while(distance2d(level.allies["admiral"].origin, level.player.origin) < 300) {
       wait 0.05;
+    }
 
     level.allies["admiral"] scripts\sp\utility::_id_10346(var_2);
     var_2 = scripts\engine\utility::ter_op(var_2 == var_0, var_1, var_0);
@@ -659,17 +674,17 @@ _id_8F0E() {
     var_4._id_1FBB = var_3.script_noteworthy;
     var_4 hide();
 
-    if(isai(var_4))
+    if(isai(var_4)) {
       var_4 scripts\sp\utility::_id_B14F(1);
-    else {
+    } else {
       var_4._id_6B14 = 1;
       var_4 scripts\sp\maps\pearlharbor\pearlharbor_util::_id_2C16();
       var_4 _id_0B0F::_id_19FC();
     }
 
-    if(var_4._id_1FBB == "ally01")
+    if(var_4._id_1FBB == "ally01") {
       var_4 scripts\sp\utility::_id_72EC("iw7_m4+reflex", "primary");
-    else if(var_4._id_1FBB == "ally02") {
+    } else if(var_4._id_1FBB == "ally02") {
       var_4 detach(var_4.hatmodel);
       var_4 detach(var_4._id_A489);
     }
@@ -688,13 +703,15 @@ _id_8F0F(var_0) {
   scripts\sp\utility::_id_65E3("door_sequence_complete");
   scripts\sp\utility::_id_65E3(var_0._id_1FBB + "_door_sequence_complete");
 
-  if(var_0 scripts\sp\utility::_id_8BC9("basement_debris_lift_exit_idle"))
+  if(var_0 scripts\sp\utility::_id_8BC9("basement_debris_lift_exit_idle")) {
     thread scripts\sp\anim::_id_1EEA(var_0, "basement_debris_lift_exit_idle");
+  }
 
   scripts\engine\utility::flag_wait("player_at_hill_trench");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 _id_8F17() {
@@ -719,12 +736,13 @@ _id_8F17() {
     var_6 _meth_82A2(%hm_grnd_org_helmet_raise_marines, 1, 0, 1.0);
     level._id_28A6 = scripts\engine\utility::array_add(level._id_28A6, var_6);
 
-    if(var_5 == "shipcribmoon_elevator_injured_loop_05")
+    if(var_5 == "shipcribmoon_elevator_injured_loop_05") {
       var_6 thread _id_8F0C("dps_um3_coughingupblood");
-    else if(var_5 == "shipcrib_moon_injured_table_01_A")
+    } else if(var_5 == "shipcrib_moon_injured_table_01_A") {
       var_6 detach(var_6.hatmodel);
-    else if(var_5 == "hc_wounded_d")
+    } else if(var_5 == "hc_wounded_d") {
       var_6 detach(var_6._id_A489);
+    }
 
     if(getdvarint("debug_print_anims")) {}
 
@@ -746,8 +764,9 @@ _id_F8C8() {
   var_3 = scripts\engine\utility::array_remove_array(var_3, level._id_F10A._id_1633);
 
   foreach(var_5 in var_3) {
-    if(!isDefined(var_5._id_D4AF))
+    if(!isDefined(var_5._id_D4AF)) {
       var_5._id_D4AF = 0;
+    }
   }
 
   for(;;) {
@@ -802,8 +821,9 @@ _id_8F0C(var_0) {
   scripts\sp\utility::_id_57D6();
   var_1 delete();
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     thread scripts\sp\utility::play_sound_on_entity(var_0);
+  }
 }
 
 _id_28AA() {
@@ -813,10 +833,11 @@ _id_28AA() {
   wait 0.1;
 
   for(;;) {
-    if(scripts\sp\utility::_id_13D92(self.origin, 0.8) && distance(self.origin, level.player.origin) < 150)
+    if(scripts\sp\utility::_id_13D92(self.origin, 0.8) && distance(self.origin, level.player.origin) < 150) {
       self _meth_8278(1.75, 0.1);
-    else
+    } else {
       self _meth_8278(1.0, 0.1);
+    }
 
     wait 0.1;
   }
@@ -835,8 +856,9 @@ _id_8F0A() {
   var_3._id_1FBB = "helper";
   var_4 = [var_2, var_3];
 
-  foreach(var_6 in var_4)
-  var_6._id_6B14 = 1;
+  foreach(var_6 in var_4) {
+    var_6._id_6B14 = 1;
+  }
 
   scripts\engine\utility::array_thread(var_4, ::_id_D8E6);
   scripts\engine\utility::array_thread(var_4, scripts\sp\maps\pearlharbor\pearlharbor_util::_id_2C16);
@@ -864,8 +886,9 @@ _id_8F14() {
   var_2._id_1FBB = "wounded";
   var_3 = [self, var_2];
 
-  foreach(var_5 in var_3)
-  var_5._id_6B14 = 1;
+  foreach(var_5 in var_3) {
+    var_5._id_6B14 = 1;
+  }
 
   scripts\engine\utility::array_thread(var_3, scripts\sp\maps\pearlharbor\pearlharbor_util::_id_2C16);
   scripts\engine\utility::array_thread(var_3, _id_0B0F::_id_19FC);
@@ -876,8 +899,9 @@ _id_8F14() {
   var_0 thread scripts\sp\anim::_id_1EE7(var_3, "basement_fireman_carry_idle");
   scripts\engine\utility::flag_wait("hill_run_checkpoint_1");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 
   self delete();
 }
@@ -890,24 +914,27 @@ _id_8F19() {
   _id_0B0F::_id_19FC();
   scripts\sp\utility::_id_86E4();
 
-  if(self._id_1FBB == "stumbler02")
+  if(self._id_1FBB == "stumbler02") {
     self detach(self.hatmodel);
+  }
 
   thread _id_D8E6();
   var_0 scripts\sp\anim::_id_1F35(self, "hill_basement_stumble");
   thread scripts\sp\anim::_id_1EEA(self, "hill_basement_stumble_idle");
   scripts\engine\utility::flag_wait("hill_run_checkpoint_1");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_8F13() {
   scripts\engine\utility::trigger_on("hill_basement_ai_spawn_stumbler", "targetname");
   var_0 = getEnt("hill_basement_ai_spawn_stumbler", "targetname");
 
-  while(!scripts\engine\utility::flag("hill_basement_player_in_second_room"))
+  while(!scripts\engine\utility::flag("hill_basement_player_in_second_room")) {
     var_0 waittill("trigger");
+  }
 
   scripts\sp\utility::_id_107EA("hill_basement_exit_stumbler");
 }
@@ -918,8 +945,9 @@ _id_D8E6() {
   }
   self endon("death");
 
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 _id_8F0B() {
@@ -955,8 +983,9 @@ _id_8FD7() {
   scripts\engine\utility::flag_wait("player_approaching_hill_trench");
   thread hill_prerun_dropships();
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     thread scripts\sp\specialist_MAYBE::_id_2683();
+  }
 
   level.player scripts\sp\utility::_id_F526("normal");
   level._id_10257 = undefined;
@@ -1017,13 +1046,15 @@ _id_8FD4() {
   scripts\sp\utility::_id_550C();
   scripts\sp\utility::_id_C972();
 
-  if(isDefined(self._id_ED46))
+  if(isDefined(self._id_ED46)) {
     self._id_4E2A = scripts\sp\utility::_id_7DC3(self._id_ED46);
+  }
 
   var_0 = scripts\engine\utility::getStruct("hill_trench_allies_struct", "targetname");
 
-  if(scripts\sp\maps\pearlharbor\pearlharbor_util::_id_C8ED("reach"))
+  if(scripts\sp\maps\pearlharbor\pearlharbor_util::_id_C8ED("reach")) {
     var_0 scripts\sp\anim::_id_1F17(self, "hill_trench_ally_intro");
+  }
 
   var_1 = getanimlength(scripts\sp\utility::_id_7DC1("hill_trench_ally_intro"));
   var_0 thread scripts\sp\anim::_id_1F35(self, "hill_trench_ally_intro");
@@ -1033,8 +1064,9 @@ _id_8FD4() {
   var_0 thread scripts\sp\anim::_id_1EEA(self, "hill_trench_ally_idle", self._id_1FBB + "_stop_loop");
   scripts\engine\utility::flag_wait("hill_charge_trench_allies");
 
-  if(isDefined(self.script_delay))
+  if(isDefined(self.script_delay)) {
     wait(self.script_delay);
+  }
 
   var_0 notify(self._id_1FBB + "_stop_loop");
   var_0 scripts\sp\anim::_id_1F35(self, "hill_trench_ally_exit");
@@ -1047,8 +1079,9 @@ hill_prerun_dropships() {
   var_0 = getEntArray("trigger_multiple_spawn", "classname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.target) && issubstr(var_2.target, "auto2440"))
+    if(isDefined(var_2.target) && issubstr(var_2.target, "auto2440")) {
       var_2 notify("trigger");
+    }
   }
 }
 
@@ -1108,8 +1141,9 @@ _id_D277() {
       var_3 = level.player getEye();
       var_3 = var_3 + var_1 * randomfloatrange(100, 300);
 
-      if(scripts\engine\utility::cointoss())
+      if(scripts\engine\utility::cointoss()) {
         var_2 = var_2 * -1;
+      }
 
       var_3 = var_3 + var_2 * randomfloatrange(0, 50);
       var_3 = scripts\sp\utility::_id_864C(var_3);
@@ -1117,8 +1151,9 @@ _id_D277() {
       thread scripts\engine\utility::play_sound_in_space("phstreets_hill_mortar_explo", var_3);
       var_4 = 50;
 
-      if(scripts\engine\utility::flag("hill_charge_start"))
+      if(scripts\engine\utility::flag("hill_charge_start")) {
         var_4 = 50000;
+      }
 
       radiusdamage(var_3, 300, var_4, var_4 / 2);
     }
@@ -1154,8 +1189,9 @@ _id_8F72() {
   var_3 = 30;
   scripts\engine\utility::delaythread(var_2, _id_0BB6::_id_3967);
 
-  foreach(var_5 in self.turrets["cap_turret_cannon_large_un"])
-  var_5 scripts\engine\utility::delaycall(var_3, ::delete);
+  foreach(var_5 in self.turrets["cap_turret_cannon_large_un"]) {
+    var_5 scripts\engine\utility::delaycall(var_3, ::delete);
+  }
 
   self notsolid();
   self waittill("reached_end_node");
@@ -1177,8 +1213,9 @@ _id_7594() {
 _id_8F74() {
   while(!scripts\engine\utility::flag("hill_friendly_destroyer_first_goal")) {
     foreach(var_1 in self.turrets) {
-      foreach(var_3 in var_1)
-      var_3._id_FEAD = 0;
+      foreach(var_3 in var_1) {
+        var_3._id_FEAD = 0;
+      }
     }
 
     _id_0BB6::_id_3984(level._id_8F5F);
@@ -1244,16 +1281,18 @@ _id_8F5F() {
   self._id_12FBA = 1;
   _id_0B0F::_id_1D84();
 
-  foreach(var_1 in self._id_B8B4["r"])
-  var_1._id_FF3E = 1;
+  foreach(var_1 in self._id_B8B4["r"]) {
+    var_1._id_FF3E = 1;
+  }
 
   thread _id_0B0F::_id_3987(self._id_B8B4["r"], [1, 2], [0.15, 3], "stop_ambient_missiles", "hill_capship_missile_trails", "vfx_ph_hill_capship_missile_impact", "phstreets_hill_mortar_explo");
   scripts\engine\utility::flag_wait("hill_allies_start");
   level._id_39B6 = 1;
   scripts\engine\utility::flag_wait("hill_player_in_bddy_door");
 
-  foreach(var_4 in level._id_28A6)
-  var_4 thread _id_28AA();
+  foreach(var_4 in level._id_28A6) {
+    var_4 thread _id_28AA();
+  }
 
   self notify("stop_ambient_missiles");
   scripts\engine\utility::flag_wait("hill_basement_player_in_second_room");
@@ -1273,8 +1312,9 @@ _id_8F5F() {
   var_7 = 30;
   scripts\engine\utility::delaythread(var_6, _id_0BB6::_id_3967);
 
-  foreach(var_9 in self.turrets["cap_turret_cannon_large_ca"])
-  var_9 scripts\engine\utility::delaycall(var_7, ::delete);
+  foreach(var_9 in self.turrets["cap_turret_cannon_large_ca"]) {
+    var_9 scripts\engine\utility::delaycall(var_7, ::delete);
+  }
 
   self waittill("reached_end_node");
   _id_0BA9::_id_397B();
@@ -1360,8 +1400,9 @@ _id_8FAD() {
   playworldsound("phstreets_unm2_dontstop", level.player.origin);
   var_1 = scripts\sp\utility::_id_7EB4(level.player.origin, getaiarray("allies"), 500);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     scripts\engine\utility::noself_delaycall(1.5, ::playworldsound, "phstreets_unm2_gogogo", var_1.origin);
+  }
 
   scripts\engine\utility::flag_wait("hill_dropship_cockpit_roll");
   wait 3.75;
@@ -1451,8 +1492,9 @@ _id_8FBF(var_0, var_1, var_2, var_3) {
     var_19 = scripts\sp\utility::_id_864C(var_11) + (0, 0, randomintrange(0, 64));
     magicbullet("sdf_mg_turret_phhill", var_7, var_19);
 
-    if(!scripts\engine\utility::flag("pause_player_hotbox_tracers"))
+    if(!scripts\engine\utility::flag("pause_player_hotbox_tracers")) {
       bullettracer(var_17, var_19, "sdf_mg_turret_phhill");
+    }
 
     var_20 = randomintrange(1, 8);
 
@@ -1462,8 +1504,9 @@ _id_8FBF(var_0, var_1, var_2, var_3) {
       if(var_9 < var_4) {
         var_10 = var_10 - var_6;
 
-        if(var_10 < var_1)
+        if(var_10 < var_1) {
           var_10 = var_1;
+        }
 
         var_9++;
       }
@@ -1489,8 +1532,9 @@ _id_8FBC(var_0, var_1, var_2) {
     var_6 = anglestoright(level.player.angles);
     var_4 = var_4 + var_5 * randomfloatrange(100, 300);
 
-    if(scripts\engine\utility::cointoss())
+    if(scripts\engine\utility::cointoss()) {
       var_6 = var_6 * -1;
+    }
 
     var_4 = var_4 + var_6 * randomfloatrange(0, 50);
     var_4 = scripts\sp\utility::_id_864C(var_4);
@@ -1505,8 +1549,9 @@ _id_8FBC(var_0, var_1, var_2) {
 
     var_7 = 50;
 
-    if(gettime() - var_3 >= var_1)
+    if(gettime() - var_3 >= var_1) {
       var_7 = 50000;
+    }
 
     radiusdamage(var_4, 300, var_7, var_7 / 2);
   }
@@ -1518,13 +1563,15 @@ _id_8F99() {
   var_2 = level.player getEye();
   var_3 = randomfloatrange(400, 450);
 
-  if(level.player issprinting())
+  if(level.player issprinting()) {
     var_3 = randomfloatrange(450, 500);
+  }
 
   var_2 = var_2 + var_0 * var_3;
 
-  if(scripts\engine\utility::cointoss())
+  if(scripts\engine\utility::cointoss()) {
     var_1 = var_1 * -1;
+  }
 
   var_2 = var_2 + var_1 * randomfloatrange(0, 35);
   var_2 = scripts\sp\utility::_id_864C(var_2);
@@ -1569,8 +1616,9 @@ _id_8FB9() {
   var_0 = self.grenadeammo;
   self.grenadeammo = 0;
 
-  if(self == level.allies["salter"])
+  if(self == level.allies["salter"]) {
     scripts\engine\utility::flag_wait("hill_run_salter_start");
+  }
 
   var_1 = scripts\engine\utility::getStruct("hero_run_path_" + self._id_1FBB, "targetname");
   scripts\sp\maps\pearlharbor\pearlharbor_util::_id_19C5(var_1);
@@ -1593,8 +1641,9 @@ _id_8F04() {
   scripts\sp\utility::_id_54F7();
   scripts\sp\utility::_id_B14F(1);
 
-  if(isDefined(var_0._id_ED46))
+  if(isDefined(var_0._id_ED46)) {
     self._id_4E2A = scripts\sp\utility::_id_7DC3(var_0._id_ED46);
+  }
 
   level._id_BB69 = scripts\engine\utility::array_add(level._id_BB69, self);
   self setCanDamage(0);
@@ -1619,14 +1668,16 @@ _id_8F04() {
 
   var_3 = var_0 scripts\sp\utility::_id_7A96();
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     scripts\sp\maps\pearlharbor\pearlharbor_util::_id_19C5(var_3);
+  }
 
   level._id_BB69 = scripts\engine\utility::array_remove(level._id_BB69, self);
   scripts\sp\utility::_id_51E1("frantic");
 
-  if(isDefined(self._id_B14F) && !var_2)
+  if(isDefined(self._id_B14F) && !var_2) {
     scripts\sp\utility::_id_1101B();
+  }
 
   self setCanDamage(1);
   scripts\sp\utility::_id_6224();
@@ -1676,10 +1727,11 @@ _id_8FB3(var_0, var_1) {
     foreach(var_5 in var_3) {
       thread _id_8FB4(var_0, var_5);
 
-      if(scripts\engine\utility::cointoss())
+      if(scripts\engine\utility::cointoss()) {
         wait(randomintrange(2, 4));
-      else
+      } else {
         wait(randomintrange(4, 8));
+      }
 
       var_2 = var_5;
     }
@@ -1714,8 +1766,9 @@ _id_8FB4(var_0, var_1) {
     var_8._id_E812 = 0.9;
     var_8._id_E811 = 1.25;
 
-    if(!var_4 && randomint(100) <= 25)
+    if(!var_4 && randomint(100) <= 25) {
       var_4 = 1;
+    }
 
     var_8 thread _id_8FB1(var_4);
     wait(randomfloatrange(0.25, 0.75));
@@ -1730,10 +1783,11 @@ _id_8FB1(var_0) {
   self setCanDamage(1);
   scripts\sp\utility::_id_F2A8(1);
 
-  if(var_0)
+  if(var_0) {
     scripts\engine\utility::delaythread(randomfloatrange(0.25, 3), ::_id_8FB2);
-  else
+  } else {
     scripts\engine\utility::delaycall(randomfloatrange(0.25, 3), ::_meth_81D0);
+  }
 
   self waittill("death");
 
@@ -1761,10 +1815,11 @@ _id_8F6A(var_0, var_1) {
   foreach(var_5 in var_3) {
     var_6 = var_5.script_parameters;
 
-    if(!isDefined(var_2[var_6]))
+    if(!isDefined(var_2[var_6])) {
       var_2[var_6] = [];
+    }
 
-    var_2[var_6] = scripts\engine\utility::array_add(var_2[var_6], var_5);
+    var_2[var_6] = ::scripts\engine\utility::array_add(var_2[var_6], var_5);
   }
 
   level._id_8FB5[var_1] = var_2;
@@ -1847,8 +1902,9 @@ _id_CD48(var_0) {
   var_1 = anglesToForward(level.player.angles);
   var_2 = anglestoright(level.player.angles);
 
-  if(scripts\engine\utility::cointoss())
+  if(scripts\engine\utility::cointoss()) {
     var_2 = var_2 * -1;
+  }
 
   var_3 = level.player.origin;
   var_3 = var_3 + var_1 * randomintrange(250, 400);
@@ -1892,8 +1948,9 @@ _id_8F58() {
 }
 
 _id_8F96(var_0, var_1, var_2) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
   scripts\engine\utility::flag_set("pause_player_hotbox_tracers");
   var_3 = scripts\engine\utility::getStruct(var_0, "targetname");
@@ -1923,8 +1980,9 @@ _id_8F96(var_0, var_1, var_2) {
       var_17 = vectorNormalize(var_15 - var_16);
       var_18 = scripts\common\trace::ray_trace(var_16, var_15, self);
 
-      if(isDefined(var_18["entity"]) && var_18["entity"] == level._id_E67E)
+      if(isDefined(var_18["entity"]) && var_18["entity"] == level._id_E67E) {
         playFX(scripts\engine\utility::getfx("hill_c6_bullet_impact"), var_18["position"], var_18["normal"]);
+      }
 
       if(var_14 == 0) {
         var_19 = distance(var_16, var_15) / var_2;
@@ -1940,15 +1998,17 @@ _id_8F96(var_0, var_1, var_2) {
       if(distance(var_8, level.allies["eth3n"].origin) < var_10 * 2) {
         var_18 = scripts\common\trace::ray_trace(var_16, level.allies["eth3n"].origin + (0, 0, randomintrange(5, 50)));
 
-        if(isDefined(var_18["entity"]) && var_18["entity"] == level.allies["eth3n"])
+        if(isDefined(var_18["entity"]) && var_18["entity"] == level.allies["eth3n"]) {
           playFX(scripts\engine\utility::getfx("hill_c6_bullet_impact"), var_18["position"], var_18["normal"]);
+        }
       }
 
       wait 0.05;
     }
 
-    if(distance(level.player.origin, var_8) < var_10)
+    if(distance(level.player.origin, var_8) < var_10) {
       level.player dodamage(randomintrange(2, 5), var_8);
+    }
 
     var_8 = var_8 + var_9 * var_6;
   }
@@ -1983,8 +2043,9 @@ _id_8FA9() {
   var_2 = var_1 scripts\sp\vehicle::_id_1080B();
   self waittill("hill_chase_jackal_explode");
 
-  if(isDefined(var_0._id_ED46))
+  if(isDefined(var_0._id_ED46)) {
     self._id_72B1 = scripts\sp\utility::_id_7DC3(var_0._id_ED46);
+  }
 
   self notify("death");
 }
@@ -2020,21 +2081,25 @@ _id_8F62() {
     scripts\sp\utility::_id_178D(scripts\engine\utility::flag_wait, "hill_combat_steep_hill_enemies_retreat");
     scripts\sp\utility::_id_57D6();
 
-    if(isDefined(var_3) && isalive(var_3))
+    if(isDefined(var_3) && isalive(var_3)) {
       var_3 scripts\sp\utility::_id_54C6();
+    }
   }
 
-  if(!scripts\engine\utility::flag("hill_combat_steep_hill_enemies_retreat"))
+  if(!scripts\engine\utility::flag("hill_combat_steep_hill_enemies_retreat")) {
     wait 2;
+  }
 
-  if(self._id_E4FB.size)
+  if(self._id_E4FB.size) {
     scripts\sp\utility::_id_65E3("unloaded");
+  }
 
   scripts\engine\utility::flag_set("hill_enemy_mg_dropship_guy_dead");
   self waittill("entitydeleted");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 delete();
+  }
 
   var_2 delete();
 }
@@ -2042,8 +2107,9 @@ _id_8F62() {
 _id_8F64() {
   scripts\engine\utility::waitframe();
 
-  if(self._id_E4FB.size)
+  if(self._id_E4FB.size) {
     scripts\sp\utility::_id_65E3("unloaded");
+  }
 
   scripts\engine\utility::flag_set("hill_mg_dropship_unloaded");
 }
@@ -2054,13 +2120,15 @@ _id_8F63() {
   var_0 = scripts\sp\utility::_id_7A8E();
   self waittill("death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     thread scripts\sp\utility::_id_6F54([var_0]);
+  }
 }
 
 _id_8FB0() {
-  if(scripts\sp\maps\pearlharbor\pearlharbor_util::_id_C8ED("center_turret"))
+  if(scripts\sp\maps\pearlharbor\pearlharbor_util::_id_C8ED("center_turret")) {
     level._id_8FA8 = self;
+  }
 
   self setdefaultdroppitch(-15);
   self makeunusable();
@@ -2089,8 +2157,9 @@ _id_8FB0() {
 
   var_1 delete();
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_8F67() {
@@ -2120,8 +2189,9 @@ _id_8F67() {
     var_1 scripts\engine\utility::delaycall(1.5, ::delete);
   }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_8F68(var_0, var_1) {
@@ -2164,8 +2234,9 @@ _id_8FBB(var_0) {
   var_2 = var_0 scripts\sp\utility::_id_7A97();
 
   foreach(var_4 in var_2) {
-    if(var_4 scripts\sp\maps\pearlharbor\pearlharbor_util::_id_C8ED("mortar_loc"))
+    if(var_4 scripts\sp\maps\pearlharbor\pearlharbor_util::_id_C8ED("mortar_loc")) {
       var_1 = var_4;
+    }
   }
 
   playFX(scripts\engine\utility::getfx("hill_mortar_incoming"), var_1.origin);
@@ -2183,8 +2254,9 @@ _id_8FBB(var_0) {
 
   var_9 = "hill_mortar_impact";
 
-  if(isDefined(var_1.script_fxid))
+  if(isDefined(var_1.script_fxid)) {
     var_9 = var_1.script_fxid;
+  }
 
   playFX(scripts\engine\utility::getfx("hill_mortar_impact"), var_1.origin);
   thread scripts\engine\utility::play_sound_in_space("phstreets_hill_mortar_explo", var_1.origin);
@@ -2195,8 +2267,9 @@ _id_8FBB(var_0) {
   if(isai(self)) {
     playworldsound("phstreets_hill_npc_mortar_death", self.origin);
 
-    if(isDefined(self._id_B14F))
+    if(isDefined(self._id_B14F)) {
       scripts\sp\utility::_id_1101B();
+    }
 
     scripts\sp\utility::_id_54C6();
   }
@@ -2234,8 +2307,9 @@ _id_8FAB() {
   foreach(var_4 in var_1) {
     var_4 linkTo(var_0);
 
-    if(var_4 scripts\sp\maps\pearlharbor\pearlharbor_util::_id_C120("clip"))
+    if(var_4 scripts\sp\maps\pearlharbor\pearlharbor_util::_id_C120("clip")) {
       var_2 = var_4;
+    }
   }
 
   var_0.clip = var_2;
@@ -2276,8 +2350,9 @@ _id_8FAA() {
   scripts\engine\utility::flag_set("hill_redshirt2_continue_path");
   var_6 = [level._id_8F3D, level._id_8F3E, level._id_8F3C, var_2];
 
-  foreach(var_8 in var_6)
-  var_8 thread _id_4315(var_4);
+  foreach(var_8 in var_6) {
+    var_8 thread _id_4315(var_4);
+  }
 
   var_0 _id_4315(var_4);
   var_0 notify("stop_earthquake_loop");
@@ -2297,11 +2372,13 @@ _id_8FC6() {
 }
 
 _id_4315(var_0) {
-  if(self._id_1FBB != "redshirt2")
+  if(self._id_1FBB != "redshirt2") {
     level waittill(self._id_1FBB + "_cockpit_roll");
+  }
 
-  if(self == level._id_E682)
+  if(self == level._id_E682) {
     thread scripts\sp\utility::play_sound_on_entity("scn_ph_hill_cockpit_roll_close");
+  }
 
   var_0 scripts\sp\anim::_id_1F35(self, "hill_cockpit_roll");
 
@@ -2314,8 +2391,9 @@ _id_4315(var_0) {
 
   var_2 = "hill_" + self._id_1FBB + "_continue_path";
 
-  if(scripts\engine\utility::flag_exist(var_2))
+  if(scripts\engine\utility::flag_exist(var_2)) {
     scripts\engine\utility::flag_set(var_2);
+  }
 }
 
 _id_4318() {
@@ -2326,11 +2404,13 @@ _id_4318() {
   self disconnectPaths();
   var_0 = level._id_8FA8;
 
-  if(isDefined(var_0.gunner))
+  if(isDefined(var_0.gunner)) {
     var_0.gunner delete();
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
   level._id_8FA8 = undefined;
   playworldsound("scn_ph_hill_cockpit_roll_explo_start_lr", self.origin);
@@ -2377,8 +2457,9 @@ _id_4316() {
 _id_4328() {
   var_0 = ["cockpit_roll_staircase_01", "cockpit_roll_staircase_02", "cockpit_roll_staircase_03", "cockpit_roll_staircase_04"];
 
-  foreach(var_2 in var_0)
-  _id_4329(var_2, "prestine", 0.1);
+  foreach(var_2 in var_0) {
+    _id_4329(var_2, "prestine", 0.1);
+  }
 }
 
 _id_4329(var_0, var_1, var_2) {
@@ -2394,8 +2475,9 @@ _id_4329(var_0, var_1, var_2) {
     var_8 setModel(var_5);
     level._id_8FC5[var_0][var_1]["models"][var_4] = var_8;
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       wait(var_2);
+    }
   }
 }
 
@@ -2407,13 +2489,15 @@ _id_4327() {
     level._id_8FC5[var_2] = [];
     var_3 = getEntArray(var_2, "targetname");
 
-    foreach(var_5 in var_3)
-    var_5 _id_4326(var_2, "prestine");
+    foreach(var_5 in var_3) {
+      var_5 _id_4326(var_2, "prestine");
+    }
 
     var_7 = getEntArray(var_2 + "_dmg", "targetname");
 
-    foreach(var_5 in var_7)
-    var_5 _id_4326(var_2, "destroyed");
+    foreach(var_5 in var_7) {
+      var_5 _id_4326(var_2, "destroyed");
+    }
   }
 }
 
@@ -2441,8 +2525,9 @@ _id_4326(var_0, var_1) {
   level._id_8FC5[var_0][var_1]["model"][var_3] = self.model;
   level._id_8FC5[var_0][var_1]["origin"][var_3] = self.origin;
 
-  if(!isDefined(self.angles))
+  if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
+  }
 
   level._id_8FC5[var_0][var_1]["angles"][var_3] = self.angles;
   level._id_8FC5[var_0][var_1]["size"]++;
@@ -2450,8 +2535,9 @@ _id_4326(var_0, var_1) {
 }
 
 _id_4317() {
-  for(var_0 = 1; var_0 < 5; var_0++)
+  for(var_0 = 1; var_0 < 5; var_0++) {
     _id_4309("cockpit_roll_staircase_0" + var_0);
+  }
 }
 
 _id_4309(var_0) {
@@ -2461,8 +2547,9 @@ _id_4309(var_0) {
   scripts\engine\utility::array_call(var_3, ::show);
   scripts\engine\utility::array_call(var_3, ::solid);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     scripts\engine\utility::array_call(var_2, ::delete);
+  }
 
   _id_4329(var_0, "destroyed");
   scripts\engine\utility::array_call(var_1, ::delete);
@@ -2471,8 +2558,9 @@ _id_4309(var_0) {
 _id_4308(var_0) {
   var_1 = scripts\engine\utility::getStructArray(var_0 + "_vase", "targetname");
 
-  foreach(var_3 in var_1)
-  radiusdamage(var_3.origin, 24, 9999, 9999);
+  foreach(var_3 in var_1) {
+    radiusdamage(var_3.origin, 24, 9999, 9999);
+  }
 }
 
 _id_430A(var_0) {
@@ -2507,12 +2595,14 @@ _id_4319() {
       var_1 = 1;
 
       foreach(var_3 in var_0) {
-        if(level.player istouching(var_3))
+        if(level.player istouching(var_3)) {
           var_1 = 0;
+        }
       }
 
-      if(var_1)
+      if(var_1) {
         level.player scripts\sp\utility::_id_54C6();
+      }
     }
   }
 }
@@ -2522,8 +2612,9 @@ _id_4307() {
   var_1 = getEntArray(var_0.target, "targetname");
 
   foreach(var_3 in var_1) {
-    if(var_3 scripts\sp\maps\pearlharbor\pearlharbor_util::_id_C120("clip"))
+    if(var_3 scripts\sp\maps\pearlharbor\pearlharbor_util::_id_C120("clip")) {
       var_3 connectpaths();
+    }
 
     var_3 delete();
   }
@@ -2537,8 +2628,9 @@ _id_8FA7() {
   thread _id_4317();
   var_0 = level._id_8FA8;
 
-  if(isDefined(var_0.gunner))
+  if(isDefined(var_0.gunner)) {
     var_0.gunner delete();
+  }
 
   var_0 delete();
 }
@@ -2590,8 +2682,9 @@ _id_8F49() {
   _id_0B77::_id_A67F(411);
   scripts\engine\utility::delaythread(8, scripts\sp\vehicle::_id_1080C, "hill_combat_droppod_center");
 
-  if(isDefined(getEnt("post_dropship_boss_colortrig", "targetname")))
+  if(isDefined(getEnt("post_dropship_boss_colortrig", "targetname"))) {
     scripts\sp\utility::_id_15F5("post_dropship_boss_colortrig");
+  }
 
   scripts\engine\utility::array_thread(getEntArray("post_dropship_boss_spawn_trigs", "script_noteworthy"), scripts\sp\utility::_id_15F1);
   scripts\engine\utility::array_thread(getEntArray("post_dropship_boss_trigs", "targetname"), scripts\engine\utility::trigger_on);
@@ -2612,17 +2705,21 @@ _id_8F42() {
   level.allies["eth3n"] scripts\sp\utility::_id_10346("phstreets_eth_enemytransportin");
   scripts\engine\utility::flag_wait("hill_dropship_boss_dialogue_start");
 
-  if(!scripts\engine\utility::flag("hill_dropship_boss_dead"))
+  if(!scripts\engine\utility::flag("hill_dropship_boss_dead")) {
     level.allies["salter"] scripts\sp\utility::_id_10346("phstreets_slt_pinningusdown");
+  }
 
-  if(!scripts\engine\utility::flag("hill_dropship_boss_dead") && !scripts\engine\utility::flag("hill_player_hacked_dropship"))
+  if(!scripts\engine\utility::flag("hill_dropship_boss_dead") && !scripts\engine\utility::flag("hill_player_hacked_dropship")) {
     scripts\sp\utility::_id_10350("phstreets_plr_cantadvance");
+  }
 
-  if(!scripts\engine\utility::flag("hill_dropship_boss_dead") && !scripts\engine\utility::flag("hill_player_hacked_dropship"))
+  if(!scripts\engine\utility::flag("hill_dropship_boss_dead") && !scripts\engine\utility::flag("hill_player_hacked_dropship")) {
     level.allies["salter"] scripts\sp\utility::_id_10346("phstreets_slt_wegottatakeitout");
+  }
 
-  if(!scripts\engine\utility::flag("hill_dropship_boss_dead") && !scripts\engine\utility::flag("hill_player_hacked_dropship"))
+  if(!scripts\engine\utility::flag("hill_dropship_boss_dead") && !scripts\engine\utility::flag("hill_player_hacked_dropship")) {
     level.allies["eth3n"] scripts\sp\utility::_id_10346("phstreets_eth_airshipsgotbots");
+  }
 
   thread _id_5D86();
   scripts\engine\utility::flag_wait("hill_dropship_boss_dead");
@@ -2631,8 +2728,9 @@ _id_8F42() {
   scripts\sp\utility::_id_10350("phstreets_plr_gold24ineedyouon");
   var_0 = scripts\sp\maps\pearlharbor\pearlharbor_tower::_id_53C2();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 scripts\sp\utility::_id_10347("phstreets_un1_copymovinleft");
+  }
 
   scripts\engine\utility::flag_wait("hill_combat_tier_2");
   level.allies["admiral"] scripts\sp\utility::_id_10346("phstreets_adm_gettingclosesta");
@@ -2647,8 +2745,9 @@ _id_5D88() {
   wait 11;
   level.allies["eth3n"] scripts\sp\utility::_id_10346("phstreets_eth_goodkilltargetdestroyed");
 
-  if(scripts\engine\utility::flag("hill_player_hacked_dropship"))
+  if(scripts\engine\utility::flag("hill_player_hacked_dropship")) {
     level.allies["salter"] scripts\sp\utility::_id_10346("phstreets_slt_solidhackreyes");
+  }
 
   scripts\sp\utility::_id_10350("phstreets_plr_forceuptowersatthe");
 }
@@ -2656,28 +2755,33 @@ _id_5D88() {
 _id_5D86() {
   wait 8;
 
-  if(!scripts\engine\utility::flag("hill_dropship_boss_dead") && !scripts\engine\utility::flag("hill_player_hacked_dropship"))
+  if(!scripts\engine\utility::flag("hill_dropship_boss_dead") && !scripts\engine\utility::flag("hill_player_hacked_dropship")) {
     level.allies["eth3n"] scripts\sp\utility::_id_10346("phstreets_eth_therearebotsaboard");
+  }
 
   wait 8;
 
-  if(!scripts\engine\utility::flag("hill_dropship_boss_dead") && !scripts\engine\utility::flag("hill_player_hacked_dropship"))
+  if(!scripts\engine\utility::flag("hill_dropship_boss_dead") && !scripts\engine\utility::flag("hill_player_hacked_dropship")) {
     level.allies["salter"] scripts\sp\utility::_id_10346("phstreets_slt_cmonreyeshackin");
+  }
 
   wait 3;
 
-  if(!scripts\engine\utility::flag("hill_dropship_boss_dead") && !scripts\engine\utility::flag("hill_player_hacked_dropship"))
+  if(!scripts\engine\utility::flag("hill_dropship_boss_dead") && !scripts\engine\utility::flag("hill_player_hacked_dropship")) {
     level.allies["salter"] scripts\sp\utility::_id_10346("phstreets_slt_callforanairstrike");
+  }
 
   wait 8;
 
-  if(!scripts\engine\utility::flag("hill_dropship_boss_dead") && !scripts\engine\utility::flag("hill_player_hacked_dropship"))
+  if(!scripts\engine\utility::flag("hill_dropship_boss_dead") && !scripts\engine\utility::flag("hill_player_hacked_dropship")) {
     level.allies["eth3n"] scripts\sp\utility::_id_10346("phstreets_eth_hackinyoucan");
+  }
 
   wait 4;
 
-  if(!scripts\engine\utility::flag("hill_dropship_boss_dead") && !scripts\engine\utility::flag("hill_player_hacked_dropship"))
+  if(!scripts\engine\utility::flag("hill_dropship_boss_dead") && !scripts\engine\utility::flag("hill_player_hacked_dropship")) {
     level.allies["salter"] scripts\sp\utility::_id_10346("phstreets_slt_transportsengines");
+  }
 }
 
 hill_transient_slowload_wait() {
@@ -2759,8 +2863,9 @@ _id_8F53() {
 _id_8F54() {
   var_0 = self._id_4E50;
 
-  if(distance2d(self.origin, var_0.origin) > 64)
+  if(distance2d(self.origin, var_0.origin) > 64) {
     return 0;
+  }
 
   self unlink();
   self _meth_80F1(var_0.origin, var_0.angles);
@@ -2799,8 +2904,9 @@ _id_8F97() {
     var_0 waittill("trigger");
     var_1 notsolid();
 
-    while(level.player istouching(var_0))
+    while(level.player istouching(var_0)) {
       wait 0.05;
+    }
 
     var_1 solid();
   }
@@ -2810,8 +2916,9 @@ _id_8F4C() {
   level endon("ok_to_delete_hill_AI");
   var_0 = self._id_EDAD;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = self._id_C3BE;
+  }
 
   scripts\sp\maps\pearlharbor\pearlharbor_hill_dropship::_id_B347(var_0);
 
@@ -2855,8 +2962,9 @@ _id_8F4D(var_0) {
   if(!scripts\engine\utility::flag("hill_combat_color_movement_start")) {
     var_2 scripts\sp\utility::_id_54F7();
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_2 _meth_82EE(var_1);
+    }
 
     scripts\engine\utility::flag_wait("hill_combat_color_movement_start");
     var_2 scripts\sp\utility::_id_61C7();
@@ -2864,15 +2972,17 @@ _id_8F4D(var_0) {
 
   scripts\engine\utility::flag_wait("hill_towerbase_allies_moveup");
 
-  if(var_2._id_EDAD == "p")
+  if(var_2._id_EDAD == "p") {
     var_2 scripts\sp\utility::_id_F3B5("o");
-  else if(var_2._id_EDAD != "o")
+  } else if(var_2._id_EDAD != "o") {
     var_2 scripts\sp\utility::_id_F3B5("p");
+  }
 
   scripts\engine\utility::flag_wait("ok_to_delete_hill_AI");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 }
 
 _id_8FA2() {
@@ -2882,21 +2992,24 @@ _id_8FA2() {
   foreach(var_3 in var_0) {
     var_4 = var_3._id_EDAD;
 
-    if(!isDefined(var_1[var_4]))
+    if(!isDefined(var_1[var_4])) {
       var_1[var_4] = [];
+    }
 
-    var_1[var_4] = scripts\engine\utility::array_add(var_1[var_4], var_3);
+    var_1[var_4] = ::scripts\engine\utility::array_add(var_1[var_4], var_3);
   }
 
-  if(scripts\sp\maps\pearlharbor\pearlharbor_util::_id_C120("start"))
+  if(scripts\sp\maps\pearlharbor\pearlharbor_util::_id_C120("start")) {
     level._id_8F4E = var_1;
+  }
 
   for(;;) {
     self waittill("trigger");
     level._id_8F4E = var_1;
 
-    while(level.player istouching(self))
+    while(level.player istouching(self)) {
       wait 0.25;
+    }
   }
 }
 
@@ -2913,15 +3026,17 @@ hill_tower_fake_dropships() {
   self endon("death");
   self waittill("unloading");
 
-  if(!scripts\engine\utility::flag("improved_towerbase_spawning_flag"))
+  if(!scripts\engine\utility::flag("improved_towerbase_spawning_flag")) {
     scripts\engine\utility::flag_wait("improved_towerbase_spawning_flag");
+  }
 
   if(scripts\sp\utility::_id_65DB("unloaded")) {
     return;
   }
   foreach(var_1 in self._id_E4FB) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 delete();
+    }
   }
 }
 
@@ -2940,8 +3055,9 @@ _id_8F69() {
     var_3 = getspawner(var_2.target, "targetname");
     var_2 thread _id_8F67(var_3);
 
-    if(isDefined(var_2.script_parameters))
+    if(isDefined(var_2.script_parameters)) {
       level._id_8F69[var_2.script_parameters] = var_2;
+    }
 
     var_2 cleartargetentity();
     var_2 setturretteam("axis");
@@ -3075,11 +3191,13 @@ _id_8F48(var_0) {
   var_1 = getEntArray("hill_combat_c6_kick_wall_prestine", "targetname");
   var_2 = getEntArray("hill_combat_c6_kick_wall_damaged", "targetname");
 
-  foreach(var_4 in var_1)
-  var_4 delete();
+  foreach(var_4 in var_1) {
+    var_4 delete();
+  }
 
-  foreach(var_4 in var_2)
-  var_4 show();
+  foreach(var_4 in var_2) {
+    var_4 show();
+  }
 }
 
 _id_8F40() {
@@ -3145,15 +3263,17 @@ _id_8F41() {
 _id_BB56() {
   self endon("death");
 
-  if(isDefined(self.script_ender))
+  if(isDefined(self.script_ender)) {
     self endon(self.script_ender);
+  }
 
   for(;;) {
     self waittill("trigger");
     scripts\sp\mortar::_id_2C20(self._id_EE26);
 
-    while(level.player istouching(self))
+    while(level.player istouching(self)) {
       wait 0.15;
+    }
 
     scripts\sp\mortar::_id_2C1F(self._id_EE26);
   }

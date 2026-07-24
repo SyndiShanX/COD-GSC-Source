@@ -19,10 +19,11 @@ _id_95E8() {
 }
 
 _id_8FF6() {
-  if(scripts\engine\utility::flag("player_ejected"))
+  if(scripts\engine\utility::flag("player_ejected")) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_A0A2() {
@@ -35,8 +36,9 @@ _id_A0A2() {
   scripts\sp\maps\heist\heist_util::_id_5569("prone");
   scripts\engine\utility::delaythread(1, ::_id_BAEE);
 
-  foreach(var_1 in level._id_BAE9)
-  var_1 show();
+  foreach(var_1 in level._id_BAE9) {
+    var_1 show();
+  }
 
   thread _id_0B1E::_id_551D("hvr_finale_door");
   thread scripts\sp\maps\prisoner\prisoner_hvt_scene::_id_D757(1);
@@ -61,8 +63,9 @@ _id_A09D() {
 autosave_jackal_arrives() {
   level endon("jackal_arrives_end");
 
-  while(!level.player isonground())
+  while(!level.player isonground()) {
     wait 1;
+  }
 
   scripts\sp\utility::_id_2669("jackal_arrives");
 }
@@ -84,8 +87,9 @@ _id_A0A1() {
   _id_D1F9(var_1);
   level.player _meth_80D1();
 
-  foreach(var_3 in level._id_871C)
-  var_3 delete();
+  foreach(var_3 in level._id_871C) {
+    var_3 delete();
+  }
 
   level._id_BAE8._id_4348 delete();
   _id_D100(var_1);
@@ -194,17 +198,19 @@ _id_D1AC() {
 _id_A4F6() {
   level endon("jackal_arrives_player_jumped");
 
-  if(level._id_7683 < 2)
+  if(level._id_7683 < 2) {
     var_0 = 12;
-  else
+  } else {
     var_0 = 8;
+  }
 
   var_1 = 5;
   var_2 = var_0;
   thread _id_7F15(var_0);
 
-  if(!isDefined(level._id_BAE8.cannon))
+  if(!isDefined(level._id_BAE8.cannon)) {
     level._id_BAE8 _id_0BB4::_id_10770();
+  }
 
   var_3 = level._id_D127.origin + (0, 0, 64) + anglestoright(level._id_D127.angles) * 128;
   level._id_BAE8 thread _id_0BB4::_id_BA69(var_3, var_2);
@@ -224,11 +230,13 @@ _id_A4F6() {
   wait 0.25;
   _id_0B60::_id_F32D("HEIST_MONS_KILL");
 
-  if(isalive(level.player))
+  if(isalive(level.player)) {
     level.player scripts\sp\utility::_id_54C6();
+  }
 
-  if(!scripts\engine\utility::flag("jackal_arrives_player_jumped"))
+  if(!scripts\engine\utility::flag("jackal_arrives_player_jumped")) {
     level._id_D127 hide();
+  }
 
   scripts\sp\utility::_id_B8D1();
 }
@@ -298,8 +306,9 @@ _id_D100(var_0) {
 }
 
 _id_D0FF(var_0) {
-  if(!isDefined(level._id_BAE8.cannon))
+  if(!isDefined(level._id_BAE8.cannon)) {
     level._id_BAE8 _id_0BB4::_id_10770();
+  }
 
   var_1 = var_0 * 0.8;
   var_2 = var_0 * 0.2;
@@ -360,15 +369,17 @@ _id_D07B(var_0) {
   var_7 = scripts\engine\utility::getStruct("dropship_arrive", "targetname");
   var_8 = var_7 _id_5F32(var_7);
 
-  if(!scripts\engine\utility::flag("player_failed_to_launch"))
+  if(!scripts\engine\utility::flag("player_failed_to_launch")) {
     scripts\sp\utility::_id_2669("mons_flight");
+  }
 
   thread jackal_fuel_depletion();
   var_9 = scripts\engine\utility::flag_wait_any_return("player_ejected", "player_eject_time_limit");
   visionsetnaked("heist_ext_mons_eject", 3.0);
 
-  foreach(var_11 in level._id_BAE9)
-  var_11 show();
+  foreach(var_11 in level._id_BAE9) {
+    var_11 show();
+  }
 
   level notify("mons_fake_hangar_lights_on");
 
@@ -410,8 +421,9 @@ _id_D07B(var_0) {
   scripts\engine\utility::flag_wait("player_on_mons");
   scripts\engine\utility::flag_clear("obj_flytomons");
 
-  if(!scripts\engine\utility::flag("mons_boost") || scripts\engine\utility::flag("mons_boost_failed"))
+  if(!scripts\engine\utility::flag("mons_boost") || scripts\engine\utility::flag("mons_boost_failed")) {
     level waittill("forever");
+  }
 
   scripts\engine\utility::flag_set("transient_mons_hangar");
   scripts\engine\utility::waitframe();
@@ -445,15 +457,15 @@ _id_687D() {
   var_1 = [];
 
   for(var_2 = 0; var_2 < 3; var_2++) {
-    var_1[var_2] = scripts\sp\utility::_id_10639("ret_smash_jackal_" + (var_2 + 1));
+    var_1[var_2] = ::scripts\sp\utility::_id_10639("ret_smash_jackal_" + (var_2 + 1));
     var_1[var_2] thread _id_5175("ret_smash");
   }
 
   var_3 = 0;
 
-  if(var_0 > 0)
+  if(var_0 > 0) {
     var_3 = var_0;
-  else if(var_0 < 0) {
+  } else if(var_0 < 0) {
     foreach(var_5 in var_1) {
       var_6 = getanimlength(var_5 scripts\sp\utility::_id_7DC1("ret_smash"));
       var_7 = var_6 - (var_6 + var_0);
@@ -518,8 +530,9 @@ _id_B150(var_0) {
     bullettracer(var_6, var_7, "iw7_sdfar", 1);
     wait(var_0);
 
-    if(!scripts\engine\utility::random([0, 1, 2, 3]))
+    if(!scripts\engine\utility::random([0, 1, 2, 3])) {
       wait(randomfloatrange(0.3, 0.7));
+    }
   }
 }
 
@@ -737,11 +750,13 @@ _id_B98B(var_0) {
   setomnvar("ui_hide_hud", 0);
   scripts\sp\utility::_id_56BA("eject");
 
-  while(level.player useButtonPressed())
+  while(level.player useButtonPressed()) {
     wait 0.05;
+  }
 
-  while(!level.player useButtonPressed())
+  while(!level.player useButtonPressed()) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_set("player_ejected");
 }
@@ -846,8 +861,9 @@ _id_DF3E() {
   if(level.player getcurrentweapon() == "none") {
     var_0 = level.player scripts\sp\utility::_id_7D74();
 
-    if(isDefined(var_0[0]))
+    if(isDefined(var_0[0])) {
       level.player switchtoweapon(var_0[0]);
+    }
   }
 }
 
@@ -881,8 +897,9 @@ _id_134E1() {
   level._id_6754 scripts\sp\utility::_id_10346("heist_eth_sireject");
   wait 0.5;
 
-  if(!scripts\engine\utility::flag("player_ejected"))
+  if(!scripts\engine\utility::flag("player_ejected")) {
     level._id_6754 scripts\sp\utility::_id_10346("heist_eth_captainnow");
+  }
 }
 
 _id_8D1D() {

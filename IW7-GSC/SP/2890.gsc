@@ -6,8 +6,9 @@
 _id_12867() {
   level.player scripts\sp\loadout_code::_id_F6B5();
 
-  if(!isDefined(level._id_37E7))
+  if(!isDefined(level._id_37E7)) {
     level._id_37E7 = "american";
+  }
 
   if(!_id_0A2F::_id_9CBB(level.template_script) && !_id_0A2F::is_jackal_arena_level(level.template_script)) {
     _id_F3BA(level.template_script);
@@ -16,8 +17,9 @@ _id_12867() {
       var_0 = 0;
       var_1 = _id_0A2F::_id_7AF1();
 
-      if(level.template_script == "europa" || !scripts\engine\utility::array_contains(var_1, level.template_script))
+      if(level.template_script == "europa" || !scripts\engine\utility::array_contains(var_1, level.template_script)) {
         var_0 = 1;
+      }
 
       _id_F56D(level.template_script, 1, 0, var_0);
 
@@ -104,19 +106,21 @@ _id_F56D(var_0, var_1, var_2, var_3) {
 
   fix_specialist_loadouts();
 
-  if(isDefined(var_3) && var_3)
+  if(isDefined(var_3) && var_3) {
     _id_8305(var_4, var_5, var_6[0], var_7[0], var_6[1], var_7[1]);
-  else {
+  } else {
     if(var_0 == "default") {
       _id_8305(var_4);
       return;
     }
 
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       var_2 = 0;
+    }
 
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       var_1 = 1;
+    }
 
     if(var_1) {
       var_4 = _id_79B0(var_4);
@@ -139,15 +143,17 @@ _id_F3BA(var_0) {
   var_0 = _id_7AA7(var_0);
   var_1 = tablelookup("sp/recommended_loadouts.csv", 0, var_0, 3);
 
-  if(var_1 != "")
+  if(var_1 != "") {
     level._id_72A6 = var_1;
+  }
 }
 
 _id_31CE(var_0, var_1) {
   var_2 = level.player _meth_84C6("loadouts", var_1, "weaponSetups", var_0, "weapon");
 
-  if(!isDefined(var_2) || var_2 == "none" || var_2 == "")
+  if(!isDefined(var_2) || var_2 == "none" || var_2 == "") {
     return undefined;
+  }
 
   var_3[0] = level.player _meth_84C6("loadouts", var_1, "weaponSetups", var_0, "attachment", 0);
   var_3[1] = level.player _meth_84C6("loadouts", var_1, "weaponSetups", var_0, "attachment", 1);
@@ -156,12 +162,14 @@ _id_31CE(var_0, var_1) {
 }
 
 _id_31CD(var_0, var_1, var_2) {
-  if(!isDefined(var_0) || var_0 == "none" || var_0 == "")
+  if(!isDefined(var_0) || var_0 == "none" || var_0 == "") {
     return "none";
+  }
 
   if(isDefined(level._id_72A6)) {
-    if(!scripts\engine\utility::array_contains(var_1, level._id_72A6))
+    if(!scripts\engine\utility::array_contains(var_1, level._id_72A6)) {
       var_1 = scripts\engine\utility::array_add(var_1, level._id_72A6);
+    }
   }
 
   var_3 = _id_7874(var_0, var_1);
@@ -173,8 +181,9 @@ _id_31CD(var_0, var_1, var_2) {
 
   var_4 = _id_0A2F::build_attach_models(var_0, "array", undefined, 0, 0, 3, 0, var_1);
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_0 = var_0 + "+" + var_4;
+  }
 
   return var_0;
 }
@@ -204,8 +213,9 @@ _id_AE39() {
 }
 
 _id_7874(var_0, var_1) {
-  if(var_0 != "iw7_gambit")
+  if(var_0 != "iw7_gambit") {
     return undefined;
+  }
 
   var_2 = _id_0A2F::_id_D9F2(0);
   var_2 = scripts\engine\utility::array_remove(var_2, "silencer");
@@ -222,8 +232,9 @@ _id_7874(var_0, var_1) {
 
   var_2 = scripts\engine\utility::array_remove_array(var_2, var_1);
 
-  if(var_2.size == 0)
+  if(var_2.size == 0) {
     return undefined;
+  }
 
   return var_2[randomint(var_2.size)];
 }
@@ -231,21 +242,25 @@ _id_7874(var_0, var_1) {
 _id_82FA() {
   var_0 = level.player _meth_84C6("currentLoadout", "levelCreated");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(isDefined(level.script))
+  if(isDefined(level.script)) {
     var_1 = scripts\sp\endmission::_id_7F6B(level.script);
-  else
+  } else {
     var_1 = undefined;
+  }
 
-  if(!isDefined(var_1) || var_1 != var_0)
+  if(!isDefined(var_1) || var_1 != var_0) {
     return 0;
+  }
 
   var_2 = level.player _meth_84C6("currentLoadout", "weaponSetups", 0, "weapon");
 
-  if(getdvarint("skip_loadout") > 0 || !isDefined(var_2) || var_2 == "none")
+  if(getdvarint("skip_loadout") > 0 || !isDefined(var_2) || var_2 == "none") {
     return 0;
+  }
 
   var_3[0] = level.player _meth_84C6("currentLoadout", "weaponSetups", 0, "attachment", 0);
   var_3[1] = level.player _meth_84C6("currentLoadout", "weaponSetups", 0, "attachment", 1);
@@ -281,23 +296,27 @@ _id_82FA() {
 }
 
 _id_7C27(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return undefined;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   switch (var_0) {
     case "grapplingdevice":
-      if(var_1)
+      if(var_1) {
         return "grapplingdevice";
-      else
+      } else {
         return undefined;
+      }
     case "trackingfragzerog":
-      if(var_1)
+      if(var_1) {
         return "trackingfragzerog";
-      else
+      } else {
         return undefined;
+      }
     case "frag_up1":
       return "frag";
     case "offhandshield_up1":
@@ -324,8 +343,9 @@ _id_EB5B() {
     var_1 = level.player getweaponslistall();
     var_2 = getweaponbasename(level.player getcurrentprimaryweapon());
 
-    if(!isDefined(var_2) || !scripts\engine\utility::array_contains(_id_0A2F::_id_DA17(), var_2))
+    if(!isDefined(var_2) || !scripts\engine\utility::array_contains(_id_0A2F::_id_DA17(), var_2)) {
       var_2 = "none";
+    }
 
     foreach(var_4 in var_1) {
       var_5 = weaponinventorytype(var_4);
@@ -355,8 +375,9 @@ _id_EB5B() {
       level.player _meth_84C7("currentLoadout", "weaponClipAmmo", var_11, var_7);
       level.player _meth_84C7("currentLoadout", "weaponStockAmmo", var_11, var_6);
 
-      foreach(var_14, var_13 in var_10)
-      level.player _meth_84C7("currentLoadout", "weaponSetups", var_11, "attachment", var_14, var_10[var_14]);
+      foreach(var_14, var_13 in var_10) {
+        level.player _meth_84C7("currentLoadout", "weaponSetups", var_11, "attachment", var_14, var_10[var_14]);
+      }
     }
 
     var_16 = scripts\sp\utility::_id_7BD6();
@@ -410,11 +431,13 @@ _id_79B0(var_0) {
   var_1 = [];
   var_2 = getweaponbasename(var_0);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return var_0;
+  }
 
-  if(_id_0A2F::_id_DA57(var_2))
+  if(_id_0A2F::_id_DA57(var_2)) {
     return var_0;
+  }
 
   var_3 = getsubstr(var_0, var_2.size);
 
@@ -488,8 +511,9 @@ _id_79B0(var_0) {
   }
 
   foreach(var_5 in var_1) {
-    if(_id_0A2F::_id_DA57(var_5))
+    if(_id_0A2F::_id_DA57(var_5)) {
       return var_5 + var_3;
+    }
   }
 
   return var_0;
@@ -512,10 +536,11 @@ fix_specialist_loadouts() {
       }
 
       if(isDefined(var_2) && var_2 == "helmet") {
-        if(isDefined(var_1) && var_1 == "hackingdevice")
+        if(isDefined(var_1) && var_1 == "hackingdevice") {
           level.player _meth_84C7("loadouts", var_0, "equipment", 1, "offhandshield");
-        else
+        } else {
           level.player _meth_84C7("loadouts", var_0, "equipment", 1, "hackingdevice");
+        }
       }
 
       var_3 = level.player _meth_84C6("loadouts", var_0, "offhandEquipment", 0);
@@ -546,10 +571,11 @@ fix_specialist_loadouts() {
 _id_82FB() {
   var_0 = level.player _meth_84C6("selectedLoadout");
 
-  if(getdvarint("skip_loadout") > 0 || !isDefined(level.player _meth_84C6("selectedLoadout")))
+  if(getdvarint("skip_loadout") > 0 || !isDefined(level.player _meth_84C6("selectedLoadout"))) {
     var_0 = 0;
-  else
+  } else {
     var_0 = level.player _meth_84C6("selectedLoadout");
+  }
 
   var_1 = level.player _meth_84C6("loadouts", var_0, "weaponSetups", 0, "weapon");
   var_2 = level.player _meth_84C6("loadouts", var_0, "weaponSetups", 1, "weapon");
@@ -571,16 +597,18 @@ _id_8305(var_0, var_1, var_2, var_3, var_4, var_5) {
     level.player giveweapon(var_0);
     level.player givemaxammo(var_0);
 
-    if(_id_0A2F::_id_DA40(var_0))
+    if(_id_0A2F::_id_DA40(var_0)) {
       level.player setweaponammoclip(var_0, weaponclipsize(var_0));
+    }
   }
 
   if(isDefined(var_1) && var_1 != "none" && var_1 != "") {
     level.player giveweapon(var_1);
     level.player givemaxammo(var_1);
 
-    if(_id_0A2F::_id_DA40(var_1))
+    if(_id_0A2F::_id_DA40(var_1)) {
       level.player setweaponammoclip(var_1, weaponclipsize(var_1));
+    }
   }
 
   if(isDefined(var_2) && var_2 != "none") {
@@ -636,8 +664,9 @@ _id_10A4F(var_0) {
         continue;
       }
 
-      if(var_3 == "none")
+      if(var_3 == "none") {
         var_3 = var_9;
+      }
     }
   }
 
@@ -645,17 +674,19 @@ _id_10A4F(var_0) {
 }
 
 _id_783F(var_0) {
-  if(!isDefined(level._id_D9E5) || isDefined(level._id_D9E5) && !isDefined(level._id_D9E5["attachments"]))
+  if(!isDefined(level._id_D9E5) || isDefined(level._id_D9E5) && !isDefined(level._id_D9E5["attachments"])) {
     var_1 = _id_0A2F::_id_DA52();
-  else
+  } else {
     var_1 = level._id_D9E5["attachments"];
+  }
 
   foreach(var_3 in var_1) {
     foreach(var_5 in var_3) {
       foreach(var_7 in var_5) {
         foreach(var_9 in var_7) {
-          if(var_9._id_24A2 == var_0)
+          if(var_9._id_24A2 == var_0) {
             return var_9;
+          }
         }
       }
     }
@@ -676,23 +707,23 @@ _id_7D6A(var_0) {
     var_5 = scripts\engine\utility::array_remove(var_5, var_4);
 
     foreach(var_8 in var_5) {
-      if(var_8 == "smartar")
+      if(var_8 == "smartar") {
         var_8 = "smart";
-      else if(var_8 == "eloshtgnepicdev")
+      } else if(var_8 == "eloshtgnepicdev") {
         var_8 = "eloshtgn";
-      else if(var_8 == "phaseshotgunepicdev_sp")
+      } else if(var_8 == "phaseshotgunepicdev_sp") {
         var_8 = "phaseshotgun_sp";
-      else if(var_8 == "reflexshotgunepicdev")
+      } else if(var_8 == "reflexshotgunepicdev") {
         var_8 = "reflexshotgun";
-      else if(var_8 == "epicdevastatorads")
+      } else if(var_8 == "epicdevastatorads") {
         continue;
-      else if(var_8 == "elopstlepicemc")
+      } else if(var_8 == "elopstlepicemc") {
         var_8 = "elopstl";
-      else if(var_8 == "phasepstlepicemc_sp")
+      } else if(var_8 == "phasepstlepicemc_sp") {
         var_8 = "phasepstl_sp";
-      else if(var_8 == "reflexpstlepicemc")
+      } else if(var_8 == "reflexpstlepicemc") {
         var_8 = "reflexpstl";
-      else if(var_8 == "epicemcads") {
+      } else if(var_8 == "epicemcads") {
         continue;
       }
       var_9 = _id_783F(var_8);
@@ -703,9 +734,9 @@ _id_7D6A(var_0) {
       if(var_4 == "iw7_gambit" && isDefined(level._id_7655) && level._id_7655 == var_8) {
         continue;
       }
-      if(var_9._id_13CDE == "default" || var_9.baseangles == "zerog")
+      if(var_9._id_13CDE == "default" || var_9.baseangles == "zerog") {
         continue;
-      else {
+      } else {
         if(var_9.location == "rail") {
           var_1 = var_9.baseangles;
           continue;
@@ -717,8 +748,9 @@ _id_7D6A(var_0) {
   }
 
   if(var_6.size > 2) {
-    if(isDefined(level._id_72A6))
+    if(isDefined(level._id_72A6)) {
       var_6 = scripts\engine\utility::array_remove(var_6, level._id_72A6);
+    }
   }
 
   foreach(var_12 in var_6) {
@@ -727,8 +759,9 @@ _id_7D6A(var_0) {
       continue;
     }
 
-    if(var_3 == "none")
+    if(var_3 == "none") {
       var_3 = var_12;
+    }
   }
 
   return [var_4, var_1, var_2, var_3];
@@ -750,84 +783,99 @@ _id_F467(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_15 = var_10[2];
   var_16 = var_10[3];
 
-  if(isDefined(var_1) && var_1 != "")
+  if(isDefined(var_1) && var_1 != "") {
     level.player _meth_84C7("loadouts", var_0, "weaponSetups", 0, "weapon", var_1);
-  else
+  } else {
     level.player _meth_84C7("loadouts", var_0, "weaponSetups", 0, "weapon", "none");
+  }
 
-  if(isDefined(var_1) && var_1 != "" && isDefined(var_11))
+  if(isDefined(var_1) && var_1 != "" && isDefined(var_11)) {
     level.player _meth_84C7("loadouts", var_0, "weaponSetups", 0, "attachment", 0, var_11);
-  else
+  } else {
     level.player _meth_84C7("loadouts", var_0, "weaponSetups", 0, "attachment", 0, "none");
+  }
 
-  if(isDefined(var_1) && var_1 != "" && isDefined(var_12))
+  if(isDefined(var_1) && var_1 != "" && isDefined(var_12)) {
     level.player _meth_84C7("loadouts", var_0, "weaponSetups", 0, "attachment", 1, var_12);
-  else
+  } else {
     level.player _meth_84C7("loadouts", var_0, "weaponSetups", 0, "attachment", 1, "none");
+  }
 
-  if(isDefined(var_1) && var_1 != "" && isDefined(var_13))
+  if(isDefined(var_1) && var_1 != "" && isDefined(var_13)) {
     level.player _meth_84C7("loadouts", var_0, "weaponSetups", 0, "attachment", 2, var_13);
-  else
+  } else {
     level.player _meth_84C7("loadouts", var_0, "weaponSetups", 0, "attachment", 2, "none");
+  }
 
-  if(isDefined(var_2) && var_2 != "")
+  if(isDefined(var_2) && var_2 != "") {
     level.player _meth_84C7("loadouts", var_0, "weaponSetups", 1, "weapon", var_2);
-  else
+  } else {
     level.player _meth_84C7("loadouts", var_0, "weaponSetups", 1, "weapon", "none");
+  }
 
-  if(isDefined(var_2) && var_2 != "" && isDefined(var_14))
+  if(isDefined(var_2) && var_2 != "" && isDefined(var_14)) {
     level.player _meth_84C7("loadouts", var_0, "weaponSetups", 1, "attachment", 0, var_14);
-  else
+  } else {
     level.player _meth_84C7("loadouts", var_0, "weaponSetups", 1, "attachment", 0, "none");
+  }
 
-  if(isDefined(var_2) && var_2 != "" && isDefined(var_15))
+  if(isDefined(var_2) && var_2 != "" && isDefined(var_15)) {
     level.player _meth_84C7("loadouts", var_0, "weaponSetups", 1, "attachment", 1, var_15);
-  else
+  } else {
     level.player _meth_84C7("loadouts", var_0, "weaponSetups", 1, "attachment", 1, "none");
+  }
 
-  if(isDefined(var_2) && var_2 != "" && isDefined(var_16))
+  if(isDefined(var_2) && var_2 != "" && isDefined(var_16)) {
     level.player _meth_84C7("loadouts", var_0, "weaponSetups", 1, "attachment", 2, var_16);
-  else
+  } else {
     level.player _meth_84C7("loadouts", var_0, "weaponSetups", 1, "attachment", 2, "none");
+  }
 
-  if(isDefined(var_4) && var_4 != "")
+  if(isDefined(var_4) && var_4 != "") {
     level.player _meth_84C7("loadouts", var_0, "equipment", 0, var_4);
-  else
+  } else {
     level.player _meth_84C7("loadouts", var_0, "equipment", 0, "none");
+  }
 
-  if(isDefined(var_3) && var_3 != "")
+  if(isDefined(var_3) && var_3 != "") {
     level.player _meth_84C7("loadouts", var_0, "offhandEquipment", 0, var_3);
-  else
+  } else {
     level.player _meth_84C7("loadouts", var_0, "offhandEquipment", 0, "none");
+  }
 
-  if(isDefined(var_6) && var_6 != "")
+  if(isDefined(var_6) && var_6 != "") {
     level.player _meth_84C7("loadouts", var_0, "equipment", 1, var_6);
-  else
+  } else {
     level.player _meth_84C7("loadouts", var_0, "equipment", 1, "none");
+  }
 
-  if(isDefined(var_5) && var_5 != "")
+  if(isDefined(var_5) && var_5 != "") {
     level.player _meth_84C7("loadouts", var_0, "offhandEquipment", 1, var_5);
-  else
+  } else {
     level.player _meth_84C7("loadouts", var_0, "offhandEquipment", 1, "none");
+  }
 
   var_17 = level.player _meth_84C6("loadouts", var_0, "jackalSetup", "jackalDecal");
 
   if(!isDefined(var_17) || var_17 == "" || var_17 == "none") {
     level.player _meth_84C7("loadouts", var_0, "jackalSetup", "jackalDecal", "veh_mil_air_un_jackal_livery_shell_01");
 
-    if(isDefined(var_7) && var_7 != "")
+    if(isDefined(var_7) && var_7 != "") {
       level.player _meth_84C7("loadouts", var_0, "jackalSetup", "jackalPrimary", var_7);
-    else
+    } else {
       level.player _meth_84C7("loadouts", var_0, "jackalSetup", "jackalPrimary", "primary_default");
+    }
 
-    if(isDefined(var_8) && var_8 != "")
+    if(isDefined(var_8) && var_8 != "") {
       level.player _meth_84C7("loadouts", var_0, "jackalSetup", "jackalSecondary", var_8);
-    else
+    } else {
       level.player _meth_84C7("loadouts", var_0, "jackalSetup", "jackalSecondary", "secondary_default");
+    }
 
-    if(isDefined(var_9) && var_9 != "")
+    if(isDefined(var_9) && var_9 != "") {
       level.player _meth_84C7("loadouts", var_0, "jackalSetup", "jackalUpgrade", var_9);
-    else
+    } else {
       level.player _meth_84C7("loadouts", var_0, "jackalSetup", "jackalUpgrade", "hull");
+    }
   }
 }

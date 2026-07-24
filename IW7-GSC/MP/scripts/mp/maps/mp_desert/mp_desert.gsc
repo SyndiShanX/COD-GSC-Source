@@ -43,8 +43,9 @@ _id_FAE6(var_0, var_1, var_2) {
   var_3.destination = scripts\engine\utility::getStruct(var_3.target, "targetname");
   var_3._id_BCEF = 1.0 / var_1;
 
-  for(;;)
+  for(;;) {
     var_3.destination = _id_E6E1(var_3, var_2);
+  }
 }
 
 _id_E6E1(var_0, var_1) {

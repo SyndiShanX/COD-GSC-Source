@@ -22,8 +22,9 @@ _id_E924() {
   level thread _id_0E4B::_id_1348D(1);
   var_0 = getEntArray("delete_for_exfil", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     scripts\engine\utility::array_call(var_0, ::delete);
+  }
 
   scripts\sp\utility::_id_F44E(1);
 }
@@ -74,8 +75,9 @@ _id_E91D() {
   var_2 = getcorpsearray();
 
   foreach(var_4 in var_2) {
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_4 delete();
+    }
   }
 
   scripts\engine\utility::flag_wait("player_in_exfil_jackal");
@@ -103,8 +105,9 @@ _id_E91D() {
   var_2 = getcorpsearray();
 
   foreach(var_4 in var_2) {
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_4 delete();
+    }
   }
 }
 
@@ -138,8 +141,9 @@ _id_E928() {
   wait 3;
   level._id_EAFE scripts\sp\utility::_id_10346("mn_slt_1_2_locked");
 
-  if(!scripts\engine\utility::flag("player_in_exfil_jackal"))
+  if(!scripts\engine\utility::flag("player_in_exfil_jackal")) {
     level thread _id_E926();
+  }
 }
 
 _id_E926() {
@@ -165,15 +169,17 @@ _id_2730(var_0) {
     var_1 = getaiarray("axis");
 
   foreach(var_4 in var_1) {
-    if(isDefined(var_4) && isalive(var_4))
+    if(isDefined(var_4) && isalive(var_4)) {
       var_4 delete();
+    }
   }
 
   var_6 = getcorpsearray();
 
   foreach(var_8 in var_6) {
-    if(isDefined(var_8))
+    if(isDefined(var_8)) {
       var_8 delete();
+    }
   }
 
   scripts\sp\utility::_id_28D7();
@@ -190,8 +196,9 @@ _id_68F8() {
   scripts\engine\utility::flag_wait("player_pressed_the_button");
   var_0 = getEnt("runner_clip", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
   thread scripts\sp\maps\sa_moon\sa_moon_util::_id_13EF9(1);
   level._id_C47F scripts\sp\utility::_id_1101B();
@@ -306,8 +313,9 @@ _id_E91F() {
 
   var_1 = getEntArray("delete_for_exfil", "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     scripts\engine\utility::array_call(var_1, ::delete);
+  }
 
   scripts\engine\utility::waitframe();
   setsaveddvar("objectiveFadeTooFar", 25);
@@ -427,15 +435,17 @@ _id_F907() {
   setthreatbias("player", "unaware_of_player2", -400);
   scripts\engine\utility::flag_wait("dropbay_triggered");
 
-  if(isDefined(self) && isalive(self))
+  if(isDefined(self) && isalive(self)) {
     scripts\sp\utility::_id_F2A8(1);
+  }
 }
 
 _id_6937() {
   var_0 = scripts\sp\utility::_id_22CD("exfil_wave1", 1);
 
-  foreach(var_2 in var_0)
-  var_2.health = 80;
+  foreach(var_2 in var_0) {
+    var_2.health = 80;
+  }
 
   scripts\sp\utility::_id_13754(var_0);
   scripts\engine\utility::flag_set("zerog_enemies_dead");
@@ -508,8 +518,9 @@ _id_AD9C() {
   var_0 = getEntArray("roof_guys", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2) && isalive(var_2))
+    if(isDefined(var_2) && isalive(var_2)) {
       var_2 delete();
+    }
   }
 }
 
@@ -536,8 +547,9 @@ _id_43D3() {
   var_5 = getcorpsearray();
 
   foreach(var_7 in var_5) {
-    if(isDefined(var_7))
+    if(isDefined(var_7)) {
       var_7 delete();
+    }
   }
 }
 
@@ -546,8 +558,9 @@ _id_43E0() {
   var_0 = getEntArray("cargobay_combat_move_triggers", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2 delete();
+    }
   }
 }
 
@@ -596,8 +609,9 @@ _id_F966() {
   level._id_6930 thread _id_0BB6::_id_F5C0(var_1, 10);
   var_2 = undefined;
 
-  foreach(var_4 in level._id_6930.turrets)
-  var_2 = var_4;
+  foreach(var_4 in level._id_6930.turrets) {
+    var_2 = var_4;
+  }
 
   var_6 = scripts\sp\maps\sa_moon\sa_moon_util::_id_FA71();
   thread scripts\sp\maps\sa_moon\sa_moon_fx::_id_13307(var_2, var_6);
@@ -614,8 +628,9 @@ _id_F966() {
 
     if(isDefined(level._id_6930._id_4074)) {
       foreach(var_8 in level._id_6930._id_4074) {
-        if(isDefined(var_8))
+        if(isDefined(var_8)) {
           var_8 delete();
+        }
       }
 
       level._id_6930._id_4074 = [];
@@ -624,8 +639,9 @@ _id_F966() {
     level._id_6930 delete();
   }
 
-  if(isDefined(level._id_68FF))
+  if(isDefined(level._id_68FF)) {
     level._id_68FF delete();
+  }
 }
 
 _id_6920() {
@@ -668,8 +684,9 @@ _id_FA43(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 
   var_9 scripts\sp\anim::_id_1F35(var_10, var_3);
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_9 scripts\sp\anim::_id_1EEA(var_10, var_4, var_6);
+  }
 }
 
 _id_F8F2(var_0, var_1, var_2, var_3, var_4) {
@@ -742,12 +759,14 @@ _id_F968(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       var_11 = strtok(var_10.script_linkto, " ");
       var_12 = [];
 
-      foreach(var_14 in var_11)
-      var_12[var_12.size] = getEnt(var_14, "script_linkname");
+      foreach(var_14 in var_11) {
+        var_12[var_12.size] = getEnt(var_14, "script_linkname");
+      }
 
       if(var_12.size) {
-        for(var_16 = 0; var_16 < var_12.size; var_16++)
+        for(var_16 = 0; var_16 < var_12.size; var_16++) {
           var_12[var_16] linkTo(var_10);
+        }
       }
     }
 
@@ -760,8 +779,9 @@ _id_F968(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   scripts\engine\utility::flag_wait(var_5);
 
   foreach(var_10 in level._id_DA9C) {
-    if(isDefined(var_10.script_noteworthy))
+    if(isDefined(var_10.script_noteworthy)) {
       var_10 linkTo(var_8, "j_prop_" + var_10.script_noteworthy, (0, 0, 0), (0, 0, 0));
+    }
   }
 
   var_7 scripts\sp\anim::_id_1F35(var_8, var_3);
@@ -781,24 +801,24 @@ _id_63D2(var_0) {
   var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
   var_2 = [];
   scripts\engine\utility::flag_wait("final_wave_spawn");
-  var_2[4] = scripts\sp\utility::_id_107EA("exfil_anim_enemy5", 1);
+  var_2[4] = ::scripts\sp\utility::_id_107EA("exfil_anim_enemy5", 1);
   var_2[4] thread _id_F907();
   var_2[4]._id_1FBB = "generic";
-  var_2[5] = scripts\sp\utility::_id_107EA("exfil_anim_enemy6", 1);
+  var_2[5] = ::scripts\sp\utility::_id_107EA("exfil_anim_enemy6", 1);
   var_2[5] thread _id_F907();
   var_2[5]._id_1FBB = "generic";
-  var_2[6] = scripts\sp\utility::_id_107EA("exfil_anim_enemy7", 1);
+  var_2[6] = ::scripts\sp\utility::_id_107EA("exfil_anim_enemy7", 1);
   var_2[6] thread _id_F907();
   var_2[6]._id_1FBB = "generic";
   scripts\engine\utility::flag_wait("spawn_anim_enemies");
   scripts\engine\utility::waitframe();
-  var_2[0] = scripts\sp\utility::_id_107EA("exfil_anim_enemy1", 1);
+  var_2[0] = ::scripts\sp\utility::_id_107EA("exfil_anim_enemy1", 1);
   var_2[0]._id_1FBB = "generic";
-  var_2[1] = scripts\sp\utility::_id_107EA("exfil_anim_enemy2", 1);
+  var_2[1] = ::scripts\sp\utility::_id_107EA("exfil_anim_enemy2", 1);
   var_2[1]._id_1FBB = "generic";
-  var_2[2] = scripts\sp\utility::_id_107EA("exfil_anim_enemy3", 1);
+  var_2[2] = ::scripts\sp\utility::_id_107EA("exfil_anim_enemy3", 1);
   var_2[2]._id_1FBB = "generic";
-  var_2[3] = scripts\sp\utility::_id_107EA("exfil_anim_enemy4", 1);
+  var_2[3] = ::scripts\sp\utility::_id_107EA("exfil_anim_enemy4", 1);
   var_2[3]._id_1FBB = "generic";
   var_1 thread scripts\sp\anim::_id_1F35(var_2[0], "exfil_enemy1");
   var_1 thread scripts\sp\anim::_id_1F35(var_2[1], "exfil_enemy2");
@@ -810,18 +830,21 @@ _id_63D2(var_0) {
     var_2[4] thread _id_6AFA();
   }
 
-  if(isDefined(var_2[5]) && isalive(var_2[5]))
+  if(isDefined(var_2[5]) && isalive(var_2[5])) {
     var_1 thread scripts\sp\anim::_id_1F35(var_2[5], "exfil_enemy6");
+  }
 
-  if(isDefined(var_2[6]) && isalive(var_2[6]))
+  if(isDefined(var_2[6]) && isalive(var_2[6])) {
     var_1 thread scripts\sp\anim::_id_1F35(var_2[6], "exfil_enemy7");
+  }
 
   var_3 = getanimlength(%sa_moon_cargobay_outro_ememy7_alive_start);
   wait(var_3);
 
   foreach(var_5 in var_2) {
-    if(isDefined(var_5) && isalive(var_5))
+    if(isDefined(var_5) && isalive(var_5)) {
       var_5 delete();
+    }
   }
 }
 
@@ -860,8 +883,9 @@ _id_F8B5(var_0, var_1, var_2, var_3, var_4, var_5) {
   scripts\engine\utility::flag_wait(var_5);
   var_6 scripts\sp\anim::_id_1F35(self, var_2);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_F8B4(var_0, var_1, var_2) {
@@ -980,8 +1004,9 @@ _id_DF3E() {
 }
 
 _id_FA87(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "cargobay_cover_float";
+  }
 
   var_1 = getEntArray(var_0, "script_noteworthy");
   var_2 = randomfloatrange(80, 220);
@@ -991,16 +1016,18 @@ _id_FA87(var_0) {
     if(isDefined(var_5.target)) {
       var_6 = getEntArray(var_5.target, "targetname");
 
-      foreach(var_8 in var_6)
-      var_8 linkTo(var_5);
+      foreach(var_8 in var_6) {
+        var_8 linkTo(var_5);
+      }
 
       var_10 = scripts\engine\utility::getStruct(var_6[0].target, "targetname");
       scripts\engine\utility::waitframe();
 
-      if(!isDefined(var_10.script_parameters))
+      if(!isDefined(var_10.script_parameters)) {
         var_5 moveTo(var_10.origin, var_3, 1, var_3 - 1);
-      else
+      } else {
         var_5 movez(var_2, 1);
+      }
     }
 
     var_5 thread _id_6F3F();
@@ -1011,20 +1038,23 @@ _id_FA87(var_0) {
 _id_6F3F() {
   var_0 = randomint(2);
 
-  if(var_0 == 0)
+  if(var_0 == 0) {
     var_1 = randomint(361);
-  else
+  } else {
     var_1 = -1 * randomint(361);
+  }
 
-  if(var_0 == 0)
+  if(var_0 == 0) {
     var_2 = randomint(361);
-  else
+  } else {
     var_2 = -1 * randomint(361);
+  }
 
-  if(var_0 == 0)
+  if(var_0 == 0) {
     var_3 = randomint(361);
-  else
+  } else {
     var_3 = -1 * randomint(361);
+  }
 
   var_4 = randomfloatrange(20, 50);
 
@@ -1094,8 +1124,9 @@ _id_6AFA() {
   level endon("stop_fake_player_gunfire");
 
   for(;;) {
-    if(isDefined(self))
+    if(isDefined(self)) {
       thread _id_B14C();
+    }
 
     wait(randomfloatrange(0.1, 0.3));
   }

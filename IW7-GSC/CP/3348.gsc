@@ -62,8 +62,9 @@ portalgeneratorused(var_0) {
 
   scripts\engine\utility::waitframe();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 placementfailed(var_0) {
@@ -77,8 +78,9 @@ _id_D684(var_0) {
 }
 
 _id_D686(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.owner) && var_0 != self.owner)
+  if(isDefined(self.owner) && var_0 != self.owner) {
     var_0 notify("destroyed_equipment");
+  }
 
   self notify("detonateExplosive");
 }
@@ -98,8 +100,9 @@ _id_D68C() {
   self notify("death");
 
   if(isDefined(self)) {
-    if(isDefined(self.killcament))
+    if(isDefined(self.killcament)) {
       self.killcament delete();
+    }
 
     scripts\cp\cp_weapon::equipmentdeletevfx();
     scripts\cp\cp_weapon::deleteexplosive();
@@ -165,11 +168,13 @@ _id_13B15(var_0) {
     }
 
     if(scripts\cp\utility::coop_mode_has("portal")) {
-      if(isDefined(level._id_5592))
+      if(isDefined(level._id_5592)) {
         var_3 thread[[level._id_5592]](var_3, 0.5, "fast_travel_complete");
+      }
 
-      if(isDefined(level._id_6B8D))
+      if(isDefined(level._id_6B8D)) {
         var_3 thread[[level._id_6B8D]](var_3, 1);
+      }
 
       continue;
     }
@@ -177,10 +182,11 @@ _id_13B15(var_0) {
     if(isDefined(var_3._id_DDCA) && var_3._id_DDCA) {
       continue;
     }
-    if(!scripts\cp\powers\coop_phaseshift::isentityphaseshifted(var_3))
+    if(!scripts\cp\powers\coop_phaseshift::isentityphaseshifted(var_3)) {
       var_3 thread _id_10DDD(var_1);
-    else
+    } else {
       var_3 scripts\cp\powers\coop_phaseshift::exitphaseshift(1);
+    }
 
     var_3 thread _id_10DDE(var_2);
   }
@@ -216,11 +222,13 @@ _id_6979() {
 _id_13B14(var_0, var_1) {
   var_0 scripts\engine\utility::waittill_any_timeout(var_1, "death");
 
-  if(isDefined(self.objid))
+  if(isDefined(self.objid)) {
     objective_delete(self.objid);
+  }
 
-  if(isDefined(self._id_D682))
+  if(isDefined(self._id_D682)) {
     self._id_D682 delete();
+  }
 
   self delete();
 }

@@ -9,18 +9,22 @@ lights_on(var_0, var_1) {
 }
 
 _id_8695(var_0, var_1, var_2) {
-  if(!isDefined(level.vehicle._id_116CE._id_13209))
+  if(!isDefined(level.vehicle._id_116CE._id_13209)) {
     level.vehicle._id_116CE._id_13209 = [];
+  }
 
-  if(!isDefined(level.vehicle._id_116CE._id_13209[var_0]))
+  if(!isDefined(level.vehicle._id_116CE._id_13209[var_0])) {
     level.vehicle._id_116CE._id_13209[var_0] = [];
+  }
 
-  if(!isDefined(level.vehicle._id_116CE._id_13209[var_0][var_2]))
+  if(!isDefined(level.vehicle._id_116CE._id_13209[var_0][var_2])) {
     level.vehicle._id_116CE._id_13209[var_0][var_2] = [];
+  }
 
   foreach(var_4 in level.vehicle._id_116CE._id_13209[var_0][var_2]) {
-    if(var_1 == var_4)
+    if(var_1 == var_4) {
       return;
+    }
   }
 
   level.vehicle._id_116CE._id_13209[var_0][var_2][level.vehicle._id_116CE._id_13209[var_0][var_2].size] = var_1;
@@ -30,13 +34,15 @@ _id_ACCA() {
   level notify("new_lights_delayfxforframe");
   level endon("new_lights_delayfxforframe");
 
-  if(!isDefined(level._id_7624))
+  if(!isDefined(level._id_7624)) {
     level._id_7624 = 0;
+  }
 
   level._id_7624 = level._id_7624 + randomfloatrange(0.2, 0.4);
 
-  if(level._id_7624 > 2)
+  if(level._id_7624 > 2) {
     level._id_7624 = 0;
+  }
 
   wait 0.05;
   level._id_7624 = undefined;
@@ -47,13 +53,15 @@ _id_A5F2(var_0) {
 }
 
 lights_off_internal(var_0, var_1, var_2) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_1 = var_2;
-  else if(!isDefined(var_1))
+  } else if(!isDefined(var_1)) {
     var_1 = self.classname;
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "all";
+  }
 
   if(!isDefined(self.lights)) {
     return;
@@ -65,14 +73,16 @@ lights_off_internal(var_0, var_1, var_2) {
   var_4 = 0;
   var_5 = 2;
 
-  if(isDefined(self._id_B4AE))
+  if(isDefined(self._id_B4AE)) {
     var_5 = self._id_B4AE;
+  }
 
   foreach(var_7 in var_3) {
     var_8 = level.vehicle._id_116CE._id_13208[var_1][var_7];
 
-    if(scripts\sp\utility::hastag(self.model, var_8.tag))
+    if(scripts\sp\utility::hastag(self.model, var_8.tag)) {
       stopFXOnTag(var_8.effect, self, var_8.tag);
+    }
 
     var_4++;
 
@@ -91,11 +101,13 @@ lights_off_internal(var_0, var_1, var_2) {
 _id_ACCF(var_0, var_1) {
   level._id_A9AE = gettime();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "all";
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = self.classname;
+  }
 
   if(!isDefined(level.vehicle._id_116CE._id_13209)) {
     return;
@@ -105,8 +117,9 @@ _id_ACCF(var_0, var_1) {
   }
   thread _id_ACCA();
 
-  if(!isDefined(self.lights))
+  if(!isDefined(self.lights)) {
     self.lights = [];
+  }
 
   var_2 = level.vehicle._id_116CE._id_13209[var_1][var_0];
   var_3 = 0;
@@ -118,10 +131,11 @@ _id_ACCF(var_0, var_1) {
     }
     var_7 = level.vehicle._id_116CE._id_13208[var_1][var_6];
 
-    if(isDefined(var_7.delay))
+    if(isDefined(var_7.delay)) {
       var_8 = var_7.delay;
-    else
+    } else {
       var_8 = 0;
+    }
 
     for(var_8 = var_8 + level._id_7624; isDefined(var_4["" + var_8]); var_8 = var_8 + 0.05) {}
 
@@ -147,6 +161,7 @@ _id_12BE2() {
   if(!isDefined(self._id_8BB8)) {
     return;
   }
-  while(isDefined(self.lights) && self.lights.size)
+  while(isDefined(self.lights) && self.lights.size) {
     wait 0.05;
+  }
 }

@@ -20,8 +20,9 @@ _id_969E() {
 _id_953A() {
   level._id_2571._id_1D66 = ["breach_to_hallway", "breach_to_hallway_secondary", "barracks_to_hubstern", "barracks_to_hubstern_secondary", "barracks_to_bowupper", "barracks_to_bowupper_secondary"];
 
-  foreach(var_1 in level._id_2571._id_1D66)
-  scripts\engine\utility::flag_init(var_1);
+  foreach(var_1 in level._id_2571._id_1D66) {
+    scripts\engine\utility::flag_init(var_1);
+  }
 
   scripts\engine\utility::flag_init("random_ambience_started");
 }
@@ -151,28 +152,31 @@ _id_DC6D() {
       case "breach_to_hallway":
         scripts\engine\utility::flag_waitopen("breach_to_hallway");
 
-        if(scripts\engine\utility::flag("breach_to_hallway_secondary"))
+        if(scripts\engine\utility::flag("breach_to_hallway_secondary")) {
           _id_4FC5();
-        else
+        } else {
           _id_990F();
+        }
 
         break;
       case "barracks_to_hubstern":
         scripts\engine\utility::flag_waitopen("barracks_to_hubstern");
 
-        if(scripts\engine\utility::flag("barracks_to_hubstern_secondary"))
+        if(scripts\engine\utility::flag("barracks_to_hubstern_secondary")) {
           _id_9A63();
-        else
+        } else {
           _id_4FC5();
+        }
 
         break;
       case "barracks_to_bowupper":
         scripts\engine\utility::flag_waitopen("barracks_to_bowupper");
 
-        if(scripts\engine\utility::flag("barracks_to_bowupper_secondary"))
+        if(scripts\engine\utility::flag("barracks_to_bowupper_secondary")) {
           _id_4FC5();
-        else
+        } else {
           _id_9A63();
+        }
 
         break;
       default:
@@ -305,10 +309,11 @@ _id_769B(var_0) {
   level endon("garbled_vo_thread");
   var_1 = [];
 
-  if(var_0 == "normal")
+  if(var_0 == "normal") {
     var_1 = level._id_2571._id_769A;
-  else if(var_0 == "chaos")
+  } else if(var_0 == "chaos") {
     var_1 = level._id_2571._id_7699;
+  }
 
   wait 5;
   var_2 = scripts\engine\utility::spawn_tag_origin(level.player.origin);
@@ -347,13 +352,15 @@ _id_DE0B() {
 _id_DE0A() {
   var_0 = getEntArray("alarm_sound_org", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 playLoopSound("sa_hack_alarm_01");
+  foreach(var_2 in var_0) {
+    var_2 playLoopSound("sa_hack_alarm_01");
+  }
 
   level._id_E99E["exfil_door"] waittill("trigger");
 
-  foreach(var_2 in var_0)
-  var_2 scripts\sp\utility::_id_10460(1, 1);
+  foreach(var_2 in var_0) {
+    var_2 scripts\sp\utility::_id_10460(1, 1);
+  }
 }
 
 _id_6914() {

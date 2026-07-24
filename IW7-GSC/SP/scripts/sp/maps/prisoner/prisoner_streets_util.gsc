@@ -20,8 +20,9 @@ _id_DF3E() {
 _id_4356(var_0, var_1) {
   var_2 = [];
 
-  for(var_3 = 0; var_3 < var_0.size - 1; var_3++)
+  for(var_3 = 0; var_3 < var_0.size - 1; var_3++) {
     var_2[var_2.size] = pointonsegmentnearesttopoint(var_0[var_3].origin, var_0[var_3 + 1].origin, var_1);
+  }
 
   var_4 = distancesquared(var_2[0], var_1);
   var_5 = var_2[0];
@@ -91,8 +92,9 @@ _id_E587() {
   self endon("death");
 
   for(;;) {
-    if(self buttonPressed("DPAD_LEFT"))
+    if(self buttonPressed("DPAD_LEFT")) {
       _id_E586();
+    }
 
     wait 0.1;
   }

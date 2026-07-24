@@ -152,12 +152,14 @@ debug_deathray_step_1() {
   level.leg_knocked_down = 1;
   var_3 = getEnt("mpq_zom_l_leg_part_ground", "targetname");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 hide();
+  }
 
   foreach(var_5, var_1 in level.mpq_zom_parts) {
-    if(!isDefined(var_1.fx_ent))
+    if(!isDefined(var_1.fx_ent)) {
       level thread glow_bed_part(var_5, var_1);
+    }
 
     var_1 show();
     wait 0.1;
@@ -209,8 +211,9 @@ debug_deathray_step_3() {
 }
 
 debug_deathray_step_4() {
-  foreach(var_1 in level.mpq_zom_parts)
-  var_1 hide();
+  foreach(var_1 in level.mpq_zom_parts) {
+    var_1 hide();
+  }
 
   level.knife_throw_target_body show();
   level.body_made = 1;
@@ -397,8 +400,9 @@ zom_body_bed_activation_func(var_0, var_1) {
     foreach(var_5, var_3 in level.mpq_zom_parts_picked_up) {
       var_4 = level.mpq_zom_parts[var_5];
 
-      if(!isDefined(var_4.fx_ent))
+      if(!isDefined(var_4.fx_ent)) {
         level thread glow_bed_part(var_5, var_4);
+      }
 
       var_4 show();
     }
@@ -448,8 +452,9 @@ zom_body_bed_init_func(var_0, var_1) {
   level.mpq_zom_parts["right_leg"] = getEnt("mpq_zom_r_leg", "targetname");
   level.mpq_zom_parts_picked_up = [];
 
-  foreach(var_3 in level.mpq_zom_parts)
-  var_3 hide();
+  foreach(var_3 in level.mpq_zom_parts) {
+    var_3 hide();
+  }
 
   level.life_ray_end = spawnStruct();
   level.life_ray_end.origin = (4116, -4575, 60);
@@ -464,8 +469,9 @@ spawn_garage_key(var_0) {
 }
 
 zom_body_part_init_func(var_0, var_1) {
-  if(!isDefined(level.mpq_zom_body_parts))
+  if(!isDefined(level.mpq_zom_body_parts)) {
     level.mpq_zom_body_parts = [];
+  }
 
   level.mpq_zom_body_parts["head"] = getEnt("mpq_zom_head_part", "targetname");
   level.mpq_zom_body_parts["torso"] = getEnt("mpq_zom_torso_part", "targetname");
@@ -475,8 +481,9 @@ zom_body_part_init_func(var_0, var_1) {
   level.mpq_zom_body_parts["right_leg"] = getEnt("mpq_zom_r_leg_part", "targetname");
   var_2 = getEnt("mpq_zom_l_leg_part_ground", "targetname");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 hide();
+  }
 
   level thread listen_for_power_handle();
   level thread listen_for_leg_damage();
@@ -539,8 +546,9 @@ zom_body_part_activation_func(var_0, var_1) {
   var_3 = "none";
 
   foreach(var_6, var_5 in level.mpq_zom_body_parts) {
-    if(var_2 == var_5)
+    if(var_2 == var_5) {
       var_3 = var_6;
+    }
   }
 
   if(scripts\engine\utility::is_true(level.mpq_zom_parts_picked_up[var_3])) {
@@ -550,11 +558,13 @@ zom_body_part_activation_func(var_0, var_1) {
     if(!scripts\engine\utility::flag("found_missing_handle")) {
       return;
     }
-    if(!scripts\engine\utility::flag("quake_lifts_arm"))
+    if(!scripts\engine\utility::flag("quake_lifts_arm")) {
       return;
+    }
   } else if(var_3 == "torso") {
-    if(!scripts\engine\utility::flag("frozen_meat_gone"))
+    if(!scripts\engine\utility::flag("frozen_meat_gone")) {
       return;
+    }
   } else if(var_3 == "left_leg") {
     if(!isDefined(level.leg_knocked_down)) {
       return;
@@ -593,8 +603,9 @@ zom_body_part_activation_func(var_0, var_1) {
   var_2.fx_ent setscriptablepartstate("muzzle_fx", "inactive");
   wait 0.1;
 
-  if(isDefined(var_2.fx_ent))
+  if(isDefined(var_2.fx_ent)) {
     var_2.fx_ent delete();
+  }
 }
 
 set_quest_omnvar_by_targetname(var_0) {
@@ -634,8 +645,9 @@ set_quest_omnvar_by_targetname(var_0) {
       break;
   }
 
-  if(var_1 > 0)
+  if(var_1 > 0) {
     scripts\cp\utility::set_quest_icon(var_1);
+  }
 }
 
 listen_for_power_handle() {
@@ -702,8 +714,9 @@ set_quake_flag_if_close_to_arm() {
   var_0 = 10000;
   var_1 = level.mpq_zom_body_parts["left_arm"];
 
-  if(distancesquared(self.origin, var_1.origin) < var_0)
+  if(distancesquared(self.origin, var_1.origin) < var_0) {
     lift_arm_out_of_ground(var_1);
+  }
 }
 
 lift_arm_out_of_ground(var_0) {
@@ -721,8 +734,9 @@ lift_arm_out_of_ground(var_0) {
     wait 3;
   }
 
-  if(scripts\engine\utility::flag("allow_quake_lifts_arm"))
+  if(scripts\engine\utility::flag("allow_quake_lifts_arm")) {
     scripts\engine\utility::flag_set("quake_lifts_arm");
+  }
 }
 
 mirror_init_func(var_0, var_1) {
@@ -766,8 +780,9 @@ mirror_activation_func(var_0, var_1) {
 }
 
 elvira_is_up() {
-  if(isDefined(level.elvira_ai))
+  if(isDefined(level.elvira_ai)) {
     return 0;
+  }
 
   return 1;
 }
@@ -952,15 +967,17 @@ ray_gun_init_func() {
           var_2.bomb_counter = var_5;
           var_5.origin = var_5.origin + (-0.1, -0.1, -23.9);
 
-          if(!isDefined(var_5.angles))
+          if(!isDefined(var_5.angles)) {
             var_2.bomb_counter.angles = (0, 0, 0);
+          }
 
           break;
         case "bomb_status":
           var_2.bomb_status = var_5;
 
-          if(!isDefined(var_5.angles))
+          if(!isDefined(var_5.angles)) {
             var_2.bomb_status.angles = (0, 0, 0);
+          }
 
           break;
       }
@@ -973,8 +990,9 @@ ray_gun_hint_func(var_0, var_1) {
 }
 
 ray_gun_activation_func(var_0, var_1) {
-  if(!isDefined(var_0.angles))
+  if(!isDefined(var_0.angles)) {
     var_0.angles = (0, 0, 0);
+  }
 
   if(!isDefined(level.punch_card_added)) {
     if(isDefined(level.punch_card_acquired)) {
@@ -993,8 +1011,9 @@ ray_gun_activation_func(var_0, var_1) {
     if(!isDefined(level.terminal_unlocked)) {
       ray_gun_terminal(var_0, var_1);
 
-      if(!isDefined(level.terminal_unlocked))
+      if(!isDefined(level.terminal_unlocked)) {
         level thread ray_fail_vo(var_1);
+      }
     } else if(!isDefined(level.body_made)) {
       var_4 = scripts\engine\utility::getStruct("mirror_laser_start", "targetname");
       playsoundatpos(var_4.origin, "cp_town_life_death_ray");
@@ -1008,11 +1027,13 @@ ray_gun_activation_func(var_0, var_1) {
         foreach(var_7 in level.mpq_zom_parts) {
           var_7 hide();
 
-          if(isDefined(var_7.fx_ent))
+          if(isDefined(var_7.fx_ent)) {
             var_7.fx_ent delete();
+          }
 
-          if(isDefined(var_7.fx_ent_2))
+          if(isDefined(var_7.fx_ent_2)) {
             var_7.fx_ent_2 delete();
+          }
         }
 
         level.knife_throw_target_body show();
@@ -1046,8 +1067,9 @@ ray_gun_activation_func(var_0, var_1) {
     } else if(!isDefined(level.polarity_reversed)) {
       ray_gun_terminal(var_0, var_1);
 
-      if(!isDefined(level.polarity_reversed))
+      if(!isDefined(level.polarity_reversed)) {
         level thread ray_fail_vo(var_1);
+      }
     } else if(!isDefined(level.key_spawned)) {
       var_10 = 1;
 
@@ -1104,8 +1126,9 @@ bounce_laser(var_0, var_1, var_2) {
   if(!scripts\engine\utility::is_true(level.mirrors_placed["bathroom_mirror"])) {
     var_5 = scripts\engine\utility::getStruct("mirror_spot_1", "targetname");
 
-    if(!isDefined(var_3.angles))
+    if(!isDefined(var_3.angles)) {
       var_3.angles = (0, 0, 0);
+    }
 
     playfxbetweenpoints(level._effect[var_1], var_3.origin, var_3.angles, var_5.origin);
     wait 0.1;
@@ -1113,8 +1136,9 @@ bounce_laser(var_0, var_1, var_2) {
     return;
   }
 
-  if(!isDefined(var_3.angles))
+  if(!isDefined(var_3.angles)) {
     var_3.angles = (0, 0, 0);
+  }
 
   playfxbetweenpoints(level._effect[var_1], var_3.origin, var_3.angles, var_5.origin);
   wait 0.1;
@@ -1124,8 +1148,9 @@ bounce_laser(var_0, var_1, var_2) {
   if(!scripts\engine\utility::is_true(level.mirrors_placed["elvira_mirror"])) {
     var_5 = scripts\engine\utility::getStruct("mirror_spot_2", "targetname");
 
-    if(!isDefined(var_3.angles))
+    if(!isDefined(var_3.angles)) {
       var_3.angles = (0, 0, 0);
+    }
 
     playfxbetweenpoints(level._effect[var_1], var_3.origin, var_3.angles, var_5.origin);
     wait 0.1;
@@ -1133,8 +1158,9 @@ bounce_laser(var_0, var_1, var_2) {
     return;
   }
 
-  if(!isDefined(var_3.angles))
+  if(!isDefined(var_3.angles)) {
     var_3.angles = (0, 0, 0);
+  }
 
   playfxbetweenpoints(level._effect[var_1], var_3.origin, var_3.angles, var_5.origin);
   wait 0.1;
@@ -1144,8 +1170,9 @@ bounce_laser(var_0, var_1, var_2) {
   if(!scripts\engine\utility::is_true(level.mirrors_placed["car_mirror"])) {
     var_5 = scripts\engine\utility::getStruct("mirror_spot_3", "targetname");
 
-    if(!isDefined(var_3.angles))
+    if(!isDefined(var_3.angles)) {
       var_3.angles = (0, 0, 0);
+    }
 
     playfxbetweenpoints(level._effect[var_1], var_3.origin, var_3.angles, var_5.origin);
     wait 0.1;
@@ -1153,16 +1180,18 @@ bounce_laser(var_0, var_1, var_2) {
     return;
   }
 
-  if(!isDefined(var_3.angles))
+  if(!isDefined(var_3.angles)) {
     var_3.angles = (0, 0, 0);
+  }
 
   playfxbetweenpoints(level._effect[var_1], var_3.origin, var_3.angles, var_5.origin);
   wait 0.1;
   var_3 = var_5;
   var_5 = level.life_ray_end;
 
-  if(!isDefined(var_3.angles))
+  if(!isDefined(var_3.angles)) {
     var_3.angles = (0, 0, 0);
+  }
 
   playfxbetweenpoints(level._effect[var_1], var_3.origin, var_3.angles, var_5.origin);
   wait 0.1;
@@ -1213,8 +1242,9 @@ listen_for_zombie_spawn() {
     level waittill("agent_spawned", var_0);
 
     if(isDefined(var_0) && isDefined(var_0.agent_type) && var_0.agent_type == "generic_zombie") {
-      if(scripts\engine\utility::is_true(var_0.is_soldier))
+      if(scripts\engine\utility::is_true(var_0.is_soldier)) {
         var_0 set_glow_attributes();
+      }
     }
   }
 }
@@ -1231,8 +1261,9 @@ set_glow_attributes() {
 listen_for_death_by_cleaver() {
   level.death_by_cleaver = 0;
 
-  while(!level.death_by_cleaver)
+  while(!level.death_by_cleaver) {
     scripts\engine\utility::waitframe();
+  }
 
   var_0 = scripts\engine\utility::getStructArray("mpq_zom_body_part", "script_noteworthy");
   var_1 = scripts\engine\utility::getclosest(level.mpq_zom_body_parts["right_leg"].origin, var_0);
@@ -1252,8 +1283,9 @@ spawn_film_reel_hints() {
 listen_for_toilet_head() {
   level endon("game_ended");
 
-  while(!isDefined(level.players))
+  while(!isDefined(level.players)) {
     wait 0.1;
+  }
 
   var_0 = scripts\engine\utility::getStruct("toilet_head", "targetname");
   var_1 = var_0.origin;
@@ -1296,11 +1328,13 @@ assign_nuclear_code(var_0, var_1, var_2) {
   var_0.ray_gun_code = [];
 
   if(var_2) {
-    for(var_3 = 5; var_3 > 0; var_3--)
+    for(var_3 = 5; var_3 > 0; var_3--) {
       var_0.ray_gun_code[5 - var_3] = var_1[var_3 - 1];
+    }
   } else {
-    for(var_3 = 0; var_3 < 5; var_3++)
+    for(var_3 = 0; var_3 < 5; var_3++) {
       var_0.ray_gun_code[var_3] = var_1[var_3];
+    }
   }
 }
 
@@ -1329,10 +1363,11 @@ enter_bomb_code_internal(var_0, var_1) {
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
   var_1.bomb_interaction_struct = var_0;
 
-  if(!isDefined(level.terminal_unlocked))
+  if(!isDefined(level.terminal_unlocked)) {
     assign_nuclear_code(var_1, level.liferaycode, 0);
-  else
+  } else {
     assign_nuclear_code(var_1, level.liferaycode, 1);
+  }
 
   reset_nuclear_code_progress(var_1);
   transition_into_enter_bomb_code(var_0, var_1);
@@ -1392,8 +1427,9 @@ bomb_counter_selected_monitor(var_0, var_1) {
     if(correct_digit_entered(var_0, var_3)) {
       advance_nuclear_code_progress(var_0, var_3);
 
-      if(nuclear_code_completed(var_0))
+      if(nuclear_code_completed(var_0)) {
         player_complete_nuclear_code(var_1, var_0);
+      }
 
       continue;
     }
@@ -1446,8 +1482,9 @@ turn_off_enter_bomb_code_hud(var_0) {
 reset_bomb_interaction_struct() {
   level.num_of_ray_gun_code_entered = 0;
 
-  foreach(var_1 in level.ray_gun_interaction_structs)
-  scripts\cp\cp_interaction::add_to_current_interaction_list(var_1);
+  foreach(var_1 in level.ray_gun_interaction_structs) {
+    scripts\cp\cp_interaction::add_to_current_interaction_list(var_1);
+  }
 }
 
 correct_digit_entered(var_0, var_1) {
@@ -1499,14 +1536,15 @@ exit_enter_bomb_code(var_0, var_1) {
 }
 
 nuclear_bomb_armed_sequence(var_0) {
-  if(!scripts\engine\utility::is_true(level.terminal_unlocked))
+  if(!scripts\engine\utility::is_true(level.terminal_unlocked)) {
     level.terminal_unlocked = 1;
-  else {
+  } else {
     level.polarity_reversed = 1;
     var_1 = getEntArray("death_ray_sign", "targetname");
 
-    foreach(var_3 in var_1)
-    var_3 setModel("cp_town_camp_danger_deathraysign");
+    foreach(var_3 in var_1) {
+      var_3 setModel("cp_town_camp_danger_deathraysign");
+    }
   }
 }
 
@@ -1515,11 +1553,13 @@ end_detonate_bomb(var_0) {
 }
 
 clean_up_bomb_interaction_struct(var_0) {
-  if(isDefined(var_0.bomb_counter_ent))
+  if(isDefined(var_0.bomb_counter_ent)) {
     var_0.bomb_counter_ent delete();
+  }
 
-  if(isDefined(var_0.bomb_status_light))
+  if(isDefined(var_0.bomb_status_light)) {
     var_0.bomb_status_light delete();
+  }
 }
 
 exit_detonate_bomb_sequence(var_0) {
@@ -1569,8 +1609,9 @@ phase3_watch_gauge_trigs() {
   self.gauge = getEnt(self.target, "targetname");
   self.gauge thread phase3_gauge_movement_logic();
 
-  if(!isDefined(level.gauges))
+  if(!isDefined(level.gauges)) {
     level.gauges = [];
+  }
 
   level.gauges = scripts\engine\utility::array_add(level.gauges, self.gauge);
 
@@ -1724,23 +1765,27 @@ phase3_get_gauge_reading(var_0) {
   } else
     var_1 = 0;
 
-  if(var_1 > 0)
+  if(var_1 > 0) {
     var_3 = var_1;
-  else
+  } else {
     var_3 = 0;
+  }
 
   return var_3;
 }
 
 is_in_range(var_0, var_1, var_2) {
-  if(var_0 >= var_1 && var_0 <= var_2)
+  if(var_0 >= var_1 && var_0 <= var_2) {
     return 1;
+  }
 
-  if(var_0 + 360 >= var_1 && var_0 + 360 <= var_2)
+  if(var_0 + 360 >= var_1 && var_0 + 360 <= var_2) {
     return 1;
+  }
 
-  if(var_0 - 360 >= var_1 && var_0 - 360 <= var_2)
+  if(var_0 - 360 >= var_1 && var_0 - 360 <= var_2) {
     return 1;
+  }
 
   return 0;
 }
@@ -1748,10 +1793,11 @@ is_in_range(var_0, var_1, var_2) {
 phase3_gauge_movement_logic() {
   self endon("damaged");
 
-  if(isDefined(self.og_angles))
+  if(isDefined(self.og_angles)) {
     self.angles = self.og_angles;
-  else
+  } else {
     self.og_angles = self.angles;
+  }
 
   self rotateTo((self.angles[0], self.angles[1], -75), randomfloatrange(0.15, 0.4));
   self waittill("rotatedone");
@@ -1787,10 +1833,11 @@ phase3_create_safe_combo() {
     var_6 = scripts\engine\utility::random(var_0);
     var_7 = level.combo_numbers[var_6];
 
-    if(var_5 < 3)
+    if(var_5 < 3) {
       var_2 = var_2 + "" + var_6 + ",";
-    else
+    } else {
       var_2 = var_2 + "" + var_6 + "";
+    }
 
     var_4[var_5] setModel(var_7);
   }
@@ -1802,8 +1849,9 @@ phase3_check_for_combo_complete() {
   var_0 = strtok(level.combo_numbers, ",");
 
   foreach(var_2 in level.gauges) {
-    if(!isDefined(var_2.current_reading))
+    if(!isDefined(var_2.current_reading)) {
       return 0;
+    }
 
     if(scripts\engine\utility::array_contains(var_0, "" + var_2.current_reading)) {
       var_3 = 0;
@@ -1829,17 +1877,21 @@ phase3_check_for_combo_complete() {
 }
 
 phase3_place_bomb_parts_hint(var_0, var_1) {
-  if(scripts\engine\utility::flag("teleporter_charged"))
+  if(scripts\engine\utility::flag("teleporter_charged")) {
     return &"CP_TOWN_INTERACTIONS_TELEPORT_READY";
+  }
 
-  if(level.teleporter_pieces_placed < level.teleporter_pieces_found)
+  if(level.teleporter_pieces_placed < level.teleporter_pieces_found) {
     return &"CP_TOWN_INTERACTIONS_PLACE_BOMB_PIECE";
+  }
 
-  if(scripts\engine\utility::flag("chemistry_step3") && !scripts\engine\utility::flag("chemistry_step4"))
+  if(scripts\engine\utility::flag("chemistry_step3") && !scripts\engine\utility::flag("chemistry_step4")) {
     return &"CP_TOWN_INTERACTIONS_ADD_CHEMS";
+  }
 
-  if(scripts\engine\utility::flag("chemistry_step4") && scripts\engine\utility::flag("launchcode_step2") && scripts\engine\utility::flag("launchcode_step3") && !scripts\engine\utility::flag("launchcode_step4"))
+  if(scripts\engine\utility::flag("chemistry_step4") && scripts\engine\utility::flag("launchcode_step2") && scripts\engine\utility::flag("launchcode_step3") && !scripts\engine\utility::flag("launchcode_step4")) {
     return &"CP_TOWN_INTERACTIONS_ACTIVATE_TELEPORT";
+  }
 
   return "";
 }
@@ -1860,8 +1912,9 @@ phase3_place_bomb_parts(var_0, var_1) {
       if(distance2dsquared(var_4.origin, var_0.origin) > 9216) {
         return;
       }
-      if(!var_4 useButtonPressed())
+      if(!var_4 useButtonPressed()) {
         return;
+      }
     }
 
     var_6 = scripts\engine\utility::getStruct("place_bomb_parts", "script_noteworthy");
@@ -1880,8 +1933,9 @@ phase3_place_bomb_parts(var_0, var_1) {
       if(distance2dsquared(var_4.origin, var_0.origin) > 9216) {
         return;
       }
-      if(!var_4 useButtonPressed())
+      if(!var_4 useButtonPressed()) {
         return;
+      }
     }
 
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("boss_charge_portal_first", "town_comment_vo");
@@ -1890,8 +1944,9 @@ phase3_place_bomb_parts(var_0, var_1) {
     return;
   }
 
-  if(level.teleporter_pieces_found != level.teleporter_pieces_placed)
+  if(level.teleporter_pieces_found != level.teleporter_pieces_placed) {
     var_1 playlocalsound("zmb_coin_sounvenir_place");
+  }
 
   while(level.teleporter_pieces_placed != level.teleporter_pieces_found) {
     level.teleporter_pieces_placed++;

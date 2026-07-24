@@ -14,8 +14,9 @@ registerscriptedagent() {
 _id_FAB0() {
   level endon("game_ended");
 
-  if(!isDefined(level.agent_definition))
+  if(!isDefined(level.agent_definition)) {
     level waittill("scripted_agents_initialized");
+  }
 
   level.agent_definition["slasher"]["setup_func"] = ::setupagent;
   level.agent_definition["slasher"]["setup_model_func"] = ::_id_FACE;
@@ -26,10 +27,11 @@ _id_FAB0() {
 _id_FACE(var_0) {
   var_1 = getDvar("ui_mapname");
 
-  if(var_1 == "cp_final")
+  if(var_1 == "cp_final") {
     self setModel("body_final_slasher");
-  else
+  } else {
     self setModel("body_zmb_slasher");
+  }
 
   self attach("head_zmb_slasher");
   self attach("weapon_zmb_slasher_vm", "tag_weapon_right");
@@ -117,8 +119,9 @@ setupzombiegametypevars() {
   self.death_anim_no_ragdoll = undefined;
   self.dont_cleanup = 1;
 
-  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1)
+  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1) {
     self._id_AB3F = 1;
+  }
 }
 
 setupagent() {
@@ -150,14 +153,16 @@ setupagent() {
   self.ignoreall = 1;
   var_0 = getDvar("ui_mapname");
 
-  if(var_0 != "cp_final")
+  if(var_0 != "cp_final") {
     self setethereal(1);
+  }
 
   if(isDefined(level.slasher_level)) {
-    if(level.wave_num < 30 && level.wave_num > 19 && level.slasher_level < 3)
+    if(level.wave_num < 30 && level.wave_num > 19 && level.slasher_level < 3) {
       level.slasher_level = 2;
-    else if(level.wave_num > 29)
+    } else if(level.wave_num > 29) {
       level.slasher_level = 3;
+    }
   }
 
   thread turn_on_saw_blade_after_time(5);
@@ -201,16 +206,18 @@ accumulatedamage(var_0, var_1) {
 
   self.damageaccumulator.lastdamagetime = gettime();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = (1, 1, 1);
+  }
 
   self.damageaccumulator.lastdir = var_1;
   self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + var_0;
 }
 
 isinravemode() {
-  if(self isethereal())
+  if(self isethereal()) {
     return 1;
+  }
 
   return 0;
 }
@@ -237,8 +244,9 @@ onslasherdamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     var_2 = var_2 * 0.1;
     var_2 = int(var_2);
   } else {
-    if(isinravemode() || scripts\engine\utility::is_true(var_1.rave_mode))
+    if(isinravemode() || scripts\engine\utility::is_true(var_1.rave_mode)) {
       var_2 = 0;
+    }
 
     if(scripts\asm\asm::asm_isinstate("block")) {
       var_2 = var_2 * 0.1;
@@ -253,8 +261,9 @@ onslasherdamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     }
   }
 
-  if(var_2 > 0)
+  if(var_2 > 0) {
     accumulatedamage(var_2, var_7);
+  }
 
   slasher_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0.0, var_11, var_12);
 }
@@ -280,22 +289,25 @@ slasher_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
   if(var_2 >= self.health) {
     var_2 = 0;
 
-    if(isDefined(var_5) && var_5 == "iw7_slasher_zm")
+    if(isDefined(var_5) && var_5 == "iw7_slasher_zm") {
       var_1 notify("slasher_killed_by_own_weapon", var_1, var_5);
+    }
 
     self notify("fake_death");
   }
 
   self finishagentdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0.0, var_11, var_12, 0, 1);
 
-  if(self.health > 0 && self.health < var_13)
+  if(self.health > 0 && self.health < var_13) {
     self notify("pain");
+  }
 
   if(isalive(self) && isDefined(self.agent_type)) {
     var_16 = level.agent_funcs[self.agent_type]["gametype_on_damage_finished"];
 
-    if(isDefined(var_16))
+    if(isDefined(var_16)) {
       [[var_16]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
+    }
   }
 }
 
@@ -318,8 +330,9 @@ shouldslasherplaypainanim() {
 }
 
 getenemy() {
-  if(isDefined(self.slasherenemy))
+  if(isDefined(self.slasherenemy)) {
     return self.slasherenemy;
+  }
 
   return undefined;
 }

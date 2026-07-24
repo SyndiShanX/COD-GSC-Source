@@ -4,8 +4,9 @@
 **************************************/
 
 _id_97E6(var_0) {
-  if(isDefined(self.bt._id_9882))
+  if(isDefined(self.bt._id_9882)) {
     return anim.success;
+  }
 
   self._blackboard.civstate = "noncombat";
   self._blackboard.civstatetime = gettime();
@@ -31,8 +32,9 @@ _id_12E8F(var_0) {
     var_4 = 5000;
     var_1 = scripts\asm\asm_bb::bb_getrequestedwhizby();
 
-    if(!isDefined(var_1) || gettime() > var_1._id_7686 + var_4)
+    if(!isDefined(var_1) || gettime() > var_1._id_7686 + var_4) {
       scripts\asm\asm_bb::bb_requestwhizby(undefined);
+    }
   }
 
   var_5 = getaiarray("axis");
@@ -44,8 +46,9 @@ _id_12E8F(var_0) {
     }
   }
 
-  if(scripts\asm\asm_bb::_id_291D() == "combat" && gettime() - scripts\asm\asm_bb::_id_291E() >= 10000)
+  if(scripts\asm\asm_bb::_id_291D() == "combat" && gettime() - scripts\asm\asm_bb::_id_291E() >= 10000) {
     scripts\asm\asm_bb::bb_setcivilianstate("noncombat");
+  }
 
   return anim.success;
 }

@@ -30,15 +30,17 @@ _id_10A9E() {
     scripts\sp\utility::_id_65E3("stealth_enabled");
     _id_0F27::_id_868E("stealth_spotted");
 
-    if(!scripts\sp\utility::_id_65DB("stealth_enabled"))
+    if(!scripts\sp\utility::_id_65DB("stealth_enabled")) {
       scripts\sp\utility::_id_65E3("stealth_enabled");
+    }
 
     thread _id_10E1B();
     scripts\sp\utility::_id_65E3("stealth_enabled");
     _id_0F27::_id_868D("stealth_spotted");
 
-    if(!scripts\sp\utility::_id_65DB("stealth_enabled"))
+    if(!scripts\sp\utility::_id_65DB("stealth_enabled")) {
       scripts\sp\utility::_id_65E3("stealth_enabled");
+    }
 
     thread _id_10E20();
   }
@@ -51,24 +53,27 @@ _id_10E1B() {
   self._id_72DE = undefined;
   self.ignoreme = 1;
 
-  if(isDefined(self._id_10E6D._id_74D5["hidden"]))
+  if(isDefined(self._id_10E6D._id_74D5["hidden"])) {
     _id_0F18::_id_10E8B("hidden");
+  }
 }
 
 _id_10E20() {
   thread scripts\sp\utility::_id_F2DA(1);
 
-  if(isDefined(self._id_10E6D._id_C3EF))
+  if(isDefined(self._id_10E6D._id_C3EF)) {
     self.grenadeammo = self._id_10E6D._id_C3EF;
-  else
+  } else {
     self.grenadeammo = 3;
+  }
 
   self.ignoreme = 0;
   self _meth_8250(0);
   scripts\sp\utility::_id_5514();
 
-  if(isDefined(self._id_10E6D._id_74D5["spotted"]))
+  if(isDefined(self._id_10E6D._id_74D5["spotted"])) {
     _id_0F18::_id_10E8B("spotted");
+  }
 }
 
 _id_81F0() {
@@ -82,8 +87,9 @@ _id_13437() {
   for(;;) {
     scripts\sp\utility::_id_65E3("stealth_enabled");
 
-    if(!isDefined(self._id_10E6D._id_931F))
+    if(!isDefined(self._id_10E6D._id_931F)) {
       self.maxvisibledist = _id_7938();
+    }
 
     wait 0.05;
   }
@@ -92,18 +98,21 @@ _id_13437() {
 _id_7938() {
   var_0 = self.a.pose;
 
-  if(var_0 == "back")
+  if(var_0 == "back") {
     var_0 = "prone";
+  }
 
-  if(_id_0F27::_id_869D())
+  if(_id_0F27::_id_869D()) {
     var_1 = "spotted";
-  else
+  } else {
     var_1 = "hidden";
+  }
 
   var_2 = level._id_10E6D._id_53A0._id_DCCA[var_1][var_0];
 
-  if(scripts\sp\utility::_id_65DB("stealth_in_shadow"))
+  if(scripts\sp\utility::_id_65DB("stealth_in_shadow")) {
     var_2 = max(level._id_10E6D._id_53A0._id_DCCA["hidden"]["prone"], var_2 * 0.5);
+  }
 
   return var_2;
 }

@@ -78,9 +78,9 @@ _id_6CF8(var_0) {
   var_4 = randomint(100);
   var_5 = 25;
 
-  if(var_4 < var_5)
+  if(var_4 < var_5) {
     var_6 = self._id_4BC7;
-  else {
+  } else {
     var_7 = (randomfloatrange(-1, 1), randomfloatrange(-1, 1), randomfloatrange(-1, 1));
     var_8 = var_7 * level._id_864B[self.classname]._id_10AA2;
     var_6 = scripts\engine\utility::spawn_tag_origin();

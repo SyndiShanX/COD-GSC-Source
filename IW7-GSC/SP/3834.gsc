@@ -45,8 +45,9 @@ _id_11A4B() {
         self.trigger notify("trigger");
         self._id_11B0E = 1;
 
-        while(var_1._id_11083)
+        while(var_1._id_11083) {
           scripts\engine\utility::waitframe();
+        }
 
         wait 0.5;
         self._id_11B0E = 0;
@@ -69,11 +70,13 @@ _id_11A50(var_0) {
     var_0._id_11083 = 1;
 
     if(isDefined(var_0._id_11B0E)) {
-      while(level.player istouching(self) || var_0._id_11B0E)
+      while(level.player istouching(self) || var_0._id_11B0E) {
         scripts\engine\utility::waitframe();
+      }
     } else {
-      while(level.player istouching(self))
+      while(level.player istouching(self)) {
         scripts\engine\utility::waitframe();
+      }
     }
 
     var_0 resumespeed(1);
@@ -84,8 +87,9 @@ _id_11A50(var_0) {
 _id_11A4A(var_0) {
   self endon("entitydeleted");
 
-  if(abs(angleclamp180(self.angles[1] - var_0.angles[1])) < 45 && scripts\sp\utility::_id_7951(self.origin, self.angles, var_0.origin) > 0.8)
+  if(abs(angleclamp180(self.angles[1] - var_0.angles[1])) < 45 && scripts\sp\utility::_id_7951(self.origin, self.angles, var_0.origin) > 0.8) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }

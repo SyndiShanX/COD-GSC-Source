@@ -59,8 +59,9 @@ _id_10188(var_0) {
   var_1 = 25;
   var_2 = undefined;
 
-  for(var_3 = undefined; var_1 > 0; var_1 = var_1 - 5)
+  for(var_3 = undefined; var_1 > 0; var_1 = var_1 - 5) {
     self waittill("damage", var_4, var_5, var_6, var_2, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_3);
+  }
 
   var_15 = undefined;
 
@@ -71,8 +72,9 @@ _id_10188(var_0) {
 
   level._id_10184[var_0] _id_1018E();
 
-  if(isDefined(var_15))
+  if(isDefined(var_15)) {
     var_15 delete();
+  }
 }
 
 _id_1018E() {
@@ -114,8 +116,9 @@ _id_40C3(var_0) {
       continue;
     }
     if(isDefined(var_2._id_3E64)) {
-      foreach(var_4 in var_2._id_3E64)
-      var_4 delete();
+      foreach(var_4 in var_2._id_3E64) {
+        var_4 delete();
+      }
     }
 
     var_6 = var_2 scripts\engine\utility::get_target_ent();

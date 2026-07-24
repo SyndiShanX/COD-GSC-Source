@@ -7,8 +7,9 @@ asminit(var_0, var_1, var_2, var_3) {
   scripts\asm\zombie\zombie::_id_13F9A(var_0, var_1, var_2, var_3);
   self.fnactionvalidator = ::isvalidaction;
 
-  if(!isDefined(level.dlc4_boss_arrival_data))
+  if(!isDefined(level.dlc4_boss_arrival_data)) {
     analyzemovementanims();
+  }
 
   var_4 = self getanimentry("move_arrival", 4);
   self._blackboard.movearrivaldist = length(getmovedelta(var_4, 0, 1));
@@ -111,13 +112,15 @@ playmoveexit(var_0, var_1, var_2, var_3) {
   var_5 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   var_6 = self getanimentry(var_1, var_5);
 
-  if(self._blackboard.smoothmotion)
+  if(self._blackboard.smoothmotion) {
     thread adjustlookahead(var_1);
+  }
 
   thread applyallmotiontowardsdesireddir(var_1, var_6, getdvarfloat("dlc4_boss_in_out_scale", 1), 0);
 
-  if(self._blackboard.facecenter)
+  if(self._blackboard.facecenter) {
     thread staylookingatcenter(var_1);
+  }
 
   scripts\asm\asm_mp::_id_2364(var_0, var_1, var_2, var_3);
 }
@@ -127,13 +130,15 @@ loopbossmoveanim(var_0, var_1, var_2, var_3) {
   var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   var_5 = self getanimentry(var_1, var_4);
 
-  if(self._blackboard.smoothmotion)
+  if(self._blackboard.smoothmotion) {
     thread adjustlookahead(var_1);
+  }
 
   thread applyallmotiontowardsdesireddir(var_1, var_5, 1, 1);
 
-  if(self._blackboard.facecenter)
+  if(self._blackboard.facecenter) {
     thread staylookingatcenter(var_1);
+  }
 
   _id_0F3C::_id_B050(var_0, var_1, var_2, var_3);
 }
@@ -142,13 +147,15 @@ playmovearrival(var_0, var_1, var_2, var_3) {
   var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   var_5 = self getanimentry(var_1, var_4);
 
-  if(self._blackboard.smoothmotion)
+  if(self._blackboard.smoothmotion) {
     thread adjustlookahead(var_1);
+  }
 
   thread applyallmotiontowardsdesireddir(var_1, var_5, getdvarfloat("dlc4_boss_in_out_scale", 1), 0);
 
-  if(self._blackboard.facecenter)
+  if(self._blackboard.facecenter) {
     thread staylookingatcenter(var_1);
+  }
 
   scripts\asm\asm_mp::_id_2364(var_0, var_1, var_2, var_3);
 }
@@ -243,13 +250,15 @@ playstrafefireball(var_0, var_1, var_2, var_3) {
   var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   var_5 = self getanimentry(var_1, var_4);
 
-  if(self._blackboard.smoothmotion)
+  if(self._blackboard.smoothmotion) {
     thread adjustlookahead(var_1);
+  }
 
   thread applyallmotiontowardsdesireddir(var_1, var_5, 1, 0);
 
-  if(self._blackboard.facecenter)
+  if(self._blackboard.facecenter) {
     thread staylookingatcenter(var_1);
+  }
 
   _id_0F3C::_id_CEA8(var_0, var_1, var_2, var_3);
 }
@@ -263,15 +272,17 @@ strafefireballnotehandler(var_0, var_1, var_2, var_3) {
   var_4 = getspecialenemy();
   var_5 = self.arenacenter;
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_5 = var_4.origin;
+  }
 
-  if(var_0 == "fireleft")
+  if(var_0 == "fireleft") {
     thread strafefireballburst("j_mid_le_3", var_5, var_1);
-  else if(var_0 == "fireright")
+  } else if(var_0 == "fireright") {
     thread strafefireballburst("j_mid_ri_3", var_5, var_1);
-  else if(var_0 == "fireboth")
+  } else if(var_0 == "fireboth") {
     thread strafefireballburst("j_thumb_ri_3", var_5, var_1);
+  }
 }
 
 strafefireballburst(var_0, var_1, var_2) {
@@ -289,8 +300,9 @@ strafefireballburst(var_0, var_1, var_2) {
 }
 
 playfireball(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.fireballtargetpos))
+  if(!isDefined(self.fireballtargetpos)) {
     self.fireballtargetpos = self.arenacenter;
+  }
 
   faceposition(self.fireballtargetpos);
   _id_0F3C::_id_CEA8(var_0, var_1, var_2, var_3);
@@ -299,12 +311,13 @@ playfireball(var_0, var_1, var_2, var_3) {
 choosefireballanim(var_0, var_1, var_2) {
   var_3 = randomfloat(1);
 
-  if(var_3 < 0.33)
+  if(var_3 < 0.33) {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "left");
-  else if(var_3 < 0.66)
+  } else if(var_3 < 0.66) {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "right");
-  else
+  } else {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "both");
+  }
 }
 
 fireball_note_handler(var_0, var_1, var_2, var_3) {
@@ -346,8 +359,9 @@ fireballimpactfx() {
 }
 
 clap_note_handler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "fire")
+  if(var_0 == "fire") {
     thread handleclapprojectile();
+  }
 }
 
 doclapdamage() {
@@ -446,8 +460,9 @@ doclaplethaldamage(var_0, var_1, var_2, var_3) {
 }
 
 warp_to_closest() {
-  while(scripts\engine\utility::is_true(level.rockwall_forming))
+  while(scripts\engine\utility::is_true(level.rockwall_forming)) {
     wait 0.05;
+  }
 
   self setOrigin(getclosestpointonnavmesh(self.origin));
 }
@@ -464,15 +479,17 @@ playsummonanim(var_0, var_1, var_2, var_3) {
 }
 
 summon_note_handler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "hit")
+  if(var_0 == "hit") {
     summonskeletons();
+  }
 }
 
 summonskeletons() {
   var_0 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 
-  foreach(var_2 in var_0.spawnpoints)
-  spawnzombie(var_0.summon_agent_type, var_2);
+  foreach(var_2 in var_0.spawnpoints) {
+    spawnzombie(var_0.summon_agent_type, var_2);
+  }
 }
 
 setup_summoned_zombie(var_0) {
@@ -490,8 +507,9 @@ setup_summoned_zombie(var_0) {
 }
 
 tornado_note_handler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "tornado_start")
+  if(var_0 == "tornado_start") {
     level thread firetornado(self);
+  }
 }
 
 firetornado(var_0) {
@@ -561,8 +579,9 @@ firetornadodamage() {
 }
 
 ground_pound_start_note_handler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "fire")
+  if(var_0 == "fire") {
     thread doteleporttocenter(var_1);
+  }
 }
 
 ground_pound_pound_note_handler(var_0, var_1, var_2, var_3) {
@@ -582,8 +601,9 @@ throw_note_handler(var_0, var_1, var_2, var_3) {
   var_6 = getspecialenemy();
   var_5 = self.arenacenter;
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_5 = var_6.origin;
+  }
 
   if(var_0 == "fireleft") {
     var_4 = self gettagorigin("j_mid_le_3");
@@ -602,28 +622,32 @@ throwmeteor(var_0, var_1, var_2) {
   self endon(var_0 + "_finished");
   var_3 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 
-  if(distance2dsquared(self.origin, var_2) < distance2dsquared(self.origin, self.arenacenter))
+  if(distance2dsquared(self.origin, var_2) < distance2dsquared(self.origin, self.arenacenter)) {
     var_2 = self.arenacenter;
+  }
 
   var_4 = vectortoangles((self.origin - var_2) * (1, 1, 0));
   var_5 = undefined;
   var_4 = (0 - var_3.throw_starting_pitch, var_4[1], var_4[2]);
 
-  if(var_1 == "LEFT")
+  if(var_1 == "LEFT") {
     var_4 = (var_4[0], var_4[1] - var_3.throw_side_yaw, var_4[2]);
-  else if(var_1 == "RIGHT")
+  } else if(var_1 == "RIGHT") {
     var_4 = (var_4[0], var_4[1] + var_3.throw_side_yaw, var_4[2]);
+  }
 
   var_6 = scripts\common\trace::create_contents(1, 0, 0, 0, 1, 0, 0);
   var_7 = [];
 
   foreach(var_9 in scripts\mp\mp_agent::getactiveagentsofspecies("zombie")) {
-    if(var_9.agent_type != "dlc4_boss")
+    if(var_9.agent_type != "dlc4_boss") {
       var_7[var_7.size] = var_9;
+    }
   }
 
-  foreach(var_12 in level.players)
-  var_7[var_7.size] = var_12;
+  foreach(var_12 in level.players) {
+    var_7[var_7.size] = var_12;
+  }
 
   while(var_4[0] > -40) {
     var_4 = (var_4[0] - var_3.throw_fidelity, var_4[1], var_4[2]);
@@ -651,12 +675,13 @@ play_asteroid_tellsfx(var_0) {
 choosethrowanim(var_0, var_1, var_2) {
   var_3 = randomfloat(1);
 
-  if(var_3 < 0.33)
+  if(var_3 < 0.33) {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "left");
-  else if(var_3 < 0.66)
+  } else if(var_3 < 0.66) {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "right");
-  else
+  } else {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "both");
+  }
 }
 
 air_pound_rise_play(var_0, var_1, var_2, var_3) {
@@ -708,8 +733,9 @@ playgroundvulidlehelper(var_0) {
 }
 
 groundvulteleportintransition(var_0, var_1, var_2, var_3) {
-  if(scripts\asm\asm::_id_232B(var_1, "teleport_finished"))
+  if(scripts\asm\asm::_id_232B(var_1, "teleport_finished")) {
     self.teleportedin = 1;
+  }
 
   return self.teleportedin && !self.claponarena;
 }
@@ -748,8 +774,9 @@ playgroundvullaunch(var_0, var_1, var_2, var_3) {
 }
 
 groundvulidletransition(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.groundvultimer) || self.groundvultimer > 0)
+  if(!isDefined(self.groundvultimer) || self.groundvultimer > 0) {
     return 0;
+  }
 
   return 1;
 }
@@ -767,10 +794,11 @@ groundvuldeathtransition(var_0, var_1, var_2, var_3) {
 }
 
 choosegroundvulhurtanim(var_0, var_1, var_2) {
-  if(level.fbd.bossstate == "FRENZIED")
+  if(level.fbd.bossstate == "FRENZIED") {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "frenzied_hurt");
-  else
+  } else {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "ground_vul_hurt");
+  }
 }
 
 groundvullaunchnotehandler(var_0, var_1, var_2, var_3) {
@@ -793,8 +821,9 @@ groundvulhurtnotehandler(var_0, var_1, var_2, var_3) {
     var_5 = scripts\mp\mp_agent::getactiveagentsofspecies("zombie");
 
     foreach(var_7 in var_5) {
-      if(var_7.agent_type != "dlc4_boss")
+      if(var_7.agent_type != "dlc4_boss") {
         var_7 dodamage(var_7.health * 10, self.arenacenter);
+      }
     }
   } else if(var_0 == "flames_on")
     self setscriptablepartstate("flames", "on");
@@ -820,8 +849,9 @@ playdropmovedownhelper(var_0) {
 }
 
 dropmovedowntransition(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.dropdowntimer) || self.dropdowntimer > 0)
+  if(!isDefined(self.dropdowntimer) || self.dropdowntimer > 0) {
     return 0;
+  }
 
   self playSound("final_meph_ground_swipe");
   self setscriptablepartstate("flame_trail", "off");
@@ -861,8 +891,9 @@ terminateflyoverarrival(var_0, var_1, var_2) {
 flyoverloopnotehandler(var_0, var_1, var_2, var_3) {}
 
 black_hole_start_note_handler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "start_blackhole")
+  if(var_0 == "start_blackhole") {
     thread createmephblackhole();
+  }
 }
 
 playblackholeloop(var_0, var_1, var_2, var_3) {
@@ -881,21 +912,23 @@ playblackholeloophelper(var_0) {
 }
 
 blackholelooptransition(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.blackholetimer) || self.blackholetimer > 0)
+  if(!isDefined(self.blackholetimer) || self.blackholetimer > 0) {
     return 0;
+  }
 
   return 1;
 }
 
 black_hole_end_note_handler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "blackhole_end")
+  if(var_0 == "blackhole_end") {
     self notify("stop_blackhole");
+  }
 }
 
 eclipse_note_handler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "start_eclipse")
+  if(var_0 == "start_eclipse") {
     thread create_eclipse();
-  else if(var_0 == "start_wave") {
+  } else if(var_0 == "start_wave") {
     thread doeclipsespecialwave();
     thread eclipsespecialwavetimer();
   }
@@ -922,19 +955,22 @@ doeclipsespecialwave() {
     var_6[var_6.size] = "alien_goon";
   }
 
-  for(var_7 = 0; var_7 < var_4; var_7++)
+  for(var_7 = 0; var_7 < var_4; var_7++) {
     var_6[var_6.size] = "alien_phantom";
+  }
 
   var_6 = scripts\engine\utility::array_randomize(var_6);
 
   for(var_7 = 0; var_7 < var_5; var_7++) {
-    while(scripts\mp\mp_agent::getactiveagentsoftype("all").size >= 24)
+    while(scripts\mp\mp_agent::getactiveagentsoftype("all").size >= 24) {
       scripts\engine\utility::waitframe();
+    }
 
     scripts\aitypes\dlc4_boss\behaviors::computespawnpoints(1, scripts\mp\mp_agent::getactiveagentsofspecies("zombie"));
 
-    if(isDefined(var_0.spawnpoints[0]))
+    if(isDefined(var_0.spawnpoints[0])) {
       spawnzombie(var_6[var_7], var_0.spawnpoints[0]);
+    }
 
     wait(var_2);
     var_2 = var_2 * var_0.spawn_interval_decay;
@@ -942,18 +978,21 @@ doeclipsespecialwave() {
 
   var_8 = var_0.specialwavesdata["SPECIAL_" + var_1];
 
-  while(scripts\mp\mp_agent::getactiveagentsofspecies("zombie").size + var_8.size > 24)
+  while(scripts\mp\mp_agent::getactiveagentsofspecies("zombie").size + var_8.size > 24) {
     wait 1;
+  }
 
   scripts\aitypes\dlc4_boss\behaviors::computespawnpoints(var_8.size, scripts\mp\mp_agent::getactiveagentsofspecies("zombie"));
 
   for(var_7 = 0; var_7 < var_8.size; var_7++) {
-    if(isDefined(var_0.spawnpoints[var_7]))
+    if(isDefined(var_0.spawnpoints[var_7])) {
       spawnzombie(var_8[var_7], var_0.spawnpoints[var_7]);
+    }
   }
 
-  while(scripts\mp\mp_agent::getactiveagentsofspecies("zombie").size > 1)
+  while(scripts\mp\mp_agent::getactiveagentsofspecies("zombie").size > 1) {
     wait 1;
+  }
 
   wait 1;
   level notify("ECLIPSE_SPAWN_COMPLETE");
@@ -964,8 +1003,9 @@ eclipsespecialwavetimer() {
   var_0 = gettime();
   var_1 = scripts\asm\dlc4\dlc4_asm::gettunedata().eclipse_duration;
 
-  while(gettime() < var_0 + var_1)
+  while(gettime() < var_0 + var_1) {
     wait 1;
+  }
 
   level notify("ECLIPSE_SPAWN_COMPLETE");
 }
@@ -973,8 +1013,9 @@ eclipsespecialwavetimer() {
 create_eclipse() {
   var_0 = getEnt("eclipse_blocker", "targetname");
 
-  if(!isDefined(var_0.og_origin))
+  if(!isDefined(var_0.og_origin)) {
     var_0.og_origin = var_0.origin;
+  }
 
   var_1 = spawnfx(level._effect["vfx_boss_sun_blocker"], (-17910.3, 966.038, 5116), anglesToForward((43.4021, 347.643, -7.50797)), anglestoup((43.4021, 347.643, -7.50797)));
   triggerfx(var_1);
@@ -1012,15 +1053,17 @@ createarmageddon() {
     var_12 = distance2dsquared(var_11, (-13165, 74, -46));
     var_13 = distance2dsquared(var_11, (-13263, -767, -46));
 
-    if(var_12 > var_1 && var_13 > var_1)
+    if(var_12 > var_1 && var_13 > var_1) {
       magicbullet("iw7_dlc4eclipse_mp", (-17910.3, 966.038, 5116), var_11);
+    }
 
     wait(randomfloatrange(var_5, var_6));
   }
 
   foreach(var_15 in scripts\mp\mp_agent::getactiveagentsofspecies("zombie")) {
-    if(var_15.agent_type != "dlc4_boss")
+    if(var_15.agent_type != "dlc4_boss") {
       var_15 dodamage(var_15.health * 10, self.arenacenter);
+    }
   }
 
   wait 5;
@@ -1036,13 +1079,15 @@ shouldplaydeath(var_0, var_1, var_2, var_3) {
 }
 
 death_note_handler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "fadeout")
+  if(var_0 == "fadeout") {
     level thread meph_victory();
+  }
 }
 
 death_ground_idle_note_handler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "idle_pain")
+  if(var_0 == "idle_pain") {
     self playSound("final_meph_pain_teleport");
+  }
 }
 
 meph_victory() {
@@ -1167,8 +1212,9 @@ teleportnotehandler(var_0, var_1, var_2, var_3) {
     playFX(level._effect["boss_teleport_start_left"], var_4, anglesToForward(var_5), (0, 0, 1));
     destroynavrepulsor("dlc4_boss_repulsor");
 
-    if(isDefined(self._id_BE6F))
+    if(isDefined(self._id_BE6F)) {
       destroynavobstacle(self._id_BE6F);
+    }
   }
 }
 
@@ -1189,10 +1235,11 @@ teleportwhenanimdone(var_0, var_1) {
 
   for(;;) {
     if(scripts\asm\asm::_id_232B(var_0, "end")) {
-      if(var_1 == "center")
+      if(var_1 == "center") {
         thread doteleporttocenter(var_0);
-      else
+      } else {
         thread doteleporttodesirednode(var_0);
+      }
 
       return;
     }
@@ -1210,8 +1257,9 @@ doteleporttocenter(var_0) {
   self setethereal(1);
   wait 0.5;
 
-  while(isDefined(self.doinggroundvul) && self.doinggroundvul && isDefined(self.claponarena) && self.claponarena)
+  while(isDefined(self.doinggroundvul) && self.doinggroundvul && isDefined(self.claponarena) && self.claponarena) {
     scripts\engine\utility::waitframe();
+  }
 
   _id_11663(self.arenacenter);
   thread showlater();
@@ -1219,8 +1267,9 @@ doteleporttocenter(var_0) {
 }
 
 doteleporttodesirednode(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   self setethereal(1);
   wait 0.5;
@@ -1231,13 +1280,15 @@ doteleporttodesirednode(var_0, var_1) {
 }
 
 teleporttodesirednode(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   var_1 = self._blackboard.nodes[self._blackboard.desirednode].origin;
 
-  if(var_0)
+  if(var_0) {
     var_1 = (var_1[0], var_1[1], self.origin[2]);
+  }
 
   _id_11663(var_1);
   self._blackboard._id_4BF7 = self._blackboard.desirednode;
@@ -1266,8 +1317,9 @@ showlater() {
   wait 0.5;
   self setethereal(0);
 
-  if(level.fbd.bossstate == "LAST_STAND")
+  if(level.fbd.bossstate == "LAST_STAND") {
     self.cantakedamage = 1;
+  }
 }
 
 createmephblackhole() {
@@ -1314,8 +1366,9 @@ mephbhquake(var_0, var_1) {
         continue;
       }
 
-      if(distance2d(var_3.origin, var_0) < 250)
+      if(distance2d(var_3.origin, var_0) < 250) {
         var_3 shellshock("default_nosound", 0.5);
+      }
     }
   }
 }
@@ -1332,10 +1385,11 @@ spawnzombie(var_0, var_1) {
     var_3.script_fxid = "dirt";
   } else if(var_0 == "alien_goon")
     scripts\cp\zombies\cp_final_spawning::_id_1B99(var_3);
-  else if(var_0 == "alien_phantom")
+  else if(var_0 == "alien_phantom") {
     scripts\cp\zombies\cp_final_spawning::_id_3115(var_3);
-  else if(var_0 == "alien_rhino" || var_0 == "zombie_clown" || var_0 == "karatemaster" || var_0 == "slasher")
+  } else if(var_0 == "alien_rhino" || var_0 == "zombie_clown" || var_0 == "karatemaster" || var_0 == "slasher") {
     scripts\cp\zombies\cp_final_spawning::_id_3115(var_3);
+  }
 
   var_4 = var_3 scripts\cp\zombies\zombies_spawning::spawn_wave_enemy(var_0, 1);
 

@@ -19,26 +19,31 @@ getfirstattacknotetracktime(var_0) {
   var_1 = 99999;
   var_2 = getnotetracktimes(var_0, "r_kick");
 
-  if(var_2.size > 0)
+  if(var_2.size > 0) {
     var_1 = var_2[var_2.size - 1];
+  }
 
   var_2 = getnotetracktimes(var_0, "l_kick");
 
-  if(var_2.size > 0 && var_2[0] < var_1)
+  if(var_2.size > 0 && var_2[0] < var_1) {
     var_1 = var_2[var_2.size - 1];
+  }
 
   var_2 = getnotetracktimes(var_0, "r_punch");
 
-  if(var_2.size > 0 && var_2[0] < var_1)
+  if(var_2.size > 0 && var_2[0] < var_1) {
     var_1 = var_2[0];
+  }
 
   var_2 = getnotetracktimes(var_0, "l_punch");
 
-  if(var_2.size > 0 && var_2[0] < var_1)
+  if(var_2.size > 0 && var_2[0] < var_1) {
     var_1 = var_2[0];
+  }
 
-  if(var_1 > 999)
+  if(var_1 > 999) {
     return undefined;
+  }
 
   return var_1;
 }
@@ -61,7 +66,7 @@ setupmeleedistances(var_0, var_1) {
     level.karatemastermeleetimetoimpact[var_1][var_3] = var_9;
   }
 
-  level.karatemastermeleedist[var_1] = scripts\engine\utility::array_sort_with_func(level.karatemastermeleedist[var_1], ::distcompare);
+  level.karatemastermeleedist[var_1] = ::scripts\engine\utility::array_sort_with_func(level.karatemastermeleedist[var_1], ::distcompare);
 }
 
 karatemasterinit(var_0, var_1, var_2, var_3) {
@@ -83,8 +88,9 @@ playanimandlookatenemy(var_0, var_1, var_2, var_3) {
 }
 
 faceenemyhelper(var_0, var_1, var_2) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self endon(var_2 + "_finished");
+  }
 
   var_3 = gettime() + var_1;
 
@@ -103,17 +109,21 @@ faceenemyhelper(var_0, var_1, var_2) {
 }
 
 isanimdone(var_0, var_1, var_2, var_3) {
-  if(scripts\asm\asm::_id_232B(var_1, "end"))
+  if(scripts\asm\asm::_id_232B(var_1, "end")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "early_end"))
+  if(scripts\asm\asm::_id_232B(var_1, "early_end")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "finish_early"))
+  if(scripts\asm\asm::_id_232B(var_1, "finish_early")) {
     return 1;
+  }
 
-  if(scripts\asm\asm::_id_232B(var_1, "code_move"))
+  if(scripts\asm\asm::_id_232B(var_1, "code_move")) {
     return 1;
+  }
 
   return 0;
 }
@@ -129,15 +139,17 @@ _id_BEA0(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
   var_5 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
 
-  if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.ent))
+  if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.ent)) {
     var_4 = self._blackboard.shootparams.ent.origin;
-  else if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.pos))
+  } else if(isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.pos)) {
     var_4 = self._blackboard.shootparams.pos;
-  else if(isDefined(var_5))
+  } else if(isDefined(var_5)) {
     var_4 = var_5.origin;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
   var_6 = self.angles[1] - vectortoyaw(var_4 - self.origin);
   var_7 = distancesquared(self.origin, var_4);
@@ -145,12 +157,14 @@ _id_BEA0(var_0, var_1, var_2, var_3) {
   if(var_7 < 65536) {
     var_8 = sqrt(var_7);
 
-    if(var_8 > 3)
+    if(var_8 > 3) {
       var_6 = var_6 + asin(-3 / var_8);
+    }
   }
 
-  if(abs(angleclamp180(var_6)) > self._id_129AF)
+  if(abs(angleclamp180(var_6)) > self._id_129AF) {
     return 1;
+  }
 
   return 0;
 }
@@ -161,21 +175,24 @@ _id_81DE() {
   var_2 = undefined;
 
   if(isDefined(self._blackboard.shootparams)) {
-    if(isDefined(self._blackboard.shootparams.ent))
+    if(isDefined(self._blackboard.shootparams.ent)) {
       var_1 = self._blackboard.shootparams.ent;
-    else if(isDefined(self._blackboard.shootparams.pos))
+    } else if(isDefined(self._blackboard.shootparams.pos)) {
       var_2 = self._blackboard.shootparams.pos;
+    }
   }
 
   var_3 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
 
   if(isDefined(var_3)) {
-    if(!isDefined(var_1) && !isDefined(var_2))
+    if(!isDefined(var_1) && !isDefined(var_2)) {
       var_1 = var_3;
+    }
   }
 
-  if(isDefined(var_1) && !issentient(var_1))
+  if(isDefined(var_1) && !issentient(var_1)) {
     var_0 = 1.5;
+  }
 
   var_4 = scripts\engine\utility::getpredictedaimyawtoshootentorpos(var_0, var_1, var_2);
   return var_4;
@@ -184,22 +201,24 @@ _id_81DE() {
 _id_3F0A(var_0, var_1, var_2) {
   var_3 = _id_81DE();
 
-  if(var_3 < 0)
+  if(var_3 < 0) {
     var_4 = "right";
-  else
+  } else {
     var_4 = "left";
+  }
 
   var_3 = abs(var_3);
   var_5 = 0;
 
-  if(var_3 > 157.5)
+  if(var_3 > 157.5) {
     var_5 = 180;
-  else if(var_3 > 112.5)
+  } else if(var_3 > 112.5) {
     var_5 = 135;
-  else if(var_3 > 67.5)
+  } else if(var_3 > 67.5) {
     var_5 = 90;
-  else
+  } else {
     var_5 = 45;
+  }
 
   var_6 = var_4 + "_" + var_5;
   var_7 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_6);
@@ -215,8 +234,9 @@ _id_D56A(var_0, var_1, var_2, var_3) {
   self _meth_8281("anim deltas");
   scripts\asm\asm_mp::_id_2365(var_0, var_1, var_2, var_4);
 
-  if(!isDefined(var_5) && isDefined(self.pathgoalpos))
+  if(!isDefined(var_5) && isDefined(self.pathgoalpos)) {
     self clearpath();
+  }
 
   scripts\asm\asm_mp::_id_237F("face current");
   scripts\asm\asm_mp::_id_237E("code_move");
@@ -240,14 +260,17 @@ playmovingpainanim(var_0, var_1, var_2, var_3) {
 }
 
 shoulddomelee(var_0, var_1, var_2, var_3) {
-  if(!scripts\engine\utility::is_true(self._blackboard.bmeleerequested))
+  if(!scripts\engine\utility::is_true(self._blackboard.bmeleerequested)) {
     return 0;
+  }
 
-  if(!isDefined(self._blackboard.meleetype))
+  if(!isDefined(self._blackboard.meleetype)) {
     return 0;
+  }
 
-  if(self._blackboard.meleetype == var_2)
+  if(self._blackboard.meleetype == var_2) {
     return 1;
+  }
 
   return 0;
 }
@@ -275,10 +298,11 @@ choosemovingmeleeanim(var_0, var_1, var_2) {
 }
 
 choosemeleeanim(var_0, var_1, var_2) {
-  if(self.asm.footsteps.foot == "left")
+  if(self.asm.footsteps.foot == "left") {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "left");
-  else
+  } else {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "right");
+  }
 }
 
 teleportrequested(var_0, var_1, var_2, var_3) {
@@ -288,8 +312,9 @@ teleportrequested(var_0, var_1, var_2, var_3) {
 playanim_teleportin(var_0, var_1, var_2, var_3) {
   var_4 = 1;
 
-  if(scripts\engine\utility::is_true(self._blackboard.bfastteleport))
+  if(scripts\engine\utility::is_true(self._blackboard.bfastteleport)) {
     var_4 = 3;
+  }
 
   playanimwithplaybackrate(var_0, var_1, var_2, var_4);
 }
@@ -298,8 +323,9 @@ playanim_teleportout(var_0, var_1, var_2, var_3) {
   thread scripts\asm\zombie\melee::_id_6A6A(var_1, scripts\mp\agents\karatemaster\karatemaster_agent::getenemy());
   var_4 = 1;
 
-  if(scripts\engine\utility::is_true(self._blackboard.bfastteleport))
+  if(scripts\engine\utility::is_true(self._blackboard.bfastteleport)) {
     var_4 = 1.5;
+  }
 
   playanimwithplaybackrate(var_0, var_1, var_2, var_4);
 
@@ -353,8 +379,9 @@ doteleportout(var_0) {
   self dontinterpolate();
   self setOrigin(var_2);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self.angles = (0, vectortoyaw(var_1.origin - self.origin), 0);
+  }
 
   wait 0.1;
   self show();
@@ -405,8 +432,9 @@ meleenotehandler(var_0, var_1, var_2, var_3) {
         if(var_16 > var_11 && var_11 > 0) {
           var_17 = var_16 / var_11;
 
-          if(var_17 > var_6.cmaxmeleeflexscale)
+          if(var_17 > var_6.cmaxmeleeflexscale) {
             var_17 = var_6.cmaxmeleeflexscale;
+          }
         }
 
         self scragentsetanimscale(var_17, 1);

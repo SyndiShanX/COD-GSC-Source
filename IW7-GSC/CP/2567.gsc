@@ -6,73 +6,87 @@
 _id_B29B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
   var_14 = [];
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_14[0] = var_0;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_14[1] = var_1;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_14[2] = var_2;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_14[3] = var_3;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_14[4] = var_4;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_14[5] = var_5;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_14[6] = var_6;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     var_14[7] = var_7;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_8))
+  if(isDefined(var_8)) {
     var_14[8] = var_8;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_9))
+  if(isDefined(var_9)) {
     var_14[9] = var_9;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_10))
+  if(isDefined(var_10)) {
     var_14[10] = var_10;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_11))
+  if(isDefined(var_11)) {
     var_14[11] = var_11;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_12))
+  if(isDefined(var_12)) {
     var_14[12] = var_12;
-  else
+  } else {
     return var_14;
+  }
 
-  if(isDefined(var_13))
+  if(isDefined(var_13)) {
     var_14[13] = var_13;
+  }
 
   return var_14;
 }
@@ -97,11 +111,13 @@ _id_97ED(var_0) {
   anim._id_6B93 = _id_B29B(2, 3, 3, 3, 4, 4, 4, 5, 5);
   anim._id_F217 = _id_B29B(1, 2, 2, 3, 3, 4, 4, 4, 4, 5, 5, 5);
 
-  if(!isDefined(anim.shootenemywrapper_func))
+  if(!isDefined(anim.shootenemywrapper_func)) {
     anim.shootenemywrapper_func = ::_id_FE9D;
+  }
 
-  if(!isDefined(anim._id_FED3))
+  if(!isDefined(anim._id_FED3)) {
     anim._id_FED3 = ::_id_FED2;
+  }
 
   self._id_A9ED = 0;
   self._id_504E = 55;
@@ -112,10 +128,11 @@ _id_97ED(var_0) {
   self._id_DCAF = 256;
   self._id_B781 = 750;
 
-  if(self.team == "allies")
+  if(self.team == "allies") {
     self.suppressionthreshold = 0.5;
-  else
+  } else {
     self.suppressionthreshold = 0.0;
+  }
 
   _id_F724();
   return anim.success;
@@ -142,19 +159,23 @@ _id_FA33() {
 }
 
 _id_7FD3() {
-  if(isDefined(self._id_10AB7) && self._id_10AB7)
+  if(isDefined(self._id_10AB7) && self._id_10AB7) {
     return "sprint";
-
-  if(isDefined(self.grenade) && isDefined(self.enemy) && self.frontshieldanglecos == 1) {
-    if(distancesquared(self.origin, self.enemy.origin) > 90000)
-      return "sprint";
   }
 
-  if(isDefined(self._id_527B))
-    return self._id_527B;
+  if(isDefined(self.grenade) && isDefined(self.enemy) && self.frontshieldanglecos == 1) {
+    if(distancesquared(self.origin, self.enemy.origin) > 90000) {
+      return "sprint";
+    }
+  }
 
-  if(isDefined(self.enemy) || isDefined(self._id_6571))
+  if(isDefined(self._id_527B)) {
+    return self._id_527B;
+  }
+
+  if(isDefined(self.enemy) || isDefined(self._id_6571)) {
     return "combat";
+  }
 
   return "walk";
 }
@@ -165,12 +186,13 @@ _id_4F66() {
   if(weaponclass(self.weapon) == "mg") {
     var_1 = randomfloat(10);
 
-    if(var_1 < 3)
+    if(var_1 < 3) {
       var_0 = randomintrange(2, 6);
-    else if(var_1 < 8)
+    } else if(var_1 < 8) {
       var_0 = randomintrange(6, 12);
-    else
+    } else {
       var_0 = randomintrange(12, 20);
+    }
   }
 
   return var_0;
@@ -191,8 +213,9 @@ _id_7EFC() {
   if(isDefined(self.node)) {
     var_0 = self.node gethighestnodestance();
 
-    if(var_0 == "prone" && self.unittype == "c6")
+    if(var_0 == "prone" && self.unittype == "c6") {
       var_0 = "crouch";
+    }
 
     return var_0;
   }

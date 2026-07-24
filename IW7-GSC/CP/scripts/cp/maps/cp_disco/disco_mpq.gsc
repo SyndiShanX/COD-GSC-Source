@@ -106,11 +106,13 @@ phase_1() {
     }
   }
 
-  if(isDefined(level.trainer))
+  if(isDefined(level.trainer)) {
     level.trainer notify("play_idle");
+  }
 
-  foreach(var_6 in level.all_animal_structs)
-  thread scripts\cp\cp_interaction::add_to_current_interaction_list(var_6);
+  foreach(var_6 in level.all_animal_structs) {
+    thread scripts\cp\cp_interaction::add_to_current_interaction_list(var_6);
+  }
 
   scripts\cp\maps\cp_disco\kung_fu_mode::disable_trainer_interactions();
 }
@@ -137,8 +139,9 @@ p2t1_0_receive_quest() {
   foreach(var_2 in level.players) {
     var_2 thread scripts\cp\cp_vo::try_to_play_vo("pam_quest_ratking_eye", "pam_dialogue_vo", "highest", 100, 1);
 
-    if(var_2.vo_prefix == "p5_")
+    if(var_2.vo_prefix == "p5_") {
       var_2 thread play_pam_reaction_vo("pam_quest_ratking_eye", 1, 0, 0);
+    }
   }
 
   scripts\cp\cp_vo::remove_from_nag_vo("pam_quest_return");
@@ -151,8 +154,9 @@ p2t1_1_destroy_cages() {
   var_0 = scripts\engine\utility::flag_wait_any_return("skq_p2t1_1", "skq_p2t1_1dbg");
   var_1 = scripts\engine\utility::getStructArray("mpq_rat_cage", "targetname");
 
-  foreach(var_3 in var_1)
-  var_3 thread monitor_cage_visibility();
+  foreach(var_3 in var_1) {
+    var_3 thread monitor_cage_visibility();
+  }
 
   for(;;) {
     var_5 = monitor_cage_destruction();
@@ -216,8 +220,9 @@ zombie_challenge_ring(var_0, var_1) {
   while(var_4 > 0) {
     level waittill("zombie_killed", var_5, var_6, var_6, var_7);
 
-    if(distancesquared(var_2, var_5) <= 22500)
+    if(distancesquared(var_2, var_5) <= 22500) {
       var_4--;
+    }
 
     wait 0.05;
   }
@@ -244,8 +249,9 @@ remove_cage_quest() {
   var_0 = scripts\engine\utility::getStructArray("mpq_rat_cage", "targetname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.cage_model))
+    if(isDefined(var_2.cage_model)) {
       var_2.cage_model delete();
+    }
 
     if(isDefined(var_2.cage_rat)) {
       if(var_2.cage_rat.model == "tag_origin_templeton") {
@@ -268,11 +274,13 @@ reset_cage_puzzle() {
   level notify("cage_fail");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.claimed_cage))
+    if(isDefined(var_2.claimed_cage)) {
       var_2.claimed_cage = undefined;
+    }
 
-    if(isDefined(var_2.cage_model))
+    if(isDefined(var_2.cage_model)) {
       var_2.cage_model delete();
+    }
 
     if(isDefined(var_2.cage_rat)) {
       if(var_2.cage_rat.model == "tag_origin_templeton") {
@@ -287,8 +295,9 @@ reset_cage_puzzle() {
 
   wait 4;
 
-  foreach(var_2 in var_0)
-  var_2 thread monitor_cage_visibility();
+  foreach(var_2 in var_0) {
+    var_2 thread monitor_cage_visibility();
+  }
 }
 
 spawn_rat_cage() {
@@ -296,8 +305,9 @@ spawn_rat_cage() {
   level endon("cage_fail");
   level endon("cage_win");
 
-  if(!isDefined(self.angles))
+  if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
+  }
 
   self.cage_model = spawn("script_model", self.origin);
   self.cage_model.angles = self.angles;
@@ -337,8 +347,9 @@ monitor_cage_destruction() {
   playFX(level._effect["rat_cage_poof"], var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles));
   var_0 thread send_rat_wandering(var_1);
 
-  while(!isDefined(level.next_cage))
+  while(!isDefined(level.next_cage)) {
     wait 0.1;
+  }
 
   for(var_2 = 0; var_2 < 4; var_2++) {
     level waittill("cage_hit", var_0, var_1);
@@ -356,10 +367,11 @@ monitor_cage_destruction() {
 
   level waittill("cage_hit", var_0, var_1);
 
-  if(var_0 == level.next_cage)
+  if(var_0 == level.next_cage) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 send_rat_wandering(var_0) {
@@ -385,15 +397,16 @@ build_path_network(var_0, var_1, var_2) {
   var_6 = undefined;
 
   for(;;) {
-    if(var_3.size == 0)
+    if(var_3.size == 0) {
       var_3 = var_2 findpath(var_0.origin, var_1.origin, 1, 1);
-    else {
+    } else {
       var_7 = var_2 findpath(var_3[var_3.size - 1], var_1.origin, 1, 1);
       var_3 = scripts\engine\utility::array_combine(var_3, var_7);
     }
 
-    if(distance2dsquared(var_1.origin, var_3[var_3.size - 1]) <= 4096)
+    if(distance2dsquared(var_1.origin, var_3[var_3.size - 1]) <= 4096) {
       return var_3;
+    }
 
     var_5 = sortbydistance(var_5, var_3[var_3.size - 1]);
     var_8 = [];
@@ -411,13 +424,15 @@ build_path_network(var_0, var_1, var_2) {
       }
     }
 
-    if(!var_4)
+    if(!var_4) {
       var_4 = 1;
+    }
 
-    if(!isDefined(var_9))
+    if(!isDefined(var_9)) {
       return var_3;
-    else
+    } else {
       var_6 = var_9;
+    }
 
     var_8 = [];
     var_8[var_8.size] = var_9.origin;
@@ -449,8 +464,9 @@ rat_follow_path(var_0, var_1) {
         var_5 = distance(self.origin, var_10);
         var_11 = var_5 / var_2;
 
-        if(var_11 <= 0.05)
+        if(var_11 <= 0.05) {
           var_11 = 0.05;
+        }
 
         var_9 = (var_9[0], var_9[1] + 90, var_9[2]);
         self rotateTo(var_9, 0.05);
@@ -464,8 +480,9 @@ rat_follow_path(var_0, var_1) {
     var_13 = vectortoangles(var_12);
     var_11 = var_5 / var_2;
 
-    if(var_11 <= 0)
+    if(var_11 <= 0) {
       var_11 = 0.1;
+    }
 
     var_13 = (var_13[0], var_13[1] - 90, var_13[2]);
     self rotateTo(var_13, 0.1);
@@ -542,8 +559,9 @@ monitor_cage_visibility() {
           }
         }
 
-        if(!var_7)
+        if(!var_7) {
           var_4 = 1;
+        }
 
         wait 0.2;
       }
@@ -729,16 +747,18 @@ p2t1_4_rat_king_fight() {
   scripts\cp\maps\cp_disco\rat_king::spawn_rat_king(var_0.origin, var_0.angles, 1);
   level thread scripts\cp\maps\cp_disco\cp_disco::enableratkingpas();
 
-  foreach(var_3 in level.players)
-  var_3 playsoundtoplayer("quest_stage_completed_gong_lr", var_3);
+  foreach(var_3 in level.players) {
+    var_3 playsoundtoplayer("quest_stage_completed_gong_lr", var_3);
+  }
 
   setrkabilities_p2t1_4();
   level watchrkretreat(1000);
   thread createrelicinteraction("eye");
   scripts\cp\maps\cp_disco\kung_fu_mode::increase_trainer_interaction_progression();
 
-  foreach(var_3 in level.players)
-  var_3 thread scripts\cp\cp_vo::try_to_play_vo("pam_quest_complete", "disco_comment_vo", "highest", 30, 1);
+  foreach(var_3 in level.players) {
+    var_3 thread scripts\cp\cp_vo::try_to_play_vo("pam_quest_complete", "disco_comment_vo", "highest", 30, 1);
+  }
 }
 
 play_rat_king_vo_discussion(var_0) {
@@ -773,39 +793,43 @@ play_vo_based_on_player(var_0) {
 
   switch (var_1.vo_prefix) {
     case "p1_":
-      if(var_0 == 1)
+      if(var_0 == 1) {
         var_1 thread scripts\cp\cp_vo::try_to_play_vo("sally_rat_king_1_1", "rave_dialogue_vo");
-      else if(var_0 == 2)
+      } else if(var_0 == 2) {
         var_1 thread scripts\cp\cp_vo::try_to_play_vo("sally_rat_king_2_1", "rave_dialogue_vo");
-      else if(var_0 == 3)
+      } else if(var_0 == 3) {
         var_1 thread scripts\cp\cp_vo::try_to_play_vo("sally_rat_king_3_1", "rave_dialogue_vo");
+      }
 
       break;
     case "p2_":
-      if(var_0 == 1)
+      if(var_0 == 1) {
         var_1 thread scripts\cp\cp_vo::try_to_play_vo("pdex_rat_king_1_1", "rave_dialogue_vo");
-      else if(var_0 == 2)
+      } else if(var_0 == 2) {
         var_1 thread scripts\cp\cp_vo::try_to_play_vo("pdex_rat_king_2_1", "rave_dialogue_vo");
-      else if(var_0 == 3)
+      } else if(var_0 == 3) {
         var_1 thread scripts\cp\cp_vo::try_to_play_vo("pdex_rat_king_3_1", "rave_dialogue_vo");
+      }
 
       break;
     case "p3_":
-      if(var_0 == 1)
+      if(var_0 == 1) {
         var_1 thread scripts\cp\cp_vo::try_to_play_vo("andre_rat_king_1_1", "rave_dialogue_vo");
-      else if(var_0 == 2)
+      } else if(var_0 == 2) {
         var_1 thread scripts\cp\cp_vo::try_to_play_vo("andre_rat_king_2_1", "rave_dialogue_vo");
-      else if(var_0 == 3)
+      } else if(var_0 == 3) {
         var_1 thread scripts\cp\cp_vo::try_to_play_vo("andre_rat_king_3_1", "rave_dialogue_vo");
+      }
 
       break;
     case "p4_":
-      if(var_0 == 1)
+      if(var_0 == 1) {
         var_1 thread scripts\cp\cp_vo::try_to_play_vo("aj_rat_king_1_1", "rave_dialogue_vo");
-      else if(var_0 == 2)
+      } else if(var_0 == 2) {
         var_1 thread scripts\cp\cp_vo::try_to_play_vo("aj_rat_king_2_1", "rave_dialogue_vo");
-      else if(var_0 == 3)
+      } else if(var_0 == 3) {
         var_1 thread scripts\cp\cp_vo::try_to_play_vo("aj_rat_king_3_1", "rave_dialogue_vo");
+      }
 
       break;
   }
@@ -860,8 +884,9 @@ p2t1_5_complete_task() {
   foreach(var_2 in level.players) {
     var_2 thread scripts\cp\cp_vo::try_to_play_vo("pam_quest_ratking_brain", "pam_dialogue_vo", "highest", 100, 1);
 
-    if(var_2.vo_prefix == "p5_")
+    if(var_2.vo_prefix == "p5_") {
       var_2 thread play_pam_reaction_vo("pam_quest_ratking_brain", 0, 0, 1);
+    }
   }
 
   level.trainer notify("play_sit_idle");
@@ -949,8 +974,9 @@ cleanup_previous_symbol() {
   level notify("symbol_updated");
 
   foreach(var_1 in level.players) {
-    if(isDefined(var_1.symbol_hunt_fx))
+    if(isDefined(var_1.symbol_hunt_fx)) {
       var_1.symbol_hunt_fx delete();
+    }
   }
 }
 
@@ -959,8 +985,9 @@ toggle_symbols_for_players() {
   level endon("symbol_updated");
 
   for(;;) {
-    foreach(var_1 in level.players)
-    var_1 thread determine_symbol_visibility();
+    foreach(var_1 in level.players) {
+      var_1 thread determine_symbol_visibility();
+    }
 
     level scripts\engine\utility::waittill_any("rat_king_eye_activated", "rat_king_eye_deactivated", "connected");
   }
@@ -969,10 +996,11 @@ toggle_symbols_for_players() {
 determine_symbol_visibility() {
   level endon("game_ended");
 
-  if(!isDefined(level.active_hunt_symbol))
+  if(!isDefined(level.active_hunt_symbol)) {
     return;
-  else
+  } else {
     var_0 = level.active_hunt_symbol;
+  }
 
   if(scripts\engine\utility::is_true(self.wearing_rat_king_eye)) {
     if(isDefined(self.symbol_hunt_fx)) {
@@ -983,8 +1011,9 @@ determine_symbol_visibility() {
     wait 0.05;
     triggerfx(var_1);
   } else {
-    if(isDefined(self.symbol_hunt_fx))
+    if(isDefined(self.symbol_hunt_fx)) {
       self.symbol_hunt_fx delete();
+    }
 
     return;
   }
@@ -998,16 +1027,18 @@ reset_phone_puzzle() {
   level thread scripts\cp\cp_vo::try_to_play_vo("ww_magicbox_laughter", "rave_announcer_vo", "highest", 70, 0, 0, 1);
   var_0 = scripts\engine\utility::getStructArray("phonebooth", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2.quest_state = 0;
+  foreach(var_2 in var_0) {
+    var_2.quest_state = 0;
+  }
 
   scripts\cp\maps\cp_disco\phonebooth::update_all_phonebooth_scriptable_states();
   init_poster_nums(1);
   thread p2t2_1_phone_puzzle();
   thread p2t2_0_symbol_hunt(1);
 
-  if(!scripts\engine\utility::flag("skq_p2t2_0"))
+  if(!scripts\engine\utility::flag("skq_p2t2_0")) {
     scripts\engine\utility::flag_set("skq_p2t2_0");
+  }
 }
 
 p2t2_1_phone_puzzle() {
@@ -1036,8 +1067,9 @@ p2t2_1_phone_puzzle() {
   scripts\engine\utility::flag_wait("morse_code_heard");
 
   if(isDefined(level.player_answered_phone)) {
-    if(isPlayer(level.player_answered_phone))
+    if(isPlayer(level.player_answered_phone)) {
       level.player_answered_phone thread scripts\cp\cp_vo::try_to_play_vo("pam_answer_phone", "disco_comment_vo");
+    }
   }
 
   scripts\engine\utility::flag_set("skq_p2t2_3");
@@ -1075,13 +1107,15 @@ p2t2_3_poster_puzzle() {
 
   scripts\engine\utility::flag_wait("correct_poster_got");
 
-  foreach(var_7 in level.players)
-  var_7 thread scripts\cp\cp_vo::add_to_nag_vo("missing_item_misc", "disco_comment_vo", 200, 120, 4, 1);
+  foreach(var_7 in level.players) {
+    var_7 thread scripts\cp\cp_vo::add_to_nag_vo("missing_item_misc", "disco_comment_vo", 200, 120, 4, 1);
+  }
 
   var_9 = scripts\engine\utility::getStructArray("phonebooth", "script_noteworthy");
 
-  foreach(var_11 in var_9)
-  var_11.quest_state = 0;
+  foreach(var_11 in var_9) {
+    var_11.quest_state = 0;
+  }
 
   scripts\cp\maps\cp_disco\phonebooth::update_all_phonebooth_scriptable_states();
   var_1.poster makeusable();
@@ -1108,8 +1142,9 @@ watch_for_spotlight_power(var_0) {
   var_2 = getEntArray("quest_light_fx", "targetname");
 
   foreach(var_4 in var_2) {
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_4 setlightintensity(150);
+    }
   }
 
   var_6 = var_0.fx_struct;
@@ -1119,8 +1154,9 @@ watch_for_spotlight_power(var_0) {
   var_0.poster waittill("trigger");
 
   foreach(var_4 in var_2) {
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_4 setlightintensity(0);
+    }
   }
 
   var_6 = scripts\engine\utility::getStruct("spotlight_x_marker", "targetname");
@@ -1135,8 +1171,9 @@ watch_for_spotlight_power(var_0) {
 
   scripts\engine\utility::flag_wait("skq_p2t2_4");
 
-  if(isDefined(var_10))
+  if(isDefined(var_10)) {
     var_10 delete();
+  }
 
   var_0.light setModel(var_1);
   var_7 delete();
@@ -1149,11 +1186,13 @@ init_poster_nums(var_0) {
   var_1 = getEntArray("mpq_poster_model", "targetname");
 
   if(!var_0) {
-    foreach(var_3 in var_1)
-    var_3.number = getEnt(var_3.target, "targetname");
+    foreach(var_3 in var_1) {
+      var_3.number = getEnt(var_3.target, "targetname");
+    }
   } else {
-    foreach(var_3 in var_1)
-    var_3 notify("reset_posters");
+    foreach(var_3 in var_1) {
+      var_3 notify("reset_posters");
+    }
   }
 
   var_1 = scripts\engine\utility::array_randomize_objects(var_1);
@@ -1166,27 +1205,31 @@ init_poster_nums(var_0) {
     if(var_3 == var_1[0]) {
       var_3.model_num = level.morse_number;
 
-      if(var_0)
+      if(var_0) {
         var_3 thread use_poster_logic(1);
+      }
 
       var_8++;
     } else {
       var_3.model_num = var_7[var_8];
 
-      if(var_8 + 1 >= var_7.size)
+      if(var_8 + 1 >= var_7.size) {
         var_8 = 1;
-      else
+      } else {
         var_8++;
+      }
 
-      if(var_0)
+      if(var_0) {
         var_3 thread use_poster_logic(0);
+      }
     }
 
     var_3.number setModel("cp_disco_film_registration_decal_" + var_3.model_num);
   }
 
-  if(!var_0)
+  if(!var_0) {
     return var_1;
+  }
 }
 
 use_poster_logic(var_0) {
@@ -1203,8 +1246,9 @@ use_poster_logic(var_0) {
   if(var_0) {
     var_2 = getEntArray("mpq_poster_model", "targetname");
 
-    foreach(var_4 in var_2)
-    var_4 notify("correct_poster_got");
+    foreach(var_4 in var_2) {
+      var_4 notify("correct_poster_got");
+    }
 
     self.number delete();
     self delete();
@@ -1238,13 +1282,13 @@ p2t2_5_rat_king_puzzle() {
 solve_word_logic(var_0) {
   level endon("game_ended");
   var_1 = [];
-  var_1[0] = scripts\engine\utility::getStruct("letter_puzzle_solve_struct", "targetname");
+  var_1[0] = ::scripts\engine\utility::getStruct("letter_puzzle_solve_struct", "targetname");
   level.bchartoggle = 0;
   level.cur_puzzle_letter = undefined;
   level.rooftopcypherglyphs = [];
 
   while(isDefined(var_1[var_1.size - 1].target)) {
-    var_1[var_1.size] = scripts\engine\utility::getStruct(var_1[var_1.size - 1].target, "targetname");
+    var_1[var_1.size] = ::scripts\engine\utility::getStruct(var_1[var_1.size - 1].target, "targetname");
     wait 0.05;
   }
 
@@ -1262,8 +1306,9 @@ solve_word_logic(var_0) {
       var_5 = determine_puzzle_wordlist(var_0);
       var_6 = 0;
 
-      foreach(var_9 in level.players)
-      var_9 playlocalsound("ww_magicbox_laughter");
+      foreach(var_9 in level.players) {
+        var_9 playlocalsound("ww_magicbox_laughter");
+      }
 
       wait_for_wave_change(1);
     }
@@ -1297,8 +1342,9 @@ solve_word_logic(var_0) {
             var_4++;
             var_6++;
 
-            foreach(var_17 in var_13)
-            var_17 delete();
+            foreach(var_17 in var_13) {
+              var_17 delete();
+            }
 
             wait 0.2;
             break;
@@ -1313,13 +1359,15 @@ solve_word_logic(var_0) {
       var_11++;
     }
 
-    if(var_2)
+    if(var_2) {
       level thread delaydeleteletters(var_13);
+    }
   }
 
   foreach(var_17 in level.rooftopcypherglyphs) {
-    if(isDefined(var_17))
+    if(isDefined(var_17)) {
       var_17 delete();
+    }
   }
 
   level.rooftopcypherglyphs = undefined;
@@ -1330,15 +1378,17 @@ delaydeleteletters(var_0) {
   level endon("game_ended");
   wait 5;
 
-  foreach(var_2 in var_0)
-  var_2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
+  }
 }
 
 waittill_character_change() {
   level endon("game_ended");
 
-  while(!level.bchartoggle)
+  while(!level.bchartoggle) {
     wait 0.1;
+  }
 
   level.bchartoggle = 0;
   return level.cur_puzzle_letter;
@@ -1351,8 +1401,9 @@ setup_cipher_glyphs() {
   var_1 = getEnt("letter_puzzle_clip", "targetname");
   var_2 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
-  foreach(var_4 in var_0)
-  var_4.current_letter = undefined;
+  foreach(var_4 in var_0) {
+    var_4.current_letter = undefined;
+  }
 
   var_6 = undefined;
 
@@ -1371,8 +1422,9 @@ setup_cipher_glyphs() {
     }
 
     foreach(var_4 in var_0) {
-      if(!isDefined(var_4.angles))
+      if(!isDefined(var_4.angles)) {
         var_4.angles = (0, 0, 0);
+      }
 
       if(var_4 == var_0[0]) {
         var_6 = var_4;
@@ -1395,8 +1447,9 @@ setup_cipher_glyphs() {
     level.rooftopcypherglyphs = var_7;
     wait 0.1;
 
-    foreach(var_12 in var_7)
-    triggerfx(var_12);
+    foreach(var_12 in var_7) {
+      triggerfx(var_12);
+    }
 
     var_4 = undefined;
     var_1 setCanDamage(1);
@@ -1417,8 +1470,9 @@ setup_cipher_glyphs() {
     var_18 = var_0[0].current_letter;
     level notify("puzzle_letter_shot", var_18);
 
-    foreach(var_12 in var_7)
-    var_12 delete();
+    foreach(var_12 in var_7) {
+      var_12 delete();
+    }
   }
 }
 
@@ -1441,22 +1495,25 @@ p2t2_6_rat_king_fight() {
     var_3 thread scripts\cp\cp_vo::try_to_play_vo("ww_ratking_spawn", "rave_ww_vo", "highest", 70, 0, 0, 1);
   }
 
-  if(level.players.size == 4)
+  if(level.players.size == 4) {
     level thread play_rat_king_vo_discussion(2);
+  }
 
   level watchrkretreat(1000);
   thread createrelicinteraction("brain");
   scripts\cp\maps\cp_disco\kung_fu_mode::increase_trainer_interaction_progression();
 
-  foreach(var_3 in level.players)
-  var_3 thread scripts\cp\cp_vo::try_to_play_vo("pam_quest_complete", "disco_comment_vo", "highest", 30, 1);
+  foreach(var_3 in level.players) {
+    var_3 thread scripts\cp\cp_vo::try_to_play_vo("pam_quest_complete", "disco_comment_vo", "highest", 30, 1);
+  }
 }
 
 createrelicinteraction(var_0) {
   level endon("game_ended");
 
-  while(isDefined(level.rat_king))
+  while(isDefined(level.rat_king)) {
     scripts\engine\utility::waitframe();
+  }
 
   var_1 = spawnStruct();
   var_1.origin = getrelicspawnpos();
@@ -1469,8 +1526,9 @@ createrelicinteraction(var_0) {
   var_2 = spawn("script_model", var_1.origin + (0, 0, 4));
   var_2 setModel("tag_origin_rk_relics");
 
-  if(isDefined(var_1.angles))
+  if(isDefined(var_1.angles)) {
     var_2.angles = var_1.angles;
+  }
 
   var_1.model = var_2;
   var_1.relic = var_0;
@@ -1508,27 +1566,31 @@ startrelicmoveloop(var_0, var_1) {
 }
 
 getrelicspawnpos() {
-  if(isDefined(level.rat_king_death_pos))
+  if(isDefined(level.rat_king_death_pos)) {
     var_0 = level.rat_king_death_pos;
-  else
+  } else {
     var_0 = level.players[0].origin;
+  }
 
-  if(!isinactivevolume(var_0))
+  if(!isinactivevolume(var_0)) {
     var_0 = getpositionnearclosestplayer(var_0);
+  }
 
   var_1 = getclosestpointonnavmesh(var_0) + (0, 0, 4);
   return var_1;
 }
 
 isinactivevolume(var_0) {
-  if(!isDefined(level.active_spawn_volumes))
+  if(!isDefined(level.active_spawn_volumes)) {
     return 1;
+  }
 
   var_1 = sortbydistance(level.active_spawn_volumes, var_0);
 
   foreach(var_3 in var_1) {
-    if(ispointinvolume(var_0, var_3))
+    if(ispointinvolume(var_0, var_3)) {
       return 1;
+    }
   }
 
   return 0;
@@ -1555,10 +1617,11 @@ mpqrelicusefunc(var_0, var_1) {
       if(!scripts\engine\utility::flag("brain_picked")) {
         scripts\engine\utility::flag_set("brain_picked");
 
-        if(var_1.vo_prefix == "p5_")
+        if(var_1.vo_prefix == "p5_") {
           var_1 thread scripts\cp\cp_vo::try_to_play_vo("ratking_brain", "disco_comment_vo");
-        else
+        } else {
           var_1 thread scripts\cp\cp_vo::try_to_play_vo("pam_collect_brain", "disco_comment_vo");
+        }
 
         var_1 thread scripts\cp\cp_vo::add_to_nag_vo("pam_quest_return", "disco_comment_vo", 120, 120, 4, 1);
         level scripts\cp\utility::set_quest_icon(17);
@@ -1571,10 +1634,11 @@ mpqrelicusefunc(var_0, var_1) {
       if(!scripts\engine\utility::flag("heart_picked")) {
         scripts\engine\utility::flag_set("heart_picked");
 
-        if(var_1.vo_prefix == "p5_")
+        if(var_1.vo_prefix == "p5_") {
           var_1 thread scripts\cp\cp_vo::try_to_play_vo("ratking_heart", "disco_comment_vo");
-        else
+        } else {
           var_1 thread scripts\cp\cp_vo::try_to_play_vo("pam_collect_heart", "disco_comment_vo");
+        }
 
         var_1 thread scripts\cp\cp_vo::add_to_nag_vo("pam_quest_return", "disco_comment_vo", 120, 120, 4, 1);
         level scripts\cp\utility::set_quest_icon(7);
@@ -1611,11 +1675,13 @@ cleanupmpqbrain(var_0, var_1) {
   var_0.model setscriptablepartstate("interactions", "pickup");
   wait 0.5;
 
-  if(isDefined(var_0.fx))
+  if(isDefined(var_0.fx)) {
     var_0.fx delete(var_1);
+  }
 
-  if(isDefined(var_0.model))
+  if(isDefined(var_0.model)) {
     var_0.model delete(var_1);
+  }
 }
 
 cleanupmpqrelic(var_0, var_1) {
@@ -1652,8 +1718,9 @@ p2t2_7_complete_task() {
   foreach(var_2 in level.players) {
     var_2 thread scripts\cp\cp_vo::try_to_play_vo("pam_quest_ratking_heart", "pam_dialogue_vo", "highest", 100, 1);
 
-    if(var_2.vo_prefix == "p5_")
+    if(var_2.vo_prefix == "p5_") {
       var_2 thread play_pam_reaction_vo("pam_quest_ratking_heart", 0, 1, 0);
+    }
   }
 
   scripts\engine\utility::flag_set("skq_p2t3_0");
@@ -1663,12 +1730,13 @@ play_pam_reaction_vo(var_0, var_1, var_2, var_3) {
   self endon("disconnect");
   wait(scripts\cp\cp_vo::get_sound_length(var_0));
 
-  if(scripts\engine\utility::is_true(var_1))
+  if(scripts\engine\utility::is_true(var_1)) {
     thread scripts\cp\cp_vo::try_to_play_vo("pam_instuctions_rat_eye", "disco_comment_vo");
-  else if(scripts\engine\utility::is_true(var_2))
+  } else if(scripts\engine\utility::is_true(var_2)) {
     thread scripts\cp\cp_vo::try_to_play_vo("pam_instuctions_rat_heart", "disco_comment_vo");
-  else
+  } else {
     thread scripts\cp\cp_vo::try_to_play_vo("pam_instuctions_rat_brain", "disco_comment_vo");
+  }
 }
 
 phase_2_task_3() {
@@ -1695,12 +1763,14 @@ p2t3_0_missing_reel() {
     var_1 = 1;
 
     foreach(var_3 in level.players) {
-      if(scripts\engine\utility::is_true(var_3.isfasttravelling) || scripts\engine\utility::is_true(var_3.is_off_grid))
+      if(scripts\engine\utility::is_true(var_3.isfasttravelling) || scripts\engine\utility::is_true(var_3.is_off_grid)) {
         var_1 = 0;
+      }
     }
 
-    if(scripts\engine\utility::is_true(level.gns_active))
+    if(scripts\engine\utility::is_true(level.gns_active)) {
       var_1 = 0;
+    }
 
     wait 0.1;
   }
@@ -1710,16 +1780,18 @@ p2t3_0_missing_reel() {
   var_7 = scripts\engine\utility::getStructArray("missing_reel_fire_struct", "targetname");
   stop_spawn_wave();
 
-  foreach(var_3 in level.players)
-  var_3 playlocalsound("bink_ducking_alias");
+  foreach(var_3 in level.players) {
+    var_3 playlocalsound("bink_ducking_alias");
+  }
 
   scripts\cp\utility::play_bink_video("MissingReel", 8, 1);
   clear_existing_enemies();
   var_10 = 0;
 
   foreach(var_3 in level.players) {
-    if(var_3 scripts\cp\utility::isteleportenabled())
+    if(var_3 scripts\cp\utility::isteleportenabled()) {
       var_3 scripts\cp\utility::allow_player_teleport(0);
+    }
 
     thread missing_reel_pickup_players(var_5[var_10], var_3);
     var_10++;
@@ -1730,8 +1802,9 @@ p2t3_0_missing_reel() {
   wait 7;
   level.wave_num = level.wave_num + randomintrange(2, 4);
 
-  foreach(var_3 in level.players)
-  var_3 setclientomnvar("zombie_wave_number", level.wave_num);
+  foreach(var_3 in level.players) {
+    var_3 setclientomnvar("zombie_wave_number", level.wave_num);
+  }
 
   thread spawn_missing_reel_wave(var_5);
   wait 1;
@@ -1739,8 +1812,9 @@ p2t3_0_missing_reel() {
   scripts\engine\utility::flag_set("cleanup_reel_assets");
 
   foreach(var_16 in level.players) {
-    if(!var_16 scripts\cp\utility::isteleportenabled())
+    if(!var_16 scripts\cp\utility::isteleportenabled()) {
       var_16 scripts\cp\utility::allow_player_teleport(1);
+    }
   }
 
   scripts\engine\utility::flag_clear("pause_wave_progression");
@@ -1781,13 +1855,15 @@ missing_reel_pickup_players(var_0, var_1) {
     scripts\cp\cp_laststand::clear_last_stand_timer(var_1);
     var_1 notify("revive_success");
 
-    if(isDefined(var_1.reviveent))
+    if(isDefined(var_1.reviveent)) {
       var_1.reviveent notify("revive_success");
+    }
 
     wait 6;
 
-    if(isDefined(var_1.lost_and_found_ent))
+    if(isDefined(var_1.lost_and_found_ent)) {
       scripts\cp\zombies\zombie_lost_and_found::restore_player_status(var_1);
+    }
   }
 
   var_1 setOrigin(var_0.origin);
@@ -1875,18 +1951,21 @@ missing_reel_fire_fx(var_0) {
   level endon("game_ended");
   var_1 = [];
 
-  foreach(var_3 in var_0)
-  var_1[var_1.size] = spawnfx(level._effect["vfx_zb_carfire_b"], var_3.origin, anglesToForward(var_3.angles), anglestoup(var_3.angles));
+  foreach(var_3 in var_0) {
+    var_1[var_1.size] = spawnfx(level._effect["vfx_zb_carfire_b"], var_3.origin, anglesToForward(var_3.angles), anglestoup(var_3.angles));
+  }
 
   wait 0.1;
 
-  foreach(var_6 in var_1)
-  triggerfx(var_6);
+  foreach(var_6 in var_1) {
+    triggerfx(var_6);
+  }
 
   scripts\engine\utility::flag_wait("cleanup_reel_assets");
 
-  foreach(var_6 in var_1)
-  var_6 delete();
+  foreach(var_6 in var_1) {
+    var_6 delete();
+  }
 }
 
 missing_reel_trigger_damage(var_0) {
@@ -1960,10 +2039,11 @@ init_turnstile() {
 }
 
 setup_turnstile(var_0, var_1, var_2, var_3) {
-  if(scripts\engine\utility::flag("skq_p2t3_2") || scripts\engine\utility::flag("turnstile_done"))
+  if(scripts\engine\utility::flag("skq_p2t3_2") || scripts\engine\utility::flag("turnstile_done")) {
     var_0 setModel("cp_disco_subway_turnstyle_animated");
-  else
+  } else {
     var_0 setModel("cp_disco_subway_turnstyle_missing_arm");
+  }
 }
 
 use_turnstile(var_0, var_1) {
@@ -1974,8 +2054,9 @@ use_turnstile(var_0, var_1) {
     var_2 scriptmodelplayanim("IW7_cp_turnstyle_rotate");
     scripts\engine\utility::flag_set("turnstile_done");
 
-    foreach(var_1 in level.players)
-    var_1 scripts\cp\zombies\achievement::update_achievement("MESSAGE_RECEIVED", 1);
+    foreach(var_1 in level.players) {
+      var_1 scripts\cp\zombies\achievement::update_achievement("MESSAGE_RECEIVED", 1);
+    }
 
     wait 2;
     var_2 scriptmodelclearanim();
@@ -1997,8 +2078,9 @@ p2t3_2_chi_symbol() {
 
   level notify("task3RingDone");
 
-  foreach(var_5 in level.players)
-  var_5 playsoundtoplayer("quest_stage_completed_gong_lr", var_5);
+  foreach(var_5 in level.players) {
+    var_5 playsoundtoplayer("quest_stage_completed_gong_lr", var_5);
+  }
 
   wait 1;
   scripts\engine\utility::flag_set("skq_p2t3_3");
@@ -2082,17 +2164,18 @@ p2t3_3_disco_fever() {
       continue;
     }
 
-    if(var_3)
+    if(var_3) {
       var_3 = 0;
-    else {
+    } else {
       level notify("update_fx");
       wait 10;
     }
 
     var_1 = 10;
 
-    for(var_5 = undefined; !isDefined(var_5); var_5 = spawn_fever_zombie())
+    for(var_5 = undefined; !isDefined(var_5); var_5 = spawn_fever_zombie()) {
       wait 0.05;
+    }
 
     var_5 clearpath();
     var_5 thread handle_fx_for_fever();
@@ -2116,8 +2199,9 @@ setfevereffectsonhostmigration() {
   level waittill("host_migration_begin");
   level waittill("host_migration_end");
 
-  if(!scripts\engine\utility::flag("skq_p2t3_4"))
+  if(!scripts\engine\utility::flag("skq_p2t3_4")) {
     playFXOnTag(level._effect["disco_fever"], self, "tag_origin");
+  }
 }
 
 find_near_disco_zombie(var_0) {
@@ -2136,10 +2220,11 @@ find_near_disco_zombie(var_0) {
 
   var_6 = sortbydistance(var_2, var_0);
 
-  if(isDefined(var_6[0]) && var_6[0] istouching(var_1))
+  if(isDefined(var_6[0]) && var_6[0] istouching(var_1)) {
     return var_6[0];
-  else
+  } else {
     return undefined;
+  }
 }
 
 spawn_fever_zombie() {
@@ -2151,8 +2236,9 @@ spawn_fever_zombie() {
   var_2.script_parameters = undefined;
   var_3 = var_2 scripts\cp\zombies\zombies_spawning::spawn_wave_enemy("generic_zombie", 1);
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     return undefined;
+  }
 
   var_3.dontmutilate = 1;
   var_3.ignoreall = 1;
@@ -2172,8 +2258,9 @@ init_turntable() {
 setup_turntable(var_0, var_1, var_2, var_3) {
   var_0 setModel("cp_disco_record_02");
 
-  if(scripts\engine\utility::flag("skq_p2t3_3") || scripts\engine\utility::flag("skq_p2t3_3dbg"))
+  if(scripts\engine\utility::flag("skq_p2t3_3") || scripts\engine\utility::flag("skq_p2t3_3dbg")) {
     var_0 thread rotate_platter(var_3);
+  }
 }
 
 rotate_platter(var_0) {
@@ -2194,8 +2281,9 @@ discofeverhintfunc(var_0, var_1) {
 }
 
 use_turntable(var_0, var_1) {
-  if(scripts\engine\utility::flag("skq_p2t3_3") && !scripts\engine\utility::flag("fever_started"))
+  if(scripts\engine\utility::flag("skq_p2t3_3") && !scripts\engine\utility::flag("fever_started")) {
     scripts\engine\utility::flag_set("fever_started");
+  }
 }
 
 p2t3_4_final_chi_door() {
@@ -2221,15 +2309,17 @@ p2t3_5_rat_king_fight() {
     var_3 thread scripts\cp\cp_vo::try_to_play_vo("ww_ratking_spawn", "rave_ww_vo", "highest", 70, 0, 0, 1);
   }
 
-  if(level.players.size == 4)
+  if(level.players.size == 4) {
     level thread play_rat_king_vo_discussion(3);
+  }
 
   level watchrkretreat(2500);
   thread createrelicinteraction("heart");
   scripts\cp\maps\cp_disco\kung_fu_mode::increase_trainer_interaction_progression();
 
-  foreach(var_3 in level.players)
-  var_3 thread scripts\cp\cp_vo::try_to_play_vo("pam_quest_complete", "disco_comment_vo", "highest", 30, 1);
+  foreach(var_3 in level.players) {
+    var_3 thread scripts\cp\cp_vo::try_to_play_vo("pam_quest_complete", "disco_comment_vo", "highest", 30, 1);
+  }
 }
 
 setrkabilities_p2t3_5() {
@@ -2325,8 +2415,9 @@ mpq_spawn_special_wave(var_0, var_1, var_2, var_3, var_4) {
     var_8 = level.desired_enemy_deaths_this_wave;
     var_9 = level.wave_num;
 
-    while(level.current_enemy_deaths == level.desired_enemy_deaths_this_wave)
+    while(level.current_enemy_deaths == level.desired_enemy_deaths_this_wave) {
       wait 0.05;
+    }
 
     level.current_enemy_deaths = 0;
     level.desired_enemy_deaths_this_wave = 24;
@@ -2336,19 +2427,22 @@ mpq_spawn_special_wave(var_0, var_1, var_2, var_3, var_4) {
     var_5 = 1;
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     playsoundatpos(self.origin, var_2);
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     playFX(level._effect[var_3], self.origin);
+  }
 
   var_10 = getrandomnavpoints(self.origin, 1024, var_1);
   scripts\cp\zombies\zombies_spawning::increase_reserved_spawn_slots(var_1);
   wait 2;
   var_11 = skeleton_spawner(var_10, var_0, var_4);
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     return var_11;
+  }
 
   for(;;) {
     var_12 = 1;
@@ -2397,8 +2491,9 @@ determine_best_shovel_spawns(var_0, var_1) {
   var_3 = scripts\engine\utility::getStructArray("camper_to_lake_spawner", "targetname");
   var_3 = sortbydistance(var_3, var_0);
 
-  for(var_4 = 0; var_4 < var_1; var_4++)
+  for(var_4 = 0; var_4 < var_1; var_4++) {
     var_2[var_4] = var_3[var_4];
+  }
 
   var_5 = scripts\engine\utility::array_randomize_objects(var_2);
   return var_2;
@@ -2459,8 +2554,9 @@ spawn_skeleton_solo(var_0, var_1) {
 
     wait(var_4);
 
-    if(isDefined(var_6))
+    if(isDefined(var_6)) {
       return var_6;
+    }
   }
 
   return undefined;
@@ -2540,26 +2636,30 @@ stop_spawn_wave() {
 }
 
 wait_for_wave_change(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   var_2 = 4;
 
   if(isDefined(var_1)) {
-    foreach(var_4 in level.players)
-    var_4 setclientomnvar("zom_escape_gate_score", var_2);
+    foreach(var_4 in level.players) {
+      var_4 setclientomnvar("zom_escape_gate_score", var_2);
+    }
   }
 
   for(var_6 = 0; var_6 < var_0; var_6++) {
     var_2--;
     var_7 = level.wave_num;
 
-    while(var_7 == level.wave_num)
+    while(var_7 == level.wave_num) {
       wait 1;
+    }
 
     if(isDefined(var_1)) {
-      foreach(var_4 in level.players)
-      var_4 setclientomnvar("zom_escape_gate_score", var_2);
+      foreach(var_4 in level.players) {
+        var_4 setclientomnvar("zom_escape_gate_score", var_2);
+      }
     }
   }
 }
@@ -2568,8 +2668,9 @@ show_effects_for_eye_only(var_0, var_1, var_2) {
   level endon("game_ended");
 
   for(;;) {
-    foreach(var_4 in level.players)
-    var_4 thread determine_effect_visibility(var_0, var_2);
+    foreach(var_4 in level.players) {
+      var_4 thread determine_effect_visibility(var_0, var_2);
+    }
 
     var_6 = level scripts\engine\utility::waittill_any_return("rat_king_eye_activated", "rat_king_eye_deactivated", "connected", var_1);
 
@@ -2578,14 +2679,16 @@ show_effects_for_eye_only(var_0, var_1, var_2) {
     }
   }
 
-  foreach(var_4 in level.players)
-  var_4 thread determine_effect_visibility();
+  foreach(var_4 in level.players) {
+    var_4 thread determine_effect_visibility();
+  }
 }
 
 determine_effect_visibility(var_0, var_1) {
   if(!isDefined(var_0) || !isDefined(var_1)) {
-    if(isDefined(self.active_effect))
+    if(isDefined(self.active_effect)) {
       self.active_effect delete();
+    }
   } else {
     var_2 = var_1;
 
@@ -2621,8 +2724,9 @@ rk_symbol_handler(var_0, var_1) {
   var_5 = spawnfx(level._effect["test_glyph_mpq"], var_4, anglesToForward(var_2.angles), anglestoup(var_2.angles));
   triggerfx(var_5);
 
-  foreach(var_7 in level.players)
-  var_7 playsoundtoplayer("quest_stage_completed_gong_lr", var_7);
+  foreach(var_7 in level.players) {
+    var_7 playsoundtoplayer("quest_stage_completed_gong_lr", var_7);
+  }
 
   var_3 setusefov(180);
   var_3 waittill("trigger");
@@ -2632,6 +2736,7 @@ rk_symbol_handler(var_0, var_1) {
 }
 
 failmpqstep() {
-  foreach(var_1 in level.players)
-  var_1 playsoundtoplayer("mpq_fail_buzzer", var_1);
+  foreach(var_1 in level.players) {
+    var_1 playsoundtoplayer("mpq_fail_buzzer", var_1);
+  }
 }

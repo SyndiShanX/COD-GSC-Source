@@ -194,16 +194,17 @@ _id_BEBD(var_0, var_1, var_2) {
 
   var_0._id_13084 makeusable();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = &"CP_ZMB_CHALLENGES_USE_NEIL";
+  }
 
   var_0._id_13084 setHintString(var_1);
   var_0._id_13084 setuserange(90);
   var_0._id_13084 setusefov(180);
 
-  if(!scripts\engine\utility::is_true(level._id_A6E1))
+  if(!scripts\engine\utility::is_true(level._id_A6E1)) {
     var_0 setscriptablepartstate("light", "on");
-  else {
+  } else {
     var_0 setscriptablepartstate("light", "on_red");
     var_0.upper_body setscriptablepartstate("facefx", "kitt");
     var_0.upper_body _id_BEDF("kitt");
@@ -211,8 +212,9 @@ _id_BEBD(var_0, var_1, var_2) {
 
   var_0._id_6265 = 1;
 
-  if(!isDefined(var_0._id_13084))
+  if(!isDefined(var_0._id_13084)) {
     return;
+  }
 }
 
 _id_BEBC(var_0) {
@@ -226,8 +228,9 @@ _id_BEBC(var_0) {
 }
 
 _id_BEE2(var_0) {
-  foreach(var_2 in level.players)
-  var_2 playlocalsound("mp_intel_received");
+  foreach(var_2 in level.players) {
+    var_2 playlocalsound("mp_intel_received");
+  }
 
   level notify("challenge_started");
   var_4 = level._id_C1E1;
@@ -237,10 +240,11 @@ _id_BEE2(var_0) {
 }
 
 _id_BEB7(var_0, var_1, var_2, var_3) {
-  if(var_1 == "challenge_force_complete")
+  if(var_1 == "challenge_force_complete") {
     level.challenge_data[var_0].success = 1;
-  else if(var_1 == "challenge_force_fail")
+  } else if(var_1 == "challenge_force_fail") {
     level.challenge_data[var_0].success = 0;
+  }
 
   scripts\cp\cp_challenge::deactivate_current_challenge();
 
@@ -256,12 +260,14 @@ _id_BEB7(var_0, var_1, var_2, var_3) {
       level._id_6ACC++;
 
       if(level._id_6ACC >= 2) {
-        foreach(var_5 in level.players)
-        var_5 thread scripts\cp\cp_vo::add_to_nag_vo("nag_no_challenge", "zmb_comment_vo", 60, 10, 6, 1);
+        foreach(var_5 in level.players) {
+          var_5 thread scripts\cp\cp_vo::add_to_nag_vo("nag_no_challenge", "zmb_comment_vo", 60, 10, 6, 1);
+        }
       }
 
-      if(level._id_6ACC > 3)
+      if(level._id_6ACC > 3) {
         level thread _id_BEC0();
+      }
 
       level.neil.upper_body _id_BEDF("sad");
     }
@@ -277,25 +283,28 @@ _id_BED1() {
   level thread scripts\cp\cp_challenge::activate_new_challenge("next_challenge");
   var_0 = int(gettime() + 30000);
 
-  foreach(var_2 in level.players)
-  var_2 setclientomnvar("ui_intel_timer", var_0);
+  foreach(var_2 in level.players) {
+    var_2 setclientomnvar("ui_intel_timer", var_0);
+  }
 
   wait 1;
   var_4 = 5;
   setomnvar("zm_neil_progress", level._id_C1E1 / var_4);
   level.neil.upper_body _id_BEDF("happy");
 
-  if(getDvar("challenge_prep_time") != "")
+  if(getDvar("challenge_prep_time") != "") {
     wait 3;
-  else
+  } else {
     wait 28;
+  }
 
   level notify("next_challenge_starting");
   wait 1;
 
   if(scripts\engine\utility::flag("pause_challenges")) {
-    foreach(var_2 in level.players)
-    var_2 setclientomnvar("zm_show_challenge", 10);
+    foreach(var_2 in level.players) {
+      var_2 setclientomnvar("zm_show_challenge", 10);
+    }
 
     scripts\engine\utility::flag_waitopen("pause_challenges");
   }
@@ -304,8 +313,9 @@ _id_BED1() {
   wait 5;
 
   if(scripts\engine\utility::flag("pause_challenges")) {
-    foreach(var_2 in level.players)
-    var_2 setclientomnvar("zm_show_challenge", 10);
+    foreach(var_2 in level.players) {
+      var_2 setclientomnvar("zm_show_challenge", 10);
+    }
 
     scripts\engine\utility::flag_waitopen("pause_challenges");
   }
@@ -334,8 +344,9 @@ _id_BEB6(var_0) {
 
   level.neil playSound("n31l_challenge_start");
 
-  if(!isDefined(level._id_1C3F))
+  if(!isDefined(level._id_1C3F)) {
     level.neil thread _id_1C5F();
+  }
 
   for(;;) {
     var_3 = level._id_C1E1;
@@ -391,8 +402,9 @@ _id_BEB5(var_0) {
   wait 3;
   level.neil.upper_body thread _id_BECD("n31l_challenge_special_complete");
 
-  foreach(var_4 in level.players)
-  var_4 setclientomnvar("zm_show_challenge", -1);
+  foreach(var_4 in level.players) {
+    var_4 setclientomnvar("zm_show_challenge", -1);
+  }
 }
 
 _id_BEB8(var_0, var_1, var_2) {
@@ -412,8 +424,9 @@ _id_BEB8(var_0, var_1, var_2) {
   level thread play_dj_vo_kitt_arrival(var_3);
   wait 5;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 thread scripts\cp\cp_vo::try_to_play_vo("challenge_n31l_complete", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
+  }
 
   level thread _id_12636(var_0, var_1);
   level thread _id_833E(100);
@@ -461,8 +474,9 @@ _id_5559(var_0) {
 }
 
 _id_106EF(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = level.neil;
+  }
 
   var_1 = spawn("script_model", var_0.origin);
   var_1.angles = var_0.angles;
@@ -485,15 +499,17 @@ _id_106EF(var_0) {
 }
 
 _id_13631() {
-  while(level.dj.current_state != "idle")
+  while(level.dj.current_state != "idle") {
     wait 1;
+  }
 
   level.the_hoff = spawnStruct();
   level.the_hoff.origin = (0, 0, 0);
 
   for(;;) {
-    if(level.dj.current_state != "close_window")
+    if(level.dj.current_state != "close_window") {
       scripts\cp\maps\cp_zmb\cp_zmb_dj::set_dj_state("close_window");
+    }
 
     wait 1;
 
@@ -511,8 +527,9 @@ _id_13631() {
 _id_54FB() {
   var_0 = scripts\engine\utility::getStructArray("dj_quest_door", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
+  foreach(var_2 in var_0) {
+    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
+  }
 
   level.disable_broadcast = 1;
 }
@@ -520,8 +537,9 @@ _id_54FB() {
 _id_61CF() {
   var_0 = scripts\engine\utility::getStructArray("dj_quest_door", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  scripts\cp\cp_interaction::add_to_current_interaction_list(var_2);
+  foreach(var_2 in var_0) {
+    scripts\cp\cp_interaction::add_to_current_interaction_list(var_2);
+  }
 }
 
 _id_12636(var_0, var_1) {
@@ -529,8 +547,9 @@ _id_12636(var_0, var_1) {
   _id_5559(1);
   level.neil vehicle_teleport(level.neil.origin, level.neil.angles);
 
-  if(scripts\engine\utility::is_true(level._id_A6E1))
+  if(scripts\engine\utility::is_true(level._id_A6E1)) {
     level.neil.upper_body setscriptablepartstate("facefx", "off");
+  }
 
   var_2 = _id_106EF(level.neil);
   scripts\engine\utility::flag_set("landing_zone_active");
@@ -555,8 +574,9 @@ _id_12636(var_0, var_1) {
   _id_13631();
 
   if(isDefined(level.force_song_func)) {
-    if(!isDefined(level.forced_songs["knight_rider"]))
+    if(!isDefined(level.forced_songs["knight_rider"])) {
       level thread[[level.force_song_func]](undefined, "mus_pa_sp_knightrider", undefined, undefined, undefined, "knight_rider");
+    }
   }
 
   scripts\cp\zombies\zombies_spawning::increase_reserved_spawn_slots(1);
@@ -589,8 +609,9 @@ _id_12636(var_0, var_1) {
   level notify("hoff_death");
 
   if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player)) {
-    if(!isalive(level.players[0]) || scripts\engine\utility::is_true(level.players[0].inlaststand))
+    if(!isalive(level.players[0]) || scripts\engine\utility::is_true(level.players[0].inlaststand)) {
       level thread[[level.endgame]]("axis", level.end_game_string_index["kia"]);
+    }
   }
 
   if(isDefined(level.the_hoff) && isalive(level.the_hoff)) {
@@ -731,8 +752,9 @@ _id_107F0(var_0, var_1) {
   var_2.can_revive = 1;
   var_2._id_FFEF = 1;
 
-  foreach(var_4 in level.players)
-  var_4 notify("hoff_spawned");
+  foreach(var_4 in level.players) {
+    var_4 notify("hoff_spawned");
+  }
 
   return var_2;
 }
@@ -751,12 +773,13 @@ _id_1176D() {
 }
 
 _id_1176F() {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     _id_83FF();
-  else if(self cansee(self.enemy))
+  } else if(self cansee(self.enemy)) {
     self.scripted_mode = 0;
-  else
+  } else {
     _id_83FF();
+  }
 }
 
 _id_1176B() {
@@ -832,8 +855,9 @@ _id_78C4() {
   var_0 = sortbydistance(level.players, self.origin);
 
   foreach(var_2 in var_0) {
-    if(scripts\cp\cp_laststand::player_in_laststand(var_2) && !scripts\engine\utility::is_true(var_2.is_being_revived) && !scripts\engine\utility::is_true(var_2.in_afterlife_arcade))
+    if(scripts\cp\cp_laststand::player_in_laststand(var_2) && !scripts\engine\utility::is_true(var_2.is_being_revived) && !scripts\engine\utility::is_true(var_2.in_afterlife_arcade)) {
       return var_2;
+    }
   }
 
   return undefined;
@@ -844,8 +868,9 @@ _id_A82C() {
   level.neil setscriptablepartstate("lingerfx", "on");
   level thread _id_A56E(level.neil.origin);
 
-  while(scripts\engine\utility::flag("landing_zone_active"))
+  while(scripts\engine\utility::flag("landing_zone_active")) {
     wait 0.1;
+  }
 
   level.neil setscriptablepartstate("landing", "off");
   level.neil setscriptablepartstate("lingerfx", "off");
@@ -897,8 +922,9 @@ _id_51CE(var_0) {
       }
 
       if(var_3 istouching(var_0)) {
-        if(isDefined(var_3.owner) && var_3.owner scripts\cp\utility::is_valid_player(1))
+        if(isDefined(var_3.owner) && var_3.owner scripts\cp\utility::is_valid_player(1)) {
           var_3.owner playlocalsound("ww_magicbox_laughter");
+        }
 
         var_3 notify("detonateExplosive");
       }
@@ -915,17 +941,19 @@ remove_padding_damage() {
 }
 
 _id_7895(var_0, var_1) {
-  if(!isDefined(level._id_3C12))
+  if(!isDefined(level._id_3C12)) {
     level._id_3C12 = var_1;
+  }
 
   var_2 = undefined;
 
-  if(level.players.size > 1)
+  if(level.players.size > 1) {
     var_2 = scripts\engine\utility::random(level._id_3C12);
-  else {
+  } else {
     for(;;) {
-      if(level._id_3C12.size == 0)
+      if(level._id_3C12.size == 0) {
         level._id_3C12 = level._id_6ACD;
+      }
 
       var_2 = scripts\engine\utility::random(level._id_3C12);
 
@@ -944,8 +972,9 @@ _id_7895(var_0, var_1) {
 _id_8320() {
   wait 3;
 
-  foreach(var_1 in level.players)
-  scripts\engine\utility::waitframe();
+  foreach(var_1 in level.players) {
+    scripts\engine\utility::waitframe();
+  }
 
   wait 1;
   level thread _id_833D(25 + level.wave_num * 5);
@@ -953,13 +982,15 @@ _id_8320() {
 }
 
 _id_BEE1(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = (0, 0, 0);
+  }
 
   var_4 = (0, 0, 0);
 
-  if(isDefined(var_0.angles))
+  if(isDefined(var_0.angles)) {
     var_4 = var_0.angles;
+  }
 
   var_5 = spawnVehicle(var_2, "neil", "cp_kevin", var_0.origin + var_1, var_4);
   var_5._id_13084 = getEnt("neil_usetrig", "targetname");
@@ -992,8 +1023,9 @@ _id_F999(var_0) {
 _id_BEDE(var_0) {
   level endon("stop_repair_sounds");
 
-  for(;;)
+  for(;;) {
     wait 1;
+  }
 }
 
 _id_BECC(var_0) {
@@ -1007,9 +1039,9 @@ _id_BECD(var_0) {
   }
   level._id_BEE3 = 1;
 
-  if(!isDefined(level.neil._id_101F6))
+  if(!isDefined(level.neil._id_101F6)) {
     level.neil._id_101F6 = gettime() + 5000;
-  else if(level.neil._id_101F6 >= gettime()) {
+  } else if(level.neil._id_101F6 >= gettime()) {
     level._id_BEE3 = undefined;
     return;
   }
@@ -1017,8 +1049,9 @@ _id_BECD(var_0) {
   level.neil._id_101F6 = gettime() + 5000;
   var_1 = lookupsoundlength(var_0);
 
-  if(soundexists(var_0))
+  if(soundexists(var_0)) {
     self playSound(var_0);
+  }
 
   thread _id_BEBF(var_1);
   wait(var_1 / 1000);
@@ -1052,8 +1085,9 @@ _id_11025() {
       self.upper_body thread _id_BECD("n31l_spawn_assembly");
     }
 
-    while(_id_203C(self.origin, var_0) || scripts\engine\utility::flag("transform"))
+    while(_id_203C(self.origin, var_0) || scripts\engine\utility::flag("transform")) {
       wait 0.5;
+    }
 
     self playSound("neil_mvmt_start");
     self playLoopSound("neil_mvmt_lp");
@@ -1084,8 +1118,9 @@ _id_BEBF(var_0) {
 }
 
 _id_BEDF(var_0) {
-  if(isDefined(level._id_A6E1))
+  if(isDefined(level._id_A6E1)) {
     var_0 = "kitt";
+  }
 
   switch (var_0) {
     case "happy":
@@ -1116,8 +1151,9 @@ _id_203C(var_0, var_1) {
   var_2 = 0;
 
   foreach(var_4 in level.players) {
-    if(var_4 scripts\cp\utility::is_valid_player() && distancesquared(var_4.origin, var_0) < var_1)
+    if(var_4 scripts\cp\utility::is_valid_player() && distancesquared(var_4.origin, var_0) < var_1) {
       return 1;
+    }
   }
 
   return 0;
@@ -1132,10 +1168,11 @@ pickup_head(var_0, var_1) {
   level scripts\cp\utility::set_quest_icon(7);
   level._id_13BD1 = level.wave_num;
 
-  if(randomint(100) > 90)
+  if(randomint(100) > 90) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("collect_n31l", "zmb_comment_vo", "low", 10, 0, 0, 0, 50);
-  else
+  } else {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("quest_n31l_find_head", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
+  }
 
   level thread _id_CDA9(var_1);
 }
@@ -1157,10 +1194,11 @@ pickup_battery(var_0, var_1) {
   var_0.part delete();
   level._id_13BCD = level.wave_num;
 
-  if(randomint(100) > 90)
+  if(randomint(100) > 90) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("collect_n31l", "zmb_comment_vo", "low", 10, 0, 0, 0, 50);
-  else
+  } else {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("quest_n31l_find_battery", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
+  }
 
   level._id_BEB0 = 1;
   level scripts\cp\utility::set_quest_icon(8);
@@ -1174,10 +1212,11 @@ pickup_firmware(var_0, var_1) {
   var_0.part delete();
   level._id_13BCF = level.wave_num;
 
-  if(randomint(100) > 90)
+  if(randomint(100) > 90) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("collect_n31l", "zmb_comment_vo", "low", 10, 0, 0, 0, 50);
-  else
+  } else {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("quest_n31l_find_disc", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
+  }
 
   level._id_BEC3 = 1;
   level scripts\cp\utility::set_quest_icon(9);
@@ -1187,8 +1226,9 @@ pickup_firmware(var_0, var_1) {
 _id_9696(var_0) {
   var_1 = scripts\engine\utility::getStructArray("neil_battery", "script_noteworthy");
 
-  foreach(var_3 in var_1)
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(var_3);
+  foreach(var_3 in var_1) {
+    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_3);
+  }
 }
 
 _id_10778(var_0) {
@@ -1199,8 +1239,9 @@ _id_10778(var_0) {
 _id_9697(var_0) {
   var_1 = scripts\engine\utility::getStructArray("neil_firmware", "script_noteworthy");
 
-  foreach(var_3 in var_1)
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(var_3);
+  foreach(var_3 in var_1) {
+    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_3);
+  }
 }
 
 _id_10779() {
@@ -1222,8 +1263,9 @@ _id_1077B(var_0, var_1) {
   var_7 = scripts\engine\utility::getStruct(var_3.target, "targetname");
   var_8 = spawn("script_model", var_7.origin);
 
-  if(isDefined(var_7.angles))
+  if(isDefined(var_7.angles)) {
     var_8.angles = var_7.angles;
+  }
 
   var_3.part = var_8;
   var_8._id_9A3E = var_3;
@@ -1266,8 +1308,9 @@ _id_1176E() {
         continue;
       }
       if(!var_0 scripts\cp\cp_persistence::player_has_enough_currency(5000)) {
-        if(soundexists("purchase_deny"))
+        if(soundexists("purchase_deny")) {
           var_0 playlocalsound("purchase_deny");
+        }
 
         var_0 thread scripts\cp\cp_vo::try_to_play_vo("no_cash", "zmb_comment_vo", "high", 3, 0, 0, 1);
         var_0 thread _id_BE86();
@@ -1318,8 +1361,9 @@ _id_BED0(var_0) {
     self waittill("reached_end_node");
     self startpath(var_0);
 
-    while(scripts\engine\utility::flag("transform"))
+    while(scripts\engine\utility::flag("transform")) {
       wait 1;
+    }
   }
 }
 
@@ -1349,8 +1393,9 @@ _id_BEE4() {
     wait 0.1;
     var_0 = var_0 + 1;
 
-    if(var_0 >= 70)
+    if(var_0 >= 70) {
       var_0 = 0;
+    }
   }
 }
 
@@ -1360,8 +1405,9 @@ _id_BEBA() {
   self.upper_body.health = 1000000;
 
   for(;;) {
-    while(scripts\engine\utility::flag("transform"))
+    while(scripts\engine\utility::flag("transform")) {
       wait 1;
+    }
 
     self.upper_body waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
     self.upper_body playSound("neil_impact");
@@ -1398,8 +1444,9 @@ _id_4EFA() {
     return;
   } else if(isDefined(level._id_BEAE) && isDefined(level._id_BEAE.part))
     pickup_battery(level._id_BEAE, level.players[0]);
-  else if(isDefined(level._id_BEC1) && isDefined(level._id_BEC1.part))
+  else if(isDefined(level._id_BEC1) && isDefined(level._id_BEC1.part)) {
     pickup_firmware(level._id_BEC1, level.players[0]);
+  }
 
   wait 0.5;
   level.neil._id_13084 notify("trigger", level.players[0]);
@@ -1408,17 +1455,21 @@ _id_4EFA() {
 }
 
 neil_repair_hintstring_logic(var_0, var_1) {
-  if(isDefined(level._id_BEC7))
+  if(isDefined(level._id_BEC7)) {
     return &"CP_ZMB_INTERACTIONS_ATTACH_HEAD";
+  }
 
-  if(isDefined(level._id_BEB0))
+  if(isDefined(level._id_BEB0)) {
     return &"CP_ZMB_INTERACTIONS_LOAD_BATTERY";
+  }
 
-  if(isDefined(level._id_BEC3))
+  if(isDefined(level._id_BEC3)) {
     return &"CP_ZMB_INTERACTIONS_LOAD_FLOPPY";
+  }
 
-  if(!isDefined(level._id_BEC7))
+  if(!isDefined(level._id_BEC7)) {
     return &"CP_ZMB_INTERACTIONS_MISSING_HEAD";
+  }
 
   return &"CP_ZMB_INTERACTIONS_REPAR_NEIL";
 }
@@ -1457,8 +1508,9 @@ add_part_to_neil(var_0, var_1) {
     level._id_BEC3 = undefined;
   }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 scripts\cp\cp_interaction::refresh_interaction();
+  }
 }
 
 _id_833E(var_0) {
@@ -1519,8 +1571,9 @@ _id_1C5F() {
     level.neil.upper_body thread _id_BECD("n31l_challenge_reactivate");
     scripts\engine\utility::flag_clear("pause_challenges");
 
-    foreach(var_0 in level.players)
-    var_0 setclientomnvar("zm_show_challenge", 11);
+    foreach(var_0 in level.players) {
+      var_0 setclientomnvar("zm_show_challenge", 11);
+    }
 
     wait 5;
   }
@@ -1549,8 +1602,9 @@ _id_BEC0() {
   wait 6;
   _id_BEBD(level.neil, &"CP_ZMB_INTERACTIONS_PAUSE_CHALLENGES");
 
-  if(!isDefined(level._id_1C3F))
+  if(!isDefined(level._id_1C3F)) {
     level.neil thread _id_1C5F();
+  }
 }
 
 _id_BECE() {
@@ -1559,8 +1613,9 @@ _id_BECE() {
   var_1 = 4096;
 
   for(;;) {
-    while(scripts\engine\utility::flag("transform"))
+    while(scripts\engine\utility::flag("transform")) {
       wait 1;
+    }
 
     var_2 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
     var_2 = sortbydistance(var_2, self.origin);
@@ -1573,14 +1628,16 @@ _id_BECE() {
     }
 
     if(isDefined(var_3)) {
-      if(distance2dsquared(self.origin, var_3.origin) < var_0 && (scripts\engine\utility::is_true(var_3.is_dancing) || scripts\engine\utility::is_true(var_3.isfrozen)))
+      if(distance2dsquared(self.origin, var_3.origin) < var_0 && (scripts\engine\utility::is_true(var_3.is_dancing) || scripts\engine\utility::is_true(var_3.isfrozen))) {
         var_3 dodamage(var_3.health + 100, self.origin);
+      }
     }
 
     foreach(var_6 in var_4) {
       if(distance2dsquared(self.origin, var_6.origin) < var_1) {
-        if(isDefined(var_6.owner) && var_6.owner scripts\cp\utility::is_valid_player(1))
+        if(isDefined(var_6.owner) && var_6.owner scripts\cp\utility::is_valid_player(1)) {
           var_6.owner playlocalsound("ww_magicbox_laughter");
+        }
 
         var_6 notify("detonateExplosive");
       }

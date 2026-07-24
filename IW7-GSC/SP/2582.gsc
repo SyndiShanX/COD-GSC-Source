@@ -11,8 +11,9 @@ _id_98D2() {
   self.bt._id_EB89._id_D895 = undefined;
   self.bt._id_EB89._id_3D4C = [];
 
-  if(self.unittype == "c12")
+  if(self.unittype == "c12") {
     self.bt._id_EB89._id_71CE = ::_id_360A;
+  }
 
   if(isDefined(anim._id_10E5D)) {
     return;
@@ -43,25 +44,28 @@ _id_360A(var_0) {
 }
 
 _id_12F2C(var_0) {
-  if(isDefined(self.bt._id_F1F8) && self.bt._id_F1F8)
+  if(isDefined(self.bt._id_F1F8) && self.bt._id_F1F8) {
     return anim.failure;
+  }
 
-  if(gettime() < self.bt._id_EB89._id_BF75)
+  if(gettime() < self.bt._id_EB89._id_BF75) {
     return anim.failure;
+  }
 
   updateenemy();
 
-  if(_id_D53D())
+  if(_id_D53D()) {
     self.bt._id_EB89._id_BF75 = gettime() + randomfloatrange(anim._id_10E5F[self.unittype], anim._id_10E5E[self.unittype]);
+  }
 
   return anim.failure;
 }
 
 updateenemy() {
   if(isDefined(self.enemy)) {
-    if(!isDefined(self.bt._id_EB89._id_D895) || self.bt._id_EB89._id_D895 != self.enemy)
+    if(!isDefined(self.bt._id_EB89._id_D895) || self.bt._id_EB89._id_D895 != self.enemy) {
       _id_17BA("newenemy", self.enemy);
-    else if(gettime() > self.bt._id_EB89._id_BFB3["engage"]) {
+    } else if(gettime() > self.bt._id_EB89._id_BFB3["engage"]) {
       self.bt._id_EB89._id_BFB3["engage"] = gettime() + randomfloatrange(1000, 3000);
       _id_17BA("engage", self.enemy);
     }
@@ -84,35 +88,43 @@ _id_81C5(var_0) {
 }
 
 _id_9FA6(var_0) {
-  if(distancesquared(level.player.origin, var_0.origin) > 6250000)
+  if(distancesquared(level.player.origin, var_0.origin) > 6250000) {
     return 0;
+  }
 
-  if(scripts\engine\utility::within_fov(anim.player.origin, anim.player.angles, var_0.origin, 0))
+  if(scripts\engine\utility::within_fov(anim.player.origin, anim.player.angles, var_0.origin, 0)) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_D53D() {
-  if(!isalive(self))
+  if(!isalive(self)) {
     return 0;
+  }
 
-  if(!scripts\anim\battlechatter::_id_29CA())
+  if(!scripts\anim\battlechatter::_id_29CA()) {
     return 0;
+  }
 
-  if(isDefined(self._id_9F6B) && self._id_9F6B)
+  if(isDefined(self._id_9F6B) && self._id_9F6B) {
     return 0;
+  }
 
-  if(!self.bt._id_EB89.enabled)
+  if(!self.bt._id_EB89.enabled) {
     return 0;
+  }
 
-  if(anim.isteamspeaking[self.team])
+  if(anim.isteamspeaking[self.team]) {
     return 0;
+  }
 
   var_0 = _id_7EFD();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   thread _id_D53E(var_0);
   return 1;
@@ -138,17 +150,21 @@ _id_17BA(var_0, var_1, var_2) {
   var_3.type = var_0;
   [[self.bt._id_EB89._id_71CE]](var_3);
 
-  if(!isDefined(var_3.alias))
+  if(!isDefined(var_3.alias)) {
     return undefined;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3._id_117B9 = var_1;
+  }
 
-  if(!isDefined(var_3.priority))
+  if(!isDefined(var_3.priority)) {
     var_3.priority = 0;
+  }
 
-  if(!isDefined(self._id_3D4C))
+  if(!isDefined(self._id_3D4C)) {
     self.bt._id_EB89._id_3D4C = [];
+  }
 
   self.bt._id_EB89._id_3D4C[var_0] = var_3;
 }

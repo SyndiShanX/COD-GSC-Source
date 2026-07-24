@@ -4,8 +4,9 @@
 **************************************/
 
 try_collect_from_lost_and_found(var_0, var_1) {
-  if(scripts\engine\utility::is_true(var_1.have_things_in_lost_and_found) && can_collect_lost_and_found_items(var_1) && (isDefined(var_1.lost_and_found_spot) && var_1.lost_and_found_spot == var_0))
+  if(scripts\engine\utility::is_true(var_1.have_things_in_lost_and_found) && can_collect_lost_and_found_items(var_1) && (isDefined(var_1.lost_and_found_spot) && var_1.lost_and_found_spot == var_0)) {
     restore_player_status(var_1);
+  }
 
   level.timesitemspicked++;
 }
@@ -17,12 +18,14 @@ save_items_to_lost_and_found(var_0) {
   var_2 = scripts\engine\utility::array_randomize_objects(var_2);
 
   foreach(var_4 in var_2) {
-    if(scripts\engine\utility::array_contains(level.current_interaction_structs, var_4))
+    if(scripts\engine\utility::array_contains(level.current_interaction_structs, var_4)) {
       var_1 = var_4;
+    }
   }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = scripts\engine\utility::random(var_2);
+  }
 
   var_6 = spawn("script_model", var_1.origin + (0, 0, 45));
   var_6 store_player_status(var_6, var_0);
@@ -97,8 +100,9 @@ restore_player_status(var_0) {
     var_0[[level.crafting_icon_create_func]](var_0.current_crafting_struct);
   }
 
-  if(isDefined(var_1.current_crafted_inventory))
+  if(isDefined(var_1.current_crafted_inventory)) {
     level thread[[var_1.current_crafted_inventory.restore_func]](undefined, var_0);
+  }
 
   var_0.special_ammo_type = var_1.copy_special_ammo_type;
   var_0.have_things_in_lost_and_found = 0;
@@ -109,14 +113,17 @@ restore_player_status(var_0) {
 }
 
 can_collect_lost_and_found_items(var_0) {
-  if(scripts\cp\cp_laststand::player_in_laststand(var_0))
+  if(scripts\cp\cp_laststand::player_in_laststand(var_0)) {
     return 0;
+  }
 
-  if(!var_0 scripts\engine\utility::isweaponswitchallowed())
+  if(!var_0 scripts\engine\utility::isweaponswitchallowed()) {
     return 0;
+  }
 
-  if(scripts\engine\utility::is_true(var_0.kung_fu_mode))
+  if(scripts\engine\utility::is_true(var_0.kung_fu_mode)) {
     return 0;
+  }
 
   return 1;
 }
@@ -166,19 +173,22 @@ refill_forge_weapon(var_0) {
   var_1 = var_0 getweaponslistprimaries();
 
   foreach(var_3 in var_1) {
-    if(scripts\cp\cp_weapon::isforgefreezeweapon(var_3) || scripts\cp\cp_weapon::issteeldragon(var_3))
+    if(scripts\cp\cp_weapon::isforgefreezeweapon(var_3) || scripts\cp\cp_weapon::issteeldragon(var_3)) {
       var_0 setweaponammoclip(var_3, weaponclipsize(var_3));
+    }
   }
 }
 
 init_lost_and_found() {
-  if(isDefined(level.lost_and_found_func))
+  if(isDefined(level.lost_and_found_func)) {
     [[level.lost_and_found_func]]();
+  }
 }
 
 get_lost_and_found_hintstring(var_0, var_1) {
-  if(scripts\engine\utility::is_true(var_1.kung_fu_mode))
+  if(scripts\engine\utility::is_true(var_1.kung_fu_mode)) {
     return "";
+  }
 
   if(scripts\engine\utility::is_true(var_1.have_things_in_lost_and_found)) {
     if(can_collect_lost_and_found_items(var_1)) {

@@ -9,10 +9,11 @@ main(var_0, var_1, var_2) {
   scripts\sp\vehicle_build::_id_31A3(3000, 2800, 3100);
   scripts\sp\vehicle_build::_id_31C4("axis");
 
-  if(issubstr(var_2, "_space"))
+  if(issubstr(var_2, "_space")) {
     scripts\sp\vehicle_build::build_ace(::_id_F8A2, ::_id_F5FC);
-  else
+  } else {
     scripts\sp\vehicle_build::build_ace(::_id_F8A1, ::_id_F5FC);
+  }
 
   scripts\sp\vehicle_build::_id_31CC(::_id_12BBD);
   scripts\sp\vehicle_build::_id_3184("vfx/iw7/core/vehicle/dropship/vfx_dropship_death_01.vfx", undefined, "dropship_helicopter_crash", undefined, undefined, undefined, -1, undefined, "stop_crash_loop_sound", 10, 5);
@@ -21,10 +22,11 @@ main(var_0, var_1, var_2) {
   scripts\sp\vehicle_build::_id_31C6(var_2, "default", var_3, 0);
   scripts\sp\vehicle_build::_id_31B8("light_1s", 0.12, 0.15, 3000, 0.05, 0.05);
 
-  if(issubstr(var_2, "plane"))
+  if(issubstr(var_2, "plane")) {
     scripts\sp\vehicle_build::_id_319F();
-  else
+  } else {
     scripts\sp\vehicle_build::_id_31A0();
+  }
 
   if(!issubstr(var_2, "cheap")) {
     scripts\sp\vehicle_build::_id_31C8("sdf_dropship_turret_energy", "tag_chin_turret", "veh_mil_air_ca_dropship_turret", undefined, "auto_nonai", 0, 20, -14, undefined);
@@ -70,13 +72,15 @@ init_location() {
   thread _id_0BBE::_id_774D();
   var_4 = self.script_team;
 
-  if(var_4 == "axis")
+  if(var_4 == "axis") {
     thread _id_0BBE::_id_774C();
+  }
 
   thread _id_0BBE::_id_5EC8(%vh_dropship_sdf_thrusters_up, %vh_dropship_sdf_thrusters_down);
 
-  if(!issubstr(self.classname, "c6"))
+  if(!issubstr(self.classname, "c6")) {
     self attach("veh_mil_air_ca_dropship_personnel", "tag_connect");
+  }
 
   thread _id_3E7A();
   thread _id_101B3();
@@ -85,8 +89,9 @@ init_location() {
 _id_3E7A() {
   self endon("death");
 
-  if(!isDefined(self._id_EEF8))
+  if(!isDefined(self._id_EEF8)) {
     self._id_EEF8 = 0;
+  }
 
   wait 0.05;
   self.mgturret[0] setleftarc(65);
@@ -333,8 +338,9 @@ _id_5DCE(var_0) {
     self._id_65CD[var_3]._id_4E26 = level._id_7649["enemy_dropship_engine_death"];
     self._id_65CD[var_3]._id_5290 = "frag_grenade_explode";
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       self._id_65CD[var_3]._id_4E40 = var_0;
+    }
 
     switch (var_3) {
       case "j_wing_mid_ri":
@@ -354,14 +360,16 @@ _id_5DCE(var_0) {
   for(;;) {
     self waittill("damage", var_5, var_6, var_7, var_8, var_7, var_7, var_7, var_9, var_7, var_10);
 
-    if(isDefined(var_6) && isPlayer(var_6) || isDefined(var_6) && isDefined(level._id_A351) && var_6 == level._id_A351)
+    if(isDefined(var_6) && isPlayer(var_6) || isDefined(var_6) && isDefined(level._id_A351) && var_6 == level._id_A351) {
       _id_D973(var_9, var_5, var_8);
+    }
   }
 }
 
 _id_D973(var_0, var_1, var_2) {
-  if(isDefined(level._id_5D81) && isDefined(level._id_5D81._id_24C0))
+  if(isDefined(level._id_5D81) && isDefined(level._id_5D81._id_24C0)) {
     level._id_5D81._id_24C0 = level._id_5D81._id_24C0 - 0.15;
+  }
 
   if(isDefined(var_0) && !isDefined(self._id_65CD[var_0])) {
     return;
@@ -371,8 +379,9 @@ _id_D973(var_0, var_1, var_2) {
   }
   thread scripts\sp\damagefeedback::monitordamage();
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     playFX(level._id_7649["engine_damage_feedback"], var_2);
+  }
 
   self._id_65CD[var_0].health = self._id_65CD[var_0].health - var_1;
 
@@ -388,8 +397,9 @@ _id_D973(var_0, var_1, var_2) {
     self._id_65CD[var_0]._id_9DA7 = 1;
     playFXOnTag(level._id_7649["enemy_dropship_engine_damaged"], self, var_0);
 
-    if(isDefined(self._id_65CD[var_0]._id_11867))
+    if(isDefined(self._id_65CD[var_0]._id_11867)) {
       _id_0BBE::_id_A61E(self._id_65CD[var_0]._id_11867);
+    }
   } else if(self._id_65CD[var_0].health <= self._id_65CD[var_0].maxhealth * 0.25 && !scripts\sp\utility::_id_65DB("thruster_near_death"))
     scripts\sp\utility::_id_65E1("thruster_near_death");
 }
@@ -410,8 +420,9 @@ _id_A5DA(var_0) {
 
   playFXOnTag(level._id_7649["enemy_dropship_engine_death"], self, var_0);
 
-  if(isDefined(self._id_65CD[var_0]._id_5290))
+  if(isDefined(self._id_65CD[var_0]._id_5290)) {
     playworldsound(self._id_65CD[var_0]._id_5290, self gettagorigin(var_0));
+  }
 
   if(!isDefined(self._id_65CD[var_0]._id_4E40)) {
     return;
@@ -422,19 +433,22 @@ _id_A5DA(var_0) {
     var_3 = 0;
 
     foreach(var_5 in self._id_65CD) {
-      if(var_5._id_9BB8)
+      if(var_5._id_9BB8) {
         var_3++;
+      }
     }
 
-    if(var_3 >= self._id_B73F)
+    if(var_3 >= self._id_B73F) {
       var_2 = 1;
-    else
+    } else {
       thread _id_101AF();
+    }
   } else
     var_2 = 1;
 
-  if(var_2)
+  if(var_2) {
     self thread[[self._id_65CD[var_0]._id_4E40]]();
+  }
 }
 
 _id_CD70(var_0, var_1, var_2) {
@@ -451,11 +465,13 @@ _id_CD70(var_0, var_1, var_2) {
     self animScripted("single anim", self.origin, self.angles, var_1);
   }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = var_3;
+  }
 
-  if(getdvarint("debug_engine_dmg"))
+  if(getdvarint("debug_engine_dmg")) {
     thread scripts\sp\utility::_id_5B51(var_0.origin, self, 1, 0, 0, var_3);
+  }
 
   self._id_1FEB moveTo(var_0.origin, var_2);
   self._id_1FEB rotateTo(var_0.angles, var_2);
@@ -478,10 +494,11 @@ _id_101AF() {
   var_5 = undefined;
 
   if(!isDefined(self._id_A8AC)) {
-    if(randomint(100) < 50)
+    if(randomint(100) < 50) {
       self._id_A8AC = "left";
-    else
+    } else {
       self._id_A8AC = "right";
+    }
   }
 
   if(bullettracepassed(self.origin, var_4, 0, self) && self._id_A8AC == "left") {

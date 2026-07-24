@@ -74,8 +74,9 @@ _id_E932() {
   scripts\engine\utility::flag_set("fleet_data_player_done");
   thread _id_4270();
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     var_7 delete();
+  }
 
   wait 0.5;
   scripts\engine\utility::flag_set("fleet_data_player_unlinked");
@@ -130,8 +131,9 @@ _id_E92E() {
 
   var_0 = getnode("ethan_hero_kill_node", "targetname");
 
-  if(isDefined(var_0.radius))
+  if(isDefined(var_0.radius)) {
     scripts\sp\utility::_id_F3E0(var_0.radius);
+  }
 
   self _meth_82EE(var_0);
 }
@@ -230,8 +232,9 @@ _id_E930() {
 _id_F981() {
   var_0 = getEntArray("fleet_data_screen_static", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 hide();
+  foreach(var_2 in var_0) {
+    var_2 hide();
+  }
 
   if(scripts\engine\utility::flag("fleet_data_checkpoint_start")) {
     setsaveddvar("bg_cinematicFullScreen", "0");
@@ -245,8 +248,9 @@ _id_F981() {
   cinematicingame("sa_moon_fleet_data_1");
   scripts\engine\utility::flag_wait("fleet_data_player_done");
 
-  foreach(var_2 in var_0)
-  var_2 show();
+  foreach(var_2 in var_0) {
+    var_2 show();
+  }
 
   pausecinematicingame(1);
   scripts\engine\utility::flag_wait("hero_kill_over");

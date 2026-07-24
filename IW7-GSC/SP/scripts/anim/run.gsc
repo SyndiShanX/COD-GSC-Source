@@ -24,20 +24,22 @@ _id_BCEB() {
       }
       scripts\anim\utility::_id_12EB9();
 
-      if(scripts\anim\utility::_id_9E40())
+      if(scripts\anim\utility::_id_9E40()) {
         _id_10B79();
-      else
+      } else {
         _id_10B7A();
+      }
 
       break;
     case "crouch":
       if(scripts\anim\setposemovement::_id_4A9E()) {
         return;
       }
-      if(isDefined(self._id_4A9F))
+      if(isDefined(self._id_4A9F)) {
         _id_4AA1();
-      else
+      } else {
         _id_4AA0();
+      }
 
       break;
     default:
@@ -50,26 +52,31 @@ _id_BCEB() {
 }
 
 getrunningforwardpainanim() {
-  if(!isDefined(self.a._id_BCA5))
+  if(!isDefined(self.a._id_BCA5)) {
     return scripts\anim\utility::_id_B027("run", "straight");
-
-  if(!self.facemotion) {
-    if(self.stairsstate == "none" || abs(self _meth_813E()) > 45)
-      return scripts\anim\utility::_id_7FCC("move_f");
   }
 
-  if(self.stairsstate == "up")
-    return scripts\anim\utility::_id_7FCC("stairs_up");
-  else if(self.stairsstate == "down")
-    return scripts\anim\utility::_id_7FCC("stairs_down");
+  if(!self.facemotion) {
+    if(self.stairsstate == "none" || abs(self _meth_813E()) > 45) {
+      return scripts\anim\utility::_id_7FCC("move_f");
+    }
+  }
 
-  if(scripts\anim\utility::_id_9E40() || isDefined(self.a._id_29CE) && self.a._id_29CE)
+  if(self.stairsstate == "up") {
+    return scripts\anim\utility::_id_7FCC("stairs_up");
+  } else if(self.stairsstate == "down") {
+    return scripts\anim\utility::_id_7FCC("stairs_down");
+  }
+
+  if(scripts\anim\utility::_id_9E40() || isDefined(self.a._id_29CE) && self.a._id_29CE) {
     return scripts\anim\utility::_id_7FCC("straight");
+  }
 
   var_0 = scripts\anim\utility::_id_7FCC("straight_twitch");
 
-  if(!isDefined(var_0) || var_0.size == 0)
+  if(!isDefined(var_0) || var_0.size == 0) {
     return scripts\anim\utility::_id_7FCC("straight");
+  }
 
   var_1 = scripts\anim\utility::_id_80BD(self.a._id_E860, 4);
 
@@ -82,8 +89,9 @@ getrunningforwardpainanim() {
 }
 
 _id_7E47() {
-  if(!isDefined(self.a._id_BCA5))
+  if(!isDefined(self.a._id_BCA5)) {
     return scripts\anim\utility::_id_B027("run", "crouch");
+  }
 
   return scripts\anim\utility::_id_7FCC("crouch");
 }
@@ -144,18 +152,20 @@ _id_E873(var_0) {
       return 0;
     } else if(self._id_E879 > 0)
       self._id_E879 = self._id_E879 - var_6;
-    else
+    else {
       self._id_E879 = self._id_E879 + var_6;
+    }
   } else {
     var_7 = var_1 / var_4;
     var_8 = var_7 - self._id_E879;
 
-    if(abs(var_8) < var_5 * 0.7)
+    if(abs(var_8) < var_5 * 0.7) {
       self._id_E879 = var_7;
-    else if(var_8 > 0)
+    } else if(var_8 > 0) {
       self._id_E879 = self._id_E879 + var_6;
-    else
+    } else {
       self._id_E879 = self._id_E879 - var_6;
+    }
   }
 
   _id_98C6();
@@ -186,8 +196,9 @@ _id_E873(var_0) {
   _id_E80F(undefined);
   self.a._id_1C8D = gettime() + 500;
 
-  if(var_0 && isPlayer(self.enemy))
+  if(var_0 && isPlayer(self.enemy)) {
     self _meth_83CE();
+  }
 
   return 1;
 }
@@ -198,8 +209,9 @@ _id_E874() {
   self _meth_82E2("runanim", var_0, 1, 0.3, 0.8);
   _id_E80F(var_0);
 
-  if(isPlayer(self.enemy))
+  if(isPlayer(self.enemy)) {
     self _meth_83CE();
+  }
 
   scripts\anim\notetracks::donotetracksfortime(0.2, "runanim");
   self clearanim(var_0, 0.2);
@@ -237,8 +249,9 @@ _id_E87E() {
   var_0 = scripts\anim\utility::_id_B028("running_react_to_bullets");
   var_1 = randomint(var_0.size);
 
-  if(var_1 == anim._id_A9E6)
+  if(var_1 == anim._id_A9E6) {
     var_1 = (var_1 + 1) % var_0.size;
+  }
 
   anim._id_A9E6 = var_1;
   var_2 = var_0[var_1];
@@ -265,44 +278,53 @@ _id_4C9A() {
 _id_8150() {
   var_0 = undefined;
 
-  if(isDefined(self.grenade))
+  if(isDefined(self.grenade)) {
     var_0 = scripts\anim\utility::_id_7FCC("sprint_short");
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = scripts\anim\utility::_id_7FCC("sprint");
+  }
 
   return var_0;
 }
 
 _id_10086() {
-  if(isDefined(self._id_10AB7))
+  if(isDefined(self._id_10AB7)) {
     return 1;
+  }
 
-  if(isDefined(self.grenade) && isDefined(self.enemy) && self.frontshieldanglecos == 1)
+  if(isDefined(self.grenade) && isDefined(self.enemy) && self.frontshieldanglecos == 1) {
     return distancesquared(self.origin, self.enemy.origin) > 90000;
+  }
 
   return 0;
 }
 
 _id_10087() {
-  if(isDefined(self._id_BEFA))
+  if(isDefined(self._id_BEFA)) {
     return 0;
+  }
 
-  if(!self.facemotion || self.stairsstate != "none")
+  if(!self.facemotion || self.stairsstate != "none") {
     return 0;
+  }
 
   var_0 = gettime();
 
   if(isDefined(self._id_4D85)) {
-    if(var_0 < self._id_4D85)
+    if(var_0 < self._id_4D85) {
       return 1;
+    }
 
-    if(var_0 - self._id_4D85 < 6000)
+    if(var_0 - self._id_4D85 < 6000) {
       return 0;
+    }
   }
 
-  if(!isDefined(self.enemy) || !issentient(self.enemy))
+  if(!isDefined(self.enemy) || !issentient(self.enemy)) {
     return 0;
+  }
 
   if(randomint(100) < 25 && self lastknowntime(self.enemy) + 2000 > var_0) {
     self._id_4D85 = var_0 + 2000 + randomint(1000);
@@ -315,8 +337,9 @@ _id_10087() {
 _id_7FCF() {
   var_0 = self.moveplaybackrate;
 
-  if(self.lookaheadhitsstairs && self.stairsstate == "none" && self.lookaheaddist < 300)
+  if(self.lookaheadhitsstairs && self.stairsstate == "none" && self.lookaheaddist < 300) {
     var_0 = var_0 * 0.75;
+  }
 
   return var_0;
 }
@@ -343,14 +366,14 @@ _id_10B79() {
   } else if(isDefined(self.enemy) && scripts\anim\move::_id_B4EC()) {
     _id_F843(1);
 
-    if(!self.facemotion)
+    if(!self.facemotion) {
       thread _id_6A6B();
-    else if(self._id_FED7 != "none" && !isDefined(self._id_C09F)) {
+    } else if(self._id_FED7 != "none" && !isDefined(self._id_C09F)) {
       _id_6318();
 
-      if(canshoottargetfrompos())
+      if(canshoottargetfrompos()) {
         var_1 = _id_E873(1);
-      else if(canshoottarget()) {
+      } else if(canshoottarget()) {
         _id_E874();
         return;
       }
@@ -375,10 +398,11 @@ _id_10B79() {
     }
     self clearanim(%stair_transitions, 0.1);
 
-    if(_id_10087())
+    if(_id_10087()) {
       var_4 = scripts\anim\utility::_id_7FCC("sprint_short");
-    else
+    } else {
       var_4 = getrunningforwardpainanim();
+    }
 
     self _meth_82E5("runanim", var_4, 1, 0.1, self.moveplaybackrate, 1);
     _id_E80F(var_4);
@@ -390,20 +414,23 @@ _id_10B79() {
 }
 
 _id_815A(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "none";
+  }
 
-  if(var_0 == var_1)
+  if(var_0 == var_1) {
     return undefined;
+  }
 
-  if(var_0 == "up")
+  if(var_0 == "up") {
     return scripts\anim\utility::_id_7FCC("stairs_up_out");
-  else if(var_0 == "down")
+  } else if(var_0 == "down") {
     return scripts\anim\utility::_id_7FCC("stairs_down_out");
-  else if(var_1 == "up")
+  } else if(var_1 == "up") {
     return scripts\anim\utility::_id_7FCC("stairs_up_in");
-  else if(var_1 == "down")
+  } else if(var_1 == "down") {
     return scripts\anim\utility::_id_7FCC("stairs_down_in");
+  }
 }
 
 _id_6A6B() {
@@ -424,8 +451,9 @@ _id_6A6B() {
   } else {
     var_1 = "walk";
 
-    if(scripts\anim\utility::_id_FFDB() && isDefined(scripts\anim\utility::_id_B027("cqb", "aim_2")))
+    if(scripts\anim\utility::_id_FFDB() && isDefined(scripts\anim\utility::_id_B027("cqb", "aim_2"))) {
       var_1 = "cqb";
+    }
 
     var_2 = scripts\anim\utility::_id_B028(var_1);
     self _meth_82AC(var_2["aim_2"]);
@@ -486,27 +514,31 @@ _id_1A3C() {
   var_0 = self getmuzzleangle();
   var_1 = vectortoangles(self.enemy getshootatpos() - self getmuzzlepos());
 
-  if(scripts\engine\utility::absangleclamp180(var_0[1] - var_1[1]) > 15)
+  if(scripts\engine\utility::absangleclamp180(var_0[1] - var_1[1]) > 15) {
     return 0;
+  }
 
   return scripts\engine\utility::absangleclamp180(var_0[0] - var_1[0]) <= 20;
 }
 
 canshoottargetfrompos() {
-  if((!isDefined(self._id_E879) || self._id_E879 == 0) && abs(self _meth_813E()) > self._id_B4C3)
+  if((!isDefined(self._id_E879) || self._id_E879 == 0) && abs(self _meth_813E()) > self._id_B4C3) {
     return 0;
+  }
 
   return 1;
 }
 
 canshoottarget() {
-  if(180 - abs(self _meth_813E()) >= 45)
+  if(180 - abs(self _meth_813E()) >= 45) {
     return 0;
+  }
 
   var_0 = _id_8096(0.2);
 
-  if(abs(var_0) > 30)
+  if(abs(var_0) > 30) {
     return 0;
+  }
 
   return 1;
 }
@@ -529,10 +561,11 @@ _id_BC1D() {
   var_1 = undefined;
 
   if(self.stairsstate == "none" && self.lookaheadhitsstairs) {
-    if(scripts\anim\utility::_id_FFDB())
+    if(scripts\anim\utility::_id_FFDB()) {
       var_2 = 32;
-    else
+    } else {
       var_2 = 48;
+    }
 
     var_3 = self.origin + (0, 0, 6);
     var_4 = vectorNormalize((self.lookaheaddir[0], self.lookaheaddir[1], 0));
@@ -540,8 +573,9 @@ _id_BC1D() {
     var_6 = self aiphysicstrace(var_3, var_5, 15, 48, 1, 1);
 
     if(var_6["fraction"] < 1) {
-      if(!isDefined(var_6["stairs"]))
+      if(!isDefined(var_6["stairs"])) {
         return 0;
+      }
 
       var_1 = _id_815A("none", "up");
     } else {
@@ -550,11 +584,13 @@ _id_BC1D() {
       var_9 = var_5 - (0, 0, var_7);
       var_6 = self aiphysicstrace(var_8, var_9, 15, 48, 1, 1);
 
-      if(var_6["fraction"] >= 1)
+      if(var_6["fraction"] >= 1) {
         return 0;
+      }
 
-      if(!isDefined(var_6["stairs"]))
+      if(!isDefined(var_6["stairs"])) {
         return 0;
+      }
 
       var_1 = _id_815A("none", "down");
     }
@@ -566,11 +602,13 @@ _id_BC1D() {
     var_9 = var_5 - (0, 0, var_7);
     var_6 = self aiphysicstrace(var_8, var_9, 15, 48, 1, 1);
 
-    if(var_6["fraction"] <= 0 || var_6["fraction"] >= 1)
+    if(var_6["fraction"] <= 0 || var_6["fraction"] >= 1) {
       return 0;
+    }
 
-    if(isDefined(var_6["stairs"]))
+    if(isDefined(var_6["stairs"])) {
       return 0;
+    }
 
     var_1 = _id_815A("up", "none");
   } else if(self.stairsstate == "down" && !self.lookaheadhitsstairs) {
@@ -581,17 +619,20 @@ _id_BC1D() {
     var_9 = var_5 - (0, 0, var_7);
     var_6 = self aiphysicstrace(var_8, var_9, 15, 48, 1, 1);
 
-    if(var_6["fraction"] <= 0 || var_6["fraction"] >= 1)
+    if(var_6["fraction"] <= 0 || var_6["fraction"] >= 1) {
       return 0;
+    }
 
-    if(isDefined(var_6["stairs"]))
+    if(isDefined(var_6["stairs"])) {
       return 0;
+    }
 
     var_1 = _id_815A("down", "none");
   }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 0;
+  }
 
   self notify("stop_move_anim_update");
   self._id_12DEF = undefined;
@@ -612,15 +653,17 @@ _id_10B7A() {
   self clearanim(%stair_transitions, 0.1);
   self _meth_82A5(%combatrun, %body, 1, 0.2, var_0);
 
-  if(_id_10086())
+  if(_id_10086()) {
     var_1 = _id_8150();
-  else
+  } else {
     var_1 = getrunningforwardpainanim();
+  }
 
-  if(self.stairsstate == "none")
+  if(self.stairsstate == "none") {
     var_2 = 0.3;
-  else
+  } else {
     var_2 = 0.1;
+  }
 
   self _meth_82E2("runanim", var_1, 1, var_2, self.moveplaybackrate, 1);
   _id_E80F(var_1);
@@ -628,10 +671,11 @@ _id_10B7A() {
   thread setcombatstandmoveanimweights("run");
   var_3 = 0;
 
-  if(self.leanamount > 0 && self.leanamount < 0.998)
+  if(self.leanamount > 0 && self.leanamount < 0.998) {
     var_3 = 1;
-  else if(self.leanamount < 0 && self.leanamount > -0.998)
+  } else if(self.leanamount < 0 && self.leanamount > -0.998) {
     var_3 = -1;
+  }
 
   var_4 = max(0.2, var_2);
   scripts\anim\notetracks::donotetracksfortime(var_4, "runanim");
@@ -659,41 +703,51 @@ _id_10B78() {
   var_0 = var_0 || isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) < 65536;
 
   if(var_0) {
-    if(!scripts\anim\utility_common::needtoreload(0))
+    if(!scripts\anim\utility_common::needtoreload(0)) {
       return 0;
+    }
   } else if(!scripts\anim\utility_common::needtoreload(0.5))
     return 0;
 
-  if(isDefined(self.grenade))
+  if(isDefined(self.grenade)) {
     return 0;
+  }
 
-  if(!self.facemotion || self.stairsstate != "none")
+  if(!self.facemotion || self.stairsstate != "none") {
     return 0;
+  }
 
-  if(isDefined(self._id_596C) || isDefined(self._id_C0A0))
+  if(isDefined(self._id_596C) || isDefined(self._id_C0A0)) {
     return 0;
+  }
 
-  if(canshootinvehicle() && !scripts\anim\utility_common::needtoreload(0))
+  if(canshootinvehicle() && !scripts\anim\utility_common::needtoreload(0)) {
     return 0;
+  }
 
-  if(!isDefined(self.pathgoalpos) || distancesquared(self.origin, self.pathgoalpos) < 65536)
+  if(!isDefined(self.pathgoalpos) || distancesquared(self.origin, self.pathgoalpos) < 65536) {
     return 0;
+  }
 
   var_1 = angleclamp180(self _meth_813E());
 
-  if(abs(var_1) > 25)
+  if(abs(var_1) > 25) {
     return 0;
+  }
 
-  if(!scripts\anim\utility_common::usingriflelikeweapon())
+  if(!scripts\anim\utility_common::usingriflelikeweapon()) {
     return 0;
+  }
 
-  if(!_id_E861())
+  if(!_id_E861()) {
     return 0;
+  }
 
-  if(scripts\anim\utility::_id_FFDB())
+  if(scripts\anim\utility::_id_FFDB()) {
     scripts\anim\cqb::_id_4790();
-  else
+  } else {
     _id_10B7B();
+  }
 
   self notify("abort_reload");
   self orientmode("face default");
@@ -706,8 +760,9 @@ _id_10B7B() {
   var_0 = "reload_" + scripts\anim\combat_utility::_id_81EB();
   var_1 = scripts\anim\utility::_id_B027("run", "reload");
 
-  if(isarray(var_1))
+  if(isarray(var_1)) {
     var_1 = var_1[randomint(var_1.size)];
+  }
 
   self _meth_82E4(var_0, var_1, %body, 1, 0.25);
   _id_E80F(var_1);
@@ -723,23 +778,27 @@ _id_E861() {
   var_1 = getanimlength(scripts\anim\utility::_id_B027("run", "straight")) / 3.0;
   var_0 = var_0 * 3.0;
 
-  if(var_0 > 3)
+  if(var_0 > 3) {
     var_0 = var_0 - 2.0;
-  else if(var_0 > 2)
+  } else if(var_0 > 2) {
     var_0 = var_0 - 1.0;
+  }
 
-  if(var_0 < 0.15 / var_1)
+  if(var_0 < 0.15 / var_1) {
     return 1;
+  }
 
-  if(var_0 > 1 - 0.3 / var_1)
+  if(var_0 > 1 - 0.3 / var_1) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_F7A9(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1;
+  }
 
   self _meth_82A9(var_0, 1, 0.1, var_3, 1);
   self _meth_82A9(var_1, 1, 0.1, var_3, 1);
@@ -784,8 +843,9 @@ _id_12F08(var_0, var_1, var_2, var_3) {
     if(isDefined(self._id_12DF0)) {
       var_4["back"] = 0.0;
 
-      if(var_4["front"] < 0.2)
+      if(var_4["front"] < 0.2) {
         var_4["front"] = 0.2;
+      }
     }
 
     self _meth_82A2(var_0, var_4["front"], 0.2, 1, 1);
@@ -799,41 +859,51 @@ _id_10B77() {
   var_0 = isDefined(self._id_138DF) && self._id_138DF;
   var_1 = scripts\anim\utility_common::isshotgun(self.weapon);
 
-  if(var_0 == var_1)
+  if(var_0 == var_1) {
     return 0;
+  }
 
-  if(!isDefined(self.pathgoalpos) || distancesquared(self.origin, self.pathgoalpos) < 65536)
+  if(!isDefined(self.pathgoalpos) || distancesquared(self.origin, self.pathgoalpos) < 65536) {
     return 0;
+  }
 
-  if(scripts\anim\utility_common::isusingsidearm())
+  if(scripts\anim\utility_common::isusingsidearm()) {
     return 0;
+  }
 
   if(self.weapon == self.primaryweapon) {
-    if(!var_0)
+    if(!var_0) {
       return 0;
+    }
 
-    if(scripts\anim\utility_common::isshotgun(self.secondaryweapon))
+    if(scripts\anim\utility_common::isshotgun(self.secondaryweapon)) {
       return 0;
+    }
   } else {
-    if(var_0)
+    if(var_0) {
       return 0;
+    }
 
-    if(scripts\anim\utility_common::isshotgun(self.primaryweapon))
+    if(scripts\anim\utility_common::isshotgun(self.primaryweapon)) {
       return 0;
+    }
   }
 
   var_2 = angleclamp180(self _meth_813E());
 
-  if(abs(var_2) > 25)
+  if(abs(var_2) > 25) {
     return 0;
+  }
 
-  if(!_id_E861())
+  if(!_id_E861()) {
     return 0;
+  }
 
-  if(var_0)
+  if(var_0) {
     _id_FF02("shotgunPullout", scripts\anim\utility::_id_B027("cqb", "shotgun_pullout"), "gun_2_chest", "none", self.secondaryweapon, "shotgun_pickup");
-  else
+  } else {
     _id_FF02("shotgunPutaway", scripts\anim\utility::_id_B027("cqb", "shotgun_putaway"), "gun_2_back", "back", self.primaryweapon, "shotgun_pickup");
+  }
 
   self notify("switchEnded");
   return 1;
@@ -852,8 +922,9 @@ _id_FF02(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_9A61(var_0) {
-  if(var_0 == "gun_2_chest" || var_0 == "gun_2_back")
+  if(var_0 == "gun_2_chest" || var_0 == "gun_2_back") {
     return 1;
+  }
 }
 
 _id_13B40(var_0, var_1, var_2, var_3, var_4) {

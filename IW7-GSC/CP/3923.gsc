@@ -36,8 +36,9 @@ _id_36F6(var_0) {
     var_5 = getmovedelta(var_4, 0, 1);
     var_6 = lengthsquared(var_5);
 
-    if(var_6 > var_1)
+    if(var_6 > var_1) {
       var_1 = var_6;
+    }
   }
 
   return sqrt(var_1);
@@ -501,20 +502,25 @@ _id_DF12(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = [];
   var_6["animState"] = var_0;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_6["animIndexArray"] = var_1;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_6["endInOriented"] = var_2;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_6["flexHeightEndAtTraverseEnd"] = var_3;
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_6["traverseSound"] = var_4;
+  }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_6["traverseAnimScale"] = var_5;
+  }
 
   return var_6;
 }
@@ -531,16 +537,18 @@ _id_129B7(var_0) {
   if(var_1 != 4) {
     self.statelocked = 1;
 
-    if(self.oriented)
+    if(self.oriented) {
       self _meth_8281("anim angle delta");
-    else
+    } else {
       self _meth_8281("anim deltas");
+    }
 
     var_2 = _id_81E0();
     scripts\anim\notetracks_mp::_id_CED5(var_2, var_1, "turn_in_place", "code_move");
 
-    if(!_id_0A49::_id_9C09())
+    if(!_id_0A49::_id_9C09()) {
       self.statelocked = 0;
+    }
 
     return 1;
   }
@@ -552,8 +560,9 @@ _id_81E0() {
   if(isDefined(level._id_5750)) {
     var_0 = [[level._id_5750]]();
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       return var_0;
+    }
   }
 
   var_0 = undefined;
@@ -564,8 +573,9 @@ _id_81E0() {
       var_0 = [[level._id_1B6B["gargoyle"]["turn_in_place_anim_state"]]]();
   }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "turn_in_place";
+  }
 
   return var_0;
 }
@@ -578,10 +588,11 @@ _id_81E1(var_0, var_1, var_2) {
   var_7 = var_5._id_DA69;
   var_8 = 10;
 
-  if(var_7 > 0)
+  if(var_7 > 0) {
     var_4 = int(ceil((180 - var_6 - var_8) / 45));
-  else
+  } else {
     var_4 = int(floor((180 + var_6 + var_8) / 45));
+  }
 
   var_4 = int(clamp(var_4, 0, 8));
   return var_4;
@@ -635,17 +646,19 @@ _id_7E59(var_0, var_1) {
   var_2 = scripts\cp\cp_agent_utils::get_agent_type(self);
   var_3 = level._id_1BA4[var_2]._id_2552["heavy_damage_threshold"];
 
-  if(var_0 < var_3 && !var_1)
+  if(var_0 < var_3 && !var_1) {
     return "light";
-  else
+  } else {
     return "heavy";
+  }
 }
 
 _id_8042(var_0, var_1, var_2) {
   var_1 = _id_C865(var_1 * -1);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 = _id_C864(var_2);
+  }
 
   return _id_8044(var_0, var_1, var_2, level._id_1BBA._id_C871);
 }
@@ -668,10 +681,11 @@ _id_7E61(var_0, var_1, var_2) {
 }
 
 _id_8044(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_4 = var_3[var_0][var_1][var_2];
-  else
+  } else {
     var_4 = var_3[var_0][var_1];
+  }
 
   return var_4[randomint(var_4.size)];
 }
@@ -692,8 +706,9 @@ _id_CED8(var_0, var_1, var_2) {
   if(!isDefined(var_3)) {
     return;
   }
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   var_3 setscriptablepartstate("animpart", var_2);
   level notify("scriptable", var_0);

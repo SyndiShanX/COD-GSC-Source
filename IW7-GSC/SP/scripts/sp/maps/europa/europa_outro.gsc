@@ -78,8 +78,9 @@ _id_6222() {
       continue;
     }
 
-    if(isDefined(self.script_intensity_01))
+    if(isDefined(self.script_intensity_01)) {
       var_2 setlightintensity(var_2.script_intensity_01);
+    }
   }
 }
 
@@ -101,8 +102,9 @@ _id_C7B4() {
   var_1 show();
   scripts\sp\maps\europa\europa_util::toggle_cockpit_lights(0);
 
-  if(getdvarint("debug_europa"))
+  if(getdvarint("debug_europa")) {
     level._id_37CE = 0;
+  }
 
   if(!var_0) {
     _id_11628();
@@ -152,13 +154,15 @@ _id_EBEA() {
         continue;
       }
 
-      if(var_3._id_1FBB == "sdf3")
+      if(var_3._id_1FBB == "sdf3") {
         level._id_C7C1 = var_3;
+      }
     }
   }
 
-  foreach(var_6 in level._id_EBCA)
-  var_6 scripts\engine\utility::delaythread(0.5, scripts\sp\utility::_id_86E4);
+  foreach(var_6 in level._id_EBCA) {
+    var_6 scripts\engine\utility::delaythread(0.5, scripts\sp\utility::_id_86E4);
+  }
 
   var_8 = 0;
 
@@ -196,8 +200,9 @@ _id_EBEA() {
   var_10 = getdvarint("skip_outro_fadeup");
   var_9 scripts\sp\anim::_id_1EC1(var_1, "outro");
 
-  if(!var_10)
+  if(!var_10) {
     wait 1;
+  }
 
   thread _id_FB84();
   level.player _meth_82C0("europa_wake_up_scene", 12);
@@ -220,8 +225,9 @@ _id_EBEA() {
 }
 
 _id_DB9C() {
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 _id_912F() {
@@ -321,8 +327,9 @@ _id_5841() {
 
     var_5 = 0;
 
-    if(isDefined(level._id_584B) && level._id_584B == level._id_A70E)
+    if(isDefined(level._id_584B) && level._id_584B == level._id_A70E) {
       var_5 = 1;
+    }
 
     _id_F4B0(var_2, 0, var_5);
     wait 0.05;
@@ -337,24 +344,29 @@ _id_F4B0(var_0, var_1, var_2) {
   var_6 = 0.85;
   var_7 = 1.5;
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
-  if(var_2)
+  if(var_2) {
     var_8 = var_0 * 0.7;
-  else
+  } else {
     var_8 = var_0 * 0.2;
+  }
 
   var_9 = var_0 * 1.15;
 
-  if(isDefined(level._id_5844))
+  if(isDefined(level._id_5844)) {
     var_8 = var_8 * 0.5;
+  }
 
-  if(var_8 < 1)
+  if(var_8 < 1) {
     var_8 = 1;
+  }
 
-  if(var_9 < var_0)
+  if(var_9 < var_0) {
     var_9 = var_0;
+  }
 
   var_10 = var_8 * var_5;
   var_11 = var_9 + 150;
@@ -365,8 +377,9 @@ _id_D20A(var_0) {
   for(;;) {
     self waittill("single anim", var_1);
 
-    if(isstring(var_1))
+    if(isstring(var_1)) {
       var_1 = [var_1];
+    }
 
     foreach(var_3 in var_1) {
       switch (var_3) {
@@ -448,8 +461,9 @@ _id_C7BC() {
   var_1._id_55A4 = 1;
   var_1 notsolid();
 
-  foreach(var_3 in var_1.mgturret)
-  var_3 notsolid();
+  foreach(var_3 in var_1.mgturret) {
+    var_3 notsolid();
+  }
 
   wait 1;
   var_1 scripts\sp\vehicle_paths::_id_845A();
@@ -502,8 +516,9 @@ _id_5E0C() {
 }
 
 _id_5E0D(var_0, var_1) {
-  foreach(var_3 in var_0)
-  playFXOnTag(var_1, self, var_3);
+  foreach(var_3 in var_0) {
+    playFXOnTag(var_1, self, var_3);
+  }
 }
 
 _id_5E0E() {
@@ -585,8 +600,9 @@ _id_8E0B() {
 _id_11628() {
   var_0 = [level.player, level._id_EBBB, level._id_EBBC];
 
-  if(level.player islinked())
+  if(level.player islinked()) {
     level.player unlink(1);
+  }
 
   var_1 = scripts\engine\utility::getStructArray("outro_spot", "targetname");
 

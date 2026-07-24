@@ -16,8 +16,9 @@ _id_FCFC(var_0) {
   level._id_FD49[var_0.keyname]._id_A594 setModel(var_0.model);
 
   if(isDefined(level._id_FD49[var_0.keyname]._id_CB2B)) {
-    if(!scripts\engine\utility::flag_exist(level._id_FD49[var_0.keyname]._id_CB2B))
+    if(!scripts\engine\utility::flag_exist(level._id_FD49[var_0.keyname]._id_CB2B)) {
       scripts\engine\utility::flag_init(level._id_FD49[var_0.keyname]._id_CB2B);
+    }
   }
 
   if(isDefined(level._id_FD49[var_0.keyname]._id_FFFE) && level._id_FD49[var_0.keyname]._id_FFFE) {
@@ -35,10 +36,11 @@ _id_FCFC(var_0) {
     }
   }
 
-  if(isDefined(level._id_FD49[var_0.keyname]._id_4C25))
+  if(isDefined(level._id_FD49[var_0.keyname]._id_4C25)) {
     level._id_FD49[var_0.keyname]._id_A594 _id_0E46::_id_48C4(level._id_FD49[var_0.keyname]._id_4C25[0], level._id_FD49[var_0.keyname]._id_4C25[1], level._id_FD49[var_0.keyname]._id_4C25[2], level._id_FD49[var_0.keyname]._id_4C25[3], level._id_FD49[var_0.keyname]._id_4C25[4], level._id_FD49[var_0.keyname]._id_4C25[5], level._id_FD49[var_0.keyname]._id_4C25[6], level._id_FD49[var_0.keyname]._id_4C25[7], level._id_FD49[var_0.keyname]._id_4C25[8]);
-  else
+  } else {
     level._id_FD49[var_0.keyname]._id_A594 _id_0E46::_id_48C4(undefined, undefined, &"SHIP_ASSAULT_CAPTAINS_KEY", undefined, 700, 128, 1);
+  }
 
   level._id_FD49[var_0.keyname]._id_A594 thread _id_FCFD(var_0);
 }
@@ -47,8 +49,9 @@ _id_FCFD(var_0) {
   self waittill("trigger");
   level.player._id_FD49[var_0.keyname] = var_0;
 
-  if(isDefined(level._id_FD49[var_0.keyname]._id_CB2B))
+  if(isDefined(level._id_FD49[var_0.keyname]._id_CB2B)) {
     scripts\engine\utility::flag_set(level._id_FD49[var_0.keyname]._id_CB2B);
+  }
 
   thread _id_0F05::_id_D0A5(var_0.keyname);
 
@@ -67,8 +70,9 @@ _id_E1B4() {
           thread scripts\sp\utility::play_sound_on_entity("sa_hack_finish");
           self._id_E1B3 = undefined;
 
-          if(isDefined(self._id_E99A) && self._id_E99A == 1)
+          if(isDefined(self._id_E99A) && self._id_E99A == 1) {
             _id_0F05::_id_12BD3();
+          }
 
           return 1;
         }

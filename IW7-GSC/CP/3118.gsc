@@ -4,27 +4,33 @@
 **************************************/
 
 zombiegreymayshoot(var_0) {
-  if(!isDefined(self.weapon))
+  if(!isDefined(self.weapon)) {
     return anim.failure;
+  }
 
-  if(isDefined(self.dontevershoot) && self.dontevershoot)
+  if(isDefined(self.dontevershoot) && self.dontevershoot) {
     return anim.failure;
+  }
 
-  if(!shouldshoot())
+  if(!shouldshoot()) {
     return anim.failure;
+  }
 
   return anim.success;
 }
 
 shouldshoot() {
-  if(isDefined(self.dontevershoot) && self.dontevershoot)
+  if(isDefined(self.dontevershoot) && self.dontevershoot) {
     return 0;
+  }
 
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return 0;
+  }
 
-  if(self.bulletsinclip == 0)
+  if(self.bulletsinclip == 0) {
     return 0;
+  }
 
   if(self cansee(self.enemy)) {
     scripts\anim\utility_common::dontgiveuponsuppressionyet();
@@ -36,36 +42,45 @@ shouldshoot() {
 }
 
 zombiegreyshouldmelee(var_0) {
-  if(!isgreymeleeallowed())
+  if(!isgreymeleeallowed()) {
     return anim.failure;
+  }
 
-  if(![[self.fnismeleevalid]](self.enemy, 1))
+  if(![[self.fnismeleevalid]](self.enemy, 1)) {
     return anim.failure;
+  }
 
   return anim.success;
 }
 
 isgreymeleeallowed(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = self.enemy;
+  }
 
-  if(isDefined(self.dontmelee))
+  if(isDefined(self.dontmelee)) {
     return 0;
+  }
 
-  if(isDefined(self.bt.cannotmelee))
+  if(isDefined(self.bt.cannotmelee)) {
     return 0;
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(isDefined(var_0.dontmelee))
+  if(isDefined(var_0.dontmelee)) {
     return 0;
+  }
 
-  if(isDefined(self._stealth) && !scripts\aitypes\melee::canmeleeduringstealth())
+  if(isDefined(self._stealth) && !scripts\aitypes\melee::canmeleeduringstealth()) {
     return 0;
+  }
 
-  if(gettime() < self.next_melee_time)
+  if(gettime() < self.next_melee_time) {
     return 0;
+  }
 
   return 1;
 }
@@ -127,17 +142,21 @@ zombiegreyinithealthregen(var_0) {
 }
 
 zombiegreyshouldduplicatingattack(var_0) {
-  if(!self.can_do_duplicating_attack)
+  if(!self.can_do_duplicating_attack) {
     return anim.failure;
+  }
 
-  if(scripts\engine\utility::is_true(self.i_am_clone))
+  if(scripts\engine\utility::is_true(self.i_am_clone)) {
     return anim.failure;
+  }
 
-  if(scripts\engine\utility::is_true(self.is_regening_health))
+  if(scripts\engine\utility::is_true(self.is_regening_health)) {
     return anim.failure;
+  }
 
-  if(scripts\engine\utility::is_true(self.doing_teleport_attack))
+  if(scripts\engine\utility::is_true(self.doing_teleport_attack)) {
     return anim.failure;
+  }
 
   if(self.health < self.trigger_clone_health) {
     setduplicatingattackdata(self, max(level.players.size, 2));
@@ -157,41 +176,51 @@ setduplicatingattackdata(var_0, var_1) {
 }
 
 zombiegreydoduplicatingattack(var_0) {
-  if(scripts\engine\utility::is_true(self.doing_duplicating_attack))
+  if(scripts\engine\utility::is_true(self.doing_duplicating_attack)) {
     return anim.running;
+  }
 
   return anim.failure;
 }
 
 zombiegreyshouldteleportattack(var_0) {
-  if(!scripts\engine\utility::is_true(self.can_do_teleport_attack))
+  if(!scripts\engine\utility::is_true(self.can_do_teleport_attack)) {
     return anim.failure;
+  }
 
-  if(scripts\engine\utility::is_true(self.i_am_clone))
+  if(scripts\engine\utility::is_true(self.i_am_clone)) {
     return anim.failure;
+  }
 
-  if(scripts\engine\utility::is_true(self.is_regening_health))
+  if(scripts\engine\utility::is_true(self.is_regening_health)) {
     return anim.failure;
+  }
 
-  if(scripts\engine\utility::is_true(self.doing_teleport_summon))
+  if(scripts\engine\utility::is_true(self.doing_teleport_summon)) {
     return anim.failure;
+  }
 
-  if(scripts\engine\utility::is_true(self.doing_teleport_dash))
+  if(scripts\engine\utility::is_true(self.doing_teleport_dash)) {
     return anim.failure;
+  }
 
-  if(isDefined(self.teleport_loner_target_player))
+  if(isDefined(self.teleport_loner_target_player)) {
     return anim.failure;
+  }
 
   var_1 = gettime();
 
-  if(var_1 < self.next_teleport_time)
+  if(var_1 < self.next_teleport_time) {
     return anim.failure;
+  }
 
-  if(var_1 < self.next_teleport_attack_time)
+  if(var_1 < self.next_teleport_attack_time) {
     return anim.failure;
+  }
 
-  if(var_1 < self.next_check_recent_damage_time)
+  if(var_1 < self.next_check_recent_damage_time) {
     return anim.failure;
+  }
 
   if(!meet_recent_damage_threshold_check(self)) {
     reset_recent_damage_data(self);
@@ -204,108 +233,133 @@ zombiegreyshouldteleportattack(var_0) {
 }
 
 zombiegreyshouldteleportsummon(var_0) {
-  if(!scripts\engine\utility::is_true(self.can_do_teleport_summon))
+  if(!scripts\engine\utility::is_true(self.can_do_teleport_summon)) {
     return anim.failure;
+  }
 
-  if(scripts\engine\utility::is_true(self.i_am_clone))
+  if(scripts\engine\utility::is_true(self.i_am_clone)) {
     return anim.failure;
+  }
 
-  if(scripts\engine\utility::is_true(self.doing_teleport_attack))
+  if(scripts\engine\utility::is_true(self.doing_teleport_attack)) {
     return anim.failure;
+  }
 
-  if(scripts\engine\utility::is_true(self.doing_teleport_dash))
+  if(scripts\engine\utility::is_true(self.doing_teleport_dash)) {
     return anim.failure;
+  }
 
-  if(scripts\engine\utility::is_true(self.is_regening_health))
+  if(scripts\engine\utility::is_true(self.is_regening_health)) {
     return anim.failure;
+  }
 
-  if(isDefined(self.teleport_loner_target_player))
+  if(isDefined(self.teleport_loner_target_player)) {
     return anim.failure;
+  }
 
   var_1 = gettime();
 
-  if(var_1 < self.next_teleport_time)
+  if(var_1 < self.next_teleport_time) {
     return anim.failure;
+  }
 
-  if(var_1 < self.next_teleport_summon_time)
+  if(var_1 < self.next_teleport_summon_time) {
     return anim.failure;
+  }
 
   self.doing_teleport_summon = 1;
   return anim.success;
 }
 
 zombiegreyshouldteleportdash(var_0) {
-  if(!scripts\engine\utility::is_true(self.can_do_teleport_dash))
+  if(!scripts\engine\utility::is_true(self.can_do_teleport_dash)) {
     return anim.failure;
+  }
 
-  if(scripts\engine\utility::is_true(self.i_am_clone))
+  if(scripts\engine\utility::is_true(self.i_am_clone)) {
     return anim.failure;
+  }
 
-  if(scripts\engine\utility::is_true(self.doing_teleport_attack))
+  if(scripts\engine\utility::is_true(self.doing_teleport_attack)) {
     return anim.failure;
+  }
 
-  if(scripts\engine\utility::is_true(self.doing_teleport_summon))
+  if(scripts\engine\utility::is_true(self.doing_teleport_summon)) {
     return anim.failure;
+  }
 
-  if(scripts\engine\utility::is_true(self.is_regening_health))
+  if(scripts\engine\utility::is_true(self.is_regening_health)) {
     return anim.failure;
+  }
 
-  if(isDefined(self.teleport_loner_target_player))
+  if(isDefined(self.teleport_loner_target_player)) {
     return anim.failure;
+  }
 
   var_1 = gettime();
 
-  if(var_1 < self.next_teleport_time)
+  if(var_1 < self.next_teleport_time) {
     return anim.failure;
+  }
 
-  if(var_1 < self.next_teleport_dash_time)
+  if(var_1 < self.next_teleport_dash_time) {
     return anim.failure;
+  }
 
-  if(isDefined(self.target_player) && distancesquared(self.origin, self.target_player.origin) > 1000000)
+  if(isDefined(self.target_player) && distancesquared(self.origin, self.target_player.origin) > 1000000) {
     return anim.failure;
+  }
 
   self.doing_teleport_dash = 1;
   return anim.success;
 }
 
 zombiegreydoteleportattack(var_0) {
-  if(scripts\engine\utility::is_true(self.doing_teleport_attack))
+  if(scripts\engine\utility::is_true(self.doing_teleport_attack)) {
     return anim.running;
+  }
 
   return anim.failure;
 }
 
 zombiegreydoteleportsummon(var_0) {
-  if(scripts\engine\utility::is_true(self.doing_teleport_summon))
+  if(scripts\engine\utility::is_true(self.doing_teleport_summon)) {
     return anim.running;
+  }
 
   return anim.failure;
 }
 
 zombiegreydoteleportdash(var_0) {
-  if(scripts\engine\utility::is_true(self.doing_teleport_dash))
+  if(scripts\engine\utility::is_true(self.doing_teleport_dash)) {
     return anim.running;
+  }
 
   return anim.failure;
 }
 
 zombiegreyshouldteleporttoloner(var_0) {
-  if(!scripts\engine\utility::is_true(self.can_do_teleport_to_loner))
+  if(!scripts\engine\utility::is_true(self.can_do_teleport_to_loner)) {
     return anim.failure;
+  }
 
-  if(scripts\engine\utility::is_true(self.i_am_clone))
+  if(scripts\engine\utility::is_true(self.i_am_clone)) {
     return anim.failure;
+  }
 
-  if(scripts\engine\utility::is_true(self.is_regening_health))
+  if(scripts\engine\utility::is_true(self.is_regening_health)) {
     return anim.failure;
+  }
 
-  if(scripts\engine\utility::is_true(self.doing_teleport_attack))
+  if(scripts\engine\utility::is_true(self.doing_teleport_attack)) {
     return anim.failure;
+  }
 
   var_1 = gettime();
 
-  if(var_1 < self.next_teleport_to_loner_time)
+  if(var_1 < self.next_teleport_to_loner_time) {
     return anim.failure;
+  }
 
   var_2 = getteleportlonertargetplayer(self);
 
@@ -319,8 +373,9 @@ zombiegreyshouldteleporttoloner(var_0) {
 }
 
 zombiegreydoteleporttoloner(var_0) {
-  if(isDefined(self.teleport_loner_target_player))
+  if(isDefined(self.teleport_loner_target_player)) {
     return anim.running;
+  }
 
   return anim.failure;
 }
@@ -329,8 +384,9 @@ getteleportlonertargetplayer(var_0) {
   var_1 = [];
 
   foreach(var_3 in level.players) {
-    if(!isDefined(var_3.num_teleport_loner_encountered))
+    if(!isDefined(var_3.num_teleport_loner_encountered)) {
       var_3.num_teleport_loner_encountered = 0;
+    }
 
     if(distancesquared(var_0.origin, var_3.origin) < 250000) {
       continue;
@@ -341,8 +397,9 @@ getteleportlonertargetplayer(var_0) {
     var_1[var_1.size] = var_3;
   }
 
-  if(var_1.size == 0)
+  if(var_1.size == 0) {
     return undefined;
+  }
 
   var_5 = undefined;
   var_6 = 999;
@@ -359,11 +416,13 @@ getteleportlonertargetplayer(var_0) {
 }
 
 zombiegreycheckhealthregen(var_0) {
-  if(scripts\engine\utility::is_true(self.i_am_clone))
+  if(scripts\engine\utility::is_true(self.i_am_clone)) {
     return anim.failure;
+  }
 
-  if(scripts\engine\utility::is_true(self.is_regening_health))
+  if(scripts\engine\utility::is_true(self.is_regening_health)) {
     return anim.running;
+  }
 
   return anim.failure;
 }
@@ -394,22 +453,27 @@ assigntargetplayer(var_0, var_1) {
 }
 
 ismeleevalid(var_0, var_1) {
-  if(distancesquared(self.origin, var_0.origin) > self.meleerangesq)
+  if(distancesquared(self.origin, var_0.origin) > self.meleerangesq) {
     return 0;
+  }
 
-  if(scripts\asm\asm_bb::bb_ismissingaleg())
+  if(scripts\asm\asm_bb::bb_ismissingaleg()) {
     return 0;
+  }
 
-  if(!scripts\aitypes\melee::ismeleevalid_common(var_0, var_1))
+  if(!scripts\aitypes\melee::ismeleevalid_common(var_0, var_1)) {
     return 0;
+  }
 
   var_2 = scripts\aitypes\melee::gettargetchargepos(var_0);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return 0;
+  }
 
-  if(!canmovefrompointtopoint(self.origin, var_2))
+  if(!canmovefrompointtopoint(self.origin, var_2)) {
     return 0;
+  }
 
   return 1;
 }
@@ -434,17 +498,19 @@ canmovefrompointtopoint(var_0, var_1) {
   var_2 = navtrace(var_0, var_1, self, 1);
   var_3 = var_2["fraction"];
 
-  if(var_3 >= self.acceptablemeleefraction)
+  if(var_3 >= self.acceptablemeleefraction) {
     var_4 = 0;
-  else
+  } else {
     var_4 = 1;
+  }
 
   return !var_4;
 }
 
 zombiegreyhasweapon(var_0) {
-  if(isDefined(self.weapon))
+  if(isDefined(self.weapon)) {
     return anim.success;
+  }
 
   return anim.failure;
 }
@@ -463,17 +529,21 @@ try_regen_health(var_0) {
 }
 
 can_regen_health(var_0) {
-  if(!scripts\engine\utility::is_true(var_0.can_do_health_regen))
+  if(!scripts\engine\utility::is_true(var_0.can_do_health_regen)) {
     return 0;
+  }
 
-  if(var_0.health > var_0.activate_health_regen_threshold)
+  if(var_0.health > var_0.activate_health_regen_threshold) {
     return 0;
+  }
 
-  if(isDefined(level.last_health_regen_time) && gettime() - level.last_health_regen_time < 50)
+  if(isDefined(level.last_health_regen_time) && gettime() - level.last_health_regen_time < 50) {
     return 0;
+  }
 
-  if(scripts\engine\utility::is_true(var_0.i_am_clone))
+  if(scripts\engine\utility::is_true(var_0.i_am_clone)) {
     return 0;
+  }
 
   return 1;
 }
@@ -492,8 +562,9 @@ regen_health_internal(var_0) {
   var_0.should_shock_wave = 0;
   var_0.alien_fuse_exposed = scripts\engine\utility::random(var_0.available_fuse);
 
-  if(isDefined(level.pre_grey_regen_func))
+  if(isDefined(level.pre_grey_regen_func)) {
     [[level.pre_grey_regen_func]](var_0);
+  }
 
   scripts\asm\zombie_grey\zombie_grey_asm::drop_max_ammo();
   var_0.health = var_0.maxhealth;
@@ -504,20 +575,23 @@ regen_health_internal(var_0) {
     process_stop_regen_health_action(var_0);
     var_0.should_shock_wave = 1;
 
-    if(isDefined(level.greygetmeleedamagedfunc))
+    if(isDefined(level.greygetmeleedamagedfunc)) {
       [[level.greygetmeleedamagedfunc]](var_0.melee_attacker, var_0.alien_fuse_exposed);
+    }
   }
 
   var_0.is_regening_health = 0;
   var_0.actually_doing_regen = 0;
 
-  if(isDefined(level.post_grey_regen_func))
+  if(isDefined(level.post_grey_regen_func)) {
     [[level.post_grey_regen_func]]();
+  }
 }
 
 process_stop_regen_health_action(var_0) {
-  if(!isDefined(var_0.num_of_times_stop_regen_health))
+  if(!isDefined(var_0.num_of_times_stop_regen_health)) {
     var_0.num_of_times_stop_regen_health = 0;
+  }
 
   var_0.num_of_times_stop_regen_health++;
 
@@ -529,11 +603,13 @@ process_stop_regen_health_action(var_0) {
 }
 
 meet_recent_damage_threshold_check(var_0) {
-  if(var_0.sum_of_recent_damage > 500)
+  if(var_0.sum_of_recent_damage > 500) {
     return 1;
+  }
 
-  if(var_0.recent_player_attackers.size >= 2)
+  if(var_0.recent_player_attackers.size >= 2) {
     return 1;
+  }
 
   return 0;
 }
@@ -578,18 +654,21 @@ set_next_teleport_to_loner_time(var_0) {
 greymeleevsplayer_init(var_0) {
   melee_init(var_0);
 
-  if(isDefined(self.fnmeleevsplayer_init))
+  if(isDefined(self.fnmeleevsplayer_init)) {
     self[[self.fnmeleevsplayer_init]](var_0);
+  }
 
   thread scripts\aitypes\melee::meleedeathhandler(self.enemy);
 }
 
 melee_init(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = self.enemy;
+  }
 
-  if(isDefined(self.melee))
+  if(isDefined(self.melee)) {
     scripts\aitypes\melee::melee_destroy();
+  }
 
   scripts\asm\asm_bb::bb_setmeleetarget(var_1);
   self.melee.taskid = var_0;
@@ -622,8 +701,9 @@ set_can_do_teleport_to_loner(var_0, var_1) {
 }
 
 deactivate_mobile_shields(var_0) {
-  foreach(var_2 in var_0.mobile_shields)
-  var_2 delete();
+  foreach(var_2 in var_0.mobile_shields) {
+    var_2 delete();
+  }
 
   var_0.mobile_shields = undefined;
 }
@@ -634,8 +714,9 @@ activate_mobile_shields(var_0) {
   var_0 waittill("shockwave_deploy");
   var_0.mobile_shields = [];
 
-  foreach(var_3, var_2 in level.players)
-  activate_mobile_shield_designated_for(var_2, var_0, 80 + var_3 * 20);
+  foreach(var_3, var_2 in level.players) {
+    activate_mobile_shield_designated_for(var_2, var_0, 80 + var_3 * 20);
+  }
 }
 
 activate_mobile_shield_designated_for(var_0, var_1, var_2) {
@@ -703,15 +784,16 @@ mobile_shield_visibility_monitor(var_0, var_1) {
   for(;;) {
     var_2 = check_is_in_front_of(var_1, var_0);
 
-    if(var_2 && scripts\engine\utility::is_true(var_0.is_shooting))
+    if(var_2 && scripts\engine\utility::is_true(var_0.is_shooting)) {
       var_1 hide();
-    else {
+    } else {
       var_3 = gettime();
 
-      if(var_3 < var_1.next_hide_time)
+      if(var_3 < var_1.next_hide_time) {
         var_1 show();
-      else
+      } else {
         var_1 hide();
+      }
     }
 
     scripts\engine\utility::waitframe();
@@ -750,8 +832,9 @@ try_update_mobile_shield(var_0, var_1) {
     return;
   }
   foreach(var_3 in var_0.mobile_shields) {
-    if(var_3.designated_player == var_1)
+    if(var_3.designated_player == var_1) {
       var_3 thread delay_update_next_hide_time(var_3);
+    }
   }
 }
 

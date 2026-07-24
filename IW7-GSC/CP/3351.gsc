@@ -43,8 +43,9 @@ killenemiesinfov() {
     if(var_13) {
       var_14 = distance2d(self.origin, var_12);
 
-      if(var_14 < var_2)
+      if(var_14 < var_2) {
         var_11 = 1;
+      }
     }
 
     if(var_11) {
@@ -58,8 +59,9 @@ killenemiesinfov() {
 }
 
 _id_9C0D(var_0) {
-  if(scripts\engine\utility::is_true(var_0._id_9342))
+  if(scripts\engine\utility::is_true(var_0._id_9342)) {
     return 1;
+  }
 
   return 0;
 }
@@ -67,8 +69,9 @@ _id_9C0D(var_0) {
 killrepulsorvictim(var_0, var_1, var_2, var_3) {
   self.do_immediate_ragdoll = 1;
 
-  if(var_1 >= self.health)
+  if(var_1 >= self.health) {
     self.customdeath = 1;
+  }
 
   self dodamage(var_1, var_2, var_0, var_0, "MOD_IMPACT", "zom_repulsor_mp");
 }

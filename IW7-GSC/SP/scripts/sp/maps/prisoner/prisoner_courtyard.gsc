@@ -45,8 +45,9 @@ _id_D704() {
   thread _id_6F6A();
   thread _id_6F6F();
 
-  if(getdvarint("disable_floodlight_scripts") == 0)
+  if(getdvarint("disable_floodlight_scripts") == 0) {
     level._id_6F60.light setlightintensity(0);
+  }
 
   scripts\sp\utility::_id_22C7(scripts\sp\utility::_id_77DF("enemy_c8"), ::_id_10893);
 }
@@ -59,8 +60,9 @@ _id_10893() {
 _id_4064() {
   var_0 = ["enemy_courtyard", "enemy_c8", "enemy_courtyard_c6", "enemy_courtyard_finalrunner", "enemy_courtyard_initial", "enemy_courtyard_suppress", "enemy_terrace", "enemy_terrace_sniper", "enemy_churchroad", "enemy_churchroad_final"];
 
-  foreach(var_2 in var_0)
-  scripts\engine\utility::array_call(scripts\sp\utility::_id_77DA(var_2), ::delete);
+  foreach(var_2 in var_0) {
+    scripts\engine\utility::array_call(scripts\sp\utility::_id_77DA(var_2), ::delete);
+  }
 }
 
 _id_10C05() {
@@ -105,8 +107,9 @@ _id_B1BD() {
   thread scripts\sp\maps\prisoner\prisoner_util::_id_6E55("flag_retreat_cy_0", scripts\sp\utility::_id_15F3, "trig_backfill_courtyard_1");
   var_0 connectpaths();
 
-  foreach(var_4 in getEntArray("trig_bagshop_spawners", "script_noteworthy"))
-  var_0 thread scripts\sp\maps\prisoner\prisoner_util::_id_127B1(var_4, ::disconnect_paths, undefined, "flag_retreat_cy_2");
+  foreach(var_4 in getEntArray("trig_bagshop_spawners", "script_noteworthy")) {
+    var_0 thread scripts\sp\maps\prisoner\prisoner_util::_id_127B1(var_4, ::disconnect_paths, undefined, "flag_retreat_cy_2");
+  }
 
   thread scripts\sp\maps\prisoner\prisoner_util::_id_6E55("flag_retreat_cy_1", scripts\sp\utility::_id_15F3, "trig_backfill_courtyard_2");
   thread scripts\sp\maps\prisoner\prisoner_util::_id_6E55("flag_retreat_cy_3", scripts\sp\utility::_id_15F3, "trig_backfill_courtyard_mid");
@@ -126,8 +129,9 @@ _id_B1BD() {
 _id_108A5() {
   self.maxfaceenemydist = 512;
 
-  if(!scripts\engine\utility::flag("flag_retreat_cy_0"))
+  if(!scripts\engine\utility::flag("flag_retreat_cy_0")) {
     thread _id_4CD6();
+  }
 
   if(self._id_ECE7 == "enemy_courtyard_initial") {
     self endon("death");
@@ -161,15 +165,17 @@ _id_4CD6() {
 _id_1178B() {
   level endon("flag_retreat_cy_0");
 
-  while(scripts\sp\utility::_id_77DD("enemy_courtyard_initial") > 2)
+  while(scripts\sp\utility::_id_77DD("enemy_courtyard_initial") > 2) {
     wait 1;
+  }
 }
 
 _id_108A6(var_0) {
   self endon("death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self[[var_0]]();
+  }
 
   scripts\engine\utility::flag_wait("flag_retreat_cy_0");
   scripts\sp\utility::_id_D282();
@@ -187,10 +193,11 @@ _id_108AE() {
   self._id_1FBB = self.script_parameters;
   scripts\sp\utility::_id_F2D8(0.5);
 
-  if(issubstr(self.script_parameters, "van2"))
+  if(issubstr(self.script_parameters, "van2")) {
     level._id_6F71 waittill("flowershop_scene");
-  else
+  } else {
     level waittill("notify_start_van_scene");
+  }
 
   self._id_C012 = undefined;
   thread _id_4D50();
@@ -202,8 +209,9 @@ _id_108AE() {
     if(issubstr(self._id_EE52, "vol")) {
       thread scripts\sp\utility::_id_7226(getEnt(self._id_EE52, "targetname"));
 
-      if(!issubstr(self._id_EE52, "flowershop"))
+      if(!issubstr(self._id_EE52, "flowershop")) {
         thread _id_4CD6();
+      }
     } else
       thread scripts\sp\utility::_id_7226(getnode(self._id_EE52, "targetname"));
   }
@@ -269,15 +277,17 @@ _id_46FC(var_0) {
   thread _id_9251();
   scripts\engine\utility::flag_wait("flag_flowershop_van_scene");
 
-  while(!scripts\engine\utility::flag("flag_cy_spawn_jeeps") && !level.player scripts\sp\utility::_id_D1DF(var_0.origin, 0.5))
+  while(!scripts\engine\utility::flag("flag_cy_spawn_jeeps") && !level.player scripts\sp\utility::_id_D1DF(var_0.origin, 0.5)) {
     scripts\engine\utility::waitframe();
+  }
 
   level notify("notify_start_van_scene");
   var_4 playSound("scn_courtyard_van_drive_off");
   thread _id_FE86();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     _id_0E29::_id_87D0(var_1);
+  }
 
   foreach(var_6 in var_2) {
     if(issubstr(var_6.script_parameters, "van1")) {
@@ -308,15 +318,17 @@ _id_46FC(var_0) {
 _id_1315C() {
   var_0 = "";
 
-  while(var_0 != "flareup")
+  while(var_0 != "flareup") {
     self waittill("scriptableNotification", var_0);
+  }
 
   self._id_5F1A = magicgrenade("car_grenade", self.origin + (0, 0, 10), self.origin, 9999, 0);
   self._id_5F1A._id_C182 = 1;
   self._id_5F1A makeunusable();
 
-  while(var_0 != "vehicle_death")
+  while(var_0 != "vehicle_death") {
     self waittill("scriptableNotification", var_0);
+  }
 
   self._id_5F1A delete();
 }
@@ -368,8 +380,9 @@ _id_FE86() {
   wait 0.75;
   scripts\engine\utility::flag_set("flag_flowershop_light_fixture_broke");
 
-  if(getdvarint("disable_floodlight_scripts") == 0)
+  if(getdvarint("disable_floodlight_scripts") == 0) {
     thread _id_6F60();
+  }
 
   var_0 = scripts\engine\utility::getStructArray("struct_flowerhsop_fakefire", "script_noteworthy");
   wait 0.5;
@@ -612,8 +625,9 @@ _id_68A5() {
   stopFXOnTag(scripts\engine\utility::getfx("tag_light_front_right"), var_0, "TAG_LIGHT_FRONT_RIGHT");
   stopFXOnTag(scripts\engine\utility::getfx("tag_light_front_left"), var_0, "TAG_LIGHT_FRONT_LEFT");
 
-  for(var_4 = 0; var_4 < var_3.size; var_4++)
+  for(var_4 = 0; var_4 < var_3.size; var_4++) {
     var_5 = getnode(var_3[var_4].target, "targetname");
+  }
 }
 
 _id_108C7() {}
@@ -622,8 +636,9 @@ _id_68A6() {
   var_0 = scripts\engine\utility::getStruct("struct_terrace_window_direction2", "targetname");
   var_1 = squared(1000);
 
-  while(!level.player scripts\sp\utility::_id_D1DF(var_0.origin) && distancesquared(var_0.origin, level.player.origin) > var_1)
+  while(!level.player scripts\sp\utility::_id_D1DF(var_0.origin) && distancesquared(var_0.origin, level.player.origin) > var_1) {
     wait 0.1;
+  }
 
   scripts\sp\utility::_id_15F3("eventtrig_terrace_window");
   scripts\engine\utility::delaythread(1, ::_id_C622);
@@ -871,10 +886,11 @@ _id_108A4() {
 }
 
 _id_3F5A() {
-  if(!isDefined(level._id_3F5B))
+  if(!isDefined(level._id_3F5B)) {
     level._id_3F5B = 0;
-  else if(level._id_3F5B >= 3)
+  } else if(level._id_3F5B >= 3) {
     thread scripts\sp\utility::_id_1938([self], 1500);
+  }
 
   level._id_3F5B++;
 }
@@ -966,11 +982,13 @@ _id_3F62() {
   thread scripts\engine\utility::flag_set_delayed("hvt_road_timer", 3);
   var_2 = cos(25);
 
-  while(!scripts\engine\utility::flag("hvt_road_timer") && !scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), level._id_920F.origin + (0, 0, 102), var_2))
+  while(!scripts\engine\utility::flag("hvt_road_timer") && !scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), level._id_920F.origin + (0, 0, 102), var_2)) {
     scripts\engine\utility::waitframe();
+  }
 
-  if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), level._id_920F.origin + (0, 0, 102), var_2))
+  if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), level._id_920F.origin + (0, 0, 102), var_2)) {
     level.player thread scripts\sp\utility::_id_1034D("prisoner_plr_thereheis");
+  }
 
   level._id_920F setgoalpos(level.hvt_dumpster_node.origin);
   level._id_920F waittill("goal");
@@ -1061,8 +1079,9 @@ _id_1294F() {
   var_0 = getEntArray("church_ext_light", "targetname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "church_entrance_light")
+    if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "church_entrance_light") {
       var_2 _meth_8300(5);
+    }
   }
 }
 
@@ -1073,8 +1092,9 @@ _id_3F63() {
   scripts\engine\utility::flag_wait("church_runin_scene_guy1_inposition");
   level._id_3F4C scripts\sp\anim::_id_1F27([level._id_920F], "church_entrance_door_enter", 2);
 
-  if(!scripts\engine\utility::flag("church_runin_scene_guy1_startclose") && !scripts\engine\utility::flag("church_runin_scene_closing_door_early"))
+  if(!scripts\engine\utility::flag("church_runin_scene_guy1_startclose") && !scripts\engine\utility::flag("church_runin_scene_closing_door_early")) {
     thread _id_3F58();
+  }
 
   if(isalive(level._id_3F4D)) {
     scripts\engine\utility::flag_set("church_runin_scene_guy2_wentAI");
@@ -1091,8 +1111,9 @@ _id_3F64() {
   scripts\engine\utility::flag_set("church_runin_scene_guy2_dead");
   scripts\engine\utility::flag_wait("church_runin_scene_guy1_inposition");
 
-  if(!scripts\engine\utility::flag("church_runin_scene_guy1_startclose") && !scripts\engine\utility::flag("church_runin_scene_closing_door_early"))
+  if(!scripts\engine\utility::flag("church_runin_scene_guy1_startclose") && !scripts\engine\utility::flag("church_runin_scene_closing_door_early")) {
     thread _id_3F58();
+  }
 }
 
 _id_3F58() {
@@ -1121,10 +1142,11 @@ _id_6F69() {
     var_0 = _id_0E29::_id_87A7();
 
     if(var_0 == "end") {
-      if(level.player_was_in_cull_zone)
+      if(level.player_was_in_cull_zone) {
         setculldist(1500);
-      else
+      } else {
         setculldist(0);
+      }
 
       thread _id_6F6C();
       return;

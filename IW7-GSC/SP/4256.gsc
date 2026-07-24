@@ -138,11 +138,13 @@ main() {
 }
 
 _id_13351(var_0, var_1) {
-  if(!isarray(level._id_1290))
+  if(!isarray(level._id_1290)) {
     level._id_1290 = [];
+  }
 
-  if(!isDefined(level._id_1290[var_0]))
+  if(!isDefined(level._id_1290[var_0])) {
     level._id_1290[var_0] = 0;
+  }
 
   if(scripts\engine\utility::is_true(var_1) && !level._id_1290[var_0]) {
     scripts\engine\utility::exploder(var_0);
@@ -261,8 +263,9 @@ _id_13350(var_0, var_1, var_2) {
     var_1 show();
 
     if(isDefined(var_2)) {
-      if(randomfloat(100) <= 25)
+      if(randomfloat(100) <= 25) {
         scripts\engine\utility::exploder(var_2);
+      }
     }
 
     wait(randomfloatrange(0.1, 0.2));
@@ -282,8 +285,9 @@ _id_132FD() {
   self waittillmatch("single anim", "vfx_intro_pop1");
   scripts\engine\utility::exploder("vfx_int_dmg_pop1");
 
-  foreach(var_6 in var_0)
-  thread _id_13350(var_6, var_2, undefined);
+  foreach(var_6 in var_0) {
+    thread _id_13350(var_6, var_2, undefined);
+  }
 
   self waittillmatch("single anim", "vfx_intro_pop2");
   scripts\engine\utility::exploder("vfx_int_dmg_pop2");
@@ -320,8 +324,9 @@ _id_132FF() {
 
   foreach(var_2 in var_0) {
     if(isarray(var_2)) {
-      foreach(var_4 in var_2)
-      var_4 hide();
+      foreach(var_4 in var_2) {
+        var_4 hide();
+      }
 
       continue;
     }
@@ -394,17 +399,17 @@ _id_D6FE(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_D6FF(var_0, var_1, var_2) {
-  if(var_1 <= 0)
+  if(var_1 <= 0) {
     setsaveddvar("r_mbRadialOverrideDistortion", var_0);
-  else {
+  } else {
     thread scripts\sp\utility::_id_AB9A("r_mbRadialOverrideDistortion", var_0, var_1);
     wait(var_1);
   }
 
   if(var_2 >= 0) {
-    if(var_2 == 0)
+    if(var_2 == 0) {
       setsaveddvar("r_mbRadialOverrideDistortion", 0);
-    else {
+    } else {
       thread scripts\sp\utility::_id_AB9A("r_mbRadialOverrideDistortion", 0, var_2);
       wait(var_2);
     }
@@ -438,8 +443,9 @@ _id_13365(var_0) {
 _id_13367() {
   self endon("death");
 
-  while(!scripts\sp\utility::_id_65DF("stealth_override_goal"))
+  while(!scripts\sp\utility::_id_65DF("stealth_override_goal")) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\sp\utility::_id_65E3("stealth_override_goal");
   _id_13365(self);
@@ -551,8 +557,9 @@ _id_132DB() {
 
 _id_132DE(var_0) {
   foreach(var_2 in self._id_132D7) {
-    if(var_2._id_2A36 == var_0)
+    if(var_2._id_2A36 == var_0) {
       return 1;
+    }
   }
 
   return 0;
@@ -578,8 +585,9 @@ _id_132D8() {
   self waittill("destroyed");
   level._id_132D6 = level._id_132D6 + 2;
 
-  if(level._id_132D6 > level._id_1333C)
+  if(level._id_132D6 > level._id_1333C) {
     level._id_132D6 = level._id_1333C;
+  }
 
   stopFXOnTag(scripts\engine\utility::getfx("vfx_yard_magnet_loop"), self, "tag_origin");
   playFXOnTag(scripts\engine\utility::getfx("vfx_yard_magnet_death"), self, "tag_origin");
@@ -588,8 +596,9 @@ _id_132D8() {
   screenshake(level.player.origin, var_1, var_1, 0, var_0, 0, var_0 * 0.5, 0, 15, 15);
   level.player playRumbleOnEntity("damage_heavy");
 
-  if(isDefined(self._id_132DC))
+  if(isDefined(self._id_132DC)) {
     self._id_132DC delete();
+  }
 
   if(isDefined(self._id_132D7)) {
     foreach(var_3 in self._id_132D7) {
@@ -657,7 +666,7 @@ _id_132F2() {
 
         if(var_10["fraction"] < 1) {
           if(var_3 >= self._id_2A1B.size) {
-            self._id_2A1B[var_3] = scripts\engine\utility::spawn_tag_origin();
+            self._id_2A1B[var_3] = ::scripts\engine\utility::spawn_tag_origin();
             self._id_2A1B[var_3].end = scripts\engine\utility::spawn_tag_origin();
             self._id_2A1B[var_3]._id_2A19 = playfxontagsbetweenclients(scripts\engine\utility::getfx("vfx_yard_column_beam"), self._id_2A1B[var_3], "tag_origin", self._id_2A1B[var_3].end, "tag_origin");
           }
@@ -753,6 +762,7 @@ _id_13346() {
   level waittill("vfx_tram_lights_off");
   stopFXOnTag(scripts\engine\utility::getfx("vfx_yard_tram_light"), self, "tag_origin");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }

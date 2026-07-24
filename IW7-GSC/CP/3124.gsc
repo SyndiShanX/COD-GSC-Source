@@ -61,18 +61,21 @@ _id_FFFA(var_0, var_1, var_2, var_3) {
 }
 
 isdepot(var_0) {
-  if(var_0 == "deserteagle")
+  if(var_0 == "deserteagle") {
     return 1;
+  }
 
   return 0;
 }
 
 _id_9D59(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(distance(self.origin, var_0.origin) > var_1)
+  if(distance(self.origin, var_0.origin) > var_1) {
     return 0;
+  }
 
   return 1;
 }

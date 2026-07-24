@@ -4,33 +4,37 @@
 **************************************/
 
 _id_7F84() {
-  if(isDefined(level._id_30E1))
+  if(isDefined(level._id_30E1)) {
     return level._id_30E1;
-  else {}
+  } else {}
 }
 
 _id_7E0E(var_0) {
   if(isDefined(level._id_30E1)) {
     if(isDefined(level._id_30E1._id_1684)) {
-      if(isDefined(level._id_30E1._id_1684[var_0]))
+      if(isDefined(level._id_30E1._id_1684[var_0])) {
         return level._id_30E1._id_1684[var_0];
+      }
     }
   }
 }
 
 _id_179B(var_0) {
-  if(isDefined(level._id_30E1._id_1684))
+  if(isDefined(level._id_30E1._id_1684)) {
     level._id_30E1._id_1684 = scripts\engine\utility::array_add(level._id_30E1._id_1684, var_0);
+  }
 }
 
 _id_181A(var_0) {
-  if(isDefined(level._id_30E1._id_DD3B))
+  if(isDefined(level._id_30E1._id_DD3B)) {
     level._id_30E1._id_DD3B = scripts\engine\utility::array_add(level._id_30E1._id_DD3B, var_0);
+  }
 }
 
 addspeaker(var_0, var_1) {
-  if(isDefined(level._id_30E1.speakers))
+  if(isDefined(level._id_30E1.speakers)) {
     level._id_30E1.speakers[var_0] = var_1;
+  }
 }
 
 _id_984C(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -45,30 +49,35 @@ _id_984C(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_984A() {
-  if(!scripts\engine\utility::flag_exist("broadcast_started"))
+  if(!scripts\engine\utility::flag_exist("broadcast_started")) {
     scripts\engine\utility::flag_init("broadcast_started");
-  else
+  } else {
     scripts\engine\utility::flag_clear("broadcast_started");
+  }
 
-  if(!scripts\engine\utility::flag_exist("broadcast_complete"))
+  if(!scripts\engine\utility::flag_exist("broadcast_complete")) {
     scripts\engine\utility::flag_init("broadcast_complete");
-  else
+  } else {
     scripts\engine\utility::flag_clear("broadcast_complete");
+  }
 
-  if(!scripts\engine\utility::flag_exist("broadcast_setup_complete"))
+  if(!scripts\engine\utility::flag_exist("broadcast_setup_complete")) {
     scripts\engine\utility::flag_init("broadcast_setup_complete");
-  else
+  } else {
     scripts\engine\utility::flag_clear("broadcast_setup_complete");
+  }
 
-  if(!scripts\engine\utility::flag_exist("broadcast_postfunc_complete"))
+  if(!scripts\engine\utility::flag_exist("broadcast_postfunc_complete")) {
     scripts\engine\utility::flag_init("broadcast_postfunc_complete");
-  else
+  } else {
     scripts\engine\utility::flag_clear("broadcast_postfunc_complete");
+  }
 }
 
 _id_7881() {
-  if(isDefined(level._id_30E1) && isDefined(level._id_30E1._id_1FBD))
+  if(isDefined(level._id_30E1) && isDefined(level._id_30E1._id_1FBD)) {
     return level._id_30E1._id_1FBD;
+  }
 }
 
 _id_48AC(var_0) {
@@ -114,18 +123,20 @@ _id_1075F(var_0, var_1) {
 }
 
 _id_7880() {
-  if(isDefined(self._id_10880))
+  if(isDefined(self._id_10880)) {
     return self._id_10880;
-  else
+  } else {
     return "spawner_interior";
+  }
 }
 
 _id_787F() {
   if(isDefined(self.gender)) {
-    if(self.gender == "female")
+    if(self.gender == "female") {
       var_0 = _id_0EF8::_id_FDFD;
-    else
+    } else {
       var_0 = _id_0EF8::_id_FE01;
+    }
   } else
     var_0 = _id_0EF8::_id_FE01;
 
@@ -141,22 +152,24 @@ _id_23BE(var_0) {
 }
 
 _id_23BD(var_0) {
-  if(isDefined(var_0._id_1FBB))
+  if(isDefined(var_0._id_1FBB)) {
     self._id_1FBB = var_0._id_1FBB;
-  else {}
+  } else {}
 }
 
 _id_23D4(var_0) {
-  if(isDefined(var_0._id_DD4D))
+  if(isDefined(var_0._id_DD4D)) {
     self._id_DD4D = var_0._id_DD4D;
+  }
 }
 
 _id_23BF(var_0) {
   if(isDefined(var_0._id_C6B3)) {
     var_1 = getEnt(var_0._id_C6B3, "targetname");
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       self._id_C6B3 = var_1;
+    }
   }
 }
 
@@ -165,8 +178,9 @@ _id_23C0(var_0) {
 }
 
 _id_23C1(var_0) {
-  if(isDefined(var_0._id_DD42))
+  if(isDefined(var_0._id_DD42)) {
     self._id_DD42 = var_0._id_DD42;
+  }
 }
 
 _id_4047(var_0) {
@@ -200,16 +214,18 @@ _id_CCA1() {
 
 _id_CCB2() {
   if(!scripts\engine\utility::flag("broadcast_started")) {
-    foreach(var_1 in level._id_30E1._id_1684)
-    var_1 thread _id_CCB6();
+    foreach(var_1 in level._id_30E1._id_1684) {
+      var_1 thread _id_CCB6();
+    }
   }
 }
 
 _id_CCB6() {
   self endon("death");
 
-  if(_id_0EE4::_id_1FA3("broadcast_scene") && !scripts\engine\utility::flag("broadcast_started"))
+  if(_id_0EE4::_id_1FA3("broadcast_scene") && !scripts\engine\utility::flag("broadcast_started")) {
     _id_CC67();
+  }
 
   _id_CC68();
 }
@@ -220,8 +236,9 @@ _id_CC67() {
   level endon("early_end_broadcast");
   self clearanim(%root, 0);
 
-  if(!isDefined(self._id_9B89))
+  if(!isDefined(self._id_9B89)) {
     self animmode("noclip");
+  }
 
   level._id_30E1._id_1FBD thread scripts\sp\anim::_id_1F35(self, "broadcast_scene");
   var_0 = getanimlength(scripts\sp\utility::_id_7DC1("broadcast_scene"));
@@ -263,15 +280,16 @@ _id_492F() {
         continue;
       }
 
-      var_0[var_2._id_DD42] = scripts\engine\utility::array_add(var_0[var_2._id_DD42], var_2);
+      var_0[var_2._id_DD42] = ::scripts\engine\utility::array_add(var_0[var_2._id_DD42], var_2);
     }
   }
 
   foreach(var_5 in var_0) {
     var_6 = [];
 
-    foreach(var_2 in var_5)
-    var_6 = scripts\engine\utility::array_add(var_6, var_2._id_DD4D);
+    foreach(var_2 in var_5) {
+      var_6 = scripts\engine\utility::array_add(var_6, var_2._id_DD4D);
+    }
 
     _id_0EE5::_id_2032(var_5, var_6);
   }
@@ -283,8 +301,9 @@ _id_30D8(var_0) {
 }
 
 _id_CCB3() {
-  if(level.script == "shipcrib_europa")
+  if(level.script == "shipcrib_europa") {
     wait 0.75;
+  }
 
   if(!scripts\engine\utility::flag("broadcast_started")) {
     stopcinematicingame();
@@ -317,8 +336,9 @@ _id_13647(var_0) {
   if(var_0 == "sc_assault_world_newscast_vips" || var_0 == "sc_assault_world_newscast_empambush" || var_0 == "sc_assault_world_newscast_wounded" || var_0 == "sc_rogue_world_newscast") {
     var_1 = _id_7881();
 
-    while(!var_1 scripts\sp\interaction_manager::_id_9EED(600))
+    while(!var_1 scripts\sp\interaction_manager::_id_9EED(600)) {
       scripts\engine\utility::waitframe();
+    }
   }
 }
 
@@ -326,8 +346,9 @@ _id_13646() {
   level endon("broadcast_complete");
   var_0 = _id_7881();
 
-  while(isDefined(var_0) && !var_0 scripts\sp\interaction_manager::_id_9EED(600))
+  while(isDefined(var_0) && !var_0 scripts\sp\interaction_manager::_id_9EED(600)) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\sp\utility::_id_834F("NEWSCAST");
 }
@@ -365,8 +386,9 @@ _id_62BF() {
 }
 
 _id_40C2() {
-  if(isDefined(level._id_30E1))
+  if(isDefined(level._id_30E1)) {
     thread _id_E817();
+  }
 }
 
 _id_E817() {
@@ -385,8 +407,9 @@ _id_10FCC() {
 
 _id_405B() {
   if(isDefined(level._id_30E1._id_1684)) {
-    foreach(var_1 in level._id_30E1._id_1684)
-    _id_0EFB::_id_FDBA(var_1);
+    foreach(var_1 in level._id_30E1._id_1684) {
+      _id_0EFB::_id_FDBA(var_1);
+    }
 
     level._id_30E1._id_1684 = undefined;
   }
@@ -394,8 +417,9 @@ _id_405B() {
 
 _id_405C() {
   if(isDefined(level._id_30E1._id_2AE5) && isDefined(level._id_30E1._id_10F99)) {
-    if(!scripts\engine\utility::flag("broadcast_started"))
+    if(!scripts\engine\utility::flag("broadcast_started")) {
       _id_8E70();
+    }
   }
 }
 
@@ -409,19 +433,22 @@ _id_405E() {
 
 _id_13744() {
   if(!scripts\engine\utility::flag("broadcast_complete")) {
-    while(!iscinematicplaying())
+    while(!iscinematicplaying()) {
       scripts\engine\utility::waitframe();
+    }
 
-    while(iscinematicplaying())
+    while(iscinematicplaying()) {
       scripts\engine\utility::waitframe();
+    }
   }
 
   level notify("broadcast_cinematic_complete");
 }
 
 _id_30DC(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     scripts\engine\utility::flag_wait(var_0);
+  }
 
   _id_0EDD::_id_5552();
   _id_0EDD::_id_5553();

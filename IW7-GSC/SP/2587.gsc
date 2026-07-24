@@ -8,8 +8,9 @@ _id_2980(var_0, var_1) {
 }
 
 _id_2927(var_0) {
-  if(isDefined(self._blackboard._id_1FC7) && isDefined(self._blackboard._id_1FC7[var_0]))
+  if(isDefined(self._blackboard._id_1FC7) && isDefined(self._blackboard._id_1FC7[var_0])) {
     return self._blackboard._id_1FC7[var_0];
+  }
 
   return undefined;
 }
@@ -17,18 +18,21 @@ _id_2927(var_0) {
 _id_2928(var_0) {
   var_1 = _id_2927(var_0);
 
-  if(isDefined(var_1) && var_1.size > 0)
+  if(isDefined(var_1) && var_1.size > 0) {
     return var_1 + "_";
+  }
 
   return undefined;
 }
 
 bb_wantstostrafe() {
-  if(isDefined(self._blackboard.meleerequested) && self._blackboard.meleerequested)
+  if(isDefined(self._blackboard.meleerequested) && self._blackboard.meleerequested) {
     return 1;
+  }
 
-  if(isDefined(self._blackboard.bwantstostrafe))
+  if(isDefined(self._blackboard.bwantstostrafe)) {
     return self._blackboard.bwantstostrafe;
+  }
 
   return 0;
 }
@@ -54,8 +58,9 @@ bb_setisincombat(var_0) {
 }
 
 bb_isincombat() {
-  if(isDefined(self._blackboard._id_2B11))
+  if(isDefined(self._blackboard._id_2B11)) {
     return self._blackboard._id_2B11;
+  }
 
   return 0;
 }
@@ -65,13 +70,15 @@ bb_isweaponclass(var_0, var_1, var_2, var_3) {
 }
 
 bb_shoulddroprocketlauncher(var_0, var_1, var_2, var_3) {
-  if(scripts\engine\utility::weaponclass(self.weapon) != "rocketlauncher")
+  if(scripts\engine\utility::weaponclass(self.weapon) != "rocketlauncher") {
     return 0;
+  }
 
   var_4 = bb_getrequestedweapon();
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
   return var_4 != "rocketlauncher";
 }
@@ -95,8 +102,9 @@ bb_movetyperequested(var_0) {
 bb_requestmovetype(var_0) {
   self._blackboard.movetype = var_0;
 
-  if(var_0 == "cqb")
+  if(var_0 == "cqb") {
     self.asm._id_13CAF = 0;
+  }
 }
 
 bb_requestweapon(var_0) {
@@ -112,34 +120,39 @@ bb_getrequestedweapon() {
 }
 
 bb_requestreload(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     self._blackboard.breload = 1;
-  else
+  } else {
     self._blackboard.breload = var_0;
+  }
 }
 
 bb_reloadrequested() {
-  if(isDefined(self._blackboard.breload))
+  if(isDefined(self._blackboard.breload)) {
     return self._blackboard.breload;
+  }
 
   return 0;
 }
 
 bb_requestthrowgrenade(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     self._blackboard.bthrowgrenade = 1;
-  else
+  } else {
     self._blackboard.bthrowgrenade = var_0;
+  }
 
-  if(self._blackboard.bthrowgrenade)
+  if(self._blackboard.bthrowgrenade) {
     self._blackboard.throwgrenadetarget = var_1;
-  else
+  } else {
     self._blackboard.throwgrenadetarget = undefined;
+  }
 }
 
 bb_throwgrenaderequested() {
-  if(isDefined(self._blackboard.bthrowgrenade))
+  if(isDefined(self._blackboard.bthrowgrenade)) {
     return self._blackboard.bthrowgrenade && isDefined(self._blackboard.throwgrenadetarget);
+  }
 
   return 0;
 }
@@ -149,20 +162,23 @@ bb_getthrowgrenadetarget() {
 }
 
 bb_requestfire(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     self._blackboard.bfire = 1;
-  else
+  } else {
     self._blackboard.bfire = var_0;
+  }
 
-  if(self._blackboard.bfire)
+  if(self._blackboard.bfire) {
     self._blackboard._id_1182F = var_1;
-  else
+  } else {
     self._blackboard._id_1182F = undefined;
+  }
 }
 
 _id_298B() {
-  if(isDefined(self._blackboard.bfire))
+  if(isDefined(self._blackboard.bfire)) {
     return self._blackboard.bfire && isDefined(self._blackboard._id_1182F);
+  }
 
   return 0;
 }
@@ -172,15 +188,17 @@ _id_2931() {
 }
 
 bb_requestfire(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     self._blackboard._id_2AA6 = 1;
-  else
+  } else {
     self._blackboard._id_2AA6 = var_0;
+  }
 }
 
 _id_291C() {
-  if(isDefined(self._blackboard._id_2AA6))
+  if(isDefined(self._blackboard._id_2AA6)) {
     return self._blackboard._id_2AA6;
+  }
 
   return 0;
 }
@@ -191,23 +209,27 @@ bb_setshootparams(var_0, var_1) {
   if(isDefined(var_0)) {
     self._blackboard.shootparams.target = var_1;
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       self._blackboard.shootparams._id_3137 = 1;
-    else
+    } else {
       self._blackboard.shootparams._id_3137 = undefined;
+    }
   }
 }
 
 _id_2985() {
   if(isDefined(self._blackboard.shootparams)) {
-    if(isDefined(self._id_FED1) && isDefined(self._blackboard.shootparams.pos))
+    if(isDefined(self._id_FED1) && isDefined(self._blackboard.shootparams.pos)) {
       return 1;
+    }
 
-    if(isDefined(self.dontevershoot) && self.dontevershoot)
+    if(isDefined(self.dontevershoot) && self.dontevershoot) {
       return 0;
+    }
 
-    if(isDefined(self._blackboard.shootparams.target) && isDefined(self.enemy) && self.enemy == self._blackboard.shootparams.target)
+    if(isDefined(self._blackboard.shootparams.target) && isDefined(self.enemy) && self.enemy == self._blackboard.shootparams.target) {
       return scripts\engine\utility::_id_9DA3();
+    }
   }
 
   return 0;
@@ -218,8 +240,9 @@ _id_2961(var_0) {
 }
 
 bb_getrequestedcoverstate() {
-  if(!isDefined(self._blackboard.coverstate))
+  if(!isDefined(self._blackboard.coverstate)) {
     return "none";
+  }
 
   return self._blackboard.coverstate;
 }
@@ -274,8 +297,9 @@ bb_getcovernode() {
 }
 
 bb_getrequestedturret() {
-  if(isDefined(self._blackboard.requestedturret))
+  if(isDefined(self._blackboard.requestedturret)) {
     return self._blackboard.requestedturret;
+  }
 
   return undefined;
 }
@@ -293,20 +317,25 @@ bb_hasshufflenode(var_0, var_1, var_2, var_3) {
 }
 
 _id_2936(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self._blackboard.shufflenode))
+  if(!isDefined(self._blackboard.shufflenode)) {
     return 0;
+  }
 
-  if(!isDefined(self.node))
+  if(!isDefined(self.node)) {
     return 0;
+  }
 
-  if(self._blackboard.shufflenode != self.node)
+  if(self._blackboard.shufflenode != self.node) {
     return 0;
+  }
 
-  if(distancesquared(self.node.origin, self.origin) <= 16)
+  if(distancesquared(self.node.origin, self.origin) <= 16) {
     return 0;
+  }
 
-  if(self._blackboard.shufflenode.type != var_3)
+  if(self._blackboard.shufflenode.type != var_3) {
     return 0;
+  }
 
   return 1;
 }
@@ -316,33 +345,39 @@ _id_9F53(var_0, var_1) {
   var_3 = anglesToForward(var_0.angles);
   var_4 = vectorcross(var_3, var_2);
 
-  if(var_4[2] > 0 && var_1 == "left")
+  if(var_4[2] > 0 && var_1 == "left") {
     return 1;
+  }
 
-  if(var_4[2] < 0 && var_1 == "right")
+  if(var_4[2] < 0 && var_1 == "right") {
     return 1;
+  }
 
   return 0;
 }
 
 _id_2935(var_0, var_1, var_2, var_3) {
-  if(!bb_hasshufflenode(var_0, var_1, var_2, var_3))
+  if(!bb_hasshufflenode(var_0, var_1, var_2, var_3)) {
     return 0;
+  }
 
   return _id_9F53(self._blackboard.shufflenode, var_3);
 }
 
 _id_2933(var_0, var_1, var_2, var_3) {
-  if(!bb_hasshufflenode(var_0, var_1, var_2, var_3))
+  if(!bb_hasshufflenode(var_0, var_1, var_2, var_3)) {
     return 0;
+  }
 
-  if(!_id_9F53(self._blackboard.shufflenode, var_3))
+  if(!_id_9F53(self._blackboard.shufflenode, var_3)) {
     return 0;
+  }
 
-  if(var_3 == "right")
+  if(var_3 == "right") {
     return self._blackboard._id_1016B.type == "Cover Right" && self._blackboard.shufflenode.type == "Cover Left";
-  else
+  } else {
     return self._blackboard._id_1016B.type == "Cover Left" && self._blackboard.shufflenode.type == "Cover Right";
+  }
 }
 
 bb_setanimScripted() {
@@ -354,8 +389,9 @@ bb_clearanimScripted() {
 }
 
 bb_isanimScripted() {
-  if(!isDefined(self.script))
+  if(!isDefined(self.script)) {
     return 0;
+  }
 
   return self.script == "scripted" || self.script == "<custom>" || scripts\engine\utility::is_true(self._blackboard.animscriptedactive);
 }
@@ -367,8 +403,9 @@ bb_requestmelee(var_0) {
 }
 
 bb_getmeleetarget() {
-  if(!isDefined(self._blackboard.meleerequested))
+  if(!isDefined(self._blackboard.meleerequested)) {
     return undefined;
+  }
 
   return self._blackboard.meleerequestedtarget;
 }
@@ -395,11 +432,13 @@ bb_meleerequested(var_0, var_1, var_2, var_3) {
 }
 
 bb_meleerequestinvalid(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.melee))
+  if(!isDefined(self.melee)) {
     return 1;
+  }
 
-  if(!isDefined(self.melee.target))
+  if(!isDefined(self.melee.target)) {
     return 1;
+  }
 
   return 0;
 }
@@ -425,15 +464,17 @@ _id_2957(var_0, var_1, var_2, var_3) {
 }
 
 bb_meleechargeaborted(var_0, var_1, var_2, var_3) {
-  if(bb_meleechargerequested(var_0, var_1, var_2, var_3))
+  if(bb_meleechargerequested(var_0, var_1, var_2, var_3)) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_2923() {
-  if(!isDefined(self._blackboard.meleerequestedcharge))
+  if(!isDefined(self._blackboard.meleerequestedcharge)) {
     return undefined;
+  }
 
   return self._blackboard.meleerequestedcharge_target;
 }
@@ -473,8 +514,9 @@ bb_getrequestedwhizby() {
 bb_isfrantic() {
   var_0 = bb_getcovernode();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = self.node;
+  }
 
   var_1 = isDefined(var_0) && (var_0.type == "Conceal Crouch" || var_0.type == "Conceal Stand");
   return self._blackboard.movetype == "frantic" && !var_1;
@@ -483,8 +525,9 @@ bb_isfrantic() {
 bb_ismissingaleg() {
   var_0 = bb_getmissingleg();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     return 1;
+  }
 
   return 0;
 }
@@ -493,8 +536,9 @@ bb_getmissingleg() {
   var_0 = 0;
   var_1 = undefined;
 
-  if(!isDefined(self._blackboard.dismemberedparts))
+  if(!isDefined(self._blackboard.dismemberedparts)) {
     return var_1;
+  }
 
   if(isDefined(self._blackboard.dismemberedparts["left_leg"])) {
     var_0++;
@@ -506,25 +550,29 @@ bb_getmissingleg() {
     var_1 = "right";
   }
 
-  if(var_0 == 2)
+  if(var_0 == 2) {
     var_1 = "both";
+  }
 
   return var_1;
 }
 
 ispartdismembered(var_0) {
-  if(!isDefined(self._blackboard))
+  if(!isDefined(self._blackboard)) {
     return 0;
+  }
 
   if(isDefined(self._blackboard.scriptableparts)) {
-    if(!isDefined(self._blackboard.scriptableparts[var_0]))
+    if(!isDefined(self._blackboard.scriptableparts[var_0])) {
       return 0;
+    }
 
     return self._blackboard.scriptableparts[var_0].state == "dismember";
   }
 
-  if(!isDefined(self._blackboard.dismemberedparts))
+  if(!isDefined(self._blackboard.dismemberedparts)) {
     return 0;
+  }
 
   return isDefined(self._blackboard.dismemberedparts[var_0]);
 }
@@ -535,20 +583,24 @@ bb_ispartdismembered(var_0, var_1, var_2, var_3) {
 
 waspartjustdismembered(var_0) {
   if(isDefined(self._blackboard.scriptableparts)) {
-    if(!isDefined(self._blackboard.scriptableparts[var_0]))
+    if(!isDefined(self._blackboard.scriptableparts[var_0])) {
       return 0;
+    }
 
-    if(self._blackboard.scriptableparts[var_0].state != "dismember")
+    if(self._blackboard.scriptableparts[var_0].state != "dismember") {
       return 0;
+    }
 
     return self._blackboard.scriptableparts[var_0].time == gettime();
   }
 
-  if(!isDefined(self._blackboard.dismemberedparts))
+  if(!isDefined(self._blackboard.dismemberedparts)) {
     return 0;
+  }
 
-  if(!isDefined(self._blackboard.dismemberedparts[var_0]))
+  if(!isDefined(self._blackboard.dismemberedparts[var_0])) {
     return 0;
+  }
 
   return self._blackboard.dismemberedparts[var_0] == gettime();
 }
@@ -571,8 +623,9 @@ bb_setselfdestruct(var_0) {
 
 bb_isselfdestruct() {
   if(!isDefined(self._blackboard.selfdestruct)) {
-    if(isDefined(self.bt.forceselfdestructtimer) && gettime() > self.bt.forceselfdestructtimer)
+    if(isDefined(self.bt.forceselfdestructtimer) && gettime() > self.bt.forceselfdestructtimer) {
       self._blackboard.selfdestruct = 1;
+    }
   }
 
   return isDefined(self._blackboard.selfdestruct);
@@ -591,20 +644,23 @@ bb_setheadless(var_0) {
 }
 
 bb_isheadless() {
-  if(isDefined(self.bt.crawlmeleegrab))
+  if(isDefined(self.bt.crawlmeleegrab)) {
     return 0;
+  }
 
   return isDefined(self._blackboard.isheadless);
 }
 
 bb_setcanrodeo(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   var_2 = "left";
 
-  if(var_0 == var_2)
+  if(var_0 == var_2) {
     var_2 = "right";
+  }
 
   if(isDefined(self._blackboard.rodeo) && isDefined(self._blackboard.rodeo[var_2])) {
     self._blackboard.rodeo[var_2] = 0;
@@ -616,14 +672,17 @@ bb_setcanrodeo(var_0, var_1) {
 }
 
 bb_canrodeo(var_0) {
-  if(!isDefined(self._blackboard.rodeo))
+  if(!isDefined(self._blackboard.rodeo)) {
     return 0;
+  }
 
-  if(!isDefined(self._blackboard.rodeo[var_0]))
+  if(!isDefined(self._blackboard.rodeo[var_0])) {
     return 0;
+  }
 
-  if(!self._blackboard.rodeo[var_0])
+  if(!self._blackboard.rodeo[var_0]) {
     return 0;
+  }
 
   return 1;
 }
@@ -637,8 +696,9 @@ bb_clearrodeorequest(var_0) {
 }
 
 bb_isrodeorequested(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self._blackboard.rodeorequested))
+  if(!isDefined(self._blackboard.rodeorequested)) {
     return 0;
+  }
 
   return 1;
 }
@@ -655,11 +715,13 @@ bb_clearmeleetarget() {
   if(!isDefined(self.melee)) {
     return;
   }
-  if(isDefined(self.melee.target))
+  if(isDefined(self.melee.target)) {
     self.melee.target.melee = undefined;
+  }
 
-  if(isDefined(self.melee.temp_ent))
+  if(isDefined(self.melee.temp_ent)) {
     self.melee.temp_ent delete();
+  }
 
   self.melee = undefined;
 }

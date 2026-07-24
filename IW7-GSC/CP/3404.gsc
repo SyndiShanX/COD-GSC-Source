@@ -7,8 +7,9 @@ _id_97B1() {
   scripts\engine\utility::flag_init("doors_initialized");
   scripts\engine\utility::flag_init("first_door_opened");
 
-  if(!scripts\engine\utility::flag("init_interaction_done"))
+  if(!scripts\engine\utility::flag("init_interaction_done")) {
     scripts\engine\utility::flag_wait("init_interaction_done");
+  }
 
   init_door_buys();
   init_team_killdoors();
@@ -43,8 +44,9 @@ init_door_buys() {
   var_0 = getEntArray("door_buy", "targetname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2._id_EEAA))
+    if(isDefined(var_2._id_EEAA)) {
       var_2 setuserange(var_2._id_EEAA);
+    }
 
     level thread _id_95B5(var_2);
     wait 0.05;
@@ -61,19 +63,22 @@ _id_95B5(var_0) {
     if(!isDefined(var_3.target)) {
       continue;
     }
-    if(var_3.target == var_0.target)
+    if(var_3.target == var_0.target) {
       var_1[var_1.size] = var_3;
+    }
   }
 
   var_5 = _id_7E81(var_1[0].script_noteworthy);
 
-  if(isDefined(level.enter_area_hint))
+  if(isDefined(level.enter_area_hint)) {
     var_0 sethintstringparams(level.enter_area_hint, var_5);
-  else
+  } else {
     var_0 sethintstringparams(&"CP_ZMB_INTERACTIONS_ENTER_THIS_AREA", var_5);
+  }
 
-  if(isDefined(level.door_properties_func))
+  if(isDefined(level.door_properties_func)) {
     [[level.door_properties_func]](var_0);
+  }
 
   for(;;) {
     var_0 waittill("trigger", var_6);
@@ -91,8 +96,9 @@ _id_95B5(var_0) {
       var_0 notify("purchased");
       level notify("door_opened_notify");
 
-      if(!scripts\engine\utility::flag("can_drop_coins"))
+      if(!scripts\engine\utility::flag("can_drop_coins")) {
         scripts\engine\utility::flag_set("can_drop_coins");
+      }
 
       var_6 scripts\cp\cp_merits::processmerit("mt_purchase_doors");
       var_6 notify("door_opened_notify");
@@ -102,11 +108,13 @@ _id_95B5(var_0) {
       var_6 scripts\cp\cp_persistence::give_player_xp(var_7, 1);
     }
 
-    if(isDefined(level.escape_objective_notify))
+    if(isDefined(level.escape_objective_notify)) {
       level notify(level.escape_objective_notify);
+    }
 
-    if(!scripts\engine\utility::flag("first_door_opened"))
+    if(!scripts\engine\utility::flag("first_door_opened")) {
       scripts\engine\utility::flag_set("first_door_opened");
+    }
 
     if(isPlayer(var_6) && var_6 scripts\cp\utility::is_valid_player() || isDefined(var_0.allow_nonplayer_trigger)) {
       foreach(var_9 in var_1) {
@@ -114,8 +122,9 @@ _id_95B5(var_0) {
           continue;
         }
         if(level.spawn_volume_array[var_9.script_area].active) {
-          if(isDefined(level.purchase_area_vo) && !isDefined(var_0.allow_nonplayer_trigger))
+          if(isDefined(level.purchase_area_vo) && !isDefined(var_0.allow_nonplayer_trigger)) {
             level[[level.purchase_area_vo]](var_9.script_area, var_6);
+          }
         }
       }
     }
@@ -138,8 +147,9 @@ _id_95B5(var_0) {
       var_14 = getEntArray(var_0.targetname, "targetname");
 
       foreach(var_16 in var_14) {
-        if(var_16.target == var_13)
+        if(var_16.target == var_13) {
           var_16 delete();
+        }
       }
     }
   }
@@ -166,10 +176,11 @@ init_team_killdoors() {
     var_3.name = var_2;
     var_3.trigger = var_1;
 
-    if(isDefined(var_1.count))
+    if(isDefined(var_1.count)) {
       var_3.base_kill_goal = var_1.count;
-    else
+    } else {
       var_3.base_kill_goal = 10;
+    }
 
     var_3.kill_goal = var_3.base_kill_goal;
     var_3.goal_mult = 1;
@@ -196,15 +207,17 @@ init_team_killdoors() {
         continue;
       }
 
-      if(issubstr(var_5.classname, "scriptable"))
+      if(issubstr(var_5.classname, "scriptable")) {
         var_3.scriptable = var_5;
+      }
     }
 
     var_3.activation_areas = [];
 
     if(isDefined(var_1.script_area)) {
-      foreach(var_8 in strtok(var_1.script_area, ","))
-      var_3.activation_areas[var_3.activation_areas.size] = var_8;
+      foreach(var_8 in strtok(var_1.script_area, ",")) {
+        var_3.activation_areas[var_3.activation_areas.size] = var_8;
+      }
     }
 
     level.team_killdoors[var_2] = var_3;
@@ -221,8 +234,9 @@ team_killdoor_think() {
     scripts\engine\utility::flag_wait(self._id_ED9A);
     level waittill("zombie_killed", var_0, var_1, var_2, var_3);
 
-    if(scripts\engine\utility::is_true(var_3.is_skeleton) && isDefined(var_3.playerowner))
+    if(scripts\engine\utility::is_true(var_3.is_skeleton) && isDefined(var_3.playerowner)) {
       var_3 = var_3.playerowner;
+    }
 
     if(!isent(var_3) || !var_3 scripts\cp\utility::is_valid_player()) {
       continue;
@@ -309,11 +323,13 @@ capture_soul(var_0, var_1) {
     if(isDefined(var_1)) {}
   }
 
-  foreach(var_5 in self.progress_meters)
-  var_5 moveTo(var_5.start_pos + (0, 0, 16 / self.kill_goal) * self.kill_captured, 0.1);
+  foreach(var_5 in self.progress_meters) {
+    var_5 moveTo(var_5.start_pos + (0, 0, 16 / self.kill_goal) * self.kill_captured, 0.1);
+  }
 
-  if(self.kill_captured >= self.kill_goal)
+  if(self.kill_captured >= self.kill_goal) {
     thread open_team_killdoor(var_1);
+  }
 }
 
 soul_to_door(var_0) {
@@ -325,20 +341,23 @@ soul_to_door(var_0) {
     var_3 = distance(var_0, var_2);
     var_4 = var_3 / 600;
 
-    if(var_4 < 0.05)
+    if(var_4 < 0.05) {
       var_4 = 0.05;
+    }
 
     var_1 moveTo(var_2, var_4);
     wait 0.05;
 
-    if(!self._id_E0E2 && distancesquared(var_1.origin, var_2) > 256)
+    if(!self._id_E0E2 && distancesquared(var_1.origin, var_2) > 256) {
       continue;
-    else
+    } else {
       break;
+    }
   }
 
-  if(!self._id_E0E2)
+  if(!self._id_E0E2) {
     self.kill_captured++;
+  }
 
   var_1 delete();
 }
@@ -348,20 +367,23 @@ open_team_killdoor(var_0) {
   self._id_E0E2 = 1;
 
   foreach(var_0 in self.players) {
-    if(isDefined(var_0.killdoor_hud))
+    if(isDefined(var_0.killdoor_hud)) {
       var_0.killdoor_hud destroy();
+    }
   }
 
-  foreach(var_4 in self.activation_areas)
-  scripts\cp\zombies\zombies_spawning::activate_volume_by_name(var_4);
+  foreach(var_4 in self.activation_areas) {
+    scripts\cp\zombies\zombies_spawning::activate_volume_by_name(var_4);
+  }
 
   if(isDefined(self._id_4348)) {
     self._id_4348 connectpaths();
     self._id_4348 notsolid();
   }
 
-  foreach(var_7 in self.progress_meters)
-  var_7 delete();
+  foreach(var_7 in self.progress_meters) {
+    var_7 delete();
+  }
 
   thread open_team_killdoor_sfx(self._id_9A3E);
   self.scriptable setscriptablepartstate("fx", "normal");
@@ -371,10 +393,11 @@ open_team_killdoor(var_0) {
   var_0 notify("door_opened_notify");
   var_0 thread scripts\cp\cp_vo::try_to_play_vo("door_kill_purchase", "disco_comment_vo");
 
-  if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player))
+  if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player)) {
     var_0 scripts\cp\cp_persistence::give_player_xp(250, 1);
-  else
+  } else {
     var_0 scripts\cp\cp_persistence::give_player_xp(75, 1);
+  }
 }
 
 open_team_killdoor_sfx(var_0) {
@@ -392,8 +415,9 @@ init_chi_doors() {
 
 chi_door_think() {
   foreach(var_1 in getEntArray(self.target, "targetname")) {
-    if(issubstr(var_1.classname, "scriptable"))
+    if(issubstr(var_1.classname, "scriptable")) {
       self.scriptable = var_1;
+    }
   }
 
   var_3 = [];
@@ -402,8 +426,9 @@ chi_door_think() {
     if(!isDefined(var_5.target)) {
       continue;
     }
-    if(var_5.target == self.target)
+    if(var_5.target == self.target) {
       var_3[var_3.size] = var_5;
+    }
   }
 
   if(var_3.size == 0) {
@@ -412,13 +437,15 @@ chi_door_think() {
   self setHintString(level.interaction_hintstrings[self.script_noteworthy]);
   var_7 = _id_7E81(var_3[0].script_noteworthy);
 
-  if(isDefined(level.enter_area_hint))
+  if(isDefined(level.enter_area_hint)) {
     self sethintstringparams(level.enter_area_hint, var_7);
-  else
+  } else {
     self sethintstringparams(&"CP_ZMB_INTERACTIONS_ENTER_THIS_AREA", var_7);
+  }
 
-  if(isDefined(level.door_properties_func))
+  if(isDefined(level.door_properties_func)) {
     [[level.door_properties_func]](self);
+  }
 
   for(;;) {
     self.scriptable waittill("damage", var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_16, var_17);
@@ -446,8 +473,9 @@ chi_door_think() {
           continue;
         }
         if(level.spawn_volume_array[var_21.script_area].active) {
-          if(isDefined(level.purchase_area_vo))
+          if(isDefined(level.purchase_area_vo)) {
             level[[level.purchase_area_vo]](var_21.script_area, var_9, 1);
+          }
         }
       }
     }
@@ -470,8 +498,9 @@ chi_door_think() {
       var_26 = getEntArray(self.targetname, "targetname");
 
       foreach(var_28 in var_26) {
-        if(var_28.target == var_25)
+        if(var_28.target == var_25) {
           var_28 delete();
+        }
       }
     }
   }

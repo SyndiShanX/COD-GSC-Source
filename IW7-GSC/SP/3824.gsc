@@ -19,20 +19,23 @@ _id_FD6D() {
 }
 
 pause_group_vignettes() {
-  if(scripts\engine\utility::flag_exist("hold_group_vignettes"))
+  if(scripts\engine\utility::flag_exist("hold_group_vignettes")) {
     scripts\engine\utility::flag_set("hold_group_vignettes");
+  }
 }
 
 release_group_vignettes() {
-  if(scripts\engine\utility::flag_exist("hold_group_vignettes"))
+  if(scripts\engine\utility::flag_exist("hold_group_vignettes")) {
     scripts\engine\utility::flag_clear("hold_group_vignettes");
+  }
 }
 
 _id_FD75(var_0, var_1) {
   level endon("stop_group_idle_controller");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level._id_C6AA["retribution"]._id_EF67;
+  }
 
   switch (var_0) {
     case "navigation":
@@ -76,8 +79,9 @@ _id_10FFF(var_0) {
     self notify("stop_group_idle_controller");
     level waittill("ftl_finished");
 
-    foreach(var_7 in var_0)
-    var_7 thread scripts\sp\interaction_manager::_id_F566("alert");
+    foreach(var_7 in var_0) {
+      var_7 thread scripts\sp\interaction_manager::_id_F566("alert");
+    }
   }
 }
 

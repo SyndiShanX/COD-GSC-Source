@@ -16,8 +16,9 @@ _id_25FB() {
   if(scripts\engine\utility::flag("sfx_night") || !scripts\engine\utility::flag("sfx_sun_start")) {
     scripts\engine\utility::flag_clear("sfx_night");
 
-    if(!scripts\engine\utility::flag("sfx_sun_start"))
+    if(!scripts\engine\utility::flag("sfx_sun_start")) {
       scripts\engine\utility::flag_set("sfx_sun_start");
+    }
 
     level.player playSound("scn_asteroid_trans_day");
     level.player _meth_82C0("rogue_asteroid_day", 4);

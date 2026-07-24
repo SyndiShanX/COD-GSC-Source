@@ -42,8 +42,9 @@ _id_11031() {
 }
 
 _id_4EFF() {
-  for(;;)
+  for(;;) {
     wait 0.5;
+  }
 }
 
 _id_104DD(var_0) {
@@ -64,9 +65,11 @@ _id_D2B8(var_0) {
 }
 
 _id_D2B9(var_0) {
-  if(isDefined(self._id_9162))
+  if(isDefined(self._id_9162)) {
     self._id_9162 scripts\sp\hud_util::destroyelem();
+  }
 
-  if(isDefined(self._id_9161))
+  if(isDefined(self._id_9161)) {
     self._id_9161 scripts\sp\hud_util::destroyelem();
+  }
 }

@@ -121,8 +121,9 @@ _id_8F77() {
   var_5 = getspawnerarray();
   scripts\engine\utility::array_thread(var_5, scripts\sp\utility::_id_1747, scripts\sp\maps\marsbase\marsbase_util::_id_B3A5);
 
-  while(isalive(level._id_19DA))
+  while(isalive(level._id_19DA)) {
     wait 1;
+  }
 
   scripts\engine\utility::flag_set("flag_hill_gate_sdf_retreat");
   var_4 = getaiarray("axis");
@@ -139,8 +140,9 @@ _id_8F78() {
   self endon("death");
   thread scripts\sp\maps\marsbase\marsbase_util::_id_13BF3();
 
-  if(isDefined(self._id_ECE7) && self._id_ECE7 == "hill_gate_retreat_snipers")
+  if(isDefined(self._id_ECE7) && self._id_ECE7 == "hill_gate_retreat_snipers") {
     level scripts\engine\utility::flag_wait_or_timeout("flag_hill_gate_allies_stairs", 10);
+  }
 
   if(scripts\sp\maps\marsbase\marsbase_util::_id_9CA8()) {
     self _meth_81D0(self.origin + (0, 0, 512));
@@ -164,8 +166,9 @@ _id_10740() {
   var_0 = scripts\sp\utility::_id_77DF("hill_gate_c6_idle_ready");
   scripts\engine\utility::array_thread(var_0, scripts\sp\utility::_id_1747, ::_id_92E6);
 
-  foreach(var_2 in var_0)
-  var_3 = var_2 scripts\sp\utility::_id_10619(1);
+  foreach(var_2 in var_0) {
+    var_3 = var_2 scripts\sp\utility::_id_10619(1);
+  }
 }
 
 _id_8911() {
@@ -183,8 +186,9 @@ _id_8911() {
   var_4 = [];
 
   foreach(var_6 in var_2) {
-    if(var_6 scripts\sp\vehicle::_id_9FEF() && var_6.classname == "script_vehicle_atv")
+    if(var_6 scripts\sp\vehicle::_id_9FEF() && var_6.classname == "script_vehicle_atv") {
       var_4 = scripts\engine\utility::array_add(var_4, var_6);
+    }
   }
 
   scripts\sp\utility::_id_22D8(var_4, "reached_end_node");
@@ -371,8 +375,9 @@ _id_76DC() {
 }
 
 _id_13785(var_0, var_1) {
-  while(isalive(var_0) && var_0.health / var_0.maxhealth * 100 > var_1)
+  while(isalive(var_0) && var_0.health / var_0.maxhealth * 100 > var_1) {
     wait 0.5;
+  }
 }
 
 _id_8912() {
@@ -464,10 +469,11 @@ _id_8F88(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   foreach(var_10 in var_8) {
     if(var_2 == "allies") {
-      if(isDefined(var_5))
+      if(isDefined(var_5)) {
         var_7 = scripts\sp\vehicle::_id_1080C(var_5);
-      else
+      } else {
         var_7 = scripts\sp\maps\marsbase\marsbase_sky_cowbell::_id_10747("hill_gate_jackal_friendly");
+      }
     } else
       var_7 = scripts\sp\maps\marsbase\marsbase_sky_cowbell::_id_10747("ambient_crashing_jackal_enemy");
 
@@ -565,8 +571,9 @@ _id_10659(var_0) {
     var_2[var_5] scripts\sp\utility::_id_F3E0(16);
     var_2[var_5].accuracy = 0.1;
 
-    if(!isDefined(var_4.script_noteworthy) || var_4.script_noteworthy != "no_pacifist")
+    if(!isDefined(var_4.script_noteworthy) || var_4.script_noteworthy != "no_pacifist") {
       var_2[var_5] scripts\sp\utility::_id_F4B2(1);
+    }
   }
 
   var_2 = scripts\engine\utility::array_removeundefined(var_2);
@@ -662,8 +669,9 @@ _id_35C7() {
 _id_1070F() {
   var_0 = sortbydistance(getEntArray("dropped_endgate", "script_noteworthy"), level.player.origin);
 
-  for(var_1 = var_0.size - 1; var_1 > -1; var_1--)
+  for(var_1 = var_0.size - 1; var_1 > -1; var_1--) {
     var_0[var_1] scripts\engine\utility::delaythread((var_0.size - var_1) * 0.6, ::_id_10795);
+  }
 }
 
 _id_10795() {
@@ -703,8 +711,9 @@ _id_301B(var_0) {
   var_5 = scripts\engine\utility::getStruct("hill_gate_destruction_fx", "targetname");
   var_0 = scripts\engine\utility::ter_op(isDefined(var_0), var_0, 0);
 
-  if(!var_0 && isDefined(var_5))
+  if(!var_0 && isDefined(var_5)) {
     playFX(scripts\engine\utility::getfx("vfx_mars_gate_explosion"), var_5.origin);
+  }
 
   scripts\sp\maps\marsbase\marsbase_util::_id_EA01(var_1);
   scripts\sp\maps\marsbase\marsbase_util::_id_EA01(var_2);
@@ -732,11 +741,13 @@ _id_8F7E() {
 
   foreach(var_3 in var_1) {
     if(var_3 istouching(var_0)) {
-      if(scripts\engine\utility::is_true(var_3.damageshield))
+      if(scripts\engine\utility::is_true(var_3.damageshield)) {
         var_3 scripts\sp\utility::_id_1101B();
+      }
 
-      if(isalive(var_3) && var_3.unittype != "c12")
+      if(isalive(var_3) && var_3.unittype != "c12") {
         var_3 _meth_81D0();
+      }
     }
   }
 
@@ -749,11 +760,13 @@ _id_8F7E() {
 
 hill_gate_ents_clean_up_c12(var_0) {
   if(isalive(var_0)) {
-    while(isDefined(var_0._blackboard._id_E5FD) && var_0._blackboard._id_E5FD)
+    while(isDefined(var_0._blackboard._id_E5FD) && var_0._blackboard._id_E5FD) {
       wait 0.1;
+    }
 
-    if(isalive(var_0))
+    if(isalive(var_0)) {
       var_0 dodamage(var_0.maxhealth, var_0.origin + (0, 0, 512), var_0, var_0, "MOD_EXPLOSIVE");
+    }
   }
 }
 

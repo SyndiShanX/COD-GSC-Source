@@ -46,11 +46,13 @@ watch_dpad() {
 
   var_1 = undefined;
 
-  if(isDefined(self.last_interaction_point))
+  if(isDefined(self.last_interaction_point)) {
     var_1 = self.last_interaction_point;
+  }
 
-  if(isDefined(self._id_DDB0))
+  if(isDefined(self._id_DDB0)) {
     var_1 = self._id_DDB0;
+  }
 
   if(!isDefined(var_1)) {
     return;
@@ -59,17 +61,21 @@ watch_dpad() {
 }
 
 _id_9B93() {
-  if(isDefined(self._id_DDB0))
+  if(isDefined(self._id_DDB0)) {
     return "valid";
+  }
 
-  if(!isDefined(self.last_interaction_point) && !isDefined(self._id_DDB0))
+  if(!isDefined(self.last_interaction_point) && !isDefined(self._id_DDB0)) {
     return "not_window";
+  }
 
-  if(!scripts\cp\cp_interaction::interaction_is_window_entrance(self.last_interaction_point))
+  if(!scripts\cp\cp_interaction::interaction_is_window_entrance(self.last_interaction_point)) {
     return "not_window";
+  }
 
-  if(scripts\engine\utility::is_true(self.last_interaction_point.has_trap))
+  if(scripts\engine\utility::is_true(self.last_interaction_point.has_trap)) {
     return "has_trap";
+  }
 
   return "valid";
 }
@@ -80,10 +86,11 @@ _id_CC08(var_0, var_1) {
   level thread _id_A86F(var_0, var_2, var_1);
   var_1 notify("window_trap_placed");
 
-  if(!isDefined(var_1._id_1193D["crafted_windowtrap"]))
+  if(!isDefined(var_1._id_1193D["crafted_windowtrap"])) {
     var_1._id_1193D["crafted_windowtrap"] = gettime();
-  else
+  } else {
     var_1._id_1193D["crafted_windowtrap"] = var_1._id_1193D["crafted_windowtrap"] + (gettime() - var_1._id_1193D["crafted_windowtrap"]);
+  }
 
   var_1.itemtype = "crafted_windowtrap";
   var_1.killswithitem["crafted_windowtrap"] = 0;
@@ -124,8 +131,9 @@ _id_A870(var_0, var_1, var_2, var_3) {
   self.owner = var_1;
   var_4 = gettime() + 300000;
 
-  while(gettime() < var_4)
+  while(gettime() < var_4) {
     wait 1;
+  }
 
   thread _id_138EB(var_0, var_1, var_2, var_3);
 }
@@ -143,10 +151,11 @@ _id_138EB(var_0, var_1, var_2, var_3) {
   triggerfx(var_4);
   var_4 thread scripts\cp\utility::delayentdelete(1);
 
-  if(var_1 scripts\cp\utility::is_valid_player(1))
+  if(var_1 scripts\cp\utility::is_valid_player(1)) {
     radiusdamage(var_0.origin, 512, 100000, 100000, var_1, "MOD_EXPLOSIVE", "zmb_imsprojectile_mp");
-  else
+  } else {
     radiusdamage(var_0.origin, 512, 100000, 100000, level.players[0], "MOD_EXPLOSIVE", "zmb_imsprojectile_mp");
+  }
 
   var_0 thread scripts\cp\cp_weapon::grenade_earthquake();
 }
@@ -155,11 +164,13 @@ _id_4CDE(var_0, var_1, var_2, var_3) {
   self endon("death");
   var_3 endon("death");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = min(self.health + 100, 10000);
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 2;
+  }
 
   var_4 = 0;
   var_5 = 6;

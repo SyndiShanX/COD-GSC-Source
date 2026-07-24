@@ -4,27 +4,31 @@
 **************************************/
 
 _id_3454(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   self._id_290A = var_0;
 
   if(!var_0) {
-    if(!_id_0C01::_id_3479() && !_id_0C01::_id_3477())
+    if(!_id_0C01::_id_3479() && !_id_0C01::_id_3477()) {
       self _meth_8484();
+    }
   }
 }
 
 _id_3449(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   self._id_2AAA = var_0;
 }
 
 _id_3455(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   self._id_3133 = var_0;
 }

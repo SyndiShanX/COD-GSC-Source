@@ -13,8 +13,9 @@ main() {
   scripts\sp\introscreen::_id_9631();
   scripts\sp\starts::_id_9766();
 
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     scripts\sp\specialist_MAYBE::init();
+  }
 
   scripts\sp\load_code::_id_83DD();
   scripts\sp\load_code::_id_83DB();
@@ -83,8 +84,9 @@ main() {
   _id_0B09::_id_952F();
   scripts\sp\utility::_id_9674();
 
-  if(isDefined(level._id_83DF))
+  if(isDefined(level._id_83DF)) {
     [[level._id_83DF]]();
+  }
 
   scripts\sp\load_code::_id_B3CD();
   _id_0B77::main();
@@ -94,10 +96,11 @@ main() {
   thread scripts\sp\geo_mover::_id_409C();
 
   if(scripts\sp\utility::_id_93A6()) {
-    if(scripts\sp\specialist_MAYBE::_id_2C8F())
+    if(scripts\sp\specialist_MAYBE::_id_2C8F()) {
       scripts\sp\specialist_MAYBE::_id_F2D2(1);
-    else
+    } else {
       level._id_10964 thread scripts\sp\specialist_MAYBE::main();
+    }
   }
 
   scripts\sp\load_code::_id_E810();
@@ -106,10 +109,11 @@ main() {
   setomnvar("ui_client_settle_time", var_0);
   var_1 = scripts\sp\utility::_id_7F70(level.script);
 
-  if(isDefined(var_1) && var_1 != "")
+  if(isDefined(var_1) && var_1 != "") {
     setomnvar("ui_transition_movie", var_1);
-  else
+  } else {
     setomnvar("ui_transition_movie", "none");
+  }
 
   scripts\sp\analytics::main();
 }

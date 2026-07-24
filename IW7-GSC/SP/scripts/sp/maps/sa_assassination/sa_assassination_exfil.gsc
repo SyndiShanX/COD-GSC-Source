@@ -29,10 +29,11 @@ _id_CFBE(var_0) {
   var_2 = scripts\engine\utility::getStruct(var_0, "targetname");
   var_3 = var_2;
 
-  if(isDefined(var_2.script_delay))
+  if(isDefined(var_2.script_delay)) {
     var_4 = var_2.script_delay;
-  else
+  } else {
     var_4 = 1;
+  }
 
   var_1 moveTo(var_2.origin, var_4, var_4 * 0.3, 0);
   var_1 rotateTo(var_2.angles, var_4, var_4 * 0.3, 0);
@@ -42,20 +43,22 @@ _id_CFBE(var_0) {
     var_2 = scripts\engine\utility::getStruct(var_2.target, "targetname");
     var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
 
-    if(isDefined(var_2.script_delay))
+    if(isDefined(var_2.script_delay)) {
       var_4 = var_2.script_delay;
-    else
+    } else {
       var_4 = 1;
+    }
 
     var_1 moveTo(var_2.origin, 1, 0, 0);
     var_1 rotateTo(var_2.angles, 1, 0, 0);
     var_1 waittill("movedone");
   }
 
-  if(isDefined(var_3.script_delay))
+  if(isDefined(var_3.script_delay)) {
     var_4 = var_3.script_delay;
-  else
+  } else {
     var_4 = 1;
+  }
 
   var_1 moveTo(var_3.origin, var_4, 0, var_4 * 0.3);
   var_1 rotateTo(var_3.angles, var_4, 0, var_4 * 0.3);
@@ -105,8 +108,9 @@ _id_E7F1() {
   var_0 scripts\sp\vehicle::_id_8441();
   var_1 = getspawnerarray(var_0.target);
 
-  foreach(var_3 in var_1)
-  var_3 scripts\sp\utility::_id_1747(::_id_5DCD);
+  foreach(var_3 in var_1) {
+    var_3 scripts\sp\utility::_id_1747(::_id_5DCD);
+  }
 
   var_0 waittill("reached_dynamic_path_end");
   var_0 notify("delete");
@@ -114,13 +118,15 @@ _id_E7F1() {
 }
 
 _id_5DCD() {
-  if(!isDefined(level._id_5DCB))
+  if(!isDefined(level._id_5DCB)) {
     level._id_5DCB = [];
+  }
 
   level._id_5DCB[level._id_5DCB.size] = self;
 
-  if(!isDefined(level._id_5DCC))
+  if(!isDefined(level._id_5DCC)) {
     level._id_5DCC = scripts\engine\utility::spawn_tag_origin();
+  }
 
   var_0 = self.pos;
   self waittill("death");
@@ -128,7 +134,7 @@ _id_5DCD() {
 }
 
 _id_68FE() {
-  var_0["destroyer"] = scripts\sp\utility::_id_8200("exfil_destroyer", "targetname");
+  var_0["destroyer"] = ::scripts\sp\utility::_id_8200("exfil_destroyer", "targetname");
   level._id_68FE = [];
   var_0["destroyer"]._id_EEF9 = "cannon_small_ca,1,1,amb_turret_sml_l_ts_1,amb_turret_sml_l_ts_5,amb_turret_sml_r_ts_1,amb_turret_sml_r_ts_5,amb_turret_sml_r_ts_6,amb_turret_sml_r_ts_7,amb_turret_sml_l_ts_6,amb_turret_sml_l_ts_7 cannon_flak_ca,1,1 cannon_phalanx";
 
@@ -140,11 +146,13 @@ _id_68FE() {
         var_2 dontinterpolate();
         var_2.origin = var_5.origin;
 
-        if(isDefined(var_5.angles))
+        if(isDefined(var_5.angles)) {
           var_2.angles = var_5.angles;
+        }
 
-        while(isDefined(var_2._id_1323B))
+        while(isDefined(var_2._id_1323B)) {
           scripts\engine\utility::waitframe();
+        }
 
         var_6 = var_2 scripts\sp\utility::_id_10808();
         level._id_68FE[level._id_68FE.size] = var_6;
@@ -163,8 +171,9 @@ _id_68FE() {
 
   _id_0BDC::_id_A321(1);
 
-  if(!isDefined(level._id_A359))
+  if(!isDefined(level._id_A359)) {
     level._id_A359 = scripts\sp\utility::_id_8200("jackal_swarm_spawner", "targetname");
+  }
 
   level._id_A359 thread _id_1DC4();
 }
@@ -191,8 +200,9 @@ _id_1DC4() {
       break;
     }
 
-    while(isDefined(self._id_1323B))
+    while(isDefined(self._id_1323B)) {
       scripts\engine\utility::waitframe();
+    }
 
     self.origin = getcsplinepointposition(var_3, 0);
     var_4 = level._id_A359 scripts\sp\utility::_id_10808();
@@ -203,8 +213,9 @@ _id_1DC4() {
   for(;;) {
     self waittill("respawn");
 
-    while(isDefined(self._id_1323B))
+    while(isDefined(self._id_1323B)) {
       scripts\engine\utility::waitframe();
+    }
 
     self.origin = getcsplinepointposition(var_0[randomint(var_0.size - 1)], 0);
     var_4 = level._id_A359 scripts\sp\utility::_id_10808();
@@ -260,8 +271,9 @@ _id_9834() {
   var_3 = getcsplineid("ace_intro_spline_2");
   level._id_282E = scripts\engine\utility::getStructArray("barrage_node", "targetname");
 
-  while(isDefined(var_0._id_1323B))
+  while(isDefined(var_0._id_1323B)) {
     scripts\engine\utility::waitframe();
+  }
 
   var_0.origin = getcsplinepointposition(var_2, 0) - (500, 0, 0);
   var_4 = var_0 scripts\sp\utility::_id_10808();
@@ -315,8 +327,9 @@ _id_282F() {
       if(level.player._id_58B7 == self && !level._id_575E) {
         var_0++;
 
-        if(var_0 >= var_1.size)
+        if(var_0 >= var_1.size) {
           var_0 = 0;
+        }
       }
     }
   }
@@ -364,10 +377,11 @@ _id_981B() {
   for(;;) {
     playFX(scripts\engine\utility::getfx("retribution_barrage"), var_1.origin);
 
-    if(isDefined(var_1.target))
+    if(isDefined(var_1.target)) {
       var_1 = scripts\engine\utility::getStruct(var_1.target, "targetname");
-    else
+    } else {
       break;
+    }
 
     wait 0.5;
   }
@@ -383,15 +397,17 @@ _id_168E() {
   _id_0BDC::_id_1990(1);
   thread _id_1552();
 
-  if(!isDefined(level._id_1553))
+  if(!isDefined(level._id_1553)) {
     level._id_1553 = 0;
+  }
 
   var_0 = level._id_1553;
   level._id_1553++;
   var_1 = 1;
 
-  if(!isDefined(level._id_1559))
+  if(!isDefined(level._id_1559)) {
     level._id_1559 = [];
+  }
 
   level._id_1559[level._id_1559.size] = self;
   _id_0BDC::_id_A36D();
@@ -422,8 +438,9 @@ _id_1557() {
 _id_9738(var_0) {
   var_1 = var_0 scripts\sp\utility::_id_7A97();
 
-  if(!isDefined(level._id_6E81))
+  if(!isDefined(level._id_6E81)) {
     level._id_6E81 = [];
+  }
 
   foreach(var_3 in var_1) {
     if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "flak_struct") {
@@ -487,8 +504,9 @@ _id_51FB() {
 }
 
 _id_F8B2() {
-  if(!isDefined(level._id_68F6))
+  if(!isDefined(level._id_68F6)) {
     level._id_68F6 = [];
+  }
 
   self.maxhealth = 999999;
   self.health = 999999;
@@ -497,8 +515,9 @@ _id_F8B2() {
 
 _id_51EE(var_0, var_1) {
   foreach(var_3 in var_0) {
-    while(isDefined(self._id_1323B))
+    while(isDefined(self._id_1323B)) {
       scripts\engine\utility::waitframe();
+    }
 
     self.origin = getcsplinepointposition(var_3, 0);
     var_4 = scripts\sp\utility::_id_10808();
@@ -509,8 +528,9 @@ _id_51EE(var_0, var_1) {
 }
 
 _id_51FD(var_0, var_1) {
-  while(isDefined(self._id_1323B))
+  while(isDefined(self._id_1323B)) {
     scripts\engine\utility::waitframe();
+  }
 
   self.origin = getcsplinepointposition(var_0, 0);
   var_2 = scripts\sp\utility::_id_10808();
@@ -573,8 +593,9 @@ _id_91C0(var_0) {
   self endon("death");
   self waittill("damage", var_1, var_2);
 
-  if(var_2 == var_0)
+  if(var_2 == var_0) {
     self dodamage(2000, var_0.origin);
+  }
 }
 
 _id_1D08(var_0) {
@@ -589,16 +610,18 @@ _id_68C8() {
   _id_94F6();
 
   foreach(var_1 in level._id_68FE) {
-    if(var_1.model == "veh_mil_air_ca_destroyer")
+    if(var_1.model == "veh_mil_air_ca_destroyer") {
       var_1 _id_0BB6::_id_39F0();
+    }
   }
 }
 
 _id_94F6() {
-  if(!isDefined(level._id_6E81))
+  if(!isDefined(level._id_6E81)) {
     level._id_6E81 = scripts\engine\utility::getStructArray("flak_spot", "targetname");
-  else
+  } else {
     scripts\engine\utility::array_combine(level._id_6E81, scripts\engine\utility::getStructArray("flak_spot", "targetname"));
+  }
 
   scripts\engine\utility::array_thread(level._id_6E81, ::_id_B03D);
 }
@@ -646,12 +669,14 @@ _id_A1B1() {
       var_5 = undefined;
 
       foreach(var_7 in var_3) {
-        if(var_7.classname == "trigger_multiple")
+        if(var_7.classname == "trigger_multiple") {
           var_1 = var_7;
+        }
       }
 
-      if(isDefined(var_4))
+      if(isDefined(var_4)) {
         objective_position(scripts\sp\utility::_id_C264("exfil_zerog"), var_4.origin);
+      }
     } else
       break;
 
@@ -660,8 +685,9 @@ _id_A1B1() {
     }
   }
 
-  while(!isDefined(level._id_D127))
+  while(!isDefined(level._id_D127)) {
     wait 0.2;
+  }
 
   var_0 dontinterpolate();
   var_0.origin = level._id_D127 gettagorigin("tag_player") + anglestoup(level._id_D127.angles) * 128;
@@ -680,11 +706,13 @@ _id_2FAF() {
 }
 
 _id_BBDC() {
-  while(!isDefined(level._id_D127))
+  while(!isDefined(level._id_D127)) {
     wait 0.2;
+  }
 
-  while(distance(level.player.origin, level._id_D127.origin) > 5000)
+  while(distance(level.player.origin, level._id_D127.origin) > 5000) {
     wait 0.2;
+  }
 
   var_0 = scripts\engine\utility::spawn_tag_origin(level._id_D127 gettagorigin("tag_player") + anglestoup(level._id_D127.angles) * 128, (0, 0, 0));
   var_0 linkTo(level._id_D127);
@@ -695,8 +723,9 @@ _id_BBDC() {
 }
 
 _id_170E() {
-  if(!isDefined(level._id_5DCB))
+  if(!isDefined(level._id_5DCB)) {
     level._id_5DCB = [];
+  }
 
   level._id_5DCB[level._id_5DCB.size] = self;
 }
@@ -716,10 +745,11 @@ _id_95D3() {
   level._id_11215 = [255, 255, 255, level._id_11214[3] * 1.5];
   var_0 = scripts\engine\utility::getStruct("flak_sun_dir", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level._id_1121A = anglesToForward(var_0.angles);
-  else
+  } else {
     level._id_1121A = (-20, -40, 0);
+  }
 }
 
 _id_C073(var_0) {
@@ -735,16 +765,19 @@ _id_6915() {
   if(var_2 > var_0) {
     return;
   }
-  if(var_2 < var_0 / 2)
+  if(var_2 < var_0 / 2) {
     var_4 = 600;
-  else
+  } else {
     var_4 = (var_0 - var_2) / (var_0 / 2) * var_1;
+  }
 
-  if(var_3 < 200)
+  if(var_3 < 200) {
     var_4 = 200;
+  }
 
-  if(var_4 > 0)
+  if(var_4 > 0) {
     scripts\engine\utility::array_thread(level._id_6917, ::_id_6916, var_4);
+  }
 
   setsuncolorandintensity(1, 0.968627, 0.913725, level._id_11215[3]);
   wait 0.05;
@@ -782,8 +815,9 @@ _id_A1F9() {
         var_3.team = "allies";
       }
 
-      if(var_6.script_noteworthy == "missile")
+      if(var_6.script_noteworthy == "missile") {
         var_4 = var_6;
+      }
     }
   }
 
@@ -901,8 +935,9 @@ _id_EAC1() {
   var_0 = (-95, 0, 0);
   var_1 = getcsplineid("salter_exfil_jackal_spline", "targetname");
 
-  while(isDefined(level._id_68F7._id_1323B))
+  while(isDefined(level._id_68F7._id_1323B)) {
     scripts\engine\utility::waitframe();
+  }
 
   level._id_68F7.origin = getcsplinepointposition(var_1, 0);
   var_2 = level._id_68F7 scripts\sp\utility::_id_10808();
@@ -986,8 +1021,9 @@ _id_A36E() {
   self.fixednode = 1;
   self._id_2894 = 0.5;
 
-  if(!isDefined(level._id_91BF))
+  if(!isDefined(level._id_91BF)) {
     level._id_91BF = [];
+  }
 
   level._id_91BF[level._id_91BF.size] = self;
 }
@@ -1121,8 +1157,9 @@ _id_EA91() {
   level._id_EA2C _meth_82EE(var_1);
   level._id_EA2C scripts\sp\utility::_id_F3DD(32);
 
-  while(!isDefined(level._id_EA99))
+  while(!isDefined(level._id_EA99)) {
     wait 0.5;
+  }
 
   level._id_EA99 scripts\engine\utility::waittill_either("goal", "near_goal");
 
@@ -1134,13 +1171,15 @@ _id_EA91() {
 
   _id_0BDC::_id_137CF();
 
-  if(isDefined(level._id_EA2C._id_B14F) && level._id_EA2C._id_B14F)
+  if(isDefined(level._id_EA2C._id_B14F) && level._id_EA2C._id_B14F) {
     level._id_EA2C scripts\sp\utility::_id_1101B();
+  }
 
   level waittill("mount dialog done");
 
-  if(isalive(level._id_EA2C))
+  if(isalive(level._id_EA2C)) {
     level._id_EA2C delete();
+  }
 }
 
 _id_A280() {
@@ -1190,8 +1229,9 @@ _id_E307() {
   self._id_11856 = [];
   var_1 = getnumparts(self._id_E505);
 
-  for(var_2 = 0; var_2 < var_1; var_2++)
+  for(var_2 = 0; var_2 < var_1; var_2++) {
     var_0[var_0.size] = getpartname(self._id_E505, var_2);
+  }
 
   foreach(var_4 in var_0) {
     var_5 = strtok(var_4, "_");
@@ -1200,10 +1240,11 @@ _id_E307() {
       continue;
     }
     if(var_5[1] == "engine" && var_5.size >= 5) {
-      if(var_5[4] == "in" || var_5[4] == "out" && var_5.size != 7)
+      if(var_5[4] == "in" || var_5[4] == "out" && var_5.size != 7) {
         self._id_11856[self._id_11856.size] = playFXOnTag(scripts\engine\utility::getfx("un_thruster_rear_med_idle"), self, var_4);
-      else if(var_5[2] == "bottom")
+      } else if(var_5[2] == "bottom") {
         self._id_11856[self._id_11856.size] = playFXOnTag(scripts\engine\utility::getfx("un_thruster_down_lrg_idle"), self, var_4);
+      }
     }
 
     scripts\engine\utility::waitframe();
@@ -1276,8 +1317,9 @@ _id_A7BD(var_0, var_1, var_2, var_3, var_4) {
   scripts\engine\utility::flag_init("jackal_assault_vo_playing_important");
   level notify("land_on_retribution");
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     thread _id_A7BE(var_4);
+  }
 
   level endon("player_jackal_drone_dock");
   var_5 = 0;

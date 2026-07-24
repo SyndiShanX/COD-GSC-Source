@@ -32,10 +32,11 @@ _id_18D1(var_0, var_1) {
     self waittillmatch("traverse", "gravity on");
     self _meth_83C4("gravity");
 
-    if(!animhasnotetrack(var_0, "blend"))
+    if(!animhasnotetrack(var_0, "blend")) {
       wait(var_5);
-    else
+    } else {
       self waittillmatch("traverse", "blend");
+    }
   }
 }
 
@@ -60,21 +61,24 @@ _id_11662(var_0, var_1, var_2, var_3) {
   if(var_0 == 0 || var_2 <= 0) {
     return;
   }
-  if(var_1 > 0)
+  if(var_1 > 0) {
     wait(var_1);
+  }
 
   var_4 = (0, 0, var_0 / var_2);
 
-  if(isDefined(var_3) && var_3 < 1.0)
+  if(isDefined(var_3) && var_3 < 1.0) {
     self _meth_82E3("traverseAnim", self._id_126DB, self._id_126DD, 1, 0.2, var_3);
+  }
 
   for(var_5 = 0; var_5 < var_2; var_5++) {
     self _meth_80F1(self.origin + var_4);
     wait 0.05;
   }
 
-  if(isDefined(var_3) && var_3 < 1.0)
+  if(isDefined(var_3) && var_3 < 1.0) {
     self _meth_82E3("traverseAnim", self._id_126DB, self._id_126DD, 1, 0.2, 1.0);
+  }
 }
 
 _id_5AC3(var_0) {
@@ -85,8 +89,9 @@ _id_5AC3(var_0) {
   var_2 = self _meth_8148();
   var_2._id_126D4 = var_2.origin[2];
 
-  if(isDefined(var_2._id_126D5))
+  if(isDefined(var_2._id_126D5)) {
     var_2._id_126D4 = var_2._id_126D4 + var_2._id_126D5;
+  }
 
   var_3 = self _meth_8145();
   self orientmode("face angle", var_2.angles[1]);
@@ -95,17 +100,18 @@ _id_5AC3(var_0) {
   var_4 = var_0["traverseAnim"];
   var_5 = var_0["traverseToCoverAnim"];
 
-  if(var_1)
+  if(var_1) {
     self animmode("noclip");
-  else {
+  } else {
     self _meth_83C4("nogravity");
     self _meth_83C4("noclip");
   }
 
   self._id_126EC = self.origin[2];
 
-  if(!animhasnotetrack(var_4, "traverse_align"))
+  if(!animhasnotetrack(var_4, "traverse_align")) {
     _id_89F5();
+  }
 
   var_6 = 0;
 
@@ -117,17 +123,19 @@ _id_5AC3(var_0) {
   }
 
   if(var_6) {
-    if(isDefined(var_0["traverseToCoverSound"]))
+    if(isDefined(var_0["traverseToCoverSound"])) {
       thread scripts\sp\utility::play_sound_on_entity(var_0["traverseToCoverSound"]);
+    }
   } else if(isDefined(var_0["traverseSound"]))
     thread scripts\sp\utility::play_sound_on_entity(var_0["traverseSound"]);
 
   var_7 = undefined;
 
-  if(var_1)
+  if(var_1) {
     var_7 = _id_0A1E::asm_getbodyknob();
-  else
+  } else {
     var_7 = % body;
+  }
 
   self._id_126DB = var_4;
   self._id_126DD = var_7;
@@ -136,14 +144,16 @@ _id_5AC3(var_0) {
   self._id_126E2 = var_0["interruptDeathAnim"];
   scripts\anim\shared::donotetracks("traverseAnim", ::_id_89F8);
 
-  if(var_1)
+  if(var_1) {
     self animmode("gravity");
-  else
+  } else {
     self _meth_83C4("gravity");
+  }
 
   if(self.delayeddeath) {
-    if(var_1)
+    if(var_1) {
       self notify("external_traverse_complete");
+    }
 
     return;
   }
@@ -165,17 +175,19 @@ _id_5AC3(var_0) {
   self._id_4E2A = undefined;
   self._id_126EB = undefined;
 
-  if(var_1)
+  if(var_1) {
     self notify("external_traverse_complete");
+  }
 }
 
 _id_89F8(var_0) {
-  if(var_0 == "traverse_death")
+  if(var_0 == "traverse_death") {
     return _id_89F6();
-  else if(var_0 == "traverse_align")
+  } else if(var_0 == "traverse_align") {
     return _id_89F5();
-  else if(var_0 == "traverse_drop")
+  } else if(var_0 == "traverse_drop") {
     return _id_89F7();
+  }
 }
 
 _id_89F6() {
@@ -187,9 +199,9 @@ _id_89F6() {
 }
 
 _id_89F5() {
-  if(getdvarint("ai_iw7", 0) != 0)
+  if(getdvarint("ai_iw7", 0) != 0) {
     self animmode("noclip");
-  else {
+  } else {
     self _meth_83C4("nogravity");
     self _meth_83C4("noclip");
   }
@@ -211,10 +223,11 @@ _id_89F7() {
   var_7 = 0 - var_5[2];
   var_8 = var_7 - var_3;
 
-  if(var_7 < var_3)
+  if(var_7 < var_3) {
     var_9 = var_7 / var_3;
-  else
+  } else {
     var_9 = 1;
+  }
 
   var_10 = (var_6 - var_4) / 3.0;
   var_11 = ceil(var_10 * 20);
@@ -228,10 +241,11 @@ _id_6CE5(var_0) {
 
   for(;;) {
     if(self.origin[2] < var_0) {
-      if(getdvarint("ai_iw7", 0) != 0)
+      if(getdvarint("ai_iw7", 0) != 0) {
         self animmode("gravity");
-      else
+      } else {
         self _meth_83C4("gravity");
+      }
 
       break;
     }
@@ -254,9 +268,9 @@ _id_5864(var_0) {
     var_2 = 1;
     var_4 = getnotetracktimes(self._id_126DB, "traverse_align");
 
-    if(var_4.size > 0)
+    if(var_4.size > 0) {
       var_1 = var_4;
-    else {
+    } else {
       var_1 = getnotetracktimes(self._id_126DB, "traverse_jump_end");
       var_3 = 1;
     }
@@ -333,16 +347,18 @@ _id_5867(var_0, var_1, var_2, var_3) {
   var_5 = self _meth_8145();
   self orientmode("face angle", var_4.angles[1]);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "jump_down_40";
+  }
 
   self._id_126DB = anim._id_58C7[var_2];
   self._id_126DD = % body;
   self._id_126EB = var_4;
   self._id_126E4 = var_5;
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
   if(!var_3) {
     var_6 = var_4.origin[2] - var_5.origin[2];
@@ -353,10 +369,11 @@ _id_5867(var_0, var_1, var_2, var_3) {
   self clearanim(%body, 0.2);
   self _meth_82EA("traverseAnim", self._id_126DB, 1, 0.2, 1);
 
-  if(!var_3)
+  if(!var_3) {
     scripts\anim\shared::donotetracks("traverseAnim");
-  else
+  } else {
     scripts\anim\notetracks::donotetracksintercept("traverseAnim", ::_id_5864);
+  }
 
   self._id_BCA6 = undefined;
   self _meth_83C4("gravity");
@@ -371,28 +388,32 @@ _id_5868(var_0, var_1, var_2, var_3) {
   var_4 = self _meth_8148();
   self orientmode("face angle", var_4.angles[1]);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "jump_up_40";
+  }
 
   self._id_126DB = anim._id_58C7[var_2];
   self._id_126DD = % body;
   self._id_126EB = var_4;
   self._id_126E4 = self _meth_8145();
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
-  if(!var_3)
+  if(!var_3) {
     thread _id_11662(var_0 - 40.0, 0.2, var_1);
+  }
 
   self._id_BCA6 = "land";
   self clearanim(%body, 0.2);
   self _meth_82EA("traverseAnim", self._id_126DB, 1, 0.2, 1);
 
-  if(!var_3)
+  if(!var_3) {
     scripts\anim\shared::donotetracks("traverseAnim");
-  else
+  } else {
     scripts\anim\notetracks::donotetracksintercept("traverseAnim", ::_id_5864);
+  }
 
   self._id_BCA6 = undefined;
   self _meth_83C4("gravity");
@@ -408,8 +429,9 @@ _id_5869(var_0, var_1) {
   var_2 = self _meth_8148();
   self orientmode("face angle", var_2.angles[1]);
 
-  if(!isDefined(var_2._id_126D4))
+  if(!isDefined(var_2._id_126D4)) {
     var_2._id_126D4 = var_2.origin[2];
+  }
 
   var_3 = var_2._id_126D4 - var_2.origin[2];
   thread _id_11661(var_3 - var_1);
@@ -425,25 +447,28 @@ _id_F163() {
 }
 
 _id_F9C6() {
-  foreach(var_1 in getnodearray("traverse", "targetname"))
-  var_1 thread _id_126ED();
+  foreach(var_1 in getnodearray("traverse", "targetname")) {
+    var_1 thread _id_126ED();
+  }
 }
 
 _id_D999(var_0) {
   self._id_5AE2 = var_0.origin;
   self._id_10DCE = self.angles;
 
-  if(isent(var_0))
+  if(isent(var_0)) {
     var_0 delete();
-  else
+  } else {
     scripts\sp\utility::_id_51D4(var_0);
+  }
 }
 
 _id_D9BD(var_0) {
   var_1 = getEnt(var_0.target, "targetname");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
+  }
 
   self._id_138A6 = spawnStruct();
   var_3 = var_0;
@@ -460,10 +485,11 @@ _id_D9BD(var_0) {
     self._id_138A6._id_C050[var_4] = var_3.origin - self.origin;
     var_4++;
 
-    if(isDefined(var_3.target))
+    if(isDefined(var_3.target)) {
       var_10 = scripts\engine\utility::getStruct(var_3.target, "targetname");
-    else
+    } else {
       var_10 = undefined;
+    }
 
     scripts\sp\utility::_id_51D4(var_3);
     var_3 = var_10;
@@ -472,8 +498,9 @@ _id_D9BD(var_0) {
       if(var_3._id_EF1D == "wallrun_mantle") {
         self._id_138A6._id_B313 = var_3.origin - self.origin;
 
-        if(isDefined(var_3.angles))
+        if(isDefined(var_3.angles)) {
           self._id_138A6._id_B312 = var_3.angles;
+        }
 
         scripts\sp\utility::_id_51D4(var_3);
         break;
@@ -490,8 +517,9 @@ _id_D9BD(var_0) {
 _id_126ED() {
   var_0 = getEnt(self.target, "targetname");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = scripts\engine\utility::getStruct(self.target, "targetname");
+  }
 
   switch (self.animscript) {
     case "wall_run":
@@ -520,8 +548,9 @@ _id_126ED() {
   self._id_126D4 = var_0.origin[2];
   self._id_126D5 = var_0.origin[2] - self.origin[2];
 
-  if(isent(var_0))
+  if(isent(var_0)) {
     var_0 delete();
-  else
+  } else {
     scripts\sp\utility::_id_51D4(var_0);
+  }
 }

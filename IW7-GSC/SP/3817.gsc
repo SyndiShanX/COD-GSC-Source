@@ -38,10 +38,11 @@ _id_CCB7(var_0) {
 _id_7C59() {
   var_0 = level.player _meth_84C6("lastCompletedMission");
 
-  if(isDefined(var_0) && var_0 != "")
+  if(isDefined(var_0) && var_0 != "") {
     var_1 = _id_7BDC(var_0);
-  else
+  } else {
     var_1 = _id_792E();
+  }
 
   return var_1;
 }
@@ -65,8 +66,9 @@ _id_7BDC(var_0) {
     }
   } else if(issubstr(var_0, "sa_") && var_0 != "sa_moon")
     var_1 = _id_7C25(var_0);
-  else if(issubstr(var_0, "ja_"))
+  else if(issubstr(var_0, "ja_")) {
     var_1 = _id_7A55();
+  }
 
   return var_1;
 }
@@ -101,22 +103,23 @@ _id_7A55() {
   var_0 = undefined;
   var_1 = _id_7BDD();
 
-  if(var_1["moonport_broadcast"] == "open")
+  if(var_1["moonport_broadcast"] == "open") {
     var_0 = "moonport_broadcast";
-  else if(var_1["geneva_broadcast"] == "open")
+  } else if(var_1["geneva_broadcast"] == "open") {
     var_0 = "geneva_broadcast";
-  else if(var_1["titan_broadcast"] == "open")
+  } else if(var_1["titan_broadcast"] == "open") {
     var_0 = "titan_broadcast";
-  else if(var_1["assassination_broadcast"] == "open")
+  } else if(var_1["assassination_broadcast"] == "open") {
     var_0 = "assassination_broadcast";
-  else if(var_1["empambush_broadcast"] == "open")
+  } else if(var_1["empambush_broadcast"] == "open") {
     var_0 = "empambush_broadcast";
-  else if(var_1["vips_broadcast"] == "open")
+  } else if(var_1["vips_broadcast"] == "open") {
     var_0 = "vips_broadcast";
-  else if(var_1["wounded_broadcast"] == "open")
+  } else if(var_1["wounded_broadcast"] == "open") {
     var_0 = "wounded_broadcast";
-  else
+  } else {
     var_0 = "rogue_broadcast";
+  }
 
   return var_0;
 }
@@ -136,26 +139,30 @@ _id_7BDD() {
 }
 
 _id_F2E9(var_0) {
-  if(!isDefined(var_0) && isDefined(level._id_FD7A))
+  if(!isDefined(var_0) && isDefined(level._id_FD7A)) {
     var_0 = level._id_FD7A;
+  }
 
   var_1 = _id_7883(var_0);
 
   if(isDefined(var_1)) {
-    if(level.player _meth_84C6("scNewsReels", var_1) == "locked")
+    if(level.player _meth_84C6("scNewsReels", var_1) == "locked") {
       level.player _meth_84C7("scNewsReels", var_1, "open");
+    }
   }
 }
 
 _id_F2EA(var_0) {
-  if(!isDefined(var_0) && isDefined(level._id_FD7A))
+  if(!isDefined(var_0) && isDefined(level._id_FD7A)) {
     var_0 = level._id_FD7A;
+  }
 
   var_1 = _id_7883(var_0);
 
   if(isDefined(var_1)) {
-    if(level.player _meth_84C6("scNewsReels", var_1) == "open")
+    if(level.player _meth_84C6("scNewsReels", var_1) == "open") {
       level.player _meth_84C7("scNewsReels", var_1, "watched");
+    }
   }
 }
 
@@ -231,15 +238,18 @@ _id_792E() {
 
 _id_7C5D(var_0) {
   if(!isDefined(var_0)) {
-    if(isDefined(level._id_FD7A))
+    if(isDefined(level._id_FD7A)) {
       var_0 = level._id_FD7A;
+    }
   }
 
-  if(!isDefined(level._id_30DA))
+  if(!isDefined(level._id_30DA)) {
     _id_9849();
+  }
 
-  if(isDefined(level._id_30DA[var_0]))
+  if(isDefined(level._id_30DA[var_0])) {
     return level._id_30DA[var_0];
+  }
 }
 
 _id_9849() {
@@ -258,11 +268,13 @@ _id_9849() {
 
 _id_7C5C(var_0) {
   if(isDefined(var_0)) {
-    if(!isDefined(level._id_30DB))
+    if(!isDefined(level._id_30DB)) {
       _id_9848();
+    }
 
-    if(isDefined(level._id_30DB[var_0]))
+    if(isDefined(level._id_30DB[var_0])) {
       return level._id_30DB[var_0];
+    }
   }
 }
 
@@ -280,11 +292,13 @@ _id_9848() {
 }
 
 _id_7C5A(var_0) {
-  if(!isDefined(level._id_30D7))
+  if(!isDefined(level._id_30D7)) {
     _id_9846();
+  }
 
-  if(isDefined(level._id_30D7[var_0]))
+  if(isDefined(level._id_30D7[var_0])) {
     return level._id_30D7[var_0];
+  }
 }
 
 _id_48AB(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
@@ -297,11 +311,13 @@ _id_48AB(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7.gender = var_5;
   var_7._id_C7D9 = "anim_only";
 
-  if(isDefined(var_4) && isDefined(var_6))
+  if(isDefined(var_4) && isDefined(var_6)) {
     var_7._id_C7D9 = "custom_interaction";
+  }
 
-  if(isDefined(var_1) && !isDefined(var_6))
+  if(isDefined(var_1) && !isDefined(var_6)) {
     var_7._id_C7D9 = "anim_interaction";
+  }
 
   return var_7;
 }
@@ -366,11 +382,13 @@ _id_1737() {
 }
 
 _id_7C5B(var_0) {
-  if(!isDefined(level._id_30D9))
+  if(!isDefined(level._id_30D9)) {
     _id_9847();
+  }
 
-  if(isDefined(level._id_30D9[var_0]))
+  if(isDefined(level._id_30D9[var_0])) {
     return level._id_30D9[var_0];
+  }
 }
 
 _id_9847() {
@@ -460,11 +478,13 @@ _id_ADE7() {
 }
 
 _id_7C5E(var_0) {
-  if(!isDefined(level._id_30DF))
+  if(!isDefined(level._id_30DF)) {
     _id_984B();
+  }
 
-  if(isDefined(level._id_30DF[var_0]))
+  if(isDefined(level._id_30DF[var_0])) {
     return level._id_30DF[var_0];
+  }
 }
 
 _id_984B() {
@@ -501,8 +521,9 @@ _id_11954() {
   var_1 = _id_0EDB::_id_7E0E("broadcast_audience_04");
   var_2 = _id_0EDB::_id_7881();
 
-  while(distance2d(level.player.origin, var_2.origin) > 400)
+  while(distance2d(level.player.origin, var_2.origin) > 400) {
     scripts\engine\utility::waitframe();
+  }
 
   var_2 notify(var_0._id_1FBB + "_stop_idle");
   var_2 notify(var_1._id_1FBB + "_stop_idle");
@@ -531,8 +552,9 @@ _id_D937() {
   var_1 = _id_0EDB::_id_7E0E("broadcast_audience_04");
   var_2 = _id_0EDB::_id_7881();
 
-  while(distance2d(level.player.origin, var_2.origin) > 400)
+  while(distance2d(level.player.origin, var_2.origin) > 400) {
     scripts\engine\utility::waitframe();
+  }
 
   var_2 notify(var_0._id_1FBB + "_stop_idle");
   var_2 notify(var_1._id_1FBB + "_stop_idle");
@@ -560,8 +582,9 @@ _id_2393() {
   var_1 = _id_0EDB::_id_7E0E("broadcast_audience_04");
   var_2 = _id_0EDB::_id_7881();
 
-  while(distance2d(level.player.origin, var_2.origin) > 400)
+  while(distance2d(level.player.origin, var_2.origin) > 400) {
     scripts\engine\utility::waitframe();
+  }
 
   var_2 notify(var_0._id_1FBB + "_stop_idle");
   var_2 notify(var_1._id_1FBB + "_stop_idle");
@@ -590,8 +613,9 @@ _id_6191() {
   var_3 = _id_0EDB::_id_7E0E("broadcast_audience_06");
   var_4 = _id_0EDB::_id_7881();
 
-  while(distance2d(level.player.origin, var_4.origin) > 400)
+  while(distance2d(level.player.origin, var_4.origin) > 400) {
     scripts\engine\utility::waitframe();
+  }
 
   var_4 notify(var_0._id_1FBB + "_stop_idle");
   var_4 notify(var_1._id_1FBB + "_stop_idle");
@@ -617,8 +641,9 @@ _id_1342E() {
   var_2 = _id_0EDB::_id_7E0E("broadcast_audience_05");
   var_3 = _id_0EDB::_id_7881();
 
-  while(distance2d(level.player.origin, var_3.origin) > 400)
+  while(distance2d(level.player.origin, var_3.origin) > 400) {
     scripts\engine\utility::waitframe();
+  }
 
   var_3 notify(var_0._id_1FBB + "_stop_idle");
   var_3 notify(var_1._id_1FBB + "_stop_idle");
@@ -629,8 +654,9 @@ _id_1342E() {
   wait 0.33;
   var_4 = level.player _meth_84C6("saVIPHostagesState");
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = "all";
+  }
 
   switch (var_4) {
     case "all":
@@ -664,8 +690,9 @@ _id_13DD1() {
   var_3 = _id_0EDB::_id_7E0E("broadcast_audience_06");
   var_4 = _id_0EDB::_id_7881();
 
-  while(distance2d(level.player.origin, var_4.origin) > 400)
+  while(distance2d(level.player.origin, var_4.origin) > 400) {
     scripts\engine\utility::waitframe();
+  }
 
   var_4 notify(var_0._id_1FBB + "_stop_idle");
   var_4 notify(var_1._id_1FBB + "_stop_idle");

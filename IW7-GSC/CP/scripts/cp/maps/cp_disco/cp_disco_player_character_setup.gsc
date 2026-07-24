@@ -32,8 +32,9 @@ init_player_characters() {
 }
 
 post_pam_setup_func(var_0) {
-  if(!isDefined(level.special_character_count))
+  if(!isDefined(level.special_character_count)) {
     level.special_character_count = 1;
-  else
+  } else {
     level.special_character_count++;
+  }
 }

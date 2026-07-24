@@ -4,14 +4,17 @@
 ***********************************************/
 
 setupjumpattackbtaction(var_0, var_1, var_2) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = ::jumpattack_begin;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = ::jumpattack_tick;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = ::jumpattack_end;
+  }
 
   scripts\aitypes\dlc4\bt_action_api::setupbtaction("jump_attack", ::jumpattack_begin, ::jumpattack_tick, ::jumpattack_end);
 }
@@ -26,8 +29,9 @@ jumpattack_begin(var_0) {
 }
 
 jumpattack_tick(var_0) {
-  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0))
+  if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0)) {
     return anim.running;
+  }
 
   self clearpath();
   return anim.success;
@@ -46,8 +50,9 @@ _id_7A7A(var_0, var_1, var_2, var_3) {
   var_4 = var_4 * (1, 1, 0);
   var_4 = vectorNormalize(var_4) * var_1;
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1.0;
+  }
 
   if(isPlayer(var_2)) {
     var_5 = var_2 getvelocity();
@@ -67,8 +72,9 @@ _id_7A7A(var_0, var_1, var_2, var_3) {
 }
 
 tryjumpattack(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 0;
+  }
 
   var_2 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 
@@ -77,15 +83,17 @@ tryjumpattack(var_0, var_1) {
     return 0;
   }
 
-  if(gettime() < self.nextjumpattack)
+  if(gettime() < self.nextjumpattack) {
     return 0;
+  }
 
   var_3 = vectorNormalize((var_1.origin - self.origin) * (1, 1, 0));
   var_4 = anglesToForward(self.angles);
   var_5 = vectordot(var_3, var_4);
 
-  if(var_5 < var_2.jump_attack_min_enemy_dot)
+  if(var_5 < var_2.jump_attack_min_enemy_dot) {
     return 0;
+  }
 
   var_6 = distance2d(var_1.origin, self.origin);
   var_7 = var_6 / var_2.avg_leap_speed;
@@ -95,22 +103,26 @@ tryjumpattack(var_0, var_1) {
   var_9 = scripts\aitypes\dlc4\behavior_utils::getpredictedenemypos(var_1, var_7);
   var_10 = distancesquared(var_9, self.origin);
 
-  if(var_10 < var_2.min_leap_distance_sq)
+  if(var_10 < var_2.min_leap_distance_sq) {
     return 0;
+  }
 
   self.nextjumpattack = gettime() + 150;
   var_9 = scripts\anim\notetracks_mp::_id_5D51(var_9, var_2.max_leap_melee_drop_distance);
 
-  if(!isDefined(var_9))
+  if(!isDefined(var_9)) {
     return 0;
+  }
 
   var_11 = distancesquared(self.origin, var_9);
 
-  if(var_11 < var_2.min_leap_distance_sq)
+  if(var_11 < var_2.min_leap_distance_sq) {
     return 0;
+  }
 
-  if(var_11 > var_2.max_leap_distance_sq)
+  if(var_11 > var_2.max_leap_distance_sq) {
     return 0;
+  }
 
   var_12 = 0;
   var_13 = 1;
@@ -121,32 +133,38 @@ tryjumpattack(var_0, var_1) {
         var_12 = 1;
         var_14 = navtrace(self.origin, var_9, self, 1);
 
-        if(var_14["fraction"] >= 0.9)
+        if(var_14["fraction"] >= 0.9) {
           var_13 = 0;
+        }
       }
     }
   }
 
-  if(!self _meth_85CA(self.origin, var_9))
+  if(!self _meth_85CA(self.origin, var_9)) {
     return 0;
+  }
 
-  if(var_13 && !trajectorycanattemptaccuratejump(self.origin, anglestoup(self.angles), var_9, anglestoup(var_1.angles), level._id_1B73, 1.01 * level._id_1B74))
+  if(var_13 && !trajectorycanattemptaccuratejump(self.origin, anglestoup(self.angles), var_9, anglestoup(var_1.angles), level._id_1B73, 1.01 * level._id_1B74)) {
     return 0;
+  }
 
   var_15 = getclosestpointonnavmesh(var_9, self);
 
-  if(abs(var_15[2] - var_9[2]) > 32)
+  if(abs(var_15[2] - var_9[2]) > 32) {
     return 0;
+  }
 
-  if(distance2dsquared(var_15, var_9) > 144)
+  if(distance2dsquared(var_15, var_9) > 144) {
     return 0;
+  }
 
   self._id_AAFD = var_9;
 
-  if(var_12)
+  if(var_12) {
     scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(var_0, "teleport");
-  else
+  } else {
     scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(var_0, "jump_attack");
+  }
 
   return 1;
 }

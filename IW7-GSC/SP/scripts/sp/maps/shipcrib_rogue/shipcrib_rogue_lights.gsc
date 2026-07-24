@@ -117,14 +117,17 @@ _id_7471() {
   var_9 = getEntArray("lgt_bridge_klaxon", "script_noteworthy");
   level waittill("jump_started");
 
-  foreach(var_11 in var_8)
-  var_11 setlightintensity(0);
+  foreach(var_11 in var_8) {
+    var_11 setlightintensity(0);
+  }
 
-  foreach(var_11 in var_6)
-  var_11 setlightintensity(0);
+  foreach(var_11 in var_6) {
+    var_11 setlightintensity(0);
+  }
 
-  foreach(var_11 in var_7)
-  var_11 setlightintensity(0);
+  foreach(var_11 in var_7) {
+    var_11 setlightintensity(0);
+  }
 
   wait 2;
   level waittill("ftl_finished");
@@ -145,8 +148,9 @@ _id_7471() {
 
   wait 1;
 
-  foreach(var_11 in var_8)
-  var_11 thread scripts\sp\lights::_id_AB83(1.25, 0.25);
+  foreach(var_11 in var_8) {
+    var_11 thread scripts\sp\lights::_id_AB83(1.25, 0.25);
+  }
 }
 
 _id_226C() {}

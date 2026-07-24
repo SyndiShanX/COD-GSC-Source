@@ -28,17 +28,20 @@ spawn_rat_king(var_0, var_1, var_2) {
   scripts\engine\utility::flag_wait("interactions_initialized");
 
   if(isDefined(level.rat_king)) {
-    if(scripts\engine\utility::is_true(var_2))
+    if(scripts\engine\utility::is_true(var_2)) {
       level.rat_king suicide();
-    else
+    } else {
       return;
+    }
   }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = level.rat_king_spawn_loc;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level.rat_king_spawn_angles;
+  }
 
   for(;;) {
     level.rat_king = scripts\mp\mp_agent::spawnnewagent("ratking", "axis", var_0, var_1);
@@ -49,8 +52,9 @@ spawn_rat_king(var_0, var_1, var_2) {
       level.rat_king thread rkaudiomonitor();
       level.spawned_enemies[level.spawned_enemies.size] = level.rat_king;
 
-      if(scripts\engine\utility::flag("rk_fight_started"))
+      if(scripts\engine\utility::flag("rk_fight_started")) {
         playsoundatpos(level.rat_king_spawn_loc + (0, 0, 100), "rk_spawn_in_lr");
+      }
 
       level.rat_king thread runspawnlogic();
       break;

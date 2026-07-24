@@ -6,8 +6,9 @@
 _id_1DF2() {
   var_0 = ["veh_mil_air_un_jackal_d1_s2_p3", "veh_mil_air_un_jackal_d1_s2_p1", "veh_mil_air_un_jackal_d2_s2_p5", "veh_mil_air_un_jackal_d2_s2_p6"];
 
-  foreach(var_2 in var_0)
-  precachemodel(var_2);
+  foreach(var_2 in var_0) {
+    precachemodel(var_2);
+  }
 }
 
 _id_1DF1() {}
@@ -15,17 +16,21 @@ _id_1DF1() {}
 _id_1DC7(var_0, var_1, var_2, var_3) {
   level waittill("poop");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "ambient_crash_start";
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "stop_ambient_jackals";
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "friendly";
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 4;
+  }
 
   level notify(var_1);
   level endon(var_1);
@@ -82,8 +87,9 @@ _id_A1DF(var_0, var_1) {
           var_6 thread _id_A1B9(randomintrange(10, 12));
 
           if(scripts\engine\utility::cointoss()) {
-            if(isDefined(var_7) && isDefined(var_6))
+            if(isDefined(var_7) && isDefined(var_6)) {
               var_6 thread _id_A1BF(randomintrange(2, 4), var_7);
+            }
           }
 
           var_2 = scripts\engine\utility::array_add(var_2, var_6);
@@ -93,11 +99,13 @@ _id_A1DF(var_0, var_1) {
         continue;
       }
 
-      if(isDefined(var_6))
+      if(isDefined(var_6)) {
         var_6 delete();
+      }
 
-      if(isDefined(var_7))
+      if(isDefined(var_7)) {
         var_7 delete();
+      }
     }
 
     wait(var_1);
@@ -136,8 +144,9 @@ _id_A1A2(var_0, var_1) {
           var_7 thread _id_A1B9(randomintrange(10, 12));
 
           if(scripts\engine\utility::cointoss()) {
-            if(isDefined(var_7) && isDefined(var_6))
+            if(isDefined(var_7) && isDefined(var_6)) {
               var_7 thread _id_A1BF(randomintrange(2, 4), var_6);
+            }
           }
 
           var_2 = scripts\engine\utility::array_add(var_2, var_7);
@@ -147,11 +156,13 @@ _id_A1A2(var_0, var_1) {
         continue;
       }
 
-      if(isDefined(var_6))
+      if(isDefined(var_6)) {
         var_6 delete();
+      }
 
-      if(isDefined(var_7))
+      if(isDefined(var_7)) {
         var_7 delete();
+      }
     }
 
     wait(var_1);
@@ -218,10 +229,11 @@ _id_10207(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_8 = scripts\engine\utility::array_randomize(var_8);
 
   foreach(var_10 in var_8) {
-    if(var_2 == "allies")
+    if(var_2 == "allies") {
       var_11 = _id_10747("ambient_crashing_jackal", var_6);
-    else
+    } else {
       var_11 = _id_10747("ambient_crashing_jackal_enemy", var_6);
+    }
 
     if(isDefined(var_11)) {
       var_11 _id_0BDC::_id_19A0(1);
@@ -239,8 +251,9 @@ _id_10207(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       var_11 thread _id_0BDC::_id_A1EF(var_10, var_13, 10);
 
       if(scripts\engine\utility::is_true(var_4)) {
-        if(!isDefined(var_5))
+        if(!isDefined(var_5)) {
           var_5 = randomintrange(4, 12);
+        }
 
         var_11 thread _id_A1B9(var_5);
       } else
@@ -248,8 +261,9 @@ _id_10207(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
       var_7 = scripts\engine\utility::array_add(var_7, var_11);
 
-      if(var_8.size > 1 && isDefined(var_1))
+      if(var_8.size > 1 && isDefined(var_1)) {
         wait(var_1);
+      }
     }
   }
 
@@ -257,19 +271,21 @@ _id_10207(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 _id_10747(var_0, var_1) {
-  if(!isDefined(level._id_14A3))
+  if(!isDefined(level._id_14A3)) {
     level._id_14A3 = [];
+  }
 
   var_2 = undefined;
   level._id_14A3 = scripts\sp\utility::_id_DFEB(level._id_14A3);
   var_3 = _id_135D7(var_0);
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     return undefined;
+  }
 
-  if(level._id_14A3.size < 15 || scripts\engine\utility::is_true(var_1))
+  if(level._id_14A3.size < 15 || scripts\engine\utility::is_true(var_1)) {
     var_2 = scripts\sp\vehicle::_id_1080C(var_0);
-  else {
+  } else {
     var_4 = undefined;
     level._id_14A3 = scripts\sp\utility::_id_DFEB(level._id_14A3);
 
@@ -280,8 +296,9 @@ _id_10747(var_0, var_1) {
       }
     }
 
-    if(!isDefined(var_4))
+    if(!isDefined(var_4)) {
       var_4 = scripts\engine\utility::random(level._id_14A3);
+    }
 
     var_4 _id_A233();
     _id_135D7(var_0);
@@ -305,8 +322,9 @@ _id_F429(var_0, var_1) {
 _id_135D7(var_0) {
   var_1 = getEnt(var_0, "targetname");
 
-  while(isDefined(var_1) && isDefined(var_1._id_1323B))
+  while(isDefined(var_1) && isDefined(var_1._id_1323B)) {
     scripts\engine\utility::waitframe();
+  }
 
   return var_1;
 }
@@ -315,10 +333,11 @@ _id_A1B9(var_0) {
   self endon("death");
   var_1 = scripts\engine\utility::waittill_notify_or_timeout_return("scripted_explode", var_0);
 
-  if(isDefined(var_1) && var_1 == "timeout")
+  if(isDefined(var_1) && var_1 == "timeout") {
     thread _id_A12F();
-  else
+  } else {
     thread _id_A233();
+  }
 }
 
 _id_A1BF(var_0, var_1, var_2) {
@@ -327,10 +346,11 @@ _id_A1BF(var_0, var_1, var_2) {
   }
   self endon("death");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     wait(var_2);
-  else
+  } else {
     wait(randomfloatrange(1, 3));
+  }
 
   if(!isDefined(var_1)) {
     self._id_B835 = scripts\engine\utility::spawn_tag_origin();
@@ -357,8 +377,9 @@ _id_A136() {
     if(scripts\engine\utility::cointoss() && isDefined(var_1.asmname) && var_1.asmname == "jackal" && !scripts\engine\utility::is_true(var_1._id_2714)) {
       wait(randomfloatrange(1, 3));
 
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         var_1 thread _id_A12F();
+      }
     }
   }
 }
@@ -382,16 +403,18 @@ _id_A233() {
     var_0 = spawn("script_origin", self.origin);
     var_0 linkTo(self);
 
-    if(isDefined(self._id_110CD))
+    if(isDefined(self._id_110CD)) {
       playFX(scripts\engine\utility::getfx(self._id_110CD), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
-    else
+    } else {
       playFX(scripts\engine\utility::getfx("vfx_jackal_explode"), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+    }
 
     scripts\engine\utility::waitframe();
     var_0 playSound("jackal_mars_explode", "explodone");
 
-    if(isDefined(self))
+    if(isDefined(self)) {
       self delete();
+    }
 
     var_0 waittill("explodone");
     var_0 delete();
@@ -408,10 +431,11 @@ _id_10273() {
   for(;;) {
     var_0 = randomint(3);
 
-    if(var_0 == 0)
+    if(var_0 == 0) {
       thread _id_10279();
-    else
+    } else {
       thread _id_1027A();
+    }
 
     wait(level._id_BE27);
   }
@@ -428,8 +452,9 @@ _id_10276() {
     var_2 = vectorNormalize(var_2);
     var_3 = vectordot(var_2, anglestoright(level.player.angles));
 
-    if(var_3 >= -0.6 && var_3 <= 0.6)
+    if(var_3 >= -0.6 && var_3 <= 0.6) {
       return var_1;
+    }
 
     wait 0.1;
   }
@@ -466,10 +491,11 @@ _id_10279() {
 }
 
 _id_10277() {
-  if(scripts\engine\utility::cointoss())
+  if(scripts\engine\utility::cointoss()) {
     return 1;
-  else
+  } else {
     return -1;
+  }
 }
 
 _id_10275(var_0, var_1, var_2, var_3) {
@@ -487,10 +513,11 @@ _id_10275(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_3)) {
     var_7 = randomint(4);
 
-    if(var_7 > 0 || var_5[2] >= 0)
+    if(var_7 > 0 || var_5[2] >= 0) {
       var_8 = scripts\engine\utility::getfx("vfx_ra_finale_expl_sideblast");
-    else
+    } else {
       var_8 = scripts\engine\utility::getfx(scripts\engine\utility::random(var_6));
+    }
 
     playFX(var_8, var_5);
     var_4 playSound("mars_explode_dist_debris");
@@ -515,20 +542,23 @@ _id_10278(var_0) {
   var_0 endon("delete");
   var_1 = randomint(2);
 
-  if(var_1 == 0)
+  if(var_1 == 0) {
     var_2 = randomint(361);
-  else
+  } else {
     var_2 = -1 * randomint(361);
+  }
 
-  if(var_1 == 0)
+  if(var_1 == 0) {
     var_3 = randomint(91);
-  else
+  } else {
     var_3 = -1 * randomint(91);
+  }
 
-  if(var_1 == 0)
+  if(var_1 == 0) {
     var_4 = randomint(46);
-  else
+  } else {
     var_4 = -1 * randomint(46);
+  }
 
   var_5 = randomfloatrange(0.5, 1.25);
 
@@ -543,23 +573,29 @@ _id_3FFC(var_0) {
   var_2 = var_0[1];
   var_3 = var_0[2];
 
-  if(var_1 > 80000)
+  if(var_1 > 80000) {
     var_1 = 80000;
+  }
 
-  if(var_1 < -80000)
+  if(var_1 < -80000) {
     var_1 = -80000;
+  }
 
-  if(var_2 > 25000)
+  if(var_2 > 25000) {
     var_2 = 25000;
+  }
 
-  if(var_2 < -115000)
+  if(var_2 < -115000) {
     var_2 = -115000;
+  }
 
-  if(var_3 < -20000)
+  if(var_3 < -20000) {
     var_3 = -20000;
+  }
 
-  if(var_3 > 20000)
+  if(var_3 > 20000) {
     var_3 = 20000;
+  }
 
   var_0 = (var_1, var_2, var_3);
   return var_0;

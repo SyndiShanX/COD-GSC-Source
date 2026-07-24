@@ -87,8 +87,9 @@ set_carrying_violetray(var_0, var_1, var_2) {
   for(;;) {
     var_3 = scripts\engine\utility::waittill_any_return("place_ims", "cancel_ims", "force_cancel_placement", "player_action_slot_restart");
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       var_3 = "force_cancel_placement";
+    }
 
     if(var_3 == "cancel_ims" || var_3 == "force_cancel_placement" || var_3 == "player_action_slot_restart") {
       if(!var_1 && var_3 == "cancel_ims") {
@@ -96,10 +97,11 @@ set_carrying_violetray(var_0, var_1, var_2) {
       }
       var_0 violetray_trap_setcancelled(var_3 == "force_cancel_placement" && !isDefined(var_0.firstplacement));
 
-      if(var_3 != "force_cancel_placement")
+      if(var_3 != "force_cancel_placement") {
         thread watch_dpad();
-      else if(var_1)
+      } else if(var_1) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
+      }
 
       return 0;
     }
@@ -107,8 +109,9 @@ set_carrying_violetray(var_0, var_1, var_2) {
     if(!var_0.canbeplaced) {
       continue;
     }
-    if(var_1)
+    if(var_1) {
       scripts\cp\utility::remove_crafted_item_from_inventory(self);
+    }
 
     var_0 thread violetray_trap_setplaced(var_2);
     self notify("IMS_placed");
@@ -155,10 +158,11 @@ create_violetray_trap(var_0, var_1) {
   var_4.config = level.violetray_trap_settings[var_3];
   var_4 thread violetray_trap_handleuse();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_4 thread scripts\cp\utility::item_timeout(var_1);
-  else
+  } else {
     var_4 thread scripts\cp\utility::item_timeout(undefined, level.violetray_trap_settings[self.violetray_trap_type].lifespan);
+  }
 
   return var_4;
 }
@@ -221,8 +225,9 @@ violetray_trap_handleuse() {
     }
     violetray_trap_setinactive();
 
-    if(isDefined(self getlinkedparent()))
+    if(isDefined(self getlinkedparent())) {
       self unlink();
+    }
 
     var_0 thread set_carrying_violetray(var_1, 0, self.lifespan);
     self delete();
@@ -234,13 +239,15 @@ violetray_trap_setplaced(var_0) {
   self endon("death");
   level endon("game_ended");
 
-  if(isDefined(self.carriedby))
+  if(isDefined(self.carriedby)) {
     self.carriedby forceusehintoff();
+  }
 
   self.carriedby = undefined;
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.iscarrying = 0;
+  }
 
   self.firstplacement = undefined;
   var_1 = create_violetray_trap(self, var_0);
@@ -252,8 +259,9 @@ violetray_trap_setplaced(var_0) {
   var_1 thread violetray_trap_setactive();
   var_2 = spawnStruct();
 
-  if(isDefined(self.moving_platform))
+  if(isDefined(self.moving_platform)) {
     var_2.linkparent = self.moving_platform;
+  }
 
   var_2.endonstring = "carried";
   var_2.deathoverridecallback = ::_id_936D;
@@ -271,8 +279,9 @@ violetray_trap_setcancelled(var_0) {
     var_1 scripts\engine\utility::allow_weapon(1);
   }
 
-  if(isDefined(var_0) && var_0)
+  if(isDefined(var_0) && var_0) {
     _id_66A7();
+  }
 
   self.carried_violetray_trap delete();
   self delete();
@@ -289,8 +298,9 @@ violetray_trap_setcarried(var_0) {
   thread _id_936F(var_0);
   thread _id_9371(var_0);
 
-  if(isDefined(level._id_5CF2))
+  if(isDefined(level._id_5CF2)) {
     self thread[[level._id_5CF2]](var_0);
+  }
 
   self notify("carried");
 }
@@ -331,8 +341,9 @@ violetray_trap_setinactive() {
   self stoploopsound();
   self setscriptablepartstate("violetray", "off");
 
-  if(isDefined(self._id_2536))
+  if(isDefined(self._id_2536)) {
     self._id_2536 delete();
+  }
 
   if(isDefined(self._id_69F6)) {
     self._id_69F6 delete();
@@ -361,24 +372,26 @@ violetray_trap_attack_zombies() {
       if(isDefined(var_2.desired_death_angles)) {
         continue;
       }
-      if(distancesquared(self.origin, var_2.origin) > 75625)
+      if(distancesquared(self.origin, var_2.origin) > 75625) {
         continue;
-      else if(scripts\engine\utility::within_fov(self.origin + (0, 0, 40), self.angles, var_2.origin + (0, 0, 40), level.cosine["15"])) {
+      } else if(scripts\engine\utility::within_fov(self.origin + (0, 0, 40), self.angles, var_2.origin + (0, 0, 40), level.cosine["15"])) {
         var_3 = self.origin - var_2.origin;
         var_4 = vectortoangles(var_3);
         var_2.desired_death_angles = (0, var_4[1], 0);
 
-        if(isDefined(self.owner))
+        if(isDefined(self.owner)) {
           var_2._id_CF80 = self.owner;
-        else
+        } else {
           var_2._id_CF80 = undefined;
+        }
 
         var_2 scripts\asm\asm::asm_setstate("violetraydeath");
         thread scripts\engine\utility::play_sound_in_space("town_xray_burn_zombie", var_2.origin);
         wait 0.05;
 
-        if(isDefined(self.owner))
+        if(isDefined(self.owner)) {
           self.owner scripts\cp\cp_merits::processmerit("mt_dlc3_crafted_kills");
+        }
       }
     }
 

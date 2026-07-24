@@ -16,10 +16,11 @@ _id_878C() {
 }
 
 _id_87CB(var_0, var_1) {
-  if(var_0)
+  if(var_0) {
     level.player._id_8856 = var_1;
-  else
+  } else {
     level.player._id_8856 = undefined;
+  }
 }
 
 _id_87E0(var_0) {
@@ -38,15 +39,17 @@ _id_87A1() {
 _id_87F3() {
   level.player waittill("player_is_hacked_robot", var_0, var_1);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     return var_1;
-  else
+  } else {
     return var_0;
+  }
 }
 
 _id_8795(var_0, var_1) {
-  if(!isDefined(level._id_8850))
+  if(!isDefined(level._id_8850)) {
     level._id_8850 = [];
+  }
 
   var_0._id_1B07 = var_1;
   level._id_8850 = scripts\engine\utility::array_add(level._id_8850, var_0);
@@ -57,8 +60,9 @@ _id_87D1(var_0) {
 }
 
 _id_87BC(var_0) {
-  if(!isDefined(level._id_8850))
+  if(!isDefined(level._id_8850)) {
     return 0;
+  }
 
   return scripts\engine\utility::array_contains(level._id_8850, var_0);
 }
@@ -68,24 +72,27 @@ _id_87C9(var_0, var_1) {
 }
 
 _id_8780(var_0) {
-  if(var_0 == 1)
+  if(var_0 == 1) {
     level.player._id_87F9 = var_0;
-  else
+  } else {
     level.player._id_87F9 = undefined;
+  }
 }
 
 _id_8782(var_0) {
-  if(var_0 == 1)
+  if(var_0 == 1) {
     level.player._id_87FA = var_0;
-  else
+  } else {
     level.player._id_87FA = undefined;
+  }
 }
 
 _id_87A7() {
-  if(!isDefined(level.player._id_883D))
+  if(!isDefined(level.player._id_883D)) {
     return "none";
-  else
+  } else {
     return level.player._id_883D;
+  }
 }
 
 _id_87BA() {
@@ -96,8 +103,9 @@ _id_877F(var_0) {
   if(isarray(var_0)) {
     level.player._id_8839 = scripts\engine\utility::array_combine(level.player._id_8839, var_0);
 
-    foreach(var_2 in var_0)
-    var_2 notify("hack_added_to_blacklist");
+    foreach(var_2 in var_0) {
+      var_2 notify("hack_added_to_blacklist");
+    }
   } else {
     level.player._id_8839 = scripts\engine\utility::array_add(level.player._id_8839, var_0);
     var_0 notify("hack_added_to_blacklist");
@@ -105,54 +113,62 @@ _id_877F(var_0) {
 }
 
 _id_87D0(var_0) {
-  if(isarray(var_0))
+  if(isarray(var_0)) {
     level.player._id_8839 = scripts\engine\utility::array_remove_array(level.player._id_8839, var_0);
-  else
+  } else {
     level.player._id_8839 = scripts\engine\utility::array_remove(level.player._id_8839, var_0);
+  }
 }
 
 _id_87E1(var_0, var_1, var_2) {
   level.player._id_C391 = var_0;
   level.player.og_angles = var_1;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level.player._id_C396 = var_2;
+  }
 }
 
 _id_87CC(var_0, var_1) {
-  if(var_0)
+  if(var_0) {
     level.player._id_884D = var_1;
-  else
+  } else {
     level.player._id_884D = undefined;
+  }
 }
 
 _id_87CD(var_0, var_1) {
-  if(var_0)
+  if(var_0) {
     level.player._id_884E = var_1;
-  else
+  } else {
     level.player._id_884E = undefined;
+  }
 }
 
 _id_8799(var_0) {
   if(var_0) {
     level.player._id_8803 = 1;
 
-    if(_id_87A7() == "controllingrobot")
+    if(_id_87A7() == "controllingrobot") {
       setomnvar("ui_hack_control_selfdestruct", 0);
+    }
   } else {
     level.player._id_8803 = undefined;
 
-    if(_id_87A7() == "controllingrobot")
+    if(_id_87A7() == "controllingrobot") {
       setomnvar("ui_hack_control_selfdestruct", 1);
+    }
   }
 }
 
 _id_87A0(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level.player._id_8859 = var_0;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level.player._id_8858 = var_1;
+  }
 }
 
 _id_878D() {
@@ -161,31 +177,35 @@ _id_878D() {
 }
 
 _id_87CA(var_0, var_1) {
-  if(var_0)
+  if(var_0) {
     level.player._id_884C = var_1;
-  else
+  } else {
     level.player._id_884C = undefined;
+  }
 }
 
 _id_879F(var_0) {
-  if(var_0)
+  if(var_0) {
     level.player._id_8849 = 1;
-  else
+  } else {
     level.player._id_8849 = undefined;
+  }
 }
 
 hack_blacklist_all_robots(var_0) {
-  if(var_0)
+  if(var_0) {
     level.player.hackallrobotsblacklisted = 1;
-  else
+  } else {
     level.player.hackallrobotsblacklisted = 0;
+  }
 }
 
 hack_enable_enemy_melee(var_0) {
-  if(var_0)
+  if(var_0) {
     level.player.hackenableenemymelee = 1;
-  else
+  } else {
     level.player.hackenableenemymelee = undefined;
+  }
 }
 
 _id_8829() {
@@ -262,8 +282,9 @@ _id_5C25() {
   level.player._id_9BFA = 0;
   level._id_6AFC = getEnt("fake_player_spawn", "targetname");
 
-  if(isDefined(level._id_6AFC))
+  if(isDefined(level._id_6AFC)) {
     level._id_6AFC.dontdeletemehacking = 1;
+  }
 }
 
 _id_87F0() {
@@ -302,8 +323,9 @@ _id_8836() {
   var_1 = 0;
 
   for(;;) {
-    if(is_mouse_and_keyboard() || !_id_9BF9())
+    if(is_mouse_and_keyboard() || !_id_9BF9()) {
       self waittill("secondary_equipment_pressed");
+    }
 
     self._id_9E1D = 0;
     self._id_8816 = 0;
@@ -390,8 +412,9 @@ _id_8836() {
             level._id_D365 = scripts\sp\utility::_id_10639("player_arms");
             var_5 = level.player _meth_84C6("currentViewModel");
 
-            if(isDefined(var_5))
+            if(isDefined(var_5)) {
               level._id_D365 setModel(var_5);
+            }
 
             level._id_D365 _meth_81E2(self, "tag_origin", (0, 0, 0), (0, 0, 0), 1);
             level._id_D365 hide();
@@ -430,8 +453,9 @@ hacking_end() {
   scripts\engine\utility::flag_clear("secondary_equipment_in_use");
   level.player scripts\sp\utility::_id_1C49(1);
 
-  if(!isDefined(level.player.hackenableenemymelee) || !level.player.hackenableenemymelee)
+  if(!isDefined(level.player.hackenableenemymelee) || !level.player.hackenableenemymelee) {
     level.player.dontmelee = undefined;
+  }
 
   self._id_9E1C = 0;
   setomnvar("ui_hack_target_entity", undefined);
@@ -467,26 +491,33 @@ _id_882D() {
 }
 
 _id_381E() {
-  if(!self _meth_843C() || self isreloading())
+  if(!self _meth_843C() || self isreloading()) {
     return 0;
+  }
 
-  if(!isDefined(level.player getcurrentprimaryweapon()) || level.player getcurrentprimaryweapon() == "none")
+  if(!isDefined(level.player getcurrentprimaryweapon()) || level.player getcurrentprimaryweapon() == "none") {
     return 0;
+  }
 
-  if(!scripts\engine\utility::isoffhandweaponsallowed() || !scripts\engine\utility::isoffhandsecondaryweaponsallowed())
+  if(!scripts\engine\utility::isoffhandweaponsallowed() || !scripts\engine\utility::isoffhandsecondaryweaponsallowed()) {
     return 0;
+  }
 
-  if(self isthrowinggrenade())
+  if(self isthrowinggrenade()) {
     return 0;
+  }
 
-  if(scripts\sp\utility::_id_D123())
+  if(scripts\sp\utility::_id_D123()) {
     return 0;
+  }
 
-  if(isDefined(level.player.hackdoingoutro) && level.player.hackdoingoutro)
+  if(isDefined(level.player.hackdoingoutro) && level.player.hackdoingoutro) {
     return 0;
+  }
 
-  if(scripts\sp\utility::_id_93A6() && scripts\engine\utility::is_true(level._id_10964._id_D430))
+  if(scripts\sp\utility::_id_93A6() && scripts\engine\utility::is_true(level._id_10964._id_D430)) {
     return 0;
+  }
 
   return 1;
 }
@@ -548,8 +579,9 @@ _id_882A() {
   self endon("hack_unequipped");
   self endon("hack_disabled");
 
-  if(isDefined(self._id_AEFA))
+  if(isDefined(self._id_AEFA)) {
     self._id_AEFA _id_8827(1);
+  }
 
   if(!is_console()) {
     level.player scripts\sp\utility::_id_65DD("hack_toggle_fired");
@@ -564,14 +596,16 @@ _id_882A() {
       self._id_AEFA = undefined;
       level.player._id_883D = "scanning";
 
-      if(!isDefined(level.player.hackenableenemymelee) || !level.player.hackenableenemymelee)
+      if(!isDefined(level.player.hackenableenemymelee) || !level.player.hackenableenemymelee) {
         level.player.dontmelee = undefined;
+      }
 
       self _meth_80D8(0.4, 0.45);
       self notify("hack_lost_target");
 
-      if(!is_console())
+      if(!is_console()) {
         self notify("hack_locked_hold_done");
+      }
 
       return "lost_target";
     }
@@ -648,10 +682,11 @@ _id_87B8() {
       setomnvar("ui_hack_target_entity", self._id_4B20);
       var_3 = self._id_4B20 _id_12A5();
 
-      if(var_3 == "C8")
+      if(var_3 == "C8") {
         var_3 = 1;
-      else
+      } else {
         var_3 = 2;
+      }
 
       setomnvar("ui_hack_control_robot_type", var_3);
       continue;
@@ -712,20 +747,22 @@ _id_87B8() {
 }
 
 _id_87AF() {
-  if(isDefined(level._id_8826) && level._id_8826)
+  if(isDefined(level._id_8826) && level._id_8826) {
     setomnvar("ui_hack_ethan_overlay", 1);
-  else
+  } else {
     setomnvar("ui_hack_control_overlay", 1);
+  }
 
   scripts\engine\utility::delaythread(0.35, ::_id_87B6);
   thread scripts\sp\utility::_id_C12D("hack_hud_stop_tracking_target", 0.35);
 
-  if(isDefined(level.player._id_884D))
+  if(isDefined(level.player._id_884D)) {
     scripts\engine\utility::noself_delaycall(0.6, ::visionsetnaked, level.player._id_884D, 0);
-  else if(level.player._id_8820 == "C6" || level.player._id_8820 == "C6Worker")
+  } else if(level.player._id_8820 == "C6" || level.player._id_8820 == "C6Worker") {
     scripts\engine\utility::noself_delaycall(0.6, ::visionsetnaked, "hack_c6_control", 0);
-  else if(level.player._id_8820 == "C8")
+  } else if(level.player._id_8820 == "C8") {
     scripts\engine\utility::noself_delaycall(0.6, ::visionsetnaked, "hack_c8_control", 0);
+  }
 
   thread scripts\engine\utility::flag_set_delayed("hack_hud_control_intro_black", 0.6);
   scripts\engine\utility::noself_delaycall(0.6, ::setomnvar, "ui_wrist_pc", 0);
@@ -772,10 +809,11 @@ _id_87B5(var_0) {
 }
 
 _id_87B3() {
-  if(isDefined(level._id_8826) && level._id_8826)
+  if(isDefined(level._id_8826) && level._id_8826) {
     setomnvar("ui_hack_ethan_overlay", 0);
-  else
+  } else {
     setomnvar("ui_hack_control_overlay", 0);
+  }
 
   setomnvar("ui_hack_targeting", 0);
   setomnvar("ui_hack_control_signal_failing", 0);
@@ -785,8 +823,9 @@ _id_87B3() {
   level.player scripts\sp\utility::_id_1C3E(1);
 
   foreach(var_1 in self._id_8802) {
-    if(isDefined(var_1.bar))
+    if(isDefined(var_1.bar)) {
       var_1.bar destroy();
+    }
 
     var_1 destroy();
   }
@@ -798,8 +837,9 @@ _id_87B6() {
   setomnvar("ui_hack_targeting", 0);
 
   foreach(var_1 in self._id_8802) {
-    if(isDefined(var_1.bar))
+    if(isDefined(var_1.bar)) {
       var_1.bar.alpha = 0.0;
+    }
 
     var_1.alpha = 0.0;
   }
@@ -808,26 +848,30 @@ _id_87B6() {
 }
 
 _id_9BF9() {
-  if(level.player scripts\sp\utility::_id_65DB("hack_raise_autohold_period"))
+  if(level.player scripts\sp\utility::_id_65DB("hack_raise_autohold_period")) {
     return 1;
+  }
 
-  if(scripts\engine\utility::flag("secondary_equipment_input_down"))
+  if(scripts\engine\utility::flag("secondary_equipment_input_down")) {
     return 1;
-  else {
+  } else {
     level.player notify("hack_button_released");
     return 0;
   }
 }
 
 is_hack_toggled_off() {
-  if(is_console())
+  if(is_console()) {
     return 0;
+  }
 
-  if(level.player scripts\sp\utility::_id_65DB("hack_raise_autohold_period"))
+  if(level.player scripts\sp\utility::_id_65DB("hack_raise_autohold_period")) {
     return 0;
+  }
 
-  if(!level.player scripts\sp\utility::_id_65DB("hack_toggled_off"))
+  if(!level.player scripts\sp\utility::_id_65DB("hack_toggled_off")) {
     return 0;
+  }
 
   return 1;
 }
@@ -840,10 +884,11 @@ _id_87A8(var_0) {
   if(!isDefined(var_0)) {
     return;
   }
-  if(var_0.classname != "script_model" && !isDefined(var_0._id_6554))
+  if(var_0.classname != "script_model" && !isDefined(var_0._id_6554)) {
     return "j_SpineUpper";
-  else
+  } else {
     return "tag_origin";
+  }
 }
 
 _id_8830() {
@@ -868,8 +913,9 @@ _id_8830() {
         level.player._id_883D = "locking";
         level.player._id_883A = 1;
 
-        if(!isDefined(level.player.hackenableenemymelee) || !level.player.hackenableenemymelee)
+        if(!isDefined(level.player.hackenableenemymelee) || !level.player.hackenableenemymelee) {
           level.player.dontmelee = 1;
+        }
 
         self notify("hack_acquired_target");
         self _meth_80D8(0.2, 0.25);
@@ -882,8 +928,9 @@ _id_8830() {
         self._id_AEFA = undefined;
         level.player._id_883D = "scanning";
 
-        if(!isDefined(level.player.hackenableenemymelee) || !level.player.hackenableenemymelee)
+        if(!isDefined(level.player.hackenableenemymelee) || !level.player.hackenableenemymelee) {
           level.player.dontmelee = undefined;
+        }
 
         self notify("hack_lost_target");
         self _meth_80D8(0.4, 0.45);
@@ -899,10 +946,11 @@ _id_11AA1() {
   self endon("hack_disabled");
   self endon("hack_button_released");
 
-  if(!is_console())
+  if(!is_console()) {
     self endon("hack_toggled_off");
-  else
+  } else {
     self endon("secondary_equipment_released");
+  }
 
   self endon("hack_close_pressed");
   self endon("robot_hacked");
@@ -933,14 +981,16 @@ _id_11AA1() {
     foreach(var_5 in self._id_87F8) {
       var_6 = 0;
 
-      if(isDefined(self._id_4B20) && var_5 == self._id_4B20)
+      if(isDefined(self._id_4B20) && var_5 == self._id_4B20) {
         var_6 = 1;
+      }
 
       var_5 _id_8827(var_6);
     }
 
-    foreach(var_5 in self._id_C123)
-    var_5 scripts\sp\utility::_id_9193("hackTarget");
+    foreach(var_5 in self._id_C123) {
+      var_5 scripts\sp\utility::_id_9193("hackTarget");
+    }
 
     wait 0.05;
   }
@@ -953,11 +1003,13 @@ _id_11AA0() {
   } else
     scripts\engine\utility::waittill_any("hack_unequipped", "hack_disabled", "hack_button_released", "secondary_equipment_released", "hack_close_pressed", "robot_hacked");
 
-  foreach(var_2 in self._id_87F8)
-  var_2 scripts\sp\utility::_id_9193("hackTarget");
+  foreach(var_2 in self._id_87F8) {
+    var_2 scripts\sp\utility::_id_9193("hackTarget");
+  }
 
-  foreach(var_2 in self._id_C123)
-  var_2 scripts\sp\utility::_id_9193("hackTarget");
+  foreach(var_2 in self._id_C123) {
+    var_2 scripts\sp\utility::_id_9193("hackTarget");
+  }
 
   self._id_87F8 = undefined;
   self._id_C123 = undefined;
@@ -965,59 +1017,73 @@ _id_11AA0() {
 
 _id_9CAA(var_0) {
   if(!isDefined(level.player._id_885D)) {
-    if(!_id_87BC(var_0) && (var_0.subclass == "C8" || var_0.subclass == "C12"))
+    if(!_id_87BC(var_0) && (var_0.subclass == "C8" || var_0.subclass == "C12")) {
       return 0;
+    }
   } else if(!_id_87BC(var_0) && var_0.subclass == "C12")
     return 0;
 
-  if(!_id_3DC7(var_0))
+  if(!_id_3DC7(var_0)) {
     return 0;
+  }
 
-  if(!_id_3DC6(var_0))
+  if(!_id_3DC6(var_0)) {
     return 0;
+  }
 
-  if(isDefined(var_0._id_87F6) && !var_0._id_87F6)
+  if(isDefined(var_0._id_87F6) && !var_0._id_87F6) {
     return 0;
+  }
 
-  if(isDefined(var_0.asm) && isDefined(var_0.asm.bpowereddown) && var_0.asm.bpowereddown)
+  if(isDefined(var_0.asm) && isDefined(var_0.asm.bpowereddown) && var_0.asm.bpowereddown) {
     return 0;
+  }
 
-  if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "nohack")
+  if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "nohack") {
     return 0;
+  }
 
-  if(scripts\engine\utility::array_contains(level.player._id_8839, var_0))
+  if(scripts\engine\utility::array_contains(level.player._id_8839, var_0)) {
     return 0;
+  }
 
-  if(isDefined(var_0.bpowerdown) && var_0.bpowerdown == 1)
+  if(isDefined(var_0.bpowerdown) && var_0.bpowerdown == 1) {
     return 0;
+  }
 
-  if(isDefined(var_0._id_8804))
+  if(isDefined(var_0._id_8804)) {
     return 0;
+  }
 
-  if(!_id_9CA9(var_0))
+  if(!_id_9CA9(var_0)) {
     return 0;
+  }
 
-  if(scripts\engine\utility::is_true(level.player.hackallrobotsblacklisted))
+  if(scripts\engine\utility::is_true(level.player.hackallrobotsblacklisted)) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_9CA9(var_0) {
-  if(!isDefined(var_0._id_884B) && distancesquared(level.player.origin, var_0.origin) > squared(1500))
+  if(!isDefined(var_0._id_884B) && distancesquared(level.player.origin, var_0.origin) > squared(1500)) {
     return 0;
-  else if(isDefined(var_0._id_884B) && distancesquared(level.player.origin, var_0.origin) > squared(var_0._id_884B))
+  } else if(isDefined(var_0._id_884B) && distancesquared(level.player.origin, var_0.origin) > squared(var_0._id_884B)) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_2A91() {
-  if(level.player scripts\sp\utility::_id_65DB("hack_reticle_disabled"))
+  if(level.player scripts\sp\utility::_id_65DB("hack_reticle_disabled")) {
     return undefined;
+  }
 
-  if(!isDefined(self._id_87F8) || !isDefined(self._id_C123))
+  if(!isDefined(self._id_87F8) || !isDefined(self._id_C123)) {
     return undefined;
+  }
 
   var_0 = scripts\engine\utility::array_combine(self._id_87F8, self._id_C123);
   var_1 = 0;
@@ -1029,8 +1095,9 @@ _id_2A91() {
     if(isDefined(var_6._id_C124)) {
       continue;
     }
-    if(isDefined(var_6) && check_robot_in_sights(var_6))
+    if(isDefined(var_6) && check_robot_in_sights(var_6)) {
       var_4[var_4.size] = var_6;
+    }
   }
 
   if(var_4.size > 0) {
@@ -1048,8 +1115,9 @@ _id_2A91() {
         if(scripts\common\trace::ray_trace_passed(var_6 gettagorigin(_id_87A8(var_6)), level.player getEye(), var_6, scripts\common\trace::create_solid_ai_contents(1)) && _id_9CA9(var_6)) {
           var_1 = 1;
 
-          if(var_6 _id_12A5() == "C8")
+          if(var_6 _id_12A5() == "C8") {
             var_2 = 1;
+          }
 
           break;
         }
@@ -1057,55 +1125,65 @@ _id_2A91() {
     }
   }
 
-  if(!isDefined(var_3) && var_1 && var_2)
+  if(!isDefined(var_3) && var_1 && var_2) {
     self notify("hack_acquired_need_upgrade");
-  else if(!isDefined(var_3) && var_1)
+  } else if(!isDefined(var_3) && var_1) {
     self notify("hack_acquired_non_hackable");
-  else if(!isDefined(var_3) && !var_1)
+  } else if(!isDefined(var_3) && !var_1) {
     self notify("hack_no_target");
+  }
 
   return var_3;
 }
 
 _id_3DC7(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(!isalive(var_0) && var_0.classname != "script_model")
+  if(!isalive(var_0) && var_0.classname != "script_model") {
     return 0;
+  }
 
   return 1;
 }
 
 _id_3DC6(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(issubstr(var_0.classname, "worker"))
+  if(issubstr(var_0.classname, "worker")) {
     return 1;
+  }
 
-  if(!isDefined(var_0.weapon) || var_0.weapon == "" || var_0.weapon == "none")
+  if(!isDefined(var_0.weapon) || var_0.weapon == "" || var_0.weapon == "none") {
     return 0;
+  }
 
   return 1;
 }
 
 _id_3DD2(var_0) {
-  if(level.player scripts\sp\utility::_id_65DB("hack_reticle_disabled"))
+  if(level.player scripts\sp\utility::_id_65DB("hack_reticle_disabled")) {
     return 0;
+  }
 
-  if(scripts\engine\utility::array_contains(self._id_8839, var_0))
+  if(scripts\engine\utility::array_contains(self._id_8839, var_0)) {
     return 0;
+  }
 
-  if(!_id_9CAA(var_0))
+  if(!_id_9CAA(var_0)) {
     return 0;
+  }
 
   return check_robot_in_sights(var_0, 1);
 }
 
 check_robot_in_sights(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_2 = var_0 gettagorigin(_id_87A8(var_0));
   var_3 = distancesquared(var_0.origin, level.player.origin);
@@ -1140,8 +1218,9 @@ check_robot_in_sights(var_0, var_1) {
     var_12 = var_14 * (var_10 - var_9) + var_9;
   }
 
-  if(var_1)
+  if(var_1) {
     var_11 = var_11 * var_12;
+  }
 
   return level.player worldpointinreticle_circle(var_2, 65, var_11);
 }
@@ -1153,10 +1232,11 @@ _id_10D4E(var_0) {
   self endon("robot_hacked");
   self endon("hack_lost_target");
 
-  if(!is_console())
+  if(!is_console()) {
     self endon("hack_toggled_off");
-  else
+  } else {
     self endon("secondary_equipment_released");
+  }
 
   self endon("hack_button_released");
   var_1 = _id_129E(var_0) / 2;
@@ -1173,8 +1253,9 @@ _id_10D4E(var_0) {
   level.player._id_883D = "locked";
   level.player._id_883A = 1;
 
-  if(!isDefined(level.player.hackenableenemymelee) || !level.player.hackenableenemymelee)
+  if(!isDefined(level.player.hackenableenemymelee) || !level.player.hackenableenemymelee) {
     level.player.dontmelee = 1;
+  }
 
   self notify("hack_locked_target");
   self._id_AEFA = var_0;
@@ -1183,11 +1264,13 @@ _id_10D4E(var_0) {
 _id_129E(var_0) {
   var_1 = 0.8;
 
-  if(isDefined(level.player._id_885E))
+  if(isDefined(level.player._id_885E)) {
     var_1 = 0.5;
+  }
 
-  if(var_0 _id_12A5() == "C8")
+  if(var_0 _id_12A5() == "C8") {
     var_1 = 2.0;
+  }
 
   return var_1;
 }
@@ -1199,18 +1282,21 @@ _id_11050(var_0) {
 _id_8827(var_0) {
   var_1 = self;
 
-  if(isDefined(self._id_6554))
+  if(isDefined(self._id_6554)) {
     var_1 = self._id_5CBA;
+  }
 
   if(var_0) {
-    if(isDefined(level.player._id_AEFA) && level.player._id_AEFA == self)
+    if(isDefined(level.player._id_AEFA) && level.player._id_AEFA == self) {
       var_1 scripts\sp\utility::_id_9196(1, 0, 1, "hackTarget");
-    else
+    } else {
       var_1 scripts\sp\utility::_id_9196(4, 0, 1, "hackTarget");
+    }
   } else if(isDefined(level.player._id_8846))
     var_1 scripts\sp\utility::_id_9193("hackTarget");
-  else
+  else {
     var_1 scripts\sp\utility::_id_9196(0, 0, 1, "hackTarget");
+  }
 
   thread _id_8828();
 }
@@ -1228,12 +1314,13 @@ _id_8828() {
   scripts\sp\utility::_id_178D(scripts\sp\utility::_id_137AA, "hack_added_to_blacklist");
   scripts\sp\utility::_id_57D6();
 
-  if(isDefined(self._id_6554))
+  if(isDefined(self._id_6554)) {
     self._id_5CBA scripts\sp\utility::_id_9193("hackTarget");
-  else if(isDefined(level.player._id_AEFA) && self == level.player._id_AEFA)
+  } else if(isDefined(level.player._id_AEFA) && self == level.player._id_AEFA) {
     scripts\engine\utility::delaythread(1, scripts\sp\utility::_id_9193, "hackTarget");
-  else
+  } else {
     scripts\sp\utility::_id_9193("hackTarget");
+  }
 
   self._id_87FC = undefined;
 }
@@ -1267,14 +1354,16 @@ _id_4FBB() {
 
 _id_12A5() {
   if(!isDefined(self.subclass) || self.subclass == "C6") {
-    if(issubstr(self.classname, "worker"))
+    if(issubstr(self.classname, "worker")) {
       return "C6Worker";
-    else
+    } else {
       return "C6";
+    }
   } else if(self.subclass == "C8")
     return "C8";
-  else if(issubstr(self.classname, "eth3n"))
+  else if(issubstr(self.classname, "eth3n")) {
     return "C6";
+  }
 
   return "unhackable";
 }
@@ -1282,18 +1371,20 @@ _id_12A5() {
 _id_E57D(var_0) {
   var_0 notify("player_controlled");
 
-  if(_id_3DC7(var_0) && _id_3DC6(var_0))
+  if(_id_3DC7(var_0) && _id_3DC6(var_0)) {
     var_0 thread _id_2A46(self._id_8820);
-  else
+  } else {
     _id_E588();
+  }
 }
 
 _id_E588() {
   level notify("robot_died_during_intro");
   scripts\sp\utility::_id_9199("hackTarget", 0);
 
-  if(isDefined(level.player._id_883E))
+  if(isDefined(level.player._id_883E)) {
     level.player._id_883E = undefined;
+  }
 
   level.player scripts\sp\utility::_id_65E1("is_hacked_robot");
   wait 0.05;
@@ -1311,30 +1402,35 @@ _id_2A46(var_0) {
   if(isalive(level.player)) {
     scripts\engine\utility::flag_wait("hack_hud_control_intro_black");
 
-    if(!_id_3DC7(self) || !_id_3DC6(self))
+    if(!_id_3DC7(self) || !_id_3DC6(self)) {
       level.player thread _id_E588();
+    }
 
     scripts\sp\utility::_id_9199("hackTarget", 0);
 
-    if(isDefined(level.player._id_883E))
+    if(isDefined(level.player._id_883E)) {
       level.player._id_883E = undefined;
+    }
 
     var_1 = "hackControl";
 
-    if(isDefined(level.player._id_8858))
+    if(isDefined(level.player._id_8858)) {
       var_1 = level.player._id_8858;
+    }
 
     scripts\sp\utility::_id_9199(var_1, 1);
 
-    if(!_id_3DC7(self) || !_id_3DC6(self))
+    if(!_id_3DC7(self) || !_id_3DC6(self)) {
       level.player thread _id_E588();
+    }
 
     self notify("stop_loop");
     _id_0A1E::_id_2386();
     waittillframeend;
 
-    if(!_id_3DC7(self) || !_id_3DC6(self))
+    if(!_id_3DC7(self) || !_id_3DC6(self)) {
       level.player thread _id_E588();
+    }
 
     level.player _id_4FBB();
 
@@ -1350,8 +1446,9 @@ _id_2A46(var_0) {
 
     level._id_87FF = [];
 
-    for(var_2 = 0; var_2 < 24; var_2++)
+    for(var_2 = 0; var_2 < 24; var_2++) {
       level._id_87FF[var_2] = 0;
+    }
 
     level.player._id_9BFA = 1;
     level.player._id_9BA2 = 1;
@@ -1380,13 +1477,15 @@ _id_2A46(var_0) {
     level.player _meth_80CB(1);
     level.player scripts\engine\utility::allow_weapon_switch(1);
 
-    if(isDefined(anim.player._id_28CF))
+    if(isDefined(anim.player._id_28CF)) {
       level._id_884F = anim.player._id_28CF;
+    }
 
     scripts\sp\utility::_id_CF8B();
 
-    if(!isDefined(level.player.hackenableenemymelee) || !level.player.hackenableenemymelee)
+    if(!isDefined(level.player.hackenableenemymelee) || !level.player.hackenableenemymelee) {
       level.player.dontmelee = 1;
+    }
 
     _id_0E4B::_id_8DEA();
     level.player _id_0E42::giveperks(["specialty_fastreload"]);
@@ -1408,8 +1507,9 @@ _id_2A46(var_0) {
 
     level.player._id_C376 = level.player scripts\sp\utility::_id_77C9();
 
-    if(isDefined(level.player._id_C376) && level.player._id_C376 != "")
+    if(isDefined(level.player._id_C376) && level.player._id_C376 != "") {
       level.player scripts\sp\utility::_id_11425();
+    }
 
     if(level._id_880A islinked() && !isDefined(level._id_880A._id_2029)) {
       level.player._id_883C = scripts\engine\utility::spawn_script_origin();
@@ -1424,8 +1524,9 @@ _id_2A46(var_0) {
 
       level.player._id_883C.origin = level._id_880A.origin;
 
-      if(isDefined(level._id_880A._id_87CF))
+      if(isDefined(level._id_880A._id_87CF)) {
         level.player._id_883C.origin = level.player._id_883C.origin + level._id_880A._id_87CF;
+      }
 
       level.player._id_883C.angles = level._id_880A.angles;
       var_5 = level._id_880A getlinkedparent();
@@ -1439,8 +1540,9 @@ _id_2A46(var_0) {
     level.player._id_87FE = 1.0;
     level._id_880C = 100 / level.player.damagemultiplier * 1.5;
 
-    if(isDefined(level.player._id_8856))
+    if(isDefined(level.player._id_8856)) {
       level._id_880C = level.player._id_8856;
+    }
 
     if(var_0 == "flying") {
       level.player allowswim(1);
@@ -1487,8 +1589,9 @@ _id_2A46(var_0) {
     scripts\sp\utility::_id_22C7(var_7, ::_id_1933);
     level.player thread _id_5C97();
 
-    if(isDefined(level.player._id_884C))
+    if(isDefined(level.player._id_884C)) {
       level.player._id_87FE = level.player._id_884C;
+    }
 
     level.player scripts\sp\utility::_id_2B76(level.player._id_87FE, 0.5);
     level.player thread _id_5C86(level._id_880A, var_0);
@@ -1497,16 +1600,17 @@ _id_2A46(var_0) {
     level.player._id_883D = "selfdestruct";
     var_12 = 0;
 
-    if(var_0 == "C8")
+    if(var_0 == "C8") {
       var_12 = 1;
+    }
 
-    if(var_11 == "hack_drone_took_damage_trigger_hurt")
+    if(var_11 == "hack_drone_took_damage_trigger_hurt") {
       thread _id_5C3B(level._id_880A, var_12);
-    else if(isDefined(level.player._id_8849) && level.player._id_8849)
+    } else if(isDefined(level.player._id_8849) && level.player._id_8849) {
       thread _id_5C77(level._id_880A);
-    else if(var_11 == "player_suicided_drone")
+    } else if(var_11 == "player_suicided_drone") {
       thread _id_5C85(level._id_880A, 1, var_12);
-    else {
+    } else {
       thread _id_5C85(level._id_880A, 0, var_12);
       level.player waittill("suicide_control_done");
     }
@@ -1539,8 +1643,9 @@ _id_61E0(var_0) {
     level.player.health = self.health;
     level.player._id_C39C = level.player _meth_816D();
 
-    if(level.player._id_C39C == "")
+    if(level.player._id_C39C == "") {
       level.player._id_C39C = "viewmodel_base_viewhands_iw7";
+    }
 
     level.player setviewmodel("viewmodel_robot_c6");
     _id_12C5();
@@ -1551,11 +1656,13 @@ _id_61E0(var_0) {
   } else {
     var_1 = level.player getweaponslistprimaries();
 
-    foreach(var_3 in var_1)
-    level.player takeweapon(var_3);
+    foreach(var_3 in var_1) {
+      level.player takeweapon(var_3);
+    }
 
-    if(isDefined(level.player._id_C389))
+    if(isDefined(level.player._id_C389)) {
       level.player scripts\sp\utility::_id_82EA(level.player._id_C389);
+    }
 
     level.player setviewmodel(level.player._id_C39C);
     level.player._id_C39C = undefined;
@@ -1577,15 +1684,17 @@ _id_61E2(var_0) {
     level.player.health = self.health;
     level.player._id_C39C = level.player _meth_816D();
 
-    if(level.player._id_C39C == "")
+    if(level.player._id_C39C == "") {
       level.player._id_C39C = "viewmodel_base_viewhands_iw7";
+    }
 
     level.player setviewmodel("vm_robot_c8_base");
     scripts\engine\utility::delaythread(1.35, ::_id_3464);
     level.player._id_C389 = level.player scripts\sp\utility::_id_7AD7();
 
-    if(isDefined(level.player._id_C389))
+    if(isDefined(level.player._id_C389)) {
       level.player scripts\sp\utility::_id_1143E();
+    }
 
     level.player._id_87FE = 0.7;
   } else {
@@ -1593,8 +1702,9 @@ _id_61E2(var_0) {
     level.player scripts\sp\utility::_id_11428();
     level.player notify("hack_stop_sustaining_ammo");
 
-    if(isDefined(level.player._id_C389))
+    if(isDefined(level.player._id_C389)) {
       level.player scripts\sp\utility::_id_82EA(level.player._id_C389);
+    }
 
     level.player setviewmodel(level.player._id_C39C);
     level.player._id_C39C = undefined;
@@ -1621,8 +1731,9 @@ _id_34E4() {
     var_1 = level.player getcurrentweaponclipammo();
     var_2 = weaponclipsize(var_0);
 
-    if(var_1 < var_2)
+    if(var_1 < var_2) {
       level.player setweaponammoclip(var_0, var_2);
+    }
 
     wait 0.05;
   }
@@ -1641,16 +1752,18 @@ _id_61E1(var_0) {
     level.player switchtoweaponimmediate("iw7_c6worker_fists");
     level.player._id_C39C = level.player _meth_816D();
 
-    if(level.player._id_C39C == "")
+    if(level.player._id_C39C == "") {
       level.player._id_C39C = "viewmodel_base_viewhands_iw7";
+    }
 
     level.player setviewmodel("viewmodel_robot_c6");
     level.player._id_87FE = 1.2;
   } else {
     var_1 = level.player getweaponslistprimaries();
 
-    foreach(var_3 in var_1)
-    level.player takeweapon(var_3);
+    foreach(var_3 in var_1) {
+      level.player takeweapon(var_3);
+    }
 
     level.player setviewmodel(level.player._id_C39C);
     level.player._id_C39C = undefined;
@@ -1674,8 +1787,9 @@ _id_12C5() {
   var_2[var_2.size] = "hacked";
   var_2 = scripts\engine\utility::alphabetize(var_2);
 
-  foreach(var_4 in var_2)
-  var_1 = var_1 + ("+" + var_4);
+  foreach(var_4 in var_2) {
+    var_1 = var_1 + ("+" + var_4);
+  }
 
   level.player giveweapon(var_1);
   level.player switchtoweaponimmediate(var_1);
@@ -1686,9 +1800,9 @@ _id_880B(var_0) {
   level.player playSound("hacked_drone_on");
   wait 0.2;
 
-  if(isDefined(level._id_8805))
+  if(isDefined(level._id_8805)) {
     level.player _meth_82C0(level._id_8805, 0.4);
-  else if(var_0 == "C6" || var_0 == "C6Worker") {
+  } else if(var_0 == "C6" || var_0 == "C6Worker") {
     wait 0.3;
     level.player setclienttriggeraudiozonepartialwithfade("hacking_hud_c6", 0.3, "reverb", "mix", "filter", "ambient", "player_adsr");
   } else {
@@ -1714,26 +1828,29 @@ _id_8809() {
   thread _id_3367();
 
   for(;;) {
-    if(!level.player isonground())
+    if(!level.player isonground()) {
       var_2 = -1;
+    }
 
     if(var_2 != -1 && var_2 <= gettime()) {
       var_1 = gettime();
       level.player playSound("c6_hacked_step");
 
-      if(var_0)
+      if(var_0) {
         level.player playSound("c6_hacked_step_servo_l");
-      else
+      } else {
         level.player playSound("c6_hacked_step_servo_r");
+      }
 
       var_0 = !var_0;
     }
 
     if(self._id_87FB < var_3 || var_2 <= gettime()) {
-      if(self._id_87FB == -1)
+      if(self._id_87FB == -1) {
         var_2 = -1.0;
-      else
+      } else {
         var_2 = var_1 + self._id_87FB * 1000.0;
+      }
     }
 
     var_3 = self._id_87FB;
@@ -1798,16 +1915,18 @@ _id_11AA2() {
     var_0 = var_0 + var_2;
     var_4 = 0;
 
-    if(isDefined(var_3) && isDefined(var_3.classname) && var_3.classname == "trigger_hurt")
+    if(isDefined(var_3) && isDefined(var_3.classname) && var_3.classname == "trigger_hurt") {
       var_4 = 1;
+    }
 
     level.player.health = 100;
 
     if(var_0 > level._id_880C) {
-      if(!var_4)
+      if(!var_4) {
         level.player notify("hack_drone_took_damage");
-      else
+      } else {
         level.player notify("hack_drone_took_damage_trigger_hurt");
+      }
     }
 
     if(var_0 > level._id_880C / 1.4 && !var_1) {
@@ -1830,8 +1949,9 @@ _id_1933() {
 _id_19CA() {
   var_0 = "hackControl";
 
-  if(isDefined(level.player._id_8858))
+  if(isDefined(level.player._id_8858)) {
     var_0 = level.player._id_8858;
+  }
 
   if(!isDefined(level.player._id_8859)) {
     scripts\sp\utility::_id_9196(1, 0, 1, var_0);
@@ -1851,8 +1971,9 @@ _id_19D5(var_0, var_1) {
   scripts\engine\utility::waittill_any("death", "player_hack_faded_out");
   scripts\sp\utility::_id_9193(var_1);
 
-  if(var_0 != -1)
+  if(var_0 != -1) {
     _id_E5B8(var_0);
+  }
 }
 
 _id_1934() {
@@ -1868,10 +1989,11 @@ _id_1934() {
     self waittill("damage", var_0, var_1);
 
     if(var_1 == level.player) {
-      if(isDefined(self._id_C3DE) && self._id_C3DE != "")
+      if(isDefined(self._id_C3DE) && self._id_C3DE != "") {
         self setthreatbiasgroup(self._id_C3DE);
-      else
+      } else {
         self setthreatbiasgroup();
+      }
 
       level notify("ai_aware_of_hacked_drone");
     }
@@ -1902,11 +2024,11 @@ _id_19C8(var_0) {
     }
     var_1 = distance(self.origin, level.player.origin);
 
-    if(var_1 <= 512)
+    if(var_1 <= 512) {
       var_2 = 0.8;
-    else if(var_1 >= 1024)
+    } else if(var_1 >= 1024) {
       var_2 = 3.0;
-    else {
+    } else {
       var_3 = (var_1 - 512) / 512;
       var_2 = 0.8 + var_3 * 2.2;
     }
@@ -1916,35 +2038,42 @@ _id_19C8(var_0) {
   }
 
   if(isalive(self)) {
-    if(isDefined(self._id_C3DE) && self._id_C3DE != "")
+    if(isDefined(self._id_C3DE) && self._id_C3DE != "") {
       self setthreatbiasgroup(self._id_C3DE);
-    else
+    } else {
       self setthreatbiasgroup();
+    }
 
-    if(var_0)
+    if(var_0) {
       wait(randomintrange(1, 3));
+    }
   }
 }
 
 _id_5C2E(var_0) {
-  if(var_0 == "flying")
+  if(var_0 == "flying") {
     level.player scripts\sp\utility::_id_1C3E(0);
+  }
 
   level.player waittill("faded_out");
 
   if(isDefined(level._id_5C24)) {
-    foreach(var_2 in level._id_5C24)
-    var_2 destroy();
+    foreach(var_2 in level._id_5C24) {
+      var_2 destroy();
+    }
   }
 
-  if(isDefined(level._id_54D5))
+  if(isDefined(level._id_54D5)) {
     level._id_54D5 destroy();
+  }
 
-  if(isDefined(level._id_54D6))
+  if(isDefined(level._id_54D6)) {
     level._id_54D6 destroy();
+  }
 
-  if(var_0 == "flying")
+  if(var_0 == "flying") {
     level.player scripts\sp\utility::_id_1C3E(1);
+  }
 }
 
 _id_5C97(var_0) {
@@ -1959,15 +2088,17 @@ _id_5C97(var_0) {
   for(;;) {
     var_1 = 20.0;
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_1 = var_0;
-    else if(isDefined(level.player._id_8855))
+    } else if(isDefined(level.player._id_8855)) {
       var_1 = level.player._id_8855;
+    }
 
-    if(var_1 > 5.0)
+    if(var_1 > 5.0) {
       scripts\engine\utility::delaythread(var_1 - 5.0, ::_id_12851);
-    else
+    } else {
       thread _id_12851();
+    }
 
     wait(var_1);
 
@@ -1983,16 +2114,18 @@ _id_12851() {
   if(!level.player scripts\sp\utility::_id_65DB("is_controlling_robot")) {
     return;
   }
-  if(!isDefined(level.player._id_885C) || level.player._id_885C == 0)
+  if(!isDefined(level.player._id_885C) || level.player._id_885C == 0) {
     setomnvar("ui_hack_control_signal_failing", 1);
+  }
 }
 
 _id_5C86(var_0, var_1) {
   level.player endon("hack_done_control_target");
   wait 1.0;
 
-  if(!isDefined(level.player._id_8803) || level.player._id_8803 == 0)
+  if(!isDefined(level.player._id_8803) || level.player._id_8803 == 0) {
     scripts\engine\utility::noself_delaycall(2.5, ::setomnvar, "ui_hack_control_selfdestruct", 1);
+  }
 
   for(;;) {
     level.player waittill("primary_equipment_pressed");
@@ -2006,8 +2139,9 @@ _id_5C86(var_0, var_1) {
 }
 
 _id_5C85(var_0, var_1, var_2) {
-  if(isDefined(level._id_8826) && level._id_8826)
+  if(isDefined(level._id_8826) && level._id_8826) {
     wait 2;
+  }
 
   level.player notify("hack_suicide");
   level.player playSound("hack_hud_self_destruct_start");
@@ -2018,10 +2152,11 @@ _id_5C85(var_0, var_1, var_2) {
   level.player scripts\engine\utility::allow_offhand_primary_weapons(0);
   level.player scripts\engine\utility::allow_melee(0);
 
-  if(!var_2)
+  if(!var_2) {
     level.player playgestureviewmodel("ges_shocknade_loop", undefined, 1);
-  else
+  } else {
     level.player playgestureviewmodel("ges_c8_shield_damage", undefined, 1);
+  }
 
   var_4 = scripts\engine\utility::spawn_tag_origin();
   var_5 = level.player getEye();
@@ -2046,8 +2181,9 @@ _id_5C85(var_0, var_1, var_2) {
     setomnvar("ui_hack_control_selfdestruct_timer", var_10);
     setomnvar("ui_hack_control_selfdestruct_show_timer", 1);
 
-    if(!isDefined(level.player._id_8803) || level.player._id_8803 == 0)
+    if(!isDefined(level.player._id_8803) || level.player._id_8803 == 0) {
       scripts\engine\utility::delaythread(0.25, ::_id_AFE2);
+    }
 
     thread _id_AFE1();
     thread _id_AFE3();
@@ -2057,8 +2193,9 @@ _id_5C85(var_0, var_1, var_2) {
     level.player notify("suicide_control_done");
     thread _id_992D();
 
-    if(var_11 != "hack_drone_took_damage_trigger_hurt")
+    if(var_11 != "hack_drone_took_damage_trigger_hurt") {
       wait(var_9);
+    }
 
     level.player thread scripts\sp\utility::_id_C12D("hack_done_control_target", var_9);
   }
@@ -2069,10 +2206,11 @@ _id_5C85(var_0, var_1, var_2) {
   var_12 = level.player.origin;
   thread _id_5C84(var_12);
 
-  if(!var_2)
+  if(!var_2) {
     level.player playgestureviewmodel("ges_player_death_drop1", undefined, 1);
-  else
+  } else {
     level.player playgestureviewmodel("ges_c8_shield_death", undefined, 1);
+  }
 
   scripts\engine\utility::flag_wait("hack_hud_control_outro_black");
   level.player scripts\engine\utility::allow_offhand_primary_weapons(1);
@@ -2081,10 +2219,11 @@ _id_5C85(var_0, var_1, var_2) {
   var_4 scripts\engine\utility::delaycall(0.05, ::delete);
   level.player._id_843F = undefined;
 
-  if(!var_2)
+  if(!var_2) {
     level.player stopgestureviewmodel("ges_player_death_drop1", 0.05);
-  else
+  } else {
     level.player stopgestureviewmodel("ges_c8_shield_death", 0.05);
+  }
 
   level.player stoprumble("damage_heavy");
 
@@ -2148,10 +2287,11 @@ _id_5C3B(var_0, var_1) {
   level.player scripts\engine\utility::allow_offhand_primary_weapons(0);
   level.player scripts\engine\utility::allow_melee(0);
 
-  if(!var_1)
+  if(!var_1) {
     level.player playgestureviewmodel("ges_player_death_drop1", undefined, 1);
-  else
+  } else {
     level.player playgestureviewmodel("ges_c8_shield_death", undefined, 1);
+  }
 
   scripts\engine\utility::flag_wait("hack_hud_control_outro_black");
   level.player scripts\engine\utility::allow_offhand_primary_weapons(1);
@@ -2159,10 +2299,11 @@ _id_5C3B(var_0, var_1) {
   var_3 delete();
   level.player._id_843F = undefined;
 
-  if(!var_1)
+  if(!var_1) {
     level.player stopgestureviewmodel("ges_player_death_drop1", 0.05);
-  else
+  } else {
     level.player stopgestureviewmodel("ges_c8_shield_death", 0.05);
+  }
 
   level.player stoprumble("damage_heavy");
 
@@ -2210,17 +2351,20 @@ _id_5C84(var_0) {
   var_3 = 300;
   var_4 = 80;
 
-  if(isDefined(level.override_hack_eplo_dmg_min))
+  if(isDefined(level.override_hack_eplo_dmg_min)) {
     var_4 = level.override_hack_eplo_dmg_min;
+  }
 
-  if(isDefined(level.override_hack_eplo_dmg_max))
+  if(isDefined(level.override_hack_eplo_dmg_max)) {
     var_3 = level.override_hack_eplo_dmg_max;
+  }
 
   var_5 = level.player._id_C391 + (0, 0, 48);
 
   if(distance(var_1, var_5) < var_2) {
-    if(scripts\common\trace::ray_trace_passed(var_1, var_5, undefined, scripts\common\trace::create_solid_ai_contents(1)))
+    if(scripts\common\trace::ray_trace_passed(var_1, var_5, undefined, scripts\common\trace::create_solid_ai_contents(1))) {
       level.drone_explosion_near_player = 1;
+    }
   }
 
   if(!isDefined(level._id_1024F)) {
@@ -2260,8 +2404,9 @@ _id_6AFB() {
   for(;;) {
     self waittill("damage", var_0, var_1);
 
-    if(!isDefined(level._id_CFEF))
+    if(!isDefined(level._id_CFEF)) {
       level._id_CFEF = 0;
+    }
 
     level._id_CFEF = level._id_CFEF + var_0;
 
@@ -2321,9 +2466,9 @@ _id_E44E() {
     level._id_880A show();
     level._id_880A unlink();
 
-    if(isai(level._id_880A))
+    if(isai(level._id_880A)) {
       level._id_880A _meth_80F1(level.player.origin, level.player.angles);
-    else {
+    } else {
       level._id_880A.origin = level.player.origin;
       level._id_880A.angles = level.player.angles;
     }
@@ -2340,15 +2485,17 @@ _id_2A47(var_0) {
   level.player notify("faded_out");
   var_1 = "hackControl";
 
-  if(isDefined(level.player._id_8858))
+  if(isDefined(level.player._id_8858)) {
     var_1 = level.player._id_8858;
+  }
 
   scripts\sp\utility::_id_9199(var_1, 0);
   var_2 = getaiarray("bad_guys");
 
   foreach(var_4 in var_2) {
-    if(isDefined(var_4._id_884A))
+    if(isDefined(var_4._id_884A)) {
       var_4 scripts\sp\utility::_id_F3E6(var_4._id_884A);
+    }
 
     var_4 notify("player_hack_faded_out");
   }
@@ -2393,8 +2540,9 @@ _id_2A47(var_0) {
         level.player setplayerangles(level.player.og_angles);
     }
 
-    if(!isDefined(level.player.hackenableenemymelee) || !level.player.hackenableenemymelee)
+    if(!isDefined(level.player.hackenableenemymelee) || !level.player.hackenableenemymelee) {
       level.player.dontmelee = 1;
+    }
 
     level.player scripts\engine\utility::delaythread(3, ::_id_B2B5);
     level.player showviewmodel();
@@ -2416,8 +2564,9 @@ _id_2A47(var_0) {
       level._id_884F = undefined;
     }
 
-    if(!getdvarint("exec_review", 0))
+    if(!getdvarint("exec_review", 0)) {
       level.player _meth_80CB(0);
+    }
 
     level.player scripts\sp\utility::_id_1C75(1);
     level.player _meth_8559(1);
@@ -2432,14 +2581,15 @@ _id_2A47(var_0) {
       level.player._id_8860 = undefined;
     }
 
-    if(var_0 == "flying")
+    if(var_0 == "flying") {
       level.player scripts\engine\utility::allow_crouch(1);
-    else if(var_0 == "C6")
+    } else if(var_0 == "C6") {
       _id_61E0(0);
-    else if(var_0 == "C8")
+    } else if(var_0 == "C8") {
       _id_61E2(0);
-    else if(var_0 == "C6Worker")
+    } else if(var_0 == "C6Worker") {
       _id_61E1(0);
+    }
 
     _id_0B2A::_id_E2C0();
     level.player notify("hack_returned_to_player_position");
@@ -2464,8 +2614,9 @@ _id_2A47(var_0) {
 
     level.player switchtoweapon(level.player._id_C37C);
 
-    if(isDefined(level.player._id_C376) && level.player._id_C376 != "")
+    if(isDefined(level.player._id_C376) && level.player._id_C376 != "") {
       level.player scripts\sp\utility::_id_8294(level.player._id_C376);
+    }
 
     level.player._id_C376 = undefined;
     level.player scripts\sp\utility::_id_65DD("is_hacked_robot");
@@ -2478,14 +2629,17 @@ _id_62D5(var_0) {
   var_1 = scripts\engine\utility::array_remove(var_1, var_0);
 
   foreach(var_3 in var_1) {
-    if(var_3 == "stand")
+    if(var_3 == "stand") {
       level.player scripts\engine\utility::allow_stances(0);
+    }
 
-    if(var_3 == "crouch")
+    if(var_3 == "crouch") {
       level.player scripts\engine\utility::allow_crouch(0);
+    }
 
-    if(var_3 == "prone")
+    if(var_3 == "prone") {
       level.player scripts\engine\utility::allow_prone(0);
+    }
   }
 
   level.player setstance(var_0);
@@ -2494,14 +2648,17 @@ _id_62D5(var_0) {
   level.player._id_883C delete();
 
   foreach(var_3 in var_1) {
-    if(var_3 == "stand")
+    if(var_3 == "stand") {
       level.player scripts\engine\utility::allow_stances(1);
+    }
 
-    if(var_3 == "crouch")
+    if(var_3 == "crouch") {
       level.player scripts\engine\utility::allow_crouch(1);
+    }
 
-    if(var_3 == "prone")
+    if(var_3 == "prone") {
       level.player scripts\engine\utility::allow_prone(1);
+    }
   }
 }
 
@@ -2517,15 +2674,17 @@ _id_8793(var_0) {
     level._id_D365 show();
     scripts\sp\anim::_id_1EC7(level._id_D365, "hack_control_end");
 
-    if(isDefined(level._id_D365))
+    if(isDefined(level._id_D365)) {
       level._id_D365 delete();
+    }
   }
 
   level._id_D365 = undefined;
   self enableweapons();
 
-  if(!isDefined(var_0) || !var_0)
+  if(!isDefined(var_0) || !var_0) {
     level.player thread hacking_end();
+  }
 
   self._id_8824 = 1;
   level.player scripts\sp\utility::_id_65E1("hack_control_outro_done");
@@ -2551,8 +2710,9 @@ _id_6AFD() {
   var_0 = level._id_6AFC spawndrone();
   var_1 = level.player getmovingplatformparent();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_0 linkTo(var_1);
+  }
 
   level.player._id_6AF9 = var_0;
   var_0 _meth_83D0(#animtree);
@@ -2584,8 +2744,9 @@ _id_E5B9(var_0, var_1) {
     }
   }
 
-  if(getdvarint("exec_review"))
+  if(getdvarint("exec_review")) {
     return var_2;
+  }
 
   if(var_2 != -1) {
     setomnvar("ui_reticles_" + var_2 + "_target_ent", var_0);
@@ -2663,8 +2824,9 @@ is_console() {
 }
 
 is_mouse_and_keyboard() {
-  if(is_console())
+  if(is_console()) {
     return 0;
+  }
 
   return !level.player usinggamepad();
 }

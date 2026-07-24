@@ -90,8 +90,9 @@ _id_F684(var_0, var_1, var_2) {
   for(;;) {
     var_3 = scripts\engine\utility::waittill_any_return("place_ims", "cancel_ims", "force_cancel_placement", "player_action_slot_restart");
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       var_3 = "force_cancel_placement";
+    }
 
     if(var_3 == "cancel_ims" || var_3 == "force_cancel_placement" || var_3 == "player_action_slot_restart") {
       if(!var_1 && var_3 == "cancel_ims") {
@@ -99,10 +100,11 @@ _id_F684(var_0, var_1, var_2) {
       }
       var_0 lavalamp_trap_setcancelled(var_3 == "force_cancel_placement" && !isDefined(var_0.firstplacement));
 
-      if(var_3 != "force_cancel_placement")
+      if(var_3 != "force_cancel_placement") {
         thread watch_dpad();
-      else if(var_1)
+      } else if(var_1) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
+      }
 
       return 0;
     }
@@ -110,8 +112,9 @@ _id_F684(var_0, var_1, var_2) {
     if(!var_0.canbeplaced) {
       continue;
     }
-    if(var_1)
+    if(var_1) {
       scripts\cp\utility::remove_crafted_item_from_inventory(self);
+    }
 
     var_0 thread lavalamp_trap_setplaced(var_2);
     self notify("IMS_placed");
@@ -158,10 +161,11 @@ create_lavalamp_trap(var_0, var_1) {
   var_4.config = level.lavalamp_trap_settings[var_3];
   var_4 thread lavalamp_trap_handleuse();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_4 thread scripts\cp\utility::item_timeout(var_1);
-  else
+  } else {
     var_4 thread scripts\cp\utility::item_timeout(undefined, level.lavalamp_trap_settings[self.lavalamp_trap_type].lifespan);
+  }
 
   return var_4;
 }
@@ -217,8 +221,9 @@ lavalamp_trap_handleuse() {
     }
     lavalamp_trap_setinactive();
 
-    if(isDefined(self getlinkedparent()))
+    if(isDefined(self getlinkedparent())) {
       self unlink();
+    }
 
     var_0 thread _id_F684(var_1, 0, self.lifespan);
     self delete();
@@ -230,13 +235,15 @@ lavalamp_trap_setplaced(var_0) {
   self endon("death");
   level endon("game_ended");
 
-  if(isDefined(self.carriedby))
+  if(isDefined(self.carriedby)) {
     self.carriedby forceusehintoff();
+  }
 
   self.carriedby = undefined;
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.iscarrying = 0;
+  }
 
   self.firstplacement = undefined;
   var_1 = create_lavalamp_trap(self, var_0);
@@ -246,8 +253,9 @@ lavalamp_trap_setplaced(var_0) {
   var_1 thread lavalamp_trap_setactive();
   var_2 = spawnStruct();
 
-  if(isDefined(self.moving_platform))
+  if(isDefined(self.moving_platform)) {
     var_2.linkparent = self.moving_platform;
+  }
 
   var_2.endonstring = "carried";
   var_2.deathoverridecallback = ::_id_936D;
@@ -265,8 +273,9 @@ lavalamp_trap_setcancelled(var_0) {
     var_1 scripts\engine\utility::allow_weapon(1);
   }
 
-  if(isDefined(var_0) && var_0)
+  if(isDefined(var_0) && var_0) {
     _id_66A7();
+  }
 
   self.carried_lavalamp_trap delete();
   self delete();
@@ -326,8 +335,9 @@ lavalamp_trap_setactive() {
 lavalamp_trap_setinactive() {
   self makeunusable();
 
-  if(isDefined(self._id_2536))
+  if(isDefined(self._id_2536)) {
     self._id_2536 delete();
+  }
 
   if(isDefined(self._id_69F6)) {
     self._id_69F6 delete();

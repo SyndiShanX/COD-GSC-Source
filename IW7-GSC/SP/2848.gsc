@@ -94,15 +94,17 @@ _id_5A38() {
       var_4 = getEntArray(var_2._id_5A3C.target, "targetname");
 
       foreach(var_6 in var_4) {
-        if(var_6.classname == "script_brushmodel")
+        if(var_6.classname == "script_brushmodel") {
           var_2._id_5A30 = var_6;
+        }
 
         var_6 linkTo(var_2._id_5A3C, "j_hinge1");
       }
     }
 
-    if(isDefined(var_2._id_5A50))
+    if(isDefined(var_2._id_5A50)) {
       var_2._id_ECCE = _id_0EFB::_id_7994("shipcrib_door_screen", "script_noteworthy", var_2._id_5A50);
+    }
 
     var_2._id_ECCA = [];
 
@@ -236,21 +238,24 @@ _id_5A4E() {
         if(isDefined(self._id_5A52)) {
           self._id_1212 = undefined;
 
-          if(self._id_5A53 == "pushpull")
+          if(self._id_5A53 == "pushpull") {
             self._id_1212 = self._id_5A52;
-          else if(self._id_5A53 == "push") {
-            if(scripts\sp\utility::_id_65DB("push_triggered"))
+          } else if(self._id_5A53 == "push") {
+            if(scripts\sp\utility::_id_65DB("push_triggered")) {
               self._id_1212 = self._id_5A52;
+            }
           } else if(self._id_5A53 == "pull") {
-            if(scripts\sp\utility::_id_65DB("pull_triggered"))
+            if(scripts\sp\utility::_id_65DB("pull_triggered")) {
               self._id_1212 = self._id_5A52;
+            }
           }
 
           _id_DFE5();
 
           if(isDefined(self._id_1212)) {
-            if(self._id_5A54)
+            if(self._id_5A54) {
               self._id_5A52 = undefined;
+            }
 
             self[[self._id_1212]]();
             self._id_1212 = undefined;
@@ -277,10 +282,11 @@ _id_5A4E() {
 }
 
 _id_5A34(var_0) {
-  if(_id_5A3D(self))
+  if(_id_5A3D(self)) {
     var_1 = "pull";
-  else
+  } else {
     var_1 = "push";
+  }
 
   var_2 = self._id_8FDD + "_" + var_1;
 
@@ -301,20 +307,23 @@ _id_5A34(var_0) {
 _id_5A3D(var_0) {
   var_1 = scripts\sp\utility::_id_7951(var_0.origin, var_0.angles, level.player.origin);
 
-  if(var_1 > 0)
+  if(var_1 > 0) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_5A2E(var_0, var_1, var_2) {
-  if(isstring(var_0))
+  if(isstring(var_0)) {
     var_3 = level.doors[var_0];
-  else
+  } else {
     var_3 = var_0;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_3._id_5A39 = var_2;
+  }
 
   var_3._id_5A33 = var_1;
   var_3._id_5A32 = "notbusy";
@@ -331,16 +340,18 @@ _id_5A52(var_0, var_1, var_2, var_3) {
   var_4 = level.doors[var_0];
   var_4 endon("death");
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = "pushpull";
+  }
 
   var_4._id_5A53 = var_3;
   var_4._id_5A52 = var_1;
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_4._id_5A54 = 1;
-  else
+  } else {
     var_4._id_5A54 = var_2;
+  }
 }
 
 _id_794A(var_0) {
@@ -350,8 +361,9 @@ _id_794A(var_0) {
 _id_AB71(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_0 endon("death");
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 2;
+  }
 
   var_6 = door_pcfov_disableweapons();
   var_0._id_5A30 connectpaths();
@@ -359,8 +371,9 @@ _id_AB71(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_0 _id_11EB(var_1, var_2, var_3, var_4, var_5);
   var_0._id_5A30 disconnectPaths();
 
-  if(var_6)
+  if(var_6) {
     level.player enableweapons();
+  }
 }
 
 door_pcfov_disableweapons() {
@@ -390,14 +403,17 @@ _id_5A2D(var_0, var_1) {
 _id_5A2F(var_0) {}
 
 _id_5A4D(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "push";
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(var_1)
+  if(var_1) {
     _id_794A(var_0) waittill("safe_to_pass");
+  }
 
   _id_0B6A::_id_EC04();
 
@@ -419,8 +435,9 @@ _id_5A36(var_0, var_1) {
   var_2 _id_DFE5();
 
   if(isarray(var_1)) {
-    foreach(var_4 in var_1)
-    scripts\engine\utility::flag_wait(var_4);
+    foreach(var_4 in var_1) {
+      scripts\engine\utility::flag_wait(var_4);
+    }
   } else
     scripts\engine\utility::flag_wait(var_1);
 
@@ -428,30 +445,34 @@ _id_5A36(var_0, var_1) {
 }
 
 _id_11EB(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0.4;
+  }
 
   var_5 = scripts\sp\utility::_id_10639("player_rig");
   var_6 = level.player _meth_84C6("currentViewModel");
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_5 setModel(var_6);
+  }
 
   var_5 hide();
   var_7 = [];
   var_7["door"] = self._id_5A3C;
   var_7["player_rig"] = var_5;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     scripts\sp\anim::_id_1EC1(var_7, var_0 + "_open");
-  else
+  } else {
     scripts\sp\anim::_id_1EC1(var_7, var_0);
+  }
 
   level.player playSound("shipcrib_door_plr_move_to_door");
   level.player _meth_823C(var_5, "tag_player", var_1, 0.2, 0.2);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self thread[[var_2]]();
+  }
 
   wait(var_1);
   var_5 show();

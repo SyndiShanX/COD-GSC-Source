@@ -152,8 +152,9 @@ _id_C46D() {
   setsaveddvar("bg_cinematicCanPause", "1");
   cinematicingame("heistspace_fspar_connect");
 
-  while(cinematicgetframe() <= 1)
+  while(cinematicgetframe() <= 1) {
     scripts\engine\utility::waitframe();
+  }
 
   pausecinematicingame(1);
   scripts\engine\utility::flag_wait("om130_activating");
@@ -216,8 +217,9 @@ _id_C43B() {
   level thread scripts\sp\utility::_id_C12D("om130_ending_delayed", 20);
   level.player playSound("hud_disconnect");
 
-  while(level._id_C41A._id_745F > 0.0)
+  while(level._id_C41A._id_745F > 0.0) {
     wait 0.05;
+  }
 
   level._id_C41A._id_FE37._id_C368 delete();
   level._id_C41A._id_FE37._id_C368 = undefined;
@@ -229,8 +231,9 @@ _id_C43B() {
     level._id_C41A._id_E7C2 = undefined;
   }
 
-  if(isDefined(level._id_C41A._id_7470))
+  if(isDefined(level._id_C41A._id_7470)) {
     level._id_C41A._id_7470 scripts\sp\utility::_id_9193("OM130");
+  }
 
   var_1 = getEnt("olympus_mons_fspar", "targetname");
   var_1 show();
@@ -239,8 +242,9 @@ _id_C43B() {
     var_1.angles = level._id_C41A._id_7458.angles;
     var_1 dontinterpolate();
 
-    if(isDefined(level._id_C41A._id_7458._id_11512))
+    if(isDefined(level._id_C41A._id_7458._id_11512)) {
       level._id_C41A._id_7458._id_11512 delete();
+    }
 
     stopFXOnTag(scripts\engine\utility::getfx("vfx_mons_steeldragon_chargeup"), level._id_C41A._id_7458, "tag_weapon");
     stopFXOnTag(scripts\engine\utility::getfx("vfx_mons_steeldragon_chargeup_muzzle"), level._id_C41A._id_7458, "tag_fx");
@@ -257,8 +261,9 @@ _id_C43B() {
   target_remove(level._id_C413);
   var_2 = target_getarray();
 
-  foreach(var_4 in var_2)
-  var_4 notify("remove_target");
+  foreach(var_4 in var_2) {
+    var_4 notify("remove_target");
+  }
 
   scripts\engine\utility::flag_wait("mons_130_vo_end");
   thread _id_C452();
@@ -357,17 +362,19 @@ _id_C43E() {
       if(scripts\engine\utility::is_true(var_9._id_7470)) {
         var_11 = distance(self getEye(), var_9.origin);
 
-        if(self worldpointinreticle_circle(var_9.origin, 65, 20))
+        if(self worldpointinreticle_circle(var_9.origin, 65, 20)) {
           var_10 = 1;
-        else {
+        } else {
           var_12 = anglestoaxis(var_9.angles);
           var_13 = var_3;
 
-          if(var_11 < 100000)
+          if(var_11 < 100000) {
             var_13 = scripts\engine\utility::array_combine(var_13, var_4);
+          }
 
-          if(var_11 < 60000)
+          if(var_11 < 60000) {
             var_13 = scripts\engine\utility::array_combine(var_13, var_5);
+          }
 
           foreach(var_15 in var_13) {
             var_16 = var_9.origin + var_12["forward"] * var_15[0] + var_12["right"] * var_15[1] + var_12["up"] * var_15[2];
@@ -389,8 +396,9 @@ _id_C43E() {
     }
 
     if(!isDefined(var_6) && isDefined(level._id_C41A._id_FE37)) {
-      if(self worldpointinreticle_circle(level._id_C41A._id_FE37._id_C368.origin, 65, 30))
+      if(self worldpointinreticle_circle(level._id_C41A._id_FE37._id_C368.origin, 65, 30)) {
         var_6 = level._id_C41A._id_FE37;
+      }
     }
 
     if(isDefined(var_6)) {
@@ -468,8 +476,9 @@ _id_C454() {
     if(var_1 == "radar_targeted") {
       var_3 = undefined;
 
-      if(var_2 >= 0)
+      if(var_2 >= 0) {
         var_3 = target_gettargetatindex(var_2);
+      }
 
       _id_C44E(var_3);
     }
@@ -480,8 +489,9 @@ _id_C438() {
   level endon("om130_ending");
   var_0 = [];
 
-  for(var_1 = 0; var_1 < level._id_C41A._id_B42A; var_1++)
+  for(var_1 = 0; var_1 < level._id_C41A._id_B42A; var_1++) {
     var_0[var_1] = var_1;
+  }
 
   level waittill("om130_capital_ships_attacking");
   level._id_C42A = 0;
@@ -491,10 +501,11 @@ _id_C438() {
     level._id_C413 waittill("missile_damage", var_3);
 
     if(var_3 == "om130_jackal_missile" || var_3 == "om130_missile_missile") {
-      if(var_3 == "om130_missile_missile")
+      if(var_3 == "om130_missile_missile") {
         var_2 = var_2 + 3;
-      else
+      } else {
         var_2 = var_2 + 2;
+      }
 
       if(var_2 >= 20) {
         var_2 = 0;
@@ -506,8 +517,9 @@ _id_C438() {
         level._id_C42A++;
         level notify("olympus_damaged");
 
-        if(var_0.size == 4)
+        if(var_0.size == 4) {
           scripts\engine\utility::flag_set("om130_danger_zone");
+        }
 
         continue;
       }
@@ -562,23 +574,26 @@ _id_C44B() {
   level._id_C41A._id_7465 hide();
 
   while(!scripts\engine\utility::flag("om130_ending") || level._id_C41A._id_745F > 0.0) {
-    if(!scripts\engine\utility::flag("om130_ending") && self attackButtonPressed() && self adsButtonPressed(1))
+    if(!scripts\engine\utility::flag("om130_ending") && self attackButtonPressed() && self adsButtonPressed(1)) {
       _id_C426();
-    else if(!scripts\engine\utility::flag("om130_ending") && level._id_C41A._id_745F >= 1.0 && isDefined(level._id_C41A._id_7470) && (!isDefined(level._id_C41A._id_FE37) || level._id_C41A._id_FE37 != level._id_C41A._id_7470))
+    } else if(!scripts\engine\utility::flag("om130_ending") && level._id_C41A._id_745F >= 1.0 && isDefined(level._id_C41A._id_7470) && (!isDefined(level._id_C41A._id_FE37) || level._id_C41A._id_FE37 != level._id_C41A._id_7470)) {
       _id_C435();
-    else
+    } else {
       _id_C430();
+    }
 
     if(!scripts\engine\utility::flag("om130_ending")) {
-      if(isDefined(level._id_C41A._id_7470))
+      if(isDefined(level._id_C41A._id_7470)) {
         level._id_C41A._id_7458._id_11512.origin = level._id_C41A._id_7470.origin;
-      else
+      } else {
         level._id_C41A._id_7458._id_11512.origin = self getEye() + anglesToForward(self getplayerangles()) * 50000;
+      }
     }
 
     if(level._id_C41A._id_745F > 0.0) {
-      if(isDefined(level._id_C41A) && isDefined(level._id_C41A._id_E7C2))
+      if(isDefined(level._id_C41A) && isDefined(level._id_C41A._id_E7C2)) {
         level._id_C41A._id_E7C2 scripts\sp\utility::_id_F581(clamp(pow(level._id_C41A._id_745F, 0.5), 0.25, 0.5));
+      }
     } else if(isDefined(level._id_C41A) && isDefined(level._id_C41A._id_E7C2))
       level._id_C41A._id_E7C2 scripts\sp\utility::_id_F581(0.0);
 
@@ -633,8 +648,9 @@ _id_C435() {
   level._id_C41A._id_7465 show();
   var_1 = playfxontagsbetweenclients(scripts\engine\utility::getfx("fspar_beam"), level._id_C41A._id_7465, "tag_fx", level._id_C41A._id_7458._id_11512, "tag_origin");
 
-  if(var_0 vehicle_getspeed() > 100)
+  if(var_0 vehicle_getspeed() > 100) {
     var_0 vehicle_setspeedimmediate(100, 200, 200);
+  }
 
   var_0 _meth_8585((0, 0, 0));
   screenshake(self getEye(), 0.4, 0.0, 0.0, 0.5, 0.0, 0.5, 0, 8, 0, 0);
@@ -651,14 +667,16 @@ _id_C435() {
   while(level._id_C41A._id_745F > 0.0) {
     _id_C430(1.0, 1);
 
-    if(isDefined(level._id_C41A._id_E7C2) && level._id_C41A._id_745F < 0.25)
+    if(isDefined(level._id_C41A._id_E7C2) && level._id_C41A._id_745F < 0.25) {
       level._id_C41A._id_E7C2 scripts\sp\utility::_id_F581(level._id_C41A._id_745F / 0.25);
+    }
 
     if(var_3 <= 0.0) {
       var_6 = scripts\common\trace::ray_trace(var_5 + vectorNormalize(var_0.origin - var_5) * 2000, var_0.origin);
 
-      if(isDefined(var_6["entity"]) && var_6["entity"] == var_0)
+      if(isDefined(var_6["entity"]) && var_6["entity"] == var_0) {
         playFX(scripts\engine\utility::getfx("fspar_impact"), var_6["position"], var_6["normal"]);
+      }
 
       var_3 = var_4;
     } else
@@ -667,8 +685,9 @@ _id_C435() {
     wait 0.05;
   }
 
-  if(isDefined(level._id_C41A._id_A91C))
+  if(isDefined(level._id_C41A._id_A91C)) {
     _id_C44E(level._id_C41A._id_A91C);
+  }
 
   level._id_C41A._id_7458._id_11512 unlink();
   var_0 notify("fspar");
@@ -686,8 +705,9 @@ _id_C435() {
 }
 
 _id_C430(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1.0;
+  }
 
   level._id_C41A._id_745F = level._id_C41A._id_745F - 0.05 / (level._id_C41A._id_745A / (level._id_C41A._id_7461 * var_0));
   level._id_C41A._id_745F = max(0.0, level._id_C41A._id_745F);
@@ -728,19 +748,23 @@ _id_C450(var_0) {
       level._id_C41A._id_7462 thread _id_C42F();
     }
 
-    if(isDefined(level._id_C41A._id_745D))
+    if(isDefined(level._id_C41A._id_745D)) {
       level._id_C41A._id_745D notify("om130_fspar_sound");
+    }
 
-    if(isDefined(level._id_C41A._id_745B))
+    if(isDefined(level._id_C41A._id_745B)) {
       level._id_C41A._id_745B notify("om130_fspar_sound");
+    }
   } else if(var_0 == "fire") {
     self playSound("heistspace_fspar_fire");
 
-    if(isDefined(level._id_C41A._id_745D))
+    if(isDefined(level._id_C41A._id_745D)) {
       level._id_C41A._id_745D notify("om130_fspar_sound");
+    }
 
-    if(isDefined(level._id_C41A._id_745B))
+    if(isDefined(level._id_C41A._id_745B)) {
       level._id_C41A._id_745B notify("om130_fspar_sound");
+    }
   }
 }
 
@@ -752,11 +776,13 @@ _id_C42F() {
 }
 
 _id_C463() {
-  if(isDefined(level._id_C41A._id_745D))
+  if(isDefined(level._id_C41A._id_745D)) {
     level._id_C41A._id_745D notify("om130_fspar_sound");
+  }
 
-  if(isDefined(level._id_C41A._id_745B))
+  if(isDefined(level._id_C41A._id_745B)) {
     level._id_C41A._id_745B notify("om130_fspar_sound");
+  }
 }
 
 _id_C40E() {
@@ -780,9 +806,9 @@ _id_C410() {
       var_4 = vectorNormalize(var_3);
       var_5 = vectordot(var_4, anglestoleft(self.angles));
 
-      if(var_5 > cos(90))
+      if(var_5 > cos(90)) {
         thread _id_0BB6::_id_39E5("phalanx_left", var_1);
-      else {
+      } else {
         var_6 = self._id_129F5["phalanx_left"];
 
         foreach(var_8 in self.turrets) {
@@ -802,8 +828,9 @@ _id_C410() {
             var_11.origin = self gettagorigin(var_10._id_AD42) + var_15;
             var_16 = 0;
 
-            if(scripts\engine\utility::cointoss())
+            if(scripts\engine\utility::cointoss()) {
               var_16 = randomfloatrange(0, 2.5);
+            }
 
             var_17 = randomfloatrange(2, 4);
             var_10 scripts\engine\utility::delaythread(var_16, _id_0BB6::_id_39ED, var_11, !self._id_12A09);
@@ -820,9 +847,9 @@ _id_C410() {
       var_4 = vectorNormalize(var_3);
       var_5 = vectordot(var_4, anglestoright(self.angles));
 
-      if(var_5 > cos(90))
+      if(var_5 > cos(90)) {
         thread _id_0BB6::_id_39E5("phalanx_right", var_2);
-      else {
+      } else {
         var_6 = self._id_129F5["phalanx_right"];
 
         foreach(var_8 in self.turrets) {
@@ -842,8 +869,9 @@ _id_C410() {
             var_11.origin = self gettagorigin(var_10._id_AD42) + var_15;
             var_16 = 0;
 
-            if(scripts\engine\utility::cointoss())
+            if(scripts\engine\utility::cointoss()) {
               var_16 = randomfloatrange(0, 2.5);
+            }
 
             var_17 = randomfloatrange(2, 4);
             var_10 scripts\engine\utility::delaythread(var_16, _id_0BB6::_id_39ED, var_11, !self._id_12A09);
@@ -883,8 +911,9 @@ _id_C40D() {
         continue;
       }
 
-      if(var_10 > cos(90))
+      if(var_10 > cos(90)) {
         var_4 = scripts\engine\utility::add_to_array(var_4, var_6);
+      }
     }
 
     if(isDefined(var_3[0]) && isDefined(var_3[1]) && var_3[0].health > 0 && var_3[1].health > 0) {
@@ -967,8 +996,9 @@ _id_10BD9() {
     var_1 thread _id_C42B();
   }
 
-  while(level._id_63E6.size > 2 && !scripts\engine\utility::flag("om130_danger_zone"))
+  while(level._id_63E6.size > 2 && !scripts\engine\utility::flag("om130_danger_zone")) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::flag_set("start_capital_reinforcements");
 }
@@ -994,8 +1024,9 @@ _id_C45F() {
   var_0.name = level._id_C41A._id_6504[level._id_C41A._id_6505];
   level._id_C41A._id_6505++;
 
-  if(level._id_C41A._id_6505 >= level._id_C41A._id_6504.size)
+  if(level._id_C41A._id_6505 >= level._id_C41A._id_6504.size) {
     level._id_C41A._id_6505 = 0;
+  }
 
   var_0 _id_0BB6::_id_39E1();
   var_0._id_EEF9 = "missile_tube_ca ";
@@ -1011,8 +1042,9 @@ _id_C45F() {
   var_0.team = "axis";
   wait 0.1;
 
-  if(scripts\engine\utility::is_true(var_0._id_1323C._id_DF26))
+  if(scripts\engine\utility::is_true(var_0._id_1323C._id_DF26)) {
     var_0 waittill("ftl_finished");
+  }
 
   var_0 thread _id_C43A();
   var_0 thread _id_C425();
@@ -1092,24 +1124,29 @@ _id_6D0D(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       var_18.origin = self gettagorigin(var_15.tag);
       var_18.angles = var_17;
 
-      if(isDefined(self._id_B80E))
+      if(isDefined(self._id_B80E)) {
         var_18.origin = var_18.origin + self._id_B80E;
+      }
 
       var_19 = 0;
 
-      if(isDefined(var_5) && !var_5)
+      if(isDefined(var_5) && !var_5) {
         var_19 = 1;
+      }
 
       var_20 = 0;
 
-      if(isDefined(var_6) && !var_6)
+      if(isDefined(var_6) && !var_6) {
         var_20 = 1;
+      }
 
-      if(isDefined(level._id_39B6) && !level._id_39B6)
+      if(isDefined(level._id_39B6) && !level._id_39B6) {
         var_20 = 1;
+      }
 
-      if(isDefined(self._id_12FB8) && self._id_12FB8)
+      if(isDefined(self._id_12FB8) && self._id_12FB8) {
         var_18._id_C180 = 1;
+      }
 
       var_18._id_AA99 = "capitalship_missile_launch";
       var_18._id_69E9 = "capitalship_missile_impact";
@@ -1123,8 +1160,9 @@ _id_6D0D(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
         break;
       }
 
-      if(var_13 % 4 == 0)
+      if(var_13 % 4 == 0) {
         wait 0.85;
+      }
 
       wait(var_2._id_6D20);
     }
@@ -1151,13 +1189,15 @@ _id_C458(var_0) {
   var_0 waittill("death");
   level._id_63E6 = scripts\engine\utility::array_remove(level._id_63E6, var_0);
 
-  if(!scripts\engine\utility::flag("start_capital_reinforcements"))
+  if(!scripts\engine\utility::flag("start_capital_reinforcements")) {
     scripts\engine\utility::flag_wait_or_timeout("start_capital_reinforcements", 15.0);
+  }
 
   wait(randomfloatrange(0.5, 1.5));
 
-  while(level._id_63E6.size > 3)
+  while(level._id_63E6.size > 3) {
     wait 0.5;
+  }
 
   var_1 = getvehiclenodearray(self.script_parameters, "targetname");
   var_2 = scripts\engine\utility::random(var_1);
@@ -1178,8 +1218,9 @@ _id_C422() {
   self endon("entitydeleted");
   scripts\engine\utility::flag_wait("elevator_done");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     _id_0BA9::_id_397B();
+  }
 }
 
 _id_C449(var_0) {
@@ -1221,8 +1262,9 @@ _id_C41B(var_0, var_1, var_2, var_3, var_4, var_5) {
 _id_C456() {
   scripts\engine\utility::waittill_any("death", "remove_target", "entitydeleted");
 
-  if(isDefined(self) && target_istarget(self))
+  if(isDefined(self) && target_istarget(self)) {
     target_remove(self);
+  }
 }
 
 _id_C457() {
@@ -1235,11 +1277,11 @@ _id_C43A() {
   thread _id_C437();
   var_0 = undefined;
 
-  if(isDefined(self._id_1323C.target))
+  if(isDefined(self._id_1323C.target)) {
     var_0 = getvehiclenode(self._id_1323C.target, "targetname");
-  else if(isDefined(self._id_10CBA))
+  } else if(isDefined(self._id_10CBA)) {
     var_0 = self._id_10CBA;
-  else {}
+  } else {}
 
   self._id_5971 = 1;
   scripts\sp\utility::_id_65E0("reached_front");
@@ -1277,10 +1319,11 @@ _id_C437() {
   for(;;) {
     self waittill("fspar");
 
-    if(!isDefined(level._id_6DD3))
+    if(!isDefined(level._id_6DD3)) {
       level._id_6DD3 = self.script_parameters;
-    else if(!isDefined(level._id_F0A6))
+    } else if(!isDefined(level._id_F0A6)) {
       level._id_F0A6 = self.script_parameters;
+    }
 
     self._id_4E09 = "destroyer_explode";
     _id_0BB6::_id_39E1();
@@ -1292,8 +1335,9 @@ _id_C437() {
     level._id_C41A._id_7470 = undefined;
     scripts\engine\utility::waitframe();
 
-    if(isDefined(self))
+    if(isDefined(self)) {
       _id_0BA9::_id_397B();
+    }
   }
 }
 
@@ -1305,8 +1349,9 @@ _id_96A7() {
   var_0.littoral_ship_lights = [];
   var_0._id_13D88 = [];
 
-  foreach(var_2 in var_0.spawner scripts\sp\utility::_id_7A97())
-  var_0._id_13D88[var_0._id_13D88.size] = (var_2.origin - var_0.spawner.origin) * 6.0;
+  foreach(var_2 in var_0.spawner scripts\sp\utility::_id_7A97()) {
+    var_0._id_13D88[var_0._id_13D88.size] = (var_2.origin - var_0.spawner.origin) * 6.0;
+  }
 
   return var_0;
 }
@@ -1353,8 +1398,9 @@ _id_8938(var_0) {
   level endon("player_never_shot_fspar");
   self._id_13D88 = [];
 
-  foreach(var_2 in scripts\sp\utility::_id_7A97())
-  self._id_13D88[self._id_13D88.size] = (var_2.origin - self.origin) * 6.0;
+  foreach(var_2 in scripts\sp\utility::_id_7A97()) {
+    self._id_13D88[self._id_13D88.size] = (var_2.origin - self.origin) * 6.0;
+  }
 
   var_4 = getcsplineid(self.target);
   self.origin = getcsplinepointposition(var_4, 0);
@@ -1367,15 +1413,17 @@ _id_8938(var_0) {
   level._id_C41A._id_A35B.littoral_ship_lights[level._id_C41A._id_A35B.littoral_ship_lights.size] = var_5;
 
   if(var_0 > 0) {
-    if(var_0 > 4)
+    if(var_0 > 4) {
       var_0 = 4;
+    }
 
     self._id_13D88 = scripts\engine\utility::array_randomize(self._id_13D88);
     var_6 = self.origin;
 
     for(var_7 = 0; var_7 < var_0; var_7++) {
-      while(isDefined(self._id_1323B))
+      while(isDefined(self._id_1323B)) {
         scripts\engine\utility::waitframe();
+      }
 
       self.origin = var_5.origin - rotatevector(self._id_13D88[var_7], (0, var_5.angles[1], 0));
       self.origin = (self.origin[0], self.origin[1], var_5.origin[2]);
@@ -1412,8 +1460,9 @@ _id_520A(var_0, var_1) {
   self.spawner.angles = vectortoangles(level._id_C413.origin - self.spawner.origin);
   self.spawner dontinterpolate();
 
-  while(isDefined(self.spawner._id_1323B))
+  while(isDefined(self.spawner._id_1323B)) {
     scripts\engine\utility::waitframe();
+  }
 
   var_3 = self.spawner scripts\sp\utility::_id_10808();
   var_3 thread _id_C41B("radar_targeting_icon_jackal_closed_wings", 40, 40, (0.75, 0.75, 0.75), "radar_targeting_icon_brackets", (1, 1, 1));
@@ -1423,15 +1472,17 @@ _id_520A(var_0, var_1) {
   self.littoral_ship_lights[self.littoral_ship_lights.size] = var_3;
 
   if(var_1 > 0) {
-    if(var_1 > 4)
+    if(var_1 > 4) {
       var_1 = 4;
+    }
 
     self._id_13D88 = scripts\engine\utility::array_randomize(self._id_13D88);
     var_4 = self.spawner.origin;
 
     for(var_5 = 0; var_5 < var_1; var_5++) {
-      while(isDefined(self.spawner._id_1323B))
+      while(isDefined(self.spawner._id_1323B)) {
         scripts\engine\utility::waitframe();
+      }
 
       self.spawner.origin = var_3.origin - rotatevector(self._id_13D88[var_5], (0, var_3.angles[1], 0));
       self.spawner.origin = (self.spawner.origin[0], self.spawner.origin[1], var_3.origin[2]);
@@ -1465,8 +1516,9 @@ _id_C444() {
         var_3 = 0;
         var_2 = 400000000;
 
-        if(target_istarget(self))
+        if(target_istarget(self)) {
           target_setshader(self, "radar_targeting_icon_jackal_open_wings");
+        }
       } else {
         var_4 = undefined;
 
@@ -1485,8 +1537,9 @@ _id_C444() {
         }
 
         if(vectordot(anglesToForward(self.angles), var_4.origin - self.origin) <= 0.0) {
-          if(scripts\engine\utility::flag("fspar_down"))
+          if(scripts\engine\utility::flag("fspar_down")) {
             var_4 delete();
+          }
 
           wait 0.05;
           continue;
@@ -1523,8 +1576,9 @@ _id_E45E(var_0, var_1, var_2, var_3) {
   var_10 = var_4 * var_7;
   var_11 = 0;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_11 = randomfloatrange(0, var_2);
+  }
 
   var_9 = var_9 + var_0[0];
   var_10 = var_10 + var_0[1];
@@ -1539,8 +1593,9 @@ _id_C446() {
   for(;;) {
     wait(randomintrange(8, 16));
 
-    if(scripts\engine\utility::cointoss())
+    if(scripts\engine\utility::cointoss()) {
       self _meth_81D0();
+    }
   }
 }
 
@@ -1549,8 +1604,9 @@ _id_C445(var_0) {
   var_0.littoral_ship_lights = scripts\engine\utility::array_remove(var_0.littoral_ship_lights, self);
 
   if(isDefined(self._id_A420)) {
-    foreach(var_2 in self._id_A420)
-    var_2 thread _id_A62E();
+    foreach(var_2 in self._id_A420) {
+      var_2 thread _id_A62E();
+    }
   }
 }
 
@@ -1558,17 +1614,19 @@ _id_A62E() {
   self endon("death");
   wait 2;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self _meth_81D0();
+  }
 }
 
 _id_5163(var_0) {
   self endon("death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 waittill("end_spline");
-  else
+  } else {
     self waittill("end_spline");
+  }
 
   self delete();
 }
@@ -1627,8 +1685,9 @@ _id_C451() {
 _id_387B() {
   level endon("om130_ending");
 
-  while(!scripts\engine\utility::is_true(level._id_C41A._id_745C))
+  while(!scripts\engine\utility::is_true(level._id_C41A._id_745C)) {
     wait 0.05;
+  }
 
   level notify("player_charging_fspar");
 }
@@ -1636,8 +1695,9 @@ _id_387B() {
 _id_C455() {
   level endon("om130_ending");
 
-  while(level._id_C41A._id_745F < 1.0)
+  while(level._id_C41A._id_745F < 1.0) {
     wait 0.05;
+  }
 
   level._id_6754 scripts\sp\utility::_id_10346("heistspace_eth_cannonfullychar");
 }
@@ -1679,23 +1739,27 @@ _id_C447() {
 _id_C41D() {
   level endon("om130_ending");
 
-  if(scripts\engine\utility::flag("om130_fired_first_time"))
+  if(scripts\engine\utility::flag("om130_fired_first_time")) {
     scripts\engine\utility::flag_waitopen("om130_vital_vo");
+  }
 
-  while(level._id_C42A < 1)
+  while(level._id_C42A < 1) {
     wait 0.05;
+  }
 
   level thread _id_1CD5();
 
-  while(level._id_C42A < 5)
+  while(level._id_C42A < 5) {
     wait 0.05;
+  }
 
   level._id_30F6 scripts\sp\utility::_id_65E1("om130_move_to_pcap");
   level notify("end_chatter_01");
   level thread _id_1CD6();
 
-  while(level._id_C42A < 9)
+  while(level._id_C42A < 9) {
     wait 0.05;
+  }
 
   level._id_A54E scripts\sp\utility::_id_65E1("om130_move_to_pcap");
   level notify("end_chatter_02");
@@ -1753,15 +1817,17 @@ _id_C471() {
   level._id_EA2C scripts\sp\utility::_id_10346("heistspace_slt_shitwellneedeve");
   scripts\engine\utility::flag_clear("om130_vital_vo");
 
-  while(level._id_C42A < 12)
+  while(level._id_C42A < 12) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_set("om130_vital_vo");
   level._id_30F6 scripts\sp\utility::_id_10346("heistspace_brk_ordnanceat30");
   scripts\engine\utility::flag_clear("om130_vital_vo");
 
-  while(level._id_C42A < 14)
+  while(level._id_C42A < 14) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_set("om130_vital_vo");
   level._id_6754 scripts\sp\utility::_id_10346("heistspace_eth_sirshipisinrese");
@@ -1772,8 +1838,9 @@ _id_C471() {
 _id_10344(var_0) {
   wait(randomfloatrange(3.5, 6.5));
 
-  if(scripts\engine\utility::flag("om130_vital_vo"))
+  if(scripts\engine\utility::flag("om130_vital_vo")) {
     scripts\engine\utility::flag_waitopen("om130_vital_vo");
+  }
 
   scripts\sp\utility::_id_10350(var_0);
 }
@@ -1781,8 +1848,9 @@ _id_10344(var_0) {
 _id_10343(var_0) {
   wait(randomfloatrange(2.5, 4.5));
 
-  if(scripts\engine\utility::flag("om130_vital_vo"))
+  if(scripts\engine\utility::flag("om130_vital_vo")) {
     scripts\engine\utility::flag_waitopen("om130_vital_vo");
+  }
 
   scripts\sp\utility::_id_10346(var_0);
 }
@@ -1805,11 +1873,13 @@ _id_1CD1(var_0, var_1, var_2) {
   scripts\sp\utility::_id_65E0("om130_chatter_02");
   scripts\sp\utility::_id_65E0("om130_move_to_pcap");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     thread _id_1CD2(var_0);
+  }
 
-  if(scripts\engine\utility::is_true(var_1))
+  if(scripts\engine\utility::is_true(var_1)) {
     var_0 scripts\sp\anim::_id_1F35(self, "bridge_intro");
+  }
 
   var_0 thread scripts\sp\anim::_id_1EEA(self, "bridge_intro_loop", "end_" + self._id_1FBB + "_bridge_loop");
   scripts\engine\utility::flag_wait_any("om130_fired_first_time", "player_never_shot_fspar");
@@ -1841,24 +1911,28 @@ _id_1CD2(var_0) {
 }
 
 _id_C421(var_0) {
-  if(!scripts\engine\utility::is_true(var_0))
+  if(!scripts\engine\utility::is_true(var_0)) {
     level waittill("olympus_damaged");
+  }
 
   scripts\engine\utility::exploder("vfx_amb_bridge_damage");
 
   if(!scripts\engine\utility::is_true(var_0)) {
-    while(!isDefined(level._id_C42A))
+    while(!isDefined(level._id_C42A)) {
       wait 0.05;
+    }
 
-    while(level._id_C42A < 11)
+    while(level._id_C42A < 11) {
       wait 0.05;
+    }
   }
 
   scripts\engine\utility::exploder("vfx_amb_bridge_damage_2");
 
   if(!scripts\engine\utility::is_true(var_0)) {
-    while(level._id_C42A < 19)
+    while(level._id_C42A < 19) {
       wait 0.05;
+    }
 
     scripts\engine\utility::exploder("vfx_ord_expl");
   }
@@ -1884,11 +1958,13 @@ _id_B394() {
   var_6 = undefined;
 
   foreach(var_8 in var_0) {
-    if(isDefined(var_8.script_noteworthy) && var_8.script_noteworthy == "mars")
+    if(isDefined(var_8.script_noteworthy) && var_8.script_noteworthy == "mars") {
       var_5 = var_8 scripts\engine\utility::spawn_tag_origin();
+    }
 
-    if(isDefined(var_8.script_noteworthy) && var_8.script_noteworthy == "shipyard_model")
+    if(isDefined(var_8.script_noteworthy) && var_8.script_noteworthy == "shipyard_model") {
       var_6 = var_8 scripts\engine\utility::spawn_tag_origin();
+    }
   }
 
   foreach(var_8 in var_0) {
@@ -1937,12 +2013,14 @@ _id_EB49() {
   var_3 = scripts\engine\utility::getStruct("intro_satellite_end", "targetname");
 
   foreach(var_5 in var_0) {
-    if(isDefined(var_5.script_noteworthy) && var_5.script_noteworthy == "body")
+    if(isDefined(var_5.script_noteworthy) && var_5.script_noteworthy == "body") {
       var_1 = var_5 scripts\engine\utility::spawn_tag_origin();
+    }
   }
 
-  foreach(var_5 in var_0)
-  var_5 linkTo(var_1);
+  foreach(var_5 in var_0) {
+    var_5 linkTo(var_1);
+  }
 
   wait 0.05;
   var_1 moveTo(var_2.origin, 0.05);

@@ -29,15 +29,17 @@ _id_FD90() {
 }
 
 _id_FDC7(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   scripts\sp\lights::_id_AB83(self._id_99E6, var_0);
 }
 
 _id_FD89(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "default";
+  }
 
   level notify("ftl_prep");
   thread _id_25AF("buildup");
@@ -46,15 +48,17 @@ _id_FD89(var_0, var_1, var_2, var_3, var_4) {
   var_5 = 0;
   var_6 = 7;
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = var_6;
-  else if(var_4 > var_6)
+  } else if(var_4 > var_6) {
     var_5 = var_4 - var_6;
+  }
 
   var_7 = 6;
 
-  if(var_7 < var_4)
+  if(var_7 < var_4) {
     var_7 = var_4 - var_7;
+  }
 
   screenshake(level.player.origin, 0.2, 0.2, 0.2, var_4, -1, 0, 0, 12, 12, 12);
   visionsetalternate(1, var_4);
@@ -93,17 +97,20 @@ _id_FD89(var_0, var_1, var_2, var_3, var_4) {
   var_17 = scripts\engine\utility::array_combine(var_8, var_9);
   var_17 = scripts\engine\utility::array_combine(var_17, var_11);
 
-  foreach(var_19 in var_16)
-  var_19._id_99E6 = scripts\sp\lights::_id_95A8([var_19.script_intensity_01, var_19 _meth_8134()]);
+  foreach(var_19 in var_16) {
+    var_19._id_99E6 = scripts\sp\lights::_id_95A8([var_19.script_intensity_01, var_19 _meth_8134()]);
+  }
 
-  foreach(var_19 in var_15)
-  var_19._id_99E6 = scripts\sp\lights::_id_95A8([var_19.script_intensity_01, var_19 _meth_8134()]);
+  foreach(var_19 in var_15) {
+    var_19._id_99E6 = scripts\sp\lights::_id_95A8([var_19.script_intensity_01, var_19 _meth_8134()]);
+  }
 
   level thread scripts\engine\utility::array_thread(var_16, scripts\sp\lights::_id_AB83, 0, var_4);
   level thread scripts\engine\utility::array_thread(var_15, scripts\sp\lights::_id_AB83, 0, var_4);
 
-  foreach(var_24 in level._id_E35D._id_6A38._id_747F)
-  playFXOnTag(scripts\engine\utility::getfx("vfx_veh_retr_ftl_04_energy_waves_a_startup" + var_24._id_101AD), var_24._id_7601, "tag_origin");
+  foreach(var_24 in level._id_E35D._id_6A38._id_747F) {
+    playFXOnTag(scripts\engine\utility::getfx("vfx_veh_retr_ftl_04_energy_waves_a_startup" + var_24._id_101AD), var_24._id_7601, "tag_origin");
+  }
 
   playFXOnTag(scripts\engine\utility::getfx("vfx_veh_retr_ftl_06_center_energy_point_a_startup"), level._id_E35D._id_6A38._id_74A1, "tag_origin");
   scripts\engine\utility::noself_delaycall(var_7, ::playfxontag, scripts\engine\utility::getfx("vfx_veh_retr_ftl_05_dialation_sphere_a_startup"), level._id_E35D._id_6A38._id_74A1, "tag_origin");
@@ -121,8 +128,9 @@ _id_FD89(var_0, var_1, var_2, var_3, var_4) {
   level thread _id_7472();
   level.player playRumbleOnEntity("heavy_1s");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level thread[[var_2]]();
+  }
 
   screenshake(level.player.origin, 1.5, 1.5, 1.5, 0.5, 0, 0, 0, 16, 16, 16);
   level thread _id_7498();
@@ -168,8 +176,9 @@ _id_FD89(var_0, var_1, var_2, var_3, var_4) {
   level thread scripts\engine\utility::array_thread(var_15, ::_id_FDC7, 0.3);
   level thread scripts\engine\utility::array_thread(var_16, ::_id_FDC7, 0.3);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level thread[[var_3]]();
+  }
 
   level scripts\engine\utility::delaythread(0.0, _id_0EF5::_id_FDF6, var_0, 0.2, "navigation");
   level scripts\engine\utility::delaythread(0.0, _id_0EF5::_id_FDF6, var_0, 0.2, "navigation_l");
@@ -190,8 +199,9 @@ _id_FD89(var_0, var_1, var_2, var_3, var_4) {
   level scripts\engine\utility::delaythread(5.0, _id_0EF5::_id_FDF6, var_0, 0.2, "comms_lower");
   level scripts\engine\utility::delaythread(5.0, _id_0EF5::_id_FDF6, var_0, 0.2, "misc");
 
-  foreach(var_24 in level._id_E35D._id_6A38._id_747F)
-  playFXOnTag(scripts\engine\utility::getfx("vfx_veh_retr_ftl_11_panel_warm_charge" + var_24._id_EB9C), var_24._id_7601, "tag_origin");
+  foreach(var_24 in level._id_E35D._id_6A38._id_747F) {
+    playFXOnTag(scripts\engine\utility::getfx("vfx_veh_retr_ftl_11_panel_warm_charge" + var_24._id_EB9C), var_24._id_7601, "tag_origin");
+  }
 
   playFXOnTag(scripts\engine\utility::getfx("vfx_veh_retr_ftl_05_dialation_sphere_c_stop"), level._id_E35D._id_6A38._id_74A1, "tag_origin");
   playFXOnTag(scripts\engine\utility::getfx("vfx_veh_retr_ftl_06_center_energy_point_c_stop"), level._id_E35D._id_6A38._id_74A1, "tag_origin");
@@ -204,8 +214,9 @@ _id_FD89(var_0, var_1, var_2, var_3, var_4) {
   foreach(var_31 in level._id_E35D._id_6A38._id_747E) {
     scripts\engine\utility::waitframe();
 
-    foreach(var_24 in var_31)
-    killfxontag(scripts\engine\utility::getfx("vfx_veh_retr_ftl_02_panel_cool_charge_a_startup" + var_24._id_EB9C), var_24._id_7601, "tag_origin");
+    foreach(var_24 in var_31) {
+      killfxontag(scripts\engine\utility::getfx("vfx_veh_retr_ftl_02_panel_cool_charge_a_startup" + var_24._id_EB9C), var_24._id_7601, "tag_origin");
+    }
   }
 }
 
@@ -218,18 +229,18 @@ _id_25AF(var_0) {
         if(scripts\engine\utility::flag("capops_ftl_triggered")) {
           var_1 = "shipcrib_captains_quarters_ftl_" + var_0 + "_lr";
 
-          if(var_0 == "go")
+          if(var_0 == "go") {
             level._id_749F playSound(var_1);
-          else {
+          } else {
             thread _id_25F9();
             level._id_749E playSound(var_1);
           }
         } else {
           var_1 = level.script + "_ftl_" + var_0 + "_lr";
 
-          if(var_0 == "go")
+          if(var_0 == "go") {
             level._id_749F playSound(var_1);
-          else {
+          } else {
             thread _id_25F9();
             level._id_749E playSound(var_1);
           }
@@ -237,9 +248,9 @@ _id_25AF(var_0) {
       } else {
         var_1 = level.script + "_ftl_" + var_0 + "_lr";
 
-        if(var_0 == "go")
+        if(var_0 == "go") {
           level._id_749F playSound(var_1);
-        else {
+        } else {
           thread _id_25F9();
           level._id_749E playSound(var_1);
         }
@@ -294,8 +305,9 @@ _id_FD8B(var_0) {
   level notify("ftl_drives_opening");
   thread _id_747D();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   level._id_E35D._id_6A38 _id_0B51::_id_C5FC(var_0);
   level notify("ftl_drives_opened");
@@ -312,8 +324,9 @@ _id_FD8A(var_0) {
   level notify("ftl_drives_closing");
   thread _id_747C();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   level._id_E35D._id_6A38 _id_0B51::_id_4268(var_0);
   level notify("ftl_drives_closed");
@@ -336,8 +349,9 @@ _id_747D(var_0) {
   level endon("ftl_stop");
   var_1 = 2;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = var_0;
+  }
 
   var_2 = 700;
   var_3 = 100;
@@ -434,8 +448,9 @@ _id_748D() {
   if(var_0.size == 0) {
     return;
   }
-  foreach(var_2 in var_0)
-  var_2 setlightintensity(0);
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(0);
+  }
 }
 
 _id_7498() {
@@ -454,8 +469,9 @@ _id_7498() {
       break;
   }
 
-  if(!isDefined(level._id_FD6E._id_7498))
+  if(!isDefined(level._id_FD6E._id_7498)) {
     level._id_FD6E._id_7498 = [];
+  }
 
   if(!isDefined(level._id_FD6E._id_7498["freq_min"])) {
     level._id_FD6E._id_7498["freq_min"] = 9;
@@ -492,8 +508,9 @@ _id_7498() {
 }
 
 _id_BB19() {
-  if(!isDefined(level._id_FD6E._id_7498))
+  if(!isDefined(level._id_FD6E._id_7498)) {
     level._id_FD6E._id_7498 = [];
+  }
 
   level._id_FD6E._id_7498["freq_min"] = 9;
   level._id_FD6E._id_7498["freq_max"] = 12;
@@ -519,8 +536,9 @@ _id_BB19() {
 }
 
 _id_E658() {
-  if(!isDefined(level._id_FD6E._id_7498))
+  if(!isDefined(level._id_FD6E._id_7498)) {
     level._id_FD6E._id_7498 = [];
+  }
 
   level._id_FD6E._id_7498["freq_min"] = 9;
   level._id_FD6E._id_7498["freq_max"] = 12;
@@ -532,8 +550,9 @@ _id_E658() {
 }
 
 _id_D941() {
-  if(!isDefined(level._id_FD6E._id_7498))
+  if(!isDefined(level._id_FD6E._id_7498)) {
     level._id_FD6E._id_7498 = [];
+  }
 
   if(isDefined(level._id_EB94) && level._id_EB94) {
     level._id_FD6E._id_7498["freq_min"] = 9;

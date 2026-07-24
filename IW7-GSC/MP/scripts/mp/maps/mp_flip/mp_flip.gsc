@@ -24,8 +24,9 @@ main() {
   thread rotatefans();
   var_0 = getEntArray("floatingJackal", "targetname");
 
-  foreach(var_2 in var_0)
-  thread _id_90EF(var_2);
+  foreach(var_2 in var_0) {
+    thread _id_90EF(var_2);
+  }
 
   thread fix_via_models();
   thread runmodespecifictriggers();
@@ -91,8 +92,9 @@ _id_5EE9(var_0) {
 }
 
 _id_5EE7(var_0) {
-  foreach(var_2 in var_0._id_BE1E)
-  var_2 thread _id_5EE8();
+  foreach(var_2 in var_0._id_BE1E) {
+    var_2 thread _id_5EE8();
+  }
 }
 
 _id_5EE8() {
@@ -102,8 +104,9 @@ _id_5EE8() {
   var_0 linkTo(self);
   scripts\engine\utility::waitframe();
 
-  if(isDefined(self.targetname))
+  if(isDefined(self.targetname)) {
     playFXOnTag(scripts\engine\utility::getfx(self.targetname), var_0, "tag_origin");
+  }
 }
 
 rotatefans() {
@@ -119,18 +122,20 @@ _id_E72B(var_0) {
   level endon("game_ended");
   var_1 = "roll";
 
-  if(isDefined(self.script_noteworthy))
+  if(isDefined(self.script_noteworthy)) {
     var_1 = self.script_noteworthy;
+  }
 
   var_2 = "Custom rotation axis must be one of yaw/pitch/roll";
 
   for(;;) {
-    if(var_1 == "yaw")
+    if(var_1 == "yaw") {
       self rotateYaw(360, var_0, 0, 0);
-    else if(var_1 == "pitch")
+    } else if(var_1 == "pitch") {
       self rotatepitch(360, var_0, 0, 0);
-    else if(var_1 == "roll")
+    } else if(var_1 == "roll") {
       self rotateroll(360, var_0, 0, 0);
+    }
 
     wait(var_0);
   }

@@ -25,8 +25,9 @@ _id_DDAE(var_0, var_1) {
     if(isDefined(level.cash_scalar)) {
       var_7 = 10 * level.cash_scalar;
 
-      if(level.cash_scalar > 1)
+      if(level.cash_scalar > 1) {
         var_8 = int(var_8 / 2);
+      }
     }
 
     var_10 = scripts\cp\zombies\zombie_entrances::_id_7B13(var_3);
@@ -42,8 +43,9 @@ _id_DDAE(var_0, var_1) {
       level _id_DDB8(var_3);
       level notify("reboard", 1, var_1);
 
-      for(var_11 = 0; var_11 < var_10; var_11++)
+      for(var_11 = 0; var_11 < var_10; var_11++) {
         var_1 scripts\cp\cp_merits::processmerit("mt_rebuild_barriers");
+      }
 
       var_1 notify("window_reboard_notify");
       var_1 scripts\cp\utility::notify_used_consumable("faster_window_reboard");
@@ -67,8 +69,9 @@ _id_DDAE(var_0, var_1) {
 
     var_3.barrier._id_C1DE++;
 
-    if(var_3.barrier._id_C1DE > 6)
+    if(var_3.barrier._id_C1DE > 6) {
       var_3.barrier._id_C1DE = 6;
+    }
 
     if(!isDefined(scripts\cp\zombies\zombie_entrances::_id_7B13(var_3))) {
       break;
@@ -77,8 +80,9 @@ _id_DDAE(var_0, var_1) {
 
   var_1._id_DDB0 = undefined;
 
-  if(var_3.barrier._id_C1DE == 6)
+  if(var_3.barrier._id_C1DE == 6) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("reinforce_window", "zmb_comment_vo", "low", 10, 0, 0, 1, 25);
+  }
 
   scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
 }
@@ -96,8 +100,9 @@ _id_DDB4(var_0) {
 
   var_5 = 200;
 
-  if(isDefined(level.cash_scalar))
+  if(isDefined(level.cash_scalar)) {
     var_5 = 200 * level.cash_scalar;
+  }
 
   foreach(var_7 in level.players) {
     if(scripts\engine\utility::is_true(var_7.inlaststand)) {
@@ -133,8 +138,9 @@ _id_DDB7(var_0, var_1, var_2, var_3) {
   wait 0.25;
   var_0.barrier._id_C1DE++;
 
-  if(var_0.barrier._id_C1DE > 6)
+  if(var_0.barrier._id_C1DE > 6) {
     var_0.barrier._id_C1DE = 6;
+  }
 }
 
 _id_DDB6(var_0, var_1, var_2, var_3, var_4) {
@@ -150,10 +156,11 @@ _id_DDB6(var_0, var_1, var_2, var_3, var_4) {
 }
 
 register_interactions() {
-  if(isDefined(level.reboard_barriers_hint))
+  if(isDefined(level.reboard_barriers_hint)) {
     level.interaction_hintstrings["secure_window"] = level.reboard_barriers_hint;
-  else
+  } else {
     level.interaction_hintstrings["secure_window"] = &"CP_ZMB_INTERACTIONS_SECURE_WINDOW";
+  }
 
   scripts\cp\cp_interaction::register_interaction("secure_window", "window_board", 1, undefined, ::_id_DDAE, 0);
 }

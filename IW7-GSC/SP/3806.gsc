@@ -85,21 +85,24 @@ _id_C67F() {
 _id_C66D(var_0) {
   level thread _id_0E72::main();
 
-  if(!isDefined(level._id_C6AA))
+  if(!isDefined(level._id_C6AA)) {
     level._id_C6AA = [];
+  }
 
-  if(var_0 == "retribution")
+  if(var_0 == "retribution") {
     level._id_C6AA[var_0] = _id_0EFB::_id_798B("opsmap", "script_noteworthy", "interact", var_0);
-  else
+  } else {
     level._id_C6AA[var_0] = spawnStruct();
+  }
 
   level._id_C6AA[var_0] _id_C64F(var_0);
 
   if(var_0 == "retribution") {
     level._id_C6AA[var_0] _id_C642();
 
-    if(level.script != "shipcrib_moon")
+    if(level.script != "shipcrib_moon") {
       level._id_C6AA[var_0] _id_C676();
+    }
   }
 
   _id_C682(0);
@@ -151,11 +154,13 @@ _id_C64F(var_0) {
   self._id_1339A _id_C687();
   self._id_6665 = [];
 
-  foreach(var_2 in self._id_CACE)
-  self._id_6665[self._id_6665.size] = var_2;
+  foreach(var_2 in self._id_CACE) {
+    self._id_6665[self._id_6665.size] = var_2;
+  }
 
-  foreach(var_5 in self._id_454F)
-  self._id_6665[self._id_6665.size] = var_5;
+  foreach(var_5 in self._id_454F) {
+    self._id_6665[self._id_6665.size] = var_5;
+  }
 
   self._id_6665[self._id_6665.size] = self._id_BA11["nav"];
   self._id_6665[self._id_6665.size] = self._id_7488;
@@ -176,10 +181,11 @@ _id_EA0A(var_0, var_1) {
     }
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self linkTo(var_0, var_1);
-  else
+  } else {
     self linkTo(var_0);
+  }
 }
 
 #using_animtree("player");
@@ -212,8 +218,9 @@ _id_C650() {
   scripts\engine\utility::flag_waitopen("opsmap_calculation_state_active");
   scripts\engine\utility::flag_waitopen("opsmap_ftl_state_active");
 
-  foreach(var_2 in var_0._id_6665)
-  var_2 delete();
+  foreach(var_2 in var_0._id_6665) {
+    var_2 delete();
+  }
 
   var_0 delete();
 }
@@ -241,8 +248,9 @@ _id_C694() {
   var_0 = % shipcrib_plr_opsmap_interact;
   var_1 = % shipcrib_plr_opsmap_interact_backaway;
 
-  if(isDefined(self._id_C645))
+  if(isDefined(self._id_C645)) {
     var_0 = self._id_C645;
+  }
 
   if(isDefined(level._id_C664)) {
     var_0 = % shipcrib_plr_opsmap_grab;
@@ -274,8 +282,9 @@ _id_C694() {
   self._id_1339A _meth_82A2(var_0, 1, 0);
 
   if(scripts\engine\utility::flag_exist("pip_hold") && scripts\engine\utility::flag("pip_hold")) {
-    while(scripts\engine\utility::flag("pip_hold"))
+    while(scripts\engine\utility::flag("pip_hold")) {
       wait 0.05;
+    }
 
     wait 0.05;
   }
@@ -288,8 +297,9 @@ _id_C694() {
 }
 
 waittilbinkend() {
-  while(iscinematicplaying())
+  while(iscinematicplaying()) {
     scripts\engine\utility::waitframe();
+  }
 
   setsaveddvar("bg_cinematicAboveUI", "0");
 }
@@ -327,8 +337,9 @@ _id_C666(var_0, var_1) {
   level.player _meth_82C0("shipcrib_opsmap", 0.5);
   visionsetnaked("shipcrib_opsmap_fullscreen", 0.05);
 
-  if(level.script == "shipcrib_europa" || level.script == "shipcrib_titan")
+  if(level.script == "shipcrib_europa" || level.script == "shipcrib_titan") {
     _id_C69C();
+  }
 
   level thread _id_C668();
 
@@ -357,14 +368,16 @@ _id_C666(var_0, var_1) {
         scripts\engine\utility::flag_set("opsmap_tutorial_shown");
         var_6 = getsubstr(var_5, 12, var_5.size);
 
-        if(var_6 != "rogue" && var_6 != "titan" && var_6 != "prisoner")
+        if(var_6 != "rogue" && var_6 != "titan" && var_6 != "prisoner") {
           level thread _id_C681(var_6);
-        else {
-          if(var_6 == "titan" || var_6 == "prisoner")
+        } else {
+          if(var_6 == "titan" || var_6 == "prisoner") {
             level._id_C6AA["retribution"] thread _id_C683("calculation", var_6);
+          }
 
-          if(var_6 == "rogue")
+          if(var_6 == "rogue") {
             setmusicstate("mx_429_rogue_briefing");
+          }
         }
 
         continue;
@@ -381,8 +394,9 @@ _id_C666(var_0, var_1) {
         var_7 = getsubstr(var_5, 7, var_5.size);
         scripts\engine\utility::flag_set("opsmap_tutorial_shown");
 
-        if(issubstr(level.script, "shipcrib"))
+        if(issubstr(level.script, "shipcrib")) {
           thread _id_C680(var_7, var_4, var_1);
+        }
 
         break;
       }
@@ -426,12 +440,13 @@ _id_C69C() {
       return;
   }
 
-  if(level.console)
+  if(level.console) {
     scripts\sp\utility::_id_56BA("opsmap_tutorial");
-  else if(level.player usinggamepad())
+  } else if(level.player usinggamepad()) {
     scripts\sp\utility::_id_56BA("opsmap_tutorial_pc_gamepad");
-  else
+  } else {
     scripts\sp\utility::_id_56BA("opsmap_tutorial");
+  }
 
   level thread scripts\engine\utility::flag_set_delayed("opsmap_tutorial_shown", 10);
 }
@@ -445,19 +460,22 @@ _id_C648(var_0, var_1) {
   level.player freezecontrols(1);
   setomnvar("ui_opsmap_in_tutorial", 1);
 
-  while(iscinematicplaying())
+  while(iscinematicplaying()) {
     scripts\engine\utility::waitframe();
+  }
 
   stopcinematicingame();
   scripts\engine\utility::waitframe();
   level._id_76FB playSound(var_1);
   cinematicingame(var_0);
 
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     scripts\engine\utility::waitframe();
+  }
 
-  while(iscinematicplaying())
+  while(iscinematicplaying()) {
     scripts\engine\utility::waitframe();
+  }
 
   stopcinematicingame();
   level.player freezecontrols(0);
@@ -473,10 +491,11 @@ _id_C668() {
   level endon("opsmap_nag_cancel");
   var_0 = level.player _meth_84C6("lastCompletedMission");
 
-  if(issubstr(var_0, "sa_") || issubstr(var_0, "ja_"))
+  if(issubstr(var_0, "sa_") || issubstr(var_0, "ja_")) {
     var_1 = 0;
-  else
+  } else {
     var_1 = 1;
+  }
 
   if(level.script == "shipcrib_europa") {
     if(!scripts\engine\utility::flag("opsmap_nag1")) {
@@ -580,8 +599,9 @@ _id_C667() {
 }
 
 _id_C690() {
-  while(iscinematicplaying())
+  while(iscinematicplaying()) {
     scripts\engine\utility::waitframe();
+  }
 
   stopcinematicingame();
 }
@@ -593,13 +613,15 @@ _id_C692() {
   level.player notify("player_in_opsmap");
   _id_C666(var_0);
 
-  if(isDefined(self._id_272B) && self._id_272B)
+  if(isDefined(self._id_272B) && self._id_272B) {
     thread _id_C691();
+  }
 }
 
 _id_C642() {
-  if(!isDefined(self.active))
+  if(!isDefined(self.active)) {
     self.active = 0;
+  }
 
   if(!self.active) {
     self notify("opsmap_disable");
@@ -640,22 +662,25 @@ _id_C643() {
 }
 
 _id_C644() {
-  if(self.active)
+  if(self.active) {
     self._id_162E = undefined;
+  }
 }
 
 #using_animtree("player");
 
 _id_C6A7(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   self._id_7488 thread _id_0E46::_id_48C4(undefined, undefined, undefined, 45, 750, 50, 0);
   self._id_7488 waittill("trigger");
   var_2 = % shipcrib_plr_opsmap_grab;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_2 = var_0;
+  }
 
   level notify("ftl triggered");
   self._id_1339A _id_0EFB::_id_FDD7(1);
@@ -671,8 +696,9 @@ _id_C6A7(var_0, var_1) {
   self._id_1339A _meth_82A2(var_2, 1, 0);
   thread _id_C658();
 
-  if(var_1)
+  if(var_1) {
     wait(getanimlength(var_2));
+  }
 
   level thread scripts\sp\utility::_id_C12D("opsmap_ftl_key_anim_done", getanimlength(var_2));
   level.player playerlinktodelta(self._id_1339A, "tag_player", 1, 20, 20, 30, 8, 1);
@@ -730,10 +756,11 @@ _id_C682(var_0) {
   var_1 = getEnt("lgt_bridge_opsmap", "script_noteworthy");
 
   if(isDefined(var_1)) {
-    if(var_0)
+    if(var_0) {
       var_1 setlightintensity(12);
-    else
+    } else {
       var_1 setlightintensity(1.5);
+    }
   }
 }
 
@@ -753,71 +780,83 @@ _id_C683(var_0, var_1, var_2) {
 
     _id_C698(var_1);
   } else if(var_0 == "ftl") {
-    if(scripts\engine\utility::flag("opsmap_calculation_state_active"))
+    if(scripts\engine\utility::flag("opsmap_calculation_state_active")) {
       _id_C695();
+    }
 
     wait 1;
     _id_C699(var_1);
   } else if(var_0 == "all_off") {
-    if(scripts\engine\utility::flag("opsmap_solar_system_state_active"))
+    if(scripts\engine\utility::flag("opsmap_solar_system_state_active")) {
       thread _id_C697();
+    }
 
-    if(scripts\engine\utility::flag("opsmap_calculation_state_active"))
+    if(scripts\engine\utility::flag("opsmap_calculation_state_active")) {
       thread _id_C695();
+    }
 
-    if(scripts\engine\utility::flag("opsmap_ftl_state_active"))
+    if(scripts\engine\utility::flag("opsmap_ftl_state_active")) {
       thread _id_C696();
+    }
   }
 }
 
 _id_C657(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3)) {
     foreach(var_5 in var_3) {
-      if(!var_5 scripts\sp\utility::_id_65DF("flickering"))
+      if(!var_5 scripts\sp\utility::_id_65DF("flickering")) {
         var_5 scripts\sp\utility::_id_65E0("flickering");
+      }
 
       var_5 scripts\sp\utility::_id_65E1("flickering");
     }
   } else {
-    if(!scripts\sp\utility::_id_65DF("flickering"))
+    if(!scripts\sp\utility::_id_65DF("flickering")) {
       scripts\sp\utility::_id_65E0("flickering");
+    }
 
     scripts\sp\utility::_id_65E1("flickering");
   }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     var_7 = 3;
-  else
+  } else {
     var_7 = 8;
+  }
 
   if(var_1) {
     for(var_8 = 0; var_8 < var_7; var_8++) {
-      if(var_8 < 3)
+      if(var_8 < 3) {
         var_9 = 0.05;
-      else
+      } else {
         var_9 = randomfloatrange(0.05, 0.15);
+      }
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         self hidepart(var_2);
-      else if(isDefined(var_3)) {
-        foreach(var_5 in var_3)
-        var_5 hide();
+      } else if(isDefined(var_3)) {
+        foreach(var_5 in var_3) {
+          var_5 hide();
+        }
       } else
         self hide();
 
       wait(var_9);
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         self showpart(var_2);
-      else if(isDefined(var_3)) {
-        foreach(var_5 in var_3)
-        var_5 show();
+      } else if(isDefined(var_3)) {
+        foreach(var_5 in var_3) {
+          var_5 show();
+        }
       } else
         self show();
 
@@ -825,26 +864,29 @@ _id_C657(var_0, var_1, var_2, var_3) {
     }
   } else {
     for(var_8 = 0; var_8 < var_7; var_8++) {
-      if(var_8 < 3)
+      if(var_8 < 3) {
         var_9 = 0.05;
-      else
+      } else {
         var_9 = randomfloatrange(0.05, 0.15);
+      }
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         self showpart(var_2);
-      else if(isDefined(var_3)) {
-        foreach(var_5 in var_3)
-        var_5 show();
+      } else if(isDefined(var_3)) {
+        foreach(var_5 in var_3) {
+          var_5 show();
+        }
       } else
         self show();
 
       wait(var_9);
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         self hidepart(var_2);
-      else if(isDefined(var_3)) {
-        foreach(var_5 in var_3)
-        var_5 hide();
+      } else if(isDefined(var_3)) {
+        foreach(var_5 in var_3) {
+          var_5 hide();
+        }
       } else
         self hide();
 
@@ -853,8 +895,9 @@ _id_C657(var_0, var_1, var_2, var_3) {
   }
 
   if(isDefined(var_3)) {
-    foreach(var_5 in var_3)
-    var_5 scripts\sp\utility::_id_65DD("flickering");
+    foreach(var_5 in var_3) {
+      var_5 scripts\sp\utility::_id_65DD("flickering");
+    }
   } else
     scripts\sp\utility::_id_65DD("flickering");
 }
@@ -880,13 +923,15 @@ _id_C684() {
 }
 
 _id_C69A(var_0) {
-  if(scripts\engine\utility::flag("opsmap_solar_system_state_active"))
+  if(scripts\engine\utility::flag("opsmap_solar_system_state_active")) {
     return;
-  else
+  } else {
     scripts\engine\utility::flag_set("opsmap_solar_system_state_active");
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   if(var_0) {
     var_1 = 65536;
@@ -1036,8 +1081,9 @@ _id_C697() {
   scripts\engine\utility::waitframe();
   killfxontag(scripts\engine\utility::getfx("vfx_opsmap_3d_asteroid_cluster"), self._id_103F1, "tag_asteroid_16");
 
-  foreach(var_1 in self._id_103F1._id_7583)
-  var_1 delete();
+  foreach(var_1 in self._id_103F1._id_7583) {
+    var_1 delete();
+  }
 
   killfxontag(scripts\engine\utility::getfx("vfx_opsmap_3d_planet_sol_tag"), self._id_103F1, "tag_planet_sun");
   killfxontag(scripts\engine\utility::getfx("vfx_opsmap_3d_planet_mercury_tag"), self._id_103F1, "tag_planet_mercury");
@@ -1070,10 +1116,11 @@ _id_C697() {
 }
 
 _id_C698(var_0) {
-  if(scripts\engine\utility::flag("opsmap_calculation_state_active"))
+  if(scripts\engine\utility::flag("opsmap_calculation_state_active")) {
     return;
-  else
+  } else {
     scripts\engine\utility::flag_set("opsmap_calculation_state_active");
+  }
 
   if(var_0 == "moon") {
     var_1 = self._id_113AF gettagorigin("tag_origin");
@@ -1132,10 +1179,11 @@ _id_FBD6(var_0) {
 _id_C699(var_0) {
   level endon("opsmap_kill_ftl_state");
 
-  if(scripts\engine\utility::flag("opsmap_ftl_state_active"))
+  if(scripts\engine\utility::flag("opsmap_ftl_state_active")) {
     return;
-  else
+  } else {
     scripts\engine\utility::flag_set("opsmap_ftl_state_active");
+  }
 
   playworldsound("ui_map_ftl_mode_on", self._id_113AF.origin);
   self._id_7496 = spawn("script_model", self._id_113AF.origin);
@@ -1182,8 +1230,9 @@ _id_C699(var_0) {
       continue;
     }
 
-    if(var_3 == "tag_diagnostic_front_waves")
+    if(var_3 == "tag_diagnostic_front_waves") {
       self._id_7496 hidepart(var_3);
+    }
   }
 
   _id_C682(1);
@@ -1208,23 +1257,25 @@ _id_C699(var_0) {
     _id_C65A();
   } else if(var_0 == "titan")
     _id_C662();
-  else if(var_0 == "rogue")
+  else if(var_0 == "rogue") {
     _id_C65E();
-  else if(var_0 == "prisoner")
+  } else if(var_0 == "prisoner") {
     _id_C65B();
-  else
+  } else {
     _id_C661();
+  }
 }
 
 _id_C65F(var_0, var_1) {
   level endon("opsmap_kill_ftl_state");
 
-  if(var_0 == "positive_45")
+  if(var_0 == "positive_45") {
     var_2 = % opsmap_ftl_pos45;
-  else if(var_0 == "negative_45")
+  } else if(var_0 == "negative_45") {
     var_2 = % opsmap_ftl_neg45;
-  else
+  } else {
     var_2 = undefined;
+  }
 
   self clearanim(%opsmap_ftl_box_idle, 0.2);
   self _meth_82A2(var_2, 1, 0.2, 1);
@@ -1248,29 +1299,30 @@ _id_C660() {
   var_0 = self._id_7496 islegacyagent(%opsmap_ftl_scan_idle);
   var_1 = undefined;
 
-  if(var_0 > 0 && var_0 <= 0.1 || var_0 > 0.9)
+  if(var_0 > 0 && var_0 <= 0.1 || var_0 > 0.9) {
     var_2 = ["tag_damage_warning_0", "tag_damage_warning_1"];
-  else if(var_0 > 0.1 && var_0 <= 0.15 || var_0 > 0.85 && var_0 <= 0.9)
+  } else if(var_0 > 0.1 && var_0 <= 0.15 || var_0 > 0.85 && var_0 <= 0.9) {
     var_2 = ["tag_damage_warning_2", "tag_damage_warning_3"];
-  else if(var_0 > 0.15 && var_0 <= 0.21 || var_0 > 0.79 && var_0 <= 0.85)
+  } else if(var_0 > 0.15 && var_0 <= 0.21 || var_0 > 0.79 && var_0 <= 0.85) {
     var_2 = ["tag_damage_warning_4", "tag_damage_warning_5"];
-  else if(var_0 > 0.21 && var_0 <= 0.26 || var_0 > 0.74 && var_0 <= 0.79)
+  } else if(var_0 > 0.21 && var_0 <= 0.26 || var_0 > 0.74 && var_0 <= 0.79) {
     var_2 = ["tag_damage_warning_6", "tag_damage_warning_7"];
-  else if(var_0 > 0.26 && var_0 <= 0.32 || var_0 > 0.69 && var_0 <= 0.74)
+  } else if(var_0 > 0.26 && var_0 <= 0.32 || var_0 > 0.69 && var_0 <= 0.74) {
     var_2 = ["tag_damage_warning_8", "tag_damage_warning_9"];
-  else if(var_0 > 0.32 && var_0 <= 0.37 || var_0 > 0.63 && var_0 <= 0.69)
+  } else if(var_0 > 0.32 && var_0 <= 0.37 || var_0 > 0.63 && var_0 <= 0.69) {
     var_2 = ["tag_damage_warning_10", "tag_damage_warning_11"];
-  else if(var_0 > 0.37 && var_0 <= 0.43 || var_0 > 0.575 && var_0 <= 0.63)
+  } else if(var_0 > 0.37 && var_0 <= 0.43 || var_0 > 0.575 && var_0 <= 0.63) {
     var_2 = ["tag_damage_warning_12", "tag_damage_warning_13"];
-  else
+  } else {
     var_2 = ["tag_damage_warning_14", "tag_damage_warning_15"];
+  }
 
   var_2 = scripts\engine\utility::array_randomize(var_2);
 
   foreach(var_4 in var_2) {
-    if(scripts\engine\utility::array_contains(self._id_7496._id_4D3A, var_4))
+    if(scripts\engine\utility::array_contains(self._id_7496._id_4D3A, var_4)) {
       continue;
-    else {
+    } else {
       var_1 = var_4;
       break;
     }
@@ -1310,10 +1362,11 @@ _id_C663(var_0, var_1) {
 
   if(var_0 == "radar") {
     if(var_1) {
-      if(scripts\sp\utility::_id_65DB("widget_radar"))
+      if(scripts\sp\utility::_id_65DB("widget_radar")) {
         return;
-      else
+      } else {
         scripts\sp\utility::_id_65E1("widget_radar");
+      }
 
       playFXOnTag(scripts\engine\utility::getfx("vfx_opsmap_3d_ftl_box_tall"), self, "tag_diagnostic_front_radar");
       wait 1.5;
@@ -1333,10 +1386,11 @@ _id_C663(var_0, var_1) {
     }
   } else if(var_0 == "text1") {
     if(var_1) {
-      if(scripts\sp\utility::_id_65DB("widget_text1"))
+      if(scripts\sp\utility::_id_65DB("widget_text1")) {
         return;
-      else
+      } else {
         scripts\sp\utility::_id_65E1("widget_text1");
+      }
 
       playFXOnTag(scripts\engine\utility::getfx("vfx_opsmap_3d_ftl_box_tall"), self, "tag_diagnostic_front_text1");
       wait 1.5;
@@ -1353,10 +1407,11 @@ _id_C663(var_0, var_1) {
     }
   } else if(var_0 == "text2") {
     if(var_1) {
-      if(scripts\sp\utility::_id_65DB("widget_text2"))
+      if(scripts\sp\utility::_id_65DB("widget_text2")) {
         return;
-      else
+      } else {
         scripts\sp\utility::_id_65E1("widget_text2");
+      }
 
       playFXOnTag(scripts\engine\utility::getfx("vfx_opsmap_3d_ftl_box_tall_small"), self, "tag_diagnostic_front_text2");
       wait 1.5;
@@ -1373,10 +1428,11 @@ _id_C663(var_0, var_1) {
     }
   } else if(var_0 == "waves") {
     if(var_1) {
-      if(scripts\sp\utility::_id_65DB("widget_waves"))
+      if(scripts\sp\utility::_id_65DB("widget_waves")) {
         return;
-      else
+      } else {
         scripts\sp\utility::_id_65E1("widget_waves");
+      }
 
       playFXOnTag(scripts\engine\utility::getfx("vfx_opsmap_3d_ftl_box_wide"), self, "tag_diagnostic_front_waves");
       wait 1.5;
@@ -1528,23 +1584,27 @@ _id_C661() {
 }
 
 _id_C678(var_0, var_1, var_2) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self._id_2AD4 show();
-  else
+  } else {
     self._id_2AE2 show();
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   setsaveddvar("bg_cinematicFullScreen", "0");
   setsaveddvar("bg_cinematicCanPause", "1");
   cinematicingame(var_0);
 
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     scripts\engine\utility::waitframe();
+  }
 
-  while(iscinematicplaying())
+  while(iscinematicplaying()) {
     scripts\engine\utility::waitframe();
+  }
 
   if(var_2) {
     self._id_2AE2 hide();
@@ -1585,8 +1645,9 @@ _id_C680(var_0, var_1, var_2) {
         scripts\engine\utility::flag_wait("opsmap_run_mission_preload_complete");
         level thread _id_0EF7::_id_FDE4(var_0, var_2);
 
-        if(level.script == "shipcrib_titan")
+        if(level.script == "shipcrib_titan") {
           level.player _meth_84C7("scTitanFirstPlay", 0);
+        }
 
         break;
       case "ja_wreckage":
@@ -1618,11 +1679,13 @@ _id_C676() {
       var_4 = level.player _meth_84C6("opsmapMissionStateData", var_1[var_3]);
     }
 
-    if(isDefined(var_4) && var_4 == "complete")
+    if(isDefined(var_4) && var_4 == "complete") {
       var_2++;
+    }
 
-    if(isDefined(var_4) && var_4 == "incomplete")
+    if(isDefined(var_4) && var_4 == "incomplete") {
       level.player _meth_84C7("missionProbability", var_1[var_3], randomintrange(81, 95));
+    }
   }
 
   for(var_3 = 0; var_3 < var_0.size; var_3++) {
@@ -1708,8 +1771,9 @@ _id_C675() {
       foreach(var_12 in var_10) {
         var_13 = level.player _meth_84C6("opsmapMissionStateData", var_12);
 
-        if(isDefined(var_13) && var_13 != "complete")
+        if(isDefined(var_13) && var_13 != "complete") {
           level.player _meth_84C7("opsmapMissionStateData", var_12, "locked");
+        }
       }
 
       break;
@@ -1717,8 +1781,9 @@ _id_C675() {
       foreach(var_12 in var_10) {
         var_13 = level.player _meth_84C6("opsmapMissionStateData", var_12);
 
-        if(isDefined(var_13) && var_13 != "complete")
+        if(isDefined(var_13) && var_13 != "complete") {
           level.player _meth_84C7("opsmapMissionStateData", var_12, "locked");
+        }
       }
 
       break;
@@ -1751,40 +1816,49 @@ _id_C675() {
       break;
     case "shipcrib_rogue":
       if(isDefined(var_0) && isDefined(var_1) && isDefined(var_2)) {
-        if(var_0 == "locked")
+        if(var_0 == "locked") {
           level.player _meth_84C7("opsmapMissionStateData", "ja_spacestation", "incomplete");
+        }
 
-        if(var_1 == "locked")
+        if(var_1 == "locked") {
           level.player _meth_84C7("opsmapMissionStateData", "ja_wreckage", "incomplete");
+        }
 
-        if(var_2 == "locked")
+        if(var_2 == "locked") {
           level.player _meth_84C7("opsmapMissionStateData", "ja_asteroid", "incomplete");
+        }
       }
 
       if(isDefined(var_3)) {
-        if(var_3 == "locked")
+        if(var_3 == "locked") {
           level.player _meth_84C7("opsmapMissionStateData", "ja_titan", "incomplete");
+        }
       }
 
       if(isDefined(var_4)) {
-        if(var_4 != "locked" && var_4 != "complete")
+        if(var_4 != "locked" && var_4 != "complete") {
           level.player _meth_84C7("opsmapMissionStateData", "ja_mining", "locked");
+        }
       }
 
       if(isDefined(var_5) && isDefined(var_6) && isDefined(var_7)) {
-        if(var_5 == "locked")
+        if(var_5 == "locked") {
           level.player _meth_84C7("missionStateData", "ja_spacestation", "incomplete");
+        }
 
-        if(var_6 == "locked")
+        if(var_6 == "locked") {
           level.player _meth_84C7("missionStateData", "ja_wreckage", "incomplete");
+        }
 
-        if(var_7 == "locked")
+        if(var_7 == "locked") {
           level.player _meth_84C7("missionStateData", "ja_asteroid", "incomplete");
+        }
       }
 
       if(isDefined(var_8)) {
-        if(var_8 == "locked")
+        if(var_8 == "locked") {
           level.player _meth_84C7("missionStateData", "ja_titan", "incomplete");
+        }
       }
 
       break;
@@ -1798,8 +1872,9 @@ _id_C675() {
         }
 
         if(var_0 == "complete" && var_1 == "complete" && var_2 == "complete" && var_3 == "complete") {
-          if(isDefined(var_4) && var_4 == "locked")
+          if(isDefined(var_4) && var_4 == "locked") {
             level.player _meth_84C7("opsmapMissionStateData", "ja_mining", "incomplete");
+          }
         }
       }
 
@@ -1827,19 +1902,22 @@ _id_C675() {
   foreach(var_12 in var_17) {
     var_13 = level.player _meth_84C6("opsmapMissionStateData", var_12);
 
-    if(!isDefined(var_13) || var_13 == "locked")
+    if(!isDefined(var_13) || var_13 == "locked") {
       level.player _meth_84C7("opsmapMissionStateData", var_12, "incomplete");
+    }
 
     var_19 = level.player _meth_84C6("missionStateData", var_12);
 
-    if(!isDefined(var_13) || var_13 == "locked")
+    if(!isDefined(var_13) || var_13 == "locked") {
       level.player _meth_84C7("missionStateData", var_12, "incomplete");
+    }
   }
 }
 
 check_and_set_opsmap_state(var_0, var_1) {
   var_2 = level.player _meth_84C6("opsmapMissionStateData", var_0);
 
-  if(isDefined(var_2) && var_2 != "complete")
+  if(isDefined(var_2) && var_2 != "complete") {
     level.player _meth_84C7("opsmapMissionStateData", var_0, var_1);
+  }
 }

@@ -68,8 +68,9 @@ shoot_piece_into_machine() {
     var_0 setscriptablepartstate("portal", "portal_end");
 
     if(var_1 == "turnstile_success") {
-      foreach(var_3 in level.players)
-      var_3 scripts\cp\zombies\achievement::update_achievement("MESSAGE_SENT", 1);
+      foreach(var_3 in level.players) {
+        var_3 scripts\cp\zombies\achievement::update_achievement("MESSAGE_SENT", 1);
+      }
 
       level.turnstile_piece delete();
       return;

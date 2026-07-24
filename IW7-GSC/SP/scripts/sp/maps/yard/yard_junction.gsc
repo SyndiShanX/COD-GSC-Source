@@ -102,8 +102,9 @@ _id_B205() {
   scripts\sp\utility::_id_2669("yard_junction_pre_tram");
   thread _id_A51B();
 
-  if(isDefined(level._id_6754))
+  if(isDefined(level._id_6754)) {
     level._id_6754 delete();
+  }
 
   level waittill("skippable_cinematic_done");
   scripts\engine\utility::flag_set("junction_bink_finished");
@@ -122,8 +123,9 @@ _id_B205() {
   var_0 = getEntArray("control_room_vista_dome_01", "targetname");
 
   if(isDefined(var_0) && var_0.size) {
-    foreach(var_2 in var_0)
-    var_2 hide();
+    foreach(var_2 in var_0) {
+      var_2 hide();
+    }
   }
 
   while(!istransientloaded("yard_central_hallway_tr")) {
@@ -194,8 +196,9 @@ tram_kill_player(var_0) {
 
     var_2 = distance(var_0.origin, level.player.origin);
 
-    if(var_2 > var_1)
+    if(var_2 > var_1) {
       level.player _meth_81D0();
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -285,14 +288,16 @@ _id_A51B() {
   var_8 thread scripts\sp\maps\yard\yard_fx::_id_13346();
   wait 1.5;
 
-  foreach(var_10 in var_2)
-  var_0 scripts\sp\anim::_id_1EC3(var_10, "tram_scene");
+  foreach(var_10 in var_2) {
+    var_0 scripts\sp\anim::_id_1EC3(var_10, "tram_scene");
+  }
 
   wait 1.5;
   level notify("yard_cutscene_start_skippable");
 
-  foreach(var_10 in var_2)
-  var_10 linkTo(var_0);
+  foreach(var_10 in var_2) {
+    var_10 linkTo(var_0);
+  }
 
   thread _id_0B0A::_id_583F(0, 100, 1, 8700, 50000, 3.1, 0);
   scripts\engine\utility::flag_wait("junction_bink_finished");
@@ -347,15 +352,17 @@ _id_A4FD(var_0) {
       continue;
     }
 
-    if(var_3.script_type == "door_clip")
+    if(var_3.script_type == "door_clip") {
       var_1._id_5985 = var_3;
+    }
   }
 
   var_1._id_5978 linkTo(var_1._id_11B30);
   var_1._id_5985 linkTo(var_1._id_5978);
 
-  foreach(var_6 in var_1._id_ACFC)
-  var_6 linkTo(var_1._id_11B30);
+  foreach(var_6 in var_1._id_ACFC) {
+    var_6 linkTo(var_1._id_11B30);
+  }
 
   var_1._id_C6EA = var_1._id_11B30 scripts\engine\utility::spawn_tag_origin();
   var_1._id_11B30 linkTo(var_1._id_C6EA);
@@ -370,9 +377,9 @@ _id_B202() {
   thread _id_A50B();
   var_0 = scripts\engine\utility::getStruct("org_ethan_hack", "targetname");
 
-  if(!isDefined(level._id_6754))
+  if(!isDefined(level._id_6754)) {
     scripts\sp\maps\yard\yard_util::_id_106D9("org_ethan_hack");
-  else {
+  } else {
     if(isDefined(level._id_6037)) {
       level._id_6754 unlink();
       level._id_6037 notify("elevator_end_idle");
@@ -435,8 +442,9 @@ _id_A4FA(var_0) {
 }
 
 _id_468F(var_0) {
-  foreach(var_2 in var_0)
-  var_2 thread _id_A51A();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_A51A();
+  }
 }
 
 _id_A51A() {
@@ -505,8 +513,9 @@ _id_4254() {
 }
 
 _id_D7B5(var_0) {
-  foreach(var_2 in var_0)
-  thread _id_D7B6(var_2);
+  foreach(var_2 in var_0) {
+    thread _id_D7B6(var_2);
+  }
 }
 
 _id_D7B6(var_0) {
@@ -515,8 +524,9 @@ _id_D7B6(var_0) {
   scripts\engine\utility::flag_wait("junction_capture_scene_door_close");
   wait 1;
 
-  if(var_0 istouching(var_1))
+  if(var_0 istouching(var_1)) {
     var_0 delete();
+  }
 }
 
 _id_B203() {
@@ -525,9 +535,9 @@ _id_B203() {
   level notify("vfx_tram_lights_off");
   var_0 = scripts\engine\utility::getStruct("org_ethan_hack", "targetname");
 
-  if(!isDefined(level._id_6754))
+  if(!isDefined(level._id_6754)) {
     scripts\sp\maps\yard\yard_util::_id_106D9("org_ethan_hack");
-  else {
+  } else {
     if(isDefined(level._id_6037)) {
       level._id_6754 unlink();
       level._id_6037 notify("elevator_end_idle");
@@ -542,9 +552,9 @@ _id_B203() {
 
   var_1 = scripts\engine\utility::getStruct("org_salter_ship_mid", "targetname");
 
-  if(!isDefined(level._id_EA2C))
+  if(!isDefined(level._id_EA2C)) {
     scripts\sp\maps\yard\yard_util::_id_107BE("org_salter_ship_mid");
-  else {
+  } else {
     level._id_EA2C dontinterpolate();
     level._id_EA2C _meth_80F1(var_1.origin, var_1.angles, 500000.0);
     level._id_EA2C setgoalpos(level._id_EA2C.origin);
@@ -564,8 +574,9 @@ _id_B203() {
 _id_F8F0() {
   var_0 = getEntArray("junction_c6_spawners", "script_noteworthy");
 
-  foreach(var_2 in var_0)
-  var_2 scripts\sp\utility::_id_1747(::_id_3372);
+  foreach(var_2 in var_0) {
+    var_2 scripts\sp\utility::_id_1747(::_id_3372);
+  }
 }
 
 _id_3372() {
@@ -581,8 +592,9 @@ joint2() {
 _id_1051A() {
   var_0 = getEntArray("test_turret_node", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_10519();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_10519();
+  }
 }
 
 _id_10518() {
@@ -721,8 +733,9 @@ _id_4693() {
   var_0 = getEnt("vol_capture_second_half", "targetname");
   var_2 = var_0 scripts\sp\utility::_id_77E3("axis");
 
-  foreach(var_4 in var_2)
-  var_4 delete();
+  foreach(var_4 in var_2) {
+    var_4 delete();
+  }
 }
 
 _id_4694(var_0) {
@@ -748,13 +761,15 @@ _id_6437() {
 
   if(var_0.size) {
     for(var_3 = 0; var_3 < var_0.size; var_3++) {
-      if(scripts\engine\utility::distance_2d_squared(self.origin, var_0[var_3].origin) < var_1)
+      if(scripts\engine\utility::distance_2d_squared(self.origin, var_0[var_3].origin) < var_1) {
         var_2 = var_0[var_3];
+      }
     }
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level thread _id_470B(var_2);
+  }
 }
 
 _id_470B(var_0) {
@@ -772,10 +787,11 @@ _id_1093F() {
   self._id_9C5B = 0;
   wait(var_0);
 
-  if(isDefined(self._id_119E6) && self._id_119E6._id_9C5B == 0)
+  if(isDefined(self._id_119E6) && self._id_119E6._id_9C5B == 0) {
     self connectpaths();
-  else if(isDefined(self._id_2EFF) && self._id_2EFF._id_9C5B == 0)
+  } else if(isDefined(self._id_2EFF) && self._id_2EFF._id_9C5B == 0) {
     self connectpaths();
+  }
 }
 
 _id_4691() {
@@ -806,8 +822,9 @@ _id_A50A(var_0) {
   level._id_341D endon("death");
   scripts\sp\utility::_id_10350("yard_eth_yougotahunterin");
 
-  while(isDefined(level._id_341D) && isalive(level._id_341D) && !scripts\sp\utility::_id_CFAC(var_0))
+  while(isDefined(level._id_341D) && isalive(level._id_341D) && !scripts\sp\utility::_id_CFAC(var_0)) {
     wait 0.05;
+  }
 
   scripts\sp\utility::_id_1034D("yard_plr_affirmative");
   scripts\sp\utility::_id_10350("yard_eth_shootthatblockh");
@@ -817,8 +834,9 @@ _id_E286(var_0, var_1) {
   level endon("stop_respawn");
   level.player endon("hack_control_target");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 100000;
+  }
 
   var_2 = getEnt(var_0, "targetname");
   var_3 = 0;
@@ -833,8 +851,9 @@ _id_E286(var_0, var_1) {
 }
 
 _id_A500(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   level notify("all_dead");
   thread _id_1328B();
@@ -842,8 +861,9 @@ _id_A500(var_0) {
   thread scripts\sp\maps\yard\yard_util::_id_D5FC("junction_door_final", "close", "locked", "generic_door_close");
   var_1 = getEnt("junction_end_door_blocker", "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1.origin = var_1.origin + (0, 0, 128);
+  }
 
   level.player scripts\sp\utility::_id_D08C("ges_radio");
   level.player scripts\engine\utility::delaycall(0.5, ::playsound, "ges_plr_radio_on");
@@ -871,8 +891,9 @@ vent_crawl_hint() {
   wait 5;
   var_0 = 0;
 
-  if(level.player getstance() == "prone")
+  if(level.player getstance() == "prone") {
     var_0 = 1;
+  }
 
   var_1 = 840;
 
@@ -902,10 +923,11 @@ _id_1328A() {
   level.player endon("death");
 
   while(!scripts\engine\utility::flag("yard_stop_crawl_hack")) {
-    if("prone" == level.player getstance())
+    if("prone" == level.player getstance()) {
       level.player disableweaponswitch();
-    else
+    } else {
       level.player enableweaponswitch();
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -916,8 +938,9 @@ _id_1328A() {
 _id_13287() {
   level endon("new_spaced_sequence");
 
-  if(level.player getstance() != "prone")
+  if(level.player getstance() != "prone") {
     level.player setstance("crouch");
+  }
 
   level.player scripts\engine\utility::allow_stances(0);
   wait 1;
@@ -937,16 +960,17 @@ _id_62C2(var_0) {
   scripts\sp\utility::_id_13753(var_0, var_0.size - 1);
   var_0 = getaiarray("axis");
 
-  foreach(var_2 in var_0)
-  var_2 _meth_82EE(getnode("final_spot", "targetname"));
+  foreach(var_2 in var_0) {
+    var_2 _meth_82EE(getnode("final_spot", "targetname"));
+  }
 }
 
 _id_13289() {
   var_0 = scripts\engine\utility::getStruct("org_salter_ship", "targetname");
 
-  if(!isDefined(level._id_EA2C))
+  if(!isDefined(level._id_EA2C)) {
     scripts\sp\maps\yard\yard_util::_id_107BE("org_salter_ship");
-  else {
+  } else {
     level._id_EA2C dontinterpolate();
     level._id_EA2C _meth_80F1(var_0.origin, var_0.angles, 500000.0);
     level._id_EA2C setgoalpos(level._id_EA2C.origin);
@@ -963,13 +987,15 @@ _id_F27B() {
   var_0 = getEntArray("server_cover", "script_noteworthy");
 
   for(var_1 = var_0.size; var_1 > 0; var_1--) {
-    if(isDefined(var_0[var_1 - 1].script_type) && var_0[var_1 - 1].script_type == "damage_volume")
+    if(isDefined(var_0[var_1 - 1].script_type) && var_0[var_1 - 1].script_type == "damage_volume") {
       var_0 = scripts\sp\utility::array_remove_index(var_0, var_1 - 1);
+    }
   }
 
   foreach(var_3 in var_0) {
-    if(var_3.classname == "script_brushmodel")
+    if(var_3.classname == "script_brushmodel") {
       level._id_F277 = scripts\engine\utility::array_add(level._id_F277, var_3);
+    }
   }
 
   foreach(var_6 in level._id_F277) {
@@ -1012,8 +1038,9 @@ _id_F27C(var_0) {
 _id_F27A() {
   self waittill("trigger");
 
-  if(isDefined(self.script_noteworthy))
+  if(isDefined(self.script_noteworthy)) {
     thread _id_F279(self.script_noteworthy);
+  }
 }
 
 _id_F279(var_0) {
@@ -1041,11 +1068,13 @@ _id_F279(var_0) {
 }
 
 _id_1C6B(var_0) {
-  if(var_0 == "rack04")
+  if(var_0 == "rack04") {
     return 1;
+  }
 
-  if(var_0 == "rack15")
+  if(var_0 == "rack15") {
     return 1;
+  }
 
   return 0;
 }
@@ -1063,10 +1092,11 @@ _id_F27F() {
       self._id_9C5B = 0;
       wait(var_0);
 
-      if(isDefined(self._id_119E6) && self._id_119E6._id_9C5B == 0)
+      if(isDefined(self._id_119E6) && self._id_119E6._id_9C5B == 0) {
         self connectpaths();
-      else if(isDefined(self._id_2EFF) && self._id_2EFF._id_9C5B == 0)
+      } else if(isDefined(self._id_2EFF) && self._id_2EFF._id_9C5B == 0) {
         self connectpaths();
+      }
     }
 
     wait 0.05;
@@ -1078,11 +1108,13 @@ _id_F27E(var_0) {
   var_2 = var_1._id_119E6;
   playFX(scripts\engine\utility::getfx("server_damage"), var_1.origin);
 
-  if(var_1._id_9C5B)
+  if(var_1._id_9C5B) {
     var_1 moveTo(var_1.origin + var_1._id_BD2A * -54.0, 0.05);
+  }
 
-  if(var_2._id_9C5B)
+  if(var_2._id_9C5B) {
     var_2 moveTo(var_2.origin + var_2._id_BD2A * -54.0, 0.05);
+  }
 
   var_1._id_9C5B = 0;
   var_2._id_9C5B = 0;
@@ -1094,8 +1126,9 @@ _id_F278(var_0) {
   var_1 = undefined;
 
   foreach(var_3 in level._id_F277) {
-    if(var_3.script_parameters == var_0)
+    if(var_3.script_parameters == var_0) {
       return var_3;
+    }
   }
 }
 
@@ -1116,10 +1149,11 @@ _id_A518(var_0, var_1, var_2) {
   var_3._id_28CF = 0;
   var_3.ignoreall = 1;
 
-  if(var_2)
+  if(var_2) {
     var_3 scripts\sp\utility::_id_23B7();
-  else
+  } else {
     var_3 scripts\sp\utility::_id_72EC("iw7_sdfar", "primary");
+  }
 
   return var_3;
 }
@@ -1161,8 +1195,9 @@ _id_BF14() {
   thread scripts\sp\maps\yard\yard_audio::_id_10523();
   var_9 = getaiarray("axis");
 
-  foreach(var_11 in var_9)
-  var_11 delete();
+  foreach(var_11 in var_9) {
+    var_11 delete();
+  }
 
   scripts\engine\utility::waitframe();
   scripts\engine\utility::flag_set("yard_stop_crawl_hack");
@@ -1293,8 +1328,9 @@ _id_117F9(var_0, var_1, var_2) {
   var_11 = var_7 * var_10;
   wait(var_11);
 
-  if(isDefined(self._id_B14F))
+  if(isDefined(self._id_B14F)) {
     scripts\sp\utility::_id_1101B();
+  }
 
   self._id_13D68 = var_6 * 5000;
   self._id_4E46 = ::_id_1051E;
@@ -1409,18 +1445,21 @@ _id_104D1(var_0) {
   var_2 = undefined;
 
   if(isDefined(var_0)) {
-    if(var_0 == "open")
+    if(var_0 == "open") {
       var_2 = 90;
-    else
+    } else {
       var_2 = -90;
+    }
   }
 
   foreach(var_4 in var_1) {
-    if(isDefined(var_4.script_noteworthy) &var_4.script_noteworthy == "top")
+    if(isDefined(var_4.script_noteworthy) &var_4.script_noteworthy == "top") {
       var_4 movez(var_2, 1, 0, 0);
+    }
 
-    if(isDefined(var_4.script_noteworthy) &var_4.script_noteworthy == "bottom")
+    if(isDefined(var_4.script_noteworthy) &var_4.script_noteworthy == "bottom") {
       var_4 movez(var_2 * -1, 1, 0, 0);
+    }
   }
 }
 
@@ -1451,13 +1490,15 @@ _id_BC6B() {
         var_3._id_F8A3 = 1;
         var_3.opened = 0;
 
-        if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "opened")
+        if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "opened") {
           var_3.opened = 1;
+        }
 
         var_4 = getEntArray(var_3.target, "targetname");
 
-        foreach(var_6 in var_4)
-        var_6 linkTo(var_3);
+        foreach(var_6 in var_4) {
+          var_6 linkTo(var_3);
+        }
 
         var_8 = scripts\engine\utility::getStruct(var_3.target, "targetname");
         var_3._id_BD2A = anglesToForward(var_8.angles);
@@ -1467,8 +1508,9 @@ _id_BC6B() {
     }
   }
 
-  foreach(var_11 in var_1)
-  var_11 thread _id_BC6A();
+  foreach(var_11 in var_1) {
+    var_11 thread _id_BC6A();
+  }
 }
 
 _id_BC6A() {
@@ -1487,10 +1529,11 @@ _id_BC6A() {
   self moveTo(self.origin + self._id_BD2A * var_1, var_0, var_0 / 2, var_0 / 2);
   self waittill("movedone");
 
-  if(self.opened)
+  if(self.opened) {
     self disconnectPaths();
-  else
+  } else {
     self connectpaths();
+  }
 }
 
 _id_F5EF() {
@@ -1505,11 +1548,13 @@ _id_F5EF() {
   var_8 = [var_0, var_1, var_2];
   var_9 = [var_3, var_6, var_7, var_4];
 
-  foreach(var_11 in var_8)
-  scripts\engine\utility::array_thread(var_11, scripts\sp\maps\yard\yard_util::_id_F595);
+  foreach(var_11 in var_8) {
+    scripts\engine\utility::array_thread(var_11, scripts\sp\maps\yard\yard_util::_id_F595);
+  }
 
-  foreach(var_11 in var_9)
-  scripts\engine\utility::array_thread(var_11, scripts\sp\maps\yard\yard_util::_id_F594);
+  foreach(var_11 in var_9) {
+    scripts\engine\utility::array_thread(var_11, scripts\sp\maps\yard\yard_util::_id_F594);
+  }
 }
 
 _id_C9F0(var_0) {

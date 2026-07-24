@@ -52,17 +52,19 @@ _id_EE1D() {
 }
 
 _id_21F8() {
-  if(!isDefined(level._id_FD6E._id_21BE))
+  if(!isDefined(level._id_FD6E._id_21BE)) {
     level._id_FD6E._id_21BE = [];
-  else
+  } else {
     return level._id_FD6E._id_21BE;
+  }
 
   var_0 = ["iw7_ake", "iw7_devastator", "iw7_m4", "iw7_sdfshotty"];
   var_1 = [];
 
   foreach(var_3 in var_0) {
-    if(level.player _meth_84C6("weaponsScanned", var_3) == "unlocked")
+    if(level.player _meth_84C6("weaponsScanned", var_3) == "unlocked") {
       var_1[var_1.size] = var_3;
+    }
   }
 
   var_1 = scripts\engine\utility::array_randomize(var_1);
@@ -79,35 +81,39 @@ _id_21F8() {
 }
 
 _id_2201(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   _id_21F8();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_2 = var_0;
-  else
+  } else {
     var_2 = level._id_FD6E._id_21BE;
+  }
 
-  foreach(var_4 in var_2)
-  _id_0A2F::_id_12646(var_4);
+  foreach(var_4 in var_2) {
+    _id_0A2F::_id_12646(var_4);
+  }
 
   foreach(var_7 in level._id_FD6E._id_2263) {
     var_7 scripts\sp\utility::_id_23B7("armory_gun_rack");
     var_7._id_1F89 = [];
     var_7._id_10E3D = [];
-    var_7._id_1F89[0] = scripts\sp\utility::_id_10639("armory_gun_rack_weapon0", var_7.origin);
+    var_7._id_1F89[0] = ::scripts\sp\utility::_id_10639("armory_gun_rack_weapon0", var_7.origin);
     var_7._id_1F89[0].animation = "gun_rack_move_weapon0";
-    var_7._id_1F89[1] = scripts\sp\utility::_id_10639("armory_gun_rack_weapon1", var_7.origin);
+    var_7._id_1F89[1] = ::scripts\sp\utility::_id_10639("armory_gun_rack_weapon1", var_7.origin);
     var_7._id_1F89[1].animation = "gun_rack_move_weapon1";
-    var_7._id_1F89[2] = scripts\sp\utility::_id_10639("armory_gun_rack_weapon2", var_7.origin);
+    var_7._id_1F89[2] = ::scripts\sp\utility::_id_10639("armory_gun_rack_weapon2", var_7.origin);
     var_7._id_1F89[2].animation = "gun_rack_move_weapon2";
-    var_7._id_1F89[3] = scripts\sp\utility::_id_10639("armory_gun_rack_weapon3", var_7.origin);
+    var_7._id_1F89[3] = ::scripts\sp\utility::_id_10639("armory_gun_rack_weapon3", var_7.origin);
     var_7._id_1F89[3].animation = "gun_rack_move_weapon3";
 
     if(var_1) {
-      foreach(var_9 in var_7._id_1F89)
-      var_9 setModel(getweaponmodel(var_2[0]));
+      foreach(var_9 in var_7._id_1F89) {
+        var_9 setModel(getweaponmodel(var_2[0]));
+      }
     }
 
     var_11 = ["j_holder_base1", "j_holder_base2", "j_holder_base3", "j_holder_base5", "j_holder_base6", "j_holder_base8", "j_holder_base10", "j_holder_base11"];
@@ -133,10 +139,11 @@ _id_1081D(var_0, var_1) {
   var_4 = spawn("script_model", var_2);
   var_4 setModel(var_1);
 
-  if(isstring(var_0))
+  if(isstring(var_0)) {
     var_4.angles = var_3 + (270, 150, -60);
-  else
+  } else {
     var_4.angles = var_3;
+  }
 
   if(issubstr(var_1, "devastator")) {
     if(isstring(var_0)) {
@@ -170,10 +177,11 @@ _id_1081D(var_0, var_1) {
 
   var_4.origin = var_2 + var_5 + var_6 + var_7;
 
-  if(isstring(var_0))
+  if(isstring(var_0)) {
     self._id_10E3D[self._id_10E3D.size] = var_4;
-  else
+  } else {
     self.weapon = var_4;
+  }
 }
 
 _id_2202(var_0) {
@@ -185,8 +193,9 @@ _id_2202(var_0) {
     if(!isDefined(var_3._id_1F89)) {
       continue;
     }
-    foreach(var_5 in var_3._id_1F89)
-    var_3 thread scripts\sp\anim::_id_1EC3(var_5, var_5.animation);
+    foreach(var_5 in var_3._id_1F89) {
+      var_3 thread scripts\sp\anim::_id_1EC3(var_5, var_5.animation);
+    }
 
     var_3 thread scripts\sp\anim::_id_1EEA(var_3, "gun_rack_loop");
     var_3 thread _id_21FF(var_0, var_2);
@@ -196,21 +205,24 @@ _id_2202(var_0) {
 _id_21FF(var_0, var_1) {
   level endon("stop_armory_gun_racks");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level waittill(var_0);
+  }
 
   var_2 = scripts\engine\utility::array_randomize(self._id_1F89);
 
-  if(var_1 == 0)
+  if(var_1 == 0) {
     wait 0.25;
-  else if(var_1 == 1)
+  } else if(var_1 == 1) {
     wait 2;
-  else
+  } else {
     wait 3.5;
+  }
 
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
-    if(var_3 > 0)
+    if(var_3 > 0) {
       wait(randomfloatrange(2, 8));
+    }
 
     self notify("stop_loop");
     scripts\sp\anim::_id_1F2C([self, var_2[var_3]], var_2[var_3].animation);
@@ -222,8 +234,9 @@ _id_21FF(var_0, var_1) {
 _id_2203() {
   level notify("stop_armory_gun_racks");
 
-  foreach(var_1 in level._id_FD6E._id_2263)
-  var_1 notify("stop_loop");
+  foreach(var_1 in level._id_FD6E._id_2263) {
+    var_1 notify("stop_loop");
+  }
 }
 
 _id_2200() {
@@ -238,8 +251,9 @@ _id_2200() {
     }
 
     if(isDefined(var_1._id_10E3D)) {
-      foreach(var_3 in var_1._id_10E3D)
-      var_3 delete();
+      foreach(var_3 in var_1._id_10E3D) {
+        var_3 delete();
+      }
     }
 
     var_1 delete();
@@ -249,13 +263,15 @@ _id_2200() {
 _id_21A6(var_0) {
   _id_21F8();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = var_0;
-  else
+  } else {
     var_1 = level._id_FD6E._id_21BE[randomintrange(0, level._id_FD6E._id_21BE.size)];
+  }
 
-  if(var_1 != "none")
+  if(var_1 != "none") {
     _id_0A2F::_id_12646(var_1);
+  }
 
   scripts\sp\utility::_id_23B7("armory_3d_printer");
 
@@ -273,8 +289,9 @@ _id_21A7(var_0) {
 _id_21A5(var_0) {
   level endon("stop_armory_3d_printers");
 
-  if(!isDefined(self._id_1FBB) || !isDefined(scripts\sp\utility::_id_7DC1("active_loop")))
+  if(!isDefined(self._id_1FBB) || !isDefined(scripts\sp\utility::_id_7DC1("active_loop"))) {
     return 0;
+  }
 
   if(isDefined(var_0)) {
     thread scripts\sp\anim::_id_1EC3(self, "active_loop");
@@ -290,8 +307,9 @@ _id_21A9() {
   foreach(var_1 in level._id_FD6E._id_21A8) {
     var_1 notify("stop_loop");
 
-    if(isDefined(var_1.weapon))
+    if(isDefined(var_1.weapon)) {
       var_1.weapon delete();
+    }
 
     var_1 delete();
   }

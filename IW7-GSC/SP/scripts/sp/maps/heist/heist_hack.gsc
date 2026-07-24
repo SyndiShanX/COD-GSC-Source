@@ -69,8 +69,9 @@ _id_B1EF() {
   level._id_880E linkTo(level.player);
   var_3 = 1.5;
 
-  if(level._id_880F._id_1FBB == "c6worker_hack_1")
+  if(level._id_880F._id_1FBB == "c6worker_hack_1") {
     var_3 = 2.25;
+  }
 
   scripts\engine\utility::delaythread(var_3, ::_id_A70F);
   scripts\engine\utility::delaythread(2, ::_id_544E);
@@ -154,14 +155,17 @@ _id_B1EF() {
   thread scripts\sp\maps\heist\heist_util::_id_6E55("hack_sequence_complete", ::_id_11000, var_4);
   _id_685B(var_2);
 
-  if(scripts\engine\utility::flag("self_destruct_started"))
+  if(scripts\engine\utility::flag("self_destruct_started")) {
     level waittill("forever");
+  }
 
-  if(isDefined(level._id_30B3))
+  if(isDefined(level._id_30B3)) {
     scripts\sp\utility::_id_228A(level._id_30B3);
+  }
 
-  if(isDefined(level._id_880F))
+  if(isDefined(level._id_880F)) {
     level._id_880F delete();
+  }
 
   level.player scripts\engine\utility::delaycall(5, ::setviewkickscale, level.player._id_C3E1);
   level.player showviewmodel();
@@ -177,8 +181,8 @@ _id_B1EF() {
 }
 
 _id_689E() {
-  var_0[0] = scripts\engine\utility::getStruct("struct_robothack1", "targetname");
-  var_0[1] = scripts\engine\utility::getStruct("struct_robothack2", "targetname");
+  var_0[0] = ::scripts\engine\utility::getStruct("struct_robothack1", "targetname");
+  var_0[1] = ::scripts\engine\utility::getStruct("struct_robothack2", "targetname");
   var_1 = scripts\sp\utility::_id_22CD("robots_to_hack");
   level._id_3029 = var_1;
 
@@ -228,8 +232,9 @@ _id_8810() {
   var_0 unlink();
   var_1 = "bootup_stand";
 
-  if(level._id_880F._id_1FBB == "c6worker_hack_1")
+  if(level._id_880F._id_1FBB == "c6worker_hack_1") {
     var_1 = "bootup_kneel";
+  }
 
   var_2 = scripts\engine\utility::getStruct("hack_bootup_struct", "targetname");
   wait 1.25;
@@ -244,8 +249,9 @@ _id_8810() {
 _id_685B(var_0) {
   level endon("self_destruct_started");
 
-  while(distance2d(level.player.origin, level._id_A70E.origin) > 250)
+  while(distance2d(level.player.origin, level._id_A70E.origin) > 250) {
     wait 0.05;
+  }
 
   var_0 notify("stop_loop");
   level._id_A70E _meth_83A1();
@@ -299,19 +305,23 @@ _id_6846(var_0, var_1) {
     } else
       var_3[var_6]._id_1FBB = "bridge_guy_extra";
 
-    if(isDefined(var_0._id_DC1A) && var_0._id_DC1A)
+    if(isDefined(var_0._id_DC1A) && var_0._id_DC1A) {
       var_3[var_6]._id_DC1A = 1;
+    }
 
-    if(!isDefined(level._id_3028))
+    if(!isDefined(level._id_3028)) {
       level._id_3028 = [];
+    }
 
-    if(!isDefined(level._id_3028[var_0._id_1FB1]))
+    if(!isDefined(level._id_3028[var_0._id_1FB1])) {
       level._id_3028[var_0._id_1FB1] = [];
+    }
 
     level._id_3028[var_0._id_1FB1][level._id_3028[var_0._id_1FB1].size] = var_3[var_6];
 
-    if(scripts\engine\utility::is_true(var_0._id_6DCD))
+    if(scripts\engine\utility::is_true(var_0._id_6DCD)) {
       level._id_3012 = var_3[var_6];
+    }
 
     var_3[var_6]._id_EBEA = var_0;
   }
@@ -351,24 +361,27 @@ _id_6846(var_0, var_1) {
   level notify("hacked_robot_scene_ " + var_0._id_1FB1);
   scripts\engine\utility::array_thread(var_3, scripts\sp\utility::_id_F225, "unlink_scene_guy");
 
-  foreach(var_10 in var_3)
-  var_2 scripts\sp\anim::_id_1EC3(var_10, var_0._id_1FB1);
+  foreach(var_10 in var_3) {
+    var_2 scripts\sp\anim::_id_1EC3(var_10, var_0._id_1FB1);
+  }
 
   level.player _meth_818A();
   level.player._id_1F1F = "player_rig_c6";
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_2 thread scripts\sp\maps\heist\heist_util::_id_1EFA(var_0._id_1FB1, undefined, 0.1);
-  else
+  } else {
     var_2 thread _id_8817(var_0._id_1FB1, var_5);
+  }
 
   if(isDefined(var_0._id_AB5B) && var_0._id_AB5B) {
     level.player._id_AB5B = scripts\sp\utility::_id_10639("player_rig_c6_legs");
     var_2 thread scripts\sp\anim::_id_1F35(level.player._id_AB5B, var_0._id_1FB1);
   }
 
-  if(isDefined(var_8))
+  if(isDefined(var_8)) {
     var_8 notify("stop_loop");
+  }
 
   level notify("starting_robot_melee");
   scripts\engine\utility::array_thread(var_3, ::_id_8812, var_2, var_0._id_1FB1);
@@ -378,8 +391,9 @@ _id_6846(var_0, var_1) {
   var_2.finished = 1;
   thread _id_EBF9();
 
-  if(isDefined(level.player._id_AB5B))
+  if(isDefined(level.player._id_AB5B)) {
     level.player._id_AB5B delete();
+  }
 
   level.player showviewmodel();
   scripts\engine\utility::flag_clear("hacked_robot_scene_active");
@@ -443,8 +457,9 @@ _id_8817(var_0, var_1) {
       wait 0.05;
     }
 
-    if(var_15)
+    if(var_15) {
       scripts\sp\maps\heist\heist_util::_id_1EFB();
+    }
   }
 }
 
@@ -453,14 +468,16 @@ _id_B595(var_0, var_1) {
   level endon("hacked_robot_scene_ " + var_1._id_1FB1);
 
   if(isDefined(var_1._id_92DC)) {
-    if(isDefined(var_1._id_DD2F))
+    if(isDefined(var_1._id_DD2F)) {
       var_0 childthread _id_881F(var_1._id_DD2F, var_1._id_92DC);
+    }
 
     scripts\engine\utility::flag_wait(var_1._id_92DC);
     scripts\engine\utility::flag_set("melee_interrupted");
 
-    if(isDefined(var_1._id_DD2E))
+    if(isDefined(var_1._id_DD2E)) {
       wait(var_1._id_DD2E);
+    }
 
     var_2 = scripts\engine\utility::getStruct(var_1._id_92FC, "targetname");
     var_2 notify("stop_loop");
@@ -469,8 +486,9 @@ _id_B595(var_0, var_1) {
     if(isDefined(var_1._id_1FB2)) {
       var_3 = self;
 
-      if(isDefined(var_1._id_DD5F))
+      if(isDefined(var_1._id_DD5F)) {
         var_3 = scripts\engine\utility::getStruct(var_1._id_DD5F, "targetname");
+      }
 
       var_3 scripts\sp\anim::_id_1ECB(var_0, var_1._id_1FB2);
     }
@@ -495,23 +513,26 @@ _id_B5AB(var_0, var_1) {
   if(isDefined(var_1._id_92DC)) {
     scripts\engine\utility::flag_wait(var_1._id_92DC);
 
-    if(isDefined(var_1._id_DD2E))
+    if(isDefined(var_1._id_DD2E)) {
       wait(var_1._id_DD2E);
+    }
   }
 
   if(isDefined(var_1._id_DD35)) {
     var_2 = 0;
 
-    if(isDefined(var_1._id_DD36))
+    if(isDefined(var_1._id_DD36)) {
       var_2 = var_1._id_DD36;
+    }
 
     var_0 scripts\engine\utility::delaythread(var_2, scripts\sp\utility::play_sound_on_entity, var_1._id_DD35);
   }
 }
 
 _id_881F(var_0, var_1) {
-  while(distance2d(level.player.origin, self.origin) > var_0)
+  while(distance2d(level.player.origin, self.origin) > var_0) {
     wait 0.05;
+  }
 
   scripts\engine\utility::flag_set(var_1);
 }
@@ -576,8 +597,9 @@ _id_8812(var_0, var_1) {
   var_0 scripts\sp\anim::_id_1EE0(self, var_1);
   scripts\sp\utility::_id_9193("heistBridgeHack");
 
-  if(isDefined(self._id_DC1A))
+  if(isDefined(self._id_DC1A)) {
     self _meth_81D0();
+  }
 }
 
 _id_137A5(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -590,16 +612,18 @@ _id_137A5(var_0, var_1, var_2, var_3, var_4, var_5) {
     wait 0.05;
     var_6 = 0;
 
-    if(level.player meleeButtonPressed() || level.player attackButtonPressed())
+    if(level.player meleeButtonPressed() || level.player attackButtonPressed()) {
       var_6 = 1;
+    }
 
     var_7 = level.player scripts\sp\utility::_id_D1DF(var_0.origin + (0, 0, 64), 0.5, 1);
     var_8 = distancesquared(level.player.origin, var_0.origin);
     var_9 = var_8 < var_1;
     var_10 = 1;
 
-    if(isDefined(var_2) && var_9)
+    if(isDefined(var_2) && var_9) {
       var_10 = var_5 _id_13D97(var_0, var_2, var_3, var_4);
+    }
 
     if(var_7 && var_9 && var_10) {
       level._id_1650 = var_0;
@@ -618,8 +642,9 @@ _id_137A5(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
 
     if(!scripts\engine\utility::flag("hacked_robot_scene_active")) {
-      if(isDefined(level._id_1650) && level._id_1650 == var_0)
+      if(isDefined(level._id_1650) && level._id_1650 == var_0) {
         level._id_1650 = undefined;
+      }
 
       scripts\engine\utility::flag_clear("flag_hint_melee");
       var_0 scripts\sp\utility::_id_9196(1, 0, 0, "heistBridgeHack");
@@ -634,20 +659,22 @@ _id_13D97(var_0, var_1, var_2, var_3) {
   var_7 = anglesdelta(var_6, var_5);
   var_7 = var_7 * 2;
 
-  if(var_7 > var_2[0] && var_7 < var_2[1])
+  if(var_7 > var_2[0] && var_7 < var_2[1]) {
     var_4 = 1;
-  else
+  } else {
     var_4 = 0;
+  }
 
   var_5 = scripts\engine\utility::flat_angle(self.angles);
   var_6 = scripts\engine\utility::flat_angle(var_0.angles);
   var_7 = anglesdelta(var_5, var_6);
   var_7 = var_7 * 2;
 
-  if(var_7 > var_3[0] && var_7 < var_3[1])
+  if(var_7 > var_3[0] && var_7 < var_3[1]) {
     var_4 = 1;
-  else
+  } else {
     var_4 = 0;
+  }
 
   return var_4;
 }
@@ -721,8 +748,9 @@ _id_11000(var_0) {
 
   if(!isDefined(var_0.finished)) {
     foreach(var_2 in var_0.enemies) {
-      if(isalive(var_2))
+      if(isalive(var_2)) {
         var_2 _meth_81D0();
+      }
     }
   }
 }
@@ -745,11 +773,13 @@ _id_E5A5() {
     scripts\sp\utility::_id_57D6();
     level.player stopgestureviewmodel("ges_c6_heist_defensivehands", 0);
 
-    if(scripts\engine\utility::flag("hacked_robot_scene_active"))
+    if(scripts\engine\utility::flag("hacked_robot_scene_active")) {
       scripts\engine\utility::flag_waitopen("hacked_robot_scene_active");
+    }
 
-    while(level.player ismeleeing())
+    while(level.player ismeleeing()) {
       wait 0.05;
+    }
   }
 }
 
@@ -773,11 +803,13 @@ _id_13805(var_0) {
   while(gettime() - var_1 < var_0) {
     wait 0.05;
 
-    if(level.player ismeleeing())
+    if(level.player ismeleeing()) {
       return 1;
+    }
 
-    if(scripts\engine\utility::flag("hacked_robot_scene_active"))
+    if(scripts\engine\utility::flag("hacked_robot_scene_active")) {
       return 1;
+    }
   }
 }
 
@@ -810,8 +842,9 @@ _id_4D4F() {
 }
 
 _id_4CF7(var_0) {
-  if(!isDefined(level._id_8811))
+  if(!isDefined(level._id_8811)) {
     level._id_8818 = [];
+  }
 
   var_1 = undefined;
   var_2 = undefined;
@@ -819,8 +852,9 @@ _id_4CF7(var_0) {
   var_4 = anglesToForward(level.player getplayerangles());
   var_5 = vectorNormalize(var_0 - var_3);
 
-  if(!level.player scripts\sp\utility::_id_D1DF(var_0, 0.5, 1))
+  if(!level.player scripts\sp\utility::_id_D1DF(var_0, 0.5, 1)) {
     var_0 = var_3 + var_4 * 10 + var_5 * 10;
+  }
 
   var_1 = scripts\engine\utility::spawn_tag_origin(var_0, level.player.angles);
   var_1 linkTo(level.player);
@@ -840,8 +874,9 @@ _id_4CF7(var_0) {
   wait 2;
   var_1 delete();
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 }
 
 _id_10C11() {
@@ -855,8 +890,9 @@ _id_10FD4(var_0) {
   level.player notify("stop_defensive_gesture_disable");
   level.player endon("stop_defensive_gesture_disable");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait(var_0);
+  }
 
   level.player scripts\sp\utility::_id_1102B("ges_c6_heist_defensivehands");
   scripts\engine\utility::flag_clear("defensive_gesture_active");
@@ -885,8 +921,9 @@ _id_1065C() {
   level._id_306D = scripts\sp\utility::_id_22CD("bridge_robots");
 
   foreach(var_1 in level._id_306D) {
-    if(isDefined(var_1.script_noteworthy))
+    if(isDefined(var_1.script_noteworthy)) {
       level._id_306E[var_1.script_noteworthy][var_1.script_index] = var_1;
+    }
 
     var_1._id_1FBB = "c6bridge";
     _id_0E29::_id_877F(var_1);
@@ -918,11 +955,13 @@ _id_43CE(var_0, var_1) {
   level endon("hacked_robot_scene_ " + var_1._id_1FB1);
 
   if(isDefined(var_1._id_92DC)) {
-    if(isDefined(var_1._id_DD2F))
+    if(isDefined(var_1._id_DD2F)) {
       var_0 thread scripts\engine\utility::flag_wait(var_1._id_92DC);
+    }
 
-    if(isDefined(var_1._id_DD2E))
+    if(isDefined(var_1._id_DD2E)) {
       wait(var_1._id_DD2E);
+    }
 
     var_2 = scripts\engine\utility::getStruct(var_1._id_92FC, "targetname");
     var_2 notify("stop_loop");
@@ -931,8 +970,9 @@ _id_43CE(var_0, var_1) {
     if(isDefined(var_1._id_1FB2)) {
       var_3 = self;
 
-      if(isDefined(var_1._id_DD5F))
+      if(isDefined(var_1._id_DD5F)) {
         var_3 = scripts\engine\utility::getStruct(var_1._id_DD5F, "targetname");
+      }
 
       var_3 scripts\sp\anim::_id_1ECB(var_0, var_1._id_1FB2);
     }
@@ -948,8 +988,9 @@ _id_43CE(var_0, var_1) {
 }
 
 _id_306A() {
-  while(distance(level.player.origin, level._id_A70E.origin) > 512)
+  while(distance(level.player.origin, level._id_A70E.origin) > 512) {
     wait 1;
+  }
 
   scripts\engine\utility::flag_set("retreat_bridge");
 }
@@ -973,8 +1014,9 @@ _id_10C17() {
     scripts\engine\utility::flag_set("mons_destruct_started");
     wait 2;
 
-    if(isalive(level._id_3012))
+    if(isalive(level._id_3012)) {
       scripts\engine\utility::flag_set(level._id_3012._id_EBEA._id_92DC);
+    }
   } else {
     wait 2;
     scripts\engine\utility::flag_set("mons_destruct_started");
@@ -1075,14 +1117,15 @@ _id_87AD() {
   for(;;) {
     var_0 = undefined;
 
-    if(!scripts\engine\utility::flag("player_has_device"))
+    if(!scripts\engine\utility::flag("player_has_device")) {
       var_0 = "hacking_hint_pickup";
-    else if(!scripts\engine\utility::flag("hacking_device_in_slot"))
+    } else if(!scripts\engine\utility::flag("hacking_device_in_slot")) {
       var_0 = "hacking_hint_slot";
-    else if(!scripts\engine\utility::flag("hacking_device_has_ammo"))
+    } else if(!scripts\engine\utility::flag("hacking_device_has_ammo")) {
       var_0 = "hacking_hint_ammo";
-    else if(_id_0E29::_id_87A7() == "none")
+    } else if(_id_0E29::_id_87A7() == "none") {
       var_0 = "hacking_hint_use";
+    }
 
     if(isDefined(var_0) && (!isDefined(level._id_BA72) || var_0 != level._id_BA72)) {
       level._id_BA72 = var_0;
@@ -1098,10 +1141,11 @@ _id_53E8() {
   level endon("player_in_bot");
 
   for(;;) {
-    if(scripts\sp\utility::_id_D0BD("hackingdevice", 1))
+    if(scripts\sp\utility::_id_D0BD("hackingdevice", 1)) {
       scripts\engine\utility::flag_set("player_has_device");
-    else
+    } else {
       scripts\engine\utility::flag_clear("player_has_device");
+    }
 
     wait 0.05;
   }
@@ -1111,10 +1155,11 @@ _id_53E9() {
   level endon("player_in_bot");
 
   for(;;) {
-    if(scripts\sp\utility::_id_D0BD("hackingdevice", 0))
+    if(scripts\sp\utility::_id_D0BD("hackingdevice", 0)) {
       scripts\engine\utility::flag_set("hacking_device_in_slot");
-    else
+    } else {
       scripts\engine\utility::flag_clear("hacking_device_in_slot");
+    }
 
     wait 0.05;
   }
@@ -1124,39 +1169,44 @@ _id_53E7() {
   level endon("player_in_bot");
 
   for(;;) {
-    if(scripts\sp\utility::_id_D0BD("hackingdevice", 0) && level.player scripts\sp\utility::_id_7C3E() > 0)
+    if(scripts\sp\utility::_id_D0BD("hackingdevice", 0) && level.player scripts\sp\utility::_id_7C3E() > 0) {
       scripts\engine\utility::flag_set("hacking_device_has_ammo");
-    else
+    } else {
       scripts\engine\utility::flag_clear("hacking_device_has_ammo");
+    }
 
     wait 0.05;
   }
 }
 
 _id_87CE() {
-  if(scripts\engine\utility::flag("player_in_bot") || !isDefined(level._id_BA72) || level._id_BA72 != "hacking_hint_pickup")
+  if(scripts\engine\utility::flag("player_in_bot") || !isDefined(level._id_BA72) || level._id_BA72 != "hacking_hint_pickup") {
     return 1;
+  }
 
   return 0;
 }
 
 _id_87E5() {
-  if(scripts\engine\utility::flag("player_in_bot") || !isDefined(level._id_BA72) || level._id_BA72 != "hacking_hint_slot")
+  if(scripts\engine\utility::flag("player_in_bot") || !isDefined(level._id_BA72) || level._id_BA72 != "hacking_hint_slot") {
     return 1;
+  }
 
   return 0;
 }
 
 _id_8783() {
-  if(scripts\engine\utility::flag("player_in_bot") || !isDefined(level._id_BA72) || level._id_BA72 != "hacking_hint_ammo")
+  if(scripts\engine\utility::flag("player_in_bot") || !isDefined(level._id_BA72) || level._id_BA72 != "hacking_hint_ammo") {
     return 1;
+  }
 
   return 0;
 }
 
 _id_87F1() {
-  if(scripts\engine\utility::flag("player_in_bot") || !isDefined(level._id_BA72) || level._id_BA72 != "hacking_hint_use")
+  if(scripts\engine\utility::flag("player_in_bot") || !isDefined(level._id_BA72) || level._id_BA72 != "hacking_hint_use") {
     return 1;
+  }
 
   return 0;
 }
@@ -1180,8 +1230,9 @@ _id_544D() {
   scripts\engine\utility::flag_set("obj_hack");
   level endon("player_hack_locking_on");
 
-  while(!isDefined(level._id_6754))
+  while(!isDefined(level._id_6754)) {
     scripts\engine\utility::waitframe();
+  }
 
   if(level._id_10CDA == "mons_hack") {
     level._id_6754 scripts\sp\utility::_id_10346("heist_eth_captainthehacki");
@@ -1191,17 +1242,19 @@ _id_544D() {
     level._id_6754 thread _id_C0D2("heist_eth_captainthehacki");
     level._id_EA2C thread _id_C0D2("heist_slt_helmsgotmechsan");
 
-    if(!level.player scripts\sp\utility::_id_D0BD("hackingdevice", 1))
+    if(!level.player scripts\sp\utility::_id_D0BD("hackingdevice", 1)) {
       level._id_EA2C _id_C0D2("heist_slt_takeitraider", "heist_slt_reyesgofortheha");
-    else
+    } else {
       level._id_EA2C _id_C0D2("heist_slt_takeitraider");
+    }
   }
 
   wait 4;
   level notify("marker_on");
 
-  if(level._id_10CDA != "mons_hack")
+  if(level._id_10CDA != "mons_hack") {
     level scripts\engine\utility::waittill_either("call_heist_slt_takeitraider", "heist_slt_reyesgofortheha");
+  }
 
   level._id_6754 scripts\sp\utility::_id_10346("heist_eth_hurrysir");
   wait 8;
@@ -1244,13 +1297,15 @@ _id_544E() {
   level._id_A70E smart_dialogue_kotch("heist_kch_overheatreactor");
   level._id_A70E smart_dialogue_kotch("heist_kch_ionexhausttoful");
 
-  while(level._id_5330 > 13)
+  while(level._id_5330 > 13) {
     wait 0.05;
+  }
 
   level._id_A70E smart_dialogue_kotch("heist_kch_scuttlekeyishot");
 
-  while(level._id_5330 > 5)
+  while(level._id_5330 > 5) {
     wait 0.05;
+  }
 
   level._id_A70E smart_dialogue_kotch("heist_kch_5secondskillhim");
 }
@@ -1271,8 +1326,9 @@ _id_5461(var_0, var_1) {
 }
 
 _id_544F() {
-  while(distance2d(level.player.origin, level._id_A70E.origin) > 250)
+  while(distance2d(level.player.origin, level._id_A70E.origin) > 250) {
     wait 0.05;
+  }
 
   level._id_A70E thread smart_dialogue_kotch("heist_kch_bot");
   wait 1.5;

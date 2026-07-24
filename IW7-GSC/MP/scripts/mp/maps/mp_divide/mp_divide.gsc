@@ -88,8 +88,9 @@ kill_trigger_loop(var_0) {
           continue;
         }
 
-        if(var_1.streakname == "venom")
+        if(var_1.streakname == "venom") {
           var_1 notify("venom_end", var_1.origin);
+        }
       }
     }
   }
@@ -119,10 +120,11 @@ fix_broshot() {
 _id_E838() {}
 
 mpdividecollisionfunc(var_0) {
-  if(var_0.origin[2] - self.origin[2] > 30)
+  if(var_0.origin[2] - self.origin[2] > 30) {
     var_0 _meth_84DC((0, -40, 10), 200);
-  else
+  } else {
     var_0 scripts\mp\movers::mover_suicide();
+  }
 }
 
 _id_1F87() {
@@ -169,33 +171,39 @@ _id_1F87() {
 }
 
 _id_110C1() {
-  foreach(var_1 in self)
-  var_1.start = var_1.origin;
+  foreach(var_1 in self) {
+    var_1.start = var_1.origin;
+  }
 }
 
 _id_E268(var_0) {
-  foreach(var_2 in var_0)
-  var_2 movez(-200, 0.01);
+  foreach(var_2 in var_0) {
+    var_2 movez(-200, 0.01);
+  }
 
   wait 0.1;
 
-  foreach(var_2 in var_0)
-  var_2 moveTo((var_2.start[0], var_2.start[1], var_2.start[2]), 0.01);
+  foreach(var_2 in var_0) {
+    var_2 moveTo((var_2.start[0], var_2.start[1], var_2.start[2]), 0.01);
+  }
 }
 
 _id_1F6C(var_0, var_1) {
-  foreach(var_3 in var_0)
-  var_3 movex(363, var_1);
+  foreach(var_3 in var_0) {
+    var_3 movex(363, var_1);
+  }
 }
 
 _id_1F76(var_0, var_1) {
-  foreach(var_3 in var_0)
-  var_3 movey(144, 1.5, 0, 0.5);
+  foreach(var_3 in var_0) {
+    var_3 movey(144, 1.5, 0, 0.5);
+  }
 
   wait(var_1);
 
-  foreach(var_3 in var_0)
-  var_3 movey(-144, 2, 0, 0.5);
+  foreach(var_3 in var_0) {
+    var_3 movey(-144, 2, 0, 0.5);
+  }
 }
 
 _id_1F71(var_0) {
@@ -221,30 +229,35 @@ _id_1F71(var_0) {
 }
 
 _id_1F6D(var_0, var_1) {
-  foreach(var_3 in var_0)
-  var_3 movey(1050, var_1);
+  foreach(var_3 in var_0) {
+    var_3 movey(1050, var_1);
+  }
 }
 
 _id_1F72(var_0) {
-  foreach(var_2 in var_0)
-  var_2 movez(43, 2, 0.2, 0.2);
+  foreach(var_2 in var_0) {
+    var_2 movez(43, 2, 0.2, 0.2);
+  }
 
   wait 8;
 
-  foreach(var_2 in var_0)
-  var_2 movez(-43, 2, 0.2, 0.2);
+  foreach(var_2 in var_0) {
+    var_2 movez(-43, 2, 0.2, 0.2);
+  }
 }
 
 _id_1F73(var_0, var_1) {
   wait 5;
 
-  foreach(var_3 in var_0)
-  var_3 movez(84, 2.5, 0, 0.5);
+  foreach(var_3 in var_0) {
+    var_3 movez(84, 2.5, 0, 0.5);
+  }
 }
 
 _id_1F6B(var_0) {
-  foreach(var_2 in var_0)
-  var_2 movez(-84, 3, 0, 0.5);
+  foreach(var_2 in var_0) {
+    var_2 movez(-84, 3, 0, 0.5);
+  }
 }
 
 _id_CDA4(var_0) {

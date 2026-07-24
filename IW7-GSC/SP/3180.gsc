@@ -4,8 +4,9 @@
 **************************************/
 
 _id_FFE6() {
-  if(scripts\engine\utility::is_true(self.disablearrivals))
+  if(scripts\engine\utility::is_true(self.disablearrivals)) {
     return 0;
+  }
 
   return 1;
 }
@@ -66,18 +67,21 @@ _id_7EAB(var_0, var_1, var_2) {
     if(var_23 > 0.01) {
       var_20[var_17] = var_23;
 
-      if(var_23 > var_21)
+      if(var_23 > var_21) {
         var_21 = var_23;
+      }
     }
   }
 
   var_24 = [];
 
-  foreach(var_17, var_23 in var_20)
-  var_24[var_17] = var_23 * (1 / var_21);
+  foreach(var_17, var_23 in var_20) {
+    var_24[var_17] = var_23 * (1 / var_21);
+  }
 
-  foreach(var_17, var_23 in var_24)
-  var_4[var_17].weight = var_23;
+  foreach(var_17, var_23 in var_24) {
+    var_4[var_17].weight = var_23;
+  }
 
   return var_4;
 }
@@ -91,19 +95,21 @@ getyaw2d(var_0) {
 _id_8061(var_0) {
   var_1 = 10;
 
-  if(var_0 < 0)
+  if(var_0 < 0) {
     return int(ceil((180 + var_0 - var_1) / 45));
-  else
+  } else {
     return int(floor((180 + var_0 + var_1) / 45));
+  }
 }
 
 _id_3720(var_0, var_1, var_2, var_3) {
   var_4 = _id_0F3D::_id_7DD6();
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_5 = var_4.origin;
-  else
+  } else {
     var_5 = self.pathgoalpos;
+  }
 
   var_6 = var_5 - self.origin;
   var_7 = length(var_6);
@@ -119,8 +125,9 @@ _id_3720(var_0, var_1, var_2, var_3) {
   if(var_2 == "Exposed 3D" && var_15) {
     var_16 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "F");
 
-    if(!isDefined(var_16))
+    if(!isDefined(var_16)) {
       return undefined;
+    }
 
     var_11 = getmovedelta(var_16);
     var_12 = getangledelta3d(var_16);
@@ -133,8 +140,9 @@ _id_3720(var_0, var_1, var_2, var_3) {
     var_10 = _id_7EAB(var_1, var_8, var_9._id_0130);
     var_17 = 0;
 
-    foreach(var_19 in var_10)
-    var_17 = var_17 + var_19.weight;
+    foreach(var_19 in var_10) {
+      var_17 = var_17 + var_19.weight;
+    }
 
     var_11 = (0, 0, 0);
     var_12 = (0, 0, 0);
@@ -176,57 +184,65 @@ _id_3720(var_0, var_1, var_2, var_3) {
       var_33 = _id_8061(var_30[0]);
     }
 
-    if(var_33 == 4)
+    if(var_33 == 4) {
       var_34 = "M";
-    else if(var_33 > 4)
+    } else if(var_33 > 4) {
       var_34 = "B";
-    else
+    } else {
       var_34 = "T";
+    }
 
     if(var_2 == "Cover Stand 3D" || var_2 == "Cover Exposed 3D") {
-      if(var_34 == "B")
+      if(var_34 == "B") {
         return undefined;
+      }
 
       if(var_32 >= 7 && var_34 == "M") {
-        if(var_7 <= 125)
+        if(var_7 <= 125) {
           var_34 = "T";
-        else
+        } else {
           return undefined;
+        }
       }
 
       var_35 = 1.0;
     } else if(var_2 == "Cover 3D") {
-      if(var_32 >= 7)
+      if(var_32 >= 7) {
         return undefined;
+      }
     }
 
     var_36 = var_32 + var_34;
     var_10 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_36);
 
-    if(!isDefined(var_10))
+    if(!isDefined(var_10)) {
       return undefined;
+    }
 
     var_11 = getmovedelta(var_10);
     var_12 = getangledelta3d(var_10);
     var_13 = getanimlength(var_10);
   }
 
-  if(!isDefined(var_10))
+  if(!isDefined(var_10)) {
     return undefined;
+  }
 
   var_37 = length(var_11);
   var_38 = var_7 - var_37;
 
-  if(var_38 >= 0)
+  if(var_38 >= 0) {
     var_39 = 0.5;
-  else
+  } else {
     var_39 = 2.0;
+  }
 
   var_40 = var_37 / var_13;
   var_41 = var_40 * self._id_BD22 * var_39 * var_14;
 
-  if(abs(var_38) > var_41)
+  if(abs(var_38) > var_41) {
     return undefined;
+  }
 
   var_42 = calculatestartorientation(var_11, var_12, var_9.pos, var_9._id_0130);
   var_43 = spawnStruct();
@@ -247,8 +263,9 @@ _id_3720(var_0, var_1, var_2, var_3) {
     var_47 = var_48 < distance(var_44, var_45) + 8.0;
   }
 
-  if(var_47)
+  if(var_47) {
     return var_43;
+  }
 
   return undefined;
 }
@@ -264,8 +281,9 @@ _id_CEA9(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   var_4 = "Exposed 3D";
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_4 = var_3;
+  }
 
   self._id_4C7E = _id_0F3D::_id_22EA;
   self.a._id_22E5 = var_1;
@@ -296,8 +314,9 @@ _id_CEA9(var_0, var_1, var_2, var_3) {
       var_10 = var_1 + "_" + var_9.string;
       self _meth_82EA(var_10, var_9._id_02C9, var_9.weight, var_2, self._id_BD22);
 
-      if(var_8 == var_6._id_02C9.size - 1)
+      if(var_8 == var_6._id_02C9.size - 1) {
         _id_0A1E::_id_231F(var_0, var_1, undefined, undefined, var_10);
+      }
     }
   } else {
     _id_0A1E::_id_2369(var_0, var_1, var_6._id_02C9);
@@ -309,19 +328,22 @@ _id_CEA9(var_0, var_1, var_2, var_3) {
 }
 
 _id_7E54() {
-  if(isDefined(self.asm._id_4C86._id_22E3))
+  if(isDefined(self.asm._id_4C86._id_22E3)) {
     return self.asm._id_4C86._id_22E3;
+  }
 
   return undefined;
 }
 
 _id_10010(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   if(scripts\engine\utility::is_true(self._id_B3E9)) {
-    if(scripts\engine\utility::isnodeexposed3d(var_0))
+    if(scripts\engine\utility::isnodeexposed3d(var_0)) {
       return 1;
+    }
   }
 
   return _id_0F3D::_id_C057(var_0);
@@ -336,10 +358,11 @@ _id_8176(var_0) {
     var_1.angles = var_2.angles;
     var_1._id_0130 = scripts\asm\shared\utility::getnodeforwardangles(var_2, 0);
   } else {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_1.pos = var_2.origin;
-    else
+    } else {
       var_1.pos = self.pathgoalpos;
+    }
 
     if(!self.facemotion && isDefined(self.enemy)) {
       var_3 = self.enemy.origin - var_1.pos;
@@ -352,21 +375,25 @@ _id_8176(var_0) {
 
   var_4 = _id_7E54();
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_1.angles = var_4;
+  }
 
   return var_1;
 }
 
 _id_FFD4(var_0, var_1, var_2, var_3) {
-  if(!_id_FFE6())
+  if(!_id_FFE6()) {
     return 0;
+  }
 
-  if(!isDefined(self.pathgoalpos))
+  if(!isDefined(self.pathgoalpos)) {
     return 0;
+  }
 
-  if(!scripts\asm\asm::_id_232B(var_1, "cover_approach"))
+  if(!scripts\asm\asm::_id_232B(var_1, "cover_approach")) {
     return 0;
+  }
 
   var_4 = _id_0F3D::_id_7DD6();
 
@@ -382,31 +409,36 @@ _id_1008E(var_0, var_1, var_2, var_3) {
   var_4 = "Exposed 3D";
 
   if(isDefined(var_3)) {
-    if(!isarray(var_3))
+    if(!isarray(var_3)) {
       var_4 = var_3;
-    else if(var_3.size >= 1)
+    } else if(var_3.size >= 1) {
       var_4 = var_3[0];
+    }
   }
 
-  if(!_id_0F3D::_id_9D4C(var_0, var_1, var_2, var_4))
+  if(!_id_0F3D::_id_9D4C(var_0, var_1, var_2, var_4)) {
     return 0;
+  }
 
   var_5 = self pathdisttogoal();
   var_6 = _id_7F95(var_4);
 
-  if(var_5 > var_6 || var_5 <= 0)
+  if(var_5 > var_6 || var_5 <= 0) {
     return 0;
+  }
 
   if(isDefined(var_3) && isarray(var_3)) {
     if(var_3.size >= 3) {
       var_7 = var_3[2];
 
       if(var_3[1] == "greater_than") {
-        if(var_5 <= var_7)
+        if(var_5 <= var_7) {
           return 0;
+        }
       } else if(var_3[1] == "less_than") {
-        if(var_5 > var_7)
+        if(var_5 > var_7) {
           return 0;
+        }
       }
     }
 
@@ -414,16 +446,18 @@ _id_1008E(var_0, var_1, var_2, var_3) {
       if(var_3[3] == "moveType") {
         var_8 = var_3[4];
 
-        if(!(isDefined(self._id_13EE7) && self._id_13EE7 == var_8))
+        if(!(isDefined(self._id_13EE7) && self._id_13EE7 == var_8)) {
           return 0;
+        }
       }
     }
   }
 
   self.asm._id_11068 = _id_3720(var_0, var_2, var_4, var_3);
 
-  if(!isDefined(self.asm._id_11068))
+  if(!isDefined(self.asm._id_11068)) {
     return 0;
+  }
 
   return 1;
 }

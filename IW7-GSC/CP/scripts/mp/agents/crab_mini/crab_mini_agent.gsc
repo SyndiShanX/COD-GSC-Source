@@ -14,29 +14,33 @@ registerscriptedagent() {
 _id_FAB0() {
   level endon("game_ended");
 
-  if(!isDefined(level.agent_definition))
+  if(!isDefined(level.agent_definition)) {
     level waittill("scripted_agents_initialized");
+  }
 
   level.agent_definition["crab_mini"]["setup_func"] = ::setupagent;
   level.agent_definition["crab_mini"]["setup_model_func"] = ::_id_FACE;
-  level.agent_funcs["crab_mini"]["on_damaged"] = scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiedamaged;
-  level.agent_funcs["crab_mini"]["gametype_on_damage_finished"] = scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
-  level.agent_funcs["crab_mini"]["gametype_on_killed"] = scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiekilled;
-  level.agent_funcs["crab_mini"]["on_damaged_finished"] = scripts\mp\agents\zombie\zombie_agent::onzombiedamagefinished;
+  level.agent_funcs["crab_mini"]["on_damaged"] = ::scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiedamaged;
+  level.agent_funcs["crab_mini"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+  level.agent_funcs["crab_mini"]["gametype_on_killed"] = ::scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiekilled;
+  level.agent_funcs["crab_mini"]["on_damaged_finished"] = ::scripts\mp\agents\zombie\zombie_agent::onzombiedamagefinished;
   level.agent_funcs["crab_mini"]["on_killed"] = ::onkilled;
 
-  if(!isDefined(level._id_8CBD))
+  if(!isDefined(level._id_8CBD)) {
     level._id_8CBD = [];
+  }
 
   level._id_8CBD["crab_mini"] = ::calculatecrabminihealth;
 
-  if(!isDefined(level.damage_feedback_overrride))
+  if(!isDefined(level.damage_feedback_overrride)) {
     level.damage_feedback_overrride = [];
+  }
 
-  level.damage_feedback_overrride["crab_mini"] = scripts\cp\maps\cp_town\cp_town_damage::crog_processdamagefeedback;
+  level.damage_feedback_overrride["crab_mini"] = ::scripts\cp\maps\cp_town\cp_town_damage::crog_processdamagefeedback;
 
-  if(!isDefined(level.special_zombie_damage_func))
+  if(!isDefined(level.special_zombie_damage_func)) {
     level.special_zombie_damage_func = [];
+  }
 
   level.special_zombie_damage_func["crab_mini"] = ::crab_mini_special_damage_func;
 }
@@ -129,8 +133,9 @@ setupzombiegametypevars() {
   self.allowpain = 0;
   self setavoidanceradius(45);
 
-  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1)
+  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1) {
     self._id_AB3F = 1;
+  }
 }
 
 setupagent() {
@@ -158,8 +163,9 @@ setupagent() {
 }
 
 getenemy() {
-  if(isDefined(self.myenemy))
+  if(isDefined(self.myenemy)) {
     return self.myenemy;
+  }
 
   return undefined;
 }
@@ -201,8 +207,9 @@ calculatecrabminihealth() {
 create_sludge_pool(var_0) {
   self._id_CE65 = 1;
 
-  if(!isDefined(level.goo_pool_ent_array))
+  if(!isDefined(level.goo_pool_ent_array)) {
     level.goo_pool_ent_array = [];
+  }
 
   var_1 = 2500;
 
@@ -255,11 +262,13 @@ iscrabministuck() {
 }
 
 crab_mini_special_damage_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
-  if(isDefined(level.insta_kill) && level.insta_kill)
+  if(isDefined(level.insta_kill) && level.insta_kill) {
     return self.health;
+  }
 
-  if(isDefined(var_5) && var_5 == "iw7_knife_zm_cleaver")
+  if(isDefined(var_5) && var_5 == "iw7_knife_zm_cleaver") {
     return self.health;
+  }
 
   if(isDefined(var_7)) {
     var_12 = scripts\mp\agents\crab_mini\crab_mini_tunedata::gettunedata();

@@ -7,8 +7,9 @@ init() {
   precacheshader("damage_feedback_thin");
   setDvar("scr_damagefeedback", "1");
 
-  if(getDvar("scr_damagefeedback") == "")
+  if(getDvar("scr_damagefeedback") == "") {
     setDvar("scr_damagefeedback", "0");
+  }
 
   if(!getdvarint("scr_damagefeedback", 0)) {
     return;
@@ -44,10 +45,11 @@ _id_4D4C(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_11 = "standard";
 
   if(isDefined(var_9)) {
-    if(var_0 <= weapongetdamagemin(var_9))
+    if(var_0 <= weapongetdamagemin(var_9)) {
       var_11 = "low_damage";
-    else if(var_0 >= weapongetdamagemax(var_9))
+    } else if(var_0 >= weapongetdamagemax(var_9)) {
       var_11 = "high_damage";
+    }
   }
 
   var_12 = 0;
@@ -63,8 +65,9 @@ _id_4D4C(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 
 _id_9EF8() {
   if(isDefined(self.unittype) && self.unittype == "seeker") {
-    if(isDefined(self.owner) && self.owner == level.player)
+    if(isDefined(self.owner) && self.owner == level.player) {
       return 1;
+    }
   }
 
   return 0;
@@ -81,8 +84,9 @@ updatedamagefeedback(var_0, var_1, var_2, var_3, var_4) {
   if(!isPlayer(self)) {
     return;
   }
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = "standard";
+  }
 
   switch (var_0) {
     case "hithealthshield":
@@ -111,11 +115,13 @@ updatehitmarker(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_0)) {
     return;
   }
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   if(isDefined(var_3) && var_3.team == "allies") {
     return;
@@ -130,20 +136,23 @@ updatehitmarker(var_0, var_1, var_2, var_3) {
   setomnvar("damage_feedback", var_0);
   self setclientomnvar("damage_feedback_notify", gettime());
 
-  if(var_1)
+  if(var_1) {
     setomnvar("damage_feedback_kill", 1);
-  else
+  } else {
     setomnvar("damage_feedback_kill", 0);
+  }
 
-  if(var_2)
+  if(var_2) {
     setomnvar("damage_feedback_headshot", 1);
-  else
+  } else {
     setomnvar("damage_feedback_headshot", 0);
+  }
 }
 
 gethitmarkerpriority(var_0) {
-  if(!isDefined(level.hitmarkerpriorities[var_0]))
+  if(!isDefined(level.hitmarkerpriorities[var_0])) {
     return 0;
+  }
 
   return level.hitmarkerpriorities[var_0];
 }

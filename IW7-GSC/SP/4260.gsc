@@ -7,47 +7,61 @@ _id_3B9D(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   anims();
   _id_DEB9();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 1;
+  }
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 1;
+  }
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     var_6 = 1;
+  }
 
-  if(!isDefined(var_7))
+  if(!isDefined(var_7)) {
     var_7 = 1;
+  }
 
-  if(!isDefined(var_8))
+  if(!isDefined(var_8)) {
     var_8 = 1;
+  }
 
-  if(!isDefined(var_9))
+  if(!isDefined(var_9)) {
     var_9 = 1;
+  }
 
-  if(var_0)
+  if(var_0) {
     level thread _id_EB97();
+  }
 
-  if(var_1)
+  if(var_1) {
     level thread _id_EB96();
+  }
 
-  if(var_2)
+  if(var_2) {
     level thread _id_EB98();
+  }
 
-  if(var_3)
+  if(var_3) {
     level thread _id_EB99();
+  }
 
   if(var_4) {
     level thread _id_FDA6();
@@ -70,19 +84,22 @@ _id_3B9D(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
     level thread _id_FDAB();
   }
 
-  if(var_8)
+  if(var_8) {
     level thread _id_FDA3();
+  }
 
-  if(var_9)
+  if(var_9) {
     level thread _id_FDAC();
+  }
 }
 
 _id_3B9E() {
   var_0 = _id_0EFB::_id_FD9C("catwalks");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2._id_1DF6))
+    if(isDefined(var_2._id_1DF6)) {
       var_2._id_1DF6 notify("ambient_idle_scene_end");
+    }
   }
 
   _id_0EFB::_id_FDBB("catwalks");

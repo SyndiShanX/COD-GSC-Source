@@ -47,8 +47,9 @@ _id_40B9(var_0) {
   var_1 = var_0 scripts\sp\utility::_id_77E3("axis");
 
   foreach(var_3 in var_1) {
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_3 delete();
+    }
   }
 }
 
@@ -63,8 +64,9 @@ _id_4127() {
   var_1 = var_0 scripts\sp\utility::_id_77E3("axis");
 
   foreach(var_3 in var_1) {
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_3 delete();
+    }
   }
 }
 
@@ -79,8 +81,9 @@ _id_57C2() {
   level._id_F06F = _id_DC98();
   level._id_F070 = _id_DC99();
 
-  foreach(var_8 in var_6)
-  var_8 scripts\sp\utility::_id_1747(::_id_FA3B);
+  foreach(var_8 in var_6) {
+    var_8 scripts\sp\utility::_id_1747(::_id_FA3B);
+  }
 }
 
 _id_57C1() {
@@ -105,8 +108,9 @@ _id_57C1() {
   var_15 = scripts\engine\utility::array_combine(var_14, var_7);
   var_16 = scripts\engine\utility::array_combine(var_15, var_8);
 
-  foreach(var_18 in var_16)
-  var_18 scripts\sp\utility::_id_1747(::_id_FA3B);
+  foreach(var_18 in var_16) {
+    var_18 scripts\sp\utility::_id_1747(::_id_FA3B);
+  }
 }
 
 _id_FA3B() {
@@ -214,8 +218,9 @@ _id_DF3E() {
 }
 
 _id_E986(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   if(var_0) {
     setsaveddvar("cg_helmetLinearVelocityToAngleRate", (0.4, 0.4, 1));
@@ -229,28 +234,32 @@ _id_E986(var_0) {
 }
 
 _id_E984(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   if(isDefined(level.player.helmet)) {
-    if(scripts\sp\utility::_id_93A6())
+    if(scripts\sp\utility::_id_93A6()) {
       level.player.helmet = level._id_10964.helmet;
-    else
+    } else {
       level _id_0E4B::_id_8E04(1);
+    }
   }
 
   if(getDvar("createfx") != "") {
     return;
   }
   if(getdvarint("no_helmet") == 0 || getdvarint("no_helmet") == 2) {
-    if(!scripts\sp\utility::_id_93A6())
+    if(!scripts\sp\utility::_id_93A6()) {
       level _id_0E4B::_id_8E06();
+    }
 
     if(isDefined(level.player.helmet) && getdvarint("no_helmet") == 0) {
-      if(var_0)
+      if(var_0) {
         level.player.helmet setModel("vm_hero_protagonist_helmet_zerog_empty");
-      else
+      } else {
         level.player.helmet setModel("vm_hero_protagonist_helmet_zerog");
+      }
     }
   }
 }
@@ -275,22 +284,26 @@ _id_2FB0(var_0, var_1, var_2, var_3) {
       if(isDefined(var_4.target)) {
         var_5 = scripts\engine\utility::getStruct(var_4.target, "targetname");
 
-        if(isDefined(var_5))
+        if(isDefined(var_5)) {
           var_6 = var_5.origin;
+        }
       }
 
       level thread _id_12DFB(var_1, var_6);
     }
   }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_4 waittill("trigger");
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     scripts\engine\utility::flag_set(var_2);
+  }
 
-  if(scripts\engine\utility::is_true(var_3))
+  if(scripts\engine\utility::is_true(var_3)) {
     _id_12DFB(var_1, (0, 0, 0));
+  }
 }
 
 _id_12DFB(var_0, var_1) {
@@ -304,8 +317,9 @@ _id_11685(var_0, var_1, var_2) {
   if(getdvarint("loc_warnings", 0)) {
     return;
   }
-  if(!isDefined(level._id_545A))
+  if(!isDefined(level._id_545A)) {
     level._id_545A = [];
+  }
 
   var_3 = 0;
 
@@ -319,8 +333,9 @@ _id_11685(var_0, var_1, var_2) {
 
   var_4 = "^3";
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   var_2 = max(1, var_2);
   level._id_545A[var_3] = 1;
@@ -365,10 +380,11 @@ _id_6F19(var_0, var_1) {
     while(var_5) {
       wait(randomfloatrange(0.05, 0.1));
 
-      if(var_4 > 0.2)
+      if(var_4 > 0.2) {
         var_4 = randomfloatrange(0, 0.3);
-      else
+      } else {
         var_4 = var_2;
+      }
 
       if(!scripts\sp\utility::_id_65DB("kill_light")) {
         self setlightintensity(var_4);
@@ -391,11 +407,13 @@ _id_6F19(var_0, var_1) {
 }
 
 _id_4546(var_0) {
-  if(!scripts\sp\utility::_id_65DF("console_finish"))
+  if(!scripts\sp\utility::_id_65DF("console_finish")) {
     scripts\sp\utility::_id_65E0("console_finish");
+  }
 
-  if(!scripts\sp\utility::_id_65DF("console_interacting"))
+  if(!scripts\sp\utility::_id_65DF("console_interacting")) {
     scripts\sp\utility::_id_65E0("console_interacting");
+  }
 
   var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
   var_2 = ["sa_console_twitch_2", "sa_console_twitch_3", "sa_console_twitch_5", "sa_console_twitch_6"];
@@ -405,10 +423,11 @@ _id_4546(var_0) {
   var_3 scripts\sp\anim::_id_1F35(self, "sa_console_enter", "tag_origin");
 
   for(;;) {
-    if(scripts\engine\utility::cointoss())
+    if(scripts\engine\utility::cointoss()) {
       var_3 scripts\sp\anim::_id_1F35(self, var_2[randomint(var_2.size - 1)], "tag_origin");
-    else
+    } else {
       var_3 scripts\sp\anim::_id_1F35(self, "sa_console_loop", "tag_origin");
+    }
 
     if(scripts\sp\utility::_id_65DB("sa_console_finish")) {
       break;
@@ -427,8 +446,9 @@ _id_4547() {
 }
 
 _id_E709(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level endon(var_1);
+  }
 
   if(isDefined(var_0)) {
     self setlightintensity(var_0);
@@ -480,29 +500,34 @@ _id_FA56() {
   level._id_A359 = scripts\sp\utility::_id_8200("jackal_swarm_spawner", "targetname");
   level._id_A359._id_13D88 = [];
 
-  foreach(var_1 in level._id_A359 scripts\sp\utility::_id_7A97())
-  level._id_A359._id_13D88[level._id_A359._id_13D88.size] = (var_1.origin - level._id_A359.origin) * 5.0;
+  foreach(var_1 in level._id_A359 scripts\sp\utility::_id_7A97()) {
+    level._id_A359._id_13D88[level._id_A359._id_13D88.size] = (var_1.origin - level._id_A359.origin) * 5.0;
+  }
 }
 
 _id_107A3(var_0) {
-  while(isDefined(self._id_1323B))
+  while(isDefined(self._id_1323B)) {
     scripts\engine\utility::waitframe();
+  }
 
   var_1 = scripts\sp\utility::_id_10808();
 
   if(var_0 > 0) {
-    while(isDefined(self._id_1323B))
+    while(isDefined(self._id_1323B)) {
       scripts\engine\utility::waitframe();
+    }
 
-    if(var_0 > self._id_13D88.size)
+    if(var_0 > self._id_13D88.size) {
       var_0 = self._id_13D88.size;
+    }
 
     self._id_13D88 = scripts\engine\utility::array_randomize(self._id_13D88);
     var_2 = self.origin;
 
     for(var_3 = 0; var_3 < var_0; var_3++) {
-      while(isDefined(self._id_1323B))
+      while(isDefined(self._id_1323B)) {
         scripts\engine\utility::waitframe();
+      }
 
       self.origin = var_2 + self._id_13D88[var_3];
       var_4 = scripts\sp\utility::_id_10808();
@@ -532,8 +557,9 @@ _id_3C0C(var_0) {
     self _meth_82EE(var_1);
     self waittill("goal");
 
-    if(isDefined(var_1.script_delay))
+    if(isDefined(var_1.script_delay)) {
       wait(var_1.script_delay);
+    }
 
     if(isDefined(var_1.target)) {
       var_1 = getnode(var_1.target, "targetname");
@@ -565,8 +591,9 @@ _id_2472() {
   foreach(var_1 in self._id_7560["thrust_vert"]) {
     var_1._id_B50D delete();
 
-    if(isDefined(var_1._id_426A))
+    if(isDefined(var_1._id_426A)) {
       stopFXOnTag(var_1._id_426A, self, var_1.tag);
+    }
   }
 }
 
@@ -579,14 +606,16 @@ _id_10109() {
 }
 
 _id_2473() {
-  foreach(var_1 in self._id_7560["thrust_vert"])
-  var_1._id_426A = playFXOnTag(scripts\engine\utility::getfx("closeup_thruster_fx"), self, var_1.tag);
+  foreach(var_1 in self._id_7560["thrust_vert"]) {
+    var_1._id_426A = playFXOnTag(scripts\engine\utility::getfx("closeup_thruster_fx"), self, var_1.tag);
+  }
 
   self waittill("death");
 
   foreach(var_1 in self._id_7560["thrust_vert"]) {
-    if(isDefined(var_1._id_426A))
+    if(isDefined(var_1._id_426A)) {
       stopFXOnTag(var_1._id_426A, self, var_1.tag);
+    }
   }
 }
 

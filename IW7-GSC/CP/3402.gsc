@@ -10,8 +10,9 @@ callback_zombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
     return;
   }
   if(var_4 == "MOD_SUICIDE") {
-    if(isDefined(level.overcook_func[var_5]))
+    if(isDefined(level.overcook_func[var_5])) {
       level thread[[level.overcook_func[var_5]]](var_12, var_5);
+    }
   }
 
   var_13 = isDefined(var_4) && (var_4 == "MOD_EXPLOSIVE" || var_4 == "MOD_GRENADE_SPLASH" || var_4 == "MOD_PROJECTILE_SPLASH");
@@ -28,21 +29,24 @@ callback_zombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
 
   if(var_18) {
     if(var_1 == self) {
-      if(issubstr(var_5, "iw7_harpoon2_zm") || issubstr(var_5, "iw7_harpoon1_zm") || issubstr(var_5, "iw7_acid_rain_projectile_zm"))
+      if(issubstr(var_5, "iw7_harpoon2_zm") || issubstr(var_5, "iw7_harpoon1_zm") || issubstr(var_5, "iw7_acid_rain_projectile_zm")) {
         var_2 = 0;
+      }
 
-      if(issubstr(var_5, "venomx"))
+      if(issubstr(var_5, "venomx")) {
         var_2 = 0;
+      }
 
       if(var_13) {
         var_24 = self getstance();
 
-        if(var_17)
+        if(var_17) {
           var_2 = 0;
-        else if(isDefined(self.has_fortified_passive) && self.has_fortified_passive && (self issprintsliding() || (var_24 == "crouch" || var_24 == "prone") && self isonground()))
+        } else if(isDefined(self.has_fortified_passive) && self.has_fortified_passive && (self issprintsliding() || (var_24 == "crouch" || var_24 == "prone") && self isonground())) {
           var_2 = 0;
-        else
+        } else {
           var_2 = get_explosive_damage_on_player(var_0, var_1, var_2, var_3, var_4, var_5);
+        }
       }
 
       switch (var_5) {
@@ -64,10 +68,11 @@ callback_zombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
       if(var_16) {
         if(scripts\cp\utility::is_ricochet_damage()) {
           if(isPlayer(var_1) && isDefined(var_8) && var_8 != "shield") {
-            if(isDefined(var_0))
+            if(isDefined(var_0)) {
               var_1 dodamage(var_2, var_1.origin - (0, 0, 50), var_1, var_0, var_4);
-            else
+            } else {
               var_1 dodamage(var_2, var_1.origin, var_1);
+            }
           }
 
           var_2 = 0;
@@ -85,23 +90,26 @@ callback_zombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
 
       var_25 = gettime();
 
-      if(!isDefined(self.last_zombie_hit_time) || var_25 - self.last_zombie_hit_time > 20)
+      if(!isDefined(self.last_zombie_hit_time) || var_25 - self.last_zombie_hit_time > 20) {
         self.last_zombie_hit_time = var_25;
-      else
+      } else {
         return;
+      }
 
       var_26 = 500;
 
-      if(getdvarint("zom_damage_shield_duration") != 0)
+      if(getdvarint("zom_damage_shield_duration") != 0) {
         var_26 = getdvarint("zom_damage_shield_duration");
+      }
 
       if(isDefined(var_1.last_damage_time_on_player[self.vo_prefix])) {
         var_27 = var_1.last_damage_time_on_player[self.vo_prefix];
 
-        if(var_27 + var_26 > gettime())
+        if(var_27 + var_26 > gettime()) {
           var_2 = 0;
-        else
+        } else {
           var_1.last_damage_time_on_player[self.vo_prefix] = gettime();
+        }
       } else
         var_1.last_damage_time_on_player[self.vo_prefix] = gettime();
     } else if(var_20)
@@ -110,31 +118,35 @@ callback_zombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
     if(var_14) {
       var_24 = self getstance();
 
-      if(var_17)
+      if(var_17) {
         var_2 = 0;
-      else if(isDefined(self.has_fortified_passive) && self.has_fortified_passive && (self issprintsliding() || (var_24 == "crouch" || var_24 == "prone") && self isonground()))
+      } else if(isDefined(self.has_fortified_passive) && self.has_fortified_passive && (self issprintsliding() || (var_24 == "crouch" || var_24 == "prone") && self isonground())) {
         var_2 = 0;
-      else if(!var_16 || var_1 == self && var_8 == "none")
+      } else if(!var_16 || var_1 == self && var_8 == "none") {
         var_2 = 0;
+      }
     }
   } else if(var_17 && var_4 == "MOD_SUICIDE") {
-    if(var_5 == "frag_grenade_zm" || var_5 == "cluster_grenade_zm")
+    if(var_5 == "frag_grenade_zm" || var_5 == "cluster_grenade_zm") {
       var_2 = 0;
+    }
   } else {
     var_24 = self getstance();
 
     if(isDefined(self.has_fortified_passive) && self.has_fortified_passive && (self issprintsliding() || (var_24 == "crouch" || var_24 == "prone") && self isonground())) {
-      if(var_5 == "frag_grenade_zm" || var_5 == "cluster_grenade_zm")
+      if(var_5 == "frag_grenade_zm" || var_5 == "cluster_grenade_zm") {
         var_2 = 0;
+      }
     }
   }
 
   if(var_4 == "MOD_FALLING") {
-    if(scripts\cp\utility::_hasperk("specialty_falldamage"))
+    if(scripts\cp\utility::_hasperk("specialty_falldamage")) {
       var_2 = 0;
-    else if(var_2 > 10) {
-      if(var_2 > self.health * 0.15)
+    } else if(var_2 > 10) {
+      if(var_2 > self.health * 0.15) {
         var_2 = int(self.health * 0.15);
+      }
     } else
       var_2 = 0;
   }
@@ -142,27 +154,31 @@ callback_zombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
   var_28 = 0.0;
 
   if(var_18 && var_1 scripts\cp\utility::is_zombie_agent() && scripts\engine\utility::is_true(self.linked_to_player)) {
-    if(self.health - var_2 < 1)
+    if(self.health - var_2 < 1) {
       var_2 = self.health - 1;
+    }
   }
 
-  if(var_19 || var_20 || var_21 || var_22 && !var_23)
+  if(var_19 || var_20 || var_21 || var_22 && !var_23) {
     var_2 = int(var_2 * var_12 scripts\cp\utility::getdamagemodifiertotal());
+  }
 
-  if(isDefined(self.linked_to_coaster))
+  if(isDefined(self.linked_to_coaster)) {
     var_2 = int(max(self.maxhealth / 2.75, var_2));
+  }
 
   if(var_12 scripts\cp\utility::is_consumable_active("secret_service") && isalive(var_1)) {
     var_29 = !isDefined(var_1.agent_type) || var_19 || !var_20 || !var_21 || scripts\engine\utility::is_true(var_1.is_suicide_bomber) || !scripts\engine\utility::is_true(var_1.entered_playspace);
     var_30 = isDefined(var_1.agent_type) && (var_19 && (!var_20 || !var_21 || scripts\engine\utility::is_true(var_1.is_suicide_bomber) || !scripts\engine\utility::is_true(var_1.entered_playspace)));
     var_30 = 0;
 
-    if(isDefined(var_1.agent_type) && (var_1.agent_type != "generic_zombie" || !scripts\engine\utility::is_true(var_1.entered_playspace)))
+    if(isDefined(var_1.agent_type) && (var_1.agent_type != "generic_zombie" || !scripts\engine\utility::is_true(var_1.entered_playspace))) {
       var_30 = 0;
-    else if(var_1 scripts\cp\utility::agentisfnfimmune())
+    } else if(var_1 scripts\cp\utility::agentisfnfimmune()) {
       var_30 = 0;
-    else
+    } else {
       var_30 = 1;
+    }
 
     if(var_30) {
       var_1 thread scripts\cp\crafted_trap_revocator::turn_zombie(var_12);
@@ -191,15 +207,17 @@ callback_zombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
     thread scripts\cp\cp_hud_util::zom_player_damage_flash();
 
     if(isagent(var_1)) {
-      if(!isDefined(var_1.damage_done))
+      if(!isDefined(var_1.damage_done)) {
         var_1.damage_done = 0;
-      else
+      } else {
         var_1.damage_done = var_1.damage_done + var_2;
+      }
 
       self.recent_attacker = var_1;
 
-      if(isDefined(level.current_challenge))
+      if(isDefined(level.current_challenge)) {
         self[[level.custom_playerdamage_challenge_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+      }
     }
   }
 }
@@ -210,8 +228,9 @@ delete_entities_on_death() {
   scripts\engine\utility::waittill_any("death", "disconnect");
 
   if(isDefined(self)) {
-    if(isDefined(self.scrnfx_obj))
+    if(isDefined(self.scrnfx_obj)) {
       self.scrnfx_obj delete();
+    }
   }
 }
 
@@ -237,13 +256,15 @@ _id_50F9(var_0) {
 }
 
 get_explosive_damage_on_player(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     return var_2;
+  }
 
   var_6 = getweaponbasename(var_5);
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     return var_2;
+  }
 
   switch (var_6) {
     case "iw7_chargeshot_zm":
@@ -333,10 +354,11 @@ _id_791A(var_0, var_1, var_2, var_3, var_4, var_5) {
 _id_100B8(var_0) {
   var_1 = 20;
 
-  if(var_0 == 0)
+  if(var_0 == 0) {
     return 0;
-  else
+  } else {
     return self.haveinvulnerabilityavailable && var_0 > self.health && var_0 < self.health + var_1;
+  }
 }
 
 usingremoteandwillbelowhealth(var_0) {
@@ -355,52 +377,65 @@ useinvulnerability(var_0) {
 }
 
 shouldtakedamage(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_2) && (issubstr(var_2, "venomx") || var_2 == "zmb_imsprojectile_mp" || var_2 == "zmb_fireworksprojectile_mp") || var_2 == "sentry_minigun_mp" || var_2 == "zmb_robotprojectile_mp" || var_2 == "iw7_electrictrap_zm")
+  if(isDefined(var_2) && (issubstr(var_2, "venomx") || var_2 == "zmb_imsprojectile_mp" || var_2 == "zmb_fireworksprojectile_mp") || var_2 == "sentry_minigun_mp" || var_2 == "zmb_robotprojectile_mp" || var_2 == "iw7_electrictrap_zm") {
     return 0;
+  }
 
-  if(isDefined(var_2) && var_2 == "bolasprayprojhome_mp")
+  if(isDefined(var_2) && var_2 == "bolasprayprojhome_mp") {
     return 0;
+  }
 
-  if(isDefined(var_3) && (var_3 == 256 || var_3 == 258))
+  if(isDefined(var_3) && (var_3 == 256 || var_3 == 258)) {
     return 0;
+  }
 
-  if(isDefined(self.inlaststand) && self.inlaststand)
+  if(isDefined(self.inlaststand) && self.inlaststand) {
     return 0;
+  }
 
-  if(gettime() < self.damageshieldexpiretime)
+  if(gettime() < self.damageshieldexpiretime) {
     return 0;
+  }
 
-  if(isDefined(self.ability_invulnerable))
+  if(isDefined(self.ability_invulnerable)) {
     return 0;
+  }
 
-  if(isDefined(var_1) && isDefined(var_1.is_neil))
+  if(isDefined(var_1) && isDefined(var_1.is_neil)) {
     return 0;
+  }
 
-  if(scripts\engine\utility::is_true(self.is_off_grid))
+  if(scripts\engine\utility::is_true(self.is_off_grid)) {
     return 0;
+  }
 
-  if(isDefined(self.is_fast_traveling))
+  if(isDefined(self.is_fast_traveling)) {
     return 0;
+  }
 
-  if(isDefined(self.linked_to_boat))
+  if(isDefined(self.linked_to_boat)) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_F29B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(isDefined(var_1)) {
-    if(var_1 == "xm25_mp" && var_0 == "MOD_IMPACT")
+    if(var_1 == "xm25_mp" && var_0 == "MOD_IMPACT") {
       var_2 = 95;
+    }
 
-    if(var_1 == "spider_beam_mp")
+    if(var_1 == "spider_beam_mp") {
       var_2 = var_2 * 15;
+    }
 
     if(var_1 == "alienthrowingknife_mp" && var_0 == "MOD_IMPACT") {
-      if(scripts\cp\cp_damage::can_hypno(var_3, 0, var_4, var_0, var_1, var_5, var_6, var_7, var_8, var_9))
+      if(scripts\cp\cp_damage::can_hypno(var_3, 0, var_4, var_0, var_1, var_5, var_6, var_7, var_8, var_9)) {
         var_2 = 20000;
-      else if(scripts\cp\cp_agent_utils::get_agent_type(self) != "elite")
+      } else if(scripts\cp\cp_agent_utils::get_agent_type(self) != "elite") {
         var_2 = 500;
+      }
     }
   }
 
@@ -408,15 +443,17 @@ _id_F29B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 }
 
 update_damage_score(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(isDefined(var_1) && isDefined(var_1.owner))
+  if(isDefined(var_1) && isDefined(var_1.owner)) {
     scripts\cp\cp_agent_utils::store_attacker_info(var_1.owner, var_2 * 0.75);
-  else if(isDefined(var_1) && isDefined(var_1.pet) && var_1.pet == 1)
+  } else if(isDefined(var_1) && isDefined(var_1.pet) && var_1.pet == 1) {
     scripts\cp\cp_agent_utils::store_attacker_info(var_1.owner, var_2);
-  else
+  } else {
     scripts\cp\cp_agent_utils::store_attacker_info(var_1, var_2);
+  }
 
-  if(isDefined(var_1) && isDefined(var_5))
+  if(isDefined(var_1) && isDefined(var_5)) {
     level thread update_zombie_damage_challenge(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, self);
+  }
 
   update_zombie_damage_challenge(var_1, var_2, var_4);
 }
@@ -431,16 +468,18 @@ update_zombie_damage_challenge(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
   if(isDefined(var_1) && isPlayer(var_1)) {
     var_11 = self[[level._id_4C44]](var_0, var_1, var_2, var_4, var_5, var_7, var_8, var_9, var_10);
 
-    if(!scripts\engine\utility::is_true(var_11))
+    if(!scripts\engine\utility::is_true(var_11)) {
       return;
+    }
   }
 }
 
 update_zombie_damage_challenge(var_0, var_1, var_2) {
-  if(isDefined(level.update_zombie_damage_challenge))
+  if(isDefined(level.update_zombie_damage_challenge)) {
     [[level.update_zombie_damage_challenge]](var_0, var_1, var_2);
-  else
+  } else {
     update_performance_zombie_damage(var_0, var_1, var_2);
+  }
 }
 
 update_performance_zombie_damage(var_0, var_1, var_2) {
@@ -455,10 +494,11 @@ update_performance_zombie_damage(var_0, var_1, var_2) {
   }
   scripts\cp\cp_gamescore::update_team_encounter_performance(scripts\cp\cp_gamescore::get_team_score_component_name(), "damage_done_on_alien", var_1);
 
-  if(isPlayer(var_0))
+  if(isPlayer(var_0)) {
     var_0 scripts\cp\cp_gamescore::update_personal_encounter_performance("personal", "damage_done_on_alien", var_1);
-  else if(isDefined(var_0.owner))
+  } else if(isDefined(var_0.owner)) {
     var_0.owner scripts\cp\cp_gamescore::update_personal_encounter_performance("personal", "damage_done_on_alien", var_1);
+  }
 }
 
 _id_2189(var_0, var_1, var_2) {
@@ -466,14 +506,16 @@ _id_2189(var_0, var_1, var_2) {
 }
 
 stun_zap(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(isDefined(self.stun_struct))
+  if(isDefined(self.stun_struct)) {
     return 0;
+  }
 
   var_7 = gettime();
 
   if(isDefined(self._id_A918) && !isDefined(var_5)) {
-    if(var_7 < self._id_A918)
+    if(var_7 < self._id_A918) {
       return;
+    }
   }
 
   self._id_A918 = var_7 + 500;
@@ -481,36 +523,42 @@ stun_zap(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_9 = 0;
   var_10 = 4;
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 256;
+  }
 
   var_11 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
   var_12 = scripts\engine\utility::get_array_of_closest(var_1.origin, var_11, undefined, var_10, var_4, 1);
 
-  if(scripts\engine\utility::array_contains(var_12, var_1))
+  if(scripts\engine\utility::array_contains(var_12, var_1)) {
     var_12 = scripts\engine\utility::array_remove(var_12, var_1);
+  }
 
   if(var_12.size >= 1) {
-    if(!isDefined(self.stun_struct))
+    if(!isDefined(self.stun_struct)) {
       self.stun_struct = spawnStruct();
+    }
 
-    if(scripts\engine\utility::is_true(var_5))
+    if(scripts\engine\utility::is_true(var_5)) {
       var_2 = int(var_2);
-    else
+    } else {
       var_2 = int(var_2 * 0.5);
+    }
 
     var_13 = ["j_crotch", "j_hip_le", "j_hip_ri"];
     var_0 = var_1 gettagorigin(scripts\engine\utility::random(var_13));
 
-    if(issubstr(var_1.agent_type, "alien"))
+    if(issubstr(var_1.agent_type, "alien")) {
       var_0 = var_1 gettagorigin("j_spine4");
+    }
 
     foreach(var_15 in var_12) {
       if(isDefined(var_15) && var_15 != var_1 && isalive(var_15) && !scripts\engine\utility::is_true(var_15.stunned)) {
         var_8 = 1;
 
-        if(scripts\engine\utility::is_true(var_5))
+        if(scripts\engine\utility::is_true(var_5)) {
           var_15.shockmelee = 1;
+        }
 
         var_15 _id_1118C(self, var_2, var_3, var_0);
         var_9++;
@@ -530,8 +578,9 @@ stun_zap(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_1.shockmelee = 1;
   }
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     self notify(var_6);
+  }
 
   return var_8;
 }
@@ -546,39 +595,44 @@ _id_1118C(var_0, var_1, var_2, var_3) {
   }
   var_5 = ["j_crotch", "j_hip_le", "j_hip_ri", "j_shoulder_le", "j_shoulder_ri", "j_chest"];
 
-  if(issubstr(self.agent_type, "alien"))
+  if(issubstr(self.agent_type, "alien")) {
     var_4 = self gettagorigin("j_spine4");
-  else
+  } else {
     var_4 = self gettagorigin(scripts\engine\utility::random(var_5));
+  }
 
   if(isDefined(var_4)) {
     playfxbetweenpoints(level._effect["blue_ark_beam"], var_3, vectortoangles(var_3 - var_4), var_4);
     wait 0.05;
 
-    if(isDefined(self) && var_2 == "MOD_MELEE")
+    if(isDefined(self) && var_2 == "MOD_MELEE") {
       self playSound("zombie_fence_shock");
+    }
 
     wait 0.05;
     var_6 = int(var_1);
     scripts\common\fx::playfxnophase(level._effect["stun_shock"], var_4);
 
-    if(isDefined(self))
+    if(isDefined(self)) {
       thread _id_1118E(var_0, var_2, var_6, "stun_ammo_mp");
+    }
   }
 }
 
 _id_1118E(var_0, var_1, var_2, var_3) {
   self endon("death");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_4 = var_2;
-  else
+  } else {
     var_4 = 100;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_5 = var_3;
-  else
+  } else {
     var_5 = "iw7_stunbolt_zm";
+  }
 
   if(!scripts\asm\zombie\zombie::_id_9F87()) {
     self.stunned = 1;
@@ -588,10 +642,11 @@ _id_1118E(var_0, var_1, var_2, var_3) {
 
   thread _id_E093(1);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self dodamage(var_4, self.origin, var_0, var_0, var_1, var_5);
-  else
+  } else {
     self dodamage(var_4, self.origin, undefined, undefined, var_1, var_5);
+  }
 }
 
 _id_E093(var_0) {
@@ -608,65 +663,78 @@ monitordamage(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon("death");
   level endon("game_ended");
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 0;
+  }
 
   self setCanDamage(1);
   self.health = 999999;
   self.maxhealth = var_0;
   self.damagetaken = 0;
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 0;
+  }
 
   for(var_6 = 1; var_6; var_6 = monitordamageoneshot(var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_16, var_1, var_2, var_3, var_4)) {
     self waittill("damage", var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_16);
 
-    if(var_5)
+    if(var_5) {
       self playRumbleOnEntity("damage_light");
+    }
 
     if(isDefined(self.helitype) && self.helitype == "littlebird") {
-      if(!isDefined(self.attackers))
+      if(!isDefined(self.attackers)) {
         self.attackers = [];
+      }
 
       var_17 = "";
 
-      if(isDefined(var_8) && isPlayer(var_8))
+      if(isDefined(var_8) && isPlayer(var_8)) {
         var_17 = var_8 scripts\cp\utility::getuniqueid();
+      }
 
-      if(isDefined(self.attackers[var_17]))
+      if(isDefined(self.attackers[var_17])) {
         self.attackers[var_17] = self.attackers[var_17] + var_7;
-      else
+      } else {
         self.attackers[var_17] = var_7;
+      }
     }
   }
 }
 
 monitordamageoneshot(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return 0;
+  }
 
-  if(isDefined(var_1) && !scripts\cp\utility::isgameparticipant(var_1) && !isDefined(var_1.allowmonitoreddamage))
+  if(isDefined(var_1) && !scripts\cp\utility::isgameparticipant(var_1) && !isDefined(var_1.allowmonitoreddamage)) {
     return 1;
+  }
 
   return 1;
 }
 
 isfriendlyfire(var_0, var_1) {
-  if(!level.teambased)
+  if(!level.teambased) {
     return 0;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 0;
+  }
 
-  if(!isPlayer(var_1) && !isDefined(var_1.team))
+  if(!isPlayer(var_1) && !isDefined(var_1.team)) {
     return 0;
+  }
 
-  if(var_0.team != var_1.team)
+  if(var_0.team != var_1.team) {
     return 0;
+  }
 
-  if(var_0 == var_1)
+  if(var_0 == var_1) {
     return 0;
+  }
 
   return 1;
 }
@@ -678,8 +746,9 @@ finishplayerdamagewrapper(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
   if(!isalive(self)) {
     return;
   }
-  if(isPlayer(self))
+  if(isPlayer(self)) {
     self finishplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
+  }
 
   damageshellshockandrumble(var_0, var_5, var_4, var_2, var_3, var_1);
 }
@@ -696,8 +765,9 @@ callback_killingblow(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
 damageshellshockandrumble(var_0, var_1, var_2, var_3, var_4, var_5) {
   thread onweapondamage(var_0, var_1, var_2, var_3, var_5);
 
-  if(!isai(self))
+  if(!isai(self)) {
     self playRumbleOnEntity("damage_heavy");
+  }
 }
 
 onweapondamage(var_0, var_1, var_2, var_3, var_4) {
@@ -706,8 +776,9 @@ onweapondamage(var_0, var_1, var_2, var_3, var_4) {
 
   switch (var_1) {
     default:
-      if(allowshellshockondamage(var_1) && !isai(var_4))
+      if(allowshellshockondamage(var_1) && !isai(var_4)) {
         scripts\cp\cp_weapon::shellshockondamage(var_2, var_3);
+      }
 
       break;
   }

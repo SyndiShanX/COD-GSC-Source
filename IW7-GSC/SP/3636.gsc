@@ -49,8 +49,9 @@ _id_2A35() {
 
       var_0 = 1.4;
 
-      if(!var_3)
+      if(!var_3) {
         _id_2A33(var_1);
+      }
 
       _id_2A2C(var_1);
       self allowfire(1);
@@ -84,8 +85,9 @@ _id_2A2C(var_0) {
   setomnvar("ui_hide_weapon_info", 0);
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.bar))
+    if(isDefined(var_2.bar)) {
       var_2.bar destroy();
+    }
 
     var_2 destroy();
   }
@@ -183,13 +185,15 @@ _id_2A33(var_0) {
           var_1 = var_3;
         }
 
-        if(isDefined(var_1))
+        if(isDefined(var_1)) {
           self switchtoweapon(var_1);
+        }
       } else
         thread scripts\sp\utility::play_sound_on_entity("weap_steeldragon_off");
 
-      while(self attackButtonPressed())
+      while(self attackButtonPressed()) {
         wait 0.05;
+      }
     }
 
     wait 0.05;
@@ -200,8 +204,9 @@ _id_FC1E() {
   self endon("beam_rifle_off");
   wait 0.35;
 
-  if(self attackButtonPressed())
+  if(self attackButtonPressed()) {
     thread scripts\engine\utility::play_loop_sound_on_entity("weap_steeldragon_lp");
+  }
 }
 
 _id_2A22() {
@@ -209,13 +214,15 @@ _id_2A22() {
   var_1 = 0.5;
 
   for(;;) {
-    while(!self adsButtonPressed())
+    while(!self adsButtonPressed()) {
       wait 0.05;
+    }
 
     self _meth_81DE(var_0, var_1);
 
-    while(self adsButtonPressed())
+    while(self adsButtonPressed()) {
       wait 0.05;
+    }
 
     self _meth_81DE(65, var_1);
     wait 0.05;
@@ -228,9 +235,9 @@ _id_28C6(var_0, var_1, var_2, var_3, var_4) {
   var_7 = anglestoup(level.player getplayerangles());
   var_8 = undefined;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_8 = var_0;
-  else {
+  } else {
     var_8 = level.player getEye();
     var_8 = var_8 + var_6 * 5;
     var_8 = var_8 + var_7 * -5;
@@ -238,19 +245,20 @@ _id_28C6(var_0, var_1, var_2, var_3, var_4) {
 
   var_9 = undefined;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_9 = var_1;
-  else {
+  } else {
     var_9 = level.player getEye();
     var_9 = var_9 + var_7 * -1;
   }
 
   var_10 = undefined;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_10 = var_2;
-  else
+  } else {
     var_10 = var_9 + var_5 * 99999;
+  }
 
   var_11 = scripts\common\trace::ray_trace(var_9, var_10, level.player);
   var_12 = var_11;
@@ -259,8 +267,9 @@ _id_28C6(var_0, var_1, var_2, var_3, var_4) {
   var_14 = distance2d(var_9, var_10);
   var_15 = int(var_14 / var_13);
 
-  if(var_15 > 100)
+  if(var_15 > 100) {
     var_15 = 100;
+  }
 
   var_16 = var_8;
 
@@ -283,13 +292,15 @@ _id_28C6(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(distance2d(var_10, level.player.origin) > 56) {
-    if(isDefined(var_11["entity"]) && isDefined(var_11["entity"]._id_9D77))
+    if(isDefined(var_11["entity"]) && isDefined(var_11["entity"]._id_9D77)) {
       var_11["entity"] notify("damage", 96, level.player, undefined, undefined, undefined, undefined, undefined, "j_head", undefined, "iw7_steeldragon");
+    }
 
     var_19 = 75;
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_19 = var_4;
+    }
 
     radiusdamage(var_11["position"], 56, var_19, var_19, level.player, "MOD_EXPLOSIVE", "iw7_steeldragon");
   }
@@ -299,8 +310,9 @@ _id_28C6(var_0, var_1, var_2, var_3, var_4) {
     playFX(scripts\engine\utility::getfx("beam_rifle_decal"), var_12["position"], anglesToForward(var_20), anglestoup(var_20));
 
     if(isDefined(var_11["entity"]) || var_11["surfacetype"] == "surftype_default") {
-      if(!isDefined(var_3))
+      if(!isDefined(var_3)) {
         level._id_EFFE = 0.75;
+      }
 
       if(isDefined(var_11["entity"])) {
         return;
@@ -310,8 +322,9 @@ _id_28C6(var_0, var_1, var_2, var_3, var_4) {
       return;
     }
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       level._id_EFFE = 0.5625;
+    }
 
     if(scripts\engine\utility::cointoss()) {
       playFX(scripts\engine\utility::getfx("beam_rifle_smoke"), var_12["position"]);
@@ -398,15 +411,17 @@ _id_2A25(var_0) {
 }
 
 _id_2A34(var_0) {
-  if(var_0 > 100)
+  if(var_0 > 100) {
     var_0 = 100;
-  else if(var_0 <= 0)
+  } else if(var_0 <= 0) {
     var_0 = 0;
+  }
 
-  if(var_0 == 0)
+  if(var_0 == 0) {
     self._id_2A2E = 1;
-  else
+  } else {
     self._id_2A2E = 0;
+  }
 
   self._id_2A23 = var_0;
   var_1 = self._id_2A23 / 100;

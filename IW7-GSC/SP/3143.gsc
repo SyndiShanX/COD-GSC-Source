@@ -8,10 +8,11 @@ _id_351B() {
   thread _id_D310();
   self notify("begin_rodeo");
 
-  if(self._blackboard.rodeorequested == "left")
+  if(self._blackboard.rodeorequested == "left") {
     var_0 = "right";
-  else
+  } else {
     var_0 = "left";
+  }
 
   if(var_0 == "right") {
     self clearanim(_id_0A1E::_id_2356("aimset_right", "arm_pitch"), 0.2);
@@ -40,9 +41,9 @@ _id_351B() {
     var_4 = level.player scripts\sp\utility::_id_7D74(1);
     var_4 = scripts\engine\utility::array_sort_with_func(var_4, ::_id_445F);
 
-    if(_id_7D6D(var_3) <= _id_7D6D(var_4[0]))
+    if(_id_7D6D(var_3) <= _id_7D6D(var_4[0])) {
       self._id_D34D = var_3;
-    else {
+    } else {
       self._id_D34D = var_4[0];
       level.player switchtoweapon(self._id_D34D);
     }
@@ -62,8 +63,9 @@ _id_351B() {
   _id_361A(var_0);
   var_6 = "rodeo_left";
 
-  if(var_0 == "left")
+  if(var_0 == "left") {
     var_6 = "rodeo_right";
+  }
 
   self _meth_82E7("RodeoJump", _id_0A1E::_id_2356(var_6, "jump_" + self._id_E5F8), 1, 0.2, 1);
   _id_0A1E::_id_231F("rodeo", "RodeoJump", ::_id_35EE);
@@ -90,8 +92,9 @@ _id_351B() {
   if(var_7 == 2) {
     thread _id_D3F0(self._id_D267, var_0);
 
-    if(var_0 == "right")
+    if(var_0 == "right") {
       _id_10907();
+    }
 
     var_9 = _id_0A1E::_id_2356(var_6, "hit");
     self _meth_82E7("RodeoHit", var_9, 1, 0.2, 1);
@@ -112,8 +115,9 @@ _id_351B() {
     thread _id_D3ED(self._id_D267, var_0);
     self _meth_82E7("RodeoDismount", var_10, 1, 0.2, 1);
 
-    if(var_0 == "left")
+    if(var_0 == "left") {
       self _meth_82A2(_id_0A1E::_id_2356("rodeo_right", "fire"), 1, 0.2, 1);
+    }
 
     _id_0A1E::_id_231F("rodeo", "RodeoDismount", ::_id_35EE);
     self._id_30EA = 1;
@@ -186,8 +190,9 @@ _id_35F1(var_0, var_1, var_2) {
   var_6 makeunusable();
   var_6 delete();
 
-  while(self islegacyagent(var_0) < 0.99)
+  while(self islegacyagent(var_0) < 0.99) {
     wait 0.05;
+  }
 
   self._id_D267._id_3919 = 1;
   return var_3;
@@ -256,8 +261,9 @@ _id_35F2(var_0) {
   var_0 _meth_82B1(var_0._id_11169, var_7);
   level.player _meth_81DE(var_11, getanimlength(var_1) * (1 - var_5) / var_7);
 
-  while(self islegacyagent(var_1) < 1)
+  while(self islegacyagent(var_1) < 1) {
     scripts\engine\utility::waitframe();
+  }
 
   self _meth_82B1(var_1, 0);
   var_0 _meth_82B1(var_0._id_11169, 0);
@@ -325,11 +331,13 @@ _id_35F3() {
   if(!isalive(level.player)) {
     return;
   }
-  if(scripts\sp\utility::_id_93A6())
+  if(scripts\sp\utility::_id_93A6()) {
     level.player.health = var_1;
+  }
 
-  if(!var_0)
+  if(!var_0) {
     level._id_470F = undefined;
+  }
 }
 
 _id_A661(var_0) {
@@ -454,8 +462,9 @@ _id_6D73() {
 _id_12DE6() {
   var_0 = 1;
 
-  if(self._id_B3C3 == 0)
+  if(self._id_B3C3 == 0) {
     var_0 = 3;
+  }
 
   self._id_B3C3 = self._id_B3C3 + var_0;
   wait 1;
@@ -519,8 +528,9 @@ _id_361C(var_0) {
   var_1 _meth_83D0(#animtree);
   var_2 = level.player _meth_84C6("currentViewModel");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_1 setModel(var_2);
+  }
 
   var_1 hide();
   var_1._id_3508 = var_0;
@@ -576,8 +586,9 @@ _id_D3FA(var_0, var_1) {
   var_2 = "rodeoMount";
   var_3 = % titan_c12_rodeo_player_mount;
 
-  if(var_1 == "left")
+  if(var_1 == "left") {
     var_3 = % titan_c12_rodeo_gun_player_mount;
+  }
 
   var_0 animScripted(var_2, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_3);
   var_0 scripts\anim\shared::donotetracks(var_2, ::_id_D403);
@@ -588,8 +599,9 @@ _id_D3F0(var_0, var_1) {
   var_2 = "rodeoHit";
   var_3 = % titan_c12_rodeo_player_hit;
 
-  if(var_1 == "left")
+  if(var_1 == "left") {
     var_3 = % titan_c12_rodeo_gun_player_hit;
+  }
 
   var_0 animScripted(var_2, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_3);
   var_0 scripts\anim\shared::donotetracks(var_2, ::_id_D403);
@@ -599,10 +611,11 @@ _id_D3F2(var_0, var_1) {
   _id_E5FE(" --- PlayerRig_HitQuickMiss");
   var_2 = "rodeoQuickMiss";
 
-  if(var_1 == "right")
+  if(var_1 == "right") {
     var_0 animScripted(var_2, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), %titan_c12_rodeo_player_miss_quick);
-  else
+  } else {
     var_0 _meth_82E7(var_2, %titan_c12_rodeo_gun_player_miss_quick);
+  }
 
   var_0 scripts\anim\shared::donotetracks(var_2, ::_id_D403);
 }
@@ -611,10 +624,11 @@ _id_D3F3(var_0, var_1) {
   _id_E5FE(" --- PlayerRig_Idle");
   var_2 = "rodeoIdle";
 
-  if(var_1 == "right")
+  if(var_1 == "right") {
     var_0 animScripted(var_2, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), %titan_c12_rodeo_player_idle);
-  else
+  } else {
     var_0 _meth_82E7(var_2, %titan_c12_rodeo_gun_player_idle);
+  }
 
   var_0 scripts\anim\shared::donotetracks(var_2, ::_id_D403);
 }
@@ -631,8 +645,9 @@ _id_D3ED(var_0, var_1) {
   var_2 = "rodeoDismount";
   var_3 = % titan_c12_rodeo_player_dismount;
 
-  if(var_1 == "left")
+  if(var_1 == "left") {
     var_3 = % titan_c12_rodeo_gun_player_dismount;
+  }
 
   thread _id_D3EF(var_0, var_1, var_3);
   var_0 animScripted(var_2, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_3);
@@ -644,8 +659,9 @@ _id_D3F6(var_0, var_1, var_2) {
   var_3 = "rodeoKnockOff";
   var_4 = % titan_c12_rodeo_player_miss_knockoff;
 
-  if(var_1 == "left")
+  if(var_1 == "left") {
     var_4 = % titan_c12_rodeo_gun_player_miss_knockoff;
+  }
 
   thread _id_D3F7(var_0, var_1, var_2);
   var_0 animScripted(var_3, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_4);
@@ -653,25 +669,28 @@ _id_D3F6(var_0, var_1, var_2) {
 }
 
 _id_35EE(var_0) {
-  if(scripts\sp\anim_notetrack::_id_C0DB(var_0))
+  if(scripts\sp\anim_notetrack::_id_C0DB(var_0)) {
     return;
+  }
 }
 
 _id_D403(var_0, var_1) {
   if(scripts\sp\anim_notetrack::_id_C0DB(var_0)) {
     return;
   }
-  if(self._id_13CCC == "right")
+  if(self._id_13CCC == "right") {
     var_2 = "tag_knife_attach2";
-  else
+  } else {
     var_2 = "tag_accessory_left";
+  }
 
   var_3 = self._id_3508;
 
   switch (var_0) {
     case "attach_rocket":
-      if(isDefined(self._id_3508._id_E601))
+      if(isDefined(self._id_3508._id_E601)) {
         var_3._id_E601 delete();
+      }
 
       self attach(level._id_EC8C["asm_c12_rodeo_rocket"], var_2, 1);
       break;
@@ -739,8 +758,9 @@ _id_D3EF(var_0, var_1, var_2) {
   level.player unlink();
   var_0 delete();
 
-  if(!isDefined(var_0._id_13CC9))
+  if(!isDefined(var_0._id_13CC9)) {
     thread _id_D3EE(var_1);
+  }
 
   self.ignoreall = 0;
   self._id_595F = undefined;
@@ -749,11 +769,13 @@ _id_D3EF(var_0, var_1, var_2) {
   wait 0.3;
   level.player.ignoreme = 0;
 
-  if(!self._id_D461)
+  if(!self._id_D461) {
     level.player _meth_80A1();
+  }
 
-  if(var_1 == "left")
+  if(var_1 == "left") {
     _id_0A05::_id_3634("c12AchievementRodeoLeft");
+  }
 }
 
 _id_D3EE(var_0) {
@@ -774,13 +796,15 @@ _id_D3EE(var_0) {
     setsaveddvar("bg_quickWeaponSwitchSpeedScaleSP", var_3 / var_4);
     var_5 = int(weaponclipsize(self._id_D34D) * 0.5);
 
-    if(level.player getweaponammoclip(self._id_D34D) < var_5)
+    if(level.player getweaponammoclip(self._id_D34D) < var_5) {
       level.player setweaponammoclip(self._id_D34D, var_5);
+    }
 
     setslowmotion(1, 0.2, 0.2);
 
-    while(isDefined(level.player getlinkedparent()) && isalive(self))
+    while(isDefined(level.player getlinkedparent()) && isalive(self)) {
       wait 0.05;
+    }
 
     setsaveddvar("perk_quickDrawSpeedScaleSP", var_1);
     setsaveddvar("perk_quickDrawSpeedScaleSniperSP", var_2);
@@ -914,10 +938,11 @@ _id_D3F7(var_0, var_1, var_2) {
   thread _id_0F3D::_id_50E8(0);
   level.player _meth_84AF(0);
 
-  if(var_1 == "right")
+  if(var_1 == "right") {
     var_3 = "tag_brass_ri";
-  else
+  } else {
     var_3 = "tag_missile_bottom_back_le";
+  }
 
   var_4 = self gettagorigin(var_3);
   var_5 = vectorNormalize(level.player.origin - var_4);
@@ -925,8 +950,9 @@ _id_D3F7(var_0, var_1, var_2) {
   level.player setvelocity(var_6);
   level.player viewkick(75, var_4);
 
-  if(!self._id_D461)
+  if(!self._id_D461) {
     level.player _meth_80A1();
+  }
 
   level.player dodamage(level.player.health * 0.6, var_4, self);
   wait 0.2;
@@ -961,6 +987,7 @@ _id_D310() {
   level.player scripts\engine\utility::allow_weapon(1);
   level.player.ignoreme = 0;
 
-  if(!self._id_D461)
+  if(!self._id_D461) {
     level.player _meth_80A1();
+  }
 }

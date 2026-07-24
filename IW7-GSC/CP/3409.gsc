@@ -10,8 +10,9 @@ _id_96F4() {
   scripts\engine\utility::flag_init("power_on");
   level.power_off_func = ::_id_D744;
 
-  foreach(var_1 in level.generators)
-  _id_95FC(var_1);
+  foreach(var_1 in level.generators) {
+    _id_95FC(var_1);
+  }
 }
 
 _id_95FC(var_0) {
@@ -26,8 +27,9 @@ _id_95FC(var_0) {
       continue;
     }
 
-    if(var_4.script_noteworthy == "box")
+    if(var_4.script_noteworthy == "box") {
       var_0._id_2F12 = var_4;
+    }
   }
 }
 
@@ -35,16 +37,18 @@ _id_D744(var_0, var_1) {
   var_2 = level.generators;
 
   foreach(var_4 in var_2) {
-    if(scripts\engine\utility::is_true(var_4.powered_on))
+    if(scripts\engine\utility::is_true(var_4.powered_on)) {
       level thread _id_7736(var_4);
+    }
   }
 
   level notify("power_off");
 }
 
 _id_7736(var_0) {
-  while(!isDefined(level.current_interaction_structs))
+  while(!isDefined(level.current_interaction_structs)) {
     wait 1;
+  }
 
   thread _id_7758(var_0);
   var_1 = var_0.script_parameters;
@@ -56,8 +60,9 @@ _id_7736(var_0) {
       continue;
     }
 
-    if(scripts\engine\utility::flag_exist(var_4 + " power_on"))
+    if(scripts\engine\utility::flag_exist(var_4 + " power_on")) {
       scripts\engine\utility::flag_clear(var_4 + " power_on");
+    }
   }
 
   var_0.powered_on = undefined;
@@ -65,17 +70,19 @@ _id_7736(var_0) {
 }
 
 _id_7758(var_0) {
-  if(var_0.handle.script_noteworthy == "roll")
+  if(var_0.handle.script_noteworthy == "roll") {
     var_0.handle rotateroll(-60, 0.5);
-  else if(var_0.handle.script_noteworthy == "-roll")
+  } else if(var_0.handle.script_noteworthy == "-roll") {
     var_0.handle rotateroll(60, 0.5);
-  else if(var_0.handle.script_noteworthy == "pitch")
+  } else if(var_0.handle.script_noteworthy == "pitch") {
     var_0.handle rotatepitch(-60, 0.5);
-  else if(var_0.handle.script_noteworthy == "-pitch")
+  } else if(var_0.handle.script_noteworthy == "-pitch") {
     var_0.handle rotatepitch(60, 0.5);
+  }
 
-  if(isDefined(var_0._id_7735))
+  if(isDefined(var_0._id_7735)) {
     var_0._id_7735 delete();
+  }
 }
 
 _id_129A2(var_0) {
@@ -85,14 +92,17 @@ _id_129A2(var_0) {
 generic_generator(var_0, var_1) {
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 thread scripts\cp\utility::firegesturegrenade(var_1, "iw7_powerlever_zm");
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level.players[0];
+  }
 
-  if(isDefined(var_0.target))
+  if(isDefined(var_0.target)) {
     _id_7759(var_0, var_1);
+  }
 
   var_2 = var_0.script_parameters;
   var_3 = strtok(var_2, ",");
@@ -112,16 +122,18 @@ generic_generator(var_0, var_1) {
 
     level notify(var_5 + " power_on");
 
-    if(scripts\engine\utility::flag_exist(var_5 + " power_on"))
+    if(scripts\engine\utility::flag_exist(var_5 + " power_on")) {
       scripts\engine\utility::flag_set(var_5 + " power_on");
+    }
   }
 
   scripts\engine\utility::waitframe();
   level notify("activate_power");
   var_1 thread scripts\cp\cp_vo::try_to_play_vo("activate_power", "zmb_comment_vo", "medium", 4, 0, 0, 0, 50);
 
-  if(isDefined(level.power_vo_func))
+  if(isDefined(level.power_vo_func)) {
     thread[[level.power_vo_func]](var_1);
+  }
 
   wait 0.5;
   level thread _id_DE6F();
@@ -143,17 +155,19 @@ _id_7759(var_0, var_1) {
   level endon("power_off");
   wait 0.2;
 
-  if(var_0.handle.script_noteworthy == "roll")
+  if(var_0.handle.script_noteworthy == "roll") {
     var_0.handle rotateroll(75, 0.15);
-  else if(var_0.handle.script_noteworthy == "-roll")
+  } else if(var_0.handle.script_noteworthy == "-roll") {
     var_0.handle rotateroll(-75, 0.15);
-  else if(var_0.handle.script_noteworthy == "pitch")
+  } else if(var_0.handle.script_noteworthy == "pitch") {
     var_0.handle rotatepitch(75, 0.15);
-  else if(var_0.handle.script_noteworthy == "-pitch")
+  } else if(var_0.handle.script_noteworthy == "-pitch") {
     var_0.handle rotatepitch(-75, 0.15);
+  }
 
-  if(isDefined(var_0._id_2F12))
+  if(isDefined(var_0._id_2F12)) {
     var_0._id_2F12 setscriptablepartstate("box", "on");
+  }
 
   var_0.powered_on = 1;
 }

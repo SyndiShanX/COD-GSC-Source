@@ -32,8 +32,9 @@ _id_73B1(var_0) {
   if(!isDefined(var_0)) {
     return;
   }
-  if(!isDefined(var_0.team))
+  if(!isDefined(var_0.team)) {
     var_0.team = "allies";
+  }
 
   if(isDefined(level._id_BFED)) {
     return;
@@ -72,8 +73,9 @@ _id_73B1(var_0) {
 
     var_8 = 0;
 
-    if(!isDefined(var_6))
+    if(!isDefined(var_6)) {
       var_6 = var_0.damageweapon;
+    }
 
     if(isDefined(level._id_740C)) {
       if(isDefined(var_2.damageowner)) {
@@ -83,26 +85,31 @@ _id_73B1(var_0) {
     }
 
     if(isDefined(level._id_740D)) {
-      if(isDefined(var_2) && isDefined(var_2.owner) && var_2.owner == level.player)
+      if(isDefined(var_2) && isDefined(var_2.owner) && var_2.owner == level.player) {
         var_8 = 1;
+      }
     }
 
     if(isPlayer(var_2)) {
       var_8 = 1;
 
-      if(isDefined(var_6) && var_6 == "none")
+      if(isDefined(var_6) && var_6 == "none") {
         var_8 = 0;
+      }
 
-      if(var_2 isusingturret())
+      if(var_2 isusingturret()) {
         var_8 = 1;
+      }
 
-      if(isDefined(var_7))
+      if(isDefined(var_7)) {
         var_8 = 1;
+      }
     } else if(isDefined(var_2.code_classname) && var_2.code_classname == "script_vehicle") {
       var_9 = var_2 _meth_816A();
 
-      if(isDefined(var_9) && isPlayer(var_9))
+      if(isDefined(var_9) && isPlayer(var_9)) {
         var_8 = 1;
+      }
     }
 
     if(!var_8) {
@@ -114,10 +121,11 @@ _id_73B1(var_0) {
     var_10 = var_0.team == level.player.team;
     var_11 = undefined;
 
-    if(isDefined(var_0.type) && var_0.type == "civilian")
+    if(isDefined(var_0.type) && var_0.type == "civilian") {
       var_11 = 1;
-    else
+    } else {
       var_11 = issubstr(var_0.classname, "civilian");
+    }
 
     var_12 = var_1 == -1;
 
@@ -138,20 +146,22 @@ _id_73B1(var_0) {
         continue;
       }
       if(var_12) {
-        if(isDefined(var_0._id_738F))
+        if(isDefined(var_0._id_738F)) {
           level.player._id_C929 = level.player._id_C929 + var_0._id_738F;
-        else
+        } else {
           level.player._id_C929 = level.player._id_C929 + level.friendlyfire["friend_kill_points"];
+        }
       } else
         level.player._id_C929 = level.player._id_C929 - var_1;
 
       _id_C92A();
 
       if(_id_3DA1(var_0, var_5) && _id_EB68()) {
-        if(var_12)
+        if(var_12) {
           return;
-        else
+        } else {
           continue;
+        }
       }
 
       if(isDefined(level._id_73B0)) {
@@ -172,8 +182,9 @@ _id_73AE(var_0) {
 
   var_1 = level._id_7417;
 
-  if(isDefined(level._id_740C) && var_0)
+  if(isDefined(level._id_740C) && var_0) {
     var_1 = 0;
+  }
 
   if(var_1) {
     return;
@@ -181,21 +192,25 @@ _id_73AE(var_0) {
   if(level._id_7416 == 1) {
     return;
   }
-  if(level.player._id_C929 <= level.friendlyfire["min_participation"])
+  if(level.player._id_C929 <= level.friendlyfire["min_participation"]) {
     level thread _id_B8CF(var_0);
+  }
 }
 
 _id_3DA1(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   var_2 = 0;
 
-  if(isDefined(var_0.damageweapon) && var_0.damageweapon == "none")
+  if(isDefined(var_0.damageweapon) && var_0.damageweapon == "none") {
     var_2 = 1;
+  }
 
-  if(isDefined(var_1) && var_1 == "MOD_GRENADE_SPLASH")
+  if(isDefined(var_1) && var_1 == "MOD_GRENADE_SPLASH") {
     var_2 = 1;
+  }
 
   return var_2;
 }
@@ -203,30 +218,34 @@ _id_3DA1(var_0, var_1) {
 _id_EB68() {
   var_0 = gettime();
 
-  if(var_0 < 4500)
+  if(var_0 < 4500) {
     return 1;
-  else if(var_0 - level._id_2668._id_A943 < 4500)
+  } else if(var_0 - level._id_2668._id_A943 < 4500) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_C92A() {
-  if(level.player._id_C929 > level.friendlyfire["max_participation"])
+  if(level.player._id_C929 > level.friendlyfire["max_participation"]) {
     level.player._id_C929 = level.friendlyfire["max_participation"];
+  }
 
-  if(level.player._id_C929 < level.friendlyfire["min_participation"])
+  if(level.player._id_C929 < level.friendlyfire["min_participation"]) {
     level.player._id_C929 = level.friendlyfire["min_participation"];
+  }
 }
 
 _id_C92B() {
   level endon("mission failed");
 
   for(;;) {
-    if(level.player._id_C929 > 0)
+    if(level.player._id_C929 > 0) {
       level.player._id_C929--;
-    else if(level.player._id_C929 < 0)
+    } else if(level.player._id_C929 < 0) {
       level.player._id_C929++;
+    }
 
     wait(level.friendlyfire["point_loss_interval"]);
   }
@@ -241,8 +260,9 @@ _id_129A9() {
 }
 
 _id_B8CF(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   if(getDvar("friendlyfire_dev_disabled") == "1") {
     return;
@@ -267,15 +287,17 @@ _id_B8CF(var_0) {
   if(isDefined(level.player._id_6AD1)) {
     return;
   }
-  if(var_0)
+  if(var_0) {
     setomnvar("ui_death_hint", 9);
-  else if(isDefined(level._id_4C51))
+  } else if(isDefined(level._id_4C51)) {
     _id_0B60::_id_F32D(level._id_4C51);
-  else
+  } else {
     setomnvar("ui_death_hint", 12);
+  }
 
-  if(isDefined(level._id_4C52))
+  if(isDefined(level._id_4C52)) {
     thread _id_0B60::_id_F330(level._id_4C52, 64, 64, 0);
+  }
 
   scripts\sp\utility::_id_B8D1();
 }
