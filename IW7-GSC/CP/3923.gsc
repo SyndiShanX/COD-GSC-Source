@@ -1,0 +1,720 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: 3923.gsc
+**************************************/
+
+_id_97C5() {
+  level._id_1BBA = spawnStruct();
+  _id_97C6(level._id_1BBA);
+  _id_97C8(level._id_1BBA);
+  _id_97C9(level._id_1BBA);
+  _id_97C7(level._id_1BBA);
+  _id_989F();
+  level._id_1BBA._id_A4E4 = 107.659;
+  level._id_1BBA._id_1108C = 99.4488;
+}
+
+_id_370B() {
+  _id_36F3();
+  _id_3703();
+}
+
+_id_36F3() {
+  iprintln("level.alienAnimData.jumpLaunchArrival_maxMoveDelta = " + _id_36F6("jump_launch_arrival"));
+}
+
+_id_3703() {
+  iprintln("level.alienAnimData.stopSoon_NotifyDist = " + _id_36F6("run_stop"));
+}
+
+_id_36F6(var_0) {
+  var_1 = 0;
+  var_2 = self getanimentrycount(var_0);
+
+  for(var_3 = 0; var_3 < var_2; var_3++) {
+    var_4 = self getanimentry(var_0, var_3);
+    var_5 = getmovedelta(var_4, 0, 1);
+    var_6 = lengthsquared(var_5);
+
+    if(var_6 > var_1)
+      var_1 = var_6;
+  }
+
+  return sqrt(var_1);
+}
+
+_id_97C6(var_0) {
+  var_0._id_38D2 = [];
+  var_0._id_38D2["alien_crawl_door"] = _id_DF12("traverse_group_1", [0], 0);
+  var_0._id_38D2["alien_jump_sidewall_l"] = _id_DF12("traverse_group_1", [1], 0);
+  var_0._id_38D2["alien_jump_sidewall_r"] = _id_DF12("traverse_group_1", [2], 0);
+  var_0._id_38D2["alien_leap_clear_height_54"] = _id_DF12("traverse_group_1", [3], 0);
+  var_0._id_38D2["alien_drone_traverse_corner_wall_crawl"] = _id_DF12("traverse_group_1", [4], 0);
+  var_0._id_38D2["alien_leap_clear_height_36"] = _id_DF12("traverse_group_1", [5], 0);
+  var_0._id_38D2["alien_leap_tree"] = _id_DF12("traverse_group_1", [6], 0);
+  var_0._id_38D2["alien_crawl_under_car"] = _id_DF12("traverse_group_1", [7], 0);
+  var_0._id_38D2["alien_crawl_on_car"] = _id_DF12("traverse_group_1", [8], 0);
+  var_0._id_38D2["alien_step_up_56"] = _id_DF12("traverse_group_1", [9], 0);
+  var_0._id_38D2["alien_step_down_56"] = _id_DF12("traverse_group_1", [10], 0);
+  var_0._id_38D2["alien_crawl_deadtree"] = _id_DF12("traverse_group_1", [11], 0);
+  var_0._id_38D2["alien_crawl_back_humvee"] = _id_DF12("traverse_group_1", [12], 0);
+  var_0._id_38D2["alien_crawl_car"] = _id_DF12("traverse_group_1", [13], 0);
+  var_0._id_38D2["alien_crawl_humvee"] = _id_DF12("traverse_group_1", [14], 0);
+  var_0._id_38D2["alien_crawl_sidecar"] = _id_DF12("traverse_group_1", [15], 0);
+  var_0._id_38D2["alien_crawl_sidehumvee"] = _id_DF12("traverse_group_1", [16], 0);
+  var_0._id_38D2["alien_under_fence"] = _id_DF12("traverse_group_1", [17, 24], 0);
+  var_0._id_38D2["alien_climb_up_spiral_tree"] = _id_DF12("traverse_group_1", [18], 1);
+  var_0._id_38D2["alien_climb_up_gutter_L"] = _id_DF12("traverse_group_1", [19], 0);
+  var_0._id_38D2["alien_climb_up_gutter_R"] = _id_DF12("traverse_group_1", [20], 0);
+  var_0._id_38D2["alien_climb_over_fence_112"] = _id_DF12("traverse_group_1", [21, 22, 23], 0);
+  var_0._id_38D2["alien_mantle_36"] = _id_DF12("traverse_group_2", [0], 0, 1);
+  var_0._id_38D2["alien_drone_traverse_climb_vault_8"] = _id_DF12("traverse_group_2", [1], 0, 1);
+  var_0._id_38D2["alien_drone_traverse_climb_over_fence"] = _id_DF12("traverse_group_2", [2], 0, 1);
+  var_0._id_38D2["alien_crawl_rail_vault_lodge"] = _id_DF12("traverse_group_2", [3], 0, 1);
+  var_0._id_38D2["alien_jump_rail_lodge"] = _id_DF12("traverse_group_2", [4], 0, 0);
+  var_0._id_38D2["alien_roof_to_ceiling"] = _id_DF12("traverse_group_2", [5], 0, 1);
+  var_0._id_38D2["alien_climb_over_fence_88"] = _id_DF12("traverse_group_2", [6], 0, 1);
+  var_0._id_38D2["alien_jump_down_100"] = _id_DF12("traverse_group_2", [7], 0, 1);
+  var_0._id_38D2["alien_jump_down_200"] = _id_DF12("traverse_group_2", [8], 0, 1);
+  var_0._id_38D2["alien_jump_up_70"] = _id_DF12("traverse_group_2", [9], 0, 1);
+  var_0._id_38D2["alien_jump_up_200"] = _id_DF12("traverse_group_2", [10], 0, 1);
+  var_0._id_38D2["alien_jump_down_straight"] = _id_DF12("traverse_group_2", [11], 0, 1);
+  var_0._id_38D2["alien_roof_to_ground"] = _id_DF12("traverse_group_2", [12], 0, 1);
+  var_0._id_38D2["alien_jump_up_128_rail_32"] = _id_DF12("traverse_group_2", [13], 0, 0);
+  var_0._id_38D2["alien_jump_up_128_rail_36"] = _id_DF12("traverse_group_2", [14], 0, 0);
+  var_0._id_38D2["alien_jump_up_128_rail_48"] = _id_DF12("traverse_group_2", [15], 0, 0);
+  var_0._id_38D2["alien_climb_up_rail_32_idle"] = _id_DF12("traverse_group_2", [16], 0, 1);
+  var_0._id_38D2["alien_climb_up_rail_32_run"] = _id_DF12("traverse_group_2", [17], 0, 1);
+  var_0._id_38D2["alien_mantle_32"] = _id_DF12("traverse_group_2", [18], 0, 1);
+  var_0._id_38D2["alien_mantle_48"] = _id_DF12("traverse_group_2", [19], 0, 1);
+  var_0._id_38D2["alien_jump_down_128_rail_32"] = _id_DF12("traverse_group_2", [20], 0, 1);
+  var_0._id_38D2["alien_jump_down_128_rail_36"] = _id_DF12("traverse_group_2", [21], 0, 1);
+  var_0._id_38D2["alien_jump_down_128_rail_48"] = _id_DF12("traverse_group_2", [22], 0, 1);
+  var_0._id_38D2["alien_climb_down_128_rail_36"] = _id_DF12("traverse_group_2", [23], 1, 1);
+  var_0._id_38D2["alien_mantle_crate_48"] = _id_DF12("traverse_group_2", [24], 0, 1);
+  var_0._id_38D2["alien_mantle_crate_64"] = _id_DF12("traverse_group_2", [25], 0, 1);
+  var_0._id_38D2["alien_jump_down_56_idle"] = _id_DF12("traverse_group_2", [26], 0, 1);
+  var_0._id_38D2["alien_jump_down_56_run"] = _id_DF12("traverse_group_2", [27], 0, 1);
+  var_0._id_38D2["alien_jump_up_56_idle"] = _id_DF12("traverse_group_2", [28], 0, 1);
+  var_0._id_38D2["alien_jump_up_56_run"] = _id_DF12("traverse_group_2", [29], 0, 1);
+  var_0._id_38D2["alien_jump_fence_88_enter_scale"] = _id_DF12("traverse_group_2", [30], 0, 0);
+  var_0._id_38D2["alien_jump_fence_88_exit_scale"] = _id_DF12("traverse_group_2", [31], 0, 1);
+  var_0._id_38D2["alien_jump_up_90_rail_32"] = _id_DF12("traverse_group_3", [0], 0, 0);
+  var_0._id_38D2["alien_jump_fence_high_to_low"] = _id_DF12("traverse_group_3", [1], 0, 0);
+  var_0._id_38D2["alien_jump_fence_low_to_high"] = _id_DF12("traverse_group_3", [2], 0, 1);
+  var_0._id_38D2["alien_jump_down_straight_forward_56"] = _id_DF12("traverse_group_3", [3], 0, 1);
+  var_0._id_38D2["alien_jump_down_straight_360_dlc"] = _id_DF12("traverse_group_3", [4], 0, 1);
+  var_0._id_38D2["alien_rail_32_jump_down_idle_dlc"] = _id_DF12("traverse_group_3", [5], 0, 1);
+  var_0._id_38D2["alien_rail_36_jump_down_idle_dlc"] = _id_DF12("traverse_group_3", [6], 0, 1);
+  var_0._id_38D2["alien_rail_48_jump_down_idle_dlc"] = _id_DF12("traverse_group_3", [7], 0, 1);
+  var_0._id_38D2["alien_climb_up"] = _id_DF12("traverse_climb_up");
+  var_0._id_38D2["alien_climb_down"] = _id_DF12("traverse_climb_down");
+  var_0._id_38D2["alien_climb_up_over_56"] = _id_DF12("traverse_climb_up_over_56");
+  var_0._id_38D2["alien_climb_over_56_down"] = _id_DF12("traverse_climb_over_56_down");
+  var_0._id_38D2["climb_up_end_jump_side_l"] = _id_DF12("climb_up_end_jump_side_l");
+  var_0._id_38D2["climb_up_end_jump_side_r"] = _id_DF12("climb_up_end_jump_side_r");
+  var_0._id_38D2["alien_climb_up_ledge_18_run"] = _id_DF12("traverse_climb_up_ledge_18_run");
+  var_0._id_38D2["alien_climb_up_ledge_18_idle"] = _id_DF12("traverse_climb_up_ledge_18_idle");
+  var_0._id_38D2["alien_wall_run"] = _id_DF12("run");
+}
+
+_id_97C8(var_0) {
+  level._id_1BBA._id_A4E2 = 907.029;
+  level._id_1BBA._id_A4E6 = 16.8476;
+  level._id_1BBA._id_A4E7 = 0.111111;
+  level._id_1BBA._id_A4E5 = [];
+  level._id_1BBA._id_A4E5["jump_launch_up"] = [];
+  level._id_1BBA._id_A4E5["jump_launch_level"] = [];
+  level._id_1BBA._id_A4E5["jump_launch_down"] = [];
+  level._id_1BBA._id_A4E5["jump_launch_up"][0] = (0.338726, 0, 0.940885);
+  level._id_1BBA._id_A4E5["jump_launch_up"][1] = (0.688542, 0, 0.725196);
+  level._id_1BBA._id_A4E5["jump_launch_up"][2] = (0.906517, 0, 0.422169);
+  level._id_1BBA._id_A4E5["jump_launch_level"][0] = (0.248516, 0, 0.968628);
+  level._id_1BBA._id_A4E5["jump_launch_level"][1] = (0.579155, 0, 0.815218);
+  level._id_1BBA._id_A4E5["jump_launch_level"][2] = (0.906514, 0, 0.422177);
+  level._id_1BBA._id_A4E5["jump_launch_down"][0] = (0.333125, 0, 0.942883);
+  level._id_1BBA._id_A4E5["jump_launch_down"][1] = (0.518112, 0, 0.855313);
+  level._id_1BBA._id_A4E5["jump_launch_down"][2] = (0.892489, 0, 0.451068);
+  level._id_1BBA._id_93B2 = [];
+  level._id_1BBA._id_93B2["jump_launch_up"] = [];
+  level._id_1BBA._id_93B2["jump_launch_level"] = [];
+  level._id_1BBA._id_93B2["jump_launch_down"] = [];
+  level._id_1BBA._id_93B2["jump_launch_up"]["jump_land_up"] = 0;
+  level._id_1BBA._id_93B2["jump_launch_up"]["jump_land_level"] = 1;
+  level._id_1BBA._id_93B2["jump_launch_up"]["jump_land_down"] = 2;
+  level._id_1BBA._id_93B2["jump_launch_level"]["jump_land_up"] = 3;
+  level._id_1BBA._id_93B2["jump_launch_level"]["jump_land_level"] = 4;
+  level._id_1BBA._id_93B2["jump_launch_level"]["jump_land_down"] = 5;
+  level._id_1BBA._id_93B2["jump_launch_down"]["jump_land_up"] = 6;
+  level._id_1BBA._id_93B2["jump_launch_down"]["jump_land_level"] = 7;
+  level._id_1BBA._id_93B2["jump_launch_down"]["jump_land_down"] = 8;
+  level._id_1BBA._id_93B2["jump_launch_up"]["jump_land_sidewall_high"] = 9;
+  level._id_1BBA._id_93B2["jump_launch_level"]["jump_land_sidewall_high"] = 9;
+  level._id_1BBA._id_93B2["jump_launch_down"]["jump_land_sidewall_high"] = 9;
+  level._id_1BBA._id_93B2["jump_launch_up"]["jump_land_sidewall_low"] = 9;
+  level._id_1BBA._id_93B2["jump_launch_level"]["jump_land_sidewall_low"] = 9;
+  level._id_1BBA._id_93B2["jump_launch_down"]["jump_land_sidewall_low"] = 9;
+}
+
+_id_97C9(var_0) {
+  var_0._id_C871 = [];
+  var_1 = [];
+  var_1["front"]["head"] = [0];
+  var_1["front"]["up_chest"] = [1];
+  var_1["front"]["low_chest"] = [1];
+  var_1["front"]["up_body_L"] = [1];
+  var_1["front"]["up_body_R"] = [2];
+  var_1["front"]["low_body_L"] = [2];
+  var_1["front"]["low_body_R"] = [2];
+  var_1["front"]["armor"] = [0];
+  var_1["front"]["soft"] = [0];
+  var_1["right"]["head"] = [0];
+  var_1["right"]["up_chest"] = [3];
+  var_1["right"]["low_chest"] = [3];
+  var_1["right"]["up_body_L"] = [3];
+  var_1["right"]["up_body_R"] = [2];
+  var_1["right"]["low_body_L"] = [4];
+  var_1["right"]["low_body_R"] = [4];
+  var_1["right"]["armor"] = [0];
+  var_1["right"]["soft"] = [0];
+  var_1["left"]["head"] = [0];
+  var_1["left"]["up_chest"] = [1];
+  var_1["left"]["low_chest"] = [1];
+  var_1["left"]["up_body_L"] = [5];
+  var_1["left"]["up_body_R"] = [5];
+  var_1["left"]["low_body_L"] = [6];
+  var_1["left"]["low_body_R"] = [6];
+  var_1["left"]["armor"] = [2];
+  var_1["left"]["soft"] = [2];
+  var_1["back"]["head"] = [0];
+  var_1["back"]["up_chest"] = [1];
+  var_1["back"]["low_chest"] = [1];
+  var_1["back"]["up_body_L"] = [1];
+  var_1["back"]["up_body_R"] = [7];
+  var_1["back"]["low_body_L"] = [7];
+  var_1["back"]["low_body_R"] = [7];
+  var_1["back"]["armor"] = [0];
+  var_1["back"]["soft"] = [0];
+  var_0._id_C871["idle"] = var_1;
+  var_2 = [];
+  var_2["front"]["head"] = [0];
+  var_2["front"]["up_chest"] = [9];
+  var_2["front"]["low_chest"] = [8];
+  var_2["front"]["up_body_L"] = [8];
+  var_2["front"]["up_body_R"] = [9];
+  var_2["front"]["low_body_L"] = [10];
+  var_2["front"]["low_body_R"] = [10];
+  var_2["front"]["armor"] = [0];
+  var_2["front"]["soft"] = [0];
+  var_2["right"]["head"] = [7];
+  var_2["right"]["up_chest"] = [7];
+  var_2["right"]["low_chest"] = [11];
+  var_2["right"]["up_body_L"] = [7];
+  var_2["right"]["up_body_R"] = [7];
+  var_2["right"]["low_body_L"] = [11];
+  var_2["right"]["low_body_R"] = [11];
+  var_2["right"]["armor"] = [0];
+  var_2["right"]["soft"] = [0];
+  var_2["left"]["head"] = [5];
+  var_2["left"]["up_chest"] = [5];
+  var_2["left"]["low_chest"] = [6];
+  var_2["left"]["up_body_L"] = [5];
+  var_2["left"]["up_body_R"] = [5];
+  var_2["left"]["low_body_L"] = [6];
+  var_2["left"]["low_body_R"] = [6];
+  var_2["left"]["armor"] = [0];
+  var_2["left"]["soft"] = [0];
+  var_2["back"]["head"] = [12];
+  var_2["back"]["up_chest"] = [12];
+  var_2["back"]["low_chest"] = [13];
+  var_2["back"]["up_body_L"] = [12];
+  var_2["back"]["up_body_R"] = [12];
+  var_2["back"]["low_body_L"] = [13];
+  var_2["back"]["low_body_R"] = [13];
+  var_2["back"]["armor"] = [0];
+  var_2["back"]["soft"] = [0];
+  var_0._id_C871["run"] = var_2;
+  var_3 = [];
+  var_3["front"]["head"] = [0];
+  var_3["front"]["up_chest"] = [1];
+  var_3["front"]["low_chest"] = [1];
+  var_3["front"]["up_body_L"] = [2];
+  var_3["front"]["up_body_R"] = [3];
+  var_3["front"]["low_body_L"] = [4];
+  var_3["front"]["low_body_R"] = [4];
+  var_3["front"]["armor"] = [0];
+  var_3["front"]["soft"] = [0];
+  var_3["right"]["head"] = [7];
+  var_3["right"]["up_chest"] = [7];
+  var_3["right"]["low_chest"] = [8];
+  var_3["right"]["up_body_L"] = [7];
+  var_3["right"]["up_body_R"] = [7];
+  var_3["right"]["low_body_L"] = [8];
+  var_3["right"]["low_body_R"] = [8];
+  var_3["right"]["armor"] = [0];
+  var_3["right"]["soft"] = [0];
+  var_3["left"]["head"] = [5];
+  var_3["left"]["up_chest"] = [5];
+  var_3["left"]["low_chest"] = [6];
+  var_3["left"]["up_body_L"] = [5];
+  var_3["left"]["up_body_R"] = [5];
+  var_3["left"]["low_body_L"] = [6];
+  var_3["left"]["low_body_R"] = [6];
+  var_3["left"]["armor"] = [0];
+  var_3["left"]["soft"] = [0];
+  var_3["back"]["head"] = [9];
+  var_3["back"]["up_chest"] = [9];
+  var_3["back"]["low_chest"] = [10];
+  var_3["back"]["up_body_L"] = [9];
+  var_3["back"]["up_body_R"] = [9];
+  var_3["back"]["low_body_L"] = [10];
+  var_3["back"]["low_body_R"] = [10];
+  var_3["back"]["armor"] = [0];
+  var_3["back"]["soft"] = [0];
+  var_0._id_C871["jump"] = var_3;
+  var_4 = [];
+  var_4["front"] = [0, 1];
+  var_4["right"] = [2];
+  var_4["left"] = [3];
+  var_4["back"] = [4];
+  var_0._id_C871["push_back"] = var_4;
+  var_5 = [];
+  var_5["front"] = [0];
+  var_5["right"] = [0];
+  var_5["left"] = [0];
+  var_5["back"] = [0];
+  var_0._id_C871["move_back"] = var_5;
+  var_6 = [];
+  var_6["front"] = [0, 1, 2];
+  var_6["right"] = [0, 1, 2];
+  var_6["left"] = [0, 1, 2];
+  var_6["back"] = [0, 1, 2];
+  var_0._id_C871["melee"] = var_6;
+  var_7 = [];
+  var_7["head"] = "head";
+  var_7["neck"] = "head";
+  var_7["torso_upper"] = "up_chest";
+  var_7["none"] = "up_chest";
+  var_7["torso_lower"] = "low_chest";
+  var_7["left_arm_upper"] = "up_body_L";
+  var_7["left_arm_lower"] = "up_body_L";
+  var_7["left_hand"] = "up_body_L";
+  var_7["right_arm_upper"] = "up_body_R";
+  var_7["right_arm_lower"] = "up_body_R";
+  var_7["right_hand"] = "up_body_R";
+  var_7["left_leg_upper"] = "low_body_L";
+  var_7["left_leg_lower"] = "low_body_L";
+  var_7["left_foot"] = "low_body_L";
+  var_7["right_leg_upper"] = "low_body_R";
+  var_7["right_leg_lower"] = "low_body_R";
+  var_7["right_foot"] = "low_body_R";
+  var_7["armor"] = "armor";
+  var_7["soft"] = "soft";
+  var_0._id_C871["hitLoc"] = var_7;
+  var_8 = [];
+  var_8[0] = "back";
+  var_8[1] = "back";
+  var_8[2] = "right";
+  var_8[3] = "right";
+  var_8[4] = "front";
+  var_8[5] = "left";
+  var_8[6] = "left";
+  var_8[7] = "back";
+  var_8[8] = "back";
+  var_0._id_C871["hitDirection"] = var_8;
+  var_9 = [];
+  var_9[0] = [0];
+  var_9[1] = [1];
+  var_9[2] = [2];
+  var_9[3] = [3];
+  var_9[4] = [4];
+  var_9[5] = [5];
+  var_9[6] = [6];
+  var_9[7] = [7];
+  var_9[8] = [8];
+  var_9[9] = [9];
+  var_9[10] = [10];
+  var_0._id_C871["idleToImpactMap"] = var_9;
+}
+
+_id_97C7(var_0) {
+  var_0._id_4E2D = [];
+  var_1 = [];
+  var_1["front"]["head"] = [0];
+  var_1["front"]["up_chest"] = [1];
+  var_1["front"]["low_chest"] = [1];
+  var_1["front"]["up_body_L"] = [1];
+  var_1["front"]["up_body_R"] = [2];
+  var_1["front"]["low_body_L"] = [2];
+  var_1["front"]["low_body_R"] = [2];
+  var_1["front"]["armor"] = [0];
+  var_1["front"]["soft"] = [0];
+  var_1["right"]["head"] = [0];
+  var_1["right"]["up_chest"] = [4];
+  var_1["right"]["low_chest"] = [3];
+  var_1["right"]["up_body_L"] = [4];
+  var_1["right"]["up_body_R"] = [4];
+  var_1["right"]["low_body_L"] = [2];
+  var_1["right"]["low_body_R"] = [2];
+  var_1["right"]["armor"] = [0];
+  var_1["right"]["soft"] = [0];
+  var_1["left"]["head"] = [0];
+  var_1["left"]["up_chest"] = [1];
+  var_1["left"]["low_chest"] = [1];
+  var_1["left"]["up_body_L"] = [1];
+  var_1["left"]["up_body_R"] = [2];
+  var_1["left"]["low_body_L"] = [5];
+  var_1["left"]["low_body_R"] = [5];
+  var_1["left"]["armor"] = [0];
+  var_1["left"]["soft"] = [0];
+  var_1["back"]["head"] = [0];
+  var_1["back"]["up_chest"] = [1];
+  var_1["back"]["low_chest"] = [1];
+  var_1["back"]["up_body_L"] = [1];
+  var_1["back"]["up_body_R"] = [2];
+  var_1["back"]["low_body_L"] = [2];
+  var_1["back"]["low_body_R"] = [2];
+  var_1["back"]["armor"] = [0];
+  var_1["back"]["soft"] = [0];
+  var_0._id_4E2D["idle"] = var_1;
+  var_2 = [];
+  var_2["front"]["head"] = [0];
+  var_2["front"]["up_chest"] = [1];
+  var_2["front"]["low_chest"] = [3];
+  var_2["front"]["up_body_L"] = [4];
+  var_2["front"]["up_body_R"] = [9];
+  var_2["front"]["low_body_L"] = [4];
+  var_2["front"]["low_body_R"] = [3];
+  var_2["front"]["armor"] = [0];
+  var_2["front"]["soft"] = [0];
+  var_2["right"]["head"] = [2];
+  var_2["right"]["up_chest"] = [1];
+  var_2["right"]["low_chest"] = [0];
+  var_2["right"]["up_body_L"] = [7];
+  var_2["right"]["up_body_R"] = [7];
+  var_2["right"]["low_body_L"] = [3];
+  var_2["right"]["low_body_R"] = [4];
+  var_2["right"]["armor"] = [0];
+  var_2["right"]["soft"] = [0];
+  var_2["left"]["head"] = [5];
+  var_2["left"]["up_chest"] = [5];
+  var_2["left"]["low_chest"] = [6];
+  var_2["left"]["up_body_L"] = [5];
+  var_2["left"]["up_body_R"] = [5];
+  var_2["left"]["low_body_L"] = [8];
+  var_2["left"]["low_body_R"] = [6];
+  var_2["left"]["armor"] = [0];
+  var_2["left"]["soft"] = [0];
+  var_2["back"]["head"] = [1];
+  var_2["back"]["up_chest"] = [5];
+  var_2["back"]["low_chest"] = [4];
+  var_2["back"]["up_body_L"] = [3];
+  var_2["back"]["up_body_R"] = [2];
+  var_2["back"]["low_body_L"] = [1];
+  var_2["back"]["low_body_R"] = [4];
+  var_2["back"]["armor"] = [0];
+  var_2["back"]["soft"] = [0];
+  var_0._id_4E2D["run"] = var_2;
+  var_3 = [];
+  var_3["front"]["head"] = [1];
+  var_3["front"]["up_chest"] = [0];
+  var_3["front"]["low_chest"] = [0];
+  var_3["front"]["up_body_L"] = [2];
+  var_3["front"]["up_body_R"] = [3];
+  var_3["front"]["low_body_L"] = [4];
+  var_3["front"]["low_body_R"] = [4];
+  var_3["front"]["armor"] = [1];
+  var_3["front"]["soft"] = [1];
+  var_3["right"]["head"] = [7];
+  var_3["right"]["up_chest"] = [7];
+  var_3["right"]["low_chest"] = [8];
+  var_3["right"]["up_body_L"] = [7];
+  var_3["right"]["up_body_R"] = [7];
+  var_3["right"]["low_body_L"] = [8];
+  var_3["right"]["low_body_R"] = [8];
+  var_3["right"]["armor"] = [1];
+  var_3["right"]["soft"] = [1];
+  var_3["left"]["head"] = [5];
+  var_3["left"]["up_chest"] = [5];
+  var_3["left"]["low_chest"] = [6];
+  var_3["left"]["up_body_L"] = [5];
+  var_3["left"]["up_body_R"] = [5];
+  var_3["left"]["low_body_L"] = [6];
+  var_3["left"]["low_body_R"] = [6];
+  var_3["left"]["armor"] = [1];
+  var_3["left"]["soft"] = [1];
+  var_3["back"]["head"] = [9];
+  var_3["back"]["up_chest"] = [9];
+  var_3["back"]["low_chest"] = [10];
+  var_3["back"]["up_body_L"] = [9];
+  var_3["back"]["up_body_R"] = [9];
+  var_3["back"]["low_body_L"] = [10];
+  var_3["back"]["low_body_R"] = [10];
+  var_3["back"]["armor"] = [1];
+  var_3["back"]["soft"] = [1];
+  var_0._id_4E2D["jump"] = var_3;
+  var_4 = [];
+  var_4["head"] = "head";
+  var_4["neck"] = "head";
+  var_4["torso_upper"] = "up_chest";
+  var_4["none"] = "up_chest";
+  var_4["torso_lower"] = "low_chest";
+  var_4["left_arm_upper"] = "up_body_L";
+  var_4["left_arm_lower"] = "up_body_L";
+  var_4["left_hand"] = "up_body_L";
+  var_4["right_arm_upper"] = "up_body_R";
+  var_4["right_arm_lower"] = "up_body_R";
+  var_4["right_hand"] = "up_body_R";
+  var_4["left_leg_upper"] = "low_body_L";
+  var_4["left_leg_lower"] = "low_body_L";
+  var_4["left_foot"] = "low_body_L";
+  var_4["right_leg_upper"] = "low_body_R";
+  var_4["right_leg_lower"] = "low_body_R";
+  var_4["right_foot"] = "low_body_R";
+  var_4["armor"] = "armor";
+  var_4["soft"] = "soft";
+  var_0._id_4E2D["hitLoc"] = var_4;
+  var_5 = [];
+  var_5[0] = "back";
+  var_5[1] = "back";
+  var_5[2] = "right";
+  var_5[3] = "right";
+  var_5[4] = "front";
+  var_5[5] = "left";
+  var_5[6] = "left";
+  var_5[7] = "back";
+  var_5[8] = "back";
+  var_0._id_4E2D["hitDirection"] = var_5;
+  var_6 = [];
+  var_6["electric_shock_death"] = [0];
+  var_6["traverse"] = [1];
+  var_0._id_4E2D["special"] = var_6;
+}
+
+_id_989F() {
+  level._id_1BBA._id_1BCD[0] = 40;
+  level._id_1BBA._id_1BCD[1] = 40;
+  level._id_1BBA._id_1BCD[2] = 20;
+}
+
+_id_DF12(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = [];
+  var_6["animState"] = var_0;
+
+  if(isDefined(var_1))
+    var_6["animIndexArray"] = var_1;
+
+  if(isDefined(var_2))
+    var_6["endInOriented"] = var_2;
+
+  if(isDefined(var_3))
+    var_6["flexHeightEndAtTraverseEnd"] = var_3;
+
+  if(isDefined(var_4))
+    var_6["traverseSound"] = var_4;
+
+  if(isDefined(var_5))
+    var_6["traverseAnimScale"] = var_5;
+
+  return var_6;
+}
+
+_id_129B5(var_0) {
+  var_1 = var_0.origin - self.origin;
+  return _id_129B7(var_1);
+}
+
+_id_129B7(var_0) {
+  var_1 = _id_81E1(anglesToForward(self.angles), var_0, anglestoup(self.angles));
+  self orientmode("face angle abs", self.angles);
+
+  if(var_1 != 4) {
+    self.statelocked = 1;
+
+    if(self.oriented)
+      self _meth_8281("anim angle delta");
+    else
+      self _meth_8281("anim deltas");
+
+    var_2 = _id_81E0();
+    scripts\anim\notetracks_mp::_id_CED5(var_2, var_1, "turn_in_place", "code_move");
+
+    if(!_id_0A49::_id_9C09())
+      self.statelocked = 0;
+
+    return 1;
+  }
+
+  return 0;
+}
+
+_id_81E0() {
+  if(isDefined(level._id_5750)) {
+    var_0 = [[level._id_5750]]();
+
+    if(isDefined(var_0))
+      return var_0;
+  }
+
+  var_0 = undefined;
+
+  switch (scripts\cp\cp_agent_utils::get_agent_type(self)) {
+    case "gargoyle_boss":
+    case "gargoyle":
+      var_0 = [[level._id_1B6B["gargoyle"]["turn_in_place_anim_state"]]]();
+  }
+
+  if(!isDefined(var_0))
+    var_0 = "turn_in_place";
+
+  return var_0;
+}
+
+_id_81E1(var_0, var_1, var_2) {
+  var_3 = undefined;
+  var_4 = undefined;
+  var_5 = _id_809E(var_0, var_1, var_2);
+  var_6 = var_5._id_E72A;
+  var_7 = var_5._id_DA69;
+  var_8 = 10;
+
+  if(var_7 > 0)
+    var_4 = int(ceil((180 - var_6 - var_8) / 45));
+  else
+    var_4 = int(floor((180 + var_6 + var_8) / 45));
+
+  var_4 = int(clamp(var_4, 0, 8));
+  return var_4;
+}
+
+_id_809E(var_0, var_1, var_2) {
+  var_3 = spawnStruct();
+  var_4 = vectorNormalize(_id_DA68(var_0, var_2));
+  var_5 = vectorNormalize(_id_DA68(var_1, var_2));
+  var_6 = vectorcross(var_5, var_2);
+  var_7 = vectorNormalize(_id_DA68(var_6, var_2));
+  var_8 = vectordot(var_4 * -1, var_7);
+  var_9 = vectordot(var_5, var_4);
+  var_9 = clamp(var_9, -1, 1);
+  var_10 = acos(var_9);
+  var_3._id_E72A = var_10;
+  var_3._id_DA69 = var_8;
+  return var_3;
+}
+
+_id_DA68(var_0, var_1) {
+  var_2 = vectordot(var_0, var_1);
+  var_3 = var_0 - var_1 * var_2;
+  return var_3;
+}
+
+_id_C864(var_0) {
+  return level._id_1BBA._id_C871["hitLoc"][var_0];
+}
+
+_id_C865(var_0) {
+  var_1 = scripts\anim\notetracks_mp::_id_7DBD(var_0);
+  return level._id_1BBA._id_C871["hitDirection"][var_1];
+}
+
+_id_4E0C(var_0) {
+  return level._id_1BBA._id_4E2D["hitLoc"][var_0];
+}
+
+_id_4E0D(var_0) {
+  var_1 = scripts\anim\notetracks_mp::_id_7DBD(var_0);
+  return level._id_1BBA._id_4E2D["hitDirection"][var_1];
+}
+
+_id_8043(var_0, var_1, var_2) {
+  var_3 = _id_7E59(var_1, var_2);
+  return var_0 + "_" + var_3;
+}
+
+_id_7E59(var_0, var_1) {
+  var_2 = scripts\cp\cp_agent_utils::get_agent_type(self);
+  var_3 = level._id_1BA4[var_2]._id_2552["heavy_damage_threshold"];
+
+  if(var_0 < var_3 && !var_1)
+    return "light";
+  else
+    return "heavy";
+}
+
+_id_8042(var_0, var_1, var_2) {
+  var_1 = _id_C865(var_1 * -1);
+
+  if(isDefined(var_2))
+    var_2 = _id_C864(var_2);
+
+  return _id_8044(var_0, var_1, var_2, level._id_1BBA._id_C871);
+}
+
+_id_7F10(var_0) {
+  var_1 = level._id_1BBA._id_C871["idleToImpactMap"][var_0];
+  var_2 = randomintrange(0, var_1.size);
+  return var_1[var_2];
+}
+
+_id_7E62(var_0, var_1) {
+  var_2 = _id_7E59(var_1, 0);
+  return var_0 + "_" + var_2;
+}
+
+_id_7E61(var_0, var_1, var_2) {
+  var_1 = _id_4E0D(var_1 * -1);
+  var_2 = _id_4E0C(var_2);
+  return _id_8044(var_0, var_1, var_2, level._id_1BBA._id_4E2D);
+}
+
+_id_8044(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_2))
+    var_4 = var_3[var_0][var_1][var_2];
+  else
+    var_4 = var_3[var_0][var_1];
+
+  return var_4[randomint(var_4.size)];
+}
+
+_id_8146(var_0) {
+  var_1 = level._id_1BBA._id_4E2D["special"][var_0];
+  return var_1[randomint(var_1.size)];
+}
+
+_id_E26A(var_0, var_1) {
+  var_2 = getEnt(var_0, "targetname");
+  var_2 setscriptablepartstate("animpart", 0);
+}
+
+_id_CED8(var_0, var_1, var_2) {
+  var_3 = getEnt(var_0, "targetname");
+
+  if(!isDefined(var_3)) {
+    return;
+  }
+  if(!isDefined(var_2))
+    var_2 = 1;
+
+  var_3 setscriptablepartstate("animpart", var_2);
+  level notify("scriptable", var_0);
+}
+
+_id_7F66(var_0) {
+  var_1 = getanimlength(var_0);
+  return min(0.2, var_1);
+}
+
+_id_8088(var_0, var_1, var_2, var_3) {
+  var_4 = getanimlength(var_0);
+  var_5 = getmovedelta(var_0, 0, var_3 / var_4);
+  var_6 = rotatevector(var_5, var_2);
+  return var_1 + var_6;
+}
+
+_id_58EA(var_0, var_1) {
+  self endon("death");
+  level endon("game_ended");
+  self _meth_827B(self.origin, var_0, var_1);
+  wait(var_1);
+  self _meth_8281("anim deltas");
+}

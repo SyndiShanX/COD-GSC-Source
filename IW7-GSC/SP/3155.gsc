@@ -1,0 +1,269 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: 3155.gsc
+**************************************/
+
+_id_B063(var_0, var_1, var_2, var_3) {
+  _id_0A1E::_id_235F(var_0, var_1, var_2, self.moveplaybackrate);
+}
+
+_id_B064(var_0, var_1, var_2, var_3) {}
+
+_id_F171(var_0, var_1, var_2, var_3) {
+  var_4 = getclosestpointonnavmesh(self.origin);
+  var_5 = distancesquared(var_4, self.origin);
+
+  if(var_5 > squared(15))
+    return 1;
+
+  return 0;
+}
+
+_id_11701(var_0, var_1) {
+  var_2 = anim.asm[var_0].states[var_1];
+  var_3 = undefined;
+
+  if(isarray(var_2._id_116FB))
+    var_3 = var_2._id_116FB[0];
+  else
+    var_3 = var_2._id_116FB;
+
+  scripts\asm\asm::_id_2388(var_0, var_1, var_2, var_2._id_116FB);
+  scripts\asm\asm::_id_238A(var_0, var_3, 0.2, undefined, undefined, undefined);
+  self notify("killanimscript");
+}
+
+_id_F16E(var_0, var_1, var_2, var_3) {
+  var_4 = anim.asm[var_0].states[var_1]._id_71A5;
+  var_5 = self[[var_4]](var_0, var_1, var_3);
+  var_6 = getanimlength(var_5);
+  self _meth_82E4("deathanim", var_5, _id_0A1E::asm_getbodyknob(), 1, 0.1);
+  wait(var_6);
+  self notify("terminate_ai_threads");
+  self notify("killanimscript");
+}
+
+_id_F16C(var_0, var_1, var_2, var_3) {
+  if(isDefined(self._id_2029))
+    self._id_2029 delete();
+
+  self._id_EA0E = 1;
+  stopFXOnTag(level._id_7649["seeker_" + self.team], self, "tag_fx");
+  self _meth_8484();
+  self _meth_8481(self.origin);
+
+  if(isDefined(self._id_B14F)) {
+    self notify("stop_magic_bullet_shield");
+    self._id_B14F = undefined;
+    self.damageshield = 0;
+    self notify("internal_stop_magic_bullet_shield");
+  }
+
+  playFX(level._id_7649["seeker_sparks"], self gettagorigin("tag_fx"));
+  playworldsound("seeker_expire", self.origin);
+  self hudoutlinedisable();
+  self notify("terminate_ai_threads");
+  self notify("killanimscript");
+  self delete();
+}
+
+isfactorinuse(var_0, var_1, var_2, var_3) {
+  if(!isDefined(self.pathgoalpos))
+    return 0;
+
+  var_4 = vectortoangles(self.lookaheaddir);
+  self orientmode("face angle", var_4[1]);
+  var_5 = vectordot(vectorNormalize((self.lookaheaddir[0], self.lookaheaddir[1], 0)), anglesToForward(self.angles));
+  var_6 = 0.966;
+  return var_5 > var_6;
+}
+
+_id_D55F(var_0, var_1, var_2, var_3) {
+  self endon("death");
+  var_4 = self _meth_8148();
+  var_5 = scripts\engine\utility::drop_to_ground(var_4.origin, 5.0);
+  var_6 = self _meth_8146();
+  var_6 = scripts\engine\utility::drop_to_ground(var_6, 5.0);
+  self orientmode("face angle", var_4.angles[1]);
+  var_7 = distance(var_5, var_6);
+  var_8 = scripts\sp\utility::_id_BD6B(20, var_7);
+  var_9 = 30;
+  var_10 = 1 / (var_9 * var_8);
+  var_11 = 0;
+  var_12 = 0;
+
+  while(!var_12) {
+    if(var_11 > 1) {
+      var_11 = 1;
+      var_12 = 1;
+    }
+
+    var_13 = vectorlerp(var_5, var_6, var_11);
+    var_11 = var_11 + var_10;
+    self _meth_80F1(var_13, self.angles, 10000);
+    scripts\engine\utility::waitframe();
+  }
+
+  self _meth_80F1(var_6, self.angles, 10000);
+  _id_11701(var_0, var_1);
+}
+
+_id_CF22(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = self _meth_8148();
+  var_5 = var_4._id_5AE2;
+  var_6 = var_5 - var_4.origin;
+  thread _id_D561(var_0, var_1, var_2, [var_6[2]]);
+}
+
+_id_CF20(var_0, var_1, var_2, var_3) {
+  _id_CF22(var_0, var_1, var_2, -8);
+}
+
+_id_CF27(var_0, var_1, var_2, var_3) {
+  _id_CF22(var_0, var_1, var_2, -42);
+}
+
+_id_CF23(var_0, var_1, var_2, var_3) {
+  self endon("death");
+  var_4 = self.origin;
+  var_5 = getclosestpointonnavmesh(var_4, self);
+  var_5 = scripts\engine\utility::drop_to_ground(var_5, 50.0);
+  var_6 = 0;
+  _id_A4E8(var_0, var_1, var_2, var_4, self.angles, var_5, var_6, 1);
+  scripts\asm\asm::asm_fireevent(var_1, "end");
+}
+
+_id_CF25(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = self _meth_8148();
+  var_5 = self _meth_8146();
+  var_6 = var_5 - var_4.origin;
+  var_6 = (var_6[0], var_6[1], 0);
+  _id_D561(var_0, var_1, var_2, [var_6[2]]);
+}
+
+_id_3EA3(var_0, var_1, var_2) {
+  return scripts\asm\asm::asm_lookupanimfromalias("traverse_external", var_2);
+}
+
+_id_D561(var_0, var_1, var_2, var_3) {
+  self endon("death");
+  var_4 = self _meth_8148();
+  var_5 = scripts\engine\utility::drop_to_ground(var_4.origin, 5.0);
+  var_6 = self _meth_8146();
+  var_6 = scripts\engine\utility::drop_to_ground(var_6, 5.0);
+  var_7 = 0;
+
+  if(isDefined(var_3)) {
+    if(isarray(var_3))
+      var_7 = var_3[0];
+    else
+      var_7 = var_3;
+  } else if(isDefined(var_4._id_126D4))
+    var_7 = var_4._id_126D5;
+
+  _id_A4E8(var_0, var_1, var_2, var_5, var_4.angles, var_6, var_7, 0);
+  _id_11701(var_0, var_1);
+}
+
+_id_A4E8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  self animmode("noclip");
+  self.useanimgoalweight = 1;
+  var_8 = 16;
+  var_9 = (0, 0, 5);
+  var_10 = var_3 + var_9;
+  var_11 = var_5 + var_9;
+  var_12 = max(var_8, var_6 + var_8);
+  var_13 = (var_11 + var_10) * 0.5;
+  var_14 = var_13[2];
+  var_15 = var_12 + var_10[2] - var_14;
+  var_16 = var_13 + (0, 0, 1) * var_15;
+
+  if(var_7) {
+    var_17 = scripts\common\trace::create_solid_ai_contents(1);
+    var_18 = scripts\common\trace::ray_trace(var_16, var_10, self, var_17);
+    var_19 = scripts\common\trace::ray_trace(var_16, var_11, self, var_17);
+
+    if(var_18["fraction"] < 0.95 || var_19["fraction"] < 0.95)
+      return;
+  }
+
+  var_20 = _id_3EA3(var_0, var_1, "takeoff");
+  self clearanim(_id_0A1E::asm_getbodyknob(), var_2);
+  self _meth_82EA(var_1, var_20, 1, var_2, 1);
+  wait(getanimlength(var_20) - 0.1);
+  var_21 = distance(var_10, var_16) + distance(var_11, var_16);
+  var_22 = scripts\sp\utility::_id_BD6B(25, var_21);
+  var_23 = 30;
+  var_24 = 1 / (var_23 * var_22);
+  self orientmode("face angle", var_4[1]);
+  _id_F154(self.groundtype);
+  thread scripts\sp\utility::play_sound_on_entity("seeker_jump_start");
+  var_25 = _id_3EA3(var_0, var_1, "jumploop");
+  self clearanim(_id_0A1E::asm_getbodyknob(), var_2);
+  self _meth_82EA(var_1, var_25, 1, var_2, 1);
+  self._id_A481 = scripts\engine\utility::spawn_tag_origin();
+  self._id_A481 linkTo(self, "tag_origin", (0, 0, 0), (90, 0, 0));
+  playFXOnTag(level._id_7649["seeker_thruster"], self._id_A481, "tag_origin");
+  var_26 = 0;
+  var_27 = 0;
+  var_28 = 0;
+
+  while(!var_27) {
+    if(var_26 > 1) {
+      var_26 = 1;
+      var_27 = 1;
+    }
+
+    var_29 = scripts\sp\math::_id_7BC5(var_10, var_11, var_15, var_26);
+    var_26 = var_26 + var_24;
+    self _meth_80F1(var_29, self.angles, 10000);
+
+    if(var_26 > 0.7 && !var_28) {
+      var_25 = _id_3EA3(var_0, var_1, "fallloop");
+      self clearanim(_id_0A1E::asm_getbodyknob(), var_2);
+      self _meth_82EA(var_1, var_25, 1, var_2, 1);
+      killfxontag(level._id_7649["seeker_thruster"], self, "tag_origin");
+      var_28 = 1;
+    }
+
+    scripts\engine\utility::waitframe();
+  }
+
+  self._id_A481 delete();
+  self _meth_80F1(var_11, self.angles, 10000);
+  _id_F154(self.groundtype);
+  var_30 = _id_3EA3(var_0, var_1, "land");
+  self clearanim(_id_0A1E::asm_getbodyknob(), var_2);
+  self _meth_82EA(var_1, var_30, 1, var_2, 1);
+  thread scripts\sp\utility::play_sound_on_entity("seeker_jump_end");
+  wait(getanimlength(var_30) - 0.05);
+  self.useanimgoalweight = 0;
+}
+
+_id_F154(var_0) {
+  if(!isDefined(var_0)) {
+    return;
+  }
+  if(isDefined(anim.optionalstepeffects) && isDefined(anim.optionalstepeffects[var_0])) {
+    if(!isDefined(level._effect["step_" + var_0][self.unittype])) {
+      if(!isDefined(level._effect["step_" + var_0]["soldier"])) {
+        return;
+      }
+      level._effect["step_" + var_0][self.unittype] = level._effect["step_" + var_0]["soldier"];
+    }
+
+    scripts\anim\notetracks::playfootstepeffect("tag_origin", var_0);
+  }
+}
+
+_id_9FBC(var_0, var_1, var_2, var_3) {
+  if(!isDefined(self.melee.target))
+    return 0;
+
+  if(var_3 == "player")
+    return isPlayer(self.melee.target);
+
+  return isDefined(self.melee.target.unittype) && tolower(self.melee.target.unittype) == tolower(var_3);
+}

@@ -1,0 +1,22 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: 3679.gsc
+**************************************/
+
+#using_animtree("generic_human");
+
+main() {
+  var_0 = spawnStruct();
+  var_0._id_EBEA = [];
+  var_0._id_EBEA["no_gun"] = 1;
+  var_0._id_EBEA["idle"] = % sh_mn_1_14a_arm_hall_jack_idle;
+  var_0._id_EBEA["interaction_blend_parent"] = % shipcrib_moon;
+  var_0._id_EBEA["fwd_anim"] = % sh_mn_1_14a_arm_hall_rs_jack_forward_02;
+  var_0._id_EBEA["right_anim"] = % sh_mn_1_14a_arm_hall_rs_jack_right_02;
+  var_0._id_EBEA["left_anim"] = % sh_mn_1_14a_arm_hall_rs_jack_left_02;
+  var_0._id_EBEA["back_right_anim"] = % sh_mn_1_14a_arm_hall_rs_jack_rightback_02;
+  var_0._id_EBEA["back_left_anim"] = % sh_mn_1_14a_arm_hall_rs_jack_leftback_02;
+  var_0._id_EBEA["trigger_radius"] = 164;
+  var_0._id_22E1 = "noclip";
+  scripts\sp\interaction::register_interaction("hallway_jack_moon_blended_react_2", var_0);
+}

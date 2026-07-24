@@ -1,0 +1,146 @@
+/***********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: scripts\asm\crab_mini\mp\states.gsc
+***********************************************/
+
+_id_2371() {
+  if(scripts\asm\asm::_id_232E("crab_mini")) {
+    return;
+  }
+  scripts\asm\asm::_id_230B("crab_mini", "start_here");
+  scripts\asm\asm::_id_2374("start_here", scripts\asm\crab_mini\crab_mini_asm::asminit, undefined, undefined, undefined, undefined, _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  scripts\asm\asm::_id_2375("entrance", undefined, scripts\asm\crab_mini\crab_mini_asm::shouldplayentranceanim, undefined);
+  scripts\asm\asm::_id_2375("decide_idle", undefined, scripts\asm\shared\utility::_id_12668, undefined);
+  scripts\asm\asm::_id_2374("idle", _id_0F3C::_id_CEA8, undefined, undefined, undefined, undefined, _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, "pain_generic", undefined, "death_generic", undefined, undefined, undefined, undefined, "face current", "anim deltas", undefined);
+  scripts\asm\asm::_id_2375("turn", undefined, scripts\asm\crab_mini\crab_mini_asm::shouldturn, undefined);
+  scripts\asm\asm::_id_2375("choose_movetype", undefined, ::trans_idle_to_choose_movetype1, undefined);
+  scripts\asm\asm::_id_2375("check_actions", undefined, scripts\asm\shared\utility::_id_12668, undefined);
+  scripts\asm\asm::_id_2374("entrance", _id_0F3C::_id_CEA8, undefined, undefined, undefined, undefined, _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2375("decide_idle", undefined, scripts\asm\crab_mini\crab_mini_asm::isanimdone, undefined);
+  scripts\asm\asm::_id_2374("check_actions", scripts\asm\shared\utility::_id_2B58, undefined, undefined, undefined, undefined, _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  scripts\asm\asm::_id_2375("stand_melee", undefined, scripts\asm\crab_mini\crab_mini_asm::shoulddoaction, undefined);
+  scripts\asm\asm::_id_2375("moving_melee", undefined, scripts\asm\crab_mini\crab_mini_asm::shoulddoaction, undefined);
+  scripts\asm\asm::_id_2374("stand_melee", scripts\asm\crab_mini\crab_mini_asm::playmeleeattack, undefined, scripts\asm\crab_mini\crab_mini_asm::meleenotehandler, undefined, undefined, _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, "pain_generic", undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, "anim deltas", undefined);
+  scripts\asm\asm::_id_2375("action_done", undefined, scripts\asm\crab_mini\crab_mini_asm::isanimdone, undefined);
+  scripts\asm\asm::_id_2374("action_done", scripts\asm\shared\utility::_id_2B58, undefined, undefined, undefined, undefined, _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  scripts\asm\asm::_id_2375("decide_idle", undefined, scripts\asm\shared\utility::_id_12668, undefined);
+  scripts\asm\asm::_id_2374("death_generic", _id_0C71::_id_CF0E, undefined, undefined, undefined, undefined, _id_0C71::_id_3F00, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "face current", "anim deltas", undefined);
+  scripts\asm\asm::_id_2374("death_moving", _id_0C71::_id_CF0E, undefined, undefined, undefined, undefined, _id_0C71::_id_3EE2, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "face current", "anim deltas", undefined);
+  scripts\asm\asm::_id_2374("check_move", scripts\asm\shared\utility::_id_2B58, undefined, undefined, undefined, undefined, _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  scripts\asm\asm::_id_2375("idle_exit_sprint", undefined, ::trans_check_move_to_idle_exit_sprint0, undefined);
+  scripts\asm\asm::_id_2375("pass_run_in", undefined, scripts\asm\shared\utility::_id_12668, undefined);
+  scripts\asm\asm::_id_2374("idle_exit_sprint", scripts\asm\zombie\zombie::_id_CEB7, undefined, undefined, undefined, undefined, _id_0F3B::_id_3E9F, undefined, undefined, undefined, undefined, undefined, "pain_moving", undefined, "death_moving", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2375("pass_walk_in", undefined, scripts\asm\asm::_id_68B0, "code_move");
+  scripts\asm\asm::_id_2375("pass_walk_in", undefined, scripts\asm\asm::_id_68B0, "finish");
+  scripts\asm\asm::_id_2375("check_move_interruptions", undefined, scripts\asm\shared\utility::_id_12668, undefined);
+  scripts\asm\asm::_id_2374("pass_walk_in", scripts\asm\shared\utility::_id_2B58, undefined, undefined, undefined, undefined, _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  scripts\asm\asm::_id_2375("pass_sprint_out", undefined, scripts\asm\shared\utility::_id_12668, undefined);
+  scripts\asm\asm::_id_2375("sprint_loop", undefined, ::trans_pass_walk_in_to_sprint_loop1, undefined);
+  scripts\asm\asm::_id_2374("sprint_turn", _id_0F3B::_id_D514, undefined, undefined, undefined, undefined, _id_0F3B::_id_3EF5, undefined, undefined, undefined, undefined, undefined, "pain_generic", undefined, "death_moving", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2375("check_move_interruptions", undefined, scripts\asm\shared\utility::_id_12668, undefined);
+  scripts\asm\asm::_id_2375("pass_walk_in", undefined, scripts\asm\asm::_id_68B0, "code_move");
+  scripts\asm\asm::_id_2375("pass_walk_in", undefined, scripts\asm\asm::_id_68B0, "end");
+  scripts\asm\asm::_id_2374("sprint_loop", scripts\asm\zombie\zombie::_id_D4E3, "walk", undefined, undefined, undefined, scripts\asm\zombie\zombie::_id_3EE1, undefined, undefined, undefined, undefined, undefined, "pain_moving", undefined, "death_moving", undefined, undefined, undefined, undefined, "face motion", "code_move", undefined);
+  scripts\asm\asm::_id_2375("pass_sprint_out", undefined, scripts\asm\shared\utility::_id_12668, undefined);
+  scripts\asm\asm::_id_2374("pass_sprint_out", scripts\asm\shared\utility::_id_2B58, undefined, undefined, undefined, undefined, _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  scripts\asm\asm::_id_2375("sprint_stop", undefined, scripts\asm\zombie\zombie::_id_10092, undefined);
+  scripts\asm\asm::_id_2375("sprint_turn", undefined, _id_0F3B::_id_FFF8, "walk_turn");
+  scripts\asm\asm::_id_2375("move_done", undefined, ::trans_pass_sprint_out_to_move_done2, undefined);
+  scripts\asm\asm::_id_2374("sprint_stop", scripts\asm\zombie\zombie::_id_CEAE, undefined, undefined, undefined, undefined, _id_0F3A::_id_3E97, undefined, undefined, undefined, undefined, undefined, "pain_generic", undefined, "death_moving", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2375("check_move_interruptions", undefined, scripts\asm\shared\utility::_id_12668, undefined);
+  scripts\asm\asm::_id_2375("pass_walk_in", undefined, scripts\asm\asm::_id_68B0, "abort");
+  scripts\asm\asm::_id_2375("move_done", undefined, scripts\asm\asm::_id_68B0, "end");
+  scripts\asm\asm::_id_2374("move_done", scripts\asm\shared\utility::_id_2B58, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  scripts\asm\asm::_id_2375("decide_idle", undefined, scripts\asm\shared\utility::_id_12668, undefined);
+  scripts\asm\asm::_id_2374("choose_movetype", scripts\asm\shared\utility::_id_2B58, undefined, undefined, undefined, undefined, _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  scripts\asm\asm::_id_2375("check_move", undefined, ::trans_choose_movetype_to_check_move0, undefined);
+  scripts\asm\asm::_id_2375("move_done", undefined, scripts\asm\shared\utility::_id_12668, undefined);
+  scripts\asm\asm::_id_2374("pass_run_in", scripts\asm\shared\utility::_id_2B58, undefined, undefined, undefined, undefined, _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  scripts\asm\asm::_id_2375("pass_run_out", undefined, scripts\asm\shared\utility::_id_12668, undefined);
+  scripts\asm\asm::_id_2375("idle_exit_run", undefined, ::trans_pass_run_in_to_idle_exit_run1, undefined);
+  scripts\asm\asm::_id_2374("run_turn", _id_0F3B::_id_D514, undefined, undefined, undefined, undefined, _id_0F3B::_id_3EF5, undefined, undefined, undefined, undefined, undefined, "pain_generic", undefined, "death_moving", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2375("check_move_interruptions", undefined, scripts\asm\shared\utility::_id_12668, undefined);
+  scripts\asm\asm::_id_2375("run_loop", undefined, scripts\asm\asm::_id_68B0, "code_move");
+  scripts\asm\asm::_id_2375("run_loop", undefined, scripts\asm\asm::_id_68B0, "end");
+  scripts\asm\asm::_id_2374("run_loop", scripts\asm\zombie\zombie::_id_D4E3, "run", undefined, undefined, undefined, scripts\asm\zombie\zombie::_id_3EE1, undefined, undefined, undefined, undefined, undefined, "pain_moving", undefined, "death_moving", undefined, undefined, undefined, undefined, "face motion", "code_move", undefined);
+  scripts\asm\asm::_id_2375("pass_run_out", undefined, scripts\asm\shared\utility::_id_12668, undefined);
+  scripts\asm\asm::_id_2374("run_stop", scripts\asm\zombie\zombie::_id_D4E3, "run", undefined, undefined, undefined, scripts\asm\zombie\zombie::_id_3EE1, undefined, undefined, undefined, undefined, undefined, "pain_moving", undefined, "death_moving", undefined, undefined, undefined, undefined, "face motion", "code_move", undefined);
+  scripts\asm\asm::_id_2375("move_done", undefined, scripts\asm\crab_mini\crab_mini_asm::isanimdone, undefined);
+  scripts\asm\asm::_id_2374("pass_run_out", scripts\asm\shared\utility::_id_2B58, undefined, undefined, undefined, undefined, _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  scripts\asm\asm::_id_2375("run_stop", undefined, scripts\asm\zombie\zombie::_id_10092, undefined);
+  scripts\asm\asm::_id_2375("check_actions", undefined, scripts\asm\shared\utility::_id_12668, undefined);
+  scripts\asm\asm::_id_2375("run_turn", undefined, _id_0F3B::_id_FFF8, "run_turn");
+  scripts\asm\asm::_id_2374("idle_exit_run", scripts\asm\zombie\zombie::_id_CEB7, undefined, undefined, undefined, undefined, _id_0F3B::_id_3E9F, undefined, undefined, undefined, undefined, undefined, "pain_moving", undefined, "death_moving", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2375("run_loop", undefined, scripts\asm\crab_mini\crab_mini_asm::isanimdone, undefined);
+  scripts\asm\asm::_id_2375("check_move_interruptions", undefined, scripts\asm\shared\utility::_id_12668, undefined);
+  scripts\asm\asm::_id_2374("check_move_interruptions", scripts\asm\shared\utility::_id_2B58, undefined, undefined, undefined, undefined, _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  scripts\asm\asm::_id_2375("check_interruptables", undefined, scripts\asm\shared\utility::_id_12668, undefined);
+  scripts\asm\asm::_id_2374("pain_generic", _id_0F3C::_id_CEA8, undefined, undefined, undefined, undefined, scripts\asm\crab_mini\crab_mini_asm::_id_3EE4, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2375("idle", undefined, scripts\asm\crab_mini\crab_mini_asm::isanimdone, undefined);
+  scripts\asm\asm::_id_2374("pain_moving", scripts\asm\crab_mini\crab_mini_asm::playmovingpainanim, undefined, undefined, undefined, undefined, _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, "face current", "anim deltas", undefined);
+  scripts\asm\asm::_id_2375("pain_moving_done", undefined, scripts\asm\crab_mini\crab_mini_asm::isanimdone, undefined);
+  scripts\asm\asm::_id_2374("decide_idle", scripts\asm\shared\utility::_id_2B58, undefined, undefined, undefined, undefined, _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  scripts\asm\asm::_id_2375("idle", undefined, scripts\asm\shared\utility::_id_12668, undefined);
+  scripts\asm\asm::_id_2374("check_interruptables", scripts\asm\shared\utility::_id_2B58, undefined, undefined, undefined, undefined, _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  scripts\asm\asm::_id_2375("stand_melee", undefined, scripts\asm\crab_mini\crab_mini_asm::shoulddoaction, undefined);
+  scripts\asm\asm::_id_2374("traverse_external", scripts\asm\crab_mini\crab_mini_asm::doteleporthack, undefined, undefined, undefined, undefined, _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  scripts\asm\asm::_id_2374("moving_melee", scripts\asm\crab_mini\crab_mini_asm::playmovingmeleeattack, undefined, scripts\asm\crab_mini\crab_mini_asm::movingmeleenotehandler, scripts\asm\crab_mini\crab_mini_asm::terminate_movingmelee, undefined, scripts\asm\crab_mini\crab_mini_asm::choosemeleeattack, undefined, undefined, undefined, undefined, undefined, "pain_generic", undefined, "death_generic", undefined, undefined, undefined, undefined, "face current", "anim deltas", undefined);
+  scripts\asm\asm::_id_2375("moving_melee_done", undefined, scripts\asm\crab_mini\crab_mini_asm::isanimdone, undefined);
+  scripts\asm\asm::_id_2374("moving_melee_done", scripts\asm\shared\utility::_id_2B58, undefined, undefined, undefined, undefined, _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  scripts\asm\asm::_id_2375("stuck_loop", 0.05, scripts\asm\crab_mini\crab_mini_asm::shoulddostuckanim, undefined);
+  scripts\asm\asm::_id_2375("action_done", undefined, scripts\asm\shared\utility::_id_12668, undefined);
+  scripts\asm\asm::_id_2374("stuck_loop", _id_0F3C::_id_CEA8, undefined, undefined, undefined, undefined, scripts\asm\crab_mini\crab_mini_asm::choosestuckanim, undefined, undefined, undefined, undefined, undefined, "pain_generic", undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, "anim deltas", undefined);
+  scripts\asm\asm::_id_2375("stuck_exit", undefined, scripts\asm\crab_mini\crab_mini_asm::isstuckdone, undefined);
+  scripts\asm\asm::_id_2374("stuck_exit", _id_0F3C::_id_CEA8, undefined, undefined, undefined, undefined, scripts\asm\crab_mini\crab_mini_asm::choosestuckanim, undefined, undefined, undefined, undefined, undefined, "pain_generic", undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, "anim deltas", undefined);
+  scripts\asm\asm::_id_2375("action_done", undefined, scripts\asm\crab_mini\crab_mini_asm::isanimdone, undefined);
+  scripts\asm\asm::_id_2374("pain_moving_done", scripts\asm\shared\utility::_id_2B58, undefined, undefined, undefined, undefined, _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  scripts\asm\asm::_id_2375("choose_movetype", undefined, ::trans_pain_moving_done_to_choose_movetype0, undefined);
+  scripts\asm\asm::_id_2375("idle", undefined, scripts\asm\shared\utility::_id_12668, undefined);
+  scripts\asm\asm::_id_2374("turn", _id_0F3C::_id_CEA8, undefined, undefined, undefined, undefined, scripts\asm\crab_mini\crab_mini_asm::choosecrabminiturnanim, undefined, undefined, undefined, undefined, undefined, "pain_generic", undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, "anim deltas", undefined);
+  scripts\asm\asm::_id_2375("idle", undefined, scripts\asm\crab_mini\crab_mini_asm::isanimdone, undefined);
+  scripts\asm\asm::_id_2374("jump_across", scripts\asm\zombie_dlc3\zombie_dlc3::playtraverseanimz_dlc, undefined, undefined, undefined, "choose_movetype", _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2374("jump_across_100", scripts\asm\zombie_dlc3\zombie_dlc3::playtraverseanimz_dlc, undefined, undefined, undefined, "choose_movetype", scripts\asm\zombie\zombie::_id_3F08, "jumpacross", undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2374("over_40_down_56", scripts\asm\zombie_dlc3\zombie_dlc3::playtraverseanimz_dlc, undefined, undefined, undefined, "choose_movetype", scripts\asm\zombie\zombie::_id_3F08, "over_40_down_56", undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2374("over_40_down_128", scripts\asm\zombie_dlc3\zombie_dlc3::playtraverseanimz_dlc, undefined, undefined, undefined, "choose_movetype", scripts\asm\zombie\zombie::_id_3F08, "over_40_down_128", undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2374("jump_up_56_over_40", scripts\asm\zombie_dlc3\zombie_dlc3::playtraverseanimz_dlc, undefined, undefined, undefined, "choose_movetype", scripts\asm\zombie\zombie::_id_3F08, "jump_up_56_over_40", undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2374("jump_up_128_over_40", scripts\asm\zombie_dlc3\zombie_dlc3::playtraverseanimz_dlc, undefined, undefined, undefined, "choose_movetype", scripts\asm\zombie\zombie::_id_3F08, "jump_up_128_over_40", undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2374("wall_over_40_flex", scripts\asm\zombie_dlc3\zombie_dlc3::playtraverseanimz_dlc, undefined, undefined, undefined, "choose_movetype", scripts\asm\zombie\zombie::_id_3F08, "wall_over_40", undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2374("over_88", scripts\asm\zombie_dlc3\zombie_dlc3::playtraverseanimz_dlc, undefined, undefined, undefined, "choose_movetype", scripts\asm\zombie\zombie::_id_3F08, "over_88", undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2374("step_over_40", scripts\asm\zombie_dlc3\zombie_dlc3::playtraverseanimz_dlc, undefined, undefined, undefined, "choose_movetype", _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2374("mantle_40_over_extended", scripts\asm\zombie_dlc3\zombie_dlc3::playtraverseanimz_dlc, undefined, undefined, undefined, "choose_movetype", scripts\asm\zombie\zombie::_id_3F08, "mantle_40_over_extended", undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2374("wall_over_40", scripts\asm\zombie_dlc3\zombie_dlc3::playtraverseanimz_dlc, undefined, undefined, undefined, "choose_movetype", scripts\asm\zombie\zombie::_id_3F08, "wall_over_40", undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2374("jump_up_56", scripts\asm\zombie_dlc3\zombie_dlc3::playtraverseanimz_dlc, undefined, undefined, undefined, "choose_movetype", scripts\asm\zombie\zombie::_id_3F08, "jump_up_56", undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2374("jump_up_128", scripts\asm\zombie_dlc3\zombie_dlc3::playtraverseanimz_dlc, undefined, undefined, undefined, "choose_movetype", scripts\asm\zombie\zombie::_id_3F08, "jump_up_128", undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2374("jump_down_56", scripts\asm\zombie_dlc3\zombie_dlc3::playtraverseanimz_dlc, undefined, undefined, undefined, "choose_movetype", scripts\asm\zombie\zombie::_id_3F08, "jump_down_56", undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2374("jump_down_128", scripts\asm\zombie_dlc3\zombie_dlc3::playtraverseanimz_dlc, undefined, undefined, undefined, "choose_movetype", scripts\asm\zombie\zombie::_id_3F08, "jump_down_128", undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2374("jump_down_56_out_50", scripts\asm\zombie_dlc3\zombie_dlc3::playtraverseanimz_dlc, undefined, undefined, undefined, "choose_movetype", scripts\asm\zombie\zombie::_id_3F08, "jump_down_56", undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2327();
+}
+
+trans_idle_to_choose_movetype1(var_0, var_1, var_2, var_3) {
+  return scripts\asm\asm_bb::bb_moverequested();
+}
+
+trans_check_move_to_idle_exit_sprint0(var_0, var_1, var_2, var_3) {
+  return scripts\asm\asm_bb::bb_movetyperequested("sprint");
+}
+
+trans_pass_walk_in_to_sprint_loop1(var_0, var_1, var_2, var_3) {
+  return scripts\asm\asm_bb::bb_moverequested();
+}
+
+trans_pass_sprint_out_to_move_done2(var_0, var_1, var_2, var_3) {
+  return !scripts\asm\asm_bb::bb_moverequested();
+}
+
+trans_choose_movetype_to_check_move0(var_0, var_1, var_2, var_3) {
+  return scripts\asm\asm_bb::bb_moverequested();
+}
+
+trans_pass_run_in_to_idle_exit_run1(var_0, var_1, var_2, var_3) {
+  return scripts\asm\asm_bb::bb_moverequested();
+}
+
+trans_pain_moving_done_to_choose_movetype0(var_0, var_1, var_2, var_3) {
+  return scripts\asm\asm_bb::bb_moverequested();
+}

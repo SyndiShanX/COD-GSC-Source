@@ -1,0 +1,1194 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: scripts\anim\pain.gsc
+**************************************/
+
+_id_951B() {}
+
+main() {
+  self endon("killanimscript");
+  _id_0A1E::_id_C879();
+}
+
+_id_98AC() {
+  level._effect["crawling_death_blood_smear"] = loadfx("vfx/core/impacts/blood_smear_decal.vfx");
+}
+
+end_script() {}
+
+_id_1390C() {
+  if(!isDefined(self.damagemod))
+    return 0;
+
+  if(isexplosivedamagemod(self.damagemod))
+    return 1;
+
+  if(scripts\engine\utility::wasdamagedbyoffhandshield())
+    return 1;
+
+  if(self.damagemod == "MOD_MELEE" && isDefined(self.attacker) && isDefined(self.attacker.unittype) && self.attacker.unittype == "c8")
+    return 1;
+
+  if(gettime() - anim._id_A955 <= 50) {
+    var_0 = anim._id_A954 * anim._id_A954 * 1.2 * 1.2;
+
+    if(distancesquared(self.origin, anim._id_A952) < var_0) {
+      var_1 = var_0 * 0.5 * 0.5;
+      self._id_B4DF = distancesquared(self.origin, anim._id_A953) < var_1;
+      return 1;
+    }
+  }
+
+  return 0;
+}
+
+_id_7E5D() {
+  if(self.a.pose == "prone") {
+    return;
+  }
+  if(isDefined(self.lastattacker) && isDefined(self.lastattacker.team) && self.lastattacker.team == self.team) {
+    return;
+  }
+  if(!isDefined(self.damageshieldcounter) || gettime() - self.a._id_A9C8 > 1500)
+    self.damageshieldcounter = randomintrange(2, 3);
+
+  if(isDefined(self.lastattacker) && distancesquared(self.origin, self.lastattacker.origin) < squared(512))
+    self.damageshieldcounter = 0;
+
+  if(self.damageshieldcounter > 0)
+    self.damageshieldcounter--;
+  else {
+    self._id_4D6A = 1;
+    self.allowpain = 0;
+
+    if(self.ignoreme)
+      self._id_D817 = 1;
+    else
+      self.ignoreme = 1;
+
+    if(scripts\anim\utility_common::isusingsidearm())
+      scripts\anim\shared::placeweaponon(self.primaryweapon, "right");
+
+    if(self.a.pose == "crouch")
+      return scripts\anim\utility::_id_B027("pain", "damage_shield_crouch");
+
+    var_0 = scripts\anim\utility::_id_B027("pain", "damage_shield_pain_array");
+  }
+}
+
+_id_8041() {
+  if(self.damageshield && !isDefined(self._id_55BF)) {
+    var_0 = _id_7E5D();
+
+    if(isDefined(var_0))
+      return var_0;
+  }
+
+  if(isDefined(self.a.onback)) {
+    if(self.a.pose == "crouch")
+      return scripts\anim\utility::_id_B027("pain", "back");
+    else
+      scripts\anim\notetracks::stoponback();
+  }
+
+  if(self.a.pose == "stand") {
+    var_1 = isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 4096;
+
+    if(!var_1 && self.a.movement == "run" && abs(self _meth_813E()) < 60)
+      return getsafecircleorigin();
+
+    self.a.movement = "stop";
+    return _id_815E();
+  } else if(self.a.pose == "crouch") {
+    self.a.movement = "stop";
+    return _id_7E46();
+  } else if(self.a.pose == "prone") {
+    self.a.movement = "stop";
+    return _id_80A0();
+  }
+}
+
+getsafecircleorigin() {
+  var_0 = [];
+  var_1 = 0;
+  var_2 = 0;
+  var_3 = 0;
+
+  if(self maymovetopoint(self localtoworldcoords((300, 0, 0)))) {
+    var_2 = 1;
+    var_1 = 1;
+  } else if(self maymovetopoint(self localtoworldcoords((200, 0, 0))))
+    var_1 = 1;
+
+  if(isDefined(self.a._id_55FD)) {
+    var_2 = 0;
+    var_1 = 0;
+  }
+
+  if(var_2)
+    var_0 = scripts\anim\utility::_id_B027("pain", "run_long");
+  else if(var_1)
+    var_0 = scripts\anim\utility::_id_B027("pain", "run_medium");
+  else if(self maymovetopoint(self localtoworldcoords((120, 0, 0))))
+    var_0 = scripts\anim\utility::_id_B027("pain", "run_short");
+
+  if(!var_0.size) {
+    self.a.movement = "stop";
+    return _id_815E();
+  }
+
+  return var_0[randomint(var_0.size)];
+}
+
+_id_8160() {
+  var_0 = [];
+
+  if(scripts\engine\utility::damagelocationisany("torso_upper"))
+    var_0 = scripts\anim\utility::_id_B027("pain", "pistol_torso_upper");
+  else if(scripts\engine\utility::damagelocationisany("torso_lower"))
+    var_0 = scripts\anim\utility::_id_B027("pain", "pistol_torso_lower");
+  else if(scripts\engine\utility::damagelocationisany("neck"))
+    var_0 = scripts\anim\utility::_id_B027("pain", "pistol_neck");
+  else if(scripts\engine\utility::damagelocationisany("head"))
+    var_0 = scripts\anim\utility::_id_B027("pain", "pistol_head");
+  else if(scripts\engine\utility::damagelocationisany("left_leg_upper", "right_leg_upper"))
+    var_0 = scripts\anim\utility::_id_B027("pain", "pistol_leg");
+  else if(scripts\engine\utility::damagelocationisany("left_arm_upper"))
+    var_0 = scripts\anim\utility::_id_B027("pain", "pistol_left_arm_upper");
+  else if(scripts\engine\utility::damagelocationisany("left_arm_lower"))
+    var_0 = scripts\anim\utility::_id_B027("pain", "pistol_left_arm_lower");
+  else if(scripts\engine\utility::damagelocationisany("right_arm_upper"))
+    var_0 = scripts\anim\utility::_id_B027("pain", "pistol_right_arm_upper");
+  else if(scripts\engine\utility::damagelocationisany("right_arm_lower"))
+    var_0 = scripts\anim\utility::_id_B027("pain", "pistol_right_arm_lower");
+
+  if(var_0.size < 2)
+    var_0 = scripts\engine\utility::array_combine(var_0, scripts\anim\utility::_id_B027("pain", "pistol_default1"));
+
+  if(var_0.size < 2)
+    var_0 = scripts\engine\utility::array_combine(var_0, scripts\anim\utility::_id_B027("pain", "pistol_default2"));
+
+  return var_0[randomint(var_0.size)];
+}
+
+_id_815E() {
+  if(scripts\anim\utility_common::isusingsidearm())
+    return _id_8160();
+
+  var_0 = [];
+  var_1 = [];
+
+  if(scripts\engine\utility::damagelocationisany("torso_upper")) {
+    var_0 = scripts\anim\utility::_id_B027("pain", "torso_upper");
+    var_1 = scripts\anim\utility::_id_B027("pain", "torso_upper_extended");
+  } else if(scripts\engine\utility::damagelocationisany("torso_lower")) {
+    var_0 = scripts\anim\utility::_id_B027("pain", "torso_lower");
+    var_1 = scripts\anim\utility::_id_B027("pain", "torso_lower_extended");
+  } else if(scripts\engine\utility::damagelocationisany("head", "helmet", "neck")) {
+    var_0 = scripts\anim\utility::_id_B027("pain", "head");
+    var_1 = scripts\anim\utility::_id_B027("pain", "head_extended");
+  } else if(scripts\engine\utility::damagelocationisany("right_arm_upper", "right_arm_lower")) {
+    var_0 = scripts\anim\utility::_id_B027("pain", "right_arm");
+    var_1 = scripts\anim\utility::_id_B027("pain", "right_arm_extended");
+  } else if(scripts\engine\utility::damagelocationisany("left_arm_upper", "left_arm_lower")) {
+    var_0 = scripts\anim\utility::_id_B027("pain", "left_arm");
+    var_1 = scripts\anim\utility::_id_B027("pain", "left_arm_extended");
+  } else if(scripts\engine\utility::damagelocationisany("left_leg_upper", "right_leg_upper")) {
+    var_0 = scripts\anim\utility::_id_B027("pain", "leg");
+    var_1 = scripts\anim\utility::_id_B027("pain", "leg_extended");
+  } else if(scripts\engine\utility::damagelocationisany("left_foot", "right_foot", "left_leg_lower", "right_leg_lower")) {
+    var_0 = scripts\anim\utility::_id_B027("pain", "foot");
+    var_1 = scripts\anim\utility::_id_B027("pain", "foot_extended");
+  }
+
+  if(var_0.size < 2) {
+    if(!self.a.disablelongdeath)
+      var_0 = scripts\engine\utility::array_combine(var_0, scripts\anim\utility::_id_B027("pain", "default_long"));
+    else
+      var_0 = scripts\engine\utility::array_combine(var_0, scripts\anim\utility::_id_B027("pain", "default_short"));
+  }
+
+  if(var_1.size < 2)
+    var_1 = scripts\engine\utility::array_combine(var_1, scripts\anim\utility::_id_B027("pain", "default_extended"));
+
+  if(!self.damageshield && !self.a.disablelongdeath) {
+    var_2 = randomint(var_0.size + var_1.size);
+
+    if(var_2 < var_0.size)
+      return var_0[var_2];
+    else
+      return var_1[var_2 - var_0.size];
+  }
+
+  return var_0[randomint(var_0.size)];
+}
+
+_id_7E46() {
+  var_0 = [];
+
+  if(!self.damageshield && !self.a.disablelongdeath)
+    var_0 = scripts\anim\utility::_id_B027("pain", "crouch_longdeath");
+
+  var_0 = scripts\engine\utility::array_combine(var_0, scripts\anim\utility::_id_B027("pain", "crouch_default"));
+
+  if(scripts\engine\utility::damagelocationisany("left_hand", "left_arm_lower", "left_arm_upper"))
+    var_0 = scripts\engine\utility::array_combine(var_0, scripts\anim\utility::_id_B027("pain", "crouch_left_arm"));
+
+  if(scripts\engine\utility::damagelocationisany("right_hand", "right_arm_lower", "right_arm_upper"))
+    var_0 = scripts\engine\utility::array_combine(var_0, scripts\anim\utility::_id_B027("pain", "crouch_right_arm"));
+
+  return var_0[randomint(var_0.size)];
+}
+
+_id_80A0() {
+  var_0 = scripts\anim\utility::_id_B027("pain", "prone");
+  return var_0[randomint(var_0.size)];
+}
+
+#using_animtree("generic_human");
+
+_id_D4EE(var_0) {
+  var_1 = 1;
+  _id_C86D("painanim", var_0, %body, 1, 0.1, var_1);
+
+  if(self.a.pose == "prone")
+    self _meth_83CF(%prone_legs_up, %prone_legs_down, 1, 0.1, 1);
+
+  if(animhasnotetrack(var_0, "start_aim")) {
+    thread _id_C172("painanim");
+    self endon("start_aim");
+  }
+
+  if(animhasnotetrack(var_0, "code_move"))
+    scripts\anim\shared::donotetracks("painanim");
+
+  scripts\anim\shared::donotetracks("painanim");
+}
+
+_id_C172(var_0) {
+  self endon("killanimscript");
+  self waittillmatch(var_0, "start_aim");
+  self notify("start_aim");
+}
+
+_id_10969() {
+  self endon("killanimscript");
+  self._id_2BB9 = 1;
+  self.allowpain = 0;
+  wait 0.5;
+  self._id_2BB9 = undefined;
+  self.allowpain = 1;
+}
+
+_id_10968(var_0) {
+  if(var_0 == "none")
+    return 0;
+
+  self.a._id_10930 = "none";
+  thread _id_10969();
+
+  switch (var_0) {
+    case "cover_left":
+      if(self.a.pose == "stand") {
+        var_1 = scripts\anim\utility::_id_B027("pain", "cover_left_stand");
+        _id_5A5B(var_1);
+        var_2 = 1;
+      } else if(self.a.pose == "crouch") {
+        var_1 = scripts\anim\utility::_id_B027("pain", "cover_left_crouch");
+        _id_5A5B(var_1);
+        var_2 = 1;
+      } else
+        var_2 = 0;
+
+      break;
+    case "cover_right":
+      if(self.a.pose == "stand") {
+        var_1 = scripts\anim\utility::_id_B027("pain", "cover_right_stand");
+        _id_5A5B(var_1);
+        var_2 = 1;
+      } else if(self.a.pose == "crouch") {
+        var_1 = scripts\anim\utility::_id_B027("pain", "cover_right_crouch");
+        _id_5A5B(var_1);
+        var_2 = 1;
+      } else
+        var_2 = 0;
+
+      break;
+    case "cover_right_stand_A":
+      var_2 = 0;
+      break;
+    case "cover_right_stand_B":
+      dopain(scripts\anim\utility::_id_B027("pain", "cover_right_stand_B"));
+      var_2 = 1;
+      break;
+    case "cover_left_stand_A":
+      dopain(scripts\anim\utility::_id_B027("pain", "cover_left_stand_A"));
+      var_2 = 1;
+      break;
+    case "cover_left_stand_B":
+      dopain(scripts\anim\utility::_id_B027("pain", "cover_left_stand_B"));
+      var_2 = 1;
+      break;
+    case "cover_crouch":
+      var_1 = scripts\anim\utility::_id_B027("pain", "cover_crouch");
+      _id_5A5B(var_1);
+      var_2 = 1;
+      break;
+    case "cover_stand":
+      var_1 = scripts\anim\utility::_id_B027("pain", "cover_stand");
+      _id_5A5B(var_1);
+      var_2 = 1;
+      break;
+    case "cover_stand_aim":
+      var_1 = scripts\anim\utility::_id_B027("pain", "cover_stand_aim");
+      _id_5A5B(var_1);
+      var_2 = 1;
+      break;
+    case "cover_crouch_aim":
+      var_1 = scripts\anim\utility::_id_B027("pain", "cover_crouch_aim");
+      _id_5A5B(var_1);
+      var_2 = 1;
+      break;
+    case "saw":
+      if(self.a.pose == "stand")
+        var_3 = scripts\anim\utility::_id_B027("pain", "saw_stand");
+      else if(self.a.pose == "crouch")
+        var_3 = scripts\anim\utility::_id_B027("pain", "saw_crouch");
+      else
+        var_3 = scripts\anim\utility::_id_B027("pain", "saw_prone");
+
+      _id_C86C("painanim", var_3, 1, 0.3, 1);
+      scripts\anim\shared::donotetracks("painanim");
+      var_2 = 1;
+      break;
+    case "mg42":
+      _id_B6AE(self.a.pose);
+      var_2 = 1;
+      break;
+    case "minigun":
+      var_2 = 0;
+      break;
+    case "corner_right_martyrdom":
+      var_2 = _id_12893();
+      break;
+    case "dying_crawl":
+    case "rambo_right":
+    case "rambo_left":
+    case "rambo":
+      var_2 = 0;
+      break;
+    default:
+      var_2 = 0;
+  }
+
+  return var_2;
+}
+
+_id_C874() {
+  self endon("death");
+  wait 0.05;
+  self notify("pain_death");
+}
+
+_id_5A5B(var_0) {
+  var_1 = var_0[randomint(var_0.size)];
+  _id_C86C("painanim", var_1, 1, 0.3, 1);
+  scripts\anim\shared::donotetracks("painanim");
+}
+
+dopain(var_0) {
+  _id_C86C("painanim", var_0, 1, 0.3, 1);
+  scripts\anim\shared::donotetracks("painanim");
+}
+
+_id_B6AE(var_0) {
+  _id_C86C("painanim", level._id_B6B0["pain_" + var_0], 1, 0.1, 1);
+  scripts\anim\shared::donotetracks("painanim");
+}
+
+_id_13713(var_0, var_1) {
+  self endon("killanimscript");
+  self endon("death");
+
+  if(isDefined(var_1))
+    self endon(var_1);
+
+  wait(var_0);
+  self.a.movement = "stop";
+}
+
+_id_4874() {
+  if(self.a.disablelongdeath || self.diequietly || self.damageshield)
+    return 0;
+
+  if(self.stairsstate != "none")
+    return 0;
+
+  if(isDefined(self.a.onback))
+    return 0;
+
+  var_0 = scripts\engine\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower", "left_foot", "right_foot");
+
+  if(isDefined(self._id_72CC)) {
+    _id_F6AD(var_0);
+    self.health = 10;
+    thread _id_4877();
+    self waittill("killanimscript");
+    return 1;
+  }
+
+  if(self.health > 100)
+    return 0;
+
+  if(var_0 && self.health < self.maxhealth * 0.4) {
+    if(gettime() < anim._id_BF78)
+      return 0;
+  } else {
+    if(anim._id_C222 > 0)
+      return 0;
+
+    if(gettime() < anim._id_BF77)
+      return 0;
+  }
+
+  if(isDefined(self._id_4E46))
+    return 0;
+
+  foreach(var_2 in level.players) {
+    if(distancesquared(self.origin, var_2.origin) < 30625)
+      return 0;
+  }
+
+  if(scripts\engine\utility::damagelocationisany("head", "helmet", "gun", "right_hand", "left_hand"))
+    return 0;
+
+  if(scripts\anim\utility_common::isusingsidearm())
+    return 0;
+
+  _id_F6AD(var_0);
+
+  if(!isDefined(self.a._id_11188) && !_id_9D9D(self.a._id_4876))
+    return 0;
+
+  anim._id_BF77 = gettime() + 3000;
+  anim._id_BF78 = gettime() + 3000;
+  thread _id_4877();
+  self waittill("killanimscript");
+  return 1;
+}
+
+_id_F6AD(var_0) {
+  var_1 = [];
+  var_2 = undefined;
+
+  if(self.a.pose == "stand") {
+    var_2 = _id_FFC3(var_0);
+
+    if(isDefined(var_2))
+      var_1 = [var_2[0]];
+    else
+      var_1 = scripts\anim\utility::_id_B027("crawl_death", "stand_transition");
+  } else if(self.a.pose == "crouch")
+    var_1 = scripts\anim\utility::_id_B027("crawl_death", "crouch_transition");
+  else
+    var_1 = scripts\anim\utility::_id_B027("crawl_death", "prone_transition");
+
+  self.a._id_4876 = var_1[randomint(var_1.size)];
+  self.a._id_11188 = var_2;
+}
+
+_id_9D9D(var_0) {
+  if(isDefined(self.a._id_7280))
+    return 1;
+
+  var_1 = getmovedelta(var_0, 0, 1);
+  var_2 = self localtoworldcoords(var_1);
+  return self maymovetopoint(var_2);
+}
+
+_id_4877() {
+  self endon("kill_long_death");
+  self endon("death");
+  thread _id_D899("crawling");
+  self.a._id_10930 = "none";
+  self._id_10957 = undefined;
+  self _meth_8306();
+  thread _id_C874();
+  level notify("ai_crawling", self);
+  self _meth_82A5(%dying, %body, 1, 0.1, 1);
+
+  if(isDefined(self.a._id_11188)) {
+    _id_11185();
+    self.a._id_11188 = undefined;
+    return;
+  }
+
+  if(!_id_5F71()) {
+    return;
+  }
+  _id_C86C("transition", self.a._id_4876, 1, 0.5, 1);
+  scripts\anim\notetracks::donotetracksintercept("transition", ::_id_8977);
+  self.a._id_10930 = "dying_crawl";
+  thread _id_5F73();
+
+  if(isDefined(self.enemy))
+    self _meth_8306(self.enemy);
+
+  _id_4F64();
+
+  while(_id_10031()) {
+    var_0 = scripts\anim\utility::_id_B027("crawl_death", "back_crawl");
+
+    if(!_id_9D9D(var_0)) {
+      break;
+    }
+
+    _id_C86E("back_crawl", var_0, 1, 0.1, 1.0);
+    scripts\anim\notetracks::donotetracksintercept("back_crawl", ::_id_8977);
+  }
+
+  self._id_527E = gettime() + randomintrange(4000, 20000);
+
+  while(_id_10099()) {
+    if(scripts\anim\utility_common::canseeenemy() && _id_1A3C()) {
+      var_1 = scripts\anim\utility::_id_B027("crawl_death", "back_fire");
+      _id_C86E("back_idle_or_fire", var_1, 1, 0.2, 1.0);
+      scripts\anim\shared::donotetracks("back_idle_or_fire");
+      continue;
+    }
+
+    var_1 = scripts\anim\utility::_id_B027("crawl_death", "back_idle");
+
+    if(randomfloat(1) < 0.4) {
+      var_2 = scripts\anim\utility::_id_B027("crawl_death", "back_idle_twitch");
+      var_1 = var_2[randomint(var_2.size)];
+    }
+
+    _id_C86E("back_idle_or_fire", var_1, 1, 0.1, 1.0);
+    var_3 = getanimlength(var_1);
+
+    while(var_3 > 0) {
+      if(scripts\anim\utility_common::canseeenemy() && _id_1A3C()) {
+        break;
+      }
+
+      var_4 = 0.5;
+
+      if(var_4 > var_3) {
+        var_4 = var_3;
+        var_3 = 0;
+      } else
+        var_3 = var_3 - var_4;
+
+      scripts\anim\notetracks::donotetracksfortime(var_4, "back_idle_or_fire");
+    }
+  }
+
+  self notify("end_dying_crawl_back_aim");
+  self clearanim(%dying_back_aim_4_wrapper, 0.3);
+  self clearanim(%dying_back_aim_6_wrapper, 0.3);
+  var_5 = scripts\anim\utility::_id_B027("crawl_death", "back_death");
+  self._id_4E2A = var_5[randomint(var_5.size)];
+  _id_A6CE();
+  self.a._id_10930 = "none";
+  self._id_10957 = undefined;
+}
+
+_id_FFC3(var_0) {
+  if(self.a.pose != "stand") {
+    return;
+  }
+  var_1 = 2;
+
+  if(randomint(10) > var_1) {
+    return;
+  }
+  var_2 = 0;
+
+  if(!var_0) {
+    var_2 = scripts\engine\utility::damagelocationisany("torso_upper", "torso_lower");
+
+    if(!var_2)
+      return;
+  }
+
+  var_3 = 0;
+  var_4 = "leg";
+  var_5 = "b";
+
+  if(var_0)
+    var_3 = 200;
+  else {
+    var_4 = "gut";
+    var_3 = 128;
+
+    if(45 < self.damageyaw && self.damageyaw < 135)
+      var_5 = "l";
+    else if(-135 < self.damageyaw && self.damageyaw < -45)
+      var_5 = "r";
+    else if(-45 < self.damageyaw && self.damageyaw < 45)
+      return;
+  }
+
+  switch (var_5) {
+    case "b":
+      var_6 = anglesToForward(self.angles);
+      var_7 = self.origin - var_6 * var_3;
+      break;
+    case "l":
+      var_8 = anglestoright(self.angles);
+      var_7 = self.origin - var_8 * var_3;
+      break;
+    case "r":
+      var_8 = anglestoright(self.angles);
+      var_7 = self.origin + var_8 * var_3;
+      break;
+    default:
+      return;
+  }
+
+  if(!self maymovetopoint(var_7)) {
+    return;
+  }
+  var_9 = scripts\anim\utility::_id_B027("crawl_death", "longdeath");
+  var_10 = var_4 + "_" + var_5;
+  var_11 = randomint(var_9[var_10].size);
+  var_12 = var_9[var_10][var_11];
+  return var_12;
+}
+
+_id_11185() {
+  _id_C86E("stumblingPainInto", self.a._id_11188[0]);
+  scripts\anim\shared::donotetracks("stumblingPainInto");
+  self.a._id_10930 = "stumbling_pain";
+  var_0 = getmovedelta(self.a._id_11188[2]);
+  var_1 = getanimlength(self.a._id_11188[2]) * 1000;
+
+  for(var_2 = randomint(2) + 1; var_2 > 0; var_2--) {
+    var_3 = anglesToForward(self.angles);
+    var_4 = self.origin + var_3 * var_0;
+
+    if(!self maymovetopoint(var_4)) {
+      break;
+    }
+
+    _id_C86E("stumblingPain", self.a._id_11188[1]);
+    scripts\anim\shared::donotetracks("stumblingPain");
+  }
+
+  self.a.nodeath = 1;
+  self.a._id_10930 = "none";
+  _id_C86E("stumblingPainCollapse", self.a._id_11188[2], 1, 0.75);
+  scripts\anim\notetracks::donotetracksintercept("stumblingPainCollapse", ::_id_11189);
+  scripts\anim\shared::donotetracks("stumblingPainCollapse");
+  _id_A6CE();
+}
+
+_id_11189(var_0) {
+  if(var_0 == "start_ragdoll") {
+    scripts\anim\notetracks::handlenotetrack(var_0, "stumblingPainCollapse");
+    return 1;
+  }
+}
+
+_id_10099() {
+  if(!enemyisingeneraldirection(anglesToForward(self.angles)))
+    return 0;
+
+  return gettime() < self._id_527E;
+}
+
+_id_5F71() {
+  if(!isDefined(self._id_72CC)) {
+    if(self.a.pose == "prone")
+      return 1;
+
+    if(self.a.movement == "stop") {
+      if(randomfloat(1) < 0.4) {
+        if(randomfloat(1) < 0.5)
+          return 1;
+      } else if(abs(self.damageyaw) > 90)
+        return 1;
+    } else if(abs(self _meth_813E()) > 90)
+      return 1;
+  }
+
+  if(self.a.pose != "prone") {
+    var_0 = scripts\anim\utility::_id_B027("crawl_death", self.a.pose + "_2_crawl");
+    var_1 = var_0[randomint(var_0.size)];
+
+    if(!_id_9D9D(var_1))
+      return 1;
+
+    thread _id_5F74();
+    _id_C86C("falling", var_1, 1, 0.5, 1);
+    scripts\anim\shared::donotetracks("falling");
+  } else
+    thread _id_5F74();
+
+  self.a._id_4876 = scripts\anim\utility::_id_B027("crawl_death", "default_transition");
+  self.a._id_10930 = "dying_crawl";
+  _id_4F64();
+  var_2 = scripts\anim\utility::_id_B027("crawl_death", "crawl");
+
+  while(_id_10031()) {
+    if(!_id_9D9D(var_2))
+      return 1;
+
+    if(isDefined(self._id_4C41))
+      self playSound(self._id_4C41);
+
+    _id_C86E("crawling", var_2, 1, 0.1, 1.0);
+    scripts\anim\shared::donotetracks("crawling");
+  }
+
+  self notify("done_crawling");
+
+  if(!isDefined(self._id_72CC) && enemyisingeneraldirection(anglesToForward(self.angles) * -1))
+    return 1;
+
+  var_3 = scripts\anim\utility::_id_B027("crawl_death", "death");
+  var_4 = var_3[randomint(var_3.size)];
+  scripts\anim\death::_id_CF0E(var_4);
+  _id_A6CE();
+  self.a._id_10930 = "none";
+  self._id_10957 = undefined;
+  return 0;
+}
+
+_id_5F74() {
+  self endon("death");
+
+  if(self.a.pose != "prone") {
+    for(;;) {
+      self waittill("falling", var_0);
+
+      if(issubstr(var_0, "bodyfall")) {
+        break;
+      }
+    }
+  }
+
+  var_1 = "J_SpineLower";
+  var_2 = "tag_origin";
+  var_3 = 0.25;
+  var_4 = level._effect["crawling_death_blood_smear"];
+
+  if(isDefined(self.a._id_486A))
+    var_3 = self.a._id_486A;
+
+  if(isDefined(self.a._id_4869))
+    var_4 = level._effect[self.a._id_4869];
+
+  while(var_3) {
+    var_5 = self gettagorigin(var_1);
+    var_6 = self gettagangles(var_2);
+    var_7 = anglestoright(var_6);
+    var_8 = anglesToForward((270, 0, 0));
+    playFX(var_4, var_5, var_8, var_7);
+    wait(var_3);
+  }
+}
+
+_id_5F73() {
+  self endon("kill_long_death");
+  self endon("death");
+  self endon("end_dying_crawl_back_aim");
+
+  if(isDefined(self._id_5F72)) {
+    return;
+  }
+  self._id_5F72 = 1;
+  self _meth_82AC(scripts\anim\utility::_id_B027("crawl_death", "aim_4"), 1, 0);
+  self _meth_82AC(scripts\anim\utility::_id_B027("crawl_death", "aim_6"), 1, 0);
+  var_0 = 0;
+
+  for(;;) {
+    var_1 = scripts\anim\utility_common::getyawtoenemy();
+    var_2 = angleclamp180(var_1 - var_0);
+
+    if(abs(var_2) > 3)
+      var_2 = scripts\engine\utility::sign(var_2) * 3;
+
+    var_1 = angleclamp180(var_0 + var_2);
+
+    if(var_1 < 0) {
+      if(var_1 < -45.0)
+        var_1 = -45.0;
+
+      var_3 = var_1 / -45.0;
+      self _meth_82A2(%dying_back_aim_4_wrapper, var_3, 0.05);
+      self _meth_82A2(%dying_back_aim_6_wrapper, 0, 0.05);
+    } else {
+      if(var_1 > 45.0)
+        var_1 = 45.0;
+
+      var_3 = var_1 / 45.0;
+      self _meth_82A2(%dying_back_aim_6_wrapper, var_3, 0.05);
+      self _meth_82A2(%dying_back_aim_4_wrapper, 0, 0.05);
+    }
+
+    var_0 = var_1;
+    wait 0.05;
+  }
+}
+
+_id_10D8E() {
+  self endon("kill_long_death");
+  self endon("death");
+  wait 0.5;
+  thread _id_5F73();
+}
+
+_id_8977(var_0) {
+  if(var_0 == "fire_spray") {
+    if(!scripts\anim\utility_common::canseeenemy())
+      return 1;
+
+    if(!_id_1A3C())
+      return 1;
+
+    scripts\anim\utility_common::shootenemywrapper();
+    return 1;
+  } else if(var_0 == "pistol_pickup") {
+    thread _id_10D8E();
+    return 0;
+  }
+
+  return 0;
+}
+
+_id_1A3C() {
+  var_0 = self.enemy getshootatpos();
+  var_1 = self getmuzzleangle();
+  var_2 = vectortoangles(var_0 - self getmuzzlepos());
+  var_3 = scripts\engine\utility::absangleclamp180(var_1[1] - var_2[1]);
+
+  if(var_3 > anim._id_C88B) {
+    if(distancesquared(self getEye(), var_0) > anim._id_C889 || var_3 > anim._id_C88A)
+      return 0;
+  }
+
+  return scripts\engine\utility::absangleclamp180(var_1[0] - var_2[0]) <= anim._id_C87D;
+}
+
+enemyisingeneraldirection(var_0) {
+  if(!isDefined(self.enemy))
+    return 0;
+
+  var_1 = vectorNormalize(self.enemy getshootatpos() - self getEye());
+  return vectordot(var_1, var_0) > 0.5;
+}
+
+_id_D899(var_0) {
+  self endon("kill_long_death");
+  self endon("death");
+  self._id_6EC4 = 1;
+  self._id_AFE7 = 1;
+  self.a._id_58DA = 1;
+  self notify("long_death");
+  self.health = 10000;
+  self.threatbias = self.threatbias - 2000;
+  wait 0.75;
+
+  if(self.health > 1)
+    self.health = 1;
+
+  wait 0.05;
+  self._id_AFE7 = undefined;
+  self.a._id_B4E7 = 1;
+
+  if(var_0 == "crawling") {
+    wait 1.0;
+
+    if(isDefined(level.player) && distancesquared(self.origin, level.player.origin) < 1048576) {
+      anim._id_C222 = randomintrange(10, 30);
+      anim._id_BF77 = gettime() + randomintrange(15000, 60000);
+    } else {
+      anim._id_C222 = randomintrange(5, 12);
+      anim._id_BF77 = gettime() + randomintrange(5000, 25000);
+    }
+
+    anim._id_BF78 = gettime() + randomintrange(7000, 13000);
+  } else if(var_0 == "corner_grenade") {
+    wait 1.0;
+
+    if(isDefined(level.player) && distancesquared(self.origin, level.player.origin) < 490000) {
+      anim._id_C221 = randomintrange(10, 30);
+      anim._id_BF76 = gettime() + randomintrange(15000, 60000);
+    } else {
+      anim._id_C221 = randomintrange(5, 12);
+      anim._id_BF76 = gettime() + randomintrange(5000, 25000);
+    }
+  }
+}
+
+_id_4F64() {
+  if(isDefined(self.a._id_7280))
+    self.a._id_C21F = self.a._id_7280;
+  else
+    self.a._id_C21F = randomintrange(1, 5);
+}
+
+_id_10031() {
+  if(!self.a._id_C21F) {
+    self.a._id_C21F = undefined;
+    return 0;
+  }
+
+  self.a._id_C21F--;
+  return 1;
+}
+
+_id_12893() {
+  if(anim._id_C221 > 0)
+    return 0;
+
+  if(gettime() < anim._id_BF76)
+    return 0;
+
+  if(self.a.disablelongdeath || self.diequietly || self.damageshield)
+    return 0;
+
+  if(isDefined(self._id_4E46))
+    return 0;
+
+  if(distance(self.origin, level.player.origin) < 175)
+    return 0;
+
+  anim._id_BF76 = gettime() + 3000;
+  thread _id_4669();
+  self waittill("killanimscript");
+  return 1;
+}
+
+_id_4669() {
+  self endon("kill_long_death");
+  self endon("death");
+  thread _id_C874();
+  thread _id_D899("corner_grenade");
+  thread scripts\sp\utility::_id_F2DA(0);
+  self.threatbias = -1000;
+  _id_C86D("corner_grenade_pain", scripts\anim\utility::_id_B027("corner_grenade_death", "pain"), %body, 1, 0.1);
+  self waittillmatch("corner_grenade_pain", "dropgun");
+  scripts\anim\shared::_id_5D1A();
+  self waittillmatch("corner_grenade_pain", "anim_pose = \"back\"");
+  scripts\anim\notetracks::notetrackposeback();
+  self waittillmatch("corner_grenade_pain", "grenade_left");
+  var_0 = getweaponmodel("fraggrenade");
+  self attach(var_0, "tag_inhand");
+  self._id_4E46 = ::_id_D850;
+  self waittillmatch("corner_grenade_pain", "end");
+  var_1 = gettime() + randomintrange(25000, 60000);
+  _id_C86D("corner_grenade_idle", scripts\anim\utility::_id_B027("corner_grenade_death", "pain"), %body, 1, 0.2);
+  thread _id_13A17();
+
+  while(!_id_6560()) {
+    if(gettime() >= var_1) {
+      break;
+    }
+
+    scripts\anim\notetracks::donotetracksfortime(0.1, "corner_grenade_idle");
+  }
+
+  var_2 = scripts\anim\utility::_id_B027("corner_grenade_death", "release");
+  _id_C86D("corner_grenade_release", var_2, %body, 1, 0.2);
+  var_3 = getnotetracktimes(var_2, "grenade_drop");
+  var_4 = var_3[0] * getanimlength(var_2);
+  wait(var_4 - 1.0);
+  scripts\anim\death::playdeathsound();
+  wait 0.7;
+  self._id_4E46 = ::waittillhelisdead;
+  var_5 = (0, 0, 30) - anglestoright(self.angles) * 70;
+  _id_4663(var_5, randomfloatrange(2.0, 3.0));
+  wait 0.05;
+  self detach(var_0, "tag_inhand");
+  thread _id_A678();
+}
+
+_id_4663(var_0, var_1) {
+  var_2 = self gettagorigin("tag_inhand");
+  var_3 = var_2 + (0, 0, 20);
+  var_4 = var_2 - (0, 0, 20);
+  var_5 = bulletTrace(var_3, var_4, 0, undefined);
+
+  if(var_5["fraction"] < 0.5)
+    var_2 = var_5["position"];
+
+  var_6 = "default";
+
+  if(var_5["surfacetype"] != "none")
+    var_6 = var_5["surfacetype"];
+
+  thread _id_D527("grenade_bounce", var_2);
+  self.grenadeweapon = "fraggrenade";
+  self _meth_81EE(var_2, var_0, var_1);
+}
+
+_id_D527(var_0, var_1) {
+  var_2 = spawn("script_origin", var_1);
+  var_2 playSound(var_0, "sounddone");
+  var_2 waittill("sounddone");
+  var_2 delete();
+}
+
+_id_A678() {
+  self.a.nodeath = 1;
+  _id_A6CE();
+  self startragdoll();
+  wait 0.1;
+  self notify("grenade_drop_done");
+}
+
+_id_A6CE() {
+  if(isDefined(self._id_A8AA))
+    self _meth_81D0(self.origin, self._id_A8AA);
+  else
+    self _meth_81D0();
+}
+
+_id_6560() {
+  if(!isDefined(self.enemy))
+    return 0;
+
+  if(distancesquared(self.origin, self.enemy.origin) > 147456)
+    return 0;
+
+  if(distancesquared(self.origin, self.enemy.origin) < 16384)
+    return 1;
+
+  var_0 = self.enemy.origin + self._id_6579 * 3.0;
+  var_1 = self.enemy.origin;
+
+  if(self.enemy.origin != var_0)
+    var_1 = pointonsegmentnearesttopoint(self.enemy.origin, var_0, self.origin);
+
+  if(distancesquared(self.origin, var_1) < 16384)
+    return 1;
+
+  return 0;
+}
+
+_id_D850() {
+  var_0 = scripts\anim\utility::_id_B027("corner_grenade_death", "premature_death");
+  var_1 = var_0[randomint(var_0.size)];
+  scripts\anim\death::playdeathsound();
+  _id_C86D("corner_grenade_die", var_1, %body, 1, 0.2);
+  var_2 = scripts\anim\combat_utility::_id_7EE3();
+  _id_4663(var_2, 3.0);
+  var_3 = getweaponmodel("fraggrenade");
+  self detach(var_3, "tag_inhand");
+  wait 0.05;
+  self startragdoll();
+  self waittillmatch("corner_grenade_die", "end");
+}
+
+waittillhelisdead() {
+  self waittill("grenade_drop_done");
+}
+
+_id_13A17() {
+  self endon("kill_long_death");
+  self endon("death");
+  self._id_6579 = (0, 0, 0);
+  var_0 = undefined;
+  var_1 = self.origin;
+  var_2 = 0.15;
+
+  for(;;) {
+    if(isDefined(self.enemy) && isDefined(var_0) && self.enemy == var_0) {
+      var_3 = self.enemy.origin;
+      self._id_6579 = (var_3 - var_1) * (1 / var_2);
+      var_1 = var_3;
+    } else {
+      if(isDefined(self.enemy))
+        var_1 = self.enemy.origin;
+      else
+        var_1 = self.origin;
+
+      var_0 = self.enemy;
+      self._id_FE9F = (0, 0, 0);
+    }
+
+    wait(var_2);
+  }
+}
+
+_id_17DD(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  self endon("death");
+
+  if(!isDefined(self)) {
+    return;
+  }
+  if(isDefined(self._id_58D6)) {
+    return;
+  }
+  if(var_0 < self.minpaindamage) {
+    return;
+  }
+  self._id_58D6 = 1;
+  var_7 = undefined;
+
+  if(scripts\engine\utility::damagelocationisany("left_arm_lower", "left_arm_upper", "left_hand"))
+    var_7 = scripts\anim\utility::_id_B027("additive_pain", "left_arm");
+
+  if(scripts\engine\utility::damagelocationisany("right_arm_lower", "right_arm_upper", "right_hand"))
+    var_7 = scripts\anim\utility::_id_B027("additive_pain", "right_arm");
+  else if(scripts\engine\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "left_foot"))
+    var_7 = scripts\anim\utility::_id_B027("additive_pain", "left_leg");
+  else if(scripts\engine\utility::damagelocationisany("right_leg_upper", "right_leg_lower", "right_foot"))
+    var_7 = scripts\anim\utility::_id_B027("additive_pain", "right_leg");
+  else {
+    var_8 = scripts\anim\utility::_id_B027("additive_pain", "default");
+    var_7 = var_8[randomint(var_8.size)];
+  }
+
+  self _meth_82AC(%add_pain, 1, 0.1, 1);
+  self _meth_82AC(var_7, 1, 0, 1);
+  wait 0.4;
+  self clearanim(var_7, 0.2);
+  self clearanim(%add_pain, 0.2);
+  self._id_58D6 = undefined;
+}
+
+_id_C86C(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_2))
+    var_2 = 1;
+
+  if(!isDefined(var_3))
+    var_3 = 0.2;
+
+  if(!isDefined(var_4))
+    var_4 = 1;
+
+  self _meth_82E2(var_0, var_1, var_2, var_3, var_4);
+  self.facialanimidx = scripts\anim\face::playfacialanim(var_1, "pain", self.facialanimidx);
+}
+
+_id_C86E(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_2))
+    var_2 = 1;
+
+  if(!isDefined(var_3))
+    var_3 = 0.2;
+
+  if(!isDefined(var_4))
+    var_4 = 1;
+
+  self _meth_82E7(var_0, var_1, var_2, var_3, var_4);
+  self.facialanimidx = scripts\anim\face::playfacialanim(var_1, "pain", self.facialanimidx);
+}
+
+_id_C86D(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(!isDefined(var_3))
+    var_3 = 1;
+
+  if(!isDefined(var_4))
+    var_4 = 0.2;
+
+  if(!isDefined(var_5))
+    var_5 = 1;
+
+  self _meth_82E4(var_0, var_1, var_2, var_3, var_4, var_5);
+  self.facialanimidx = scripts\anim\face::playfacialanim(var_1, "pain", self.facialanimidx);
+}

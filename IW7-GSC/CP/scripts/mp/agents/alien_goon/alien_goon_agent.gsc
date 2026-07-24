@@ -1,0 +1,232 @@
+/*************************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: scripts\mp\agents\alien_goon\alien_goon_agent.gsc
+*************************************************************/
+
+registerscriptedagent() {
+  scripts\mp\agents\alien_goon\alien_goon_tunedata::setuptunedata();
+  scripts\aitypes\bt_util::init();
+  behaviortree\alien_goon::_id_DEE8();
+  scripts\asm\alien_goon\mp\states::_id_2371();
+  scripts\asm\dlc4\alien_anim_utils::_id_97C5();
+  _id_AEB0();
+  thread _id_FAB0();
+}
+
+_id_FAB0() {
+  level endon("game_ended");
+
+  if(!isDefined(level.agent_definition))
+    level waittill("scripted_agents_initialized");
+
+  level.agent_definition["alien_goon"]["setup_func"] = ::setupagent;
+  level.agent_definition["alien_goon"]["setup_model_func"] = ::_id_FACE;
+  level.agent_funcs["alien_goon"]["on_damaged"] = ::_id_C4E0;
+  level.agent_funcs["alien_goon"]["gametype_on_damage_finished"] = scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+  level.agent_funcs["alien_goon"]["gametype_on_killed"] = scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiekilled;
+  level.agent_funcs["alien_goon"]["on_damaged_finished"] = scripts\mp\agents\zombie\zombie_agent::onzombiedamagefinished;
+  level.agent_funcs["alien_goon"]["on_killed"] = scripts\mp\agents\zombie\zombie_agent::onzombiekilled;
+
+  if(!isDefined(level._id_8CBD))
+    level._id_8CBD = [];
+
+  level._id_8CBD["alien_goon"] = ::calculatealiengoonhealth;
+
+  if(!isDefined(level.damage_feedback_overrride))
+    level.damage_feedback_overrride = [];
+}
+
+_id_FACE(var_0) {
+  self setModel("alien_goon");
+}
+
+setupzombiegametypevars() {
+  self.class = undefined;
+  self.movespeedscaler = undefined;
+  self.avoidkillstreakonspawntimer = undefined;
+  self.guid = undefined;
+  self.name = undefined;
+  self.saved_actionslotdata = undefined;
+  self.perks = undefined;
+  self.weaponlist = undefined;
+  self.objectivescaler = undefined;
+  self.sessionteam = undefined;
+  self.sessionstate = undefined;
+  self.disabledweapon = undefined;
+  self.disabledweaponswitch = undefined;
+  self.disabledoffhandweapons = undefined;
+  self.disabledusability = 1;
+  self.nocorpse = undefined;
+  self.ignoreme = 0;
+  self.ignoreall = 0;
+  self.ten_percent_of_max_health = undefined;
+  self.command_given = undefined;
+  self.current_icon = undefined;
+  self.do_immediate_ragdoll = undefined;
+  self.can_be_killed = 0;
+  self.attack_spot = undefined;
+  self.entered_playspace = 0;
+  self.marked_for_death = undefined;
+  self.trap_killed_by = undefined;
+  self.hastraversed = 0;
+  self.attackent = undefined;
+  self._id_9342 = 1;
+  self.aistate = "idle";
+  self.movemode = "walk";
+  self.sharpturnnotifydist = 100;
+  self.radius = 15;
+  self.height = 40;
+  self._id_252B = 26 + self.radius;
+  self._id_B640 = "normal";
+  self._id_B641 = 50;
+  self._id_2539 = 54;
+  self._id_253A = -64;
+  self._id_4D45 = 2250000;
+  self.ignoreclosefoliage = 1;
+  self.guid = self getentitynumber();
+  self.moveratescale = 0.9;
+  self._id_C081 = 1.0;
+  self.traverseratescale = 1.0;
+  self.generalspeedratescale = 1.0;
+  self._id_2AB2 = 0;
+  self._id_2AB8 = 1;
+  self.timelineevents = 0;
+  self.allowcrouch = 1;
+  self._id_B5F9 = 40;
+  self._id_B62E = 70;
+  self.meleeradiuswhentargetnotonnavmesh = 80;
+  self.meleeradiusbasesq = squared(self._id_B62E);
+  self.defaultgoalradius = self.radius + 1;
+  self.meleedot = 0.5;
+  self.dismember_crawl = 0;
+  self.is_crawler = 0;
+  self.died_poorly = 0;
+  self.damaged_by_player = 0;
+  self.isfrozen = undefined;
+  self.flung = undefined;
+  self._id_B0FC = 1;
+  self.full_gib = 0;
+  self.favoriteenemy = undefined;
+  self._id_E821 = undefined;
+  self.last_damage_time_on_player = [];
+  self._id_8C12 = 0;
+  self.hasplayedvignetteanim = undefined;
+  self.is_cop = undefined;
+  self.highlyawareradius = 200;
+  self.deathmethod = undefined;
+  self._id_10A57 = undefined;
+  self.gib_fx_override = undefined;
+  self._id_CE65 = undefined;
+  self._id_29D2 = 1;
+  self.vignette_nocorpse = undefined;
+  self.death_anim_no_ragdoll = undefined;
+  self.allowpain = 0;
+  self setavoidanceradius(45);
+
+  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1)
+    self._id_AB3F = 1;
+}
+
+setupagent() {
+  setupzombiegametypevars();
+  thread scripts\mp\agents\zombie\zombie_agent::_id_12EE6();
+  self.height = self._id_18F4;
+  self.radius = self._id_18F9;
+  self._id_B62D = 70;
+  self._id_B62E = 70;
+  self.meleeradiuswhentargetnotonnavmesh = 80;
+  self.meleeradiusbasesq = squared(self._id_B62E);
+  self.defaultgoalradius = self.radius + 1;
+  self.meleedot = 0.5;
+  self._id_B601 = 45;
+  self._id_504E = 55;
+  self._id_129AF = 55;
+  self.upaimlimit = -60;
+  self.downaimlimit = 60;
+  self.ground_pound_damage = 50;
+  self.footstepdetectdist = 2500;
+  self.footstepdetectdistwalk = 2500;
+  self.footstepdetectdistsprint = 2500;
+  self.ignoreall = 1;
+  self.dontmutilate = 1;
+
+  if(scripts\engine\utility::is_true(self.activated_venomx_sphere))
+    self.activated_venomx_sphere = undefined;
+
+  if(scripts\engine\utility::is_true(self.dot_triggered))
+    self.dot_triggered = undefined;
+
+  self.aj_goon = 0;
+  self.preventplayerpushdist = 12;
+  thread monitorwhizbys();
+}
+
+_id_AEB0() {
+  level._effect["alien_teleport_fx"] = loadfx("vfx/iw7/_requests/coop/zmb_fullbody_gib.vfx");
+}
+
+monitorwhizbys() {
+  self endon("death");
+  self.lastwhizbytime = undefined;
+
+  for(;;) {
+    self waittill("bulletwhizby", var_0, var_1);
+    self.lastwhizbytime = gettime();
+    self.lastwhizbyshooter = var_0;
+    self.lastwhizbydist = var_1;
+  }
+}
+
+calculatealiengoonhealth() {
+  var_0 = 200;
+
+  switch (level.specialroundcounter) {
+    case 0:
+      var_0 = 400;
+      break;
+    case 1:
+      var_0 = 900;
+      break;
+    case 2:
+      var_0 = 1300;
+      break;
+    case 3:
+      var_0 = 1600;
+      break;
+    case 4:
+      var_0 = 2000;
+      break;
+    default:
+      var_0 = 2000;
+  }
+
+  return var_0;
+}
+
+accumulatedamage(var_0, var_1) {
+  if(!isDefined(self.damageaccumulator)) {
+    self.damageaccumulator = spawnStruct();
+    self.damageaccumulator.accumulateddamage = 0;
+  } else if(!isDefined(self.damageaccumulator.lastdamagetime) || gettime() > self.damageaccumulator.lastdamagetime + 1000) {
+    self.damageaccumulator.accumulateddamage = 0;
+    self.damageaccumulator.lastdamagetime = 0;
+  }
+
+  self.damageaccumulator.lastdamagetime = gettime();
+
+  if(!isDefined(var_1))
+    var_1 = (1, 1, 1);
+
+  self.damageaccumulator.lastdir = var_1;
+
+  if(isDefined(self.fake_damage)) {
+    self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + self.fake_damage;
+    self.fake_damage = undefined;
+  } else
+    self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + var_0;
+}
+
+_id_C4E0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  accumulatedamage(var_2, var_7);
+  scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
+}

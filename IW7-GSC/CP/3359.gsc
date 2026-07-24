@@ -1,0 +1,378 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: 3359.gsc
+**************************************/
+
+tripmine_init() {
+  level._effect["tripMineLaserFr"] = loadfx("vfx/iw7/_requests/mp/power/vfx_trip_mine_beam_friendly.vfx");
+}
+
+tripmine_used(var_0) {
+  var_0 endon("death");
+  self endon("disconnect");
+  thread _id_127D3(self);
+  var_0 waittill("missile_stuck", var_1);
+  var_0 setotherent(self);
+  var_0 setnodeploy(1);
+  var_0._id_ABC7 = _id_127EB(var_0);
+  thread scripts\cp\cp_weapon::minedeletetrigger(var_0._id_ABC7);
+  var_0._id_ABC9 = _id_127EC(var_0);
+  thread scripts\cp\cp_weapon::minedeletetrigger(var_0._id_ABC9);
+  scripts\cp\cp_weapon::onlethalequipmentplanted(var_0, "power_tripMine");
+  thread scripts\cp\cp_weapon::monitordisownedequipment(self, var_0);
+  var_0 thread _id_127DC();
+  var_0 setscriptablepartstate("plant", "active", 0);
+  var_0 thread _id_127D1();
+}
+
+_id_127EB(var_0) {
+  var_1 = var_0 gettagorigin("tag_laser");
+  var_2 = var_0.angles;
+  var_3 = spawn("trigger_rotatable_radius", var_1, 0, 3, 1000);
+  var_3.angles = var_2;
+  var_3 enablelinkTo();
+  var_3 linkTo(var_0);
+  var_3 hide();
+  return var_3;
+}
+
+_id_127EC(var_0) {
+  var_1 = spawn("trigger_rotatable_radius", var_0.origin, 0, 32, 32);
+  var_1.angles = var_0.angles;
+  var_1 enablelinkTo();
+  var_1 linkTo(var_0);
+  var_1 hide();
+  return var_1;
+}
+
+_id_127D1() {
+  self endon("mine_triggered");
+  self endon("mine_destroyed");
+  self endon("mine_selfdestruct");
+  self endon("death");
+  self.owner endon("disconnect");
+  wait 1.0;
+  var_0 = self gettagorigin("tag_laser");
+  var_1 = var_0 + anglestoup(self.angles) * 1000;
+  thread _id_127E0(var_0, var_1);
+  thread _id_127F4();
+}
+
+_id_127DC() {
+  self endon("death");
+  self.owner endon("disconnect");
+  level endon("game_ended");
+  var_0 = self.owner;
+  self waittill("detonateExplosive", var_1);
+
+  if(isDefined(var_1))
+    thread _id_127DB(var_1);
+  else
+    thread _id_127DB(var_0);
+}
+
+_id_127D8() {
+  self endon("death");
+  self.owner endon("disconnect");
+  self waittill("emp_damage", var_0, var_1);
+
+  if(isDefined(self.owner) && var_0 != self.owner)
+    var_0 notify("destroyed_equipment");
+
+  thread _id_127D7();
+}
+
+_id_127DB(var_0) {
+  thread _id_127D6(5);
+  self setentityowner(var_0);
+  self setscriptablepartstate("plant", "neutral", 0);
+  self setscriptablepartstate("arm", "neutral", 0);
+  self setscriptablepartstate("trigger", "neutral", 0);
+  self setscriptablepartstate("launch", "neutral", 0);
+  self setscriptablepartstate("explode", "active_cp", 0);
+}
+
+_id_127D7(var_0) {
+  if(!isDefined(var_0))
+    var_0 = 0;
+
+  thread _id_127D6(var_0 + 2);
+  wait(var_0);
+  self setscriptablepartstate("plant", "neutral", 0);
+  self setscriptablepartstate("arm", "neutral", 0);
+  self setscriptablepartstate("trigger", "neutral", 0);
+  self setscriptablepartstate("launch", "neutral", 0);
+  self setscriptablepartstate("destroy", "active", 0);
+}
+
+_id_127E7(var_0) {
+  var_1 = spawn("script_model", self gettagorigin("tag_laser"));
+  var_1.angles = self.angles;
+  var_1 setotherent(self.owner);
+  var_1 setentityowner(self.owner);
+  var_1 setModel("trip_mine_wm_projectile");
+  var_1.owner = self.owner;
+  var_1.team = self.team;
+  var_1.weapon_name = "trip_mine_mp";
+  var_1.power = "power_tripMine";
+  var_1.killcament = self;
+  thread _id_127D7(0.2);
+  var_1 moveTo(var_0, 0.2, 0.1);
+  wait 0.2;
+  var_2 = undefined;
+
+  if(isDefined(var_1.owner)) {
+    var_2 = 5;
+    var_1 setscriptablepartstate("explode", "active_cp", 0);
+  } else {
+    var_2 = 2;
+    var_1 setscriptablepartstate("destroy", "active", 0);
+  }
+
+  wait(var_2);
+  var_1 delete();
+}
+
+_id_127F4() {
+  self endon("mine_triggered");
+  self endon("mine_destroyed");
+  self endon("mine_selfdestruct");
+  self endon("death");
+  self._id_6316 endon("death");
+  self.owner endon("disconnect");
+  var_0 = self._id_ABC7;
+  var_1 = _id_127D2();
+
+  while(isDefined(var_0)) {
+    var_0 waittill("trigger", var_2);
+
+    if(!_id_127E4(var_2, 1)) {
+      continue;
+    }
+    var_3 = scripts\engine\utility::ter_op(isPlayer(var_2) || isagent(var_2), var_2 gettagorigin("j_helmet"), var_2.origin);
+    var_4 = self gettagorigin("tag_laser");
+    var_5 = self._id_6316.origin;
+    var_6 = scripts\engine\utility::closestdistancebetweensegments(var_2.origin, var_3, var_4, var_5);
+
+    if(!isDefined(var_6)) {
+      continue;
+    }
+    var_7 = var_6[0];
+    var_8 = var_6[1];
+    var_9 = var_6[2];
+    var_10 = var_8[2] > var_3[2];
+    var_11 = var_8[2] < var_2.origin[2];
+
+    if(var_10 || var_11 || var_9 > 16) {
+      continue;
+    }
+    thread _id_127E8(var_2, var_8);
+    break;
+  }
+}
+
+_id_127F7() {
+  self endon("mine_triggered");
+  self endon("mine_destroyed");
+  self endon("mine_selfdestruct");
+  self endon("death");
+  self.owner endon("disconnect");
+  var_0 = self._id_ABC9;
+  var_1 = _id_127D2();
+
+  while(isDefined(var_0)) {
+    var_0 waittill("trigger", var_2);
+
+    if(!_id_127E4(var_2, 0)) {
+      continue;
+    }
+    var_3 = scripts\engine\utility::ter_op(isPlayer(var_2) || isagent(var_2), var_2 getEye(), var_2.origin);
+    var_4 = physics_raycast(self.origin, var_2 getEye(), var_1, self, 0, "physicsquery_closest");
+
+    if(isDefined(var_4) && var_4.size > 0) {
+      continue;
+    }
+    var_5 = self.origin;
+    var_6 = self._id_6316.origin;
+    var_7 = var_5 + (var_6 - var_5) * 0.2;
+    thread _id_127E8(var_2, var_7);
+    break;
+  }
+}
+
+_id_127E8(var_0, var_1) {
+  self endon("mine_destroyed");
+  self endon("mine_selfdestruct");
+  self endon("death");
+  self.owner endon("disconnect");
+  self notify("mine_triggered");
+  self setscriptablepartstate("trigger", "active", 0);
+  scripts\cp\cp_weapon::explosivetrigger(var_0, 0.3, "tripMine");
+  thread _id_127E7(var_1);
+}
+
+_id_127E4(var_0, var_1) {
+  if(!isDefined(var_0))
+    return 0;
+  else if(isPlayer(var_0) || isagent(var_0)) {
+    if(scripts\cp\powers\coop_phaseshift::isentityphaseshifted(var_0))
+      return 0;
+
+    if(!scripts\cp\utility::isreallyalive(var_0))
+      return 0;
+
+    if(self.team == var_0.team)
+      return 0;
+
+    if(!var_1 && lengthsquared(var_0 getentityvelocity()) < 0.0001)
+      return 0;
+    else
+      return 1;
+  } else
+    return 1;
+}
+
+_id_127E0(var_0, var_1) {
+  var_2 = spawn("script_model", var_0);
+  var_2 setModel("tag_origin");
+  var_3 = spawn("script_model", var_1);
+  var_3 setModel("tag_origin");
+  self._id_10D97 = var_2;
+  self._id_6316 = var_3;
+  self._id_10D97 linkTo(self);
+  self._id_6316 linkTo(self._id_10D97);
+  self._id_41F6 = [];
+  self._id_41EF = [];
+  scripts\engine\utility::waitframe();
+
+  if(!isDefined(self)) {
+    var_2 delete();
+    var_3 delete();
+    return;
+  } else {
+    var_4 = self.owner;
+    var_5 = self.owner.team;
+
+    foreach(var_7 in level.players) {
+      if(!isDefined(var_7)) {
+        continue;
+      }
+      var_8 = var_7 getentitynumber();
+      self._id_41F6[var_8] = var_7;
+      self._id_41EF[var_8] = playfxontagsbetweenclients(scripts\engine\utility::getfx("tripMineLaserFr"), self._id_10D97, "tag_origin", self._id_6316, "tag_origin", var_7);
+    }
+
+    thread _id_127F0();
+    thread _id_127EF();
+    thread _id_127F1();
+    _id_127E1();
+    self._id_10D97 delete();
+    self._id_6316 delete();
+
+    foreach(var_11 in self._id_41EF) {
+      if(isDefined(var_11))
+        var_11 delete();
+    }
+  }
+}
+
+_id_127E1() {
+  self endon("mine_destroyed");
+  self endon("mine_selfdestruct");
+  self endon("death");
+  self.owner endon("disconnect");
+  self waittill("forever");
+}
+
+_id_127F0() {
+  self endon("mine_destroyed");
+  self endon("mine_selfdestruct");
+  self endon("death");
+  self.owner endon("disconnect");
+  var_0 = self.owner;
+  var_1 = self.owner.team;
+
+  for(;;) {
+    level waittill("joined_team", var_2);
+    var_3 = var_2 getentitynumber();
+    self._id_41F6[var_3] = var_2;
+
+    if(isDefined(self._id_41EF[var_3]))
+      self._id_41EF[var_3] delete();
+
+    self._id_41EF[var_3] = playfxontagsbetweenclients(scripts\engine\utility::getfx("tripMineLaserFr"), self._id_10D97, "tag_origin", self._id_6316, "tag_origin", var_2);
+  }
+}
+
+_id_127EF() {
+  self endon("mine_destroyed");
+  self endon("mine_selfdestruct");
+  self endon("death");
+  self.owner endon("disconnect");
+
+  for(;;) {
+    foreach(var_2, var_1 in self._id_41F6) {
+      if(!isDefined(var_1)) {
+        if(isDefined(self._id_41EF[var_2]))
+          self._id_41EF[var_2] delete();
+
+        self._id_41F6[var_2] = undefined;
+        self._id_41EF[var_2] = undefined;
+      }
+    }
+
+    wait 0.1;
+  }
+}
+
+_id_127F1() {
+  self endon("mine_destroyed");
+  self endon("mine_selfdestruct");
+  self endon("death");
+  self.owner endon("disconnect");
+  var_0 = _id_127D2();
+
+  for(;;) {
+    var_1 = self._id_10D97.origin;
+    var_2 = var_1 + anglestoup(self.angles) * 1000;
+    var_3 = physics_raycast(var_1, var_2, var_0, self, 0, "physicsquery_closest");
+
+    if(isDefined(var_3) && var_3.size > 0)
+      var_2 = var_3[0]["position"];
+
+    self._id_6316 unlink();
+    self._id_6316.origin = var_2;
+    self._id_6316 linkTo(self._id_10D97);
+    scripts\engine\utility::waitframe();
+  }
+}
+
+_id_127D6(var_0) {
+  self notify("death");
+  level.mines[self getentitynumber()] = undefined;
+  self setCanDamage(0);
+  self freeentitysentient();
+  self.exploding = 1;
+  var_1 = self.owner;
+
+  if(isDefined(self.owner)) {
+    var_1.plantedlethalequip = scripts\engine\utility::array_remove(var_1.plantedlethalequip, self);
+    var_1 notify("c4_update", 0);
+  }
+
+  wait(var_0);
+  self delete();
+}
+
+_id_127D2() {
+  return physics_createcontents(["physicscontents_solid", "physicscontents_water", "physicscontents_sky", "physicscontents_glass", "physicscontents_vehicle", "physicscontents_item", "physicscontents_missileclip"]);
+}
+
+_id_127D3(var_0) {
+  self endon("death");
+  self endon("missile_stuck");
+  var_0 waittill("disconnect");
+
+  if(isDefined(self))
+    self delete();
+}
