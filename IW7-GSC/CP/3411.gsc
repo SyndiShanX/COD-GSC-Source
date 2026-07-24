@@ -211,7 +211,7 @@ freeze_zombie(var_0) {
   } else if(scripts\engine\utility::is_true(var_0.dismember_crawl)) {
     var_0 setscriptablepartstate("frozen", "frozen_crawl");
   } else {
-    var_0 setscriptablepartstate("frozen", "frozen");
+    var_0 setscriptablepartstate("frozen", "frozen", 1);
   }
 
   wait 10.1;
@@ -220,7 +220,7 @@ freeze_zombie(var_0) {
 
 unfreeze_zombie(var_0) {
   var_0 endon("death");
-  var_0 setscriptablepartstate("frozen", "unfrozen");
+  var_0 setscriptablepartstate("frozen", "unfrozen", 1);
 
   if(!isalive(var_0)) {
     return;
@@ -270,8 +270,8 @@ _id_5554(var_0, var_1) {
       var_0 setscriptablepartstate("arcane_white", "inactive", 1);
       var_0 setscriptablepartstate("eyes", "eye_glow_off", 1);
       break;
-    case "shocked":
     case "electrified":
+    case "shocked":
       var_0 setscriptablepartstate("cold", "inactive", 1);
       var_0 setscriptablepartstate("burning", "inactive", 1);
       var_0 setscriptablepartstate("chemburn", "inactive", 1);
@@ -339,8 +339,8 @@ _id_FFAA(var_0) {
   }
 
   switch (var_0.species) {
-    case "zombie_grey":
     case "zombie_brute":
+    case "zombie_grey":
       return 0;
     default:
       return 1;

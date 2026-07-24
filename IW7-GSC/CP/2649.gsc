@@ -265,13 +265,13 @@ _id_7A4A(var_0, var_1) {
       var_6 = var_0.script_noteworthy;
 
       switch (var_6) {
-        case "iw7_ripper_zmr":
         case "iw7_ripper_zm+ripperscope_zm":
+        case "iw7_ripper_zmr":
         case "shooting_gallery":
           var_2 = (0, 0, 12);
           break;
-        case "iw7_ake_zml":
         case "iw7_ake_zm":
+        case "iw7_ake_zml":
           if(var_5 == "swamp_stage") {
             var_2 = (0, 0, 12);
           }
@@ -365,11 +365,11 @@ _id_9CDB(var_0) {
 
 get_perk_machine_cost(var_0) {
   switch (var_0.perk_type) {
-    case "perk_machine_zap":
-    case "perk_machine_change":
     case "perk_machine_deadeye":
+    case "perk_machine_zap":
     case "perk_machine_fwoosh":
     case "perk_machine_boom":
+    case "perk_machine_change":
     case "perk_machine_revive":
       return 1500;
     case "perk_machine_flash":
@@ -434,6 +434,14 @@ _id_9C64(var_0, var_1, var_2) {
 
   if(scripts\engine\utility::is_true(var_1.requires_power) && !scripts\engine\utility::is_true(var_1.powered_on)) {
     return 0;
+  }
+
+  if(var_3 == "boss_fight_activation") {
+    if(scripts\engine\utility::flag_exist("boss_fight_ready_soon") && scripts\engine\utility::flag("boss_fight_ready_soon")) {
+      return 0;
+    } else {
+      return 1;
+    }
   }
 
   if(isDefined(level.active_volume_check)) {
@@ -1013,8 +1021,12 @@ _id_F422(var_0, var_1) {
   }
 
   if(var_1.script_noteworthy == "weapon_purchase" && isDefined(self.weapon_purchase_looking_at)) {
-    var_3 = _id_8228(self.weapon_purchase_looking_at.weaponname);
-    self.interaction_trigger sethintstringparams(var_3, int(5000));
+    if(scripts\cp\zombies\direct_boss_fight::is_kung_fu(self.weapon_purchase_looking_at.weaponname)) {
+      self.interaction_trigger sethintstringparams(scripts\cp\zombies\direct_boss_fight::get_kung_fu_string(self.weapon_purchase_looking_at.weaponname));
+    } else {
+      var_3 = _id_8228(self.weapon_purchase_looking_at.weaponname);
+      self.interaction_trigger sethintstringparams(var_3, int(scripts\cp\zombies\direct_boss_fight::get_weapon_cost(self.weapon_purchase_looking_at.weaponname)));
+    }
   } else if(interaction_is_weapon_buy(var_1)) {
     if(isDefined(var_2) && !isstring(var_2) && var_2 == &"COOP_INTERACTIONS_PURCHASE_AMMO") {
       var_4 = scripts\cp\utility::getrawbaseweaponname(var_1.script_noteworthy);
@@ -1037,7 +1049,7 @@ _id_F422(var_0, var_1) {
   } else if(var_1.script_noteworthy == "coaster") {
     self.interaction_trigger useTriggerRequireLookAt(1);
     self.interaction_trigger setusefov(245);
-  } else if(var_1.script_noteworthy == "dj_quest_speaker_mid" || var_1.script_noteworthy == "dj_quest_speaker" || var_1.script_noteworthy == "weapon_purchase") {
+  } else if(var_1.script_noteworthy == "dj_quest_speaker_mid" || var_1.script_noteworthy == "dj_quest_speaker" || var_1.script_noteworthy == "weapon_purchase" || var_1.script_noteworthy == "boss_fight_activation") {
     self.interaction_trigger useTriggerRequireLookAt(0);
     self.interaction_trigger setusefov(360);
   } else if(var_1.script_noteworthy == "spawned_essence") {
@@ -1182,19 +1194,19 @@ play_weapon_purchase_vo(var_0, var_1) {
       }
 
       break;
-    case "iw7_harpoon4_zm":
     case "iw7_harpoon3_zm":
+    case "iw7_harpoon_zm":
+    case "iw7_harpoon4_zm":
     case "iw7_harpoon2_zm":
     case "iw7_harpoon1_zm":
-    case "iw7_harpoon_zm":
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
       break;
-    case "iw7_ake_zml":
     case "iw7_ake_zm":
+    case "iw7_ake_zml":
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_assault", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
       break;
-    case "iw7_lmg03_zm":
     case "iw7_ameli_zm":
+    case "iw7_lmg03_zm":
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("purchase_weapon", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
       break;
     case "iw7_ar57_zm":
@@ -1243,8 +1255,8 @@ play_weapon_purchase_vo(var_0, var_1) {
     case "iw7_forgefreeze_zm":
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
       break;
-    case "iw7_g18_zmr":
     case "iw7_g18_zm":
+    case "iw7_g18_zmr":
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_pistol", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
       break;
     case "iw7_lockon_zm":
@@ -1660,10 +1672,10 @@ _id_7A4B(var_0, var_1) {
       var_2 = ["lost_and_found_purchase"];
       break;
     case "rockettrap":
-    case "blackhole_trap":
     case "scrambler":
     case "interaction_discoballtrap":
     case "beamtrap":
+    case "blackhole_trap":
       var_2 = ["trap_control_panel_purchase"];
       break;
     case "sliding_door":
@@ -1924,7 +1936,7 @@ can_use_perk(var_0) {
     return 0;
   } else if(self.self_revives_purchased >= self.max_self_revive_machine_use && var_0.perk_type == "perk_machine_revive") {
     return 0;
-  } else if(isDefined(self.zombies_perks) && self.zombies_perks.size > 4) {
+  } else if(isDefined(self.zombies_perks) && self.zombies_perks.size > 4 && !scripts\engine\utility::is_true(self.have_permanent_perks)) {
     return 0;
   }
 
@@ -2087,4 +2099,33 @@ souvenir_team_splash(var_0, var_1) {
     var_3 thread scripts\cp\cp_hud_message::showsplash(var_0, undefined, var_1);
     wait 0.1;
   }
+}
+
+atm_deposit_hint(var_0, var_1) {
+  if(exceed_deposit_limit(var_1)) {
+    return "";
+  }
+
+  return level.interaction_hintstrings[var_0.script_noteworthy];
+}
+
+exceed_deposit_limit(var_0) {
+  var_1 = 50000;
+
+  if(!isDefined(level.atm_total_deposit_amount)) {
+    level.atm_total_deposit_amount = [];
+  }
+
+  var_2 = var_0.name;
+
+  if(!isDefined(level.atm_total_deposit_amount[var_2])) {
+    level.atm_total_deposit_amount[var_2] = 0;
+  }
+
+  return level.atm_total_deposit_amount[var_2] >= var_1;
+}
+
+increase_total_deposit_amount(var_0, var_1) {
+  var_2 = var_0.name;
+  level.atm_total_deposit_amount[var_2] = level.atm_total_deposit_amount[var_2] + var_1;
 }

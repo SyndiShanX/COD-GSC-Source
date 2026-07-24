@@ -55,4 +55,9 @@ main() {
   level._effect["yellow_eye_glow"] = loadfx("vfx/iw7/core/zombie/vfx_zombie_yellow_eye_loop.vfx");
   level._effect["fnfeyes"] = loadfx("vfx/iw7/core/zombie/vfx_fnf_gloweyes.vfx");
   level._effect["muzzleflash"] = loadfx("vfx/iw7/core/zombie/vfx_frontend_muzzle_flash.vfx");
+  level._effect["vfx_zb_pack_grd_d"] = loadfx("vfx/iw7/core/zombie/frontend/vfx_zb_d.vfx");
+  level._effect["vfx_zb_pack_grd_e"] = loadfx("vfx/iw7/core/zombie/frontend/vfx_zb_e.vfx");
+  level._effect["vfx_zb_pack_grd_c"] = loadfx("vfx/iw7/core/zombie/frontend/vfx_zb_c.vfx");
+  level._effect["vfx_zb_pack_grd_b"] = loadfx("vfx/iw7/core/zombie/frontend/vfx_zb_b.vfx");
+  level._effect["vfx_zb_pack_grd_a"] = loadfx("vfx/iw7/core/zombie/frontend/vfx_zb_a.vfx");
 }

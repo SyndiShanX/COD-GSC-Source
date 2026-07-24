@@ -4396,13 +4396,13 @@ isprimaryweapon(var_0) {
   }
 
   switch (weaponclass(var_0)) {
-    case "smg":
+    case "spread":
     case "sniper":
     case "rocketlauncher":
     case "mg":
-    case "rifle":
-    case "spread":
     case "pistol":
+    case "rifle":
+    case "smg":
       return 1;
     default:
       return 0;
@@ -4434,12 +4434,12 @@ isbulletweapon(var_0) {
   }
 
   switch (weaponclass(var_0)) {
-    case "smg":
+    case "spread":
     case "sniper":
     case "mg":
-    case "rifle":
-    case "spread":
     case "pistol":
+    case "rifle":
+    case "smg":
       return 1;
     default:
       return 0;

@@ -437,31 +437,37 @@ _id_834A(var_0) {
     }
 
     if(scripts\cp\utility::is_consumable_active("wall_power")) {
+      var_16 = scripts\engine\utility::array_combine(getweaponattachments(var_4), ["pap1"]);
+
       if(issubstr(var_4, "venomx")) {
         var_16 = undefined;
-        var_4 = "iw7_venomx_zm_pap1";
-      } else
-        var_16 = scripts\engine\utility::array_combine(getweaponattachments(var_4), ["pap1"]);
-
-      if(isDefined(level.no_pap_camos) && scripts\engine\utility::array_contains(level.no_pap_camos, var_10)) {
         var_6 = undefined;
-      } else if(isDefined(level.pap_1_camo)) {
-        var_6 = level.pap_1_camo;
-      }
 
-      switch (var_10) {
-        case "dischord":
-          var_6 = "camo20";
-          break;
-        case "facemelter":
-          var_6 = "camo22";
-          break;
-        case "headcutter":
-          var_6 = "camo21";
-          break;
-        case "shredder":
-          var_6 = "camo23";
-          break;
+        if(scripts\engine\utility::is_true(level.completed_venomx_pap1_challenges)) {
+          var_4 = "iw7_venomx_zm_pap1";
+          var_6 = level.pap_1_camo;
+        }
+      } else {
+        if(isDefined(level.no_pap_camos) && scripts\engine\utility::array_contains(level.no_pap_camos, var_10)) {
+          var_6 = undefined;
+        } else if(isDefined(level.pap_1_camo)) {
+          var_6 = level.pap_1_camo;
+        }
+
+        switch (var_10) {
+          case "dischord":
+            var_6 = "camo20";
+            break;
+          case "facemelter":
+            var_6 = "camo22";
+            break;
+          case "headcutter":
+            var_6 = "camo21";
+            break;
+          case "shredder":
+            var_6 = "camo23";
+            break;
+        }
       }
 
       var_17 = scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_4, undefined, var_16, undefined, var_6);
@@ -471,6 +477,27 @@ _id_834A(var_0) {
       var_19 = spawnStruct();
       var_19.lvl = 2;
       self.pap[var_18] = var_19;
+
+      if(!scripts\engine\utility::is_true(level.completed_venomx_pap1_challenges) && issubstr(var_4, "venomx")) {
+        scripts\cp\utility::take_fists_weapon(self);
+        self notify("wor_item_pickup", var_17);
+        scripts\cp\cp_merits::processmerit("mt_purchased_weapon");
+        self givemaxammo(var_17);
+        self notify("weapon_level_changed");
+        self switchtoweapon(var_17);
+        wait 0.25;
+
+        while(self isswitchingweapon()) {
+          wait 0.05;
+        }
+
+        self notify("weapon_purchased");
+        wait 0.05;
+        self.purchasing_ammo = undefined;
+        scripts\cp\cp_interaction::refresh_interaction();
+        return;
+      }
+
       scripts\cp\utility::notify_used_consumable("wall_power");
       scripts\cp\utility::take_fists_weapon(self);
     } else {
@@ -736,6 +763,14 @@ interaction_purchase_weapon(var_0, var_1) {
     return;
   }
   if(issubstr(var_0.script_noteworthy, "venomx")) {
+    var_2 = var_1 getweaponslistall();
+
+    foreach(var_4 in var_2) {
+      if(issubstr(var_4, "venomx")) {
+        return;
+      }
+    }
+
     if(scripts\engine\utility::flag_exist("completepuzzles_step4") && scripts\engine\utility::flag("completepuzzles_step4")) {
       var_2 = var_1 getweaponslistall();
 
@@ -755,6 +790,7 @@ interaction_purchase_weapon(var_0, var_1) {
       var_1.last_interaction_point = undefined;
       var_1 scripts\cp\zombies\achievement::update_achievement("EGG_SLAYER", 1);
       scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(var_0, var_1);
+      return;
     }
   } else {
     var_0 _id_A02D(var_1);

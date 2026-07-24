@@ -129,10 +129,13 @@ generic_generator(var_0, var_1) {
 
   scripts\engine\utility::waitframe();
   level notify("activate_power");
-  var_1 thread scripts\cp\cp_vo::try_to_play_vo("activate_power", "zmb_comment_vo", "medium", 4, 0, 0, 0, 50);
 
-  if(isDefined(level.power_vo_func)) {
-    thread[[level.power_vo_func]](var_1);
+  if(!scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
+    var_1 thread scripts\cp\cp_vo::try_to_play_vo("activate_power", "zmb_comment_vo", "medium", 4, 0, 0, 0, 50);
+
+    if(isDefined(level.power_vo_func)) {
+      thread[[level.power_vo_func]](var_1);
+    }
   }
 
   wait 0.5;

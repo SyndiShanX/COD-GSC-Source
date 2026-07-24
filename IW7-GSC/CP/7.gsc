@@ -68,6 +68,10 @@ _id_00B6(var_0, var_1, var_2, var_3) {
   if(isDefined(level.weaponmapfunc)) {
     var_2 = [[level.weaponmapfunc]](var_2);
   }
+
+  if(isDefined(level.callbackfinishweaponchange)) {
+    [[level.callbackfinishweaponchange]](var_2, var_0, var_3, var_1);
+  }
 }
 
 codecallback_playerimpaled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {

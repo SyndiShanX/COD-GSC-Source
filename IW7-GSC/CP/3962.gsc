@@ -72,7 +72,7 @@ setupagent() {
   self.explosiondamagemax = 50;
   self.guid = self getentitynumber();
   self.backawayenemydist = 0;
-  self.meleerangesq = 90000;
+  self.meleerangesq = 22500;
   self.meleechargedist = 160;
   self.meleechargedistvsplayer = 250;
   self.meleechargedistreloadmultiplier = 1.2;

@@ -248,7 +248,10 @@ exit_globaldefaultaction() {
     self setweaponammoclip(self.pre_laststand_weapon, self.pre_laststand_weapon_ammo_clip);
   }
 
-  self setspawnweapon(self.lastweapon, 1);
+  if(is_valid_spawn_weapon(self.lastweapon)) {
+    self setspawnweapon(self.lastweapon, 1);
+  }
+
   give_fists_if_no_real_weapon(self);
   self.bleedoutspawnentityoverride = undefined;
   self.pre_arcade_game_weapon = undefined;
@@ -319,7 +322,7 @@ waitinlaststand(var_0, var_1, var_2) {
     }
   }
 
-  if(scripts\cp\utility::isplayingsolo() || level.only_one_player && !isDefined(level.the_hoff_revive)) {
+  if((scripts\cp\utility::isplayingsolo() || level.only_one_player) && !isDefined(level.the_hoff_revive)) {
     return wait_for_self_revive(var_0, var_1);
   } else {
     return wait_to_be_revived(self, self.origin, undefined, undefined, 1, get_normal_revive_time(), (0.33, 0.75, 0.24), var_3, 0, var_1, 1, var_2);
@@ -618,7 +621,7 @@ only_use_weapon() {
   }
 
   scripts\cp\utility::_giveweapon(var_0, scripts\cp\utility::get_weapon_variant_id(self, var_0), 0, 1);
-  var_1 = ["iw7_knife_zm", "iw7_knife_zm_hoff", "iw7_knife_zm_jock", "iw7_knife_zm_vgirl", "iw7_knife_zm_rapper", "iw7_knife_zm_nerd", "iw7_knife_zm_wyler", "iw7_knife_zm_schoolgirl", "iw7_knife_zm_scientist", "iw7_knife_zm_soldier", "iw7_knife_zm_rebel", "iw7_knife_zm_elvira", "iw7_knife_zm_crowbar", "iw7_knife_zm_cleaver", "iw7_knife_zm_disco"];
+  var_1 = ["iw7_knife_zm", "iw7_knife_zm_hoff", "iw7_knife_zm_jock", "iw7_knife_zm_vgirl", "iw7_knife_zm_rapper", "iw7_knife_zm_nerd", "iw7_knife_zm_wyler", "iw7_knife_zm_schoolgirl", "iw7_knife_zm_scientist", "iw7_knife_zm_soldier", "iw7_knife_zm_rebel", "iw7_knife_zm_elvira", "iw7_knife_zm_crowbar", "iw7_knife_zm_cleaver", "iw7_knife_zm_chola", "iw7_knife_zm_raver", "iw7_knife_zm_grunge", "iw7_knife_zm_hiphop", "iw7_knife_zm_kevinsmith", "iw7_knife_zm_disco"];
   var_2 = can_use_pistol_during_last_stand(self);
 
   if(var_2) {
@@ -1280,9 +1283,34 @@ self_revive(var_0) {
 
 give_fists_if_no_real_weapon(var_0) {
   if(has_no_real_weapon(var_0)) {
-    self giveweapon("iw7_fists_zm");
-    self switchtoweaponimmediate("iw7_fists_zm");
-    self setspawnweapon("iw7_fists_zm", 1);
+    var_1 = get_fists_weapon(var_0);
+
+    if(var_1 != "iw7_fists_zm" && var_0 hasweapon("iw7_fists_zm")) {
+      var_0 takeweapon("iw7_fists_zm");
+    }
+
+    self giveweapon(var_1);
+    self switchtoweaponimmediate(var_1);
+
+    if(is_valid_spawn_weapon(var_1)) {
+      self setspawnweapon(var_1, 1);
+    }
+  }
+}
+
+get_fists_weapon(var_0) {
+  if(isDefined(level.get_fists_weapon_func)) {
+    return [[level.get_fists_weapon_func]](var_0);
+  } else {
+    return "iw7_fists_zm";
+  }
+}
+
+is_valid_spawn_weapon(var_0) {
+  if(isDefined(level.is_valid_spawn_weapon_func)) {
+    return [[level.is_valid_spawn_weapon_func]](var_0);
+  } else {
+    return 1;
   }
 }
 

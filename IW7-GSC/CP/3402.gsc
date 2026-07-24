@@ -176,6 +176,8 @@ callback_zombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
       var_30 = 0;
     } else if(var_1 scripts\cp\utility::agentisfnfimmune()) {
       var_30 = 0;
+    } else if(isPlayer(var_12) && isPlayer(var_1)) {
+      var_30 = 0;
     } else {
       var_30 = 1;
     }
@@ -285,8 +287,8 @@ get_explosive_damage_on_player(var_0, var_1, var_2, var_3, var_4, var_5) {
       var_2 = var_7 * 100;
       break;
     case "iw7_g18_zml":
-    case "iw7_g18_zmr":
     case "iw7_g18_zm":
+    case "iw7_g18_zmr":
       if(scripts\cp\cp_weapon::get_weapon_level(var_6) <= 2) {
         var_7 = var_2 / 1800;
         var_2 = var_7 * 100;
@@ -377,6 +379,10 @@ useinvulnerability(var_0) {
 }
 
 shouldtakedamage(var_0, var_1, var_2, var_3) {
+  if(scripts\engine\utility::is_true(level.disableplayerdamage)) {
+    return 0;
+  }
+
   if(isDefined(var_2) && (issubstr(var_2, "venomx") || var_2 == "zmb_imsprojectile_mp" || var_2 == "zmb_fireworksprojectile_mp") || var_2 == "sentry_minigun_mp" || var_2 == "zmb_robotprojectile_mp" || var_2 == "iw7_electrictrap_zm") {
     return 0;
   }
@@ -546,10 +552,11 @@ stun_zap(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
 
     var_13 = ["j_crotch", "j_hip_le", "j_hip_ri"];
-    var_0 = var_1 gettagorigin(scripts\engine\utility::random(var_13));
 
     if(issubstr(var_1.agent_type, "alien")) {
       var_0 = var_1 gettagorigin("j_spine4");
+    } else {
+      var_0 = var_1 gettagorigin(scripts\engine\utility::random(var_13));
     }
 
     foreach(var_15 in var_12) {

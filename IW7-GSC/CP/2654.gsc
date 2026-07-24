@@ -15,7 +15,7 @@ init() {
 }
 
 mayprocessmerits() {
-  if(level.onlinegame) {
+  if(level.onlinegame && !scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
     return 1;
   }
 
@@ -184,6 +184,10 @@ process_agent_on_killed_merits(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
     if(issubstr(var_4, "g18_")) {
       var_24 = isDefined(var_1.has_replaced_starting_pistol);
     }
+
+    if(isDefined(var_1.pap2_card_weapon) && var_4 == var_1.pap2_card_weapon) {
+      var_24 = 0;
+    }
   }
 
   if(var_16) {
@@ -227,7 +231,7 @@ process_agent_on_killed_merits(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
         }
 
         break;
-      case "pistol":
+      case "weapon_pistol":
         var_1 processmerit("mt_pistol_kills");
         break;
       case "other":
@@ -422,8 +426,8 @@ is_crafted_trap_damage(var_0) {
     case "iw7_robotzap_zm":
     case "zmb_robotprojectile_mp":
     case "incendiary_ammo_mp":
-    case "alien_sentry_minigun_4_mp":
     case "iw7_electrictrap_zm":
+    case "alien_sentry_minigun_4_mp":
       return 1;
   }
 

@@ -155,4 +155,20 @@ main() {
   level._effect["vfx_screen_flash"] = loadfx("vfx/core/mp/core/vfx_screen_flash");
   level._effect["computer_screen"] = loadfx("vfx/iw7/levels/cp_rave/vfx_rave_computer_screen.vfx");
   level._effect["cone_expl_fx"] = loadfx("vfx/iw7/core/muzflash/rvn/vfx_rvn_defib_legend_cone.vfx");
+  level._effect["twister"] = loadfx("vfx/iw7/core/zombie/vfx_fnf_twister.vfx");
+  level._effect["powerup_additive_fx"] = loadfx("vfx/iw7/core/zombie/powerups/vfx_pwrup_additive.vfx");
+  level._effect["dodge_ground_spark_fx"] = loadfx("vfx/core/mp/killstreaks/vfx_ims_sparks");
+  level._effect["dodge_fwd_screen"] = loadfx("vfx/iw7/levels/cp_town/dodge/vfx_zb_fwd.vfx");
+  level._effect["dodge_back_screen"] = loadfx("vfx/iw7/levels/cp_town/dodge/vfx_zb_back.vfx");
+  level._effect["dodge_left_screen"] = loadfx("vfx/iw7/levels/cp_town/dodge/vfx_zb_left.vfx");
+  level._effect["dodge_right_screen"] = loadfx("vfx/iw7/levels/cp_town/dodge/vfx_zb_right.vfx");
+  level._effect["dodge_fwd_left_screen"] = loadfx("vfx/iw7/levels/cp_town/dodge/vfx_zb_fwd_left.vfx");
+  level._effect["dodge_fwd_right_screen"] = loadfx("vfx/iw7/levels/cp_town/dodge/vfx_zb_fwd_right.vfx");
+  level._effect["dodge_back_left_screen"] = loadfx("vfx/iw7/levels/cp_town/dodge/vfx_zb_back_left.vfx");
+  level._effect["dodge_back_right_screen"] = loadfx("vfx/iw7/levels/cp_town/dodge/vfx_back_right.vfx");
+  level._effect["dodge_touch"] = loadfx("vfx/iw7/levels/cp_town/dodge/vfx_zb_dodge_touch.vfx");
+  level._effect["stimulus_shield"] = loadfx("vfx/iw7/levels/cp_town/fnf/vfx_stimulus_heal_scrn.vfx");
+  level._effect["stimulus_glow_burst"] = loadfx("vfx/iw7/levels/cp_town/fnf/vfx_stimulus_burst.vfx");
+  level._effect["ammo_crate_fx"] = loadfx("vfx/iw7/levels/cp_town/craft/vfx_cp_town_ammo_idle.vfx");
+  level._effect["ammo_crate_ping"] = loadfx("vfx/iw7/levels/cp_town/vfx_cp_town_ammo_flash.vfx");
 }

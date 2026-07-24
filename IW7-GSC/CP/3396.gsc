@@ -12,6 +12,10 @@ enter_afterlife_arcade(var_0) {
     var_0.first_time_in_arcade = 1;
   }
 
+  if(isDefined(level.afterlife_arcade_set_audio_zone_func)) {
+    var_0 thread[[level.afterlife_arcade_set_audio_zone_func]](var_0);
+  }
+
   var_1 = get_afterlife_arcade_start_point(var_0);
   clearplayersweaponlevels(var_0);
   level notify("player_entered_ala", var_0);
@@ -99,7 +103,7 @@ enter_afterlife_arcade(var_0) {
   if(isDefined(level.aa_ww_char_vo)) {
     var_0 thread[[level.aa_ww_char_vo]](var_0);
   } else {
-    var_0 thread scripts\cp\cp_vo::try_to_play_vo("ww_afterlife_arrive", "zmb_afterlife_vo", "high", 20, 0, 0, 1);
+    level thread play_willard_afterlife_vo(var_0);
   }
 
   if(isDefined(level.aa_memoirs_vo)) {
@@ -107,6 +111,17 @@ enter_afterlife_arcade(var_0) {
   }
 
   var_0 thread freeze_controls_for_time();
+}
+
+play_willard_afterlife_vo(var_0) {
+  level endon("game_ended");
+  var_0 endon("disconnect");
+
+  while(scripts\engine\utility::is_true(var_0.vo_system_playing_vo)) {
+    wait 0.1;
+  }
+
+  var_0 thread scripts\cp\cp_vo::try_to_play_vo("ww_afterlife_arrive", "zmb_afterlife_vo", "high", 20, 0, 0, 1);
 }
 
 freeze_controls_for_time() {
@@ -307,6 +322,10 @@ exit_afterlife_arcade(var_0) {
 
   if(var_0 hasweapon("iw7_gunless_zm")) {
     var_0 takeweapon("iw7_gunless_zm");
+  }
+
+  if(isDefined(level.afterlife_arcade_unset_audio_zone_func)) {
+    var_0 thread[[level.afterlife_arcade_unset_audio_zone_func]](var_0);
   }
 
   level thread close_afterlife_door_for_player(var_0);

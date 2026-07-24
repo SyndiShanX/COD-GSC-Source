@@ -44,7 +44,7 @@ endgame(var_0, var_1) {
   level.ingraceperiod = 0;
   setomnvar("allow_server_pause", 0);
   scripts\engine\utility::waitframe();
-  level.time_survived = int((gettime() - level.starttime) / 1000);
+  level.time_survived = get_time_survived();
   setomnvar("zm_time_survived", level.time_survived);
   setomnvarforallclients("post_game_state", 1);
   setDvar("g_deadChat", 1);
@@ -109,12 +109,30 @@ endgame(var_0, var_1) {
 
   var_17 = _id_7978(var_1);
   var_18 = _id_7B85();
+  scripts\cp\zombies\direct_boss_fight::adjust_wave_num(var_17);
   scripts\cp\cp_analytics::endgame(var_17, var_18);
+
+  if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
+    if(var_1 == 1) {
+      setomnvar("zm_boss_splash", 5);
+    } else {
+      setomnvar("zm_boss_splash", 6);
+    }
+  }
+
   setomnvarforallclients("post_game_state", 4);
   wait 11.0;
   setomnvarforallclients("post_game_state", 1);
   level notify("exitLevel_called");
   exitlevel(0);
+}
+
+get_time_survived() {
+  if(isDefined(level.calculate_time_survived_func)) {
+    return [[level.calculate_time_survived_func]]();
+  }
+
+  return int((gettime() - level.starttime) / 1000);
 }
 
 kill_all_zombies() {
@@ -137,9 +155,9 @@ kill_all_zombies() {
     }
     switch (var_2.agent_type) {
       case "zombie_cop":
-      case "zombie_ghost":
-      case "zombie_brute":
       case "zombie_clown":
+      case "zombie_brute":
+      case "zombie_ghost":
         break;
       case "generic_zombie":
         playFX(level._effect["head_loss"], var_2 gettagorigin("j_head"));

@@ -880,6 +880,12 @@ shouldignoreent(var_0) {
     return 1;
   }
 
+  if(isDefined(level.killingtimevalidationcheck)) {
+    if(![[level.killingtimevalidationcheck]](self, var_0)) {
+      return 0;
+    }
+  }
+
   if(isDefined(var_0.killing_time)) {
     return 1;
   }

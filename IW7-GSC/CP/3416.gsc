@@ -152,6 +152,10 @@ jaroslav_hint_logic(var_0, var_1) {
     var_2 = level.interaction_hintstrings[var_0.script_noteworthy];
   }
 
+  if(scripts\engine\utility::is_true(level.meph_fight_started)) {
+    return level.interaction_hintstrings[var_0.script_noteworthy];
+  }
+
   if(scripts\engine\utility::is_true(level.unlimited_fnf)) {
     return var_2;
   }

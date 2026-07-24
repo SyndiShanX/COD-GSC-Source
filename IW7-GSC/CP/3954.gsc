@@ -625,8 +625,8 @@ _id_AED2(var_0) {
     case "left_leg_lower":
     case "left_leg_upper":
       return 8;
-    case "neck":
     case "helmet":
+    case "neck":
     case "head":
       return 16;
     default:
@@ -1339,7 +1339,7 @@ _id_10926(var_0, var_1, var_2) {
   if(isDefined(self.isfrozen) && !issubstr(self.agent_type, "alien")) {
     self.nocorpse = 1;
     self playSound("forge_freeze_shatter");
-    self setscriptablepartstate("frozen", "unfrozen");
+    self setscriptablepartstate("frozen", "unfrozen", 1);
     playFX(level._effect["zombie_freeze_shatter"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
     return;
   }

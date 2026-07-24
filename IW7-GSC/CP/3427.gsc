@@ -1267,10 +1267,10 @@ assign_ark_attachment_properties(var_0, var_1, var_2) {
   }
 
   switch (var_1) {
-    case "arkblue_sm":
     case "arkblue_akimbo":
-    case "blue":
     case "arkblue":
+    case "blue":
+    case "arkblue_sm":
       self setclientomnvar("zm_ui_specialammo", 1);
       self.special_ammo_type = "stun_ammo";
       self.special_ammo_weapon = var_2;
@@ -1283,10 +1283,10 @@ assign_ark_attachment_properties(var_0, var_1, var_2) {
       scripts\cp\utility::_unsetperk("specialty_armorpiercing");
       self setscriptablepartstate("arcane", "blue_on", 0);
       break;
-    case "arkgreen_sm":
     case "arkgreen_akimbo":
     case "arkgreen":
     case "green":
+    case "arkgreen_sm":
       self.special_ammo_type = "poison_ammo";
       self setclientomnvar("zm_ui_specialammo", 0);
       scripts\cp\utility::_unsetperk("specialty_explosivebullets");
@@ -1294,10 +1294,10 @@ assign_ark_attachment_properties(var_0, var_1, var_2) {
       scripts\cp\utility::_unsetperk("specialty_bulletdamage");
       self setscriptablepartstate("arcane", "green_on", 0);
       break;
-    case "arkyellow_sm":
     case "arkyellow_akimbo":
-    case "yellow":
     case "arkyellow":
+    case "yellow":
+    case "arkyellow_sm":
       self setclientomnvar("zm_ui_specialammo", 3);
       self.special_ammo_type = "explosive_ammo";
 
@@ -1309,10 +1309,10 @@ assign_ark_attachment_properties(var_0, var_1, var_2) {
       scripts\cp\utility::_unsetperk("specialty_bulletdamage");
       self setscriptablepartstate("arcane", "yellow_on", 0);
       break;
-    case "arkred_sm":
     case "arkred_akimbo":
     case "arkred":
     case "red":
+    case "arkred_sm":
       self setclientomnvar("zm_ui_specialammo", 2);
       self.special_ammo_type = "incendiary_ammo";
       scripts\cp\utility::_unsetperk("specialty_explosivebullets");
@@ -1320,11 +1320,11 @@ assign_ark_attachment_properties(var_0, var_1, var_2) {
       scripts\cp\utility::_unsetperk("specialty_bulletdamage");
       self setscriptablepartstate("arcane", "red_on", 0);
       break;
-    case "arkpink_sm":
     case "arkpink_akimbo":
     case "arkpink_lmg":
-    case "pink":
     case "arkpink":
+    case "pink":
+    case "arkpink_sm":
       self setclientomnvar("zm_ui_specialammo", 5);
       self.special_ammo_type = "combined_ammo";
 

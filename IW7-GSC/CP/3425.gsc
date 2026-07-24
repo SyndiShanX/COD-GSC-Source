@@ -2326,6 +2326,9 @@ deactivate_volume_by_name(var_0) {
 }
 
 make_volume_active() {
+  if(isDefined(self.active) && self.active) {
+    return;
+  }
   var_0 = 1;
 
   if(scripts\cp\utility::is_escape_gametype()) {
@@ -2374,6 +2377,9 @@ make_volume_active() {
 }
 
 make_volume_inactive() {
+  if(isDefined(self.active) && !self.active) {
+    return;
+  }
   self.active = 0;
 
   if(is_in_array(level.active_spawn_volumes, self)) {
@@ -2792,7 +2798,7 @@ _id_E81B() {
         }
       }
 
-      if(getDvar("ui_gametype") == "zombie") {
+      if(getDvar("ui_gametype") == "zombie" && !scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
         foreach(var_4 in level.players) {
           var_4 setclientomnvar("zombie_wave_number", level.wave_num);
           var_4 scripts\cp\cp_merits::processmerit("mt_highest_round");
@@ -2825,8 +2831,10 @@ _id_E81B() {
       level notify("spawn_wave_done");
     }
 
-    if(isDefined(level.final_wave_vo_func)) {
-      level thread[[level.final_wave_vo_func]](level.wave_num);
+    if(level.wave_num > 2) {
+      if(isDefined(level.final_wave_vo_func)) {
+        level thread[[level.final_wave_vo_func]](level.wave_num);
+      }
     }
 
     var_6 = int(1000);
@@ -2836,7 +2844,10 @@ _id_E81B() {
     }
 
     foreach(var_4 in level.players) {
-      var_4 scripts\cp\cp_persistence::give_player_xp(var_6, 1);
+      if(!scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
+        var_4 scripts\cp\cp_persistence::give_player_xp(var_6, 1);
+      }
+
       var_4 scripts\cp\cp_merits::processmerit("mt_total_rounds");
 
       if(level.wave_num > 0) {
@@ -3443,8 +3454,8 @@ _id_FF1A(var_0) {
   }
 
   switch (var_0.agent_type) {
-    case "zombie_grey":
     case "zombie_brute":
+    case "zombie_grey":
       return 0;
     default:
       return 1;
@@ -3863,7 +3874,10 @@ _id_F546(var_0) {
 }
 
 _id_BDD4() {
-  scripts\cp\utility::playsoundinspace("mus_zombies_newwave", (0, 0, 0), 1);
+  if(!scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
+    scripts\cp\utility::playsoundinspace("mus_zombies_newwave", (0, 0, 0), 1);
+  }
+
   level notify("wave_start_sound_done");
 }
 

@@ -521,7 +521,13 @@ play_perk_machine_purchase_sound(var_0, var_1) {
   switch (var_0.name) {
     case "perk_machine_revive":
       var_2 = ["mus_zmb_upnatoms_purchase"];
-      var_3 = "purchase_perk_upnatoms";
+
+      if(level.players.size < 2) {
+        var_3 = "purchase_perk_revive_solo";
+      } else {
+        var_3 = "purchase_perk_upnatoms";
+      }
+
       break;
     case "perk_machine_more":
       var_2 = ["mus_zmb_mulemunchies_purchase"];
@@ -899,6 +905,9 @@ wait_for_change_chews_update() {
     self waittill("change_chews_damage", var_0, var_1);
 
     if(var_1 > 30) {
+      continue;
+    }
+    if(scripts\engine\utility::is_true(self.playing_ghosts_n_skulls)) {
       continue;
     }
     if(isDefined(self.sub_perks) && isDefined(self.sub_perks["perk_machine_change"])) {

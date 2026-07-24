@@ -289,10 +289,10 @@ return_pap_attachment(var_0, var_1, var_2, var_3, var_4) {
       case "spiked":
       case "golf":
       case "two":
-      case "machete":
       case "katana":
       case "nunchucks":
       case "venomx":
+      case "machete":
         return "replace_me";
       default:
         if(scripts\engine\utility::is_true(var_4)) {
@@ -404,10 +404,10 @@ getoffsetfrombaseweaponname(var_0) {
     case "iw7_crb":
       return (0, -7, 3);
     case "iw7_shredder":
-    case "iw7_nrg":
     case "iw7_headcutter":
     case "iw7_facemelter":
     case "iw7_dischord":
+    case "iw7_nrg":
     case "iw7_emc":
       return (0, 0, 0);
     case "iw7_forgefreeze":
@@ -642,6 +642,7 @@ _id_12F72(var_0, var_1, var_2) {
       var_12 = var_0 scripts\cp\utility::_giveweapon(var_12, undefined, undefined, 1);
       var_0.pap[var_3].lvl++;
       var_0 notify("weapon_level_changed");
+      var_0 givemaxammo(var_12);
       return var_12;
     }
   }

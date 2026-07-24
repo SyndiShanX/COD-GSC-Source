@@ -152,9 +152,14 @@ interaction_atm_deposit(var_0, var_1) {
   var_1 notify("stop_interaction_logic");
   var_1.last_interaction_point = undefined;
   level.atm_amount_deposited = level.atm_amount_deposited + 1000;
+  scripts\cp\cp_interaction::increase_total_deposit_amount(var_1, 1000);
   var_0 notify("deposit_made", var_1);
   var_1 thread scripts\cp\cp_vo::try_to_play_vo("atm_deposit", "zmb_comment_vo", "low", 10, 0, 0, 1, 40);
   scripts\cp\zombies\zombie_analytics::log_atmused(1, level.wave_num, var_1);
+
+  if(scripts\cp\cp_interaction::exceed_deposit_limit(var_1)) {
+    scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(var_0, var_1);
+  }
 }
 
 interaction_atm_withdrawal(var_0, var_1) {

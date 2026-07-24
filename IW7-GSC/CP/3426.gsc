@@ -141,15 +141,15 @@ play_vo_on_dist(var_0, var_1, var_2, var_3) {
 
 _id_FF72(var_0) {
   switch (var_0.agent_type) {
+    case "slasher":
     case "karatemaster":
     case "zombie_sasquatch":
-    case "slasher":
-    case "zombie_grey":
-    case "zombie_brute":
     case "ratking":
     case "skater":
     case "crab_brute":
     case "crab_mini":
+    case "zombie_brute":
+    case "zombie_grey":
       return 0;
     default:
       return 1;

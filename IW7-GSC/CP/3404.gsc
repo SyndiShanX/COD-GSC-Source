@@ -105,7 +105,10 @@ _id_95B5(var_0) {
       var_6 scripts\cp\cp_persistence::take_player_currency(level.interactions[var_1[0].script_noteworthy].cost, 1, "door");
       scripts\cp\zombies\zombie_analytics::_id_AF7E(1, var_6, var_1[0].script_area, level.interactions[var_1[0].script_noteworthy].cost, level.wave_num);
       var_7 = int(250);
-      var_6 scripts\cp\cp_persistence::give_player_xp(var_7, 1);
+
+      if(!scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
+        var_6 scripts\cp\cp_persistence::give_player_xp(var_7, 1);
+      }
     }
 
     if(isDefined(level.escape_objective_notify)) {
@@ -394,10 +397,11 @@ open_team_killdoor(var_0) {
   var_0 thread scripts\cp\cp_vo::try_to_play_vo("door_kill_purchase", "disco_comment_vo");
 
   if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player)) {
-    var_0 scripts\cp\cp_persistence::give_player_xp(250, 1);
-  } else {
+    if(!scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
+      var_0 scripts\cp\cp_persistence::give_player_xp(250, 1);
+    }
+  } else if(!scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight())
     var_0 scripts\cp\cp_persistence::give_player_xp(75, 1);
-  }
 }
 
 open_team_killdoor_sfx(var_0) {
@@ -464,7 +468,10 @@ chi_door_think() {
       var_9 notify("door_opened_notify");
       scripts\cp\zombies\zombie_analytics::_id_AF7E(1, var_9, var_3[0].script_area, level.interactions[var_3[0].script_noteworthy].cost, level.wave_num);
       var_19 = int(250);
-      var_9 scripts\cp\cp_persistence::give_player_xp(var_19, 1);
+
+      if(!scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
+        var_9 scripts\cp\cp_persistence::give_player_xp(var_19, 1);
+      }
     }
 
     if(isPlayer(var_9) && var_9 scripts\cp\utility::is_valid_player()) {

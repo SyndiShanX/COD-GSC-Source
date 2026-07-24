@@ -122,7 +122,11 @@ jukebox_start(var_0, var_1, var_2) {
     var_6 playLoopSound(var_8);
     level.songs_played++;
     var_11 = lookupsoundlength(var_8) / 1000;
-    setomnvar("song_playing", var_10);
+
+    if(!scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
+      setomnvar("song_playing", var_10);
+    }
+
     level.song_last_played = var_10;
     var_6 thread earlyendon(var_6);
     level scripts\engine\utility::waittill_any_timeout(var_11, "skip_song");

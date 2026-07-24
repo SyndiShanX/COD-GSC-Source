@@ -446,6 +446,8 @@ zombiegreyassigntargetplayer(var_0) {
       return anim.failure;
     }
   }
+
+  return anim.failure;
 }
 
 assigntargetplayer(var_0, var_1) {
@@ -640,7 +642,13 @@ set_next_teleport_dash_time(var_0) {
 }
 
 set_next_melee_time(var_0) {
-  var_0.next_melee_time = gettime() + 3000;
+  var_1 = 3;
+
+  if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
+    var_1 = 0.5;
+  }
+
+  var_0.next_melee_time = gettime() + var_1 * 1000;
 }
 
 set_next_teleport_time(var_0) {

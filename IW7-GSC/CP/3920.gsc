@@ -4,6 +4,8 @@
 **************************************/
 
 main() {
+  level._effect["vfx_blood_throw"] = loadfx("vfx/iw7/levels/cp_zmb/willard/vfx_blood_throw.vfx");
+  level._effect["vfx_blood_cut"] = loadfx("vfx/iw7/levels/cp_zmb/willard/vfx_blood_cut.vfx");
   level._effect["vfx_zmb_gns_ghost_float_arms"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_zmb_ghost_arms.vfx");
   level._effect["vfx_zmb_gns_ghost_float_legs"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_zmb_ghost_legs.vfx");
   level._effect["vfx_zb_pack_grd_d"] = loadfx("vfx/iw7/core/zombie/pack_a_punch/vfx_zb_pack_grd_d.vfx");
@@ -161,7 +163,6 @@ main() {
   level._effect["cone_expl_fx"] = loadfx("vfx/iw7/core/muzflash/rvn/vfx_rvn_defib_legend_cone.vfx");
   level._effect["powerup_additive_fx"] = loadfx("vfx/iw7/core/zombie/powerups/vfx_pwrup_additive.vfx");
   level._effect["dodge_ground_spark_fx"] = loadfx("vfx/core/mp/killstreaks/vfx_ims_sparks");
-  level._effect["dash_trail"] = loadfx("vfx/iw7/levels/cp_town/dodge/vfx_zb_dodge_trail.vfx");
   level._effect["dodge_fwd_screen"] = loadfx("vfx/iw7/levels/cp_town/dodge/vfx_zb_fwd.vfx");
   level._effect["dodge_back_screen"] = loadfx("vfx/iw7/levels/cp_town/dodge/vfx_zb_back.vfx");
   level._effect["dodge_left_screen"] = loadfx("vfx/iw7/levels/cp_town/dodge/vfx_zb_left.vfx");

@@ -24,8 +24,8 @@ _id_3EFC(var_0, var_1, var_2) {
       case "slow_walk":
         var_3 = "_walk";
         break;
-      case "run":
       case "sprint":
+      case "run":
         var_3 = "_run";
         break;
       default:
@@ -55,8 +55,8 @@ _id_3EFB(var_0, var_1, var_2) {
       case "slow_walk":
         var_3 = "_walk";
         break;
-      case "run":
       case "sprint":
+      case "run":
         var_3 = "_run";
         break;
       default:
@@ -809,8 +809,8 @@ _id_3F08(var_0, var_1, var_2) {
     case "slow_walk":
       var_2 = var_2 + "_walk";
       break;
-    case "run":
     case "sprint":
+    case "run":
       var_2 = var_2 + "_run";
       break;
     default:
@@ -1208,7 +1208,7 @@ _id_7389(var_0, var_1, var_2, var_3) {
   if(scripts\engine\utility::is_true(self.activated_slomo_sphere)) {
     scripts\asm\asm_mp::_id_2365(var_0, var_1, 0.1, var_4, 0.2);
   } else if(scripts\engine\utility::is_true(self.activated_venomx_sphere)) {
-    scripts\asm\asm_mp::_id_2365(var_0, var_1, 0.1, var_4, 0.4);
+    scripts\asm\asm_mp::_id_2365(var_0, var_1, 0.1, var_4, 0.2);
   } else {
     scripts\asm\asm_mp::_id_2365(var_0, var_1, 0.1, var_4, 0.001);
   }

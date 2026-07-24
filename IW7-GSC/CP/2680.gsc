@@ -31,6 +31,9 @@ camera_move_helper(var_0, var_1, var_2) {
 }
 
 frontend_camera_move(var_0, var_1, var_2, var_3, var_4) {
+  level endon("game_ended");
+  self endon("disconnect");
+
   if(isDefined(level.camera_anchor.move_target)) {
     level.camera_anchor.origin = level.camera_anchor.move_target.origin;
     level.camera_anchor.angles = level.camera_anchor.move_target.angles;
@@ -67,7 +70,12 @@ frontend_camera_move(var_0, var_1, var_2, var_3, var_4) {
 }
 
 frontend_camera_teleport(var_0, var_1, var_2, var_3, var_4, var_5) {
+  level endon("game_ended");
+  self endon("disconnect");
+  level notify("camera_teleport");
+  level endon("camera_teleport");
   level.playerviewowner predictstreampos(var_0.origin);
+  level.transition_interrupted = 1;
   frontendscenecamerafade(0, var_3);
   wait(var_3 + 0.05);
   frontendscenecamerafov(var_1, 0);
@@ -87,6 +95,7 @@ frontend_camera_teleport(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   frontendscenecamerafade(1, var_4);
+  level.transition_interrupted = 0;
 }
 
 frontend_camera_watcher(var_0) {

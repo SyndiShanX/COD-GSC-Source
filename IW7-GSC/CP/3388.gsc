@@ -179,7 +179,7 @@ kill_zombies(var_0, var_1) {
       var_3 dodamage(var_3.health + 1000, var_4.origin, var_1, var_1, "MOD_UNKNOWN", "iw7_escapevelocity_zm");
       var_3 thread fling_zombie(var_4, var_1);
     } else {
-      var_3 dodamage(var_3.health + 1000, var_4.origin, undefined, undefined, "MOD_UNKNOWN", "iw7_escapevelocity_zm");
+      var_3 dodamage(var_3.health + 1000, var_4.origin, var_1, var_1, "MOD_UNKNOWN", "iw7_escapevelocity_zm");
       var_3 thread fling_zombie(var_4, undefined);
     }
   }

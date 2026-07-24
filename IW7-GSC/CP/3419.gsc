@@ -166,7 +166,7 @@ delayreturningperks(var_0) {
 release_character_number(var_0) {
   var_1 = var_0._id_CFC4;
 
-  if(!scripts\engine\utility::array_contains(level.available_player_characters, var_1) && var_1 != 5) {
+  if(!scripts\engine\utility::array_contains(level.available_player_characters, var_1) && var_1 != 5 && var_1 != 6) {
     level.available_player_characters = scripts\engine\utility::array_add(level.available_player_characters, var_1);
   }
 }

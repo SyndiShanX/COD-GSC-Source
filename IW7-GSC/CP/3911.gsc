@@ -204,16 +204,14 @@ _id_2371() {
   scripts\asm\asm::_id_2374("cover_stand_arrival", _id_0F3A::_id_CEAA, undefined, undefined, undefined, undefined, _id_0F3A::_id_3E97, "Cover Stand", undefined, undefined, undefined, undefined, undefined, undefined, "death_moving", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
   scripts\asm\asm::_id_2375("stand_run_loop", undefined, scripts\asm\asm::_id_68B0, "abort");
   scripts\asm\asm::_id_2374("stand_run_strafe_loop", _id_0F3B::_id_D4E5, undefined, undefined, undefined, undefined, _id_0F3C::_id_3E96, undefined, ["aim"], "stand", ["shoot_grey"], undefined, "pain_stand", undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2375("melee_attack", undefined, scripts\asm\asm_bb::bb_meleerequested, undefined);
   scripts\asm\asm::_id_2375("stop_stand_run_strafe", undefined, scripts\asm\shared\utility::_id_12668, undefined);
-  scripts\asm\asm::_id_2375("stop_stand_run_strafe", undefined, scripts\asm\shared\utility::_id_12668, undefined);
-  scripts\asm\asm::_id_2375("stop_stand_run_strafe", undefined, scripts\asm\shared\utility::_id_12668, undefined);
+  scripts\asm\asm::_id_2375("stand_run_loop", undefined, _id_0F3C::_id_FFB6, "stand");
+  scripts\asm\asm::_id_2375("stand_run_loop", undefined, scripts\asm\asm_bb::bb_meleechargerequested, undefined);
   scripts\asm\asm::_id_2375("teleport_to_loner", undefined, scripts\asm\zombie_grey\zombie_grey_asm::zombiegreyshouldteleporttoloner, undefined);
-  scripts\asm\asm::_id_2375("stop_stand_run_strafe", undefined, scripts\asm\shared\utility::_id_12668, undefined);
   scripts\asm\asm::_id_2375("teleport_attack", undefined, scripts\asm\zombie_grey\zombie_grey_asm::zombiegreyshouldteleportattack, undefined);
   scripts\asm\asm::_id_2375("teleport_summon", undefined, scripts\asm\zombie_grey\zombie_grey_asm::zombiegreyshouldteleportsummon, undefined);
   scripts\asm\asm::_id_2375("teleport_dash", undefined, scripts\asm\zombie_grey\zombie_grey_asm::zombiegreyshouldteleportdash, undefined);
-  scripts\asm\asm::_id_2375("stand_run_loop", undefined, _id_0F3C::_id_FFB6, "stand");
-  scripts\asm\asm::_id_2375("stand_run_loop", undefined, scripts\asm\asm_bb::bb_meleechargerequested, undefined);
   scripts\asm\asm::_id_2374("stand_run_n_gun_loop", _id_0C36::_id_D50D, undefined, undefined, _id_0C36::_id_11088, undefined, _id_0F3C::_id_3E96, undefined, undefined, undefined, ["shoot_grey"], undefined, "pain_run", undefined, "death_moving", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
   scripts\asm\asm::_id_2375("stand_run_n_gun_backwards_loop", undefined, _id_0C36::_id_1006F, undefined);
   scripts\asm\asm::_id_2375("run_turn", undefined, _id_0F3B::_id_FFF8, "run_turn");
@@ -243,6 +241,7 @@ _id_2371() {
   scripts\asm\asm::_id_2375("stand_run_loop", undefined, _id_0F3C::_id_FFB6, "crouch");
   scripts\asm\asm::_id_2375("stand_run_loop", undefined, scripts\asm\asm_bb::bb_meleechargerequested, undefined);
   scripts\asm\asm::_id_2374("start_stand_run_strafe", _id_0F3C::_id_CEA8, undefined, undefined, undefined, undefined, _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::_id_2375("melee_attack", undefined, scripts\asm\asm_bb::bb_meleerequested, undefined);
   scripts\asm\asm::_id_2375("stand_run_strafe_loop", undefined, scripts\asm\asm::_id_68B0, "end");
   scripts\asm\asm::_id_2374("move_walk_loop", _id_0F3C::_id_D4DD, undefined, undefined, undefined, undefined, _id_0F3C::_id_3E96, undefined, undefined, undefined, undefined, undefined, "pain_stand", undefined, "death_generic", undefined, undefined, undefined, undefined, "face motion", "code_move", undefined);
   scripts\asm\asm::_id_2375("noncombat_stand_idle", undefined, ::_id_122B0, undefined);

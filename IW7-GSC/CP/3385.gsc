@@ -115,10 +115,11 @@ use_team_door_switch(var_0, var_1) {
   }
 
   if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player)) {
-    var_1 scripts\cp\cp_persistence::give_player_xp(250, 1);
-  } else {
+    if(!scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
+      var_1 scripts\cp\cp_persistence::give_player_xp(250, 1);
+    }
+  } else if(!scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight())
     var_1 scripts\cp\cp_persistence::give_player_xp(75, 1);
-  }
 
   var_1 scripts\cp\cp_interaction::refresh_interaction();
 }
@@ -160,6 +161,10 @@ _id_C61B(var_0, var_1, var_2, var_3) {
     }
 
     var_13 setscriptablepartstate("default", "hide");
+
+    if(should_play_door_purchase_sound()) {
+      var_13 playSound("purchase_generic");
+    }
   }
 }
 
@@ -228,7 +233,19 @@ clear_debris(var_0, var_1) {
     }
 
     var_4 setscriptablepartstate("default", "hide");
+
+    if(should_play_door_purchase_sound()) {
+      var_4 playSound("purchase_generic");
+    }
   }
+}
+
+should_play_door_purchase_sound() {
+  if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
+    return 0;
+  }
+
+  return 1;
 }
 
 move_up_and_delete(var_0) {

@@ -111,9 +111,12 @@ use_arcade_game(var_0, var_1) {
 
   var_1 setstance("stand");
   var_1 setplayerangles(var_0.angles);
-  var_1 scripts\engine\utility::allow_weapon_switch(1);
 
-  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade)) {
+  if(!var_1 scripts\engine\utility::isweaponswitchallowed()) {
+    var_1 scripts\engine\utility::allow_weapon_switch(1);
+  }
+
+  if(!scripts\engine\utility::is_true(var_1.in_afterlife_arcade) && !var_1 scripts\engine\utility::isweaponallowed()) {
     var_1 scripts\engine\utility::allow_weapon(1);
   }
 
@@ -142,7 +145,7 @@ _id_5FB8(var_0, var_1) {
     return;
   }
   var_0 notify("stop_arcade_timer");
-  var_0 playanimscriptevent("power_active_cp", "gesture000");
+  var_0 playanimscriptevent("power_active_cp", "gesture001");
   var_0.anchor.angles = var_1.angles;
   var_3 = scripts\cp\utility::vec_multiply(anglesToForward(var_1.angles), -15);
   var_0.anchor.origin = scripts\engine\utility::getStruct(var_1.target, "targetname").origin + (0, 0, 1) + var_3;
@@ -159,6 +162,7 @@ _id_5FB8(var_0, var_1) {
 _id_211A(var_0) {
   var_0 endon("stop_arcade_timer");
   var_0 endon("disconnect");
+  var_0 endon("arcade_special_interrupt");
 
   if(!isDefined(var_0._id_2113)) {
     var_0._id_2113 = 0;
@@ -219,7 +223,7 @@ _id_61D8(var_0, var_1) {
   var_0 setclientomnvar("zombie_arcade_widget", 0);
   var_0 setclientomnvar("zombie_arcade_game_time", -1);
   wait 0.5;
-  var_0 playanimscriptevent("power_active_cp", "gesture000");
+  var_0 playanimscriptevent("power_active_cp", "gesture001");
   var_0.disable_consumables = undefined;
   var_0 allowcrouch(1);
   var_0 allowprone(1);
@@ -229,7 +233,7 @@ _id_61D7(var_0, var_1) {
   var_0 endon("disconnect");
   var_0 endon("exit_arcade_game");
   var_0 scripts\engine\utility::waittill_any("last_stand");
-  var_0 playanimscriptevent("power_active_cp", "gesture000");
+  var_0 playanimscriptevent("power_active_cp", "gesture001");
   var_0 setclientomnvar("zm_arcade_emulator", "arcade_off");
   var_0 stoplocalsound("arcadeSound");
 
@@ -243,9 +247,17 @@ _id_61D7(var_0, var_1) {
   }
 
   var_0 setplayerangles(var_1.angles);
-  var_0 scripts\engine\utility::allow_weapon_switch(1);
+
+  if(!var_0 scripts\engine\utility::isweaponswitchallowed()) {
+    var_0 scripts\engine\utility::allow_weapon_switch(1);
+  }
+
   var_0 scripts\cp\utility::freezecontrolswrapper(0);
-  var_0 scripts\engine\utility::allow_weapon(1);
+
+  if(!var_0 scripts\engine\utility::isweaponallowed()) {
+    var_0 scripts\engine\utility::allow_weapon(1);
+  }
+
   var_0.playing_game = undefined;
   var_0.no_team_outlines = undefined;
   var_0 setmovespeedscale(1);
@@ -262,7 +274,6 @@ _id_5653(var_0, var_1) {
   var_0 endon("disconnect");
   var_0 endon("exit_arcade_game");
   level scripts\engine\utility::waittill_any("game_ended", "force_exit_arcade");
-  var_0 playanimscriptevent("power_active_cp", "gesture000");
   var_0 setclientomnvar("zm_arcade_emulator", "arcade_off");
   var_0 stoplocalsound("arcadeSound");
 

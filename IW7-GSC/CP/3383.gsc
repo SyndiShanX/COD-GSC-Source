@@ -300,7 +300,7 @@ _id_12FFA(var_0, var_1, var_2) {
     foreach(var_11 in var_4) {
       var_12 = scripts\cp\utility::getbaseweaponname(var_11);
 
-      if(var_12 == var_8) {
+      if(var_12 == var_8 || issubstr(var_12, var_8)) {
         var_9 = 1;
         break;
       }
@@ -466,15 +466,19 @@ _id_1010C(var_0, var_1) {
 
       var_1.given_nunchucks = 1;
     } else if(randomint(100) > 95 || getDvar("debug_gns_reward") != "") {
-      if(scripts\cp\zombies\directors_cut::directors_cut_is_activated() || can_have_nunchucks(var_1)) {
+      if(!has_nunchucks_in_loadout(var_1) && (scripts\cp\zombies\directors_cut::directors_cut_is_activated() || can_have_nunchucks(var_1))) {
         var_3 = "";
 
         if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap2)) {
           var_0._id_13C25 = scripts\engine\utility::array_add(var_0._id_13C25, "iw7_nunchucks_zm_pap2");
           var_3 = "iw7_nunchucks_zm_pap2";
-        } else if(scripts\cp\zombies\directors_cut::directors_cut_is_activated())
-          var_3 = "iw7_nunchucks_zm_pap1";
-        else if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap1) && !var_1 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade")) {
+        } else if(scripts\cp\zombies\directors_cut::directors_cut_is_activated()) {
+          if(var_1 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade") && scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap1)) {
+            var_3 = "iw7_nunchucks_zm_pap2";
+            var_0._id_13C25 = scripts\engine\utility::array_add(var_0._id_13C25, var_3);
+          } else
+            var_3 = "iw7_nunchucks_zm_pap1";
+        } else if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap1) && !var_1 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade")) {
           var_3 = "iw7_nunchucks_zm_pap1";
           var_0._id_13C25 = scripts\engine\utility::array_add(var_0._id_13C25, "iw7_nunchucks_zm_pap1");
         } else if(!scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap1) && var_1 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade"))
@@ -496,7 +500,7 @@ _id_1010C(var_0, var_1) {
 
   if(level.script == "cp_final") {
     if(randomint(100) > 95) {
-      if(scripts\cp\zombies\directors_cut::directors_cut_is_activated() || can_have_venomx(var_1)) {
+      if(!has_venomx_in_loadout(var_1) && (scripts\cp\zombies\directors_cut::directors_cut_is_activated() || can_have_venomx(var_1))) {
         var_3 = "";
 
         if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap2)) {
@@ -583,7 +587,7 @@ _id_1010C(var_0, var_1) {
 
   var_0.weapon._id_8293 = var_0._id_13C25[var_4];
 
-  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap1) || scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap2)) {
+  if(isDefined(var_1) && isPlayer(var_1) && scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap1) || scripts\engine\utility::is_true(level.magic_wheel_upgraded_pap2)) {
     var_0.weapon setmoverweapon(get_weapon_with_new_camo(var_1, var_0.weapon._id_8293, get_camo_for_upgraded_weapon(getweaponbasename(var_0.weapon._id_8293), var_1)));
   } else {
     var_0.weapon setmoverweapon(var_0.weapon._id_8293);
@@ -680,10 +684,37 @@ _id_1010C(var_0, var_1) {
 
 can_have_venomx(var_0) {
   if(scripts\engine\utility::flag_exist("completepuzzles_step4") && scripts\engine\utility::flag("completepuzzles_step4")) {
-    return 1;
-  } else {
+    if(!has_venomx_in_loadout(var_0)) {
+      return 1;
+    } else {
+      return 0;
+    }
+  } else
     return 0;
+}
+
+has_venomx_in_loadout(var_0) {
+  var_1 = var_0 getweaponslistall();
+
+  foreach(var_3 in var_1) {
+    if(issubstr(var_3, "venomx")) {
+      return 1;
+    }
   }
+
+  return 0;
+}
+
+has_nunchucks_in_loadout(var_0) {
+  var_1 = var_0 getweaponslistall();
+
+  foreach(var_3 in var_1) {
+    if(issubstr(var_3, "nunchucks")) {
+      return 1;
+    }
+  }
+
+  return 0;
 }
 
 getrotationlist(var_0) {
@@ -796,9 +827,9 @@ wait_for_player_to_take_weapon(var_0) {
     var_3 = scripts\cp\utility::getrawbaseweaponname(var_2);
 
     switch (var_3) {
-      case "mauler":
-      case "sdflmg":
       case "lmg03":
+      case "sdflmg":
+      case "mauler":
         var_1 thread scripts\cp\cp_vo::try_to_play_vo("magicwheel_weapon", "zmb_comment_vo", "low", 10, 0, 1, 0, 25);
         break;
       case "katana":
@@ -890,7 +921,7 @@ _id_B16A(var_0, var_1) {
     var_0 notify("weapon_level_changed");
   }
 
-  if(issubstr(var_1, "g18_")) {
+  if(issubstr(var_1, "g18_") || level.script == "cp_final" && issubstr(var_1, "iw7_arclassic")) {
     var_0.has_replaced_starting_pistol = 1;
   }
 
@@ -965,20 +996,20 @@ get_camo_for_upgraded_weapon(var_0, var_1) {
   }
 
   switch (var_0) {
-    case "dischord":
     case "iw7_dischord_zm_pap1":
+    case "dischord":
       var_2 = "camo20";
       break;
-    case "facemelter":
     case "iw7_facemelter_zm_pap1":
+    case "facemelter":
       var_2 = "camo22";
       break;
-    case "headcutter":
     case "iw7_headcutter_zm_pap1":
+    case "headcutter":
       var_2 = "camo21";
       break;
-    case "shredder":
     case "iw7_shredder_zm_pap1":
+    case "shredder":
       var_2 = "camo23";
       break;
     case "nunchucks":
@@ -1057,8 +1088,8 @@ _id_10C4D(var_0, var_1, var_2) {
   level thread _id_4DB4(var_0, var_1, var_3);
 
   foreach(var_8 in level.players) {
-    if(isDefined(var_8.temporal_increase)) {
-      var_8 thread scripts\cp\loot::power_icon_active(30 * var_8.temporal_increase, "fire_30");
+    if(isDefined(level.temporal_increase)) {
+      var_8 thread scripts\cp\loot::power_icon_active(30 * level.temporal_increase, "fire_30");
       continue;
     }
 

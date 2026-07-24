@@ -16,6 +16,8 @@ _id_DEE0() {
   level._id_C54A = [];
   level._id_C54A["passive_nuke"] = ::_id_11AF4;
   level._id_C54A["passive_random_perks"] = ::trackkillsforrandomperks;
+  level._id_C54A["passive_railgun_overload"] = ::dolocalrailgundamage;
+  level._id_C54A["passive_overkill"] = ::dolocaloverkilldamage;
   level._id_C54A["passive_headshot_ammo"] = ::_id_89AE;
   level._id_C54A["passive_headshot_super"] = ::_id_1869;
   level._id_C54A["passive_refresh"] = ::_id_89D1;
@@ -33,6 +35,9 @@ _id_DEE0() {
   level._id_C54A["passive_double_kill_super"] = ::handledoublekillssuper;
   level._id_C54A["passive_melee_cone_expl"] = ::handlemeleeconeexplode;
   level._id_C54A["passive_berserk"] = ::handleberserk;
+  level._id_C54A["passive_ninja"] = ::handleammoonlastshotskill;
+  _id_DEDF("passive_railgun_overload", ::init_passive_railgun_overload, ::set_passive_railgun_overload, ::unset_passive_railgun_overload);
+  _id_DEDF("passive_overkill", ::init_passive_overkill, ::set_passive_overkill, ::unset_passive_overkill);
   _id_DEDF("passive_last_shots_ammo", ::init_passive_last_shots_ammo, ::set_passive_last_shots_ammo, ::unset_passive_last_shots_ammo);
   _id_DEDF("passive_nuke", ::_id_96BA, ::_id_F4C0, ::_id_12C0D);
   _id_DEDF("passive_headshot_ammo", ::_id_961A, ::_id_F3FB, ::_id_12BFF);
@@ -65,9 +70,11 @@ _id_DEE0() {
   level._id_C4E6["passive_sonic"] = ::handlepassivesonic;
   level._id_C4E6["passive_minimap_damage"] = ::updatepassiveminimapdamage;
   level._id_C4E6["passive_cold_damage"] = ::updatepassivecolddamage;
+  level._id_C4E6["passive_fire_damage"] = ::updatepassivefiredamage;
   _id_DEDF("passive_wallrun_quieter", ::init_passive_ninja, ::set_passive_ninja, ::unset_passive_ninja);
   _id_DEDF("passive_slide_blastshield", ::init_passive_fortified, ::set_passive_fortified, ::unset_passive_fortified);
   _id_DEDF("passive_cold_damage", ::init_passive_cold_damage, ::set_passive_cold_damage, ::unset_passive_cold_damage);
+  _id_DEDF("passive_fire_damage", ::init_passive_fire_damage, ::set_passive_fire_damage, ::unset_passive_fire_damage);
   _id_DEDF("passive_sonic", ::init_passive_sonic, ::set_passive_sonic, ::unset_passive_sonic);
   _id_DEDF("passive_below_the_belt", ::_id_96B0, ::_id_F4B5, ::_id_12C03);
   _id_DEDF("passive_minimap_damage", ::init_passive_minimap_damage, ::set_passive_minimap_damage, ::unset_passive_minimap_damage);
@@ -714,11 +721,17 @@ handlefortified(var_0, var_1, var_2) {}
 init_passive_ninja(var_0) {}
 
 set_passive_ninja(var_0) {
+  var_0.stealth_used = [];
   var_0._id_C5C9["passive_ninja"] = 1;
 }
 
 unset_passive_ninja(var_0) {
   var_0._id_C5C9["passive_ninja"] = 0;
+  var_0 notify("reset_stealth");
+
+  if(var_0 scripts\cp\utility::isignoremeenabled()) {
+    var_0 scripts\cp\utility::allow_player_ignore_me(0);
+  }
 }
 
 handleninjaonlastshot(var_0, var_1, var_2) {
@@ -733,7 +746,7 @@ handleninjaonlastshot(var_0, var_1, var_2) {
   }
 
   if(var_4 == 0 && !scripts\engine\utility::array_contains(var_0.stealth_used, "right")) {
-    var_0 thread set_player_stealthed("right");
+    var_0 thread set_player_stealthed();
   } else if(var_4 > 0) {
     var_0.stealth_used = scripts\engine\utility::array_remove(var_0.stealth_used, "right");
   }
@@ -742,7 +755,7 @@ handleninjaonlastshot(var_0, var_1, var_2) {
     var_5 = var_0 getweaponammoclip(var_1, "left");
 
     if(var_5 == 0 && !scripts\engine\utility::array_contains(var_0.stealth_used, "left")) {
-      var_0 thread set_player_stealthed("left");
+      var_0 thread set_player_stealthed();
     } else if(var_5 > 0) {
       var_0.stealth_used = scripts\engine\utility::array_remove(var_0.stealth_used, "left");
     }
@@ -802,6 +815,102 @@ handleammoonlastshotskill(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 }
 
+init_passive_overkill(var_0) {}
+
+set_passive_overkill(var_0) {
+  var_0._id_C54A["passive_overkill"] = 1;
+}
+
+unset_passive_overkill(var_0) {
+  var_0._id_C54A["passive_overkill"] = 0;
+}
+
+dolocaloverkilldamage(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(!scripts\engine\utility::isbulletdamage(var_3)) {
+    return 0;
+  }
+
+  if(isDefined(var_2.agent_type) && (var_2.agent_type == "zombie_brute" || var_2.agent_type == "zombie_grey" || var_2.agent_type == "slasher" || var_2.agent_type == "superslasher" || var_2.agent_type == "zombie_sasquatch" || var_2.agent_type == "lumberjack")) {
+    return;
+  }
+  var_6 = scripts\engine\utility::is_true(var_2.is_suicide_bomber);
+  var_2.head_is_exploding = 1;
+  var_7 = var_2 gettagorigin("j_spine4");
+  playsoundatpos(var_2.origin, "zmb_fnf_headpopper_explo");
+  playFX(level._effect["bloody_death"], var_7);
+
+  foreach(var_1 in level.players) {
+    if(distance(var_1.origin, var_7) <= 350) {
+      var_1 thread scripts\cp\zombies\zombies_weapons::showonscreenbloodeffects();
+    }
+  }
+
+  if(isDefined(var_2.headmodel)) {
+    var_2 detach(var_2.headmodel);
+  }
+
+  if(!var_6) {
+    var_2 setscriptablepartstate("head", "hide");
+  }
+
+  var_10 = scripts\engine\utility::get_array_of_closest(var_2.origin, level.spawned_enemies, [var_2], undefined, 64, 1);
+
+  foreach(var_12 in var_10) {
+    var_12 dodamage(var_2.maxhealth, var_2.origin, var_1, var_1, "MOD_EXPLOSIVE", "iw7_walkietalkie_zm");
+  }
+}
+
+init_passive_railgun_overload(var_0) {}
+
+set_passive_railgun_overload(var_0) {
+  var_0._id_C54A["passive_railgun_overload"] = 1;
+}
+
+unset_passive_railgun_overload(var_0) {
+  var_0._id_C54A["passive_railgun_overload"] = 0;
+}
+
+dolocalrailgundamage(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(!isDefined(var_2.hitbychargedshot)) {
+    return 0;
+  }
+
+  var_2.hitbychargedshot = undefined;
+
+  if(!scripts\engine\utility::isbulletdamage(var_3)) {
+    return 0;
+  }
+
+  if(isDefined(var_2.agent_type) && (var_2.agent_type == "zombie_brute" || var_2.agent_type == "zombie_grey" || var_2.agent_type == "slasher" || var_2.agent_type == "superslasher" || var_2.agent_type == "zombie_sasquatch" || var_2.agent_type == "lumberjack")) {
+    return;
+  }
+  var_6 = scripts\engine\utility::is_true(var_2.is_suicide_bomber);
+  var_2.head_is_exploding = 1;
+  var_7 = var_2 gettagorigin("j_spine4");
+  playsoundatpos(var_2.origin, "zmb_fnf_headpopper_explo");
+  playFX(level._effect["bloody_death"], var_7);
+
+  foreach(var_1 in level.players) {
+    if(distance(var_1.origin, var_7) <= 350) {
+      var_1 thread scripts\cp\zombies\zombies_weapons::showonscreenbloodeffects();
+    }
+  }
+
+  if(isDefined(var_2.headmodel)) {
+    var_2 detach(var_2.headmodel);
+  }
+
+  if(!var_6) {
+    var_2 setscriptablepartstate("head", "hide");
+  }
+
+  var_10 = scripts\engine\utility::get_array_of_closest(var_2.origin, level.spawned_enemies, [var_2], undefined, 64, 1);
+
+  foreach(var_12 in var_10) {
+    var_12 dodamage(var_2.maxhealth, var_2.origin, var_1, var_1, "MOD_EXPLOSIVE", "iw7_walkietalkie_zm");
+  }
+}
+
 _id_961B(var_0) {
   var_0.delayedsuperbonus = 0;
 }
@@ -858,11 +967,36 @@ init_passive_crouch_move_speed(var_0) {}
 
 set_passive_crouch_move_speed(var_0) {
   var_0 thread adjust_move_speed_while_crouched(var_0);
+  var_0 thread adjust_move_speed_while_sliding(var_0);
 }
 
 unset_passive_crouch_move_speed(var_0) {
   var_0 notify("remove_crouch_speed_mod");
   var_0.weaponpassivespeedmod = undefined;
+}
+
+adjust_move_speed_while_sliding(var_0) {
+  level endon("game_ended");
+  var_0 endon("disconnect");
+  var_0 endon("remove_crouch_speed_mod");
+
+  for(;;) {
+    self waittill("sprint_slide_end");
+
+    if(var_0 getstance() == "crouch") {
+      if(isDefined(level.move_speed_scale)) {
+        var_0.weaponpassivespeedmod = 0.5;
+        var_0[[level.move_speed_scale]]();
+      }
+    }
+
+    while(var_0 getstance() == "crouch") {
+      wait 0.1;
+    }
+
+    var_0.weaponpassivespeedmod = undefined;
+    var_0[[level.move_speed_scale]]();
+  }
 }
 
 adjust_move_speed_while_crouched(var_0, var_1) {
@@ -918,7 +1052,6 @@ _id_89B8(var_0, var_1) {
 
 _id_AD6F(var_0) {
   self endon("disconnect");
-  self endon("last_stand");
   self notify("infinite_ammo_fire");
   self endon("infinite_ammo_fire");
   self.selfdamaging = 1;
@@ -1481,6 +1614,34 @@ run_adrenaline_visuals(var_0, var_1) {
   var_0 thread remove_adrenaline_visuals(var_0);
 }
 
+init_passive_fire_damage(var_0) {}
+
+set_passive_fire_damage(var_0) {
+  var_0._id_C4E6["passive_fire_damage"] = 1;
+  var_0._id_6D53 = var_0 getcurrentweapon();
+}
+
+unset_passive_fire_damage(var_0) {
+  var_0._id_C4E6["passive_fire_damage"] = 0;
+  var_0._id_6D53 = undefined;
+}
+
+updatepassivefiredamage(var_0, var_1, var_2) {
+  var_3 = isDefined(var_2.agent_type) && var_2.agent_type == "zombie_brute";
+  var_4 = isDefined(var_2.agent_type) && var_2.agent_type == "zombie_grey";
+  var_5 = scripts\engine\utility::is_true(var_2.is_suicide_bomber);
+  var_6 = min(var_2.maxhealth * 0.1, 1000);
+
+  if(var_3 || var_4 || var_5) {
+    return;
+  }
+  if(isDefined(var_0._id_6D53)) {
+    if(scripts\cp\utility::getrawbaseweaponname(var_0._id_6D53) == scripts\cp\utility::getrawbaseweaponname(var_1)) {
+      var_2 thread scripts\cp\utility::damage_over_time(var_2, var_0, 5, var_6, "MOD_HEAD_SHOT", "incendiary_ammo_mp", undefined, "burning");
+    }
+  }
+}
+
 init_passive_cold_damage(var_0) {}
 
 set_passive_cold_damage(var_0) {
@@ -1503,9 +1664,21 @@ updatepassivecolddamage(var_0, var_1, var_2) {
   }
   if(isDefined(var_0.cold_weapon)) {
     if(scripts\cp\utility::getrawbaseweaponname(var_0.cold_weapon) == scripts\cp\utility::getrawbaseweaponname(var_1)) {
+      var_2 thread unsetslowmovementaftertime(var_2, var_2.movemode);
       var_2.movemode = "slow_walk";
       var_2 scripts\asm\asm_bb::bb_requestmovetype("slow_walk");
     }
+  }
+}
+
+unsetslowmovementaftertime(var_0, var_1) {
+  level endon("game_ended");
+  var_0 endon("death");
+  wait 10;
+
+  if(isDefined(var_1)) {
+    var_0.movemode = var_1;
+    var_0 scripts\asm\asm_bb::bb_requestmovetype(var_1);
   }
 }
 

@@ -2260,6 +2260,10 @@ allow_player_teleport(var_0, var_1) {
       self.teleportdisableflags[self.teleportdisableflags.size] = var_1;
     }
 
+    if(!isDefined(self.disabledteleportation)) {
+      self.disabledteleportation = 0;
+    }
+
     self.disabledteleportation++;
     self.can_teleport = 0;
   }
@@ -3355,7 +3359,9 @@ restore_weapons_status(var_0) {
 
   foreach(var_3 in self.copy_fullweaponlist) {
     if(!self hasweapon(var_3)) {
-      self giveweapon(var_3, -1, 0, -1, 1);
+      var_6 = getweaponattachments(var_3);
+      var_7 = getcurrentcamoname(var_3);
+      self giveweapon(scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_3, undefined, var_6, undefined, var_7), -1, 0, -1, 1);
     }
 
     if(isDefined(self.powerprimarygrenade) && self.powerprimarygrenade == var_3) {
@@ -3385,25 +3391,25 @@ restore_weapons_status(var_0) {
     }
 
     if(isDefined(self.copy_weapon_level[var_3])) {
-      var_6 = spawnStruct();
-      var_6.lvl = self.copy_weapon_level[var_3];
-      self.pap[getrawbaseweaponname(var_3)] = var_6;
+      var_8 = spawnStruct();
+      var_8.lvl = self.copy_weapon_level[var_3];
+      self.pap[getrawbaseweaponname(var_3)] = var_8;
     }
   }
 
-  var_8 = self.copy_weapon_current;
+  var_10 = self.copy_weapon_current;
 
-  if(!isDefined(var_8) || var_8 == "none") {
-    foreach(var_10 in self.copy_fullweaponlist) {
-      if(scripts\cp\cp_weapon::isbulletweapon(var_10)) {
-        var_8 = var_10;
+  if(!isDefined(var_10) || var_10 == "none") {
+    foreach(var_12 in self.copy_fullweaponlist) {
+      if(scripts\cp\cp_weapon::isbulletweapon(var_12)) {
+        var_10 = var_12;
         break;
       }
     }
   }
 
   if(scripts\engine\utility::isweaponswitchallowed()) {
-    self switchtoweaponimmediate(var_8);
+    self switchtoweaponimmediate(var_10);
   }
 
   self.copy_fullweaponlist = undefined;
@@ -3438,29 +3444,35 @@ restore_primary_weapons_only(var_0) {
         continue;
       }
       if(!self hasweapon(var_3)) {
-        self giveweapon(var_3, -1, 0, -1, 1);
+        if(issubstr(var_3, "knife_")) {
+          self giveweapon(var_3, -1, 0, -1, 1);
+        } else {
+          var_7 = getcurrentcamoname(var_3);
+          var_8 = getweaponattachments(var_3);
+          self giveweapon(scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_3, undefined, var_8, undefined, var_7), -1, 0, -1, 1);
+        }
       }
 
       self setweaponammoclip(var_3, self.copy_weapon_ammo_clip[var_3]);
       self setweaponammostock(var_3, self.copy_weapon_ammo_stock[var_3]);
 
       if(isDefined(self.copy_weapon_level[var_3])) {
-        var_7 = spawnStruct();
-        var_7.lvl = self.copy_weapon_level[var_3];
-        self.pap[getrawbaseweaponname(var_3)] = var_7;
+        var_9 = spawnStruct();
+        var_9.lvl = self.copy_weapon_level[var_3];
+        self.pap[getrawbaseweaponname(var_3)] = var_9;
       }
 
       var_5++;
     }
   }
 
-  var_9 = self.copy_weapon_current;
+  var_11 = self.copy_weapon_current;
 
-  if(!isDefined(var_9) || !self hasweapon(var_9) || var_9 == "none") {
-    var_9 = getweapontoswitchbackto();
+  if(!isDefined(var_11) || !self hasweapon(var_11) || var_11 == "none") {
+    var_11 = getweapontoswitchbackto();
   }
 
-  self switchtoweaponimmediate(var_9);
+  self switchtoweaponimmediate(var_11);
   self.copy_fullweaponlist = undefined;
   self.copy_weapon_current = undefined;
   self.copy_weapon_ammo_clip = undefined;
@@ -4071,6 +4083,7 @@ buildweaponassetname(var_0, var_1) {
       case "iw7_spiked_bat_mp":
       case "iw7_two_headed_axe_mp":
       case "iw7_machete_mp":
+      case "super_default_zm":
         return var_0;
       case "iw7_ake":
         return var_0 + "_zml";
@@ -4461,6 +4474,32 @@ issummerholidayweapon(var_0, var_1) {
   return 0;
 }
 
+ishalloweenholidayweapon(var_0, var_1) {
+  if(!isDefined(var_1) || var_1 < 0) {
+    return 0;
+  }
+
+  var_2 = getweaponrootname(var_0);
+
+  if(var_1 == 9) {
+    return var_2 == "iw7_kbs" || var_2 == "iw7_ripper" || var_2 == "iw7_m4";
+  }
+
+  if(var_1 == 8) {
+    return var_2 == "iw7_mod2187";
+  }
+
+  if(var_1 == 7) {
+    return var_2 == "iw7_mag";
+  }
+
+  if(var_1 == 6) {
+    return var_2 == "iw7_minilmg";
+  }
+
+  return 0;
+}
+
 ismark2weapon(var_0) {
   if(!isDefined(var_0)) {
     return 0;
@@ -4504,6 +4543,9 @@ buildweaponnamecamo(var_0, var_1, var_2) {
       return var_0 + "+camo" + var_3;
     } else if(issummerholidayweapon(var_0, var_2)) {
       var_3 = int(tablelookup("mp/camoTable.csv", 1, "camo230", scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
+      return var_0 + "+camo" + var_3;
+    } else if(ishalloweenholidayweapon(var_0, var_2)) {
+      var_3 = int(tablelookup("mp/camoTable.csv", 1, "camo242", scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
       return var_0 + "+camo" + var_3;
     } else if((!isDefined(var_1) || var_1 == "none") && ismark2weapon(var_2)) {
       var_5 = getweaponqualitybyid(var_0, var_2);
@@ -4834,7 +4876,7 @@ player_pain_vo(var_0) {
           break;
         case "alien_goon":
         case "alien_phantom":
-          var_3 = "injured_pain_cryptid";
+          var_3 = "injured_pain_crytpid";
           break;
         default:
           var_3 = "injured_pain_vocal";
@@ -5121,7 +5163,7 @@ getregendata(var_0) {
   self.prestigehealthregennerfscalar = scripts\cp\perks\prestige::prestige_getslowhealthregenscalar();
 
   if(self.prestigehealthregennerfscalar == 1.0) {
-    if(is_consumable_active("faster_health_regen_upgrade") || isDefined(level.purify_active)) {
+    if(is_consumable_active("faster_health_regen_upgrade") || isDefined(level.purify_active) && level.purify_active >= 1) {
       var_0.activatetime = 0.45;
       var_0.waittimebetweenregen = 0.045;
       var_0.regenamount = 0.1;
@@ -5946,6 +5988,16 @@ add_to_notify_queue(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
   if(!isDefined(self.notify_queue[var_0])) {
     self.notify_queue[var_0] = 0;
   } else {
+    if(var_0 == "weapon_hit_enemy") {
+      var_9 = gettime();
+
+      if(isDefined(self.last_notify_time) && self.last_notify_time == var_9) {
+        return;
+      } else {
+        self.last_notify_time = var_9;
+      }
+    }
+
     self.notify_queue[var_0]++;
   }
 

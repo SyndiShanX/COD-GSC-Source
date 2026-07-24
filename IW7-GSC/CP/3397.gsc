@@ -393,23 +393,19 @@ log_balloons_popped(var_0) {
   scripts\cp\cp_analytics::_id_AF6A("balloons_popped", var_0, [level.script, var_0], [level.script]);
 }
 
-log_shooting_icemonster_coaster(var_0) {
+log_boss_fight_result(var_0) {
   scripts\cp\cp_analytics::_id_AF6A("shot_icemonster", var_0, [level.script, var_0], [level.script]);
 }
 
-log_ghost_spelled(var_0) {
+log_wave_dur_boss_fight(var_0) {
   scripts\cp\cp_analytics::_id_AF6A("ghost_spelled", var_0, [level.script, var_0], [level.script]);
 }
 
-log_1984_kills(var_0) {
-  scripts\cp\cp_analytics::_id_AF6A("1984_kills", undefined, [var_0], undefined);
-}
-
-log_beating_arcade_games(var_0) {
+log_using_dc_mode(var_0) {
   scripts\cp\cp_analytics::_id_AF6A("beating_arcade_games", var_0, [level.script, var_0], [level.script]);
 }
 
-log_brute_hits_cabinet(var_0) {
+log_using_boss_fight_playlist(var_0) {
   scripts\cp\cp_analytics::_id_AF6A("brute_hits_cabinet", var_0, [level.script, var_0], [level.script]);
 }
 

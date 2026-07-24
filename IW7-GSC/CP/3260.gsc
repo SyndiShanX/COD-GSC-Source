@@ -105,8 +105,30 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
   var_33 = scripts\cp\utility::isaltmodeweapon(var_5);
   var_34 = var_19 && var_1 scripts\cp\utility::is_consumable_active("shock_melee_upgrade");
 
+  if(isDefined(var_5) && issubstr(var_5, "iw7_gauss_zml")) {
+    var_35 = 250;
+
+    if(scripts\cp\utility::weaponhasattachment(var_5, "pap1")) {
+      var_35 = 470;
+    }
+
+    if(scripts\cp\utility::weaponhasattachment(var_5, "pap2")) {
+      var_35 = 734;
+    }
+
+    if(scripts\cp\utility::weaponhasattachment(var_5, "doubletap")) {
+      var_35 = 1.33 * var_35;
+    }
+
+    if(var_2 >= var_35) {
+      self.hitbychargedshot = var_1;
+    }
+  }
+
   if(isPlayer(var_1)) {
-    if(scripts\engine\utility::is_true(self.marked_shared_fate_fnf)) {}
+    if(scripts\engine\utility::is_true(self.marked_shared_fate_fnf)) {
+      var_1 notify("weapon_hit_marked_target", var_1, var_2, var_4, var_5, self);
+    }
 
     if(issubstr(var_5, "iw7_harpoon2_zm")) {
       var_1 notify("zombie_hit_by_ben", var_6, self, self.maxhealth);
@@ -120,44 +142,44 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
       playFX(level._effect["stimulus_glow_burst"], self gettagorigin("j_spineupper"));
       scripts\engine\utility::play_sound_in_space("zmb_fnf_stimulus", self gettagorigin("j_spineupper"));
 
-      foreach(var_36 in level.players) {
-        if(var_36 == var_1) {
-          if(distance2dsquared(var_36.origin, self.origin) <= 10000) {
+      foreach(var_37 in level.players) {
+        if(var_37 == var_1) {
+          if(distance2dsquared(var_37.origin, self.origin) <= 10000) {
             playFX(level._effect["stimulus_glow_burst"], self gettagorigin("j_spineupper"));
-            playFX(level._effect["stimulus_shield"], var_36 gettagorigin("tag_eye"), anglesToForward(var_36.angles), anglestoup(var_36.angles), var_36);
+            playFX(level._effect["stimulus_shield"], var_37 gettagorigin("tag_eye"), anglesToForward(var_37.angles), anglestoup(var_37.angles), var_37);
 
             if(var_2 >= self.health) {
-              if(scripts\engine\utility::is_true(var_36.inlaststand)) {
-                scripts\cp\zombies\zombies_consumables::revive_downed_entities(var_36);
+              if(scripts\engine\utility::is_true(var_37.inlaststand)) {
+                scripts\cp\zombies\zombies_consumables::revive_downed_entities(var_37);
               }
             }
 
-            if(var_36.health + var_2 / (level.players.size + 1) >= var_36.maxhealth) {
-              var_36.health = var_36.maxhealth;
+            if(var_37.health + var_2 / (level.players.size + 1) >= var_37.maxhealth) {
+              var_37.health = var_37.maxhealth;
             } else {
-              var_36.health = int(var_36.health + var_2 / (level.players.size + 1));
+              var_37.health = int(var_37.health + var_2 / (level.players.size + 1));
             }
           }
 
           continue;
         }
 
-        if(distance2dsquared(var_36.origin, self.origin) <= 10000) {
+        if(distance2dsquared(var_37.origin, self.origin) <= 10000) {
           playFX(level._effect["stimulus_glow_burst"], self gettagorigin("j_spineupper"));
-          playFX(level._effect["stimulus_shield"], var_36 gettagorigin("tag_eye"));
+          playFX(level._effect["stimulus_shield"], var_37 gettagorigin("tag_eye"));
 
           if(var_2 >= self.health) {
-            if(scripts\engine\utility::is_true(var_36.inlaststand)) {
-              scripts\cp\zombies\zombies_consumables::revive_downed_entities(var_36);
+            if(scripts\engine\utility::is_true(var_37.inlaststand)) {
+              scripts\cp\zombies\zombies_consumables::revive_downed_entities(var_37);
             }
           }
 
-          if(int(var_36.health + var_2 / (level.players.size + 1)) >= var_36.maxhealth) {
-            var_36.health = var_36.maxhealth;
+          if(int(var_37.health + var_2 / (level.players.size + 1)) >= var_37.maxhealth) {
+            var_37.health = var_37.maxhealth;
             continue;
           }
 
-          var_36.health = int(var_36.health + var_2 / (level.players.size + 1));
+          var_37.health = int(var_37.health + var_2 / (level.players.size + 1));
         }
       }
     }
@@ -175,50 +197,50 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
     }
   }
 
-  var_38 = 0;
+  var_39 = 0;
 
   if(!var_19 && checkaltmodestatus(var_5) && var_24 && !isDefined(var_1.linked_to_coaster) && var_1 scripts\cp\utility::is_consumable_active("sniper_soft_upgrade")) {
-    var_38 = var_1 scripts\cp\utility::coop_getweaponclass(var_5) == "weapon_sniper";
+    var_39 = var_1 scripts\cp\utility::coop_getweaponclass(var_5) == "weapon_sniper";
   }
 
-  var_39 = scripts\engine\utility::is_true(level.explosive_touch) && isDefined(var_4) && var_4 == "MOD_UNKNOWN";
+  var_40 = scripts\engine\utility::is_true(level.explosive_touch) && isDefined(var_4) && var_4 == "MOD_UNKNOWN";
 
-  if(var_39 && (var_15 || var_14)) {
+  if(var_40 && (var_15 || var_14)) {
     return;
   }
-  var_40 = !var_14 && !var_15 && (var_27 || var_28 || var_34 || var_39 || var_21 || var_26 || var_29 || var_31 || var_38);
-  var_41 = isDefined(self.isfrozen);
+  var_41 = !var_14 && !var_15 && (var_27 || var_28 || var_34 || var_40 || var_21 || var_26 || var_29 || var_31 || var_39);
+  var_42 = isDefined(self.isfrozen);
 
   if(scripts\cp\powers\coop_armageddon::isfirstarmageddonmeteorhit(var_5) && !var_14 && !var_15) {
     thread scripts\cp\powers\coop_armageddon::fling_zombie_from_meteor(var_0.origin, var_6, var_7);
     return;
   } else if(isDefined(var_5) && scripts\cp\cp_weapon::isforgefreezeweapon(var_5) && !var_19 && !var_22) {
-    var_42 = var_1 scripts\cp\cp_weapon::get_weapon_level(var_5);
-    var_43 = getnumberoffrozenticksfromwave(self, var_42);
+    var_43 = var_1 scripts\cp\cp_weapon::get_weapon_level(var_5);
+    var_44 = getnumberoffrozenticksfromwave(self, var_43);
 
-    if(!var_41 && !var_32 && !var_14 && !var_18) {
-      var_44 = 10 * level.cash_scalar;
+    if(!var_42 && !var_32 && !var_14 && !var_18) {
+      var_45 = 10 * level.cash_scalar;
 
       if(var_1 scripts\cp\utility::is_consumable_active("hit_reward_upgrade")) {
         var_1 scripts\cp\utility::notify_used_consumable("hit_reward_upgrade");
-        var_44 = var_44 * 2;
+        var_45 = var_45 * 2;
       }
 
-      var_1 scripts\cp\cp_persistence::give_player_currency(var_44, "large", var_8);
+      var_1 scripts\cp\cp_persistence::give_player_currency(var_45, "large", var_8);
       var_1 notify("weapon_hit_enemy", self, var_1, var_5, var_2, var_8, var_4);
 
-      if(var_5 == "zfreeze_semtex_mp" || isDefined(self.frozentick) && self.frozentick >= var_43 || var_28) {
+      if(var_5 == "zfreeze_semtex_mp" || isDefined(self.frozentick) && self.frozentick >= var_44 || var_28) {
         self.frozentick = undefined;
         self.isfrozen = 1;
         thread scripts\cp\zombies\zombie_scriptable_states::applyzombiescriptablestate(self);
       } else if(isDefined(self.frozentick)) {
         self.frozentick++;
 
-        if(var_43 > 15 && self.frozentick >= 8) {
+        if(var_44 > 15 && self.frozentick >= 8) {
           self.allowpain = 1;
         }
 
-        if(self.frozentick / var_43 > 0.33) {
+        if(self.frozentick / var_44 > 0.33) {
           self.slowed = 1;
         }
 
@@ -226,7 +248,7 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
       } else {
         self.frozentick = 1;
         thread scripts\cp\zombies\zombie_scriptable_states::removefrozentickontimeout(self);
-        thread scripts\cp\zombies\zombie_scriptable_states::applyzombiescriptablestate(self, var_42);
+        thread scripts\cp\zombies\zombie_scriptable_states::applyzombiescriptablestate(self, var_43);
       }
     } else if(var_18) {
       if(isDefined(self.frozentick)) {
@@ -235,17 +257,17 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
         self.frozentick = 1;
       }
 
-      if(self.frozentick <= var_43) {
+      if(self.frozentick <= var_44) {
         return;
       } else {
         var_2 = self.maxhealth;
       }
     } else
       return;
-  } else if(!var_41 && var_22)
+  } else if(!var_42 && var_22)
     return;
-  else if(var_40 && !var_14 && !var_15) {
-    if(var_38) {
+  else if(var_41 && !var_14 && !var_15) {
+    if(var_39) {
       var_1 scripts\cp\utility::notify_used_consumable("sniper_soft_upgrade");
     }
 
@@ -264,40 +286,40 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
     }
   } else if(!var_15) {
     var_8 = shitloc_mods(var_1, var_4, var_5, var_8);
-    var_45 = level.wave_num;
-    var_46 = is_grenade(var_5, var_4);
-    var_47 = scripts\engine\utility::is_true(self.is_burning) && !var_23;
-    var_48 = var_25 && var_1 scripts\cp\utility::is_consumable_active("sharp_shooter_upgrade");
-    var_49 = var_23 && var_1 scripts\cp\utility::is_consumable_active("bonus_damage_on_last_bullets");
-    var_50 = var_23 && var_1 scripts\cp\utility::is_consumable_active("damage_booster_upgrade");
-    var_51 = var_23 && isDefined(var_1.special_ammo_weapon) && var_1.special_ammo_weapon == var_5;
-    var_52 = var_24 && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_boom");
-    var_53 = var_24 && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_smack");
-    var_54 = is_axe_weapon(var_5);
-    var_55 = weaponclass(var_5) == "spread" && var_1 scripts\cp\cp_weapon::has_attachment(var_5, "smart");
-    var_56 = weaponclass(var_5) == "spread" && !var_55 && (var_1 scripts\cp\cp_weapon::has_attachment(var_5, "arkpink") || scripts\cp\cp_weapon::has_attachment(var_5, "arkyellow"));
-    var_57 = var_25 && var_23 && var_1 scripts\cp\cp_weapon::has_attachment(var_5, "highcal");
+    var_46 = level.wave_num;
+    var_47 = is_grenade(var_5, var_4);
+    var_48 = scripts\engine\utility::is_true(self.is_burning) && !var_23;
+    var_49 = var_25 && var_1 scripts\cp\utility::is_consumable_active("sharp_shooter_upgrade");
+    var_50 = var_23 && var_1 scripts\cp\utility::is_consumable_active("bonus_damage_on_last_bullets");
+    var_51 = var_23 && var_1 scripts\cp\utility::is_consumable_active("damage_booster_upgrade");
+    var_52 = var_23 && isDefined(var_1.special_ammo_weapon) && var_1.special_ammo_weapon == var_5;
+    var_53 = var_24 && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_boom");
+    var_54 = var_24 && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_smack");
+    var_55 = is_axe_weapon(var_5);
+    var_56 = weaponclass(var_5) == "spread" && var_1 scripts\cp\cp_weapon::has_attachment(var_5, "smart");
+    var_57 = weaponclass(var_5) == "spread" && !var_56 && (var_1 scripts\cp\cp_weapon::has_attachment(var_5, "arkpink") || scripts\cp\cp_weapon::has_attachment(var_5, "arkyellow"));
+    var_58 = var_25 && var_23 && var_1 scripts\cp\cp_weapon::has_attachment(var_5, "highcal");
 
     if(var_33 && issubstr(var_5, "+gl")) {
       var_2 = scalegldamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
     }
 
-    if(var_55) {
+    if(var_56) {
       var_2 = var_2 * 0.5;
     }
 
     if(isDefined(var_2) && isDefined(var_8) && !var_28 && var_23) {
-      var_58 = scripts\cp\zombies\zombie_armor::process_damage_to_armor(var_12, var_1, var_2, var_8, var_7);
+      var_59 = scripts\cp\zombies\zombie_armor::process_damage_to_armor(var_12, var_1, var_2, var_8, var_7);
 
-      if(var_58 <= 0) {
+      if(var_59 <= 0) {
         return;
       }
-      var_2 = var_58;
+      var_2 = var_59;
     }
 
     var_2 = initial_weapon_scale(undefined, var_1, var_2, undefined, var_4, var_5, undefined, undefined, var_8, undefined, undefined, undefined);
 
-    if(var_56) {
+    if(var_57) {
       var_2 = var_2 * 4;
     }
 
@@ -313,52 +335,52 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
           var_2 = var_2 + var_1.passive_melee_kill_damage;
         }
 
-        if(var_53) {
+        if(var_54) {
           var_2 = var_2 + 1500;
         }
 
-        var_59 = 0;
+        var_60 = 0;
 
         if(var_2 >= self.health) {
-          var_59 = 1;
+          var_60 = 1;
         }
 
         if(isDefined(var_1.increased_melee_damage)) {
           var_2 = var_2 + var_1.increased_melee_damage;
         }
 
-        if(var_54 || var_53) {
-          if(var_54) {
+        if(var_55 || var_54) {
+          if(var_55) {
             var_1 notify("axe_melee_hit", var_5, self, var_2);
 
-            if(var_59 && !isDefined(self.launched)) {
-              thread launch_and_kill(var_1, var_5, var_53);
+            if(var_60 && !isDefined(self.launched)) {
+              thread launch_and_kill(var_1, var_5, var_54);
               return;
             }
-          } else if(var_59)
+          } else if(var_60)
             self.slappymelee = 1;
-        } else if(var_59 && var_1.vo_prefix == "p1_")
+        } else if(var_60 && var_1.vo_prefix == "p1_")
           thread _id_107E1(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
       }
 
-      if(var_51) {
+      if(var_52) {
         var_1 thread scripts\cp\zombies\zombie_damage::stun_zap(self getEye(), self, var_2, var_4, 128);
       }
 
-      if(var_52 && var_30) {
+      if(var_53 && var_30) {
         var_2 = int(var_2 * 2);
       }
     }
 
-    if(var_48) {
+    if(var_49) {
       var_2 = var_2 * 3.0;
     }
 
-    if(var_49) {
-      var_60 = int(var_1 getweaponammoclip(var_1 getcurrentweapon()) + 1);
-      var_61 = weaponclipsize(var_1 getcurrentweapon());
+    if(var_50) {
+      var_61 = int(var_1 getweaponammoclip(var_1 getcurrentweapon()) + 1);
+      var_62 = weaponclipsize(var_1 getcurrentweapon());
 
-      if(var_60 <= 4) {
+      if(var_61 <= 4) {
         var_2 = var_2 * 2;
       }
     }
@@ -367,15 +389,15 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
       var_2 = var_2 * 2;
     }
 
-    if(var_46) {
-      var_2 = var_2 * min(2 + var_45 * 0.5, 10);
+    if(var_47) {
+      var_2 = var_2 * min(2 + var_46 * 0.5, 10);
     }
 
-    if(var_50) {
+    if(var_51) {
       var_2 = int(var_2 * 2);
     }
 
-    if(var_57) {
+    if(var_58) {
       var_2 = var_2 * 1.2;
     }
   }
@@ -423,6 +445,10 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
     playFX(level._effect["melee_impact"], self gettagorigin("j_neck"), vectortoangles(self.origin - var_1.origin), anglestoup(self.angles), var_1);
   }
 
+  if(isDefined(self.hitbychargedshot) && !(self.health - var_2 < 1)) {
+    self.hitbychargedshot = undefined;
+  }
+
   var_2 = int(min(var_2, self.maxhealth));
 
   if(self.health > 0 && self.health - var_2 <= 0) {
@@ -463,7 +489,7 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
     }
   }
 
-  if(var_25 && var_24 && var_41) {
+  if(var_25 && var_24 && var_42) {
     if(isDefined(self.freeze_struct)) {
       self.freeze_struct notify("headcutter_cryo_kill", var_1, self);
     }
@@ -499,7 +525,8 @@ greywordamageadjust(var_0, var_1) {
 
     if(isDefined(var_2)) {
       if(var_2 == "iw7_headcutter_zm_pap1" || var_2 == "iw7_dischord_zm_pap1" || var_2 == "iw7_facemelter_zm_pap1" || var_2 == "iw7_shredder_zm_pap1") {
-        var_0 = var_0 * 2;
+        var_0 = var_0 * 1.2;
+        var_0 = min(var_0, 20000);
       }
     }
   }
@@ -1023,6 +1050,12 @@ process_kill_rewards(var_0, var_1, var_2, var_3, var_4, var_5) {
           } else {
             var_7 thread scripts\cp\cp_vo::try_to_play_vo("killfirm", "zmb_comment_vo", "low", 10, 0, 0, 0, 20);
           }
+        } else if(var_2.agent_type == "alien_goon") {
+          if(randomint(100) > 60) {
+            var_7 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_cryptid", "rave_comment_vo", "low", 10, 0, 0, 0, 20);
+          } else {
+            var_7 thread scripts\cp\cp_vo::try_to_play_vo("killfirm", "zmb_comment_vo", "low", 10, 0, 0, 0, 20);
+          }
         } else if(var_2.agent_type == "zombie_sasquatch") {
           if(randomint(100) > 60) {
             var_7 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_sasquatch", "rave_comment_vo", "low", 10, 0, 0, 0, 20);
@@ -1152,6 +1185,15 @@ give_attacker_kill_rewards(var_0, var_1, var_2, var_3, var_4) {
       }
       var_14 = "large";
       var_2 = "none";
+
+      if(var_5 == "alien_rhino" || scripts\engine\utility::is_true(self.mammoth)) {
+        foreach(var_16 in level.players) {
+          var_16 scripts\cp\cp_persistence::give_player_currency(var_11, var_14, var_2, 1, "crafted");
+        }
+
+        continue;
+      }
+
       var_13 scripts\cp\cp_persistence::give_player_currency(var_11, var_14, var_2, 1, "crafted");
     }
 
@@ -1179,9 +1221,9 @@ give_attacker_kill_rewards(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(isPlayer(var_1)) {
-    var_16 = scripts\cp\utility::get_weapon_variant_id(var_1, var_4);
+    var_19 = scripts\cp\utility::get_weapon_variant_id(var_1, var_4);
 
-    if(scripts\cp\utility::ismark2weapon(var_16)) {
+    if(scripts\cp\utility::ismark2weapon(var_19)) {
       var_7 = var_7 * 1.15;
     }
   }
@@ -1232,8 +1274,14 @@ givekillreward(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       }
       var_10 scripts\cp\cp_persistence::give_player_currency(var_2, var_4, var_5, 1, "crafted");
     }
-  } else if(should_get_currency_from_kill(var_0, var_1, var_6, var_8))
-    var_1 scripts\cp\cp_persistence::give_player_currency(var_2, var_4, var_5, 1);
+  } else if(should_get_currency_from_kill(var_0, var_1, var_6, var_8)) {
+    if(self.agent_type == "alien_rhino" || scripts\engine\utility::is_true(self.mammoth)) {
+      foreach(var_13 in level.players) {
+        var_13 scripts\cp\cp_persistence::give_player_currency(var_2, var_4, var_5, 1, "crafted");
+      }
+    } else
+      var_1 scripts\cp\cp_persistence::give_player_currency(var_2, var_4, var_5, 1);
+  }
 
   if(isDefined(level.zombie_xp)) {
     var_1 scripts\cp\cp_persistence::give_player_xp(int(var_3));
@@ -1371,7 +1419,7 @@ initial_weapon_scale(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
         return var_2;
       }
 
-      if(!is_axe_weapon(var_5)) {
+      if(!is_axe_weapon(var_5) && !is_wyler_dagger(var_5)) {
         var_2 = 150;
       }
 
@@ -1403,8 +1451,10 @@ fateandfortuneweaponscale(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       case "iw7_claw_mp":
         if(var_3 || var_5 || var_6 || var_0 scripts\cp\utility::agentisinstakillimmune()) {
           var_2 = min(max(var_0.maxhealth * 0.34, 300), 1000);
-        } else {
+        } else if(var_4) {
           var_2 = min(max(var_0.maxhealth * 0.34, 300), 1000);
+        } else {
+          var_2 = min(max(var_0.maxhealth, 700), 1000);
         }
 
         break;
@@ -1433,6 +1483,14 @@ fateandfortuneweaponscale(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   return var_2;
+}
+
+is_wyler_dagger(var_0) {
+  if(!isDefined(var_0)) {
+    return 0;
+  }
+
+  return var_0 == "iw7_wylerdagger_zm";
 }
 
 is_axe_weapon(var_0) {
@@ -1466,9 +1524,9 @@ scale_ww_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
 
   switch (var_12) {
     case "shredder":
+    case "dischord":
     case "headcutter":
     case "facemelter":
-    case "dischord":
       var_2 = 2000;
   }
 

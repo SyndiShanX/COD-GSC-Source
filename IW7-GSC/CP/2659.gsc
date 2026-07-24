@@ -98,7 +98,11 @@ give_player_currency(var_0, var_1, var_2, var_3, var_4) {
   }
 
   self notify("currency_earned", var_0);
-  scripts\cp\utility::bufferednotify("currency_earned_buffered", var_0);
+
+  if(!scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
+    scripts\cp\utility::bufferednotify("currency_earned_buffered", var_0);
+  }
+
   eog_player_update_stat("score", int(self.total_currency_earned), 1);
 }
 
@@ -1056,6 +1060,9 @@ update_player_career_highest_wave(var_0, var_1, var_2, var_3) {
 }
 
 increment_zombiecareerstats(var_0, var_1, var_2) {
+  if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
+    return;
+  }
   if(!isDefined(var_2)) {
     var_2 = 1;
   }
@@ -1066,6 +1073,9 @@ increment_zombiecareerstats(var_0, var_1, var_2) {
 }
 
 updateifgreaterthan_zombiecareerstats(var_0, var_1, var_2) {
+  if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
+    return;
+  }
   var_3 = var_0 getrankedplayerdata("cp", "coopCareerStats", var_1);
 
   if(var_2 > var_3) {
@@ -1074,6 +1084,9 @@ updateifgreaterthan_zombiecareerstats(var_0, var_1, var_2) {
 }
 
 update_highest_wave_lb(var_0, var_1, var_2, var_3, var_4) {
+  if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
+    return;
+  }
   var_5 = var_0 getrankedplayerdata("cp", "leaderboarddata", var_3, "leaderboardDataPerMap", var_4, var_2);
 
   if(var_1 > var_5) {
@@ -1082,6 +1095,9 @@ update_highest_wave_lb(var_0, var_1, var_2, var_3, var_4) {
 }
 
 updateleaderboardstats(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
+    return;
+  }
   if(!isDefined(var_5)) {
     var_5 = 1;
   }

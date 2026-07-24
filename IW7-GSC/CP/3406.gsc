@@ -402,7 +402,7 @@ hidden_room_exit_tube(var_0) {
   var_0 scripts\cp\utility::removedamagemodifier("papRoom", 0);
   var_0.is_off_grid = undefined;
   var_0.kicked_out = undefined;
-  var_0 set_in_pap_room(self, 0);
+  var_0 set_in_pap_room(var_0, 0);
   var_0 notify("fast_travel_complete");
   scripts\cp\cp_vo::remove_from_nag_vo("ww_pap_nag");
   scripts\cp\cp_vo::remove_from_nag_vo("nag_find_pap");

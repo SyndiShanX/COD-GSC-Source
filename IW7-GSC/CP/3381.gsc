@@ -138,7 +138,10 @@ use_knife_throw(var_0, var_1) {
   var_0.knife_throw_target.health = 10000000;
   var_0.knife_throw_target.head_hit = 0;
 
-  if(isDefined(level.gns_wheel_of_misfortune_start_func)) {
+  if(isDefined(level.dc_wheel_of_misfortune_start_func)) {
+    var_0 thread[[level.dc_wheel_of_misfortune_start_func]](var_0.knife_throw_target, var_1);
+    scripts\engine\utility::waitframe();
+  } else if(isDefined(level.gns_wheel_of_misfortune_start_func)) {
     var_0 thread[[level.gns_wheel_of_misfortune_start_func]](var_0.knife_throw_target, var_1);
     scripts\engine\utility::waitframe();
   }
@@ -370,10 +373,10 @@ get_knife_hit_reward_point(var_0) {
   switch (var_0) {
     case "j_helmet":
       return 100;
+    case "j_wrist_ri":
     case "j_wrist_le":
     case "j_ankle_ri":
     case "j_ankle_le":
-    case "j_wrist_ri":
       return 50;
     case "body":
       return 5;

@@ -479,8 +479,8 @@ process_loot_content(var_0, var_1, var_2, var_3) {
       break;
     case "fire":
       if(isDefined(level.fire_sale_func)) {
-        if(isDefined(var_0.temporal_increase)) {
-          var_6 = int(var_6) * var_0.temporal_increase;
+        if(isDefined(level.temporal_increase)) {
+          var_6 = int(var_6) * level.temporal_increase;
         }
 
         level thread scripts\cp\cp_vo::try_to_play_vo("powerup_firesale", "zmb_powerup_vo");
@@ -490,8 +490,8 @@ process_loot_content(var_0, var_1, var_2, var_3) {
 
       break;
     case "grenade":
-      if(isDefined(var_0.temporal_increase)) {
-        var_6 = int(var_6) * var_0.temporal_increase;
+      if(isDefined(level.temporal_increase)) {
+        var_6 = int(var_6) * level.temporal_increase;
       }
 
       level thread scripts\cp\cp_vo::try_to_play_vo("powerup_infinitegrenades", "zmb_powerup_vo");
@@ -499,8 +499,8 @@ process_loot_content(var_0, var_1, var_2, var_3) {
       level thread give_infinite_grenade(var_4, int(var_6), var_7);
       break;
     case "infinite":
-      if(isDefined(var_0.temporal_increase)) {
-        var_6 = int(var_6) * var_0.temporal_increase;
+      if(isDefined(level.temporal_increase)) {
+        var_6 = int(var_6) * level.temporal_increase;
       }
 
       level thread scripts\cp\cp_vo::try_to_play_vo("powerup_infiniteammo", "zmb_powerup_vo");
@@ -531,8 +531,8 @@ process_loot_content(var_0, var_1, var_2, var_3) {
       level thread scale_earned_cash(var_0, var_4, int(var_6), var_7);
       break;
     case "instakill":
-      if(isDefined(var_0.temporal_increase)) {
-        var_6 = int(var_6) * var_0.temporal_increase;
+      if(isDefined(level.temporal_increase)) {
+        var_6 = int(var_6) * level.temporal_increase;
       }
 
       level thread scripts\cp\cp_vo::try_to_play_vo("powerup_instakill", "zmb_powerup_vo");
@@ -972,8 +972,8 @@ give_infinite_grenade(var_0, var_1, var_2) {
 }
 
 apply_fire_sale_effects(var_0) {
-  if(isDefined(var_0.temporal_increase)) {
-    var_0 thread power_icon_active(30 * var_0.temporal_increase, "fire_30");
+  if(isDefined(level.temporal_increase)) {
+    var_0 thread power_icon_active(30 * level.temporal_increase, "fire_30");
   } else {
     var_0 thread power_icon_active(30, "fire_30");
   }
@@ -984,8 +984,8 @@ apply_infinite_grenade_effects(var_0) {
   var_0.has_infinite_grenade = 1;
   var_0 scripts\cp\powers\coop_powers::power_adjustcharges(1, "primary", 1);
 
-  if(isDefined(var_0.temporal_increase)) {
-    var_0 thread power_icon_active(30 * var_0.temporal_increase, "grenade_30");
+  if(isDefined(level.temporal_increase)) {
+    var_0 thread power_icon_active(30 * level.temporal_increase, "grenade_30");
   } else {
     var_0 thread power_icon_active(30, "grenade_30");
   }
@@ -1030,8 +1030,8 @@ apply_infinite_ammo_effects(var_0) {
   var_1 = var_0 ammo_round_up();
   var_0 thread unlimited_ammo(var_1, "infinite_20");
 
-  if(isDefined(var_0.temporal_increase)) {
-    var_0 thread power_icon_active(20 * var_0.temporal_increase, "infinite_20");
+  if(isDefined(level.temporal_increase)) {
+    var_0 thread power_icon_active(20 * level.temporal_increase, "infinite_20");
   } else {
     var_0 thread power_icon_active(20, "infinite_20");
   }
@@ -1137,20 +1137,24 @@ give_max_ammo_to_player(var_0) {
   var_1 = var_0 getweaponslistprimaries();
 
   foreach(var_3 in var_1) {
-    var_0 givemaxammo(var_3);
+    var_4 = strtok(var_3, "_");
+
+    if(var_4[0] != "alt") {
+      var_0 givemaxammo(var_3);
+    }
 
     if(weaponmaxammo(var_3) == weaponclipsize(var_3)) {
       var_0 setweaponammoclip(var_3, weaponclipsize(var_3));
     }
   }
 
-  var_5 = getarraykeys(var_0.powers);
+  var_6 = getarraykeys(var_0.powers);
 
-  foreach(var_7 in var_5) {
-    if(var_0.powers[var_7].slot == "secondary") {
+  foreach(var_8 in var_6) {
+    if(var_0.powers[var_8].slot == "secondary") {
       continue;
     }
-    var_0 thread recharge_power(var_7);
+    var_0 thread recharge_power(var_8);
   }
 }
 
@@ -1178,8 +1182,8 @@ activate_instakill(var_0, var_1, var_2, var_3) {
 apply_instakill_effects(var_0) {
   var_0.instakill = 1;
 
-  if(isDefined(var_0.temporal_increase)) {
-    var_0 thread power_icon_active(30 * var_0.temporal_increase, "instakill_30");
+  if(isDefined(level.temporal_increase)) {
+    var_0 thread power_icon_active(30 * level.temporal_increase, "instakill_30");
   } else {
     var_0 thread power_icon_active(30, "instakill_30");
   }
@@ -1207,8 +1211,8 @@ scale_earned_cash(var_0, var_1, var_2, var_3) {
   level.active_power_ups["double_money"] = 1;
   level.cash_scalar = 2;
 
-  if(isDefined(var_0.temporal_increase)) {
-    level thread deactivate_scaled_cash(var_1, 30 * var_0.temporal_increase, var_2);
+  if(isDefined(level.temporal_increase)) {
+    level thread deactivate_scaled_cash(var_1, 30 * level.temporal_increase, var_2);
   } else {
     level thread deactivate_scaled_cash(var_1, 30, var_2);
   }
@@ -1221,8 +1225,8 @@ scale_earned_cash(var_0, var_1, var_2, var_3) {
 apply_double_money_effects(var_0) {
   var_0.double_money = 1;
 
-  if(isDefined(var_0.temporal_increase)) {
-    var_0 thread power_icon_active(30 * var_0.temporal_increase, "cash_2");
+  if(isDefined(level.temporal_increase)) {
+    var_0 thread power_icon_active(30 * level.temporal_increase, "cash_2");
   } else {
     var_0 thread power_icon_active(30, "cash_2");
   }
@@ -1326,6 +1330,11 @@ kill_closest_enemies(var_0, var_1) {
     if(is_immune_against_nuke(var_11)) {
       continue;
     }
+    if(scripts\engine\utility::is_true(level.forced_nuke)) {
+      var_11.died_poorly = 1;
+      var_11.died_poorly_health = var_11.health;
+    }
+
     if(scripts\engine\utility::is_true(var_11.isfrozen)) {
       var_11 dodamage(var_11.health + 100, var_11.origin);
     } else {
@@ -1341,6 +1350,7 @@ kill_closest_enemies(var_0, var_1) {
   level.nuke_zombies_paused = 1;
   wait 5;
   level.nuke_zombies_paused = 0;
+  level.dont_resume_wave_after_solo_afterlife = undefined;
 
   foreach(var_6 in level.players) {
     var_6 scripts\cp\utility::removedamagemodifier("nuke", 0);
