@@ -1,4 +1,4 @@
-require("x64:bcb9c49c8db8721")
+require("ui/uieditor/widgets/keyboardtextfieldinternal")
 CoD.KeyboardTextField = InheritFrom(CoD.Menu)
 LUI.createMenu.KeyboardTextField = function(f1_arg0, f1_arg1)
 	local self = CoD.Menu.NewForUIEditor("KeyboardTextField", f1_arg0)
@@ -24,7 +24,7 @@ LUI.createMenu.KeyboardTextField = function(f1_arg0, f1_arg1)
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[@"getglobalmodel"]()
+	local f1_local5 = Engine.GetGlobalModel()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.lobbyNav"], function(f3_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -34,20 +34,20 @@ LUI.createMenu.KeyboardTextField = function(f1_arg0, f1_arg1)
 			modelName = "lobbyRoot.lobbyNav",
 		})
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
-		EngineExec(controller, "ui_keyboard_cancel")
-		GoBack(self, controller)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xbb_pscircle"], "ESCAPE", function(f4_arg0, f4_arg1, f4_arg2, f4_arg3)
+		EngineExec(f4_arg2, "ui_keyboard_cancel")
+		GoBack(self, f4_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/cancel", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ESCAPE")
+	end, function(f5_arg0, f5_arg1, f5_arg2)
+		CoD.Menu.SetButtonLabel(f5_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], @"menu/cancel", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ESCAPE")
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		EngineExec(controller, "ui_keyboard_complete")
-		GoBack(self, controller)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f6_arg0, f6_arg1, f6_arg2, f6_arg3)
+		EngineExec(f6_arg2, "ui_keyboard_complete")
+		GoBack(self, f6_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/ok", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_confirm")
+	end, function(f7_arg0, f7_arg1, f7_arg2)
+		CoD.Menu.SetButtonLabel(f7_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], @"menu/ok", Enum[@"luibuttonpromptflags"][@"bpf_contextual"], "ui_confirm")
 		return true
 	end, false)
 	popupBG:setModel(self.buttonModel, f1_arg0)

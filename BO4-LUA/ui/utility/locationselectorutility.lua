@@ -126,11 +126,11 @@ CoD.LocationSelectorUtility.MoveSelectionToTargetedMarker = function(f12_arg0, f
 	if f12_local0 and f12_local1 then
 		CoD.LocationSelectorUtility.DeselectMarker(f12_local0, f12_arg1)
 		CoD.LocationSelectorUtility.SelectMarker(f12_arg0, f12_local1, f12_arg1)
-		Engine[@"playsound"]("uin_main_edit", f12_arg1)
+		Engine.playsound("uin_main_edit", f12_arg1)
 	end
 end
 CoD.LocationSelectorUtility.SelectCurrentMarker = function(f13_arg0, f13_arg1, f13_arg2, f13_arg3)
-	if CoD.LocationSelectorUtility.IsLocationSelectorActive(f13_arg1) and not f13_arg3.occludedBy and CoD.BitUtility.IsBitwiseAndNonZero(Engine[@"getmodelvalue"](f13_arg2), Enum[@"luibuttonflags"][@"flag_down"]) and not f13_arg3.m_disableAllButtonActions then
+	if CoD.LocationSelectorUtility.IsLocationSelectorActive(f13_arg1) and not f13_arg3.occludedBy and CoD.BitUtility.IsBitwiseAndNonZero(Engine.GetModelValue(f13_arg2), Enum.LUIButtonFlags[@"flag_down"]) and not f13_arg3.m_disableAllButtonActions then
 		local f13_local0 = f13_arg0.selectedMarker
 		if f13_local0 then
 			local f13_local1 = "marker_location"
@@ -139,7 +139,7 @@ CoD.LocationSelectorUtility.SelectCurrentMarker = function(f13_arg0, f13_arg1, f
 			elseif f13_local0.objId == CoD.LocationSelectorUtility.ControlFakeObjId then
 				f13_local1 = "take_control"
 			end
-			Engine[@"sendmenuresponse"](f13_arg1, CoD.LocationSelectorUtility.MenuResponseName, f13_local1, f13_local0.objId)
+			Engine.SendMenuResponse(f13_arg1, CoD.LocationSelectorUtility.MenuResponseName, f13_local1, f13_local0.objId)
 			CoD.LocationSelectorUtility.DeselectMarker(f13_local0, f13_arg1)
 		end
 	end
@@ -156,26 +156,26 @@ CoD.LocationSelectorUtility.SetupDatapadLocationMap = function(f14_arg0, f14_arg
 	end
 	if not f14_arg0.markers then
 		f14_arg0.markers = {}
-		local f14_local0 = @"datapad_location"
+		local f14_local0 = "datapad_location"
 		local f14_local1 = CoD.LocationSelectorUtility.AddDatapadLocation
 		local f14_local2 = CoD.LocationSelectorUtility.IsLocSelInCommandMode(f14_arg1)
 		if f14_local2 then
-			f14_local0 = 0xFB0BE7A198B305
+			f14_local0 = "datapad_patrol_location"
 			f14_local1 = CoD.LocationSelectorUtility.AddDatapadPatrolLocation
 		end
-		local f14_local3 = Engine[@"getmodelforcontroller"](f14_arg1)
+		local f14_local3 = Engine.GetModelForController(f14_arg1)
 		for f14_local4 = 0, 63, 1 do
-			local f14_local7 = Engine[@"getmodel"](f14_local3, "objective" .. f14_local4)
+			local f14_local7 = Engine.GetModel(f14_local3, "objective" .. f14_local4)
 			if f14_local7 and f14_local7.id and f14_local7.objID then
-				local f14_local8 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f14_local7, "id"))
+				local f14_local8 = Engine.GetModelValue(Engine.GetModel(f14_local7, "id"))
 				if f14_local8 == f14_local0 then
-					local f14_local9 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f14_local7, "objID"))
+					local f14_local9 = Engine.GetModelValue(Engine.GetModel(f14_local7, "objID"))
 					if f14_local9 then
 						f14_local1(f14_arg0, f14_arg1, f14_arg2, f14_local9)
 					end
 				end
 				if f14_local2 and CoD.LocationSelectorUtility.IsObjectiveCommandLocation(f14_local8) then
-					local f14_local9 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f14_local7, "objID"))
+					local f14_local9 = Engine.GetModelValue(Engine.GetModel(f14_local7, "objID"))
 					if f14_local9 then
 						CoD.LocationSelectorUtility.AddDatapadObjectiveLocation(f14_arg0, f14_arg1, f14_arg2, f14_local9)
 					end
@@ -239,24 +239,24 @@ CoD.LocationSelectorUtility.SetupLocationSelectorControls = function(f16_arg0, f
 			CoD.LocationSelectorUtility.UpdateLeftStickVector(f16_arg3, f16_arg1)
 		end
 	end)
-	f16_arg3:subscribeToModel(Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f16_arg1), "ButtonBits." .. Enum[@"luibutton"][@"lui_key_xba_pscross"]), function(model)
+	f16_arg3:subscribeToModel(Engine.GetModel(Engine.GetModelForController(f16_arg1), "ButtonBits." .. Enum.LUIButton[@"lui_key_xba_pscross"]), function(model)
 		CoD.LocationSelectorUtility.SelectCurrentMarker(f16_arg3, f16_arg1, model, f16_arg2)
 	end, false)
-	f16_arg3:subscribeToModel(Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f16_arg1), "KeyPressBits.MOUSE1"), function(model)
+	f16_arg3:subscribeToModel(Engine.GetModel(Engine.GetModelForController(f16_arg1), "KeyPressBits.MOUSE1"), function(model)
 		CoD.LocationSelectorUtility.SelectCurrentMarker(f16_arg3, f16_arg1, model, f16_arg2)
 	end, false)
-	f16_arg3:subscribeToModel(Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f16_arg1), "ButtonBits." .. Enum[@"luibutton"][@"lui_key_xbb_pscircle"]), function(model)
-		if CoD.LocationSelectorUtility.IsLocationSelectorActive(f16_arg1) and not f16_arg2.occludedBy and CoD.BitUtility.IsBitwiseAndNonZero(Engine[@"getmodelvalue"](model), Enum[@"luibuttonflags"][@"flag_down"]) and not f16_arg2.m_disableAllButtonActions then
-			Engine[@"sendmenuresponse"](f16_arg1, CoD.LocationSelectorUtility.MenuResponseName, "cancel", 0)
+	f16_arg3:subscribeToModel(Engine.GetModel(Engine.GetModelForController(f16_arg1), "ButtonBits." .. Enum.LUIButton[@"lui_key_xbb_pscircle"]), function(model)
+		if CoD.LocationSelectorUtility.IsLocationSelectorActive(f16_arg1) and not f16_arg2.occludedBy and CoD.BitUtility.IsBitwiseAndNonZero(Engine.GetModelValue(model), Enum.LUIButtonFlags[@"flag_down"]) and not f16_arg2.m_disableAllButtonActions then
+			Engine.SendMenuResponse(f16_arg1, CoD.LocationSelectorUtility.MenuResponseName, "cancel", 0)
 		end
 	end, false)
 end
 CoD.LocationSelectorUtility.IsLocationSelectorActive = function(f22_arg0)
-	return Engine[@"isvisibilitybitset"](f22_arg0, Enum[@"uivisibilitybit"][@"bit_selecting_locational_killstreak"])
+	return Engine.IsVisibilityBitSet(f22_arg0, Enum.UIVisibilityBit[@"bit_selecting_locational_killstreak"])
 end
 CoD.LocationSelectorUtility.IsLocSelInCommandMode = function(f23_arg0)
-	local f23_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f23_arg0), "locSel.commandMode")
-	return f23_local0 and Engine[@"getmodelvalue"](f23_local0) == 1
+	local f23_local0 = Engine.GetModel(Engine.GetModelForController(f23_arg0), "locSel.commandMode")
+	return f23_local0 and Engine.GetModelValue(f23_local0) == 1
 end
 CoD.LocationSelectorUtility.IsObjectiveCommandLocation = function(f24_arg0)
 	local f24_local0 = LUI.startswith(f24_arg0, "control_")

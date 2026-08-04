@@ -1,4 +1,4 @@
-require("x64:9fc49de026d9299")
+require("ui/uieditor/widgets/callingcards/callingcards_goldframe")
 CoD[@"hash_56E6DDD790C76F5E"] = InheritFrom(LUI.UIElement)
 CoD[@"hash_56E6DDD790C76F5E"].__defaultWidth = 720
 CoD[@"hash_56E6DDD790C76F5E"].__defaultHeight = 180
@@ -10,20 +10,20 @@ CoD[@"hash_56E6DDD790C76F5E"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Image0 = LUI.UIImage.new(0, 0, 0, 720, 0, 0, 0, 180)
-	Image0:setImage(RegisterImage(@"uie_t7_loot_callingcard_cutie_animals_master_bg"))
+	Image0:setImage(RegisterImage("uie_t7_loot_callingcard_cutie_animals_master_bg"))
 	self:addElement(Image0)
 	self.Image0 = Image0
 	local Image1 = LUI.UIImage.new(0, 0, 0, 720, 0, 0, 0, 180)
-	Image1:setImage(RegisterImage(@"uie_t7_loot_callingcard_cutie_animals_master_rays"))
+	Image1:setImage(RegisterImage("uie_t7_loot_callingcard_cutie_animals_master_rays"))
 	self:addElement(Image1)
 	self.Image1 = Image1
 	local Image2 = LUI.UIImage.new(0, 0, 0, 720, 0, 0, 0, 180)
-	Image2:setImage(RegisterImage(@"uie_t7_loot_callingcard_cutie_animals_master_chicks"))
+	Image2:setImage(RegisterImage("uie_t7_loot_callingcard_cutie_animals_master_chicks"))
 	self:addElement(Image2)
 	self.Image2 = Image2
 	local Image20 = LUI.UIImage.new(0, 0, 0, 720, 0, 0, 0, 180)
 	Image20:setAlpha(0)
-	Image20:setImage(RegisterImage(@"uie_t7_loot_callingcard_cutie_animals_master_chicks2"))
+	Image20:setImage(RegisterImage("uie_t7_loot_callingcard_cutie_animals_master_chicks2"))
 	self:addElement(Image20)
 	self.Image20 = Image20
 	local CallingCardsGoldFrame = CoD.CallingCards_GoldFrame.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)

@@ -1,4 +1,4 @@
-require("x64:c4c5fd562617659")
+require("ui/uieditor/widgets/genericsimplebutton_container")
 CoD.GenericSimpleButton = InheritFrom(LUI.UIElement)
 CoD.GenericSimpleButton.__defaultWidth = 194
 CoD.GenericSimpleButton.__defaultHeight = 103

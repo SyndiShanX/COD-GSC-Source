@@ -1,4 +1,4 @@
-require("x64:3f77bf4255b87dd")
+require("ui/uieditor/widgets/freecursor/infopanelsubwidgets/freecursornolabelbuttonpromptcontainer")
 CoD.freeCursorNoLabelButtonPromptArea = InheritFrom(LUI.UIElement)
 CoD.freeCursorNoLabelButtonPromptArea.__defaultWidth = 300
 CoD.freeCursorNoLabelButtonPromptArea.__defaultHeight = 36
@@ -32,14 +32,14 @@ CoD.freeCursorNoLabelButtonPromptArea.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	end)
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
-	f1_local3(f1_local2, f1_local4["ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"]], function(f4_arg0)
+	local f1_local4 = Engine.GetModelForController(f1_arg1)
+	f1_local3(f1_local2, f1_local4["ButtonBits." .. Enum.LUIButton[@"lui_key_rtrig"]], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f4_arg0:get(),
-			modelName = "ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"],
+			modelName = "ButtonBits." .. Enum.LUIButton[@"lui_key_rtrig"],
 		})
 	end, false)
 	self:linkToElementModel(self, "detailedViewPC", true, function(model)

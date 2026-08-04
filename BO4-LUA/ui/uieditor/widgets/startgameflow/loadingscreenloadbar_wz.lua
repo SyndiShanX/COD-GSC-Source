@@ -1,4 +1,4 @@
-require("x64:acbf06924421e35")
+require("ui/uieditor/widgets/common/commoncornerpips01")
 CoD.LoadingScreenLoadbar_WZ = InheritFrom(LUI.UIElement)
 CoD.LoadingScreenLoadbar_WZ.__defaultWidth = 1803
 CoD.LoadingScreenLoadbar_WZ.__defaultHeight = 20
@@ -31,8 +31,8 @@ CoD.LoadingScreenLoadbar_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.HeaderStripeAdd = HeaderStripeAdd
 	local LoadingBar = LUI.UIImage.new(0, 1, 0, 0, 0.5, 0.5, -6, 6)
 	LoadingBar:setRGB(0.16, 0.45, 1)
-	LoadingBar:setImage(RegisterImage(@"uie_t7_mp_menu_startflow_meterfill"))
-	LoadingBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe"))
+	LoadingBar:setImage(RegisterImage("uie_t7_mp_menu_startflow_meterfill"))
+	LoadingBar:setMaterial(LUI.UIImage.GetCachedMaterial("uie_wipe"))
 	LoadingBar:setShaderVector(0, 1, 0, 0, 0)
 	LoadingBar:setShaderVector(1, 0, 0, 0, 0)
 	LoadingBar:setShaderVector(2, 1, 0, 0, 0)

@@ -1,5 +1,5 @@
-require("x64:3863141f8b496f8")
-require("x64:f9a3b11d5a51171")
+require("ui/uieditor/widgets/pc/startmenu/graphicsoptions/pc_startmenu_options_safeareaborder_horiz")
+require("ui/uieditor/widgets/pc/startmenu/graphicsoptions/pc_startmenu_options_safeareaborder_vert")
 CoD.StartMenu_Options_SafeArea_Container = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Options_SafeArea_Container.__defaultWidth = 1920
 CoD.StartMenu_Options_SafeArea_Container.__defaultHeight = 1080
@@ -19,26 +19,26 @@ CoD.StartMenu_Options_SafeArea_Container.new = function(f1_arg0, f1_arg1, f1_arg
 	PCBackingBackground = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	PCBackingBackground:setRGB(0.69, 0.69, 0.69)
 	PCBackingBackground:setAlpha(0)
-	PCBackingBackground:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	PCBackingBackground:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(PCBackingBackground)
 	self.PCBackingBackground = PCBackingBackground
 	local upArrow = LUI.UIImage.new(0.5, 0.5, -48, 48, 0, 0, 0, 96)
 	upArrow:setZRot(270)
-	upArrow:setImage(RegisterImage(@"safe_area_arrow"))
+	upArrow:setImage(RegisterImage("safe_area_arrow"))
 	self:addElement(upArrow)
 	self.upArrow = upArrow
 	local downArrow = LUI.UIImage.new(0.5, 0.5, -48, 48, 1, 1, -96, 0)
 	downArrow:setZRot(90)
-	downArrow:setImage(RegisterImage(@"safe_area_arrow"))
+	downArrow:setImage(RegisterImage("safe_area_arrow"))
 	self:addElement(downArrow)
 	self.downArrow = downArrow
 	local leftArrow = LUI.UIImage.new(0, 0, 0, 96, 0.5, 0.5, -48, 48)
-	leftArrow:setImage(RegisterImage(@"safe_area_arrow"))
+	leftArrow:setImage(RegisterImage("safe_area_arrow"))
 	self:addElement(leftArrow)
 	self.leftArrow = leftArrow
 	local rightArrow = LUI.UIImage.new(1, 1, -96, 0, 0.5, 0.5, -48, 48)
 	rightArrow:setZRot(180)
-	rightArrow:setImage(RegisterImage(@"safe_area_arrow"))
+	rightArrow:setImage(RegisterImage("safe_area_arrow"))
 	self:addElement(rightArrow)
 	self.rightArrow = rightArrow
 	local RBorder = nil

@@ -1,10 +1,10 @@
-require("x64:71d4e66447f837e")
-require("x64:d6ecdf7755aeddc")
-require("x64:a6e027ec2d1bee7")
-require("x64:e41af73729601d6")
-require("x64:7889ce1e3e2e8a")
-require("x64:55aca670e9903a3")
-require("x64:a9255c570c68aa8")
+require("ui/uieditor/widgets/backgroundframes/menuframeingame")
+require("ui/uieditor/widgets/common/commonheader")
+require("ui/uieditor/widgets/director/directortabheader")
+require("ui/uieditor/widgets/header/header_container_frontend")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsbackground")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmaincorners")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmainframe")
 CoD.StartMenu_Options_Main = InheritFrom(CoD.Menu)
 LUI.createMenu.StartMenu_Options_Main = function(f1_arg0, f1_arg1)
 	local self = CoD.Menu.NewForUIEditor("StartMenu_Options_Main", f1_arg0)
@@ -108,36 +108,36 @@ LUI.createMenu.StartMenu_Options_Main = function(f1_arg0, f1_arg1)
 			OptionsFrame:changeFrameWidget(f7_local0)
 		end
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
-		GoBack(self, controller)
-		UpdateGamerprofile(self, element, controller)
-		ClearMenuSavedState(menu)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xbb_pscircle"], nil, function(f8_arg0, f8_arg1, f8_arg2, f8_arg3)
+		GoBack(self, f8_arg2)
+		UpdateGamerprofile(self, f8_arg0, f8_arg2)
+		ClearMenuSavedState(f8_arg1)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
+	end, function(f9_arg0, f9_arg1, f9_arg2)
+		CoD.Menu.SetButtonLabel(f9_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xbx_pssquare"], nil, function(f10_arg0, f10_arg1, f10_arg2, f10_arg3)
 		if AlwaysFalse() then
 			return true
 		else
 		end
-	end, function(element, menu, controller)
+	end, function(f11_arg0, f11_arg1, f11_arg2)
 		if AlwaysFalse() then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_0", nil, nil)
+			CoD.Menu.SetButtonLabel(f11_arg1, Enum.LUIButton[@"lui_key_xbx_pssquare"], 0x0, nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], nil, function(f12_arg0, f12_arg1, f12_arg2, f12_arg3)
 		if AlwaysFalse() then
 			return true
 		else
 		end
-	end, function(element, menu, controller)
+	end, function(f13_arg0, f13_arg1, f13_arg2)
 		if AlwaysFalse() then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
+			CoD.Menu.SetButtonLabel(f13_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, nil)
 			return false
 		else
 			return false

@@ -1,5 +1,5 @@
-require("x64:5f8cf56752aa71b")
-require("x64:b9ad3e1e7c33125")
+require("ui/uieditor/widgets/commonbuttonoutline")
+require("ui/uieditor/widgets/startmenu/startmenu_identity_subtitle")
 CoD.StartMenu_Button_Emblem_Internal = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Button_Emblem_Internal.__defaultWidth = 555
 CoD.StartMenu_Button_Emblem_Internal.__defaultHeight = 211
@@ -13,14 +13,14 @@ CoD.StartMenu_Button_Emblem_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local NoiseTiledBacking2 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking2:setAlpha(0.5)
-	NoiseTiledBacking2:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking2:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	NoiseTiledBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking2:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking2:setupNineSliceShader(196, 88)
 	self:addElement(NoiseTiledBacking2)
 	self.NoiseTiledBacking2 = NoiseTiledBacking2
 	local BgGrid = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	BgGrid:setImage(RegisterImage(@"uie_ui_menu_start_menu_grid"))
+	BgGrid:setImage(RegisterImage("uie_ui_menu_start_menu_grid"))
 	BgGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_1A02C44161370F6D"))
 	BgGrid:setShaderVector(0, 0, 0, 0, 0)
 	BgGrid:setShaderVector(1, 1, 1, 0, 0)
@@ -29,7 +29,7 @@ CoD.StartMenu_Button_Emblem_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.BgGrid = BgGrid
 	local NoiseTiledBackingAdd = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBackingAdd:setAlpha(0.2)
-	NoiseTiledBackingAdd:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBackingAdd:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	NoiseTiledBackingAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	NoiseTiledBackingAdd:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBackingAdd:setupNineSliceShader(196, 88)
@@ -44,11 +44,11 @@ CoD.StartMenu_Button_Emblem_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self:addElement(emblem0)
 	self.emblem0 = emblem0
 	local Title = LUI.UIText.new(0, 0, 18, 327, 1, 1, -36.5, -3.5)
-	Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/multiplayer"))
+	Title:setText(Engine[@"hash_4F9F1239CFD921FE"]("menu/multiplayer"))
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(2)
-	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	Title:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	Title:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(Title)
 	self.Title = Title
 	local Subtitle = CoD.StartMenu_Identity_SubTitle.new(f1_arg0, f1_arg1, 0, 0, 6.5, 548.5, 0, 0, 0.5, 39.5)
@@ -96,14 +96,14 @@ CoD.StartMenu_Button_Emblem_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	ButtonStateText:setText(LocalizeToUpperString(@"hash_6D135324AE818CEE"))
 	ButtonStateText:setTTF("ttmussels_regular")
 	ButtonStateText:setLetterSpacing(4)
-	ButtonStateText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ButtonStateText:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
 	self:addElement(ButtonStateText)
 	self.ButtonStateText = ButtonStateText
 	local ImageText = LUI.UIText.new(0, 1, 0, 0, 0, 0, 0, 30)
 	ImageText:setText("")
 	ImageText:setTTF("default")
-	ImageText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	ImageText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	ImageText:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	ImageText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(ImageText)
 	self.ImageText = ImageText
 	local ButtonOutline = CoD.CommonButtonOutline.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)

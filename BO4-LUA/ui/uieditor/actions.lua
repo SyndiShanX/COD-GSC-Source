@@ -1,4 +1,4 @@
-require("x64:d3ad8b6812f6d2c")
+require("ui/uieditor/actions_helper")
 function GridForceMenuOpened(f1_arg0, f1_arg1, f1_arg2)
 	if f1_arg0.isGridLayout then
 		f1_arg0:menuOpened(f1_arg1, f1_arg2, true)
@@ -48,10 +48,10 @@ function UpdateElementStateWithoutChildren(f7_arg0, f7_arg1, f7_arg2)
 	})
 end
 function SetLuiKeyCatcher(f8_arg0)
-	Engine[@"setluikeycatcher"](f8_arg0)
+	Engine.SetLuiKeyCatcher(f8_arg0)
 end
 function EngineExec(f9_arg0, f9_arg1)
-	Engine[@"exec"](f9_arg0, f9_arg1)
+	Engine.exec(f9_arg0, f9_arg1)
 end
 function UpdateAllMenuButtonPrompts(f10_arg0, f10_arg1)
 	f10_arg0:UpdateAllButtonPrompts(f10_arg1)
@@ -73,10 +73,10 @@ function SendButtonPressToMenu(f14_arg0, f14_arg1, f14_arg2, f14_arg3)
 	CoD.Menu.HandleButtonPress(f14_arg0, f14_arg1, f14_arg3, f14_arg2)
 end
 function SendButtonPressToMenuEx(f15_arg0, f15_arg1, f15_arg2)
-	local f15_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f15_arg1), "ButtonBits." .. f15_arg2)
+	local f15_local0 = Engine.GetModel(Engine.GetModelForController(f15_arg1), "ButtonBits." .. f15_arg2)
 	if f15_local0 then
-		Engine[@"setmodelvalue"](f15_local0, Enum[@"luibuttonflags"][@"flag_down"])
-		Engine[@"setmodelvalue"](f15_local0, 0)
+		Engine.SetModelValue(f15_local0, Enum.LUIButtonFlags[@"flag_down"])
+		Engine.SetModelValue(f15_local0, 0)
 	end
 end
 function DisableAutoButtonCallback(f16_arg0, f16_arg1, f16_arg2)
@@ -85,7 +85,7 @@ function DisableAutoButtonCallback(f16_arg0, f16_arg1, f16_arg2)
 		if f16_arg1.__autoButtonCallback then
 			for f16_local3, f16_local4 in pairs(f16_arg1.__autoButtonCallback) do
 				if f16_local4 then
-					f16_arg0:AddButtonCallbackFunction(f16_arg1, f16_arg2, Enum[@"luibutton"][@"lui_key_none"], f16_local3, nil, nil, nil)
+					f16_arg0:AddButtonCallbackFunction(f16_arg1, f16_arg2, Enum.LUIButton[@"lui_key_none"], f16_local3, nil, nil, nil)
 				end
 			end
 		end
@@ -104,61 +104,61 @@ function SetElementPropertyEnum(f20_arg0, f20_arg1, f20_arg2)
 	f20_arg0[f20_arg1] = f20_arg2
 end
 function ForceNotifyModel(f21_arg0, f21_arg1)
-	Engine[@"forcenotifymodelsubscriptions"](Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f21_arg0), f21_arg1))
+	Engine.ForceNotifyModelSubscriptions(Engine.GetModel(Engine.GetModelForController(f21_arg0), f21_arg1))
 end
 function SetControllerModelValue(f22_arg0, f22_arg1, f22_arg2)
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f22_arg0), f22_arg1), f22_arg2)
+	Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f22_arg0), f22_arg1), f22_arg2)
 end
 function ToggleControllerModelValueBoolean(f23_arg0, f23_arg1)
-	local f23_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f23_arg0), f23_arg1)
-	Engine[@"setmodelvalue"](f23_local0, not Engine[@"getmodelvalue"](f23_local0))
+	local f23_local0 = Engine.GetModel(Engine.GetModelForController(f23_arg0), f23_arg1)
+	Engine.SetModelValue(f23_local0, not Engine.GetModelValue(f23_local0))
 end
 function ToggleControllerModelValueNumber(f24_arg0, f24_arg1)
-	local f24_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f24_arg0), f24_arg1)
-	Engine[@"setmodelvalue"](f24_local0, 1 - Engine[@"getmodelvalue"](f24_local0))
+	local f24_local0 = Engine.GetModel(Engine.GetModelForController(f24_arg0), f24_arg1)
+	Engine.SetModelValue(f24_local0, 1 - Engine.GetModelValue(f24_local0))
 end
 function SetControllerModelValueNumberIncrement(f25_arg0, f25_arg1, f25_arg2)
-	local f25_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f25_arg0), f25_arg1)
-	local f25_local1 = Engine[@"getmodelvalue"](f25_local0) + 1
+	local f25_local0 = Engine.GetModel(Engine.GetModelForController(f25_arg0), f25_arg1)
+	local f25_local1 = Engine.GetModelValue(f25_local0) + 1
 	if f25_arg2 then
 		f25_local1 = math.min(f25_local1, f25_arg2)
 	end
-	Engine[@"setmodelvalue"](f25_local0, f25_local1)
+	Engine.SetModelValue(f25_local0, f25_local1)
 end
 function SetControllerModelValueNumberDecrement(f26_arg0, f26_arg1, f26_arg2)
-	local f26_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f26_arg0), f26_arg1)
-	local f26_local1 = Engine[@"getmodelvalue"](f26_local0) - 1
+	local f26_local0 = Engine.GetModel(Engine.GetModelForController(f26_arg0), f26_arg1)
+	local f26_local1 = Engine.GetModelValue(f26_local0) - 1
 	if f26_arg2 then
 		f26_local1 = math.max(f26_local1, f26_arg2)
 	end
-	Engine[@"setmodelvalue"](f26_local0, f26_local1)
+	Engine.SetModelValue(f26_local0, f26_local1)
 end
 function ToggleGlobalModelValueBoolean(f27_arg0)
-	local f27_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), f27_arg0)
-	Engine[@"setmodelvalue"](f27_local0, not Engine[@"getmodelvalue"](f27_local0))
+	local f27_local0 = Engine.CreateModel(Engine.GetGlobalModel(), f27_arg0)
+	Engine.SetModelValue(f27_local0, not Engine.GetModelValue(f27_local0))
 end
 function SetListDataSource(f28_arg0, f28_arg1)
 	f28_arg0:setDataSource(f28_arg1)
 end
 function SetGlobalModelValueTrue(f29_arg0)
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), f29_arg0), true)
+	Engine.SetModelValue(Engine.CreateModel(Engine.GetGlobalModel(), f29_arg0), true)
 end
 function SetGlobalModelValueFalse(f30_arg0)
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), f30_arg0), false)
+	Engine.SetModelValue(Engine.CreateModel(Engine.GetGlobalModel(), f30_arg0), false)
 end
 function SetGlobalModelValue(f31_arg0, f31_arg1)
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), f31_arg0), f31_arg1)
+	Engine.SetModelValue(Engine.CreateModel(Engine.GetGlobalModel(), f31_arg0), f31_arg1)
 end
 function SetGlobalModelValueLocString(f32_arg0, f32_arg1)
-	local f32_local0 = Engine[@"getglobalmodel"]()
+	local f32_local0 = Engine.GetGlobalModel()
 	f32_local0 = f32_local0:create(f32_arg0)
 	f32_local0:set(f32_arg1)
 end
 function SetGlobalModelValueArg(f33_arg0, f33_arg1)
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), f33_arg0), f33_arg1)
+	Engine.SetModelValue(Engine.CreateModel(Engine.GetGlobalModel(), f33_arg0), f33_arg1)
 end
 function SetElementModelValue(f34_arg0, f34_arg1, f34_arg2)
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](f34_arg0:getModel(), f34_arg1), f34_arg2)
+	Engine.SetModelValue(Engine.GetModel(f34_arg0:getModel(), f34_arg1), f34_arg2)
 end
 function DispatchEventToChildren(f35_arg0, f35_arg1, f35_arg2)
 	return f35_arg0:dispatchEventToChildren({
@@ -190,17 +190,17 @@ function CopyElementToPerControllerTable(f40_arg0, f40_arg1, f40_arg2)
 	CoD.perController[f40_arg0][f40_arg2] = f40_arg1
 end
 function SendClientScriptNotify(f41_arg0, f41_arg1, f41_arg2)
-	Engine[@"sendclientscriptnotify"](f41_arg0, f41_arg1, {
+	Engine.SendClientScriptNotify(f41_arg0, f41_arg1, {
 		param1 = f41_arg2,
 	})
 end
 function SendClientScriptNotifyForAdjustedClient(f42_arg0, f42_arg1, f42_arg2)
-	Engine[@"sendclientscriptnotify"](f42_arg0, f42_arg1, {
+	Engine.SendClientScriptNotify(f42_arg0, f42_arg1, {
 		param1 = f42_arg2 .. CoD.GetLocalClientAdjustedNum(f42_arg0),
 	})
 end
 function SendCustomClientScriptNotifyForAdjustedClient(f43_arg0, f43_arg1, ...)
-	Engine[@"sendclientscriptnotify"](f43_arg0, f43_arg1 .. CoD.GetLocalClientAdjustedNum(f43_arg0), ...)
+	Engine.SendClientScriptNotify(f43_arg0, f43_arg1 .. CoD.GetLocalClientAdjustedNum(f43_arg0), ...)
 end
 function SendClientScriptMenuChangeNotify(f44_arg0, f44_arg1, f44_arg2)
 	SendClientScriptMenuChangeNotifyHelper(f44_arg0, f44_arg1.menuName, f44_arg2)
@@ -239,7 +239,7 @@ function CallCustomElementFunction_Element(f51_arg0, f51_arg1, ...)
 	end
 end
 function SetProfileVar(f52_arg0, f52_arg1, f52_arg2)
-	Engine[@"setprofilevar"](f52_arg0, f52_arg1, f52_arg2)
+	Engine.SetProfileVar(f52_arg0, f52_arg1, f52_arg2)
 end
 function SetupDynamicContainer(f53_arg0)
 	LUI.OverrideFunction_CallOriginalSecond(f53_arg0, "close", function(element)
@@ -261,36 +261,36 @@ function OpenGameSettingsOptionsMenu(f56_arg0, f56_arg1, f56_arg2, f56_arg3)
 	OpenPopup(f56_arg3, "GameSettings_OptionsMenu", f56_arg2)
 end
 function ResetGameSettings()
-	Engine[@"setgametype"](Engine[@"lobbygetgametype"]())
-	Engine[@"setdvar"]("bot_maxFree", 0)
-	Engine[@"setdvar"]("bot_maxAllies", 0)
-	Engine[@"setdvar"]("bot_maxAxis", 0)
-	Engine[@"setdvar"]("bot_difficulty", 1)
-	Engine[@"forcenotifymodelsubscriptions"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "GametypeSettings.Update"))
-	Engine[@"forcenotifymodelsubscriptions"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "GametypeSettings.Reset"))
+	Engine.SetGametype(Engine[@"lobbygetgametype"]())
+	Engine.SetDvar("bot_maxFree", 0)
+	Engine.SetDvar("bot_maxAllies", 0)
+	Engine.SetDvar("bot_maxAxis", 0)
+	Engine.SetDvar("bot_difficulty", 1)
+	Engine.ForceNotifyModelSubscriptions(Engine.CreateModel(Engine.GetGlobalModel(), "GametypeSettings.Update"))
+	Engine.ForceNotifyModelSubscriptions(Engine.CreateModel(Engine.GetGlobalModel(), "GametypeSettings.Reset"))
 end
 function SetCTDifficultyEasy()
-	Engine[@"setdvar"]("overrideDifficulty", "easy")
+	Engine.SetDvar("overrideDifficulty", "easy")
 end
 function SetCTDifficultyMedium()
-	Engine[@"setdvar"]("overrideDifficulty", "medium")
+	Engine.SetDvar("overrideDifficulty", "medium")
 end
 function SetCTDifficultyHard()
-	Engine[@"setdvar"]("overrideDifficulty", "hard")
+	Engine.SetDvar("overrideDifficulty", "hard")
 end
 function SetCTDifficultyTutorial()
-	Engine[@"setdvar"]("overrideDifficulty", "tutorial")
+	Engine.SetDvar("overrideDifficulty", "tutorial")
 end
 function ResetSelectedGameSetting(f62_arg0, f62_arg1, f62_arg2, f62_arg3)
 	local f62_local0 = CoD.perController[f62_arg2].selectedGameSettingElement
 	if f62_local0 and f62_local0.revert then
 		f62_local0:revert()
 	end
-	Engine[@"forcenotifymodelsubscriptions"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "GametypeSettings.Update"))
+	Engine.ForceNotifyModelSubscriptions(Engine.CreateModel(Engine.GetGlobalModel(), "GametypeSettings.Update"))
 end
 function GameSettingsMenuClosed(f63_arg0, f63_arg1)
 	if CoD.perController[f63_arg1].editingPresetClass then
-		Engine[@"stopeditingpresetclass"]()
+		Engine.StopEditingPresetClass()
 		CoD.perController[f63_arg1].isPreset = nil
 	end
 end
@@ -315,7 +315,7 @@ function SetIgnorePlaySoundSetSound(f67_arg0, f67_arg1)
 	f67_arg0:setIgnorePlaySound(f67_arg1)
 end
 function PlaySoundAlias(f68_arg0)
-	Engine[@"playsound"](f68_arg0)
+	Engine.playsound(f68_arg0)
 end
 function DelayedPlaySoundAlias(f69_arg0, f69_arg1, f69_arg2)
 	f69_arg0:addElement(LUI.UITimer.newElementTimer(f69_arg1, true, function()
@@ -323,15 +323,15 @@ function DelayedPlaySoundAlias(f69_arg0, f69_arg1, f69_arg2)
 	end))
 end
 function StopSoundAlias(f71_arg0)
-	Engine[@"stopsound"](f71_arg0)
+	Engine.stopsound(f71_arg0)
 end
 function PlayMPMusicPreview(f72_arg0, f72_arg1)
 	local f72_local0 = CoD.SafeGetModelValue(f72_arg1:getModel(), "alias")
 	if f72_local0 and f72_local0 ~= "" then
 		CoD.StopFrontendMusic()
-		Engine[@"playsound"](f72_local0)
+		Engine.playsound(f72_local0)
 		if not f72_arg1.soundTimer then
-			f72_arg1.soundTimer = LUI.UITimer.newElementTimer(Engine[@"getsoundplaybacktime"](f72_local0), true, function()
+			f72_arg1.soundTimer = LUI.UITimer.newElementTimer(Engine.GetSoundPlaybackTime(f72_local0), true, function()
 				StopMPMusicPreview(f72_arg0, f72_arg1)
 			end)
 			f72_arg1:addElement(f72_arg1.soundTimer)
@@ -343,7 +343,7 @@ end
 function StopMPMusicPreview(f74_arg0, f74_arg1)
 	local f74_local0 = CoD.SafeGetModelValue(f74_arg1:getModel(), "alias")
 	if f74_local0 and f74_local0 ~= "" then
-		Engine[@"stopsound"](f74_local0)
+		Engine.stopsound(f74_local0)
 		CoD.ResetFrontendMusic()
 		if f74_arg1.soundTimer then
 			f74_arg1.soundTimer:close()
@@ -355,13 +355,13 @@ function PlayMenuMusic(f75_arg0, f75_arg1, f75_arg2)
 	if not f75_arg2 then
 		f75_arg2 = 0
 	end
-	local f75_local0 = Engine[@"getmodelforcontroller"](f75_arg0)
+	local f75_local0 = Engine.GetModelForController(f75_arg0)
 	f75_local0.MenuMusic.musicStateName:set(f75_arg1)
 	f75_local0.MenuMusic.delayInMS:set(f75_arg2)
 	f75_local0.MenuMusic:forceNotifySubscriptions()
 end
 function ResetFrontendMusic(f76_arg0)
-	local f76_local0 = Engine[@"getmodelforcontroller"](f76_arg0)
+	local f76_local0 = Engine.GetModelForController(f76_arg0)
 	f76_local0.MenuMusic.musicStateName:set("")
 	f76_local0.MenuMusic.delayInMS:set(0)
 	f76_local0.MenuMusic:forceNotifySubscriptions()
@@ -411,12 +411,12 @@ function SetElementModelToSelfModelValue(f80_arg0, f80_arg1, f80_arg2, f80_arg3)
 	end
 end
 function ForceNotifyGlobalModel(f81_arg0, f81_arg1)
-	Engine[@"forcenotifymodelsubscriptions"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), f81_arg1))
+	Engine.ForceNotifyModelSubscriptions(Engine.GetModel(Engine.GetGlobalModel(), f81_arg1))
 end
 function ForceNotifyControllerModel(f82_arg0, f82_arg1)
-	local f82_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f82_arg0), f82_arg1)
+	local f82_local0 = Engine.GetModel(Engine.GetModelForController(f82_arg0), f82_arg1)
 	if f82_local0 then
-		Engine[@"forcenotifymodelsubscriptions"](f82_local0)
+		Engine.ForceNotifyModelSubscriptions(f82_local0)
 	end
 end
 function DelayForceNotifyControllerModel(f83_arg0, f83_arg1, f83_arg2, f83_arg3)
@@ -424,9 +424,9 @@ function DelayForceNotifyControllerModel(f83_arg0, f83_arg1, f83_arg2, f83_arg3)
 		f83_arg3 = 0
 	end
 	f83_arg0:addElement(LUI.UITimer.newElementTimer(f83_arg3, true, function(f84_arg0)
-		local f84_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f83_arg1), f83_arg2)
+		local f84_local0 = Engine.GetModel(Engine.GetModelForController(f83_arg1), f83_arg2)
 		if f84_local0 then
-			Engine[@"forcenotifymodelsubscriptions"](f84_local0)
+			Engine.ForceNotifyModelSubscriptions(f84_local0)
 		end
 	end))
 end
@@ -442,17 +442,17 @@ function DataSourceHelperGetModel(f87_arg0, f87_arg1)
 	end
 end
 function ShowKeyboard(f88_arg0, f88_arg1, f88_arg2, f88_arg3)
-	Engine[@"exec"](f88_arg2, "ui_keyboard_new " .. Enum[@"keyboardtype"][Engine[@"converttoxhash"](f88_arg3)])
+	Engine.exec(f88_arg2, "ui_keyboard_new " .. Enum.KeyboardType[Engine[@"converttoxhash"](f88_arg3)])
 end
 function RefreshLobbyGameClient(f89_arg0, f89_arg1)
-	local f89_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.gameClient.update")
+	local f89_local0 = Engine.GetModel(Engine.GetGlobalModel(), "lobbyRoot.gameClient.update")
 	local f89_local1
-	if Engine[@"getmodelvalue"](f89_local0) == 0 then
+	if Engine.GetModelValue(f89_local0) == 0 then
 		f89_local1 = 1
 	else
 		f89_local1 = 0
 	end
-	Engine[@"setmodelvalue"](f89_local0, f89_local1)
+	Engine.SetModelValue(f89_local0, f89_local1)
 end
 function ShowHeaderIconOnly(f90_arg0)
 	f90_arg0.showHeaderKicker = false
@@ -463,9 +463,9 @@ function ShowHeaderKickerAndIcon(f91_arg0)
 	f91_arg0.showHeaderIcon = true
 end
 function SetHeadingKickerText(f92_arg0)
-	local f92_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.headingKickerText")
+	local f92_local0 = Engine.CreateModel(Engine.GetGlobalModel(), "lobbyRoot.headingKickerText")
 	if f92_local0 then
-		Engine[@"setmodelvalue"](f92_local0, Engine[@"hash_4F9F1239CFD921FE"](f92_arg0))
+		Engine.SetModelValue(f92_local0, Engine[@"hash_4F9F1239CFD921FE"](f92_arg0))
 	end
 end
 function SetHeadingKickerTextToGameMode()
@@ -476,14 +476,14 @@ function SetHeadingKickerTextToGameMode()
 		SetHeadingKickerText(GetGameMode())
 		return
 	end
-	local f93_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.headingKickerMode")
-	local f93_local1 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.headingKickerText")
+	local f93_local0 = Engine.CreateModel(Engine.GetGlobalModel(), "lobbyRoot.headingKickerMode")
+	local f93_local1 = Engine.CreateModel(Engine.GetGlobalModel(), "lobbyRoot.headingKickerText")
 	if f93_local1 then
-		local f93_local2 = Engine[@"setmodelvalue"]
+		local f93_local2 = Engine.SetModelValue
 		local f93_local3 = f93_local1
 		local f93_local4
 		if f93_local0 then
-			f93_local4 = Engine[@"getmodelvalue"](f93_local0)
+			f93_local4 = Engine.GetModelValue(f93_local0)
 			if not f93_local4 then
 			else
 				f93_local2(f93_local3, f93_local4)
@@ -494,12 +494,12 @@ function SetHeadingKickerTextToGameMode()
 end
 function SetHeadingKickerTextToSelectedWeapon(f94_arg0)
 	local f94_local0 = CoD.GetCustomization(f94_arg0, "weapon_index")
-	local f94_local1 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.headingKickerText")
+	local f94_local1 = Engine.CreateModel(Engine.GetGlobalModel(), "lobbyRoot.headingKickerText")
 	if f94_local1 and f94_local0 ~= CoD.CACUtility.EmptyItemIndex then
-		local f94_local2 = Engine[@"getitemref"](f94_local0)
-		local f94_local3 = Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](Engine[@"getitemname"](f94_local0)))
+		local f94_local2 = Engine.GetItemRef(f94_local0)
+		local f94_local3 = Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"](Engine.GetItemName(f94_local0)))
 		if f94_local1 and f94_local3 then
-			Engine[@"setmodelvalue"](f94_local1, f94_local3)
+			Engine.SetModelValue(f94_local1, f94_local3)
 		end
 	end
 end
@@ -514,15 +514,15 @@ function JoinSystemLinkServer(f97_arg0, f97_arg1, f97_arg2)
 		return
 	end
 	local f97_local0 = f97_arg1.gridInfoTable.zeroBasedIndex
-	local f97_local1 = Engine[@"getmodelvalue"](Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "serverListRoot"), "server" .. tostring(f97_local0)), "sessionMode"))
+	local f97_local1 = Engine.GetModelValue(Engine.CreateModel(Engine.CreateModel(Engine.CreateModel(Engine.GetGlobalModel(), "serverListRoot"), "server" .. tostring(f97_local0)), "sessionMode"))
 	local f97_local2 = nil
-	if f97_local1 == Enum[@"emodes"][@"mode_campaign"] then
+	if f97_local1 == Enum.eModes.mode_campaign then
 		local f97_local3 = LobbyData.GetLobbyMenuByName(LuaEnum.UI.DIRECTOR_LAN_CP)
 		f97_local2 = f97_local3[@"maxlocalclientsnetwork"]
-	elseif f97_local1 == Enum[@"emodes"][@"mode_multiplayer"] then
+	elseif f97_local1 == Enum.eModes.mode_multiplayer then
 		local f97_local3 = LobbyData.GetLobbyMenuByName(LuaEnum.UI.DIRECTOR_LAN_MP)
 		f97_local2 = f97_local3[@"maxlocalclientsnetwork"]
-	elseif f97_local1 == Enum[@"emodes"][@"mode_zombies"] then
+	elseif f97_local1 == Enum.eModes.mode_zombies then
 		local f97_local3 = LobbyData.GetLobbyMenuByName(LuaEnum.UI.DIRECTOR_LAN_ZM)
 		f97_local2 = f97_local3[@"maxlocalclientsnetwork"]
 	end
@@ -534,7 +534,7 @@ function JoinSystemLinkServer(f97_arg0, f97_arg1, f97_arg2)
 			Engine[@"lobbyserverlistjoinserver"](f98_arg0.controller, f98_arg0.index)
 		end
 	end
-	if f97_local2 < Engine[@"getusedcontrollercount"]() then
+	if f97_local2 < Engine.GetUsedControllerCount() then
 		CoD.OverlayUtility.CreateOverlay(f97_arg2, f97_arg0, "LobbyLocalClientWarning", {
 			controller = f97_arg2,
 			navToMenu = nil,
@@ -555,12 +555,12 @@ function LobbyAddLocalClient(f99_arg0, f99_arg1)
 		return
 	elseif Engine[@"hash_5CB675CA7856DA25"]() and not LuaUtils.TrialAllowSplitscreen() then
 		return false
-	elseif Engine[@"getlobbynetworkmode"]() == Enum[@"lobbynetworkmode"][@"lobby_networkmode_live"] then
+	elseif Engine[@"getlobbynetworkmode"]() == Enum.LobbyNetworkMode[@"lobby_networkmode_live"] then
 		if CoD.isPS4 then
-			if Engine[@"displaynpavailabilityerrors"](f99_arg1) then
+			if Engine.DisplayNpAvailabilityErrors(f99_arg1) then
 				return
 			elseif LuaUtils.RequirePaidSubscriptionForOnlinePlay() then
-				local f99_local0, f99_local1 = Engine[@"checkpsplus"](f99_arg1)
+				local f99_local0, f99_local1 = Engine.CheckPSPlus(f99_arg1)
 				if f99_local0 == true then
 					if f99_local1 == false and not LuaUtils.PlayStationPlusUpsell(f99_arg1) then
 						return
@@ -570,23 +570,23 @@ function LobbyAddLocalClient(f99_arg0, f99_arg1)
 				end
 			end
 		end
-		if CoD.isDurango and not Engine[@"isuserguest"](f99_arg1) and not Engine[@"hasmpprivileges"](f99_arg1) then
-			Engine[@"privilegeforcecheck"](f99_arg1, 254, true)
+		if CoD.isDurango and not Engine.IsUserGuest(f99_arg1) and not Engine.HasMPPrivileges(f99_arg1) then
+			Engine.PrivilegeForceCheck(f99_arg1, 254, true)
 			return
 		end
 	end
-	local f99_local0 = Enum[@"lobbytype"][@"lobby_type_private"]
-	if Engine[@"islobbyactive"](Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_game"]) then
-		f99_local0 = Enum[@"lobbytype"][@"lobby_type_game"]
+	local f99_local0 = Enum.LobbyType[@"lobby_type_private"]
+	if Engine[@"islobbyactive"](Enum.LobbyModule[@"lobby_module_client"], Enum.LobbyType[@"lobby_type_game"]) then
+		f99_local0 = Enum.LobbyType[@"lobby_type_game"]
 	end
-	if Engine[@"getusedcontrollercount"]() < Dvar[@"lobby_maxlocalplayers"]:get() then
-		local f99_local2 = Engine[@"getmodelvalue"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.lobbyMainMode"))
+	if Engine.GetUsedControllerCount() < Dvar[@"lobby_maxlocalplayers"]:get() then
+		local f99_local2 = Engine.GetModelValue(Engine.GetModel(Engine.GetGlobalModel(), "lobbyRoot.lobbyMainMode"))
 		local f99_local3 = -1
-		if f99_local2 == Enum[@"lobbymainmode"][@"lobby_mainmode_mp"] then
+		if f99_local2 == Enum.LobbyMainMode[@"lobby_mainmode_mp"] then
 			f99_local3 = LuaEnum.FEATURE_BAN.MP_SPLIT_SCREEN
-		elseif f99_local2 == Enum[@"lobbymainmode"][@"lobby_mainmode_zm"] then
+		elseif f99_local2 == Enum.LobbyMainMode[@"lobby_mainmode_zm"] then
 			f99_local3 = LuaEnum.FEATURE_BAN.ZM_SPLIT_SCREEN
-		elseif f99_local2 == Enum[@"lobbymainmode"][@"lobby_mainmode_cp"] then
+		elseif f99_local2 == Enum.LobbyMainMode[@"lobby_mainmode_cp"] then
 			f99_local3 = LuaEnum.FEATURE_BAN.CP_SPLIT_SCREEN
 		end
 		if f99_local3 >= 0 then
@@ -598,8 +598,8 @@ function LobbyAddLocalClient(f99_arg0, f99_arg1)
 			end
 		end
 		CoD.LobbyUtility.UnusedGamepadButton(f99_arg0, f99_arg1)
-		if Engine[@"getusedcontrollercount"]() == 3 then
-			Engine[@"execnow"](nil, "canceldemonwareconnect")
+		if Engine.GetUsedControllerCount() == 3 then
+			Engine.ExecNow(nil, "canceldemonwareconnect")
 			LuaUtils.UI_ShowWarningMessageDialog(f99_arg1, Engine[@"hash_4F9F1239CFD921FE"](0x6B651D2751797A))
 		end
 		local f99_local4 = Engine[@"getdvarint"]("bot_maxAllies")
@@ -607,25 +607,25 @@ function LobbyAddLocalClient(f99_arg0, f99_arg1)
 		local f99_local6 = Engine[@"getdvarint"]("bot_maxFree")
 		local f99_local7 = CoD.OptionsUtility.MaxSplitscreenBots
 		if f99_local7 < f99_local4 + f99_local5 then
-			Engine[@"setdvar"]("bot_maxAllies", f99_local7 / 2)
-			Engine[@"setdvar"]("bot_maxAxis", f99_local7 / 2)
+			Engine.SetDvar("bot_maxAllies", f99_local7 / 2)
+			Engine.SetDvar("bot_maxAxis", f99_local7 / 2)
 		end
 		if f99_local7 < f99_local6 then
-			Engine[@"setdvar"]("bot_maxFree", f99_local7)
+			Engine.SetDvar("bot_maxFree", f99_local7)
 		end
-		CoD.perController[Engine[@"getprimarycontroller"]()].localClientChanged = true
+		CoD.perController[Engine.GetPrimaryController()].localClientChanged = true
 		ForceLobbyButtonUpdate(f99_arg1)
 	end
 end
 function LobbyLANServerPlayerListRefresh(f100_arg0, f100_arg1, f100_arg2)
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "serverPlayerListRoot"), "selectedServer"), f100_arg1.gridInfoTable.zeroBasedIndex)
+	Engine.SetModelValue(Engine.CreateModel(Engine.CreateModel(Engine.GetGlobalModel(), "serverPlayerListRoot"), "selectedServer"), f100_arg1.gridInfoTable.zeroBasedIndex)
 	if f100_arg0.LANServerBrowserDetails and f100_arg0.LANServerBrowserDetails.PlayerList then
 		f100_arg0.LANServerBrowserDetails.PlayerList:updateDataSource()
 	end
 end
 function UploadStats(f101_arg0, f101_arg1)
-	Engine[@"exec"](f101_arg1, "uploadstats")
-	Engine[@"exec"](f101_arg1, "savegamerprofilestats")
+	Engine.exec(f101_arg1, "uploadstats")
+	Engine.exec(f101_arg1, "savegamerprofilestats")
 end
 function SaveLoadout(f102_arg0, f102_arg1)
 	local f102_local0 = CoD.PlayerRoleUtility.customizationMode
@@ -633,12 +633,12 @@ function SaveLoadout(f102_arg0, f102_arg1)
 		f102_local0 = CoD.PrestigeUtility.GetPermanentUnlockMode()
 	end
 	Engine[@"saveloadout"](f102_arg1, f102_local0)
-	if f102_local0 == Enum[@"emodes"][@"mode_multiplayer"] then
-		CoD.BreadcrumbUtility.UploadBuffer(f102_arg1, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
-	elseif f102_local0 == Enum[@"emodes"][@"mode_warzone"] then
-		CoD.BreadcrumbUtility.UploadBuffer(f102_arg1, Enum[@"storagefiletype"][@"storage_wz_stats_online"])
-	elseif f102_local0 == Enum[@"emodes"][@"mode_zombies"] then
-		CoD.BreadcrumbUtility.UploadBuffer(f102_arg1, Enum[@"storagefiletype"][@"storage_zm_stats_online"])
+	if f102_local0 == Enum.eModes.mode_multiplayer then
+		CoD.BreadcrumbUtility.UploadBuffer(f102_arg1, Enum.StorageFileType[@"storage_mp_stats_online"])
+	elseif f102_local0 == Enum.eModes.mode_warzone then
+		CoD.BreadcrumbUtility.UploadBuffer(f102_arg1, Enum.StorageFileType[@"storage_wz_stats_online"])
+	elseif f102_local0 == Enum.eModes.mode_zombies then
+		CoD.BreadcrumbUtility.UploadBuffer(f102_arg1, Enum.StorageFileType[@"storage_zm_stats_online"])
 	end
 end
 function SaveLoadoutGeneric(f103_arg0)
@@ -647,56 +647,56 @@ function SaveLoadoutGeneric(f103_arg0)
 		f103_local0 = CoD.PrestigeUtility.GetPermanentUnlockMode()
 	end
 	Engine[@"saveloadout"](f103_arg0, f103_local0)
-	if f103_local0 == Enum[@"emodes"][@"mode_multiplayer"] then
-		CoD.BreadcrumbUtility.UploadBuffer(f103_arg0, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
-	elseif f103_local0 == Enum[@"emodes"][@"mode_warzone"] then
-		CoD.BreadcrumbUtility.UploadBuffer(f103_arg0, Enum[@"storagefiletype"][@"storage_wz_stats_online"])
-	elseif f103_local0 == Enum[@"emodes"][@"mode_zombies"] then
-		CoD.BreadcrumbUtility.UploadBuffer(f103_arg0, Enum[@"storagefiletype"][@"storage_zm_stats_online"])
+	if f103_local0 == Enum.eModes.mode_multiplayer then
+		CoD.BreadcrumbUtility.UploadBuffer(f103_arg0, Enum.StorageFileType[@"storage_mp_stats_online"])
+	elseif f103_local0 == Enum.eModes.mode_warzone then
+		CoD.BreadcrumbUtility.UploadBuffer(f103_arg0, Enum.StorageFileType[@"storage_wz_stats_online"])
+	elseif f103_local0 == Enum.eModes.mode_zombies then
+		CoD.BreadcrumbUtility.UploadBuffer(f103_arg0, Enum.StorageFileType[@"storage_zm_stats_online"])
 	end
 end
 function ChangeCharacter(f104_arg0, f104_arg1, f104_arg2, f104_arg3)
-	Engine[@"sendmenuresponse"](f104_arg2, CoD.CACUtility.PositionDraftMenuName, "changecharacter", 0)
-	local f104_local0 = Engine[@"getmodelforcontroller"](f104_arg2)
+	Engine.SendMenuResponse(f104_arg2, CoD.CACUtility.PositionDraftMenuName, "changecharacter", 0)
+	local f104_local0 = Engine.GetModelForController(f104_arg2)
 	f104_local0 = f104_local0:create("PositionDraft.focusedCharacterIndex")
 	f104_local0:set(0)
-	f104_local0 = Engine[@"getmodelforcontroller"](f104_arg2)
+	f104_local0 = Engine.GetModelForController(f104_arg2)
 	f104_local0 = f104_local0:create("PositionDraft.focusedCharacterWeapon")
 	f104_local0:set("")
-	Engine[@"sendclientscriptnotify"](f104_arg2, "PositionDraft_Update", {
-		localClientNum = Engine[@"getlocalclientnum"](f104_arg2),
+	Engine.SendClientScriptNotify(f104_arg2, "PositionDraft_Update", {
+		localClientNum = Engine.GetLocalClientNum(f104_arg2),
 	})
 end
 function PositionDraftOnChangingCharacter(f105_arg0)
-	Engine[@"sendclientscriptnotify"](f105_arg0, "PositionDraft_ChangingCharacter", {
-		localClientNum = Engine[@"getlocalclientnum"](f105_arg0),
+	Engine.SendClientScriptNotify(f105_arg0, "PositionDraft_ChangingCharacter", {
+		localClientNum = Engine.GetLocalClientNum(f105_arg0),
 	})
 end
 function PositionDraftOnChangingCharacterComplete(f106_arg0)
-	Engine[@"sendclientscriptnotify"](f106_arg0, "PositionDraft_ChangingCharacterComplete", {
-		localClientNum = Engine[@"getlocalclientnum"](f106_arg0),
+	Engine.SendClientScriptNotify(f106_arg0, "PositionDraft_ChangingCharacterComplete", {
+		localClientNum = Engine.GetLocalClientNum(f106_arg0),
 	})
 end
 function PositionDraftResetCharacterScene(f107_arg0)
-	Engine[@"sendclientscriptnotify"](f107_arg0, "PositionDraft_ResetCharacterScene", {
-		localClientNum = Engine[@"getlocalclientnum"](f107_arg0),
+	Engine.SendClientScriptNotify(f107_arg0, "PositionDraft_ResetCharacterScene", {
+		localClientNum = Engine.GetLocalClientNum(f107_arg0),
 	})
 end
 function PositionDraftReady(f108_arg0, f108_arg1, f108_arg2)
-	Engine[@"sendmenuresponse"](f108_arg2, CoD.CACUtility.PositionDraftMenuName, "ready", 0)
-	local f108_local0 = Engine[@"getmodelforclient"](Engine[@"getclientnum"](f108_arg2))
+	Engine.SendMenuResponse(f108_arg2, CoD.CACUtility.PositionDraftMenuName, "ready", 0)
+	local f108_local0 = Engine[@"getmodelforclient"](Engine.GetClientNum(f108_arg2))
 	if f108_local0 ~= nil then
 		f108_local0.ready:set(1)
 	end
 end
 function PositionDraftOnFocusCharacter(f109_arg0, f109_arg1, f109_arg2)
 	local f109_local0 = ""
-	local f109_local1 = Engine[@"currentsessionmode"]()
+	local f109_local1 = Engine.CurrentSessionMode()
 	local f109_local2 = CoD.CACUtility.GetSelectedCustomClass(f109_arg2, f109_local1)
-	if not CoD.BaseUtility.IsCurrentSessionModeEqualTo(Enum[@"emodes"][@"mode_warzone"]) and f109_local2 and f109_local2 >= 0 then
+	if not CoD.BaseUtility.IsCurrentSessionModeEqualTo(Enum.eModes.mode_warzone) and f109_local2 and f109_local2 >= 0 then
 		local f109_local3 = CoD.CACUtility.GetClassItem(f109_arg2, f109_local2, "primary", f109_local1)
 		if f109_local3 and f109_local3 > CoDShared.EmptyItemIndex then
-			f109_local0 = Engine[@"getitemref"](f109_local3, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f109_local1)
+			f109_local0 = Engine.GetItemRef(f109_local3, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f109_local1)
 		end
 	end
 	local f109_local3 = f109_arg1.characterIndex
@@ -704,20 +704,20 @@ function PositionDraftOnFocusCharacter(f109_arg0, f109_arg1, f109_arg2)
 		local f109_local4 = f109_arg1:getModel()
 		f109_local3 = f109_local4.characterIndex and f109_local4 and f109_local4.characterIndex:get()
 	end
-	local f109_local4 = Engine[@"getmodelforcontroller"](f109_arg2)
+	local f109_local4 = Engine.GetModelForController(f109_arg2)
 	f109_local4 = f109_local4:create("PositionDraft.focusedCharacterIndex")
 	f109_local4:set(f109_local3)
-	f109_local4 = Engine[@"getmodelforcontroller"](f109_arg2)
+	f109_local4 = Engine.GetModelForController(f109_arg2)
 	f109_local4 = f109_local4:create("PositionDraft.focusedCharacterWeapon")
 	f109_local4:set(f109_local0)
-	f109_local4 = Engine[@"getmodelforcontroller"](f109_arg2)
+	f109_local4 = Engine.GetModelForController(f109_arg2)
 	f109_local4 = f109_local4:create("PositionDraft.focusedCharacterHasRestriction")
 	f109_local4:set(CoD.PlayerRoleUtility.IsAnyAbilityRestricted(f109_arg1))
-	f109_local4 = Engine[@"getmodelforcontroller"](f109_arg2)
+	f109_local4 = Engine.GetModelForController(f109_arg2)
 	f109_local4 = f109_local4:create("PositionDraft.focusedCharacterIsRestricted")
 	f109_local4:set(CoD.PlayerRoleUtility.IsCharacterRestricted(f109_local1, f109_local3))
-	Engine[@"sendclientscriptnotify"](f109_arg2, "PositionDraft_Update", {
-		localClientNum = Engine[@"getlocalclientnum"](f109_arg2),
+	Engine.SendClientScriptNotify(f109_arg2, "PositionDraft_Update", {
+		localClientNum = Engine.GetLocalClientNum(f109_arg2),
 	})
 end
 function PositionDraftOnFocusCharacterLost(f110_arg0, f110_arg1, f110_arg2, f110_arg3)
@@ -726,35 +726,35 @@ function PositionDraftOnFocusCharacterLost(f110_arg0, f110_arg1, f110_arg2, f110
 	end
 end
 function PositionDraftClearFocusedCharacter(f111_arg0)
-	local f111_local0 = Engine[@"getmodelforcontroller"](f111_arg0)
+	local f111_local0 = Engine.GetModelForController(f111_arg0)
 	f111_local0 = f111_local0:create("PositionDraft.focusedCharacterIndex")
 	f111_local0:set(0)
-	f111_local0 = Engine[@"getmodelforcontroller"](f111_arg0)
+	f111_local0 = Engine.GetModelForController(f111_arg0)
 	f111_local0 = f111_local0:create("PositionDraft.focusedCharacterWeapon")
 	f111_local0:set("")
-	f111_local0 = Engine[@"getmodelforcontroller"](f111_arg0)
+	f111_local0 = Engine.GetModelForController(f111_arg0)
 	f111_local0 = f111_local0:create("PositionDraft.focusedCharacterHasRestriction")
 	f111_local0:set(false)
-	f111_local0 = Engine[@"getmodelforcontroller"](f111_arg0)
+	f111_local0 = Engine.GetModelForController(f111_arg0)
 	f111_local0 = f111_local0:create("PositionDraft.focusedCharacterIsRestricted")
 	f111_local0:set(false)
-	Engine[@"sendclientscriptnotify"](f111_arg0, "PositionDraft_Update", {
-		localClientNum = Engine[@"getlocalclientnum"](f111_arg0),
+	Engine.SendClientScriptNotify(f111_arg0, "PositionDraft_Update", {
+		localClientNum = Engine.GetLocalClientNum(f111_arg0),
 	})
 end
 function PositionDraftSelectCharacter(f112_arg0, f112_arg1, f112_arg2)
 	local f112_local0 = f112_arg1:getModel()
 	f112_local0 = f112_local0:create("disabled")
 	if f112_local0:get() == false then
-		Engine[@"sendmenuresponse"](f112_arg2, CoD.CACUtility.PositionDraftMenuName, "draft", f112_arg1.characterIndex)
-		Engine[@"sendclientscriptnotify"](f112_arg2, "PositionDraft_CharacterSelected", {
-			localClientNum = Engine[@"getlocalclientnum"](f112_arg2),
+		Engine.SendMenuResponse(f112_arg2, CoD.CACUtility.PositionDraftMenuName, "draft", f112_arg1.characterIndex)
+		Engine.SendClientScriptNotify(f112_arg2, "PositionDraft_CharacterSelected", {
+			localClientNum = Engine.GetLocalClientNum(f112_arg2),
 		})
-		CoD.perController[f112_arg2].classNum = Engine[@"getpositionrolecustomclassindex"](Engine[@"currentsessionmode"](), f112_arg1.characterIndex)
-		f112_local0 = Engine[@"getmodelforcontroller"](f112_arg2)
+		CoD.perController[f112_arg2].classNum = Engine[@"getpositionrolecustomclassindex"](Engine.CurrentSessionMode(), f112_arg1.characterIndex)
+		f112_local0 = Engine.GetModelForController(f112_arg2)
 		f112_local0 = f112_local0:create("PositionDraft.focusedCharacterIndex")
 		f112_local0:set(0)
-		f112_local0 = Engine[@"getmodelforcontroller"](f112_arg2)
+		f112_local0 = Engine.GetModelForController(f112_arg2)
 		f112_local0 = f112_local0:create("PositionDraft.focusedCharacterWeapon")
 		f112_local0:set("")
 	end
@@ -768,44 +768,44 @@ function PositionDraftSelectCharacterFrontend(f113_arg0, f113_arg1, f113_arg2)
 			local f113_local1 = f113_arg1:getModel()
 			f113_local0 = f113_local1.characterIndex and f113_local1 and f113_local1.characterIndex:get()
 		end
-		Engine[@"sendcharacterdraftselection"](f113_arg2, Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_client"]), f113_local0)
+		Engine[@"sendcharacterdraftselection"](f113_arg2, Engine[@"lobbygetcontrollinglobbysession"](Enum.LobbyModule[@"lobby_module_client"]), f113_local0)
 		LuaUtils.SetLastSelectedSpecialist(f113_arg2, f113_local0)
-		Engine[@"sendclientscriptnotify"](f113_arg2, "PositionDraft_CharacterSelected", {
+		Engine.SendClientScriptNotify(f113_arg2, "PositionDraft_CharacterSelected", {
 			characterIndex = f113_local0,
-			localClientNum = Engine[@"getlocalclientnum"](f113_arg2),
+			localClientNum = Engine.GetLocalClientNum(f113_arg2),
 		})
-		CoD.perController[f113_arg2].classNum = Engine[@"getpositionrolecustomclassindex"](Engine[@"currentsessionmode"](), f113_local0)
-		local f113_local2 = Engine[@"getmodelforcontroller"](f113_arg2)
+		CoD.perController[f113_arg2].classNum = Engine[@"getpositionrolecustomclassindex"](Engine.CurrentSessionMode(), f113_local0)
+		local f113_local2 = Engine.GetModelForController(f113_arg2)
 		f113_local2 = f113_local2:create("PositionDraft.focusedCharacterIndex")
 		f113_local2:set(0)
-		f113_local2 = Engine[@"getmodelforcontroller"](f113_arg2)
+		f113_local2 = Engine.GetModelForController(f113_arg2)
 		f113_local2 = f113_local2:create("PositionDraft.focusedCharacterWeapon")
 		f113_local2:set("")
 	end
 end
 function PositionDraftOnCloseCharacterSelection(f114_arg0)
-	if CoD.SafeGetModelValue(Engine[@"getmodelforcontroller"](f114_arg0), "PositionDraft.ResetOnCloseCharacterSelection") == 1 then
+	if CoD.SafeGetModelValue(Engine.GetModelForController(f114_arg0), "PositionDraft.ResetOnCloseCharacterSelection") == 1 then
 		PositionDraftResetCharacterScene(f114_arg0)
 	else
 		PositionDraftOnChangingCharacterComplete(f114_arg0)
 	end
 end
 function CustomGameSettingsMenuClosed(f115_arg0, f115_arg1)
-	local f115_local0 = Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_host"])
+	local f115_local0 = Engine[@"lobbygetcontrollinglobbysession"](Enum.LobbyModule[@"lobby_module_host"])
 	Engine[@"lobbyevent"]("OnGametypeSettingsChange", {
-		lobbyModule = Enum[@"lobbymodule"][@"lobby_module_host"],
+		lobbyModule = Enum.LobbyModule[@"lobby_module_host"],
 		lobbyType = f115_local0,
 		fromUI = true,
 	})
-	Engine[@"lobbyhostsessionsetdirty"](f115_local0, Enum[@"sessiondirty"][@"session_dirty_state"])
+	Engine[@"lobbyhostsessionsetdirty"](f115_local0, Enum.SessionDirty[@"session_dirty_state"])
 end
 function LobbyToggleNetwork(f116_arg0, f116_arg1, f116_arg2, f116_arg3)
-	for f116_local0 = 1, Engine[@"getmaxcontrollercount"]() - 1, 1 do
+	for f116_local0 = 1, Engine.GetMaxControllerCount() - 1, 1 do
 		LobbyRemoveLocalClientFromLobby(f116_arg0, f116_local0)
 	end
-	if f116_arg3 == Enum[@"lobbynetworkmode"][@"lobby_networkmode_live"] then
+	if f116_arg3 == Enum.LobbyNetworkMode[@"lobby_networkmode_live"] then
 		if IsOrbis() then
-			if Engine[@"displaynpavailabilityerrors"](f116_arg2) then
+			if Engine.DisplayNpAvailabilityErrors(f116_arg2) then
 				return
 			elseif not LuaUtils.PlayStationPlusUpsell(f116_arg2) then
 				return
@@ -814,14 +814,14 @@ function LobbyToggleNetwork(f116_arg0, f116_arg1, f116_arg2, f116_arg3)
 		if CoD.LobbyUtility.ForceOffline() == true then
 			CoD.OverlayUtility.CreateOverlay(f116_arg2, f116_arg0, "UpdateNeeded")
 			return
-		elseif not Engine[@"isdemonwarefetchingdone"](f116_arg2) then
-			Engine[@"liveconnectenabledemonwareconnect"]()
+		elseif not Engine.IsDemonwareFetchingDone(f116_arg2) then
+			Engine.LiveConnectEnableDemonwareConnect()
 			CoD.OverlayUtility.CreateOverlay(f116_arg2, f116_arg0, "ConnectingToDemonware")
 			return
 		end
 	end
 	local f116_local0 = LuaEnum.UI.DIRECTOR_LAN
-	if f116_arg3 == Enum[@"lobbynetworkmode"][@"lobby_networkmode_live"] then
+	if f116_arg3 == Enum.LobbyNetworkMode[@"lobby_networkmode_live"] then
 		f116_local0 = LuaEnum.UI.DIRECTOR_ONLINE
 	end
 	Engine[@"lobbyevent"]("OnGoForward", {
@@ -832,12 +832,12 @@ function LobbyToggleNetwork(f116_arg0, f116_arg1, f116_arg2, f116_arg3)
 	f116_arg0:close()
 end
 function LaunchGamePrototype(f117_arg0, f117_arg1, f117_arg2)
-	local f117_local0 = Engine[@"getmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.lobbyNav"))
+	local f117_local0 = Engine.GetModelValue(Engine.CreateModel(Engine.GetGlobalModel(), "lobbyRoot.lobbyNav"))
 	local f117_local1 = {}
 	local f117_local2 = function(f118_arg0, f118_arg1)
 		local f118_local0 = LobbyData.GetLobbyMenuByName(f118_arg0)
 		if f118_local0 then
-			f117_local1[f118_local0[@"id"]] = f118_arg1
+			f117_local1[f118_local0.id] = f118_arg1
 		end
 	end
 	f117_local2(LuaEnum.UI.DIRECTOR_ONLINE_CP_STORY, LobbyOnlineCustomLaunchGame_SelectionList)
@@ -859,7 +859,7 @@ function LaunchGamePrototype(f117_arg0, f117_arg1, f117_arg2)
 end
 function LobbyNoAction(f119_arg0, f119_arg1, f119_arg2, f119_arg3, f119_arg4) end
 function OpenMPFirstTimeFlow(f120_arg0, f120_arg1, f120_arg2, f120_arg3, f120_arg4)
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "heroSelectionTutorial"), true)
+	Engine.SetModelValue(Engine.CreateModel(Engine.GetGlobalModel(), "heroSelectionTutorial"), true)
 	if f120_arg3 == "goBackFirst" then
 		f120_arg4 = GoBack(f120_arg0, f120_arg2)
 	end
@@ -868,10 +868,10 @@ function OpenMPFirstTimeFlow(f120_arg0, f120_arg1, f120_arg2, f120_arg3, f120_ar
 	NavigateToLobby_FirstTimeFlowMP(f120_arg0, f120_arg1, f120_arg2, f120_arg4)
 end
 function FirstTimeSetup_SetNone(f121_arg0)
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f121_arg0), "firstTimeFlowState"), CoD.PlayerRoleUtility.FirstTimeFlowState.None)
+	Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f121_arg0), "firstTimeFlowState"), CoD.PlayerRoleUtility.FirstTimeFlowState.None)
 end
 function ShowReportPlayerDialogTargetingKiller(f122_arg0, f122_arg1)
-	local f122_local0 = Engine[@"getmodelforcontroller"](f122_arg1)
+	local f122_local0 = Engine.GetModelForController(f122_arg1)
 	f122_local0 = f122_local0.Attacker
 	if f122_local0 then
 		local f122_local1 = f122_local0.xuid
@@ -879,7 +879,7 @@ function ShowReportPlayerDialogTargetingKiller(f122_arg0, f122_arg1)
 			f122_local1 = f122_local0.xuid:get()
 		end
 		if f122_local1 then
-			local f122_local2 = Engine[@"getplayerinfo"](f122_arg1, f122_local1)
+			local f122_local2 = Engine.GetPlayerInfo(f122_arg1, f122_local1)
 			CoD.OverlayUtility.CreateOverlay(f122_arg1, f122_arg0, "ReportPlayer", f122_arg1, f122_arg0, {
 				controller = f122_arg1,
 				xuid = f122_local1,
@@ -893,7 +893,7 @@ end
 function ShowReportPlayerDialog(f123_arg0, f123_arg1, f123_arg2, f123_arg3)
 	local f123_local0 = f123_arg3.controller
 	local f123_local1 = f123_arg3.xuid
-	local f123_local2 = Engine[@"getplayerinfo"](f123_local0, f123_local1)
+	local f123_local2 = Engine.GetPlayerInfo(f123_local0, f123_local1)
 	local f123_local3 = f123_local2.info.gamertag
 	if not f123_local3 or f123_local3 == "" then
 		f123_local3 = f123_arg3.gamertag
@@ -907,10 +907,10 @@ function ShowReportPlayerDialog(f123_arg0, f123_arg1, f123_arg2, f123_arg3)
 	})
 end
 function CheckIfFeatureIsBanned(f124_arg0, f124_arg1)
-	if Engine[@"isdedicatedserver"]() then
+	if Engine.isdedicatedserver() then
 		return false
 	else
-		local f124_local0, f124_local1 = Engine[@"isfeaturebanned"](f124_arg0, f124_arg1)
+		local f124_local0, f124_local1 = Engine.IsFeatureBanned(f124_arg0, f124_arg1)
 		if f124_local0 then
 			return true
 		else
@@ -919,57 +919,57 @@ function CheckIfFeatureIsBanned(f124_arg0, f124_arg1)
 	end
 end
 function GetFeatureBanInfo(f125_arg0, f125_arg1)
-	if Engine[@"isdedicatedserver"]() then
+	if Engine.isdedicatedserver() then
 		return ""
 	end
-	local f125_local0 = Engine[@"isfeaturepermabanned"](f125_arg0, f125_arg1)
+	local f125_local0 = Engine.IsFeaturePermaBanned(f125_arg0, f125_arg1)
 	local f125_local1 = LuaUtils.GetBanMessageForFeature(f125_arg0, f125_arg1, f125_local0)
 	local f125_local2 = ""
 	if not f125_local0 then
-		local f125_local3 = CoD.SafeGetModelValue(Engine[@"getmodel"](Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f125_arg0), "lobbyRoot.anticheat"), "featureBans"), "feature_" .. f125_arg1 .. "_end")
+		local f125_local3 = CoD.SafeGetModelValue(Engine.GetModel(Engine.GetModel(Engine.GetModelForController(f125_arg0), "lobbyRoot.anticheat"), "featureBans"), "feature_" .. f125_arg1 .. "_end")
 		if f125_local3 then
-			f125_local2 = Engine[@"gettimeremainingstring"](f125_local3 - Engine[@"systemtimeuint64"]())
+			f125_local2 = Engine.GetTimeRemainingString(f125_local3 - Engine.SystemTimeUInt64())
 		end
 	end
 	return string.format("%s\n\n%s", f125_local1, f125_local2)
 end
 function PopAnticheatMessageAndGoForward_MP(f126_arg0, f126_arg1, f126_arg2, f126_arg3)
 	local f126_local0 = GoBack(f126_arg0, f126_arg2)
-	Engine[@"popanticheatmessage"](f126_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.MP)
+	Engine.PopAnticheatMessage(f126_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.MP)
 	NavigateCheckForFirstTime(f126_local0, f126_arg1, f126_arg2, {
 		targetName = "MPLobbyMain",
-		mode = Enum[@"emodes"][@"mode_multiplayer"],
+		mode = Enum.eModes.mode_multiplayer,
 		firstTimeFlowAction = OpenMPFirstTimeFlow,
 	}, f126_local0)
 end
 function PopAnticheatMessageAndGoForward_ZM(f127_arg0, f127_arg1, f127_arg2, f127_arg3)
 	local f127_local0 = GoBack(f127_arg0, f127_arg2)
-	Engine[@"popanticheatmessage"](f127_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.ZM)
+	Engine.PopAnticheatMessage(f127_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.ZM)
 	NavigateToLobby_SelectionList(f127_local0, f127_arg1, f127_arg2, "ZMLobbyOnline", f127_local0)
 end
 function PopAnticheatMessageAndGoForward_Paintshop(f128_arg0, f128_arg1, f128_arg2, f128_arg3)
 	local f128_local0 = GoBack(f128_arg0, f128_arg2)
-	Engine[@"popanticheatmessage"](f128_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.UGC)
+	Engine.PopAnticheatMessage(f128_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.UGC)
 	CoD.CraftUtility.OpenPaintjobWeaponSelection(f128_local0, f128_arg1, f128_arg2, "", f128_local0)
 end
 function PopAnticheatMessageAndGoForward_EmblemEditor(f129_arg0, f129_arg1, f129_arg2, f129_arg3)
 	local f129_local0 = GoBack(f129_arg0, f129_arg2)
-	Engine[@"popanticheatmessage"](f129_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.UGC)
+	Engine.PopAnticheatMessage(f129_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.UGC)
 	OpenEmblemEditor(f129_arg1, f129_local0, f129_arg2, nil)
 end
 function PopAnticheatMessageAndGoForward_PaintjobEditor(f130_arg0, f130_arg1, f130_arg2, f130_arg3)
 	local f130_local0 = GoBack(f130_arg0, f130_arg2)
-	Engine[@"popanticheatmessage"](f130_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.UGC)
+	Engine.PopAnticheatMessage(f130_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.UGC)
 	OpenPaintjobEditor(f130_arg1, f130_local0, f130_arg2, nil)
 end
 function PopAnticheatMessageAndGoForward_Loot(f131_arg0, f131_arg1, f131_arg2, f131_arg3)
 	local f131_local0 = GoBack(f131_arg0, f131_arg2)
-	Engine[@"popanticheatmessage"](f131_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.LOOT)
+	Engine.PopAnticheatMessage(f131_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.LOOT)
 	OpenBlackMarket(f131_local0, nil, f131_arg2)
 end
 function PopAnticheatMessageAndGoForward_Arena(f132_arg0, f132_arg1, f132_arg2, f132_arg3)
 	local f132_local0 = GoBack(f132_arg0, f132_arg2)
-	Engine[@"popanticheatmessage"](f132_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.ARENA)
+	Engine.PopAnticheatMessage(f132_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.ARENA)
 	NavigateToLobby_SelectionList(f132_local0, f132_arg1, f132_arg2, "MPLobbyOnlineArena", f132_local0)
 end
 function GetAnticheatMessageForwardFunction(f133_arg0, f133_arg1, f133_arg2)
@@ -992,19 +992,19 @@ function GetAnticheatMessageForwardFunction(f133_arg0, f133_arg1, f133_arg2)
 	end
 end
 function DisplayAnticheatMessage(f134_arg0, f134_arg1, f134_arg2, f134_arg3, f134_arg4)
-	if Engine[@"isdedicatedserver"]() then
+	if Engine.isdedicatedserver() then
 		return
 	else
 		local f134_local0 = GetAnticheatMessageForwardFunction(f134_arg2, f134_arg3, f134_arg4)
-		local f134_local1 = Engine[@"getmodel"](Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f134_arg1), "lobbyRoot.anticheat"), "message")
-		CoD.OverlayUtility.CreateOverlay(f134_arg1, f134_arg0, "AnticheatMessage", Engine[@"getmodelvalue"](Engine[@"getmodel"](f134_local1, "string")), Engine[@"getmodelvalue"](Engine[@"getmodel"](f134_local1, "url")), f134_local0)
+		local f134_local1 = Engine.GetModel(Engine.GetModel(Engine.GetModelForController(f134_arg1), "lobbyRoot.anticheat"), "message")
+		CoD.OverlayUtility.CreateOverlay(f134_arg1, f134_arg0, "AnticheatMessage", Engine.GetModelValue(Engine.GetModel(f134_local1, "string")), Engine.GetModelValue(Engine.GetModel(f134_local1, "url")), f134_local0)
 	end
 end
 function OpenAnticheatPolicyInBrowser(f135_arg0, f135_arg1, f135_arg2, f135_arg3)
-	if Engine[@"isdedicatedserver"]() then
+	if Engine.isdedicatedserver() then
 		return
 	else
-		Engine[@"openanticheatpolicyinbrowser"](f135_arg2, Engine[@"getmodelvalue"](Engine[@"getmodel"](Engine[@"getmodel"](Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f135_arg2), "lobbyRoot.anticheat"), "message"), "url")))
+		Engine.OpenAnticheatPolicyInBrowser(f135_arg2, Engine.GetModelValue(Engine.GetModel(Engine.GetModel(Engine.GetModel(Engine.GetModelForController(f135_arg2), "lobbyRoot.anticheat"), "message"), "url")))
 	end
 end
 function NavigateCheckForFirstTime(f136_arg0, f136_arg1, f136_arg2, f136_arg3, f136_arg4)
@@ -1018,10 +1018,10 @@ function SetCharacterModeToSessionMode(f137_arg0, f137_arg1, f137_arg2)
 	CoD.PlayerRoleUtility.customizationMode = f137_arg2
 end
 function SetCharacterModeToCurrentSessionMode(f138_arg0, f138_arg1, f138_arg2)
-	CoD.PlayerRoleUtility.customizationMode = Engine[@"currentsessionmode"]()
+	CoD.PlayerRoleUtility.customizationMode = Engine.CurrentSessionMode()
 end
 function SetFirstTimeSetupComplete_MP(f139_arg0, f139_arg1, f139_arg2, f139_arg3, f139_arg4)
-	Engine[@"setfirsttimecomplete"](f139_arg2, Enum[@"emodes"][@"mode_multiplayer"], true)
+	Engine.SetFirstTimeComplete(f139_arg2, Enum.eModes.mode_multiplayer, true)
 	FirstTimeSetup_SetNone(f139_arg2)
 end
 function OpenMegaChewFactorymenu(f140_arg0, f140_arg1, f140_arg2, f140_arg3, f140_arg4)
@@ -1040,12 +1040,12 @@ function SetFillParty(f144_arg0, f144_arg1, f144_arg2, f144_arg3)
 	Engine[@"hash_5F6CE659F166033E"](f144_arg3)
 end
 function ResetClientLoadouts(f145_arg0)
-	if Engine[@"islobbyhost"](Enum[@"lobbytype"][@"lobby_type_private"]) then
+	if Engine[@"islobbyhost"](Enum.LobbyType[@"lobby_type_private"]) then
 		Engine[@"lobbyevent"]("ResetClientLoadouts", {})
 	end
 end
 function OpenStore(f146_arg0, f146_arg1, f146_arg2, f146_arg3, f146_arg4)
-	if CoD.isPS4 and Engine[@"displaynpavailabilityerrors"](f146_arg2) then
+	if CoD.isPS4 and Engine.DisplayNpAvailabilityErrors(f146_arg2) then
 		return
 	elseif not CoD.StoreUtility.IsStoreEnabled(f146_arg2) then
 		return
@@ -1055,7 +1055,7 @@ function OpenStore(f146_arg0, f146_arg1, f146_arg2, f146_arg3, f146_arg4)
 		local f146_local1 = DataSources.StoreRoot.getModel(f146_arg2)
 		f146_local1.ready:set(false)
 		f146_local1.actionSource:set(f146_arg3)
-		f146_local1.storeSource:set(f146_local0[@"name"])
+		f146_local1.storeSource:set(f146_local0.name)
 		OpenOverlay(f146_arg4, "Store", f146_arg2)
 	end
 end
@@ -1063,7 +1063,7 @@ function OpenCredits(f147_arg0, f147_arg1, f147_arg2, f147_arg3, f147_arg4)
 	OpenOverlay(f147_arg4, "Credit_Fullscreen", f147_arg2)
 end
 function OpenQuarterMaster(f148_arg0, f148_arg1, f148_arg2, f148_arg3, f148_arg4)
-	if not Engine[@"isuserguest"](f148_arg2) then
+	if not Engine.IsUserGuest(f148_arg2) then
 		OpenOverlay(f148_arg4, "QuarterMasterMenu", f148_arg2, {
 			_tab = f148_arg3,
 		})
@@ -1072,23 +1072,23 @@ function OpenQuarterMaster(f148_arg0, f148_arg1, f148_arg2, f148_arg3, f148_arg4
 end
 function OpenSteamStore(f149_arg0, f149_arg1, f149_arg2, f149_arg3, f149_arg4)
 	if not DisableSteamStore() then
-		Engine[@"steamstore"](f149_arg2)
+		Engine.SteamStore(f149_arg2)
 	end
 end
 function OpenScorestreaks(f150_arg0, f150_arg1, f150_arg2, f150_arg3, f150_arg4)
 	CoD.LobbyUtility.OpenScorestreaks(f150_arg4, f150_arg2)
 end
 function PromoteToLeader(f151_arg0, f151_arg1, f151_arg2, f151_arg3, f151_arg4, f151_arg5)
-	Engine[@"giveleadership"](f151_arg3.controller, Enum[@"lobbytype"][@"lobby_type_private"], f151_arg3.xuid)
+	Engine[@"giveleadership"](f151_arg3.controller, Enum.LobbyType[@"lobby_type_private"], f151_arg3.xuid)
 	if not f151_arg5 then
 		f151_arg4:goBack(f151_arg2)
 	end
 end
 function DisconnectClient(f152_arg0, f152_arg1, f152_arg2, f152_arg3, f152_arg4, f152_arg5)
 	if Engine[@"hash_65CB8E6B7FBBFFD5"](f152_arg3.xuid) then
-		Engine[@"hash_3D79B00C4CCE228B"](Enum[@"lobbytype"][@"lobby_type_private"], f152_arg3.xuid)
+		Engine[@"hash_3D79B00C4CCE228B"](Enum.LobbyType[@"lobby_type_private"], f152_arg3.xuid)
 	else
-		Engine[@"disconnectclientfromlobby"](f152_arg3.controller, Enum[@"lobbytype"][@"lobby_type_private"], f152_arg3.xuid, Enum[@"lobbydisconnectclient"][@"lobby_disconnect_client_kick"])
+		Engine[@"disconnectclientfromlobby"](f152_arg3.controller, Enum.LobbyType[@"lobby_type_private"], f152_arg3.xuid, Enum.LobbyDisconnectClient[@"lobby_disconnect_client_kick"])
 		if CoD.isPC then
 			CoD.PCUtility.ShowPlayerKickGameEvent(f152_arg3.xuid)
 		end
@@ -1098,22 +1098,22 @@ function DisconnectClient(f152_arg0, f152_arg1, f152_arg2, f152_arg3, f152_arg4,
 	end
 end
 function MutePlayer(f153_arg0, f153_arg1, f153_arg2, f153_arg3, f153_arg4, f153_arg5)
-	if Engine[@"hash_686E64DD1C270046"](Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_private"], f153_arg3.xuid) then
-		Engine[@"muteplayer"](f153_arg3.controller, Enum[@"lobbytype"][@"lobby_type_private"], f153_arg3.xuid)
+	if Engine[@"hash_686E64DD1C270046"](Enum.LobbyModule[@"lobby_module_client"], Enum.LobbyType[@"lobby_type_private"], f153_arg3.xuid) then
+		Engine[@"muteplayer"](f153_arg3.controller, Enum.LobbyType[@"lobby_type_private"], f153_arg3.xuid)
 	end
-	if Engine[@"hash_686E64DD1C270046"](Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_game"], f153_arg3.xuid) then
-		Engine[@"muteplayer"](f153_arg3.controller, Enum[@"lobbytype"][@"lobby_type_game"], f153_arg3.xuid)
+	if Engine[@"hash_686E64DD1C270046"](Enum.LobbyModule[@"lobby_module_client"], Enum.LobbyType[@"lobby_type_game"], f153_arg3.xuid) then
+		Engine[@"muteplayer"](f153_arg3.controller, Enum.LobbyType[@"lobby_type_game"], f153_arg3.xuid)
 	end
 	if not f153_arg5 then
 		f153_arg4:goBack(f153_arg2)
 	end
 end
 function UnMutePlayer(f154_arg0, f154_arg1, f154_arg2, f154_arg3, f154_arg4, f154_arg5)
-	if Engine[@"hash_686E64DD1C270046"](Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_private"], f154_arg3.xuid) then
-		Engine[@"unmuteplayer"](f154_arg3.controller, Enum[@"lobbytype"][@"lobby_type_private"], f154_arg3.xuid)
+	if Engine[@"hash_686E64DD1C270046"](Enum.LobbyModule[@"lobby_module_client"], Enum.LobbyType[@"lobby_type_private"], f154_arg3.xuid) then
+		Engine[@"unmuteplayer"](f154_arg3.controller, Enum.LobbyType[@"lobby_type_private"], f154_arg3.xuid)
 	end
-	if Engine[@"hash_686E64DD1C270046"](Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_game"], f154_arg3.xuid) then
-		Engine[@"unmuteplayer"](f154_arg3.controller, Enum[@"lobbytype"][@"lobby_type_game"], f154_arg3.xuid)
+	if Engine[@"hash_686E64DD1C270046"](Enum.LobbyModule[@"lobby_module_client"], Enum.LobbyType[@"lobby_type_game"], f154_arg3.xuid) then
+		Engine[@"unmuteplayer"](f154_arg3.controller, Enum.LobbyType[@"lobby_type_game"], f154_arg3.xuid)
 	end
 	if not f154_arg5 then
 		f154_arg4:goBack(f154_arg2)
@@ -1125,21 +1125,21 @@ function ShowSocialPartyWidget(f155_arg0)
 	end
 end
 function LobbyOnlineCustomLaunchGame_SelectionList(f156_arg0, f156_arg1, f156_arg2)
-	local f156_local0 = Engine[@"getglobalmodel"]()
+	local f156_local0 = Engine.GetGlobalModel()
 	f156_local0 = f156_local0.MapVote.timerActive
 	if f156_local0 ~= nil then
 		f156_local0:set(1)
 	end
-	Engine[@"setdvar"]("skipto", "")
-	Engine[@"setdvar"]("sv_saveGameSkipto", "")
-	CoD.LobbyUtility.LaunchGame(f156_arg0, f156_arg2, Enum[@"lobbytype"][@"lobby_type_game"])
+	Engine.SetDvar("skipto", "")
+	Engine.SetDvar("sv_saveGameSkipto", "")
+	CoD.LobbyUtility.LaunchGame(f156_arg0, f156_arg2, Enum.LobbyType[@"lobby_type_game"])
 end
 function LobbyOnlineStartMatchMaking(f157_arg0, f157_arg1, f157_arg2, f157_arg3)
 	CoD.LobbyUtility.StartSearch(f157_arg0, f157_arg1, f157_arg3)
 end
 function OpenTheaterSelectFilm(f158_arg0, f158_arg1)
-	CoD.FileshareUtility.SetFileshareMode(f158_arg1, Enum[@"filesharemode"][@"fileshare_mode_user"])
-	CoD.FileshareUtility.SetCurrentUser(Engine[@"getxuid64"](f158_arg1))
+	CoD.FileshareUtility.SetFileshareMode(f158_arg1, Enum.FileshareMode[@"fileshare_mode_user"])
+	CoD.FileshareUtility.SetCurrentUser(Engine.GetXUID64(f158_arg1))
 	CoD.FileshareUtility.SetDirty()
 	CoD.LobbyUtility.OpenTheaterSelectFilm(f158_arg0, f158_arg1)
 end
@@ -1150,16 +1150,16 @@ function GoBackAndDisplayModalDialog(f160_arg0, f160_arg1, f160_arg2)
 	f160_arg2(GoBack(f160_arg0, f160_arg1), f160_arg1)
 end
 function DisplayPlayGoJoinError(f161_arg0, f161_arg1)
-	LuaUtils.UI_ShowWarningMessageDialog(f161_arg1, Engine[@"hash_4F9F1239CFD921FE"](@"hash_798057596B3D3C6B"))
+	LuaUtils.UI_ShowWarningMessageDialog(f161_arg1, Engine[@"hash_4F9F1239CFD921FE"]("menu/cannot_join_during_install"))
 	GoBack(f161_arg0, f161_arg1)
 end
 function LobbyQuickJoin(f162_arg0, f162_arg1, f162_arg2, f162_arg3, f162_arg4, f162_arg5)
 	if CoD.isPC then
 		LobbyQuickJoinPC(f162_arg1, f162_arg2, f162_arg3, f162_arg4)
 		return
-	elseif LobbyData.GetLobbyNav() == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE) and IsFirstTimeSetup(f162_arg3, Enum[@"emodes"][@"mode_multiplayer"]) then
-		local f162_local0 = Engine[@"getmodel"](f162_arg2:getModel(), "activity")
-		if f162_local0 and GetSessionModeFromPresenceActivity(Engine[@"getmodelvalue"](f162_local0)) == Enum[@"emodes"][@"mode_multiplayer"] then
+	elseif LobbyData.GetLobbyNav() == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE) and IsFirstTimeSetup(f162_arg3, Enum.eModes.mode_multiplayer) then
+		local f162_local0 = Engine.GetModel(f162_arg2:getModel(), "activity")
+		if f162_local0 and GetSessionModeFromPresenceActivity(Engine.GetModelValue(f162_local0)) == Enum.eModes.mode_multiplayer then
 			if booleanArg == true then
 				GoBackAndOpenOverlayOnParent(f162_arg1, "MPIntroRequired", f162_arg3)
 			else
@@ -1174,8 +1174,8 @@ function LobbyQuickJoin(f162_arg0, f162_arg1, f162_arg2, f162_arg3, f162_arg4, f
 		f162_local0 = f162_arg2:getModel(f162_arg3, "isJoinable")
 	end
 	if f162_local0 ~= nil then
-		local f162_local2 = Engine[@"getmodelvalue"](f162_local0)
-		if f162_local2 ~= nil and (f162_local2 == Enum[@"lobbyjoinable"][@"lobby_joinable_yes"] or f162_local2 == Enum[@"lobbyjoinable"][@"lobby_joinable_yes_friends_only"]) then
+		local f162_local2 = Engine.GetModelValue(f162_local0)
+		if f162_local2 ~= nil and (f162_local2 == Enum.LobbyJoinable[@"lobby_joinable_yes"] or f162_local2 == Enum.LobbyJoinable[@"lobby_joinable_yes_friends_only"]) then
 			f162_local1 = true
 		end
 	end
@@ -1189,15 +1189,15 @@ function LobbyQuickJoin(f162_arg0, f162_arg1, f162_arg2, f162_arg3, f162_arg4, f
 	if f162_local0 == nil then
 		return
 	end
-	local f162_local2 = Engine[@"getmodelvalue"](f162_local0)
+	local f162_local2 = Engine.GetModelValue(f162_local0)
 	if f162_local2 == nil then
 		return
 	end
 	local f162_local3 = nil
-	if f162_arg4 ~= nil and f162_arg4 >= 0 and f162_arg4 < Enum[@"jointype"][@"join_type_count"] then
+	if f162_arg4 ~= nil and f162_arg4 >= 0 and f162_arg4 < Enum.jointype[@"join_type_count"] then
 		f162_local3 = f162_arg4
 	else
-		f162_local3 = Enum[@"jointype"][@"join_type_normal"]
+		f162_local3 = Enum.jointype.join_type_normal
 	end
 	local f162_local4 = {
 		controller = f162_arg3,
@@ -1208,8 +1208,8 @@ function LobbyQuickJoin(f162_arg0, f162_arg1, f162_arg2, f162_arg3, f162_arg4, f
 	if f162_arg5 ~= nil and f162_arg5 == true then
 		GoBack(f162_arg1, f162_arg3)
 	end
-	if Engine[@"isingame"]() then
-		if not Engine[@"hash_686E64DD1C270046"](Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_game"], f162_local4.xuid) then
+	if Engine.IsInGame() then
+		if not Engine[@"hash_686E64DD1C270046"](Enum.LobbyModule[@"lobby_module_client"], Enum.LobbyType[@"lobby_type_game"], f162_local4.xuid) then
 			f162_local4.migrating = not CoDShared.QuitGame(f162_arg3)
 			Engine[@"lobbyevent"]("OnInGameJoin", f162_local4)
 		end
@@ -1222,14 +1222,14 @@ function LobbyQuickJoinPC(f163_arg0, f163_arg1, f163_arg2, f163_arg3)
 	if not f163_local0 then
 		f163_local0 = f163_arg1:getModel(f163_arg2, "isJoinable")
 	end
-	local f163_local1 = f163_local0 and Engine[@"getmodelvalue"](f163_local0)
+	local f163_local1 = f163_local0 and Engine.GetModelValue(f163_local0)
 	local f163_local2 = f163_arg1:getModel(f163_arg2, "xuid")
-	local f163_local3 = f163_local2 and Engine[@"getmodelvalue"](f163_local2)
+	local f163_local3 = f163_local2 and Engine.GetModelValue(f163_local2)
 	local f163_local4 = nil
-	if f163_arg3 and f163_arg3 >= 0 and f163_arg3 < Enum[@"jointype"][@"join_type_count"] then
+	if f163_arg3 and f163_arg3 >= 0 and f163_arg3 < Enum.jointype[@"join_type_count"] then
 		f163_local4 = f163_arg3
 	else
-		f163_local4 = Enum[@"jointype"][@"join_type_normal"]
+		f163_local4 = Enum.jointype.join_type_normal
 	end
 	local f163_local5 = LobbyQuickJoinFinal(f163_arg0, f163_arg2, f163_local4, f163_local3, f163_local1)
 	if f163_local5 and CoD.isPC then
@@ -1239,15 +1239,15 @@ function LobbyQuickJoinPC(f163_arg0, f163_arg1, f163_arg2, f163_arg3)
 	return f163_local5
 end
 function LobbyQuickJoinWithXuid(f164_arg0, f164_arg1, f164_arg2)
-	local f164_local0 = Engine[@"getplayerinfo"](f164_arg1, f164_arg2)
-	return LobbyQuickJoinFinal(f164_arg0, f164_arg1, Enum[@"jointype"][@"join_type_invite"], f164_arg2, f164_local0.info.joinable)
+	local f164_local0 = Engine.GetPlayerInfo(f164_arg1, f164_arg2)
+	return LobbyQuickJoinFinal(f164_arg0, f164_arg1, Enum.jointype.join_type_invite, f164_arg2, f164_local0.info.joinable)
 end
 function LobbyQuickJoinFinal(f165_arg0, f165_arg1, f165_arg2, f165_arg3, f165_arg4)
 	if not f165_arg0 or not f165_arg0:getMenu() then
 		return false
-	elseif CoD.isPC and f165_arg4 == Enum[@"lobbyjoinable"][@"lobby_joinable_no_party_privacy_invite_only"] and not Engine[@"hash_D3DDFE2224597C2"](f165_arg1, f165_arg3) then
+	elseif CoD.isPC and f165_arg4 == Enum.LobbyJoinable[@"lobby_joinable_no_party_privacy_invite_only"] and not Engine[@"hash_D3DDFE2224597C2"](f165_arg1, f165_arg3) then
 		return false
-	elseif f165_arg4 ~= Enum[@"lobbyjoinable"][@"lobby_joinable_yes"] and f165_arg4 ~= Enum[@"lobbyjoinable"][@"lobby_joinable_yes_friends_only"] and f165_arg4 ~= Enum[@"lobbyjoinable"][@"lobby_joinable_no_party_privacy_invite_only"] then
+	elseif f165_arg4 ~= Enum.LobbyJoinable[@"lobby_joinable_yes"] and f165_arg4 ~= Enum.LobbyJoinable[@"lobby_joinable_yes_friends_only"] and f165_arg4 ~= Enum.LobbyJoinable[@"lobby_joinable_no_party_privacy_invite_only"] then
 		return false
 	elseif InFrontend() then
 		local f165_local0 = f165_arg0:getMenu()
@@ -1260,8 +1260,8 @@ function LobbyQuickJoinFinal(f165_arg0, f165_arg1, f165_arg2, f165_arg3, f165_ar
 		joinType = f165_arg2,
 		platform = false,
 	}
-	if Engine[@"isingame"]() then
-		if not Engine[@"hash_686E64DD1C270046"](Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_game"], f165_arg3) then
+	if Engine.IsInGame() then
+		if not Engine[@"hash_686E64DD1C270046"](Enum.LobbyModule[@"lobby_module_client"], Enum.LobbyType[@"lobby_type_game"], f165_arg3) then
 			f165_local0.migrating = not CoDShared.QuitGame(f165_arg1)
 			Engine[@"lobbyevent"]("OnInGameJoin", f165_local0)
 		end
@@ -1276,8 +1276,8 @@ function LobbyInviteFriend(f166_arg0, f166_arg1, f166_arg2, f166_arg3)
 		f166_local0 = f166_arg3.xuid
 		f166_local1 = f166_arg3.gamertag
 	else
-		f166_local0 = Engine[@"getmodelvalue"](f166_arg1:getModel(f166_arg2, "xuid"))
-		f166_local1 = Engine[@"getmodelvalue"](f166_arg1:getModel(f166_arg2, "gamertag"))
+		f166_local0 = Engine.GetModelValue(f166_arg1:getModel(f166_arg2, "xuid"))
+		f166_local1 = Engine.GetModelValue(f166_arg1:getModel(f166_arg2, "gamertag"))
 	end
 	if f166_local0 ~= nil then
 		if CoD.isPC then
@@ -1296,26 +1296,26 @@ end
 function LobbyInviteFriendByXuid(f168_arg0, f168_arg1, f168_arg2)
 	if CoD.isPC then
 		LobbyInviteFriend(f168_arg0, f168_arg1, f168_arg2, {
-			xuid = Engine[@"getmodelvalue"](f168_arg1:getModel(f168_arg2, "xuid")),
+			xuid = Engine.GetModelValue(f168_arg1:getModel(f168_arg2, "xuid")),
 		})
 	end
 end
 function CancelPartyInvite(f169_arg0, f169_arg1, f169_arg2)
-	Engine[@"hash_2406FC054276FCE6"](f169_arg2, Engine[@"getmodelvalue"](f169_arg1:getModel(f169_arg2, "xuid")))
+	Engine[@"hash_2406FC054276FCE6"](f169_arg2, Engine.GetModelValue(f169_arg1:getModel(f169_arg2, "xuid")))
 end
 function LobbyRemoveLocalClientFromLobby(f170_arg0, f170_arg1)
-	if not Engine[@"iscontrollerbeingused"](f170_arg1) or f170_arg1 == Engine[@"getprimarycontroller"]() then
+	if not Engine.IsControllerBeingUsed(f170_arg1) or f170_arg1 == Engine.GetPrimaryController() then
 		return
 	else
 		CoD.LobbyUtility.RemoveLocalPlayerFromTheLobby(f170_arg0, f170_arg1)
-		CoD.perController[Engine[@"getprimarycontroller"]()].localClientChanged = true
+		CoD.perController[Engine.GetPrimaryController()].localClientChanged = true
 		ForceLobbyButtonUpdate(f170_arg1)
 	end
 end
 function CheckModeAvailableAndBackOut_ZM(f171_arg0, f171_arg1, f171_arg2)
 	local f171_local0 = f171_arg0
 	local f171_local1 = f171_arg0.subscribeToModel
-	local f171_local2 = Engine[@"getglobalmodel"]()
+	local f171_local2 = Engine.GetGlobalModel()
 	f171_local1(f171_local0, f171_local2["lobbyRoot.lobbyNav"], function(f172_arg0)
 		if IsZombies() and (CoD.PCKoreaUtility.ShowKorea15Plus() or Engine[@"hash_45405A6484A88367"]() or Engine[@"hash_5CB675CA7856DA25"]()) then
 			GoBackAndLeaveParty(f171_arg1, f171_arg2, LuaEnum.LEAVE_WITH_PARTY.WITHOUT)
@@ -1331,7 +1331,7 @@ function GoBackAndLeaveParty(f173_arg0, f173_arg1, f173_arg2)
 			controller = f173_arg1,
 		})
 	end
-	local f173_local1 = Engine[@"getglobalmodel"]()
+	local f173_local1 = Engine.GetGlobalModel()
 	f173_local1 = f173_local1.lobbyRoot.lobbyNav:get()
 	if f173_local1 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE) then
 		CoD.LobbyUtility.DisbandParty(f173_arg0, f173_arg1, f173_local1)
@@ -1369,12 +1369,12 @@ function SetStateByElementModel(f179_arg0, f179_arg1, f179_arg2, f179_arg3)
 end
 function LockInput(f180_arg0, f180_arg1, f180_arg2)
 	if f180_arg2 ~= nil then
-		Engine[@"lockinput"](f180_arg1, f180_arg2)
+		Engine.LockInput(f180_arg1, f180_arg2)
 	end
 end
 function LockInputHUD(f181_arg0, f181_arg1, f181_arg2)
 	if f181_arg2 ~= nil then
-		Engine[@"lockinput"](f181_arg1, f181_arg2, Enum[@"hash_39061B48916076D5"][@"hash_59FF6C7FED5C383"])
+		Engine.LockInput(f181_arg1, f181_arg2, Enum[@"hash_39061B48916076D5"][@"hash_59FF6C7FED5C383"])
 	end
 end
 function EnableMouseLockInputBinding(f182_arg0, f182_arg1, f182_arg2, f182_arg3)
@@ -1387,7 +1387,7 @@ function EnableMouseLockInputBinding(f182_arg0, f182_arg1, f182_arg2, f182_arg3)
 			if not f182_arg0._mouseLockInputInputChangeSubscription then
 				local f182_local0 = f182_arg0
 				local f182_local1 = f182_arg0.subscribeToModel
-				local f182_local2 = Engine[@"getmodelforcontroller"](f182_arg1)
+				local f182_local2 = Engine.GetModelForController(f182_arg1)
 				f182_arg0._mouseLockInputInputChangeSubscription = f182_local1(f182_local0, f182_local2.LastInput, function()
 					if IsGamepad(f182_arg1) then
 						EnableMouseLockInputBinding(f182_arg0, f182_arg1, false, f182_arg3)
@@ -1406,10 +1406,10 @@ function EnableMouseLockInputBinding(f182_arg0, f182_arg1, f182_arg2, f182_arg3)
 	end
 end
 function EnableMouseLockInputForMap(f184_arg0, f184_arg1, f184_arg2)
-	EnableMouseLockInputBinding(f184_arg0, f184_arg1, f184_arg2, Engine[@"profileint"](f184_arg1, @"cursor_immediate_lock_map") == 1)
+	EnableMouseLockInputBinding(f184_arg0, f184_arg1, f184_arg2, Engine.ProfileInt(f184_arg1, "cursor_immediate_lock_map") == 1)
 end
 function EnableMouseLockInputForInventory(f185_arg0, f185_arg1, f185_arg2)
-	EnableMouseLockInputBinding(f185_arg0, f185_arg1, f185_arg2, Engine[@"profileint"](f185_arg1, @"cursor_immediate_lock_inventory") == 1)
+	EnableMouseLockInputBinding(f185_arg0, f185_arg1, f185_arg2, Engine.ProfileInt(f185_arg1, "cursor_immediate_lock_inventory") == 1)
 end
 function ScaleWidgetToLabelCentered(f186_arg0, f186_arg1, f186_arg2)
 	if f186_arg1 == nil then
@@ -1671,7 +1671,7 @@ function ScaleWidthToWidestChildElement(f209_arg0)
 	end
 end
 function TrimLabelIfLanguageReversed(f210_arg0, f210_arg1)
-	if Engine[@"iscurrentlanguagereversed"]() then
+	if Engine.IsCurrentLanguageReversed() then
 		if f210_arg1 == nil then
 			return
 		else
@@ -1756,9 +1756,9 @@ function LobbyGoBack(f217_arg0, f217_arg1)
 	if not f217_arg0:getParent() then
 		return
 	end
-	local f217_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.lobbyNav")
-	local f217_local1 = Engine[@"getmodelvalue"](f217_local0)
-	local f217_local2 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.showSelect")
+	local f217_local0 = Engine.CreateModel(Engine.GetGlobalModel(), "lobbyRoot.lobbyNav")
+	local f217_local1 = Engine.GetModelValue(f217_local0)
+	local f217_local2 = Engine.CreateModel(Engine.GetGlobalModel(), "lobbyRoot.showSelect")
 	if f217_local0 and (f217_local1 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_LAN) or f217_local1 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE) and f217_local2:get()) then
 		DisableAllMenuInput(f217_arg0, true)
 	end
@@ -1932,34 +1932,34 @@ function Close(f236_arg0, f236_arg1)
 end
 function NavigateToLobby_SelectionList(f237_arg0, f237_arg1, f237_arg2, f237_arg3, f237_arg4)
 	if f237_arg3 == LuaEnum.UI.DIRECTOR_ONLINE_ZM_CUSTOM then
-		Dvar[@"zm_private_rankedmatch"]:set(Engine[@"getprofilevarint"](f237_arg2, "com_privategame_ranked_zm") ~= 0)
+		Dvar.zm_private_rankedmatch:set(Engine.GetProfileVarInt(f237_arg2, "com_privategame_ranked_zm") ~= 0)
 		Engine[@"runplaylistrules"](f237_arg2)
 	end
 	local f237_local0 = LobbyData.GetLobbyMenuByName(f237_arg3)
-	if f237_local0[@"egamemodes"] == Enum[@"egamemodes"][@"mode_game_league"] and Engine[@"getdvarbool"]("arena_maintenance") == true then
-		LuaUtils.UI_ShowErrorMessageDialog(f237_arg2, @"hash_2DD0FACA77FB825A", @"hash_12DF6ED539CA406A")
+	if f237_local0.eGameModes == Enum.eGameModes[@"mode_game_league"] and Engine[@"getdvarbool"]("arena_maintenance") == true then
+		LuaUtils.UI_ShowErrorMessageDialog(f237_arg2, "menu/arena_maintenance_desc", "menu/arena_maintenance_caps")
 		return
 	end
 	local f237_local1 = Engine[@"getdvarbool"]("probation_public_enabled")
 	local f237_local2 = Engine[@"getdvarbool"]("probation_league_enabled")
-	if f237_local0[@"isgame"] and (f237_local0[@"egamemodes"] == Enum[@"egamemodes"][@"mode_game_matchmaking_playlist"] or f237_local0[@"egamemodes"] == Enum[@"egamemodes"][@"mode_game_league"]) then
-		Engine[@"probationcheckforprobation"](f237_arg2, f237_local0[@"egamemodes"])
-		local f237_local3 = Engine[@"lobbyclient_getprobationtime"](f237_arg2, f237_local0[@"egamemodes"])
+	if f237_local0[@"isgame"] and (f237_local0.eGameModes == Enum.eGameModes[@"mode_game_matchmaking_playlist"] or f237_local0.eGameModes == Enum.eGameModes[@"mode_game_league"]) then
+		Engine.ProbationCheckForProbation(f237_arg2, f237_local0.eGameModes)
+		local f237_local3 = Engine.LobbyClient_GetProbationTime(f237_arg2, f237_local0.eGameModes)
 		if f237_local3 > 0 then
-			local f237_local4 = Engine[@"secondsastime"](f237_local3)
-			if f237_local1 and f237_local0[@"egamemodes"] == Enum[@"egamemodes"][@"mode_game_matchmaking_playlist"] then
-				LuaUtils.UI_ShowErrorMessageDialog(f237_arg2, Engine[@"hash_4F9F1239CFD921FE"](@"hash_A5BCA09BFBE90BB", f237_local4), 0x9AEEA73CA9BBA3)
+			local f237_local4 = Engine.SecondsAsTime(f237_local3)
+			if f237_local1 and f237_local0.eGameModes == Enum.eGameModes[@"mode_game_matchmaking_playlist"] then
+				LuaUtils.UI_ShowErrorMessageDialog(f237_arg2, Engine[@"hash_4F9F1239CFD921FE"]("menu/probation_given_public_match", f237_local4), "menu/probation_caps")
 				return
-			elseif f237_local2 and f237_local0[@"egamemodes"] == Enum[@"egamemodes"][@"mode_game_league"] then
-				LuaUtils.UI_ShowErrorMessageDialog(f237_arg2, Engine[@"hash_4F9F1239CFD921FE"](@"hash_31E60B8AE3979C41", f237_local4), 0x9AEEA73CA9BBA3)
+			elseif f237_local2 and f237_local0.eGameModes == Enum.eGameModes[@"mode_game_league"] then
+				LuaUtils.UI_ShowErrorMessageDialog(f237_arg2, Engine[@"hash_4F9F1239CFD921FE"]("menu/probation_given_arena_match", f237_local4), "menu/probation_caps")
 				return
 			end
-		elseif Engine[@"lobbyhost_anyclientinprobationforgamemode"](f237_local0[@"egamemodes"]) then
-			if f237_local1 and f237_local0[@"egamemodes"] == Enum[@"egamemodes"][@"mode_game_matchmaking_playlist"] then
-				LuaUtils.UI_ShowErrorMessageDialog(f237_arg2, @"hash_68F60BFC521CBE84")
+		elseif Engine.LobbyHost_AnyClientInProbationForGameMode(f237_local0.eGameModes) then
+			if f237_local1 and f237_local0.eGameModes == Enum.eGameModes[@"mode_game_matchmaking_playlist"] then
+				LuaUtils.UI_ShowErrorMessageDialog(f237_arg2, "menu/probation_party_public_match")
 				return
-			elseif f237_local2 and f237_local0[@"egamemodes"] == Enum[@"egamemodes"][@"mode_game_league"] then
-				LuaUtils.UI_ShowErrorMessageDialog(f237_arg2, @"hash_22B597460DFBDD08")
+			elseif f237_local2 and f237_local0.eGameModes == Enum.eGameModes[@"mode_game_league"] then
+				LuaUtils.UI_ShowErrorMessageDialog(f237_arg2, "menu/probation_party_arena_match")
 				return
 			end
 		end
@@ -2086,10 +2086,10 @@ function OpenGenericSmallPopup(f251_arg0, f251_arg1, f251_arg2, f251_arg3, f251_
 	return CoD.OverlayUtility.CreateOverlay(f251_arg1, f251_arg0, "GenericPopup", CoD.OverlayUtility.GenericPopupSizes.Small, f251_arg2, f251_arg3, f251_arg4, f251_arg5, f251_arg6, f251_arg7)
 end
 function SendMenuResponse(f252_arg0, f252_arg1, f252_arg2, f252_arg3)
-	Engine[@"sendmenuresponse"](f252_arg3, f252_arg1, f252_arg2, 0)
+	Engine.SendMenuResponse(f252_arg3, f252_arg1, f252_arg2, 0)
 end
 function SendOwnMenuResponse(f253_arg0, f253_arg1, f253_arg2)
-	Engine[@"sendmenuresponse"](f253_arg1, f253_arg0.menuName, f253_arg2, 0)
+	Engine.SendMenuResponse(f253_arg1, f253_arg0.menuName, f253_arg2, 0)
 end
 function ClearMenuSavedState(f254_arg0)
 	f254_arg0:clearSavedState()
@@ -2258,7 +2258,7 @@ function RestartMission(f286_arg0, f286_arg1, f286_arg2)
 	CoD.OverlayUtility.CreateOverlay(f286_arg2, f286_local0, "RestartMissionPopup")
 end
 function EndTrainingSim(f287_arg0, f287_arg1, f287_arg2)
-	Engine[@"sendmenuresponse"](f287_arg2, "StartMenu", "EndTrainingSim", 0)
+	Engine.SendMenuResponse(f287_arg2, "StartMenu", "EndTrainingSim", 0)
 	StartMenuResumeGame(f287_arg0, f287_arg2)
 	GoBack(f287_arg0, f287_arg2)
 end
@@ -2284,14 +2284,14 @@ function RestartGame(f290_arg0, f290_arg1, f290_arg2)
 	CoD.OverlayUtility.CreateOverlay(f290_arg2, f290_local0, "RestartGamePopup")
 end
 function RestartGameImmediate(f291_arg0, f291_arg1)
-	Engine[@"setdvar"]("cl_paused", 0)
-	Dvar[@"ui_busyblockingamemenu"]:set(1)
-	Engine[@"exec"](f291_arg1, "stopControllerRumble")
-	Engine[@"exec"](f291_arg1, "fade 0 0 0 255 0 0 1")
-	Engine[@"exec"](f291_arg1, "silence")
+	Engine.SetDvar("cl_paused", 0)
+	Dvar.ui_busyblockingamemenu:set(1)
+	Engine.exec(f291_arg1, "stopControllerRumble")
+	Engine.exec(f291_arg1, "fade 0 0 0 255 0 0 1")
+	Engine.exec(f291_arg1, "silence")
 	local f291_local0 = LobbyData.GetCurrentMenuTarget()
-	if (Engine[@"sessionmodeismode"](Enum[@"enetworkmodes"][@"mode_network_systemlink"]) == true) or (Engine[@"sessionmodeismode"](Enum[@"enetworkmodes"][@"mode_network_offline"]) == true) or f291_local0[@"id"] == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_ZM_CUSTOM) then
-		Engine[@"exec"](f291_arg1, "fast_restart")
+	if (Engine.SessionModeIsMode(Enum[@"enetworkmodes"][@"mode_network_systemlink"]) == true) or (Engine.SessionModeIsMode(Enum[@"enetworkmodes"][@"mode_network_offline"]) == true) or f291_local0.id == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_ZM_CUSTOM) then
+		Engine.exec(f291_arg1, "fast_restart")
 	else
 		SendOwnMenuResponse(f291_arg0, f291_arg1, "restart_level_zm")
 	end
@@ -2302,7 +2302,7 @@ end
 function ChooseClass(f293_arg0, f293_arg1, f293_arg2, f293_arg3, f293_arg4)
 	f293_arg4:saveState(f293_arg2)
 	if IsMultiplayer() then
-		Engine[@"sendmenuresponse"](f293_arg2, "PositionDraft", "opendraft", 0)
+		Engine.SendMenuResponse(f293_arg2, "PositionDraft", "opendraft", 0)
 		f293_arg4:openMenu(CoD.CACUtility.PositionDraftMenuName, f293_arg2)
 	else
 		f293_arg4:openMenu(CoD.CACUtility.ChangeClassMenuName, f293_arg2)
@@ -2310,76 +2310,76 @@ function ChooseClass(f293_arg0, f293_arg1, f293_arg2, f293_arg3, f293_arg4)
 	f293_arg4:close()
 end
 function QuitGame_MP(f294_arg0, f294_arg1, f294_arg2, f294_arg3, f294_arg4)
-	if Engine[@"canpausegame"]() then
-		Engine[@"setdvar"]("cl_paused", 0)
+	if Engine.CanPauseGame() then
+		Engine.SetDvar("cl_paused", 0)
 	end
 	StartMenuGoBack(f294_arg4, f294_arg2)
 	CoDShared.QuitGame(f294_arg2, not CoD.StartMenuUtility.GetArenaQuitDeservesExtraPenalty(f294_arg2))
 end
 function QuitGame_Raw(f295_arg0, f295_arg1, f295_arg2, f295_arg3, f295_arg4)
-	if Engine[@"canpausegame"]() then
-		Engine[@"setdvar"]("cl_paused", 0)
+	if Engine.CanPauseGame() then
+		Engine.SetDvar("cl_paused", 0)
 	end
 	CoDShared.QuitGame(f295_arg2)
 end
 function SendClientScriptDebugMenuNotify(f296_arg0, f296_arg1, f296_arg2)
 	local f296_local0 = f296_arg0.cscDebugMenuList
-	Engine[@"sendclientscriptnotify"](f296_arg2, "script_debug_menu", {
-		param1 = Engine[@"getmodelvalue"](f296_arg1:getModel(f296_arg2, "name")),
+	Engine.SendClientScriptNotify(f296_arg2, "script_debug_menu", {
+		param1 = Engine.GetModelValue(f296_arg1:getModel(f296_arg2, "name")),
 		param2 = f296_arg1.gridInfoTable.zeroBasedIndex + 1,
 	})
 end
 function SendClientScriptDebugMenuCloseMenuNotify(f297_arg0, f297_arg1, f297_arg2)
-	Engine[@"sendclientscriptnotify"](f297_arg2, "script_debug_menu", {
+	Engine.SendClientScriptNotify(f297_arg2, "script_debug_menu", {
 		param1 = "close",
 	})
 end
 function GetPlayerCalloutNameColor(f298_arg0, f298_arg1)
 	local f298_local0 = Enum[@"cacheduicolors"][@"cached_ui_color_enemy"]
 	if CoD.IsShoutcaster(f298_arg0) then
-		local f298_local1 = Engine[@"getteamid"](f298_arg0, f298_arg1)
+		local f298_local1 = Engine.GetTeamID(f298_arg0, f298_arg1)
 		local f298_local2 = LuaDefine.INVALID_CLIENT_INDEX
-		local f298_local3 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f298_arg0), "deadSpectator.playerIndex")
+		local f298_local3 = Engine.GetModel(Engine.GetModelForController(f298_arg0), "deadSpectator.playerIndex")
 		if f298_local3 then
-			f298_local2 = Engine[@"getmodelvalue"](f298_local3)
+			f298_local2 = Engine.GetModelValue(f298_local3)
 		end
 		if f298_local2 == f298_arg1 then
 			f298_local0 = Enum[@"cacheduicolors"][@"cached_ui_color_self"]
-		elseif f298_local1 == Enum[@"team_t"][@"team_allies"] then
+		elseif f298_local1 == Enum.team_t[@"team_allies"] then
 			f298_local0 = Enum[@"cacheduicolors"][@"cached_ui_color_allies"]
 		else
 			f298_local0 = Enum[@"cacheduicolors"][@"cached_ui_color_axis"]
 		end
 		return f298_local0
-	elseif Engine[@"getclientnum"](f298_arg0) == f298_arg1 then
+	elseif Engine.GetClientNum(f298_arg0) == f298_arg1 then
 		f298_local0 = Enum[@"cacheduicolors"][@"cached_ui_color_self"]
-	elseif Engine[@"getteamid"](f298_arg0, f298_arg1) == CoD.TeamUtility.GetTeamID(f298_arg0) then
+	elseif Engine.GetTeamID(f298_arg0, f298_arg1) == CoD.TeamUtility.GetTeamID(f298_arg0) then
 		f298_local0 = Enum[@"cacheduicolors"][@"cached_ui_color_friendly"]
 	end
 	return f298_local0
 end
 function SetMPScoreText(f299_arg0, f299_arg1, f299_arg2, f299_arg3)
 	local f299_local0 = CoD.GetScriptNotifyData(f299_arg3)
-	local f299_local1 = Engine[@"getistring"](f299_local0[1], "CS_LOCALIZED_STRINGS")
+	local f299_local1 = Engine.GetIString(f299_local0[1], "CS_LOCALIZED_STRINGS")
 	local f299_local2 = f299_local0[2]
 	if Engine[@"isdemoplaying"]() == false or CoD.isZombie == false then
 		f299_arg1:AddCenterScore(f299_local1, f299_local2, f299_local0[4])
 	end
 end
 function SetupStageResultsWidget(f300_arg0, f300_arg1)
-	local f300_local0 = Engine[@"getglobalmodel"]()
+	local f300_local0 = Engine.GetGlobalModel()
 	f300_local0:create("StageResults")
 	local f300_local1 = f300_local0.StageResults:create("winningTeam")
-	f300_local1:set(Enum[@"team_t"][@"team_free"])
+	f300_local1:set(Enum.team_t[@"team_free"])
 	f300_local1 = f300_local0.StageResults:create("outcomeText")
 	f300_local1:set(0x0)
 	f300_arg0:subscribeToGlobalModel(f300_arg1, "PerController", "scriptNotify", function(model)
-		if Engine[@"getmodelvalue"](model) == @"hash_321BD3EC422E5463" then
+		if Engine.GetModelValue(model) == @"hash_321BD3EC422E5463" then
 			local f301_local0 = CoD.GetScriptNotifyData(model)
 			local f301_local1 = f301_local0[1]
 			f300_local0.StageResults.winningTeam:set(f301_local1)
-			local f301_local2 = Engine[@"getistring"](f301_local0[2], "CS_LOCALIZED_STRINGS")
-			local f301_local3 = Engine[@"getistring"](f301_local0[3], "CS_LOCALIZED_STRINGS")
+			local f301_local2 = Engine.GetIString(f301_local0[2], "CS_LOCALIZED_STRINGS")
+			local f301_local3 = Engine.GetIString(f301_local0[3], "CS_LOCALIZED_STRINGS")
 			if CoD.TeamUtility.GetTeamID(f300_arg1) == f301_local1 then
 				f301_local3 = f301_local2
 			end
@@ -2409,7 +2409,7 @@ function PopulateCompletionTimeField(f302_arg0, f302_arg1)
 end
 function SetupObjectiveNotificationWidget(f303_arg0, f303_arg1)
 	f303_arg0.ignoreCurrentStateCheck = true
-	local f303_local0 = Engine[@"getmodelforcontroller"](f303_arg1)
+	local f303_local0 = Engine.GetModelForController(f303_arg1)
 	local f303_local1 = f303_local0:create("showGametypeObjectiveHint")
 	f303_local1:set(false)
 	f303_local1 = f303_local0:create("gametypeObjectiveHint")
@@ -2421,17 +2421,17 @@ function SetupObjectiveNotificationWidget(f303_arg0, f303_arg1)
 	f303_local1 = f303_local0:create("gameTypeObjectiveIcon")
 	f303_local1:set("")
 	f303_arg0:subscribeToGlobalModel(f303_arg1, "PerController", "scriptNotify", function(model)
-		local f304_local0 = Engine[@"getmodelvalue"](model)
-		if f304_local0 == @"show_gametype_objective_hint" then
+		local modelValue = Engine.GetModelValue(model)
+		if modelValue == "show_gametype_objective_hint" then
 			local f304_local1 = {
 				controller = f303_arg1,
-				name = f304_local0,
+				name = modelValue,
 				data = CoD.GetScriptNotifyData(model),
 			}
-			f303_local0.gametypeObjectiveHint:set(Engine[@"getistring"](f304_local1.data[1], "CS_LOCALIZED_STRINGS"))
+			f303_local0.gametypeObjectiveHint:set(Engine.GetIString(f304_local1.data[1], "CS_LOCALIZED_STRINGS"))
 			local f304_local2 = f304_local1.data[2]
 			if f304_local2 then
-				f304_local2 = Engine[@"getistring"](f304_local1.data[2], "CS_LOCALIZED_STRINGS")
+				f304_local2 = Engine.GetIString(f304_local1.data[2], "CS_LOCALIZED_STRINGS")
 			end
 			f303_local0.gametypeAttackers:set(f304_local1.data[3] == 1)
 			local f304_local3 = f304_local2 and CoD.WarUtility.MissionInfo[f304_local2]
@@ -2454,7 +2454,7 @@ function AddKillstreakReceivedNotification(f306_arg0, f306_arg1, f306_arg2, f306
 	if IsCodCaster(f306_arg2) then
 		if not IsCodCasterProfileValueEqualTo(f306_arg2, "shoutcaster_ds_scorestreaks_notification", 1) then
 			return
-		elseif CoD.SafeGetModelValue(Engine[@"getmodelforcontroller"](f306_arg2), "CodCaster.showLoadout") then
+		elseif CoD.SafeGetModelValue(Engine.GetModelForController(f306_arg2), "CodCaster.showLoadout") then
 			return
 		end
 	end
@@ -2464,8 +2464,8 @@ function AddKillstreakReceivedNotification(f306_arg0, f306_arg1, f306_arg2, f306
 		local f306_local2 = f306_local0[3]
 		local f306_local3 = nil
 		for f306_local7, f306_local8 in ipairs(CoD.CACUtility.KillstreakNameList) do
-			local f306_local9 = CoD.ScorestreakSelectUtility.GetEquippedItemIndexForScorestreakSlot(f306_arg2, f306_local8, Engine[@"currentsessionmode"]())
-			local f306_local10 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f306_arg2), "killstreaks.killstreak" .. f306_local7 - 1 .. ".bindingKBM")
+			local f306_local9 = CoD.ScorestreakSelectUtility.GetEquippedItemIndexForScorestreakSlot(f306_arg2, f306_local8, Engine.CurrentSessionMode())
+			local f306_local10 = Engine.GetModel(Engine.GetModelForController(f306_arg2), "killstreaks.killstreak" .. f306_local7 - 1 .. ".bindingKBM")
 			if f306_local10 ~= nil then
 				f306_local3 = f306_local10:get()
 			else
@@ -2476,7 +2476,7 @@ function AddKillstreakReceivedNotification(f306_arg0, f306_arg1, f306_arg2, f306
 			end
 		end
 		if f306_local2 == 1 then
-			f306_local4 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f306_arg2), "killstreaks.killstreak" .. #CoD.CACUtility.KillstreakNameList - 1 .. ".bindingKBM")
+			f306_local4 = Engine.GetModel(Engine.GetModelForController(f306_arg2), "killstreaks.killstreak" .. #CoD.CACUtility.KillstreakNameList - 1 .. ".bindingKBM")
 			if f306_local4 ~= nil then
 				f306_local3 = f306_local4:get()
 			else
@@ -2484,12 +2484,12 @@ function AddKillstreakReceivedNotification(f306_arg0, f306_arg1, f306_arg2, f306
 			end
 		end
 		if IsGameTypeCombatTraining() then
-			f306_local4 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f306_arg2), "killstreaks.killstreak0.bindingKBM")
+			f306_local4 = Engine.GetModel(Engine.GetModelForController(f306_arg2), "killstreaks.killstreak0.bindingKBM")
 			f306_local3 = f306_local4:get()
 		end
 		f306_arg1:appendNotification({
-			title = Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"menu/killstreak_ready", Engine[@"hash_4F9F1239CFD921FE"](Engine[@"getitemname"](f306_local1)))),
-			image = RegisterImage(Engine[@"getitemimage"](f306_local1)),
+			title = Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"](@"menu/killstreak_ready", Engine[@"hash_4F9F1239CFD921FE"](Engine.GetItemName(f306_local1)))),
+			image = RegisterImage(Engine.GetItemImage(f306_local1)),
 			type = "Killstreak",
 			bindingKBM = f306_local3,
 			priority = 0,
@@ -2500,21 +2500,21 @@ function AddHeroAbilityReceivedNotification(f307_arg0, f307_arg1, f307_arg2, f30
 	if IsCodCaster(f307_arg2) then
 		if not IsCodCasterProfileValueEqualTo(f307_arg2, "shoutcaster_ds_specialist_notification", 1) then
 			return
-		elseif CoD.SafeGetModelValue(Engine[@"getmodelforcontroller"](f307_arg2), "CodCaster.showLoadout") then
+		elseif CoD.SafeGetModelValue(Engine.GetModelForController(f307_arg2), "CodCaster.showLoadout") then
 			return
 		end
 	end
 	if f307_arg1.appendNotification ~= nil then
 		local f307_local0 = CoD.GetScriptNotifyData(f307_arg3)
 		local f307_local1 = f307_local0[1]
-		local f307_local2 = Engine[@"getitemname"](f307_local1)
-		local f307_local3 = Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"hash_6EE9796129C8602E", Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](f307_local2))))
-		local f307_local4 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_7C0031E0C32601B3")
+		local f307_local2 = Engine.GetItemName(f307_local1)
+		local f307_local3 = Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"]("menu/hero_ability_ready", Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"](f307_local2))))
+		local f307_local4 = Engine[@"hash_4F9F1239CFD921FE"]("menu/activate_hero_ability_instr")
 		if f307_local2 == @"weapon/gadget_resurrect" then
-			f307_local4 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_286F1315B244AA64")
+			f307_local4 = Engine[@"hash_4F9F1239CFD921FE"]("menu/activate_rejack_instr")
 		end
 		if Engine[@"holdtriangleforweapon"](Engine[@"hash_7B98952F69D937F9"](f307_local1)) then
-			f307_local4 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_41F4597DF81CF039")
+			f307_local4 = Engine[@"hash_4F9F1239CFD921FE"]("menu/activate_hero_weapon_instr")
 		end
 		f307_arg1:appendNotification({
 			title = f307_local3,
@@ -2530,21 +2530,21 @@ function AddSlotUnlockedNotification(f308_arg0, f308_arg1, f308_arg2, f308_arg3)
 	elseif IsCodCaster(f308_arg2) then
 		if not IsCodCasterProfileValueEqualTo(f308_arg2, "shoutcaster_ds_scorestreaks_notification", 1) then
 			return
-		elseif CoD.SafeGetModelValue(Engine[@"getmodelforcontroller"](f308_arg2), "CodCaster.showLoadout") then
+		elseif CoD.SafeGetModelValue(Engine.GetModelForController(f308_arg2), "CodCaster.showLoadout") then
 			return
 		end
 	end
 	if f308_arg1.appendNotification ~= nil then
 		local f308_local0 = CoD.GetScriptNotifyData(f308_arg3)
-		local f308_local1 = Engine[@"getunlockableinfobyindex"](f308_local0[1])
+		local f308_local1 = Engine.GetUnlockableInfoByIndex(f308_local0[1])
 		local f308_local2
 		if f308_local1 then
 			f308_local2 = f308_local1.name
 			if not f308_local2 then
 			else
 				f308_arg1:appendNotification({
-					title = Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"hash_B966AF8CFF52CEE", f308_local2)),
-					description = @"hash_0",
+					title = Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"](@"hash_B966AF8CFF52CEE", f308_local2)),
+					description = 0x0,
 					type = "Slot",
 					priority = 0,
 				})
@@ -2554,14 +2554,14 @@ function AddSlotUnlockedNotification(f308_arg0, f308_arg1, f308_arg2, f308_arg3)
 	end
 end
 function AddZombieNotification(f309_arg0, f309_arg1, f309_arg2, f309_arg3)
-	if not Engine[@"isvisibilitybitset"](f309_arg2, Enum[@"uivisibilitybit"][@"bit_hud_visible"]) then
+	if not Engine.IsVisibilityBitSet(f309_arg2, Enum.UIVisibilityBit[@"bit_hud_visible"]) then
 		return
 	else
 		local f309_local0 = CoD.GetScriptNotifyData(f309_arg3)
 		f309_arg1:appendNotification({
 			clip = "TextandImageBasic_Story" .. Engine[@"hash_6BBE3328FE08B8C7"]() or 0 + 1,
-			title = Engine[@"localize"](Engine[@"getistring"](f309_local0[1], "CS_LOCALIZED_STRINGS")),
-			description = @"hash_0",
+			title = Engine.Localize(Engine.GetIString(f309_local0[1], "CS_LOCALIZED_STRINGS")),
+			description = 0x0,
 		})
 	end
 end
@@ -2569,40 +2569,40 @@ function AddZombieRushNotification(f310_arg0, f310_arg1, f310_arg2, f310_arg3)
 	local f310_local0 = CoD.GetScriptNotifyData(f310_arg2)
 	f310_arg1:appendNotification({
 		clip = "TextandImage" .. f310_arg3,
-		title = Engine[@"localize"](Engine[@"getistring"](f310_local0[1], "CS_LOCALIZED_STRINGS")),
-		description = @"hash_0",
+		title = Engine.Localize(Engine.GetIString(f310_local0[1], "CS_LOCALIZED_STRINGS")),
+		description = 0x0,
 	})
 end
 function AddZombieBGBNotification(f311_arg0, f311_arg1, f311_arg2, f311_arg3)
-	if not Engine[@"isvisibilitybitset"](f311_arg2, Enum[@"uivisibilitybit"][@"bit_hud_visible"]) then
+	if not Engine.IsVisibilityBitSet(f311_arg2, Enum.UIVisibilityBit[@"bit_hud_visible"]) then
 		return
 	else
 		local f311_local0 = CoD.GetScriptNotifyData(f311_arg3)
 		local f311_local1 = f311_local0[1]
 		f311_arg1:appendNotification({
 			clip = "TextandImageBGB",
-			title = Engine[@"hash_4F9F1239CFD921FE"](Engine[@"getitemname"](f311_local1, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], Enum[@"emodes"][@"mode_zombies"])),
-			description = Engine[@"hash_4F9F1239CFD921FE"](Engine[@"getitemdesc"](f311_local1, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], Enum[@"emodes"][@"mode_zombies"])),
-			bgbImage = RegisterImage(GetItemImageForIndex(f311_local1, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], Enum[@"emodes"][@"mode_zombies"])),
+			title = Engine[@"hash_4F9F1239CFD921FE"](Engine.GetItemName(f311_local1, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], Enum.eModes.mode_zombies)),
+			description = Engine[@"hash_4F9F1239CFD921FE"](Engine.GetItemDesc(f311_local1, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], Enum.eModes.mode_zombies)),
+			bgbImage = RegisterImage(GetItemImageForIndex(f311_local1, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], Enum.eModes.mode_zombies)),
 		})
 	end
 end
 function AddZombieBGBTokenNotification(f312_arg0, f312_arg1, f312_arg2, f312_arg3)
-	if not Engine[@"isvisibilitybitset"](f312_arg2, Enum[@"uivisibilitybit"][@"bit_hud_visible"]) then
+	if not Engine.IsVisibilityBitSet(f312_arg2, Enum.UIVisibilityBit[@"bit_hud_visible"]) then
 		return
 	else
 		f312_arg0:playSound("zmb_bgb_token")
 		f312_arg1:appendNotification({
 			clip = "TextandImageBGBToken",
-			title = Engine[@"hash_4F9F1239CFD921FE"](@"hash_38BDEBA40AFA3B45"),
-			description = Engine[@"hash_4F9F1239CFD921FE"](@"hash_7B2B401DDF606C74"),
-			bgbImage = RegisterImage(@"t7_hud_zm_vial_256"),
+			title = Engine[@"hash_4F9F1239CFD921FE"]("zmui/bgb_token_award_notification_title"),
+			description = Engine[@"hash_4F9F1239CFD921FE"]("zmui/bgb_token_award_notification_desc"),
+			bgbImage = RegisterImage("t7_hud_zm_vial_256"),
 		})
 	end
 end
 function CreatePrematchDraft(f313_arg0, f313_arg1, f313_arg2)
 	if not f313_arg0.PositionDraft and not Engine[@"isdemoplaying"]() then
-		local f313_local0 = "PositionDraft_" .. string.upper(CoD.ModeToModeString(Engine[@"currentsessionmode"]()))
+		local f313_local0 = "PositionDraft_" .. string.upper(CoD.ModeToModeString(Engine.CurrentSessionMode()))
 		if not CoD.Menu.DoesMenuExist(f313_local0) then
 			f313_local0 = "PositionDraft"
 		end
@@ -2625,7 +2625,7 @@ function CreatePrematchDraft(f313_arg0, f313_arg1, f313_arg2)
 			f313_local1:setAlpha(1)
 		end))
 	end
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f313_arg1), "isInPrematchPeriod"), 1)
+	Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f313_arg1), "isInPrematchPeriod"), 1)
 end
 function CreatePrematchTimer(f317_arg0, f317_arg1, f317_arg2)
 	local f317_local0 = CoD.GetScriptNotifyData(f317_arg2)
@@ -2649,14 +2649,14 @@ function CreatePrematchTimer(f317_arg0, f317_arg1, f317_arg2)
 			end
 		end)
 	end
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f317_arg1), "isInPrematchPeriod"), 1)
+	Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f317_arg1), "isInPrematchPeriod"), 1)
 end
 function CreatePrematchTimer_Minimize(f319_arg0, f319_arg1, f319_arg2, f319_arg3, f319_arg4)
 	local f319_local0 = CoD.GetScriptNotifyData(f319_arg3)
 	local f319_local1 = f319_local0[1]
 	local f319_local2 = f319_local0[2] == 1
 	local f319_local3 = f319_local0[3]
-	local f319_local4 = Engine[@"getmodelforcontroller"](f319_arg2)
+	local f319_local4 = Engine.GetModelForController(f319_arg2)
 	f319_local4 = f319_local4.hudItems:create("prematchTimerUsePandemicLabel")
 	if f319_local3 then
 		f319_local4:set(true)
@@ -2677,7 +2677,7 @@ function CreatePrematchTimer_Minimize(f319_arg0, f319_arg1, f319_arg2, f319_arg3
 			end
 		end)
 	end
-	local f319_local5 = Engine[@"getmodelforcontroller"](f319_arg2)
+	local f319_local5 = Engine.GetModelForController(f319_arg2)
 	local f319_local6 = f319_local5:create("isInPrematchPeriod")
 	f319_local6:set(1)
 end
@@ -2724,9 +2724,9 @@ function ProcessListActionInternal(f325_arg0, f325_arg1, f325_arg2, f325_arg3, f
 	local f325_local1 = f325_arg1:getModel(f325_arg2, "param")
 	local f325_local2, f325_local3 = nil
 	if f325_local0 then
-		f325_local2 = Engine[@"getmodelvalue"](f325_local0)
+		f325_local2 = Engine.GetModelValue(f325_local0)
 		if f325_local1 then
-			f325_local3 = Engine[@"getmodelvalue"](f325_local1)
+			f325_local3 = Engine.GetModelValue(f325_local1)
 		end
 	else
 		f325_local2 = f325_arg5
@@ -2840,8 +2840,8 @@ function ChangeClass(f346_arg0, f346_arg1, f346_arg2, f346_arg3)
 		f346_arg0:saveState(f346_arg3)
 	end
 	f346_arg1.menuResponseSent = true
-	local f346_local0 = Engine[@"getmodelvalue"](f346_arg2:getModel(f346_arg3, "classNum"), nil)
-	local f346_local1 = Engine[@"getmodelvalue"](f346_arg2:getModel(f346_arg3, "defaultClassName"), nil)
+	local f346_local0 = Engine.GetModelValue(f346_arg2:getModel(f346_arg3, "classNum"), nil)
+	local f346_local1 = Engine.GetModelValue(f346_arg2:getModel(f346_arg3, "defaultClassName"), nil)
 	if f346_local0 == nil and IsIntDvarNonZero("mp_prototype") and IsMultiplayer() then
 		f346_local0 = f346_arg2.characterIndex
 	end
@@ -2909,7 +2909,7 @@ function RemoveOverflowItemFromClass(f353_arg0, f353_arg1, f353_arg2, f353_arg3)
 	if f353_local11.getCount(f353_arg1.itemList) > 1 then
 		f353_arg1.itemList:updateDataSource()
 	end
-	f353_local11 = Engine[@"getmodelforcontroller"](f353_arg3)
+	f353_local11 = Engine.GetModelForController(f353_arg3)
 	f353_local11 = f353_local11["CACMenu.numItemsToRemove"]
 	local f353_local12 = f353_local11:get() - f353_local10
 	f353_local11:set(f353_local12)
@@ -2955,7 +2955,7 @@ end
 function UpdateAllocationBar(f355_arg0, f355_arg1, f355_arg2)
 	local f355_local0 = f355_arg1:getModel(f355_arg2, "allocationSpent")
 	if f355_local0 then
-		local f355_local1 = Engine[@"getmodelvalue"](f355_local0)
+		local f355_local1 = Engine.GetModelValue(f355_local0)
 		if f355_local1 >= 0 then
 			local f355_local2 = -1
 			local f355_local3 = f355_arg1:getModel(f355_arg2, "classNum")
@@ -2989,8 +2989,8 @@ end
 function BubblegumPackOptionsRename(f356_arg0, f356_arg1, f356_arg2)
 	local f356_local0 = f356_arg0:getModel(f356_arg2, "bgbPackIndex")
 	if f356_local0 then
-		local f356_local1 = Engine[@"getmodelvalue"](f356_local0)
-		Engine[@"exec"](f356_arg2, "ui_keyboard_new " .. Enum[@"keyboardtype"][@"keyboard_type_bubblegum_pack"])
+		local f356_local1 = Engine.GetModelValue(f356_local0)
+		Engine.exec(f356_arg2, "ui_keyboard_new " .. Enum.KeyboardType[@"keyboard_type_bubblegum_pack"])
 	end
 end
 function BubblegumPackOptionsCopy(f357_arg0, f357_arg1, f357_arg2)
@@ -2999,10 +2999,10 @@ function BubblegumPackOptionsCopy(f357_arg0, f357_arg1, f357_arg2)
 	if f357_local0 == f357_local1 then
 		return
 	elseif f357_local0 and f357_local1 then
-		local f357_local2 = Engine[@"getmodelvalue"](f357_local0)
-		local f357_local3 = Engine[@"getmodelvalue"](f357_local1)
+		local f357_local2 = Engine.GetModelValue(f357_local0)
+		local f357_local3 = Engine.GetModelValue(f357_local1)
 		if f357_local2 and f357_local3 then
-			Engine[@"execnow"](f357_arg2, "copybubblegumpack " .. f357_local2 .. " " .. f357_local3)
+			Engine.ExecNow(f357_arg2, "copybubblegumpack " .. f357_local2 .. " " .. f357_local3)
 			local f357_local4 = f357_arg0.occludedMenu
 			GoBack(f357_arg0, f357_arg2)
 			ClearMenuSavedState(f357_arg0, f357_arg2)
@@ -3023,8 +3023,8 @@ function ClassOptionsCopyLoadout(f358_arg0, f358_arg1, f358_arg2, f358_arg3)
 		local f358_local4 = f358_local2.classNum:get()
 		if f358_local3 and f358_local4 then
 			Engine[@"copyclass"](f358_arg2, f358_local3, f358_local4, f358_local0)
-			if f358_local0 == Enum[@"emodes"][@"mode_zombies"] then
-				Engine[@"execnow"](f358_arg2, "copybubblegumpack " .. f358_local3 .. " " .. f358_local4)
+			if f358_local0 == Enum.eModes.mode_zombies then
+				Engine.ExecNow(f358_arg2, "copybubblegumpack " .. f358_local3 .. " " .. f358_local4)
 			end
 			SaveLoadoutGeneric(f358_arg2)
 			CoD.CACUtility.GetCustomClassModel(f358_arg2, f358_local4, f358_local2, nil, f358_local0)
@@ -3035,13 +3035,13 @@ end
 function ClassOptionsCopyClassSet(f359_arg0, f359_arg1, f359_arg2)
 	local f359_local0 = f359_arg1:getModel(f359_arg2, "classSetId")
 	if f359_local0 then
-		local f359_local1 = Engine[@"getmodelvalue"](f359_local0)
-		local f359_local2 = Engine[@"getcurrentclasssetindex"](f359_arg2)
+		local f359_local1 = Engine.GetModelValue(f359_local0)
+		local f359_local2 = Engine.GetCurrentClassSetIndex(f359_arg2)
 		if f359_local1 == f359_local2 then
 			return
 		end
-		Engine[@"copytoclassset"](f359_arg2, f359_local2)
-		Engine[@"copyfromclasssettoclassset"](f359_arg2, f359_local2, f359_local1)
+		Engine.CopyToClassSet(f359_arg2, f359_local2)
+		Engine.CopyFromClassSetToClassSet(f359_arg2, f359_local2, f359_local1)
 		local f359_local3 = GoBack(f359_arg0, f359_arg2)
 		ClearMenuSavedState(f359_arg0, f359_arg2)
 		f359_local3 = GoBack(f359_local3, f359_arg2)
@@ -3056,13 +3056,13 @@ function ClassOptionsResetToDefault(f360_arg0, f360_arg1, f360_arg2, f360_arg3)
 	local f360_local0 = CoD.BaseUtility.GetMenuSessionMode(f360_arg3)
 	local f360_local1 = CoD.BaseUtility.GetMenuModel(f360_arg3)
 	local f360_local2 = f360_arg1:getModel()
-	local f360_local3 = LuaUtils.IsArenaMode() and @"mp_arena_default_loadouts" or @"mp_default_loadouts"
+	local f360_local3 = LuaUtils.IsArenaMode() and "mp_arena_default_loadouts" or "mp_default_loadouts"
 	local f360_local4 = nil
-	if f360_local0 == Enum[@"emodes"][@"mode_campaign"] then
+	if f360_local0 == Enum.eModes.mode_campaign then
 		f360_local3 = @"cp_default_loadouts"
-	elseif f360_local0 == Enum[@"emodes"][@"mode_zombies"] then
-		f360_local3 = @"zm_default_loadouts"
-		local f360_local5 = Engine[@"getmodelforcontroller"](f360_arg2)
+	elseif f360_local0 == Enum.eModes.mode_zombies then
+		f360_local3 = "zm_default_loadouts"
+		local f360_local5 = Engine.GetModelForController(f360_arg2)
 		f360_local5 = f360_local5.selectedZMStory
 		f360_local4 = f360_local5 and f360_local5:get()
 	end
@@ -3072,11 +3072,11 @@ function ClassOptionsResetToDefault(f360_arg0, f360_arg1, f360_arg2, f360_arg3)
 		local f360_local7 = f360_local2.index:get()
 		if f360_local5 and f360_local6 and f360_local7 then
 			local f360_local8 = f360_local5 + 1
-			local f360_local9 = Engine[@"getcacroot"](f360_arg2, f360_local5, f360_local0)
+			local f360_local9 = Engine.GetCACRoot(f360_arg2, f360_local5, f360_local0)
 			if f360_local9 then
 				local f360_local10 = Engine[@"hash_2E00B2F29271C60B"](f360_local3)
 				CoDShared.SetDefaultLoadoutForClass(f360_local9, f360_local8, f360_local7, f360_local10, f360_local0, f360_local4)
-				if f360_local0 == Enum[@"emodes"][@"mode_zombies"] then
+				if f360_local0 == Enum.eModes.mode_zombies then
 					CoDShared.SetDefaultBubbleGumBuffsForClass(f360_local9, f360_local8, f360_local7, f360_local10, f360_local0, f360_local4)
 					DataSourceHelperRecreate(f360_arg2, "BGBLoadout")
 				end
@@ -3092,7 +3092,7 @@ function ClassOptionsClearLoadout(f361_arg0, f361_arg1, f361_arg2, f361_arg3)
 	local f361_local0 = CoD.BaseUtility.GetMenuSessionMode(f361_arg3)
 	local f361_local1 = CoD.BaseUtility.GetMenuModel(f361_arg3)
 	local f361_local2 = f361_local1.classNum:get()
-	local f361_local3 = Engine[@"getcacroot"](f361_arg2, f361_local2, f361_local0)
+	local f361_local3 = Engine.GetCACRoot(f361_arg2, f361_local2, f361_local0)
 	if f361_local3 then
 		CoDShared.ClearLoadoutForClassIndex(f361_local3, f361_local2 + 1, f361_local0)
 	end
@@ -3109,13 +3109,13 @@ function ClassOptionsSetHintText(f362_arg0, f362_arg1, f362_arg2)
 end
 function OpenBuyExtraSlotsPackDialog(f363_arg0, f363_arg1, f363_arg2)
 	CoD.OverlayUtility.CreateOverlay(f363_arg2, f363_arg0, "PurchaseExtraSlotsConfirmation", f363_arg2, {
-		displayText = @"hash_5E3634DA619F3701",
+		displayText = "menu/media_storage_pack",
 		itemCODPointCost = CoD.CACUtility.GetExtraSlotCODPointCost(),
 	})
 end
 function CopyLoadoutFromClassSet(f364_arg0)
 	if IsClassSetsAvailableForCurrentGameMode() then
-		Engine[@"copyfromclassset"](f364_arg0, Engine[@"getcurrentclasssetindex"](f364_arg0))
+		Engine.CopyFromClassSet(f364_arg0, Engine.GetCurrentClassSetIndex(f364_arg0))
 	end
 end
 function SetHintText(f365_arg0, f365_arg1, f365_arg2)
@@ -3126,9 +3126,9 @@ function SetHintText(f365_arg0, f365_arg1, f365_arg2)
 		else
 			local f365_local1 = f365_arg1:getModel()
 			if f365_local1 then
-				local f365_local2 = Engine[@"getmodel"](f365_local1, "hintText")
+				local f365_local2 = Engine.GetModel(f365_local1, "hintText")
 				if f365_local2 then
-					f365_local0 = Engine[@"getmodelvalue"](f365_local2)
+					f365_local0 = Engine.GetModelValue(f365_local2)
 				end
 			end
 		end
@@ -3140,11 +3140,11 @@ function SetHintText(f365_arg0, f365_arg1, f365_arg2)
 	end
 end
 function UpdateDifficulty(f366_arg0, f366_arg1, f366_arg2)
-	local f366_local0 = Engine[@"getprofilevarint"](f366_arg2, "g_gameskill") or 0
+	local f366_local0 = Engine.GetProfileVarInt(f366_arg2, "g_gameskill") or 0
 	local f366_local1 = LobbyData.GetLobbyMenuByName(LuaEnum.UI.DIRECTOR_LAN_CP)
-	if f366_arg1 == f366_local1[@"name"] then
-		Engine[@"setprofilevar"](f366_arg2, "g_gameskill", GetCPDifficulty(f366_arg2, "g_gameskill_offline_cp") or f366_local0)
-		Engine[@"exec"](f366_arg2, "updategamerprofile")
+	if f366_arg1 == f366_local1.name then
+		Engine.SetProfileVar(f366_arg2, "g_gameskill", GetCPDifficulty(f366_arg2, "g_gameskill_offline_cp") or f366_local0)
+		Engine.exec(f366_arg2, "updategamerprofile")
 	else
 	end
 end
@@ -3154,13 +3154,13 @@ end
 function ShowPsStoreIcon(f368_arg0, f368_arg1)
 	if CoD.perController[f368_arg0].psStoreIconCount == nil or CoD.perController[f368_arg0].psStoreIconCount == 0 then
 		Store_UpdatePSStoreIconCount(f368_arg0, 1)
-		Engine[@"showpsstoreicon"](f368_arg1)
+		Engine.ShowPsStoreIcon(f368_arg1)
 	end
 end
 function HidePsStoreIcon(f369_arg0)
 	if CoD.perController[f369_arg0].psStoreIconCount ~= nil and CoD.perController[f369_arg0].psStoreIconCount > 0 then
 		Store_UpdatePSStoreIconCount(f369_arg0, -1)
-		Engine[@"hidepsstoreicon"]()
+		Engine.HidePsStoreIcon()
 	end
 end
 function ClearSelectedStoreCategory(f370_arg0)
@@ -3172,16 +3172,16 @@ end
 function SetSelectedStoreCategory(f372_arg0, f372_arg1, f372_arg2)
 	local f372_local0 = f372_arg1:getModel(f372_arg2, "category")
 	if f372_local0 then
-		local f372_local1 = Engine[@"getmodelvalue"](f372_local0)
+		local f372_local1 = Engine.GetModelValue(f372_local0)
 		if CoD.perController[f372_arg2].selectedStoreCategory ~= f372_local1 then
 			local f372_local2 = CoD.perController[f372_arg2].selectedStoreCategory
 			CoD.perController[f372_arg2].selectedStoreCategory = f372_local1
 			if f372_local1 == "featured" or f372_local1 == "codpoints" then
 				if f372_local2 ~= "featured" and f372_local2 ~= "codpoints" then
-					ShowPsStoreIcon(f372_arg2, Enum[@"hash_6784DC8CE13E1E13"][@"center"])
+					ShowPsStoreIcon(f372_arg2, Enum[@"hash_6784DC8CE13E1E13"].center)
 				end
 			else
-				ShowPsStoreIcon(f372_arg2, Enum[@"hash_6784DC8CE13E1E13"][@"center"])
+				ShowPsStoreIcon(f372_arg2, Enum[@"hash_6784DC8CE13E1E13"].center)
 			end
 			Engine[@"hash_3ED84BE5BCA388FA"](f372_arg2, f372_local1, false)
 		end
@@ -3194,7 +3194,7 @@ function AutoSelectFeaturedCategory(f373_arg0, f373_arg1)
 		if IsDurango() then
 			f373_local0 = false
 		end
-		ShowPsStoreIcon(f373_arg1, Enum[@"hash_6784DC8CE13E1E13"][@"center"])
+		ShowPsStoreIcon(f373_arg1, Enum[@"hash_6784DC8CE13E1E13"].center)
 		Engine[@"hash_3ED84BE5BCA388FA"](f373_arg1, "featured", f373_local0)
 	end
 end
@@ -3211,22 +3211,22 @@ function PurchaseProduct(f375_arg0, f375_arg1, f375_arg2, f375_arg3)
 			if IsDurango() then
 				local f375_local1 = f375_arg2:getModel(f375_arg3, "productID")
 				if f375_local1 then
-					Engine[@"hash_1D58E665ABB6A9AE"](f375_arg3, f375_local0, Engine[@"getmodelvalue"](f375_local1))
+					Engine[@"hash_1D58E665ABB6A9AE"](f375_arg3, f375_local0, Engine.GetModelValue(f375_local1))
 				end
 			elseif IsOrbis() then
 				local f375_local1 = f375_arg2:getModel(f375_arg3, "serviceLabel")
 				if f375_local1 then
-					local f375_local2 = Engine[@"getmodelvalue"](f375_local1)
+					local f375_local2 = Engine.GetModelValue(f375_local1)
 					local f375_local3 = f375_arg2:getModel(f375_arg3, "productID")
 					if f375_local3 then
-						Engine[@"hash_1D58E665ABB6A9AE"](f375_arg3, f375_local0, Engine[@"getmodelvalue"](f375_local3), f375_local2)
+						Engine[@"hash_1D58E665ABB6A9AE"](f375_arg3, f375_local0, Engine.GetModelValue(f375_local3), f375_local2)
 					end
 				end
 			elseif IsPC() then
 				CoD.PCUtility.DisplayPrePurchasePopup(
 					function()
 						local f376_local0 = f375_arg2:getModel(f375_arg3, "productID")
-						local f376_local1 = Engine[@"getmodelforcontroller"](f375_arg3)
+						local f376_local1 = Engine.GetModelForController(f375_arg3)
 						f376_local1 = f376_local1:create("bnetCheckoutProductID")
 						f376_local1:set(f376_local0:get())
 						OpenPopup(f375_arg0:getMenu(), "PC_Battlenet_Checkout", f375_arg3)
@@ -3251,8 +3251,8 @@ function SetWorkingStateAndPurchaseDWSKU(f377_arg0, f377_arg1, f377_arg2, f377_a
 		PurchaseDWSKU(f377_arg0, f377_arg1, f377_arg2)
 		if not f377_arg0.purchaseTimer then
 			f377_arg0.purchaseTimer = LUI.UITimer.newElementTimer(500, false, function()
-				if not Engine[@"isinventorybusy"](f377_arg2) and Engine[@"getpurchasedwskuresult"](f377_arg2) ~= Enum[@"inventorypurchaseresult"][@"inventory_purchase_result_inprogress"] then
-					if Engine[@"getpurchasedwskuresult"](f377_arg2) == Enum[@"inventorypurchaseresult"][@"inventory_purchase_result_success"] then
+				if not Engine.IsInventoryBusy(f377_arg2) and Engine.GetPurchaseDWSKUResult(f377_arg2) ~= Enum.InventoryPurchaseResult[@"inventory_purchase_result_inprogress"] then
+					if Engine.GetPurchaseDWSKUResult(f377_arg2) == Enum.InventoryPurchaseResult[@"inventory_purchase_result_success"] then
 						f377_arg0:setState(f377_arg2, "FinishedState")
 						if f377_arg0:getModel() then
 							local f379_local0 = f377_arg0:getModel()
@@ -3261,12 +3261,12 @@ function SetWorkingStateAndPurchaseDWSKU(f377_arg0, f377_arg1, f377_arg2, f377_a
 								f379_local0.purchased:set(true)
 							end
 						end
-						local f379_local0 = Engine[@"getmodelforcontroller"](f377_arg2)
+						local f379_local0 = Engine.GetModelForController(f377_arg2)
 						local f379_local1 = f379_local0:create("LootStreamProgress.playAnimation")
 						f379_local1:set(true)
 						f379_local1 = f377_arg0:getModel(f377_arg2, "skuID")
 						if f379_local1 then
-							local f379_local2 = Engine[@"getmodelvalue"](f379_local1)
+							local f379_local2 = Engine.GetModelValue(f379_local1)
 							local f379_local3 = f379_local0:create("LootStreamProgress.skuPurchased")
 							f379_local3:set(tostring(f379_local2))
 						end
@@ -3322,7 +3322,7 @@ end
 function PurchaseDWSKU(f382_arg0, f382_arg1, f382_arg2)
 	local f382_local0 = f382_arg0:getModel(f382_arg2, "skuID")
 	if f382_local0 then
-		Engine[@"hash_29EF65378FF2525E"](f382_arg2, tostring(Engine[@"getmodelvalue"](f382_local0)), 1)
+		Engine[@"hash_29EF65378FF2525E"](f382_arg2, tostring(Engine.GetModelValue(f382_local0)), 1)
 	end
 end
 function RecordStoreOnItemGainFocus(f383_arg0, f383_arg1, f383_arg2, f383_arg3)
@@ -3341,7 +3341,7 @@ function RecordStoreOnItemLoseFocus(f384_arg0, f384_arg1, f384_arg2, f384_arg3)
 	end
 	local f384_local4 = f384_arg1:getModel(f384_arg2, "productID")
 	if f384_local4 then
-		CoD.MetricsUtility.StoreItemViewed(f384_arg0, f384_arg2, Engine[@"getmodelvalue"](f384_local4), f384_local2)
+		CoD.MetricsUtility.StoreItemViewed(f384_arg0, f384_arg2, Engine.GetModelValue(f384_local4), f384_local2)
 	end
 end
 function RecordStoreLastFocusedItemViewed(f385_arg0, f385_arg1, f385_arg2, f385_arg3)
@@ -3353,7 +3353,7 @@ function PaintshopWeaponList_Back(f386_arg0, f386_arg1, f386_arg2)
 	CoD.CraftUtility.Paintjobs.CachedPaintjobs = {}
 end
 function FileshareGetSlots(f387_arg0, f387_arg1, f387_arg2)
-	Engine[@"filesharestartup"](f387_arg2)
+	Engine.FileshareStartup(f387_arg2)
 end
 function OpenShowcase(f388_arg0, f388_arg1, f388_arg2, f388_arg3, f388_arg4)
 	local f388_local0 = CoD.FileshareUtility.GetCurrentCategory()
@@ -3378,7 +3378,7 @@ end
 function OpenShowcasePaintjobs(f389_arg0, f389_arg1, f389_arg2, f389_arg3, f389_arg4)
 	CoD.FileshareUtility.SetPreviousCategory("paintjob")
 	CoD.FileshareUtility.SetCurrentCategory("paintjob")
-	CoD.FileshareUtility.SetCurrentFilter(Enum[@"fileshareprimarytags_e"][@"fileshare_pritag_invalid"], Engine[@"defaultid64value"]())
+	CoD.FileshareUtility.SetCurrentFilter(Enum[@"fileshareprimarytags_e"][@"fileshare_pritag_invalid"], Engine.DefaultID64Value())
 	local f389_local0 = false
 	if FileshareIsCurrentUserContext(f389_arg2) then
 		f389_local0 = true
@@ -3389,7 +3389,7 @@ end
 function OpenShowcaseEmblems(f390_arg0, f390_arg1, f390_arg2, f390_arg3, f390_arg4)
 	CoD.FileshareUtility.SetPreviousCategory("emblem")
 	CoD.FileshareUtility.SetCurrentCategory("emblem")
-	CoD.FileshareUtility.SetCurrentFilter(Enum[@"fileshareprimarytags_e"][@"fileshare_pritag_invalid"], Engine[@"defaultid64value"]())
+	CoD.FileshareUtility.SetCurrentFilter(Enum[@"fileshareprimarytags_e"][@"fileshare_pritag_invalid"], Engine.DefaultID64Value())
 	local f390_local0 = false
 	if FileshareIsCurrentUserContext(f390_arg2) then
 		f390_local0 = true
@@ -3400,7 +3400,7 @@ end
 function OpenShowcaseCustomGames(f391_arg0, f391_arg1, f391_arg2, f391_arg3, f391_arg4)
 	CoD.FileshareUtility.SetPreviousCategory("customgame")
 	CoD.FileshareUtility.SetCurrentCategory("customgame")
-	CoD.FileshareUtility.SetCurrentFilter(Enum[@"fileshareprimarytags_e"][@"fileshare_pritag_invalid"], Engine[@"defaultid64value"]())
+	CoD.FileshareUtility.SetCurrentFilter(Enum[@"fileshareprimarytags_e"][@"fileshare_pritag_invalid"], Engine.DefaultID64Value())
 	local f391_local0 = false
 	if FileshareIsCurrentUserContext(f391_arg2) and CoD.FileshareUtility.GetIsCommunityMode(f391_arg2) == false then
 		f391_local0 = true
@@ -3411,7 +3411,7 @@ end
 function OpenShowcaseScreenshots(f392_arg0, f392_arg1, f392_arg2, f392_arg3, f392_arg4)
 	CoD.FileshareUtility.SetPreviousCategory("screenshot")
 	CoD.FileshareUtility.SetCurrentCategory("screenshot")
-	CoD.FileshareUtility.SetCurrentFilter(Enum[@"fileshareprimarytags_e"][@"fileshare_pritag_invalid"], Engine[@"defaultid64value"]())
+	CoD.FileshareUtility.SetCurrentFilter(Enum[@"fileshareprimarytags_e"][@"fileshare_pritag_invalid"], Engine.DefaultID64Value())
 	local f392_local0 = false
 	if FileshareIsCurrentUserContext(f392_arg2) then
 		f392_local0 = true
@@ -3422,7 +3422,7 @@ end
 function OpenShowcaseRecentGames(f393_arg0, f393_arg1, f393_arg2, f393_arg3, f393_arg4)
 	CoD.FileshareUtility.SetPreviousCategory("recentgames")
 	CoD.FileshareUtility.SetCurrentCategory("recentgames")
-	CoD.FileshareUtility.SetCurrentFilter(Enum[@"fileshareprimarytags_e"][@"fileshare_pritag_invalid"], Engine[@"defaultid64value"]())
+	CoD.FileshareUtility.SetCurrentFilter(Enum[@"fileshareprimarytags_e"][@"fileshare_pritag_invalid"], Engine.DefaultID64Value())
 	local f393_local0 = false
 	if FileshareIsCurrentUserContext(f393_arg2) then
 		f393_local0 = true
@@ -3433,7 +3433,7 @@ end
 function OpenShowcaseClips(f394_arg0, f394_arg1, f394_arg2, f394_arg3, f394_arg4)
 	CoD.FileshareUtility.SetPreviousCategory("clip")
 	CoD.FileshareUtility.SetCurrentCategory("clip")
-	CoD.FileshareUtility.SetCurrentFilter(Enum[@"fileshareprimarytags_e"][@"fileshare_pritag_invalid"], Engine[@"defaultid64value"]())
+	CoD.FileshareUtility.SetCurrentFilter(Enum[@"fileshareprimarytags_e"][@"fileshare_pritag_invalid"], Engine.DefaultID64Value())
 	local f394_local0 = false
 	if FileshareIsCurrentUserContext(f394_arg2) then
 		f394_local0 = true
@@ -3446,7 +3446,7 @@ end
 function OpenShowcaseLocalClips(f395_arg0, f395_arg1, f395_arg2, f395_arg3, f395_arg4)
 	CoD.FileshareUtility.SetPreviousCategory("clip_private")
 	CoD.FileshareUtility.SetCurrentCategory("clip_private")
-	CoD.FileshareUtility.SetCurrentFilter(Enum[@"fileshareprimarytags_e"][@"fileshare_pritag_invalid"], Engine[@"defaultid64value"]())
+	CoD.FileshareUtility.SetCurrentFilter(Enum[@"fileshareprimarytags_e"][@"fileshare_pritag_invalid"], Engine.DefaultID64Value())
 	local f395_local0 = false
 	if FileshareIsCurrentUserContext(f395_arg2) then
 		f395_local0 = true
@@ -3460,16 +3460,16 @@ function PublishClip(f396_arg0)
 	local f396_local0 = CoD.FileshareUtility.GetSelectedItemProperty("fileId")
 	local f396_local1 = CoD.FileshareUtility.GetPublishName()
 	local f396_local2 = CoD.FileshareUtility.GetPublishDescription()
-	if Engine[@"setuptransferdata"](f396_arg0, "clip_private", f396_local0, CoD.FileshareUtility.GetIsCommunityMode(f396_arg0)) then
-		Engine[@"publishclip"](f396_arg0, "clip", f396_local0, f396_local1, f396_local2)
+	if Engine.SetupTransferData(f396_arg0, "clip_private", f396_local0, CoD.FileshareUtility.GetIsCommunityMode(f396_arg0)) then
+		Engine.PublishClip(f396_arg0, "clip", f396_local0, f396_local1, f396_local2)
 	else
-		Engine[@"setmodelvalue"](Engine[@"getmodel"](CoD.FileshareUtility.GetPublishingModel()), Enum[@"filesharetaskuistate"][@"fileshare_task_ui_error"])
+		Engine.SetModelValue(Engine.GetModel(CoD.FileshareUtility.GetPublishingModel()), Enum.FileshareTaskUIState[@"fileshare_task_ui_error"])
 	end
 end
 function OpenLocalClipPublishPrompt(f397_arg0, f397_arg1, f397_arg2, f397_arg3, f397_arg4)
-	local f397_local0 = Engine[@"lobbygetdemoinformation"](Enum[@"lobbymodule"][@"lobby_module_client"], Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_client"]))
+	local f397_local0 = Engine[@"lobbygetdemoinformation"](Enum.LobbyModule[@"lobby_module_client"], Engine[@"lobbygetcontrollinglobbysession"](Enum.LobbyModule[@"lobby_module_client"]))
 	if f397_local0.fileID ~= CoD.FileshareUtility.GetSelectedItemProperty("fileId") then
-		LuaUtils.UI_ShowErrorMessageDialog(f397_arg2, @"hash_4C08DDDCF42A89F1")
+		LuaUtils.UI_ShowErrorMessageDialog(f397_arg2, "menu/fileshare_publish_only_after_downloading")
 		return
 	else
 		CoD.FileshareUtility.OpenPublishPrompt(f397_arg0, f397_arg2, "clip", CoD.FileshareUtility.GetSelectedItemProperty("fileName"), CoD.FileshareUtility.GetSelectedItemProperty("fileDescription"), PublishClip)
@@ -3482,14 +3482,14 @@ function OpenLocalScreenshots(f398_arg0, f398_arg1)
 		CoD.FileshareUtility.SetDirty()
 	end
 	CoD.FileshareUtility.ProcessUIIndex(f398_arg1, f398_local0, 0)
-	local f398_local1 = Engine[@"getxuid64"](f398_arg1)
-	Engine[@"execnow"](f398_arg1, "fileshareResetSummaryFiles")
+	local f398_local1 = Engine.GetXUID64(f398_arg1)
+	Engine.ExecNow(f398_arg1, "fileshareResetSummaryFiles")
 	CoD.FileshareUtility.SetCurrentUser(f398_local1)
-	CoD.FileshareUtility.SetFileshareMode(f398_arg1, Enum[@"filesharemode"][@"fileshare_mode_user"])
+	CoD.FileshareUtility.SetFileshareMode(f398_arg1, Enum.FileshareMode[@"fileshare_mode_user"])
 	CoD.FileshareUtility.FetchContentForUser(f398_arg1, f398_local1)
 	FileshareSetShowcasePublishMode(f398_arg1, false)
 	CoD.FileshareUtility.SetPreviousCategory(f398_local0)
-	CoD.FileshareUtility.SetCurrentFilter(Enum[@"fileshareprimarytags_e"][@"fileshare_pritag_invalid"], Engine[@"defaultid64value"]())
+	CoD.FileshareUtility.SetCurrentFilter(Enum[@"fileshareprimarytags_e"][@"fileshare_pritag_invalid"], Engine.DefaultID64Value())
 	CoD.FileshareUtility.SetShowCreateButton(false)
 	CoD.FileshareUtility.SetShowFileDetails(false)
 	CoD.FileshareUtility.SetShowPublishNewDetails(false)
@@ -3500,16 +3500,16 @@ function PublishScreenshot(f399_arg0)
 	local f399_local0 = CoD.FileshareUtility.GetSelectedItemProperty("fileId")
 	local f399_local1 = CoD.FileshareUtility.GetPublishName()
 	local f399_local2 = CoD.FileshareUtility.GetPublishDescription()
-	if Engine[@"setuptransferdata"](f399_arg0, "screenshot_private", f399_local0, CoD.FileshareUtility.GetIsCommunityMode(f399_arg0)) then
-		Engine[@"publishscreenshot"](f399_arg0, "screenshot", f399_local0, f399_local1, f399_local2)
+	if Engine.SetupTransferData(f399_arg0, "screenshot_private", f399_local0, CoD.FileshareUtility.GetIsCommunityMode(f399_arg0)) then
+		Engine.PublishScreenshot(f399_arg0, "screenshot", f399_local0, f399_local1, f399_local2)
 	else
-		Engine[@"setmodelvalue"](Engine[@"getmodel"](CoD.FileshareUtility.GetPublishingModel()), Enum[@"filesharetaskuistate"][@"fileshare_task_ui_error"])
+		Engine.SetModelValue(Engine.GetModel(CoD.FileshareUtility.GetPublishingModel()), Enum.FileshareTaskUIState[@"fileshare_task_ui_error"])
 	end
 end
 function OpenLocalScreenshotsPublishPrompt(f400_arg0, f400_arg1, f400_arg2, f400_arg3, f400_arg4)
 	local f400_local0 = CoD.FileshareUtility.GetSelectedItemProperty("fileId")
-	if Engine[@"isscreenshotready"](Enum[@"screenshotviewtype"][@"ui_screenshot_type_screenshot"], f400_local0) == false or Engine[@"isscreenshotready"](Enum[@"screenshotviewtype"][@"ui_screenshot_type_thumbnail"], f400_local0) == false then
-		LuaUtils.UI_ShowErrorMessageDialog(f400_arg2, @"hash_3B2A1F25CCD4E630")
+	if Engine.IsScreenshotReady(Enum.ScreenshotViewType[@"ui_screenshot_type_screenshot"], f400_local0) == false or Engine.IsScreenshotReady(Enum.ScreenshotViewType[@"ui_screenshot_type_thumbnail"], f400_local0) == false then
+		LuaUtils.UI_ShowErrorMessageDialog(f400_arg2, "menu/upload_fail_due_to_screenshot_download")
 		return
 	else
 		CoD.FileshareUtility.OpenPublishPrompt(f400_arg0, f400_arg2, "screenshot", CoD.FileshareUtility.GetSelectedItemProperty("fileName"), CoD.FileshareUtility.GetSelectedItemProperty("fileDescription"), PublishScreenshot)
@@ -3518,7 +3518,7 @@ end
 function OpenMediaCommunity(f401_arg0, f401_arg1, f401_arg2, f401_arg3, f401_arg4, f401_arg5)
 	CoD.FileshareUtility.InitModels()
 	CoD.FileshareUtility.SetCurrentCommunityDataType(f401_arg5)
-	CoD.FileshareUtility.SetFileshareMode(f401_arg2, Enum[@"filesharemode"][@"fileshare_mode_community"])
+	CoD.FileshareUtility.SetFileshareMode(f401_arg2, Enum.FileshareMode[@"fileshare_mode_community"])
 	OpenOverlay(f401_arg0, "Community", f401_arg2)
 end
 function FileshareSetSelectedItemAttachTimer(f402_arg0, f402_arg1, f402_arg2, f402_arg3)
@@ -3546,7 +3546,7 @@ function FileshareSetSelectedItem(f404_arg0, f404_arg1, f404_arg2, f404_arg3)
 	elseif f404_arg1.gridInfoTable then
 		FileshareSetSelectedItemAttachTimer(f404_arg1, f404_arg2, f404_local3, f404_arg1.gridInfoTable.zeroBasedIndex)
 	end
-	local f404_local5 = Engine[@"getfileshareweaponindex"](f404_arg2, f404_local1)
+	local f404_local5 = Engine.GetFileshareWeaponIndex(f404_arg2, f404_local1)
 	if f404_local3 == "paintjob" then
 		CoD.CraftUtility.Fileshare.DisplayWeaponWithPaintjob(f404_arg2, f404_local5, f404_local1, f404_local4)
 	end
@@ -3557,13 +3557,13 @@ function FileshareSetSelectedItem(f404_arg0, f404_arg1, f404_arg2, f404_arg3)
 	end
 end
 function FileshareCategorySelectorItemSelected(f405_arg0, f405_arg1, f405_arg2)
-	local f405_local0 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f405_arg1:getModel(), "category"))
+	local f405_local0 = Engine.GetModelValue(Engine.GetModel(f405_arg1:getModel(), "category"))
 	local f405_local1 = CoD.FileshareUtility.GetCurrentCommunityDataType()
 	local f405_local2 = false
-	local f405_local3 = Engine[@"getmodel"](f405_arg1:getModel(), "communityDataType")
+	local f405_local3 = Engine.GetModel(f405_arg1:getModel(), "communityDataType")
 	if f405_local3 then
 		local f405_local4 = CoD.FileshareUtility.GetCurrentCommunityDataType()
-		local f405_local5 = Engine[@"getmodelvalue"](f405_local3)
+		local f405_local5 = Engine.GetModelValue(f405_local3)
 		if f405_local5 ~= nil and f405_local5 ~= "" and f405_local4 ~= f405_local5 then
 			CoD.FileshareUtility.SetCurrentCommunityDataType(f405_local5)
 			f405_local1 = f405_local5
@@ -3580,13 +3580,13 @@ function FileshareCategorySelectorItemSelected(f405_arg0, f405_arg1, f405_arg2)
 	CoD.FileshareUtility.FileshareCategorySelectorCategoryChanged(f405_arg2, f405_local0, f405_local1, f405_local2)
 end
 function FileshareHandleKeyboardComplete(f406_arg0, f406_arg1, f406_arg2, f406_arg3)
-	if f406_arg3.type == Enum[@"keyboardtype"][@"keyboard_type_fileshare_publish_name"] then
+	if f406_arg3.type == Enum.KeyboardType[@"keyboard_type_fileshare_publish_name"] then
 		CoD.FileshareUtility.SetPublishName(f406_arg3.input)
-	elseif f406_arg3.type == Enum[@"keyboardtype"][@"keyboard_type_fileshare_publish_description"] then
+	elseif f406_arg3.type == Enum.KeyboardType[@"keyboard_type_fileshare_publish_description"] then
 		CoD.FileshareUtility.SetPublishDescription(f406_arg3.input)
-	elseif f406_arg3.type == Enum[@"keyboardtype"][@"keyboard_type_fileshare_publish_tags"] then
+	elseif f406_arg3.type == Enum.KeyboardType[@"keyboard_type_fileshare_publish_tags"] then
 		CoD.FileshareUtility.SetPublishTags(f406_arg3.input)
-	elseif f406_arg3.type == Enum[@"keyboardtype"][@"keyboard_type_fileshare_download_name"] then
+	elseif f406_arg3.type == Enum.KeyboardType[@"keyboard_type_fileshare_download_name"] then
 		CoD.FileshareUtility.SetDownloadFileName(f406_arg3.input)
 	end
 end
@@ -3601,31 +3601,31 @@ function FileshareEnterPublishTags(f409_arg0, f409_arg1, f409_arg2)
 end
 function FileshareSetPreviewIconSizeNormal()
 	local f410_local0 = CoD.FileshareUtility.GetRootModel()
-	local f410_local1 = Engine[@"createmodel"](f410_local0, "isNormalSize", false)
-	local f410_local2 = Engine[@"createmodel"](f410_local0, "listVerticalCount", false)
-	Engine[@"setmodelvalue"](f410_local1, true)
-	Engine[@"setmodelvalue"](f410_local2, 2)
+	local f410_local1 = Engine.CreateModel(f410_local0, "isNormalSize", false)
+	local f410_local2 = Engine.CreateModel(f410_local0, "listVerticalCount", false)
+	Engine.SetModelValue(f410_local1, true)
+	Engine.SetModelValue(f410_local2, 2)
 end
 function FileshareSetPreviewIconSizeShort()
 	local f411_local0 = CoD.FileshareUtility.GetRootModel()
-	local f411_local1 = Engine[@"createmodel"](f411_local0, "isNormalSize", false)
-	local f411_local2 = Engine[@"createmodel"](f411_local0, "listVerticalCount", false)
-	Engine[@"setmodelvalue"](f411_local1, false)
-	Engine[@"setmodelvalue"](f411_local2, 8)
+	local f411_local1 = Engine.CreateModel(f411_local0, "isNormalSize", false)
+	local f411_local2 = Engine.CreateModel(f411_local0, "listVerticalCount", false)
+	Engine.SetModelValue(f411_local1, false)
+	Engine.SetModelValue(f411_local2, 8)
 end
 function FileshareSummaryFileUpdate(f412_arg0)
-	local f412_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "fileshareRoot", false)
-	local f412_local1 = Engine[@"getmodelvalue"](Engine[@"createmodel"](f412_local0, "summaryFileUpdated", false))
+	local f412_local0 = Engine.CreateModel(Engine.GetGlobalModel(), "fileshareRoot", false)
+	local f412_local1 = Engine.GetModelValue(Engine.CreateModel(f412_local0, "summaryFileUpdated", false))
 	if f412_local1 == nil then
 		return
 	elseif CoD.FileshareUtility.GetIsFullscreenMode(f412_arg0) == true then
 		local f412_local2 = CoD.FileshareUtility.GetSelectedItem()
-		if Engine[@"getmodelvalue"](Engine[@"createmodel"](f412_local2, "fileId")) == f412_local1 then
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f412_local2, "renderFileId"), f412_local1)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f412_local2, "showDetailsViewSpinner"), 0)
-			local f412_local3 = Engine[@"getmodelvalue"](Engine[@"createmodel"](f412_local2, "fileId"))
-			local f412_local4 = Engine[@"getmodelvalue"](Engine[@"createmodel"](f412_local2, "fileCategory"))
-			local f412_local5 = Engine[@"getfileshareweaponindex"](f412_arg0, f412_local3)
+		if Engine.GetModelValue(Engine.CreateModel(f412_local2, "fileId")) == f412_local1 then
+			Engine.SetModelValue(Engine.CreateModel(f412_local2, "renderFileId"), f412_local1)
+			Engine.SetModelValue(Engine.CreateModel(f412_local2, "showDetailsViewSpinner"), 0)
+			local f412_local3 = Engine.GetModelValue(Engine.CreateModel(f412_local2, "fileId"))
+			local f412_local4 = Engine.GetModelValue(Engine.CreateModel(f412_local2, "fileCategory"))
+			local f412_local5 = Engine.GetFileshareWeaponIndex(f412_arg0, f412_local3)
 			if f412_local4 == "paintjob" then
 				CoD.CraftUtility.Fileshare.DisplayWeaponWithPaintjob(f412_arg0, f412_local5, f412_local3, true)
 			end
@@ -3636,11 +3636,11 @@ function FileshareSummaryFileUpdate(f412_arg0)
 			if FileshareIsCommunityMode(nil, f412_arg0) == true then
 				f412_local3 = "fileshareData_community_" .. f412_local2
 			end
-			local f412_local4 = Engine[@"createmodel"](f412_local0, f412_local3, false)
-			local f412_local5 = Engine[@"createmodel"](f412_local4, "fileID", false)
-			local f412_local8 = Engine[@"createmodel"](f412_local4, "renderFileId", false)
-			if Engine[@"getmodelvalue"](f412_local5) == f412_local1 then
-				Engine[@"setmodelvalue"](f412_local8, f412_local1)
+			local f412_local4 = Engine.CreateModel(f412_local0, f412_local3, false)
+			local f412_local5 = Engine.CreateModel(f412_local4, "fileID", false)
+			local f412_local8 = Engine.CreateModel(f412_local4, "renderFileId", false)
+			if Engine.GetModelValue(f412_local5) == f412_local1 then
+				Engine.SetModelValue(f412_local8, f412_local1)
 				break
 			end
 		end
@@ -3654,31 +3654,31 @@ function FileshareBookmarkRecentGame(f413_arg0)
 	if f413_local3 then
 		f413_local3 = f413_local2 and Engine[@"hash_690B6BCE69A8E08B"](f413_local1.demoFileID:get())
 	end
-	if f413_local3 ~= nil and f413_local3 ~= Engine[@"defaultid64value"]() then
-		Engine[@"bookmarkrecentgame"](f413_arg0, f413_local3)
-		CoD.OverlayUtility.ShowToast("RecentGameBookmarked", Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"menu/notice")), Engine[@"hash_4F9F1239CFD921FE"](@"hash_46534C8ED6B43677"), "uie_bookmark")
+	if f413_local3 ~= nil and f413_local3 ~= Engine.DefaultID64Value() then
+		Engine.BookmarkRecentGame(f413_arg0, f413_local3)
+		CoD.OverlayUtility.ShowToast("RecentGameBookmarked", Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"](@"menu/notice")), Engine[@"hash_4F9F1239CFD921FE"]("menu/game_bookmarked"), "uie_bookmark")
 	end
 end
 function FileshareSetShowcasePublishMode(f414_arg0, f414_arg1)
-	local f414_local0 = Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "FileshareRoot", false), "PublishMode", false)
+	local f414_local0 = Engine.CreateModel(Engine.CreateModel(Engine.GetGlobalModel(), "FileshareRoot", false), "PublishMode", false)
 	local f414_local1 = 0
 	if f414_arg1 == true then
 		f414_local1 = 1
 	end
-	Engine[@"setmodelvalue"](f414_local0, f414_local1)
+	Engine.SetModelValue(f414_local0, f414_local1)
 end
 function GetMediaManagerCategoryCount()
 	return #CoD.FileshareUtility.ShowcaseManagerTabs
 end
 function MediaManagerMarkDirty(f416_arg0)
-	local f416_local0 = Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "MediaManager", false), "dirty", false)
+	local f416_local0 = Engine.CreateModel(Engine.CreateModel(Engine.GetGlobalModel(), "MediaManager", false), "dirty", false)
 	ForceNotifyGlobalModel(f416_arg0, "MediaManager.dirty")
 	MediaManagerUpdateSlotsUsed(f416_arg0, CoD.perController[f416_arg0].selectedMediaManagerTab)
 end
 function MediaManagerUpdateSlotsUsed(f417_arg0, f417_arg1)
 	if f417_arg1 then
-		local f417_local0 = Engine[@"mediamanagergetquota"](f417_arg0, f417_arg1)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "MediaManager", false), "slotsUsed", false), f417_local0.categorySlotsUsed)
+		local f417_local0 = Engine.MediaManagerGetQuota(f417_arg0, f417_arg1)
+		Engine.SetModelValue(Engine.CreateModel(Engine.CreateModel(Engine.GetGlobalModel(), "MediaManager", false), "slotsUsed", false), f417_local0.categorySlotsUsed)
 	end
 end
 function MediaManagerClearDisplay(f418_arg0, f418_arg1, f418_arg2)
@@ -3691,7 +3691,7 @@ end
 function OpenMediaManager(f419_arg0, f419_arg1, f419_arg2, f419_arg3, f419_arg4)
 	CoD.FileshareUtility.SetPreviousCategory(CoD.FileshareUtility.GetCurrentCategory())
 	CoD.FileshareUtility.SetCurrentCategory(f419_arg3)
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "MediaManager", false), "previousWeaponIndex", false), CoD.GetCustomization(f419_arg2, "weapon_index"))
+	Engine.SetModelValue(Engine.CreateModel(Engine.CreateModel(Engine.GetGlobalModel(), "MediaManager", false), "previousWeaponIndex", false), CoD.GetCustomization(f419_arg2, "weapon_index"))
 	MediaManagerClearDisplay(f419_arg0, f419_arg1, f419_arg2)
 	OpenOverlay(f419_arg0, "MediaManager", f419_arg2)
 end
@@ -3700,7 +3700,7 @@ function GoBackAndOpenMediaManagerOnParent(f420_arg0, f420_arg1, f420_arg2, f420
 	if f420_arg3 ~= nil and f420_arg3 ~= "" then
 		CoD.FileshareUtility.SetCurrentCategory(f420_arg3)
 	end
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "MediaManager", false), "previousWeaponIndex", false), CoD.GetCustomization(f420_arg2, "weapon_index"))
+	Engine.SetModelValue(Engine.CreateModel(Engine.CreateModel(Engine.GetGlobalModel(), "MediaManager", false), "previousWeaponIndex", false), CoD.GetCustomization(f420_arg2, "weapon_index"))
 	MediaManagerClearDisplay(f420_arg0, f420_arg1, f420_arg2)
 	GoBackAndOpenOverlayOnParent(f420_arg0, "MediaManager", f420_arg2)
 end
@@ -3715,7 +3715,7 @@ function PaintjobSelector_ChoosePaintjob(f422_arg0, f422_arg1, f422_arg2)
 	local f422_local0 = f422_arg1:getModel(f422_arg2, "paintjobSlot")
 	CoD.perController[f422_arg2].selectedPaintjobModel = f422_arg1:getModel()
 	if f422_local0 then
-		Engine[@"setuppaintjobdata"](f422_arg2, Engine[@"getmodelvalue"](f422_local0))
+		Engine.SetupPaintjobData(f422_arg2, Engine.GetModelValue(f422_local0))
 	end
 	CoD.perController[f422_arg2].viewIndex = 1
 	local f422_local1 = CoD.CraftUtility.PaintshopView[CoD.perController[f422_arg2].viewIndex].view_name
@@ -3723,9 +3723,9 @@ function PaintjobSelector_ChoosePaintjob(f422_arg0, f422_arg1, f422_arg2)
 	local f422_local3 = CoD.CraftUtility.PaintshopView[CoD.perController[f422_arg2].viewIndex].view_string_ref
 	CoD.SetCustomization(f422_arg2, f422_local2, "type")
 	CoD.SetCustomization(f422_arg2, f422_local3, "view_string_ref")
-	Engine[@"setupemblemeditbuffer"](f422_arg2, f422_local2, CoD.GetCustomization(f422_arg2, "weapon_index"))
+	Engine.SetupEmblemEditBuffer(f422_arg2, f422_local2, CoD.GetCustomization(f422_arg2, "weapon_index"))
 	CoD.CraftUtility.DisplayWeaponInPaintshop(f422_arg2, f422_local1)
-	CoD.CraftUtility.SetEmblemEditorProperties(f422_arg2, Enum[@"customizationeditormode"][@"customization_editor_mode_browse"], "editorMode")
+	CoD.CraftUtility.SetEmblemEditorProperties(f422_arg2, Enum.CustomizationEditorMode[@"customization_editor_mode_browse"], "editorMode")
 end
 function FileshareOpenFullscreenView(f423_arg0, f423_arg1, f423_arg2, f423_arg3)
 	if f423_arg1.gridInfoTable then
@@ -3761,8 +3761,8 @@ function SteamWorkshopViewWorkshop(f430_arg0, f430_arg1, f430_arg2)
 	CoD.SteamWorkshopUtility.ViewWorkshop(f430_arg0, f430_arg1, f430_arg2)
 end
 function PaintjobSelector_ClearPaintjob(f431_arg0, f431_arg1)
-	CoD.CraftUtility.Paintjobs.ClearPaintjob(f431_arg1, Engine[@"getmodelvalue"](Engine[@"getmodel"](CoD.perController[f431_arg1].selectedPaintjobModel, "paintjobSlot")))
-	CoD.CraftUtility.Paintjobs.ParseDDL(f431_arg1, Enum[@"storagefiletype"][@"storage_paintjobs"])
+	CoD.CraftUtility.Paintjobs.ClearPaintjob(f431_arg1, Engine.GetModelValue(Engine.GetModel(CoD.perController[f431_arg1].selectedPaintjobModel, "paintjobSlot")))
+	CoD.CraftUtility.Paintjobs.ParseDDL(f431_arg1, Enum.StorageFileType[@"storage_paintjobs"])
 	if IsMediaManager() == true then
 		MediaManagerMarkDirty(f431_arg1)
 	end
@@ -3772,7 +3772,7 @@ end
 function PaintjobSelector_CopyPaintjob(f432_arg0, f432_arg1, f432_arg2, f432_arg3, f432_arg4)
 	local f432_local0 = CoD.CraftUtility.Paintjobs.Copy(f432_arg2, CoD.perController[f432_arg2].selectedPaintjobModel)
 	if f432_local0 then
-		CoD.CraftUtility.Paintjobs.ParseDDL(f432_arg2, Enum[@"storagefiletype"][@"storage_paintjobs"])
+		CoD.CraftUtility.Paintjobs.ParseDDL(f432_arg2, Enum.StorageFileType[@"storage_paintjobs"])
 		CoD.CraftUtility.InvalidateWCItemRender(f432_local0)
 		ForceNotifyModel(f432_arg2, "Paintshop.UpdateDataSource")
 		CoD.WeaponOptionsUtility.UpdateWeaponOptionLists(f432_arg1, f432_arg2)
@@ -3780,18 +3780,18 @@ function PaintjobSelector_CopyPaintjob(f432_arg0, f432_arg1, f432_arg2, f432_arg
 end
 function PaintjobSelector_RenamePaintjob(f433_arg0, f433_arg1)
 	local f433_local0 = CoD.perController[f433_arg1].selectedPaintjobModel
-	CoD.CraftUtility.Paintjobs.RenamePaintjob(f433_arg1, Engine[@"getmodelvalue"](Engine[@"getmodel"](f433_local0, "paintjobSlot")), Engine[@"getmodelvalue"](Engine[@"getmodel"](f433_local0, "paintjobName")))
+	CoD.CraftUtility.Paintjobs.RenamePaintjob(f433_arg1, Engine.GetModelValue(Engine.GetModel(f433_local0, "paintjobSlot")), Engine.GetModelValue(Engine.GetModel(f433_local0, "paintjobName")))
 end
 function PaintjobSelector_HandleRenameKeyboardComplete(f434_arg0, f434_arg1, f434_arg2, f434_arg3)
 	local f434_local0 = CoD.perController[f434_arg2].selectedPaintjobModel
 	local f434_local1 = nil
 	if not f434_local0 then
 		return
-	elseif f434_arg3.type == Enum[@"keyboardtype"][@"keyboard_type_paintjob"] then
-		f434_local1 = Engine[@"getmodel"](f434_local0, "paintjobName")
+	elseif f434_arg3.type == Enum.KeyboardType[@"keyboard_type_paintjob"] then
+		f434_local1 = Engine.GetModel(f434_local0, "paintjobName")
 	end
 	if f434_local1 then
-		Engine[@"setmodelvalue"](f434_local1, f434_arg3.input)
+		Engine.SetModelValue(f434_local1, f434_arg3.input)
 	end
 end
 function PaintjobEditor_OpenSavePopup(f435_arg0, f435_arg1, f435_arg2, f435_arg3)
@@ -3810,15 +3810,15 @@ function PaintjobEditor_RemoveGrid(f437_arg0)
 	Engine[@"emblemsetgridsize"](CoD.GetCustomization(f437_arg0, "type"), 0)
 end
 function PaintjobEditor_RestoreGridState(f438_arg0)
-	Engine[@"emblemsetgridsize"](CoD.GetCustomization(f438_arg0, "type"), Engine[@"getprofilevarint"](f438_arg0, CoD.CraftUtility.GetGridTypeName(f438_arg0)))
+	Engine[@"emblemsetgridsize"](CoD.GetCustomization(f438_arg0, "type"), Engine.GetProfileVarInt(f438_arg0, CoD.CraftUtility.GetGridTypeName(f438_arg0)))
 end
 function PaintjobEditor_SavePaintjob(f439_arg0, f439_arg1, f439_arg2)
-	local f439_local0 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f439_arg2, "paintjobTextEntry"))
-	local f439_local1 = Engine[@"getmodel"](f439_arg2, "paintjobName")
-	local f439_local2 = Engine[@"mediamanagergetquota"](f439_arg1, "paintjob")
-	Engine[@"setmodelvalue"](f439_local1, f439_local0)
+	local f439_local0 = Engine.GetModelValue(Engine.GetModel(f439_arg2, "paintjobTextEntry"))
+	local f439_local1 = Engine.GetModel(f439_arg2, "paintjobName")
+	local f439_local2 = Engine.MediaManagerGetQuota(f439_arg1, "paintjob")
+	Engine.SetModelValue(f439_local1, f439_local0)
 	CoD.CraftUtility.Paintjobs.UploadPaintjob(f439_arg1, f439_arg2)
-	CoD.CraftUtility.Paintjobs.ParseDDL(f439_arg1, Enum[@"storagefiletype"][@"storage_paintjobs"])
+	CoD.CraftUtility.Paintjobs.ParseDDL(f439_arg1, Enum.StorageFileType[@"storage_paintjobs"])
 	CoD.CraftUtility.Paintjobs.InvalidateRender(f439_arg1, f439_arg2)
 	PaintJobEditor_RecordMetrics(f439_arg0, f439_arg1, f439_arg2, "save", f439_local2.categorySlotsUsed, f439_local2.categoryQuota)
 	local f439_local3 = GoBack(f439_arg0, f439_arg1)
@@ -3826,20 +3826,20 @@ function PaintjobEditor_SavePaintjob(f439_arg0, f439_arg1, f439_arg2)
 	ClearMenuSavedState(f439_local3, f439_arg1)
 end
 function OnSocialMenuBack(f440_arg0, f440_arg1)
-	local f440_local0 = Engine[@"getmodelvalue"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "socialRoot.tab"))
+	local f440_local0 = Engine.GetModelValue(Engine.GetModel(Engine.GetGlobalModel(), "socialRoot.tab"))
 	if f440_local0 == "groups" then
-		local f440_local1 = Engine[@"getmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f440_arg1), "groups.frameType"))
+		local f440_local1 = Engine.GetModelValue(Engine.CreateModel(Engine.GetModelForController(f440_arg1), "groups.frameType"))
 		if f440_local1 == "invites" or f440_local1 == "members" then
 			GroupsSocialChangeTabFrameWidget(f440_arg0, f440_arg0, f440_arg1, "main")
 			return
 		end
 	end
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f440_arg1), "groups.frameType"), "")
+	Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f440_arg1), "groups.frameType"), "")
 	if string.find(f440_local0, "clan_") ~= nil then
-		local f440_local1 = Engine[@"getglobalmodel"]()
+		local f440_local1 = Engine.GetGlobalModel()
 		f440_local1.socialRoot.tab:set("clan")
 	else
-		local f440_local1 = Engine[@"getglobalmodel"]()
+		local f440_local1 = Engine.GetGlobalModel()
 		f440_local1.socialRoot.tab:set("friends")
 	end
 	if not IsInGame() then
@@ -3847,15 +3847,15 @@ function OnSocialMenuBack(f440_arg0, f440_arg1)
 	end
 end
 function SetSocialTab(f441_arg0, f441_arg1, f441_arg2)
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "socialRoot"), "tab"), f441_arg1.tabId)
+	Engine.SetModelValue(Engine.GetModel(Engine.GetModel(Engine.GetGlobalModel(), "socialRoot"), "tab"), f441_arg1.tabId)
 end
 function FetchOnlineFriendsData(f442_arg0, f442_arg1, f442_arg2)
 	if "friends" == f442_arg1.tabId or f442_arg1.tabId == "friendsPlayersList" then
-		Engine[@"updatefriends"](f442_arg2, Enum[@"presencefilter"][@"presence_filter_online_and_in_title"])
+		Engine.UpdateFriends(f442_arg2, Enum.PresenceFilter[@"presence_filter_online_and_in_title"])
 	end
 end
 function OpenPlatformProfile(f443_arg0, f443_arg1, f443_arg2, f443_arg3, f443_arg4)
-	local f443_local0 = Engine[@"getmodelforcontroller"](f443_arg2)
+	local f443_local0 = Engine.GetModelForController(f443_arg2)
 	local f443_local1
 	if f443_arg3 then
 		f443_local1 = f443_arg3.xuid
@@ -3869,13 +3869,13 @@ function OpenPlatformProfile(f443_arg0, f443_arg1, f443_arg2, f443_arg3, f443_ar
 					Engine[@"showplatformprofile"](f443_arg2, f443_local1, f443_local2)
 				end
 			end
-			f443_local2 = Engine[@"getmodelvalue"](Engine[@"createmodel"](f443_local0, "Social.selectedFriendGamertag"))
+			f443_local2 = Engine.GetModelValue(Engine.CreateModel(f443_local0, "Social.selectedFriendGamertag"))
 		end
 	end
-	f443_local1 = Engine[@"getmodelvalue"](Engine[@"createmodel"](f443_local0, "Social.selectedFriendXUID"))
+	f443_local1 = Engine.GetModelValue(Engine.CreateModel(f443_local0, "Social.selectedFriendXUID"))
 end
 function OpenPlatformFriendRequest(f444_arg0, f444_arg1, f444_arg2, f444_arg3, f444_arg4)
-	local f444_local0 = Engine[@"getmodelforcontroller"](f444_arg2)
+	local f444_local0 = Engine.GetModelForController(f444_arg2)
 	local f444_local1
 	if f444_arg3 then
 		f444_local1 = f444_arg3.xuid
@@ -3893,17 +3893,17 @@ function OpenPlatformFriendRequest(f444_arg0, f444_arg1, f444_arg2, f444_arg3, f
 					end
 				end
 			end
-			f444_local2 = Engine[@"getmodelvalue"](Engine[@"createmodel"](f444_local0, "Social.selectedFriendGamertag"))
+			f444_local2 = Engine.GetModelValue(Engine.CreateModel(f444_local0, "Social.selectedFriendGamertag"))
 		end
 	end
-	f444_local1 = Engine[@"getmodelvalue"](Engine[@"createmodel"](f444_local0, "Social.selectedFriendXUID"))
+	f444_local1 = Engine.GetModelValue(Engine.CreateModel(f444_local0, "Social.selectedFriendXUID"))
 end
 function SocialJoin(f445_arg0, f445_arg1, f445_arg2, f445_arg3, f445_arg4, f445_arg5)
 	if CoD.isPC then
 		LobbyQuickJoinWithXuid(f445_arg0, f445_arg2, f445_arg3.xuid)
 		return
-	elseif Engine[@"isingame"]() then
-		if not Engine[@"hash_686E64DD1C270046"](Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_game"], f445_arg3.xuid) then
+	elseif Engine.IsInGame() then
+		if not Engine[@"hash_686E64DD1C270046"](Enum.LobbyModule[@"lobby_module_client"], Enum.LobbyType[@"lobby_type_game"], f445_arg3.xuid) then
 			f445_arg3.migrating = not CoDShared.QuitGame(f445_arg2)
 			Engine[@"lobbyevent"]("OnInGameJoin", f445_arg3)
 		end
@@ -3911,13 +3911,13 @@ function SocialJoin(f445_arg0, f445_arg1, f445_arg2, f445_arg3, f445_arg4, f445_
 		Engine[@"lobbyevent"]("OnJoin", f445_arg3)
 	end
 	if not f445_arg5 then
-		local f445_local0 = Engine[@"getglobalmodel"]()
+		local f445_local0 = Engine.GetGlobalModel()
 		f445_local0 = f445_local0.lobbyRoot:create("closePopups")
 		f445_local0:forceNotifySubscriptions()
 	end
 end
 function CacheSocialOnlinePlayersListModels(f446_arg0, f446_arg1, f446_arg2)
-	if Engine[@"getmodelvalue"](Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "socialRoot"), "tab")) == "party" then
+	if Engine.GetModelValue(Engine.CreateModel(Engine.CreateModel(Engine.GetGlobalModel(), "socialRoot"), "tab")) == "party" then
 		return
 	end
 	local f446_local0, f446_local1, f446_local2, f446_local3, f446_local4, f446_local5, f446_local6 = nil
@@ -3930,39 +3930,39 @@ function CacheSocialOnlinePlayersListModels(f446_arg0, f446_arg1, f446_arg2)
 		f446_local4 = f446_arg0.cachePartyAvailable
 		f446_local5 = f446_arg0.cachePartyLeader
 	else
-		local f446_local7 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "socialRoot")
-		f446_local0 = Engine[@"createmodel"](Engine[@"createmodel"](f446_local7, "cache"), "xuid")
-		f446_local1 = Engine[@"createmodel"](f446_local7, "party")
-		f446_local2 = Engine[@"createmodel"](f446_local1, "update")
-		f446_local3 = Engine[@"createmodel"](f446_local1, "total")
-		f446_local4 = Engine[@"createmodel"](f446_local1, "available")
-		f446_local5 = Engine[@"createmodel"](f446_local1, "leader")
-		Engine[@"setmodelvalue"](f446_local0, Engine[@"stringtoxuiddecimal"]("0"))
+		local f446_local7 = Engine.GetModel(Engine.GetGlobalModel(), "socialRoot")
+		f446_local0 = Engine.CreateModel(Engine.CreateModel(f446_local7, "cache"), "xuid")
+		f446_local1 = Engine.CreateModel(f446_local7, "party")
+		f446_local2 = Engine.CreateModel(f446_local1, "update")
+		f446_local3 = Engine.CreateModel(f446_local1, "total")
+		f446_local4 = Engine.CreateModel(f446_local1, "available")
+		f446_local5 = Engine.CreateModel(f446_local1, "leader")
+		Engine.SetModelValue(f446_local0, Engine.StringToXUIDDecimal("0"))
 		f446_local6 = {}
 		for f446_local8 = 1, 18, 1 do
-			f446_local6[f446_local8] = Engine[@"createmodel"](Engine[@"createmodel"](f446_local1, "pm_" .. f446_local8), "gamertag")
-			Engine[@"setmodelvalue"](f446_local6[f446_local8], "")
+			f446_local6[f446_local8] = Engine.CreateModel(Engine.CreateModel(f446_local1, "pm_" .. f446_local8), "gamertag")
+			Engine.SetModelValue(f446_local6[f446_local8], "")
 		end
 	end
 	if f446_arg1.party ~= nil then
-		Engine[@"setmodelvalue"](f446_local0, f446_arg1.xuid)
-		Engine[@"setmodelvalue"](f446_local3, f446_arg1.party.total)
-		Engine[@"setmodelvalue"](f446_local4, f446_arg1.party.available)
-		Engine[@"setmodelvalue"](f446_local5, f446_arg1.party.leader)
+		Engine.SetModelValue(f446_local0, f446_arg1.xuid)
+		Engine.SetModelValue(f446_local3, f446_arg1.party.total)
+		Engine.SetModelValue(f446_local4, f446_arg1.party.available)
+		Engine.SetModelValue(f446_local5, f446_arg1.party.leader)
 		if f446_arg1.party.members ~= nil then
 			for f446_local7 = 1, #f446_local6, 1 do
 				local f446_local10 = f446_local6[f446_local7]
 				if f446_arg1.party.members[f446_local7] ~= nil then
-					Engine[@"setmodelvalue"](f446_local10, f446_arg1.party.members[f446_local7].gamertag)
+					Engine.SetModelValue(f446_local10, f446_arg1.party.members[f446_local7].gamertag)
 				end
 			end
-			local f446_local7 = Engine[@"getmodelvalue"](f446_local2)
+			local f446_local7 = Engine.GetModelValue(f446_local2)
 			if f446_local7 < 100000 then
 				f446_local7 = f446_local7 + 1
 			else
 				f446_local7 = 0
 			end
-			Engine[@"setmodelvalue"](f446_local2, f446_local7)
+			Engine.SetModelValue(f446_local2, f446_local7)
 		end
 	end
 end
@@ -3976,53 +3976,53 @@ function SetSelectedFriendXUID(f447_arg0, f447_arg1, f447_arg2)
 			f447_local3 = f447_local2 and f447_local1.xuid:get()
 		end
 		if f447_local3 ~= nil then
-			local f447_local4 = Engine[@"getmodelforcontroller"](f447_arg2)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f447_local4, "Social.selectedFriendXUID"), f447_local3)
+			local f447_local4 = Engine.GetModelForController(f447_arg2)
+			Engine.SetModelValue(Engine.CreateModel(f447_local4, "Social.selectedFriendXUID"), f447_local3)
 			local f447_local5 = f447_local1.info and f447_local1.info:get() or f447_local1
 			local f447_local6 = f447_local5 and f447_local5.gamertag
 			local f447_local7 = f447_local6 and f447_local6:get()
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f447_local4, "Social.selectedFriendGamertag"), f447_local7)
+			Engine.SetModelValue(Engine.CreateModel(f447_local4, "Social.selectedFriendGamertag"), f447_local7)
 			if Engine[@"uint64tostring"](f447_local3) == "fefefefefefefefe" then
-				local f447_local8 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f447_arg2), "socialPlayerInfo.identityBadge")
-				Engine[@"setmodelvalue"](Engine[@"createmodel"](f447_local8, "gamertag"), f447_local7)
-				Engine[@"setmodelvalue"](Engine[@"createmodel"](f447_local8, "clantag"), "")
+				local f447_local8 = Engine.CreateModel(Engine.GetModelForController(f447_arg2), "socialPlayerInfo.identityBadge")
+				Engine.SetModelValue(Engine.CreateModel(f447_local8, "gamertag"), f447_local7)
+				Engine.SetModelValue(Engine.CreateModel(f447_local8, "clantag"), "")
 			end
 			if not CoD.isPC then
 				local f447_local8 = f447_local5 and f447_local5.presence
 				if f447_local8 ~= nil then
-					Engine[@"setmodelvalue"](Engine[@"createmodel"](f447_local4, "Social.selectedFriendInTitle"), f447_local8:get() > Enum[@"presencetitle"][@"hash_7A2184EBB293AF2D"])
+					Engine.SetModelValue(Engine.CreateModel(f447_local4, "Social.selectedFriendInTitle"), f447_local8:get() > Enum[@"presencetitle"][@"hash_7A2184EBB293AF2D"])
 				end
 			else
-				Engine[@"setmodelvalue"](Engine[@"createmodel"](f447_local4, "Social.selectedFriendInTitle"), (f447_local1.battlenetPresence and f447_local1.battlenetPresence:get() or CoD.PCBattlenetUtility.GetBattlenetPresence(f447_local3)) ~= Enum[@"hash_28811A60F2FF3ADA"][@"hash_5D7B6D45F00CF380"])
+				Engine.SetModelValue(Engine.CreateModel(f447_local4, "Social.selectedFriendInTitle"), (f447_local1.battlenetPresence and f447_local1.battlenetPresence:get() or CoD.PCBattlenetUtility.GetBattlenetPresence(f447_local3)) ~= Enum[@"hash_28811A60F2FF3ADA"][@"hash_5D7B6D45F00CF380"])
 			end
 		end
 	end
 end
 function SocialToggleSorting(f448_arg0, f448_arg1, f448_arg2)
-	local f448_local0 = Engine[@"getmodel"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "socialRoot"), "sort")
-	local f448_local1 = Engine[@"getmodelvalue"](f448_local0)
-	if f448_local1 == Enum[@"presencesorting"][@"presence_sorting_online_most_recent"] then
-		Engine[@"setmodelvalue"](f448_local0, Enum[@"presencesorting"][@"presence_sorting_alphabetical"])
-		Engine[@"sortfriends"](f448_arg2, Enum[@"presencesorting"][@"presence_sorting_alphabetical"])
-	elseif f448_local1 == Enum[@"presencesorting"][@"presence_sorting_alphabetical"] then
-		Engine[@"setmodelvalue"](f448_local0, Enum[@"presencesorting"][@"presence_sorting_online_most_recent"])
-		Engine[@"sortfriends"](f448_arg2, Enum[@"presencesorting"][@"presence_sorting_online_most_recent"])
+	local f448_local0 = Engine.GetModel(Engine.GetModel(Engine.GetGlobalModel(), "socialRoot"), "sort")
+	local f448_local1 = Engine.GetModelValue(f448_local0)
+	if f448_local1 == Enum.PresenceSorting[@"presence_sorting_online_most_recent"] then
+		Engine.SetModelValue(f448_local0, Enum.PresenceSorting[@"presence_sorting_alphabetical"])
+		Engine.SortFriends(f448_arg2, Enum.PresenceSorting[@"presence_sorting_alphabetical"])
+	elseif f448_local1 == Enum.PresenceSorting[@"presence_sorting_alphabetical"] then
+		Engine.SetModelValue(f448_local0, Enum.PresenceSorting[@"presence_sorting_online_most_recent"])
+		Engine.SortFriends(f448_arg2, Enum.PresenceSorting[@"presence_sorting_online_most_recent"])
 	end
 end
 function SocialEnablePresenceCacheAutoupdate(f449_arg0, f449_arg1)
-	if Engine[@"enablepresencecacheautoupdate"] ~= nil then
-		Engine[@"enablepresencecacheautoupdate"](f449_arg0, f449_arg1)
+	if Engine.EnablePresenceCacheAutoupdate ~= nil then
+		Engine.EnablePresenceCacheAutoupdate(f449_arg0, f449_arg1)
 	end
 end
 function UpdateFriends(f450_arg0, f450_arg1, f450_arg2)
 	local f450_local0 = f450_arg0
-	Engine[@"updatefriends"](f450_arg2, Enum[@"presencefilter"][@"presence_filter_online_and_in_title"])
+	Engine.UpdateFriends(f450_arg2, Enum.PresenceFilter[@"presence_filter_online_and_in_title"])
 end
 function SpectateSelectedPlayer(f451_arg0, f451_arg1, f451_arg2)
-	Engine[@"sendmenuresponse"](f451_arg2, "spectate", "clientNum", Engine[@"getmodelvalue"](Engine[@"getmodel"](f451_arg1:getModel(), "clientNum")))
+	Engine.SendMenuResponse(f451_arg2, "spectate", "clientNum", Engine.GetModelValue(Engine.GetModel(f451_arg1:getModel(), "clientNum")))
 end
 function SetShoutcastHighlightedPlayer(f452_arg0, f452_arg1, f452_arg2)
-	Dvar[@"shoutcasthighlightedclient"]:set(Engine[@"getmodelvalue"](Engine[@"getmodel"](f452_arg1:getModel(), "clientNum")))
+	Dvar[@"shoutcasthighlightedclient"]:set(Engine.GetModelValue(Engine.GetModel(f452_arg1:getModel(), "clientNum")))
 end
 function ToggleCodCasterQuickSettings(f453_arg0, f453_arg1, f453_arg2)
 	if not f453_arg1.profileVar then
@@ -4032,9 +4032,9 @@ function ToggleCodCasterQuickSettings(f453_arg0, f453_arg1, f453_arg2)
 	else
 		CoD.SetShoutcasterProfileVarValue(f453_arg2, f453_arg1.profileVar, 0)
 	end
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](f453_arg1:getModel(), "profileVarValue"), CoD.ShoutcasterProfileVarBool(f453_arg2, f453_arg1.profileVar))
-	if Engine[@"isingame"]() and f453_arg1.profileVar == "shoutcaster_ds_thirdperson" then
-		Engine[@"execnow"](f453_arg2, "shoutcaster_thirdperson " .. CoD.ShoutcasterProfileVarValue(f453_arg2, f453_arg1.profileVar))
+	Engine.SetModelValue(Engine.GetModel(f453_arg1:getModel(), "profileVarValue"), CoD.ShoutcasterProfileVarBool(f453_arg2, f453_arg1.profileVar))
+	if Engine.IsInGame() and f453_arg1.profileVar == "shoutcaster_ds_thirdperson" then
+		Engine.ExecNow(f453_arg2, "shoutcaster_thirdperson " .. CoD.ShoutcasterProfileVarValue(f453_arg2, f453_arg1.profileVar))
 	end
 end
 function SetCodCasterProfileValue(f454_arg0, f454_arg1, f454_arg2, f454_arg3, f454_arg4)
@@ -4057,14 +4057,14 @@ function AdjustShoutcasterTeam(f455_arg0, f455_arg1, f455_arg2, f455_arg3)
 end
 function HandleTeamIdentityKeyboardComplete(f456_arg0, f456_arg1, f456_arg2, f456_arg3)
 	local f456_local0, f456_local1 = nil
-	local f456_local2 = Engine[@"getmodelvalue"](Engine[@"getmodel"](DataSources.TeamIdentity.getModel(f456_arg2), "team"))
+	local f456_local2 = Engine.GetModelValue(Engine.GetModel(DataSources.TeamIdentity.getModel(f456_arg2), "team"))
 	local f456_local3 = DataSources.TeamIdentityInformation.getModel(f456_arg2, f456_local2)
-	if f456_arg3.type == Enum[@"keyboardtype"][@"keyboard_type_team_identity_teamname"] then
-		f456_local0 = Engine[@"getmodel"](f456_local3, "teamName")
+	if f456_arg3.type == Enum.KeyboardType[@"keyboard_type_team_identity_teamname"] then
+		f456_local0 = Engine.GetModel(f456_local3, "teamName")
 		f456_local1 = "shoutcaster_fe_" .. f456_local2 .. "_name"
 	end
 	if f456_local0 then
-		Engine[@"setmodelvalue"](f456_local0, f456_arg3.input)
+		Engine.SetModelValue(f456_local0, f456_arg3.input)
 		CoD.SetShoutcasterProfileVarValue(f456_arg2, f456_local1, f456_arg3.input)
 	end
 end
@@ -4072,40 +4072,40 @@ function SetTeamIdentityProfileValue(f457_arg0, f457_arg1, f457_arg2, f457_arg3)
 	if not f457_arg3 or f457_arg3 == "" then
 		return
 	else
-		local f457_local0 = Engine[@"getmodel"](f457_arg1:getModel(), "id")
+		local f457_local0 = Engine.GetModel(f457_arg1:getModel(), "id")
 		if not f457_local0 then
 			return
 		else
-			CoD.SetShoutcasterProfileVarValue(f457_arg2, "shoutcaster_fe_" .. Engine[@"getmodelvalue"](Engine[@"getmodel"](DataSources.TeamIdentity.getModel(f457_arg2), "team")) .. "_" .. f457_arg3, Engine[@"getmodelvalue"](f457_local0))
+			CoD.SetShoutcasterProfileVarValue(f457_arg2, "shoutcaster_fe_" .. Engine.GetModelValue(Engine.GetModel(DataSources.TeamIdentity.getModel(f457_arg2), "team")) .. "_" .. f457_arg3, Engine.GetModelValue(f457_local0))
 		end
 	end
 end
 function SetTeamIdentityTeamLogo(f458_arg0, f458_arg1, f458_arg2)
-	local f458_local0 = DataSources.TeamIdentityInformation.getModel(f458_arg2, Engine[@"getmodelvalue"](Engine[@"getmodel"](DataSources.TeamIdentity.getModel(f458_arg2), "team")))
-	local f458_local1 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f458_arg1:getModel(), "ref"))
-	local f458_local2 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f458_arg1:getModel(), "name"))
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](f458_local0, "teamLogo"), f458_local1)
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](f458_local0, "teamLogoName"), f458_local2)
+	local f458_local0 = DataSources.TeamIdentityInformation.getModel(f458_arg2, Engine.GetModelValue(Engine.GetModel(DataSources.TeamIdentity.getModel(f458_arg2), "team")))
+	local f458_local1 = Engine.GetModelValue(Engine.GetModel(f458_arg1:getModel(), "ref"))
+	local f458_local2 = Engine.GetModelValue(Engine.GetModel(f458_arg1:getModel(), "name"))
+	Engine.SetModelValue(Engine.GetModel(f458_local0, "teamLogo"), f458_local1)
+	Engine.SetModelValue(Engine.GetModel(f458_local0, "teamLogoName"), f458_local2)
 end
 function SetTeamIdentityTeamColor(f459_arg0, f459_arg1, f459_arg2)
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](DataSources.TeamIdentityInformation.getModel(f459_arg2, Engine[@"getmodelvalue"](Engine[@"getmodel"](DataSources.TeamIdentity.getModel(f459_arg2), "team"))), "teamColor"), Engine[@"getmodelvalue"](Engine[@"getmodel"](f459_arg1:getModel(), "color")))
+	Engine.SetModelValue(Engine.GetModel(DataSources.TeamIdentityInformation.getModel(f459_arg2, Engine.GetModelValue(Engine.GetModel(DataSources.TeamIdentity.getModel(f459_arg2), "team"))), "teamColor"), Engine.GetModelValue(Engine.GetModel(f459_arg1:getModel(), "color")))
 end
 function UpdateSelectedTeamIdentityColorElement(f460_arg0, f460_arg1, f460_arg2)
-	local f460_local0 = CoD.ShoutcasterProfileVarValue(f460_arg2, "shoutcaster_fe_" .. Engine[@"getmodelvalue"](Engine[@"getmodel"](DataSources.TeamIdentity.getModel(f460_arg2), "team")) .. "_color")
-	local f460_local1 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f460_arg1:getModel(), "id"))
+	local f460_local0 = CoD.ShoutcasterProfileVarValue(f460_arg2, "shoutcaster_fe_" .. Engine.GetModelValue(Engine.GetModel(DataSources.TeamIdentity.getModel(f460_arg2), "team")) .. "_color")
+	local f460_local1 = Engine.GetModelValue(Engine.GetModel(f460_arg1:getModel(), "id"))
 	local f460_local2 = f460_arg0.TeamColorList:findItem({
 		id = f460_local0,
 	})
 	if f460_local2 then
-		Engine[@"setmodelvalue"](Engine[@"getmodel"](f460_local2:getModel(), "selected"), false)
+		Engine.SetModelValue(Engine.GetModel(f460_local2:getModel(), "selected"), false)
 	end
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](f460_arg1:getModel(), "selected"), true)
+	Engine.SetModelValue(Engine.GetModel(f460_arg1:getModel(), "selected"), true)
 end
 function SaveShoutcasterSettings(f461_arg0, f461_arg1, f461_arg2)
-	Engine[@"storagewrite"](f461_arg2, Enum[@"storagefiletype"][@"storage_profile_shoutcaster"])
+	Engine.StorageWrite(f461_arg2, Enum.StorageFileType[@"storage_profile_shoutcaster"])
 end
 function OpenBlackMarket(f462_arg0, f462_arg1, f462_arg2)
-	if Engine[@"pushanticheatmessagetoui"](f462_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.LOOT) then
+	if Engine.PushAnticheatMessageToUI(f462_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.LOOT) then
 		DisplayAnticheatMessage(f462_arg0, f462_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.LOOT, "", "")
 		return
 	end
@@ -4134,7 +4134,7 @@ function QuitPCGame_WZ_Spectating(f464_arg0, f464_arg1)
 	end
 end
 function OpenPCQuit(f465_arg0, f465_arg1, f465_arg2, f465_arg3)
-	if CoD.isPC and not Engine[@"iscinematicplaying"]() then
+	if CoD.isPC and not Engine.IsCinematicPlaying() then
 		local f465_local0 = f465_arg0:getMenu()
 		if f465_local0.pcQuitOverlayActive ~= nil then
 			f465_local0.pcQuitOverlayActive = true
@@ -4176,69 +4176,69 @@ function ResetEverythingOnPC(f469_arg0, f469_arg1)
 	Dvar.cl_firstTimeOpenControlsOptionsScreen:set(true)
 	CoD.CACUtility.SetDefaultLoadouts({
 		controller = f469_arg1,
-		storageFileType = Enum[@"storagefiletype"][@"storage_mp_loadouts_offline"],
+		storageFileType = Enum.StorageFileType[@"storage_mp_loadouts_offline"],
 	})
 	CoD.CACUtility.SetDefaultLoadouts({
 		controller = f469_arg1,
-		storageFileType = Enum[@"storagefiletype"][@"hash_D062FA7B47FC13A"],
+		storageFileType = Enum.StorageFileType[@"hash_D062FA7B47FC13A"],
 	})
 end
 function GetGameplayOptionsAndSendToDlog(f470_arg0)
 	local f470_local0 = {}
 	for f470_local4, f470_local5 in ipairs({
-		@"hitmarkers_enable",
-		@"hitmarkers_damage_type",
-		@"healthbar_show_ally",
-		@"healthbar_show_enemy",
-		@"cursor_immediate_lock_map",
-		@"cursor_immediate_lock_inventory",
-		@"show_real_names",
-		@"chat_profanity_filter",
-		@"zm_cartoonmode",
-		@"display_crosshair",
-		@"ui_play_intro_movies",
-		@"show_global_chat",
-		@"show_team_chat",
-		@"out_of_ammo_auto_weapon_change",
-		@"weapon_cycle_disable_wrap",
-		@"windows_key_disable",
-		@"vehicle_alternate_control",
-		@"vehicle_alternate_control_water",
-		@"trophysystem_toggle",
-		@"molotov_toggle",
-		@"fraggrenade_toggle",
-		@"slowgrenade_toggle",
-		@"combataxe_toggle",
-		@"swatgrenade_toggle",
-		@"altads_toggle",
-		@"semtex_toggle",
-		@"supplypod_toggle",
-		@"radiation_toggle",
-		@"radiation_inversecam",
-		@"tripwire_alternate",
-		@"sensordart_toggle",
-		@"grapple_autohold",
-		@"spawnbeacon_toggle",
-		@"smartcover_toggle",
-		@"concertina_toggle",
-		@"smokescreen_toggle",
-		@"seeker_mine_toggle",
-		@"cymbal_monkey_toggle",
-		@"claymore_toggle",
-		@"health_regen_toggle",
+		"hitmarkers_enable",
+		"hitmarkers_damage_type",
+		"healthbar_show_ally",
+		"healthbar_show_enemy",
+		"cursor_immediate_lock_map",
+		"cursor_immediate_lock_inventory",
+		"show_real_names",
+		"chat_profanity_filter",
+		"zm_cartoonmode",
+		"display_crosshair",
+		"ui_play_intro_movies",
+		"show_global_chat",
+		"show_team_chat",
+		"out_of_ammo_auto_weapon_change",
+		"weapon_cycle_disable_wrap",
+		"windows_key_disable",
+		"vehicle_alternate_control",
+		"vehicle_alternate_control_water",
+		"trophysystem_toggle",
+		"molotov_toggle",
+		"fraggrenade_toggle",
+		"slowgrenade_toggle",
+		"combataxe_toggle",
+		"swatgrenade_toggle",
+		"altads_toggle",
+		"semtex_toggle",
+		"supplypod_toggle",
+		"radiation_toggle",
+		"radiation_inversecam",
+		"tripwire_alternate",
+		"sensordart_toggle",
+		"grapple_autohold",
+		"spawnbeacon_toggle",
+		"smartcover_toggle",
+		"concertina_toggle",
+		"smokescreen_toggle",
+		"seeker_mine_toggle",
+		"cymbal_monkey_toggle",
+		"claymore_toggle",
+		"health_regen_toggle",
 	}) do
-		if f470_local5 == @"grapple_autohold" then
-			f470_local0[@"grapple_autohold"] = CoD.PCOptionsUtility.GetCurrentOptionValue(f470_local5, f470_arg0) ~= 0
+		if f470_local5 == "grapple_autohold" then
+			f470_local0.grapple_autohold = CoD.PCOptionsUtility.GetCurrentOptionValue(f470_local5, f470_arg0) ~= 0
 		end
-		if f470_local5 == @"zm_cartoonmode" then
-			f470_local0[@"zm_cartoonmode"] = CoD.PCOptionsUtility.GetCurrentOptionValue(f470_local5, f470_arg0) ~= 0
+		if f470_local5 == "zm_cartoonmode" then
+			f470_local0.zm_cartoonmode = CoD.PCOptionsUtility.GetCurrentOptionValue(f470_local5, f470_arg0) ~= 0
 		else
 			f470_local0[f470_local5] = CoD.PCOptionsUtility.GetCurrentOptionValue(f470_local5, f470_arg0) ~= 0
 		end
 	end
-	f470_local0[@"m_mousesensitivity"] = Dvar[@"m_mousesensitivity"]:get()
-	f470_local0[@"cg_fov_default"] = Dvar[@"cg_fov_default"]:get()
-	f470_local0[@"weapon_cycle_delay"] = Dvar[@"cg_weaponcycledelay"]:get()
+	f470_local0.m_mousesensitivity = Dvar.m_mousesensitivity:get()
+	f470_local0.cg_fov_default = Dvar.cg_fov_default:get()
+	f470_local0.weapon_cycle_delay = Dvar[@"cg_weaponcycledelay"]:get()
 	Engine[0xDE279ECDDDD966](f470_arg0, @"hash_521034E1157F040C", f470_local0)
 end
 function GetKeybindsAndSendToDlog(f471_arg0)
@@ -4413,7 +4413,7 @@ function GetKeybindsAndSendToDlog(f471_arg0)
 	f471_local2[70] = f471_local8
 	f471_local2[71] = f471_local9
 	for f471_local6, f471_local7 in ipairs(f471_local2) do
-		f471_local8 = Engine[@"keybinding"](f471_arg0, f471_local7, false)
+		f471_local8 = Engine.KeyBinding(f471_arg0, f471_local7, false)
 		f471_local9 = string.gsub(f471_local7, "+", "")
 		if string.find(f471_local8, "%^") ~= nil then
 			f471_local8 = f471_local0(f471_local8)
@@ -4431,36 +4431,36 @@ function DispatchOptionRefreshEvent(f473_arg0, f473_arg1)
 end
 function ResetPCBindingsToDefault(f474_arg0, f474_arg1)
 	if Dvar[@"ui_execdemo_gamescom"]:get() then
-		Engine[@"execnow"](f474_arg1, "resetprofilecommon")
-		Engine[@"execnow"](f474_arg1, "updategamerprofile")
-		Engine[@"execnow"](f474_arg1, "storagereset stats_mp_offline")
+		Engine.ExecNow(f474_arg1, "resetprofilecommon")
+		Engine.ExecNow(f474_arg1, "updategamerprofile")
+		Engine.ExecNow(f474_arg1, "storagereset stats_mp_offline")
 	end
-	Engine[@"execnow"](f474_arg1, "defaultbindings")
-	Engine[@"execnow"](f474_arg1, "execcontrollerbindings")
-	Engine[@"synchardwareprofilewithdvars"]()
+	Engine.ExecNow(f474_arg1, "defaultbindings")
+	Engine.ExecNow(f474_arg1, "execcontrollerbindings")
+	Engine.SyncHardwareProfileWithDvars()
 	Dvar.cl_bindings_presetId:set(0)
 	Dvar.cl_bindings_presetIsModified:set(false)
 	DispatchOptionRefreshEvent(f474_arg0, f474_arg1)
 end
 function LoadPCBindings(f475_arg0, f475_arg1, f475_arg2)
-	Engine[@"execnow"](f475_arg1, "selectbindings " .. f475_arg2)
+	Engine.ExecNow(f475_arg1, "selectbindings " .. f475_arg2)
 	DispatchOptionRefreshEvent(f475_arg0, f475_arg1)
 end
 function ResetPCBindings(f476_arg0, f476_arg1)
-	Engine[@"execnow"](f476_arg1, "defaultbindings")
+	Engine.ExecNow(f476_arg1, "defaultbindings")
 	DispatchOptionRefreshEvent(f476_arg0, f476_arg1)
 end
 function ResetPCGraphicsOptions(f477_arg0, f477_arg1, f477_arg2, f477_arg3)
-	Engine[@"resethardwareprofilesettings"](f477_arg2)
-	Engine[@"savehardwareprofile"]()
-	Engine[@"exec"](nil, "vid_restart")
+	Engine.ResetHardwareProfileSettings(f477_arg2)
+	Engine.SaveHardwareProfile()
+	Engine.exec(nil, "vid_restart")
 	CoD.PCOptionsUtility.RevertPCHardwareChanges(f477_arg0, f477_arg2)
 	CoD.PCOptionsUtility.RefreshAllOptions(f477_arg1, f477_arg2)
 	CoD.PCOptionsUtility.DelayVRAMBarUpdate(f477_arg3:getParent(), f477_arg2, 0)
 end
 function SetVerticaListSpacerHeight(f478_arg0, f478_arg1)
 	if f478_arg1 then
-		local f478_local0 = Engine[@"getmodelvalue"](f478_arg1)
+		local f478_local0 = Engine.GetModelValue(f478_arg1)
 		if f478_local0 then
 			f478_arg0:setTopBottom(true, false, 0, f478_local0)
 		end
@@ -4478,17 +4478,17 @@ end
 function Gunsmith_ClearSelectedGunsmithVariantStats(f482_arg0)
 	local f482_local0 = CoD.perController[f482_arg0].gunsmithVariantModel
 	if f482_local0 then
-		local f482_local1 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f482_local0, "variantIndex"))
-		CoD.CraftUtility.Gunsmith.ClearVariantStats(f482_arg0, f482_local1, Enum[@"emodes"][@"mode_multiplayer"])
-		CoD.CraftUtility.Gunsmith.ClearVariantStats(f482_arg0, f482_local1, Enum[@"emodes"][@"mode_campaign"])
+		local f482_local1 = Engine.GetModelValue(Engine.GetModel(f482_local0, "variantIndex"))
+		CoD.CraftUtility.Gunsmith.ClearVariantStats(f482_arg0, f482_local1, Enum.eModes.mode_multiplayer)
+		CoD.CraftUtility.Gunsmith.ClearVariantStats(f482_arg0, f482_local1, Enum.eModes.mode_campaign)
 	end
 end
 function Gunsmith_ClearCACWithUpdatedVariant(f483_arg0, f483_arg1)
-	local f483_local0 = Engine[@"getmodelvalue"](Engine[@"getmodel"](CoD.perController[f483_arg1].gunsmithVariantModel, "variantIndex")) + 1
+	local f483_local0 = Engine.GetModelValue(Engine.GetModel(CoD.perController[f483_arg1].gunsmithVariantModel, "variantIndex")) + 1
 	local f483_local1 = function(f484_arg0, f484_arg1, f484_arg2)
-		local f484_local0 = Engine[@"getclassitem"](f483_arg1, f484_arg0, f484_arg1, f484_arg2)
+		local f484_local0 = Engine.GetClassItem(f483_arg1, f484_arg0, f484_arg1, f484_arg2)
 		if f484_local0 > CoD.CACUtility.EmptyItemIndex and f484_local0 == f483_local0 then
-			Engine[@"setclassitem"](f483_arg1, f484_arg0, f484_arg1, CoD.CACUtility.EmptyItemIndex, f484_arg2)
+			Engine.SetClassItem(f483_arg1, f484_arg0, f484_arg1, CoD.CACUtility.EmptyItemIndex, f484_arg2)
 		end
 	end
 	local f483_local2 = function(f485_arg0)
@@ -4499,17 +4499,17 @@ function Gunsmith_ClearCACWithUpdatedVariant(f483_arg0, f483_arg1)
 			f483_local1(f485_local4, "secondarygunsmithvariant", f485_arg0)
 		end
 	end
-	f483_local2(Enum[@"emodes"][@"mode_campaign"])
-	f483_local2(Enum[@"emodes"][@"mode_multiplayer"])
+	f483_local2(Enum.eModes.mode_campaign)
+	f483_local2(Enum.eModes.mode_multiplayer)
 end
 function Gunsmith_SnapshotToggleDisplayProperty(f486_arg0, f486_arg1, f486_arg2)
 	local f486_local0 = f486_arg1:getModel(f486_arg2, "param")
 	if f486_local0 then
-		local f486_local1 = Engine[@"getmodelvalue"](f486_local0)
+		local f486_local1 = Engine.GetModelValue(f486_local0)
 		if f486_local1 then
-			local f486_local2 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), f486_local1)
+			local f486_local2 = Engine.GetModel(Engine.GetGlobalModel(), f486_local1)
 			if f486_local2 then
-				Engine[@"setmodelvalue"](f486_local2, (Engine[@"getmodelvalue"](f486_local2) + 1) % 2)
+				Engine.SetModelValue(f486_local2, (Engine.GetModelValue(f486_local2) + 1) % 2)
 			end
 		end
 	end
@@ -4561,7 +4561,7 @@ function StartMenuGoBack(f492_arg0, f492_arg1)
 			if f492_arg0.occludedBy ~= nil then
 				f492_arg0.occludedMenu.occludedBy = f492_arg0.occludedBy
 			else
-				if IsGameTypeDOA() and Engine[@"issplitscreen"]() then
+				if IsGameTypeDOA() and Engine.issplitscreen() then
 					f492_arg0.occludedMenu:setOwner(f492_arg0:getOwner())
 				end
 				f492_arg0.occludedMenu:processEvent({
@@ -4570,7 +4570,7 @@ function StartMenuGoBack(f492_arg0, f492_arg1)
 					occludedBy = f492_arg0,
 					controller = f492_arg1,
 				})
-				local f492_local0 = Engine[@"getmodelforcontroller"](f492_arg1)
+				local f492_local0 = Engine.GetModelForController(f492_arg1)
 				f492_local0 = f492_local0.PositionDraft.stage:get()
 				if f492_local0 and f492_local0 > 0 then
 					f492_arg0.occludedMenu:setAlpha(1)
@@ -4618,19 +4618,19 @@ function UpdateStartMenuTabsDatasource(f494_arg0)
 	end
 end
 function StartMenuResumeGame(f495_arg0, f495_arg1)
-	if Engine[@"isingame"]() and Engine[@"canpausegame"]() and not Engine[@"isdemoplaying"]() then
+	if Engine.IsInGame() and Engine.CanPauseGame() and not Engine[@"isdemoplaying"]() then
 		if IsZombies() then
 			Engine[@"hash_7FA25B276065ED3C"]()
 		else
-			Engine[@"setdvar"]("cl_paused", 0)
+			Engine.SetDvar("cl_paused", 0)
 		end
 	end
-	if Engine[@"isingame"]() then
+	if Engine.IsInGame() then
 		local f495_local0 = 0
-		local f495_local1 = Engine[@"getmaxlocalcontrollers"]() - 1
+		local f495_local1 = Engine.GetMaxLocalControllers() - 1
 		for f495_local2 = f495_local0, f495_local1, 1 do
-			if Engine[@"iscontrollerbeingused"](f495_local2) then
-				Engine[@"setactivemenu"](f495_local2, Enum[@"uimenucommand_t"][@"uimenu_none"])
+			if Engine.IsControllerBeingUsed(f495_local2) then
+				Engine.SetActiveMenu(f495_local2, Enum[@"uimenucommand_t"][@"uimenu_none"])
 			end
 		end
 	end
@@ -4642,19 +4642,19 @@ function CloseStartMenu(f496_arg0, f496_arg1)
 	end
 end
 function RefreshLobbyRoom(f497_arg0, f497_arg1)
-	if Engine[@"isingame"]() then
+	if Engine.IsInGame() then
 		return
 	end
-	local f497_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.lobbyGameMode")
-	local f497_local1 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.lobbyMainMode")
-	local f497_local2 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.isMatchmaking")
-	local f497_local3 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.showSelect")
-	local f497_local4 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.room")
+	local f497_local0 = Engine.GetModel(Engine.GetGlobalModel(), "lobbyRoot.lobbyGameMode")
+	local f497_local1 = Engine.GetModel(Engine.GetGlobalModel(), "lobbyRoot.lobbyMainMode")
+	local f497_local2 = Engine.GetModel(Engine.GetGlobalModel(), "lobbyRoot.isMatchmaking")
+	local f497_local3 = Engine.GetModel(Engine.GetGlobalModel(), "lobbyRoot.showSelect")
+	local f497_local4 = Engine.GetModel(Engine.GetGlobalModel(), "lobbyRoot.room")
 	if f497_local4 then
-		local f497_local5 = Engine[@"getmodelvalue"](f497_local4)
+		local f497_local5 = Engine.GetModelValue(f497_local4)
 		if f497_local5 == "auto" then
-			f497_local5 = Engine[@"getabbreviationformode"](Engine[@"getmostrecentplayedmode"](f497_arg1))
-			if Engine[@"sessionmodeismode"](Enum[@"enetworkmodes"][@"mode_network_systemlink"]) == true then
+			f497_local5 = Engine.GetAbbreviationForMode(Engine.GetMostRecentPlayedMode(f497_arg1))
+			if Engine.SessionModeIsMode(Enum[@"enetworkmodes"][@"mode_network_systemlink"]) == true then
 				f497_local5 = f497_local5 .. "_local"
 			end
 			if IsCustomLobby() then
@@ -4662,16 +4662,16 @@ function RefreshLobbyRoom(f497_arg0, f497_arg1)
 			end
 		end
 		local f497_local6 = LobbyData.GetCurrentMenuTarget()
-		if f497_local2:get() and f497_local1:get() == Enum[@"lobbymainmode"][@"lobby_mainmode_mp"] and IsLobbyMode(Enum[@"lobbymode"][@"lobby_mode_public"]) then
+		if f497_local2:get() and f497_local1:get() == Enum.LobbyMainMode[@"lobby_mainmode_mp"] and IsLobbyMode(Enum.LobbyMode[@"lobby_mode_public"]) then
 			SendCustomClientScriptMenuStateChangeNotify(f497_arg1, "Main", true, "matchmaking")
-		elseif not f497_local3:get() and f497_local6[@"name"] == LuaEnum.UI.DIRECTOR_ONLINE then
+		elseif not f497_local3:get() and f497_local6.name == LuaEnum.UI.DIRECTOR_ONLINE then
 			SendCustomClientScriptMenuStateChangeNotify(f497_arg1, "Main", true, "room3")
 		else
 			SendCustomClientScriptMenuStateChangeNotify(f497_arg1, "Main", true, f497_local5)
 		end
 		f497_arg0.previousRoom = f497_local5
 	end
-	if LuaUtils.GetEModeForLobbyMainMode(f497_local1:get()) == Enum[@"emodes"][@"mode_campaign"] and not IsFirstTimeSetup(f497_arg1, Enum[@"emodes"][@"mode_campaign"]) then
+	if LuaUtils.GetEModeForLobbyMainMode(f497_local1:get()) == Enum.eModes.mode_campaign and not IsFirstTimeSetup(f497_arg1, Enum.eModes.mode_campaign) then
 		CoD.CPUtility.EnteredCP_FlowComplete(f497_arg1)
 	end
 end
@@ -4703,7 +4703,7 @@ function UpdatePlayerInspection(f499_arg0, f499_arg1, f499_arg2)
 		if not f499_local1 then
 		else
 			if Engine[@"xuidisvalid"](f499_local1) then
-				Engine[@"sendclientscriptnotify"](f499_arg2, "inspect_player", {
+				Engine.SendClientScriptNotify(f499_arg2, "inspect_player", {
 					xuid = Engine[@"xuidtostring"](f499_local1),
 				})
 			end
@@ -4721,8 +4721,8 @@ function UpdatePlayerInspectionWeapon(f500_arg0, f500_arg1, f500_arg2)
 		f500_local1 = f500_local1.xuid:get()
 		if not f500_local1 then
 		else
-			local f500_local2 = Engine[@"currentsessionmode"]()
-			if f500_local2 >= Enum[@"emodes"][@"mode_count"] then
+			local f500_local2 = Engine.CurrentSessionMode()
+			if f500_local2 >= Enum.eModes[@"mode_count"] then
 				return
 			end
 			local f500_local3 = {
@@ -4740,7 +4740,7 @@ function UpdatePlayerInspectionWeapon(f500_arg0, f500_arg1, f500_arg2)
 						local f500_local8 = ""
 						for f500_local12, f500_local13 in ipairs(f500_local4.attachments) do
 							if f500_local13.attachmentIndex > CoD.CACUtility.EmptyItemIndex then
-								f500_local8 = LUI.appendStringWithDelimiter(f500_local8, Engine[@"getattachmentref"](f500_local6, f500_local13.attachmentIndex), "+")
+								f500_local8 = LUI.appendStringWithDelimiter(f500_local8, Engine.GetAttachmentRef(f500_local6, f500_local13.attachmentIndex), "+")
 							end
 						end
 						f500_local3 = {
@@ -4753,17 +4753,17 @@ function UpdatePlayerInspectionWeapon(f500_arg0, f500_arg1, f500_arg2)
 					end
 				end
 			end
-			Engine[@"sendclientscriptnotify"](f500_arg2, "inspect_player_weapon", f500_local3)
+			Engine.SendClientScriptNotify(f500_arg2, "inspect_player_weapon", f500_local3)
 		end
 	end
 	f500_local1 = f500_arg1:getModel()
 	f500_local1 = f500_local1.xuid:get()
 end
 function UpdateGamerprofile(f501_arg0, f501_arg1, f501_arg2)
-	Engine[@"exec"](f501_arg2, "updategamerprofile")
+	Engine.exec(f501_arg2, "updategamerprofile")
 end
 function OpenGroupEmblemSelect(f502_arg0, f502_arg1, f502_arg2, f502_arg3, f502_arg4)
-	CoD.SetCustomization(f502_arg2, Enum[@"customizationtype"][@"customization_type_emblem"], "type")
+	CoD.SetCustomization(f502_arg2, Enum.CustomizationType[@"customization_type_emblem"], "type")
 	Engine[@"emblemgetprofile"](f502_arg2)
 	local f502_local0 = true
 	CoD.perController[f502_arg2].selectedEmblemTabStorageType = f502_arg3
@@ -4775,13 +4775,13 @@ function OpenGroupEmblemSelect(f502_arg0, f502_arg1, f502_arg2, f502_arg3, f502_
 	if f502_local0 then
 		OpenOverlay(f502_arg0, "EmblemSelect", f502_arg2, {
 			_selectGroupEmblem = true,
-			_storageClientBuffer = CoD.BreadcrumbUtility.GetStorageClientBufferForPlayer(f502_arg2, Enum[@"emodes"][@"mode_multiplayer"]),
+			_storageClientBuffer = CoD.BreadcrumbUtility.GetStorageClientBufferForPlayer(f502_arg2, Enum.eModes.mode_multiplayer),
 		})
 	end
 end
 function OpenEmblemSelect(f503_arg0, f503_arg1, f503_arg2, f503_arg3, f503_arg4, f503_arg5)
 	if f503_arg5 then
-		if Engine[@"pushanticheatmessagetoui"](f503_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.UGC) then
+		if Engine.PushAnticheatMessageToUI(f503_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.UGC) then
 			DisplayAnticheatMessage(f503_arg4, f503_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.UGC, "EmblemEditor", "")
 			return
 		elseif CheckIfFeatureIsBanned(f503_arg2, LuaEnum.FEATURE_BAN.USER_GENERATED_CONTENT) then
@@ -4789,7 +4789,7 @@ function OpenEmblemSelect(f503_arg0, f503_arg1, f503_arg2, f503_arg3, f503_arg4,
 			return
 		end
 	end
-	CoD.SetCustomization(f503_arg2, Enum[@"customizationtype"][@"customization_type_emblem"], "type")
+	CoD.SetCustomization(f503_arg2, Enum.CustomizationType[@"customization_type_emblem"], "type")
 	Engine[@"emblemgetprofile"](f503_arg2)
 	local f503_local0 = true
 	if f503_arg5 == "true" then
@@ -4805,12 +4805,12 @@ function OpenEmblemSelect(f503_arg0, f503_arg1, f503_arg2, f503_arg3, f503_arg4,
 	if f503_local0 then
 		OpenOverlay(f503_arg0, "EmblemSelect", f503_arg2, {
 			_isEditor = f503_arg5,
-			_storageClientBuffer = CoD.BreadcrumbUtility.GetStorageClientBufferForPlayer(f503_arg2, Enum[@"emodes"][@"mode_multiplayer"]),
+			_storageClientBuffer = CoD.BreadcrumbUtility.GetStorageClientBufferForPlayer(f503_arg2, Enum.eModes.mode_multiplayer),
 		})
 	end
 end
 function OpenEmblemEditor(f504_arg0, f504_arg1, f504_arg2, f504_arg3)
-	if Engine[@"pushanticheatmessagetoui"](f504_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.UGC) then
+	if Engine.PushAnticheatMessageToUI(f504_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.UGC) then
 		DisplayAnticheatMessage(f504_arg1, f504_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.UGC, "EmblemEditor", "")
 		return
 	elseif CheckIfFeatureIsBanned(f504_arg2, LuaEnum.FEATURE_BAN.USER_GENERATED_CONTENT) then
@@ -4819,12 +4819,12 @@ function OpenEmblemEditor(f504_arg0, f504_arg1, f504_arg2, f504_arg3)
 	else
 		CoD.CraftUtility.EmblemSelect_ChooseEmblem(f504_arg1, f504_arg0, f504_arg2)
 		OpenOverlay(f504_arg1, "EmblemEditor", f504_arg2, {
-			_storageClientBuffer = CoD.BreadcrumbUtility.GetStorageClientBufferForPlayer(f504_arg2, Enum[@"emodes"][@"mode_multiplayer"]),
+			_storageClientBuffer = CoD.BreadcrumbUtility.GetStorageClientBufferForPlayer(f504_arg2, Enum.eModes.mode_multiplayer),
 		})
 	end
 end
 function OpenPaintjobEditor(f505_arg0, f505_arg1, f505_arg2, f505_arg3)
-	if Engine[@"pushanticheatmessagetoui"](f505_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.UGC) then
+	if Engine.PushAnticheatMessageToUI(f505_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.UGC) then
 		DisplayAnticheatMessage(f505_arg1, f505_arg2, LuaEnum.ANTICHEAT_MESSAGE_GROUPS.UGC, "PaintjobEditor", "")
 		return
 	elseif CheckIfFeatureIsBanned(f505_arg2, LuaEnum.FEATURE_BAN.USER_GENERATED_CONTENT) then
@@ -4844,7 +4844,7 @@ function OpenCallingCards(f507_arg0, f507_arg1, f507_arg2, f507_arg3, f507_arg4)
 	if f507_arg3 and f507_arg3 ~= "" then
 		f507_local0.callingCardShowcaseSlot = f507_arg3
 	end
-	f507_local0._storageClientBuffer = CoD.BreadcrumbUtility.GetStorageClientBufferForPlayer(f507_arg2, Enum[@"emodes"][@"mode_multiplayer"])
+	f507_local0._storageClientBuffer = CoD.BreadcrumbUtility.GetStorageClientBufferForPlayer(f507_arg2, Enum.eModes.mode_multiplayer)
 	f507_local0._sessionMode = f507_arg4._sessionMode
 	f507_arg4:openOverlay("CallingCards", f507_arg2, f507_local0)
 end
@@ -4852,11 +4852,11 @@ function OpenGroups(f508_arg0, f508_arg1, f508_arg2, f508_arg3, f508_arg4)
 	if IsGroupsEnabled(f508_arg2) then
 		InitializeGroups(f508_arg0, nil, f508_arg2)
 		GoBackAndOpenOverlayOnParent(f508_arg0, "Groups", f508_arg2)
-		CoD.FileshareUtility.SetFileshareMode(f508_arg2, Enum[@"filesharemode"][@"fileshare_mode_groups"])
+		CoD.FileshareUtility.SetFileshareMode(f508_arg2, Enum.FileshareMode[@"fileshare_mode_groups"])
 	end
 end
 function OpenChooseCharacterLoadout(f509_arg0, f509_arg1, f509_arg2, f509_arg3, f509_arg4)
-	CoD.PlayerRoleUtility.customizationMode = Enum[@"emodes"][@"mode_multiplayer"]
+	CoD.PlayerRoleUtility.customizationMode = Enum.eModes.mode_multiplayer
 	CoD.LobbyUtility.OpenChooseCharacterLoadout(f509_arg4, f509_arg2, f509_arg3)
 end
 function EditClanTag(f510_arg0, f510_arg1, f510_arg2)
@@ -4866,38 +4866,38 @@ function OpenPopupMenuByNameParam(f511_arg0, f511_arg1, f511_arg2, f511_arg3, f5
 	f511_arg4:openPopup(f511_arg3, f511_arg2)
 end
 function ResetThumbnailViewer(f512_arg0)
-	Engine[@"execnow"](f512_arg0, "resetThumbnailViewer")
+	Engine.ExecNow(f512_arg0, "resetThumbnailViewer")
 end
 function PreserveThumbnails(f513_arg0, f513_arg1)
 	if f513_arg1 == true then
-		Engine[@"execnow"](f513_arg0, "preservethumbnails 1")
+		Engine.ExecNow(f513_arg0, "preservethumbnails 1")
 	else
-		Engine[@"execnow"](f513_arg0, "preservethumbnails 0")
+		Engine.ExecNow(f513_arg0, "preservethumbnails 0")
 	end
 end
 function TimelineEditorRefresh()
-	local f514_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "DemoSegments.refresh")
-	Engine[@"setmodelvalue"](f514_local0, Engine[@"getmodelvalue"](f514_local0) + 1)
+	local f514_local0 = Engine.GetModel(Engine.GetGlobalModel(), "DemoSegments.refresh")
+	Engine.SetModelValue(f514_local0, Engine.GetModelValue(f514_local0) + 1)
 end
 function TimelineEditorPreviewClip(f515_arg0, f515_arg1, f515_arg2)
 	CoD.InGameMenu.CloseAllInGameMenus(f515_arg0, {
 		name = "close_all_ingame_menus",
 		controller = f515_arg2,
 	})
-	Engine[@"exec"](f515_arg2, "demo_previewclip")
+	Engine.exec(f515_arg2, "demo_previewclip")
 end
 function TimelineEditorFilmOptions(f516_arg0, f516_arg1, f516_arg2)
 	OpenPopupWithPriority(f516_arg0, "TimelineEditorFilmOptions", f516_arg2)
 end
 function TimelineEditorChangeTransition(f517_arg0, f517_arg1, f517_arg2)
-	local f517_local0 = Engine[@"getmodel"](f517_arg1:getModel(), "segmentNumber")
+	local f517_local0 = Engine.GetModel(f517_arg1:getModel(), "segmentNumber")
 	if f517_local0 then
-		local f517_local1 = Engine[@"getmodelvalue"](f517_local0) - 1
+		local f517_local1 = Engine.GetModelValue(f517_local0) - 1
 		local f517_local2 = tonumber(Engine[@"getdemosegmentinformation"](f517_local1, "transitionValue")) + 1
-		if f517_local2 > Enum[@"democliptransition"][@"demo_clip_transition_last"] then
-			f517_local2 = Enum[@"democliptransition"][@"demo_clip_transition_first"]
+		if f517_local2 > Enum.demoClipTransition[@"demo_clip_transition_last"] then
+			f517_local2 = Enum.demoClipTransition[@"demo_clip_transition_first"]
 		end
-		Engine[@"execnow"](f517_arg2, "demo_switchtransition " .. f517_local1 .. " " .. f517_local2)
+		Engine.ExecNow(f517_arg2, "demo_switchtransition " .. f517_local1 .. " " .. f517_local2)
 	end
 end
 function TimelineEditorUpdateHighlightedSegmentModel(f518_arg0, f518_arg1, f518_arg2, f518_arg3, f518_arg4)
@@ -4913,82 +4913,82 @@ function TimelineEditorUpdateHighlightedSegmentModel(f518_arg0, f518_arg1, f518_
 	if not f518_local1 then
 		return
 	end
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](f518_local1, "highlighted"), f518_local0)
+	Engine.SetModelValue(Engine.CreateModel(f518_local1, "highlighted"), f518_local0)
 end
 function TimelineEditorKeyboardComplete(f519_arg0, f519_arg1, f519_arg2, f519_arg3)
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](CoD.DemoUtility.Timeline_GetHighlightedSegmentModel(), "name"), f519_arg3.input)
+	Engine.SetModelValue(Engine.GetModel(CoD.DemoUtility.Timeline_GetHighlightedSegmentModel(), "name"), f519_arg3.input)
 end
 function IncreaseSafeAreaVertical(f520_arg0, f520_arg1, f520_arg2, f520_arg3, f520_arg4)
 	if f520_arg3 == nil then
-		f520_arg3 = @"safeareatweakable_vertical"
+		f520_arg3 = "safeareatweakable_vertical"
 	end
 	if not CoD.SafeArea or not CoD.SafeArea.Maximum or not CoD.SafeArea.AdjustAmount then
 		return
 	elseif not f520_arg4 then
 		f520_arg4 = CoD.SafeArea.AdjustAmount
 	end
-	local f520_local0 = (tonumber(Engine[@"profilevalueasstring"](f520_arg2, f520_arg3)) or 1) + f520_arg4
+	local f520_local0 = (tonumber(Engine.ProfileValueAsString(f520_arg2, f520_arg3)) or 1) + f520_arg4
 	if f520_local0 <= CoD.SafeArea.Maximum then
-		Engine[@"setprofilevar"](f520_arg2, f520_arg3, f520_local0)
+		Engine.SetProfileVar(f520_arg2, f520_arg3, f520_local0)
 	else
-		Engine[@"setprofilevar"](f520_arg2, f520_arg3, CoD.SafeArea.Maximum)
+		Engine.SetProfileVar(f520_arg2, f520_arg3, CoD.SafeArea.Maximum)
 	end
 end
 function DecreaseSafeAreaVertical(f521_arg0, f521_arg1, f521_arg2, f521_arg3, f521_arg4)
 	if f521_arg3 == nil then
-		f521_arg3 = @"safeareatweakable_vertical"
+		f521_arg3 = "safeareatweakable_vertical"
 	end
 	if not CoD.SafeArea or not CoD.SafeArea.Maximum or not CoD.SafeArea.AdjustAmount then
 		return
 	elseif not f521_arg4 then
 		f521_arg4 = CoD.SafeArea.AdjustAmount
 	end
-	local f521_local0 = (tonumber(Engine[@"profilevalueasstring"](f521_arg2, f521_arg3)) or 1) - f521_arg4
+	local f521_local0 = (tonumber(Engine.ProfileValueAsString(f521_arg2, f521_arg3)) or 1) - f521_arg4
 	if f521_local0 >= CoD.SafeArea.Minimum then
-		Engine[@"setprofilevar"](f521_arg2, f521_arg3, f521_local0)
+		Engine.SetProfileVar(f521_arg2, f521_arg3, f521_local0)
 	else
-		Engine[@"setprofilevar"](f521_arg2, f521_arg3, CoD.SafeArea.Minimum)
+		Engine.SetProfileVar(f521_arg2, f521_arg3, CoD.SafeArea.Minimum)
 	end
 end
 function IncreaseSafeAreaHorizontal(f522_arg0, f522_arg1, f522_arg2, f522_arg3, f522_arg4)
 	if f522_arg3 == nil then
-		f522_arg3 = @"safeareatweakable_horizontal"
+		f522_arg3 = "safeareatweakable_horizontal"
 	end
 	if not CoD.SafeArea or not CoD.SafeArea.Maximum or not CoD.SafeArea.AdjustAmount then
 		return
 	elseif not f522_arg4 then
 		f522_arg4 = CoD.SafeArea.AdjustAmount
 	end
-	local f522_local0 = (tonumber(Engine[@"profilevalueasstring"](f522_arg2, f522_arg3)) or 1) + f522_arg4
+	local f522_local0 = (tonumber(Engine.ProfileValueAsString(f522_arg2, f522_arg3)) or 1) + f522_arg4
 	if f522_local0 <= CoD.SafeArea.Maximum then
-		Engine[@"setprofilevar"](f522_arg2, f522_arg3, f522_local0)
+		Engine.SetProfileVar(f522_arg2, f522_arg3, f522_local0)
 	else
-		Engine[@"setprofilevar"](f522_arg2, f522_arg3, CoD.SafeArea.Maximum)
+		Engine.SetProfileVar(f522_arg2, f522_arg3, CoD.SafeArea.Maximum)
 	end
 end
 function DecreaseSafeAreaHorizontal(f523_arg0, f523_arg1, f523_arg2, f523_arg3, f523_arg4)
 	if f523_arg3 == nil then
-		f523_arg3 = @"safeareatweakable_horizontal"
+		f523_arg3 = "safeareatweakable_horizontal"
 	end
 	if not CoD.SafeArea or not CoD.SafeArea.Maximum or not CoD.SafeArea.AdjustAmount then
 		return
 	elseif not f523_arg4 then
 		f523_arg4 = CoD.SafeArea.AdjustAmount
 	end
-	local f523_local0 = (tonumber(Engine[@"profilevalueasstring"](f523_arg2, f523_arg3)) or 1) - f523_arg4
+	local f523_local0 = (tonumber(Engine.ProfileValueAsString(f523_arg2, f523_arg3)) or 1) - f523_arg4
 	if CoD.isPC then
 		local f523_local1, f523_local2, f523_local3 = Engine[@"hash_6913E41040C17FD"](f523_arg2)
 		if f523_local1 / f523_local2 < CoD.SafeArea.MinimumWidthHeightRatioPC then
-			Engine[@"setprofilevar"](f523_arg2, f523_arg3, 1)
+			Engine.SetProfileVar(f523_arg2, f523_arg3, 1)
 		elseif CoD.SafeArea.MinimumWidthHeightRatioPC * f523_local2 / f523_local1 < f523_local0 then
-			Engine[@"setprofilevar"](f523_arg2, f523_arg3, f523_local0)
+			Engine.SetProfileVar(f523_arg2, f523_arg3, f523_local0)
 		else
-			Engine[@"setprofilevar"](f523_arg2, f523_arg3, CoD.SafeArea.MinimumWidthHeightRatioPC * f523_local2 / f523_local1)
+			Engine.SetProfileVar(f523_arg2, f523_arg3, CoD.SafeArea.MinimumWidthHeightRatioPC * f523_local2 / f523_local1)
 		end
 	elseif f523_local0 >= CoD.SafeArea.Minimum then
-		Engine[@"setprofilevar"](f523_arg2, f523_arg3, f523_local0)
+		Engine.SetProfileVar(f523_arg2, f523_arg3, f523_local0)
 	else
-		Engine[@"setprofilevar"](f523_arg2, f523_arg3, CoD.SafeArea.Minimum)
+		Engine.SetProfileVar(f523_arg2, f523_arg3, CoD.SafeArea.Minimum)
 	end
 end
 function AdjustSafeArea(f524_arg0, f524_arg1, f524_arg2, f524_arg3, f524_arg4, f524_arg5, f524_arg6, f524_arg7)
@@ -5006,26 +5006,26 @@ function AdjustSafeArea(f524_arg0, f524_arg1, f524_arg2, f524_arg3, f524_arg4, f
 	end
 end
 function SetSafeArea(f525_arg0, f525_arg1, f525_arg2, f525_arg3, f525_arg4)
-	Engine[@"setprofilevar"](f525_arg2, f525_arg3, f525_arg4)
+	Engine.SetProfileVar(f525_arg2, f525_arg3, f525_arg4)
 end
 function ResetSafeAreaHorizontal(f526_arg0, f526_arg1, f526_arg2)
 	local f526_local0, f526_local1, f526_local2 = Engine[@"hash_6913E41040C17FD"](f526_arg2)
 	if f526_local0 / f526_local1 <= CoD.SafeArea.DefaultWidthHeightRatioPC then
-		SetSafeArea(f526_arg0, f526_arg1, f526_arg2, @"hash_17664E60A992DFDA", CoD.SafeArea.Maximum)
+		SetSafeArea(f526_arg0, f526_arg1, f526_arg2, "hudboundstweakable_horizontal", CoD.SafeArea.Maximum)
 	else
-		SetSafeArea(f526_arg0, f526_arg1, f526_arg2, @"hash_17664E60A992DFDA", CoD.SafeArea.DefaultWidthHeightRatioPC * f526_local1 / f526_local0)
+		SetSafeArea(f526_arg0, f526_arg1, f526_arg2, "hudboundstweakable_horizontal", CoD.SafeArea.DefaultWidthHeightRatioPC * f526_local1 / f526_local0)
 	end
 	DispatchEventToRoot(f526_arg0, "update_safe_area", f526_arg2)
 end
 function CallingCards_SetPlayerBackground(f527_arg0, f527_arg1, f527_arg2)
-	local f527_local0 = Engine[@"getmodel"](f527_arg1:getModel(), "iconId")
+	local f527_local0 = Engine.GetModel(f527_arg1:getModel(), "iconId")
 	if f527_local0 ~= nil then
-		local f527_local1 = Engine[@"getmodelvalue"](f527_local0)
+		local f527_local1 = Engine.GetModelValue(f527_local0)
 		if f527_arg0.callingCardShowcaseSlot then
-			Engine[@"setcombatrecordbackgroundid"](f527_arg2, CoD.InspectionUtility.GetShowcaseCategoryForCurrentSessionMode(), f527_local1, f527_arg0.callingCardShowcaseSlot)
-			local f527_local2 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "CallingCardShowcaseUpdated")
+			Engine.SetCombatRecordBackgroundId(f527_arg2, CoD.InspectionUtility.GetShowcaseCategoryForCurrentSessionMode(), f527_local1, f527_arg0.callingCardShowcaseSlot)
+			local f527_local2 = Engine.GetModel(Engine.GetGlobalModel(), "CallingCardShowcaseUpdated")
 			if f527_local2 then
-				Engine[@"forcenotifymodelsubscriptions"](f527_local2)
+				Engine.ForceNotifyModelSubscriptions(f527_local2)
 			end
 			if f527_arg0.callingCardShowcaseIsBM then
 				GoBack(GoBack(f527_arg0, f527_arg2), f527_arg2)
@@ -5045,10 +5045,10 @@ function CallingCards_EmblemGetProfile(f528_arg0, f528_arg1, f528_arg2)
 end
 function CallingCards_GoBack(f529_arg0, f529_arg1)
 	if not IsLive() then
-		Engine[@"commitprofilechanges"](f529_arg1)
+		Engine.CommitProfileChanges(f529_arg1)
 	else
 		CoD.CraftUtility.UploadPublicProfile(f529_arg0, f529_arg1)
-		CoD.BreadcrumbUtility.UploadBuffer(f529_arg1, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
+		CoD.BreadcrumbUtility.UploadBuffer(f529_arg1, Enum.StorageFileType[@"storage_mp_stats_online"])
 	end
 	CoD.BlackMarketUtility.CleanupCachedCallingCardData(f529_arg1)
 	DataSources.CallingCardsBlackMarketMasterCard.invalidate(f529_arg1)
@@ -5068,7 +5068,7 @@ function OpenCustomizePrestigeMenu(f532_arg0, f532_arg1, f532_arg2)
 	if CheckIfFeatureIsBanned(f532_arg1, LuaEnum.FEATURE_BAN.PRESTIGE_EXTRAS) then
 		LuaUtils.UI_ShowErrorMessageDialog(f532_arg1, GetFeatureBanInfo(f532_arg1, LuaEnum.FEATURE_BAN.PRESTIGE_EXTRAS))
 		return
-	elseif CoD.PrestigeUtility.GetPrestigeGameMode() == Enum[@"emodes"][@"mode_zombies"] then
+	elseif CoD.PrestigeUtility.GetPrestigeGameMode() == Enum.eModes.mode_zombies then
 		OpenOverlay(f532_arg0, "Prestige_CustomizePrestigeIconZM", f532_arg1, "", "")
 	else
 		OpenOverlay(f532_arg0, "Prestige_CustomizePrestigeIcon", f532_arg1, "", "")
@@ -5085,7 +5085,7 @@ function OpenPermanentUnlockMenu(f533_arg0, f533_arg1, f533_arg2)
 		CoD.statsMilestonePath = "gamedata/stats/mp/statsmilestones"
 		SetHeadingKickerText(@"menu/permanent_unlocks")
 		CoD.PrestigeUtility.CreatePermanentUnlockTokenModel(f533_arg1)
-		local f533_local0 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f533_arg1), "PermanentlyUnlockClass")
+		local f533_local0 = Engine.CreateModel(Engine.GetModelForController(f533_arg1), "PermanentlyUnlockClass")
 		CoD.CACUtility.GetCustomClassModel(f533_arg1, 0, f533_local0)
 		CoD.perController[f533_arg1].classModel = f533_local0
 		OpenOverlay(f533_arg0, "Prestige_PermanentUnlocks", f533_arg1)
@@ -5109,18 +5109,18 @@ function CloseCPAAR(f538_arg0, f538_arg1)
 end
 function OpenCRMFeaturedPopup(f539_arg0, f539_arg1, f539_arg2, f539_arg3, f539_arg4)
 	if f539_arg3 == "MOTDBanner" then
-		local f539_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "CRMPopup")
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f539_local0, "location"), "registration")
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f539_local0, "actionSource"), f539_arg3)
+		local f539_local0 = Engine.CreateModel(Engine.GetGlobalModel(), "CRMPopup")
+		Engine.SetModelValue(Engine.CreateModel(f539_local0, "location"), "registration")
+		Engine.SetModelValue(Engine.CreateModel(f539_local0, "actionSource"), f539_arg3)
 	elseif f539_arg3 == "Featured" then
-		local f539_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "CRMPopup")
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f539_local0, "location"), "crm_featured")
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f539_local0, "actionSource"), f539_arg3)
+		local f539_local0 = Engine.CreateModel(Engine.GetGlobalModel(), "CRMPopup")
+		Engine.SetModelValue(Engine.CreateModel(f539_local0, "location"), "crm_featured")
+		Engine.SetModelValue(Engine.CreateModel(f539_local0, "actionSource"), f539_arg3)
 	end
 	OpenOverlay(f539_arg4, "CRMPopup", f539_arg2)
 end
 function SetBubbleGumPackNameFromPackIndex(f540_arg0, f540_arg1, f540_arg2)
-	return Engine[@"setbubblegumpackname"](f540_arg0, f540_arg1, f540_arg2)
+	return Engine.SetBubbleGumPackName(f540_arg0, f540_arg1, f540_arg2)
 end
 function SetMap(f541_arg0, f541_arg1, f541_arg2)
 	local f541_local0 = CoD.MapUtility.MapsTable[f541_arg1]
@@ -5129,19 +5129,19 @@ function SetMap(f541_arg0, f541_arg1, f541_arg2)
 		f541_local0 = CoD.MapUtility.MapsTable[f541_arg1]
 	end
 	if f541_local0[@"hash_B514EC7141EE89B"] and f541_local0[@"hash_B514EC7141EE89B"] ~= "" then
-		Engine[@"exec"](f541_arg0, f541_local0[@"hash_B514EC7141EE89B"])
+		Engine.exec(f541_arg0, f541_local0[@"hash_B514EC7141EE89B"])
 	end
-	local f541_local1 = Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_host"])
+	local f541_local1 = Engine[@"lobbygetcontrollinglobbysession"](Enum.LobbyModule[@"lobby_module_host"])
 	if f541_local0[@"hash_3E2D141CB22F2813"] and f541_local0[@"hash_3E2D141CB22F2813"] ~= "" then
 		Engine[@"lobbysetmap"](f541_local1, f541_local0[@"hash_3E2D141CB22F2813"])
 	else
 		Engine[@"lobbysetmap"](f541_local1, f541_local0.mapToLoad)
 	end
-	Engine[@"setprofilevar"](f541_arg0, CoD.profileKey_map, f541_local0.mapToLoad)
-	local f541_local2 = Engine[@"getglobalmodel"]()
+	Engine.SetProfileVar(f541_arg0, CoD.profileKey_map, f541_local0.mapToLoad)
+	local f541_local2 = Engine.GetGlobalModel()
 	f541_local2 = f541_local2:create("lobbyRoot.selectedMapId")
 	f541_local2:set(f541_arg1)
-	Engine[@"commitprofilechanges"](f541_arg0)
+	Engine.CommitProfileChanges(f541_arg0)
 end
 function OpenPurchaseMapPackConfirmation(f542_arg0, f542_arg1, f542_arg2)
 	local f542_local0 = Engine[@"getdlcbitformapname"]
@@ -5158,28 +5158,28 @@ function MapSelected(f543_arg0, f543_arg1)
 	SetMap(f543_arg1, f543_arg0.mapName, false)
 end
 function SetInCustomGames(f544_arg0)
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "CustomGamesRoot"), "inCustomGames"), f544_arg0)
+	Engine.SetModelValue(Engine.CreateModel(Engine.CreateModel(Engine.GetGlobalModel(), "CustomGamesRoot"), "inCustomGames"), f544_arg0)
 end
 function GetCurrentGameType(f545_arg0)
 	return Engine[@"lobbygetgametype"]()
 end
 function GetCurrentUIGameType(f546_arg0)
-	return Engine[@"getmodelvalue"](Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "CustomGamesRoot"), "gameType")) or "tdm"
+	return Engine.GetModelValue(Engine.CreateModel(Engine.CreateModel(Engine.GetGlobalModel(), "CustomGamesRoot"), "gameType")) or "tdm"
 end
 function LoadFileshareCustomGame(f547_arg0, f547_arg1, f547_arg2)
 	local f547_local0 = CoD.FileshareUtility.GetSelectedItem()
 	local f547_local1 = CoD.FileshareUtility.GetSelectedItemProperty("fileId")
 	if f547_local1 then
-		Engine[@"loadfilesharecustomgame"](f547_arg2, f547_local1)
+		Engine.LoadFileshareCustomGame(f547_arg2, f547_local1)
 	end
 end
 function SaveCustomGame(f548_arg0, f548_arg1, f548_arg2)
-	local f548_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "CustomGamesRoot")
-	local f548_local1 = Engine[@"getmodelvalue"](Engine[@"createmodel"](f548_local0, "isOfficial"))
-	local f548_local2 = Engine[@"getmodelvalue"](Engine[@"createmodel"](f548_local0, "slot"))
-	local f548_local3 = Engine[@"getmodelvalue"](Engine[@"createmodel"](f548_local0, "index"))
-	local f548_local4 = Engine[@"getmodelvalue"](Engine[@"createmodel"](f548_local0, "gameName"))
-	local f548_local5 = Engine[@"getmodelvalue"](Engine[@"createmodel"](f548_local0, "gameDescription"))
+	local f548_local0 = Engine.CreateModel(Engine.GetGlobalModel(), "CustomGamesRoot")
+	local f548_local1 = Engine.GetModelValue(Engine.CreateModel(f548_local0, "isOfficial"))
+	local f548_local2 = Engine.GetModelValue(Engine.CreateModel(f548_local0, "slot"))
+	local f548_local3 = Engine.GetModelValue(Engine.CreateModel(f548_local0, "index"))
+	local f548_local4 = Engine.GetModelValue(Engine.CreateModel(f548_local0, "gameName"))
+	local f548_local5 = Engine.GetModelValue(Engine.CreateModel(f548_local0, "gameDescription"))
 	if not f548_local4 or f548_local4 == "" then
 		f548_local4 = "Custom Game"
 	end
@@ -5188,24 +5188,24 @@ function SaveCustomGame(f548_arg0, f548_arg1, f548_arg2)
 		f548_local5 = Engine[@"hash_4F9F1239CFD921FE"](f548_local6.descriptionRef)
 	end
 	if f548_local1 == nil or f548_local1 == 1 or f548_local1 == true then
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f548_local0, "gameName"), "Custom Game")
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f548_local0, "gameDescription"), "Game Description")
+		Engine.SetModelValue(Engine.CreateModel(f548_local0, "gameName"), "Custom Game")
+		Engine.SetModelValue(Engine.CreateModel(f548_local0, "gameDescription"), "Game Description")
 		OpenOverlay(f548_arg0, "CustomGamesSave", f548_arg2)
 	else
 		Engine[@"customgame_save"](f548_arg1, Engine[@"hash_FFDD58B353B5C0B"](), f548_local2, GetCurrentGameType(), f548_local4, f548_local5)
 	end
 end
 function DeleteCustomGame(f549_arg0, f549_arg1, f549_arg2, f549_arg3, f549_arg4)
-	if Engine[@"getmodelvalue"](Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "SelectedCustomGame"), "isOfficial")) then
+	if Engine.GetModelValue(Engine.CreateModel(Engine.CreateModel(Engine.GetGlobalModel(), "SelectedCustomGame"), "isOfficial")) then
 		return
 	else
 		OpenOverlay(f549_arg4, "CustomGamesDelete", f549_arg2)
 	end
 end
 function DeleteCustomGameYes(f550_arg0, f550_arg1, f550_arg2, f550_arg3, f550_arg4)
-	local f550_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "SelectedCustomGame")
-	local f550_local1 = Engine[@"getmodelvalue"](Engine[@"createmodel"](f550_local0, "slot"))
-	local f550_local2 = Engine[@"getmodelvalue"](Engine[@"createmodel"](f550_local0, "index"))
+	local f550_local0 = Engine.CreateModel(Engine.GetGlobalModel(), "SelectedCustomGame")
+	local f550_local1 = Engine.GetModelValue(Engine.CreateModel(f550_local0, "slot"))
+	local f550_local2 = Engine.GetModelValue(Engine.CreateModel(f550_local0, "index"))
 	GoBack(f550_arg0, f550_arg2)
 	Engine[@"customgame_delete"](f550_arg2, f550_local1)
 end
@@ -5213,10 +5213,10 @@ function DeleteCustomGameNo(f551_arg0, f551_arg1, f551_arg2, f551_arg3, f551_arg
 	GoBack(f551_arg4, f551_arg2)
 end
 function OpenCustomGamePublishPrompt(f552_arg0, f552_arg1, f552_arg2, f552_arg3, f552_arg4)
-	local f552_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "SelectedCustomGame")
-	local f552_local1 = Engine[@"getmodelvalue"](Engine[@"createmodel"](f552_local0, "isOfficial"))
-	local f552_local2 = Engine[@"getmodelvalue"](Engine[@"createmodel"](f552_local0, "gameName"))
-	local f552_local3 = Engine[@"getmodelvalue"](Engine[@"createmodel"](f552_local0, "gameDescription"))
+	local f552_local0 = Engine.CreateModel(Engine.GetGlobalModel(), "SelectedCustomGame")
+	local f552_local1 = Engine.GetModelValue(Engine.CreateModel(f552_local0, "isOfficial"))
+	local f552_local2 = Engine.GetModelValue(Engine.CreateModel(f552_local0, "gameName"))
+	local f552_local3 = Engine.GetModelValue(Engine.CreateModel(f552_local0, "gameDescription"))
 	if f552_local1 then
 		return
 	elseif not f552_local2 then
@@ -5228,16 +5228,16 @@ function OpenCustomGamePublishPrompt(f552_arg0, f552_arg1, f552_arg2, f552_arg3,
 	CoD.FileshareUtility.OpenPublishPrompt(f552_arg4, f552_arg2, "customgame", f552_local2, f552_local3, PublishCustomGame)
 end
 function PublishCustomGame(f553_arg0)
-	local f553_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "SelectedCustomGame")
-	Engine[@"publishcustomgame"](f553_arg0, "customgame", Engine[@"getmodelvalue"](Engine[@"createmodel"](f553_local0, "slot")), Engine[@"getmodelvalue"](Engine[@"createmodel"](f553_local0, "index")), CoD.FileshareUtility.GetPublishName(), GetCurrentUIGameType(f553_arg0), CoD.FileshareUtility.GetPublishDescription())
+	local f553_local0 = Engine.CreateModel(Engine.GetGlobalModel(), "SelectedCustomGame")
+	Engine.PublishCustomGame(f553_arg0, "customgame", Engine.GetModelValue(Engine.CreateModel(f553_local0, "slot")), Engine.GetModelValue(Engine.CreateModel(f553_local0, "index")), CoD.FileshareUtility.GetPublishName(), GetCurrentUIGameType(f553_arg0), CoD.FileshareUtility.GetPublishDescription())
 end
 function OpenPopularCustomGames(f554_arg0, f554_arg1, f554_arg2)
-	CoD.FileshareUtility.SetCurrentCommunityDataType(Enum[@"filesharecommunitydatatype"][@"fileshare_community_data_popular"])
-	CoD.FileshareUtility.SetFileshareMode(f554_arg2, Enum[@"filesharemode"][@"fileshare_mode_community"])
-	local f554_local0 = Engine[@"createmodel"](f554_arg1:getModel(), "category")
-	local f554_local1 = Engine[@"createmodel"](f554_arg1:getModel(), "communityDataType")
-	Engine[@"setmodelvalue"](f554_local0, "customgame")
-	Engine[@"setmodelvalue"](f554_local1, Enum[@"filesharecommunitydatatype"][@"fileshare_community_data_popular"])
+	CoD.FileshareUtility.SetCurrentCommunityDataType(Enum.FileshareCommunityDataType[@"fileshare_community_data_popular"])
+	CoD.FileshareUtility.SetFileshareMode(f554_arg2, Enum.FileshareMode[@"fileshare_mode_community"])
+	local f554_local0 = Engine.CreateModel(f554_arg1:getModel(), "category")
+	local f554_local1 = Engine.CreateModel(f554_arg1:getModel(), "communityDataType")
+	Engine.SetModelValue(f554_local0, "customgame")
+	Engine.SetModelValue(f554_local1, Enum.FileshareCommunityDataType[@"fileshare_community_data_popular"])
 	SetInCustomGames(1)
 	FileshareCategorySelectorItemSelected(f554_arg0, f554_arg1, f554_arg2)
 	CoD.FileshareUtility.SetShowCreateButton(false)
@@ -5246,12 +5246,12 @@ function OpenPopularCustomGames(f554_arg0, f554_arg1, f554_arg2)
 	OpenShowcase(f554_arg0, f554_arg1, f554_arg2, nil, f554_arg0)
 end
 function OpenTrendingCustomGames(f555_arg0, f555_arg1, f555_arg2)
-	CoD.FileshareUtility.SetCurrentCommunityDataType(Enum[@"filesharecommunitydatatype"][@"fileshare_community_data_trending"])
-	CoD.FileshareUtility.SetFileshareMode(f555_arg2, Enum[@"filesharemode"][@"fileshare_mode_community"])
-	local f555_local0 = Engine[@"createmodel"](f555_arg1:getModel(), "category")
-	local f555_local1 = Engine[@"createmodel"](f555_arg1:getModel(), "communityDataType")
-	Engine[@"setmodelvalue"](f555_local0, "customgame")
-	Engine[@"setmodelvalue"](f555_local1, Enum[@"filesharecommunitydatatype"][@"fileshare_community_data_trending"])
+	CoD.FileshareUtility.SetCurrentCommunityDataType(Enum.FileshareCommunityDataType[@"fileshare_community_data_trending"])
+	CoD.FileshareUtility.SetFileshareMode(f555_arg2, Enum.FileshareMode[@"fileshare_mode_community"])
+	local f555_local0 = Engine.CreateModel(f555_arg1:getModel(), "category")
+	local f555_local1 = Engine.CreateModel(f555_arg1:getModel(), "communityDataType")
+	Engine.SetModelValue(f555_local0, "customgame")
+	Engine.SetModelValue(f555_local1, Enum.FileshareCommunityDataType[@"fileshare_community_data_trending"])
 	SetInCustomGames(1)
 	FileshareCategorySelectorItemSelected(f555_arg0, f555_arg1, f555_arg2)
 	CoD.FileshareUtility.SetShowCreateButton(false)
@@ -5260,12 +5260,12 @@ function OpenTrendingCustomGames(f555_arg0, f555_arg1, f555_arg2)
 	OpenShowcase(f555_arg0, f555_arg1, f555_arg2, nil, f555_arg0)
 end
 function OpenrRecentCustomGames(f556_arg0, f556_arg1, f556_arg2)
-	CoD.FileshareUtility.SetCurrentCommunityDataType(Enum[@"filesharecommunitydatatype"][@"fileshare_community_data_recent"])
-	CoD.FileshareUtility.SetFileshareMode(f556_arg2, Enum[@"filesharemode"][@"fileshare_mode_community"])
-	local f556_local0 = Engine[@"createmodel"](f556_arg1:getModel(), "category")
-	local f556_local1 = Engine[@"createmodel"](f556_arg1:getModel(), "communityDataType")
-	Engine[@"setmodelvalue"](f556_local0, "customgame")
-	Engine[@"setmodelvalue"](f556_local1, Enum[@"filesharecommunitydatatype"][@"fileshare_community_data_recent"])
+	CoD.FileshareUtility.SetCurrentCommunityDataType(Enum.FileshareCommunityDataType[@"fileshare_community_data_recent"])
+	CoD.FileshareUtility.SetFileshareMode(f556_arg2, Enum.FileshareMode[@"fileshare_mode_community"])
+	local f556_local0 = Engine.CreateModel(f556_arg1:getModel(), "category")
+	local f556_local1 = Engine.CreateModel(f556_arg1:getModel(), "communityDataType")
+	Engine.SetModelValue(f556_local0, "customgame")
+	Engine.SetModelValue(f556_local1, Enum.FileshareCommunityDataType[@"fileshare_community_data_recent"])
 	SetInCustomGames(1)
 	FileshareCategorySelectorItemSelected(f556_arg0, f556_arg1, f556_arg2)
 	CoD.FileshareUtility.SetShowCreateButton(false)
@@ -5274,34 +5274,34 @@ function OpenrRecentCustomGames(f556_arg0, f556_arg1, f556_arg2)
 	OpenShowcase(f556_arg0, f556_arg1, f556_arg2, nil, f556_arg0)
 end
 function SetGameType(f557_arg0, f557_arg1)
-	Engine[@"exec"](f557_arg0, "resetCustomGametype")
+	Engine.exec(f557_arg0, "resetCustomGametype")
 	local f557_local0 = CoDShared.IsGametypeTeamBased()
 	if f557_arg1 == "" then
 		return
 	end
-	Engine[@"setgametype"](f557_arg1)
+	Engine.SetGametype(f557_arg1)
 	if f557_local0 ~= CoDShared.IsGametypeTeamBased() then
-		Engine[@"setdvar"]("bot_friends", 0)
-		Engine[@"setdvar"]("bot_enemies", 0)
+		Engine.SetDvar("bot_friends", 0)
+		Engine.SetDvar("bot_enemies", 0)
 	end
 	if not CoD.GameTypeUtility.DoesGameTypeSupportBots(f557_arg1) then
-		local f557_local1 = Enum[@"lobbymodule"][@"lobby_module_host"]
+		local f557_local1 = Enum.LobbyModule[@"lobby_module_host"]
 		local f557_local2 = Engine[@"lobbygetcontrollinglobbysession"](f557_local1)
 		local f557_local3 = Engine[@"getlobbyclientcount"](f557_local1, f557_local2, Enum[@"lobbyclientfiltertype"][@"lobby_client_filter_type_bot"])
 		if f557_local3 > 0 then
 			Engine[@"removelobbybot"](f557_local2, f557_local3)
 		end
 	end
-	Engine[@"exec"](f557_arg0, "xupdatepartystate")
-	Engine[@"setprofilevar"](f557_arg0, CoD.profileKey_gametype, f557_arg1)
-	Engine[@"commitprofilechanges"](f557_arg0)
-	Engine[@"exec"](f557_arg0, "lobby_setgametype " .. f557_arg1)
-	local f557_local1 = Engine[@"getglobalmodel"]()
+	Engine.exec(f557_arg0, "xupdatepartystate")
+	Engine.SetProfileVar(f557_arg0, CoD.profileKey_gametype, f557_arg1)
+	Engine.CommitProfileChanges(f557_arg0)
+	Engine.exec(f557_arg0, "lobby_setgametype " .. f557_arg1)
+	local f557_local1 = Engine.GetGlobalModel()
 	f557_local1 = f557_local1:create("lobbyRoot.selectedGameType")
 	f557_local1:set(Engine[@"converttoxhash"](f557_arg1))
 	Engine[@"lobbyevent"]("OnGametypeSettingsChange", {
-		lobbyModule = Enum[@"lobbymodule"][@"lobby_module_host"],
-		lobbyType = Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_host"]),
+		lobbyModule = Enum.LobbyModule[@"lobby_module_host"],
+		lobbyType = Engine[@"lobbygetcontrollinglobbysession"](Enum.LobbyModule[@"lobby_module_host"]),
 		fromUI = true,
 	})
 end
@@ -5309,7 +5309,7 @@ function GameModeSelected(f558_arg0, f558_arg1)
 	local f558_local0 = CoD.SafeGetModelValue(f558_arg0:getModel(), "id")
 	if f558_local0 then
 		local f558_local1 = Engine[@"converttoxhash"](f558_local0)
-		local f558_local2 = Engine[@"getglobalmodel"]()
+		local f558_local2 = Engine.GetGlobalModel()
 		f558_local2 = f558_local2:create("lobbyRoot.selectedGameType")
 		if f558_local1 == f558_local2:get() then
 			return
@@ -5318,18 +5318,18 @@ function GameModeSelected(f558_arg0, f558_arg1)
 	SetGameType(f558_arg1, f558_local0)
 end
 function BlockGameFromKeyEvent(f559_arg0)
-	Engine[@"blockgamefromkeyevent"]()
+	Engine.BlockGameFromKeyEvent()
 end
 function ShowGamerCardForScoreboardRow(f560_arg0, f560_arg1)
 	local f560_local0 = CoD.SafeGetModelValue(f560_arg1:getModel(), "clientNum")
-	if not Engine[@"isvisibilitybitset"](f560_arg0, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and CoD.SafeGetModelValue(Engine[@"getmodelforcontroller"](f560_arg0), "forceScoreboard") ~= 1 then
+	if not Engine.IsVisibilityBitSet(f560_arg0, Enum.UIVisibilityBit[@"bit_scoreboard_open"]) and CoD.SafeGetModelValue(Engine.GetModelForController(f560_arg0), "forceScoreboard") ~= 1 then
 		return
 	else
-		Engine[@"showgamercard"](f560_arg0, f560_local0)
+		Engine.ShowGamerCard(f560_arg0, f560_local0)
 	end
 end
 function ShowAccountPicker(f561_arg0)
-	Engine[@"showaccountpicker"](f561_arg0)
+	Engine.ShowAccountPicker(f561_arg0)
 end
 function FinishRegistrationFlow(f562_arg0, f562_arg1, f562_arg2)
 	CoD.LobbyUtility.NavigateToLobby(f562_arg0, "ModeSelect", false, f562_arg1)
@@ -5346,13 +5346,13 @@ function ChatClientInputArrangeText(f563_arg0, f563_arg1, f563_arg2)
 	end
 end
 function ResetControlsToDefault(f564_arg0, f564_arg1, f564_arg2, f564_arg3)
-	Engine[@"exec"](f564_arg2, "resetprofilecommon")
-	Engine[@"exec"](f564_arg2, "updategamerprofile")
-	Engine[@"exec"](f564_arg2, "storagereset stats_mp_offline")
+	Engine.exec(f564_arg2, "resetprofilecommon")
+	Engine.exec(f564_arg2, "updategamerprofile")
+	Engine.exec(f564_arg2, "storagereset stats_mp_offline")
 	CoD.OverlayUtility.AddSystemOverlay("ResetControlsToDefault", {
 		menuName = "SystemOverlay_Compact",
-		title = @"hash_149770A897DE23D4",
-		description = @"hash_6409E828997F3F6C",
+		title = "menu/reset_to_default_caps",
+		description = "menu/reset_to_defaults_successful",
 		[CoD.OverlayUtility.GoBackPropertyName] = CoD.OverlayUtility.DefaultGoBack,
 		categoryType = CoD.OverlayUtility.OverlayTypes.GenericMessage,
 		listDatasource = function()
@@ -5376,7 +5376,7 @@ function ResetControlsToDefault(f564_arg0, f564_arg1, f564_arg2, f564_arg3)
 	CoD.OverlayUtility.CreateOverlay(f564_arg2, f564_arg3, "ResetControlsToDefault")
 end
 function ChangeLanguage(f568_arg0, f568_arg1, f568_arg2, f568_arg3, f568_arg4, f568_arg5)
-	if f568_arg3 == Engine[@"getlanguage"]() or f568_arg3 == nil then
+	if f568_arg3 == Engine.GetLanguage() or f568_arg3 == nil then
 		return
 	else
 		local f568_local0 = f568_arg0
@@ -5400,8 +5400,8 @@ function ChangeLanguage(f568_arg0, f568_arg1, f568_arg2, f568_arg3, f568_arg4, f
 							local f571_local0 = f568_local0:getModel(f571_arg1, "optionAssetName")
 							if f571_local0 then
 								CoD.OptionsUtility.NotifyPlayerSettingsUpdate(f571_arg1, f571_local0:get())
-								Engine[@"setlanguage"](f568_arg3)
-								Engine[@"rebootgame"]()
+								Engine.SetLanguage(f568_arg3)
+								Engine.RebootGame()
 							end
 						end,
 						text = @"menu/ok",
@@ -5420,9 +5420,9 @@ function CombatRecordShowHero(f573_arg0, f573_arg1)
 	local f573_local0 = 0
 	local f573_local1 = f573_arg1:getModel(f573_arg0, "heroIndex")
 	if f573_local1 then
-		f573_local0 = Engine[@"getmodelvalue"](f573_local1)
+		f573_local0 = Engine.GetModelValue(f573_local1)
 	end
-	Engine[@"sendclientscriptnotify"](f573_arg0, CoD.PlayerRoleUtility.Heroes.heroUpdateEvent .. CoD.GetLocalClientAdjustedNum(f573_arg0), {
+	Engine.SendClientScriptNotify(f573_arg0, CoD.PlayerRoleUtility.Heroes.heroUpdateEvent .. CoD.GetLocalClientAdjustedNum(f573_arg0), {
 		event_name = "changeHero",
 		character_index = f573_local0,
 		mode = CoD.GetCombatRecordMode(),
@@ -5435,35 +5435,35 @@ function CombatRecordTabChanged(f574_arg0, f574_arg1, f574_arg2)
 end
 function CombatRecordSetHeadingKickerTextToCombatRecordGameMode()
 	local f575_local0 = SessionModeToLocalizedSessionMode(CoD.GetCombatRecordMode())
-	local f575_local1 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.headingKickerText")
+	local f575_local1 = Engine.CreateModel(Engine.GetGlobalModel(), "lobbyRoot.headingKickerText")
 	if f575_local1 then
-		Engine[@"setmodelvalue"](f575_local1, f575_local0)
+		Engine.SetModelValue(f575_local1, f575_local0)
 	end
 end
 function CombatRecordSetHeadingKickerTextToCombatRecordMode()
-	if CoD.GetCombatRecordMode() ~= Enum[@"emodes"][@"mode_multiplayer"] then
+	if CoD.GetCombatRecordMode() ~= Enum.eModes.mode_multiplayer then
 		CombatRecordSetHeadingKickerTextToCombatRecordGameMode()
 		return
 	end
-	local f576_local0 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_37BAA05710CE37D3")
+	local f576_local0 = Engine[@"hash_4F9F1239CFD921FE"]("mpui/summary_caps")
 	if CoD.CombatRecordMode == "public" then
-		f576_local0 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_48159ECA1876AE99")
+		f576_local0 = Engine[@"hash_4F9F1239CFD921FE"]("menu/combat_record_tab_public_caps")
 	elseif CoD.CombatRecordMode == "arena" then
-		f576_local0 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_44B08B09636ECD9E")
+		f576_local0 = Engine[@"hash_4F9F1239CFD921FE"]("menu/arena_caps")
 	end
-	local f576_local1 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.headingKickerText")
+	local f576_local1 = Engine.CreateModel(Engine.GetGlobalModel(), "lobbyRoot.headingKickerText")
 	if f576_local1 then
-		Engine[@"setmodelvalue"](f576_local1, f576_local0)
+		Engine.SetModelValue(f576_local1, f576_local0)
 	end
 end
 function CombatRecordSetXUIDForLocalController(f577_arg0)
-	CoD.CombatRecordXUID = Engine[@"getxuid64"](f577_arg0)
+	CoD.CombatRecordXUID = Engine.GetXUID64(f577_arg0)
 	CoD.CombatRecordOtherPlayerStats = false
 end
 function CombatRecordSetXUIDFromSelectedFriend(f578_arg0)
-	local f578_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f578_arg0), "Social.selectedFriendXUID")
+	local f578_local0 = Engine.GetModel(Engine.GetModelForController(f578_arg0), "Social.selectedFriendXUID")
 	if f578_local0 then
-		CoD.CombatRecordXUID = Engine[@"getmodelvalue"](f578_local0)
+		CoD.CombatRecordXUID = Engine.GetModelValue(f578_local0)
 		CoD.CombatRecordMode = "public"
 	end
 end
@@ -5478,69 +5478,69 @@ function CombatRecordSetMenuForPostStatsLoad(f580_arg0, f580_arg1)
 end
 function CombatRecordReadOtherPlayerStats(f581_arg0)
 	CoD.CombatRecordOtherPlayerStats = true
-	Engine[@"readotherplayerstats"](f581_arg0, CoD.CombatRecordXUID, CoD.GetCombatRecordMode())
+	Engine.ReadOtherPlayerStats(f581_arg0, CoD.CombatRecordXUID, CoD.GetCombatRecordMode())
 end
 function CombatRecordCompareAgainstLocalPlayer(f582_arg0)
-	local f582_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "OtherPlayerStats")
+	local f582_local0 = Engine.CreateModel(Engine.GetGlobalModel(), "OtherPlayerStats")
 	if f582_local0 then
-		local f582_local1 = Engine[@"getgamertagforcontroller"](f582_arg0)
+		local f582_local1 = Engine.GetGamertagForController(f582_arg0)
 		if f582_local1 then
-			local f582_local2 = Engine[@"createmodel"](f582_local0, "gamertag")
+			local f582_local2 = Engine.CreateModel(f582_local0, "gamertag")
 			if f582_local2 then
-				Engine[@"setmodelvalue"](f582_local2, f582_local1)
+				Engine.SetModelValue(f582_local2, f582_local1)
 			end
 		end
-		local f582_local2 = Engine[@"getxuid64"](f582_arg0)
+		local f582_local2 = Engine.GetXUID64(f582_arg0)
 		if f582_local2 then
-			local f582_local3 = Engine[@"createmodel"](f582_local0, "xuid")
+			local f582_local3 = Engine.CreateModel(f582_local0, "xuid")
 			if f582_local3 then
-				Engine[@"setmodelvalue"](f582_local3, f582_local2)
+				Engine.SetModelValue(f582_local3, f582_local2)
 			end
 		end
 	end
 end
 function CombatRecordSelectFriend(f583_arg0, f583_arg1, f583_arg2)
-	local f583_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "OtherPlayerStats")
+	local f583_local0 = Engine.CreateModel(Engine.GetGlobalModel(), "OtherPlayerStats")
 	local f583_local1 = nil
 	if f583_local0 then
 		local f583_local2 = f583_arg1:getModel(f583_arg2, "identityBadge.gamertag")
 		if f583_local2 then
-			f583_local1 = Engine[@"getmodelvalue"](f583_local2)
+			f583_local1 = Engine.GetModelValue(f583_local2)
 		end
 	end
 	if f583_local1 then
-		local f583_local2 = Engine[@"createmodel"](f583_local0, "gamertag")
+		local f583_local2 = Engine.CreateModel(f583_local0, "gamertag")
 		if f583_local2 then
-			Engine[@"setmodelvalue"](f583_local2, f583_local1)
+			Engine.SetModelValue(f583_local2, f583_local1)
 		end
 	end
 	local f583_local2 = nil
 	local f583_local3 = f583_arg1:getModel(f583_arg2, "identityBadge.xuid")
 	if f583_local3 then
-		f583_local2 = Engine[@"getmodelvalue"](f583_local3)
+		f583_local2 = Engine.GetModelValue(f583_local3)
 	end
 	if f583_local2 then
 		if f583_local0 then
-			local f583_local4 = Engine[@"createmodel"](f583_local0, "XUID")
+			local f583_local4 = Engine.CreateModel(f583_local0, "XUID")
 			if f583_local4 then
-				Engine[@"setmodelvalue"](f583_local4, f583_local2)
+				Engine.SetModelValue(f583_local4, f583_local2)
 			end
 		end
-		Engine[@"readotherplayerstats"](f583_arg2, f583_local2, CoD.GetCombatRecordMode())
+		Engine.ReadOtherPlayerStats(f583_arg2, f583_local2, CoD.GetCombatRecordMode())
 	end
 end
 function CombatRecordSetComparing(f584_arg0, f584_arg1, f584_arg2)
-	local f584_local0 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f584_arg1), "CombatRecordComparing")
+	local f584_local0 = Engine.CreateModel(Engine.GetModelForController(f584_arg1), "CombatRecordComparing")
 	if f584_local0 then
-		Engine[@"setmodelvalue"](f584_local0, f584_arg2)
+		Engine.SetModelValue(f584_local0, f584_arg2)
 	end
 end
 function CombatRecordUpdateSelfIdentityWidget(f585_arg0, f585_arg1)
 	if CoD.CombatRecordOtherPlayerStats == true then
 		local f585_local0 = f585_arg0.MenuFrame
-		local f585_local1 = Engine[@"getmodelforcontroller"](f585_arg1)
-		local f585_local2 = Engine[@"getmodel"](f585_local1, "socialPlayerInfo")
-		local f585_local3 = Engine[@"getmodel"](f585_local1, "socialPlayerInfo.identityBadge")
+		local f585_local1 = Engine.GetModelForController(f585_arg1)
+		local f585_local2 = Engine.GetModel(f585_local1, "socialPlayerInfo")
+		local f585_local3 = Engine.GetModel(f585_local1, "socialPlayerInfo.identityBadge")
 		if f585_local0 and f585_local2 and f585_local3 then
 			if f585_local0.SelfIdentityBadge then
 				f585_local0.SelfIdentityBadge:setModel(f585_local3, f585_arg1)
@@ -5552,7 +5552,7 @@ function CombatRecordUpdateSelfIdentityWidget(f585_arg0, f585_arg1)
 	end
 end
 function StartLiveEvent(f586_arg0, f586_arg1)
-	Engine[@"exec"](f586_arg0, "setliveevent " .. (Engine[@"tablelookup"]("gamedata/tables/common/live_event_streamers.csv", 1, 0, f586_arg1 or 0) or ""))
+	Engine.exec(f586_arg0, "setliveevent " .. (Engine.TableLookup("gamedata/tables/common/live_event_streamers.csv", 1, 0, f586_arg1 or 0) or ""))
 end
 function CollapseFreeCursorElementParent(f587_arg0)
 	local f587_local0 = f587_arg0:getParent()
@@ -5644,7 +5644,7 @@ function ClearResetPropertiesFunc(f600_arg0, f600_arg1)
 end
 function ResetServerTimer(f602_arg0, f602_arg1, f602_arg2)
 	if f602_arg2 ~= nil then
-		local f602_local0 = Engine[@"getmodelvalue"](f602_arg2)
+		local f602_local0 = Engine.GetModelValue(f602_arg2)
 		if f602_local0 ~= nil then
 			f602_arg1:setupServerTime(f602_local0)
 		end
@@ -5686,10 +5686,10 @@ function DisableModelStringReplacement(f605_arg0)
 	f605_arg0:disableModelStringReplacement()
 end
 function SetFocusedTierModelValue(f606_arg0, f606_arg1, f606_arg2)
-	local f606_local0 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f606_arg0), "FocusedTier")
+	local f606_local0 = Engine.CreateModel(Engine.GetModelForController(f606_arg0), "FocusedTier")
 	local f606_local1 = tonumber(f606_arg1)
 	local f606_local2 = 5
-	local f606_local3 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f606_arg0), "MaxTier")
+	local f606_local3 = Engine.CreateModel(Engine.GetModelForController(f606_arg0), "MaxTier")
 	local f606_local4
 	if f606_local3 then
 		f606_local4 = f606_local3:get()
@@ -5699,7 +5699,7 @@ function SetFocusedTierModelValue(f606_arg0, f606_arg1, f606_arg2)
 				f606_local4 = math.max(CoD.BlackMarketUtility.GetCurrentSeasonTier(f606_arg0) + CoD.BlackMarketUtility.SupplyChainPeekTiers, CoD.BlackMarketUtility.GetCurrentSeasonMaxTiers())
 			end
 			if f606_local0 ~= nil then
-				local f606_local5 = Engine[@"getmodelvalue"](f606_local0)
+				local f606_local5 = Engine.GetModelValue(f606_local0)
 				if f606_local1 == 1 then
 					CoD.perController[f606_arg0].ignoreResetFocusToFirstSelectable = true
 				end
@@ -5708,24 +5708,24 @@ function SetFocusedTierModelValue(f606_arg0, f606_arg1, f606_arg2)
 				end
 				if f606_arg2 == "increment" and f606_local5 ~= nil then
 					if f606_local5 + f606_local2 + f606_local1 - 1 < f606_local4 then
-						Engine[@"setmodelvalue"](f606_local0, f606_local5 + f606_local1)
+						Engine.SetModelValue(f606_local0, f606_local5 + f606_local1)
 					else
-						Engine[@"setmodelvalue"](f606_local0, math.max(f606_local4 + 1 - f606_local2, 1))
+						Engine.SetModelValue(f606_local0, math.max(f606_local4 + 1 - f606_local2, 1))
 					end
 				elseif f606_arg2 == "decrement" and f606_local5 ~= nil then
 					if f606_local1 < f606_local5 then
-						Engine[@"setmodelvalue"](f606_local0, f606_local5 - f606_local1)
+						Engine.SetModelValue(f606_local0, f606_local5 - f606_local1)
 					else
-						Engine[@"setmodelvalue"](f606_local0, 1)
+						Engine.SetModelValue(f606_local0, 1)
 					end
 				elseif f606_arg2 == "set" and f606_local5 ~= nil then
-					Engine[@"setmodelvalue"](f606_local0, f606_local1)
+					Engine.SetModelValue(f606_local0, f606_local1)
 				else
 					local f606_local6 = CoD.BlackMarketUtility.GetCurrentSeasonTier(f606_arg0)
 					if f606_local6 < 1 then
 						f606_local6 = 1
 					end
-					Engine[@"setmodelvalue"](f606_local0, f606_local6)
+					Engine.SetModelValue(f606_local0, f606_local6)
 				end
 			end
 		end

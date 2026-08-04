@@ -1,11 +1,11 @@
-require("x64:71d4e66447f837e")
-require("x64:d6ecdf7755aeddc")
-require("x64:e41af73729601d6")
-require("x64:447b94b1bc3bd97")
-require("x64:7889ce1e3e2e8a")
-require("x64:55aca670e9903a3")
-require("x64:a9255c570c68aa8")
-require("x64:a83717e9f99925a")
+require("ui/uieditor/widgets/backgroundframes/menuframeingame")
+require("ui/uieditor/widgets/common/commonheader")
+require("ui/uieditor/widgets/header/header_container_frontend")
+require("ui/uieditor/widgets/startmenu/options/flyout/startmenu_options_settinggriditem")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsbackground")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmaincorners")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmainframe")
+require("ui/uieditor/widgets/startmenu/startmenu_options_graphics_colorblindminimappreview")
 CoD.StartMenu_Options_Graphics_Colorblind = InheritFrom(CoD.Menu)
 LUI.createMenu.StartMenu_Options_Graphics_Colorblind = function(f1_arg0, f1_arg1)
 	local self = CoD.Menu.NewForUIEditor("StartMenu_Options_Graphics_Colorblind", f1_arg0)
@@ -36,7 +36,7 @@ LUI.createMenu.StartMenu_Options_Graphics_Colorblind = function(f1_arg0, f1_arg1
 	})
 	local BGFill = Buttons
 	local Description = Buttons.subscribeToModel
-	local Image = Engine[@"getmodelforcontroller"](f1_arg0)
+	local Image = Engine.GetModelForController(f1_arg0)
 	Description(BGFill, Image.PlayerSettingsUpdate, function(f3_arg0)
 		f1_local1:updateElementState(Buttons, {
 			name = "model_validation",
@@ -61,7 +61,7 @@ LUI.createMenu.StartMenu_Options_Graphics_Colorblind = function(f1_arg0, f1_arg1
 	Buttons:setWidgetType(CoD.StartMenu_Options_SettingGridItem)
 	Buttons:setHorizontalCount(4)
 	Buttons:setSpacing(10)
-	Buttons:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	Buttons:setAlignment(Enum.LUIAlignment[@"lui_alignment_right"])
 	Buttons:linkToElementModel(self, "optionsDatasource", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -75,16 +75,16 @@ LUI.createMenu.StartMenu_Options_Graphics_Colorblind = function(f1_arg0, f1_arg1
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(Buttons, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
-		ProcessListAction(self, element, controller, menu)
-		ForceNotifyControllerModel(controller, "profile.colorblindMode")
+	f1_local1:AddButtonCallbackFunction(Buttons, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], nil, function(f7_arg0, f7_arg1, f7_arg2, f7_arg3)
+		ProcessListAction(self, f7_arg0, f7_arg2, f7_arg1)
+		ForceNotifyControllerModel(f7_arg2, "profile.colorblindMode")
 		PlaySoundAlias("uin_paint_decal_nav")
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
+	end, function(f8_arg0, f8_arg1, f8_arg2)
+		CoD.Menu.SetButtonLabel(f8_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(Buttons)
@@ -93,7 +93,7 @@ LUI.createMenu.StartMenu_Options_Graphics_Colorblind = function(f1_arg0, f1_arg1
 	Description:setRGB(0.6, 0.6, 0.6)
 	Description:setZoom(40)
 	Description:setTTF("ttmussels_regular")
-	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	Description:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
 	Description:linkToElementModel(self, "hintText", true, function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then
@@ -106,7 +106,7 @@ LUI.createMenu.StartMenu_Options_Graphics_Colorblind = function(f1_arg0, f1_arg1
 	BGFill:setRGB(0, 0, 0)
 	BGFill:setAlpha(0.55)
 	BGFill:setZoom(40)
-	BGFill:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
+	BGFill:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_normal"))
 	BGFill:setShaderVector(0, 0, 0, 0, 0)
 	BGFill:setupNineSliceShader(6, 6)
 	self:addElement(BGFill)
@@ -138,20 +138,20 @@ LUI.createMenu.StartMenu_Options_Graphics_Colorblind = function(f1_arg0, f1_arg1
 			CommonHeader.subtitle.StageTitle:setText(LocalizeToUpperString(f10_local0))
 		end
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
-		GoBack(self, controller)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xbb_pscircle"], nil, function(f11_arg0, f11_arg1, f11_arg2, f11_arg3)
+		GoBack(self, f11_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
+	end, function(f12_arg0, f12_arg1, f12_arg2)
+		CoD.Menu.SetButtonLabel(f12_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], "ui_contextual_2", function(element, menu, controller, model)
-		CoD.OptionsUtility.ResetPlayerSettingToDefault(self, controller)
-		ForceNotifyControllerModel(controller, "profile.colorblindMode")
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xbx_pssquare"], "ui_contextual_2", function(f13_arg0, f13_arg1, f13_arg2, f13_arg3)
+		CoD.OptionsUtility.ResetPlayerSettingToDefault(self, f13_arg2)
+		ForceNotifyControllerModel(f13_arg2, "profile.colorblindMode")
 		PlaySoundAlias("uin_paint_decal_nav")
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/default", nil, "ui_contextual_2")
+	end, function(f14_arg0, f14_arg1, f14_arg2)
+		CoD.Menu.SetButtonLabel(f14_arg1, Enum.LUIButton[@"lui_key_xbx_pssquare"], "menu/default", nil, "ui_contextual_2")
 		return true
 	end, false)
 	MenuFrame:setModel(self.buttonModel, f1_arg0)

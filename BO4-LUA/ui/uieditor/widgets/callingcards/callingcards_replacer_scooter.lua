@@ -1,4 +1,4 @@
-require("x64:ac7b4e6db1cf2f6")
+require("ui/uieditor/widgets/callingcards/callingcards_replacer_smoke")
 CoD.CallingCards_replacer_scooter = InheritFrom(LUI.UIElement)
 CoD.CallingCards_replacer_scooter.__defaultWidth = 496
 CoD.CallingCards_replacer_scooter.__defaultHeight = 240

@@ -9,7 +9,7 @@ CoD.PlayerContextualMenu_Item.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ActionName = LUI.UIText.new(0, 0, 0, 160, 0, 0, 0, 25)
 	ActionName:setTTF("default")
-	ActionName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ActionName:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	ActionName:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

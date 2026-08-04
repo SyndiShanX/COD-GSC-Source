@@ -1,5 +1,5 @@
-require("x64:5e3a2795c098049")
-require("x64:b1e66064c1e62b6")
+require("ui/uieditor/widgets/callingcards/loot2/callingcards_loot2_vikingbattles_blood01")
+require("ui/uieditor/widgets/callingcards/loot2/callingcards_loot2_vikingbattles_characters")
 CoD[@"hash_18C2EA50F867B09B"] = InheritFrom(LUI.UIElement)
 CoD[@"hash_18C2EA50F867B09B"].__defaultWidth = 960
 CoD[@"hash_18C2EA50F867B09B"].__defaultHeight = 240
@@ -11,18 +11,18 @@ CoD[@"hash_18C2EA50F867B09B"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(@"uie_ui_menu_callingcards_vikingbattles_bg"))
+	bg:setImage(RegisterImage("uie_ui_menu_callingcards_vikingbattles_bg"))
 	self:addElement(bg)
 	self.bg = bg
 	local crowd = LUI.UIImage.new(0, 0, 0, 952, 0, 0, -60, 308)
-	crowd:setImage(RegisterImage(@"uie_ui_menu_callingcards_vikingbattles_crowd"))
+	crowd:setImage(RegisterImage("uie_ui_menu_callingcards_vikingbattles_crowd"))
 	self:addElement(crowd)
 	self.crowd = crowd
 	local characters = CoD.callingcards_loot2_vikingbattles_characters.new(f1_arg0, f1_arg1, 0, 0, 216.5, 964.5, 0, 0, -48, 402)
 	self:addElement(characters)
 	self.characters = characters
 	local blood02 = LUI.UIImage.new(0, 0, 511, 951, 0, 0, 0, 104)
-	blood02:setImage(RegisterImage(@"uie_ui_menu_callingcards_vikingbattles_blood2"))
+	blood02:setImage(RegisterImage("uie_ui_menu_callingcards_vikingbattles_blood2"))
 	self:addElement(blood02)
 	self.blood02 = blood02
 	local blood01 = CoD.callingcards_loot2_vikingbattles_blood01.new(f1_arg0, f1_arg1, 0, 0, 414.5, 424.5, 0, 0, 235, 245)

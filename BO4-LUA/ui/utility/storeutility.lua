@@ -1,10 +1,10 @@
 CoD.StoreUtility = {}
-require("x64:f3c5259f470592d")
+require("ui/utility/overlayutility")
 CoD.StoreUtility.StoreFeaturedCategory = "featured"
 CoD.StoreUtility.IsStoreEnabled = function(f1_arg0)
 	if not Dvar[@"live_store_enable"]:get() then
 		return false
-	elseif CoD.isPS4 and Dvar[@"live_store_disable_lang"]:get() == Dvar[@"loc_availablelanguages"]:get() and Dvar[@"live_store_disable_region"]:get() == Engine[@"getskuregion"]() then
+	elseif CoD.isPS4 and Dvar[@"live_store_disable_lang"]:get() == Dvar[@"loc_availablelanguages"]:get() and Dvar[@"live_store_disable_region"]:get() == Engine.GetSkuRegion() then
 		return false
 	else
 		return true
@@ -18,20 +18,20 @@ CoD.StoreUtility.InitSingleCategoryStoreMenu = function(f2_arg0, f2_arg1, f2_arg
 	f2_arg0.disablePopupOpenCloseAnim = true
 end
 CoD.StoreUtility.AddUpsellToDescriptionIfNeeded = function(f3_arg0, f3_arg1, f3_arg2)
-	if not Engine[@"ismapvalid"](f3_arg1) and ShowPurchasableMap(f3_arg0, f3_arg1) then
+	if not Engine.IsMapValid(f3_arg1) and ShowPurchasableMap(f3_arg0, f3_arg1) then
 		local f3_local0 = Engine[@"getdlcbitformapname"](f3_arg1)
 		local f3_local1 = f3_local0 and CoD.DLCPackFromBit[f3_local0]
 		if f3_local1 then
-			return Engine[@"hash_4F9F1239CFD921FE"](@"hash_5D4B2D29288ADDF", f3_arg2, Engine[@"localize"]("MENU/" .. f3_local1 .. "_REQUIRED_HINT"))
+			return Engine[@"hash_4F9F1239CFD921FE"]("menu/description_and_upsell", f3_arg2, Engine.Localize("MENU/" .. f3_local1 .. "_REQUIRED_HINT"))
 		end
 	end
 	return f3_arg2
 end
 CoD.StoreUtility.PrependPurchaseIconIfNeeded = function(f4_arg0, f4_arg1, f4_arg2)
-	if not Engine[@"ismapvalid"](f4_arg1) and ShowPurchasableMap(f4_arg0, f4_arg1) then
+	if not Engine.IsMapValid(f4_arg1) and ShowPurchasableMap(f4_arg0, f4_arg1) then
 		local f4_local0 = Engine[@"getdlcbitformapname"](f4_arg1)
 		if f4_local0 and CoD.DLCPackFromBit[f4_local0] then
-			return Engine[@"hash_4F9F1239CFD921FE"](@"hash_31001FF6B558E68C", f4_arg2)
+			return Engine[@"hash_4F9F1239CFD921FE"]("menu/purchase_icon_and_text", f4_arg2)
 		end
 	end
 	return f4_arg2
@@ -58,9 +58,9 @@ CoD.StoreUtility.CreateStoreFeatureCard = function(f8_arg0, f8_arg1)
 	table.insert(f8_arg0, {
 		models = {
 			locked = false,
-			name = Engine[@"hash_4F9F1239CFD921FE"](@"hash_4191CDDA584B4408"),
-			iconBackground = @"ui_icon_crm_featured_welcome",
-			iconBackgroundFocus = @"ui_icon_crm_featured_welcome",
+			name = Engine[@"hash_4F9F1239CFD921FE"]("menu/store_caps"),
+			iconBackground = "ui_icon_crm_featured_welcome",
+			iconBackgroundFocus = "ui_icon_crm_featured_welcome",
 			descriptionText = @"menu/upgrade_now",
 			action = OpenStore,
 			actionParam = "FeaturedCard",
@@ -100,13 +100,13 @@ CoD.OverlayUtility.AddSystemOverlay("PurchaseMapPackConfirmation", {
 			end
 			table.insert(
 				f12_local0,
-				f12_local1(Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"hash_369530752CA38E65")), function(f14_arg0, f14_arg1, f14_arg2, f14_arg3, f14_arg4)
+				f12_local1(Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"]("menu/go_to_store")), function(f14_arg0, f14_arg1, f14_arg2, f14_arg3, f14_arg4)
 					GoBackAndOpenOverlayOnParent(f14_arg4, "Store_DLC", f14_arg2)
 				end, true, false)
 			)
 			table.insert(
 				f12_local0,
-				f12_local1(@"hash_26DA4540B4705513", function(f15_arg0, f15_arg1, f15_arg2, f15_arg3, f15_arg4)
+				f12_local1("menu/cancel_caps", function(f15_arg0, f15_arg1, f15_arg2, f15_arg3, f15_arg4)
 					GoBack(f15_arg4, f15_arg2)
 				end, false, false)
 			)
@@ -164,7 +164,7 @@ CoD.StoreUtility.ShouldUpsellOrDownloadPlaylist = function(f18_arg0, f18_arg1)
 end
 CoD.StoreUtility.GetDLCImageFromDLCName = function(f19_arg0, f19_arg1)
 	if f19_arg1 then
-		local f19_local0 = Engine[@"hash_6E4C9240A618B3D3"](@"featured")
+		local f19_local0 = Engine[@"hash_6E4C9240A618B3D3"]("featured")
 		for f19_local1 = 1, #f19_local0, 1 do
 			local f19_local4 = f19_local0[f19_local1]
 			if f19_arg1 == f19_local4.metadata then
@@ -172,12 +172,12 @@ CoD.StoreUtility.GetDLCImageFromDLCName = function(f19_arg0, f19_arg1)
 			end
 		end
 	end
-	return @"ui_menu_store_product_b04_blops_pass_new_large"
+	return "ui_menu_store_product_b04_blops_pass_new_large"
 end
 CoD.StoreUtility.GetDLCImageByPlaylistId = function(f20_arg0, f20_arg1)
 	if f20_arg1 then
 		local f20_local0 = Engine[@"getplaylistinfobyid"](f20_arg1)
-		if f20_local0 and f20_local0.locked and f20_local0.mainMode == Enum[@"lobbymainmode"][@"lobby_mainmode_zm"] then
+		if f20_local0 and f20_local0.locked and f20_local0.mainMode == Enum.LobbyMainMode[@"lobby_mainmode_zm"] then
 			return CoD.StoreUtility.GetDLCImageFromDLCName(f20_arg0, CoD.DLCPackFromBit[CoD.StoreUtility.FindMissingDLC(f20_local0.usedDLCMask & Engine[@"hash_63A5F21D4434E1F8"]())])
 		end
 	end
@@ -210,7 +210,7 @@ CoD.StoreUtility.OpenStoreToDLCPack = function(f24_arg0, f24_arg1, f24_arg2, f24
 		local f24_local1 = DataSources.StoreRoot.getModel(f24_arg2)
 		f24_local1.ready:set(false)
 		f24_local1.actionSource:set(f24_arg3)
-		f24_local1.storeSource:set(f24_local0[@"name"])
+		f24_local1.storeSource:set(f24_local0.name)
 		OpenOverlay(f24_arg4, "Store", f24_arg2, {
 			_focusProduct = CoD.StoreUtility.GetDLCPackByPlaylistId(f24_arg2, CoD.SafeGetModelValue(f24_arg1:getModel(), "playlist")),
 		})
@@ -223,7 +223,7 @@ CoD.StoreUtility.OpenStoreToDLCPackByPlaylist = function(f25_arg0, f25_arg1, f25
 		local f25_local1 = DataSources.StoreRoot.getModel(f25_arg2)
 		f25_local1.ready:set(false)
 		f25_local1.actionSource:set(f25_arg3)
-		f25_local1.storeSource:set(f25_local0[@"name"])
+		f25_local1.storeSource:set(f25_local0.name)
 		OpenOverlay(f25_arg4, "Store", f25_arg2, {
 			_focusProduct = CoD.StoreUtility.GetDLCPackByPlaylistId(f25_arg2, f25_arg1),
 		})

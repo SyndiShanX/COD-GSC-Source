@@ -9,8 +9,8 @@ CoD.CallingCards_Asset_black_hole.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local blackhole = LUI.UIImage.new(0, 0, 0, 435, 0, 0, 0, 435)
 	blackhole:setZRot(-220)
-	blackhole:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_hunter_blackhole"))
-	blackhole:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	blackhole:setImage(RegisterImage("uie_ui_icon_callingcard_zombie_hunter_blackhole"))
+	blackhole:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(blackhole)
 	self.blackhole = blackhole
 	if PostLoadFunc then

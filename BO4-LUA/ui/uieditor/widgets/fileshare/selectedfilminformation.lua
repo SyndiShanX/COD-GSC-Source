@@ -1,6 +1,6 @@
-require("x64:79fe6ac43673588")
-require("x64:ba4ff48d9983a63")
-require("x64:80eabd1cd12cbd")
+require("ui/uieditor/widgets/challenges/challenges_framewidget_titlebackground")
+require("ui/uieditor/widgets/fileshare/filesharebookmarkeditem")
+require("ui/uieditor/widgets/fileshare/selectedfilmsummaryinformation")
 CoD.SelectedFilmInformation = InheritFrom(LUI.UIElement)
 CoD.SelectedFilmInformation.__defaultWidth = 525
 CoD.SelectedFilmInformation.__defaultHeight = 792
@@ -45,8 +45,8 @@ CoD.SelectedFilmInformation.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	AuthorName:setShaderVector(1, 0.02, 0, 0, 0)
 	AuthorName:setShaderVector(2, 1, 0, 0, 0)
 	AuthorName:setLetterSpacing(3)
-	AuthorName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	AuthorName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	AuthorName:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	AuthorName:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	AuthorName:linkToElementModel(self, "fileAuthorName", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -58,8 +58,8 @@ CoD.SelectedFilmInformation.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local CreateTime = LUI.UIText.new(0, 1, 17, -17, 1, 1, -370, -352)
 	CreateTime:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	CreateTime:setTTF("dinnext_regular")
-	CreateTime:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	CreateTime:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	CreateTime:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	CreateTime:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	CreateTime:linkToElementModel(self, "fileCreateTime", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -71,8 +71,8 @@ CoD.SelectedFilmInformation.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local MatchType = LUI.UIText.new(0.58, 1.58, -287, -321, 1, 1, -349, -331)
 	MatchType:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	MatchType:setTTF("dinnext_regular")
-	MatchType:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	MatchType:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	MatchType:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	MatchType:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	MatchType:linkToElementModel(self, "matchmakingMode", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -87,7 +87,7 @@ CoD.SelectedFilmInformation.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end)
 	SelectedFilmSummaryInformation:subscribeToGlobalModel(f1_arg1, "GlobalModel", "fileshareRoot.summaryDownloadTask.state", function(model)
 		local f8_local0 = SelectedFilmSummaryInformation
-		if CoD.ModelUtility.IsGlobalModelValueEqualToEnum("fileshareRoot.summaryDownloadTask.state", Enum[@"filesharetaskuistate"][@"fileshare_task_ui_done"]) and CoD.ModelUtility.IsGlobalModelValueTrue("fileshareRoot.summaryDownloadTask.success") then
+		if CoD.ModelUtility.IsGlobalModelValueEqualToEnum("fileshareRoot.summaryDownloadTask.state", Enum.FileshareTaskUIState[@"fileshare_task_ui_done"]) and CoD.ModelUtility.IsGlobalModelValueTrue("fileshareRoot.summaryDownloadTask.success") then
 			CoD.FileshareUtility.FileshareHandleDownloadSummary(self)
 		end
 	end)
@@ -126,8 +126,8 @@ CoD.SelectedFilmInformation.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	GametypeOnMapName:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	GametypeOnMapName:setTTF("dinnext_regular")
 	GametypeOnMapName:setLetterSpacing(2)
-	GametypeOnMapName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	GametypeOnMapName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	GametypeOnMapName:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	GametypeOnMapName:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	GametypeOnMapName:setBackingType(2)
 	GametypeOnMapName:setBackingColor(0, 0, 0)
 	GametypeOnMapName:setBackingAlpha(0.9)
@@ -145,8 +145,8 @@ CoD.SelectedFilmInformation.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	GameModeTitle:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	GameModeTitle:setTTF("ttmussels_regular")
 	GameModeTitle:setLetterSpacing(2)
-	GameModeTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	GameModeTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	GameModeTitle:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	GameModeTitle:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	GameModeTitle:setBackingType(2)
 	GameModeTitle:setBackingColor(0, 0, 0)
 	GameModeTitle:setBackingAlpha(0.9)
@@ -171,8 +171,8 @@ CoD.SelectedFilmInformation.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.GameTypeImage = GameTypeImage
 	local DurationText = LUI.UIText.new(0, 0, 428, 518, 0, 0, 7.5, 34.5)
 	DurationText:setTTF("dinnext_regular")
-	DurationText:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
-	DurationText:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
+	DurationText:setAlignment(Enum.LUIAlignment[@"lui_alignment_right"])
+	DurationText:setAlignment(Enum.LUIAlignment[@"lui_alignment_middle"])
 	DurationText:setBackingType(2)
 	DurationText:setBackingColor(0, 0, 0)
 	DurationText:setBackingAlpha(0.9)

@@ -1,4 +1,4 @@
-require("x64:53a1a33ed8c3d04")
+require("ui/uieditor/widgets/callingcards/loot2/callingcards_loot2_warriorcreatures_character")
 CoD[@"hash_1687E459DB800FBA"] = InheritFrom(LUI.UIElement)
 CoD[@"hash_1687E459DB800FBA"].__defaultWidth = 960
 CoD[@"hash_1687E459DB800FBA"].__defaultHeight = 240
@@ -10,19 +10,19 @@ CoD[@"hash_1687E459DB800FBA"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(@"uie_ui_menu_callingcards_warriorcreatures_bg"))
+	bg:setImage(RegisterImage("uie_ui_menu_callingcards_warriorcreatures_bg"))
 	self:addElement(bg)
 	self.bg = bg
 	local character02 = LUI.UIImage.new(0, 0, 93, 157, 0, 0, 20, 108)
-	character02:setImage(RegisterImage(@"uie_ui_menu_callingcards_warriorcreatures_char2"))
+	character02:setImage(RegisterImage("uie_ui_menu_callingcards_warriorcreatures_char2"))
 	self:addElement(character02)
 	self.character02 = character02
 	local helmet = LUI.UIImage.new(0, 0, 0, 272, 0, 0, 48, 240)
-	helmet:setImage(RegisterImage(@"uie_ui_menu_callingcards_warriorcreatures_helmet"))
+	helmet:setImage(RegisterImage("uie_ui_menu_callingcards_warriorcreatures_helmet"))
 	self:addElement(helmet)
 	self.helmet = helmet
 	local arrow = LUI.UIImage.new(0, 0, 101, 397, 0, 0, -72, 120)
-	arrow:setImage(RegisterImage(@"uie_ui_menu_callingcards_warriorcreatures_arrow"))
+	arrow:setImage(RegisterImage("uie_ui_menu_callingcards_warriorcreatures_arrow"))
 	self:addElement(arrow)
 	self.arrow = arrow
 	local character01 = CoD.callingcards_loot2_warriorcreatures_character.new(f1_arg0, f1_arg1, 0, 0, 294, 933, 0, 0, -88, 240)
@@ -30,22 +30,22 @@ CoD[@"hash_1687E459DB800FBA"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.character01 = character01
 	local arrow01 = LUI.UIImage.new(0, 0, -55, 305, 0, 0, -144, -88)
 	arrow01:setZRot(-38)
-	arrow01:setImage(RegisterImage(@"uie_ui_menu_callingcards_warriorcreatures_arrow02"))
+	arrow01:setImage(RegisterImage("uie_ui_menu_callingcards_warriorcreatures_arrow02"))
 	self:addElement(arrow01)
 	self.arrow01 = arrow01
 	local arrow02 = LUI.UIImage.new(0, 0, -379, -19, 0, 0, -124, -68)
 	arrow02:setZRot(-29)
-	arrow02:setImage(RegisterImage(@"uie_ui_menu_callingcards_warriorcreatures_arrow02"))
+	arrow02:setImage(RegisterImage("uie_ui_menu_callingcards_warriorcreatures_arrow02"))
 	self:addElement(arrow02)
 	self.arrow02 = arrow02
 	local arrow03 = LUI.UIImage.new(0, 0, -55, 305, 0, 0, -144, -88)
 	arrow03:setZRot(-38)
-	arrow03:setImage(RegisterImage(@"uie_ui_menu_callingcards_warriorcreatures_arrow02"))
+	arrow03:setImage(RegisterImage("uie_ui_menu_callingcards_warriorcreatures_arrow02"))
 	self:addElement(arrow03)
 	self.arrow03 = arrow03
 	local arrow04 = LUI.UIImage.new(0, 0, -379, -19, 0, 0, -124, -68)
 	arrow04:setZRot(-29)
-	arrow04:setImage(RegisterImage(@"uie_ui_menu_callingcards_warriorcreatures_arrow02"))
+	arrow04:setImage(RegisterImage("uie_ui_menu_callingcards_warriorcreatures_arrow02"))
 	self:addElement(arrow04)
 	self.arrow04 = arrow04
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

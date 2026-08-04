@@ -1,5 +1,5 @@
-require("x64:e579fbd66fb7e11")
-require("x64:7631da4ee57d7b6")
+require("ui/uieditor/widgets/pc/cyclinglist")
+require("ui/uieditor/widgets/scrollbars/verticalscrollbar")
 CoD.StartMenu_Options_PC_GraphicsOptions_SubOptionsList = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Options_PC_GraphicsOptions_SubOptionsList.__defaultWidth = 674
 CoD.StartMenu_Options_PC_GraphicsOptions_SubOptionsList.__defaultHeight = 535
@@ -16,7 +16,7 @@ CoD.StartMenu_Options_PC_GraphicsOptions_SubOptionsList.new = function(f1_arg0, 
 	List:setWidgetType(CoD.CyclingList)
 	List:setVerticalCount(11)
 	List:setSpacing(4)
-	List:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	List:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	List:setVerticalScrollbar(CoD.verticalScrollbar)
 	List:setDataSource("OptionGraphicsVideo")
 	List:registerEventHandler("gain_list_focus", function(element, event)

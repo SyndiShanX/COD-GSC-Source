@@ -1,9 +1,9 @@
-require("x64:228a7baa572b047")
-require("x64:79fe6ac43673588")
-require("x64:e8e4ca11e9bec8b")
-require("x64:1cff9ab810ca0ce")
-require("x64:a9255c570c68aa8")
-require("x64:2675595fa323085")
+require("ui/uieditor/widgets/callingcards/callingcards_framewidget")
+require("ui/uieditor/widgets/challenges/challenges_framewidget_titlebackground")
+require("ui/uieditor/widgets/common/commonsocialarrow")
+require("ui/uieditor/widgets/social/social_rankiconandranklargecontainer")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmainframe")
+require("ui/uieditor/widgets/emptyfocusable")
 CoD.Social_InfoPaneLeft = InheritFrom(LUI.UIElement)
 CoD.Social_InfoPaneLeft.__defaultWidth = 460
 CoD.Social_InfoPaneLeft.__defaultHeight = 741
@@ -31,7 +31,7 @@ CoD.Social_InfoPaneLeft.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.RankFrame = RankFrame
 	local TiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 26, 740)
 	TiledBacking:setAlpha(0.25)
-	TiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBacking:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	TiledBacking:setupNineSliceShader(196, 88)
@@ -84,7 +84,7 @@ CoD.Social_InfoPaneLeft.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	infoBracketBot:setAlpha(0.1)
 	infoBracketBot:setZRot(180)
 	infoBracketBot:setImage(RegisterImage(@"hash_4C325BED3F226657"))
-	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
+	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_add"))
 	infoBracketBot:setShaderVector(0, 0, 0, 0, 0)
 	infoBracketBot:setupNineSliceShader(16, 4)
 	self:addElement(infoBracketBot)
@@ -94,7 +94,7 @@ CoD.Social_InfoPaneLeft.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	primaryPresence:setTTF("dinnext_regular")
 	primaryPresence:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	primaryPresence:setLetterSpacing(1)
-	primaryPresence:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	primaryPresence:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	primaryPresence:linkToElementModel(self, "primaryPresence", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -110,8 +110,8 @@ CoD.Social_InfoPaneLeft.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	gamertag.__Color()
 	gamertag:setTTF("notosans_regular")
 	gamertag:setLetterSpacing(2)
-	gamertag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	gamertag:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
+	gamertag:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	gamertag:setAlignment(Enum.LUIAlignment[@"hash_E821F0ECFF8D1C7"])
 	gamertag:linkToElementModel(self, "gamertag", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then

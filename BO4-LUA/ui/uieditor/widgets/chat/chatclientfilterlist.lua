@@ -1,4 +1,4 @@
-require("x64:dfdca1daf33c8b0")
+require("ui/uieditor/widgets/chat/chatclientfilterlist_item")
 CoD.ChatClientFilterList = InheritFrom(LUI.UIElement)
 CoD.ChatClientFilterList.__defaultWidth = 125
 CoD.ChatClientFilterList.__defaultHeight = 120
@@ -16,7 +16,7 @@ CoD.ChatClientFilterList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	FiltersList:setWidgetType(CoD.ChatClientFilterList_Item)
 	FiltersList:setVerticalCount(8)
 	FiltersList:setSpacing(0)
-	FiltersList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	FiltersList:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	FiltersList:setDataSource("ChatClientFiltersOptionsList")
 	self:addElement(FiltersList)
 	self.FiltersList = FiltersList

@@ -3,7 +3,7 @@ function SendClientScriptMenuChangeNotifyHelper(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	if f1_arg2 then
 		f1_local0 = "opened"
 	end
-	Engine[@"sendclientscriptnotify"](f1_arg0, "menu_change" .. CoD.GetLocalClientAdjustedNum(f1_arg0), {
+	Engine.SendClientScriptNotify(f1_arg0, "menu_change" .. CoD.GetLocalClientAdjustedNum(f1_arg0), {
 		menu = f1_arg1,
 		status = f1_local0,
 		state = f1_arg3,
@@ -24,16 +24,16 @@ function CloseAllOccludingMenus(f2_arg0, f2_arg1)
 	end
 end
 function GetSessionModeFromPresenceActivity(f3_arg0)
-	if f3_arg0 == Enum[@"presenceactivity"][@"presence_activity_offline"] then
-		return Enum[@"emodes"][@"mode_invalid"]
-	elseif Enum[@"presenceactivity"][@"presence_activity_menu_inlobby"] <= f3_arg0 and f3_arg0 <= Enum[@"presenceactivity"][@"presence_activity_menu_last"] then
-		return Enum[@"emodes"][@"mode_invalid"]
-	elseif Enum[@"presenceactivity"][@"presence_activity_cp_first"] <= f3_arg0 and f3_arg0 <= Enum[@"presenceactivity"][@"presence_activity_cp_last"] then
-		return Enum[@"emodes"][@"mode_campaign"]
-	elseif Enum[@"presenceactivity"][@"presence_activity_mp_first"] <= f3_arg0 and f3_arg0 <= Enum[@"presenceactivity"][@"presence_activity_mp_last"] then
-		return Enum[@"emodes"][@"mode_multiplayer"]
-	elseif Enum[@"presenceactivity"][@"presence_activity_zm_first"] <= f3_arg0 and f3_arg0 <= Enum[@"presenceactivity"][@"presence_activity_zm_last"] then
-		return Enum[@"emodes"][@"mode_zombies"]
+	if f3_arg0 == Enum.PresenceActivity[@"presence_activity_offline"] then
+		return Enum.eModes.mode_invalid
+	elseif Enum.PresenceActivity[@"presence_activity_menu_inlobby"] <= f3_arg0 and f3_arg0 <= Enum.PresenceActivity[@"presence_activity_menu_last"] then
+		return Enum.eModes.mode_invalid
+	elseif Enum.PresenceActivity[@"presence_activity_cp_first"] <= f3_arg0 and f3_arg0 <= Enum.PresenceActivity[@"presence_activity_cp_last"] then
+		return Enum.eModes.mode_campaign
+	elseif Enum.PresenceActivity[@"presence_activity_mp_first"] <= f3_arg0 and f3_arg0 <= Enum.PresenceActivity[@"presence_activity_mp_last"] then
+		return Enum.eModes.mode_multiplayer
+	elseif Enum.PresenceActivity[@"presence_activity_zm_first"] <= f3_arg0 and f3_arg0 <= Enum.PresenceActivity[@"presence_activity_zm_last"] then
+		return Enum.eModes.mode_zombies
 	else
 	end
 end
@@ -85,7 +85,7 @@ function RemoveItemFromClassSlot(f6_arg0, f6_arg1, f6_arg2, f6_arg3, f6_arg4)
 				RemoveItemFromClassSlot(f6_arg0, f6_local7, f6_arg2, f6_arg3, f6_arg4)
 			end
 			CoD.CACUtility.ClearWeaponOptionsForClass(f6_arg2, f6_arg0, f6_arg1)
-			CoD.CACUtility.SetClassItem(f6_arg2, f6_local0, f6_arg1 .. "paintjobslot", Enum[@"customizationpaintjobinvalidid"][@"customization_invalid_paintjob_slot"], nil, f6_arg4)
+			CoD.CACUtility.SetClassItem(f6_arg2, f6_local0, f6_arg1 .. "paintjobslot", Enum.CustomizationPaintjobInvalidID[@"customization_invalid_paintjob_slot"], nil, f6_arg4)
 			CoD.CACUtility.SetClassItem(f6_arg2, f6_local0, f6_arg1 .. "." .. CoD.CACUtility[f6_arg1 .. "WeaponPrestigeSlot"], CoD.CACUtility.EmptyItemIndex, nil, f6_arg4)
 			CoD.CACUtility.SetClassItem(f6_arg2, f6_local0, f6_arg1 .. ".charmIndex", CoD.CACUtility.EmptyItemIndex, nil, f6_arg4)
 			CoD.CACUtility.SetClassItem(f6_arg2, f6_local0, f6_arg1 .. ".deathFxIndex", CoD.CACUtility.EmptyItemIndex, nil, f6_arg4)
@@ -96,7 +96,7 @@ function RemoveItemFromClassSlot(f6_arg0, f6_arg1, f6_arg2, f6_arg3, f6_arg4)
 			end
 			local f6_local3 = f6_arg0[f6_local8]
 			if f6_local3 then
-				local f6_local5 = Engine[@"getattachmentref"](f6_local3.itemIndex:get(), f6_local2, f6_arg4)
+				local f6_local5 = Engine.GetAttachmentRef(f6_local3.itemIndex:get(), f6_local2, f6_arg4)
 				if f6_local5 and CoD.CACUtility.AttachmentHasCustomReticle(f6_local5) then
 					local f6_local6 = f6_local8 .. ".reticleIndex"
 					if f6_arg0[f6_local6] then
@@ -108,24 +108,24 @@ function RemoveItemFromClassSlot(f6_arg0, f6_arg1, f6_arg2, f6_arg3, f6_arg4)
 			RemoveItemFromClassSlot(f6_arg0, "primarygrenadecount", f6_arg2, f6_arg3, f6_arg4)
 		elseif LUI.startswith(f6_arg1, "bonuscard") then
 			local f6_local3 = Engine[@"hash_7B98952F69D937F9"](f6_local2, CoD.CACUtility.GetStatIndexOffsetForLoadoutSlot(f6_arg1, f6_arg4), f6_arg4)
-			if f6_local3 == @"bonuscard_perk_1_greed" and not f6_arg3 then
+			if f6_local3 == "bonuscard_perk_1_greed" and not f6_arg3 then
 				RemoveItemFromClassSlot(f6_arg0, "talent.4", f6_arg2, f6_arg3, f6_arg4)
-			elseif f6_local3 == @"bonuscard_perk_2_greed" and not f6_arg3 then
+			elseif f6_local3 == "bonuscard_perk_2_greed" and not f6_arg3 then
 				RemoveItemFromClassSlot(f6_arg0, "talent.5", f6_arg2, f6_arg3, f6_arg4)
-			elseif f6_local3 == @"bonuscard_perk_3_greed" and not f6_arg3 then
+			elseif f6_local3 == "bonuscard_perk_3_greed" and not f6_arg3 then
 				RemoveItemFromClassSlot(f6_arg0, "talent.6", f6_arg2, f6_arg3, f6_arg4)
-			elseif f6_local3 == @"bonuscard_perk_1_gluttony" then
+			elseif f6_local3 == "bonuscard_perk_1_gluttony" then
 				RemoveItemFromClassSlot(f6_arg0, "talent.2", f6_arg2, f6_arg3, f6_arg4)
 				RemoveItemFromClassSlot(f6_arg0, "talent.3", f6_arg2, f6_arg3, f6_arg4)
-			elseif f6_local3 == @"bonuscard_perk_2_gluttony" then
+			elseif f6_local3 == "bonuscard_perk_2_gluttony" then
 				RemoveItemFromClassSlot(f6_arg0, "talent.1", f6_arg2, f6_arg3, f6_arg4)
 				RemoveItemFromClassSlot(f6_arg0, "talent.3", f6_arg2, f6_arg3, f6_arg4)
-			elseif f6_local3 == @"bonuscard_perk_3_gluttony" then
+			elseif f6_local3 == "bonuscard_perk_3_gluttony" then
 				RemoveItemFromClassSlot(f6_arg0, "talent.1", f6_arg2, f6_arg3, f6_arg4)
 				RemoveItemFromClassSlot(f6_arg0, "talent.2", f6_arg2, f6_arg3, f6_arg4)
-			elseif f6_local3 == @"bonuscard_overkill" then
+			elseif f6_local3 == "bonuscard_overkill" then
 				RemoveItemFromClassSlot(f6_arg0, "secondary", f6_arg2, f6_arg3, f6_arg4)
-			elseif f6_local3 == @"bonuscard_underkill" then
+			elseif f6_local3 == "bonuscard_underkill" then
 				RemoveItemFromClassSlot(f6_arg0, "primary", f6_arg2, f6_arg3, f6_arg4)
 			elseif CoD.BonuscardUtility.IsBonuscardOfTypeList(CoD.BonuscardUtility.PrimaryGunfighterWildcards, f6_local3) then
 				local f6_local4 = CoD.BonuscardUtility.SpecificGunfighterEquippedCountDDL(f6_arg2, f6_arg0, CoD.BonuscardUtility.PrimaryGunfighterWildcards, f6_arg4)
@@ -153,9 +153,9 @@ function RemoveItemFromClassSlot(f6_arg0, f6_arg1, f6_arg2, f6_arg3, f6_arg4)
 					end
 				end
 				CoD.WeaponAttachmentsUtility.ValidateUpgradeAttachmentLoadoutHelper(f6_arg2, f6_arg0, "secondary", f6_arg4)
-			elseif f6_local3 == @"bonuscard_primary_operator_mod" then
+			elseif f6_local3 == "bonuscard_primary_operator_mod" then
 				RemoveItemFromClassSlot(f6_arg0, "primary.attachment.5", f6_arg2, f6_arg3, f6_arg4)
-			elseif f6_local3 == @"bonuscard_secondary_operator_mod" then
+			elseif f6_local3 == "bonuscard_secondary_operator_mod" then
 				RemoveItemFromClassSlot(f6_arg0, "secondary.attachment.5", f6_arg2, f6_arg3, f6_arg4)
 			end
 		end
@@ -166,8 +166,7 @@ function RemoveItemFromClassSlot(f6_arg0, f6_arg1, f6_arg2, f6_arg3, f6_arg4)
 end
 function AttemptAttachItem(f7_arg0, f7_arg1, f7_arg2, f7_arg3, f7_arg4, f7_arg5, f7_arg6, f7_arg7)
 	local f7_local0 = f7_arg3.classNum:get()
-	local f7_local1 = false
-	local f7_local2 = nil
+	local f7_local1, f7_local2 = false
 	local f7_local3 = false
 	local f7_local4 = LUI.startswith(f7_arg4, "primary.attachment")
 	if not f7_local4 then
@@ -183,8 +182,8 @@ function AttemptAttachItem(f7_arg0, f7_arg1, f7_arg2, f7_arg3, f7_arg4, f7_arg5,
 		local f7_local8 = LUI.splitString(f7_arg4, ".")
 		f7_local8 = f7_local8[1]
 		if f7_local8 and f7_arg3[f7_local8] then
-			local f7_local9 = Engine[@"getitemattachment"](f7_arg3[f7_local8].itemIndex:get(), f7_arg5, f7_arg2)
-			f7_local7 = Engine[@"converttoxhash"](Engine[@"getattachmentrefbyindex"](f7_local9))
+			local f7_local9 = Engine.GetItemAttachment(f7_arg3[f7_local8].itemIndex:get(), f7_arg5, f7_arg2)
+			f7_local7 = Engine[@"converttoxhash"](Engine.GetAttachmentRefByIndex(f7_local9))
 			f7_local5 = Engine[0x37522AE910C327](f7_local9, f7_arg2) == Enum[@"eattachmentgroup"][@"hash_26EE211053211305"]
 		end
 	end
@@ -206,10 +205,10 @@ function AttemptAttachItem(f7_arg0, f7_arg1, f7_arg2, f7_arg3, f7_arg4, f7_arg5,
 		local f7_local13 = LUI.splitString(f7_arg4, ".")
 		f7_local13 = f7_local13[1]
 		if f7_local13 and f7_arg3[f7_local13] then
-			f7_local11 = Engine[@"getattachmentallocationcost"](Engine[@"getitemattachment"](f7_arg3[f7_local13].itemIndex:get(), f7_arg5, f7_arg2))
+			f7_local11 = Engine.GetAttachmentAllocationCost(Engine.GetItemAttachment(f7_arg3[f7_local13].itemIndex:get(), f7_arg5, f7_arg2))
 		end
 	else
-		f7_local11 = Engine[@"getitemallocationcost"](f7_local10, f7_local6, f7_arg2)
+		f7_local11 = Engine.GetItemAllocationCost(f7_local10, f7_local6, f7_arg2)
 	end
 	if not (f7_local10 <= CoD.CACUtility.EmptyItemIndex or f7_local11 <= 0) or f7_local2 then
 		f7_local3 = true
@@ -217,11 +216,11 @@ function AttemptAttachItem(f7_arg0, f7_arg1, f7_arg2, f7_arg3, f7_arg4, f7_arg5,
 			f7_local2 = f7_arg4
 		end
 		local f7_local13 = Engine[@"hash_7B98952F69D937F9"](f7_local10, f7_local6, f7_arg2)
-		if f7_local13 == @"bonuscard_perk_1_greed" then
+		if f7_local13 == "bonuscard_perk_1_greed" then
 			RemoveItemFromClassSlot(f7_arg3, "talent.4", f7_arg1, f7_local3, f7_arg2)
-		elseif f7_local13 == @"bonuscard_perk_2_greed" then
+		elseif f7_local13 == "bonuscard_perk_2_greed" then
 			RemoveItemFromClassSlot(f7_arg3, "talent.5", f7_arg1, f7_local3, f7_arg2)
-		elseif f7_local13 == @"bonuscard_perk_3_greed" then
+		elseif f7_local13 == "bonuscard_perk_3_greed" then
 			RemoveItemFromClassSlot(f7_arg3, "talent.6", f7_arg1, f7_local3, f7_arg2)
 		end
 		RemoveItemFromClassSlot(f7_arg3, f7_local2, f7_arg1, f7_local3, f7_arg2)
@@ -231,12 +230,12 @@ function AttemptAttachItem(f7_arg0, f7_arg1, f7_arg2, f7_arg3, f7_arg4, f7_arg5,
 	if not f7_local3 then
 		local f7_local13 = CoD.CACUtility.GetMaxAllocation(f7_arg1)
 		local f7_local12 = CoD.CACUtility.GetUsedAllocation(f7_arg1, f7_local0, f7_arg2)
-		local f7_local14 = Engine[@"getitemallocationcost"](f7_arg5, f7_local6, f7_arg2)
+		local f7_local14 = Engine.GetItemAllocationCost(f7_arg5, f7_local6, f7_arg2)
 		if f7_local4 then
 			local f7_local15 = LUI.splitString(f7_arg4, ".")
 			f7_local15 = f7_local15[1]
 			if f7_local15 and f7_arg3[f7_local15] then
-				f7_local14 = Engine[@"getattachmentallocationcost"](Engine[@"getitemattachment"](f7_arg3[f7_local15].itemIndex:get(), f7_arg5, f7_arg2))
+				f7_local14 = Engine.GetAttachmentAllocationCost(Engine.GetItemAttachment(f7_arg3[f7_local15].itemIndex:get(), f7_arg5, f7_arg2))
 			else
 				f7_local14 = 1
 			end
@@ -244,9 +243,9 @@ function AttemptAttachItem(f7_arg0, f7_arg1, f7_arg2, f7_arg3, f7_arg4, f7_arg5,
 			f7_local14 = 1
 		end
 		local f7_local15 = f7_local12 + f7_local14 - f7_local13
-		local f7_local16 = Engine[@"getmodelforcontroller"](f7_arg1)
+		local f7_local16 = Engine.GetModelForController(f7_arg1)
 		f7_local16["CACMenu.numItemsToRemove"].set(f7_local16["CACMenu.numItemsToRemove"], f7_local15)
-		if f7_arg2 == Enum[@"emodes"][@"mode_zombies"] or f7_local12 + f7_local14 <= f7_local13 or f7_local14 == 0 and not LUI.startswith(f7_arg4, "primary.attachment") and not LUI.startswith(f7_arg4, "secondary.attachment") and f7_arg4 ~= "primarygrenadecount" then
+		if f7_arg2 == Enum.eModes.mode_zombies or f7_local12 + f7_local14 <= f7_local13 or f7_local14 == 0 and not LUI.startswith(f7_arg4, "primary.attachment") and not LUI.startswith(f7_arg4, "secondary.attachment") and f7_arg4 ~= "primarygrenadecount" then
 			f7_local1 = true
 		else
 			CoD.perController[f7_arg1].overCapacityItemIndex = f7_arg5
@@ -263,9 +262,9 @@ function AttemptAttachItem(f7_arg0, f7_arg1, f7_arg2, f7_arg3, f7_arg4, f7_arg5,
 		end
 	end
 	if f7_local1 and f7_arg5 > CoD.CACUtility.EmptyItemIndex then
-		if f7_local7 == @"bonuscard_overkill" then
+		if f7_local7 == "bonuscard_overkill" then
 			RemoveItemFromClassSlot(f7_arg3, "secondary", f7_arg1, f7_local3, f7_arg2)
-		elseif f7_local7 == @"bonuscard_underkill" then
+		elseif f7_local7 == "bonuscard_underkill" then
 			RemoveItemFromClassSlot(f7_arg3, "primary", f7_arg1, f7_local3, f7_arg2)
 		end
 		CoD.CACUtility.SetClassItem(f7_arg1, f7_local0, f7_arg4, f7_arg5, f7_arg6, f7_arg2)
@@ -276,10 +275,10 @@ function AttemptAttachItem(f7_arg0, f7_arg1, f7_arg2, f7_arg3, f7_arg4, f7_arg5,
 	return f7_local1
 end
 function SetConfirmationInfoInternal(f8_arg0, f8_arg1, f8_arg2)
-	local f8_local0 = Engine[@"getmodelvalue"](f8_arg2)
-	local f8_local1 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f8_arg1), "UnlockTokenInfo")
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](f8_local1, "itemIndex"), f8_local0)
-	local f8_local2 = Engine[@"getmodel"](f8_local1, "xpBarInfo")
+	local f8_local0 = Engine.GetModelValue(f8_arg2)
+	local f8_local1 = Engine.GetModel(Engine.GetModelForController(f8_arg1), "UnlockTokenInfo")
+	Engine.SetModelValue(Engine.GetModel(f8_local1, "itemIndex"), f8_local0)
+	local f8_local2 = Engine.GetModel(f8_local1, "xpBarInfo")
 	if f8_local2 then
 		local f8_local3 = CoD.GetPlayerStats(f8_arg1)
 		local f8_local4 = f8_local3.PlayerStatsList.RANKXP.statValue:get()
@@ -298,21 +297,21 @@ function SetConfirmationInfoInternal(f8_arg0, f8_arg1, f8_arg2)
 			if not f8_local8 then
 				f8_local8 = f8_local4
 			end
-			f8_local9 = Engine[@"getparagonrankdisplaylevel"](f8_local5)
-			f8_local11 = Engine[@"getparagonrankdisplaylevel"](f8_local5 + 1)
+			f8_local9 = Engine.GetParagonRankDisplayLevel(f8_local5)
+			f8_local11 = Engine.GetParagonRankDisplayLevel(f8_local5 + 1)
 			local f8_local13 = f8_local3.PlayerStatsList.PARAGON_ICON_ID.StatValue:get()
 			if f8_local13 ~= CoD.PrestigeUtility.INVALID_PARAGON_ICON_ID then
-				f8_local10 = Engine[@"getparagoniconbyid"](f8_local13)
+				f8_local10 = Engine.GetParagonIconById(f8_local13)
 				f8_local12 = f8_local10
 			end
 		end
-		Engine[@"setmodelvalue"](Engine[@"getmodel"](f8_local2, "rankXP"), f8_local4)
-		Engine[@"setmodelvalue"](Engine[@"getmodel"](f8_local2, "xpEarned"), 0)
-		Engine[@"setmodelvalue"](Engine[@"getmodel"](f8_local2, "xpNeeded"), f8_local8 - f8_local4)
-		Engine[@"setmodelvalue"](Engine[@"getmodel"](f8_local2, "currLevel"), f8_local9)
-		Engine[@"setmodelvalue"](Engine[@"getmodel"](f8_local2, "currLevelIcon"), f8_local10)
-		Engine[@"setmodelvalue"](Engine[@"getmodel"](f8_local2, "nextLevel"), f8_local11)
-		Engine[@"setmodelvalue"](Engine[@"getmodel"](f8_local2, "nextLevelIcon"), f8_local12)
+		Engine.SetModelValue(Engine.GetModel(f8_local2, "rankXP"), f8_local4)
+		Engine.SetModelValue(Engine.GetModel(f8_local2, "xpEarned"), 0)
+		Engine.SetModelValue(Engine.GetModel(f8_local2, "xpNeeded"), f8_local8 - f8_local4)
+		Engine.SetModelValue(Engine.GetModel(f8_local2, "currLevel"), f8_local9)
+		Engine.SetModelValue(Engine.GetModel(f8_local2, "currLevelIcon"), f8_local10)
+		Engine.SetModelValue(Engine.GetModel(f8_local2, "nextLevel"), f8_local11)
+		Engine.SetModelValue(Engine.GetModel(f8_local2, "nextLevelIcon"), f8_local12)
 	end
 	CoD.perController[f8_arg1].UnlockTokenInfo = f8_local1
 end
@@ -321,23 +320,23 @@ function SetWeaponOptionAsOldInternal(f9_arg0, f9_arg1, f9_arg2, f9_arg3)
 	local f9_local1 = f9_arg1:getModel(f9_arg2, "weaponOptionType")
 	local f9_local2 = f9_arg1:getModel(f9_arg2, "unlockSessionMode")
 	if f9_local0 and f9_local1 and f9_local2 then
-		local f9_local3 = Engine[@"getmodelvalue"](f9_local0)
-		local f9_local4 = Engine[@"getmodelvalue"](f9_local1)
-		local f9_local5 = Engine[@"getmodelvalue"](f9_local2)
-		if f9_local4 ~= Enum[@"eweaponoptiongroup"][@"weaponoption_group_paintjob"] and f9_local4 ~= Enum[@"eweaponoptiongroup"][@"weaponoption_group_invalid"] and f9_local3 > CoD.CACUtility.EmptyItemIndex then
-			Engine[@"setweaponoptionasold"](f9_arg2, f9_arg3, Engine[@"getweaponoptiongroupindex"](f9_local3, f9_local4), f9_local5)
+		local f9_local3 = Engine.GetModelValue(f9_local0)
+		local f9_local4 = Engine.GetModelValue(f9_local1)
+		local f9_local5 = Engine.GetModelValue(f9_local2)
+		if f9_local4 ~= Enum.eWeaponOptionGroup[@"weaponoption_group_paintjob"] and f9_local4 ~= Enum.eWeaponOptionGroup[@"weaponoption_group_invalid"] and f9_local3 > CoD.CACUtility.EmptyItemIndex then
+			Engine.SetWeaponOptionAsOld(f9_arg2, f9_arg3, Engine.GetWeaponOptionGroupIndex(f9_local3, f9_local4), f9_local5)
 			if f9_arg0.categoryTabs and f9_arg0.categoryTabs.Tabs.grid then
 				local f9_local6 = f9_arg0.categoryTabs.Tabs.grid:getItemAt(f9_arg0.categoryTabs.Tabs.grid.savedActiveIndex + 1)
 				if f9_local6 then
 					local f9_local7 = f9_local6:getModel(f9_arg2, "breadcrumbCount")
 					if f9_local7 then
 						local f9_local8 = 0
-						if f9_local6.filterEnum < Enum[@"weaponoptionfilter"][@"weaponoption_filter_mode_count"] then
-							f9_local8 = Engine[@"weaponoptionnewitemcount"](f9_arg2, f9_arg3, f9_local4, f9_local6.filterEnum)
+						if f9_local6.filterEnum < Enum.WeaponOptionFilter[@"weaponoption_filter_mode_count"] then
+							f9_local8 = Engine.WeaponOptionNewItemCount(f9_arg2, f9_arg3, f9_local4, f9_local6.filterEnum)
 						else
-							f9_local8 = Engine[@"weaponoptionnewmodeagnosticitemcount"](f9_arg2, f9_arg3, f9_local4, f9_local6.filterEnum)
+							f9_local8 = Engine.WeaponOptionNewModeAgnosticItemCount(f9_arg2, f9_arg3, f9_local4, f9_local6.filterEnum)
 						end
-						Engine[@"setmodelvalue"](f9_local7, f9_local8)
+						Engine.SetModelValue(f9_local7, f9_local8)
 					end
 				end
 			end
@@ -345,14 +344,14 @@ function SetWeaponOptionAsOldInternal(f9_arg0, f9_arg1, f9_arg2, f9_arg3)
 	end
 end
 function GetCPDifficulty(f10_arg0, f10_arg1)
-	local f10_local0 = Engine[@"getprofilevarint"](f10_arg0, f10_arg1)
+	local f10_local0 = Engine.GetProfileVarInt(f10_arg0, f10_arg1)
 	if f10_local0 ~= 0 then
 		return f10_local0 - 1
 	else
 	end
 end
 function SetCPDifficulty(f11_arg0, f11_arg1, f11_arg2)
-	Engine[@"setprofilevar"](f11_arg0, f11_arg1, f11_arg2 + 1)
+	Engine.SetProfileVar(f11_arg0, f11_arg1, f11_arg2 + 1)
 end
 function SetHeroCardStateToDefault(f12_arg0, f12_arg1, f12_arg2, f12_arg3)
 	local f12_local0 = GetListItem(f12_arg1, f12_arg2)
@@ -363,7 +362,7 @@ function SetHeroCardStateToDefault(f12_arg0, f12_arg1, f12_arg2, f12_arg3)
 	end
 end
 function SetBrowseMode(f13_arg0)
-	CoD.CraftUtility.SetEmblemEditorProperties(f13_arg0, Enum[@"customizationeditormode"][@"customization_editor_mode_browse"], "editorMode")
+	CoD.CraftUtility.SetEmblemEditorProperties(f13_arg0, Enum.CustomizationEditorMode[@"customization_editor_mode_browse"], "editorMode")
 end
 function EmblemEditor_SetScaleMode(f14_arg0, f14_arg1)
 	CoD.CraftUtility.SetEmblemEditorProperties(f14_arg0, f14_arg1, "scaleMode")
@@ -374,7 +373,7 @@ function EmblemEditor_SetMaterialScaleMode(f15_arg0, f15_arg1)
 	Engine[@"hash_3BBCA32C957C5A85"](f15_arg1)
 end
 function EmblemEditor_GetLayerAndGroupIndex(f16_arg0, f16_arg1)
-	return Engine[@"getmodelvalue"](f16_arg0:getModel(f16_arg1, "layerIndex")) .. " " .. Engine[@"getmodelvalue"](f16_arg0:getModel(f16_arg1, "groupIndex"))
+	return Engine.GetModelValue(f16_arg0:getModel(f16_arg1, "layerIndex")) .. " " .. Engine.GetModelValue(f16_arg0:getModel(f16_arg1, "groupIndex"))
 end
 function EmblemEditor_SetupDrawEmblem(f17_arg0, f17_arg1, f17_arg2)
 	f17_arg1.emblemLayer.layerIcon.layerIcon:setupDrawEmblemLayer(GetEmblemLayerAndGroupIndex(f17_arg0, EmblemEditor_GetLayerAndGroupIndex(f17_arg1, f17_arg0)))
@@ -383,7 +382,7 @@ end
 function EmblemEditor_SetSelectedLayerIndex(f18_arg0, f18_arg1)
 	local f18_local0 = f18_arg1:getModel(f18_arg0, "layerIndex")
 	if f18_local0 then
-		CoD.perController[f18_arg0].selectedLayerIndex = Engine[@"getmodelvalue"](f18_local0)
+		CoD.perController[f18_arg0].selectedLayerIndex = Engine.GetModelValue(f18_local0)
 	end
 end
 function EmblemEditor_RecordMetrics(f19_arg0, f19_arg1, f19_arg2, f19_arg3)
@@ -391,24 +390,24 @@ function EmblemEditor_RecordMetrics(f19_arg0, f19_arg1, f19_arg2, f19_arg3)
 	if f19_arg0.occludedMenu and f19_arg0.occludedMenu.openTime then
 		f19_local0 = Engine[@"milliseconds"]() - f19_arg0.occludedMenu.openTime
 	end
-	CoD.MetricsUtility.EmblemEvent(f19_arg1, f19_local0, Engine[@"getemblemsummarystring"](), f19_arg2, f19_arg3)
+	CoD.MetricsUtility.EmblemEvent(f19_arg1, f19_local0, Engine.GetEmblemSummaryString(), f19_arg2, f19_arg3)
 end
 function EmblemChooseColor_SetupSelectedLayerColorModel(f20_arg0)
-	local f20_local0 = Engine[@"getmodelforcontroller"](f20_arg0)
-	local f20_local1 = Engine[@"getselectedlayercolor"](f20_arg0)
+	local f20_local0 = Engine.GetModelForController(f20_arg0)
+	local f20_local1 = Engine.GetSelectedLayerColor(f20_arg0)
 	local f20_local2 = CoD.ColorUtility.ConvertColor(f20_local1.red, f20_local1.green, f20_local1.blue)
-	local f20_local3 = Engine[@"getmodel"](f20_local0, "Emblem.EmblemSelectedLayerColor")
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](f20_local3, "color"), f20_local2)
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](f20_local3, "red"), f20_local1.red * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE)
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](f20_local3, "green"), f20_local1.green * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE)
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](f20_local3, "blue"), f20_local1.blue * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE)
-	local f20_local4 = Engine[@"getselectedlayercolor1"](f20_arg0)
+	local f20_local3 = Engine.GetModel(f20_local0, "Emblem.EmblemSelectedLayerColor")
+	Engine.SetModelValue(Engine.GetModel(f20_local3, "color"), f20_local2)
+	Engine.SetModelValue(Engine.GetModel(f20_local3, "red"), f20_local1.red * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE)
+	Engine.SetModelValue(Engine.GetModel(f20_local3, "green"), f20_local1.green * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE)
+	Engine.SetModelValue(Engine.GetModel(f20_local3, "blue"), f20_local1.blue * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE)
+	local f20_local4 = Engine.GetSelectedLayerColor1(f20_arg0)
 	local f20_local5 = CoD.ColorUtility.ConvertColor(f20_local4.red, f20_local4.green, f20_local4.blue)
-	local f20_local6 = Engine[@"getmodel"](f20_local0, "Emblem.EmblemSelectedLayerColor1")
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](f20_local6, "color"), f20_local5)
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](f20_local6, "red"), f20_local4.red * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE)
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](f20_local6, "green"), f20_local4.green * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE)
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](f20_local6, "blue"), f20_local4.blue * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE)
+	local f20_local6 = Engine.GetModel(f20_local0, "Emblem.EmblemSelectedLayerColor1")
+	Engine.SetModelValue(Engine.GetModel(f20_local6, "color"), f20_local5)
+	Engine.SetModelValue(Engine.GetModel(f20_local6, "red"), f20_local4.red * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE)
+	Engine.SetModelValue(Engine.GetModel(f20_local6, "green"), f20_local4.green * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE)
+	Engine.SetModelValue(Engine.GetModel(f20_local6, "blue"), f20_local4.blue * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE)
 	CoD.CraftUtility.SetEmblemNoColorDataModel(f20_arg0)
 end
 function EmblemChooseColor_SetPointerPosition(f21_arg0, f21_arg1)
@@ -441,23 +440,23 @@ function EmblemChooseColor_GetGradientSliderElement(f24_arg0, f24_arg1)
 	return f24_arg1.colorGradientContainer.gradientSlider
 end
 function EmblemChooseColor_ModifyColorModelValue(f25_arg0, f25_arg1)
-	Engine[@"setmodelvalue"](f25_arg0, CoD.ColorUtility.ClampColor(Engine[@"getmodelvalue"](f25_arg0) + f25_arg1, 0, 255))
+	Engine.SetModelValue(f25_arg0, CoD.ColorUtility.ClampColor(Engine.GetModelValue(f25_arg0) + f25_arg1, 0, 255))
 end
 function EmblemChooseColor_SetColorModelValue(f26_arg0, f26_arg1)
-	Engine[@"setmodelvalue"](f26_arg0, CoD.ColorUtility.ClampColor(f26_arg1, 0, 255))
+	Engine.SetModelValue(f26_arg0, CoD.ColorUtility.ClampColor(f26_arg1, 0, 255))
 end
 function EmblemChooseColor_SetLayerColor(f27_arg0, f27_arg1)
-	local f27_local0 = Engine[@"getmodelvalue"](f27_arg0:getModel(f27_arg1, "red"))
-	local f27_local1 = Engine[@"getmodelvalue"](f27_arg0:getModel(f27_arg1, "green"))
-	local f27_local2 = Engine[@"getmodelvalue"](f27_arg0:getModel(f27_arg1, "blue"))
+	local f27_local0 = Engine.GetModelValue(f27_arg0:getModel(f27_arg1, "red"))
+	local f27_local1 = Engine.GetModelValue(f27_arg0:getModel(f27_arg1, "green"))
+	local f27_local2 = Engine.GetModelValue(f27_arg0:getModel(f27_arg1, "blue"))
 	local f27_local3 = 1 / CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE
 	Engine[@"emblemsetlayercolor"](CoD.CraftUtility.GetEmblemEditorProperties(f27_arg1, "colorNum"), f27_local0 * f27_local3, f27_local1 * f27_local3, f27_local2 * f27_local3)
 end
 function EmblemChooseColor_SetPreviewColorModel(f28_arg0, f28_arg1)
-	local f28_local0 = Engine[@"getmodelforcontroller"](f28_arg1)
+	local f28_local0 = Engine.GetModelForController(f28_arg1)
 	local f28_local1 = CoD.CraftUtility.GetSelectedEmblemColor(f28_arg1)
 	if f28_local1 ~= nil then
-		Engine[@"setmodelvalue"](f28_arg0:getModel(f28_arg1, "color"), CoD.ColorUtility.ConvertColor(f28_local1.red, f28_local1.green, f28_local1.blue))
+		Engine.SetModelValue(f28_arg0:getModel(f28_arg1, "color"), CoD.ColorUtility.ConvertColor(f28_local1.red, f28_local1.green, f28_local1.blue))
 	end
 end
 function EmblemChooseColor_SetBarProperties(f29_arg0, f29_arg1, f29_arg2, f29_arg3)
@@ -471,9 +470,9 @@ function EmblemGradient_SetupSwatchLastSavedColor(f30_arg0, f30_arg1, f30_arg2)
 	f30_arg1.colorGradientMixerContainer.colorMixer:setModel(f30_local0, f30_arg2)
 end
 function EmblemGradient_UpdateGradientVisuals(f31_arg0, f31_arg1)
-	local f31_local0 = Engine[@"getmodelvalue"](Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f31_arg0), "Emblem.EmblemSelectedLayerProperties.gradient_fill")) / CoD.CraftUtility.EMBLEM_MAX_GRADIENT_SLIDER_VALUE
-	local f31_local1 = Engine[@"getselectedlayercolor"](f31_arg0)
-	local f31_local2 = Engine[@"getselectedlayercolor1"](f31_arg0)
+	local f31_local0 = Engine.GetModelValue(Engine.GetModel(Engine.GetModelForController(f31_arg0), "Emblem.EmblemSelectedLayerProperties.gradient_fill")) / CoD.CraftUtility.EMBLEM_MAX_GRADIENT_SLIDER_VALUE
+	local f31_local1 = Engine.GetSelectedLayerColor(f31_arg0)
+	local f31_local2 = Engine.GetSelectedLayerColor1(f31_arg0)
 	EmblemChooseColor_SetPointerPosition(f31_arg1, f31_local0)
 	if f31_local1 ~= nil and f31_local2 ~= nil then
 		f31_arg1.bar:setShaderVector(0, f31_local1.red, f31_local1.green, f31_local1.blue, f31_local1.alpha)
@@ -492,27 +491,27 @@ function PaintJobEditor_RecordMetrics(f33_arg0, f33_arg1, f33_arg2, f33_arg3, f3
 	if f33_arg0.occludedMenu and f33_arg0.occludedMenu.openTime then
 		f33_local0 = Engine[@"milliseconds"]() - f33_arg0.occludedMenu.openTime
 	end
-	CoD.MetricsUtility.PaintshopEvent(f33_arg1, f33_arg3, f33_local0, Engine[@"getmodelvalue"](Engine[@"getmodel"](f33_arg2, "weaponIndex")), Engine[@"getmodelvalue"](Engine[@"getmodel"](f33_arg2, "paintjobName")), Engine[@"getpaintshopsummarystring"](), f33_arg4, f33_arg5)
+	CoD.MetricsUtility.PaintshopEvent(f33_arg1, f33_arg3, f33_local0, Engine.GetModelValue(Engine.GetModel(f33_arg2, "weaponIndex")), Engine.GetModelValue(Engine.GetModel(f33_arg2, "paintjobName")), Engine.GetPaintshopSummaryString(), f33_arg4, f33_arg5)
 end
 function SetGroupsNotifyInformation(f34_arg0, f34_arg1, f34_arg2, f34_arg3)
-	local f34_local0 = Engine[@"getmodelforcontroller"](f34_arg0)
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](f34_local0, "groups.notificationTitle"), f34_arg1)
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](f34_local0, "groups.notificationMessage"), f34_arg2)
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](f34_local0, "groups.notificationError"), f34_arg3)
+	local f34_local0 = Engine.GetModelForController(f34_arg0)
+	Engine.SetModelValue(Engine.GetModel(f34_local0, "groups.notificationTitle"), f34_arg1)
+	Engine.SetModelValue(Engine.GetModel(f34_local0, "groups.notificationMessage"), f34_arg2)
+	Engine.SetModelValue(Engine.GetModel(f34_local0, "groups.notificationError"), f34_arg3)
 end
 function ValidateCreateGroupInformation(f35_arg0, f35_arg1, f35_arg2)
-	local f35_local0 = Engine[@"getmodelforcontroller"](f35_arg2)
-	local f35_local1 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f35_local0, "groups.createGroup.name"))
-	local f35_local2 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f35_local0, "groups.createGroup.description"))
+	local f35_local0 = Engine.GetModelForController(f35_arg2)
+	local f35_local1 = Engine.GetModelValue(Engine.GetModel(f35_local0, "groups.createGroup.name"))
+	local f35_local2 = Engine.GetModelValue(Engine.GetModel(f35_local0, "groups.createGroup.description"))
 	if f35_local1 == "" then
-		OpenGenericSmallPopup(f35_arg0, f35_arg2, @"hash_44553C10CA6CD641", @"hash_3231A10628026E56", nil, @"menu/ok")
+		OpenGenericSmallPopup(f35_arg0, f35_arg2, "groups/missing_group_name_title", "groups/missing_group_name_text", nil, @"menu/ok")
 		return false
 	else
 		return true
 	end
 end
 function Gunsmith_ClearItemName(f36_arg0)
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f36_arg0), "Gunsmith.GunsmithSelectedItemProperties.itemName"), "")
+	Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f36_arg0), "Gunsmith.GunsmithSelectedItemProperties.itemName"), "")
 end
 function Store_UpdatePSStoreIconCount(f37_arg0, f37_arg1)
 	if CoD.perController[f37_arg0].psStoreIconCount == nil then

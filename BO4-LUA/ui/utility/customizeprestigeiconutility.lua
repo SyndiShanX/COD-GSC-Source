@@ -19,7 +19,7 @@ CoD.CustomizePrestigeIconUtility.EnumToTitleOfOriginString = function(f2_arg0)
 			return f2_local1
 		end
 	end
-	f2_local1 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_2C79EA24AB1A2BA")
+	f2_local1 = Engine[@"hash_4F9F1239CFD921FE"]("null/empty")
 end
 CoD.CustomizePrestigeIconUtility.IsIconUnlockedByWins = function(f3_arg0, f3_arg1)
 	local f3_local0
@@ -31,7 +31,7 @@ CoD.CustomizePrestigeIconUtility.IsIconUnlockedByWins = function(f3_arg0, f3_arg
 	return f3_local0
 end
 CoD.CustomizePrestigeIconUtility.IsIconUnlockedByLevel = function(f4_arg0, f4_arg1, f4_arg2, f4_arg3, f4_arg4)
-	if f4_arg4 == Enum[@"emodes"][@"mode_warzone"] then
+	if f4_arg4 == Enum.eModes.mode_warzone then
 		return f4_arg0 and f4_arg2 <= f4_arg1 + 1
 	end
 	local f4_local0 = f4_arg0
@@ -45,10 +45,10 @@ CoD.CustomizePrestigeIconUtility.IsIconUnlockedByLevel = function(f4_arg0, f4_ar
 end
 CoD.CustomizePrestigeIconUtility.GetCurrentWins = function(f5_arg0, f5_arg1)
 	local f5_local0 = 0
-	if f5_arg1 == Enum[@"emodes"][@"mode_warzone"] then
+	if f5_arg1 == Enum.eModes.mode_warzone then
 		local f5_local1 = CoD.GetCurrentPlayerStats(f5_arg0)
 		if f5_local1 then
-			for f5_local5, f5_local6 in pairs(CoD.GameTypeUtility.GetAllGameModes(Enum[@"emodes"][@"mode_warzone"])) do
+			for f5_local5, f5_local6 in pairs(CoD.GameTypeUtility.GetAllGameModes(Enum.eModes.mode_warzone)) do
 				local f5_local7 = f5_local1.PlayerStatsByGameType[f5_local6].WINS.StatValue:get()
 				if f5_local0 < f5_local7 then
 					f5_local0 = f5_local7
@@ -62,18 +62,18 @@ CoD.CustomizePrestigeIconUtility.IsIconUnlocked = function(f6_arg0, f6_arg1)
 	return CoD.CustomizePrestigeIconUtility.IsIconUnlockedByLevel(f6_local3, f6_local2, f6_local1.unlockLevel, f6_local1.titleOfOrigin) and CoD.CustomizePrestigeIconUtility.IsIconUnlockedByWins(f6_local4, f6_local1.winsRequired)
 end
 CoD.CustomizePrestigeIconUtility.GetCurrentParagonIconId = function(f7_arg0, f7_arg1)
-	if f7_arg1 == Enum[@"emodes"][@"mode_multiplayer"] then
-		local f7_local0 = Engine[@"storagegetbuffer"](f7_arg0, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
+	if f7_arg1 == Enum.eModes.mode_multiplayer then
+		local f7_local0 = Engine.StorageGetBuffer(f7_arg0, Enum.StorageFileType[@"storage_mp_stats_online"])
 		if f7_local0 and f7_local0.prestige_icon_id then
 			return f7_local0.prestige_icon_id:get()
 		end
-	elseif f7_arg1 == Enum[@"emodes"][@"mode_zombies"] then
-		local f7_local0 = Engine[@"storagegetbuffer"](f7_arg0, Enum[@"storagefiletype"][@"storage_zm_stats_online"])
+	elseif f7_arg1 == Enum.eModes.mode_zombies then
+		local f7_local0 = Engine.StorageGetBuffer(f7_arg0, Enum.StorageFileType[@"storage_zm_stats_online"])
 		if f7_local0 and f7_local0.prestige_icon_id then
 			return f7_local0.prestige_icon_id:get()
 		end
-	elseif f7_arg1 == Enum[@"emodes"][@"mode_warzone"] then
-		local f7_local0 = Engine[@"storagegetbuffer"](f7_arg0, Enum[@"storagefiletype"][@"storage_wz_stats_online"])
+	elseif f7_arg1 == Enum.eModes.mode_warzone then
+		local f7_local0 = Engine.StorageGetBuffer(f7_arg0, Enum.StorageFileType[@"storage_wz_stats_online"])
 		if f7_local0 and f7_local0.prestige_icon_id then
 			return f7_local0.prestige_icon_id:get()
 		end
@@ -89,18 +89,18 @@ CoD.CustomizePrestigeIconUtility.PrestigeIconSelected = function(f9_arg0, f9_arg
 		PlaySoundAlias("cac_equipment_add")
 		local f9_local1 = CoD.PrestigeUtility.GetPrestigeGameMode()
 		local f9_local2 = nil
-		if f9_local1 == Enum[@"emodes"][@"mode_multiplayer"] then
-			f9_local2 = Enum[@"storagefiletype"][@"storage_mp_stats_online"]
-		elseif f9_local1 == Enum[@"emodes"][@"mode_zombies"] then
-			f9_local2 = Enum[@"storagefiletype"][@"storage_zm_stats_online"]
-		elseif f9_local1 == Enum[@"emodes"][@"mode_warzone"] then
-			f9_local2 = Enum[@"storagefiletype"][@"storage_wz_stats_online"]
+		if f9_local1 == Enum.eModes.mode_multiplayer then
+			f9_local2 = Enum.StorageFileType[@"storage_mp_stats_online"]
+		elseif f9_local1 == Enum.eModes.mode_zombies then
+			f9_local2 = Enum.StorageFileType[@"storage_zm_stats_online"]
+		elseif f9_local1 == Enum.eModes.mode_warzone then
+			f9_local2 = Enum.StorageFileType[@"storage_wz_stats_online"]
 		end
 		if f9_local2 ~= nil then
-			local f9_local3 = Engine[@"storagegetbuffer"](f9_arg2, f9_local2)
+			local f9_local3 = Engine.StorageGetBuffer(f9_arg2, f9_local2)
 			if f9_local3 and f9_local3.prestige_icon_id then
 				f9_local3.prestige_icon_id:set(f9_local0)
-				Engine[@"storagewrite"](f9_arg2, f9_local2)
+				Engine.StorageWrite(f9_arg2, f9_local2)
 				local f9_local4 = DataSources.PrestigeMenuInfo.getModel(f9_arg2)
 				f9_local4.hasPrestiged:set(true)
 			end
@@ -108,16 +108,16 @@ CoD.CustomizePrestigeIconUtility.PrestigeIconSelected = function(f9_arg0, f9_arg
 	end
 end
 CoD.CustomizePrestigeIconUtility.GetCustomizePrestigeIconMenuTitleString = function(f10_arg0)
-	if CoD.PrestigeUtility.GetPrestigeGameMode() == Enum[@"emodes"][@"mode_warzone"] then
+	if CoD.PrestigeUtility.GetPrestigeGameMode() == Enum.eModes.mode_warzone then
 		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_23E0FFE995FC055D")
 	else
-		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_7754A8D073F00C06")
+		return Engine[@"hash_4F9F1239CFD921FE"]("menu/prestige_customize_icon")
 	end
 end
 DataSources.PrestigeIcon = ListHelper_SetupDataSource("PrestigeIcon", function(f11_arg0)
 	local f11_local0 = {}
 	local f11_local1 = CoD.PrestigeUtility.GetPrestigeGameMode()
-	local f11_local2 = Engine[@"getparagonicontable"](f11_local1)
+	local f11_local2 = Engine.GetParagonIconTable(f11_local1)
 	local f11_local3 = CoD.PrestigeUtility.GetCurrentLevel(f11_arg0, f11_local1)
 	local f11_local4 = CoD.PrestigeUtility.GetPrestigeCap(f11_local1) <= CoD.PrestigeUtility.GetCurrentPLevel(f11_arg0, f11_local1)
 	local f11_local5 = CoD.CustomizePrestigeIconUtility.GetCurrentWins(f11_arg0, f11_local1)

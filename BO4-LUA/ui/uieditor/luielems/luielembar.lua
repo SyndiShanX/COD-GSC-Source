@@ -14,9 +14,9 @@ local PostLoadFunc = function(self, controller)
 	self.blue = 1
 	if f2_local0 then
 		self:subscribeToModel(f2_local0, function(model)
-			local f3_local0 = Engine[@"getmodelvalue"](model)
-			if f3_local0 then
-				self.alpha = f3_local0
+			local modelValue = Engine.GetModelValue(model)
+			if modelValue then
+				self.alpha = modelValue
 				local f3_local1 = self:getModel()
 				f3_local1 = f3_local1.fadeOverTime:get() * 100
 				self.BarBackground:beginAnimation(f3_local1)
@@ -29,27 +29,27 @@ local PostLoadFunc = function(self, controller)
 	end
 	if f2_local2 then
 		self:subscribeToModel(f2_local2, function(model)
-			local f4_local0 = Engine[@"getmodelvalue"](model)
-			if f4_local0 then
-				self.red = f4_local0
+			local modelValue = Engine.GetModelValue(model)
+			if modelValue then
+				self.red = modelValue
 				f0_local0(self)
 			end
 		end)
 	end
 	if f2_local3 then
 		self:subscribeToModel(f2_local3, function(model)
-			local f5_local0 = Engine[@"getmodelvalue"](model)
-			if f5_local0 then
-				self.green = f5_local0
+			local modelValue = Engine.GetModelValue(model)
+			if modelValue then
+				self.green = modelValue
 				f0_local0(self)
 			end
 		end)
 	end
 	if f2_local4 then
 		self:subscribeToModel(f2_local4, function(model)
-			local f6_local0 = Engine[@"getmodelvalue"](model)
-			if f6_local0 then
-				self.blue = f6_local0
+			local modelValue = Engine.GetModelValue(model)
+			if modelValue then
+				self.blue = modelValue
 				f0_local0(self)
 			end
 		end)
@@ -95,7 +95,7 @@ LUI.createMenu.LUIelemBar = function(f7_arg0, f7_arg1)
 	self:addElement(BarBackground)
 	self.BarBackground = BarBackground
 	local BarForeground = LUI.UIImage.new(0, 0, 31, 45, 0, 0, 31, 37)
-	BarForeground:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
+	BarForeground:setMaterial(LUI.UIImage.GetCachedMaterial("uie_wipe_normal"))
 	BarForeground:setShaderVector(1, 0, 0, 0, 0)
 	BarForeground:setShaderVector(2, 1, 0, 0, 0)
 	BarForeground:setShaderVector(3, 0, 0, 0, 0)

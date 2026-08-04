@@ -1,6 +1,6 @@
-require("x64:2675595fa323085")
-require("x64:aed1ac7f246af18")
-require("x64:baff2229992d7b6")
+require("ui/uieditor/widgets/emptyfocusable")
+require("ui/uieditor/widgets/pc/pc_simplevscrolllist_list")
+require("ui/uieditor/widgets/pc/pc_vscrollbar")
 CoD.PC_SimpleVScrollList = InheritFrom(LUI.UIElement)
 CoD.PC_SimpleVScrollList.__defaultWidth = 1007
 CoD.PC_SimpleVScrollList.__defaultHeight = 1080

@@ -49,12 +49,12 @@ CoD.TextUtility.SetupHorizontalScrollingWidget = function(f1_arg0, f1_arg1)
 			local f6_local0 = DataSources.RightStick.getModel(f1_arg1)
 			local f6_local1 = nil
 			if f6_local0 then
-				f6_local1 = Engine[@"getmodel"](f6_local0, "X")
+				f6_local1 = Engine.GetModel(f6_local0, "X")
 			end
 			f1_arg0.updateTimer = LUI.UITimer.newElementTimer(f1_local2, false, function(f7_arg0)
 				local f7_local0 = 0
 				if f1_arg0.allowRightStickScrolling and f6_local1 then
-					f7_local0 = -Engine[@"getmodelvalue"](f6_local1) * f1_arg0.rightStickScrollSpeed / f7_arg0.timeElapsed * 1000
+					f7_local0 = -Engine.GetModelValue(f6_local1) * f1_arg0.rightStickScrollSpeed / f7_arg0.timeElapsed * 1000
 				end
 				if math.abs(f7_local0) > 0.05 then
 					f1_local3 = 0
@@ -131,12 +131,12 @@ CoD.TextUtility.SetupVerticalScrollingTextWidget = function(f8_arg0, f8_arg1)
 			local f13_local0 = DataSources.RightStick.getModel(f8_arg1)
 			local f13_local1 = nil
 			if f13_local0 then
-				f13_local1 = Engine[@"getmodel"](f13_local0, "Y")
+				f13_local1 = Engine.GetModel(f13_local0, "Y")
 			end
 			f8_arg0.updateTimer = LUI.UITimer.newElementTimer(f8_local2, false, function(f14_arg0)
 				local f14_local0 = 0
 				if f8_arg0.allowRightStickScrolling and f13_local1 then
-					f14_local0 = -Engine[@"getmodelvalue"](f13_local1) * f8_arg0.rightStickScrollSpeed / f14_arg0.timeElapsed * 1000
+					f14_local0 = -Engine.GetModelValue(f13_local1) * f8_arg0.rightStickScrollSpeed / f14_arg0.timeElapsed * 1000
 				end
 				if math.abs(f14_local0) > 0.05 then
 					f8_local3 = 0

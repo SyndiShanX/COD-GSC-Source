@@ -1,4 +1,4 @@
-require("x64:a4e58ff04ef52d1")
+require("ui/uieditor/widgets/debug/lobbyprocessqueuedebugitemtext")
 CoD.LobbyProcessQueueDebugItem = InheritFrom(LUI.UIElement)
 CoD.LobbyProcessQueueDebugItem.__defaultWidth = 1119
 CoD.LobbyProcessQueueDebugItem.__defaultHeight = 20

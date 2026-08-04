@@ -8,24 +8,24 @@ local f0_local0 = 4
 local f0_local1 = 112
 CoD.CodCasterUtility.GetAttackingTeamColor = function(f1_arg0)
 	local f1_local0 = nil
-	if f1_arg0 == Enum[@"team_t"][@"team_allies"] then
-		f1_local0 = CoD.TeamUtility.GetTeamFactionColor(Enum[@"team_t"][@"team_axis"])
+	if f1_arg0 == Enum.team_t[@"team_allies"] then
+		f1_local0 = CoD.TeamUtility.GetTeamFactionColor(Enum.team_t[@"team_axis"])
 	else
-		f1_local0 = CoD.TeamUtility.GetTeamFactionColor(Enum[@"team_t"][@"team_allies"])
+		f1_local0 = CoD.TeamUtility.GetTeamFactionColor(Enum.team_t[@"team_allies"])
 	end
 	return f1_local0
 end
 CoD.CodCasterUtility.GetCodCasterTeamColorList = function(f2_arg0)
 	local f2_local0 = {}
-	local f2_local1 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f2_arg0), "TeamIdentity.ColorList")
-	local f2_local2 = Engine[@"structtablerowcount"](CoD.CodCasterUtility.codcasterTeamIdentityColorTable)
+	local f2_local1 = Engine.CreateModel(Engine.GetModelForController(f2_arg0), "TeamIdentity.ColorList")
+	local f2_local2 = Engine.StructTableRowCount(CoD.CodCasterUtility.codcasterTeamIdentityColorTable)
 	for f2_local3 = 0, f2_local2 - 1, 1 do
-		local f2_local6 = Engine[@"structtablelookupnumber"](CoD.CodCasterUtility.codcasterTeamIdentityColorTable, "id", f2_local3, "colorR")
-		local f2_local7 = Engine[@"structtablelookupnumber"](CoD.CodCasterUtility.codcasterTeamIdentityColorTable, "id", f2_local3, "colorG")
-		local f2_local8 = Engine[@"structtablelookupnumber"](CoD.CodCasterUtility.codcasterTeamIdentityColorTable, "id", f2_local3, "colorB")
-		local f2_local9 = Engine[@"createmodel"](f2_local1, "color_" .. f2_local3)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f2_local9, "id"), f2_local3)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f2_local9, "color"), string.format("%d %d %d", f2_local6, f2_local7, f2_local8))
+		local f2_local6 = Engine.StructTableLookupNumber(CoD.CodCasterUtility.codcasterTeamIdentityColorTable, "id", f2_local3, "colorR")
+		local f2_local7 = Engine.StructTableLookupNumber(CoD.CodCasterUtility.codcasterTeamIdentityColorTable, "id", f2_local3, "colorG")
+		local f2_local8 = Engine.StructTableLookupNumber(CoD.CodCasterUtility.codcasterTeamIdentityColorTable, "id", f2_local3, "colorB")
+		local f2_local9 = Engine.CreateModel(f2_local1, "color_" .. f2_local3)
+		Engine.SetModelValue(Engine.CreateModel(f2_local9, "id"), f2_local3)
+		Engine.SetModelValue(Engine.CreateModel(f2_local9, "color"), string.format("%d %d %d", f2_local6, f2_local7, f2_local8))
 		table.insert(f2_local0, f2_local9)
 	end
 	return f2_local0
@@ -34,29 +34,29 @@ CoD.CodCasterUtility.GetCodCasterTeamColorInformation = function(f3_arg0, f3_arg
 	if not CoD.CodCasterUtility.TeamIdentity.ColorList then
 		CoD.CodCasterUtility.TeamIdentity.ColorList = CoD.CodCasterUtility.GetCodCasterTeamColorList(f3_arg0)
 	end
-	local f3_local0 = Engine[@"getmodel"](Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f3_arg0), "TeamIdentity.ColorList"), "color_" .. f3_arg1)
+	local f3_local0 = Engine.GetModel(Engine.GetModel(Engine.GetModelForController(f3_arg0), "TeamIdentity.ColorList"), "color_" .. f3_arg1)
 	if not f3_local0 then
 		return nil
 	else
-		local f3_local1 = Engine[@"getmodel"](f3_local0, f3_arg2)
+		local f3_local1 = Engine.GetModel(f3_local0, f3_arg2)
 		if not f3_local1 then
 			return nil
 		else
-			return Engine[@"getmodelvalue"](f3_local1)
+			return Engine.GetModelValue(f3_local1)
 		end
 	end
 end
 CoD.CodCasterUtility.GetCodCasterTeamLogoList = function(f4_arg0)
 	local f4_local0 = {}
-	local f4_local1 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f4_arg0), "TeamIdentity.LogoList")
-	local f4_local2 = Engine[@"structtablerowcount"](CoD.CodCasterUtility.codcasterTeamIdentityLogoTable)
+	local f4_local1 = Engine.CreateModel(Engine.GetModelForController(f4_arg0), "TeamIdentity.LogoList")
+	local f4_local2 = Engine.StructTableRowCount(CoD.CodCasterUtility.codcasterTeamIdentityLogoTable)
 	for f4_local3 = 0, f4_local2 - 1, 1 do
-		local f4_local6 = Engine[@"structtablelookupstring"](CoD.CodCasterUtility.codcasterTeamIdentityLogoTable, "id", f4_local3, "logo_name")
-		local f4_local7 = Engine[@"structtablelookupstring"](CoD.CodCasterUtility.codcasterTeamIdentityLogoTable, "id", f4_local3, "logo_icon")
-		local f4_local8 = Engine[@"createmodel"](f4_local1, "logo_" .. f4_local3)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f4_local8, "id"), f4_local3)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f4_local8, "name"), f4_local6)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f4_local8, "ref"), f4_local7)
+		local f4_local6 = Engine.StructTableLookupString(CoD.CodCasterUtility.codcasterTeamIdentityLogoTable, "id", f4_local3, "logo_name")
+		local f4_local7 = Engine.StructTableLookupString(CoD.CodCasterUtility.codcasterTeamIdentityLogoTable, "id", f4_local3, "logo_icon")
+		local f4_local8 = Engine.CreateModel(f4_local1, "logo_" .. f4_local3)
+		Engine.SetModelValue(Engine.CreateModel(f4_local8, "id"), f4_local3)
+		Engine.SetModelValue(Engine.CreateModel(f4_local8, "name"), f4_local6)
+		Engine.SetModelValue(Engine.CreateModel(f4_local8, "ref"), f4_local7)
 		table.insert(f4_local0, f4_local8)
 	end
 	return f4_local0
@@ -65,23 +65,23 @@ CoD.CodCasterUtility.GetCodCasterTeamLogoInformation = function(f5_arg0, f5_arg1
 	if not CoD.CodCasterUtility.TeamIdentity.LogoList then
 		CoD.CodCasterUtility.TeamIdentity.LogoList = CoD.CodCasterUtility.GetCodCasterTeamLogoList(f5_arg0)
 	end
-	local f5_local0 = Engine[@"getmodel"](Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f5_arg0), "TeamIdentity.LogoList"), "logo_" .. f5_arg1)
+	local f5_local0 = Engine.GetModel(Engine.GetModel(Engine.GetModelForController(f5_arg0), "TeamIdentity.LogoList"), "logo_" .. f5_arg1)
 	if not f5_local0 then
 		return nil
 	else
-		local f5_local1 = Engine[@"getmodel"](f5_local0, f5_arg2)
+		local f5_local1 = Engine.GetModel(f5_local0, f5_arg2)
 		if not f5_local1 then
 			return nil
 		else
-			return Engine[@"getmodelvalue"](f5_local1)
+			return Engine.GetModelValue(f5_local1)
 		end
 	end
 end
 CoD.CodCasterUtility.GetCodCasterFactionIcon = function(f6_arg0, f6_arg1)
 	local f6_local0 = nil
-	if f6_arg1 == Enum[@"team_t"][@"team_allies"] then
+	if f6_arg1 == Enum.team_t[@"team_allies"] then
 		f6_local0 = "team1"
-	elseif f6_arg1 == Enum[@"team_t"][@"team_axis"] then
+	elseif f6_arg1 == Enum.team_t[@"team_axis"] then
 		f6_local0 = "team2"
 	end
 	if f6_local0 then
@@ -93,9 +93,9 @@ CoD.CodCasterUtility.GetCodCasterFactionIcon = function(f6_arg0, f6_arg1)
 	return CoD.CodCasterUtility.GetDefaultCodCasterFactionIcon(f6_arg1)
 end
 CoD.CodCasterUtility.GetDefaultCodCasterFactionIcon = function(f7_arg0)
-	if f7_arg0 == Enum[@"team_t"][@"team_allies"] then
+	if f7_arg0 == Enum.team_t[@"team_allies"] then
 		return "uie_t7_codcaster_faction1"
-	elseif f7_arg0 == Enum[@"team_t"][@"team_axis"] then
+	elseif f7_arg0 == Enum.team_t[@"team_axis"] then
 		return "uie_t7_codcaster_faction2"
 	else
 		return ""
@@ -104,7 +104,7 @@ end
 CoD.CodCasterUtility.GetStandardOrCodCasterTeam = function(f8_arg0)
 	local f8_local0 = nil
 	if IsCodCaster(f8_arg0) then
-		f8_local0 = Enum[@"team_t"][@"team_allies"]
+		f8_local0 = Enum.team_t[@"team_allies"]
 	else
 		local f8_local1 = DataSources.Factions.getModel(f8_arg0)
 		f8_local1 = f8_local1.actualTeam:get()
@@ -160,7 +160,7 @@ CoD.CodCasterUtility.Options_ItemSelected = function(f12_arg0, f12_arg1, f12_arg
 end
 CoD.CodCasterUtility.Options_RevertItemSelected = function(f13_arg0, f13_arg1, f13_arg2, f13_arg3, f13_arg4, f13_arg5)
 	local f13_local0 = CoD.OptionsUtility.GetCustomProfileSelection(f13_arg2, f13_arg1.options, CoD.ShoutcasterProfileVarValue(f13_arg2, f13_arg3))
-	local f13_local1, f13_local2 = f13_arg0.Slider:getRowAndColumnForIndex(Engine[@"getmodelvalue"](f13_arg0:getModel(f13_arg2, "currentSelection")) - 1)
+	local f13_local1, f13_local2 = f13_arg0.Slider:getRowAndColumnForIndex(Engine.GetModelValue(f13_arg0:getModel(f13_arg2, "currentSelection")) - 1)
 	f13_arg0.Slider:setActiveIndex(f13_local1, f13_local2, 0)
 end
 CoD.CodCasterUtility.Options_GetProfileSelection = function(f14_arg0, f14_arg1, f14_arg2)
@@ -170,7 +170,7 @@ CoD.CodCasterUtility.CodCasterEnabledAndProfileVarEqualTo = function(f15_arg0, f
 	return CoD.IsShoutcaster(f15_arg0) and CoD.ShoutcasterProfileVarBool(f15_arg0, f15_arg1) == f15_arg2
 end
 CoD.CodCasterUtility.CodCasterIsInAerialCam = function(f16_arg0)
-	local f16_local0 = Engine[@"isvisibilitybitset"](f16_arg0, Enum[@"uivisibilitybit"][@"hash_57EAF988DDEB83EA"])
+	local f16_local0 = Engine.IsVisibilityBitSet(f16_arg0, Enum.UIVisibilityBit[@"hash_57EAF988DDEB83EA"])
 	if not f16_local0 then
 		f16_local0 = Engine[@"iscodcasterinaerialcam"](f16_arg0)
 	end
@@ -180,9 +180,9 @@ CoD.CodCasterUtility.IsAerialCamAllowed = function()
 	return Engine[@"hash_4EA8900B6E5F7DAE"]()
 end
 CoD.CodCasterUtility.CodCasterShowPlayerList = function(f18_arg0, f18_arg1)
-	local f18_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f18_arg1), "CodCaster.showPlayerList")
+	local f18_local0 = Engine.GetModel(Engine.GetModelForController(f18_arg1), "CodCaster.showPlayerList")
 	local f18_local1 = f18_local0:get()
-	if Engine[@"isvisibilitybitset"](f18_arg1, Enum[@"uivisibilitybit"][@"hash_23DA38CAFF843C18"]) and f18_arg0.CodCasterPlayerList.currentState == "DefaultState" then
+	if Engine.IsVisibilityBitSet(f18_arg1, Enum.UIVisibilityBit[@"hash_23DA38CAFF843C18"]) and f18_arg0.CodCasterPlayerList.currentState == "DefaultState" then
 		if not f18_local1 then
 			ToggleControllerModelValueBoolean(f18_arg1, "codcaster.showPlayerList")
 		end
@@ -192,9 +192,9 @@ CoD.CodCasterUtility.CodCasterShowPlayerList = function(f18_arg0, f18_arg1)
 	end
 end
 CoD.CodCasterUtility.CodCasterShowPortraitList = function(f19_arg0)
-	local f19_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f19_arg0), "CodCaster.showPortraitList")
+	local f19_local0 = Engine.GetModel(Engine.GetModelForController(f19_arg0), "CodCaster.showPortraitList")
 	local f19_local1 = f19_local0:get()
-	if Engine[@"isvisibilitybitset"](f19_arg0, Enum[@"uivisibilitybit"][@"hash_23DA38CAFF843C18"]) then
+	if Engine.IsVisibilityBitSet(f19_arg0, Enum.UIVisibilityBit[@"hash_23DA38CAFF843C18"]) then
 		return false
 	else
 		return f19_local1
@@ -213,45 +213,45 @@ CoD.CodCasterUtility.CharacterIndexForClientNum = function(f20_arg0, f20_arg1)
 	end
 end
 CoD.CodCasterUtility.GetPrimaryWeaponImage = function(f21_arg0, f21_arg1)
-	local f21_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f21_arg0), "primaryWeapon.item")
+	local f21_local0 = Engine.GetModel(Engine.GetModelForController(f21_arg0), "primaryWeapon.item")
 	return f21_local0:get()
 end
 CoD.CodCasterUtility.GetSecondaryWeaponImage = function(f22_arg0, f22_arg1)
-	local f22_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f22_arg0), "secondaryWeapon.item")
+	local f22_local0 = Engine.GetModel(Engine.GetModelForController(f22_arg0), "secondaryWeapon.item")
 	return f22_local0:get()
 end
 CoD.CodCasterUtility.GetPrimaryWeaponName = function(f23_arg0, f23_arg1)
-	local f23_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f23_arg0), "primaryWeapon.itemIndex")
-	return Engine[@"hash_4F9F1239CFD921FE"](Engine[@"getitemname"](f23_local0:get(), Enum[@"statindexoffset"][@"hash_13057ABF96AF8289"], Engine[@"currentsessionmode"]()))
+	local f23_local0 = Engine.GetModel(Engine.GetModelForController(f23_arg0), "primaryWeapon.itemIndex")
+	return Engine[@"hash_4F9F1239CFD921FE"](Engine.GetItemName(f23_local0:get(), Enum[@"statindexoffset"][@"hash_13057ABF96AF8289"], Engine.CurrentSessionMode()))
 end
 CoD.CodCasterUtility.GetSecondaryWeaponName = function(f24_arg0, f24_arg1)
-	local f24_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f24_arg0), "secondaryWeapon.indexIndex")
-	return Engine[@"hash_4F9F1239CFD921FE"](Engine[@"getitemname"](f24_local0:get(), Enum[@"statindexoffset"][@"hash_13057ABF96AF8289"], Engine[@"currentsessionmode"]()))
+	local f24_local0 = Engine.GetModel(Engine.GetModelForController(f24_arg0), "secondaryWeapon.indexIndex")
+	return Engine[@"hash_4F9F1239CFD921FE"](Engine.GetItemName(f24_local0:get(), Enum[@"statindexoffset"][@"hash_13057ABF96AF8289"], Engine.CurrentSessionMode()))
 end
 CoD.CodCasterUtility.GetPrimaryWeaponAttachment0 = function(f25_arg0, f25_arg1)
-	local f25_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f25_arg0), "primaryWeapon.attachment0")
+	local f25_local0 = Engine.GetModel(Engine.GetModelForController(f25_arg0), "primaryWeapon.attachment0")
 	return Engine[@"hash_4F9F1239CFD921FE"](f25_local0:get())
 end
 CoD.CodCasterUtility.GetPerkImage = function(f26_arg0, f26_arg1, f26_arg2, f26_arg3)
-	local f26_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f26_arg0), "perks.perk" .. f26_arg1 .. "_" .. f26_arg2 .. ".image")
+	local f26_local0 = Engine.GetModel(Engine.GetModelForController(f26_arg0), "perks.perk" .. f26_arg1 .. "_" .. f26_arg2 .. ".image")
 	return f26_local0:get()
 end
 CoD.CodCasterUtility.IsCodCasterEnabled = function()
 	return true
 end
 CoD.CodCasterUtility.AreCodCasterAssigned = function(f28_arg0)
-	local f28_local0 = Engine[@"lobbygetsessionclients"](Enum[@"lobbymodule"][@"lobby_module_host"], Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_host"]))
+	local f28_local0 = Engine[@"lobbygetsessionclients"](Enum.LobbyModule[@"lobby_module_host"], Engine[@"lobbygetcontrollinglobbysession"](Enum.LobbyModule[@"lobby_module_host"]))
 	for f28_local4, f28_local5 in ipairs(f28_local0.sessionClients) do
-		if f28_local5.team == Enum[@"team_t"][@"team_spectator"] then
+		if f28_local5.team == Enum.team_t[@"team_spectator"] then
 			return true
 		end
 	end
 	return false
 end
 CoD.CodCasterUtility.IsCodCasterAssigned = function(f29_arg0)
-	local f29_local0 = Engine[@"getmodelforcontroller"](f29_arg0)
+	local f29_local0 = Engine.GetModelForController(f29_arg0)
 	local f29_local1 = Engine[@"getmodelforclient"](CoD.AARUtility.GetInGameClientNum(f29_arg0))
-	if f29_local1.team:get() == Enum[@"team_t"][@"team_spectator"] then
+	if f29_local1.team:get() == Enum.team_t[@"team_spectator"] then
 		return true
 	else
 		return false
@@ -265,9 +265,9 @@ CoD.CodCasterUtility.IsCodCasterOrAssigned = function(f30_arg0)
 	return f30_local0
 end
 CoD.CodCasterUtility.IsCodCasterSupportedGameType = function(f31_arg0)
-	local f31_local0 = Engine[@"getglobalmodel"]()
+	local f31_local0 = Engine.GetGlobalModel()
 	f31_local0 = f31_local0["MapVote.mapVoteGameModeNext"].get(f31_local0["MapVote.mapVoteGameModeNext"])
-	if f31_local0 == @"dm" or f31_local0 == @"gun" then
+	if f31_local0 == "dm" or f31_local0 == "gun" then
 		return false
 	else
 		return true
@@ -299,7 +299,7 @@ end
 CoD.CodCasterUtility.Announcement.ExtraDataToStringParameter = function(f35_arg0, f35_arg1)
 	if f35_arg0 <= 0 then
 		return nil
-	elseif f35_arg1 == @"letter" then
+	elseif f35_arg1 == "letter" then
 		if f35_arg0 == 1 then
 			return "A"
 		elseif f35_arg0 == 2 then
@@ -309,8 +309,8 @@ CoD.CodCasterUtility.Announcement.ExtraDataToStringParameter = function(f35_arg0
 		elseif f35_arg0 == 4 then
 			return "D"
 		end
-	elseif f35_arg1 == @"killstreak" then
-		return Engine[@"hash_4F9F1239CFD921FE"](Engine[@"getistring"](f35_arg0, "CS_LOCALIZED_STRINGS"))
+	elseif f35_arg1 == "killstreak" then
+		return Engine[@"hash_4F9F1239CFD921FE"](Engine.GetIString(f35_arg0, "CS_LOCALIZED_STRINGS"))
 	end
 	return f35_arg0
 end
@@ -321,19 +321,19 @@ end
 CoD.CodCasterUtility.Announcement.Data = nil
 CoD.CodCasterUtility.Announcement.OnNewAnnouncement = function(f37_arg0, f37_arg1, f37_arg2)
 	return function(f38_arg0)
-		if f38_arg0:get() ~= @"announcement_event" then
+		if f38_arg0:get() ~= "announcement_event" then
 			return
 		end
 		local f38_local0 = {}
 		f38_local0.announcementID, f38_local0.teamColor, f38_local0.playerClientNum, f38_local0.extraData, f38_local0.teamId = CoD.CodCasterUtility.Announcement.ModelValueToData(f37_arg0, f37_arg1, f38_arg0)
 		if CoD.CodCasterUtility.Announcement.Data == nil then
-			CoD.CodCasterUtility.Announcement.Data = Engine[@"hash_2E00B2F29271C60B"](@"codcaster_announcements")
+			CoD.CodCasterUtility.Announcement.Data = Engine[@"hash_2E00B2F29271C60B"]("codcaster_announcements")
 		end
 		local f38_local1 = CoD.CodCasterUtility.Announcement.Data.announcementslist[f38_local0.announcementID]
 		if f38_local1 == nil then
 			return
 		end
-		local f38_local2 = f38_local1[@"priority"]
+		local f38_local2 = f38_local1.priority
 		if f38_local2 == nil then
 			error("LUI Error: invalid broadcaster announcement ID " .. f38_local0.announcementID)
 			return
@@ -375,30 +375,30 @@ CoD.CodCasterUtility.Announcement.ShowAnnouncement = function(f40_arg0, f40_arg1
 	end
 	local f40_local1 = f40_arg3.announcementImageBackground:getParent()
 	local f40_local2 = f40_local0[@"announcement"]
-	local f40_local3 = f40_local0[@"eventtype"]
-	local f40_local4 = math.floor(f40_local0[@"delay"] * 1000) + 400
+	local f40_local3 = f40_local0.eventtype
+	local f40_local4 = math.floor(f40_local0.delay * 1000) + 400
 	local f40_local5 = nil
 	local f40_local6 = CoD.CodCasterUtility.Announcement.ExtraDataToStringParameter(f40_arg2.extraData, f40_local0[@"parametertype"])
 	if f40_local6 then
-		f40_local5 = Engine[@"localize"](f40_local2, f40_local6)
+		f40_local5 = Engine.Localize(f40_local2, f40_local6)
 	else
-		f40_local5 = Engine[@"localize"](f40_local2)
+		f40_local5 = Engine.Localize(f40_local2)
 	end
 	f40_arg3.announcementFeed:setText(f40_local5)
 	local f40_local7 = ""
 	if f40_arg2.playerClientNum >= 0 then
-		f40_local7 = Engine[@"getclantagforclientnum"](f40_arg1, f40_arg2.playerClientNum) .. GetClientName(f40_arg1, f40_arg2.playerClientNum) .. " "
+		f40_local7 = Engine.GetClanTagForClientNum(f40_arg1, f40_arg2.playerClientNum) .. GetClientName(f40_arg1, f40_arg2.playerClientNum) .. " "
 		local f40_local8 = nil
-		local f40_local9 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f40_arg1), "deadSpectator.playerIndex")
+		local f40_local9 = Engine.GetModel(Engine.GetModelForController(f40_arg1), "deadSpectator.playerIndex")
 		if f40_local9 then
-			f40_local8 = Engine[@"getmodelvalue"](f40_local9)
+			f40_local8 = Engine.GetModelValue(f40_local9)
 		end
 		if f40_local8 ~= nil and f40_local8 == f40_arg2.playerClientNum then
 			f40_arg3.announcementFeedHeader:setRGB(ColorSet.PlayerYellow.r, ColorSet.PlayerYellow.g, ColorSet.PlayerYellow.b)
 		else
 			f40_arg3.announcementFeedHeader:setRGB(f40_arg2.teamColor)
 		end
-	elseif f40_arg2.teamId == Enum[@"team_t"][@"team_axis"] or f40_arg2.teamId == Enum[@"team_t"][@"team_allies"] then
+	elseif f40_arg2.teamId == Enum.team_t[@"team_axis"] or f40_arg2.teamId == Enum.team_t[@"team_allies"] then
 		f40_local7 = CoD.TeamUtility.GetTeamNameForTeamEnum(f40_arg1, f40_arg2.teamId) .. " "
 		f40_arg3.announcementFeedHeader:setRGB(f40_arg2.teamColor)
 	end
@@ -412,19 +412,19 @@ CoD.CodCasterUtility.Announcement.ShowAnnouncement = function(f40_arg0, f40_arg1
 	f40_arg3.announcementFeedHeader:setLeftRight(f40_local10, f40_local11, f40_local12 + f40_local16, f40_local12 + f40_local16 + f40_local8)
 	f40_arg3.announcementFeed:setLeftRight(f40_local10, f40_local11, f40_local13 - f40_local16 - f40_local9, f40_local13 - f40_local16)
 	if not ScoreboardVisible(f40_arg1) and IsCodCasterProfileValueEqualTo(f40_arg1, "shoutcaster_ds_teamscore", 1) and IsCodCasterProfileValueEqualTo(f40_arg1, "shoutcaster_qs_playerlist", 1) and IsCodCasterProfileValueEqualTo(f40_arg1, "shoutcaster_ds_notification_announcements", 1) then
-		if f40_arg2.teamId == Enum[@"team_t"][@"team_axis"] then
+		if f40_arg2.teamId == Enum.team_t[@"team_axis"] then
 			f40_arg3.announcementImageHighlightRight:setRGB(f40_arg2.teamColor)
 			f40_local1:playClip("OnTeam2")
-		elseif f40_arg2.teamId == Enum[@"team_t"][@"team_allies"] then
+		elseif f40_arg2.teamId == Enum.team_t[@"team_allies"] then
 			f40_arg3.announcementImageHighlightLeft:setRGB(f40_arg2.teamColor)
 			f40_local1:playClip("OnTeam1")
 		end
 	end
 	f40_arg0:addElement(LUI.UITimer.newElementTimer(f40_local4, true, function()
-		if f40_arg2.teamId == Enum[@"team_t"][@"team_axis"] then
+		if f40_arg2.teamId == Enum.team_t[@"team_axis"] then
 			f40_arg3.announcementImageHighlightRight:setRGB(f40_arg2.teamColor)
 			f40_local1:playClip("OffTeam2")
-		elseif f40_arg2.teamId == Enum[@"team_t"][@"team_allies"] then
+		elseif f40_arg2.teamId == Enum.team_t[@"team_allies"] then
 			f40_arg3.announcementImageHighlightLeft:setRGB(f40_arg2.teamColor)
 			f40_local1:playClip("OffTeam1")
 		end
@@ -439,7 +439,7 @@ DataSources.KillstreakList = {
 	end,
 	getItem = function(f43_arg0, f43_arg1, f43_arg2)
 		local f43_local0 = f43_arg2 - 1
-		local f43_local1 = Engine[@"getmodel"]
+		local f43_local1 = Engine.GetModel
 		local f43_local2 = f43_arg1:getParent()
 		return f43_local1(f43_local2:getModel(), "killstreaks.killstreak" .. f43_local0)
 	end,
@@ -448,11 +448,11 @@ DataSources.KillstreakList = {
 DataSources.TalentList = {
 	prepare = function(f45_arg0, f45_arg1, f45_arg2)
 		f45_arg1.talents = {}
-		local f45_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f45_arg0), "talents")
-		local f45_local1 = Engine[@"getmodel"](f45_local0, "count")
+		local f45_local0 = Engine.GetModel(Engine.GetModelForController(f45_arg0), "talents")
+		local f45_local1 = Engine.GetModel(f45_local0, "count")
 		local f45_local2 = f45_local1:get()
 		for f45_local3 = 0, f45_local2 - 1, 1 do
-			table.insert(f45_arg1.talents, Engine[@"getmodel"](f45_local0, "talent" .. f45_local3))
+			table.insert(f45_arg1.talents, Engine.GetModel(f45_local0, "talent" .. f45_local3))
 		end
 	end,
 	getCount = function(f46_arg0)
@@ -465,12 +465,12 @@ DataSources.TalentList = {
 DataSources.PerkList = {
 	prepare = function(f48_arg0, f48_arg1, f48_arg2)
 		f48_arg1.perks = {}
-		local f48_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f48_arg0), "talents")
-		local f48_local1 = Engine[@"getmodel"](f48_local0, "count")
+		local f48_local0 = Engine.GetModel(Engine.GetModelForController(f48_arg0), "talents")
+		local f48_local1 = Engine.GetModel(f48_local0, "count")
 		local f48_local2 = f48_local1:get()
 		for f48_local3 = 0, f48_local2 - 1, 1 do
-			local f48_local6 = Engine[@"getmodel"](f48_local0, "talent" .. f48_local3)
-			local f48_local7 = Engine[@"getmodel"](f48_local6, "isPerk")
+			local f48_local6 = Engine.GetModel(f48_local0, "talent" .. f48_local3)
+			local f48_local7 = Engine.GetModel(f48_local6, "isPerk")
 			if f48_local7:get() then
 				table.insert(f48_arg1.perks, f48_local6)
 			end
@@ -486,14 +486,14 @@ DataSources.PerkList = {
 DataSources.EquipmentList = {
 	prepare = function(f51_arg0, f51_arg1, f51_arg2)
 		f51_arg1.equipments = {}
-		local f51_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f51_arg0), "talents")
-		local f51_local1 = Engine[@"getmodel"](f51_local0, "count")
+		local f51_local0 = Engine.GetModel(Engine.GetModelForController(f51_arg0), "talents")
+		local f51_local1 = Engine.GetModel(f51_local0, "count")
 		local f51_local2 = f51_local1:get()
 		for f51_local3 = 0, f51_local2 - 1, 1 do
-			local f51_local6 = Engine[@"getmodel"](f51_local0, "talent" .. f51_local3)
-			local f51_local7 = Engine[@"getmodel"](f51_local6, "isPerk")
+			local f51_local6 = Engine.GetModel(f51_local0, "talent" .. f51_local3)
+			local f51_local7 = Engine.GetModel(f51_local6, "isPerk")
 			f51_local7 = f51_local7:get()
-			local f51_local8 = Engine[@"getmodel"](f51_local6, "isSpecialIssue")
+			local f51_local8 = Engine.GetModel(f51_local6, "isSpecialIssue")
 			if not f51_local7 and not f51_local8:get() then
 				table.insert(f51_arg1.equipments, f51_local6)
 			end
@@ -507,18 +507,18 @@ DataSources.EquipmentList = {
 	end,
 }
 CoD.CodCasterUtility.FillAttachmentList = function(f54_arg0, f54_arg1)
-	local f54_local0 = Engine[@"getmodel"](f54_arg0, "attachmentCount")
+	local f54_local0 = Engine.GetModel(f54_arg0, "attachmentCount")
 	local f54_local1 = f54_local0:get()
 	if f54_local1 then
 		for f54_local2 = 0, f54_local1 - 1, 1 do
-			table.insert(f54_arg1, Engine[@"getmodel"](f54_arg0, "attachmentImage" .. f54_local2))
+			table.insert(f54_arg1, Engine.GetModel(f54_arg0, "attachmentImage" .. f54_local2))
 		end
 	end
 end
 DataSources.PrimaryWeaponAttachmentImageList = {
 	prepare = function(f55_arg0, f55_arg1, f55_arg2)
 		f55_arg1.attachments = {}
-		CoD.CodCasterUtility.FillAttachmentList(Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f55_arg0), "primaryWeapon"), f55_arg1.attachments)
+		CoD.CodCasterUtility.FillAttachmentList(Engine.GetModel(Engine.GetModelForController(f55_arg0), "primaryWeapon"), f55_arg1.attachments)
 	end,
 	getCount = function(f56_arg0)
 		return #f56_arg0.attachments
@@ -530,7 +530,7 @@ DataSources.PrimaryWeaponAttachmentImageList = {
 DataSources.SecondaryWeaponAttachmentImageList = {
 	prepare = function(f58_arg0, f58_arg1, f58_arg2)
 		f58_arg1.attachments = {}
-		CoD.CodCasterUtility.FillAttachmentList(Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f58_arg0), "secondaryWeapon"), f58_arg1.attachments)
+		CoD.CodCasterUtility.FillAttachmentList(Engine.GetModel(Engine.GetModelForController(f58_arg0), "secondaryWeapon"), f58_arg1.attachments)
 	end,
 	getCount = function(f59_arg0)
 		return #f59_arg0.attachments
@@ -541,12 +541,12 @@ DataSources.SecondaryWeaponAttachmentImageList = {
 }
 CoD.CodCasterUtility.GetWildcardsList = function(f61_arg0, f61_arg1, f61_arg2)
 	local f61_local0 = {}
-	local f61_local1 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f61_arg0), "wildcards")
-	local f61_local2 = Engine[@"getmodel"](f61_local1, "count")
+	local f61_local1 = Engine.GetModel(Engine.GetModelForController(f61_arg0), "wildcards")
+	local f61_local2 = Engine.GetModel(f61_local1, "count")
 	local f61_local3 = f61_local2:get()
 	for f61_local4 = 0, f61_local3 - 1, 1 do
-		local f61_local7 = Engine[@"getmodel"](f61_local1, "wildcard" .. f61_local4)
-		local f61_local8 = Engine[@"getmodel"](f61_local7, "name")
+		local f61_local7 = Engine.GetModel(f61_local1, "wildcard" .. f61_local4)
+		local f61_local8 = Engine.GetModel(f61_local7, "name")
 		f61_local8 = f61_local8:get()
 		if f61_arg1 then
 			if f61_arg1(f61_local8) then
@@ -622,14 +622,14 @@ CoD.CodCasterUtility.GetPortraitListHoverAndSelectedIndices = function(f74_arg0,
 end
 CoD.CodCasterUtility.GetPlayerListNextSelectedInNonTeamBased = function(f75_arg0, f75_arg1)
 	local f75_local0 = LuaDefine.INVALID_CLIENT_INDEX
-	local f75_local1 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f75_arg1), "hudItems.codcaster.nextClient")
+	local f75_local1 = Engine.GetModel(Engine.GetModelForController(f75_arg1), "hudItems.codcaster.nextClient")
 	f75_local0 = f75_local1:get()
 	if f75_local0 == LuaDefine.INVALID_CLIENT_INDEX then
-		local f75_local2 = Engine[@"getmodelforcontroller"](f75_arg1)
+		local f75_local2 = Engine.GetModelForController(f75_arg1)
 		f75_local0 = f75_local2.deadSpectator.playerIndex:get()
 	end
 	for f75_local2 = 1, f75_arg0.itemCount, 1 do
-		if Engine[@"getmodelvalue"](Engine[@"getmodel"](f75_arg0.layoutItems[f75_local2][1]:getModel(), "clientNum")) == f75_local0 then
+		if Engine.GetModelValue(Engine.GetModel(f75_arg0.layoutItems[f75_local2][1]:getModel(), "clientNum")) == f75_local0 then
 			return f75_local2
 		end
 	end
@@ -648,9 +648,9 @@ end
 CoD.CodCasterUtility.SetPortraitHoverState = function(f77_arg0, f77_arg1, f77_arg2)
 	f77_arg1.hovered = f77_arg2
 	if f77_arg2 then
-		local f77_local0 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f77_arg1:getModel(), "clientNum"))
+		local f77_local0 = Engine.GetModelValue(Engine.GetModel(f77_arg1:getModel(), "clientNum"))
 		Dvar[@"shoutcasthighlightedclient"]:set(f77_local0)
-		local f77_local1 = Engine[@"getmodelforcontroller"](f77_arg0)
+		local f77_local1 = Engine.GetModelForController(f77_arg0)
 		local f77_local2 = f77_local1:create("hudItems.codcaster.nextClient")
 		f77_local2:set(f77_local0)
 		f77_arg1.PlayerPortraitHoverTop.topselector:setAlpha(0.5)
@@ -685,7 +685,7 @@ CoD.CodCasterUtility.IsPlayerAtIndexAlive = function(f80_arg0, f80_arg1, f80_arg
 	else
 		f80_local0 = f80_arg2.layoutItems[f80_arg4][1]
 	end
-	local f80_local1 = Engine[@"getmodelforclient"](Engine[@"getmodelvalue"](Engine[@"getmodel"](f80_local0:getModel(), "clientNum")))
+	local f80_local1 = Engine[@"getmodelforclient"](Engine.GetModelValue(Engine.GetModel(f80_local0:getModel(), "clientNum")))
 	f80_local1 = f80_local1:create("health.healthValue")
 	return f80_local1:get() > 0
 end
@@ -729,8 +729,8 @@ CoD.CodCasterUtility.OnDpadLeftNonTeamBased = function(f83_arg0, f83_arg1)
 	local f83_local5 = f83_local0
 	local f83_local6 = nil
 	local f83_local7 = f83_local1
-	f83_local4 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f83_local0.layoutItems[f83_local2(f83_local3, f83_local4, f83_local5, f83_local6, f83_local1, -1)][1]:getModel(), "clientNum"))
-	f83_local5 = Engine[@"getmodelforcontroller"](f83_arg1)
+	f83_local4 = Engine.GetModelValue(Engine.GetModel(f83_local0.layoutItems[f83_local2(f83_local3, f83_local4, f83_local5, f83_local6, f83_local1, -1)][1]:getModel(), "clientNum"))
+	f83_local5 = Engine.GetModelForController(f83_arg1)
 	f83_local6 = f83_local5:create("hudItems.codcaster.nextClient")
 	f83_local6:set(f83_local4)
 end
@@ -768,8 +768,8 @@ CoD.CodCasterUtility.OnDpadRightNonTeamBased = function(f86_arg0, f86_arg1)
 	local f86_local5 = f86_local0
 	local f86_local6 = nil
 	local f86_local7 = f86_local1
-	f86_local4 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f86_local0.layoutItems[f86_local2(f86_local3, f86_local4, f86_local5, f86_local6, f86_local1, 1)][1]:getModel(), "clientNum"))
-	f86_local5 = Engine[@"getmodelforcontroller"](f86_arg1)
+	f86_local4 = Engine.GetModelValue(Engine.GetModel(f86_local0.layoutItems[f86_local2(f86_local3, f86_local4, f86_local5, f86_local6, f86_local1, 1)][1]:getModel(), "clientNum"))
+	f86_local5 = Engine.GetModelForController(f86_arg1)
 	f86_local6 = f86_local5:create("hudItems.codcaster.nextClient")
 	f86_local6:set(f86_local4)
 end
@@ -793,22 +793,22 @@ CoD.CodCasterUtility.SpectateHoveredPlayer = function(f88_arg0, f88_arg1)
 		end
 		f88_local3.PlayerPortraitHoverTop.topselector:setAlpha(0)
 		f88_local3.PlayerPortraitHoverBottom.bottomselector:setAlpha(0)
-		Engine[@"sendmenuresponse"](f88_arg1, "spectate", "clientNum", Engine[@"getmodelvalue"](Engine[@"getmodel"](f88_local3:getModel(), "clientNum")))
+		Engine.SendMenuResponse(f88_arg1, "spectate", "clientNum", Engine.GetModelValue(Engine.GetModel(f88_local3:getModel(), "clientNum")))
 	end
-	local f88_local3 = Engine[@"getmodelforcontroller"](f88_arg1)
+	local f88_local3 = Engine.GetModelForController(f88_arg1)
 	local f88_local4 = f88_local3:create("hudItems.codcaster.nextClient")
 	f88_local4:set(LuaDefine.INVALID_CLIENT_INDEX)
 end
 CoD.CodCasterUtility.SpectateHoveredPlayerNonTeamBased = function(f89_arg0, f89_arg1)
 	local f89_local0 = LuaDefine.INVALID_CLIENT_INDEX
-	local f89_local1 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f89_arg1), "hudItems.codcaster.nextClient")
+	local f89_local1 = Engine.GetModel(Engine.GetModelForController(f89_arg1), "hudItems.codcaster.nextClient")
 	if f89_local1 ~= nil then
-		f89_local0 = Engine[@"getmodelvalue"](f89_local1)
+		f89_local0 = Engine.GetModelValue(f89_local1)
 	end
 	if f89_local0 ~= nil and f89_local0 ~= LuaDefine.INVALID_CLIENT_INDEX then
-		Engine[@"sendmenuresponse"](f89_arg1, "spectate", "clientNum", f89_local0)
+		Engine.SendMenuResponse(f89_arg1, "spectate", "clientNum", f89_local0)
 	end
-	local f89_local2 = Engine[@"getmodelforcontroller"](f89_arg1)
+	local f89_local2 = Engine.GetModelForController(f89_arg1)
 	local f89_local3 = f89_local2:create("hudItems.codcaster.nextClient")
 	f89_local3:set(LuaDefine.INVALID_CLIENT_INDEX)
 end
@@ -825,8 +825,8 @@ CoD.CodCasterUtility.SpectatePlayerNumber = function(f90_arg0, f90_arg1, f90_arg
 	else
 		f90_local3 = f90_local2.layoutItems[1][f90_local0 - f90_local1.itemCount]
 	end
-	Engine[@"sendmenuresponse"](f90_arg1, "spectate", "clientNum", Engine[@"getmodelvalue"](Engine[@"getmodel"](f90_local3:getModel(), "clientNum")))
-	local f90_local4 = Engine[@"getmodelforcontroller"](f90_arg1)
+	Engine.SendMenuResponse(f90_arg1, "spectate", "clientNum", Engine.GetModelValue(Engine.GetModel(f90_local3:getModel(), "clientNum")))
+	local f90_local4 = Engine.GetModelForController(f90_arg1)
 	local f90_local5 = f90_local4:create("hudItems.codcaster.nextClient")
 	f90_local5:set(LuaDefine.INVALID_CLIENT_INDEX)
 end
@@ -855,7 +855,7 @@ CoD.CodCasterUtility.HasButtonFocus = function(f93_arg0)
 end
 CoD.CodCasterUtility.GetTeamPlayerCount = function(f94_arg0, f94_arg1)
 	local f94_local0 = 0
-	local f94_local1 = Engine[@"getmodelforcontroller"](f94_arg0)
+	local f94_local1 = Engine.GetModelForController(f94_arg0)
 	f94_local1 = f94_local1:create("Clients.clientCount")
 	f94_local1 = f94_local1:get()
 	for f94_local2 = 0, f94_local1 - 1, 1 do
@@ -867,7 +867,7 @@ CoD.CodCasterUtility.GetTeamPlayerCount = function(f94_arg0, f94_arg1)
 	return f94_local0
 end
 CoD.CodCasterUtility.InitDataSources = function(f95_arg0, f95_arg1)
-	local f95_local0 = Engine[@"getmodelforcontroller"](f95_arg1)
+	local f95_local0 = Engine.GetModelForController(f95_arg1)
 	local f95_local1 = f95_local0:create("HUDItems.codcaster.ObjectiveA.color")
 	f95_local1:set("255 255 255")
 	f95_local1 = f95_local0:create("HUDItems.codcaster.ObjectiveB.color")
@@ -894,12 +894,12 @@ CoD.CodCasterUtility.InitDataSources = function(f95_arg0, f95_arg1)
 	f95_local1:set(LuaDefine.INVALID_CLIENT_INDEX)
 end
 CoD.CodCasterUtility.InitPortraitObjectiveStatus = function(f96_arg0, f96_arg1)
-	f96_arg0:subscribeToModel(Engine[@"createmodel"](Engine[@"getglobalmodel"](), "objectivesUpdated"), function(model)
+	f96_arg0:subscribeToModel(Engine.CreateModel(Engine.GetGlobalModel(), "objectivesUpdated"), function(model)
 		local f97_local0 = f96_arg0:getModel()
 		if f97_local0 then
-			local f97_local1 = Engine[@"getmodel"](f97_local0, "clientNum")
+			local f97_local1 = Engine.GetModel(f97_local0, "clientNum")
 			if f97_local1 then
-				local f97_local2 = Engine[@"getmodelvalue"](f97_local1)
+				local f97_local2 = Engine.GetModelValue(f97_local1)
 				f96_arg0.ObjectiveStatusImage:setImage(RegisterImage(GetPlayerListObjectiveMinimapImage(f96_arg1, f97_local2)))
 				f96_arg0.ObjectiveStatusImage:setRGB(GetPlayerListObjectiveColor(f96_arg1, f97_local2))
 			end
@@ -921,7 +921,7 @@ CoD.CodCasterUtility.CodCasterSettingsGroupListPrepare = function(f99_arg0, f99_
 	for f99_local10, f99_local11 in ipairs(f99_arg1) do
 		local f99_local12 = nil
 		local f99_local13 = {}
-		if f99_local11.options and not (f99_arg0 ~= Engine[@"getprimarycontroller"]() and IsInGame()) then
+		if f99_local11.options and not (f99_arg0 ~= Engine.GetPrimaryController() and IsInGame()) then
 			for f99_local7, f99_local8 in ipairs(f99_local11.options) do
 				local f99_local9 = Engine[@"hash_2E00B2F29271C60B"](Engine[@"converttoxhash"](f99_local8))
 				if f99_local9 and not CoD.OptionsUtility.ExcludeOption(f99_arg0, f99_local9) then
@@ -976,8 +976,8 @@ CoD.CodCasterUtility.CodCasterSettingsItemSelected = function(f101_arg0, f101_ar
 		if f101_local2 then
 			CoD.OptionsUtility.NotifyPlayerSettingsUpdate(f101_arg2, f101_local2:get())
 		end
-		if Engine[@"isingame"]() and f101_arg3 == "shoutcaster_ds_thirdperson" then
-			Engine[@"execnow"](f101_arg2, "shoutcaster_thirdperson " .. CoD.ShoutcasterProfileVarValue(f101_arg2, f101_arg3))
+		if Engine.IsInGame() and f101_arg3 == "shoutcaster_ds_thirdperson" then
+			Engine.ExecNow(f101_arg2, "shoutcaster_thirdperson " .. CoD.ShoutcasterProfileVarValue(f101_arg2, f101_arg3))
 		end
 	end
 end
@@ -1171,7 +1171,7 @@ CoD.CodCasterUtility.CodCasterSettings = {}
 CoD.CodCasterUtility.CodCasterSettings.DisplaySettingsCategories = {
 	{
 		ref = "Xray",
-		groupName = @"hash_2C110A89F1CE335C",
+		groupName = "codcaster/ds_xray",
 		datasourceNameHeader = "CodCasterDisplaySettingsXrayList",
 		datasourceFunc = CoD.CodCasterUtility.CodCasterSettingsDisplaySettingsXray,
 		isDefaultCondition = CoD.CodCasterUtility.AreCodCasterOptionsDefault,
@@ -1213,7 +1213,7 @@ CoD.CodCasterUtility.CodCasterSettings.DisplaySettingsCategories = {
 CoD.CodCasterUtility.CodCasterSettings.LoadoutSettingsCategories = {
 	{
 		ref = "PrimaryWeapon",
-		groupName = @"hash_CB2D4EFE37D882B",
+		groupName = "codcaster/ls_primary_weapon",
 		datasourceNameHeader = "CodCasterLoadoutSettingsPrimaryWeaponList",
 		datasourceFunc = CoD.CodCasterUtility.CodCasterSettingsLoadoutSettingsPrimaryWeapon,
 		isDefaultCondition = CoD.CodCasterUtility.AreCodCasterOptionsDefault,
@@ -1221,7 +1221,7 @@ CoD.CodCasterUtility.CodCasterSettings.LoadoutSettingsCategories = {
 	},
 	{
 		ref = "SecondaryWeapon",
-		groupName = @"hash_A305350B533949F",
+		groupName = "codcaster/ls_secondary_weapon",
 		datasourceNameHeader = "CodCasterLoadoutSettingsSecondaryWeaponList",
 		datasourceFunc = CoD.CodCasterUtility.CodCasterSettingsLoadoutSettingsSecondaryWeapon,
 		isDefaultCondition = CoD.CodCasterUtility.AreCodCasterOptionsDefault,
@@ -1239,7 +1239,7 @@ CoD.CodCasterUtility.CodCasterSettings.LoadoutSettingsCategories = {
 CoD.CodCasterUtility.CodCasterSettings.TeamSettingsCategories = {
 	{
 		ref = "TeamIdentity",
-		groupName = @"hash_77A023700261F0B2",
+		groupName = "codcaster/team_identity",
 		datasourceNameHeader = "CodCasterTeamSettingsTeamIdentityList",
 		datasourceFunc = CoD.CodCasterUtility.CodCasterSettingsTeamSettingsTeamIdentity,
 		isDefaultCondition = CoD.CodCasterUtility.AreCodCasterOptionsDefault,
@@ -1247,11 +1247,11 @@ CoD.CodCasterUtility.CodCasterSettings.TeamSettingsCategories = {
 	},
 	{
 		ref = "Team1Settings",
-		groupName = @"hash_230692B7DE1E3032",
+		groupName = "codcaster/team1_settings",
 	},
 	{
 		ref = "Team2Settings",
-		groupName = @"hash_5E3E43881DB13D15",
+		groupName = "codcaster/team2_settings",
 	},
 }
 CoD.CodCasterUtility.CodCasterSettings.QuickSettingsCategories = {
@@ -1260,7 +1260,7 @@ CoD.CodCasterUtility.CodCasterSettings.QuickSettingsCategories = {
 	},
 }
 CoD.CodCasterUtility.SettingsUpdate = function(f112_arg0, f112_arg1, f112_arg2)
-	local f112_local0 = Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "CodCasterSettings"), "Update")
+	local f112_local0 = Engine.CreateModel(Engine.CreateModel(Engine.GetGlobalModel(), "CodCasterSettings"), "Update")
 	if f112_arg1.updateSubscription then
 		f112_arg1:removeSubscription(f112_arg1.updateSubscription)
 	end
@@ -1313,8 +1313,7 @@ CoD.CodCasterUtility.PrepareSettingsTeamCategories = function(f115_arg0, f115_ar
 			f115_local5 = CoD.OptionsUtility.IsPlayerSettingDefault(f115_arg0, "codcaster_fe_team_identity")
 		end
 		local f115_local6 = false
-		local f115_local7 = false
-		local f115_local8 = nil
+		local f115_local7, f115_local8 = false
 		if f115_local13.ref == "Team1Settings" then
 			f115_local6 = true
 			f115_local8 = "team1"
@@ -1360,24 +1359,24 @@ DataSources.CodCasterDisplaySettingsCategories = DataSourceHelpers.ListSetup("Co
 DataSources.CodCasterLoadoutSettingsCategories = DataSourceHelpers.ListSetup("CodCasterLoadoutSettingsCategories", CoD.CodCasterUtility.PrepareSettingsCategoriesLoadout, nil, nil, CoD.CodCasterUtility.SettingsUpdate)
 DataSources.CodCasterTeamSettingsCategories = DataSourceHelpers.ListSetup("CodCasterTeamSettingsCategories", CoD.CodCasterUtility.PrepareSettingsCategoriesTeam, nil, nil, CoD.CodCasterUtility.SettingsUpdate)
 CoD.CodCasterUtility.NonTeamBasedPreLoad = function(f119_arg0, f119_arg1)
-	local f119_local0 = Engine[@"getmodelforcontroller"](f119_arg1)
-	if not Engine[@"getmodel"](f119_local0, "selfPlayerInfo") then
-		Engine[@"createmodel"](f119_local0, "selfPlayerInfo")
-		Engine[@"createmodel"](f119_local0, "selfPlayerInfo.intop3")
+	local f119_local0 = Engine.GetModelForController(f119_arg1)
+	if not Engine.GetModel(f119_local0, "selfPlayerInfo") then
+		Engine.CreateModel(f119_local0, "selfPlayerInfo")
+		Engine.CreateModel(f119_local0, "selfPlayerInfo.intop3")
 	end
 end
 CoD.CodCasterUtility.NonTeamBasedPostLoad = function(f120_arg0, f120_arg1)
-	local f120_local0 = Engine[@"getgametypeinfo"](Engine[@"getcurrentgametype"]())
+	local f120_local0 = Engine[@"getgametypeinfo"](Engine.GetCurrentGameType())
 	f120_arg0.ModeAndMapName:setText(Engine[@"hash_4F9F1239CFD921FE"](f120_local0.nameRef))
-	f120_arg0.Widget1Portrait:setImage(RegisterImage(@"blacktransparent"))
-	f120_arg0.Widget2Portrait:setImage(RegisterImage(@"blacktransparent"))
-	f120_arg0.Widget3Portrait:setImage(RegisterImage(@"blacktransparent"))
+	f120_arg0.Widget1Portrait:setImage(RegisterImage("blacktransparent"))
+	f120_arg0.Widget2Portrait:setImage(RegisterImage("blacktransparent"))
+	f120_arg0.Widget3Portrait:setImage(RegisterImage("blacktransparent"))
 end
 DataSources.CodCasterSideBarSettingsTabs = ListHelper_SetupDataSource("CodCasterSideBarSettingsTabs", function(f121_arg0)
 	local f121_local0 = {}
 	table.insert(f121_local0, {
 		models = {
-			tabName = @"hash_7E2311AD89D11E7C",
+			tabName = "codcaster/display_settings",
 			tabWidget = "CoD.CodCasterSettingsSideBarDisplaySettings",
 			tabIcon = "",
 		},
@@ -1388,7 +1387,7 @@ DataSources.CodCasterSideBarSettingsTabs = ListHelper_SetupDataSource("CodCaster
 	})
 	table.insert(f121_local0, {
 		models = {
-			tabName = @"hash_2DC89C646FCB3342",
+			tabName = "codcaster/loadout_settings",
 			tabWidget = "CoD.CodCasterSettingsSideBarLoadoutSettings",
 			tabIcon = "",
 		},
@@ -1400,7 +1399,7 @@ DataSources.CodCasterSideBarSettingsTabs = ListHelper_SetupDataSource("CodCaster
 	return f121_local0
 end, true)
 CoD.CodCasterUtility.GetCodCasterSettingsModel = function(f122_arg0)
-	local f122_local0 = Engine[@"getglobalmodel"]()
+	local f122_local0 = Engine.GetGlobalModel()
 	local f122_local1 = f122_local0:create("CodCasterSettings")
 	if f122_arg0 then
 		return f122_local1:create(f122_arg0)
@@ -1481,7 +1480,7 @@ CoD.CodCasterUtility.UpdateTalentsListSizeAndModel = function(f127_arg0, f127_ar
 	local f127_local1 = f127_local0.CodCasterLoadoutModuleEquipment
 	local f127_local2 = f127_local0.CodCasterLoadoutModulePerk
 	local f127_local3 = f127_local0.CodCasterLoadoutModulePerkWildcard
-	local f127_local4 = Engine[@"getmodelforcontroller"](f127_arg2)
+	local f127_local4 = Engine.GetModelForController(f127_arg2)
 	local f127_local5 = f127_local4:create("talents.talentEquipmentCount")
 	f127_local5 = f127_local5:get()
 	local f127_local6 = f127_local4:create("talents.perkCount")
@@ -1539,7 +1538,7 @@ CoD.CodCasterUtility.ShowCurrentWeaponWildcards = function(f130_arg0, f130_arg1)
 	return IsCodCasterProfileValueEqualTo(f130_arg0, "shoutcaster_ls_secondary_wildcards", 1) and IsCodCasterProfileValueEqualTo(f130_arg0, "shoutcaster_ls_secondary_weapon", 1)
 end
 CoD.CodCasterUtility.IsPrimaryWeaponOnHand = function(f131_arg0)
-	local f131_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f131_arg0), "secondaryWeapon.indexIndex")
+	local f131_local0 = Engine.GetModel(Engine.GetModelForController(f131_arg0), "secondaryWeapon.indexIndex")
 	return CoD.SafeGetModelValue(DataSources.CurrentWeapon.getModel(f131_arg0), "weapon") ~= f131_local0:get()
 end
 CoD.CodCasterUtility.RealignLoadoutPrimaryWeapon = function(f132_arg0, f132_arg1, f132_arg2, f132_arg3, f132_arg4, f132_arg5, f132_arg6)
@@ -1592,7 +1591,7 @@ CoD.CodCasterUtility.UpdateWeaponListSizeAndModel = function(f133_arg0, f133_arg
 	end
 	local f133_local1 = f133_local0.CodCasterLoadoutModulePrimaryWildcard
 	local f133_local2 = f133_local0.CodCasterLoadoutModulePrimaryAttachments
-	local f133_local3 = Engine[@"getmodelforcontroller"](f133_arg2)
+	local f133_local3 = Engine.GetModelForController(f133_arg2)
 	local f133_local4 = f133_local3:create("wildcards.primaryCount")
 	f133_local4 = f133_local4:get()
 	local f133_local5 = f133_local3:create("primaryWeapon.attachmentCount")
@@ -1614,9 +1613,9 @@ CoD.CodCasterUtility.UpdateWeaponListSizeAndModel = function(f133_arg0, f133_arg
 	end
 	f133_local1.CodCasterLoadoutWildcardBackground:setWidth(f133_local7)
 	f133_local2.CodCasterLoadoutAttachmentsBackground:setWidth(f133_local8)
-	local f133_local9 = Engine[@"getmodel"](f133_local3, "primaryWeapon.itemIndex")
+	local f133_local9 = Engine.GetModel(f133_local3, "primaryWeapon.itemIndex")
 	local f133_local10 = f133_local9:get()
-	local f133_local11 = Engine[@"getmodel"](f133_local3, "secondaryWeapon.indexIndex")
+	local f133_local11 = Engine.GetModel(f133_local3, "secondaryWeapon.indexIndex")
 	local f133_local12 = f133_local11:get()
 	local f133_local13 = 389
 	local f133_local14 = false
@@ -1690,7 +1689,7 @@ CoD.CodCasterUtility.UpdateSecondaryWeaponListSizeAndModel = function(f135_arg0,
 	end
 	local f135_local1 = f135_local0.CodCasterLoadoutModuleSecondaryWildcard
 	local f135_local2 = f135_local0.CodCasterLoadoutModuleSecondaryAttachments
-	local f135_local3 = Engine[@"getmodelforcontroller"](f135_arg2)
+	local f135_local3 = Engine.GetModelForController(f135_arg2)
 	local f135_local4 = f135_local3:create("wildcards.secondaryCount")
 	f135_local4 = f135_local4:get()
 	local f135_local5 = f135_local3:create("secondaryWeapon.attachmentCount")
@@ -1715,7 +1714,7 @@ CoD.CodCasterUtility.UpdateSecondaryWeaponListSizeAndModel = function(f135_arg0,
 	local f135_local9 = 389
 	local f135_local10 = false
 	local f135_local11 = CoD.SafeGetModelValue(DataSources.CurrentWeapon.getModel(f135_arg2), "weapon")
-	local f135_local12 = Engine[@"getmodel"](f135_local3, "secondaryWeapon.indexIndex")
+	local f135_local12 = Engine.GetModel(f135_local3, "secondaryWeapon.indexIndex")
 	local f135_local13 = f135_local12:get()
 	if f135_local13 == 0 then
 		f135_local0.CodCasterLoadoutModuleSecondaryWeapon.WeaponBackground:setWidth(0)
@@ -1883,8 +1882,8 @@ CoD.CodCasterUtility.GetLeftMostOffhandItem = function(f140_arg0, f140_arg1, f14
 	elseif f140_local2 > 0 and f140_local0[CoD.CodCasterUtility.LoadoutLocation.OFFHAND_ATTACHMENT] then
 		f140_local3 = LUI.GridLayout.getItemAt(f140_arg2, 1)
 	else
-		local f140_local4 = Engine[@"getmodelforcontroller"](f140_arg0)
-		local f140_local5 = CoD.CodCasterUtility.IsPrimaryWeaponOnHand(f140_arg0) and Engine[@"getmodel"](f140_local4, "secondaryWeapon.indexIndex") or Engine[@"getmodel"](f140_local4, "primaryWeapon.itemIndex")
+		local f140_local4 = Engine.GetModelForController(f140_arg0)
+		local f140_local5 = CoD.CodCasterUtility.IsPrimaryWeaponOnHand(f140_arg0) and Engine.GetModel(f140_local4, "secondaryWeapon.indexIndex") or Engine.GetModel(f140_local4, "primaryWeapon.itemIndex")
 		if f140_local5:get() ~= 0 then
 			f140_local3 = f140_arg3
 		end
@@ -1910,7 +1909,7 @@ CoD.CodCasterUtility.SetLoadoutTalentsText = function(f142_arg0)
 	for f142_local1 = 1, f142_local0, 1 do
 		local f142_local4 = LUI.GridLayout.getItemAt(f142_arg0, f142_local1)
 		if f142_local4 ~= nil then
-			local f142_local5 = Engine[@"getmodel"](f142_local4:getModel(), "itemShortName")
+			local f142_local5 = Engine.GetModel(f142_local4:getModel(), "itemShortName")
 			f142_local4.CodCasterLoadoutSelection.ItemName:setText(Engine[@"hash_4F9F1239CFD921FE"](f142_local5:get()))
 		end
 	end
@@ -1920,8 +1919,8 @@ CoD.CodCasterUtility.SetLoadoutWildcardsText = function(f143_arg0)
 	for f143_local1 = 1, f143_local0, 1 do
 		local f143_local4 = LUI.GridLayout.getItemAt(f143_arg0, f143_local1)
 		if f143_local4 ~= nil then
-			local f143_local5 = Engine[@"getmodel"](f143_local4:getModel(), "name")
-			f143_local4.CodCasterLoadoutSelection.ItemName:setText(Engine[@"hash_4F9F1239CFD921FE"](Engine[@"getitemname"](Engine[@"hash_2D97229B24C685D5"](f143_local5:get(), Enum[@"emodes"][@"mode_multiplayer"]), Enum[@"statindexoffset"][@"hash_1A949B83CC070B0"], Enum[@"emodes"][@"mode_multiplayer"])))
+			local f143_local5 = Engine.GetModel(f143_local4:getModel(), "name")
+			f143_local4.CodCasterLoadoutSelection.ItemName:setText(Engine[@"hash_4F9F1239CFD921FE"](Engine.GetItemName(Engine[@"hash_2D97229B24C685D5"](f143_local5:get(), Enum.eModes.mode_multiplayer), Enum[@"statindexoffset"][@"hash_1A949B83CC070B0"], Enum.eModes.mode_multiplayer)))
 		end
 	end
 end
@@ -1930,7 +1929,7 @@ CoD.CodCasterUtility.SetLoadoutAttachmentsText = function(f144_arg0, f144_arg1, 
 	for f144_local1 = 1, f144_local0, 1 do
 		local f144_local4 = LUI.GridLayout.getItemAt(f144_arg1, f144_local1)
 		if f144_local4 ~= nil then
-			local f144_local5 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f144_arg0), f144_arg2 .. "Weapon.attachment" .. f144_local1 - 1)
+			local f144_local5 = Engine.GetModel(Engine.GetModelForController(f144_arg0), f144_arg2 .. "Weapon.attachment" .. f144_local1 - 1)
 			if f144_local5 ~= nil then
 				f144_local4.CodCasterLoadoutSelection.ItemName:setText(Engine[@"hash_4F9F1239CFD921FE"](f144_local5:get()))
 			end
@@ -1951,27 +1950,27 @@ CoD.CodCasterUtility.SetLoadoutElementsText = function(f147_arg0, f147_arg1, f14
 	CoD.CodCasterUtility.SetLoadoutWildcardsText(f147_local2.CodCasterLoadoutModulePerkWildcard.CodCasterLoadoutWildcardList)
 	local f147_local3 = f147_local1:getParent()
 	local f147_local4 = f147_local3.T7HudMenuGameMode.HudMPSafeAreaContainer.AmmoWidgetMPUltimate
-	f147_local4.HealCooldown.CodCasterLoadoutSelection.ItemName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_38CADD3D78C04519"))
-	local f147_local5 = Engine[@"getmodel"](f147_local4.UltimateRadialMeterwipe:getModel(), "name")
+	f147_local4.HealCooldown.CodCasterLoadoutSelection.ItemName:setText(Engine[@"hash_4F9F1239CFD921FE"]("hud/heal"))
+	local f147_local5 = Engine.GetModel(f147_local4.UltimateRadialMeterwipe:getModel(), "name")
 	f147_local4.CodCasterLoadoutSelection.ItemName:setText(Engine[@"hash_4F9F1239CFD921FE"](f147_local5:get()))
-	local f147_local6 = Engine[@"getmodel"](f147_local4.AmmoWidgetMPAbilityItem:getModel(), "name")
+	local f147_local6 = Engine.GetModel(f147_local4.AmmoWidgetMPAbilityItem:getModel(), "name")
 	f147_local4.AmmoWidgetMPAbilityItem.CodCasterLoadoutSelection.ItemName:setText(Engine[@"hash_4F9F1239CFD921FE"](f147_local6:get()))
 	local f147_local7 = f147_local0.CodCasterLoadoutPrimary
 	CoD.CodCasterUtility.SetLoadoutWildcardsText(f147_local7.CodCasterLoadoutModulePrimaryWildcard.CodCasterLoadoutWildcards)
 	CoD.CodCasterUtility.SetLoadoutAttachmentsText(f147_arg2, f147_local7.CodCasterLoadoutModulePrimaryAttachments.CodCasterLoadoutAttachments, "primary")
-	local f147_local8 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f147_arg2), "primaryWeapon.itemIndex")
+	local f147_local8 = Engine.GetModel(Engine.GetModelForController(f147_arg2), "primaryWeapon.itemIndex")
 	f147_local8 = f147_local8:get()
 	local f147_local9 = nil
 	if f147_local8 ~= nil then
-		f147_local7.CodCasterLoadoutModulePrimaryWeapon.CodCasterLoadoutSelection.ItemName:setText(Engine[@"hash_4F9F1239CFD921FE"](Engine[@"getitemname"](f147_local8, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], Enum[@"emodes"][@"mode_multiplayer"])))
+		f147_local7.CodCasterLoadoutModulePrimaryWeapon.CodCasterLoadoutSelection.ItemName:setText(Engine[@"hash_4F9F1239CFD921FE"](Engine.GetItemName(f147_local8, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], Enum.eModes.mode_multiplayer)))
 	end
 	local f147_local10 = f147_local0.CodCasterLoadoutSecondary
 	CoD.CodCasterUtility.SetLoadoutWildcardsText(f147_local10.CodCasterLoadoutModuleSecondaryWildcard.CodCasterLoadoutWildcards)
 	CoD.CodCasterUtility.SetLoadoutAttachmentsText(f147_arg2, f147_local10.CodCasterLoadoutModuleSecondaryAttachments.CodCasterLoadoutAttachments, "secondary")
-	local f147_local11 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f147_arg2), "secondaryWeapon.indexIndex")
+	local f147_local11 = Engine.GetModel(Engine.GetModelForController(f147_arg2), "secondaryWeapon.indexIndex")
 	f147_local8 = f147_local11:get()
 	if f147_local8 ~= nil then
-		f147_local10.CodCasterLoadoutModuleSecondaryWeapon.CodCasterLoadoutSelection.ItemName:setText(Engine[@"hash_4F9F1239CFD921FE"](Engine[@"getitemname"](f147_local8, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], Enum[@"emodes"][@"mode_multiplayer"])))
+		f147_local10.CodCasterLoadoutModuleSecondaryWeapon.CodCasterLoadoutSelection.ItemName:setText(Engine[@"hash_4F9F1239CFD921FE"](Engine.GetItemName(f147_local8, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], Enum.eModes.mode_multiplayer)))
 	end
 end
 CoD.CodCasterUtility.ClearSelectedLoadoutElement = function(f148_arg0, f148_arg1, f148_arg2)
@@ -2104,11 +2103,11 @@ CoD.CodCasterUtility.HealthColor = function(f154_arg0)
 	return f154_local0.r, f154_local0.g, f154_local0.b
 end
 CoD.CodCasterUtility.CurrentSpectatedTeamEqualTo = function(f155_arg0, f155_arg1)
-	local f155_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f155_arg0), "deadSpectator.playerTeam")
+	local f155_local0 = Engine.GetModel(Engine.GetModelForController(f155_arg0), "deadSpectator.playerTeam")
 	return f155_local0:get() == f155_arg1
 end
 CoD.CodCasterUtility.IsSelfNext = function(f156_arg0, f156_arg1)
-	local f156_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f156_arg1), "hudItems.codcaster.nextClient")
+	local f156_local0 = Engine.GetModel(Engine.GetModelForController(f156_arg1), "hudItems.codcaster.nextClient")
 	local f156_local1 = f156_arg0:getModel(f156_arg1, "clientNum")
 	return f156_local0:get() == f156_local1:get()
 end
@@ -2118,17 +2117,17 @@ CoD.CodCasterUtility.ToggleCodCasterProfileValue = function(f157_arg0, f157_arg1
 	else
 		CoD.SetShoutcasterProfileVarValue(f157_arg0, f157_arg1, 0)
 	end
-	if Engine[@"isingame"]() and f157_arg1 == "shoutcaster_ds_thirdperson" then
-		Engine[@"execnow"](f157_arg0, "shoutcaster_thirdperson " .. CoD.ShoutcasterProfileVarValue(f157_arg0, f157_arg1))
+	if Engine.IsInGame() and f157_arg1 == "shoutcaster_ds_thirdperson" then
+		Engine.ExecNow(f157_arg0, "shoutcaster_thirdperson " .. CoD.ShoutcasterProfileVarValue(f157_arg0, f157_arg1))
 	end
 end
 CoD.CodCasterUtility.ForcePortraitUpdate = function(f158_arg0, f158_arg1)
-	local f158_local0 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f158_arg0:getModel(), "clientNum"))
+	local f158_local0 = Engine.GetModelValue(Engine.GetModel(f158_arg0:getModel(), "clientNum"))
 	f158_arg0.CodCasterPortraitPlayerListEntryExtra.PlayerListEntryKD:setText(GetCodcasterPlayerListKD(f158_arg1, f158_local0))
 	f158_arg0.ObjectiveStatus.ObjectiveStatusImage:setImage(RegisterImage(GetPlayerListObjectiveMinimapImage(f158_arg1, f158_local0)))
 end
 CoD.CodCasterUtility.ForcePlayerListEntryUpdate = function(f159_arg0, f159_arg1)
-	local f159_local0 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f159_arg0:getModel(), "clientNum"))
+	local f159_local0 = Engine.GetModelValue(Engine.GetModel(f159_arg0:getModel(), "clientNum"))
 	f159_arg0.Score01:setText(GetCodcasterPlayerListKD(f159_arg1, f159_local0))
 	f159_arg0.ObjectiveStatus.ObjectiveStatusImage:setImage(RegisterImage(GetPlayerListObjectiveMinimapImage(f159_arg1, f159_local0)))
 end
@@ -2142,14 +2141,14 @@ CoD.CodCasterUtility.InitScores = function(f161_arg0, f161_arg1)
 	f161_arg0.teamright.score2:setText(0)
 	local f161_local0, f161_local1 = nil
 	if CoD.AARUtility.IsGameTypeEqualToString("escort", f161_arg1) then
-		local f161_local2 = Engine[@"getglobalmodel"]()
+		local f161_local2 = Engine.GetGlobalModel()
 		f161_local0 = f161_local2.hudItems.team1.roundsWon
-		f161_local2 = Engine[@"getglobalmodel"]()
+		f161_local2 = Engine.GetGlobalModel()
 		f161_local1 = f161_local2.hudItems.team2.roundsWon
 	else
-		local f161_local2 = Engine[@"getmodelforcontroller"](f161_arg1)
+		local f161_local2 = Engine.GetModelForController(f161_arg1)
 		f161_local0 = f161_local2.GameScore.alliesScore
-		f161_local2 = Engine[@"getmodelforcontroller"](f161_arg1)
+		f161_local2 = Engine.GetModelForController(f161_arg1)
 		f161_local1 = f161_local2.GameScore.axisScore
 	end
 	f161_arg0.teamleft:subscribeToModel(f161_local0, function(model)
@@ -2224,7 +2223,7 @@ DataSources.CodCasterDirectorSettingsTabs = ListHelper_SetupDataSource("CodCaste
 	local f167_local0 = {}
 	table.insert(f167_local0, {
 		models = {
-			tabName = @"hash_24EA93CFFE505B27",
+			tabName = "codcaster/quick_settings",
 			tabWidget = "CoD.DirectorCodCasterQuickSettings",
 			tabIcon = "",
 		},
@@ -2234,7 +2233,7 @@ DataSources.CodCasterDirectorSettingsTabs = ListHelper_SetupDataSource("CodCaste
 	})
 	table.insert(f167_local0, {
 		models = {
-			tabName = @"hash_7E2311AD89D11E7C",
+			tabName = "codcaster/display_settings",
 			tabWidget = "CoD.DirectorCodCasterDisplaySettings",
 			tabIcon = "",
 		},
@@ -2245,7 +2244,7 @@ DataSources.CodCasterDirectorSettingsTabs = ListHelper_SetupDataSource("CodCaste
 	})
 	table.insert(f167_local0, {
 		models = {
-			tabName = @"hash_2DC89C646FCB3342",
+			tabName = "codcaster/loadout_settings",
 			tabWidget = "CoD.DirectorCodCasterLoadoutSettings",
 			tabIcon = "",
 		},
@@ -2256,7 +2255,7 @@ DataSources.CodCasterDirectorSettingsTabs = ListHelper_SetupDataSource("CodCaste
 	})
 	table.insert(f167_local0, {
 		models = {
-			tabName = @"hash_64D1595123C780BD",
+			tabName = "codcaster/team_settings",
 			tabWidget = "CoD.DirectorCodCasterTeamSettings",
 			tabIcon = "",
 		},
@@ -2283,14 +2282,14 @@ CoD.CodCasterUtility.ResetPlayerSettingsCategoryListToDefault = function(f168_ar
 			end
 		end
 	end
-	Engine[@"forcenotifymodelsubscriptions"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "GametypeSettings.Update"))
-	Engine[@"forcenotifymodelsubscriptions"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "GametypeSettings.Reset"))
+	Engine.ForceNotifyModelSubscriptions(Engine.CreateModel(Engine.GetGlobalModel(), "GametypeSettings.Update"))
+	Engine.ForceNotifyModelSubscriptions(Engine.CreateModel(Engine.GetGlobalModel(), "GametypeSettings.Reset"))
 end
 CoD.CodCasterUtility.ShouldShowOverheadInfo = function(f169_arg0, f169_arg1, f169_arg2)
 	local f169_local0 = false
 	local f169_local1 = f169_arg0:getModel(f169_arg1, "team")
 	local f169_local2 = f169_local1:get()
-	local f169_local3 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f169_arg1), "deadSpectator.playerTeam")
+	local f169_local3 = Engine.GetModel(Engine.GetModelForController(f169_arg1), "deadSpectator.playerTeam")
 	if f169_local2 == f169_local3:get() then
 		f169_local0 = IsCodCasterProfileValueEqualTo(f169_arg1, f169_arg2 .. "_allies", 1)
 	else
@@ -2299,9 +2298,9 @@ CoD.CodCasterUtility.ShouldShowOverheadInfo = function(f169_arg0, f169_arg1, f16
 	return f169_local0
 end
 CoD.CodCasterUtility.PreLoadCodCasterTeamSettings = function(f170_arg0, f170_arg1)
-	local f170_local0 = Engine[@"createmodel"](DataSources.TeamIdentity.getModel(f170_arg1), "team")
-	if not Engine[@"getmodelvalue"](f170_local0) then
-		Engine[@"setmodelvalue"](f170_local0, "team")
+	local f170_local0 = Engine.CreateModel(DataSources.TeamIdentity.getModel(f170_arg1), "team")
+	if not Engine.GetModelValue(f170_local0) then
+		Engine.SetModelValue(f170_local0, "team")
 	end
 	CoD.CodCasterUtility.UpdateTeamIdentity(f170_arg0, f170_arg1)
 end
@@ -2309,13 +2308,13 @@ CoD.CodCasterUtility.UpdateTeamIdentity = function(f171_arg0, f171_arg1, f171_ar
 	CoD.SetupTeamIdentityInformation(f171_arg0, f171_arg1, "team1")
 	CoD.SetupTeamIdentityInformation(f171_arg0, f171_arg1, "team2")
 	if f171_arg2 then
-		Engine[@"forcenotifymodelsubscriptions"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "GametypeSettings.Update"))
-		Engine[@"forcenotifymodelsubscriptions"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "GametypeSettings.Reset"))
+		Engine.ForceNotifyModelSubscriptions(Engine.CreateModel(Engine.GetGlobalModel(), "GametypeSettings.Update"))
+		Engine.ForceNotifyModelSubscriptions(Engine.CreateModel(Engine.GetGlobalModel(), "GametypeSettings.Reset"))
 	end
 end
 CoD.CodCasterUtility.OpenCodCasterEditTeamSettings = function(f172_arg0, f172_arg1, f172_arg2)
 	local f172_local0 = function(f173_arg0, f173_arg1)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](DataSources.TeamIdentity.getModel(f173_arg0), "team"), f173_arg1)
+		Engine.SetModelValue(Engine.CreateModel(DataSources.TeamIdentity.getModel(f173_arg0), "team"), f173_arg1)
 	end
 	f172_local0(f172_arg2, f172_arg1.actionTeam)
 	OpenPopup(f172_arg0, "DirectorCodCasterTeamIdentitySettings", f172_arg2)
@@ -2323,7 +2322,7 @@ end
 CoD.CodCasterUtility.IsSelfOrSpectatedClient = function(f174_arg0, f174_arg1)
 	local f174_local0 = LuaDefine.INVALID_CLIENT_INDEX
 	if IsCodCaster(f174_arg0) then
-		local f174_local1 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f174_arg0), "deadSpectator.playerIndex")
+		local f174_local1 = Engine.GetModel(Engine.GetModelForController(f174_arg0), "deadSpectator.playerIndex")
 		f174_local0 = f174_local1:get()
 	else
 		f174_local0 = CoD.AARUtility.GetInGameClientNum(f174_arg0)
@@ -2332,7 +2331,7 @@ CoD.CodCasterUtility.IsSelfOrSpectatedClient = function(f174_arg0, f174_arg1)
 end
 CoD.CodCasterUtility.ScoreboardSetFocus = function(f175_arg0, f175_arg1)
 	if IsCodCaster(f175_arg1) then
-		local f175_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f175_arg1), "deadSpectator.playerIndex")
+		local f175_local0 = Engine.GetModel(Engine.GetModelForController(f175_arg1), "deadSpectator.playerIndex")
 		local f175_local1 = f175_local0:get()
 		local f175_local2 = f175_arg0.YourTeamScores:findItem({
 			clientNum = f175_local1,
@@ -2356,25 +2355,25 @@ CoD.CodCasterUtility.ScoreboardSetFocus = function(f175_arg0, f175_arg1)
 			})
 			f175_local3._readyForCustomFocus = true
 		end
-		local f175_local5 = Engine[@"getmodelforcontroller"](f175_arg1)
+		local f175_local5 = Engine.GetModelForController(f175_arg1)
 		if f175_local5.currentFocusedClient and f175_local4 ~= LuaDefine.INVALID_CLIENT_INDEX then
 			f175_local5.currentFocusedClient:set(f175_local4)
 		end
 	end
 end
 CoD.CodCasterUtility.TeamSettings_RenameTeam = function(f176_arg0, f176_arg1)
-	local f176_local0 = Engine[@"getmodelforcontroller"](f176_arg1)
+	local f176_local0 = Engine.GetModelForController(f176_arg1)
 	f176_local0 = f176_local0.RenameEmblemText:get()
-	if not Engine[@"hash_E3FC4BECF450A06"](f176_arg1, f176_local0, Enum[@"keyboardtype"][@"keyboard_type_team_identity_teamname"]) then
+	if not Engine[@"hash_E3FC4BECF450A06"](f176_arg1, f176_local0, Enum.KeyboardType[@"keyboard_type_team_identity_teamname"]) then
 		local f176_local1 = f176_arg0:getModel(f176_arg1, "inputText")
 		if f176_local1 then
-			Engine[@"setmodelvalue"](f176_local1, f176_local0)
+			Engine.SetModelValue(f176_local1, f176_local0)
 		end
-		local f176_local2 = Engine[@"getmodelvalue"](Engine[@"getmodel"](DataSources.TeamIdentity.getModel(f176_arg1), "team"))
-		local f176_local3 = Engine[@"getmodel"](DataSources.TeamIdentityInformation.getModel(f176_arg1, f176_local2), "teamName")
+		local f176_local2 = Engine.GetModelValue(Engine.GetModel(DataSources.TeamIdentity.getModel(f176_arg1), "team"))
+		local f176_local3 = Engine.GetModel(DataSources.TeamIdentityInformation.getModel(f176_arg1, f176_local2), "teamName")
 		local f176_local4 = "shoutcaster_fe_" .. f176_local2 .. "_name"
 		if f176_local3 then
-			Engine[@"setmodelvalue"](f176_local3, f176_local0)
+			Engine.SetModelValue(f176_local3, f176_local0)
 			CoD.SetShoutcasterProfileVarValue(f176_arg1, f176_local4, f176_local0)
 		end
 	end
@@ -2403,8 +2402,8 @@ CoD.CodCasterUtility.ResetCodcasterSettings = function(f179_arg0, f179_arg1)
 			CoD.CodCasterUtility.ResetCodCasterSettingsDefault(f179_arg0, CoD.CodCasterUtility.CodCasterSettings.LoadoutSettingsCategories)
 		end
 	end
-	Engine[@"forcenotifymodelsubscriptions"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "GametypeSettings.Update"))
-	Engine[@"forcenotifymodelsubscriptions"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "GametypeSettings.Reset"))
+	Engine.ForceNotifyModelSubscriptions(Engine.CreateModel(Engine.GetGlobalModel(), "GametypeSettings.Update"))
+	Engine.ForceNotifyModelSubscriptions(Engine.CreateModel(Engine.GetGlobalModel(), "GametypeSettings.Reset"))
 end
 CoD.CodCasterUtility.ResetCodCasterSettingsDefault = function(f180_arg0, f180_arg1)
 	for f180_local0 = 1, #f180_arg1, 1 do
@@ -2412,9 +2411,9 @@ CoD.CodCasterUtility.ResetCodCasterSettingsDefault = function(f180_arg0, f180_ar
 		if f180_local3 then
 			for f180_local7, f180_local8 in ipairs(Engine[@"hash_7A7E3CD65E63086F"](f180_local3)) do
 				CoD.SetShoutcasterProfileVarValue(f180_arg0, f180_local8[@"statname"], CoD.OptionsUtility.GetPlayerSettingDefaultValueFromOptionInfo(f180_arg0, f180_local8))
-				CoD.OptionsUtility.NotifyPlayerSettingsUpdate(f180_arg0, f180_local8[@"name"])
-				if Engine[@"isingame"]() and f180_local8[@"statname"] == "shoutcaster_ds_thirdperson" then
-					Engine[@"execnow"](f180_arg0, "shoutcaster_thirdperson " .. CoD.ShoutcasterProfileVarValue(f180_arg0, f180_local8[@"statname"]))
+				CoD.OptionsUtility.NotifyPlayerSettingsUpdate(f180_arg0, f180_local8.name)
+				if Engine.IsInGame() and f180_local8[@"statname"] == "shoutcaster_ds_thirdperson" then
+					Engine.ExecNow(f180_arg0, "shoutcaster_thirdperson " .. CoD.ShoutcasterProfileVarValue(f180_arg0, f180_local8[@"statname"]))
 				end
 			end
 		end
@@ -2460,7 +2459,7 @@ CoD.CodCasterUtility.SwapTeamIdentity = function(f188_arg0, f188_arg1)
 		CoD.CodCasterUtility.SetAllShoutcasterProfileVar(f188_arg1, "team1", f188_local3, f188_local4, f188_local5)
 		CoD.CodCasterUtility.SetAllShoutcasterProfileVar(f188_arg1, "team2", f188_local0, f188_local1, f188_local2)
 		CoD.CodCasterUtility.UpdateTeamIdentity(f188_arg0, f188_arg1, true)
-		Engine[@"storagewrite"](f188_arg1, Enum[@"storagefiletype"][@"storage_profile_shoutcaster"])
+		Engine.StorageWrite(f188_arg1, Enum.StorageFileType[@"storage_profile_shoutcaster"])
 	end
 end
 CoD.CodCasterUtility.HandleListenInForPlayer = function(f189_arg0, f189_arg1)
@@ -2469,19 +2468,19 @@ CoD.CodCasterUtility.HandleListenInForPlayer = function(f189_arg0, f189_arg1)
 	elseif f189_arg1 < 0 then
 		return
 	end
-	local f189_local0 = Engine[@"getteamid"](f189_arg0, f189_arg1)
+	local f189_local0 = Engine.GetTeamID(f189_arg0, f189_arg1)
 	if f189_local0 ~= -1 then
-		Engine[@"exec"](f189_arg0, "shoutcastSetListenInTeam " .. f189_local0)
+		Engine.exec(f189_arg0, "shoutcastSetListenInTeam " .. f189_local0)
 	end
 end
 CoD.CodCasterUtility.HandleListenInForProfileChange = function(f190_arg0)
 	if not CoD.ShoutcasterProfileVarBool(f190_arg0, "shoutcaster_qs_listen_in") then
-		Engine[@"exec"](f190_arg0, "shoutcastSetListenInTeam " .. Enum[@"team_t"][@"team_neutral"])
+		Engine.exec(f190_arg0, "shoutcastSetListenInTeam " .. Enum.team_t[@"team_neutral"])
 		return
 	end
-	local f190_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f190_arg0), "deadSpectator.playerIndex")
+	local f190_local0 = Engine.GetModel(Engine.GetModelForController(f190_arg0), "deadSpectator.playerIndex")
 	if f190_local0 then
-		CoD.CodCasterUtility.HandleListenInForPlayer(f190_arg0, Engine[@"getmodelvalue"](f190_local0))
+		CoD.CodCasterUtility.HandleListenInForPlayer(f190_arg0, Engine.GetModelValue(f190_local0))
 	end
 end
 CoD.CodCasterUtility.PostLoadFunc = function(f191_arg0, f191_arg1, f191_arg2)
@@ -2491,13 +2490,13 @@ CoD.CodCasterUtility.PostLoadFunc = function(f191_arg0, f191_arg1, f191_arg2)
 			controller = f191_arg1,
 		})
 	end
-	f191_arg0:subscribeToModel(Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f191_arg1), "deadSpectator.playerIndex"), function(model)
-		CoD.CodCasterUtility.HandleListenInForPlayer(f191_arg1, Engine[@"getmodelvalue"](model))
+	f191_arg0:subscribeToModel(Engine.GetModel(Engine.GetModelForController(f191_arg1), "deadSpectator.playerIndex"), function(model)
+		CoD.CodCasterUtility.HandleListenInForPlayer(f191_arg1, Engine.GetModelValue(model))
 	end)
-	f191_arg0:subscribeToModel(Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f191_arg1), "CodCaster.profileSettingsUpdated"), function(model)
+	f191_arg0:subscribeToModel(Engine.GetModel(Engine.GetModelForController(f191_arg1), "CodCaster.profileSettingsUpdated"), function(model)
 		CoD.CodCasterUtility.HandleListenInForProfileChange(f191_arg1)
 	end)
-	f191_arg0:subscribeToModel(Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f191_arg1), "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_ui_active"]), function(model)
+	f191_arg0:subscribeToModel(Engine.GetModel(Engine.GetModelForController(f191_arg1), "UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_ui_active"]), function(model)
 		f191_arg0:processEvent({
 			name = "gain_focus",
 			controller = f191_arg1,

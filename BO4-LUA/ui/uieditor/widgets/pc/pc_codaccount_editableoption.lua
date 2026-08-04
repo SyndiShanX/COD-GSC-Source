@@ -1,7 +1,7 @@
-require("x64:2675595fa323085")
-require("x64:610fa6ebdf6af8b")
-require("x64:a9255c570c68aa8")
-require("x64:a1e2d7b19f5deb0")
+require("ui/uieditor/widgets/emptyfocusable")
+require("ui/uieditor/widgets/pc/pc_codaccount_editableoption_editbox")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmainframe")
+require("ui/uieditor/widgets/startmenu/startmenu_frame_nobg")
 CoD.PC_CoDAccount_EditableOption = InheritFrom(LUI.UIElement)
 CoD.PC_CoDAccount_EditableOption.__defaultWidth = 750
 CoD.PC_CoDAccount_EditableOption.__defaultHeight = 60
@@ -28,8 +28,8 @@ CoD.PC_CoDAccount_EditableOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local ActionText = LUI.UIText.new(0, 0, 12, 352, 0.5, 0.5, -9.5, 10.5)
 	ActionText:setRGB(0.78, 0.74, 0.67)
 	ActionText:setTTF("ttmussels_regular")
-	ActionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	ActionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	ActionText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	ActionText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	ActionText:linkToElementModel(self, "displayText", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

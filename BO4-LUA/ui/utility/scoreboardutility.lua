@@ -2,11 +2,11 @@ CoD.ScoreboardUtility = {}
 CoD.ScoreboardUtility.MinRowsToShowOnEachTeam = 4
 CoD.ScoreboardUtility.MinRowsToShowOnEachTeamForFFA = 8
 CoD.ScoreboardUtility.GoldenScoreRefs = {
-	@"golden_kill_bonus",
+	"golden_kill_bonus",
 	@"hash_7B62CCBE655DC08A",
 }
 CoD.ScoreboardUtility.ShowScoreboard = function(f1_arg0)
-	Engine[@"showscoreboard"](f1_arg0)
+	Engine.showscoreboard(f1_arg0)
 end
 CoD.ScoreboardUtility.HideScoreboard = function(f2_arg0, f2_arg1)
 	Engine[@"hidescoreboard"](f2_arg1)
@@ -25,21 +25,21 @@ CoD.ScoreboardUtility.SetupGameStatusClientLists = function(f5_arg0, f5_arg1)
 	f5_arg0.EnemyList:updateDataSource(true)
 	local f5_local0 = f5_arg0
 	local f5_local1 = f5_arg0.subscribeToModel
-	local f5_local2 = Engine[@"getmodelforcontroller"](f5_arg1)
+	local f5_local2 = Engine.GetModelForController(f5_arg1)
 	f5_local1(f5_local0, f5_local2:create("Clients.clientChangedTeam"), function(f6_arg0)
 		f5_arg0.TeamList:updateDataSource(true)
 		f5_arg0.EnemyList:updateDataSource(true)
 	end)
 	f5_local0 = f5_arg0
 	f5_local1 = f5_arg0.subscribeToModel
-	f5_local2 = Engine[@"getmodelforcontroller"](f5_arg1)
+	f5_local2 = Engine.GetModelForController(f5_arg1)
 	f5_local1(f5_local0, f5_local2:create("Clients.clientCount"), function(f7_arg0)
 		f5_arg0.TeamList:updateDataSource(true)
 		f5_arg0.EnemyList:updateDataSource(true)
 	end)
 end
 CoD.ScoreboardUtility.SetClientModelOnElement = function(f8_arg0, f8_arg1)
-	local f8_local0 = Engine[@"getmodelforclient"](Engine[@"getclientnum"](f8_arg0))
+	local f8_local0 = Engine[@"getmodelforclient"](Engine.GetClientNum(f8_arg0))
 	if f8_local0 then
 		f8_arg1:setModel(f8_local0, f8_arg0)
 	end
@@ -49,13 +49,13 @@ CoD.ScoreboardUtility.UpdateScoreboardClientMuteButtonPrompt = function(f9_arg0,
 	if not f9_local0 then
 		return
 	end
-	local f9_local1 = Engine[@"getmodelvalue"](f9_local0)
-	local f9_local2 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f9_arg1), "scoreboardInfo.muteButtonPromptVisible")
-	local f9_local3 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f9_arg1), "scoreboardInfo.muteButtonPromptText")
-	if f9_local1 and f9_local1 >= 0 and Engine[@"getclientnum"](f9_arg1) ~= f9_local1 then
+	local f9_local1 = Engine.GetModelValue(f9_local0)
+	local f9_local2 = Engine.CreateModel(Engine.GetModelForController(f9_arg1), "scoreboardInfo.muteButtonPromptVisible")
+	local f9_local3 = Engine.CreateModel(Engine.GetModelForController(f9_arg1), "scoreboardInfo.muteButtonPromptText")
+	if f9_local1 and f9_local1 >= 0 and Engine.GetClientNum(f9_arg1) ~= f9_local1 then
 		local f9_local4 = CoD.SafeGetModelValue(f9_arg0:getModel(), "clientNum")
 		local f9_local5 = CoD.SafeGetModelValue(f9_arg0:getModel(), "isBot")
-		local f9_local6 = Engine[@"setmodelvalue"]
+		local f9_local6 = Engine.SetModelValue
 		local f9_local7 = f9_local2
 		local f9_local8
 		if f9_local4 ~= nil then
@@ -64,32 +64,32 @@ CoD.ScoreboardUtility.UpdateScoreboardClientMuteButtonPrompt = function(f9_arg0,
 			f9_local8 = false
 		end
 		f9_local6(f9_local7, f9_local8)
-		if Engine[@"isplayermutedbyclientnum"](f9_arg1, Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_client"]), f9_local4) then
-			Engine[@"setmodelvalue"](f9_local3, @"hash_56BEF50FAD886D13")
+		if Engine[@"isplayermutedbyclientnum"](f9_arg1, Engine[@"lobbygetcontrollinglobbysession"](Enum.LobbyModule[@"lobby_module_client"]), f9_local4) then
+			Engine.SetModelValue(f9_local3, "menu/unmute_caps")
 		else
-			Engine[@"setmodelvalue"](f9_local3, @"hash_322978D8B62A956")
+			Engine.SetModelValue(f9_local3, "menu/mute_caps")
 		end
 	else
-		Engine[@"setmodelvalue"](f9_local2, false)
-		Engine[@"setmodelvalue"](f9_local3, @"hash_322978D8B62A956")
+		Engine.SetModelValue(f9_local2, false)
+		Engine.SetModelValue(f9_local3, "menu/mute_caps")
 	end
 end
 CoD.ScoreboardUtility.ToggleClientMute = function(f10_arg0, f10_arg1)
-	Engine[@"blockgamefromkeyevent"]()
+	Engine.BlockGameFromKeyEvent()
 	local f10_local0 = f10_arg0:getModel()
 	local f10_local1 = f10_local0 and f10_local0.clientNum
 	if f10_local1 then
 		f10_local1 = f10_local1:get()
 	end
-	if f10_local1 and f10_local1 >= 0 and Engine[@"getclientnum"](f10_arg1) ~= f10_local1 then
-		Engine[@"toggleplayermute"](f10_arg1, f10_local1, Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_client"]))
+	if f10_local1 and f10_local1 >= 0 and Engine.GetClientNum(f10_arg1) ~= f10_local1 then
+		Engine.TogglePlayerMute(f10_arg1, f10_local1, Engine[@"lobbygetcontrollinglobbysession"](Enum.LobbyModule[@"lobby_module_client"]))
 		CoD.ScoreboardUtility.UpdateScoreboardClientMuteButtonPrompt(f10_arg0, f10_arg1)
 	end
 end
 CoD.ScoreboardUtility.CreatedSortKey = function(f11_arg0, f11_arg1, f11_arg2)
-	local f11_local0 = Engine[@"getmodelforcontroller"](f11_arg0)
+	local f11_local0 = Engine.GetModelForController(f11_arg0)
 	if not f11_local0["scoreboardInfo.sortKey" .. f11_arg1] then
-		local f11_local1 = Engine[@"profilevalueasstring"](f11_arg0, "scoreboardSortKey" .. f11_arg1)
+		local f11_local1 = Engine.ProfileValueAsString(f11_arg0, "scoreboardSortKey" .. f11_arg1)
 		if f11_local1 == nil or f11_local1 == "" or not IsObjectiveBasedGametype() and f11_local1 == "scoreboard.objScore" then
 			f11_local1 = f11_arg2
 		end
@@ -98,20 +98,20 @@ CoD.ScoreboardUtility.CreatedSortKey = function(f11_arg0, f11_arg1, f11_arg2)
 	end
 end
 CoD.ScoreboardUtility.InitScoreboardSortKey = function(f12_arg0)
-	local f12_local0 = Engine[@"getscoreboardcolumnname"](f12_arg0, 0)
-	local f12_local1 = Engine[@"getscoreboardcolumnname"](f12_arg0, 1)
-	local f12_local2 = Engine[@"getscoreboardcolumnname"](f12_arg0, 2)
+	local f12_local0 = Engine.GetScoreBoardColumnName(f12_arg0, 0)
+	local f12_local1 = Engine.GetScoreBoardColumnName(f12_arg0, 1)
+	local f12_local2 = Engine.GetScoreBoardColumnName(f12_arg0, 2)
 	CoD.ScoreboardUtility.CreatedSortKey(f12_arg0, 0, "scoreboard." .. string.lower(f12_local0))
 	CoD.ScoreboardUtility.CreatedSortKey(f12_arg0, 1, "scoreboard." .. string.lower(f12_local1))
 	CoD.ScoreboardUtility.CreatedSortKey(f12_arg0, 2, "scoreboard." .. string.lower(f12_local2))
 end
 CoD.ScoreboardUtility.SetRowHeader = function(f13_arg0, f13_arg1, f13_arg2)
-	local f13_local0 = Engine[@"getscoreboardcolumnheader"](f13_arg0, f13_arg2)
+	local f13_local0 = Engine.GetScoreboardColumnHeader(f13_arg0, f13_arg2)
 	if CoD.AARUtility.IsGameTypeEqualToString("bounty", f13_arg0) and string.lower(f13_local0) == "score" then
 		f13_local0 = Engine[@"hash_4F9F1239CFD921FE"](@"mpui/cash")
 	end
 	if CoD.AARUtility.IsGameTypeEqualToString("dm", f13_arg0) and string.lower(f13_local0) == "kills" then
-		f13_local0 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_5AB2B22D8DAC768C")
+		f13_local0 = Engine[@"hash_4F9F1239CFD921FE"]("mpui/points_caps")
 	end
 	if CoD.AARUtility.IsGameTypeEqualToString("infect", f13_arg0) and string.lower(f13_local0) == "objectives" then
 		f13_local0 = Engine[@"hash_4F9F1239CFD921FE"](@"mpui/infects")
@@ -124,7 +124,7 @@ end
 CoD.ScoreboardUtility.SetCurrentFocusedClient = function(f14_arg0, f14_arg1)
 	local f14_local0 = f14_arg0:getModel()
 	if f14_local0 then
-		local f14_local1 = Engine[@"getmodelforcontroller"](f14_arg1)
+		local f14_local1 = Engine.GetModelForController(f14_arg1)
 		if f14_local1.currentFocusedClient then
 			f14_local1.currentFocusedClient:set(f14_local0)
 		end
@@ -132,7 +132,7 @@ CoD.ScoreboardUtility.SetCurrentFocusedClient = function(f14_arg0, f14_arg1)
 	CoD.ScoreboardUtility.UpdateScoreboardClientMuteButtonPrompt(f14_arg0, f14_arg1)
 end
 CoD.ScoreboardUtility.SetCurrentFocusedClientToLocalPlayer = function(f15_arg0, f15_arg1)
-	local f15_local0 = Engine[@"getmodelforcontroller"](f15_arg1)
+	local f15_local0 = Engine.GetModelForController(f15_arg1)
 	local f15_local1 = f15_local0.clientModel:get()
 	local f15_local2 = f15_arg0:findItem({
 		clientNum = f15_local1.clientNum:get(),
@@ -142,7 +142,7 @@ CoD.ScoreboardUtility.SetCurrentFocusedClientToLocalPlayer = function(f15_arg0, 
 	end
 end
 CoD.ScoreboardUtility.SetSavedActiveItemToLocalPlayer = function(f16_arg0, f16_arg1)
-	local f16_local0 = Engine[@"getmodelforcontroller"](f16_arg1)
+	local f16_local0 = Engine.GetModelForController(f16_arg1)
 	local f16_local1 = f16_local0.clientModel:get()
 	local f16_local2 = f16_arg0:findItem({
 		clientNum = f16_local1.clientNum:get(),
@@ -152,9 +152,9 @@ CoD.ScoreboardUtility.SetSavedActiveItemToLocalPlayer = function(f16_arg0, f16_a
 	end
 end
 CoD.ScoreboardUtility.SetupFooterSubscription = function(f17_arg0, f17_arg1)
-	local f17_local0 = Engine[@"getmodelforcontroller"](f17_arg1)
+	local f17_local0 = Engine.GetModelForController(f17_arg1)
 	if not f17_local0.currentFocusedClient then
-		local f17_local1 = Engine[@"getmodelforclient"](Engine[@"getclientnum"](f17_arg1))
+		local f17_local1 = Engine[@"getmodelforclient"](Engine.GetClientNum(f17_arg1))
 		f17_local0:create("currentFocusedClient")
 	end
 	f17_arg0:subscribeToModel(f17_local0.currentFocusedClient, function(model)
@@ -164,8 +164,8 @@ end
 CoD.ScoreboardUtility.SetupResetToLocalPlayerSubscription = function(f19_arg0, f19_arg1, f19_arg2)
 	local f19_local0 = f19_arg0
 	local f19_local1 = f19_arg0.subscribeToModel
-	local f19_local2 = Engine[@"getmodelforcontroller"](f19_arg2)
-	f19_local1(f19_local0, f19_local2["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function(f20_arg0)
+	local f19_local2 = Engine.GetModelForController(f19_arg2)
+	f19_local1(f19_local0, f19_local2["UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_scoreboard_open"]], function(f20_arg0)
 		CoD.ScoreboardUtility.SetCurrentFocusedClientToLocalPlayer(f19_arg1, f19_arg2)
 	end, false)
 end
@@ -174,7 +174,7 @@ CoD.ScoreboardUtility.UpdateScoreboardTabsFocus = function(f21_arg0)
 	CoD.GridAndListUtility.SetFocusToFirstSelectableItem(f21_arg0.Tabs)
 end
 CoD.ScoreboardUtility.SetupTeamLists = function(f22_arg0, f22_arg1, f22_arg2, f22_arg3, f22_arg4, f22_arg5)
-	local f22_local0 = math.ceil(Engine[@"getlobbymaxclients"](Enum[@"lobbymodule"][@"lobby_module_client"], Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_client"])) / 2)
+	local f22_local0 = math.ceil(Engine[@"getlobbymaxclients"](Enum.LobbyModule[@"lobby_module_client"], Engine[@"lobbygetcontrollinglobbysession"](Enum.LobbyModule[@"lobby_module_client"])) / 2)
 	if f22_local0 > 6 then
 		f22_local0 = 6
 	end
@@ -198,20 +198,20 @@ CoD.ScoreboardUtility.SetupTeamLists = function(f22_arg0, f22_arg1, f22_arg2, f2
 	end
 	local f22_local2 = f22_arg0
 	local f22_local3 = f22_arg0.subscribeToModel
-	local f22_local4 = Engine[@"getmodelforcontroller"](f22_arg1)
+	local f22_local4 = Engine.GetModelForController(f22_arg1)
 	f22_local3(f22_local2, f22_local4:create("Clients.clientCount"), function(f24_arg0)
 		f22_local1()
 	end)
 	f22_local2 = f22_arg0
 	f22_local3 = f22_arg0.subscribeToModel
-	f22_local4 = Engine[@"getmodelforcontroller"](f22_arg1)
+	f22_local4 = Engine.GetModelForController(f22_arg1)
 	f22_local3(f22_local2, f22_local4:create("Clients.clientChangedTeam"), function(f25_arg0)
 		f22_local1()
 	end)
 end
 CoD.ScoreboardUtility.CanShowScoreboard = function(f26_arg0)
 	local f26_local0
-	if not Engine[@"isvisibilitybitset"](f26_arg0, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]) and not CoD.SpawnSelectionUtility.IsSpawnSelectActive(f26_arg0) then
+	if not Engine.IsVisibilityBitSet(f26_arg0, Enum.UIVisibilityBit[@"bit_scoreboard_open"]) and not CoD.SpawnSelectionUtility.IsSpawnSelectActive(f26_arg0) then
 		f26_local0 = CoD.isMultiplayer
 		if not f26_local0 then
 			if not GameEnded(f26_arg0) then
@@ -226,7 +226,7 @@ CoD.ScoreboardUtility.CanShowScoreboard = function(f26_arg0)
 	return f26_local0
 end
 CoD.ScoreboardUtility.CanHideScoreboard = function(f27_arg0)
-	local f27_local0 = Engine[@"isvisibilitybitset"](f27_arg0, Enum[@"uivisibilitybit"][@"bit_scoreboard_open"])
+	local f27_local0 = Engine.IsVisibilityBitSet(f27_arg0, Enum.UIVisibilityBit[@"bit_scoreboard_open"])
 	if f27_local0 then
 		if not CoD.SpawnSelectionUtility.IsSpawnSelectActive(f27_arg0) then
 			f27_local0 = CoD.isMultiplayer
@@ -269,7 +269,7 @@ CoD.ScoreboardUtility.IsScoreboardItemCharged = function(f29_arg0)
 	return f29_local0.powerRatio:get() == 1
 end
 CoD.ScoreboardUtility.IsActiveRowClientNum = function(f30_arg0, f30_arg1)
-	local f30_local0 = Engine[@"getmodelforcontroller"](f30_arg0)
+	local f30_local0 = Engine.GetModelForController(f30_arg0)
 	if f30_local0.scoreboardActiveClient then
 		return CoD.SafeGetModelValue(f30_arg1:getModel(), "clientNum") == f30_local0.scoreboardActiveClient:get()
 	else
@@ -321,14 +321,14 @@ DataSources.TabbedScoreboardTabs = ListHelper_SetupDataSource("TabbedScoreboardT
 end)
 DataSources.TeamClients = {
 	prepare = function(f33_arg0, f33_arg1, f33_arg2)
-		local f33_local0 = Engine[@"getmodelforclient"](Engine[@"getclientnum"](f33_arg0))
+		local f33_local0 = Engine[@"getmodelforclient"](Engine.GetClientNum(f33_arg0))
 		f33_local0 = f33_local0:create("team")
 		f33_local0 = f33_local0:get()
-		if f33_local0 == Enum[@"team_t"][@"team_spectator"] then
+		if f33_local0 == Enum.team_t[@"team_spectator"] then
 			if CoD.ShoutcasterProfileVarBool(f33_arg0, "shoutcaster_ds_flip_scorepane") then
-				f33_local0 = Enum[@"team_t"][@"team_axis"]
+				f33_local0 = Enum.team_t[@"team_axis"]
 			else
-				f33_local0 = Enum[@"team_t"][@"team_allies"]
+				f33_local0 = Enum.team_t[@"team_allies"]
 			end
 		end
 		local f33_local1 = Engine[@"hash_4FCDE749B09C3D6"](f33_arg0)
@@ -348,14 +348,14 @@ DataSources.TeamClients = {
 }
 DataSources.EnemyClients = {
 	prepare = function(f36_arg0, f36_arg1, f36_arg2)
-		local f36_local0 = Engine[@"getmodelforclient"](Engine[@"getclientnum"](f36_arg0))
+		local f36_local0 = Engine[@"getmodelforclient"](Engine.GetClientNum(f36_arg0))
 		f36_local0 = f36_local0:create("team")
 		f36_local0 = f36_local0:get()
-		if f36_local0 == Enum[@"team_t"][@"team_spectator"] then
+		if f36_local0 == Enum.team_t[@"team_spectator"] then
 			if CoD.ShoutcasterProfileVarBool(f36_arg0, "shoutcaster_ds_flip_scorepane") then
-				f36_local0 = Enum[@"team_t"][@"team_axis"]
+				f36_local0 = Enum.team_t[@"team_axis"]
 			else
-				f36_local0 = Enum[@"team_t"][@"team_allies"]
+				f36_local0 = Enum.team_t[@"team_allies"]
 			end
 		end
 		local f36_local1 = Engine[@"hash_4FCDE749B09C3D6"](f36_arg0)
@@ -375,7 +375,7 @@ DataSources.EnemyClients = {
 }
 DataSources.ScoreboardSortOptions = ListHelper_SetupDataSource("ScoreboardSortOptions", function(f39_arg0)
 	local f39_local0 = {}
-	local f39_local1 = Engine[@"getmodelforcontroller"](f39_arg0)
+	local f39_local1 = Engine.GetModelForController(f39_arg0)
 	f39_local1 = f39_local1.scoreboardInfo.sortKey:get()
 	local f39_local2 = {
 		selectIndex = true,
@@ -399,7 +399,7 @@ DataSources.ScoreboardSortOptions = ListHelper_SetupDataSource("ScoreboardSortOp
 	f39_local5 = {
 		models = {
 			id = "scoreboard.damageDone",
-			name = @"hash_189FE6A116A1EE1F",
+			name = "mpui/damage_done",
 			icon = "icon_scoreboard_badge_damage_dealt128",
 		},
 	}
@@ -414,7 +414,7 @@ DataSources.ScoreboardSortOptions = ListHelper_SetupDataSource("ScoreboardSortOp
 		f39_local5 = {
 			models = {
 				id = "scoreboard.objScore",
-				name = @"hash_77C9E518376089AE",
+				name = "mpui/objscore",
 				icon = "icon_scoreboard_badge_objective_score128",
 			},
 		}
@@ -457,25 +457,25 @@ end)
 CoD.ScoreboardUtility.SwitchTabbedScoreboardTabs = function(f40_arg0, f40_arg1, f40_arg2, f40_arg3, f40_arg4)
 	local f40_local0 = f40_arg3
 	BlockGameFromKeyEvent(f40_arg2)
-	local f40_local1 = Engine[@"getmodelforcontroller"](f40_arg2)
+	local f40_local1 = Engine.GetModelForController(f40_arg2)
 	f40_local1.scoreboardInfo.activeTab:set(f40_local0)
 end
 CoD.ScoreboardUtility.GetScoreboardTeamTable = function(f41_arg0, f41_arg1)
-	local f41_local0 = Engine[@"getteampositions"](f41_arg0, Engine[@"getcurrentteamcount"]())
-	if Engine[@"getcurrentteamcount"]() < 2 and f41_arg1 == 2 then
+	local f41_local0 = Engine.GetTeamPositions(f41_arg0, Engine.GetCurrentTeamCount())
+	if Engine.GetCurrentTeamCount() < 2 and f41_arg1 == 2 then
 		return {}
 	end
 	local f41_local1 = f41_local0[f41_arg1].team
 	local f41_local2 = 0
 	local f41_local3 = 0
-	if f41_local1 ~= Enum[@"team_t"][@"team_free"] then
-		f41_local2 = Engine[@"getscoreboardteamclientcount"](Enum[@"team_t"][@"team_allies"])
-		f41_local3 = Engine[@"getscoreboardteamclientcount"](Enum[@"team_t"][@"team_axis"])
+	if f41_local1 ~= Enum.team_t[@"team_free"] then
+		f41_local2 = Engine.GetScoreboardTeamClientCount(Enum.team_t[@"team_allies"])
+		f41_local3 = Engine.GetScoreboardTeamClientCount(Enum.team_t[@"team_axis"])
 	else
-		f41_local2 = Engine[@"getscoreboardteamclientcount"](Enum[@"team_t"][@"team_free"])
+		f41_local2 = Engine.GetScoreboardTeamClientCount(Enum.team_t[@"team_free"])
 	end
 	local f41_local4 = CoD.ScoreboardUtility.MinRowsToShowOnEachTeam
-	if Engine[@"getcurrentteamcount"]() < 2 then
+	if Engine.GetCurrentTeamCount() < 2 then
 		f41_local4 = CoD.ScoreboardUtility.MinRowsToShowOnEachTeamForFFA
 	end
 	f41_local4 = math.max(f41_local4, math.max(f41_local2, f41_local3))
@@ -483,10 +483,10 @@ CoD.ScoreboardUtility.GetScoreboardTeamTable = function(f41_arg0, f41_arg1)
 	for f41_local6 = 1, f41_local4, 1 do
 		local f41_local9 = "team: " .. f41_local1 .. " client: " .. f41_local6 - 1
 		local f41_local10 = -1
-		if Engine[@"getscoreboardteamclientcount"](f41_local1) < f41_local6 then
+		if Engine.GetScoreboardTeamClientCount(f41_local1) < f41_local6 then
 			f41_local9 = "team: " .. f41_local1 .. " client: -1"
 		else
-			f41_local10 = Engine[@"getscoreboardplayerdata"](f41_local6 - 1, f41_local1, Enum[@"scoreboardcolumns_e"][@"scoreboard_column_clientnum"])
+			f41_local10 = Engine.GetScoreboardPlayerData(f41_local6 - 1, f41_local1, Enum.scoreBoardColumns_e[@"scoreboard_column_clientnum"])
 		end
 		table.insert(f41_local5, {
 			models = {
@@ -498,9 +498,9 @@ CoD.ScoreboardUtility.GetScoreboardTeamTable = function(f41_arg0, f41_arg1)
 	return f41_local5
 end
 CoD.ScoreboardUtility.UpdateScoreboardTeamScores = function(f42_arg0)
-	local f42_local0 = Engine[@"getcurrentteamcount"]()
-	local f42_local1 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f42_arg0), "scoreboardInfo")
-	local f42_local2 = Engine[@"getteampositions"](f42_arg0, f42_local0)
+	local f42_local0 = Engine.GetCurrentTeamCount()
+	local f42_local1 = Engine.CreateModel(Engine.GetModelForController(f42_arg0), "scoreboardInfo")
+	local f42_local2 = Engine.GetTeamPositions(f42_arg0, f42_local0)
 	local f42_local3 = {}
 	for f42_local4 = 1, f42_local0, 1 do
 		local f42_local7 = {}
@@ -508,7 +508,7 @@ CoD.ScoreboardUtility.UpdateScoreboardTeamScores = function(f42_arg0)
 		f42_local7.FactionName = ""
 		f42_local7.FactionIcon = ""
 		f42_local7.Score = f42_local2[f42_local4].score
-		if f42_local8 ~= Enum[@"team_t"][@"team_free"] then
+		if f42_local8 ~= Enum.team_t[@"team_free"] then
 			f42_local7.FactionName = CoD.TeamUtility.GetTeamNameCaps(f42_local8)
 			f42_local7.FactionIcon = CoD.TeamUtility.GetTeamFactionIcon(f42_local8)
 			f42_local7.FactionColor = CoD.TeamUtility.GetTeamFactionColor(f42_local8)
@@ -517,7 +517,7 @@ CoD.ScoreboardUtility.UpdateScoreboardTeamScores = function(f42_arg0)
 	end
 	for f42_local12, f42_local7 in ipairs(f42_local3) do
 		for f42_local9, f42_local10 in pairs(f42_local7) do
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f42_local1, "team" .. f42_local12 .. f42_local9), f42_local10)
+			Engine.SetModelValue(Engine.CreateModel(f42_local1, "team" .. f42_local12 .. f42_local9), f42_local10)
 		end
 	end
 end
@@ -530,29 +530,29 @@ CoD.ScoreboardUtility.SetNemesisInfoModels = function(f44_arg0, f44_arg1)
 	local f44_local1 = f44_local0.AfterActionReportStats
 	local f44_local2 = f44_local1.nemesisKills:get()
 	local f44_local3 = f44_local1.nemesisKilledBy:get()
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](f44_arg1, "nemesisXuid"), Engine[@"stringtoxuiddecimal"](f44_local1.nemesisXuid:get()))
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](f44_arg1, "nemesisKills"), f44_local2)
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](f44_arg1, "nemesisKilledBy"), f44_local3)
+	Engine.SetModelValue(Engine.CreateModel(f44_arg1, "nemesisXuid"), Engine.StringToXUIDDecimal(f44_local1.nemesisXuid:get()))
+	Engine.SetModelValue(Engine.CreateModel(f44_arg1, "nemesisKills"), f44_local2)
+	Engine.SetModelValue(Engine.CreateModel(f44_arg1, "nemesisKilledBy"), f44_local3)
 end
 CoD.ScoreboardUtility.SetScoreboardUIModels = function(f45_arg0)
-	local f45_local0 = Engine[@"getcurrentteamcount"]()
-	local f45_local1 = Engine[@"getmodelforcontroller"](f45_arg0)
-	local f45_local2 = Engine[@"createmodel"](f45_local1, "scoreboardInfo")
-	local f45_local3 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](0), "scoreboardInfo")
-	if not Engine[@"getmodel"](f45_local1, "forceScoreboard") then
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f45_local1, "forceScoreboard"), 0)
+	local f45_local0 = Engine.GetCurrentTeamCount()
+	local f45_local1 = Engine.GetModelForController(f45_arg0)
+	local f45_local2 = Engine.CreateModel(f45_local1, "scoreboardInfo")
+	local f45_local3 = Engine.CreateModel(Engine.GetModelForController(0), "scoreboardInfo")
+	if not Engine.GetModel(f45_local1, "forceScoreboard") then
+		Engine.SetModelValue(Engine.CreateModel(f45_local1, "forceScoreboard"), 0)
 	end
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f45_arg0), "updateClientDeadStatus"), 0)
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](f45_local2, "muteButtonPromptVisible"), false)
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](f45_local2, "muteButtonPromptText"), 0x0)
-	local f45_local4 = MapNameToLocalizedMapName(Engine[@"getcurrentmapname"]())
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](f45_local2, "mapName"), f45_local4)
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](f45_local3, "mapName"), f45_local4)
-	if Engine[@"ismultiplayergame"]() then
-		if not Engine[@"isingame"]() then
+	Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f45_arg0), "updateClientDeadStatus"), 0)
+	Engine.SetModelValue(Engine.CreateModel(f45_local2, "muteButtonPromptVisible"), false)
+	Engine.SetModelValue(Engine.CreateModel(f45_local2, "muteButtonPromptText"), 0x0)
+	local f45_local4 = MapNameToLocalizedMapName(Engine.GetCurrentMapName())
+	Engine.SetModelValue(Engine.CreateModel(f45_local2, "mapName"), f45_local4)
+	Engine.SetModelValue(Engine.CreateModel(f45_local3, "mapName"), f45_local4)
+	if Engine.IsMultiplayerGame() then
+		if not Engine.IsInGame() then
 			CoD.ScoreboardUtility.SetNemesisInfoModels(f45_arg0, f45_local2)
 		end
-		local f45_local5 = Engine[@"getteampositions"](f45_arg0, f45_local0)
+		local f45_local5 = Engine.GetTeamPositions(f45_arg0, f45_local0)
 		local f45_local6 = {}
 		for f45_local7 = 1, f45_local0, 1 do
 			local f45_local10 = {}
@@ -560,7 +560,7 @@ CoD.ScoreboardUtility.SetScoreboardUIModels = function(f45_arg0)
 			f45_local10.FactionName = ""
 			f45_local10.FactionIcon = ""
 			f45_local10.Score = f45_local5[f45_local7].score
-			if f45_local11 ~= Enum[@"team_t"][@"team_free"] then
+			if f45_local11 ~= Enum.team_t[@"team_free"] then
 				f45_local10.FactionName = CoD.TeamUtility.GetTeamNameCaps(f45_local11)
 				f45_local10.FactionIcon = CoD.TeamUtility.GetTeamFactionIcon(f45_local11)
 				f45_local10.FactionColor = CoD.TeamUtility.GetTeamFactionColor(f45_local11)
@@ -569,33 +569,33 @@ CoD.ScoreboardUtility.SetScoreboardUIModels = function(f45_arg0)
 		end
 		for f45_local15, f45_local10 in ipairs(f45_local6) do
 			for f45_local12, f45_local13 in pairs(f45_local10) do
-				Engine[@"setmodelvalue"](Engine[@"createmodel"](f45_local2, "team" .. f45_local15 .. f45_local12), f45_local13)
+				Engine.SetModelValue(Engine.CreateModel(f45_local2, "team" .. f45_local15 .. f45_local12), f45_local13)
 			end
 		end
 		f45_local7 = Engine[@"getgametypeinfo"](Engine[@"hash_36F8027A8BC75673"]())
 		f45_local8 = f45_local7.nameRefCaps
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f45_local2, "gameType"), f45_local8)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f45_local3, "gameType"), f45_local8)
+		Engine.SetModelValue(Engine.CreateModel(f45_local2, "gameType"), f45_local8)
+		Engine.SetModelValue(Engine.CreateModel(f45_local3, "gameType"), f45_local8)
 		if f45_local0 < 2 then
-			f45_local9 = Engine[@"getmodel"](f45_local1, "gameScore.playerScore")
+			f45_local9 = Engine.GetModel(f45_local1, "gameScore.playerScore")
 			if f45_local9 then
-				Engine[@"setmodelvalue"](Engine[@"createmodel"](f45_local2, "team1Score"), Engine[@"getmodelvalue"](f45_local9))
+				Engine.SetModelValue(Engine.CreateModel(f45_local2, "team1Score"), Engine.GetModelValue(f45_local9))
 			else
 				local f45_local5 = 5
 				for f45_local6 = 1, f45_local5, 1 do
-					Engine[@"setmodelvalue"](Engine[@"createmodel"](f45_local2, "column" .. f45_local6 .. "Header"), Engine[@"getscoreboardcolumnheader"](f45_arg0, f45_local6 - 1))
+					Engine.SetModelValue(Engine.CreateModel(f45_local2, "column" .. f45_local6 .. "Header"), Engine.GetScoreboardColumnHeader(f45_arg0, f45_local6 - 1))
 				end
 			end
 		else
 			local f45_local5 = 5
 			for f45_local6 = 1, f45_local5, 1 do
-				Engine[@"setmodelvalue"](Engine[@"createmodel"](f45_local2, "column" .. f45_local6 .. "Header"), Engine[@"getscoreboardcolumnheader"](f45_arg0, f45_local6 - 1))
+				Engine.SetModelValue(Engine.CreateModel(f45_local2, "column" .. f45_local6 .. "Header"), Engine.GetScoreboardColumnHeader(f45_arg0, f45_local6 - 1))
 			end
 		end
 	end
 	local f45_local5 = 5
 	for f45_local6 = 1, f45_local5, 1 do
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f45_local2, "column" .. f45_local6 .. "Header"), Engine[@"getscoreboardcolumnheader"](f45_arg0, f45_local6 - 1))
+		Engine.SetModelValue(Engine.CreateModel(f45_local2, "column" .. f45_local6 .. "Header"), Engine.GetScoreboardColumnHeader(f45_arg0, f45_local6 - 1))
 	end
 end
 CoD.ScoreboardUtility.MPScrPostLaod = function(f46_arg0, f46_arg1, f46_arg2)
@@ -680,7 +680,7 @@ CoD.ScoreboardUtility.MPScrPostLaod = function(f46_arg0, f46_arg1, f46_arg2)
 			f50_arg0.currentScore = f50_arg0.currentScore + f50_arg2
 			local f50_local0
 			if f50_arg2 > 0 then
-				f50_local0 = Engine[@"hash_4F9F1239CFD921FE"](@"mp/plus")
+				f50_local0 = Engine[@"hash_4F9F1239CFD921FE"]("mp/plus")
 				if not f50_local0 then
 				else
 					f50_arg0.Score:setText(f50_local0 .. f50_arg0.currentScore)
@@ -701,8 +701,8 @@ CoD.ScoreboardUtility.MPScrPostLaod = function(f46_arg0, f46_arg1, f46_arg2)
 					else
 						f46_arg0:playClip("NormalScore")
 					end
-					if f50_arg1 ~= @"score/kill" and f50_arg1 ~= @"hash_480234A872BD64AC" then
-						f50_arg0:AddScoreFeed(Engine[@"localize"](f50_arg1), f50_local1, f50_local2)
+					if f50_arg1 ~= "score/kill" and f50_arg1 ~= "score/blank" then
+						f50_arg0:AddScoreFeed(Engine.Localize(f50_arg1), f50_local1, f50_local2)
 					end
 					if f50_local2 then
 						f46_local6(25, f50_local2)

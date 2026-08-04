@@ -9,14 +9,14 @@ CoD.BlackMarketTableUtility[@"hash_1C73F5908A5FD309"] = function(f1_arg0)
 		}
 	else
 		return {
-			title = @"hash_0",
+			title = 0x0,
 		}
 	end
 end
 CoD.BlackMarketTableUtility.DEFAULT_RNG_CP_PRICE = 100
 CoD.BlackMarketTableUtility.DEFAULT_RNG_CASE_PRICE = 2
 CoD.BlackMarketTableUtility.MasterContractTable = {}
-CoD.BlackMarketTableUtility.MasterContractTable.name = @"hash_69FA37692BF3254F"
+CoD.BlackMarketTableUtility.MasterContractTable.name = "gamedata/loot/loot_contracts.csv"
 CoD.BlackMarketTableUtility.MasterContractTable.COL_ID = 0
 CoD.BlackMarketTableUtility.MasterContractTable.COL_NAMEHASH = 1
 CoD.BlackMarketTableUtility.MasterContractTable.COL_RARITY = 2
@@ -40,70 +40,70 @@ CoD.BlackMarketTableUtility.ContractsTable.COL_MPPRT = 10
 CoD.BlackMarketTableUtility.ContractsTable.COL_WZPRT = 11
 CoD.BlackMarketTableUtility.ContractsTable.COL_OUTFIT = 12
 CoD.BlackMarketTableUtility.ContractsTable.names = {
-	[@"loot_contract_nomad_muertos"] = @"hash_7AF012FA447E54A0",
-	[@"loot_contract_ruin_muertos"] = 0x14D835E744D0CB,
-	[@"loot_contract_recon_muertos"] = @"hash_5A5316D31DE70234",
-	[@"loot_contract_prophet_muertos"] = @"hash_4DB3F62E91D6D4AD",
-	[@"loot_contract_crash_muertos"] = @"hash_6336BD62B45CB0D0",
-	[@"loot_contract_ajax_roman_warrior"] = @"hash_6C64CBCB4009D532",
-	[@"loot_contract_battery_muertos"] = @"hash_16E3947D0C285856",
-	[@"loot_contract_recon_samurai"] = @"hash_6A197B26A979BA03",
-	[@"loot_contract_ruin_modern_viking"] = @"hash_6B792A1E77329130",
-	[@"loot_contract_torque_muertos"] = @"hash_6DFF687B4909D53F",
-	[@"loot_contract_seraph_muertos"] = @"hash_73AD22FE59BB6FCC",
-	[@"loot_contract_seraph_crimson_lotus"] = @"hash_2B1CFFC7C5038848",
-	[@"loot_contract_ajax_muertos"] = @"hash_5E7BDCB5AC08E9F",
-	[@"loot_contract_halloween"] = @"hash_1B98D930AAAF7316",
-	[@"loot_contract_firebreak_muertos"] = @"hash_613CEC2364DF5AFC",
-	[@"loot_contract_torque_highlander"] = @"hash_695E85714371B8FC",
-	[@"loot_contract_seraph_splinter"] = @"hash_4145AE564FD82FBE",
-	[@"loot_contract_patriot"] = @"hash_42198DABA1541BB6",
-	[@"loot_contract_carbon_cobra"] = 0xA6F0C62E947A34,
-	[@"loot_contract_nomad_splinter"] = @"hash_3827A99C57C1B6C2",
-	[@"loot_contract_zero_cyberpunk"] = @"hash_13DAB37E1DEF60D3",
-	[@"loot_contract_battery_snakeskin"] = @"hash_231C625E585AA402",
-	[@"loot_contract_richtofen"] = @"hash_18FC5C29700A10C9",
-	[@"loot_contract_crash_snakeskin"] = @"hash_5B4AC0940ECC3F38",
-	[@"loot_contract_valkyrie"] = @"hash_225A0D37D7ABC4BA",
-	[@"loot_contract_winter"] = @"hash_26775083C09AC62",
-	[@"loot_contract_firebreak_snakeskin"] = @"hash_6564E6A117034834",
-	[@"loot_contract_season_2_bonus_stream"] = @"hash_394BD1A0F5BF3C10",
-	[@"loot_contract_party_rock"] = @"hash_3C83D1A0A6BA0F7B",
-	[@"loot_contract_misty"] = @"hash_7A5195F46F22BC31",
-	[@"loot_contract_nomad_heist"] = @"hash_7DDDFFB3C508A690",
-	[@"loot_contract_space_shuttle"] = @"hash_6EDA0608CF97548D",
-	[@"loot_contract_seraph_cop"] = @"hash_6BF4180C336F0D0B",
-	[@"loot_contract_crash_cop"] = @"hash_780C722259A9950F",
-	[@"loot_contract_deep_voyage"] = @"hash_525C3644FDCCCFAF",
-	[@"loot_contract_sergei"] = @"hash_1DE297F3D53BD86E",
-	[@"loot_contract_ahabs_revenge"] = 0x6586E2580AADDB,
-	[@"loot_contract_fourth_of_july_event_stream"] = @"hash_18D926D4195CCFC8",
-	[@"loot_contract_russman"] = @"hash_7DB01E2D49663E38",
-	[@"loot_contract_replacer_vacation"] = @"hash_3C2657C533E45C45",
-	[@"loot_contract_koshka_mastercraft"] = @"hash_35664BCA02258FE5",
-	[@"loot_contract_icr7_mastercraft"] = @"hash_46B7E027B542D407",
-	[@"loot_contract_afterglow"] = @"hash_34D842D45F57F3A6",
-	[@"loot_contract_rampart_mastercraft"] = @"hash_68C66D2BE918A3F",
-	[@"loot_contract_tedd"] = @"hash_4D55311398568128",
-	[@"loot_contract_labor_day_event_stream"] = @"hash_69965A9AE971DADE",
-	[@"loot_contract_gks_mastercraft"] = @"hash_776D9062C3C37CB5",
-	[@"loot_contract_stuhlinger"] = @"hash_6F2AFDC5580487CA",
-	[@"loot_contract_kn57_mastercraft"] = @"hash_2986664E382AA135",
-	[@"loot_contract_grigori_weaver"] = @"hash_2ECD1931CDCEB2FB",
+	loot_contract_nomad_muertos = @"hash_7AF012FA447E54A0",
+	loot_contract_ruin_muertos = 0x14D835E744D0CB,
+	loot_contract_recon_muertos = @"hash_5A5316D31DE70234",
+	loot_contract_prophet_muertos = @"hash_4DB3F62E91D6D4AD",
+	loot_contract_crash_muertos = @"hash_6336BD62B45CB0D0",
+	loot_contract_ajax_roman_warrior = @"hash_6C64CBCB4009D532",
+	loot_contract_battery_muertos = @"hash_16E3947D0C285856",
+	loot_contract_recon_samurai = @"hash_6A197B26A979BA03",
+	loot_contract_ruin_modern_viking = @"hash_6B792A1E77329130",
+	loot_contract_torque_muertos = @"hash_6DFF687B4909D53F",
+	loot_contract_seraph_muertos = @"hash_73AD22FE59BB6FCC",
+	loot_contract_seraph_crimson_lotus = @"hash_2B1CFFC7C5038848",
+	loot_contract_ajax_muertos = @"hash_5E7BDCB5AC08E9F",
+	loot_contract_halloween = @"hash_1B98D930AAAF7316",
+	loot_contract_firebreak_muertos = @"hash_613CEC2364DF5AFC",
+	loot_contract_torque_highlander = @"hash_695E85714371B8FC",
+	loot_contract_seraph_splinter = @"hash_4145AE564FD82FBE",
+	loot_contract_patriot = @"hash_42198DABA1541BB6",
+	loot_contract_carbon_cobra = 0xA6F0C62E947A34,
+	loot_contract_nomad_splinter = @"hash_3827A99C57C1B6C2",
+	loot_contract_zero_cyberpunk = @"hash_13DAB37E1DEF60D3",
+	loot_contract_battery_snakeskin = @"hash_231C625E585AA402",
+	loot_contract_richtofen = @"hash_18FC5C29700A10C9",
+	loot_contract_crash_snakeskin = @"hash_5B4AC0940ECC3F38",
+	loot_contract_valkyrie = @"hash_225A0D37D7ABC4BA",
+	loot_contract_winter = @"hash_26775083C09AC62",
+	loot_contract_firebreak_snakeskin = @"hash_6564E6A117034834",
+	loot_contract_season_2_bonus_stream = @"hash_394BD1A0F5BF3C10",
+	loot_contract_party_rock = @"hash_3C83D1A0A6BA0F7B",
+	loot_contract_misty = @"hash_7A5195F46F22BC31",
+	loot_contract_nomad_heist = @"hash_7DDDFFB3C508A690",
+	loot_contract_space_shuttle = @"hash_6EDA0608CF97548D",
+	loot_contract_seraph_cop = @"hash_6BF4180C336F0D0B",
+	loot_contract_crash_cop = @"hash_780C722259A9950F",
+	loot_contract_deep_voyage = @"hash_525C3644FDCCCFAF",
+	loot_contract_sergei = @"hash_1DE297F3D53BD86E",
+	loot_contract_ahabs_revenge = 0x6586E2580AADDB,
+	loot_contract_fourth_of_july_event_stream = @"hash_18D926D4195CCFC8",
+	loot_contract_russman = @"hash_7DB01E2D49663E38",
+	loot_contract_replacer_vacation = @"hash_3C2657C533E45C45",
+	loot_contract_koshka_mastercraft = @"hash_35664BCA02258FE5",
+	loot_contract_icr7_mastercraft = @"hash_46B7E027B542D407",
+	loot_contract_afterglow = @"hash_34D842D45F57F3A6",
+	loot_contract_rampart_mastercraft = @"hash_68C66D2BE918A3F",
+	loot_contract_tedd = @"hash_4D55311398568128",
+	loot_contract_labor_day_event_stream = @"hash_69965A9AE971DADE",
+	loot_contract_gks_mastercraft = @"hash_776D9062C3C37CB5",
+	loot_contract_stuhlinger = @"hash_6F2AFDC5580487CA",
+	loot_contract_kn57_mastercraft = @"hash_2986664E382AA135",
+	loot_contract_grigori_weaver = @"hash_2ECD1931CDCEB2FB",
 }
 CoD.BlackMarketTableUtility.StatBasedOutfitUnlocks = {
-	[@"zm_halloween_2018_reward_1"] = {
-		storageFile = Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"],
+	zm_halloween_2018_reward_1 = {
+		storageFile = Enum.StorageFileType[@"hash_A57D6164B91A8FC"],
 		path = {
 			@"hash_3B52E51401F0229C",
-			@"zm_halloween_2018",
-			@"reward_1",
+			"zm_halloween_2018",
+			"reward_1",
 		},
 		lockedStringRef = @"hash_3369ABF4C17436E3",
 		unlockedStringRef = @"hash_D655AC8E9A3ACCC",
 		itemUnlockable = function()
 			local f2_local0 = CoD.SpecialEventUtility.GetCurrentSpecialEventInfo()
-			return f2_local0 and f2_local0.statHash == @"zm_halloween_2018"
+			return f2_local0 and f2_local0.statHash == "zm_halloween_2018"
 		end,
 		lootIds = {
 			@"hash_7A17204F81E27EA0",
@@ -130,18 +130,18 @@ CoD.BlackMarketTableUtility.StatBasedOutfitUnlocks = {
 			@"hash_13716D88CBAEEB95",
 		},
 	},
-	[@"zm_halloween_2018_reward_2"] = {
-		storageFile = Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"],
+	zm_halloween_2018_reward_2 = {
+		storageFile = Enum.StorageFileType[@"hash_A57D6164B91A8FC"],
 		path = {
 			@"hash_3B52E51401F0229C",
-			@"zm_halloween_2018",
-			@"reward_2",
+			"zm_halloween_2018",
+			"reward_2",
 		},
 		lockedStringRef = @"hash_3369ABF4C17436E3",
 		unlockedStringRef = @"hash_D655AC8E9A3ACCC",
 		itemUnlockable = function()
 			local f3_local0 = CoD.SpecialEventUtility.GetCurrentSpecialEventInfo()
-			return f3_local0 and f3_local0.statHash == @"zm_halloween_2018"
+			return f3_local0 and f3_local0.statHash == "zm_halloween_2018"
 		end,
 		lootIds = {
 			@"hash_7ECB296F71F5F325",
@@ -168,18 +168,18 @@ CoD.BlackMarketTableUtility.StatBasedOutfitUnlocks = {
 			@"hash_488070541D135C3C",
 		},
 	},
-	[@"zm_halloween_2018_reward_3"] = {
-		storageFile = Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"],
+	zm_halloween_2018_reward_3 = {
+		storageFile = Enum.StorageFileType[@"hash_A57D6164B91A8FC"],
 		path = {
 			@"hash_3B52E51401F0229C",
-			@"zm_halloween_2018",
-			@"reward_3",
+			"zm_halloween_2018",
+			"reward_3",
 		},
 		lockedStringRef = @"hash_3369ABF4C17436E3",
 		unlockedStringRef = @"hash_D655AC8E9A3ACCC",
 		itemUnlockable = function()
 			local f4_local0 = CoD.SpecialEventUtility.GetCurrentSpecialEventInfo()
-			return f4_local0 and f4_local0.statHash == @"zm_halloween_2018"
+			return f4_local0 and f4_local0.statHash == "zm_halloween_2018"
 		end,
 		lootIds = {
 			0xA3922047F487AC,
@@ -206,18 +206,18 @@ CoD.BlackMarketTableUtility.StatBasedOutfitUnlocks = {
 			@"hash_72CCDA68FB9F2501",
 		},
 	},
-	[@"zm_halloween_2018_reward_4"] = {
-		storageFile = Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"],
+	zm_halloween_2018_reward_4 = {
+		storageFile = Enum.StorageFileType[@"hash_A57D6164B91A8FC"],
 		path = {
 			@"hash_3B52E51401F0229C",
-			@"zm_halloween_2018",
-			@"reward_4",
+			"zm_halloween_2018",
+			"reward_4",
 		},
 		lockedStringRef = @"hash_3369ABF4C17436E3",
 		unlockedStringRef = @"hash_D655AC8E9A3ACCC",
 		itemUnlockable = function()
 			local f5_local0 = CoD.SpecialEventUtility.GetCurrentSpecialEventInfo()
-			return f5_local0 and f5_local0.statHash == @"zm_halloween_2018"
+			return f5_local0 and f5_local0.statHash == "zm_halloween_2018"
 		end,
 		lootIds = {
 			@"hash_575912091D384F94",
@@ -244,18 +244,18 @@ CoD.BlackMarketTableUtility.StatBasedOutfitUnlocks = {
 			@"hash_4F754311FE4C0539",
 		},
 	},
-	[@"zm_winter_2018_reward_1"] = {
-		storageFile = Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"],
+	zm_winter_2018_reward_1 = {
+		storageFile = Enum.StorageFileType[@"hash_A57D6164B91A8FC"],
 		path = {
 			@"hash_3B52E51401F0229C",
-			@"zm_winter_2018",
-			@"reward_1",
+			"zm_winter_2018",
+			"reward_1",
 		},
 		lockedStringRef = @"hash_559A4FBDA30BC349",
 		unlockedStringRef = @"hash_2780F5BDCFEFA0A6",
 		itemUnlockable = function()
 			local f6_local0 = CoD.SpecialEventUtility.GetCurrentSpecialEventInfo()
-			return f6_local0 and f6_local0.statHash == @"zm_winter_2018"
+			return f6_local0 and f6_local0.statHash == "zm_winter_2018"
 		end,
 		lootIds = {
 			@"hash_3AD487C35DCF6FC3",
@@ -283,18 +283,18 @@ CoD.BlackMarketTableUtility.StatBasedOutfitUnlocks = {
 			@"hash_555A382B548E2098",
 		},
 	},
-	[@"zm_winter_2018_reward_2"] = {
-		storageFile = Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"],
+	zm_winter_2018_reward_2 = {
+		storageFile = Enum.StorageFileType[@"hash_A57D6164B91A8FC"],
 		path = {
 			@"hash_3B52E51401F0229C",
-			@"zm_winter_2018",
-			@"reward_2",
+			"zm_winter_2018",
+			"reward_2",
 		},
 		lockedStringRef = @"hash_559A4FBDA30BC349",
 		unlockedStringRef = @"hash_2780F5BDCFEFA0A6",
 		itemUnlockable = function()
 			local f7_local0 = CoD.SpecialEventUtility.GetCurrentSpecialEventInfo()
-			return f7_local0 and f7_local0.statHash == @"zm_winter_2018"
+			return f7_local0 and f7_local0.statHash == "zm_winter_2018"
 		end,
 		lootIds = {
 			@"hash_4FAE28D345693152",
@@ -322,18 +322,18 @@ CoD.BlackMarketTableUtility.StatBasedOutfitUnlocks = {
 			@"hash_7F008EDB198501B7",
 		},
 	},
-	[@"zm_winter_2018_reward_3"] = {
-		storageFile = Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"],
+	zm_winter_2018_reward_3 = {
+		storageFile = Enum.StorageFileType[@"hash_A57D6164B91A8FC"],
 		path = {
 			@"hash_3B52E51401F0229C",
-			@"zm_winter_2018",
-			@"reward_3",
+			"zm_winter_2018",
+			"reward_3",
 		},
 		lockedStringRef = @"hash_559A4FBDA30BC349",
 		unlockedStringRef = @"hash_2780F5BDCFEFA0A6",
 		itemUnlockable = function()
 			local f8_local0 = CoD.SpecialEventUtility.GetCurrentSpecialEventInfo()
-			return f8_local0 and f8_local0.statHash == @"zm_winter_2018"
+			return f8_local0 and f8_local0.statHash == "zm_winter_2018"
 		end,
 		lootIds = {
 			@"hash_139531747A150EC2",
@@ -361,18 +361,18 @@ CoD.BlackMarketTableUtility.StatBasedOutfitUnlocks = {
 			0xC698394A5B92C7,
 		},
 	},
-	[@"zm_winter_2018_reward_4"] = {
-		storageFile = Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"],
+	zm_winter_2018_reward_4 = {
+		storageFile = Enum.StorageFileType[@"hash_A57D6164B91A8FC"],
 		path = {
 			@"hash_3B52E51401F0229C",
-			@"zm_winter_2018",
-			@"reward_4",
+			"zm_winter_2018",
+			"reward_4",
 		},
 		lockedStringRef = @"hash_559A4FBDA30BC349",
 		unlockedStringRef = @"hash_2780F5BDCFEFA0A6",
 		itemUnlockable = function()
 			local f9_local0 = CoD.SpecialEventUtility.GetCurrentSpecialEventInfo()
-			return f9_local0 and f9_local0.statHash == @"zm_winter_2018"
+			return f9_local0 and f9_local0.statHash == "zm_winter_2018"
 		end,
 		lootIds = {
 			@"hash_31FB2969AB22B2A",
@@ -402,20 +402,20 @@ CoD.BlackMarketTableUtility.StatBasedOutfitUnlocks = {
 	},
 }
 CoD.BlackMarketTableUtility[@"hash_733358695872A441"] = {
-	[@"hash_AAEF8C1B2CB1C79"] = @"hash_7F410B145DCE17BD",
-	[@"hash_71205A986B4A89A7"] = @"hash_7A9842F6BEC0E568",
-	[@"hash_5814FA48F1A5AE2A"] = @"hash_6999516E5E35A515",
-	[@"hash_33AEA5A87AEA226F"] = @"hash_8596BC069593313",
-	[@"hash_2ADFBB57B3F4939E"] = 0x3D7717027A0F92,
-	[@"hash_1D1E23073FFE5E47"] = @"hash_4B77F84C47802222",
+	[@"hash_AAEF8C1B2CB1C79"] = "prt_wz_battery",
+	[@"hash_71205A986B4A89A7"] = "prt_wz_buffassault",
+	[@"hash_5814FA48F1A5AE2A"] = "prt_wz_engineer",
+	[@"hash_33AEA5A87AEA226F"] = "prt_wz_firebreak",
+	[@"hash_2ADFBB57B3F4939E"] = "prt_wz_zero",
+	[@"hash_1D1E23073FFE5E47"] = "prt_wz_trapper",
 	[@"hash_32802518C8458986"] = @"hash_62361C68E083D401",
-	[@"hash_32031E9BA4DA5393"] = @"hash_78C357C8A5680D67",
-	[@"hash_32C6BA9E60BDB826"] = @"hash_63B894FA4D634238",
-	[@"hash_682F9EF36F4D4AD"] = @"hash_17C02481305F0E24",
-	[@"hash_4EE280A4B988F4FB"] = @"hash_69BBE1EC48F79DF5",
-	[@"hash_1DE4E977B12948"] = @"hash_1DC888EECACF65D4",
-	[@"hash_6FE24B15C9DE2184"] = @"hash_1EE2659E8DFF07D8",
-	[0xE89B11A63B156A] = @"hash_76CCE42BFC9866CD",
+	[@"hash_32031E9BA4DA5393"] = "prt_wz_recon",
+	[@"hash_32C6BA9E60BDB826"] = "prt_wz_mercenary",
+	[@"hash_682F9EF36F4D4AD"] = "prt_wz_enforcer",
+	[@"hash_4EE280A4B988F4FB"] = "prt_wz_swatpolice",
+	[@"hash_1DE4E977B12948"] = "prt_wz_outrider",
+	[@"hash_6FE24B15C9DE2184"] = "prt_wz_spectre",
+	[0xE89B11A63B156A] = "prt_wz_reaper_bo4",
 }
 CoD.BlackMarketTableUtility[@"hash_6986E4198CE10DF3"] = @"hash_29A9BD2389B3C356"
 CoD.BlackMarketTableUtility[@"hash_33C671F618E1D758"] = {
@@ -424,12 +424,12 @@ CoD.BlackMarketTableUtility[@"hash_33C671F618E1D758"] = {
 	unlockedStringRef = @"hash_176D201B1691A3E6",
 }
 CoD.BlackMarketTableUtility[@"hash_548F022EAF4F53A3"] = {
-	[@"ui_icon_stickers_gauntlet_unsinkable"] = {
-		storageFile = Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"],
+	ui_icon_stickers_gauntlet_unsinkable = {
+		storageFile = Enum.StorageFileType[@"hash_A57D6164B91A8FC"],
 		path = {
-			@"playerstatslist",
+			"playerstatslist",
 			@"hash_2C88C6128E0BE61",
-			@"statvalue",
+			"statvalue",
 		},
 		lockedStringRef = 0xC6DC1A7FAC1E48,
 		unlockedStringRef = @"hash_2FBC87DDBF94F262",
@@ -437,12 +437,12 @@ CoD.BlackMarketTableUtility[@"hash_548F022EAF4F53A3"] = {
 			return false
 		end,
 	},
-	[@"ui_icon_stickers_gauntlet_vinividizombie"] = {
-		storageFile = Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"],
+	ui_icon_stickers_gauntlet_vinividizombie = {
+		storageFile = Enum.StorageFileType[@"hash_A57D6164B91A8FC"],
 		path = {
-			@"playerstatslist",
+			"playerstatslist",
 			0xD31F5C1693D096,
-			@"statvalue",
+			"statvalue",
 		},
 		lockedStringRef = @"hash_3DEADD371D74E38C",
 		unlockedStringRef = @"hash_574B2C581B1EE696",
@@ -450,12 +450,12 @@ CoD.BlackMarketTableUtility[@"hash_548F022EAF4F53A3"] = {
 			return false
 		end,
 	},
-	[@"ui_icon_stickers_gauntlet_deathconfive"] = {
-		storageFile = Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"],
+	ui_icon_stickers_gauntlet_deathconfive = {
+		storageFile = Enum.StorageFileType[@"hash_A57D6164B91A8FC"],
 		path = {
-			@"playerstatslist",
+			"playerstatslist",
 			0xFEEBDA8BD7FDC,
-			@"statvalue",
+			"statvalue",
 		},
 		lockedStringRef = @"hash_7D04C533DC2235E6",
 		unlockedStringRef = @"hash_157F0E5854DC9308",
@@ -463,12 +463,12 @@ CoD.BlackMarketTableUtility[@"hash_548F022EAF4F53A3"] = {
 			return false
 		end,
 	},
-	[@"ui_icon_stickers_gauntlet_hellcatraz"] = {
-		storageFile = Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"],
+	ui_icon_stickers_gauntlet_hellcatraz = {
+		storageFile = Enum.StorageFileType[@"hash_A57D6164B91A8FC"],
 		path = {
-			@"playerstatslist",
+			"playerstatslist",
 			@"hash_4402D97CCDAE530F",
-			@"statvalue",
+			"statvalue",
 		},
 		lockedStringRef = @"hash_1F075735A3BB5BB6",
 		unlockedStringRef = @"hash_69ADB853E213968F",
@@ -476,12 +476,12 @@ CoD.BlackMarketTableUtility[@"hash_548F022EAF4F53A3"] = {
 			return false
 		end,
 	},
-	[@"loot_ui_icon_stickers_zm_wolf_moon"] = {
-		storageFile = Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"],
+	loot_ui_icon_stickers_zm_wolf_moon = {
+		storageFile = Enum.StorageFileType[@"hash_A57D6164B91A8FC"],
 		path = {
-			@"playerstatslist",
+			"playerstatslist",
 			@"hash_23D2D5674D304C2D",
-			@"statvalue",
+			"statvalue",
 		},
 		lockedStringRef = @"hash_316859B1C782F9F2",
 		unlockedStringRef = @"hash_1E70F147F622CC72",
@@ -489,12 +489,12 @@ CoD.BlackMarketTableUtility[@"hash_548F022EAF4F53A3"] = {
 			return false
 		end,
 	},
-	[@"loot_ui_icon_stickers_zm_delphi"] = {
-		storageFile = Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"],
+	loot_ui_icon_stickers_zm_delphi = {
+		storageFile = Enum.StorageFileType[@"hash_A57D6164B91A8FC"],
 		path = {
-			@"playerstatslist",
+			"playerstatslist",
 			@"hash_112C92D966D3F90B",
-			@"statvalue",
+			"statvalue",
 		},
 		lockedStringRef = @"hash_757782883FEE8976",
 		unlockedStringRef = @"hash_19BD658EB1AA6206",
@@ -502,12 +502,12 @@ CoD.BlackMarketTableUtility[@"hash_548F022EAF4F53A3"] = {
 			return false
 		end,
 	},
-	[@"ui_icon_stickers_gauntlet_unsinkable_variant_1"] = {
-		storageFile = Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"],
+	ui_icon_stickers_gauntlet_unsinkable_variant_1 = {
+		storageFile = Enum.StorageFileType[@"hash_A57D6164B91A8FC"],
 		path = {
-			@"playerstatslist",
+			"playerstatslist",
 			@"hash_65A6063DD5DC5425",
-			@"statvalue",
+			"statvalue",
 		},
 		lockedStringRef = @"hash_656A30ED7D329F5C",
 		unlockedStringRef = @"hash_71C2ECA0D6772E3A",
@@ -516,11 +516,11 @@ CoD.BlackMarketTableUtility[@"hash_548F022EAF4F53A3"] = {
 		end,
 	},
 	[@"hash_52EB1680B294E084"] = {
-		storageFile = Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"],
+		storageFile = Enum.StorageFileType[@"hash_A57D6164B91A8FC"],
 		path = {
-			@"playerstatslist",
+			"playerstatslist",
 			@"hash_35018EB03FB43999",
-			@"statvalue",
+			"statvalue",
 		},
 		lockedStringRef = @"hash_4EAA7F3D6F2BA4CC",
 		unlockedStringRef = @"hash_36DB81F2D0441E41",
@@ -529,11 +529,11 @@ CoD.BlackMarketTableUtility[@"hash_548F022EAF4F53A3"] = {
 		end,
 	},
 	[@"hash_1A15336CFB3AE9CE"] = {
-		storageFile = Enum[@"storagefiletype"][@"hash_A57D6164B91A8FC"],
+		storageFile = Enum.StorageFileType[@"hash_A57D6164B91A8FC"],
 		path = {
-			@"playerstatslist",
+			"playerstatslist",
 			@"hash_5FB724D439B8956",
-			@"statvalue",
+			"statvalue",
 		},
 		lockedStringRef = @"hash_65B5BA355D71196A",
 		unlockedStringRef = @"hash_46A5E16D5603427",
@@ -566,13 +566,13 @@ CoD.BlackMarketTableUtility.GetStatsBasedUnlockId = function()
 			end
 		end
 		for f19_local8, f19_local9 in pairs(CoD.BlackMarketTableUtility[@"hash_733358695872A441"]) do
-			local f19_local3 = Enum[@"emodes"][@"mode_warzone"]
+			local f19_local3 = Enum.eModes.mode_warzone
 			CoD.BlackMarketTableUtility.StatsBasedUnlockId[f19_local8] = {
-				storageFile = Enum[@"storagefiletype"][@"hash_1AB0E693244221BC"],
+				storageFile = Enum.StorageFileType[@"hash_1AB0E693244221BC"],
 				path = {
-					@"characters",
+					"characters",
 					f19_local9,
-					@"unlocked",
+					"unlocked",
 				},
 				lockedStringLookup = function()
 					local f20_local0 = Engine[@"hash_284E3CB0C7D8BA11"](f19_local3, f19_local9)
@@ -602,7 +602,7 @@ CoD.BlackMarketTableUtility.GetStatsBasedUnlockId = function()
 							return false
 						end
 					end
-					return IsBooleanDvarSet(@"hash_4A5FD7D94CFC9DFD")
+					return IsBooleanDvarSet("wz_mp_character_unlocks_outfits")
 				end,
 				notOwnedWhenUnavilable = true,
 			}
@@ -616,9 +616,9 @@ CoD.BlackMarketTableUtility.GetStatsBasedUnlockId = function()
 			@"hash_1A942F2AEECCB69",
 		}) do
 			CoD.BlackMarketTableUtility.StatsBasedUnlockId[f19_local9] = {
-				storageFile = Enum[@"storagefiletype"][@"hash_1AB0E693244221BC"],
+				storageFile = Enum.StorageFileType[@"hash_1AB0E693244221BC"],
 				path = {
-					@"unlockedtags",
+					"unlockedtags",
 					f19_local9,
 				},
 				unlockedStringRef = @"hash_574BDFDE54AFF033",
@@ -627,18 +627,18 @@ CoD.BlackMarketTableUtility.GetStatsBasedUnlockId = function()
 				end,
 			}
 		end
-		if CoD.ZombiesCallingsUtility and IsBooleanDvarSet(@"hash_11DA02CA40639DE5") then
+		if CoD.ZombiesCallingsUtility and IsBooleanDvarSet("faction_callings_enabled_zm") then
 			CoD.ZombiesCallingsUtility.AddFactionCallingStatUnlocks(CoD.BlackMarketTableUtility.StatsBasedUnlockId)
 		end
 	end
 	return CoD.BlackMarketTableUtility.StatsBasedUnlockId
 end
 CoD.BlackMarketTableUtility[@"hash_3B789987DAEDF129"] = {
-	[@"loot_pistol_standard_sig_01"] = "346173322",
-	[@"loot_ar_fastfire_sig_01"] = "345570600",
+	loot_pistol_standard_sig_01 = "346173322",
+	loot_ar_fastfire_sig_01 = "345570600",
 }
 CoD.BlackMarketTableUtility[@"hash_7ACB591F93627122"] = {
-	[@"loot_smg_standard_sig_01"] = {
+	loot_smg_standard_sig_01 = {
 		entitlement = @"hash_6C94ED95E25D8246",
 		deluxe_pack_id = "500016",
 		itemID = "377952817",
@@ -652,7 +652,7 @@ CoD.BlackMarketTableUtility[@"hash_25DDB72D0172A035"] = function(f24_arg0, f24_a
 		local f24_local1 = CoD.BlackMarketTableUtility[@"hash_7ACB591F93627122"][f24_arg1].entitlement
 		local f24_local2 = Engine[@"hash_5352DC095BBB2A45"](f24_arg0, CoD.BlackMarketTableUtility[@"hash_7ACB591F93627122"][f24_arg1].itemID)
 		local f24_local3 = Engine[@"hash_5352DC095BBB2A45"](f24_arg0, CoD.BlackMarketTableUtility[@"hash_7ACB591F93627122"][f24_arg1].deluxe_pack_id)
-		if f24_local3 > 0 and not Engine[@"hasentitlement"](f24_arg0, f24_local1) and not IsBooleanDvarSet(@"loot_fakeall") then
+		if f24_local3 > 0 and not Engine.HasEntitlement(f24_arg0, f24_local1) and not IsBooleanDvarSet(@"loot_fakeall") then
 			f24_local2 = f24_local2 - f24_local3
 		end
 		return f24_local1 ~= nil, f24_local2 > 0
@@ -661,28 +661,28 @@ CoD.BlackMarketTableUtility[@"hash_25DDB72D0172A035"] = function(f24_arg0, f24_a
 	end
 end
 CoD.BlackMarketTableUtility[@"hash_2152E2ED863A7D7A"] = {
-	[@"c_t8_bo_jumpkit_game_cartridge"] = {
-		entitlement = 0x15BE56C5EA0253,
+	c_t8_bo_jumpkit_game_cartridge = {
+		entitlement = "blackops_pack_spectre",
 		_id = "500036",
 		itemID = "445584988",
 	},
 	[@"hash_468A29BD720AEEFB"] = {
-		entitlement = 0x15BE56C5EA0253,
+		entitlement = "blackops_pack_spectre",
 		_id = "500036",
 		itemID = "437925560",
 	},
-	[@"hash_73617BA9FBFD5096"] = {
-		entitlement = @"hash_377B58D9F38DE25F",
+	loot_character_trejo = {
+		entitlement = "blackops_pack_survivor",
 		_id = "500037",
 		itemID = "423973420",
 	},
-	[@"jumppack_hide"] = {
-		entitlement = @"hash_377B58D9F38DE25F",
+	jumppack_hide = {
+		entitlement = "blackops_pack_survivor",
 		_id = "500037",
 		itemID = "476947721",
 	},
 	[@"hash_652641DAB6CBB097"] = {
-		entitlement = @"hash_377B58D9F38DE25F",
+		entitlement = "blackops_pack_survivor",
 		_id = "500037",
 		itemID = "404926528",
 	},
@@ -692,7 +692,7 @@ CoD.BlackMarketTableUtility[@"hash_1214319EDB448F3B"] = function(f25_arg0, f25_a
 		local f25_local0 = CoD.BlackMarketTableUtility[@"hash_2152E2ED863A7D7A"][f25_arg1].entitlement
 		local f25_local1 = Engine[@"hash_5352DC095BBB2A45"](f25_arg0, CoD.BlackMarketTableUtility[@"hash_2152E2ED863A7D7A"][f25_arg1].itemID)
 		local f25_local2 = Engine[@"hash_5352DC095BBB2A45"](f25_arg0, CoD.BlackMarketTableUtility[@"hash_2152E2ED863A7D7A"][f25_arg1]._id)
-		if f25_local2 > 0 and not Engine[@"hasentitlement"](f25_arg0, f25_local0) and not IsBooleanDvarSet(@"loot_fakeall") then
+		if f25_local2 > 0 and not Engine.HasEntitlement(f25_arg0, f25_local0) and not IsBooleanDvarSet(@"loot_fakeall") then
 			f25_local1 = f25_local1 - f25_local2
 		end
 		return f25_local0 ~= nil, f25_local1 > 0
@@ -758,7 +758,7 @@ CoD.BlackMarketTableUtility[@"hash_762B0EE548400BF2"] = function(f26_arg0, f26_a
 		local f26_local1 = CoD.BlackMarketTableUtility[@"hash_2AFA534398B6DC13"][f26_local0].entitlement
 		local f26_local2 = Engine[@"hash_5352DC095BBB2A45"](f26_arg0, CoD.BlackMarketTableUtility[@"hash_2AFA534398B6DC13"][f26_local0].deluxe_pack_id) > 0
 		local f26_local3 = Engine[@"hash_5352DC095BBB2A45"](f26_arg0, CoD.BlackMarketTableUtility[@"hash_2AFA534398B6DC13"][f26_local0].itemID)
-		if f26_local2 and not Engine[@"hasentitlement"](f26_arg0, f26_local1) and not IsBooleanDvarSet(@"loot_fakeall") then
+		if f26_local2 and not Engine.HasEntitlement(f26_arg0, f26_local1) and not IsBooleanDvarSet(@"loot_fakeall") then
 			f26_local3 = f26_local3 - 1
 		end
 		return f26_local1 ~= nil, f26_local3 > 0
@@ -767,16 +767,16 @@ CoD.BlackMarketTableUtility[@"hash_762B0EE548400BF2"] = function(f26_arg0, f26_a
 	end
 end
 CoD.BlackMarketTableUtility[@"hash_714DE8345BDDBCA8"] = {
-	[@"hash_641D42086962443D"] = 500201,
-	[@"hash_25D901B2845AFFB5"] = 500202,
-	[@"hash_271546989F2B39C0"] = 500203,
-	[@"hash_17C8471AD085983B"] = 500204,
-	[@"hash_BAC19A8A93F750A"] = 500205,
-	[@"hash_74A7B1F09EB77129"] = 500206,
-	[@"hash_265A8BFE9E6A3A8F"] = 500207,
-	[@"hash_215EFCE6AF8D9A10"] = 500208,
-	[@"hash_35ABB557417D97BC"] = 500209,
-	[@"hash_34C5E1C04823489D"] = 500210,
+	pbt_mp_swatpolice = 500201,
+	pbt_mp_battery = 500202,
+	pbt_mp_buffassault = 500203,
+	pbt_mp_firebreak = 500204,
+	pbt_mp_trapper = 500205,
+	pbt_mp_technomancer = 500206,
+	pbt_mp_recon = 500207,
+	pbt_mp_mercenary = 500208,
+	pbt_mp_enforcer = 500209,
+	pbt_mp_engineer = 500210,
 }
 CoD.BlackMarketTableUtility[@"hash_521632E84A5AAF71"] = function(f27_arg0)
 	return CoD.BlackMarketTableUtility[@"hash_714DE8345BDDBCA8"][f27_arg0]
@@ -787,10 +787,10 @@ CoD.BlackMarketTableUtility.GetInfoIfOnlyOwnedNonBaseWeapon = function(f28_arg0,
 		if f28_local0 and #f28_local0 > 0 then
 			for f28_local6, f28_local7 in ipairs(f28_local0) do
 				if f28_local7 then
-					local f28_local4 = f28_local7[@"lootid"]
+					local f28_local4 = f28_local7.lootid
 					local f28_local5 = CoD.BlackMarketTableUtility.GetContrabandInfoForPlayer(f28_arg0, f28_local4, f28_arg4)
-					if f28_local5 and f28_local5.owned and not CoD.CACUtility.DvarHideUnlockableItem(f28_local4, Engine[@"currentsessionmode"]()) then
-						f28_local5.useVariantSlot = f28_local7[@"index"]
+					if f28_local5 and f28_local5.owned and not CoD.CACUtility.DvarHideUnlockableItem(f28_local4, Engine.CurrentSessionMode()) then
+						f28_local5.useVariantSlot = f28_local7.index
 						return f28_local5
 					end
 				end
@@ -840,7 +840,7 @@ end
 CoD.BlackMarketTableUtility.GetContractTierCount = function(f32_arg0)
 	local f32_local0 = CoD.BlackMarketTableUtility.GetContractInfo(f32_arg0)
 	if f32_local0 and CoD.BlackMarketTableUtility.ContractsTable.names[f32_local0.namehash] then
-		return Engine[@"gettablerowcount"](CoD.BlackMarketTableUtility.ContractsTable.names[f32_local0.namehash])
+		return Engine.GetTableRowCount(CoD.BlackMarketTableUtility.ContractsTable.names[f32_local0.namehash])
 	else
 		return 0
 	end
@@ -851,7 +851,7 @@ CoD.BlackMarketTableUtility.GetContractItemsByTier = function(f33_arg0, f33_arg1
 	if f33_local1 == nil then
 		return f33_local0
 	elseif CoD.BlackMarketTableUtility.ContractsTable.names[f33_local1.namehash] ~= nil then
-		local f33_local2 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ContractsTable.names[f33_local1.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_TIER, f33_arg2)
+		local f33_local2 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ContractsTable.names[f33_local1.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_TIER, f33_arg2)
 		if not IsBooleanDvarSet(@"hash_DDC9E66934FFDAB") and f33_arg3 ~= nil and f33_arg3 == true then
 			local f33_local3 = Engine[@"hash_72D18261CB3AF850"](f33_arg0, f33_local1.namehash, f33_arg2)
 			if f33_local3 ~= nil then
@@ -871,7 +871,7 @@ CoD.BlackMarketTableUtility.GetContractItemsByTier = function(f33_arg0, f33_arg1
 						end
 					end
 					table.insert(f33_local0, {
-						name = @"hash_0",
+						name = 0x0,
 						gap = true,
 					})
 				end
@@ -890,13 +890,13 @@ CoD.BlackMarketTableUtility.GetContractItemsByTier = function(f33_arg0, f33_arg1
 	return f33_local0
 end
 CoD.BlackMarketTableUtility.GetContractCompletionTier = function(f34_arg0, f34_arg1)
-	local f34_local0 = Engine[@"storagegetbuffer"](f34_arg0, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
+	local f34_local0 = Engine.StorageGetBuffer(f34_arg0, Enum.StorageFileType[@"storage_mp_stats_online"])
 	if f34_local0 ~= nil then
 		for f34_local5, f34_local6 in pairs(CoDShared.Loot.ContractSlots) do
 			if f34_local6 ~= nil then
-				local f34_local4 = f34_local0[@"loot_contracts"][f34_local6]
-				if f34_local4 ~= nil and f34_arg1 == f34_local4[@"contractid"]:get() then
-					return f34_local4[@"completiontier"]:get()
+				local f34_local4 = f34_local0.loot_contracts[f34_local6]
+				if f34_local4 ~= nil and f34_arg1 == f34_local4.contractid:get() then
+					return f34_local4.completiontier:get()
 				end
 			end
 		end
@@ -922,7 +922,7 @@ CoD.BlackMarketTableUtility.GetContractItemsByRelativeTier = function(f35_arg0, 
 			end
 		end
 		if f35_local5 ~= nil and f35_local5 == f35_local0.id then
-			local f35_local7 = Engine[@"storagegetbuffer"](f35_arg0, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
+			local f35_local7 = Engine.StorageGetBuffer(f35_arg0, Enum.StorageFileType[@"storage_mp_stats_online"])
 			if f35_local7 ~= nil then
 				local f35_local8 = f35_local7.loot_contracts.SLOT_EVENT.contractId
 				local f35_local9 = f35_local7.loot_contracts.SLOT_EVENT.completionTier
@@ -934,7 +934,7 @@ CoD.BlackMarketTableUtility.GetContractItemsByRelativeTier = function(f35_arg0, 
 					else
 						f35_local8:set(f35_local5)
 						f35_local9:set(f35_local2)
-						Engine[@"storagewrite"](f35_arg0, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
+						Engine.StorageWrite(f35_arg0, Enum.StorageFileType[@"storage_mp_stats_online"])
 						f35_local4 = f35_local2
 					end
 				end
@@ -969,7 +969,7 @@ CoD.BlackMarketTableUtility.GetContractItemInfo = function(f37_arg0, f37_arg1, f
 	if f37_local1 == nil then
 		return f37_local0
 	elseif CoD.BlackMarketTableUtility.ContractsTable.names[f37_local1.namehash] ~= nil then
-		local f37_local2 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ContractsTable.names[f37_local1.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_NAMEHASH, Engine[@"hash_DE65B393F703EB1"](CoD.BlackMarketTableUtility.ContractsTable.names[f37_local1.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_ID, f37_arg2, CoD.BlackMarketTableUtility.ContractsTable.COL_NAMEHASH))
+		local f37_local2 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ContractsTable.names[f37_local1.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_NAMEHASH, Engine[@"hash_DE65B393F703EB1"](CoD.BlackMarketTableUtility.ContractsTable.names[f37_local1.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_ID, f37_arg2, CoD.BlackMarketTableUtility.ContractsTable.COL_NAMEHASH))
 		if f37_local2 ~= nil and #f37_local2 > 0 then
 			local f37_local3 = f37_local2[1]
 			f37_local0 = {
@@ -991,7 +991,7 @@ end
 CoD.BlackMarketTableUtility.GetContractPalette = function(f38_arg0, f38_arg1)
 	local f38_local0 = CoD.BlackMarketTableUtility.GetContractInfo(f38_arg1)
 	if f38_local0 and CoD.BlackMarketTableUtility.ContractsTable.names[f38_local0.namehash] then
-		local f38_local1 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ContractsTable.names[f38_local0.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_TYPE, @"palette")
+		local f38_local1 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ContractsTable.names[f38_local0.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_TYPE, "palette")
 		if f38_local1 == nil then
 			return 0x0
 		else
@@ -1003,7 +1003,7 @@ end
 CoD.BlackMarketTableUtility.GetContractSignatureWeapon = function(f39_arg0, f39_arg1)
 	local f39_local0 = CoD.BlackMarketTableUtility.GetContractInfo(f39_arg1)
 	if f39_local0 and CoD.BlackMarketTableUtility.ContractsTable.names[f39_local0.namehash] then
-		local f39_local1 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ContractsTable.names[f39_local0.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_TYPE, @"signature_weapon")
+		local f39_local1 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ContractsTable.names[f39_local0.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_TYPE, "signature_weapon")
 		if f39_local1 == nil then
 			return 0x0
 		else
@@ -1015,7 +1015,7 @@ end
 CoD.BlackMarketTableUtility.GetContractReactiveCamoRef = function(f40_arg0, f40_arg1)
 	local f40_local0 = CoD.BlackMarketTableUtility.GetContractInfo(f40_arg1)
 	if f40_local0 and CoD.BlackMarketTableUtility.ContractsTable.names[f40_local0.namehash] then
-		local f40_local1 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ContractsTable.names[f40_local0.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_TYPE, @"reactive_camo")
+		local f40_local1 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ContractsTable.names[f40_local0.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_TYPE, "reactive_camo")
 		if f40_local1 == nil then
 			return 0x0
 		else
@@ -1027,7 +1027,7 @@ end
 CoD.BlackMarketTableUtility.GetContractMastercraft = function(f41_arg0, f41_arg1)
 	local f41_local0 = CoD.BlackMarketTableUtility.GetContractInfo(f41_arg1)
 	if f41_local0 and CoD.BlackMarketTableUtility.ContractsTable.names[f41_local0.namehash] then
-		local f41_local1 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ContractsTable.names[f41_local0.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_TYPE, @"mastercraft")
+		local f41_local1 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ContractsTable.names[f41_local0.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_TYPE, "mastercraft")
 		if f41_local1 == nil then
 			return 0x0
 		else
@@ -1039,7 +1039,7 @@ end
 CoD.BlackMarketTableUtility.GetContractWeaponRefName = function(f42_arg0, f42_arg1, f42_arg2)
 	local f42_local0 = CoD.BlackMarketTableUtility.GetContractInfo(f42_arg2)
 	if f42_local0 and CoD.BlackMarketTableUtility.ContractsTable.names[f42_local0.namehash] then
-		local f42_local1 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ContractsTable.names[f42_local0.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_NAMEHASH, f42_arg1)
+		local f42_local1 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ContractsTable.names[f42_local0.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_NAMEHASH, f42_arg1)
 		if f42_local1 == nil then
 			return 0x0
 		else
@@ -1051,7 +1051,7 @@ end
 CoD.BlackMarketTableUtility.GetContractChaseOutfit = function(f43_arg0, f43_arg1)
 	local f43_local0 = CoD.BlackMarketTableUtility.GetContractInfo(f43_arg1)
 	if f43_local0 and CoD.BlackMarketTableUtility.ContractsTable.names[f43_local0.namehash] then
-		local f43_local1 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ContractsTable.names[f43_local0.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_TYPE, @"palette")
+		local f43_local1 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ContractsTable.names[f43_local0.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_TYPE, "palette")
 		if f43_local1 == nil then
 			return nil
 		end
@@ -1065,15 +1065,15 @@ end
 CoD.BlackMarketTableUtility.GetContractOutfitInfo = function(f44_arg0, f44_arg1, f44_arg2)
 	local f44_local0 = CoD.BlackMarketTableUtility.GetContractInfo(f44_arg1)
 	if f44_local0 and CoD.BlackMarketTableUtility.ContractsTable.names[f44_local0.namehash] then
-		local f44_local1 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ContractsTable.names[f44_local0.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_NAMEHASH, f44_arg2)
+		local f44_local1 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ContractsTable.names[f44_local0.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_NAMEHASH, f44_arg2)
 		if f44_local1 == nil then
 			return nil
 		end
-		local f44_local2 = Enum[@"emodes"][@"mode_multiplayer"]
+		local f44_local2 = Enum.eModes.mode_multiplayer
 		local f44_local3 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContractsTable.names[f44_local0.namehash], f44_local1[#f44_local1], CoD.BlackMarketTableUtility.ContractsTable.COL_MPPRT)
 		if f44_local3 == 0x0 then
 			f44_local3 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContractsTable.names[f44_local0.namehash], f44_local1[#f44_local1], CoD.BlackMarketTableUtility.ContractsTable.COL_WZPRT)
-			f44_local2 = Enum[@"emodes"][@"mode_warzone"]
+			f44_local2 = Enum.eModes.mode_warzone
 		end
 		local f44_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContractsTable.names[f44_local0.namehash], f44_local1[#f44_local1], CoD.BlackMarketTableUtility.ContractsTable.COL_OUTFIT)
 		if f44_local4 == nil then
@@ -1091,7 +1091,7 @@ end
 CoD.BlackMarketTableUtility.GetContractCharacter = function(f45_arg0, f45_arg1)
 	local f45_local0 = CoD.BlackMarketTableUtility.GetContractInfo(f45_arg1)
 	if f45_local0 and CoD.BlackMarketTableUtility.ContractsTable.names[f45_local0.namehash] then
-		local f45_local1 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ContractsTable.names[f45_local0.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_TYPE, @"character")
+		local f45_local1 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ContractsTable.names[f45_local0.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_TYPE, "character")
 		if f45_local1 == nil then
 			return 0x0
 		else
@@ -1106,7 +1106,7 @@ CoD.BlackMarketTableUtility.GetContractOutfitInformation = function(f46_arg0, f4
 	local f46_local2 = 0x0
 	local f46_local3 = CoD.BlackMarketTableUtility.GetContractInfo(f46_arg2)
 	if f46_local3 and CoD.BlackMarketTableUtility.ContractsTable.names[f46_local3.namehash] then
-		local f46_local4 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ContractsTable.names[f46_local3.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_NAMEHASH, f46_arg1)
+		local f46_local4 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ContractsTable.names[f46_local3.namehash], CoD.BlackMarketTableUtility.ContractsTable.COL_NAMEHASH, f46_arg1)
 		if f46_local4 == nil then
 			return {}
 		end
@@ -1125,11 +1125,11 @@ CoD.BlackMarketTableUtility.GetContractOutfitInformation = function(f46_arg0, f4
 			local f46_local9 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContractsTable.names[f46_local3.namehash], f46_local4[1], CoD.BlackMarketTableUtility.ContractsTable.COL_TYPE)
 			local f46_local10 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContractsTable.names[f46_local3.namehash], f46_local4[1], CoD.BlackMarketTableUtility.ContractsTable.COL_NAMEHASH)
 			local f46_local11 = Engine[0x422A503291AC81](f46_local9)
-			if f46_local11 == Enum[@"characteritemtype"][@"hash_57852FCB3BFCC8D1"] then
+			if f46_local11 == Enum.CharacterItemType[@"hash_57852FCB3BFCC8D1"] then
 				f46_local0 = f46_local10
-			elseif f46_local11 == Enum[@"characteritemtype"][@"hash_4922FE5C41D9EE8B"] then
+			elseif f46_local11 == Enum.CharacterItemType[@"hash_4922FE5C41D9EE8B"] then
 				f46_local1 = f46_local10
-			elseif f46_local11 == Enum[@"characteritemtype"][@"hash_48E3A65D78229DC1"] then
+			elseif f46_local11 == Enum.CharacterItemType[@"hash_48E3A65D78229DC1"] then
 				f46_local2 = f46_local10
 			end
 			return {
@@ -1149,12 +1149,12 @@ CoD.BlackMarketTableUtility.GetFullContractItemInfo = function(f47_arg0, f47_arg
 	if CoD.BlackMarketTableUtility.GetContractInfo(CoD.BlackMarketTableUtility.GetContractId(f47_arg1)) == nil then
 		return f47_local0
 	end
-	local f47_local1 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.MasterContractTable.name, CoD.BlackMarketTableUtility.MasterContractTable.COL_NAMEHASH, f47_arg1)
+	local f47_local1 = Engine.TableFindRows(CoD.BlackMarketTableUtility.MasterContractTable.name, CoD.BlackMarketTableUtility.MasterContractTable.COL_NAMEHASH, f47_arg1)
 	if f47_local1 ~= nil and #f47_local1 > 0 then
 		f47_local0 = {
 			name = f47_arg1,
 			rarity = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.MasterContractTable.name, f47_local1[1], CoD.BlackMarketTableUtility.MasterContractTable.COL_RARITY),
-			category = @"special_order",
+			category = "special_order",
 		}
 	end
 	return f47_local0
@@ -1169,19 +1169,19 @@ CoD.BlackMarketTableUtility.GetFullContractOutfitInfo = function(f48_arg0, f48_a
 		local f48_local5 = 0x0
 		local f48_local6 = 0x0
 		local f48_local7 = 0x0
-		local f48_local8 = Engine[@"gettablerowcount"](f48_local0)
+		local f48_local8 = Engine.GetTableRowCount(f48_local0)
 		for f48_local9 = 1, f48_local8, 1 do
 			local f48_local12 = Engine[@"hash_4C6F8EC444864600"](f48_local0, f48_local9 - 1, CoD.BlackMarketTableUtility.ContractsTable.COL_TYPE)
 			if f48_local12 then
 				local f48_local13 = Engine[@"hash_4C6F8EC444864600"](f48_local0, f48_local9 - 1, CoD.BlackMarketTableUtility.ContractsTable.COL_NAMEHASH)
 				local f48_local14 = Engine[0x422A503291AC81](f48_local12)
-				if f48_local14 == Enum[@"characteritemtype"][@"hash_57852FCB3BFCC8D1"] then
+				if f48_local14 == Enum.CharacterItemType[@"hash_57852FCB3BFCC8D1"] then
 					f48_local5 = f48_local13
 				end
-				if f48_local14 == Enum[@"characteritemtype"][@"hash_4922FE5C41D9EE8B"] then
+				if f48_local14 == Enum.CharacterItemType[@"hash_4922FE5C41D9EE8B"] then
 					f48_local6 = f48_local13
 				end
-				if f48_local14 == Enum[@"characteritemtype"][@"hash_48E3A65D78229DC1"] then
+				if f48_local14 == Enum.CharacterItemType[@"hash_48E3A65D78229DC1"] then
 					f48_local7 = f48_local13
 				end
 			end
@@ -1200,7 +1200,7 @@ CoD.BlackMarketTableUtility.GetFullContractOutfitInfo = function(f48_arg0, f48_a
 end
 CoD.BlackMarketTableUtility.GetContractInfoForPlayer = function(f49_arg0, f49_arg1, f49_arg2)
 	for f49_local19, f49_local20 in pairs(CoD.BlackMarketTableUtility.ContractsTable.names) do
-		local f49_local21 = Engine[@"tablefindrows"](f49_local20, CoD.BlackMarketTableUtility.ContractsTable.COL_NAMEHASH, f49_arg1)
+		local f49_local21 = Engine.TableFindRows(f49_local20, CoD.BlackMarketTableUtility.ContractsTable.COL_NAMEHASH, f49_arg1)
 		if f49_local21 ~= nil and #f49_local21 > 0 then
 			local f49_local3 = f49_local21[1]
 			local f49_local4 = Engine[@"hash_4C6F8EC444864600"](f49_local20, f49_local3, CoD.BlackMarketTableUtility.ContractsTable.COL_RARITY)
@@ -1324,7 +1324,7 @@ CoD.BlackMarketTableUtility.GetSeasonItemsByTier = function(f52_arg0, f52_arg1, 
 	end
 	local f52_local2 = CoDShared.Loot.GetSeasonInfoParam(f52_local1.namehash, CoDShared.Loot.SEASON_INFO_TABLENAME)
 	if f52_local2 ~= nil then
-		local f52_local3 = Engine[@"tablefindrows"](f52_local2, CoD.BlackMarketTableUtility.SeasonsTable.COL_TIER, f52_arg2)
+		local f52_local3 = Engine.TableFindRows(f52_local2, CoD.BlackMarketTableUtility.SeasonsTable.COL_TIER, f52_arg2)
 		if not IsBooleanDvarSet(@"hash_DDC9E66934FFDAB") and f52_arg2 <= (Engine[@"hash_6159D7050715A2C3"](f52_arg0, f52_local1.namehash) or 0) then
 			local f52_local4 = Engine[@"hash_72D18261CB3AF850"](f52_arg0, f52_local1.namehash, f52_arg2)
 			if f52_local4 ~= nil then
@@ -1374,9 +1374,9 @@ CoD.BlackMarketTableUtility.GetEmptyContrabandItemInfo = function(f53_arg0, f53_
 	return {
 		itemId = "0",
 		tier = f53_arg0,
-		category = @"hash_0",
-		rarity = @"hash_0",
-		name = @"contraband",
+		category = 0x0,
+		rarity = 0x0,
+		name = "contraband",
 		lootType = LuaEnum.LOOT_TYPE.EMPTY,
 		movieName = f53_local0,
 	}
@@ -1393,9 +1393,9 @@ CoD.BlackMarketTableUtility.GetCaseItemInfo = function(f54_arg0, f54_arg1)
 	return {
 		itemId = "0",
 		tier = f54_arg0,
-		category = @"hash_0",
-		rarity = @"hash_0",
-		name = @"case",
+		category = 0x0,
+		rarity = 0x0,
+		name = "case",
 		lootType = LuaEnum.LOOT_TYPE.EMPTY,
 		movieName = f54_local0,
 	}
@@ -1403,7 +1403,7 @@ end
 CoD.BlackMarketTableUtility.GetSeasonTableAndRowsForItemRef = function(f55_arg0, f55_arg1)
 	for f55_local3, f55_local4 in pairs(CoDShared.Loot.SeasonParams) do
 		local f55_local5 = CoDShared.Loot.GetSeasonInfoParam(f55_local3, CoDShared.Loot.SEASON_INFO_TABLENAME)
-		local f55_local6 = Engine[@"tablefindrows"](f55_local5, CoD.BlackMarketTableUtility.SeasonsTable.COL_NAMEHASH, f55_arg1)
+		local f55_local6 = Engine.TableFindRows(f55_local5, CoD.BlackMarketTableUtility.SeasonsTable.COL_NAMEHASH, f55_arg1)
 		if f55_local6 ~= nil and #f55_local6 > 0 then
 			return f55_local5, f55_local6
 		end
@@ -1426,7 +1426,7 @@ CoD.BlackMarketTableUtility.GetSeasonItemInfo = function(f57_arg0, f57_arg1, f57
 	end
 	local f57_local2 = CoDShared.Loot.GetSeasonInfoParam(f57_local1.namehash, CoDShared.Loot.SEASON_INFO_TABLENAME)
 	if f57_local2 ~= nil then
-		local f57_local3 = Engine[@"tablefindrows"](f57_local2, CoD.BlackMarketTableUtility.SeasonsTable.COL_NAMEHASH, Engine[@"hash_DE65B393F703EB1"](f57_local2, CoD.BlackMarketTableUtility.SeasonsTable.COL_ID, f57_arg2, CoD.BlackMarketTableUtility.SeasonsTable.COL_NAMEHASH))
+		local f57_local3 = Engine.TableFindRows(f57_local2, CoD.BlackMarketTableUtility.SeasonsTable.COL_NAMEHASH, Engine[@"hash_DE65B393F703EB1"](f57_local2, CoD.BlackMarketTableUtility.SeasonsTable.COL_ID, f57_arg2, CoD.BlackMarketTableUtility.SeasonsTable.COL_NAMEHASH))
 		if f57_local3 ~= nil and #f57_local3 > 0 then
 			local f57_local4 = f57_local3[1]
 			f57_local0 = {
@@ -1455,10 +1455,10 @@ CoD.BlackMarketTableUtility.GetSeasonOutfitInformation = function(f58_arg0, f58_
 		return {}
 	end
 	local f58_local5 = Engine[@"hash_4C6F8EC444864600"](f58_local3, f58_local4[1], CoD.BlackMarketTableUtility.SeasonsTable.COL_MPPRT)
-	local f58_local6 = Enum[@"emodes"][@"mode_multiplayer"]
+	local f58_local6 = Enum.eModes.mode_multiplayer
 	if f58_local5 == 0x0 then
 		f58_local5 = Engine[@"hash_4C6F8EC444864600"](f58_local3, f58_local4[1], CoD.BlackMarketTableUtility.SeasonsTable.COL_WZPRT)
-		f58_local6 = Enum[@"emodes"][@"mode_warzone"]
+		f58_local6 = Enum.eModes.mode_warzone
 		if f58_local5 == 0x0 then
 			return {}
 		end
@@ -1470,11 +1470,11 @@ CoD.BlackMarketTableUtility.GetSeasonOutfitInformation = function(f58_arg0, f58_
 	local f58_local8 = Engine[@"hash_4C6F8EC444864600"](f58_local3, f58_local4[1], CoD.BlackMarketTableUtility.SeasonsTable.COL_TYPE)
 	local f58_local9 = Engine[@"hash_4C6F8EC444864600"](f58_local3, f58_local4[1], CoD.BlackMarketTableUtility.SeasonsTable.COL_NAMEHASH)
 	local f58_local10 = Engine[0x422A503291AC81](f58_local8)
-	if f58_local10 == Enum[@"characteritemtype"][@"hash_57852FCB3BFCC8D1"] then
+	if f58_local10 == Enum.CharacterItemType[@"hash_57852FCB3BFCC8D1"] then
 		f58_local0 = f58_local9
-	elseif f58_local10 == Enum[@"characteritemtype"][@"hash_4922FE5C41D9EE8B"] then
+	elseif f58_local10 == Enum.CharacterItemType[@"hash_4922FE5C41D9EE8B"] then
 		f58_local1 = f58_local9
-	elseif f58_local10 == Enum[@"characteritemtype"][@"hash_48E3A65D78229DC1"] then
+	elseif f58_local10 == Enum.CharacterItemType[@"hash_48E3A65D78229DC1"] then
 		f58_local2 = f58_local9
 	end
 	return {
@@ -1500,7 +1500,7 @@ CoD.BlackMarketTableUtility.GetSeasonItemId = function(f60_arg0, f60_arg1)
 	local f60_local0 = 1
 	for f60_local6, f60_local7 in pairs(CoDShared.Loot.SeasonParams) do
 		local f60_local8 = CoDShared.Loot.GetSeasonInfoParam(f60_local6, CoDShared.Loot.SEASON_INFO_TABLENAME)
-		local f60_local9 = Engine[@"tablefindrows"](f60_local8, CoD.BlackMarketTableUtility.SeasonsTable.COL_NAMEHASH, f60_arg1)
+		local f60_local9 = Engine.TableFindRows(f60_local8, CoD.BlackMarketTableUtility.SeasonsTable.COL_NAMEHASH, f60_arg1)
 		if f60_local9 ~= nil and #f60_local9 > 0 then
 			local f60_local4 = f60_local9[1]
 			local f60_local5 = CoD.BlackMarketTableUtility.GetSeasonId(f60_local6)
@@ -1513,7 +1513,7 @@ CoD.BlackMarketTableUtility.GetSeasonInfoForPlayer = function(f61_arg0, f61_arg1
 	for f61_local19, f61_local20 in pairs(CoDShared.Loot.SeasonParams) do
 		if CoDShared.Loot.GetSeasonInfoParam(f61_local19, CoDShared.Loot.SEASON_INFO_NUMBER) == f61_arg2 then
 			local f61_local4 = CoDShared.Loot.GetSeasonInfoParam(f61_local19, CoDShared.Loot.SEASON_INFO_TABLENAME)
-			local f61_local5 = Engine[@"tablefindrows"](f61_local4, CoD.BlackMarketTableUtility.SeasonsTable.COL_NAMEHASH, f61_arg1)
+			local f61_local5 = Engine.TableFindRows(f61_local4, CoD.BlackMarketTableUtility.SeasonsTable.COL_NAMEHASH, f61_arg1)
 			if f61_local5 ~= nil and #f61_local5 > 0 then
 				local f61_local6 = f61_local5[1]
 				local f61_local7 = Engine[@"hash_4C6F8EC444864600"](f61_local4, f61_local6, CoD.BlackMarketTableUtility.SeasonsTable.COL_RARITY)
@@ -1588,7 +1588,7 @@ CoD.BlackMarketTableUtility.ContrabandTable.COL_CASE_RULE = 13
 CoD.BlackMarketTableUtility.ContrabandTable.COL_NUMERATOR = 14
 CoD.BlackMarketTableUtility.ContrabandTable.allContrabandItemsTable = nil
 CoD.BlackMarketTableUtility.GetContrabandItemInfoByRowAndDropNumber = function(f63_arg0, f63_arg1, f63_arg2)
-	local f63_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ContrabandTable.name, CoD.BlackMarketTableUtility.ContrabandTable.COL_DROP, f63_arg2)
+	local f63_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ContrabandTable.name, CoD.BlackMarketTableUtility.ContrabandTable.COL_DROP, f63_arg2)
 	if f63_local0 ~= nil and #f63_local0 > 0 and f63_arg1 <= #f63_local0 then
 		return CoD.BlackMarketTableUtility.GetContrabandItemInfo(f63_arg0, Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f63_local0[f63_arg1], CoD.BlackMarketTableUtility.ContrabandTable.COL_ID), f63_arg1)
 	else
@@ -1604,9 +1604,9 @@ end
 CoD.BlackMarketTableUtility.GetContrabandXHashFromItemID = function(f66_arg0, f66_arg1)
 	return Engine[@"hash_DE65B393F703EB1"](CoD.BlackMarketTableUtility.ContrabandTable.name, CoD.BlackMarketTableUtility.ContrabandTable.COL_ID, f66_arg1, CoD.BlackMarketTableUtility.ContrabandTable.COL_NAMEHASH)
 end
-CoD.BlackMarketTableUtility.GetContrabandItemInfo = function(f67_arg0, f67_arg1, f67_arg2)
+CoD.BlackMarketTableUtility.GetContrabandSkuAndCaseRule = function(f67_arg0, f67_arg1)
 	if f67_arg1 == nil then
-		return {}
+		return nil
 	end
 	local f67_local0 = Engine[@"getdvarint"](@"hash_E137E1AD55735AC")
 	if f67_local0 <= 0 then
@@ -1616,22 +1616,12 @@ CoD.BlackMarketTableUtility.GetContrabandItemInfo = function(f67_arg0, f67_arg1,
 	if f67_local1 <= 0 then
 		f67_local1 = CoD.BlackMarketTableUtility.DEFAULT_RNG_CASE_PRICE
 	end
-	local f67_local2 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ContrabandTable.name, CoD.BlackMarketTableUtility.ContrabandTable.COL_NAMEHASH, Engine[@"hash_DE65B393F703EB1"](CoD.BlackMarketTableUtility.ContrabandTable.name, CoD.BlackMarketTableUtility.ContrabandTable.COL_ID, f67_arg1, CoD.BlackMarketTableUtility.ContrabandTable.COL_NAMEHASH))
+	local f67_local2 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ContrabandTable.name, CoD.BlackMarketTableUtility.ContrabandTable.COL_NAMEHASH, Engine[@"hash_DE65B393F703EB1"](CoD.BlackMarketTableUtility.ContrabandTable.name, CoD.BlackMarketTableUtility.ContrabandTable.COL_ID, f67_arg1, CoD.BlackMarketTableUtility.ContrabandTable.COL_NAMEHASH))
 	local f67_local3 = nil
 	if f67_local2 ~= nil then
 		for f67_local7, f67_local8 in ipairs(f67_local2) do
 			if Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f67_local8, CoD.BlackMarketTableUtility.ContrabandTable.COL_ID) == f67_arg1 then
 				return {
-					itemId = f67_arg1,
-					tier = f67_arg2,
-					name = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f67_local8, CoD.BlackMarketTableUtility.ContrabandTable.COL_NAMEHASH),
-					rarity = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f67_local8, CoD.BlackMarketTableUtility.ContrabandTable.COL_RARITY),
-					owned = Engine[@"hash_5352DC095BBB2A45"](f67_arg0, f67_arg1),
-					inSet = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f67_local8, CoD.BlackMarketTableUtility.ContrabandTable.COL_SET),
-					category = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f67_local8, CoD.BlackMarketTableUtility.ContrabandTable.COL_TYPE),
-					lootType = LuaEnum.LOOT_TYPE.CONTRABAND,
-					refOptic = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f67_local8, CoD.BlackMarketTableUtility.ContrabandTable.COL_REFOPTIC),
-					optData = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f67_local8, CoD.BlackMarketTableUtility.ContrabandTable.COL_OPTIONALDATA),
 					cpPrice = f67_local0,
 					cpSku = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f67_local8, CoD.BlackMarketTableUtility.ContrabandTable.COL_CP_SKU),
 					casePrice = f67_local1,
@@ -1640,115 +1630,141 @@ CoD.BlackMarketTableUtility.GetContrabandItemInfo = function(f67_arg0, f67_arg1,
 			end
 		end
 	end
-	return f67_local3
+	return nil
 end
-CoD.BlackMarketTableUtility.GetContrabandOutfitInformation = function(f68_arg0, f68_arg1)
-	local f68_local0 = 0x0
-	local f68_local1 = 0x0
-	local f68_local2 = 0x0
-	local f68_local3 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ContrabandTable.name, CoD.BlackMarketTableUtility.ContrabandTable.COL_NAMEHASH, f68_arg1)
-	if f68_local3 == nil then
+CoD.BlackMarketTableUtility.GetContrabandItemInfo = function(f68_arg0, f68_arg1, f68_arg2)
+	if f68_arg1 == nil then
 		return {}
 	end
-	local f68_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f68_local3[1], CoD.BlackMarketTableUtility.ContrabandTable.COL_MPPRT)
-	local f68_local5 = Enum[@"emodes"][@"mode_multiplayer"]
-	if f68_local4 == 0x0 then
-		f68_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f68_local3[1], CoD.BlackMarketTableUtility.ContrabandTable.COL_WZPRT)
-		f68_local5 = Enum[@"emodes"][@"mode_warzone"]
-		if f68_local4 == 0x0 then
+	local f68_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ContrabandTable.name, CoD.BlackMarketTableUtility.ContrabandTable.COL_NAMEHASH, Engine[@"hash_DE65B393F703EB1"](CoD.BlackMarketTableUtility.ContrabandTable.name, CoD.BlackMarketTableUtility.ContrabandTable.COL_ID, f68_arg1, CoD.BlackMarketTableUtility.ContrabandTable.COL_NAMEHASH))
+	local f68_local1 = nil
+	if f68_local0 ~= nil then
+		for f68_local5, f68_local6 in ipairs(f68_local0) do
+			if Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f68_local6, CoD.BlackMarketTableUtility.ContrabandTable.COL_ID) == f68_arg1 then
+				return {
+					itemId = f68_arg1,
+					tier = f68_arg2,
+					name = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f68_local6, CoD.BlackMarketTableUtility.ContrabandTable.COL_NAMEHASH),
+					rarity = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f68_local6, CoD.BlackMarketTableUtility.ContrabandTable.COL_RARITY),
+					owned = Engine[@"hash_5352DC095BBB2A45"](f68_arg0, f68_arg1),
+					inSet = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f68_local6, CoD.BlackMarketTableUtility.ContrabandTable.COL_SET),
+					category = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f68_local6, CoD.BlackMarketTableUtility.ContrabandTable.COL_TYPE),
+					lootType = LuaEnum.LOOT_TYPE.CONTRABAND,
+					refOptic = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f68_local6, CoD.BlackMarketTableUtility.ContrabandTable.COL_REFOPTIC),
+					optData = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f68_local6, CoD.BlackMarketTableUtility.ContrabandTable.COL_OPTIONALDATA),
+				}
+			end
+		end
+	end
+	return f68_local1
+end
+CoD.BlackMarketTableUtility.GetContrabandOutfitInformation = function(f69_arg0, f69_arg1)
+	local f69_local0 = 0x0
+	local f69_local1 = 0x0
+	local f69_local2 = 0x0
+	local f69_local3 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ContrabandTable.name, CoD.BlackMarketTableUtility.ContrabandTable.COL_NAMEHASH, f69_arg1)
+	if f69_local3 == nil then
+		return {}
+	end
+	local f69_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f69_local3[1], CoD.BlackMarketTableUtility.ContrabandTable.COL_MPPRT)
+	local f69_local5 = Enum.eModes.mode_multiplayer
+	if f69_local4 == 0x0 then
+		f69_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f69_local3[1], CoD.BlackMarketTableUtility.ContrabandTable.COL_WZPRT)
+		f69_local5 = Enum.eModes.mode_warzone
+		if f69_local4 == 0x0 then
 			return {}
 		end
 	end
-	local f68_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f68_local3[1], CoD.BlackMarketTableUtility.ContrabandTable.COL_OUTFIT)
-	if f68_local6 == 0x0 then
+	local f69_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f69_local3[1], CoD.BlackMarketTableUtility.ContrabandTable.COL_OUTFIT)
+	if f69_local6 == 0x0 then
 		return {}
 	end
-	local f68_local7 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f68_local3[1], CoD.BlackMarketTableUtility.ContrabandTable.COL_TYPE)
-	local f68_local8 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f68_local3[1], CoD.BlackMarketTableUtility.ContrabandTable.COL_NAMEHASH)
-	local f68_local9 = Engine[0x422A503291AC81](f68_local7)
-	if f68_local9 == Enum[@"characteritemtype"][@"hash_57852FCB3BFCC8D1"] then
-		f68_local0 = f68_local8
-	elseif f68_local9 == Enum[@"characteritemtype"][@"hash_4922FE5C41D9EE8B"] then
-		f68_local1 = f68_local8
-	elseif f68_local9 == Enum[@"characteritemtype"][@"hash_48E3A65D78229DC1"] then
-		f68_local2 = f68_local8
+	local f69_local7 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f69_local3[1], CoD.BlackMarketTableUtility.ContrabandTable.COL_TYPE)
+	local f69_local8 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f69_local3[1], CoD.BlackMarketTableUtility.ContrabandTable.COL_NAMEHASH)
+	local f69_local9 = Engine[0x422A503291AC81](f69_local7)
+	if f69_local9 == Enum.CharacterItemType[@"hash_57852FCB3BFCC8D1"] then
+		f69_local0 = f69_local8
+	elseif f69_local9 == Enum.CharacterItemType[@"hash_4922FE5C41D9EE8B"] then
+		f69_local1 = f69_local8
+	elseif f69_local9 == Enum.CharacterItemType[@"hash_48E3A65D78229DC1"] then
+		f69_local2 = f69_local8
 	end
 	return {
-		prt = f68_local4,
-		mode = f68_local5,
-		outfit = f68_local6,
-		decal = f68_local0,
-		preset = f68_local1,
-		war_paint = f68_local2,
+		prt = f69_local4,
+		mode = f69_local5,
+		outfit = f69_local6,
+		decal = f69_local0,
+		preset = f69_local1,
+		war_paint = f69_local2,
 	}
 end
 CoD.BlackMarketTableUtility.IsAllContrabandOwnedTest = function()
 	return CoD.BlackMarketTableUtility.IsAllContrabandOwned(0)
 end
-CoD.BlackMarketTableUtility.IsAllContrabandOwned = function(f70_arg0)
-	return CoDShared.Loot.RNGPercentUnlocked(f70_arg0, CoDShared.Loot.GetCurrentSeason(), true) == 1
+CoD.BlackMarketTableUtility.IsAllContrabandOwned = function(f71_arg0)
+	return CoDShared.Loot.RNGPercentUnlocked(f71_arg0, CoDShared.Loot.GetCurrentSeason(), true) == 1
 end
-CoD.BlackMarketTableUtility.GetContrabandInfoForPlayer = function(f71_arg0, f71_arg1, f71_arg2, f71_arg3)
-	local f71_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ContrabandTable.name, CoD.BlackMarketTableUtility.ContrabandTable.COL_NAMEHASH, f71_arg1)
-	if f71_local0 ~= nil then
-		local f71_local1 = CoD.BlackMarketTableUtility.FindCorrectRow(f71_local0, CoD.BlackMarketTableUtility.ContrabandTable.name, f71_arg3, CoD.BlackMarketTableUtility.ContrabandTable.COL_REFWEAPON)
-		if f71_local1 then
-			local f71_local2 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f71_local1, CoD.BlackMarketTableUtility.ContrabandTable.COL_RARITY)
-			local f71_local3 = true
-			local f71_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f71_local1, CoD.BlackMarketTableUtility.ContrabandTable.COL_ID)
-			local f71_local5 = CoDShared.IsLootItemOwned(f71_arg0, f71_local4, f71_arg2)
-			local f71_local6 = f71_local5
-			local f71_local7 = CoD.BlackMarketTableUtility.GetInfoIfOnlyOwnedNonBaseWeapon(f71_arg0, f71_arg1, f71_local5, f71_local6, f71_arg2)
-			if f71_local7 then
-				return f71_local7
+CoD.BlackMarketTableUtility.GetContrabandInfoForPlayer = function(f72_arg0, f72_arg1, f72_arg2, f72_arg3)
+	local f72_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ContrabandTable.name, CoD.BlackMarketTableUtility.ContrabandTable.COL_NAMEHASH, f72_arg1)
+	if f72_local0 ~= nil then
+		local f72_local1 = CoD.BlackMarketTableUtility.FindCorrectRow(f72_local0, CoD.BlackMarketTableUtility.ContrabandTable.name, f72_arg3, CoD.BlackMarketTableUtility.ContrabandTable.COL_REFWEAPON)
+		if f72_local1 then
+			local f72_local2 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f72_local1, CoD.BlackMarketTableUtility.ContrabandTable.COL_RARITY)
+			local f72_local3 = true
+			local f72_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f72_local1, CoD.BlackMarketTableUtility.ContrabandTable.COL_ID)
+			local f72_local5 = CoDShared.IsLootItemOwned(f72_arg0, f72_local4, f72_arg2)
+			local f72_local6 = f72_local5
+			local f72_local7 = CoD.BlackMarketTableUtility.GetInfoIfOnlyOwnedNonBaseWeapon(f72_arg0, f72_arg1, f72_local5, f72_local6, f72_arg2)
+			if f72_local7 then
+				return f72_local7
 			end
-			local f71_local8 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f71_local1, CoD.BlackMarketTableUtility.ContrabandTable.COL_SET)
-			if f71_local8 == 0x0 then
-				f71_local8 = nil
+			local f72_local8 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f72_local1, CoD.BlackMarketTableUtility.ContrabandTable.COL_SET)
+			if f72_local8 == 0x0 then
+				f72_local8 = nil
 			end
-			local f71_local9 = false
-			local f71_local10 = LuaEnum.LOOT_TYPE.CONTRABAND
-			local f71_local11 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_444870138E328735")
-			if not f71_local6 then
-				f71_local11 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_282246B89B2146A0")
+			local f72_local9 = false
+			local f72_local10 = LuaEnum.LOOT_TYPE.CONTRABAND
+			local f72_local11 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_444870138E328735")
+			if not f72_local6 then
+				f72_local11 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_282246B89B2146A0")
 			end
 			return {
-				rarity = f71_local2,
-				isLoot = f71_local3,
-				owned = f71_local5,
-				available = f71_local6,
-				inSet = f71_local8,
-				setMaster = f71_local9,
-				lootType = f71_local10,
-				unlockInfo = f71_local11,
-				itemId = f71_local4,
+				rarity = f72_local2,
+				isLoot = f72_local3,
+				owned = f72_local5,
+				available = f72_local6,
+				inSet = f72_local8,
+				setMaster = f72_local9,
+				lootType = f72_local10,
+				unlockInfo = f72_local11,
+				itemId = f72_local4,
 			}
 		end
 	end
 	return nil
 end
-CoD.BlackMarketTableUtility.GetAllContrabandItem = function(f72_arg0, f72_arg1)
-	if not f72_arg1 and CoD.BlackMarketTableUtility.ContrabandTable.allContrabandItemsTable then
+CoD.BlackMarketTableUtility.GetAllContrabandItem = function(f73_arg0, f73_arg1)
+	if not f73_arg1 and CoD.BlackMarketTableUtility.ContrabandTable.allContrabandItemsTable then
 		return CoD.BlackMarketTableUtility.ContrabandTable.allContrabandItemsTable
 	end
-	local f72_local0 = {}
-	local f72_local1 = Engine[@"gettablerowcount"](CoD.BlackMarketTableUtility.ContrabandTable.name)
-	for f72_local2 = 1, f72_local1, 1 do
-		local f72_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f72_local2, CoD.BlackMarketTableUtility.ContrabandTable.COL_ID)
-		local f72_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f72_local2, CoD.BlackMarketTableUtility.ContrabandTable.COL_NAMEHASH)
-		if f72_local5 and f72_local6 then
-			table.insert(f72_local0, {
-				itemId = f72_local5,
-				name = f72_local6,
-				weight = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f72_local2, CoD.BlackMarketTableUtility.ContrabandTable.COL_NUMERATOR),
+	local f73_local0 = {}
+	local f73_local1 = Engine.GetTableRowCount(CoD.BlackMarketTableUtility.ContrabandTable.name)
+	for f73_local2 = 1, f73_local1, 1 do
+		local f73_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f73_local2, CoD.BlackMarketTableUtility.ContrabandTable.COL_ID)
+		local f73_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f73_local2, CoD.BlackMarketTableUtility.ContrabandTable.COL_NAMEHASH)
+		if f73_local5 and f73_local6 then
+			table.insert(f73_local0, {
+				itemId = f73_local5,
+				name = f73_local6,
+				weight = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f73_local2, CoD.BlackMarketTableUtility.ContrabandTable.COL_NUMERATOR),
 			})
 		end
 	end
-	CoD.BlackMarketTableUtility.ContrabandTable.allContrabandItemsTable = f72_local0
-	return f72_local0
+	CoD.BlackMarketTableUtility.ContrabandTable.allContrabandItemsTable = f73_local0
+	return f73_local0
 end
 CoD.BlackMarketTableUtility.BundleTable = {}
-CoD.BlackMarketTableUtility.BundleTable.name = @"hash_233FC487684E8C69"
+CoD.BlackMarketTableUtility.BundleTable.name = "gamedata/loot/loot_bundles.csv"
 CoD.BlackMarketTableUtility.BundleTable.COL_BUNDLE = 0
 CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH = 1
 CoD.BlackMarketTableUtility.BundleTable.COL_TYPE = 2
@@ -1761,249 +1777,249 @@ CoD.BlackMarketTableUtility.BundleTable.COL_RARITY = 8
 CoD.BlackMarketTableUtility.BundleTable.COL_REFOPTIC = 9
 CoD.BlackMarketTableUtility.BundleTable.COL_REFWEAPON = 10
 CoD.BlackMarketTableUtility.BundleTable.COL_KEYITEM = 11
-CoD.BlackMarketTableUtility.IsItemLootBundle = function(f73_arg0, f73_arg1)
-	local f73_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_BUNDLE, f73_arg1)
-	if f73_local0 and #f73_local0 > 0 then
+CoD.BlackMarketTableUtility.IsItemLootBundle = function(f74_arg0, f74_arg1)
+	local f74_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_BUNDLE, f74_arg1)
+	if f74_local0 and #f74_local0 > 0 then
 		return true
 	else
 		return false
 	end
 end
-CoD.BlackMarketTableUtility.AreAllBundleKeyItemsOwned = function(f74_arg0, f74_arg1)
-	local f74_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_BUNDLE, f74_arg1)
-	if f74_local0 == nil then
+CoD.BlackMarketTableUtility.AreAllBundleKeyItemsOwned = function(f75_arg0, f75_arg1)
+	local f75_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_BUNDLE, f75_arg1)
+	if f75_local0 == nil then
 		return false
 	end
-	local f74_local1 = 0
-	local f74_local2 = 0
-	for f74_local3 = 1, #f74_local0, 1 do
-		local f74_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f74_local0[f74_local3], CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH)
-		if f74_local6 and Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f74_local0[f74_local3], CoD.BlackMarketTableUtility.BundleTable.COL_KEYITEM) then
-			f74_local1 = f74_local1 + 1
-			if CoDShared.IsLootItemOwnedByName(f74_arg0, f74_local6) then
-				f74_local2 = f74_local2 + 1
+	local f75_local1 = 0
+	local f75_local2 = 0
+	for f75_local3 = 1, #f75_local0, 1 do
+		local f75_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f75_local0[f75_local3], CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH)
+		if f75_local6 and Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f75_local0[f75_local3], CoD.BlackMarketTableUtility.BundleTable.COL_KEYITEM) then
+			f75_local1 = f75_local1 + 1
+			if CoDShared.IsLootItemOwnedByName(f75_arg0, f75_local6) then
+				f75_local2 = f75_local2 + 1
 			end
 		end
 	end
-	if f74_local1 <= 0 or f74_local1 ~= f74_local2 then
-		f74_local3 = false
+	if f75_local1 <= 0 or f75_local1 ~= f75_local2 then
+		f75_local3 = false
 	else
-		local f74_local3 = true
+		local f75_local3 = true
 	end
-	return f74_local3
+	return f75_local3
 end
-CoD.BlackMarketTableUtility.GetBundleWeaponRefName = function(f75_arg0, f75_arg1)
-	return Engine[0x6ED59F41A5B1CC](CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_REFWEAPON, CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH, f75_arg1)
+CoD.BlackMarketTableUtility.GetBundleWeaponRefName = function(f76_arg0, f76_arg1)
+	return Engine[0x6ED59F41A5B1CC](CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_REFWEAPON, CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH, f76_arg1)
 end
-CoD.BlackMarketTableUtility.GetBundleItemInformation = function(f76_arg0, f76_arg1, f76_arg2)
-	if f76_arg1 == nil then
+CoD.BlackMarketTableUtility.GetBundleItemInformation = function(f77_arg0, f77_arg1, f77_arg2)
+	if f77_arg1 == nil then
 		return {}
 	end
-	local f76_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH, f76_arg1)
-	local f76_local1 = nil
-	if f76_local0 ~= nil then
-		for f76_local6, f76_local7 in ipairs(f76_local0) do
-			local f76_local8 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f76_local7, CoD.BlackMarketTableUtility.BundleTable.COL_TYPE)
-			if f76_local8 == f76_arg2 then
-				local f76_local5 = f76_local0[1]
+	local f77_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH, f77_arg1)
+	local f77_local1 = nil
+	if f77_local0 ~= nil then
+		for f77_local6, f77_local7 in ipairs(f77_local0) do
+			local f77_local8 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f77_local7, CoD.BlackMarketTableUtility.BundleTable.COL_TYPE)
+			if f77_local8 == f77_arg2 then
+				local f77_local5 = f77_local0[1]
 				return {
-					name = f76_arg1,
-					rarity = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f76_local5, CoD.BlackMarketTableUtility.BundleTable.COL_RARITY),
-					inSet = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f76_local5, CoD.BlackMarketTableUtility.BundleTable.COL_SET),
-					category = f76_local8,
+					name = f77_arg1,
+					rarity = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f77_local5, CoD.BlackMarketTableUtility.BundleTable.COL_RARITY),
+					inSet = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f77_local5, CoD.BlackMarketTableUtility.BundleTable.COL_SET),
+					category = f77_local8,
 					lootType = LuaEnum.LOOT_TYPE.BUNDLE,
-					refOptic = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f76_local5, CoD.BlackMarketTableUtility.BundleTable.COL_REFOPTIC),
+					refOptic = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f77_local5, CoD.BlackMarketTableUtility.BundleTable.COL_REFOPTIC),
 				}
 			end
 		end
 	end
-	return f76_local1
+	return f77_local1
 end
-CoD.BlackMarketTableUtility.GetBundlePiecesInformation = function(f77_arg0, f77_arg1)
-	local f77_local0 = {}
-	local f77_local1 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_BUNDLE, f77_arg1)
-	if f77_local1 == nil then
-		return f77_local0
+CoD.BlackMarketTableUtility.GetBundlePiecesInformation = function(f78_arg0, f78_arg1)
+	local f78_local0 = {}
+	local f78_local1 = Engine.TableFindRows(CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_BUNDLE, f78_arg1)
+	if f78_local1 == nil then
+		return f78_local0
 	end
-	table.sort(f77_local1)
-	for f77_local2 = 1, #f77_local1, 1 do
-		local f77_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f77_local1[f77_local2], CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH)
-		local f77_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f77_local1[f77_local2], CoD.BlackMarketTableUtility.BundleTable.COL_TYPE)
-		if f77_local5 ~= 0x0 and f77_local6 ~= 0x0 then
-			table.insert(f77_local0, CoD.BlackMarketTableUtility.GetBundleItemInformation(f77_arg0, f77_local5, f77_local6))
+	table.sort(f78_local1)
+	for f78_local2 = 1, #f78_local1, 1 do
+		local f78_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f78_local1[f78_local2], CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH)
+		local f78_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f78_local1[f78_local2], CoD.BlackMarketTableUtility.BundleTable.COL_TYPE)
+		if f78_local5 ~= 0x0 and f78_local6 ~= 0x0 then
+			table.insert(f78_local0, CoD.BlackMarketTableUtility.GetBundleItemInformation(f78_arg0, f78_local5, f78_local6))
 		end
 	end
-	return f77_local0
+	return f78_local0
 end
-CoD.BlackMarketTableUtility.GetBundleOutfitInformation = function(f78_arg0, f78_arg1)
-	local f78_local0 = 0x0
-	local f78_local1 = 0x0
-	local f78_local2 = 0x0
-	local f78_local3 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH, f78_arg1)
-	if f78_local3 == nil then
+CoD.BlackMarketTableUtility.GetBundleOutfitInformation = function(f79_arg0, f79_arg1)
+	local f79_local0 = 0x0
+	local f79_local1 = 0x0
+	local f79_local2 = 0x0
+	local f79_local3 = Engine.TableFindRows(CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH, f79_arg1)
+	if f79_local3 == nil then
 		return {}
 	end
-	local f78_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f78_local3[1], CoD.BlackMarketTableUtility.BundleTable.COL_MPPRT)
-	local f78_local5 = Enum[@"emodes"][@"mode_multiplayer"]
-	if f78_local4 == 0x0 then
-		f78_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f78_local3[1], CoD.BlackMarketTableUtility.BundleTable.COL_WZPRT)
-		f78_local5 = Enum[@"emodes"][@"mode_warzone"]
-		if f78_local4 == 0x0 then
+	local f79_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f79_local3[1], CoD.BlackMarketTableUtility.BundleTable.COL_MPPRT)
+	local f79_local5 = Enum.eModes.mode_multiplayer
+	if f79_local4 == 0x0 then
+		f79_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f79_local3[1], CoD.BlackMarketTableUtility.BundleTable.COL_WZPRT)
+		f79_local5 = Enum.eModes.mode_warzone
+		if f79_local4 == 0x0 then
 			return {}
 		end
 	end
-	local f78_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f78_local3[1], CoD.BlackMarketTableUtility.BundleTable.COL_OUTFIT)
-	if f78_local6 == 0x0 then
+	local f79_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f79_local3[1], CoD.BlackMarketTableUtility.BundleTable.COL_OUTFIT)
+	if f79_local6 == 0x0 then
 		return {}
 	end
-	local f78_local7 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f78_local3[1], CoD.BlackMarketTableUtility.BundleTable.COL_TYPE)
-	local f78_local8 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f78_local3[1], CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH)
-	local f78_local9 = Engine[0x422A503291AC81](f78_local7)
-	if f78_local9 == Enum[@"characteritemtype"][@"hash_57852FCB3BFCC8D1"] then
-		f78_local0 = f78_local8
-	elseif f78_local9 == Enum[@"characteritemtype"][@"hash_4922FE5C41D9EE8B"] then
-		f78_local1 = f78_local8
-	elseif f78_local9 == Enum[@"characteritemtype"][@"hash_48E3A65D78229DC1"] then
-		f78_local2 = f78_local8
+	local f79_local7 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f79_local3[1], CoD.BlackMarketTableUtility.BundleTable.COL_TYPE)
+	local f79_local8 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f79_local3[1], CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH)
+	local f79_local9 = Engine[0x422A503291AC81](f79_local7)
+	if f79_local9 == Enum.CharacterItemType[@"hash_57852FCB3BFCC8D1"] then
+		f79_local0 = f79_local8
+	elseif f79_local9 == Enum.CharacterItemType[@"hash_4922FE5C41D9EE8B"] then
+		f79_local1 = f79_local8
+	elseif f79_local9 == Enum.CharacterItemType[@"hash_48E3A65D78229DC1"] then
+		f79_local2 = f79_local8
 	end
 	return {
-		prt = f78_local4,
-		mode = f78_local5,
-		outfit = f78_local6,
-		decal = f78_local0,
-		preset = f78_local1,
-		war_paint = f78_local2,
+		prt = f79_local4,
+		mode = f79_local5,
+		outfit = f79_local6,
+		decal = f79_local0,
+		preset = f79_local1,
+		war_paint = f79_local2,
 	}
 end
-CoD.BlackMarketTableUtility.GetOutfitBundleInformation = function(f79_arg0, f79_arg1)
-	local f79_local0 = {}
-	local f79_local1 = 0x0
-	local f79_local2 = 0x0
-	local f79_local3 = 0x0
-	local f79_local4 = 0x0
-	local f79_local5 = 0x0
-	local f79_local6 = CoD.BlackMarketUtility.GetBundleKeyItemRef(f79_arg0, f79_arg1, @"palette")
-	if not f79_local6 then
-		return f79_local0
-	end
-	local f79_local7 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_BUNDLE, f79_arg1)
-	local f79_local8 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH, f79_local6.name)
-	if f79_local7 == nil or f79_local8 == nil then
-		return f79_local0
-	end
-	local f79_local9 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f79_local8[1], CoD.BlackMarketTableUtility.BundleTable.COL_MPPRT)
-	local f79_local10 = Enum[@"emodes"][@"mode_multiplayer"]
-	if f79_local9 == "" then
-		f79_local9 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f79_local8[1], CoD.BlackMarketTableUtility.BundleTable.COL_WZPRT)
-		f79_local10 = Enum[@"emodes"][@"mode_warzone"]
-		if f79_local9 == "" then
-			return f79_local0
-		end
-	end
-	local f79_local11 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f79_local8[1], CoD.BlackMarketTableUtility.BundleTable.COL_OUTFIT)
-	if f79_local11 == "" then
-		return f79_local0
-	end
-	for f79_local12 = 1, #f79_local7, 1 do
-		local f79_local15 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f79_local7[f79_local12], CoD.BlackMarketTableUtility.BundleTable.COL_TYPE)
-		local f79_local16 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f79_local7[f79_local12], CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH)
-		local f79_local17 = Engine[0x422A503291AC81](f79_local15)
-		if f79_local17 == Enum[@"characteritemtype"][@"hash_57852FCB3BFCC8D1"] then
-			f79_local3 = f79_local16
-		end
-		if f79_local17 == Enum[@"characteritemtype"][@"hash_4922FE5C41D9EE8B"] then
-			f79_local4 = f79_local16
-		end
-		if f79_local17 == Enum[@"characteritemtype"][@"hash_48E3A65D78229DC1"] then
-			f79_local5 = f79_local16
-		end
-	end
-	f79_local0.prt = f79_local9
-	f79_local0.mode = f79_local10
-	f79_local0.outfit = f79_local11
-	f79_local0.decal = f79_local3
-	f79_local0.preset = f79_local4
-	f79_local0.war_paint = f79_local5
-	return f79_local0
-end
-CoD.BlackMarketTableUtility.GetOutfitItemBundleInformation = function(f80_arg0, f80_arg1)
+CoD.BlackMarketTableUtility.GetOutfitBundleInformation = function(f80_arg0, f80_arg1)
 	local f80_local0 = {}
 	local f80_local1 = 0x0
 	local f80_local2 = 0x0
 	local f80_local3 = 0x0
 	local f80_local4 = 0x0
 	local f80_local5 = 0x0
-	local f80_local6 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_BUNDLE, f80_arg1)
-	if f80_local6 == nil then
+	local f80_local6 = CoD.BlackMarketUtility.GetBundleKeyItemRef(f80_arg0, f80_arg1, "palette")
+	if not f80_local6 then
 		return f80_local0
 	end
-	local f80_local7 = 1
-	for f80_local8 = 1, #f80_local6, 1 do
-		if Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f80_local6[f80_local8], CoD.BlackMarketTableUtility.BundleTable.COL_CHARACTER) == @"ruin" then
-			f80_local7 = f80_local8
-			break
-		end
+	local f80_local7 = Engine.TableFindRows(CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_BUNDLE, f80_arg1)
+	local f80_local8 = Engine.TableFindRows(CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH, f80_local6.name)
+	if f80_local7 == nil or f80_local8 == nil then
+		return f80_local0
 	end
-	f80_local1 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f80_local6[f80_local7], CoD.BlackMarketTableUtility.BundleTable.COL_MPPRT)
-	local f80_local8 = Enum[@"emodes"][@"mode_multiplayer"]
-	if f80_local1 == 0x0 then
-		f80_local1 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f80_local6[f80_local7], CoD.BlackMarketTableUtility.BundleTable.COL_WZPRT)
-		f80_local8 = Enum[@"emodes"][@"mode_warzone"]
-		if f80_local1 == 0x0 then
+	local f80_local9 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f80_local8[1], CoD.BlackMarketTableUtility.BundleTable.COL_MPPRT)
+	local f80_local10 = Enum.eModes.mode_multiplayer
+	if f80_local9 == "" then
+		f80_local9 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f80_local8[1], CoD.BlackMarketTableUtility.BundleTable.COL_WZPRT)
+		f80_local10 = Enum.eModes.mode_warzone
+		if f80_local9 == "" then
 			return f80_local0
 		end
 	end
-	f80_local2 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f80_local6[f80_local7], CoD.BlackMarketTableUtility.BundleTable.COL_OUTFIT)
-	if f80_local2 == 0x0 then
+	local f80_local11 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f80_local8[1], CoD.BlackMarketTableUtility.BundleTable.COL_OUTFIT)
+	if f80_local11 == "" then
 		return f80_local0
 	end
-	local f80_local9 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f80_local6[f80_local7], CoD.BlackMarketTableUtility.BundleTable.COL_TYPE)
-	local f80_local10 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f80_local6[f80_local7], CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH)
-	local f80_local11 = Engine[0x422A503291AC81](f80_local9)
-	if f80_local11 == Enum[@"characteritemtype"][@"hash_57852FCB3BFCC8D1"] then
-		f80_local3 = f80_local10
-	elseif f80_local11 == Enum[@"characteritemtype"][@"hash_4922FE5C41D9EE8B"] then
-		f80_local4 = f80_local10
-	elseif f80_local11 == Enum[@"characteritemtype"][@"hash_48E3A65D78229DC1"] then
-		f80_local5 = f80_local10
+	for f80_local12 = 1, #f80_local7, 1 do
+		local f80_local15 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f80_local7[f80_local12], CoD.BlackMarketTableUtility.BundleTable.COL_TYPE)
+		local f80_local16 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f80_local7[f80_local12], CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH)
+		local f80_local17 = Engine[0x422A503291AC81](f80_local15)
+		if f80_local17 == Enum.CharacterItemType[@"hash_57852FCB3BFCC8D1"] then
+			f80_local3 = f80_local16
+		end
+		if f80_local17 == Enum.CharacterItemType[@"hash_4922FE5C41D9EE8B"] then
+			f80_local4 = f80_local16
+		end
+		if f80_local17 == Enum.CharacterItemType[@"hash_48E3A65D78229DC1"] then
+			f80_local5 = f80_local16
+		end
 	end
-	f80_local0.prt = f80_local1
-	f80_local0.mode = f80_local8
-	f80_local0.outfit = f80_local2
+	f80_local0.prt = f80_local9
+	f80_local0.mode = f80_local10
+	f80_local0.outfit = f80_local11
 	f80_local0.decal = f80_local3
 	f80_local0.preset = f80_local4
 	f80_local0.war_paint = f80_local5
 	return f80_local0
 end
-CoD.BlackMarketTableUtility.BundleIncludesTiers = function(f81_arg0, f81_arg1)
-	local f81_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_BUNDLE, f81_arg1)
-	if f81_local0 and #f81_local0 > 0 then
-		for f81_local1 = 1, #f81_local0, 1 do
-			if Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f81_local0[f81_local1], CoD.BlackMarketTableUtility.BundleTable.COL_TYPE) == @"tiers" then
+CoD.BlackMarketTableUtility.GetOutfitItemBundleInformation = function(f81_arg0, f81_arg1)
+	local f81_local0 = {}
+	local f81_local1 = 0x0
+	local f81_local2 = 0x0
+	local f81_local3 = 0x0
+	local f81_local4 = 0x0
+	local f81_local5 = 0x0
+	local f81_local6 = Engine.TableFindRows(CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_BUNDLE, f81_arg1)
+	if f81_local6 == nil then
+		return f81_local0
+	end
+	local f81_local7 = 1
+	for f81_local8 = 1, #f81_local6, 1 do
+		if Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f81_local6[f81_local8], CoD.BlackMarketTableUtility.BundleTable.COL_CHARACTER) == "ruin" then
+			f81_local7 = f81_local8
+			break
+		end
+	end
+	f81_local1 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f81_local6[f81_local7], CoD.BlackMarketTableUtility.BundleTable.COL_MPPRT)
+	local f81_local8 = Enum.eModes.mode_multiplayer
+	if f81_local1 == 0x0 then
+		f81_local1 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f81_local6[f81_local7], CoD.BlackMarketTableUtility.BundleTable.COL_WZPRT)
+		f81_local8 = Enum.eModes.mode_warzone
+		if f81_local1 == 0x0 then
+			return f81_local0
+		end
+	end
+	f81_local2 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f81_local6[f81_local7], CoD.BlackMarketTableUtility.BundleTable.COL_OUTFIT)
+	if f81_local2 == 0x0 then
+		return f81_local0
+	end
+	local f81_local9 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f81_local6[f81_local7], CoD.BlackMarketTableUtility.BundleTable.COL_TYPE)
+	local f81_local10 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f81_local6[f81_local7], CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH)
+	local f81_local11 = Engine[0x422A503291AC81](f81_local9)
+	if f81_local11 == Enum.CharacterItemType[@"hash_57852FCB3BFCC8D1"] then
+		f81_local3 = f81_local10
+	elseif f81_local11 == Enum.CharacterItemType[@"hash_4922FE5C41D9EE8B"] then
+		f81_local4 = f81_local10
+	elseif f81_local11 == Enum.CharacterItemType[@"hash_48E3A65D78229DC1"] then
+		f81_local5 = f81_local10
+	end
+	f81_local0.prt = f81_local1
+	f81_local0.mode = f81_local8
+	f81_local0.outfit = f81_local2
+	f81_local0.decal = f81_local3
+	f81_local0.preset = f81_local4
+	f81_local0.war_paint = f81_local5
+	return f81_local0
+end
+CoD.BlackMarketTableUtility.BundleIncludesTiers = function(f82_arg0, f82_arg1)
+	local f82_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_BUNDLE, f82_arg1)
+	if f82_local0 and #f82_local0 > 0 then
+		for f82_local1 = 1, #f82_local0, 1 do
+			if Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f82_local0[f82_local1], CoD.BlackMarketTableUtility.BundleTable.COL_TYPE) == "tiers" then
 				return true
 			end
 		end
 	end
 	return false
 end
-CoD.BlackMarketTableUtility.GetBundleItemInfoForPlayer = function(f82_arg0, f82_arg1)
-	local f82_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH, f82_arg1)
-	local f82_local1 = nil
-	if f82_local0 ~= nil and #f82_local0 > 0 then
-		for f82_local5, f82_local6 in ipairs(f82_local0) do
-			local f82_local7 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f82_local6, CoD.BlackMarketTableUtility.BundleTable.COL_BUNDLE)
-			if f82_local7 then
-				f82_local1 = CoD.BlackMarketTableUtility.LootInfoLookup(f82_arg0, f82_local7)
-				if f82_arg1 ~= f82_local7 then
-					f82_local1.rarity = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f82_local6, CoD.BlackMarketTableUtility.BundleTable.COL_RARITY)
+CoD.BlackMarketTableUtility.GetBundleItemInfoForPlayer = function(f83_arg0, f83_arg1)
+	local f83_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH, f83_arg1)
+	local f83_local1 = nil
+	if f83_local0 ~= nil and #f83_local0 > 0 then
+		for f83_local5, f83_local6 in ipairs(f83_local0) do
+			local f83_local7 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f83_local6, CoD.BlackMarketTableUtility.BundleTable.COL_BUNDLE)
+			if f83_local7 then
+				f83_local1 = CoD.BlackMarketTableUtility.LootInfoLookup(f83_arg0, f83_local7)
+				if f83_arg1 ~= f83_local7 then
+					f83_local1.rarity = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f83_local6, CoD.BlackMarketTableUtility.BundleTable.COL_RARITY)
 				end
-				if f82_local1 and f82_local1.owned == true then
-					return f82_local1
+				if f83_local1 and f83_local1.owned == true then
+					return f83_local1
 				end
 			end
 		end
 	end
-	return f82_local1
+	return f83_local1
 end
 CoD.BlackMarketTableUtility.ItemShopTable = {}
 CoD.BlackMarketTableUtility.ItemShopTable.name = @"hash_32F6538EA0AF7458"
@@ -2023,140 +2039,140 @@ CoD.BlackMarketTableUtility.ItemShopTable.COL_REFOPTIC = 12
 CoD.BlackMarketTableUtility.ItemShopTable.COL_DISCOUNTSKUID = 13
 CoD.BlackMarketTableUtility.ItemShopTable.COL_DISCOUNTPRICE = 14
 CoD.BlackMarketTableUtility.ItemShopTable.COL_PROMOVIDEO = 15
-CoD.BlackMarketTableUtility.GetItemShopWeaponRefName = function(f83_arg0, f83_arg1)
-	local f83_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ItemShopTable.name, CoD.BlackMarketTableUtility.ItemShopTable.COL_NAMEHASH, f83_arg1)
-	if f83_local0 ~= nil then
-		return Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f83_local0[1], CoD.BlackMarketTableUtility.ItemShopTable.COL_REFWEAPON)
+CoD.BlackMarketTableUtility.GetItemShopWeaponRefName = function(f84_arg0, f84_arg1)
+	local f84_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ItemShopTable.name, CoD.BlackMarketTableUtility.ItemShopTable.COL_NAMEHASH, f84_arg1)
+	if f84_local0 ~= nil then
+		return Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f84_local0[1], CoD.BlackMarketTableUtility.ItemShopTable.COL_REFWEAPON)
 	else
 		return nil
 	end
 end
-CoD.BlackMarketTableUtility.GetItemShopOutfitInformation = function(f84_arg0, f84_arg1)
-	local f84_local0 = 0x0
-	local f84_local1 = 0x0
-	local f84_local2 = 0x0
-	local f84_local3 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ItemShopTable.name, CoD.BlackMarketTableUtility.ItemShopTable.COL_NAMEHASH, f84_arg1)
-	if f84_local3 == nil then
+CoD.BlackMarketTableUtility.GetItemShopOutfitInformation = function(f85_arg0, f85_arg1)
+	local f85_local0 = 0x0
+	local f85_local1 = 0x0
+	local f85_local2 = 0x0
+	local f85_local3 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ItemShopTable.name, CoD.BlackMarketTableUtility.ItemShopTable.COL_NAMEHASH, f85_arg1)
+	if f85_local3 == nil then
 		return {}
 	end
-	local f84_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f84_local3[1], CoD.BlackMarketTableUtility.ItemShopTable.COL_MPPRT)
-	local f84_local5 = Enum[@"emodes"][@"mode_multiplayer"]
-	if f84_local4 == 0x0 then
-		f84_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f84_local3[1], CoD.BlackMarketTableUtility.ItemShopTable.COL_WZPRT)
-		f84_local5 = Enum[@"emodes"][@"mode_warzone"]
-		if f84_local4 == 0x0 then
+	local f85_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f85_local3[1], CoD.BlackMarketTableUtility.ItemShopTable.COL_MPPRT)
+	local f85_local5 = Enum.eModes.mode_multiplayer
+	if f85_local4 == 0x0 then
+		f85_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f85_local3[1], CoD.BlackMarketTableUtility.ItemShopTable.COL_WZPRT)
+		f85_local5 = Enum.eModes.mode_warzone
+		if f85_local4 == 0x0 then
 			return {}
 		end
 	end
-	local f84_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f84_local3[1], CoD.BlackMarketTableUtility.ItemShopTable.COL_OUTFIT)
-	if f84_local6 == 0x0 then
+	local f85_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f85_local3[1], CoD.BlackMarketTableUtility.ItemShopTable.COL_OUTFIT)
+	if f85_local6 == 0x0 then
 		return {}
 	end
-	local f84_local7 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f84_local3[1], CoD.BlackMarketTableUtility.ItemShopTable.COL_TYPE)
-	local f84_local8 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f84_local3[1], CoD.BlackMarketTableUtility.ItemShopTable.COL_NAMEHASH)
-	local f84_local9 = Engine[0x422A503291AC81](f84_local7)
-	if f84_local9 == Enum[@"characteritemtype"][@"hash_57852FCB3BFCC8D1"] then
-		f84_local0 = f84_local8
-	elseif f84_local9 == Enum[@"characteritemtype"][@"hash_4922FE5C41D9EE8B"] then
-		f84_local1 = f84_local8
-	elseif f84_local9 == Enum[@"characteritemtype"][@"hash_48E3A65D78229DC1"] then
-		f84_local2 = f84_local8
+	local f85_local7 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f85_local3[1], CoD.BlackMarketTableUtility.ItemShopTable.COL_TYPE)
+	local f85_local8 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f85_local3[1], CoD.BlackMarketTableUtility.ItemShopTable.COL_NAMEHASH)
+	local f85_local9 = Engine[0x422A503291AC81](f85_local7)
+	if f85_local9 == Enum.CharacterItemType[@"hash_57852FCB3BFCC8D1"] then
+		f85_local0 = f85_local8
+	elseif f85_local9 == Enum.CharacterItemType[@"hash_4922FE5C41D9EE8B"] then
+		f85_local1 = f85_local8
+	elseif f85_local9 == Enum.CharacterItemType[@"hash_48E3A65D78229DC1"] then
+		f85_local2 = f85_local8
 	end
 	return {
-		prt = f84_local4,
-		mode = f84_local5,
-		outfit = f84_local6,
-		decal = f84_local0,
-		preset = f84_local1,
-		war_paint = f84_local2,
+		prt = f85_local4,
+		mode = f85_local5,
+		outfit = f85_local6,
+		decal = f85_local0,
+		preset = f85_local1,
+		war_paint = f85_local2,
 	}
 end
-CoD.BlackMarketTableUtility.GetItemShopEntryName = function(f85_arg0, f85_arg1)
-	return Engine[@"hash_DE65B393F703EB1"](CoD.BlackMarketTableUtility.ItemShopTable.name, CoD.BlackMarketTableUtility.ItemShopTable.COL_ID, f85_arg1, CoD.BlackMarketTableUtility.ItemShopTable.COL_NAMEHASH)
+CoD.BlackMarketTableUtility.GetItemShopEntryName = function(f86_arg0, f86_arg1)
+	return Engine[@"hash_DE65B393F703EB1"](CoD.BlackMarketTableUtility.ItemShopTable.name, CoD.BlackMarketTableUtility.ItemShopTable.COL_ID, f86_arg1, CoD.BlackMarketTableUtility.ItemShopTable.COL_NAMEHASH)
 end
-CoD.BlackMarketTableUtility.GetItemShopEntryId = function(f86_arg0, f86_arg1)
-	local f86_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ItemShopTable.name, CoD.BlackMarketTableUtility.ItemShopTable.COL_NAMEHASH, f86_arg1)
-	if f86_local0 == nil then
+CoD.BlackMarketTableUtility.GetItemShopEntryId = function(f87_arg0, f87_arg1)
+	local f87_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ItemShopTable.name, CoD.BlackMarketTableUtility.ItemShopTable.COL_NAMEHASH, f87_arg1)
+	if f87_local0 == nil then
 		return nil
-	elseif #f86_local0 > 0 then
-		return Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f86_local0[1], CoD.BlackMarketTableUtility.ItemShopTable.COL_ID)
+	elseif #f87_local0 > 0 then
+		return Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f87_local0[1], CoD.BlackMarketTableUtility.ItemShopTable.COL_ID)
 	else
 		return nil
 	end
 end
-CoD.BlackMarketTableUtility.GetItemShopInfoById = function(f87_arg0, f87_arg1)
-	local f87_local0 = CoD.BlackMarketTableUtility.GetItemShopEntryName(f87_arg0, f87_arg1)
-	if f87_local0 then
-		return CoD.BlackMarketTableUtility.GetItemShopInformation(f87_arg0, f87_local0)
+CoD.BlackMarketTableUtility.GetItemShopInfoById = function(f88_arg0, f88_arg1)
+	local f88_local0 = CoD.BlackMarketTableUtility.GetItemShopEntryName(f88_arg0, f88_arg1)
+	if f88_local0 then
+		return CoD.BlackMarketTableUtility.GetItemShopInformation(f88_arg0, f88_local0)
 	else
 		return nil
 	end
 end
-CoD.BlackMarketTableUtility.GetItemShopInformation = function(f88_arg0, f88_arg1)
-	local f88_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ItemShopTable.name, CoD.BlackMarketTableUtility.ItemShopTable.COL_NAMEHASH, f88_arg1)
-	if f88_local0 == nil then
+CoD.BlackMarketTableUtility.GetItemShopInformation = function(f89_arg0, f89_arg1)
+	local f89_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ItemShopTable.name, CoD.BlackMarketTableUtility.ItemShopTable.COL_NAMEHASH, f89_arg1)
+	if f89_local0 == nil then
 		return nil
 	end
-	local f88_local1 = nil
-	if #f88_local0 > 0 then
-		local f88_local2 = f88_local0[1]
-		f88_local1 = {
-			itemId = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f88_local2, CoD.BlackMarketTableUtility.ItemShopTable.COL_ID),
-			name = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f88_local2, CoD.BlackMarketTableUtility.ItemShopTable.COL_NAMEHASH),
-			rarity = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f88_local2, CoD.BlackMarketTableUtility.ItemShopTable.COL_RARITY),
-			owned = Engine[@"hash_5352DC095BBB2A45"](f88_arg0, f88_local1.itemId),
-			inSet = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f88_local2, CoD.BlackMarketTableUtility.ItemShopTable.COL_SET),
-			category = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f88_local2, CoD.BlackMarketTableUtility.ItemShopTable.COL_TYPE),
+	local f89_local1 = nil
+	if #f89_local0 > 0 then
+		local f89_local2 = f89_local0[1]
+		f89_local1 = {
+			itemId = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f89_local2, CoD.BlackMarketTableUtility.ItemShopTable.COL_ID),
+			name = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f89_local2, CoD.BlackMarketTableUtility.ItemShopTable.COL_NAMEHASH),
+			rarity = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f89_local2, CoD.BlackMarketTableUtility.ItemShopTable.COL_RARITY),
+			owned = Engine[@"hash_5352DC095BBB2A45"](f89_arg0, f89_local1.itemId),
+			inSet = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f89_local2, CoD.BlackMarketTableUtility.ItemShopTable.COL_SET),
+			category = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f89_local2, CoD.BlackMarketTableUtility.ItemShopTable.COL_TYPE),
 			lootType = LuaEnum.LOOT_TYPE.ITEMSHOP,
-			price = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f88_local2, CoD.BlackMarketTableUtility.ItemShopTable.COL_PRICE),
-			koreaExcluded = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f88_local2, CoD.BlackMarketTableUtility.ItemShopTable.COL_KOREAEXCLUDED),
-			refOptic = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f88_local2, CoD.BlackMarketTableUtility.ItemShopTable.COL_REFOPTIC),
-			discountSkuId = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f88_local2, CoD.BlackMarketTableUtility.ItemShopTable.COL_DISCOUNTSKUID),
-			discountPrice = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f88_local2, CoD.BlackMarketTableUtility.ItemShopTable.COL_DISCOUNTPRICE),
-			movieName = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f88_local2, CoD.BlackMarketTableUtility.ItemShopTable.COL_PROMOVIDEO),
+			price = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f89_local2, CoD.BlackMarketTableUtility.ItemShopTable.COL_PRICE),
+			koreaExcluded = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f89_local2, CoD.BlackMarketTableUtility.ItemShopTable.COL_KOREAEXCLUDED),
+			refOptic = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f89_local2, CoD.BlackMarketTableUtility.ItemShopTable.COL_REFOPTIC),
+			discountSkuId = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f89_local2, CoD.BlackMarketTableUtility.ItemShopTable.COL_DISCOUNTSKUID),
+			discountPrice = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f89_local2, CoD.BlackMarketTableUtility.ItemShopTable.COL_DISCOUNTPRICE),
+			movieName = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f89_local2, CoD.BlackMarketTableUtility.ItemShopTable.COL_PROMOVIDEO),
 		}
 	end
-	return f88_local1
+	return f89_local1
 end
-CoD.BlackMarketTableUtility.GetItemShopInfoForPlayer = function(f89_arg0, f89_arg1, f89_arg2)
-	local f89_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ItemShopTable.name, CoD.BlackMarketTableUtility.ItemShopTable.COL_NAMEHASH, f89_arg1)
-	if f89_local0 ~= nil and #f89_local0 > 0 then
-		local f89_local1 = f89_local0[1]
-		local f89_local2 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f89_local1, CoD.BlackMarketTableUtility.ItemShopTable.COL_RARITY)
-		local f89_local3 = true
-		local f89_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f89_local1, CoD.BlackMarketTableUtility.ItemShopTable.COL_ID)
-		local f89_local5 = CoDShared.IsLootItemOwned(f89_arg0, f89_local4, f89_arg2)
-		local f89_local6 = f89_local5
-		local f89_local7 = false
-		for f89_local8 = 1, CoD.BlackMarketUtility.ItemShopSlots, 1 do
-			if Engine[@"converttoxhash"](Engine[@"getdvarstring"]("loot_itemshop_slot" .. f89_local8 .. "_item")) == f89_arg1 then
-				f89_local7 = true
+CoD.BlackMarketTableUtility.GetItemShopInfoForPlayer = function(f90_arg0, f90_arg1, f90_arg2)
+	local f90_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ItemShopTable.name, CoD.BlackMarketTableUtility.ItemShopTable.COL_NAMEHASH, f90_arg1)
+	if f90_local0 ~= nil and #f90_local0 > 0 then
+		local f90_local1 = f90_local0[1]
+		local f90_local2 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f90_local1, CoD.BlackMarketTableUtility.ItemShopTable.COL_RARITY)
+		local f90_local3 = true
+		local f90_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f90_local1, CoD.BlackMarketTableUtility.ItemShopTable.COL_ID)
+		local f90_local5 = CoDShared.IsLootItemOwned(f90_arg0, f90_local4, f90_arg2)
+		local f90_local6 = f90_local5
+		local f90_local7 = false
+		for f90_local8 = 1, CoD.BlackMarketUtility.ItemShopSlots, 1 do
+			if Engine[@"converttoxhash"](Engine[@"getdvarstring"]("loot_itemshop_slot" .. f90_local8 .. "_item")) == f90_arg1 then
+				f90_local7 = true
 				break
 			end
 		end
-		local f89_local8 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f89_local1, CoD.BlackMarketTableUtility.ItemShopTable.COL_SET)
-		if f89_local8 == 0x0 then
-			f89_local8 = nil
+		local f90_local8 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f90_local1, CoD.BlackMarketTableUtility.ItemShopTable.COL_SET)
+		if f90_local8 == 0x0 then
+			f90_local8 = nil
 		end
-		local f89_local9 = false
-		local f89_local10 = LuaEnum.LOOT_TYPE.ITEMSHOP
-		local f89_local11 = ""
-		if f89_local5 then
-			f89_local11 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_270635062A0697A0")
-		elseif f89_local8 then
-			f89_local11 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_570B5D696F9C3EC5")
+		local f90_local9 = false
+		local f90_local10 = LuaEnum.LOOT_TYPE.ITEMSHOP
+		local f90_local11 = ""
+		if f90_local5 then
+			f90_local11 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_270635062A0697A0")
+		elseif f90_local8 then
+			f90_local11 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_570B5D696F9C3EC5")
 		end
 		return {
-			rarity = f89_local2,
-			isLoot = f89_local3,
-			owned = f89_local5,
-			available = f89_local6,
-			inSet = f89_local8,
-			setMaster = f89_local9,
-			lootType = f89_local10,
-			unlockInfo = f89_local11,
-			forSale = f89_local7,
-			itemId = f89_local4,
+			rarity = f90_local2,
+			isLoot = f90_local3,
+			owned = f90_local5,
+			available = f90_local6,
+			inSet = f90_local8,
+			setMaster = f90_local9,
+			lootType = f90_local10,
+			unlockInfo = f90_local11,
+			forSale = f90_local7,
+			itemId = f90_local4,
 		}
 	else
 		return nil
@@ -2171,32 +2187,32 @@ CoD.BlackMarketTableUtility.LootBonusTable.COL_MINIMUMTARGET = 3
 CoD.BlackMarketTableUtility.LootBonusTable.COL_TOTAL = 4
 CoD.BlackMarketTableUtility.LootBonusTable.COL_STRINGREF = 5
 CoD.BlackMarketTableUtility.LootBonusTable.COL_RARITY = 6
-CoD.BlackMarketTableUtility.IsLootBonusMasterUnlocked = function(f90_arg0, f90_arg1)
-	local f90_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.LootBonusTable.name, CoD.BlackMarketTableUtility.LootBonusTable.COL_NAMEHASH, f90_arg1)
-	if f90_local0 ~= nil and #f90_local0 > 0 then
-		return CoD.BlackMarketTableUtility.IsBonusSetUnlocked(f90_arg0, Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.LootBonusTable.name, f90_local0[1], CoD.BlackMarketTableUtility.LootBonusTable.COL_SET))
+CoD.BlackMarketTableUtility.IsLootBonusMasterUnlocked = function(f91_arg0, f91_arg1)
+	local f91_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.LootBonusTable.name, CoD.BlackMarketTableUtility.LootBonusTable.COL_NAMEHASH, f91_arg1)
+	if f91_local0 ~= nil and #f91_local0 > 0 then
+		return CoD.BlackMarketTableUtility.IsBonusSetUnlocked(f91_arg0, Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.LootBonusTable.name, f91_local0[1], CoD.BlackMarketTableUtility.LootBonusTable.COL_SET))
 	else
 		return false
 	end
 end
-CoD.BlackMarketTableUtility.GetBonusItemInfoForPlayer = function(f91_arg0, f91_arg1)
-	local f91_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.LootBonusTable.name, CoD.BlackMarketTableUtility.LootBonusTable.COL_NAMEHASH, f91_arg1)
-	if f91_local0 ~= nil and #f91_local0 > 0 then
-		local f91_local1 = f91_local0[1]
-		local f91_local2 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.LootBonusTable.name, f91_local1, CoD.BlackMarketTableUtility.LootBonusTable.COL_RARITY)
-		local f91_local3 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.LootBonusTable.name, f91_local1, CoD.BlackMarketTableUtility.LootBonusTable.COL_TYPE)
-		local f91_local4 = true
-		local f91_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.LootBonusTable.name, f91_local1, CoD.BlackMarketTableUtility.LootBonusTable.COL_SET)
-		if f91_local5 == 0x0 then
-			f91_local5 = nil
+CoD.BlackMarketTableUtility.GetBonusItemInfoForPlayer = function(f92_arg0, f92_arg1)
+	local f92_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.LootBonusTable.name, CoD.BlackMarketTableUtility.LootBonusTable.COL_NAMEHASH, f92_arg1)
+	if f92_local0 ~= nil and #f92_local0 > 0 then
+		local f92_local1 = f92_local0[1]
+		local f92_local2 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.LootBonusTable.name, f92_local1, CoD.BlackMarketTableUtility.LootBonusTable.COL_RARITY)
+		local f92_local3 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.LootBonusTable.name, f92_local1, CoD.BlackMarketTableUtility.LootBonusTable.COL_TYPE)
+		local f92_local4 = true
+		local f92_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.LootBonusTable.name, f92_local1, CoD.BlackMarketTableUtility.LootBonusTable.COL_SET)
+		if f92_local5 == 0x0 then
+			f92_local5 = nil
 		end
-		local f91_local6, f91_local7 = CoD.BlackMarketTableUtility.GetBonusSetUnlockedAvailableStates(f91_arg0, f91_local5)
+		local f92_local6, f92_local7 = CoD.BlackMarketTableUtility.GetBonusSetUnlockedAvailableStates(f92_arg0, f92_local5)
 		return {
-			rarity = f91_local2,
-			isLoot = f91_local4,
-			owned = f91_local6,
-			available = f91_local7,
-			inSet = f91_local5,
+			rarity = f92_local2,
+			isLoot = f92_local4,
+			owned = f92_local6,
+			available = f92_local7,
+			inSet = f92_local5,
 			setMaster = true,
 			lootType = LuaEnum.LOOT_TYPE.SETBONUS,
 			unlockInfo = "",
@@ -2205,141 +2221,141 @@ CoD.BlackMarketTableUtility.GetBonusItemInfoForPlayer = function(f91_arg0, f91_a
 		return nil
 	end
 end
-CoD.BlackMarketTableUtility.IsContractOwned = function(f92_arg0, f92_arg1)
-	if CoD.BlackMarketUtility.IsEventActive() and CoD.BlackMarketUtility.GetEventName() == f92_arg1 then
+CoD.BlackMarketTableUtility.IsContractOwned = function(f93_arg0, f93_arg1)
+	if CoD.BlackMarketUtility.IsEventActive() and CoD.BlackMarketUtility.GetEventName() == f93_arg1 then
 		return true
 	end
-	local f92_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.MasterContractTable.name, CoD.BlackMarketTableUtility.MasterContractTable.COL_NAMEHASH, f92_arg1)
-	if f92_local0 ~= nil and #f92_local0 > 0 then
-		local f92_local1 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.MasterContractTable.name, f92_local0[1], CoD.BlackMarketTableUtility.MasterContractTable.COL_ID)
-		if f92_local1 ~= nil and f92_local1 ~= "" then
-			return Engine[@"hash_34509DFCBC7BC5CE"](f92_arg0, f92_local1) > 0
+	local f93_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.MasterContractTable.name, CoD.BlackMarketTableUtility.MasterContractTable.COL_NAMEHASH, f93_arg1)
+	if f93_local0 ~= nil and #f93_local0 > 0 then
+		local f93_local1 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.MasterContractTable.name, f93_local0[1], CoD.BlackMarketTableUtility.MasterContractTable.COL_ID)
+		if f93_local1 ~= nil and f93_local1 ~= "" then
+			return Engine[@"hash_34509DFCBC7BC5CE"](f93_arg0, f93_local1) > 0
 		end
 	end
 	return false
 end
-CoD.BlackMarketTableUtility.IsEventContract = function(f93_arg0)
-	if Engine[@"trytablelookup"](CoD.BlackMarketTableUtility.MasterContractTable.name, CoD.BlackMarketTableUtility.MasterContractTable.COL_TYPE, CoD.BlackMarketTableUtility.MasterContractTable.COL_NAMEHASH, f93_arg0) == @"event" then
+CoD.BlackMarketTableUtility.IsEventContract = function(f94_arg0)
+	if Engine[@"trytablelookup"](CoD.BlackMarketTableUtility.MasterContractTable.name, CoD.BlackMarketTableUtility.MasterContractTable.COL_TYPE, CoD.BlackMarketTableUtility.MasterContractTable.COL_NAMEHASH, f94_arg0) == "event" then
 		return true
 	else
 		return false
 	end
 end
-CoD.BlackMarketTableUtility.GetBonusSetMasterNameHash = function(f94_arg0)
-	local f94_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.LootBonusTable.name, CoD.BlackMarketTableUtility.LootBonusTable.COL_SET, f94_arg0)
-	if f94_local0 ~= nil and #f94_local0 > 0 then
-		return Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.LootBonusTable.name, f94_local0[1], CoD.BlackMarketTableUtility.LootBonusTable.COL_NAMEHASH)
-	else
-		return nil
-	end
-end
-CoD.BlackMarketTableUtility.GetBonusSetTotal = function(f95_arg0)
-	local f95_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.LootBonusTable.name, CoD.BlackMarketTableUtility.LootBonusTable.COL_SET, f95_arg0)
+CoD.BlackMarketTableUtility.GetBonusSetMasterNameHash = function(f95_arg0)
+	local f95_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.LootBonusTable.name, CoD.BlackMarketTableUtility.LootBonusTable.COL_SET, f95_arg0)
 	if f95_local0 ~= nil and #f95_local0 > 0 then
-		return Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.LootBonusTable.name, f95_local0[1], CoD.BlackMarketTableUtility.LootBonusTable.COL_TOTAL)
+		return Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.LootBonusTable.name, f95_local0[1], CoD.BlackMarketTableUtility.LootBonusTable.COL_NAMEHASH)
 	else
 		return nil
 	end
 end
-CoD.BlackMarketTableUtility.GetBonusSetMinimumTarget = function(f96_arg0)
-	local f96_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.LootBonusTable.name, CoD.BlackMarketTableUtility.LootBonusTable.COL_SET, f96_arg0)
+CoD.BlackMarketTableUtility.GetBonusSetTotal = function(f96_arg0)
+	local f96_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.LootBonusTable.name, CoD.BlackMarketTableUtility.LootBonusTable.COL_SET, f96_arg0)
 	if f96_local0 ~= nil and #f96_local0 > 0 then
-		return Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.LootBonusTable.name, f96_local0[1], CoD.BlackMarketTableUtility.LootBonusTable.COL_MINIMUMTARGET)
+		return Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.LootBonusTable.name, f96_local0[1], CoD.BlackMarketTableUtility.LootBonusTable.COL_TOTAL)
+	else
+		return nil
+	end
+end
+CoD.BlackMarketTableUtility.GetBonusSetMinimumTarget = function(f97_arg0)
+	local f97_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.LootBonusTable.name, CoD.BlackMarketTableUtility.LootBonusTable.COL_SET, f97_arg0)
+	if f97_local0 ~= nil and #f97_local0 > 0 then
+		return Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.LootBonusTable.name, f97_local0[1], CoD.BlackMarketTableUtility.LootBonusTable.COL_MINIMUMTARGET)
 	else
 		return 0
 	end
 end
-CoD.BlackMarketTableUtility.GetNumberOwnedAndAvailableOfSet = function(f97_arg0, f97_arg1)
-	local f97_local0 = 0
-	local f97_local1 = 0
-	local f97_local2 = false
-	local f97_local3 = false
-	local f97_local4 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ContrabandTable.name, CoD.BlackMarketTableUtility.ContrabandTable.COL_SET, f97_arg1)
-	if f97_local4 ~= nil then
-		for f97_local5 = 1, #f97_local4, 1 do
-			if 0 < Engine[@"hash_34509DFCBC7BC5CE"](f97_arg0, Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f97_local4[f97_local5], CoD.BlackMarketTableUtility.ContrabandTable.COL_ID)) then
-				f97_local0 = f97_local0 + 1
-				f97_local1 = f97_local1 + 1
+CoD.BlackMarketTableUtility.GetNumberOwnedAndAvailableOfSet = function(f98_arg0, f98_arg1)
+	local f98_local0 = 0
+	local f98_local1 = 0
+	local f98_local2 = false
+	local f98_local3 = false
+	local f98_local4 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ContrabandTable.name, CoD.BlackMarketTableUtility.ContrabandTable.COL_SET, f98_arg1)
+	if f98_local4 ~= nil then
+		for f98_local5 = 1, #f98_local4, 1 do
+			if 0 < Engine[@"hash_34509DFCBC7BC5CE"](f98_arg0, Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f98_local4[f98_local5], CoD.BlackMarketTableUtility.ContrabandTable.COL_ID)) then
+				f98_local0 = f98_local0 + 1
+				f98_local1 = f98_local1 + 1
 			end
 		end
 	end
-	local f97_local5 = CoDShared.Loot.GetCurrentSeason()
-	for f97_local13, f97_local14 in pairs(CoDShared.Loot.SeasonParams) do
-		local f97_local15 = CoDShared.Loot.GetSeasonInfoParam(f97_local13, CoDShared.Loot.SEASON_INFO_TABLENAME)
-		local f97_local16 = Engine[@"tablefindrows"](f97_local15, CoD.BlackMarketTableUtility.SeasonsTable.COL_SET, f97_arg1)
-		if f97_local16 ~= nil then
-			local f97_local9 = f97_local13 == f97_local5
-			for f97_local10 = 1, #f97_local16, 1 do
-				if 0 < Engine[@"hash_34509DFCBC7BC5CE"](f97_arg0, Engine[@"hash_4C6F8EC444864600"](f97_local15, f97_local16[f97_local10], CoD.BlackMarketTableUtility.SeasonsTable.COL_ID)) then
-					f97_local0 = f97_local0 + 1
-					f97_local1 = f97_local1 + 1
+	local f98_local5 = CoDShared.Loot.GetCurrentSeason()
+	for f98_local13, f98_local14 in pairs(CoDShared.Loot.SeasonParams) do
+		local f98_local15 = CoDShared.Loot.GetSeasonInfoParam(f98_local13, CoDShared.Loot.SEASON_INFO_TABLENAME)
+		local f98_local16 = Engine.TableFindRows(f98_local15, CoD.BlackMarketTableUtility.SeasonsTable.COL_SET, f98_arg1)
+		if f98_local16 ~= nil then
+			local f98_local9 = f98_local13 == f98_local5
+			for f98_local10 = 1, #f98_local16, 1 do
+				if 0 < Engine[@"hash_34509DFCBC7BC5CE"](f98_arg0, Engine[@"hash_4C6F8EC444864600"](f98_local15, f98_local16[f98_local10], CoD.BlackMarketTableUtility.SeasonsTable.COL_ID)) then
+					f98_local0 = f98_local0 + 1
+					f98_local1 = f98_local1 + 1
 				end
-				if f97_local9 then
-					f97_local1 = f97_local1 + 1
-				end
-			end
-		end
-	end
-	for f97_local13, f97_local14 in pairs(CoD.BlackMarketTableUtility.ContractsTable.names) do
-		local f97_local15 = Engine[@"tablefindrows"](f97_local14, CoD.BlackMarketTableUtility.ContractsTable.COL_SET, f97_arg1)
-		if f97_local15 ~= nil then
-			if CoD.BlackMarketTableUtility.IsContractOwned(f97_arg0, f97_local13) then
-				f97_local1 = f97_local1 + #f97_local15
-			end
-			for f97_local16 = 1, #f97_local15, 1 do
-				if 0 < Engine[@"hash_34509DFCBC7BC5CE"](f97_arg0, Engine[@"hash_4C6F8EC444864600"](f97_local14, f97_local15[f97_local16], CoD.BlackMarketTableUtility.ContractsTable.COL_ID)) then
-					f97_local0 = f97_local0 + 1
+				if f98_local9 then
+					f98_local1 = f98_local1 + 1
 				end
 			end
 		end
 	end
-	f97_local6 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ItemShopTable.name, CoD.BlackMarketTableUtility.ItemShopTable.COL_SET, f97_arg1)
-	if f97_local6 ~= nil then
-		for f97_local7 = 1, #f97_local6, 1 do
-			local f97_local15 = f97_local6[f97_local7]
-			local f97_local16 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f97_local15, CoD.BlackMarketTableUtility.ItemShopTable.COL_TYPE)
-			local f97_local10 = 0 < Engine[@"hash_34509DFCBC7BC5CE"](f97_arg0, Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f97_local15, CoD.BlackMarketTableUtility.ItemShopTable.COL_ID))
-			if f97_local16 == @"tag_bundle" or f97_local16 == @"outfit_bundle" then
-				f97_local2 = true
-				f97_local3 = f97_local10
+	for f98_local13, f98_local14 in pairs(CoD.BlackMarketTableUtility.ContractsTable.names) do
+		local f98_local15 = Engine.TableFindRows(f98_local14, CoD.BlackMarketTableUtility.ContractsTable.COL_SET, f98_arg1)
+		if f98_local15 ~= nil then
+			if CoD.BlackMarketTableUtility.IsContractOwned(f98_arg0, f98_local13) then
+				f98_local1 = f98_local1 + #f98_local15
 			end
-			if f97_local10 then
-				f97_local0 = f97_local0 + 1
-				f97_local1 = f97_local1 + 1
+			for f98_local16 = 1, #f98_local15, 1 do
+				if 0 < Engine[@"hash_34509DFCBC7BC5CE"](f98_arg0, Engine[@"hash_4C6F8EC444864600"](f98_local14, f98_local15[f98_local16], CoD.BlackMarketTableUtility.ContractsTable.COL_ID)) then
+					f98_local0 = f98_local0 + 1
+				end
 			end
 		end
 	end
-	if f97_local2 then
-		f97_local7 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_SET, f97_arg1)
-		if f97_local7 ~= nil then
-			f97_local1 = #f97_local7
-			if f97_local3 then
-				f97_local0 = #f97_local7
+	f98_local6 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ItemShopTable.name, CoD.BlackMarketTableUtility.ItemShopTable.COL_SET, f98_arg1)
+	if f98_local6 ~= nil then
+		for f98_local7 = 1, #f98_local6, 1 do
+			local f98_local15 = f98_local6[f98_local7]
+			local f98_local16 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f98_local15, CoD.BlackMarketTableUtility.ItemShopTable.COL_TYPE)
+			local f98_local10 = 0 < Engine[@"hash_34509DFCBC7BC5CE"](f98_arg0, Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f98_local15, CoD.BlackMarketTableUtility.ItemShopTable.COL_ID))
+			if f98_local16 == "tag_bundle" or f98_local16 == "outfit_bundle" then
+				f98_local2 = true
+				f98_local3 = f98_local10
+			end
+			if f98_local10 then
+				f98_local0 = f98_local0 + 1
+				f98_local1 = f98_local1 + 1
 			end
 		end
 	end
-	return f97_local0, f97_local1
+	if f98_local2 then
+		f98_local7 = Engine.TableFindRows(CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_SET, f98_arg1)
+		if f98_local7 ~= nil then
+			f98_local1 = #f98_local7
+			if f98_local3 then
+				f98_local0 = #f98_local7
+			end
+		end
+	end
+	return f98_local0, f98_local1
 end
-CoD.BlackMarketTableUtility.IsBonusSetUnlocked = function(f98_arg0, f98_arg1)
-	local f98_local0 = CoD.BlackMarketTableUtility.GetBonusSetMinimumTarget(f98_arg1)
-	local f98_local1, f98_local2 = CoD.BlackMarketTableUtility.GetNumberOwnedAndAvailableOfSet(f98_arg0, f98_arg1)
-	return f98_local0 <= f98_local1
-end
-CoD.BlackMarketTableUtility.GetBonusSetUnlockedAvailableStates = function(f99_arg0, f99_arg1)
+CoD.BlackMarketTableUtility.IsBonusSetUnlocked = function(f99_arg0, f99_arg1)
 	local f99_local0 = CoD.BlackMarketTableUtility.GetBonusSetMinimumTarget(f99_arg1)
 	local f99_local1, f99_local2 = CoD.BlackMarketTableUtility.GetNumberOwnedAndAvailableOfSet(f99_arg0, f99_arg1)
-	return f99_local0 <= f99_local1, f99_local0 <= f99_local2
+	return f99_local0 <= f99_local1
 end
-CoD.BlackMarketTableUtility.GetLootBonusStringRef = function(f100_arg0, f100_arg1)
-	local f100_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.LootBonusTable.name, CoD.BlackMarketTableUtility.LootBonusTable.COL_SET, f100_arg1)
-	if f100_local0 ~= nil and #f100_local0 > 0 then
-		return Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.LootBonusTable.name, f100_local0[1], CoD.BlackMarketTableUtility.LootBonusTable.COL_STRINGREF)
+CoD.BlackMarketTableUtility.GetBonusSetUnlockedAvailableStates = function(f100_arg0, f100_arg1)
+	local f100_local0 = CoD.BlackMarketTableUtility.GetBonusSetMinimumTarget(f100_arg1)
+	local f100_local1, f100_local2 = CoD.BlackMarketTableUtility.GetNumberOwnedAndAvailableOfSet(f100_arg0, f100_arg1)
+	return f100_local0 <= f100_local1, f100_local0 <= f100_local2
+end
+CoD.BlackMarketTableUtility.GetLootBonusStringRef = function(f101_arg0, f101_arg1)
+	local f101_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.LootBonusTable.name, CoD.BlackMarketTableUtility.LootBonusTable.COL_SET, f101_arg1)
+	if f101_local0 ~= nil and #f101_local0 > 0 then
+		return Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.LootBonusTable.name, f101_local0[1], CoD.BlackMarketTableUtility.LootBonusTable.COL_STRINGREF)
 	else
 		return 0x0
 	end
 end
 CoD.BlackMarketTableUtility.BackfillTable = {}
-CoD.BlackMarketTableUtility.BackfillTable.name = @"hash_12C85CA9A2CE0E06"
+CoD.BlackMarketTableUtility.BackfillTable.name = "gamedata/loot/loot_backfill.csv"
 CoD.BlackMarketTableUtility.BackfillTable.COL_NAMEHASH = 0
 CoD.BlackMarketTableUtility.BackfillTable.COL_TYPE = 1
 CoD.BlackMarketTableUtility.BackfillTable.COL_RARITY = 2
@@ -2350,76 +2366,76 @@ CoD.BlackMarketTableUtility.BackfillTable.COL_OUTFIT = 6
 CoD.BlackMarketTableUtility.BackfillTable.COL_REFWEAPON = 7
 CoD.BlackMarketTableUtility.BackfillTable.COL_REFOPTIC = 8
 CoD.BlackMarketTableUtility.BackfillTable.COL_ID = 9
-CoD.BlackMarketTableUtility.GetBackfillItemInfoByRow = function(f101_arg0, f101_arg1)
-	return CoD.BlackMarketTableUtility.GetBackfillItemInfo(f101_arg0, Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f101_arg1, CoD.BlackMarketTableUtility.BackfillTable.COL_ID), f101_arg1)
+CoD.BlackMarketTableUtility.GetBackfillItemInfoByRow = function(f102_arg0, f102_arg1)
+	return CoD.BlackMarketTableUtility.GetBackfillItemInfo(f102_arg0, Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f102_arg1, CoD.BlackMarketTableUtility.BackfillTable.COL_ID), f102_arg1)
 end
-CoD.BlackMarketTableUtility.GetBackfillItemInfo = function(f102_arg0, f102_arg1, f102_arg2)
-	if f102_arg1 == nil then
+CoD.BlackMarketTableUtility.GetBackfillItemInfo = function(f103_arg0, f103_arg1, f103_arg2)
+	if f103_arg1 == nil then
 		return {}
 	end
-	local f102_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.BackfillTable.name, CoD.BlackMarketTableUtility.BackfillTable.COL_NAMEHASH, Engine[@"hash_DE65B393F703EB1"](CoD.BlackMarketTableUtility.BackfillTable.name, CoD.BlackMarketTableUtility.BackfillTable.COL_ID, f102_arg1, CoD.BlackMarketTableUtility.BackfillTable.COL_NAMEHASH))
-	local f102_local1 = nil
-	if f102_local0 ~= nil and #f102_local0 > 0 then
-		local f102_local2 = f102_local0[1]
-		f102_local1 = {
-			itemId = f102_arg1,
-			tier = f102_arg2,
-			name = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f102_local2, CoD.BlackMarketTableUtility.BackfillTable.COL_NAMEHASH),
-			rarity = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f102_local2, CoD.BlackMarketTableUtility.BackfillTable.COL_RARITY),
-			owned = Engine[@"hash_5352DC095BBB2A45"](f102_arg0, f102_arg1),
-			inSet = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f102_local2, CoD.BlackMarketTableUtility.BackfillTable.COL_SET),
-			category = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f102_local2, CoD.BlackMarketTableUtility.BackfillTable.COL_TYPE),
+	local f103_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.BackfillTable.name, CoD.BlackMarketTableUtility.BackfillTable.COL_NAMEHASH, Engine[@"hash_DE65B393F703EB1"](CoD.BlackMarketTableUtility.BackfillTable.name, CoD.BlackMarketTableUtility.BackfillTable.COL_ID, f103_arg1, CoD.BlackMarketTableUtility.BackfillTable.COL_NAMEHASH))
+	local f103_local1 = nil
+	if f103_local0 ~= nil and #f103_local0 > 0 then
+		local f103_local2 = f103_local0[1]
+		f103_local1 = {
+			itemId = f103_arg1,
+			tier = f103_arg2,
+			name = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f103_local2, CoD.BlackMarketTableUtility.BackfillTable.COL_NAMEHASH),
+			rarity = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f103_local2, CoD.BlackMarketTableUtility.BackfillTable.COL_RARITY),
+			owned = Engine[@"hash_5352DC095BBB2A45"](f103_arg0, f103_arg1),
+			inSet = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f103_local2, CoD.BlackMarketTableUtility.BackfillTable.COL_SET),
+			category = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f103_local2, CoD.BlackMarketTableUtility.BackfillTable.COL_TYPE),
 			lootType = LuaEnum.LOOT_TYPE.CONTRABAND,
-			refOptic = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f102_local2, CoD.BlackMarketTableUtility.BackfillTable.COL_REFOPTIC),
+			refOptic = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f103_local2, CoD.BlackMarketTableUtility.BackfillTable.COL_REFOPTIC),
 		}
 	end
-	return f102_local1
+	return f103_local1
 end
-CoD.BlackMarketTableUtility.GetBackfillOutfitInformation = function(f103_arg0, f103_arg1)
-	local f103_local0 = 0x0
-	local f103_local1 = 0x0
-	local f103_local2 = 0x0
-	local f103_local3 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.BackfillTable.name, CoD.BlackMarketTableUtility.BackfillTable.COL_NAMEHASH, f103_arg1)
-	if f103_local3 == nil then
+CoD.BlackMarketTableUtility.GetBackfillOutfitInformation = function(f104_arg0, f104_arg1)
+	local f104_local0 = 0x0
+	local f104_local1 = 0x0
+	local f104_local2 = 0x0
+	local f104_local3 = Engine.TableFindRows(CoD.BlackMarketTableUtility.BackfillTable.name, CoD.BlackMarketTableUtility.BackfillTable.COL_NAMEHASH, f104_arg1)
+	if f104_local3 == nil then
 		return {}
 	end
-	local f103_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f103_local3[1], CoD.BlackMarketTableUtility.BackfillTable.COL_MPPRT)
-	local f103_local5 = Enum[@"emodes"][@"mode_multiplayer"]
-	if f103_local4 == 0x0 then
-		f103_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f103_local3[1], CoD.BlackMarketTableUtility.BackfillTable.COL_WZPRT)
-		f103_local5 = Enum[@"emodes"][@"mode_warzone"]
-		if f103_local4 == 0x0 then
+	local f104_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f104_local3[1], CoD.BlackMarketTableUtility.BackfillTable.COL_MPPRT)
+	local f104_local5 = Enum.eModes.mode_multiplayer
+	if f104_local4 == 0x0 then
+		f104_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f104_local3[1], CoD.BlackMarketTableUtility.BackfillTable.COL_WZPRT)
+		f104_local5 = Enum.eModes.mode_warzone
+		if f104_local4 == 0x0 then
 			return {}
 		end
 	end
-	local f103_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f103_local3[1], CoD.BlackMarketTableUtility.BackfillTable.COL_OUTFIT)
-	if f103_local6 == 0x0 then
+	local f104_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f104_local3[1], CoD.BlackMarketTableUtility.BackfillTable.COL_OUTFIT)
+	if f104_local6 == 0x0 then
 		return {}
 	end
-	local f103_local7 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f103_local3[1], CoD.BlackMarketTableUtility.BackfillTable.COL_TYPE)
-	local f103_local8 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f103_local3[1], CoD.BlackMarketTableUtility.BackfillTable.COL_NAMEHASH)
-	local f103_local9 = Engine[0x422A503291AC81](f103_local7)
-	if f103_local9 == Enum[@"characteritemtype"][@"hash_57852FCB3BFCC8D1"] then
-		f103_local0 = f103_local8
-	elseif f103_local9 == Enum[@"characteritemtype"][@"hash_4922FE5C41D9EE8B"] then
-		f103_local1 = f103_local8
-	elseif f103_local9 == Enum[@"characteritemtype"][@"hash_48E3A65D78229DC1"] then
-		f103_local2 = f103_local8
+	local f104_local7 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f104_local3[1], CoD.BlackMarketTableUtility.BackfillTable.COL_TYPE)
+	local f104_local8 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f104_local3[1], CoD.BlackMarketTableUtility.BackfillTable.COL_NAMEHASH)
+	local f104_local9 = Engine[0x422A503291AC81](f104_local7)
+	if f104_local9 == Enum.CharacterItemType[@"hash_57852FCB3BFCC8D1"] then
+		f104_local0 = f104_local8
+	elseif f104_local9 == Enum.CharacterItemType[@"hash_4922FE5C41D9EE8B"] then
+		f104_local1 = f104_local8
+	elseif f104_local9 == Enum.CharacterItemType[@"hash_48E3A65D78229DC1"] then
+		f104_local2 = f104_local8
 	end
 	return {
-		prt = f103_local4,
-		mode = f103_local5,
-		outfit = f103_local6,
-		decal = f103_local0,
-		preset = f103_local1,
-		war_paint = f103_local2,
+		prt = f104_local4,
+		mode = f104_local5,
+		outfit = f104_local6,
+		decal = f104_local0,
+		preset = f104_local1,
+		war_paint = f104_local2,
 	}
 end
-CoD.BlackMarketTableUtility[0xC3056CABEF9D99] = function(f104_arg0)
-	local f104_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.BackfillTable.name, CoD.BlackMarketTableUtility.BackfillTable.COL_NAMEHASH, f104_arg0)
-	if f104_local0 ~= nil and #f104_local0 > 0 then
+CoD.BlackMarketTableUtility[0xC3056CABEF9D99] = function(f105_arg0)
+	local f105_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.BackfillTable.name, CoD.BlackMarketTableUtility.BackfillTable.COL_NAMEHASH, f105_arg0)
+	if f105_local0 ~= nil and #f105_local0 > 0 then
 		return {
-			rarity = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f104_local0[1], CoD.BlackMarketTableUtility.BackfillTable.COL_RARITY),
+			rarity = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BackfillTable.name, f105_local0[1], CoD.BlackMarketTableUtility.BackfillTable.COL_RARITY),
 			isLoot = true,
 			owned = IsBooleanDvarSet(@"hash_3B843C9AB4802F53"),
 			available = IsBooleanDvarSet(@"hash_3B843C9AB4802F53"),
@@ -2437,80 +2453,80 @@ CoD.BlackMarketTableUtility.MyShopTable.COL_PRICE = 3
 CoD.BlackMarketTableUtility.MyShopTable.COL_NUMERATOR = 4
 CoD.BlackMarketTableUtility.MyShopTable.COL_PRICEPOINT = 5
 CoD.BlackMarketTableUtility.MyShopTable.NumberOfPricePoints = 3
-CoD.BlackMarketTableUtility.GetMyShopItemCategory = function(f105_arg0, f105_arg1)
-	local f105_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.MyShopTable.name, CoD.BlackMarketTableUtility.MyShopTable.COL_NAMEHASH, f105_arg1)
-	if f105_local0 == nil then
+CoD.BlackMarketTableUtility.GetMyShopItemCategory = function(f106_arg0, f106_arg1)
+	local f106_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.MyShopTable.name, CoD.BlackMarketTableUtility.MyShopTable.COL_NAMEHASH, f106_arg1)
+	if f106_local0 == nil then
 		return nil
 	else
-		return Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.MyShopTable.name, f105_local0[1], CoD.BlackMarketTableUtility.MyShopTable.COL_LOOT_TYPE)
+		return Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.MyShopTable.name, f106_local0[1], CoD.BlackMarketTableUtility.MyShopTable.COL_LOOT_TYPE)
 	end
 end
-CoD.BlackMarketTableUtility.GetMyShopItemId = function(f106_arg0, f106_arg1)
-	local f106_local0 = CoD.BlackMarketTableUtility.GetMyShopItemCategory(f106_arg0, f106_arg1)
-	if f106_local0 == @"special_order" then
-		for f106_local4, f106_local5 in pairs(CoD.BlackMarketTableUtility.ContractsTable.names) do
-			if f106_local4 == f106_arg1 then
-				return CoD.BlackMarketTableUtility.GetContractId(f106_local4)
+CoD.BlackMarketTableUtility.GetMyShopItemId = function(f107_arg0, f107_arg1)
+	local f107_local0 = CoD.BlackMarketTableUtility.GetMyShopItemCategory(f107_arg0, f107_arg1)
+	if f107_local0 == "special_order" then
+		for f107_local4, f107_local5 in pairs(CoD.BlackMarketTableUtility.ContractsTable.names) do
+			if f107_local4 == f107_arg1 then
+				return CoD.BlackMarketTableUtility.GetContractId(f107_local4)
 			end
 		end
-	elseif f106_local0 == @"hash_731315EF3FB1AE07" then
-		return CoD.BlackMarketTableUtility.GetItemShopEntryId(f106_arg0, f106_arg1)
-	elseif f106_local0 == @"loot_stream" then
-		return CoD.BlackMarketTableUtility.GetSeasonItemId(f106_arg0, f106_arg1)
+	elseif f107_local0 == "item_shop" then
+		return CoD.BlackMarketTableUtility.GetItemShopEntryId(f107_arg0, f107_arg1)
+	elseif f107_local0 == "loot_stream" then
+		return CoD.BlackMarketTableUtility.GetSeasonItemId(f107_arg0, f107_arg1)
 	end
 	return nil
 end
-CoD.BlackMarketTableUtility.GetMyShopSkuAndPrice = function(f107_arg0, f107_arg1, f107_arg2)
-	local f107_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.MyShopTable.name, CoD.BlackMarketTableUtility.MyShopTable.COL_NAMEHASH, f107_arg1)
-	if f107_local0 == nil then
+CoD.BlackMarketTableUtility.GetMyShopSkuAndPrice = function(f108_arg0, f108_arg1, f108_arg2)
+	local f108_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.MyShopTable.name, CoD.BlackMarketTableUtility.MyShopTable.COL_NAMEHASH, f108_arg1)
+	if f108_local0 == nil then
 		return nil
 	end
-	for f107_local6, f107_local7 in ipairs(f107_local0) do
-		if Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.MyShopTable.name, f107_local7, CoD.BlackMarketTableUtility.MyShopTable.COL_PRICEPOINT) == f107_arg2 then
-			local f107_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.MyShopTable.name, f107_local7, CoD.BlackMarketTableUtility.MyShopTable.COL_PRICE)
-			local f107_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.MyShopTable.name, f107_local7, CoD.BlackMarketTableUtility.MyShopTable.COL_SKU)
-			if f107_local4 and f107_local5 then
+	for f108_local6, f108_local7 in ipairs(f108_local0) do
+		if Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.MyShopTable.name, f108_local7, CoD.BlackMarketTableUtility.MyShopTable.COL_PRICEPOINT) == f108_arg2 then
+			local f108_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.MyShopTable.name, f108_local7, CoD.BlackMarketTableUtility.MyShopTable.COL_PRICE)
+			local f108_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.MyShopTable.name, f108_local7, CoD.BlackMarketTableUtility.MyShopTable.COL_SKU)
+			if f108_local4 and f108_local5 then
 				return {
-					price = f107_local4,
-					sku = f107_local5,
+					price = f108_local4,
+					sku = f108_local5,
 				}
 			end
 		end
 	end
 	return nil
 end
-CoD.BlackMarketTableUtility.GetAllMyShopItems = function(f108_arg0, f108_arg1)
-	local f108_local0 = {}
-	local f108_local1 = Engine[@"gettablerowcount"](CoD.BlackMarketTableUtility.MyShopTable.name)
-	for f108_local2 = 1, f108_local1, 1 do
-		local f108_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.MyShopTable.name, f108_local2, CoD.BlackMarketTableUtility.MyShopTable.COL_NAMEHASH)
-		if f108_local5 then
-			local f108_local6 = CoD.BlackMarketTableUtility.GetMyShopItemCategory(f108_arg0, f108_local5)
-			local f108_local7 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.MyShopTable.name, f108_local2, CoD.BlackMarketTableUtility.MyShopTable.COL_NUMERATOR)
-			local f108_local8 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.MyShopTable.name, f108_local2, CoD.BlackMarketTableUtility.MyShopTable.COL_PRICEPOINT)
-			if not f108_arg1 or f108_arg1 == f108_local6 then
-				table.insert(f108_local0, {
-					name = f108_local5,
-					weight = f108_local7,
-					pricePoint = f108_local8,
+CoD.BlackMarketTableUtility.GetAllMyShopItems = function(f109_arg0, f109_arg1)
+	local f109_local0 = {}
+	local f109_local1 = Engine.GetTableRowCount(CoD.BlackMarketTableUtility.MyShopTable.name)
+	for f109_local2 = 1, f109_local1, 1 do
+		local f109_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.MyShopTable.name, f109_local2, CoD.BlackMarketTableUtility.MyShopTable.COL_NAMEHASH)
+		if f109_local5 then
+			local f109_local6 = CoD.BlackMarketTableUtility.GetMyShopItemCategory(f109_arg0, f109_local5)
+			local f109_local7 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.MyShopTable.name, f109_local2, CoD.BlackMarketTableUtility.MyShopTable.COL_NUMERATOR)
+			local f109_local8 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.MyShopTable.name, f109_local2, CoD.BlackMarketTableUtility.MyShopTable.COL_PRICEPOINT)
+			if not f109_arg1 or f109_arg1 == f109_local6 then
+				table.insert(f109_local0, {
+					name = f109_local5,
+					weight = f109_local7,
+					pricePoint = f109_local8,
 				})
 			end
 		end
 	end
-	return f108_local0
+	return f109_local0
 end
-CoD.BlackMarketTableUtility.GetMyShopItemNameFromId = function(f109_arg0, f109_arg1)
-	local f109_local0 = CoD.BlackMarketTableUtility.GetContractInfo(f109_arg1)
-	if f109_local0 ~= nil then
-		return f109_local0.namehash
+CoD.BlackMarketTableUtility.GetMyShopItemNameFromId = function(f110_arg0, f110_arg1)
+	local f110_local0 = CoD.BlackMarketTableUtility.GetContractInfo(f110_arg1)
+	if f110_local0 ~= nil then
+		return f110_local0.namehash
 	else
-		f109_local0 = CoD.BlackMarketTableUtility.GetItemShopEntryName(f109_arg0, f109_arg1)
-		if f109_local0 ~= nil and f109_local0 ~= 0x0 then
-			return f109_local0
+		f110_local0 = CoD.BlackMarketTableUtility.GetItemShopEntryName(f110_arg0, f110_arg1)
+		if f110_local0 ~= nil and f110_local0 ~= 0x0 then
+			return f110_local0
 		else
-			f109_local0 = CoD.BlackMarketTableUtility.GetMyShopSeasonItemInfo(f109_arg0, f109_arg1)
-			if f109_local0 ~= nil then
-				return f109_local0.name
+			f110_local0 = CoD.BlackMarketTableUtility.GetMyShopSeasonItemInfo(f110_arg0, f110_arg1)
+			if f110_local0 ~= nil then
+				return f110_local0.name
 			else
 				return nil
 			end
@@ -2529,103 +2545,103 @@ CoD.BlackMarketTableUtility.DetItemsTable.COL_NUMERATOR = 6
 CoD.BlackMarketTableUtility.DetItemsTable.COL_NUMERATOR_1 = 7
 CoD.BlackMarketTableUtility.DetItemsTable.COL_PRICEPOINT = 8
 CoD.BlackMarketTableUtility.DetItemsTable.allDeterministicItemsTable = nil
-CoD.BlackMarketTableUtility.GetDeterministicItemCategory = function(f110_arg0, f110_arg1)
-	local f110_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.DetItemsTable.name, CoD.BlackMarketTableUtility.DetItemsTable.COL_NAMEHASH, f110_arg1)
-	if f110_local0 == nil then
+CoD.BlackMarketTableUtility.GetDeterministicItemCategory = function(f111_arg0, f111_arg1)
+	local f111_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.DetItemsTable.name, CoD.BlackMarketTableUtility.DetItemsTable.COL_NAMEHASH, f111_arg1)
+	if f111_local0 == nil then
 		return nil
 	else
-		return Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.DetItemsTable.name, f110_local0[1], CoD.BlackMarketTableUtility.DetItemsTable.COL_LOOT_TYPE)
+		return Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.DetItemsTable.name, f111_local0[1], CoD.BlackMarketTableUtility.DetItemsTable.COL_LOOT_TYPE)
 	end
 end
-CoD.BlackMarketTableUtility.GetDeterministicItemId = function(f111_arg0, f111_arg1)
-	local f111_local0 = CoD.BlackMarketTableUtility.GetDeterministicItemCategory(f111_arg0, f111_arg1)
-	if f111_local0 == @"special_order" then
-		for f111_local4, f111_local5 in pairs(CoD.BlackMarketTableUtility.ContractsTable.names) do
-			if f111_local4 == f111_arg1 then
-				return CoD.BlackMarketTableUtility.GetContractId(f111_local4)
+CoD.BlackMarketTableUtility.GetDeterministicItemId = function(f112_arg0, f112_arg1)
+	local f112_local0 = CoD.BlackMarketTableUtility.GetDeterministicItemCategory(f112_arg0, f112_arg1)
+	if f112_local0 == "special_order" then
+		for f112_local4, f112_local5 in pairs(CoD.BlackMarketTableUtility.ContractsTable.names) do
+			if f112_local4 == f112_arg1 then
+				return CoD.BlackMarketTableUtility.GetContractId(f112_local4)
 			end
 		end
-	elseif f111_local0 == @"hash_731315EF3FB1AE07" then
-		return CoD.BlackMarketTableUtility.GetItemShopEntryId(f111_arg0, f111_arg1)
-	elseif f111_local0 == @"loot_stream" then
-		return CoD.BlackMarketTableUtility.GetSeasonItemId(f111_arg0, f111_arg1)
+	elseif f112_local0 == "item_shop" then
+		return CoD.BlackMarketTableUtility.GetItemShopEntryId(f112_arg0, f112_arg1)
+	elseif f112_local0 == "loot_stream" then
+		return CoD.BlackMarketTableUtility.GetSeasonItemId(f112_arg0, f112_arg1)
 	end
 	return nil
 end
-CoD.BlackMarketTableUtility.GetDeterministicItemSkusAndPrices = function(f112_arg0, f112_arg1, f112_arg2)
-	local f112_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.DetItemsTable.name, CoD.BlackMarketTableUtility.DetItemsTable.COL_NAMEHASH, f112_arg1)
-	if f112_local0 == nil then
+CoD.BlackMarketTableUtility.GetDeterministicItemSkusAndPrices = function(f113_arg0, f113_arg1, f113_arg2)
+	local f113_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.DetItemsTable.name, CoD.BlackMarketTableUtility.DetItemsTable.COL_NAMEHASH, f113_arg1)
+	if f113_local0 == nil then
 		return nil
 	end
-	for f112_local8, f112_local9 in ipairs(f112_local0) do
-		if Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.DetItemsTable.name, f112_local9, CoD.BlackMarketTableUtility.DetItemsTable.COL_PRICEPOINT) == f112_arg2 then
-			local f112_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.DetItemsTable.name, f112_local9, CoD.BlackMarketTableUtility.DetItemsTable.COL_CP_PRICE)
-			local f112_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.DetItemsTable.name, f112_local9, CoD.BlackMarketTableUtility.DetItemsTable.COL_CP_SKU)
-			local f112_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.DetItemsTable.name, f112_local9, CoD.BlackMarketTableUtility.DetItemsTable.COL_CASE_PRICE)
-			local f112_local7 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.DetItemsTable.name, f112_local9, CoD.BlackMarketTableUtility.DetItemsTable.COL_CASE_RULE)
-			if f112_local4 and f112_local5 and f112_local6 and f112_local7 then
+	for f113_local8, f113_local9 in ipairs(f113_local0) do
+		if Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.DetItemsTable.name, f113_local9, CoD.BlackMarketTableUtility.DetItemsTable.COL_PRICEPOINT) == f113_arg2 then
+			local f113_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.DetItemsTable.name, f113_local9, CoD.BlackMarketTableUtility.DetItemsTable.COL_CP_PRICE)
+			local f113_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.DetItemsTable.name, f113_local9, CoD.BlackMarketTableUtility.DetItemsTable.COL_CP_SKU)
+			local f113_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.DetItemsTable.name, f113_local9, CoD.BlackMarketTableUtility.DetItemsTable.COL_CASE_PRICE)
+			local f113_local7 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.DetItemsTable.name, f113_local9, CoD.BlackMarketTableUtility.DetItemsTable.COL_CASE_RULE)
+			if f113_local4 and f113_local5 and f113_local6 and f113_local7 then
 				return {
-					cpPrice = f112_local4,
-					cpSku = f112_local5,
-					casePrice = f112_local6,
-					caseRule = f112_local7,
+					cpPrice = f113_local4,
+					cpSku = f113_local5,
+					casePrice = f113_local6,
+					caseRule = f113_local7,
 				}
 			end
 		end
 	end
 	return nil
 end
-CoD.BlackMarketTableUtility.GetAllDeterministicItem = function(f113_arg0, f113_arg1, f113_arg2)
-	if not f113_arg1 and CoD.BlackMarketTableUtility.DetItemsTable.allDeterministicItemsTable then
-		if not f113_arg2 then
+CoD.BlackMarketTableUtility.GetAllDeterministicItem = function(f114_arg0, f114_arg1, f114_arg2)
+	if not f114_arg1 and CoD.BlackMarketTableUtility.DetItemsTable.allDeterministicItemsTable then
+		if not f114_arg2 then
 			return CoD.BlackMarketTableUtility.DetItemsTable.allDeterministicItemsTable
 		end
-		local f113_local0 = {}
-		for f113_local4, f113_local5 in ipairs(CoD.BlackMarketTableUtility.DetItemsTable.allDeterministicItemsTable) do
-			if f113_local5.category == f113_arg2 then
-				table.insert(f113_local0, f113_local5)
+		local f114_local0 = {}
+		for f114_local4, f114_local5 in ipairs(CoD.BlackMarketTableUtility.DetItemsTable.allDeterministicItemsTable) do
+			if f114_local5.category == f114_arg2 then
+				table.insert(f114_local0, f114_local5)
 			end
 		end
-		return f113_local0
+		return f114_local0
 	else
-		local f113_local0 = {}
-		local f113_local1 = Engine[@"gettablerowcount"](CoD.BlackMarketTableUtility.DetItemsTable.name)
-		for f113_local2 = 1, f113_local1, 1 do
-			local f113_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.DetItemsTable.name, f113_local2, CoD.BlackMarketTableUtility.DetItemsTable.COL_NAMEHASH)
-			if f113_local6 then
-				local f113_local7 = CoD.BlackMarketTableUtility.GetDeterministicItemCategory(f113_arg0, f113_local6)
-				local f113_local8 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.DetItemsTable.name, f113_local2, CoD.BlackMarketTableUtility.DetItemsTable.COL_NUMERATOR)
-				local f113_local9 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.DetItemsTable.name, f113_local2, CoD.BlackMarketTableUtility.DetItemsTable.COL_NUMERATOR_1)
-				local f113_local10 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.DetItemsTable.name, f113_local2, CoD.BlackMarketTableUtility.DetItemsTable.COL_PRICEPOINT)
-				if not f113_arg2 or f113_arg2 == f113_local7 then
-					table.insert(f113_local0, {
-						name = f113_local6,
-						weight1 = f113_local8,
-						weight2 = f113_local9,
-						pricePoint = f113_local10,
-						category = f113_local7,
+		local f114_local0 = {}
+		local f114_local1 = Engine.GetTableRowCount(CoD.BlackMarketTableUtility.DetItemsTable.name)
+		for f114_local2 = 1, f114_local1, 1 do
+			local f114_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.DetItemsTable.name, f114_local2, CoD.BlackMarketTableUtility.DetItemsTable.COL_NAMEHASH)
+			if f114_local6 then
+				local f114_local7 = CoD.BlackMarketTableUtility.GetDeterministicItemCategory(f114_arg0, f114_local6)
+				local f114_local8 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.DetItemsTable.name, f114_local2, CoD.BlackMarketTableUtility.DetItemsTable.COL_NUMERATOR)
+				local f114_local9 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.DetItemsTable.name, f114_local2, CoD.BlackMarketTableUtility.DetItemsTable.COL_NUMERATOR_1)
+				local f114_local10 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.DetItemsTable.name, f114_local2, CoD.BlackMarketTableUtility.DetItemsTable.COL_PRICEPOINT)
+				if not f114_arg2 or f114_arg2 == f114_local7 then
+					table.insert(f114_local0, {
+						name = f114_local6,
+						weight1 = f114_local8,
+						weight2 = f114_local9,
+						pricePoint = f114_local10,
+						category = f114_local7,
 					})
 				end
 			end
 		end
-		if not f113_arg2 then
-			CoD.BlackMarketTableUtility.DetItemsTable.allDeterministicItemsTable = f113_local0
+		if not f114_arg2 then
+			CoD.BlackMarketTableUtility.DetItemsTable.allDeterministicItemsTable = f114_local0
 		end
-		return f113_local0
+		return f114_local0
 	end
 end
-CoD.BlackMarketTableUtility.GetDeterministicItemNameFromId = function(f114_arg0, f114_arg1)
-	local f114_local0 = CoD.BlackMarketTableUtility.GetContractInfo(f114_arg1)
-	if f114_local0 ~= nil then
-		return f114_local0.namehash
+CoD.BlackMarketTableUtility.GetDeterministicItemNameFromId = function(f115_arg0, f115_arg1)
+	local f115_local0 = CoD.BlackMarketTableUtility.GetContractInfo(f115_arg1)
+	if f115_local0 ~= nil then
+		return f115_local0.namehash
 	else
-		f114_local0 = CoD.BlackMarketTableUtility.GetItemShopEntryName(f114_arg0, f114_arg1)
-		if f114_local0 ~= nil and f114_local0 ~= 0x0 then
-			return f114_local0
+		f115_local0 = CoD.BlackMarketTableUtility.GetItemShopEntryName(f115_arg0, f115_arg1)
+		if f115_local0 ~= nil and f115_local0 ~= 0x0 then
+			return f115_local0
 		else
-			f114_local0 = CoD.BlackMarketTableUtility.GetMyShopSeasonItemInfo(f114_arg0, f114_arg1)
-			if f114_local0 ~= nil then
-				return f114_local0.name
+			f115_local0 = CoD.BlackMarketTableUtility.GetMyShopSeasonItemInfo(f115_arg0, f115_arg1)
+			if f115_local0 ~= nil then
+				return f115_local0.name
 			else
 				return nil
 			end
@@ -2650,183 +2666,154 @@ CoD.BlackMarketTableUtility.BribeTable.COL_STRING_NAME = 12
 CoD.BlackMarketTableUtility.BribeTable.COL_KEY_ITEM = 13
 CoD.BlackMarketTableUtility.BribeTable.COL_BRIBE_MENU = 14
 CoD.BlackMarketTableUtility.BribeTable.COL_SORT_ORDER = 15
-CoD.BlackMarketTableUtility.GetBribeStackInfo = function(f115_arg0)
-	local f115_local0 = {}
-	local f115_local1 = Engine[@"gettablerowcount"](CoD.BlackMarketTableUtility.BribeTable.name)
-	for f115_local2 = 1, f115_local1, 1 do
-		local f115_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f115_local2, CoD.BlackMarketTableUtility.BribeTable.COL_NAMEHASH)
-		if f115_local5 and IsBooleanDvarSet(f115_local5) then
-			table.insert(f115_local0, {
-				bribeName = f115_local5,
-				lootRule = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f115_local2, CoD.BlackMarketTableUtility.BribeTable.COL_LOOT_RULE),
-				stringName = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f115_local2, CoD.BlackMarketTableUtility.BribeTable.COL_STRING_NAME),
+CoD.BlackMarketTableUtility.BribeTable.COL_DISCOUNT_LOOT_RULE = 16
+CoD.BlackMarketTableUtility.BribeTable.COL_DISCOUNT_COST = 17
+CoD.BlackMarketTableUtility.BribeTable.COL_DISCOUNT_COST_OPTIONAL = 18
+CoD.BlackMarketTableUtility.BribeTable.COL_IS_FREE = 19
+CoD.BlackMarketTableUtility.GetBribeStackInfo = function(f116_arg0)
+	local f116_local0 = {}
+	local f116_local1 = Engine.GetTableRowCount(CoD.BlackMarketTableUtility.BribeTable.name)
+	for f116_local2 = 1, f116_local1, 1 do
+		local f116_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f116_local2, CoD.BlackMarketTableUtility.BribeTable.COL_NAMEHASH)
+		if f116_local5 and IsBooleanDvarSet(f116_local5) then
+			table.insert(f116_local0, {
+				bribeName = f116_local5,
+				lootRule = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f116_local2, CoD.BlackMarketTableUtility.BribeTable.COL_LOOT_RULE),
+				stringName = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f116_local2, CoD.BlackMarketTableUtility.BribeTable.COL_STRING_NAME),
 			})
 		end
 	end
-	return f115_local0
+	return f116_local0
 end
-CoD.BlackMarketTableUtility.GetBribeCPAndCasePrice = function(f116_arg0, f116_arg1)
-	local f116_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.BribeTable.name, CoD.BlackMarketTableUtility.BribeTable.COL_NAMEHASH, f116_arg1)
-	if f116_local0 ~= nil then
-		local f116_local1 = f116_local0[1]
-		local f116_local2 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f116_local1, CoD.BlackMarketTableUtility.BribeTable.COL_CURRENCY)
-		local f116_local3 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f116_local1, CoD.BlackMarketTableUtility.BribeTable.COL_COST)
-		local f116_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f116_local1, CoD.BlackMarketTableUtility.BribeTable.COL_CURRENCY_OPTIONAL)
-		local f116_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f116_local1, CoD.BlackMarketTableUtility.BribeTable.COL_COST_OPTIONAL)
-		local f116_local6, f116_local7 = nil
-		if f116_local2 == tostring(CoD.BlackMarketUtility.COD_POINTS_CURRENCY_ID) then
-			f116_local6 = f116_local3
-		end
-		if f116_local4 == tostring(CoD.BlackMarketUtility.RESERVE_CRATE_CURRENCY_ID) then
-			f116_local7 = f116_local5
-		end
-		return {
-			price = f116_local6,
-			casePrice = f116_local7,
-		}
-	else
-		return nil
-	end
-end
-CoD.BlackMarketTableUtility.GetAdditionalDrop = function(f117_arg0, f117_arg1)
-	local f117_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.BribeTable.name, CoD.BlackMarketTableUtility.BribeTable.COL_LOOT_RULE, f117_arg1)
+CoD.BlackMarketTableUtility.GetBribeCPAndCasePrice = function(f117_arg0, f117_arg1)
+	local f117_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.BribeTable.name, CoD.BlackMarketTableUtility.BribeTable.COL_NAMEHASH, f117_arg1)
 	if f117_local0 ~= nil then
-		return Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f117_local0[1], CoD.BlackMarketTableUtility.BribeTable.COL_ADDITIONAL_DROP)
-	else
-		return nil
-	end
-end
-CoD.BlackMarketTableUtility.CanPurchaseBribe = function(f118_arg0, f118_arg1, f118_arg2, f118_arg3, f118_arg4, f118_arg5, f118_arg6, f118_arg7)
-	local f118_local0 = false
-	local f118_local1 = 0
-	local f118_local2 = 0
-	local f118_local3 = Engine[@"hash_2F40679B550DCCA2"](f118_arg0, CoD.Currencies.COD_POINTS)
-	if f118_arg1 and f118_arg1 ~= "" and f118_arg2 and f118_arg2 ~= 0 then
-		if f118_arg1 == tostring(CoD.BlackMarketUtility.COD_POINTS_CURRENCY_ID) then
-			if f118_arg2 <= f118_local3 then
-				f118_local0 = true
-				f118_local1 = math.floor(f118_local3 / f118_arg2)
-			end
-		elseif f118_arg1 ~= tostring(CoD.BlackMarketUtility.RESERVE_CRATE_CURRENCY_ID) or f118_arg6 == CoD.BlackMarketUtility.RESERVER_CASE_BRIBE_ID then
-			local f118_local4 = Engine[@"hash_5352DC095BBB2A45"](f118_arg0, f118_arg1)
-			if f118_arg2 <= f118_local4 then
-				f118_local0 = true
-				f118_local1 = math.floor(f118_local4 / f118_arg2)
-				f118_local2 = math.floor(f118_local4 / f118_arg2)
-			end
+		local f117_local1 = f117_local0[1]
+		local f117_local2 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f117_local1, CoD.BlackMarketTableUtility.BribeTable.COL_CURRENCY)
+		local f117_local3 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f117_local1, CoD.BlackMarketTableUtility.BribeTable.COL_COST)
+		local f117_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f117_local1, CoD.BlackMarketTableUtility.BribeTable.COL_CURRENCY_OPTIONAL)
+		local f117_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f117_local1, CoD.BlackMarketTableUtility.BribeTable.COL_COST_OPTIONAL)
+		local f117_local6, f117_local7 = nil
+		if f117_local2 == tostring(CoD.BlackMarketUtility.COD_POINTS_CURRENCY_ID) then
+			f117_local6 = f117_local3
 		end
-	end
-	if f118_arg3 and f118_arg4 ~= "" and f118_arg3 and f118_arg4 ~= 0 then
-		if f118_arg5 and f118_local0 then
-			if Engine[@"hash_5352DC095BBB2A45"](f118_arg0, f118_arg3) < f118_arg4 then
-				f118_local0 = false
-				f118_local1 = 0
-			end
-		elseif f118_arg3 == tostring(CoD.BlackMarketUtility.COD_POINTS_CURRENCY_ID) then
-			if f118_arg4 <= f118_local3 then
-				f118_local0 = true
-				f118_local1 = f118_local1 + math.floor(f118_local3 / f118_arg4)
-			end
-		elseif f118_arg3 ~= tostring(CoD.BlackMarketUtility.RESERVE_CRATE_CURRENCY_ID) or f118_arg6 == CoD.BlackMarketUtility.RESERVER_CASE_BRIBE_ID then
-			local f118_local4 = Engine[@"hash_5352DC095BBB2A45"](f118_arg0, f118_arg3)
-			if f118_arg4 <= f118_local4 then
-				f118_local0 = true
-				f118_local1 = f118_local1 + math.floor(f118_local4 / f118_arg4)
-				f118_local2 = f118_local2 + math.floor(f118_local4 / f118_arg4)
-			end
+		if f117_local4 == tostring(CoD.BlackMarketUtility.RESERVE_CRATE_CURRENCY_ID) then
+			f117_local7 = f117_local5
 		end
-	end
-	if f118_arg7 and f118_arg6 then
-		if 0 < Engine[@"hash_5352DC095BBB2A45"](f118_arg0, f118_arg6) then
-			f118_local0 = false
-			f118_local1 = 0
-		else
-			f118_local1 = 1
-		end
-	end
-	return f118_local0, f118_local1, f118_local2
-end
-CoD.BlackMarketTableUtility.GetBribeInformation = function(f119_arg0, f119_arg1)
-	local f119_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.BribeTable.name, CoD.BlackMarketTableUtility.BribeTable.COL_NAMEHASH, f119_arg1)
-	if f119_local0 ~= nil then
-		local f119_local1 = f119_local0[1]
-		local f119_local2 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f119_local1, CoD.BlackMarketTableUtility.BribeTable.COL_CURRENCY)
-		local f119_local3 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f119_local1, CoD.BlackMarketTableUtility.BribeTable.COL_COST)
-		local f119_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f119_local1, CoD.BlackMarketTableUtility.BribeTable.COL_CURRENCY_OPTIONAL)
-		local f119_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f119_local1, CoD.BlackMarketTableUtility.BribeTable.COL_COST_OPTIONAL)
-		local f119_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f119_local1, CoD.BlackMarketTableUtility.BribeTable.COL_ITEM_EXCHANGE)
-		local f119_local7 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f119_local1, CoD.BlackMarketTableUtility.BribeTable.COL_ID)
-		local f119_local8, f119_local9, f119_local10 = CoD.BlackMarketTableUtility.CanPurchaseBribe(f119_arg0, f119_local2, f119_local3, f119_local4, f119_local5, f119_local6, f119_local7, Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f119_local1, CoD.BlackMarketTableUtility.BribeTable.COL_ONE_TIME))
 		return {
-			name = f119_arg1,
-			lootRule = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f119_local1, CoD.BlackMarketTableUtility.BribeTable.COL_LOOT_RULE),
-			bribeId = f119_local7,
-			currency = f119_local2,
-			price = f119_local3,
-			canPurchase = f119_local8,
-			quantity = f119_local9,
-			nonCpQuantity = f119_local10,
-			isSingleItem = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f119_local1, CoD.BlackMarketTableUtility.BribeTable.COL_SINGLE_ITEM),
-			optionalCost = f119_local5,
-			optionalCurrency = f119_local4,
-			stringName = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f119_local1, CoD.BlackMarketTableUtility.BribeTable.COL_STRING_NAME),
-			keyItem = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f119_local1, CoD.BlackMarketTableUtility.BribeTable.COL_KEY_ITEM),
-			bribeMenu = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f119_local1, CoD.BlackMarketTableUtility.BribeTable.COL_BRIBE_MENU),
-			sortIndex = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f119_local1, CoD.BlackMarketTableUtility.BribeTable.COL_SORT_ORDER),
+			price = f117_local6,
+			casePrice = f117_local7,
 		}
 	else
 		return nil
 	end
 end
-CoD.BlackMarketTableUtility.GetAllBribes = function(f120_arg0)
-	local f120_local0 = {}
-	local f120_local1 = Engine[@"gettablerowcount"](CoD.BlackMarketTableUtility.BribeTable.name)
-	for f120_local2 = 1, f120_local1, 1 do
-		table.insert(f120_local0, Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f120_local2 - 1, CoD.BlackMarketTableUtility.BribeTable.COL_NAMEHASH))
-	end
-	return f120_local0
-end
-CoD.BlackMarketTableUtility.GetRedeemableCPBribes = function(f121_arg0)
-	local f121_local0 = {}
-	for f121_local1 = Engine[@"gettablerowcount"](CoD.BlackMarketTableUtility.BribeTable.name), 1, -1 do
-		local f121_local4 = f121_local1 - 1
-		local f121_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f121_local4, CoD.BlackMarketTableUtility.BribeTable.COL_NAMEHASH)
-		local f121_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f121_local4, CoD.BlackMarketTableUtility.BribeTable.COL_CURRENCY)
-		local f121_local7 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f121_local4, CoD.BlackMarketTableUtility.BribeTable.COL_COST)
-		local f121_local8 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f121_local4, CoD.BlackMarketTableUtility.BribeTable.COL_CURRENCY_OPTIONAL)
-		local f121_local9 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f121_local4, CoD.BlackMarketTableUtility.BribeTable.COL_COST_OPTIONAL)
-		local f121_local10 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f121_local4, CoD.BlackMarketTableUtility.BribeTable.COL_ITEM_EXCHANGE)
-		local f121_local11 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f121_local4, CoD.BlackMarketTableUtility.BribeTable.COL_ID)
-		local f121_local12, f121_local13, f121_local14 = CoD.BlackMarketTableUtility.CanPurchaseBribe(f121_arg0, f121_local6, f121_local7, f121_local8, f121_local9, f121_local10, f121_local11, Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f121_local4, CoD.BlackMarketTableUtility.BribeTable.COL_ONE_TIME))
-		local f121_local15 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f121_local4, CoD.BlackMarketTableUtility.BribeTable.COL_SINGLE_ITEM)
-		local f121_local16 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f121_local4, CoD.BlackMarketTableUtility.BribeTable.COL_KEY_ITEM)
-		local f121_local17 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f121_local4, CoD.BlackMarketTableUtility.BribeTable.COL_BRIBE_MENU)
-		local f121_local18 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f121_local4, CoD.BlackMarketTableUtility.BribeTable.COL_SORT_ORDER)
-		if (f121_local6 == tostring(CoD.BlackMarketUtility.COD_POINTS_CURRENCY_ID) or f121_local8 == tostring(CoD.BlackMarketUtility.COD_POINTS_CURRENCY_ID) and not f121_local10) and f121_local12 and f121_local13 > 0 then
-			table.insert(f121_local0, {
-				name = f121_local5,
-				lootRule = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f121_local4, CoD.BlackMarketTableUtility.BribeTable.COL_LOOT_RULE),
-				bribeId = f121_local11,
-				currency = f121_local6,
-				price = f121_local7,
-				optionalCurrency = f121_local8,
-				optionalCost = f121_local9,
-				itemExchange = f121_local10,
-				canPurchase = f121_local12,
-				quantity = f121_local13,
-				nonCpQuantity = f121_local14,
-				isSingleItem = f121_local15,
-				keyItem = f121_local16,
-				bribeMenu = f121_local17,
-				sortIndex = f121_local18,
-			})
+CoD.BlackMarketTableUtility.GetAdditionalDrop = function(f118_arg0, f118_arg1)
+	local f118_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.BribeTable.name, CoD.BlackMarketTableUtility.BribeTable.COL_LOOT_RULE, f118_arg1)
+	if f118_local0 ~= nil then
+		return Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f118_local0[1], CoD.BlackMarketTableUtility.BribeTable.COL_ADDITIONAL_DROP)
+	else
+		f118_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.BribeTable.name, CoD.BlackMarketTableUtility.BribeTable.COL_DISCOUNT_LOOT_RULE, f118_arg1)
+		if f118_local0 ~= nil then
+			return Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f118_local0[1], CoD.BlackMarketTableUtility.BribeTable.COL_ADDITIONAL_DROP)
+		else
+			return nil
 		end
+	end
+end
+CoD.BlackMarketTableUtility.CanPurchaseBribe = function(f119_arg0, f119_arg1, f119_arg2, f119_arg3, f119_arg4, f119_arg5, f119_arg6, f119_arg7)
+	local f119_local0 = false
+	local f119_local1 = 0
+	local f119_local2 = 0
+	local f119_local3 = Engine[@"hash_2F40679B550DCCA2"](f119_arg0, CoD.Currencies.COD_POINTS)
+	if f119_arg1 and f119_arg1 ~= "" and f119_arg2 and f119_arg2 ~= 0 then
+		if f119_arg1 == tostring(CoD.BlackMarketUtility.COD_POINTS_CURRENCY_ID) then
+			if f119_arg2 <= f119_local3 then
+				f119_local0 = true
+				f119_local1 = math.floor(f119_local3 / f119_arg2)
+			end
+		elseif f119_arg1 ~= tostring(CoD.BlackMarketUtility.RESERVE_CRATE_CURRENCY_ID) or f119_arg6 == CoD.BlackMarketUtility.RESERVER_CASE_BRIBE_ID then
+			local f119_local4 = Engine[@"hash_5352DC095BBB2A45"](f119_arg0, f119_arg1)
+			if f119_arg2 <= f119_local4 then
+				f119_local0 = true
+				f119_local1 = math.floor(f119_local4 / f119_arg2)
+				f119_local2 = math.floor(f119_local4 / f119_arg2)
+			end
+		end
+	end
+	if f119_arg3 and f119_arg4 ~= "" and f119_arg3 and f119_arg4 ~= 0 then
+		if f119_arg5 and f119_local0 then
+			if Engine[@"hash_5352DC095BBB2A45"](f119_arg0, f119_arg3) < f119_arg4 then
+				f119_local0 = false
+				f119_local1 = 0
+			end
+		elseif f119_arg3 == tostring(CoD.BlackMarketUtility.COD_POINTS_CURRENCY_ID) then
+			if f119_arg4 <= f119_local3 then
+				f119_local0 = true
+				f119_local1 = f119_local1 + math.floor(f119_local3 / f119_arg4)
+			end
+		elseif f119_arg3 ~= tostring(CoD.BlackMarketUtility.RESERVE_CRATE_CURRENCY_ID) or f119_arg6 == CoD.BlackMarketUtility.RESERVER_CASE_BRIBE_ID then
+			local f119_local4 = Engine[@"hash_5352DC095BBB2A45"](f119_arg0, f119_arg3)
+			if f119_arg4 <= f119_local4 then
+				f119_local0 = true
+				f119_local1 = f119_local1 + math.floor(f119_local4 / f119_arg4)
+				f119_local2 = f119_local2 + math.floor(f119_local4 / f119_arg4)
+			end
+		end
+	end
+	if f119_arg7 and f119_arg6 then
+		if 0 < Engine[@"hash_5352DC095BBB2A45"](f119_arg0, f119_arg6) then
+			f119_local0 = false
+			f119_local1 = 0
+		else
+			f119_local1 = 1
+		end
+	end
+	return f119_local0, f119_local1, f119_local2
+end
+CoD.BlackMarketTableUtility.GetBribeInformation = function(f120_arg0, f120_arg1)
+	local f120_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.BribeTable.name, CoD.BlackMarketTableUtility.BribeTable.COL_NAMEHASH, f120_arg1)
+	if f120_local0 ~= nil then
+		local f120_local1 = f120_local0[1]
+		local f120_local2 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f120_local1, CoD.BlackMarketTableUtility.BribeTable.COL_CURRENCY)
+		local f120_local3 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f120_local1, CoD.BlackMarketTableUtility.BribeTable.COL_COST)
+		local f120_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f120_local1, CoD.BlackMarketTableUtility.BribeTable.COL_CURRENCY_OPTIONAL)
+		local f120_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f120_local1, CoD.BlackMarketTableUtility.BribeTable.COL_COST_OPTIONAL)
+		local f120_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f120_local1, CoD.BlackMarketTableUtility.BribeTable.COL_ITEM_EXCHANGE)
+		local f120_local7 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f120_local1, CoD.BlackMarketTableUtility.BribeTable.COL_ID)
+		local f120_local8, f120_local9, f120_local10 = CoD.BlackMarketTableUtility.CanPurchaseBribe(f120_arg0, f120_local2, f120_local3, f120_local4, f120_local5, f120_local6, f120_local7, Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f120_local1, CoD.BlackMarketTableUtility.BribeTable.COL_ONE_TIME))
+		return {
+			name = f120_arg1,
+			lootRule = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f120_local1, CoD.BlackMarketTableUtility.BribeTable.COL_LOOT_RULE),
+			bribeId = f120_local7,
+			currency = f120_local2,
+			price = f120_local3,
+			canPurchase = f120_local8,
+			quantity = f120_local9,
+			nonCpQuantity = f120_local10,
+			isSingleItem = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f120_local1, CoD.BlackMarketTableUtility.BribeTable.COL_SINGLE_ITEM),
+			optionalCost = f120_local5,
+			optionalCurrency = f120_local4,
+			stringName = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f120_local1, CoD.BlackMarketTableUtility.BribeTable.COL_STRING_NAME),
+			keyItem = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f120_local1, CoD.BlackMarketTableUtility.BribeTable.COL_KEY_ITEM),
+			bribeMenu = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f120_local1, CoD.BlackMarketTableUtility.BribeTable.COL_BRIBE_MENU),
+			sortIndex = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f120_local1, CoD.BlackMarketTableUtility.BribeTable.COL_SORT_ORDER),
+		}
+	else
+		return nil
+	end
+end
+CoD.BlackMarketTableUtility.GetAllBribes = function(f121_arg0)
+	local f121_local0 = {}
+	local f121_local1 = Engine.GetTableRowCount(CoD.BlackMarketTableUtility.BribeTable.name)
+	for f121_local2 = 1, f121_local1, 1 do
+		table.insert(f121_local0, Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f121_local2 - 1, CoD.BlackMarketTableUtility.BribeTable.COL_NAMEHASH))
 	end
 	return f121_local0
 end
-CoD.BlackMarketTableUtility.GetRedeemableNonCPBribes = function(f122_arg0)
+CoD.BlackMarketTableUtility.GetRedeemableCPBribes = function(f122_arg0)
 	local f122_local0 = {}
-	for f122_local1 = Engine[@"gettablerowcount"](CoD.BlackMarketTableUtility.BribeTable.name), 1, -1 do
+	for f122_local1 = Engine.GetTableRowCount(CoD.BlackMarketTableUtility.BribeTable.name), 1, -1 do
 		local f122_local4 = f122_local1 - 1
 		local f122_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f122_local4, CoD.BlackMarketTableUtility.BribeTable.COL_NAMEHASH)
 		local f122_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f122_local4, CoD.BlackMarketTableUtility.BribeTable.COL_CURRENCY)
@@ -2840,7 +2827,7 @@ CoD.BlackMarketTableUtility.GetRedeemableNonCPBribes = function(f122_arg0)
 		local f122_local16 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f122_local4, CoD.BlackMarketTableUtility.BribeTable.COL_KEY_ITEM)
 		local f122_local17 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f122_local4, CoD.BlackMarketTableUtility.BribeTable.COL_BRIBE_MENU)
 		local f122_local18 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f122_local4, CoD.BlackMarketTableUtility.BribeTable.COL_SORT_ORDER)
-		if (f122_local6 ~= tostring(CoD.BlackMarketUtility.COD_POINTS_CURRENCY_ID) or f122_local8 ~= tostring(CoD.BlackMarketUtility.COD_POINTS_CURRENCY_ID) and not f122_local10) and f122_local12 and f122_local13 > 0 then
+		if (f122_local6 == tostring(CoD.BlackMarketUtility.COD_POINTS_CURRENCY_ID) or f122_local8 == tostring(CoD.BlackMarketUtility.COD_POINTS_CURRENCY_ID) and not f122_local10) and f122_local12 and f122_local13 > 0 then
 			table.insert(f122_local0, {
 				name = f122_local5,
 				lootRule = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f122_local4, CoD.BlackMarketTableUtility.BribeTable.COL_LOOT_RULE),
@@ -2862,294 +2849,226 @@ CoD.BlackMarketTableUtility.GetRedeemableNonCPBribes = function(f122_arg0)
 	end
 	return f122_local0
 end
-CoD.BlackMarketTableUtility.IsBribeMenu = function(f123_arg0, f123_arg1)
-	local f123_local0 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.BribeTable.name, CoD.BlackMarketTableUtility.BribeTable.COL_STRING_NAME, f123_arg1)
-	if f123_local0 ~= nil then
-		return Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f123_local0[1], CoD.BlackMarketTableUtility.BribeTable.COL_BRIBE_MENU)
+CoD.BlackMarketTableUtility.GetRedeemableNonCPBribes = function(f123_arg0)
+	local f123_local0 = {}
+	for f123_local1 = Engine.GetTableRowCount(CoD.BlackMarketTableUtility.BribeTable.name), 1, -1 do
+		local f123_local4 = f123_local1 - 1
+		local f123_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f123_local4, CoD.BlackMarketTableUtility.BribeTable.COL_NAMEHASH)
+		local f123_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f123_local4, CoD.BlackMarketTableUtility.BribeTable.COL_CURRENCY)
+		local f123_local7 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f123_local4, CoD.BlackMarketTableUtility.BribeTable.COL_COST)
+		local f123_local8 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f123_local4, CoD.BlackMarketTableUtility.BribeTable.COL_CURRENCY_OPTIONAL)
+		local f123_local9 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f123_local4, CoD.BlackMarketTableUtility.BribeTable.COL_COST_OPTIONAL)
+		local f123_local10 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f123_local4, CoD.BlackMarketTableUtility.BribeTable.COL_ITEM_EXCHANGE)
+		local f123_local11 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f123_local4, CoD.BlackMarketTableUtility.BribeTable.COL_ID)
+		local f123_local12, f123_local13, f123_local14 = CoD.BlackMarketTableUtility.CanPurchaseBribe(f123_arg0, f123_local6, f123_local7, f123_local8, f123_local9, f123_local10, f123_local11, Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f123_local4, CoD.BlackMarketTableUtility.BribeTable.COL_ONE_TIME))
+		local f123_local15 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f123_local4, CoD.BlackMarketTableUtility.BribeTable.COL_SINGLE_ITEM)
+		local f123_local16 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f123_local4, CoD.BlackMarketTableUtility.BribeTable.COL_KEY_ITEM)
+		local f123_local17 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f123_local4, CoD.BlackMarketTableUtility.BribeTable.COL_BRIBE_MENU)
+		local f123_local18 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f123_local4, CoD.BlackMarketTableUtility.BribeTable.COL_SORT_ORDER)
+		if (f123_local6 ~= tostring(CoD.BlackMarketUtility.COD_POINTS_CURRENCY_ID) or f123_local8 ~= tostring(CoD.BlackMarketUtility.COD_POINTS_CURRENCY_ID) and not f123_local10) and f123_local12 and f123_local13 > 0 then
+			table.insert(f123_local0, {
+				name = f123_local5,
+				lootRule = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f123_local4, CoD.BlackMarketTableUtility.BribeTable.COL_LOOT_RULE),
+				bribeId = f123_local11,
+				currency = f123_local6,
+				price = f123_local7,
+				optionalCurrency = f123_local8,
+				optionalCost = f123_local9,
+				itemExchange = f123_local10,
+				canPurchase = f123_local12,
+				quantity = f123_local13,
+				nonCpQuantity = f123_local14,
+				isSingleItem = f123_local15,
+				keyItem = f123_local16,
+				bribeMenu = f123_local17,
+				sortIndex = f123_local18,
+			})
+		end
+	end
+	return f123_local0
+end
+CoD.BlackMarketTableUtility.IsBribeMenu = function(f124_arg0, f124_arg1)
+	local f124_local0 = Engine.TableFindRows(CoD.BlackMarketTableUtility.BribeTable.name, CoD.BlackMarketTableUtility.BribeTable.COL_STRING_NAME, f124_arg1)
+	if f124_local0 ~= nil then
+		return Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f124_local0[1], CoD.BlackMarketTableUtility.BribeTable.COL_BRIBE_MENU)
 	else
 		return false
 	end
 end
-CoD.BlackMarketTableUtility.GetWeaponBribeSelectionBribes = function(f124_arg0)
-	local f124_local0 = {}
-	for f124_local1 = Engine[@"gettablerowcount"](CoD.BlackMarketTableUtility.BribeTable.name), 1, -1 do
-		local f124_local4 = f124_local1 - 1
-		local f124_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f124_local4, CoD.BlackMarketTableUtility.BribeTable.COL_BRIBE_MENU)
-		if f124_local5 then
-			local f124_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f124_local4, CoD.BlackMarketTableUtility.BribeTable.COL_NAMEHASH)
-			local f124_local7 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f124_local4, CoD.BlackMarketTableUtility.BribeTable.COL_CURRENCY)
-			local f124_local8 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f124_local4, CoD.BlackMarketTableUtility.BribeTable.COL_COST)
-			local f124_local9 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f124_local4, CoD.BlackMarketTableUtility.BribeTable.COL_CURRENCY_OPTIONAL)
-			local f124_local10 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f124_local4, CoD.BlackMarketTableUtility.BribeTable.COL_COST_OPTIONAL)
-			local f124_local11 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f124_local4, CoD.BlackMarketTableUtility.BribeTable.COL_ITEM_EXCHANGE)
-			local f124_local12 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f124_local4, CoD.BlackMarketTableUtility.BribeTable.COL_ID)
-			local f124_local13, f124_local14, f124_local15 = CoD.BlackMarketTableUtility.CanPurchaseBribe(f124_arg0, f124_local7, f124_local8, f124_local9, f124_local10, f124_local11, f124_local12, Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f124_local4, CoD.BlackMarketTableUtility.BribeTable.COL_ONE_TIME))
-			table.insert(f124_local0, {
-				name = f124_local6,
-				lootRule = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f124_local4, CoD.BlackMarketTableUtility.BribeTable.COL_LOOT_RULE),
-				bribeId = f124_local12,
-				currency = f124_local7,
-				price = f124_local8,
-				optionalCurrency = f124_local9,
-				optionalCost = f124_local10,
-				itemExchange = f124_local11,
-				canPurchase = f124_local13,
-				quantity = f124_local14,
-				nonCpQuantity = f124_local15,
-				isSingleItem = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f124_local4, CoD.BlackMarketTableUtility.BribeTable.COL_SINGLE_ITEM),
-				keyItem = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f124_local4, CoD.BlackMarketTableUtility.BribeTable.COL_KEY_ITEM),
-				bribeMenu = f124_local5,
-				sortIndex = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f124_local4, CoD.BlackMarketTableUtility.BribeTable.COL_SORT_ORDER),
-				stringName = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f124_local4, CoD.BlackMarketTableUtility.BribeTable.COL_STRING_NAME),
-			})
+CoD.BlackMarketTableUtility.GetWeaponBribeSelectionBribes = function(f125_arg0)
+	local f125_local0 = {}
+	local f125_local1 = {}
+	local f125_local2 = {}
+	local f125_local3 = CoD.BlackMarketUtility.IsHalfOffPickWeaponBribeActive()
+	local f125_local4 = CoD.BlackMarketUtility.IsFreePickWeaponBribeAvailable(f125_arg0)
+	local f125_local5 = Engine.GetTableRowCount(CoD.BlackMarketTableUtility.BribeTable.name)
+	for f125_local6 = 1, f125_local5, 1 do
+		local f125_local9 = f125_local6 - 1
+		local f125_local10 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f125_local9, CoD.BlackMarketTableUtility.BribeTable.COL_NAMEHASH)
+		local f125_local11 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f125_local9, CoD.BlackMarketTableUtility.BribeTable.COL_IS_FREE)
+		local f125_local12 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f125_local9, CoD.BlackMarketTableUtility.BribeTable.COL_BRIBE_MENU)
+		if f125_local12 and not f125_local11 then
+			local f125_local13 = f125_local10 .. "_free"
+			f125_local1[f125_local13] = f125_local10
+			if f125_local2[f125_local13] then
+				f125_local2[f125_local13].assetName = f125_local10
+			end
+		end
+		if f125_local12 and f125_local4 == f125_local11 then
+			local f125_local13 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f125_local9, CoD.BlackMarketTableUtility.BribeTable.COL_CURRENCY)
+			local f125_local14 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f125_local9, CoD.BlackMarketTableUtility.BribeTable.COL_COST)
+			local f125_local15 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f125_local9, CoD.BlackMarketTableUtility.BribeTable.COL_CURRENCY_OPTIONAL)
+			local f125_local16 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f125_local9, CoD.BlackMarketTableUtility.BribeTable.COL_COST_OPTIONAL)
+			local f125_local17 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f125_local9, CoD.BlackMarketTableUtility.BribeTable.COL_ITEM_EXCHANGE)
+			local f125_local18 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f125_local9, CoD.BlackMarketTableUtility.BribeTable.COL_ID)
+			local f125_local19 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f125_local9, CoD.BlackMarketTableUtility.BribeTable.COL_ONE_TIME)
+			local f125_local20 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f125_local9, CoD.BlackMarketTableUtility.BribeTable.COL_SINGLE_ITEM)
+			local f125_local21 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f125_local9, CoD.BlackMarketTableUtility.BribeTable.COL_KEY_ITEM)
+			local f125_local22 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f125_local9, CoD.BlackMarketTableUtility.BribeTable.COL_SORT_ORDER)
+			local f125_local23 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f125_local9, CoD.BlackMarketTableUtility.BribeTable.COL_STRING_NAME)
+			local f125_local24 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f125_local9, CoD.BlackMarketTableUtility.BribeTable.COL_LOOT_RULE)
+			local f125_local25 = f125_local10
+			if f125_local11 and f125_local1[f125_local25] then
+				f125_local25 = f125_local1[f125_local25]
+			end
+			if not f125_local11 and f125_local3 then
+				f125_local24 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f125_local9, CoD.BlackMarketTableUtility.BribeTable.COL_DISCOUNT_LOOT_RULE)
+				f125_local14 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f125_local9, CoD.BlackMarketTableUtility.BribeTable.COL_DISCOUNT_COST)
+				f125_local16 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f125_local9, CoD.BlackMarketTableUtility.BribeTable.COL_DISCOUNT_COST_OPTIONAL)
+			end
+			local f125_local26, f125_local27, f125_local28 = CoD.BlackMarketTableUtility.CanPurchaseBribe(f125_arg0, f125_local13, f125_local14, f125_local15, f125_local16, f125_local17, f125_local18, f125_local19)
+			local f125_local29 = {
+				name = f125_local10,
+				assetName = f125_local25,
+				lootRule = f125_local24,
+				bribeId = f125_local18,
+				currency = f125_local13,
+				price = f125_local14,
+				optionalCurrency = f125_local15,
+				optionalCost = f125_local16,
+				itemExchange = f125_local17,
+				canPurchase = f125_local26,
+				quantity = f125_local27,
+				nonCpQuantity = f125_local28,
+				isSingleItem = f125_local20,
+				keyItem = f125_local21,
+				bribeMenu = f125_local12,
+				sortIndex = f125_local22,
+				stringName = f125_local23,
+			}
+			table.insert(f125_local0, f125_local29)
+			if f125_local11 then
+				f125_local2[f125_local10] = f125_local29
+			end
 		end
 	end
-	return f124_local0
+	return f125_local0
 end
-CoD.BlackMarketTableUtility.GetLootInfoForCamo = function(f125_arg0, f125_arg1, f125_arg2, f125_arg3)
-	if f125_arg3 and f125_arg3 ~= 0x0 then
+CoD.BlackMarketTableUtility.PlayerHasUnownedWeaponBribe = function(f126_arg0)
+	for f126_local0 = Engine.GetTableRowCount(CoD.BlackMarketTableUtility.BribeTable.name), 1, -1 do
+		local f126_local3 = f126_local0 - 1
+		if Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f126_local3, CoD.BlackMarketTableUtility.BribeTable.COL_BRIBE_MENU) and not Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f126_local3, CoD.BlackMarketTableUtility.BribeTable.COL_IS_FREE) then
+			local f126_local4 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BribeTable.name, f126_local3, CoD.BlackMarketTableUtility.BribeTable.COL_KEY_ITEM)
+			if f126_local4 and f126_local4 ~= "" and Engine[@"hash_5352DC095BBB2A45"](f126_arg0, f126_local4) == 0 then
+				return true
+			end
+		end
+	end
+	return false
+end
+CoD.BlackMarketTableUtility.GetLootInfoForCamo = function(f127_arg0, f127_arg1, f127_arg2, f127_arg3)
+	if f127_arg3 and f127_arg3 ~= 0x0 then
 		return {
 			isLoot = false,
 			isEntitlement = true,
-			owned = Engine[@"hasentitlement"](f125_arg0, f125_arg3),
-			unlockInfo = Engine[@"hash_4F9F1239CFD921FE"](Engine[@"hash_2F9DAA00F0637292"](f125_arg3)),
+			owned = Engine.HasEntitlement(f127_arg0, f127_arg3),
+			unlockInfo = Engine[@"hash_4F9F1239CFD921FE"](Engine[@"hash_2F9DAA00F0637292"](f127_arg3)),
 		}
 	end
-	local f125_local0 = CoD.BlackMarketTableUtility.PerWeaponCamoLookup(f125_arg0, f125_arg1, f125_arg2)
-	if f125_local0.isLoot == false then
-		f125_local0 = CoD.BlackMarketTableUtility.LootInfoLookup(f125_arg0, f125_arg1)
+	local f127_local0 = CoD.BlackMarketTableUtility.PerWeaponCamoLookup(f127_arg0, f127_arg1, f127_arg2)
+	if f127_local0.isLoot == false then
+		f127_local0 = CoD.BlackMarketTableUtility.LootInfoLookup(f127_arg0, f127_arg1)
 	end
-	return f125_local0
+	return f127_local0
 end
 CoD.BlackMarketTableUtility.DefaultWeaponCamoLookupResult = {
 	isLoot = false,
 	available = false,
 	owned = false,
-	rarity = @"invalid",
+	rarity = "invalid",
 }
-CoD.BlackMarketTableUtility.PerWeaponCamoLookup = function(f126_arg0, f126_arg1, f126_arg2)
-	if not f126_arg1 or f126_arg1 == 0x0 then
+CoD.BlackMarketTableUtility.PerWeaponCamoLookup = function(f128_arg0, f128_arg1, f128_arg2)
+	if not f128_arg1 or f128_arg1 == 0x0 then
 		return CoD.BlackMarketTableUtility.DefaultWeaponCamoLookupResult
 	end
-	local f126_local0 = true
-	if not IsBooleanDvarSet(@"loot_enableblackmarket") then
-		f126_local0 = false
+	local f128_local0 = true
+	if not IsBooleanDvarSet("loot_enableblackmarket") then
+		f128_local0 = false
 	end
-	local f126_local1 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ContrabandTable.name, CoD.BlackMarketTableUtility.ContrabandTable.COL_NAMEHASH, f126_arg1)
-	if f126_local1 ~= nil then
-		for f126_local2 = 1, #f126_local1, 1 do
-			local f126_local5 = f126_local1[f126_local2]
-			if f126_arg2 == Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f126_local5, CoD.BlackMarketTableUtility.ContrabandTable.COL_REFWEAPON) then
-				local f126_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f126_local5, CoD.BlackMarketTableUtility.ContrabandTable.COL_RARITY)
-				local f126_local7 = true
-				local f126_local8 = Engine[@"hash_34509DFCBC7BC5CE"](f126_arg0, Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f126_local5, CoD.BlackMarketTableUtility.ContrabandTable.COL_ID)) > 0
-				local f126_local9 = f126_local8
-				local f126_local10 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f126_local5, CoD.BlackMarketTableUtility.ContrabandTable.COL_SET)
-				if f126_local10 == 0x0 then
-					f126_local10 = nil
+	local f128_local1 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ContrabandTable.name, CoD.BlackMarketTableUtility.ContrabandTable.COL_NAMEHASH, f128_arg1)
+	if f128_local1 ~= nil then
+		for f128_local2 = 1, #f128_local1, 1 do
+			local f128_local5 = f128_local1[f128_local2]
+			if f128_arg2 == Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f128_local5, CoD.BlackMarketTableUtility.ContrabandTable.COL_REFWEAPON) then
+				local f128_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f128_local5, CoD.BlackMarketTableUtility.ContrabandTable.COL_RARITY)
+				local f128_local7 = true
+				local f128_local8 = Engine[@"hash_34509DFCBC7BC5CE"](f128_arg0, Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f128_local5, CoD.BlackMarketTableUtility.ContrabandTable.COL_ID)) > 0
+				local f128_local9 = f128_local8
+				local f128_local10 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f128_local5, CoD.BlackMarketTableUtility.ContrabandTable.COL_SET)
+				if f128_local10 == 0x0 then
+					f128_local10 = nil
 				end
-				local f126_local11 = false
-				local f126_local12 = LuaEnum.LOOT_TYPE.CONTRABAND
-				local f126_local13 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_444870138E328735")
-				if not f126_local9 then
-					f126_local13 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_282246B89B2146A0")
+				local f128_local11 = false
+				local f128_local12 = LuaEnum.LOOT_TYPE.CONTRABAND
+				local f128_local13 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_444870138E328735")
+				if not f128_local9 then
+					f128_local13 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_282246B89B2146A0")
 				end
 				return {
-					rarity = f126_local6,
-					isLoot = f126_local7,
-					owned = f126_local8,
-					available = f126_local9,
-					inSet = f126_local10,
-					setMaster = f126_local11,
-					lootType = f126_local12,
-					unlockInfo = f126_local13,
+					rarity = f128_local6,
+					isLoot = f128_local7,
+					owned = f128_local8,
+					available = f128_local9,
+					inSet = f128_local10,
+					setMaster = f128_local11,
+					lootType = f128_local12,
+					unlockInfo = f128_local13,
 				}
 			end
 		end
 	end
 	return CoD.BlackMarketTableUtility.DefaultWeaponCamoLookupResult
 end
-CoD.BlackMarketTableUtility.SimpleLootLookupTypes = LuaEnum.createEnum(@"none", @"loot", @"entitlement", @"stat")
-CoD.BlackMarketTableUtility.SimpleLootLookup = function(f127_arg0, f127_arg1, f127_arg2)
-	if not f127_arg1 or f127_arg1 == 0x0 then
-		return CoD.BlackMarketTableUtility.SimpleLootLookupTypes[@"none"], false
-	elseif CoD.isPC and CoD.PCKoreaUtility.ShowKorea15Plus() then
-		local f127_local0 = Engine[@"tablelookup"](CoD.BlackMarketUtility.lootEmblemTableName, 3, 13, f127_arg1)
-		if f127_local0 and f127_local0 ~= 0x0 then
-			f127_arg1 = f127_local0
-		else
-			f127_local0 = Engine[@"tablelookup"](CoD.BlackMarketUtility.backgroundsTable, 3, 19, f127_arg1)
-			if f127_local0 and f127_local0 ~= 0x0 then
-				f127_arg1 = f127_local0
-			end
-		end
-	end
-	local f127_local0, f127_local1 = CoD.BlackMarketTableUtility[@"hash_762B0EE548400BF2"](f127_arg0, f127_arg1)
-	if f127_local0 and not f127_local1 then
-		return CoD.BlackMarketTableUtility.SimpleLootLookupTypes[@"loot"], false
-	end
-	local f127_local2, f127_local3 = CoD.BlackMarketTableUtility[@"hash_25DDB72D0172A035"](f127_arg0, f127_arg1)
-	if f127_local2 and not f127_local3 then
-		return CoD.BlackMarketTableUtility.SimpleLootLookupTypes[@"loot"], false
-	end
-	local f127_local4, f127_local5 = CoD.BlackMarketTableUtility[@"hash_1214319EDB448F3B"](f127_arg0, f127_arg1)
-	if f127_local4 and not f127_local5 then
-		return CoD.BlackMarketTableUtility.SimpleLootLookupTypes[@"loot"], false
-	end
-	local f127_local6, f127_local7 = CoDShared.IsLootItemOwnedByNameSimple(f127_arg0, f127_arg1)
-	if f127_local6 then
-		return CoD.BlackMarketTableUtility.SimpleLootLookupTypes[@"loot"], f127_local7
-	end
-	local f127_local8 = CoD.BlackMarketTableUtility.GetStatsBasedUnlockId()
-	local f127_local9 = f127_local8 and f127_local8[f127_arg1]
-	if f127_local9 then
-		local f127_local10 = function(f128_arg0)
-			local f128_local0 = false
-			if f128_arg0.storageFile and f128_arg0.path and #f128_arg0.path > 0 then
-				local f128_local1 = Engine[@"storagegetbuffer"](f127_arg0, f128_arg0.storageFile)
-				if f128_local1 then
-					f128_local1 = LUI.getTableFromFieldList(f128_arg0.path, f128_local1)
-				end
-				if not f128_local1 or f128_local1:get() == 0 then
-					f128_local0 = false
-				else
-					f128_local0 = true
-				end
-			elseif f128_arg0.itemOwned then
-				f128_local0 = f128_arg0.itemOwned(f127_arg0)
-			end
-			local f128_local1 = true
-			if f128_arg0.itemUnlockable then
-				f128_local1 = f128_arg0.itemUnlockable()
-			end
-			if f128_local0 then
-				if f128_arg0.notOwnedWhenUnavilable then
-					f128_local0 = f128_local1
-				else
-					f128_local0 = true
-				end
-			end
-			return f128_local0
-		end
-		local f127_local11 = false
-		if f127_local9.linkedLootIds and #f127_local9.linkedLootIds > 0 then
-			for f127_local15, f127_local16 in ipairs(f127_local9.linkedLootIds) do
-				if f127_local10(f127_local8[f127_local16]) then
-					f127_local11 = true
-				end
-			end
-		else
-			f127_local11 = f127_local10(f127_local9)
-		end
-		return CoD.BlackMarketTableUtility.SimpleLootLookupTypes[@"stat"], f127_local11
-	elseif f127_arg2 and f127_arg2 ~= 0x0 then
-		return CoD.BlackMarketTableUtility.SimpleLootLookupTypes[@"entitlement"], Engine[@"hasentitlement"](f127_arg0, f127_arg2)
-	end
-	return CoD.BlackMarketTableUtility.SimpleLootLookupTypes[@"none"], false
-end
-local f0_local0 = {
-	isLoot = false,
-	available = false,
-	owned = false,
-	rarity = @"invalid",
-}
-CoD.BlackMarketTableUtility.LootInfoLookup = function(f129_arg0, f129_arg1, f129_arg2, f129_arg3)
+CoD.BlackMarketTableUtility.SimpleLootLookupTypes = LuaEnum.createEnum("none", "loot", @"entitlement", "stat")
+CoD.BlackMarketTableUtility.SimpleLootLookup = function(f129_arg0, f129_arg1, f129_arg2)
 	if not f129_arg1 or f129_arg1 == 0x0 then
-		return f0_local0
-	end
-	local f129_local0 = true
-	if not IsBooleanDvarSet(@"loot_enableblackmarket") then
-		f129_local0 = false
-	end
-	if CoD.isPC and CoD.PCKoreaUtility.ShowKorea15Plus() then
-		local f129_local1 = Engine[@"tablelookup"](CoD.BlackMarketUtility.lootEmblemTableName, 3, 13, f129_arg1)
-		if f129_local1 and f129_local1 ~= 0x0 then
-			f129_arg1 = f129_local1
+		return CoD.BlackMarketTableUtility.SimpleLootLookupTypes.none, false
+	elseif CoD.isPC and CoD.PCKoreaUtility.ShowKorea15Plus() then
+		local f129_local0 = Engine.TableLookup(CoD.BlackMarketUtility.lootEmblemTableName, 3, 13, f129_arg1)
+		if f129_local0 and f129_local0 ~= 0x0 then
+			f129_arg1 = f129_local0
 		else
-			f129_local1 = Engine[@"tablelookup"](CoD.BlackMarketUtility.backgroundsTable, 3, 19, f129_arg1)
-			if f129_local1 and f129_local1 ~= 0x0 then
-				f129_arg1 = f129_local1
+			f129_local0 = Engine.TableLookup(CoD.BlackMarketUtility.backgroundsTable, 3, 19, f129_arg1)
+			if f129_local0 and f129_local0 ~= 0x0 then
+				f129_arg1 = f129_local0
 			end
 		end
 	end
-	local f129_local1, f129_local2 = CoD.BlackMarketTableUtility[@"hash_762B0EE548400BF2"](f129_arg0, f129_arg1)
-	if f129_local1 and not f129_local2 then
-		return {
-			isLoot = true,
-			available = false,
-			owned = false,
-			rarity = @"invalid",
-		}
+	local f129_local0, f129_local1 = CoD.BlackMarketTableUtility[@"hash_762B0EE548400BF2"](f129_arg0, f129_arg1)
+	if f129_local0 and not f129_local1 then
+		return CoD.BlackMarketTableUtility.SimpleLootLookupTypes.loot, false
 	end
-	local f129_local3, f129_local4 = CoD.BlackMarketTableUtility[@"hash_25DDB72D0172A035"](f129_arg0, f129_arg1)
-	if f129_local3 and not f129_local4 then
-		return {
-			isLoot = true,
-			available = false,
-			owned = false,
-			rarity = @"invalid",
-		}
+	local f129_local2, f129_local3 = CoD.BlackMarketTableUtility[@"hash_25DDB72D0172A035"](f129_arg0, f129_arg1)
+	if f129_local2 and not f129_local3 then
+		return CoD.BlackMarketTableUtility.SimpleLootLookupTypes.loot, false
 	end
-	local f129_local5, f129_local6 = CoD.BlackMarketTableUtility[@"hash_1214319EDB448F3B"](f129_arg0, f129_arg1)
-	if f129_local5 and not f129_local6 then
-		return {
-			isLoot = true,
-			available = false,
-			owned = false,
-			rarity = @"invalid",
-		}
+	local f129_local4, f129_local5 = CoD.BlackMarketTableUtility[@"hash_1214319EDB448F3B"](f129_arg0, f129_arg1)
+	if f129_local4 and not f129_local5 then
+		return CoD.BlackMarketTableUtility.SimpleLootLookupTypes.loot, false
 	end
-	local f129_local7 = CoDShared.LootIndexInfoLookup(f129_arg1, f129_arg3)
-	if f129_local7 then
-		local f129_local8 = {}
-		local f129_local9 = f129_local7.table
-		if f129_local9 == @"season" then
-			local f129_local10 = CoD.BlackMarketTableUtility.GetSeasonInfoForPlayer(f129_arg0, f129_arg1, f129_local7.season, f129_local7.bundles, f129_arg3)
-			if not f129_local10 then
-				f129_local10 = f0_local0
-			end
-			return f129_local10
-		elseif f129_local9 == @"contraband" then
-			local f129_local10 = CoD.BlackMarketTableUtility.GetContrabandInfoForPlayer(f129_arg0, f129_arg1, f129_local7.bundles, f129_arg3)
-			if not f129_local10 then
-				f129_local10 = f0_local0
-			end
-			return f129_local10
-		elseif f129_local9 == @"contract" then
-			local f129_local10 = CoD.BlackMarketTableUtility.GetContractInfoForPlayer(f129_arg0, f129_arg1, f129_local7.bundles, f129_arg3)
-			if not f129_local10 then
-				f129_local10 = f0_local0
-			end
-			return f129_local10
-		elseif f129_local9 == @"bonus" then
-			local f129_local10 = CoD.BlackMarketTableUtility.GetBonusItemInfoForPlayer(f129_arg0, f129_arg1, f129_arg3)
-			if not f129_local10 then
-				f129_local10 = f0_local0
-			end
-			return f129_local10
-		elseif f129_local9 == @"hash_731315EF3FB1AE07" then
-			local f129_local10 = CoD.BlackMarketTableUtility.GetItemShopInfoForPlayer(f129_arg0, f129_arg1, f129_local7.bundles, f129_arg3)
-			if f129_local10 then
-				return f129_local10
-			end
-			local f129_local11 = CoD.BlackMarketTableUtility.GetBundleItemInfoForPlayer(f129_arg0, f129_arg1, f129_arg3)
-			if not f129_local11 then
-				f129_local11 = f0_local0
-			end
-			return f129_local11
-		elseif f129_local9 == @"bundles" then
-			local f129_local10 = CoD.BlackMarketTableUtility.GetBundleItemInfoForPlayer(f129_arg0, f129_arg1, f129_arg3)
-			if not f129_local10 then
-				f129_local10 = f0_local0
-			end
-			return f129_local10
-		elseif f129_local9 == @"backfill" then
-			local f129_local10 = CoD.BlackMarketTableUtility[0xC3056CABEF9D99](f129_arg1, f129_arg3)
-			if not f129_local10 then
-				f129_local10 = f0_local0
-			end
-			return f129_local10
-		end
+	local f129_local6, f129_local7 = CoDShared.IsLootItemOwnedByNameSimple(f129_arg0, f129_arg1)
+	if f129_local6 then
+		return CoD.BlackMarketTableUtility.SimpleLootLookupTypes.loot, f129_local7
 	end
 	local f129_local8 = CoD.BlackMarketTableUtility.GetStatsBasedUnlockId()
 	local f129_local9 = f129_local8 and f129_local8[f129_arg1]
@@ -3157,7 +3076,7 @@ CoD.BlackMarketTableUtility.LootInfoLookup = function(f129_arg0, f129_arg1, f129
 		local f129_local10 = function(f130_arg0)
 			local f130_local0 = false
 			if f130_arg0.storageFile and f130_arg0.path and #f130_arg0.path > 0 then
-				local f130_local1 = Engine[@"storagegetbuffer"](f129_arg0, f130_arg0.storageFile)
+				local f130_local1 = Engine.StorageGetBuffer(f129_arg0, f130_arg0.storageFile)
 				if f130_local1 then
 					f130_local1 = LUI.getTableFromFieldList(f130_arg0.path, f130_local1)
 				end
@@ -3180,77 +3099,228 @@ CoD.BlackMarketTableUtility.LootInfoLookup = function(f129_arg0, f129_arg1, f129
 					f130_local0 = true
 				end
 			end
-			local f130_local2 = ""
-			if f130_local0 then
-				if f130_arg0.unlockedStringRef then
-					f130_local2 = Engine[@"hash_4F9F1239CFD921FE"](f130_arg0.unlockedStringRef)
-				elseif f130_arg0.unlockedStringLookup then
-					f130_local2 = f130_arg0.unlockedStringLookup()
+			return f130_local0
+		end
+		local f129_local11 = false
+		if f129_local9.linkedLootIds and #f129_local9.linkedLootIds > 0 then
+			for f129_local15, f129_local16 in ipairs(f129_local9.linkedLootIds) do
+				if f129_local10(f129_local8[f129_local16]) then
+					f129_local11 = true
 				end
-			elseif f130_local1 then
-				if f130_arg0.lockedStringRef then
-					f130_local2 = Engine[@"hash_4F9F1239CFD921FE"](f130_arg0.lockedStringRef)
-				elseif f130_arg0.lockedStringLookup then
-					f130_local2 = f130_arg0.lockedStringLookup()
+			end
+		else
+			f129_local11 = f129_local10(f129_local9)
+		end
+		return CoD.BlackMarketTableUtility.SimpleLootLookupTypes.stat, f129_local11
+	elseif f129_arg2 and f129_arg2 ~= 0x0 then
+		return CoD.BlackMarketTableUtility.SimpleLootLookupTypes[@"entitlement"], Engine.HasEntitlement(f129_arg0, f129_arg2)
+	end
+	return CoD.BlackMarketTableUtility.SimpleLootLookupTypes.none, false
+end
+local f0_local0 = {
+	isLoot = false,
+	available = false,
+	owned = false,
+	rarity = "invalid",
+}
+CoD.BlackMarketTableUtility.LootInfoLookup = function(f131_arg0, f131_arg1, f131_arg2, f131_arg3)
+	if not f131_arg1 or f131_arg1 == 0x0 then
+		return f0_local0
+	end
+	local f131_local0 = true
+	if not IsBooleanDvarSet("loot_enableblackmarket") then
+		f131_local0 = false
+	end
+	if CoD.isPC and CoD.PCKoreaUtility.ShowKorea15Plus() then
+		local f131_local1 = Engine.TableLookup(CoD.BlackMarketUtility.lootEmblemTableName, 3, 13, f131_arg1)
+		if f131_local1 and f131_local1 ~= 0x0 then
+			f131_arg1 = f131_local1
+		else
+			f131_local1 = Engine.TableLookup(CoD.BlackMarketUtility.backgroundsTable, 3, 19, f131_arg1)
+			if f131_local1 and f131_local1 ~= 0x0 then
+				f131_arg1 = f131_local1
+			end
+		end
+	end
+	local f131_local1, f131_local2 = CoD.BlackMarketTableUtility[@"hash_762B0EE548400BF2"](f131_arg0, f131_arg1)
+	if f131_local1 and not f131_local2 then
+		return {
+			isLoot = true,
+			available = false,
+			owned = false,
+			rarity = "invalid",
+		}
+	end
+	local f131_local3, f131_local4 = CoD.BlackMarketTableUtility[@"hash_25DDB72D0172A035"](f131_arg0, f131_arg1)
+	if f131_local3 and not f131_local4 then
+		return {
+			isLoot = true,
+			available = false,
+			owned = false,
+			rarity = "invalid",
+		}
+	end
+	local f131_local5, f131_local6 = CoD.BlackMarketTableUtility[@"hash_1214319EDB448F3B"](f131_arg0, f131_arg1)
+	if f131_local5 and not f131_local6 then
+		return {
+			isLoot = true,
+			available = false,
+			owned = false,
+			rarity = "invalid",
+		}
+	end
+	local f131_local7 = CoDShared.LootIndexInfoLookup(f131_arg1, f131_arg3)
+	if f131_local7 then
+		local f131_local8 = {}
+		local f131_local9 = f131_local7.table
+		if f131_local9 == "season" then
+			local f131_local10 = CoD.BlackMarketTableUtility.GetSeasonInfoForPlayer(f131_arg0, f131_arg1, f131_local7.season, f131_local7.bundles, f131_arg3)
+			if not f131_local10 then
+				f131_local10 = f0_local0
+			end
+			return f131_local10
+		elseif f131_local9 == "contraband" then
+			local f131_local10 = CoD.BlackMarketTableUtility.GetContrabandInfoForPlayer(f131_arg0, f131_arg1, f131_local7.bundles, f131_arg3)
+			if not f131_local10 then
+				f131_local10 = f0_local0
+			end
+			return f131_local10
+		elseif f131_local9 == "contract" then
+			local f131_local10 = CoD.BlackMarketTableUtility.GetContractInfoForPlayer(f131_arg0, f131_arg1, f131_local7.bundles, f131_arg3)
+			if not f131_local10 then
+				f131_local10 = f0_local0
+			end
+			return f131_local10
+		elseif f131_local9 == "bonus" then
+			local f131_local10 = CoD.BlackMarketTableUtility.GetBonusItemInfoForPlayer(f131_arg0, f131_arg1, f131_arg3)
+			if not f131_local10 then
+				f131_local10 = f0_local0
+			end
+			return f131_local10
+		elseif f131_local9 == "item_shop" then
+			local f131_local10 = CoD.BlackMarketTableUtility.GetItemShopInfoForPlayer(f131_arg0, f131_arg1, f131_local7.bundles, f131_arg3)
+			if f131_local10 then
+				return f131_local10
+			end
+			local f131_local11 = CoD.BlackMarketTableUtility.GetBundleItemInfoForPlayer(f131_arg0, f131_arg1, f131_arg3)
+			if not f131_local11 then
+				f131_local11 = f0_local0
+			end
+			return f131_local11
+		elseif f131_local9 == "bundles" then
+			local f131_local10 = CoD.BlackMarketTableUtility.GetBundleItemInfoForPlayer(f131_arg0, f131_arg1, f131_arg3)
+			if not f131_local10 then
+				f131_local10 = f0_local0
+			end
+			return f131_local10
+		elseif f131_local9 == "backfill" then
+			local f131_local10 = CoD.BlackMarketTableUtility[0xC3056CABEF9D99](f131_arg1, f131_arg3)
+			if not f131_local10 then
+				f131_local10 = f0_local0
+			end
+			return f131_local10
+		end
+	end
+	local f131_local8 = CoD.BlackMarketTableUtility.GetStatsBasedUnlockId()
+	local f131_local9 = f131_local8 and f131_local8[f131_arg1]
+	if f131_local9 then
+		local f131_local10 = function(f132_arg0)
+			local f132_local0 = false
+			if f132_arg0.storageFile and f132_arg0.path and #f132_arg0.path > 0 then
+				local f132_local1 = Engine.StorageGetBuffer(f131_arg0, f132_arg0.storageFile)
+				if f132_local1 then
+					f132_local1 = LUI.getTableFromFieldList(f132_arg0.path, f132_local1)
+				end
+				if not f132_local1 or f132_local1:get() == 0 then
+					f132_local0 = false
+				else
+					f132_local0 = true
+				end
+			elseif f132_arg0.itemOwned then
+				f132_local0 = f132_arg0.itemOwned(f131_arg0)
+			end
+			local f132_local1 = true
+			if f132_arg0.itemUnlockable then
+				f132_local1 = f132_arg0.itemUnlockable()
+			end
+			if f132_local0 then
+				if f132_arg0.notOwnedWhenUnavilable then
+					f132_local0 = f132_local1
+				else
+					f132_local0 = true
+				end
+			end
+			local f132_local2 = ""
+			if f132_local0 then
+				if f132_arg0.unlockedStringRef then
+					f132_local2 = Engine[@"hash_4F9F1239CFD921FE"](f132_arg0.unlockedStringRef)
+				elseif f132_arg0.unlockedStringLookup then
+					f132_local2 = f132_arg0.unlockedStringLookup()
+				end
+			elseif f132_local1 then
+				if f132_arg0.lockedStringRef then
+					f132_local2 = Engine[@"hash_4F9F1239CFD921FE"](f132_arg0.lockedStringRef)
+				elseif f132_arg0.lockedStringLookup then
+					f132_local2 = f132_arg0.lockedStringLookup()
 				end
 			end
 			return {
 				isLoot = true,
-				available = f130_local0 or f130_local1,
-				owned = f130_local0,
-				rarity = @"invalid",
-				unlockInfo = f130_local2,
+				available = f132_local0 or f132_local1,
+				owned = f132_local0,
+				rarity = "invalid",
+				unlockInfo = f132_local2,
 				hideRarity = true,
 				isStatsBasedUnlock = true,
 				disableWhenAvailable = true,
 			}
 		end
-		if f129_local9.linkedLootIds and #f129_local9.linkedLootIds > 0 then
-			local f129_local11 = {
+		if f131_local9.linkedLootIds and #f131_local9.linkedLootIds > 0 then
+			local f131_local11 = {
 				isLoot = true,
 				available = false,
 				owned = false,
-				rarity = @"invalid",
+				rarity = "invalid",
 				unlockInfo = "",
 				hideRarity = true,
 				isStatsBasedUnlock = true,
 				disableWhenAvailable = true,
 			}
-			for f129_local16, f129_local17 in ipairs(f129_local9.linkedLootIds) do
-				local f129_local18 = f129_local10(f129_local8[f129_local17])
-				local f129_local15 = f129_local11.available
-				if not f129_local15 then
-					f129_local15 = f129_local18.available
+			for f131_local16, f131_local17 in ipairs(f131_local9.linkedLootIds) do
+				local f131_local18 = f131_local10(f131_local8[f131_local17])
+				local f131_local15 = f131_local11.available
+				if not f131_local15 then
+					f131_local15 = f131_local18.available
 				end
-				f129_local11.available = f129_local15
-				f129_local15 = f129_local11.owned
-				if not f129_local15 then
-					f129_local15 = f129_local18.owned
+				f131_local11.available = f131_local15
+				f131_local15 = f131_local11.owned
+				if not f131_local15 then
+					f131_local15 = f131_local18.owned
 				end
-				f129_local11.owned = f129_local15
+				f131_local11.owned = f131_local15
 			end
-			if f129_local11.owned then
-				if f129_local9.unlockedStringRef then
-					f129_local11.unlockInfo = Engine[@"hash_4F9F1239CFD921FE"](f129_local9.unlockedStringRef)
-				elseif f129_local9.unlockedStringLookup then
-					f129_local11.unlockInfo = f129_local9.unlockedStringLookup()
+			if f131_local11.owned then
+				if f131_local9.unlockedStringRef then
+					f131_local11.unlockInfo = Engine[@"hash_4F9F1239CFD921FE"](f131_local9.unlockedStringRef)
+				elseif f131_local9.unlockedStringLookup then
+					f131_local11.unlockInfo = f131_local9.unlockedStringLookup()
 				end
-			elseif f129_local11.available then
-				if f129_local9.lockedStringRef then
-					f129_local11.unlockInfo = Engine[@"hash_4F9F1239CFD921FE"](f129_local9.lockedStringRef)
-				elseif f129_local9.lockedStringLookup then
-					f129_local11.unlockInfo = f129_local9.lockedStringLookup()
+			elseif f131_local11.available then
+				if f131_local9.lockedStringRef then
+					f131_local11.unlockInfo = Engine[@"hash_4F9F1239CFD921FE"](f131_local9.lockedStringRef)
+				elseif f131_local9.lockedStringLookup then
+					f131_local11.unlockInfo = f131_local9.lockedStringLookup()
 				end
 			end
-			return f129_local11
+			return f131_local11
 		end
-		return f129_local10(f129_local9)
-	elseif f129_arg2 and f129_arg2 ~= 0x0 then
+		return f131_local10(f131_local9)
+	elseif f131_arg2 and f131_arg2 ~= 0x0 then
 		return {
 			isLoot = false,
 			isEntitlement = true,
-			owned = Engine[@"hasentitlement"](f129_arg0, f129_arg2),
-			unlockInfo = Engine[@"hash_4F9F1239CFD921FE"](Engine[@"hash_2F9DAA00F0637292"](f129_arg2)),
+			owned = Engine.HasEntitlement(f131_arg0, f131_arg2),
+			unlockInfo = Engine[@"hash_4F9F1239CFD921FE"](Engine[@"hash_2F9DAA00F0637292"](f131_arg2)),
 		}
 	end
 	return {
@@ -3258,68 +3328,68 @@ CoD.BlackMarketTableUtility.LootInfoLookup = function(f129_arg0, f129_arg1, f129
 	}
 end
 CoD.BlackMarketTableUtility.TestLookupOfType = function()
-	CoD.BlackMarketTableUtility.GetItemsOfType(0, @"calling_card")
+	CoD.BlackMarketTableUtility.GetItemsOfType(0, "calling_card")
 end
-CoD.BlackMarketTableUtility.GetItemsOfType = function(f132_arg0, f132_arg1)
-	local f132_local0 = {}
-	local f132_local1 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ContrabandTable.name, CoD.BlackMarketTableUtility.ContrabandTable.COL_TYPE, f132_arg1)
-	if f132_local1 ~= nil then
-		for f132_local2 = 1, #f132_local1, 1 do
-			local f132_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f132_local1[f132_local2], CoD.BlackMarketTableUtility.ContrabandTable.COL_NAMEHASH)
-			if f132_local5 ~= nil and f132_local5 ~= 0x0 then
-				table.insert(f132_local0, f132_local5)
+CoD.BlackMarketTableUtility.GetItemsOfType = function(f134_arg0, f134_arg1)
+	local f134_local0 = {}
+	local f134_local1 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ContrabandTable.name, CoD.BlackMarketTableUtility.ContrabandTable.COL_TYPE, f134_arg1)
+	if f134_local1 ~= nil then
+		for f134_local2 = 1, #f134_local1, 1 do
+			local f134_local5 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ContrabandTable.name, f134_local1[f134_local2], CoD.BlackMarketTableUtility.ContrabandTable.COL_NAMEHASH)
+			if f134_local5 ~= nil and f134_local5 ~= 0x0 then
+				table.insert(f134_local0, f134_local5)
 			end
 		end
 	end
-	for f132_local10, f132_local11 in pairs(CoDShared.Loot.SeasonParams) do
-		local f132_local5 = CoDShared.Loot.GetSeasonInfoParam(f132_local10, CoDShared.Loot.SEASON_INFO_TABLENAME)
-		local f132_local12 = Engine[@"tablefindrows"](f132_local5, CoD.BlackMarketTableUtility.SeasonsTable.COL_TYPE, f132_arg1)
-		if f132_local12 ~= nil then
-			for f132_local6 = 1, #f132_local12, 1 do
-				local f132_local9 = Engine[@"hash_4C6F8EC444864600"](f132_local5, f132_local12[f132_local6], CoD.BlackMarketTableUtility.SeasonsTable.COL_NAMEHASH)
-				if f132_local9 ~= nil and f132_local9 ~= 0x0 then
-					table.insert(f132_local0, f132_local9)
+	for f134_local10, f134_local11 in pairs(CoDShared.Loot.SeasonParams) do
+		local f134_local5 = CoDShared.Loot.GetSeasonInfoParam(f134_local10, CoDShared.Loot.SEASON_INFO_TABLENAME)
+		local f134_local12 = Engine.TableFindRows(f134_local5, CoD.BlackMarketTableUtility.SeasonsTable.COL_TYPE, f134_arg1)
+		if f134_local12 ~= nil then
+			for f134_local6 = 1, #f134_local12, 1 do
+				local f134_local9 = Engine[@"hash_4C6F8EC444864600"](f134_local5, f134_local12[f134_local6], CoD.BlackMarketTableUtility.SeasonsTable.COL_NAMEHASH)
+				if f134_local9 ~= nil and f134_local9 ~= 0x0 then
+					table.insert(f134_local0, f134_local9)
 				end
 			end
 		end
 	end
-	for f132_local10, f132_local11 in pairs(CoD.BlackMarketTableUtility.ContractsTable.names) do
-		local f132_local5 = Engine[@"tablefindrows"](f132_local11, CoD.BlackMarketTableUtility.ContractsTable.COL_TYPE, f132_arg1)
-		if f132_local5 ~= nil then
-			for f132_local12 = 1, #f132_local5, 1 do
-				local f132_local13 = Engine[@"hash_4C6F8EC444864600"](f132_local11, f132_local5[f132_local12], CoD.BlackMarketTableUtility.ContractsTable.COL_NAMEHASH)
-				if f132_local13 ~= nil and f132_local13 ~= 0x0 then
-					table.insert(f132_local0, f132_local13)
+	for f134_local10, f134_local11 in pairs(CoD.BlackMarketTableUtility.ContractsTable.names) do
+		local f134_local5 = Engine.TableFindRows(f134_local11, CoD.BlackMarketTableUtility.ContractsTable.COL_TYPE, f134_arg1)
+		if f134_local5 ~= nil then
+			for f134_local12 = 1, #f134_local5, 1 do
+				local f134_local13 = Engine[@"hash_4C6F8EC444864600"](f134_local11, f134_local5[f134_local12], CoD.BlackMarketTableUtility.ContractsTable.COL_NAMEHASH)
+				if f134_local13 ~= nil and f134_local13 ~= 0x0 then
+					table.insert(f134_local0, f134_local13)
 				end
 			end
 		end
 	end
-	f132_local2 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.ItemShopTable.name, CoD.BlackMarketTableUtility.ItemShopTable.COL_TYPE, f132_arg1)
-	if f132_local2 ~= nil then
-		for f132_local3 = 1, #f132_local2, 1 do
-			local f132_local12 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f132_local2[f132_local3], CoD.BlackMarketTableUtility.ItemShopTable.COL_NAMEHASH)
-			if f132_local12 ~= nil and f132_local12 ~= 0x0 then
-				table.insert(f132_local0, f132_local12)
+	f134_local2 = Engine.TableFindRows(CoD.BlackMarketTableUtility.ItemShopTable.name, CoD.BlackMarketTableUtility.ItemShopTable.COL_TYPE, f134_arg1)
+	if f134_local2 ~= nil then
+		for f134_local3 = 1, #f134_local2, 1 do
+			local f134_local12 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.ItemShopTable.name, f134_local2[f134_local3], CoD.BlackMarketTableUtility.ItemShopTable.COL_NAMEHASH)
+			if f134_local12 ~= nil and f134_local12 ~= 0x0 then
+				table.insert(f134_local0, f134_local12)
 			end
 		end
 	end
-	f132_local3 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.LootBonusTable.name, CoD.BlackMarketTableUtility.LootBonusTable.COL_TYPE, f132_arg1)
-	if f132_local3 ~= nil then
-		for f132_local4 = 1, #f132_local3, 1 do
-			local f132_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.LootBonusTable.name, f132_local3[f132_local4], CoD.BlackMarketTableUtility.LootBonusTable.COL_NAMEHASH)
-			if f132_local6 ~= nil and f132_local6 ~= 0x0 then
-				table.insert(f132_local0, f132_local6)
+	f134_local3 = Engine.TableFindRows(CoD.BlackMarketTableUtility.LootBonusTable.name, CoD.BlackMarketTableUtility.LootBonusTable.COL_TYPE, f134_arg1)
+	if f134_local3 ~= nil then
+		for f134_local4 = 1, #f134_local3, 1 do
+			local f134_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.LootBonusTable.name, f134_local3[f134_local4], CoD.BlackMarketTableUtility.LootBonusTable.COL_NAMEHASH)
+			if f134_local6 ~= nil and f134_local6 ~= 0x0 then
+				table.insert(f134_local0, f134_local6)
 			end
 		end
 	end
-	f132_local4 = Engine[@"tablefindrows"](CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_TYPE, f132_arg1)
-	if f132_local4 ~= nil then
-		for f132_local10 = 1, #f132_local4, 1 do
-			local f132_local7 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f132_local4[f132_local10], CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH)
-			if f132_local7 ~= nil and f132_local7 ~= 0x0 then
-				table.insert(f132_local0, f132_local7)
+	f134_local4 = Engine.TableFindRows(CoD.BlackMarketTableUtility.BundleTable.name, CoD.BlackMarketTableUtility.BundleTable.COL_TYPE, f134_arg1)
+	if f134_local4 ~= nil then
+		for f134_local10 = 1, #f134_local4, 1 do
+			local f134_local7 = Engine[@"hash_4C6F8EC444864600"](CoD.BlackMarketTableUtility.BundleTable.name, f134_local4[f134_local10], CoD.BlackMarketTableUtility.BundleTable.COL_NAMEHASH)
+			if f134_local7 ~= nil and f134_local7 ~= 0x0 then
+				table.insert(f134_local0, f134_local7)
 			end
 		end
 	end
-	return f132_local0
+	return f134_local0
 end

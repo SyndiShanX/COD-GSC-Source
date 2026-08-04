@@ -1,6 +1,6 @@
-require("x64:2675595fa323085")
-require("x64:7d2086e818e7f81")
-require("x64:1ba14a6a952408f")
+require("ui/uieditor/widgets/emptyfocusable")
+require("ui/uieditor/widgets/pc/openbutton_button")
+require("ui/uieditor/widgets/pc/startmenu/listitem")
 CoD.OpenButton = InheritFrom(LUI.UIElement)
 CoD.OpenButton.__defaultWidth = 810
 CoD.OpenButton.__defaultHeight = 65

@@ -1,4 +1,4 @@
-require("x64:479c90f39533c8a")
+require("ui/uieditor/widgets/vehiclehuds/ground/vehicleground_vignetteback")
 CoD.scorestreakVignetteContainer = InheritFrom(LUI.UIElement)
 CoD.scorestreakVignetteContainer.__defaultWidth = 1920
 CoD.scorestreakVignetteContainer.__defaultHeight = 1080

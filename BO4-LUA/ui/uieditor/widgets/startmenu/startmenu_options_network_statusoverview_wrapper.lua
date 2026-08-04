@@ -1,4 +1,4 @@
-require("x64:22bf0e10b899d2b")
+require("ui/uieditor/widgets/startmenu/startmenu_options_network_statusoverview")
 CoD.StartMenu_Options_Network_StatusOverview_Wrapper = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Options_Network_StatusOverview_Wrapper.__defaultWidth = 700
 CoD.StartMenu_Options_Network_StatusOverview_Wrapper.__defaultHeight = 112

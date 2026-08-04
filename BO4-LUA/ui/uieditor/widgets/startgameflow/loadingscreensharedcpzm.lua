@@ -1,7 +1,7 @@
-require("x64:98f7faea863c34f")
-require("x64:c1acb20bd53615e")
-require("x64:f8db2063f73b388")
-require("x64:474d14efb47ebf4")
+require("ui/uieditor/widgets/hud/movieplayback/moviesubtitles")
+require("ui/uieditor/widgets/loadinganimation/loadingscreenskipprompt")
+require("ui/uieditor/widgets/notifications/xp/doublexpiconsleftaligned")
+require("ui/uieditor/widgets/startgameflow/loadingscreentalkerwidgetcpzm")
 CoD.LoadingScreenSharedCPZM = InheritFrom(LUI.UIElement)
 CoD.LoadingScreenSharedCPZM.__defaultWidth = 1920
 CoD.LoadingScreenSharedCPZM.__defaultHeight = 1080
@@ -38,12 +38,12 @@ CoD.LoadingScreenSharedCPZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	Team1PlayerList:setWidgetType(CoD.LoadingScreenTalkerWidgetCPZM)
 	Team1PlayerList:setVerticalCount(4)
 	Team1PlayerList:setSpacing(8)
-	Team1PlayerList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Team1PlayerList:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	Team1PlayerList:setDataSource("LoadingScreenPlayerListTeam1")
 	self:addElement(Team1PlayerList)
 	self.Team1PlayerList = Team1PlayerList
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 192, -192, 0, 0, 1004, 1028)
-	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
@@ -51,13 +51,13 @@ CoD.LoadingScreenSharedCPZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.NoiseTiledBacking = NoiseTiledBacking
 	local loadingBarBG = LUI.UIImage.new(0, 1, 198, -198, 0, 0, 1010, 1022)
 	loadingBarBG:setRGB(0.2, 0.2, 0.2)
-	loadingBarBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	loadingBarBG:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(loadingBarBG)
 	self.loadingBarBG = loadingBarBG
 	local loadingBar = LUI.UIImage.new(0, 1, 186, -186, 0, 0, 1000, 1032)
 	loadingBar:setRGB(0.6, 0.6, 0.6)
-	loadingBar:setImage(RegisterImage(@"uie_ui_menu_loadingbar_fill_zm"))
-	loadingBar:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
+	loadingBar:setImage(RegisterImage("uie_ui_menu_loadingbar_fill_zm"))
+	loadingBar:setMaterial(LUI.UIImage.GetCachedMaterial("uie_wipe_normal"))
 	loadingBar:setShaderVector(1, 0, 0, 0, 0)
 	loadingBar:setShaderVector(2, 1, 0, 0, 0)
 	loadingBar:setShaderVector(3, 0, 0, 0, 0)
@@ -72,8 +72,8 @@ CoD.LoadingScreenSharedCPZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.loadingBar = loadingBar
 	local loadingBarAdd = LUI.UIImage.new(0, 1, 186, -186, 0, 0, 1004, 1028)
 	loadingBarAdd:setRGB(0.6, 0.6, 0.6)
-	loadingBarAdd:setImage(RegisterImage(@"uie_ui_menu_loadingbar_fill_zm"))
-	loadingBarAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe"))
+	loadingBarAdd:setImage(RegisterImage("uie_ui_menu_loadingbar_fill_zm"))
+	loadingBarAdd:setMaterial(LUI.UIImage.GetCachedMaterial("uie_wipe"))
 	loadingBarAdd:setShaderVector(1, 0, 0, 0, 0)
 	loadingBarAdd:setShaderVector(2, 1, 0, 0, 0)
 	loadingBarAdd:setShaderVector(3, 0, 0, 0, 0)
@@ -90,7 +90,7 @@ CoD.LoadingScreenSharedCPZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	Status:setRGB(0.87, 0.9, 0.9)
 	Status:setTTF("default")
 	Status:setLetterSpacing(-1)
-	Status:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	Status:setAlignment(Enum.LUIAlignment[@"lui_alignment_right"])
 	Status:subscribeToGlobalModel(f1_arg1, "LoadingScreenTeamInfo", "statusText", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -103,7 +103,7 @@ CoD.LoadingScreenSharedCPZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	MapName:setRGB(0.8, 0.11, 0.11)
 	MapName:setTTF("skorzhen")
 	MapName:setLetterSpacing(-1)
-	MapName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	MapName:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	MapName:subscribeToGlobalModel(f1_arg1, "LoadingScreenTeamInfo", "mapName", function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -116,7 +116,7 @@ CoD.LoadingScreenSharedCPZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	Location:setRGB(0.87, 0.9, 0.9)
 	Location:setTTF("skorzhen")
 	Location:setLetterSpacing(-1)
-	Location:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Location:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	Location:subscribeToGlobalModel(f1_arg1, "LoadingScreenTeamInfo", "location", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -129,7 +129,7 @@ CoD.LoadingScreenSharedCPZM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	GameType:setRGB(0.58, 0.85, 1)
 	GameType:setTTF("skorzhen")
 	GameType:setLetterSpacing(-1)
-	GameType:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	GameType:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	GameType:subscribeToGlobalModel(f1_arg1, "LoadingScreenTeamInfo", "gameType", function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then

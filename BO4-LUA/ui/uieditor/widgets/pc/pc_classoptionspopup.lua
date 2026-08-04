@@ -1,4 +1,4 @@
-require("x64:87edb7802d72c0e")
+require("ui/uieditor/widgets/systemoverlays/systemoverlay_alertstatusbar")
 CoD.PC_ClassOptionsPopup = InheritFrom(LUI.UIElement)
 CoD.PC_ClassOptionsPopup.__defaultWidth = 800
 CoD.PC_ClassOptionsPopup.__defaultHeight = 1090
@@ -21,7 +21,7 @@ CoD.PC_ClassOptionsPopup.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.RightBackground = RightBackground
 	local RightTiledBacking = LUI.UIImage.new(0.5, 0.5, -400, 400, -0.1, 1.1, 0, 0)
 	RightTiledBacking:setAlpha(0.25)
-	RightTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	RightTiledBacking:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	RightTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	RightTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	RightTiledBacking:setupNineSliceShader(196, 88)

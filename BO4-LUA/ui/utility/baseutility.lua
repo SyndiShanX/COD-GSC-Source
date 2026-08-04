@@ -1,21 +1,21 @@
 CoD.BaseUtility = {}
-local f0_local0 = Engine[@"getcurrentplatform"]()
+local f0_local0 = Engine.GetCurrentPlatform()
 CoD.BaseUtility.isDurango = f0_local0 == "durango"
 CoD.BaseUtility.isPC = f0_local0 == "pc"
 CoD.BaseUtility.isPS4 = f0_local0 == "orbis"
 CoD.BaseUtility.InvalidXHash = Engine[@"numbertouint64"](0)
 CoD.BaseUtility.CreateControllerModel = function(f1_arg0, f1_arg1)
-	Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f1_arg0), f1_arg1)
+	Engine.CreateModel(Engine.GetModelForController(f1_arg0), f1_arg1)
 end
 CoD.BaseUtility.CreatePersistentControllerModel = function(f2_arg0, f2_arg1)
-	local f2_local0 = Engine[@"getmodelforcontroller"](f2_arg0)
+	local f2_local0 = Engine.GetModelForController(f2_arg0)
 	f2_local0:create(f2_arg1, true)
 end
 CoD.BaseUtility.InitControllerModel = function(f3_arg0, f3_arg1, f3_arg2)
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f3_arg0), f3_arg1), f3_arg2)
+	Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f3_arg0), f3_arg1), f3_arg2)
 end
 CoD.BaseUtility.InitDirectorCharacterControllerModels = function()
-	for f4_local0 = 0, Engine[@"getmaxcontrollercount"]() - 1, 1 do
+	for f4_local0 = 0, Engine.GetMaxControllerCount() - 1, 1 do
 		CoD.BaseUtility.InitControllerModel(f4_local0, "PositionDraft.autoSelected", -1)
 		CoD.BaseUtility.CreateControllerModel(f4_local0, "PositionDraft.stage")
 		CoD.BaseUtility.CreateControllerModel(f4_local0, "PositionDraft.focusedCharacterIndex")
@@ -23,42 +23,42 @@ CoD.BaseUtility.InitDirectorCharacterControllerModels = function()
 	end
 end
 CoD.BaseUtility.InitControllerModelIfNotSet = function(f5_arg0, f5_arg1, f5_arg2)
-	local f5_local0 = Engine[@"getmodelforcontroller"](f5_arg0)
+	local f5_local0 = Engine.GetModelForController(f5_arg0)
 	if not f5_local0[f5_arg1] then
 		local f5_local1 = f5_local0:create(f5_arg1)
 		f5_local1:set(f5_arg2)
 	end
 end
 CoD.BaseUtility.InitPersistentControllerModelIfNotSet = function(f6_arg0, f6_arg1, f6_arg2)
-	local f6_local0 = Engine[@"getmodelforcontroller"](f6_arg0)
+	local f6_local0 = Engine.GetModelForController(f6_arg0)
 	if not f6_local0[f6_arg1] then
 		local f6_local1 = f6_local0:create(f6_arg1, true)
 		f6_local1:set(f6_arg2)
 	end
 end
 CoD.BaseUtility.InitControllerModelEnumIfNotSet = function(f7_arg0, f7_arg1, f7_arg2)
-	local f7_local0 = Engine[@"getmodelforcontroller"](f7_arg0)
+	local f7_local0 = Engine.GetModelForController(f7_arg0)
 	if not f7_local0[f7_arg1] then
 		local f7_local1 = f7_local0:create(f7_arg1)
 		f7_local1:set(f7_arg2)
 	end
 end
 CoD.BaseUtility.SetControllerModelToSelfModelValue = function(f8_arg0, f8_arg1, f8_arg2, f8_arg3)
-	local f8_local0 = Engine[@"getmodelforcontroller"](f8_arg0)
+	local f8_local0 = Engine.GetModelForController(f8_arg0)
 	f8_local0 = f8_local0[f8_arg2]
 	local f8_local1 = f8_arg1:getModel()
 	f8_local0:set(f8_local1[f8_arg3]:get())
 end
 CoD.BaseUtility.SetProfileVarToSelfModelValue = function(f9_arg0, f9_arg1, f9_arg2, f9_arg3)
 	local f9_local0 = f9_arg2:getModel()
-	Engine[@"setprofilevar"](f9_arg0, f9_arg1, tostring(f9_local0[f9_arg3]:get()))
-	Engine[@"commitprofilechanges"](f9_arg0)
+	Engine.SetProfileVar(f9_arg0, f9_arg1, tostring(f9_local0[f9_arg3]:get()))
+	Engine.CommitProfileChanges(f9_arg0)
 end
 CoD.BaseUtility.CreateGlobalModel = function(f10_arg0)
-	Engine[@"createmodel"](Engine[@"getglobalmodel"](), f10_arg0)
+	Engine.CreateModel(Engine.GetGlobalModel(), f10_arg0)
 end
 CoD.BaseUtility.InitGlobalModel = function(f11_arg0, f11_arg1)
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), f11_arg0), f11_arg1)
+	Engine.SetModelValue(Engine.CreateModel(Engine.GetGlobalModel(), f11_arg0), f11_arg1)
 end
 CoD.BaseUtility.SetMenuSessionMode = function(f12_arg0, f12_arg1)
 	f12_arg0:setSessionMode(f12_arg1)
@@ -74,7 +74,7 @@ CoD.BaseUtility.SetMenuSessionModeByElementModel = function(f14_arg0, f14_arg1, 
 end
 CoD.BaseUtility.SetInGameMenuSessionMode = function(f15_arg0)
 	if not CoD.isFrontend then
-		f15_arg0:setSessionMode(Engine[@"currentsessionmode"]())
+		f15_arg0:setSessionMode(Engine.CurrentSessionMode())
 	end
 end
 CoD.BaseUtility.SetDefaultFocusToElement = function(f16_arg0, f16_arg1)
@@ -144,14 +144,14 @@ CoD.BaseUtility.SetModelFromExpression = function(f35_arg0, f35_arg1, f35_arg2)
 	f35_arg1:setModel(f35_arg2, f35_arg0)
 end
 CoD.BaseUtility.SendCustomMenuResponse = function(f36_arg0, f36_arg1, f36_arg2, f36_arg3)
-	Engine[@"sendmenuresponse"](f36_arg0, f36_arg1, f36_arg2, f36_arg3)
+	Engine.SendMenuResponse(f36_arg0, f36_arg1, f36_arg2, f36_arg3)
 end
 CoD.BaseUtility.SendModelValueAsCustomMenuResponse = function(f37_arg0, f37_arg1, f37_arg2, f37_arg3, f37_arg4)
 	local f37_local0 = CoD.SafeGetModelValue(f37_arg1:getModel(), f37_arg4)
 	if not f37_local0 then
 		return
 	else
-		Engine[@"sendmenuresponse"](f37_arg0, f37_arg2, f37_arg3, f37_local0)
+		Engine.SendMenuResponse(f37_arg0, f37_arg2, f37_arg3, f37_local0)
 	end
 end
 CoD.BaseUtility.GetMenuModelModeLoadoutSlot = function(f38_arg0)
@@ -161,21 +161,21 @@ CoD.BaseUtility.CachedKeyedLocStringTables = {}
 CoD.BaseUtility.GetLocStringListEntry = function(f39_arg0, f39_arg1)
 	if tonumber(f39_arg1) then
 		local f39_local0 = Engine[@"hash_2E00B2F29271C60B"](f39_arg0)
-		return f39_local0.entries[f39_arg1][@"value"]
+		return f39_local0.entries[f39_arg1].value
 	elseif not CoD.BaseUtility.CachedKeyedLocStringTables[f39_arg0] then
 		local f39_local0 = Engine[@"hash_2E00B2F29271C60B"](f39_arg0)
 		CoD.BaseUtility.CachedKeyedLocStringTables[f39_arg0] = {}
 		for f39_local4, f39_local5 in ipairs(f39_local0.entries) do
-			CoD.BaseUtility.CachedKeyedLocStringTables[f39_arg0][f39_local4] = f39_local5[@"value"]
-			if f39_local5[@"key"] then
-				CoD.BaseUtility.CachedKeyedLocStringTables[f39_arg0][f39_local5[@"key"]] = f39_local5[@"value"]
+			CoD.BaseUtility.CachedKeyedLocStringTables[f39_arg0][f39_local4] = f39_local5.value
+			if f39_local5.key then
+				CoD.BaseUtility.CachedKeyedLocStringTables[f39_arg0][f39_local5.key] = f39_local5.value
 			end
 		end
 	end
 	return CoD.BaseUtility.CachedKeyedLocStringTables[f39_arg0][f39_arg1]
 end
 CoD.BaseUtility.ShownIfEqualToGlobalModelValue = function(f40_arg0, f40_arg1)
-	local f40_local0 = Engine[@"getglobalmodel"]()
+	local f40_local0 = Engine.GetGlobalModel()
 	if not f40_local0 then
 		return false
 	else
@@ -213,7 +213,7 @@ CoD.BaseUtility.OrbisDurangoPCValue = function(f42_arg0, f42_arg1, f42_arg2)
 	return f42_local2 or f42_local1 or f42_local0 or nil
 end
 CoD.BaseUtility.OwnSeasonPass = function(f43_arg0)
-	return Engine[@"ownseasonpass"](f43_arg0)
+	return Engine.OwnSeasonPass(f43_arg0)
 end
 CoD.BaseUtility.IsKnownDLC = function(f44_arg0)
 	local f44_local0
@@ -234,7 +234,7 @@ CoD.BaseUtility.SwitchMode = function(f46_arg0, f46_arg1)
 		f46_local1 = f46_local0.Abbreviation
 		if not f46_local1 then
 		else
-			Engine[@"switchmode"](f46_arg0, f46_local1)
+			Engine.SwitchMode(f46_arg0, f46_local1)
 		end
 	end
 	f46_local1 = ""
@@ -267,7 +267,7 @@ CoD.BaseUtility.ParseKnownDLC = function()
 end
 CoD.BaseUtility.ParseKnownDLC()
 CoD.BaseUtility.GetKnownDLCBits = function()
-	return CoD.ProductFromBit[Engine[@"currentsessionmode"]()].known
+	return CoD.ProductFromBit[Engine.CurrentSessionMode()].known
 end
 CoD.BaseUtility.GetMapDataFromMapID = function(f51_arg0)
 	if f51_arg0 ~= nil then
@@ -312,7 +312,7 @@ CoD.BaseUtility.AlreadyRegisteredIfUserDataOrCallingCard = function(f57_arg0)
 	if type(f57_arg0) == "userdata" then
 		return f57_arg0
 	elseif CoD.ChallengesUtility.IsWidgetBasedCallingCard(f57_arg0) then
-		return RegisterImage(@"blacktransparent")
+		return RegisterImage("blacktransparent")
 	else
 		return RegisterImage(f57_arg0)
 	end
@@ -367,7 +367,7 @@ CoD.BaseUtility.GetLeftStickVector = function(f65_arg0)
 		x = 0,
 		y = 0,
 	}
-	local f65_local1 = Engine[@"getmodelforcontroller"](f65_arg0)
+	local f65_local1 = Engine.GetModelForController(f65_arg0)
 	f65_local1 = f65_local1.LeftStick
 	if f65_local1 then
 		f65_local0.x = f65_local1.X:get()
@@ -464,14 +464,14 @@ CoD.BaseUtility.IsDvarEnabled = function(f76_arg0)
 end
 CoD.BaseUtility.SubscribeToMessageDialogBox = function(f77_arg0, f77_arg1)
 	if not f77_arg1 then
-		f77_arg1 = Engine[@"getprimarycontroller"]()
+		f77_arg1 = Engine.GetPrimaryController()
 	end
 	if f77_arg0._messagePendingSubscription ~= nil then
 		f77_arg0:removeSubscription(f77_arg0._messagePendingSubscription)
 	end
 	f77_arg0._messagePendingSubscription = f77_arg0:subscribeToGlobalModel(f77_arg1, "MessageDialog", "messagePending", function(model)
 		if ShouldOpenMessageDialog(f77_arg0, f77_arg1) then
-			local f78_local0 = CoD.SafeGetModelValue(Engine[@"getglobalmodel"](), "messageDialog.controller") or f77_arg1
+			local f78_local0 = CoD.SafeGetModelValue(Engine.GetGlobalModel(), "messageDialog.controller") or f77_arg1
 			local f78_local1 = f77_arg0.occludedBy
 			local f78_local2 = f77_arg0.occludedMenu
 			if f78_local1 and f78_local1.menuName == "MessageDialogBox" then
@@ -488,8 +488,8 @@ CoD.BaseUtility.SubscribeToMessageDialogBox = function(f77_arg0, f77_arg1)
 					LUI.OverrideFunction_CallOriginalSecond(f77_arg0._messageDialogBox, "close", function()
 						f77_arg0._messageDialogBox = nil
 					end)
-					Engine[@"lockinput"](f78_local0, true)
-					Engine[@"setuiactive"](f78_local0, true)
+					Engine.LockInput(f78_local0, true)
+					Engine.SetUIActive(f78_local0, true)
 				end
 			elseif not f78_local1 then
 				local f78_local4 = CoD.OverlayUtility.CreateOverlay(f78_local0, f77_arg0, "MessageDialogBox", f78_local0)
@@ -528,14 +528,14 @@ CoD.BaseUtility.PlaySoundOnce = function(f87_arg0, f87_arg1)
 		return
 	else
 		f87_arg0._playOnceAliases[f87_arg1] = true
-		Engine[@"playsound"](f87_arg1)
+		Engine.playsound(f87_arg1)
 	end
 end
 CoD.BaseUtility.StopPlayOnceSound = function(f88_arg0, f88_arg1)
 	if f88_arg0._playOnceAliases then
 		f88_arg0._playOnceAliases[f88_arg1] = nil
 	end
-	Engine[@"stopsound"](f88_arg1)
+	Engine.stopsound(f88_arg1)
 end
 CoD.BaseUtility.AddToMenuList = function(f89_arg0)
 	CoD.Menu.AddToCurrMenuNameList(f89_arg0.id)
@@ -560,7 +560,7 @@ CoD.BaseUtility.IsButtonHoldFinished = function(f94_arg0)
 	local f94_local0 = f94_arg0 and f94_arg0:get()
 	local f94_local1
 	if f94_local0 ~= nil then
-		f94_local1 = CoD.BitUtility.IsBitwiseAndNonZero(f94_local0, Enum[@"luibuttonflags"][@"hash_4715085B24AAB606"])
+		f94_local1 = CoD.BitUtility.IsBitwiseAndNonZero(f94_local0, Enum.LUIButtonFlags[@"hash_4715085B24AAB606"])
 	else
 		f94_local1 = true
 	end
@@ -576,29 +576,29 @@ CoD.BaseUtility.DoesElementOrChildHaveFocus = function(f96_arg0, f96_arg1)
 	return f96_arg0[f96_arg1] and f96_arg0[f96_arg1]:doesElementOrChildHaveFocus()
 end
 CoD.BaseUtility.IsCurrentSessionModeEqualTo = function(f97_arg0)
-	return Engine[@"currentsessionmode"]() == f97_arg0
+	return Engine.CurrentSessionMode() == f97_arg0
 end
 CoD.BaseUtility.SetStateByMenuSessionMode = function(f98_arg0, f98_arg1, f98_arg2)
 	local f98_local0 = CoD.BaseUtility.GetMenuSessionMode(f98_arg0)
-	if f98_local0 == Enum[@"emodes"][@"mode_campaign"] then
+	if f98_local0 == Enum.eModes.mode_campaign then
 		f98_arg1:setState(f98_arg2, "Campaign")
-	elseif f98_local0 == Enum[@"emodes"][@"mode_multiplayer"] then
+	elseif f98_local0 == Enum.eModes.mode_multiplayer then
 		f98_arg1:setState(f98_arg2, "Multiplayer")
-	elseif f98_local0 == Enum[@"emodes"][@"mode_zombies"] then
+	elseif f98_local0 == Enum.eModes.mode_zombies then
 		f98_arg1:setState(f98_arg2, "Zombies")
 	else
 		f98_arg1:setState(f98_arg2, "DefaultState")
 	end
 end
 CoD.BaseUtility.GetCurrentSessionModeString = function()
-	local f99_local0 = Engine[@"currentsessionmode"]()
-	if f99_local0 == Enum[@"emodes"][@"mode_campaign"] then
+	local f99_local0 = Engine.CurrentSessionMode()
+	if f99_local0 == Enum.eModes.mode_campaign then
 		return "cp"
-	elseif f99_local0 == Enum[@"emodes"][@"mode_multiplayer"] then
+	elseif f99_local0 == Enum.eModes.mode_multiplayer then
 		return "mp"
-	elseif f99_local0 == Enum[@"emodes"][@"mode_zombies"] then
+	elseif f99_local0 == Enum.eModes.mode_zombies then
 		return "zm"
-	elseif f99_local0 == Enum[@"emodes"][@"mode_warzone"] then
+	elseif f99_local0 == Enum.eModes.mode_warzone then
 		return "wz"
 	else
 		return ""
@@ -620,7 +620,7 @@ CoD.BaseUtility.IsWidgetVisible = function(f102_arg0)
 	return f102_arg0:getAlpha() > 0
 end
 CoD.BaseUtility.IsFirstTimeComplete = function(f103_arg0, f103_arg1)
-	return Engine[@"isfirsttimecomplete"](f103_arg0, f103_arg1)
+	return Engine.IsFirstTimeComplete(f103_arg0, f103_arg1)
 end
 CoD.BaseUtility.SetStateOnClipOver = function(f104_arg0, f104_arg1, f104_arg2)
 	f104_arg0._originalClipOver = f104_arg0.m_eventHandlers.clip_over
@@ -776,13 +776,13 @@ CoD.BaseUtility.CloseOccludingMenus = function(f127_arg0)
 	end
 end
 CoD.BaseUtility.ClearBlur = function(f128_arg0)
-	Engine[@"blurworld"](f128_arg0, 0)
-	Engine[@"lockinput"](f128_arg0, false)
-	Engine[@"setuiactive"](f128_arg0, false)
+	Engine.BlurWorld(f128_arg0, 0)
+	Engine.LockInput(f128_arg0, false)
+	Engine.SetUIActive(f128_arg0, false)
 end
 CoD.BaseUtility.IsCurrentLanguageRussian = function()
 	local f129_local0
-	if Dvar[@"loc_language"]:get() ~= Enum[@"language_t"][@"language_russian"] and Dvar[@"loc_language"]:get() ~= Enum[@"language_t"][@"hash_237F47E9EC48B533"] then
+	if Dvar.loc_language:get() ~= Enum[@"language_t"].language_russian and Dvar.loc_language:get() ~= Enum[@"language_t"][@"hash_237F47E9EC48B533"] then
 		f129_local0 = false
 	else
 		f129_local0 = true
@@ -790,8 +790,8 @@ CoD.BaseUtility.IsCurrentLanguageRussian = function()
 	return f129_local0
 end
 CoD.BaseUtility.IsCurrentLanguageAsian = function()
-	local f130_local0 = Dvar[@"loc_language"]:get()
-	if f130_local0 == Enum[@"language_t"][@"language_korean"] or f130_local0 == Enum[@"language_t"][@"language_traditionalchinese"] or f130_local0 == Enum[@"language_t"][@"language_simplifiedchinese"] or f130_local0 == Enum[@"language_t"][@"hash_39A4194D08679C69"] or f130_local0 == Enum[@"language_t"][@"language_japanese"] then
+	local f130_local0 = Dvar.loc_language:get()
+	if f130_local0 == Enum[@"language_t"].language_korean or f130_local0 == Enum[@"language_t"][@"language_traditionalchinese"] or f130_local0 == Enum[@"language_t"][@"language_simplifiedchinese"] or f130_local0 == Enum[@"language_t"][@"hash_39A4194D08679C69"] or f130_local0 == Enum[@"language_t"].language_japanese then
 		return true
 	else
 		return false
@@ -870,10 +870,10 @@ CoD.BaseUtility.SyncChildStateToSelfState = function(f141_arg0, f141_arg1, f141_
 	end)
 end
 CoD.BaseUtility.PlayMusic = function(f144_arg0)
-	Engine[@"playmenumusic"](f144_arg0)
+	Engine.PlayMenuMusic(f144_arg0)
 end
 CoD.BaseUtility.SelfShowsBuildInfo = function(f145_arg0)
-	local f145_local0 = Engine[@"getglobalmodel"]()
+	local f145_local0 = Engine.GetGlobalModel()
 	f145_local0 = f145_local0.showBuildInfo
 	local f145_local1 = f145_local0 and f145_local0:get()
 	f145_local0:set(f145_local1 + 1)
@@ -882,7 +882,7 @@ CoD.BaseUtility.SelfShowsBuildInfo = function(f145_arg0)
 	end)
 end
 CoD.BaseUtility.SelfHidesBuildInfo = function(f147_arg0)
-	local f147_local0 = Engine[@"getglobalmodel"]()
+	local f147_local0 = Engine.GetGlobalModel()
 	f147_local0 = f147_local0.showBuildInfo
 	local f147_local1 = f147_local0 and f147_local0:get()
 	f147_local0:set(f147_local1 - 1)

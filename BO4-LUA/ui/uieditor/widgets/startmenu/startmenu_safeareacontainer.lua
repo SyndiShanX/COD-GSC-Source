@@ -1,8 +1,8 @@
-require("x64:78d9663be3f826")
-require("x64:d6ecdf7755aeddc")
-require("x64:bc6e2379d2241fb")
-require("x64:81a24c5340caa1e")
-require("x64:e41af73729601d6")
+require("ui/uieditor/widgets/common/common_tabbar_center")
+require("ui/uieditor/widgets/common/commonheader")
+require("ui/uieditor/widgets/common/commonidentitywidgetstreamlined")
+require("ui/uieditor/widgets/common/commontabbarbacking")
+require("ui/uieditor/widgets/header/header_container_frontend")
 CoD.StartMenu_SafeAreaContainer = InheritFrom(LUI.UIElement)
 CoD.StartMenu_SafeAreaContainer.__defaultWidth = 1920
 CoD.StartMenu_SafeAreaContainer.__defaultHeight = 1080
@@ -52,7 +52,7 @@ CoD.StartMenu_SafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	end)
 	local f1_local5 = TabBar
 	local CommonIdentityWidgetStreamlined = TabBar.subscribeToModel
-	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	local f1_local7 = Engine.GetModelForController(f1_arg1)
 	CommonIdentityWidgetStreamlined(f1_local5, f1_local7.LastInput, function(f6_arg0)
 		f1_arg0:updateElementState(TabBar, {
 			name = "model_validation",
@@ -105,7 +105,7 @@ CoD.StartMenu_SafeAreaContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	f1_local7 = self
 	f1_local5 = self.subscribeToModel
-	local f1_local8 = Engine[@"getglobalmodel"]()
+	local f1_local8 = Engine.GetGlobalModel()
 	f1_local5(f1_local7, f1_local8["lobbyRoot.lobbyNav"], function(f13_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

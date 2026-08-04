@@ -1,6 +1,6 @@
-require("x64:2675595fa323085")
-require("x64:1ba14a6a952408f")
-require("x64:55b10f9afc8df1d")
+require("ui/uieditor/widgets/emptyfocusable")
+require("ui/uieditor/widgets/pc/startmenu/listitem")
+require("ui/uieditor/widgets/pc/togglebutton_button")
 CoD.ToggleButton = InheritFrom(LUI.UIElement)
 CoD.ToggleButton.__defaultWidth = 810
 CoD.ToggleButton.__defaultHeight = 65

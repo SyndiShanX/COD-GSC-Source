@@ -16,8 +16,8 @@ CoD.StartMenu_Options_PC_GraphicsOptions_DescriptionTextBox.new = function(f1_ar
 	detailedDescription:setRGB(0.63, 0.62, 0.61)
 	detailedDescription:setTTF("ttmussels_regular")
 	detailedDescription:setLetterSpacing(2)
-	detailedDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	detailedDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	detailedDescription:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	detailedDescription:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(detailedDescription)
 	self.detailedDescription = detailedDescription
 	local LineBottom01 = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 0, 1)
@@ -72,7 +72,7 @@ CoD.StartMenu_Options_PC_GraphicsOptions_DescriptionTextBox.new = function(f1_ar
 		{
 			stateName = "Visible",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, f1_arg1, "detailedDescription") and CoD.ModelUtility.AreButtonModelValueBitsSet(f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"], Enum[@"luibuttonflags"][@"flag_down"])
+				return CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, f1_arg1, "detailedDescription") and CoD.ModelUtility.AreButtonModelValueBitsSet(f1_arg1, Enum.LUIButton[@"lui_key_rtrig"], Enum.LUIButtonFlags[@"flag_down"])
 			end,
 		},
 	})
@@ -87,14 +87,14 @@ CoD.StartMenu_Options_PC_GraphicsOptions_DescriptionTextBox.new = function(f1_ar
 	end)
 	local f1_local13 = self
 	local f1_local14 = self.subscribeToModel
-	local f1_local15 = Engine[@"getmodelforcontroller"](f1_arg1)
-	f1_local14(f1_local13, f1_local15["ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"]], function(f5_arg0)
+	local f1_local15 = Engine.GetModelForController(f1_arg1)
+	f1_local14(f1_local13, f1_local15["ButtonBits." .. Enum.LUIButton[@"lui_key_rtrig"]], function(f5_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f5_arg0:get(),
-			modelName = "ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"],
+			modelName = "ButtonBits." .. Enum.LUIButton[@"lui_key_rtrig"],
 		})
 	end, false)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

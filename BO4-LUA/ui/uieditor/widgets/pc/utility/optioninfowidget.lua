@@ -1,4 +1,4 @@
-require("x64:c7f53f7ca89a4d2")
+require("ui/uieditor/widgets/pc/utility/titletextwidget")
 CoD.OptionInfoWidget = InheritFrom(LUI.UIElement)
 CoD.OptionInfoWidget.__defaultWidth = 600
 CoD.OptionInfoWidget.__defaultHeight = 450
@@ -12,8 +12,8 @@ CoD.OptionInfoWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	description:setRGB(0.74, 0.74, 0.74)
 	description:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	description:setTTF("default")
-	description:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	description:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	description:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	LUI.OverrideFunction_CallOriginalFirst(description, "setText", function(element, controller)
 		SetStateFromText(self, element, "DefaultState", "Hidden", f1_arg1)
 	end)

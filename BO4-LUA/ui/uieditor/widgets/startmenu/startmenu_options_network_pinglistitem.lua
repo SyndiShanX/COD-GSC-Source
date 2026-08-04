@@ -12,7 +12,7 @@ CoD.StartMenu_Options_Network_PingListItem.new = function(f1_arg0, f1_arg1, f1_a
 	local pingText = LUI.UIText.new(0.5, 0.5, -150, 150, 0, 0, 97.5, 118.5)
 	pingText:setRGB(0.78, 0.74, 0.67)
 	pingText:setTTF("dinnext_regular")
-	pingText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	pingText:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
 	self:addElement(pingText)
 	self.pingText = pingText
 	self.pingImage:linkToElementModel(self, "pingIndex", true, function(model)

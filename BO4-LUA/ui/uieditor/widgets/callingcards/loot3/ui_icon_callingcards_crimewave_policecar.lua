@@ -1,4 +1,3 @@
-
 CoD.ui_icon_callingcards_crimewave_policecar = InheritFrom( LUI.UIElement )
 CoD.ui_icon_callingcards_crimewave_policecar.__defaultWidth = 320
 CoD.ui_icon_callingcards_crimewave_policecar.__defaultHeight = 136
@@ -10,12 +9,12 @@ CoD.ui_icon_callingcards_crimewave_policecar.new = function ( f1_arg0, f1_arg1, 
 	f1_arg0:addElementToPendingUpdateStateList( self )
 	
 	local policecar2 = LUI.UIImage.new( 0, 0, 0, 320, 0, 0, 0, 136 )
-	policecar2:setImage( RegisterImage( @"uie_ui_menu_callingcards_crimewave_policecar2" ) )
+	policecar2:setImage( RegisterImage( "uie_ui_menu_callingcards_crimewave_policecar2" ) )
 	self:addElement( policecar2 )
 	self.policecar2 = policecar2
 	
 	local policecar1 = LUI.UIImage.new( 0, 0, 0, 320, 0, 0, 0, 136 )
-	policecar1:setImage( RegisterImage( @"uie_ui_menu_callingcards_crimewave_policecar1" ) )
+	policecar1:setImage( RegisterImage( "uie_ui_menu_callingcards_crimewave_policecar1" ) )
 	self:addElement( policecar1 )
 	self.policecar1 = policecar1
 	

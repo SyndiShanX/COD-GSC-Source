@@ -10,7 +10,7 @@ CoD.CallingCards_Asset_warwheel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local warWheel = LUI.UIImage.new(0, 0, 0, 1024, 0, 0, 0, 1024)
 	warWheel:setRGB(0.09, 0.09, 0.09)
 	warWheel:setScale(0.5, 0.5)
-	warWheel:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_strategist_war_wheel"))
+	warWheel:setImage(RegisterImage("uie_ui_icon_callingcards_zm_strategist_war_wheel"))
 	self:addElement(warWheel)
 	self.warWheel = warWheel
 	if PostLoadFunc then

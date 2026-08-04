@@ -1,4 +1,4 @@
-require("x64:b79410dc8d1ea84")
+require("ui/uieditor/widgets/pc/startmenu/pc_highlightborder")
 CoD.Dropdown_ListItem_LeftAlign = InheritFrom(LUI.UIElement)
 CoD.Dropdown_ListItem_LeftAlign.__defaultWidth = 336
 CoD.Dropdown_ListItem_LeftAlign.__defaultHeight = 60
@@ -17,8 +17,8 @@ CoD.Dropdown_ListItem_LeftAlign.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	TextBox:setRGB(0.76, 0.76, 0.76)
 	TextBox:setTTF("ttmussels_regular")
 	TextBox:setLetterSpacing(1)
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_middle"])
 	TextBox:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -51,8 +51,8 @@ CoD.Dropdown_ListItem_LeftAlign.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	GlowAdd:setAlpha(0)
 	GlowAdd:setZRot(-90)
 	GlowAdd:setScale(0.34, 0.48)
-	GlowAdd:setImage(RegisterImage(@"uie_icon_frontend_navigation_glowmed"))
-	GlowAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	GlowAdd:setImage(RegisterImage("uie_icon_frontend_navigation_glowmed"))
+	GlowAdd:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(GlowAdd)
 	self.GlowAdd = GlowAdd
 	LUI.OverrideFunction_CallOriginalFirst(self, "setModel", function(element, controller)

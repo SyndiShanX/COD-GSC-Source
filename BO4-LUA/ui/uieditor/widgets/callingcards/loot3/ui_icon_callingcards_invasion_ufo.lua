@@ -1,4 +1,4 @@
-require("x64:e9ea9b16de1842b")
+require("ui/uieditor/widgets/callingcards/loot3/ui_icon_callingcards_invasion_ufowbeam")
 CoD.ui_icon_callingcards_invasion_ufo = InheritFrom(LUI.UIElement)
 CoD.ui_icon_callingcards_invasion_ufo.__defaultWidth = 224
 CoD.ui_icon_callingcards_invasion_ufo.__defaultHeight = 88

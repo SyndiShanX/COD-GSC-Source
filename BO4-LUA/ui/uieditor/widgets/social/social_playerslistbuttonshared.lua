@@ -1,7 +1,7 @@
-require("x64:93ba3c001655e44")
-require("x64:d0dd4bae5f1fadb")
-require("x64:94b635276e05752")
-require("x64:d2872b253938e36")
+require("ui/uieditor/widgets/social/social_partymembericonlarge")
+require("ui/uieditor/widgets/social/social_playerslistbutton_trial")
+require("ui/uieditor/widgets/social/social_playerslistrankinfo")
+require("ui/uieditor/widgets/pc/directorlobbyclanandmembernamecontainerpc")
 CoD.Social_PlayersListButtonShared = InheritFrom(LUI.UIElement)
 CoD.Social_PlayersListButtonShared.__defaultWidth = 474
 CoD.Social_PlayersListButtonShared.__defaultHeight = 40
@@ -18,7 +18,7 @@ CoD.Social_PlayersListButtonShared.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.EmptyBacking2 = EmptyBacking2
 	local TeamColorBacking = LUI.UIImage.new(0, 1.01, 14, 14, 0, 1.19, -4, -4)
 	TeamColorBacking:setAlpha(0.5)
-	TeamColorBacking:setImage(RegisterImage(@"uie_ui_menu_cac_text_bg01"))
+	TeamColorBacking:setImage(RegisterImage("uie_ui_menu_cac_text_bg01"))
 	TeamColorBacking.__Color = function(f2_arg0)
 		local f2_local0 = f2_arg0:get()
 		if f2_local0 ~= nil then
@@ -40,7 +40,7 @@ CoD.Social_PlayersListButtonShared.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.TeamColorBacking = TeamColorBacking
 	local OnOffBacking = LUI.UIImage.new(0, 1.01, 14, 14, 0, 1.19, -4, -4)
 	OnOffBacking:setAlpha(0)
-	OnOffBacking:setImage(RegisterImage(@"uie_ui_menu_cac_text_bg01"))
+	OnOffBacking:setImage(RegisterImage("uie_ui_menu_cac_text_bg01"))
 	OnOffBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	OnOffBacking:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(OnOffBacking)
@@ -147,7 +147,7 @@ CoD.Social_PlayersListButtonShared.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	local Plus = LUI.UIImage.new(0.5, 0.5, -12, 12, 0.5, 0.5, -12.5, 11.5)
 	Plus:setRGB(0.53, 0.53, 0.53)
 	Plus:setAlpha(0)
-	Plus:setImage(RegisterImage(@"uie_ui_menu_cac_plus"))
+	Plus:setImage(RegisterImage("uie_ui_menu_cac_plus"))
 	self:addElement(Plus)
 	self.Plus = Plus
 	local SocialPlayersListRankInfo = CoD.Social_PlayersListRankInfo.new(f1_arg0, f1_arg1, 1, 1, -79.5, -22.5, 0, 0, 1.5, 37.5)
@@ -168,13 +168,13 @@ CoD.Social_PlayersListButtonShared.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.membernamePC = membernamePC
 	local f1_local15 = TeamColorBacking
 	local f1_local16 = TeamColorBacking.subscribeToModel
-	local f1_local17 = Engine[@"getglobalmodel"]()
+	local f1_local17 = Engine.GetGlobalModel()
 	f1_local16(f1_local15, f1_local17["MapVote.mapVoteGameModeNext"], TeamColorBacking.__Color_FullPath)
 	self:mergeStateConditions({
 		{
 			stateName = "OfflinePC",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "primaryPresence", Enum[@"presenceprimary"][@"presence_primary_offline"]) and IsPC()
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "primaryPresence", Enum.PresencePrimary[@"presence_primary_offline"]) and IsPC()
 			end,
 		},
 		{
@@ -218,13 +218,13 @@ CoD.Social_PlayersListButtonShared.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 		{
 			stateName = "Empty",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "xuid", Engine[@"stringtoxuiddecimal"]("0"))
+				return CoD.ModelUtility.IsSelfModelValueEqualTo(element, f1_arg1, "xuid", Engine.StringToXUIDDecimal("0"))
 			end,
 		},
 		{
 			stateName = "Offline",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "primaryPresence", Enum[@"presenceprimary"][@"presence_primary_offline"])
+				return CoD.ModelUtility.IsSelfModelValueEqualToEnum(element, f1_arg1, "primaryPresence", Enum.PresencePrimary[@"presence_primary_offline"])
 			end,
 		},
 		{
@@ -251,7 +251,7 @@ CoD.Social_PlayersListButtonShared.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end)
 	f1_local15 = self
 	f1_local16 = self.subscribeToModel
-	f1_local17 = Engine[@"getglobalmodel"]()
+	f1_local17 = Engine.GetGlobalModel()
 	f1_local16(f1_local15, f1_local17["socialRoot.leaderboardsPlayerListActive"], function(f27_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -272,7 +272,7 @@ CoD.Social_PlayersListButtonShared.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	end)
 	f1_local15 = self
 	f1_local16 = self.subscribeToModel
-	f1_local17 = Engine[@"getglobalmodel"]()
+	f1_local17 = Engine.GetGlobalModel()
 	f1_local16(f1_local15, f1_local17["lobbyRoot.lobbyNav"], function(f29_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

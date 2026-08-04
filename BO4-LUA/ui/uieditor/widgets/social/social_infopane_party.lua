@@ -1,4 +1,4 @@
-require("x64:39a75111725556")
+require("ui/uieditor/widgets/social/social_partylist")
 CoD.Social_InfoPane_Party = InheritFrom(LUI.UIElement)
 CoD.Social_InfoPane_Party.__defaultWidth = 290
 CoD.Social_InfoPane_Party.__defaultHeight = 169
@@ -16,7 +16,7 @@ CoD.Social_InfoPane_Party.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	partyHeader:setTTF("ttmussels_regular")
 	partyHeader:setLetterSpacing(3)
 	partyHeader:setLineSpacing(1)
-	partyHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	partyHeader:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	self:addElement(partyHeader)
 	self.partyHeader = partyHeader
 	local PlayerList = LUI.UIList.new(f1_arg0, f1_arg1, 2, 0, nil, false, false, false, false)
@@ -24,7 +24,7 @@ CoD.Social_InfoPane_Party.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	PlayerList:setTopBottom(0, 0, 23, 151)
 	PlayerList:setWidgetType(CoD.Social_PartyList)
 	PlayerList:setVerticalCount(5)
-	PlayerList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	PlayerList:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	PlayerList:setDataSource("SocialPlayerPartyList")
 	self:addElement(PlayerList)
 	self.PlayerList = PlayerList
@@ -38,7 +38,7 @@ CoD.Social_InfoPane_Party.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[@"getglobalmodel"]()
+	local f1_local5 = Engine.GetGlobalModel()
 	f1_local4(f1_local3, f1_local5["socialRoot.tab"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

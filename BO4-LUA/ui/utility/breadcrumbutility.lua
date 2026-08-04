@@ -1,4 +1,3 @@
-
 CoD.BreadcrumbUtility = {}
 CoD.BreadcrumbUtility.BreadcrumbLoadoutSlots = {
 	"primary",
@@ -142,29 +141,29 @@ CoD.BreadcrumbUtility.ForceUpdateChildCountLink = function ( f9_arg0, f9_arg1 )
 end
 CoD.BreadcrumbUtility.GetStorageClientBufferForPlayer = function ( f10_arg0, f10_arg1 )
 	if not f10_arg1 then
-		f10_arg1 = Engine[@"currentsessionmode"]()
+		f10_arg1 = Engine.CurrentSessionMode()
 	end
-	if f10_arg1 == Enum[@"emodes"][@"mode_zombies"] then
-		return Engine[@"storagegetbuffer"]( f10_arg0, Enum[@"storagefiletype"][@"storage_zm_stats_online"] )
-	elseif f10_arg1 == Enum[@"emodes"][@"mode_warzone"] then
-		return Engine[@"storagegetbuffer"]( f10_arg0, Enum[@"storagefiletype"][@"storage_wz_stats_online"] )
+	if f10_arg1 == Enum.eModes.mode_zombies then
+		return Engine.StorageGetBuffer( f10_arg0, Enum.StorageFileType[@"storage_zm_stats_online"] )
+	elseif f10_arg1 == Enum.eModes.mode_warzone then
+		return Engine.StorageGetBuffer( f10_arg0, Enum.StorageFileType[@"storage_wz_stats_online"] )
 	else
-		return Engine[@"storagegetbuffer"]( f10_arg0, Enum[@"storagefiletype"][@"storage_mp_stats_online"] )
+		return Engine.StorageGetBuffer( f10_arg0, Enum.StorageFileType[@"storage_mp_stats_online"] )
 	end
 end
 CoD.BreadcrumbUtility.GetStorageLoadoutBufferForPlayer = function ( f11_arg0, f11_arg1 )
 	if not f11_arg1 then
-		f11_arg1 = Engine[@"currentsessionmode"]()
+		f11_arg1 = Engine.CurrentSessionMode()
 	end
-	local f11_local0 = Enum[@"storagefiletype"][@"storage_mp_loadouts"]
-	if f11_arg1 == Enum[@"emodes"][@"mode_zombies"] then
-		f11_local0 = Enum[@"storagefiletype"][@"storage_zm_loadouts"]
-	elseif f11_arg1 == Enum[@"emodes"][@"mode_warzone"] then
-		f11_local0 = Enum[@"storagefiletype"][@"storage_wz_loadouts"]
+	local f11_local0 = Enum.StorageFileType[@"storage_mp_loadouts"]
+	if f11_arg1 == Enum.eModes.mode_zombies then
+		f11_local0 = Enum.StorageFileType[@"storage_zm_loadouts"]
+	elseif f11_arg1 == Enum.eModes.mode_warzone then
+		f11_local0 = Enum.StorageFileType[@"storage_wz_loadouts"]
 	end
-	local f11_local1 = Engine[@"storagegetbuffer"]( f11_arg0, f11_local0 )
+	local f11_local1 = Engine.StorageGetBuffer( f11_arg0, f11_local0 )
 	if f11_local1 then
-		return f11_local1[@"cacloadouts"]
+		return f11_local1.cacloadouts
 	else
 		
 	end
@@ -183,8 +182,8 @@ CoD.BreadcrumbUtility.UpdateCallingCardOwnedAndCheckIfSeenStat = function ( f14_
 		return false
 	else
 		local f14_local0 = CoD.BaseUtility.GetMenuStorageClientBuffer( f14_arg0 )
-		if f14_local0 and f14_local0[@"hash_1D45B221DEE76EE4"] and f14_local0[@"hash_1D45B221DEE76EE4"][f14_arg2] then
-			f14_local0[@"hash_1D45B221DEE76EE4"][f14_arg2]:set( CoD.BreadcrumbUtility.ItemOwnedValue )
+		if f14_local0 and f14_local0.calling_card_owned and f14_local0.calling_card_owned[f14_arg2] then
+			f14_local0.calling_card_owned[f14_arg2]:set( CoD.BreadcrumbUtility.ItemOwnedValue )
 			return f14_local0[@"hash_58BB06B8B337E385"][f14_arg2]:get() ~= CoD.BreadcrumbUtility.ItemNewValue
 		else
 			return false
@@ -196,8 +195,8 @@ CoD.BreadcrumbUtility.UpdateEmblemOwnedAndCheckIfSeenStat = function ( f15_arg0,
 		return false
 	else
 		local f15_local0 = CoD.BaseUtility.GetMenuStorageClientBuffer( f15_arg0 )
-		if f15_local0 and f15_local0[@"icon_owned"] and f15_local0[@"icon_owned"][f15_arg2] then
-			f15_local0[@"icon_owned"][f15_arg2]:set( CoD.BreadcrumbUtility.ItemOwnedValue )
+		if f15_local0 and f15_local0.icon_owned and f15_local0.icon_owned[f15_arg2] then
+			f15_local0.icon_owned[f15_arg2]:set( CoD.BreadcrumbUtility.ItemOwnedValue )
 			return f15_local0[@"hash_42799A890D40252F"][f15_arg2]:get() ~= CoD.BreadcrumbUtility.ItemNewValue
 		else
 			return false
@@ -218,8 +217,8 @@ CoD.BreadcrumbUtility.IsStatLootWeaponItemAsOld = function ( f17_arg0, f17_arg1,
 		return true
 	else
 		local f17_local0 = CoD.BaseUtility.GetMenuStorageClientBuffer( f17_arg0 )
-		if f17_local0 and f17_local0[@"hash_24B9A9540A303875"] and f17_local0[@"hash_24B9A9540A303875"][f17_arg2] then
-			return f17_local0[@"hash_24B9A9540A303875"][f17_arg2]:get() == CoD.BreadcrumbUtility.ItemNewValue
+		if f17_local0 and f17_local0.item_marked_old and f17_local0.item_marked_old[f17_arg2] then
+			return f17_local0.item_marked_old[f17_arg2]:get() == CoD.BreadcrumbUtility.ItemNewValue
 		else
 			return true
 		end
@@ -296,7 +295,7 @@ CoD.BreadcrumbUtility.IsStatSpecialistOutfitItemNew = function ( f24_arg0, f24_a
 		return false
 	end
 	local f24_local0 = CoD.BaseUtility.GetMenuStorageLoadoutBuffer( f24_arg0 )
-	if f24_arg0._sessionMode == Enum[@"emodes"][@"mode_zombies"] then
+	if f24_arg0._sessionMode == Enum.eModes.mode_zombies then
 		if not CoD.ZMStoryUtility.CharacterIndexToStory[f24_arg2] then
 			CoD.ZMStoryUtility.GenerateCharacterToStoryTable()
 		end
@@ -305,20 +304,20 @@ CoD.BreadcrumbUtility.IsStatSpecialistOutfitItemNew = function ( f24_arg0, f24_a
 			f24_local0 = f24_local0[f24_local1]
 		end
 	end
-	if f24_local0 and f24_local0[@"characters"][f24_arg2] and f24_local0[@"characters"][f24_arg2][@"outfit_breadcrumbs"][f24_arg3] then
+	if f24_local0 and f24_local0.characters[f24_arg2] and f24_local0.characters[f24_arg2].outfit_breadcrumbs[f24_arg3] then
 		if f24_arg4 == CoD.BreadcrumbUtility.PresetPart then
-			if f24_local0[@"characters"][f24_arg2][@"outfit_breadcrumbs"][f24_arg3][@"hash_63930AAFA5D6AC7B"][f24_arg5] then
-				return f24_local0[@"characters"][f24_arg2][@"outfit_breadcrumbs"][f24_arg3][@"hash_63930AAFA5D6AC7B"][f24_arg5]:get() ~= CoD.BreadcrumbUtility.ItemNewValue
+			if f24_local0.characters[f24_arg2].outfit_breadcrumbs[f24_arg3][@"hash_63930AAFA5D6AC7B"][f24_arg5] then
+				return f24_local0.characters[f24_arg2].outfit_breadcrumbs[f24_arg3][@"hash_63930AAFA5D6AC7B"][f24_arg5]:get() ~= CoD.BreadcrumbUtility.ItemNewValue
 			end
-		elseif f24_local0[@"characters"][f24_arg2][@"outfit_breadcrumbs"][f24_arg3][@"parts"][f24_arg4] and f24_local0[@"characters"][f24_arg2][@"outfit_breadcrumbs"][f24_arg3][@"parts"][f24_arg4][@"hash_3D834AEE4BD18D13"][f24_arg5] then
-			return f24_local0[@"characters"][f24_arg2][@"outfit_breadcrumbs"][f24_arg3][@"parts"][f24_arg4][@"hash_3D834AEE4BD18D13"][f24_arg5]:get() ~= CoD.BreadcrumbUtility.ItemNewValue
+		elseif f24_local0.characters[f24_arg2].outfit_breadcrumbs[f24_arg3].parts[f24_arg4] and f24_local0.characters[f24_arg2].outfit_breadcrumbs[f24_arg3].parts[f24_arg4][@"hash_3D834AEE4BD18D13"][f24_arg5] then
+			return f24_local0.characters[f24_arg2].outfit_breadcrumbs[f24_arg3].parts[f24_arg4][@"hash_3D834AEE4BD18D13"][f24_arg5]:get() ~= CoD.BreadcrumbUtility.ItemNewValue
 		end
 	end
 end
 CoD.BreadcrumbUtility.JumpkitPartLookup = {
-	[Enum[@"hash_58037372CBD17C20"][@"hash_7BF99C226E97F1DB"]] = @"parachute",
-	[Enum[@"hash_58037372CBD17C20"][@"hash_4711A76E11C936FF"]] = @"trail",
-	[Enum[@"hash_58037372CBD17C20"][@"hash_D7DC1BB143B4455"]] = @"wingsuit"
+	[Enum[@"hash_58037372CBD17C20"][@"hash_7BF99C226E97F1DB"]] = "parachute",
+	[Enum[@"hash_58037372CBD17C20"][@"hash_4711A76E11C936FF"]] = "trail",
+	[Enum[@"hash_58037372CBD17C20"][@"hash_D7DC1BB143B4455"]] = "wingsuit"
 }
 CoD.BreadcrumbUtility.IsStatSpecialistJumpKitPartNew = function ( f25_arg0, f25_arg1, f25_arg2, f25_arg3 )
 	if not CoD.BreadcrumbUtility.AreBreadcrumbsEnabled() then
@@ -338,8 +337,8 @@ CoD.BreadcrumbUtility.IsStatWeaponAccessoryNew = function ( f26_arg0, f26_arg1, 
 		return false
 	else
 		local f26_local0 = CoD.BaseUtility.GetMenuStorageClientBuffer( f26_arg0 )
-		if f26_local0 and f26_local0[@"hash_6326A574B8674519"] and f26_local0[@"hash_6326A574B8674519"][f26_arg2] and f26_local0[@"hash_6326A574B8674519"][f26_arg2][@"hash_46F3E7D5FFAA28E0"] and f26_local0[@"hash_6326A574B8674519"][f26_arg2][@"hash_46F3E7D5FFAA28E0"][f26_arg3] then
-			return f26_local0[@"hash_6326A574B8674519"][f26_arg2][@"hash_46F3E7D5FFAA28E0"][f26_arg3]:get() ~= CoD.BreadcrumbUtility.ItemNewValue
+		if f26_local0 and f26_local0[@"hash_6326A574B8674519"] and f26_local0[@"hash_6326A574B8674519"][f26_arg2] and f26_local0[@"hash_6326A574B8674519"][f26_arg2].charms_marked_old and f26_local0[@"hash_6326A574B8674519"][f26_arg2].charms_marked_old[f26_arg3] then
+			return f26_local0[@"hash_6326A574B8674519"][f26_arg2].charms_marked_old[f26_arg3]:get() ~= CoD.BreadcrumbUtility.ItemNewValue
 		else
 			
 		end
@@ -352,8 +351,8 @@ CoD.BreadcrumbUtility.IsStatWeaponDeathFxNew = function ( f27_arg0, f27_arg1, f2
 		return false
 	else
 		local f27_local0 = CoD.BaseUtility.GetMenuStorageClientBuffer( f27_arg0 )
-		if f27_local0 and f27_local0[@"hash_6326A574B8674519"] and f27_local0[@"hash_6326A574B8674519"][f27_arg2] and f27_local0[@"hash_6326A574B8674519"][f27_arg2][@"hash_6790AE6A6414898A"] and f27_local0[@"hash_6326A574B8674519"][f27_arg2][@"hash_6790AE6A6414898A"][f27_arg3] then
-			return f27_local0[@"hash_6326A574B8674519"][f27_arg2][@"hash_6790AE6A6414898A"][f27_arg3]:get() ~= CoD.BreadcrumbUtility.ItemNewValue
+		if f27_local0 and f27_local0[@"hash_6326A574B8674519"] and f27_local0[@"hash_6326A574B8674519"][f27_arg2] and f27_local0[@"hash_6326A574B8674519"][f27_arg2].deathfx_marked_old and f27_local0[@"hash_6326A574B8674519"][f27_arg2].deathfx_marked_old[f27_arg3] then
+			return f27_local0[@"hash_6326A574B8674519"][f27_arg2].deathfx_marked_old[f27_arg3]:get() ~= CoD.BreadcrumbUtility.ItemNewValue
 		else
 			
 		end
@@ -364,8 +363,8 @@ CoD.BreadcrumbUtility.IsStatWeaponOpticNew = function ( f28_arg0, f28_arg1, f28_
 		return false
 	else
 		local f28_local0 = CoD.BaseUtility.GetMenuStorageClientBuffer( f28_arg0 )
-		if f28_local0 and f28_local0[@"hash_6326A574B8674519"] and f28_local0[@"hash_6326A574B8674519"][f28_arg2] and f28_local0[@"hash_6326A574B8674519"][f28_arg2][@"hash_5F4B90954C205CDE"] and f28_local0[@"hash_6326A574B8674519"][f28_arg2][@"hash_5F4B90954C205CDE"][f28_arg3] then
-			return f28_local0[@"hash_6326A574B8674519"][f28_arg2][@"hash_5F4B90954C205CDE"][f28_arg3]:get() ~= CoD.BreadcrumbUtility.ItemNewValue
+		if f28_local0 and f28_local0[@"hash_6326A574B8674519"] and f28_local0[@"hash_6326A574B8674519"][f28_arg2] and f28_local0[@"hash_6326A574B8674519"][f28_arg2].reticle_marked_old and f28_local0[@"hash_6326A574B8674519"][f28_arg2].reticle_marked_old[f28_arg3] then
+			return f28_local0[@"hash_6326A574B8674519"][f28_arg2].reticle_marked_old[f28_arg3]:get() ~= CoD.BreadcrumbUtility.ItemNewValue
 		else
 			
 		end
@@ -376,8 +375,8 @@ CoD.BreadcrumbUtility.IsStatWeaponCamoNew = function ( f29_arg0, f29_arg1, f29_a
 		return false
 	else
 		local f29_local0 = CoD.BaseUtility.GetMenuStorageClientBuffer( f29_arg0 )
-		if f29_local0 and f29_local0[@"hash_6326A574B8674519"] and f29_local0[@"hash_6326A574B8674519"][f29_arg2] and f29_local0[@"hash_6326A574B8674519"][f29_arg2][@"hash_2E3660BDEC3818FD"] and f29_local0[@"hash_6326A574B8674519"][f29_arg2][@"hash_2E3660BDEC3818FD"][f29_arg3] then
-			return f29_local0[@"hash_6326A574B8674519"][f29_arg2][@"hash_2E3660BDEC3818FD"][f29_arg3]:get() ~= CoD.BreadcrumbUtility.ItemNewValue
+		if f29_local0 and f29_local0[@"hash_6326A574B8674519"] and f29_local0[@"hash_6326A574B8674519"][f29_arg2] and f29_local0[@"hash_6326A574B8674519"][f29_arg2].camos_marked_old and f29_local0[@"hash_6326A574B8674519"][f29_arg2].camos_marked_old[f29_arg3] then
+			return f29_local0[@"hash_6326A574B8674519"][f29_arg2].camos_marked_old[f29_arg3]:get() ~= CoD.BreadcrumbUtility.ItemNewValue
 		else
 			
 		end
@@ -398,7 +397,7 @@ CoD.BreadcrumbUtility.ClearLootWeaponItemAsOld = function ( f31_arg0, f31_arg1, 
 	end
 	local f31_local0 = CoD.BaseUtility.GetMenuStorageClientBuffer( f31_arg0 )
 	if f31_local0 then
-		f31_local0[@"hash_24B9A9540A303875"][f31_arg2]:set( CoD.BreadcrumbUtility.ItemNewValue )
+		f31_local0.item_marked_old[f31_arg2]:set( CoD.BreadcrumbUtility.ItemNewValue )
 	end
 end
 CoD.BreadcrumbUtility.ClearSignatureWeaponItemAsOld = function ( f32_arg0, f32_arg1, f32_arg2, f32_arg3 )
@@ -469,7 +468,7 @@ CoD.BreadcrumbUtility.ClearSpecialistOutfitItem = function ( f38_arg0, f38_arg1,
 		return false
 	end
 	local f38_local0 = CoD.BaseUtility.GetMenuStorageLoadoutBuffer( f38_arg0 )
-	if f38_arg0._sessionMode == Enum[@"emodes"][@"mode_zombies"] then
+	if f38_arg0._sessionMode == Enum.eModes.mode_zombies then
 		if not CoD.ZMStoryUtility.CharacterIndexToStory[f38_arg2] then
 			CoD.ZMStoryUtility.GenerateCharacterToStoryTable()
 		end
@@ -478,13 +477,13 @@ CoD.BreadcrumbUtility.ClearSpecialistOutfitItem = function ( f38_arg0, f38_arg1,
 			f38_local0 = f38_local0[f38_local1]
 		end
 	end
-	if f38_local0 and f38_local0[@"characters"][f38_arg2] and f38_local0[@"characters"][f38_arg2][@"outfit_breadcrumbs"][f38_arg3] then
+	if f38_local0 and f38_local0.characters[f38_arg2] and f38_local0.characters[f38_arg2].outfit_breadcrumbs[f38_arg3] then
 		if f38_arg4 == CoD.BreadcrumbUtility.PresetPart then
-			if f38_local0[@"characters"][f38_arg2][@"outfit_breadcrumbs"][f38_arg3][@"hash_63930AAFA5D6AC7B"][f38_arg5] then
-				return f38_local0[@"characters"][f38_arg2][@"outfit_breadcrumbs"][f38_arg3][@"hash_63930AAFA5D6AC7B"][f38_arg5]:set( CoD.BreadcrumbUtility.ItemNewValue )
+			if f38_local0.characters[f38_arg2].outfit_breadcrumbs[f38_arg3][@"hash_63930AAFA5D6AC7B"][f38_arg5] then
+				return f38_local0.characters[f38_arg2].outfit_breadcrumbs[f38_arg3][@"hash_63930AAFA5D6AC7B"][f38_arg5]:set( CoD.BreadcrumbUtility.ItemNewValue )
 			end
-		elseif f38_local0[@"characters"][f38_arg2][@"outfit_breadcrumbs"][f38_arg3][@"parts"][f38_arg4] and f38_local0[@"characters"][f38_arg2][@"outfit_breadcrumbs"][f38_arg3][@"parts"][f38_arg4][@"hash_3D834AEE4BD18D13"][f38_arg5] then
-			return f38_local0[@"characters"][f38_arg2][@"outfit_breadcrumbs"][f38_arg3][@"parts"][f38_arg4][@"hash_3D834AEE4BD18D13"][f38_arg5]:set( CoD.BreadcrumbUtility.ItemNewValue )
+		elseif f38_local0.characters[f38_arg2].outfit_breadcrumbs[f38_arg3].parts[f38_arg4] and f38_local0.characters[f38_arg2].outfit_breadcrumbs[f38_arg3].parts[f38_arg4][@"hash_3D834AEE4BD18D13"][f38_arg5] then
+			return f38_local0.characters[f38_arg2].outfit_breadcrumbs[f38_arg3].parts[f38_arg4][@"hash_3D834AEE4BD18D13"][f38_arg5]:set( CoD.BreadcrumbUtility.ItemNewValue )
 		end
 	end
 end
@@ -560,7 +559,7 @@ CoD.BreadcrumbUtility.GetLootWeaponNewCountForCategory = function ( f45_arg0, f4
 	local f45_local0 = 0
 	local f45_local1 = f45_arg0._sessionMode
 	for f45_local5, f45_local6 in ipairs( CoD.CACUtility.GetUnlockableItemsForItemGroup( f45_arg1, f45_local1, f45_arg2 ) ) do
-		if not Engine[@"isitemlocked"]( f45_arg1, f45_local6.globalItemIndex, f45_local1 ) then
+		if not Engine.IsItemLocked( f45_arg1, f45_local6.globalItemIndex, f45_local1 ) then
 			f45_local0 = f45_local0 + CoD.BreadcrumbUtility.GetLootWeaponNewCountForWeapon( f45_arg0, f45_arg1, f45_local6.nameHash )
 		end
 	end
@@ -569,11 +568,11 @@ end
 CoD.BreadcrumbUtility.GetLootWeaponNewCountForWeapon = function ( f46_arg0, f46_arg1, f46_arg2 )
 	local f46_local0 = 0
 	local f46_local1, f46_local2 = CoD.BlackMarketTableUtility.SimpleLootLookup( f46_arg1, f46_arg2 )
-	if f46_local1 ~= CoD.BlackMarketTableUtility.SimpleLootLookupTypes[@"none"] and f46_local2 and not CoD.BreadcrumbUtility.IsStatLootWeaponItemAsOld( f46_arg0, f46_arg1, f46_arg2 ) then
+	if f46_local1 ~= CoD.BlackMarketTableUtility.SimpleLootLookupTypes.none and f46_local2 and not CoD.BreadcrumbUtility.IsStatLootWeaponItemAsOld( f46_arg0, f46_arg1, f46_arg2 ) then
 		f46_local0 = f46_local0 + 1
 	end
 	for f46_local6, f46_local7 in CoD.CACUtility.ForAvailableSignatureWeapons( f46_arg1, f46_arg2, not IsCurrentMenu( f46_arg0, "PaintjobWeaponSelect" ), true ) do
-		local f46_local8 = f46_local7[@"index"]
+		local f46_local8 = f46_local7.index
 		if f46_local8 > CoD.CACUtility.EmptyItemIndex and not CoD.BreadcrumbUtility.IsStatSignatureWeaponItemAsOld( f46_arg0, f46_arg1, f46_arg2, f46_local8 - 1 ) then
 			f46_local0 = f46_local0 + 1
 		end
@@ -591,11 +590,11 @@ CoD.BreadcrumbUtility.GetEmblemNewCountFromOwned = function ( f48_arg0, f48_arg1
 	local f48_local0 = 0
 	if not IsUserContentRestricted( f48_arg1 ) then
 		local f48_local1 = CoD.BaseUtility.GetMenuStorageClientBuffer( f48_arg0 )
-		if f48_local1 and f48_local1[@"icon_owned"] and f48_local1[@"hash_42799A890D40252F"] then
-			local f48_local2 = Engine[@"emblemfiltercount"]( f48_arg1, 0, f48_arg2 )
+		if f48_local1 and f48_local1.icon_owned and f48_local1[@"hash_42799A890D40252F"] then
+			local f48_local2 = Engine.EmblemFilterCount( f48_arg1, 0, f48_arg2 )
 			for f48_local3 = 0, f48_local2 - 1, 1 do
-				local f48_local6 = Engine[@"emblemfiltericonid"]( f48_arg1, 0, f48_arg2, f48_local3 )
-				if f48_local1[@"icon_owned"][f48_local6] and f48_local1[@"icon_owned"][f48_local6]:get() == CoDLootShared.ItemOwnedValue and f48_local1[@"hash_42799A890D40252F"][f48_local6] and f48_local1[@"hash_42799A890D40252F"][f48_local6]:get() ~= CoDLootShared.ItemNewValue then
+				local f48_local6 = Engine.EmblemFilterIconID( f48_arg1, 0, f48_arg2, f48_local3 )
+				if f48_local1.icon_owned[f48_local6] and f48_local1.icon_owned[f48_local6]:get() == CoDLootShared.ItemOwnedValue and f48_local1[@"hash_42799A890D40252F"][f48_local6] and f48_local1[@"hash_42799A890D40252F"][f48_local6]:get() ~= CoDLootShared.ItemNewValue then
 					f48_local0 = f48_local0 + 1
 				end
 			end
@@ -609,10 +608,10 @@ CoD.BreadcrumbUtility.GetEmblemByCategoryNewCount = function ( f49_arg0, f49_arg
 	end
 	local f49_local0 = 0
 	if not IsUserContentRestricted( f49_arg1 ) then
-		local f49_local1 = Engine[@"emblemfiltercount"]( f49_arg1, 0, f49_arg2 )
+		local f49_local1 = Engine.EmblemFilterCount( f49_arg1, 0, f49_arg2 )
 		for f49_local2 = 0, f49_local1 - 1, 1 do
 			local f49_local5 = false
-			local f49_local6 = Engine[@"emblemfiltericonid"]( f49_arg1, 0, f49_arg2, f49_local2 )
+			local f49_local6 = Engine.EmblemFilterIconID( f49_arg1, 0, f49_arg2, f49_local2 )
 			if Engine[@"hash_2D1419DCE072A0B1"]( f49_local6 ) then
 				f49_local5 = Engine[@"hash_52EE0A51483D8E7C"]( f49_arg1, f49_local6 )
 			else
@@ -633,9 +632,9 @@ end
 CoD.BreadcrumbUtility.GetLootCallingCardNewCountFromOwned = function ( f50_arg0, f50_arg1 )
 	local f50_local0 = CoD.BaseUtility.GetMenuStorageClientBuffer( f50_arg0 )
 	local f50_local1 = 0
-	if f50_local0 and f50_local0[@"hash_1D45B221DEE76EE4"] and f50_local0[@"hash_58BB06B8B337E385"] then
-		for f50_local5, f50_local6 in DDLUtils.ipairs( f50_local0[@"hash_1D45B221DEE76EE4"] ) do
-			if f50_local0[@"hash_1D45B221DEE76EE4"][f50_local5] and f50_local0[@"hash_1D45B221DEE76EE4"][f50_local5]:get() == CoDLootShared.ItemOwnedValue and f50_local0[@"hash_58BB06B8B337E385"][f50_local5] and f50_local0[@"hash_58BB06B8B337E385"][f50_local5]:get() ~= CoDLootShared.ItemNewValue then
+	if f50_local0 and f50_local0.calling_card_owned and f50_local0[@"hash_58BB06B8B337E385"] then
+		for f50_local5, f50_local6 in DDLUtils.ipairs( f50_local0.calling_card_owned ) do
+			if f50_local0.calling_card_owned[f50_local5] and f50_local0.calling_card_owned[f50_local5]:get() == CoDLootShared.ItemOwnedValue and f50_local0[@"hash_58BB06B8B337E385"][f50_local5] and f50_local0[@"hash_58BB06B8B337E385"][f50_local5]:get() ~= CoDLootShared.ItemNewValue then
 				f50_local1 = f50_local1 + 1
 			end
 		end
@@ -646,7 +645,7 @@ CoD.BreadcrumbUtility.UpdateOwnedCallingCardsAndCount = function ( f51_arg0, f51
 	local f51_local0 = {}
 	local f51_local1 = 0
 	if IsLive() and f51_arg2 == "loot" then
-		for f51_local7, f51_local8 in ipairs( CoD.BlackMarketTableUtility.GetItemsOfType( f51_arg1, @"calling_card" ) ) do
+		for f51_local7, f51_local8 in ipairs( CoD.BlackMarketTableUtility.GetItemsOfType( f51_arg1, "calling_card" ) ) do
 			if f51_local8 then
 				local f51_local5 = nil
 				local f51_local6 = CoD.BlackMarketTableUtility.LootInfoLookup( f51_arg1, f51_local8 )
@@ -666,11 +665,11 @@ CoD.BreadcrumbUtility.UpdateOwnedCallingCardsAndCount = function ( f51_arg0, f51
 		elseif not CoD.CACUtility.IsProgressionEnabled( f51_arg0._sessionMode ) then
 			return 
 		elseif f51_arg2 == "mp" then
-			f51_local0 = CoD.ChallengesUtility.GetChallengeCardsForSessionMode( f51_arg1, Enum[@"emodes"][@"mode_multiplayer"], f51_arg2, false )
+			f51_local0 = CoD.ChallengesUtility.GetChallengeCardsForSessionMode( f51_arg1, Enum.eModes.mode_multiplayer, f51_arg2, false )
 		elseif f51_arg2 == "zm" then
-			f51_local0 = CoD.ChallengesUtility.GetChallengeCardsForSessionMode( f51_arg1, Enum[@"emodes"][@"mode_zombies"], f51_arg2, false )
+			f51_local0 = CoD.ChallengesUtility.GetChallengeCardsForSessionMode( f51_arg1, Enum.eModes.mode_zombies, f51_arg2, false )
 		elseif f51_arg2 == "wz" then
-			f51_local0 = CoD.ChallengesUtility.GetChallengeCardsForSessionMode( f51_arg1, Enum[@"emodes"][@"mode_warzone"], f51_arg2, false )
+			f51_local0 = CoD.ChallengesUtility.GetChallengeCardsForSessionMode( f51_arg1, Enum.eModes.mode_warzone, f51_arg2, false )
 		elseif f51_arg2 == "masters" then
 			f51_local0 = CoD.ChallengesUtility.GetMasteryChallengeCards( f51_arg1, false )
 		end
@@ -692,7 +691,7 @@ CoD.BreadcrumbUtility.UpdateSprayGestureNewCountTable = function ( f52_arg0, f52
 		gestures = 0
 	}
 	if not f52_arg0._sessionMode then
-		local f52_local1 = Engine[@"currentsessionmode"]()
+		local f52_local1 = Engine.CurrentSessionMode()
 	end
 	for f52_local8, f52_local9 in ipairs( CoD.BreadcrumbUtility.GetSprayGestureTable() ) do
 		local f52_local10 = f52_local9[@"assetname"]
@@ -707,7 +706,7 @@ CoD.BreadcrumbUtility.UpdateSprayGestureNewCountTable = function ( f52_arg0, f52
 				if f52_local7 then
 					f52_local7 = f52_local9[@"isdefault"] == 1
 				end
-				if f52_local9[@"type"] == @"tag" then
+				if f52_local9.type == "tag" then
 					if not f52_local5 or not f52_local5.inSet then
 						if not f52_local7 and (f52_local6 or f52_local5.owned) then
 							if f52_arg2 then
@@ -727,7 +726,7 @@ CoD.BreadcrumbUtility.UpdateSprayGestureNewCountTable = function ( f52_arg0, f52
 						end
 					end
 				end
-				if f52_local9[@"type"] == @"gesture" and (f52_local6 or f52_local5.owned) then
+				if f52_local9.type == "gesture" and (f52_local6 or f52_local5.owned) then
 					if f52_arg2 then
 						CoD.BreadcrumbUtility.ClearSprayGestureNew( f52_arg0, f52_arg1, f52_local8 )
 					else
@@ -745,13 +744,13 @@ end
 CoD.BreadcrumbUtility.GetAccessoryNewCountForWeapon = function ( f53_arg0, f53_arg1, f53_arg2 )
 	local f53_local0 = 0
 	local f53_local1 = CoD.BaseUtility.GetMenuStorageClientBuffer( f53_arg0 )
-	local f53_local2 = Engine[@"hash_7A7E3CD65E63086F"]( @"hash_5F2DC7A2FE7EEDC5" )
+	local f53_local2 = Engine[@"hash_7A7E3CD65E63086F"]( "weaponcharm_list" )
 	local f53_local3 = {
 		weaponRef = f53_arg2
 	}
 	if f53_local2 then
 		for f53_local7, f53_local8 in ipairs( f53_local2 ) do
-			local f53_local9 = CoD.BlackMarketTableUtility.LootInfoLookup( f53_arg1, f53_local8[@"lootid"], f53_local8[@"entitlement"], f53_local3 )
+			local f53_local9 = CoD.BlackMarketTableUtility.LootInfoLookup( f53_arg1, f53_local8.lootid, f53_local8[@"entitlement"], f53_local3 )
 			if f53_local9 and f53_local9.owned and (f53_local9.isEntitlement or f53_local9.isLoot) and CoD.BreadcrumbUtility.IsStatWeaponAccessoryNew( f53_arg0, f53_arg1, f53_arg2, f53_local7 - 1 ) then
 				f53_local0 = f53_local0 + 1
 			end
@@ -765,13 +764,13 @@ CoD.BreadcrumbUtility.GetDeathFxNewCountForWeapon = function ( f54_arg0, f54_arg
 	end
 	local f54_local0 = 0
 	local f54_local1 = CoD.BaseUtility.GetMenuStorageClientBuffer( f54_arg0 )
-	local f54_local2 = Engine[@"hash_7A7E3CD65E63086F"]( @"hash_A8F031F7C7B2ED8" )
+	local f54_local2 = Engine[@"hash_7A7E3CD65E63086F"]( "weapondeathfx_list" )
 	local f54_local3 = {
 		weaponRef = f54_arg2
 	}
 	if f54_local2 then
 		for f54_local7, f54_local8 in ipairs( f54_local2 ) do
-			local f54_local9 = CoD.BlackMarketTableUtility.LootInfoLookup( f54_arg1, f54_local8[@"lootid"], f54_local8[@"entitlement"], f54_local3 )
+			local f54_local9 = CoD.BlackMarketTableUtility.LootInfoLookup( f54_arg1, f54_local8.lootid, f54_local8[@"entitlement"], f54_local3 )
 			if f54_local9 and f54_local9.owned and (f54_local9.isEntitlement or f54_local9.isLoot) and CoD.BreadcrumbUtility.IsStatWeaponDeathFxNew( f54_arg0, f54_arg1, f54_arg2, f54_local7 - 1 ) then
 				f54_local0 = f54_local0 + 1
 			end
@@ -790,7 +789,7 @@ CoD.BreadcrumbUtility.GetOpticsNewCountForWeapon = function ( f55_arg0, f55_arg1
 					f55_local5 = Engine[@"converttoxhash"]( "reticle_" .. f55_arg0._attachmentRef .. "_" .. f55_local8.reticleIndex )
 				end
 				local f55_local6 = CoD.BlackMarketTableUtility.LootInfoLookup( f55_arg1, f55_local5 )
-				if (f55_local6.available or f55_local8.entitlement and Engine[@"hasentitlement"]( f55_arg1, f55_local8.entitlement )) and CoD.BreadcrumbUtility.IsStatWeaponOpticNew( f55_arg0, f55_arg1, f55_arg0._itemRefHash, f55_local8.weaponOptionSubIndex ) then
+				if (f55_local6.available or f55_local8.entitlement and Engine.HasEntitlement( f55_arg1, f55_local8.entitlement )) and CoD.BreadcrumbUtility.IsStatWeaponOpticNew( f55_arg0, f55_arg1, f55_arg0._itemRefHash, f55_local8.weaponOptionSubIndex ) then
 					f55_local0 = f55_local0 + 1
 				end
 			end
@@ -803,10 +802,10 @@ CoD.BreadcrumbUtility.BuildWeaponCamoTable = function ( f56_arg0, f56_arg1, f56_
 		lootbase = {},
 		active = {}
 	}
-	local f56_local1 = Engine[@"tablefindrows"]( CoD.attachmentTable, Enum[@"attachmenttablecolumn_e"][@"hash_2BE9816FAD8AD2D2"], "lootbase" )
+	local f56_local1 = Engine.TableFindRows( CoD.attachmentTable, Enum.attachmentTableColumn_e[@"hash_2BE9816FAD8AD2D2"], "lootbase" )
 	if f56_local1 then
 		for f56_local5, f56_local6 in ipairs( f56_local1 ) do
-			local f56_local7 = Engine[@"hash_4C6F8EC444864600"]( CoD.attachmentTable, f56_local6, Enum[@"attachmenttablecolumn_e"][@"hash_2419575E672F6FA2"] )
+			local f56_local7 = Engine[@"hash_4C6F8EC444864600"]( CoD.attachmentTable, f56_local6, Enum.attachmentTableColumn_e[@"hash_2419575E672F6FA2"] )
 			if f56_local7 then
 				table.insert( f56_local0.lootbase, {
 					camoName = f56_local7
@@ -815,10 +814,10 @@ CoD.BreadcrumbUtility.BuildWeaponCamoTable = function ( f56_arg0, f56_arg1, f56_
 		end
 	end
 	if f56_arg3 then
-		local f56_local2 = Engine[@"tablefindrows"]( CoD.attachmentTable, Enum[@"attachmenttablecolumn_e"][@"hash_2BE9816FAD8AD2D2"], "active" )
+		local f56_local2 = Engine.TableFindRows( CoD.attachmentTable, Enum.attachmentTableColumn_e[@"hash_2BE9816FAD8AD2D2"], "active" )
 		if f56_local2 then
 			for f56_local6, f56_local7 in ipairs( f56_local2 ) do
-				local f56_local8 = Engine[@"hash_4C6F8EC444864600"]( CoD.attachmentTable, f56_local7, Enum[@"attachmenttablecolumn_e"][@"hash_2419575E672F6FA2"] )
+				local f56_local8 = Engine[@"hash_4C6F8EC444864600"]( CoD.attachmentTable, f56_local7, Enum.attachmentTableColumn_e[@"hash_2419575E672F6FA2"] )
 				if f56_local8 then
 					table.insert( f56_local0.active, {
 						camoName = f56_local8
@@ -858,8 +857,8 @@ CoD.BreadcrumbUtility.GetCamoNewCountForWeapon = function ( f58_arg0, f58_arg1, 
 				if not f58_local4 then
 				
 				elseif f58_local4 then
-					local f58_local5 = Engine[@"tablelookup"]( CoD.CACUtility.CamoOptionsTable, Enum[@"hash_25DD5CC8AEA7314B"][@"hash_6A6342D60A0D5AAE"], Enum[@"hash_25DD5CC8AEA7314B"][@"hash_3AA94CABDA68EB21"], f58_local4 )
-					local f58_local6 = Engine[@"tablelookup"]( CoD.attachmentTable, Enum[@"attachmenttablecolumn_e"][@"attachmenttable_column_entitlement_name"], Enum[@"attachmenttablecolumn_e"][@"hash_2419575E672F6FA2"], f58_local4 )
+					local f58_local5 = Engine.TableLookup( CoD.CACUtility.CamoOptionsTable, Enum[@"hash_25DD5CC8AEA7314B"][@"hash_6A6342D60A0D5AAE"], Enum[@"hash_25DD5CC8AEA7314B"][@"hash_3AA94CABDA68EB21"], f58_local4 )
+					local f58_local6 = Engine.TableLookup( CoD.attachmentTable, Enum.attachmentTableColumn_e[@"attachmenttable_column_entitlement_name"], Enum.attachmentTableColumn_e[@"hash_2419575E672F6FA2"], f58_local4 )
 					local f58_local7
 					if f58_local4 then
 						f58_local7 = CoD.WeaponOptionsUtility.AlternateCamoLootIDLookup[f58_local4]
@@ -884,15 +883,15 @@ CoD.BreadcrumbUtility.DecrementPrimarySecondaryBreadCrumbCount = function ( f59_
 	local f59_local0 = CoD.BaseUtility.GetMenuModel( f59_arg0 )
 	local f59_local1 = CoD.BaseUtility.GetMenuSessionMode( f59_arg0 )
 	if f59_local0 then
-		if f59_local1 == Enum[@"emodes"][@"mode_multiplayer"] then
+		if f59_local1 == Enum.eModes.mode_multiplayer then
 			if f59_arg2 == f59_local0.primary.refHash:get() then
 				f59_local0.primary.breadcrumbCount:set( math.max( 0, f59_local0.primary.breadcrumbCount:get() - 1 ) )
 			elseif f59_arg2 == f59_local0.secondary.refHash:get() then
 				f59_local0.secondary.breadcrumbCount:set( math.max( 0, f59_local0.secondary.breadcrumbCount:get() - 1 ) )
 			end
-		elseif f59_local1 == Enum[@"emodes"][@"mode_zombies"] then
+		elseif f59_local1 == Enum.eModes.mode_zombies then
 			f59_local0.breadcrumbCount:set( math.max( 0, f59_local0.breadcrumbCount:get() - 1 ) )
-		elseif f59_local1 == Enum[@"emodes"][@"mode_warzone"] then
+		elseif f59_local1 == Enum.eModes.mode_warzone then
 			f59_local0.breadcrumbCount:set( math.max( 0, f59_local0.breadcrumbCount:get() - 1 ) )
 		end
 	end
@@ -904,7 +903,7 @@ CoD.BreadcrumbUtility.SetClientStorageBufferForMode = function ( f61_arg0, f61_a
 	f61_arg0._storageClientBuffer = CoD.BreadcrumbUtility.GetStorageClientBufferForPlayer( f61_arg1, f61_arg2 )
 end
 CoD.BreadcrumbUtility.UploadBuffer = function ( f62_arg0, f62_arg1 )
-	Engine[@"storagewrite"]( f62_arg0, f62_arg1 )
+	Engine.StorageWrite( f62_arg0, f62_arg1 )
 end
 CoD.BreadcrumbUtility.UpdateLoadoutBreadcrumbs = function ( f63_arg0, f63_arg1 )
 	local f63_local0 = CoD.BaseUtility.GetMenuSessionMode( f63_arg0 )
@@ -986,7 +985,7 @@ CoD.BreadcrumbUtility.SetLootWeaponAsOld = function ( f69_arg0, f69_arg1, f69_ar
 			CoD.BreadcrumbUtility.ClearLootWeaponItemAsOld( f69_arg0, f69_arg2, f69_local2 )
 		end
 		CoD.BreadcrumbUtility.UpdateLoadoutBreadcrumbs( f69_arg0, f69_arg2 )
-		local f69_local4 = Engine[@"getweapongroup"]( f69_local1.itemIndex:get(), f69_local0 )
+		local f69_local4 = Engine.GetWeaponGroup( f69_local1.itemIndex:get(), f69_local0 )
 		local f69_local5 = CoD.CACUtility.GetWeaponGroupsNames( "primary" )
 		local f69_local6 = CoD.CACUtility.GetWeaponGroupsNames( "secondary" )
 		local f69_local7
@@ -1016,7 +1015,7 @@ CoD.BreadcrumbUtility.SetSignatureWeaponAsOld = function ( f70_arg0, f70_arg1, f
 			CoD.BreadcrumbUtility.ClearSignatureWeaponItemAsOld( f70_arg0, f70_arg2, f70_local2, f70_local3 - 1 )
 			CoD.BreadcrumbUtility.UpdateLoadoutBreadcrumbs( f70_arg0, f70_arg2 )
 			CoD.BreadcrumbUtility.UpdateWeaponBreadcrumbs( f70_arg0, f70_arg2, f70_local2 )
-			local f70_local4 = Engine[@"getweapongroup"]( f70_local1.itemIndex:get(), f70_local0 )
+			local f70_local4 = Engine.GetWeaponGroup( f70_local1.itemIndex:get(), f70_local0 )
 			local f70_local5 = CoD.CACUtility.GetWeaponGroupsNames( "primary" )
 			local f70_local6 = CoD.CACUtility.GetWeaponGroupsNames( "secondary" )
 			local f70_local7
@@ -1125,9 +1124,8 @@ CoD.BreadcrumbUtility.SetSpecialistOutfitItemAsOld = function ( f75_arg0, f75_ar
 	if f75_local1 and f75_local0 and f75_local0.outfitIndex and CoD.ModelUtility.IsSelfModelValueNilOrTrue( f75_arg1, f75_arg2, "owned" ) then
 		local f75_local2 = f75_local0.outfitIndex:get()
 		local f75_local3, f75_local4 = nil
-		local f75_local5 = false
-		local f75_local6 = nil
-		local f75_local7 = Engine[@"currentsessionmode"]()
+		local f75_local5, f75_local6 = false
+		local f75_local7 = Engine.CurrentSessionMode()
 		if f75_local0.presetIndex and f75_local0.presetIndex:get() ~= -1 then
 			f75_local3 = CoD.BreadcrumbUtility.PresetPart
 			f75_local4 = f75_local0.presetIndex:get()
@@ -1254,7 +1252,7 @@ CoD.BreadcrumbUtility.SetWeaponCamoOld = function ( f83_arg0, f83_arg1, f83_arg2
 		else
 			if f83_local0 and f83_local1 == true and CoD.BreadcrumbUtility.IsWeaponCamoNew( f83_arg0, f83_arg1, f83_arg2 ) then
 				local f83_local2 = CoD.GetCustomization( f83_arg2, "weaponRefHash" )
-				local f83_local3 = Engine[@"tablelookup"]( CoD.CACUtility.CamoOptionsTable, Enum[@"hash_25DD5CC8AEA7314B"][@"hash_6A6342D60A0D5AAE"], Enum[@"hash_25DD5CC8AEA7314B"][@"hash_3AA94CABDA68EB21"], CoD.SafeGetModelValue( f83_local0, "ref" ) )
+				local f83_local3 = Engine.TableLookup( CoD.CACUtility.CamoOptionsTable, Enum[@"hash_25DD5CC8AEA7314B"][@"hash_6A6342D60A0D5AAE"], Enum[@"hash_25DD5CC8AEA7314B"][@"hash_3AA94CABDA68EB21"], CoD.SafeGetModelValue( f83_local0, "ref" ) )
 				if f83_local2 and f83_local3 then
 					CoD.BreadcrumbUtility.ClearWeaponCamoItem( f83_arg0, f83_arg2, f83_local2, f83_local3 )
 					UpdateSelfElementState( f83_arg0, f83_arg1, f83_arg2 )
@@ -1279,7 +1277,7 @@ CoD.BreadcrumbUtility.UpdateStartMenuBreadcrumb = function ( f85_arg0 )
 		return 
 	end
 	local f85_local0 = CoD.StartMenuUtility.GetSessionModeFromLobby()
-	if not IsLobbyNetworkModeLAN() and Engine[@"getplayerstats"]( f85_arg0, CoD.STATS_LOCATION_NORMAL, Enum[@"emodes"][@"mode_multiplayer"] ) then
+	if not IsLobbyNetworkModeLAN() and Engine.GetPlayerStats( f85_arg0, CoD.STATS_LOCATION_NORMAL, Enum.eModes.mode_multiplayer ) then
 		DataSources.StartMenuBreadcrumbs.recreateStartTabBreadcrumbModelsIfNeeded( f85_arg0, f85_local0, DataSources.StartMenuBreadcrumbs.getModel( f85_arg0 ) )
 	end
 end
@@ -1316,7 +1314,7 @@ CoD.BreadcrumbUtility.IsItemNew = function ( f87_arg0, f87_arg1, f87_arg2 )
 				return not CoD.BreadcrumbUtility.IsStatSignatureWeaponItemAsOld( f87_arg0, f87_arg2, f87_local4, f87_local5 - 1 )
 			else
 				local f87_local6, f87_local7 = CoD.BlackMarketTableUtility.SimpleLootLookup( f87_arg2, f87_local4 )
-				if f87_local6 ~= CoD.BlackMarketTableUtility.SimpleLootLookupTypes[@"none"] and f87_local7 and not CoD.BreadcrumbUtility.IsStatLootWeaponItemAsOld( f87_arg0, f87_arg2, f87_local4 ) then
+				if f87_local6 ~= CoD.BlackMarketTableUtility.SimpleLootLookupTypes.none and f87_local7 and not CoD.BreadcrumbUtility.IsStatLootWeaponItemAsOld( f87_arg0, f87_arg2, f87_local4 ) then
 					return true
 				else
 					return CoD.BreadcrumbUtility.IsStatItemNew( f87_arg0, f87_arg2, f87_local4 )
@@ -1356,7 +1354,7 @@ CoD.BreadcrumbUtility.IsWeaponOpticNew = function ( f89_arg0, f89_arg1, f89_arg2
 end
 CoD.BreadcrumbUtility.IsWeaponCamoNew = function ( f90_arg0, f90_arg1, f90_arg2 )
 	local f90_local0 = CoD.GetCustomization( f90_arg2, "weaponRefHash" )
-	local f90_local1 = Engine[@"tablelookup"]( CoD.CACUtility.CamoOptionsTable, Enum[@"hash_25DD5CC8AEA7314B"][@"hash_6A6342D60A0D5AAE"], Enum[@"hash_25DD5CC8AEA7314B"][@"hash_3AA94CABDA68EB21"], f90_arg1 and CoD.SafeGetModelValue( f90_arg1:getModel(), "ref" ) )
+	local f90_local1 = Engine.TableLookup( CoD.CACUtility.CamoOptionsTable, Enum[@"hash_25DD5CC8AEA7314B"][@"hash_6A6342D60A0D5AAE"], Enum[@"hash_25DD5CC8AEA7314B"][@"hash_3AA94CABDA68EB21"], f90_arg1 and CoD.SafeGetModelValue( f90_arg1:getModel(), "ref" ) )
 	if f90_local0 and f90_local1 and f90_local1 >= 0 then
 		return CoD.BreadcrumbUtility.IsStatWeaponCamoNew( f90_arg0, f90_arg2, f90_local0, f90_local1 )
 	else
@@ -1374,7 +1372,7 @@ CoD.BreadcrumbUtility.IsAnyOpticsNew = function ( f91_arg0, f91_arg1, f91_arg2 )
 			if not f91_local2 then
 				f91_local2 = CoD.CACUtility.EmptyItemIndex
 			end
-			return Engine[@"areanyopticsnew"]( f91_arg1, f91_local2, f91_local0 )
+			return Engine.AreAnyOpticsNew( f91_arg1, f91_local2, f91_local0 )
 		else
 			return false
 		end
@@ -1391,7 +1389,7 @@ CoD.BreadcrumbUtility.IsAnyAttachmentsNew = function ( f92_arg0, f92_arg1, f92_a
 			if not f92_local2 then
 				f92_local2 = CoD.CACUtility.EmptyItemIndex
 			end
-			return Engine[@"areanynonopticattachmentsnew"]( f92_arg1, f92_local2, f92_local0 )
+			return Engine.AreAnyNonOpticAttachmentsNew( f92_arg1, f92_local2, f92_local0 )
 		else
 			return false
 		end
@@ -1402,7 +1400,7 @@ CoD.BreadcrumbUtility.IsAnyLoadoutSlotNew = function ( f93_arg0, f93_arg1 )
 	if not CoD.CACUtility.IsProgressionEnabled( f93_local1 ) then
 		return false
 	elseif f93_local2 then
-		return Engine[@"isloadoutslotnew"]( f93_arg1, f93_local2 )
+		return Engine.IsLoadoutSlotNew( f93_arg1, f93_local2 )
 	else
 		return false
 	end
@@ -1581,7 +1579,7 @@ CoD.BreadcrumbUtility.UpdatePersonalizeStringIfNew = function ( f110_arg0, f110_
 	if f110_local0 and f110_local0 > 0 then
 		return LocalizeHash( @"hash_4222960C47764579" )
 	else
-		return LocalizeHash( @"hash_32315E97C5F6E412" )
+		return LocalizeHash( "mpui/button_personalize_caps" )
 	end
 end
 CoD.BreadcrumbUtility.UpdateNewBreadcrumbPersonalizationString = function ( f111_arg0, f111_arg1, f111_arg2 )
@@ -1590,7 +1588,7 @@ CoD.BreadcrumbUtility.UpdateNewBreadcrumbPersonalizationString = function ( f111
 		local f111_local1 = CoD.SafeGetModelValue( f111_local0, "refHash" )
 		local f111_local2 = CoD.SafeGetModelValue( f111_local0, "breadcrumbCount" )
 		if f111_local2 and f111_local2 > 0 then
-			local f111_local3 = Engine[@"currentsessionmode"]()
+			local f111_local3 = Engine.CurrentSessionMode()
 			local f111_local4 = {
 				_storageClientBuffer = CoD.BreadcrumbUtility.GetStorageClientBufferForPlayer( f111_arg1, f111_local3 ),
 				_sessionMode = f111_local3
@@ -1621,9 +1619,9 @@ DataSourceHelpers.PerControllerDataSourceSetup( "StartMenuBreadcrumbs", "Breadcr
 	if IsInGame() then
 		return 
 	end
-	local f112_local0 = Engine[@"currentsessionmode"]()
+	local f112_local0 = Engine.CurrentSessionMode()
 	local f112_local1 = LobbyData.GetCurrentMenuTarget()
-	local f112_local2 = f112_local1[@"id"] == LobbyData.GetLobbyMenuIDByName( LuaEnum.UI.DIRECTOR_ONLINE_MP_TRAINING )
+	local f112_local2 = f112_local1.id == LobbyData.GetLobbyMenuIDByName( LuaEnum.UI.DIRECTOR_ONLINE_MP_TRAINING )
 	DataSources.StartMenuBreadcrumbs.initPersonalizationMode( f112_arg0, f112_local0 )
 	for f112_local6, f112_local7 in ipairs( CoD.BreadcrumbUtility.BreadcrumbStartMenuTabs ) do
 		local f112_local8 = f112_arg0:create( f112_local7 )
@@ -1706,20 +1704,20 @@ end, true, {
 	end
 } )
 DataSourceHelpers.PerControllerDataSourceSetup( "CharacterBreadcrumbs", "Breadcrumbs.characters", function ( f115_arg0, f115_arg1 )
-	local f115_local0 = Engine[@"currentsessionmode"]()
+	local f115_local0 = Engine.CurrentSessionMode()
 	local f115_local1 = f115_arg0:create( "breadcrumbCount" )
 	f115_local1:set( 0 )
-	if f115_local0 ~= Enum[@"emodes"][@"mode_invalid"] and not IsInGame() and not IsLobbyNetworkModeLAN() then
+	if f115_local0 ~= Enum.eModes.mode_invalid and not IsInGame() and not IsLobbyNetworkModeLAN() then
 		local f115_local2 = CoD.BreadcrumbUtility.GetStorageLoadoutBufferForPlayer( f115_arg1, f115_local0 )
 		local f115_local3 = CoD.PlayerRoleUtility.GetHeroList( f115_local0 )
 		local f115_local4 = {}
-		for f115_local5 = 0, Enum[@"emodes"][@"mode_count"] - 1, 1 do
+		for f115_local5 = 0, Enum.eModes[@"mode_count"] - 1, 1 do
 			local f115_local8 = f115_arg0:create( "wz_specialist_" .. (CoD.ModeToModeString( f115_local5 ) or "") )
 			f115_local4[f115_local5] = f115_local8:create( "breadcrumbCount" )
 			f115_local4[f115_local5]:set( 0 )
 		end
 		local f115_local5 = function ()
-			return f115_local0 == Engine[@"currentsessionmode"]()
+			return f115_local0 == Engine.CurrentSessionMode()
 		end
 		
 		local f115_local6 = {}
@@ -1741,7 +1739,7 @@ DataSourceHelpers.PerControllerDataSourceSetup( "CharacterBreadcrumbs", "Breadcr
 								_sessionMode = f115_local0
 							}, f115_arg1, f115_local0, f115_local11, CoD.PlayerRoleUtility.GetCachedHeroCustomization( f115_local0, f115_local11 ), false )
 						end )
-						if f115_local0 == Enum[@"emodes"][@"mode_warzone"] then
+						if f115_local0 == Enum.eModes.mode_warzone then
 							local f115_local15 = Engine[@"getpositionrolebundleinfo"]( f115_local0, f115_local11 )
 							if f115_local15[@"isdefaultcharacter"] ~= 1 then
 								CoD.BreadcrumbUtility.AddChildCountLink( f115_arg1, f115_local4[f115_local15[@"modecategory"]], f115_local13 )
@@ -1790,7 +1788,7 @@ DataSourceHelpers.PerControllerDataSourceSetup( "DepotBreadcrumbs", "Breadcrumbs
 	CoD.BreadcrumbUtility.AddChildCountLink( f120_arg1, f120_local0, f120_local1.breadcrumbCount )
 	local f120_local2 = DataSources.JumpkitBreadcrumbs.getModel( f120_arg1 )
 	CoD.BreadcrumbUtility.AddChildCountLink( f120_arg1, f120_local0, f120_local2.breadcrumbCount, function ()
-		return Engine[@"currentsessionmode"]() == Enum[@"emodes"][@"mode_warzone"]
+		return Engine.CurrentSessionMode() == Enum.eModes.mode_warzone
 	end )
 	CoD.BreadcrumbUtility.ForceUpdateChildCountLink( f120_arg1, f120_local0 )
 end )
@@ -1817,7 +1815,7 @@ end, true, {
 			_storageLoadoutBuffer = CoD.BreadcrumbUtility.GetStorageLoadoutBufferForPlayer( f123_arg0, f123_arg1 ),
 			_sessionMode = f123_arg1
 		}
-		if f123_arg1 == Enum[@"emodes"][@"mode_multiplayer"] or f123_arg1 == Enum[@"emodes"][@"mode_warzone"] then
+		if f123_arg1 == Enum.eModes.mode_multiplayer or f123_arg1 == Enum.eModes.mode_warzone then
 			CoD.BreadcrumbUtility.QueueBreadcrumbTask( f123_arg0, "UpdateSprayGestureNewCountTable", function ()
 				CoD.BreadcrumbUtility.UpdateSprayGestureNewCountTable( f123_local0, f123_arg0, f123_arg2 )
 			end )
@@ -1836,22 +1834,22 @@ DataSourceHelpers.PerControllerDataSourceSetup( "JumpkitBreadcrumbs", "Breadcrum
 	DataSources.JumpkitBreadcrumbs.updateJumpkitBreadcrumbs( f125_arg1 )
 end, true, {
 	updateJumpkitBreadcrumbs = function ( f126_arg0, f126_arg1 )
-		if Engine[@"currentsessionmode"]() == Enum[@"emodes"][@"mode_warzone"] then
+		if Engine.CurrentSessionMode() == Enum.eModes.mode_warzone then
 			CoD.BreadcrumbUtility.QueueBreadcrumbTask( f126_arg0, "updateJumpkitBreadcrumbs ", function ()
 				local f127_local0 = {}
 				for f127_local1 = 0, Enum[@"hash_58037372CBD17C20"][@"hash_7CB623E2324C5CCF"] - 1, 1 do
 					f127_local0[f127_local1] = 0
 				end
-				local f127_local1 = Enum[@"emodes"][@"mode_warzone"]
+				local f127_local1 = Enum.eModes.mode_warzone
 				local f127_local3 = {
 					_storageLoadoutBuffer = CoD.BreadcrumbUtility.GetStorageLoadoutBufferForPlayer( f126_arg0, f127_local1 ),
 					_sessionMode = f127_local1
 				}
-				local f127_local4 = Engine[@"hash_7A7E3CD65E63086F"]( @"jumpkits" )
+				local f127_local4 = Engine[@"hash_7A7E3CD65E63086F"]( "jumpkits" )
 				if f127_local4 then
 					for f127_local11, f127_local12 in ipairs( f127_local4 ) do
-						local f127_local13, f127_local14 = CoD.BlackMarketTableUtility.SimpleLootLookup( f126_arg0, f127_local12[@"lootid"], f127_local12[@"entitlement"] )
-						if f127_local13 == CoD.BlackMarketTableUtility.SimpleLootLookupTypes[@"none"] or f127_local14 then
+						local f127_local13, f127_local14 = CoD.BlackMarketTableUtility.SimpleLootLookup( f126_arg0, f127_local12.lootid, f127_local12[@"entitlement"] )
+						if f127_local13 == CoD.BlackMarketTableUtility.SimpleLootLookupTypes.none or f127_local14 then
 							for f127_local8 = 0, Enum[@"hash_58037372CBD17C20"][@"hash_7CB623E2324C5CCF"] - 1, 1 do
 								if CoD.BreadcrumbUtility.IsStatSpecialistJumpKitPartNew( f127_local3, f126_arg0, f127_local11 - 1, f127_local8 ) then
 									if f126_arg1 then
@@ -1894,7 +1892,7 @@ DataSourceHelpers.PerControllerDataSourceSetup( "SpecialistOutfitBreadcrumbs", "
 				return false
 			else
 				local f129_local0, f129_local1 = CoD.BlackMarketTableUtility.SimpleLootLookup( f128_arg1, f129_arg0.lootId, f129_arg0.entitlement )
-				if f129_local0 ~= CoD.BlackMarketTableUtility.SimpleLootLookupTypes[@"none"] then
+				if f129_local0 ~= CoD.BlackMarketTableUtility.SimpleLootLookupTypes.none then
 					return f129_local1
 				else
 					return false
@@ -1927,7 +1925,7 @@ DataSourceHelpers.PerControllerDataSourceSetup( "SpecialistOutfitBreadcrumbs", "
 				if f128_local17.requiresBreadcrumb then
 					local f128_local18 = DataSources.SpecialistOutfitBreadcrumbs.getBreadcrumbModelForItemTypeCategory( f128_arg1, f128_arg2, f128_arg3, f128_local17.type )
 					f128_local18 = f128_local18:create( "breadcrumbCount" )
-					if f128_local17.type ~= Enum[@"characteritemtype"][@"hash_57852FCB3BFCC8D1"] then
+					if f128_local17.type ~= Enum.CharacterItemType[@"hash_57852FCB3BFCC8D1"] then
 						CoD.BreadcrumbUtility.AddChildCountLink( f128_arg1, f128_local6, f128_local18 )
 					else
 						CoD.BreadcrumbUtility.AddChildCountLink( f128_arg1, f128_local5, f128_local18 )
@@ -1937,7 +1935,7 @@ DataSourceHelpers.PerControllerDataSourceSetup( "SpecialistOutfitBreadcrumbs", "
 						local f128_local13 = DataSources.SpecialistOutfitBreadcrumbs.getBreadcrumbModelForThemeItemType( f128_arg1, f128_arg2, f128_arg3, f128_local15, f128_local17.type )
 						f128_local13 = f128_local13:create( "breadcrumbCount" )
 						CoD.BreadcrumbUtility.AddChildCountLink( f128_arg1, f128_local18, f128_local13 )
-						if f128_local17.type == Enum[@"characteritemtype"][@"hash_57852FCB3BFCC8D1"] then
+						if f128_local17.type == Enum.CharacterItemType[@"hash_57852FCB3BFCC8D1"] then
 							local f128_local14 = DataSources.SpecialistOutfitBreadcrumbs.getBreadcrumbModelForThemePresetCategory( f128_arg1, f128_arg2, f128_arg3, f128_local15 )
 							f128_local14 = f128_local14:create( "breadcrumbCount" )
 							CoD.BreadcrumbUtility.AddChildCountLink( f128_arg1, f128_local14, f128_local13 )
@@ -1951,7 +1949,7 @@ DataSourceHelpers.PerControllerDataSourceSetup( "SpecialistOutfitBreadcrumbs", "
 									local f128_local27 = f128_local22[f128_local17.name][f128_local24]
 									local f128_local28 = f128_local24 - 1
 									local f128_local29 = f128_local8( f128_local27 )
-									if not f128_local29 and f128_local17.type == Enum[@"characteritemtype"][@"hash_48E3A65D78229DC1"] and f128_local27.lootId ~= 0x0 then
+									if not f128_local29 and f128_local17.type == Enum.CharacterItemType[@"hash_48E3A65D78229DC1"] and f128_local27.lootId ~= 0x0 then
 										local f128_local30 = CoD.PlayerRoleUtility.LookupLootForWarPaint( f128_arg1, f128_local27, f128_local22.presets )
 										f128_local29 = f128_local30.owned
 									end
@@ -2008,7 +2006,7 @@ DataSourceHelpers.PerControllerDataSourceSetup( "SpecialistOutfitBreadcrumbs", "
 	end
 } )
 DataSourceHelpers.PerControllerDataSourceSetup( "EmblemCallingCardBreadcrumbs", "Breadcrumbs", function ( f136_arg0, f136_arg1 )
-	local f136_local0 = Enum[@"emodes"][@"mode_multiplayer"]
+	local f136_local0 = Enum.eModes.mode_multiplayer
 	DataSources.EmblemCallingCardBreadcrumbs.initEmblemCallingCardCategories( f136_arg1, f136_arg0, {
 		_storageClientBuffer = CoD.BreadcrumbUtility.GetStorageClientBufferForPlayer( f136_arg1, f136_local0 ),
 		_sessionMode = f136_local0
@@ -2105,11 +2103,11 @@ end, true, {
 	end
 } )
 DataSourceHelpers.PerControllerDataSourceSetup( "LoadoutBreadcrumbs", "Breadcrumbs", function ( f144_arg0, f144_arg1 )
-	local f144_local0 = Engine[@"currentsessionmode"]()
-	local f144_local1 = Engine[@"getmodelforcontroller"]( f144_arg1 )
+	local f144_local0 = Engine.CurrentSessionMode()
+	local f144_local1 = Engine.GetModelForController( f144_arg1 )
 	f144_local1 = f144_local1.isInPaintshop
 	if f144_local1 and f144_local1:get() == true then
-		f144_local0 = Enum[@"emodes"][@"mode_multiplayer"]
+		f144_local0 = Enum.eModes.mode_multiplayer
 	end
 	local f144_local2 = {
 		_storageClientBuffer = CoD.BreadcrumbUtility.GetStorageClientBufferForPlayer( f144_arg1, f144_local0 ),

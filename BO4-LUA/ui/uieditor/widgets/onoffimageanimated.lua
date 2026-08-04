@@ -1,4 +1,4 @@
-require("x64:7323f389161595d")
+require("ui/uieditor/widgets/facebuttonwithkeymouse")
 CoD.onOffImageAnimated = InheritFrom(LUI.UIElement)
 CoD.onOffImageAnimated.__defaultWidth = 30
 CoD.onOffImageAnimated.__defaultHeight = 30

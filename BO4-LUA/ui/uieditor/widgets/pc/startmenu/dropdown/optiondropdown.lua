@@ -1,7 +1,7 @@
-require("x64:3625a0d08a5c80d")
-require("x64:dbd216abb19e109")
-require("x64:7631da4ee57d7b6")
-require("x64:a1e2d7b19f5deb0")
+require("ui/uieditor/widgets/lobby/common/fe_focusbarcontainer")
+require("ui/uieditor/widgets/pc/startmenu/dropdown/optiondropdownitem")
+require("ui/uieditor/widgets/scrollbars/verticalscrollbar")
+require("ui/uieditor/widgets/startmenu/startmenu_frame_nobg")
 local f0_local0 = function(f1_arg0, f1_arg1)
 	if f1_arg0.DropDownList then
 		f1_arg0.inUse = not f1_arg0.inUse
@@ -14,7 +14,7 @@ local f0_local0 = function(f1_arg0, f1_arg1)
 			if type(f1_arg0.dropDownCurrentValue) == "function" then
 				local f1_local0 = f1_arg0.DropDownList:findItem({
 					value = f1_arg0.dropDownCurrentValue(f1_arg1, f1_arg0),
-				}, nil, false, nil)
+				}, nil, false, false)
 				if f1_local0 then
 					f1_arg0.DropDownList:setActiveItem(f1_local0)
 				end
@@ -40,7 +40,7 @@ local f0_local1 = function(f2_arg0, f2_arg1, f2_arg2)
 	f2_arg0:setForceMouseEventDispatch(true)
 	f2_arg0:registerEventHandler("dropdown_item_selected", function(element, event)
 		if type(element.dropDownItemSelected) == "function" and element.inUse then
-			element.currentValueText:setText(Engine[@"localize"](element.dropDownItemSelected(f2_arg1, element, event.element)))
+			element.currentValueText:setText(Engine.Localize(element.dropDownItemSelected(f2_arg1, element, event.element)))
 		end
 		f0_local0(element, f2_arg1)
 		UpdateState(element, event)
@@ -59,18 +59,18 @@ local f0_local1 = function(f2_arg0, f2_arg1, f2_arg2)
 	f2_arg0:registerEventHandler("options_refresh", function(element, event)
 		element.DropDownList:updateDataSource()
 		if type(element.dropDownRefresh) == "function" then
-			element.currentValueText:setText(Engine[@"localize"](element.dropDownRefresh(event.controller, element, element.DropDownList)))
+			element.currentValueText:setText(Engine.Localize(element.dropDownRefresh(event.controller, element, element.DropDownList)))
 		end
 		UpdateState(element, event)
 	end)
 	f2_arg0.listBackground:setHandleMouseButton(true)
-	CoD.Menu.AddButtonCallbackFunction(f2_arg2, f2_arg0, f2_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, f6_arg3)
-		if not f2_arg0.disabled and not menu.m_disableNavigation and menu:AcceptGamePadButtonInputFromModelCallback(controller) then
+	CoD.Menu.AddButtonCallbackFunction(f2_arg2, f2_arg0, f2_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f6_arg0, f6_arg1, f6_arg2, f6_arg3)
+		if not f2_arg0.disabled and not f6_arg1.m_disableNavigation and f6_arg1:AcceptGamePadButtonInputFromModelCallback(f6_arg2) then
 			if not f2_arg0.inUse then
-				f0_local0(f2_arg0, controller)
+				f0_local0(f2_arg0, f6_arg2)
 				UpdateState(f2_arg0, {
 					name = "update_state",
-					controller = controller,
+					controller = f6_arg2,
 				})
 			end
 			return true
@@ -109,8 +109,8 @@ CoD.OptionDropdown.new = function(f8_arg0, f8_arg1, f8_arg2, f8_arg3, f8_arg4, f
 	local labelText = LUI.UIText.new(0, 0, 14, 427, 0, 0, 7, 45)
 	labelText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	labelText:setTTF("default")
-	labelText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	labelText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	labelText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	labelText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(labelText)
 	self.labelText = labelText
 	local dropdownBacking = LUI.UIImage.new(0, 0, 375, 737, 0, 0, 11, 40)
@@ -121,8 +121,8 @@ CoD.OptionDropdown.new = function(f8_arg0, f8_arg1, f8_arg2, f8_arg3, f8_arg4, f
 	local currentValueText = LUI.UIText.new(0, 0, 383, 705, 0, 0, 6, 44)
 	currentValueText:setText("")
 	currentValueText:setTTF("default")
-	currentValueText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	currentValueText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	currentValueText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	currentValueText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(currentValueText)
 	self.currentValueText = currentValueText
 	local FocusBarB = CoD.FE_FocusBarContainer.new(f8_arg0, f8_arg1, 0, 1, 0, 0, 1, 1, -8, 0)
@@ -142,7 +142,7 @@ CoD.OptionDropdown.new = function(f8_arg0, f8_arg1, f8_arg2, f8_arg3, f8_arg4, f
 	DropDownList:setWidgetType(CoD.OptionDropdownItem)
 	DropDownList:setVerticalCount(10)
 	DropDownList:setFirstElementXOffset(1)
-	DropDownList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	DropDownList:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	DropDownList:setVerticalScrollbar(CoD.verticalScrollbar)
 	DropDownList:setDataSource("DropdownListTest")
 	self:addElement(DropDownList)
@@ -150,7 +150,7 @@ CoD.OptionDropdown.new = function(f8_arg0, f8_arg1, f8_arg2, f8_arg3, f8_arg4, f
 	local Arrow = LUI.UIImage.new(0, 1, 702, -2, 0, 1, 7, -7)
 	Arrow:setZRot(90)
 	Arrow:setScale(0.6, 0.6)
-	Arrow:setImage(RegisterImage(@"uie_characterminiselectorarrow"))
+	Arrow:setImage(RegisterImage("uie_characterminiselectorarrow"))
 	self:addElement(Arrow)
 	self.Arrow = Arrow
 	self:mergeStateConditions({

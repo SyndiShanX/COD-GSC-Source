@@ -1,5 +1,5 @@
-require("x64:5f8cf56752aa71b")
-require("x64:19c1945d2e472b0")
+require("ui/uieditor/widgets/commonbuttonoutline")
+require("ui/uieditor/widgets/store/storecommontextbacking")
 CoD.GameSettings_OptionsButton = InheritFrom(LUI.UIElement)
 CoD.GameSettings_OptionsButton.__defaultWidth = 760
 CoD.GameSettings_OptionsButton.__defaultHeight = 60
@@ -17,7 +17,7 @@ CoD.GameSettings_OptionsButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.Backing = Backing
 	local NoiseBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseBacking:setAlpha(0.5)
-	NoiseBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseBacking:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	NoiseBacking:setupNineSliceShader(196, 88)
 	self:addElement(NoiseBacking)
 	self.NoiseBacking = NoiseBacking
@@ -44,8 +44,8 @@ CoD.GameSettings_OptionsButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	local OptionText = LUI.UIText.new(0.03, 0.97, 0, 0, 0.31, 0.69, 0, 0)
 	OptionText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	OptionText:setTTF("ttmussels_regular")
-	OptionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	OptionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	OptionText:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	OptionText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	OptionText:linkToElementModel(self, "displayText", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

@@ -1,7 +1,7 @@
-require("x64:dfd115b8bbb2cbc")
-require("x64:6f134078184861")
-require("x64:65d95de4452e481")
-require("x64:4dc5c4aa56bd569")
+require("ui/uieditor/widgets/pc/categoryexpendablebutton")
+require("ui/uieditor/widgets/pc/separationline_vertical")
+require("ui/uieditor/widgets/pc/startmenu/pc_startmenu_options_description")
+require("ui/uieditor/widgets/pc/startmenu/pc_startmenu_options_list")
 CoD.PC_StartMenu_Options_TabContent = InheritFrom(LUI.UIElement)
 CoD.PC_StartMenu_Options_TabContent.__defaultWidth = 1920
 CoD.PC_StartMenu_Options_TabContent.__defaultHeight = 802
@@ -31,7 +31,7 @@ CoD.PC_StartMenu_Options_TabContent.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	})
 	local Description = SideButtons
 	local OptionsList = SideButtons.subscribeToModel
-	local SeparationLineVertical = Engine[@"getmodelforcontroller"](f1_arg1)
+	local SeparationLineVertical = Engine.GetModelForController(f1_arg1)
 	OptionsList(Description, SeparationLineVertical["PC.CurrentCategory"], function(f4_arg0)
 		f1_arg0:updateElementState(SideButtons, {
 			name = "model_validation",
@@ -56,7 +56,7 @@ CoD.PC_StartMenu_Options_TabContent.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	SideButtons:setWidgetType(CoD.CategoryExpendableButton)
 	SideButtons:setVerticalCount(5)
 	SideButtons:setSpacing(10)
-	SideButtons:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	SideButtons:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	SideButtons:setStaggeredIntroTime(-1)
 	SideButtons:setDataSource("OptionGameplayCategories")
 	self:addElement(SideButtons)

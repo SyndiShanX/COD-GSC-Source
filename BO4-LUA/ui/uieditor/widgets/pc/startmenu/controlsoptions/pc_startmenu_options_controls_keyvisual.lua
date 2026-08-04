@@ -12,8 +12,8 @@ CoD.PC_StartMenu_Options_Controls_KeyVisual.new = function(f1_arg0, f1_arg1, f1_
 	KeyText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	KeyText:setTTF("notosans_regular")
 	KeyText:setLetterSpacing(1)
-	KeyText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	KeyText:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
+	KeyText:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	KeyText:setAlignment(Enum.LUIAlignment[@"lui_alignment_middle"])
 	LUI.OverrideFunction_CallOriginalFirst(KeyText, "setText", function(element, controller) end)
 	self:addElement(KeyText)
 	self.KeyText = KeyText

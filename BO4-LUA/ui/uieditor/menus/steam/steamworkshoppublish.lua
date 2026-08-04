@@ -1,7 +1,7 @@
-require("x64:c56b1e49074706b")
-require("x64:90718a0f86dc27e")
-require("x64:b970b1c400291ca")
-require("x64:4ad93de6a0b1ca6")
+require("ui/uieditor/widgets/checkbox")
+require("ui/uieditor/widgets/fileshare/fullscreenpopup/fullscreeenpupupsteamform")
+require("ui/uieditor/widgets/inputbutton")
+require("ui/uieditor/widgets/lobby/common/list1buttonlarge_left_nd")
 CoD.SteamWorkshopPublish = InheritFrom(CoD.Menu)
 LUI.createMenu.SteamWorkshopPublish = function(f1_arg0, f1_arg1)
 	local self = CoD.Menu.NewForUIEditor("SteamWorkshopPublish", f1_arg0)
@@ -37,7 +37,7 @@ LUI.createMenu.SteamWorkshopPublish = function(f1_arg0, f1_arg1)
 	})
 	local LblName = FullscreenPopupForm
 	local InputName = FullscreenPopupForm.subscribeToModel
-	local InputDescription = Engine[@"getglobalmodel"]()
+	local InputDescription = Engine.GetGlobalModel()
 	InputName(LblName, InputDescription["fileshareRoot.publishTask.state"], function(f5_arg0)
 		f1_local1:updateElementState(FullscreenPopupForm, {
 			name = "model_validation",
@@ -68,22 +68,22 @@ LUI.createMenu.SteamWorkshopPublish = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f7_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(InputName, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		FileshareEnterPublishName(self, element, controller)
+	f1_local1:AddButtonCallbackFunction(InputName, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f8_arg0, f8_arg1, f8_arg2, f8_arg3)
+		FileshareEnterPublishName(self, f8_arg0, f8_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
+	end, function(f9_arg0, f9_arg1, f9_arg2)
+		CoD.Menu.SetButtonLabel(f9_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(InputName)
 	self.InputName = InputName
 	LblName = LUI.UIText.new(0, 0, 693, 993, 0, 0, 529, 567)
-	LblName:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6808E4CA838AD72E"))
+	LblName:setText(Engine[@"hash_4F9F1239CFD921FE"]("menu/fileshare_newname"))
 	LblName:setTTF("default")
-	LblName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	LblName:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	self:addElement(LblName)
 	self.LblName = LblName
 	InputDescription = CoD.InputButton.new(f1_local1, f1_arg0, 0, 0, 693, 1616, 0, 0, 655, 795)
@@ -100,14 +100,14 @@ LUI.createMenu.SteamWorkshopPublish = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f11_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f11_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(InputDescription, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		FileshareEnterPublishDescription(self, element, controller)
+	f1_local1:AddButtonCallbackFunction(InputDescription, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f12_arg0, f12_arg1, f12_arg2, f12_arg3)
+		FileshareEnterPublishDescription(self, f12_arg0, f12_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
+	end, function(f13_arg0, f13_arg1, f13_arg2)
+		CoD.Menu.SetButtonLabel(f13_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(InputDescription)
@@ -115,7 +115,7 @@ LUI.createMenu.SteamWorkshopPublish = function(f1_arg0, f1_arg1)
 	local LblDescription = LUI.UIText.new(0, 0, 693, 795, 0, 0, 618, 656)
 	LblDescription:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/fileshare_description"))
 	LblDescription:setTTF("default")
-	LblDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	LblDescription:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	self:addElement(LblDescription)
 	self.LblDescription = LblDescription
 	local InputTags = CoD.InputButton.new(f1_local1, f1_arg0, 0, 0, 1062, 1616, 0, 0, 566.5, 617.5)
@@ -126,14 +126,14 @@ LUI.createMenu.SteamWorkshopPublish = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f14_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f14_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(InputTags, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		FileshareEnterPublishTags(self, element, controller)
+	f1_local1:AddButtonCallbackFunction(InputTags, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f15_arg0, f15_arg1, f15_arg2, f15_arg3)
+		FileshareEnterPublishTags(self, f15_arg0, f15_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
+	end, function(f16_arg0, f16_arg1, f16_arg2)
+		CoD.Menu.SetButtonLabel(f16_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(InputTags)
@@ -141,7 +141,7 @@ LUI.createMenu.SteamWorkshopPublish = function(f1_arg0, f1_arg1)
 	local LblTags = LUI.UIText.new(0, 0, 1062, 1287, 0, 0, 529, 567)
 	LblTags:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/fileshare_tags"))
 	LblTags:setTTF("default")
-	LblTags:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	LblTags:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	self:addElement(LblTags)
 	self.LblTags = LblTags
 	local BtnPublish = CoD.List1ButtonLarge_Left_ND.new(f1_local1, f1_arg0, 0, 0, 1477, 1615, 0, 0, 846, 892)
@@ -155,7 +155,7 @@ LUI.createMenu.SteamWorkshopPublish = function(f1_arg0, f1_arg1)
 	})
 	local BtnFAQ = BtnPublish
 	local BtnAgreement = BtnPublish.subscribeToModel
-	local BtnViewSteamWorkshop = Engine[@"getglobalmodel"]()
+	local BtnViewSteamWorkshop = Engine.GetGlobalModel()
 	BtnAgreement(BtnFAQ, BtnViewSteamWorkshop["fileshareRoot.publishSteamAgreement"], function(f18_arg0)
 		f1_local1:updateElementState(BtnPublish, {
 			name = "model_validation",
@@ -165,19 +165,19 @@ LUI.createMenu.SteamWorkshopPublish = function(f1_arg0, f1_arg1)
 			modelName = "fileshareRoot.publishSteamAgreement",
 		})
 	end, false)
-	BtnPublish.btnDisplayText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_515DBA93D2EC63CC"))
-	BtnPublish.btnDisplayTextStroke:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_515DBA93D2EC63CC"))
+	BtnPublish.btnDisplayText:setText(Engine[@"hash_4F9F1239CFD921FE"]("menu/fileshare_publish"))
+	BtnPublish.btnDisplayTextStroke:setText(Engine[@"hash_4F9F1239CFD921FE"]("menu/fileshare_publish"))
 	BtnFAQ = BtnPublish
 	BtnAgreement = BtnPublish.subscribeToModel
-	BtnViewSteamWorkshop = Engine[@"getglobalmodel"]()
+	BtnViewSteamWorkshop = Engine.GetGlobalModel()
 	BtnAgreement(BtnFAQ, BtnViewSteamWorkshop["fileshareRoot.ready"], function(f19_arg0, f19_arg1)
-		CoD.Menu.UpdateButtonShownState(f19_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f19_arg1, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 	end, false)
 	BtnFAQ = BtnPublish
 	BtnAgreement = BtnPublish.subscribeToModel
-	BtnViewSteamWorkshop = Engine[@"getglobalmodel"]()
+	BtnViewSteamWorkshop = Engine.GetGlobalModel()
 	BtnAgreement(BtnFAQ, BtnViewSteamWorkshop["fileshareRoot.publishSteamAgreement"], function(f20_arg0, f20_arg1)
-		CoD.Menu.UpdateButtonShownState(f20_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f20_arg1, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 	end, false)
 	BtnPublish:registerEventHandler("gain_focus", function(element, event)
 		local f21_local0 = nil
@@ -189,19 +189,19 @@ LUI.createMenu.SteamWorkshopPublish = function(f1_arg0, f1_arg1)
 		if not FileshareIsSteamAgreed() then
 			SetHintText(self, element, f1_arg0)
 		else
-			CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+			CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 		end
 		return f21_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(BtnPublish, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		if FileshareIsReady(controller) and FileshareIsSteamAgreed() then
-			SteamWorkshopPublish(self, element, controller)
+	f1_local1:AddButtonCallbackFunction(BtnPublish, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f22_arg0, f22_arg1, f22_arg2, f22_arg3)
+		if FileshareIsReady(f22_arg2) and FileshareIsSteamAgreed() then
+			SteamWorkshopPublish(self, f22_arg0, f22_arg2)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if FileshareIsReady(controller) and FileshareIsSteamAgreed() then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
+	end, function(f23_arg0, f23_arg1, f23_arg2)
+		if FileshareIsReady(f23_arg2) and FileshareIsSteamAgreed() then
+			CoD.Menu.SetButtonLabel(f23_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false
@@ -210,8 +210,8 @@ LUI.createMenu.SteamWorkshopPublish = function(f1_arg0, f1_arg1)
 	self:addElement(BtnPublish)
 	self.BtnPublish = BtnPublish
 	BtnAgreement = CoD.List1ButtonLarge_Left_ND.new(f1_local1, f1_arg0, 0, 0, 1020, 1158, 0, 0, 846, 892)
-	BtnAgreement.btnDisplayText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7E019652E4A6C5C7"))
-	BtnAgreement.btnDisplayTextStroke:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7E019652E4A6C5C7"))
+	BtnAgreement.btnDisplayText:setText(Engine[@"hash_4F9F1239CFD921FE"]("platform/steam_agreement_label"))
+	BtnAgreement.btnDisplayTextStroke:setText(Engine[@"hash_4F9F1239CFD921FE"]("platform/steam_agreement_label"))
 	BtnAgreement:registerEventHandler("gain_focus", function(element, event)
 		local f24_local0 = nil
 		if element.gainFocus then
@@ -219,14 +219,14 @@ LUI.createMenu.SteamWorkshopPublish = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f24_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f24_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(BtnAgreement, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		SteamWorkshopOpenAgreement(self, element, controller)
+	f1_local1:AddButtonCallbackFunction(BtnAgreement, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f25_arg0, f25_arg1, f25_arg2, f25_arg3)
+		SteamWorkshopOpenAgreement(self, f25_arg0, f25_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
+	end, function(f26_arg0, f26_arg1, f26_arg2)
+		CoD.Menu.SetButtonLabel(f26_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(BtnAgreement)
@@ -241,14 +241,14 @@ LUI.createMenu.SteamWorkshopPublish = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f27_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f27_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(BtnFAQ, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		SteamWorkshopOpenFAQ(self, element, controller)
+	f1_local1:AddButtonCallbackFunction(BtnFAQ, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f28_arg0, f28_arg1, f28_arg2, f28_arg3)
+		SteamWorkshopOpenFAQ(self, f28_arg0, f28_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
+	end, function(f29_arg0, f29_arg1, f29_arg2)
+		CoD.Menu.SetButtonLabel(f29_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(BtnFAQ)
@@ -263,14 +263,14 @@ LUI.createMenu.SteamWorkshopPublish = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f30_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f30_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(BtnViewSteamWorkshop, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		SteamWorkshopViewWorkshop(self, element, controller)
+	f1_local1:AddButtonCallbackFunction(BtnViewSteamWorkshop, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f31_arg0, f31_arg1, f31_arg2, f31_arg3)
+		SteamWorkshopViewWorkshop(self, f31_arg0, f31_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
+	end, function(f32_arg0, f32_arg1, f32_arg2)
+		CoD.Menu.SetButtonLabel(f32_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(BtnViewSteamWorkshop)
@@ -285,21 +285,21 @@ LUI.createMenu.SteamWorkshopPublish = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f33_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f33_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(BtnViewItemInWorkshop, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		SteamWorkshopOpenItem(self, element, controller)
+	f1_local1:AddButtonCallbackFunction(BtnViewItemInWorkshop, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f34_arg0, f34_arg1, f34_arg2, f34_arg3)
+		SteamWorkshopOpenItem(self, f34_arg0, f34_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
+	end, function(f35_arg0, f35_arg1, f35_arg2)
+		CoD.Menu.SetButtonLabel(f35_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(BtnViewItemInWorkshop)
 	self.BtnViewItemInWorkshop = BtnViewItemInWorkshop
 	local BtnDone = CoD.List1ButtonLarge_Left_ND.new(f1_local1, f1_arg0, 0, 0, 1477, 1615, 0, 0, 846, 892)
-	BtnDone.btnDisplayText:setText(Engine[@"hash_4F9F1239CFD921FE"](0xA1809370478D8D))
-	BtnDone.btnDisplayTextStroke:setText(Engine[@"hash_4F9F1239CFD921FE"](0xA1809370478D8D))
+	BtnDone.btnDisplayText:setText(Engine[@"hash_4F9F1239CFD921FE"]("mpui/done_caps"))
+	BtnDone.btnDisplayTextStroke:setText(Engine[@"hash_4F9F1239CFD921FE"]("mpui/done_caps"))
 	BtnDone:registerEventHandler("gain_focus", function(element, event)
 		local f36_local0 = nil
 		if element.gainFocus then
@@ -307,14 +307,14 @@ LUI.createMenu.SteamWorkshopPublish = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f36_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f36_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(BtnDone, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		GoBack(self, controller)
+	f1_local1:AddButtonCallbackFunction(BtnDone, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f37_arg0, f37_arg1, f37_arg2, f37_arg3)
+		GoBack(self, f37_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
+	end, function(f38_arg0, f38_arg1, f38_arg2)
+		CoD.Menu.SetButtonLabel(f38_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(BtnDone)
@@ -330,7 +330,7 @@ LUI.createMenu.SteamWorkshopPublish = function(f1_arg0, f1_arg1)
 	})
 	local f1_local16 = checkboxSteamAgreement
 	local f1_local17 = checkboxSteamAgreement.subscribeToModel
-	local f1_local18 = Engine[@"getglobalmodel"]()
+	local f1_local18 = Engine.GetGlobalModel()
 	f1_local17(f1_local16, f1_local18["FileshareRoot.publishSteamAgreement"], function(f40_arg0)
 		f1_local1:updateElementState(checkboxSteamAgreement, {
 			name = "model_validation",
@@ -348,14 +348,14 @@ LUI.createMenu.SteamWorkshopPublish = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f41_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f41_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(checkboxSteamAgreement, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(checkboxSteamAgreement, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f42_arg0, f42_arg1, f42_arg2, f42_arg3)
 		ToggleGlobalModelValueBoolean("FileshareRoot.publishSteamAgreement")
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
+	end, function(f43_arg0, f43_arg1, f43_arg2)
+		CoD.Menu.SetButtonLabel(f43_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(checkboxSteamAgreement, "setText", function(element, controller)
@@ -363,19 +363,19 @@ LUI.createMenu.SteamWorkshopPublish = function(f1_arg0, f1_arg1)
 	end)
 	self:addElement(checkboxSteamAgreement)
 	self.checkboxSteamAgreement = checkboxSteamAgreement
-	self:registerEventHandler("ui_keyboard_input", function(self, event)
+	self:registerEventHandler("ui_keyboard_input", function(element, event)
 		local f45_local0 = nil
-		FileshareHandleKeyboardComplete(self, self, f1_arg0, event)
+		FileshareHandleKeyboardComplete(self, element, f1_arg0, event)
 		if not f45_local0 then
-			f45_local0 = self:dispatchEventToChildren(event)
+			f45_local0 = element:dispatchEventToChildren(event)
 		end
 		return f45_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
-		GoBack(self, controller)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xbb_pscircle"], nil, function(f46_arg0, f46_arg1, f46_arg2, f46_arg3)
+		GoBack(self, f46_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_0", nil, nil)
+	end, function(f47_arg0, f47_arg1, f47_arg2)
+		CoD.Menu.SetButtonLabel(f47_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], 0x0, nil, nil)
 		return false
 	end, false)
 	InputName.id = "InputName"

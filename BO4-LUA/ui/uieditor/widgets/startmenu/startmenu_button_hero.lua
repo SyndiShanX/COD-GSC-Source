@@ -1,4 +1,4 @@
-require("x64:ee1f2d6740c51d1")
+require("ui/uieditor/widgets/startmenu/startmenu_button_hero_internal")
 CoD.StartMenu_Button_Hero = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Button_Hero.__defaultWidth = 1096
 CoD.StartMenu_Button_Hero.__defaultHeight = 492

@@ -8,39 +8,39 @@ CoD.freeCursorCursor.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local middle_overlay = LUI.UIImage.new(0, 0, 42.5, 98.5, 0, 0, 40, 96)
-	middle_overlay:setImage(RegisterImage(@"uie_ui_menu_cursor_middle_overlay"))
+	middle_overlay:setImage(RegisterImage("uie_ui_menu_cursor_middle_overlay"))
 	self:addElement(middle_overlay)
 	self.middle_overlay = middle_overlay
 	local inner_ring = LUI.UIImage.new(0, 0, 42.5, 98.5, 0, 0, 40, 96)
 	inner_ring:setAlpha(0.3)
-	inner_ring:setImage(RegisterImage(@"uie_ui_menu_cursor_inner_ring"))
+	inner_ring:setImage(RegisterImage("uie_ui_menu_cursor_inner_ring"))
 	self:addElement(inner_ring)
 	self.inner_ring = inner_ring
 	local innerring = LUI.UIImage.new(0, 0, 42.5, 98.5, 0, 0, 40, 96)
 	innerring:setAlpha(0)
-	innerring:setImage(RegisterImage(@"uie_ui_menu_cursor_focus_ring"))
+	innerring:setImage(RegisterImage("uie_ui_menu_cursor_focus_ring"))
 	self:addElement(innerring)
 	self.innerring = innerring
 	local middle_ring = LUI.UIImage.new(0, 0, 42.5, 98.5, 0, 0, 40, 96)
 	middle_ring:setAlpha(0.42)
-	middle_ring:setImage(RegisterImage(@"uie_ui_menu_cursor_middle_ring"))
+	middle_ring:setImage(RegisterImage("uie_ui_menu_cursor_middle_ring"))
 	self:addElement(middle_ring)
 	self.middle_ring = middle_ring
 	local outer_ring = LUI.UIImage.new(0, 0, 42.5, 98.5, 0, 0, 40, 96)
 	outer_ring:setAlpha(0.4)
-	outer_ring:setImage(RegisterImage(@"uie_ui_menu_cursor_outer_ring"))
+	outer_ring:setImage(RegisterImage("uie_ui_menu_cursor_outer_ring"))
 	self:addElement(outer_ring)
 	self.outer_ring = outer_ring
 	local outerring2 = LUI.UIImage.new(0, 0, 42.5, 98.5, 0, 0, 40, 96)
 	outerring2:setAlpha(0)
 	outerring2:setScale(0.8, 0.8)
-	outerring2:setImage(RegisterImage(@"uie_ui_menu_cursor_outer_ring"))
+	outerring2:setImage(RegisterImage("uie_ui_menu_cursor_outer_ring"))
 	self:addElement(outerring2)
 	self.outerring2 = outerring2
 	local outerring = LUI.UIImage.new(0, 0, 42.5, 98.5, 0, 0, 40, 96)
 	outerring:setAlpha(0)
 	outerring:setScale(0.8, 0.8)
-	outerring:setImage(RegisterImage(@"uie_ui_menu_cursor_outer_ring"))
+	outerring:setImage(RegisterImage("uie_ui_menu_cursor_outer_ring"))
 	self:addElement(outerring)
 	self.outerring = outerring
 	self:mergeStateConditions({
@@ -69,7 +69,7 @@ CoD.freeCursorCursor.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	end)
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	local f1_local10 = Engine.GetModelForController(f1_arg1)
 	f1_local9(f1_local8, f1_local10.LastInput, function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

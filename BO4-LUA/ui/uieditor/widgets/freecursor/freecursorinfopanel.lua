@@ -1,6 +1,6 @@
-require("x64:868f60ef6139e7d")
-require("x64:ce8d57df5286d4a")
-require("x64:381a4c321d8728e")
+require("ui/uieditor/widgets/freecursor/freecursoridentitypanel")
+require("ui/uieditor/widgets/freecursor/tooltiparchetypes/tooltipactionprompt")
+require("ui/uieditor/widgets/freecursor/tooltiparchetypes/tooltipfeaturetitle")
 CoD.freeCursorInfoPanel = InheritFrom(LUI.UIElement)
 CoD.freeCursorInfoPanel.__defaultWidth = 405
 CoD.freeCursorInfoPanel.__defaultHeight = 963

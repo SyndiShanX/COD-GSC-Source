@@ -7,7 +7,7 @@ CoD.Callingcards_Asset_RacoonArm_R.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.id = "Callingcards_Asset_RacoonArm_R"
 	self.soundSet = "default"
 	local Rarm = LUI.UIImage.new(0, 0, 0, 232, 0, 0, 0, 88)
-	Rarm:setImage(RegisterImage(@"uie_ui_icon_callingcards_prestige_master_racoon_rarm"))
+	Rarm:setImage(RegisterImage("uie_ui_icon_callingcards_prestige_master_racoon_rarm"))
 	self:addElement(Rarm)
 	self.Rarm = Rarm
 	if PostLoadFunc then

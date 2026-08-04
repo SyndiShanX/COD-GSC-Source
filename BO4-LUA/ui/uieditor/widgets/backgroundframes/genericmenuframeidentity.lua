@@ -1,8 +1,8 @@
-require("x64:7efaf2f566c4e95")
-require("x64:d6ecdf7755aeddc")
-require("x64:71d2a0ed724628e")
-require("x64:ce1e6b6549d478c")
-require("x64:e41af73729601d6")
+require("ui/uieditor/widgets/backgroundframes/identitybadgeupperrightsafe")
+require("ui/uieditor/widgets/common/commonheader")
+require("ui/uieditor/widgets/common/commonidentitywidgetstreamlinedsafeareacontainer")
+require("ui/uieditor/widgets/footer/footercontainer_frontend_right")
+require("ui/uieditor/widgets/header/header_container_frontend")
 CoD.GenericMenuFrameIdentity = InheritFrom(LUI.UIElement)
 CoD.GenericMenuFrameIdentity.__defaultWidth = 1920
 CoD.GenericMenuFrameIdentity.__defaultHeight = 1080

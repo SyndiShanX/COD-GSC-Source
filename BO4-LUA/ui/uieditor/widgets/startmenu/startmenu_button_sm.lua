@@ -1,4 +1,4 @@
-require("x64:1b85b932bf6c1d3")
+require("ui/uieditor/widgets/startmenu/options/startmenubuttonsmcontainer")
 CoD.StartMenu_Button_SM = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Button_SM.__defaultWidth = 500
 CoD.StartMenu_Button_SM.__defaultHeight = 500
@@ -20,7 +20,7 @@ CoD.StartMenu_Button_SM.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.BlackLine = BlackLine
 	local LockIcon = LUI.UIImage.new(0.5, 0.5, -25, 25, 0.5, 0.5, -25, 25)
 	LockIcon:setAlpha(0)
-	LockIcon:setImage(RegisterImage(@"uie_ui_icon_global_lock"))
+	LockIcon:setImage(RegisterImage("uie_ui_icon_global_lock"))
 	self:addElement(LockIcon)
 	self.LockIcon = LockIcon
 	self:mergeStateConditions({

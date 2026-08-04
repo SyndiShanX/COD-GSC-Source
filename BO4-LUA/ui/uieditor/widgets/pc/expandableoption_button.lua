@@ -1,4 +1,4 @@
-require("x64:b79410dc8d1ea84")
+require("ui/uieditor/widgets/pc/startmenu/pc_highlightborder")
 CoD.ExpandableOption_Button = InheritFrom(LUI.UIElement)
 CoD.ExpandableOption_Button.__defaultWidth = 725
 CoD.ExpandableOption_Button.__defaultHeight = 28
@@ -19,10 +19,10 @@ CoD.ExpandableOption_Button.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.PCHighlightBorder = PCHighlightBorder
 	local TextBox = LUI.UIText.new(0, 0, 14, 214, 0.5, 0.5, -9, 9)
 	TextBox:setRGB(0.76, 0.76, 0.76)
-	TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_45F407BC037861DC"))
+	TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"]("options/advanced"))
 	TextBox:setTTF("ttmussels_demibold")
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -37,7 +37,7 @@ CoD.ExpandableOption_Button.__resetProperties = function(f2_arg0)
 	f2_arg0.TextBox:completeAnimation()
 	f2_arg0.Background:setRGB(0.09, 0.09, 0.09)
 	f2_arg0.TextBox:setRGB(0.76, 0.76, 0.76)
-	f2_arg0.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_45F407BC037861DC"))
+	f2_arg0.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"]("options/advanced"))
 end
 CoD.ExpandableOption_Button.__clipsPerState = {
 	DefaultState = {
@@ -146,7 +146,7 @@ CoD.ExpandableOption_Button.__clipsPerState = {
 			f13_arg0.PCHighlightBorder:playClip("DefaultClip")
 			f13_arg0.clipFinished(f13_arg0.PCHighlightBorder)
 			f13_arg0.TextBox:completeAnimation()
-			f13_arg0.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3C3EC6EB9A334A1E"))
+			f13_arg0.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"]("options/hide"))
 			f13_arg0.clipFinished(f13_arg0.TextBox)
 		end,
 		Focus = function(f14_arg0, f14_arg1)
@@ -157,7 +157,7 @@ CoD.ExpandableOption_Button.__clipsPerState = {
 			f14_arg0.clipFinished(f14_arg0.Background)
 			f14_arg0.TextBox:completeAnimation()
 			f14_arg0.TextBox:setRGB(1, 1, 1)
-			f14_arg0.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3C3EC6EB9A334A1E"))
+			f14_arg0.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"]("options/hide"))
 			f14_arg0.clipFinished(f14_arg0.TextBox)
 		end,
 		LoseFocus = function(f15_arg0, f15_arg1)
@@ -183,7 +183,7 @@ CoD.ExpandableOption_Button.__clipsPerState = {
 			end
 			f15_arg0.TextBox:completeAnimation()
 			f15_arg0.TextBox:setRGB(1, 1, 1)
-			f15_arg0.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3C3EC6EB9A334A1E"))
+			f15_arg0.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"]("options/hide"))
 			f15_local1(f15_arg0.TextBox)
 		end,
 		GainFocus = function(f18_arg0, f18_arg1)
@@ -209,7 +209,7 @@ CoD.ExpandableOption_Button.__clipsPerState = {
 			end
 			f18_arg0.TextBox:completeAnimation()
 			f18_arg0.TextBox:setRGB(0.76, 0.76, 0.76)
-			f18_arg0.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3C3EC6EB9A334A1E"))
+			f18_arg0.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"]("options/hide"))
 			f18_local1(f18_arg0.TextBox)
 		end,
 		Active = function(f21_arg0, f21_arg1)
@@ -220,7 +220,7 @@ CoD.ExpandableOption_Button.__clipsPerState = {
 			f21_arg0.clipFinished(f21_arg0.Background)
 			f21_arg0.TextBox:completeAnimation()
 			f21_arg0.TextBox:setRGB(1, 1, 1)
-			f21_arg0.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3C3EC6EB9A334A1E"))
+			f21_arg0.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"]("options/hide"))
 			f21_arg0.clipFinished(f21_arg0.TextBox)
 		end,
 		ActiveAndFocus = function(f22_arg0, f22_arg1)
@@ -231,7 +231,7 @@ CoD.ExpandableOption_Button.__clipsPerState = {
 			f22_arg0.clipFinished(f22_arg0.Background)
 			f22_arg0.TextBox:completeAnimation()
 			f22_arg0.TextBox:setRGB(1, 1, 1)
-			f22_arg0.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3C3EC6EB9A334A1E"))
+			f22_arg0.TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"]("options/hide"))
 			f22_arg0.clipFinished(f22_arg0.TextBox)
 		end,
 	},

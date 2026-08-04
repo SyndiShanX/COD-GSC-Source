@@ -5,7 +5,7 @@ CoD.FeedUtility.FeedInsertionSide = LuaEnum.createEnum("BEGINNING", "END")
 CoD.FeedUtility.FeedTypes = {}
 CoD.FeedUtility.SetupFeed = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8)
 	local f1_local0 = f1_arg0
-	local f1_local1 = Engine[@"getmodelforcontroller"](f1_arg8)
+	local f1_local1 = Engine.GetModelForController(f1_arg8)
 	local f1_local2 = f1_local1:create("feeds." .. f1_arg2 .. "." .. f1_arg3)
 	f1_local2:set(f1_arg2)
 	f1_arg1:setModel(f1_local2, f1_arg8)

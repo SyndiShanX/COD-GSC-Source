@@ -9,17 +9,17 @@ CoD.StartMenu_ConnectionMeter_PacketLossImage.new = function(f1_arg0, f1_arg1, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Level1Image = LUI.UIImage.new(0, 0, 0, 44, 0, 0, 0, 46)
 	Level1Image:setAlpha(0)
-	Level1Image:setImage(RegisterImage(@"uie_t7_icon_network_packet1"))
+	Level1Image:setImage(RegisterImage("uie_t7_icon_network_packet1"))
 	self:addElement(Level1Image)
 	self.Level1Image = Level1Image
 	local Level2Image = LUI.UIImage.new(0, 0, 0, 44, 0, 0, 0, 46)
 	Level2Image:setAlpha(0)
-	Level2Image:setImage(RegisterImage(@"uie_t7_icon_network_packet2"))
+	Level2Image:setImage(RegisterImage("uie_t7_icon_network_packet2"))
 	self:addElement(Level2Image)
 	self.Level2Image = Level2Image
 	local Level3Image = LUI.UIImage.new(0, 0, 0, 44, 0, 0, 0, 46)
 	Level3Image:setAlpha(0)
-	Level3Image:setImage(RegisterImage(@"uie_t7_icon_network_packet3"))
+	Level3Image:setImage(RegisterImage("uie_t7_icon_network_packet3"))
 	self:addElement(Level3Image)
 	self.Level3Image = Level3Image
 	self:mergeStateConditions({

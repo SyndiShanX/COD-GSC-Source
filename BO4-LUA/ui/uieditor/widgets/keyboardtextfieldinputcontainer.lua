@@ -1,4 +1,4 @@
-require("x64:75777a3809eb976")
+require("ui/uieditor/widgets/keyboardtextfieldinputcursor")
 CoD.KeyboardTextFieldInputContainer = InheritFrom(LUI.UIElement)
 CoD.KeyboardTextFieldInputContainer.__defaultWidth = 200
 CoD.KeyboardTextFieldInputContainer.__defaultHeight = 72
@@ -16,8 +16,8 @@ CoD.KeyboardTextFieldInputContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	local inputText = LUI.UIText.new(0, 0.98, 5, 5, 0, 1, 0, 0)
 	inputText:setText("")
 	inputText:setTTF("notosans_regular")
-	inputText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	inputText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	inputText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	inputText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(inputText)
 	self.inputText = inputText
 	local cursorText = CoD.KeyboardTextFieldInputCursor.new(f1_arg0, f1_arg1, 0, 0, -1, 194, 0, 1, 0, 0)

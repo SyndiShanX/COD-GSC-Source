@@ -1,7 +1,7 @@
-require("x64:d7ba7c36104672")
-require("x64:afc19d5a265543e")
-require("x64:87edb7802d72c0e")
-require("x64:2e0d905bf8bc9a5")
+require("ui/uieditor/widgets/footer/fe_leftcontainer_notlobby")
+require("ui/uieditor/widgets/menuspecificwidgets/scorestreaks/scorestreakvignettecontainer")
+require("ui/uieditor/widgets/systemoverlays/systemoverlay_alertstatusbar")
+require("ui/uieditor/widgets/systemoverlays/systemoverlay_freecursor_full_basicframe")
 CoD.systemOverlay_FreeCursor_Full_Layout = InheritFrom(LUI.UIElement)
 CoD.systemOverlay_FreeCursor_Full_Layout.__defaultWidth = 1920
 CoD.systemOverlay_FreeCursor_Full_Layout.__defaultHeight = 1080
@@ -31,7 +31,7 @@ CoD.systemOverlay_FreeCursor_Full_Layout.new = function(f1_arg0, f1_arg1, f1_arg
 	self.backing = backing
 	local NoiseTiledBacking = LUI.UIImage.new(0, 0, 0, 1920, 0.09, 0.09, 184, 667)
 	NoiseTiledBacking:setAlpha(0.65)
-	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)

@@ -1,12 +1,12 @@
-require("x64:f7fbc54782f3af5")
-require("x64:f7fb954782f35dc")
-require("x64:1a2e59dc55c2814")
-CoD[@"hash_97E55AFDA50BA65"] = InheritFrom(LUI.UIElement)
-CoD[@"hash_97E55AFDA50BA65"].__defaultWidth = 960
-CoD[@"hash_97E55AFDA50BA65"].__defaultHeight = 240
-CoD[@"hash_97E55AFDA50BA65"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+require("ui/uieditor/widgets/callingcards/callingcards_replacer_cars1")
+require("ui/uieditor/widgets/callingcards/callingcards_replacer_cars2")
+require("ui/uieditor/widgets/callingcards/callingcards_replacer_scooter")
+CoD.callingcards_replacer = InheritFrom(LUI.UIElement)
+CoD.callingcards_replacer.__defaultWidth = 960
+CoD.callingcards_replacer.__defaultHeight = 240
+CoD.callingcards_replacer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[@"hash_97E55AFDA50BA65"])
+	self:setClass(CoD.callingcards_replacer)
 	self.id = "CallingCards_replacer"
 	self.soundSet = "none"
 	self.anyChildUsesUpdateState = true
@@ -35,7 +35,7 @@ CoD[@"hash_97E55AFDA50BA65"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end
 	return self
 end
-CoD[@"hash_97E55AFDA50BA65"].__resetProperties = function(f2_arg0)
+CoD.callingcards_replacer.__resetProperties = function(f2_arg0)
 	f2_arg0.background:completeAnimation()
 	f2_arg0.cars1:completeAnimation()
 	f2_arg0.cars2:completeAnimation()
@@ -49,7 +49,7 @@ CoD[@"hash_97E55AFDA50BA65"].__resetProperties = function(f2_arg0)
 	f2_arg0.cars3:setAlpha(0)
 	f2_arg0.scooter:setLeftRight(0, 0, 408, 904)
 end
-CoD[@"hash_97E55AFDA50BA65"].__clipsPerState = {
+CoD.callingcards_replacer.__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -148,7 +148,7 @@ CoD[@"hash_97E55AFDA50BA65"].__clipsPerState = {
 		end,
 	},
 }
-CoD[@"hash_97E55AFDA50BA65"].__onClose = function(f19_arg0)
+CoD.callingcards_replacer.__onClose = function(f19_arg0)
 	f19_arg0.cars3:close()
 	f19_arg0.cars1:close()
 	f19_arg0.cars2:close()

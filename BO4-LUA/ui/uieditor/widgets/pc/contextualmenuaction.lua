@@ -16,7 +16,7 @@ CoD.ContextualMenuAction.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	local ActionName = LUI.UIText.new(0.02, 0.02, 0, 213, 0.5, 0.5, -10.5, 10.5)
 	ActionName:setRGB(0.76, 0.76, 0.76)
 	ActionName:setTTF("ttmussels_regular")
-	ActionName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ActionName:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	ActionName:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

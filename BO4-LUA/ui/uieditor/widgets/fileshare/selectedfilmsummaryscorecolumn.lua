@@ -12,15 +12,15 @@ CoD.SelectedFilmSummaryScoreColumn.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	HeaderText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	HeaderText:setTTF("ttmussels_regular")
 	HeaderText:setLetterSpacing(1)
-	HeaderText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	HeaderText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	HeaderText:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	HeaderText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(HeaderText)
 	self.HeaderText = HeaderText
 	local ValueText = LUI.UIText.new(0.5, 0.5, -99.5, 99.5, 1, 1, -34, -1)
 	ValueText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	ValueText:setTTF("dinnext_regular")
 	ValueText:setLetterSpacing(1)
-	ValueText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ValueText:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
 	self:addElement(ValueText)
 	self.ValueText = ValueText
 	self:mergeStateConditions({

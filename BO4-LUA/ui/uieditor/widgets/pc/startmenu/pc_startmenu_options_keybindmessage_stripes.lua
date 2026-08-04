@@ -1,4 +1,4 @@
-require("x64:44485d23f771954")
+require("ui/uieditor/widgets/pc/verticalstripes")
 CoD.PC_StartMenu_Options_KeybindMessage_Stripes = InheritFrom(LUI.UIElement)
 CoD.PC_StartMenu_Options_KeybindMessage_Stripes.__defaultWidth = 200
 CoD.PC_StartMenu_Options_KeybindMessage_Stripes.__defaultHeight = 32

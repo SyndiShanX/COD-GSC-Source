@@ -9,7 +9,7 @@ CoD.DirectorPartyLeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local PartyLeaderStar = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	PartyLeaderStar:setRGB(0.02, 0.29, 0.49)
-	PartyLeaderStar:setImage(RegisterImage(@"uie_ui_menu_director_icon_star"))
+	PartyLeaderStar:setImage(RegisterImage("uie_ui_menu_director_icon_star"))
 	self:addElement(PartyLeaderStar)
 	self.PartyLeaderStar = PartyLeaderStar
 	self:mergeStateConditions({

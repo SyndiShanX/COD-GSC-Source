@@ -8,18 +8,18 @@ CoD.CallingCards_FutureRacing_asset02.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local roadbottom = LUI.UIImage.new(0, 0, 0, 448, 0, 0, 0, 184)
-	roadbottom:setImage(RegisterImage(@"uie_cc_bottomroad"))
+	roadbottom:setImage(RegisterImage("uie_cc_bottomroad"))
 	self:addElement(roadbottom)
 	self.roadbottom = roadbottom
 	local vehicle01 = LUI.UIImage.new(0, 0, 467, 307, 0, 0, 114, 354)
 	vehicle01:setZRot(11)
 	vehicle01:setScale(0.4, 0.4)
-	vehicle01:setImage(RegisterImage(@"uie_cc_vehicle02"))
+	vehicle01:setImage(RegisterImage("uie_cc_vehicle02"))
 	self:addElement(vehicle01)
 	self.vehicle01 = vehicle01
 	local vehicle02 = LUI.UIImage.new(0, 0, 540, 380, 0, 0, 127, 367)
 	vehicle02:setScale(0.3, 0.3)
-	vehicle02:setImage(RegisterImage(@"uie_cc_vehicle04"))
+	vehicle02:setImage(RegisterImage("uie_cc_vehicle04"))
 	self:addElement(vehicle02)
 	self.vehicle02 = vehicle02
 	if PostLoadFunc then

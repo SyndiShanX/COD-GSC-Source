@@ -1,48 +1,48 @@
-require("x64:fb1621df4e9688b")
-CoD[@"hash_1C93CA98359EB427"] = InheritFrom(LUI.UIElement)
-CoD[@"hash_1C93CA98359EB427"].__defaultWidth = 960
-CoD[@"hash_1C93CA98359EB427"].__defaultHeight = 240
-CoD[@"hash_1C93CA98359EB427"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+require("ui/uieditor/widgets/callingcards/callingcards_asset_astromonkey")
+CoD.callingcards_signature_weapon_master = InheritFrom(LUI.UIElement)
+CoD.callingcards_signature_weapon_master.__defaultWidth = 960
+CoD.callingcards_signature_weapon_master.__defaultHeight = 240
+CoD.callingcards_signature_weapon_master.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[@"hash_1C93CA98359EB427"])
+	self:setClass(CoD.callingcards_signature_weapon_master)
 	self.id = "CallingCards_Signature_Weapon_Master"
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(@"uie_ui_icon_callingcards_signature_weapon_master_bg"))
+	bg:setImage(RegisterImage("uie_ui_icon_callingcards_signature_weapon_master_bg"))
 	self:addElement(bg)
 	self.bg = bg
 	local monkeyShines = CoD.CallingCards_Asset_AstroMonkey.new(f1_arg0, f1_arg1, 0, 0, 251, 619, 0, 0, -53, 340)
 	self:addElement(monkeyShines)
 	self.monkeyShines = monkeyShines
 	local bannana01 = LUI.UIImage.new(0, 0, 607, 687, 0, 0, 64.5, 160.5)
-	bannana01:setImage(RegisterImage(@"uie_ui_icon_callingcards_signature_weapon_master_bannana_01"))
+	bannana01:setImage(RegisterImage("uie_ui_icon_callingcards_signature_weapon_master_bannana_01"))
 	self:addElement(bannana01)
 	self.bannana01 = bannana01
 	local bannana02 = LUI.UIImage.new(0, 0, 258.5, 354.5, 0, 0, -11, 77)
-	bannana02:setImage(RegisterImage(@"uie_ui_icon_callingcards_signature_weapon_master_bannana_02"))
+	bannana02:setImage(RegisterImage("uie_ui_icon_callingcards_signature_weapon_master_bannana_02"))
 	self:addElement(bannana02)
 	self.bannana02 = bannana02
 	local bannana03 = LUI.UIImage.new(0, 0, 149, 261, 0, 0, 59, 155)
-	bannana03:setImage(RegisterImage(@"uie_ui_icon_callingcards_signature_weapon_master_bannana_03"))
+	bannana03:setImage(RegisterImage("uie_ui_icon_callingcards_signature_weapon_master_bannana_03"))
 	self:addElement(bannana03)
 	self.bannana03 = bannana03
 	local bannana04 = LUI.UIImage.new(0, 0, 192.5, 256.5, 0, 0, 161, 225)
-	bannana04:setImage(RegisterImage(@"uie_ui_icon_callingcards_signature_weapon_master_bannana_04"))
+	bannana04:setImage(RegisterImage("uie_ui_icon_callingcards_signature_weapon_master_bannana_04"))
 	self:addElement(bannana04)
 	self.bannana04 = bannana04
 	local bannana05 = LUI.UIImage.new(0, 0, 66.5, 138.5, 0, 0, 49, 121)
-	bannana05:setImage(RegisterImage(@"uie_ui_icon_callingcards_signature_weapon_master_bannana_05"))
+	bannana05:setImage(RegisterImage("uie_ui_icon_callingcards_signature_weapon_master_bannana_05"))
 	self:addElement(bannana05)
 	self.bannana05 = bannana05
 	local bannana06 = LUI.UIImage.new(0, 0, 95, 151, 0, 0, 153, 209)
-	bannana06:setImage(RegisterImage(@"uie_ui_icon_callingcards_signature_weapon_master_bannana_06"))
+	bannana06:setImage(RegisterImage("uie_ui_icon_callingcards_signature_weapon_master_bannana_06"))
 	self:addElement(bannana06)
 	self.bannana06 = bannana06
 	local cropper = LUI.UIImage.new(0, 0, -32, 992, 0, 0, -392, 632)
 	cropper:setAlpha(0)
-	cropper:setImage(RegisterImage(@"uie_stage_crop_prop"))
+	cropper:setImage(RegisterImage("uie_stage_crop_prop"))
 	self:addElement(cropper)
 	self.cropper = cropper
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -51,7 +51,7 @@ CoD[@"hash_1C93CA98359EB427"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end
 	return self
 end
-CoD[@"hash_1C93CA98359EB427"].__resetProperties = function(f2_arg0)
+CoD.callingcards_signature_weapon_master.__resetProperties = function(f2_arg0)
 	f2_arg0.monkeyShines:completeAnimation()
 	f2_arg0.bannana01:completeAnimation()
 	f2_arg0.bannana02:completeAnimation()
@@ -68,7 +68,7 @@ CoD[@"hash_1C93CA98359EB427"].__resetProperties = function(f2_arg0)
 	f2_arg0.bannana05:setTopBottom(0, 0, 49, 121)
 	f2_arg0.bannana06:setTopBottom(0, 0, 153, 209)
 end
-CoD[@"hash_1C93CA98359EB427"].__clipsPerState = {
+CoD.callingcards_signature_weapon_master.__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -200,6 +200,6 @@ CoD[@"hash_1C93CA98359EB427"].__clipsPerState = {
 		end,
 	},
 }
-CoD[@"hash_1C93CA98359EB427"].__onClose = function(f23_arg0)
+CoD.callingcards_signature_weapon_master.__onClose = function(f23_arg0)
 	f23_arg0.monkeyShines:close()
 end

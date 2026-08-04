@@ -1,5 +1,5 @@
-require("x64:e9cfc3cb5356fa5")
-require("x64:81a24c5340caa1e")
+require("ui/uieditor/widgets/common/commontabbar")
+require("ui/uieditor/widgets/common/commontabbarbacking")
 CoD.Social_SafeAreaContainer = InheritFrom(LUI.UIElement)
 CoD.Social_SafeAreaContainer.__defaultWidth = 1920
 CoD.Social_SafeAreaContainer.__defaultHeight = 1080

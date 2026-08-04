@@ -8,10 +8,10 @@ CoD.LobbyProcessQueueDebugItemText.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Name = LUI.UIText.new(0, 0, 0, 1083, 0, 0, 0, 20)
-	Name:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6808E4CA838AD72E"))
+	Name:setText(Engine[@"hash_4F9F1239CFD921FE"]("menu/fileshare_newname"))
 	Name:setTTF("dinnext_regular")
-	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	Name:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	Name:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(Name)
 	self.Name = Name
 	self:mergeStateConditions({

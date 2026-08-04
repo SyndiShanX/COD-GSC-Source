@@ -76,7 +76,7 @@ end, true)
 CoD.PCKoreaEventUtility.SetupKoreaDayListDataSource = function(f5_arg0, f5_arg1, f5_arg2, f5_arg3, f5_arg4)
 	return DataSourceHelpers.ListSetup(f5_arg0, function(f6_arg0)
 		return CoD.PCKoreaEventUtility.GetEventweekProgression(f5_arg1, f5_arg2, f5_arg3, f5_arg4)
-	end, false, nil, nil)
+	end, false, false, false)
 end
 CoD.PCKoreaEventUtility.GetEventweekProgression = function(f7_arg0, f7_arg1, f7_arg2, f7_arg3)
 	local f7_local0 = {}
@@ -104,7 +104,7 @@ DataSources.PCKoreaEventCurrentDayProgression = {
 		local f8_local0 = 60
 		local f8_local1 = 120
 		local f8_local2 = 30
-		local f8_local3 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f8_arg0), "PCKoreaEventCurrentDayProgression")
+		local f8_local3 = Engine.CreateModel(Engine.GetModelForController(f8_arg0), "PCKoreaEventCurrentDayProgression")
 		local f8_local4 = Engine[@"hash_2E43D4F4AB33D421"](f8_arg0)
 		local f8_local5 = math.floor(f8_local4.progress_today / f8_local2 * f8_local0)
 		local f8_local6
@@ -113,11 +113,11 @@ DataSources.PCKoreaEventCurrentDayProgression = {
 			if not f8_local6 then
 			else
 				local f8_local7 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_6B14283B7023E6C6", math.ceil(f8_local2 - (f8_local4.progress_today / f8_local2 * f8_local0 - f8_local5) * f8_local2))
-				Engine[@"setmodelvalue"](Engine[@"createmodel"](f8_local3, "progression"), f8_local6 / f8_local0)
-				Engine[@"setmodelvalue"](Engine[@"createmodel"](f8_local3, "progressBarRatio"), f8_local6 / f8_local1 * f8_local0)
-				Engine[@"setmodelvalue"](Engine[@"createmodel"](f8_local3, "showStarCompletedAnimation"), false)
-				Engine[@"setmodelvalue"](Engine[@"createmodel"](f8_local3, "showCompletedAnimation"), false)
-				Engine[@"setmodelvalue"](Engine[@"createmodel"](f8_local3, "timeRemaining"), f8_local7)
+				Engine.SetModelValue(Engine.CreateModel(f8_local3, "progression"), f8_local6 / f8_local0)
+				Engine.SetModelValue(Engine.CreateModel(f8_local3, "progressBarRatio"), f8_local6 / f8_local1 * f8_local0)
+				Engine.SetModelValue(Engine.CreateModel(f8_local3, "showStarCompletedAnimation"), false)
+				Engine.SetModelValue(Engine.CreateModel(f8_local3, "showCompletedAnimation"), false)
+				Engine.SetModelValue(Engine.CreateModel(f8_local3, "timeRemaining"), f8_local7)
 				return f8_local3
 			end
 		end
@@ -127,16 +127,16 @@ DataSources.PCKoreaEventCurrentDayProgression = {
 		if not DataSources.PCKoreaEventCurrentDayProgression.prepared then
 			return DataSources.PCKoreaEventCurrentDayProgression.prepare(f9_arg0)
 		else
-			return Engine[@"createmodel"](Engine[@"getglobalmodel"](), "PCKoreaEventCurrentDayProgression")
+			return Engine.CreateModel(Engine.GetGlobalModel(), "PCKoreaEventCurrentDayProgression")
 		end
 	end,
 }
 DataSources.PCKoreaEventProgression = {
 	prepare = function(f10_arg0, f10_arg1, f10_arg2)
-		local f10_local0 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f10_arg0), "PCKoreaEventProgression")
+		local f10_local0 = Engine.CreateModel(Engine.GetModelForController(f10_arg0), "PCKoreaEventProgression")
 		local f10_local1 = Engine[@"hash_2E43D4F4AB33D421"](f10_arg0)
 		local f10_local2 = 3
-		local f10_local3, f10_local4, f10_local5, f10_local6 = CoD.PCKoreaEventUtility.GetTimeFromUnixTime(Engine[@"getsecondsremainingserver"](CoD.PCKoreaEventUtility.eventEndTime))
+		local f10_local3, f10_local4, f10_local5, f10_local6 = CoD.PCKoreaEventUtility.GetTimeFromUnixTime(Engine.GetSecondsRemainingServer(CoD.PCKoreaEventUtility.eventEndTime))
 		local f10_local7 = CoD.PCKoreaEventUtility.GetCurrentWeekData(f10_arg0)
 		local f10_local8 = true
 		for f10_local9 = 1, #f10_local1.weekly_completion, 1 do
@@ -144,20 +144,20 @@ DataSources.PCKoreaEventProgression = {
 				f10_local8 = false
 			end
 		end
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f10_local0, "isCompleted"), f10_local8)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f10_local0, "timeRemaining"), Engine[@"hash_4F9F1239CFD921FE"](@"hash_875394DD29160DA", f10_local3, f10_local4, f10_local5, f10_local6))
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f10_local0, "isCurrentWeekCompleted"), false)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f10_local0, "currentWeekRewardImage"), f10_local7.weekRewardImage)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f10_local0, "rewardPopUpImage"), f10_local7.popUpWeekRewardImage)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f10_local0, "rewardPopUpText"), f10_local7.weekRewardText)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f10_local0, "showCompletedMonthPopUp"), false)
+		Engine.SetModelValue(Engine.CreateModel(f10_local0, "isCompleted"), f10_local8)
+		Engine.SetModelValue(Engine.CreateModel(f10_local0, "timeRemaining"), Engine[@"hash_4F9F1239CFD921FE"](@"hash_875394DD29160DA", f10_local3, f10_local4, f10_local5, f10_local6))
+		Engine.SetModelValue(Engine.CreateModel(f10_local0, "isCurrentWeekCompleted"), false)
+		Engine.SetModelValue(Engine.CreateModel(f10_local0, "currentWeekRewardImage"), f10_local7.weekRewardImage)
+		Engine.SetModelValue(Engine.CreateModel(f10_local0, "rewardPopUpImage"), f10_local7.popUpWeekRewardImage)
+		Engine.SetModelValue(Engine.CreateModel(f10_local0, "rewardPopUpText"), f10_local7.weekRewardText)
+		Engine.SetModelValue(Engine.CreateModel(f10_local0, "showCompletedMonthPopUp"), false)
 		return f10_local0
 	end,
 	getModel = function(f11_arg0)
 		if not DataSources.PCKoreaEventProgression.prepared then
 			return DataSources.PCKoreaEventProgression.prepare(f11_arg0)
 		else
-			return Engine[@"createmodel"](Engine[@"getglobalmodel"](), "PCKoreaEventProgression")
+			return Engine.CreateModel(Engine.GetGlobalModel(), "PCKoreaEventProgression")
 		end
 	end,
 }
@@ -177,9 +177,9 @@ CoD.PCKoreaEventUtility.GetTimeFromUnixTime = function(f14_arg0)
 	return f14_local3, f14_local4, f14_local5, f14_arg0 - f14_local3 * f14_local0 - f14_local4 * f14_local1 - f14_local5 * f14_local2
 end
 CoD.PCKoreaEventUtility.TickKoreaEvent = function(f15_arg0)
-	local f15_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f15_arg0), "PCKoreaEventProgression.timeRemaining")
+	local f15_local0 = Engine.GetModel(Engine.GetModelForController(f15_arg0), "PCKoreaEventProgression.timeRemaining")
 	if f15_local0 then
-		local f15_local1, f15_local2, f15_local3, f15_local4 = CoD.PCKoreaEventUtility.GetTimeFromUnixTime(Engine[@"getsecondsremainingserver"](CoD.PCKoreaEventUtility.eventEndTime))
+		local f15_local1, f15_local2, f15_local3, f15_local4 = CoD.PCKoreaEventUtility.GetTimeFromUnixTime(Engine.GetSecondsRemainingServer(CoD.PCKoreaEventUtility.eventEndTime))
 		f15_local0:set(Engine[@"hash_4F9F1239CFD921FE"](@"hash_875394DD29160DA", f15_local1, f15_local2, f15_local3, f15_local4))
 	end
 end
@@ -227,8 +227,8 @@ CoD.PCKoreaEventUtility.AnimateKoreaEventBar = function(f18_arg0, f18_arg1, f18_
 	local f18_local2 = 3
 	local f18_local3 = 90
 	local f18_local4 = Engine[@"hash_2E43D4F4AB33D421"](f18_arg1)
-	local f18_local5 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f18_arg1), "PCKoreaEventProgression")
-	local f18_local6 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f18_arg1), "PCKoreaEventCurrentDayProgression")
+	local f18_local5 = Engine.GetModel(Engine.GetModelForController(f18_arg1), "PCKoreaEventProgression")
+	local f18_local6 = Engine.GetModel(Engine.GetModelForController(f18_arg1), "PCKoreaEventCurrentDayProgression")
 	local f18_local7
 	if f18_local4.next_day_utc ~= f18_local4.prev_next_day_utc then
 		f18_local7 = 0

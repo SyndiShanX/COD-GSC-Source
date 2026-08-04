@@ -1,6 +1,6 @@
-require("x64:2675595fa323085")
-require("x64:ec2c7fb5a455c0a")
-require("x64:1ba14a6a952408f")
+require("ui/uieditor/widgets/emptyfocusable")
+require("ui/uieditor/widgets/pc/cyclinglist_itemcontrol")
+require("ui/uieditor/widgets/pc/startmenu/listitem")
 CoD.CyclingList = InheritFrom(LUI.UIElement)
 CoD.CyclingList.__defaultWidth = 810
 CoD.CyclingList.__defaultHeight = 65

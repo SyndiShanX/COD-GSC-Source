@@ -1,5 +1,5 @@
-require("x64:8aa4715db6ab705")
-require("x64:874be6f078f635e")
+require("ui/uieditor/widgets/pc/battlenet_checkout_closebutton")
+require("ui/uieditor/widgets/pc/battlenet_checkout_view")
 CoD.PC_Battlenet_Checkout = InheritFrom(CoD.Menu)
 LUI.createMenu.PC_Battlenet_Checkout = function(f1_arg0, f1_arg1)
 	local self = CoD.Menu.NewForUIEditor("PC_Battlenet_Checkout", f1_arg0)
@@ -26,14 +26,14 @@ LUI.createMenu.PC_Battlenet_Checkout = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(BattlenetCheckoutCloseButton, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
-		GoBack(self, controller)
+	f1_local1:AddButtonCallbackFunction(BattlenetCheckoutCloseButton, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], nil, function(f3_arg0, f3_arg1, f3_arg2, f3_arg3)
+		GoBack(self, f3_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
+	end, function(f4_arg0, f4_arg1, f4_arg2)
+		CoD.Menu.SetButtonLabel(f4_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, nil)
 		return false
 	end, false)
 	self:addElement(BattlenetCheckoutCloseButton)

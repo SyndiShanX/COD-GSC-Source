@@ -1,4 +1,4 @@
-require("x64:89f851f831d9bd0")
+require("ui/uieditor/widgets/hud/fadingskipprompt")
 CoD.Credit_Fullscreen = InheritFrom(CoD.Menu)
 LUI.createMenu.Credit_Fullscreen = function(f1_arg0, f1_arg1)
 	local self = CoD.Menu.NewForUIEditor("Credit_Fullscreen", f1_arg0)
@@ -48,7 +48,7 @@ LUI.createMenu.Credit_Fullscreen = function(f1_arg0, f1_arg1)
 	end)
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg0)
+	local f1_local8 = Engine.GetModelForController(f1_arg0)
 	f1_local7(f1_local6, f1_local8.LastInput, function(f4_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",

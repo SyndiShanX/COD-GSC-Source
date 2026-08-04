@@ -1,4 +1,4 @@
-require("x64:37a0b77f84c105b")
+require("ui/uieditor/widgets/callingcards/callingcards_asset_steampunkwarriors_gun")
 CoD.CallingCards_Asset_steampunkwarriors_gunarm = InheritFrom(LUI.UIElement)
 CoD.CallingCards_Asset_steampunkwarriors_gunarm.__defaultWidth = 10
 CoD.CallingCards_Asset_steampunkwarriors_gunarm.__defaultHeight = 10

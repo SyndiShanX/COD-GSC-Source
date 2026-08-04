@@ -1,7 +1,7 @@
-require("x64:990129a15a105f")
-require("x64:5b0746a4176f12b")
-require("x64:fd51e83e2e6dbd1")
-require("x64:9d185ccb5a360a0")
+require("ui/uieditor/widgets/freecursor/freecursorheaderlabelcontainer")
+require("ui/uieditor/widgets/freecursor/infopanelsubwidgets/freecursornolabelbuttonpromptarea")
+require("ui/uieditor/widgets/onoffimage")
+require("ui/uieditor/widgets/pc/footer/footerbutton_tooltipbg")
 CoD.freeCursorHeaderInfo = InheritFrom(LUI.UIElement)
 CoD.freeCursorHeaderInfo.__defaultWidth = 756
 CoD.freeCursorHeaderInfo.__defaultHeight = 41
@@ -42,7 +42,7 @@ CoD.freeCursorHeaderInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 			condition = function(menu, element, event)
 				local f4_local0 = CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, f1_arg1, "cautionDescription")
 				if f4_local0 then
-					if not CoD.ModelUtility.AreButtonModelValueBitsSet(f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"], Enum[@"luibuttonflags"][@"flag_down"]) then
+					if not CoD.ModelUtility.AreButtonModelValueBitsSet(f1_arg1, Enum.LUIButton[@"lui_key_rtrig"], Enum.LUIButtonFlags[@"flag_down"]) then
 						f4_local0 = not CoD.ModelUtility.IsSelfModelValueTrue(self, f1_arg1, "detailedViewPC")
 					else
 						f4_local0 = false
@@ -63,14 +63,14 @@ CoD.freeCursorHeaderInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end)
 	local f1_local7 = cautionHint
 	local f1_local8 = cautionHint.subscribeToModel
-	local f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
-	f1_local8(f1_local7, f1_local9["ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"]], function(f6_arg0)
+	local f1_local9 = Engine.GetModelForController(f1_arg1)
+	f1_local8(f1_local7, f1_local9["ButtonBits." .. Enum.LUIButton[@"lui_key_rtrig"]], function(f6_arg0)
 		f1_arg0:updateElementState(cautionHint, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f6_arg0:get(),
-			modelName = "ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"],
+			modelName = "ButtonBits." .. Enum.LUIButton[@"lui_key_rtrig"],
 		})
 	end, false)
 	cautionHint:linkToElementModel(cautionHint, "detailedViewPC", true, function(model)
@@ -135,14 +135,14 @@ CoD.freeCursorHeaderInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
-	f1_local8(f1_local7, f1_local9["ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"]], function(f14_arg0)
+	f1_local9 = Engine.GetModelForController(f1_arg1)
+	f1_local8(f1_local7, f1_local9["ButtonBits." .. Enum.LUIButton[@"lui_key_rtrig"]], function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f14_arg0:get(),
-			modelName = "ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"],
+			modelName = "ButtonBits." .. Enum.LUIButton[@"lui_key_rtrig"],
 		})
 	end, false)
 	self:linkToElementModel(self, "detailedViewPC", true, function(model)
@@ -160,7 +160,7 @@ CoD.freeCursorHeaderInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local9 = Engine.GetModelForController(f1_arg1)
 	f1_local8(f1_local7, f1_local9.LastInput, function(f17_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -210,7 +210,7 @@ CoD.freeCursorHeaderInfo.__resetProperties = function(f21_arg0)
 	f21_arg0.detailsButton:setAlpha(1)
 	f21_arg0.noLabelButtonPrompts:setAlpha(1)
 	f21_arg0.backingDetailed:setAlpha(0)
-	f21_arg0.backingDetailed:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
+	f21_arg0.backingDetailed:setMaterial(LUI.UIImage.GetCachedMaterial("uie_wipe_normal"))
 	f21_arg0.backingDetailed:setShaderVector(0, 1, 0, 0, 0)
 	f21_arg0.backingDetailed:setShaderVector(1, 0, 0, 0, 0)
 	f21_arg0.backingDetailed:setShaderVector(2, 1, 0, 0, 0)
@@ -244,7 +244,7 @@ CoD.freeCursorHeaderInfo.__clipsPerState = {
 			end
 			f23_arg0.backingDetailed:completeAnimation()
 			f23_arg0.backingDetailed:setAlpha(1)
-			f23_arg0.backingDetailed:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
+			f23_arg0.backingDetailed:setMaterial(LUI.UIImage.GetCachedMaterial("uie_wipe_normal"))
 			f23_arg0.backingDetailed:setShaderVector(0, 0, 0, 0, 0)
 			f23_arg0.backingDetailed:setShaderVector(1, 0, 0, 0, 0)
 			f23_arg0.backingDetailed:setShaderVector(2, 1, 0, 0, 0)
@@ -275,7 +275,7 @@ CoD.freeCursorHeaderInfo.__clipsPerState = {
 			end
 			f26_arg0.backingDetailed:completeAnimation()
 			f26_arg0.backingDetailed:setAlpha(1)
-			f26_arg0.backingDetailed:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
+			f26_arg0.backingDetailed:setMaterial(LUI.UIImage.GetCachedMaterial("uie_wipe_normal"))
 			f26_arg0.backingDetailed:setShaderVector(0, 0.16, 0, 0, 0)
 			f26_arg0.backingDetailed:setShaderVector(1, 0, 0, 0, 0)
 			f26_arg0.backingDetailed:setShaderVector(2, 1, 0, 0, 0)

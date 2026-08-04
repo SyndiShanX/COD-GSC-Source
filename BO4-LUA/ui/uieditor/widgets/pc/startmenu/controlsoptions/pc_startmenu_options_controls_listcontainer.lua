@@ -1,5 +1,5 @@
-require("x64:2675595fa323085")
-require("x64:13e691628900f29")
+require("ui/uieditor/widgets/emptyfocusable")
+require("ui/uieditor/widgets/pc/startmenu/controlsoptions/pc_startmenu_options_controls_list")
 CoD.PC_StartMenu_Options_Controls_ListContainer = InheritFrom(LUI.UIElement)
 CoD.PC_StartMenu_Options_Controls_ListContainer.__defaultWidth = 694
 CoD.PC_StartMenu_Options_Controls_ListContainer.__defaultHeight = 633

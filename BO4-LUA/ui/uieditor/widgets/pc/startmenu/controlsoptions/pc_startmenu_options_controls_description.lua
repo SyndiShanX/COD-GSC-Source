@@ -1,7 +1,7 @@
-require("x64:278721ff61dca1c")
-require("x64:379001ae517dfa6")
-require("x64:a8c6f5d1845bdd6")
-require("x64:dd0e1cefc02c892")
+require("ui/uieditor/widgets/pc/presetsquare")
+require("ui/uieditor/widgets/pc/seperationline")
+require("ui/uieditor/widgets/pc/startmenu/controlsoptions/pc_startmenu_options_controls_descriptionimage")
+require("ui/uieditor/widgets/pc/startmenu/controlsoptions/pc_startmenu_options_controls_descriptiontext")
 CoD.PC_StartMenu_Options_Controls_Description = InheritFrom(LUI.UIElement)
 CoD.PC_StartMenu_Options_Controls_Description.__defaultWidth = 675
 CoD.PC_StartMenu_Options_Controls_Description.__defaultHeight = 540
@@ -17,7 +17,7 @@ CoD.PC_StartMenu_Options_Controls_Description.new = function(f1_arg0, f1_arg1, f
 	self:addElement(DescriptionTextBox)
 	self.DescriptionTextBox = DescriptionTextBox
 	local PlaceHolderImage = CoD.PC_StartMenu_Options_Controls_DescriptionImage.new(f1_arg0, f1_arg1, 0, 0, 0, 675, 0, 0, 4.5, 384.5)
-	PlaceHolderImage.PlaceHolderImage:setImage(RegisterImage(@"img_t7_menu_mp_preview_biodome"))
+	PlaceHolderImage.PlaceHolderImage:setImage(RegisterImage("img_t7_menu_mp_preview_biodome"))
 	self:addElement(PlaceHolderImage)
 	self.PlaceHolderImage = PlaceHolderImage
 	local Line = CoD.SeperationLine.new(f1_arg0, f1_arg1, 0, 0, 0, 673, 0, 0, 0, 1)

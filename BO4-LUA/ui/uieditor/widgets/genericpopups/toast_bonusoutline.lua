@@ -1,5 +1,5 @@
-require("x64:172ebfa9a1d2af0")
-require("x64:806e93b8e0b15c5")
+require("ui/uieditor/widgets/genericpopups/gp_framebackgroundt")
+require("ui/uieditor/widgets/genericpopups/toast_itemtitleglow")
 CoD.Toast_BonusOutline = InheritFrom(LUI.UIElement)
 CoD.Toast_BonusOutline.__defaultWidth = 456
 CoD.Toast_BonusOutline.__defaultHeight = 120
@@ -13,15 +13,15 @@ CoD.Toast_BonusOutline.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg
 	self.ToastItemTitleGlow = ToastItemTitleGlow
 	local Bonus = LUI.UIText.new(0.5, 0.5, -113, 107, 1, 1, -25, 0)
 	Bonus:setRGB(0, 0, 0)
-	Bonus:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7800CBD9308E73C2"))
+	Bonus:setText(Engine[@"hash_4F9F1239CFD921FE"]("mpui/bonus_caps"))
 	Bonus:setTTF("dinnext_regular")
 	Bonus:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_2AE166D9BA8C6907"))
 	Bonus:setShaderVector(0, 0.06, 0, 0, 0)
 	Bonus:setShaderVector(1, 0.02, 0, 0, 0)
 	Bonus:setShaderVector(2, 1, 0, 0, 0)
 	Bonus:setLetterSpacing(1)
-	Bonus:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	Bonus:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	Bonus:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	Bonus:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(Bonus)
 	self.Bonus = Bonus
 	local FrameBackground = CoD.GP_FrameBackgroundt.new(f1_arg0, f1_arg1, 0, 1, -45, 43, 0, 1, 0, -24)

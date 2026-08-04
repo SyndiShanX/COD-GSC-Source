@@ -1,19 +1,19 @@
 local PostLoadFunc = function(f1_arg0)
-	local f1_local0 = f1_arg0:getModel(Engine[@"getprimarycontroller"](), "fadeOverTime")
+	local f1_local0 = f1_arg0:getModel(Engine.GetPrimaryController(), "fadeOverTime")
 	if f1_local0 then
 		f1_arg0:subscribeToModel(f1_local0, function(model)
-			local f2_local0 = Engine[@"getmodelvalue"](model)
-			local f2_local1 = f1_arg0:getModel(Engine[@"getprimarycontroller"](), "startAlpha")
-			local f2_local2 = f1_arg0:getModel(Engine[@"getprimarycontroller"](), "endAlpha")
+			local modelValue = Engine.GetModelValue(model)
+			local f2_local1 = f1_arg0:getModel(Engine.GetPrimaryController(), "startAlpha")
+			local f2_local2 = f1_arg0:getModel(Engine.GetPrimaryController(), "endAlpha")
 			local f2_local3 = 0
 			local f2_local4 = 0
 			if f2_local1 then
-				f2_local3 = Engine[@"getmodelvalue"](f2_local1)
+				f2_local3 = Engine.GetModelValue(f2_local1)
 			end
 			if f2_local2 then
-				f2_local4 = Engine[@"getmodelvalue"](f2_local2)
+				f2_local4 = Engine.GetModelValue(f2_local2)
 			end
-			if f2_local0 then
+			if modelValue then
 				if f2_local4 == 0 then
 					CoD.Menu.RemoveFromCurrMenuNameList(f1_arg0.menuName)
 				else
@@ -22,7 +22,7 @@ local PostLoadFunc = function(f1_arg0)
 				if f2_local3 >= 0 then
 					f1_arg0.Fullscreen:setAlpha(f2_local3)
 				end
-				f1_arg0.Fullscreen:beginAnimation("fadeOverTime", f2_local0)
+				f1_arg0.Fullscreen:beginAnimation("fadeOverTime", modelValue)
 				f1_arg0.Fullscreen:setAlpha(f2_local4)
 			end
 		end)

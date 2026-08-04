@@ -1,4 +1,4 @@
-require("x64:bc6e2379d2241fb")
+require("ui/uieditor/widgets/common/commonidentitywidgetstreamlined")
 CoD.CommonIdentityWidgetStreamlinedSafeAreaContainer = InheritFrom(LUI.UIElement)
 CoD.CommonIdentityWidgetStreamlinedSafeAreaContainer.__defaultWidth = 1920
 CoD.CommonIdentityWidgetStreamlinedSafeAreaContainer.__defaultHeight = 1080

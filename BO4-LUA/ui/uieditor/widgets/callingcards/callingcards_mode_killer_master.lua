@@ -1,18 +1,18 @@
-require("x64:8f71caf880cb975")
-CoD[@"hash_3323BABA7CF22289"] = InheritFrom(LUI.UIElement)
-CoD[@"hash_3323BABA7CF22289"].__defaultWidth = 960
-CoD[@"hash_3323BABA7CF22289"].__defaultHeight = 240
-CoD[@"hash_3323BABA7CF22289"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+require("ui/uieditor/widgets/callingcards/callingcards_asset_birds")
+CoD.callingcards_mode_killer_master = InheritFrom(LUI.UIElement)
+CoD.callingcards_mode_killer_master.__defaultWidth = 960
+CoD.callingcards_mode_killer_master.__defaultHeight = 240
+CoD.callingcards_mode_killer_master.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[@"hash_3323BABA7CF22289"])
+	self:setClass(CoD.callingcards_mode_killer_master)
 	self.id = "CallingCards_Mode_Killer_Master"
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local fog = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
 	fog:setAlpha(0.8)
-	fog:setImage(RegisterImage(@"uie_mode_background"))
-	fog:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
+	fog:setImage(RegisterImage("uie_mode_background"))
+	fog:setMaterial(LUI.UIImage.GetCachedMaterial("uie_tile_scroll_normal"))
 	fog:setShaderVector(0, 1, 1, 0, 0)
 	fog:setShaderVector(1, -0.01, 0, 0, 0)
 	self:addElement(fog)
@@ -22,28 +22,28 @@ CoD[@"hash_3323BABA7CF22289"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(birds)
 	self.birds = birds
 	local pirateship = LUI.UIImage.new(0, 0, -90, 870, 0, 0, 0, 240)
-	pirateship:setImage(RegisterImage(@"uie_pirate_ship"))
+	pirateship:setImage(RegisterImage("uie_pirate_ship"))
 	self:addElement(pirateship)
 	self.pirateship = pirateship
 	local boatHighlight = LUI.UIImage.new(0, 0, 198, 574, 0, 0, 90, 240)
 	boatHighlight:setRGB(0.37, 0.06, 0.06)
-	boatHighlight:setImage(RegisterImage(@"uie_boat_highlights"))
+	boatHighlight:setImage(RegisterImage("uie_boat_highlights"))
 	self:addElement(boatHighlight)
 	self.boatHighlight = boatHighlight
 	local skelly = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	skelly:setImage(RegisterImage(@"uie_skeleton"))
+	skelly:setImage(RegisterImage("uie_skeleton"))
 	self:addElement(skelly)
 	self.skelly = skelly
 	local lightOverlay = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	lightOverlay:setImage(RegisterImage(@"uie_skelly_highlight"))
+	lightOverlay:setImage(RegisterImage("uie_skelly_highlight"))
 	self:addElement(lightOverlay)
 	self.lightOverlay = lightOverlay
 	local eyeFlareImage = LUI.UIImage.new(0, 0, 687, 1042, 0, 0, -9, 189)
-	eyeFlareImage:setImage(RegisterImage(@"uie_eye_flare"))
+	eyeFlareImage:setImage(RegisterImage("uie_eye_flare"))
 	self:addElement(eyeFlareImage)
 	self.eyeFlareImage = eyeFlareImage
 	local eyeFlareImage2 = LUI.UIImage.new(0, 0, 792, 1147, 0, 0, -9, 189)
-	eyeFlareImage2:setImage(RegisterImage(@"uie_eye_flare"))
+	eyeFlareImage2:setImage(RegisterImage("uie_eye_flare"))
 	self:addElement(eyeFlareImage2)
 	self.eyeFlareImage2 = eyeFlareImage2
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -52,7 +52,7 @@ CoD[@"hash_3323BABA7CF22289"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end
 	return self
 end
-CoD[@"hash_3323BABA7CF22289"].__resetProperties = function(f2_arg0)
+CoD.callingcards_mode_killer_master.__resetProperties = function(f2_arg0)
 	f2_arg0.lightOverlay:completeAnimation()
 	f2_arg0.eyeFlareImage:completeAnimation()
 	f2_arg0.eyeFlareImage2:completeAnimation()
@@ -60,7 +60,7 @@ CoD[@"hash_3323BABA7CF22289"].__resetProperties = function(f2_arg0)
 	f2_arg0.birds:completeAnimation()
 	f2_arg0.lightOverlay:setAlpha(1)
 	f2_arg0.eyeFlareImage:setAlpha(1)
-	f2_arg0.eyeFlareImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_normal"))
+	f2_arg0.eyeFlareImage:setMaterial(LUI.UIImage.GetCachedMaterial("ui_normal"))
 	f2_arg0.eyeFlareImage2:setAlpha(1)
 	f2_arg0.boatHighlight:setRGB(0.37, 0.06, 0.06)
 	f2_arg0.boatHighlight:setAlpha(1)
@@ -68,7 +68,7 @@ CoD[@"hash_3323BABA7CF22289"].__resetProperties = function(f2_arg0)
 	f2_arg0.birds:setTopBottom(0, 0, -107.5, 587.5)
 	f2_arg0.birds:setScale(1, 1)
 end
-CoD[@"hash_3323BABA7CF22289"].__clipsPerState = {
+CoD.callingcards_mode_killer_master.__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -137,7 +137,7 @@ CoD[@"hash_3323BABA7CF22289"].__clipsPerState = {
 			end
 			f3_arg0.eyeFlareImage:completeAnimation()
 			f3_arg0.eyeFlareImage:setAlpha(1)
-			f3_arg0.eyeFlareImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+			f3_arg0.eyeFlareImage:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 			f3_local3(f3_arg0.eyeFlareImage)
 			local f3_local4 = function(f13_arg0)
 				local f13_local0 = function(f14_arg0)
@@ -157,6 +157,6 @@ CoD[@"hash_3323BABA7CF22289"].__clipsPerState = {
 		end,
 	},
 }
-CoD[@"hash_3323BABA7CF22289"].__onClose = function(f15_arg0)
+CoD.callingcards_mode_killer_master.__onClose = function(f15_arg0)
 	f15_arg0.birds:close()
 end

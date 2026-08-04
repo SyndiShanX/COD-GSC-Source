@@ -1,7 +1,7 @@
-require("x64:baf9d942e162c42")
-require("x64:990129a15a105f")
-require("x64:6efca540339ed2f")
-require("x64:e92bbb6cf7249e8")
+require("ui/uieditor/widgets/freecursor/freecursordetaileddescriptioncontainer")
+require("ui/uieditor/widgets/freecursor/freecursorheaderlabelcontainer")
+require("ui/uieditor/widgets/freecursor/infopanelsubwidgets/freecursorbuttonpromptinfo")
+require("ui/uieditor/widgets/showhideimage")
 CoD.TooltipActionPrompt = InheritFrom(LUI.UIElement)
 CoD.TooltipActionPrompt.__defaultWidth = 405
 CoD.TooltipActionPrompt.__defaultHeight = 377
@@ -81,14 +81,14 @@ CoD.TooltipActionPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
-	f1_local6(f1_local5, f1_local7["ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"]], function(f11_arg0)
+	local f1_local7 = Engine.GetModelForController(f1_arg1)
+	f1_local6(f1_local5, f1_local7["ButtonBits." .. Enum.LUIButton[@"lui_key_rtrig"]], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f11_arg0:get(),
-			modelName = "ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"],
+			modelName = "ButtonBits." .. Enum.LUIButton[@"lui_key_rtrig"],
 		})
 	end, false)
 	self:linkToElementModel(self, "detailedViewPC", true, function(model)
@@ -106,7 +106,7 @@ CoD.TooltipActionPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7 = Engine.GetModelForController(f1_arg1)
 	f1_local6(f1_local5, f1_local7.LastInput, function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

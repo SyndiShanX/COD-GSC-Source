@@ -1,4 +1,4 @@
-require("x64:72b4a1e69ac48fb")
+require("ui/uieditor/widgets/verticalscrollingtextcontainer")
 CoD.verticalScrollingTextBox = InheritFrom(LUI.UIElement)
 CoD.verticalScrollingTextBox.__defaultWidth = 900
 CoD.verticalScrollingTextBox.__defaultHeight = 300

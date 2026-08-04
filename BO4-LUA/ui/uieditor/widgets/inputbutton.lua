@@ -1,5 +1,5 @@
-require("x64:3625a0d08a5c80d")
-require("x64:a1e2d7b19f5deb0")
+require("ui/uieditor/widgets/lobby/common/fe_focusbarcontainer")
+require("ui/uieditor/widgets/startmenu/startmenu_frame_nobg")
 CoD.InputButton = InheritFrom(LUI.UIElement)
 CoD.InputButton.__defaultWidth = 577
 CoD.InputButton.__defaultHeight = 51
@@ -15,8 +15,8 @@ CoD.InputButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	local Text = LUI.UIText.new(0, 1, 10.5, -13.5, 0, 0, 13, 43)
 	Text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Text:setTTF("dinnext_regular")
-	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	Text:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	Text:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(Text)
 	self.Text = Text
 	local FocusBarB = CoD.FE_FocusBarContainer.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 1, 1, -5, 0)

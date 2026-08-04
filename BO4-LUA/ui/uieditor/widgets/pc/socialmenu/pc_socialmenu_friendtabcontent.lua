@@ -1,6 +1,6 @@
-require("x64:9833b819beeecb8")
-require("x64:ac0bb8eed5b40fa")
-require("x64:eb0bad5d4e6c01d")
+require("ui/uieditor/widgets/pc/socialmenu/pc_socialmenu_dropdownbnetstatus")
+require("ui/uieditor/widgets/pc/socialmenu/pcsocialmenu_pendingrequests")
+require("ui/uieditor/widgets/pc/socialmenu/pcsocialmenu_playerslist")
 CoD.PC_SocialMenu_FriendTabContent = InheritFrom(LUI.UIElement)
 CoD.PC_SocialMenu_FriendTabContent.__defaultWidth = 1290
 CoD.PC_SocialMenu_FriendTabContent.__defaultHeight = 802

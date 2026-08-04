@@ -1,5 +1,5 @@
-require("x64:5121f7cbfe5fa89")
-require("x64:83fdf4983fb5894")
+require("ui/uieditor/widgets/genericpopups/kickerinternal")
+require("ui/uieditor/widgets/genericpopups/loot_bonustoastgenericbacking")
 CoD.Toast_Container_BlackMarket = InheritFrom(LUI.UIElement)
 CoD.Toast_Container_BlackMarket.__defaultWidth = 340
 CoD.Toast_Container_BlackMarket.__defaultHeight = 80
@@ -18,8 +18,8 @@ CoD.Toast_Container_BlackMarket.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local FooterText = LUI.UIText.new(0.5, 1.5, -170, -170, 0, 0.26, 50, 50)
 	FooterText:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	FooterText:setTTF("ttmussels_regular")
-	FooterText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	FooterText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	FooterText:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	FooterText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	FooterText:linkToElementModel(self, "description", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

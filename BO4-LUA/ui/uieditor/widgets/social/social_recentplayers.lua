@@ -1,11 +1,11 @@
-require("x64:f315f285d876794")
-require("x64:38c11a77e96e48c")
-require("x64:53e6f1dc36a47c8")
-require("x64:d288f163475f28")
-require("x64:bf523a632054d42")
-require("x64:8b8054dd7e46390")
-require("x64:7889ce1e3e2e8a")
-require("x64:d93d55bb6418607")
+require("ui/uieditor/menus/social/social_playerdetailspopup")
+require("ui/uieditor/widgets/scrollbars/verticalcounter")
+require("ui/uieditor/widgets/social/social_emptyframe")
+require("ui/uieditor/widgets/social/social_infopane")
+require("ui/uieditor/widgets/social/social_nofriends")
+require("ui/uieditor/widgets/social/social_playerslistbutton")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsbackground")
+require("ui/uieditor/widgets/pc_vscrolllist")
 CoD.Social_RecentPlayers = InheritFrom(LUI.UIElement)
 CoD.Social_RecentPlayers.__defaultWidth = 1920
 CoD.Social_RecentPlayers.__defaultHeight = 1080
@@ -22,7 +22,7 @@ CoD.Social_RecentPlayers.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.Background = Background
 	local SocialNoFriends = CoD.Social_NoFriends.new(f1_arg0, f1_arg1, 0.5, 0.5, -960, 960, 0, 0, 0, 1080)
 	SocialNoFriends:setAlpha(0)
-	SocialNoFriends.noFriends:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6575DC659C9D5D27"))
+	SocialNoFriends.noFriends:setText(Engine[@"hash_4F9F1239CFD921FE"]("menu/there_are_no_recent_players"))
 	self:addElement(SocialNoFriends)
 	self.SocialNoFriends = SocialNoFriends
 	local f1_local3 = nil
@@ -36,7 +36,7 @@ CoD.Social_RecentPlayers.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	Title:setText(LocalizeToUpperString(@"menu/recent"))
 	Title:setTTF("ttmussels_regular")
 	Title:setLetterSpacing(6)
-	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	self:addElement(Title)
 	self.Title = Title
 	local PCSimpleVScrollList = nil
@@ -61,7 +61,7 @@ CoD.Social_RecentPlayers.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	infoBracketBot:setAlpha(0.1)
 	infoBracketBot:setZRot(180)
 	infoBracketBot:setImage(RegisterImage(@"hash_4C325BED3F226657"))
-	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
+	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_add"))
 	infoBracketBot:setShaderVector(0, 0, 0, 0, 0)
 	infoBracketBot:setupNineSliceShader(16, 4)
 	self:addElement(infoBracketBot)

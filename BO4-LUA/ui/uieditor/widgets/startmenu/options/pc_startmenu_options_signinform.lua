@@ -1,7 +1,7 @@
-require("x64:98f1288a89a9af6")
-require("x64:aaa2f6ba4984209")
-require("x64:110e986e11c842b")
-require("x64:75b68cdde53ec78")
+require("ui/uieditor/widgets/common/commondetailpanel")
+require("ui/uieditor/widgets/pc/pc_codaccount_editableoption")
+require("ui/uieditor/widgets/startmenu/startmenu_options_buttonaction")
+require("ui/uieditor/widgets/startmenu/startmenu_options_simplecheckoption")
 CoD.PC_StartMenu_Options_SignInForm = InheritFrom(LUI.UIElement)
 CoD.PC_StartMenu_Options_SignInForm.__defaultWidth = 1920
 CoD.PC_StartMenu_Options_SignInForm.__defaultHeight = 1080
@@ -19,7 +19,7 @@ CoD.PC_StartMenu_Options_SignInForm.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	registrationFormOptions:setLeftRight(0.5, 0.5, -380, 380)
 	registrationFormOptions:setTopBottom(0, 0, 548, 608)
 	registrationFormOptions:setWidgetType(CoD.StartMenu_Options_SimpleCheckOption)
-	registrationFormOptions:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	registrationFormOptions:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	registrationFormOptions:setDataSource("CODAccountSignInInfoOptions")
 	registrationFormOptions:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -29,14 +29,14 @@ CoD.PC_StartMenu_Options_SignInForm.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 			f2_local0 = element.super:gainFocus(event)
 		end
 		CoD.CoDAccountUtility.OnSignInItemFocusChange(f1_arg0, f1_arg1, element)
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(registrationFormOptions, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
-		ProcessListAction(self, element, controller, menu)
+	f1_arg0:AddButtonCallbackFunction(registrationFormOptions, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], nil, function(f3_arg0, f3_arg1, f3_arg2, f3_arg3)
+		ProcessListAction(self, f3_arg0, f3_arg2, f3_arg1)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
+	end, function(f4_arg0, f4_arg1, f4_arg2)
+		CoD.Menu.SetButtonLabel(f4_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, nil)
 		return false
 	end, false)
 	self:addElement(registrationFormOptions)
@@ -45,7 +45,7 @@ CoD.PC_StartMenu_Options_SignInForm.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	registerButton:setLeftRight(0.5, 0.5, -380, 380)
 	registerButton:setTopBottom(0, 0, 648, 708)
 	registerButton:setWidgetType(CoD.StartMenu_Options_ButtonAction)
-	registerButton:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	registerButton:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	registerButton:setDataSource("CODAccountSignInConfirmation")
 	registerButton:registerEventHandler("gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -54,14 +54,14 @@ CoD.PC_StartMenu_Options_SignInForm.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(registerButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
-		ProcessListAction(self, element, controller, menu)
+	f1_arg0:AddButtonCallbackFunction(registerButton, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "MOUSE1", function(f6_arg0, f6_arg1, f6_arg2, f6_arg3)
+		ProcessListAction(self, f6_arg0, f6_arg2, f6_arg1)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "MOUSE1")
+	end, function(f7_arg0, f7_arg1, f7_arg2)
+		CoD.Menu.SetButtonLabel(f7_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "MOUSE1")
 		return false
 	end, false)
 	self:addElement(registerButton)
@@ -70,8 +70,8 @@ CoD.PC_StartMenu_Options_SignInForm.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	DescriptionText:setRGB(0.96, 0.93, 0.84)
 	DescriptionText:setAlpha(0.3)
 	DescriptionText:setTTF("ttmussels_regular")
-	DescriptionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	DescriptionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	DescriptionText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	DescriptionText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	DescriptionText:linkToElementModel(self, "hintText", true, function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then

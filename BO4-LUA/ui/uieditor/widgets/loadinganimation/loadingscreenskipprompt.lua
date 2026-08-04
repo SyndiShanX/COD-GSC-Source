@@ -10,8 +10,8 @@ CoD.LoadingScreenSkipPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local label = LUI.UIText.new(1, 1, -807, -26, 1, 1, -37, 0)
 	label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"platform/skip"))
 	label:setTTF("skorzhen")
-	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
-	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	label:setAlignment(Enum.LUIAlignment[@"lui_alignment_right"])
+	label:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(label)
 	self.label = label
 	if PostLoadFunc then
@@ -56,7 +56,7 @@ CoD.LoadingScreenSkipPrompt.__clipsPerState = {
 			end
 			f4_arg0.label:completeAnimation()
 			f4_arg0.label:setAlpha(0)
-			f4_arg0.label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_63135E00B961022B"))
+			f4_arg0.label:setText(Engine[@"hash_4F9F1239CFD921FE"]("menu/skip_kbm"))
 			f4_local0(f4_arg0.label)
 		end,
 	},

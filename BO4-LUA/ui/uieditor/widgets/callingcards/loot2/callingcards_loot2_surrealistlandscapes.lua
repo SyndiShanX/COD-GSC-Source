@@ -1,5 +1,5 @@
-require("x64:a90c651f34c6414")
-require("x64:ab46e4d00941143")
+require("ui/uieditor/widgets/callingcards/loot2/callingcards_loot2_surrealistlandscapes_book")
+require("ui/uieditor/widgets/callingcards/loot2/callingcards_loot2_surrealistlandscapes_stairs")
 CoD[0xF9B8B7EB4A5FEE] = InheritFrom(LUI.UIElement)
 CoD[0xF9B8B7EB4A5FEE].__defaultWidth = 960
 CoD[0xF9B8B7EB4A5FEE].__defaultHeight = 240
@@ -11,7 +11,7 @@ CoD[0xF9B8B7EB4A5FEE].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(@"uie_ui_menu_callingcards_surrealistlandscape_bg"))
+	bg:setImage(RegisterImage("uie_ui_menu_callingcards_surrealistlandscape_bg"))
 	self:addElement(bg)
 	self.bg = bg
 	local ball = CoD.callingcards_loot2_surrealistlandscapes_stairs.new(f1_arg0, f1_arg1, 0, 0, 0, 512, 0, 0, 0, 240)
@@ -19,8 +19,8 @@ CoD[0xF9B8B7EB4A5FEE].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.ball = ball
 	local cloud01 = LUI.UIImage.new(0, 0, 0, 424, 0, 0, 120, 240)
 	cloud01:setAlpha(0.5)
-	cloud01:setImage(RegisterImage(@"uie_ui_menu_callingcards_surrealistlandscape_cloud01"))
-	cloud01:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	cloud01:setImage(RegisterImage("uie_ui_menu_callingcards_surrealistlandscape_cloud01"))
+	cloud01:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(cloud01)
 	self.cloud01 = cloud01
 	local book = CoD.callingcards_loot2_surrealistlandscapes_book.new(f1_arg0, f1_arg1, 0, 0, 256, 960, 0, 0, 0, 240)
@@ -28,14 +28,14 @@ CoD[0xF9B8B7EB4A5FEE].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.book = book
 	local cloud02 = LUI.UIImage.new(0, 0, 424, 960, 0, 0, 80, 240)
 	cloud02:setAlpha(0.7)
-	cloud02:setImage(RegisterImage(@"uie_ui_menu_callingcards_surrealistlandscape_cloud02"))
-	cloud02:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	cloud02:setImage(RegisterImage("uie_ui_menu_callingcards_surrealistlandscape_cloud02"))
+	cloud02:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(cloud02)
 	self.cloud02 = cloud02
 	local cloud = LUI.UIImage.new(0, 0, 167, 519, 0, 0, 0, 64)
 	cloud:setAlpha(0.7)
-	cloud:setImage(RegisterImage(@"uie_ui_menu_callingcards_surrealistlandscape_cloud03"))
-	cloud:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	cloud:setImage(RegisterImage("uie_ui_menu_callingcards_surrealistlandscape_cloud03"))
+	cloud:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(cloud)
 	self.cloud = cloud
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

@@ -1,4 +1,4 @@
-require("x64:5b148190bdea241")
+require("ui/uieditor/widgets/debug/lobbyprocessqueuedebug")
 CoD.LobbyDebugOverlay = InheritFrom(LUI.UIElement)
 CoD.LobbyDebugOverlay.__defaultWidth = 1920
 CoD.LobbyDebugOverlay.__defaultHeight = 1080

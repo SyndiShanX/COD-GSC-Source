@@ -1,4 +1,4 @@
-require("x64:b10e5cd828cc66e")
+require("ui/uieditor/widgets/freecursor/infopanelsubwidgets/freecursornolabelbuttonprompt")
 CoD.freeCursorNoLabelButtonPromptContainer = InheritFrom(LUI.UIElement)
 CoD.freeCursorNoLabelButtonPromptContainer.__defaultWidth = 621
 CoD.freeCursorNoLabelButtonPromptContainer.__defaultHeight = 36
@@ -16,7 +16,7 @@ CoD.freeCursorNoLabelButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1_a
 			LeftStick.buttonPromptImage:setImage(RegisterImage(f2_local0))
 		end
 	end)
-	LeftStick:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_lstick_pressed"], false, function(model)
+	LeftStick:linkToElementModel(self, "" .. Enum.LUIButton[@"lui_key_lstick_pressed"], false, function(model)
 		LeftStick:setModel(model, f1_arg1)
 	end)
 	self:addElement(LeftStick)
@@ -28,7 +28,7 @@ CoD.freeCursorNoLabelButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1_a
 			RTbtn.buttonPromptImage:setImage(RegisterImage(f4_local0))
 		end
 	end)
-	RTbtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_rtrig"], false, function(model)
+	RTbtn:linkToElementModel(self, "" .. Enum.LUIButton[@"lui_key_rtrig"], false, function(model)
 		RTbtn:setModel(model, f1_arg1)
 	end)
 	self:addElement(RTbtn)
@@ -40,7 +40,7 @@ CoD.freeCursorNoLabelButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1_a
 			LTbtn.buttonPromptImage:setImage(RegisterImage(f6_local0))
 		end
 	end)
-	LTbtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_ltrig"], false, function(model)
+	LTbtn:linkToElementModel(self, "" .. Enum.LUIButton[@"lui_key_ltrig"], false, function(model)
 		LTbtn:setModel(model, f1_arg1)
 	end)
 	self:addElement(LTbtn)
@@ -52,7 +52,7 @@ CoD.freeCursorNoLabelButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1_a
 			Ybtn.buttonPromptImage:setImage(RegisterImage(f8_local0))
 		end
 	end)
-	Ybtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_xby_pstriangle"], false, function(model)
+	Ybtn:linkToElementModel(self, "" .. Enum.LUIButton[@"lui_key_xby_pstriangle"], false, function(model)
 		Ybtn:setModel(model, f1_arg1)
 	end)
 	self:addElement(Ybtn)
@@ -64,7 +64,7 @@ CoD.freeCursorNoLabelButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1_a
 			OptionsBtn.buttonPromptImage:setImage(RegisterImage(f10_local0))
 		end
 	end)
-	OptionsBtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_start"], false, function(model)
+	OptionsBtn:linkToElementModel(self, "" .. Enum.LUIButton[@"lui_key_start"], false, function(model)
 		OptionsBtn:setModel(model, f1_arg1)
 	end)
 	self:addElement(OptionsBtn)
@@ -76,7 +76,7 @@ CoD.freeCursorNoLabelButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1_a
 			Xbtn.buttonPromptImage:setImage(RegisterImage(f12_local0))
 		end
 	end)
-	Xbtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_xbx_pssquare"], false, function(model)
+	Xbtn:linkToElementModel(self, "" .. Enum.LUIButton[@"lui_key_xbx_pssquare"], false, function(model)
 		Xbtn:setModel(model, f1_arg1)
 	end)
 	self:addElement(Xbtn)
@@ -88,7 +88,7 @@ CoD.freeCursorNoLabelButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1_a
 			Bbtn.buttonPromptImage:setImage(RegisterImage(f14_local0))
 		end
 	end)
-	Bbtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_xbb_pscircle"], false, function(model)
+	Bbtn:linkToElementModel(self, "" .. Enum.LUIButton[@"lui_key_xbb_pscircle"], false, function(model)
 		Bbtn:setModel(model, f1_arg1)
 	end)
 	self:addElement(Bbtn)
@@ -100,7 +100,7 @@ CoD.freeCursorNoLabelButtonPromptContainer.new = function(f1_arg0, f1_arg1, f1_a
 			Abtn.buttonPromptImage:setImage(RegisterImage(f16_local0))
 		end
 	end)
-	Abtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_xba_pscross"], false, function(model)
+	Abtn:linkToElementModel(self, "" .. Enum.LUIButton[@"lui_key_xba_pscross"], false, function(model)
 		Abtn:setModel(model, f1_arg1)
 	end)
 	self:addElement(Abtn)

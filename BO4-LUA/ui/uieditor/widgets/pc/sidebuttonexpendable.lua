@@ -1,5 +1,5 @@
-require("x64:2675595fa323085")
-require("x64:397017260be9959")
+require("ui/uieditor/widgets/emptyfocusable")
+require("ui/uieditor/widgets/pc/dropdown")
 CoD.SideButtonExpendable = InheritFrom(LUI.UIElement)
 CoD.SideButtonExpendable.__defaultWidth = 390
 CoD.SideButtonExpendable.__defaultHeight = 84
@@ -23,15 +23,15 @@ CoD.SideButtonExpendable.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.BackingTint = BackingTint
 	local highlightGrad01 = LUI.UIImage.new(1, 1, 0, 90, 0, 1, 0, 0)
 	highlightGrad01:setAlpha(0)
-	highlightGrad01:setImage(RegisterImage(@"uie_ui_menu_chooseface_gradation01"))
-	highlightGrad01:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	highlightGrad01:setImage(RegisterImage("uie_ui_menu_chooseface_gradation01"))
+	highlightGrad01:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(highlightGrad01)
 	self.highlightGrad01 = highlightGrad01
 	local ButtonLabel = LUI.UIText.new(0.2, 0.81, 36, 36, 0.5, 0.5, -21, 0)
 	ButtonLabel:setTTF("ttmussels_regular")
 	ButtonLabel:setLetterSpacing(5)
-	ButtonLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	ButtonLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
+	ButtonLabel:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	ButtonLabel:setAlignment(Enum.LUIAlignment[@"lui_alignment_middle"])
 	ButtonLabel:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -108,8 +108,8 @@ CoD.SideButtonExpendable.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	TextBox:setRGB(ColorSet.T8__BUTTON_UNSELECTED_MAIN.r, ColorSet.T8__BUTTON_UNSELECTED_MAIN.g, ColorSet.T8__BUTTON_UNSELECTED_MAIN.b)
 	TextBox:setText(1)
 	TextBox:setTTF("ttmussels_demibold")
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	local emptyFocusable = CoD.emptyFocusable.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)

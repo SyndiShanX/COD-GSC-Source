@@ -7,7 +7,7 @@ CoD.CallingCards_Asset_Pirates_armwithgun.new = function(f1_arg0, f1_arg1, f1_ar
 	self.id = "CallingCards_Asset_Pirates_armwithgun"
 	self.soundSet = "default"
 	local armwithgun = LUI.UIImage.new(0, 0, -13, 211, 0, 0, -86, 74)
-	armwithgun:setImage(RegisterImage(@"uie_ui_icon_callingcards_pirates_arm2"))
+	armwithgun:setImage(RegisterImage("uie_ui_icon_callingcards_pirates_arm2"))
 	self:addElement(armwithgun)
 	self.armwithgun = armwithgun
 	if PostLoadFunc then

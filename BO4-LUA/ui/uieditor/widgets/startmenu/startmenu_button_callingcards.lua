@@ -1,4 +1,4 @@
-require("x64:2f83d4f91282174")
+require("ui/uieditor/widgets/startmenu/startmenu_button_callingcards_internal")
 CoD.StartMenu_Button_CallingCards = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Button_CallingCards.__defaultWidth = 420
 CoD.StartMenu_Button_CallingCards.__defaultHeight = 113

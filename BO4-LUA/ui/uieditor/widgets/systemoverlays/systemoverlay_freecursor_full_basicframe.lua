@@ -1,6 +1,6 @@
-require("x64:258a2641aa72235")
-require("x64:a9d9ad002907d62")
-require("x64:be779d5e87238aa")
+require("ui/uieditor/widgets/systemoverlays/systemoverlay_layout_genericforeground_freecursor_full")
+require("ui/uieditor/widgets/systemoverlays/systemoverlay_supportwidget")
+require("ui/uieditor/widgets/systemoverlays/featureoverlay_button")
 CoD.systemOverlay_FreeCursor_Full_BasicFrame = InheritFrom(LUI.UIElement)
 CoD.systemOverlay_FreeCursor_Full_BasicFrame.__defaultWidth = 1920
 CoD.systemOverlay_FreeCursor_Full_BasicFrame.__defaultHeight = 480
@@ -31,7 +31,7 @@ CoD.systemOverlay_FreeCursor_Full_BasicFrame.new = function(f1_arg0, f1_arg1, f1
 	options:setWidgetType(CoD.featureOverlay_Button)
 	options:setHorizontalCount(2)
 	options:setSpacing(15)
-	options:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	options:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	options:linkToElementModel(self, "listDatasource", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -39,7 +39,7 @@ CoD.systemOverlay_FreeCursor_Full_BasicFrame.new = function(f1_arg0, f1_arg1, f1
 		end
 	end)
 	options:linkToElementModel(options, "disabled", true, function(model, f5_arg1)
-		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f5_arg1, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 	end)
 	options:registerEventHandler("gain_focus", function(element, event)
 		local f6_local0 = nil
@@ -48,18 +48,18 @@ CoD.systemOverlay_FreeCursor_Full_BasicFrame.new = function(f1_arg0, f1_arg1, f1
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(options, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		if not IsDisabled(element, controller) then
-			ProcessListAction(self, element, controller, menu)
+	f1_arg0:AddButtonCallbackFunction(options, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f7_arg0, f7_arg1, f7_arg2, f7_arg3)
+		if not IsDisabled(f7_arg0, f7_arg2) then
+			ProcessListAction(self, f7_arg0, f7_arg2, f7_arg1)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if not IsDisabled(element, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
+	end, function(f8_arg0, f8_arg1, f8_arg2)
+		if not IsDisabled(f8_arg0, f8_arg2) then
+			CoD.Menu.SetButtonLabel(f8_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 			return true
 		else
 			return false

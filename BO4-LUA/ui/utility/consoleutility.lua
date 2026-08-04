@@ -8,18 +8,18 @@ CoD.ConsoleUtility.UpdateConsole = function(f1_arg0)
 			f1_local0 = f1_local0 + 1
 		end
 	end
-	local f1_local1 = Engine[@"getmodelforcontroller"](f1_arg0.controller)
-	local f1_local2 = Engine[@"getmodel"](f1_arg0.consoleModel, "currentIndex")
-	local f1_local3 = Engine[@"getmodelvalue"](f1_local2)
+	local f1_local1 = Engine.GetModelForController(f1_arg0.controller)
+	local f1_local2 = Engine.GetModel(f1_arg0.consoleModel, "currentIndex")
+	local f1_local3 = Engine.GetModelValue(f1_local2)
 	if f1_arg0.maxElementIndex < f1_local0 then
 		f1_arg0.lines[f1_local3].element:forceHideConsoleEntry()
 	end
-	if Engine[@"isvisibilitybitset"](f1_arg0.controller, Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"]) then
+	if Engine.IsVisibilityBitSet(f1_arg0.controller, Enum.UIVisibilityBit[@"bit_demo_camera_mode_moviecam"]) then
 	else
 		f1_arg0.lines[f1_local3].element:showConsoleEntry(f1_local3, f1_arg0.padding)
 		f1_arg0.lines[f1_local3].active = true
 	end
-	Engine[@"setmodelvalue"](f1_local2, (f1_local3 + 1) % (f1_arg0.maxElementIndex + 1))
+	Engine.SetModelValue(f1_local2, (f1_local3 + 1) % (f1_arg0.maxElementIndex + 1))
 	return true
 end
 CoD.ConsoleUtility.ConsoleNotificationComplete = function(f2_arg0, f2_arg1)
@@ -28,8 +28,8 @@ CoD.ConsoleUtility.ConsoleNotificationComplete = function(f2_arg0, f2_arg1)
 end
 CoD.ConsoleUtility.Init = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3, f3_arg4)
 	f3_arg0.controller = f3_arg1
-	local f3_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f3_arg1), "hudItems." .. f3_arg2)
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](f3_local0, "currentIndex"), 0)
+	local f3_local0 = Engine.GetModel(Engine.GetModelForController(f3_arg1), "hudItems." .. f3_arg2)
+	Engine.SetModelValue(Engine.CreateModel(f3_local0, "currentIndex"), 0)
 	f3_arg0.currentIndex = 0
 	f3_arg0.maxElementIndex = f3_arg3 or 6
 	f3_arg0.consoleModel = f3_local0
@@ -80,14 +80,14 @@ CoD.ConsoleUtility.ShowConsoleEntry = function(f6_arg0, f6_arg1, f6_arg2)
 		return f7_local0
 	end
 	local f6_local6 = f6_arg0:getModel()
-	f6_arg0.icon0Visible = f6_local5(Engine[@"getmodelvalue"](Engine[@"getmodel"](f6_local6, "icon0")))
-	f6_arg0.text0Visible = f6_local5(Engine[@"getmodelvalue"](Engine[@"getmodel"](f6_local6, "text0")))
-	f6_arg0.icon1Visible = f6_local5(Engine[@"getmodelvalue"](Engine[@"getmodel"](f6_local6, "icon1")))
-	f6_arg0.text1Visible = f6_local5(Engine[@"getmodelvalue"](Engine[@"getmodel"](f6_local6, "text1")))
-	f6_arg0.text2Visible = f6_local5(Engine[@"getmodelvalue"](Engine[@"getmodel"](f6_local6, "text2")))
+	f6_arg0.icon0Visible = f6_local5(Engine.GetModelValue(Engine.GetModel(f6_local6, "icon0")))
+	f6_arg0.text0Visible = f6_local5(Engine.GetModelValue(Engine.GetModel(f6_local6, "text0")))
+	f6_arg0.icon1Visible = f6_local5(Engine.GetModelValue(Engine.GetModel(f6_local6, "icon1")))
+	f6_arg0.text1Visible = f6_local5(Engine.GetModelValue(Engine.GetModel(f6_local6, "text1")))
+	f6_arg0.text2Visible = f6_local5(Engine.GetModelValue(Engine.GetModel(f6_local6, "text2")))
 	if f6_arg0.icon0Visible then
 		local f6_local7, f6_local8, f6_local9, f6_local10 = f6_arg0.ConsoleEntry.Icon0:getLocalRect()
-		local f6_local11 = (f6_local10 - f6_local8) * Engine[@"getmodelvalue"](Engine[@"getmodel"](f6_local6, "iconWidth"))
+		local f6_local11 = (f6_local10 - f6_local8) * Engine.GetModelValue(Engine.GetModel(f6_local6, "iconWidth"))
 		if f6_local11 < 0 then
 			f6_arg0.ConsoleEntry.Icon0:setLeftRight(true, false, f6_local0, f6_local0 - f6_local11)
 		else
@@ -104,7 +104,7 @@ CoD.ConsoleUtility.ShowConsoleEntry = function(f6_arg0, f6_arg1, f6_arg2)
 	end
 	if f6_arg0.icon1Visible then
 		local f6_local7, f6_local8, f6_local9, f6_local10 = f6_arg0.ConsoleEntry.Icon1:getLocalRect()
-		local f6_local11 = (f6_local10 - f6_local8) * Engine[@"getmodelvalue"](Engine[@"getmodel"](f6_local6, "iconWidth"))
+		local f6_local11 = (f6_local10 - f6_local8) * Engine.GetModelValue(Engine.GetModel(f6_local6, "iconWidth"))
 		if f6_local11 < 0 then
 			f6_arg0.ConsoleEntry.Icon1:setLeftRight(true, false, f6_local0 - f6_local11, f6_local0)
 		else
@@ -127,7 +127,7 @@ CoD.ConsoleUtility.ShowConsoleEntry = function(f6_arg0, f6_arg1, f6_arg2)
 	end
 	f6_local0 = f6_local0 - f6_arg2 / 2
 	f6_arg0.ConsoleEntry.Panel:setLeftRight(true, false, f6_arg0.panelStartLeft, f6_arg0.panelStartRight + f6_local0)
-	if f6_arg0.alignment == Enum[@"luialignment"][@"lui_alignment_center"] then
+	if f6_arg0.alignment == Enum.LUIAlignment[@"lui_alignment_center"] then
 		f6_arg0.ConsoleEntry:setLeftRight(false, false, -f6_local0 / 2, f6_local0 / 2)
 	end
 	f6_arg0.ConsoleEntry:playClip("FadeIn")
@@ -215,23 +215,23 @@ CoD.ConsoleUtility.EntryInit = function(f11_arg0, f11_arg1, f11_arg2)
 	f11_arg0.forceHideConsoleEntry = CoD.ConsoleUtility.ForceHideConsoleEntry
 end
 CoD.ConsoleUtility.ChooseEntryIconImage = function(f12_arg0)
-	local f12_local0 = Engine[@"getmodel"](f12_arg0.obitModel, "line" .. Engine[@"getmodelvalue"](f12_arg0.currentIndexModel))
-	local f12_local1 = Engine[@"getmodel"](f12_local0, "icon")
-	local f12_local2 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f12_local0, "mod"))
-	local f12_local3 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f12_local0, "weaponKillIcon"))
+	local f12_local0 = Engine.GetModel(f12_arg0.obitModel, "line" .. Engine.GetModelValue(f12_arg0.currentIndexModel))
+	local f12_local1 = Engine.GetModel(f12_local0, "icon")
+	local f12_local2 = Engine.GetModelValue(Engine.GetModel(f12_local0, "mod"))
+	local f12_local3 = Engine.GetModelValue(Engine.GetModel(f12_local0, "weaponKillIcon"))
 	local f12_local4 = f12_local0.ignoreModIconOverride
 	if f12_local4 then
 		f12_local4 = f12_local0.ignoreModIconOverride:get()
 	end
 	local f12_local5 = f12_local3
 	if not Engine[@"hash_4238317564B9D47B"](f12_local5) then
-		f12_local5 = CoD.HUDUtility.GetModIcon(Enum[@"meansofdeath_t"][@"mod_suicide"], f12_local5)
+		f12_local5 = CoD.HUDUtility.GetModIcon(Enum[@"meansofdeath_t"].mod_suicide, f12_local5)
 	end
 	local f12_local6 = f12_local5
 	if not f12_local4 then
 		f12_local6 = CoD.HUDUtility.GetModIcon(f12_local2, f12_local5)
 	end
-	Engine[@"setmodelvalue"](f12_local1, f12_local6)
+	Engine.SetModelValue(f12_local1, f12_local6)
 end
 CoD.ConsoleUtility.UpdateObituary = function(f13_arg0)
 	if not f13_arg0.obitModel or not f13_arg0.currentIndexModel then
@@ -246,17 +246,17 @@ CoD.ConsoleUtility.UpdateObituary = function(f13_arg0)
 			f13_local0 = f13_local0 + 1
 		end
 	end
-	local f13_local1 = Engine[@"getmodelforcontroller"](f13_arg0.controller)
-	local f13_local2 = Engine[@"getmodelvalue"](f13_arg0.currentIndexModel)
+	local f13_local1 = Engine.GetModelForController(f13_arg0.controller)
+	local f13_local2 = Engine.GetModelValue(f13_arg0.currentIndexModel)
 	if f13_arg0.maxElementIndex < f13_local0 then
 		f13_arg0.lines[f13_local2].element:forceHideObituaryEntry()
 	end
-	if Engine[@"isvisibilitybitset"](f13_arg0.controller, Enum[@"uivisibilitybit"][@"bit_demo_camera_mode_moviecam"]) then
+	if Engine.IsVisibilityBitSet(f13_arg0.controller, Enum.UIVisibilityBit[@"bit_demo_camera_mode_moviecam"]) then
 	else
 		f13_arg0.lines[f13_local2].element:showObituaryEntry(f13_local2)
 		f13_arg0.lines[f13_local2].active = true
 	end
-	Engine[@"setmodelvalue"](f13_arg0.currentIndexModel, (f13_local2 + 1) % (f13_arg0.maxElementIndex + 1))
+	Engine.SetModelValue(f13_arg0.currentIndexModel, (f13_local2 + 1) % (f13_arg0.maxElementIndex + 1))
 	return true
 end
 CoD.ConsoleUtility.ObituaryNotificationComplete = function(f14_arg0, f14_arg1)
@@ -265,12 +265,12 @@ CoD.ConsoleUtility.ObituaryNotificationComplete = function(f14_arg0, f14_arg1)
 end
 CoD.ConsoleUtility.InitObituary = function(f15_arg0, f15_arg1, f15_arg2, f15_arg3)
 	f15_arg0.controller = f15_arg1
-	local f15_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f15_arg1), "hudItems." .. f15_arg2)
-	local f15_local1 = Engine[@"createmodel"](f15_local0, "currentIndex")
+	local f15_local0 = Engine.GetModel(Engine.GetModelForController(f15_arg1), "hudItems." .. f15_arg2)
+	local f15_local1 = Engine.CreateModel(f15_local0, "currentIndex")
 	f15_arg0.maxElementIndex = f15_arg3 or 6
 	f15_arg0.obitModel = f15_local0
 	f15_arg0.currentIndexModel = f15_local1
-	Engine[@"setmodelvalue"](f15_local1, 0)
+	Engine.SetModelValue(f15_local1, 0)
 	f15_arg0.lines = {}
 	for f15_local2 = 0, f15_arg0.maxElementIndex, 1 do
 		f15_arg0.lines[f15_local2] = {}

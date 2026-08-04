@@ -1,4 +1,4 @@
-require("x64:d7e092479c7b82c")
+require("ui/uieditor/widgets/border")
 CoD.CommonCheckbox = InheritFrom(LUI.UIElement)
 CoD.CommonCheckbox.__defaultWidth = 40
 CoD.CommonCheckbox.__defaultHeight = 40
@@ -27,30 +27,30 @@ CoD.CommonCheckbox.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.Border = Border
 	local Empty = LUI.UIImage.new(0, 0, -4, 44, 0, 0, -4, 44)
 	Empty:setScale(0.67, 0.67)
-	Empty:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_selectbox_empty"))
-	Empty:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	Empty:setImage(RegisterImage("uie_ui_menu_specialist_hub_selectbox_empty"))
+	Empty:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(Empty)
 	self.Empty = Empty
 	local dashBacking = LUI.UIImage.new(0, 0, 4, 36, 0, 0, 4.5, 36.5)
 	dashBacking:setScale(1.5, 1.5)
-	dashBacking:setImage(RegisterImage(@"uie_ui_menu_cac_allocation_pip_empty"))
+	dashBacking:setImage(RegisterImage("uie_ui_menu_cac_allocation_pip_empty"))
 	self:addElement(dashBacking)
 	self.dashBacking = dashBacking
 	local dash = LUI.UIImage.new(0, 0, 4, 36, 0, 0, 4.5, 36.5)
 	dash:setScale(1.5, 1.5)
-	dash:setImage(RegisterImage(@"uie_ui_menu_cac_allocation_pip_full"))
+	dash:setImage(RegisterImage("uie_ui_menu_cac_allocation_pip_full"))
 	self:addElement(dash)
 	self.dash = dash
 	local Glow = LUI.UIImage.new(0, 0, -0.5, 41.5, 0, 0, -15.5, 57.5)
 	Glow:setRGB(0.88, 0.8, 0.45)
 	Glow:setAlpha(0)
-	Glow:setImage(RegisterImage(@"uie_t7_menu_cac_glow"))
-	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	Glow:setImage(RegisterImage("uie_t7_menu_cac_glow"))
+	Glow:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(Glow)
 	self.Glow = Glow
 	local CornerDots = LUI.UIImage.new(0, 0, 4, 36, 0, 0, 4.5, 36.5)
 	CornerDots:setScale(1.5, 1.5)
-	CornerDots:setImage(RegisterImage(@"uie_ui_menu_cac_allocation_pip_dots"))
+	CornerDots:setImage(RegisterImage("uie_ui_menu_cac_allocation_pip_dots"))
 	self:addElement(CornerDots)
 	self.CornerDots = CornerDots
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

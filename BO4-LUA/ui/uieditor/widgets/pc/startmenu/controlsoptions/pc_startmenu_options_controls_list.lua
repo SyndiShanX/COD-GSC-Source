@@ -1,5 +1,5 @@
-require("x64:e579fbd66fb7e11")
-require("x64:baff2229992d7b6")
+require("ui/uieditor/widgets/pc/cyclinglist")
+require("ui/uieditor/widgets/pc/pc_vscrollbar")
 CoD.PC_StartMenu_Options_Controls_List = InheritFrom(LUI.UIElement)
 CoD.PC_StartMenu_Options_Controls_List.__defaultWidth = 695
 CoD.PC_StartMenu_Options_Controls_List.__defaultHeight = 633
@@ -16,7 +16,7 @@ CoD.PC_StartMenu_Options_Controls_List.new = function(f1_arg0, f1_arg1, f1_arg2,
 	List:setWidgetType(CoD.CyclingList)
 	List:setVerticalCount(13)
 	List:setSpacing(4)
-	List:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	List:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	List:setVerticalScrollbar(CoD.PC_VScrollbar)
 	List:registerEventHandler("gain_list_focus", function(element, event)
 		local f2_local0 = nil

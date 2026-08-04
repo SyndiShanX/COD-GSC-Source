@@ -1,5 +1,5 @@
-require("x64:55aca670e9903a3")
-require("x64:a9255c570c68aa8")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmaincorners")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmainframe")
 CoD.PC_CoDAccount_EditableOption_EditBox = InheritFrom(LUI.UIElement)
 CoD.PC_CoDAccount_EditableOption_EditBox.__defaultWidth = 340
 CoD.PC_CoDAccount_EditableOption_EditBox.__defaultHeight = 60
@@ -25,7 +25,7 @@ CoD.PC_CoDAccount_EditableOption_EditBox.new = function(f1_arg0, f1_arg1, f1_arg
 	local TextBox = LUI.UIText.new(0, 0, 20, 320, 0.5, 0.5, -10.5, 10.5)
 	TextBox:setRGB(0.78, 0.74, 0.67)
 	TextBox:setTTF("notosans_regular")
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	TextBox:linkToElementModel(self, "currentText", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

@@ -1,6 +1,6 @@
-require("x64:2675595fa323085")
-require("x64:bdc4956715f81d7")
-require("x64:b79410dc8d1ea84")
+require("ui/uieditor/widgets/emptyfocusable")
+require("ui/uieditor/widgets/pc/cyclinglist_arrow")
+require("ui/uieditor/widgets/pc/startmenu/pc_highlightborder")
 CoD.CyclingList_ItemControl = InheritFrom(LUI.UIElement)
 CoD.CyclingList_ItemControl.__defaultWidth = 348
 CoD.CyclingList_ItemControl.__defaultHeight = 65
@@ -20,8 +20,8 @@ CoD.CyclingList_ItemControl.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	TextBox:setTTF("ttmussels_regular")
 	TextBox:setLetterSpacing(1)
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_middle"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	local right = CoD.CyclingList_Arrow.new(f1_arg0, f1_arg1, 1, 1, -68, 0, 0, 1, 0, 0)
@@ -52,7 +52,7 @@ CoD.CyclingList_ItemControl.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.PCHighlightBorder = PCHighlightBorder
 	local OptionCountBorder = LUI.UIImage.new(0, 0, 0, 214, 1, 1, -5, -1)
 	OptionCountBorder:setAlpha(0.05)
-	OptionCountBorder:setImage(RegisterImage(@"uie_hud_core_loadout_panel1"))
+	OptionCountBorder:setImage(RegisterImage("uie_hud_core_loadout_panel1"))
 	OptionCountBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_631E7B3C72564429"))
 	OptionCountBorder:setShaderVector(0, 0, 0, 0.55, 0.13)
 	OptionCountBorder:setShaderVector(2, 0, 1, 0, 1)
@@ -67,7 +67,7 @@ CoD.CyclingList_ItemControl.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.OptionCountBorder = OptionCountBorder
 	local CurrentOptionBorder = LUI.UIImage.new(0, 0, 0, 214, 1, 1, -5, -1)
 	CurrentOptionBorder:setRGB(0.8, 0.8, 0.8)
-	CurrentOptionBorder:setImage(RegisterImage(@"uie_hud_core_loadout_panel1"))
+	CurrentOptionBorder:setImage(RegisterImage("uie_hud_core_loadout_panel1"))
 	CurrentOptionBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_631E7B3C72564429"))
 	CurrentOptionBorder:setShaderVector(0, 0, 0, 0.55, 0.13)
 	CurrentOptionBorder:setupNineSliceShader(25, 4)

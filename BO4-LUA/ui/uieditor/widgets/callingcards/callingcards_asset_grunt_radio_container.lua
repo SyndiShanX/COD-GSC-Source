@@ -8,7 +8,7 @@ CoD.CallingCards_Asset_grunt_radio_container.new = function(f1_arg0, f1_arg1, f1
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local radio = LUI.UIImage.new(0, 0, 0, 216, 0, 0, 0, 192)
-	radio:setImage(RegisterImage(@"uie_grunt_radio"))
+	radio:setImage(RegisterImage("uie_grunt_radio"))
 	self:addElement(radio)
 	self.radio = radio
 	if PostLoadFunc then

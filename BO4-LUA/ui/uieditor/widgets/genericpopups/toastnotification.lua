@@ -1,4 +1,4 @@
-require("x64:cbc3d81e3f40cac")
+require("ui/uieditor/widgets/genericpopups/toast_container")
 CoD.ToastNotification = InheritFrom(LUI.UIElement)
 CoD.ToastNotification.__defaultWidth = 1920
 CoD.ToastNotification.__defaultHeight = 1080

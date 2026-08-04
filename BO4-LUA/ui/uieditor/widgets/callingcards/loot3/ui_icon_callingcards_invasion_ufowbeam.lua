@@ -1,5 +1,5 @@
-require("x64:ffdb3f7d41098b6")
-require("x64:f0302a2ab82b9aa")
+require("ui/uieditor/widgets/callingcards/loot3/ui_icon_callingcards_invasion_beam")
+require("ui/uieditor/widgets/callingcards/loot3/ui_icon_callingcards_invasion_lamb3")
 CoD.ui_icon_callingcards_invasion_ufowbeam = InheritFrom(LUI.UIElement)
 CoD.ui_icon_callingcards_invasion_ufowbeam.__defaultWidth = 224
 CoD.ui_icon_callingcards_invasion_ufowbeam.__defaultHeight = 88
@@ -11,7 +11,7 @@ CoD.ui_icon_callingcards_invasion_ufowbeam.new = function(f1_arg0, f1_arg1, f1_a
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ufo = LUI.UIImage.new(0, 0, 0, 224, 0, 0, 0, 88)
-	ufo:setImage(RegisterImage(@"uie_ui_menu_callingcards_invasion_ufo"))
+	ufo:setImage(RegisterImage("uie_ui_menu_callingcards_invasion_ufo"))
 	self:addElement(ufo)
 	self.ufo = ufo
 	local beam = CoD.ui_icon_callingcards_invasion_beam.new(f1_arg0, f1_arg1, 0, 0, 64.5, 144.5, 0, 0, 49, 193)

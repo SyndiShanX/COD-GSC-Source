@@ -1,6 +1,6 @@
 CoD.HealthUtility = {}
 CoD.HealthUtility.GetSpawnHealthPerBar = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4)
-	return math.ceil(f1_arg1 / Dvar[@"cg_healthperbar"]:get()), f1_arg0, 1, f1_arg4
+	return math.ceil(f1_arg1 / Dvar.cg_healthperbar:get()), f1_arg0, 1, f1_arg4
 end
 CoD.HealthUtility.InitHealthBarLossPulse = function(f2_arg0, f2_arg1, f2_arg2, f2_arg3, f2_arg4)
 	local f2_local0, f2_local1 = f2_arg1:getLocalSize()

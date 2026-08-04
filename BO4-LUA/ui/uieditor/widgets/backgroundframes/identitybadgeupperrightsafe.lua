@@ -1,4 +1,4 @@
-require("x64:f035e2b6323687d")
+require("ui/uieditor/widgets/playercard/selfidentitybadge")
 CoD.IdentityBadgeUpperRightSafe = InheritFrom(LUI.UIElement)
 CoD.IdentityBadgeUpperRightSafe.__defaultWidth = 1920
 CoD.IdentityBadgeUpperRightSafe.__defaultHeight = 1080

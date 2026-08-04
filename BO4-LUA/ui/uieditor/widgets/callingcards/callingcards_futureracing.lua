@@ -1,47 +1,47 @@
-require("x64:6cd5e8b4612a4ef")
-require("x64:6cd5f8b4612a6a2")
-CoD[@"hash_F3C30F1F50D950A"] = InheritFrom(LUI.UIElement)
-CoD[@"hash_F3C30F1F50D950A"].__defaultWidth = 960
-CoD[@"hash_F3C30F1F50D950A"].__defaultHeight = 240
-CoD[@"hash_F3C30F1F50D950A"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+require("ui/uieditor/widgets/callingcards/callingcards_futureracing_asset01")
+require("ui/uieditor/widgets/callingcards/callingcards_futureracing_asset02")
+CoD.callingcards_futureracing = InheritFrom(LUI.UIElement)
+CoD.callingcards_futureracing.__defaultWidth = 960
+CoD.callingcards_futureracing.__defaultHeight = 240
+CoD.callingcards_futureracing.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[@"hash_F3C30F1F50D950A"])
+	self:setClass(CoD.callingcards_futureracing)
 	self.id = "CallingCards_FutureRacing"
 	self.soundSet = "none"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local backgroundcity = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	backgroundcity:setImage(RegisterImage(@"uie_cc_carsbg"))
+	backgroundcity:setImage(RegisterImage("uie_cc_carsbg"))
 	self:addElement(backgroundcity)
 	self.backgroundcity = backgroundcity
 	local smallcars01 = LUI.UIImage.new(0, 0, 47.5, 655.5, 0, 0, 37, 85)
 	smallcars01:setZRot(-337)
-	smallcars01:setImage(RegisterImage(@"uie_smallcars01"))
+	smallcars01:setImage(RegisterImage("uie_smallcars01"))
 	self:addElement(smallcars01)
 	self.smallcars01 = smallcars01
 	local smallcars = LUI.UIImage.new(0, 0, -131, 477, 0, 0, 128, 176)
 	smallcars:setZRot(-337)
-	smallcars:setImage(RegisterImage(@"uie_smallcars01"))
+	smallcars:setImage(RegisterImage("uie_smallcars01"))
 	self:addElement(smallcars)
 	self.smallcars = smallcars
 	local roadbottom = CoD.CallingCards_FutureRacing_asset02.new(f1_arg0, f1_arg1, 0, 0, -18, 430, 0, 0, 56, 240)
 	self:addElement(roadbottom)
 	self.roadbottom = roadbottom
 	local explosion4 = LUI.UIImage.new(0, 0, 195.5, 507.5, 0, 0, 72, 240)
-	explosion4:setImage(RegisterImage(@"uie_explosion04"))
+	explosion4:setImage(RegisterImage("uie_explosion04"))
 	self:addElement(explosion4)
 	self.explosion4 = explosion4
 	local explosion3 = LUI.UIImage.new(0, 0, 195.5, 507.5, 0, 0, 72, 240)
-	explosion3:setImage(RegisterImage(@"uie_explosion03"))
+	explosion3:setImage(RegisterImage("uie_explosion03"))
 	self:addElement(explosion3)
 	self.explosion3 = explosion3
 	local explosion2 = LUI.UIImage.new(0, 0, 195.5, 507.5, 0, 0, 72, 240)
-	explosion2:setImage(RegisterImage(@"uie_explosion02"))
+	explosion2:setImage(RegisterImage("uie_explosion02"))
 	self:addElement(explosion2)
 	self.explosion2 = explosion2
 	local explosion1 = LUI.UIImage.new(0, 0, 195.5, 507.5, 0, 0, 72, 240)
 	explosion1:setAlpha(0)
-	explosion1:setImage(RegisterImage(@"uie_explosion01"))
+	explosion1:setImage(RegisterImage("uie_explosion01"))
 	self:addElement(explosion1)
 	self.explosion1 = explosion1
 	local roadtop = CoD.CallingCards_FutureRacing_asset01.new(f1_arg0, f1_arg1, 0, 0, 394, 970, 0, 0, 0, 240)
@@ -53,7 +53,7 @@ CoD[@"hash_F3C30F1F50D950A"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end
 	return self
 end
-CoD[@"hash_F3C30F1F50D950A"].__resetProperties = function(f2_arg0)
+CoD.callingcards_futureracing.__resetProperties = function(f2_arg0)
 	f2_arg0.roadtop:completeAnimation()
 	f2_arg0.explosion1:completeAnimation()
 	f2_arg0.roadbottom:completeAnimation()
@@ -85,7 +85,7 @@ CoD[@"hash_F3C30F1F50D950A"].__resetProperties = function(f2_arg0)
 	f2_arg0.explosion4:setAlpha(1)
 	f2_arg0.explosion4:setScale(1, 1)
 end
-CoD[@"hash_F3C30F1F50D950A"].__clipsPerState = {
+CoD.callingcards_futureracing.__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -232,7 +232,7 @@ CoD[@"hash_F3C30F1F50D950A"].__clipsPerState = {
 		end,
 	},
 }
-CoD[@"hash_F3C30F1F50D950A"].__onClose = function(f20_arg0)
+CoD.callingcards_futureracing.__onClose = function(f20_arg0)
 	f20_arg0.roadbottom:close()
 	f20_arg0.roadtop:close()
 end

@@ -1,5 +1,5 @@
-require("x64:79a30146aa335c5")
-require("x64:87edb7802d72c0e")
+require("ui/uieditor/widgets/systemoverlays/featureoverlay_framevlayout")
+require("ui/uieditor/widgets/systemoverlays/systemoverlay_alertstatusbar")
 CoD.featureOverlay_Layout = InheritFrom(LUI.UIElement)
 CoD.featureOverlay_Layout.__defaultWidth = 1920
 CoD.featureOverlay_Layout.__defaultHeight = 1080
@@ -17,7 +17,7 @@ CoD.featureOverlay_Layout.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.background = background
 	local blackbkg = LUI.UIImage.new(0, 1, 0, 0, 0, 0, 222, 920)
 	blackbkg:setAlpha(0.8)
-	blackbkg:setImage(RegisterImage(@"uie_ui_icon_master_overlays_bkg"))
+	blackbkg:setImage(RegisterImage("uie_ui_icon_master_overlays_bkg"))
 	self:addElement(blackbkg)
 	self.blackbkg = blackbkg
 	local vlayout = CoD.featureOverlay_frameVLayout.new(f1_arg0, f1_arg1, 0, 0, 0, 1920, 0, 0, 222, 972)

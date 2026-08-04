@@ -1,6 +1,6 @@
-require("x64:3625a0d08a5c80d")
-require("x64:a1e2d7b19f5deb0")
-require("x64:543fba707c6b07")
+require("ui/uieditor/widgets/lobby/common/fe_focusbarcontainer")
+require("ui/uieditor/widgets/startmenu/startmenu_frame_nobg")
+require("ui/uieditor/widgets/startmenu/startmenu_options_pc_keybindertooltip")
 CoD.checkbox = InheritFrom(LUI.UIElement)
 CoD.checkbox.__defaultWidth = 750
 CoD.checkbox.__defaultHeight = 51
@@ -26,18 +26,18 @@ CoD.checkbox.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 	self.checkboxBacking = checkboxBacking
 	local CheckboxBkg = LUI.UIImage.new(0, 0, 22, 50, 0, 0, 13, 39)
 	CheckboxBkg:setAlpha(0)
-	CheckboxBkg:setImage(RegisterImage(@"uie_t7_menu_cacselection_checkbox_empty"))
+	CheckboxBkg:setImage(RegisterImage("uie_t7_menu_cacselection_checkbox_empty"))
 	self:addElement(CheckboxBkg)
 	self.CheckboxBkg = CheckboxBkg
 	local checkboxCheck = LUI.UIImage.new(0, 0, 22, 50, 0, 0, 13, 39)
 	checkboxCheck:setRGB(1, 0.45, 0)
-	checkboxCheck:setImage(RegisterImage(@"uie_t7_menu_cacselection_checkbox"))
+	checkboxCheck:setImage(RegisterImage("uie_t7_menu_cacselection_checkbox"))
 	self:addElement(checkboxCheck)
 	self.checkboxCheck = checkboxCheck
 	local labelText = LUI.UIText.new(0, 0, 70, 750, 0, 0, 7, 45)
 	labelText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	labelText:setTTF("default")
-	labelText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	labelText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	self:addElement(labelText)
 	self.labelText = labelText
 	local tooltip = CoD.StartMenu_Options_PC_KeyBinderTooltip.new(f1_arg0, f1_arg1, 0, 0, 776, 1076, 0, 0, -53, 97)

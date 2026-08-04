@@ -1,7 +1,7 @@
-require("x64:1394ae5e9cdcb54")
-require("x64:aaefcdf6bb981b7")
-require("x64:ce7f7f6abb8b87")
-require("x64:14ab47ffb48a077")
+require("ui/uieditor/widgets/bumperbuttonwithkeymousetext")
+require("ui/uieditor/widgets/director/directorselecttexttab")
+require("ui/uieditor/widgets/tabbedwidgets/basictablist")
+require("ui/uieditor/widgets/pc/pc_tabsarrow")
 CoD.Common_Tabbar_Center = InheritFrom(LUI.UIElement)
 CoD.Common_Tabbar_Center.__defaultWidth = 3300
 CoD.Common_Tabbar_Center.__defaultHeight = 61
@@ -16,8 +16,8 @@ CoD.Common_Tabbar_Center.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local LB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0.5, 0.5, -1148, -948, 0, 0.56, 17, 17)
-	LB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BDCD5292604F434"))
-	LB.GamepadPrompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	LB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"]("groups/lb"))
+	LB.GamepadPrompt:setAlignment(Enum.LUIAlignment[@"lui_alignment_right"])
 	self:addElement(LB)
 	self.LB = LB
 	local left = nil
@@ -32,7 +32,7 @@ CoD.Common_Tabbar_Center.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	})
 	local RB = left
 	local Tabs = left.subscribeToModel
-	local right = Engine[@"getglobalmodel"]()
+	local right = Engine.GetGlobalModel()
 	Tabs(RB, right.CommonCurrentActiveTabIndex, function(f3_arg0)
 		f1_arg0:updateElementState(left, {
 			name = "model_validation",
@@ -50,14 +50,14 @@ CoD.Common_Tabbar_Center.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		elseif element.super.gainFocus then
 			f4_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f4_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(left, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		CoD.GridAndListUtility.DoBumperGridButton(menu, controller, true)
+	f1_arg0:AddButtonCallbackFunction(left, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f5_arg0, f5_arg1, f5_arg2, f5_arg3)
+		CoD.GridAndListUtility.DoBumperGridButton(f5_arg1, f5_arg2, true)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
+	end, function(f6_arg0, f6_arg1, f6_arg2)
+		CoD.Menu.SetButtonLabel(f6_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(left)
@@ -67,7 +67,7 @@ CoD.Common_Tabbar_Center.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self:addElement(Tabs)
 	self.Tabs = Tabs
 	RB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0.5, 0.5, 876, 1076, 0, 0.56, 17, 17)
-	RB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BFED5292621DA9A"))
+	RB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"]("groups/rb"))
 	self:addElement(RB)
 	self.RB = RB
 	right = nil
@@ -82,7 +82,7 @@ CoD.Common_Tabbar_Center.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	})
 	local f1_local6 = right
 	local f1_local7 = right.subscribeToModel
-	local f1_local8 = Engine[@"getglobalmodel"]()
+	local f1_local8 = Engine.GetGlobalModel()
 	f1_local7(f1_local6, f1_local8.CommonCurrentActiveTabIndex, function(f8_arg0)
 		f1_arg0:updateElementState(right, {
 			name = "model_validation",
@@ -101,14 +101,14 @@ CoD.Common_Tabbar_Center.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 		elseif element.super.gainFocus then
 			f9_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f9_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(right, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		CoD.GridAndListUtility.DoBumperGridButton(menu, controller, false)
+	f1_arg0:AddButtonCallbackFunction(right, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f10_arg0, f10_arg1, f10_arg2, f10_arg3)
+		CoD.GridAndListUtility.DoBumperGridButton(f10_arg1, f10_arg2, false)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
+	end, function(f11_arg0, f11_arg1, f11_arg2)
+		CoD.Menu.SetButtonLabel(f11_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], @"menu/select", nil, "ui_confirm")
 		return true
 	end, false)
 	self:addElement(right)
@@ -137,7 +137,7 @@ CoD.Common_Tabbar_Center.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	end)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local8 = Engine.GetModelForController(f1_arg1)
 	f1_local7(f1_local6, f1_local8.LastInput, function(f16_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

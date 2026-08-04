@@ -1,7 +1,7 @@
-require("x64:2675595fa323085")
-require("x64:6a09e0fce4b9806")
-require("x64:baff2229992d7b6")
-require("x64:59648045a39f73a")
+require("ui/uieditor/widgets/emptyfocusable")
+require("ui/uieditor/widgets/pc/dropdownlistitem")
+require("ui/uieditor/widgets/pc/pc_vscrollbar")
+require("ui/uieditor/widgets/pc/pc_vscrolllist_list")
 CoD.DropDown_ItemList = InheritFrom(LUI.UIElement)
 CoD.DropDown_ItemList.__defaultWidth = 364
 CoD.DropDown_ItemList.__defaultHeight = 246
@@ -31,12 +31,12 @@ CoD.DropDown_ItemList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	VScrollbar:setAlpha(0)
 	self:addElement(VScrollbar)
 	self.VScrollbar = VScrollbar
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], nil, function(f3_arg0, f3_arg1, f3_arg2, f3_arg3)
 		CoD.PCWidgetUtility.DropdownClose(self)
-		CoD.PCWidgetUtility.DropdownGiveFocusBack(self, menu, controller)
+		CoD.PCWidgetUtility.DropdownGiveFocusBack(self, f3_arg1, f3_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_0", nil, nil)
+	end, function(f4_arg0, f4_arg1, f4_arg2)
+		CoD.Menu.SetButtonLabel(f4_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], 0x0, nil, nil)
 		return false
 	end, false)
 	self:linkToElementModel(self, "isOpen", true, function(model)

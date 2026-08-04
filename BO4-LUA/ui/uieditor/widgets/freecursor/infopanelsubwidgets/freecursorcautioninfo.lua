@@ -17,8 +17,8 @@ CoD.freeCursorCautionInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	cautionText:setTTF("ttmussels_demibold")
 	cautionText:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	cautionText:setLineSpacing(4)
-	cautionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
-	cautionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	cautionText:setAlignment(Enum.LUIAlignment[@"lui_alignment_right"])
+	cautionText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	cautionText:linkToElementModel(self, "cautionDescription", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -28,7 +28,7 @@ CoD.freeCursorCautionInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	LUI.OverrideFunction_CallOriginalFirst(cautionText, "setText", function(element, controller)
 		if IsTextEmpty(element) then
 			CollapseFreeCursorElement(self)
-		elseif not IsTextEmpty(element) and CoD.ModelUtility.AreButtonModelValueBitsSet(f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"], Enum[@"luibuttonflags"][@"flag_down"]) then
+		elseif not IsTextEmpty(element) and CoD.ModelUtility.AreButtonModelValueBitsSet(f1_arg1, Enum.LUIButton[@"lui_key_rtrig"], Enum.LUIButtonFlags[@"flag_down"]) then
 			UpdateWidgetHeightToMultilineText(self, self.cautionText, 2)
 		end
 	end)
@@ -38,7 +38,7 @@ CoD.freeCursorCautionInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		{
 			stateName = "Visible",
 			condition = function(menu, element, event)
-				return CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, f1_arg1, "cautionDescription") and CoD.ModelUtility.AreButtonModelValueBitsSet(f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"], Enum[@"luibuttonflags"][@"flag_down"])
+				return CoD.ModelUtility.IsSelfModelValueNonEmptyString(element, f1_arg1, "cautionDescription") and CoD.ModelUtility.AreButtonModelValueBitsSet(f1_arg1, Enum.LUIButton[@"lui_key_rtrig"], Enum.LUIButtonFlags[@"flag_down"])
 			end,
 		},
 		{
@@ -59,14 +59,14 @@ CoD.freeCursorCautionInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
-	f1_local4(f1_local3, f1_local5["ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"]], function(f7_arg0)
+	local f1_local5 = Engine.GetModelForController(f1_arg1)
+	f1_local4(f1_local3, f1_local5["ButtonBits." .. Enum.LUIButton[@"lui_key_rtrig"]], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f7_arg0:get(),
-			modelName = "ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"],
+			modelName = "ButtonBits." .. Enum.LUIButton[@"lui_key_rtrig"],
 		})
 	end, false)
 	self:linkToElementModel(self, "detailedViewPC", true, function(model)

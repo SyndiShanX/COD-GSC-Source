@@ -8,7 +8,7 @@ CoD.callingcards_snakegods_asset_lefthand.new = function(f1_arg0, f1_arg1, f1_ar
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local lefthand = LUI.UIImage.new(0, 0, -68, 68, 0, 0, -94, 10)
-	lefthand:setImage(RegisterImage(@"uie_ui_menu_callingcards_snake_gods_hand"))
+	lefthand:setImage(RegisterImage("uie_ui_menu_callingcards_snake_gods_hand"))
 	self:addElement(lefthand)
 	self.lefthand = lefthand
 	if PostLoadFunc then

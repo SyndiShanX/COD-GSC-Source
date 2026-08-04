@@ -1,17 +1,17 @@
 CoD.CPUtility = {}
-require("x64:f3c5259f470592d")
+require("ui/utility/overlayutility")
 CoD.CPUtility.DIFFICULTY = {}
-CoD.CPUtility.DIFFICULTY[0] = @"menu/recruit"
-CoD.CPUtility.DIFFICULTY[1] = @"menu/regular"
-CoD.CPUtility.DIFFICULTY[2] = @"hash_5EB0FE85B0C234B0"
-CoD.CPUtility.DIFFICULTY[3] = @"menu/veteran"
-CoD.CPUtility.DIFFICULTY[4] = @"menu/heroic"
+CoD.CPUtility.DIFFICULTY[0] = "menu/recruit"
+CoD.CPUtility.DIFFICULTY[1] = "menu/regular"
+CoD.CPUtility.DIFFICULTY[2] = "menu/hardened"
+CoD.CPUtility.DIFFICULTY[3] = "menu/veteran"
+CoD.CPUtility.DIFFICULTY[4] = "menu/heroic"
 CoD.CPUtility.DIFFICULTY_DESC = {}
-CoD.CPUtility.DIFFICULTY_DESC[0] = @"hash_6E6EE823F2A199D7"
-CoD.CPUtility.DIFFICULTY_DESC[1] = @"hash_1DD1C9C6348D427D"
-CoD.CPUtility.DIFFICULTY_DESC[2] = @"hash_4AE85AB083535732"
-CoD.CPUtility.DIFFICULTY_DESC[3] = @"hash_15D910F0B084B1E8"
-CoD.CPUtility.DIFFICULTY_DESC[4] = @"hash_C562663F9E9D20F"
+CoD.CPUtility.DIFFICULTY_DESC[0] = "menu/diff_recruit_desc"
+CoD.CPUtility.DIFFICULTY_DESC[1] = "menu/diff_regular_desc"
+CoD.CPUtility.DIFFICULTY_DESC[2] = "menu/diff_hardened_desc"
+CoD.CPUtility.DIFFICULTY_DESC[3] = "menu/diff_veteran_desc"
+CoD.CPUtility.DIFFICULTY_DESC[4] = "menu/diff_heroic_desc"
 CoD.CPUtility.DIFFICULTY_ICON = {}
 CoD.CPUtility.DIFFICULTY_ICON[0] = "playlist_sp_recr"
 CoD.CPUtility.DIFFICULTY_ICON[1] = "playlist_sp_reg"
@@ -50,10 +50,10 @@ CoD.CPUtility.GetFactionFromStats = function(f1_arg0)
 		local f1_local0 = f1_arg0.faction
 		local f1_local1 = f1_arg0.faction:get()
 	end
-	return f1_local0 and f1_local1 or Enum[@"team_t"][@"team_allies"]
+	return f1_local0 and f1_local1 or Enum.team_t[@"team_allies"]
 end
 CoD.CPUtility.GetFactionFromStatsByController = function(f2_arg0)
-	return CoD.CPUtility.GetFactionFromStats(Engine[@"getplayerstats"](f2_arg0))
+	return CoD.CPUtility.GetFactionFromStats(Engine.GetPlayerStats(f2_arg0))
 end
 CoD.CPUtility.CreateCPFactionList = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3)
 	local f3_local0 = {}
@@ -72,8 +72,8 @@ CoD.CPUtility.CreateCPFactionList = function(f3_arg0, f3_arg1, f3_arg2, f3_arg3)
 			},
 		}
 	end
-	table.insert(f3_local0, f3_local1(Enum[@"team_t"][@"team_allies"]))
-	table.insert(f3_local0, f3_local1(Enum[@"team_t"][@"team_axis"]))
+	table.insert(f3_local0, f3_local1(Enum.team_t[@"team_allies"]))
+	table.insert(f3_local0, f3_local1(Enum.team_t[@"team_axis"]))
 	return f3_local0
 end
 DataSources.CPFactions = DataSourceHelpers.ListSetup("CPFactions", function(f5_arg0, f5_arg1)
@@ -120,8 +120,8 @@ CoD.OverlayUtility.AddSystemOverlay("ConfirmCompanionChange", {
 	menuName = "SystemOverlay_FreeCursor",
 	title = @"hash_2D53A1670E00816",
 	description = function(f15_arg0, f15_arg1)
-		local f15_local0 = Engine[@"getplayerstats"](f15_arg0)
-		local f15_local1 = CoD.PlayerRoleUtility.GetCachedHeroInfo(Enum[@"emodes"][@"mode_campaign"], f15_local0.companion:get())
+		local f15_local0 = Engine.GetPlayerStats(f15_arg0)
+		local f15_local1 = CoD.PlayerRoleUtility.GetCachedHeroInfo(Enum.eModes.mode_campaign, f15_local0.companion:get())
 		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_F68F0D6082EA8E6", f15_local1.displayName)
 	end,
 	categoryType = CoD.OverlayUtility.OverlayTypes.Notice,
@@ -165,20 +165,20 @@ CoD.OverlayUtility.AddSystemOverlay("ConfirmFactionChange", {
 	[CoD.OverlayUtility.bCirclePromptText] = @"menu/cancel",
 })
 CoD.CPUtility.SelectCompanion_Internal = function(f25_arg0, f25_arg1)
-	local f25_local0 = Engine[@"getplayerstats"](f25_arg0)
+	local f25_local0 = Engine.GetPlayerStats(f25_arg0)
 	f25_local0.companion:set(f25_arg1)
 	UploadStats(f25_arg0)
 end
 CoD.CPUtility.GetTeamTokenXModel = function(f26_arg0)
-	if f26_arg0 == Enum[@"team_t"][@"team_allies"] or f26_arg0 == Enum[@"team_t"][@"team_axis"] then
-		return "p8_frontend_cp_faction_" .. Engine[@"getfactionforteam"](f26_arg0) .. "_base"
+	if f26_arg0 == Enum.team_t[@"team_allies"] or f26_arg0 == Enum.team_t[@"team_axis"] then
+		return "p8_frontend_cp_faction_" .. Engine.GetFactionForTeam(f26_arg0) .. "_base"
 	else
 		return "tag_origin"
 	end
 end
 CoD.CPUtility.GetFactionBodyIndexForPlayer = function(f27_arg0)
 	local f27_local0
-	if f27_arg0 == Enum[@"team_t"][@"team_allies"] then
+	if f27_arg0 == Enum.team_t[@"team_allies"] then
 		f27_local0 = 0
 		if not f27_local0 then
 		else
@@ -189,7 +189,7 @@ CoD.CPUtility.GetFactionBodyIndexForPlayer = function(f27_arg0)
 end
 CoD.CPUtility.GetFactionBodyIndexForCompanion = function(f28_arg0, f28_arg1)
 	local f28_local0
-	if f28_arg0 == Enum[@"team_t"][@"team_allies"] then
+	if f28_arg0 == Enum.team_t[@"team_allies"] then
 		f28_local0 = 1
 		if not f28_local0 then
 		else
@@ -203,7 +203,7 @@ CoD.CPUtility.GetFactionBodyIndexForCompanion = function(f28_arg0, f28_arg1)
 end
 CoD.CPUtility.GetFactionHelmetIndexForCompanion = function(f29_arg0, f29_arg1)
 	local f29_local0
-	if f29_arg0 == Enum[@"team_t"][@"team_allies"] then
+	if f29_arg0 == Enum.team_t[@"team_allies"] then
 		f29_local0 = 1
 		if not f29_local0 then
 		else
@@ -216,18 +216,18 @@ CoD.CPUtility.GetFactionHelmetIndexForCompanion = function(f29_arg0, f29_arg1)
 	f29_local0 = 2
 end
 CoD.CPUtility.SelectFaction_Internal = function(f30_arg0, f30_arg1)
-	local f30_local0 = Engine[@"getplayerstats"](f30_arg0)
+	local f30_local0 = Engine.GetPlayerStats(f30_arg0)
 	f30_local0.faction:set(f30_arg1)
 	CoD.LobbyUtility.LobbySetTeam(f30_arg0, f30_arg1)
 	UploadStats(f30_arg0)
 end
 CoD.CPUtility.SetupFrontendForFaction = function(f31_arg0, f31_arg1)
 	SendClientScriptNotify(f31_arg0, "changeFactionToken", CoD.CPUtility.GetTeamTokenXModel(f31_arg1))
-	SendCustomClientScriptNotifyForAdjustedClient(f31_arg0, CoD.CPUtility.FrontendPlayerCharacterUpdate, "changeBody", CoD.CPUtility.GetFactionBodyIndexForPlayer(f31_arg1), Enum[@"emodes"][@"mode_campaign"], true)
-	local f31_local0 = Engine[@"getplayerstats"](f31_arg0)
+	SendCustomClientScriptNotifyForAdjustedClient(f31_arg0, CoD.CPUtility.FrontendPlayerCharacterUpdate, "changeBody", CoD.CPUtility.GetFactionBodyIndexForPlayer(f31_arg1), Enum.eModes.mode_campaign, true)
+	local f31_local0 = Engine.GetPlayerStats(f31_arg0)
 	local f31_local1 = f31_local0.companion:get()
 	if f31_arg1 ~= CoD.CPUtility.GetFactionFromStats(f31_local0) then
-		for f31_local5, f31_local6 in ipairs(CoD.PlayerRoleUtility.GetHeroList(Enum[@"emodes"][@"mode_campaign"])) do
+		for f31_local5, f31_local6 in ipairs(CoD.PlayerRoleUtility.GetHeroList(Enum.eModes.mode_campaign)) do
 			if f31_local6[@"iscompanion"] ~= 0 and (not f31_local6[@"baseteam"] or f31_local6[@"baseteam"] == f31_arg1) then
 				f31_local1 = f31_local6.bodyIndex
 				break
@@ -297,7 +297,7 @@ CoD.CPUtility.SetupVehicleHack = function(f37_arg0, f37_arg1)
 		table.insert(f37_local3, "buttonType" .. f37_local5)
 	end
 	local f37_local5 = LuaEnum.createEnum("index", "difficulty", "numPrompts", unpack(f37_local3))
-	local f37_local6 = tonumber(Engine[@"tablelookup"](f37_local0, f37_local5.numPrompts, f37_local5.index, f37_local1))
+	local f37_local6 = tonumber(Engine.TableLookup(f37_local0, f37_local5.numPrompts, f37_local5.index, f37_local1))
 	local f37_local7 = DataSources.HUDItems.getModel(f37_arg1)
 	f37_local7 = f37_local7:create("vehicleHack.level")
 	local f37_local8 = f37_arg0.puzzleLevels
@@ -324,18 +324,18 @@ CoD.CPUtility.SetupVehicleHack = function(f37_arg0, f37_arg1)
 		end
 	end
 	local f37_local9 = function()
-		f37_local2.kbcross = Engine[@"keybinding"](f37_arg1, "+forward")
-		f37_local2.kbsquare = Engine[@"keybinding"](f37_arg1, "+moveleft")
-		f37_local2.kbtriangle = Engine[@"keybinding"](f37_arg1, "+moveright")
-		f37_local2.kbcircle = Engine[@"keybinding"](f37_arg1, "+back")
+		f37_local2.kbcross = Engine.KeyBinding(f37_arg1, "+forward")
+		f37_local2.kbsquare = Engine.KeyBinding(f37_arg1, "+moveleft")
+		f37_local2.kbtriangle = Engine.KeyBinding(f37_arg1, "+moveright")
+		f37_local2.kbcircle = Engine.KeyBinding(f37_arg1, "+back")
 	end
 	local f37_local10 = function(f39_arg0, f39_arg1)
-		f39_arg0.text = f37_local2["kb" .. Engine[@"tablelookup"](f37_local0, f37_local5["buttonType" .. f39_arg1], f37_local5.index, f37_local1)] or ""
+		f39_arg0.text = f37_local2["kb" .. Engine.TableLookup(f37_local0, f37_local5["buttonType" .. f39_arg1], f37_local5.index, f37_local1)] or ""
 		if #f39_arg0.text > 1 then
-			f39_arg0.text = Engine[@"localize"](f39_arg0.text)
+			f39_arg0.text = Engine.Localize(f39_arg0.text)
 		end
 		assert(f39_arg0.text ~= nil)
-		f39_arg0.spinner.resultContainer.resultText:setText(Engine[@"toupper"](f39_arg0.text))
+		f39_arg0.spinner.resultContainer.resultText:setText(Engine.ToUpper(f39_arg0.text))
 	end
 	if CoD.isPC then
 		f37_local9()
@@ -355,9 +355,9 @@ CoD.CPUtility.SetupVehicleHack = function(f37_arg0, f37_arg1)
 		if f37_local11 == false then
 			f37_local8[f37_local13].delay = 0
 		else
-			f37_local8[f37_local13].delay = tonumber(Engine[@"tablelookup"](f37_local0, f37_local5["buttonTime" .. f37_local13], f37_local5.index, f37_local1))
+			f37_local8[f37_local13].delay = tonumber(Engine.TableLookup(f37_local0, f37_local5["buttonTime" .. f37_local13], f37_local5.index, f37_local1))
 		end
-		f37_local8[f37_local13].image = f37_local2[Engine[@"tablelookup"](f37_local0, f37_local5["buttonType" .. f37_local13], f37_local5.index, f37_local1)] or "$white"
+		f37_local8[f37_local13].image = f37_local2[Engine.TableLookup(f37_local0, f37_local5["buttonType" .. f37_local13], f37_local5.index, f37_local1)] or "$white"
 		if CoD.isPC then
 			f37_local10(f37_local8[f37_local13], f37_local13)
 		end
@@ -413,8 +413,8 @@ CoD.CPUtility.SetupVehicleHack = function(f37_arg0, f37_arg1)
 					f37_local8[f43_local1].spinner = f37_local8[f43_local4].spinner
 					f37_local8[f43_local4].spinner = f43_local5
 					if CoD.isPC then
-						f37_local8[f43_local1].spinner.resultContainer.resultText:setText(Engine[@"toupper"](f37_local8[f43_local1].text))
-						f37_local8[f43_local4].spinner.resultContainer.resultText:setText(Engine[@"toupper"](f37_local8[f43_local4].text))
+						f37_local8[f43_local1].spinner.resultContainer.resultText:setText(Engine.ToUpper(f37_local8[f43_local1].text))
+						f37_local8[f43_local4].spinner.resultContainer.resultText:setText(Engine.ToUpper(f37_local8[f43_local4].text))
 					end
 					f37_local8[f43_local1].spinner.resultContainer.result:setImage(RegisterImage(f37_local8[f43_local1].image))
 					f37_local8[f43_local4].spinner.resultContainer.result:setImage(RegisterImage(f37_local8[f43_local4].image))
@@ -488,8 +488,8 @@ DataSourceHelpers.PerControllerDataSourceSetup("InterferenceSelect", "hudItems.i
 	f49_local0:set(0)
 end, false)
 DataSourceHelpers.PerControllerDataSourceSetup("InterferenceSelectorTablet", "InterferenceSelectorTablet", function(f50_arg0, f50_arg1)
-	local f50_local0 = Engine[@"getcurrentmapname"]()
-	local f50_local1 = Engine[@"getfactionforteam"](CoD.TeamUtility.GetTeamID(f50_arg1))
+	local f50_local0 = Engine.GetCurrentMapName()
+	local f50_local1 = Engine.GetFactionForTeam(CoD.TeamUtility.GetTeamID(f50_arg1))
 	local f50_local2 = CoD.BaseUtility.GetMapValue(f50_local0, @"hash_765873EF183A770A" .. f50_local1, nil) or ""
 	local f50_local3 = CoD.BaseUtility.GetMapValue(f50_local0, @"hash_462D533E8A3E0AA5" .. f50_local1, nil) or ""
 	local f50_local4 = f50_arg0:create("title")
@@ -499,7 +499,7 @@ DataSourceHelpers.PerControllerDataSourceSetup("InterferenceSelectorTablet", "In
 end, false)
 DataSources.InterferenceSelection = DataSourceHelpers.ListSetup("InterferenceSelection", function(f51_arg0, f51_arg1)
 	local f51_local0 = {}
-	local f51_local1 = CoD.BaseUtility.GetMapValue(Engine[@"getcurrentmapname"](), "interferenceSelection_" .. Engine[@"getfactionforteam"](CoD.TeamUtility.GetTeamID(f51_arg0)), nil)
+	local f51_local1 = CoD.BaseUtility.GetMapValue(Engine.GetCurrentMapName(), "interferenceSelection_" .. Engine.GetFactionForTeam(CoD.TeamUtility.GetTeamID(f51_arg0)), nil)
 	if f51_local1 then
 		for f51_local5, f51_local6 in ipairs(f51_local1) do
 			table.insert(f51_local0, {
@@ -555,17 +555,17 @@ CoD.CPUtility.SpawnDynamicCPHUDWidgets = function(f58_arg0, f58_arg1)
 	CoD.HUDUtility.SetupGrenadeWarningIndicators(f58_arg0, f58_arg1)
 	local f58_local1 = function(f59_arg0, f59_arg1, f59_arg2, f59_arg3)
 		if worldIconModel then
-			local f59_local0 = Engine[@"createmodel"](worldIconModel, "weakpoint_" .. f59_arg0 .. "_" .. f59_arg1)
+			local f59_local0 = Engine.CreateModel(worldIconModel, "weakpoint_" .. f59_arg0 .. "_" .. f59_arg1)
 			if f59_local0 then
-				LUI.CreateModelAndInitialize(f59_local0, "status", Enum[@"weakpointwidgetstates"][@"weakpoint_state_default"])
+				LUI.CreateModelAndInitialize(f59_local0, "status", Enum.WeakpointWidgetStates[@"weakpoint_state_default"])
 				local f59_local1 = CoD.weakpointIndicator.new(f58_arg0, f58_arg1, 0, 0, 0, CoD.weakpointIndicator.__defaultWidth, 0, 0, 0, CoD.weakpointIndicator.__defaultHeight)
 				f59_local1:setModel(f59_local0, f58_arg1)
 				f59_local1:setupWeakpointIndicator(f58_arg1, f59_arg0, f59_arg1, f59_arg2, f59_arg3)
 				LUI.OverrideFunction_CallOriginalFirst(f59_local1, "close", function()
 					if LUI.DEV then
-						local f60_local0 = LUI.DEV.ErrorIfModelsDoNotMatch(f59_local0, Engine[@"createmodel"](worldIconModel, "weakpoint_" .. f59_arg0 .. "_" .. f59_arg1))
+						local f60_local0 = LUI.DEV.ErrorIfModelsDoNotMatch(f59_local0, Engine.CreateModel(worldIconModel, "weakpoint_" .. f59_arg0 .. "_" .. f59_arg1))
 					end
-					Engine[@"unsubscribeandfreemodel"](f59_local0)
+					Engine.UnsubscribeAndFreeModel(f59_local0)
 				end)
 				return f59_local1
 			end
@@ -573,20 +573,20 @@ CoD.CPUtility.SpawnDynamicCPHUDWidgets = function(f58_arg0, f58_arg1)
 	end
 	f58_arg0.weakpoints = {}
 	f58_arg0:subscribeToGlobalModel(f58_arg1, "PerController", "scriptNotify", function(model)
-		local f61_local0 = Engine[@"getmodelvalue"](model)
+		local modelValue = Engine.GetModelValue(model)
 		local f61_local1 = {
 			controller = f58_arg1,
-			name = f61_local0,
+			name = modelValue,
 			data = CoD.GetScriptNotifyData(model),
 		}
-		if f61_local0 == "weakpoint_update" then
+		if modelValue == "weakpoint_update" then
 			local f61_local2 = f61_local1.data[2]
-			local f61_local3 = Engine[@"getistring"](f61_local1.data[3], "CS_LOCALIZED_STRINGS")
+			local f61_local3 = Engine.GetIString(f61_local1.data[3], "CS_LOCALIZED_STRINGS")
 			if f61_local1.data[1] == 0 then
 				if f58_arg0.weakpoints[f61_local2] and f58_arg0.weakpoints[f61_local2][f61_local3] then
 					local f61_local4 = f58_arg0.weakpoints[f61_local2][f61_local3]:getModel(f58_arg1, "status")
 					if f61_local4 then
-						Engine[@"setmodelvalue"](f61_local4, Enum[@"weakpointwidgetstates"][@"weakpoint_state_closing"])
+						Engine.SetModelValue(f61_local4, Enum.WeakpointWidgetStates[@"weakpoint_state_closing"])
 					end
 					local f61_local5 = f58_arg0.weakpoints[f61_local2][f61_local3]
 					f61_local5:addElement(LUI.UITimer.newElementTimer(1500, true, f61_local5.close, f61_local5))
@@ -619,7 +619,7 @@ CoD.CPUtility.SpawnDynamicCPHUDWidgets = function(f58_arg0, f58_arg1)
 	f58_local2 = f58_local2.viewmodelWeaponName
 	if f58_local2 then
 		f58_arg0:subscribeToModel(f58_local2, function(model)
-			if IsCurrentViewmodelWeaponName(f58_arg1, @"spike_launcher") then
+			if IsCurrentViewmodelWeaponName(f58_arg1, "spike_launcher") then
 				f58_arg0.spikeLauncherCounter = CoD.SpikeLauncherSpikeCounter.new(f58_arg0, f58_arg1, 0, 0, 0, CoD.SpikeLauncherSpikeCounter.__defaultWidth, 0, 0, 0, CoD.SpikeLauncherSpikeCounter.__defaultHeight)
 				f58_arg0:addElement(f58_arg0.spikeLauncherCounter)
 				f58_arg0.spikeLauncherCounter:dispatchEventToChildren({
@@ -646,7 +646,7 @@ CoD.CPUtility.SpawnDynamicCPHUDWidgets = function(f58_arg0, f58_arg1)
 				if LUI.startswith(f64_local0.id, "bleedOutItem") then
 					local f64_local1 = f64_local0:getModel(f58_arg1, "playerName")
 					if f64_local1 then
-						Engine[@"setmodelvalue"](f64_local1, Engine[@"getgamertagforclient"](f58_arg1, f64_local0.bleedOutClient))
+						Engine.SetModelValue(f64_local1, Engine.GetGamertagForClient(f58_arg1, f64_local0.bleedOutClient))
 					end
 				end
 				f64_local0 = f64_local0:getNextSibling()
@@ -656,15 +656,15 @@ CoD.CPUtility.SpawnDynamicCPHUDWidgets = function(f58_arg0, f58_arg1)
 		local f58_local6 = true
 		while f58_local6 do
 			local f58_local7 = f58_local5
-			local f58_local8 = Engine[@"createmodel"](f58_local0, "bleedOutModel" .. f58_local7)
-			local f58_local9 = Engine[@"createmodel"](f58_local8, "playerName")
-			Engine[@"setmodelvalue"](f58_local9, GetClientName(f58_arg1, f58_local7))
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f58_local8, "prompt"), @"hash_48FE93EDC5208D8")
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f58_local8, "clockPercent"), 0)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f58_local8, "bleedOutPercent"), 0)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f58_local8, "stateFlags"), 0)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f58_local8, "arrowAngle"), 0)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f58_local8, "isCompanion"), false)
+			local f58_local8 = Engine.CreateModel(f58_local0, "bleedOutModel" .. f58_local7)
+			local f58_local9 = Engine.CreateModel(f58_local8, "playerName")
+			Engine.SetModelValue(f58_local9, GetClientName(f58_arg1, f58_local7))
+			Engine.SetModelValue(Engine.CreateModel(f58_local8, "prompt"), "cpui/revive")
+			Engine.SetModelValue(Engine.CreateModel(f58_local8, "clockPercent"), 0)
+			Engine.SetModelValue(Engine.CreateModel(f58_local8, "bleedOutPercent"), 0)
+			Engine.SetModelValue(Engine.CreateModel(f58_local8, "stateFlags"), 0)
+			Engine.SetModelValue(Engine.CreateModel(f58_local8, "arrowAngle"), 0)
+			Engine.SetModelValue(Engine.CreateModel(f58_local8, "isCompanion"), false)
 			local f58_local10 = CoD.bleedOutWidget.new(f58_arg0, f58_arg1, 0, 0, 0, CoD.bleedOutWidget.__defaultWidth, 0, 0, 0, CoD.bleedOutWidget.__defaultHeight)
 			f58_local10.bleedOutClient = f58_local7
 			f58_local10.id = "bleedOutItem" .. f58_local7
@@ -678,7 +678,7 @@ CoD.CPUtility.SpawnDynamicCPHUDWidgets = function(f58_arg0, f58_arg1)
 				f58_local9:set(model:get())
 			end)
 			if not f58_arg0.fullscreenContainer._hasPlayerConnectedSubscription then
-				f58_arg0.fullscreenContainer:subscribeToModel(Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f58_arg1), "playerConnected"), function(model)
+				f58_arg0.fullscreenContainer:subscribeToModel(Engine.GetModel(Engine.GetModelForController(f58_arg1), "playerConnected"), function(model)
 					f58_local4(f58_arg0.fullscreenContainer)
 				end)
 				f58_arg0.fullscreenContainer._hasPlayerConnectedSubscription = true
@@ -690,18 +690,18 @@ CoD.CPUtility.SpawnDynamicCPHUDWidgets = function(f58_arg0, f58_arg1)
 end
 CoD.CPUtility.ChangeGender = function(f67_arg0, f67_arg1, f67_arg2)
 	if f67_arg1.gender then
-		Engine[@"setgender"](f67_arg0, f67_arg1.gender)
+		Engine.SetGender(f67_arg0, f67_arg1.gender)
 		f67_arg2.__currentlySelectedGender = f67_arg1.gender
 		SendCustomClientScriptNotifyForAdjustedClient(f67_arg0, CoD.PlayerRoleUtility.Heroes.heroUpdateEvent, {
 			event_name = "changeGender",
 			gender = f67_arg1.gender,
-			mode = Enum[@"emodes"][@"mode_campaign"],
+			mode = Enum.eModes.mode_campaign,
 		})
 	end
 end
 CoD.CPUtility.NewsAlertTypes = LuaEnum.createEnum("REGULAR_NEWS", "BREAKING_NEWS")
 CoD.CPUtility.SetupNewsroomDataWatchers = function(f68_arg0, f68_arg1)
-	local f68_local0 = CoD.BaseUtility.GetMapValue(Engine[@"getcurrentmapname"](), @"hash_13C66F2147C55B8D", nil)
+	local f68_local0 = CoD.BaseUtility.GetMapValue(Engine.GetCurrentMapName(), @"hash_13C66F2147C55B8D", nil)
 	local f68_local1 = f68_local0 and Engine[@"hash_2E00B2F29271C60B"](Engine[@"converttoxhash"](f68_local0))
 	local f68_local2 = f68_arg0:getModel()
 	local f68_local3 = f68_local1
@@ -721,9 +721,9 @@ CoD.CPUtility.SetupNewsroomDataWatchers = function(f68_arg0, f68_arg1)
 				local f69_local0 = f68_local4.torchdonatorentries[(model:get() or 0) + 1] or {}
 				if f69_local0 then
 					local f69_local1 = f68_local2:create("torch.donatorName")
-					f69_local1:set(f69_local0[@"name"] and Engine[@"localize"](f69_local0[@"name"]) or "")
+					f69_local1:set(f69_local0.name and Engine.Localize(f69_local0.name) or "")
 					f69_local1 = f68_local2:create("torch.donatorAmount")
-					f69_local1:set(f69_local0[@"amount"] or 0)
+					f69_local1:set(f69_local0.amount or 0)
 				end
 			end
 		end)
@@ -735,8 +735,8 @@ CoD.CPUtility.SetupNewsroomDataWatchers = function(f68_arg0, f68_arg1)
 		f68_arg0:linkToElementModel(f68_arg0, "uns.generalNewsIndex", true, function(model)
 			if f68_local4.unsnewsentries then
 				local f70_local0 = f68_local4.unsnewsentries[model:get() or 0] or {}
-				local f70_local1 = f70_local0[@"header"] and Engine[@"localize"](f70_local0[@"header"]) or ""
-				local f70_local2 = f70_local0[@"body"] and Engine[@"localize"](f70_local0[@"body"]) or ""
+				local f70_local1 = f70_local0.header and Engine.Localize(f70_local0.header) or ""
+				local f70_local2 = f70_local0.body and Engine.Localize(f70_local0.body) or ""
 				f68_local2["uns.header"].set(f68_local2["uns.header"], f70_local1)
 				f68_local2["uns.body"].set(f68_local2["uns.body"], f70_local2)
 				local f70_local3 = CoD.CPUtility.NewsAlertTypes.REGULAR_NEWS
@@ -756,7 +756,7 @@ CoD.CPUtility.SetupNewsroomDataWatchers = function(f68_arg0, f68_arg1)
 		f68_arg0:linkToElementModel(f68_arg0, "noble.generalNewsIndex", true, function(model)
 			if f68_local4.noblenewsentries then
 				local f71_local0 = f68_local4.noblenewsentries[model:get() or 0] or {}
-				f68_local2["noble.body"].set(f68_local2["noble.body"], f71_local0[@"body"] and Engine[@"localize"](f71_local0[@"body"]) or "")
+				f68_local2["noble.body"].set(f68_local2["noble.body"], f71_local0.body and Engine.Localize(f71_local0.body) or "")
 				local f71_local1 = CoD.CPUtility.NewsAlertTypes.REGULAR_NEWS
 				if f71_local0[@"hash_1F5A9D1C35E8A1E7"] == 1 then
 					f71_local1 = CoD.CPUtility.NewsAlertTypes.BREAKING_NEWS
@@ -841,7 +841,7 @@ CoD.CPUtility.SetupNewsRoomTicker = function(f73_arg0, f73_arg1)
 						end
 					end
 					local f74_local2 = 0
-					f73_local1[1].text:setText(Engine[@"localize"](f73_local5[f74_local0][@"entry"]))
+					f73_local1[1].text:setText(Engine.Localize(f73_local5[f74_local0][@"entry"]))
 					local f74_local3 = f73_local1[1].text:getTextWidth()
 					local f74_local4, f74_local5 = f73_local1[1].spacer:getLocalSize()
 					f74_local3 = f74_local3 + f74_local4
@@ -878,7 +878,7 @@ CoD.CPUtility.SetupNewsRoomTicker = function(f73_arg0, f73_arg1)
 							f74_local8(f73_local1[1])
 							local f74_local9 = 2
 							while f74_local2 - f74_local3 < f73_local7 and f74_local9 <= #f73_local1 do
-								f73_local1[f74_local9].text:setText(Engine[@"localize"](f73_local5[f74_local0][@"entry"]))
+								f73_local1[f74_local9].text:setText(Engine.Localize(f73_local5[f74_local0][@"entry"]))
 								f74_local8(f73_local1[f74_local9])
 								f74_local9 = f74_local9 + 1
 								f74_local1()
@@ -959,7 +959,7 @@ DataSources.CPObjectiveTeams = {
 		end
 	end,
 	setupSubObjectiveModels = function(f84_arg0, f84_arg1, f84_arg2)
-		local f84_local0 = Engine[@"getmodelforcontroller"](f84_arg0)
+		local f84_local0 = Engine.GetModelForController(f84_arg0)
 		f84_local0 = f84_local0.hudItems.cpObjective.perPlayer
 		local f84_local1 = f84_arg1:create("subObjective1")
 		f84_local1:set(f84_local0.subObjective1)
@@ -991,27 +991,27 @@ DataSources.CPObjectiveTeams = {
 			DataSources.CPObjectiveTeams.preparedForController[f85_arg0] = false
 			DataSources.CPObjectiveTeams.prepare(f85_arg0)
 		end, false)
-		f85_local0 = Engine[@"getmodelforcontroller"](f85_arg0)
+		f85_local0 = Engine.GetModelForController(f85_arg0)
 		f85_local0 = f85_local0:create("CPObjectiveTeams")
 		f85_local1 = f85_local0:create("myTeam")
 		f85_local2 = f85_local0:create("enemyTeam")
-		local f85_local3 = Engine[@"getglobalmodel"]()
+		local f85_local3 = Engine.GetGlobalModel()
 		f85_local3 = f85_local3.hudItems.cpObjective
 		local f85_local4 = f85_local3.allies:create("timer")
 		local f85_local5 = f85_local4
 		f85_local4 = f85_local4.set
-		local f85_local6 = Engine[@"getglobalmodel"]()
+		local f85_local6 = Engine.GetGlobalModel()
 		f85_local4(f85_local5, f85_local6.bombTimer.bomb0)
 		f85_local4 = f85_local3.axis:create("timer")
 		f85_local5 = f85_local4
 		f85_local4 = f85_local4.set
-		f85_local6 = Engine[@"getglobalmodel"]()
+		f85_local6 = Engine.GetGlobalModel()
 		f85_local4(f85_local5, f85_local6.bombTimer.bomb1)
 		DataSources.CPObjectiveTeams.createFractionModelListener(f85_arg0, f85_local3.allies)
 		DataSources.CPObjectiveTeams.createFractionModelListener(f85_arg0, f85_local3.axis)
 		DataSources.CPObjectiveTeams.createPercentModelListener(f85_arg0, f85_local3.allies, 1)
 		DataSources.CPObjectiveTeams.createPercentModelListener(f85_arg0, f85_local3.axis, 2)
-		if Engine[@"getteamid"](f85_arg0, Engine[@"getpredictedclientnum"](f85_arg0)) == Enum[@"team_t"][@"team_allies"] then
+		if Engine.GetTeamID(f85_arg0, Engine.GetPredictedClientNum(f85_arg0)) == Enum.team_t[@"team_allies"] then
 			f85_local1:set(f85_local3.allies)
 			f85_local2:set(f85_local3.axis)
 		else
@@ -1024,13 +1024,13 @@ DataSources.CPObjectiveTeams = {
 		if not DataSources.CPObjectiveTeams.preparedForController or not DataSources.CPObjectiveTeams.preparedForController[f87_arg0] then
 			DataSources.CPObjectiveTeams.prepare(f87_arg0)
 		end
-		local f87_local0 = Engine[@"getmodelforcontroller"](f87_arg0)
+		local f87_local0 = Engine.GetModelForController(f87_arg0)
 		return f87_local0:create("CPObjectiveTeams")
 	end,
 }
 DataSources.CPObjectivePerPlayer = {
 	getModel = function(f88_arg0)
-		local f88_local0 = Engine[@"getmodelforcontroller"](f88_arg0)
+		local f88_local0 = Engine.GetModelForController(f88_arg0)
 		return f88_local0:create("hudItems.cpObjective.perPlayer")
 	end,
 }
@@ -1047,7 +1047,7 @@ DataSources.CurrentObjectiveInfo = {
 		end
 		DataSources.CurrentObjectiveInfo.subscriptions[f89_arg0]:unsubscribeFromAllModels()
 		DataSources.CurrentObjectiveInfo.preparedForController[f89_arg0] = true
-		local f89_local0 = Engine[@"getmodelforcontroller"](f89_arg0)
+		local f89_local0 = Engine.GetModelForController(f89_arg0)
 		f89_local0 = f89_local0:create("CurrentObjectiveInfo")
 		local f89_local1 = f89_local0:create("currentObjId")
 		local f89_local2 = f89_local0:create("previousObjId")
@@ -1078,18 +1078,18 @@ DataSources.CurrentObjectiveInfo = {
 				end
 			end
 			local f89_local9 = function(f92_arg0)
-				local f92_local0 = f92_arg0 and CoD.HUDUtility.GetCachedObjective(Engine[@"getobjectivename"](f89_arg0, f92_arg0))
+				local f92_local0 = f92_arg0 and CoD.HUDUtility.GetCachedObjective(Engine.GetObjectiveName(f89_arg0, f92_arg0))
 				if f92_local0 then
-					local f92_local1 = Engine[@"getobjectiveteam"](f89_arg0, f92_arg0)
-					local f92_local2 = Engine[@"getteamid"](f89_arg0, Engine[@"getpredictedclientnum"](f89_arg0))
+					local f92_local1 = Engine.GetObjectiveTeam(f89_arg0, f92_arg0)
+					local f92_local2 = Engine.GetTeamID(f89_arg0, Engine.GetPredictedClientNum(f89_arg0))
 					local f92_local3
-					if f92_local1 ~= Enum[@"team_t"][@"team_neutral"] and f92_local1 ~= Enum[@"team_t"][@"team_free"] then
+					if f92_local1 ~= Enum.team_t[@"team_neutral"] and f92_local1 ~= Enum.team_t[@"team_free"] then
 						f92_local3 = false
 					else
 						f92_local3 = true
 					end
 					local f92_local4 = f92_local1 == f92_local2
-					local f92_local5 = f92_local0[@"hash_2E3FD1464311AFA1"] or @"blacktransparent"
+					local f92_local5 = f92_local0[@"hash_2E3FD1464311AFA1"] or "blacktransparent"
 					if f92_local3 then
 						f92_local5 = f92_local0[@"hash_61F7C7371625DBE8"] or f92_local5
 					elseif f92_local4 then
@@ -1105,9 +1105,9 @@ DataSources.CurrentObjectiveInfo = {
 					local f93_local0 = f93_arg0.objectiveModel
 					local f93_local1 = f93_local0
 					f93_local0 = f93_local0.set
-					local f93_local2 = Engine[@"getmodelforcontroller"](f89_arg0)
+					local f93_local2 = Engine.GetModelForController(f89_arg0)
 					f93_local0(f93_local1, f93_local2["objective" .. f93_arg1])
-					Engine[@"forcenotifymodelsubscriptions"](f93_arg0)
+					Engine.ForceNotifyModelSubscriptions(f93_arg0)
 				end
 			end
 			local f89_local11 = f89_local7:create("activeObjective.objId")
@@ -1141,7 +1141,7 @@ DataSources.CurrentObjectiveInfo = {
 		if not DataSources.CurrentObjectiveInfo.preparedForController or not DataSources.CurrentObjectiveInfo.preparedForController[f99_arg0] then
 			DataSources.CurrentObjectiveInfo.prepare(f99_arg0)
 		end
-		local f99_local0 = Engine[@"getmodelforcontroller"](f99_arg0)
+		local f99_local0 = Engine.GetModelForController(f99_arg0)
 		return f99_local0:create("CurrentObjectiveInfo")
 	end,
 }
@@ -1179,7 +1179,7 @@ DataSources.ClearAllLives = {
 			if f100_local4 > 0 then
 				f100_local6 = f100_local5 / f100_local4
 			end
-			local f100_local7 = Engine[@"getmodelforcontroller"](f100_arg0)
+			local f100_local7 = Engine.GetModelForController(f100_arg0)
 			f100_local7 = f100_local7:create("ClearAllLives")
 			local f100_local8 = f100_local7:create("numTotalCount")
 			f100_local8:set(f100_local4)
@@ -1195,7 +1195,7 @@ DataSources.ClearAllLives = {
 		if not DataSources.ClearAllLives.preparedForController or not DataSources.ClearAllLives.preparedForController[f102_arg0] then
 			DataSources.ClearAllLives.prepare(f102_arg0)
 		end
-		local f102_local0 = Engine[@"getmodelforcontroller"](f102_arg0)
+		local f102_local0 = Engine.GetModelForController(f102_arg0)
 		return f102_local0:create("ClearAllLives")
 	end,
 }
@@ -1414,7 +1414,7 @@ end
 CoD.CPUtility.GetObjectiveNotificationHeader = function(f123_arg0, f123_arg1, f123_arg2)
 	local f123_local0 = tonumber(f123_arg2)
 	if f123_local0 then
-		local f123_local1 = Engine[@"getteamid"](f123_arg0, Engine[@"getpredictedclientnum"](f123_arg0))
+		local f123_local1 = Engine.GetTeamID(f123_arg0, Engine.GetPredictedClientNum(f123_arg0))
 		local f123_local2 = DataSources.CPObjectiveTeams.getModel(f123_arg0)
 		f123_local2 = f123_local2.myTeam
 		if f123_local2 then
@@ -1449,7 +1449,7 @@ CoD.CPUtility.IsPlayerABot = function(f125_arg0, f125_arg1, f125_arg2)
 	else
 		local f125_local1 = f125_local0:get()
 		if f125_local1 then
-			local f125_local2 = Engine[@"getplayerlistdata"](f125_arg1, f125_local1)
+			local f125_local2 = Engine.GetPlayerListData(f125_arg1, f125_local1)
 			return f125_local2.isBot == true
 		else
 			return false
@@ -1466,7 +1466,7 @@ CoD.CPUtility.IsPlayerACompanion = function(f126_arg0, f126_arg1, f126_arg2)
 	else
 		local f126_local1 = f126_local0:get()
 		if f126_local1 then
-			local f126_local2 = Engine[@"getplayerlistdata"](f126_arg1, f126_local1)
+			local f126_local2 = Engine.GetPlayerListData(f126_arg1, f126_local1)
 			return f126_local2.isCompanion == true
 		else
 			return false
@@ -1475,7 +1475,7 @@ CoD.CPUtility.IsPlayerACompanion = function(f126_arg0, f126_arg1, f126_arg2)
 end
 CoD.CPUtility.SetGotoPlayerColor = function(f127_arg0, f127_arg1)
 	local f127_local0 = f127_arg1
-	local f127_local1 = Engine[@"getclientnum"](f127_arg0)
+	local f127_local1 = Engine.GetClientNum(f127_arg0)
 	local f127_local2 = CoD.ColorUtility.GetColorBlindColorForPlayer(f127_arg0, "FriendlyBlue")
 	if f127_local0 == f127_local1 then
 		f127_local2 = CoD.ColorUtility.GetColorBlindColorForPlayer(f127_arg0, "PlayerYellow")
@@ -1496,7 +1496,7 @@ CoD.CPUtility.GetSpecialistPromptImage = function(f129_arg0, f129_arg1)
 	if f129_local0 < 2 then
 		return "$blacktransparent"
 	else
-		local f129_local1 = CoD.PlayerRoleUtility.GetCachedHeroInfo(Engine[@"currentsessionmode"](), f129_local0)
+		local f129_local1 = CoD.PlayerRoleUtility.GetCachedHeroInfo(Engine.CurrentSessionMode(), f129_local0)
 		if f129_local1 == nil or f129_local1.positionDraftIcon == nil then
 			return "$blacktransparent"
 		else
@@ -1507,42 +1507,42 @@ end
 CoD.CPUtility.LocalizeWithShortFriendlyAndEnemyTeams = function(f130_arg0, f130_arg1)
 	local f130_local0 = CoD.TeamUtility.GetTeam(f130_arg0)
 	local f130_local1 = nil
-	if f130_local0 == Enum[@"team_t"][@"team_allies"] then
-		f130_local1 = Enum[@"team_t"][@"team_axis"]
+	if f130_local0 == Enum.team_t[@"team_allies"] then
+		f130_local1 = Enum.team_t[@"team_axis"]
 	else
-		f130_local0 = Enum[@"team_t"][@"team_axis"]
-		f130_local1 = Enum[@"team_t"][@"team_allies"]
+		f130_local0 = Enum.team_t[@"team_axis"]
+		f130_local1 = Enum.team_t[@"team_allies"]
 	end
 	return Engine[@"hash_4F9F1239CFD921FE"](f130_arg1, Engine[@"hash_4F9F1239CFD921FE"](CoD.TeamUtility.GetDefaultTeamShortName(f130_local0)), Engine[@"hash_4F9F1239CFD921FE"](CoD.TeamUtility.GetDefaultTeamShortName(f130_local1)))
 end
 CoD.CPUtility.LocalizeWithShortFriendlyTeam = function(f131_arg0, f131_arg1)
 	local f131_local0 = CoD.TeamUtility.GetTeam(f131_arg0)
-	if f131_local0 ~= Enum[@"team_t"][@"team_allies"] then
-		f131_local0 = Enum[@"team_t"][@"team_axis"]
+	if f131_local0 ~= Enum.team_t[@"team_allies"] then
+		f131_local0 = Enum.team_t[@"team_axis"]
 	end
 	return Engine[@"hash_4F9F1239CFD921FE"](f131_arg1, Engine[@"hash_4F9F1239CFD921FE"](CoD.TeamUtility.GetDefaultTeamShortName(f131_local0)))
 end
 CoD.CPUtility.LocalizeWithShortEnemyTeam = function(f132_arg0, f132_arg1)
 	local f132_local0 = CoD.TeamUtility.GetTeam(f132_arg0)
 	local f132_local1 = nil
-	if f132_local0 == Enum[@"team_t"][@"team_allies"] then
-		f132_local1 = Enum[@"team_t"][@"team_axis"]
+	if f132_local0 == Enum.team_t[@"team_allies"] then
+		f132_local1 = Enum.team_t[@"team_axis"]
 	else
-		f132_local1 = Enum[@"team_t"][@"team_allies"]
+		f132_local1 = Enum.team_t[@"team_allies"]
 	end
-	return Engine[@"hash_4F9F1239CFD921FE"](f132_arg1, Engine[@"localize"](CoD.TeamUtility.GetDefaultTeamShortName(f132_local1)))
+	return Engine[@"hash_4F9F1239CFD921FE"](f132_arg1, Engine.Localize(CoD.TeamUtility.GetDefaultTeamShortName(f132_local1)))
 end
 CoD.CPUtility.TEMP_GetOnlyOtherNonCompanionPlayerDefectionText = function(f133_arg0, f133_arg1)
 	for f133_local0 = 0, LuaDefine.MAX_CLIENTS - 1, 1 do
 		local f133_local3 = Engine[@"getmodelforclient"](f133_local0)
-		if f133_local3.clientNum:get() ~= Engine[@"getclientnum"](f133_arg0) and not f133_local3.isBot:get() then
+		if f133_local3.clientNum:get() ~= Engine.GetClientNum(f133_arg0) and not f133_local3.isBot:get() then
 			local f133_local4
-			if f133_local3.team:get() == Enum[@"team_t"][@"team_allies"] then
-				f133_local4 = Enum[@"team_t"][@"team_axis"]
+			if f133_local3.team:get() == Enum.team_t[@"team_allies"] then
+				f133_local4 = Enum.team_t[@"team_axis"]
 			else
-				f133_local4 = Enum[@"team_t"][@"team_allies"]
+				f133_local4 = Enum.team_t[@"team_allies"]
 			end
-			return Engine[@"hash_4F9F1239CFD921FE"](f133_arg1, GetClientNameAndClanTag(f133_arg0, f133_local3.clientNum:get()), Engine[@"localize"](CoD.TeamUtility.GetDefaultTeamShortName(f133_local4)))
+			return Engine[@"hash_4F9F1239CFD921FE"](f133_arg1, GetClientNameAndClanTag(f133_arg0, f133_local3.clientNum:get()), Engine.Localize(CoD.TeamUtility.GetDefaultTeamShortName(f133_local4)))
 		end
 	end
 	return ""
@@ -1550,7 +1550,7 @@ end
 CoD.CPUtility.TEMP_GetOnlyOtherNonCompanionPlayerDefectionColor = function(f134_arg0, f134_arg1)
 	for f134_local0 = 0, LuaDefine.MAX_CLIENTS - 1, 1 do
 		local f134_local3 = Engine[@"getmodelforclient"](f134_local0)
-		if f134_local3.clientNum:get() ~= Engine[@"getclientnum"](f134_arg0) and not f134_local3.isBot:get() then
+		if f134_local3.clientNum:get() ~= Engine.GetClientNum(f134_arg0) and not f134_local3.isBot:get() then
 			local f134_local4 = f134_local3.team:get()
 			local f134_local5 = CoD.TeamUtility.GetColorSetFriendlyOrShoutCasterColor(f134_arg0)
 			if f134_local4 == CoD.TeamUtility.GetTeamID(f134_arg0) then
@@ -1569,10 +1569,10 @@ CoD.OverlayUtility.AddSystemOverlay("CPDefectPopup", {
 	title = @"hash_1EC7F5F52C453C14",
 	description = function(f136_arg0)
 		local f136_local0
-		if CoD.TeamUtility.GetTeam(f136_arg0) == Enum[@"team_t"][@"team_allies"] then
-			f136_local0 = Enum[@"team_t"][@"team_axis"]
+		if CoD.TeamUtility.GetTeam(f136_arg0) == Enum.team_t[@"team_allies"] then
+			f136_local0 = Enum.team_t[@"team_axis"]
 		else
-			f136_local0 = Enum[@"team_t"][@"team_allies"]
+			f136_local0 = Enum.team_t[@"team_allies"]
 		end
 		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_1FA69678D2B5CF93", Engine[@"hash_4F9F1239CFD921FE"](CoD.TeamUtility.GetDefaultTeamName(f136_local0)))
 	end,
@@ -1593,7 +1593,7 @@ CoD.OverlayUtility.AddSystemOverlay("CPDefectPopup", {
 CoD.CPUtility.AARObjectiveStates = LuaEnum.createEnum("STATE_INCOMPLETE", "STATE_SUCCESS", "STATE_FAILURE")
 CoD.CPUtility.SetupInGameCPAARModels = function(f141_arg0, f141_arg1)
 	local f141_local0 = f141_arg0:getModel()
-	local f141_local1 = Engine[@"getcurrentmapname"]()
+	local f141_local1 = Engine.GetCurrentMapName()
 	local f141_local2 = function(f142_arg0, f142_arg1, f142_arg2, f142_arg3)
 		if f142_arg1 == CoD.CPUtility.AARObjectiveStates.STATE_SUCCESS then
 			return f142_arg3[f142_arg2 + 1][@"hash_496EF98AC24F8629"] or ""
@@ -1606,8 +1606,8 @@ CoD.CPUtility.SetupInGameCPAARModels = function(f141_arg0, f141_arg1)
 		return f143_local0[f143_arg1 + 1][@"headertext"]
 	end
 	local f141_local4 = CoD.TeamUtility.GetTeamID(f141_arg1)
-	if f141_local4 == Enum[@"team_t"][@"team_allies"] or f141_local4 == Enum[@"team_t"][@"team_axis"] then
-		local f141_local5 = Engine[@"getfactionforteam"](f141_local4)
+	if f141_local4 == Enum.team_t[@"team_allies"] or f141_local4 == Enum.team_t[@"team_axis"] then
+		local f141_local5 = Engine.GetFactionForTeam(f141_local4)
 		local f141_local6 = CoD.BaseUtility.GetMapValue(f141_local1, "aarObjectives_" .. f141_local5, nil)
 		local f141_local7 = f141_local0:create("missionResult")
 		f141_local7:set(f141_local3(f141_local5, f141_local0.mission_result:get()))
@@ -1626,7 +1626,7 @@ CoD.CPUtility.SetupInGameCPAARModels = function(f141_arg0, f141_arg1)
 end
 CoD.CPUtility.SetupChyron = function(f144_arg0, f144_arg1)
 	local f144_local0 = f144_arg0:getModel()
-	local f144_local1 = Engine[@"getcurrentmapname"]()
+	local f144_local1 = Engine.GetCurrentMapName()
 	for f144_local2 = 1, 5, 1 do
 		local f144_local5 = CoD.BaseUtility.GetMapValue(f144_local1, @"chyronline" .. f144_local2, 0x0)
 		local f144_local6 = f144_local0:create("line" .. f144_local2)
@@ -1648,6 +1648,6 @@ CoD.CPUtility.GetLivesRemainingTitle = function(f147_arg0)
 	if f147_arg0 == 1 then
 		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_7157B8AEAE96B10C", f147_arg0)
 	else
-		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_4531E5936198E11F", f147_arg0)
+		return Engine[@"hash_4F9F1239CFD921FE"]("coop/lives_remaining", f147_arg0)
 	end
 end

@@ -1,5 +1,5 @@
-require("x64:2675595fa323085")
-require("x64:b79410dc8d1ea84")
+require("ui/uieditor/widgets/emptyfocusable")
+require("ui/uieditor/widgets/pc/startmenu/pc_highlightborder")
 CoD.DropDownList_ItemControl = InheritFrom(LUI.UIElement)
 CoD.DropDownList_ItemControl.__defaultWidth = 336
 CoD.DropDownList_ItemControl.__defaultHeight = 65
@@ -17,20 +17,20 @@ CoD.DropDownList_ItemControl.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	TextBox:setTTF("ttmussels_regular")
 	TextBox:setLetterSpacing(2)
 	TextBox:setLineSpacing(2)
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_middle"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	local Arrow = LUI.UIImage.new(1, 1, -60, 5, 0.5, 0.5, -32.5, 32.5)
 	Arrow:setRGB(0.58, 0.58, 0.58)
 	Arrow:setZRot(-90)
 	Arrow:setScale(0.4, 0.4)
-	Arrow:setImage(RegisterImage(@"uie_optionswidgets_arrow"))
+	Arrow:setImage(RegisterImage("uie_optionswidgets_arrow"))
 	self:addElement(Arrow)
 	self.Arrow = Arrow
 	local center = CoD.emptyFocusable.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)
 	center:linkToElementModel(center, "refreshWidget", true, function(model, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 	end)
 	center:registerEventHandler("gain_focus", function(element, event)
 		local f3_local0 = nil
@@ -39,18 +39,18 @@ CoD.DropDownList_ItemControl.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(center, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		if not CoD.PCUtility.IsUnavailable(self, controller) then
-			CoD.PCWidgetUtility.CreateDropdown(self, self, controller, menu, "DropDown_ItemList")
+	f1_arg0:AddButtonCallbackFunction(center, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f4_arg0, f4_arg1, f4_arg2, f4_arg3)
+		if not CoD.PCUtility.IsUnavailable(self, f4_arg2) then
+			CoD.PCWidgetUtility.CreateDropdown(self, self, f4_arg2, f4_arg1, "DropDown_ItemList")
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if not CoD.PCUtility.IsUnavailable(self, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+	end, function(f5_arg0, f5_arg1, f5_arg2)
+		if not CoD.PCUtility.IsUnavailable(self, f5_arg2) then
+			CoD.Menu.SetButtonLabel(f5_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 			return false
 		else
 			return false

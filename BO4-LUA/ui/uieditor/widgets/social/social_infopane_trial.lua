@@ -12,8 +12,8 @@ CoD.Social_InfoPane_Trial.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	local TrialText = LUI.UIText.new(0, 0, 31, 181, 0, 0, 0, 18)
 	TrialText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_9B9BE1E62972305"))
 	TrialText:setTTF("default")
-	TrialText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	TrialText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	TrialText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	TrialText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(TrialText)
 	self.TrialText = TrialText
 	local TrialWidget = CoD.TrialWidget.new(f1_arg0, f1_arg1, 0, 0, 1, 31, 0, 0, 0, 30)

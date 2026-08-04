@@ -15,8 +15,8 @@ CoD.PCSocialMenu_GenericButton_Container.new = function(f1_arg0, f1_arg1, f1_arg
 	Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(3)
-	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
+	Title:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	Title:setAlignment(Enum.LUIAlignment[@"lui_alignment_middle"])
 	self:addElement(Title)
 	self.Title = Title
 	local CornerDotBLAnim = LUI.UIImage.new(0, 0, 1, 2, 1, 1, -2, -1)

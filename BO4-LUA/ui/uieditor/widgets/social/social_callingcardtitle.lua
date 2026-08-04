@@ -1,4 +1,4 @@
-require("x64:bd6207aa7efa728")
+require("ui/uieditor/widgets/lobby/common/fe_listsubheaderpanel")
 CoD.Social_CallingCardTitle = InheritFrom(LUI.UIElement)
 CoD.Social_CallingCardTitle.__defaultWidth = 450
 CoD.Social_CallingCardTitle.__defaultHeight = 30
@@ -16,7 +16,7 @@ CoD.Social_CallingCardTitle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	Label0:setText("")
 	Label0:setTTF("dinnext_regular")
 	Label0:setLetterSpacing(0.5)
-	Label0:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Label0:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	LUI.OverrideFunction_CallOriginalFirst(Label0, "setText", function(element, controller)
 		ScaleWidgetToLabel(self, element, 2)
 	end)

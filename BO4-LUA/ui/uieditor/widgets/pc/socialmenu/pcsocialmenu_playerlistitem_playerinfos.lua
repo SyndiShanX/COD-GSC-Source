@@ -1,12 +1,12 @@
-require("x64:891695c75906b3c")
-require("x64:2675595fa323085")
-require("x64:959425edb586236")
-require("x64:9b0dc90c4c75e4d")
-require("x64:fd56264606587b7")
-require("x64:40610d2417880da")
-require("x64:a1d3d059e6cf4d9")
-require("x64:2d80af66958e98e")
-require("x64:b0e533b6e349f33")
+require("ui/uieditor/widgets/director/directorlobbyleader")
+require("ui/uieditor/widgets/emptyfocusable")
+require("ui/uieditor/widgets/pc/socialmenu/pcsocialmenu_playerlistitem_playerinfos_acceptinvitebutton")
+require("ui/uieditor/widgets/pc/socialmenu/pcsocialmenu_playerlistitem_playerinfos_acceptinvitetoparty")
+require("ui/uieditor/widgets/pc/socialmenu/pcsocialmenu_playerlistitem_playerinfos_cancelinvitetoparty")
+require("ui/uieditor/widgets/pc/socialmenu/pcsocialmenu_playerlistitem_playerinfos_invitebutton")
+require("ui/uieditor/widgets/pc/socialmenu/pcsocialmenu_playerlistitem_playerinfos_invitetoparty")
+require("ui/uieditor/widgets/pc/socialmenu/pcsocialmenu_playerlistitem_playerinfos_mutebutton")
+require("ui/uieditor/widgets/pc/socialmenu/pcsocialmenu_playerlistitem_playerinfos_removebutton")
 CoD.PCSocialMenu_PlayerListItem_PlayerInfos = InheritFrom(LUI.UIElement)
 CoD.PCSocialMenu_PlayerListItem_PlayerInfos.__defaultWidth = 622
 CoD.PCSocialMenu_PlayerListItem_PlayerInfos.__defaultHeight = 85
@@ -34,8 +34,8 @@ CoD.PCSocialMenu_PlayerListItem_PlayerInfos.new = function(f1_arg0, f1_arg1, f1_
 	self.emblem = emblem
 	local TXTPlayerTag = LUI.UIText.new(0, 0, 140, 450, 0, 0, 13, 43)
 	TXTPlayerTag:setTTF("ttmussels_demibold")
-	TXTPlayerTag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	TXTPlayerTag:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	TXTPlayerTag:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	TXTPlayerTag:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	TXTPlayerTag:linkToElementModel(self, "identityBadge.gamertag", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -46,8 +46,8 @@ CoD.PCSocialMenu_PlayerListItem_PlayerInfos.new = function(f1_arg0, f1_arg1, f1_
 	self.TXTPlayerTag = TXTPlayerTag
 	local TXTPlayerStatus = LUI.UIText.new(0, 0, 172, 450, 0, 0, 42.5, 68.5)
 	TXTPlayerStatus:setTTF("ttmussels_regular")
-	TXTPlayerStatus:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	TXTPlayerStatus:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	TXTPlayerStatus:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	TXTPlayerStatus:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	TXTPlayerStatus:linkToElementModel(self, "activityString", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -81,14 +81,14 @@ CoD.PCSocialMenu_PlayerListItem_PlayerInfos.new = function(f1_arg0, f1_arg1, f1_
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(BTN_Accept, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		CoD.PCUtility.AcceptFriendRequest(self, controller)
+	f1_arg0:AddButtonCallbackFunction(BTN_Accept, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f7_arg0, f7_arg1, f7_arg2, f7_arg3)
+		CoD.PCUtility.AcceptFriendRequest(self, f7_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+	end, function(f8_arg0, f8_arg1, f8_arg2)
+		CoD.Menu.SetButtonLabel(f8_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(BTN_Accept)
@@ -96,7 +96,7 @@ CoD.PCSocialMenu_PlayerListItem_PlayerInfos.new = function(f1_arg0, f1_arg1, f1_
 	local BTN_Remove = CoD.PCSocialMenu_PlayerListItem_PlayerInfos_RemoveButton.new(f1_arg0, f1_arg1, 1, 1, -65, -15, 0.5, 0.5, -25, 25)
 	BTN_Remove:setAlpha(0)
 	BTN_Remove:linkToElementModel(BTN_Remove, "inviteStatus", true, function(model, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 	end)
 	BTN_Remove:registerEventHandler("gain_focus", function(element, event)
 		local f10_local0 = nil
@@ -105,30 +105,30 @@ CoD.PCSocialMenu_PlayerListItem_PlayerInfos.new = function(f1_arg0, f1_arg1, f1_
 		elseif element.super.gainFocus then
 			f10_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f10_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(BTN_Remove, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		if CoD.ModelUtility.IsSelfModelValueEqualToEnum(self, controller, "inviteStatus", CoD.PCWidgetUtility.SocialInviteStatus.IN_PARTY) then
-			CoD.PCUtility.RemoveFriend(self, controller)
+	f1_arg0:AddButtonCallbackFunction(BTN_Remove, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f11_arg0, f11_arg1, f11_arg2, f11_arg3)
+		if CoD.ModelUtility.IsSelfModelValueEqualToEnum(self, f11_arg2, "inviteStatus", CoD.PCWidgetUtility.SocialInviteStatus.IN_PARTY) then
+			CoD.PCUtility.RemoveFriend(self, f11_arg2)
 			return true
-		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(self, controller, "inviteStatus", CoD.PCWidgetUtility.SocialInviteStatus.PENDING) then
-			CoD.PCUtility.RevokeSentFriendRequest(self, controller)
+		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(self, f11_arg2, "inviteStatus", CoD.PCWidgetUtility.SocialInviteStatus.PENDING) then
+			CoD.PCUtility.RevokeSentFriendRequest(self, f11_arg2)
 			return true
-		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(self, controller, "inviteStatus", CoD.PCWidgetUtility.SocialInviteStatus.RECEIVED) then
-			CoD.PCUtility.IgnoreFriendRequest(self, controller)
+		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(self, f11_arg2, "inviteStatus", CoD.PCWidgetUtility.SocialInviteStatus.RECEIVED) then
+			CoD.PCUtility.IgnoreFriendRequest(self, f11_arg2)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if CoD.ModelUtility.IsSelfModelValueEqualToEnum(self, controller, "inviteStatus", CoD.PCWidgetUtility.SocialInviteStatus.IN_PARTY) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+	end, function(f12_arg0, f12_arg1, f12_arg2)
+		if CoD.ModelUtility.IsSelfModelValueEqualToEnum(self, f12_arg2, "inviteStatus", CoD.PCWidgetUtility.SocialInviteStatus.IN_PARTY) then
+			CoD.Menu.SetButtonLabel(f12_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 			return false
-		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(self, controller, "inviteStatus", CoD.PCWidgetUtility.SocialInviteStatus.PENDING) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(self, f12_arg2, "inviteStatus", CoD.PCWidgetUtility.SocialInviteStatus.PENDING) then
+			CoD.Menu.SetButtonLabel(f12_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 			return false
-		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(self, controller, "inviteStatus", CoD.PCWidgetUtility.SocialInviteStatus.RECEIVED) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+		elseif CoD.ModelUtility.IsSelfModelValueEqualToEnum(self, f12_arg2, "inviteStatus", CoD.PCWidgetUtility.SocialInviteStatus.RECEIVED) then
+			CoD.Menu.SetButtonLabel(f12_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -143,8 +143,8 @@ CoD.PCSocialMenu_PlayerListItem_PlayerInfos.new = function(f1_arg0, f1_arg1, f1_
 	TXTPending:setAlpha(0)
 	TXTPending:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_33DD0EE1DB9F6A1C"))
 	TXTPending:setTTF("default")
-	TXTPending:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
-	TXTPending:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	TXTPending:setAlignment(Enum.LUIAlignment[@"lui_alignment_right"])
+	TXTPending:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(TXTPending)
 	self.TXTPending = TXTPending
 	local DirectorLobbyLeader = CoD.DirectorLobbyLeader.new(f1_arg0, f1_arg1, 0, 0, 2, 16, 0, 1, 2, -2)
@@ -159,14 +159,14 @@ CoD.PCSocialMenu_PlayerListItem_PlayerInfos.new = function(f1_arg0, f1_arg1, f1_
 		elseif element.super.gainFocus then
 			f13_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f13_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(BTNInviteToParty, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		LobbyInviteFriendByXuid(self, self, controller)
+	f1_arg0:AddButtonCallbackFunction(BTNInviteToParty, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f14_arg0, f14_arg1, f14_arg2, f14_arg3)
+		LobbyInviteFriendByXuid(self, self, f14_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+	end, function(f15_arg0, f15_arg1, f15_arg2)
+		CoD.Menu.SetButtonLabel(f15_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(BTNInviteToParty)
@@ -180,14 +180,14 @@ CoD.PCSocialMenu_PlayerListItem_PlayerInfos.new = function(f1_arg0, f1_arg1, f1_
 		elseif element.super.gainFocus then
 			f16_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f16_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(BTNCancelPartyInvite, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		CancelPartyInvite(self, self, controller)
+	f1_arg0:AddButtonCallbackFunction(BTNCancelPartyInvite, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f17_arg0, f17_arg1, f17_arg2, f17_arg3)
+		CancelPartyInvite(self, self, f17_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+	end, function(f18_arg0, f18_arg1, f18_arg2)
+		CoD.Menu.SetButtonLabel(f18_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(BTNCancelPartyInvite)
@@ -201,14 +201,14 @@ CoD.PCSocialMenu_PlayerListItem_PlayerInfos.new = function(f1_arg0, f1_arg1, f1_
 		elseif element.super.gainFocus then
 			f19_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f19_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(BTNAcceptInviteToParty, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		LobbyQuickJoin(menu, self, self, controller, Enum[@"jointype"][@"join_type_friend"], true)
+	f1_arg0:AddButtonCallbackFunction(BTNAcceptInviteToParty, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f20_arg0, f20_arg1, f20_arg2, f20_arg3)
+		LobbyQuickJoin(f20_arg1, self, self, f20_arg2, Enum.jointype.join_type_friend, true)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+	end, function(f21_arg0, f21_arg1, f21_arg2)
+		CoD.Menu.SetButtonLabel(f21_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(BTNAcceptInviteToParty)

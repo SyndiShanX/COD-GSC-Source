@@ -1,7 +1,7 @@
-require("x64:3d3abfba105a95")
-require("x64:978e56ada3acd1c")
-require("x64:4565d12133afcc3")
-require("x64:d93d55bb6418607")
+require("ui/uieditor/widgets/pc/pc_achievement")
+require("ui/uieditor/widgets/pc/pc_achievements_totalpoints")
+require("ui/uieditor/widgets/pc_achievementdetailview")
+require("ui/uieditor/widgets/pc_vscrolllist")
 CoD.PC_Achievements = InheritFrom(LUI.UIElement)
 CoD.PC_Achievements.__defaultWidth = 1920
 CoD.PC_Achievements.__defaultHeight = 780
@@ -21,8 +21,8 @@ CoD.PC_Achievements.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	local Border = LUI.UIImage.new(0, 1, -72, 72, 0.5, 0.5, -360, 360)
 	Border:setRGB(0.8, 0.76, 0.7)
 	Border:setAlpha(0.03)
-	Border:setImage(RegisterImage(@"uie_highlight_border_line"))
-	Border:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
+	Border:setImage(RegisterImage("uie_highlight_border_line"))
+	Border:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_normal"))
 	Border:setShaderVector(0, 0, 0, 0, 0)
 	Border:setupNineSliceShader(6, 6)
 	self:addElement(Border)

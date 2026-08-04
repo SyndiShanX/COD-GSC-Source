@@ -1,4 +1,4 @@
-require("x64:ce3604433342b41")
+require("ui/uieditor/widgets/pc/sliderbar_barhandle_bardetail")
 CoD.SliderBar_BarHandle = InheritFrom(LUI.UIElement)
 CoD.SliderBar_BarHandle.__defaultWidth = 1
 CoD.SliderBar_BarHandle.__defaultHeight = 70

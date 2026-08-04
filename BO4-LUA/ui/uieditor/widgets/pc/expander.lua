@@ -1,6 +1,6 @@
-require("x64:dbf24db6ac58306")
-require("x64:b0810588c9ad0b8")
-require("x64:7f02a0c84ffbeac")
+require("ui/uieditor/widgets/pc/expandableoption_button")
+require("ui/uieditor/widgets/pc/startmenu/controlsoptions/pc_startmenu_options_controls_keybinder")
+require("ui/uieditor/widgets/pc/togglebutton")
 CoD.Expander = InheritFrom(LUI.UIElement)
 CoD.Expander.__defaultWidth = 750
 CoD.Expander.__defaultHeight = 695
@@ -19,7 +19,7 @@ CoD.Expander.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 	ElementList:setWidgetType(CoD.PC_StartMenu_Options_Controls_KeyBinder)
 	ElementList:setVerticalCount(9)
 	ElementList:setSpacing(10)
-	ElementList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ElementList:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	ElementList:linkToElementModel(self, "optionsDatasource", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

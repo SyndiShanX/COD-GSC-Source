@@ -1,6 +1,6 @@
-require("x64:2675595fa323085")
-require("x64:d03b459fa976316")
-require("x64:ec3aebbc4ad4b48")
+require("ui/uieditor/widgets/emptyfocusable")
+require("ui/uieditor/widgets/pc/dropdownlist_itemcontrol")
+require("ui/uieditor/widgets/pc/listitemnocategory")
 CoD.PC_StartMenu_Options_Controls_TabContent_DropDownPresetKeybindings = InheritFrom(LUI.UIElement)
 CoD.PC_StartMenu_Options_Controls_TabContent_DropDownPresetKeybindings.__defaultWidth = 750
 CoD.PC_StartMenu_Options_Controls_TabContent_DropDownPresetKeybindings.__defaultHeight = 65

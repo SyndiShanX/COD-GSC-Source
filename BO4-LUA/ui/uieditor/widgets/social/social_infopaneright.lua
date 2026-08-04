@@ -1,9 +1,9 @@
-require("x64:34cc6596da96a84")
-require("x64:4e00e02e26a9da7")
-require("x64:a9b9965f6f12714")
-require("x64:f0a581682449185")
-require("x64:d085ca092d117e3")
-require("x64:a9255c570c68aa8")
+require("ui/uieditor/widgets/social/social_infopane_dlcstatus")
+require("ui/uieditor/widgets/social/social_infopane_party")
+require("ui/uieditor/widgets/social/social_infopane_presence")
+require("ui/uieditor/widgets/social/social_infopane_presence_joinable")
+require("ui/uieditor/widgets/social/social_infopane_trial")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmainframe")
 CoD.Social_InfoPaneRight = InheritFrom(LUI.UIElement)
 CoD.Social_InfoPaneRight.__defaultWidth = 303
 CoD.Social_InfoPaneRight.__defaultHeight = 741

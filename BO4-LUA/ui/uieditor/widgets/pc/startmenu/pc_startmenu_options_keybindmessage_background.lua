@@ -1,4 +1,4 @@
-require("x64:dd2cd7ae31f0939")
+require("ui/uieditor/widgets/pc/startmenu/pc_startmenu_options_keybindmessage_toplinedeco")
 CoD.PC_StartMenu_Options_KeybindMessage_Background = InheritFrom(LUI.UIElement)
 CoD.PC_StartMenu_Options_KeybindMessage_Background.__defaultWidth = 1920
 CoD.PC_StartMenu_Options_KeybindMessage_Background.__defaultHeight = 68

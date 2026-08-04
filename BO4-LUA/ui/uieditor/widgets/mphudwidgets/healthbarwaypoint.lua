@@ -1,5 +1,5 @@
-require("x64:27411b1d207dbc8")
-require("x64:da622980c9a8593")
+require("ui/uieditor/widgets/mphudwidgets/waypointcenter")
+require("ui/uieditor/widgets/mphudwidgets/waypointprogressbar")
 CoD.HealthBarWaypoint = InheritFrom(LUI.UIElement)
 CoD.HealthBarWaypoint.__defaultWidth = 120
 CoD.HealthBarWaypoint.__defaultHeight = 180
@@ -113,7 +113,7 @@ CoD.HealthBarWaypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	end)
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	local f1_local7 = Engine.GetModelForController(f1_arg1)
 	f1_local6(f1_local5, f1_local7["interactivePrompt.activeObjectiveID"], function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -125,7 +125,7 @@ CoD.HealthBarWaypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	end, false)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local7 = Engine.GetModelForController(f1_arg1)
 	f1_local6(f1_local5, f1_local7["hudItems.hacked"], function(f15_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -197,50 +197,50 @@ CoD.HealthBarWaypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	end, false)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
-	f1_local6(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]], function(f21_arg0)
+	f1_local7 = Engine.GetModelForController(f1_arg1)
+	f1_local6(f1_local5, f1_local7["UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_spectating_client"]], function(f21_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f21_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"],
+			modelName = "UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_spectating_client"],
 		})
 	end, false)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
-	f1_local6(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f22_arg0)
+	f1_local7 = Engine.GetModelForController(f1_arg1)
+	f1_local6(f1_local5, f1_local7["UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_hud_visible"]], function(f22_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f22_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
+			modelName = "UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_hud_visible"],
 		})
 	end, false)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
-	f1_local6(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"]], function(f23_arg0)
+	f1_local7 = Engine.GetModelForController(f1_arg1)
+	f1_local6(f1_local5, f1_local7["UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_emp_active"]], function(f23_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f23_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"],
+			modelName = "UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_emp_active"],
 		})
 	end, false)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
-	f1_local6(f1_local5, f1_local7["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_selecting_locational_killstreak"]], function(f24_arg0)
+	f1_local7 = Engine.GetModelForController(f1_arg1)
+	f1_local6(f1_local5, f1_local7["UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_selecting_locational_killstreak"]], function(f24_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f24_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_selecting_locational_killstreak"],
+			modelName = "UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_selecting_locational_killstreak"],
 		})
 	end, false)
 	self:linkToElementModel(self, "icon", true, function(model)

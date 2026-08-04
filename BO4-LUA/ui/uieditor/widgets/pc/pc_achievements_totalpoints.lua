@@ -1,5 +1,5 @@
-require("x64:a7c4cf84718519f")
-require("x64:29187ea00d726c3")
+require("ui/uieditor/widgets/pc/pc_achievements_totalpoints_circularprogress")
+require("ui/uieditor/widgets/pc/utility/verticallistspacer")
 CoD.PC_Achievements_TotalPoints = InheritFrom(LUI.UIElement)
 CoD.PC_Achievements_TotalPoints.__defaultWidth = 339
 CoD.PC_Achievements_TotalPoints.__defaultHeight = 29
@@ -12,10 +12,10 @@ CoD.PC_Achievements_TotalPoints.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local TotalPoints = LUI.UIText.new(0.5, 0.5, 9.5, 169.5, 0.5, 0.5, -7, 12)
 	TotalPoints:setRGB(0.8, 0.8, 0.8)
 	TotalPoints:setAlpha(0.35)
-	TotalPoints:setText(LocalizeToUpperString(0xA3BAB954D979BB))
+	TotalPoints:setText(LocalizeToUpperString("achievements/totalpoints"))
 	TotalPoints:setTTF("ttmussels_regular")
 	TotalPoints:setLetterSpacing(6)
-	TotalPoints:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TotalPoints:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	self:addElement(TotalPoints)
 	self.TotalPoints = TotalPoints
 	local Spacer2 = CoD.VerticalListSpacer.new(f1_arg0, f1_arg1, 0, 0, 167, 172, 0.5, 0.5, -14.5, 14.5)
@@ -25,7 +25,7 @@ CoD.PC_Achievements_TotalPoints.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	CurrentProgressValue:setRGB(0.71, 0.68, 0.65)
 	CurrentProgressValue:setTTF("ttmussels_demibold")
 	CurrentProgressValue:setLetterSpacing(3)
-	CurrentProgressValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	CurrentProgressValue:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	CurrentProgressValue:subscribeToGlobalModel(f1_arg1, "PCTotalAchievementsScore", "score", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -38,14 +38,14 @@ CoD.PC_Achievements_TotalPoints.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	Slash:setRGB(0.69, 0.67, 0.62)
 	Slash:setText(CoD.BaseUtility.AlreadyLocalized("/"))
 	Slash:setTTF("ttmussels_regular")
-	Slash:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Slash:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	self:addElement(Slash)
 	self.Slash = Slash
 	local TotalProgressValue = LUI.UIText.new(0.5, 0.5, -133.5, -83.5, 0.5, 0.5, -11, 14)
 	TotalProgressValue:setRGB(0.69, 0.67, 0.62)
 	TotalProgressValue:setTTF("ttmussels_regular")
 	TotalProgressValue:setLetterSpacing(2)
-	TotalProgressValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	TotalProgressValue:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	TotalProgressValue:subscribeToGlobalModel(f1_arg1, "PCTotalAchievementsScore", "maxScore", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

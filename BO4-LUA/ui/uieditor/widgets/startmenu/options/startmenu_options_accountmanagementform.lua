@@ -1,5 +1,5 @@
-require("x64:1deecd602935a98")
-require("x64:75b68cdde53ec78")
+require("ui/uieditor/widgets/startmenu/startmenu_options_buttonoption")
+require("ui/uieditor/widgets/startmenu/startmenu_options_simplecheckoption")
 CoD.StartMenu_Options_AccountManagementForm = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Options_AccountManagementForm.__defaultWidth = 1920
 CoD.StartMenu_Options_AccountManagementForm.__defaultHeight = 1080
@@ -14,7 +14,7 @@ CoD.StartMenu_Options_AccountManagementForm.new = function(f1_arg0, f1_arg1, f1_
 	AccountOptions:setLeftRight(0.5, 0.5, -380, 380)
 	AccountOptions:setTopBottom(0, 0, 489, 549)
 	AccountOptions:setWidgetType(CoD.StartMenu_Options_SimpleCheckOption)
-	AccountOptions:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	AccountOptions:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
 	AccountOptions:setDataSource("CODAccountManagementOptions")
 	AccountOptions:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
@@ -23,14 +23,14 @@ CoD.StartMenu_Options_AccountManagementForm.new = function(f1_arg0, f1_arg1, f1_
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(AccountOptions, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
-		ProcessListAction(self, element, controller, menu)
+	f1_arg0:AddButtonCallbackFunction(AccountOptions, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], nil, function(f3_arg0, f3_arg1, f3_arg2, f3_arg3)
+		ProcessListAction(self, f3_arg0, f3_arg2, f3_arg1)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
+	end, function(f4_arg0, f4_arg1, f4_arg2)
+		CoD.Menu.SetButtonLabel(f4_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, nil)
 		return false
 	end, false)
 	self:addElement(AccountOptions)
@@ -39,7 +39,7 @@ CoD.StartMenu_Options_AccountManagementForm.new = function(f1_arg0, f1_arg1, f1_
 	AccountButtonOptionsList:setLeftRight(0.5, 0.5, -380, 380)
 	AccountButtonOptionsList:setTopBottom(0, 0, 549, 609)
 	AccountButtonOptionsList:setWidgetType(CoD.StartMenu_Options_ButtonOption)
-	AccountButtonOptionsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	AccountButtonOptionsList:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
 	AccountButtonOptionsList:setDataSource("CODAccountManagementConfirmation")
 	AccountButtonOptionsList:registerEventHandler("gain_focus", function(element, event)
 		local f5_local0 = nil
@@ -48,39 +48,39 @@ CoD.StartMenu_Options_AccountManagementForm.new = function(f1_arg0, f1_arg1, f1_
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(AccountButtonOptionsList, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
-		ProcessListAction(self, element, controller, menu)
+	f1_arg0:AddButtonCallbackFunction(AccountButtonOptionsList, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], nil, function(f6_arg0, f6_arg1, f6_arg2, f6_arg3)
+		ProcessListAction(self, f6_arg0, f6_arg2, f6_arg1)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
+	end, function(f7_arg0, f7_arg1, f7_arg2)
+		CoD.Menu.SetButtonLabel(f7_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, nil)
 		return false
 	end, false)
 	self:addElement(AccountButtonOptionsList)
 	self.AccountButtonOptionsList = AccountButtonOptionsList
 	local Title = LUI.UIText.new(0.5, 0.5, -362.5, 362.5, 0, 0, 210.5, 264.5)
 	Title:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
-	Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_630BC41F2404F851"))
+	Title:setText(Engine[@"hash_4F9F1239CFD921FE"]("menu/cod_account_caps"))
 	Title:setTTF("ttmussels_regular")
-	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	Title:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	Title:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(Title)
 	self.Title = Title
 	local Body = LUI.UIText.new(0.5, 0.5, -362.5, 362.5, 0, 0, 296.5, 320.5)
 	Body:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Body:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7FDF4DE037465FD4"))
 	Body:setTTF("dinnext_regular")
-	Body:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	Body:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	Body:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	Body:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(Body)
 	self.Body = Body
 	local DescriptionText = LUI.UIText.new(0.5, 0.5, 392, 849, 0, 0, 210.5, 234.5)
 	DescriptionText:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	DescriptionText:setTTF("dinnext_regular")
-	DescriptionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	DescriptionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	DescriptionText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	DescriptionText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	DescriptionText:subscribeToGlobalModel(f1_arg1, "CODAccountManagementForm", "hintText", function(model)
 		local f8_local0 = model:get()
 		if f8_local0 ~= nil then

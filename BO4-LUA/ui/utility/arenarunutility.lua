@@ -1,6 +1,6 @@
 CoD.ArenaRunUtility = {}
 CoD.ArenaRunUtility.GetCurrentBestRun = function(f1_arg0)
-	local f1_local0 = Engine[@"storagegetbuffer"](f1_arg0, Enum[@"storagefiletype"][@"hash_5D5A7695E03A7A90"])
+	local f1_local0 = Engine.StorageGetBuffer(f1_arg0, Enum.StorageFileType[@"hash_5D5A7695E03A7A90"])
 	if f1_local0 then
 		return f1_local0.arenaStats[Enum[@"hash_6C0EA92D04BC003B"][@"hash_33603CAC0849A965"]].arenaRunStats.bestRun
 	else
@@ -8,7 +8,7 @@ CoD.ArenaRunUtility.GetCurrentBestRun = function(f1_arg0)
 	end
 end
 CoD.ArenaRunUtility.GetCurrentBestPerfectRun = function(f2_arg0)
-	local f2_local0 = Engine[@"storagegetbuffer"](f2_arg0, Enum[@"storagefiletype"][@"hash_5D5A7695E03A7A90"])
+	local f2_local0 = Engine.StorageGetBuffer(f2_arg0, Enum.StorageFileType[@"hash_5D5A7695E03A7A90"])
 	if f2_local0 then
 		return f2_local0.arenaStats[Enum[@"hash_6C0EA92D04BC003B"][@"hash_33603CAC0849A965"]].arenaRunStats.bestPerfectRun
 	else
@@ -31,7 +31,7 @@ CoD.ArenaRunUtility.PopulateArenaStats = function(f5_arg0, f5_arg1, f5_arg2, f5_
 end
 DataSources.ArenaRunStats = {
 	getModel = function(f6_arg0)
-		local f6_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "Arena")
+		local f6_local0 = Engine.CreateModel(Engine.GetGlobalModel(), "Arena")
 		local f6_local1 = f6_local0:create("arenaRunStats")
 		local f6_local2 = f6_local1:create("wins")
 		f6_local2:set(CoD.ArenaRunUtility.GetCurrentWins(f6_arg0))

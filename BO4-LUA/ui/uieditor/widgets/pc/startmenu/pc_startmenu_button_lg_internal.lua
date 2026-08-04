@@ -1,8 +1,8 @@
-require("x64:eeba57f916954d1")
-require("x64:5f8cf56752aa71b")
-require("x64:b9ad3e1e7c33125")
-require("x64:31a49b4e793f7de")
-require("x64:19c1945d2e472b0")
+require("ui/uieditor/widgets/cac/cac_lock")
+require("ui/uieditor/widgets/commonbuttonoutline")
+require("ui/uieditor/widgets/startmenu/startmenu_identity_subtitle")
+require("ui/uieditor/widgets/startmenu/startmenu_imagecontainer")
+require("ui/uieditor/widgets/store/storecommontextbacking")
 CoD.PC_StartMenu_Button_LG_Internal = InheritFrom(LUI.UIElement)
 CoD.PC_StartMenu_Button_LG_Internal.__defaultWidth = 420
 CoD.PC_StartMenu_Button_LG_Internal.__defaultHeight = 117
@@ -22,7 +22,7 @@ CoD.PC_StartMenu_Button_LG_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.Background = Background
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0.5)
-	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
@@ -30,7 +30,7 @@ CoD.PC_StartMenu_Button_LG_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.NoiseTiledBacking = NoiseTiledBacking
 	local NoiseTiledBackingAdd = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBackingAdd:setAlpha(0.2)
-	NoiseTiledBackingAdd:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBackingAdd:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	NoiseTiledBackingAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	NoiseTiledBackingAdd:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBackingAdd:setupNineSliceShader(196, 88)
@@ -56,7 +56,7 @@ CoD.PC_StartMenu_Button_LG_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.DotTiledBacking = DotTiledBacking
 	local TitleBgTexture = LUI.UIImage.new(0, 1, 0, 0, 0.5, 0.5, -26.5, 22.5)
 	TitleBgTexture:setAlpha(0.5)
-	TitleBgTexture:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TitleBgTexture:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	TitleBgTexture:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TitleBgTexture:setShaderVector(0, 0, 0, 0, 0)
 	TitleBgTexture:setupNineSliceShader(196, 88)
@@ -77,7 +77,7 @@ CoD.PC_StartMenu_Button_LG_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	ButtonStateText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/online_only"))
 	ButtonStateText:setTTF("ttmussels_regular")
 	ButtonStateText:setLetterSpacing(4)
-	ButtonStateText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	ButtonStateText:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
 	self:addElement(ButtonStateText)
 	self.ButtonStateText = ButtonStateText
 	local NameEntryBG = LUI.UIImage.new(0.5, 0.5, -82.5, 82.5, 0.5, 0.5, -17, 33)
@@ -88,24 +88,24 @@ CoD.PC_StartMenu_Button_LG_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	local NameEntryBorder = LUI.UIImage.new(0.5, 0.5, -82.5, 82.5, 0.5, 0.5, -17, 33)
 	NameEntryBorder:setRGB(0.57, 0.57, 0.57)
 	NameEntryBorder:setAlpha(0)
-	NameEntryBorder:setImage(RegisterImage(@"uie_highlight_border_line"))
-	NameEntryBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
+	NameEntryBorder:setImage(RegisterImage("uie_highlight_border_line"))
+	NameEntryBorder:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_normal"))
 	NameEntryBorder:setShaderVector(0, 0, 0, 0, 0)
 	NameEntryBorder:setupNineSliceShader(6, 6)
 	self:addElement(NameEntryBorder)
 	self.NameEntryBorder = NameEntryBorder
 	local NameEntrySelected = LUI.UIImage.new(0.5, 0.5, -82.5, 82.5, 0.5, 0.5, -19, 35)
 	NameEntrySelected:setAlpha(0)
-	NameEntrySelected:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
-	NameEntrySelected:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
+	NameEntrySelected:setImage(RegisterImage("uie_ui_menu_store_focus_frame"))
+	NameEntrySelected:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_add"))
 	NameEntrySelected:setShaderVector(0, 0, 0, 0, 0)
 	NameEntrySelected:setupNineSliceShader(6, 6)
 	self:addElement(NameEntrySelected)
 	self.NameEntrySelected = NameEntrySelected
 	local ClanText = LUI.UIText.new(0.5, 0.5, -79, 79, 0.5, 0.5, -21, 33)
 	ClanText:setTTF("notosans_regular")
-	ClanText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	ClanText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	ClanText:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	ClanText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	ClanText:subscribeToGlobalModel(f1_arg1, "PerController", "identityBadge.clantag", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -118,7 +118,7 @@ CoD.PC_StartMenu_Button_LG_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	TextBox:setAlpha(0)
 	TextBox:setText("")
 	TextBox:setTTF("notosans_regular")
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	local BracketL = LUI.UIFixedAspectRatioImage.new(0.5, 0.5, -130, -30, 0.5, 0.5, -42, 58)
@@ -151,7 +151,7 @@ CoD.PC_StartMenu_Button_LG_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.BracketR2 = BracketR2
 	local ButtonTitle = CoD.StartMenu_Identity_SubTitle.new(f1_arg0, f1_arg1, 0, 1, 6, -6, 0, 0, 0.5, 39.5)
 	ButtonTitle:setRGB(0.92, 0.92, 0.92)
-	ButtonTitle.SubtitleText:setText(LocalizeToUpperString(@"hash_87AD82563AAAC53"))
+	ButtonTitle.SubtitleText:setText(LocalizeToUpperString("menu/clan_name"))
 	self:addElement(ButtonTitle)
 	self.ButtonTitle = ButtonTitle
 	local ButtonOutline = CoD.CommonButtonOutline.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)

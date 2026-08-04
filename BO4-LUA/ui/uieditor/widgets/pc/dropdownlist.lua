@@ -1,6 +1,6 @@
-require("x64:2675595fa323085")
-require("x64:d03b459fa976316")
-require("x64:1ba14a6a952408f")
+require("ui/uieditor/widgets/emptyfocusable")
+require("ui/uieditor/widgets/pc/dropdownlist_itemcontrol")
+require("ui/uieditor/widgets/pc/startmenu/listitem")
 CoD.DropDownList = InheritFrom(LUI.UIElement)
 CoD.DropDownList.__defaultWidth = 810
 CoD.DropDownList.__defaultHeight = 65
@@ -43,7 +43,7 @@ CoD.DropDownList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self.ListItem = ListItem
 	local emptyFocusable = CoD.emptyFocusable.new(f1_arg0, f1_arg1, 0, 1, 40, 0, 0, 1, 0, 0)
 	emptyFocusable:linkToElementModel(emptyFocusable, "refreshWidget", true, function(model, f6_arg1)
-		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f6_arg1, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_none"])
 	end)
 	emptyFocusable:registerEventHandler("gain_focus", function(element, event)
 		local f7_local0 = nil
@@ -52,18 +52,18 @@ CoD.DropDownList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_none"])
 		return f7_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(emptyFocusable, f1_arg1, Enum[@"luibutton"][@"lui_key_none"], "ui_confirm", function(element, menu, controller, model)
-		if not CoD.PCUtility.IsUnavailable(self, controller) then
-			CoD.PCWidgetUtility.CreateDropdown(self, self.DropdownList, controller, menu, "DropDown_ItemList")
+	f1_arg0:AddButtonCallbackFunction(emptyFocusable, f1_arg1, Enum.LUIButton[@"lui_key_none"], "ui_confirm", function(f8_arg0, f8_arg1, f8_arg2, f8_arg3)
+		if not CoD.PCUtility.IsUnavailable(self, f8_arg2) then
+			CoD.PCWidgetUtility.CreateDropdown(self, self.DropdownList, f8_arg2, f8_arg1, "DropDown_ItemList")
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if not CoD.PCUtility.IsUnavailable(self, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_confirm")
+	end, function(f9_arg0, f9_arg1, f9_arg2)
+		if not CoD.PCUtility.IsUnavailable(self, f9_arg2) then
+			CoD.Menu.SetButtonLabel(f9_arg1, Enum.LUIButton[@"lui_key_none"], 0x0, nil, "ui_confirm")
 			return false
 		else
 			return false

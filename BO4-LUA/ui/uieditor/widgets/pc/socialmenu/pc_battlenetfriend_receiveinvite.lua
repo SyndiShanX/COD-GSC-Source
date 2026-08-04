@@ -1,5 +1,5 @@
-require("x64:959425edb586236")
-require("x64:b0e533b6e349f33")
+require("ui/uieditor/widgets/pc/socialmenu/pcsocialmenu_playerlistitem_playerinfos_acceptinvitebutton")
+require("ui/uieditor/widgets/pc/socialmenu/pcsocialmenu_playerlistitem_playerinfos_removebutton")
 CoD.PC_BattlenetFriend_ReceiveInvite = InheritFrom(LUI.UIElement)
 CoD.PC_BattlenetFriend_ReceiveInvite.__defaultWidth = 400
 CoD.PC_BattlenetFriend_ReceiveInvite.__defaultHeight = 60
@@ -13,14 +13,14 @@ CoD.PC_BattlenetFriend_ReceiveInvite.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	local IMG_Background = LUI.UIImage.new(0.03, 1, 0, 0, 0, 1, 0, 0)
 	IMG_Background:setRGB(0.07, 0.07, 0.07)
 	IMG_Background:setAlpha(0)
-	IMG_Background:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	IMG_Background:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(IMG_Background)
 	self.IMG_Background = IMG_Background
 	local TXTPlayerTag = LUI.UIText.new(0.23, 0.23, 0, 233, 0, 0, 6, 27)
 	TXTPlayerTag:setRGB(ColorSet.EnemyOrange_Protanopia.r, ColorSet.EnemyOrange_Protanopia.g, ColorSet.EnemyOrange_Protanopia.b)
 	TXTPlayerTag:setTTF("notosans_light")
-	TXTPlayerTag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	TXTPlayerTag:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
+	TXTPlayerTag:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	TXTPlayerTag:setAlignment(Enum.LUIAlignment[@"hash_E821F0ECFF8D1C7"])
 	TXTPlayerTag:linkToElementModel(self, "identityBadge.gamertag", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -37,15 +37,15 @@ CoD.PC_BattlenetFriend_ReceiveInvite.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(BTN_Accept, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		CoD.PCUtility.AcceptFriendRequest(self, controller)
-		CoD.PCNotificationsUtility.HideNotificationWidget(controller)
+	f1_arg0:AddButtonCallbackFunction(BTN_Accept, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f4_arg0, f4_arg1, f4_arg2, f4_arg3)
+		CoD.PCUtility.AcceptFriendRequest(self, f4_arg2)
+		CoD.PCNotificationsUtility.HideNotificationWidget(f4_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+	end, function(f5_arg0, f5_arg1, f5_arg2)
+		CoD.Menu.SetButtonLabel(f5_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(BTN_Accept)
@@ -58,21 +58,21 @@ CoD.PC_BattlenetFriend_ReceiveInvite.new = function(f1_arg0, f1_arg1, f1_arg2, f
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(BTN_Remove, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		CoD.PCUtility.IgnoreFriendRequest(self, controller)
-		CoD.PCNotificationsUtility.HideNotificationWidget(controller)
+	f1_arg0:AddButtonCallbackFunction(BTN_Remove, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f7_arg0, f7_arg1, f7_arg2, f7_arg3)
+		CoD.PCUtility.IgnoreFriendRequest(self, f7_arg2)
+		CoD.PCNotificationsUtility.HideNotificationWidget(f7_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+	end, function(f8_arg0, f8_arg1, f8_arg2)
+		CoD.Menu.SetButtonLabel(f8_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(BTN_Remove)
 	self.BTN_Remove = BTN_Remove
 	local ProgramImage = LUI.UIImage.new(0.11, 0.11, 0, 40, 0.5, 0.5, -22, 18)
-	ProgramImage:setImage(RegisterImage(@"uie_social_friendlist_offline_icon"))
+	ProgramImage:setImage(RegisterImage("uie_social_friendlist_offline_icon"))
 	self:addElement(ProgramImage)
 	self.ProgramImage = ProgramImage
 	BTN_Accept.id = "BTN_Accept"

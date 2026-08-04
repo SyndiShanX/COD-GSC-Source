@@ -1,7 +1,7 @@
-require("x64:d7e092479c7b82c")
-require("x64:55aca670e9903a3")
-require("x64:a9255c570c68aa8")
-require("x64:a1e2d7b19f5deb0")
+require("ui/uieditor/widgets/border")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmaincorners")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmainframe")
+require("ui/uieditor/widgets/startmenu/startmenu_frame_nobg")
 CoD.StartMenu_Options_SimpleCheckOption = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Options_SimpleCheckOption.__defaultWidth = 760
 CoD.StartMenu_Options_SimpleCheckOption.__defaultHeight = 60
@@ -30,13 +30,13 @@ CoD.StartMenu_Options_SimpleCheckOption.new = function(f1_arg0, f1_arg1, f1_arg2
 	self.checkboxBacking = checkboxBacking
 	local Dash = LUI.UIImage.new(0, 0, 18.5, 42.5, 0, 0, 18, 42)
 	Dash:setScale(1.5, 1.5)
-	Dash:setImage(RegisterImage(@"uie_ui_menu_cac_allocation_pip_full"))
+	Dash:setImage(RegisterImage("uie_ui_menu_cac_allocation_pip_full"))
 	self:addElement(Dash)
 	self.Dash = Dash
 	local LabelText = LUI.UIText.new(0, 0.89, 70, 70, 0.5, 0.5, -10.5, 10.5)
 	LabelText:setRGB(0.78, 0.74, 0.67)
 	LabelText:setTTF("ttmussels_regular")
-	LabelText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	LabelText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	LabelText:linkToElementModel(self, "displayText", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -56,26 +56,26 @@ CoD.StartMenu_Options_SimpleCheckOption.new = function(f1_arg0, f1_arg1, f1_arg2
 	self.BorderAdd = BorderAdd
 	local Empty = LUI.UIImage.new(0, 0, 11.5, 46.5, 0, 0, 12.5, 47.5)
 	Empty:setScale(0.67, 0.67)
-	Empty:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_selectbox_empty"))
-	Empty:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	Empty:setImage(RegisterImage("uie_ui_menu_specialist_hub_selectbox_empty"))
+	Empty:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(Empty)
 	self.Empty = Empty
 	local DashBacking = LUI.UIImage.new(0, 0, 17, 41, 0, 0, 18, 42)
 	DashBacking:setScale(1.5, 1.5)
-	DashBacking:setImage(RegisterImage(@"uie_ui_menu_cac_allocation_pip_empty"))
+	DashBacking:setImage(RegisterImage("uie_ui_menu_cac_allocation_pip_empty"))
 	self:addElement(DashBacking)
 	self.DashBacking = DashBacking
 	local CornerDots = LUI.UIImage.new(0, 0, 14.5, 43.5, 0, 0, 15.5, 44.5)
 	CornerDots:setAlpha(0)
 	CornerDots:setScale(1.5, 1.5)
-	CornerDots:setImage(RegisterImage(@"uie_ui_menu_cac_allocation_pip_dots"))
+	CornerDots:setImage(RegisterImage("uie_ui_menu_cac_allocation_pip_dots"))
 	self:addElement(CornerDots)
 	self.CornerDots = CornerDots
 	local Glow = LUI.UIImage.new(0, 0.06, 8, 8, 0, 0, -6.5, 66.5)
 	Glow:setRGB(0.88, 0.8, 0.45)
 	Glow:setAlpha(0)
-	Glow:setImage(RegisterImage(@"uie_t7_menu_cac_glow"))
-	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	Glow:setImage(RegisterImage("uie_t7_menu_cac_glow"))
+	Glow:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(Glow)
 	self.Glow = Glow
 	self:mergeStateConditions({

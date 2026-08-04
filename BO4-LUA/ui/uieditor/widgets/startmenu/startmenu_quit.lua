@@ -1,4 +1,4 @@
-require("x64:9bfecaffe48d881")
+require("ui/uieditor/widgets/startmenu/startmenu_quitbutton")
 CoD.StartMenu_Quit = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Quit.__defaultWidth = 1920
 CoD.StartMenu_Quit.__defaultHeight = 1080
@@ -21,13 +21,13 @@ CoD.StartMenu_Quit.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	local QuitButton = CoD.StartMenu_QuitButton.new(f1_arg0, f1_arg1, 1, 1, -283, -33, 1, 1, -186, -94)
 	QuitButton:appendEventHandler("input_source_changed", function(f2_arg0, f2_arg1)
 		f2_arg1.menu = f2_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f2_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f2_arg0, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 	end)
 	local f1_local4 = QuitButton
 	local f1_local5 = QuitButton.subscribeToModel
-	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
+	local f1_local6 = Engine.GetModelForController(f1_arg1)
 	f1_local5(f1_local4, f1_local6.LastInput, function(f3_arg0, f3_arg1)
-		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f3_arg1, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 	end, false)
 	QuitButton:registerEventHandler("gain_focus", function(element, event)
 		local f4_local0 = nil
@@ -36,32 +36,32 @@ CoD.StartMenu_Quit.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		elseif element.super.gainFocus then
 			f4_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f4_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(QuitButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
-		if IsMouseOrKeyboard(controller) and IsPC() and not CoD.BaseUtility.IsButtonHoldFinished(model) then
-			QuitPCGame_MP(self, controller, true)
+	f1_arg0:AddButtonCallbackFunction(QuitButton, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "MOUSE1", function(f5_arg0, f5_arg1, f5_arg2, f5_arg3)
+		if IsMouseOrKeyboard(f5_arg2) and IsPC() and not CoD.BaseUtility.IsButtonHoldFinished(f5_arg3) then
+			QuitPCGame_MP(self, f5_arg2, true)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if IsMouseOrKeyboard(controller) and IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 1500 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], "MOUSE1")
+	end, function(f6_arg0, f6_arg1, f6_arg2)
+		if IsMouseOrKeyboard(f6_arg2) and IsPC() then
+			CoD.Menu.SetButtonLabel(f6_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 1500 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], "MOUSE1")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(QuitButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
-		if IsGamepad(controller) and CoD.BaseUtility.IsButtonHoldFinished(model) then
-			CoD.StartMenuUtility.QuitGameWZ(self, element, controller, "", menu)
+	f1_arg0:AddButtonCallbackFunction(QuitButton, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], nil, function(f7_arg0, f7_arg1, f7_arg2, f7_arg3)
+		if IsGamepad(f7_arg2) and CoD.BaseUtility.IsButtonHoldFinished(f7_arg3) then
+			CoD.StartMenuUtility.QuitGameWZ(self, f7_arg0, f7_arg2, "", f7_arg1)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 1500 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
+	end, function(f8_arg0, f8_arg1, f8_arg2)
+		if IsGamepad(f8_arg2) then
+			CoD.Menu.SetButtonLabel(f8_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], @"menu/select", Enum[@"luibuttonpromptflags"][@"hash_771B04FAC5BE0E35"] | 1500 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return true
 		else
 			return false
@@ -85,7 +85,7 @@ CoD.StartMenu_Quit.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	})
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local6 = Engine.GetModelForController(f1_arg1)
 	f1_local5(f1_local4, f1_local6["factions.isCoDCaster"], function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -97,7 +97,7 @@ CoD.StartMenu_Quit.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	end, false)
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[@"getglobalmodel"]()
+	f1_local6 = Engine.GetGlobalModel()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.lobbyNav"], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

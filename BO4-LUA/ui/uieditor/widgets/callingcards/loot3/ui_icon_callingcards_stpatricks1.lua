@@ -1,4 +1,4 @@
-require("x64:b7079cabff5b7aa")
+require("ui/uieditor/widgets/callingcards/loot3/ui_icon_callingcards_stpatricks_speedlines")
 CoD.ui_icon_callingcards_stpatricks1 = InheritFrom(LUI.UIElement)
 CoD.ui_icon_callingcards_stpatricks1.__defaultWidth = 960
 CoD.ui_icon_callingcards_stpatricks1.__defaultHeight = 240
@@ -10,11 +10,11 @@ CoD.ui_icon_callingcards_stpatricks1.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(@"uie_ui_menu_callingcards_stpatricks_f1_bg"))
+	bg:setImage(RegisterImage("uie_ui_menu_callingcards_stpatricks_f1_bg"))
 	self:addElement(bg)
 	self.bg = bg
 	local clouds = LUI.UIImage.new(0, 0, -168.5, 1061.5, 0, 0, -148, 364)
-	clouds:setImage(RegisterImage(@"uie_ui_menu_callingcards_stpatricks_f1_clouds"))
+	clouds:setImage(RegisterImage("uie_ui_menu_callingcards_stpatricks_f1_clouds"))
 	self:addElement(clouds)
 	self.clouds = clouds
 	local speedlines = CoD.ui_icon_callingcards_stpatricks_speedlines.new(f1_arg0, f1_arg1, 0, 0, -135, 1095, 0, 0, -265.5, 462.5)
@@ -22,7 +22,7 @@ CoD.ui_icon_callingcards_stpatricks1.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.speedlines = speedlines
 	local ruin = LUI.UIImage.new(0, 0, 358, 566, 0, 0, 8, 232)
 	ruin:setScale(0.5, 0.5)
-	ruin:setImage(RegisterImage(@"uie_ui_menu_callingcards_stpatricks_f1_ruin"))
+	ruin:setImage(RegisterImage("uie_ui_menu_callingcards_stpatricks_f1_ruin"))
 	self:addElement(ruin)
 	self.ruin = ruin
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

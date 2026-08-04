@@ -1,4 +1,4 @@
-require("x64:64780253f98a740")
+require("ui/uieditor/widgets/startgameflow/loadingscreensharedcpzm")
 CoD.Loading_CP = InheritFrom(CoD.Menu)
 LUI.createMenu.Loading_CP = function(f1_arg0, f1_arg1)
 	local self = CoD.Menu.NewForUIEditor("Loading_CP", f1_arg0)
@@ -15,19 +15,19 @@ LUI.createMenu.Loading_CP = function(f1_arg0, f1_arg1)
 	local LoadingScreenSharedCPZM = CoD.LoadingScreenSharedCPZM.new(f1_local1, f1_arg0, 0, 0, 0, 1920, 0, 0, 0, 1080)
 	self:addElement(LoadingScreenSharedCPZM)
 	self.LoadingScreenSharedCPZM = LoadingScreenSharedCPZM
-	self:registerEventHandler("loading_startplay", function(self, event)
+	self:registerEventHandler("loading_startplay", function(element, event)
 		local f2_local0 = nil
-		CoD.HUDUtility.StartPlay(self, f1_arg0)
+		CoD.HUDUtility.StartPlay(element, f1_arg0)
 		if not f2_local0 then
-			f2_local0 = self:dispatchEventToChildren(event)
+			f2_local0 = element:dispatchEventToChildren(event)
 		end
 		return f2_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ESCAPE", function(element, menu, controller, model)
-		CoD.HUDUtility.StartPlay(element, controller)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ESCAPE", function(f3_arg0, f3_arg1, f3_arg2, f3_arg3)
+		CoD.HUDUtility.StartPlay(f3_arg0, f3_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ESCAPE")
+	end, function(f4_arg0, f4_arg1, f4_arg2)
+		CoD.Menu.SetButtonLabel(f4_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ESCAPE")
 		return false
 	end, false)
 	LoadingScreenSharedCPZM.id = "LoadingScreenSharedCPZM"

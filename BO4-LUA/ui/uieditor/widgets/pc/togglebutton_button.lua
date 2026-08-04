@@ -1,5 +1,5 @@
-require("x64:b79410dc8d1ea84")
-require("x64:2b92e102c99da61")
+require("ui/uieditor/widgets/pc/startmenu/pc_highlightborder")
+require("ui/uieditor/widgets/pc/startmenu/pc_startmenu_options_pagination")
 CoD.ToggleButton_Button = InheritFrom(LUI.UIElement)
 CoD.ToggleButton_Button.__defaultWidth = 167
 CoD.ToggleButton_Button.__defaultHeight = 70
@@ -15,8 +15,8 @@ CoD.ToggleButton_Button.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	On:setText(LocalizeToUpperString(@"hash_439156E8D96D245"))
 	On:setTTF("ttmussels_regular")
 	On:setLetterSpacing(2)
-	On:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	On:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
+	On:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	On:setAlignment(Enum.LUIAlignment[@"lui_alignment_middle"])
 	self:addElement(On)
 	self.On = On
 	local PCHighlightBorder = CoD.PC_HighlightBorder.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)

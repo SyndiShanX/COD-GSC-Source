@@ -1,4 +1,4 @@
-require("x64:dbb04b55fa27ac6")
+require("ui/uieditor/widgets/cac/newbreadcrumbcount")
 CoD.DirectorSelectTextTab = InheritFrom(LUI.UIElement)
 CoD.DirectorSelectTextTab.__defaultWidth = 234
 CoD.DirectorSelectTextTab.__defaultHeight = 34
@@ -11,14 +11,14 @@ CoD.DirectorSelectTextTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ZMTabBackingGlowRed = LUI.UIImage.new(0, 1, -111, 111, 0, 1, -111, 111)
 	ZMTabBackingGlowRed:setAlpha(0)
-	ZMTabBackingGlowRed:setImage(RegisterImage(@"uie_ui_menu_common_tab_glowred"))
+	ZMTabBackingGlowRed:setImage(RegisterImage("uie_ui_menu_common_tab_glowred"))
 	ZMTabBackingGlowRed:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	ZMTabBackingGlowRed:setShaderVector(0, 1.36, 0, 0, 0)
 	self:addElement(ZMTabBackingGlowRed)
 	self.ZMTabBackingGlowRed = ZMTabBackingGlowRed
 	local ZMTabBackingRed = LUI.UIImage.new(0, 1, -67, 67, 0, 1, -32, 32)
 	ZMTabBackingRed:setAlpha(0)
-	ZMTabBackingRed:setImage(RegisterImage(@"uie_ui_menu_common_tab_backing_red"))
+	ZMTabBackingRed:setImage(RegisterImage("uie_ui_menu_common_tab_backing_red"))
 	ZMTabBackingRed:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	ZMTabBackingRed:setShaderVector(0, 0.9, 0, 0, 0)
 	self:addElement(ZMTabBackingRed)
@@ -33,8 +33,8 @@ CoD.DirectorSelectTextTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	ZMTextFocus:setAlpha(0)
 	ZMTextFocus:setTTF("notosans_regular")
 	ZMTextFocus:setLetterSpacing(3)
-	ZMTextFocus:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	ZMTextFocus:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
+	ZMTextFocus:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	ZMTextFocus:setAlignment(Enum.LUIAlignment[@"hash_E821F0ECFF8D1C7"])
 	ZMTextFocus:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -48,8 +48,8 @@ CoD.DirectorSelectTextTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	ZMText:setAlpha(0)
 	ZMText:setTTF("notosans_regular")
 	ZMText:setLetterSpacing(3)
-	ZMText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	ZMText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	ZMText:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	ZMText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	ZMText:linkToElementModel(self, "name", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -60,24 +60,24 @@ CoD.DirectorSelectTextTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.ZMText = ZMText
 	local ZMTabEndRight = LUI.UIImage.new(1, 1, -8, 0, 0, 0, 0, 35)
 	ZMTabEndRight:setAlpha(0)
-	ZMTabEndRight:setImage(RegisterImage(@"uie_ui_menu_common_tab_end_right"))
+	ZMTabEndRight:setImage(RegisterImage("uie_ui_menu_common_tab_end_right"))
 	self:addElement(ZMTabEndRight)
 	self.ZMTabEndRight = ZMTabEndRight
 	local ZMTabEndLeft = LUI.UIImage.new(0, 0, 0, 8, 0, 0, 0, 35)
 	ZMTabEndLeft:setAlpha(0)
-	ZMTabEndLeft:setImage(RegisterImage(@"uie_ui_menu_common_tab_end_left"))
+	ZMTabEndLeft:setImage(RegisterImage("uie_ui_menu_common_tab_end_left"))
 	self:addElement(ZMTabEndLeft)
 	self.ZMTabEndLeft = ZMTabEndLeft
 	local TabBackingGlow = LUI.UIImage.new(0, 1, -117, 117, 0, 1, -111, 111)
 	TabBackingGlow:setAlpha(0)
-	TabBackingGlow:setImage(RegisterImage(@"uie_ui_menu_common_tab_glow"))
+	TabBackingGlow:setImage(RegisterImage("uie_ui_menu_common_tab_glow"))
 	TabBackingGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	TabBackingGlow:setShaderVector(0, 1.36, 0, 0, 0)
 	self:addElement(TabBackingGlow)
 	self.TabBackingGlow = TabBackingGlow
 	local TabBacking = LUI.UIImage.new(0, 1, -66, 66, 0, 1, -30, 30)
 	TabBacking:setAlpha(0)
-	TabBacking:setImage(RegisterImage(@"uie_ui_menu_common_tab_backing"))
+	TabBacking:setImage(RegisterImage("uie_ui_menu_common_tab_backing"))
 	TabBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	TabBacking:setShaderVector(0, 0.9, 0, 0, 0)
 	self:addElement(TabBacking)
@@ -87,8 +87,8 @@ CoD.DirectorSelectTextTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	TabTitle:setAlpha(0)
 	TabTitle:setTTF("ttmussels_regular")
 	TabTitle:setLetterSpacing(3)
-	TabTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	TabTitle:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
+	TabTitle:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	TabTitle:setAlignment(Enum.LUIAlignment[@"hash_E821F0ECFF8D1C7"])
 	TabTitle:linkToElementModel(self, "name", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -103,14 +103,14 @@ CoD.DirectorSelectTextTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	TabTitleFocus:setTTF("ttmussels_demibold")
 	TabTitleFocus:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	TabTitleFocus:setLetterSpacing(3)
-	TabTitleFocus:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	TabTitleFocus:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
+	TabTitleFocus:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	TabTitleFocus:setAlignment(Enum.LUIAlignment[@"hash_E821F0ECFF8D1C7"])
 	TabTitleFocus:setBackingType(2)
 	TabTitleFocus:setBackingColor(0.8, 0.32, 0.08)
 	TabTitleFocus:setBackingAlpha(0)
 	TabTitleFocus:setBackingXPadding(50)
 	TabTitleFocus:setBackingYPadding(7)
-	TabTitleFocus:setBackingImage(RegisterImage(@"uie_circularglow"))
+	TabTitleFocus:setBackingImage(RegisterImage("uie_circularglow"))
 	TabTitleFocus:setBackingMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	TabTitleFocus:setBackingShaderVector(0, 1.5, 0, 0, 0)
 	TabTitleFocus:linkToElementModel(self, "name", true, function(model)
@@ -123,12 +123,12 @@ CoD.DirectorSelectTextTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.TabTitleFocus = TabTitleFocus
 	local TabEndLeft = LUI.UIImage.new(0, 0, 9, 17, 0, 0, 0, 35)
 	TabEndLeft:setAlpha(0)
-	TabEndLeft:setImage(RegisterImage(@"uie_ui_menu_common_tab_end_left"))
+	TabEndLeft:setImage(RegisterImage("uie_ui_menu_common_tab_end_left"))
 	self:addElement(TabEndLeft)
 	self.TabEndLeft = TabEndLeft
 	local TabEndRight = LUI.UIImage.new(0, 0, 217, 225, 0, 0, 0, 35)
 	TabEndRight:setAlpha(0)
-	TabEndRight:setImage(RegisterImage(@"uie_ui_menu_common_tab_end_right"))
+	TabEndRight:setImage(RegisterImage("uie_ui_menu_common_tab_end_right"))
 	self:addElement(TabEndRight)
 	self.TabEndRight = TabEndRight
 	local newIcon = CoD.NewBreadcrumbCount.new(f1_arg0, f1_arg1, 0, 0, 203, 221, 0.5, 0.5, -26, -8)
@@ -194,7 +194,7 @@ CoD.DirectorSelectTextTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	end)
 	local f1_local15 = self
 	local f1_local16 = self.subscribeToModel
-	local f1_local17 = Engine[@"getglobalmodel"]()
+	local f1_local17 = Engine.GetGlobalModel()
 	f1_local16(f1_local15, f1_local17["lobbyRoot.lobbyNav"], function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

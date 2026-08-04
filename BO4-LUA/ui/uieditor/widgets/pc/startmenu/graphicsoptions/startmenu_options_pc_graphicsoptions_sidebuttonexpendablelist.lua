@@ -1,4 +1,4 @@
-require("x64:3a2ffd2bb09aa77")
+require("ui/uieditor/widgets/pc/sidebuttonexpendable")
 CoD.StartMenu_Options_PC_GraphicsOptions_SideButtonExpendableList = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Options_PC_GraphicsOptions_SideButtonExpendableList.__defaultWidth = 390
 CoD.StartMenu_Options_PC_GraphicsOptions_SideButtonExpendableList.__defaultHeight = 272

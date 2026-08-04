@@ -1,5 +1,5 @@
-require("x64:8b4af6c828d40f")
-require("x64:d93d55bb6418607")
+require("ui/uieditor/widgets/pc/socialmenu/pcsocialmenu_playerlistitem")
+require("ui/uieditor/widgets/pc_vscrolllist")
 CoD.PC_SocialMenu_PartyInvitesTab = InheritFrom(LUI.UIElement)
 CoD.PC_SocialMenu_PartyInvitesTab.__defaultWidth = 1920
 CoD.PC_SocialMenu_PartyInvitesTab.__defaultHeight = 1080
@@ -20,8 +20,8 @@ CoD.PC_SocialMenu_PartyInvitesTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_18F2C8CBB96C1826"))
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(3)
-	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	Title:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	Title:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(Title)
 	self.Title = Title
 	ReceivedInvites.id = "ReceivedInvites"

@@ -1,4 +1,4 @@
-require("x64:170db364cb58ba9")
+require("ui/uieditor/widgets/callingcards/callingcards_asset_truckwheelanimation")
 CoD.CallingCards_Asset_truck = InheritFrom(LUI.UIElement)
 CoD.CallingCards_Asset_truck.__defaultWidth = 816
 CoD.CallingCards_Asset_truck.__defaultHeight = 320
@@ -10,7 +10,7 @@ CoD.CallingCards_Asset_truck.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local truck = LUI.UIImage.new(0, 0, 0, 816, 0, 0, 0, 320)
-	truck:setImage(RegisterImage(@"uie_transport_main"))
+	truck:setImage(RegisterImage("uie_transport_main"))
 	self:addElement(truck)
 	self.truck = truck
 	local wheel = CoD.CallingCards_Asset_TruckWheelAnimation.new(f1_arg0, f1_arg1, 0, 0, 131.5, 299.5, 0, 0, 222.5, 390.5)
@@ -23,18 +23,18 @@ CoD.CallingCards_Asset_truck.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self:addElement(wheel3)
 	self.wheel3 = wheel3
 	local wheelShadow = LUI.UIImage.new(0, 0, 698.5, 866.5, 0, 0, 223.5, 391.5)
-	wheelShadow:setImage(RegisterImage(@"uie_code_wheel_shadow"))
-	wheelShadow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
+	wheelShadow:setImage(RegisterImage("uie_code_wheel_shadow"))
+	wheelShadow:setMaterial(LUI.UIImage.GetCachedMaterial("ui_multiply"))
 	self:addElement(wheelShadow)
 	self.wheelShadow = wheelShadow
 	local wheelShadow3 = LUI.UIImage.new(0, 0, 131.5, 299.5, 0, 0, 222.5, 390.5)
-	wheelShadow3:setImage(RegisterImage(@"uie_code_wheel_shadow"))
-	wheelShadow3:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
+	wheelShadow3:setImage(RegisterImage("uie_code_wheel_shadow"))
+	wheelShadow3:setMaterial(LUI.UIImage.GetCachedMaterial("ui_multiply"))
 	self:addElement(wheelShadow3)
 	self.wheelShadow3 = wheelShadow3
 	local wheelShadow2 = LUI.UIImage.new(0, 0, 347.5, 515.5, 0, 0, 222.5, 390.5)
-	wheelShadow2:setImage(RegisterImage(@"uie_code_wheel_shadow"))
-	wheelShadow2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
+	wheelShadow2:setImage(RegisterImage("uie_code_wheel_shadow"))
+	wheelShadow2:setMaterial(LUI.UIImage.GetCachedMaterial("ui_multiply"))
 	self:addElement(wheelShadow2)
 	self.wheelShadow2 = wheelShadow2
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

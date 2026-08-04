@@ -1,10 +1,10 @@
 CoD.EntitlementUtility = {}
 CoD.EntitlementUtility.EntitlementDisplayInfo = {
-	[@"hash_7541976A426ADB94"] = {
+	predigitalgame = {
 		parents = {
-			@"hash_754C2B9DDDD8A254",
+			"deluxegame",
 			@"hash_B4CDBEC9F5007D3",
-			@"enhancedgame",
+			"enhancedgame",
 			@"hash_3124842D07E8B0B0",
 		},
 		addsCODPoints = true,
@@ -20,13 +20,13 @@ CoD.EntitlementUtility.EntitlementDisplayInfo = {
 			@"hash_15D4C0FD1E750439",
 		},
 	},
-	[@"digitalgame"] = {
+	digitalgame = {
 		parents = {
-			@"hash_754C2B9DDDD8A254",
+			"deluxegame",
 			@"hash_B4CDBEC9F5007D3",
-			@"enhancedgame",
+			"enhancedgame",
 			@"hash_3124842D07E8B0B0",
-			@"hash_16582F0E479C96E9",
+			"spectreeditiongame",
 		},
 		addsCODPoints = true,
 		displayName = @"hash_6998026799B2915E",
@@ -40,9 +40,9 @@ CoD.EntitlementUtility.EntitlementDisplayInfo = {
 			@"hash_15D4C0FD1E750439",
 		},
 	},
-	[@"hash_754C2B9DDDD8A254"] = {
+	deluxegame = {
 		parents = {
-			@"enhancedgame",
+			"enhancedgame",
 			@"hash_3124842D07E8B0B0",
 		},
 		addsCODPoints = true,
@@ -62,7 +62,7 @@ CoD.EntitlementUtility.EntitlementDisplayInfo = {
 	},
 	[@"hash_B4CDBEC9F5007D3"] = {
 		parents = {
-			@"enhancedgame",
+			"enhancedgame",
 			@"hash_3124842D07E8B0B0",
 		},
 		addsCODPoints = true,
@@ -80,7 +80,7 @@ CoD.EntitlementUtility.EntitlementDisplayInfo = {
 			@"hash_15D4C0FD1E750439",
 		},
 	},
-	[@"enhancedgame"] = {
+	enhancedgame = {
 		addsCODPoints = true,
 		displayName = @"hash_226C4AF933188F11",
 		description = @"hash_1816BC202A2D222B",
@@ -134,7 +134,7 @@ CoD.EntitlementUtility.EntitlementDisplayInfo = {
 			@"hash_BC5B3E566D14354",
 		},
 	},
-	[@"hash_6F7C1FF18A02ED4E"] = {
+	retail_pro_pack = {
 		addsCODPoints = true,
 		displayName = @"hash_564681CFB4FF344D",
 		description = @"hash_3D8CD36610AC4177",
@@ -174,7 +174,7 @@ CoD.EntitlementUtility.EntitlementDisplayInfo = {
 			@"hash_15D4C0FD1E750439",
 		},
 	},
-	[@"hash_69DF29D0839A1BE1"] = {
+	black_ops_pass = {
 		addsCODPoints = false,
 		displayName = @"hash_3BB8C7DC3C3EB0CB",
 		description = @"hash_55B9C7B3D045CFDD",
@@ -307,7 +307,7 @@ CoD.EntitlementUtility.EntitlementDisplayInfo = {
 			@"hash_A4E0BB7A87A54EA",
 		},
 	},
-	[@"hash_1BE23F482B82219F"] = {
+	beta_reward = {
 		addsCODPoints = false,
 		displayName = @"hash_6E1D37200C8B3601",
 		description = @"hash_71C5D1B0FF8C86FB",
@@ -337,7 +337,7 @@ CoD.EntitlementUtility.EntitlementDisplayInfo = {
 		},
 	},
 	[@"hash_62F6851583C61D1F"] = {
-		bannerImage = @"ui_icon_blackmarket_promos_twitch_redemption",
+		bannerImage = "ui_icon_blackmarket_promos_twitch_redemption",
 		displayName = @"hash_15D5482CC59417A0",
 		description = @"hash_13F1FF3532504768",
 		items = {
@@ -347,7 +347,7 @@ CoD.EntitlementUtility.EntitlementDisplayInfo = {
 		},
 	},
 	[@"hash_7152F1598A5C3DE"] = {
-		bannerImage = @"ui_icon_blackmarket_promos_twitch_redemption_banner_2",
+		bannerImage = "ui_icon_blackmarket_promos_twitch_redemption_banner_2",
 		displayName = @"hash_112754DD27A73007",
 		description = @"hash_77E06CD7E7856F99",
 		items = {
@@ -356,7 +356,7 @@ CoD.EntitlementUtility.EntitlementDisplayInfo = {
 			@"hash_8ADA739B92CFC74",
 		},
 	},
-	[@"hash_16582F0E479C96E9"] = {
+	spectreeditiongame = {
 		displayName = @"hash_359507D962AB0868",
 		description = @"hash_5D94D478E8696DB0",
 		items = {
@@ -370,7 +370,7 @@ CoD.EntitlementUtility.EntitlementDisplayInfo = {
 		},
 	},
 	[@"hash_62F68E1583C62C6A"] = {
-		bannerImage = @"ui_icon_blackmarket_promos_twitch_redemption_banner_3",
+		bannerImage = "ui_icon_blackmarket_promos_twitch_redemption_banner_3",
 		displayName = @"hash_71B584310BE38056",
 		description = 0x9C062C90F04826,
 		items = {
@@ -382,7 +382,7 @@ CoD.EntitlementUtility.EntitlementDisplayInfo = {
 		},
 	},
 	[@"hash_5BD04E15802702BE"] = {
-		bannerImage = @"ui_icon_blackmarket_promos_twitch_redemption_banner_5",
+		bannerImage = "ui_icon_blackmarket_promos_twitch_redemption_banner_5",
 		displayName = @"hash_7C830692FAB97775",
 		description = @"hash_6681C2CCB1378C5F",
 		items = {
@@ -395,7 +395,7 @@ CoD.EntitlementUtility.EntitlementDisplayInfo = {
 		},
 	},
 	[@"hash_5BD04C158026FF58"] = {
-		bannerImage = @"ui_icon_blackmarket_promos_twitch_redemption_banner_6",
+		bannerImage = "ui_icon_blackmarket_promos_twitch_redemption_banner_6",
 		displayName = @"hash_7C7BFE92FAB34B2F",
 		description = @"hash_434B97450DF63BE1",
 		items = {
@@ -410,51 +410,51 @@ CoD.EntitlementUtility.EntitlementDisplayInfo = {
 	},
 }
 CoD.EntitlementUtility.DOTDImages = {
-	[@"hash_25D901B2845AFFB5"] = @"loot_ui_icon_outfit_dotd_base_pal_exo2_battery",
-	[@"hash_271546989F2B39C0"] = @"loot_ui_icon_outfit_dotd_base_pal_exo2_crash",
-	[@"hash_35ABB557417D97BC"] = @"loot_ui_icon_outfit_dotd_base_pal_exo2_seraph",
-	[@"hash_34C5E1C04823489D"] = @"loot_ui_icon_outfit_dotd_base_pal_exo2_torque",
-	[@"hash_17C8471AD085983B"] = @"loot_ui_icon_outfit_dotd_base_pal_exo2_firebreak",
-	[@"hash_215EFCE6AF8D9A10"] = @"loot_ui_icon_outfit_dotd_base_pal_exo2_ruin",
-	[@"hash_265A8BFE9E6A3A8F"] = @"loot_ui_icon_outfit_dotd_base_pal_exo2_recon",
-	[@"hash_641D42086962443D"] = @"loot_ui_icon_outfit_dotd_base_pal_exo2_ajax",
-	[@"hash_74A7B1F09EB77129"] = @"loot_ui_icon_outfit_dotd_base_pal_exo2_prophet",
-	[@"hash_BAC19A8A93F750A"] = @"loot_ui_icon_outfit_dotd_base_pal_exo2_nomad",
+	pbt_mp_battery = "loot_ui_icon_outfit_dotd_base_pal_exo2_battery",
+	pbt_mp_buffassault = "loot_ui_icon_outfit_dotd_base_pal_exo2_crash",
+	pbt_mp_enforcer = "loot_ui_icon_outfit_dotd_base_pal_exo2_seraph",
+	pbt_mp_engineer = "loot_ui_icon_outfit_dotd_base_pal_exo2_torque",
+	pbt_mp_firebreak = "loot_ui_icon_outfit_dotd_base_pal_exo2_firebreak",
+	pbt_mp_mercenary = "loot_ui_icon_outfit_dotd_base_pal_exo2_ruin",
+	pbt_mp_recon = "loot_ui_icon_outfit_dotd_base_pal_exo2_recon",
+	pbt_mp_swatpolice = "loot_ui_icon_outfit_dotd_base_pal_exo2_ajax",
+	pbt_mp_technomancer = "loot_ui_icon_outfit_dotd_base_pal_exo2_prophet",
+	pbt_mp_trapper = "loot_ui_icon_outfit_dotd_base_pal_exo2_nomad",
 }
 CoD.EntitlementUtility.DigitalGameEntitlement = {
-	[@"blackops_pack"] = {
+	blackops_pack = {
 		@"hash_B4CDBEC9F5007D3",
 		@"hash_3124842D07E8B0B0",
-		@"hash_754C2B9DDDD8A254",
-		@"digitalgame",
-		@"enhancedgame",
+		"deluxegame",
+		"digitalgame",
+		"enhancedgame",
 		@"hash_49EC2B060A91A01C",
-		@"hash_7541976A426ADB94",
+		"predigitalgame",
 		@"hash_4229C75FA42FA856",
-		@"hash_6F7C1FF18A02ED4E",
+		"retail_pro_pack",
 		@"hash_53EE7271A9A14421",
-		@"hash_16582F0E479C96E9",
+		"spectreeditiongame",
 	},
-	[0x15BE56C5EA0253] = {
-		@"hash_16582F0E479C96E9",
+	blackops_pack_spectre = {
+		"spectreeditiongame",
 	},
-	[@"hash_377B58D9F38DE25F"] = {
-		@"hash_16582F0E479C96E9",
+	blackops_pack_survivor = {
+		"spectreeditiongame",
 	},
 	[@"hash_6C94ED95E25D8246"] = {
 		@"hash_B4CDBEC9F5007D3",
 		@"hash_3124842D07E8B0B0",
-		@"hash_754C2B9DDDD8A254",
-		@"enhancedgame",
+		"deluxegame",
+		"enhancedgame",
 		@"hash_49EC2B060A91A01C",
-		@"hash_6F7C1FF18A02ED4E",
+		"retail_pro_pack",
 	},
 }
 CoD.EntitlementUtility.CheckBOpsPassValidity = function(f1_arg0)
 	local f1_local0 = CoD.EntitlementUtility.DigitalGameEntitlement[f1_arg0.entitlementNameXHash]
 	if f1_local0 ~= nil then
 		for f1_local4, f1_local5 in ipairs(f1_local0) do
-			if Engine[@"hasentitlement"](f1_arg0.controller, f1_local5) then
+			if Engine.HasEntitlement(f1_arg0.controller, f1_local5) then
 				return true
 			end
 		end
@@ -464,10 +464,10 @@ CoD.EntitlementUtility.CheckBOpsPassValidity = function(f1_arg0)
 	end
 end
 CoD.EntitlementUtility.GetDOTDImageFull = function(f2_arg0)
-	return CoD.EntitlementUtility.DOTDImages[f2_arg0] or @"blacktransparent"
+	return CoD.EntitlementUtility.DOTDImages[f2_arg0] or "blacktransparent"
 end
 CoD.EntitlementUtility.GetDOTDImageRedemption = function(f3_arg0)
-	return CoD.EntitlementUtility.DOTDRedemptionImage or @"blacktransparent"
+	return CoD.EntitlementUtility.DOTDRedemptionImage or "blacktransparent"
 end
 CoD.EntitlementUtility.HasSeasonPassToken = function(f4_arg0)
 	if Engine[@"hash_2F40679B550DCCA2"](f4_arg0, CoD.Currencies.BLACKOPSPASS_INCENTIVE_TOKEN) > 0 then
@@ -477,25 +477,25 @@ CoD.EntitlementUtility.HasSeasonPassToken = function(f4_arg0)
 	end
 end
 CoD.EntitlementUtility.GetViewedEntitlement = function(f5_arg0, f5_arg1)
-	local f5_local0 = Engine[@"storagegetbuffer"](f5_arg0, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
-	if f5_local0 and f5_local0[@"hash_6A6EE0A867B10F80"][f5_arg1] then
-		return f5_local0[@"hash_6A6EE0A867B10F80"][f5_arg1]:get() == 1
+	local f5_local0 = Engine.StorageGetBuffer(f5_arg0, Enum.StorageFileType[@"storage_mp_stats_online"])
+	if f5_local0 and f5_local0.entitlementacknowledged[f5_arg1] then
+		return f5_local0.entitlementacknowledged[f5_arg1]:get() == 1
 	else
 		return nil
 	end
 end
 CoD.EntitlementUtility.SetViewedEntitlement = function(f6_arg0, f6_arg1)
-	local f6_local0 = Engine[@"storagegetbuffer"](f6_arg0, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
-	if f6_local0 and f6_local0[@"hash_6A6EE0A867B10F80"][f6_arg1] then
-		f6_local0[@"hash_6A6EE0A867B10F80"][f6_arg1]:set(1)
-		Engine[@"storagewrite"](f6_arg0, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
+	local f6_local0 = Engine.StorageGetBuffer(f6_arg0, Enum.StorageFileType[@"storage_mp_stats_online"])
+	if f6_local0 and f6_local0.entitlementacknowledged[f6_arg1] then
+		f6_local0.entitlementacknowledged[f6_arg1]:set(1)
+		Engine.StorageWrite(f6_arg0, Enum.StorageFileType[@"storage_mp_stats_online"])
 		return true
 	else
 		return nil
 	end
 end
 CoD.EntitlementUtility.SetupEntitlementPopupData = function(f7_arg0, f7_arg1)
-	local f7_local0 = Engine[@"getmodelforcontroller"](f7_arg0)
+	local f7_local0 = Engine.GetModelForController(f7_arg0)
 	f7_local0 = f7_local0:create("EntitlementData")
 	local f7_local1 = CoD.EntitlementUtility.EntitlementDisplayInfo[f7_arg1]
 	local f7_local2 = f7_local0:create("entitlement")
@@ -550,26 +550,26 @@ CoD.EntitlementUtility.OpenEntitlementPopups = function(f14_arg0, f14_arg1)
 			name = "entitlement_popups_all_done",
 		})
 		return
-	elseif Engine[@"hasentitlement"](f14_arg0, @"hash_43638EF15BA822FB") then
+	elseif Engine.HasEntitlement(f14_arg0, @"hash_43638EF15BA822FB") then
 		if not CoD.EntitlementUtility.GetViewedEntitlement(f14_arg0, @"hash_43638EF15BA822FB") and not CoD.EntitlementUtility.EntitlementDisplayInfo[@"hash_43638EF15BA822FB"].opened then
-			CoD.EntitlementUtility.SetViewedEntitlement(f14_arg0, @"hash_1BE23F482B82219F")
+			CoD.EntitlementUtility.SetViewedEntitlement(f14_arg0, "beta_reward")
 			CoD.EntitlementUtility.SetupEntitlementPopupData(f14_arg0, @"hash_43638EF15BA822FB")
 			CoD.EntitlementUtility.EntitlementDisplayInfo[@"hash_43638EF15BA822FB"].opened = true
 			OpenPopup(f14_arg1, "BetaUnlockPopup", f14_arg0)
 			return
 		end
-	elseif Engine[@"hasentitlement"](f14_arg0, @"hash_1BE23F482B82219F") and not CoD.EntitlementUtility.GetViewedEntitlement(f14_arg0, @"hash_1BE23F482B82219F") and not CoD.EntitlementUtility.EntitlementDisplayInfo[@"hash_1BE23F482B82219F"].opened then
-		CoD.EntitlementUtility.SetupEntitlementPopupData(f14_arg0, @"hash_1BE23F482B82219F")
-		CoD.EntitlementUtility.EntitlementDisplayInfo[@"hash_1BE23F482B82219F"].opened = true
+	elseif Engine.HasEntitlement(f14_arg0, "beta_reward") and not CoD.EntitlementUtility.GetViewedEntitlement(f14_arg0, "beta_reward") and not CoD.EntitlementUtility.EntitlementDisplayInfo.beta_reward.opened then
+		CoD.EntitlementUtility.SetupEntitlementPopupData(f14_arg0, "beta_reward")
+		CoD.EntitlementUtility.EntitlementDisplayInfo.beta_reward.opened = true
 		OpenPopup(f14_arg1, "BetaCallingCardPopup", f14_arg0)
 		return
 	end
 	for f14_local9, f14_local10 in pairs(CoD.EntitlementUtility.EntitlementDisplayInfo) do
-		if Engine[@"hasentitlement"](f14_arg0, f14_local9) and not CoD.EntitlementUtility.GetViewedEntitlement(f14_arg0, f14_local9) and not f14_local10.opened then
+		if Engine.HasEntitlement(f14_arg0, f14_local9) and not CoD.EntitlementUtility.GetViewedEntitlement(f14_arg0, f14_local9) and not f14_local10.opened then
 			local f14_local3 = false
 			if f14_local10.parents then
 				for f14_local7, f14_local8 in ipairs(f14_local10.parents) do
-					if Engine[@"hasentitlement"](f14_arg0, f14_local8) then
+					if Engine.HasEntitlement(f14_arg0, f14_local8) then
 						f14_local3 = true
 						f14_local10.opened = true
 						CoD.EntitlementUtility.SetViewedEntitlement(f14_arg0, f14_local9)
@@ -584,21 +584,21 @@ CoD.EntitlementUtility.OpenEntitlementPopups = function(f14_arg0, f14_arg1)
 			end
 		end
 	end
-	if IsLootReady(f14_arg0) and CoD.EntitlementUtility.HasSeasonPassToken(f14_arg0) and not CoD.EntitlementUtility.BOPassSeen and Engine[@"currentsessionmode"]() == Enum[@"emodes"][@"mode_invalid"] then
+	if IsLootReady(f14_arg0) and CoD.EntitlementUtility.HasSeasonPassToken(f14_arg0) and not CoD.EntitlementUtility.BOPassSeen and Engine.CurrentSessionMode() == Enum.eModes.mode_invalid then
 		CoD.EntitlementUtility.BOPassSeen = true
 		OpenPopup(f14_arg1, "BOPassPopup", f14_arg0)
 		return
-	elseif IsLootReady(f14_arg0) and CoDShared.Loot.GetBOPassTierBoost(f14_arg0) ~= 0 and not CoD.EntitlementUtility.BOPass5CrateIncentiveSeen and Engine[@"getinventoryitemquantity"](f14_arg0, CoD.EntitlementUtility.BLACKOPS_PASS_5CRATE_INCENTIVE_ID) == 0 then
+	elseif IsLootReady(f14_arg0) and CoDShared.Loot.GetBOPassTierBoost(f14_arg0) ~= 0 and not CoD.EntitlementUtility.BOPass5CrateIncentiveSeen and Engine.GetInventoryItemQuantity(f14_arg0, CoD.EntitlementUtility.BLACKOPS_PASS_5CRATE_INCENTIVE_ID) == 0 then
 		CoD.EntitlementUtility.BOPass5CrateIncentiveSeen = true
 		OpenPopup(f14_arg1, "RewardPopup", f14_arg0)
 		return
-	elseif IsLootReady(f14_arg0) and CoD.EntitlementUtility.ShouldOpenSpecialistDialog(f14_arg0, Enum[@"emodes"][@"mode_multiplayer"], @"hash_6C94ED95E25D8246") and not CoD.EntitlementUtility.DiaDeLosMuertosPopupSeen then
+	elseif IsLootReady(f14_arg0) and CoD.EntitlementUtility.ShouldOpenSpecialistDialog(f14_arg0, Enum.eModes.mode_multiplayer, @"hash_6C94ED95E25D8246") and not CoD.EntitlementUtility.DiaDeLosMuertosPopupSeen then
 		CoD.EntitlementUtility.DiaDeLosMuertosPopupSeen = true
-		f14_local0 = Engine[@"getmodelforcontroller"](f14_arg0)
+		f14_local0 = Engine.GetModelForController(f14_arg0)
 		f14_local0 = f14_local0:create("PositionEditLoadout")
 		f14_local0 = f14_local0:create("SelectedCharacterIndex")
 		f14_local0:set(-1)
-		f14_local0 = Engine[@"getglobalmodel"]()
+		f14_local0 = Engine.GetGlobalModel()
 		f14_local0 = f14_local0.hudItems:create("specialistSwitchIsLethal")
 		f14_local0:set(false)
 		CoD.EntitlementUtility.ForceStreamEntitlementImages()
@@ -611,7 +611,7 @@ CoD.EntitlementUtility.OpenEntitlementPopups = function(f14_arg0, f14_arg1)
 end
 DataSources.EntitlementItemList = DataSourceHelpers.ListSetup("EntitlementItemList", function(f15_arg0)
 	local f15_local0 = {}
-	local f15_local1 = Engine[@"getmodelforcontroller"](f15_arg0)
+	local f15_local1 = Engine.GetModelForController(f15_arg0)
 	f15_local1 = f15_local1:create("EntitlementData")
 	local f15_local2 = f15_local1:create("entitlement")
 	local f15_local3 = CoD.EntitlementUtility.EntitlementDisplayInfo[f15_local2:get()]
@@ -694,8 +694,8 @@ CoD.EntitlementUtility.SetWorkingStateAndPurchaseBOPass = function(f22_arg0, f22
 	f22_arg1:setState(f22_arg2, "WorkingState")
 	if not f22_arg0.purchaseTimer then
 		f22_arg0.purchaseTimer = LUI.UITimer.newElementTimer(500, false, function()
-			if not Engine[@"isinventorybusy"](f22_arg2) and Engine[@"getpurchasedwskuresult"](f22_arg2) ~= Enum[@"inventorypurchaseresult"][@"inventory_purchase_result_inprogress"] then
-				if Engine[@"getpurchasedwskuresult"](f22_arg2) == Enum[@"inventorypurchaseresult"][@"inventory_purchase_result_success"] then
+			if not Engine.IsInventoryBusy(f22_arg2) and Engine.GetPurchaseDWSKUResult(f22_arg2) ~= Enum.InventoryPurchaseResult[@"inventory_purchase_result_inprogress"] then
+				if Engine.GetPurchaseDWSKUResult(f22_arg2) == Enum.InventoryPurchaseResult[@"inventory_purchase_result_success"] then
 					f22_arg1:setState(f22_arg2, "FinishedState")
 					local f23_local0 = f22_arg1:getMenu()
 					if f23_local0._closeAndGoBack then
@@ -720,7 +720,7 @@ CoD.EntitlementUtility.SetWorkingStateAndPurchaseBOPass = function(f22_arg0, f22
 	end
 end
 CoD.EntitlementUtility.GetBannerImage = function(f24_arg0, f24_arg1)
-	local f24_local0 = Engine[@"getmodelforcontroller"](f24_arg0)
+	local f24_local0 = Engine.GetModelForController(f24_arg0)
 	f24_local0 = f24_local0:create("EntitlementData")
 	if f24_local0 then
 		local f24_local1 = f24_local0:create("entitlement")
@@ -735,10 +735,10 @@ CoD.EntitlementUtility.GetBannerImage = function(f24_arg0, f24_arg1)
 					return f24_local3
 				end
 			end
-			f24_local3 = @"blacktransparent"
+			f24_local3 = "blacktransparent"
 		end
 	end
-	return @"blacktransparent"
+	return "blacktransparent"
 end
 CoD.EntitlementUtility.SelectSpecialistForEntitlement = function(f25_arg0, f25_arg1, f25_arg2, f25_arg3, f25_arg4)
 	local f25_local0 = f25_arg2:getModel()
@@ -756,7 +756,7 @@ CoD.EntitlementUtility.SelectSpecialistForEntitlement = function(f25_arg0, f25_a
 	CoD.EntitlementUtility.StopStreamingEntitlementImages()
 end
 CoD.EntitlementUtility.SetCurrentEntitlementViewed = function(f26_arg0)
-	local f26_local0 = Engine[@"getmodelforcontroller"](f26_arg0)
+	local f26_local0 = Engine.GetModelForController(f26_arg0)
 	f26_local0 = f26_local0:create("EntitlementData")
 	local f26_local1 = f26_local0:create("entitlement")
 	f26_local1 = f26_local1:get()

@@ -1,4 +1,4 @@
-require("x64:b1da0ac88356f3d")
+require("ui/uieditor/widgets/social/social_managepartyplayerrealname")
 CoD.Social_ManagePartyPlayerRealNameContainer = InheritFrom(LUI.UIElement)
 CoD.Social_ManagePartyPlayerRealNameContainer.__defaultWidth = 289
 CoD.Social_ManagePartyPlayerRealNameContainer.__defaultHeight = 30

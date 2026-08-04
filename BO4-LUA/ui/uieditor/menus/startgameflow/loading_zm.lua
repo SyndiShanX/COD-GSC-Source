@@ -1,5 +1,5 @@
-require("x64:64780253f98a740")
-require("x64:c0887595cfb6bb1")
+require("ui/uieditor/widgets/startgameflow/loadingscreensharedcpzm")
+require("ui/uieditor/widgets/pc/notifications/pc_notif_container")
 CoD.Loading_ZM = InheritFrom(CoD.Menu)
 LUI.createMenu.Loading_ZM = function(f1_arg0, f1_arg1)
 	local self = CoD.Menu.NewForUIEditor("Loading_ZM", f1_arg0)
@@ -33,61 +33,61 @@ LUI.createMenu.Loading_ZM = function(f1_arg0, f1_arg1)
 	self.PCNotifContainer = PCNotifContainer
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[@"getglobalmodel"]()
+	local f1_local8 = Engine.GetGlobalModel()
 	f1_local7(f1_local6, f1_local8.mapLoaded, function(f2_arg0, f2_arg1)
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
-		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f2_arg1, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_none"])
 	end, false)
-	self:registerEventHandler("loading_startplay", function(self, event)
+	self:registerEventHandler("loading_startplay", function(element, event)
 		local f3_local0 = nil
-		CoD.HUDUtility.StartPlay(self, f1_arg0)
+		CoD.HUDUtility.StartPlay(element, f1_arg0)
 		if not f3_local0 then
-			f3_local0 = self:dispatchEventToChildren(event)
+			f3_local0 = element:dispatchEventToChildren(event)
 		end
 		return f3_local0
 	end)
-	self:registerEventHandler("loading_nomovie_startplay", function(self, event)
+	self:registerEventHandler("loading_nomovie_startplay", function(element, event)
 		local f4_local0 = nil
 		if IsZombies() and IsSplitscreenAndInGame(f1_arg0) then
-			CoD.HUDUtility.StartPlay(self, f1_arg0)
-			HideWidget(self)
+			CoD.HUDUtility.StartPlay(element, f1_arg0)
+			HideWidget(element)
 		end
 		if not f4_local0 then
-			f4_local0 = self:dispatchEventToChildren(event)
+			f4_local0 = element:dispatchEventToChildren(event)
 		end
 		return f4_local0
 	end)
-	self:registerEventHandler("loading_displaycontinue", function(self, event)
+	self:registerEventHandler("loading_displaycontinue", function(element, event)
 		local f5_local0 = nil
 		SetGlobalModelValueTrue("mapLoaded")
 		if not f5_local0 then
-			f5_local0 = self:dispatchEventToChildren(event)
+			f5_local0 = element:dispatchEventToChildren(event)
 		end
 		return f5_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f6_arg0, f6_arg1, f6_arg2, f6_arg3)
 		if CoD.ModelUtility.IsGlobalModelValueTrue("mapLoaded") then
-			CoD.HUDUtility.StartPlay(element, controller)
+			CoD.HUDUtility.StartPlay(f6_arg0, f6_arg2)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
+	end, function(f7_arg0, f7_arg1, f7_arg2)
 		if CoD.ModelUtility.IsGlobalModelValueTrue("mapLoaded") then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(f7_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_none"], "ESCAPE", function(f8_arg0, f8_arg1, f8_arg2, f8_arg3)
 		if CoD.ModelUtility.IsGlobalModelValueTrue("mapLoaded") then
-			CoD.HUDUtility.StartPlay(element, controller)
+			CoD.HUDUtility.StartPlay(f8_arg0, f8_arg2)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
+	end, function(f9_arg0, f9_arg1, f9_arg2)
 		if CoD.ModelUtility.IsGlobalModelValueTrue("mapLoaded") then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(f9_arg1, Enum.LUIButton[@"lui_key_none"], 0x0, nil, "ESCAPE")
 			return false
 		else
 			return false

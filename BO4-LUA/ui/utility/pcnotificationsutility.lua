@@ -4,10 +4,10 @@ CoD.PCNotificationsUtility.COOLDOWN_NOTIFICATION_CHECK = 1
 CoD.PCNotificationsUtility.NotificationType = {
 	UNKNOWN = {
 		id = 0,
-		appearStringHash = @"hash_0",
-		acceptStringHash = @"hash_0",
-		declineStringHash = @"hash_0",
-		timeoutStringHash = @"hash_0",
+		appearStringHash = 0x0,
+		acceptStringHash = 0x0,
+		declineStringHash = 0x0,
+		timeoutStringHash = 0x0,
 	},
 	PARTY = {
 		id = 1,
@@ -19,7 +19,7 @@ CoD.PCNotificationsUtility.NotificationType = {
 	FRIEND = {
 		id = 2,
 		appearStringHash = @"hash_CAD0D75E6830A9B",
-		acceptStringHash = @"hash_0",
+		acceptStringHash = 0x0,
 		declineStringHash = @"hash_36319CDC4EB1032",
 	},
 }
@@ -27,33 +27,33 @@ CoD.PCNotificationsUtility.MockupData = {}
 CoD.PCNotificationsUtility.MockupDataFriends = {}
 DataSources.CurrentNotification = {
 	prepare = function(f1_arg0)
-		local f1_local0 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f1_arg0), "PC.CurrentNotification")
-		local f1_local1 = Engine[@"createmodel"](f1_local0, "notificationEvent")
+		local f1_local0 = Engine.CreateModel(Engine.GetModelForController(f1_arg0), "PC.CurrentNotification")
+		local f1_local1 = Engine.CreateModel(f1_local0, "notificationEvent")
 		f1_local1:set("")
-		f1_local1 = Engine[@"createmodel"](f1_local0, "inviteResponseEvent")
+		f1_local1 = Engine.CreateModel(f1_local0, "inviteResponseEvent")
 		f1_local1:set("")
-		f1_local1 = Engine[@"createmodel"](f1_local0, "visibility")
+		f1_local1 = Engine.CreateModel(f1_local0, "visibility")
 		f1_local1:set(false)
-		f1_local1 = Engine[@"createmodel"](f1_local0, "hideNotificationsTimestamp")
+		f1_local1 = Engine.CreateModel(f1_local0, "hideNotificationsTimestamp")
 		f1_local1:set(Engine[@"milliseconds"]() - CoD.PCNotificationsUtility.NOTIFICATION_DURATION * 1000)
-		f1_local1 = Engine[@"createmodel"](f1_local0, "chooseOffDurationStateVisible")
+		f1_local1 = Engine.CreateModel(f1_local0, "chooseOffDurationStateVisible")
 		f1_local1:set(false)
-		f1_local1 = Engine[@"createmodel"](f1_local0, "type")
+		f1_local1 = Engine.CreateModel(f1_local0, "type")
 		f1_local1:set(0)
-		f1_local1 = Engine[@"createmodel"](f1_local0, "senderXuid")
+		f1_local1 = Engine.CreateModel(f1_local0, "senderXuid")
 		f1_local1:set(nil)
-		f1_local1 = Engine[@"createmodel"](f1_local0, "senderGamertag")
+		f1_local1 = Engine.CreateModel(f1_local0, "senderGamertag")
 		f1_local1:set("")
-		f1_local1 = Engine[@"createmodel"](f1_local0, "requestIndex")
+		f1_local1 = Engine.CreateModel(f1_local0, "requestIndex")
 		f1_local1:set(0)
-		f1_local1 = Engine[@"createmodel"](f1_local0, "remainingTime")
+		f1_local1 = Engine.CreateModel(f1_local0, "remainingTime")
 		f1_local1:set(0)
-		f1_local1 = Engine[@"createmodel"](f1_local0, "timestamp")
+		f1_local1 = Engine.CreateModel(f1_local0, "timestamp")
 		f1_local1:set(0)
 		return f1_local0
 	end,
 	getModel = function(f2_arg0)
-		local f2_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f2_arg0), "PC.CurrentNotification")
+		local f2_local0 = Engine.GetModel(Engine.GetModelForController(f2_arg0), "PC.CurrentNotification")
 		if f2_local0 == nil then
 			return DataSources.CurrentNotification.prepare(f2_arg0)
 		else
@@ -79,11 +79,11 @@ local f0_local0 = function(f3_arg0, f3_arg1)
 end
 local f0_local1 = function(f4_arg0, f4_arg1)
 	if #CoD.PCNotificationsUtility.MockupData == 0 then
-		local f4_local0 = Engine[@"getfriends"](f4_arg0)
+		local f4_local0 = Engine.GetFriends(f4_arg0)
 		if #f4_local0 > 0 then
 			local f4_local1 = 0
 			for f4_local5, f4_local6 in pairs(f4_local0) do
-				local f4_local7 = Engine[@"getplayerinfo"](f4_arg0, f4_local6.xuid)
+				local f4_local7 = Engine.GetPlayerInfo(f4_arg0, f4_local6.xuid)
 				table.insert(CoD.PCNotificationsUtility.MockupData, {
 					xuid = f4_local6.xuid,
 					timestamp = Engine[@"milliseconds"]() + f4_local1 * 10,
@@ -119,11 +119,11 @@ local f0_local2 = function(f5_arg0, f5_arg1)
 end
 local f0_local3 = function(f6_arg0, f6_arg1)
 	if #CoD.PCNotificationsUtility.MockupDataFriends == 0 then
-		local f6_local0 = Engine[@"getfriends"](f6_arg0)
+		local f6_local0 = Engine.GetFriends(f6_arg0)
 		if #f6_local0 > 0 then
 			local f6_local1 = 0
 			for f6_local5, f6_local6 in pairs(f6_local0) do
-				local f6_local7 = Engine[@"getplayerinfo"](f6_arg0, f6_local6.xuid)
+				local f6_local7 = Engine.GetPlayerInfo(f6_arg0, f6_local6.xuid)
 				table.insert(CoD.PCNotificationsUtility.MockupDataFriends, {
 					gamertag = f6_local6.gamertag,
 					timestamp = Engine[@"milliseconds"]() + f6_local1 * 10,
@@ -166,7 +166,7 @@ local f0_local6 = function(f9_arg0, f9_arg1, f9_arg2)
 	local f9_local0 = DataSources.CurrentNotification.getModel(f9_arg1)
 	local f9_local1 = f9_local0.hideNotificationsTimestamp:get()
 	local f9_local2 = {}
-	if Engine[@"getprofilevarint"](f9_arg1, @"show_party_notifications") ~= 0 then
+	if Engine.GetProfileVarInt(f9_arg1, "show_party_notifications") ~= 0 then
 		if IsBooleanDvarSet("ui_fakeInviteData") then
 			local f9_local3 = f0_local1(f9_arg1, f9_local1)
 		end
@@ -186,13 +186,13 @@ local f0_local6 = function(f9_arg0, f9_arg1, f9_arg2)
 		f9_arg0.quickTimerActivated = true
 		f9_arg0:playSound("menu_open", f9_arg1)
 		local f9_local6 = CoD.PCUtility.ShowGameEvent
-		local f9_local7 = Engine[@"localize"]
+		local f9_local7 = Engine.Localize
 		local f9_local8 = f0_local5(f9_local5)
 		f9_local6(f9_local7(f9_local8.appearStringHash, CoD.SocialUtility.CleanGamerTag(f9_local4.gamertag)))
 		CoD.PCUtility.FlashWindowDefault()
 	else
 		local f9_local4 = {}
-		if Engine[@"getprofilevarint"](f9_arg1, @"show_friends_notifications") ~= 0 then
+		if Engine.GetProfileVarInt(f9_arg1, "show_friends_notifications") ~= 0 then
 			if IsBooleanDvarSet("ui_fakeFriendsInviteData") then
 				local f9_local9 = f0_local3(f9_arg1, f9_local1)
 			end
@@ -212,7 +212,7 @@ local f0_local6 = function(f9_arg0, f9_arg1, f9_arg2)
 			f9_arg0.quickTimerActivated = true
 			f9_arg0:playSound("menu_open", f9_arg1)
 			local f9_local7 = CoD.PCUtility.ShowGameEvent
-			local f9_local8 = Engine[@"localize"]
+			local f9_local8 = Engine.Localize
 			local f9_local10 = f0_local5(f9_local6)
 			f9_local7(f9_local8(f9_local10.appearStringHash, CoD.SocialUtility.CleanGamerTag(f9_local5.gamertag)))
 			CoD.PCUtility.FlashWindowDefault()
@@ -239,7 +239,7 @@ CoD.PCNotificationsUtility.AutoCancelOldPartyInvites = function(f10_arg0)
 			if f10_local12.timestamp + CoD.PCNotificationsUtility.NOTIFICATION_DURATION * 1000 < f10_local1 and (f10_local3 ~= CoD.PCNotificationsUtility.NotificationType.PARTY.id or f10_local4 ~= f10_local12.xuid) then
 				Engine[@"hash_6E7B086418037B6F"](f10_arg0, f10_local12.xuid, Enum[@"hash_12E338C10A793F0C"][@"hash_2302E5C8D977EF94"])
 				local f10_local8 = CoD.PCUtility.ShowGameEvent
-				local f10_local9 = Engine[@"localize"]
+				local f10_local9 = Engine.Localize
 				local f10_local10 = f0_local5(f10_local3)
 				f10_local8(f10_local9(f10_local10.timeoutStringHash))
 			end
@@ -283,7 +283,7 @@ local f0_local8 = function(f13_arg0, f13_arg1)
 	end
 end
 CoD.PCNotificationsUtility.UpdateNotifToSafeArea = function(f14_arg0, f14_arg1)
-	local f14_local0, f14_local1, f14_local2, f14_local3 = Engine[@"getusersafeareaforcontroller"](f14_arg1, true)
+	local f14_local0, f14_local1, f14_local2, f14_local3 = Engine.GetUserSafeAreaForController(f14_arg1, true)
 	local f14_local4, f14_local5, f14_local6, f14_local7 = f14_arg0:getLocalRect()
 	local f14_local8, f14_local9 = Engine[@"getscreensize"](f14_arg1)
 	local f14_local10, f14_local11, f14_local12 = Engine[@"hash_6913E41040C17FD"](f14_arg1)
@@ -308,7 +308,7 @@ CoD.PCNotificationsUtility.AcceptCurrentInvite = function(f17_arg0, f17_arg1)
 			Engine[@"hash_6E7B086418037B6F"](f17_arg1, f17_local2, Enum[@"hash_12E338C10A793F0C"][@"hash_28B7FB4BFD13E7FD"])
 			CoD.PCNotificationsUtility.CancelAllPartyInvites(f17_arg1)
 			local f17_local3 = CoD.PCUtility.ShowGameEvent
-			local f17_local4 = Engine[@"localize"]
+			local f17_local4 = Engine.Localize
 			local f17_local5 = f0_local5(f17_local1)
 			f17_local3(f17_local4(f17_local5.acceptStringHash))
 		else
@@ -327,11 +327,11 @@ CoD.PCNotificationsUtility.DeclineCurrentInvite = function(f18_arg0)
 	if f18_local1 == CoD.PCNotificationsUtility.NotificationType.PARTY.id then
 		Engine[@"hash_6E7B086418037B6F"](f18_arg0, f18_local0.senderXuid:get(), Enum[@"hash_12E338C10A793F0C"][@"hash_498C8DC20F909A0F"])
 	elseif f18_local1 == CoD.PCNotificationsUtility.NotificationType.FRIEND.id then
-		Engine[@"hash_21AE51B8C2493C18"](f18_local0.requestIndex:get())
+		Engine.ignorefriendrequest(f18_local0.requestIndex:get())
 	end
 	f18_local0.visibility:set(false)
 	local f18_local2 = CoD.PCUtility.ShowGameEvent
-	local f18_local3 = Engine[@"localize"]
+	local f18_local3 = Engine.Localize
 	local f18_local4 = f0_local5(f18_local1)
 	f18_local2(f18_local3(f18_local4.declineStringHash))
 end
@@ -340,7 +340,7 @@ CoD.PCNotificationsUtility.CurrentNotificationTimedOut = function(f19_arg0, f19_
 	if f19_local0 == CoD.PCNotificationsUtility.NotificationType.PARTY.id then
 		Engine[@"hash_6E7B086418037B6F"](f19_arg1, f19_arg2.senderXuid:get(), Enum[@"hash_12E338C10A793F0C"][@"hash_2302E5C8D977EF94"])
 		local f19_local1 = CoD.PCUtility.ShowGameEvent
-		local f19_local2 = Engine[@"localize"]
+		local f19_local2 = Engine.Localize
 		local f19_local3 = f0_local5(f19_local0)
 		f19_local1(f19_local2(f19_local3.timeoutStringHash))
 	elseif f19_local0 == CoD.PCNotificationsUtility.NotificationType.FRIEND.id then
@@ -361,16 +361,16 @@ CoD.PCNotificationsUtility.PrepareNotificationContainer = function(f20_arg0, f20
 		end
 	end)
 	f20_arg0:addElement(f20_arg0.quickRefreshNotificationTimer)
-	CoD.Menu.AddButtonCallbackFunction(f20_arg2, f20_arg3.KeyPrompts.KeyPromptAccept, f20_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, f23_arg3)
-		if CoD.PCNotificationsUtility.IsNotificationWidgetVisible(controller) then
-			CoD.PCNotificationsUtility.AcceptCurrentInvite(menu, controller)
+	CoD.Menu.AddButtonCallbackFunction(f20_arg2, f20_arg3.KeyPrompts.KeyPromptAccept, f20_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f23_arg0, f23_arg1, f23_arg2, f23_arg3)
+		if CoD.PCNotificationsUtility.IsNotificationWidgetVisible(f23_arg2) then
+			CoD.PCNotificationsUtility.AcceptCurrentInvite(f23_arg1, f23_arg2)
 			return true
 		else
 		end
 	end)
-	CoD.Menu.AddButtonCallbackFunction(f20_arg2, f20_arg3.KeyPrompts.KeyPromptDecline, f20_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, f24_arg3)
-		if CoD.PCNotificationsUtility.IsNotificationWidgetVisible(controller) then
-			CoD.PCNotificationsUtility.DeclineCurrentInvite(controller)
+	CoD.Menu.AddButtonCallbackFunction(f20_arg2, f20_arg3.KeyPrompts.KeyPromptDecline, f20_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f24_arg0, f24_arg1, f24_arg2, f24_arg3)
+		if CoD.PCNotificationsUtility.IsNotificationWidgetVisible(f24_arg2) then
+			CoD.PCNotificationsUtility.DeclineCurrentInvite(f24_arg2)
 			return true
 		else
 		end

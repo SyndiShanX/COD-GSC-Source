@@ -13,8 +13,8 @@ CoD.PC_AchievementNotification_Texts.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	CompletesMessage:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_27B2FB935B1A0F49"))
 	CompletesMessage:setTTF("ttmussels_regular")
 	CompletesMessage:setLetterSpacing(2)
-	CompletesMessage:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	CompletesMessage:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	CompletesMessage:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	CompletesMessage:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(CompletesMessage)
 	self.CompletesMessage = CompletesMessage
 	local Name = LUI.UIText.new(0, 1, 0, 0, 0, 0, 16, 34)
@@ -22,8 +22,8 @@ CoD.PC_AchievementNotification_Texts.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	Name:setTTF("ttmussels_demibold")
 	Name:setLetterSpacing(2)
 	Name:setLineSpacing(1)
-	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	Name:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	Name:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	Name:subscribeToGlobalModel(f1_arg1, "PCAchievementNotification", "name", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

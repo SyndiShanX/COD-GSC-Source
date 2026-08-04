@@ -10,8 +10,8 @@ CoD.Social_InfoPane_DLCStatus.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local DLCText = LUI.UIText.new(0, 0, 0, 200, 0, 0, 0.5, 16.5)
 	DLCText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6B9675B360750903"))
 	DLCText:setTTF("dinnext_regular")
-	DLCText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	DLCText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	DLCText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	DLCText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(DLCText)
 	self.DLCText = DLCText
 	self:mergeStateConditions({

@@ -1,5 +1,5 @@
-require("x64:fa630f1ab8206")
-require("x64:f3ca764bd1e6b77")
+require("ui/uieditor/widgets/pc/pc_achievementnotification_container")
+require("ui/uieditor/widgets/pc/pc_perfstatscontainer")
 CoD.MainOverlay = InheritFrom(LUI.UIElement)
 CoD.MainOverlay.__defaultWidth = 1920
 CoD.MainOverlay.__defaultHeight = 1080
@@ -26,15 +26,15 @@ CoD.MainOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	BuildInfo:setShaderVector(1, 0, 0, 0, 0)
 	BuildInfo:setShaderVector(2, 0, 0, 0, 0.5)
 	BuildInfo:setLetterSpacing(0.9)
-	BuildInfo:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
-	BuildInfo:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	BuildInfo:setAlignment(Enum.LUIAlignment[@"lui_alignment_right"])
+	BuildInfo:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(BuildInfo)
 	self.BuildInfo = BuildInfo
 	local BuildInfo2 = LUI.UIText.new(0.5, 0.5, 615, 955, 0, 0, 14, 28)
 	BuildInfo2:setRGB(0.35, 0.35, 0.35)
 	BuildInfo2:setTTF("0arame_mono_stencil")
-	BuildInfo2:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
-	BuildInfo2:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	BuildInfo2:setAlignment(Enum.LUIAlignment[@"lui_alignment_right"])
+	BuildInfo2:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	BuildInfo2:linkToElementModel(self, "buildInfo", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -46,7 +46,7 @@ CoD.MainOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	local BuildInfo3 = LUI.UIText.new(0.5, 0.5, 755, 955, 0, 0, 56, 70)
 	BuildInfo3:setRGB(0.47, 0.47, 0.47)
 	BuildInfo3:setTTF("0arame_mono_stencil")
-	BuildInfo3:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	BuildInfo3:setAlignment(Enum.LUIAlignment[@"lui_alignment_right"])
 	BuildInfo3:linkToElementModel(self, "hostName", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -58,7 +58,7 @@ CoD.MainOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	local BuildInfo4 = LUI.UIText.new(0.5, 0.5, 755, 955, 0, 0, 75, 89)
 	BuildInfo4:setRGB(0.47, 0.47, 0.47)
 	BuildInfo4:setTTF("0arame_mono_stencil")
-	BuildInfo4:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	BuildInfo4:setAlignment(Enum.LUIAlignment[@"lui_alignment_right"])
 	BuildInfo4:linkToElementModel(self, "fullBuildNameContext", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -97,7 +97,7 @@ CoD.MainOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	})
 	local f1_local7 = self
 	local f1_local8 = self.subscribeToModel
-	local f1_local9 = Engine[@"getglobalmodel"]()
+	local f1_local9 = Engine.GetGlobalModel()
 	f1_local8(f1_local7, f1_local9.showPreAlphaText, function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -109,7 +109,7 @@ CoD.MainOverlay.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_a
 	end, false)
 	f1_local7 = self
 	f1_local8 = self.subscribeToModel
-	f1_local9 = Engine[@"getglobalmodel"]()
+	f1_local9 = Engine.GetGlobalModel()
 	f1_local8(f1_local7, f1_local9.showBuildInfo, function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

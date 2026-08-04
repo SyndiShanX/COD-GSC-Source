@@ -1,4 +1,4 @@
-require("x64:fb040b6277a38ba")
+require("ui/uieditor/widgets/debug/lobbyprocessqueuedebugitem")
 CoD.LobbyProcessQueueDebug = InheritFrom(LUI.UIElement)
 CoD.LobbyProcessQueueDebug.__defaultWidth = 500
 CoD.LobbyProcessQueueDebug.__defaultHeight = 1009
@@ -13,7 +13,7 @@ CoD.LobbyProcessQueueDebug.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	List:setTopBottom(0, 0, 0, 658)
 	List:setWidgetType(CoD.LobbyProcessQueueDebugItem)
 	List:setVerticalCount(30)
-	List:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	List:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	List:setDataSource("LobbyProcessQueueInfo")
 	self:addElement(List)
 	self.List = List

@@ -1,5 +1,5 @@
-require("x64:c1b8e8afdaf81b9")
-require("x64:ff3f371ba869eda")
+require("ui/uieditor/widgets/social/social_infopaneleft")
+require("ui/uieditor/widgets/social/social_infopaneright")
 CoD.Social_InfoPane = InheritFrom(LUI.UIElement)
 CoD.Social_InfoPane.__defaultWidth = 724
 CoD.Social_InfoPane.__defaultHeight = 680

@@ -1,7 +1,7 @@
-require("x64:f315f285d876794")
-require("x64:891695c75906b3c")
-require("x64:2675595fa323085")
-require("x64:a637e411019b270")
+require("ui/uieditor/menus/social/social_playerdetailspopup")
+require("ui/uieditor/widgets/director/directorlobbyleader")
+require("ui/uieditor/widgets/emptyfocusable")
+require("ui/uieditor/widgets/pc/socialmenu/pc_battlenetfriend_nameandrealid")
 CoD.PC_BattlenetFriend_Online = InheritFrom(LUI.UIElement)
 CoD.PC_BattlenetFriend_Online.__defaultWidth = 400
 CoD.PC_BattlenetFriend_Online.__defaultHeight = 60
@@ -16,7 +16,7 @@ CoD.PC_BattlenetFriend_Online.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local IMG_Background = LUI.UIImage.new(0.02, 0.99, 0, 0, 0, 1, 0, 0)
 	IMG_Background:setRGB(0.07, 0.07, 0.07)
 	IMG_Background:setAlpha(0)
-	IMG_Background:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	IMG_Background:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(IMG_Background)
 	self.IMG_Background = IMG_Background
 	local ProgramImage = LUI.UIImage.new(0.11, 0.11, -0.5, 39.5, 0.5, 0.5, -22, 18)
@@ -32,8 +32,8 @@ CoD.PC_BattlenetFriend_Online.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	TXTPlayerStatus:setRGB(0.59, 0.59, 0.59)
 	TXTPlayerStatus:setTTF("notosans_regular")
 	TXTPlayerStatus:setLetterSpacing(1)
-	TXTPlayerStatus:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	TXTPlayerStatus:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	TXTPlayerStatus:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	TXTPlayerStatus:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	TXTPlayerStatus:linkToElementModel(self, "presenceString", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -47,12 +47,12 @@ CoD.PC_BattlenetFriend_Online.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	TXTPending:setAlpha(0)
 	TXTPending:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_33DD0EE1DB9F6A1C"))
 	TXTPending:setTTF("notosans_regular")
-	TXTPending:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	TXTPending:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	TXTPending:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	TXTPending:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(TXTPending)
 	self.TXTPending = TXTPending
 	local IMG_PlayerStatusIcon = LUI.UIImage.new(0.16, 0.16, 0, 40, 0.44, 0.44, 0, 40)
-	IMG_PlayerStatusIcon:setImage(RegisterImage(@"uie_sliderbar_handle_alt"))
+	IMG_PlayerStatusIcon:setImage(RegisterImage("uie_sliderbar_handle_alt"))
 	IMG_PlayerStatusIcon:linkToElementModel(self, "battlenetPresence", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -107,24 +107,24 @@ CoD.PC_BattlenetFriend_Online.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end)
 	self:appendEventHandler("input_source_changed", function(f11_arg0, f11_arg1)
 		f11_arg1.menu = f11_arg1.menu or f1_arg0
-		CoD.Menu.UpdateButtonShownState(f11_arg0, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f11_arg0, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xbx_pssquare"])
 	end)
 	local f1_local9 = self
 	local f1_local10 = self.subscribeToModel
-	local f1_local11 = Engine[@"getmodelforcontroller"](f1_arg1)
+	local f1_local11 = Engine.GetModelForController(f1_arg1)
 	f1_local10(f1_local9, f1_local11.LastInput, function(f12_arg0, f12_arg1)
-		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f12_arg1, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xbx_pssquare"])
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
-		if IsGamepad(controller) then
-			SetSelectedFriendXUID(self, element, controller)
-			OpenOverlay(self, "Social_PlayerDetailsPopup", controller, nil)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum.LUIButton[@"lui_key_xbx_pssquare"], nil, function(f13_arg0, f13_arg1, f13_arg2, f13_arg3)
+		if IsGamepad(f13_arg2) then
+			SetSelectedFriendXUID(self, f13_arg0, f13_arg2)
+			OpenOverlay(self, "Social_PlayerDetailsPopup", f13_arg2, nil)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_1E0254269ED8FFD3", nil, nil)
+	end, function(f14_arg0, f14_arg1, f14_arg2)
+		if IsGamepad(f14_arg2) then
+			CoD.Menu.SetButtonLabel(f14_arg1, Enum.LUIButton[@"lui_key_xbx_pssquare"], @"hash_1E0254269ED8FFD3", nil, nil)
 			return true
 		else
 			return false

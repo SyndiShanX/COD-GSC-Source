@@ -1,4 +1,4 @@
-require("x64:4141c0118a5ab1d")
+require("ui/uieditor/widgets/startgameflow/loadingscreenplayerstats")
 CoD.LoadingScreenHeader = InheritFrom(LUI.UIElement)
 CoD.LoadingScreenHeader.__defaultWidth = 1129
 CoD.LoadingScreenHeader.__defaultHeight = 200
@@ -10,7 +10,7 @@ CoD.LoadingScreenHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local TiledBackingTop = LUI.UIImage.new(0.5, 0.5, -542.5, 48.5, 0, 0, 2, 200)
-	TiledBackingTop:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBackingTop:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	TiledBackingTop:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledBackingTop:setShaderVector(0, 0, 0, 0, 0)
 	TiledBackingTop:setupNineSliceShader(196, 88)
@@ -18,7 +18,7 @@ CoD.LoadingScreenHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.TiledBackingTop = TiledBackingTop
 	local TiledBackingTop2 = LUI.UIImage.new(0.5, 0.5, -542.5, 48.5, 0, 0, 41, 91)
 	TiledBackingTop2:setRGB(0.11, 0.11, 0.11)
-	TiledBackingTop2:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBackingTop2:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	TiledBackingTop2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledBackingTop2:setShaderVector(0, 0, 0, 0, 0)
 	TiledBackingTop2:setupNineSliceShader(196, 88)
@@ -31,8 +31,8 @@ CoD.LoadingScreenHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.BACKINGMapName = BACKINGMapName
 	local DiagonalLine = LUI.UIImage.new(0, 0, 22, 613, 0, 0, 2, 42)
 	DiagonalLine:setRGB(0.25, 0.25, 0.25)
-	DiagonalLine:setImage(RegisterImage(@"uie_ui_menu_common_repeat_stripe"))
-	DiagonalLine:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
+	DiagonalLine:setImage(RegisterImage("uie_ui_menu_common_repeat_stripe"))
+	DiagonalLine:setMaterial(LUI.UIImage.GetCachedMaterial("uie_tile_scroll_normal"))
 	DiagonalLine:setShaderVector(0, 8, 1, 0, 0)
 	DiagonalLine:setShaderVector(1, 0, 0, 0, 0)
 	self:addElement(DiagonalLine)
@@ -47,8 +47,8 @@ CoD.LoadingScreenHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	GamemodeName:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	GamemodeName:setTTF("ttmussels_demibold")
 	GamemodeName:setLetterSpacing(5)
-	GamemodeName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	GamemodeName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
+	GamemodeName:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	GamemodeName:setAlignment(Enum.LUIAlignment[@"hash_E821F0ECFF8D1C7"])
 	GamemodeName:subscribeToGlobalModel(f1_arg1, "LoadingScreenTeamInfo", "gameType", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -66,8 +66,8 @@ CoD.LoadingScreenHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	MapNameShadow:setShaderVector(1, 0, 0, 0, 0)
 	MapNameShadow:setShaderVector(2, 1, 0, 0, 0)
 	MapNameShadow:setLetterSpacing(6)
-	MapNameShadow:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	MapNameShadow:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	MapNameShadow:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	MapNameShadow:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	MapNameShadow:subscribeToGlobalModel(f1_arg1, "LoadingScreenTeamInfo", "mapName", function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -80,8 +80,8 @@ CoD.LoadingScreenHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	MapName:setRGB(ColorSet.PlayerYellow.r, ColorSet.PlayerYellow.g, ColorSet.PlayerYellow.b)
 	MapName:setTTF("ttmussels_regular")
 	MapName:setLetterSpacing(6)
-	MapName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	MapName:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
+	MapName:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	MapName:setAlignment(Enum.LUIAlignment[@"hash_E821F0ECFF8D1C7"])
 	MapName:subscribeToGlobalModel(f1_arg1, "LoadingScreenTeamInfo", "mapName", function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then

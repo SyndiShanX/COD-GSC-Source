@@ -1,4 +1,4 @@
-require("x64:f3c5259f470592d")
+require("ui/utility/overlayutility")
 CoD.ClanUtility = {}
 CoD.ClanUtility.clan_privacy_levels = {
 	{
@@ -10,7 +10,7 @@ CoD.ClanUtility.clan_privacy_levels = {
 		value = Enum[@"hash_6C491AC72605E0C3"][@"hash_76C66A50C1991611"],
 	},
 	{
-		display_string = @"hash_1818F22EF9A1728D",
+		display_string = "clan/privacy_invite_only",
 		value = Enum[@"hash_6C491AC72605E0C3"][@"hash_54A7DCCE66FFD267"],
 	},
 	{
@@ -20,15 +20,15 @@ CoD.ClanUtility.clan_privacy_levels = {
 }
 CoD.ClanUtility.clan_styles = {
 	{
-		display_string = @"hash_6EE9E9192DACAFC",
+		display_string = "clan/none",
 		value = LuaEnum.CLAN_STYLE.NONE,
 	},
 	{
-		display_string = @"hash_2B3910644531DFE7",
+		display_string = "clan/casual",
 		value = LuaEnum.CLAN_STYLE.CASUAL,
 	},
 	{
-		display_string = @"hash_14542B8F119A1ABD",
+		display_string = "clan/competitive",
 		value = LuaEnum.CLAN_STYLE.COMPETITIVE,
 	},
 }
@@ -53,7 +53,7 @@ CoD.ClanUtility.InboxPreLoad = function(f4_arg0)
 		controller = f4_arg0,
 		event = LuaEnum.CLAN_UI_EVENT.REFETCH_ALL,
 	})
-	local f4_local0 = Engine[@"getglobalmodel"]()
+	local f4_local0 = Engine.GetGlobalModel()
 	f4_local0 = f4_local0.socialRoot:create("ClanInbox")
 	local f4_local1 = f4_local0:create("loadedGroupInbox")
 	f4_local1:set(false)
@@ -72,11 +72,11 @@ end
 CoD.ClanUtility.CurrentGroupFinderString = function(f6_arg0)
 	local f6_local0 = CoD.ClanUtility.GetCurrentGroupKindDependingOnCurrentTab()
 	if f6_local0 == LuaEnum.CLAN_KINDS.TEAM then
-		return @"hash_73D7816DFB72EAF8"
+		return "clan/team_finder"
 	elseif f6_local0 == LuaEnum.CLAN_KINDS.SQUAD then
-		return @"hash_35C0A96701A346F5"
+		return "clan/squad_finder"
 	else
-		return @"hash_C6F69A7F555ED2B"
+		return "clan/clan_finder"
 	end
 end
 CoD.ClanUtility.GetGroupPrivacyString = function(f7_arg0)
@@ -87,7 +87,7 @@ CoD.ClanUtility.GetGroupPrivacyString = function(f7_arg0)
 	elseif f7_local0 == Enum[@"hash_6C491AC72605E0C3"][@"hash_76C66A50C1991611"] then
 		f7_arg0 = @"hash_19CB638F61EA2233"
 	elseif f7_local0 == Enum[@"hash_6C491AC72605E0C3"][@"hash_54A7DCCE66FFD267"] then
-		f7_arg0 = @"hash_1818F22EF9A1728D"
+		f7_arg0 = "clan/privacy_invite_only"
 	elseif f7_local0 == Enum[@"hash_6C491AC72605E0C3"][0xC009B7E8A40812] then
 		f7_arg0 = 0x0
 	end
@@ -192,40 +192,40 @@ end
 CoD.ClanUtility.GetClanEmblemSlotParams = function(f13_arg0, f13_arg1)
 	if Dvar[@"hash_3CA8E9EDE02C25E6"]:get() then
 		local f13_local0 = CoDShared.GetXUID64StringForController(f13_arg0)
-		local f13_local1 = Engine[@"getglobalmodel"]()
+		local f13_local1 = Engine.GetGlobalModel()
 		local f13_local2 = f13_local1.LobbyClients[f13_local0]:create("clan")
 		if f13_local2.clans ~= nil then
 			for f13_local3 = 1, f13_local2.clans.count:get() or 0, 1 do
 				local f13_local6 = f13_local2.clans
 				local f13_local7 = "clan"
 				if f13_arg1 == f13_local6["clan" .. f13_local3].ID:get() then
-					return f13_arg0, LuaEnum.CLAN_STORAGE_SLOT.CLAN_EMBLEM - 1 + f13_local3, Enum[@"storagefiletype"][@"hash_394DF15E8078D20A"]
+					return f13_arg0, LuaEnum.CLAN_STORAGE_SLOT.CLAN_EMBLEM - 1 + f13_local3, Enum.StorageFileType[@"hash_394DF15E8078D20A"]
 				end
 			end
 			for f13_local3 = 1, f13_local2.squads.count:get() or 0, 1 do
 				local f13_local6 = f13_local2.squads
 				local f13_local7 = "squad"
 				if f13_arg1 == f13_local6["squad" .. f13_local3].ID:get() then
-					return f13_arg0, LuaEnum.CLAN_STORAGE_SLOT.SQUAD_1_EMBLEM - 1 + f13_local3, Enum[@"storagefiletype"][@"hash_394DF15E8078D20A"]
+					return f13_arg0, LuaEnum.CLAN_STORAGE_SLOT.SQUAD_1_EMBLEM - 1 + f13_local3, Enum.StorageFileType[@"hash_394DF15E8078D20A"]
 				end
 			end
 			for f13_local3 = 1, f13_local2.teams.count:get() or 0, 1 do
 				local f13_local6 = f13_local2.teams
 				local f13_local7 = "team"
 				if f13_arg1 == f13_local6["team" .. f13_local3].ID:get() then
-					return f13_arg0, LuaEnum.CLAN_STORAGE_SLOT.TEAM_1_EMBLEM - 1 + f13_local3, Enum[@"storagefiletype"][@"hash_394DF15E8078D20A"]
+					return f13_arg0, LuaEnum.CLAN_STORAGE_SLOT.TEAM_1_EMBLEM - 1 + f13_local3, Enum.StorageFileType[@"hash_394DF15E8078D20A"]
 				end
 			end
 		end
 	end
-	return f13_arg0, LuaEnum.CLAN_STORAGE_SLOT.CLAN_EMBLEM, Enum[@"storagefiletype"][@"hash_394DF15E8078D20A"]
+	return f13_arg0, LuaEnum.CLAN_STORAGE_SLOT.CLAN_EMBLEM, Enum.StorageFileType[@"hash_394DF15E8078D20A"]
 end
 DataSources.GroupRenderInfo = {
 	getModel = function()
-		local f14_local0 = Engine[@"getglobalmodel"]()
+		local f14_local0 = Engine.GetGlobalModel()
 		f14_local0 = f14_local0.GroupRenderInfo
 		if not f14_local0 then
-			local f14_local1 = Engine[@"getglobalmodel"]()
+			local f14_local1 = Engine.GetGlobalModel()
 			f14_local0 = f14_local1:create("GroupRenderInfo")
 			f14_local1 = f14_local0:create("ownerID")
 			f14_local1:set(LuaDefine.ZERO_X64)
@@ -290,7 +290,7 @@ CoD.ClanUtility.IsTeamAdminOrOwner = function(f18_arg0)
 	return false
 end
 CoD.ClanUtility.ShowClanOptionPrompt = function(f19_arg0)
-	local f19_local0 = Engine[@"getglobalmodel"]()
+	local f19_local0 = Engine.GetGlobalModel()
 	f19_local0 = f19_local0["socialRoot.tab"]
 	local f19_local1 = CoD.ClanUtility.GetControllerClanModel(f19_arg0)
 	if f19_local0:get() == "clan" and f19_local1 and f19_local1.clans and f19_local1.clans.clan1 and f19_local1.clans.clan1.groupinfo then
@@ -300,7 +300,7 @@ CoD.ClanUtility.ShowClanOptionPrompt = function(f19_arg0)
 	end
 end
 CoD.ClanUtility.ShowSquadOptionPrompt = function(f20_arg0)
-	local f20_local0 = Engine[@"getglobalmodel"]()
+	local f20_local0 = Engine.GetGlobalModel()
 	if f20_local0["socialRoot.tab"]:get() == "clan_Squad" then
 		return true
 	else
@@ -308,7 +308,7 @@ CoD.ClanUtility.ShowSquadOptionPrompt = function(f20_arg0)
 	end
 end
 CoD.ClanUtility.ShowTeamOptionPrompt = function(f21_arg0)
-	local f21_local0 = Engine[@"getglobalmodel"]()
+	local f21_local0 = Engine.GetGlobalModel()
 	if f21_local0["socialRoot.tab"]:get() == "clan_Team" then
 		return true
 	else
@@ -316,7 +316,7 @@ CoD.ClanUtility.ShowTeamOptionPrompt = function(f21_arg0)
 	end
 end
 CoD.ClanUtility.GetCurrentGroupKindDependingOnCurrentTab = function()
-	local f22_local0 = Engine[@"getglobalmodel"]()
+	local f22_local0 = Engine.GetGlobalModel()
 	f22_local0 = f22_local0["socialRoot.tab"]
 	if f22_local0:get() == "clan_Team" then
 		return LuaEnum.CLAN_KINDS.TEAM
@@ -525,10 +525,10 @@ CoD.ClanUtility.IsInboxEmpty = function()
 end
 DataSources.GroupOverlayInfo = {
 	getModel = function()
-		local f45_local0 = Engine[@"getglobalmodel"]()
+		local f45_local0 = Engine.GetGlobalModel()
 		f45_local0 = f45_local0.GroupOverlayInfo
 		if not f45_local0 then
-			local f45_local1 = Engine[@"getglobalmodel"]()
+			local f45_local1 = Engine.GetGlobalModel()
 			f45_local0 = f45_local1:create("GroupOverlayInfo")
 			f45_local1 = f45_local0:create("warningText")
 			f45_local1:set("")
@@ -606,7 +606,7 @@ DataSources.ClanInboxButtonList = DataSourceHelpers.ListSetup("ClanInboxButtonLi
 	local f51_local8 = {}
 	local f51_local9
 	if f51_local2 then
-		f51_local9 = @"hash_98066110F701811"
+		f51_local9 = "clan/delete"
 		if not f51_local9 then
 		else
 			f51_local8.displayText = f51_local9
@@ -634,14 +634,14 @@ DataSources.ClanInboxButtonList = DataSourceHelpers.ListSetup("ClanInboxButtonLi
 			return f51_local6
 		end
 	end
-	f51_local9 = @"hash_519B9D7FEF31F185"
+	f51_local9 = "clan/reject"
 end)
 CoD.ClanUtility.AssignEmblemsToClanSquadTeam = function(f52_arg0, f52_arg1, f52_arg2)
 	local f52_local0 = 0
 	local f52_local1 = CoD.ClanUtility.GetControllerClanModel(f52_arg2)
 	local f52_local2 = f52_local1.clans:create("clan1")
 	local f52_local3 = {
-		Enum[@"storagefiletype"][@"hash_394DF15E8078D20A"],
+		Enum.StorageFileType[@"hash_394DF15E8078D20A"],
 	}
 	local f52_local4 = {
 		LuaEnum.CLAN_STORAGE_SLOT.CLAN_EMBLEM,
@@ -657,11 +657,11 @@ CoD.ClanUtility.AssignEmblemsToClanSquadTeam = function(f52_arg0, f52_arg1, f52_
 	local f52_local9 = {
 		LuaEnum.CLAN_STORAGE.EMBLEM,
 	}
-	Engine[@"uploademblemdata"](f52_arg2, LuaEnum.CLAN_STORAGE_SLOT.CLAN_EMBLEM, Enum[@"storagefiletype"][@"hash_394DF15E8078D20A"])
+	Engine.UploadEmblemData(f52_arg2, LuaEnum.CLAN_STORAGE_SLOT.CLAN_EMBLEM, Enum.StorageFileType[@"hash_394DF15E8078D20A"])
 	local f52_local10 = f52_local1.squads
 	for f52_local11 = 1, f52_local10.count:get() or 0, 1 do
 		local f52_local14 = f52_local10["squad" .. f52_local11]
-		table.insert(f52_local3, Enum[@"storagefiletype"][@"hash_394DF15E8078D20A"])
+		table.insert(f52_local3, Enum.StorageFileType[@"hash_394DF15E8078D20A"])
 		table.insert(f52_local4, LuaEnum.CLAN_STORAGE_SLOT.CLAN_EMBLEM + f52_local11)
 		table.insert(f52_local5, f52_local14.kind:get())
 		table.insert(f52_local6, f52_local14.ID:get())
@@ -669,13 +669,13 @@ CoD.ClanUtility.AssignEmblemsToClanSquadTeam = function(f52_arg0, f52_arg1, f52_
 		table.insert(f52_local8, f52_local14.rootID:get())
 		table.insert(f52_local9, LuaEnum.CLAN_STORAGE.EMBLEM)
 		f52_local0 = f52_local0 + 1
-		Engine[@"setupemblemdata"](f52_arg2, f52_local0, Enum[@"storagefiletype"][@"storage_default_emblems"], Enum[@"customizationtype"][@"customization_type_emblem"])
-		Engine[@"uploademblemdata"](f52_arg2, LuaEnum.CLAN_STORAGE_SLOT.CLAN_EMBLEM + f52_local11, Enum[@"storagefiletype"][@"hash_394DF15E8078D20A"])
+		Engine.SetupEmblemData(f52_arg2, f52_local0, Enum.StorageFileType[@"storage_default_emblems"], Enum.CustomizationType[@"customization_type_emblem"])
+		Engine.UploadEmblemData(f52_arg2, LuaEnum.CLAN_STORAGE_SLOT.CLAN_EMBLEM + f52_local11, Enum.StorageFileType[@"hash_394DF15E8078D20A"])
 	end
 	f52_local10 = f52_local1.teams
 	for f52_local11 = 1, f52_local10.count:get() or 0, 1 do
 		local f52_local14 = f52_local10["team" .. f52_local11]
-		table.insert(f52_local3, Enum[@"storagefiletype"][@"hash_394DF15E8078D20A"])
+		table.insert(f52_local3, Enum.StorageFileType[@"hash_394DF15E8078D20A"])
 		table.insert(f52_local4, LuaEnum.CLAN_STORAGE_SLOT.SQUAD_3_EMBLEM + f52_local11)
 		table.insert(f52_local5, f52_local14.kind:get())
 		table.insert(f52_local6, f52_local14.ID:get())
@@ -683,8 +683,8 @@ CoD.ClanUtility.AssignEmblemsToClanSquadTeam = function(f52_arg0, f52_arg1, f52_
 		table.insert(f52_local8, f52_local14.rootID:get())
 		table.insert(f52_local9, LuaEnum.CLAN_STORAGE.EMBLEM)
 		f52_local0 = f52_local0 + 1
-		Engine[@"setupemblemdata"](f52_arg2, f52_local0, Enum[@"storagefiletype"][@"storage_default_emblems"], Enum[@"customizationtype"][@"customization_type_emblem"])
-		Engine[@"uploademblemdata"](f52_arg2, LuaEnum.CLAN_STORAGE_SLOT.SQUAD_3_EMBLEM + f52_local11, Enum[@"storagefiletype"][@"hash_394DF15E8078D20A"])
+		Engine.SetupEmblemData(f52_arg2, f52_local0, Enum.StorageFileType[@"storage_default_emblems"], Enum.CustomizationType[@"customization_type_emblem"])
+		Engine.UploadEmblemData(f52_arg2, LuaEnum.CLAN_STORAGE_SLOT.SQUAD_3_EMBLEM + f52_local11, Enum.StorageFileType[@"hash_394DF15E8078D20A"])
 	end
 	Engine[@"hash_37079182F35F6DF8"](f52_arg2, f52_local3, f52_local4, f52_local5, f52_local6, f52_local7, f52_local8, f52_local9)
 end
@@ -711,7 +711,7 @@ CoD.ClanUtility.ClanButtonPress = function(f54_arg0, f54_arg1, f54_arg2, f54_arg
 		CoD.ClanUtility.ConfirmLeaveGroup(f54_arg2, f54_arg3, nil, LuaEnum.CLAN_KINDS.CLAN, 1)
 		GoBack(f54_arg0, f54_arg2)
 	elseif f54_local0 == "delete_clan" then
-		CoD.ClanUtility.ConfirmRemoveUserFromGroup(f54_arg2, Engine[@"getxuid64"](f54_arg2), f54_arg3, 0, LuaEnum.CLAN_KINDS.CLAN, 1)
+		CoD.ClanUtility.ConfirmRemoveUserFromGroup(f54_arg2, Engine.GetXUID64(f54_arg2), f54_arg3, 0, LuaEnum.CLAN_KINDS.CLAN, 1)
 		GoBack(f54_arg0, f54_arg2)
 	end
 end
@@ -719,8 +719,8 @@ CoD.ClanUtility.ConfirmLeaveGroup = function(f55_arg0, f55_arg1, f55_arg2, f55_a
 	CoD.ClanUtility.ConfirmRemoveUserFromGroup(f55_arg0, nil, f55_arg1, f55_arg2, f55_arg3, f55_arg4)
 end
 CoD.ClanUtility.ConfirmRemoveUserFromGroup = function(f56_arg0, f56_arg1, f56_arg2, f56_arg3, f56_arg4, f56_arg5)
-	local f56_local0 = Engine[@"xuidtostring"](Engine[@"getxuid64"](f56_arg0))
-	local f56_local1 = Engine[@"getglobalmodel"]()
+	local f56_local0 = Engine[@"xuidtostring"](Engine.GetXUID64(f56_arg0))
+	local f56_local1 = Engine.GetGlobalModel()
 	local f56_local2 = f56_local1.LobbyClients[f56_local0]:create("clan")
 	local f56_local3 = nil
 	local f56_local4 = f56_local2.clans:create("clan1")
@@ -762,7 +762,7 @@ CoD.ClanUtility.SquadAdminButtonPress = function(f57_arg0, f57_arg1, f57_arg2, f
 		CoD.ClanUtility.ConfirmLeaveGroup(f57_arg2, f57_arg3, nil, LuaEnum.CLAN_KINDS.SQUAD, f57_local1)
 		GoBack(f57_arg0, f57_arg2)
 	elseif f57_local0 == "delete_squad" then
-		CoD.ClanUtility.ConfirmRemoveUserFromGroup(f57_arg2, Engine[@"getxuid64"](f57_arg2), f57_arg3, 0, LuaEnum.CLAN_KINDS.SQUAD, f57_local1)
+		CoD.ClanUtility.ConfirmRemoveUserFromGroup(f57_arg2, Engine.GetXUID64(f57_arg2), f57_arg3, 0, LuaEnum.CLAN_KINDS.SQUAD, f57_local1)
 		GoBack(f57_arg0, f57_arg2)
 	end
 end
@@ -780,7 +780,7 @@ CoD.ClanUtility.TeamAdminButtonPress = function(f58_arg0, f58_arg1, f58_arg2, f5
 		CoD.ClanUtility.ConfirmLeaveGroup(f58_arg2, f58_arg3, nil, LuaEnum.CLAN_KINDS.TEAM, f58_local1)
 		GoBack(f58_arg0, f58_arg2)
 	elseif f58_local0 == "delete_team" then
-		CoD.ClanUtility.ConfirmRemoveUserFromGroup(f58_arg2, Engine[@"getxuid64"](f58_arg2), f58_arg3, 0, LuaEnum.CLAN_KINDS.TEAM, f58_local1)
+		CoD.ClanUtility.ConfirmRemoveUserFromGroup(f58_arg2, Engine.GetXUID64(f58_arg2), f58_arg3, 0, LuaEnum.CLAN_KINDS.TEAM, f58_local1)
 		GoBack(f58_arg0, f58_arg2)
 	end
 end
@@ -819,10 +819,10 @@ CoD.ClanUtility.CreateClanNameDescHandleKeyboardComplete = function(f61_arg0, f6
 		return
 	end
 	local f61_local3 = 0
-	if f61_arg2.type == Enum[@"keyboardtype"][@"hash_6C1A9F6974AA1C28"] then
+	if f61_arg2.type == Enum.KeyboardType[@"hash_6C1A9F6974AA1C28"] then
 		f61_local2.name:set(f61_local0)
 		f61_local3 = 1
-	elseif f61_arg2.type == Enum[@"keyboardtype"][@"hash_73E8DD5E8D7F1377"] then
+	elseif f61_arg2.type == Enum.KeyboardType[@"hash_73E8DD5E8D7F1377"] then
 		f61_local2.description:set(f61_local0)
 		f61_local3 = 2
 	end
@@ -853,14 +853,14 @@ CoD.ClanUtility.SetupEditBoxClanSearch = function(f66_arg0, f66_arg1, f66_arg2, 
 	CoD.ClanUtility.SetupEditBox(f66_arg0, f66_arg1.CurrentText, f66_arg2, f66_arg3, f66_arg4, DataSources.ClanSearchFields)
 end
 CoD.ClanUtility.SetupEditBoxControlWithDatasource = function(f67_arg0, f67_arg1, f67_arg2, f67_arg3, f67_arg4, f67_arg5, f67_arg6)
-	local f67_local0 = Engine[@"getmodel"](f67_arg5.getModel(f67_arg2), f67_arg4)
+	local f67_local0 = Engine.GetModel(f67_arg5.getModel(f67_arg2), f67_arg4)
 	if not f67_local0:get() then
 		f67_local0:set("")
 	end
 	CoD.PCUtility.SetupEditControlWithModel(f67_arg1.CurrentText, f67_arg2, f67_arg3, f67_local0, nil, nil, f67_arg6)
 end
 CoD.ClanUtility.SetupEditBox = function(f68_arg0, f68_arg1, f68_arg2, f68_arg3, f68_arg4, f68_arg5)
-	local f68_local0 = Engine[@"getmodel"](f68_arg5.getModel(f68_arg2), f68_arg4)
+	local f68_local0 = Engine.GetModel(f68_arg5.getModel(f68_arg2), f68_arg4)
 	if not f68_local0:get() then
 		f68_local0:set("")
 	end
@@ -874,7 +874,7 @@ CoD.ClanUtility.CreateSquadNameDescHandleKeyboardComplete = function(f69_arg0, f
 		return
 	end
 	local f69_local3 = 0
-	if f69_arg2.type == Enum[@"keyboardtype"][@"hash_6C1A9F6974AA1C28"] then
+	if f69_arg2.type == Enum.KeyboardType[@"hash_6C1A9F6974AA1C28"] then
 		f69_local2.name:set(f69_local0)
 		f69_local3 = 1
 	end
@@ -889,7 +889,7 @@ CoD.ClanUtility.CreateTeamNameDescHandleKeyboardComplete = function(f70_arg0, f7
 		return
 	end
 	local f70_local3 = 0
-	if f70_arg2.type == Enum[@"keyboardtype"][@"hash_6C1A9F6974AA1C28"] then
+	if f70_arg2.type == Enum.KeyboardType[@"hash_6C1A9F6974AA1C28"] then
 		f70_local2.name:set(f70_local0)
 		f70_local3 = 1
 	end
@@ -898,19 +898,19 @@ CoD.ClanUtility.CreateTeamNameDescHandleKeyboardComplete = function(f70_arg0, f7
 end
 CoD.ClanUtility.ClanEmblem_GainFocus = function(f71_arg0, f71_arg1, f71_arg2)
 	CoD.perController[f71_arg2].selectedEmblemModel = f71_arg1:getModel()
-	Engine[@"setupemblemdata"](f71_arg2, Engine[@"getmodelvalue"](f71_arg1:getModel(f71_arg2, "emblemIndex")), Enum[@"storagefiletype"][@"storage_emblems"], Enum[@"customizationtype"][@"customization_type_emblem"])
+	Engine.SetupEmblemData(f71_arg2, Engine.GetModelValue(f71_arg1:getModel(f71_arg2, "emblemIndex")), Enum.StorageFileType[@"storage_emblems"], Enum.CustomizationType[@"customization_type_emblem"])
 end
 CoD.ClanUtility.SearchCurrentGroupKind = function(f72_arg0)
 	CoD.ClanUtility.SearchGroup(f72_arg0, CoD.ClanUtility.GetCurrentGroupKindDependingOnCurrentTab())
 end
 CoD.ClanUtility.SearchGroup = function(f73_arg0, f73_arg1)
-	local f73_local0 = Engine[@"getmodelforcontroller"](f73_arg0)
-	local f73_local1 = Engine[@"getmodel"](f73_local0, "ClanSearchFields.friendsOnly")
+	local f73_local0 = Engine.GetModelForController(f73_arg0)
+	local f73_local1 = Engine.GetModel(f73_local0, "ClanSearchFields.friendsOnly")
 	f73_local1 = f73_local1:get()
-	local f73_local2 = Engine[@"getmodel"](f73_local0, "ClanSearchFields.search")
+	local f73_local2 = Engine.GetModel(f73_local0, "ClanSearchFields.search")
 	f73_local2 = f73_local2:get()
 	if f73_local1 then
-		local f73_local3 = Engine[@"getmodel"](f73_local0, "ClanSearchFields.publicOnly")
+		local f73_local3 = Engine.GetModel(f73_local0, "ClanSearchFields.publicOnly")
 		if not f73_local3:get() or not {
 			Enum[@"hash_6C491AC72605E0C3"][@"hash_4B91F60B176A25F1"],
 		} then
@@ -927,11 +927,11 @@ CoD.ClanUtility.SearchGroup = function(f73_arg0, f73_arg1)
 	end
 end
 CoD.ClanUtility.OpenGroupEmblemSelect = function(f74_arg0, f74_arg1, f74_arg2, f74_arg3, f74_arg4)
-	CoD.SetCustomization(f74_arg2, Enum[@"customizationtype"][@"hash_1AB847C1A0E71617"], "type")
+	CoD.SetCustomization(f74_arg2, Enum.CustomizationType[@"hash_1AB847C1A0E71617"], "type")
 	if CoD.CraftUtility.Groups.ParseDDL(f74_arg2) then
 		OpenOverlay(f74_arg0, "EmblemSelect", f74_arg2, {
 			_isEditor = "false",
-			_storageClientBuffer = CoD.BreadcrumbUtility.GetStorageClientBufferForPlayer(f74_arg2, Enum[@"emodes"][@"mode_multiplayer"]),
+			_storageClientBuffer = CoD.BreadcrumbUtility.GetStorageClientBufferForPlayer(f74_arg2, Enum.eModes.mode_multiplayer),
 			_isClan = true,
 		})
 	end
@@ -940,20 +940,20 @@ CoD.ClanUtility.SetCreateGroupEmblem = function(f75_arg0, f75_arg1, f75_arg2)
 	if IsLive() and not IsUserContentRestricted(f75_arg2) then
 		local f75_local0 = f75_arg1:getModel()
 		CoD.ClanUtility.PopulateClanEmblemData(f75_local0)
-		Engine[@"setupemblemdata"](f75_arg2, f75_local0.emblemIndex:get(), f75_local0.storageFileType:get(), Enum[@"customizationtype"][@"customization_type_emblem"])
+		Engine.SetupEmblemData(f75_arg2, f75_local0.emblemIndex:get(), f75_local0.storageFileType:get(), Enum.CustomizationType[@"customization_type_emblem"])
 	else
 	end
 	GoBack(f75_arg0, f75_arg2)
 end
 CoD.ClanUtility.ClearGroupEmblem = function(f76_arg0)
-	Engine[@"storagereset"](f76_arg0, Enum[@"storagefiletype"][@"hash_394DF15E8078D20A"], LuaEnum.CLAN_STORAGE_SLOT.EMBLEM)
+	Engine.StorageReset(f76_arg0, Enum.StorageFileType[@"hash_394DF15E8078D20A"], LuaEnum.CLAN_STORAGE_SLOT.EMBLEM)
 	CoD.ClanUtility.PopulateClanEmblemData()
 end
 CoD.ClanUtility.PopulateClanEmblemData = function(f77_arg0)
 	if not f77_arg0 then
 		f77_arg0 = {}
 	end
-	local f77_local0 = Engine[@"getglobalmodel"]()
+	local f77_local0 = Engine.GetGlobalModel()
 	f77_local0 = f77_local0:create("ClanEmblem")
 	for f77_local4, f77_local5 in pairs({
 		isNonClickableEmblem = 0,
@@ -980,20 +980,20 @@ CoD.ClanUtility.PopulateClanEmblemData = function(f77_arg0)
 end
 DataSources.ClanSearchFields = {
 	getModel = function(f78_arg0)
-		local f78_local0 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f78_arg0), "ClanSearchFields")
-		local f78_local1 = Engine[@"createmodel"](f78_local0, "search")
+		local f78_local0 = Engine.CreateModel(Engine.GetModelForController(f78_arg0), "ClanSearchFields")
+		local f78_local1 = Engine.CreateModel(f78_local0, "search")
 		f78_local1:set("")
-		f78_local1 = Engine[@"createmodel"](f78_local0, "friendsOnly")
+		f78_local1 = Engine.CreateModel(f78_local0, "friendsOnly")
 		f78_local1:set(false)
-		f78_local1 = Engine[@"createmodel"](f78_local0, "publicOnly")
+		f78_local1 = Engine.CreateModel(f78_local0, "publicOnly")
 		f78_local1:set(false)
 		return f78_local0
 	end,
 	getFriendsClans = function(f79_arg0)
-		local f79_local0 = Engine[@"getglobalmodel"]()
+		local f79_local0 = Engine.GetGlobalModel()
 		f79_local0 = f79_local0.socialRoot
-		local f79_local1 = Engine[@"getmodel"](f79_local0, "clans.friendsClans.count")
-		local f79_local2 = Engine[@"getmodel"](f79_local0, "clans.friendsClans.list")
+		local f79_local1 = Engine.GetModel(f79_local0, "clans.friendsClans.count")
+		local f79_local2 = Engine.GetModel(f79_local0, "clans.friendsClans.list")
 		local f79_local3 = {}
 		for f79_local4 = 1, f79_local1:get() or 0, 1 do
 			f79_local3[f79_local4] = f79_local2[f79_local4]:get()
@@ -1008,10 +1008,10 @@ CoD.ClanUtility.HasFindClansNoResult = function(f80_arg0)
 	return f80_local0:get() == 0
 end
 CoD.ClanUtility.GetFriendsCountByClanIndexArrayMap = function(f81_arg0)
-	local f81_local0 = Engine[@"getglobalmodel"]()
+	local f81_local0 = Engine.GetGlobalModel()
 	f81_local0 = f81_local0.socialRoot
-	local f81_local1 = Engine[@"getmodel"](f81_local0, "clans.friendsClans.count")
-	local f81_local2 = Engine[@"getmodel"](f81_local0, "clans.friendsClans.list")
+	local f81_local1 = Engine.GetModel(f81_local0, "clans.friendsClans.count")
+	local f81_local2 = Engine.GetModel(f81_local0, "clans.friendsClans.list")
 	local f81_local3 = {}
 	for f81_local4 = 1, f81_local1:get() or 0, 1 do
 		local f81_local7 = f81_local2[f81_local4]:get()
@@ -1062,7 +1062,7 @@ DataSources.FindClansResults = DataSourceHelpers.ListSetup("FindClansResults", C
 	end
 end)
 DataSources.ClanTabs = ListHelper_SetupDataSource("ClanTabs", function(f85_arg0)
-	local f85_local0 = Engine[@"getglobalmodel"]()
+	local f85_local0 = Engine.GetGlobalModel()
 	f85_local0 = f85_local0:create("socialRoot")
 	local f85_local1 = f85_local0:create("clanTab")
 	local f85_local2 = f85_local1:get()
@@ -1076,7 +1076,7 @@ DataSources.ClanTabs = ListHelper_SetupDataSource("ClanTabs", function(f85_arg0)
 	local f85_local3 = {}
 	table.insert(f85_local3, {
 		models = {
-			tabName = LocalizeToUpperString(@"hash_48745563CF3B8C74"),
+			tabName = LocalizeToUpperString("clan/clan_hq"),
 			tabWidget = "CoD.Clan_HQ",
 			showInQuickInvite = true,
 		},
@@ -1087,7 +1087,7 @@ DataSources.ClanTabs = ListHelper_SetupDataSource("ClanTabs", function(f85_arg0)
 	})
 	table.insert(f85_local3, {
 		models = {
-			tabName = LocalizeToUpperString(@"hash_34D2079A95A2CD00"),
+			tabName = LocalizeToUpperString("clan/squad"),
 			tabWidget = "CoD.Clan_Squad",
 			showInQuickInvite = true,
 		},
@@ -1098,7 +1098,7 @@ DataSources.ClanTabs = ListHelper_SetupDataSource("ClanTabs", function(f85_arg0)
 	})
 	table.insert(f85_local3, {
 		models = {
-			tabName = LocalizeToUpperString(@"hash_9E78FD8E4E7865F"),
+			tabName = LocalizeToUpperString("clan/team"),
 			tabWidget = "CoD.Clan_Team",
 			showInQuickInvite = true,
 		},
@@ -1109,7 +1109,7 @@ DataSources.ClanTabs = ListHelper_SetupDataSource("ClanTabs", function(f85_arg0)
 	})
 	table.insert(f85_local3, {
 		models = {
-			tabName = LocalizeToUpperString(@"hash_3E15BA3CAE4EB429"),
+			tabName = LocalizeToUpperString("clan/members"),
 			tabWidget = "CoD.Clan_Members",
 			showInQuickInvite = true,
 		},
@@ -1120,7 +1120,7 @@ DataSources.ClanTabs = ListHelper_SetupDataSource("ClanTabs", function(f85_arg0)
 	})
 	table.insert(f85_local3, {
 		models = {
-			tabName = LocalizeToUpperString(@"hash_A5BE2B8C29E1076"),
+			tabName = LocalizeToUpperString("clan/leaderboards"),
 			tabWidget = "CoD.Clan_Leaderboards",
 			showInQuickInvite = true,
 		},
@@ -1131,7 +1131,7 @@ DataSources.ClanTabs = ListHelper_SetupDataSource("ClanTabs", function(f85_arg0)
 	})
 	table.insert(f85_local3, {
 		models = {
-			tabName = LocalizeToUpperString(@"hash_391511506A6D8036"),
+			tabName = LocalizeToUpperString("clan/inbox"),
 			tabWidget = "CoD.Clan_Inbox",
 			showInQuickInvite = true,
 		},
@@ -1142,7 +1142,7 @@ DataSources.ClanTabs = ListHelper_SetupDataSource("ClanTabs", function(f85_arg0)
 	})
 	table.insert(f85_local3, {
 		models = {
-			tabName = LocalizeToUpperString(@"hash_F968AEB941BE995"),
+			tabName = LocalizeToUpperString("clan/admin"),
 			tabWidget = "CoD.Clan_Admin",
 			showInQuickInvite = true,
 		},
@@ -1165,7 +1165,7 @@ end, true)
 DataSources.ClanInfo = {
 	getModel = function(f86_arg0)
 		local f86_local0 = CoD.ClanUtility.GetControllerClanModel(f86_arg0)
-		local f86_local1 = Engine[@"getglobalmodel"]()
+		local f86_local1 = Engine.GetGlobalModel()
 		local f86_local2 = f86_local1.socialRoot.clans:create("listClans")
 		local f86_local3 = {}
 		if f86_local0.clans ~= nil and f86_local0.clans.clan1 ~= nil then
@@ -1188,7 +1188,7 @@ DataSources.ClanSquadInfo = {
 		local f87_local1 = {}
 		if f87_local0.squads ~= nil and f87_local0.squads.squad1 ~= nil then
 			f87_local1 = f87_local0.squads.squad1
-			local f87_local2 = Engine[@"getglobalmodel"]()
+			local f87_local2 = Engine.GetGlobalModel()
 			local f87_local3 = f87_local2.socialRoot.clans:create("listSquads")
 			if f87_local1.IDstr and f87_local3[f87_local1.IDstr:get()] ~= nil then
 				f87_local1.groupInfo:set(f87_local3[f87_local1.IDstr:get()])
@@ -1209,7 +1209,7 @@ DataSources.ClanTeamInfo = {
 	getModel = function(f88_arg0)
 		local f88_local0 = CoD.ClanUtility.GetControllerClanModel(f88_arg0)
 		local f88_local1 = {}
-		local f88_local2 = Engine[@"getglobalmodel"]()
+		local f88_local2 = Engine.GetGlobalModel()
 		f88_local2 = f88_local2.socialRoot.clans
 		local f88_local3 = f88_local2.currentTeamId:get() or 1
 		if f88_local0.teams ~= nil and f88_local0.teams["team" .. f88_local3] then
@@ -1242,7 +1242,7 @@ DataSourceHelpers.GlobalDataSourceSetup("ClanSquads", "LobbyClients", function(f
 				f90_arg1:updateDataSource()
 			end, false)
 		end
-		local f90_local2 = Engine[@"getglobalmodel"]()
+		local f90_local2 = Engine.GetGlobalModel()
 		local f90_local3 = f90_local2.socialRoot.clans:create("listSquads")
 		for f90_local4 = 1, f90_local1.count:get() or 0, 1 do
 			local f90_local7 = f90_local1["squad" .. f90_local4]
@@ -1252,7 +1252,7 @@ DataSourceHelpers.GlobalDataSourceSetup("ClanSquads", "LobbyClients", function(f
 			end
 			if f90_local8 ~= nil then
 				local f90_local9 = f90_local7:create("emblem")
-				f90_local9:set(@"ui_host")
+				f90_local9:set("ui_host")
 				f90_local9 = f90_local7:create("groupInfo")
 				f90_local9:set(f90_local8)
 				table.insert(f90_arg1._items, f90_local7)
@@ -1276,7 +1276,7 @@ DataSourceHelpers.GlobalDataSourceSetup("ClanTeams", "LobbyClients", function(f9
 				f95_arg1:updateDataSource()
 			end, false)
 		end
-		local f95_local2 = Engine[@"getglobalmodel"]()
+		local f95_local2 = Engine.GetGlobalModel()
 		local f95_local3 = f95_local2.socialRoot.clans:create("listTeams")
 		for f95_local4 = 1, f95_local1.count:get() or 0, 1 do
 			local f95_local7 = f95_local1["team" .. f95_local4]
@@ -1286,7 +1286,7 @@ DataSourceHelpers.GlobalDataSourceSetup("ClanTeams", "LobbyClients", function(f9
 			end
 			if f95_local8 ~= nil then
 				local f95_local9 = f95_local7:create("emblem")
-				f95_local9:set(@"ui_host")
+				f95_local9:set("ui_host")
 				f95_local9 = f95_local7:create("groupInfo")
 				f95_local9:set(f95_local8)
 				table.insert(f95_arg1._items, f95_local7)
@@ -1324,9 +1324,9 @@ DataSourceHelpers.GlobalDataSourceSetup("ClanMembers", "LobbyClients", function(
 	end,
 })
 CoD.ClanUtility.RequestDataClanInbox = function(f104_arg0)
-	local f104_local0 = Engine[@"getglobalmodel"]()
+	local f104_local0 = Engine.GetGlobalModel()
 	if f104_local0.socialRoot.ClanInbox.loadedGroupInbox:get() then
-		f104_local0 = Engine[@"getglobalmodel"]()
+		f104_local0 = Engine.GetGlobalModel()
 		if f104_local0.socialRoot.ClanInbox.loadedUserInbox:get() then
 			Engine[@"lobbyevent"]("OnClanUIEvent", {
 				dataRequestType = LuaEnum.CLAN_DATA_REQUEST_TYPE.CLAN_INBOX,
@@ -1341,10 +1341,10 @@ end
 DataSourceHelpers.GlobalDataSourceSetup("ClanInbox", "LobbyClients", function(f105_arg0, f105_arg1) end, false, {
 	prepare = function(f106_arg0, f106_arg1, f106_arg2)
 		f106_arg1._items = {}
-		local f106_local0 = Engine[@"getglobalmodel"]()
+		local f106_local0 = Engine.GetGlobalModel()
 		f106_local0 = f106_local0.socialRoot
 		f106_arg1._rootListModel = f106_local0:create("ClanInbox")
-		local f106_local1 = Engine[@"getxuid64"](f106_arg0)
+		local f106_local1 = Engine.GetXUID64(f106_arg0)
 		if not f106_arg1._countSubUserInboxCount then
 			f106_arg1._countSubUserInboxCount = f106_arg1:subscribeToModel(f106_local0.clans:create("countInbox"), function()
 				f106_arg1._rootListModel.loadedUserInbox:set(true)
@@ -1360,7 +1360,7 @@ DataSourceHelpers.GlobalDataSourceSetup("ClanInbox", "LobbyClients", function(f1
 		if not f106_arg1._countSubInboxTotalCount then
 			f106_arg1._countSubInboxTotalCount = f106_arg1:subscribeToModel(f106_arg1._rootListModel:create("modelCount"), function()
 				f106_arg1:updateDataSource()
-				local f109_local0 = Engine[@"getglobalmodel"]()
+				local f109_local0 = Engine.GetGlobalModel()
 				f109_local0.socialRoot.ClanInbox.fullyLoaded:set(true)
 			end, false)
 		end
@@ -1414,7 +1414,7 @@ DataSourceHelpers.GlobalDataSourceSetup("ClanInbox", "LobbyClients", function(f1
 					local f106_local17 = f106_local11:create("groupInfo", true)
 					f106_local17:set(f106_local16)
 					f106_local17 = f106_local11:create("emblem", true)
-					f106_local17:set(@"ui_host")
+					f106_local17:set("ui_host")
 					table.insert(f106_arg1._items, f106_local11)
 					f106_local7 = f106_local7 + 1
 				end
@@ -1430,12 +1430,12 @@ DataSourceHelpers.GlobalDataSourceSetup("ClanInbox", "LobbyClients", function(f1
 		return f115_arg1._items[f115_arg2]
 	end,
 	cleanup = function(f116_arg0, f116_arg1)
-		Engine[@"unsubscribeandfreemodel"](f116_arg0._rootListModel)
+		Engine.UnsubscribeAndFreeModel(f116_arg0._rootListModel)
 	end,
 })
 CoD.ClanUtility.GetLocalEmblemData = function(f117_arg0)
 	local f117_local0 = {}
-	local f117_local1 = Engine[@"storagegetbuffer"](f117_arg0, Enum[@"storagefiletype"][@"hash_394DF15E8078D20A"])
+	local f117_local1 = Engine.StorageGetBuffer(f117_arg0, Enum.StorageFileType[@"hash_394DF15E8078D20A"])
 	if f117_local1 then
 		f117_local0.emblemIndex = f117_local1.emblemIndex and f117_local1.emblemIndex:get() or 0
 		f117_local0.isUsed = f117_local1.isUsed:get()
@@ -1450,19 +1450,19 @@ CoD.ClanUtility.GetLocalEmblemData = function(f117_arg0)
 end
 DataSources.GroupEmblem = {
 	getModel = function(f118_arg0, f118_arg1, f118_arg2)
-		local f118_local0 = Engine[@"getglobalmodel"]()
+		local f118_local0 = Engine.GetGlobalModel()
 		f118_local0 = f118_local0:create("ClanEmblem")
 		CoD.ClanUtility.PopulateClanEmblemData(CoD.ClanUtility.GetLocalEmblemData(f118_arg0))
 		return f118_local0
 	end,
 }
 DataSources.ClanSocialOptionsButtonList = ListHelper_SetupDataSource("ClanSocialOptionsButtonList", function(f119_arg0, f119_arg1)
-	local f119_local0 = Engine[@"getglobalmodel"]()
+	local f119_local0 = Engine.GetGlobalModel()
 	f119_local0 = f119_local0.socialRoot.clans.ownerClan:get()
 	local f119_local1 = {}
 	table.insert(f119_local1, {
-		displayText = @"hash_C6F69A7F555ED2B",
-		displayImage = @"ui_host",
+		displayText = "clan/clan_finder",
+		displayImage = "ui_host",
 		action = CoD.ClanUtility.ClanButtonPress,
 		frameWidget = "CoD.ClanFinderFrame",
 		params = {
@@ -1470,8 +1470,8 @@ DataSources.ClanSocialOptionsButtonList = ListHelper_SetupDataSource("ClanSocial
 		},
 	})
 	table.insert(f119_local1, {
-		displayText = @"hash_6E11D7D4DCBEADF8",
-		displayImage = @"ui_host",
+		displayText = "clan/join_request",
+		displayImage = "ui_host",
 		action = CoD.ClanUtility.ClanButtonPress,
 		frameWidget = "CoD.JoinRequestFrame",
 		params = {
@@ -1479,8 +1479,8 @@ DataSources.ClanSocialOptionsButtonList = ListHelper_SetupDataSource("ClanSocial
 		},
 	})
 	table.insert(f119_local1, {
-		displayText = @"hash_3DEB4B8C3DB6B117",
-		displayImage = @"ui_host",
+		displayText = "clan/create_clan",
+		displayImage = "ui_host",
 		action = CoD.ClanUtility.ClanButtonPress,
 		frameWidget = "CoD.CreateClanFrame",
 		disabled = f119_local0,
@@ -1511,12 +1511,12 @@ DataSources.ClanSocialOptionsButtonList = ListHelper_SetupDataSource("ClanSocial
 	return f119_local2
 end)
 DataSources.ClanSquadOptionsButtonList = ListHelper_SetupDataSource("ClanSquadOptionsButtonList", function(f120_arg0, f120_arg1)
-	local f120_local0 = Engine[@"getglobalmodel"]()
+	local f120_local0 = Engine.GetGlobalModel()
 	f120_local0 = f120_local0.socialRoot.clans.ownerSquad:get()
 	local f120_local1 = {}
 	table.insert(f120_local1, {
-		displayText = @"hash_FEA19F754428E27",
-		displayImage = @"ui_host",
+		displayText = "clan/friends_squads",
+		displayImage = "ui_host",
 		action = CoD.ClanUtility.SquadAdminButtonPress,
 		frameWidget = "CoD.FriendsClansFrame",
 		params = {
@@ -1524,8 +1524,8 @@ DataSources.ClanSquadOptionsButtonList = ListHelper_SetupDataSource("ClanSquadOp
 		},
 	})
 	table.insert(f120_local1, {
-		displayText = @"hash_35C0A96701A346F5",
-		displayImage = @"ui_host",
+		displayText = "clan/squad_finder",
+		displayImage = "ui_host",
 		action = CoD.ClanUtility.SquadAdminButtonPress,
 		frameWidget = "CoD.ClanFinderFrame",
 		params = {
@@ -1533,8 +1533,8 @@ DataSources.ClanSquadOptionsButtonList = ListHelper_SetupDataSource("ClanSquadOp
 		},
 	})
 	table.insert(f120_local1, {
-		displayText = @"hash_28F07CF5A510C972",
-		displayImage = @"ui_host",
+		displayText = "clan/search_for_player",
+		displayImage = "ui_host",
 		action = CoD.ClanUtility.SquadAdminButtonPress,
 		frameWidget = "CoD.SearchForPlayerFrame",
 		params = {
@@ -1542,8 +1542,8 @@ DataSources.ClanSquadOptionsButtonList = ListHelper_SetupDataSource("ClanSquadOp
 		},
 	})
 	table.insert(f120_local1, {
-		displayText = @"hash_6E11D7D4DCBEADF8",
-		displayImage = @"ui_host",
+		displayText = "clan/join_request",
+		displayImage = "ui_host",
 		action = CoD.ClanUtility.SquadAdminButtonPress,
 		frameWidget = "CoD.JoinRequestFrame",
 		params = {
@@ -1551,8 +1551,8 @@ DataSources.ClanSquadOptionsButtonList = ListHelper_SetupDataSource("ClanSquadOp
 		},
 	})
 	table.insert(f120_local1, {
-		displayText = @"hash_19B196AC8D1E4923",
-		displayImage = @"ui_host",
+		displayText = "clan/create_squad",
+		displayImage = "ui_host",
 		action = CoD.ClanUtility.SquadAdminButtonPress,
 		frameWidget = "CoD.CreateClanFrame",
 		disabled = f120_local0,
@@ -1582,12 +1582,12 @@ DataSources.ClanSquadOptionsButtonList = ListHelper_SetupDataSource("ClanSquadOp
 	return f120_local2
 end)
 DataSources.ClanTeamOptionsButtonList = ListHelper_SetupDataSource("ClanTeamOptionsButtonList", function(f121_arg0, f121_arg1)
-	local f121_local0 = Engine[@"getglobalmodel"]()
+	local f121_local0 = Engine.GetGlobalModel()
 	f121_local0 = f121_local0.socialRoot.clans.ownerTeam:get()
 	local f121_local1 = {}
 	table.insert(f121_local1, {
-		displayText = @"hash_6153C2AF3F541EB2",
-		displayImage = @"ui_host",
+		displayText = "clan/friends_teams",
+		displayImage = "ui_host",
 		action = CoD.ClanUtility.TeamAdminButtonPress,
 		frameWidget = "CoD.FriendsClansFrame",
 		params = {
@@ -1595,8 +1595,8 @@ DataSources.ClanTeamOptionsButtonList = ListHelper_SetupDataSource("ClanTeamOpti
 		},
 	})
 	table.insert(f121_local1, {
-		displayText = @"hash_73D7816DFB72EAF8",
-		displayImage = @"ui_host",
+		displayText = "clan/team_finder",
+		displayImage = "ui_host",
 		action = CoD.ClanUtility.TeamAdminButtonPress,
 		frameWidget = "CoD.ClanFinderFrame",
 		params = {
@@ -1604,8 +1604,8 @@ DataSources.ClanTeamOptionsButtonList = ListHelper_SetupDataSource("ClanTeamOpti
 		},
 	})
 	table.insert(f121_local1, {
-		displayText = @"hash_28F07CF5A510C972",
-		displayImage = @"ui_host",
+		displayText = "clan/search_for_player",
+		displayImage = "ui_host",
 		action = CoD.ClanUtility.TeamAdminButtonPress,
 		frameWidget = "CoD.SearchForPlayerFrame",
 		params = {
@@ -1613,8 +1613,8 @@ DataSources.ClanTeamOptionsButtonList = ListHelper_SetupDataSource("ClanTeamOpti
 		},
 	})
 	table.insert(f121_local1, {
-		displayText = @"hash_6E11D7D4DCBEADF8",
-		displayImage = @"ui_host",
+		displayText = "clan/join_request",
+		displayImage = "ui_host",
 		action = CoD.ClanUtility.TeamAdminButtonPress,
 		frameWidget = "CoD.JoinRequestFrame",
 		params = {
@@ -1622,8 +1622,8 @@ DataSources.ClanTeamOptionsButtonList = ListHelper_SetupDataSource("ClanTeamOpti
 		},
 	})
 	table.insert(f121_local1, {
-		displayText = @"hash_75D5BCFD93BE1F26",
-		displayImage = @"ui_host",
+		displayText = "clan/create_team",
+		displayImage = "ui_host",
 		action = CoD.ClanUtility.TeamAdminButtonPress,
 		frameWidget = "CoD.CreateClanFrame",
 		disabled = f121_local0,
@@ -1686,7 +1686,7 @@ DataSources.ClanJoinButtonList = ListHelper_SetupDataSource("ClanJoinButtonList"
 			if f122_local2.kind ~= LuaEnum.CLAN_KINDS.CLAN and CoD.ClanUtility.GetClanId(f122_arg0) ~= f122_local2.rootID then
 			else
 			end
-			local f122_local4 = 0xCC5D02482CF027
+			local f122_local4 = "clan/join_clan"
 			if f122_local2.kind == LuaEnum.CLAN_KINDS.TEAM then
 				f122_local4 = @"hash_3FDDCF7F9CBFF616"
 			elseif f122_local2.kind == LuaEnum.CLAN_KINDS.SQUAD then
@@ -1748,9 +1748,9 @@ DataSources.ClanAdminOptionsButtonList = ListHelper_SetupDataSource("ClanAdminOp
 	local f123_local1 = {}
 	if f123_local0 == Enum[@"hash_610C0A769A29C38F"][@"hash_4E94BCDEEB8AE946"] then
 		table.insert(f123_local1, {
-			displayText = @"hash_59CAA53C4504E513",
-			displayImage = @"ui_host",
-			displayDesc = @"hash_35BAF6BC7F1F75C5",
+			displayText = "clan/transfer_ownership",
+			displayImage = "ui_host",
+			displayDesc = "clan/transfer_ownership_desc",
 			action = CoD.ClanUtility.ClanButtonPress,
 			params = {
 				event = "transfer_ownership",
@@ -1758,9 +1758,9 @@ DataSources.ClanAdminOptionsButtonList = ListHelper_SetupDataSource("ClanAdminOp
 		})
 	end
 	table.insert(f123_local1, {
-		displayText = @"hash_2DC06E1D45AF813A",
-		displayImage = @"ui_host",
-		displayDesc = @"hash_38DA8816BDC7010A",
+		displayText = "clan/leave_clan",
+		displayImage = "ui_host",
+		displayDesc = "clan/leave_clan_desc",
 		action = CoD.ClanUtility.ClanButtonPress,
 		params = {
 			event = "leave_clan",
@@ -1768,9 +1768,9 @@ DataSources.ClanAdminOptionsButtonList = ListHelper_SetupDataSource("ClanAdminOp
 	})
 	if f123_local0 == Enum[@"hash_610C0A769A29C38F"][@"hash_4E94BCDEEB8AE946"] then
 		table.insert(f123_local1, {
-			displayText = 0x352A550AB4D746,
-			displayImage = @"ui_host",
-			displayDesc = @"hash_55253E43235D5736",
+			displayText = "clan/delete_clan",
+			displayImage = "ui_host",
+			displayDesc = "clan/delete_clan_desc",
 			action = CoD.ClanUtility.ClanButtonPress,
 			params = {
 				event = "delete_clan",
@@ -1798,8 +1798,8 @@ DataSources.TeamAdminOptionsButtonList = ListHelper_SetupDataSource("TeamAdminOp
 	local f124_local1 = {}
 	if f124_local0 == Enum[@"hash_610C0A769A29C38F"][@"hash_4E94BCDEEB8AE946"] then
 		table.insert(f124_local1, {
-			displayText = @"hash_59CAA53C4504E513",
-			displayImage = @"ui_host",
+			displayText = "clan/transfer_ownership",
+			displayImage = "ui_host",
 			action = CoD.ClanUtility.TeamAdminButtonPress,
 			params = {
 				event = "transfer_ownership",
@@ -1807,8 +1807,8 @@ DataSources.TeamAdminOptionsButtonList = ListHelper_SetupDataSource("TeamAdminOp
 		})
 	end
 	table.insert(f124_local1, {
-		displayText = @"hash_67FD8B7D8412D017",
-		displayImage = @"ui_host",
+		displayText = "clan/leave_team",
+		displayImage = "ui_host",
 		action = CoD.ClanUtility.TeamAdminButtonPress,
 		params = {
 			event = "leave_team",
@@ -1816,8 +1816,8 @@ DataSources.TeamAdminOptionsButtonList = ListHelper_SetupDataSource("TeamAdminOp
 	})
 	if f124_local0 == Enum[@"hash_610C0A769A29C38F"][@"hash_4E94BCDEEB8AE946"] then
 		table.insert(f124_local1, {
-			displayText = @"hash_2DB06907F7FD272B",
-			displayImage = @"ui_host",
+			displayText = "clan/delete_team",
+			displayImage = "ui_host",
 			action = CoD.ClanUtility.TeamAdminButtonPress,
 			params = {
 				event = "delete_team",
@@ -1844,8 +1844,8 @@ DataSources.SquadAdminOptionsButtonList = ListHelper_SetupDataSource("SquadAdmin
 	local f125_local1 = {}
 	if f125_local0 == Enum[@"hash_610C0A769A29C38F"][@"hash_4E94BCDEEB8AE946"] then
 		table.insert(f125_local1, {
-			displayText = @"hash_59CAA53C4504E513",
-			displayImage = @"ui_host",
+			displayText = "clan/transfer_ownership",
+			displayImage = "ui_host",
 			action = CoD.ClanUtility.SquadAdminButtonPress,
 			params = {
 				event = "transfer_ownership",
@@ -1853,8 +1853,8 @@ DataSources.SquadAdminOptionsButtonList = ListHelper_SetupDataSource("SquadAdmin
 		})
 	end
 	table.insert(f125_local1, {
-		displayText = @"hash_394163DA9BFDEB8",
-		displayImage = @"ui_host",
+		displayText = "clan/leave_squad",
+		displayImage = "ui_host",
 		action = CoD.ClanUtility.SquadAdminButtonPress,
 		params = {
 			event = "leave_squad",
@@ -1862,8 +1862,8 @@ DataSources.SquadAdminOptionsButtonList = ListHelper_SetupDataSource("SquadAdmin
 	})
 	if f125_local0 == Enum[@"hash_610C0A769A29C38F"][@"hash_4E94BCDEEB8AE946"] then
 		table.insert(f125_local1, {
-			displayText = @"hash_59B34500A39D0A1C",
-			displayImage = @"ui_host",
+			displayText = "clan/delete_squad",
+			displayImage = "ui_host",
 			action = CoD.ClanUtility.SquadAdminButtonPress,
 			params = {
 				event = "delete_squad",
@@ -1910,7 +1910,7 @@ DataSources.SearchClanNameDescription = ListHelper_SetupDataSource("SearchClanNa
 	if not CoD.isPC then
 		table.insert(
 			f129_local0,
-			CoD.CoDAccountUtility.packageOptionsButtonData(@"hash_56264D0536BC9414", @"hash_6A6FBC982BCC92DC", "", function(f130_arg0, f130_arg1, f130_arg2, f130_arg3, f130_arg4)
+			CoD.CoDAccountUtility.packageOptionsButtonData(@"hash_56264D0536BC9414", "clan/clan_name_desc", "", function(f130_arg0, f130_arg1, f130_arg2, f130_arg3, f130_arg4)
 				ShowKeyboard(f130_arg0, f130_arg1, f130_arg2, "KEYBOARD_TYPE_CLAN_NAME")
 			end, {
 				actionType = "name",
@@ -1921,9 +1921,9 @@ DataSources.SearchClanNameDescription = ListHelper_SetupDataSource("SearchClanNa
 end, true)
 DataSources.CreateClanForm = {
 	getModel = function(f131_arg0)
-		local f131_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f131_arg0), "CreateClanForm")
+		local f131_local0 = Engine.GetModel(Engine.GetModelForController(f131_arg0), "CreateClanForm")
 		if f131_local0 == nil then
-			local f131_local1 = Engine[@"getmodelforcontroller"](f131_arg0)
+			local f131_local1 = Engine.GetModelForController(f131_arg0)
 			f131_local0 = f131_local1:create("CreateClanForm")
 			f131_local0:create("name")
 			f131_local0:create("description")
@@ -1956,13 +1956,13 @@ DataSources.CreateClanNameDescription = ListHelper_SetupDataSource("CreateClanNa
 		end
 		table.insert(
 			f132_local0,
-			CoD.CoDAccountUtility.packageOptionsButtonData(@"hash_56264D0536BC9414", @"hash_6A6FBC982BCC92DC", "", f132_local1, {
+			CoD.CoDAccountUtility.packageOptionsButtonData(@"hash_56264D0536BC9414", "clan/clan_name_desc", "", f132_local1, {
 				actionType = "name",
 			})
 		)
 		table.insert(
 			f132_local0,
-			CoD.CoDAccountUtility.packageOptionsButtonData(0xE51F7B584C39C8, @"hash_1C0049AE16662ED0", "", f132_local2, {
+			CoD.CoDAccountUtility.packageOptionsButtonData("clan/description", "clan/description_desc", "", f132_local2, {
 				actionType = "description",
 			})
 		)
@@ -1995,7 +1995,7 @@ DataSources.CreateClanType = ListHelper_SetupDataSource("CreateClanType", functi
 	end
 	local f135_local3 = DataSources.CreateClanForm.getModel(f135_arg0)
 	f135_local3 = f135_local3.type:get()
-	table.insert(f135_local0, CoD.CoDAccountUtility.packageNumOptionsButtonData(@"hash_1CB5C04C1EAE13CF", @"hash_48C87035F8D6E641", Engine[@"hash_4F9F1239CFD921FE"](CoD.ClanUtility.clan_privacy_levels[f135_local3.type:get()].display_string), f135_local1, f135_local2))
+	table.insert(f135_local0, CoD.CoDAccountUtility.packageNumOptionsButtonData(@"hash_1CB5C04C1EAE13CF", "clan/clan_type_desc", Engine[@"hash_4F9F1239CFD921FE"](CoD.ClanUtility.clan_privacy_levels[f135_local3.type:get()].display_string), f135_local1, f135_local2))
 	return f135_local0
 end, true)
 DataSources.CreateClanStyle = ListHelper_SetupDataSource("CreateClanStyle", function(f138_arg0)
@@ -2024,7 +2024,7 @@ DataSources.CreateClanStyle = ListHelper_SetupDataSource("CreateClanStyle", func
 	end
 	local f138_local3 = DataSources.CreateClanForm.getModel(f138_arg0)
 	f138_local3 = f138_local3.style:get()
-	table.insert(f138_local0, CoD.CoDAccountUtility.packageNumOptionsButtonData(@"hash_7D0DA8823B3B303B", @"hash_4E98C5F06E62AB2D", Engine[@"hash_4F9F1239CFD921FE"](CoD.ClanUtility.clan_styles[f138_local3.style:get()].display_string), f138_local1, f138_local2))
+	table.insert(f138_local0, CoD.CoDAccountUtility.packageNumOptionsButtonData("clan/style", "clan/style_desc", Engine[@"hash_4F9F1239CFD921FE"](CoD.ClanUtility.clan_styles[f138_local3.style:get()].display_string), f138_local1, f138_local2))
 	return f138_local0
 end, true)
 DataSources.CreateClanModes = ListHelper_SetupDataSource("CreateClanModes", function(f141_arg0)
@@ -2065,7 +2065,7 @@ DataSources.CreateClanModes = ListHelper_SetupDataSource("CreateClanModes", func
 	local f141_local3 = table.insert
 	local f141_local4 = f141_local0
 	local f141_local5 = f141_local1
-	local f141_local6 = @"hash_6B12B3E335B4B1AD"
+	local f141_local6 = "exe/cod_multiplayer"
 	local f141_local7 = 0x0
 	local f141_local8 = DataSources.CreateClanForm.getModel(f141_arg0)
 	f141_local3(
@@ -2089,7 +2089,7 @@ DataSources.CreateClanModes = ListHelper_SetupDataSource("CreateClanModes", func
 	f141_local3 = table.insert
 	f141_local4 = f141_local0
 	f141_local5 = f141_local1
-	f141_local6 = @"menu/zombie"
+	f141_local6 = "menu/zombie"
 	f141_local7 = 0x0
 	f141_local8 = DataSources.CreateClanForm.getModel(f141_arg0)
 	f141_local3(
@@ -2116,7 +2116,7 @@ DataSources.CreateClanConfirmation = ListHelper_SetupDataSource("CreateClanConfi
 	local f144_local0 = {}
 	table.insert(
 		f144_local0,
-		CoD.CoDAccountUtility.packageOptionsButtonData(@"hash_3DEB4B8C3DB6B117", @"hash_4DBC259F0BBED809", nil, function(f145_arg0, f145_arg1, f145_arg2, f145_arg3, f145_arg4)
+		CoD.CoDAccountUtility.packageOptionsButtonData("clan/create_clan", "clan/create_clan_desc", nil, function(f145_arg0, f145_arg1, f145_arg2, f145_arg3, f145_arg4)
 			local f145_local0 = DataSources.CreateClanForm.getModel(f145_arg2)
 			local f145_local1 = f145_local0.name:get()
 			local f145_local2 = f145_local0.description:get()
@@ -2129,19 +2129,19 @@ DataSources.CreateClanConfirmation = ListHelper_SetupDataSource("CreateClanConfi
 			local f145_local7 = f145_local0.modeZombies:get()
 			local f145_local8 = f145_local0.modeBlackout:get()
 			if not f145_local1 or string.len(f145_local1) == 0 then
-				LuaUtils.UI_ShowErrorMessageDialog(f145_arg2, @"hash_5419BBF769DD4724", @"hash_431E422BC40B2429")
+				LuaUtils.UI_ShowErrorMessageDialog(f145_arg2, @"hash_5419BBF769DD4724", "menu/notice_caps")
 				return
 			elseif not f145_local2 or string.len(f145_local2) == 0 then
-				LuaUtils.UI_ShowErrorMessageDialog(f145_arg2, @"hash_16319AECC843F92B", @"hash_431E422BC40B2429")
+				LuaUtils.UI_ShowErrorMessageDialog(f145_arg2, @"hash_16319AECC843F92B", "menu/notice_caps")
 				return
 			elseif not f145_local5 and not f145_local6 and not f145_local7 and not f145_local8 then
-				LuaUtils.UI_ShowErrorMessageDialog(f145_arg2, @"hash_29071218D66BA869", @"hash_431E422BC40B2429")
+				LuaUtils.UI_ShowErrorMessageDialog(f145_arg2, @"hash_29071218D66BA869", "menu/notice_caps")
 				return
 			elseif CoD.CraftUtility.IsClanEmblemEmpty(f145_arg2) then
-				LuaUtils.UI_ShowErrorMessageDialog(f145_arg2, @"hash_6719ACB7DA0AACF9", @"hash_431E422BC40B2429")
+				LuaUtils.UI_ShowErrorMessageDialog(f145_arg2, @"hash_6719ACB7DA0AACF9", "menu/notice_caps")
 				return
 			else
-				local f145_local9 = Engine[@"getglobalmodel"]()
+				local f145_local9 = Engine.GetGlobalModel()
 				f145_local9.socialRoot.clans.loaded:set(LuaEnum.CLAN_INFO_MODELS.CREATING_CLAN)
 				Engine[@"lobbyevent"]("OnClanUIEvent", {
 					name = f145_local1,
@@ -2156,7 +2156,7 @@ DataSources.CreateClanConfirmation = ListHelper_SetupDataSource("CreateClanConfi
 					event = LuaEnum.CLAN_UI_EVENT.CREATE_GROUP,
 					kind = LuaEnum.CLAN_KINDS.CLAN,
 				})
-				Engine[@"uploademblemdata"](f145_arg2, LuaEnum.CLAN_STORAGE_SLOT.CLAN_EMBLEM, Enum[@"storagefiletype"][@"hash_394DF15E8078D20A"])
+				Engine.UploadEmblemData(f145_arg2, LuaEnum.CLAN_STORAGE_SLOT.CLAN_EMBLEM, Enum.StorageFileType[@"hash_394DF15E8078D20A"])
 				GoBack(f145_arg4, f145_arg2)
 			end
 		end)
@@ -2165,13 +2165,13 @@ DataSources.CreateClanConfirmation = ListHelper_SetupDataSource("CreateClanConfi
 end, true)
 DataSources.CreateSquadForm = {
 	getModel = function(f146_arg0)
-		local f146_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f146_arg0), "CreateSquadForm")
+		local f146_local0 = Engine.GetModel(Engine.GetModelForController(f146_arg0), "CreateSquadForm")
 		if f146_local0 == nil then
-			f146_local0 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f146_arg0), "CreateSquadForm")
-			Engine[@"createmodel"](f146_local0, "name")
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f146_local0, "type"), 1)
-			Engine[@"createmodel"](f146_local0, "hintTitle")
-			Engine[@"createmodel"](f146_local0, "hintText")
+			f146_local0 = Engine.CreateModel(Engine.GetModelForController(f146_arg0), "CreateSquadForm")
+			Engine.CreateModel(f146_local0, "name")
+			Engine.SetModelValue(Engine.CreateModel(f146_local0, "type"), 1)
+			Engine.CreateModel(f146_local0, "hintTitle")
+			Engine.CreateModel(f146_local0, "hintText")
 		end
 		return f146_local0
 	end,
@@ -2180,7 +2180,7 @@ DataSources.CreateSquadNameDescription = ListHelper_SetupDataSource("CreateSquad
 	local f147_local0 = {}
 	table.insert(
 		f147_local0,
-		CoD.CoDAccountUtility.packageOptionsButtonData(@"hash_234F1F662908AAAE", @"hash_76CEB4714E89FA9E", "", function(f148_arg0, f148_arg1, f148_arg2, f148_arg3, f148_arg4)
+		CoD.CoDAccountUtility.packageOptionsButtonData("clan/squad_name", @"hash_76CEB4714E89FA9E", "", function(f148_arg0, f148_arg1, f148_arg2, f148_arg3, f148_arg4)
 			ShowKeyboard(f148_arg0, f148_arg1, f148_arg2, "KEYBOARD_TYPE_CLAN_NAME")
 		end, {
 			actionType = "name",
@@ -2214,26 +2214,26 @@ DataSources.CreateSquadType = ListHelper_SetupDataSource("CreateSquadType", func
 	end
 	local f149_local3 = DataSources.CreateSquadForm.getModel(f149_arg0)
 	f149_local3 = f149_local3.type:get()
-	table.insert(f149_local0, CoD.CoDAccountUtility.packageNumOptionsButtonData(@"hash_141ABC196E1EEBE5", 0x839B97B8D3EEEF, Engine[@"hash_4F9F1239CFD921FE"](CoD.ClanUtility.clan_privacy_levels[f149_local3.type:get()].display_string), f149_local1, f149_local2))
+	table.insert(f149_local0, CoD.CoDAccountUtility.packageNumOptionsButtonData(@"hash_141ABC196E1EEBE5", "clan/squad_type_desc", Engine[@"hash_4F9F1239CFD921FE"](CoD.ClanUtility.clan_privacy_levels[f149_local3.type:get()].display_string), f149_local1, f149_local2))
 	return f149_local0
 end, true)
 DataSources.CreateSquadConfirmation = ListHelper_SetupDataSource("CreateSquadConfirmation", function(f152_arg0)
 	local f152_local0 = {}
 	table.insert(
 		f152_local0,
-		CoD.CoDAccountUtility.packageOptionsButtonData(@"hash_19B196AC8D1E4923", @"hash_6865F8A3065298F5", nil, function(f153_arg0, f153_arg1, f153_arg2, f153_arg3, f153_arg4)
+		CoD.CoDAccountUtility.packageOptionsButtonData("clan/create_squad", "clan/create_squad_desc", nil, function(f153_arg0, f153_arg1, f153_arg2, f153_arg3, f153_arg4)
 			local f153_local0 = DataSources.CreateSquadForm.getModel(f153_arg2)
 			local f153_local1 = f153_local0.name:get()
 			local f153_local2 = f153_local0.type
 			f153_local2 = CoD.ClanUtility.clan_privacy_levels[REG7:get()].value
 			if not f153_local1 or string.len(f153_local1) == 0 then
-				LuaUtils.UI_ShowErrorMessageDialog(f153_arg2, @"hash_5419BBF769DD4724", @"hash_431E422BC40B2429")
+				LuaUtils.UI_ShowErrorMessageDialog(f153_arg2, @"hash_5419BBF769DD4724", "menu/notice_caps")
 				return
 			elseif CoD.CraftUtility.IsClanEmblemEmpty(f153_arg2) then
-				LuaUtils.UI_ShowErrorMessageDialog(f153_arg2, @"hash_6719ACB7DA0AACF9", @"hash_431E422BC40B2429")
+				LuaUtils.UI_ShowErrorMessageDialog(f153_arg2, @"hash_6719ACB7DA0AACF9", "menu/notice_caps")
 				return
 			else
-				local f153_local3 = Engine[@"getglobalmodel"]()
+				local f153_local3 = Engine.GetGlobalModel()
 				f153_local3.socialRoot.squads.loaded:set(LuaEnum.CLAN_INFO_MODELS.CREATING_SQUAD)
 				Engine[@"lobbyevent"]("OnClanUIEvent", {
 					name = f153_local1,
@@ -2250,13 +2250,13 @@ DataSources.CreateSquadConfirmation = ListHelper_SetupDataSource("CreateSquadCon
 end, true)
 DataSources.CreateTeamForm = {
 	getModel = function(f154_arg0)
-		local f154_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f154_arg0), "CreateTeamForm")
+		local f154_local0 = Engine.GetModel(Engine.GetModelForController(f154_arg0), "CreateTeamForm")
 		if f154_local0 == nil then
-			f154_local0 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f154_arg0), "CreateTeamForm")
-			Engine[@"createmodel"](f154_local0, "name")
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f154_local0, "type"), 1)
-			Engine[@"createmodel"](f154_local0, "hintTitle")
-			Engine[@"createmodel"](f154_local0, "hintText")
+			f154_local0 = Engine.CreateModel(Engine.GetModelForController(f154_arg0), "CreateTeamForm")
+			Engine.CreateModel(f154_local0, "name")
+			Engine.SetModelValue(Engine.CreateModel(f154_local0, "type"), 1)
+			Engine.CreateModel(f154_local0, "hintTitle")
+			Engine.CreateModel(f154_local0, "hintText")
 		end
 		return f154_local0
 	end,
@@ -2265,7 +2265,7 @@ DataSources.CreateTeamNameDescription = ListHelper_SetupDataSource("CreateTeamNa
 	local f155_local0 = {}
 	table.insert(
 		f155_local0,
-		CoD.CoDAccountUtility.packageOptionsButtonData(@"hash_7701611BF6804343", @"hash_65F915D1491A67D5", "", function(f156_arg0, f156_arg1, f156_arg2, f156_arg3, f156_arg4)
+		CoD.CoDAccountUtility.packageOptionsButtonData("clan/team_name", "clan/team_name_desc", "", function(f156_arg0, f156_arg1, f156_arg2, f156_arg3, f156_arg4)
 			ShowKeyboard(f156_arg0, f156_arg1, f156_arg2, "KEYBOARD_TYPE_CLAN_NAME")
 		end, {
 			actionType = "name",
@@ -2299,26 +2299,26 @@ DataSources.CreateTeamType = ListHelper_SetupDataSource("CreateTeamType", functi
 	end
 	local f157_local3 = DataSources.CreateTeamForm.getModel(f157_arg0)
 	f157_local3 = f157_local3.type:get()
-	table.insert(f157_local0, CoD.CoDAccountUtility.packageNumOptionsButtonData(@"hash_66985D51346D79E8", @"hash_E334A16101A5230", Engine[@"hash_4F9F1239CFD921FE"](CoD.ClanUtility.clan_privacy_levels[f157_local3.type:get()].display_string), f157_local1, f157_local2))
+	table.insert(f157_local0, CoD.CoDAccountUtility.packageNumOptionsButtonData(@"hash_66985D51346D79E8", "clan/team_type_desc", Engine[@"hash_4F9F1239CFD921FE"](CoD.ClanUtility.clan_privacy_levels[f157_local3.type:get()].display_string), f157_local1, f157_local2))
 	return f157_local0
 end, true)
 DataSources.CreateTeamConfirmation = ListHelper_SetupDataSource("CreateTeamConfirmation", function(f160_arg0)
 	local f160_local0 = {}
 	table.insert(
 		f160_local0,
-		CoD.CoDAccountUtility.packageOptionsButtonData(@"hash_75D5BCFD93BE1F26", @"hash_549F16619D209F56", nil, function(f161_arg0, f161_arg1, f161_arg2, f161_arg3, f161_arg4)
+		CoD.CoDAccountUtility.packageOptionsButtonData("clan/create_team", "clan/create_team_desc", nil, function(f161_arg0, f161_arg1, f161_arg2, f161_arg3, f161_arg4)
 			local f161_local0 = DataSources.CreateTeamForm.getModel(f161_arg2)
 			local f161_local1 = f161_local0.name:get()
 			local f161_local2 = f161_local0.type
 			f161_local2 = CoD.ClanUtility.clan_privacy_levels[REG7:get()].value
 			if not f161_local1 or string.len(f161_local1) == 0 then
-				LuaUtils.UI_ShowErrorMessageDialog(f161_arg2, @"hash_5419BBF769DD4724", @"hash_431E422BC40B2429")
+				LuaUtils.UI_ShowErrorMessageDialog(f161_arg2, @"hash_5419BBF769DD4724", "menu/notice_caps")
 				return
 			else
-				local f161_local3 = Engine[@"getglobalmodel"]()
+				local f161_local3 = Engine.GetGlobalModel()
 				f161_local3.socialRoot.teams.loaded:set(LuaEnum.CLAN_INFO_MODELS.CREATING_TEAM)
 				if CoD.CraftUtility.IsClanEmblemEmpty(f161_arg2) then
-					LuaUtils.UI_ShowErrorMessageDialog(f161_arg2, @"hash_6719ACB7DA0AACF9", @"hash_431E422BC40B2429")
+					LuaUtils.UI_ShowErrorMessageDialog(f161_arg2, @"hash_6719ACB7DA0AACF9", "menu/notice_caps")
 					return
 				else
 					Engine[@"lobbyevent"]("OnClanUIEvent", {
@@ -2338,12 +2338,12 @@ end, true)
 DataSources.SocialPlayerDetailsButtons = ListHelper_SetupDataSource(
 	"SocialPlayerDetailsButtons",
 	function(f162_arg0, f162_arg1)
-		local f162_local0 = Engine[@"getmodelforcontroller"](f162_arg0)
+		local f162_local0 = Engine.GetModelForController(f162_arg0)
 		local f162_local1 = f162_local0:create("Social.selectedFriendXUID")
 		f162_local1 = f162_local1:get()
 		local f162_local2 = f162_local0:create("Social.selectedFriendGamertag")
 		f162_local2 = f162_local2:get()
-		local f162_local3 = Engine[@"createmodel"](f162_local0, "Social.selectedFriendInTitle")
+		local f162_local3 = Engine.CreateModel(f162_local0, "Social.selectedFriendInTitle")
 		f162_local3 = f162_local3:get()
 		local f162_local4 = {}
 		f162_local4 = CoD.SocialUtility.GetFriendsButtonOptions(f162_arg0, f162_arg1, f162_local1, f162_local2, f162_local3, false, "")
@@ -2507,7 +2507,7 @@ CoD.ClanUtility.GetPlayersParty = function(f168_arg0, f168_arg1)
 		local f168_local3 = "member"
 		local f168_local4 = f168_local2["member" .. f168_arg1 + 1].xuidStr
 		local f168_local5 = f168_local1[f168_local3:get()].xuid:get()
-		return Engine[@"getgetrecentplayerparty"](f168_local5, Engine[@"hash_61FB3481C8114A9A"](f168_local5))
+		return Engine.GetGetRecentPlayerParty(f168_local5, Engine[@"hash_61FB3481C8114A9A"](f168_local5))
 	else
 		return nil
 	end
@@ -2556,7 +2556,7 @@ CoD.ClanUtility.GetSquadRank = function(f172_arg0, f172_arg1)
 	f172_local2 = nil
 end
 CoD.ClanUtility.GetCurrentTeamId = function()
-	local f173_local0 = Engine[@"getglobalmodel"]()
+	local f173_local0 = Engine.GetGlobalModel()
 	f173_local0 = f173_local0.socialRoot.clans.currentTeamId
 	local f173_local1
 	if f173_local0 then
@@ -2569,7 +2569,7 @@ CoD.ClanUtility.GetCurrentTeamId = function()
 	f173_local1 = 1
 end
 CoD.ClanUtility.GetCurrentSquadId = function()
-	local f174_local0 = Engine[@"getglobalmodel"]()
+	local f174_local0 = Engine.GetGlobalModel()
 	f174_local0 = f174_local0.socialRoot.clans.currentSquadId
 	local f174_local1
 	if f174_local0 then
@@ -2588,9 +2588,9 @@ CoD.ClanUtility.AddMemberActions = function(f176_arg0, f176_arg1, f176_arg2, f17
 	if not Dvar[@"hash_3CA8E9EDE02C25E6"]:get() then
 		return
 	end
-	local f176_local0 = Engine[@"getxuid64"](f176_arg0)
+	local f176_local0 = Engine.GetXUID64(f176_arg0)
 	local f176_local1 = Engine[@"xuidtostring"](f176_local0)
-	local f176_local2 = Engine[@"getglobalmodel"]()
+	local f176_local2 = Engine.GetGlobalModel()
 	f176_local2 = f176_local2.LobbyClients
 	if not f176_local2[f176_local1] or not f176_local2[f176_local1].clan or not f176_local2[f176_local1].clan.clans then
 		return
@@ -2771,8 +2771,8 @@ CoD.ClanUtility.GetMembersList = function(f181_arg0, f181_arg1, f181_arg2, f181_
 end
 DataSources.ClanData = {
 	getModel = function(f182_arg0)
-		local f182_local0 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f182_arg0), "ClanData")
-		local f182_local1 = Engine[@"storagegetbuffer"](f182_arg0, Enum[@"storagefiletype"][@"hash_56CA620BD75C97F4"], LuaEnum.CLAN_STORAGE_SLOT.CLAN_DATA)
+		local f182_local0 = Engine.CreateModel(Engine.GetModelForController(f182_arg0), "ClanData")
+		local f182_local1 = Engine.StorageGetBuffer(f182_arg0, Enum.StorageFileType[@"hash_56CA620BD75C97F4"], LuaEnum.CLAN_STORAGE_SLOT.CLAN_DATA)
 		if f182_local1 then
 			local f182_local2 = f182_local0:create("description")
 			f182_local2:set(f182_local1.description:get())
@@ -2797,7 +2797,7 @@ CoD.ClanUtility.UploadClanDataFile = function(f183_arg0)
 		local f183_local1 = f183_local0.clans:create("clan1")
 		if f183_local1 then
 			local f183_local2 = {
-				Enum[@"storagefiletype"][@"hash_56CA620BD75C97F4"],
+				Enum.StorageFileType[@"hash_56CA620BD75C97F4"],
 			}
 			local f183_local3 = {
 				LuaEnum.CLAN_STORAGE_SLOT.CLAN_DATA,
@@ -2812,17 +2812,17 @@ CoD.ClanUtility.UploadClanDataFile = function(f183_arg0)
 			Engine[@"hash_37079182F35F6DF8"](f183_arg0, f183_local2, f183_local3, f183_local4, f183_local5, f183_local6, f183_local1.rootID:get(), {
 				LuaEnum.CLAN_STORAGE.DATA,
 			})
-			Engine[@"hash_7FD581BCE55651E3"](f183_arg0, Enum[@"storagefiletype"][@"hash_56CA620BD75C97F4"], LuaEnum.CLAN_STORAGE_SLOT.CLAN_DATA)
+			Engine[@"hash_7FD581BCE55651E3"](f183_arg0, Enum.StorageFileType[@"hash_56CA620BD75C97F4"], LuaEnum.CLAN_STORAGE_SLOT.CLAN_DATA)
 			return true
 		end
 	end
 	return false
 end
 CoD.ClanUtility.HandleMessageKeyboardComplete = function(f184_arg0, f184_arg1, f184_arg2, f184_arg3)
-	if f184_arg3.type == Enum[@"keyboardtype"][@"hash_73E8DD5E8D7F1377"] then
-		local f184_local0 = Engine[@"storagegetbuffer"](f184_arg2, Enum[@"storagefiletype"][@"hash_56CA620BD75C97F4"], LuaEnum.CLAN_STORAGE_SLOT.CLAN_DATA)
+	if f184_arg3.type == Enum.KeyboardType[@"hash_73E8DD5E8D7F1377"] then
+		local f184_local0 = Engine.StorageGetBuffer(f184_arg2, Enum.StorageFileType[@"hash_56CA620BD75C97F4"], LuaEnum.CLAN_STORAGE_SLOT.CLAN_DATA)
 		if f184_local0 then
-			local f184_local1 = Engine[@"getxuid64"](f184_arg2)
+			local f184_local1 = Engine.GetXUID64(f184_arg2)
 			f184_local0.message:set(f184_arg3.input)
 			f184_local0.messageXuid:set(f184_local1)
 			CoD.ClanUtility.UploadClanDataFile(f184_arg2)
@@ -2837,12 +2837,12 @@ end
 CoD.ClanUtility.SetCurrentTeamId = function(f185_arg0, f185_arg1, f185_arg2)
 	local f185_local0 = f185_arg2:getModel()
 	f185_local0 = f185_local0.listId:get()
-	local f185_local1 = Engine[@"getglobalmodel"]()
+	local f185_local1 = Engine.GetGlobalModel()
 	f185_local1.socialRoot.clans.currentTeamId:set(f185_local0)
 end
 CoD.ClanUtility.SetCurrentSquadId = function(f186_arg0, f186_arg1, f186_arg2)
 	local f186_local0 = f186_arg2:getModel()
 	f186_local0 = f186_local0.listId:get()
-	local f186_local1 = Engine[@"getglobalmodel"]()
+	local f186_local1 = Engine.GetGlobalModel()
 	f186_local1.socialRoot.clans.currentSquadId:set(f186_local0)
 end

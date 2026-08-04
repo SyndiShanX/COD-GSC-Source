@@ -1,5 +1,5 @@
-require("x64:3625a0d08a5c80d")
-require("x64:a1e2d7b19f5deb0")
+require("ui/uieditor/widgets/lobby/common/fe_focusbarcontainer")
+require("ui/uieditor/widgets/startmenu/startmenu_frame_nobg")
 CoD.StartMenu_Options_GamepadLayoutOption = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Options_GamepadLayoutOption.__defaultWidth = 750
 CoD.StartMenu_Options_GamepadLayoutOption.__defaultHeight = 60
@@ -21,7 +21,7 @@ CoD.StartMenu_Options_GamepadLayoutOption.new = function(f1_arg0, f1_arg1, f1_ar
 	self.fullBorder = fullBorder
 	local actionText = LUI.UIText.new(0, 0, 12, 297, 0, 0, 11, 49)
 	actionText:setTTF("default")
-	actionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	actionText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	actionText:linkToElementModel(self, "label", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -38,8 +38,8 @@ CoD.StartMenu_Options_GamepadLayoutOption.new = function(f1_arg0, f1_arg1, f1_ar
 	local valueText = LUI.UIText.new(1, 1, -375, -90, 0, 0, 11, 49)
 	valueText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	valueText:setTTF("default")
-	valueText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	valueText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	valueText:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	valueText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(valueText)
 	self.valueText = valueText
 	local StartMenuframenoBG00 = CoD.StartMenu_frame_noBG.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)

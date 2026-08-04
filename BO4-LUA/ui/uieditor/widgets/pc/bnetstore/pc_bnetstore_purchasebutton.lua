@@ -48,8 +48,8 @@ CoD.PC_BnetStore_PurchaseButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	ButtonTitle:setText(LocalizeToUpperString(@"hash_5802AE8BF3973373"))
 	ButtonTitle:setTTF("ttmussels_demibold")
 	ButtonTitle:setLetterSpacing(8)
-	ButtonTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	ButtonTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	ButtonTitle:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	ButtonTitle:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(ButtonTitle)
 	self.ButtonTitle = ButtonTitle
 	self:mergeStateConditions({
@@ -68,7 +68,7 @@ CoD.PC_BnetStore_PurchaseButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	})
 	local f1_local11 = self
 	local f1_local12 = self.subscribeToModel
-	local f1_local13 = Engine[@"getglobalmodel"]()
+	local f1_local13 = Engine.GetGlobalModel()
 	f1_local12(f1_local11, f1_local13["lobbyRoot.lobbyNetworkMode"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

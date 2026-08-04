@@ -1,20 +1,20 @@
-require("x64:3625a0d08a5c80d")
+require("ui/uieditor/widgets/lobby/common/fe_focusbarcontainer")
 local f0_local0 = function(f1_arg0, f1_arg1, f1_arg2)
-	CoD.Menu.AddButtonCallbackFunction(f1_arg2, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, f2_arg3)
+	CoD.Menu.AddButtonCallbackFunction(f1_arg2, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], nil, function(f2_arg0, f2_arg1, f2_arg2, f2_arg3)
 		f1_arg0:processEvent({
 			name = "lose_focus",
-			controller = controller,
+			controller = f2_arg2,
 		})
 		return f1_arg0:dispatchEventToParent({
 			name = "dropdown_item_cancelled",
 			element = f1_arg0,
 		})
 	end)
-	CoD.Menu.AddButtonCallbackFunction(f1_arg2, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, f3_arg3)
-		if not menu.m_disableNavigation and menu:AcceptGamePadButtonInputFromModelCallback(controller) then
+	CoD.Menu.AddButtonCallbackFunction(f1_arg2, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f3_arg0, f3_arg1, f3_arg2, f3_arg3)
+		if not f3_arg1.m_disableNavigation and f3_arg1:AcceptGamePadButtonInputFromModelCallback(f3_arg2) then
 			f1_arg0:processEvent({
 				name = "lose_focus",
-				controller = controller,
+				controller = f3_arg2,
 			})
 			return f1_arg0:dispatchEventToParent({
 				name = "dropdown_item_selected",
@@ -45,8 +45,8 @@ CoD.OptionDropdownItem.new = function(f5_arg0, f5_arg1, f5_arg2, f5_arg3, f5_arg
 	self.fullbacking = fullbacking
 	local labelText = LUI.UIText.new(0, 0, 9, 364, 0, 0, 0, 36)
 	labelText:setTTF("default")
-	labelText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	labelText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	labelText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	labelText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	labelText:linkToElementModel(self, "valueDisplay", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then

@@ -1,7 +1,7 @@
-require("x64:71d4e66447f837e")
-require("x64:7889ce1e3e2e8a")
-require("x64:6374709588b8a15")
-require("x64:268b19728179583")
+require("ui/uieditor/widgets/backgroundframes/menuframeingame")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsbackground")
+require("ui/uieditor/widgets/startmenu/startmenu_safeareacontainer")
+require("ui/uieditor/widgets/director/directorquitbuttoncontainer")
 require("x64:b710bc406e458bd")
 CoD.StartMenu_Main = InheritFrom(CoD.Menu)
 LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
@@ -40,7 +40,7 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 	self.TopBacking = TopBacking
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0)
-	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
@@ -56,7 +56,7 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 	self.MenuFrameIngame = MenuFrameIngame
 	local TiledPlusGrid = LUI.UIImage.new(0, 0, -135, 1920, 0, 0, 0, 1080)
 	TiledPlusGrid:setAlpha(0.05)
-	TiledPlusGrid:setImage(RegisterImage(@"uie_ui_hud_vehicle_hellstorm_repeat_plusgrid"))
+	TiledPlusGrid:setImage(RegisterImage("uie_ui_hud_vehicle_hellstorm_repeat_plusgrid"))
 	TiledPlusGrid:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	TiledPlusGrid:setShaderVector(0, 0, 0, 0, 0)
 	TiledPlusGrid:setupNineSliceShader(220, 220)
@@ -90,18 +90,18 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(DirectorQuitButtonContainer, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(DirectorQuitButtonContainer, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "MOUSE1", function(f3_arg0, f3_arg1, f3_arg2, f3_arg3)
 		if IsPC() then
-			OpenPCQuit(self, menu, self, controller)
+			OpenPCQuit(self, f3_arg1, self, f3_arg2)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
+	end, function(f4_arg0, f4_arg1, f4_arg2)
 		if IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "MOUSE1")
+			CoD.Menu.SetButtonLabel(f4_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "MOUSE1")
 			return false
 		else
 			return false
@@ -184,7 +184,7 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 	})
 	local f1_local15 = self
 	local f1_local16 = self.subscribeToModel
-	local f1_local17 = Engine[@"getglobalmodel"]()
+	local f1_local17 = Engine.GetGlobalModel()
 	f1_local16(f1_local15, f1_local17["lobbyRoot.lobbyNav"], function(f13_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -196,286 +196,286 @@ LUI.createMenu.StartMenu_Main = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local15 = self
 	f1_local16 = self.subscribeToModel
-	f1_local17 = Engine[@"getglobalmodel"]()
+	f1_local17 = Engine.GetGlobalModel()
 	f1_local16(f1_local15, f1_local17["lobbyRoot.lobbyNav"], function(f14_arg0, f14_arg1)
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_ltrig"])
 	end, false)
 	f1_local15 = self
 	f1_local16 = self.subscribeToModel
-	f1_local17 = Engine[@"getglobalmodel"]()
+	f1_local17 = Engine.GetGlobalModel()
 	f1_local16(f1_local15, f1_local17["lobbyRoot.lobbyMainMode"], function(f15_arg0, f15_arg1)
-		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"])
+		CoD.Menu.UpdateButtonShownState(f15_arg1, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_ltrig"])
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f16_arg0, f16_arg1)
 		f16_arg1.menu = f16_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f16_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_start"])
+		CoD.Menu.UpdateButtonShownState(f16_arg0, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_start"])
 	end)
 	f1_local15 = self
 	f1_local16 = self.subscribeToModel
-	f1_local17 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local17 = Engine.GetModelForController(f1_arg0)
 	f1_local16(f1_local15, f1_local17.LastInput, function(f17_arg0, f17_arg1)
-		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_start"])
+		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_start"])
 	end, false)
 	f1_local15 = self
 	f1_local16 = self.subscribeToModel
-	f1_local17 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local17 = Engine.GetModelForController(f1_arg0)
 	f1_local16(f1_local15, f1_local17["PositionDraft.stage"], function(f18_arg0, f18_arg1)
-		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_none"])
 	end, false)
 	self:appendEventHandler("on_session_start", function(f19_arg0, f19_arg1)
 		f19_arg1.menu = f19_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f19_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f19_arg0, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_none"])
 	end)
 	self:appendEventHandler("on_session_end", function(f20_arg0, f20_arg1)
 		f20_arg1.menu = f20_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f20_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f20_arg0, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_none"])
 	end)
 	f1_local15 = self
 	f1_local16 = self.subscribeToModel
-	f1_local17 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local17 = Engine.GetModelForController(f1_arg0)
 	f1_local16(f1_local15, f1_local17["hudItems.hasStartedWZMatch"], function(f21_arg0, f21_arg1)
-		CoD.Menu.UpdateButtonShownState(f21_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f21_arg1, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_none"])
 	end, false)
-	self:registerEventHandler("menu_loaded", function(self, event)
+	self:registerEventHandler("menu_loaded", function(element, event)
 		local f22_local0 = nil
-		if self.menuLoaded then
-			f22_local0 = self:menuLoaded(event)
-		elseif self.super.menuLoaded then
-			f22_local0 = self.super:menuLoaded(event)
+		if element.menuLoaded then
+			f22_local0 = element:menuLoaded(event)
+		elseif element.super.menuLoaded then
+			f22_local0 = element.super:menuLoaded(event)
 		end
 		PlaySoundSetSound(self, "menu_enter")
-		FileshareGetSlots(self, self, f1_arg0)
+		FileshareGetSlots(self, element, f1_arg0)
 		SetHeadingKickerTextToGameMode()
 		if not f22_local0 then
-			f22_local0 = self:dispatchEventToChildren(event)
+			f22_local0 = element:dispatchEventToChildren(event)
 		end
 		return f22_local0
 	end)
-	self:registerEventHandler("close_all_ingame_menus", function(self, event)
+	self:registerEventHandler("close_all_ingame_menus", function(element, event)
 		local f23_local0 = nil
 		StartMenuGoBack(f1_local1, f1_arg0)
 		if not f23_local0 then
-			f23_local0 = self:dispatchEventToChildren(event)
+			f23_local0 = element:dispatchEventToChildren(event)
 		end
 		return f23_local0
 	end)
-	self:registerEventHandler("open_migration_menu", function(self, event)
+	self:registerEventHandler("open_migration_menu", function(element, event)
 		local f24_local0 = nil
 		StartMenuGoBack(f1_local1, f1_arg0)
 		if not f24_local0 then
-			f24_local0 = self:dispatchEventToChildren(event)
+			f24_local0 = element:dispatchEventToChildren(event)
 		end
 		return f24_local0
 	end)
-	self:registerEventHandler("occlusion_change", function(self, event)
+	self:registerEventHandler("occlusion_change", function(element, event)
 		local f25_local0 = nil
-		if self.OcclusionChange then
-			f25_local0 = self:OcclusionChange(event)
-		elseif self.super.OcclusionChange then
-			f25_local0 = self.super:OcclusionChange(event)
+		if element.OcclusionChange then
+			f25_local0 = element:OcclusionChange(event)
+		elseif element.super.OcclusionChange then
+			f25_local0 = element.super:OcclusionChange(event)
 		end
 		if IsPC() and IsWarzone() and IsInGame() then
 			CoD.WZUtility.ClosePCSplitterWidget(self, f1_local1, f1_arg0)
 		end
 		if not f25_local0 then
-			f25_local0 = self:dispatchEventToChildren(event)
+			f25_local0 = element:dispatchEventToChildren(event)
 		end
 		return f25_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xbb_pscircle"], nil, function(f26_arg0, f26_arg1, f26_arg2, f26_arg3)
 		if InFrontend() then
-			CoD.BaseUtility.SwitchModeOnMenu(controller)
-			RefreshLobbyRoom(menu, controller)
-			CoD.StartMenuUtility.CleanUpBarracksTab(menu, controller)
-			StartMenuGoBack(menu, controller)
-			CoD.LobbyUtility.SetMenuControllerRestriction(self, controller, 0)
+			CoD.BaseUtility.SwitchModeOnMenu(f26_arg2)
+			RefreshLobbyRoom(f26_arg1, f26_arg2)
+			CoD.StartMenuUtility.CleanUpBarracksTab(f26_arg1, f26_arg2)
+			StartMenuGoBack(f26_arg1, f26_arg2)
+			CoD.LobbyUtility.SetMenuControllerRestriction(self, f26_arg2, 0)
 			return true
 		elseif not IsPC() and not IsDemoPlaying() then
-			CoD.BaseUtility.SwitchModeOnMenu(controller)
-			RefreshLobbyRoom(menu, controller)
-			StartMenuGoBack(menu, controller)
+			CoD.BaseUtility.SwitchModeOnMenu(f26_arg2)
+			RefreshLobbyRoom(f26_arg1, f26_arg2)
+			StartMenuGoBack(f26_arg1, f26_arg2)
 			return true
 		elseif IsPC() and not IsDemoPlaying() then
-			CoD.BaseUtility.SwitchModeOnMenu(controller)
-			RefreshLobbyRoom(menu, controller)
-			StartMenuGoBack(menu, controller)
+			CoD.BaseUtility.SwitchModeOnMenu(f26_arg2)
+			RefreshLobbyRoom(f26_arg1, f26_arg2)
+			StartMenuGoBack(f26_arg1, f26_arg2)
 			return true
 		elseif IsPC() and IsDemoPlaying() then
-			CoD.DemoUtility.RunPauseCommandIfNotPlayerPause(controller)
-			RefreshLobbyRoom(menu, controller)
-			StartMenuGoBack(menu, controller)
+			CoD.DemoUtility.RunPauseCommandIfNotPlayerPause(f26_arg2)
+			RefreshLobbyRoom(f26_arg1, f26_arg2)
+			StartMenuGoBack(f26_arg1, f26_arg2)
 			return true
 		elseif IsDemoPlaying() and not IsPC() then
-			RefreshLobbyRoom(menu, controller)
-			StartMenuGoBack(menu, controller)
+			RefreshLobbyRoom(f26_arg1, f26_arg2)
+			StartMenuGoBack(f26_arg1, f26_arg2)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
+	end, function(f27_arg0, f27_arg1, f27_arg2)
 		if InFrontend() then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
+			CoD.Menu.SetButtonLabel(f27_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		elseif not IsPC() and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/dismiss", nil, nil)
+			CoD.Menu.SetButtonLabel(f27_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], @"menu/dismiss", nil, nil)
 			return true
 		elseif IsPC() and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
+			CoD.Menu.SetButtonLabel(f27_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		elseif IsPC() and IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
+			CoD.Menu.SetButtonLabel(f27_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		elseif IsDemoPlaying() and not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
+			CoD.Menu.SetButtonLabel(f27_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], nil, function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xby_pstriangle"], nil, function(f28_arg0, f28_arg1, f28_arg2, f28_arg3)
 		if IsWarzone() and IsInGame() and not IsDemoPlaying() then
-			CoD.WZUtility.NextWeapon(controller)
+			CoD.WZUtility.NextWeapon(f28_arg2)
 			return true
 		elseif IsInGame() and not IsLobbyNetworkModeLAN() and not IsDemoPlaying() and not IsPC() and not IsGameTypeCombatTraining() then
-			OpenOverlay(self, "Social_Main", controller, nil)
+			OpenOverlay(self, "Social_Main", f28_arg2, nil)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
+	end, function(f29_arg0, f29_arg1, f29_arg2)
 		if IsWarzone() and IsInGame() and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_0", nil, nil)
+			CoD.Menu.SetButtonLabel(f29_arg1, Enum.LUIButton[@"lui_key_xby_pstriangle"], 0x0, nil, nil)
 			return false
 		elseif IsInGame() and not IsLobbyNetworkModeLAN() and not IsDemoPlaying() and not IsPC() and not IsGameTypeCombatTraining() then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"menu/social", nil, nil)
+			CoD.Menu.SetButtonLabel(f29_arg1, Enum.LUIButton[@"lui_key_xby_pstriangle"], @"menu/social", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "weapnext", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_none"], "weapnext", function(f30_arg0, f30_arg1, f30_arg2, f30_arg3)
 		if IsWarzone() and IsInGame() and not IsDemoPlaying() then
-			CoD.WZUtility.NextWeapon(controller)
+			CoD.WZUtility.NextWeapon(f30_arg2)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
+	end, function(f31_arg0, f31_arg1, f31_arg2)
 		if IsWarzone() and IsInGame() and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "weapnext")
+			CoD.Menu.SetButtonLabel(f31_arg1, Enum.LUIButton[@"lui_key_none"], 0x0, nil, "weapnext")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "weapprev", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_none"], "weapprev", function(f32_arg0, f32_arg1, f32_arg2, f32_arg3)
 		if IsWarzone() and IsInGame() and not IsDemoPlaying() then
-			CoD.WZUtility.PrevWeapon(controller)
+			CoD.WZUtility.PrevWeapon(f32_arg2)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
+	end, function(f33_arg0, f33_arg1, f33_arg2)
 		if IsWarzone() and IsInGame() and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "weapprev")
+			CoD.Menu.SetButtonLabel(f33_arg1, Enum.LUIButton[@"lui_key_none"], 0x0, nil, "weapprev")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "weapswitchprimary", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_none"], "weapswitchprimary", function(f34_arg0, f34_arg1, f34_arg2, f34_arg3)
 		if IsPC() and IsWarzone() and IsInGame() and not IsDemoPlaying() then
-			CoD.WZUtility.SwitchToWeaponInSlot(controller, 0)
+			CoD.WZUtility.SwitchToWeaponInSlot(f34_arg2, 0)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
+	end, function(f35_arg0, f35_arg1, f35_arg2)
 		if IsPC() and IsWarzone() and IsInGame() and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "weapswitchprimary")
+			CoD.Menu.SetButtonLabel(f35_arg1, Enum.LUIButton[@"lui_key_none"], 0x0, nil, "weapswitchprimary")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "weapswitchsecondary", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_none"], "weapswitchsecondary", function(f36_arg0, f36_arg1, f36_arg2, f36_arg3)
 		if IsPC() and IsWarzone() and IsInGame() and not IsDemoPlaying() then
-			CoD.WZUtility.SwitchToWeaponInSlot(controller, 1)
+			CoD.WZUtility.SwitchToWeaponInSlot(f36_arg2, 1)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
+	end, function(f37_arg0, f37_arg1, f37_arg2)
 		if IsPC() and IsWarzone() and IsInGame() and not IsDemoPlaying() then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "weapswitchsecondary")
+			CoD.Menu.SetButtonLabel(f37_arg1, Enum.LUIButton[@"lui_key_none"], 0x0, nil, "weapswitchsecondary")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_ltrig"], "F1", function(element, menu, controller, model)
-		if not IsRepeatButtonPress(model) and CoD.DirectorUtility.IsMainMode(controller, Enum[@"lobbymainmode"][@"lobby_mainmode_mp"]) and not InFrontend() and AlwaysFalse() then
-			CoD.StartMenuUtility.ShowClassSelectSlideout(menu, controller)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_ltrig"], "F1", function(f38_arg0, f38_arg1, f38_arg2, f38_arg3)
+		if not IsRepeatButtonPress(f38_arg3) and CoD.DirectorUtility.IsMainMode(f38_arg2, Enum.LobbyMainMode[@"lobby_mainmode_mp"]) and not InFrontend() and AlwaysFalse() then
+			CoD.StartMenuUtility.ShowClassSelectSlideout(f38_arg1, f38_arg2)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if not IsRepeatButtonPress(nil) and CoD.DirectorUtility.IsMainMode(controller, Enum[@"lobbymainmode"][@"lobby_mainmode_mp"]) and not InFrontend() and AlwaysFalse() then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_ltrig"], @"hash_0", nil, "F1")
+	end, function(f39_arg0, f39_arg1, f39_arg2)
+		if not IsRepeatButtonPress(nil) and CoD.DirectorUtility.IsMainMode(f39_arg2, Enum.LobbyMainMode[@"lobby_mainmode_mp"]) and not InFrontend() and AlwaysFalse() then
+			CoD.Menu.SetButtonLabel(f39_arg1, Enum.LUIButton[@"lui_key_ltrig"], 0x0, nil, "F1")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_start"], nil, function(element, menu, controller, model)
-		if IsPC() and IsGamepad(controller) then
-			RefreshLobbyRoom(menu, controller)
-			StartMenuGoBack(menu, controller)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_start"], nil, function(f40_arg0, f40_arg1, f40_arg2, f40_arg3)
+		if IsPC() and IsGamepad(f40_arg2) then
+			RefreshLobbyRoom(f40_arg1, f40_arg2)
+			StartMenuGoBack(f40_arg1, f40_arg2)
 			return true
 		else
-			RefreshLobbyRoom(menu, controller)
-			StartMenuGoBack(menu, controller)
+			RefreshLobbyRoom(f40_arg1, f40_arg2)
+			StartMenuGoBack(f40_arg1, f40_arg2)
 			return true
 		end
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_start"], @"hash_0", nil, nil)
+	end, function(f41_arg0, f41_arg1, f41_arg2)
+		CoD.Menu.SetButtonLabel(f41_arg1, Enum.LUIButton[@"lui_key_start"], 0x0, nil, nil)
 		return false
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
-		if CoD.StartMenuUtility.CanChangeWZStatsFilter(menu, self.TabFrame, controller) then
-			CoD.PlayerStatsUtility.UpdateWZStatsFilter(controller)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xbx_pssquare"], nil, function(f42_arg0, f42_arg1, f42_arg2, f42_arg3)
+		if CoD.StartMenuUtility.CanChangeWZStatsFilter(f42_arg1, self.TabFrame, f42_arg2) then
+			CoD.PlayerStatsUtility.UpdateWZStatsFilter(f42_arg2)
 			PlaySoundAlias("uin_stats_switch")
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if CoD.StartMenuUtility.CanChangeWZStatsFilter(menu, self.TabFrame, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_0", nil, nil)
+	end, function(f43_arg0, f43_arg1, f43_arg2)
+		if CoD.StartMenuUtility.CanChangeWZStatsFilter(f43_arg1, self.TabFrame, f43_arg2) then
+			CoD.Menu.SetButtonLabel(f43_arg1, Enum.LUIButton[@"lui_key_xbx_pssquare"], 0x0, nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_contextual_2", function(element, menu, controller, model)
-		if IsPC() and CoD.PCUtility.CanShowLeaveGameButton(menu, controller) then
-			QuitPCGame_MP(self, controller, false)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_none"], "ui_contextual_2", function(f44_arg0, f44_arg1, f44_arg2, f44_arg3)
+		if IsPC() and CoD.PCUtility.CanShowLeaveGameButton(f44_arg1, f44_arg2) then
+			QuitPCGame_MP(self, f44_arg2, false)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if IsPC() and CoD.PCUtility.CanShowLeaveGameButton(menu, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_contextual_2")
+	end, function(f45_arg0, f45_arg1, f45_arg2)
+		if IsPC() and CoD.PCUtility.CanShowLeaveGameButton(f45_arg1, f45_arg2) then
+			CoD.Menu.SetButtonLabel(f45_arg1, Enum.LUIButton[@"lui_key_none"], 0x0, nil, "ui_contextual_2")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ui_contextual_1", function(element, menu, controller, model)
-		if IsPC() and CoD.PCUtility.CanShowStartWarzoneButton(menu, controller) then
-			CoD.WZUtility.StartWarzone(controller)
-			SetControllerModelValue(controller, "hudItems.hasStartedWZMatch", true)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_none"], "ui_contextual_1", function(f46_arg0, f46_arg1, f46_arg2, f46_arg3)
+		if IsPC() and CoD.PCUtility.CanShowStartWarzoneButton(f46_arg1, f46_arg2) then
+			CoD.WZUtility.StartWarzone(f46_arg2)
+			SetControllerModelValue(f46_arg2, "hudItems.hasStartedWZMatch", true)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if IsPC() and CoD.PCUtility.CanShowStartWarzoneButton(menu, controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ui_contextual_1")
+	end, function(f47_arg0, f47_arg1, f47_arg2)
+		if IsPC() and CoD.PCUtility.CanShowStartWarzoneButton(f47_arg1, f47_arg2) then
+			CoD.Menu.SetButtonLabel(f47_arg1, Enum.LUIButton[@"lui_key_none"], 0x0, nil, "ui_contextual_1")
 			return false
 		else
 			return false

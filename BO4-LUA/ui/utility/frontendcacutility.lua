@@ -1,7 +1,7 @@
 CoD.FrontendCACUtility = {}
-require("x64:f3c5259f470592d")
+require("ui/utility/overlayutility")
 CoD.FrontendCACUtility.ClassOptionsPreLoad = function(f1_arg0, f1_arg1)
-	if not Engine[@"issplitscreen"]() then
+	if not Engine.issplitscreen() then
 		f1_arg0.animateInFromOffset = 340
 	end
 	f1_arg0:setModel(CoD.perController[f1_arg1].classModel)
@@ -10,19 +10,19 @@ CoD.FrontendCACUtility.ClassOptionsPreLoad = function(f1_arg0, f1_arg1)
 		local f2_local1 = CoD.BaseUtility.GetMenuSessionMode(f2_arg0)
 		local f2_local2 = CoD.BaseUtility.GetMenuModel(f2_arg0)
 		local f2_local3 = f2_local2.classNum:get()
-		if f2_arg3.type == Enum[@"keyboardtype"][@"keyboard_type_custom_class"] then
+		if f2_arg3.type == Enum.KeyboardType[@"keyboard_type_custom_class"] then
 			if f2_local0 ~= nil then
 				f2_local2.customClassName:set(f2_local0)
-				local f2_local4 = Engine[@"getcacroot"](f2_arg2, f2_local3, f2_local1)
+				local f2_local4 = Engine.GetCACRoot(f2_arg2, f2_local3, f2_local1)
 				if f2_local4 and f2_local4.customClassName and f2_local4.customClassName[f2_local3] then
 					f2_local4.customClassName[f2_local3]:set(f2_local0)
 					SaveLoadoutGeneric(f2_arg2)
 				end
 			end
 			GoBack(f2_arg0, f2_arg2)
-		elseif f2_arg3.type == Enum[@"keyboardtype"][@"keyboard_type_class_set"] then
+		elseif f2_arg3.type == Enum.KeyboardType[@"keyboard_type_class_set"] then
 			if f2_local0 ~= nil then
-				Engine[@"setclasssetname"](f2_arg2, Engine[@"getcurrentclasssetindex"](f2_arg2), f2_local0)
+				Engine.SetClassSetName(f2_arg2, Engine.GetCurrentClassSetIndex(f2_arg2), f2_local0)
 			end
 			local f2_local4 = GoBack(f2_arg0, f2_arg2)
 			f2_local4:dispatchEventToChildren({
@@ -61,14 +61,14 @@ CoD.OverlayUtility.AddSystemOverlay("CopyClass", {
 CoD.OverlayUtility.AddSystemOverlay("ResetToDefault", {
 	menuName = "SystemOverlay_Full",
 	frameWidget = "CoD.systemOverlay_ClassOptionsFrame",
-	title = Engine[@"hash_4F9F1239CFD921FE"](@"hash_3345C72CB8A9CA70"),
+	title = Engine[@"hash_4F9F1239CFD921FE"]("menu/which_default_class_title_caps"),
 	description = function(f7_arg0)
 		local f7_local0 = ""
 		local f7_local1 = CoD.BaseUtility.GetMenuModel(f7_arg0)
 		if f7_local1 then
 			f7_local0 = f7_local1.customClassName:get() or ""
 		end
-		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_6C7FD70D0AC5247", f7_local0)
+		return Engine[@"hash_4F9F1239CFD921FE"]("menu/which_default_class_desc", f7_local0)
 	end,
 	categoryType = CoD.OverlayUtility.OverlayTypes.GenericMessage,
 	listDatasource = "ResetDefaultClass",
@@ -105,16 +105,16 @@ CoD.OverlayUtility.AddSystemOverlay("PurchaseExtraSlotsConfirmation", {
 	frameWidget = "CoD.SystemOverlay_ExtraSlots",
 	title = function(f14_arg0, f14_arg1)
 		if f14_arg1.itemCODPointCost > 0 and Engine[@"hash_2F40679B550DCCA2"](f14_arg0, CoD.Currencies.COD_POINTS) < f14_arg1.itemCODPointCost then
-			return @"hash_6924599FE45E0286"
+			return "mpui/bm_no_currency"
 		else
-			return Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](0x815271F5DDF1C8))
+			return Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"]("zmui/confirm_trade"))
 		end
 	end,
 	description = function(f15_arg0, f15_arg1)
 		if f15_arg1.itemCODPointCost > 0 and Engine[@"hash_2F40679B550DCCA2"](f15_arg0, CoD.Currencies.COD_POINTS) < f15_arg1.itemCODPointCost then
-			return Engine[@"hash_4F9F1239CFD921FE"](@"hash_3F1D4F9815C2714B", f15_arg1.displayText)
+			return Engine[@"hash_4F9F1239CFD921FE"]("mpui/bm_no_codpoints_description", f15_arg1.displayText)
 		else
-			return Engine[@"hash_4F9F1239CFD921FE"](@"hash_7E30E8F4251F2FC0", f15_arg1.displayText)
+			return Engine[@"hash_4F9F1239CFD921FE"]("mpui/bm_codpoints_purchase_confirmation_text", f15_arg1.displayText)
 		end
 	end,
 	codpointcost = function(f16_arg0, f16_arg1)
@@ -122,7 +122,7 @@ CoD.OverlayUtility.AddSystemOverlay("PurchaseExtraSlotsConfirmation", {
 	end,
 	codpointcostString = function(f17_arg0, f17_arg1)
 		if f17_arg1.itemCODPointCost > 0 and Engine[@"hash_2F40679B550DCCA2"](f17_arg0, CoD.Currencies.COD_POINTS) < f17_arg1.itemCODPointCost then
-			return Engine[@"hash_4F9F1239CFD921FE"](@"hash_23B61EC19CA8A6D", f17_arg1.itemCODPointCost)
+			return Engine[@"hash_4F9F1239CFD921FE"]("menu/codpoint_cost", f17_arg1.itemCODPointCost)
 		else
 			return ""
 		end
@@ -151,7 +151,7 @@ CoD.OverlayUtility.AddSystemOverlay("PurchaseExtraSlotsConfirmation", {
 				if not DoesPlayerHaveExtraSlotsItem(f21_arg2) then
 					local f21_local0 = Dvar[@"hash_CF99BC22D677A8D"]:get()
 					if f21_local0 == 0 or not Engine[@"hash_29EF65378FF2525E"](f21_arg2, tostring(f21_local0)) then
-						LuaUtils.UI_ShowErrorMessageDialog(f21_arg2, @"hash_4133DE36D3F6B23E", "")
+						LuaUtils.UI_ShowErrorMessageDialog(f21_arg2, "menu/extraslots_purchase_failed", "")
 						GoBack(f21_arg4, f21_arg2)
 						return
 					end
@@ -164,17 +164,17 @@ CoD.OverlayUtility.AddSystemOverlay("PurchaseExtraSlotsConfirmation", {
 					f19_arg1.disabled = true
 					CoD.Menu.UpdateAllButtonPrompts(f21_arg4, f21_arg2)
 					f21_arg0.PurchasingWidget:registerEventHandler("clip_over", function(element, event)
-						if Engine[@"isinventorybusy"](f21_arg2) or Engine[@"getpurchasedwskuresult"](f21_arg2) == Enum[@"inventorypurchaseresult"][@"inventory_purchase_result_inprogress"] then
+						if Engine.IsInventoryBusy(f21_arg2) or Engine.GetPurchaseDWSKUResult(f21_arg2) == Enum.InventoryPurchaseResult[@"inventory_purchase_result_inprogress"] then
 							LUI.UIElement.clipOver(element, event)
 						else
 							element:playClip("StopPurchasing")
 							element:registerEventHandler("clip_over", function(element, event)
 								element:registerEventHandler("clip_over", LUI.UIElement.clipOver)
 								f21_arg0:setState(f21_arg2, "DefaultState")
-								if Engine[@"getpurchasedwskuresult"](f21_arg2) == Enum[@"inventorypurchaseresult"][@"inventory_purchase_result_success"] then
+								if Engine.GetPurchaseDWSKUResult(f21_arg2) == Enum.InventoryPurchaseResult[@"inventory_purchase_result_success"] then
 									CoD.OverlayUtility.CreateOverlay(f21_arg2, GoBack(f21_arg4, f21_arg2), "PurchaseExtraSlotsComplete", f21_arg2)
 								else
-									LuaUtils.UI_ShowErrorMessageDialog(f21_arg2, @"hash_4133DE36D3F6B23E", "")
+									LuaUtils.UI_ShowErrorMessageDialog(f21_arg2, "menu/extraslots_purchase_failed", "")
 									GoBack(f21_arg4, f21_arg2)
 								end
 							end)
@@ -186,11 +186,11 @@ CoD.OverlayUtility.AddSystemOverlay("PurchaseExtraSlotsConfirmation", {
 				GoBack(f24_arg4, f24_arg2)
 			end
 			if f18_arg1.itemCODPointCost > 0 and Engine[@"hash_2F40679B550DCCA2"](f19_arg0, CoD.Currencies.COD_POINTS) < f18_arg1.itemCODPointCost then
-				table.insert(f19_local0, f19_local1(@"hash_263D5409DEC36DFA", CoD.FrontendCACUtility.GoBackAndPurchaseCodpointsAction, true, false))
+				table.insert(f19_local0, f19_local1("mpui/purchase_codpoints_caps", CoD.FrontendCACUtility.GoBackAndPurchaseCodpointsAction, true, false))
 			elseif f18_arg1.itemCODPointCost > 0 then
-				table.insert(f19_local0, f19_local1(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6804EA01CE713AC", CoD.CACUtility.GetExtraSlotCODPointCost()), f19_local2, true, false))
+				table.insert(f19_local0, f19_local1(Engine[@"hash_4F9F1239CFD921FE"]("mpui/bm_trade_cod_points", CoD.CACUtility.GetExtraSlotCODPointCost()), f19_local2, true, false))
 			end
-			table.insert(f19_local0, f19_local1(@"hash_26DA4540B4705513", f19_local3, false, false))
+			table.insert(f19_local0, f19_local1("menu/cancel_caps", f19_local3, false, false))
 			return f19_local0
 		end, true)
 		return "PurchaseExtraSlotsMenuList"
@@ -201,10 +201,10 @@ CoD.OverlayUtility.AddSystemOverlay("PurchaseExtraSlotsComplete", {
 	menuName = "SystemOverlay_Compact",
 	frameWidget = "CoD.SystemOverlay_ExtraSlotsPurchased",
 	title = function(f25_arg0, f25_arg1)
-		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_3A833716CBB8F05A")
+		return Engine[@"hash_4F9F1239CFD921FE"]("menu/congratulations_caps")
 	end,
 	description = function(f26_arg0, f26_arg1)
-		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_46E962892BD26FA8")
+		return Engine[@"hash_4F9F1239CFD921FE"]("menu/extraslots_purchase_complete_desc")
 	end,
 	categoryType = CoD.OverlayUtility.OverlayTypes.GenericMessage,
 	listDatasource = function(f27_arg0, f27_arg1)
@@ -226,9 +226,9 @@ CoD.OverlayUtility.AddSystemOverlay("PurchaseExtraSlotsComplete", {
 			table.insert(
 				f28_local0,
 				f28_local1("MENU_OK", function(f30_arg0, f30_arg1, f30_arg2, f30_arg3, f30_arg4)
-					local f30_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f30_arg2), "classSetsUpdated")
+					local f30_local0 = Engine.GetModel(Engine.GetModelForController(f30_arg2), "classSetsUpdated")
 					if f30_local0 then
-						Engine[@"forcenotifymodelsubscriptions"](f30_local0)
+						Engine.ForceNotifyModelSubscriptions(f30_local0)
 					end
 					GoBack(f30_arg4, f30_arg2)
 				end, true, false)
@@ -239,9 +239,9 @@ CoD.OverlayUtility.AddSystemOverlay("PurchaseExtraSlotsComplete", {
 	end,
 	[CoD.OverlayUtility.GoBackPropertyName] = function()
 		return function(f32_arg0, f32_arg1)
-			local f32_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f32_arg1), "classSetsUpdated")
+			local f32_local0 = Engine.GetModel(Engine.GetModelForController(f32_arg1), "classSetsUpdated")
 			if f32_local0 then
-				Engine[@"forcenotifymodelsubscriptions"](f32_local0)
+				Engine.ForceNotifyModelSubscriptions(f32_local0)
 			end
 			GoBack(f32_arg0, f32_arg1)
 		end
@@ -282,18 +282,18 @@ CoD.FrontendCACUtility.ClassOptionsListPrepare = function(f33_arg0)
 		GoBack(f38_arg0, f38_arg2)
 	end
 	if not CoD.isPC then
-		table.insert(f33_local0, f33_local1(@"hash_6D3D8A176056AD52", "t7_icon_menu_simple_rename", @"hash_41EE9CD5194170FF", f33_local2))
+		table.insert(f33_local0, f33_local1("menu/rename_loadout_caps", "t7_icon_menu_simple_rename", "menu/rename_class_loadout_desc", f33_local2))
 	end
-	table.insert(f33_local0, f33_local1(@"hash_1A4D4C13AEECF34E", "t7_icon_menu_simple_copy", @"hash_640C0201ADBDA6AF", f33_local3))
-	table.insert(f33_local0, f33_local1(@"hash_149770A897DE23D4", "t7_icon_menu_simple_revertsetting", @"hash_5CF897E6D58FEB53", f33_local4))
+	table.insert(f33_local0, f33_local1("menu/copy_caps", "t7_icon_menu_simple_copy", "menu/copy_class_desc", f33_local3))
+	table.insert(f33_local0, f33_local1("menu/reset_to_default_caps", "t7_icon_menu_simple_revertsetting", "menu/reset_class_to_default_desc", f33_local4))
 	if not IsCampaign() and not IsZombies() then
-		table.insert(f33_local0, f33_local1(@"hash_4E9BA912AFB1F83D", "t7_icon_menu_simple_delete", @"hash_7630F4D735D328DD", f33_local5))
+		table.insert(f33_local0, f33_local1("menu/clear_loadout_caps", "t7_icon_menu_simple_delete", "menu/clear_loadout_desc", f33_local5))
 	end
 	return f33_local0
 end
 CoD.FrontendCACUtility.ClassOptionsGlobalModels = {
 	getModel = function(f39_arg0)
-		local f39_local0 = Engine[@"getmodelforcontroller"](f39_arg0)
+		local f39_local0 = Engine.GetModelForController(f39_arg0)
 		f39_local0 = f39_local0:create("CACClassOptions")
 		f39_local0:create("customClassOptionsHintText")
 		f39_local0:create("customClassName")

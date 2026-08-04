@@ -1,4 +1,4 @@
-require("x64:ce1e6b6549d478c")
+require("ui/uieditor/widgets/footer/footercontainer_frontend_right")
 CoD.MenuFrameIngame = InheritFrom(LUI.UIElement)
 CoD.MenuFrameIngame.__defaultWidth = 1920
 CoD.MenuFrameIngame.__defaultHeight = 1080

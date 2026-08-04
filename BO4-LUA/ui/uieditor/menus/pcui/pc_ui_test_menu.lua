@@ -1,5 +1,5 @@
-require("x64:eda152e1d10147a")
-require("x64:78d9663be3f826")
+require("ui/uieditor/widgets/backgroundframes/genericmenuframe")
+require("ui/uieditor/widgets/common/common_tabbar_center")
 CoD.PC_UI_Test_Menu = InheritFrom(CoD.Menu)
 LUI.createMenu.PC_UI_Test_Menu = function(f1_arg0, f1_arg1)
 	local self = CoD.Menu.NewForUIEditor("PC_UI_Test_Menu", f1_arg0)
@@ -12,7 +12,7 @@ LUI.createMenu.PC_UI_Test_Menu = function(f1_arg0, f1_arg1)
 	self:playSound("menu_open", f1_arg0)
 	self.anyChildUsesUpdateState = true
 	local Background = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Background:setImage(RegisterImage(@"uie_fe_cp_background"))
+	Background:setImage(RegisterImage("uie_fe_cp_background"))
 	self:addElement(Background)
 	self.Background = Background
 	local MenuFrame = CoD.GenericMenuFrame.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 1, 0, 0)
@@ -33,11 +33,11 @@ LUI.createMenu.PC_UI_Test_Menu = function(f1_arg0, f1_arg1)
 	TabFrame:setTopBottom(0, 0.74, 187.5, 187.5)
 	self:addElement(TabFrame)
 	self.TabFrame = TabFrame
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
-		SendMenuResponse(self, "PC_UI_Test_Menu", "closing", controller)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xbb_pscircle"], "ESCAPE", function(f3_arg0, f3_arg1, f3_arg2, f3_arg3)
+		SendMenuResponse(self, "PC_UI_Test_Menu", "closing", f3_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/close", nil, "ESCAPE")
+	end, function(f4_arg0, f4_arg1, f4_arg2)
+		CoD.Menu.SetButtonLabel(f4_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], @"menu/close", nil, "ESCAPE")
 		return true
 	end, false)
 	MenuFrame:setModel(self.buttonModel, f1_arg0)

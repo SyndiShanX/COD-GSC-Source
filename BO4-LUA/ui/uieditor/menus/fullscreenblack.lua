@@ -1,57 +1,57 @@
-require("x64:e813280582af4f1")
+require("ui/uieditor/widgets/hud/ingametalkerswidget")
 local f0_local0 = function(f1_arg0)
 	if f1_arg0.red and f1_arg0.green and f1_arg0.blue then
 		f1_arg0.Fullscreen:setRGB(f1_arg0.red, f1_arg0.green, f1_arg0.blue)
 	end
 end
 local PostLoadFunc = function(f2_arg0)
-	local f2_local0 = f2_arg0:getModel(Engine[@"getprimarycontroller"](), "fadeOverTime")
-	local f2_local1 = f2_arg0:getModel(Engine[@"getprimarycontroller"](), "red")
-	local f2_local2 = f2_arg0:getModel(Engine[@"getprimarycontroller"](), "green")
-	local f2_local3 = f2_arg0:getModel(Engine[@"getprimarycontroller"](), "blue")
+	local f2_local0 = f2_arg0:getModel(Engine.GetPrimaryController(), "fadeOverTime")
+	local f2_local1 = f2_arg0:getModel(Engine.GetPrimaryController(), "red")
+	local f2_local2 = f2_arg0:getModel(Engine.GetPrimaryController(), "green")
+	local f2_local3 = f2_arg0:getModel(Engine.GetPrimaryController(), "blue")
 	if f2_local1 then
 		f2_arg0:subscribeToModel(f2_local1, function(model)
-			local f3_local0 = Engine[@"getmodelvalue"](model)
-			if f3_local0 then
-				f2_arg0.red = f3_local0
+			local modelValue = Engine.GetModelValue(model)
+			if modelValue then
+				f2_arg0.red = modelValue
 				f0_local0(f2_arg0)
 			end
 		end)
 	end
 	if f2_local2 then
 		f2_arg0:subscribeToModel(f2_local2, function(model)
-			local f4_local0 = Engine[@"getmodelvalue"](model)
-			if f4_local0 then
-				f2_arg0.green = f4_local0
+			local modelValue = Engine.GetModelValue(model)
+			if modelValue then
+				f2_arg0.green = modelValue
 				f0_local0(f2_arg0)
 			end
 		end)
 	end
 	if f2_local3 then
 		f2_arg0:subscribeToModel(f2_local3, function(model)
-			local f5_local0 = Engine[@"getmodelvalue"](model)
-			if f5_local0 then
-				f2_arg0.blue = f5_local0
+			local modelValue = Engine.GetModelValue(model)
+			if modelValue then
+				f2_arg0.blue = modelValue
 				f0_local0(f2_arg0)
 			end
 		end)
 	end
 	if f2_local0 then
 		f2_arg0:subscribeToModel(f2_local0, function(model)
-			local f6_local0 = Engine[@"getmodelvalue"](model)
-			local f6_local1 = f2_arg0:getModel(Engine[@"getprimarycontroller"](), "startAlpha")
-			local f6_local2 = f2_arg0:getModel(Engine[@"getprimarycontroller"](), "endAlpha")
+			local modelValue = Engine.GetModelValue(model)
+			local f6_local1 = f2_arg0:getModel(Engine.GetPrimaryController(), "startAlpha")
+			local f6_local2 = f2_arg0:getModel(Engine.GetPrimaryController(), "endAlpha")
 			local f6_local3 = 0
 			local f6_local4 = 0
 			if f6_local1 then
-				f6_local3 = Engine[@"getmodelvalue"](f6_local1)
+				f6_local3 = Engine.GetModelValue(f6_local1)
 			end
 			if f6_local2 then
-				f6_local4 = Engine[@"getmodelvalue"](f6_local2)
+				f6_local4 = Engine.GetModelValue(f6_local2)
 			end
-			if f6_local0 then
+			if modelValue then
 				if f6_local4 == 0 then
-					if f6_local3 == 0 or f6_local0 == 0 then
+					if f6_local3 == 0 or modelValue == 0 then
 						CoD.Menu.RemoveFromCurrMenuNameList(f2_arg0.menuName)
 					else
 						f2_arg0.Fullscreen:registerEventHandler("clip_over", function(element, event)
@@ -65,7 +65,7 @@ local PostLoadFunc = function(f2_arg0)
 				if f6_local3 >= 0 then
 					f2_arg0.Fullscreen:setAlpha(f6_local3)
 				end
-				f2_arg0.Fullscreen:beginAnimation("fadeOverTime", f6_local0)
+				f2_arg0.Fullscreen:beginAnimation("fadeOverTime", modelValue)
 				f2_arg0.Fullscreen:setAlpha(f6_local4)
 			end
 		end)
@@ -98,7 +98,7 @@ LUI.createMenu.FullScreenBlack = function(f8_arg0, f8_arg1)
 	})
 	local f8_local4 = InGameTalkersWidget
 	local f8_local5 = InGameTalkersWidget.subscribeToModel
-	local f8_local6 = Engine[@"getglobalmodel"]()
+	local f8_local6 = Engine.GetGlobalModel()
 	f8_local5(f8_local4, f8_local6["lobbyRoot.lobbyNav"], function(f10_arg0)
 		f8_local1:updateElementState(InGameTalkersWidget, {
 			name = "model_validation",

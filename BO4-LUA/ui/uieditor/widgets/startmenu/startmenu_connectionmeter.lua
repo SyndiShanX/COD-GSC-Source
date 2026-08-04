@@ -1,6 +1,6 @@
-require("x64:1bd7a98cc365538")
-require("x64:28679d45921cbd1")
-require("x64:c3166633f638a68")
+require("ui/uieditor/widgets/startmenu/startmenu_connectionmeter_packetlossimage")
+require("ui/uieditor/widgets/startmenu/startmenu_connectionmeter_pingimage")
+require("ui/uieditor/widgets/startmenu/startmenu_stenciledconnectionmeter")
 CoD.StartMenu_ConnectionMeter = InheritFrom(LUI.UIElement)
 CoD.StartMenu_ConnectionMeter.__defaultWidth = 745
 CoD.StartMenu_ConnectionMeter.__defaultHeight = 115
@@ -23,8 +23,8 @@ CoD.StartMenu_ConnectionMeter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local PingLabel = LUI.UIText.new(0, 0, 185, 273, 0, 0, 10.5, 30.5)
 	PingLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_C82D7F8B4BBEF0A"))
 	PingLabel:setTTF("default")
-	PingLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	PingLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	PingLabel:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	PingLabel:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(PingLabel)
 	self.PingLabel = PingLabel
 	local bg10 = LUI.UIImage.new(0, 0, 562.5, 738.5, 0, 0, 2, 113)
@@ -40,13 +40,13 @@ CoD.StartMenu_ConnectionMeter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local TextBox0 = LUI.UIText.new(0, 0, 569.5, 657.5, 0, 0, 10.5, 30.5)
 	TextBox0:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7670B328A0A31250"))
 	TextBox0:setTTF("default")
-	TextBox0:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	TextBox0:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	TextBox0:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	TextBox0:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(TextBox0)
 	self.TextBox0 = TextBox0
 	local PingTextBox = LUI.UIText.new(0, 0, 288.5, 339.5, 0, 0, 69, 99)
 	PingTextBox:setTTF("default")
-	PingTextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	PingTextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_right"])
 	PingTextBox:subscribeToGlobalModel(f1_arg1, "NetStatsInfo", "NETSTATS_LATENCY", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -57,7 +57,7 @@ CoD.StartMenu_ConnectionMeter.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.PingTextBox = PingTextBox
 	local PingTextBox0 = LUI.UIText.new(0, 0, 678, 729, 0, 0, 69, 99)
 	PingTextBox0:setTTF("default")
-	PingTextBox0:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	PingTextBox0:setAlignment(Enum.LUIAlignment[@"lui_alignment_right"])
 	PingTextBox0:subscribeToGlobalModel(f1_arg1, "NetStatsInfo", "NETSTATS_PACKETLOSS", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

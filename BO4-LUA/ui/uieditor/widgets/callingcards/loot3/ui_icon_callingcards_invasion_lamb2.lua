@@ -8,7 +8,7 @@ CoD.ui_icon_callingcards_invasion_lamb2.new = function(f1_arg0, f1_arg1, f1_arg2
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local lamb2 = LUI.UIImage.new(0, 0, 0, 112, 0, 0, 0, 112)
-	lamb2:setImage(RegisterImage(@"uie_ui_menu_callingcards_invasion_lamb2"))
+	lamb2:setImage(RegisterImage("uie_ui_menu_callingcards_invasion_lamb2"))
 	self:addElement(lamb2)
 	self.lamb2 = lamb2
 	if PostLoadFunc then

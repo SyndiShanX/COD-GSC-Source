@@ -10,28 +10,28 @@ CoD.StartMenu_CODpoints.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	local Background = LUI.UIImage.new(0.5, 0.5, -100, 100, 0.5, 0.5, -40, 40)
 	Background:setRGB(0.32, 0.32, 0.32)
 	Background:setAlpha(0)
-	Background:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_smoke"))
+	Background:setMaterial(LUI.UIImage.GetCachedMaterial("uie_smoke"))
 	Background:setShaderVector(0, 0.4, 0, 0, 0)
 	self:addElement(Background)
 	self.Background = Background
 	local ring = LUI.UIImage.new(0, 0, -16, 64, 0, 0, 1, 81)
 	ring:setAlpha(0)
-	ring:setImage(RegisterImage(@"uie_t7_blackmarket_keyringglow_glow"))
+	ring:setImage(RegisterImage("uie_t7_blackmarket_keyringglow_glow"))
 	self:addElement(ring)
 	self.ring = ring
 	local Glow = LUI.UIImage.new(0, 0, -21, 69, 0, 0, -4, 88)
 	Glow:setAlpha(0)
-	Glow:setImage(RegisterImage(@"uie_t7_blackmarket_keyglow_gold"))
+	Glow:setImage(RegisterImage("uie_t7_blackmarket_keyglow_gold"))
 	self:addElement(Glow)
 	self.Glow = Glow
 	local codpoints = LUI.UIImage.new(0, 0, 7, 41, 0, 0, 25, 59)
-	codpoints:setImage(RegisterImage(@"uie_ui_codpoints_symbol_32x32"))
+	codpoints:setImage(RegisterImage("uie_ui_codpoints_symbol_32x32"))
 	self:addElement(codpoints)
 	self.codpoints = codpoints
 	local codpointGlint = LUI.UIImage.new(0, 0, 7, 41, 0, 0, 25, 59)
 	codpointGlint:setRGB(1, 0.94, 0.57)
-	codpointGlint:setImage(RegisterImage(@"uie_ui_codpoints_symbol_32x32"))
-	codpointGlint:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_glint_reveal"))
+	codpointGlint:setImage(RegisterImage("uie_ui_codpoints_symbol_32x32"))
+	codpointGlint:setMaterial(LUI.UIImage.GetCachedMaterial("uie_glint_reveal"))
 	codpointGlint:setShaderVector(0, 0.01, 0, 0, 0)
 	self:addElement(codpointGlint)
 	self.codpointGlint = codpointGlint
@@ -41,8 +41,8 @@ CoD.StartMenu_CODpoints.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end
 	codpointsCount.__Color()
 	codpointsCount:setTTF("ttmussels_demibold")
-	codpointsCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	codpointsCount:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
+	codpointsCount:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	codpointsCount:setAlignment(Enum.LUIAlignment[@"hash_E821F0ECFF8D1C7"])
 	codpointsCount:subscribeToGlobalModel(f1_arg1, "LootStreamProgress", "codPoints", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -57,7 +57,7 @@ CoD.StartMenu_CODpoints.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	self.Image = Image
 	local f1_local8 = codpointsCount
 	local f1_local9 = codpointsCount.subscribeToModel
-	local f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	local f1_local10 = Engine.GetModelForController(f1_arg1)
 	f1_local9(f1_local8, f1_local10["LootStreamProgress.codPoints"], codpointsCount.__Color)
 	self:mergeStateConditions({
 		{
@@ -75,7 +75,7 @@ CoD.StartMenu_CODpoints.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	})
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local10 = Engine.GetModelForController(f1_arg1)
 	f1_local9(f1_local8, f1_local10["LootStreamProgress.codPoints"], function(f6_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -87,7 +87,7 @@ CoD.StartMenu_CODpoints.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end, false)
 	f1_local8 = self
 	f1_local9 = self.subscribeToModel
-	f1_local10 = Engine[@"getglobalmodel"]()
+	f1_local10 = Engine.GetGlobalModel()
 	f1_local9(f1_local8, f1_local10["lobbyRoot.lobbyNetworkMode"], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -110,7 +110,7 @@ CoD.StartMenu_CODpoints.__resetProperties = function(f8_arg0)
 	f8_arg0.Glow:completeAnimation()
 	f8_arg0.ring:completeAnimation()
 	f8_arg0.codpointGlint:setAlpha(1)
-	f8_arg0.codpointGlint:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_glint_reveal"))
+	f8_arg0.codpointGlint:setMaterial(LUI.UIImage.GetCachedMaterial("uie_glint_reveal"))
 	f8_arg0.codpointGlint:setShaderVector(0, 0.01, 0, 0, 0)
 	f8_arg0.codpoints:setAlpha(1)
 	f8_arg0.codpointsCount:setAlpha(1)
@@ -254,7 +254,7 @@ CoD.StartMenu_CODpoints.__clipsPerState = {
 			end
 			f10_arg0.codpointGlint:completeAnimation()
 			f10_arg0.codpointGlint:setAlpha(0)
-			f10_arg0.codpointGlint:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_glint_reveal"))
+			f10_arg0.codpointGlint:setMaterial(LUI.UIImage.GetCachedMaterial("uie_glint_reveal"))
 			f10_arg0.codpointGlint:setShaderVector(0, 0.01, 0, 0, 0)
 			f10_local3(f10_arg0.codpointGlint)
 			f10_arg0.nextClip = "DefaultClip"

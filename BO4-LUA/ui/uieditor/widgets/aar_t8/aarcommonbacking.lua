@@ -1,4 +1,4 @@
-require("x64:c7393046816f760")
+require("ui/uieditor/widgets/aar_t8/levelup/aarlevelcommonboxes")
 CoD.AARCommonBacking = InheritFrom(LUI.UIElement)
 CoD.AARCommonBacking.__defaultWidth = 1356
 CoD.AARCommonBacking.__defaultHeight = 836
@@ -20,7 +20,7 @@ CoD.AARCommonBacking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.Backer = Backer
 	local TiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	TiledBacking:setAlpha(0.12)
-	TiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBacking:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	TiledBacking:setupNineSliceShader(196, 88)
@@ -33,7 +33,7 @@ CoD.AARCommonBacking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local FuiBox02Right = LUI.UIImage.new(1, 1, -84, -50, 1, 1, -10, -44)
 	FuiBox02Right:setAlpha(0.05)
 	FuiBox02Right:setZRot(-90)
-	FuiBox02Right:setImage(RegisterImage(@"uie_ui_hud_vehicle_ac130_fui_box01"))
+	FuiBox02Right:setImage(RegisterImage("uie_ui_hud_vehicle_ac130_fui_box01"))
 	FuiBox02Right:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	FuiBox02Right:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(FuiBox02Right)

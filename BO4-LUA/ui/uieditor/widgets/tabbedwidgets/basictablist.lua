@@ -1,4 +1,4 @@
-require("x64:31f27d414cc7ab7")
+require("ui/uieditor/widgets/tabbedwidgets/basictabwidget")
 CoD.basicTabList = InheritFrom(LUI.UIElement)
 CoD.basicTabList.__defaultWidth = 1635
 CoD.basicTabList.__defaultHeight = 60
@@ -15,7 +15,7 @@ CoD.basicTabList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	grid:setWidgetType(CoD.basicTabWidget)
 	grid:setHorizontalCount(6)
 	grid:setSpacing(3)
-	grid:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	grid:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
 	grid:registerEventHandler("gain_focus", function(element, event)
 		local f2_local0 = nil
 		if element.gainFocus then
@@ -23,15 +23,15 @@ CoD.basicTabList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(grid, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		SelectItemIfPossible(self, element, controller)
+	f1_arg0:AddButtonCallbackFunction(grid, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f3_arg0, f3_arg1, f3_arg2, f3_arg3)
+		SelectItemIfPossible(self, f3_arg0, f3_arg2)
 		PlaySoundSetSound(self, "list_right")
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+	end, function(f4_arg0, f4_arg1, f4_arg2)
+		CoD.Menu.SetButtonLabel(f4_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 		return false
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(grid, "setWidth", function(element, controller)

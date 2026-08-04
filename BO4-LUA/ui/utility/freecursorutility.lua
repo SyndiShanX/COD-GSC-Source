@@ -520,11 +520,11 @@ CoD.FreeCursorUtility.SetVisibilityToAnyContextualButtonVisible = function(f45_a
 		return
 	end
 	for f45_local4, f45_local5 in ipairs({
-		Enum[@"luibutton"][@"lui_key_xby_pstriangle"],
-		Enum[@"luibutton"][@"lui_key_xbx_pssquare"],
-		Enum[@"luibutton"][@"lui_key_xba_pscross"],
+		Enum.LUIButton[@"lui_key_xby_pstriangle"],
+		Enum.LUIButton[@"lui_key_xbx_pssquare"],
+		Enum.LUIButton[@"lui_key_xba_pscross"],
 	}) do
-		if f45_local0[f45_local5] and f45_local0[f45_local5]:get() == Enum[@"luibuttonpromptstates"][@"flag_enable_prompts"] and f45_local0[f45_local5].flags and CoD.BitUtility.IsBitwiseAndNonZero(f45_local0[f45_local5].flags:get(), Enum[@"luibuttonpromptflags"][@"bpf_contextual"]) then
+		if f45_local0[f45_local5] and f45_local0[f45_local5]:get() == Enum.LUIButtonPromptStates[@"flag_enable_prompts"] and f45_local0[f45_local5].flags and CoD.BitUtility.IsBitwiseAndNonZero(f45_local0[f45_local5].flags:get(), Enum[@"luibuttonpromptflags"][@"bpf_contextual"]) then
 			f45_arg2:setAlpha(1)
 			return
 		end
@@ -537,7 +537,7 @@ end
 CoD.FreeCursorUtility.IsTooltipInDetailedView = function(f47_arg0, f47_arg1)
 	local f47_local0 = CoD.ModelUtility.IsSelfModelValueNonEmptyString(f47_arg0, f47_arg1, "detailedDescription")
 	if f47_local0 then
-		f47_local0 = CoD.ModelUtility.AreButtonModelValueBitsSet(f47_arg1, Enum[@"luibutton"][@"lui_key_rtrig"], Enum[@"luibuttonflags"][@"flag_down"])
+		f47_local0 = CoD.ModelUtility.AreButtonModelValueBitsSet(f47_arg1, Enum.LUIButton[@"lui_key_rtrig"], Enum.LUIButtonFlags[@"flag_down"])
 		if not f47_local0 then
 			f47_local0 = CoD.FreeCursorUtility.IsDetailedViewPCActive(f47_arg1)
 		end
@@ -552,7 +552,7 @@ CoD.FreeCursorUtility.IsTooltipTitleVisible = function(f48_arg0, f48_arg1)
 		if not f48_local0 then
 			return false
 		elseif f48_local0 == CoD.FreeCursorUtility.TooltipArchetypes.DEFAULT then
-			local f48_local1 = CoD.ModelUtility.AreButtonModelValueBitsSet(f48_arg1, Enum[@"luibutton"][@"lui_key_rtrig"], Enum[@"luibuttonflags"][@"flag_down"])
+			local f48_local1 = CoD.ModelUtility.AreButtonModelValueBitsSet(f48_arg1, Enum.LUIButton[@"lui_key_rtrig"], Enum.LUIButtonFlags[@"flag_down"])
 			if not f48_local1 then
 				f48_local1 = CoD.FreeCursorUtility.IsDetailedViewPCActive(f48_arg1)
 			end
@@ -574,7 +574,7 @@ CoD.FreeCursorUtility.ShowingContextualPromptForFlags = function(f49_arg0, f49_a
 	f49_local0 = CoD.ModelUtility.IsSelfModelValueEnumFlagSet(f49_arg0, f49_arg1, "flags", Enum[@"luibuttonpromptflags"][@"bpf_contextual"])
 end
 CoD.FreeCursorUtility.XUIDToClientName = function(f50_arg0, f50_arg1)
-	local f50_local0 = Engine[@"hash_334E2C136520C3C8"](Enum[@"lobbymodule"][@"lobby_module_client"], f50_arg1)
+	local f50_local0 = Engine[@"hash_334E2C136520C3C8"](Enum.LobbyModule[@"lobby_module_client"], f50_arg1)
 	local f50_local1
 	if f50_local0 then
 		f50_local1 = f50_local0.client.gamertag
@@ -586,7 +586,7 @@ CoD.FreeCursorUtility.XUIDToClientName = function(f50_arg0, f50_arg1)
 	f50_local1 = ""
 end
 CoD.FreeCursorUtility.XUIDToClanTag = function(f51_arg0, f51_arg1)
-	local f51_local0 = Engine[@"hash_334E2C136520C3C8"](Enum[@"lobbymodule"][@"lobby_module_client"], f51_arg1)
+	local f51_local0 = Engine[@"hash_334E2C136520C3C8"](Enum.LobbyModule[@"lobby_module_client"], f51_arg1)
 	local f51_local1
 	if f51_local0 then
 		f51_local1 = f51_local0.client.clantag
@@ -613,7 +613,7 @@ DataSources.FreeCursor = {
 	getModel = function(f53_arg0)
 		f53_arg0 = CoD.FreeCursorUtility.GetCursorControllerIndex(f53_arg0)
 		if not DataSources.FreeCursor.models[f53_arg0] then
-			local f53_local0 = Engine[@"getmodelforcontroller"](f53_arg0)
+			local f53_local0 = Engine.GetModelForController(f53_arg0)
 			f53_local0 = f53_local0:create("FreeCursor")
 			local f53_local1 = f53_local0:create("hasFocus")
 			f53_local1:set(false)
@@ -638,8 +638,8 @@ DataSources.FreeCursor = {
 			if DataSources.FreeCursor.subscriptionElements[f53_arg0] == nil then
 				DataSources.FreeCursor.subscriptionElements[f53_arg0] = LUI.UIElement.new()
 				if not CoD.isPC then
-					DataSources.FreeCursor.subscriptionElements[f53_arg0]:subscribeToGlobalModel(f53_arg0, "PerController", "ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"], function(model)
-						f53_local1.detailedView:set(CoD.BitUtility.IsBitwiseAndNonZero(model:get(), Enum[@"luibuttonflags"][@"flag_down"]))
+					DataSources.FreeCursor.subscriptionElements[f53_arg0]:subscribeToGlobalModel(f53_arg0, "PerController", "ButtonBits." .. Enum.LUIButton[@"lui_key_rtrig"], function(model)
+						f53_local1.detailedView:set(CoD.BitUtility.IsBitwiseAndNonZero(model:get(), Enum.LUIButtonFlags[@"flag_down"]))
 					end)
 				end
 			end
@@ -726,7 +726,7 @@ DataSources.FreeCursor = {
 				"displayName",
 				"name",
 			},
-			default = @"hash_0",
+			default = 0x0,
 		},
 		{
 			name = "description",
@@ -734,7 +734,7 @@ DataSources.FreeCursor = {
 				"desc",
 				"description",
 			},
-			default = @"hash_0",
+			default = 0x0,
 		},
 		{
 			name = "detailedDescription",
@@ -749,14 +749,14 @@ DataSources.FreeCursor = {
 			paths = {
 				"headerName",
 			},
-			default = @"hash_0",
+			default = 0x0,
 		},
 		{
 			name = "headerUseString",
 			paths = {
 				"headerUseString",
 			},
-			default = @"hash_0",
+			default = 0x0,
 		},
 		{
 			name = "attachmentDataSource",
@@ -778,7 +778,7 @@ DataSources.FreeCursor = {
 				"unlockDescription",
 				"levelUnlockDescription",
 			},
-			default = @"hash_0",
+			default = 0x0,
 		},
 		{
 			name = "cautionDescription",
@@ -786,7 +786,7 @@ DataSources.FreeCursor = {
 				"cautionDesc",
 				"cautionDescription",
 			},
-			default = @"hash_0",
+			default = 0x0,
 		},
 		{
 			name = "characterIndex",
@@ -800,7 +800,7 @@ DataSources.FreeCursor = {
 			paths = {
 				"characterTraitSummary",
 			},
-			default = @"hash_0",
+			default = 0x0,
 		},
 		{
 			name = "clientNum",
@@ -921,7 +921,7 @@ CoD.FreeCursorUtility.UpdateFreeCursorState = function(f69_arg0, f69_arg1, f69_a
 end
 CoD.FreeCursorUtility.IsDetailedViewPCActive = function(f70_arg0)
 	if CoD.isPC then
-		local f70_local0 = Engine[@"getmodelforcontroller"](f70_arg0)
+		local f70_local0 = Engine.GetModelForController(f70_arg0)
 		f70_local0 = f70_local0:create("FreeCursor")
 		local f70_local1 = f70_local0:create("contextualInfo")
 		return f70_local1.detailedViewPC:get()
@@ -1034,7 +1034,7 @@ CoD.FreeCursorUtility.ToggleDetailedViewPC = function(f79_arg0, f79_arg1, f79_ar
 	end
 end
 CoD.FreeCursorUtility.OpenDetailedViewPC = function(f80_arg0, f80_arg1)
-	local f80_local0 = Engine[@"getmodelforcontroller"](f80_arg1)
+	local f80_local0 = Engine.GetModelForController(f80_arg1)
 	f80_local0 = f80_local0:create("FreeCursor")
 	local f80_local1 = f80_local0:create("contextualInfo")
 	if CoD.FreeCursorUtility.CanOpenTooltip(f80_arg1) and not f80_local1.detailedViewPC:get() then
@@ -1044,7 +1044,7 @@ CoD.FreeCursorUtility.OpenDetailedViewPC = function(f80_arg0, f80_arg1)
 	end
 end
 CoD.FreeCursorUtility.CloseDetailedViewPC = function(f81_arg0, f81_arg1)
-	local f81_local0 = Engine[@"getmodelforcontroller"](f81_arg1)
+	local f81_local0 = Engine.GetModelForController(f81_arg1)
 	f81_local0 = f81_local0:create("FreeCursor")
 	local f81_local1 = f81_local0:create("contextualInfo")
 	if f81_local1.detailedViewPC:get() then
@@ -1137,7 +1137,7 @@ CoD.FreeCursorUtility.CanShowContextualButtonPromptPC = function(f90_arg0, f90_a
 end
 CoD.FreeCursorUtility.GetCursorControllerIndex = function(f91_arg0)
 	if CoD.isFrontend then
-		return Engine[@"getprimarycontroller"]()
+		return Engine.GetPrimaryController()
 	else
 		return f91_arg0
 	end
@@ -1146,7 +1146,7 @@ CoD.FreeCursorUtility.UpdateContextualPromptModelPC = function(f92_arg0, f92_arg
 	DataSources.FreeCursor.updateContextualPromptPC(f92_arg1)
 end
 CoD.FreeCursorUtility.SetIsShowingContextualPromptsModelPC = function(f93_arg0, f93_arg1, f93_arg2)
-	local f93_local0 = Engine[@"getmodelforcontroller"](f93_arg1)
+	local f93_local0 = Engine.GetModelForController(f93_arg1)
 	f93_local0 = f93_local0:create("FreeCursor")
 	local f93_local1 = f93_local0:create("contextualInfo")
 	f93_arg0:subscribeToGlobalModel(f93_arg1, "FreeCursor", "contextualInfo.updateContextualPromptPC", function()

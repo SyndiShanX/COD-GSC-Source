@@ -36,7 +36,7 @@ end
 LUI.CoDRoot.ProcessEventNow = function(f3_arg0, f3_arg1)
 	if f3_arg1.name ~= "process_events" then
 		Engine[@"beginpixevent"](f3_arg1.name)
-		Engine[@"eventprocessed"]()
+		Engine.EventProcessed()
 	end
 	local f3_local0 = f3_arg0:propagateEvent(f3_arg1)
 	if f3_local0 then

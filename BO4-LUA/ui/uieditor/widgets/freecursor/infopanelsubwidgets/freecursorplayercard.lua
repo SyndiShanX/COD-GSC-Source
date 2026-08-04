@@ -1,4 +1,4 @@
-require("x64:7aa6f93320ca609")
+require("ui/uieditor/widgets/callingcards/callingcards_basicimage")
 CoD.freeCursorPlayerCard = InheritFrom(LUI.UIElement)
 CoD.freeCursorPlayerCard.__defaultWidth = 405
 CoD.freeCursorPlayerCard.__defaultHeight = 100
@@ -28,8 +28,8 @@ CoD.freeCursorPlayerCard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.Backing = Backing
 	local PlayerName = LUI.UIText.new(0, 0, 170, 405, 0, 0, 17.5, 47.5)
 	PlayerName:setTTF("default")
-	PlayerName:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	PlayerName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	PlayerName:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	PlayerName:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	PlayerName:linkToElementModel(self, "xuid", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -40,8 +40,8 @@ CoD.freeCursorPlayerCard.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	self.PlayerName = PlayerName
 	local ClanTag = LUI.UIText.new(0, 0, 170, 405, 0, 0, 50, 75)
 	ClanTag:setTTF("default")
-	ClanTag:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	ClanTag:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	ClanTag:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	ClanTag:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	ClanTag:linkToElementModel(self, "xuid", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then

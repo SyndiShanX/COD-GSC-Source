@@ -12,7 +12,7 @@ CoD.FaceButtonWithKeyMouse.new = function(f2_arg0, f2_arg1, f2_arg2, f2_arg3, f2
 	f2_arg0:addElementToPendingUpdateStateList(self)
 	local KeyMouseImage = nil
 	KeyMouseImage = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	KeyMouseImage:setImage(RegisterImage(@"uie_smallsquarebutton"))
+	KeyMouseImage:setImage(RegisterImage("uie_smallsquarebutton"))
 	self:addElement(KeyMouseImage)
 	self.KeyMouseImage = KeyMouseImage
 	local ControllerImage = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
@@ -59,7 +59,7 @@ CoD.FaceButtonWithKeyMouse.new = function(f2_arg0, f2_arg1, f2_arg2, f2_arg3, f2
 	end)
 	local f2_local3 = self
 	local f2_local4 = self.subscribeToModel
-	local f2_local5 = Engine[@"getmodelforcontroller"](f2_arg1)
+	local f2_local5 = Engine.GetModelForController(f2_arg1)
 	f2_local4(f2_local3, f2_local5.LastInput, function(f8_arg0)
 		f2_arg0:updateElementState(self, {
 			name = "model_validation",

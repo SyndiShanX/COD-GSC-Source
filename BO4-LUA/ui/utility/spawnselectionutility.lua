@@ -1,4 +1,3 @@
-
 CoD.SpawnSelectionUtility = {}
 local f0_local0 = -1
 local f0_local1 = 3
@@ -31,8 +30,8 @@ CoD.SpawnSelectionUtility.SelectSpawnRegion = function ( f1_arg0, f1_arg1, f1_ar
 				controller = f1_arg2
 			} )
 			f1_arg0.selectedRegion = f1_arg1
-			if Engine[@"getlobbymode"]( Engine[@"lobbygetcontrollinglobbysession"]( Enum[@"lobbymodule"][@"lobby_module_client"] ) ) == Enum[@"lobbymode"][@"hash_3B3A1BBF18C0B176"] or IsSimulateCT() then
-				Engine[@"sendmenuresponse"]( f1_arg2, CoD.SpawnSelectionUtility.MenuResponseName, "SpawnRegionFocus", f1_arg0.selectedRegion.objId )
+			if Engine[@"getlobbymode"]( Engine[@"lobbygetcontrollinglobbysession"]( Enum.LobbyModule[@"lobby_module_client"] ) ) == Enum.LobbyMode[@"hash_3B3A1BBF18C0B176"] or IsSimulateCT() then
+				Engine.SendMenuResponse( f1_arg2, CoD.SpawnSelectionUtility.MenuResponseName, "SpawnRegionFocus", f1_arg0.selectedRegion.objId )
 			end
 		end
 		
@@ -103,7 +102,7 @@ CoD.SpawnSelectionUtility.FindBeaconTargetedByCursor = function ( f7_arg0, f7_ar
 	local f7_local0 = {}
 	local f7_local1 = f7_arg0:getRoot()
 	for f7_local6, f7_local7 in pairs( f7_arg0.beacons ) do
-		if Engine[@"ismouseinsideelement"]( f7_arg1, f7_local7, f7_local1.name, f7_arg2.x, f7_arg2.y ) then
+		if Engine.IsMouseInsideElement( f7_arg1, f7_local7, f7_local1.name, f7_arg2.x, f7_arg2.y ) then
 			local f7_local5 = CoD.BaseUtility.GetElementCenterVec( f7_local7 )
 			table.insert( f7_local0, {
 				marker = f7_local7,
@@ -131,7 +130,7 @@ CoD.SpawnSelectionUtility.MoveSelectionToTargetedBeacon = function ( f9_arg0, f9
 			CoD.SpawnSelectionUtility.DeselectSpawnRegion( f9_arg0.SpawnSelectionMap, f9_local0, f9_arg1, f9_local1 )
 		end
 		CoD.SpawnSelectionUtility.SelectSpawnRegion( f9_arg0.SpawnSelectionMap, f9_local1, f9_arg1, f9_local0 )
-		Engine[@"playsound"]( "uin_main_edit", f9_arg1 )
+		Engine.playsound( "uin_main_edit", f9_arg1 )
 	end
 end
 CoD.SpawnSelectionUtility.PositionMarker = function ( f10_arg0, f10_arg1, f10_arg2, f10_arg3 )
@@ -155,7 +154,7 @@ CoD.SpawnSelectionUtility.PositionMarker = function ( f10_arg0, f10_arg1, f10_ar
 	end
 end
 CoD.SpawnSelectionUtility.PositionObjectiveMarker = function ( f11_arg0, f11_arg1, f11_arg2, f11_arg3 )
-	local f11_local0, f11_local1, f11_local2 = Engine[@"getobjectiveposition"]( f11_arg1, f11_arg3 )
+	local f11_local0, f11_local1, f11_local2 = Engine.GetObjectivePosition( f11_arg1, f11_arg3 )
 	if f11_local0 and f11_local1 and f11_local2 then
 		CoD.SpawnSelectionUtility.PositionMarker( f11_arg0, f11_arg1, f11_arg2, {
 			x = f11_local0,
@@ -169,7 +168,7 @@ CoD.SpawnSelectionUtility.PositionSpawnBeacon = function ( f12_arg0, f12_arg1, f
 end
 CoD.SpawnSelectionUtility.IsObjectiveInActiveState = function ( f13_arg0 )
 	local f13_local0
-	if f13_arg0 ~= Enum[@"objectivestate_t"][@"objst_active"] and f13_arg0 ~= Enum[@"objectivestate_t"][@"objst_invisible"] then
+	if f13_arg0 ~= Enum.objectiveState_t[@"objst_active"] and f13_arg0 ~= Enum.objectiveState_t[@"objst_invisible"] then
 		f13_local0 = false
 	else
 		f13_local0 = true
@@ -177,31 +176,31 @@ CoD.SpawnSelectionUtility.IsObjectiveInActiveState = function ( f13_arg0 )
 	return f13_local0
 end
 CoD.SpawnSelectionUtility.IsObjectiveSpawnBeacon = function ( f14_arg0, f14_arg1 )
-	return Engine[@"getobjectivename"]( f14_arg0, f14_arg1 ) == @"spawnbeacon_objective"
+	return Engine.GetObjectiveName( f14_arg0, f14_arg1 ) == "spawnbeacon_objective"
 end
 CoD.SpawnSelectionUtility.IsObjectiveDeathMarker = function ( f15_arg0, f15_arg1 )
-	return Engine[@"getobjectivename"]( f15_arg0, f15_arg1 ) == @"headicon_dead"
+	return Engine.GetObjectiveName( f15_arg0, f15_arg1 ) == "headicon_dead"
 end
 CoD.SpawnSelectionUtility.IsObjectiveSpawnGroup = function ( f16_arg0, f16_arg1 )
-	if Engine[@"getobjectivename"]( f16_arg0, f16_arg1 ) then
+	if Engine.GetObjectiveName( f16_arg0, f16_arg1 ) then
 		return false
 	else
 		return false
 	end
 end
 CoD.SpawnSelectionUtility.IsObjectiveTeamOwned = function ( f17_arg0, f17_arg1 )
-	return CoD.TeamUtility.GetTeamID( f17_arg0 ) == Engine[@"getobjectiveteam"]( f17_arg0, f17_arg1 )
+	return CoD.TeamUtility.GetTeamID( f17_arg0 ) == Engine.GetObjectiveTeam( f17_arg0, f17_arg1 )
 end
 CoD.SpawnSelectionUtility.IsSpawnEMPDisabled = function ( f18_arg0, f18_arg1 )
 	if f18_arg1 ~= f0_local0 then
-		return Engine[@"getobjectivegamemodeflags"]( f18_arg0, f18_arg1 ) == f0_local1
+		return Engine.GetObjectiveGamemodeFlags( f18_arg0, f18_arg1 ) == f0_local1
 	else
 		return false
 	end
 end
 CoD.SpawnSelectionUtility.IsSpawnManualDisabled = function ( f19_arg0, f19_arg1 )
 	if f19_arg1 ~= f0_local0 then
-		return Engine[@"getobjectivegamemodeflags"]( f19_arg0, f19_arg1 ) == f0_local2
+		return Engine.GetObjectiveGamemodeFlags( f19_arg0, f19_arg1 ) == f0_local2
 	else
 		return false
 	end
@@ -210,7 +209,7 @@ CoD.SpawnSelectionUtility.IsKillcamActive = function ( f20_arg0 )
 	return CoD.ModelUtility.IsModelValueEqualTo( f20_arg0, "hudItems.killcamActive", 1 )
 end
 CoD.SpawnSelectionUtility.GetObjectiveModel = function ( f21_arg0, f21_arg1 )
-	return Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f21_arg0 ), "objective" .. f21_arg1 )
+	return Engine.GetModel( Engine.GetModelForController( f21_arg0 ), "objective" .. f21_arg1 )
 end
 CoD.SpawnSelectionUtility.ResizeSpawnRadius = function ( f22_arg0, f22_arg1, f22_arg2 )
 	local f22_local0, f22_local1 = f22_arg0:getLocalSize()
@@ -222,7 +221,7 @@ CoD.SpawnSelectionUtility.ResizeSpawnRadius = function ( f22_arg0, f22_arg1, f22
 	elseif math.abs( f22_local7 ) > 0 then
 		f22_local8 = f22_local0 / math.abs( f22_local4 - f22_local2 )
 	end
-	local f22_local9 = Engine[@"hash_2E00B2F29271C60B"]( @"default_spawnbeacon_settings" )
+	local f22_local9 = Engine[@"hash_2E00B2F29271C60B"]( "default_spawnbeacon_settings" )
 	local f22_local10 = f22_local9[@"collectionradiusmax"]
 	local f22_local11 = f22_local10 * f22_local8
 	local f22_local12 = f22_arg1.SpawnSelectRadius
@@ -320,14 +319,14 @@ CoD.SpawnSelectionUtility.RemoveSpawnBeacon = function ( f26_arg0, f26_arg1, f26
 end
 CoD.SpawnSelectionUtility.SetupDeathMarker = function ( f27_arg0, f27_arg1, f27_arg2, f27_arg3 )
 	local f27_local0 = f27_arg0.DeathMarker
-	if f27_local0 and Engine[@"getpredictedclientnum"]( f27_arg1 ) == Engine[@"hash_4C43D7E71B1CA70B"]( f27_arg1, f27_arg3 ) then
+	if f27_local0 and Engine.GetPredictedClientNum( f27_arg1 ) == Engine[@"hash_4C43D7E71B1CA70B"]( f27_arg1, f27_arg3 ) then
 		CoD.SpawnSelectionUtility.PositionObjectiveMarker( f27_arg0, f27_arg1, f27_arg0.DeathMarker, f27_arg3 )
 		f27_local0:setState( f27_arg1, "Hidden" )
 		local f27_local1 = CoD.SpawnSelectionUtility.GetObjectiveModel( f27_arg1, f27_arg3 )
 		local f27_local2 = f27_local1.state
 		f27_local0:unsubscribeFromAllModels()
 		f27_local0:subscribeToModel( f27_local2, function ( model )
-			if not CoD.SpawnSelectionUtility.IsObjectiveInActiveState( Engine[@"getmodelvalue"]( model ) ) then
+			if not CoD.SpawnSelectionUtility.IsObjectiveInActiveState( Engine.GetModelValue( model ) ) then
 				f27_local0:setState( f27_arg1, "DefaultState" )
 				f27_local0:unsubscribeFromAllModels()
 			end
@@ -338,7 +337,7 @@ CoD.SpawnSelectionUtility.SetupSpawnBeacon = function ( f29_arg0, f29_arg1, f29_
 	if not f29_arg0.beaconSubs[f29_arg3] then
 		local f29_local0 = CoD.SpawnSelectionUtility.GetObjectiveModel( f29_arg1, f29_arg3 )
 		f29_arg0.beaconSubs[f29_arg3] = f29_arg0:subscribeToModel( f29_local0.state, function ( model )
-			if not CoD.SpawnSelectionUtility.IsObjectiveInActiveState( Engine[@"getmodelvalue"]( model ) ) then
+			if not CoD.SpawnSelectionUtility.IsObjectiveInActiveState( Engine.GetModelValue( model ) ) then
 				local f30_local0 = f29_arg0.beacons[f29_arg3]
 				if f30_local0 and f29_arg0.selectedRegion == f30_local0 then
 					local f30_local1
@@ -495,7 +494,7 @@ CoD.SpawnSelectionUtility.SetupSpawnSelectControls = function ( f42_arg0, f42_ar
 		end
 	end )
 	local f42_local1 = function ( f46_arg0 )
-		if CoD.SpawnSelectionUtility.IsSpawnSelectActive( f42_arg1 ) and f42_arg3._readyForInput and not f42_local0() and CoD.BitUtility.IsBitwiseAndNonZero( Engine[@"getmodelvalue"]( f46_arg0 ), Enum[@"luibuttonflags"][@"flag_down"] ) and not f42_arg2.m_disableAllButtonActions and not CoD.SpawnSelectionUtility.IsKillcamFullscreen( f42_arg0 ) and not CoD.SpawnSelectionUtility.IsKillcamAnimating( f42_arg0 ) then
+		if CoD.SpawnSelectionUtility.IsSpawnSelectActive( f42_arg1 ) and f42_arg3._readyForInput and not f42_local0() and CoD.BitUtility.IsBitwiseAndNonZero( Engine.GetModelValue( f46_arg0 ), Enum.LUIButtonFlags[@"flag_down"] ) and not f42_arg2.m_disableAllButtonActions and not CoD.SpawnSelectionUtility.IsKillcamFullscreen( f42_arg0 ) and not CoD.SpawnSelectionUtility.IsKillcamAnimating( f42_arg0 ) then
 			local f46_local0 = f42_arg3.selectedRegion
 			if CoD.isPC and IsMouse( f42_arg1 ) then
 				local f46_local1 = DataSources.FreeCursor.getModel( f42_arg1 )
@@ -510,13 +509,13 @@ CoD.SpawnSelectionUtility.SetupSpawnSelectControls = function ( f42_arg0, f42_ar
 					CoD.SpawnSelectionUtility.DeselectSpawnRegion( f42_arg0.SpawnSelectionMap, f42_arg3.selectedRegion, f42_arg1, nil )
 				end
 				CoD.SpawnSelectionUtility.SelectSpawnRegion( f42_arg0.SpawnSelectionMap, f46_local0, f42_arg1, nil )
-				Engine[@"playsound"]( "uin_main_edit", f42_arg1 )
+				Engine.playsound( "uin_main_edit", f42_arg1 )
 			elseif f46_local0 and f46_local0 == f42_arg3.selectedRegion then
 				if not CoD.SpawnSelectionUtility.IsSpawnEMPDisabled( f42_arg1, f46_local0.objId ) and not CoD.SpawnSelectionUtility.IsSpawnManualDisabled( f42_arg1, f46_local0.objId ) and CoD.SpawnSelectionUtility.IsSpawnBeaconActive( f42_arg1, f46_local0 ) then
 					if IsGameTypeCombatTraining() and IsPC() and not IsGamepad( f42_arg1 ) then
-						Engine[@"sendmenuresponse"]( f42_arg1, CoD.SpawnSelectionUtility.MenuResponseName, "SpawnSelectKeyboard", f46_local0.objId )
+						Engine.SendMenuResponse( f42_arg1, CoD.SpawnSelectionUtility.MenuResponseName, "SpawnSelectKeyboard", f46_local0.objId )
 					end
-					Engine[@"sendmenuresponse"]( f42_arg1, CoD.SpawnSelectionUtility.MenuResponseName, "SpawnRegion", f46_local0.objId )
+					Engine.SendMenuResponse( f42_arg1, CoD.SpawnSelectionUtility.MenuResponseName, "SpawnRegion", f46_local0.objId )
 					local f46_local3 = f46_local0.objId == f0_local0
 					f42_arg3.lastObjId = f46_local0.objId
 					local f46_local4 = f42_arg3
@@ -538,23 +537,23 @@ CoD.SpawnSelectionUtility.SetupSpawnSelectControls = function ( f42_arg0, f42_ar
 		end
 	end
 	
-	f42_arg3:subscribeToModel( Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f42_arg1 ), "ButtonBits." .. Enum[@"luibutton"][@"lui_key_xba_pscross"] ), f42_local1, false )
-	f42_arg3:subscribeToModel( Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f42_arg1 ), "ButtonBits." .. Enum[@"luibutton"][@"lui_key_xbx_pssquare"] ), f42_local1, false )
+	f42_arg3:subscribeToModel( Engine.GetModel( Engine.GetModelForController( f42_arg1 ), "ButtonBits." .. Enum.LUIButton[@"lui_key_xba_pscross"] ), f42_local1, false )
+	f42_arg3:subscribeToModel( Engine.GetModel( Engine.GetModelForController( f42_arg1 ), "ButtonBits." .. Enum.LUIButton[@"lui_key_xbx_pssquare"] ), f42_local1, false )
 	if CoD.isPC then
 		local f42_local2 = function ( f47_arg0, f47_arg1 )
 			if CoD.SpawnSelectionUtility.IsSpawnSelectActive( f42_arg1 ) and f42_arg3._readyForInput then
-				local f47_local0 = Engine[@"getmodelvalue"]( f47_arg0 )
-				if not CoD.BitUtility.IsBitwiseAndNonZero( f47_local0, Enum[@"luibuttonflags"][@"flag_isrepeat"] ) and CoD.BitUtility.IsBitwiseAndNonZero( f47_local0, Enum[@"luibuttonflags"][@"flag_down"] ) then
+				local f47_local0 = Engine.GetModelValue( f47_arg0 )
+				if not CoD.BitUtility.IsBitwiseAndNonZero( f47_local0, Enum.LUIButtonFlags[@"flag_isrepeat"] ) and CoD.BitUtility.IsBitwiseAndNonZero( f47_local0, Enum.LUIButtonFlags[@"flag_down"] ) then
 					f42_arg3.leftStickVector = f47_arg1
 					CoD.SpawnSelectionUtility.MoveSelectionToTargetedBeacon( f42_arg0, f42_arg1, f42_arg2 )
 				end
 			end
 		end
 		
-		f42_arg3:subscribeToModel( Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f42_arg1 ), "KeyPressBits.ESCAPE" ), function ( model )
-			local f48_local0 = Engine[@"getmodelvalue"]( model )
-			local f48_local1 = CoD.BitUtility.IsBitwiseAndNonZero( f48_local0, Enum[@"luibuttonflags"][@"flag_down"] )
-			local f48_local2 = CoD.BitUtility.IsBitwiseAndNonZero( f48_local0, Enum[@"luibuttonflags"][@"flag_isrepeat"] )
+		f42_arg3:subscribeToModel( Engine.GetModel( Engine.GetModelForController( f42_arg1 ), "KeyPressBits.ESCAPE" ), function ( model )
+			local modelValue = Engine.GetModelValue( model )
+			local f48_local1 = CoD.BitUtility.IsBitwiseAndNonZero( modelValue, Enum.LUIButtonFlags[@"flag_down"] )
+			local f48_local2 = CoD.BitUtility.IsBitwiseAndNonZero( modelValue, Enum.LUIButtonFlags[@"flag_isrepeat"] )
 			if f48_local1 and CoD.SpawnSelectionUtility.IsSpawnSelectActive( f42_arg1 ) and f42_arg3._readyForInput then
 				LockInputHUD( f42_arg0, f42_arg1, false )
 				Engine[@"hash_1E06DCDAF717FCE0"]( f42_arg1 )
@@ -586,8 +585,8 @@ CoD.SpawnSelectionUtility.SetupSpawnSelectControls = function ( f42_arg0, f42_ar
 			} )
 		end, false )
 		f42_arg3:subscribeToModel( Engine[@"hash_7A9FCAD7BE6FA349"]( "+activate", f42_arg1 ), f42_local1, false )
-		f42_arg3:subscribeToModel( Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f42_arg1 ), "KeyPressBits.SPACE" ), f42_local1, false )
-		f42_arg3:subscribeToModel( Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f42_arg1 ), "KeyPressBits.MOUSE1" ), f42_local1, false )
+		f42_arg3:subscribeToModel( Engine.GetModel( Engine.GetModelForController( f42_arg1 ), "KeyPressBits.SPACE" ), f42_local1, false )
+		f42_arg3:subscribeToModel( Engine.GetModel( Engine.GetModelForController( f42_arg1 ), "KeyPressBits.MOUSE1" ), f42_local1, false )
 		if CursorInputEnabledForBuild( f42_arg1 ) then
 			local f42_local3 = function ( f53_arg0 )
 				if CoD.SpawnSelectionUtility.IsSpawnSelectActive( f42_arg1 ) and f42_arg3._readyForInput then
@@ -602,16 +601,16 @@ CoD.SpawnSelectionUtility.SetupSpawnSelectControls = function ( f42_arg0, f42_ar
 							CoD.SpawnSelectionUtility.DeselectSpawnRegion( f42_arg0.SpawnSelectionMap, f53_local3, f42_arg1, f53_local2 )
 						end
 						CoD.SpawnSelectionUtility.SelectSpawnRegion( f42_arg0.SpawnSelectionMap, f53_local2, f42_arg1, f53_local3 )
-						Engine[@"playsound"]( "uin_main_edit", f42_arg1 )
+						Engine.playsound( "uin_main_edit", f42_arg1 )
 					end
 				end
 			end
 			
 			local f42_local4 = f42_arg0
 			local f42_local5 = f42_arg0.subscribeToModel
-			local f42_local6 = Engine[@"getmodelforcontroller"]( f42_arg1 )
+			local f42_local6 = Engine.GetModelForController( f42_arg1 )
 			f42_local5( f42_local4, f42_local6.LastInput, function ( f54_arg0 )
-				if CoD.SpawnSelectionUtility.IsSpawnSelectActive( f42_arg1 ) and f42_arg3._readyForInput and not f42_arg0.SpawnSelectionMap.selectedRegion and not Engine[@"lastinput_mouse"]() then
+				if CoD.SpawnSelectionUtility.IsSpawnSelectActive( f42_arg1 ) and f42_arg3._readyForInput and not f42_arg0.SpawnSelectionMap.selectedRegion and not Engine.LastInput_Mouse() then
 					local f54_local0 = f42_arg0.SpawnSelectionMap.beacons[f0_local0]
 					if f54_local0 then
 						CoD.SpawnSelectionUtility.SelectSpawnRegion( f42_arg0.SpawnSelectionMap, f54_local0, f42_arg1, nil )
@@ -626,7 +625,7 @@ CoD.SpawnSelectionUtility.SetupSpawnSelectionMap = function ( f55_arg0, f55_arg1
 	f55_arg0.beaconSubs = {}
 	local f55_local0 = f55_arg0.AutoSpawnMarker
 	if f55_local0 then
-		local f55_local1 = Engine[@"getglobalmodel"]()
+		local f55_local1 = Engine.GetGlobalModel()
 		f55_local1 = f55_local1:create( "hideautospawnoption" )
 		if f55_local1:get() == 1 then
 			f55_local0:close()
@@ -640,9 +639,9 @@ CoD.SpawnSelectionUtility.SetupSpawnSelectionMap = function ( f55_arg0, f55_arg1
 	end
 	CoD.SpawnSelectionUtility.AnimateMarkerPulse( f55_local0 )
 	if not f55_arg0.newObjSubscription then
-		f55_arg0.newObjSubscription = f55_arg0:subscribeToModel( Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f55_arg1 ), "newObjective" ), function ( model )
+		f55_arg0.newObjSubscription = f55_arg0:subscribeToModel( Engine.CreateModel( Engine.GetModelForController( f55_arg1 ), "newObjective" ), function ( model )
 			if not CoD.SpawnSelectionUtility.IsKillcamActive( f55_arg1 ) then
-				local f56_local0 = Engine[@"getmodelvalue"]( model )
+				local f56_local0 = Engine.GetModelValue( model )
 				if f56_local0 then
 					local f56_local1 = CoD.SpawnSelectionUtility.IsObjectiveSpawnBeacon( f55_arg1, f56_local0 )
 					local f56_local2 = CoD.SpawnSelectionUtility.IsObjectiveDeathMarker( f55_arg1, f56_local0 )
@@ -653,7 +652,7 @@ CoD.SpawnSelectionUtility.SetupSpawnSelectionMap = function ( f55_arg0, f55_arg1
 							CoD.SpawnSelectionUtility.AddSpawnBeacon( f55_arg0, f55_arg1, f55_arg2, f56_local0, true )
 							local f56_local4 = CoD.SpawnSelectionUtility.GetObjectiveModel( f55_arg1, f56_local0 )
 							f56_local4:create( "gamemodeFlags" )
-							local f56_local5 = Engine[@"getmodelforcontroller"]( f55_arg1 )
+							local f56_local5 = Engine.GetModelForController( f55_arg1 )
 							f56_local5 = f56_local5:create( "hudItems.SpawnBeaconObjective" )
 							f56_local5:set( f56_local4 )
 						elseif f56_local3 then
@@ -671,7 +670,7 @@ CoD.SpawnSelectionUtility.SetupSpawnSelectionMap = function ( f55_arg0, f55_arg1
 	end
 end
 CoD.SpawnSelectionUtility.SetSpawnBeaconObjectiveModel = function ( f57_arg0, f57_arg1 )
-	local f57_local0 = Engine[@"getmodelforcontroller"]( f57_arg1 )
+	local f57_local0 = Engine.GetModelForController( f57_arg1 )
 	f57_local0 = f57_local0.hudItems.SpawnBeaconObjective:get()
 	if f57_local0 ~= nil then
 		f57_arg0:setModel( f57_local0, f57_arg1 )
@@ -708,7 +707,7 @@ CoD.SpawnSelectionUtility.SendMenuResponseForRecommendedRegion = function ( f60_
 		if f60_local1 then
 			f60_local0 = f60_local1.objId
 		end
-		Engine[@"sendmenuresponse"]( f60_arg1, CoD.SpawnSelectionUtility.MenuResponseName, "SpawnRegion", f60_local0 )
+		Engine.SendMenuResponse( f60_arg1, CoD.SpawnSelectionUtility.MenuResponseName, "SpawnRegion", f60_local0 )
 	end
 end
 CoD.SpawnSelectionUtility.AddRecommendedSelectionTimer = function ( f61_arg0, f61_arg1, f61_arg2 )
@@ -742,13 +741,13 @@ CoD.SpawnSelectionUtility.InitTimeLimit = function ( f65_arg0, f65_arg1, f65_arg
 		f65_local0 = CoD.SpawnSelectionUtility.SPAWNSELECT_TIMELIMIT_MS
 	end
 	local f65_local1 = Engine[@"getservertime"]( f65_arg1 )
-	local f65_local2 = Engine[@"getmodelforcontroller"]( f65_arg1 )
+	local f65_local2 = Engine.GetModelForController( f65_arg1 )
 	f65_local2.hudItems.spawnSelectEndTime:set( f65_local1 + f65_local0 )
 end
 CoD.SpawnSelectionUtility.RestoreNormalViewport = function ( f66_arg0, f66_arg1, f66_arg2 )
 	CoD.SpawnSelectionUtility.DestroyKillcamAnimTimer( f66_arg0 )
 	CoD.perController[f66_arg1].modifiedViewport = nil
-	Engine[@"setviewport"]( f66_arg1 )
+	Engine.SetViewport( f66_arg1 )
 end
 CoD.SpawnSelectionUtility.CalculateKillcamViewportSize = function ( f67_arg0, f67_arg1, f67_arg2, f67_arg3 )
 	local f67_local0, f67_local1 = f67_arg0:getLocalSize()
@@ -763,7 +762,7 @@ end
 CoD.SpawnSelectionUtility.ForceFullscreenViewportUntilClosed = function ( f68_arg0, f68_arg1 )
 	CoD.perController[f68_arg1].viewportForcedFullscreen = (CoD.perController[f68_arg1].viewportForcedFullscreen or 0) + 1
 	if CoD.perController[f68_arg1].modifiedViewport then
-		Engine[@"setviewport"]( f68_arg1 )
+		Engine.SetViewport( f68_arg1 )
 	end
 	LUI.OverrideFunction_CallOriginalSecond( f68_arg0, "close", function ()
 		CoD.perController[f68_arg1].viewportForcedFullscreen = CoD.perController[f68_arg1].viewportForcedFullscreen - 1
@@ -855,14 +854,14 @@ CoD.SpawnSelectionUtility.IsSpawnBeaconPromptHidden = function ( f78_arg0, f78_a
 end
 CoD.SpawnSelectionUtility.IsForwardSpawnTeamActive = function ( f79_arg0, f79_arg1 )
 	local f79_local0 = CoD.TeamUtility.GetTeamID( f79_arg0 )
-	local f79_local1 = Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "hudItems.war.forwardSpawnStatus" )
+	local f79_local1 = Engine.GetModel( Engine.GetGlobalModel(), "hudItems.war.forwardSpawnStatus" )
 	return f79_local1:get() == f79_local0
 end
 CoD.SpawnSelectionUtility.IsForwardSpawnEnemyActive = function ( f80_arg0, f80_arg1 )
 	local f80_local0 = 0
 	local f80_local1 = 3
 	local f80_local2 = CoD.TeamUtility.GetTeamID( f80_arg0 )
-	local f80_local3 = Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "hudItems.war.forwardSpawnStatus" )
+	local f80_local3 = Engine.GetModel( Engine.GetGlobalModel(), "hudItems.war.forwardSpawnStatus" )
 	f80_local3 = f80_local3:get()
 	local f80_local4
 	if f80_local2 == f80_local3 or f80_local3 == f80_local0 or f80_local3 == f80_local1 then
@@ -889,7 +888,7 @@ CoD.SpawnSelectionUtility.IsSpawnRegionOwnedByTeam = function ( f82_arg0, f82_ar
 	end
 end
 CoD.SpawnSelectionUtility.GetNameForSpawnUtilityIndex = function ( f83_arg0 )
-	local f83_local0 = Engine[@"getglobalmodel"]()
+	local f83_local0 = Engine.GetGlobalModel()
 	return CoD.SafeGetModelValue( f83_local0.spawngroupStatus, f83_arg0 .. ".regionName" ) or ""
 end
 CoD.SpawnSelectionUtility.KillcamWeaponPlusAlpha = function ( f84_arg0 )

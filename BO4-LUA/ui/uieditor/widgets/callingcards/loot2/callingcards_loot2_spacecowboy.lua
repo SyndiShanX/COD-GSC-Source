@@ -8,30 +8,30 @@ CoD[@"hash_38CBCB769802AC5B"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local background = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	background:setImage(RegisterImage(@"uie_ui_menu_callingcards_spacecowboy_bg"))
+	background:setImage(RegisterImage("uie_ui_menu_callingcards_spacecowboy_bg"))
 	self:addElement(background)
 	self.background = background
 	local wrangleranimation = LUI.UIImage.new(0, 0, 274, 650, 0, 0, -9, 231)
-	wrangleranimation:setImage(RegisterImage(@"uie_ui_menu_callingcards_spacecowboy_wranglers"))
-	wrangleranimation:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook"))
+	wrangleranimation:setImage(RegisterImage("uie_ui_menu_callingcards_spacecowboy_wranglers"))
+	wrangleranimation:setMaterial(LUI.UIImage.GetCachedMaterial("uie_flipbook"))
 	wrangleranimation:setShaderVector(0, 4, 0, 0, 0)
 	wrangleranimation:setShaderVector(1, 20, 0, 0, 0)
 	self:addElement(wrangleranimation)
 	self.wrangleranimation = wrangleranimation
 	local smoke = LUI.UIImage.new(0, 0, -20, 524, 0, 0, -16, 240)
-	smoke:setImage(RegisterImage(@"uie_ui_menu_callingcards_spacecowboy_clouds"))
-	smoke:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	smoke:setImage(RegisterImage("uie_ui_menu_callingcards_spacecowboy_clouds"))
+	smoke:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(smoke)
 	self.smoke = smoke
 	local smoke2 = LUI.UIImage.new(0, 0, -150, 394, 0, 0, -28, 228)
 	smoke2:setAlpha(0)
 	smoke2:setScale(1.5, 1.5)
-	smoke2:setImage(RegisterImage(@"uie_ui_menu_callingcards_spacecowboy_clouds"))
-	smoke2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	smoke2:setImage(RegisterImage("uie_ui_menu_callingcards_spacecowboy_clouds"))
+	smoke2:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(smoke2)
 	self.smoke2 = smoke2
 	local foregrounddude = LUI.UIImage.new(0, 0, -90, 1038, 0, 0, -9, 311)
-	foregrounddude:setImage(RegisterImage(@"uie_ui_menu_callingcards_spacecowboy_foregrounddude"))
+	foregrounddude:setImage(RegisterImage("uie_ui_menu_callingcards_spacecowboy_foregrounddude"))
 	self:addElement(foregrounddude)
 	self.foregrounddude = foregrounddude
 	if PostLoadFunc then

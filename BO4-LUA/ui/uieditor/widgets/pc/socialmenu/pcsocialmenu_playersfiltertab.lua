@@ -1,4 +1,4 @@
-require("x64:46764a7d19467a4")
+require("ui/uieditor/widgets/rightstickpagination")
 CoD.PCSocialMenu_PlayersFilterTab = InheritFrom(LUI.UIElement)
 CoD.PCSocialMenu_PlayersFilterTab.__defaultWidth = 200
 CoD.PCSocialMenu_PlayersFilterTab.__defaultHeight = 26
@@ -15,15 +15,15 @@ CoD.PCSocialMenu_PlayersFilterTab.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	local GlowPC = nil
 	GlowPC = LUI.UIImage.new(0, 1, 17, -17, 0, 0, 8, 34)
 	GlowPC:setAlpha(0)
-	GlowPC:setImage(RegisterImage(@"uie_director_mode_text_tab_glow_pc"))
+	GlowPC:setImage(RegisterImage("uie_director_mode_text_tab_glow_pc"))
 	self:addElement(GlowPC)
 	self.GlowPC = GlowPC
 	local Name = LUI.UIText.new(0, 0, 0, 200, 0, 0, 7, 25)
 	Name:setRGB(0.92, 0.92, 0.92)
 	Name:setTTF("ttmussels_demibold")
 	Name:setLetterSpacing(4)
-	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	Name:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	Name:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	Name:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

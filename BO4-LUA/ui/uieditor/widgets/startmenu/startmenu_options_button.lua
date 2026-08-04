@@ -1,5 +1,5 @@
-require("x64:3625a0d08a5c80d")
-require("x64:a1e2d7b19f5deb0")
+require("ui/uieditor/widgets/lobby/common/fe_focusbarcontainer")
+require("ui/uieditor/widgets/startmenu/startmenu_frame_nobg")
 local f0_local0 = function(f1_arg0, f1_arg1, f1_arg2)
 	local f1_local0 = function(f2_arg0, f2_arg1)
 		local f2_local0 = CoD.PCUtil.GetElementModelValues(f2_arg0, "onPressFn")
@@ -11,9 +11,9 @@ local f0_local0 = function(f1_arg0, f1_arg1, f1_arg2)
 		f1_local0(element, f1_arg1)
 		return true
 	end)
-	CoD.Menu.AddButtonCallbackFunction(f1_arg2, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, f4_arg3)
-		if not f1_arg0.disabled and not menu.m_disableNavigation and menu:AcceptGamePadButtonInputFromModelCallback(controller) then
-			f1_local0(element, controller)
+	CoD.Menu.AddButtonCallbackFunction(f1_arg2, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f4_arg0, f4_arg1, f4_arg2, f4_arg3)
+		if not f1_arg0.disabled and not f4_arg1.m_disableNavigation and f4_arg1:AcceptGamePadButtonInputFromModelCallback(f4_arg2) then
+			f1_local0(f4_arg0, f4_arg2)
 			return true
 		else
 		end
@@ -45,8 +45,8 @@ CoD.StartMenu_Options_Button.new = function(f6_arg0, f6_arg1, f6_arg2, f6_arg3, 
 	self.fullBorder = fullBorder
 	local actionText = LUI.UIText.new(0, 0, 12, 352, 0, 0, 11, 49)
 	actionText:setTTF("default")
-	actionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	actionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	actionText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	actionText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	actionText:linkToElementModel(self, "label", true, function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then

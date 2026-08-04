@@ -7,7 +7,7 @@ CoD.CallingCards_Asset_Pirates_Flag.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.id = "CallingCards_Asset_Pirates_Flag"
 	self.soundSet = "default"
 	local flag = LUI.UIImage.new(0, 0, -470, 10, 0, 0, -40, 80)
-	flag:setImage(RegisterImage(@"uie_ui_icon_callingcards_pirates_flag"))
+	flag:setImage(RegisterImage("uie_ui_icon_callingcards_pirates_flag"))
 	self:addElement(flag)
 	self.flag = flag
 	if PostLoadFunc then

@@ -1,6 +1,6 @@
-require("x64:eda152e1d10147a")
-require("x64:3e7363f43bb91")
-require("x64:3dd43113c4e1bd6")
+require("ui/uieditor/widgets/backgroundframes/genericmenuframe")
+require("ui/uieditor/widgets/lobby/common/fe_buttonpanelshadercontainer")
+require("ui/uieditor/widgets/startmenu/startmenu_background")
 CoD.GameSettings_Background = InheritFrom(LUI.UIElement)
 CoD.GameSettings_Background.__defaultWidth = 1920
 CoD.GameSettings_Background.__defaultHeight = 1080
@@ -26,7 +26,7 @@ CoD.GameSettings_Background.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.BackingTint = BackingTint
 	local BackingNoise = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BackingNoise:setAlpha(0.5)
-	BackingNoise:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	BackingNoise:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	BackingNoise:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	BackingNoise:setShaderVector(0, 0, 0, 0, 0)
 	BackingNoise:setupNineSliceShader(196, 88)

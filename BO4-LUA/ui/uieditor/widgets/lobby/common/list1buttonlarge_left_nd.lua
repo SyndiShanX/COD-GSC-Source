@@ -1,7 +1,7 @@
-require("x64:b1a5ff64a609f41")
-require("x64:77e3e54a29272ad")
-require("x64:3e7363f43bb91")
-require("x64:b68ad1c4d3c481e")
+require("ui/uieditor/widgets/lobby/common/fe_buttonfocus")
+require("ui/uieditor/widgets/lobby/common/fe_buttonidle")
+require("ui/uieditor/widgets/lobby/common/fe_buttonpanelshadercontainer")
+require("ui/uieditor/widgets/lobby/common/fe_helpitemslabel")
 CoD.List1ButtonLarge_Left_ND = InheritFrom(LUI.UIElement)
 CoD.List1ButtonLarge_Left_ND.__defaultWidth = 420
 CoD.List1ButtonLarge_Left_ND.__defaultHeight = 48
@@ -30,8 +30,8 @@ CoD.List1ButtonLarge_Left_ND.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	Glow:setRGB(0.88, 1, 0.04)
 	Glow:setAlpha(0)
 	Glow:setZRot(90)
-	Glow:setImage(RegisterImage(@"uie_t7_cp_hud_enemytarget_glow"))
-	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	Glow:setImage(RegisterImage("uie_t7_cp_hud_enemytarget_glow"))
+	Glow:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(Glow)
 	self.Glow = Glow
 	local btnDisplayText = LUI.UIText.new(0, 0, 18, 426, 0, 0, 10, 40)
@@ -39,8 +39,8 @@ CoD.List1ButtonLarge_Left_ND.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	btnDisplayText:setText("")
 	btnDisplayText:setTTF("notosans_regular")
 	btnDisplayText:setLetterSpacing(1)
-	btnDisplayText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	btnDisplayText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	btnDisplayText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	btnDisplayText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	LUI.OverrideFunction_CallOriginalFirst(btnDisplayText, "setText", function(element, controller)
 		ScaleWidgetToLabel(self, element, 0)
 	end)
@@ -56,8 +56,8 @@ CoD.List1ButtonLarge_Left_ND.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	btnDisplayTextStroke:setShaderVector(1, 0, 0, 0, 0)
 	btnDisplayTextStroke:setShaderVector(2, 1, 0, 0, 0)
 	btnDisplayTextStroke:setLetterSpacing(1)
-	btnDisplayTextStroke:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	btnDisplayTextStroke:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	btnDisplayTextStroke:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	btnDisplayTextStroke:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(btnDisplayTextStroke)
 	self.btnDisplayTextStroke = btnDisplayTextStroke
 	local FEHelpItemsLabel0 = CoD.FE_HelpItemsLabel.new(f1_arg0, f1_arg1, 1, 1, 0, 30, 0.5, 0.5, -15, 15)
@@ -66,14 +66,14 @@ CoD.List1ButtonLarge_Left_ND.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	local Arrow = LUI.UIImage.new(0, 0, 4, 16, 0, 0, 18, 30)
 	Arrow:setAlpha(0)
 	Arrow:setZoom(10)
-	Arrow:setImage(RegisterImage(@"uie_t7_menu_frontend_buttonfocusarrow"))
-	Arrow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	Arrow:setImage(RegisterImage("uie_t7_menu_frontend_buttonfocusarrow"))
+	Arrow:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(Arrow)
 	self.Arrow = Arrow
 	local Glow2 = LUI.UIImage.new(0, 1, -72, 104, 0, 0, -37, 87)
 	Glow2:setAlpha(0)
-	Glow2:setImage(RegisterImage(@"uie_t7_cp_hud_enemytarget_glow"))
-	Glow2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	Glow2:setImage(RegisterImage("uie_t7_cp_hud_enemytarget_glow"))
+	Glow2:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(Glow2)
 	self.Glow2 = Glow2
 	self:mergeStateConditions({

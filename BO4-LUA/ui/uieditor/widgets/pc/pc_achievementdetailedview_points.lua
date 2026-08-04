@@ -1,6 +1,6 @@
-require("x64:3ff924af57d228a")
-require("x64:fd7d47c64b87ee4")
-require("x64:29187ea00d726c3")
+require("ui/uieditor/widgets/pc/pc_achievement_completedtick")
+require("ui/uieditor/widgets/pc/pc_achievementdetailedview_points_bg")
+require("ui/uieditor/widgets/pc/utility/verticallistspacer")
 CoD.PC_AchievementDetailedView_Points = InheritFrom(LUI.UIElement)
 CoD.PC_AchievementDetailedView_Points.__defaultWidth = 175
 CoD.PC_AchievementDetailedView_Points.__defaultHeight = 40
@@ -28,7 +28,7 @@ CoD.PC_AchievementDetailedView_Points.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	ScoreValue:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	ScoreValue:setTTF("ttmussels_regular")
 	ScoreValue:setLetterSpacing(3)
-	ScoreValue:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ScoreValue:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	self:addElement(ScoreValue)
 	self.ScoreValue = ScoreValue
 	local Spacer2 = CoD.VerticalListSpacer.new(f1_arg0, f1_arg1, 0, 0, 48, 58, 0, 1, 0, 0)
@@ -36,10 +36,10 @@ CoD.PC_AchievementDetailedView_Points.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.Spacer2 = Spacer2
 	local Points = LUI.UIText.new(0, 0, 58, 155, 0, 0, 15, 32)
 	Points:setRGB(0.33, 0.33, 0.32)
-	Points:setText(LocalizeToUpperString(@"hash_6D34BC94F168F56D"))
+	Points:setText(LocalizeToUpperString("achievements/points"))
 	Points:setTTF("ttmussels_regular")
 	Points:setLetterSpacing(4)
-	Points:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Points:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	self:addElement(Points)
 	self.Points = Points
 	local Spacer = CoD.VerticalListSpacer.new(f1_arg0, f1_arg1, 0, 0, -60, -40, 0, 1, 0, 0)

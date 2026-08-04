@@ -1,4 +1,4 @@
-require("x64:e59f88bc0f16b1b")
+require("ui/uieditor/widgets/startmenu/startmenu_connectionmeter")
 CoD.StartMenu_ConnectionMeterContainer = InheritFrom(LUI.UIElement)
 CoD.StartMenu_ConnectionMeterContainer.__defaultWidth = 950
 CoD.StartMenu_ConnectionMeterContainer.__defaultHeight = 170
@@ -13,10 +13,10 @@ CoD.StartMenu_ConnectionMeterContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 	self:addElement(StartMenuConnectionMeter0)
 	self.StartMenuConnectionMeter0 = StartMenuConnectionMeter0
 	local ConnectionMeterLabel = LUI.UIText.new(0, 0, 0, 445, 0, 0, -23, 15)
-	ConnectionMeterLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](0xAC738A24A38A83))
+	ConnectionMeterLabel:setText(Engine[@"hash_4F9F1239CFD921FE"]("menu/connection_meter_caps"))
 	ConnectionMeterLabel:setTTF("default")
-	ConnectionMeterLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	ConnectionMeterLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	ConnectionMeterLabel:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	ConnectionMeterLabel:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(ConnectionMeterLabel)
 	self.ConnectionMeterLabel = ConnectionMeterLabel
 	self:mergeStateConditions({
@@ -29,7 +29,7 @@ CoD.StartMenu_ConnectionMeterContainer.new = function(f1_arg0, f1_arg1, f1_arg2,
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
+	local f1_local5 = Engine.GetModelForController(f1_arg1)
 	f1_local4(f1_local3, f1_local5.PlayerSettingsUpdate, function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -57,7 +57,7 @@ CoD.StartMenu_ConnectionMeterContainer.__resetProperties = function(f6_arg0)
 	f6_arg0.ConnectionMeterLabel:completeAnimation()
 	f6_arg0.StartMenuConnectionMeter0:completeAnimation()
 	f6_arg0.ConnectionMeterLabel:setAlpha(1)
-	f6_arg0.ConnectionMeterLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	f6_arg0.ConnectionMeterLabel:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	f6_arg0.StartMenuConnectionMeter0:setAlpha(1)
 end
 CoD.StartMenu_ConnectionMeterContainer.__clipsPerState = {

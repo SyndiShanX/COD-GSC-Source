@@ -1,4 +1,4 @@
-require("x64:a9255c570c68aa8")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmainframe")
 CoD.basicTabWidget = InheritFrom(LUI.UIElement)
 CoD.basicTabWidget.__defaultWidth = 270
 CoD.basicTabWidget.__defaultHeight = 60
@@ -10,8 +10,8 @@ CoD.basicTabWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local text = LUI.UIText.new(0, 1, 0, 0, 0, 0, 0, 60)
 	text:setTTF("default")
-	text:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	text:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
+	text:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	text:setAlignment(Enum.LUIAlignment[@"hash_E821F0ECFF8D1C7"])
 	text:linkToElementModel(self, "tabName", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -23,8 +23,8 @@ CoD.basicTabWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	local buttonText = LUI.UIText.new(0, 1, 0, 0, 0, 0, 16, 44)
 	buttonText:setAlpha(0)
 	buttonText:setTTF("default")
-	buttonText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	buttonText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	buttonText:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	buttonText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	buttonText:linkToElementModel(self, "tabIcon", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

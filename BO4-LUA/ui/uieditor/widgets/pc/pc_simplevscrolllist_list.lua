@@ -1,4 +1,4 @@
-require("x64:729220b1154af14")
+require("ui/uieditor/widgets/startmenu/startmenu_options_slider")
 CoD.PC_SimpleVScrollList_List = InheritFrom(LUI.UIElement)
 CoD.PC_SimpleVScrollList_List.__defaultWidth = 1000
 CoD.PC_SimpleVScrollList_List.__defaultHeight = 1080
@@ -15,7 +15,7 @@ CoD.PC_SimpleVScrollList_List.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	View:setAutoScaleContent(true)
 	View:setWidgetType(CoD.StartMenu_Options_Slider)
 	View:setVerticalCount(10)
-	View:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	View:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	LUI.OverrideFunction_CallOriginalFirst(View, "setDataSource", function(element, controller)
 		CoD.PCWidgetUtility.ScrollVerticalTo(self, 0)
 	end)

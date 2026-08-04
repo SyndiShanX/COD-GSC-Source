@@ -1,7 +1,7 @@
-require("x64:4b7b1ff2d035a21")
-require("x64:a9d9ad002907d62")
-require("x64:1723f8d4305e6c7")
-require("x64:e1b76d902bbc762")
+require("ui/uieditor/widgets/systemoverlays/systemoverlay_fademask")
+require("ui/uieditor/widgets/systemoverlays/systemoverlay_supportwidget")
+require("ui/uieditor/widgets/systemoverlays/systemoverlayspinner")
+require("ui/uieditor/widgets/systemoverlays/systemoverlay_layout_genericforeground_pc")
 CoD.systemOverlay_Compact_BasicFrame = InheritFrom(LUI.UIElement)
 CoD.systemOverlay_Compact_BasicFrame.__defaultWidth = 1920
 CoD.systemOverlay_Compact_BasicFrame.__defaultHeight = 286

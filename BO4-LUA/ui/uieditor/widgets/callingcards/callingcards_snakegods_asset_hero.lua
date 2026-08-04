@@ -1,4 +1,4 @@
-require("x64:c0a558f234790a5")
+require("ui/uieditor/widgets/callingcards/callingcards_snakegods_asset_herosnake")
 CoD.callingcards_snakegods_asset_hero = InheritFrom(LUI.UIElement)
 CoD.callingcards_snakegods_asset_hero.__defaultWidth = 10
 CoD.callingcards_snakegods_asset_hero.__defaultHeight = 10

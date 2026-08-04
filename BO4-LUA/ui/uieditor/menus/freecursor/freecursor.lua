@@ -1,4 +1,4 @@
-require("x64:5b49a25d663c403")
+require("ui/uieditor/widgets/freecursor/freecursorwidget")
 CoD.FreeCursor = InheritFrom(CoD.Menu)
 LUI.createMenu.FreeCursor = function(f1_arg0, f1_arg1)
 	local self = CoD.Menu.NewForUIEditor("FreeCursor", f1_arg0)
@@ -52,7 +52,7 @@ LUI.createMenu.FreeCursor = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local5 = Engine.GetModelForController(f1_arg0)
 	f1_local4(f1_local3, f1_local5.activeKeys, function(f6_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",

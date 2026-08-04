@@ -1,4 +1,4 @@
-require("x64:d4fd2cff476eaae")
+require("ui/uieditor/widgets/genericiconbutton_container")
 CoD.GenericIconButton = InheritFrom(LUI.UIElement)
 CoD.GenericIconButton.__defaultWidth = 194
 CoD.GenericIconButton.__defaultHeight = 103

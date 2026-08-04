@@ -14,16 +14,16 @@ CoD.StartMenu_Options_PC_KeyBinderTooltip.new = function(f1_arg0, f1_arg1, f1_ar
 	local headerText = LUI.UIText.new(0, 0, 11, 300, 0, 0, 9, 47)
 	headerText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	headerText:setTTF("dinnext_regular")
-	headerText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	headerText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	headerText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	headerText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(headerText)
 	self.headerText = headerText
 	local descText = LUI.UIText.new(0, 0, 11, 300, 0, 0, 47, 77)
 	descText:setRGB(0.78, 0.78, 0.78)
 	descText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	descText:setTTF("dinnext_regular")
-	descText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	descText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	descText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	descText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(descText)
 	self.descText = descText
 	self:mergeStateConditions({

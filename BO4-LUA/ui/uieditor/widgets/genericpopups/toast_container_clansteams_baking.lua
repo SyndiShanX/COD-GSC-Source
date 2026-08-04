@@ -1,4 +1,4 @@
-require("x64:83fdf4983fb5894")
+require("ui/uieditor/widgets/genericpopups/loot_bonustoastgenericbacking")
 CoD.Toast_Container_ClansTeams_Baking = InheritFrom(LUI.UIElement)
 CoD.Toast_Container_ClansTeams_Baking.__defaultWidth = 340
 CoD.Toast_Container_ClansTeams_Baking.__defaultHeight = 80

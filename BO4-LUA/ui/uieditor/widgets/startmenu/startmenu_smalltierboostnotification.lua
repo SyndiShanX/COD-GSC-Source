@@ -1,4 +1,4 @@
-require("x64:683120446682173")
+require("ui/uieditor/widgets/notifications/notificationqueuewidgets/notificationrewardqueuewidgets/notification2xpblackmarketreward")
 CoD.StartMenu_SmallTierBoostNotification = InheritFrom(LUI.UIElement)
 CoD.StartMenu_SmallTierBoostNotification.__defaultWidth = 50
 CoD.StartMenu_SmallTierBoostNotification.__defaultHeight = 50

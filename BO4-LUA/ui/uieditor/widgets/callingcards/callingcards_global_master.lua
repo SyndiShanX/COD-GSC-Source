@@ -1,80 +1,80 @@
-CoD[@"hash_28A9D1228888C8CB"] = InheritFrom(LUI.UIElement)
-CoD[@"hash_28A9D1228888C8CB"].__defaultWidth = 960
-CoD[@"hash_28A9D1228888C8CB"].__defaultHeight = 240
-CoD[@"hash_28A9D1228888C8CB"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD.callingcards_global_master = InheritFrom(LUI.UIElement)
+CoD.callingcards_global_master.__defaultWidth = 960
+CoD.callingcards_global_master.__defaultHeight = 240
+CoD.callingcards_global_master.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[@"hash_28A9D1228888C8CB"])
+	self:setClass(CoD.callingcards_global_master)
 	self.id = "CallingCards_Global_Master"
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local clouds = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	clouds:setImage(RegisterImage(@"uie_callingcards_global_master_clouds"))
-	clouds:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
+	clouds:setImage(RegisterImage("uie_callingcards_global_master_clouds"))
+	clouds:setMaterial(LUI.UIImage.GetCachedMaterial("uie_tile_scroll_normal"))
 	clouds:setShaderVector(0, 1, 1, 0, 0)
 	clouds:setShaderVector(1, 0.02, 0, 0, 0)
 	self:addElement(clouds)
 	self.clouds = clouds
 	local rocks = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	rocks:setImage(RegisterImage(@"uie_callingcards_global_master_rocks"))
+	rocks:setImage(RegisterImage("uie_callingcards_global_master_rocks"))
 	self:addElement(rocks)
 	self.rocks = rocks
 	local dragonWing = LUI.UIImage.new(0, 0, 320.5, 792.5, 0, 0, -8.5, 103.5)
-	dragonWing:setImage(RegisterImage(@"uie_callingcards_global_master_dragonbackwing"))
+	dragonWing:setImage(RegisterImage("uie_callingcards_global_master_dragonbackwing"))
 	self:addElement(dragonWing)
 	self.dragonWing = dragonWing
 	local dragonbody = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	dragonbody:setImage(RegisterImage(@"uie_callingcards_global_master_dragonbody"))
+	dragonbody:setImage(RegisterImage("uie_callingcards_global_master_dragonbody"))
 	self:addElement(dragonbody)
 	self.dragonbody = dragonbody
 	local dragonneckStill = LUI.UIImage.new(0, 0, 502.5, 782.5, 0, 0, -3, 213)
-	dragonneckStill:setImage(RegisterImage(@"uie_callingcards_global_master_placeholder_dragonneck_still"))
+	dragonneckStill:setImage(RegisterImage("uie_callingcards_global_master_placeholder_dragonneck_still"))
 	self:addElement(dragonneckStill)
 	self.dragonneckStill = dragonneckStill
 	local dragonneckbackward2 = LUI.UIImage.new(0, 0, 507, 787, 0, 0, -3, 213)
-	dragonneckbackward2:setImage(RegisterImage(@"uie_callingcards_global_master_placeholder_dragonneck_backward2"))
+	dragonneckbackward2:setImage(RegisterImage("uie_callingcards_global_master_placeholder_dragonneck_backward2"))
 	self:addElement(dragonneckbackward2)
 	self.dragonneckbackward2 = dragonneckbackward2
 	local dragonneckbackward3 = LUI.UIImage.new(0, 0, 508, 788, 0, 0, 0, 216)
-	dragonneckbackward3:setImage(RegisterImage(@"uie_callingcards_global_master_placeholder_dragonneck_backward3"))
+	dragonneckbackward3:setImage(RegisterImage("uie_callingcards_global_master_placeholder_dragonneck_backward3"))
 	self:addElement(dragonneckbackward3)
 	self.dragonneckbackward3 = dragonneckbackward3
 	local dragonneckforward2 = LUI.UIImage.new(0, 0, 507, 787, 0, 0, 1, 217)
-	dragonneckforward2:setImage(RegisterImage(@"uie_callingcards_global_master_placeholder_dragonneck_forward2"))
+	dragonneckforward2:setImage(RegisterImage("uie_callingcards_global_master_placeholder_dragonneck_forward2"))
 	self:addElement(dragonneckforward2)
 	self.dragonneckforward2 = dragonneckforward2
 	local dragonneckforward3 = LUI.UIImage.new(0, 0, 517.5, 797.5, 0, 0, 6.5, 222.5)
-	dragonneckforward3:setImage(RegisterImage(@"uie_callingcards_global_master_placeholder_dragonneck_forward3"))
+	dragonneckforward3:setImage(RegisterImage("uie_callingcards_global_master_placeholder_dragonneck_forward3"))
 	self:addElement(dragonneckforward3)
 	self.dragonneckforward3 = dragonneckforward3
 	local dragonmouthOpen = LUI.UIImage.new(0, 0, 433.5, 713.5, 0, 0, -22, 218)
-	dragonmouthOpen:setImage(RegisterImage(@"uie_callingcards_global_master_placeholder_dragonmouth_open"))
+	dragonmouthOpen:setImage(RegisterImage("uie_callingcards_global_master_placeholder_dragonmouth_open"))
 	self:addElement(dragonmouthOpen)
 	self.dragonmouthOpen = dragonmouthOpen
 	local dragonmouthMid = LUI.UIImage.new(0, 0, 437.5, 717.5, 0, 0, -27, 213)
-	dragonmouthMid:setImage(RegisterImage(@"uie_callingcards_global_master_placeholder_dragonmouth_midopen"))
+	dragonmouthMid:setImage(RegisterImage("uie_callingcards_global_master_placeholder_dragonmouth_midopen"))
 	self:addElement(dragonmouthMid)
 	self.dragonmouthMid = dragonmouthMid
 	local dragonmouthclosed = LUI.UIImage.new(0, 0, 437.5, 717.5, 0, 0, -22, 218)
-	dragonmouthclosed:setImage(RegisterImage(@"uie_callingcards_global_master_placeholder_dragonmouth_closed"))
+	dragonmouthclosed:setImage(RegisterImage("uie_callingcards_global_master_placeholder_dragonmouth_closed"))
 	self:addElement(dragonmouthclosed)
 	self.dragonmouthclosed = dragonmouthclosed
 	local mist = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	mist:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_elixirs_talismans_mist"))
-	mist:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll"))
+	mist:setImage(RegisterImage("uie_ui_icon_callingcards_zm_elixirs_talismans_mist"))
+	mist:setMaterial(LUI.UIImage.GetCachedMaterial("uie_tile_scroll"))
 	mist:setShaderVector(0, 1, 1, 0, 0)
 	mist:setShaderVector(1, -0.01, 0, 0, 0)
 	self:addElement(mist)
 	self.mist = mist
 	local spotlightColor = LUI.UIImage.new(0, 0, -230, 821, 0, 0, 6.5, 518.5)
 	spotlightColor:setRGB(0.98, 0.87, 0)
-	spotlightColor:setImage(RegisterImage(@"uie_callingcards_global_master_spotlight"))
-	spotlightColor:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	spotlightColor:setImage(RegisterImage("uie_callingcards_global_master_spotlight"))
+	spotlightColor:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(spotlightColor)
 	self.spotlightColor = spotlightColor
 	local fire = LUI.UIImage.new(0, 0, -364, 596, 0, 0, 171, 411)
 	fire:setZRot(21)
-	fire:setImage(RegisterImage(@"uie_callingcards_global_master_firebreath"))
-	fire:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
+	fire:setImage(RegisterImage("uie_callingcards_global_master_firebreath"))
+	fire:setMaterial(LUI.UIImage.GetCachedMaterial("uie_flipbook_add"))
 	fire:setShaderVector(0, 0, 5, 0, 0)
 	fire:setShaderVector(1, 12, 0, 0, 0)
 	self:addElement(fire)
@@ -84,7 +84,7 @@ CoD[@"hash_28A9D1228888C8CB"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end
 	return self
 end
-CoD[@"hash_28A9D1228888C8CB"].__resetProperties = function(f2_arg0)
+CoD.callingcards_global_master.__resetProperties = function(f2_arg0)
 	f2_arg0.dragonWing:completeAnimation()
 	f2_arg0.dragonbody:completeAnimation()
 	f2_arg0.dragonneckStill:completeAnimation()
@@ -123,7 +123,7 @@ CoD[@"hash_28A9D1228888C8CB"].__resetProperties = function(f2_arg0)
 	f2_arg0.fire:setTopBottom(0, 0, 171, 411)
 	f2_arg0.fire:setAlpha(1)
 end
-CoD[@"hash_28A9D1228888C8CB"].__clipsPerState = {
+CoD.callingcards_global_master.__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()

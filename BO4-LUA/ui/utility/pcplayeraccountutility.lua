@@ -11,12 +11,12 @@ DataSources.PCPlayerAccountTabs = ListHelper_SetupDataSource("PCPlayerAccountTab
 	local f3_local1 = CoD.StartMenuUtility.GetSessionModeFromLobby()
 	if not LuaUtils.OfflineOnlyDemo() and not IsPlayerAGuest(f3_arg0) then
 		local f3_local2 = LobbyData.GetCurrentMenuTarget()
-		local f3_local3 = f3_local2[@"id"] == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_TRAINING)
-		if not IsLobbyNetworkModeLAN() and (not CoD.DirectorUtility.IsOfflineDemo() or Engine[@"hash_5CB675CA7856DA25"]()) and f3_local1 ~= Enum[@"emodes"][@"mode_invalid"] and not f3_local3 then
+		local f3_local3 = f3_local2.id == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_TRAINING)
+		if not IsLobbyNetworkModeLAN() and (not CoD.DirectorUtility.IsOfflineDemo() or Engine[@"hash_5CB675CA7856DA25"]()) and f3_local1 ~= Enum.eModes.mode_invalid and not f3_local3 then
 			local f3_local4 = "CoD.StartMenu_Barracks"
-			if f3_local1 == Enum[@"emodes"][@"mode_zombies"] then
+			if f3_local1 == Enum.eModes.mode_zombies then
 				f3_local4 = "CoD.StartMenu_Barracks_ZM"
-			elseif f3_local1 == Enum[@"emodes"][@"mode_warzone"] then
+			elseif f3_local1 == Enum.eModes.mode_warzone then
 				f3_local4 = "CoD.StartMenu_Barracks_WZ"
 			elseif IsArenaMode() then
 				f3_local4 = "CoD.StartMenu_Barracks_WL"
@@ -24,7 +24,7 @@ DataSources.PCPlayerAccountTabs = ListHelper_SetupDataSource("PCPlayerAccountTab
 			if not IsCustomLobby() then
 				table.insert(f3_local0, {
 					models = {
-						name = @"hash_310B1AA71AB55844",
+						name = "menu/tab_barracks_caps",
 						tabWidget = f3_local4,
 						available = true,
 					},
@@ -38,7 +38,7 @@ DataSources.PCPlayerAccountTabs = ListHelper_SetupDataSource("PCPlayerAccountTab
 			if not f3_local3 then
 				table.insert(f3_local0, {
 					models = {
-						name = 0xF635C8E33C499F,
+						name = "menu/tab_identity_caps",
 						tabWidget = "CoD.StartMenu_Identity",
 						available = true,
 					},
@@ -49,11 +49,11 @@ DataSources.PCPlayerAccountTabs = ListHelper_SetupDataSource("PCPlayerAccountTab
 			end
 			if not IsLobbyNetworkModeLAN() and (not IsCustomLobby() or f3_local3) then
 				if CoD.isPC and CoD.PCKoreaUtility.ShowKorea15Plus() then
-					if f3_local1 == Enum[@"emodes"][@"mode_multiplayer"] then
+					if f3_local1 == Enum.eModes.mode_multiplayer then
 						if not f3_local3 then
 							table.insert(f3_local0, {
 								models = {
-									name = @"hash_5E66423FDAAC9FBF",
+									name = "menu/tab_challenges_caps",
 									tabWidget = "CoD.Challenges_MP_Summary",
 									available = true,
 								},
@@ -62,10 +62,10 @@ DataSources.PCPlayerAccountTabs = ListHelper_SetupDataSource("PCPlayerAccountTab
 								},
 							})
 						end
-					elseif f3_local1 == Enum[@"emodes"][@"mode_warzone"] then
+					elseif f3_local1 == Enum.eModes.mode_warzone then
 						table.insert(f3_local0, {
 							models = {
-								name = @"hash_5E66423FDAAC9FBF",
+								name = "menu/tab_challenges_caps",
 								tabWidget = "CoD.ChallengesWZSummary",
 								available = true,
 							},
@@ -74,11 +74,11 @@ DataSources.PCPlayerAccountTabs = ListHelper_SetupDataSource("PCPlayerAccountTab
 							},
 						})
 					end
-				elseif f3_local1 == Enum[@"emodes"][@"mode_multiplayer"] then
+				elseif f3_local1 == Enum.eModes.mode_multiplayer then
 					if f3_local3 then
 						table.insert(f3_local0, {
 							models = {
-								name = @"hash_5E66423FDAAC9FBF",
+								name = "menu/tab_challenges_caps",
 								tabWidget = "CoD.Challenges_MP_Stickerbook_CombatTraining",
 								available = true,
 							},
@@ -89,7 +89,7 @@ DataSources.PCPlayerAccountTabs = ListHelper_SetupDataSource("PCPlayerAccountTab
 					else
 						table.insert(f3_local0, {
 							models = {
-								name = @"hash_5E66423FDAAC9FBF",
+								name = "menu/tab_challenges_caps",
 								tabWidget = "CoD.Challenges_MP_Summary",
 								available = true,
 							},
@@ -98,10 +98,10 @@ DataSources.PCPlayerAccountTabs = ListHelper_SetupDataSource("PCPlayerAccountTab
 							},
 						})
 					end
-				elseif f3_local1 == Enum[@"emodes"][@"mode_zombies"] then
+				elseif f3_local1 == Enum.eModes.mode_zombies then
 					table.insert(f3_local0, {
 						models = {
-							name = @"hash_5E66423FDAAC9FBF",
+							name = "menu/tab_challenges_caps",
 							tabWidget = "CoD.Challenges_ZM_Summary",
 							available = true,
 						},
@@ -109,10 +109,10 @@ DataSources.PCPlayerAccountTabs = ListHelper_SetupDataSource("PCPlayerAccountTab
 							tabId = "challenges",
 						},
 					})
-				elseif f3_local1 == Enum[@"emodes"][@"mode_warzone"] then
+				elseif f3_local1 == Enum.eModes.mode_warzone then
 					table.insert(f3_local0, {
 						models = {
-							name = @"hash_5E66423FDAAC9FBF",
+							name = "menu/tab_challenges_caps",
 							tabWidget = "CoD.ChallengesWZSummary",
 							available = true,
 						},
@@ -123,7 +123,7 @@ DataSources.PCPlayerAccountTabs = ListHelper_SetupDataSource("PCPlayerAccountTab
 				else
 					table.insert(f3_local0, {
 						models = {
-							name = @"hash_5E66423FDAAC9FBF",
+							name = "menu/tab_challenges_caps",
 							tabWidget = "CoD.ChallengesGlobalStickerbook",
 							available = true,
 						},
@@ -135,7 +135,7 @@ DataSources.PCPlayerAccountTabs = ListHelper_SetupDataSource("PCPlayerAccountTab
 			end
 			table.insert(f3_local0, {
 				models = {
-					name = @"hash_12A6EA2811A2E0F1",
+					name = "menu/tab_achievements_caps",
 					tabWidget = "CoD.PC_Achievements",
 					available = true,
 				},
@@ -145,7 +145,7 @@ DataSources.PCPlayerAccountTabs = ListHelper_SetupDataSource("PCPlayerAccountTab
 			})
 			table.insert(f3_local0, {
 				models = {
-					name = @"hash_72E61B49D5A9BACD",
+					name = "menu/info_caps",
 					tabWidget = "CoD.PC_CoDAccount",
 					available = true,
 				},

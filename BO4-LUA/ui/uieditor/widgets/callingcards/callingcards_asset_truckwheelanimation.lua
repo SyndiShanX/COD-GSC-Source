@@ -8,7 +8,7 @@ CoD.CallingCards_Asset_TruckWheelAnimation.new = function(f1_arg0, f1_arg1, f1_a
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local wheel = LUI.UIImage.new(0, 0, 0, 168, 0, 0, 0, 168)
-	wheel:setImage(RegisterImage(@"uie_code_wheel"))
+	wheel:setImage(RegisterImage("uie_code_wheel"))
 	self:addElement(wheel)
 	self.wheel = wheel
 	if PostLoadFunc then

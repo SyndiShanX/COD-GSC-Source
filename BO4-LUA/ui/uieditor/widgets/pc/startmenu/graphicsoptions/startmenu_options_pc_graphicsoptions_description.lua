@@ -1,7 +1,7 @@
-require("x64:278721ff61dca1c")
-require("x64:379001ae517dfa6")
-require("x64:af761d5883b65cc")
-require("x64:9ce4bb889b74799")
+require("ui/uieditor/widgets/pc/presetsquare")
+require("ui/uieditor/widgets/pc/seperationline")
+require("ui/uieditor/widgets/pc/startmenu/graphicsoptions/startmenu_options_pc_graphicsoptions_descriptionimage")
+require("ui/uieditor/widgets/pc/startmenu/graphicsoptions/startmenu_options_pc_graphicsoptions_descriptiontextbox")
 CoD.StartMenu_Options_PC_GraphicsOptions_Description = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Options_PC_GraphicsOptions_Description.__defaultWidth = 672
 CoD.StartMenu_Options_PC_GraphicsOptions_Description.__defaultHeight = 540

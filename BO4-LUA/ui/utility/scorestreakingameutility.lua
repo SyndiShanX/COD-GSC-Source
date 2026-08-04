@@ -8,9 +8,9 @@ CoD.ScorestreakInGameUtility.ArrowState = {
 }
 CoD.ScorestreakInGameUtility.HealthBoostPlayerSelected = function(f1_arg0, f1_arg1, f1_arg2)
 	local f1_local0 = f1_arg1:getModel()
-	local f1_local1 = Engine[@"getclientnum"](f1_arg2)
+	local f1_local1 = Engine.GetClientNum(f1_arg2)
 	if f1_local0 then
-		Engine[@"sendmenuresponse"](f1_arg2, CoD.ScorestreakInGameUtility.HealthBoostMenuResponseName, "select_player", f1_local0.clientNum:get())
+		Engine.SendMenuResponse(f1_arg2, CoD.ScorestreakInGameUtility.HealthBoostMenuResponseName, "select_player", f1_local0.clientNum:get())
 	end
 end
 CoD.ScorestreakInGameUtility.AddScorestreakListNavigation = function(f2_arg0, f2_arg1, f2_arg2)
@@ -34,14 +34,14 @@ CoD.ScorestreakInGameUtility.AddScorestreakListNavigation = function(f2_arg0, f2
 	end
 	f2_arg1:appendEventHandler("register_focusable_element", f2_local1)
 	f2_arg1:appendEventHandler("unregister_focusable_element", f2_local1)
-	CoD.Menu.AddButtonCallbackFunction(f2_arg0, f2_arg1, f2_arg2, Enum[@"luibutton"][@"lui_key_up"], "ui_navup", function(element, menu, controller, f5_arg3)
-		if not element.m_disableNavigation and (not (not f2_arg1.dpadDisabled or not IsDpadButton(f5_arg3)) or f2_arg1:navigateItemUp(f2_local0)) then
+	CoD.Menu.AddButtonCallbackFunction(f2_arg0, f2_arg1, f2_arg2, Enum.LUIButton[@"lui_key_up"], "ui_navup", function(f5_arg0, f5_arg1, f5_arg2, f5_arg3)
+		if not f5_arg0.m_disableNavigation and (not (not f2_arg1.dpadDisabled or not IsDpadButton(f5_arg3)) or f2_arg1:navigateItemUp(f2_local0)) then
 			return true
 		else
 		end
 	end)
-	CoD.Menu.AddButtonCallbackFunction(f2_arg0, f2_arg1, f2_arg2, Enum[@"luibutton"][@"lui_key_down"], "ui_navdown", function(element, menu, controller, f6_arg3)
-		if not element.m_disableNavigation and (not (not f2_arg1.dpadDisabled or not IsDpadButton(f6_arg3)) or f2_arg1:navigateItemDown(f2_local0)) then
+	CoD.Menu.AddButtonCallbackFunction(f2_arg0, f2_arg1, f2_arg2, Enum.LUIButton[@"lui_key_down"], "ui_navdown", function(f6_arg0, f6_arg1, f6_arg2, f6_arg3)
+		if not f6_arg0.m_disableNavigation and (not (not f2_arg1.dpadDisabled or not IsDpadButton(f6_arg3)) or f2_arg1:navigateItemDown(f2_local0)) then
 			return true
 		else
 		end
@@ -51,11 +51,11 @@ CoD.ScorestreakInGameUtility.SetScorestreakSelectedSlot = function(f7_arg0, f7_a
 	local f7_local0 = f7_arg0:getModel(f7_arg1, "rewardSlot")
 	local f7_local1 = f7_local0 and f7_local0:get()
 	if f7_local1 then
-		Engine[@"actionslotselectweapon"](f7_arg1, f7_local1)
+		Engine.ActionSlotSelectWeapon(f7_arg1, f7_local1)
 	else
-		Engine[@"actionslotselectweapon"](f7_arg1, -1)
+		Engine.ActionSlotSelectWeapon(f7_arg1, -1)
 	end
-	local f7_local2 = Engine[@"getmodelforcontroller"](f7_arg1)
+	local f7_local2 = Engine.GetModelForController(f7_arg1)
 	local f7_local3 = f7_local2.hudItems.currentHCStreakName
 	local f7_local4 = f7_local3
 	f7_local3 = f7_local3.set
@@ -103,10 +103,10 @@ CoD.ScorestreakInGameUtility.InitScorestreakUpdateListener = function(f9_arg0, f
 end
 CoD.ScorestreakInGameUtility.EarningTowardsThisScorestreak = function(f11_arg0, f11_arg1)
 	local f11_local0 = f11_arg1:getModel()
-	local f11_local1 = Engine[@"getmodelforcontroller"](f11_arg0)
-	local f11_local2 = Engine[@"getmodel"](f11_local1, "rewardMomentum")
-	local f11_local3 = Engine[@"getmodel"](f11_local0, "momentumCost")
-	local f11_local4 = Engine[@"getmodel"](f11_local1, "killstreaks")
+	local f11_local1 = Engine.GetModelForController(f11_arg0)
+	local f11_local2 = Engine.GetModel(f11_local1, "rewardMomentum")
+	local f11_local3 = Engine.GetModel(f11_local0, "momentumCost")
+	local f11_local4 = Engine.GetModel(f11_local1, "killstreaks")
 	if not f11_local3 or not f11_local2 or not f11_local4 then
 		return false
 	end
@@ -127,7 +127,7 @@ end
 CoD.ScorestreakInGameUtility.ScorestreakIsUsable = function(f12_arg0, f12_arg1)
 	local f12_local0 = f12_arg1:getModel()
 	f12_local0 = f12_local0.rewardImage:get()
-	local f12_local1 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f12_arg0), "killstreaks")
+	local f12_local1 = Engine.GetModel(Engine.GetModelForController(f12_arg0), "killstreaks")
 	return f12_local0 == f12_local1.killstreak3.rewardImage:get()
 end
 CoD.ScorestreakInGameUtility.IsScorestreakDiscountActive = function(f13_arg0)
@@ -149,14 +149,14 @@ DataSources.HealthBoostPlayerList = {
 	prepare = function(f15_arg0, f15_arg1, f15_arg2)
 		local f15_local0 = nil
 		f15_arg1.clients = {}
-		local f15_local1 = Engine[@"getmodelforcontroller"](f15_arg0)
+		local f15_local1 = Engine.GetModelForController(f15_arg0)
 		if CoD.IsShoutcaster(f15_arg0) then
-			local f15_local2 = Engine[@"getmodel"](f15_local1, "deadSpectator.playerIndex")
+			local f15_local2 = Engine.GetModel(f15_local1, "deadSpectator.playerIndex")
 			f15_local0 = f15_local2:get()
 		else
-			f15_local0 = Engine[@"getclientnum"](f15_arg0)
+			f15_local0 = Engine.GetClientNum(f15_arg0)
 		end
-		local f15_local2 = Engine[@"getteamid"](f15_arg0, f15_local0)
+		local f15_local2 = Engine.GetTeamID(f15_arg0, f15_local0)
 		for f15_local9, f15_local10 in pairs(Engine[@"hash_F9C4C8A66F9CB02"](f15_arg0)) do
 			if f15_local2 == f15_local10 and f15_local9 ~= f15_local0 then
 				local f15_local6 = Engine[@"getmodelforclient"](f15_local9)
@@ -184,7 +184,7 @@ DataSources.HealthBoostPlayerList = {
 		if not f15_arg1.clientCountSubscription then
 			f15_local4 = f15_arg1
 			f15_local3 = f15_arg1.subscribeToModel
-			f15_local5 = Engine[@"getmodelforcontroller"](f15_arg0)
+			f15_local5 = Engine.GetModelForController(f15_arg0)
 			f15_arg1.clientCountSubscription = f15_local3(f15_local4, f15_local5:create("Clients.clientCount"), function()
 				f15_arg1:updateDataSource(true, true)
 			end, false)
@@ -192,7 +192,7 @@ DataSources.HealthBoostPlayerList = {
 		if not f15_arg1.clientChangedTeamSubscription then
 			f15_local4 = f15_arg1
 			f15_local3 = f15_arg1.subscribeToModel
-			f15_local5 = Engine[@"getmodelforcontroller"](f15_arg0)
+			f15_local5 = Engine.GetModelForController(f15_arg0)
 			f15_arg1.clientChangedTeamSubscription = f15_local3(f15_local4, f15_local5:create("Clients.clientChangedTeam"), function()
 				f15_arg1:updateDataSource(true, true)
 			end, false)

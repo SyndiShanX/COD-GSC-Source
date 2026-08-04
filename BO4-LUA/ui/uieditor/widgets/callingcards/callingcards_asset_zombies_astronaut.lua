@@ -1,4 +1,4 @@
-require("x64:992cd9d81359ad7")
+require("ui/uieditor/widgets/callingcards/callingcards_asset_zombies_arm")
 CoD.CallingCards_Asset_zombies_astronaut = InheritFrom(LUI.UIElement)
 CoD.CallingCards_Asset_zombies_astronaut.__defaultWidth = 392
 CoD.CallingCards_Asset_zombies_astronaut.__defaultHeight = 240
@@ -9,7 +9,7 @@ CoD.CallingCards_Asset_zombies_astronaut.new = function(f1_arg0, f1_arg1, f1_arg
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local astronaut = LUI.UIImage.new(0, 0, 0, 392, 0, 0, 0, 240)
-	astronaut:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_astronaut"))
+	astronaut:setImage(RegisterImage("uie_ui_icon_callingcard_zombie_astronaut"))
 	self:addElement(astronaut)
 	self.astronaut = astronaut
 	local arm = CoD.CallingCards_Asset_zombies_arm.new(f1_arg0, f1_arg1, 0, 0, 249, 279, 0, 0, 138.5, 168.5)

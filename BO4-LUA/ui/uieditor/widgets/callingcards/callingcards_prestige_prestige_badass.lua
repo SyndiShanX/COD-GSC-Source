@@ -1,54 +1,54 @@
-CoD[@"hash_660D368575962A3"] = InheritFrom(LUI.UIElement)
-CoD[@"hash_660D368575962A3"].__defaultWidth = 960
-CoD[@"hash_660D368575962A3"].__defaultHeight = 240
-CoD[@"hash_660D368575962A3"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD.callingcards_prestige_prestige_badass = InheritFrom(LUI.UIElement)
+CoD.callingcards_prestige_prestige_badass.__defaultWidth = 960
+CoD.callingcards_prestige_prestige_badass.__defaultHeight = 240
+CoD.callingcards_prestige_prestige_badass.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[@"hash_660D368575962A3"])
+	self:setClass(CoD.callingcards_prestige_prestige_badass)
 	self.id = "CallingCards_Prestige_Prestige_Badass"
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(@"uie_ui_icon_callingcards_mp_prestige_prestige_badass_background"))
-	bg:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
+	bg:setImage(RegisterImage("uie_ui_icon_callingcards_mp_prestige_prestige_badass_background"))
+	bg:setMaterial(LUI.UIImage.GetCachedMaterial("uie_tile_scroll_normal"))
 	bg:setShaderVector(0, 1, 1, 0, 0)
 	bg:setShaderVector(1, 0, 0.04, 0, 0)
 	self:addElement(bg)
 	self.bg = bg
 	local wings = LUI.UIImage.new(0, 0, 402, 962, 0, 0, 0, 240)
-	wings:setImage(RegisterImage(@"uie_ui_icon_callingcards_mp_prestige_prestige_badass_wings"))
+	wings:setImage(RegisterImage("uie_ui_icon_callingcards_mp_prestige_prestige_badass_wings"))
 	self:addElement(wings)
 	self.wings = wings
 	local body = LUI.UIImage.new(0, 0, 550, 846, 0, 0, 58, 242)
-	body:setImage(RegisterImage(@"uie_ui_icon_callingcards_mp_prestige_prestige_badass_body"))
+	body:setImage(RegisterImage("uie_ui_icon_callingcards_mp_prestige_prestige_badass_body"))
 	self:addElement(body)
 	self.body = body
 	local skull = LUI.UIImage.new(0, 0, 393, 489, 0, 0, 144, 240)
-	skull:setImage(RegisterImage(@"uie_ui_icon_callingcards_mp_prestige_prestige_badass_skull"))
+	skull:setImage(RegisterImage("uie_ui_icon_callingcards_mp_prestige_prestige_badass_skull"))
 	self:addElement(skull)
 	self.skull = skull
 	local headOpen = LUI.UIImage.new(0, 0, 538, 714, 0, 0, 0, 160)
-	headOpen:setImage(RegisterImage(@"uie_ui_icon_callingcards_mp_prestige_prestige_badass_mouth_open"))
+	headOpen:setImage(RegisterImage("uie_ui_icon_callingcards_mp_prestige_prestige_badass_mouth_open"))
 	self:addElement(headOpen)
 	self.headOpen = headOpen
 	local bodyGlow = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bodyGlow:setImage(RegisterImage(@"uie_ui_icon_callingcards_mp_prestige_prestige_badass_body_glow"))
+	bodyGlow:setImage(RegisterImage("uie_ui_icon_callingcards_mp_prestige_prestige_badass_body_glow"))
 	self:addElement(bodyGlow)
 	self.bodyGlow = bodyGlow
 	local headClosed = LUI.UIImage.new(0, 0, 538, 714, 0, 0, -4, 132)
 	headClosed:setScale(1.05, 1.05)
-	headClosed:setImage(RegisterImage(@"uie_ui_icon_callingcards_mp_prestige_prestige_badass_mouth_closed"))
+	headClosed:setImage(RegisterImage("uie_ui_icon_callingcards_mp_prestige_prestige_badass_mouth_closed"))
 	self:addElement(headClosed)
 	self.headClosed = headClosed
 	local mouthBlast = LUI.UIImage.new(0, 0, 0, 648, 0, 0, 16.5, 256.5)
-	mouthBlast:setImage(RegisterImage(@"uie_ui_icon_callingcards_mp_prestige_prestige_badass_blast_glow"))
-	mouthBlast:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook"))
+	mouthBlast:setImage(RegisterImage("uie_ui_icon_callingcards_mp_prestige_prestige_badass_blast_glow"))
+	mouthBlast:setMaterial(LUI.UIImage.GetCachedMaterial("uie_flipbook"))
 	mouthBlast:setShaderVector(0, 0, 3, 0, 0)
 	mouthBlast:setShaderVector(1, 18, 0, 0, 0)
 	self:addElement(mouthBlast)
 	self.mouthBlast = mouthBlast
 	local cropper = LUI.UIImage.new(0, 0, -32, 992, 0, 0, -392, 632)
 	cropper:setAlpha(0)
-	cropper:setImage(RegisterImage(@"uie_stage_crop_prop"))
+	cropper:setImage(RegisterImage("uie_stage_crop_prop"))
 	self:addElement(cropper)
 	self.cropper = cropper
 	if PostLoadFunc then
@@ -56,7 +56,7 @@ CoD[@"hash_660D368575962A3"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end
 	return self
 end
-CoD[@"hash_660D368575962A3"].__resetProperties = function(f2_arg0)
+CoD.callingcards_prestige_prestige_badass.__resetProperties = function(f2_arg0)
 	f2_arg0.wings:completeAnimation()
 	f2_arg0.skull:completeAnimation()
 	f2_arg0.headClosed:completeAnimation()
@@ -73,7 +73,7 @@ CoD[@"hash_660D368575962A3"].__resetProperties = function(f2_arg0)
 	f2_arg0.bodyGlow:setAlpha(1)
 	f2_arg0.headOpen:setAlpha(1)
 end
-CoD[@"hash_660D368575962A3"].__clipsPerState = {
+CoD.callingcards_prestige_prestige_badass.__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()

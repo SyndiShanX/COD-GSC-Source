@@ -59,7 +59,7 @@ local f0_local2 = function(f3_arg0, f3_arg1, f3_arg2)
 	return f3_local0, f3_local1
 end
 LUI.GridLayout.addLeftRightActiveNavigation = function(f8_arg0, f8_arg1, f8_arg2, f8_arg3)
-	CoD.Menu.AddButtonCallbackFunction(f8_arg1, f8_arg1, f8_arg2, Enum[@"luibutton"][@"lui_key_left"], "ui_navleft", function(element, menu, controller, f9_arg3)
+	CoD.Menu.AddButtonCallbackFunction(f8_arg1, f8_arg1, f8_arg2, Enum.LUIButton[@"lui_key_left"], "ui_navleft", function(f9_arg0, f9_arg1, f9_arg2, f9_arg3)
 		if not f8_arg0.m_disableNavigation then
 			if not (not f8_arg0.dpadDisabled or not IsDpadButton(f9_arg3)) or f8_arg0:navigateItemLeft() then
 				return true
@@ -68,7 +68,7 @@ LUI.GridLayout.addLeftRightActiveNavigation = function(f8_arg0, f8_arg1, f8_arg2
 			end
 		end
 	end)
-	CoD.Menu.AddButtonCallbackFunction(f8_arg1, f8_arg1, f8_arg2, Enum[@"luibutton"][@"lui_key_right"], "ui_navright", function(element, menu, controller, f10_arg3)
+	CoD.Menu.AddButtonCallbackFunction(f8_arg1, f8_arg1, f8_arg2, Enum.LUIButton[@"lui_key_right"], "ui_navright", function(f10_arg0, f10_arg1, f10_arg2, f10_arg3)
 		if not f8_arg0.m_disableNavigation then
 			if not (not f8_arg0.dpadDisabled or not IsDpadButton(f10_arg3)) or f8_arg0:navigateItemRight() then
 				return true
@@ -79,17 +79,17 @@ LUI.GridLayout.addLeftRightActiveNavigation = function(f8_arg0, f8_arg1, f8_arg2
 	end)
 end
 LUI.GridLayout.AddBumperPaging = function(f11_arg0, f11_arg1, f11_arg2)
-	CoD.Menu.AddButtonCallbackFunction(f11_arg1, f11_arg0, f11_arg2, Enum[@"luibutton"][@"lui_key_lb"], "ui_pageup", function(element, menu, controller, f12_arg3)
+	CoD.Menu.AddButtonCallbackFunction(f11_arg1, f11_arg0, f11_arg2, Enum.LUIButton[@"lui_key_lb"], "ui_pageup", function(f12_arg0, f12_arg1, f12_arg2, f12_arg3)
 		if not f11_arg0.m_disableNavigation then
-			BlockGameFromKeyEvent(controller)
+			BlockGameFromKeyEvent(f12_arg2)
 			if f11_arg0:pageUp() then
 				return true
 			end
 		end
 	end)
-	CoD.Menu.AddButtonCallbackFunction(f11_arg1, f11_arg0, f11_arg2, Enum[@"luibutton"][@"lui_key_rb"], "ui_pagedown", function(element, menu, controller, f13_arg3)
+	CoD.Menu.AddButtonCallbackFunction(f11_arg1, f11_arg0, f11_arg2, Enum.LUIButton[@"lui_key_rb"], "ui_pagedown", function(f13_arg0, f13_arg1, f13_arg2, f13_arg3)
 		if not f11_arg0.m_disableNavigation then
-			BlockGameFromKeyEvent(controller)
+			BlockGameFromKeyEvent(f13_arg2)
 			if f11_arg0:pageDown() then
 				return true
 			end
@@ -774,8 +774,8 @@ LUI.GridLayout.findItem = function(f77_arg0, f77_arg1, f77_arg2, f77_arg3, f77_a
 				local f77_local7 = f77_arg0:getModelForPosition(f77_local0, f77_local3)
 				if f77_local7 then
 					for f77_local11, f77_local12 in pairs(f77_arg1) do
-						local f77_local13 = Engine[@"getmodel"](f77_local7, f77_local11)
-						if not f77_local13 or Engine[@"getmodelvalue"](f77_local13) ~= f77_local12 then
+						local f77_local13 = Engine.GetModel(f77_local7, f77_local11)
+						if not f77_local13 or Engine.GetModelValue(f77_local13) ~= f77_local12 then
 							f77_local6 = false
 						end
 					end
@@ -814,8 +814,8 @@ LUI.GridLayout.findVisibleItem = function(f78_arg0, f78_arg1, f78_arg2)
 				local f78_local3 = f78_local12:getModel()
 				if f78_local3 then
 					for f78_local8, f78_local9 in pairs(f78_arg1) do
-						local f78_local10 = Engine[@"getmodel"](f78_local3, f78_local8)
-						if not f78_local10 or Engine[@"getmodelvalue"](f78_local10) ~= f78_local9 then
+						local f78_local10 = Engine.GetModel(f78_local3, f78_local8)
+						if not f78_local10 or Engine.GetModelValue(f78_local10) ~= f78_local9 then
 							f78_local7 = false
 						end
 					end
@@ -1121,9 +1121,9 @@ LUI.GridLayout.navigateItemUp = function(f87_arg0, f87_arg1)
 		end
 		for f87_local6 = f87_local1, f87_local5, -1 do
 			local f87_local9 = f87_local4
-			if CoD.BitUtility.IsBitwiseAndNonZero(f87_local2, Enum[@"luialignment"][@"lui_alignment_center"]) then
+			if CoD.BitUtility.IsBitwiseAndNonZero(f87_local2, Enum.LUIAlignment[@"lui_alignment_center"]) then
 				f87_local9 = f87_local9 + math.floor((#f87_arg0.rowColumnIndexMap[f87_local6] - f87_local3) / 2)
-			elseif CoD.BitUtility.IsBitwiseAndNonZero(f87_local2, Enum[@"luialignment"][@"lui_alignment_right"]) then
+			elseif CoD.BitUtility.IsBitwiseAndNonZero(f87_local2, Enum.LUIAlignment[@"lui_alignment_right"]) then
 				f87_local9 = f87_local9 + #f87_arg0.rowColumnIndexMap[f87_local5] - f87_local3
 			end
 			for f87_local10 = 0, f87_local0.gridInfoTable.gridColSpan - 1, 1 do
@@ -1207,9 +1207,9 @@ LUI.GridLayout.navigateItemDown = function(f88_arg0, f88_arg1)
 		end
 		for f88_local6 = f88_local1, f88_local5, 1 do
 			local f88_local9 = f88_local4
-			if CoD.BitUtility.IsBitwiseAndNonZero(f88_local2, Enum[@"luialignment"][@"lui_alignment_center"]) then
+			if CoD.BitUtility.IsBitwiseAndNonZero(f88_local2, Enum.LUIAlignment[@"lui_alignment_center"]) then
 				f88_local9 = f88_local9 - math.floor((f88_local3 - #f88_arg0.rowColumnIndexMap[f88_local6]) / 2)
-			elseif CoD.BitUtility.IsBitwiseAndNonZero(f88_local2, Enum[@"luialignment"][@"lui_alignment_right"]) then
+			elseif CoD.BitUtility.IsBitwiseAndNonZero(f88_local2, Enum.LUIAlignment[@"lui_alignment_right"]) then
 				f88_local9 = f88_local9 - f88_local3 - #f88_arg0.rowColumnIndexMap[f88_local5]
 			end
 			for f88_local10 = 0, f88_local0.gridInfoTable.gridColSpan - 1, 1 do
@@ -1900,9 +1900,9 @@ LUI.GridLayout.updateLayout = function(f114_arg0, f114_arg1)
 				f118_local1 = f118_local1 - (f114_local9[f118_local2] or 0)
 			end
 		end
-		if f114_local15 & Enum[@"luialignment"][@"lui_alignment_center"] ~= 0 then
+		if f114_local15 & Enum.LUIAlignment[@"lui_alignment_center"] ~= 0 then
 			f118_local0 = f118_local0 + (f114_local14 - f114_local10[f118_arg1]) / 2
-		elseif f114_local15 & Enum[@"luialignment"][@"lui_alignment_right"] ~= 0 then
+		elseif f114_local15 & Enum.LUIAlignment[@"lui_alignment_right"] ~= 0 then
 			f118_local0 = f118_local0 + f114_local14 - f114_local10[f118_arg1]
 		end
 		return f118_local0, f118_local1
@@ -2122,9 +2122,9 @@ LUI.GridLayout.getWidgetForIndex = function(f130_arg0, f130_arg1)
 			if CoD[f130_arg0.widgetType] then
 				return CoD[f130_arg0.widgetType]
 			end
-			local f130_local3 = Engine[@"getmodel"](f130_arg0:getModelForIndex(f130_arg1), f130_arg0.widgetTypeDataSource)
+			local f130_local3 = Engine.GetModel(f130_arg0:getModelForIndex(f130_arg1), f130_arg0.widgetTypeDataSource)
 			if f130_local3 ~= nil then
-				return LUI.getTableFromPath(Engine[@"getmodelvalue"](f130_local3))
+				return LUI.getTableFromPath(Engine.GetModelValue(f130_local3))
 			end
 		elseif type(f130_arg0.widgetType) == "table" then
 			return f130_arg0.widgetType
@@ -2171,9 +2171,9 @@ LUI.GridLayout.createWidgetForPosition = function(f132_arg0, f132_arg1, f132_arg
 									f132_local6:setModel(f132_local3, f132_arg0.controller, true)
 								end
 								if f132_local3 then
-									local f132_local9 = Engine[@"getmodel"](f132_local3, "customId")
+									local f132_local9 = Engine.GetModel(f132_local3, "customId")
 									if f132_local9 then
-										f0_local10(f132_arg0.itemStencil, f132_local6, Engine[@"getmodelvalue"](f132_local9))
+										f0_local10(f132_arg0.itemStencil, f132_local6, Engine.GetModelValue(f132_local9))
 									end
 								end
 								f132_arg0.menu:sendInitializationEvents(f132_arg0.controller, f132_local6)

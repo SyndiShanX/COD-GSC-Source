@@ -1,4 +1,4 @@
-require("x64:78530715a6cebc7")
+require("ui/uieditor/widgets/systemoverlays/featureoverlay_framevlayout_buttons")
 CoD.featureOverlay_frameVLayout = InheritFrom(LUI.UIElement)
 CoD.featureOverlay_frameVLayout.__defaultWidth = 1920
 CoD.featureOverlay_frameVLayout.__defaultHeight = 750

@@ -1,4 +1,4 @@
-require("x64:f715750c9ae608a")
+require("ui/uieditor/widgets/pc/socialmenu/pcsocialmenu_genericbutton_container")
 CoD.PCSocialMenu_GenericButton = InheritFrom(LUI.UIElement)
 CoD.PCSocialMenu_GenericButton.__defaultWidth = 194
 CoD.PCSocialMenu_GenericButton.__defaultHeight = 103

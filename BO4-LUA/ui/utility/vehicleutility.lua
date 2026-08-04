@@ -1,4 +1,3 @@
-
 CoD.VehicleUtility = {}
 CoD.VehicleUtility.WidgetTypes = LuaEnum.createEnum( "TIME_REMAINING_BAR", "POOLED_HEALTH_BAR", "HORIZONTAL_IMAGE_HEALTH_BAR", "VERTICAL_IMAGE_HEALTH_BAR", "AMMO", "ROCKET_AMMO", "SECONDARY_AMMO", "SPEED", "RPM", "ALTITUDE", "RADAR", "BOOST_METER", "INCOMING_MISSILE", "COLLISION_WARNING", "EXIT_VEHICLE_PROMPT", "SEAT_MAP", "SWITCH_TO_DRIVER_PROMPT" )
 CoD.VehicleUtility.MAX_VEHICLE_BUTTON_COOLDOWNS = 3
@@ -9,7 +8,7 @@ CoD.VehicleUtility.VehicleMalfunction = LuaEnum.createEnum( "VEHICLE_MALFUNCTION
 CoD.VehicleUtility.SetBindingsTable = {}
 CoD.VehicleUtility.SeatMapStates = LuaEnum.createEnum( "NONE", "ATV", "CARGO_TRUCK", "HELICOPTER", "BOAT", "BUGGY", "PATROL", "UH1D", "SUV", "MUSCLE_CAR", "ATTACK_HELICOPTER", "MOTORCYCLE", "TANK" )
 CoD.VehicleUtility.SwapStringWhenUsingAlternateControls = function ( f1_arg0, f1_arg1, f1_arg2 )
-	if Engine[@"profileint"]( f1_arg0, @"vehicle_alternate_control" ) == 1 then
+	if Engine.ProfileInt( f1_arg0, "vehicle_alternate_control" ) == 1 then
 		local f1_local0 = f1_arg2
 	end
 	return f1_local0 or f1_arg1
@@ -60,11 +59,11 @@ CoD.VehicleUtility.HUD_VehicleConfig_GetIntParam = function ( f5_arg0, f5_arg1 )
 end
 CoD.VehicleUtility.HUD_VehicleConfigConditions = {
 	IsVehicleOwner = function ( f6_arg0, f6_arg1, f6_arg2 )
-		local f6_local0 = Engine[@"getmodelforcontroller"]( f6_arg0 )
+		local f6_local0 = Engine.GetModelForController( f6_arg0 )
 		return f6_local0.vehicle.isVehicleOwner:get()
 	end,
 	IsAttackMode = function ( f7_arg0, f7_arg1, f7_arg2 )
-		local f7_local0 = Engine[@"getmodelforcontroller"]( f7_arg0 )
+		local f7_local0 = Engine.GetModelForController( f7_arg0 )
 		return f7_local0.vehicle.vehicleAttackMode:get() == CoD.VehicleUtility.HUD_VehicleConfig_GetIntParam( f7_arg1, f7_arg2 )
 	end
 }
@@ -76,24 +75,24 @@ local f0_local4 = {}
 local f0_local5 = CoD.VehicleUtility.CreateVehicleTypeMap
 local f0_local6 = "VHUD_Hellstorm"
 local f0_local7 = {}
-local f0_local8 = CoD.VehicleUtility.CreateVehicleButtonInfo( @"hash_B1A03F2448A49D9", "+speed_throw", "left" )
-local f0_local9 = CoD.VehicleUtility.CreateVehicleButtonInfo( @"hash_79D336E3DD657B0A", "+breath_sprint", "left" )
-local f0_local10 = CoD.VehicleUtility.CreateVehicleButtonInfo( @"hash_5DBA026FFA1D58CD", "+lookstick", "right" )
-local f0_local11 = CoD.VehicleUtility.CreateVehicleButtonInfo( @"hash_61FED314D6AF9450", "+attack", "right" )
+local f0_local8 = CoD.VehicleUtility.CreateVehicleButtonInfo( "menu/hud_vehicle_slow", "+speed_throw", "left" )
+local f0_local9 = CoD.VehicleUtility.CreateVehicleButtonInfo( "menu/hud_vehicle_speedboost", "+breath_sprint", "left" )
+local f0_local10 = CoD.VehicleUtility.CreateVehicleButtonInfo( "menu/hud_vehicle_steer", "+lookstick", "right" )
+local f0_local11 = CoD.VehicleUtility.CreateVehicleButtonInfo( "menu/launch_caps", "+attack", "right" )
 f0_local4.hud = f0_local5( f0_local6, f0_local8 )
 f0_local5 = {
 	hudCondition = function ( f8_arg0 )
-		local f8_local0 = Engine[@"getmodelforcontroller"]( f8_arg0, "vehicle.vehicleAttackMode" )
+		local f8_local0 = Engine.GetModelForController( f8_arg0, "vehicle.vehicleAttackMode" )
 		return f8_local0 and f8_local0:get() == 1
 	end
 }
 f0_local6 = CoD.VehicleUtility.CreateVehicleTypeMap
 f0_local7 = "VHUD_Hellstorm"
 f0_local8 = {}
-f0_local9 = CoD.VehicleUtility.CreateVehicleButtonInfo( @"hash_B1A03F2448A49D9", "+speed_throw", "left" )
-f0_local10 = CoD.VehicleUtility.CreateVehicleButtonInfo( @"hash_79D336E3DD657B0A", "+breath_sprint", "left" )
-f0_local11 = CoD.VehicleUtility.CreateVehicleButtonInfo( @"hash_6368EB0A070207A", "+attack", "right" )
-local f0_local12 = CoD.VehicleUtility.CreateVehicleButtonInfo( @"hash_5DBA026FFA1D58CD", "+lookstick", "right" )
+f0_local9 = CoD.VehicleUtility.CreateVehicleButtonInfo( "menu/hud_vehicle_slow", "+speed_throw", "left" )
+f0_local10 = CoD.VehicleUtility.CreateVehicleButtonInfo( "menu/hud_vehicle_speedboost", "+breath_sprint", "left" )
+f0_local11 = CoD.VehicleUtility.CreateVehicleButtonInfo( "menu/hud_vehicle_clusterbomb", "+attack", "right" )
+local f0_local12 = CoD.VehicleUtility.CreateVehicleButtonInfo( "menu/hud_vehicle_steer", "+lookstick", "right" )
 f0_local5.hud = f0_local6( f0_local7, f0_local9 )
 f0_local3[1] = f0_local4
 f0_local3[2] = f0_local5
@@ -102,8 +101,8 @@ f0_local1[@"operating_predator"] = f0_local2
 f0_local2 = CoD.VehicleUtility.CreateVehicleTypeMap
 f0_local3 = "VHUD_Hellstorm"
 f0_local4 = {}
-f0_local5 = CoD.VehicleUtility.CreateVehicleButtonInfo( @"hash_5627DEC5036BC76C", "+attack", "right" )
-f0_local6 = CoD.VehicleUtility.CreateVehicleButtonInfo( @"hash_5DBA026FFA1D58CD", "+lookstick", "right" )
+f0_local5 = CoD.VehicleUtility.CreateVehicleButtonInfo( "menu/hud_vehicle_detonate", "+attack", "right" )
+f0_local6 = CoD.VehicleUtility.CreateVehicleButtonInfo( "menu/hud_vehicle_steer", "+lookstick", "right" )
 f0_local1[@"operating_tv_guided_missile"] = f0_local2( f0_local3, f0_local5 )
 f0_local0.HUD_VehicleTypeMap = f0_local1
 CoD.VehicleUtility.GetVehicleHudInfo = function ( f9_arg0, f9_arg1, f9_arg2 )
@@ -111,7 +110,7 @@ CoD.VehicleUtility.GetVehicleHudInfo = function ( f9_arg0, f9_arg1, f9_arg2 )
 	if f9_local0 and f9_local0.huds and #f9_local0.huds > 0 then
 		local f9_local1 = 1
 		for f9_local2 = #f9_local0.huds, 2, -1 do
-			local f9_local5 = f9_local0.huds[f9_local2][@"hash_6EFBBAF16820AC23"]
+			local f9_local5 = f9_local0.huds[f9_local2].hudcondition
 			if CoD.VehicleUtility.HUD_VehicleConfigConditions[f9_local5] and CoD.VehicleUtility.HUD_VehicleConfigConditions[f9_local5]( f9_arg1, f9_local0, f9_local2 ) then
 				f9_local1 = f9_local2
 				break
@@ -121,45 +120,45 @@ CoD.VehicleUtility.GetVehicleHudInfo = function ( f9_arg0, f9_arg1, f9_arg2 )
 		if f9_local0.huds[f9_local1].bindings then
 			for f9_local5, f9_local8 in ipairs( f9_local0.huds[f9_local1].bindings ) do
 				local f9_local7
-				if f9_local8[@"hash_41590175A80BBF59"] == @"kbm" then
+				if f9_local8.controllerrestriction == "kbm" then
 					f9_local7 = IsMouseOrKeyboard( f9_arg1 )
 					if not f9_local7 then
-						if f9_local8[@"hash_41590175A80BBF59"] == @"gamepad" then
+						if f9_local8.controllerrestriction == "gamepad" then
 							f9_local7 = IsGamepad( f9_arg1 )
 							if not f9_local7 then
 							
 							elseif f9_local7 and f9_local8[@"displaystring"] and f9_local8[@"displaystring"] ~= 0x0 then
-								table.insert( f9_local2, CoD.VehicleUtility.CreateVehicleButtonInfo( f9_local8[@"displaystring"], CoD.VehicleUtility.TranslateBindingForPC( f9_arg1, f9_local8[@"prompt"] ), f9_local8[@"hash_645FD7C1D0628D06"], f9_local8[@"cooldownindex"], f9_local8[@"cooldownicon"] ) )
+								table.insert( f9_local2, CoD.VehicleUtility.CreateVehicleButtonInfo( f9_local8[@"displaystring"], CoD.VehicleUtility.TranslateBindingForPC( f9_arg1, f9_local8.prompt ), f9_local8.buttondirection, f9_local8[@"cooldownindex"], f9_local8[@"cooldownicon"] ) )
 							end
 						end
-						if f9_local8[@"hash_41590175A80BBF59"] ~= @"none" then
-							f9_local7 = not f9_local8[@"hash_41590175A80BBF59"]
+						if f9_local8.controllerrestriction ~= "none" then
+							f9_local7 = not f9_local8.controllerrestriction
 						else
 							f9_local7 = true
 						end
 					end
 				else
-					if f9_local8[@"hash_41590175A80BBF59"] == @"gamepad" then
+					if f9_local8.controllerrestriction == "gamepad" then
 						f9_local7 = IsGamepad( f9_arg1 )
 						if not f9_local7 then
 						
 						elseif f9_local7 and f9_local8[@"displaystring"] and f9_local8[@"displaystring"] ~= 0x0 then
-							table.insert( f9_local2, CoD.VehicleUtility.CreateVehicleButtonInfo( f9_local8[@"displaystring"], CoD.VehicleUtility.TranslateBindingForPC( f9_arg1, f9_local8[@"prompt"] ), f9_local8[@"hash_645FD7C1D0628D06"], f9_local8[@"cooldownindex"], f9_local8[@"cooldownicon"] ) )
+							table.insert( f9_local2, CoD.VehicleUtility.CreateVehicleButtonInfo( f9_local8[@"displaystring"], CoD.VehicleUtility.TranslateBindingForPC( f9_arg1, f9_local8.prompt ), f9_local8.buttondirection, f9_local8[@"cooldownindex"], f9_local8[@"cooldownicon"] ) )
 						end
 					end
-					if f9_local8[@"hash_41590175A80BBF59"] ~= @"none" then
-						f9_local7 = not f9_local8[@"hash_41590175A80BBF59"]
+					if f9_local8.controllerrestriction ~= "none" then
+						f9_local7 = not f9_local8.controllerrestriction
 					else
 						f9_local7 = true
 					end
 				end
 				elseif f9_local7 and f9_local8[@"displaystring"] and f9_local8[@"displaystring"] ~= 0x0 then
-					table.insert( f9_local2, CoD.VehicleUtility.CreateVehicleButtonInfo( f9_local8[@"displaystring"], CoD.VehicleUtility.TranslateBindingForPC( f9_arg1, f9_local8[@"prompt"] ), f9_local8[@"hash_645FD7C1D0628D06"], f9_local8[@"cooldownindex"], f9_local8[@"cooldownicon"] ) )
+					table.insert( f9_local2, CoD.VehicleUtility.CreateVehicleButtonInfo( f9_local8[@"displaystring"], CoD.VehicleUtility.TranslateBindingForPC( f9_arg1, f9_local8.prompt ), f9_local8.buttondirection, f9_local8[@"cooldownindex"], f9_local8[@"cooldownicon"] ) )
 			end
 		end
 		f9_local3 = nil
-		if f9_local0.huds[f9_local1][@"hash_594735B5485CCEB3"] then
-			f9_local4 = LUI.splitString( f9_local0.huds[f9_local1][@"hash_594735B5485CCEB3"], " " )
+		if f9_local0.huds[f9_local1].tintcolor then
+			f9_local4 = LUI.splitString( f9_local0.huds[f9_local1].tintcolor, " " )
 			if #f9_local4 > 3 then
 				f9_local3 = {
 					red = math.ceil( tonumber( f9_local4[1] * 255 ) ),
@@ -217,7 +216,7 @@ end, false, {
 		if f11_arg1.bindingColor then
 			f11_local1.color:set( f11_arg1.bindingColor )
 		end
-		if f11_arg1.vehicleInfoTable and f11_arg1.vehicleInfoTable[@"hash_16B4C5C47FCF7794"] == 1 then
+		if f11_arg1.vehicleInfoTable and f11_arg1.vehicleInfoTable.hideplayerinfo == 1 then
 			f11_local0.hidePlayerInfo:set( true )
 		end
 		if f11_arg1.vehicleInfoTable and f11_arg1.vehicleInfoTable[@"hideweaponinfo"] == 1 then
@@ -232,19 +231,19 @@ end, false, {
 		local f11_local4 = {}
 		for f11_local18, f11_local19 in ipairs( f11_arg1.bindings ) do
 			if f11_local19.bindCommand and (f11_local19.text ~= @"menu/free_look" or 1 == Engine[@"getdvarint"]( @"hash_35D9CDEECB132532" )) then
-				local f11_local8, f11_local9 = Engine[@"getbindingbuttonstring"]( f11_arg0, f11_local19.bindCommand )
+				local f11_local8, f11_local9 = Engine.GetBindingButtonString( f11_arg0, f11_local19.bindCommand )
 				local f11_local10 = string.sub( f11_local19.bindCommand, 1, 1 ) and string.upper( string.sub( f11_local19.bindCommand, 2, -1 ) ) or string.upper( f11_local19.bindCommand )
 				if f11_local8 then
 					CoD.VehicleUtility.SetBindingsTable[f11_local8] = true
 					local f11_local11 = f11_local1:create( f11_local8 .. ".text" )
 					f11_local11:set( f11_local19.text )
 					f11_local11 = f11_local1:create( f11_local8 .. ".bind" )
-					f11_local11:set( Engine[@"keybinding"]( f11_arg0, f11_local19.bindCommand ) )
+					f11_local11:set( Engine.KeyBinding( f11_arg0, f11_local19.bindCommand ) )
 					if CoD.isPC then
 						f11_local11 = f11_local1:create( f11_local10 .. ".text" )
 						f11_local11:set( f11_local19.text )
 						f11_local11 = f11_local1:create( f11_local10 .. ".bind" )
-						f11_local11:set( Engine[@"keybinding"]( f11_arg0, f11_local19.bindCommand ) )
+						f11_local11:set( Engine.KeyBinding( f11_arg0, f11_local19.bindCommand ) )
 					end
 					if f11_local19.cooldownIcon then
 						f11_local11 = f11_local1:create( f11_local8 .. ".cooldownIcon" )
@@ -279,7 +278,7 @@ end, false, {
 						local f11_local15 = f11_local1:create( f11_local14 )
 						local f11_local16 = f11_local15:create( "text" )
 						f11_local16:set( f11_local19.text )
-						f11_local16 = Engine[@"keybinding"]( f11_arg0, f11_local19.bindCommand )
+						f11_local16 = Engine.KeyBinding( f11_arg0, f11_local19.bindCommand )
 						local f11_local17 = f11_local15:create( "bind" )
 						f11_local17:set( f11_local16 )
 						if f11_local11 then
@@ -308,7 +307,7 @@ end, false, {
 				end
 				
 				local f11_local9 = f11_local0:create( "damageOverlayImage" )
-				f11_local9:set( Engine[@"converttoxhash"]( f11_local8( @"overlayimage" ) ) )
+				f11_local9:set( Engine[@"converttoxhash"]( f11_local8( "overlayimage" ) ) )
 				f11_local9 = f11_local0:create( "damageFillImage" )
 				f11_local9:set( Engine[@"converttoxhash"]( f11_local8( @"fillimage" ) ) )
 			elseif f11_local19[@"widgettype"] == CoD.VehicleUtility.WidgetTypes.TIME_REMAINING_BAR then
@@ -318,7 +317,7 @@ end, false, {
 				local f11_local8 = f11_local0:create( "showAmmo" )
 				f11_local8:set( true )
 				f11_local8 = f11_local0:create( "ammoIcon" )
-				f11_local8:set( f11_local19[@"iconimage"] or @"blacktransparent" )
+				f11_local8:set( f11_local19.iconimage or "blacktransparent" )
 			elseif f11_local19[@"widgettype"] == CoD.VehicleUtility.WidgetTypes.SECONDARY_AMMO then
 				local f11_local8 = f11_local0:create( "secondaryAmmoTitle" )
 				f11_local8:set( f11_local19.header )
@@ -333,7 +332,7 @@ end, false, {
 				f11_local8 = f11_local0:create( "pooledHealthAmount" )
 				f11_local8:set( f11_arg1.healthPoolSize or 0 )
 				f11_local8 = f11_local0:create( "vehicleIcon" )
-				f11_local8:set( f11_local19[@"iconimage"] or @"blacktransparent" )
+				f11_local8:set( f11_local19.iconimage or "blacktransparent" )
 			elseif f11_local19[@"widgettype"] == CoD.VehicleUtility.WidgetTypes.SPEED then
 				local f11_local8 = f11_local0:create( "showSpeed" )
 				f11_local8:set( true )
@@ -358,24 +357,24 @@ end, false, {
 			elseif f11_local19[@"widgettype"] == CoD.VehicleUtility.WidgetTypes.EXIT_VEHICLE_PROMPT then
 				local f11_local8 = f11_local0:create( "enableVehicleExitPrompt" )
 				f11_local8:set( true )
-				if f11_local19[@"hash_5D479F6320D21682"] and f11_local19[@"hash_5D479F6320D21682"] ~= 0x0 then
+				if f11_local19.vehicleexitpromptref and f11_local19.vehicleexitpromptref ~= 0x0 then
 					f11_local8 = f11_local0:create( "vehicleExitPromptRef" )
-					f11_local8:set( f11_local19[@"hash_5D479F6320D21682"] )
+					f11_local8:set( f11_local19.vehicleexitpromptref )
 				else
 					f11_local8 = f11_local0:create( "vehicleExitPromptRef" )
-					f11_local8:set( @"hash_4C7D903A026627FC" )
+					f11_local8:set( "menu/hud_vehicle_exit" )
 				end
 			elseif f11_local19[@"widgettype"] == CoD.VehicleUtility.WidgetTypes.SEAT_MAP then
 				local f11_local8 = f11_local0:create( "showSeatMap" )
 				f11_local8:set( true )
 				f11_local8 = f11_local0:create( "seatMapState" )
-				f11_local8:set( f11_local19[0x3B76D86D727423] )
+				f11_local8:set( f11_local19.seatmapstate )
 			elseif f11_local19[@"widgettype"] == CoD.VehicleUtility.WidgetTypes.SWITCH_TO_DRIVER_PROMPT then
 				local f11_local8 = f11_local0:create( "showSwitchToDriverPrompt" )
 				f11_local8:set( true )
-				if f11_local19[@"hash_114F6FC8E568FD75"] and f11_local19[@"hash_114F6FC8E568FD75"] ~= 0x0 then
+				if f11_local19.vehicledriverstringoverrideref and f11_local19.vehicledriverstringoverrideref ~= 0x0 then
 					f11_local8 = f11_local0:create( "vehicleDriverStringOverrideRef" )
-					f11_local8:set( f11_local19[@"hash_114F6FC8E568FD75"] )
+					f11_local8:set( f11_local19.vehicledriverstringoverrideref )
 				else
 					f11_local8 = f11_local0:create( "vehicleDriverStringOverrideRef" )
 					f11_local8:set( @"menu/driver_seat" )
@@ -397,7 +396,7 @@ end, false, {
 		end
 		CoD.VehicleUtility.SetBindingsTable = {}
 		if f13_local1 then
-			Engine[@"unsubscribeandfreemodel"]( f13_local1 )
+			Engine.UnsubscribeAndFreeModel( f13_local1 )
 		end
 		f13_local2 = f13_local0:create( "ammoTitle" )
 		f13_local2:set( "" )
@@ -410,16 +409,16 @@ end, false, {
 		f13_local2 = f13_local0:create( "rocketTitle" )
 		f13_local2:set( "" )
 		f13_local2 = f13_local0:create( "damageFillImage" )
-		f13_local2:set( @"blacktransparent" )
+		f13_local2:set( "blacktransparent" )
 		f13_local2 = f13_local0:create( "showPooledHealthBar" )
 		f13_local2:set( false )
 		f13_local0:create( "pooledHealthAmount" )
 		f13_local2 = f13_local0:create( "vehicleIcon" )
-		f13_local2:set( @"blacktransparent" )
+		f13_local2:set( "blacktransparent" )
 		f13_local2 = f13_local0:create( "showAmmo" )
 		f13_local2:set( false )
 		f13_local2 = f13_local0:create( "ammoIcon" )
-		f13_local2:set( @"blacktransparent" )
+		f13_local2:set( "blacktransparent" )
 		f13_local2 = f13_local0:create( "showSpeed" )
 		f13_local2:set( false )
 		f13_local2 = f13_local0:create( "showRPM" )
@@ -452,7 +451,7 @@ end, false, {
 		f13_local2 = f13_local0:create( "hideWeaponInfo" )
 		f13_local2:set( false )
 		f13_local2 = f13_local0:create( "vehicleExitPromptRef" )
-		f13_local2:set( @"hash_4C7D903A026627FC" )
+		f13_local2:set( "menu/hud_vehicle_exit" )
 		f13_local2 = f13_local0:create( "showSwitchToDriverPrompt" )
 		f13_local2:set( false )
 		for f13_local2 = 1, CoD.VehicleUtility.MAX_VEHICLE_BUTTON_COOLDOWNS, 1 do

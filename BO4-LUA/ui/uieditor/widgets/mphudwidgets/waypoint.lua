@@ -1,8 +1,8 @@
-require("x64:b3cb3de9a683c02")
-require("x64:c68e35524efc8d1")
-require("x64:27411b1d207dbc8")
-require("x64:da622980c9a8593")
-require("x64:76c14e1bc07cd98")
+require("ui/uieditor/widgets/mphudwidgets/waypoint_textbg")
+require("ui/uieditor/widgets/mphudwidgets/waypointarrowcontainer")
+require("ui/uieditor/widgets/mphudwidgets/waypointcenter")
+require("ui/uieditor/widgets/mphudwidgets/waypointprogressbar")
+require("ui/uieditor/widgets/mphudwidgets/waypointprogressring")
 CoD.Waypoint = InheritFrom(LUI.UIElement)
 CoD.Waypoint.__defaultWidth = 120
 CoD.Waypoint.__defaultHeight = 180
@@ -200,7 +200,7 @@ CoD.Waypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 	self:addElement(WaypointBacker)
 	self.WaypointBacker = WaypointBacker
 	local WaypointPattern = LUI.UIImage.new(0.5, 0.5, -37, 39, 0.5, 0.5, -38, 38)
-	WaypointPattern:setImage(RegisterImage(@"uie_ui_hud_core_waypoint_led"))
+	WaypointPattern:setImage(RegisterImage("uie_ui_hud_core_waypoint_led"))
 	WaypointPattern:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_F755127C95CF5B6"))
 	WaypointPattern:setShaderVector(0, 1.3, 0, 0, 0)
 	WaypointPattern:linkToElementModel(self, "color", true, function(model)
@@ -268,8 +268,8 @@ CoD.Waypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 	LED:setRGB(0, 0, 0)
 	LED:setAlpha(0.18)
 	LED:setScale(0.94, 0.94)
-	LED:setImage(RegisterImage(@"uie_ui_hud_core_player_widget_led_status"))
-	LED:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
+	LED:setImage(RegisterImage("uie_ui_hud_core_player_widget_led_status"))
+	LED:setMaterial(LUI.UIImage.GetCachedMaterial("uie_wipe_delta_normal"))
 	LED:setShaderVector(0, 0, 1, 0, 0)
 	LED:setShaderVector(1, 0, 0, 0, 0)
 	LED:setShaderVector(2, 0.24, 0.67, 0, 0)
@@ -281,8 +281,8 @@ CoD.Waypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 	LED2:setRGB(0, 0, 0)
 	LED2:setAlpha(0.18)
 	LED2:setScale(0.94, 0.94)
-	LED2:setImage(RegisterImage(@"uie_ui_hud_core_player_widget_led_status"))
-	LED2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
+	LED2:setImage(RegisterImage("uie_ui_hud_core_player_widget_led_status"))
+	LED2:setMaterial(LUI.UIImage.GetCachedMaterial("uie_wipe_delta_normal"))
 	LED2:setShaderVector(0, 0, 1, 0, 0)
 	LED2:setShaderVector(1, 0, 0, 0, 0)
 	LED2:setShaderVector(2, 0.24, 0.67, 0, 0)
@@ -294,8 +294,8 @@ CoD.Waypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 	LED3:setRGB(0, 0, 0)
 	LED3:setAlpha(0.18)
 	LED3:setScale(0.94, 0.94)
-	LED3:setImage(RegisterImage(@"uie_ui_hud_core_player_widget_led_status"))
-	LED3:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
+	LED3:setImage(RegisterImage("uie_ui_hud_core_player_widget_led_status"))
+	LED3:setMaterial(LUI.UIImage.GetCachedMaterial("uie_wipe_delta_normal"))
 	LED3:setShaderVector(0, 0.63, 1, 0, 0)
 	LED3:setShaderVector(1, 0, 0, 0, 0)
 	LED3:setShaderVector(2, 0.24, 0.67, 0, 0)
@@ -306,13 +306,13 @@ CoD.Waypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 	local Cap = LUI.UIImage.new(0, 0, -125.5, -106.5, 0, 0, 155, 165)
 	Cap:setZRot(90)
 	Cap:setImage(RegisterImage(@"hash_7F3E81C52AE39D91"))
-	Cap:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	Cap:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(Cap)
 	self.Cap = Cap
 	local Cap2 = LUI.UIImage.new(0, 0, 225.5, 244.5, 0, 0, 155, 165)
 	Cap2:setZRot(90)
 	Cap2:setImage(RegisterImage(@"hash_7F3E81C52AE39D91"))
-	Cap2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	Cap2:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(Cap2)
 	self.Cap2 = Cap2
 	self:mergeStateConditions({
@@ -388,7 +388,7 @@ CoD.Waypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 	end)
 	local f1_local18 = self
 	local f1_local19 = self.subscribeToModel
-	local f1_local20 = Engine[@"getmodelforcontroller"](f1_arg1)
+	local f1_local20 = Engine.GetModelForController(f1_arg1)
 	f1_local19(f1_local18, f1_local20["interactivePrompt.activeObjectiveID"], function(f43_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -400,7 +400,7 @@ CoD.Waypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 	end, false)
 	f1_local18 = self
 	f1_local19 = self.subscribeToModel
-	f1_local20 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local20 = Engine.GetModelForController(f1_arg1)
 	f1_local19(f1_local18, f1_local20["hudItems.hacked"], function(f44_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -472,50 +472,50 @@ CoD.Waypoint.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5
 	end, false)
 	f1_local18 = self
 	f1_local19 = self.subscribeToModel
-	f1_local20 = Engine[@"getmodelforcontroller"](f1_arg1)
-	f1_local19(f1_local18, f1_local20["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]], function(f50_arg0)
+	f1_local20 = Engine.GetModelForController(f1_arg1)
+	f1_local19(f1_local18, f1_local20["UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_spectating_client"]], function(f50_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f50_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"],
+			modelName = "UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_spectating_client"],
 		})
 	end, false)
 	f1_local18 = self
 	f1_local19 = self.subscribeToModel
-	f1_local20 = Engine[@"getmodelforcontroller"](f1_arg1)
-	f1_local19(f1_local18, f1_local20["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"]], function(f51_arg0)
+	f1_local20 = Engine.GetModelForController(f1_arg1)
+	f1_local19(f1_local18, f1_local20["UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_hud_visible"]], function(f51_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f51_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_hud_visible"],
+			modelName = "UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_hud_visible"],
 		})
 	end, false)
 	f1_local18 = self
 	f1_local19 = self.subscribeToModel
-	f1_local20 = Engine[@"getmodelforcontroller"](f1_arg1)
-	f1_local19(f1_local18, f1_local20["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"]], function(f52_arg0)
+	f1_local20 = Engine.GetModelForController(f1_arg1)
+	f1_local19(f1_local18, f1_local20["UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_emp_active"]], function(f52_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f52_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_emp_active"],
+			modelName = "UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_emp_active"],
 		})
 	end, false)
 	f1_local18 = self
 	f1_local19 = self.subscribeToModel
-	f1_local20 = Engine[@"getmodelforcontroller"](f1_arg1)
-	f1_local19(f1_local18, f1_local20["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_selecting_locational_killstreak"]], function(f53_arg0)
+	f1_local20 = Engine.GetModelForController(f1_arg1)
+	f1_local19(f1_local18, f1_local20["UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_selecting_locational_killstreak"]], function(f53_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f53_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_selecting_locational_killstreak"],
+			modelName = "UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_selecting_locational_killstreak"],
 		})
 	end, false)
 	self:linkToElementModel(self, "icon", true, function(model)

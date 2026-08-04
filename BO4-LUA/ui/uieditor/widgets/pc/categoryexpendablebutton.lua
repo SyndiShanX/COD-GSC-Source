@@ -1,7 +1,7 @@
-require("x64:2675595fa323085")
-require("x64:6f134078184861")
-require("x64:3d2e497c33a6dc4")
-require("x64:d725614df0dc9ec")
+require("ui/uieditor/widgets/emptyfocusable")
+require("ui/uieditor/widgets/pc/separationline_vertical")
+require("ui/uieditor/widgets/pc/startmenu/pc_startmenu_options_glow")
+require("ui/uieditor/widgets/pc/startmenu/pc_startmenu_options_tick")
 CoD.CategoryExpendableButton = InheritFrom(LUI.UIElement)
 CoD.CategoryExpendableButton.__defaultWidth = 245
 CoD.CategoryExpendableButton.__defaultHeight = 64
@@ -33,7 +33,7 @@ CoD.CategoryExpendableButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	})
 	local SeparationLineVertical = Tick
 	local GlowAdditive = Tick.subscribeToModel
-	local Number = Engine[@"getmodelforcontroller"](f1_arg1)
+	local Number = Engine.GetModelForController(f1_arg1)
 	GlowAdditive(SeparationLineVertical, Number.PlayerSettingsUpdate, function(f3_arg0)
 		f1_arg0:updateElementState(Tick, {
 			name = "model_validation",
@@ -44,14 +44,14 @@ CoD.CategoryExpendableButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		})
 	end, false)
 	Tick:setAlpha(0.75)
-	Tick:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	Tick:setRFTMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(Tick)
 	self.Tick = Tick
 	GlowAdditive = LUI.UIImage.new(0, 0, 6, 72, 0.5, 0.5, -18, 18)
 	GlowAdditive:setAlpha(0)
 	GlowAdditive:setZRot(-90)
-	GlowAdditive:setImage(RegisterImage(@"uie_icon_frontend_navigation_glowmed"))
-	GlowAdditive:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	GlowAdditive:setImage(RegisterImage("uie_icon_frontend_navigation_glowmed"))
+	GlowAdditive:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(GlowAdditive)
 	self.GlowAdditive = GlowAdditive
 	SeparationLineVertical = CoD.SeparationLine_Vertical.new(f1_arg0, f1_arg1, 1, 1, -1, 0, 0, 1, 0, 0)
@@ -62,8 +62,8 @@ CoD.CategoryExpendableButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	Number:setRGB(0.92, 0.92, 0.92)
 	Number:setAlpha(0.28)
 	Number:setTTF("ttmussels_regular")
-	Number:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	Number:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	Number:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	Number:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	Number:linkToElementModel(self, "categoryId", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -78,8 +78,8 @@ CoD.CategoryExpendableButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	CategoryName:setTTF("ttmussels_regular")
 	CategoryName:setLetterSpacing(2)
 	CategoryName:setLineSpacing(3)
-	CategoryName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	CategoryName:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
+	CategoryName:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	CategoryName:setAlignment(Enum.LUIAlignment[@"lui_alignment_middle"])
 	CategoryName:linkToElementModel(self, "name", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then
@@ -119,7 +119,7 @@ CoD.CategoryExpendableButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	})
 	local f1_local9 = self
 	local f1_local10 = self.subscribeToModel
-	local f1_local11 = Engine[@"getmodelforcontroller"](f1_arg1)
+	local f1_local11 = Engine.GetModelForController(f1_arg1)
 	f1_local10(f1_local9, f1_local11["PC.CurrentCategory"], function(f10_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

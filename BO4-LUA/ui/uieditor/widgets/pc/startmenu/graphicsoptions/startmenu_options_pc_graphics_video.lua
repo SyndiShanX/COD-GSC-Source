@@ -1,4 +1,4 @@
-require("x64:729220b1154af14")
+require("ui/uieditor/widgets/startmenu/startmenu_options_slider")
 local PostLoadFunc = function(self, controller)
 	self:dispatchEventToChildren({
 		name = "options_refresh",
@@ -22,7 +22,7 @@ CoD.StartMenu_Options_PC_Graphics_Video.new = function(f2_arg0, f2_arg1, f2_arg2
 	graphicsList:setWidgetType(CoD.StartMenu_Options_Slider)
 	graphicsList:setVerticalCount(25)
 	graphicsList:setSpacing(0)
-	graphicsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	graphicsList:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	graphicsList:setDataSource("OptionGraphicsDevmenu")
 	self:addElement(graphicsList)
 	self.graphicsList = graphicsList

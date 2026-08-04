@@ -1,0 +1,293 @@
+require("ui/uieditor/widgets/buttonprogressringcontainer")
+require("ui/uieditor/widgets/footer/footerbutton_segmentbacking")
+CoD.FooterButton_BnetStore = InheritFrom(LUI.UIElement)
+CoD.FooterButton_BnetStore.__defaultWidth = 150
+CoD.FooterButton_BnetStore.__defaultHeight = 48
+CoD.FooterButton_BnetStore.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	self:setClass(CoD.FooterButton_BnetStore)
+	self.id = "FooterButton_BnetStore"
+	self.soundSet = "default"
+	self.anyChildUsesUpdateState = true
+	f1_arg0:addElementToPendingUpdateStateList(self)
+	local FooterButtonSegmentBacking = CoD.FooterButton_SegmentBacking.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 0, -3, 231)
+	self:addElement(FooterButtonSegmentBacking)
+	self.FooterButtonSegmentBacking = FooterButtonSegmentBacking
+	local GoldBG = LUI.UIImage.new(0, 1, 2, -2, 0, 0, -3, 68)
+	GoldBG:setAlpha(0)
+	GoldBG:setImage(RegisterImage("uie_pc_bnetstore_footerbtnbg"))
+	self:addElement(GoldBG)
+	self.GoldBG = GoldBG
+	local BG = LUI.UIImage.new(0, 1, 2, -2, 0, 0, 17, 65)
+	BG:setRGB(1, 0.75, 0.09)
+	self:addElement(BG)
+	self.BG = BG
+	local BackingTint = LUI.UIImage.new(0, 1, 2, -2, 0, 0, 17, 65)
+	BackingTint:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
+	BackingTint:setAlpha(0)
+	self:addElement(BackingTint)
+	self.BackingTint = BackingTint
+	local progressRing = CoD.ButtonProgressRingContainer.new(f1_arg0, f1_arg1, 0, 0, 18, 60, 0, 0, 3, 45)
+	self:addElement(progressRing)
+	self.progressRing = progressRing
+	local GlowImage = LUI.UIImage.new(0, 1, 2, -2, 0, 0, -48, 2)
+	GlowImage:setAlpha(0)
+	GlowImage:setImage(RegisterImage(@"hash_27B23E8B1ACF3472"))
+	self:addElement(GlowImage)
+	self.GlowImage = GlowImage
+	local Glowadictiv = LUI.UIImage.new(0, 1, 2, -2, 0, 0, -38, 12)
+	Glowadictiv:setAlpha(0)
+	Glowadictiv:setImage(RegisterImage(@"hash_27B23E8B1ACF3472"))
+	self:addElement(Glowadictiv)
+	self.Glowadictiv = Glowadictiv
+	local bigbar = LUI.UIImage.new(0, 1, 2, -2, 0, 0, 4, 12)
+	bigbar:setRGB(0.99, 0.84, 0.43)
+	self:addElement(bigbar)
+	self.bigbar = bigbar
+	local smallbar = LUI.UIImage.new(0, 1, 2, -2, 0, 0, 0, 2)
+	smallbar:setRGB(0.99, 0.84, 0.43)
+	self:addElement(smallbar)
+	self.smallbar = smallbar
+	local label = LUI.UIText.new(0, 0, 0, 200, 0.5, 0.5, 0, 21)
+	label:setRGB(0, 0, 0)
+	label:setText(LocalizeToUpperString("menu/store_caps"))
+	label:setTTF("ttmussels_demibold")
+	label:setLetterSpacing(4)
+	label:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	self:addElement(label)
+	self.label = label
+	local PreorderIcon = LUI.UIImage.new(0, 0, 7.5, 50.5, 0, 0, 19.5, 62.5)
+	PreorderIcon:setRGB(0, 0, 0)
+	PreorderIcon:setImage(RegisterImage("footerpreordericon"))
+	self:addElement(PreorderIcon)
+	self.PreorderIcon = PreorderIcon
+	self:mergeStateConditions({
+		{
+			stateName = "Disabled",
+			condition = function(menu, element, event)
+				return BattlenetStoreDisabled(f1_arg1)
+			end,
+		},
+		{
+			stateName = "Enabled",
+			condition = function(menu, element, event)
+				return true
+			end,
+		},
+	})
+	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
+	if PostLoadFunc then
+		PostLoadFunc(self, f1_arg1, f1_arg0)
+	end
+	local f1_local12 = self
+	CoD.PCUtility.SetupButtonPromptForPC(self, f1_arg1, f1_arg0)
+	DisableKeyboardNavigationByElement(self)
+	CoD.PCUtility.ResizeButtonWithImageAndLabel(self, f1_arg1, self.PreorderIcon, "8")
+	return self
+end
+CoD.FooterButton_BnetStore.__resetProperties = function(f4_arg0)
+	f4_arg0.progressRing:completeAnimation()
+	f4_arg0.label:completeAnimation()
+	f4_arg0.PreorderIcon:completeAnimation()
+	f4_arg0.GoldBG:completeAnimation()
+	f4_arg0.BG:completeAnimation()
+	f4_arg0.bigbar:completeAnimation()
+	f4_arg0.smallbar:completeAnimation()
+	f4_arg0.FooterButtonSegmentBacking:completeAnimation()
+	f4_arg0.GlowImage:completeAnimation()
+	f4_arg0.BackingTint:completeAnimation()
+	f4_arg0.Glowadictiv:completeAnimation()
+	f4_arg0.progressRing:setAlpha(1)
+	f4_arg0.label:setRGB(0, 0, 0)
+	f4_arg0.PreorderIcon:setRGB(0, 0, 0)
+	f4_arg0.PreorderIcon:setMaterial(LUI.UIImage.GetCachedMaterial("ui_normal"))
+	f4_arg0.GoldBG:setAlpha(0)
+	f4_arg0.BG:setAlpha(1)
+	f4_arg0.bigbar:setRGB(0.99, 0.84, 0.43)
+	f4_arg0.bigbar:setAlpha(1)
+	f4_arg0.smallbar:setRGB(0.99, 0.84, 0.43)
+	f4_arg0.smallbar:setAlpha(1)
+	f4_arg0.FooterButtonSegmentBacking:setAlpha(1)
+	f4_arg0.GlowImage:setAlpha(0)
+	f4_arg0.BackingTint:setAlpha(0)
+	f4_arg0.Glowadictiv:setAlpha(0)
+	f4_arg0.Glowadictiv:setImage(RegisterImage(@"hash_27B23E8B1ACF3472"))
+end
+CoD.FooterButton_BnetStore.__clipsPerState = {
+	DefaultState = {
+		DefaultClip = function(f5_arg0, f5_arg1)
+			f5_arg0:__resetProperties()
+			f5_arg0:setupElementClipCounter(1)
+			f5_arg0.progressRing:completeAnimation()
+			f5_arg0.progressRing:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.progressRing)
+		end,
+	},
+	Disabled = {
+		DefaultClip = function(f6_arg0, f6_arg1)
+			f6_arg0:__resetProperties()
+			f6_arg0:setupElementClipCounter(7)
+			f6_arg0.GoldBG:completeAnimation()
+			f6_arg0.GoldBG:setAlpha(0)
+			f6_arg0.clipFinished(f6_arg0.GoldBG)
+			f6_arg0.BG:completeAnimation()
+			f6_arg0.BG:setAlpha(0)
+			f6_arg0.clipFinished(f6_arg0.BG)
+			f6_arg0.progressRing:completeAnimation()
+			f6_arg0.progressRing:setAlpha(0)
+			f6_arg0.clipFinished(f6_arg0.progressRing)
+			f6_arg0.bigbar:completeAnimation()
+			f6_arg0.bigbar:setAlpha(0)
+			f6_arg0.clipFinished(f6_arg0.bigbar)
+			f6_arg0.smallbar:completeAnimation()
+			f6_arg0.smallbar:setAlpha(0)
+			f6_arg0.clipFinished(f6_arg0.smallbar)
+			f6_arg0.label:completeAnimation()
+			f6_arg0.label:setRGB(0.32, 0.32, 0.32)
+			f6_arg0.clipFinished(f6_arg0.label)
+			f6_arg0.PreorderIcon:completeAnimation()
+			f6_arg0.PreorderIcon:setRGB(0.29, 0.29, 0.29)
+			f6_arg0.PreorderIcon:setMaterial(LUI.UIImage.GetCachedMaterial("ui_normal"))
+			f6_arg0.clipFinished(f6_arg0.PreorderIcon)
+		end,
+	},
+	Enabled = {
+		DefaultClip = function(f7_arg0, f7_arg1)
+			f7_arg0:__resetProperties()
+			f7_arg0:setupElementClipCounter(3)
+			f7_arg0.FooterButtonSegmentBacking:completeAnimation()
+			f7_arg0.FooterButtonSegmentBacking:setAlpha(1)
+			f7_arg0.clipFinished(f7_arg0.FooterButtonSegmentBacking)
+			f7_arg0.progressRing:completeAnimation()
+			f7_arg0.progressRing:setAlpha(0)
+			f7_arg0.clipFinished(f7_arg0.progressRing)
+			f7_arg0.GlowImage:completeAnimation()
+			f7_arg0.GlowImage:setAlpha(0)
+			f7_arg0.clipFinished(f7_arg0.GlowImage)
+		end,
+		Hide = function(f8_arg0, f8_arg1)
+			f8_arg0:__resetProperties()
+			f8_arg0:setupElementClipCounter(1)
+			f8_arg0.progressRing:completeAnimation()
+			f8_arg0.progressRing:setAlpha(0)
+			f8_arg0.clipFinished(f8_arg0.progressRing)
+		end,
+		Focus = function(f9_arg0, f9_arg1)
+			f9_arg0:__resetProperties()
+			f9_arg0:setupElementClipCounter(7)
+			f9_arg0.FooterButtonSegmentBacking:completeAnimation()
+			f9_arg0.FooterButtonSegmentBacking:setAlpha(1)
+			f9_arg0.clipFinished(f9_arg0.FooterButtonSegmentBacking)
+			f9_arg0.BackingTint:completeAnimation()
+			f9_arg0.BackingTint:setAlpha(0.3)
+			f9_arg0.clipFinished(f9_arg0.BackingTint)
+			f9_arg0.progressRing:completeAnimation()
+			f9_arg0.progressRing:setAlpha(0)
+			f9_arg0.clipFinished(f9_arg0.progressRing)
+			f9_arg0.GlowImage:completeAnimation()
+			f9_arg0.GlowImage:setAlpha(1)
+			f9_arg0.clipFinished(f9_arg0.GlowImage)
+			f9_arg0.Glowadictiv:completeAnimation()
+			f9_arg0.Glowadictiv:setAlpha(0.35)
+			f9_arg0.Glowadictiv:setImage(RegisterImage("uie_director_mode_text_tab_glow_pc"))
+			f9_arg0.clipFinished(f9_arg0.Glowadictiv)
+			f9_arg0.bigbar:completeAnimation()
+			f9_arg0.bigbar:setRGB(1, 0.92, 0.7)
+			f9_arg0.bigbar:setAlpha(1)
+			f9_arg0.clipFinished(f9_arg0.bigbar)
+			f9_arg0.smallbar:completeAnimation()
+			f9_arg0.smallbar:setRGB(1, 0.92, 0.7)
+			f9_arg0.smallbar:setAlpha(1)
+			f9_arg0.clipFinished(f9_arg0.smallbar)
+		end,
+		GainFocus = function(f10_arg0, f10_arg1)
+			f10_arg0:__resetProperties()
+			f10_arg0:setupElementClipCounter(7)
+			f10_arg0.FooterButtonSegmentBacking:completeAnimation()
+			f10_arg0.FooterButtonSegmentBacking:setAlpha(1)
+			f10_arg0.clipFinished(f10_arg0.FooterButtonSegmentBacking)
+			f10_arg0.BackingTint:completeAnimation()
+			f10_arg0.BackingTint:setAlpha(0.3)
+			f10_arg0.clipFinished(f10_arg0.BackingTint)
+			f10_arg0.progressRing:completeAnimation()
+			f10_arg0.progressRing:setAlpha(0)
+			f10_arg0.clipFinished(f10_arg0.progressRing)
+			local f10_local0 = function(f11_arg0)
+				f10_arg0.GlowImage:beginAnimation(220)
+				f10_arg0.GlowImage:setAlpha(1)
+				f10_arg0.GlowImage:registerEventHandler("interrupted_keyframe", f10_arg0.clipInterrupted)
+				f10_arg0.GlowImage:registerEventHandler("transition_complete_keyframe", f10_arg0.clipFinished)
+			end
+			f10_arg0.GlowImage:completeAnimation()
+			f10_arg0.GlowImage:setAlpha(0)
+			f10_local0(f10_arg0.GlowImage)
+			local f10_local1 = function(f12_arg0)
+				f10_arg0.Glowadictiv:beginAnimation(140)
+				f10_arg0.Glowadictiv:setAlpha(0.35)
+				f10_arg0.Glowadictiv:registerEventHandler("interrupted_keyframe", f10_arg0.clipInterrupted)
+				f10_arg0.Glowadictiv:registerEventHandler("transition_complete_keyframe", f10_arg0.clipFinished)
+			end
+			f10_arg0.Glowadictiv:completeAnimation()
+			f10_arg0.Glowadictiv:setAlpha(0)
+			f10_arg0.Glowadictiv:setImage(RegisterImage("uie_director_mode_text_tab_glow_pc"))
+			f10_local1(f10_arg0.Glowadictiv)
+			f10_arg0.bigbar:completeAnimation()
+			f10_arg0.bigbar:setRGB(1, 0.92, 0.7)
+			f10_arg0.bigbar:setAlpha(1)
+			f10_arg0.clipFinished(f10_arg0.bigbar)
+			f10_arg0.smallbar:completeAnimation()
+			f10_arg0.smallbar:setRGB(1, 0.92, 0.7)
+			f10_arg0.smallbar:setAlpha(1)
+			f10_arg0.clipFinished(f10_arg0.smallbar)
+		end,
+		LoseFocus = function(f13_arg0, f13_arg1)
+			f13_arg0:__resetProperties()
+			f13_arg0:setupElementClipCounter(7)
+			f13_arg0.FooterButtonSegmentBacking:completeAnimation()
+			f13_arg0.FooterButtonSegmentBacking:setAlpha(1)
+			f13_arg0.clipFinished(f13_arg0.FooterButtonSegmentBacking)
+			f13_arg0.BackingTint:completeAnimation()
+			f13_arg0.BackingTint:setAlpha(0)
+			f13_arg0.clipFinished(f13_arg0.BackingTint)
+			f13_arg0.progressRing:completeAnimation()
+			f13_arg0.progressRing:setAlpha(0)
+			f13_arg0.clipFinished(f13_arg0.progressRing)
+			local f13_local0 = function(f14_arg0)
+				f13_arg0.GlowImage:beginAnimation(100)
+				f13_arg0.GlowImage:setAlpha(0)
+				f13_arg0.GlowImage:registerEventHandler("interrupted_keyframe", f13_arg0.clipInterrupted)
+				f13_arg0.GlowImage:registerEventHandler("transition_complete_keyframe", f13_arg0.clipFinished)
+			end
+			f13_arg0.GlowImage:completeAnimation()
+			f13_arg0.GlowImage:setAlpha(1)
+			f13_local0(f13_arg0.GlowImage)
+			local f13_local1 = function(f15_arg0)
+				f13_arg0.Glowadictiv:beginAnimation(100)
+				f13_arg0.Glowadictiv:setAlpha(0)
+				f13_arg0.Glowadictiv:setImage(RegisterImage(@"hash_27B23E8B1ACF3472"))
+				f13_arg0.Glowadictiv:registerEventHandler("interrupted_keyframe", f13_arg0.clipInterrupted)
+				f13_arg0.Glowadictiv:registerEventHandler("transition_complete_keyframe", f13_arg0.clipFinished)
+			end
+			f13_arg0.Glowadictiv:completeAnimation()
+			f13_arg0.Glowadictiv:setAlpha(0.35)
+			f13_arg0.Glowadictiv:setImage(RegisterImage("uie_director_mode_text_tab_glow_pc"))
+			f13_local1(f13_arg0.Glowadictiv)
+			f13_arg0.bigbar:completeAnimation()
+			f13_arg0.bigbar:setAlpha(1)
+			f13_arg0.clipFinished(f13_arg0.bigbar)
+			f13_arg0.smallbar:completeAnimation()
+			f13_arg0.smallbar:setAlpha(1)
+			f13_arg0.clipFinished(f13_arg0.smallbar)
+		end,
+	},
+}
+if not CoD.isPC then
+	CoD.FooterButton_BnetStore.__clipsPerState.Enabled.Focus = nil
+	CoD.FooterButton_BnetStore.__clipsPerState.Enabled.GainFocus = nil
+	CoD.FooterButton_BnetStore.__clipsPerState.Enabled.LoseFocus = nil
+end
+CoD.FooterButton_BnetStore.__onClose = function(f16_arg0)
+	f16_arg0.FooterButtonSegmentBacking:close()
+	f16_arg0.progressRing:close()
+	f16_arg0.PreorderIcon:close()
+end

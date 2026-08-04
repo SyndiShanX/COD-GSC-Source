@@ -1,4 +1,4 @@
-require("x64:7ecf7294ec3064f")
+require("ui/uieditor/widgets/startgameflow/tipwidgetbacking")
 require("x64:2d361ac3553c22a")
 CoD.TipWidgetList_WZ = InheritFrom(LUI.UIElement)
 CoD.TipWidgetList_WZ.__defaultWidth = 1735
@@ -15,7 +15,7 @@ CoD.TipWidgetList_WZ.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	TipLabel:setText(LocalizeToUpperString(@"mpui/tip"))
 	TipLabel:setTTF("ttmussels_demibold")
 	TipLabel:setLetterSpacing(5.5)
-	TipLabel:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
+	TipLabel:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum.LUIAlignment[@"lui_alignment_left"]))
 	self:addElement(TipLabel)
 	self.TipLabel = TipLabel
 	local TipWidgetBacking = CoD.TipWidgetBacking.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 0, 67, 127)

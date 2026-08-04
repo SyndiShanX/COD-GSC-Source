@@ -1,7 +1,7 @@
-require("x64:eeba57f916954d1")
-require("x64:228a7baa572b047")
-require("x64:5f8cf56752aa71b")
-require("x64:b9ad3e1e7c33125")
+require("ui/uieditor/widgets/cac/cac_lock")
+require("ui/uieditor/widgets/callingcards/callingcards_framewidget")
+require("ui/uieditor/widgets/commonbuttonoutline")
+require("ui/uieditor/widgets/startmenu/startmenu_identity_subtitle")
 CoD.StartMenu_Button_CallingCards_Internal = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Button_CallingCards_Internal.__defaultWidth = 420
 CoD.StartMenu_Button_CallingCards_Internal.__defaultHeight = 113
@@ -15,7 +15,7 @@ CoD.StartMenu_Button_CallingCards_Internal.new = function(f1_arg0, f1_arg1, f1_a
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local NoiseTiledBacking2 = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking2:setAlpha(0.5)
-	NoiseTiledBacking2:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking2:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	NoiseTiledBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking2:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking2:setupNineSliceShader(196, 88)
@@ -23,7 +23,7 @@ CoD.StartMenu_Button_CallingCards_Internal.new = function(f1_arg0, f1_arg1, f1_a
 	self.NoiseTiledBacking2 = NoiseTiledBacking2
 	local NoiseTiledBackingAdd = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBackingAdd:setAlpha(0.2)
-	NoiseTiledBackingAdd:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBackingAdd:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	NoiseTiledBackingAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_67C9C02F608D0A75"))
 	NoiseTiledBackingAdd:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBackingAdd:setupNineSliceShader(196, 88)
@@ -45,10 +45,10 @@ CoD.StartMenu_Button_CallingCards_Internal.new = function(f1_arg0, f1_arg1, f1_a
 	self:addElement(Spinner)
 	self.Spinner = Spinner
 	local Title = LUI.UIText.new(0, 0, 17.5, 326.5, 1, 1, -36.5, -3.5)
-	Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/multiplayer"))
+	Title:setText(Engine[@"hash_4F9F1239CFD921FE"]("menu/multiplayer"))
 	Title:setTTF("ttmussels_demibold")
-	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	Title:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	Title:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(Title)
 	self.Title = Title
 	local Subtitle = CoD.StartMenu_Identity_SubTitle.new(f1_arg0, f1_arg1, 0, 0, 3, 551, 0, 0, 0.5, 39.5)
@@ -133,8 +133,8 @@ CoD.StartMenu_Button_CallingCards_Internal.new = function(f1_arg0, f1_arg1, f1_a
 	local ImageText = LUI.UIText.new(0, 1, 0, 0, 0, 0, 3.5, 33.5)
 	ImageText:setText("")
 	ImageText:setTTF("default")
-	ImageText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	ImageText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	ImageText:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	ImageText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(ImageText)
 	self.ImageText = ImageText
 	local BorderOutline = CoD.CommonButtonOutline.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)

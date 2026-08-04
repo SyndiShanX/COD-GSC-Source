@@ -12,12 +12,12 @@ CoD.PCSocialMenu_PlayerListItem_PlayerInfos_InviteButton.new = function(f1_arg0,
 	self:addElement(ButtonBG)
 	self.ButtonBG = ButtonBG
 	local InviteIcon = LUI.UIImage.new(0.15, 0.85, 0, 0, 0.1, 0.8, 0, 0)
-	InviteIcon:setImage(RegisterImage(@"uie_add_icon"))
+	InviteIcon:setImage(RegisterImage("uie_add_icon"))
 	self:addElement(InviteIcon)
 	self.InviteIcon = InviteIcon
 	local NineSliceShaderImage = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	NineSliceShaderImage:setImage(RegisterImage(@"uie_borderbutton2_9s"))
-	NineSliceShaderImage:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
+	NineSliceShaderImage:setImage(RegisterImage("uie_borderbutton2_9s"))
+	NineSliceShaderImage:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_normal"))
 	NineSliceShaderImage:setShaderVector(0, 0, 0, 0, 0)
 	NineSliceShaderImage:setupNineSliceShader(14, 14)
 	self:addElement(NineSliceShaderImage)

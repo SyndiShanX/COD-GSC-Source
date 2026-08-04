@@ -8,43 +8,43 @@ CoD[@"hash_43E8AA265071E59F"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(@"uie_ui_icon_callingcards_zombies_100percent_background"))
-	bg:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
+	bg:setImage(RegisterImage("uie_ui_icon_callingcards_zombies_100percent_background"))
+	bg:setMaterial(LUI.UIImage.GetCachedMaterial("uie_tile_scroll_normal"))
 	bg:setShaderVector(0, 1, 1, 0, 0)
 	bg:setShaderVector(1, 0.03, 0, 0, 0)
 	self:addElement(bg)
 	self.bg = bg
 	local earthlive = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	earthlive:setImage(RegisterImage(@"uie_ui_icon_callingcards_zombies_100percent_earth_live"))
+	earthlive:setImage(RegisterImage("uie_ui_icon_callingcards_zombies_100percent_earth_live"))
 	self:addElement(earthlive)
 	self.earthlive = earthlive
 	local earthdead = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	earthdead:setImage(RegisterImage(@"uie_ui_icon_callingcards_zombies_100percent_earth_dead"))
+	earthdead:setImage(RegisterImage("uie_ui_icon_callingcards_zombies_100percent_earth_dead"))
 	self:addElement(earthdead)
 	self.earthdead = earthdead
 	local zombiehand1 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	zombiehand1:setImage(RegisterImage(@"uie_ui_icon_callingcards_zombies_100percent_zombiehand1"))
+	zombiehand1:setImage(RegisterImage("uie_ui_icon_callingcards_zombies_100percent_zombiehand1"))
 	self:addElement(zombiehand1)
 	self.zombiehand1 = zombiehand1
 	local zombiehand2 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	zombiehand2:setImage(RegisterImage(@"uie_ui_icon_callingcards_zombies_100percent_zombiehand2"))
+	zombiehand2:setImage(RegisterImage("uie_ui_icon_callingcards_zombies_100percent_zombiehand2"))
 	self:addElement(zombiehand2)
 	self.zombiehand2 = zombiehand2
 	local zombiehand3 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	zombiehand3:setImage(RegisterImage(@"uie_ui_icon_callingcards_zombies_100percent_zombiehand3"))
+	zombiehand3:setImage(RegisterImage("uie_ui_icon_callingcards_zombies_100percent_zombiehand3"))
 	self:addElement(zombiehand3)
 	self.zombiehand3 = zombiehand3
 	local zombiehand4 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	zombiehand4:setImage(RegisterImage(@"uie_ui_icon_callingcards_zombies_100percent_zombiehand4"))
+	zombiehand4:setImage(RegisterImage("uie_ui_icon_callingcards_zombies_100percent_zombiehand4"))
 	self:addElement(zombiehand4)
 	self.zombiehand4 = zombiehand4
 	local zombiehand5 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	zombiehand5:setImage(RegisterImage(@"uie_ui_icon_callingcards_zombies_100percent_zombiehand5"))
+	zombiehand5:setImage(RegisterImage("uie_ui_icon_callingcards_zombies_100percent_zombiehand5"))
 	self:addElement(zombiehand5)
 	self.zombiehand5 = zombiehand5
 	local cropper = LUI.UIImage.new(0, 0, -32, 992, 0, 0, -392, 632)
 	cropper:setAlpha(0)
-	cropper:setImage(RegisterImage(@"uie_stage_crop_prop"))
+	cropper:setImage(RegisterImage("uie_stage_crop_prop"))
 	self:addElement(cropper)
 	self.cropper = cropper
 	if PostLoadFunc then

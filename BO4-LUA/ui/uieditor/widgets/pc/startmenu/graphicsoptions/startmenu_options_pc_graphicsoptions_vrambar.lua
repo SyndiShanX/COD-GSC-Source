@@ -1,5 +1,5 @@
-require("x64:2675595fa323085")
-require("x64:55aca670e9903a3")
+require("ui/uieditor/widgets/emptyfocusable")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmaincorners")
 CoD.StartMenu_Options_PC_GraphicsOptions_VRAMBar = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Options_PC_GraphicsOptions_VRAMBar.__defaultWidth = 366
 CoD.StartMenu_Options_PC_GraphicsOptions_VRAMBar.__defaultHeight = 45
@@ -13,10 +13,10 @@ CoD.StartMenu_Options_PC_GraphicsOptions_VRAMBar.new = function(f1_arg0, f1_arg1
 	local Maximum = LUI.UIText.new(1, 1, -125, 0, 0.5, 0.5, 12.5, 27.5)
 	Maximum:setRGB(0.76, 0.76, 0.76)
 	Maximum:setAlpha(0.44)
-	Maximum:setText(LocalizeToUpperString(0x4EF66575DDB929))
+	Maximum:setText(LocalizeToUpperString("mpui/max_caps"))
 	Maximum:setTTF("dinnext_regular")
 	Maximum:setLetterSpacing(1)
-	Maximum:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	Maximum:setAlignment(Enum.LUIAlignment[@"lui_alignment_right"])
 	self:addElement(Maximum)
 	self.Maximum = Maximum
 	local FilledBarBackground = LUI.UIImage.new(0, 1, 0, 0, 0.5, 0.5, -3, 5)
@@ -42,7 +42,7 @@ CoD.StartMenu_Options_PC_GraphicsOptions_VRAMBar.new = function(f1_arg0, f1_arg1
 	local OverflowIndicator4 = LUI.UIImage.new(1, 1, -4, 26, 0.5, 0.5, -32, -2)
 	OverflowIndicator4:setRGB(0.76, 0.76, 0.76)
 	OverflowIndicator4:setAlpha(0.44)
-	OverflowIndicator4:setImage(RegisterImage(@"uie_warning_small"))
+	OverflowIndicator4:setImage(RegisterImage("uie_warning_small"))
 	self:addElement(OverflowIndicator4)
 	self.OverflowIndicator4 = OverflowIndicator4
 	local Corners = CoD.StartMenuOptionsMainCorners.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0.5, 0.5, -3, 5)
@@ -55,8 +55,8 @@ CoD.StartMenu_Options_PC_GraphicsOptions_VRAMBar.new = function(f1_arg0, f1_arg1
 	TextBox:setText(LocalizeToUpperString(@"hash_5CCC02F6B5D8DCE1"))
 	TextBox:setTTF("dinnext_regular")
 	TextBox:setLetterSpacing(1)
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	local MbUsage = LUI.UIText.new(1, 1, -125, 0, 0.5, 0.5, -24.5, -7.5)
@@ -65,7 +65,7 @@ CoD.StartMenu_Options_PC_GraphicsOptions_VRAMBar.new = function(f1_arg0, f1_arg1
 	MbUsage:setText(LocalizeToUpperString(@"hash_5BF86D864C077F3E"))
 	MbUsage:setTTF("dinnext_regular")
 	MbUsage:setLetterSpacing(1)
-	MbUsage:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	MbUsage:setAlignment(Enum.LUIAlignment[@"lui_alignment_right"])
 	self:addElement(MbUsage)
 	self.MbUsage = MbUsage
 	local RecommendedLimit = LUI.UIImage.new(0, 0, 284, 285, 0.5, 0.5, -3, 5)

@@ -1,5 +1,5 @@
-require("x64:84662ffcdea628")
-require("x64:9882d5cfd382409")
+require("ui/uieditor/widgets/pc/utility/optioninfowidget")
+require("ui/uieditor/widgets/startmenu/startmenu_options_checkboxoption")
 local PostLoadFunc = function(self, controller)
 	self:dispatchEventToChildren({
 		name = "options_refresh",
@@ -22,7 +22,7 @@ CoD.StartMenu_Options_PC_GamepadControls.new = function(f2_arg0, f2_arg1, f2_arg
 	keybindList:setWidgetType(CoD.StartMenu_Options_CheckBoxOption)
 	keybindList:setVerticalCount(7)
 	keybindList:setSpacing(0)
-	keybindList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	keybindList:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	keybindList:setDataSource("OptionGamepadSettingsPC")
 	self:addElement(keybindList)
 	self.keybindList = keybindList

@@ -7,7 +7,7 @@ CoD.callingcards_loot2_warriorcreatures_tail.new = function(f1_arg0, f1_arg1, f1
 	self.id = "callingcards_loot2_warriorcreatures_tail"
 	self.soundSet = "default"
 	local tail = LUI.UIImage.new(0, 0, -15, 153, 0, 0, -159, 41)
-	tail:setImage(RegisterImage(@"uie_ui_menu_callingcards_warriorcreatures_tail"))
+	tail:setImage(RegisterImage("uie_ui_menu_callingcards_warriorcreatures_tail"))
 	self:addElement(tail)
 	self.tail = tail
 	if PostLoadFunc then

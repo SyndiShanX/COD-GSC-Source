@@ -1,4 +1,4 @@
-require("x64:b79410dc8d1ea84")
+require("ui/uieditor/widgets/pc/startmenu/pc_highlightborder")
 CoD.PC_SocialMenu_DropDownListItem = InheritFrom(LUI.UIElement)
 CoD.PC_SocialMenu_DropDownListItem.__defaultWidth = 336
 CoD.PC_SocialMenu_DropDownListItem.__defaultHeight = 35
@@ -21,8 +21,8 @@ CoD.PC_SocialMenu_DropDownListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	TextBox:setRGB(0.76, 0.76, 0.76)
 	TextBox:setTTF("ttmussels_regular")
 	TextBox:setLetterSpacing(1)
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	TextBox:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"hash_E821F0ECFF8D1C7"])
 	TextBox:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -51,8 +51,8 @@ CoD.PC_SocialMenu_DropDownListItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	GlowAdd:setAlpha(0)
 	GlowAdd:setZRot(-90)
 	GlowAdd:setScale(0.34, 0.48)
-	GlowAdd:setImage(RegisterImage(@"uie_icon_frontend_navigation_glowmed"))
-	GlowAdd:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	GlowAdd:setImage(RegisterImage("uie_icon_frontend_navigation_glowmed"))
+	GlowAdd:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(GlowAdd)
 	self.GlowAdd = GlowAdd
 	self:mergeStateConditions({

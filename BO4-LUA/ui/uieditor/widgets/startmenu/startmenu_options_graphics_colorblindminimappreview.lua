@@ -8,7 +8,7 @@ CoD.StartMenu_Options_Graphics_ColorBlindMinimapPreview.new = function(f1_arg0, 
 	self.id = "StartMenu_Options_Graphics_ColorBlindMinimapPreview"
 	self.soundSet = "default"
 	local minimap = LUI.UIImage.new(0, 0, 0, 750, 0, 0, 0, 282)
-	minimap:setImage(RegisterImage(@"uie_t7_mp_sector_color_blind_map"))
+	minimap:setImage(RegisterImage("uie_t7_mp_sector_color_blind_map"))
 	self:addElement(minimap)
 	self.minimap = minimap
 	local playerArrow = LUI.UIImage.new(0, 0, 100, 134, 0, 0, 341, 375)
@@ -16,7 +16,7 @@ CoD.StartMenu_Options_Graphics_ColorBlindMinimapPreview.new = function(f1_arg0, 
 		playerArrow:setRGB(GetColorBlindSafeColorFromBase("PlayerYellow", f1_arg1, 1, 1, 1))
 	end
 	playerArrow.__Color()
-	playerArrow:setImage(RegisterImage(@"t7_hud_waypoints_compassping_player"))
+	playerArrow:setImage(RegisterImage("t7_hud_waypoints_compassping_player"))
 	self:addElement(playerArrow)
 	self.playerArrow = playerArrow
 	local playerScorestreakDiamond = LUI.UIImage.new(0, 0, 146.5, 180.5, 0, 0, 341, 375)
@@ -24,7 +24,7 @@ CoD.StartMenu_Options_Graphics_ColorBlindMinimapPreview.new = function(f1_arg0, 
 		playerScorestreakDiamond:setRGB(GetColorBlindSafeColorFromBase("PlayerYellow", f1_arg1, 1, 1, 1))
 	end
 	playerScorestreakDiamond.__Color()
-	playerScorestreakDiamond:setImage(RegisterImage(@"uie_t7_hud_enemysatellite_diamond_top_small"))
+	playerScorestreakDiamond:setImage(RegisterImage("uie_t7_hud_enemysatellite_diamond_top_small"))
 	self:addElement(playerScorestreakDiamond)
 	self.playerScorestreakDiamond = playerScorestreakDiamond
 	local friendlyArrow = LUI.UIImage.new(0, 0, 358, 392, 0, 0, 341, 375)
@@ -32,7 +32,7 @@ CoD.StartMenu_Options_Graphics_ColorBlindMinimapPreview.new = function(f1_arg0, 
 		friendlyArrow:setRGB(GetColorBlindSafeColorFromBase("FriendlyBlue", f1_arg1, 1, 1, 1))
 	end
 	friendlyArrow.__Color()
-	friendlyArrow:setImage(RegisterImage(@"t7_hud_waypoints_compassping_friendly_mp"))
+	friendlyArrow:setImage(RegisterImage("t7_hud_waypoints_compassping_friendly_mp"))
 	self:addElement(friendlyArrow)
 	self.friendlyArrow = friendlyArrow
 	local friendlyPartyArrow = LUI.UIImage.new(0, 0, 310, 344, 0, 0, 341, 375)
@@ -40,7 +40,7 @@ CoD.StartMenu_Options_Graphics_ColorBlindMinimapPreview.new = function(f1_arg0, 
 		friendlyPartyArrow:setRGB(GetColorBlindSafeColorFromBase("PartyFriendlyBlue", f1_arg1, 1, 1, 1))
 	end
 	friendlyPartyArrow.__Color()
-	friendlyPartyArrow:setImage(RegisterImage(@"t7_hud_waypoints_compassping_friendly_mp"))
+	friendlyPartyArrow:setImage(RegisterImage("t7_hud_waypoints_compassping_friendly_mp"))
 	self:addElement(friendlyPartyArrow)
 	self.friendlyPartyArrow = friendlyPartyArrow
 	local friendlyObjective = LUI.UIImage.new(0, 0, 406, 440, 0, 0, 341, 375)
@@ -56,7 +56,7 @@ CoD.StartMenu_Options_Graphics_ColorBlindMinimapPreview.new = function(f1_arg0, 
 		enemyArrow:setRGB(GetColorBlindSafeColorFromBase("EnemyOrange", f1_arg1, 1, 1, 1))
 	end
 	enemyArrow.__Color()
-	enemyArrow:setImage(RegisterImage(@"t7_hud_waypoints_compassping_enemydirectional"))
+	enemyArrow:setImage(RegisterImage("t7_hud_waypoints_compassping_enemydirectional"))
 	self:addElement(enemyArrow)
 	self.enemyArrow = enemyArrow
 	local enemyObjective = LUI.UIImage.new(0, 0, 593, 627, 0, 0, 341, 375)
@@ -72,7 +72,7 @@ CoD.StartMenu_Options_Graphics_ColorBlindMinimapPreview.new = function(f1_arg0, 
 		enemyScorestreakDiamond:setRGB(GetColorBlindSafeColorFromBase("EnemyScorestreakTarget", f1_arg1, 1, 1, 1))
 	end
 	enemyScorestreakDiamond.__Color()
-	enemyScorestreakDiamond:setImage(RegisterImage(@"uie_t7_hud_enemysatellite_diamond_top_small"))
+	enemyScorestreakDiamond:setImage(RegisterImage("uie_t7_hud_enemysatellite_diamond_top_small"))
 	self:addElement(enemyScorestreakDiamond)
 	self.enemyScorestreakDiamond = enemyScorestreakDiamond
 	local playerHeader = LUI.UIText.new(0, 0, -9, 291, 0, 0, 305.5, 326.5)
@@ -80,10 +80,10 @@ CoD.StartMenu_Options_Graphics_ColorBlindMinimapPreview.new = function(f1_arg0, 
 		playerHeader:setRGB(GetColorBlindSafeColorFromBase("PlayerYellow", f1_arg1, 1, 1, 1))
 	end
 	playerHeader.__Color()
-	playerHeader:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_51F9844545CB4FF6"))
+	playerHeader:setText(Engine[@"hash_4F9F1239CFD921FE"]("menu/you_caps"))
 	playerHeader:setTTF("ttmussels_regular")
-	playerHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	playerHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
+	playerHeader:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	playerHeader:setAlignment(Enum.LUIAlignment[@"lui_alignment_bottom"])
 	self:addElement(playerHeader)
 	self.playerHeader = playerHeader
 	local friendlyHeader = LUI.UIText.new(0, 0, 225, 525, 0, 0, 305.5, 326.5)
@@ -93,8 +93,8 @@ CoD.StartMenu_Options_Graphics_ColorBlindMinimapPreview.new = function(f1_arg0, 
 	friendlyHeader.__Color()
 	friendlyHeader:setText(LocalizeToUpperString(@"menu/friendly"))
 	friendlyHeader:setTTF("ttmussels_regular")
-	friendlyHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	friendlyHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
+	friendlyHeader:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	friendlyHeader:setAlignment(Enum.LUIAlignment[@"lui_alignment_bottom"])
 	self:addElement(friendlyHeader)
 	self.friendlyHeader = friendlyHeader
 	local enemyHeader = LUI.UIText.new(0, 0, 460, 760, 0, 0, 305.5, 326.5)
@@ -104,8 +104,8 @@ CoD.StartMenu_Options_Graphics_ColorBlindMinimapPreview.new = function(f1_arg0, 
 	enemyHeader.__Color()
 	enemyHeader:setText(LocalizeToUpperString(@"menu/enemy"))
 	enemyHeader:setTTF("ttmussels_regular")
-	enemyHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	enemyHeader:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
+	enemyHeader:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	enemyHeader:setAlignment(Enum.LUIAlignment[@"lui_alignment_bottom"])
 	self:addElement(enemyHeader)
 	self.enemyHeader = enemyHeader
 	local minimapPlayerArrow = LUI.UIImage.new(0, 0, 62, 110, 0, 0, 130, 178)
@@ -114,7 +114,7 @@ CoD.StartMenu_Options_Graphics_ColorBlindMinimapPreview.new = function(f1_arg0, 
 	end
 	minimapPlayerArrow.__Color()
 	minimapPlayerArrow:setZRot(-90)
-	minimapPlayerArrow:setImage(RegisterImage(@"t7_hud_waypoints_compassping_player"))
+	minimapPlayerArrow:setImage(RegisterImage("t7_hud_waypoints_compassping_player"))
 	self:addElement(minimapPlayerArrow)
 	self.minimapPlayerArrow = minimapPlayerArrow
 	local minimapFriendlyPlayerArrow = LUI.UIImage.new(0, 0, 117, 165, 0, 0, 104, 152)
@@ -123,7 +123,7 @@ CoD.StartMenu_Options_Graphics_ColorBlindMinimapPreview.new = function(f1_arg0, 
 	end
 	minimapFriendlyPlayerArrow.__Color()
 	minimapFriendlyPlayerArrow:setZRot(-34)
-	minimapFriendlyPlayerArrow:setImage(RegisterImage(@"t7_hud_waypoints_compassping_friendly_mp"))
+	minimapFriendlyPlayerArrow:setImage(RegisterImage("t7_hud_waypoints_compassping_friendly_mp"))
 	self:addElement(minimapFriendlyPlayerArrow)
 	self.minimapFriendlyPlayerArrow = minimapFriendlyPlayerArrow
 	local minimapPartyFriendlyPlayerArrow = LUI.UIImage.new(0, 0, 279, 327, 0, 0, 171, 219)
@@ -132,7 +132,7 @@ CoD.StartMenu_Options_Graphics_ColorBlindMinimapPreview.new = function(f1_arg0, 
 	end
 	minimapPartyFriendlyPlayerArrow.__Color()
 	minimapPartyFriendlyPlayerArrow:setZRot(-34)
-	minimapPartyFriendlyPlayerArrow:setImage(RegisterImage(@"t7_hud_waypoints_compassping_friendly_mp"))
+	minimapPartyFriendlyPlayerArrow:setImage(RegisterImage("t7_hud_waypoints_compassping_friendly_mp"))
 	self:addElement(minimapPartyFriendlyPlayerArrow)
 	self.minimapPartyFriendlyPlayerArrow = minimapPartyFriendlyPlayerArrow
 	local minimapEnemyPing1 = LUI.UIImage.new(0, 0, 303, 351, 0, 0, 123, 171)
@@ -140,7 +140,7 @@ CoD.StartMenu_Options_Graphics_ColorBlindMinimapPreview.new = function(f1_arg0, 
 		minimapEnemyPing1:setRGB(GetColorBlindSafeColorFromBase("EnemyOrange", f1_arg1, 1, 1, 1))
 	end
 	minimapEnemyPing1.__Color()
-	minimapEnemyPing1:setImage(RegisterImage(@"t7_hud_waypoints_compassping_enemy"))
+	minimapEnemyPing1:setImage(RegisterImage("t7_hud_waypoints_compassping_enemy"))
 	self:addElement(minimapEnemyPing1)
 	self.minimapEnemyPing1 = minimapEnemyPing1
 	local minimapEnemyPing2 = LUI.UIImage.new(0, 0, 412, 460, 0, 0, 93, 141)
@@ -148,7 +148,7 @@ CoD.StartMenu_Options_Graphics_ColorBlindMinimapPreview.new = function(f1_arg0, 
 		minimapEnemyPing2:setRGB(GetColorBlindSafeColorFromBase("EnemyOrange", f1_arg1, 1, 1, 1))
 	end
 	minimapEnemyPing2.__Color()
-	minimapEnemyPing2:setImage(RegisterImage(@"t7_hud_waypoints_compassping_enemy"))
+	minimapEnemyPing2:setImage(RegisterImage("t7_hud_waypoints_compassping_enemy"))
 	self:addElement(minimapEnemyPing2)
 	self.minimapEnemyPing2 = minimapEnemyPing2
 	local minimapEnemyPing3 = LUI.UIImage.new(0, 0, 538, 586, 0, 0, 159, 207)
@@ -156,7 +156,7 @@ CoD.StartMenu_Options_Graphics_ColorBlindMinimapPreview.new = function(f1_arg0, 
 		minimapEnemyPing3:setRGB(GetColorBlindSafeColorFromBase("EnemyOrange", f1_arg1, 1, 1, 1))
 	end
 	minimapEnemyPing3.__Color()
-	minimapEnemyPing3:setImage(RegisterImage(@"t7_hud_waypoints_compassping_enemy"))
+	minimapEnemyPing3:setImage(RegisterImage("t7_hud_waypoints_compassping_enemy"))
 	self:addElement(minimapEnemyPing3)
 	self.minimapEnemyPing3 = minimapEnemyPing3
 	local objectivePointA = LUI.UIImage.new(0, 0, 135, 183, 0, 0, 146, 194)
@@ -164,11 +164,11 @@ CoD.StartMenu_Options_Graphics_ColorBlindMinimapPreview.new = function(f1_arg0, 
 		objectivePointA:setRGB(GetColorBlindSafeColorFromBase("FriendlyBlue", f1_arg1, 1, 1, 1))
 	end
 	objectivePointA.__Color()
-	objectivePointA:setImage(RegisterImage(@"t7_hud_waypoints_neutral_new_a_mini"))
+	objectivePointA:setImage(RegisterImage("t7_hud_waypoints_neutral_new_a_mini"))
 	self:addElement(objectivePointA)
 	self.objectivePointA = objectivePointA
 	local objectivePointB = LUI.UIImage.new(0, 0, 342, 390, 0, 0, 122, 170)
-	objectivePointB:setImage(RegisterImage(@"t7_hud_waypoints_neutral_new_b_mini"))
+	objectivePointB:setImage(RegisterImage("t7_hud_waypoints_neutral_new_b_mini"))
 	self:addElement(objectivePointB)
 	self.objectivePointB = objectivePointB
 	local objectivePointC = LUI.UIImage.new(0, 0, 532, 580, 0, 0, 99, 147)
@@ -176,84 +176,84 @@ CoD.StartMenu_Options_Graphics_ColorBlindMinimapPreview.new = function(f1_arg0, 
 		objectivePointC:setRGB(GetColorBlindSafeColorFromBase("EnemyOrange", f1_arg1, 1, 1, 1))
 	end
 	objectivePointC.__Color()
-	objectivePointC:setImage(RegisterImage(@"t7_hud_waypoints_neutral_new_c_mini"))
+	objectivePointC:setImage(RegisterImage("t7_hud_waypoints_neutral_new_c_mini"))
 	self:addElement(objectivePointC)
 	self.objectivePointC = objectivePointC
 	local f1_local22 = playerArrow
 	local f1_local23 = playerArrow.subscribeToModel
-	local f1_local24 = Engine[@"getmodelforcontroller"](f1_arg1)
+	local f1_local24 = Engine.GetModelForController(f1_arg1)
 	f1_local23(f1_local22, f1_local24["profile.colorblindMode"], playerArrow.__Color)
 	f1_local22 = playerScorestreakDiamond
 	f1_local23 = playerScorestreakDiamond.subscribeToModel
-	f1_local24 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local24 = Engine.GetModelForController(f1_arg1)
 	f1_local23(f1_local22, f1_local24["profile.colorblindMode"], playerScorestreakDiamond.__Color)
 	f1_local22 = friendlyArrow
 	f1_local23 = friendlyArrow.subscribeToModel
-	f1_local24 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local24 = Engine.GetModelForController(f1_arg1)
 	f1_local23(f1_local22, f1_local24["profile.colorblindMode"], friendlyArrow.__Color)
 	f1_local22 = friendlyPartyArrow
 	f1_local23 = friendlyPartyArrow.subscribeToModel
-	f1_local24 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local24 = Engine.GetModelForController(f1_arg1)
 	f1_local23(f1_local22, f1_local24["profile.colorblindMode"], friendlyPartyArrow.__Color)
 	f1_local22 = friendlyObjective
 	f1_local23 = friendlyObjective.subscribeToModel
-	f1_local24 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local24 = Engine.GetModelForController(f1_arg1)
 	f1_local23(f1_local22, f1_local24["profile.colorblindMode"], friendlyObjective.__Color)
 	f1_local22 = enemyArrow
 	f1_local23 = enemyArrow.subscribeToModel
-	f1_local24 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local24 = Engine.GetModelForController(f1_arg1)
 	f1_local23(f1_local22, f1_local24["profile.colorblindMode"], enemyArrow.__Color)
 	f1_local22 = enemyObjective
 	f1_local23 = enemyObjective.subscribeToModel
-	f1_local24 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local24 = Engine.GetModelForController(f1_arg1)
 	f1_local23(f1_local22, f1_local24["profile.colorblindMode"], enemyObjective.__Color)
 	f1_local22 = enemyScorestreakDiamond
 	f1_local23 = enemyScorestreakDiamond.subscribeToModel
-	f1_local24 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local24 = Engine.GetModelForController(f1_arg1)
 	f1_local23(f1_local22, f1_local24["profile.colorblindMode"], enemyScorestreakDiamond.__Color)
 	f1_local22 = playerHeader
 	f1_local23 = playerHeader.subscribeToModel
-	f1_local24 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local24 = Engine.GetModelForController(f1_arg1)
 	f1_local23(f1_local22, f1_local24["profile.colorblindMode"], playerHeader.__Color)
 	f1_local22 = friendlyHeader
 	f1_local23 = friendlyHeader.subscribeToModel
-	f1_local24 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local24 = Engine.GetModelForController(f1_arg1)
 	f1_local23(f1_local22, f1_local24["profile.colorblindMode"], friendlyHeader.__Color)
 	f1_local22 = enemyHeader
 	f1_local23 = enemyHeader.subscribeToModel
-	f1_local24 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local24 = Engine.GetModelForController(f1_arg1)
 	f1_local23(f1_local22, f1_local24["profile.colorblindMode"], enemyHeader.__Color)
 	f1_local22 = minimapPlayerArrow
 	f1_local23 = minimapPlayerArrow.subscribeToModel
-	f1_local24 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local24 = Engine.GetModelForController(f1_arg1)
 	f1_local23(f1_local22, f1_local24["profile.colorblindMode"], minimapPlayerArrow.__Color)
 	f1_local22 = minimapFriendlyPlayerArrow
 	f1_local23 = minimapFriendlyPlayerArrow.subscribeToModel
-	f1_local24 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local24 = Engine.GetModelForController(f1_arg1)
 	f1_local23(f1_local22, f1_local24["profile.colorblindMode"], minimapFriendlyPlayerArrow.__Color)
 	f1_local22 = minimapPartyFriendlyPlayerArrow
 	f1_local23 = minimapPartyFriendlyPlayerArrow.subscribeToModel
-	f1_local24 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local24 = Engine.GetModelForController(f1_arg1)
 	f1_local23(f1_local22, f1_local24["profile.colorblindMode"], minimapPartyFriendlyPlayerArrow.__Color)
 	f1_local22 = minimapEnemyPing1
 	f1_local23 = minimapEnemyPing1.subscribeToModel
-	f1_local24 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local24 = Engine.GetModelForController(f1_arg1)
 	f1_local23(f1_local22, f1_local24["profile.colorblindMode"], minimapEnemyPing1.__Color)
 	f1_local22 = minimapEnemyPing2
 	f1_local23 = minimapEnemyPing2.subscribeToModel
-	f1_local24 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local24 = Engine.GetModelForController(f1_arg1)
 	f1_local23(f1_local22, f1_local24["profile.colorblindMode"], minimapEnemyPing2.__Color)
 	f1_local22 = minimapEnemyPing3
 	f1_local23 = minimapEnemyPing3.subscribeToModel
-	f1_local24 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local24 = Engine.GetModelForController(f1_arg1)
 	f1_local23(f1_local22, f1_local24["profile.colorblindMode"], minimapEnemyPing3.__Color)
 	f1_local22 = objectivePointA
 	f1_local23 = objectivePointA.subscribeToModel
-	f1_local24 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local24 = Engine.GetModelForController(f1_arg1)
 	f1_local23(f1_local22, f1_local24["profile.colorblindMode"], objectivePointA.__Color)
 	f1_local22 = objectivePointC
 	f1_local23 = objectivePointC.subscribeToModel
-	f1_local24 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local24 = Engine.GetModelForController(f1_arg1)
 	f1_local23(f1_local22, f1_local24["profile.colorblindMode"], objectivePointC.__Color)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
 	if PostLoadFunc then

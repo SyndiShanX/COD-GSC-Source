@@ -1,4 +1,4 @@
-require("x64:ac1be6f056b0dfb")
+require("ui/uieditor/widgets/startmenu/startmenu_button_emblem_internal")
 CoD.StartMenu_Button_Emblem = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Button_Emblem.__defaultWidth = 555
 CoD.StartMenu_Button_Emblem.__defaultHeight = 210

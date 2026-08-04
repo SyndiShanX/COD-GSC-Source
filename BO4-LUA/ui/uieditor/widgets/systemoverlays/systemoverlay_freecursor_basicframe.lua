@@ -1,6 +1,6 @@
-require("x64:40b72231fbc0534")
-require("x64:a9d9ad002907d62")
-require("x64:e1b76d902bbc762")
+require("ui/uieditor/widgets/systemoverlays/systemoverlay_freecursor_genericforeground")
+require("ui/uieditor/widgets/systemoverlays/systemoverlay_supportwidget")
+require("ui/uieditor/widgets/systemoverlays/systemoverlay_layout_genericforeground_pc")
 CoD.systemOverlay_FreeCursor_BasicFrame = InheritFrom(LUI.UIElement)
 CoD.systemOverlay_FreeCursor_BasicFrame.__defaultWidth = 1920
 CoD.systemOverlay_FreeCursor_BasicFrame.__defaultHeight = 286

@@ -1,5 +1,5 @@
-require("x64:55aca670e9903a3")
-require("x64:a9255c570c68aa8")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmaincorners")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmainframe")
 CoD.StartMenuOptionsHeader = InheritFrom(LUI.UIElement)
 CoD.StartMenuOptionsHeader.__defaultWidth = 1920
 CoD.StartMenuOptionsHeader.__defaultHeight = 80
@@ -25,8 +25,8 @@ CoD.StartMenuOptionsHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	self.Underline = Underline
 	local UnderlineTexture = LUI.UIImage.new(0, 1, 0, 0, 1, 1, -2, 0)
 	UnderlineTexture:setRGB(0.15, 0.15, 0.15)
-	UnderlineTexture:setImage(RegisterImage(@"uie_ui_menu_director_grain_bg01"))
-	UnderlineTexture:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
+	UnderlineTexture:setImage(RegisterImage("uie_ui_menu_director_grain_bg01"))
+	UnderlineTexture:setMaterial(LUI.UIImage.GetCachedMaterial("ui_multiply"))
 	self:addElement(UnderlineTexture)
 	self.UnderlineTexture = UnderlineTexture
 	local Frame = CoD.StartMenuOptionsMainFrame.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 0, 0, 80)
@@ -54,42 +54,42 @@ CoD.StartMenuOptionsHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1
 	HeaderText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	HeaderText:setTTF("ttmussels_regular")
 	HeaderText:setLetterSpacing(10)
-	HeaderText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	HeaderText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	self:addElement(HeaderText)
 	self.HeaderText = HeaderText
 	local Image = LUI.UIImage.new(0.5, 0.5, -958, -890, 0, 0, 29, 71)
 	Image:setRGB(0.63, 0.57, 0.2)
 	Image:setAlpha(0.6)
-	Image:setImage(RegisterImage(@"uie_ui_menu_director_top_left_dot_pattern"))
+	Image:setImage(RegisterImage("uie_ui_menu_director_top_left_dot_pattern"))
 	self:addElement(Image)
 	self.Image = Image
-	self:registerEventHandler("menu_loaded", function(self, event)
+	self:registerEventHandler("menu_loaded", function(element, event)
 		local f2_local0 = nil
-		if self.menuLoaded then
-			f2_local0 = self:menuLoaded(event)
-		elseif self.super.menuLoaded then
-			f2_local0 = self.super:menuLoaded(event)
+		if element.menuLoaded then
+			f2_local0 = element:menuLoaded(event)
+		elseif element.super.menuLoaded then
+			f2_local0 = element.super:menuLoaded(event)
 		end
 		ShowHeaderIconOnly(f1_arg0)
 		DataSourceHelperRecreate(f1_arg1, "ButtonLayoutLabels")
 		if not f2_local0 then
-			f2_local0 = self:dispatchEventToChildren(event)
+			f2_local0 = element:dispatchEventToChildren(event)
 		end
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
-		GoBack(self, controller)
-		UpdateGamerprofile(self, element, controller)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], nil, function(f3_arg0, f3_arg1, f3_arg2, f3_arg3)
+		GoBack(self, f3_arg2)
+		UpdateGamerprofile(self, f3_arg0, f3_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
+	end, function(f4_arg0, f4_arg1, f4_arg2)
+		CoD.Menu.SetButtonLabel(f4_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
-		CoD.OptionsUtility.ResetPlayerSettingsGroupListToDefault(controller, self.OptionGroups)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum.LUIButton[@"lui_key_xbx_pssquare"], nil, function(f5_arg0, f5_arg1, f5_arg2, f5_arg3)
+		CoD.OptionsUtility.ResetPlayerSettingsGroupListToDefault(f5_arg2, self.OptionGroups)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"menu/all_defaults", Enum[@"luibuttonpromptflags"][@"hash_72919C98A7A845F0"] | 750 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
+	end, function(f6_arg0, f6_arg1, f6_arg2)
+		CoD.Menu.SetButtonLabel(f6_arg1, Enum.LUIButton[@"lui_key_xbx_pssquare"], @"menu/all_defaults", Enum[@"luibuttonpromptflags"][@"hash_72919C98A7A845F0"] | 750 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 		return true
 	end, false)
 	self:subscribeToGlobalModel(f1_arg1, "PerController", "PlayerSettingsUpdate", function(model)

@@ -1,22 +1,22 @@
 CoD.TeamUtility = {}
 CoD.TeamUtility.TeamName = {}
-CoD.TeamUtility.TeamName[Enum[@"team_t"][@"team_free"]] = @"mpui/autoassign"
-CoD.TeamUtility.TeamName[Enum[@"team_t"][@"team_neutral"]] = @"mpui/neutral"
-CoD.TeamUtility.TeamName[Enum[@"team_t"][@"team_spectator"]] = @"mpui/shoutcaster"
+CoD.TeamUtility.TeamName[Enum.team_t[@"team_free"]] = @"mpui/autoassign"
+CoD.TeamUtility.TeamName[Enum.team_t[@"team_neutral"]] = @"mpui/neutral"
+CoD.TeamUtility.TeamName[Enum.team_t[@"team_spectator"]] = @"mpui/shoutcaster"
 if not CoD.isMultiplayer then
-	CoD.TeamUtility.TeamName[Enum[@"team_t"][@"team_neutral"]] = @"mpui/neutral"
-	CoD.TeamUtility.TeamName[Enum[@"team_t"][@"team_dead"]] = @"hash_3E283EA5896DD5A6"
+	CoD.TeamUtility.TeamName[Enum.team_t[@"team_neutral"]] = @"mpui/neutral"
+	CoD.TeamUtility.TeamName[Enum.team_t[@"team_dead"]] = @"hash_3E283EA5896DD5A6"
 end
 CoD.TeamUtility.GetTeam = function(f1_arg0)
 	if IsCodCaster(f1_arg0) then
 		return CoD.ShoutcasterProfileVarValue(f1_arg0, "shoutcaster_team")
 	else
-		return Engine[@"getlobbyteamid"](Enum[@"lobbymodule"][@"lobby_module_client"], Engine[@"getclientnum"](f1_arg0))
+		return Engine[@"getlobbyteamid"](Enum.LobbyModule[@"lobby_module_client"], Engine.GetClientNum(f1_arg0))
 	end
 end
 CoD.TeamUtility.GetTeams = function()
 	CoD.TeamUtility.Teams = {}
-	local f2_local0 = Engine[@"getteams"](Enum[@"lobbymodule"][@"lobby_module_client"], Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_client"]))
+	local f2_local0 = Engine[@"getteams"](Enum.LobbyModule[@"lobby_module_client"], Engine[@"lobbygetcontrollinglobbysession"](Enum.LobbyModule[@"lobby_module_client"]))
 	local f2_local1 = {}
 	for f2_local5, f2_local6 in pairs(f2_local0.clientTeams) do
 		if not f2_local1[f2_local6.team] and CoD.TeamUtility.IsValidPlayerTeam(f2_local6.team) then
@@ -50,9 +50,9 @@ CoD.TeamUtility.ShouldUseBlankTeamIdentity = function(f4_arg0)
 end
 CoD.TeamUtility.GetDefaultCodCasterTeamName = function(f5_arg0)
 	if f5_arg0 == "team2" then
-		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_139A9E427416E0C7")
+		return Engine[@"hash_4F9F1239CFD921FE"]("codcaster/team2")
 	else
-		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_139A9F427416E27A")
+		return Engine[@"hash_4F9F1239CFD921FE"]("codcaster/team1")
 	end
 end
 CoD.TeamUtility.IsValidPlayerTeam = function(f6_arg0, f6_arg1)
@@ -60,13 +60,13 @@ CoD.TeamUtility.IsValidPlayerTeam = function(f6_arg0, f6_arg1)
 		return false
 	elseif CoDShared.IsGametypeTeamBased(f6_arg1) then
 		local f6_local0 = {
-			[Enum[@"team_t"][@"team_allies"]] = true,
-			[Enum[@"team_t"][@"team_axis"]] = true,
+			[Enum.team_t[@"team_allies"]] = true,
+			[Enum.team_t[@"team_axis"]] = true,
 		}
 		return f6_local0[f6_arg0] ~= nil
 	else
 		local f6_local0
-		if f6_arg0 <= Enum[@"team_t"][@"team_free"] or f6_arg0 >= Enum[@"team_t"][@"team_spectator"] then
+		if f6_arg0 <= Enum.team_t[@"team_free"] or f6_arg0 >= Enum.team_t[@"team_spectator"] then
 			f6_local0 = false
 		else
 			f6_local0 = true
@@ -75,10 +75,10 @@ CoD.TeamUtility.IsValidPlayerTeam = function(f6_arg0, f6_arg1)
 	return f6_local0
 end
 CoD.TeamUtility.GetOppositeTeamAxisAllies = function(f7_arg0)
-	if f7_arg0 == Enum[@"team_t"][@"team_allies"] then
-		return Enum[@"team_t"][@"team_axis"]
-	elseif f7_arg0 == Enum[@"team_t"][@"team_axis"] then
-		return Enum[@"team_t"][@"team_allies"]
+	if f7_arg0 == Enum.team_t[@"team_allies"] then
+		return Enum.team_t[@"team_axis"]
+	elseif f7_arg0 == Enum.team_t[@"team_axis"] then
+		return Enum.team_t[@"team_allies"]
 	else
 		return f7_arg0
 	end
@@ -90,23 +90,23 @@ CoD.TeamUtility.GetTeamColor = function(f8_arg0, f8_arg1)
 	return CoD.TeamUtility.GetTeamFactionColor(f8_arg1)
 end
 CoD.TeamUtility.GetTeamIDForController = function(f9_arg0)
-	local f9_local0 = Engine[@"getteamidbyxuid"](Engine[@"getxuid64"](f9_arg0))
+	local f9_local0 = Engine.GetTeamIDByXUID(Engine.GetXUID64(f9_arg0))
 	if f9_local0 then
 		return f9_local0
 	end
-	local f9_local1 = Engine[@"lobbygetsessionclients"](Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_game"])
+	local f9_local1 = Engine[@"lobbygetsessionclients"](Enum.LobbyModule[@"lobby_module_client"], Enum.LobbyType[@"lobby_type_game"])
 	if f9_local1 and f9_local1.sessionClients then
 		for f9_local5, f9_local6 in ipairs(f9_local1.sessionClients) do
 			local f9_local7 = f9_local6.team
-			if Engine[@"getxuid64"](f9_arg0) == f9_local6.xuid then
+			if Engine.GetXUID64(f9_arg0) == f9_local6.xuid then
 				return f9_local7
 			end
 		end
 	end
-	return Enum[@"team_t"][@"team_bad"]
+	return Enum.team_t[@"team_bad"]
 end
 CoD.TeamUtility.GetPredictedTeamID = function(f10_arg0)
-	local f10_local0 = CoD.SafeGetModelValue(Engine[@"getmodelforcontroller"](f10_arg0), "factions.playerFactionTeamEnum")
+	local f10_local0 = CoD.SafeGetModelValue(Engine.GetModelForController(f10_arg0), "factions.playerFactionTeamEnum")
 	if f10_local0 then
 		return f10_local0
 	else
@@ -118,42 +118,42 @@ CoD.TeamUtility.GetTeamID = function(f11_arg0)
 end
 CoD.TeamUtility.GetDefaultTeamName = function(f12_arg0)
 	if IsMultiplayer() then
-		if f12_arg0 == Enum[@"team_t"][@"team_allies"] then
+		if f12_arg0 == Enum.team_t[@"team_allies"] then
 			return @"mpui/allies"
-		elseif f12_arg0 == Enum[@"team_t"][@"team_axis"] then
+		elseif f12_arg0 == Enum.team_t[@"team_axis"] then
 			return @"mpui/axis"
 		end
 	elseif IsCampaign() then
-		if f12_arg0 == Enum[@"team_t"][@"team_allies"] then
-			return @"hash_42B048C5B8811227"
-		elseif f12_arg0 == Enum[@"team_t"][@"team_axis"] then
-			return @"hash_38223F843A2C25CC"
+		if f12_arg0 == Enum.team_t[@"team_allies"] then
+			return "cpui/allies"
+		elseif f12_arg0 == Enum.team_t[@"team_axis"] then
+			return "cpui/axis"
 		end
 	end
 	return CoD.TeamUtility.TeamName[f12_arg0] or 0x0
 end
 CoD.TeamUtility.TeamDevStringToEnumTable = {
-	allies = Enum[@"team_t"][@"team_allies"],
-	axis = Enum[@"team_t"][@"team_axis"],
+	allies = Enum.team_t[@"team_allies"],
+	axis = Enum.team_t[@"team_axis"],
 }
 CoD.TeamUtility.TeamDevStringToEnum = function(f13_arg0)
 	local f13_local0 = CoD.TeamUtility.TeamDevStringToEnumTable[f13_arg0]
 	if not f13_local0 then
-		f13_local0 = Enum[@"team_t"][@"team_bad"]
+		f13_local0 = Enum.team_t[@"team_bad"]
 	end
 	return f13_local0
 end
 CoD.TeamUtility.GetDefaultTeamShortName = function(f14_arg0)
 	if IsMultiplayer() then
-		if f14_arg0 == Enum[@"team_t"][@"team_allies"] then
+		if f14_arg0 == Enum.team_t[@"team_allies"] then
 			return @"hash_EDCCEFE94375E18"
-		elseif f14_arg0 == Enum[@"team_t"][@"team_axis"] then
+		elseif f14_arg0 == Enum.team_t[@"team_axis"] then
 			return @"hash_5FFCFA8A74D3E077"
 		end
 	elseif IsCampaign() then
-		if f14_arg0 == Enum[@"team_t"][@"team_allies"] then
+		if f14_arg0 == Enum.team_t[@"team_allies"] then
 			return @"hash_64A981F51DACF0A"
-		elseif f14_arg0 == Enum[@"team_t"][@"team_axis"] then
+		elseif f14_arg0 == Enum.team_t[@"team_axis"] then
 			return 0x258ADD73950461
 		end
 	end
@@ -161,15 +161,15 @@ CoD.TeamUtility.GetDefaultTeamShortName = function(f14_arg0)
 end
 CoD.TeamUtility.GetDefaultTeamFactionDescription = function(f15_arg0)
 	if IsMultiplayer() then
-		if f15_arg0 == Enum[@"team_t"][@"team_allies"] then
-			return @"hash_4F61ADAF3651241F"
-		elseif f15_arg0 == Enum[@"team_t"][@"team_axis"] then
-			return @"hash_2A8BCD7E744625EA"
+		if f15_arg0 == Enum.team_t[@"team_allies"] then
+			return "mpui/allies_desc"
+		elseif f15_arg0 == Enum.team_t[@"team_axis"] then
+			return "mpui/axis_desc"
 		end
 	elseif IsCampaign() then
-		if f15_arg0 == Enum[@"team_t"][@"team_allies"] then
+		if f15_arg0 == Enum.team_t[@"team_allies"] then
 			return @"hash_5712156435B5EBF9"
-		elseif f15_arg0 == Enum[@"team_t"][@"team_axis"] then
+		elseif f15_arg0 == Enum.team_t[@"team_axis"] then
 			return @"hash_42FED463C97B0434"
 		end
 	end
@@ -177,49 +177,49 @@ CoD.TeamUtility.GetDefaultTeamFactionDescription = function(f15_arg0)
 end
 CoD.TeamUtility.GetDefaultTeamFactionColor = function(f16_arg0)
 	local f16_local0 = ColorSet.CodCaster
-	if f16_arg0 == Enum[@"team_t"][@"team_allies"] then
+	if f16_arg0 == Enum.team_t[@"team_allies"] then
 		f16_local0 = ColorSet.FriendlyBlue
-	elseif f16_arg0 == Enum[@"team_t"][@"team_axis"] then
+	elseif f16_arg0 == Enum.team_t[@"team_axis"] then
 		f16_local0 = ColorSet.EnemyOrange
-	elseif f16_arg0 == Enum[@"team_t"][@"team_three"] then
+	elseif f16_arg0 == Enum.team_t.team_three then
 		f16_local0 = ColorSet.WarzoneCustomTeam3
-	elseif f16_arg0 == Enum[@"team_t"][@"team_four"] then
+	elseif f16_arg0 == Enum.team_t.team_four then
 		f16_local0 = ColorSet.WarzoneCustomTeam4
-	elseif f16_arg0 == Enum[@"team_t"][@"team_five"] then
+	elseif f16_arg0 == Enum.team_t.team_five then
 		f16_local0 = ColorSet.WarzoneCustomTeam5
-	elseif f16_arg0 == Enum[@"team_t"][@"team_six"] then
+	elseif f16_arg0 == Enum.team_t.team_six then
 		f16_local0 = ColorSet.WarzoneCustomTeam6
-	elseif f16_arg0 == Enum[@"team_t"][@"team_spectator"] then
+	elseif f16_arg0 == Enum.team_t[@"team_spectator"] then
 		f16_local0 = ColorSet.CodCaster
 	end
 	return string.format("%d %d %d", f16_local0.r * 255, f16_local0.g * 255, f16_local0.b * 255)
 end
 CoD.TeamUtility.GetDefaultTeamFactionIcon = function(f17_arg0)
 	if IsCampaign() then
-		if f17_arg0 == Enum[@"team_t"][@"team_allies"] then
+		if f17_arg0 == Enum.team_t[@"team_allies"] then
 			return "cp_icon_faction_allies"
-		elseif f17_arg0 == Enum[@"team_t"][@"team_axis"] then
+		elseif f17_arg0 == Enum.team_t[@"team_axis"] then
 			return "cp_icon_faction_axis"
 		end
-	elseif f17_arg0 == Enum[@"team_t"][@"team_allies"] then
+	elseif f17_arg0 == Enum.team_t[@"team_allies"] then
 		return "faction_allies"
-	elseif f17_arg0 == Enum[@"team_t"][@"team_axis"] then
+	elseif f17_arg0 == Enum.team_t[@"team_axis"] then
 		return "faction_axis"
 	end
 	return ""
 end
 CoD.TeamUtility.GetSimplifiedTeamFactionIcon = function(f18_arg0)
 	if IsCampaign() then
-		if f18_arg0 == Enum[@"team_t"][@"team_allies"] then
+		if f18_arg0 == Enum.team_t[@"team_allies"] then
 			return "uie_t8_cp_faction_allies"
-		elseif f18_arg0 == Enum[@"team_t"][@"team_axis"] then
+		elseif f18_arg0 == Enum.team_t[@"team_axis"] then
 			return "uie_t8_cp_faction_axis"
 		end
 	end
 	return ""
 end
 CoD.TeamUtility.GetTeamName = function(f19_arg0)
-	local f19_local0 = Engine[@"getprimarycontroller"]()
+	local f19_local0 = Engine.GetPrimaryController()
 	if CoD.IsShoutcaster(f19_local0) or CoD.CodCasterUtility.AreCodCasterAssigned(f19_local0) then
 		if CoD.TeamUtility.ShouldUseCustomTeamIdentity(f19_local0) then
 			return CoD.GetCodCasterTeamName(f19_local0, f19_arg0)
@@ -231,15 +231,15 @@ CoD.TeamUtility.GetTeamName = function(f19_arg0)
 	end
 end
 CoD.TeamUtility.GetTeamFactionColor = function(f20_arg0)
-	local f20_local0 = Engine[@"getprimarycontroller"]()
+	local f20_local0 = Engine.GetPrimaryController()
 	if CoD.CodCasterUtility.IsCodCasterOrAssigned(f20_local0) then
 		if CoD.TeamUtility.ShouldUseCustomTeamIdentity(f20_local0) then
 			return CoD.GetCodCasterTeamColor(f20_local0, f20_arg0)
 		end
 		local f20_local1 = ColorSet.CodCaster
-		if f20_arg0 == Enum[@"team_t"][@"team_allies"] then
+		if f20_arg0 == Enum.team_t[@"team_allies"] then
 			f20_local1 = ColorSet.FriendlyBlue
-		elseif f20_arg0 == Enum[@"team_t"][@"team_spectator"] then
+		elseif f20_arg0 == Enum.team_t[@"team_spectator"] then
 			f20_local1 = ColorSet.CodCaster
 		else
 			f20_local1 = ColorSet.EnemyOrange
@@ -261,7 +261,7 @@ CoD.TeamUtility.GetTeamFactionColor = function(f20_arg0)
 	return CoD.TeamUtility.GetDefaultTeamFactionColor(f20_arg0)
 end
 CoD.TeamUtility.GetTeamFactionIcon = function(f21_arg0)
-	local f21_local0 = Engine[@"getprimarycontroller"]()
+	local f21_local0 = Engine.GetPrimaryController()
 	if CoD.CodCasterUtility.IsCodCasterOrAssigned(f21_local0) then
 		if CoD.TeamUtility.ShouldUseBlankTeamIdentity(f21_local0) then
 			return "blacktransparent"
@@ -275,23 +275,23 @@ CoD.TeamUtility.GetTeamFactionIcon = function(f21_arg0)
 	end
 end
 CoD.TeamUtility.GetTeamNameCaps = function(f22_arg0)
-	if Engine[@"gamemodeismode"](Enum[@"egamemodes"][@"mode_game_league"]) then
-		if f22_arg0 == Enum[@"team_t"][@"team_allies"] and Dvar[@"g_customteamname_allies"]:get() ~= "" then
-			return Engine[@"toupper"](Dvar[@"g_customteamname_allies"]:get())
-		elseif f22_arg0 == Enum[@"team_t"][@"team_axis"] and Dvar[@"g_customteamname_axis"]:get() ~= "" then
-			return Engine[@"toupper"](Dvar[@"g_customteamname_axis"]:get())
+	if Engine.GameModeIsMode(Enum.eGameModes[@"mode_game_league"]) then
+		if f22_arg0 == Enum.team_t[@"team_allies"] and Dvar.g_customteamname_allies:get() ~= "" then
+			return Engine.ToUpper(Dvar.g_customteamname_allies:get())
+		elseif f22_arg0 == Enum.team_t[@"team_axis"] and Dvar.g_customteamname_axis:get() ~= "" then
+			return Engine.ToUpper(Dvar.g_customteamname_axis:get())
 		end
 	end
-	if CoD.CodCasterUtility.IsCodCasterOrAssigned(Engine[@"getprimarycontroller"]()) then
+	if CoD.CodCasterUtility.IsCodCasterOrAssigned(Engine.GetPrimaryController()) then
 		local f22_local0 = CoD.TeamUtility.GetTeamName(f22_arg0)
 		if f22_local0 ~= "" then
-			return Engine[@"toupper"](f22_local0)
+			return Engine.ToUpper(f22_local0)
 		else
 			return f22_local0
 		end
 	end
 	local f22_local0 = CoD.TeamUtility.GetTeamName(f22_arg0)
-	if f22_arg0 == Enum[@"team_t"][@"team_spectator"] then
+	if f22_arg0 == Enum.team_t[@"team_spectator"] then
 		f22_local0 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_379A28BE744E24FB")
 	end
 	return ToUpper(f22_local0)
@@ -299,9 +299,9 @@ end
 CoD.TeamUtility.GetColorSetNameFriendlyColor = function(f23_arg0, f23_arg1)
 	local f23_local0 = "White"
 	if CoD.IsShoutcaster(f23_arg0) then
-		if f23_arg1 == Enum[@"team_t"][@"team_allies"] then
+		if f23_arg1 == Enum.team_t[@"team_allies"] then
 			f23_local0 = "CodCasterFactionAllies"
-		elseif f23_arg1 == Enum[@"team_t"][@"team_axis"] then
+		elseif f23_arg1 == Enum.team_t[@"team_axis"] then
 			f23_local0 = "CodCasterFactionAxis"
 		end
 	else
@@ -315,9 +315,9 @@ end
 CoD.TeamUtility.GetColorSetNameEnemyColor = function(f25_arg0, f25_arg1)
 	local f25_local0 = "White"
 	if CoD.IsShoutcaster(f25_arg0) then
-		if f25_arg1 == Enum[@"team_t"][@"team_allies"] then
+		if f25_arg1 == Enum.team_t[@"team_allies"] then
 			f25_local0 = "CodCasterFactionAllies"
-		elseif f25_arg1 == Enum[@"team_t"][@"team_axis"] then
+		elseif f25_arg1 == Enum.team_t[@"team_axis"] then
 			f25_local0 = "CodCasterFactionAxis"
 		end
 	else
@@ -349,26 +349,26 @@ end
 CoD.TeamUtility.IsTeamLivesLow = function(f29_arg0)
 	local f29_local0 = 0
 	local f29_local1 = 0
-	if f29_arg0 == Enum[@"team_t"][@"team_allies"] then
-		local f29_local2 = Engine[@"getglobalmodel"]()
+	if f29_arg0 == Enum.team_t[@"team_allies"] then
+		local f29_local2 = Engine.GetGlobalModel()
 		f29_local0 = f29_local2.hudItems.team1.livesCount:get()
-		f29_local2 = Engine[@"getglobalmodel"]()
+		f29_local2 = Engine.GetGlobalModel()
 		f29_local1 = f29_local2.scoreboard.team1.count:get()
-	elseif f29_arg0 == Enum[@"team_t"][@"team_axis"] then
-		local f29_local2 = Engine[@"getglobalmodel"]()
+	elseif f29_arg0 == Enum.team_t[@"team_axis"] then
+		local f29_local2 = Engine.GetGlobalModel()
 		f29_local0 = f29_local2.hudItems.team2.livesCount:get()
-		f29_local2 = Engine[@"getglobalmodel"]()
+		f29_local2 = Engine.GetGlobalModel()
 		f29_local1 = f29_local2.scoreboard.team2.count:get()
 	end
 	return f29_local0 <= f29_local1
 end
 CoD.TeamUtility.GetTeamCount = function(f30_arg0)
 	local f30_local0 = 0
-	if f30_arg0 == Enum[@"team_t"][@"team_allies"] then
-		local f30_local1 = Engine[@"getglobalmodel"]()
+	if f30_arg0 == Enum.team_t[@"team_allies"] then
+		local f30_local1 = Engine.GetGlobalModel()
 		f30_local0 = f30_local1.scoreboard.team1.count:get()
-	elseif f30_arg0 == Enum[@"team_t"][@"team_axis"] then
-		local f30_local1 = Engine[@"getglobalmodel"]()
+	elseif f30_arg0 == Enum.team_t[@"team_axis"] then
+		local f30_local1 = Engine.GetGlobalModel()
 		f30_local0 = f30_local1.scoreboard.team2.count:get()
 	end
 	return f30_local0
@@ -378,9 +378,9 @@ CoD.TeamUtility.IsMyTeamLivesLow = function(f31_arg0)
 end
 CoD.TeamUtility.IsEnemyTeamLivesLow = function(f32_arg0)
 	local f32_local0 = CoD.TeamUtility.GetTeamID(f32_arg0)
-	local f32_local1 = Enum[@"team_t"][@"team_allies"]
+	local f32_local1 = Enum.team_t[@"team_allies"]
 	if f32_local1 == f32_local0 then
-		f32_local1 = Enum[@"team_t"][@"team_axis"]
+		f32_local1 = Enum.team_t[@"team_axis"]
 	end
 	return CoD.TeamUtility.IsTeamLivesLow(f32_local1)
 end
@@ -400,7 +400,7 @@ CoD.TeamUtility.IsClientSameTeam = function(f34_arg0, f34_arg1)
 	if not f34_local0 or f34_local0 < 0 or f34_local0 >= LuaDefine.MAX_CLIENTS then
 		return false
 	else
-		return Engine[@"getteamid"](f34_arg1, f34_local0) == CoD.TeamUtility.GetTeamID(f34_arg1)
+		return Engine.GetTeamID(f34_arg1, f34_local0) == CoD.TeamUtility.GetTeamID(f34_arg1)
 	end
 end
 CoD.TeamUtility.GetTeamNameForTeamEnum = function(f35_arg0, f35_arg1)
@@ -430,7 +430,7 @@ DataSources.InGamePlayerListRowData = DataSourceHelpers.ListSetup("InGamePlayerL
 	end
 	local f39_local1 = function(f41_arg0, f41_arg1, f41_arg2)
 		local f41_local0 = CoD.TeamUtility.GetTeamNameCaps(f41_arg2)
-		local f41_local1 = Engine[@"getingameplayerlist"](f41_arg0, f41_arg2)
+		local f41_local1 = Engine.GetInGamePlayerList(f41_arg0, f41_arg2)
 		if not f41_local1 or #f41_local1 == 0 then
 			return
 		end
@@ -456,7 +456,7 @@ DataSources.InGamePlayerListRowData = DataSourceHelpers.ListSetup("InGamePlayerL
 				f41_local10 = CoD.ColorUtility.ConvertColor(f41_local6.r * f41_local2, f41_local6.g * f41_local2, f41_local6.b * f41_local2)
 			end
 			local f41_local11 = f41_local17.rank
-			local f41_local12 = Engine[@"getrankicon"](f41_local11, 0)
+			local f41_local12 = Engine.GetRankIcon(f41_local11, 0)
 			local f41_local13 = f41_local17.playerName
 			local f41_local14 = CoD.ColorUtility.ConvertColor(f41_local3.r, f41_local3.g, f41_local3.b)
 			local f41_local15 = {
@@ -471,7 +471,7 @@ DataSources.InGamePlayerListRowData = DataSourceHelpers.ListSetup("InGamePlayerL
 		end
 	end
 	local f39_local2 = {}
-	local f39_local3 = Engine[@"getgametypesetting"](@"teamcount")
+	local f39_local3 = Engine.GetGametypeSetting("teamcount")
 	for f39_local4 = 1, f39_local3, 1 do
 		f39_local1(f39_arg0, f39_local2, f39_local4)
 	end
@@ -499,15 +499,15 @@ DataSources.ChangeTeamOptions = DataSourceHelpers.ListSetup("ChangeTeamOptions",
 					if f44_arg4.previousMenuId then
 						LUI.savedMenuStates[f44_arg4.previousMenuId] = nil
 					end
-					local f44_local0 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f44_arg2), "factions.isCoDCaster")
+					local f44_local0 = Engine.CreateModel(Engine.GetModelForController(f44_arg2), "factions.isCoDCaster")
 					if f43_arg2 == "spectator" then
-						Engine[@"lockinput"](f44_arg2, false)
-						Engine[@"setuiactive"](f44_arg2, false)
-						Engine[@"setmodelvalue"](f44_local0, true)
+						Engine.LockInput(f44_arg2, false)
+						Engine.SetUIActive(f44_arg2, false)
+						Engine.SetModelValue(f44_local0, true)
 					else
-						Engine[@"setmodelvalue"](f44_local0, false)
+						Engine.SetModelValue(f44_local0, false)
 					end
-					Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f44_arg2), "CodCaster"), "showCodCasterScoreboard"), false)
+					Engine.SetModelValue(Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(f44_arg2), "CodCaster"), "showCodCasterScoreboard"), false)
 					SetControllerModelValue(f44_arg2, "forceScoreboard", 0)
 					if IsIntDvarNonZero("mp_prototype") then
 						StartMenuGoBack(f44_arg4, f44_arg2)
@@ -519,8 +519,8 @@ DataSources.ChangeTeamOptions = DataSourceHelpers.ListSetup("ChangeTeamOptions",
 		}
 	end
 	local f42_local1 = function(f45_arg0, f45_arg1)
-		local f45_local0 = CoD.PlayerRoleUtility.GetHeroList(Engine[@"currentsessionmode"]())
-		local f45_local1 = Engine[@"getgametypesettings"]()
+		local f45_local0 = CoD.PlayerRoleUtility.GetHeroList(Engine.CurrentSessionMode())
+		local f45_local1 = Engine.GetGametypeSettings()
 		local f45_local2 = Engine[@"hash_4FCDE749B09C3D6"](f45_arg0)
 		local f45_local3 = 1
 		for f45_local7, f45_local8 in pairs(f45_local2) do
@@ -537,10 +537,10 @@ DataSources.ChangeTeamOptions = DataSourceHelpers.ListSetup("ChangeTeamOptions",
 		return f45_local3 <= f45_local4
 	end
 	local f42_local2 = {}
-	local f42_local3 = Engine[@"team"](f42_arg0, "index")
+	local f42_local3 = Engine.team(f42_arg0, "index")
 	local f42_local4
-	if Engine[@"getgametypesetting"](@"spectatetype") >= 1 and Engine[@"getgametypesetting"](@"allowspectating") == 1 then
-		f42_local4 = not Engine[@"issplitscreen"]()
+	if Engine.GetGametypeSetting("spectatetype") >= 1 and Engine.GetGametypeSetting("allowspectating") == 1 then
+		f42_local4 = not Engine.issplitscreen()
 	else
 		f42_local4 = false
 	end
@@ -560,30 +560,30 @@ DataSources.ChangeTeamOptions = DataSourceHelpers.ListSetup("ChangeTeamOptions",
 	local f42_local5 = function(f46_arg0)
 		local f46_local0 = CoD.TeamUtility.GetTeamNameCaps(f46_arg0)
 		if f46_local0 == "" then
-			f46_local0 = Engine[@"toupper"](CoD.TeamUtility.GetDefaultTeamName(f46_arg0))
+			f46_local0 = Engine.ToUpper(CoD.TeamUtility.GetDefaultTeamName(f46_arg0))
 		end
 		return f46_local0
 	end
 	if CoDShared.IsGametypeTeamBased() == true and CoD.IsTeamChangeAllowed(f42_arg0) then
-		if f42_local3 ~= Enum[@"team_t"][@"team_allies"] then
-			if f42_local1(f42_arg0, Enum[@"team_t"][@"team_allies"]) then
-				table.insert(f42_local2, f42_local0(f42_arg0, @"mpui/allies", "allies", @"hash_617E759991A40568", CoD.TeamUtility.GetTeamFactionIcon(Enum[@"team_t"][@"team_allies"]), false))
+		if f42_local3 ~= Enum.team_t[@"team_allies"] then
+			if f42_local1(f42_arg0, Enum.team_t[@"team_allies"]) then
+				table.insert(f42_local2, f42_local0(f42_arg0, @"mpui/allies", "allies", @"hash_617E759991A40568", CoD.TeamUtility.GetTeamFactionIcon(Enum.team_t[@"team_allies"]), false))
 			else
-				table.insert(f42_local2, f42_local0(f42_arg0, @"mpui/allies", "allies", @"hash_6A3EE0239CF6265D", CoD.TeamUtility.GetTeamFactionIcon(Enum[@"team_t"][@"team_allies"]), true))
+				table.insert(f42_local2, f42_local0(f42_arg0, @"mpui/allies", "allies", @"hash_6A3EE0239CF6265D", CoD.TeamUtility.GetTeamFactionIcon(Enum.team_t[@"team_allies"]), true))
 			end
 		end
-		if f42_local3 ~= Enum[@"team_t"][@"team_axis"] then
-			if f42_local1(f42_arg0, Enum[@"team_t"][@"team_axis"]) then
-				table.insert(f42_local2, f42_local0(f42_arg0, @"mpui/axis", "axis", @"hash_46838CD03F01BF13", CoD.TeamUtility.GetTeamFactionIcon(Enum[@"team_t"][@"team_axis"]), false))
+		if f42_local3 ~= Enum.team_t[@"team_axis"] then
+			if f42_local1(f42_arg0, Enum.team_t[@"team_axis"]) then
+				table.insert(f42_local2, f42_local0(f42_arg0, @"mpui/axis", "axis", @"hash_46838CD03F01BF13", CoD.TeamUtility.GetTeamFactionIcon(Enum.team_t[@"team_axis"]), false))
 			else
-				table.insert(f42_local2, f42_local0(f42_arg0, @"mpui/axis", "axis", @"hash_6A3EE0239CF6265D", CoD.TeamUtility.GetTeamFactionIcon(Enum[@"team_t"][@"team_axis"]), true))
+				table.insert(f42_local2, f42_local0(f42_arg0, @"mpui/axis", "axis", @"hash_6A3EE0239CF6265D", CoD.TeamUtility.GetTeamFactionIcon(Enum.team_t[@"team_axis"]), true))
 			end
 		end
 	end
-	if CoDShared.IsGametypeTeamBased() == true or f42_local3 == Enum[@"team_t"][@"team_spectator"] then
-		table.insert(f42_local2, f42_local0(f42_arg0, @"hash_2AD8F376215AE5D7", "autoassign", @"hash_38BFAF5D14337A27", ""))
+	if CoDShared.IsGametypeTeamBased() == true or f42_local3 == Enum.team_t[@"team_spectator"] then
+		table.insert(f42_local2, f42_local0(f42_arg0, "mpui/autoassign_caps", "autoassign", "mpui/autoassign_desc", ""))
 	end
-	if f42_local3 ~= Enum[@"team_t"][@"team_spectator"] and f42_local4 == true then
+	if f42_local3 ~= Enum.team_t[@"team_spectator"] and f42_local4 == true then
 		table.insert(f42_local2, f42_local0(f42_arg0, @"hash_379A28BE744E24FB", "spectator", @"hash_6E6B92255B28A2BF", "", false))
 	end
 	if true == Dvar[@"ui_autocontrolledplayer"]:get() then
@@ -602,36 +602,36 @@ DataSources.Factions = {
 		if not DataSources.Factions.factionSubscription[f47_arg0] then
 			DataSources.Factions.factionSubscription[f47_arg0] = LUI.UIElement.new()
 		end
-		local f47_local0 = Engine[@"getmodelforcontroller"](f47_arg0)
-		local f47_local1 = Engine[@"createmodel"](f47_local0, "factions")
-		local f47_local2 = Engine[@"createmodel"](f47_local1, "isCoDCaster")
-		local f47_local3 = Engine[@"createmodel"](f47_local1, "playerFactionTeamEnum")
-		local f47_local4 = Engine[@"createmodel"](f47_local1, "playerFactionName")
-		local f47_local5 = Engine[@"createmodel"](f47_local1, "playerFactionDisplayName")
-		local f47_local6 = Engine[@"createmodel"](f47_local1, "playerFactionIcon")
-		local f47_local7 = Engine[@"createmodel"](f47_local1, "playerFactionColor")
-		local f47_local8 = Engine[@"createmodel"](f47_local1, "playerFactionFlagColor")
-		local f47_local9 = Engine[@"createmodel"](f47_local1, "playerFactionModel")
+		local f47_local0 = Engine.GetModelForController(f47_arg0)
+		local f47_local1 = Engine.CreateModel(f47_local0, "factions")
+		local f47_local2 = Engine.CreateModel(f47_local1, "isCoDCaster")
+		local f47_local3 = Engine.CreateModel(f47_local1, "playerFactionTeamEnum")
+		local f47_local4 = Engine.CreateModel(f47_local1, "playerFactionName")
+		local f47_local5 = Engine.CreateModel(f47_local1, "playerFactionDisplayName")
+		local f47_local6 = Engine.CreateModel(f47_local1, "playerFactionIcon")
+		local f47_local7 = Engine.CreateModel(f47_local1, "playerFactionColor")
+		local f47_local8 = Engine.CreateModel(f47_local1, "playerFactionFlagColor")
+		local f47_local9 = Engine.CreateModel(f47_local1, "playerFactionModel")
 		local f47_local10 = f47_local1:create("actualTeam")
-		local f47_local11 = Engine[@"createmodel"](f47_local1, "enemyFactionTeamEnum")
-		local f47_local12 = Engine[@"createmodel"](f47_local1, "enemyFactionName")
-		local f47_local13 = Engine[@"createmodel"](f47_local1, "enemyFactionDisplayName")
-		local f47_local14 = Engine[@"createmodel"](f47_local1, "enemyFactionIcon")
-		local f47_local15 = Engine[@"createmodel"](f47_local1, "enemyFactionColor")
-		local f47_local16 = Engine[@"createmodel"](f47_local1, "enemyFactionFlagColor")
-		local f47_local17 = Engine[@"createmodel"](f47_local1, "enemyFactionModel")
+		local f47_local11 = Engine.CreateModel(f47_local1, "enemyFactionTeamEnum")
+		local f47_local12 = Engine.CreateModel(f47_local1, "enemyFactionName")
+		local f47_local13 = Engine.CreateModel(f47_local1, "enemyFactionDisplayName")
+		local f47_local14 = Engine.CreateModel(f47_local1, "enemyFactionIcon")
+		local f47_local15 = Engine.CreateModel(f47_local1, "enemyFactionColor")
+		local f47_local16 = Engine.CreateModel(f47_local1, "enemyFactionFlagColor")
+		local f47_local17 = Engine.CreateModel(f47_local1, "enemyFactionModel")
 		DataSources.Factions.factionSubscription[f47_arg0]:unsubscribeFromAllModels()
 		DataSources.Factions.preparedForController[f47_arg0] = true
 		DataSources.Factions.factionSubscription[f47_arg0]:subscribeToModel(f47_local3, function(model)
-			local f48_local0 = Engine[@"getmodelvalue"](model)
-			if f48_local0 then
+			local modelValue = Engine.GetModelValue(model)
+			if modelValue then
 				if CoD.IsShoutcaster(f47_arg0) then
-					f48_local0 = Enum[@"team_t"][@"team_allies"]
+					modelValue = Enum.team_t[@"team_allies"]
 					local f48_local1 = f47_local0:create("factionList")
-					f48_local1 = f48_local1:create("faction" .. f48_local0)
+					f48_local1 = f48_local1:create("faction" .. modelValue)
 					f48_local1:create("factionScore")
 					f47_local9:set(f48_local1)
-					f47_local6:set(CoD.TeamUtility.GetTeamFactionIcon(f48_local0))
+					f47_local6:set(CoD.TeamUtility.GetTeamFactionIcon(modelValue))
 				else
 					local f48_local1 = CoD.TeamUtility.GetTeamIDForController(f47_arg0)
 					local f48_local2 = f47_local0:create("factionList")
@@ -640,106 +640,106 @@ DataSources.Factions = {
 					f47_local9:set(f48_local2)
 					f47_local6:set(CoD.TeamUtility.GetTeamFactionIcon(f48_local1))
 				end
-				Engine[@"setmodelvalue"](f47_local5, CoD.TeamUtility.GetTeamNameCaps(f48_local0))
-				Engine[@"setmodelvalue"](f47_local7, CoD.TeamUtility.GetTeamFactionColor(f48_local0))
+				Engine.SetModelValue(f47_local5, CoD.TeamUtility.GetTeamNameCaps(modelValue))
+				Engine.SetModelValue(f47_local7, CoD.TeamUtility.GetTeamFactionColor(modelValue))
 				local f48_local1 = CoD.ColorUtility.GetColorBlindColorForPlayer(f47_arg0, "FriendlyBlue")
 				local f48_local2 = string.format("%d %d %d", f48_local1.r * 255, f48_local1.g * 255, f48_local1.b * 255)
 				if CoD.IsShoutcaster(f47_arg0) then
-					local f48_local3 = CoD.TeamUtility.GetTeamFactionColor(Enum[@"team_t"][@"team_allies"])
+					local f48_local3 = CoD.TeamUtility.GetTeamFactionColor(Enum.team_t[@"team_allies"])
 					if not CoDShared.IsGametypeTeamBased() then
 						f48_local3 = f48_local2
 					end
 					CoD.ColorUtility.UpdateColorSet("CodCasterFriendly", f48_local3)
 					CoD.ColorUtility.UpdateColorSet("CodCasterFriendlyEffect", f48_local3)
-					Engine[@"setupcompasscolors"](f47_arg0)
+					Engine.SetupCompassColors(f47_arg0)
 					f48_local2 = f48_local3
 				end
-				Engine[@"setmodelvalue"](f47_local8, f48_local2)
+				Engine.SetModelValue(f47_local8, f48_local2)
 			end
 		end)
 		DataSources.Factions.factionSubscription[f47_arg0]:subscribeToModel(f47_local11, function(model)
-			local f49_local0 = Engine[@"getmodelvalue"](model)
-			if f49_local0 then
+			local modelValue = Engine.GetModelValue(model)
+			if modelValue then
 				if CoD.IsShoutcaster(f47_arg0) then
-					f49_local0 = Enum[@"team_t"][@"team_axis"]
+					modelValue = Enum.team_t[@"team_axis"]
 					local f49_local1 = f47_local0:create("factionList")
-					f49_local1 = f49_local1:create("faction" .. f49_local0)
+					f49_local1 = f49_local1:create("faction" .. modelValue)
 					f49_local1:create("factionScore")
 					f47_local17:set(f49_local1)
-					Engine[@"setmodelvalue"](f47_local14, CoD.TeamUtility.GetTeamFactionIcon(f49_local0))
+					Engine.SetModelValue(f47_local14, CoD.TeamUtility.GetTeamFactionIcon(modelValue))
 				else
 					local f49_local1 = CoD.TeamUtility.GetOppositeTeamAxisAllies(CoD.TeamUtility.GetTeamIDForController(f47_arg0))
 					local f49_local2 = f47_local0:create("factionList")
 					f49_local2 = f49_local2:create("faction" .. f49_local1)
 					f49_local2:create("factionScore")
 					f47_local17:set(f49_local2)
-					Engine[@"setmodelvalue"](f47_local14, CoD.TeamUtility.GetTeamFactionIcon(f49_local1))
+					Engine.SetModelValue(f47_local14, CoD.TeamUtility.GetTeamFactionIcon(f49_local1))
 				end
-				Engine[@"setmodelvalue"](f47_local13, CoD.TeamUtility.GetTeamNameCaps(f49_local0))
-				Engine[@"setmodelvalue"](f47_local15, CoD.TeamUtility.GetTeamFactionColor(f49_local0))
+				Engine.SetModelValue(f47_local13, CoD.TeamUtility.GetTeamNameCaps(modelValue))
+				Engine.SetModelValue(f47_local15, CoD.TeamUtility.GetTeamFactionColor(modelValue))
 				local f49_local1 = CoD.ColorUtility.GetColorBlindColorForPlayer(f47_arg0, "EnemyOrange")
 				local f49_local2 = string.format("%d %d %d", f49_local1.r * 255, f49_local1.g * 255, f49_local1.b * 255)
 				if CoD.IsShoutcaster(f47_arg0) then
-					local f49_local3 = CoD.TeamUtility.GetTeamFactionColor(Enum[@"team_t"][@"team_axis"])
+					local f49_local3 = CoD.TeamUtility.GetTeamFactionColor(Enum.team_t[@"team_axis"])
 					if not CoDShared.IsGametypeTeamBased() then
 						f49_local3 = f49_local2
 					end
 					CoD.ColorUtility.UpdateColorSet("CodCasterEnemy", f49_local3)
 					CoD.ColorUtility.UpdateColorSet("CodCasterEnemyEffect", f49_local3)
-					Engine[@"setupcompasscolors"](f47_arg0)
+					Engine.SetupCompassColors(f47_arg0)
 					f49_local2 = f49_local3
 				end
-				Engine[@"setmodelvalue"](f47_local16, f49_local2)
+				Engine.SetModelValue(f47_local16, f49_local2)
 			end
 		end)
 		local f47_local18 = {
-			name = CoD.TeamUtility.GetTeamNameCaps(Enum[@"team_t"][@"team_allies"]),
-			icon = CoD.TeamUtility.GetTeamFactionIcon(Enum[@"team_t"][@"team_allies"]),
-			color = CoD.TeamUtility.GetTeamFactionColor(Enum[@"team_t"][@"team_allies"]),
+			name = CoD.TeamUtility.GetTeamNameCaps(Enum.team_t[@"team_allies"]),
+			icon = CoD.TeamUtility.GetTeamFactionIcon(Enum.team_t[@"team_allies"]),
+			color = CoD.TeamUtility.GetTeamFactionColor(Enum.team_t[@"team_allies"]),
 		}
 		local f47_local19 = {
-			name = CoD.TeamUtility.GetTeamNameCaps(Enum[@"team_t"][@"team_axis"]),
-			icon = CoD.TeamUtility.GetTeamFactionIcon(Enum[@"team_t"][@"team_axis"]),
-			color = CoD.TeamUtility.GetTeamFactionColor(Enum[@"team_t"][@"team_axis"]),
+			name = CoD.TeamUtility.GetTeamNameCaps(Enum.team_t[@"team_axis"]),
+			icon = CoD.TeamUtility.GetTeamFactionIcon(Enum.team_t[@"team_axis"]),
+			color = CoD.TeamUtility.GetTeamFactionColor(Enum.team_t[@"team_axis"]),
 		}
 		if CoD.IsShoutcaster(f47_arg0) and CoD.ShoutcasterProfileVarBool(f47_arg0, "shoutcaster_ds_flip_scorepanel") then
 			f47_local19 = {
-				name = CoD.TeamUtility.GetTeamNameCaps(Enum[@"team_t"][@"team_allies"]),
-				icon = CoD.TeamUtility.GetTeamFactionIcon(Enum[@"team_t"][@"team_allies"]),
-				color = CoD.TeamUtility.GetTeamFactionColor(Enum[@"team_t"][@"team_allies"]),
+				name = CoD.TeamUtility.GetTeamNameCaps(Enum.team_t[@"team_allies"]),
+				icon = CoD.TeamUtility.GetTeamFactionIcon(Enum.team_t[@"team_allies"]),
+				color = CoD.TeamUtility.GetTeamFactionColor(Enum.team_t[@"team_allies"]),
 			}
 			f47_local18 = {
-				name = CoD.TeamUtility.GetTeamNameCaps(Enum[@"team_t"][@"team_axis"]),
-				icon = CoD.TeamUtility.GetTeamFactionIcon(Enum[@"team_t"][@"team_axis"]),
-				color = CoD.TeamUtility.GetTeamFactionColor(Enum[@"team_t"][@"team_axis"]),
+				name = CoD.TeamUtility.GetTeamNameCaps(Enum.team_t[@"team_axis"]),
+				icon = CoD.TeamUtility.GetTeamFactionIcon(Enum.team_t[@"team_axis"]),
+				color = CoD.TeamUtility.GetTeamFactionColor(Enum.team_t[@"team_axis"]),
 			}
 		end
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f47_local1, "axisFactionDisplayName"), f47_local19.name)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f47_local1, "axisFactionIcon"), f47_local19.icon)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f47_local1, "axisFactionColor"), f47_local19.color)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f47_local1, "alliesFactionDisplayName"), f47_local18.name)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f47_local1, "alliesFactionIcon"), f47_local18.icon)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f47_local1, "alliesFactionColor"), f47_local18.color)
+		Engine.SetModelValue(Engine.CreateModel(f47_local1, "axisFactionDisplayName"), f47_local19.name)
+		Engine.SetModelValue(Engine.CreateModel(f47_local1, "axisFactionIcon"), f47_local19.icon)
+		Engine.SetModelValue(Engine.CreateModel(f47_local1, "axisFactionColor"), f47_local19.color)
+		Engine.SetModelValue(Engine.CreateModel(f47_local1, "alliesFactionDisplayName"), f47_local18.name)
+		Engine.SetModelValue(Engine.CreateModel(f47_local1, "alliesFactionIcon"), f47_local18.icon)
+		Engine.SetModelValue(Engine.CreateModel(f47_local1, "alliesFactionColor"), f47_local18.color)
 		if CoD.IsShoutcaster(f47_arg0) then
 			CoD.ColorUtility.UpdateColorSet("CodCasterFactionAllies", f47_local18.color)
 			CoD.ColorUtility.UpdateColorSet("CodCasterFactionAxis", f47_local19.color)
-			Engine[@"setupcompasscolors"](f47_arg0)
+			Engine.SetupCompassColors(f47_arg0)
 		end
-		local f47_local20 = Engine[@"getmodel"](f47_local0, "team")
+		local f47_local20 = Engine.GetModel(f47_local0, "team")
 		if f47_local20 then
 			DataSources.Factions.factionSubscription[f47_arg0]:subscribeToModel(f47_local20, function(model)
 				DataSources.Factions.preparedForController[f47_arg0] = false
 				DataSources.Factions.prepare(f47_arg0)
 			end, false)
 		end
-		local f47_local21 = Engine[@"getmodel"](f47_local0, "CodCaster.profileSettingsUpdated")
+		local f47_local21 = Engine.GetModel(f47_local0, "CodCaster.profileSettingsUpdated")
 		if f47_local21 then
 			DataSources.Factions.factionSubscription[f47_arg0]:subscribeToModel(f47_local21, function(model)
 				DataSources.Factions.preparedForController[f47_arg0] = false
 				DataSources.Factions.prepare(f47_arg0)
 			end, false)
 		end
-		local f47_local22 = Engine[@"getmodel"](f47_local0, "profile.colorblindMode")
+		local f47_local22 = Engine.GetModel(f47_local0, "profile.colorblindMode")
 		if f47_local22 then
 			DataSources.Factions.factionSubscription[f47_arg0]:subscribeToModel(f47_local22, function(model)
 				DataSources.Factions.preparedForController[f47_arg0] = false
@@ -752,62 +752,62 @@ DataSources.Factions = {
 			DataSources.Factions.prepare(f53_arg0)
 		end
 		if not f53_arg0 then
-			f53_arg0 = Engine[@"getprimarycontroller"]()
+			f53_arg0 = Engine.GetPrimaryController()
 		end
-		return Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f53_arg0), "factions")
+		return Engine.CreateModel(Engine.GetModelForController(f53_arg0), "factions")
 	end,
 }
 DataSources.FactionsGlobal = {
 	prepare = function(f54_arg0, f54_arg1, f54_arg2)
-		local f54_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "factions")
-		local f54_local1 = Engine[@"getmodelforcontroller"](f54_arg0)
+		local f54_local0 = Engine.CreateModel(Engine.GetGlobalModel(), "factions")
+		local f54_local1 = Engine.GetModelForController(f54_arg0)
 		if not DataSources.FactionsGlobal.factionSubscription then
 			DataSources.FactionsGlobal.factionSubscription = LUI.UIElement.new()
 		end
 		DataSources.FactionsGlobal.factionSubscription:unsubscribeFromAllModels()
 		local f54_local2 = {
-			name = CoD.TeamUtility.GetTeamNameCaps(Enum[@"team_t"][@"team_allies"]),
-			icon = CoD.TeamUtility.GetTeamFactionIcon(Enum[@"team_t"][@"team_allies"]),
-			color = CoD.TeamUtility.GetTeamFactionColor(Enum[@"team_t"][@"team_allies"]),
+			name = CoD.TeamUtility.GetTeamNameCaps(Enum.team_t[@"team_allies"]),
+			icon = CoD.TeamUtility.GetTeamFactionIcon(Enum.team_t[@"team_allies"]),
+			color = CoD.TeamUtility.GetTeamFactionColor(Enum.team_t[@"team_allies"]),
 		}
 		local f54_local3 = {
-			name = CoD.TeamUtility.GetTeamNameCaps(Enum[@"team_t"][@"team_axis"]),
-			icon = CoD.TeamUtility.GetTeamFactionIcon(Enum[@"team_t"][@"team_axis"]),
-			color = CoD.TeamUtility.GetTeamFactionColor(Enum[@"team_t"][@"team_axis"]),
+			name = CoD.TeamUtility.GetTeamNameCaps(Enum.team_t[@"team_axis"]),
+			icon = CoD.TeamUtility.GetTeamFactionIcon(Enum.team_t[@"team_axis"]),
+			color = CoD.TeamUtility.GetTeamFactionColor(Enum.team_t[@"team_axis"]),
 		}
 		if CoD.IsShoutcaster(f54_arg0) and CoD.ShoutcasterProfileVarBool(f54_arg0, "shoutcaster_ds_flip_scorepanel") then
 			f54_local3 = {
-				name = CoD.TeamUtility.GetTeamNameCaps(Enum[@"team_t"][@"team_allies"]),
-				icon = CoD.TeamUtility.GetTeamFactionIcon(Enum[@"team_t"][@"team_allies"]),
-				color = CoD.TeamUtility.GetTeamFactionColor(Enum[@"team_t"][@"team_allies"]),
+				name = CoD.TeamUtility.GetTeamNameCaps(Enum.team_t[@"team_allies"]),
+				icon = CoD.TeamUtility.GetTeamFactionIcon(Enum.team_t[@"team_allies"]),
+				color = CoD.TeamUtility.GetTeamFactionColor(Enum.team_t[@"team_allies"]),
 			}
 			f54_local2 = {
-				name = CoD.TeamUtility.GetTeamNameCaps(Enum[@"team_t"][@"team_axis"]),
-				icon = CoD.TeamUtility.GetTeamFactionIcon(Enum[@"team_t"][@"team_axis"]),
-				color = CoD.TeamUtility.GetTeamFactionColor(Enum[@"team_t"][@"team_axis"]),
+				name = CoD.TeamUtility.GetTeamNameCaps(Enum.team_t[@"team_axis"]),
+				icon = CoD.TeamUtility.GetTeamFactionIcon(Enum.team_t[@"team_axis"]),
+				color = CoD.TeamUtility.GetTeamFactionColor(Enum.team_t[@"team_axis"]),
 			}
 		end
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f54_local0, "axisFactionDisplayName"), f54_local3.name)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f54_local0, "axisFactionIcon"), f54_local3.icon)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f54_local0, "axisFactionColor"), f54_local3.color)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f54_local0, "alliesFactionDisplayName"), f54_local2.name)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f54_local0, "alliesFactionIcon"), f54_local2.icon)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f54_local0, "alliesFactionColor"), f54_local2.color)
-		local f54_local4 = Engine[@"getmodel"](f54_local1, "team")
+		Engine.SetModelValue(Engine.CreateModel(f54_local0, "axisFactionDisplayName"), f54_local3.name)
+		Engine.SetModelValue(Engine.CreateModel(f54_local0, "axisFactionIcon"), f54_local3.icon)
+		Engine.SetModelValue(Engine.CreateModel(f54_local0, "axisFactionColor"), f54_local3.color)
+		Engine.SetModelValue(Engine.CreateModel(f54_local0, "alliesFactionDisplayName"), f54_local2.name)
+		Engine.SetModelValue(Engine.CreateModel(f54_local0, "alliesFactionIcon"), f54_local2.icon)
+		Engine.SetModelValue(Engine.CreateModel(f54_local0, "alliesFactionColor"), f54_local2.color)
+		local f54_local4 = Engine.GetModel(f54_local1, "team")
 		if f54_local4 then
 			DataSources.FactionsGlobal.factionSubscription:subscribeToModel(f54_local4, function(model)
 				DataSources.FactionsGlobal.prepared = false
 				DataSources.FactionsGlobal.prepare(f54_arg0)
 			end, false)
 		end
-		local f54_local5 = Engine[@"getmodel"](f54_local1, "CodCaster.profileSettingsUpdated")
+		local f54_local5 = Engine.GetModel(f54_local1, "CodCaster.profileSettingsUpdated")
 		if f54_local5 then
 			DataSources.FactionsGlobal.factionSubscription:subscribeToModel(f54_local5, function(model)
 				DataSources.FactionsGlobal.prepared = false
 				DataSources.FactionsGlobal.prepare(f54_arg0)
 			end, false)
 		end
-		local f54_local6 = Engine[@"getmodel"](f54_local1, "profile.colorblindMode")
+		local f54_local6 = Engine.GetModel(f54_local1, "profile.colorblindMode")
 		if f54_local6 then
 			DataSources.FactionsGlobal.factionSubscription:subscribeToModel(f54_local6, function(model)
 				DataSources.FactionsGlobal.prepared = false
@@ -820,21 +820,21 @@ DataSources.FactionsGlobal = {
 		if not DataSources.FactionsGlobal.prepared then
 			DataSources.FactionsGlobal.prepare(f58_arg0)
 		end
-		return Engine[@"createmodel"](Engine[@"getglobalmodel"](), "factions")
+		return Engine.CreateModel(Engine.GetGlobalModel(), "factions")
 	end,
 }
 DataSources.FactionList = {
 	prepare = function(f59_arg0, f59_arg1, f59_arg2)
 		f59_arg1.factions = {}
-		local f59_local0 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f59_arg0), "factionList")
-		for f59_local4, f59_local5 in ipairs(Engine[@"getteampositions"](f59_arg0)) do
-			local f59_local6 = Engine[@"getfactionforteam"](f59_local4)
-			f59_arg1.factions[f59_local4] = Engine[@"createmodel"](f59_local0, "faction" .. f59_local4)
+		local f59_local0 = Engine.CreateModel(Engine.GetModelForController(f59_arg0), "factionList")
+		for f59_local4, f59_local5 in ipairs(Engine.GetTeamPositions(f59_arg0)) do
+			local f59_local6 = Engine.GetFactionForTeam(f59_local4)
+			f59_arg1.factions[f59_local4] = Engine.CreateModel(f59_local0, "faction" .. f59_local4)
 			local f59_local7 = 0
 			local f59_local8 = "faction_" .. f59_local6
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f59_arg1.factions[f59_local4], "factionName"), f59_local6)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f59_arg1.factions[f59_local4], "factionIcon"), f59_local8)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f59_arg1.factions[f59_local4], "factionScore"), f59_local7)
+			Engine.SetModelValue(Engine.CreateModel(f59_arg1.factions[f59_local4], "factionName"), f59_local6)
+			Engine.SetModelValue(Engine.CreateModel(f59_arg1.factions[f59_local4], "factionIcon"), f59_local8)
+			Engine.SetModelValue(Engine.CreateModel(f59_arg1.factions[f59_local4], "factionScore"), f59_local7)
 		end
 	end,
 	getCount = function(f60_arg0)

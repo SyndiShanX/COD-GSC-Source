@@ -7,7 +7,7 @@ CoD.callingcards_loot2_circusclown_rightarm.new = function(f1_arg0, f1_arg1, f1_
 	self.id = "callingcards_loot2_circusclown_rightarm"
 	self.soundSet = "default"
 	local rightarm = LUI.UIImage.new(0, 0, -136, 16, 0, 0, -48, 48)
-	rightarm:setImage(RegisterImage(@"uie_ui_menu_callingcards_circusclown_rightarm"))
+	rightarm:setImage(RegisterImage("uie_ui_menu_callingcards_circusclown_rightarm"))
 	self:addElement(rightarm)
 	self.rightarm = rightarm
 	if PostLoadFunc then

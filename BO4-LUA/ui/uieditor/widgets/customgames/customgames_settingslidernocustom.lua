@@ -1,4 +1,4 @@
-require("x64:9e5ed084d6c26d")
+require("ui/uieditor/widgets/customgames/customgames_settingslidernocustom_internal")
 CoD.CustomGames_SettingSliderNoCustom = InheritFrom(LUI.UIElement)
 CoD.CustomGames_SettingSliderNoCustom.__defaultWidth = 500
 CoD.CustomGames_SettingSliderNoCustom.__defaultHeight = 60

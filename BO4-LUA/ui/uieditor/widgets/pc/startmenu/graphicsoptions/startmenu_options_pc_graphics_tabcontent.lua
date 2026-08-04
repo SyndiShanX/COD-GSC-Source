@@ -1,8 +1,8 @@
-require("x64:dfd115b8bbb2cbc")
-require("x64:5efe05d5e26c932")
-require("x64:6f134078184861")
-require("x64:8b075f4e512e795")
-require("x64:6ecfe9d4da6fd92")
+require("ui/uieditor/widgets/pc/categoryexpendablebutton")
+require("ui/uieditor/widgets/pc/globaldropdown")
+require("ui/uieditor/widgets/pc/separationline_vertical")
+require("ui/uieditor/widgets/pc/startmenu/graphicsoptions/startmenu_options_pc_graphicsoptions_suboptionsnavigation")
+require("ui/uieditor/widgets/pc/startmenu/graphicsoptions/startmenu_options_pc_graphicsoptions_vrambar")
 CoD.StartMenu_Options_PC_Graphics_TabContent = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Options_PC_Graphics_TabContent.__defaultWidth = 1920
 CoD.StartMenu_Options_PC_Graphics_TabContent.__defaultHeight = 802
@@ -41,7 +41,7 @@ CoD.StartMenu_Options_PC_Graphics_TabContent.new = function(f1_arg0, f1_arg1, f1
 	})
 	local f1_local5 = List
 	local SeparationLineVertical = List.subscribeToModel
-	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	local f1_local7 = Engine.GetModelForController(f1_arg1)
 	SeparationLineVertical(f1_local5, f1_local7["PC.CurrentCategory"], function(f4_arg0)
 		f1_arg0:updateElementState(List, {
 			name = "model_validation",
@@ -66,7 +66,7 @@ CoD.StartMenu_Options_PC_Graphics_TabContent.new = function(f1_arg0, f1_arg1, f1
 	List:setWidgetType(CoD.CategoryExpendableButton)
 	List:setVerticalCount(4)
 	List:setSpacing(10)
-	List:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	List:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	List:setDataSource("OptionGraphicsCategories")
 	self:addElement(List)
 	self.List = List

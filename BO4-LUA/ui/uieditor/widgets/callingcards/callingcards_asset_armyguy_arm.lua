@@ -7,7 +7,7 @@ CoD.CallingCards_Asset_armyguy_arm.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	self.id = "CallingCards_Asset_armyguy_arm"
 	self.soundSet = "default"
 	local arm = LUI.UIImage.new(0, 0, 136, 272, 0, 0, 0, 96)
-	arm:setImage(RegisterImage(@"uie_ui_icon_callingcards_backout_100percent_armyguy_arm"))
+	arm:setImage(RegisterImage("uie_ui_icon_callingcards_backout_100percent_armyguy_arm"))
 	self:addElement(arm)
 	self.arm = arm
 	if PostLoadFunc then

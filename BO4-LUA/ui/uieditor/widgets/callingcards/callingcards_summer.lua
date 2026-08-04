@@ -1,31 +1,31 @@
-require("x64:61905ce88d4fbc5")
-CoD[@"hash_7D8E26CF160AEA12"] = InheritFrom(LUI.UIElement)
-CoD[@"hash_7D8E26CF160AEA12"].__defaultWidth = 960
-CoD[@"hash_7D8E26CF160AEA12"].__defaultHeight = 240
-CoD[@"hash_7D8E26CF160AEA12"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+require("ui/uieditor/widgets/callingcards/callingcards_summer_lenseflare")
+CoD.callingcards_summer = InheritFrom(LUI.UIElement)
+CoD.callingcards_summer.__defaultWidth = 960
+CoD.callingcards_summer.__defaultHeight = 240
+CoD.callingcards_summer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[@"hash_7D8E26CF160AEA12"])
+	self:setClass(CoD.callingcards_summer)
 	self.id = "CallingCards_Summer"
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local background = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	background:setImage(RegisterImage(@"uie_ui_icon_callingcards_summer_background"))
+	background:setImage(RegisterImage("uie_ui_icon_callingcards_summer_background"))
 	self:addElement(background)
 	self.background = background
 	local ruin = LUI.UIImage.new(0, 0, 127, 767, 0, 0, 7, 327)
-	ruin:setImage(RegisterImage(@"uie_ui_icon_callingcards_summer_ruin"))
+	ruin:setImage(RegisterImage("uie_ui_icon_callingcards_summer_ruin"))
 	self:addElement(ruin)
 	self.ruin = ruin
 	local duck = LUI.UIImage.new(0, 0, 416, 480, 0, 0, 130, 226)
-	duck:setImage(RegisterImage(@"uie_ui_icon_callingcards_summer_duck"))
+	duck:setImage(RegisterImage("uie_ui_icon_callingcards_summer_duck"))
 	self:addElement(duck)
 	self.duck = duck
 	local legs = LUI.UIImage.new(0, 0, 87, 663, 0, 0, 53, 357)
-	legs:setImage(RegisterImage(@"uie_ui_icon_callingcards_summer_legs"))
+	legs:setImage(RegisterImage("uie_ui_icon_callingcards_summer_legs"))
 	self:addElement(legs)
 	self.legs = legs
 	local drink = LUI.UIImage.new(0, 0, 682, 986, 0, 0, 26, 330)
-	drink:setImage(RegisterImage(@"uie_ui_icon_callingcards_summer_drink"))
+	drink:setImage(RegisterImage("uie_ui_icon_callingcards_summer_drink"))
 	self:addElement(drink)
 	self.drink = drink
 	local lenseflare = CoD.CallingCards_Summer_lenseflare.new(f1_arg0, f1_arg1, 0, 0, 342, 352, 0, 0, 7, 17)
@@ -37,7 +37,7 @@ CoD[@"hash_7D8E26CF160AEA12"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end
 	return self
 end
-CoD[@"hash_7D8E26CF160AEA12"].__resetProperties = function(f2_arg0)
+CoD.callingcards_summer.__resetProperties = function(f2_arg0)
 	f2_arg0.ruin:completeAnimation()
 	f2_arg0.duck:completeAnimation()
 	f2_arg0.legs:completeAnimation()
@@ -56,7 +56,7 @@ CoD[@"hash_7D8E26CF160AEA12"].__resetProperties = function(f2_arg0)
 	f2_arg0.lenseflare:setZRot(0)
 	f2_arg0.lenseflare:setScale(1, 1)
 end
-CoD[@"hash_7D8E26CF160AEA12"].__clipsPerState = {
+CoD.callingcards_summer.__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -148,6 +148,6 @@ CoD[@"hash_7D8E26CF160AEA12"].__clipsPerState = {
 		end,
 	},
 }
-CoD[@"hash_7D8E26CF160AEA12"].__onClose = function(f14_arg0)
+CoD.callingcards_summer.__onClose = function(f14_arg0)
 	f14_arg0.lenseflare:close()
 end

@@ -1,5 +1,5 @@
-require("x64:b169fe8f8ecf71e")
-require("x64:e3ca6e804d6d29c")
+require("ui/uieditor/widgets/callingcards/callingcards_asset_steampunkwarriors_gunshoteffect")
+require("ui/uieditor/widgets/callingcards/callingcards_asset_steampunkwarriors_gunsmoke")
 CoD.CallingCards_Asset_steampunkwarriors_gun = InheritFrom(LUI.UIElement)
 CoD.CallingCards_Asset_steampunkwarriors_gun.__defaultWidth = 10
 CoD.CallingCards_Asset_steampunkwarriors_gun.__defaultHeight = 10

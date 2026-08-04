@@ -11,13 +11,13 @@ CoD.PC_TabsArrow.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	Arrow:setRGB(0.78, 0.74, 0.67)
 	Arrow:setZRot(180)
 	Arrow:setScale(0.4, 0.4)
-	Arrow:setImage(RegisterImage(@"uie_optionswidgets_arrow"))
+	Arrow:setImage(RegisterImage("uie_optionswidgets_arrow"))
 	self:addElement(Arrow)
 	self.Arrow = Arrow
 	local ArrowFocus = LUI.UIImage.new(0.36, 0.64, -1, -1, 0.23, 0.77, 0, 0)
 	ArrowFocus:setRGB(0.85, 0.79, 0.5)
 	ArrowFocus:setAlpha(0)
-	ArrowFocus:setImage(RegisterImage(@"uie_ui_menu_social_common_arrow"))
+	ArrowFocus:setImage(RegisterImage("uie_ui_menu_social_common_arrow"))
 	self:addElement(ArrowFocus)
 	self.ArrowFocus = ArrowFocus
 	self:mergeStateConditions({

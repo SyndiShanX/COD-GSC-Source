@@ -9,7 +9,7 @@ CoD.CraftActionButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Background = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Background:setAlpha(0.95)
-	Background:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	Background:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	Background:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	Background:setShaderVector(0, 0, 0, 0, 0)
 	Background:setupNineSliceShader(196, 88)
@@ -27,8 +27,8 @@ CoD.CraftActionButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.flash = flash
 	local Frame = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -2, 2)
 	Frame:setRGB(0.2, 0.2, 0.2)
-	Frame:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
-	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
+	Frame:setImage(RegisterImage("uie_ui_menu_store_common_frame"))
+	Frame:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_add"))
 	Frame:setShaderVector(0, 0, 0, 0, 0)
 	Frame:setupNineSliceShader(16, 16)
 	self:addElement(Frame)
@@ -37,8 +37,8 @@ CoD.CraftActionButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	actionName:setRGB(0.92, 0.92, 0.92)
 	actionName:setTTF("ttmussels_regular")
 	actionName:setLetterSpacing(2)
-	actionName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	actionName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	actionName:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	actionName:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(actionName)
 	self.actionName = actionName
 	self.actionName:linkToElementModel(self, "actionName", true, function(model)
@@ -47,11 +47,11 @@ CoD.CraftActionButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 			actionName:setText(Engine[@"hash_4F9F1239CFD921FE"](f2_local0))
 		end
 	end)
-	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
-		ProcessListAction(self, element, controller, menu)
+	f1_arg0:AddButtonCallbackFunction(self, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], nil, function(f3_arg0, f3_arg1, f3_arg2, f3_arg3)
+		ProcessListAction(self, f3_arg0, f3_arg2, f3_arg1)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, nil)
+	end, function(f4_arg0, f4_arg1, f4_arg2)
+		CoD.Menu.SetButtonLabel(f4_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, nil)
 		return false
 	end, false)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

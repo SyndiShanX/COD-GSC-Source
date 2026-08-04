@@ -1,4 +1,4 @@
-require("x64:b79410dc8d1ea84")
+require("ui/uieditor/widgets/pc/startmenu/pc_highlightborder")
 CoD.OpenButton_Button = InheritFrom(LUI.UIElement)
 CoD.OpenButton_Button.__defaultWidth = 336
 CoD.OpenButton_Button.__defaultHeight = 65
@@ -14,8 +14,8 @@ CoD.OpenButton_Button.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	Text:setText(LocalizeToUpperString(@"menu/edit"))
 	Text:setTTF("ttmussels_regular")
 	Text:setLetterSpacing(2)
-	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	Text:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
+	Text:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	Text:setAlignment(Enum.LUIAlignment[@"lui_alignment_middle"])
 	self:addElement(Text)
 	self.Text = Text
 	local PCHighlightBorder = CoD.PC_HighlightBorder.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)

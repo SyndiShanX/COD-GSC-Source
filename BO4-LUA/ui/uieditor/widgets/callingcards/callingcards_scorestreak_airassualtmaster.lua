@@ -1,20 +1,20 @@
-CoD[@"hash_37EA1BE40E0AA14F"] = InheritFrom(LUI.UIElement)
-CoD[@"hash_37EA1BE40E0AA14F"].__defaultWidth = 960
-CoD[@"hash_37EA1BE40E0AA14F"].__defaultHeight = 240
-CoD[@"hash_37EA1BE40E0AA14F"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD.callingcards_scorestreak_airassualtmaster = InheritFrom(LUI.UIElement)
+CoD.callingcards_scorestreak_airassualtmaster.__defaultWidth = 960
+CoD.callingcards_scorestreak_airassualtmaster.__defaultHeight = 240
+CoD.callingcards_scorestreak_airassualtmaster.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[@"hash_37EA1BE40E0AA14F"])
+	self:setClass(CoD.callingcards_scorestreak_airassualtmaster)
 	self.id = "CallingCards_Scorestreak_AirassualtMaster"
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local background = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	background:setImage(RegisterImage(@"uie_air_background"))
+	background:setImage(RegisterImage("uie_air_background"))
 	self:addElement(background)
 	self.background = background
 	local speedlines = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
 	speedlines:setAlpha(0.5)
-	speedlines:setImage(RegisterImage(@"uie_speedlines"))
-	speedlines:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook"))
+	speedlines:setImage(RegisterImage("uie_speedlines"))
+	speedlines:setMaterial(LUI.UIImage.GetCachedMaterial("uie_flipbook"))
 	speedlines:setShaderVector(0, 0, 3, 0, 0)
 	speedlines:setShaderVector(1, 15, 0, 0, 0)
 	self:addElement(speedlines)
@@ -23,8 +23,8 @@ CoD[@"hash_37EA1BE40E0AA14F"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	jetwave:setAlpha(0.6)
 	jetwave:setXRot(180)
 	jetwave:setZRot(91)
-	jetwave:setImage(RegisterImage(@"uie_jetwave"))
-	jetwave:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook"))
+	jetwave:setImage(RegisterImage("uie_jetwave"))
+	jetwave:setMaterial(LUI.UIImage.GetCachedMaterial("uie_flipbook"))
 	jetwave:setShaderVector(0, 5, 0.7, 0, 0)
 	jetwave:setShaderVector(1, 30, 0, 0, 0)
 	self:addElement(jetwave)
@@ -32,8 +32,8 @@ CoD[@"hash_37EA1BE40E0AA14F"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local jetwave2 = LUI.UIImage.new(0, 0, 377, 415, 0, 0, -49, 289)
 	jetwave2:setAlpha(0.6)
 	jetwave2:setZRot(-51)
-	jetwave2:setImage(RegisterImage(@"uie_jetwave"))
-	jetwave2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook"))
+	jetwave2:setImage(RegisterImage("uie_jetwave"))
+	jetwave2:setMaterial(LUI.UIImage.GetCachedMaterial("uie_flipbook"))
 	jetwave2:setShaderVector(0, 5, 0.7, 0, 0)
 	jetwave2:setShaderVector(1, 30, 0, 0, 0)
 	self:addElement(jetwave2)
@@ -41,61 +41,61 @@ CoD[@"hash_37EA1BE40E0AA14F"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local jetwave3 = LUI.UIImage.new(0, 0, 500.5, 688.5, 0, 0, 5.5, 126.5)
 	jetwave3:setAlpha(0.35)
 	jetwave3:setZRot(-393)
-	jetwave3:setImage(RegisterImage(@"uie_jetwave"))
-	jetwave3:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook"))
+	jetwave3:setImage(RegisterImage("uie_jetwave"))
+	jetwave3:setMaterial(LUI.UIImage.GetCachedMaterial("uie_flipbook"))
 	jetwave3:setShaderVector(0, 5, 0.7, 0, 0)
 	jetwave3:setShaderVector(1, 30, 0, 0, 0)
 	self:addElement(jetwave3)
 	self.jetwave3 = jetwave3
 	local AirFX03 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	AirFX03:setImage(RegisterImage(@"uie_plane_fx_04"))
+	AirFX03:setImage(RegisterImage("uie_plane_fx_04"))
 	self:addElement(AirFX03)
 	self.AirFX03 = AirFX03
 	local AirFX02 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	AirFX02:setImage(RegisterImage(@"uie_air_fx_02"))
+	AirFX02:setImage(RegisterImage("uie_air_fx_02"))
 	self:addElement(AirFX02)
 	self.AirFX02 = AirFX02
 	local plane = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 5.5, 245.5)
 	plane:setYRot(-1)
 	plane:setZRot(-2)
-	plane:setImage(RegisterImage(@"uie_plane"))
+	plane:setImage(RegisterImage("uie_plane"))
 	self:addElement(plane)
 	self.plane = plane
 	local AirFX01 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	AirFX01:setImage(RegisterImage(@"uie_air_fx_01"))
+	AirFX01:setImage(RegisterImage("uie_air_fx_01"))
 	self:addElement(AirFX01)
 	self.AirFX01 = AirFX01
 	local explosion = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
 	explosion:setAlpha(0)
-	explosion:setImage(RegisterImage(@"uie_plane_explosion"))
+	explosion:setImage(RegisterImage("uie_plane_explosion"))
 	self:addElement(explosion)
 	self.explosion = explosion
 	local PlaneFX03 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
 	PlaneFX03:setAlpha(0)
-	PlaneFX03:setImage(RegisterImage(@"uie_plane_fx_03"))
+	PlaneFX03:setImage(RegisterImage("uie_plane_fx_03"))
 	self:addElement(PlaneFX03)
 	self.PlaneFX03 = PlaneFX03
 	local PlaneFX02 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
 	PlaneFX02:setAlpha(0)
-	PlaneFX02:setImage(RegisterImage(@"uie_plane_fx_02"))
+	PlaneFX02:setImage(RegisterImage("uie_plane_fx_02"))
 	self:addElement(PlaneFX02)
 	self.PlaneFX02 = PlaneFX02
 	local greyplane = LUI.UIImage.new(0, 0, -317, -36, 0, 0, 122, 216)
 	greyplane:setZRot(31)
 	greyplane:setScale(1, 1)
-	greyplane:setImage(RegisterImage(@"uie_grey_plane"))
+	greyplane:setImage(RegisterImage("uie_grey_plane"))
 	self:addElement(greyplane)
 	self.greyplane = greyplane
 	local planeParts = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
 	planeParts:setAlpha(0)
-	planeParts:setImage(RegisterImage(@"uie_plane_parts"))
+	planeParts:setImage(RegisterImage("uie_plane_parts"))
 	self:addElement(planeParts)
 	self.planeParts = planeParts
 	local whiteFlare = LUI.UIImage.new(0, 0, -70.5, 314.5, 0, 0, -102.5, 282.5)
 	whiteFlare:setRGB(1, 0.74, 0)
 	whiteFlare:setAlpha(0)
-	whiteFlare:setImage(RegisterImage(@"uie_white_flare"))
-	whiteFlare:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	whiteFlare:setImage(RegisterImage("uie_white_flare"))
+	whiteFlare:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(whiteFlare)
 	self.whiteFlare = whiteFlare
 	if PostLoadFunc then
@@ -103,7 +103,7 @@ CoD[@"hash_37EA1BE40E0AA14F"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end
 	return self
 end
-CoD[@"hash_37EA1BE40E0AA14F"].__resetProperties = function(f2_arg0)
+CoD.callingcards_scorestreak_airassualtmaster.__resetProperties = function(f2_arg0)
 	f2_arg0.plane:completeAnimation()
 	f2_arg0.jetwave3:completeAnimation()
 	f2_arg0.jetwave2:completeAnimation()
@@ -142,7 +142,7 @@ CoD[@"hash_37EA1BE40E0AA14F"].__resetProperties = function(f2_arg0)
 	f2_arg0.greyplane:setXRot(0)
 	f2_arg0.greyplane:setZRot(31)
 	f2_arg0.greyplane:setScale(1, 1)
-	f2_arg0.greyplane:setImage(RegisterImage(@"uie_grey_plane"))
+	f2_arg0.greyplane:setImage(RegisterImage("uie_grey_plane"))
 	f2_arg0.whiteFlare:setAlpha(0)
 	f2_arg0.whiteFlare:setScale(1, 1)
 	f2_arg0.PlaneFX02:setLeftRight(0, 0, 0, 960)
@@ -157,7 +157,7 @@ CoD[@"hash_37EA1BE40E0AA14F"].__resetProperties = function(f2_arg0)
 	f2_arg0.planeParts:setTopBottom(0, 0, 0, 240)
 	f2_arg0.planeParts:setAlpha(0)
 end
-CoD[@"hash_37EA1BE40E0AA14F"].__clipsPerState = {
+CoD.callingcards_scorestreak_airassualtmaster.__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -401,7 +401,7 @@ CoD[@"hash_37EA1BE40E0AA14F"].__clipsPerState = {
 			f3_arg0.greyplane:setXRot(0)
 			f3_arg0.greyplane:setZRot(-13)
 			f3_arg0.greyplane:setScale(1, 1)
-			f3_arg0.greyplane:setImage(RegisterImage(@"uie_grey_plane"))
+			f3_arg0.greyplane:setImage(RegisterImage("uie_grey_plane"))
 			f3_arg0.greyplane:registerEventHandler("interrupted_keyframe", f3_arg0.clipInterrupted)
 			f3_arg0.greyplane:registerEventHandler("transition_complete_keyframe", f3_local5)
 			local f3_local6 = function(f34_arg0)

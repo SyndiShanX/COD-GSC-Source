@@ -1,4 +1,4 @@
-require("x64:b79410dc8d1ea84")
+require("ui/uieditor/widgets/pc/startmenu/pc_highlightborder")
 CoD.SliderBar_EditBox = InheritFrom(LUI.UIElement)
 CoD.SliderBar_EditBox.__defaultWidth = 65
 CoD.SliderBar_EditBox.__defaultHeight = 65
@@ -20,14 +20,14 @@ CoD.SliderBar_EditBox.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	TextBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	TextBox:setTTF("ttmussels_regular")
 	TextBox:setLetterSpacing(1)
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_middle"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	local Frame = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -2, 2)
 	Frame:setRGB(0.2, 0.2, 0.2)
-	Frame:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
-	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
+	Frame:setImage(RegisterImage("uie_ui_menu_store_common_frame"))
+	Frame:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_add"))
 	Frame:setShaderVector(0, 0, 0, 0, 0)
 	Frame:setupNineSliceShader(16, 16)
 	self:addElement(Frame)

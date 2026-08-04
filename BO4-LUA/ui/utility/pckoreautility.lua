@@ -3,8 +3,8 @@ CoD.PCKoreaUtility.WaitOutKoreanBootWarning = function(f1_arg0, f1_arg1, f1_arg2
 	local f1_local0 = tonumber(f1_arg2)
 	assert(f1_local0)
 	f1_arg0.koreaTimer = LUI.UITimer.newElementTimer(f1_local0, true, function()
-		local f2_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.postPopups")
-		Engine[@"setmodelvalue"](f2_local0, CoD.BitUtility.ClearBit(Engine[@"getmodelvalue"](f2_local0), LuaEnum.START_POPUPS.KoreaRating))
+		local f2_local0 = Engine.GetModel(Engine.GetGlobalModel(), "lobbyRoot.postPopups")
+		Engine.SetModelValue(f2_local0, CoD.BitUtility.ClearBit(Engine.GetModelValue(f2_local0), LuaEnum.START_POPUPS.KoreaRating))
 		ForceNotifyGlobalModel(f1_arg1, "lobbyRoot.closePopups")
 		if Engine[@"getlobbyuiscreen"]() == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.MAIN) then
 			Engine[@"lobbyevent"]("OnGoForward", {
@@ -22,7 +22,7 @@ CoD.PCKoreaUtility.StartKoreaIndulgenceChecks = function(f3_arg0)
 	if not CoD.PCKoreaUtility.IsInKorea() then
 		return
 	end
-	local f3_local0 = Engine[@"getglobalmodel"]()
+	local f3_local0 = Engine.GetGlobalModel()
 	f3_local0 = f3_local0["Korea.ShowIndulgenceMessage"]
 	if f3_local0 then
 		f3_arg0:subscribeToModel(f3_local0, function(model)
@@ -108,17 +108,17 @@ CoD.PCKoreaUtility.IsHashInSemicolonSeperatedList = function(f19_arg0, f19_arg1)
 	return false
 end
 CoD.PCKoreaUtility.OpenTransactionsDeepLinkStore = function(f20_arg0)
-	Engine[@"execnow"](f20_arg0, "ui_browser_new 2 http:www.activision.com")
+	Engine.ExecNow(f20_arg0, "ui_browser_new 2 http:www.activision.com")
 end
 CoD.PCKoreaUtility.OpenTransactionsDeepLinkBlackmarket = function(f21_arg0)
-	Engine[@"execnow"](f21_arg0, "ui_browser_new 2 http:www.activision.com")
+	Engine.ExecNow(f21_arg0, "ui_browser_new 2 http:www.activision.com")
 end
 CoD.PCKoreaUtility.OpenTransactionsDeepLinkLab = function(f22_arg0)
-	Engine[@"execnow"](f22_arg0, "ui_browser_new 2 http:www.activision.com")
+	Engine.ExecNow(f22_arg0, "ui_browser_new 2 http:www.activision.com")
 end
 DataSources.PCKoreaRefundWarning = {
 	prepare = function(f23_arg0, f23_arg1, f23_arg2, f23_arg3, f23_arg4, f23_arg5, f23_arg6, f23_arg7, f23_arg8, f23_arg9, f23_arg10, f23_arg11, f23_arg12, f23_arg13, f23_arg14, f23_arg15, f23_arg16)
-		local f23_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "PCKoreaRefundWarning")
+		local f23_local0 = Engine.CreateModel(Engine.GetGlobalModel(), "PCKoreaRefundWarning")
 		local f23_local1 = f23_local0:create("title")
 		f23_local1:set(tostring(f23_arg3))
 		f23_local1 = f23_local0:create("description")
@@ -178,12 +178,12 @@ DataSources.PCKoreaRefundWarning = {
 		return f23_local0
 	end,
 	getModel = function()
-		local f24_local0 = Engine[@"getglobalmodel"]()
+		local f24_local0 = Engine.GetGlobalModel()
 		return f24_local0.PCKoreaRefundWarning
 	end,
 }
 CoD.PCKoreaUtility.DeclineRefundPopup = function(f25_arg0, f25_arg1)
-	local f25_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "PCStoreKoreaAccepts")
+	local f25_local0 = Engine.GetModel(Engine.GetGlobalModel(), "PCStoreKoreaAccepts")
 	f25_local0:set(false)
 	local f25_local1 = DataSources.PCKoreaRefundWarning.getModel()
 	local f25_local2 = f25_local1.cancelCallback:get()
@@ -198,7 +198,7 @@ DataSources.PCKoreaRefundButtons = DataSourceHelpers.ListSetup("PCKoreaRefundBut
 		CoD.PCKoreaUtility.DeclineRefundPopup(f27_arg1, f27_arg2)
 	end
 	local f26_local2 = function(f28_arg0, f28_arg1, f28_arg2)
-		local f28_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "PCStoreKoreaAccepts")
+		local f28_local0 = Engine.GetModel(Engine.GetGlobalModel(), "PCStoreKoreaAccepts")
 		if not f28_local0 then
 			return
 		else
@@ -210,16 +210,16 @@ DataSources.PCKoreaRefundButtons = DataSourceHelpers.ListSetup("PCKoreaRefundBut
 		end
 	end
 	local f26_local3 = function(f29_arg0, f29_arg1, f29_arg2)
-		Engine[@"execnow"](f29_arg2, "ui_browser_new 2 https:\\\\support.activision.com\\servlet\\servlet.FileDownload?retURL=%2Fapex%2Fmanuals&file=00P0B000018GAugUAG")
+		Engine.ExecNow(f29_arg2, "ui_browser_new 2 https:\\\\support.activision.com\\servlet\\servlet.FileDownload?retURL=%2Fapex%2Fmanuals&file=00P0B000018GAugUAG")
 	end
 	local f26_local4 = function(f30_arg0, f30_arg1, f30_arg2)
-		Engine[@"execnow"](f30_arg2, "ui_browser_new 2 https:\\\\support.activision.com\\articles\\ko\\FAQ\\Call-of-Duty-Black-Ops-4-Purchases")
+		Engine.ExecNow(f30_arg2, "ui_browser_new 2 https:\\\\support.activision.com\\articles\\ko\\FAQ\\Call-of-Duty-Black-Ops-4-Purchases")
 	end
 	local f26_local5 = function(f31_arg0, f31_arg1, f31_arg2)
-		Engine[@"execnow"](f31_arg2, "ui_browser_new 2 https:\\\\support.activision.com\\articles\\ko\\FAQ\\Call-of-Duty-Black-Ops-4-Tiers")
+		Engine.ExecNow(f31_arg2, "ui_browser_new 2 https:\\\\support.activision.com\\articles\\ko\\FAQ\\Call-of-Duty-Black-Ops-4-Tiers")
 	end
 	local f26_local6 = function(f32_arg0, f32_arg1, f32_arg2)
-		local f32_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "PCStoreKoreaAccepts")
+		local f32_local0 = Engine.GetModel(Engine.GetGlobalModel(), "PCStoreKoreaAccepts")
 		return not f32_local0:get()
 	end
 	local f26_local7 = function(f33_arg0, f33_arg1, f33_arg2, f33_arg3, f33_arg4, f33_arg5)
@@ -237,23 +237,23 @@ DataSources.PCKoreaRefundButtons = DataSourceHelpers.ListSetup("PCKoreaRefundBut
 		}
 	end
 	local f26_local8 = DataSources.PCKoreaRefundWarning.getModel()
-	table.insert(f26_local0, f26_local7(f26_local8.confirmButtonTextHash:get(), @"hash_0", nil, f26_local2, f26_local6, false))
-	table.insert(f26_local0, f26_local7(@"menu/cancel", @"hash_0", nil, f26_local1, nil, false))
+	table.insert(f26_local0, f26_local7(f26_local8.confirmButtonTextHash:get(), 0x0, nil, f26_local2, f26_local6, false))
+	table.insert(f26_local0, f26_local7(@"menu/cancel", 0x0, nil, f26_local1, nil, false))
 	local f26_local9 = {}
 	if f26_local8.hasTermsOfSale:get() then
-		table.insert(f26_local0, f26_local7(@"hash_38770CBF493EC79D", @"hash_0", nil, f26_local3, nil, false))
+		table.insert(f26_local0, f26_local7(@"hash_38770CBF493EC79D", 0x0, nil, f26_local3, nil, false))
 	else
-		table.insert(f26_local9, f26_local7(@"hash_38770CBF493EC79D", @"hash_0", nil, f26_local3, nil, true))
+		table.insert(f26_local9, f26_local7(@"hash_38770CBF493EC79D", 0x0, nil, f26_local3, nil, true))
 	end
 	if f26_local8.hasRefundPolicy:get() then
-		table.insert(f26_local0, f26_local7(@"hash_54D63B43357A2C1B", @"hash_0", nil, f26_local4, nil, false))
+		table.insert(f26_local0, f26_local7(@"hash_54D63B43357A2C1B", 0x0, nil, f26_local4, nil, false))
 	else
-		table.insert(f26_local9, f26_local7(@"hash_54D63B43357A2C1B", @"hash_0", nil, f26_local4, nil, true))
+		table.insert(f26_local9, f26_local7(@"hash_54D63B43357A2C1B", 0x0, nil, f26_local4, nil, true))
 	end
 	if f26_local8.hasDropRates:get() then
-		table.insert(f26_local0, f26_local7(@"hash_2B4D9AF6DB53EB97", @"hash_0", nil, f26_local5, nil, false))
+		table.insert(f26_local0, f26_local7(@"hash_2B4D9AF6DB53EB97", 0x0, nil, f26_local5, nil, false))
 	else
-		table.insert(f26_local9, f26_local7(@"hash_2B4D9AF6DB53EB97", @"hash_0", nil, f26_local5, nil, true))
+		table.insert(f26_local9, f26_local7(@"hash_2B4D9AF6DB53EB97", 0x0, nil, f26_local5, nil, true))
 	end
 	for f26_local13, f26_local14 in ipairs(f26_local9) do
 		table.insert(f26_local0, f26_local14)
@@ -270,8 +270,8 @@ CoD.PCKoreaUtility.DisplayRefundAgreement = function(f34_arg0, f34_arg1, f34_arg
 	local f34_local3 = 0
 	local f34_local4 = CoD.Currencies.COD_POINTS
 	local f34_local5 = @"hash_26EAF44BE32C0CDD"
-	local f34_local6 = @"blacktransparent"
-	local f34_local7 = @"blacktransparent"
+	local f34_local6 = "blacktransparent"
+	local f34_local7 = "blacktransparent"
 	local f34_local8 = nil
 	local f34_local9 = false
 	local f34_local10 = true
@@ -301,7 +301,7 @@ CoD.PCKoreaUtility.DisplayRefundAgreement = function(f34_arg0, f34_arg1, f34_arg
 		f34_local6 = nil
 		f34_local9 = true
 		f34_local8 = {}
-		local f34_local15 = Engine[@"getmodelforcontroller"](f34_arg2)
+		local f34_local15 = Engine.GetModelForController(f34_arg2)
 		if f34_local15.tierPurchase then
 			f34_local8.nextTier = f34_local15.tierPurchase.nextTier:get()
 			f34_local8.lastTier = f34_local15.tierPurchase.lastTier:get()

@@ -2,14 +2,14 @@ CoD.ZombieUtility = {}
 CoD.ZombieUtility.TrialsInfoStates = LuaEnum.createEnum("STATE_INVISIBLE", "STATE_COUNTER", "STATE_UNCHECKED", "STATE_CHECKED")
 CoD.ZombieUtility.TrialsGameStates = LuaEnum.createEnum("STATE_PLAYING", "STATE_ROUND_RESET", "STATE_GAME_OVER_SUCCESS", "STATE_GAME_OVER_FAILURE")
 CoD.ZombieUtility.MapToTrialsCSVPrefix = {
-	[@"zm_zodt8"] = @"hash_EFE70CADBE4C183",
-	[@"zm_office"] = @"hash_2AB7DAAB01B8557E",
-	[@"zm_towers"] = @"hash_7879F08905406A48",
-	[@"zm_escape"] = @"hash_6DA20E363F296451",
-	[@"zm_mansion"] = @"hash_772CB250BE51DE37",
-	[@"zm_red"] = @"hash_74A4EDFD6AD1375",
-	[@"zm_white"] = @"hash_7E5032A765530F0B",
-	[@"zm_orange"] = @"hash_423355D2C68D0B98",
+	zm_zodt8 = @"hash_EFE70CADBE4C183",
+	zm_office = @"hash_2AB7DAAB01B8557E",
+	zm_towers = @"hash_7879F08905406A48",
+	zm_escape = @"hash_6DA20E363F296451",
+	zm_mansion = @"hash_772CB250BE51DE37",
+	zm_red = @"hash_74A4EDFD6AD1375",
+	zm_white = @"hash_7E5032A765530F0B",
+	zm_orange = @"hash_423355D2C68D0B98",
 }
 CoD.ZombieUtility.MAX_CLIENTS_ZM = 4
 CoD.ZombieUtility.Rush = {
@@ -21,22 +21,22 @@ CoD.ZombieUtility.Rush = {
 	},
 }
 CoD.ZombieUtility.SpecialZombiesImages = {
-	@"uie_catalyst_splash",
-	@"uie_stoker_splash",
-	@"uie_blightfather_splash",
-	@"uie_tigeer_splash",
-	@"uie_marauder_splash",
-	@"uie_gladiator_splash",
-	@"uie_hellhound_splash",
-	@"uie_nova_splash",
-	@"uie_warden_splash",
-	@"uie_werewolf_splash",
-	@"uie_nosferatu_splash",
-	@"uie_skeleton_fb_splash",
-	@"uie_gegenees_splash",
-	@"ui_hud_zm_rush_lightninghounds",
-	@"ui_hud_zm_rush_nova6bombers",
-	@"ui_hud_zm_rush_joltingjacks",
+	"uie_catalyst_splash",
+	"uie_stoker_splash",
+	"uie_blightfather_splash",
+	"uie_tigeer_splash",
+	"uie_marauder_splash",
+	"uie_gladiator_splash",
+	"uie_hellhound_splash",
+	"uie_nova_splash",
+	"uie_warden_splash",
+	"uie_werewolf_splash",
+	"uie_nosferatu_splash",
+	"uie_skeleton_fb_splash",
+	"uie_gegenees_splash",
+	"ui_hud_zm_rush_lightninghounds",
+	"ui_hud_zm_rush_nova6bombers",
+	"ui_hud_zm_rush_joltingjacks",
 	@"hash_3E15FF6A079B0562",
 	@"hash_9477BAAE284D117",
 }
@@ -106,15 +106,15 @@ CoD.ZombieUtility.TutorialStringOverrideKBM = {
 	[@"hash_52ED5BAFC1E1A62C"] = @"hash_43F817FB61BDA3C8",
 }
 CoD.ZombieUtility.ZMTrialsEnum = {
-	@"zm_zodt8_default",
-	@"zm_towers_default",
-	@"zm_office_default",
-	@"zm_escape_default",
-	@"zm_mansion_default",
-	@"zm_red_default",
-	@"zm_zodt8_variant_1",
-	@"zm_white_default",
-	@"zm_orange_default",
+	"zm_zodt8_default",
+	"zm_towers_default",
+	"zm_office_default",
+	"zm_escape_default",
+	"zm_mansion_default",
+	"zm_red_default",
+	"zm_zodt8_variant_1",
+	"zm_white_default",
+	"zm_orange_default",
 }
 CoD.ZombieUtility.ZombiesTrialsAARStrings = {
 	[0] = {
@@ -150,7 +150,7 @@ CoD.ZombieUtility.CommonPostLoadHud = function(f2_arg0, f2_arg1, f2_arg2)
 				if LUI.startswith(f3_local0.id, "bleedOutItem") then
 					local f3_local1 = f3_local0:getModel(f2_arg1, "playerName")
 					if f3_local1 then
-						Engine[@"setmodelvalue"](f3_local1, Engine[@"getgamertagforclient"](f2_arg1, f3_local0.bleedOutClient))
+						Engine.SetModelValue(f3_local1, Engine.GetGamertagForClient(f2_arg1, f3_local0.bleedOutClient))
 					end
 				end
 				f3_local0 = f3_local0:getNextSibling()
@@ -161,7 +161,7 @@ CoD.ZombieUtility.CommonPostLoadHud = function(f2_arg0, f2_arg1, f2_arg2)
 		while f2_local3 do
 			local f2_local4 = f2_local0:create("bleedOutModel" .. f2_local2)
 			local f2_local5 = f2_local4:create("playerName")
-			f2_local5:set(Engine[@"getgamertagforclient"](f2_arg1, f2_local2))
+			f2_local5:set(Engine.GetGamertagForClient(f2_arg1, f2_local2))
 			local f2_local6 = f2_local4:create("prompt")
 			f2_local6:set(@"zmui/revive")
 			f2_local6 = f2_local4:create("clockPercent")
@@ -182,7 +182,7 @@ CoD.ZombieUtility.CommonPostLoadHud = function(f2_arg0, f2_arg1, f2_arg2)
 			f2_arg0:sendInitializationEvents(f2_arg1, f2_local6)
 			f2_arg0.fullscreenContainer:addElement(f2_local6)
 			if not f2_arg0._connectionChangeHandlerSubscription then
-				f2_arg0._connectionChangeHandlerSubscription = f2_arg0.fullscreenContainer:subscribeToModel(Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f2_arg1), "playerConnected"), function(model)
+				f2_arg0._connectionChangeHandlerSubscription = f2_arg0.fullscreenContainer:subscribeToModel(Engine.GetModel(Engine.GetModelForController(f2_arg1), "playerConnected"), function(model)
 					f2_local1(f2_arg0.fullscreenContainer)
 				end)
 			end
@@ -295,7 +295,7 @@ DataSources.TcmRules = DataSourceHelpers.ListSetup(
 	"TcmRules",
 	function(f9_arg0)
 		local f9_local0 = {}
-		local f9_local1 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "ZMHudGlobal.tcm.active")
+		local f9_local1 = Engine.GetModel(Engine.GetGlobalModel(), "ZMHudGlobal.tcm.active")
 		local f9_local2 = 0
 		if f9_local1 then
 			f9_local2 = f9_local1:get()
@@ -319,7 +319,7 @@ DataSources.TcmRules = DataSourceHelpers.ListSetup(
 	function(f10_arg0, f10_arg1, f10_arg2)
 		if not f10_arg1.__gameEndSubscription then
 			f10_arg1.__gameEndSubscription = true
-			f10_arg1:subscribeToModel(Engine[@"getmodel"](Engine[@"getglobalmodel"](), "ZmHudGlobal.tcm.active"), function(model)
+			f10_arg1:subscribeToModel(Engine.GetModel(Engine.GetGlobalModel(), "ZmHudGlobal.tcm.active"), function(model)
 				f10_arg1:clearLayout()
 				f10_arg1:updateDataSource(false, false)
 			end)
@@ -328,7 +328,7 @@ DataSources.TcmRules = DataSourceHelpers.ListSetup(
 )
 DataSources.ZMPlayerList = {
 	getModel = function(f12_arg0)
-		return Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f12_arg0), "PlayerList")
+		return Engine.CreateModel(Engine.GetModelForController(f12_arg0), "PlayerList")
 	end,
 }
 DataSources.ZombieGameoverScoreboard = DataSourceHelpers.ListSetup(
@@ -336,25 +336,25 @@ DataSources.ZombieGameoverScoreboard = DataSourceHelpers.ListSetup(
 	function(f13_arg0)
 		local f13_local0 = {}
 		local f13_local1 = DataSources.ZMPlayerList.getModel(f13_arg0)
-		local f13_local2 = Engine[@"getclientnum"](f13_arg0)
+		local f13_local2 = Engine.GetClientNum(f13_arg0)
 		for f13_local3 = 0, 3, 1 do
-			local f13_local6 = tonumber(Engine[@"getmodelvalue"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "scoreboard.team1." .. f13_local3 .. ".clientNum")))
+			local f13_local6 = tonumber(Engine.GetModelValue(Engine.GetModel(Engine.GetGlobalModel(), "scoreboard.team1." .. f13_local3 .. ".clientNum")))
 			local f13_local7 = f13_local3 + 1
 			if f13_local6 > -1 then
-				local f13_local8 = Engine[@"createmodel"](f13_local1, DataSources.PlayerListZM.clientNumToArrayIndex(f13_local6, f13_local2))
+				local f13_local8 = Engine.CreateModel(f13_local1, DataSources.PlayerListZM.clientNumToArrayIndex(f13_local6, f13_local2))
 				local f13_local9 = f13_local8:create("zombiePlayerIcon")
-				local f13_local10 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "Clients." .. f13_local6 .. ".scoreboard")
+				local f13_local10 = Engine.GetModel(Engine.GetGlobalModel(), "Clients." .. f13_local6 .. ".scoreboard")
 				table.insert(f13_local0, {
 					models = {
 						clientNum = f13_local6,
 						position = f13_local7,
-						zombiePlayerIcon = Engine[@"getmodelvalue"](f13_local9),
-						playerName = Engine[@"getmodelvalue"](Engine[@"getmodel"](f13_local10, "playerName")),
-						col1 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f13_local10, "col1")),
-						col2 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f13_local10, "col2")),
-						col3 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f13_local10, "col3")),
-						col4 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f13_local10, "footer1")),
-						col5 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f13_local10, "footer2")),
+						zombiePlayerIcon = Engine.GetModelValue(f13_local9),
+						playerName = Engine.GetModelValue(Engine.GetModel(f13_local10, "playerName")),
+						col1 = Engine.GetModelValue(Engine.GetModel(f13_local10, "col1")),
+						col2 = Engine.GetModelValue(Engine.GetModel(f13_local10, "col2")),
+						col3 = Engine.GetModelValue(Engine.GetModel(f13_local10, "col3")),
+						col4 = Engine.GetModelValue(Engine.GetModel(f13_local10, "footer1")),
+						col5 = Engine.GetModelValue(Engine.GetModel(f13_local10, "footer2")),
 					},
 				})
 			end
@@ -368,8 +368,8 @@ DataSources.ZombieGameoverScoreboard = DataSourceHelpers.ListSetup(
 			f14_arg1.__gameEndSubscription = true
 			local f14_local0 = f14_arg1
 			local f14_local1 = f14_arg1.subscribeToModel
-			local f14_local2 = Engine[@"getmodelforcontroller"](f14_arg0)
-			f14_local1(f14_local0, f14_local2["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f15_arg0)
+			local f14_local2 = Engine.GetModelForController(f14_arg0)
+			f14_local1(f14_local0, f14_local2["UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_game_ended"]], function(f15_arg0)
 				f14_arg1:clearLayout()
 				f14_arg1:updateDataSource(false, false)
 			end)
@@ -404,7 +404,7 @@ table.insert(CoD.ZombieUtility.PowerUps.ClientFieldNames, {
 })
 DataSources.PowerUps = {
 	prepare = function(f16_arg0, f16_arg1, f16_arg2)
-		f16_arg1.model = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f16_arg0), "hudItems.zmPowerUps")
+		f16_arg1.model = Engine.CreateModel(Engine.GetModelForController(f16_arg0), "hudItems.zmPowerUps")
 		if not f16_arg1.eventHandlersRegistered then
 			f16_arg1.eventHandlersRegistered = true
 			f16_arg1.clientFieldStates = {}
@@ -412,7 +412,7 @@ DataSources.PowerUps = {
 			f16_arg1.updateSubscriptions = {}
 			for f16_local3, f16_local4 in ipairs(CoD.ZombieUtility.PowerUps.ClientFieldNames) do
 				local f16_local5 = f16_local4.clientFieldName
-				f16_arg1.models[f16_local3] = Engine[@"createmodel"](f16_arg1.model, f16_local5)
+				f16_arg1.models[f16_local3] = Engine.CreateModel(f16_arg1.model, f16_local5)
 				local f16_local6 = f16_arg1.models[f16_local3]:create("image")
 				f16_local6:set(f16_local4.image)
 				f16_local6 = f16_arg1.models[f16_local3]:create("state")
@@ -451,21 +451,21 @@ CoD.ZombieUtility.OpenZombieLoadout = function(f20_arg0, f20_arg1)
 	OpenOverlay(f20_arg1, "ZMLoadoutMain", f20_arg0)
 end
 CoD.ZombieUtility.TrialsTimerShouldShow = function()
-	if Engine[@"getgametypesetting"](@"zmshowtimer") == 1 and CoD.ModelUtility.IsGlobalModelValueEqualTo("ZMHudGlobal.trials.gameState", 0) then
+	if Engine.GetGametypeSetting("zmshowtimer") == 1 and CoD.ModelUtility.IsGlobalModelValueEqualTo("ZMHudGlobal.trials.gameState", 0) then
 		return true
 	else
 		return false
 	end
 end
 CoD.ZombieUtility.HideIfIsArcadeMode = function(f22_arg0)
-	if Dvar[@"g_gametype"]:get() == "zstandard" then
+	if Dvar.g_gametype:get() == "zstandard" then
 		return 0
 	else
 		return 1
 	end
 end
 CoD.ZombieUtility.ShowIfIsArcadeMode = function(f23_arg0)
-	if Dvar[@"g_gametype"]:get() == "zstandard" then
+	if Dvar.g_gametype:get() == "zstandard" then
 		return 1
 	else
 		return 0
@@ -473,9 +473,9 @@ CoD.ZombieUtility.ShowIfIsArcadeMode = function(f23_arg0)
 end
 CoD.ZombieUtility.GetSurvivedRoundsText = function(f24_arg0)
 	if f24_arg0 == 1 then
-		return Engine[@"hash_4F9F1239CFD921FE"](@"zombie/survived_round")
+		return Engine[@"hash_4F9F1239CFD921FE"]("zombie/survived_round")
 	else
-		return Engine[@"hash_4F9F1239CFD921FE"](@"zombie/survived_rounds", f24_arg0)
+		return Engine[@"hash_4F9F1239CFD921FE"]("zombie/survived_rounds", f24_arg0)
 	end
 end
 CoD.ZombieUtility.GetNumDownsText = function(f25_arg0)
@@ -488,7 +488,7 @@ end
 CoD.ZombieUtility.IsZombieFactionRewardsAvailable = function(f26_arg0)
 	if not IsLobbyNetworkModeLAN() then
 		local f26_local0, f26_local1, f26_local2 = LuaUtils.GetCurrentFactionDvars()
-		local f26_local3 = IsBooleanDvarSet(@"hash_11DA02CA40639DE5")
+		local f26_local3 = IsBooleanDvarSet("faction_callings_enabled_zm")
 		if f26_local3 then
 			if f26_local0 == 0 or f26_local1 == 0 then
 				f26_local3 = false
@@ -504,7 +504,7 @@ end
 CoD.ZombieUtility.IsZombieCallingsAvailable = function(f27_arg0)
 	if not IsLobbyNetworkModeLAN() then
 		local f27_local0, f27_local1, f27_local2 = LuaUtils.GetCurrentFactionDvars()
-		local f27_local3 = IsBooleanDvarSet(@"hash_11DA02CA40639DE5")
+		local f27_local3 = IsBooleanDvarSet("faction_callings_enabled_zm")
 		if f27_local3 then
 			if f27_local0 ~= 0 and f27_local1 ~= 0 then
 				f27_local3 = f27_local2
@@ -524,7 +524,7 @@ CoD.ZombieUtility.IsSpeedStatusEffectActive = function(f28_arg0)
 		local f28_local1 = f28_local0.id and f28_local0.id:get() or 0x0
 		if type(f28_local1) == "string" and (f28_local1 == "hero_chakram_lv2_zm" or f28_local1 == "hero_chakram_lv3_zm") and f28_local0.state then
 			return f28_local0.state:get() == Enum[@"weapongadgetstates"][@"player_ability_state_inuse"]
-		elseif (f28_local1 == @"hero_chakram_lv2_zm" or f28_local1 == @"hero_chakram_lv3_zm") and f28_local0.state then
+		elseif (f28_local1 == "hero_chakram_lv2_zm" or f28_local1 == "hero_chakram_lv3_zm") and f28_local0.state then
 			return f28_local0.state:get() == Enum[@"weapongadgetstates"][@"player_ability_state_inuse"]
 		end
 	end
@@ -545,7 +545,7 @@ CoD.ZombieUtility.IsVigorStatusEffectActive = function(f29_arg0)
 			return f29_local2
 		else
 			local f29_local2
-			if f29_local1 ~= @"hero_scepter_lv2_zm" and f29_local1 ~= @"hero_scepter_lv3_zm" then
+			if f29_local1 ~= "hero_scepter_lv2_zm" and f29_local1 ~= "hero_scepter_lv3_zm" then
 				f29_local2 = false
 			else
 				f29_local2 = true
@@ -559,12 +559,12 @@ end
 CoD.ZombieUtility.AddUpdateOrderHandlingForZMRushPlayercards = function(f30_arg0, f30_arg1)
 	local f30_local0 = function()
 		if f30_arg0.currentState == "HudStart" then
-			local f31_local0 = Engine[@"getmodelforcontroller"](f30_arg1)
+			local f31_local0 = Engine.GetModelForController(f30_arg1)
 			f31_local0 = f31_local0:create("Clients.clientCount")
 			local f31_local1 = CoD.ZombieUtility.MAX_CLIENTS_ZM - f31_local0:get()
-			local f31_local2 = Engine[@"getclientnum"](f30_arg1)
+			local f31_local2 = Engine.GetClientNum(f30_arg1)
 			for f31_local3 = 0, 3, 1 do
-				local f31_local6 = tonumber(Engine[@"getmodelvalue"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "scoreboard.team1." .. f31_local3 .. ".clientNum")))
+				local f31_local6 = tonumber(Engine.GetModelValue(Engine.GetModel(Engine.GetGlobalModel(), "scoreboard.team1." .. f31_local3 .. ".clientNum")))
 				if f31_local6 > -1 then
 					PlayClip(f30_arg0, "Client" .. DataSources.PlayerListZM.clientNumToArrayIndex(f31_local6, f31_local2) .. "Pos" .. f31_local3 + f31_local1, f30_arg1)
 				end
@@ -587,7 +587,7 @@ CoD.ZombieUtility.AddUpdateOrderHandlingForZMRushPlayercards = function(f30_arg0
 	end
 	local f30_local2 = f30_arg0
 	local f30_local3 = f30_arg0.subscribeToModel
-	local f30_local4 = Engine[@"getmodelforcontroller"](f30_arg1)
+	local f30_local4 = Engine.GetModelForController(f30_arg1)
 	f30_local3(f30_local2, f30_local4:create("Clients.clientCount"), f30_local0)
 	f30_arg0.orderTimer = nil
 	LUI.OverrideFunction_CallOriginalFirst(f30_arg0, "setState", function(element, controller, f33_arg2, f33_arg3, f33_arg4)
@@ -608,16 +608,16 @@ CoD.ZombieUtility.AddUpdateOrderHandlingForZMRushPlayercards = function(f30_arg0
 	end)
 end
 CoD.ZombieUtility.GetZombiesRushPositionForIndex = function(f34_arg0, f34_arg1)
-	local f34_local0 = Engine[@"getmodelforcontroller"](f34_arg0)
+	local f34_local0 = Engine.GetModelForController(f34_arg0)
 	f34_local0 = f34_local0:create("Clients.clientCount")
 	return CoD.ZombieUtility.GetStringPositionForIndex(f34_arg1 - CoD.ZombieUtility.MAX_CLIENTS_ZM - f34_local0:get())
 end
 CoD.ZombieUtility.SetupZMPlayerListModel = function(f35_arg0, f35_arg1)
 	local f35_local0 = DataSources.ZMPlayerList.getModel(f35_arg1)
-	local f35_local1 = Engine[@"getclientnum"](f35_arg1)
+	local f35_local1 = Engine.GetClientNum(f35_arg1)
 	for f35_local2 = 0, 3, 1 do
-		local f35_local5 = Engine[@"createmodel"](f35_local0, DataSources.PlayerListZM.clientNumToArrayIndex(f35_local2, f35_local1))
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f35_local5, "zombieInventoryIcon"), "blacktransparent")
+		local f35_local5 = Engine.CreateModel(f35_local0, DataSources.PlayerListZM.clientNumToArrayIndex(f35_local2, f35_local1))
+		Engine.SetModelValue(Engine.CreateModel(f35_local5, "zombieInventoryIcon"), "blacktransparent")
 		f35_local5:create("playerScore")
 		f35_local5:create("playerIsDowned")
 		f35_local5:create("zombiePlayerIcon")
@@ -627,39 +627,39 @@ CoD.ZombieUtility.SetupZMPlayerListModel = function(f35_arg0, f35_arg1)
 		f35_local6:set(0)
 		f35_local5:create("self_revives_direction")
 		f35_local5:create("clientModel")
-		DataSources.PlayerListZM.subscriptions[f35_arg1]:subscribeToModel(Engine[@"getmodel"](Engine[@"getglobalmodel"](), "PlayerList.client" .. f35_local2 .. ".playerIsDowned"), function(model)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f35_local5, "playerIsDowned"), Engine[@"getmodelvalue"](model))
+		DataSources.PlayerListZM.subscriptions[f35_arg1]:subscribeToModel(Engine.GetModel(Engine.GetGlobalModel(), "PlayerList.client" .. f35_local2 .. ".playerIsDowned"), function(model)
+			Engine.SetModelValue(Engine.CreateModel(f35_local5, "playerIsDowned"), Engine.GetModelValue(model))
 		end)
-		DataSources.PlayerListZM.subscriptions[f35_arg1]:subscribeToModel(Engine[@"getmodel"](Engine[@"getglobalmodel"](), "PlayerList.client" .. f35_local2 .. ".multiplier_count"), function(model)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f35_local5, "multiplier_count"), Engine[@"getmodelvalue"](model))
+		DataSources.PlayerListZM.subscriptions[f35_arg1]:subscribeToModel(Engine.GetModel(Engine.GetGlobalModel(), "PlayerList.client" .. f35_local2 .. ".multiplier_count"), function(model)
+			Engine.SetModelValue(Engine.CreateModel(f35_local5, "multiplier_count"), Engine.GetModelValue(model))
 		end)
-		DataSources.PlayerListZM.subscriptions[f35_arg1]:subscribeToModel(Engine[@"getmodel"](Engine[@"getglobalmodel"](), "PlayerList.client" .. f35_local2 .. ".multiplier_blink"), function(model)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f35_local5, "multiplier_blink"), Engine[@"getmodelvalue"](model))
+		DataSources.PlayerListZM.subscriptions[f35_arg1]:subscribeToModel(Engine.GetModel(Engine.GetGlobalModel(), "PlayerList.client" .. f35_local2 .. ".multiplier_blink"), function(model)
+			Engine.SetModelValue(Engine.CreateModel(f35_local5, "multiplier_blink"), Engine.GetModelValue(model))
 		end)
-		DataSources.PlayerListZM.subscriptions[f35_arg1]:subscribeToModel(Engine[@"getmodel"](Engine[@"getglobalmodel"](), "PlayerList.client" .. f35_local2 .. ".self_revives"), function(model)
-			local f39_local0 = Engine[@"createmodel"](f35_local5, "self_revives")
-			local f39_local1 = Engine[@"getmodelvalue"](f39_local0)
-			local f39_local2 = Engine[@"getmodelvalue"](model)
+		DataSources.PlayerListZM.subscriptions[f35_arg1]:subscribeToModel(Engine.GetModel(Engine.GetGlobalModel(), "PlayerList.client" .. f35_local2 .. ".self_revives"), function(model)
+			local f39_local0 = Engine.CreateModel(f35_local5, "self_revives")
+			local f39_local1 = Engine.GetModelValue(f39_local0)
+			local f39_local2 = Engine.GetModelValue(model)
 			local f39_local3 = 0
 			if f39_local2 < f39_local1 then
 				f39_local3 = -1
 			elseif f39_local1 < f39_local2 then
 				f39_local3 = 1
 			end
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f35_local5, "self_revives_direction"), f39_local3)
-			Engine[@"setmodelvalue"](f39_local0, f39_local2)
+			Engine.SetModelValue(Engine.CreateModel(f35_local5, "self_revives_direction"), f39_local3)
+			Engine.SetModelValue(f39_local0, f39_local2)
 		end)
-		f35_local6 = Engine[@"createmodel"](f35_local5, "clientModel")
-		f35_local6:set(Engine[@"getmodel"](Engine[@"getglobalmodel"](), "Clients." .. f35_local2))
+		f35_local6 = Engine.CreateModel(f35_local5, "clientModel")
+		f35_local6:set(Engine.GetModel(Engine.GetGlobalModel(), "Clients." .. f35_local2))
 	end
 end
 CoD.ZombieUtility.IsClientnumFromElementEqualToOurs = function(f40_arg0, f40_arg1)
-	local f40_local0 = Engine[@"getclientnum"](f40_arg0)
+	local f40_local0 = Engine.GetClientNum(f40_arg0)
 	local f40_local1 = f40_arg1:getModel()
 	if f40_local1 then
-		local f40_local2 = Engine[@"getmodel"](f40_local1, "clientNum")
+		local f40_local2 = Engine.GetModel(f40_local1, "clientNum")
 		if f40_local2 then
-			return f40_local0 == Engine[@"getmodelvalue"](f40_local2)
+			return f40_local0 == Engine.GetModelValue(f40_local2)
 		end
 	end
 	return false
@@ -667,9 +667,9 @@ end
 CoD.ZombieUtility.IsSelfModelValueGreaterThanCachedValue = function(f41_arg0, f41_arg1, f41_arg2, f41_arg3)
 	local f41_local0 = f41_arg1:getModel()
 	if f41_local0 then
-		local f41_local1 = Engine[@"getmodel"](f41_local0, f41_arg2)
+		local f41_local1 = Engine.GetModel(f41_local0, f41_arg2)
 		if f41_local1 then
-			local f41_local2 = Engine[@"getmodelvalue"](f41_local1)
+			local f41_local2 = Engine.GetModelValue(f41_local1)
 			if f41_local2 and f41_arg1[f41_arg3] then
 				return f41_arg1[f41_arg3] < f41_local2
 			end
@@ -723,7 +723,7 @@ CoD.ZombieUtility.TrialsNoHudPostLoad = function(f47_arg0, f47_arg1, f47_arg2)
 		})
 		local f47_local0 = f47_arg0
 		local f47_local1 = f47_arg0.subscribeToModel
-		local f47_local2 = Engine[@"getglobalmodel"]()
+		local f47_local2 = Engine.GetGlobalModel()
 		f47_local1(f47_local0, f47_local2["ZMHudGlobal.trials.hudDeactivated"], function(f49_arg0)
 			f47_arg2:updateElementState(f47_arg0, {
 				name = "model_validation",
@@ -740,14 +740,14 @@ CoD.ZombieUtility.SetZombiePointPickupNotificationAmount = function(f50_arg0, f5
 	f50_arg0.PointAmount:setText(f50_local0[1])
 end
 CoD.ZombieUtility.OnPlayTrialsRoundSplashNotification = function()
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "ZMHudGlobal.trials.roundSplashPlay"), true)
+	Engine.SetModelValue(Engine.GetModel(Engine.GetGlobalModel(), "ZMHudGlobal.trials.roundSplashPlay"), true)
 end
 CoD.ZombieUtility.OnFinishTrialsRoundSplashNotification = function()
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "ZMHudGlobal.trials.infoHidden"), false)
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "ZMHudGlobal.trials.roundSplashPlay"), false)
+	Engine.SetModelValue(Engine.GetModel(Engine.GetGlobalModel(), "ZMHudGlobal.trials.infoHidden"), false)
+	Engine.SetModelValue(Engine.GetModel(Engine.GetGlobalModel(), "ZMHudGlobal.trials.roundSplashPlay"), false)
 end
 CoD.ZombieUtility.AddTrialsRoundSplashNotification = function(f53_arg0, f53_arg1, f53_arg2)
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "ZMHudGlobal.trials.infoHidden"), true)
+	Engine.SetModelValue(Engine.GetModel(Engine.GetGlobalModel(), "ZMHudGlobal.trials.infoHidden"), true)
 	f53_arg1:appendNotification({
 		clip = "TrialsRoundSplash",
 		playCallback = CoD.ZombieUtility.OnPlayTrialsRoundSplashNotification,
@@ -761,14 +761,14 @@ CoD.ZombieUtility.AddTcmSplashNotification = function(f54_arg0, f54_arg1, f54_ar
 end
 CoD.ZombieUtility.OnPlayTributeSplash = function(f55_arg0)
 	if f55_arg0 then
-		local f55_local0 = Engine[@"getmodelforcontroller"](f55_arg0)
+		local f55_local0 = Engine.GetModelForController(f55_arg0)
 		local f55_local1 = f55_local0.zmhud:create("playTributeSplash")
 		f55_local1:set(1)
 	end
 end
 CoD.ZombieUtility.OnFinishTributeSplash = function(f56_arg0)
 	if f56_arg0 then
-		local f56_local0 = Engine[@"getmodelforcontroller"](f56_arg0)
+		local f56_local0 = Engine.GetModelForController(f56_arg0)
 		local f56_local1 = f56_local0.zmhud:create("playTributeSplash")
 		f56_local1:set(0)
 	end
@@ -791,7 +791,7 @@ CoD.ZombieUtility.GetPlayerDownColor = function(f58_arg0)
 end
 CoD.ZombieUtility.GetTrialsTableForMap = function(f59_arg0, f59_arg1)
 	if not f59_arg1 then
-		f59_arg1 = Engine[@"getgametypesetting"](@"zmtrialsvariant")
+		f59_arg1 = Engine.GetGametypeSetting("zmtrialsvariant")
 	end
 	local f59_local0 = CoD.ZombieUtility.MapToTrialsCSVPrefix[f59_arg0]
 	if f59_local0 then
@@ -806,7 +806,7 @@ CoD.ZombieUtility.GetTrialsTableForMap = function(f59_arg0, f59_arg1)
 end
 CoD.ZombieUtility.GetTrialsNameForMap = function(f60_arg0, f60_arg1)
 	if not f60_arg1 then
-		f60_arg1 = Engine[@"getgametypesetting"](@"zmtrialsvariant")
+		f60_arg1 = Engine.GetGametypeSetting("zmtrialsvariant")
 	end
 	if f60_arg1 and f60_arg1 > 0 then
 		return f60_arg0 .. "_variant_" .. f60_arg1
@@ -815,7 +815,7 @@ CoD.ZombieUtility.GetTrialsNameForMap = function(f60_arg0, f60_arg1)
 	end
 end
 CoD.ZombieUtility.TrialsMedalNotification = function(f61_arg0, f61_arg1, f61_arg2)
-	local f61_local0 = CoD.ZombieUtility.GetTrialsTableForMap(Engine[@"converttoxhash"](Engine[@"getcurrentmapname"]()))
+	local f61_local0 = CoD.ZombieUtility.GetTrialsTableForMap(Engine[@"converttoxhash"](Engine.GetCurrentMapName()))
 	local f61_local1 = 7
 	local f61_local2 = 8
 	local f61_local3 = CoD.GetScriptNotifyData(f61_arg2)
@@ -823,8 +823,8 @@ CoD.ZombieUtility.TrialsMedalNotification = function(f61_arg0, f61_arg1, f61_arg
 	f61_arg1:playNotification(Engine[@"hash_4C6F8EC444864600"](f61_local0, f61_local4, f61_local1), Engine[@"hash_4C6F8EC444864600"](f61_local0, f61_local4, f61_local2))
 end
 CoD.ZombieUtility.TrialsCreatePlayerListClientModel = function(f62_arg0, f62_arg1)
-	local f62_local0 = Engine[@"getglobalmodel"]()
-	local f62_local1 = Engine[@"getclientnum"](f62_arg1)
+	local f62_local0 = Engine.GetGlobalModel()
+	local f62_local1 = Engine.GetClientNum(f62_arg1)
 	local f62_local2 = Engine[@"getmodelforclient"](f62_local1)
 	assert(f62_local2.clientNum:get() == f62_local1)
 	local f62_local3 = f62_local0:create("PlayerList.client" .. f62_local1)
@@ -833,16 +833,16 @@ CoD.ZombieUtility.TrialsCreatePlayerListClientModel = function(f62_arg0, f62_arg
 	end
 end
 CoD.ZombieUtility.SubscribeForSoloMatchLobbyTitle = function(f63_arg0)
-	local f63_local0 = Engine[@"getglobalmodel"]()
+	local f63_local0 = Engine.GetGlobalModel()
 	f63_local0 = f63_local0:create("lobbyRoot")
 	local f63_local1 = f63_local0:create("lobbyTitle")
 	local f63_local2 = f63_local0:create("lobbyList")
 	f63_local2 = f63_local2:create("playerCount")
 	local f63_local3 = function()
 		local f64_local0 = LobbyData.GetCurrentMenuTarget()
-		if f64_local0[@"name"] == LuaEnum.UI.DIRECTOR_ONLINE_ZM_PRIVATE then
+		if f64_local0.name == LuaEnum.UI.DIRECTOR_ONLINE_ZM_PRIVATE then
 			if f63_local2:get() ~= 1 then
-				f63_local1:set(f64_local0[@"title"])
+				f63_local1:set(f64_local0.title)
 			else
 				f63_local1:set(@"menu/solo_match")
 			end
@@ -852,7 +852,7 @@ CoD.ZombieUtility.SubscribeForSoloMatchLobbyTitle = function(f63_arg0)
 	f63_arg0:subscribeToModel(f63_local2, f63_local3, true)
 end
 CoD.ZombieUtility.GetCounterProgress = function(f65_arg0)
-	local f65_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "ZMHudGlobal.trials.playerCounterMax")
+	local f65_local0 = Engine.GetModel(Engine.GetGlobalModel(), "ZMHudGlobal.trials.playerCounterMax")
 	local f65_local1 = f65_local0:get()
 	if f65_arg0 ~= nil and f65_local1 ~= nil then
 		return Engine[@"hash_4F9F1239CFD921FE"](@"hash_5B7D5EBBEC599C9A", f65_arg0, f65_local1)
@@ -864,7 +864,7 @@ CoD.ZombieUtility.IsNotTrialsOrTrialsModelAllowed = function(f66_arg0, f66_arg1)
 	if not CoD.HUDUtility.IsAnyGameType(f66_arg0, "ztrials") then
 		return true
 	else
-		local f66_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), f66_arg1)
+		local f66_local0 = Engine.GetModel(Engine.GetGlobalModel(), f66_arg1)
 		if f66_local0:get() ~= true then
 			return true
 		else
@@ -873,7 +873,7 @@ CoD.ZombieUtility.IsNotTrialsOrTrialsModelAllowed = function(f66_arg0, f66_arg1)
 	end
 end
 CoD.ZombieUtility.GetGlobalTrialsCounterProgress = function(f67_arg0, f67_arg1, f67_arg2)
-	local f67_local0 = Engine[@"getmodel"](f67_arg0, "globalCounterMax")
+	local f67_local0 = Engine.GetModel(f67_arg0, "globalCounterMax")
 	if f67_local0 then
 		local f67_local1 = f67_local0:get()
 		if f67_arg2 ~= nil and f67_local1 ~= nil then
@@ -894,9 +894,9 @@ CoD.ZombieUtility.ShowZMLobbyPoseOptions = function()
 	return Engine[@"getdvarbool"]("ui_enableZMLobbyPoseOptions")
 end
 CoD.ZombieUtility.GetShamedPlayerPortrait = function(f70_arg0, f70_arg1, f70_arg2)
-	local f70_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "ZMHudGlobal.trials.failurePlayer")
+	local f70_local0 = Engine.GetModel(Engine.GetGlobalModel(), "ZMHudGlobal.trials.failurePlayer")
 	if f70_local0 ~= nil then
-		local f70_local1 = Engine[@"getmodelvalue"](f70_local0)
+		local f70_local1 = Engine.GetModelValue(f70_local0)
 		local f70_local2 = {
 			0,
 			1,
@@ -915,14 +915,14 @@ CoD.ZombieUtility.GetShamedPlayerPortrait = function(f70_arg0, f70_arg1, f70_arg
 			end
 		end
 		if f70_local4 ~= nil then
-			f70_local6 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f70_arg0), "PlayerList")
+			f70_local6 = Engine.CreateModel(Engine.GetModelForController(f70_arg0), "PlayerList")
 			f70_local7 = 0
 			f70_local8 = Engine[@"getmodelforclient"](f70_local4)
 			if f70_local8 then
 				f70_local9 = f70_local8.xuid:get()
 				local f70_local10 = f70_local8.playerName:get()
-				if Engine[@"getxuid64"](f70_arg0) ~= f70_local9 then
-					for f70_local11 = 1, Dvar[@"com_maxclients"]:get() - 1, 1 do
+				if Engine.GetXUID64(f70_arg0) ~= f70_local9 then
+					for f70_local11 = 1, Dvar.com_maxclients:get() - 1, 1 do
 						if f70_local9 == LuaDefine.INVALID_XUID_X64 then
 							if f70_local6[f70_local11].playerName and f70_local6[f70_local11].playerName:get() == f70_local10 then
 								f70_local7 = f70_local11
@@ -952,10 +952,10 @@ CoD.ZombieUtility.GetShamedPlayerPortrait = function(f70_arg0, f70_arg1, f70_arg
 	return ""
 end
 CoD.ZombieUtility.GetTrialFailurePlayerGamertagByCount = function(f71_arg0, f71_arg1, f71_arg2)
-	local f71_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "ZMHudGlobal.trials.failurePlayer")
+	local f71_local0 = Engine.GetModel(Engine.GetGlobalModel(), "ZMHudGlobal.trials.failurePlayer")
 	local f71_local1 = nil
 	if f71_local0 ~= nil then
-		local f71_local2 = Engine[@"getmodelvalue"](f71_local0)
+		local f71_local2 = Engine.GetModelValue(f71_local0)
 		local f71_local3 = {
 			0,
 			1,
@@ -974,7 +974,7 @@ CoD.ZombieUtility.GetTrialFailurePlayerGamertagByCount = function(f71_arg0, f71_
 			end
 		end
 		if f71_local5 ~= nil then
-			f71_local1 = Engine[@"getgamertagforclient"](f71_arg0, f71_local5)
+			f71_local1 = Engine.GetGamertagForClient(f71_arg0, f71_local5)
 		else
 			if f71_local1 ~= nil then
 				return f71_local1
@@ -990,10 +990,10 @@ CoD.ZombieUtility.GetTrialFailurePlayerGamertagByCount = function(f71_arg0, f71_
 	end
 end
 CoD.ZombieUtility.FailurePlayerCountMatchesNum = function(f72_arg0, f72_arg1)
-	local f72_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "ZMHudGlobal.trials.failurePlayer")
+	local f72_local0 = Engine.GetModel(Engine.GetGlobalModel(), "ZMHudGlobal.trials.failurePlayer")
 	local f72_local1 = 0
 	if f72_local0 ~= nil then
-		local f72_local2 = Engine[@"getmodelvalue"](f72_local0)
+		local f72_local2 = Engine.GetModelValue(f72_local0)
 		for f72_local6, f72_local7 in ipairs({
 			0,
 			1,
@@ -1008,9 +1008,9 @@ CoD.ZombieUtility.FailurePlayerCountMatchesNum = function(f72_arg0, f72_arg1)
 	return f72_arg1 == f72_local1
 end
 CoD.ZombieUtility.ShouldShowFailurePlayer = function(f73_arg0)
-	local f73_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "ZMHudGlobal.trials.failurePlayer")
+	local f73_local0 = Engine.GetModel(Engine.GetGlobalModel(), "ZMHudGlobal.trials.failurePlayer")
 	local f73_local1 = nil
-	if f73_local0 ~= nil and CoD.BitUtility.IsAnyBitSet(Engine[@"getmodelvalue"](f73_local0), {
+	if f73_local0 ~= nil and CoD.BitUtility.IsAnyBitSet(Engine.GetModelValue(f73_local0), {
 		0,
 		1,
 		2,
@@ -1051,14 +1051,14 @@ CoD.ZombieUtility.SetupTrialsStaggerDisables = function(f77_arg0, f77_arg1)
 	local f77_local1 = 750
 	local f77_local2 = function(f78_arg0)
 		if f78_arg0:get() == true then
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f77_arg1), "ZMHud.delayDisableSpecial"), 1)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f77_arg1), "ZMHud.delayDisableEquipment"), 1)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f77_arg1), "ZMHud.delayDisableWeapon"), 1)
+			Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f77_arg1), "ZMHud.delayDisableSpecial"), 1)
+			Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f77_arg1), "ZMHud.delayDisableEquipment"), 1)
+			Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f77_arg1), "ZMHud.delayDisableWeapon"), 1)
 		else
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f77_arg1), "ZMHud.delayDisableEquipment"), 1)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f77_arg1), "ZMHud.delayDisableWeapon"), 1)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f77_arg1), "ZMHud.delayDisableSpecial"), 2)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f77_arg1), "ZMHud.updateDisableWeapon"), 1)
+			Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f77_arg1), "ZMHud.delayDisableEquipment"), 1)
+			Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f77_arg1), "ZMHud.delayDisableWeapon"), 1)
+			Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f77_arg1), "ZMHud.delayDisableSpecial"), 2)
+			Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f77_arg1), "ZMHud.updateDisableWeapon"), 1)
 		end
 	end
 	local f77_local3 = function(f79_arg0)
@@ -1072,11 +1072,11 @@ CoD.ZombieUtility.SetupTrialsStaggerDisables = function(f77_arg0, f77_arg1)
 					f77_arg0.delayDisableTimer = nil
 				end
 				f77_arg0.delayDisableTimer = LUI.UITimer.newElementTimer(f77_local0, true, function()
-					Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f77_arg1), "ZMHud.delayDisableEquipment"), 2)
+					Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f77_arg1), "ZMHud.delayDisableEquipment"), 2)
 				end)
 				f77_arg0:addElement(f77_arg0.delayDisableTimer)
 			else
-				Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f77_arg1), "ZMHud.delayDisableEquipment"), 2)
+				Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f77_arg1), "ZMHud.delayDisableEquipment"), 2)
 			end
 		end
 	end
@@ -1091,18 +1091,18 @@ CoD.ZombieUtility.SetupTrialsStaggerDisables = function(f77_arg0, f77_arg1)
 					f77_arg0.delayDisableTimer = nil
 				end
 				f77_arg0.delayDisableTimer = LUI.UITimer.newElementTimer(f77_local0, true, function()
-					Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f77_arg1), "ZMHud.delayDisableWeapon"), 2)
+					Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f77_arg1), "ZMHud.delayDisableWeapon"), 2)
 				end)
 				f77_arg0:addElement(f77_arg0.delayDisableTimer)
 			else
-				Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f77_arg1), "ZMHud.delayDisableWeapon"), 2)
+				Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f77_arg1), "ZMHud.delayDisableWeapon"), 2)
 			end
 		end
 	end
 	local f77_local5 = function(f83_arg0)
 		if f83_arg0:get() == 2 then
 			if CoD.ModelUtility.IsGlobalModelValueEqualTo("ZMHudGlobal.trials.disableGun", 1) then
-				Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f77_arg1), "ZMHud.updateDisableWeapon"), 2)
+				Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f77_arg1), "ZMHud.updateDisableWeapon"), 2)
 			end
 			if f77_arg0.delayDisableTimer ~= nil then
 				f77_arg0.delayDisableTimer.disposable = true
@@ -1112,25 +1112,25 @@ CoD.ZombieUtility.SetupTrialsStaggerDisables = function(f77_arg0, f77_arg1)
 				f77_arg0.delayDisableTimer = nil
 			end
 			f77_arg0.delayDisableTimer = LUI.UITimer.newElementTimer(f77_local1, true, function()
-				Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f77_arg1), "ZMHud.delayDisableSpecial"), 0)
-				Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f77_arg1), "ZMHud.delayDisableEquipment"), 0)
-				Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f77_arg1), "ZMHud.delayDisableWeapon"), 0)
-				Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f77_arg1), "ZMHud.updateDisableWeapon"), 0)
+				Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f77_arg1), "ZMHud.delayDisableSpecial"), 0)
+				Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f77_arg1), "ZMHud.delayDisableEquipment"), 0)
+				Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f77_arg1), "ZMHud.delayDisableWeapon"), 0)
+				Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f77_arg1), "ZMHud.updateDisableWeapon"), 0)
 			end)
 			f77_arg0:addElement(f77_arg0.delayDisableTimer)
 		end
 	end
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f77_arg1), "ZMHud.updateDisableWeapon"), 0)
-	f77_arg0:subscribeToModel(Engine[@"createmodel"](Engine[@"getglobalmodel"](), "ZMHudGlobal.trials.infoHidden"), f77_local2)
-	f77_arg0:subscribeToModel(Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f77_arg1), "ZMHud.delayDisableSpecial"), f77_local3)
-	f77_arg0:subscribeToModel(Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f77_arg1), "ZMHud.delayDisableEquipment"), f77_local4)
-	f77_arg0:subscribeToModel(Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f77_arg1), "ZMHud.delayDisableWeapon"), f77_local5)
+	Engine.SetModelValue(Engine.CreateModel(Engine.GetModelForController(f77_arg1), "ZMHud.updateDisableWeapon"), 0)
+	f77_arg0:subscribeToModel(Engine.CreateModel(Engine.GetGlobalModel(), "ZMHudGlobal.trials.infoHidden"), f77_local2)
+	f77_arg0:subscribeToModel(Engine.CreateModel(Engine.GetModelForController(f77_arg1), "ZMHud.delayDisableSpecial"), f77_local3)
+	f77_arg0:subscribeToModel(Engine.CreateModel(Engine.GetModelForController(f77_arg1), "ZMHud.delayDisableEquipment"), f77_local4)
+	f77_arg0:subscribeToModel(Engine.CreateModel(Engine.GetModelForController(f77_arg1), "ZMHud.delayDisableWeapon"), f77_local5)
 end
 CoD.ZombieUtility.GetTrialsGameOverText = function(f85_arg0)
 	if f85_arg0 == CoD.ZombieUtility.TrialsGameStates.STATE_GAME_OVER_SUCCESS then
-		return LocalizeToUpperString(@"hash_5400A284ADF5EAC0")
+		return LocalizeToUpperString("zmtrials/trial_completed")
 	else
-		return Engine[@"hash_4F9F1239CFD921FE"](@"zombie/game_over")
+		return Engine[@"hash_4F9F1239CFD921FE"]("zombie/game_over")
 	end
 end
 CoD.ZombieUtility.GetTrialsCompletetionTime = function(f86_arg0, f86_arg1)
@@ -1187,9 +1187,9 @@ CoD.ZombieUtility.ZMPlaylistTabs = {
 	COUNT = 7,
 }
 CoD.ZombieUtility.GameTypeAllowsBots = function()
-	local f89_local0 = Engine[@"getglobalmodel"]()
+	local f89_local0 = Engine.GetGlobalModel()
 	f89_local0 = f89_local0:create("MapVote.mapVoteGameModeNext")
-	return f89_local0 and f89_local0:get() == @"zclassic"
+	return f89_local0 and f89_local0:get() == "zclassic"
 end
 CoD.ZombieUtility.IsZMLoadoutPreviewWidgetShown = function(f90_arg0)
 	local f90_local0 = DataSources.DirectorZMLoadoutPreview.getModel(f90_arg0)
@@ -1209,27 +1209,27 @@ CoD.ZombieUtility.GetLocalZMLobbyTitle = function(f91_arg0)
 	end
 end
 CoD.ZombieUtility.GetLocalZMDifficultyImage = function(f92_arg0)
-	if IsLobbyNetworkModeLAN() and f92_arg0 == @"zclassic" and not CoD.ZombieUtility.IsZMOfflineScreenStateCustomGame() then
+	if IsLobbyNetworkModeLAN() and f92_arg0 == "zclassic" and not CoD.ZombieUtility.IsZMOfflineScreenStateCustomGame() then
 		local f92_local0 = {
 			"ui_icon_difficulty_zm_casual_large",
 			"ui_icon_difficulty_zm_normal_large",
 			"ui_icon_difficulty_zm_hardcore_large",
 			"ui_icon_difficulty_zm_realistic_large",
 		}
-		local f92_local1 = Engine[@"getglobalmodel"]()
+		local f92_local1 = Engine.GetGlobalModel()
 		f92_local1 = f92_local1:create("localZMDifficulty")
 		return f92_local0[(f92_local1:get() or 1) + 1]
 	else
-		return @"blacktransparent"
+		return "blacktransparent"
 	end
 end
 CoD.ZombieUtility.MapNameToZMOfflineLocalizedMapName = function(f93_arg0)
 	if IsLobbyNetworkModeLAN() then
-		local f93_local0 = Engine[@"getglobalmodel"]()
+		local f93_local0 = Engine.GetGlobalModel()
 		f93_local0 = f93_local0:create("MapVote.mapVoteGameModeNext")
 		f93_local0 = f93_local0:get()
-		if f93_local0 == @"ztutorial" then
-			local f93_local1 = Engine[@"getglobalmodel"]()
+		if f93_local0 == "ztutorial" then
+			local f93_local1 = Engine.GetGlobalModel()
 			f93_local1 = f93_local1:create("localZMDifficulty")
 			f93_local1 = f93_local1:get() or 1
 			local f93_local2 = {
@@ -1237,8 +1237,8 @@ CoD.ZombieUtility.MapNameToZMOfflineLocalizedMapName = function(f93_arg0)
 				@"hash_C9580DAB628ED90",
 			}
 			return Engine[@"hash_4F9F1239CFD921FE"](f93_local2[f93_local1 + 1]) or ""
-		elseif f93_local0 == @"ztrials" then
-			local f93_local1 = Engine[@"getglobalmodel"]()
+		elseif f93_local0 == "ztrials" then
+			local f93_local1 = Engine.GetGlobalModel()
 			f93_local1 = f93_local1:create("localZMTrialVariant")
 			return LocalizeToUpperString(CoD.MapUtility.GetMapValue(f93_arg0, CoD.ZombieUtility.GetTrialMapNameFieldName(f93_local1:get()), 0x0))
 		end
@@ -1251,15 +1251,15 @@ CoD.ZombieUtility.SetDefaultGameTypeZMDifficulty = function(f94_arg0)
 		if f94_arg0 == "ztutorial" then
 			f94_local0 = 0
 		end
-		Engine[@"setgametypesetting"]("zmDifficulty", f94_local0)
+		Engine.SetGametypeSetting("zmDifficulty", f94_local0)
 		CoD.ZombieUtility.SetLocalZMDifficultyModel(f94_local0)
-		local f94_local1 = Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_host"])
+		local f94_local1 = Engine[@"lobbygetcontrollinglobbysession"](Enum.LobbyModule[@"lobby_module_host"])
 		Engine[@"lobbyevent"]("OnGametypeSettingsChange", {
-			lobbyModule = Enum[@"lobbymodule"][@"lobby_module_host"],
+			lobbyModule = Enum.LobbyModule[@"lobby_module_host"],
 			lobbyType = f94_local1,
 			fromUI = true,
 		})
-		Engine[@"lobbyhostsessionsetdirty"](f94_local1, Enum[@"sessiondirty"][@"session_dirty_state"])
+		Engine[@"lobbyhostsessionsetdirty"](f94_local1, Enum.SessionDirty[@"session_dirty_state"])
 	end
 end
 CoD.ZombieUtility.HideZMLoadoutPreview = function(f95_arg0)
@@ -1274,7 +1274,7 @@ CoD.ZombieUtility.HideZMLoadoutPreview = function(f95_arg0)
 	f95_local0.ZMLoadoutPreviewItemImage:set(0x0)
 end
 CoD.ZombieUtility.SetPlaylistTab = function(f96_arg0, f96_arg1)
-	local f96_local0 = Engine[@"getglobalmodel"]()
+	local f96_local0 = Engine.GetGlobalModel()
 	f96_local0 = f96_local0:create("ZMLobbyExclusions.ZMPlaylistTab")
 	if f96_arg0 == CoD.ZombieUtility.ZMPlaylistTabs.FEATURED or f96_arg0 == CoD.ZombieUtility.ZMPlaylistTabs.PUBLIC then
 		f96_local0:set(f96_arg0)
@@ -1293,7 +1293,7 @@ CoD.ZombieUtility.GetDifficultyText = function(f97_arg0)
 end
 CoD.ZombieUtility.GetGroupedGameType = function(f98_arg0, f98_arg1)
 	local f98_local0 = Engine[@"hash_1F2CD89B3C345FD3"](f98_arg0)
-	if f98_arg1 ~= nil and f98_arg1 ~= @"ztcm" then
+	if f98_arg1 ~= nil and f98_arg1 ~= "ztcm" then
 		return f98_local0.gametype
 	else
 		local f98_local1 = Engine[@"hash_48D4B2F88BB8D5E7"](f98_local0.gametype)
@@ -1301,7 +1301,7 @@ CoD.ZombieUtility.GetGroupedGameType = function(f98_arg0, f98_arg1)
 	end
 end
 CoD.ZombieUtility.GetGametypeTabName = function(f99_arg0)
-	for f99_local3, f99_local4 in pairs(Engine[@"getgametypesbase"]()) do
+	for f99_local3, f99_local4 in pairs(Engine.GetGametypesBase()) do
 		if f99_local4.gametype == f99_arg0 then
 			return f99_local4.name
 		end
@@ -1321,13 +1321,13 @@ CoD.ZombieUtility.IsZMOfflineScreenStateCustomGame = function()
 end
 CoD.ZombieUtility.SetZMOfflineScreenStateToPrivate = function(f102_arg0)
 	CoD.LobbyUtility.RemoveAllLobbyBots(f102_arg0)
-	Engine[@"resetgametypesettings"]()
+	Engine.ResetGametypeSettings()
 	local f102_local0 = CoD.DirectorUtility.CreateOfflineScreenState()
 	f102_local0:set(CoD.ZombieUtility.ZMOfflineScreenState.PRIVATE)
 end
 CoD.ZombieUtility.SetZMOfflineScreenStateToCustomGame = function(f103_arg0)
-	Engine[@"resetgametypesettings"]()
-	local f103_local0 = Engine[@"getglobalmodel"]()
+	Engine.ResetGametypeSettings()
+	local f103_local0 = Engine.GetGlobalModel()
 	f103_local0 = f103_local0:create("lobbyRoot.selectedGameType")
 	f103_local0 = f103_local0:get()
 	local f103_local1 = false
@@ -1370,7 +1370,7 @@ CoD.ZombieUtility.GetTrialRoundGridInfo = function(f106_arg0, f106_arg1, f106_ar
 		local f106_local3 = 2
 		local f106_local4 = 3
 		local f106_local5 = {}
-		local f106_local6 = Engine[@"gettablerowcount"](f106_local1)
+		local f106_local6 = Engine.GetTableRowCount(f106_local1)
 		local f106_local7 = -1
 		local f106_local8 = CoD.ZombieUtility.GetTrialsNameForMap(f106_arg0, f106_arg2)
 		for f106_local9 = 0, f106_local6, 1 do
@@ -1430,7 +1430,7 @@ end
 CoD.ZombieUtility.GetZMPlaylistDifficulty = function(f107_arg0)
 	for f107_local0 = 1, #f107_arg0.rules, 1 do
 		local f107_local3 = f107_arg0.rules[f107_local0]
-		if f107_local3.type == 0 and f107_local3.name == @"zmdifficulty" then
+		if f107_local3.type == 0 and f107_local3.name == "zmdifficulty" then
 			return tonumber(f107_local3.value)
 		end
 	end
@@ -1484,7 +1484,7 @@ CoD.ZombieUtility.GetEquivalentPrivatePlaylist = function(f109_arg0, f109_arg1)
 end
 CoD.ZombieUtility.UpdateFocusedZMOfflineInfo = function(f110_arg0, f110_arg1)
 	local f110_local0 = CoD.SafeGetModelValue(f110_arg1:getModel(), "id")
-	local f110_local1 = Engine[@"getglobalmodel"]()
+	local f110_local1 = Engine.GetGlobalModel()
 	f110_local1 = f110_local1:create("lobbyRoot.selectedGameType")
 	f110_local1 = f110_local1:get()
 	local f110_local2 = CoD.SafeGetModelValue(f110_arg1:getModel(), "difficulty")
@@ -1495,22 +1495,22 @@ end
 CoD.ZombieUtility.UpdateZMOfflineInfo = function(f111_arg0, f111_arg1, f111_arg2, f111_arg3, f111_arg4)
 	local f111_local0 = DataSources.DirectorZMPlaylistInfo.getModel(f111_arg0)
 	f111_local0.name:set(CoD.MapUtility.GetMapValue(f111_arg1, "mapName", 0x0))
-	if f111_arg2 == @"ztrials" then
+	if f111_arg2 == "ztrials" then
 		f111_local0.name:set(CoD.MapUtility.GetMapValue(f111_arg1, CoD.ZombieUtility.GetTrialMapNameFieldName(CoD.SafeGetModelValue(f111_arg4:getModel(), "trialVariant")), 0x0))
 	end
 	f111_local0.image:set(CoD.MapUtility.GetMapValue(f111_arg1, "previewImage", 0x0))
 	local f111_local1 = Engine[@"hash_48D4B2F88BB8D5E7"](f111_arg2)
 	local f111_local2 = Engine[@"converttoxhash"](f111_local1.groupName)
 	local f111_local3 = 0x0
-	if f111_arg2 == @"zclassic" then
+	if f111_arg2 == "zclassic" then
 		f111_local3 = @"hash_F44B71F613A7D65"
-	elseif f111_arg2 == @"zstandard" then
+	elseif f111_arg2 == "zstandard" then
 		f111_local3 = @"hash_159DF0D7D85936E1"
-	elseif f111_local2 == @"ztcm" then
+	elseif f111_local2 == "ztcm" then
 		f111_local3 = @"hash_1F8845568A0DA5AD"
-	elseif f111_arg2 == @"ztrials" then
+	elseif f111_arg2 == "ztrials" then
 		f111_local3 = @"hash_65A74962FD2F07DE"
-	elseif f111_arg2 == @"ztutorial" then
+	elseif f111_arg2 == "ztutorial" then
 		f111_local3 = @"hash_752D3B2A3C8DB965"
 		local f111_local4 = {
 			@"hash_364122F25F791280",
@@ -1520,17 +1520,17 @@ CoD.ZombieUtility.UpdateZMOfflineInfo = function(f111_arg0, f111_arg1, f111_arg2
 	end
 	f111_local0.tabDesc:set(f111_local3)
 	local f111_local4 = Engine[@"hash_4F9F1239CFD921FE"](CoD.MapUtility.GetMapValue(f111_arg1, "mapDescription", 0x0))
-	if f111_arg2 == @"ztutorial" then
+	if f111_arg2 == "ztutorial" then
 		if f111_arg3 == 0 then
-			f111_local4 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_2856A031E976516B")
+			f111_local4 = Engine[@"hash_4F9F1239CFD921FE"]("zmui/ztutorial_desc")
 		elseif f111_arg3 == 1 then
 			f111_local4 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_9A181BE33C22198")
 		end
 	end
 	f111_local0.desc:set(f111_local4)
-	local f111_local5 = CoD.MapUtility.GetMapValue(f111_arg1, @"hash_3A3627D705B66CDE", 0)
+	local f111_local5 = CoD.MapUtility.GetMapValue(f111_arg1, "storyloadouttype", 0)
 	local f111_local6 = 0x0
-	if f111_arg2 ~= @"ztutorial" then
+	if f111_arg2 ~= "ztutorial" then
 		if f111_local5 == 0 then
 			f111_local6 = @"hash_66D26560889B0C05"
 		elseif f111_local5 == 1 then
@@ -1542,7 +1542,7 @@ CoD.ZombieUtility.UpdateZMOfflineInfo = function(f111_arg0, f111_arg1, f111_arg2
 end
 CoD.ZombieUtility.UpdateZMPlaylistInfo = function(f112_arg0, f112_arg1, f112_arg2, f112_arg3)
 	local f112_local0 = Engine[@"getplaylistinfobyid"](f112_arg1)
-	local f112_local1 = Engine[@"getglobalmodel"]()
+	local f112_local1 = Engine.GetGlobalModel()
 	f112_local1 = f112_local1:create("DirectorZMPlaylistInfo")
 	local f112_local2 = CoD.GetPlayerStats(f112_arg0)
 	if f112_local2 == nil then
@@ -1578,7 +1578,7 @@ CoD.ZombieUtility.UpdateZMPlaylistInfo = function(f112_arg0, f112_arg1, f112_arg
 		end
 		local f114_local0 = nil
 		for f114_local4, f114_local5 in ipairs(f112_local0.rotationList) do
-			local f114_local6 = CoD.MapUtility.GetMapValue(f114_local5.map, @"hash_3A3627D705B66CDE", 0)
+			local f114_local6 = CoD.MapUtility.GetMapValue(f114_local5.map, "storyloadouttype", 0)
 			if f114_local0 ~= nil and f114_local0 ~= f114_local6 then
 				return 0x0
 			end
@@ -1595,14 +1595,14 @@ CoD.ZombieUtility.UpdateZMPlaylistInfo = function(f112_arg0, f112_arg1, f112_arg
 	end
 	if f112_arg2 == CoD.ZombieUtility.ZMPlaylistTabs.FEATURED or f112_arg2 == CoD.ZombieUtility.ZMPlaylistTabs.PUBLIC then
 		f112_local1.name:set(f112_local0.name)
-		f112_local1.image:set(f112_local0.imageTileSideInfo or @"blacktransparent")
+		f112_local1.image:set(f112_local0.imageTileSideInfo or "blacktransparent")
 		f112_local1.tabDesc:set(0x0)
-		f112_local1.desc:set(Engine[@"hash_632A860841DBD025"](f112_arg0, f112_arg1, Enum[@"emodes"][@"mode_zombies"]))
+		f112_local1.desc:set(Engine[@"hash_632A860841DBD025"](f112_arg0, f112_arg1, Enum.eModes.mode_zombies))
 		f112_local1.storyDesc:set(f112_local7())
 		f112_local1.lockState:set(f112_local0.lockState)
-	elseif f112_arg2 == @"zclassic" then
+	elseif f112_arg2 == "zclassic" then
 		f112_local1.name:set(CoD.MapUtility.GetMapValue(f112_local3, "mapName", 0x0))
-		f112_local1.image:set(f112_local0.imageTileSideInfo or @"blacktransparent")
+		f112_local1.image:set(f112_local0.imageTileSideInfo or "blacktransparent")
 		f112_local1.tabDesc:set(@"hash_F44B71F613A7D65")
 		f112_local1.desc:set(MapNameToLocalizedMapDescription(f112_local3))
 		f112_local1.storyDesc:set(f112_local7())
@@ -1615,14 +1615,14 @@ CoD.ZombieUtility.UpdateZMPlaylistInfo = function(f112_arg0, f112_arg1, f112_arg
 			f112_local1.statInt4:set(f112_local8.MAIN_QUEST_COMPLETED.statValue:get())
 			local f112_local9 = f112_local8.FASTEST_QUEST_COMPLETION_TIME.statValue:get()
 			if f112_local9 == 0 then
-				f112_local1.statTimeString1:set(Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"hash_2791826DA0652E1A")))
+				f112_local1.statTimeString1:set(Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"](@"hash_2791826DA0652E1A")))
 			else
 				f112_local1.statTimeString1:set(f112_local6(f112_local9))
 			end
 		end
-	elseif f112_arg2 == @"zstandard" then
+	elseif f112_arg2 == "zstandard" then
 		f112_local1.name:set(CoD.MapUtility.GetMapValue(f112_local3, "mapName", 0x0))
-		f112_local1.image:set(f112_local0.imageTileSideInfo or @"blacktransparent")
+		f112_local1.image:set(f112_local0.imageTileSideInfo or "blacktransparent")
 		f112_local1.tabDesc:set(@"hash_159DF0D7D85936E1")
 		f112_local1.desc:set(MapNameToLocalizedMapDescription(f112_local3))
 		f112_local1.storyDesc:set(f112_local7())
@@ -1634,9 +1634,9 @@ CoD.ZombieUtility.UpdateZMPlaylistInfo = function(f112_arg0, f112_arg1, f112_arg
 			f112_local1.statInt3:set(f112_local8.HIGHEST_SCORE.statValue:get())
 			f112_local1.statInt4:set(f112_local8.HIGHEST_TEAM_SCORE.statValue:get())
 		end
-	elseif f112_arg2 == @"ztcm" then
+	elseif f112_arg2 == "ztcm" then
 		f112_local1.name:set(CoD.MapUtility.GetMapValue(f112_local3, "mapName", 0x0))
-		f112_local1.image:set(f112_local0.imageTileSideInfo or @"blacktransparent")
+		f112_local1.image:set(f112_local0.imageTileSideInfo or "blacktransparent")
 		f112_local1.tabDesc:set(@"hash_1F8845568A0DA5AD")
 		f112_local1.desc:set(MapNameToLocalizedMapDescription(f112_local3))
 		f112_local1.storyDesc:set(f112_local7())
@@ -1647,9 +1647,9 @@ CoD.ZombieUtility.UpdateZMPlaylistInfo = function(f112_arg0, f112_arg1, f112_arg
 			f112_local1.statInt2:set(f112_local8.HEADSHOTS.statValue:get())
 			f112_local1.statInt3:set(f112_local8.HIGHEST_ROUND_REACHED.statValue:get())
 		end
-	elseif f112_arg2 == @"ztrials" then
+	elseif f112_arg2 == "ztrials" then
 		f112_local1.name:set(CoD.MapUtility.GetMapValue(f112_local3, CoD.ZombieUtility.GetTrialMapNameFieldName(CoD.ZombieUtility.GetZMPlaylistTrialVariant(f112_local0)), 0x0))
-		f112_local1.image:set(f112_local0.imageTileSideInfo or @"blacktransparent")
+		f112_local1.image:set(f112_local0.imageTileSideInfo or "blacktransparent")
 		f112_local1.tabDesc:set(@"hash_65A74962FD2F07DE")
 		f112_local1.desc:set(MapNameToLocalizedMapDescription(f112_local3))
 		f112_local1.storyDesc:set(f112_local7())
@@ -1657,39 +1657,39 @@ CoD.ZombieUtility.UpdateZMPlaylistInfo = function(f112_arg0, f112_arg1, f112_arg
 		local f112_local9 = CoD.ZombieUtility.GetZMPlaylistTrialName(f112_local0)
 		if f112_local2.PlayerStatsByTrial[f112_local9] then
 			local f112_local10 = f112_local2.PlayerStatsByTrial[f112_local9]
-			f112_local1.statInt1:set(f112_local10[@"kills"]:get())
-			f112_local1.statInt2:set(f112_local10[@"headshots"]:get())
-			f112_local1.statInt3:set(f112_local10[@"highest_round_reached"]:get())
-			local f112_local11 = f112_local10[0xE770CEC441C9F2]:get()
+			f112_local1.statInt1:set(f112_local10.kills:get())
+			f112_local1.statInt2:set(f112_local10.headshots:get())
+			f112_local1.statInt3:set(f112_local10.highest_round_reached:get())
+			local f112_local11 = f112_local10.fastest_time_to_round_10:get()
 			if f112_local11 == 0 then
-				f112_local1.statTimeString1:set(Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"hash_9FDF805B7D869B6")))
+				f112_local1.statTimeString1:set(Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"]("zmtrials/incomplete")))
 				f112_local1.bronzeComplete:set(false)
 			else
 				f112_local1.statTimeString1:set(f112_local6(f112_local11))
 				f112_local1.bronzeComplete:set(true)
 			end
-			local f112_local12 = f112_local10[0xE46ACEC43F89E9]:get()
+			local f112_local12 = f112_local10.fastest_time_to_round_20:get()
 			if f112_local12 == 0 then
-				f112_local1.statTimeString2:set(Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"hash_9FDF805B7D869B6")))
+				f112_local1.statTimeString2:set(Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"]("zmtrials/incomplete")))
 				f112_local1.silverComplete:set(false)
 			else
 				f112_local1.statTimeString2:set(f112_local6(f112_local12))
 				f112_local1.silverComplete:set(true)
 			end
-			local f112_local13 = f112_local10[@"fastest_time_to_complete_round_30"]:get()
+			local f112_local13 = f112_local10.fastest_time_to_complete_round_30:get()
 			if f112_local13 == 0 then
-				f112_local1.statTimeString3:set(Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"hash_9FDF805B7D869B6")))
+				f112_local1.statTimeString3:set(Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"]("zmtrials/incomplete")))
 				f112_local1.goldComplete:set(false)
 			else
 				f112_local1.statTimeString3:set(f112_local6(f112_local13))
 				f112_local1.goldComplete:set(true)
 			end
 		end
-	elseif f112_arg2 == @"ztutorial" then
+	elseif f112_arg2 == "ztutorial" then
 		f112_local1.name:set(f112_local0.name)
-		f112_local1.image:set(f112_local0.imageTileSideInfo or @"blacktransparent")
+		f112_local1.image:set(f112_local0.imageTileSideInfo or "blacktransparent")
 		f112_local1.tabDesc:set(@"hash_752D3B2A3C8DB965")
-		f112_local1.desc:set(Engine[@"hash_632A860841DBD025"](f112_arg0, f112_arg1, Enum[@"emodes"][@"mode_zombies"]))
+		f112_local1.desc:set(Engine[@"hash_632A860841DBD025"](f112_arg0, f112_arg1, Enum.eModes.mode_zombies))
 		f112_local1.storyDesc:set(0x0)
 	end
 end
@@ -1706,7 +1706,7 @@ CoD.ZombieUtility.GetQuickPlayPlaylistID = function(f115_arg0)
 					local f115_local11 = f115_local7[f115_local8]
 					if f115_local11.rotationList and #f115_local11.rotationList == 1 then
 						local f115_local12 = Engine[@"hash_1F2CD89B3C345FD3"](f115_local11.rotationList[1].gametype)
-						if f115_local12.gametype == @"ztutorial" and CoD.ZombieUtility.GetZMPlaylistDifficulty(f115_local11) == 0 then
+						if f115_local12.gametype == "ztutorial" and CoD.ZombieUtility.GetZMPlaylistDifficulty(f115_local11) == 0 then
 							return f115_local11.id
 						end
 					end
@@ -1912,7 +1912,7 @@ CoD.ZombieUtility.GetZMRoundStats = function(f120_arg0)
 		f120_local0.isTrialComplete = ""
 		f120_local0.prevHighestRoundCompleted = -1
 	else
-		local f120_local1 = Engine[@"getselfgamertag"](f120_arg0)
+		local f120_local1 = Engine.GetSelfGamertag(f120_arg0)
 		local f120_local2 = {
 			useStatsByMap = true,
 			useStatsByGametype = true,
@@ -2088,15 +2088,15 @@ CoD.ZombieUtility.ZMSummaryListGenericInfoTableFunc = function(f124_arg0, f124_a
 	if f124_local2 == "zclassic" or f0_local2(f124_local2) then
 		f124_local3 = {
 			{
-				title = @"hash_4978F253BCF5F16A",
+				title = "menu/lb_zmglobal_kills",
 				value = CoD.TextUtility.FormatNumberWithDelimiters(f124_local1.kills),
 			},
 			{
-				title = @"hash_8E2A982E7E6C57A",
+				title = "zmui/headshots_caps",
 				value = CoD.TextUtility.FormatNumberWithDelimiters(f124_local1.headshots),
 			},
 			{
-				title = @"hash_74BCE2F951AD2A79",
+				title = "zmui/revives_caps",
 				value = CoD.TextUtility.FormatNumberWithDelimiters(f124_local1.revives),
 			},
 			{
@@ -2117,11 +2117,11 @@ CoD.ZombieUtility.ZMSummaryListGenericInfoTableFunc = function(f124_arg0, f124_a
 		local f124_local5 = f124_local4 and CoD.ZombieUtility.ZombiesTrialsAARStrings[f124_local4]
 		local f124_local6 = {}
 		local f124_local7 = {
-			title = @"hash_4978F253BCF5F16A",
+			title = "menu/lb_zmglobal_kills",
 			value = CoD.TextUtility.FormatNumberWithDelimiters(f124_local1.kills),
 		}
 		local f124_local8 = {
-			title = @"hash_8E2A982E7E6C57A",
+			title = "zmui/headshots_caps",
 			value = CoD.TextUtility.FormatNumberWithDelimiters(f124_local1.headshots),
 		}
 		local f124_local9 = {
@@ -2171,25 +2171,25 @@ CoD.ZombieUtility.ZMSummaryListGenericInfoTableFunc = function(f124_arg0, f124_a
 	elseif f124_local2 == "zstandard" then
 		f124_local3 = {
 			{
-				title = @"hash_4978F253BCF5F16A",
+				title = "menu/lb_zmglobal_kills",
 				value = CoD.TextUtility.FormatNumberWithDelimiters(f124_local1.kills),
 			},
 			{
-				title = @"hash_8E2A982E7E6C57A",
+				title = "zmui/headshots_caps",
 				value = CoD.TextUtility.FormatNumberWithDelimiters(f124_local1.headshots),
 			},
 			{
-				title = @"hash_3C2707EFE95DB779",
+				title = "zmui/highest_multiplier",
 				value = CoD.ZombieUtility.GetZombieScoreboardColumnRushMultiplierTreatment(f124_arg0, f124_local1.highestMultiplier),
 			},
 			{
-				title = @"hash_6A75180BC7FDA8F5",
+				title = "menu/score_caps",
 				value = CoD.TextUtility.FormatNumberWithDelimiters(f124_local1.score),
 			},
 		}
 		if not f0_local1(f124_arg0) then
 			table.insert(f124_local3, {
-				title = @"hash_7BC59621C600E8A8",
+				title = "codcaster/ds_team_score",
 				value = CoD.TextUtility.FormatNumberWithDelimiters(f124_local1.teamScore),
 			})
 		end
@@ -2220,15 +2220,15 @@ CoD.ZombieUtility.ZMAllTimeSummaryListGenericInfoTableFunc = function(f125_arg0,
 	if f125_local2 == "zclassic" or f0_local2(f125_local2) then
 		f125_local3 = {
 			{
-				title = @"hash_4978F253BCF5F16A",
+				title = "menu/lb_zmglobal_kills",
 				value = CoD.TextUtility.FormatNumberWithDelimiters(f125_local1.allTimeKills),
 			},
 			{
-				title = @"hash_8E2A982E7E6C57A",
+				title = "zmui/headshots_caps",
 				value = CoD.TextUtility.FormatNumberWithDelimiters(f125_local1.allTimeHeadshots),
 			},
 			{
-				title = @"hash_75B108688AC430E3",
+				title = "zmui/highest_round_reached",
 				value = CoD.TextUtility.FormatNumberWithDelimiters(f125_local1.highestRound),
 			},
 			{
@@ -2241,15 +2241,15 @@ CoD.ZombieUtility.ZMAllTimeSummaryListGenericInfoTableFunc = function(f125_arg0,
 		local f125_local5 = f125_local4 and CoD.ZombieUtility.ZombiesTrialsAARStrings[f125_local4]
 		local f125_local6 = {}
 		local f125_local7 = {
-			title = @"hash_4978F253BCF5F16A",
+			title = "menu/lb_zmglobal_kills",
 			value = CoD.TextUtility.FormatNumberWithDelimiters(f125_local1.allTimeKills),
 		}
 		local f125_local8 = {
-			title = @"hash_8E2A982E7E6C57A",
+			title = "zmui/headshots_caps",
 			value = CoD.TextUtility.FormatNumberWithDelimiters(f125_local1.allTimeHeadshots),
 		}
 		local f125_local9 = {
-			title = @"hash_75B108688AC430E3",
+			title = "zmui/highest_round_reached",
 			value = CoD.TextUtility.FormatNumberWithDelimiters(f125_local1.highestRound),
 		}
 		local f125_local10 = {}
@@ -2295,25 +2295,25 @@ CoD.ZombieUtility.ZMAllTimeSummaryListGenericInfoTableFunc = function(f125_arg0,
 	elseif f125_local2 == "zstandard" then
 		f125_local3 = {
 			{
-				title = @"hash_4978F253BCF5F16A",
+				title = "menu/lb_zmglobal_kills",
 				value = CoD.TextUtility.FormatNumberWithDelimiters(f125_local1.allTimeKills),
 			},
 			{
-				title = @"hash_8E2A982E7E6C57A",
+				title = "zmui/headshots_caps",
 				value = CoD.TextUtility.FormatNumberWithDelimiters(f125_local1.allTimeHeadshots),
 			},
 			{
-				title = @"hash_3C2707EFE95DB779",
+				title = "zmui/highest_multiplier",
 				value = CoD.ZombieUtility.GetZombieScoreboardColumnRushMultiplierTreatment(f125_arg0, f125_local1.allTimeHighestMultiplier),
 			},
 			{
-				title = @"hash_6A75180BC7FDA8F5",
+				title = "menu/score_caps",
 				value = CoD.TextUtility.FormatNumberWithDelimiters(f125_local1.allTimeScore),
 			},
 		}
 		if not f0_local1(f125_arg0) then
 			table.insert(f125_local3, {
-				title = @"hash_7BC59621C600E8A8",
+				title = "codcaster/ds_team_score",
 				value = CoD.TextUtility.FormatNumberWithDelimiters(f125_local1.allTimeTeamScore),
 			})
 		end
@@ -2341,7 +2341,7 @@ CoD.ZombieUtility.GetAARTrialVariant = function(f127_arg0)
 	local f127_local1 = f127_local0.zmTrialsVariant
 	if not f127_local1 then
 		f127_local1 = f127_local0:create("zmTrialsVariant")
-		f127_local1:set(Engine[@"getgametypesetting"](@"zmtrialsvariant"))
+		f127_local1:set(Engine.GetGametypeSetting("zmtrialsvariant"))
 	end
 	return f127_local1 and f127_local1:get()
 end
@@ -2350,7 +2350,7 @@ DataSources.ZmAarTrialRoundGrid = ListHelper_SetupDataSource("ZmAarTrialRoundGri
 	if not CoD.ZombieUtility then
 		return {}
 	else
-		return CoD.ZombieUtility.GetTrialRoundGridInfo(CoD.MapUtility.ConvertMapNameToXHash(Engine[@"isingame"]() and Engine[@"lobbygetmap"]() or CoD.AARUtility.GetCurrentMapName(f128_arg0)), nil, Engine[@"isingame"]() and Engine[@"getgametypesetting"](@"zmtrialsvariant") or CoD.ZombieUtility.GetAARTrialVariant(f128_arg0))
+		return CoD.ZombieUtility.GetTrialRoundGridInfo(CoD.MapUtility.ConvertMapNameToXHash(Engine.IsInGame() and Engine[@"lobbygetmap"]() or CoD.AARUtility.GetCurrentMapName(f128_arg0)), nil, Engine.IsInGame() and Engine.GetGametypeSetting("zmtrialsvariant") or CoD.ZombieUtility.GetAARTrialVariant(f128_arg0))
 	end
 end, true)
 DataSources.ZmAarTrialRoundColumn = ListHelper_SetupDataSource("ZmAarTrialRoundColumn", function(f129_arg0, f129_arg1)
@@ -2410,7 +2410,7 @@ DataSources.AARTrialStats = {
 }
 CoD.ZombieUtility.GetZMPlaylistTrialVariant = function(f132_arg0)
 	for f132_local3, f132_local4 in ipairs(f132_arg0.rules) do
-		if f132_local4.type == 0 and f132_local4.name == @"zmtrialsvariant" then
+		if f132_local4.type == 0 and f132_local4.name == "zmtrialsvariant" then
 			return tonumber(f132_local4.value)
 		end
 	end
@@ -2420,7 +2420,7 @@ CoD.ZombieUtility.GetZMPlaylistTrialName = function(f133_arg0)
 	return CoD.ZombieUtility.GetTrialsNameForMap(f133_arg0.rotationList[1].map, CoD.ZombieUtility.GetZMPlaylistTrialVariant(f133_arg0))
 end
 CoD.ZombieUtility.IsFocusedPlaylistTrialVariant = function(f134_arg0)
-	local f134_local0 = Engine[@"getglobalmodel"]()
+	local f134_local0 = Engine.GetGlobalModel()
 	f134_local0 = f134_local0:create("ZMLobbyExclusions.focusedPlaylistID")
 	if f134_local0 and f134_local0:get() then
 		return f134_arg0 == CoD.ZombieUtility.GetZMPlaylistTrialVariant(Engine[@"getplaylistinfobyid"](f134_local0:get()))
@@ -2429,7 +2429,7 @@ CoD.ZombieUtility.IsFocusedPlaylistTrialVariant = function(f134_arg0)
 end
 DataSources.ZMTrialInfoRoundStat = DataSourceHelpers.ListSetup("ZMTrialInfoRoundStat", function(f135_arg0, f135_arg1)
 	local f135_local0 = {}
-	local f135_local1 = Engine[@"getglobalmodel"]()
+	local f135_local1 = Engine.GetGlobalModel()
 	f135_local1 = f135_local1:create("ZMLobbyExclusions.focusedPlaylistID")
 	local f135_local2 = 0
 	if f135_local1 and f135_local1:get() then
@@ -2441,7 +2441,7 @@ DataSources.ZMTrialInfoRoundStat = DataSourceHelpers.ListSetup("ZMTrialInfoRound
 			local f135_local7 = CoD.GetPlayerStats(f135_arg0)
 			local f135_local8 = CoD.ZombieUtility.GetZMPlaylistTrialName(f135_local3)
 			if f135_local7.PlayerStatsByTrial[f135_local8] then
-				f135_local2 = f135_local7.PlayerStatsByTrial[f135_local8][@"highest_round_reached"]:get()
+				f135_local2 = f135_local7.PlayerStatsByTrial[f135_local8].highest_round_reached:get()
 			end
 		end
 		f135_local0 = CoD.ZombieUtility.GetTrialRoundGridInfo(f135_local4, f135_local2, CoD.ZombieUtility.GetZMPlaylistTrialVariant(f135_local3))
@@ -2452,20 +2452,20 @@ DataSourceHelpers.PerControllerDataSourceSetup("ZMBarracksTrialStats", "ZMBarrac
 	local f136_local0 = 0
 	local f136_local1 = 0
 	local f136_local2 = 0
-	if Engine[@"currentsessionmode"]() == Enum[@"emodes"][@"mode_zombies"] then
+	if Engine.CurrentSessionMode() == Enum.eModes.mode_zombies then
 		local f136_local3 = CoD.PlayerStatsUtility.GetStorageBufferForPlayer(f136_arg1)
-		local f136_local4 = f136_local3 and f136_local3[@"hash_5ABF25946AB0CE9A"]
+		local f136_local4 = f136_local3 and f136_local3.playerstatsbytrial
 		if f136_local4 then
 			for f136_local8, f136_local9 in ipairs(CoD.ZombieUtility.ZMTrialsEnum) do
 				local f136_local10 = f136_local4[f136_local9]
 				if f136_local10 then
-					if 0 < f136_local10[@"fastest_time_to_complete_round_30"]:get() then
+					if 0 < f136_local10.fastest_time_to_complete_round_30:get() then
 						f136_local0 = f136_local0 + 1
 					end
-					if 0 < f136_local10[0xE46ACEC43F89E9]:get() then
+					if 0 < f136_local10.fastest_time_to_round_20:get() then
 						f136_local1 = f136_local1 + 1
 					end
-					if 0 < f136_local10[0xE770CEC441C9F2]:get() then
+					if 0 < f136_local10.fastest_time_to_round_10:get() then
 						f136_local2 = f136_local2 + 1
 					end
 				end
@@ -2481,13 +2481,13 @@ DataSourceHelpers.PerControllerDataSourceSetup("ZMBarracksTrialStats", "ZMBarrac
 end, false)
 DataSources.DirectorZMPlaylistInfoMaps = DataSourceHelpers.ListSetup("DirectorZMPlaylistInfoMaps", function(f137_arg0, f137_arg1)
 	local f137_local0 = {}
-	local f137_local1 = Engine[@"getglobalmodel"]()
+	local f137_local1 = Engine.GetGlobalModel()
 	f137_local1 = f137_local1:create("ZMLobbyExclusions.ZMPlaylistTab")
 	local f137_local2 = f137_local1:get()
-	local f137_local3 = Engine[@"getglobalmodel"]()
+	local f137_local3 = Engine.GetGlobalModel()
 	f137_local3 = f137_local3:create("ZMLobbyExclusions.focusedPlaylistID")
 	local f137_local4 = f137_local3:get()
-	local f137_local5 = Engine[@"getglobalmodel"]()
+	local f137_local5 = Engine.GetGlobalModel()
 	f137_local5 = f137_local5:create("LobbyRoot.PlaylistID")
 	local f137_local6 = f137_local5:get()
 	if f137_local4 == nil then
@@ -2514,7 +2514,7 @@ DataSources.DirectorZMPlaylistInfoMaps = DataSourceHelpers.ListSetup("DirectorZM
 			local f137_local10 = f137_local7
 			table.insert(f137_local0, {
 				models = {
-					map = @"hash_0",
+					map = 0x0,
 				},
 			})
 		end
@@ -2538,13 +2538,13 @@ DataSources.DirectorZMPlaylistInfoMaps = DataSourceHelpers.ListSetup("DirectorZM
 end, true)
 DataSources.DirectorZMPlaylistInfoModes = DataSourceHelpers.ListSetup("DirectorZMPlaylistInfoModes", function(f141_arg0, f141_arg1)
 	local f141_local0 = {}
-	local f141_local1 = Engine[@"getglobalmodel"]()
+	local f141_local1 = Engine.GetGlobalModel()
 	f141_local1 = f141_local1:create("ZMLobbyExclusions.ZMPlaylistTab")
 	local f141_local2 = f141_local1:get()
-	local f141_local3 = Engine[@"getglobalmodel"]()
+	local f141_local3 = Engine.GetGlobalModel()
 	f141_local3 = f141_local3:create("ZMLobbyExclusions.focusedPlaylistID")
 	local f141_local4 = f141_local3:get()
-	local f141_local5 = Engine[@"getglobalmodel"]()
+	local f141_local5 = Engine.GetGlobalModel()
 	f141_local5 = f141_local5:create("LobbyRoot.PlaylistID")
 	local f141_local6 = f141_local5:get()
 	if f141_local4 == nil then
@@ -2598,7 +2598,7 @@ DataSources.ZMDifficultyList = DataSourceHelpers.ListSetup("ZMDifficultyList", f
 		"ui_icon_difficulty_zm_realistic_large",
 	}
 	local f145_local2 = {}
-	local f145_local3 = Engine[@"getglobalmodel"]()
+	local f145_local3 = Engine.GetGlobalModel()
 	f145_local3 = f145_local3:create("ZMLobbyExclusions")
 	f145_local3 = f145_local3:create("ZMPrivateDifficulty")
 	if f145_arg1.difficultySubscription == nil then
@@ -2608,7 +2608,7 @@ DataSources.ZMDifficultyList = DataSourceHelpers.ListSetup("ZMDifficultyList", f
 	end
 	local f145_local4 = nil
 	if not IsLobbyNetworkModeLAN() then
-		local f145_local5 = Engine[@"getglobalmodel"]()
+		local f145_local5 = Engine.GetGlobalModel()
 		f145_local5 = f145_local5:create("ZMLobbyExclusions.ZMPlaylistTab")
 		if f145_arg1.playlistTabSubscription == nil then
 			f145_arg1.playlistTabSubscription = f145_arg1:subscribeToModel(f145_local5, function()
@@ -2623,7 +2623,7 @@ DataSources.ZMDifficultyList = DataSourceHelpers.ListSetup("ZMDifficultyList", f
 			f145_local4 = f145_local6
 		end
 	else
-		local f145_local5 = Engine[@"getglobalmodel"]()
+		local f145_local5 = Engine.GetGlobalModel()
 		f145_local5 = f145_local5:create("lobbyRoot.selectedGameType")
 		if f145_arg1.gametypeSubscription == nil then
 			f145_arg1.gametypeSubscription = f145_arg1:subscribeToModel(f145_local5, function()
@@ -2634,15 +2634,15 @@ DataSources.ZMDifficultyList = DataSourceHelpers.ListSetup("ZMDifficultyList", f
 			f145_arg1:removeSubscription(f145_arg1.playlistTabSubscription)
 		end
 		f145_local4 = f145_local5:get()
-		Engine[@"setgametypesetting"]("zmDifficulty", f145_local3:get())
+		Engine.SetGametypeSetting("zmDifficulty", f145_local3:get())
 		CoD.ZombieUtility.SetLocalZMDifficultyModel(f145_local3:get())
-		local f145_local6 = Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_host"])
+		local f145_local6 = Engine[@"lobbygetcontrollinglobbysession"](Enum.LobbyModule[@"lobby_module_host"])
 		Engine[@"lobbyevent"]("OnGametypeSettingsChange", {
-			lobbyModule = Enum[@"lobbymodule"][@"lobby_module_host"],
+			lobbyModule = Enum.LobbyModule[@"lobby_module_host"],
 			lobbyType = f145_local6,
 			fromUI = true,
 		})
-		Engine[@"lobbyhostsessionsetdirty"](f145_local6, Enum[@"sessiondirty"][@"session_dirty_state"])
+		Engine[@"lobbyhostsessionsetdirty"](f145_local6, Enum.SessionDirty[@"session_dirty_state"])
 	end
 	if f145_local4 ~= nil then
 		local f145_local5 = Engine[@"hash_48D4B2F88BB8D5E7"](f145_local4)
@@ -2667,15 +2667,15 @@ end, true)
 DataSources.DirectorPlaylistMapList = DataSourceHelpers.ListSetup("DirectorPlaylistMapList", function(f149_arg0, f149_arg1)
 	local f149_local0 = {}
 	local f149_local1 = Engine[@"getplaylistid"]()
-	local f149_local2 = Engine[@"getglobalmodel"]()
+	local f149_local2 = Engine.GetGlobalModel()
 	f149_local2 = f149_local2:create("ZMLobbyExclusions.ZMPlaylistTab")
 	local f149_local3 = f149_local2:get()
-	local f149_local4 = Engine[@"getglobalmodel"]()
+	local f149_local4 = Engine.GetGlobalModel()
 	f149_local4 = f149_local4:create("ZMLobbyExclusions.ZMPrivateDifficulty")
 	local f149_local5 = f149_local4:get()
 	local f149_local6 = CoD.LobbyUtility.GetClientList()
 	local f149_local7 = CoD.ZombieUtility.GetUnfilteredPlaylistEntriesForTab(f149_arg0, f149_local3, f149_local5)
-	if f149_local3 ~= CoD.ZombieUtility.ZMPlaylistTabs.FEATURED and f149_local3 ~= CoD.ZombieUtility.ZMPlaylistTabs.PUBLIC and f149_local3 ~= CoD.ZombieUtility.ZMPlaylistTabs.TCM and f149_local3 ~= @"ztrials" and f149_local3 ~= @"ztutorial" then
+	if f149_local3 ~= CoD.ZombieUtility.ZMPlaylistTabs.FEATURED and f149_local3 ~= CoD.ZombieUtility.ZMPlaylistTabs.PUBLIC and f149_local3 ~= CoD.ZombieUtility.ZMPlaylistTabs.TCM and f149_local3 ~= "ztrials" and f149_local3 ~= "ztutorial" then
 		local f149_local8 = {}
 		local f149_local9 = {}
 		for f149_local10 = 1, #f149_local7, 1 do
@@ -2693,7 +2693,7 @@ DataSources.DirectorPlaylistMapList = DataSourceHelpers.ListSetup("DirectorPlayl
 		local f149_local9 = {}
 		for f149_local10 = 1, #f149_local7, 1 do
 			local f149_local13 = f149_local7[f149_local10]
-			if f149_local13[@"featured"] then
+			if f149_local13.featured then
 				f149_local8 = true
 				if f149_local13.isQuickplayCard then
 					table.insert(f149_local9, 1, f149_local13)
@@ -2704,7 +2704,7 @@ DataSources.DirectorPlaylistMapList = DataSourceHelpers.ListSetup("DirectorPlayl
 		end
 		for f149_local10 = 1, #f149_local7, 1 do
 			local f149_local13 = f149_local7[f149_local10]
-			if not f149_local13[@"featured"] then
+			if not f149_local13.featured then
 				table.insert(f149_local9, f149_local13)
 			end
 		end
@@ -2735,27 +2735,27 @@ DataSources.DirectorPlaylistMapList = DataSourceHelpers.ListSetup("DirectorPlayl
 		local f149_local20 = f149_local15.description
 		local f149_local21 = f149_local16
 		local f149_local22 = f149_local15.locked
-		if not f149_local22 and CoD.DirectorUtility.IsPlaylistRankRestrictedForPlayer(f149_local15, Enum[@"emodes"][@"mode_zombies"], f149_arg0) then
+		if not f149_local22 and CoD.DirectorUtility.IsPlaylistRankRestrictedForPlayer(f149_local15, Enum.eModes.mode_zombies, f149_arg0) then
 			f149_local22 = true
 		end
-		local f149_local23 = LuaUtils.PlaylistRulesIncludes(f149_local15.rules, @"scr_xpscalezm", "2")
-		local f149_local24 = LuaUtils.PlaylistRulesIncludes(f149_local15.rules, @"scr_gunxpscalezm", "2")
+		local f149_local23 = LuaUtils.PlaylistRulesIncludes(f149_local15.rules, "scr_xpscalezm", "2")
+		local f149_local24 = LuaUtils.PlaylistRulesIncludes(f149_local15.rules, "scr_gunxpscalezm", "2")
 		local f149_local25 = CoD.ZombieUtility.IsDoubleNP(f149_arg0)
-		local f149_local26 = f149_local15[@"featured"] and 2 or 1
+		local f149_local26 = f149_local15.featured and 2 or 1
 		local f149_local27 = table.insert
 		local f149_local28 = f149_local0
 		local f149_local29 = {}
 		local f149_local30 = {
 			id = f149_local14,
 			playlistID = f149_local15.id,
-			text = Engine[@"localize"](f149_local16),
-			buttonText = Engine[@"localize"](f149_local21),
+			text = Engine.Localize(f149_local16),
+			buttonText = Engine.Localize(f149_local21),
 			image = f149_local17,
 			imageLarge = f149_local18,
 		}
 		local f149_local31 = f149_local15.imageTileSmall
 		if not f149_local31 then
-			f149_local31 = @"blacktransparent"
+			f149_local31 = "blacktransparent"
 		end
 		f149_local30.tileImage = f149_local31
 		f149_local30.playlistDesc = f149_local20
@@ -2770,7 +2770,7 @@ DataSources.DirectorPlaylistMapList = DataSourceHelpers.ListSetup("DirectorPlayl
 		f149_local30.playlistDesc = f149_local20
 		f149_local31 = f149_local15.imageTileLarge
 		if not f149_local31 then
-			f149_local31 = @"blacktransparent"
+			f149_local31 = "blacktransparent"
 		end
 		f149_local30.icon = f149_local31
 		f149_local30.iconBackground = f149_local15.imageBackground
@@ -2778,7 +2778,7 @@ DataSources.DirectorPlaylistMapList = DataSourceHelpers.ListSetup("DirectorPlayl
 		f149_local30.mode = f149_local15.mainMode
 		f149_local30.locked = f149_local22
 		f149_local30.lockState = Engine[@"hash_514ECF96E169F000"](f149_arg0, f149_local15.id)
-		f149_local30.featured = f149_local15[@"featured"] == true
+		f149_local30.featured = f149_local15.featured == true
 		f149_local30.maxPartySize = f149_local15.maxPartySize
 		f149_local30.hasDoubleXP = f149_local23
 		f149_local30.hasDoubleWeaponXP = f149_local24
@@ -2797,15 +2797,15 @@ DataSources.DirectorPlaylistMapList = DataSourceHelpers.ListSetup("DirectorPlayl
 			f149_local31 = Engine[@"hash_5CB675CA7856DA25"]()
 		end
 		f149_local30.disabled = f149_local31
-		f149_local30.purchasable = not Engine[@"ismapvalid"](CoD.MapUtility.ConvertMapNameToXHash(f149_local14))
+		f149_local30.purchasable = not Engine.IsMapValid(CoD.MapUtility.ConvertMapNameToXHash(f149_local14))
 		f149_local30.rowSpan = f149_local26
 		f149_local29.properties = f149_local30
 		f149_local27(f149_local28, f149_local29)
 	end
-	if not f149_local8 and #f149_local0 > 0 and f149_local3 == @"zclassic" then
+	if not f149_local8 and #f149_local0 > 0 and f149_local3 == "zclassic" then
 		local f149_local9 = Engine[@"getplaylistinfobyid"](f149_local1)
 		for f149_local10 = 1, #f149_local0, 1 do
-			if #f149_local9.rotationList == 1 and f149_local9.excludePublicLobby and f149_local0[f149_local10].models.id == f149_local9.rotationList[1].map and CoD.ZombieUtility.GetGroupedGameType(f149_local9.rotationList[1].gametype, @"zclassic") == @"zclassic" then
+			if #f149_local9.rotationList == 1 and f149_local9.excludePublicLobby and f149_local0[f149_local10].models.id == f149_local9.rotationList[1].map and CoD.ZombieUtility.GetGroupedGameType(f149_local9.rotationList[1].gametype, "zclassic") == "zclassic" then
 				f149_local0[f149_local10].properties.selectIndex = true
 				f149_local8 = true
 				Engine[@"setplaylistid"](f149_local0[f149_local10].models.playlistID)
@@ -2837,14 +2837,14 @@ DataSources.DirectorPlaylistMapList = DataSourceHelpers.ListSetup("DirectorPlayl
 end, true)
 DataSources.DirectorPlaylistGameTypeList = DataSourceHelpers.ListSetup("DirectorPlaylistGameTypeList", function(f152_arg0, f152_arg1)
 	local f152_local0 = {}
-	local f152_local1 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot")
-	local f152_local2 = Engine[@"getmodel"](f152_local1, "playlistId")
+	local f152_local1 = Engine.GetModel(Engine.GetGlobalModel(), "lobbyRoot")
+	local f152_local2 = Engine.GetModel(f152_local1, "playlistId")
 	local f152_local3 = nil
 	if f152_local2 and f152_local2:get() then
 		f152_local3 = Engine[@"getplaylistinfobyid"](f152_local2:get())
 	end
-	local f152_local4 = Engine[@"createmodel"](Engine[@"createmodel"](f152_local1, "lobbyList"), "playerCount")
-	local f152_local5 = Engine[@"getmodelvalue"](f152_local4) or 0
+	local f152_local4 = Engine.CreateModel(Engine.CreateModel(f152_local1, "lobbyList"), "playerCount")
+	local f152_local5 = Engine.GetModelValue(f152_local4) or 0
 	local f152_local6 = #CoD.ZombieUtility.GetUnfilteredPlaylistEntriesForTab(f152_arg0, CoD.ZombieUtility.ZMPlaylistTabs.FEATURED) > 0
 	local f152_local7 = false
 	for f152_local8 = CoD.ZombieUtility.ZMPlaylistTabs.BEGIN, CoD.ZombieUtility.ZMPlaylistTabs.COUNT, 1 do
@@ -2865,46 +2865,46 @@ DataSources.DirectorPlaylistGameTypeList = DataSourceHelpers.ListSetup("Director
 				f152_local13 = false
 			end
 		elseif f152_local8 == CoD.ZombieUtility.ZMPlaylistTabs.ZCLASSIC then
-			f152_local11 = @"zclassic"
+			f152_local11 = "zclassic"
 			f152_local12 = CoD.ZombieUtility.GetGametypeTabName("zclassic")
 			if f152_local3 and #f152_local3.rotationList == 1 then
 				local f152_local16 = Engine[@"hash_1F2CD89B3C345FD3"](f152_local3.rotationList[1].gametype)
-				f152_local13 = f152_local16 and f152_local16.gametype == @"zclassic"
+				f152_local13 = f152_local16 and f152_local16.gametype == "zclassic"
 			end
 		elseif f152_local8 == CoD.ZombieUtility.ZMPlaylistTabs.ZSTANDARD then
-			f152_local11 = @"zstandard"
+			f152_local11 = "zstandard"
 			f152_local12 = CoD.ZombieUtility.GetGametypeTabName("zstandard")
 			if f152_local3 and #f152_local3.rotationList == 1 then
 				local f152_local16 = Engine[@"hash_1F2CD89B3C345FD3"](f152_local3.rotationList[1].gametype)
-				f152_local13 = f152_local16 and f152_local16.gametype == @"zstandard"
+				f152_local13 = f152_local16 and f152_local16.gametype == "zstandard"
 			end
 		elseif f152_local8 == CoD.ZombieUtility.ZMPlaylistTabs.TCM then
 			if not LUI.DEV then
 				f152_local14 = true
 			end
-			f152_local11 = @"ztcm"
+			f152_local11 = "ztcm"
 			f152_local12 = CoD.ZombieUtility.GetGametypeTabName("ztcm")
 			if f152_local3 and #f152_local3.rotationList == 1 then
 				local f152_local16 = Engine[@"hash_1F2CD89B3C345FD3"](f152_local3.rotationList[1].gametype)
-				f152_local13 = f152_local16 and f152_local16.gametype == @"ztcm"
+				f152_local13 = f152_local16 and f152_local16.gametype == "ztcm"
 			end
 		elseif f152_local8 == CoD.ZombieUtility.ZMPlaylistTabs.ZTRIALS then
 			f152_local14 = IsBooleanDvarSet(0x431CAAEFB37761)
-			f152_local11 = @"ztrials"
+			f152_local11 = "ztrials"
 			f152_local12 = CoD.ZombieUtility.GetGametypeTabName("ztrials")
 			if f152_local3 and #f152_local3.rotationList == 1 then
 				local f152_local16 = Engine[@"hash_1F2CD89B3C345FD3"](f152_local3.rotationList[1].gametype)
-				f152_local13 = f152_local16 and f152_local16.gametype == @"ztrials"
+				f152_local13 = f152_local16 and f152_local16.gametype == "ztrials"
 			end
 		elseif f152_local8 == CoD.ZombieUtility.ZMPlaylistTabs.ZTUTORIAL then
 			if f152_local5 > 1 then
 				f152_local14 = true
 			end
-			f152_local11 = @"ztutorial"
+			f152_local11 = "ztutorial"
 			f152_local12 = CoD.ZombieUtility.GetGametypeTabName("ztutorial")
 			if f152_local3 and #f152_local3.rotationList == 1 then
 				local f152_local16 = Engine[@"hash_1F2CD89B3C345FD3"](f152_local3.rotationList[1].gametype)
-				f152_local13 = f152_local16 and f152_local16.gametype == @"ztutorial"
+				f152_local13 = f152_local16 and f152_local16.gametype == "ztutorial"
 			end
 		end
 		if not f152_local14 then
@@ -2959,15 +2959,15 @@ CoD.ZombieUtility.GetUnfilteredPlaylistEntriesForTab = function(f154_arg0, f154_
 						if not f154_local13.featuredCategory and not f154_local13.excludePublicLobby then
 							f154_local12 = true
 						end
-					elseif f154_arg1 == @"ztutorial" then
+					elseif f154_arg1 == "ztutorial" then
 						local f154_local14 = Engine[@"hash_1F2CD89B3C345FD3"](f154_local13.rotationList[1].gametype)
 						if f154_local14.gametype == f154_arg1 then
 							f154_local12 = true
 						end
-					elseif f154_arg1 ~= nil and #f154_local13.rotationList == 1 and f154_local13.excludePublicLobby and (f154_arg1 ~= @"zclassic" or f154_arg1 == @"zclassic" and CoD.ZombieUtility.GetZMPlaylistDifficulty(f154_local13) == f154_arg2) and CoD.ZombieUtility.GetGroupedGameType(f154_local13.rotationList[1].gametype, f154_arg1) == f154_arg1 then
+					elseif f154_arg1 ~= nil and #f154_local13.rotationList == 1 and f154_local13.excludePublicLobby and (f154_arg1 ~= "zclassic" or f154_arg1 == "zclassic" and CoD.ZombieUtility.GetZMPlaylistDifficulty(f154_local13) == f154_arg2) and CoD.ZombieUtility.GetGroupedGameType(f154_local13.rotationList[1].gametype, f154_arg1) == f154_arg1 then
 						f154_local12 = true
 					end
-					if f154_local13.isQuickplayCard and not CoD.DirectorUtility.IsQuickplayAvailableForMode(Enum[@"lobbymainmode"][@"lobby_mainmode_zm"]) then
+					if f154_local13.isQuickplayCard and not CoD.DirectorUtility.IsQuickplayAvailableForMode(Enum.LobbyMainMode[@"lobby_mainmode_zm"]) then
 						f154_local12 = false
 					end
 					if f154_local12 then
@@ -3020,7 +3020,7 @@ CoD.ZombieUtility.SetZMLoadoutPreviewInfoElement = function(f157_arg0, f157_arg1
 	end
 	local f157_local5 = CoD.SafeGetModelValue(f157_arg1:getModel(), "isRestricted")
 	if f157_local1 then
-		CoD.ZombieUtility.SetZMLoadoutPreviewInfo("", @"hash_0", @"blacktransparent", f157_arg2, false)
+		CoD.ZombieUtility.SetZMLoadoutPreviewInfo("", 0x0, "blacktransparent", f157_arg2, false)
 	elseif f157_local2 and f157_local3 and f157_local4 and f157_local5 ~= nil then
 		CoD.ZombieUtility.SetZMLoadoutPreviewInfo(f157_local2, f157_local3, f157_local4, f157_arg2, f157_local5)
 	end
@@ -3037,7 +3037,7 @@ CoD.ZombieUtility.SetZMLoadoutPreviewInfoIndex = function(f158_arg0, f158_arg1, 
 end
 CoD.ZombieUtility.SetZMLoadoutPreviewInfo = function(f159_arg0, f159_arg1, f159_arg2, f159_arg3, f159_arg4)
 	local f159_local0 = DataSources.DirectorZMLoadoutPreview.getModel(f159_arg3)
-	if not f159_arg2 or f159_arg2 == 0x0 or f159_arg2 == @"blacktransparent" or f159_arg2 == "blacktransparent" then
+	if not f159_arg2 or f159_arg2 == 0x0 or f159_arg2 == "blacktransparent" or f159_arg2 == "blacktransparent" then
 		f159_local0.ZMLoadoutPreviewInfoShown:set(false)
 	else
 		f159_local0.ZMLoadoutPreviewInfoShown:set(true)
@@ -3073,76 +3073,76 @@ end
 CoD.ZombieUtility.SelectDifficulty = function(f164_arg0, f164_arg1)
 	local f164_local0 = f164_arg0:getModel(f164_arg1, "difficultyID")
 	f164_local0 = f164_local0:get()
-	local f164_local1 = Engine[@"getglobalmodel"]()
+	local f164_local1 = Engine.GetGlobalModel()
 	f164_local1 = f164_local1:create("ZMLobbyExclusions")
 	f164_local1 = f164_local1:create("ZMPrivateDifficulty")
 	f164_local1:set(f164_local0)
 	if IsLobbyNetworkModeLAN() then
-		Engine[@"setgametypesetting"]("zmDifficulty", f164_local0)
+		Engine.SetGametypeSetting("zmDifficulty", f164_local0)
 		CoD.ZombieUtility.SetLocalZMDifficultyModel(f164_local0)
-		local f164_local2 = Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_host"])
+		local f164_local2 = Engine[@"lobbygetcontrollinglobbysession"](Enum.LobbyModule[@"lobby_module_host"])
 		Engine[@"lobbyevent"]("OnGametypeSettingsChange", {
-			lobbyModule = Enum[@"lobbymodule"][@"lobby_module_host"],
+			lobbyModule = Enum.LobbyModule[@"lobby_module_host"],
 			lobbyType = f164_local2,
 			fromUI = true,
 		})
-		Engine[@"lobbyhostsessionsetdirty"](f164_local2, Enum[@"sessiondirty"][@"session_dirty_state"])
+		Engine[@"lobbyhostsessionsetdirty"](f164_local2, Enum.SessionDirty[@"session_dirty_state"])
 	end
 end
 CoD.ZombieUtility.SetLocalZMDifficultyModel = function(f165_arg0)
-	local f165_local0 = Engine[@"getglobalmodel"]()
+	local f165_local0 = Engine.GetGlobalModel()
 	f165_local0 = f165_local0:create("localZMDifficulty")
 	f165_local0:set(f165_arg0)
 end
 CoD.ZombieUtility.SetLocalZMTrialVariantModel = function(f166_arg0)
-	local f166_local0 = Engine[@"getglobalmodel"]()
+	local f166_local0 = Engine.GetGlobalModel()
 	f166_local0 = f166_local0:create("localZMTrialVariant")
 	f166_local0:set(f166_arg0)
 end
 CoD.ZombieUtility.SelectTutorialMapDifficulty = function(f167_arg0, f167_arg1)
-	local f167_local0 = Engine[@"getglobalmodel"]()
+	local f167_local0 = Engine.GetGlobalModel()
 	f167_local0 = f167_local0:create("lobbyRoot.selectedGameType")
-	if f167_local0 and f167_local0:get() == @"ztutorial" then
+	if f167_local0 and f167_local0:get() == "ztutorial" then
 		local f167_local1 = f167_arg0:getModel(f167_arg1, "difficulty")
 		if f167_local1 and f167_local1:get() then
 			f167_local1 = f167_local1:get()
 			if IsLobbyNetworkModeLAN() then
-				Engine[@"setgametypesetting"]("zmDifficulty", f167_local1)
+				Engine.SetGametypeSetting("zmDifficulty", f167_local1)
 				CoD.ZombieUtility.SetLocalZMDifficultyModel(f167_local1)
-				local f167_local2 = Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_host"])
+				local f167_local2 = Engine[@"lobbygetcontrollinglobbysession"](Enum.LobbyModule[@"lobby_module_host"])
 				Engine[@"lobbyevent"]("OnGametypeSettingsChange", {
-					lobbyModule = Enum[@"lobbymodule"][@"lobby_module_host"],
+					lobbyModule = Enum.LobbyModule[@"lobby_module_host"],
 					lobbyType = f167_local2,
 					fromUI = true,
 				})
-				Engine[@"lobbyhostsessionsetdirty"](f167_local2, Enum[@"sessiondirty"][@"session_dirty_state"])
+				Engine[@"lobbyhostsessionsetdirty"](f167_local2, Enum.SessionDirty[@"session_dirty_state"])
 			end
 		end
-	elseif f167_local0 and f167_local0:get() == @"ztrials" then
+	elseif f167_local0 and f167_local0:get() == "ztrials" then
 		local f167_local1 = CoD.SafeGetModelValue(f167_arg0:getModel(), "trialVariant")
 		if f167_local1 and IsLobbyNetworkModeLAN() then
-			Engine[@"setgametypesetting"]("zmTrialsVariant", f167_local1)
+			Engine.SetGametypeSetting("zmTrialsVariant", f167_local1)
 			CoD.ZombieUtility.SetLocalZMTrialVariantModel(f167_local1)
-			local f167_local2 = Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_host"])
+			local f167_local2 = Engine[@"lobbygetcontrollinglobbysession"](Enum.LobbyModule[@"lobby_module_host"])
 			Engine[@"lobbyevent"]("OnGametypeSettingsChange", {
-				lobbyModule = Enum[@"lobbymodule"][@"lobby_module_host"],
+				lobbyModule = Enum.LobbyModule[@"lobby_module_host"],
 				lobbyType = f167_local2,
 				fromUI = true,
 			})
-			Engine[@"lobbyhostsessionsetdirty"](f167_local2, Enum[@"sessiondirty"][@"session_dirty_state"])
+			Engine[@"lobbyhostsessionsetdirty"](f167_local2, Enum.SessionDirty[@"session_dirty_state"])
 		end
 	end
 end
 CoD.ZombieUtility.SetFocusedPlaylistIDToLobbyPlaylistID = function(f168_arg0)
-	local f168_local0 = Engine[@"getglobalmodel"]()
+	local f168_local0 = Engine.GetGlobalModel()
 	f168_local0 = f168_local0:create("lobbyRoot.playlistID")
-	local f168_local1 = Engine[@"getglobalmodel"]()
+	local f168_local1 = Engine.GetGlobalModel()
 	f168_local1 = f168_local1:create("ZMLobbyExclusions.focusedPlaylistID")
 	f168_local1:set(f168_local0:get())
 	CoD.ZombieUtility.UpdateFocusedPlaylistMapsAndGamemodes(f168_arg0)
 end
 CoD.ZombieUtility.UpdateFocusedPlaylistID = function(f169_arg0, f169_arg1)
-	local f169_local0 = Engine[@"getglobalmodel"]()
+	local f169_local0 = Engine.GetGlobalModel()
 	f169_local0 = f169_local0:create("ZMLobbyExclusions.focusedPlaylistID")
 	local f169_local1 = f169_arg1:getModel()
 	local f169_local2 = f169_local1
@@ -3156,11 +3156,11 @@ CoD.ZombieUtility.UpdateFocusedPlaylistID = function(f169_arg0, f169_arg1)
 	end
 end
 CoD.ZombieUtility.UpdateFocusedPlaylistMapsAndGamemodes = function(f170_arg0)
-	local f170_local0 = Engine[@"getglobalmodel"]()
+	local f170_local0 = Engine.GetGlobalModel()
 	f170_local0 = f170_local0:create("ZMLobbyExclusions.PlaylistMapsString")
-	local f170_local1 = Engine[@"getglobalmodel"]()
+	local f170_local1 = Engine.GetGlobalModel()
 	f170_local1 = f170_local1:create("ZMLobbyExclusions.PlaylistGamemodesString")
-	local f170_local2 = Engine[@"getglobalmodel"]()
+	local f170_local2 = Engine.GetGlobalModel()
 	f170_local2 = f170_local2:create("ZMLobbyExclusions.focusedPlaylistID")
 	local f170_local3 = f170_local2:get()
 	local f170_local4 = {}
@@ -3172,11 +3172,11 @@ CoD.ZombieUtility.UpdateFocusedPlaylistMapsAndGamemodes = function(f170_arg0)
 	for f170_local10 = 1, #f170_local9, 1 do
 		local f170_local13 = f170_local9[f170_local10]
 		local f170_local14 = f170_local13.map
-		if not CoD.ZombieUtility.ArrayContains(f170_local5, f170_local14) and Engine[@"ismapvalid"](f170_local14) then
+		if not CoD.ZombieUtility.ArrayContains(f170_local5, f170_local14) and Engine.IsMapValid(f170_local14) then
 			table.insert(f170_local5, f170_local14)
 			table.insert(f170_local4, f170_local14)
 		end
-		local f170_local15 = CoD.ZombieUtility.GetGroupedGameType(f170_local13.gametype, @"ztcm")
+		local f170_local15 = CoD.ZombieUtility.GetGroupedGameType(f170_local13.gametype, "ztcm")
 		if f170_local15 ~= @"zctm" then
 			local f170_local16 = Engine[@"hash_1F2CD89B3C345FD3"](f170_local13.gametype)
 			f170_local15 = f170_local16.gametype
@@ -3214,13 +3214,13 @@ CoD.ZombieUtility.UpdateFocusedPlaylistMapsAndGamemodes = function(f170_arg0)
 		for f170_local12 = 1, #f170_local6, 1 do
 			local f170_local15 = f170_local6[f170_local12]
 			local f170_local16 = nil
-			if f170_local15 == @"zclassic" then
+			if f170_local15 == "zclassic" then
 				f170_local16 = @"hash_F44B71F613A7D65"
-			elseif f170_local15 == @"zstandard" then
+			elseif f170_local15 == "zstandard" then
 				f170_local16 = @"hash_159DF0D7D85936E1"
-			elseif f170_local15 == @"ztcm" then
+			elseif f170_local15 == "ztcm" then
 				f170_local16 = @"hash_1F8845568A0DA5AD"
-			elseif f170_local15 == @"ztrials" then
+			elseif f170_local15 == "ztrials" then
 				f170_local16 = @"hash_65A74962FD2F07DE"
 			end
 			if f170_local16 ~= nil then
@@ -3240,11 +3240,11 @@ CoD.ZombieUtility.UpdateFocusedPlaylistMapsAndGamemodes = function(f170_arg0)
 	f170_local1:set(f170_local11)
 end
 CoD.ZombieUtility.SubscribeToZMPlaylistInfoModels = function(f171_arg0, f171_arg1)
-	local f171_local0 = Engine[@"getglobalmodel"]()
+	local f171_local0 = Engine.GetGlobalModel()
 	f171_local0 = f171_local0:create("ZMLobbyExclusions.focusedPlaylistID")
-	local f171_local1 = Engine[@"getglobalmodel"]()
+	local f171_local1 = Engine.GetGlobalModel()
 	f171_local1 = f171_local1:create("ZMLobbyExclusions.ZMPlaylistTab")
-	local f171_local2 = Engine[@"getglobalmodel"]()
+	local f171_local2 = Engine.GetGlobalModel()
 	f171_local2 = f171_local2:create("ZMLobbyExclusions.ZMPrivateDifficulty")
 	local f171_local3 = function()
 		local f172_local0 = f171_local0:get()
@@ -3259,7 +3259,7 @@ CoD.ZombieUtility.SubscribeToZMPlaylistInfoModels = function(f171_arg0, f171_arg
 	f171_arg0:subscribeToModel(f171_local2, f171_local3, true)
 end
 CoD.ZombieUtility.QuickPlayPregame = function(f173_arg0, f173_arg1)
-	local f173_local0 = Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot"), "lobbyList"), "playerCount")
+	local f173_local0 = Engine.CreateModel(Engine.CreateModel(Engine.GetModel(Engine.GetGlobalModel(), "lobbyRoot"), "lobbyList"), "playerCount")
 	if f173_local0 and f173_local0:get() == 1 then
 		local f173_local1 = CoD.ZombieUtility.GetQuickPlayPlaylistID(f173_arg1)
 		if f173_local1 ~= -1 then
@@ -3267,13 +3267,13 @@ CoD.ZombieUtility.QuickPlayPregame = function(f173_arg0, f173_arg1)
 			LuaUtils.SetQuickplayPlaylistID(f173_local1)
 			Engine[@"lobbyevent"]("OnGameLobbyGameServerDataUpdate", {})
 			CoD.DirectorUtility.NavigateToPrivateLobbyForCurrentMode(f173_arg0, f173_arg1)
-			local f173_local2 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "QuickPlay")
+			local f173_local2 = Engine.GetModel(Engine.GetGlobalModel(), "QuickPlay")
 			f173_local2:set(true)
 		end
 	end
 end
 CoD.ZombieUtility.QuickPlayPrivate = function(f174_arg0, f174_arg1)
-	local f174_local0 = Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot"), "lobbyList"), "playerCount")
+	local f174_local0 = Engine.CreateModel(Engine.CreateModel(Engine.GetModel(Engine.GetGlobalModel(), "lobbyRoot"), "lobbyList"), "playerCount")
 	if f174_local0 and f174_local0:get() == 1 then
 		local f174_local1 = CoD.BreadcrumbUtility.GetStorageClientBufferForPlayer(f174_arg1)
 		if f174_local1 and f174_local1.extraBools[2] then
@@ -3282,15 +3282,15 @@ CoD.ZombieUtility.QuickPlayPrivate = function(f174_arg0, f174_arg1)
 		end
 		CoD.DirectorUtility.SetPlayerReady(f174_arg1)
 	end
-	local f174_local1 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "QuickPlay")
+	local f174_local1 = Engine.GetModel(Engine.GetGlobalModel(), "QuickPlay")
 	f174_local1:set(false)
 end
 CoD.ZombieUtility.ShouldShowPlaylistSelection = function(f175_arg0)
-	local f175_local0 = Engine[@"getglobalmodel"]()
+	local f175_local0 = Engine.GetGlobalModel()
 	f175_local0 = f175_local0:create("ZMLobbyExclusions.ZMPlaylistTab")
 	local f175_local1 = f175_local0:get()
 	local f175_local2
-	if f175_local1 ~= CoD.ZombieUtility.ZMPlaylistTabs.FEATURED and f175_local1 ~= CoD.ZombieUtility.ZMPlaylistTabs.PUBLIC and f175_local1 ~= @"ztutorial" then
+	if f175_local1 ~= CoD.ZombieUtility.ZMPlaylistTabs.FEATURED and f175_local1 ~= CoD.ZombieUtility.ZMPlaylistTabs.PUBLIC and f175_local1 ~= "ztutorial" then
 		f175_local2 = false
 	else
 		f175_local2 = true
@@ -3298,7 +3298,7 @@ CoD.ZombieUtility.ShouldShowPlaylistSelection = function(f175_arg0)
 	return f175_local2
 end
 CoD.ZombieUtility.FeaturedInfo = function()
-	local f176_local0 = Engine[@"getglobalmodel"]()
+	local f176_local0 = Engine.GetGlobalModel()
 	f176_local0 = f176_local0:create("ZMLobbyExclusions.ZMPlaylistTab")
 	local f176_local1 = f176_local0:get()
 	local f176_local2
@@ -3310,37 +3310,37 @@ CoD.ZombieUtility.FeaturedInfo = function()
 	return f176_local2
 end
 CoD.ZombieUtility.ClassicInfo = function()
-	local f177_local0 = Engine[@"getglobalmodel"]()
+	local f177_local0 = Engine.GetGlobalModel()
 	f177_local0 = f177_local0:create("ZMLobbyExclusions.ZMPlaylistTab")
-	return f177_local0:get() == @"zclassic"
+	return f177_local0:get() == "zclassic"
 end
 CoD.ZombieUtility.ZombieRushInfo = function()
-	local f178_local0 = Engine[@"getglobalmodel"]()
+	local f178_local0 = Engine.GetGlobalModel()
 	f178_local0 = f178_local0:create("ZMLobbyExclusions.ZMPlaylistTab")
-	return f178_local0:get() == @"zstandard"
+	return f178_local0:get() == "zstandard"
 end
 CoD.ZombieUtility.TCMInfo = function()
-	local f179_local0 = Engine[@"getglobalmodel"]()
+	local f179_local0 = Engine.GetGlobalModel()
 	f179_local0 = f179_local0:create("ZMLobbyExclusions.ZMPlaylistTab")
-	return f179_local0:get() == @"ztcm"
+	return f179_local0:get() == "ztcm"
 end
 CoD.ZombieUtility.TrialsInfo = function()
-	local f180_local0 = Engine[@"getglobalmodel"]()
+	local f180_local0 = Engine.GetGlobalModel()
 	f180_local0 = f180_local0:create("ZMLobbyExclusions.ZMPlaylistTab")
-	return f180_local0:get() == @"ztrials"
+	return f180_local0:get() == "ztrials"
 end
 CoD.ZombieUtility.TutorialInfo = function()
-	local f181_local0 = Engine[@"getglobalmodel"]()
+	local f181_local0 = Engine.GetGlobalModel()
 	f181_local0 = f181_local0:create("ZMLobbyExclusions.ZMPlaylistTab")
-	return f181_local0:get() == @"ztutorial"
+	return f181_local0:get() == "ztutorial"
 end
 CoD.ZombieUtility.SpecialZombieNotification = function(f182_arg0, f182_arg1, f182_arg2)
 	local f182_local0 = CoD.GetScriptNotifyData(f182_arg2)
 	f182_arg1:appendNotification({
 		clip = "TextAndImageSpecial",
-		title = Engine[@"localize"](Engine[@"getistring"](f182_local0[2], "CS_LOCALIZED_STRINGS")),
-		description = @"hash_0",
-		specialImage = RegisterImage(CoD.ZombieUtility.SpecialZombiesImages[f182_local0[1]] or @"blacktransparent"),
+		title = Engine.Localize(Engine.GetIString(f182_local0[2], "CS_LOCALIZED_STRINGS")),
+		description = 0x0,
+		specialImage = RegisterImage(CoD.ZombieUtility.SpecialZombiesImages[f182_local0[1]] or "blacktransparent"),
 	})
 end
 CoD.ZombieUtility.GetTcmTitle = function(f183_arg0)
@@ -3351,7 +3351,7 @@ CoD.ZombieUtility.GetTcmTitle = function(f183_arg0)
 	end
 end
 CoD.ZombieUtility.IsEasterEggsAllowed = function(f184_arg0)
-	if Dvar[@"g_gametype"]:get() == "zclassic" and CoD.isPublicOnlineGame() and not IsGametypeSettingsValue("zmDifficulty", 0) then
+	if Dvar.g_gametype:get() == "zclassic" and CoD.isPublicOnlineGame() and not IsGametypeSettingsValue("zmDifficulty", 0) then
 		return true
 	else
 		return false
@@ -3362,12 +3362,12 @@ CoD.ZombieUtility.IsHighestRoundSurvivedGreaterThanOrEqualTo = function(f185_arg
 	return f185_arg1 <= f185_local0.highestRoundCompleted
 end
 CoD.ZombieUtility.IsHighestTrialRoundSurvivedGreaterThanOrEqualTo = function(f186_arg0, f186_arg1)
-	local f186_local0 = CoD.ZombieUtility.GetTrialsNameForMap(Engine[@"isingame"]() and Engine[@"getcurrentmap"]() or CoD.AARUtility.GetCurrentMapName(f186_arg0), Engine[@"isingame"]() and Engine[@"getgametypesetting"](@"zmtrialsvariant") or CoD.ZombieUtility.GetAARTrialVariant(f186_arg0))
+	local f186_local0 = CoD.ZombieUtility.GetTrialsNameForMap(Engine.IsInGame() and Engine.GetCurrentMap() or CoD.AARUtility.GetCurrentMapName(f186_arg0), Engine.IsInGame() and Engine.GetGametypeSetting("zmtrialsvariant") or CoD.ZombieUtility.GetAARTrialVariant(f186_arg0))
 	local f186_local1 = 0
 	if not IsLobbyNetworkModeLAN() then
 		local f186_local2 = CoD.GetPlayerStats(f186_arg0)
 		if f186_local2.PlayerStatsByTrial[f186_local0] then
-			f186_local1 = f186_local2.PlayerStatsByTrial[f186_local0][@"highest_round_reached"]:get()
+			f186_local1 = f186_local2.PlayerStatsByTrial[f186_local0].highest_round_reached:get()
 		end
 	end
 	return f186_arg1 <= f186_local1
@@ -3375,9 +3375,9 @@ end
 CoD.ZombieUtility.IsSelfModelValueLessThanOrEqualToMapStatVal = function(f187_arg0, f187_arg1, f187_arg2, f187_arg3)
 	local f187_local0 = f187_arg0:getModel()
 	if f187_arg2 ~= "" and f187_local0 then
-		f187_local0 = Engine[@"getmodel"](f187_local0, f187_arg2)
+		f187_local0 = Engine.GetModel(f187_local0, f187_arg2)
 	end
-	local f187_local1 = f187_local0 and Engine[@"getmodelvalue"](f187_local0)
+	local f187_local1 = f187_local0 and Engine.GetModelValue(f187_local0)
 	local f187_local2
 	if f187_local1 == nil or f187_local1 > CoD.ZombieUtility.GetStat(f187_arg1, {
 		statName = f187_arg3,
@@ -3395,10 +3395,10 @@ end
 CoD.ZombieUtility.IsSelfModelValueLessThanOrEqualToTrialStatVal = function(f188_arg0, f188_arg1, f188_arg2, f188_arg3)
 	local f188_local0 = f188_arg0:getModel()
 	if f188_arg2 ~= "" and f188_local0 then
-		f188_local0 = Engine[@"getmodel"](f188_local0, f188_arg2)
+		f188_local0 = Engine.GetModel(f188_local0, f188_arg2)
 	end
-	local f188_local1 = f188_local0 and Engine[@"getmodelvalue"](f188_local0)
-	local f188_local2 = CoD.ZombieUtility.GetTrialsNameForMap(Engine[@"isingame"]() and Engine[@"getcurrentmap"]() or CoD.AARUtility.GetCurrentMapName(f188_arg1), Engine[@"isingame"]() and Engine[@"getgametypesetting"](@"zmtrialsvariant") or CoD.ZombieUtility.GetAARTrialVariant(f188_arg1))
+	local f188_local1 = f188_local0 and Engine.GetModelValue(f188_local0)
+	local f188_local2 = CoD.ZombieUtility.GetTrialsNameForMap(Engine.IsInGame() and Engine.GetCurrentMap() or CoD.AARUtility.GetCurrentMapName(f188_arg1), Engine.IsInGame() and Engine.GetGametypeSetting("zmtrialsvariant") or CoD.ZombieUtility.GetAARTrialVariant(f188_arg1))
 	local f188_local3 = 0
 	if not IsLobbyNetworkModeLAN() then
 		local f188_local4 = CoD.GetPlayerStats(f188_arg1)
@@ -3430,7 +3430,7 @@ CoD.ZombieUtility.GetPositionDraftClient = function(f189_arg0, f189_arg1)
 	return nil
 end
 CoD.ZombieUtility.OrderCharacterButtonZMList = function(f190_arg0, f190_arg1, f190_arg2)
-	local f190_local0 = Engine[@"getglobalmodel"]()
+	local f190_local0 = Engine.GetGlobalModel()
 	f190_local0 = f190_local0:create("MapVote")
 	f190_local0 = f190_local0:create("mapVoteMapNext")
 	local f190_local1 = f190_local0:get()
@@ -3440,7 +3440,7 @@ CoD.ZombieUtility.OrderCharacterButtonZMList = function(f190_arg0, f190_arg1, f1
 		return f190_local2
 	end
 	local f190_local4 = {
-		[@"story1"] = {
+		story1 = {
 			{
 				"niko",
 				"Unik",
@@ -3548,7 +3548,7 @@ CoD.ZombieUtility.OrderCharacterButtonZMList = function(f190_arg0, f190_arg1, f1
 	return f190_local2
 end
 CoD.ZombieUtility.SubscribeToLobbyClientInfo = function(f193_arg0, f193_arg1)
-	local f193_local0 = Engine[@"getglobalmodel"]()
+	local f193_local0 = Engine.GetGlobalModel()
 	f193_local0 = f193_local0.LobbyClients
 	if not f193_arg0._lobbyMembersChangedSubscription then
 		f193_arg0._lobbyMembersChangedSubscription = f193_arg0:subscribeToModel(f193_local0.membersChanged, function()
@@ -3557,11 +3557,11 @@ CoD.ZombieUtility.SubscribeToLobbyClientInfo = function(f193_arg0, f193_arg1)
 	end
 end
 CoD.ZombieUtility.GetShieldIconForCurrentMap = function(f195_arg0)
-	return CoD.MapUtility.GetMapValue(Engine[@"getcurrentmap"](), @"shield", @"blacktransparent")
+	return CoD.MapUtility.GetMapValue(Engine.GetCurrentMap(), "shield", "blacktransparent")
 end
 CoD.ZombieUtility.InitTutorialQuickPlayModel = function(f196_arg0)
 	local f196_local0 = CoD.BreadcrumbUtility.GetStorageClientBufferForPlayer(f196_arg0)
-	local f196_local1 = Engine[@"getglobalmodel"]()
+	local f196_local1 = Engine.GetGlobalModel()
 	f196_local1 = f196_local1:create("ZMLobbyExclusions")
 	f196_local1 = f196_local1:create("ShowTutorialQuickPlay")
 	if f196_local0 and f196_local0.extraBools[2] and f196_local0.extraBools[2]:get() == 0 then
@@ -3578,7 +3578,7 @@ CoD.ZombieUtility.IsDoubleNP = function(f197_arg0)
 	if IsPublicOnlineGame() then
 		f197_local0 = Engine[@"getplaylistid"]()
 	end
-	if Engine[@"hash_5F4F47F17B3BDCB3"](f197_arg0, Engine[@"hash_2ACFE452C407B25B"](Enum[@"emodes"][@"mode_zombies"]), Enum[@"emodes"][@"mode_zombies"], f197_local0) then
+	if Engine[@"hash_5F4F47F17B3BDCB3"](f197_arg0, Engine[@"hash_2ACFE452C407B25B"](Enum.eModes.mode_zombies), Enum.eModes.mode_zombies, f197_local0) then
 		return true
 	end
 	local f197_local1 = Engine[@"getdvarint"](@"hash_1624FAAEE3C04F09")
@@ -3589,7 +3589,7 @@ CoD.ZombieUtility.CreateZMDoubleNotification = function(f198_arg0, f198_arg1, f1
 		if f199_arg0.PrematchCountdown2xpNotificationZM then
 			return false
 		end
-		local f199_local0 = Engine[@"getmodelforcontroller"](f199_arg1)
+		local f199_local0 = Engine.GetModelForController(f199_arg1)
 		f199_local0 = f199_local0:create("DoubleXpNotification")
 		if f199_local0 and f199_local0:get() then
 			return false
@@ -3618,7 +3618,7 @@ CoD.ZombieUtility.CreateZMDoubleNotification = function(f198_arg0, f198_arg1, f1
 		local f198_local1 = function(f201_arg0)
 			f201_arg0:playClip("Notify")
 			f201_arg0:registerEventHandler("clip_over", function(element, event)
-				local f202_local0 = Engine[@"getmodelforcontroller"](f198_arg2)
+				local f202_local0 = Engine.GetModelForController(f198_arg2)
 				f202_local0 = f202_local0:create("DoubleXpNotification")
 				f202_local0:set(true)
 				element:close()
@@ -3628,24 +3628,24 @@ CoD.ZombieUtility.CreateZMDoubleNotification = function(f198_arg0, f198_arg1, f1
 	end
 end
 CoD.ZombieUtility.ResolveInvalidMapGametypeSelection = function(f203_arg0)
-	local f203_local0 = Engine[@"getglobalmodel"]()
+	local f203_local0 = Engine.GetGlobalModel()
 	f203_local0 = f203_local0:create("lobbyRoot.selectedGameType")
 	f203_local0 = f203_local0:get()
 	local f203_local1 = Engine[@"converttoxhash"](Engine[@"lobbygetmap"]())
 	local f203_local2 = {
-		[@"zclassic"] = @"hash_4B1B381DE2ADC014",
-		[@"ztrials"] = @"hash_37EEA154A1D4F3C1",
-		[@"zgrief"] = 0x4F1EA0CA4EC9E3,
-		[@"zstandard"] = @"hash_5154C514171FEE9",
-		[@"ztcm"] = @"hash_D126B224D84608C",
-		[@"ztutorial"] = @"hash_674923AD245EF8BE",
+		zclassic = @"hash_4B1B381DE2ADC014",
+		ztrials = @"hash_37EEA154A1D4F3C1",
+		zgrief = 0x4F1EA0CA4EC9E3,
+		zstandard = @"hash_5154C514171FEE9",
+		ztcm = @"hash_D126B224D84608C",
+		ztutorial = @"hash_674923AD245EF8BE",
 	}
 	local f203_local3 = function(f204_arg0, f204_arg1)
 		return CoD.MapUtility.MapsTable[f204_arg0].uniqueID < CoD.MapUtility.MapsTable[f204_arg1].uniqueID
 	end
 	local f203_local4 = function(f205_arg0)
 		if CoD.MapUtility.MapsTable[f205_arg0][f203_local2[f203_local0]] == 1 then
-			if f203_local0 == @"ztrials" then
+			if f203_local0 == "ztrials" then
 				local f205_local0 = CoD.DirectorUtility.TrialsMapEnabledDvars[f205_arg0]
 				if f205_local0 and IsBooleanDvarSet(f205_local0) then
 					return true

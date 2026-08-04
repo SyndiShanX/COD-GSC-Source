@@ -1,10 +1,10 @@
-require("x64:f59c6c673920a4a")
-require("x64:71d4e66447f837e")
-require("x64:d6ecdf7755aeddc")
-require("x64:1f846296f1a1b81")
-require("x64:e41af73729601d6")
-require("x64:eff78026a683bfd")
-require("x64:7889ce1e3e2e8a")
+require("ui/uieditor/menus/startmenu/popups/legaltextviewermenu")
+require("ui/uieditor/widgets/backgroundframes/menuframeingame")
+require("ui/uieditor/widgets/common/commonheader")
+require("ui/uieditor/widgets/director/directorselectbuttonminiinternal")
+require("ui/uieditor/widgets/header/header_container_frontend")
+require("ui/uieditor/widgets/startmenu/options/pc_startmenu_options_registrationform")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsbackground")
 CoD.PC_StartMenu_Options_CoDAccount_NewAccount = InheritFrom(CoD.Menu)
 LUI.createMenu.PC_StartMenu_Options_CoDAccount_NewAccount = function(f1_arg0, f1_arg1)
 	local self = CoD.Menu.NewForUIEditor("PC_StartMenu_Options_CoDAccount_NewAccount", f1_arg0)
@@ -82,15 +82,15 @@ LUI.createMenu.PC_StartMenu_Options_CoDAccount_NewAccount = function(f1_arg0, f1
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f7_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(DirectorSelectButtonMiniInternal2, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
-		CoD.CoDAccountUtility.SetupCurrentLegalInfo(menu, controller, "TermsOfUsePages")
-		OpenOverlay(self, "LegalTextViewerMenu", controller)
+	f1_local1:AddButtonCallbackFunction(DirectorSelectButtonMiniInternal2, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], nil, function(f8_arg0, f8_arg1, f8_arg2, f8_arg3)
+		CoD.CoDAccountUtility.SetupCurrentLegalInfo(f8_arg1, f8_arg2, "TermsOfUsePages")
+		OpenOverlay(self, "LegalTextViewerMenu", f8_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
+	end, function(f9_arg0, f9_arg1, f9_arg2)
+		CoD.Menu.SetButtonLabel(f9_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(DirectorSelectButtonMiniInternal2)
@@ -119,38 +119,38 @@ LUI.createMenu.PC_StartMenu_Options_CoDAccount_NewAccount = function(f1_arg0, f1
 		elseif element.super.gainFocus then
 			f12_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f12_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(DirectorSelectButtonMiniInternal, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
-		CoD.CoDAccountUtility.SetupCurrentLegalInfo(menu, controller, "PrivacyPolicyPages")
-		OpenOverlay(self, "LegalTextViewerMenu", controller)
+	f1_local1:AddButtonCallbackFunction(DirectorSelectButtonMiniInternal, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], nil, function(f13_arg0, f13_arg1, f13_arg2, f13_arg3)
+		CoD.CoDAccountUtility.SetupCurrentLegalInfo(f13_arg1, f13_arg2, "PrivacyPolicyPages")
+		OpenOverlay(self, "LegalTextViewerMenu", f13_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
+	end, function(f14_arg0, f14_arg1, f14_arg2)
+		CoD.Menu.SetButtonLabel(f14_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(DirectorSelectButtonMiniInternal)
 	self.DirectorSelectButtonMiniInternal = DirectorSelectButtonMiniInternal
-	self:registerEventHandler("ui_keyboard_input", function(self, event)
+	self:registerEventHandler("ui_keyboard_input", function(element, event)
 		local f15_local0 = nil
 		CoD.CoDAccountUtility.CodAccountHandleKeyboardComplete(self, f1_arg0, event, self.PCStartMenuOptionsRegistrationForm)
 		if not f15_local0 then
-			f15_local0 = self:dispatchEventToChildren(event)
+			f15_local0 = element:dispatchEventToChildren(event)
 		end
 		return f15_local0
 	end)
-	self:registerEventHandler("list_active_changed", function(self, event)
+	self:registerEventHandler("list_active_changed", function(element, event)
 		local f16_local0 = nil
-		CoD.CoDAccountUtility.OnNewAccountItemFocusChange(f1_local1, f1_arg0, self)
+		CoD.CoDAccountUtility.OnNewAccountItemFocusChange(f1_local1, f1_arg0, element)
 		return f16_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
-		GoBack(self, controller)
-		CoD.CoDAccountUtility.ClearRegistrationEmailAndPasswordModels(controller)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xbb_pscircle"], nil, function(f17_arg0, f17_arg1, f17_arg2, f17_arg3)
+		GoBack(self, f17_arg2)
+		CoD.CoDAccountUtility.ClearRegistrationEmailAndPasswordModels(f17_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
+	end, function(f18_arg0, f18_arg1, f18_arg2)
+		CoD.Menu.SetButtonLabel(f18_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
 	self:subscribeToGlobalModel(f1_arg0, "UNOAccountInfo", "iTransactionResult", function(model)

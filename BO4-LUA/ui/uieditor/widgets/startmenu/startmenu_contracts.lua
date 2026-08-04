@@ -1,5 +1,5 @@
 require("x64:c01c702d0c9c363")
-require("x64:2675595fa323085")
+require("ui/uieditor/widgets/emptyfocusable")
 CoD.StartMenu_Contracts = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Contracts.__defaultWidth = 1920
 CoD.StartMenu_Contracts.__defaultHeight = 1080

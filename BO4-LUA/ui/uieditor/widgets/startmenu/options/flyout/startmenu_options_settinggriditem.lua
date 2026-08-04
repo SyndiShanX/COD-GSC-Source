@@ -1,6 +1,6 @@
-require("x64:6e37b4dc09c830f")
-require("x64:55aca670e9903a3")
-require("x64:a9255c570c68aa8")
+require("ui/uieditor/widgets/startmenu/options/flyout/startmenu_options_customsettingsindicator")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmaincorners")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmainframe")
 CoD.StartMenu_Options_SettingGridItem = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Options_SettingGridItem.__defaultWidth = 300
 CoD.StartMenu_Options_SettingGridItem.__defaultHeight = 60
@@ -27,8 +27,8 @@ CoD.StartMenu_Options_SettingGridItem.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	local SettingLabel = LUI.UIText.new(0, 0, 15, 275, 0, 0, 17.5, 42.5)
 	SettingLabel:setAlpha(0.25)
 	SettingLabel:setTTF("ttmussels_regular")
-	SettingLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	SettingLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
+	SettingLabel:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	SettingLabel:setAlignment(Enum.LUIAlignment[@"lui_alignment_middle"])
 	SettingLabel:linkToElementModel(self, "text", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

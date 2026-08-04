@@ -1,5 +1,5 @@
-require("x64:846c5dfd075b628")
-require("x64:b79410dc8d1ea84")
+require("ui/uieditor/widgets/pc/startmenu/controlsoptions/pc_startmenu_options_controls_keyvisual")
+require("ui/uieditor/widgets/pc/startmenu/pc_highlightborder")
 CoD.PC_StartMenu_Options_Controls_KeyBind = InheritFrom(LUI.UIElement)
 CoD.PC_StartMenu_Options_Controls_KeyBind.__defaultWidth = 168
 CoD.PC_StartMenu_Options_Controls_KeyBind.__defaultHeight = 65
@@ -29,7 +29,7 @@ CoD.PC_StartMenu_Options_Controls_KeyBind.new = function(f1_arg0, f1_arg1, f1_ar
 	end)
 	local f1_local3 = PCHighlightBorder
 	local f1_local4 = PCHighlightBorder.subscribeToModel
-	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
+	local f1_local5 = Engine.GetModelForController(f1_arg1)
 	f1_local4(f1_local3, f1_local5.LastInput, function(f4_arg0)
 		f1_arg0:updateElementState(PCHighlightBorder, {
 			name = "model_validation",
@@ -67,7 +67,7 @@ CoD.PC_StartMenu_Options_Controls_KeyBind.new = function(f1_arg0, f1_arg1, f1_ar
 	end)
 	f1_local3 = self
 	f1_local4 = self.subscribeToModel
-	f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local5 = Engine.GetModelForController(f1_arg1)
 	f1_local4(f1_local3, f1_local5.LastInput, function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

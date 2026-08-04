@@ -1,4 +1,4 @@
-require("x64:2675595fa323085")
+require("ui/uieditor/widgets/emptyfocusable")
 CoD.PC_StartMenu_Options_SafeAreaBorder_Horiz = InheritFrom(LUI.UIElement)
 CoD.PC_StartMenu_Options_SafeAreaBorder_Horiz.__defaultWidth = 100
 CoD.PC_StartMenu_Options_SafeAreaBorder_Horiz.__defaultHeight = 1080

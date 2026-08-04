@@ -14,7 +14,7 @@ CoD.kickerinternal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	local NotifTextMain = LUI.UIText.new(0, 0, 48, 400, 0.5, 0.5, -13.5, 13.5)
 	NotifTextMain:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	NotifTextMain:setTTF("ttmussels_regular")
-	NotifTextMain:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	NotifTextMain:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	self:addElement(NotifTextMain)
 	self.NotifTextMain = NotifTextMain
 	if PostLoadFunc then

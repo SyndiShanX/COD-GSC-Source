@@ -1,7 +1,7 @@
-require("x64:4f13af0f746b8f8")
-require("x64:ade61cc095aa2bc")
-require("x64:42713807971f727")
-require("x64:be779d5e87238aa")
+require("ui/uieditor/widgets/playercard/callingcard")
+require("ui/uieditor/widgets/pc/pc_reporttextbox")
+require("ui/uieditor/widgets/pc/reportdropdown_container")
+require("ui/uieditor/widgets/systemoverlays/featureoverlay_button")
 CoD.systemOverlay_reportPlayer = InheritFrom(LUI.UIElement)
 CoD.systemOverlay_reportPlayer.__defaultWidth = 1920
 CoD.systemOverlay_reportPlayer.__defaultHeight = 480
@@ -30,7 +30,7 @@ CoD.systemOverlay_reportPlayer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.backing = backing
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0.09, 0.09, -44.5, 439.5)
 	NoiseTiledBacking:setAlpha(0.65)
-	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
@@ -38,11 +38,11 @@ CoD.systemOverlay_reportPlayer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.NoiseTiledBacking = NoiseTiledBacking
 	local Title = LUI.UIText.new(0.5, 0.5, -342, 864, 0, 0, 10, 44)
 	Title:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
-	Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_7A9BFB932EE4FB07"))
+	Title:setText(Engine[@"hash_4F9F1239CFD921FE"]("menu/report_user_caps"))
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(6)
-	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	Title:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	Title:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(Title)
 	self.Title = Title
 	local f1_local6 = nil
@@ -61,8 +61,8 @@ CoD.systemOverlay_reportPlayer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	ReportTextBoxLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1F4902B629151E78"))
 	ReportTextBoxLabel:setTTF("ttmussels_regular")
 	ReportTextBoxLabel:setLetterSpacing(2)
-	ReportTextBoxLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	ReportTextBoxLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
+	ReportTextBoxLabel:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	ReportTextBoxLabel:setAlignment(Enum.LUIAlignment[@"lui_alignment_bottom"])
 	self:addElement(ReportTextBoxLabel)
 	self.ReportTextBoxLabel = ReportTextBoxLabel
 	local ReportTextBoxLimit = nil
@@ -71,8 +71,8 @@ CoD.systemOverlay_reportPlayer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	ReportTextBoxLimit:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_6DD2240592242F36"))
 	ReportTextBoxLimit:setTTF("notosans_regular")
 	ReportTextBoxLimit:setLetterSpacing(1)
-	ReportTextBoxLimit:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
-	ReportTextBoxLimit:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	ReportTextBoxLimit:setAlignment(Enum.LUIAlignment[@"lui_alignment_right"])
+	ReportTextBoxLimit:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(ReportTextBoxLimit)
 	self.ReportTextBoxLimit = ReportTextBoxLimit
 	local VerticalLine = nil
@@ -86,7 +86,7 @@ CoD.systemOverlay_reportPlayer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	ConfirmationText:setAlpha(0)
 	ConfirmationText:setTTF("notosans_regular")
 	ConfirmationText:setLetterSpacing(2)
-	ConfirmationText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ConfirmationText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	ConfirmationText:subscribeToGlobalModel(f1_arg1, "ReportPlayerDropDown", "currentValue", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -125,15 +125,15 @@ CoD.systemOverlay_reportPlayer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		elseif element.super.gainFocus then
 			f5_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f5_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(ReportButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		CoD.PCWidgetUtility.SendReportPlayer(self, controller)
-		GoBack(self, controller)
+	f1_arg0:AddButtonCallbackFunction(ReportButton, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f6_arg0, f6_arg1, f6_arg2, f6_arg3)
+		CoD.PCWidgetUtility.SendReportPlayer(self, f6_arg2)
+		GoBack(self, f6_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+	end, function(f7_arg0, f7_arg1, f7_arg2)
+		CoD.Menu.SetButtonLabel(f7_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(ReportButton)
@@ -148,14 +148,14 @@ CoD.systemOverlay_reportPlayer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		elseif element.super.gainFocus then
 			f8_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f8_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(CancelButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		GoBack(self, controller)
+	f1_arg0:AddButtonCallbackFunction(CancelButton, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f9_arg0, f9_arg1, f9_arg2, f9_arg3)
+		GoBack(self, f9_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+	end, function(f10_arg0, f10_arg1, f10_arg2)
+		CoD.Menu.SetButtonLabel(f10_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(CancelButton)
@@ -165,8 +165,8 @@ CoD.systemOverlay_reportPlayer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	ReportDescription:setRGB(0.54, 0.54, 0.54)
 	ReportDescription:setTTF("notosans_regular")
 	ReportDescription:setLetterSpacing(1)
-	ReportDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	ReportDescription:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	ReportDescription:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	ReportDescription:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	ReportDescription:subscribeToGlobalModel(f1_arg1, "ReportPlayerDropDown", "currentValue", function(model)
 		local f11_local0 = model:get()
 		if f11_local0 ~= nil then
@@ -224,28 +224,28 @@ CoD.systemOverlay_reportPlayer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	local cornerBracket = LUI.UIImage.new(0.5, 0.5, -748, -736, 0, 0, 13, 25)
 	cornerBracket:setAlpha(0.5)
 	cornerBracket:setZRot(180)
-	cornerBracket:setImage(RegisterImage(@"hash_7535662F512D5F90"))
-	cornerBracket:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	cornerBracket:setImage(RegisterImage("uie_ui_menu_social_corner_bracket"))
+	cornerBracket:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(cornerBracket)
 	self.cornerBracket = cornerBracket
 	local cornerBracket4 = LUI.UIImage.new(0.5, 0.5, -748, -736, 0, 0, 377, 389)
 	cornerBracket4:setAlpha(0.5)
 	cornerBracket4:setZRot(270)
-	cornerBracket4:setImage(RegisterImage(@"hash_7535662F512D5F90"))
-	cornerBracket4:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	cornerBracket4:setImage(RegisterImage("uie_ui_menu_social_corner_bracket"))
+	cornerBracket4:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(cornerBracket4)
 	self.cornerBracket4 = cornerBracket4
 	local cornerBracket2 = LUI.UIImage.new(0.5, 0.5, -394, -382, 0, 0, 13, 25)
 	cornerBracket2:setAlpha(0.5)
 	cornerBracket2:setZRot(90)
-	cornerBracket2:setImage(RegisterImage(@"hash_7535662F512D5F90"))
-	cornerBracket2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	cornerBracket2:setImage(RegisterImage("uie_ui_menu_social_corner_bracket"))
+	cornerBracket2:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(cornerBracket2)
 	self.cornerBracket2 = cornerBracket2
 	local cornerBracket3 = LUI.UIImage.new(0.5, 0.5, -394, -382, 0, 0, 377, 389)
 	cornerBracket3:setAlpha(0.5)
-	cornerBracket3:setImage(RegisterImage(@"hash_7535662F512D5F90"))
-	cornerBracket3:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	cornerBracket3:setImage(RegisterImage("uie_ui_menu_social_corner_bracket"))
+	cornerBracket3:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(cornerBracket3)
 	self.cornerBracket3 = cornerBracket3
 	local Image = LUI.UIImage.new(0.5, 0.5, -733, -397, 0, 0, 15, 17)

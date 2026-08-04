@@ -8,8 +8,8 @@ CoD.ui_icon_callingcards_robber_laser.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local lasers = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	lasers:setImage(RegisterImage(@"uie_ui_menu_callingcards_robbery_lasers"))
-	lasers:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	lasers:setImage(RegisterImage("uie_ui_menu_callingcards_robbery_lasers"))
+	lasers:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(lasers)
 	self.lasers = lasers
 	if PostLoadFunc then

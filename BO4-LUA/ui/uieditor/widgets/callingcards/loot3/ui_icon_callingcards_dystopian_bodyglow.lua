@@ -8,11 +8,11 @@ CoD.ui_icon_callingcards_dystopian_bodyglow.new = function(f1_arg0, f1_arg1, f1_
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local arm = LUI.UIImage.new(0, 0, 0, 272, 0, 0, 0, 200)
-	arm:setImage(RegisterImage(@"uie_ui_icon_callingcards_dystopian_body"))
+	arm:setImage(RegisterImage("uie_ui_icon_callingcards_dystopian_body"))
 	self:addElement(arm)
 	self.arm = arm
 	local bodyglow = LUI.UIImage.new(0, 0, 0, 272, 0, 0, 0, 200)
-	bodyglow:setImage(RegisterImage(@"uie_ui_icon_callingcards_dystopian_bodyhighlight"))
+	bodyglow:setImage(RegisterImage("uie_ui_icon_callingcards_dystopian_bodyhighlight"))
 	self:addElement(bodyglow)
 	self.bodyglow = bodyglow
 	if PostLoadFunc then

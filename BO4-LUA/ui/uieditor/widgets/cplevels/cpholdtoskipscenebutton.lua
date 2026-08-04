@@ -1,18 +1,18 @@
 local PostLoadFunc = function(self, controller, menu)
 	self:registerEventHandler("update_scene_skip_progress", function(element)
-		self.progressMeter:setShaderVector(0, (Engine[@"currentgametime"]() - self._progressStartTime) / (self._progressEndTime - self._progressStartTime), 0, 0, 0)
+		self.progressMeter:setShaderVector(0, (Engine.CurrentGameTime() - self._progressStartTime) / (self._progressEndTime - self._progressStartTime), 0, 0, 0)
 	end)
 	self:linkToElementModel(menu, "sceneSkipEndTime", true, function(model)
-		local f3_local0 = Engine[@"getmodelvalue"](model)
-		if f3_local0 == 0 then
+		local modelValue = Engine.GetModelValue(model)
+		if modelValue == 0 then
 			if self._sceneSkipUpdateTimer then
 				self._sceneSkipUpdateTimer:close()
 				self._sceneSkipUpdateTimer = nil
 			end
 			self.progressMeter:setShaderVector(0, -0.05, 0, 0, 0)
 		else
-			self._progressStartTime = Engine[@"currentgametime"]()
-			self._progressEndTime = f3_local0
+			self._progressStartTime = Engine.CurrentGameTime()
+			self._progressEndTime = modelValue
 			if not self._sceneSkipUpdateTimer then
 				self._sceneSkipUpdateTimer = LUI.UITimer.new(1, "update_scene_skip_progress", false)
 				self:addElement(self._sceneSkipUpdateTimer)
@@ -30,8 +30,8 @@ CoD.CPHoldToSkipSceneButton.new = function(f4_arg0, f4_arg1, f4_arg2, f4_arg3, f
 	self.soundSet = "default"
 	f4_arg0:addElementToPendingUpdateStateList(self)
 	local progressMeter = LUI.UIImage.new(0.5, 0.5, -17, 17, 0.5, 0.5, -17, 17)
-	progressMeter:setImage(RegisterImage(@"uie_t7_hud_interact_meter_thick"))
-	progressMeter:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_clock_normal"))
+	progressMeter:setImage(RegisterImage("uie_t7_hud_interact_meter_thick"))
+	progressMeter:setMaterial(LUI.UIImage.GetCachedMaterial("uie_clock_normal"))
 	progressMeter:setShaderVector(0, -0.05, 0, 0, 0)
 	progressMeter:setShaderVector(1, 0.5, 0, 0, 0)
 	progressMeter:setShaderVector(2, 0.5, 0, 0, 0)
@@ -79,7 +79,7 @@ CoD.CPHoldToSkipSceneButton.new = function(f4_arg0, f4_arg1, f4_arg2, f4_arg3, f
 	end)
 	local f4_local4 = self
 	local f4_local5 = self.subscribeToModel
-	local f4_local6 = Engine[@"getmodelforcontroller"](f4_arg1)
+	local f4_local6 = Engine.GetModelForController(f4_arg1)
 	f4_local5(f4_local4, f4_local6.LastInput, function(f9_arg0)
 		f4_arg0:updateElementState(self, {
 			name = "model_validation",

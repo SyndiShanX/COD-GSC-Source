@@ -8,8 +8,8 @@ CoD.CallingCards_Asset_vortex.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local vortex = LUI.UIImage.new(0, 0, 0, 512, 0, 0, 0, 512)
-	vortex:setImage(RegisterImage(@"uie_vortex"))
-	vortex:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	vortex:setImage(RegisterImage("uie_vortex"))
+	vortex:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(vortex)
 	self.vortex = vortex
 	if PostLoadFunc then

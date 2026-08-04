@@ -11,7 +11,7 @@ LUI.createMenu.scavenger_icon = function(f1_arg0, f1_arg1)
 	self.ignoreCursor = true
 	f1_local1:addElementToPendingUpdateStateList(self)
 	local image = LUI.UIImage.new(0.5, 0.5, -64, 64, 0.5, 0.5, 96, 224)
-	image:setImage(RegisterImage(@"hud_scavenger_pickup"))
+	image:setImage(RegisterImage("hud_scavenger_pickup"))
 	self:addElement(image)
 	self.image = image
 	self:linkToElementModel(self, "pulse", true, function(model)

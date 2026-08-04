@@ -1,5 +1,5 @@
-require("x64:3a7cd4b13bb0f7b")
-require("x64:7f3e319a62a00f3")
+require("ui/uieditor/widgets/callingcards/loot3/ui_icon_callingcards_stpatricks_clover_anim")
+require("ui/uieditor/widgets/callingcards/loot3/ui_icon_callingcards_stpatricks_coin_anim")
 CoD.ui_icon_callingcards_stpatricks2 = InheritFrom(LUI.UIElement)
 CoD.ui_icon_callingcards_stpatricks2.__defaultWidth = 960
 CoD.ui_icon_callingcards_stpatricks2.__defaultHeight = 240
@@ -11,16 +11,16 @@ CoD.ui_icon_callingcards_stpatricks2.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg2 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg2:setImage(RegisterImage(@"uie_st_patricks_frame_02_bg"))
+	bg2:setImage(RegisterImage("uie_st_patricks_frame_02_bg"))
 	self:addElement(bg2)
 	self.bg2 = bg2
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(@"uie_st_patricks_frame_02_bg2"))
+	bg:setImage(RegisterImage("uie_st_patricks_frame_02_bg2"))
 	self:addElement(bg)
 	self.bg = bg
 	local rainbow = LUI.UIImage.new(0, 0, 113, 473, 0, 0, -169, 191)
-	rainbow:setImage(RegisterImage(@"uie_st_patricks_frame_02_rainbow"))
-	rainbow:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
+	rainbow:setImage(RegisterImage("uie_st_patricks_frame_02_rainbow"))
+	rainbow:setMaterial(LUI.UIImage.GetCachedMaterial("uie_wipe_delta_normal"))
 	rainbow:setShaderVector(0, 0, 1, 0, 0)
 	rainbow:setShaderVector(1, 0, 0, 0, 0)
 	rainbow:setShaderVector(2, 1, 1, 0, 0)
@@ -30,8 +30,8 @@ CoD.ui_icon_callingcards_stpatricks2.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.rainbow = rainbow
 	local rainbow2 = LUI.UIImage.new(0, 0, 491.5, 851.5, 0, 0, -169, 191)
 	rainbow2:setYRot(180)
-	rainbow2:setImage(RegisterImage(@"uie_st_patricks_frame_02_rainbow"))
-	rainbow2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_delta_normal"))
+	rainbow2:setImage(RegisterImage("uie_st_patricks_frame_02_rainbow"))
+	rainbow2:setMaterial(LUI.UIImage.GetCachedMaterial("uie_wipe_delta_normal"))
 	rainbow2:setShaderVector(0, 0, 1, 0, 0)
 	rainbow2:setShaderVector(1, 0, 0, 0, 0)
 	rainbow2:setShaderVector(2, 1, 1, 0, 0)
@@ -40,11 +40,11 @@ CoD.ui_icon_callingcards_stpatricks2.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self:addElement(rainbow2)
 	self.rainbow2 = rainbow2
 	local crack = LUI.UIImage.new(0, 0, 333, 637, 0, 0, 157.5, 280.5)
-	crack:setImage(RegisterImage(@"uie_st_patricks_frame_02_crack"))
+	crack:setImage(RegisterImage("uie_st_patricks_frame_02_crack"))
 	self:addElement(crack)
 	self.crack = crack
 	local ruin1 = LUI.UIImage.new(0, 0, 409.5, 577.5, 0, 0, 11, 227)
-	ruin1:setImage(RegisterImage(@"uie_st_patricks_frame_02_ruin1"))
+	ruin1:setImage(RegisterImage("uie_st_patricks_frame_02_ruin1"))
 	self:addElement(ruin1)
 	self.ruin1 = ruin1
 	local cloverpack = CoD.ui_icon_callingcards_stpatricks_clover_anim.new(f1_arg0, f1_arg1, 0, 0, 12, 473, 0, 0, 4, 227)
@@ -85,7 +85,7 @@ CoD.ui_icon_callingcards_stpatricks2.__resetProperties = function(f2_arg0)
 	f2_arg0.ruin1:setLeftRight(0, 0, 409.5, 577.5)
 	f2_arg0.ruin1:setTopBottom(0, 0, 11, 227)
 	f2_arg0.ruin1:setScale(1, 1)
-	f2_arg0.ruin1:setImage(RegisterImage(@"uie_st_patricks_frame_02_ruin1"))
+	f2_arg0.ruin1:setImage(RegisterImage("uie_st_patricks_frame_02_ruin1"))
 	f2_arg0.bg:setAlpha(1)
 	f2_arg0.rainbow:setShaderVector(0, 0, 1, 0, 0)
 	f2_arg0.rainbow:setShaderVector(1, 0, 0, 0, 0)
@@ -190,7 +190,7 @@ CoD.ui_icon_callingcards_stpatricks2.__clipsPerState = {
 			f3_arg0.ruin1:setLeftRight(0, 0, 407.5, 575.5)
 			f3_arg0.ruin1:setTopBottom(0, 0, -226, -10)
 			f3_arg0.ruin1:setScale(0.8, 0.9)
-			f3_arg0.ruin1:setImage(RegisterImage(@"uie_st_patricks_frame_02_ruin2"))
+			f3_arg0.ruin1:setImage(RegisterImage("uie_st_patricks_frame_02_ruin2"))
 			f3_local4(f3_arg0.ruin1)
 			local f3_local5 = function(f11_arg0)
 				local f11_local0 = function(f12_arg0)

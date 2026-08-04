@@ -1,23 +1,23 @@
-require("x64:3d33ce699f2ae4d")
-require("x64:c61249ff76c1459")
-CoD[@"hash_62610197D1A9043B"] = InheritFrom(LUI.UIElement)
-CoD[@"hash_62610197D1A9043B"].__defaultWidth = 960
-CoD[@"hash_62610197D1A9043B"].__defaultHeight = 240
-CoD[@"hash_62610197D1A9043B"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+require("ui/uieditor/widgets/callingcards/callingcards_asset_pirates_mast")
+require("ui/uieditor/widgets/callingcards/callingcards_asset_pirates_pirate")
+CoD.callingcards_pirates = InheritFrom(LUI.UIElement)
+CoD.callingcards_pirates.__defaultWidth = 960
+CoD.callingcards_pirates.__defaultHeight = 240
+CoD.callingcards_pirates.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[@"hash_62610197D1A9043B"])
+	self:setClass(CoD.callingcards_pirates)
 	self.id = "CallingCards_Pirates"
 	self.soundSet = "none"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local background = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	background:setImage(RegisterImage(@"uie_ui_icon_callingcards_pirates_background"))
+	background:setImage(RegisterImage("uie_ui_icon_callingcards_pirates_background"))
 	self:addElement(background)
 	self.background = background
 	local embers1 = LUI.UIImage.new(0, 0, 14.5, 598.5, 0, 0, 5, 317)
 	embers1:setAlpha(0.8)
-	embers1:setImage(RegisterImage(@"uie_ui_icon_callingcards_pirates_embers1"))
-	embers1:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	embers1:setImage(RegisterImage("uie_ui_icon_callingcards_pirates_embers1"))
+	embers1:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(embers1)
 	self.embers1 = embers1
 	local MastandFlag = CoD.CallingCards_Asset_Pirates_Mast.new(f1_arg0, f1_arg1, 0, 0, -24, 976, 0, 0, -20, 260)
@@ -28,15 +28,15 @@ CoD[@"hash_62610197D1A9043B"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.piratebody = piratebody
 	local embers2 = LUI.UIImage.new(0, 0, 401.5, 1153.5, 0, 0, -39.5, 392.5)
 	embers2:setAlpha(0.5)
-	embers2:setImage(RegisterImage(@"uie_ui_icon_callingcards_pirates_embers1"))
-	embers2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	embers2:setImage(RegisterImage("uie_ui_icon_callingcards_pirates_embers1"))
+	embers2:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(embers2)
 	self.embers2 = embers2
 	local embers3 = LUI.UIImage.new(0, 0, 319.5, 1071.5, 0, 0, 24, 456)
 	embers3:setAlpha(0)
 	embers3:setZRot(-39)
-	embers3:setImage(RegisterImage(@"uie_ui_icon_callingcards_pirates_embers1"))
-	embers3:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	embers3:setImage(RegisterImage("uie_ui_icon_callingcards_pirates_embers1"))
+	embers3:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(embers3)
 	self.embers3 = embers3
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
@@ -45,7 +45,7 @@ CoD[@"hash_62610197D1A9043B"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end
 	return self
 end
-CoD[@"hash_62610197D1A9043B"].__resetProperties = function(f2_arg0)
+CoD.callingcards_pirates.__resetProperties = function(f2_arg0)
 	f2_arg0.piratebody:completeAnimation()
 	f2_arg0.MastandFlag:completeAnimation()
 	f2_arg0.embers1:completeAnimation()
@@ -67,7 +67,7 @@ CoD[@"hash_62610197D1A9043B"].__resetProperties = function(f2_arg0)
 	f2_arg0.embers3:setAlpha(0)
 	f2_arg0.embers3:setZRot(-39)
 end
-CoD[@"hash_62610197D1A9043B"].__clipsPerState = {
+CoD.callingcards_pirates.__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -193,7 +193,7 @@ CoD[@"hash_62610197D1A9043B"].__clipsPerState = {
 		end,
 	},
 }
-CoD[@"hash_62610197D1A9043B"].__onClose = function(f18_arg0)
+CoD.callingcards_pirates.__onClose = function(f18_arg0)
 	f18_arg0.MastandFlag:close()
 	f18_arg0.piratebody:close()
 end

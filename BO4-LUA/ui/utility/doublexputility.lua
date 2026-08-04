@@ -59,7 +59,7 @@ CoD.DoubleXPUtility.HasDoubleXPOrPromotionalDoubleXP = function(f7_arg0, f7_arg1
 	return f7_local0
 end
 CoD.DoubleXPUtility.MainModeHasDoubleWeaponXP = function(f8_arg0, f8_arg1, f8_arg2)
-	if f8_arg1 == Enum[@"lobbymainmode"][@"lobby_mainmode_wz"] then
+	if f8_arg1 == Enum.LobbyMainMode[@"lobby_mainmode_wz"] then
 		return false
 	end
 	local f8_local0 = f8_arg1 and LuaUtils.GetEModeForLobbyMainMode(f8_arg1)
@@ -94,7 +94,7 @@ CoD.DoubleXPUtility.HasDoubleLootXP = function(f10_arg0, f10_arg1)
 	if f10_local0 then
 		f10_local0 = LuaUtils.GetEModeForLobbyMainMode(f10_local0)
 	end
-	if f10_local0 == Enum[@"emodes"][@"mode_zombies"] or CoD.StartMenuUtility.GetSessionModeFromLobby() == Enum[@"emodes"][@"mode_zombies"] then
+	if f10_local0 == Enum.eModes.mode_zombies or CoD.StartMenuUtility.GetSessionModeFromLobby() == Enum.eModes.mode_zombies then
 		return false
 	else
 		local f10_local2
@@ -132,13 +132,13 @@ CoD.DoubleXPUtility.CurrentLobbyHasTierBoost = function(f12_arg0)
 	if not IsPublicOnlineGame() then
 		return false
 	end
-	local f12_local0 = Engine[@"getglobalmodel"]()
+	local f12_local0 = Engine.GetGlobalModel()
 	f12_local0 = f12_local0.lobbyRoot.lobbyMainMode:get()
-	if f12_local0 == Enum[@"lobbymainmode"][@"lobby_mainmode_zm"] or f12_local0 == Enum[@"lobbymainmode"][@"lobby_mainmode_invalid"] then
+	if f12_local0 == Enum.LobbyMainMode[@"lobby_mainmode_zm"] or f12_local0 == Enum.LobbyMainMode[@"lobby_mainmode_invalid"] then
 		return false
 	end
 	local f12_local1 = LobbyData.GetCurrentMenuTarget()
-	if f12_local1[@"id"] == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_TRAINING) or IsSimulateCT() then
+	if f12_local1.id == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_TRAINING) or IsSimulateCT() then
 		return false
 	elseif CoD.BaseUtility.IsDvarEnabled("ui_fakeTierBoost") then
 		return true
@@ -153,7 +153,7 @@ CoD.DoubleXPUtility.CurrentLobbyHasTierBoost = function(f12_arg0)
 	elseif IsKoreaBonusXPSpecialEventActive(f12_arg0) then
 		return true
 	end
-	local f12_local4 = Dvar[@"scr_credit_scale"]:get()
+	local f12_local4 = Dvar.scr_credit_scale:get()
 	if not f12_local4 then
 		return false
 	end
@@ -182,7 +182,7 @@ CoD.DoubleXPUtility.HasDoubleNP = function(f15_arg0, f15_arg1)
 	if f15_local0 then
 		f15_local0 = LuaUtils.GetEModeForLobbyMainMode(f15_local0)
 	end
-	if (f15_local0 == Enum[@"emodes"][@"mode_zombies"] or CoD.StartMenuUtility.GetSessionModeFromLobby() == Enum[@"emodes"][@"mode_zombies"]) and (Engine[@"hash_5F4F47F17B3BDCB3"](f15_arg0, Engine[@"hash_2ACFE452C407B25B"](Enum[@"emodes"][@"mode_zombies"]), Enum[@"emodes"][@"mode_zombies"], f15_local1) or CoD.BaseUtility.IsDvarEnabled("ui_fakeDoubleNP")) then
+	if (f15_local0 == Enum.eModes.mode_zombies or CoD.StartMenuUtility.GetSessionModeFromLobby() == Enum.eModes.mode_zombies) and (Engine[@"hash_5F4F47F17B3BDCB3"](f15_arg0, Engine[@"hash_2ACFE452C407B25B"](Enum.eModes.mode_zombies), Enum.eModes.mode_zombies, f15_local1) or CoD.BaseUtility.IsDvarEnabled("ui_fakeDoubleNP")) then
 		return true
 	else
 		return false
@@ -192,23 +192,23 @@ CoD.DoubleXPUtility.CurrentLobbyHasDoubleNP = function(f16_arg0)
 	if not CoD.ZombieUtility.IsDoubleNP(f16_arg0) then
 		return false
 	else
-		local f16_local0 = Engine[@"getglobalmodel"]()
-		return f16_local0.lobbyRoot.lobbyMainMode:get() == Enum[@"lobbymainmode"][@"lobby_mainmode_zm"]
+		local f16_local0 = Engine.GetGlobalModel()
+		return f16_local0.lobbyRoot.lobbyMainMode:get() == Enum.LobbyMainMode[@"lobby_mainmode_zm"]
 	end
 end
 CoD.DoubleXPUtility.CurrentPlaylistHasDoubleXP = function(f17_arg0)
 	local f17_local0 = LobbyData.GetCurrentMenuTarget()
-	if not IsPublicOrLeagueGame() and (not f17_local0 or f17_local0[@"lobbymode"] == Enum[@"lobbymode"][@"lobby_mode_custom"]) and not CoD.DirectorUtility.ShowDirectorPregame(f17_arg0) then
+	if not IsPublicOrLeagueGame() and (not f17_local0 or f17_local0.LobbyMode == Enum.LobbyMode[@"lobby_mode_custom"]) and not CoD.DirectorUtility.ShowDirectorPregame(f17_arg0) then
 		return false
 	else
 		local f17_local1 = LobbyData.GetCurrentMenuTarget()
-		if f17_local1[@"id"] == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_TRAINING) or IsSimulateCT() then
+		if f17_local1.id == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_TRAINING) or IsSimulateCT() then
 			return false
 		else
-			local f17_local2 = Engine[@"getglobalmodel"]()
+			local f17_local2 = Engine.GetGlobalModel()
 			f17_local2 = f17_local2.lobbyRoot.playlistId:get()
 			local f17_local3 = f17_local2 and Engine[@"getplaylistinfobyid"](f17_local2)
-			if f17_local3 and LuaUtils.PlaylistRulesIncludes(f17_local3.rules, @"scr_xpscalezm", "0") then
+			if f17_local3 and LuaUtils.PlaylistRulesIncludes(f17_local3.rules, "scr_xpscalezm", "0") then
 				return false
 			elseif CoD.BaseUtility.IsDvarEnabled("ui_fakeDoubleXP") then
 				return true
@@ -220,14 +220,14 @@ CoD.DoubleXPUtility.CurrentPlaylistHasDoubleXP = function(f17_arg0)
 end
 CoD.DoubleXPUtility.CurrentPlaylistHasMainMode = function(f18_arg0, f18_arg1)
 	local f18_local0 = LobbyData.GetCurrentMenuTarget()
-	if not IsPublicOrLeagueGame() and (not f18_local0 or f18_local0[@"lobbymode"] == Enum[@"lobbymode"][@"lobby_mode_custom"]) and not CoD.DirectorUtility.ShowDirectorPregame(f18_arg0) then
+	if not IsPublicOrLeagueGame() and (not f18_local0 or f18_local0.LobbyMode == Enum.LobbyMode[@"lobby_mode_custom"]) and not CoD.DirectorUtility.ShowDirectorPregame(f18_arg0) then
 		return false
 	else
 		local f18_local1 = LobbyData.GetCurrentMenuTarget()
-		if f18_local1[@"id"] == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_TRAINING) or IsSimulateCT() then
+		if f18_local1.id == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_TRAINING) or IsSimulateCT() then
 			return false
 		else
-			local f18_local2 = Engine[@"getglobalmodel"]()
+			local f18_local2 = Engine.GetGlobalModel()
 			f18_local2 = f18_local2.lobbyRoot.playlistId:get()
 			local f18_local3 = f18_local2 and Engine[@"getplaylistinfobyid"](f18_local2)
 			return (f18_local3 and f18_local3.mainMode) == f18_arg1
@@ -236,17 +236,17 @@ CoD.DoubleXPUtility.CurrentPlaylistHasMainMode = function(f18_arg0, f18_arg1)
 end
 CoD.DoubleXPUtility.CurrentPlaylistHasDoubleWeaponXP = function(f19_arg0)
 	local f19_local0 = LobbyData.GetCurrentMenuTarget()
-	if not IsPublicOrLeagueGame() and (not f19_local0 or f19_local0[@"lobbymode"] == Enum[@"lobbymode"][@"lobby_mode_custom"]) and not CoD.DirectorUtility.ShowDirectorPregame(f19_arg0) then
+	if not IsPublicOrLeagueGame() and (not f19_local0 or f19_local0.LobbyMode == Enum.LobbyMode[@"lobby_mode_custom"]) and not CoD.DirectorUtility.ShowDirectorPregame(f19_arg0) then
 		return false
 	else
 		local f19_local1 = LobbyData.GetCurrentMenuTarget()
-		if f19_local1[@"id"] == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_TRAINING) or IsSimulateCT() then
+		if f19_local1.id == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_TRAINING) or IsSimulateCT() then
 			return false
 		else
-			local f19_local2 = Engine[@"getglobalmodel"]()
+			local f19_local2 = Engine.GetGlobalModel()
 			f19_local2 = f19_local2.lobbyRoot.playlistId:get()
 			local f19_local3 = f19_local2 and Engine[@"getplaylistinfobyid"](f19_local2)
-			if f19_local3 and LuaUtils.PlaylistRulesIncludes(f19_local3.rules, @"scr_gunxpscalezm", "0") then
+			if f19_local3 and LuaUtils.PlaylistRulesIncludes(f19_local3.rules, "scr_gunxpscalezm", "0") then
 				return false
 			else
 				return CoD.DoubleXPUtility.MainModeHasDoubleWeaponXP(f19_arg0, f19_local0 and f19_local0[@"mainmode"])
@@ -270,7 +270,7 @@ end
 DataSourceHelpers.PerControllerDataSourceSetup("PromotionalDoubleXP", "PromotionalDoubleXP", function(f21_arg0, f21_arg1)
 	local f21_local0 = f21_arg0:create("dailyDoubleXPTimeLeft")
 	local f21_local1 = f21_arg0:create("doubleXPTimeLeft")
-	local f21_local2, f21_local3 = Engine[@"getdoublexptimeremaining"](f21_arg1)
+	local f21_local2, f21_local3 = Engine.GetDoubleXPTimeRemaining(f21_arg1)
 	f21_local0:set(f21_local3)
 	f21_local1:set(f21_local2)
 end)

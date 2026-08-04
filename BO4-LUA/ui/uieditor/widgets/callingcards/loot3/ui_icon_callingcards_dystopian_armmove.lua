@@ -1,4 +1,4 @@
-require("x64:f13acb26eff999c")
+require("ui/uieditor/widgets/callingcards/loot3/ui_icon_callingcards_dystopian_armglow")
 CoD.ui_icon_callingcards_dystopian_armmove = InheritFrom(LUI.UIElement)
 CoD.ui_icon_callingcards_dystopian_armmove.__defaultWidth = 10
 CoD.ui_icon_callingcards_dystopian_armmove.__defaultHeight = 10

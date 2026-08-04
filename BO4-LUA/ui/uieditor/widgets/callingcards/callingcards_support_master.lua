@@ -1,74 +1,74 @@
-CoD[0x3E15977AA24AE9] = InheritFrom(LUI.UIElement)
-CoD[0x3E15977AA24AE9].__defaultWidth = 960
-CoD[0x3E15977AA24AE9].__defaultHeight = 240
-CoD[0x3E15977AA24AE9].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD.callingcards_support_master = InheritFrom(LUI.UIElement)
+CoD.callingcards_support_master.__defaultWidth = 960
+CoD.callingcards_support_master.__defaultHeight = 240
+CoD.callingcards_support_master.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[0x3E15977AA24AE9])
+	self:setClass(CoD.callingcards_support_master)
 	self.id = "CallingCards_Support_Master"
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local CardIcon = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	CardIcon:setImage(RegisterImage(@"uie_t7_icon_callingcard_temp2_lrg"))
-	CardIcon:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
+	CardIcon:setImage(RegisterImage("uie_t7_icon_callingcard_temp2_lrg"))
+	CardIcon:setMaterial(LUI.UIImage.GetCachedMaterial("uie_feather_blend"))
 	self:addElement(CardIcon)
 	self.CardIcon = CardIcon
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(@"uie_dino_background"))
+	bg:setImage(RegisterImage("uie_dino_background"))
 	self:addElement(bg)
 	self.bg = bg
 	local ufo2 = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	ufo2:setImage(RegisterImage(@"uie_ufo"))
+	ufo2:setImage(RegisterImage("uie_ufo"))
 	self:addElement(ufo2)
 	self.ufo2 = ufo2
 	local LightSpin = LUI.UIImage.new(0, 0, 153, 979, 0, 0, -423, 403)
-	LightSpin:setImage(RegisterImage(@"uie_light_burst"))
-	LightSpin:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	LightSpin:setImage(RegisterImage("uie_light_burst"))
+	LightSpin:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(LightSpin)
 	self.LightSpin = LightSpin
 	local BgHoled = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	BgHoled:setImage(RegisterImage(@"uie_dino_background_holed"))
+	BgHoled:setImage(RegisterImage("uie_dino_background_holed"))
 	self:addElement(BgHoled)
 	self.BgHoled = BgHoled
 	local ufo = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	ufo:setImage(RegisterImage(@"uie_ufo"))
+	ufo:setImage(RegisterImage("uie_ufo"))
 	self:addElement(ufo)
 	self.ufo = ufo
 	local rockFloat = LUI.UIImage.new(0, 0, 178, 887, 0, 0, -105.5, 426.5)
 	rockFloat:setAlpha(0.5)
-	rockFloat:setImage(RegisterImage(@"uie_rock_float"))
-	rockFloat:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
+	rockFloat:setImage(RegisterImage("uie_rock_float"))
+	rockFloat:setMaterial(LUI.UIImage.GetCachedMaterial("uie_tile_scroll_normal"))
 	rockFloat:setShaderVector(0, 1, 1, 0, 0)
 	rockFloat:setShaderVector(1, 0, 0.05, 0, 0)
 	self:addElement(rockFloat)
 	self.rockFloat = rockFloat
 	local rockFloat2 = LUI.UIImage.new(0, 0, 106.5, 755.5, 0, 0, -3.5, 483.5)
 	rockFloat2:setAlpha(0.7)
-	rockFloat2:setImage(RegisterImage(@"uie_rock_float"))
-	rockFloat2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
+	rockFloat2:setImage(RegisterImage("uie_rock_float"))
+	rockFloat2:setMaterial(LUI.UIImage.GetCachedMaterial("uie_tile_scroll_normal"))
 	rockFloat2:setShaderVector(0, 1, 1, 0, 0)
 	rockFloat2:setShaderVector(1, 0, 0.05, 0, 0)
 	self:addElement(rockFloat2)
 	self.rockFloat2 = rockFloat2
 	local dinos = LUI.UIImage.new(0, 0, 69, 1029, 0, 0, 0, 240)
-	dinos:setImage(RegisterImage(@"uie_dino"))
-	dinos:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook"))
+	dinos:setImage(RegisterImage("uie_dino"))
+	dinos:setMaterial(LUI.UIImage.GetCachedMaterial("uie_flipbook"))
 	dinos:setShaderVector(0, 0, 3, 0, 0)
 	dinos:setShaderVector(1, 15, 0, 0, 0)
 	self:addElement(dinos)
 	self.dinos = dinos
 	local lightSource = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
 	lightSource:setAlpha(0.2)
-	lightSource:setImage(RegisterImage(@"uie_light_blur"))
-	lightSource:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	lightSource:setImage(RegisterImage("uie_light_blur"))
+	lightSource:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(lightSource)
 	self.lightSource = lightSource
 	local dinoStill = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	dinoStill:setImage(RegisterImage(@"uie_dino_still"))
+	dinoStill:setImage(RegisterImage("uie_dino_still"))
 	self:addElement(dinoStill)
 	self.dinoStill = dinoStill
 	local cropper = LUI.UIImage.new(0, 0, -32, 992, 0, 0, -392, 632)
 	cropper:setAlpha(0)
-	cropper:setImage(RegisterImage(@"uie_stage_crop_prop"))
+	cropper:setImage(RegisterImage("uie_stage_crop_prop"))
 	self:addElement(cropper)
 	self.cropper = cropper
 	if PostLoadFunc then
@@ -76,7 +76,7 @@ CoD[0x3E15977AA24AE9].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	end
 	return self
 end
-CoD[0x3E15977AA24AE9].__resetProperties = function(f2_arg0)
+CoD.callingcards_support_master.__resetProperties = function(f2_arg0)
 	f2_arg0.LightSpin:completeAnimation()
 	f2_arg0.dinos:completeAnimation()
 	f2_arg0.dinoStill:completeAnimation()
@@ -87,7 +87,7 @@ CoD[0x3E15977AA24AE9].__resetProperties = function(f2_arg0)
 	f2_arg0.dinos:setAlpha(1)
 	f2_arg0.dinoStill:setAlpha(1)
 end
-CoD[0x3E15977AA24AE9].__clipsPerState = {
+CoD.callingcards_support_master.__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()

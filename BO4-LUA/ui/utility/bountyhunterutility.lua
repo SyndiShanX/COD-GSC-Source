@@ -7,7 +7,7 @@ DataSources.BountyHunterWeaponGroups = ListHelper_SetupDataSource("BountyHunterW
 	local f1_local1 = f1_arg1.menu._packageType
 	if f1_local1 then
 		local f1_local2 = f1_arg1.menu._model
-		local f1_local3 = Engine[@"currentsessionmode"]()
+		local f1_local3 = Engine.CurrentSessionMode()
 		local f1_local4 = nil
 		if f1_local2[f1_local1] and f1_local2[f1_local1]:get() and f1_local2[f1_local1]:get() > 0 then
 			local f1_local5 = CoD.BountyHunterUtility.GetGetPackageByID(f1_local2[f1_local1]:get())
@@ -15,7 +15,7 @@ DataSources.BountyHunterWeaponGroups = ListHelper_SetupDataSource("BountyHunterW
 		end
 		local f1_local5 = function(f2_arg0, f2_arg1)
 			for f2_local3, f2_local4 in ipairs(f2_arg0) do
-				if f2_local4.itemGroup ~= Enum[@"itemgroup_t"][@"itemgroup_special"] then
+				if f2_local4.itemGroup ~= Enum.itemGroup_t[@"itemgroup_special"] then
 					table.insert(f1_local0, {
 						models = {
 							name = f2_local4.name,
@@ -83,7 +83,7 @@ CoD.BountyHunterUtility.SetupAttachmentDataSource = function(f6_arg0, f6_arg1, f
 	local f6_local0 = {}
 	local f6_local1 = f6_arg1.menu:getModel()
 	f6_local1 = f6_local1[f6_arg2]:get()
-	local f6_local2 = Engine[@"getgametypesetting"](@"hash_1B34B26470F4368")
+	local f6_local2 = Engine.GetGametypeSetting(@"hash_1B34B26470F4368")
 	if not f6_local2 then
 		f6_local2 = CoD.BountyHunterUtility.PurchaseCostDefaultMultiplier
 	end
@@ -93,7 +93,7 @@ CoD.BountyHunterUtility.SetupAttachmentDataSource = function(f6_arg0, f6_arg1, f
 		if f6_local3.attachmentUpgrades then
 			for f6_local16, f6_local17 in ipairs(f6_local3.attachmentUpgrades) do
 				local f6_local18 = {}
-				local f6_local19 = f6_local17[@"attachmentlist"]
+				local f6_local19 = f6_local17.attachmentlist
 				local f6_local13 = 1
 				for f6_local8, f6_local9 in ipairs(LUI.splitString(f6_local19, "+")) do
 					local f6_local11 = CoD.BountyHunterUtility.BuildAttachmentItemModelsList(f6_arg0, f6_local9, f6_local4)
@@ -110,7 +110,7 @@ CoD.BountyHunterUtility.SetupAttachmentDataSource = function(f6_arg0, f6_arg1, f
 				end
 				f6_local18.trackTier = f6_local16
 				f6_local18.packageType = f6_local3.packageType .. "_attachment_" .. f6_local18.trackTier
-				f6_local18.buyCost = f6_local17[@"purchasecost"] * f6_local2
+				f6_local18.buyCost = f6_local17.purchasecost * f6_local2
 				f6_local18.packageID = f6_local3.packageID
 				f6_local14 = f6_arg1.menu:getModel()
 				f6_local18.trackModel = f6_local14[f6_local3.packageType .. "AttachmentTrack"]
@@ -124,7 +124,7 @@ CoD.BountyHunterUtility.SetupAttachmentDataSource = function(f6_arg0, f6_arg1, f
 end
 DataSources.BountyHunterLoadout = {
 	getModel = function(f8_arg0)
-		local f8_local0 = Engine[@"getglobalmodel"]()
+		local f8_local0 = Engine.GetGlobalModel()
 		return f8_local0:create("BountyHunterLoadout")
 	end,
 }
@@ -134,13 +134,13 @@ end
 CoD.BountyHunterUtility.GetBountyHunterPackageTable = function()
 	if not CoD.BountyHunterUtility.BountyHunterPackages then
 		local f10_local0 = Engine[@"hash_7A7E3CD65E63086F"](CoD.BountyHunterUtility.PackageTableName)
-		local f10_local1 = Engine[@"currentsessionmode"]()
+		local f10_local1 = Engine.CurrentSessionMode()
 		local f10_local2 = {}
-		local f10_local3 = Engine[@"getgametypesetting"](@"hash_1B34B26470F4368")
+		local f10_local3 = Engine.GetGametypeSetting(@"hash_1B34B26470F4368")
 		if not f10_local3 then
 			f10_local3 = CoD.BountyHunterUtility.PurchaseCostDefaultMultiplier
 		end
-		local f10_local4 = Engine[@"getgametypesetting"](@"hash_71B2B43696E16252")
+		local f10_local4 = Engine.GetGametypeSetting(@"hash_71B2B43696E16252")
 		if not f10_local4 then
 			f10_local4 = CoD.BountyHunterUtility.RefillCostDefaultMultiplier
 		end
@@ -149,7 +149,7 @@ CoD.BountyHunterUtility.GetBountyHunterPackageTable = function()
 				local f10_local8 = nil
 				local f10_local9 = {}
 				for f10_local13, f10_local14 in pairs(f10_local17.packageitems) do
-					local f10_local15 = CoD.CACUtility.GetUnlockableItemInfoByAssetHash(f10_local14[@"item"], f10_local1)
+					local f10_local15 = CoD.CACUtility.GetUnlockableItemInfoByAssetHash(f10_local14.item, f10_local1)
 					if f10_local15 then
 						if not f10_local8 then
 							f10_local8 = f10_local15.itemGroup
@@ -157,7 +157,7 @@ CoD.BountyHunterUtility.GetBountyHunterPackageTable = function()
 						table.insert(f10_local9, f10_local15)
 					end
 					if LUI.DEV then
-						Engine[@"printerror"](Enum[@"consolelabel_e"][@"con_label_lui"], "LUI Error: Bounty Hunter Package contains a bad unlockable item: " .. tostring(f10_local14[@"item"]) .. " (check to make sure its included in this mode.\n")
+						Engine.PrintError(Enum[@"consolelabel_e"][@"con_label_lui"], "LUI Error: Bounty Hunter Package contains a bad unlockable item: " .. tostring(f10_local14.item) .. " (check to make sure its included in this mode.\n")
 					end
 				end
 				if #f10_local9 > 0 then
@@ -165,7 +165,7 @@ CoD.BountyHunterUtility.GetBountyHunterPackageTable = function()
 					f10_local11 = f10_local2
 					f10_local12 = {}
 					if not CoD.BountyHunterUtility.UsePurchaseCostMultiplier(f10_local8) then
-						f10_local13 = f10_local17[@"purchasecost"]
+						f10_local13 = f10_local17.purchasecost
 						if not f10_local13 then
 						else
 							f10_local12.purchaseCost = f10_local13
@@ -180,7 +180,7 @@ CoD.BountyHunterUtility.GetBountyHunterPackageTable = function()
 							f10_local10(f10_local11, f10_local12)
 						end
 					end
-					f10_local13 = f10_local17[@"purchasecost"] * f10_local3
+					f10_local13 = f10_local17.purchasecost * f10_local3
 				end
 			end
 		end
@@ -217,7 +217,7 @@ CoD.BountyHunterUtility.BuildWeaponPackageModelsList = function(f12_arg0, f12_ar
 	return f12_local1
 end
 CoD.BountyHunterUtility.BuildPackageModelsList = function(f13_arg0, f13_arg1)
-	local f13_local0 = Engine[@"currentsessionmode"]()
+	local f13_local0 = Engine.CurrentSessionMode()
 	return {
 		itemIndex = f13_arg1.itemIndex,
 		displayName = f13_arg1.displayName,
@@ -227,13 +227,13 @@ CoD.BountyHunterUtility.BuildPackageModelsList = function(f13_arg0, f13_arg1)
 	}
 end
 CoD.BountyHunterUtility.BuildAttachmentItemModelsList = function(f14_arg0, f14_arg1, f14_arg2)
-	local f14_local0 = Engine[@"getattachmentindexbyattachmenttableindex"](f14_arg2, Engine[@"getattachmentindexbyref"](f14_arg1))
-	local f14_local1 = Engine[@"currentsessionmode"]()
+	local f14_local0 = Engine.GetAttachmentIndexByAttachmentTableIndex(f14_arg2, Engine.GetAttachmentIndexByRef(f14_arg1))
+	local f14_local1 = Engine.CurrentSessionMode()
 	return {
-		displayName = Engine[@"getattachmentname"](f14_arg2, f14_local0, f14_local1),
-		image = Engine[@"getattachmentuniqueimagebyindex"](f14_arg2, f14_local0, f14_local1),
-		imageLarge = Engine[@"getattachmentuniqueimagebyindex"](f14_arg2, f14_local0, f14_local1),
-		description = Engine[@"getattachmentdesc"](f14_arg2, f14_local0, f14_local1),
+		displayName = Engine.GetAttachmentName(f14_arg2, f14_local0, f14_local1),
+		image = Engine.GetAttachmentUniqueImageByIndex(f14_arg2, f14_local0, f14_local1),
+		imageLarge = Engine.GetAttachmentUniqueImageByIndex(f14_arg2, f14_local0, f14_local1),
+		description = Engine.GetAttachmentDesc(f14_arg2, f14_local0, f14_local1),
 	}
 end
 CoD.BountyHunterUtility.GetGetPackageByID = function(f15_arg0)
@@ -272,7 +272,7 @@ CoD.BountyHunterUtility.GetCurrentEquippedPackageID = function(f18_arg0, f18_arg
 	return f18_local0[f18_arg1._packageType]
 end
 CoD.BountyHunterUtility.BuildPackageModel = function(f19_arg0, f19_arg1)
-	local f19_local0 = Engine[@"currentsessionmode"]()
+	local f19_local0 = Engine.CurrentSessionMode()
 	if f19_arg0 > 0 then
 		local f19_local1 = CoD.BountyHunterUtility.GetGetPackageByID(f19_arg0)
 		for f19_local7, f19_local8 in ipairs(f19_local1.items) do
@@ -312,15 +312,15 @@ CoD.BountyHunterUtility.BuildPackageModel = function(f19_arg0, f19_arg1)
 	end
 end
 CoD.BountyHunterUtility.InitPackageModel = function(f20_arg0)
-	local f20_local0 = Engine[@"currentsessionmode"]()
+	local f20_local0 = Engine.CurrentSessionMode()
 	for f20_local1 = 1, 3, 1 do
 		local f20_local4 = f20_arg0:create("item" .. f20_local1)
 		f20_local4:create("itemIndex")
 		f20_local4:create("displayName")
 		local f20_local5 = f20_local4:create("image")
-		f20_local5:set(RegisterImage(@"blacktransparent"))
+		f20_local5:set(RegisterImage("blacktransparent"))
 		f20_local5 = f20_local4:create("imageLarge")
-		f20_local5:set(RegisterImage(@"blacktransparent"))
+		f20_local5:set(RegisterImage("blacktransparent"))
 		f20_local4:create("description")
 		f20_local5 = f20_local4:create("weaponAttributes")
 		local f20_local6 = f20_local5:create("damage")
@@ -348,7 +348,7 @@ CoD.BountyHunterUtility.OpenBountyHunterOverlay = function(f21_arg0, f21_arg1, f
 	end
 end
 CoD.BountyHunterUtility.SetupBountyHunterModels = function(f22_arg0, f22_arg1, f22_arg2)
-	local f22_local0 = Engine[@"getmodelforcontroller"](f22_arg2)
+	local f22_local0 = Engine.GetModelForController(f22_arg2)
 	local f22_local1 = f22_local0.hudItems:create("bountyUndoValid")
 	f22_local1:set(false)
 	f22_local1 = f22_arg0:getModel()
@@ -380,9 +380,9 @@ CoD.BountyHunterUtility.PerformValidatedBuy = function(f23_arg0, f23_arg1, f23_a
 			f23_local1 = f23_arg2.refillCost:get()
 		end
 		if f23_local1 <= f23_local0 then
-			Engine[@"sendmenuresponse"](f23_arg0, f23_arg1.menuName, "buy_package_" .. f23_arg3, f23_arg2.packageID:get())
-			Engine[@"playsound"]("uin_bh_purchase")
-			local f23_local2 = Engine[@"getmodelforcontroller"](f23_arg0)
+			Engine.SendMenuResponse(f23_arg0, f23_arg1.menuName, "buy_package_" .. f23_arg3, f23_arg2.packageID:get())
+			Engine.playsound("uin_bh_purchase")
+			local f23_local2 = Engine.GetModelForController(f23_arg0)
 			f23_local2.hudItems.bountyUndoValid:set(true)
 			return true
 		end
@@ -414,7 +414,7 @@ CoD.BountyHunterUtility.SetActiveListItemForWeaponGroup = function(f27_arg0, f27
 	if f27_arg0._packageType == "primary" or f27_arg0._packageType == "secondary" then
 		local f27_local0 = CoD.BountyHunterUtility.GetCurrentEquippedPackageID(f27_arg1, f27_arg0)
 		f27_local0 = f27_local0:get()
-		local f27_local1 = Engine[@"currentsessionmode"]()
+		local f27_local1 = Engine.CurrentSessionMode()
 		if f27_local0 > 0 then
 			local f27_local2 = CoD.BountyHunterUtility.GetGetPackageByID(f27_local0)
 			local f27_local3 = f27_local2.itemGroup
@@ -435,7 +435,7 @@ CoD.BountyHunterUtility.SetPackageInSlotByPackageId = function(f28_arg0, f28_arg
 	CoD.BountyHunterUtility.BuildPackageModel(f28_local0, f28_local1:create(f28_arg1 .. "Model"))
 end
 CoD.BountyHunterUtility.IsTooExpensive = function(f29_arg0, f29_arg1)
-	local f29_local0 = Engine[@"getmodelforcontroller"](f29_arg1)
+	local f29_local0 = Engine.GetModelForController(f29_arg1)
 	f29_local0 = f29_local0.luielement.BountyHunterLoadout.money:get()
 	local f29_local1 = f29_arg0:getModel()
 	if f29_local1 then
@@ -445,7 +445,7 @@ CoD.BountyHunterUtility.IsTooExpensive = function(f29_arg0, f29_arg1)
 	return f29_local1
 end
 CoD.BountyHunterUtility.IsRefillTooExpensive = function(f30_arg0, f30_arg1)
-	local f30_local0 = Engine[@"getmodelforcontroller"](f30_arg1)
+	local f30_local0 = Engine.GetModelForController(f30_arg1)
 	f30_local0 = f30_local0.luielement.BountyHunterLoadout.money:get()
 	local f30_local1 = f30_arg0:getModel()
 	if f30_local1 then
@@ -599,11 +599,11 @@ CoD.BountyHunterUtility.GameTypeHidesChooseClass = function(f42_arg0)
 end
 CoD.BountyHunterUtility.TimeRemainingClockFraction = function(f43_arg0, f43_arg1, f43_arg2, f43_arg3, f43_arg4, f43_arg5)
 	local f43_local0 = 10
-	local f43_local1 = Engine[@"getgametypesettings"]()
+	local f43_local1 = Engine.GetGametypeSettings()
 	return 1, 1 - math.ceil(f43_arg2 / f43_local1.bountyPurchasePhaseDuration:get() * f43_local0) / f43_local0, 0, 0
 end
 CoD.BountyHunterUtility.GiveBountyHunterMoneyScore = function(f44_arg0, f44_arg1, f44_arg2, f44_arg3)
-	if not Engine[@"isvisibilitybitset"](f44_arg2, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) and not Engine[@"isvisibilitybitset"](f44_arg2, Enum[@"uivisibilitybit"][@"bit_player_dead"]) then
+	if not Engine.IsVisibilityBitSet(f44_arg2, Enum.UIVisibilityBit[@"bit_spectating_client"]) and not Engine.IsVisibilityBitSet(f44_arg2, Enum.UIVisibilityBit[@"bit_player_dead"]) then
 		local f44_local0 = f44_arg3:get()
 		if not f44_arg0._previousMoney then
 			f44_arg0._previousMoney = f44_local0
@@ -652,7 +652,7 @@ CoD.BountyHunterUtility.HideBuyMenu = function(f46_arg0, f46_arg1, f46_arg2, f46
 	end
 end
 CoD.BountyHunterUtility.ToggleBuyMenuVisible = function(f47_arg0, f47_arg1, f47_arg2, f47_arg3, f47_arg4)
-	if not Engine[@"isvisibilitybitset"](f47_arg1, Enum[@"uivisibilitybit"][@"bit_spectating_client"]) then
+	if not Engine.IsVisibilityBitSet(f47_arg1, Enum.UIVisibilityBit[@"bit_spectating_client"]) then
 		if CoD.BountyHunterUtility.IsBuyMenuVisible(f47_arg2) then
 			CoD.BountyHunterUtility.HideBuyMenu(f47_arg0, f47_arg1, f47_arg2, f47_arg3)
 			if CoD.isPC then
@@ -725,7 +725,7 @@ CoD.BountyHunterUtility.HasPreviewBeenPurchased = function(f50_arg0, f50_arg1)
 end
 CoD.BountyHunterUtility.HasBountyStreakOrNotBounty = function(f51_arg0)
 	local f51_local0 = CoD.BountyHunterUtility.GameTypeIsBounty(f51_arg0)
-	local f51_local1 = Engine[@"getmodelforcontroller"](f51_arg0)
+	local f51_local1 = Engine.GetModelForController(f51_arg0)
 	f51_local1 = f51_local1.killstreaks
 	local f51_local2 = f51_local1.killstreak3.rewardAmmo:get()
 	if f51_local2 then

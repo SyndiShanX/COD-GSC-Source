@@ -1,7 +1,7 @@
-require("x64:2675595fa323085")
-require("x64:6a09e0fce4b9806")
-require("x64:55aca670e9903a3")
-require("x64:a9255c570c68aa8")
+require("ui/uieditor/widgets/emptyfocusable")
+require("ui/uieditor/widgets/pc/dropdownlistitem")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmaincorners")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmainframe")
 CoD.GlobalDropdown = InheritFrom(LUI.UIElement)
 CoD.GlobalDropdown.__defaultWidth = 424
 CoD.GlobalDropdown.__defaultHeight = 45
@@ -33,7 +33,7 @@ CoD.GlobalDropdown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	DropDownList:setWidgetType(CoD.DropdownListItem)
 	DropDownList:setVerticalCount(4)
 	DropDownList:setFirstElementXOffset(1)
-	DropDownList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	DropDownList:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	DropDownList:setDataSource("DropdownListTest")
 	self:addElement(DropDownList)
 	self.DropDownList = DropDownList
@@ -43,8 +43,8 @@ CoD.GlobalDropdown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	Name:setText(LocalizeToUpperString(@"menu/new"))
 	Name:setTTF("ttmussels_demibold")
 	Name:setLetterSpacing(2)
-	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
+	Name:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	Name:setAlignment(Enum.LUIAlignment[@"lui_alignment_middle"])
 	self:addElement(Name)
 	self.Name = Name
 	local Selection = LUI.UIText.new(0, 0.67, 102, 102, 0.5, 0.5, -11.5, 7.5)
@@ -53,8 +53,8 @@ CoD.GlobalDropdown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	Selection:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Selection:setTTF("ttmussels_demibold")
 	Selection:setLetterSpacing(2)
-	Selection:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	Selection:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
+	Selection:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	Selection:setAlignment(Enum.LUIAlignment[@"lui_alignment_middle"])
 	self:addElement(Selection)
 	self.Selection = Selection
 	local emptyFocusable = CoD.emptyFocusable.new(f1_arg0, f1_arg1, 0, 1, 90, 0, 0.5, 0.5, -22.5, 22.5)
@@ -65,18 +65,18 @@ CoD.GlobalDropdown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(emptyFocusable, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
-		if IsInDefaultState(element) then
-			SetState(self, "InUse", controller)
+	f1_arg0:AddButtonCallbackFunction(emptyFocusable, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], nil, function(f3_arg0, f3_arg1, f3_arg2, f3_arg3)
+		if IsInDefaultState(f3_arg0) then
+			SetState(self, "InUse", f3_arg2)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if IsInDefaultState(element) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_7179662091387B23", nil, nil)
+	end, function(f4_arg0, f4_arg1, f4_arg2)
+		if IsInDefaultState(f4_arg0) then
+			CoD.Menu.SetButtonLabel(f4_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "key/mouse1", nil, nil)
 			return true
 		else
 			return false

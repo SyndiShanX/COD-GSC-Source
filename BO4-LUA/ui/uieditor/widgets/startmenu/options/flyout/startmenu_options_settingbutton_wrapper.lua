@@ -1,4 +1,4 @@
-require("x64:69723f90383a43c")
+require("ui/uieditor/widgets/startmenu/options/flyout/startmenu_options_settingbutton")
 CoD.StartMenu_Options_SettingButton_Wrapper = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Options_SettingButton_Wrapper.__defaultWidth = 700
 CoD.StartMenu_Options_SettingButton_Wrapper.__defaultHeight = 46

@@ -1,5 +1,5 @@
-require("x64:b0810588c9ad0b8")
-require("x64:d93d55bb6418607")
+require("ui/uieditor/widgets/pc/startmenu/controlsoptions/pc_startmenu_options_controls_keybinder")
+require("ui/uieditor/widgets/pc_vscrolllist")
 CoD.PC_StartMenu_Options_List = InheritFrom(LUI.UIElement)
 CoD.PC_StartMenu_Options_List.__defaultWidth = 694
 CoD.PC_StartMenu_Options_List.__defaultHeight = 633

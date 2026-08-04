@@ -1,4 +1,4 @@
-require("x64:42702cd396663a8")
+require("ui/uieditor/widgets/common/commonrankiconandranklarge")
 CoD.Social_RankIconAndRankLargeContainer = InheritFrom(LUI.UIElement)
 CoD.Social_RankIconAndRankLargeContainer.__defaultWidth = 349
 CoD.Social_RankIconAndRankLargeContainer.__defaultHeight = 135

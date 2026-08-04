@@ -8,11 +8,11 @@ CoD.ui_icon_callingcards_crimewave_wheelspin02.new = function(f1_arg0, f1_arg1, 
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local wheelspin1 = LUI.UIImage.new(0, 0, 0, 40, 0, 0, 0, 56)
-	wheelspin1:setImage(RegisterImage(@"uie_ui_menu_callingcards_crimewave_criminalcar_rearwheel1"))
+	wheelspin1:setImage(RegisterImage("uie_ui_menu_callingcards_crimewave_criminalcar_rearwheel1"))
 	self:addElement(wheelspin1)
 	self.wheelspin1 = wheelspin1
 	local wheelspin2 = LUI.UIImage.new(0, 0, 0, 40, 0, 0, 0, 56)
-	wheelspin2:setImage(RegisterImage(@"uie_ui_menu_callingcards_crimewave_criminalcar_rearwheel2"))
+	wheelspin2:setImage(RegisterImage("uie_ui_menu_callingcards_crimewave_criminalcar_rearwheel2"))
 	self:addElement(wheelspin2)
 	self.wheelspin2 = wheelspin2
 	if PostLoadFunc then

@@ -1,4 +1,4 @@
-require("x64:1f846296f1a1b81")
+require("ui/uieditor/widgets/director/directorselectbuttonminiinternal")
 CoD.StartMenu_Options_CoDAccountButton = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Options_CoDAccountButton.__defaultWidth = 514
 CoD.StartMenu_Options_CoDAccountButton.__defaultHeight = 69
@@ -29,8 +29,8 @@ CoD.StartMenu_Options_CoDAccountButton.new = function(f1_arg0, f1_arg1, f1_arg2,
 	DirectorCustomStartButton.Tint:setRGB(0.05, 0.08, 0.11)
 	DirectorCustomStartButton.Tint:setAlpha(0.25)
 	DirectorCustomStartButton.LeaderActivityText:setText("")
-	DirectorCustomStartButton.MiddleText:setText(LocalizeToUpperString(@"hash_630BC41F2404F851"))
-	DirectorCustomStartButton.MiddleTextFocus:setText(LocalizeToUpperString(@"hash_630BC41F2404F851"))
+	DirectorCustomStartButton.MiddleText:setText(LocalizeToUpperString("menu/cod_account_caps"))
+	DirectorCustomStartButton.MiddleTextFocus:setText(LocalizeToUpperString("menu/cod_account_caps"))
 	self:addElement(DirectorCustomStartButton)
 	self.DirectorCustomStartButton = DirectorCustomStartButton
 	self:mergeStateConditions({

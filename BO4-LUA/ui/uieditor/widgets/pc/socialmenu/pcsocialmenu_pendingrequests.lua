@@ -1,5 +1,5 @@
-require("x64:8b4af6c828d40f")
-require("x64:d93d55bb6418607")
+require("ui/uieditor/widgets/pc/socialmenu/pcsocialmenu_playerlistitem")
+require("ui/uieditor/widgets/pc_vscrolllist")
 CoD.PCSocialMenu_PendingRequests = InheritFrom(LUI.UIElement)
 CoD.PCSocialMenu_PendingRequests.__defaultWidth = 626
 CoD.PCSocialMenu_PendingRequests.__defaultHeight = 720
@@ -45,16 +45,16 @@ CoD.PCSocialMenu_PendingRequests.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	RequestReceived:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4F690C78D6DA9218"))
 	RequestReceived:setTTF("ttmussels_demibold")
 	RequestReceived:setLetterSpacing(3)
-	RequestReceived:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	RequestReceived:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	RequestReceived:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	RequestReceived:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(RequestReceived)
 	self.RequestReceived = RequestReceived
 	local RequestSent = LUI.UIText.new(0, 1, 0, 0, 0, 0, 323, 360)
 	RequestSent:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_21AE94021C967D51"))
 	RequestSent:setTTF("ttmussels_demibold")
 	RequestSent:setLetterSpacing(3)
-	RequestSent:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	RequestSent:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	RequestSent:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	RequestSent:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(RequestSent)
 	self.RequestSent = RequestSent
 	RequestSentList.id = "RequestSentList"

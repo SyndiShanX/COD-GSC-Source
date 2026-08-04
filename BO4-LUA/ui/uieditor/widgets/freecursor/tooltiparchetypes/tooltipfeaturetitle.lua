@@ -1,8 +1,8 @@
-require("x64:baf9d942e162c42")
-require("x64:a433c9653680736")
-require("x64:9a23af2a8d21742")
-require("x64:65ae4679e313a58")
-require("x64:c373acceaa4c882")
+require("ui/uieditor/widgets/freecursor/freecursordetaileddescriptioncontainer")
+require("ui/uieditor/widgets/freecursor/infopanelsubwidgets/freecursorbuttonpromptarea")
+require("ui/uieditor/widgets/freecursor/infopanelsubwidgets/freecursorcautioninfo")
+require("ui/uieditor/widgets/freecursor/infopanelsubwidgets/freecursorheaderinfo")
+require("ui/uieditor/widgets/freecursor/infopanelsubwidgets/freecursorplayercard")
 CoD.TooltipFeatureTitle = InheritFrom(LUI.UIElement)
 CoD.TooltipFeatureTitle.__defaultWidth = 405
 CoD.TooltipFeatureTitle.__defaultHeight = 372
@@ -32,7 +32,7 @@ CoD.TooltipFeatureTitle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	playerGrid:setTopBottom(0, 0, 241, 749)
 	playerGrid:setWidgetType(CoD.freeCursorPlayerCard)
 	playerGrid:setVerticalCount(5)
-	playerGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	playerGrid:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	playerGrid:linkToElementModel(self, "playerListDataSource", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -93,14 +93,14 @@ CoD.TooltipFeatureTitle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	local f1_local6 = self
 	local f1_local7 = self.subscribeToModel
-	local f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
-	f1_local7(f1_local6, f1_local8["ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"]], function(f12_arg0)
+	local f1_local8 = Engine.GetModelForController(f1_arg1)
+	f1_local7(f1_local6, f1_local8["ButtonBits." .. Enum.LUIButton[@"lui_key_rtrig"]], function(f12_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f12_arg0:get(),
-			modelName = "ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"],
+			modelName = "ButtonBits." .. Enum.LUIButton[@"lui_key_rtrig"],
 		})
 	end, false)
 	self:appendEventHandler("input_source_changed", function(f13_arg0, f13_arg1)
@@ -109,7 +109,7 @@ CoD.TooltipFeatureTitle.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_ar
 	end)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[@"getmodelforcontroller"](f1_arg1)
+	f1_local8 = Engine.GetModelForController(f1_arg1)
 	f1_local7(f1_local6, f1_local8.LastInput, function(f14_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

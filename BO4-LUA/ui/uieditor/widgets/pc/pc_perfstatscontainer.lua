@@ -1,4 +1,4 @@
-require("x64:2afa491a35484d6")
+require("ui/uieditor/widgets/pc/pc_telemetryitem")
 CoD.PC_PerfStatsContainer = InheritFrom(LUI.UIElement)
 CoD.PC_PerfStatsContainer.__defaultWidth = 1000
 CoD.PC_PerfStatsContainer.__defaultHeight = 15
@@ -10,7 +10,7 @@ CoD.PC_PerfStatsContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.id = "PC_PerfStatsContainer"
 	self.soundSet = "default"
 	local Framerate = CoD.PC_TelemetryItem.new(f1_arg0, f1_arg1, 0, 0, 0, 93, 0, 0, 0, 15)
-	Framerate.Label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3FC9D018B3560041"))
+	Framerate.Label:setText(Engine[@"hash_4F9F1239CFD921FE"]("options/fps"))
 	Framerate:subscribeToGlobalModel(f1_arg1, "PCTelemetry", "showFPS", function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -18,7 +18,7 @@ CoD.PC_PerfStatsContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 		end
 	end)
 	Framerate:subscribeToGlobalModel(f1_arg1, "GlobalModel", "PCTelemetry.framerateCounter", function(model)
-		CoD.PCUtility.SetTextFromTelemetryModel(Framerate, f1_arg1, "PCTelemetry.framerateCounter", @"hash_3FC9D018B3560041", @"hash_583A0261B143DFE7")
+		CoD.PCUtility.SetTextFromTelemetryModel(Framerate, f1_arg1, "PCTelemetry.framerateCounter", "options/fps", @"hash_583A0261B143DFE7")
 	end)
 	self:addElement(Framerate)
 	self.Framerate = Framerate
@@ -132,7 +132,7 @@ CoD.PC_PerfStatsContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	self.VoiceSuspended = VoiceSuspended
 	local f1_local10 = GPUTemperature
 	local f1_local11 = GPUTemperature.subscribeToModel
-	local f1_local12 = Engine[@"getglobalmodel"]()
+	local f1_local12 = Engine.GetGlobalModel()
 	f1_local11(f1_local10, f1_local12["PCTelemetry.GPUTemperature"], GPUTemperature.Label.__Text_Color)
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)
 	if PostLoadFunc then

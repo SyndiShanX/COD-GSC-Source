@@ -1,13 +1,13 @@
-require("x64:f315f285d876794")
-require("x64:3507fa8399fe49")
-require("x64:e9cfc3cb5356fa5")
-require("x64:d7ba7c36104672")
-require("x64:38c11a77e96e48c")
-require("x64:e930ac5578a8d6e")
-require("x64:eeba179b3edce79")
-require("x64:ba72b08fda6493")
-require("x64:9e9198b8b1a81d5")
-require("x64:c829ac7d797ba4c")
+require("ui/uieditor/menus/social/social_playerdetailspopup")
+require("ui/uieditor/widgets/common/commonlistbuttonshort")
+require("ui/uieditor/widgets/common/commontabbar")
+require("ui/uieditor/widgets/footer/fe_leftcontainer_notlobby")
+require("ui/uieditor/widgets/scrollbars/verticalcounter")
+require("ui/uieditor/widgets/social/social_inviteplayersheader")
+require("ui/uieditor/widgets/social/social_playerslistbuttonwithcheckbox")
+require("ui/uieditor/widgets/pc/pc_smallclosebutton")
+require("ui/uieditor/widgets/pc_simplevscrolllist")
+require("ui/uieditor/widgets/systemoverlays/featureoverlay_button_mouseonly")
 CoD.Social_InvitePlayersPopup = InheritFrom(CoD.Menu)
 LUI.createMenu.Social_InvitePlayersPopup = function(f1_arg0, f1_arg1)
 	local self = CoD.Menu.NewForUIEditor("Social_InvitePlayersPopup", f1_arg0)
@@ -41,7 +41,7 @@ LUI.createMenu.Social_InvitePlayersPopup = function(f1_arg0, f1_arg1)
 	self.Container = Container
 	local TiledBacking = LUI.UIImage.new(0.5, 0.5, -471.5, 471.5, 0.06, 0.06, -29, 971)
 	TiledBacking:setAlpha(0.25)
-	TiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBacking:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	TiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	TiledBacking:setupNineSliceShader(196, 88)
@@ -49,7 +49,7 @@ LUI.createMenu.Social_InvitePlayersPopup = function(f1_arg0, f1_arg1)
 	self.TiledBacking = TiledBacking
 	local TiledBacking2 = LUI.UIImage.new(0.5, 0.5, -460, 460, 0.06, 0.06, 0.5, 29.5)
 	TiledBacking2:setAlpha(0.5)
-	TiledBacking2:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	TiledBacking2:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	TiledBacking2:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	TiledBacking2:setShaderVector(0, 0, 0, 0, 0)
 	TiledBacking2:setupNineSliceShader(196, 88)
@@ -81,11 +81,11 @@ LUI.createMenu.Social_InvitePlayersPopup = function(f1_arg0, f1_arg1)
 	local InvitePlayersText = LUI.UIText.new(0.5, 0.5, -460.5, 460.5, 0, 0, 72, 96)
 	InvitePlayersText:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	InvitePlayersText:setAlpha(0.6)
-	InvitePlayersText:setText(LocalizeToUpperString(@"hash_C4EB9FE5F09A2E7"))
+	InvitePlayersText:setText(LocalizeToUpperString("menu/invite_players"))
 	InvitePlayersText:setTTF("ttmussels_regular")
 	InvitePlayersText:setLetterSpacing(4)
-	InvitePlayersText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	InvitePlayersText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	InvitePlayersText:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	InvitePlayersText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(InvitePlayersText)
 	self.InvitePlayersText = InvitePlayersText
 	local SendInvitesButton = CoD.CommonListButtonShort.new(f1_local1, f1_arg0, 0.5, 0.5, 211.5, 451.5, 0, 0, 409.5, 501.5)
@@ -97,26 +97,26 @@ LUI.createMenu.Social_InvitePlayersPopup = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f4_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f4_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(SendInvitesButton, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(SendInvitesButton, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f5_arg0, f5_arg1, f5_arg2, f5_arg3)
 		if not IsPC() then
-			CoD.SocialUtility.SendInvites(self, controller)
-			GoBack(self, controller)
+			CoD.SocialUtility.SendInvites(self, f5_arg2)
+			GoBack(self, f5_arg2)
 			return true
 		elseif IsPC() then
-			CoD.SocialUtility.SendInvites(self, controller)
-			GoBack(self, controller)
+			CoD.SocialUtility.SendInvites(self, f5_arg2)
+			GoBack(self, f5_arg2)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
+	end, function(f6_arg0, f6_arg1, f6_arg2)
 		if not IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_3AC3B80C833B60E1", nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(f6_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "menu/select_caps", nil, "ui_confirm")
 			return true
 		elseif IsPC() then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(f6_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 			return false
 		else
 			return false
@@ -127,8 +127,8 @@ LUI.createMenu.Social_InvitePlayersPopup = function(f1_arg0, f1_arg1)
 	local SelectedCount = LUI.UIText.new(0.5, 0.5, 233, 433, 0, 0, 549, 603)
 	SelectedCount:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	SelectedCount:setTTF("0arame_mono_stencil")
-	SelectedCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	SelectedCount:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	SelectedCount:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	SelectedCount:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	SelectedCount:subscribeToGlobalModel(f1_arg0, "SocialRoot", "selectedCount", function(model)
 		local f7_local0 = model:get()
 		if f7_local0 ~= nil then
@@ -142,8 +142,8 @@ LUI.createMenu.Social_InvitePlayersPopup = function(f1_arg0, f1_arg1)
 	SelectedCount2:setText(LocalizeToUpperString(@"menu/selected"))
 	SelectedCount2:setTTF("ttmussels_regular")
 	SelectedCount2:setLetterSpacing(4)
-	SelectedCount2:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	SelectedCount2:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	SelectedCount2:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	SelectedCount2:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(SelectedCount2)
 	self.SelectedCount2 = SelectedCount2
 	local noPlayersOnlineText = LUI.UIText.new(0.5, 0.5, -402.5, 115.5, 0, 0, 412.5, 449.5)
@@ -151,21 +151,21 @@ LUI.createMenu.Social_InvitePlayersPopup = function(f1_arg0, f1_arg1)
 	noPlayersOnlineText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_765A2CB730C7F61D"))
 	noPlayersOnlineText:setTTF("ttmussels_regular")
 	noPlayersOnlineText:setLetterSpacing(2)
-	noPlayersOnlineText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	noPlayersOnlineText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	noPlayersOnlineText:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	noPlayersOnlineText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(noPlayersOnlineText)
 	self.noPlayersOnlineText = noPlayersOnlineText
 	local LayoutTopBar = LUI.UIImage.new(0.5, 0.5, -473, 473, 0, 0, 40, 68)
-	LayoutTopBar:setImage(RegisterImage(@"uie_ui_menu_social_popup_menu_bar"))
+	LayoutTopBar:setImage(RegisterImage("uie_ui_menu_social_popup_menu_bar"))
 	self:addElement(LayoutTopBar)
 	self.LayoutTopBar = LayoutTopBar
 	local LayoutTopBar2 = LUI.UIImage.new(0.5, 0.5, -473, 473, 0, 0, 1012, 1040)
 	LayoutTopBar2:setZRot(180)
-	LayoutTopBar2:setImage(RegisterImage(@"uie_ui_menu_social_popup_menu_bar"))
+	LayoutTopBar2:setImage(RegisterImage("uie_ui_menu_social_popup_menu_bar"))
 	self:addElement(LayoutTopBar2)
 	self.LayoutTopBar2 = LayoutTopBar2
 	local Stripes = LUI.UIImage.new(0.5, 0.5, -471.5, 471.5, 0, 0, 39, 55)
-	Stripes:setImage(RegisterImage(@"uie_ui_menu_social_bar_stripe"))
+	Stripes:setImage(RegisterImage("uie_ui_menu_social_bar_stripe"))
 	self:addElement(Stripes)
 	self.Stripes = Stripes
 	local Linker = LUI.UIImage.new(0.5, 0.5, -4, 0, 0, 0, -350.5, 574.5)
@@ -212,13 +212,13 @@ LUI.createMenu.Social_InvitePlayersPopup = function(f1_arg0, f1_arg1)
 	PCSimpleVScrollList.ScrollView.View:setDataSource("SocialInvitePlayersList")
 	PCSimpleVScrollList:appendEventHandler("input_source_changed", function(f8_arg0, f8_arg1)
 		f8_arg1.menu = f8_arg1.menu or f1_local1
-		CoD.Menu.UpdateButtonShownState(f8_arg0, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f8_arg0, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xby_pstriangle"])
 	end)
 	local BTNQuit = PCSimpleVScrollList
 	local Header = PCSimpleVScrollList.subscribeToModel
-	local featureOverlayButtonMouseOnly = Engine[@"getmodelforcontroller"](f1_arg0)
+	local featureOverlayButtonMouseOnly = Engine.GetModelForController(f1_arg0)
 	Header(BTNQuit, featureOverlayButtonMouseOnly.LastInput, function(f9_arg0, f9_arg1)
-		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(f9_arg1, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xby_pstriangle"])
 	end, false)
 	PCSimpleVScrollList:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f10_local0 = nil
@@ -234,19 +234,19 @@ LUI.createMenu.Social_InvitePlayersPopup = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f11_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xby_pstriangle"])
 		return f11_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(PCSimpleVScrollList, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], nil, function(element, menu, controller, model)
-		if IsGamepad(controller) then
-			SetSelectedFriendXUID(self, element, controller)
-			OpenOverlay(self, "Social_PlayerDetailsPopup", controller, nil)
+	f1_local1:AddButtonCallbackFunction(PCSimpleVScrollList, f1_arg0, Enum.LUIButton[@"lui_key_xby_pstriangle"], nil, function(f12_arg0, f12_arg1, f12_arg2, f12_arg3)
+		if IsGamepad(f12_arg2) then
+			SetSelectedFriendXUID(self, f12_arg0, f12_arg2)
+			OpenOverlay(self, "Social_PlayerDetailsPopup", f12_arg2, nil)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_1E0254269ED8FFD3", nil, nil)
+	end, function(f13_arg0, f13_arg1, f13_arg2)
+		if IsGamepad(f13_arg2) then
+			CoD.Menu.SetButtonLabel(f13_arg1, Enum.LUIButton[@"lui_key_xby_pstriangle"], @"hash_1E0254269ED8FFD3", nil, nil)
 			return true
 		else
 			return false
@@ -267,21 +267,21 @@ LUI.createMenu.Social_InvitePlayersPopup = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f14_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f14_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(BTNQuit, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		GoBack(self, controller)
+	f1_local1:AddButtonCallbackFunction(BTNQuit, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f15_arg0, f15_arg1, f15_arg2, f15_arg3)
+		GoBack(self, f15_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+	end, function(f16_arg0, f16_arg1, f16_arg2)
+		CoD.Menu.SetButtonLabel(f16_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(BTNQuit)
 	self.BTNQuit = BTNQuit
 	featureOverlayButtonMouseOnly = nil
 	featureOverlayButtonMouseOnly = CoD.featureOverlay_Button_MouseOnly.new(f1_local1, f1_arg0, 0.5, 0.5, -408.5, -222.5, 0.5, 0.5, 426, 486)
-	featureOverlayButtonMouseOnly.featureOverlayButtonContainer.Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_778D439E1B360368"))
+	featureOverlayButtonMouseOnly.featureOverlayButtonContainer.Title:setText(Engine[@"hash_4F9F1239CFD921FE"]("menu/back_caps"))
 	featureOverlayButtonMouseOnly:registerEventHandler("gain_focus", function(element, event)
 		local f17_local0 = nil
 		if element.gainFocus then
@@ -289,14 +289,14 @@ LUI.createMenu.Social_InvitePlayersPopup = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f17_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f17_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(featureOverlayButtonMouseOnly, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		GoBack(self, controller)
+	f1_local1:AddButtonCallbackFunction(featureOverlayButtonMouseOnly, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f18_arg0, f18_arg1, f18_arg2, f18_arg3)
+		GoBack(self, f18_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+	end, function(f19_arg0, f19_arg1, f19_arg2)
+		CoD.Menu.SetButtonLabel(f19_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(featureOverlayButtonMouseOnly)
@@ -324,26 +324,26 @@ LUI.createMenu.Social_InvitePlayersPopup = function(f1_arg0, f1_arg1)
 			modelName = "visibleCount",
 		})
 	end, false)
-	self:registerEventHandler("menu_loaded", function(self, event)
+	self:registerEventHandler("menu_loaded", function(element, event)
 		local f23_local0 = nil
-		if self.menuLoaded then
-			f23_local0 = self:menuLoaded(event)
-		elseif self.super.menuLoaded then
-			f23_local0 = self.super:menuLoaded(event)
+		if element.menuLoaded then
+			f23_local0 = element:menuLoaded(event)
+		elseif element.super.menuLoaded then
+			f23_local0 = element.super:menuLoaded(event)
 		end
 		if not IsPC() then
 			CoD.FreeCursorUtility.AddLockedFocusLeftOrRightNavigation(f1_local1, f1_arg0, self.onlineList, self.SendInvitesButton)
 		end
 		if not f23_local0 then
-			f23_local0 = self:dispatchEventToChildren(event)
+			f23_local0 = element:dispatchEventToChildren(event)
 		end
 		return f23_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
-		GoBack(self, controller)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xbb_pscircle"], nil, function(f24_arg0, f24_arg1, f24_arg2, f24_arg3)
+		GoBack(self, f24_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"mp/back", nil, nil)
+	end, function(f25_arg0, f25_arg1, f25_arg2)
+		CoD.Menu.SetButtonLabel(f25_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], @"mp/back", nil, nil)
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(self, "close", function(element)
@@ -387,7 +387,7 @@ LUI.createMenu.Social_InvitePlayersPopup = function(f1_arg0, f1_arg1)
 		PostLoadFunc(self, f1_arg0)
 	end
 	f1_local28 = self
-	SetElementPropertyEnum(self.onlineList, "_presenceFilter", Enum[@"presencefilter"][@"presence_filter_online"])
+	SetElementPropertyEnum(self.onlineList, "_presenceFilter", Enum.PresenceFilter[@"presence_filter_online"])
 	MenuHidesFreeCursor(f1_local1, f1_arg0)
 	CoD.SocialUtility.SetSelfInviteTypeToSocialRoot(self, f1_arg0)
 	CoD.BaseUtility.SetCustomNavDirection(CoD.BaseUtility.NavigationDirection.right, f1_local7, self.SendInvitesButton)

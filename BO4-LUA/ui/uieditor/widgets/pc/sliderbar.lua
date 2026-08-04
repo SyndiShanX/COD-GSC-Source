@@ -1,7 +1,7 @@
-require("x64:2675595fa323085")
-require("x64:807dca7a3470358")
-require("x64:e65f98731c82aa")
-require("x64:1ba14a6a952408f")
+require("ui/uieditor/widgets/emptyfocusable")
+require("ui/uieditor/widgets/pc/sliderbar_editbox")
+require("ui/uieditor/widgets/pc/sliderbar_slider")
+require("ui/uieditor/widgets/pc/startmenu/listitem")
 CoD.SliderBar = InheritFrom(LUI.UIElement)
 CoD.SliderBar.__defaultWidth = 810
 CoD.SliderBar.__defaultHeight = 64

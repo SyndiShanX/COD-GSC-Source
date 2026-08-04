@@ -1,4 +1,4 @@
-require("x64:a2c4a319ea5353")
+require("ui/uieditor/widgets/lobby/common/fe_titlenumbrdr")
 CoD.PC_AchievementDetailedView_Desc_BG = InheritFrom(LUI.UIElement)
 CoD.PC_AchievementDetailedView_Desc_BG.__defaultWidth = 600
 CoD.PC_AchievementDetailedView_Desc_BG.__defaultHeight = 129

@@ -1,5 +1,5 @@
-require("x64:65d95de4452e481")
-require("x64:4dc5c4aa56bd569")
+require("ui/uieditor/widgets/pc/startmenu/pc_startmenu_options_description")
+require("ui/uieditor/widgets/pc/startmenu/pc_startmenu_options_list")
 CoD.StartMenu_Options_PC_GraphicsOptions_SubOptionsNavigation = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Options_PC_GraphicsOptions_SubOptionsNavigation.__defaultWidth = 1623
 CoD.StartMenu_Options_PC_GraphicsOptions_SubOptionsNavigation.__defaultHeight = 716

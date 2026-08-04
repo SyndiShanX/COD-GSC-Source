@@ -1,5 +1,5 @@
 CoD.ZMLaboratoryUtility = {}
-require("x64:f3c5259f470592d")
+require("ui/utility/overlayutility")
 CoD.ZMLaboratoryUtility.LabAnimState = {
 	NOT_PLAYING = 0,
 	NOT_PLAYING_TO_PLAYING = 1,
@@ -26,20 +26,20 @@ CoD.ZMLaboratoryUtility.RarityStrings = {
 CoD.ZMLaboratoryUtility.MaxSpecialOffers = 3
 CoD.ZMLaboratoryUtility.DefaultConcoctions = {
 	{
-		assetName = @"zm_lab_carbon_combo",
+		assetName = "zm_lab_carbon_combo",
 	},
 	{
-		assetName = @"zm_lab_argon_array",
+		assetName = "zm_lab_argon_array",
 	},
 	{
-		assetName = @"zm_lab_palladium_package",
+		assetName = "zm_lab_palladium_package",
 	},
 }
 CoD.ZMLaboratoryUtility.MaxResults = 4
 CoD.ZMLaboratoryUtility.ResultModels = {
 	{
 		modelName = "result",
-		default = @"hash_0",
+		default = 0x0,
 	},
 	{
 		modelName = "quantity",
@@ -72,12 +72,12 @@ CoD.ZMLaboratoryUtility.GetResults = function(f2_arg0)
 	return f2_local0
 end
 CoD.ZMLaboratoryUtility.GetLabModel = function(f3_arg0)
-	local f3_local0 = Engine[@"getmodelforcontroller"](f3_arg0)
+	local f3_local0 = Engine.GetModelForController(f3_arg0)
 	return f3_local0:create("Laboratory")
 end
 CoD.ZMLaboratoryUtility.DoLootQueryAndSendClientScriptNotify = function(f4_arg0, f4_arg1, f4_arg2, f4_arg3, f4_arg4)
 	local f4_local0 = function()
-		Engine[@"sendclientscriptnotify"](f4_arg2, "np_item_play_anim")
+		Engine.SendClientScriptNotify(f4_arg2, "np_item_play_anim")
 		CoD.ZMLaboratoryUtility.AttemptLootQuery(f4_arg0, f4_arg1, f4_arg2, f4_arg3, f4_arg4)
 	end
 	if CoD.isPC then
@@ -167,7 +167,7 @@ CoD.ZMLaboratoryUtility.HasOfferExpired = function(f15_arg0)
 end
 CoD.ZMLaboratoryUtility.ClientScriptNotifyFocusChanged = function(f16_arg0, f16_arg1, f16_arg2, f16_arg3)
 	if f16_arg1.focusChangedNotifyParams then
-		Engine[@"sendclientscriptnotify"](f16_arg2, "np_item_focus_changed", f16_arg1.focusChangedNotifyParams)
+		Engine.SendClientScriptNotify(f16_arg2, "np_item_focus_changed", f16_arg1.focusChangedNotifyParams)
 	end
 end
 CoD.ZMLaboratoryUtility.AttemptLootQuery = function(f17_arg0, f17_arg1, f17_arg2, f17_arg3, f17_arg4)
@@ -238,7 +238,7 @@ CoD.ZMLaboratoryUtility.DoLootQuery = function(f20_arg0, f20_arg1, f20_arg2, f20
 		if f21_local0.animState:get() == CoD.ZMLaboratoryUtility.LabAnimState.PLAYING and (f20_local0.ready:get() == true or f20_local1 == true) then
 			f20_arg4.LaboratoryBottleLabelList.BottleLabels.showResults = true
 			f20_arg4.LaboratoryBottleLabelList.BottleLabels:updateDataSource()
-			Engine[@"sendclientscriptnotify"](f20_arg2, "lab_set_rewards")
+			Engine.SendClientScriptNotify(f20_arg2, "lab_set_rewards")
 		elseif f20_local4 < f20_local3 then
 			f20_arg4:addElement(LUI.UITimer.newElementTimer(250, true, f20_local5))
 			f20_local4 = f20_local4 + 1
@@ -258,14 +258,14 @@ CoD.ZMLaboratoryUtility.AddExperimentalConcoctions = function(f22_arg0)
 		"conc3",
 	}
 	local f22_local2 = {
-		[@"zm_lab_carbon_combo"] = true,
-		[@"zm_lab_argon_array"] = true,
-		[@"zm_lab_palladium_package"] = true,
-		[@"zm_lab_beryllium_bundle"] = true,
-		[@"zm_lab_selenium_selection"] = true,
-		[@"zm_lab_rhodium_roundup"] = true,
-		[@"zm_lab_titanium_treble"] = true,
-		[@"zm_lab_tungsten_tripler"] = true,
+		zm_lab_carbon_combo = true,
+		zm_lab_argon_array = true,
+		zm_lab_palladium_package = true,
+		zm_lab_beryllium_bundle = true,
+		zm_lab_selenium_selection = true,
+		zm_lab_rhodium_roundup = true,
+		zm_lab_titanium_treble = true,
+		zm_lab_tungsten_tripler = true,
 	}
 	for f22_local7, f22_local8 in ipairs(f22_local1) do
 		local f22_local6 = CoD.StoreUtility.GetExperimentModifier(f22_arg0, f22_local8)
@@ -299,22 +299,22 @@ CoD.ZMLaboratoryUtility.SetupLaboratoryMenu = function(f23_arg0, f23_arg1)
 	CoD.ZMLaboratoryUtility.ResetResults(f23_local0:create("results"))
 	f23_arg1:appendEventHandler("clip_over", function()
 		if not (f23_arg1.currentState ~= "DefaultState" or (f23_arg1.__lastClipPlayedState ~= "AnimStateMixAgainToNotPlaying" or f23_arg1.__lastClipPlayedName ~= "DefaultClip") and (f23_arg1.__lastClipPlayedState ~= "AnimStatePlaying" or f23_arg1.__lastClipPlayedName ~= "DefaultClip")) or f23_arg1.currentState == "AnimStateMixAgain" and f23_arg1.__lastClipPlayedState == "AnimStateMixAgain" and f23_arg1.__lastClipPlayedName == "DefaultClip" then
-			Engine[@"forcenotifymodelsubscriptions"](f23_local0.unhideFreeCursor)
+			Engine.ForceNotifyModelSubscriptions(f23_local0.unhideFreeCursor)
 		end
 	end)
-	Engine[@"sendclientscriptnotify"](f23_arg0, "init_controller_model", {
+	Engine.SendClientScriptNotify(f23_arg0, "init_controller_model", {
 		controller = f23_arg0,
 	})
 end
 CoD.ZMLaboratoryUtility.CleanUpLaboratoryMenu = function(f25_arg0)
 	local f25_local0 = CoD.ZMLaboratoryUtility.GetLabModel(f25_arg0)
 	if f25_local0 then
-		Engine[@"unsubscribeandfreemodel"](f25_local0)
+		Engine.UnsubscribeAndFreeModel(f25_local0)
 	end
-	local f25_local1 = Engine[@"getmodelforcontroller"](f25_arg0)
+	local f25_local1 = Engine.GetModelForController(f25_arg0)
 	f25_local1 = f25_local1.ZMLaboratoryPlasmaItemList
 	if f25_local1 then
-		Engine[@"unsubscribeandfreemodel"](f25_local1)
+		Engine.UnsubscribeAndFreeModel(f25_local1)
 	end
 end
 CoD.ZMLaboratoryUtility.SetListElementModelsWithDelay = function(f26_arg0, f26_arg1, f26_arg2, f26_arg3, f26_arg4, f26_arg5)
@@ -340,7 +340,7 @@ CoD.ZMLaboratoryUtility.SetListElementModelsWithDelay = function(f26_arg0, f26_a
 end
 CoD.ZMLaboratoryUtility.MixAgain = function(f28_arg0, f28_arg1, f28_arg2)
 	local f28_local0 = function()
-		Engine[@"sendclientscriptnotify"](f28_arg2, "mix_again", {
+		Engine.SendClientScriptNotify(f28_arg2, "mix_again", {
 			controller = f28_arg2,
 			param1 = "1",
 		})
@@ -366,7 +366,7 @@ CoD.ZMLaboratoryUtility.RestoreFocusToCachedOfferButton = function(f31_arg0, f31
 	end
 end
 CoD.ZMLaboratoryUtility.CloseTimedOutPopup = function(f32_arg0, f32_arg1, f32_arg2, f32_arg3, f32_arg4)
-	Engine[@"sendclientscriptnotify"](f32_arg2, "timed_out_popup_closed", {
+	Engine.SendClientScriptNotify(f32_arg2, "timed_out_popup_closed", {
 		controller = f32_arg2,
 	})
 	GoBack(f32_arg4, f32_arg2)
@@ -379,7 +379,7 @@ CoD.ZMLaboratoryUtility.SetupEventCountdown = function(f33_arg0, f33_arg1)
 		elseif f33_arg1.labTimerSubscription then
 			f33_arg1:removeSubscription(f33_arg1.labTimerSubscription)
 		end
-		f33_local0 = Engine[@"getglobalmodel"]()
+		f33_local0 = Engine.GetGlobalModel()
 		local f33_local1 = f33_local0
 		f33_local0 = f33_local0.create
 		local f33_local2 = f33_arg0:getModel()
@@ -447,51 +447,51 @@ DataSources.ZMLaboratoryResultsItemList = ListHelper_SetupDataSource("Laboratory
 	local f40_local1 = {}
 	if Dvar[@"hash_3659A867DE4952AA"]:exists() and tonumber(Dvar[@"hash_3659A867DE4952AA"]:get()) > 0 then
 		local f40_local2 = {
-			@"zm_bgb_cache_back",
-			@"zm_bgb_ctrl_z",
-			@"zm_bgb_extra_credit",
-			@"zm_bgb_free_fire",
-			@"zm_bgb_immolation_liquidation",
-			@"zm_bgb_kill_joy",
-			@"zm_bgb_licensed_contractor",
-			@"zm_bgb_shields_up",
-			@"zm_bgb_undead_man_walking",
-			@"zm_bgb_wall_power",
-			@"zm_bgb_whos_keeping_score",
+			"zm_bgb_cache_back",
+			"zm_bgb_ctrl_z",
+			"zm_bgb_extra_credit",
+			"zm_bgb_free_fire",
+			"zm_bgb_immolation_liquidation",
+			"zm_bgb_kill_joy",
+			"zm_bgb_licensed_contractor",
+			"zm_bgb_shields_up",
+			"zm_bgb_undead_man_walking",
+			"zm_bgb_wall_power",
+			"zm_bgb_whos_keeping_score",
 		}
 		local f40_local3 = {
-			@"talisman_box_guarantee_box_only",
-			@"talisman_box_guarantee_lmg",
-			@"talisman_coagulant",
-			@"talisman_extra_claymore",
-			@"talisman_extra_frag",
-			@"talisman_extra_miniturret",
-			@"talisman_extra_molotov",
-			@"talisman_extra_semtex",
-			@"talisman_impatient",
-			@"talisman_perk_mod_single",
-			@"talisman_perk_permanent_1",
-			@"talisman_perk_permanent_2",
-			@"talisman_perk_permanent_3",
-			@"talisman_perk_permanent_4",
-			@"talisman_perk_reducecost_1",
-			@"talisman_perk_reducecost_2",
-			@"talisman_perk_reducecost_3",
-			@"talisman_perk_reducecost_4",
-			@"talisman_perk_start_1",
-			@"talisman_perk_start_2",
-			@"talisman_perk_start_3",
-			@"talisman_perk_start_4",
-			@"talisman_shield_durability_legendary",
-			@"talisman_shield_durability_rare",
-			@"talisman_shield_price",
-			@"talisman_special_startlv2",
-			@"talisman_special_startlv3",
-			@"talisman_special_xp_rate",
-			@"talisman_start_weapon_ar",
-			@"talisman_start_weapon_lmg",
-			@"talisman_start_weapon_smg",
-			@"talisman_weapon_reducepapcost",
+			"talisman_box_guarantee_box_only",
+			"talisman_box_guarantee_lmg",
+			"talisman_coagulant",
+			"talisman_extra_claymore",
+			"talisman_extra_frag",
+			"talisman_extra_miniturret",
+			"talisman_extra_molotov",
+			"talisman_extra_semtex",
+			"talisman_impatient",
+			"talisman_perk_mod_single",
+			"talisman_perk_permanent_1",
+			"talisman_perk_permanent_2",
+			"talisman_perk_permanent_3",
+			"talisman_perk_permanent_4",
+			"talisman_perk_reducecost_1",
+			"talisman_perk_reducecost_2",
+			"talisman_perk_reducecost_3",
+			"talisman_perk_reducecost_4",
+			"talisman_perk_start_1",
+			"talisman_perk_start_2",
+			"talisman_perk_start_3",
+			"talisman_perk_start_4",
+			"talisman_shield_durability_legendary",
+			"talisman_shield_durability_rare",
+			"talisman_shield_price",
+			"talisman_special_startlv2",
+			"talisman_special_startlv3",
+			"talisman_special_xp_rate",
+			"talisman_start_weapon_ar",
+			"talisman_start_weapon_lmg",
+			"talisman_start_weapon_smg",
+			"talisman_weapon_reducepapcost",
 		}
 		f40_local1 = {
 			{
@@ -522,7 +522,7 @@ DataSources.ZMLaboratoryResultsItemList = ListHelper_SetupDataSource("Laboratory
 			models = {
 				indexModel = 0,
 				id = "",
-				modelRef = @"hash_0",
+				modelRef = 0x0,
 				rarity = -1,
 				visible = 0,
 				quantity = 0,
@@ -535,9 +535,9 @@ DataSources.ZMLaboratoryResultsItemList = ListHelper_SetupDataSource("Laboratory
 	end
 	for f40_local3 = 1, #f40_local1, 1 do
 		if f40_local1[f40_local3].result ~= 0x0 then
-			local f40_local6 = Engine[@"hash_68FF94BB44442412"](f40_local1[f40_local3].result, Enum[@"emodes"][@"mode_zombies"])
+			local f40_local6 = Engine[@"hash_68FF94BB44442412"](f40_local1[f40_local3].result, Enum.eModes.mode_zombies)
 			if f40_local6 ~= CoD.CACUtility.EmptyItemIndex then
-				local f40_local7 = CoD.CACUtility.GetUnlockableItemInfo(f40_local6, Enum[@"emodes"][@"mode_zombies"])
+				local f40_local7 = CoD.CACUtility.GetUnlockableItemInfo(f40_local6, Enum.eModes.mode_zombies)
 				local f40_local8 = 0x0
 				if f40_local7.itemGroup == "bubblegum_consumable" or f40_local7.itemGroup == "talisman" then
 					f40_local8 = f40_local7[@"previewmodelname"]
@@ -563,13 +563,13 @@ DataSources.ZMLaboratoryNPItemList = {
 			local f43_local2 = {
 				skuID = f43_arg1[@"skuid"] or 0,
 				dropType = f43_arg1[@"droptype"] or 0,
-				icon = f43_arg1[@"hash_6E4B82BD24F5B464"] or @"blacktransparent",
+				icon = f43_arg1.tileicon or "blacktransparent",
 				name = f43_local0,
-				labelName = f43_arg1[@"descriptiontitle"] or @"hash_2C79EA24AB1A2BA",
+				labelName = f43_arg1[@"descriptiontitle"] or "null/empty",
 				displayName = f43_arg1[@"numplasma"] or 0,
-				description = f43_arg1[@"descriptiontext"] or @"hash_2C79EA24AB1A2BA",
+				description = f43_arg1[@"descriptiontext"] or "null/empty",
 				plasmaPrice = f43_arg1[@"plasmaprice"] or 0,
-				price = f43_arg1[@"hash_14A555CF71B7907A"] or 0,
+				price = f43_arg1.codpointprice or 0,
 			}
 			local f43_local3
 			if f43_arg3 ~= nil then
@@ -578,7 +578,7 @@ DataSources.ZMLaboratoryNPItemList = {
 				f43_local3 = false
 			end
 			f43_local2.specialOffer = f43_local3
-			f43_local2.maxQuantity = f43_arg1[@"maxquantity"]
+			f43_local2.maxQuantity = f43_arg1.maxquantity
 			f43_local2.offerAssetName = f43_arg2
 			f43_local2.eventTimerModel = f43_arg9
 			f43_local1.models = f43_local2
@@ -599,9 +599,9 @@ DataSources.ZMLaboratoryNPItemList = {
 			if not f43_local1.properties.actionParam.price then
 				f43_local1.properties.actionParam.price = f43_local1.models.price
 			end
-			if f43_arg1[@"hash_79D73ABDD04877EA"] and f43_arg1[@"globstate"] then
+			if f43_arg1.centrifugecolor and f43_arg1[@"globstate"] then
 				f43_local1.properties.focusChangedNotifyParams = {
-					centrifuge_color = f43_arg1[@"hash_79D73ABDD04877EA"],
+					centrifuge_color = f43_arg1.centrifugecolor,
 					glob_state = f43_arg1[@"globstate"],
 				}
 			end
@@ -629,7 +629,7 @@ DataSources.ZMLaboratoryNPItemList = {
 						f42_local0(f42_local2, f42_local8, f42_local7, true, CoD.ZMLaboratoryUtility.PurchasePlasmaOrCoDPoints, {
 							openedDirectly = true,
 							amount = f42_local8[@"numplasma"] or 0,
-							image = f42_local8[@"hash_6E4B82BD24F5B464"] or @"blacktransparent",
+							image = f42_local8.tileicon or "blacktransparent",
 						}, CoD.LaboratoryListItemNebuliumPlasmaDiscount, 1, 3, "AutoEvents.autoevent_laboratory_special_offer_" .. f42_local4 .. "_timer")
 					end
 				end
@@ -639,11 +639,11 @@ DataSources.ZMLaboratoryNPItemList = {
 		local f42_local4 = CoD.ZMLaboratoryUtility.GetLabModel(f42_arg0)
 		f42_local4 = f42_local4:create("ZMLaboratoryNPItemList")
 		for f42_local7, f42_local8 in ipairs(f42_local2) do
-			local f42_local11 = Engine[@"createmodel"](f42_local4, f42_local7)
+			local f42_local11 = Engine.CreateModel(f42_local4, f42_local7)
 			if f42_local8.models then
 				LuaUtils.CreateModelsFromTable(f42_local11, f42_local8.models)
 				if not f42_arg1.eventCycledSubscription then
-					local f42_local10 = Engine[@"getglobalmodel"]()
+					local f42_local10 = Engine.GetGlobalModel()
 					f42_local10 = f42_local10:create("AutoEvents.cycled")
 					if f42_local10 then
 						f42_arg1.eventCycledSubscription = f42_arg1:subscribeToModel(f42_local10, function(model)
@@ -674,7 +674,7 @@ DataSources.ZMLaboratoryNPItemList = {
 		return f49_arg0.buttons[f49_arg2].properties.widgetOverride
 	end,
 	cleanup = function(f50_arg0, f50_arg1)
-		Engine[@"unsubscribeandfreemodel"](f50_arg0.model)
+		Engine.UnsubscribeAndFreeModel(f50_arg0.model)
 	end,
 }
 CoD.ZMLaboratoryUtility.GetPurchasePlasmaModel = function(f51_arg0)
@@ -691,10 +691,10 @@ CoD.ZMLaboratoryUtility.OpenCoDPointsPopoutConfirmation = function(f52_arg0, f52
 	f52_local0.dontCloseOnStoreOpen = true
 	local f52_local1 = nil
 	if CoD.isPC then
-		local f52_local2 = Engine[@"getmodelforcontroller"](f52_arg2)
+		local f52_local2 = Engine.GetModelForController(f52_arg2)
 		f52_local1 = f52_local2:create("battlenetCheckoutStatus")
 	else
-		local f52_local2 = Engine[@"getmodelforcontroller"](f52_arg2)
+		local f52_local2 = Engine.GetModelForController(f52_arg2)
 		f52_local2 = f52_local2:create("LootStreamProgress")
 		f52_local1 = f52_local2:create("codPoints")
 	end
@@ -704,7 +704,7 @@ CoD.ZMLaboratoryUtility.OpenCoDPointsPopoutConfirmation = function(f52_arg0, f52
 			if model:get() ~= 1 then
 				return
 			end
-			local f53_local1 = Engine[@"getmodelforcontroller"](f52_arg2)
+			local f53_local1 = Engine.GetModelForController(f52_arg2)
 			f53_local1 = f53_local1:create("LootStreamProgress")
 			f53_local0 = f53_local1:create("codPoints")
 		else
@@ -782,9 +782,9 @@ DataSources.ZMLaboratoryPlasmaItemList = ListHelper_SetupDataSource("ZMLaborator
 		})
 	end
 	local f56_local1 = {}
-	f56_local0(f56_local1, 500052, @"hash_78EB5BCEA98B4CF2", @"ui_icon_laboratory_nebulium_offer_large", 300, 2000, true, CoD.ZMLaboratoryUtility.PurchasePlasmaOrCoDPoints)
-	f56_local0(f56_local1, 500051, @"hash_1FF5560BC462E0F0", @"ui_icon_laboratory_nebulium_offer_medium", 75, 500, false, CoD.ZMLaboratoryUtility.PurchasePlasmaOrCoDPoints)
-	f56_local0(f56_local1, 500050, @"hash_78EB5BCEA98B4CF2", @"ui_icon_laboratory_nebulium_offer_small", 30, 200, false, CoD.ZMLaboratoryUtility.PurchasePlasmaOrCoDPoints)
+	f56_local0(f56_local1, 500052, "zmui/bgb_aftertaste", "ui_icon_laboratory_nebulium_offer_large", 300, 2000, true, CoD.ZMLaboratoryUtility.PurchasePlasmaOrCoDPoints)
+	f56_local0(f56_local1, 500051, "zmui/bgb_always_done_swiftly", "ui_icon_laboratory_nebulium_offer_medium", 75, 500, false, CoD.ZMLaboratoryUtility.PurchasePlasmaOrCoDPoints)
+	f56_local0(f56_local1, 500050, "zmui/bgb_aftertaste", "ui_icon_laboratory_nebulium_offer_small", 30, 200, false, CoD.ZMLaboratoryUtility.PurchasePlasmaOrCoDPoints)
 	return f56_local1
 end)
 DataSources.PlasmaConfirmationButtonList = ListHelper_SetupDataSource("PlasmaConfirmationButtonList", function(f58_arg0, f58_arg1)
@@ -792,7 +792,7 @@ DataSources.PlasmaConfirmationButtonList = ListHelper_SetupDataSource("PlasmaCon
 	table.insert(f58_local0, {
 		models = {
 			displayText = @"menu/purchase",
-			displayImage = @"blacktransparent",
+			displayImage = "blacktransparent",
 		},
 		properties = {
 			action = SetWorkingStateAndPurchaseDWSKU,
@@ -804,7 +804,7 @@ DataSources.PlasmaConfirmationButtonList = ListHelper_SetupDataSource("PlasmaCon
 	table.insert(f58_local0, {
 		models = {
 			displayText = @"menu/cancel",
-			displayImage = @"blacktransparent",
+			displayImage = "blacktransparent",
 		},
 		properties = {
 			action = function(f59_arg0, f59_arg1, f59_arg2, f59_arg3, f59_arg4)

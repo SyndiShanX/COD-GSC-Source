@@ -1,4 +1,4 @@
-require("x64:a9f890241f5b6c3")
+require("ui/uieditor/widgets/callingcards/callingcards_asset_superheroes_speed_rightarm")
 CoD.CallingCards_Asset_superheroes_speed_hero = InheritFrom(LUI.UIElement)
 CoD.CallingCards_Asset_superheroes_speed_hero.__defaultWidth = 384
 CoD.CallingCards_Asset_superheroes_speed_hero.__defaultHeight = 240

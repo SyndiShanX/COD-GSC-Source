@@ -8,7 +8,7 @@ CoD.CallingCards_Asset_spiderleg_animated.new = function(f1_arg0, f1_arg1, f1_ar
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local spiderLeg = LUI.UIImage.new(0, 0, 0, 280, 0, 0, 0, 240)
-	spiderLeg:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_survivalist_spiderleg"))
+	spiderLeg:setImage(RegisterImage("uie_ui_icon_callingcards_zm_survivalist_spiderleg"))
 	self:addElement(spiderLeg)
 	self.spiderLeg = spiderLeg
 	if PostLoadFunc then

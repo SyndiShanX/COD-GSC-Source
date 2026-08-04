@@ -1,6 +1,6 @@
-require("x64:2675595fa323085")
-require("x64:5c96c77ee312720")
-require("x64:807dca7a3470358")
+require("ui/uieditor/widgets/emptyfocusable")
+require("ui/uieditor/widgets/pc/craft/craftactionsliderwidget")
+require("ui/uieditor/widgets/pc/sliderbar_editbox")
 CoD.CraftActionSlider = InheritFrom(LUI.UIElement)
 CoD.CraftActionSlider.__defaultWidth = 375
 CoD.CraftActionSlider.__defaultHeight = 60
@@ -14,7 +14,7 @@ CoD.CraftActionSlider.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Background = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Background:setAlpha(0.95)
-	Background:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	Background:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	Background:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	Background:setShaderVector(0, 0, 0, 0, 0)
 	Background:setupNineSliceShader(196, 88)

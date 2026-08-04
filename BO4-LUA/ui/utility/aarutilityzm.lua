@@ -66,9 +66,9 @@ CoD.AARUtilityZM.SetupUIModels = function(f4_arg0)
 				f4_local8.meleeKills = CoD.AARUtilityZM.GetMatchStat(f4_arg0, "MELEE_KILLS")
 				f4_local8.pointsPerKill = CoD.AARUtilityZM.GetMatchStat(f4_arg0, "BGBS_CHEWED")
 				f4_local8.bgbTokensGainedThisGame = f4_local2.PlayerStatsList.BGB_TOKENS_GAINED_THIS_GAME.StatValue:get()
-				for f4_local13, f4_local14 in ipairs(Engine[@"getrecentchallenges"](f4_arg0)) do
-					if f4_local14.type == Enum[@"statsmilestonetypes_t"][@"milestone_daily"] then
-						local f4_local12 = tonumber(Engine[@"hash_4C6F8EC444864600"](CoD.getStatsMilestoneTable(f4_local14.tableNumber + 1), f4_local14.row, Enum[@"milestonetablecolumns_t"][@"milestone_column_vialsearned"]))
+				for f4_local13, f4_local14 in ipairs(Engine.GetRecentChallenges(f4_arg0)) do
+					if f4_local14.type == Enum.statsMilestoneTypes_t[@"milestone_daily"] then
+						local f4_local12 = tonumber(Engine[@"hash_4C6F8EC444864600"](CoD.getStatsMilestoneTable(f4_local14.tableNumber + 1), f4_local14.row, Enum.milestoneTableColumns_t[@"milestone_column_vialsearned"]))
 						if f4_local12 then
 							f4_local8.bgbTokensGainedThisGame = f4_local8.bgbTokensGainedThisGame + f4_local12
 						end
@@ -82,14 +82,14 @@ CoD.AARUtilityZM.SetupUIModels = function(f4_arg0)
 				f4_local2.showMegaChewFactoryBreadcrumb:set(1)
 			end
 			f4_local8.xpEarnedDuringMatch = f4_local6
-			local f4_local15 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f4_arg0), "aarStats.performanceTabStats")
+			local f4_local15 = Engine.CreateModel(Engine.GetModelForController(f4_arg0), "aarStats.performanceTabStats")
 			for f4_local13, f4_local14 in pairs(f4_local8) do
-				Engine[@"setmodelvalue"](Engine[@"createmodel"](f4_local15, f4_local13), f4_local14)
+				Engine.SetModelValue(Engine.CreateModel(f4_local15, f4_local13), f4_local14)
 			end
 			if CoD.isFrontend and f4_arg0 ~= 0 then
-				f4_local9 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](0), "aarStats.performanceTabStats")
+				f4_local9 = Engine.CreateModel(Engine.GetModelForController(0), "aarStats.performanceTabStats")
 				for f4_local14, f4_local16 in pairs(f4_local8) do
-					Engine[@"setmodelvalue"](Engine[@"createmodel"](f4_local9, f4_local14), f4_local16)
+					Engine.SetModelValue(Engine.CreateModel(f4_local9, f4_local14), f4_local16)
 				end
 			end
 			UploadStats(nil, f4_arg0)
@@ -105,7 +105,7 @@ CoD.AARUtilityZM.GetXPEarnedDuringMatch = function(f5_arg0, f5_arg1)
 	return f5_local0
 end
 CoD.AARUtilityZM.GetModelForRewardItemByIndex = function(f6_arg0, f6_arg1)
-	return Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f6_arg0), "aarRewards." .. f6_arg1)
+	return Engine.GetModel(Engine.GetModelForController(f6_arg0), "aarRewards." .. f6_arg1)
 end
 CoD.AARUtilityZM.GetRewardItemCount = function(f7_arg0)
 	if CoD.AARUtilityZM.UseTestData() then
@@ -115,5 +115,5 @@ CoD.AARUtilityZM.GetRewardItemCount = function(f7_arg0)
 	end
 end
 CoD.AARUtilityZM.CreateQuestItemModels = function(f8_arg0)
-	local f8_local0 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f8_arg0), "aarQuests")
+	local f8_local0 = Engine.CreateModel(Engine.GetModelForController(f8_arg0), "aarQuests")
 end

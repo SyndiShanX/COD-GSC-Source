@@ -11,8 +11,8 @@ CoD.verticalScrollingTextContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	text:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	text:setTTF("dinnext_regular")
 	text:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
-	text:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	text:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	text:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	text:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(text)
 	self.text = text
 	self:mergeStateConditions({

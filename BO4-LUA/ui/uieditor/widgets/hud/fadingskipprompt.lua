@@ -10,8 +10,8 @@ CoD.FadingSkipPrompt.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local pressXtext = LUI.UIText.new(1, 1, -1350, -4, 0, 0, 3, 33)
 	pressXtext:setText(Engine[@"hash_4F9F1239CFD921FE"](@"platform/skip"))
 	pressXtext:setTTF("default")
-	pressXtext:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
-	pressXtext:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	pressXtext:setAlignment(Enum.LUIAlignment[@"lui_alignment_right"])
+	pressXtext:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(pressXtext)
 	self.pressXtext = pressXtext
 	if PostLoadFunc then

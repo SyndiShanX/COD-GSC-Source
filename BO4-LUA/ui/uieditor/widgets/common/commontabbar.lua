@@ -1,6 +1,6 @@
-require("x64:1394ae5e9cdcb54")
-require("x64:9dc2d0c43534ce4")
-require("x64:ce7f7f6abb8b87")
+require("ui/uieditor/widgets/bumperbuttonwithkeymousetext")
+require("ui/uieditor/widgets/common/commontabbutton")
+require("ui/uieditor/widgets/tabbedwidgets/basictablist")
 CoD.CommonTabBar = InheritFrom(LUI.UIElement)
 CoD.CommonTabBar.__defaultWidth = 3300
 CoD.CommonTabBar.__defaultHeight = 61
@@ -15,7 +15,7 @@ CoD.CommonTabBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local LB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0, 0, 582, 782, 0, 0, 16.5, 50.5)
 	LB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_F0418298D80E185"))
-	LB.GamepadPrompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	LB.GamepadPrompt:setAlignment(Enum.LUIAlignment[@"lui_alignment_right"])
 	self:addElement(LB)
 	self.LB = LB
 	local Tabs = CoD.basicTabList.new(f1_arg0, f1_arg1, 0, 0, 786, 2514, 0, 0, 16.5, 76.5)

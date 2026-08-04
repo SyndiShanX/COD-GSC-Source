@@ -1,4 +1,4 @@
-require("x64:174f2b412760fd3")
+require("ui/uieditor/widgets/director/directorlobbyclanandmembername")
 CoD.DirectorLobbyClanAndMemberNameContainerPC = InheritFrom(LUI.UIElement)
 CoD.DirectorLobbyClanAndMemberNameContainerPC.__defaultWidth = 296
 CoD.DirectorLobbyClanAndMemberNameContainerPC.__defaultHeight = 21

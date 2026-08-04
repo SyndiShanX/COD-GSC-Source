@@ -1,4 +1,4 @@
-require("x64:b5d5f7ffe97a9a7")
+require("lua/shared/luaenum")
 if not CoD.OverlayUtility then
 	CoD.OverlayUtility = {}
 end
@@ -80,10 +80,10 @@ CoD.OverlayUtility.OverlayPropertyFields = {
 	CoD.OverlayUtility.yTrianglePromptFn,
 }
 CoD.OverlayUtility.ButtonPromptsFields = {
-	[Enum[@"luibutton"][@"lui_key_xba_pscross"]] = CoD.OverlayUtility.aCrossPromptText,
-	[Enum[@"luibutton"][@"lui_key_xbb_pscircle"]] = CoD.OverlayUtility.bCirclePromptText,
-	[Enum[@"luibutton"][@"lui_key_xbx_pssquare"]] = CoD.OverlayUtility.xSquarePromptText,
-	[Enum[@"luibutton"][@"lui_key_xby_pstriangle"]] = CoD.OverlayUtility.yTrianglePromptText,
+	[Enum.LUIButton[@"lui_key_xba_pscross"]] = CoD.OverlayUtility.aCrossPromptText,
+	[Enum.LUIButton[@"lui_key_xbb_pscircle"]] = CoD.OverlayUtility.bCirclePromptText,
+	[Enum.LUIButton[@"lui_key_xbx_pssquare"]] = CoD.OverlayUtility.xSquarePromptText,
+	[Enum.LUIButton[@"lui_key_xby_pstriangle"]] = CoD.OverlayUtility.yTrianglePromptText,
 }
 CoD.OverlayUtility.DefaultModelFields = {
 	image = function(f2_arg0, f2_arg1)
@@ -137,20 +137,20 @@ CoD.OverlayUtility.DefaultButtonAction = function(f6_arg0, f6_arg1, f6_arg2, f6_
 end
 CoD.OverlayUtility.QueueGoBack = function()
 	return function(f8_arg0, f8_arg1, f8_arg2, f8_arg3)
-		Engine[@"leavequeue"](f8_arg2)
+		Engine.LeaveQueue(f8_arg2)
 		GoBack(f8_arg3, f8_arg2)
 	end
 end
 CoD.OverlayUtility.DefaultScriptDialogGoBack = function(f9_arg0)
 	return function(f10_arg0, f10_arg1, f10_arg2, f10_arg3)
 		SendMenuResponse(f10_arg3, f9_arg0, "close", f10_arg2)
-		Engine[@"lockinput"](f10_arg2, false)
+		Engine.LockInput(f10_arg2, false)
 		Close(f10_arg3, f10_arg2)
 	end
 end
 CoD.OverlayUtility.AutoSizeMenuFromDescription = function(f11_arg0, f11_arg1, f11_arg2)
 	return function(...)
-		if Engine[@"getnumtextlines"](
+		if Engine.GetNumTextLines(
 			CoD.BaseUtility.LocalizeIfXHash(CoD.OverlayUtility.callFnOrGetValue(CoD.OverlayUtility.Overlays[f11_arg0].description, {
 				n = select("#", ...),
 				...,
@@ -174,7 +174,7 @@ CoD.OverlayUtility.FreeCursorAutoSizeMenuFromDescription = function(f13_arg0, f1
 		if type(f14_local0) == "xhash" then
 			f14_local0 = Engine[@"hash_4F9F1239CFD921FE"](f14_local0)
 		end
-		if Engine[@"getnumtextlines"](f14_local0, CoD.fonts.Default, 20, 660) > 6 then
+		if Engine.GetNumTextLines(f14_local0, CoD.fonts.Default, 20, 660) > 6 then
 			return f13_arg2 or "SystemOverlay_FreeCursor_Full"
 		else
 			return f13_arg1 or "SystemOverlay_FreeCursor"
@@ -205,7 +205,7 @@ CoD.OverlayUtility.ShouldOverlayUseFullVersion = function(f16_arg0, ...)
 	if type(f16_local0) == "xhash" then
 		f16_local0 = Engine[@"hash_4F9F1239CFD921FE"](f16_local0)
 	end
-	return Engine[@"getnumtextlines"](f16_local0, CoD.fonts.Default, 20, 660) > 6
+	return Engine.GetNumTextLines(f16_local0, CoD.fonts.Default, 20, 660) > 6
 end
 CoD.OverlayUtility.AutoDetectOverlayMenu = function(f17_arg0, f17_arg1, f17_arg2, f17_arg3, f17_arg4)
 	return function(...)
@@ -356,10 +356,10 @@ end
 CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays, {
 	SaveAndQuitGamePopup = {
 		menuName = "SystemOverlay_FreeCursor",
-		title = Engine[@"hash_4F9F1239CFD921FE"](0x89E88D593CFB09),
+		title = Engine[@"hash_4F9F1239CFD921FE"]("menu/are_you_sure_quit"),
 		description = function()
 			if not Engine[@"getdvarbool"]("ui_blocksaves") then
-				return Engine[@"hash_4F9F1239CFD921FE"](@"hash_342D6867D072433A")
+				return Engine[@"hash_4F9F1239CFD921FE"]("menu/savequit_text_without_device_change")
 			else
 				return ""
 			end
@@ -367,17 +367,17 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		categoryType = CoD.OverlayUtility.OverlayTypes.Quit,
 		[CoD.OverlayUtility.aCrossPromptFn] = function(f33_arg0)
 			return function(f34_arg0, f34_arg1)
-				Engine[@"exec"](f34_arg1, "updategamerprofile")
+				Engine.exec(f34_arg1, "updategamerprofile")
 				f34_arg0:close()
 				CloseStartMenu(f34_arg0, f34_arg1)
-				Engine[@"sendmenuresponse"](f34_arg1, "popup_leavegame", "endround", 0)
+				Engine.SendMenuResponse(f34_arg1, "popup_leavegame", "endround", 0)
 			end
 		end,
-		[CoD.OverlayUtility.aCrossPromptText] = @"hash_676FE10547721876",
+		[CoD.OverlayUtility.aCrossPromptText] = "menu/save_and_quit_caps",
 		[CoD.OverlayUtility.bCirclePromptFn] = function(f35_arg0)
 			return function(f36_arg0, f36_arg1)
-				Engine[@"setdvar"]("cl_paused", 0)
-				Engine[@"lockinput"](f36_arg1, false)
+				Engine.SetDvar("cl_paused", 0)
+				Engine.LockInput(f36_arg1, false)
 				CloseStartMenu(f36_arg0, f36_arg1)
 				f36_arg0:processEvent({
 					name = "close_all_ingame_menus",
@@ -385,23 +385,23 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 				})
 			end
 		end,
-		[CoD.OverlayUtility.bCirclePromptText] = @"hash_721A0365016C8C6E",
+		[CoD.OverlayUtility.bCirclePromptText] = "menu/resumegame_caps",
 	},
 	QuitGamePopup = {
 		menuName = "SystemOverlay_Compact",
 		title = Engine[@"hash_4F9F1239CFD921FE"](@"menu/quit_warning"),
-		description = Engine[@"hash_4F9F1239CFD921FE"](@"hash_1719B1EEC54B1C06"),
+		description = Engine[@"hash_4F9F1239CFD921FE"]("menu/noprofile_quit_warning_desc"),
 		categoryType = CoD.OverlayUtility.OverlayTypes.Quit,
 		listDatasource = function()
 			DataSources.QuitGamePopup_List = DataSourceHelpers.ListSetup("QuitGamePopup_List", function(f38_arg0)
 				return {
 					{
 						models = {
-							displayText = Engine[@"hash_4F9F1239CFD921FE"](@"hash_721A0365016C8C6E"),
+							displayText = Engine[@"hash_4F9F1239CFD921FE"]("menu/resumegame_caps"),
 						},
 						properties = {
 							action = function(f39_arg0, f39_arg1, f39_arg2, f39_arg3, f39_arg4)
-								Engine[@"setdvar"]("cl_paused", 0)
+								Engine.SetDvar("cl_paused", 0)
 								f39_arg4:processEvent({
 									name = "close_all_ingame_menus",
 									controller = f39_arg2,
@@ -420,15 +420,15 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 									name = "close_all_ingame_menus",
 									controller = f40_arg2,
 								})
-								Engine[@"setdvar"]("cl_paused", 0)
-								Engine[@"sendmenuresponse"](f40_arg2, "popup_leavegame", "endround", 0)
-								local f40_local0 = Engine[@"islobbyhost"](Enum[@"lobbytype"][@"lobby_type_game"])
+								Engine.SetDvar("cl_paused", 0)
+								Engine.SendMenuResponse(f40_arg2, "popup_leavegame", "endround", 0)
+								local f40_local0 = Engine[@"islobbyhost"](Enum.LobbyType[@"lobby_type_game"])
 								if IsGameTypeDOA() then
 									if not f40_local0 then
-										Engine[@"exec"](f40_arg2, "disconnect")
+										Engine.exec(f40_arg2, "disconnect")
 									end
 								else
-									Engine[@"exec"](f40_arg2, "disconnect")
+									Engine.exec(f40_arg2, "disconnect")
 								end
 							end,
 						},
@@ -441,12 +441,12 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 	},
 	RestartCheckpointPopup = {
 		menuName = "SystemOverlay_FreeCursor",
-		title = Engine[@"hash_4F9F1239CFD921FE"](@"hash_6F9AE6D0C0376015"),
-		description = Engine[@"hash_4F9F1239CFD921FE"](@"hash_6276F9228BA5B6B9"),
+		title = Engine[@"hash_4F9F1239CFD921FE"]("menu/continue_restart_checkpoint"),
+		description = Engine[@"hash_4F9F1239CFD921FE"]("menu/checkpoint_restart_text"),
 		categoryType = CoD.OverlayUtility.OverlayTypes.Quit,
 		[CoD.OverlayUtility.aCrossPromptFn] = function(f41_arg0)
 			return function(f42_arg0, f42_arg1)
-				Dvar[@"ui_busyblockingamemenu"]:set(1)
+				Dvar.ui_busyblockingamemenu:set(1)
 				f42_arg0:dispatchEventToRoot({
 					name = "flush_dynamic_hud",
 				})
@@ -454,28 +454,28 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 					name = "close_all_ingame_menus",
 					controller = f42_arg1,
 				})
-				Engine[@"setdvar"]("cl_paused", 0)
+				Engine.SetDvar("cl_paused", 0)
 				CloseStartMenu(f42_arg0, f42_arg1)
-				Engine[@"exec"](f42_arg1, "fade 0 0 0 255 0 0 1")
-				Engine[@"exec"](f42_arg1, "stopControllerRumble")
-				Engine[@"exec"](f42_arg1, "silence")
-				Engine[@"exec"](f42_arg1, "checkpoint_restart")
+				Engine.exec(f42_arg1, "fade 0 0 0 255 0 0 1")
+				Engine.exec(f42_arg1, "stopControllerRumble")
+				Engine.exec(f42_arg1, "silence")
+				Engine.exec(f42_arg1, "checkpoint_restart")
 			end
 		end,
-		[CoD.OverlayUtility.aCrossPromptText] = @"hash_4CC22946A4401603",
+		[CoD.OverlayUtility.aCrossPromptText] = "menu/restart_checkpoint_caps",
 		[CoD.OverlayUtility.bCirclePromptFn] = function(f43_arg0)
 			return function(f44_arg0, f44_arg1)
-				Engine[@"setdvar"]("cl_paused", 0)
-				Engine[@"lockinput"](f44_arg1, false)
+				Engine.SetDvar("cl_paused", 0)
+				Engine.LockInput(f44_arg1, false)
 				CloseStartMenu(f44_arg0, f44_arg1)
 			end
 		end,
-		[CoD.OverlayUtility.bCirclePromptText] = @"hash_721A0365016C8C6E",
+		[CoD.OverlayUtility.bCirclePromptText] = "menu/resumegame_caps",
 	},
 	RestartGamePopup = {
 		menuName = "SystemOverlay_Compact",
 		title = Engine[@"hash_4F9F1239CFD921FE"](@"menu/continue_restart"),
-		description = Engine[@"hash_4F9F1239CFD921FE"](0x6E41AC9D5FFDEB),
+		description = Engine[@"hash_4F9F1239CFD921FE"]("menu/restart_level_text"),
 		categoryType = CoD.OverlayUtility.OverlayTypes.Quit,
 		listDatasource = function()
 			DataSources.RestartGamePopup_List = DataSourceHelpers.ListSetup("RestartGamePopup_List", function(f46_arg0)
@@ -517,11 +517,11 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 				return {
 					{
 						models = {
-							displayText = Engine[@"hash_4F9F1239CFD921FE"](@"hash_47ED5E24F12CBE58"),
+							displayText = Engine[@"hash_4F9F1239CFD921FE"]("menu/quit_caps"),
 						},
 						properties = {
 							action = function(f51_arg0, f51_arg1, f51_arg2, f51_arg3, f51_arg4)
-								Engine[@"exec"](f51_arg2, "quit")
+								Engine.exec(f51_arg2, "quit")
 							end,
 						},
 					},
@@ -533,29 +533,29 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 	RestartMissionPopup = {
 		menuName = "SystemOverlay_FreeCursor",
 		title = Engine[@"hash_4F9F1239CFD921FE"](@"menu/continue_restart"),
-		description = Engine[@"hash_4F9F1239CFD921FE"](@"hash_A4142654C681BBB"),
+		description = Engine[@"hash_4F9F1239CFD921FE"]("menu/restart_mission_text"),
 		categoryType = CoD.OverlayUtility.OverlayTypes.Quit,
 		[CoD.OverlayUtility.aCrossPromptFn] = function(f52_arg0)
 			return function(f53_arg0, f53_arg1)
-				Dvar[@"ui_busyblockingamemenu"]:set(1)
+				Dvar.ui_busyblockingamemenu:set(1)
 				f53_arg0:processEvent({
 					name = "close_all_ingame_menus",
 					controller = f53_arg1,
 				})
-				Engine[@"setdvar"]("cl_paused", 0)
-				Engine[@"sendmenuresponse"](f53_arg1, "StartMenu_Main", "restartmission", 0)
+				Engine.SetDvar("cl_paused", 0)
+				Engine.SendMenuResponse(f53_arg1, "StartMenu_Main", "restartmission", 0)
 				CloseStartMenu(f53_arg0, f53_arg1)
-				Engine[@"playmenumusic"]("death")
-				Engine[@"exec"](f53_arg1, "stopControllerRumble")
-				Engine[@"exec"](f53_arg1, "fade 0 0 0 255 0 0 1")
-				Engine[@"exec"](f53_arg1, "silence")
+				Engine.PlayMenuMusic("death")
+				Engine.exec(f53_arg1, "stopControllerRumble")
+				Engine.exec(f53_arg1, "fade 0 0 0 255 0 0 1")
+				Engine.exec(f53_arg1, "silence")
 			end
 		end,
-		[CoD.OverlayUtility.aCrossPromptText] = @"hash_D06CC23B526BABD",
+		[CoD.OverlayUtility.aCrossPromptText] = "menu/restart_mission_caps",
 		[CoD.OverlayUtility.bCirclePromptFn] = function(f54_arg0)
 			return function(f55_arg0, f55_arg1)
-				Engine[@"setdvar"]("cl_paused", 0)
-				Engine[@"lockinput"](f55_arg1, false)
+				Engine.SetDvar("cl_paused", 0)
+				Engine.LockInput(f55_arg1, false)
 				CloseStartMenu(f55_arg0, f55_arg1)
 				f55_arg0:processEvent({
 					name = "close_all_ingame_menus",
@@ -563,12 +563,12 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 				})
 			end
 		end,
-		[CoD.OverlayUtility.bCirclePromptText] = @"hash_721A0365016C8C6E",
+		[CoD.OverlayUtility.bCirclePromptText] = "menu/resumegame_caps",
 	},
 	RetryMissionPopup = {
 		menuName = "SystemOverlay_Compact",
 		title = Engine[@"hash_4F9F1239CFD921FE"](@"hash_6DBA1F53349424E4"),
-		description = @"hash_0",
+		description = 0x0,
 		categoryType = CoD.OverlayUtility.OverlayTypes.Quit,
 		listDatasource = function()
 			DataSources.RetryMissionPopup_List = DataSourceHelpers.ListSetup("RetryMissionPopup_List", function(f57_arg0)
@@ -579,18 +579,18 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 						},
 						properties = {
 							action = function(f58_arg0, f58_arg1, f58_arg2, f58_arg3, f58_arg4)
-								Dvar[@"ui_busyblockingamemenu"]:set(1)
+								Dvar.ui_busyblockingamemenu:set(1)
 								f58_arg4:processEvent({
 									name = "close_all_ingame_menus",
 									controller = f58_arg2,
 								})
-								Engine[@"setdvar"]("cl_paused", 0)
-								Engine[@"sendmenuresponse"](f58_arg2, "StartMenu_Main", "restartmission", 0)
+								Engine.SetDvar("cl_paused", 0)
+								Engine.SendMenuResponse(f58_arg2, "StartMenu_Main", "restartmission", 0)
 								CloseStartMenu(f58_arg4, f58_arg2)
-								Engine[@"playmenumusic"]("death")
-								Engine[@"exec"](f58_arg2, "stopControllerRumble")
-								Engine[@"exec"](f58_arg2, "fade 0 0 0 255 0 0 1")
-								Engine[@"exec"](f58_arg2, "silence")
+								Engine.PlayMenuMusic("death")
+								Engine.exec(f58_arg2, "stopControllerRumble")
+								Engine.exec(f58_arg2, "fade 0 0 0 255 0 0 1")
+								Engine.exec(f58_arg2, "silence")
 							end,
 						},
 					},
@@ -604,15 +604,15 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 									name = "close_all_ingame_menus",
 									controller = f59_arg2,
 								})
-								Engine[@"setdvar"]("cl_paused", 0)
-								Engine[@"sendmenuresponse"](f59_arg2, "popup_leavegame", "endround", 0)
-								local f59_local0 = Engine[@"islobbyhost"](Enum[@"lobbytype"][@"lobby_type_game"])
+								Engine.SetDvar("cl_paused", 0)
+								Engine.SendMenuResponse(f59_arg2, "popup_leavegame", "endround", 0)
+								local f59_local0 = Engine[@"islobbyhost"](Enum.LobbyType[@"lobby_type_game"])
 								if IsGameTypeDOA() then
 									if not f59_local0 then
-										Engine[@"exec"](f59_arg2, "disconnect")
+										Engine.exec(f59_arg2, "disconnect")
 									end
 								else
-									Engine[@"exec"](f59_arg2, "disconnect")
+									Engine.exec(f59_arg2, "disconnect")
 								end
 							end,
 						},
@@ -626,7 +626,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 	MessageDialogBox = {
 		menuName = CoD.OverlayUtility.FreeCursorAutoSizeMenuFromDescription("MessageDialogBox", "SystemOverlay_MessageDialog", "SystemOverlay_MessageDialogFull"),
 		getStringRef = function(f60_arg0)
-			return Engine[@"getmodelvalue"](Engine[@"getmodel"](DataSources.MessageDialog.getModel(f60_arg0), "message")) or ""
+			return Engine.GetModelValue(Engine.GetModel(DataSources.MessageDialog.getModel(f60_arg0), "message")) or ""
 		end,
 		getTitleRef = function(f61_arg0)
 			local f61_local0 = DataSources.MessageDialog.getModel(f61_arg0)
@@ -641,14 +641,14 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 			local f63_local0 = DataSources.MessageDialog.getModel(f63_arg0)
 			local f63_local1 = CoD.BaseUtility.LocalizeIfXHash(CoD.SafeGetModelValue(f63_local0, "messageTitle"))
 			if f63_local1 == nil or f63_local1 == "" or f63_local1 == 0x0 then
-				local f63_local2 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f63_local0, "messageType"))
-				if f63_local2 == Enum[@"messagedialogtype"][@"message_dialog_type_info"] then
+				local f63_local2 = Engine.GetModelValue(Engine.GetModel(f63_local0, "messageType"))
+				if f63_local2 == Enum.MessageDialogType[@"message_dialog_type_info"] then
 					f63_local1 = @"menu/info"
-				elseif f63_local2 == Enum[@"messagedialogtype"][@"message_dialog_type_warning"] then
+				elseif f63_local2 == Enum.MessageDialogType[@"message_dialog_type_warning"] then
 					f63_local1 = @"menu/warning"
-				elseif f63_local2 == Enum[@"messagedialogtype"][@"message_dialog_type_error"] then
+				elseif f63_local2 == Enum.MessageDialogType[@"message_dialog_type_error"] then
 					f63_local1 = @"menu/error"
-				elseif f63_local2 == Enum[@"messagedialogtype"][@"message_dialog_type_notice"] then
+				elseif f63_local2 == Enum.MessageDialogType[@"message_dialog_type_notice"] then
 					if CoD.OverlayUtility.Overlays.MessageDialogBox.getStringRef(f63_arg0) == Engine[0x5C7590F54ABD40](@"hash_1EED560597ED4A25") then
 						f63_local1 = @"hash_2F6A1C64397DF8F7"
 					else
@@ -656,7 +656,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 					end
 				end
 			end
-			return Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](f63_local1))
+			return Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"](f63_local1))
 		end,
 		description = function(f64_arg0)
 			return CoD.OverlayUtility.Overlays.MessageDialogBox.getStringRef(f64_arg0)
@@ -670,15 +670,15 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 			end
 		end,
 		categoryType = function(f66_arg0)
-			local f66_local0 = Engine[@"getmodelvalue"](Engine[@"getmodel"](DataSources.MessageDialog.getModel(f66_arg0), "messageType"))
+			local modelValue = Engine.GetModelValue(Engine.GetModel(DataSources.MessageDialog.getModel(f66_arg0), "messageType"))
 			local f66_local1 = CoD.OverlayUtility.OverlayTypes.GenericMessage
-			if f66_local0 == Enum[@"messagedialogtype"][@"message_dialog_type_warning"] then
+			if modelValue == Enum.MessageDialogType[@"message_dialog_type_warning"] then
 				f66_local1 = CoD.OverlayUtility.OverlayTypes.Alert
-			elseif f66_local0 == Enum[@"messagedialogtype"][@"message_dialog_type_error"] then
+			elseif modelValue == Enum.MessageDialogType[@"message_dialog_type_error"] then
 				f66_local1 = CoD.OverlayUtility.OverlayTypes.Error
-			elseif f66_local0 == Enum[@"messagedialogtype"][@"message_dialog_type_info"] then
+			elseif modelValue == Enum.MessageDialogType[@"message_dialog_type_info"] then
 				f66_local1 = CoD.OverlayUtility.OverlayTypes.Info
-			elseif f66_local0 == Enum[@"messagedialogtype"][@"message_dialog_type_notice"] then
+			elseif modelValue == Enum.MessageDialogType[@"message_dialog_type_notice"] then
 				f66_local1 = CoD.OverlayUtility.OverlayTypes.Notice
 			end
 			return f66_local1
@@ -708,11 +708,11 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 			local f70_local0 = CoD.OverlayUtility.Overlays.MessageDialogBox.getTitleRef(f70_arg0)
 			if CoD.OverlayUtility.Overlays.MessageDialogBox.getStringRef(f70_arg0) == Engine[0x5C7590F54ABD40](@"hash_1EED560597ED4A25") then
 				return function(f71_arg0, f71_arg1)
-					Engine[@"showaccountpicker"](f71_arg1)
+					Engine.ShowAccountPicker(f71_arg1)
 					LuaUtils.UI_ClearErrorMessageDialog()
 					GoBack(f71_arg0, f71_arg1)
 				end
-			elseif f70_local0 == @"hash_5D8301725C955017" then
+			elseif f70_local0 == "menu/connectivity_notice_caps" then
 				return function(f72_arg0, f72_arg1)
 					LuaUtils.UI_ClearErrorMessageDialog()
 					GoBack(f72_arg0, f72_arg1)
@@ -729,7 +729,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 			local f74_local0 = CoD.OverlayUtility.Overlays.MessageDialogBox.getTitleRef(f74_arg0)
 			if CoD.OverlayUtility.Overlays.MessageDialogBox.getStringRef(f74_arg0) == Engine[0x5C7590F54ABD40](@"hash_1EED560597ED4A25") then
 				return @"platform/switch_user"
-			elseif f74_local0 == @"hash_5D8301725C955017" then
+			elseif f74_local0 == "menu/connectivity_notice_caps" then
 				return @"menu/play_local"
 			else
 				return @"menu/ok"
@@ -740,17 +740,17 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 			if CoD.OverlayUtility.Overlays.MessageDialogBox.getStringRef(f75_arg0) == Engine[0x5C7590F54ABD40](@"hash_1EED560597ED4A25") then
 				return function(f76_arg0, f76_arg1)
 					LuaUtils.UI_ClearErrorMessageDialog()
-					LuaUtils.UI_SetSignedInGamertagModel(Engine[@"getgamertagwhostoleprimarycontroller"]())
+					LuaUtils.UI_SetSignedInGamertagModel(Engine.GetGamertagWhoStolePrimaryController())
 					GoBack(f76_arg0, f76_arg1)
-					Engine[@"durango_continueas"]()
-					Engine[@"comerror"](Enum[@"errorcode"][@"error_softrestart_keepdw"], "")
+					Engine.Durango_ContinueAs()
+					Engine[@"comerror"](Enum.errorcode[@"error_softrestart_keepdw"], "")
 				end
-			elseif f75_local0 == @"hash_5D8301725C955017" then
+			elseif f75_local0 == "menu/connectivity_notice_caps" then
 				return function(f77_arg0, f77_arg1)
 					LuaUtils.UI_ClearErrorMessageDialog()
 					local f77_local0 = GoBack(f77_arg0, f77_arg1)
 					CoD.LobbyUtility.FailedDWConnection = false
-					Engine[@"setmodelvalue"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.failedDemonwareConnection"), false)
+					Engine.SetModelValue(Engine.GetModel(Engine.GetGlobalModel(), "lobbyRoot.failedDemonwareConnection"), false)
 					LobbyBeginPlay(f77_local0, f77_arg1)
 				end
 			else
@@ -760,8 +760,8 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		[CoD.OverlayUtility.xSquarePromptText] = function(f78_arg0)
 			local f78_local0 = CoD.OverlayUtility.Overlays.MessageDialogBox.getTitleRef(f78_arg0)
 			if CoD.OverlayUtility.Overlays.MessageDialogBox.getStringRef(f78_arg0) == Engine[0x5C7590F54ABD40](@"hash_1EED560597ED4A25") then
-				return Engine[@"hash_4F9F1239CFD921FE"](@"hash_6AB75339FD90608", Engine[@"getgamertagwhostoleprimarycontroller"]())
-			elseif f78_local0 == @"hash_5D8301725C955017" then
+				return Engine[@"hash_4F9F1239CFD921FE"](@"hash_6AB75339FD90608", Engine.GetGamertagWhoStolePrimaryController())
+			elseif f78_local0 == "menu/connectivity_notice_caps" then
 				return @"menu/retry"
 			else
 				return ""
@@ -770,12 +770,12 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		[CoD.OverlayUtility.GoBackPropertyName] = function(f79_arg0)
 			local f79_local0 = CoD.OverlayUtility.Overlays.MessageDialogBox.getTitleRef(f79_arg0)
 			if CoD.isPC then
-				if f79_local0 == @"hash_5D8301725C955017" then
+				if f79_local0 == "menu/connectivity_notice_caps" then
 					return function(f80_arg0, f80_arg1)
 						LuaUtils.UI_ClearErrorMessageDialog()
 						local f80_local0 = GoBack(f80_arg0, f80_arg1)
 						CoD.LobbyUtility.FailedDWConnection = false
-						Engine[@"setmodelvalue"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.failedDemonwareConnection"), false)
+						Engine.SetModelValue(Engine.GetModel(Engine.GetGlobalModel(), "lobbyRoot.failedDemonwareConnection"), false)
 						LobbyBeginPlay(f80_local0, f80_arg1)
 					end
 				else
@@ -800,7 +800,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 			CoD.OverlayUtility.Overlays[f82_arg0.menuName].description = ""
 			f82_arg0:addElement(LUI.UITimer.newElementTimer(400, false, function(f83_arg0)
 				if f82_local1 ~= true then
-					local f83_local0 = Engine[@"getglobalmodel"]()
+					local f83_local0 = Engine.GetGlobalModel()
 					f83_local0 = f83_local0.lobbyRoot.theaterDownloadPercent:get()
 					local f83_local1 = CoD.FileshareUtility.GetSelectedItemProperty("mainMode")
 					local f83_local2 = CoD.FileshareUtility.GetSelectedItemProperty("mapName")
@@ -814,12 +814,12 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 						f83_local7 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_36648C5ADFDA72BB")
 						f83_local5 = true
 						f82_local1 = true
-					elseif not Engine[@"ismapvalid"](f83_local2, f83_local1) then
+					elseif not Engine.IsMapValid(f83_local2, f83_local1) then
 						f83_local6 = @"menu/error"
-						f83_local7 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_47BDE85F342990C1")
+						f83_local7 = Engine[@"hash_4F9F1239CFD921FE"]("menu/dlc_warning_missing_map_pack_theater")
 						f83_local5 = true
 						f82_local1 = true
-					elseif not Engine[@"isgametypevalid"](f83_local3, f83_local1) then
+					elseif not Engine.IsGameTypeValid(f83_local3, f83_local1) then
 						f83_local6 = @"menu/error"
 						f83_local7 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_57AE2FA3B14AB42C")
 						f83_local5 = true
@@ -828,18 +828,18 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 						CoD.DirectorUtility.DirectorTheaterLaunchDemo(f82_arg0, f82_arg1)
 						local f83_local8 = CoD.FileshareUtility.GetSelectedItemProperty("fileCategory")
 						if f83_local8 == "film" or f83_local8 == "recentgames" or f83_local8 == "film_private" then
-							f83_local7 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_5E8105FA89AA601F")
+							f83_local7 = Engine[@"hash_4F9F1239CFD921FE"]("exe/loading_film")
 						else
-							f83_local7 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_239FE9D0CB0C6F0F")
+							f83_local7 = Engine[@"hash_4F9F1239CFD921FE"]("exe/loading_clip")
 						end
 						f83_local5 = true
 					elseif f83_local0 < 100 then
 						if CoD.FileshareUtility.FileshareIsDownloadingInError(CoD.FileshareUtility.GetSelectedItemProperty("fileId")) then
 							f83_local6 = @"menu/error"
-							f83_local7 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_2CFC1E203E359C99")
+							f83_local7 = Engine[@"hash_4F9F1239CFD921FE"]("menu/fileshare_downloaderror")
 							f82_local1 = true
 						else
-							f83_local7 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_4658F66BBA1E1ADF", f83_local0)
+							f83_local7 = Engine[@"hash_4F9F1239CFD921FE"]("mpui/downloading_percent", f83_local0)
 						end
 						f83_local5 = true
 					end
@@ -858,7 +858,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		[CoD.OverlayUtility.GoBackPropertyName] = function(f84_arg0)
 			return function(f85_arg0, f85_arg1)
 				if CoD.FileshareUtility.FileshareIsDownloading(CoD.FileshareUtility.GetSelectedItemProperty("fileId")) then
-					Engine[@"execnow"](f85_arg1, "demo_abortfilesharedownload")
+					Engine.ExecNow(f85_arg1, "demo_abortfilesharedownload")
 				end
 				if f85_arg0.occludedMenu and CoD.LobbyUtility.MapVoteTimerActive() then
 					LobbyGoBack(f85_arg0.occludedMenu, f85_arg1)
@@ -870,10 +870,10 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 	DemoSaveClipPopup = {
 		menuName = "SystemOverlay_Full",
 		title = function()
-			return Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"menu/keep_segment"))
+			return Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"](@"menu/keep_segment"))
 		end,
 		description = function()
-			return Engine[@"hash_4F9F1239CFD921FE"](@"hash_57BDC7223FDD20A0")
+			return Engine[@"hash_4F9F1239CFD921FE"]("demo/keep_segment_hint")
 		end,
 		categoryType = CoD.OverlayUtility.OverlayTypes.Save,
 		listDatasource = function()
@@ -881,11 +881,11 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 				local f89_local0 = {}
 				table.insert(f89_local0, {
 					models = {
-						displayText = Engine[@"hash_4F9F1239CFD921FE"](@"hash_1BBE01564BE96E29"),
+						displayText = Engine[@"hash_4F9F1239CFD921FE"]("menu/autoname_segment"),
 					},
 					properties = {
 						action = function(f90_arg0, f90_arg1, f90_arg2, f90_arg3, f90_arg4)
-							Engine[@"exec"](f90_arg2, "demo_savesegment 0")
+							Engine.exec(f90_arg2, "demo_savesegment 0")
 							GoBack(f90_arg4, f90_arg2)
 						end,
 					},
@@ -906,18 +906,18 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 					},
 					properties = {
 						action = function(f92_arg0, f92_arg1, f92_arg2, f92_arg3, f92_arg4)
-							Engine[@"exec"](f92_arg2, "demo_previewsegment")
+							Engine.exec(f92_arg2, "demo_previewsegment")
 							GoBack(f92_arg4, f92_arg2)
 						end,
 					},
 				})
 				table.insert(f89_local0, {
 					models = {
-						displayText = Engine[@"hash_4F9F1239CFD921FE"](@"hash_420EE0E918F7E7CD"),
+						displayText = Engine[@"hash_4F9F1239CFD921FE"]("menu/discard_segment"),
 					},
 					properties = {
 						action = function(f93_arg0, f93_arg1, f93_arg2, f93_arg3, f93_arg4)
-							Engine[@"exec"](f93_arg2, "demo_savesegment 1")
+							Engine.exec(f93_arg2, "demo_savesegment 1")
 							GoBack(f93_arg4, f93_arg2)
 						end,
 					},
@@ -927,11 +927,11 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 			return "DemoSaveClipPopup_List"
 		end,
 		postCreateStep = function(f94_arg0, f94_arg1)
-			Engine[@"lockinput"](f94_arg1, true)
-			Engine[@"setuiactive"](f94_arg1, true)
+			Engine.LockInput(f94_arg1, true)
+			Engine.SetUIActive(f94_arg1, true)
 			LUI.OverrideFunction_CallOriginalSecond(f94_arg0, "close", function(element)
-				Engine[@"lockinput"](f94_arg1, false)
-				Engine[@"setuiactive"](f94_arg1, false)
+				Engine.LockInput(f94_arg1, false)
+				Engine.SetUIActive(f94_arg1, false)
 			end)
 		end,
 		[CoD.OverlayUtility.GoBackPropertyName] = nil,
@@ -939,8 +939,8 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 	DemoCustomizeHighlightReelPopup = {
 		menuName = "SystemOverlay_DemoCustomizeHighlightReel",
 		frameWidget = "CoD.DemoCustomizeHighlightReel",
-		title = Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"hash_47AA390A01EFA66C")),
-		description = Engine[@"hash_4F9F1239CFD921FE"](@"hash_19164F5093FB2C14"),
+		title = Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"]("menu/demo_customize_highlight_reel")),
+		description = Engine[@"hash_4F9F1239CFD921FE"]("menu/demo_customize_highlight_reel_desc"),
 		categoryType = CoD.OverlayUtility.OverlayTypes.Save,
 		listDatasource = function()
 			DataSources.DemoCustomizeHighlightReel_List = DataSourceHelpers.ListSetup(
@@ -950,13 +950,13 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 					local f97_local1 = {}
 					table.insert(f97_local1, {
 						models = {
-							displayText = Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"hash_4355E66EE96B33D5")),
+							displayText = Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"]("menu/demo_start_highlight_reel")),
 							disabled = f97_local0 <= 0,
 						},
 						properties = {
 							action = function(f98_arg0, f98_arg1, f98_arg2, f98_arg3, f98_arg4)
 								GoBackMultiple(f98_arg0, f98_arg2, 2)
-								Engine[@"exec"](f98_arg2, "demo_regeneratehighlightreel")
+								Engine.exec(f98_arg2, "demo_regeneratehighlightreel")
 							end,
 						},
 					})
@@ -985,14 +985,14 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 	DemoDeleteAllDollyCameraMarkers = {
 		menuName = "SystemOverlay_FreeCursor",
 		title = @"hash_7AFB18AF560AEA82",
-		description = @"hash_7D478721E04FE0A6",
+		description = "demo/delete_all_keyframes_hint",
 		categoryType = CoD.OverlayUtility.OverlayTypes.Alert,
 		listDatasource = function()
 			DataSources.DemoDeleteAllDollyCameraMarkers_List = DataSourceHelpers.ListSetup("DemoDeleteAllDollyCameraMarkers_List", function(f104_arg0)
 				local f104_local0 = {}
 				table.insert(f104_local0, {
 					models = {
-						displayText = Engine[@"hash_4F9F1239CFD921FE"](@"hash_1D08A225C6FA4034"),
+						displayText = Engine[@"hash_4F9F1239CFD921FE"]("demo/delete_all"),
 					},
 					properties = {
 						action = function(f105_arg0, f105_arg1, f105_arg2, f105_arg3, f105_arg4)
@@ -1036,14 +1036,14 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 	DemoDeleteAllLightmanMarkers = {
 		menuName = "SystemOverlay_FreeCursor",
 		title = @"hash_67D0A0960E680418",
-		description = @"hash_56BDA7219E3794F8",
+		description = "demo/delete_all_lights_hint",
 		categoryType = CoD.OverlayUtility.OverlayTypes.Alert,
 		listDatasource = function()
 			DataSources.DemoDeleteAllLightmanMarkers_List = DataSourceHelpers.ListSetup("DemoDeleteAllLightmanMarkers_List", function(f112_arg0)
 				local f112_local0 = {}
 				table.insert(f112_local0, {
 					models = {
-						displayText = Engine[@"hash_4F9F1239CFD921FE"](@"hash_1D08A225C6FA4034"),
+						displayText = Engine[@"hash_4F9F1239CFD921FE"]("demo/delete_all"),
 					},
 					properties = {
 						action = function(f113_arg0, f113_arg1, f113_arg2, f113_arg3, f113_arg4)
@@ -1087,7 +1087,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 	DemoDeleteSegment = {
 		menuName = "SystemOverlay_FreeCursor",
 		title = @"menu/delete_segment",
-		description = @"hash_43C93A343D0D4E7A",
+		description = "menu/delete_segment_confirmation",
 		categoryType = CoD.OverlayUtility.OverlayTypes.Alert,
 		listDatasource = function()
 			DataSources.DemoDeleteSegment_List = DataSourceHelpers.ListSetup("DemoDeleteSegment_List", function(f120_arg0)
@@ -1098,7 +1098,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 					},
 					properties = {
 						action = function(f121_arg0, f121_arg1, f121_arg2, f121_arg3, f121_arg4)
-							Engine[@"execnow"](f121_arg2, "demo_deletesegment " .. Engine[@"getmodelvalue"](Engine[@"getmodel"](CoD.DemoUtility.Timeline_GetHighlightedSegmentModel(), "segmentNumber")) - 1)
+							Engine.ExecNow(f121_arg2, "demo_deletesegment " .. Engine.GetModelValue(Engine.GetModel(CoD.DemoUtility.Timeline_GetHighlightedSegmentModel(), "segmentNumber")) - 1)
 							TimelineEditorRefresh()
 							GoBack(f121_arg4, f121_arg2)
 						end,
@@ -1122,7 +1122,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		[CoD.OverlayUtility.GoBackPropertyName] = CoD.OverlayUtility.DefaultGoBack,
 		[CoD.OverlayUtility.aCrossPromptFn] = function(f123_arg0)
 			return function(f124_arg0, f124_arg1)
-				Engine[@"execnow"](f124_arg1, "demo_deletesegment " .. Engine[@"getmodelvalue"](Engine[@"getmodel"](CoD.DemoUtility.Timeline_GetHighlightedSegmentModel(), "segmentNumber")) - 1)
+				Engine.ExecNow(f124_arg1, "demo_deletesegment " .. Engine.GetModelValue(Engine.GetModel(CoD.DemoUtility.Timeline_GetHighlightedSegmentModel(), "segmentNumber")) - 1)
 				TimelineEditorRefresh()
 				GoBack(f124_arg0, f124_arg1)
 			end
@@ -1137,8 +1137,8 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 	},
 	DemoDeleteAllSegments = {
 		menuName = "SystemOverlay_FreeCursor",
-		title = @"hash_5835CE6A81360E27",
-		description = @"hash_5CF790D62CC5FF35",
+		title = "menu/delete_all_segments",
+		description = "menu/delete_all_segments_confirmation",
 		categoryType = CoD.OverlayUtility.OverlayTypes.Alert,
 		listDatasource = function()
 			DataSources.DemoDeleteAllSegments_List = DataSourceHelpers.ListSetup("DemoDeleteAllSegments_List", function(f128_arg0)
@@ -1149,7 +1149,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 					},
 					properties = {
 						action = function(f129_arg0, f129_arg1, f129_arg2, f129_arg3, f129_arg4)
-							Engine[@"execnow"](f129_arg2, "demo_deleteclip")
+							Engine.ExecNow(f129_arg2, "demo_deleteclip")
 							TimelineEditorRefresh()
 							GoBack(f129_arg4, f129_arg2)
 						end,
@@ -1173,7 +1173,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		[CoD.OverlayUtility.GoBackPropertyName] = CoD.OverlayUtility.DefaultGoBack,
 		[CoD.OverlayUtility.aCrossPromptFn] = function(f131_arg0)
 			return function(f132_arg0, f132_arg1)
-				Engine[@"execnow"](f132_arg1, "demo_deleteclip")
+				Engine.ExecNow(f132_arg1, "demo_deleteclip")
 				TimelineEditorRefresh()
 				GoBack(f132_arg0, f132_arg1)
 			end
@@ -1188,8 +1188,8 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 	},
 	DemoMergeAllSegments = {
 		menuName = "SystemOverlay_FreeCursor",
-		title = @"hash_627E276A81A157A4",
-		description = @"hash_15B672D58B3799C8",
+		title = "menu/merge_all_segments",
+		description = "menu/merge_all_segments_confirmation",
 		categoryType = CoD.OverlayUtility.OverlayTypes.Alert,
 		listDatasource = function()
 			DataSources.DemoMergeAllSegments_List = DataSourceHelpers.ListSetup("DemoMergeAllSegments_List", function(f136_arg0)
@@ -1200,7 +1200,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 					},
 					properties = {
 						action = function(f137_arg0, f137_arg1, f137_arg2, f137_arg3, f137_arg4)
-							Engine[@"execnow"](f137_arg2, "demo_mergesegments")
+							Engine.ExecNow(f137_arg2, "demo_mergesegments")
 							TimelineEditorRefresh()
 							GoBack(f137_arg4, f137_arg2)
 						end,
@@ -1224,7 +1224,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		[CoD.OverlayUtility.GoBackPropertyName] = CoD.OverlayUtility.DefaultGoBack,
 		[CoD.OverlayUtility.aCrossPromptFn] = function(f139_arg0)
 			return function(f140_arg0, f140_arg1)
-				Engine[@"execnow"](f140_arg1, "demo_mergesegments")
+				Engine.ExecNow(f140_arg1, "demo_mergesegments")
 				TimelineEditorRefresh()
 				GoBack(f140_arg0, f140_arg1)
 			end
@@ -1242,23 +1242,23 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		title = function()
 			local f143_local0 = nil
 			local f143_local1 = Engine[@"isdemoclipplaying"]()
-			local f143_local2 = Engine[@"gamehost"]()
+			local f143_local2 = Engine.GameHost()
 			if not f143_local1 then
 				if f143_local2 then
 					f143_local0 = @"hash_5AF10C79FA8979B9"
 				else
-					f143_local0 = 0x683F5885FC33F7
+					f143_local0 = "mpui/end_film"
 				end
 			elseif f143_local2 then
 				f143_local0 = @"hash_1D0E892038AAC19"
 			else
-				f143_local0 = @"hash_15F4332EC7BB2FF7"
+				f143_local0 = "mpui/end_clip"
 			end
 			return f143_local0
 		end,
 		description = function()
 			if Engine[@"isclipmodified"]() then
-				return @"hash_3865068626103889"
+				return "menu/demo_unuploaded_clip"
 			else
 				return 0x0
 			end
@@ -1315,7 +1315,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		[CoD.OverlayUtility.bCirclePromptFn] = function(f153_arg0)
 			return function(f154_arg0, f154_arg1)
 				SendOwnMenuResponse(f154_arg0, f154_arg1, "close")
-				Engine[@"lockinput"](f154_arg1, false)
+				Engine.LockInput(f154_arg1, false)
 				Close(f154_arg0, f154_arg1)
 			end
 		end,
@@ -1340,7 +1340,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 						properties = {
 							action = function(f158_arg0, f158_arg1, f158_arg2, f158_arg3, f158_arg4)
 								CoD.LobbyUtility.FailedDWConnection = true
-								Engine[@"setmodelvalue"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.failedDemonwareConnection"), true)
+								Engine.SetModelValue(Engine.GetModel(Engine.GetGlobalModel(), "lobbyRoot.failedDemonwareConnection"), true)
 								GoBack(f158_arg4, f158_arg2)
 							end,
 						},
@@ -1357,7 +1357,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 			f159_arg0.unusedControllerAllowed = true
 			local f159_local0 = 0
 			f159_arg0:addElement(LUI.UITimer.newElementTimer(400, false, function(f160_arg0)
-				if Engine[@"arelocalfilesready"](f159_arg1) == true then
+				if Engine.AreLocalFilesReady(f159_arg1) == true then
 					GoBack(f159_arg0, f159_arg1)
 					return
 				elseif f159_local0 > CoD.OverlayUtility.LOCAL_FILES_FETCH_WAIT_TIME then
@@ -1369,7 +1369,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 			end))
 		end,
 		title = @"menu/loading_profile",
-		description = @"hash_0",
+		description = 0x0,
 		categoryType = CoD.OverlayUtility.OverlayTypes.Connection,
 		[CoD.OverlayUtility.GoBackPropertyName] = CoD.OverlayUtility.DefaultGoBack,
 	},
@@ -1380,7 +1380,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 			f161_arg0.unusedControllerAllowed = true
 			local f161_local0 = 0
 			local f161_local1 = 0
-			Engine[@"setmodelvalue"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.beginPlay"), Enum[@"lobbynetworkmode"][@"lobby_networkmode_invalid"])
+			Engine.SetModelValue(Engine.GetModel(Engine.GetGlobalModel(), "lobbyRoot.beginPlay"), Enum.LobbyNetworkMode[@"lobby_networkmode_invalid"])
 			f161_arg0:addElement(LUI.UITimer.newElementTimer(400, false, function(f162_arg0)
 				local f162_local0 = Engine[@"hash_5451F40A2FEDDF88"](f161_arg1)
 				if f162_local0.connectionState == 7 then
@@ -1389,49 +1389,49 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 				else
 					CoD.OverlayUtility.Overlays[f161_arg0.menuName].description = ""
 				end
-				local f162_local1 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.startPopups")
+				local f162_local1 = Engine.GetModel(Engine.GetGlobalModel(), "lobbyRoot.startPopups")
 				local f162_local2 = 0
 				if f162_local1 then
-					f162_local2 = Engine[@"getmodelvalue"](f162_local1)
+					f162_local2 = Engine.GetModelValue(f162_local1)
 				end
 				if f162_local2 > 0 then
-					local f162_local3 = Engine[@"getmodelvalue"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.startBitsToFetch"))
+					local f162_local3 = Engine.GetModelValue(Engine.GetModel(Engine.GetGlobalModel(), "lobbyRoot.startBitsToFetch"))
 					if f162_local3 & Engine[0x4DC3A644148CFC](f161_arg1) == f162_local3 then
 						if not CoD.MOTDUtility.MOTD_ShouldShowMOTD(f161_arg1) then
-							Engine[@"setmodelvalue"](f162_local1, CoD.BitUtility.ClearBit(f162_local2, LuaEnum.START_POPUPS.MOTD))
+							Engine.SetModelValue(f162_local1, CoD.BitUtility.ClearBit(f162_local2, LuaEnum.START_POPUPS.MOTD))
 						else
 							GoBack(f161_arg0, f161_arg1)
 							return
 						end
 					end
-				elseif Engine[@"isdemonwarefetchingdone"](f161_arg1) then
+				elseif Engine.IsDemonwareFetchingDone(f161_arg1) then
 					CoD.LobbyUtility.FailedDWConnection = false
-					Engine[@"setmodelvalue"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.failedDemonwareConnection"), false)
+					Engine.SetModelValue(Engine.GetModel(Engine.GetGlobalModel(), "lobbyRoot.failedDemonwareConnection"), false)
 					local f162_local3 = LobbyData.GetLobbyNav()
-					if Engine[@"getprimarycontroller"]() == f161_arg1 then
+					if Engine.GetPrimaryController() == f161_arg1 then
 						if f162_local3 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_LAN) or f162_local3 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE) then
 							Engine[@"lobbyevent"]("OnNetworkModeChanged", {
 								controller = f161_arg1,
-								networkMode = Enum[@"lobbynetworkmode"][@"lobby_networkmode_live"],
+								networkMode = Enum.LobbyNetworkMode[@"lobby_networkmode_live"],
 							})
 						elseif f162_local3 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.MAIN) then
-							Engine[@"setlobbynetworkmode"](Enum[@"lobbynetworkmode"][@"lobby_networkmode_live"])
+							Engine[@"setlobbynetworkmode"](Enum.LobbyNetworkMode[@"lobby_networkmode_live"])
 						end
 					end
 					GoBack(f161_arg0, f161_arg1)
 					if f162_local3 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.MAIN) then
-						Dvar[@"lobby_beginplay"]:set(Enum[@"lobbynetworkmode"][@"lobby_networkmode_live"])
+						Dvar[@"lobby_beginplay"]:set(Enum.LobbyNetworkMode[@"lobby_networkmode_live"])
 					end
 					return
 				end
-				local f162_local3 = Engine[@"checknetconnection"]()
+				local f162_local3 = Engine.CheckNetConnection()
 				local f162_local4 = LuaUtils.ConnectingToDemonwareMaxWaitTime()
-				if Engine[@"islpcbusy"]() then
-					local f162_local5 = Engine[@"getlpccompletionpercentage"]()
+				if Engine.IsLPCBusy() then
+					local f162_local5 = Engine.GetLPCCompletionPercentage()
 					if f162_local5 == 0 or f162_local5 == 100 then
 						CoD.OverlayUtility.Overlays[f161_arg0.menuName].description = Engine[@"hash_4F9F1239CFD921FE"](@"menu/checking_files")
 					else
-						CoD.OverlayUtility.Overlays[f161_arg0.menuName].description = Engine[@"hash_4F9F1239CFD921FE"](@"hash_4D9EDFBB4CD890FF", f162_local5)
+						CoD.OverlayUtility.Overlays[f161_arg0.menuName].description = Engine[@"hash_4F9F1239CFD921FE"]("menu/download_in_progress", f162_local5)
 					end
 					f161_arg0:refreshData(nil)
 					f161_local0 = 0
@@ -1439,7 +1439,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 					local f162_local5 = GoBack(f161_arg0, f161_arg1)
 					CoD.OverlayUtility.CreateConnectionErrorOverlay(f161_arg1, f162_local5.id, f162_local3)
 				end
-				if Engine[@"hash_F62AEC4075B0105"](f161_arg1) or Engine[@"isplayerqueued"](f161_arg1) then
+				if Engine[@"hash_F62AEC4075B0105"](f161_arg1) or Engine.IsPlayerQueued(f161_arg1) then
 					CoD.OverlayUtility.CreateOverlay(f161_arg1, GoBack(f161_arg0, f161_arg1), "LoginQueued")
 				end
 				f161_local0 = f161_local0 + f162_arg0.timeElapsed
@@ -1457,25 +1457,25 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		menuName = CoD.OverlayUtility.AutoSizeMenuFromDescription("LobbyPlayNetworkModePopup"),
 		title = function(f163_arg0)
 			local f163_local0 = 0x0
-			if f163_arg0 == Enum[@"lobbynetworkmode"][@"lobby_networkmode_live"] then
+			if f163_arg0 == Enum.LobbyNetworkMode[@"lobby_networkmode_live"] then
 				f163_local0 = @"hash_B8CCFF42AA4540F"
-			elseif f163_arg0 == Enum[@"lobbynetworkmode"][@"lobby_networkmode_lan"] then
-				f163_local0 = @"hash_3B7452C346AFFF67"
+			elseif f163_arg0 == Enum.LobbyNetworkMode[@"lobby_networkmode_lan"] then
+				f163_local0 = "menu/play_local_caps"
 			end
 			return Engine[@"hash_4F9F1239CFD921FE"](f163_local0)
 		end,
 		description = function(f164_arg0)
 			local f164_local0 = 0x0
-			local f164_local1 = Engine[@"islobbyhost"](Enum[@"lobbytype"][@"lobby_type_private"]) and Enum[@"lobbymodule"][@"lobby_module_host"] or Enum[@"lobbymodule"][@"lobby_module_client"]
-			if f164_arg0 == Enum[@"lobbynetworkmode"][@"lobby_networkmode_live"] then
-				if Engine[@"getlobbyclientcount"](f164_local1, Enum[@"lobbytype"][@"lobby_type_private"], Enum[@"lobbyclientfiltertype"][@"lobby_client_filter_type_all"]) > 1 then
-					f164_local0 = @"hash_2A8219C5EFD57415"
+			local f164_local1 = Engine[@"islobbyhost"](Enum.LobbyType[@"lobby_type_private"]) and Enum.LobbyModule[@"lobby_module_host"] or Enum.LobbyModule[@"lobby_module_client"]
+			if f164_arg0 == Enum.LobbyNetworkMode[@"lobby_networkmode_live"] then
+				if Engine[@"getlobbyclientcount"](f164_local1, Enum.LobbyType[@"lobby_type_private"], Enum[@"lobbyclientfiltertype"][@"lobby_client_filter_type_all"]) > 1 then
+					f164_local0 = "xboxlive/play_online_and_disband_desc"
 				else
-					f164_local0 = @"hash_4641941712295807"
+					f164_local0 = "xboxlive/play_online_desc"
 				end
-			elseif f164_arg0 == Enum[@"lobbynetworkmode"][@"lobby_networkmode_lan"] then
-				if Engine[@"getlobbyclientcount"](f164_local1, Enum[@"lobbytype"][@"lobby_type_private"], Enum[@"lobbyclientfiltertype"][@"lobby_client_filter_type_all"]) > 1 then
-					f164_local0 = @"hash_62C90CCF70351109"
+			elseif f164_arg0 == Enum.LobbyNetworkMode[@"lobby_networkmode_lan"] then
+				if Engine[@"getlobbyclientcount"](f164_local1, Enum.LobbyType[@"lobby_type_private"], Enum[@"lobbyclientfiltertype"][@"lobby_client_filter_type_all"]) > 1 then
+					f164_local0 = "xboxlive/disband_and_play_local_desc"
 				else
 					f164_local0 = @"hash_2C63DC8F5263EFB7"
 				end
@@ -1487,9 +1487,9 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		listDatasource = function(f165_arg0)
 			DataSources.LobbyPlayNetworkModePopupButtons = DataSourceHelpers.ListSetup("LobbyPlayNetworkModePopupButtons", function(f166_arg0)
 				local f166_local0 = 0x0
-				if f165_arg0 == Enum[@"lobbynetworkmode"][@"lobby_networkmode_live"] then
-					f166_local0 = @"hash_3E15741425E1DEBD"
-				elseif f165_arg0 == Enum[@"lobbynetworkmode"][@"lobby_networkmode_lan"] then
+				if f165_arg0 == Enum.LobbyNetworkMode[@"lobby_networkmode_live"] then
+					f166_local0 = "xboxlive/play_online"
+				elseif f165_arg0 == Enum.LobbyNetworkMode[@"lobby_networkmode_lan"] then
 					f166_local0 = @"menu/play_local"
 				end
 				return {
@@ -1524,45 +1524,45 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		menuName = "SystemOverlay_Compact",
 		title = Engine[@"hash_4F9F1239CFD921FE"](@"hash_1D7A26B6796F8776"),
 		frameWidget = "CoD.systemOverlay_Compact_BasicFrame_Loading",
-		description = @"hash_0",
+		description = 0x0,
 		categoryType = CoD.OverlayUtility.OverlayTypes.Connection,
 		[CoD.OverlayUtility.GoBackPropertyName] = CoD.OverlayUtility.DefaultGoBack,
 		postCreateStep = function(f169_arg0, f169_arg1)
 			f169_arg0.unusedControllerAllowed = true
 			local f169_local0 = 0
 			f169_arg0:addElement(LUI.UITimer.newElementTimer(800, false, function(f170_arg0)
-				if Engine[@"iscurrentlycheckingcontentrestrictions"](f169_arg1) == false then
-					if Engine[@"hascompletedcheckingrestrictions"](f169_arg1) then
+				if Engine.IsCurrentlyCheckingContentRestrictions(f169_arg1) == false then
+					if Engine.HasCompletedCheckingRestrictions(f169_arg1) then
 						CoD.LobbyUtility.FailedDWConnection = false
-						Engine[@"setmodelvalue"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.failedDemonwareConnection"), false)
+						Engine.SetModelValue(Engine.GetModel(Engine.GetGlobalModel(), "lobbyRoot.failedDemonwareConnection"), false)
 						local f170_local0 = LobbyData.GetLobbyNav()
 						if f170_local0 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_LAN) or f170_local0 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE) then
 							Engine[@"lobbyevent"]("OnNetworkModeChanged", {
 								controller = f169_arg1,
-								networkMode = Enum[@"lobbynetworkmode"][@"lobby_networkmode_live"],
+								networkMode = Enum.LobbyNetworkMode[@"lobby_networkmode_live"],
 							})
 						elseif f170_local0 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.MAIN) then
-							Engine[@"setlobbynetworkmode"](Enum[@"lobbynetworkmode"][@"lobby_networkmode_live"])
+							Engine[@"setlobbynetworkmode"](Enum.LobbyNetworkMode[@"lobby_networkmode_live"])
 						end
 						GoBack(f169_arg0, f169_arg1)
 						if f170_local0 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.MAIN) then
-							Dvar[@"lobby_beginplay"]:set(Enum[@"lobbynetworkmode"][@"lobby_networkmode_live"])
+							Dvar[@"lobby_beginplay"]:set(Enum.LobbyNetworkMode[@"lobby_networkmode_live"])
 						end
 						return
 					end
-					Engine[@"printwarning"](Enum[@"consolelabel_e"][@"con_label_lobby"], "CheckingRestrictions:HasCompletedCheckingRestrictions still hasn't completed.\n")
+					Engine.PrintWarning(Enum[@"consolelabel_e"][@"con_label_lobby"], "CheckingRestrictions:HasCompletedCheckingRestrictions still hasn't completed.\n")
 					local f170_local0 = LobbyData.GetLobbyNav()
 					if f170_local0 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_LAN) or f170_local0 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE) then
 						Engine[@"lobbyevent"]("OnNetworkModeChanged", {
 							controller = f169_arg1,
-							networkMode = Enum[@"lobbynetworkmode"][@"lobby_networkmode_lan"],
+							networkMode = Enum.LobbyNetworkMode[@"lobby_networkmode_lan"],
 						})
 					elseif f170_local0 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.MAIN) then
-						Engine[@"setlobbynetworkmode"](Enum[@"lobbynetworkmode"][@"lobby_networkmode_lan"])
+						Engine[@"setlobbynetworkmode"](Enum.LobbyNetworkMode[@"lobby_networkmode_lan"])
 					end
 					GoBack(f169_arg0, f169_arg1)
 					if f170_local0 == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.MAIN) then
-						Dvar[@"lobby_beginplay"]:set(Enum[@"lobbynetworkmode"][@"lobby_networkmode_lan"])
+						Dvar[@"lobby_beginplay"]:set(Enum.LobbyNetworkMode[@"lobby_networkmode_lan"])
 					end
 					return
 				else
@@ -1578,7 +1578,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 			local f171_local0 = 0
 			local f171_local1 = 0
 			f171_arg0:addElement(LUI.UITimer.newElementTimer(400, false, function(f172_arg0)
-				local f172_local0 = Engine[@"getplayerqueueinfo"](f171_arg1)
+				local f172_local0 = Engine.GetPlayerQueueInfo(f171_arg1)
 				if f172_local0.closed then
 					local f172_local1 = LuaEnum.BD_LOBBY_ERROR_CODES_DESCRIPTION_STRINGS[f172_local0.errorCode]
 					if f172_local1 ~= nil then
@@ -1598,16 +1598,16 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 						local f172_local8 = f172_local5 % 60
 						CoD.OverlayUtility.Overlays[f171_arg0.menuName].description = Engine[@"hash_4F9F1239CFD921FE"](Engine[@"hash_4F9F1239CFD921FE"](@"hash_678D7640C2093217", f172_local0.position, f172_local5, f172_local6, f172_local1, f172_local2))
 					end
-					CoD.OverlayUtility.Overlays[f171_arg0.menuName].title = Engine[@"hash_4F9F1239CFD921FE"](@"hash_7C51866DCC22F69A")
+					CoD.OverlayUtility.Overlays[f171_arg0.menuName].title = Engine[@"hash_4F9F1239CFD921FE"]("menu/login_queue_default")
 					f171_arg0:refreshData(nil)
 				elseif f172_local0.disabled then
 				elseif not f172_local0.success then
-					local f172_local1 = @"hash_6632F97C36A01BD6"
+					local f172_local1 = "platform/demonware_disconnect"
 					local f172_local2 = GoBack(f171_arg0, f171_arg1)
-					LuaUtils.UI_ShowErrorMessageDialog(f171_arg1, f172_local1, @"hash_431E422BC40B2429")
+					LuaUtils.UI_ShowErrorMessageDialog(f171_arg1, f172_local1, "menu/notice_caps")
 					CoD.LobbyUtility.FailedDWConnection = true
-					Engine[@"setmodelvalue"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.failedDemonwareConnection"), true)
-					Engine[@"leavequeue"](f171_arg1)
+					Engine.SetModelValue(Engine.GetModel(Engine.GetGlobalModel(), "lobbyRoot.failedDemonwareConnection"), true)
+					Engine.LeaveQueue(f171_arg1)
 				else
 					CoD.OverlayUtility.CreateOverlay(f171_arg1, GoBack(f171_arg0, f171_arg1), "ConnectingToDemonware")
 				end
@@ -1623,7 +1623,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		menuName = "SystemOverlay_FreeCursor",
 		frameWidget = "CoD.systemOverlay_DeletePaintjobFrame",
 		title = Engine[@"hash_4F9F1239CFD921FE"](@"hash_574BEFB514E9134B"),
-		description = Engine[@"hash_4F9F1239CFD921FE"](@"hash_2F23BA024C1883C6"),
+		description = Engine[@"hash_4F9F1239CFD921FE"]("menu/paintjob_delete_confirmation"),
 		categoryType = CoD.OverlayUtility.OverlayTypes.GenericMessage,
 		listDatasource = function()
 			DataSources.DeletePaintjobConfirmation_List = DataSourceHelpers.ListSetup("DeletePaintjobConfirmation_List", function(f174_arg0)
@@ -1670,8 +1670,8 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 	},
 	InitialCODPointsOverlay = {
 		menuName = "SystemOverlay_Compact",
-		title = Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"hash_225BC30296F0A01F")),
-		description = @"hash_66B5C6DE62EF7B8F",
+		title = Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"]("menu/codpoints_intro_header")),
+		description = "menu/codpoints_intro_desc",
 		categoryType = CoD.OverlayUtility.OverlayTypes.CODPoints,
 		listDatasource = function()
 			DataSources.InitialCODPoints_List = DataSourceHelpers.ListSetup("InitialCODPoints_List", function(f182_arg0)
@@ -1682,10 +1682,10 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 						},
 						properties = {
 							action = function(f183_arg0, f183_arg1, f183_arg2, f183_arg3, f183_arg4)
-								local f183_local0 = Engine[@"storagegetbuffer"](f183_arg2, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
+								local f183_local0 = Engine.StorageGetBuffer(f183_arg2, Enum.StorageFileType[@"storage_mp_stats_online"])
 								if f183_local0 then
 									f183_local0.codPointMsgSeen:set(1)
-									Engine[@"storagewrite"](f183_arg2, Enum[@"storagefiletype"][@"storage_mp_stats_online"])
+									Engine.StorageWrite(f183_arg2, Enum.StorageFileType[@"storage_mp_stats_online"])
 								end
 								GoBack(f183_arg4, f183_arg2)
 							end,
@@ -1699,8 +1699,8 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 	EmblemClearConfirmationOverlay = {
 		menuName = "SystemOverlay_FreeCursor",
 		frameWidget = "CoD.systemOverlay_DeleteEmblemFrame",
-		title = Engine[@"hash_4F9F1239CFD921FE"](@"hash_3C9D0E475F9A65A9"),
-		description = Engine[@"hash_4F9F1239CFD921FE"](@"hash_2F18FEBD3AE90DFF"),
+		title = Engine[@"hash_4F9F1239CFD921FE"]("menu/emblem_delete_popup_title"),
+		description = Engine[@"hash_4F9F1239CFD921FE"]("menu/emblem_delete_confirmation"),
 		categoryType = CoD.OverlayUtility.OverlayTypes.GenericMessage,
 		listDatasource = function()
 			DataSources.DeleteEmblemConfirmation_List = DataSourceHelpers.ListSetup("DeleteEmblemConfirmation_List", function(f185_arg0)
@@ -1748,16 +1748,16 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 	GunsmithSaveVariant = {
 		menuName = "SystemOverlay_Full",
 		frameWidget = "CoD.systemOverlay_SaveVariantFrame",
-		title = Engine[@"hash_4F9F1239CFD921FE"](@"hash_7A887F080414BD45"),
+		title = Engine[@"hash_4F9F1239CFD921FE"]("menu/gunsmith_save_changes_title"),
 		description = function(f192_arg0, f192_arg1)
-			return LocalizeWeaponNameIntoString(0x6E7F7FD2F8A555, f192_arg0, CoD.GetCustomization(f192_arg0, "weapon_index"))
+			return LocalizeWeaponNameIntoString("menu/gunsmith_save_changes_subtitle", f192_arg0, CoD.GetCustomization(f192_arg0, "weapon_index"))
 		end,
 		image = function(f193_arg0, f193_arg1)
 			local f193_local0 = f193_arg1:getModel()
 			if f193_local0 then
-				local f193_local1 = Engine[@"getmodel"](f193_local0, "variantIndex")
+				local f193_local1 = Engine.GetModel(f193_local0, "variantIndex")
 				if f193_local1 then
-					return Engine[@"getmodelvalue"](f193_local1)
+					return Engine.GetModelValue(f193_local1)
 				end
 			end
 			return ""
@@ -1765,9 +1765,9 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		variantName = function(f194_arg0, f194_arg1)
 			local f194_local0 = f194_arg1:getModel()
 			if f194_local0 then
-				local f194_local1 = Engine[@"getmodel"](f194_local0, "variantName")
+				local f194_local1 = Engine.GetModel(f194_local0, "variantName")
 				if f194_local1 then
-					return Engine[@"getmodelvalue"](f194_local1)
+					return Engine.GetModelValue(f194_local1)
 				end
 			end
 			return ""
@@ -1775,9 +1775,9 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		weaponName = function(f195_arg0, f195_arg1)
 			local f195_local0 = f195_arg1:getModel()
 			if f195_local0 then
-				local f195_local1 = Engine[@"getmodel"](f195_local0, "weaponIndex")
+				local f195_local1 = Engine.GetModel(f195_local0, "weaponIndex")
 				if f195_local1 then
-					return Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](Engine[@"getitemname"](Engine[@"getmodelvalue"](f195_local1))))
+					return Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"](Engine.GetItemName(Engine.GetModelValue(f195_local1))))
 				end
 			end
 			return ""
@@ -1818,11 +1818,11 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		menuName = "SystemOverlay_Full",
 		frameWidget = "CoD.systemOverlay_SaveEmblemFrame",
 		title = Engine[@"hash_4F9F1239CFD921FE"](@"menu/save_emblem"),
-		description = Engine[@"hash_4F9F1239CFD921FE"](@"hash_AAC383C11CADD1B"),
+		description = Engine[@"hash_4F9F1239CFD921FE"]("menu/save_emblem_desc"),
 		categoryType = CoD.OverlayUtility.OverlayTypes.Save,
 		inputText = function(f200_arg0, f200_arg1, f200_arg2, f200_arg3)
 			if f200_arg1 then
-				return Engine[@"getmodelvalue"](Engine[@"getmodel"](f200_arg1, "emblemTextEntry"))
+				return Engine.GetModelValue(Engine.GetModel(f200_arg1, "emblemTextEntry"))
 			else
 			end
 		end,
@@ -1834,12 +1834,12 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		end,
 		listDatasource = function(f203_arg0, f203_arg1, f203_arg2, f203_arg3)
 			DataSources.EmblemSave_List = DataSourceHelpers.ListSetup("EmblemSave_List", function(f204_arg0)
-				local f204_local0 = @"hash_430BBCC54CF2C2AE"
+				local f204_local0 = "menu/craft_rename"
 				if f203_arg1 then
-					f204_local0 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f203_arg1, "emblemTextEntry"))
+					f204_local0 = Engine.GetModelValue(Engine.GetModel(f203_arg1, "emblemTextEntry"))
 				end
-				local f204_local1 = CraftSlotsFullByStorageType(f204_arg0, Enum[@"storagefiletype"][@"storage_emblems"])
-				local f204_local2 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f203_arg1, "isUsed")) == 1
+				local f204_local1 = CraftSlotsFullByStorageType(f204_arg0, Enum.StorageFileType[@"storage_emblems"])
+				local f204_local2 = Engine.GetModelValue(Engine.GetModel(f203_arg1, "isUsed")) == 1
 				local f204_local3 = {}
 				local f204_local4 = LocalizeToUpperString(@"menu/craft_save")
 				if f204_local2 then
@@ -1866,7 +1866,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 				if f204_local2 then
 					table.insert(f204_local3, {
 						models = {
-							displayText = LocalizeToUpperString(@"hash_2CDD21EE3622D1D1"),
+							displayText = LocalizeToUpperString("menu/emblem_save_as_new"),
 							disabled = f204_local1,
 						},
 						properties = {
@@ -1887,7 +1887,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 					table.insert(f204_local3, {
 						models = {
 							rename = false,
-							displayText = LocalizeToUpperString(@"hash_345A42BBA5637767"),
+							displayText = LocalizeToUpperString("menu/emblems_discard"),
 						},
 						properties = {
 							action = function(f207_arg0, f207_arg1, f207_arg2, f207_arg3, f207_arg4)
@@ -1916,7 +1916,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		categoryType = CoD.OverlayUtility.OverlayTypes.Save,
 		inputText = function(f208_arg0, f208_arg1)
 			if f208_arg1 then
-				return Engine[@"getmodelvalue"](Engine[@"getmodel"](f208_arg1, "emblemTextEntry"))
+				return Engine.GetModelValue(Engine.GetModel(f208_arg1, "emblemTextEntry"))
 			else
 			end
 		end,
@@ -1927,7 +1927,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 					{
 						models = {
 							rename = false,
-							displayText = LocalizeToUpperString(@"hash_5C5F3C3BC3105BF9"),
+							displayText = LocalizeToUpperString("menu/emblem_save_changes"),
 						},
 						properties = {
 							action = function(f211_arg0, f211_arg1, f211_arg2, f211_arg3, f211_arg4)
@@ -1949,7 +1949,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		categoryType = CoD.OverlayUtility.OverlayTypes.Save,
 		inputText = function(f212_arg0, f212_arg1)
 			if f212_arg1 then
-				return Engine[@"getmodelvalue"](Engine[@"getmodel"](f212_arg1, "emblemTextEntry"))
+				return Engine.GetModelValue(Engine.GetModel(f212_arg1, "emblemTextEntry"))
 			else
 			end
 		end,
@@ -1959,7 +1959,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 				return {
 					{
 						models = {
-							displayText = LocalizeToUpperString(@"hash_5C5F3C3BC3105BF9"),
+							displayText = LocalizeToUpperString("menu/emblem_save_changes"),
 						},
 						properties = {
 							action = function(f215_arg0, f215_arg1, f215_arg2, f215_arg3, f215_arg4)
@@ -1976,11 +1976,11 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		menuName = "SystemOverlay_Full",
 		frameWidget = "CoD.systemOverlay_SavePaintjobFrame",
 		title = Engine[@"hash_4F9F1239CFD921FE"](@"menu/save_paintjob"),
-		description = Engine[@"hash_4F9F1239CFD921FE"](@"hash_7AF9A268B817FFDC"),
+		description = Engine[@"hash_4F9F1239CFD921FE"]("menu/save_paintjob_desc"),
 		categoryType = CoD.OverlayUtility.OverlayTypes.Save,
 		inputText = function(f216_arg0, f216_arg1, f216_arg2, f216_arg3)
 			if f216_arg1 then
-				return Engine[@"getmodelvalue"](Engine[@"getmodel"](f216_arg1, "paintjobTextEntry"))
+				return Engine.GetModelValue(Engine.GetModel(f216_arg1, "paintjobTextEntry"))
 			else
 			end
 		end,
@@ -1992,12 +1992,12 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		end,
 		listDatasource = function(f219_arg0, f219_arg1, f219_arg2, f219_arg3)
 			DataSources.PaintjobSave_List = DataSourceHelpers.ListSetup("PaintjobSave_List", function(f220_arg0)
-				local f220_local0 = @"hash_430BBCC54CF2C2AE"
+				local f220_local0 = "menu/craft_rename"
 				if f219_arg1 then
-					f220_local0 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f219_arg1, "paintjobTextEntry"))
+					f220_local0 = Engine.GetModelValue(Engine.GetModel(f219_arg1, "paintjobTextEntry"))
 				end
-				local f220_local1 = CraftSlotsFullByStorageType(f220_arg0, Enum[@"storagefiletype"][@"storage_paintjobs"])
-				local f220_local2 = Engine[@"getmodelvalue"](Engine[@"getmodel"](f219_arg1, "weaponIndex")) ~= CoD.CraftUtility.Paintjobs.EMPTY_PAINTJOB_SLOT_WEAPON_INDEX
+				local f220_local1 = CraftSlotsFullByStorageType(f220_arg0, Enum.StorageFileType[@"storage_paintjobs"])
+				local f220_local2 = Engine.GetModelValue(Engine.GetModel(f219_arg1, "weaponIndex")) ~= CoD.CraftUtility.Paintjobs.EMPTY_PAINTJOB_SLOT_WEAPON_INDEX
 				local f220_local3 = {}
 				local f220_local4 = LocalizeToUpperString(@"menu/craft_save")
 				if f220_local2 then
@@ -2026,7 +2026,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 				if f220_local2 then
 					table.insert(f220_local3, {
 						models = {
-							displayText = LocalizeToUpperString(@"hash_2CDD21EE3622D1D1"),
+							displayText = LocalizeToUpperString("menu/emblem_save_as_new"),
 							disabled = f220_local1,
 						},
 						properties = {
@@ -2051,7 +2051,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 					table.insert(f220_local3, {
 						models = {
 							rename = false,
-							displayText = LocalizeToUpperString(@"hash_345A42BBA5637767"),
+							displayText = LocalizeToUpperString("menu/emblems_discard"),
 						},
 						properties = {
 							action = function(f223_arg0, f223_arg1, f223_arg2, f223_arg3, f223_arg4)
@@ -2077,8 +2077,8 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		menuName = "SystemOverlay_Full",
 		frameWidget = "CoD.systemOverlay_DailyChallengeWarningFrame",
 		categoryType = CoD.OverlayUtility.OverlayTypes.Notice,
-		title = @"hash_224093201635E25B",
-		description = @"hash_3FFE8BBAFA58EAA",
+		title = "menu/abandon_challenge_question",
+		description = "menu/abandon_challenge_desc",
 		listDatasource = function()
 			DataSources.DailyChallengeWarningOverlay = DataSourceHelpers.ListSetup("DailyChallengeWarningOverlay", function(f225_arg0)
 				return {
@@ -2094,7 +2094,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 					},
 					{
 						models = {
-							displayText = LocalizeToUpperString(@"hash_8BAF8C765361E1A"),
+							displayText = LocalizeToUpperString("menu/abandon_challenge"),
 						},
 						properties = {
 							action = function(f227_arg0, f227_arg1, f227_arg2, f227_arg3, f227_arg4)
@@ -2117,7 +2117,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		frameWidget = "CoD.systemOverlay_DailyChallengeFrame",
 		categoryType = CoD.OverlayUtility.OverlayTypes.Notice,
 		title = function(f230_arg0, f230_arg1)
-			CoD.perController[f230_arg0].dailyChallengeInfo = CoD.ChallengesUtility.GetDailyChallenge(f230_arg0, Enum[@"emodes"][@"mode_zombies"])
+			CoD.perController[f230_arg0].dailyChallengeInfo = CoD.ChallengesUtility.GetDailyChallenge(f230_arg0, Enum.eModes.mode_zombies)
 			if not CoD.perController[f230_arg0].dailyChallengeInfo then
 				return ""
 			else
@@ -2176,7 +2176,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 				if Engine[@"candailychallengebeabandoned"](f237_arg0) then
 					table.insert(f237_local0, {
 						models = {
-							displayText = LocalizeToUpperString(@"hash_8BAF8C765361E1A"),
+							displayText = LocalizeToUpperString("menu/abandon_challenge"),
 						},
 						properties = {
 							action = function(f239_arg0, f239_arg1, f239_arg2, f239_arg3, f239_arg4)
@@ -2193,8 +2193,8 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 	},
 	CraftNoChangesNotification = {
 		menuName = "SystemOverlay_FreeCursor",
-		title = @"hash_259DC0AE25F0626",
-		description = @"hash_170A4BEE310634C1",
+		title = "menu/emblem_no_changes_title",
+		description = "menu/emblem_no_changes_desc",
 		categoryType = CoD.OverlayUtility.OverlayTypes.GenericMessage,
 		[CoD.OverlayUtility.aCrossPromptFn] = function(f240_arg0)
 			return function(f241_arg0, f241_arg1)
@@ -2222,7 +2222,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 				return {
 					{
 						models = {
-							displayText = Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"menu/confirm")),
+							displayText = Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"](@"menu/confirm")),
 						},
 						properties = {
 							action = function(f245_arg0, f245_arg1, f245_arg2, f245_arg3, f245_arg4)
@@ -2237,7 +2237,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 					},
 					{
 						models = {
-							displayText = Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"menu/cancel")),
+							displayText = Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"](@"menu/cancel")),
 						},
 						properties = {
 							action = function(f246_arg0, f246_arg1, f246_arg2, f246_arg3, f246_arg4)
@@ -2292,8 +2292,8 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 	},
 	CampaignOfflineToOnlineWarning = {
 		menuName = "SystemOverlay_Compact",
-		title = @"hash_62FDFEFE692A50F6",
-		description = @"hash_5FE90E4CB2E73D0C",
+		title = "menu/warning_campaign_offline_to_online",
+		description = "menu/warning_campaign_offline_to_online2",
 		categoryType = CoD.OverlayUtility.OverlayTypes.Connection,
 		listDatasource = function()
 			DataSources.CampaignOfflineToOnlineWarning = DataSourceHelpers.ListSetup("CampaignOfflineToOnlineWarning", function(f256_arg0)
@@ -2315,8 +2315,8 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 	},
 	PublisherFilesChangedPopup = {
 		menuName = "SystemOverlay_FreeCursor",
-		title = @"hash_141A646FD4F798CE",
-		description = @"hash_4E62FD61197D6DF",
+		title = "menu/refetch_wad_confirmation_title",
+		description = "menu/refetch_wad_confirmation_message",
 		categoryType = CoD.OverlayUtility.OverlayTypes.Connection,
 		listDatasource = function()
 			DataSources.PublisherFilesChangedPopup_List = DataSourceHelpers.ListSetup("PublisherFilesChangedPopup_List", function(f259_arg0)
@@ -2327,9 +2327,9 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 						},
 						properties = {
 							action = function(f260_arg0, f260_arg1, f260_arg2, f260_arg3, f260_arg4)
-								Engine[@"setmodelvalue"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "pubstorageFilesChanged"), false)
-								Engine[@"setdvar"]("live_pubSemaphoreUserTriggerTime", Engine[@"milliseconds"]())
-								Engine[@"comerror"](Enum[@"errorcode"][@"error_softrestart_keepdw"], "")
+								Engine.SetModelValue(Engine.GetModel(Engine.GetGlobalModel(), "pubstorageFilesChanged"), false)
+								Engine.SetDvar("live_pubSemaphoreUserTriggerTime", Engine[@"milliseconds"]())
+								Engine[@"comerror"](Enum.errorcode[@"error_softrestart_keepdw"], "")
 							end,
 						},
 					},
@@ -2339,16 +2339,16 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		end,
 		[CoD.OverlayUtility.aCrossPromptFn] = function(f261_arg0)
 			return function()
-				Engine[@"setmodelvalue"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "pubstorageFilesChanged"), false)
-				Engine[@"comerror"](Enum[@"errorcode"][@"error_softrestart_keepdw"], "")
+				Engine.SetModelValue(Engine.GetModel(Engine.GetGlobalModel(), "pubstorageFilesChanged"), false)
+				Engine[@"comerror"](Enum.errorcode[@"error_softrestart_keepdw"], "")
 			end
 		end,
-		[CoD.OverlayUtility.aCrossPromptText] = @"hash_5349737B0BDAA763",
+		[CoD.OverlayUtility.aCrossPromptText] = "menu/confirm_caps",
 	},
 	RegistrationSuccess = {
 		menuName = "SystemOverlay_Compact",
-		title = Engine[@"hash_4F9F1239CFD921FE"](@"hash_4EF2EC2C66BFD57F"),
-		description = Engine[@"hash_4F9F1239CFD921FE"](@"hash_426B299D9492F452"),
+		title = Engine[@"hash_4F9F1239CFD921FE"]("menu/registration_success_title"),
+		description = Engine[@"hash_4F9F1239CFD921FE"]("menu/registration_success"),
 		categoryType = CoD.OverlayUtility.OverlayTypes.Unlock,
 		listDatasource = function()
 			DataSources.RegistrationSuccess_List = DataSourceHelpers.ListSetup("RegistrationSuccess_List", function(f264_arg0)
@@ -2377,8 +2377,8 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 	},
 	OptInSuccess = {
 		menuName = "SystemOverlay_Compact",
-		title = Engine[@"hash_4F9F1239CFD921FE"](@"hash_4EF2EC2C66BFD57F"),
-		description = Engine[@"hash_4F9F1239CFD921FE"](@"hash_56745166A236B37F"),
+		title = Engine[@"hash_4F9F1239CFD921FE"]("menu/registration_success_title"),
+		description = Engine[@"hash_4F9F1239CFD921FE"]("menu/registration_optin_success"),
 		categoryType = CoD.OverlayUtility.OverlayTypes.Unlock,
 		listDatasource = function()
 			DataSources.OptInSuccess_List = DataSourceHelpers.ListSetup("OptInSuccess_List", function(f269_arg0)
@@ -2407,15 +2407,15 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 	},
 	ConfirmPCGraphicsChange = {
 		menuName = "SystemOverlay_Compact",
-		title = Engine[@"hash_4F9F1239CFD921FE"](0xADB7C8A56882A8),
-		description = @"hash_0",
+		title = Engine[@"hash_4F9F1239CFD921FE"]("platform/confirm_graphics_change"),
+		description = 0x0,
 		categoryType = CoD.OverlayUtility.OverlayTypes.Settings,
 		listDatasource = function()
 			DataSources.ConfirmPCGraphicsChange_List = DataSourceHelpers.ListSetup("ConfirmPCGraphicsChange_List", function(f274_arg0)
 				return {
 					{
 						models = {
-							displayText = Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"menu/yes")),
+							displayText = Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"](@"menu/yes")),
 						},
 						properties = {
 							action = function(f275_arg0, f275_arg1, f275_arg2, f275_arg3, f275_arg4)
@@ -2427,7 +2427,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 					},
 					{
 						models = {
-							displayText = Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"menu/no")),
+							displayText = Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"](@"menu/no")),
 						},
 						properties = {
 							action = function(f276_arg0, f276_arg1, f276_arg2, f276_arg3, f276_arg4)
@@ -2456,7 +2456,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 						},
 						properties = {
 							action = function(f279_arg0, f279_arg1, f279_arg2, f279_arg3, f279_arg4)
-								local f279_local0 = Engine[@"getglobalmodel"]()
+								local f279_local0 = Engine.GetGlobalModel()
 								f279_local0 = f279_local0.Arena:create("triggerEndOfEvent")
 								f279_local0:set(false)
 								LobbyGoBack(f279_arg4, f279_arg2)
@@ -2469,13 +2469,13 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		end,
 		[CoD.OverlayUtility.aCrossPromptFn] = function(f280_arg0)
 			return function(f281_arg0, f281_arg1)
-				local f281_local0 = Engine[@"getglobalmodel"]()
+				local f281_local0 = Engine.GetGlobalModel()
 				f281_local0 = f281_local0.Arena:create("triggerEndOfEvent")
 				f281_local0:set(false)
 				LobbyGoBack(f281_arg0, f281_arg1)
 			end
 		end,
-		[CoD.OverlayUtility.aCrossPromptText] = @"hash_5349737B0BDAA763",
+		[CoD.OverlayUtility.aCrossPromptText] = "menu/confirm_caps",
 	},
 	GenericPopup = {
 		menuName = function(f282_arg0, f282_arg1, f282_arg2, f282_arg3, f282_arg4, f282_arg5, f282_arg6)
@@ -2586,7 +2586,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 	},
 	LobbyLocalClientWarning = {
 		menuName = CoD.OverlayUtility.AutoSizeMenuFromDescription("LobbyLocalClientWarning"),
-		title = @"hash_7641F00ACB6B36A3",
+		title = "menu/disband_party_caps",
 		description = @"hash_6C0E964190DE7A7F",
 		image = "",
 		categoryType = CoD.OverlayUtility.OverlayTypes.Alert,
@@ -2601,7 +2601,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 							action = function(f300_arg0, f300_arg1, f300_arg2, f300_arg3, f300_arg4)
 								GoBack(f300_arg4, f300_arg2)
 								f298_arg0.disbandParty = true
-								for f300_local0 = 1, Engine[@"getmaxcontrollercount"]() - 1, 1 do
+								for f300_local0 = 1, Engine.GetMaxControllerCount() - 1, 1 do
 									LobbyRemoveLocalClientFromLobby(f300_arg0, f300_local0)
 								end
 								if f298_arg0.navToMenu ~= nil then
@@ -2637,13 +2637,13 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		openMethod = CoD.OverlayUtility.OpenMethods.Overlay,
 		frameWidget = "CoD.cpReachedMaxLevelOverlayFrame",
 		maxRankName = function()
-			return Engine[@"localize"](Engine[@"getrankname"](CoD.RankUtility.GetRankCap()))
+			return Engine.Localize(Engine.GetRankName(CoD.RankUtility.GetRankCap()))
 		end,
 		title = function()
 			return CoD.OverlayUtility.Overlays.CPMaxLevelNotification.maxRankName()
 		end,
 		description = function()
-			return Engine[@"hash_4F9F1239CFD921FE"](@"hash_6419A32DAB47E460", CoD.OverlayUtility.Overlays.CPMaxLevelNotification.maxRankName())
+			return Engine[@"hash_4F9F1239CFD921FE"]("cpui/max_rank_message", CoD.OverlayUtility.Overlays.CPMaxLevelNotification.maxRankName())
 		end,
 		categoryType = CoD.OverlayUtility.OverlayTypes.Unlock,
 	},
@@ -2693,7 +2693,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 				return {
 					{
 						models = {
-							displayText = Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"menu/confirm")),
+							displayText = Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"](@"menu/confirm")),
 						},
 						properties = {
 							action = function(f310_arg0, f310_arg1, f310_arg2, f310_arg3, f310_arg4)
@@ -2704,7 +2704,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 					},
 					{
 						models = {
-							displayText = Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"menu/cancel")),
+							displayText = Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"](@"menu/cancel")),
 						},
 						properties = {
 							action = function(f311_arg0, f311_arg1, f311_arg2, f311_arg3, f311_arg4)
@@ -2752,18 +2752,18 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 			local f320_local1 = f320_arg2.gamertag
 			local f320_local2 = "uie_t7_icon_menu_options_dislike"
 			DataSources.ReportOptions = DataSourceHelpers.ListSetup("ReportOptions", function(f321_arg0)
-				local f321_local0 = Engine[@"isfriendfromxuid"](f321_arg0, f320_local0)
+				local f321_local0 = Engine.IsFriendFromXUID(f321_arg0, f320_local0)
 				local f321_local1 = {}
 				if not f321_local0 then
 					table.insert(f321_local1, {
 						models = {
-							displayText = @"hash_36BD8567C603F5A3",
+							displayText = "menu/report_user_offensive_caps",
 						},
 						properties = {
 							action = function(f322_arg0, f322_arg1, f322_arg2, f322_arg3, f322_arg4)
 								CoD.MetricsUtility.ReportUser(f322_arg2, f320_local0, "offensive", 1, true)
 								GoBack(f322_arg0, f322_arg2)
-								CoD.OverlayUtility.ShowToast("Invite", Engine[@"localize"](@"hash_E64954DBD80A7CF"), f320_local1, f320_local2)
+								CoD.OverlayUtility.ShowToast("Invite", Engine.Localize("menu/reportplayer_offensive_language_reported"), f320_local1, f320_local2)
 							end,
 							actionParam = f320_local0,
 						},
@@ -2771,26 +2771,26 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 				end
 				table.insert(f321_local1, {
 					models = {
-						displayText = @"hash_15919C649561B63C",
+						displayText = "menu/report_user_offensive_emblem_caps",
 					},
 					properties = {
 						action = function(f323_arg0, f323_arg1, f323_arg2, f323_arg3, f323_arg4)
 							CoD.MetricsUtility.ReportUser(f323_arg2, f320_local0, "offensive_emblem", 1, true)
 							GoBack(f323_arg0, f323_arg2)
-							CoD.OverlayUtility.ShowToast("Invite", Engine[@"localize"](@"hash_447FE6FBD71AF9CF"), f320_local1, f320_local2)
+							CoD.OverlayUtility.ShowToast("Invite", Engine.Localize("menu/reportplayer_offensive_emblem_reported"), f320_local1, f320_local2)
 						end,
 						actionParam = f320_local0,
 					},
 				})
 				table.insert(f321_local1, {
 					models = {
-						displayText = @"hash_3CE324B8FB722A9B",
+						displayText = "menu/report_user_offensive_paintjob_caps",
 					},
 					properties = {
 						action = function(f324_arg0, f324_arg1, f324_arg2, f324_arg3, f324_arg4)
 							CoD.MetricsUtility.ReportUser(f324_arg2, f320_local0, "offensive_paintjob", 1, true)
 							GoBack(f324_arg0, f324_arg2)
-							CoD.OverlayUtility.ShowToast("Invite", Engine[@"localize"](0x2FDE62E23ABC28), f320_local1, f320_local2)
+							CoD.OverlayUtility.ShowToast("Invite", Engine.Localize("menu/reportplayer_offensive_paintjob_reported"), f320_local1, f320_local2)
 						end,
 						actionParam = f320_local0,
 					},
@@ -2798,13 +2798,13 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 				if not f321_local0 then
 					table.insert(f321_local1, {
 						models = {
-							displayText = @"hash_72519B57188045C6",
+							displayText = "menu/report_user_cheater_caps",
 						},
 						properties = {
 							action = function(f325_arg0, f325_arg1, f325_arg2, f325_arg3, f325_arg4)
 								CoD.MetricsUtility.ReportUser(f325_arg2, f320_local0, "cheater", 1, true)
 								GoBack(f325_arg0, f325_arg2)
-								CoD.OverlayUtility.ShowToast("Invite", Engine[@"localize"](@"hash_533A182AC50FF0D2"), f320_local1, f320_local2)
+								CoD.OverlayUtility.ShowToast("Invite", Engine.Localize("menu/reportplayer_cheating_reported"), f320_local1, f320_local2)
 							end,
 							actionParam = f320_local0,
 						},
@@ -2817,7 +2817,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 							action = function(f326_arg0, f326_arg1, f326_arg2, f326_arg3, f326_arg4)
 								CoD.MetricsUtility.ReportUser(f326_arg2, f320_local0, "greifer", 1, true)
 								GoBack(f326_arg0, f326_arg2)
-								CoD.OverlayUtility.ShowToast("Invite", Engine[@"localize"](@"hash_31E6CE0A4E16A923"), f320_local1, f320_local2)
+								CoD.OverlayUtility.ShowToast("Invite", Engine.Localize("menu/reportplayer_booster_reported"), f320_local1, f320_local2)
 							end,
 							actionParam = f320_local0,
 						},
@@ -2826,7 +2826,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 				if CoD.isPC then
 					table.insert(f321_local1, {
 						models = {
-							displayText = @"hash_26DA4540B4705513",
+							displayText = "menu/cancel_caps",
 						},
 						properties = {
 							action = function(f327_arg0, f327_arg1, f327_arg2, f327_arg3, f327_arg4)
@@ -2879,7 +2879,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 			end, true, nil)
 			return "SeasonPassUpsellPopup"
 		end,
-		[CoD.OverlayUtility.aCrossPromptText] = @"hash_3AC3B80C833B60E1",
+		[CoD.OverlayUtility.aCrossPromptText] = "menu/select_caps",
 	},
 	DownloadDLC = {
 		menuName = "SystemOverlay_Full",
@@ -2918,7 +2918,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 			end, true, nil)
 			return "DownloadDLCPopup"
 		end,
-		[CoD.OverlayUtility.aCrossPromptText] = @"hash_3AC3B80C833B60E1",
+		[CoD.OverlayUtility.aCrossPromptText] = "menu/select_caps",
 	},
 	TrialVersionUpsell = {
 		menuName = "SystemOverlay_Full",
@@ -2926,7 +2926,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		[CoD.OverlayUtility.GoBackPropertyName] = CoD.OverlayUtility.DefaultGoBack,
 		title = Engine[@"hash_4F9F1239CFD921FE"](@"menu/join_result_full_version_required_title"),
 		description = function()
-			return Engine[@"getmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.trialOverlayDescription"))
+			return Engine.GetModelValue(Engine.CreateModel(Engine.GetGlobalModel(), "lobbyRoot.trialOverlayDescription"))
 		end,
 		listDatasource = function()
 			DataSources.TrialUpsellPopup = DataSourceHelpers.ListSetup("TrialUpsellPopup", function(f341_arg0)
@@ -2943,7 +2943,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 					},
 					{
 						models = {
-							displayText = @"hash_26DA4540B4705513",
+							displayText = "menu/cancel_caps",
 						},
 						properties = {
 							action = function(f343_arg0, f343_arg1, f343_arg2, f343_arg3, f343_arg4)
@@ -2955,7 +2955,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 			end, true, nil)
 			return "TrialUpsellPopup"
 		end,
-		[CoD.OverlayUtility.aCrossPromptText] = @"hash_3AC3B80C833B60E1",
+		[CoD.OverlayUtility.aCrossPromptText] = "menu/select_caps",
 	},
 	TrialNotAvailable = {
 		menuName = "SystemOverlay_Full",
@@ -2978,7 +2978,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 					},
 					{
 						models = {
-							displayText = @"hash_26DA4540B4705513",
+							displayText = "menu/cancel_caps",
 						},
 						properties = {
 							action = function(f347_arg0, f347_arg1, f347_arg2, f347_arg3, f347_arg4)
@@ -2990,23 +2990,23 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 			end, true, nil)
 			return "TrialNotAvailablePopup"
 		end,
-		[CoD.OverlayUtility.aCrossPromptText] = @"hash_3AC3B80C833B60E1",
+		[CoD.OverlayUtility.aCrossPromptText] = "menu/select_caps",
 	},
 	LobbyLeaveTrial = {
 		menuName = "SystemOverlay_Full",
 		categoryType = CoD.OverlayUtility.OverlayTypes.Quit,
 		title = Engine[@"hash_4F9F1239CFD921FE"](@"hash_3C31F6523A462DB6"),
 		description = function()
-			return Engine[@"getmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.trialOverlayDescription"))
+			return Engine.GetModelValue(Engine.CreateModel(Engine.GetGlobalModel(), "lobbyRoot.trialOverlayDescription"))
 		end,
 		[CoD.OverlayUtility.GoBackPropertyName] = CoD.OverlayUtility.DefaultGoBack,
-		[CoD.OverlayUtility.aCrossPromptText] = @"hash_3AC3B80C833B60E1",
+		[CoD.OverlayUtility.aCrossPromptText] = "menu/select_caps",
 		listDatasource = function()
 			DataSources.LobbyLeaveTrial = DataSourceHelpers.ListSetup("LobbyLeaveTrial", function(f350_arg0)
 				return {
 					{
 						models = {
-							displayText = @"hash_7C57347FF991141",
+							displayText = "menu/leave_lobby_leave_alone",
 						},
 						properties = {
 							action = function(f351_arg0, f351_arg1, f351_arg2, f351_arg3, f351_arg4)
@@ -3028,7 +3028,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 					},
 					{
 						models = {
-							displayText = @"hash_26DA4540B4705513",
+							displayText = "menu/cancel_caps",
 						},
 						properties = {
 							action = function(f353_arg0, f353_arg1, f353_arg2, f353_arg3, f353_arg4)
@@ -3044,18 +3044,18 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 	LobbyLeaveInvalidPlayers = {
 		menuName = "SystemOverlay_Full",
 		categoryType = CoD.OverlayUtility.OverlayTypes.Quit,
-		title = Engine[@"hash_4F9F1239CFD921FE"](@"hash_5B69F71ABEAEC777"),
+		title = Engine[@"hash_4F9F1239CFD921FE"]("menu/leave_lobby_leave_party_title"),
 		description = function()
-			return Engine[@"getmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.trialOverlayDescription"))
+			return Engine.GetModelValue(Engine.CreateModel(Engine.GetGlobalModel(), "lobbyRoot.trialOverlayDescription"))
 		end,
 		[CoD.OverlayUtility.GoBackPropertyName] = CoD.OverlayUtility.DefaultGoBack,
-		[CoD.OverlayUtility.aCrossPromptText] = @"hash_3AC3B80C833B60E1",
+		[CoD.OverlayUtility.aCrossPromptText] = "menu/select_caps",
 		listDatasource = function(f355_arg0)
 			DataSources.LobbyLeaveInvalidPlayers = DataSourceHelpers.ListSetup("LobbyLeaveInvalidPlayers", function(f356_arg0)
 				return {
 					{
 						models = {
-							displayText = @"hash_7C57347FF991141",
+							displayText = "menu/leave_lobby_leave_alone",
 						},
 						properties = {
 							action = function(f357_arg0, f357_arg1, f357_arg2, f357_arg3, f357_arg4)
@@ -3085,7 +3085,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 					},
 					{
 						models = {
-							displayText = @"hash_26DA4540B4705513",
+							displayText = "menu/cancel_caps",
 						},
 						properties = {
 							action = function(f359_arg0, f359_arg1, f359_arg2, f359_arg3, f359_arg4)
@@ -3103,7 +3103,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 		categoryType = CoD.OverlayUtility.OverlayTypes.Quit,
 		title = Engine[@"hash_4F9F1239CFD921FE"](@"hash_3C31F6523A462DB6"),
 		description = "",
-		[CoD.OverlayUtility.aCrossPromptText] = @"hash_F420F9DB5188F96",
+		[CoD.OverlayUtility.aCrossPromptText] = "menu/leave_lobby_leave_lobby",
 		[CoD.OverlayUtility.aCrossPromptFn] = function(f360_arg0)
 			return function(f361_arg0, f361_arg1)
 				GoBack(f361_arg0, f361_arg1)
@@ -3115,7 +3115,7 @@ CoD.OverlayUtility.Overlays = LuaUtils.OverrideTable(CoD.OverlayUtility.Overlays
 				GoBack(f363_arg0, f363_arg1)
 			end
 		end,
-		[CoD.OverlayUtility.bCirclePromptText] = @"hash_26DA4540B4705513",
+		[CoD.OverlayUtility.bCirclePromptText] = "menu/cancel_caps",
 	},
 })
 CoD.OverlayUtility.AddSystemOverlay = function(f364_arg0, f364_arg1)
@@ -3128,9 +3128,9 @@ CoD.OverlayUtility.OverlayCloseMethod = function(f365_arg0, f365_arg1)
 	return function()
 		ClearMenuSavedState(f365_arg0)
 		if f365_arg0.overlayModelName then
-			local f366_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f365_arg1), f365_arg0.overlayModelName)
+			local f366_local0 = Engine.GetModel(Engine.GetModelForController(f365_arg1), f365_arg0.overlayModelName)
 			if f366_local0 then
-				Engine[@"unsubscribeandfreemodel"](f366_local0)
+				Engine.UnsubscribeAndFreeModel(f366_local0)
 			end
 		end
 		if CoD.isPC then
@@ -3141,7 +3141,7 @@ end
 CoD.OverlayUtility.RefreshOverlayModels = function(f367_arg0, f367_arg1, f367_arg2)
 	for f367_local4, f367_local5 in ipairs(CoD.OverlayUtility.OverlayModelFields) do
 		local f367_local3 = nil
-		local f367_local6 = Engine[@"createmodel"](f367_arg0, f367_local5)
+		local f367_local6 = Engine.CreateModel(f367_arg0, f367_local5)
 		f367_local3 = CoD.OverlayUtility.callFnOrGetValue(f367_arg1[f367_local5], f367_arg2)
 		if not f367_local3 and CoD.OverlayUtility.DefaultModelFields[f367_local5] then
 			f367_local3 = CoD.OverlayUtility.callFnOrGetValue(CoD.OverlayUtility.DefaultModelFields[f367_local5], {
@@ -3150,7 +3150,7 @@ CoD.OverlayUtility.RefreshOverlayModels = function(f367_arg0, f367_arg1, f367_ar
 			})
 		end
 		if f367_local3 ~= nil then
-			Engine[@"setmodelvalue"](f367_local6, f367_local3)
+			Engine.SetModelValue(f367_local6, f367_local3)
 		end
 	end
 end
@@ -3204,22 +3204,22 @@ CoD.OverlayUtility.OpenPublisherFilesChangedOverlay = function(f372_arg0, f372_a
 end
 CoD.OverlayUtility.CreateConnectionErrorOverlay = function(f374_arg0, f374_arg1, f374_arg2)
 	local f374_local0 = ""
-	local f374_local1 = @"hash_431E422BC40B2429"
+	local f374_local1 = "menu/notice_caps"
 	if f374_arg2 == false then
 		f374_local0 = @"xboxlive/netconnection"
 	elseif Dvar[0xBA976FA45F7D3C]:get() then
 		f374_local0 = @"hash_314C0DA3363E75CB"
 	else
-		local f374_local2, f374_local3 = Engine[@"getsysteminfo"](f374_arg0, CoD.SYSINFO_CONNECTIVITY_INFO)
-		f374_local0 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_6632F97C36A01BD6") .. "\n\n" .. Engine[@"hash_4F9F1239CFD921FE"](@"menu/error_code", f374_local2 .. "\n" .. Engine[@"hash_6979890CEFD94F11"](f374_arg0))
+		local f374_local2, f374_local3 = Engine.GetSystemInfo(f374_arg0, CoD.SYSINFO_CONNECTIVITY_INFO)
+		f374_local0 = Engine[@"hash_4F9F1239CFD921FE"]("platform/demonware_disconnect") .. "\n\n" .. Engine[@"hash_4F9F1239CFD921FE"](@"menu/error_code", f374_local2 .. "\n" .. Engine[@"hash_6979890CEFD94F11"](f374_arg0))
 		if f374_arg1 == "Menu.Main" then
-			f374_local1 = @"hash_5D8301725C955017"
+			f374_local1 = "menu/connectivity_notice_caps"
 		end
 		if false == Engine[@"isshipbuild"]() then
 			f374_local0 = f374_local0 .. "\n\n\tDEBUG INFO:\n" .. f374_local3
 		end
 	end
-	if not Engine[@"isdedicatedserver"]() then
+	if not Engine.isdedicatedserver() then
 		local f374_local2, f374_local3, f374_local4, f374_local5 = Engine[0x4DC3A644148CFC](f374_arg0)
 		if f374_local5 then
 			local f374_local6 = Engine[@"numbertouint64"](1)
@@ -3238,7 +3238,7 @@ CoD.OverlayUtility.CreateConnectionErrorOverlay = function(f374_arg0, f374_arg1,
 		end
 	end
 	CoD.LobbyUtility.FailedDWConnection = true
-	Engine[@"setmodelvalue"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.failedDemonwareConnection"), true)
+	Engine.SetModelValue(Engine.GetModel(Engine.GetGlobalModel(), "lobbyRoot.failedDemonwareConnection"), true)
 	LuaUtils.UI_ShowErrorMessageDialog(f374_arg0, f374_local0, f374_local1)
 end
 CoD.OverlayUtility.CreateOverlay = function(f375_arg0, f375_arg1, f375_arg2, ...)
@@ -3250,7 +3250,7 @@ CoD.OverlayUtility.CreateOverlay = function(f375_arg0, f375_arg1, f375_arg2, ...
 	local f375_local2 = function(f376_arg0, f376_arg1)
 		for f376_local4, f376_local5 in ipairs(CoD.OverlayUtility.OverlayModelFields) do
 			local f376_local3 = nil
-			local f376_local6 = Engine[@"createmodel"](f376_arg0, f376_local5)
+			local f376_local6 = Engine.CreateModel(f376_arg0, f376_local5)
 			if type(f376_arg1[f376_local5]) == "function" then
 				f376_local3 = f376_arg1[f376_local5](unpack(f375_local1))
 			else
@@ -3263,7 +3263,7 @@ CoD.OverlayUtility.CreateOverlay = function(f375_arg0, f375_arg1, f375_arg2, ...
 				})
 			end
 			if f376_local3 ~= nil then
-				Engine[@"setmodelvalue"](f376_local6, f376_local3)
+				Engine.SetModelValue(f376_local6, f376_local3)
 			end
 		end
 	end
@@ -3296,7 +3296,7 @@ CoD.OverlayUtility.CreateOverlay = function(f375_arg0, f375_arg1, f375_arg2, ...
 				end
 				if not f375_local0:getModel() then
 					f375_local0.overlayModelName = "Overlay." .. f375_arg2
-					local f375_local5 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f375_arg0), f375_local0.overlayModelName)
+					local f375_local5 = Engine.CreateModel(Engine.GetModelForController(f375_arg0), f375_local0.overlayModelName)
 					CoD.OverlayUtility.RefreshOverlayModels(f375_local5, f375_local3, f375_local1)
 					f375_local0:setModel(f375_local5, f375_arg0)
 				end
@@ -3321,9 +3321,9 @@ DataSourceHelpers.PerControllerDataSourceSetup("FrontendToast", "FrontendToast",
 	f377_local0 = f377_arg0:create("description")
 	f377_local0:set("")
 	f377_local0 = f377_arg0:create("contentIcon")
-	f377_local0:set(@"blacktransparent")
+	f377_local0:set("blacktransparent")
 	f377_local0 = f377_arg0:create("functionIcon")
-	f377_local0:set(@"blacktransparent")
+	f377_local0:set("blacktransparent")
 	f377_local0 = f377_arg0:create("emblemDecal")
 	f377_local0:set(0)
 	f377_local0 = f377_arg0:create("category")
@@ -3337,12 +3337,12 @@ CoD.OverlayUtility.ShowToast = function(f378_arg0, f378_arg1, f378_arg2, f378_ar
 		end
 		return f379_arg0
 	end
-	local f378_local1 = DataSources.FrontendToast.getModel(Engine[@"getprimarycontroller"]())
+	local f378_local1 = DataSources.FrontendToast.getModel(Engine.GetPrimaryController())
 	f378_local1.state:set(f378_arg0 or "DefaultState")
 	f378_local1.kicker:set(f378_arg1 or "")
 	f378_local1.description:set(f378_arg2 or "")
-	f378_local1.contentIcon:set(f378_local0(f378_arg3) or @"blacktransparent")
-	f378_local1.functionIcon:set(f378_local0(f378_arg4) or @"blacktransparent")
+	f378_local1.contentIcon:set(f378_local0(f378_arg3) or "blacktransparent")
+	f378_local1.functionIcon:set(f378_local0(f378_arg4) or "blacktransparent")
 	f378_local1.emblemDecal:set(f378_arg5 or 0)
 	f378_local1.category:set(f378_arg7 or "")
 	f378_local1.notify:set(true)
@@ -3384,14 +3384,14 @@ CoD.OverlayUtility.SystemOverlayPreLoad = function(f388_arg0, f388_arg1)
 end
 CoD.OverlayUtility.SystemOverlayPostLoad = function(f389_arg0, f389_arg1)
 	f389_arg0.disableBlur = true
-	local f389_local0 = Engine[@"getmodelvalue"](Engine[@"getmodel"](DataSources.MessageDialog.getModel(f389_arg1), "message"))
+	local f389_local0 = Engine.GetModelValue(Engine.GetModel(DataSources.MessageDialog.getModel(f389_arg1), "message"))
 	if f389_local0 ~= nil then
 		if type(f389_local0) == "xhash" then
 			f389_local0 = Engine[@"hash_4F9F1239CFD921FE"](f389_local0)
 		end
-		Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobby"], "MessageDialogBox: Opened with '" .. f389_local0 .. "'.\n")
+		Engine.PrintInfo(Enum[@"consolelabel_e"][@"con_label_lobby"], "MessageDialogBox: Opened with '" .. f389_local0 .. "'.\n")
 	else
-		Engine[@"printinfo"](Enum[@"consolelabel_e"][@"con_label_lobby"], "MessageDialogBox: Opened with no message.\n")
+		Engine.PrintInfo(Enum[@"consolelabel_e"][@"con_label_lobby"], "MessageDialogBox: Opened with no message.\n")
 	end
 end
 CoD.OverlayUtility.AnimateInFromOffset = function(f390_arg0, f390_arg1)

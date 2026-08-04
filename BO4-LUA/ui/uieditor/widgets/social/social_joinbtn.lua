@@ -1,4 +1,4 @@
-require("x64:12d199c0b6f6540")
+require("ui/uieditor/widgets/social/joinbuttonprompt")
 CoD.Social_JoinBtn = InheritFrom(LUI.UIElement)
 CoD.Social_JoinBtn.__defaultWidth = 300
 CoD.Social_JoinBtn.__defaultHeight = 36
@@ -22,11 +22,11 @@ CoD.Social_JoinBtn.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f
 	self.JoinButtonPrompt = JoinButtonPrompt
 	local joinLabel = LUI.UIText.new(0, 0, 52, 124, 0.5, 0.5, -7, 11)
 	joinLabel:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
-	joinLabel:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_732C830F2EA4EA2D"))
+	joinLabel:setText(Engine[@"hash_4F9F1239CFD921FE"]("menu/join_server_caps"))
 	joinLabel:setTTF("dinnext_regular")
 	joinLabel:setLetterSpacing(2)
-	joinLabel:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	joinLabel:setAlignment(Enum[@"luialignment"][@"hash_E821F0ECFF8D1C7"])
+	joinLabel:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	joinLabel:setAlignment(Enum.LUIAlignment[@"hash_E821F0ECFF8D1C7"])
 	self:addElement(joinLabel)
 	self.joinLabel = joinLabel
 	self:mergeStateConditions({

@@ -1,5 +1,5 @@
 CoD.PCBattlenetUtility = {}
-require("x64:f3c5259f470592d")
+require("ui/utility/overlayutility")
 CoD.PCBattlenetUtility.BattleNetStatusColor = {
 	[Enum[@"hash_28811A60F2FF3ADA"][@"hash_5D7B6D45F00CF380"]] = ColorSet.Disabled,
 	[Enum[@"hash_28811A60F2FF3ADA"][@"hash_AF6B7B618097742"]] = ColorSet.SelectedGreen,
@@ -51,7 +51,7 @@ DataSources.SocialBNetStatus = DataSourceHelpers.ListSetup("PC.SocialBNetStatus"
 end, true)
 DataSources.SocialPlayerBNetStatusSelection = {
 	getModel = function(f2_arg0)
-		local f2_local0 = Engine[@"getglobalmodel"]()
+		local f2_local0 = Engine.GetGlobalModel()
 		local f2_local1 = f2_local0.SocialPlayerBNetStatusSelection
 		if not f2_local1 then
 			f2_local1 = f2_local0:create("SocialPlayerBNetStatusSelection")
@@ -96,7 +96,7 @@ CoD.PCBattlenetUtility.PrepareSocialStatusDropdownProperties = function(f4_arg0,
 			f4_arg0.immediateUpdateValue = nil
 			return f6_local0
 		else
-			return Engine[@"getbattlenetpresence"](Engine[@"getxuid64"](f4_arg1))
+			return Engine[@"getbattlenetpresence"](Engine.GetXUID64(f4_arg1))
 		end
 	end
 	local f4_local1 = DataSources.SocialPlayerBNetStatusSelection:getModel()
@@ -118,7 +118,7 @@ CoD.PCBattlenetUtility.PrepareSocialStatusDropdownProperties = function(f4_arg0,
 	f4_local4 = DataSources.BattlenetGlobal.getModel(f4_arg1)
 	f4_local2(f4_local3, f4_local4.AFK, function(f8_arg0)
 		local f8_local0 = DataSources.BattlenetGlobal.getModel(f4_arg1)
-		f8_local0.PresenceStatus:set(f8_arg0:get() and Enum[@"hash_28811A60F2FF3ADA"][0xBDC39BBB7981F3] or Engine[@"getbattlenetpresence"](Engine[@"getxuid64"](f4_arg1)))
+		f8_local0.PresenceStatus:set(f8_arg0:get() and Enum[@"hash_28811A60F2FF3ADA"][0xBDC39BBB7981F3] or Engine[@"getbattlenetpresence"](Engine.GetXUID64(f4_arg1)))
 	end, false)
 end
 CoD.PCBattlenetUtility.BattleNetStatusToColor = function(f9_arg0)
@@ -180,7 +180,7 @@ local f0_local2 = function(f16_arg0, f16_arg1, f16_arg2)
 		f16_arg1.recentplayersUpdateRegistered = true
 		local f16_local0 = f16_arg1
 		local f16_local1 = f16_arg1.subscribeToModel
-		local f16_local2 = Engine[@"getglobalmodel"]()
+		local f16_local2 = Engine.GetGlobalModel()
 		f16_local1(f16_local0, f16_local2["pcache.presenceFetched"], function(f17_arg0)
 			if not f16_arg1.recentplayerUpdateTimer then
 				f16_arg1.recentplayerUpdateTimer = LUI.UITimer.newElementTimer(250, true, function(f18_arg0)
@@ -201,7 +201,7 @@ local f0_local4 = function(f20_arg0, f20_arg1, f20_arg2)
 	if not f20_arg1._partySizeSubscription then
 		local f20_local0 = f20_arg1
 		local f20_local1 = f20_arg1.subscribeToModel
-		local f20_local2 = Engine[@"getglobalmodel"]()
+		local f20_local2 = Engine.GetGlobalModel()
 		f20_arg1._partySizeSubscription = f20_local1(f20_local0, f20_local2.lobbyRoot.privateClient.count, function()
 			f20_arg1:clearLayout()
 			f20_arg1:updateDataSource()
@@ -231,20 +231,20 @@ local f0_local5 = function(f22_arg0, f22_arg1, f22_arg2)
 end
 local f0_local6 = function(f25_arg0, f25_arg1)
 	local f25_local0 = Engine[@"getbattlenetpresence"](f25_arg1)
-	local f25_local1 = Engine[@"getplayerinfo"](f25_arg0, f25_arg1)
+	local f25_local1 = Engine.GetPlayerInfo(f25_arg0, f25_arg1)
 	if f25_local1 and f25_local1.info then
 		if not f25_local1.info.joinable then
-			local f25_local2 = Enum[@"lobbyjoinable"][@"lobby_joinable_no"]
+			local f25_local2 = Enum.LobbyJoinable[@"lobby_joinable_no"]
 		end
 		if f25_local1.info.playlist and CoD.SocialUtility.IsMissingDLCForPlaylist(f25_local1.info.playlist) then
-			local f25_local2 = Enum[@"lobbyjoinable"][@"lobby_joinable_no_you_need_dlc"]
+			local f25_local2 = Enum.LobbyJoinable[@"lobby_joinable_no_you_need_dlc"]
 		end
 		if f25_local1.info.mapid and not CoD.MapUtility.LobbyHasMap(f25_local1.info.mapid) then
-			local f25_local2 = Enum[@"lobbyjoinable"][@"lobby_joinable_no_you_need_dlc"]
+			local f25_local2 = Enum.LobbyJoinable[@"lobby_joinable_no_you_need_dlc"]
 		end
 		return f25_local0, f25_local2
 	else
-		return f25_local0, Enum[@"lobbyjoinable"][@"lobby_joinable_no"]
+		return f25_local0, Enum.LobbyJoinable[@"lobby_joinable_no"]
 	end
 end
 CoD.PCBattlenetUtility.GetPartyInviteStatus = function(f26_arg0, f26_arg1)
@@ -283,25 +283,25 @@ local f0_local12 = function(f32_arg0, f32_arg1, f32_arg2, f32_arg3, f32_arg4)
 		return true
 	elseif f32_arg1 == CoD.PCBattlenetUtility.Filters.OFFLINE_PLAYERS and f32_arg3 ~= Enum[@"hash_28811A60F2FF3ADA"][@"hash_5D7B6D45F00CF380"] then
 		return true
-	elseif (f32_arg1 == CoD.PCBattlenetUtility.Filters.AVAILABLE_PLAYERS or f32_arg1 == CoD.PCBattlenetUtility.Filters.AVAILABLE_NOT_IN_PARTY_PLAYERS) and (not (f32_arg3 ~= Enum[@"hash_28811A60F2FF3ADA"][@"hash_5D7B6D45F00CF380"] and Engine[@"isplayerintitle"](f32_arg0, f32_arg2) and (f32_arg4 or CoD.canInviteToGame(f32_arg0, f32_arg2))) or f32_arg1 == CoD.PCBattlenetUtility.Filters.AVAILABLE_NOT_IN_PARTY_PLAYERS and CoD.LobbyUtility.IsPlayerInMyParty(f32_arg2)) then
+	elseif (f32_arg1 == CoD.PCBattlenetUtility.Filters.AVAILABLE_PLAYERS or f32_arg1 == CoD.PCBattlenetUtility.Filters.AVAILABLE_NOT_IN_PARTY_PLAYERS) and (not (f32_arg3 ~= Enum[@"hash_28811A60F2FF3ADA"][@"hash_5D7B6D45F00CF380"] and Engine.IsPlayerInTitle(f32_arg0, f32_arg2) and (f32_arg4 or CoD.canInviteToGame(f32_arg0, f32_arg2))) or f32_arg1 == CoD.PCBattlenetUtility.Filters.AVAILABLE_NOT_IN_PARTY_PLAYERS and CoD.LobbyUtility.IsPlayerInMyParty(f32_arg2)) then
 		return true
-	elseif f32_arg1 == CoD.PCBattlenetUtility.Filters.INVITABLE_PLAYERS and not Engine[@"isplayerinvitable"](f32_arg0, f32_arg2) then
+	elseif f32_arg1 == CoD.PCBattlenetUtility.Filters.INVITABLE_PLAYERS and not Engine.IsPlayerInvitable(f32_arg0, f32_arg2) then
 		return true
 	else
 		return false
 	end
 end
 local f0_local13 = function(f33_arg0, f33_arg1, f33_arg2, f33_arg3, f33_arg4, f33_arg5, f33_arg6, f33_arg7)
-	local f33_local0 = f33_arg2(f33_arg0, 0, 200, Enum[@"presencefilter"][@"presence_filter_all"], f33_arg4)
+	local f33_local0 = f33_arg2(f33_arg0, 0, 200, Enum.PresenceFilter[@"presence_filter_all"], f33_arg4)
 	local f33_local1 = {}
 	local f33_local2 = {}
 	local f33_local3 = 0
 	if 0 < #f33_local0 then
-		local f33_local4 = Engine[@"getprofilevarint"](f33_arg0, @"show_real_names") ~= 0
+		local f33_local4 = Engine.GetProfileVarInt(f33_arg0, "show_real_names") ~= 0
 		for f33_local28, f33_local25 in pairs(f33_local0) do
 			local f33_local9, f33_local8 = f0_local6(f33_arg0, f33_local25.xuid)
 			if CoD.LobbyUtility.IsPlayerInMyParty(f33_local25.xuid) then
-				f33_local8 = Enum[@"lobbyjoinable"][@"hash_78FCE6A0B08CD559"]
+				f33_local8 = Enum.LobbyJoinable[@"hash_78FCE6A0B08CD559"]
 			end
 			if Engine[@"hash_65CB8E6B7FBBFFD5"](f33_local25.xuid) then
 				f33_local9 = Enum[@"hash_28811A60F2FF3ADA"][@"hash_AF6B7B618097742"]
@@ -313,7 +313,7 @@ local f0_local13 = function(f33_arg0, f33_arg1, f33_arg2, f33_arg3, f33_arg4, f3
 				f33_local9 = Enum[@"hash_28811A60F2FF3ADA"][0xBDC39BBB7981F3]
 			end
 			if not f0_local12(f33_arg0, f33_arg1, f33_local25.xuid, f33_local9, f33_local8) then
-				local f33_local10 = Engine[@"getplayerinfo"](f33_arg0, f33_local25.xuid)
+				local f33_local10 = Engine.GetPlayerInfo(f33_arg0, f33_local25.xuid)
 				local f33_local11 = f33_local25.realname
 				local f33_local12 = ""
 				local f33_local13 = ""
@@ -437,7 +437,7 @@ local f0_local14 = function(f34_arg0, f34_arg1, f34_arg2, f34_arg3, f34_arg4)
 	return f0_local13(f34_arg0, f34_arg2, CoD.ClanUtility.GetMembersList, CoD.ClanUtility.GetPlayersParty, CoD.ClanUtility.GetClanMembersFilteredList(f34_arg0), CoD.ClanUtility.GetClanMembersCount(f34_arg0, f34_arg1), f34_arg3, f34_arg4)
 end
 local f0_local15 = function(f35_arg0, f35_arg1, f35_arg2, f35_arg3)
-	return f0_local13(f35_arg0, f35_arg1, Engine[@"getfriends"], Engine[@"hash_E940BDCC0375A9D"], nil, Engine[@"getfriendscount"](f35_arg0, Enum[@"presencefilter"][@"presence_filter_all"]), f35_arg2, f35_arg3)
+	return f0_local13(f35_arg0, f35_arg1, Engine.GetFriends, Engine[@"hash_E940BDCC0375A9D"], nil, Engine.GetFriendsCount(f35_arg0, Enum.PresenceFilter[@"presence_filter_all"]), f35_arg2, f35_arg3)
 end
 local f0_local16 = function(f36_arg0, f36_arg1, f36_arg2, f36_arg3)
 	return f0_local13(f36_arg0, f36_arg1, CoD.SocialUtility.GetRecentPlayersList, CoD.SocialUtility.GetRecentPlayersParty, nil, CoD.SocialUtility.GetRecentPlayersCount(f36_arg0), f36_arg2, f36_arg3)
@@ -490,10 +490,10 @@ local f0_local27 = function(f47_arg0)
 	local f47_local0 = f0_local17(f47_arg0, CoD.PCBattlenetUtility.Filters.NONE, true)
 	if CoD.canSendInvites(f47_arg0) then
 		local f47_local1 = #f47_local0
-		local f47_local2 = Engine[@"getglobalmodel"]()
+		local f47_local2 = Engine.GetGlobalModel()
 		if f47_local1 < f47_local2.PartyPrivacy.maxPlayers:get() then
-			f47_local1 = Engine[@"getglobalmodel"]()
-			if f47_local1.PartyPrivacy.privacy:get() ~= Enum[@"partyprivacy"][@"party_privacy_closed"] then
+			f47_local1 = Engine.GetGlobalModel()
+			if f47_local1.PartyPrivacy.privacy:get() ~= Enum.PartyPrivacy[@"party_privacy_closed"] then
 				table.insert(f47_local0, {
 					models = {
 						empty = true,
@@ -645,7 +645,7 @@ DataSources.SocialPartyInviteList = DataSourceHelpers.ListSetup("PC.PartyInviteL
 	if #f52_local0 > 0 then
 		for f52_local6, f52_local7 in pairs(f52_local0) do
 			local f52_local8 = Engine[@"getbattlenetpresence"](f52_local7.xuid)
-			local f52_local9 = Engine[@"getplayerinfo"](f52_arg0, f52_local7.xuid)
+			local f52_local9 = Engine.GetPlayerInfo(f52_arg0, f52_local7.xuid)
 			local f52_local10 = table.insert
 			local f52_local11 = f52_local1
 			local f52_local12 = {}
@@ -658,7 +658,7 @@ DataSources.SocialPartyInviteList = DataSourceHelpers.ListSetup("PC.PartyInviteL
 			}
 			local f52_local5 = f52_local9.info.joinable
 			if not f52_local5 then
-				f52_local5 = Enum[@"lobbyjoinable"][@"lobby_joinable_no"]
+				f52_local5 = Enum.LobbyJoinable[@"lobby_joinable_no"]
 			end
 			f52_local13.joinable = f52_local5
 			f52_local13.battlenetPresence = f52_local8
@@ -692,7 +692,7 @@ CoD.PCBattlenetUtility.SetSortFunction = function(f54_arg0, f54_arg1)
 	local f54_local0 = DataSources.BattlenetGlobal.getModel(f54_arg0)
 	if f54_local0 and f54_local0.CurrentSort and f54_local0.FriendUpdateEvent and f54_arg1 then
 		f54_local0.CurrentSort:set(f54_arg1)
-		Engine[@"forcenotifymodelsubscriptions"](f54_local0.FriendUpdateEvent)
+		Engine.ForceNotifyModelSubscriptions(f54_local0.FriendUpdateEvent)
 	end
 end
 CoD.PCBattlenetUtility.SortArrayUsingCurrentSort = function(f55_arg0, f55_arg1)
@@ -711,9 +711,9 @@ CoD.PCBattlenetUtility.SortArrayUsingCurrentSort = function(f55_arg0, f55_arg1)
 end
 CoD.OverlayUtility.AddSystemOverlay("RemoveFriendConfirmation", {
 	menuName = "SystemOverlay_Compact",
-	title = Engine[@"localize"](@"hash_62ABB014B7887052"),
+	title = Engine.Localize(@"hash_62ABB014B7887052"),
 	description = function(f56_arg0, f56_arg1)
-		return Engine[@"localize"](@"hash_6303418D0232357A", CoD.SocialUtility.CleanGamerTag(f56_arg1.gamertag))
+		return Engine.Localize(@"hash_6303418D0232357A", CoD.SocialUtility.CleanGamerTag(f56_arg1.gamertag))
 	end,
 	categoryType = CoD.OverlayUtility.OverlayTypes.Alert,
 	listDatasource = function(f57_arg0, f57_arg1)
@@ -721,7 +721,7 @@ CoD.OverlayUtility.AddSystemOverlay("RemoveFriendConfirmation", {
 			return {
 				{
 					models = {
-						displayText = Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"menu/confirm")),
+						displayText = Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"](@"menu/confirm")),
 					},
 					properties = {
 						actionParam = f57_arg1,
@@ -733,7 +733,7 @@ CoD.OverlayUtility.AddSystemOverlay("RemoveFriendConfirmation", {
 				},
 				{
 					models = {
-						displayText = Engine[@"toupper"](Engine[@"hash_4F9F1239CFD921FE"](@"menu/cancel")),
+						displayText = Engine.ToUpper(Engine[@"hash_4F9F1239CFD921FE"](@"menu/cancel")),
 					},
 					properties = {
 						action = function(f60_arg0, f60_arg1, f60_arg2, f60_arg3, f60_arg4)
@@ -852,11 +852,11 @@ CoD.PCBattlenetUtility.SetBattlenetMenuVisibility = function(f81_arg0, f81_arg1,
 	end
 	f81_arg3:set(f81_arg4)
 	if f81_arg4 then
-		local f81_local0 = Engine[@"forcenotifymodelsubscriptions"]
+		local f81_local0 = Engine.ForceNotifyModelSubscriptions
 		local f81_local1 = DataSources.BattlenetGlobal.getModel(f81_arg2)
 		f81_local0(f81_local1.FriendUpdateEvent)
 	else
-		local f81_local0 = Engine[@"getmodelforcontroller"](f81_arg2)
+		local f81_local0 = Engine.GetModelForController(f81_arg2)
 		f81_local0 = f81_local0["EditBoxGlobal.BattlenetFriendsFilter"]
 		if f81_local0 then
 			f81_local0:set("")

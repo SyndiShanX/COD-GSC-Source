@@ -1,4 +1,4 @@
-require("x64:1114dc24c016469")
+require("ui/uieditor/widgets/systemoverlays/systemoverlay_layout_foregroundmultilinetext")
 CoD.systemOverlay_Layout_GenericForeground_FreeCursor_Full = InheritFrom(LUI.UIElement)
 CoD.systemOverlay_Layout_GenericForeground_FreeCursor_Full.__defaultWidth = 1920
 CoD.systemOverlay_Layout_GenericForeground_FreeCursor_Full.__defaultHeight = 480
@@ -21,7 +21,7 @@ CoD.systemOverlay_Layout_GenericForeground_FreeCursor_Full.new = function(f1_arg
 	title:setRGB(ColorSet.T8__BEIGE__HEADER.r, ColorSet.T8__BEIGE__HEADER.g, ColorSet.T8__BEIGE__HEADER.b)
 	title:setTTF("ttmussels_demibold")
 	title:setLetterSpacing(6)
-	title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	title:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	title:linkToElementModel(self, "title", true, function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then

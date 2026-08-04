@@ -9,22 +9,22 @@ CoD.StartMenu_ConnectionMeter_PingImage.new = function(f1_arg0, f1_arg1, f1_arg2
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local Level1Image = LUI.UIImage.new(0, 0, 0, 44, 0, 0, 0, 46)
 	Level1Image:setAlpha(0)
-	Level1Image:setImage(RegisterImage(@"uie_t7_icon_network_wired1"))
+	Level1Image:setImage(RegisterImage("uie_t7_icon_network_wired1"))
 	self:addElement(Level1Image)
 	self.Level1Image = Level1Image
 	local Level2Image = LUI.UIImage.new(0, 0, 0, 44, 0, 0, 0, 46)
 	Level2Image:setAlpha(0)
-	Level2Image:setImage(RegisterImage(@"t7_network_icon_wired2"))
+	Level2Image:setImage(RegisterImage("t7_network_icon_wired2"))
 	self:addElement(Level2Image)
 	self.Level2Image = Level2Image
 	local Level3Image = LUI.UIImage.new(0, 0, 0, 44, 0, 0, 0, 46)
 	Level3Image:setAlpha(0)
-	Level3Image:setImage(RegisterImage(@"t7_network_icon_wired3"))
+	Level3Image:setImage(RegisterImage("t7_network_icon_wired3"))
 	self:addElement(Level3Image)
 	self.Level3Image = Level3Image
 	local Level4Image = LUI.UIImage.new(0, 0, 0, 44, 0, 0, 0, 46)
 	Level4Image:setAlpha(0)
-	Level4Image:setImage(RegisterImage(@"t7_network_icon_wired4"))
+	Level4Image:setImage(RegisterImage("t7_network_icon_wired4"))
 	self:addElement(Level4Image)
 	self.Level4Image = Level4Image
 	self:mergeStateConditions({

@@ -1,4 +1,4 @@
-require("x64:368f532cc98a68a")
+require("ui/uieditor/widgets/callingcards/callingcards_asset_pirates_flag")
 CoD.CallingCards_Asset_Pirates_Mast = InheritFrom(LUI.UIElement)
 CoD.CallingCards_Asset_Pirates_Mast.__defaultWidth = 1000
 CoD.CallingCards_Asset_Pirates_Mast.__defaultHeight = 280
@@ -9,7 +9,7 @@ CoD.CallingCards_Asset_Pirates_Mast.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local mast = LUI.UIImage.new(0, 0, 0, 1000, 0, 0, 0, 280)
-	mast:setImage(RegisterImage(@"uie_ui_icon_callingcards_pirates_mast"))
+	mast:setImage(RegisterImage("uie_ui_icon_callingcards_pirates_mast"))
 	self:addElement(mast)
 	self.mast = mast
 	local flag = CoD.CallingCards_Asset_Pirates_Flag.new(f1_arg0, f1_arg1, 0, 0, 681.5, 691.5, 0, 0, 68, 78)

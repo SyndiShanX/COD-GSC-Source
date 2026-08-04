@@ -1,5 +1,4 @@
-
-require( "x64:f3c5259f470592d" )
+require( "ui/utility/overlayutility" )
 CoD.PrestigeUtility = {}
 CoD.PrestigeUtility.INVALID_PARAGON_ICON_ID = 0
 CoD.PrestigeUtility.DEFAULT_PARAGON_ICON_ID = 11
@@ -22,71 +21,71 @@ CoD.PrestigeUtility.BASE_ZM_PRESTIGE_CALLING_CARD_ID = 416
 CoD.PrestigeUtility.BASE_WZ_PRESTIGE_CALLING_CARD_ID = 694
 CoD.PrestigeUtility.PrestigeStrings = {
 	[@"hash_65741301630398C1"] = {
-		default = @"hash_44FA6EF886E18DDE",
-		zm = @"hash_481131AE361D3EA",
-		wz = @"hash_44FA6EF886E18DDE"
+		default = "menu/prestige_fresh_start_desc",
+		zm = "menu/zm_prestige_fresh_start_desc",
+		wz = "menu/prestige_fresh_start_desc"
 	},
 	[@"hash_1DBA7AA206A2D3FB"] = {
-		default = @"hash_433699A472D82E05",
-		zm = @"hash_1C6EB34CDCCE0519",
-		wz = @"hash_433699A472D82E05"
+		default = "menu/prestige_fresh_start_warning",
+		zm = "menu/zm_prestige_fresh_start_warning",
+		wz = "menu/prestige_fresh_start_warning"
 	},
 	[@"prestige_locked"] = {
-		default = @"hash_4C7B58DE94790471",
-		zm = @"hash_93DDE94AFD8A4FD",
+		default = "menu/prestige_mode_locked_hint",
+		zm = "menu/zm_prestige_mode_locked_hint",
 		wz = @"hash_3A4263C3A9043A6D"
 	},
 	[@"prestige_description"] = {
-		default = @"hash_2E33F151DA53C3B4",
+		default = "menu/prestige_mode_desc",
 		zm = @"hash_7529973044EE7CC0",
 		wz = @"hash_1221B26CFA33C130"
 	}
 }
 CoD.PrestigeUtility.SpecialLoadoutRewards = {
-	[@"feature_default_class_1"] = {
+	feature_default_class_1 = {
 		index = 1,
 		loadoutList = "defaultloadouts",
-		typeName = @"hash_11C9270C1BD7E2BF"
+		typeName = "feature/default_class1"
 	},
-	[@"feature_default_class_2"] = {
+	feature_default_class_2 = {
 		index = 2,
 		loadoutList = "defaultloadouts",
-		typeName = @"hash_11C9280C1BD7E472"
+		typeName = "feature/default_class2"
 	},
-	[@"feature_default_class_3"] = {
+	feature_default_class_3 = {
 		index = 3,
 		loadoutList = "defaultloadouts",
-		typeName = @"hash_11C9290C1BD7E625"
+		typeName = "feature/default_class3"
 	},
-	[@"feature_default_class_4"] = {
+	feature_default_class_4 = {
 		index = 4,
 		loadoutList = "defaultloadouts",
-		typeName = @"hash_11C9220C1BD7DA40"
+		typeName = "feature/default_class4"
 	},
-	[@"feature_default_class_5"] = {
+	feature_default_class_5 = {
 		index = 5,
 		loadoutList = "defaultloadouts",
-		typeName = @"hash_11C9230C1BD7DBF3"
+		typeName = "feature/default_class5"
 	},
-	[@"feature_default_class_6"] = {
+	feature_default_class_6 = {
 		index = 6,
 		loadoutList = "defaultloadouts",
-		typeName = @"hash_11C9240C1BD7DDA6"
+		typeName = "feature/default_class6"
 	},
-	[@"feature_custom_class_4"] = {
+	feature_custom_class_4 = {
 		index = 4,
 		loadoutList = "defaultloadouts",
-		typeName = @"hash_28E2607011380146"
+		typeName = "feature/custom_class4"
 	},
-	[@"feature_custom_class_5"] = {
+	feature_custom_class_5 = {
 		index = 5,
 		loadoutList = "defaultloadouts",
-		typeName = @"hash_28E26170113802F9"
+		typeName = "feature/custom_class5"
 	},
-	[@"feature_custom_class_6"] = {
+	feature_custom_class_6 = {
 		index = 6,
 		loadoutList = "defaultloadouts",
-		typeName = @"hash_28E25E701137FDE0"
+		typeName = "feature/custom_class6"
 	}
 }
 CoD.PrestigeUtility.RewardEntriesWZ = {
@@ -116,23 +115,23 @@ CoD.PrestigeUtility.RewardEntriesInfoWZ = {
 CoD.PrestigeUtility.SpecialWZRankRewardImages = {
 	[19] = {
 		image1 = @"hash_6B079427B08C3B6F",
-		image2 = @"ui_icon_callingcards_wz_insigniaechelons_wzlevel20"
+		image2 = "ui_icon_callingcards_wz_insigniaechelons_wzlevel20"
 	},
 	[39] = {
 		image1 = @"hash_25B24A0BEC8CAE09",
-		image2 = @"ui_icon_callingcards_wz_insigniaechelons_wzlevel40"
+		image2 = "ui_icon_callingcards_wz_insigniaechelons_wzlevel40"
 	},
 	[59] = {
 		image1 = @"hash_3CD4B5D66DBEDFE1",
-		image2 = @"ui_icon_callingcards_wz_insigniaechelons_wzlevel60"
+		image2 = "ui_icon_callingcards_wz_insigniaechelons_wzlevel60"
 	},
 	[79] = {
 		image1 = @"hash_3E41819B543643CA",
-		image2 = @"ui_icon_callingcards_wz_insigniaechelons_wzlevel80"
+		image2 = "ui_icon_callingcards_wz_insigniaechelons_wzlevel80"
 	},
 	[80] = {
 		image1 = @"hash_4BC54EE3D6BE2B6D",
-		image2 = @"hash_27ED38F84B5D585D"
+		image2 = "callingcards_wz_insigniaechelons_master"
 	}
 }
 CoD.PrestigeUtility.RewardEntriesZM = {
@@ -142,14 +141,14 @@ CoD.PrestigeUtility.RewardEntriesZM = {
 CoD.PrestigeUtility.PrestigeOverlayLayouts = LuaEnum.createEnum( "Standard", "NoReward", "FreshStart", "TokenUnlock", "RequestProcessing" )
 CoD.PrestigeUtility.GetPrestigeCap = function ( f1_arg0 )
 	if not f1_arg0 then
-		f1_arg0 = Engine[@"currentsessionmode"]()
+		f1_arg0 = Engine.CurrentSessionMode()
 	end
-	return Engine[@"getprestigecap"]( f1_arg0 )
+	return Engine.GetPrestigeCap( f1_arg0 )
 end
 CoD.PrestigeUtility.GetPrestigeGameMode = function ()
-	local f2_local0 = Engine[@"currentsessionmode"]()
-	if f2_local0 == nil or f2_local0 == Enum[@"emodes"][@"mode_invalid"] then
-		f2_local0 = Enum[@"emodes"][@"mode_multiplayer"]
+	local f2_local0 = Engine.CurrentSessionMode()
+	if f2_local0 == nil or f2_local0 == Enum.eModes.mode_invalid then
+		f2_local0 = Enum.eModes.mode_multiplayer
 	end
 	return f2_local0
 end
@@ -157,7 +156,7 @@ CoD.PrestigeUtility.GetMaxRankByMode = function ( f3_arg0 )
 	return CoD.RankUtility.GetRankCap( f3_arg0 )
 end
 CoD.PrestigeUtility.GetPrestigeGameModeString = function ()
-	if CoD.PrestigeUtility.GetPrestigeGameMode() == Enum[@"emodes"][@"mode_zombies"] then
+	if CoD.PrestigeUtility.GetPrestigeGameMode() == Enum.eModes.mode_zombies then
 		return "zm"
 	else
 		return "mp"
@@ -166,9 +165,9 @@ end
 CoD.PrestigeUtility.GetStringForMode = function ( f5_arg0 )
 	if not CoD.PrestigeUtility.PrestigeStrings[f5_arg0] then
 		return 0x0
-	elseif CoD.PrestigeUtility.GetPrestigeGameMode() == Enum[@"emodes"][@"mode_zombies"] then
+	elseif CoD.PrestigeUtility.GetPrestigeGameMode() == Enum.eModes.mode_zombies then
 		return CoD.PrestigeUtility.PrestigeStrings[f5_arg0].zm
-	elseif CoD.PrestigeUtility.GetPrestigeGameMode() == Enum[@"emodes"][@"mode_warzone"] then
+	elseif CoD.PrestigeUtility.GetPrestigeGameMode() == Enum.eModes.mode_warzone then
 		return CoD.PrestigeUtility.PrestigeStrings[f5_arg0].wz
 	else
 		return CoD.PrestigeUtility.PrestigeStrings[f5_arg0].default
@@ -178,7 +177,7 @@ CoD.PrestigeUtility.GetCurrentLevel = function ( f6_arg0, f6_arg1 )
 	if not f6_arg1 then
 		f6_arg1 = CoD.PrestigeUtility.GetPrestigeGameMode()
 	end
-	local f6_local0 = Engine[@"getplayerstats"]( f6_arg0, CoD.STATS_LOCATION_NORMAL, f6_arg1 )
+	local f6_local0 = Engine.GetPlayerStats( f6_arg0, CoD.STATS_LOCATION_NORMAL, f6_arg1 )
 	if not f6_local0 or not f6_local0.PlayerStatsList.RANK.statValue:get() then
 		local f6_local1 = 0
 	end
@@ -196,7 +195,7 @@ CoD.PrestigeUtility.GetCurrentPLevel = function ( f7_arg0, f7_arg1 )
 	elseif not f7_arg1 then
 		f7_arg1 = CoD.PrestigeUtility.GetPrestigeGameMode()
 	end
-	local f7_local0 = Engine[@"getplayerstats"]( f7_arg0, CoD.STATS_LOCATION_NORMAL, f7_arg1 )
+	local f7_local0 = Engine.GetPlayerStats( f7_arg0, CoD.STATS_LOCATION_NORMAL, f7_arg1 )
 	local f7_local1
 	if f7_local0 then
 		f7_local1 = f7_local0.PlayerStatsList.PLEVEL.StatValue:get()
@@ -216,35 +215,35 @@ CoD.PrestigeUtility.GetBackgroundIdByPLevel = function ( f8_arg0, f8_arg1, f8_ar
 		return 0
 	end
 	local f8_local0 = nil
-	if f8_arg2 == Enum[@"emodes"][@"mode_multiplayer"] then
+	if f8_arg2 == Enum.eModes.mode_multiplayer then
 		f8_local0 = CoD.PrestigeUtility.BASE_MP_PRESTIGE_CALLING_CARD_ID
-	elseif f8_arg2 == Enum[@"emodes"][@"mode_zombies"] then
+	elseif f8_arg2 == Enum.eModes.mode_zombies then
 		f8_local0 = CoD.PrestigeUtility.BASE_ZM_PRESTIGE_CALLING_CARD_ID
-	elseif f8_arg2 == Enum[@"emodes"][@"mode_warzone"] then
+	elseif f8_arg2 == Enum.eModes.mode_warzone then
 		f8_local0 = CoD.PrestigeUtility.BASE_WZ_PRESTIGE_CALLING_CARD_ID
 	end
 	return f8_local0 + f8_arg1 - 1
 end
 CoD.PrestigeUtility.GetPermanentUnlockMode = function ()
-	local f9_local0 = Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "prestigeGameMode" )
+	local f9_local0 = Engine.GetModel( Engine.GetGlobalModel(), "prestigeGameMode" )
 	if f9_local0 ~= nil then
-		local f9_local1 = Engine[@"getmodelvalue"]( f9_local0 )
-		if f9_local1 ~= nil and f9_local1 ~= Enum[@"emodes"][@"mode_invalid"] then
+		local f9_local1 = Engine.GetModelValue( f9_local0 )
+		if f9_local1 ~= nil and f9_local1 ~= Enum.eModes.mode_invalid then
 			return f9_local1
 		end
 	end
-	return Engine[@"currentsessionmode"]()
+	return Engine.CurrentSessionMode()
 end
 CoD.PrestigeUtility.CreatePermanentUnlockTokenModel = function ( f10_arg0 )
-	local f10_local0 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f10_arg0 ), "permanentUnlockTokensCount" )
+	local f10_local0 = Engine.GetModel( Engine.GetModelForController( f10_arg0 ), "permanentUnlockTokensCount" )
 	local f10_local1 = CoD.PrestigeUtility.GetPermanentUnlockMode()
 	if Engine[@"islootready"]( f10_arg0 ) then
-		Engine[@"setmodelvalue"]( f10_local0, Engine[@"getpermanentunlockcount"]( f10_arg0, f10_local1 ) )
+		Engine.SetModelValue( f10_local0, Engine.GetPermanentUnlockCount( f10_arg0, f10_local1 ) )
 	end
 end
 CoD.PrestigeUtility.IsPrestigeBackground = function ( f11_arg0 )
-	local f11_local0 = Engine[@"getemblembackgroundid"]()
-	local f11_local1 = Engine[@"getbackgroundsforcategoryname"]( f11_arg0, "prestige" )
+	local f11_local0 = Engine.GetEmblemBackgroundId()
+	local f11_local1 = Engine.GetBackgroundsForCategoryName( f11_arg0, "prestige" )
 	local f11_local2 = false
 	for f11_local6, f11_local7 in pairs( f11_local1 ) do
 		if f11_local7.id == f11_local0 then
@@ -252,7 +251,7 @@ CoD.PrestigeUtility.IsPrestigeBackground = function ( f11_arg0 )
 			break
 		end
 	end
-	for f11_local7, f11_local8 in pairs( Engine[@"getbackgroundsforcategoryname"]( f11_arg0, "zmprestige" ) ) do
+	for f11_local7, f11_local8 in pairs( Engine.GetBackgroundsForCategoryName( f11_arg0, "zmprestige" ) ) do
 		if f11_local8.id == f11_local0 then
 			f11_local2 = true
 			break
@@ -264,17 +263,17 @@ CoD.PrestigeUtility.ResetToFirstSelectedCharacterLoadout = function ( f12_arg0, 
 	if 10 <= f12_arg1 then
 		f12_arg1 = 0
 	end
-	Engine[@"execnow"]( f12_arg0, "resetMPCharacterLoadout " .. f12_arg1 )
-	Engine[@"setheroforcactype"]( f12_arg0, Enum[@"emodes"][@"mode_multiplayer"], Enum[@"cactype"][@"cac_type_mp_public"], f12_arg1 )
-	Engine[@"setfirsttimecomplete"]( f12_arg0, Enum[@"emodes"][@"mode_multiplayer"], true )
+	Engine.ExecNow( f12_arg0, "resetMPCharacterLoadout " .. f12_arg1 )
+	Engine.SetHeroForCACType( f12_arg0, Enum.eModes.mode_multiplayer, Enum.CACType[@"cac_type_mp_public"], f12_arg1 )
+	Engine.SetFirstTimeComplete( f12_arg0, Enum.eModes.mode_multiplayer, true )
 end
 CoD.PrestigeUtility.EnterPrestigeAction = function ( f13_arg0, f13_arg1, f13_arg2 )
 	Engine[@"prestigeplayer"]( f13_arg1, CoD.PrestigeUtility.GetPrestigeGameMode() )
 end
 CoD.PrestigeUtility.SavePermanentlyUnlockedWeaponVariants = function ( f14_arg0, f14_arg1 )
 	local f14_local0 = {}
-	if f14_arg1 == Enum[@"emodes"][@"mode_zombies"] then
-		local f14_local1 = Engine[@"storagegetbuffer"]( f14_arg0, Enum[@"storagefiletype"][@"storage_zm_stats_online"] )
+	if f14_arg1 == Enum.eModes.mode_zombies then
+		local f14_local1 = Engine.StorageGetBuffer( f14_arg0, Enum.StorageFileType[@"storage_zm_stats_online"] )
 		local f14_local2 = #f14_local1.prestigeTokens
 		for f14_local3 = 0, f14_local2 - 1, 1 do
 			local f14_local6 = f14_local1.prestigeTokens[f14_local3]
@@ -282,7 +281,7 @@ CoD.PrestigeUtility.SavePermanentlyUnlockedWeaponVariants = function ( f14_arg0,
 				f14_local0[f14_local6.itemUnlocked:get()] = {}
 			end
 		end
-		local f14_local3 = Engine[@"storagegetbuffer"]( f14_arg0, Enum[@"storagefiletype"][@"storage_zm_loadouts"] )
+		local f14_local3 = Engine.StorageGetBuffer( f14_arg0, Enum.StorageFileType[@"storage_zm_loadouts"] )
 		f14_local3 = f14_local3.cacLoadouts
 		local f14_local4 = #f14_local3.variant
 		for f14_local5 = 0, f14_local4 - 1, 1 do
@@ -309,8 +308,8 @@ CoD.PrestigeUtility.SavePermanentlyUnlockedWeaponVariants = function ( f14_arg0,
 	return f14_local0
 end
 CoD.PrestigeUtility.RestorePermanentlyUnlockedWeaponVariants = function ( f15_arg0, f15_arg1, f15_arg2 )
-	if f15_arg1 == Enum[@"emodes"][@"mode_zombies"] then
-		local f15_local0 = Engine[@"storagegetbuffer"]( f15_arg0, Enum[@"storagefiletype"][@"storage_zm_loadouts"] )
+	if f15_arg1 == Enum.eModes.mode_zombies then
+		local f15_local0 = Engine.StorageGetBuffer( f15_arg0, Enum.StorageFileType[@"storage_zm_loadouts"] )
 		f15_local0 = f15_local0.cacLoadouts
 		local f15_local1 = 0
 		for f15_local6, f15_local7 in pairs( f15_arg2 ) do
@@ -333,7 +332,7 @@ CoD.PrestigeUtility.RestorePermanentlyUnlockedWeaponVariants = function ( f15_ar
 end
 CoD.PrestigeUtility.GetRankNameWZ = function ( f16_arg0 )
 	if CoD.PrestigeUtility.RewardEntriesWZ[f16_arg0] then
-		return CoD.GetRankName( f16_arg0, 0, Enum[@"emodes"][@"mode_warzone"] )
+		return CoD.GetRankName( f16_arg0, 0, Enum.eModes.mode_warzone )
 	end
 	local f16_local0 = 1
 	for f16_local4, f16_local5 in ipairs( CoD.PrestigeUtility.RewardEntriesInfoWZ ) do
@@ -342,15 +341,15 @@ CoD.PrestigeUtility.GetRankNameWZ = function ( f16_arg0 )
 			break
 		end
 	end
-	return CoD.GetRankName( f16_local0, 0, Enum[@"emodes"][@"mode_warzone"] )
+	return CoD.GetRankName( f16_local0, 0, Enum.eModes.mode_warzone )
 end
 CoD.PrestigeUtility.DisplayBetaRewardInventoryNotification = function ( f17_arg0, f17_arg1, f17_arg2 )
 	local f17_local0 = Engine[@"hash_5352DC095BBB2A45"]( f17_arg1, tostring( Dvar[@"hash_6CB029F7D2D66004"]:get() ) )
-	local f17_local1 = Engine[@"storagegetbuffer"]( f17_arg1, Enum[@"storagefiletype"][@"storage_mp_stats_online"] )
+	local f17_local1 = Engine.StorageGetBuffer( f17_arg1, Enum.StorageFileType[@"storage_mp_stats_online"] )
 	if f17_local1 then
 		if f17_local0 > 0 and f17_local1.betaRewardMessageSeen:get() == 0 then
 			f17_local1.betaRewardMessageSeen:set( 1 )
-			Engine[@"storagewrite"]( f17_arg1, Enum[@"storagefiletype"][@"storage_mp_stats_online"] )
+			Engine.StorageWrite( f17_arg1, Enum.StorageFileType[@"storage_mp_stats_online"] )
 			OpenSystemOverlay( f17_arg0, f17_arg2, f17_arg1, "BetaTokenNotification", nil )
 		end
 	end
@@ -418,7 +417,7 @@ CoD.PrestigeUtility.AddPrestigeCallingCards = function ( f20_arg0, f20_arg1, f20
 	local f20_local0 = CoD.PrestigeUtility.GetCurrentPLevel( f20_arg0, f20_arg1 )
 	local f20_local1 = CoD.PrestigeUtility.GetPrestigeCap( f20_arg1 )
 	for f20_local2 = 1, f20_local0, 1 do
-		local f20_local5 = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_4E2EF437F27777CE", f20_local2 )
+		local f20_local5 = Engine[@"hash_4F9F1239CFD921FE"]( "class/prestige_unlock_desc", f20_local2 )
 		if f20_local2 == f20_local1 then
 			break
 		end
@@ -448,7 +447,7 @@ CoD.PrestigeUtility.GetMasterPrestigeCard = function ( f21_arg0, f21_arg1 )
 	if f21_local0 ~= f21_local1 then
 		return nil
 	else
-		local f21_local2 = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_EBE8DFCB123DA37", f21_local1 )
+		local f21_local2 = Engine[@"hash_4F9F1239CFD921FE"]( "class/prestige_master_unlock_desc", f21_local1 )
 		local f21_local3 = CoD.PrestigeUtility.GetBackgroundIdByPLevel( f21_arg0, f21_local1, f21_arg1 )
 		return {
 			models = {
@@ -488,7 +487,7 @@ CoD.PrestigeUtility.InitializePrestigeMenu = function ( f22_arg0, f22_arg1, f22_
 	if CoD.PrestigeUtility.GetPrestigeCap( f22_local4 ) < f22_local5 then
 		f22_local5 = f22_local3
 	end
-	DataSources.PrestigeCallingCard.setModelValues( f22_arg1, @"hash_0", @"hash_0", CoD.PrestigeUtility.GetBackgroundIdByPLevel( f22_arg1, f22_local5, f22_local4 ), 0 )
+	DataSources.PrestigeCallingCard.setModelValues( f22_arg1, 0x0, 0x0, CoD.PrestigeUtility.GetBackgroundIdByPLevel( f22_arg1, f22_local5, f22_local4 ), 0 )
 end
 CoD.PrestigeUtility.UpdateCurrentTargetIndex = function ( f23_arg0, f23_arg1, f23_arg2, f23_arg3 )
 	local f23_local0 = CoD.PrestigeUtility.GetTargetPageList( f23_arg1 )
@@ -514,7 +513,7 @@ CoD.PrestigeUtility.UpdateCurrentTargetIndex = function ( f23_arg0, f23_arg1, f2
 end
 CoD.PrestigeUtility.AddEntryForReward = function ( f24_arg0, f24_arg1 )
 	local f24_local0 = CoD.PrestigeUtility.GetPrestigeGameMode()
-	if f24_local0 == Enum[@"emodes"][@"mode_warzone"] and CoD.PrestigeUtility.GetCurrentPLevel( f24_arg0, f24_local0 ) > 0 and not CoD.PrestigeUtility.UsingWidePermanentUnlockEntry( f24_local0, f24_arg1 ) then
+	if f24_local0 == Enum.eModes.mode_warzone and CoD.PrestigeUtility.GetCurrentPLevel( f24_arg0, f24_local0 ) > 0 and not CoD.PrestigeUtility.UsingWidePermanentUnlockEntry( f24_local0, f24_arg1 ) then
 		return false
 	else
 		return true
@@ -530,7 +529,7 @@ CoD.PrestigeUtility.SetupTargetPageList = function ( f25_arg0 )
 			targetIndex = 0
 		} )
 		local f25_local3 = 0
-		for f25_local4 = 0, f25_local0[@"maxrank"], 1 do
+		for f25_local4 = 0, f25_local0.maxrank, 1 do
 			if f25_local1 <= f25_local2 then
 				table.insert( CoD.PrestigeUtility.TargetPageList, {
 					targetIndex = f25_local4
@@ -545,7 +544,7 @@ CoD.PrestigeUtility.SetupTargetPageList = function ( f25_arg0 )
 		local f25_local1 = CoD.RankUtility.GetRankInfoTable()
 		local f25_local2 = f25_local1[f25_local0]
 		local f25_local3
-		if f25_local0 == Enum[@"emodes"][@"mode_warzone"] then
+		if f25_local0 == Enum.eModes.mode_warzone then
 			f25_local3 = CoD.PrestigeUtility.DEFAULT_WZ_REWARD_LIST_COUNT
 			if not f25_local3 then
 			
@@ -588,7 +587,7 @@ CoD.PrestigeUtility.GetTargetPageList = function ( f26_arg0 )
 	return CoD.PrestigeUtility.TargetPageList
 end
 CoD.PrestigeUtility.UpdateCurrentlySelectedItemInfo = function ( f27_arg0, f27_arg1, f27_arg2 )
-	if CoD.PrestigeUtility.GetPrestigeGameMode() == Enum[@"emodes"][@"mode_warzone"] then
+	if CoD.PrestigeUtility.GetPrestigeGameMode() == Enum.eModes.mode_warzone then
 		CoD.PrestigeUtility.UpdateCurrentlySelectedItemInfoStandard( f27_arg0, f27_arg1, f27_arg2 )
 	else
 		CoD.PrestigeUtility.UpdateCurrentlySelectedItemInfoStandard( f27_arg0, f27_arg1, f27_arg2 )
@@ -671,13 +670,13 @@ CoD.PrestigeUtility.ResetInformationOnPrestige = function ( f30_arg0, f30_arg1 )
 	local f30_local0 = DataSources.PrestigeMenuInfo.getModel( f30_arg1 )
 	f30_local0.hasPrestiged:set( true )
 	DataSources.XPProgressionBar.getModel( f30_arg1 )
-	if CoD.PrestigeUtility.GetPrestigeGameMode() == Enum[@"emodes"][@"mode_warzone"] then
+	if CoD.PrestigeUtility.GetPrestigeGameMode() == Enum.eModes.mode_warzone then
 		local f30_local1 = DataSources.PrestigeMenuInfo.getModel( f30_arg1 )
 		f30_local1.currentHighlightedItem.rankIndex:set( -1 )
 	end
 end
 CoD.PrestigeUtility.OnPrestigeTransactionResultUpdated = function ( f31_arg0, f31_arg1, f31_arg2, f31_arg3 )
-	local f31_local0 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f31_arg2 ), "prestigeRoot.prestigeTask" )
+	local f31_local0 = Engine.GetModel( Engine.GetModelForController( f31_arg2 ), "prestigeRoot.prestigeTask" )
 	local f31_local1 = f31_local0.success:get()
 	if f31_arg3:get() == true then
 		CoD.PrestigeUtility.prestigeTransactionActive = true
@@ -698,7 +697,7 @@ CoD.PrestigeUtility.OnPrestigeTransactionResultUpdated = function ( f31_arg0, f3
 	end
 end
 CoD.PrestigeUtility.OnPrestigeUnlockTransactionResultUpdated = function ( f32_arg0, f32_arg1, f32_arg2 )
-	local f32_local0 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f32_arg1 ), "prestigeRoot.unlockTask" )
+	local f32_local0 = Engine.GetModel( Engine.GetModelForController( f32_arg1 ), "prestigeRoot.unlockTask" )
 	local f32_local1 = f32_local0.success:get()
 	if f32_arg2:get() == true then
 		CoD.PrestigeUtility.prestigeUnlockTransactionActive = true
@@ -718,7 +717,7 @@ CoD.PrestigeUtility.OnPrestigeUnlockTransactionResultUpdated = function ( f32_ar
 	end
 end
 CoD.PrestigeUtility.OnFreshStartTransactionResultUpdated = function ( f33_arg0, f33_arg1, f33_arg2 )
-	local f33_local0 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f33_arg1 ), "prestigeRoot.freshStartTask" )
+	local f33_local0 = Engine.GetModel( Engine.GetModelForController( f33_arg1 ), "prestigeRoot.freshStartTask" )
 	local f33_local1 = f33_local0.success:get()
 	if f33_arg2:get() == true then
 		CoD.PrestigeUtility.freshStartTransactionActive = true
@@ -898,14 +897,14 @@ CoD.PrestigeUtility.ShowFreshStart = function ( f51_arg0 )
 	end
 end
 CoD.PrestigeUtility.GetPermanentUnlockInfoString = function ( f52_arg0 )
-	if CoD.PrestigeUtility.GetPrestigeGameMode() == Enum[@"emodes"][@"mode_zombies"] then
+	if CoD.PrestigeUtility.GetPrestigeGameMode() == Enum.eModes.mode_zombies then
 		return Engine[@"hash_4F9F1239CFD921FE"]( @"hash_598063AE96E7D98" )
 	else
 		return Engine[@"hash_4F9F1239CFD921FE"]( @"hash_619552171639ADD0" )
 	end
 end
 CoD.PrestigeUtility.GetPrestigeMenuTitleString = function ( f53_arg0 )
-	if CoD.PrestigeUtility.GetPrestigeGameMode() == Enum[@"emodes"][@"mode_warzone"] then
+	if CoD.PrestigeUtility.GetPrestigeGameMode() == Enum.eModes.mode_warzone then
 		return Engine[@"hash_4F9F1239CFD921FE"]( @"hash_4226E947798C9490" )
 	elseif IsArenaMode() then
 		return Engine[@"hash_4F9F1239CFD921FE"]( @"hash_24ACCE4091313402" )
@@ -943,10 +942,10 @@ end
 CoD.PrestigeUtility.GetNextLevelText = function ( f57_arg0, f57_arg1, f57_arg2 )
 	local f57_local0 = CoD.PlayerStatsUtility.GetCurrentRankAndXPFromMenuStorageBuffer( f57_arg0 )
 	local f57_local1 = CoD.RankUtility.GetRankCap()
-	if CoD.PlayerStatsUtility.IsPrestigeMasterForMenu( Engine[@"currentsessionmode"](), f57_arg0 ) then
+	if CoD.PlayerStatsUtility.IsPrestigeMasterForMenu( Engine.CurrentSessionMode(), f57_arg0 ) then
 		f57_local0 = CoD.PlayerStatsUtility.HashStorageLookupForMenu( f57_arg0, {
-			@"playerstatslist",
-			@"paragon_rank"
+			"playerstatslist",
+			"paragon_rank"
 		} )
 		if CoD.PrestigeUtility.PRESTIGE_MASTER_MAX_RANK <= f57_local0 then
 			return Engine[@"hash_4F9F1239CFD921FE"]( @"menu/max_level" )
@@ -975,7 +974,7 @@ CoD.PrestigeUtility.GetNextLevelXPText = function ( f58_arg0, f58_arg1, f58_arg2
 	local f58_local0 = f58_arg2
 	local f58_local1 = CoD.PlayerStatsUtility.GetCurrentRankAndXPFromMenuStorageBuffer( f58_arg0 )
 	local f58_local2 = CoD.RankUtility.GetRankCap()
-	if CoD.PlayerStatsUtility.IsPrestigeMasterForMenu( Engine[@"currentsessionmode"](), f58_arg0 ) then
+	if CoD.PlayerStatsUtility.IsPrestigeMasterForMenu( Engine.CurrentSessionMode(), f58_arg0 ) then
 		if CoD.PrestigeUtility.PRESTIGE_MASTER_MAX_RANK <= f58_local1 then
 			return Engine[@"hash_4F9F1239CFD921FE"]( @"menu/max_level" )
 		else
@@ -1008,64 +1007,64 @@ CoD.PrestigeUtility.HideIfPrestigeMasterOrValueZero = function ( f59_arg0, f59_a
 end
 local f0_local0 = {
 	SPECIALISTS = {
-		displayText = @"hash_6FF94A9EB646C873",
-		description = @"hash_840DDF6BE6B0F38",
+		displayText = "menu/specialists",
+		description = "menu/permanent_unlocks_specialists_desc",
 		image = "t7_icon_pbt_mp_battery_head1_skin1_rwd",
 		action = OpenChooseCharacterLoadout,
 		param = ""
 	},
 	WEAPONS = {
 		displayText = @"menu/weapons",
-		description = @"hash_616FF87A293ECFB1",
+		description = "menu/permanent_unlocks_weapons_desc",
 		image = "t7_icon_weapon_ar_standard_rwd",
 		action = OpenPermanentWeaponUnlockCategoryMenu,
 		param = CoD.PrestigeUtility.ContentCategory.WEAPONS
 	},
 	LETHAL = {
 		displayText = @"hash_2DA102A6853690E6",
-		description = @"hash_7D3E7D550CC337E3",
+		description = "menu/permanent_unlocks_lethals_desc",
 		image = "t7_hud_icon_menu_frag_rwd",
 		action = OpenPermanentUnlockCategoryMenu,
 		param = CoD.PrestigeUtility.ContentCategory.LETHAL
 	},
 	TACTICAL = {
-		displayText = @"menu/tactical",
-		description = @"hash_3321848994844FE0",
+		displayText = "menu/tactical",
+		description = "menu/permanent_unlocks_tacticals_desc",
 		image = "t7_hud_icon_menu_concussion_rwd",
 		action = OpenPermanentUnlockCategoryMenu,
 		param = CoD.PrestigeUtility.ContentCategory.TACTICAL
 	},
 	PERK1 = {
-		displayText = @"mpui/perk1",
-		description = @"hash_EA29654F1DC4ACB",
+		displayText = "mpui/perk1",
+		description = "menu/permanent_unlocks_perk1_desc",
 		image = "t7_hud_perk_jetcharge_rwd",
 		action = OpenPermanentUnlockCategoryMenu,
 		param = CoD.PrestigeUtility.ContentCategory.PERK1
 	},
 	PERK2 = {
-		displayText = @"mpui/perk2",
-		description = @"hash_DFED4FA3CF1FC40",
+		displayText = "mpui/perk2",
+		description = "menu/permanent_unlocks_perk2_desc",
 		image = "t7_hud_perk_fasthands_rwd",
 		action = OpenPermanentUnlockCategoryMenu,
 		param = CoD.PrestigeUtility.ContentCategory.PERK2
 	},
 	PERK3 = {
-		displayText = @"mpui/perk3",
-		description = @"hash_445E54E8EAF5FE1D",
+		displayText = "mpui/perk3",
+		description = "menu/permanent_unlocks_perk3_desc",
 		image = "t7_hud_perk_gungho_rwd",
 		action = OpenPermanentUnlockCategoryMenu,
 		param = CoD.PrestigeUtility.ContentCategory.PERK3
 	},
 	SCORESTREAKS = {
-		displayText = @"menu/scorestreaks",
-		description = @"hash_114380F481205521",
+		displayText = "menu/scorestreaks",
+		description = "menu/permanent_unlocks_scorestreaks_desc",
 		image = "t7_hud_ks_drone_attack_rwd",
 		action = OpenScorestreaks,
 		param = ""
 	},
 	GOBBLEGUM = {
-		displayText = @"hash_5BFF3DAFD18C7957",
-		description = 0x18662525A3E822,
+		displayText = "menu/store_bubblegum_buffs",
+		description = "menu/permanent_unlocks_gobblegum_desc",
 		image = "uie_t7_menu_gobblegum_comsumable",
 		action = OpenPermanentUnlockCategoryMenu,
 		param = CoD.PrestigeUtility.ContentCategory.GOBBLEGUM
@@ -1088,7 +1087,7 @@ local f0_local2 = {
 CoD.PrestigeUtility.PermanentUnlockCategoryListPrepare = function ( f60_arg0 )
 	local f60_local0 = {}
 	local f60_local1 = f0_local1
-	if CoD.PrestigeUtility.GetPrestigeGameMode() == Enum[@"emodes"][@"mode_zombies"] then
+	if CoD.PrestigeUtility.GetPrestigeGameMode() == Enum.eModes.mode_zombies then
 		f60_local1 = f0_local2
 	end
 	for f60_local5, f60_local6 in pairs( f60_local1 ) do
@@ -1107,7 +1106,7 @@ end
 DataSources.PermanentUnlockCategoryList = DataSourceHelpers.ListSetup( "PermanentUnlockCategoryList", CoD.PrestigeUtility.PermanentUnlockCategoryListPrepare, true )
 DataSources.PrestigeMenuInfo = {
 	getModel = function ( f61_arg0 )
-		local f61_local0 = Engine[@"getmodelforcontroller"]( f61_arg0 )
+		local f61_local0 = Engine.GetModelForController( f61_arg0 )
 		f61_local0 = f61_local0:create( "PrestigeMenuInfo" )
 		f61_local0:create( "currentTargetPageIndex" )
 		f61_local0:create( "hasPrestiged" )
@@ -1140,13 +1139,13 @@ DataSourceHelpers.PerControllerDataSourceSetup( "PrestigeFreshStartResult", "pre
 	f64_arg0:create( "success" )
 end, false )
 CoD.PrestigeUtility.UsingWidePermanentUnlockEntry = function ( f65_arg0, f65_arg1 )
-	if f65_arg0 == Enum[@"emodes"][@"mode_warzone"] then
+	if f65_arg0 == Enum.eModes.mode_warzone then
 		return CoD.PrestigeUtility.RewardEntriesWZ[f65_arg1] ~= nil
-	elseif f65_arg0 == Enum[@"emodes"][@"mode_zombies"] then
+	elseif f65_arg0 == Enum.eModes.mode_zombies then
 		return CoD.PrestigeUtility.RewardEntriesZM[f65_arg1] ~= nil
 	else
 		local f65_local0
-		if f65_arg0 ~= Enum[@"emodes"][@"mode_multiplayer"] or f65_arg1 > CoD.PrestigeUtility.LAST_WIDE_LAYOUT_RANK then
+		if f65_arg0 ~= Enum.eModes.mode_multiplayer or f65_arg1 > CoD.PrestigeUtility.LAST_WIDE_LAYOUT_RANK then
 			f65_local0 = false
 		else
 			f65_local0 = true
@@ -1156,8 +1155,8 @@ CoD.PrestigeUtility.UsingWidePermanentUnlockEntry = function ( f65_arg0, f65_arg
 end
 CoD.PrestigeUtility.GetWLRewardsForRank = function ( f66_arg0, f66_arg1, f66_arg2, f66_arg3 )
 	local f66_local0 = {}
-	local f66_local1 = @"blacktransparent"
-	local f66_local2 = @"blacktransparent"
+	local f66_local1 = "blacktransparent"
+	local f66_local2 = "blacktransparent"
 	local f66_local3 = 0x0
 	local f66_local4 = CoD.ArenaLeaguePlayUtility.GetRubyCountForRank( f66_arg2 + 1 )
 	local f66_local5 = CoD.ArenaLeaguePlayUtility.GetRankInfoFieldAtRank( f66_arg2 + 1, "rankrewards", nil )
@@ -1200,7 +1199,7 @@ CoD.PrestigeUtility.GetWLRewardsForRank = function ( f66_arg0, f66_arg1, f66_arg
 			displayName = Engine[@"hash_4F9F1239CFD921FE"]( 0x0 ),
 			description = Engine[@"hash_4F9F1239CFD921FE"]( 0x0 ),
 			itemGroupName = f66_local6,
-			image = @"blacktransparent",
+			image = "blacktransparent",
 			loadoutReferenceHash = nil,
 			isPermanentlyUnlocked = false,
 			useWideLayout = false,
@@ -1214,17 +1213,17 @@ CoD.PrestigeUtility.GetWLRewardsForRank = function ( f66_arg0, f66_arg1, f66_arg
 end
 CoD.PrestigeUtility.GetWZRewardsForRank = function ( f67_arg0, f67_arg1, f67_arg2, f67_arg3 )
 	local f67_local0 = {}
-	local f67_local1 = CoD.RankUtility.GetRankInfoField( f67_arg1, f67_arg2, @"level", 0x0 )
-	local f67_local2 = CoD.RankUtility.GetRankInfoField( f67_arg1, f67_arg2, @"iconlarge", @"blacktransparent" )
+	local f67_local1 = CoD.RankUtility.GetRankInfoField( f67_arg1, f67_arg2, "level", 0x0 )
+	local f67_local2 = CoD.RankUtility.GetRankInfoField( f67_arg1, f67_arg2, @"iconlarge", "blacktransparent" )
 	local f67_local3 = f67_local2
 	if CoD.PrestigeUtility.SpecialWZRankRewardImages[f67_arg2] then
 		f67_local2 = CoD.PrestigeUtility.SpecialWZRankRewardImages[f67_arg2].image1
 		f67_local3 = CoD.PrestigeUtility.SpecialWZRankRewardImages[f67_arg2].image2
 	end
 	if CoD.PrestigeUtility.GetCurrentPLevel( f67_arg0 ) > 0 then
-		f67_local3 = CoD.RankUtility.GetRankInfoField( f67_arg1, f67_arg2, @"iconlarge", @"blacktransparent" )
+		f67_local3 = CoD.RankUtility.GetRankInfoField( f67_arg1, f67_arg2, @"iconlarge", "blacktransparent" )
 	end
-	local f67_local4 = CoD.RankUtility.GetRankInfoField( f67_arg1, f67_arg2 - 1, @"maxxp", 0 )
+	local f67_local4 = CoD.RankUtility.GetRankInfoField( f67_arg1, f67_arg2 - 1, "maxxp", 0 )
 	local f67_local5 = CoD.PrestigeUtility.UsingWidePermanentUnlockEntry( f67_arg1, f67_arg2 )
 	local f67_local6 = CoD.PrestigeUtility.GetRankNameWZ( f67_arg2 )
 	local f67_local7 = table.insert
@@ -1255,7 +1254,7 @@ CoD.PrestigeUtility.GetWZRewardsForRank = function ( f67_arg0, f67_arg1, f67_arg
 					itemIndex = CoD.CACUtility.EmptyItemIndex,
 					displayName = Engine[@"hash_4F9F1239CFD921FE"]( 0x0 ),
 					itemGroupName = "",
-					image = @"blacktransparent",
+					image = "blacktransparent",
 					loadoutReferenceHash = nil,
 					isPermanentlyUnlocked = false,
 					useWideLayout = f67_local5,
@@ -1270,15 +1269,15 @@ CoD.PrestigeUtility.GetWZRewardsForRank = function ( f67_arg0, f67_arg1, f67_arg
 end
 CoD.PrestigeUtility.GetRewardsForRank = function ( f68_arg0, f68_arg1, f68_arg2, f68_arg3 )
 	local f68_local0 = {}
-	local f68_local1 = f68_arg1 == Enum[@"emodes"][@"mode_zombies"]
-	if f68_arg1 == Enum[@"emodes"][@"mode_warzone"] then
+	local f68_local1 = f68_arg1 == Enum.eModes.mode_zombies
+	if f68_arg1 == Enum.eModes.mode_warzone then
 		return CoD.PrestigeUtility.GetWZRewardsForRank( f68_arg0, f68_arg1, f68_arg2, f68_arg3 )
 	elseif IsArenaMode() then
 		return CoD.PrestigeUtility.GetWLRewardsForRank( f68_arg0, f68_arg1, f68_arg2, f68_arg3 )
 	end
 	local f68_local2 = IsMaxPrestigeLevel( f68_arg0 )
 	local f68_local3 = CoD.PrestigeUtility.UsingWidePermanentUnlockEntry( f68_arg1, f68_arg2 )
-	for f68_local22, f68_local23 in pairs( CoD.RankUtility.GetRankInfoField( f68_arg1, f68_arg2, @"rewards", nil ) ) do
+	for f68_local22, f68_local23 in pairs( CoD.RankUtility.GetRankInfoField( f68_arg1, f68_arg2, "rewards", nil ) ) do
 		if #f68_local0 >= CoD.PrestigeUtility.MIN_REWARD_COUNT_WIDE_LAYOUT then
 			break
 			while #f68_local0 < CoD.PrestigeUtility.MIN_REWARD_COUNT_WIDE_LAYOUT do
@@ -1286,7 +1285,7 @@ CoD.PrestigeUtility.GetRewardsForRank = function ( f68_arg0, f68_arg1, f68_arg2,
 					itemIndex = CoD.CACUtility.EmptyItemIndex,
 					displayName = Engine[@"hash_4F9F1239CFD921FE"]( 0x0 ),
 					itemGroupName = "",
-					image = @"blacktransparent",
+					image = "blacktransparent",
 					loadoutReferenceHash = nil,
 					isPermanentlyUnlocked = false,
 					useWideLayout = false,
@@ -1300,10 +1299,10 @@ CoD.PrestigeUtility.GetRewardsForRank = function ( f68_arg0, f68_arg1, f68_arg2,
 		local f68_local8 = CoD.PrestigeUtility.SpecialLoadoutRewards[f68_local23.rewardName]
 		if f68_local8 ~= nil then
 			local f68_local9 = f68_local8.index
-			if not f68_local1 or not @"zm_default_loadouts" then
+			if not f68_local1 or not "zm_default_loadouts" then
 				local f68_local10 = LuaUtils.IsArenaMode()
-				local f68_local11 = @"mp_arena_default_loadouts"
-				local f68_local12 = @"mp_default_loadouts"
+				local f68_local11 = "mp_arena_default_loadouts"
+				local f68_local12 = "mp_default_loadouts"
 			end
 			local f68_local13 = Engine[@"hash_2E00B2F29271C60B"]( f68_local10 and f68_local11 or f68_local12 )
 			local f68_local14
@@ -1331,7 +1330,7 @@ CoD.PrestigeUtility.GetRewardsForRank = function ( f68_arg0, f68_arg1, f68_arg2,
 							local f68_local20 = Engine[@"hash_4F9F1239CFD921FE"]
 							local f68_local21
 							if f68_local1 then
-								f68_local21 = f68_local15[@"hash_66FC96C0FA5BFA2C"]
+								f68_local21 = f68_local15.customclassname_2
 								if not f68_local21 then
 								
 								else
@@ -1348,10 +1347,10 @@ CoD.PrestigeUtility.GetRewardsForRank = function ( f68_arg0, f68_arg1, f68_arg2,
 									goto basicblock_27:
 								end
 							end
-							f68_local21 = f68_local15[@"customclassname"]
+							f68_local21 = f68_local15.customclassname
 						end
 					end
-					f68_local17 = f68_local15[@"primary"]
+					f68_local17 = f68_local15.primary
 				end
 			end
 			f68_local14 = f68_local8.loadoutList
@@ -1360,7 +1359,7 @@ CoD.PrestigeUtility.GetRewardsForRank = function ( f68_arg0, f68_arg1, f68_arg2,
 			local f68_local9 = CoD.CACUtility.GetUnlockableItemTable()
 			f68_local9 = f68_local9[f68_local7]
 			local f68_local13 = f68_local2 or Engine[@"hash_1D876F030270CB95"]( f68_arg0, f68_arg1, Engine[@"hash_7E12950F85CC3F92"]( f68_arg1, f68_local7 ) )
-			if f68_local1 and f68_local9.nameHash == @"pistol_topbreak_t8" then
+			if f68_local1 and f68_local9.nameHash == "pistol_topbreak_t8" then
 				f68_local13 = true
 			end
 			table.insert( f68_local0, {
@@ -1390,7 +1389,7 @@ DataSources.PrestigeRankInfo = ListHelper_SetupDataSource( "PrestigeRankInfo", f
 	f69_local5 = f69_local4[f69_local5:get()].targetIndex
 	f69_local6 = 0
 	local f69_local7
-	if f69_local1 == Enum[@"emodes"][@"mode_warzone"] then
+	if f69_local1 == Enum.eModes.mode_warzone then
 		f69_local7 = CoD.PrestigeUtility.DEFAULT_WZ_REWARD_LIST_COUNT
 		if not f69_local7 then
 		
@@ -1405,17 +1404,17 @@ DataSources.PrestigeRankInfo = ListHelper_SetupDataSource( "PrestigeRankInfo", f
 					local f69_local12 = f69_local9 <= f69_local8
 					local f69_local13 = CoD.PrestigeUtility.GetRewardsForRank( f69_arg0, f69_local1, f69_local9, f69_local12 )
 					local f69_local14 = CoD.PrestigeUtility.UsingWidePermanentUnlockEntry( f69_local1, f69_local9 )
-					local f69_local15 = CoD.RankUtility.GetRankInfoField( f69_local1, f69_local9, @"iconlarge", @"blacktransparent" )
-					if f69_local1 == Enum[@"emodes"][@"mode_warzone"] and CoD.PrestigeUtility.GetCurrentPLevel( f69_arg0, f69_local1 ) > 0 then
+					local f69_local15 = CoD.RankUtility.GetRankInfoField( f69_local1, f69_local9, @"iconlarge", "blacktransparent" )
+					if f69_local1 == Enum.eModes.mode_warzone and CoD.PrestigeUtility.GetCurrentPLevel( f69_arg0, f69_local1 ) > 0 then
 						if CoD.PrestigeUtility.SpecialWZRankRewardImages[f69_local9] then
 							f69_local15 = CoD.PrestigeUtility.SpecialWZRankRewardImages[f69_local9].image1
 						else
-							f69_local15 = @"blacktransparent"
+							f69_local15 = "blacktransparent"
 						end
 					end
 					table.insert( f69_local0, {
 						models = {
-							displayLevel = CoD.RankUtility.GetRankInfoField( f69_local1, f69_local9, @"level", 0x0 ),
+							displayLevel = CoD.RankUtility.GetRankInfoField( f69_local1, f69_local9, "level", 0x0 ),
 							iconLarge = f69_local15,
 							wideLayout = f69_local14,
 							rankAchieved = f69_local12,
@@ -1448,7 +1447,7 @@ DataSources.WorldLeagueRankInfo = ListHelper_SetupDataSource( "WorldLeagueRankIn
 	local f70_local0 = {}
 	local f70_local1 = LuaUtils.GetLeaguePlayTierTable()
 	if IsArenaMode() then
-		local f70_local2 = f70_local1[@"maxrank"]
+		local f70_local2 = f70_local1.maxrank
 		local f70_local3 = CoD.PrestigeUtility.GetPrestigeGameMode()
 		local f70_local4 = CoD.PrestigeUtility.GetTargetPageList( f70_arg0 )
 		local f70_local5 = DataSources.PrestigeMenuInfo.getModel( f70_arg0 )
@@ -1504,7 +1503,7 @@ DataSources.WorldLeagueRankInfo = ListHelper_SetupDataSource( "WorldLeagueRankIn
 end, true )
 DataSources.LevelRewardLoadoutInfo = ListHelper_SetupDataSource( "LevelRewardLoadoutInfo", function ( f71_arg0 )
 	local f71_local0 = {}
-	local f71_local1 = CoD.PrestigeUtility.GetPrestigeGameMode() == Enum[@"emodes"][@"mode_zombies"]
+	local f71_local1 = CoD.PrestigeUtility.GetPrestigeGameMode() == Enum.eModes.mode_zombies
 	local f71_local2 = function ( f72_arg0 )
 		local f72_local0 = CoD.CACUtility.GetUnlockableItemTable()
 		f72_local0 = f72_local0[f72_arg0]
@@ -1514,7 +1513,7 @@ DataSources.LevelRewardLoadoutInfo = ListHelper_SetupDataSource( "LevelRewardLoa
 			local f72_local1 = CoD.CACUtility.GetItemGroupDisplayNameFromRef( f72_local0.itemGroup )
 		end
 		if f71_local1 and f72_local0.loadoutSlot == "herogadget" then
-			local f72_local1 = 0x3377F50B93AB03
+			local f72_local1 = "mpui/special_weapon"
 		end
 		table.insert( f71_local0, {
 			models = {
@@ -1530,7 +1529,7 @@ DataSources.LevelRewardLoadoutInfo = ListHelper_SetupDataSource( "LevelRewardLoa
 			if type( f73_arg0 ) == "xhash" then
 				f73_local0 = Engine[@"hash_2D97229B24C685D5"]( f73_arg0, f73_arg2 )
 			elseif type( f73_arg0 ) == "string" then
-				f73_local0 = Engine[@"getitemindexfromreference"]( f73_arg0, f73_arg2 )
+				f73_local0 = Engine.GetItemIndexFromReference( f73_arg0, f73_arg2 )
 			end
 			f73_local0 = Engine[@"hash_1E8B1E317B9DD6FE"]( f73_local0, f73_arg1, f73_arg2 ) or f73_local0
 		end
@@ -1550,10 +1549,10 @@ DataSources.LevelRewardLoadoutInfo = ListHelper_SetupDataSource( "LevelRewardLoa
 	local f71_local6 = CoD.PrestigeUtility.GetPrestigeGameMode()
 	local f71_local7 = CoD.PrestigeUtility.SpecialLoadoutRewards[f71_local5]
 	local f71_local8 = f71_local7.index
-	if not f71_local1 or not @"zm_default_loadouts" then
+	if not f71_local1 or not "zm_default_loadouts" then
 		local f71_local9 = LuaUtils.IsArenaMode()
-		local f71_local10 = @"mp_arena_default_loadouts"
-		local f71_local11 = @"mp_default_loadouts"
+		local f71_local10 = "mp_arena_default_loadouts"
+		local f71_local11 = "mp_default_loadouts"
 	end
 	local f71_local12 = Engine[@"hash_2E00B2F29271C60B"]( f71_local9 and f71_local10 or f71_local11 )
 	local f71_local13
@@ -1568,27 +1567,27 @@ DataSources.LevelRewardLoadoutInfo = ListHelper_SetupDataSource( "LevelRewardLoa
 				f71_local3( f71_local14[@"primarygrenade_2"], Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f71_local6 )
 				if f71_local14.bubblegumbuffs_2 then
 					for f71_local18, f71_local19 in ipairs( f71_local14.bubblegumbuffs ) do
-						f71_local3( f71_local19[@"bubblegumbuff"], Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], f71_local6 )
+						f71_local3( f71_local19.bubblegumbuff, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], f71_local6 )
 					end
 				end
 				if f71_local14.specialties_2 then
 					for f71_local18, f71_local19 in ipairs( f71_local14.specialties_2 ) do
-						f71_local3( f71_local19[@"specialty"], Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"], f71_local6 )
+						f71_local3( f71_local19.specialty, Enum[@"statindexoffset"][@"hash_49AF82A21BAD026D"], f71_local6 )
 					end
 				end
 			else
-				f71_local3( f71_local14[@"primary"], Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f71_local6 )
-				f71_local3( f71_local14[@"secondary"], Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f71_local6 )
-				f71_local3( f71_local14[@"primarygrenade"], Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f71_local6 )
-				f71_local3( f71_local14[@"tacticalgear"], Enum[@"statindexoffset"][@"hash_68EA6ADA81FD4511"], f71_local6 )
+				f71_local3( f71_local14.primary, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f71_local6 )
+				f71_local3( f71_local14.secondary, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f71_local6 )
+				f71_local3( f71_local14.primarygrenade, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f71_local6 )
+				f71_local3( f71_local14.tacticalgear, Enum[@"statindexoffset"][@"hash_68EA6ADA81FD4511"], f71_local6 )
 				if f71_local14.talents then
 					for f71_local18, f71_local19 in ipairs( f71_local14.talents ) do
-						f71_local3( f71_local19[@"talent"], Enum[@"statindexoffset"][@"hash_68EA6ADA81FD4511"], f71_local6 )
+						f71_local3( f71_local19.talent, Enum[@"statindexoffset"][@"hash_68EA6ADA81FD4511"], f71_local6 )
 					end
 				end
 				if f71_local14.bonuscards then
 					for f71_local18, f71_local19 in ipairs( f71_local14.bonuscards ) do
-						f71_local3( f71_local19[@"bonuscard"], Enum[@"statindexoffset"][@"hash_1A949B83CC070B0"], f71_local6 )
+						f71_local3( f71_local19.bonuscard, Enum[@"statindexoffset"][@"hash_1A949B83CC070B0"], f71_local6 )
 					end
 				end
 			end
@@ -1599,9 +1598,9 @@ DataSources.LevelRewardLoadoutInfo = ListHelper_SetupDataSource( "LevelRewardLoa
 end, true )
 DataSources.PrestigeCallingCard = {
 	getModel = function ( f74_arg0 )
-		local f74_local0 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f74_arg0 ), "PrestigeCallingCard" )
+		local f74_local0 = Engine.GetModel( Engine.GetModelForController( f74_arg0 ), "PrestigeCallingCard" )
 		if f74_local0 == nil then
-			f74_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f74_arg0 ), "PrestigeCallingCard" )
+			f74_local0 = Engine.CreateModel( Engine.GetModelForController( f74_arg0 ), "PrestigeCallingCard" )
 			f74_local0:create( "title" )
 			f74_local0:create( "description" )
 			f74_local0:create( "iconId" )
@@ -1611,7 +1610,7 @@ DataSources.PrestigeCallingCard = {
 		return f74_local0
 	end,
 	setModelValues = function ( f75_arg0, f75_arg1, f75_arg2, f75_arg3, f75_arg4 )
-		local f75_local0 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f75_arg0 ), "PrestigeCallingCard" )
+		local f75_local0 = Engine.GetModel( Engine.GetModelForController( f75_arg0 ), "PrestigeCallingCard" )
 		if f75_local0 == nil then
 			f75_local0 = DataSources.PrestigeCallingCard.getModel( f75_arg0 )
 		end
@@ -1642,13 +1641,13 @@ DataSources.PrestigeRewards = ListHelper_SetupDataSource( "PrestigeRewards", fun
 	local f76_local2 = CoD.PrestigeUtility.GetPrestigeGameMode()
 	local f76_local3 = CoD.PrestigeUtility.GetCurrentPLevel( f76_arg0, f76_local2 ) + 1
 	f76_local1( Engine[@"hash_2FC100C7712C1987"]( f76_local3, f76_local2 ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_1A15D2B49843A6EB", f76_local3 ) )
-	if f76_local2 ~= Enum[@"emodes"][@"mode_warzone"] then
-		f76_local1( @"ui_icon_prestige_permanenttoken_large", @"hash_7943D0DA9B5CB36E" )
+	if f76_local2 ~= Enum.eModes.mode_warzone then
+		f76_local1( "ui_icon_prestige_permanenttoken_large", @"hash_7943D0DA9B5CB36E" )
 	end
-	if f76_local2 == Enum[@"emodes"][@"mode_zombies"] then
-		f76_local1( @"ui_icon_nebulium_medium", @"menu/plasma" )
-	elseif f76_local2 == Enum[@"emodes"][@"mode_multiplayer"] and f0_local3[f76_local3] then
-		f76_local1( @"uie_create_a_class_reward_icon", @"hash_59DC7EEA939C4551" )
+	if f76_local2 == Enum.eModes.mode_zombies then
+		f76_local1( "ui_icon_nebulium_medium", @"menu/plasma" )
+	elseif f76_local2 == Enum.eModes.mode_multiplayer and f0_local3[f76_local3] then
+		f76_local1( "uie_create_a_class_reward_icon", @"hash_59DC7EEA939C4551" )
 	end
 	return f76_local0
 end, true )
@@ -1656,9 +1655,9 @@ CoD.OverlayUtility.AddSystemOverlay( "EnterPrestigeMode", {
 	menuName = "SystemOverlay_Full",
 	frameWidget = "CoD.systemOverlay_Prestige",
 	title = function ( f78_arg0 )
-		return Engine[@"hash_4F9F1239CFD921FE"]( @"hash_7E903B367C2A5717", CoD.PrestigeUtility.GetCurrentPLevel( f78_arg0 ) + 1 )
+		return Engine[@"hash_4F9F1239CFD921FE"]( "menu/prestige_enter_level_question", CoD.PrestigeUtility.GetCurrentPLevel( f78_arg0 ) + 1 )
 	end,
-	subtitle = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_6D4D5A6F9B41B3A6" ),
+	subtitle = Engine[@"hash_4F9F1239CFD921FE"]( "menu/about_prestige_mode_caps" ),
 	prestigeItemName = function ( f79_arg0 )
 		return CoD.GetRankName( 0, CoD.PrestigeUtility.GetCurrentPLevel( f79_arg0 ) + 1, CoD.PrestigeUtility.GetPrestigeGameMode() )
 	end,
@@ -1701,7 +1700,7 @@ CoD.OverlayUtility.AddSystemOverlay( "EnterPrestigeMode", {
 				GoBack( f86_arg4, f86_arg2 )
 			end
 			
-			table.insert( f83_local0, f83_local2( Engine[@"hash_4F9F1239CFD921FE"]( @"hash_5E574BBAD7F9CEAE", f83_local1 ), f83_local3, false ) )
+			table.insert( f83_local0, f83_local2( Engine[@"hash_4F9F1239CFD921FE"]( "menu/prestige_enter_level", f83_local1 ), f83_local3, false ) )
 			table.insert( f83_local0, f83_local2( Engine[@"hash_4F9F1239CFD921FE"]( @"menu/cancel" ), f83_local4, true ) )
 			return f83_local0
 		end, true )
@@ -1712,9 +1711,9 @@ CoD.OverlayUtility.AddSystemOverlay( "EnterPrestigeMode", {
 CoD.OverlayUtility.AddSystemOverlay( "PrestigeFreshStart1", {
 	menuName = "SystemOverlay_Full",
 	frameWidget = "CoD.systemOverlay_Prestige",
-	title = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_499EDC1B272ABA57" ),
+	title = Engine[@"hash_4F9F1239CFD921FE"]( "menu/prestige_fresh_start_question" ),
 	subtitle = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_1EA01E48F3DF7660" ),
-	prestigeItemName = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_499EDC1B272ABA57" ),
+	prestigeItemName = Engine[@"hash_4F9F1239CFD921FE"]( "menu/prestige_fresh_start_question" ),
 	description = Engine[@"hash_4F9F1239CFD921FE"]( CoD.PrestigeUtility.GetStringForMode( @"hash_65741301630398C1" ) ),
 	supportText = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_ECA1FDC726D20ED" ),
 	prestigeLayout = CoD.PrestigeUtility.PrestigeOverlayLayouts.FreshStart,
@@ -1743,7 +1742,7 @@ CoD.OverlayUtility.AddSystemOverlay( "PrestigeFreshStart1", {
 				GoBack( f91_arg4, f91_arg2 )
 			end
 			
-			table.insert( f88_local0, f88_local1( @"hash_2395CB6A23357AF6", f88_local2, false ) )
+			table.insert( f88_local0, f88_local1( "menu/use_fresh_start", f88_local2, false ) )
 			table.insert( f88_local0, f88_local1( @"menu/cancel", f88_local3, true ) )
 			return f88_local0
 		end, true )
@@ -1754,7 +1753,7 @@ CoD.OverlayUtility.AddSystemOverlay( "PrestigeFreshStart1", {
 CoD.OverlayUtility.AddSystemOverlay( "PrestigeFreshStart2", {
 	menuName = "SystemOverlay_Full",
 	frameWidget = "CoD.systemOverlay_Prestige",
-	title = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_E600BD476A84DE9" ),
+	title = Engine[@"hash_4F9F1239CFD921FE"]( "menu/are_you_sure" ),
 	subtitle = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_1EA01E48F3DF7660" ),
 	description = Engine[@"hash_4F9F1239CFD921FE"]( CoD.PrestigeUtility.GetStringForMode( @"hash_1DBA7AA206A2D3FB" ) ),
 	supportText = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_ECA1CDC726D1BD4" ),
@@ -1785,7 +1784,7 @@ CoD.OverlayUtility.AddSystemOverlay( "PrestigeFreshStart2", {
 				GoBack( f96_arg4, f96_arg2 )
 			end
 			
-			table.insert( f93_local0, f93_local1( @"hash_2395CB6A23357AF6", f93_local2, false ) )
+			table.insert( f93_local0, f93_local1( "menu/use_fresh_start", f93_local2, false ) )
 			table.insert( f93_local0, f93_local1( @"menu/cancel", f93_local3, true ) )
 			return f93_local0
 		end, true )
@@ -1799,17 +1798,17 @@ CoD.OverlayUtility.AddSystemOverlay( "PrestigeMasterNotification", {
 	title = Engine[@"hash_4F9F1239CFD921FE"]( @"menu/prestige_master" ),
 	description = function ()
 		if CoD.isZombie == true then
-			return Engine[@"hash_4F9F1239CFD921FE"]( @"hash_12F1A76D4186CCC5" )
+			return Engine[@"hash_4F9F1239CFD921FE"]( "menu/zm_prestige_master_notification" )
 		else
-			return Engine[@"hash_4F9F1239CFD921FE"]( @"hash_122E59E4E76F889" )
+			return Engine[@"hash_4F9F1239CFD921FE"]( "menu/prestige_master_notification" )
 		end
 	end,
 	image = function ( f98_arg0 )
-		local f98_local0 = Enum[@"emodes"][@"mode_multiplayer"]
+		local f98_local0 = Enum.eModes.mode_multiplayer
 		if CoD.isZombie == true then
-			f98_local0 = Enum[@"emodes"][@"mode_zombies"]
+			f98_local0 = Enum.eModes.mode_zombies
 		end
-		return GetRankIconLarge( Engine[@"getrankicon"]( 0, CoD.PrestigeUtility.GetPrestigeCap( f98_local0 ), f98_local0 ) )
+		return GetRankIconLarge( Engine.GetRankIcon( 0, CoD.PrestigeUtility.GetPrestigeCap( f98_local0 ), f98_local0 ) )
 	end,
 	categoryType = CoD.OverlayUtility.OverlayTypes.GenericMessage,
 	listDatasource = nil,
@@ -1818,9 +1817,9 @@ CoD.OverlayUtility.AddSystemOverlay( "PrestigeMasterNotification", {
 CoD.OverlayUtility.AddSystemOverlay( "BetaTokenNotification", {
 	menuName = "SystemOverlay_Full",
 	frameWidget = "CoD.systemOverlay_Prestige",
-	title = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_3A833716CBB8F05A" ),
+	title = Engine[@"hash_4F9F1239CFD921FE"]( "menu/congratulations_caps" ),
 	subtitle = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_7FBF779C0C40B1AF" ),
-	prestigeItemName = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_7761785BDEE02A1D" ),
+	prestigeItemName = Engine[@"hash_4F9F1239CFD921FE"]( "mpui/unlock_token" ),
 	description = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_58D7FE0562ECF1E" ),
 	prestigeLayout = CoD.PrestigeUtility.PrestigeOverlayLayouts.Standard,
 	image = "prestige_icon_awards",
@@ -1854,13 +1853,13 @@ CoD.OverlayUtility.AddSystemOverlay( "PermanentUnlockClassItem", {
 	frameWidget = "CoD.systemOverlay_Prestige",
 	title = Engine[@"hash_4F9F1239CFD921FE"]( @"menu/permanent_unlock" ),
 	prestigeItemName = function ( f103_arg0, f103_arg1 )
-		return Engine[@"hash_4F9F1239CFD921FE"]( @"hash_287EEF440127A8D9", CoD.CACUtility.GetItemGroupDisplayNameFromRef( Engine[@"getitemgroup"]( f103_arg1 ) ), Engine[@"getitemname"]( f103_arg1, CoD.PrestigeUtility.GetPermanentUnlockMode() ) )
+		return Engine[@"hash_4F9F1239CFD921FE"]( @"hash_287EEF440127A8D9", CoD.CACUtility.GetItemGroupDisplayNameFromRef( Engine.GetItemGroup( f103_arg1 ) ), Engine.GetItemName( f103_arg1, CoD.PrestigeUtility.GetPermanentUnlockMode() ) )
 	end,
 	description = function ( f104_arg0, f104_arg1 )
-		return Engine[@"hash_4F9F1239CFD921FE"]( @"hash_77916417949FD96D", Engine[@"getitemname"]( f104_arg1, CoD.PrestigeUtility.GetPermanentUnlockMode() ) )
+		return Engine[@"hash_4F9F1239CFD921FE"]( @"hash_77916417949FD96D", Engine.GetItemName( f104_arg1, CoD.PrestigeUtility.GetPermanentUnlockMode() ) )
 	end,
 	supportText = function ( f105_arg0, f105_arg1 )
-		return Engine[@"hash_4F9F1239CFD921FE"]( Engine[@"getitemname"]( f105_arg1, CoD.PrestigeUtility.GetPermanentUnlockMode() ) )
+		return Engine[@"hash_4F9F1239CFD921FE"]( Engine.GetItemName( f105_arg1, CoD.PrestigeUtility.GetPermanentUnlockMode() ) )
 	end,
 	image = function ( f106_arg0, f106_arg1, f106_arg2 )
 		return f106_arg2
@@ -1897,7 +1896,7 @@ CoD.OverlayUtility.AddSystemOverlay( "PermanentUnlockClassItem", {
 				GoBack( f111_arg4, f111_arg2 )
 			end
 			
-			table.insert( f108_local0, f108_local1( @"hash_156A1934FFD3E74D", f108_local2, false ) )
+			table.insert( f108_local0, f108_local1( "menu/permanently_unlock", f108_local2, false ) )
 			table.insert( f108_local0, f108_local1( @"menu/cancel", f108_local3, true ) )
 			return f108_local0
 		end, true )
@@ -1924,7 +1923,7 @@ end )
 CoD.OverlayUtility.AddSystemOverlay( "RequestProcessingOverlay", {
 	menuName = "SystemOverlay_Full",
 	frameWidget = "CoD.systemOverlay_Prestige",
-	title = Engine[@"hash_4F9F1239CFD921FE"]( 0x1FE7F4D169E0A3 ),
+	title = Engine[@"hash_4F9F1239CFD921FE"]( "menu/activating_prestige" ),
 	subtitle = Engine[@"hash_4F9F1239CFD921FE"]( 0x0 ),
 	prestigeLayout = CoD.PrestigeUtility.PrestigeOverlayLayouts.RequestProcessing,
 	categoryType = CoD.OverlayUtility.OverlayTypes.Unlock

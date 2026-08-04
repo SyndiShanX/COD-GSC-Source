@@ -44,8 +44,8 @@ CoD.PC_SocialMenu_AddFriendTextBox.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	SearchPlaceholderText:setAlpha(0)
 	SearchPlaceholderText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_1236F2E52CE62AFE"))
 	SearchPlaceholderText:setTTF("default")
-	SearchPlaceholderText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	SearchPlaceholderText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	SearchPlaceholderText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	SearchPlaceholderText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(SearchPlaceholderText)
 	self.SearchPlaceholderText = SearchPlaceholderText
 	local CornerTopL = LUI.UIImage.new(0, 0, 0, 1, 0, 0, 0, 1)
@@ -67,8 +67,8 @@ CoD.PC_SocialMenu_AddFriendTextBox.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	local TextBox = LUI.UIText.new(0, 0.95, 11, 11, 0.19, 0.82, 0, 0)
 	TextBox:setText("")
 	TextBox:setTTF("default")
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	if PostLoadFunc then

@@ -1,4 +1,3 @@
-
 CoD.WarUtility = {}
 CoD.WarUtility.MissionInfo = {
 	mission_koth = {
@@ -29,8 +28,8 @@ CoD.WarUtility.InitializeWarDataSource = function ( f1_arg0 )
 			zoneInfo = {},
 			tierInfo = {}
 		}
-		local f1_local1 = Engine[@"hash_2E00B2F29271C60B"]( @"warscoring" )
-		for f1_local2 = 1, f1_local1[@"hash_6869549C59B6EDEB"], 1 do
+		local f1_local1 = Engine[@"hash_2E00B2F29271C60B"]( "warscoring" )
+		for f1_local2 = 1, f1_local1.completionsecondscount, 1 do
 			DataSources.WarData.WarInfo.completionBonus[f1_local2] = {
 				time = f1_local1[Engine[@"converttoxhash"]( string.format( "completionSeconds%02d", f1_local2 ) )],
 				score = f1_local1[Engine[@"converttoxhash"]( string.format( "completionScore%02d", f1_local2 ) )]
@@ -39,7 +38,7 @@ CoD.WarUtility.InitializeWarDataSource = function ( f1_arg0 )
 		for f1_local2 = 1, f1_local1[@"hash_764BD41DBBCBF9D0"], 1 do
 			DataSources.WarData.WarInfo.tierInfo[f1_local2] = {
 				icon = f1_local1[@"medalicon" .. f1_local2],
-				name = f1_local1[@"name" .. f1_local2]
+				name = f1_local1["name" .. f1_local2]
 			}
 		end
 		for f1_local2 = 1, f1_local1[@"zonecount"], 1 do
@@ -59,7 +58,7 @@ CoD.WarUtility.InitializeWarDataSource = function ( f1_arg0 )
 		return 
 	end
 	local f1_local1 = Engine[@"hash_36F8027A8BC75673"]()
-	local f1_local2 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "hudItems.war" )
+	local f1_local2 = Engine.CreateModel( Engine.GetGlobalModel(), "hudItems.war" )
 	local f1_local3 = {}
 	local f1_local4 = f1_local2:create( "team1" )
 	local f1_local8 = f1_local2:create( "team2" )
@@ -126,7 +125,7 @@ CoD.WarUtility.InitializeWarDataSource = function ( f1_arg0 )
 				f3_local0 = CoD.SafeGetModelValue( f1_local2, "team1.zone" .. f3_local2 ) or 0
 			end
 			if 0 < f3_local2 and 0 < f3_local0 then
-				f3_local0 = f3_local0 - tonumber( Engine[@"getgametypesetting"]( @"ticketsearnedatstagewin_" .. f3_local2 - 1 ) )
+				f3_local0 = f3_local0 - tonumber( Engine.GetGametypeSetting( "ticketsearnedatstagewin_" .. f3_local2 - 1 ) )
 			end
 		end
 		f1_local9:set( f3_local0 )
@@ -197,7 +196,7 @@ CoD.WarUtility.InitializeWarDataSource = function ( f1_arg0 )
 	
 	DataSources.WarData.subscriptionElement[f1_arg0]:subscribeToModel( f1_local2.currentZone, f1_local10, false )
 	DataSources.WarData.subscriptionElement[f1_arg0]:subscribeToModel( f1_local2.attackingTeam, f1_local13, true )
-	DataSources.WarData.subscriptionElement[f1_arg0]:subscribeToModel( Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f1_arg0 ), "factions.playerFactionTeamEnum" ), f1_local12 )
+	DataSources.WarData.subscriptionElement[f1_arg0]:subscribeToModel( Engine.CreateModel( Engine.GetModelForController( f1_arg0 ), "factions.playerFactionTeamEnum" ), f1_local12 )
 	for f1_local19, f1_local20 in ipairs( f1_local3 ) do
 		local f1_local21 = function ()
 			f1_local20.total:set( tonumber( f1_local20.zone1:get() or 0 ) + tonumber( f1_local20.zone2:get() or 0 ) + tonumber( f1_local20.zone3:get() or 0 ) + f1_local7( f1_local20.bonus:get() or 0 ) )
@@ -228,7 +227,7 @@ end
 DataSources.WarData = {
 	getModel = function ( f8_arg0 )
 		CoD.WarUtility.InitializeWarDataSource( f8_arg0 )
-		return Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "hudItems.war" )
+		return Engine.GetModel( Engine.GetGlobalModel(), "hudItems.war" )
 	end,
 	getCount = function ( f9_arg0 )
 		return #f9_arg0.models

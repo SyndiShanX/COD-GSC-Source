@@ -1,4 +1,4 @@
-require("x64:a2c4a319ea5353")
+require("ui/uieditor/widgets/lobby/common/fe_titlenumbrdr")
 CoD.CraftActionSliderWidget = InheritFrom(LUI.UIElement)
 CoD.CraftActionSliderWidget.__defaultWidth = 315
 CoD.CraftActionSliderWidget.__defaultHeight = 60
@@ -11,8 +11,8 @@ CoD.CraftActionSliderWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	local Frame = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -2, 2)
 	Frame:setRGB(0.2, 0.2, 0.2)
 	Frame:setAlpha(0.5)
-	Frame:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
-	Frame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
+	Frame:setImage(RegisterImage("uie_ui_menu_store_common_frame"))
+	Frame:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_add"))
 	Frame:setShaderVector(0, 0, 0, 0, 0)
 	Frame:setupNineSliceShader(16, 16)
 	self:addElement(Frame)
@@ -21,8 +21,8 @@ CoD.CraftActionSliderWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	actionName:setRGB(0.92, 0.92, 0.92)
 	actionName:setTTF("ttmussels_regular")
 	actionName:setLetterSpacing(2)
-	actionName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	actionName:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	actionName:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	actionName:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(actionName)
 	self.actionName = actionName
 	local sliderBack = CoD.FE_TitleNumBrdr.new(f1_arg0, f1_arg1, 0, 0, 6, 309, 0, 0, 35, 60)

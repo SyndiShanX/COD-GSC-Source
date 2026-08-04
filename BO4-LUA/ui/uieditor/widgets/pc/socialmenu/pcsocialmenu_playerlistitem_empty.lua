@@ -19,11 +19,11 @@ CoD.PCSocialMenu_PlayerListItem_Empty.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	local EmptyText = LUI.UIText.new(0, 0, 24, 224, 0, 0, 30, 52)
 	EmptyText:setRGB(0.33, 0.3, 0.25)
 	EmptyText:setAlpha(0.9)
-	EmptyText:setText(Engine[@"hash_4F9F1239CFD921FE"](0x6ADB318F8178FC))
+	EmptyText:setText(Engine[@"hash_4F9F1239CFD921FE"]("menu/empty_caps"))
 	EmptyText:setTTF("ttmussels_regular")
 	EmptyText:setLetterSpacing(10)
-	EmptyText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	EmptyText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	EmptyText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	EmptyText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(EmptyText)
 	self.EmptyText = EmptyText
 	if PostLoadFunc then

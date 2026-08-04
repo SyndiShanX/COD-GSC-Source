@@ -1,5 +1,5 @@
-require("x64:228a7baa572b047")
-require("x64:2eff9733aa0a59e")
+require("ui/uieditor/widgets/callingcards/callingcards_framewidget")
+require("ui/uieditor/widgets/freecursor/infopanelsubwidgets/freecursorpartyleader")
 CoD.freeCursorIdentityPanel = InheritFrom(LUI.UIElement)
 CoD.freeCursorIdentityPanel.__defaultWidth = 369
 CoD.freeCursorIdentityPanel.__defaultHeight = 89
@@ -40,8 +40,8 @@ CoD.freeCursorIdentityPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.sizeElement = sizeElement
 	local gamertag = LUI.UIText.new(0, 0, 118.5, 367.5, 0, 0, 6.5, 32.5)
 	gamertag:setTTF("notosans_regular")
-	gamertag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	gamertag:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	gamertag:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	gamertag:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	gamertag:linkToElementModel(self, "xuid", true, function(model)
 		local f4_local0 = model:get()
 		if f4_local0 ~= nil then
@@ -52,8 +52,8 @@ CoD.freeCursorIdentityPanel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.gamertag = gamertag
 	local clantag = LUI.UIText.new(0, 0, 118.5, 367.5, 0, 0, 31, 52)
 	clantag:setTTF("notosans_regular")
-	clantag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	clantag:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	clantag:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	clantag:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	clantag:linkToElementModel(self, "xuid", true, function(model)
 		local f5_local0 = model:get()
 		if f5_local0 ~= nil then

@@ -1,5 +1,5 @@
-require("x64:a433c9653680736")
-require("x64:ff0ba3ebdcd89f0")
+require("ui/uieditor/widgets/freecursor/infopanelsubwidgets/freecursorbuttonpromptarea")
+require("ui/uieditor/widgets/onoffimageanimated")
 CoD.freeCursorButtonPromptInfo = InheritFrom(LUI.UIElement)
 CoD.freeCursorButtonPromptInfo.__defaultWidth = 1076
 CoD.freeCursorButtonPromptInfo.__defaultHeight = 36
@@ -23,7 +23,7 @@ CoD.freeCursorButtonPromptInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 			condition = function(menu, element, event)
 				local f3_local0 = CoD.ModelUtility.IsSelfModelValueNonEmptyString(self, f1_arg1, "detailedDescription")
 				if f3_local0 then
-					if not CoD.ModelUtility.AreButtonModelValueBitsSet(f1_arg1, Enum[@"luibutton"][@"lui_key_rtrig"], Enum[@"luibuttonflags"][@"flag_down"]) then
+					if not CoD.ModelUtility.AreButtonModelValueBitsSet(f1_arg1, Enum.LUIButton[@"lui_key_rtrig"], Enum.LUIButtonFlags[@"flag_down"]) then
 						f3_local0 = not CoD.ModelUtility.IsSelfModelValueTrue(self.detailsButton, f1_arg1, "detailedViewPC")
 					else
 						f3_local0 = false
@@ -44,14 +44,14 @@ CoD.freeCursorButtonPromptInfo.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end)
 	local f1_local3 = detailsButton
 	local f1_local4 = detailsButton.subscribeToModel
-	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
-	f1_local4(f1_local3, f1_local5["ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"]], function(f5_arg0)
+	local f1_local5 = Engine.GetModelForController(f1_arg1)
+	f1_local4(f1_local3, f1_local5["ButtonBits." .. Enum.LUIButton[@"lui_key_rtrig"]], function(f5_arg0)
 		f1_arg0:updateElementState(detailsButton, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f5_arg0:get(),
-			modelName = "ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"],
+			modelName = "ButtonBits." .. Enum.LUIButton[@"lui_key_rtrig"],
 		})
 	end, false)
 	detailsButton:linkToElementModel(detailsButton, "detailedViewPC", true, function(model)

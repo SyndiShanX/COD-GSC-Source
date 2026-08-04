@@ -1,5 +1,5 @@
-require("x64:47803d0fb7647f2")
-require("x64:84662ffcdea628")
+require("ui/uieditor/widgets/pc/startmenu/dropdown/optiondropdown")
+require("ui/uieditor/widgets/pc/utility/optioninfowidget")
 local PostLoadFunc = function(self, controller, menu)
 	self:dispatchEventToChildren({
 		name = "options_refresh",
@@ -34,7 +34,7 @@ CoD.StartMenu_Options_PC_Graphics_Game.new = function(f3_arg0, f3_arg1, f3_arg2,
 	graphicsList:setWidgetType(CoD.OptionDropdown)
 	graphicsList:setVerticalCount(14)
 	graphicsList:setSpacing(0)
-	graphicsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	graphicsList:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	graphicsList:setDataSource("OptionGraphicsGame")
 	self:addElement(graphicsList)
 	self.graphicsList = graphicsList

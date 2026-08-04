@@ -7,7 +7,7 @@ CoD.callingcards_loot2_vikingbattles_blood01.new = function(f1_arg0, f1_arg1, f1
 	self.id = "callingcards_loot2_vikingbattles_blood01"
 	self.soundSet = "default"
 	local blood01 = LUI.UIImage.new(0, 0, -319, -7, 0, 0, -226, 38)
-	blood01:setImage(RegisterImage(@"uie_ui_menu_callingcards_vikingbattles_blood1"))
+	blood01:setImage(RegisterImage("uie_ui_menu_callingcards_vikingbattles_blood1"))
 	self:addElement(blood01)
 	self.blood01 = blood01
 	if PostLoadFunc then

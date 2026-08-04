@@ -1,5 +1,5 @@
-require("x64:100e5d2a5970b5e")
-require("x64:29187ea00d726c3")
+require("ui/uieditor/widgets/pc/pc_achievementdetailedview_desc_bg")
+require("ui/uieditor/widgets/pc/utility/verticallistspacer")
 CoD.PC_AchievementDetailedView_Desc = InheritFrom(LUI.UIElement)
 CoD.PC_AchievementDetailedView_Desc.__defaultWidth = 600
 CoD.PC_AchievementDetailedView_Desc.__defaultHeight = 129
@@ -22,8 +22,8 @@ CoD.PC_AchievementDetailedView_Desc.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	Name:setTTF("ttmussels_demibold")
 	Name:setLetterSpacing(4)
 	Name:setLineSpacing(3)
-	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	Name:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	Name:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	Name:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(Name)
 	self.Name = Name
 	local Separator = LUI.UIImage.new(0, 1, 20, -20, 0, 0, 60, 61)
@@ -36,8 +36,8 @@ CoD.PC_AchievementDetailedView_Desc.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	Description:setTTF("dinnext_regular")
 	Description:setLetterSpacing(1)
 	Description:setLineSpacing(3)
-	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	Description:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	Description:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	Description:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(Description)
 	self.Description = Description
 	local VerticalListSpacer2 = CoD.VerticalListSpacer.new(f1_arg0, f1_arg1, -0.01, 0.99, 0, 0, 0, 0, 99, 111)

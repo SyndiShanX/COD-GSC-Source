@@ -1,9 +1,9 @@
-CoD[@"hash_542F57FBC330969D"] = InheritFrom(LUI.UIElement)
-CoD[@"hash_542F57FBC330969D"].__defaultWidth = 960
-CoD[@"hash_542F57FBC330969D"].__defaultHeight = 240
-CoD[@"hash_542F57FBC330969D"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD.callingcards_specialistzombies = InheritFrom(LUI.UIElement)
+CoD.callingcards_specialistzombies.__defaultWidth = 960
+CoD.callingcards_specialistzombies.__defaultHeight = 240
+CoD.callingcards_specialistzombies.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[@"hash_542F57FBC330969D"])
+	self:setClass(CoD.callingcards_specialistzombies)
 	self.id = "CallingCards_specialistzombies"
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
@@ -28,7 +28,7 @@ CoD[@"hash_542F57FBC330969D"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end
 	return self
 end
-CoD[@"hash_542F57FBC330969D"].__resetProperties = function(f2_arg0)
+CoD.callingcards_specialistzombies.__resetProperties = function(f2_arg0)
 	f2_arg0.battery:completeAnimation()
 	f2_arg0.zombie1:completeAnimation()
 	f2_arg0.zombie2:completeAnimation()
@@ -41,7 +41,7 @@ CoD[@"hash_542F57FBC330969D"].__resetProperties = function(f2_arg0)
 	f2_arg0.zombie2:setTopBottom(0, 0, -186, 286)
 	f2_arg0.bg:setLeftRight(0, 0, 0, 1208)
 end
-CoD[@"hash_542F57FBC330969D"].__clipsPerState = {
+CoD.callingcards_specialistzombies.__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()

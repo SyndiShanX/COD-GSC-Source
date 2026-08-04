@@ -13,8 +13,8 @@ CoD.ChatClientChatEntryChannel.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	entryChannelText:setShaderVector(0, 0.25, 0, 0, 0)
 	entryChannelText:setShaderVector(1, 0.05, 0, 0, 0)
 	entryChannelText:setShaderVector(2, 0, 0, 0, 0.67)
-	entryChannelText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	entryChannelText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	entryChannelText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	entryChannelText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(entryChannelText)
 	self.entryChannelText = entryChannelText
 	self.entryChannelText:linkToElementModel(self, "chColor", true, function(model)

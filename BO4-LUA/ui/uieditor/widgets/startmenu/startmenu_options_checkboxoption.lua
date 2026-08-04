@@ -1,5 +1,5 @@
-require("x64:3625a0d08a5c80d")
-require("x64:a1e2d7b19f5deb0")
+require("ui/uieditor/widgets/lobby/common/fe_focusbarcontainer")
+require("ui/uieditor/widgets/startmenu/startmenu_frame_nobg")
 CoD.StartMenu_Options_CheckBoxOption = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Options_CheckBoxOption.__defaultWidth = 750
 CoD.StartMenu_Options_CheckBoxOption.__defaultHeight = 51
@@ -25,16 +25,16 @@ CoD.StartMenu_Options_CheckBoxOption.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	self.checkboxBacking = checkboxBacking
 	local CheckboxBkg = LUI.UIImage.new(0, 0, 22, 50, 0, 0, 13, 39)
 	CheckboxBkg:setAlpha(0)
-	CheckboxBkg:setImage(RegisterImage(@"uie_t7_menu_cacselection_checkbox_empty"))
+	CheckboxBkg:setImage(RegisterImage("uie_t7_menu_cacselection_checkbox_empty"))
 	self:addElement(CheckboxBkg)
 	self.CheckboxBkg = CheckboxBkg
 	local checkboxCheck = LUI.UIImage.new(0, 0, 22, 50, 0, 0, 13, 39)
-	checkboxCheck:setImage(RegisterImage(@"uie_t7_menu_cacselection_checkbox"))
+	checkboxCheck:setImage(RegisterImage("uie_t7_menu_cacselection_checkbox"))
 	self:addElement(checkboxCheck)
 	self.checkboxCheck = checkboxCheck
 	local labelText = LUI.UIText.new(0, 0, 70, 750, 0, 0, 7, 45)
 	labelText:setTTF("default")
-	labelText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	labelText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	labelText:linkToElementModel(self, "label", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

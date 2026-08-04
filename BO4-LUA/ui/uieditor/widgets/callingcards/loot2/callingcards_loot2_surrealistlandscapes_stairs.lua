@@ -1,4 +1,4 @@
-require("x64:c8af151fdab05a0")
+require("ui/uieditor/widgets/callingcards/loot2/callingcards_loot2_surrealistlandscapes_ball")
 CoD.callingcards_loot2_surrealistlandscapes_stairs = InheritFrom(LUI.UIElement)
 CoD.callingcards_loot2_surrealistlandscapes_stairs.__defaultWidth = 512
 CoD.callingcards_loot2_surrealistlandscapes_stairs.__defaultHeight = 240
@@ -10,7 +10,7 @@ CoD.callingcards_loot2_surrealistlandscapes_stairs.new = function(f1_arg0, f1_ar
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local stairs = LUI.UIImage.new(0, 0, 0, 512, 0, 0, 0, 240)
-	stairs:setImage(RegisterImage(@"uie_ui_menu_callingcards_surrealistlandscape_stairs"))
+	stairs:setImage(RegisterImage("uie_ui_menu_callingcards_surrealistlandscape_stairs"))
 	self:addElement(stairs)
 	self.stairs = stairs
 	local ball = CoD.callingcards_loot2_surrealistlandscapes_ball.new(f1_arg0, f1_arg1, 0, 0, 208, 256, 0, 0, 76, 124)

@@ -1,9 +1,9 @@
-require("x64:bb4d1a31de34c66")
-require("x64:d288f163475f28")
-require("x64:5d1faa058a65aae")
-require("x64:2d685c8ddad85cf")
-require("x64:7889ce1e3e2e8a")
-require("x64:d93d55bb6418607")
+require("ui/uieditor/menus/social/social_partysettings")
+require("ui/uieditor/widgets/social/social_infopane")
+require("ui/uieditor/widgets/social/social_managepartyplayerbutton")
+require("ui/uieditor/widgets/social/social_partysettingsbutton")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsbackground")
+require("ui/uieditor/widgets/pc_vscrolllist")
 CoD.Social_Party = InheritFrom(LUI.UIElement)
 CoD.Social_Party.__defaultWidth = 1920
 CoD.Social_Party.__defaultHeight = 1080
@@ -25,10 +25,10 @@ CoD.Social_Party.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	self.playerInfo = playerInfo
 	local Title = LUI.UIText.new(0.5, 0.5, -479, 4, 0, 0, 175, 209)
 	Title:setAlpha(0.8)
-	Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_17AE9A3B9A819A37"))
+	Title:setText(Engine[@"hash_4F9F1239CFD921FE"]("menu/tab_party_caps"))
 	Title:setTTF("ttmussels_regular")
 	Title:setLetterSpacing(2)
-	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Title:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	self:addElement(Title)
 	self.Title = Title
 	local gamertag = LUI.UIText.new(0.5, 0.5, -799, -498, 0, 0, 175, 209)
@@ -37,8 +37,8 @@ CoD.Social_Party.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	gamertag:setText(LocalizeToUpperString(@"menu/party_settings"))
 	gamertag:setTTF("notosans_regular")
 	gamertag:setLetterSpacing(2)
-	gamertag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	gamertag:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
+	gamertag:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	gamertag:setAlignment(Enum.LUIAlignment[@"lui_alignment_bottom"])
 	self:addElement(gamertag)
 	self.gamertag = gamertag
 	local PCSimpleVScrollList = nil
@@ -66,15 +66,15 @@ CoD.Social_Party.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(SocialPartySettingsButton, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
-		OpenPopup(self, "Social_PartySettings", controller)
+	f1_arg0:AddButtonCallbackFunction(SocialPartySettingsButton, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], nil, function(f4_arg0, f4_arg1, f4_arg2, f4_arg3)
+		OpenPopup(self, "Social_PartySettings", f4_arg2)
 		PlaySoundAlias("uin_toggle_generic")
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
+	end, function(f5_arg0, f5_arg1, f5_arg2)
+		CoD.Menu.SetButtonLabel(f5_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	self:addElement(SocialPartySettingsButton)
@@ -84,7 +84,7 @@ CoD.Social_Party.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	infoBracketBot:setAlpha(0.1)
 	infoBracketBot:setZRot(180)
 	infoBracketBot:setImage(RegisterImage(@"hash_4C325BED3F226657"))
-	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
+	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_add"))
 	infoBracketBot:setShaderVector(0, 0, 0, 0, 0)
 	infoBracketBot:setupNineSliceShader(16, 4)
 	self:addElement(infoBracketBot)
@@ -94,7 +94,7 @@ CoD.Social_Party.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_
 	infoBracketBot2:setAlpha(0.1)
 	infoBracketBot2:setZRot(180)
 	infoBracketBot2:setImage(RegisterImage(@"hash_4C325BED3F226657"))
-	infoBracketBot2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
+	infoBracketBot2:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_add"))
 	infoBracketBot2:setShaderVector(0, 0, 0, 0, 0)
 	infoBracketBot2:setupNineSliceShader(16, 4)
 	self:addElement(infoBracketBot2)

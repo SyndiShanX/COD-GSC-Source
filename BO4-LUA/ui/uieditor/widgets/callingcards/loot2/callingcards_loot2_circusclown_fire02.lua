@@ -8,14 +8,14 @@ CoD.callingcards_loot2_circusclown_fire02.new = function(f1_arg0, f1_arg1, f1_ar
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local fire02 = LUI.UIImage.new(0, 0, 0, 96, 0, 0, 0, 176)
-	fire02:setImage(RegisterImage(@"uie_ui_menu_callingcards_circusclown_fire02"))
-	fire02:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	fire02:setImage(RegisterImage("uie_ui_menu_callingcards_circusclown_fire02"))
+	fire02:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(fire02)
 	self.fire02 = fire02
 	local fire = LUI.UIImage.new(0, 0, -12, 108, 0, 0, -97, 167)
 	fire:setAlpha(0.4)
-	fire:setImage(RegisterImage(@"uie_ui_menu_callingcards_circusclown_fire03"))
-	fire:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	fire:setImage(RegisterImage("uie_ui_menu_callingcards_circusclown_fire03"))
+	fire:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(fire)
 	self.fire = fire
 	if PostLoadFunc then

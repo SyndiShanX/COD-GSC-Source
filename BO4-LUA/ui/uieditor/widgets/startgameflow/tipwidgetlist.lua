@@ -1,4 +1,4 @@
-require("x64:7ecf7294ec3064f")
+require("ui/uieditor/widgets/startgameflow/tipwidgetbacking")
 CoD.TipWidgetList = InheritFrom(LUI.UIElement)
 CoD.TipWidgetList.__defaultWidth = 1735
 CoD.TipWidgetList.__defaultHeight = 134
@@ -13,7 +13,7 @@ CoD.TipWidgetList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	TipLabel:setText(LocalizeToUpperString(@"mpui/tip"))
 	TipLabel:setTTF("ttmussels_demibold")
 	TipLabel:setLetterSpacing(5.5)
-	TipLabel:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
+	TipLabel:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum.LUIAlignment[@"lui_alignment_left"]))
 	self:addElement(TipLabel)
 	self.TipLabel = TipLabel
 	local TipWidgetBacking = CoD.TipWidgetBacking.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 0, 66, 126)
@@ -35,7 +35,7 @@ CoD.TipWidgetList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1
 	})
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[@"getglobalmodel"]()
+	local f1_local5 = Engine.GetGlobalModel()
 	f1_local4(f1_local3, f1_local5["lobbyRoot.lobbyNav"], function(f4_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

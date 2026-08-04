@@ -1,7 +1,7 @@
-require("x64:a969aa55b2ced8")
-require("x64:945348cbcaea7d0")
+require("ui/uieditor/widgets/common/commonidentitymembernamestreamlined")
+require("ui/uieditor/widgets/common/commonplasmacurrency")
 require("x64:d516fec83a97b65")
-require("x64:4cee61320cd1f1b")
+require("ui/uieditor/widgets/startmenu/startmenu_codpoints")
 CoD.CommonIdentityWidgetStreamlinedInternal = InheritFrom(LUI.UIElement)
 CoD.CommonIdentityWidgetStreamlinedInternal.__defaultWidth = 530
 CoD.CommonIdentityWidgetStreamlinedInternal.__defaultHeight = 40
@@ -66,7 +66,7 @@ CoD.CommonIdentityWidgetStreamlinedInternal.new = function(f1_arg0, f1_arg1, f1_
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[@"getglobalmodel"]()
+	local f1_local7 = Engine.GetGlobalModel()
 	f1_local6(f1_local5, f1_local7["lobbyRoot.lobbyNav"], function(f8_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
@@ -78,7 +78,7 @@ CoD.CommonIdentityWidgetStreamlinedInternal.new = function(f1_arg0, f1_arg1, f1_
 	end, false)
 	f1_local5 = self
 	f1_local6 = self.subscribeToModel
-	f1_local7 = Engine[@"getglobalmodel"]()
+	f1_local7 = Engine.GetGlobalModel()
 	f1_local6(f1_local5, f1_local7["lobbyRoot.lobbyMainMode"], function(f9_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

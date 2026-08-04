@@ -1,5 +1,5 @@
-require("x64:3e426332d66c91e")
-require("x64:dab8c3a6f5b136c")
+require("ui/uieditor/widgets/common/commonfocusbrackets")
+require("ui/uieditor/widgets/common/commonpixelbacking")
 CoD.EmblemRenameButton_Internal = InheritFrom(LUI.UIElement)
 CoD.EmblemRenameButton_Internal.__defaultWidth = 400
 CoD.EmblemRenameButton_Internal.__defaultHeight = 60
@@ -17,7 +17,7 @@ CoD.EmblemRenameButton_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.Blur = Blur
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseTiledBacking:setAlpha(0.95)
-	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
@@ -25,7 +25,7 @@ CoD.EmblemRenameButton_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.NoiseTiledBacking = NoiseTiledBacking
 	local FocusGlow = LUI.UIImage.new(0, 1, -146, 146, 0, 1, -18, 18)
 	FocusGlow:setAlpha(0)
-	FocusGlow:setImage(RegisterImage(@"uie_ui_menu_common_focus_glow_large"))
+	FocusGlow:setImage(RegisterImage("uie_ui_menu_common_focus_glow_large"))
 	FocusGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_6DAB59B2CAE01851"))
 	FocusGlow:setShaderVector(0, 0, 0, 0.25, 0.25)
 	FocusGlow:setShaderVector(1, 1.2, 0, 0, 0)
@@ -34,8 +34,8 @@ CoD.EmblemRenameButton_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.FocusGlow = FocusGlow
 	local FrameBorder = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -1, 1)
 	FrameBorder:setAlpha(0.15)
-	FrameBorder:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
-	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
+	FrameBorder:setImage(RegisterImage("uie_ui_menu_store_common_frame"))
+	FrameBorder:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_add"))
 	FrameBorder:setShaderVector(0, 0, 0, 0, 0)
 	FrameBorder:setupNineSliceShader(12, 12)
 	self:addElement(FrameBorder)
@@ -43,8 +43,8 @@ CoD.EmblemRenameButton_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local FocusBorder = LUI.UIImage.new(0, 1, -4, 4, 0, 1, -4, 4)
 	FocusBorder:setRGB(0.96, 0.94, 0.78)
 	FocusBorder:setAlpha(0)
-	FocusBorder:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame"))
-	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
+	FocusBorder:setImage(RegisterImage("uie_ui_menu_store_focus_frame"))
+	FocusBorder:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_add"))
 	FocusBorder:setShaderVector(0, 0, 0, 0, 0)
 	FocusBorder:setupNineSliceShader(10, 10)
 	self:addElement(FocusBorder)
@@ -59,7 +59,7 @@ CoD.EmblemRenameButton_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.FocusBrackets = FocusBrackets
 	local DotTiledBacking = CoD.CommonPixelBacking.new(f1_arg0, f1_arg1, 0, 1, 4, -4, 0, 1, 4, -4)
 	DotTiledBacking:setAlpha(0)
-	DotTiledBacking:setRFTMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	DotTiledBacking:setRFTMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	DotTiledBacking.NoiseBacking:setAlpha(1)
 	DotTiledBacking.TiledShaderImage:setRGB(0.28, 0.28, 0.28)
 	DotTiledBacking.TiledShaderImage:setAlpha(0.15)
@@ -71,8 +71,8 @@ CoD.EmblemRenameButton_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(3)
 	Title:setLineSpacing(1)
-	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
+	Title:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	Title:setAlignment(Enum.LUIAlignment[@"lui_alignment_middle"])
 	Title:linkToElementModel(self, "displayText", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -87,8 +87,8 @@ CoD.EmblemRenameButton_Internal.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self.Icon = Icon
 	local LineFull = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -1, 1)
 	LineFull:setRGB(0.64, 0.71, 0.78)
-	LineFull:setImage(RegisterImage(@"uie_ui_menu_store_focus_frame_white"))
-	LineFull:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
+	LineFull:setImage(RegisterImage("uie_ui_menu_store_focus_frame_white"))
+	LineFull:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_add"))
 	LineFull:setShaderVector(0, 0, 0, 0, 0)
 	LineFull:setupNineSliceShader(12, 12)
 	self:addElement(LineFull)

@@ -1,6 +1,5 @@
-
-require( "x64:cac53608c125a69" )
-require( "x64:cac50608c125550" )
+require( "ui/uieditor/widgets/callingcards/loot3/ui_icon_callingcards_crimewave_wheelspin01" )
+require( "ui/uieditor/widgets/callingcards/loot3/ui_icon_callingcards_crimewave_wheelspin02" )
 CoD.ui_icon_callingcards_crimewave_criminalcar = InheritFrom( LUI.UIElement )
 CoD.ui_icon_callingcards_crimewave_criminalcar.__defaultWidth = 648
 CoD.ui_icon_callingcards_crimewave_criminalcar.__defaultHeight = 240
@@ -13,12 +12,12 @@ CoD.ui_icon_callingcards_crimewave_criminalcar.new = function ( f1_arg0, f1_arg1
 	f1_arg0:addElementToPendingUpdateStateList( self )
 	
 	local criminalcar = LUI.UIImage.new( 0, 0, 0, 648, 0, 0, 0, 240 )
-	criminalcar:setImage( RegisterImage( @"uie_ui_menu_callingcards_crimewave_criminals2" ) )
+	criminalcar:setImage( RegisterImage( "uie_ui_menu_callingcards_crimewave_criminals2" ) )
 	self:addElement( criminalcar )
 	self.criminalcar = criminalcar
 	
 	local criminalcar2 = LUI.UIImage.new( 0, 0, 0, 648, 0, 0, 0, 240 )
-	criminalcar2:setImage( RegisterImage( @"uie_ui_menu_callingcards_crimewave_criminals1" ) )
+	criminalcar2:setImage( RegisterImage( "uie_ui_menu_callingcards_crimewave_criminals1" ) )
 	self:addElement( criminalcar2 )
 	self.criminalcar2 = criminalcar2
 	

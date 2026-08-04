@@ -23,8 +23,8 @@ CoD.GenericIconButton_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	Title:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Title:setTTF("ttmussels_demibold")
 	Title:setLetterSpacing(3)
-	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
+	Title:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	Title:setAlignment(Enum.LUIAlignment[@"lui_alignment_middle"])
 	self:addElement(Title)
 	self.Title = Title
 	local CornerDotBLAnim = LUI.UIImage.new(0, 0, 1, 2, 1, 1, -2, -1)
@@ -50,7 +50,7 @@ CoD.GenericIconButton_Container.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	self:addElement(TopBorder)
 	self.TopBorder = TopBorder
 	local icon = LUI.UIImage.new(0, 0, 2, 62, 0.5, 0.5, -26, 34)
-	icon:setImage(RegisterImage(@"uie_t8_mp_setup_bots"))
+	icon:setImage(RegisterImage("uie_t8_mp_setup_bots"))
 	self:addElement(icon)
 	self.icon = icon
 	if PostLoadFunc then

@@ -116,7 +116,7 @@ CoD.PCOptionsUtility.PrepareCategoryListFromAsset = function(f5_arg0, f5_arg1)
 		if f5_local7[@"iscategory"] == 1 then
 			table.insert(f5_local0, {
 				models = {
-					name = f5_local7[@"displayname"],
+					name = f5_local7.displayname,
 					categoryId = f5_local2,
 				},
 				properties = {},
@@ -149,12 +149,12 @@ CoD.PCOptionsUtility.CreatePCOptionTableFromAsset = function(f8_arg0, f8_arg1)
 		if CoD.PCKoreaUtility.ShowKorea15Plus() and f8_arg1[@"hash_1E0113A4F1783E87"] ~= 0 then
 			return nil
 		elseif f8_arg1[@"hash_23F5AD2205070F2E"] == 1 then
-			local f8_local0 = f8_arg1[@"description"]
+			local f8_local0 = f8_arg1.description
 			if CoD.PCKoreaUtility.ShowKorea15Plus() and f8_arg1[@"hash_275454D1B48DC3"] then
 				f8_local0 = f8_arg1[@"hash_275454D1B48DC3"]
 			end
-			return CoD.PCOptionsUtility.MakeKeybindTable(f8_arg0, f8_arg1[@"displayname"], f8_local0, f8_arg1[@"hash_7E4CF24FFB07F9A2"], f8_arg1[@"bindindex"], f8_arg1[@"hash_2ABB4544CC59EA03"], f8_arg1[@"descriptionimage"])
-		elseif f8_arg1[@"hash_39A5811D217C6EA1"] == 1 then
+			return CoD.PCOptionsUtility.MakeKeybindTable(f8_arg0, f8_arg1.displayname, f8_local0, f8_arg1[@"hash_7E4CF24FFB07F9A2"], f8_arg1[@"bindindex"], f8_arg1[@"hash_2ABB4544CC59EA03"], f8_arg1[@"descriptionimage"])
+		elseif f8_arg1.isemptyseparator == 1 then
 			return CoD.PCOptionsUtility.CreateEmptySeparator(f8_arg0)
 		end
 		local f8_local0 = nil
@@ -163,7 +163,7 @@ CoD.PCOptionsUtility.CreatePCOptionTableFromAsset = function(f8_arg0, f8_arg1)
 			f8_local1 = Engine[@"converttoxhash"](f8_arg1[@"statname"])
 		end
 		local f8_local2 = nil
-		if not f8_arg1[@"description"] then
+		if not f8_arg1.description then
 			local f8_local3 = 0x0
 		end
 		if CoD.PCKoreaUtility.ShowKorea15Plus() and f8_arg1[@"hash_275454D1B48DC3"] then
@@ -171,7 +171,7 @@ CoD.PCOptionsUtility.CreatePCOptionTableFromAsset = function(f8_arg0, f8_arg1)
 		end
 		local f8_local4 = {}
 		local f8_local5 = {}
-		local f8_local6 = f8_arg1[@"displayname"]
+		local f8_local6 = f8_arg1.displayname
 		if not f8_local6 then
 			f8_local6 = 0x0
 		end
@@ -195,7 +195,7 @@ CoD.PCOptionsUtility.CreatePCOptionTableFromAsset = function(f8_arg0, f8_arg1)
 				for f8_local10, f8_local11 in ipairs(f8_arg1.option_dependencies) do
 					f8_local11[@"optionname"] = Engine[@"converttoxhash"](f8_local11[@"optionname"])
 					local f8_local12 = f8_local11[@"optionname"]
-					if f8_local11[@"operator"] ~= "change" then
+					if f8_local11.operator ~= "change" then
 						table.insert(f8_local5, f8_local11)
 					end
 					local f8_local9 = CoD.PCOptionsUtility.GetSpecialProfileData(f8_local12, true)
@@ -213,7 +213,7 @@ CoD.PCOptionsUtility.CreatePCOptionTableFromAsset = function(f8_arg0, f8_arg1)
 							local f9_local8 = f9_local6[@"optionvalue"]
 							f9_local8 = tonumber(f9_local8) or f9_local8
 							local f9_local4 = nil
-							if f9_local6[@"operator"] == "~=" then
+							if f9_local6.operator == "~=" then
 								f9_local4 = f9_local7 ~= f9_local8
 							else
 								f9_local4 = f9_local7 == f9_local8
@@ -245,12 +245,12 @@ CoD.PCOptionsUtility.CreatePCOptionTableFromAsset = function(f8_arg0, f8_arg1)
 					f8_local4.properties._optionProperties._onActive = f8_local2.onActive
 				end
 			end
-		elseif not (not f8_arg1[@"hash_3A37009BD8B9445C"] ~= 1 or f8_local1 ~= nil) or f8_arg1[@"hash_3A37009BD8B9445C"] == 0 and f8_local1 == nil then
+		elseif not (not f8_arg1.isopenbuttonoption ~= 1 or f8_local1 ~= nil) or f8_arg1.isopenbuttonoption == 0 and f8_local1 == nil then
 			f8_local4.models.unavailableFunction = function()
 				return true
 			end
 		end
-		if f8_arg1[@"hash_3A37009BD8B9445C"] == 1 and f8_arg1[@"openmenuname"] == "StartMenu_Options_CoDAccount_CTA" then
+		if f8_arg1.isopenbuttonoption == 1 and f8_arg1[@"openmenuname"] == "StartMenu_Options_CoDAccount_CTA" then
 			f8_local4.models.unavailableFunction = function(f11_arg0)
 				return CoD.SafeGetModelValue(DataSources.UNOAccountInfo.getModel(f11_arg0), "bSignedIn") == true
 			end
@@ -276,15 +276,15 @@ CoD.PCOptionsUtility.CreatePCOptionTableFromAsset = function(f8_arg0, f8_arg1)
 				end
 				f8_local5.maxValue = f8_local6
 				f8_local5 = f8_local4.models
-				f8_local6 = f8_arg1[@"hash_E0EC36B4536B579"]
+				f8_local6 = f8_arg1.toggleonstring
 				if not f8_local6 then
-					f8_local6 = Engine[@"hash_4F9F1239CFD921FE"](@"menu/on")
+					f8_local6 = Engine[@"hash_4F9F1239CFD921FE"]("menu/on")
 				end
 				f8_local5.toggleOnString = f8_local6
 				f8_local5 = f8_local4.models
-				f8_local6 = f8_arg1[@"hash_7E511B9A41A891A3"]
+				f8_local6 = f8_arg1.toggleoffstring
 				if not f8_local6 then
-					f8_local6 = Engine[@"hash_4F9F1239CFD921FE"](@"menu/off")
+					f8_local6 = Engine[@"hash_4F9F1239CFD921FE"]("menu/off")
 				end
 				f8_local5.toggleOffString = f8_local6
 			end
@@ -298,7 +298,7 @@ CoD.PCOptionsUtility.CreatePCOptionTableFromAsset = function(f8_arg0, f8_arg1)
 				end
 				f8_local5.minValue = f8_local6
 				f8_local5 = f8_local4.models
-				f8_local6 = f8_arg1[@"hash_6546C97C01207014"]
+				f8_local6 = f8_arg1.rangeendvalue
 				if not f8_local6 then
 					f8_local6 = 1
 				end
@@ -324,8 +324,8 @@ CoD.PCOptionsUtility.CreatePCOptionTableFromAsset = function(f8_arg0, f8_arg1)
 						local f13_local0 = {}
 						for f13_local4, f13_local5 in ipairs(f8_arg1.options) do
 							table.insert(f13_local0, {
-								name = Engine[@"hash_4F9F1239CFD921FE"](f13_local5[@"label"]),
-								value = tonumber(f13_local5[@"value"]) or f13_local5[@"value"],
+								name = Engine[@"hash_4F9F1239CFD921FE"](f13_local5.label),
+								value = tonumber(f13_local5.value) or f13_local5.value,
 							})
 						end
 						return f13_local0
@@ -349,7 +349,7 @@ CoD.PCOptionsUtility.CreatePCOptionTableFromAsset = function(f8_arg0, f8_arg1)
 				f8_local4.models.isOpen = false
 				f8_local4.models.text = ""
 			end
-		elseif f8_arg1[0xC196D6034CA07F] == 1 then
+		elseif f8_arg1.isexpanderoption == 1 then
 			f8_local6 = CoD.PCOptionsUtility.CreatePCOptionTableFromAsset(f8_arg0, Engine[@"hash_2E00B2F29271C60B"](Engine[@"converttoxhash"](f8_arg1[@"hash_789A4DE9FEE4913"])))
 			if not f8_local6 then
 				return nil
@@ -369,12 +369,12 @@ CoD.PCOptionsUtility.CreatePCOptionTableFromAsset = function(f8_arg0, f8_arg1)
 			if not f8_local7 then
 				f8_local7 = 0
 			end
-			local f8_local8 = f8_arg1[@"displayname"]
+			local f8_local8 = f8_arg1.displayname
 			if not f8_local8 then
 				f8_local8 = 0x0
 			end
 			return f8_local5(f8_local6, f8_local7, f8_local8)
-		elseif f8_arg1[@"hash_3A37009BD8B9445C"] == 1 then
+		elseif f8_arg1.isopenbuttonoption == 1 then
 			f8_local4.models.widgetType = "openbutton"
 			f8_local4.models.openMenuName = f8_arg1[@"openmenuname"]
 		else
@@ -387,8 +387,8 @@ CoD.PCOptionsUtility.CreatePCOptionTableFromAsset = function(f8_arg0, f8_arg1)
 						local f15_local0 = {}
 						for f15_local4, f15_local5 in ipairs(f8_arg1.options) do
 							table.insert(f15_local0, {
-								name = Engine[@"hash_4F9F1239CFD921FE"](f15_local5[@"label"]),
-								value = tonumber(f15_local5[@"value"]) or f15_local5[@"value"],
+								name = Engine[@"hash_4F9F1239CFD921FE"](f15_local5.label),
+								value = tonumber(f15_local5.value) or f15_local5.value,
 							})
 						end
 						return f15_local0
@@ -460,7 +460,7 @@ DataSources.OptionTabs = DataSourceHelpers.ListSetup("PC.OptionTabs", function(f
 		},
 		{
 			models = {
-				name = @"hash_4557B323E42088DA",
+				name = "menu/graphics_caps",
 				listDataSource = "OptionGraphicsVideo",
 				categoriesDataSource = "OptionGraphicsCategories",
 				image = "ui_icon_startmenu_option_graphics",
@@ -482,7 +482,7 @@ DataSources.OptionTabs = DataSourceHelpers.ListSetup("PC.OptionTabs", function(f
 		},
 		{
 			models = {
-				name = @"hash_2E26811C3A36321D",
+				name = "menu/audio_caps",
 				listDataSource = "OptionAudio",
 				categoriesDataSource = "OptionAudioCategories",
 				image = "uie_img_t7_menu_startmenu_option_audio",
@@ -523,7 +523,7 @@ CoD.PCOptionsUtility.SyncAllOptionModels = function(f20_arg0)
 				for f20_local8, f20_local9 in pairs(f20_local4.profilesToUpdate) do
 					local f20_local10 = CoD.PCOptionsUtility.GetOptionModel(f20_arg0, f20_local8)
 					if f20_local10 then
-						Engine[@"forcenotifymodelsubscriptions"](f20_local10.refreshWidget)
+						Engine.ForceNotifyModelSubscriptions(f20_local10.refreshWidget)
 					end
 				end
 			end
@@ -557,7 +557,7 @@ CoD.PCOptionsUtility.SetupOptionDataSource = function(f23_arg0, f23_arg1, f23_ar
 			end
 		end,
 		false,
-		nil,
+		false,
 		function(f24_arg0, f24_arg1, f24_arg2)
 			if f23_arg2 then
 				return
@@ -591,18 +591,18 @@ DataSources.OptionGraphicsVideo = CoD.PCOptionsUtility.SetupOptionDataSource("PC
 DataSources.OptionGraphicsCategories = CoD.PCOptionsUtility.SetupOptionDataSource("PC.OptionGraphicsCategories", @"hash_21AA317708A48A81", true)
 DataSources.OptionKeyBindings = CoD.PCOptionsUtility.SetupOptionDataSource("PC.OptionKeybindings", @"hash_6D2467E662F8539", false)
 DataSources.OptionKeyBindingCategories = CoD.PCOptionsUtility.SetupOptionDataSource("PC.OptionGraphicsCategories", @"hash_6D2467E662F8539", true)
-DataSources.OptionGameplay = CoD.PCOptionsUtility.SetupOptionDataSource("PC.OptionGameplay", @"hash_2E1D867DA45BE574", false)
-DataSources.OptionGameplayCategories = CoD.PCOptionsUtility.SetupOptionDataSource("PC.OptionGraphicsCategories", @"hash_2E1D867DA45BE574", true)
+DataSources.OptionGameplay = CoD.PCOptionsUtility.SetupOptionDataSource("PC.OptionGameplay", "pc_gameplay_options", false)
+DataSources.OptionGameplayCategories = CoD.PCOptionsUtility.SetupOptionDataSource("PC.OptionGraphicsCategories", "pc_gameplay_options", true)
 DataSources.OptionInterface = CoD.PCOptionsUtility.SetupOptionDataSource("PC.OptionInterface", @"hash_3E667FE66146F9B1", false)
 DataSources.OptionInterfaceCategories = CoD.PCOptionsUtility.SetupOptionDataSource("PC.OptionInterfaceCategories", @"hash_3E667FE66146F9B1", true)
 DataSources.OptionAudio = CoD.PCOptionsUtility.SetupOptionDataSource("PC.OptionAudio", @"hash_3A66EE44116637C0", false)
 DataSources.OptionAudioCategories = CoD.PCOptionsUtility.SetupOptionDataSource("PC.OptionAudioCategories", @"hash_3A66EE44116637C0", true)
-DataSources.OptionGamepad = CoD.PCOptionsUtility.SetupOptionDataSource("PC.OptionGamepad", @"hash_3B70550C535036F1", false)
-DataSources.OptionGamepadCategories = CoD.PCOptionsUtility.SetupOptionDataSource("PC.OptionGamepadCategories", @"hash_3B70550C535036F1", true)
+DataSources.OptionGamepad = CoD.PCOptionsUtility.SetupOptionDataSource("PC.OptionGamepad", "pc_gamepad_options", false)
+DataSources.OptionGamepadCategories = CoD.PCOptionsUtility.SetupOptionDataSource("PC.OptionGamepadCategories", "pc_gamepad_options", true)
 DataSources.OptionGraphicContentPC = CoD.PCOptionsUtility.SetupOptionDataSource("PC.OptionGraphicContentPC", @"hash_74B6E9F353ED2F1F", false)
 DataSources.KeybindMessages = {
 	getModel = function(f27_arg0)
-		local f27_local0 = Engine[@"getglobalmodel"]()
+		local f27_local0 = Engine.GetGlobalModel()
 		local f27_local1 = f27_local0.KeybindMessages
 		if not f27_local1 then
 			f27_local1 = f27_local0:create("KeybindMessages")
@@ -624,15 +624,15 @@ DataSources.KeybindMessages = {
 		return f27_local1
 	end,
 	showBindingMessage = function(f28_arg0)
-		local f28_local0 = Engine[@"getglobalmodel"]()
+		local f28_local0 = Engine.GetGlobalModel()
 		f28_local0.KeybindMessage.isBindingKey:set(true)
 	end,
 }
 CoD.PCOptionsUtility.GetOptionWidget = function(f29_arg0, f29_arg1, f29_arg2)
 	if f29_arg1 then
-		local f29_local0 = Engine[@"getmodel"](f29_arg1, "widgetType")
+		local f29_local0 = Engine.GetModel(f29_arg1, "widgetType")
 		if f29_local0 then
-			local f29_local1 = Engine[@"getmodelvalue"](f29_local0)
+			local f29_local1 = Engine.GetModelValue(f29_local0)
 			if f29_local1 == "keybinder" then
 				return CoD.PC_StartMenu_Options_Controls_KeyBinder
 			elseif f29_local1 == "checkbox" then
@@ -729,20 +729,20 @@ end
 CoD.PCOptionsUtility.GetScreenResolutions = function(f35_arg0)
 	local f35_local0 = {}
 	local f35_local1 = nil
-	if CoD.PCOptionsUtility.GetCurrentOptionValue(@"r_fullscreen", f35_arg0) == 0 then
-		f35_local1 = Engine[@"getallresolutions"]()
+	if CoD.PCOptionsUtility.GetCurrentOptionValue("r_fullscreen", f35_arg0) == 0 then
+		f35_local1 = Engine.GetAllResolutions()
 	else
-		local f35_local2 = CoD.PCOptionsUtility.GetCurrentOptionValue(@"r_monitor", f35_arg0)
+		local f35_local2 = CoD.PCOptionsUtility.GetCurrentOptionValue("r_monitor", f35_arg0)
 		if f35_local2 > Dvar[@"r_monitorcount"]:get() then
 			f35_local2 = 0
 		end
 		if f35_local2 == 0 then
-			f35_local2 = Dvar[@"r_monitor"]:get()
+			f35_local2 = Dvar.r_monitor:get()
 		end
 		if f35_local2 == 0 then
 			f35_local2 = 1
 		end
-		f35_local1 = Engine[@"getavailableresolutions"](f35_local2)
+		f35_local1 = Engine.GetAvailableResolutions(f35_local2)
 	end
 	table.sort(f35_local1, function(f36_arg0, f36_arg1)
 		local f36_local0, f36_local1 = string.match(f36_arg0, "([%d]+)x([%d]+)")
@@ -754,7 +754,7 @@ CoD.PCOptionsUtility.GetScreenResolutions = function(f35_arg0)
 		end
 	end)
 	local f35_local3 = {}
-	local f35_local4 = CoD.PCOptionsUtility.GetCurrentOptionValue(@"r_fullscreenmode", f35_arg0)
+	local f35_local4 = CoD.PCOptionsUtility.GetCurrentOptionValue("r_fullscreenmode", f35_arg0)
 	for f35_local8, f35_local9 in ipairs(f35_local1) do
 		if not f35_local3[f35_local9] then
 			table.insert(f35_local0, {
@@ -810,18 +810,18 @@ CoD.PCOptionsUtility.GetAvailableHDROptions = function(f38_arg0)
 end
 CoD.PCOptionsUtility.GetRefreshRateOptions = function(f39_arg0)
 	local f39_local0 = {}
-	local f39_local1, f39_local2 = string.match(CoD.PCOptionsUtility.GetCurrentOptionValue(@"r_fullscreenmode", f39_arg0), "([%d]+)x([%d]+)")
-	local f39_local3 = CoD.PCOptionsUtility.GetCurrentOptionValue(@"r_monitor", f39_arg0)
+	local f39_local1, f39_local2 = string.match(CoD.PCOptionsUtility.GetCurrentOptionValue("r_fullscreenmode", f39_arg0), "([%d]+)x([%d]+)")
+	local f39_local3 = CoD.PCOptionsUtility.GetCurrentOptionValue("r_monitor", f39_arg0)
 	if f39_local3 > Dvar[@"r_monitorcount"]:get() then
 		f39_local3 = 0
 	end
 	if f39_local3 == 0 then
-		f39_local3 = Dvar[@"r_monitor"]:get()
+		f39_local3 = Dvar.r_monitor:get()
 	end
 	if f39_local3 == 0 then
 		f39_local3 = 1
 	end
-	local f39_local4 = Engine[@"getavailablerefreshrates"](f39_local1, f39_local2, f39_local3)
+	local f39_local4 = Engine.GetAvailableRefreshRates(f39_local1, f39_local2, f39_local3)
 	table.sort(f39_local4, function(f40_arg0, f40_arg1)
 		return tonumber(f40_arg0) < tonumber(f40_arg1)
 	end)
@@ -876,7 +876,7 @@ CoD.PCOptionsUtility.ApplyOptionValue = function(f43_arg0, f43_arg1, f43_arg2)
 				f43_local0:latch(f43_arg2)
 			end
 		else
-			Engine[@"setprofilevar"](f43_arg0, f43_arg1, f43_arg2)
+			Engine.SetProfileVar(f43_arg0, f43_arg1, f43_arg2)
 			CoD.OptionsUtility.NotifyPlayerSettingsUpdate(f43_arg0, f43_arg1)
 		end
 	end
@@ -908,7 +908,7 @@ CoD.PCOptionsUtility.ApplyAllPCChangedOptions = function(f46_arg0, f46_arg1)
 		CoD.PCOptionsUtility.ApplyOptionValue(f46_arg1, f46_local6, f46_local7)
 	end
 	if Engine[@"hash_423974DC6BAF9D42"]() then
-		Engine[@"exec"](nil, "vid_restart")
+		Engine.exec(nil, "vid_restart")
 	end
 	CoD.PCOptionsUtility.RevertPCHardwareChanges(f46_arg0, f46_arg1)
 end
@@ -922,7 +922,7 @@ CoD.PCOptionsUtility.CheckForPendingChanges = function(f47_arg0, f47_arg1)
 	end
 end
 CoD.PCOptionsUtility.SyncHardwareProfileWithDVar = function(f49_arg0, f49_arg1)
-	Engine[@"synchardwareprofilewithdvars"]()
+	Engine.SyncHardwareProfileWithDvars()
 end
 CoD.PCOptionsUtility.ResetOptionsValue = function(f50_arg0, f50_arg1, f50_arg2)
 	CoD.OverlayUtility.CreateOverlay(f50_arg1, f50_arg0, "ResetPCSettings", CoD.PCOptionsUtility.GetCurrentOptionTabId(f50_arg1))
@@ -930,7 +930,7 @@ end
 CoD.PCOptionsUtility.ApplyOptionsValue = function(f51_arg0, f51_arg1)
 	local f51_local0 = f51_arg0.TabContent.OptionsList.ScrollList.ScrollView.View.dataSourceName
 	CoD.PCOptionsUtility.ApplyAllPCChangedOptions(f51_arg0, f51_arg1)
-	Engine[@"savehardwareprofile"]()
+	Engine.SaveHardwareProfile()
 end
 CoD.PCOptionsUtility.PrepareGamepadVisual = function(f52_arg0, f52_arg1)
 	LUI.OverrideFunction_CallOriginalFirst(f52_arg1.OptionsList.ScrollList.ScrollView.View, "setModel", function(element, controller)
@@ -956,17 +956,17 @@ end
 CoD.PCOptionsUtility.UpdateCurrentOptionTabModel = function(f57_arg0, f57_arg1)
 	if f57_arg0 then
 		assert(f57_arg0.id)
-		local f57_local0 = Engine[@"getmodelforcontroller"](f57_arg1)
+		local f57_local0 = Engine.GetModelForController(f57_arg1)
 		f57_local0.CurrentOptionTab:set(f57_arg0.id:get())
 	else
-		local f57_local0 = Engine[@"getmodelforcontroller"](f57_arg1)
+		local f57_local0 = Engine.GetModelForController(f57_arg1)
 		f57_local0.CurrentOptionTab:set("")
 	end
 end
 CoD.PCOptionsUtility.GetCurrentOptionTabId = function(f58_arg0)
-	local f58_local0 = Engine[@"getmodelforcontroller"](f58_arg0)
+	local f58_local0 = Engine.GetModelForController(f58_arg0)
 	if f58_local0.CurrentOptionTab then
-		local f58_local1 = Engine[@"getmodelforcontroller"](f58_arg0)
+		local f58_local1 = Engine.GetModelForController(f58_arg0)
 		return f58_local1.CurrentOptionTab:get()
 	else
 		return nil
@@ -977,9 +977,9 @@ CoD.PCOptionsUtility.IsGamepadOptions = function(f59_arg0)
 end
 CoD.PCOptionsUtility.CurrentPCCategoryDefinition = 0
 CoD.PCOptionsUtility.GetCurrentCategoryModel = function(f60_arg0)
-	local f60_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f60_arg0), "PC.CurrentCategory")
+	local f60_local0 = Engine.GetModel(Engine.GetModelForController(f60_arg0), "PC.CurrentCategory")
 	if not f60_local0 then
-		f60_local0 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f60_arg0), "PC.CurrentCategory")
+		f60_local0 = Engine.CreateModel(Engine.GetModelForController(f60_arg0), "PC.CurrentCategory")
 	end
 	return f60_local0
 end
@@ -988,16 +988,16 @@ CoD.PCOptionsUtility.SetCurrentCategoryModel = function(f61_arg0, f61_arg1)
 	f61_local0:set(f61_arg1)
 end
 CoD.PCOptionsUtility.GetOptionsDirtyModel = function(f62_arg0, f62_arg1)
-	local f62_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f62_arg0), "PC.OptionsDirty")
+	local f62_local0 = Engine.GetModel(Engine.GetModelForController(f62_arg0), "PC.OptionsDirty")
 	if not f62_local0 and f62_arg1 then
-		f62_local0 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f62_arg0), "PC.OptionsDirty")
+		f62_local0 = Engine.CreateModel(Engine.GetModelForController(f62_arg0), "PC.OptionsDirty")
 	end
 	return f62_local0
 end
 CoD.PCOptionsUtility.FreeOptionsDirtyModel = function(f63_arg0)
 	local f63_local0 = CoD.PCOptionsUtility.GetOptionsDirtyModel(f63_arg0)
 	if f63_local0 then
-		Engine[@"unsubscribeandfreemodel"](f63_local0)
+		Engine.UnsubscribeAndFreeModel(f63_local0)
 	end
 end
 CoD.PCOptionsUtility.UpdateOptionDirtyModel = function(f64_arg0)
@@ -1016,8 +1016,8 @@ CoD.PCOptionsUtility.AreOptionsDirty = function(f66_arg0)
 	return f66_local0:get() == 1
 end
 CoD.PCOptionsUtility.RefreshAllOptions = function(f67_arg0, f67_arg1)
-	local f67_local0 = Engine[@"forcenotifymodelsubscriptions"]
-	local f67_local1 = Engine[@"getglobalmodel"]()
+	local f67_local0 = Engine.ForceNotifyModelSubscriptions
+	local f67_local1 = Engine.GetGlobalModel()
 	f67_local0(f67_local1.HardwareSettingsUpdate)
 	f67_arg0:dispatchEventToRoot({
 		name = "options_refresh",
@@ -1026,104 +1026,104 @@ CoD.PCOptionsUtility.RefreshAllOptions = function(f67_arg0, f67_arg1)
 end
 CoD.PCOptionsUtility.ChangedOptionsList = {}
 CoD.PCOptionsUtility.SpecialProfileDefaults = {
-	[@"radiation_toggle"] = {
+	radiation_toggle = {
 		get = function(f68_arg0)
-			return tonumber(Engine[@"getprofilevarint"](f68_arg0, @"radiation_toggle"))
+			return tonumber(Engine.GetProfileVarInt(f68_arg0, "radiation_toggle"))
 		end,
 		apply = function(f69_arg0, f69_arg1)
-			Engine[@"setprofilevar"](f69_arg0, @"radiation_toggle", f69_arg1)
+			Engine.SetProfileVar(f69_arg0, "radiation_toggle", f69_arg1)
 			local f69_local0 = DataSources.GameplayFeedbackSettings.getModel(f69_arg0)
 			f69_local0.hideRadiationHold:set(f69_arg1)
 		end,
 	},
-	[@"healthbar_show_enemy"] = {
+	healthbar_show_enemy = {
 		get = function(f70_arg0)
-			return tonumber(Engine[@"getprofilevarint"](f70_arg0, @"healthbar_show_enemy"))
+			return tonumber(Engine.GetProfileVarInt(f70_arg0, "healthbar_show_enemy"))
 		end,
 		apply = function(f71_arg0, f71_arg1)
-			Engine[@"setprofilevar"](f71_arg0, @"healthbar_show_enemy", f71_arg1)
+			Engine.SetProfileVar(f71_arg0, "healthbar_show_enemy", f71_arg1)
 			local f71_local0 = DataSources.GameplayFeedbackSettings.getModel(f71_arg0)
 			f71_local0.healthBarEnemyAlpha:set(f71_arg1)
 		end,
 	},
-	[@"healthbar_show_ally"] = {
+	healthbar_show_ally = {
 		get = function(f72_arg0)
-			return tonumber(Engine[@"getprofilevarint"](f72_arg0, @"healthbar_show_ally"))
+			return tonumber(Engine.GetProfileVarInt(f72_arg0, "healthbar_show_ally"))
 		end,
 		apply = function(f73_arg0, f73_arg1)
-			Engine[@"setprofilevar"](f73_arg0, @"healthbar_show_ally", f73_arg1)
+			Engine.SetProfileVar(f73_arg0, "healthbar_show_ally", f73_arg1)
 			local f73_local0 = DataSources.GameplayFeedbackSettings.getModel(f73_arg0)
 			f73_local0.healthBarAllyAlpha:set(f73_arg1)
 		end,
 	},
-	[@"maxfps_uncapped"] = {
+	maxfps_uncapped = {
 		get = function(f74_arg0)
-			if Dvar[@"com_maxfps"]:get() == 0 then
+			if Dvar.com_maxfps:get() == 0 then
 				return 0
 			else
 				return 1
 			end
 		end,
 		apply = function(f75_arg0, f75_arg1)
-			local f75_local0 = Dvar[@"com_maxfps"]
+			local f75_local0 = Dvar.com_maxfps
 			if f75_arg1 == 0 then
 				f75_local0:set(0)
 			elseif f75_local0:get() == 0 then
 				f75_local0:set(250)
-				Dvar[@"com_maxfps_menu"]:set(0)
+				Dvar.com_maxfps_menu:set(0)
 			end
 		end,
 	},
-	[@"com_maxfps"] = {
+	com_maxfps = {
 		_maxFps = 250,
 		get = function(f76_arg0)
-			local f76_local0 = Dvar[@"com_maxfps"]:get()
+			local f76_local0 = Dvar.com_maxfps:get()
 			if f76_local0 == 0 then
-				return CoD.PCOptionsUtility.SpecialProfileDefaults[@"com_maxfps"]._maxFps
+				return CoD.PCOptionsUtility.SpecialProfileDefaults.com_maxfps._maxFps
 			else
 				return f76_local0
 			end
 		end,
 		apply = function(f77_arg0, f77_arg1)
-			if CoD.PCOptionsUtility.GetCurrentOptionValue(@"maxfps_uncapped", f77_arg0) ~= 0 then
-				Dvar[@"com_maxfps"]:set(f77_arg1)
+			if CoD.PCOptionsUtility.GetCurrentOptionValue("maxfps_uncapped", f77_arg0) ~= 0 then
+				Dvar.com_maxfps:set(f77_arg1)
 			end
 		end,
 	},
-	[@"com_maxfps_menu"] = {
+	com_maxfps_menu = {
 		get = function(f78_arg0)
-			local f78_local0 = Dvar[@"com_maxfps_menu"]:get()
-			local f78_local1 = CoD.PCOptionsUtility.GetCurrentOptionValue(@"com_maxfps", f78_arg0)
+			local f78_local0 = Dvar.com_maxfps_menu:get()
+			local f78_local1 = CoD.PCOptionsUtility.GetCurrentOptionValue("com_maxfps", f78_arg0)
 			if f78_local0 == 0 or f78_local1 < f78_local0 then
 				f78_local0 = f78_local1
 			end
 			return f78_local0
 		end,
 		apply = function(f79_arg0, f79_arg1)
-			if CoD.PCOptionsUtility.GetCurrentOptionValue(@"maxfps_uncapped", f79_arg0) ~= 0 then
-				Dvar[@"com_maxfps_menu"]:set(f79_arg1)
+			if CoD.PCOptionsUtility.GetCurrentOptionValue("maxfps_uncapped", f79_arg0) ~= 0 then
+				Dvar.com_maxfps_menu:set(f79_arg1)
 			end
 		end,
 	},
 	[@"m_pitchamplitude"] = {
 		get = function(f80_arg0)
-			return CoD.PCOptionsUtility.LinearMapFromTo(math.abs(Dvar[@"m_pitch"]:get()), 0, 0.04, 0.1, 2)
+			return CoD.PCOptionsUtility.LinearMapFromTo(math.abs(Dvar.m_pitch:get()), 0, 0.04, 0.1, 2)
 		end,
 		apply = function(f81_arg0, f81_arg1)
-			local f81_local0 = Dvar[@"m_pitch"]:get()
-			Dvar[@"m_pitch"]:set(f81_local0 / math.abs(f81_local0) * CoD.PCOptionsUtility.LinearMapFromTo(f81_arg1, 0.1, 2, 0, 0.04))
+			local f81_local0 = Dvar.m_pitch:get()
+			Dvar.m_pitch:set(f81_local0 / math.abs(f81_local0) * CoD.PCOptionsUtility.LinearMapFromTo(f81_arg1, 0.1, 2, 0, 0.04))
 		end,
 	},
 	[@"m_pitchsign"] = {
 		get = function(f82_arg0)
-			if Dvar[@"m_pitch"]:get() < 0 then
+			if Dvar.m_pitch:get() < 0 then
 				return -1
 			else
 				return 1
 			end
 		end,
 		apply = function(f83_arg0, f83_arg1)
-			Dvar[@"m_pitch"]:set(f83_arg1 * math.abs(Dvar[@"m_pitch"]:get()))
+			Dvar.m_pitch:set(f83_arg1 * math.abs(Dvar.m_pitch:get()))
 		end,
 	},
 	[@"r_oit"] = {
@@ -1159,10 +1159,10 @@ CoD.PCOptionsUtility.SpecialProfileDefaults = {
 	},
 	[@"r_spotshadowres"] = {
 		get = function(f86_arg0)
-			return Engine[@"getshadowquality"]()
+			return Engine.GetShadowQuality()
 		end,
 		apply = function(f87_arg0, f87_arg1)
-			Engine[@"setshadowquality"](f87_arg1)
+			Engine.SetShadowQuality(f87_arg1)
 		end,
 	},
 	[@"r_forceadapter"] = {
@@ -1172,10 +1172,10 @@ CoD.PCOptionsUtility.SpecialProfileDefaults = {
 	},
 	[@"r_forcetextureaniso"] = {
 		get = function(f89_arg0)
-			return tonumber(Dvar[@"r_texfilterquality"]:get())
+			return tonumber(Dvar.r_texfilterquality:get())
 		end,
 		apply = function(f90_arg0, f90_arg1)
-			Dvar[@"r_texfilterquality"]:set(f90_arg1)
+			Dvar.r_texfilterquality:set(f90_arg1)
 		end,
 	},
 	[@"r_hdruimode"] = {
@@ -1208,19 +1208,19 @@ CoD.PCOptionsUtility.SpecialProfileDefaults = {
 			f92_local2 = -1
 		end,
 	},
-	[@"r_monitor"] = {
+	r_monitor = {
 		getOptions = function(f93_arg0)
 			return CoD.PCOptionsUtility.GetMonitorOptions(f93_arg0)
 		end,
 		get = function(f94_arg0)
-			local f94_local0 = Dvar[@"r_monitor"]:get()
+			local f94_local0 = Dvar.r_monitor:get()
 			if f94_local0 == 0 then
 				f94_local0 = 1
 			end
 			return f94_local0
 		end,
 	},
-	[@"r_fullscreenmode"] = {
+	r_fullscreenmode = {
 		getOptions = function(f95_arg0)
 			return CoD.PCOptionsUtility.GetScreenResolutions(f95_arg0)
 		end,
@@ -1336,34 +1336,34 @@ CoD.PCOptionsUtility.SpecialProfileDefaults = {
 		end,
 		useListOptionsOutdatedCheck = true,
 	},
-	[@"gpad_sticksconfig"] = {
+	gpad_sticksconfig = {
 		apply = function(f108_arg0, f108_arg1)
-			Engine[@"setprofilevar"](f108_arg0, @"gpad_sticksconfig", f108_arg1)
+			Engine.SetProfileVar(f108_arg0, "gpad_sticksconfig", f108_arg1)
 			DataSourceHelperRecreate(f108_arg0, "StickLayoutLabels")
 		end,
 		onActive = function(f109_arg0)
 			CoD.ModelUtility.SetControllerModelValueToEnum(f109_arg0, "controllerLayoutState", CoD.OptionsUtility.ControllerPreviewStates.CONTROLLER_STICKS)
 		end,
 	},
-	[@"gpad_buttonsconfig"] = {
+	gpad_buttonsconfig = {
 		apply = function(f110_arg0, f110_arg1)
-			Engine[@"setprofilevar"](f110_arg0, @"gpad_buttonsconfig", f110_arg1)
+			Engine.SetProfileVar(f110_arg0, "gpad_buttonsconfig", f110_arg1)
 			DataSourceHelperRecreate(f110_arg0, "ButtonLayoutLabels")
 		end,
 		onActive = function(f111_arg0)
 			CoD.ModelUtility.SetControllerModelValueToEnum(f111_arg0, "controllerLayoutState", CoD.OptionsUtility.ControllerPreviewStates.CONTROLLER_BUTTONS)
 		end,
 	},
-	[@"flipped_control_config"] = {
+	flipped_control_config = {
 		apply = function(f112_arg0, f112_arg1)
-			Engine[@"setprofilevar"](f112_arg0, @"flipped_control_config", f112_arg1)
+			Engine.SetProfileVar(f112_arg0, "flipped_control_config", f112_arg1)
 			DataSourceHelperRecreate(f112_arg0, "ButtonLayoutLabels")
 		end,
 		onActive = function(f113_arg0)
 			CoD.ModelUtility.SetControllerModelValueToEnum(f113_arg0, "controllerLayoutState", CoD.OptionsUtility.ControllerPreviewStates.CONTROLLER_BUTTONS)
 		end,
 	},
-	[@"r_lightingsunshadowdisabledynamicdraw"] = {
+	r_lightingsunshadowdisabledynamicdraw = {
 		apply = function(f114_arg0, f114_arg1)
 			local f114_local0
 			if 1 <= f114_arg1 then
@@ -1373,14 +1373,14 @@ CoD.PCOptionsUtility.SpecialProfileDefaults = {
 					local f114_local1 = f114_arg1 ~= 2
 					Dvar[@"r_dedicatedplayershadow"]:set(f114_local0)
 					Dvar[@"r_deferredforceshadowneverupdate"]:set(f114_local1)
-					Dvar[@"r_lightingsunshadowdisabledynamicdraw"]:set(f114_local1)
+					Dvar.r_lightingsunshadowdisabledynamicdraw:set(f114_local1)
 				end
 			end
 			f114_local0 = 0
 		end,
 		get = function(f115_arg0)
 			local f115_local0 = 0
-			if not Dvar[@"r_lightingsunshadowdisabledynamicdraw"]:get() then
+			if not Dvar.r_lightingsunshadowdisabledynamicdraw:get() then
 				f115_local0 = 2
 			elseif Dvar[@"r_dedicatedplayershadow"]:get() == 3 then
 				f115_local0 = 1
@@ -1413,7 +1413,7 @@ CoD.PCOptionsUtility.SpecialProfileDefaults = {
 			f120_local0.showVoiceSuspended:set(f120_arg1)
 		end,
 	},
-	[@"show_global_chat"] = {
+	show_global_chat = {
 		get = function(f121_arg0)
 			return Engine[@"hash_2521BD332BD7984C"](Enum[@"hash_7F6296F5D7A38AD2"][@"hash_18AE60B993F07980"]) and 0 or 1
 		end,
@@ -1434,7 +1434,7 @@ CoD.PCOptionsUtility.SpecialProfileDefaults = {
 			end
 		end,
 	},
-	[@"show_team_chat"] = {
+	show_team_chat = {
 		get = function(f123_arg0)
 			return Engine[@"hash_2521BD332BD7984C"](Enum[@"hash_7F6296F5D7A38AD2"][@"hash_6EB1743CA5B28F23"]) and 0 or 1
 		end,
@@ -1455,7 +1455,7 @@ CoD.PCOptionsUtility.SpecialProfileDefaults = {
 			end
 		end,
 	},
-	[@"is_voice_recording"] = {
+	is_voice_recording = {
 		get = function(f125_arg0)
 			return CoD.PCOptionsUtility.IsRecordingLoopBack(f125_arg0) and 1 or 0
 		end,
@@ -1469,7 +1469,7 @@ CoD.PCOptionsUtility.GetOptionValue = function(f127_arg0, f127_arg1)
 	if CoD.PCOptionsUtility.SpecialProfileDefaults[f127_arg0] and CoD.PCOptionsUtility.SpecialProfileDefaults[f127_arg0].get then
 		return CoD.PCOptionsUtility.SpecialProfileDefaults[f127_arg0].get(f127_arg1)
 	elseif Engine[@"hash_66EFFE5E7E57CDD5"](f127_arg0) then
-		local f127_local0 = Engine[@"profilevalueasstring"](f127_arg1, f127_arg0)
+		local f127_local0 = Engine.ProfileValueAsString(f127_arg1, f127_arg0)
 		local f127_local1 = tonumber(f127_local0)
 		if f127_local1 then
 			return f127_local1
@@ -1511,7 +1511,7 @@ CoD.PCOptionsUtility.SetCurrentOptionValue = function(f128_arg0, f128_arg1, f128
 		for f128_local7, f128_local8 in pairs(f128_local3.profilesToUpdate) do
 			local f128_local9 = CoD.PCOptionsUtility.GetOptionModel(f128_arg1, f128_local7)
 			if f128_local9 then
-				Engine[@"forcenotifymodelsubscriptions"](f128_local9.refreshWidget)
+				Engine.ForceNotifyModelSubscriptions(f128_local9.refreshWidget)
 			end
 		end
 	end
@@ -1531,34 +1531,34 @@ CoD.PCOptionsUtility.RefreshSpecificOptions = function(f130_arg0, f130_arg1)
 	for f130_local3, f130_local4 in pairs(f130_arg1) do
 		local f130_local5 = CoD.PCOptionsUtility.GetOptionModel(f130_arg0, f130_local4)
 		if f130_local5 then
-			Engine[@"forcenotifymodelsubscriptions"](f130_local5.refreshWidget)
+			Engine.ForceNotifyModelSubscriptions(f130_local5.refreshWidget)
 		end
 	end
 end
 CoD.PCOptionsUtility.IsVRAMOverflown = function(f131_arg0)
 	local f131_local0, f131_local1 = Engine[@"hash_19831D90925B3DA3"]()
-	local f131_local2 = Engine[@"getmodelforcontroller"](f131_arg0)
+	local f131_local2 = Engine.GetModelForController(f131_arg0)
 	return f131_local1 < f131_local2.PC.VRAMBar:get()
 end
 CoD.PCOptionsUtility.IsVRAMOverRecommended = function(f132_arg0)
 	local f132_local0, f132_local1 = Engine[@"hash_19831D90925B3DA3"]()
-	local f132_local2 = Engine[@"getmodelforcontroller"](f132_arg0)
+	local f132_local2 = Engine.GetModelForController(f132_arg0)
 	return f132_local0 < f132_local2.PC.VRAMBar:get()
 end
 CoD.PCOptionsUtility.VRAMPredictOptionNames = {
 	@"r_ssaotechnique",
-	@"r_motionblurmode",
+	"r_motionblurmode",
 	@"r_aatechnique",
 	@"r_spotshadowres",
-	@"r_picmip",
+	"r_picmip",
 	@"r_hdruimode",
 	@"r_oit",
-	@"r_ssr_enabled",
-	@"r_fullscreen",
+	"r_ssr_enabled",
+	"r_fullscreen",
 	@"r_aspectratio",
 	@"r_sceneresolutionmultiplier",
-	@"r_fullscreenmode",
-	@"r_monitor",
+	"r_fullscreenmode",
+	"r_monitor",
 	@"r_picfxmip",
 	@"r_modellodlimit",
 }
@@ -1582,18 +1582,18 @@ CoD.PCOptionsUtility.PrepareVRAMBarUpdate = function(f136_arg0)
 	end
 	f136_local1 = 0
 	f136_local2 = 0
-	if f136_local0[@"r_fullscreen"] == 1 then
-		f136_local3 = CoDShared.splitString(f136_local0[@"r_fullscreenmode"], "x")
+	if f136_local0.r_fullscreen == 1 then
+		f136_local3 = CoDShared.splitString(f136_local0.r_fullscreenmode, "x")
 		f136_local1 = tonumber(f136_local3[1])
 		f136_local2 = tonumber(f136_local3[2])
 	end
-	local f136_local6 = Engine[@"hash_BE57033070D5585"](f136_local1, f136_local2, f136_local0[@"r_fullscreen"], f136_local0[@"r_monitor"], f136_local0[@"r_aspectratio"], f136_local0[@"r_sceneresolutionmultiplier"], f136_local0[@"r_ssaotechnique"], f136_local0[@"r_motionblurmode"], f136_local0[@"r_aatechnique"], f136_local0[@"r_spotshadowres"], f136_local0[@"r_picmip"], f136_local0[@"r_picfxmip"], f136_local0[@"r_modellodlimit"], f136_local0[@"r_hdruimode"], f136_local0[@"r_oit"], f136_local0[@"r_motionblurmode"] > 0, f136_local0[@"r_ssr_enabled"] == 1, f136_local0[@"r_aatechnique"] > 1, f136_local0[@"r_oit"] > 0)
-	local f136_local7 = Engine[@"getmodelforcontroller"](f136_arg0)
+	local f136_local6 = Engine[@"hash_BE57033070D5585"](f136_local1, f136_local2, f136_local0.r_fullscreen, f136_local0.r_monitor, f136_local0[@"r_aspectratio"], f136_local0[@"r_sceneresolutionmultiplier"], f136_local0[@"r_ssaotechnique"], f136_local0.r_motionblurmode, f136_local0[@"r_aatechnique"], f136_local0[@"r_spotshadowres"], f136_local0.r_picmip, f136_local0[@"r_picfxmip"], f136_local0[@"r_modellodlimit"], f136_local0[@"r_hdruimode"], f136_local0[@"r_oit"], f136_local0.r_motionblurmode > 0, f136_local0.r_ssr_enabled == 1, f136_local0[@"r_aatechnique"] > 1, f136_local0[@"r_oit"] > 0)
+	local f136_local7 = Engine.GetModelForController(f136_arg0)
 	f136_local7.PC.VRAMBar:set(f136_local6)
 end
 CoD.PCOptionsUtility.UpdateVRAMBar = function(f137_arg0, f137_arg1, f137_arg2)
 	local f137_local0, f137_local1 = Engine[@"hash_19831D90925B3DA3"]()
-	local f137_local2 = Engine[@"getmodelforcontroller"](f137_arg0)
+	local f137_local2 = Engine.GetModelForController(f137_arg0)
 	f137_local2 = f137_local2.PC.VRAMBar:get()
 	local f137_local3 = f137_local2 / f137_local1
 	if f137_local1 < f137_local2 then
@@ -1617,12 +1617,12 @@ end
 CoD.PCOptionsUtility.SyncAudioDeviceModel = function(f140_arg0)
 	local f140_local0 = CoD.PCOptionsUtility.GetOptionModel(f140_arg0, @"voice_inputdevice")
 	if f140_local0 then
-		Engine[@"forcenotifymodelsubscriptions"](f140_local0.refreshWidget)
+		Engine.ForceNotifyModelSubscriptions(f140_local0.refreshWidget)
 		CoD.PCOptionsUtility.SyncOptionModel(f140_arg0, @"voice_inputdevice")
 	end
 	local f140_local1 = CoD.PCOptionsUtility.GetOptionModel(f140_arg0, @"voice_outputdevice")
 	if f140_local1 then
-		Engine[@"forcenotifymodelsubscriptions"](f140_local1.refreshWidget)
+		Engine.ForceNotifyModelSubscriptions(f140_local1.refreshWidget)
 		CoD.PCOptionsUtility.SyncOptionModel(f140_arg0, @"voice_outputdevice")
 	end
 end
@@ -1689,8 +1689,8 @@ CoD.PCOptionsUtility.UpdateVoiceBar = function(f150_arg0, f150_arg1, f150_arg2)
 	f150_arg1.DynamicBar.FilledBar:setWidth(f150_arg1.DynamicBar.FilledBarBackground:getWidth() * f150_local4)
 end
 CoD.PCOptionsUtility.SetVoiceDvars = function()
-	Engine[@"setdvar"]("voiceBar_recommendedValue", 30)
-	Engine[@"setdvar"]("voiceBar_maxValue", 70)
+	Engine.SetDvar("voiceBar_recommendedValue", 30)
+	Engine.SetDvar("voiceBar_maxValue", 70)
 end
 CoD.PCOptionsUtility.InitializeVoiceBar = function(f152_arg0, f152_arg1)
 	local f152_local0 = f152_arg1.DynamicBar:getWidth() * (Engine[@"getdvarint"]("voiceBar_recommendedValue") and Engine[@"getdvarint"]("voiceBar_recommendedValue") or 50) / (Engine[@"getdvarint"]("voiceBar_maxValue") and Engine[@"getdvarint"]("voiceBar_maxValue") or 100)
@@ -1698,7 +1698,7 @@ CoD.PCOptionsUtility.InitializeVoiceBar = function(f152_arg0, f152_arg1)
 end
 DataSources.SpeakingEnergy = {
 	prepare = function(f153_arg0)
-		local f153_local0 = Engine[@"getglobalmodel"]()
+		local f153_local0 = Engine.GetGlobalModel()
 		f153_local0 = f153_local0:create("SpeakingEnergy")
 		local f153_local1 = f153_local0:create("displayText")
 		f153_local1:set("0")
@@ -1706,11 +1706,11 @@ DataSources.SpeakingEnergy = {
 		f153_local1:set(false)
 	end,
 	getModel = function(f154_arg0)
-		local f154_local0 = Engine[@"getglobalmodel"]()
+		local f154_local0 = Engine.GetGlobalModel()
 		f154_local0 = f154_local0.SpeakingEnergy
 		if not f154_local0 or not f154_local0.isRecording then
 			DataSources.SpeakingEnergy.prepare(f154_arg0)
-			local f154_local1 = Engine[@"getglobalmodel"]()
+			local f154_local1 = Engine.GetGlobalModel()
 			f154_local0 = f154_local1.SpeakingEnergy
 		end
 		return f154_local0

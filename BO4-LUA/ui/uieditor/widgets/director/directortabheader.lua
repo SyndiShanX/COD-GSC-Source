@@ -1,6 +1,6 @@
-require("x64:1394ae5e9cdcb54")
-require("x64:81a24c5340caa1e")
-require("x64:f05ce99c62baa19")
+require("ui/uieditor/widgets/bumperbuttonwithkeymousetext")
+require("ui/uieditor/widgets/common/commontabbarbacking")
+require("ui/uieditor/widgets/director/directorselectglowtab")
 CoD.DirectorTabHeader = InheritFrom(LUI.UIElement)
 CoD.DirectorTabHeader.__defaultWidth = 1920
 CoD.DirectorTabHeader.__defaultHeight = 98
@@ -23,8 +23,8 @@ CoD.DirectorTabHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self:addElement(TabBacking)
 	self.TabBacking = TabBacking
 	local LB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0, 0, -50, 150, 0, 0, 53, 87)
-	LB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BDCD5292604F434"))
-	LB.GamepadPrompt:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	LB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"]("groups/lb"))
+	LB.GamepadPrompt:setAlignment(Enum.LUIAlignment[@"lui_alignment_right"])
 	self:addElement(LB)
 	self.LB = LB
 	local tabsList = LUI.GridLayout.new(f1_arg0, f1_arg1, false, 0, 0, 0, 0, nil, nil, false, false, false, false)
@@ -33,12 +33,12 @@ CoD.DirectorTabHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	tabsList:setWidgetType(CoD.DirectorSelectGlowTab)
 	tabsList:setHorizontalCount(7)
 	tabsList:setSpacing(0)
-	tabsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
+	tabsList:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
 	tabsList:setStaggeredIntroTime(50)
 	self:addElement(tabsList)
 	self.tabsList = tabsList
 	local RB = CoD.BumperButtonWithKeyMouseText.new(f1_arg0, f1_arg1, 0, 0, 1770, 1970, 0, 0, 53, 87)
-	RB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_5BFED5292621DA9A"))
+	RB.GamepadPrompt:setText(Engine[@"hash_4F9F1239CFD921FE"]("groups/rb"))
 	self:addElement(RB)
 	self.RB = RB
 	tabsList.id = "tabsList"

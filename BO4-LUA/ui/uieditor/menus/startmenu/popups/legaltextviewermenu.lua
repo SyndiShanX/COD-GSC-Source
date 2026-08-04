@@ -1,7 +1,7 @@
-require("x64:ce1e6b6549d478c")
-require("x64:bfd45228502765f")
-require("x64:6c3af68af4a6634")
-require("x64:2b3a36f75bb6e0e")
+require("ui/uieditor/widgets/footer/footercontainer_frontend_right")
+require("ui/uieditor/widgets/startmenu/options/legaltextviewerbody")
+require("ui/uieditor/widgets/pc/pc_eula_pages")
+require("ui/uieditor/widgets/startmenu/options/flyout/startmenu_options_settingsliderarrow")
 CoD.LegalTextViewerMenu = InheritFrom(CoD.Menu)
 LUI.createMenu.LegalTextViewerMenu = function(f1_arg0, f1_arg1)
 	local self = CoD.Menu.NewForUIEditor("LegalTextViewerMenu", f1_arg0)
@@ -16,7 +16,7 @@ LUI.createMenu.LegalTextViewerMenu = function(f1_arg0, f1_arg1)
 	self.anyChildUsesUpdateState = true
 	local BlackBG = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BlackBG:setRGB(0, 0, 0)
-	BlackBG:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_multiply"))
+	BlackBG:setMaterial(LUI.UIImage.GetCachedMaterial("ui_multiply"))
 	self:addElement(BlackBG)
 	self.BlackBG = BlackBG
 	local FooterContainerFrontendRight = CoD.FooterContainer_Frontend_Right.new(f1_local1, f1_arg0, 0.5, 0.5, -960, 960, 1, 1, -51, -3)
@@ -40,8 +40,8 @@ LUI.createMenu.LegalTextViewerMenu = function(f1_arg0, f1_arg1)
 	self.Border = Border
 	local Header = LUI.UIText.new(0.5, 0.5, -864, 864, 0.5, 0.5, -507, -462)
 	Header:setTTF("ttmussels_demibold")
-	Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	Header:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	Header:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	Header:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	Header:subscribeToGlobalModel(f1_arg0, "CODAccountLegalInfo", "currentLegalTitle", function(model)
 		local f3_local0 = model:get()
 		if f3_local0 ~= nil then
@@ -80,14 +80,14 @@ LUI.createMenu.LegalTextViewerMenu = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(SliderArrowLeft, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		CoD.CoDAccountUtility.PreviousCurrentLegalInfoEntry(menu, self.LegalTextViewerPages, controller)
+	f1_local1:AddButtonCallbackFunction(SliderArrowLeft, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f7_arg0, f7_arg1, f7_arg2, f7_arg3)
+		CoD.CoDAccountUtility.PreviousCurrentLegalInfoEntry(f7_arg1, self.LegalTextViewerPages, f7_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+	end, function(f8_arg0, f8_arg1, f8_arg2)
+		CoD.Menu.SetButtonLabel(f8_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(SliderArrowLeft)
@@ -122,14 +122,14 @@ LUI.createMenu.LegalTextViewerMenu = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f11_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f11_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(SliderArrowRight, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		CoD.CoDAccountUtility.NextCurrentLegalInfoEntry(menu, self.LegalTextViewerPages, controller)
+	f1_local1:AddButtonCallbackFunction(SliderArrowRight, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f12_arg0, f12_arg1, f12_arg2, f12_arg3)
+		CoD.CoDAccountUtility.NextCurrentLegalInfoEntry(f12_arg1, self.LegalTextViewerPages, f12_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+	end, function(f13_arg0, f13_arg1, f13_arg2)
+		CoD.Menu.SetButtonLabel(f13_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(SliderArrowRight)
@@ -142,41 +142,41 @@ LUI.createMenu.LegalTextViewerMenu = function(f1_arg0, f1_arg1)
 	f1_local9 = self.subscribeToModel
 	local f1_local11 = DataSources.CODAccountLegalInfo.getModel(f1_arg0)
 	f1_local9(f1_local10, f1_local11.currentLegalInfoIndex, function(f14_arg0, f14_arg1)
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_lb"])
-		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_rb"])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_lb"])
+		CoD.Menu.UpdateButtonShownState(f14_arg1, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_rb"])
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
-		GoBack(self, controller)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xbb_pscircle"], nil, function(f15_arg0, f15_arg1, f15_arg2, f15_arg3)
+		GoBack(self, f15_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
+	end, function(f16_arg0, f16_arg1, f16_arg2)
+		CoD.Menu.SetButtonLabel(f16_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 		return true
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_lb"], nil, function(element, menu, controller, model)
-		if not CoD.CoDAccountUtility.IsFirstLegalInfoEntry(controller) then
-			CoD.CoDAccountUtility.PreviousCurrentLegalInfoEntry(menu, self.LegalTextViewerPages, controller)
-			UpdateAllMenuButtonPrompts(menu, controller)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_lb"], nil, function(f17_arg0, f17_arg1, f17_arg2, f17_arg3)
+		if not CoD.CoDAccountUtility.IsFirstLegalInfoEntry(f17_arg2) then
+			CoD.CoDAccountUtility.PreviousCurrentLegalInfoEntry(f17_arg1, self.LegalTextViewerPages, f17_arg2)
+			UpdateAllMenuButtonPrompts(f17_arg1, f17_arg2)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if not CoD.CoDAccountUtility.IsFirstLegalInfoEntry(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_lb"], @"menu/previous_page", nil, nil)
+	end, function(f18_arg0, f18_arg1, f18_arg2)
+		if not CoD.CoDAccountUtility.IsFirstLegalInfoEntry(f18_arg2) then
+			CoD.Menu.SetButtonLabel(f18_arg1, Enum.LUIButton[@"lui_key_lb"], @"menu/previous_page", nil, nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_rb"], nil, function(element, menu, controller, model)
-		if not CoD.CoDAccountUtility.IsLastLegalInfoEntry(controller) then
-			CoD.CoDAccountUtility.NextCurrentLegalInfoEntry(menu, self.LegalTextViewerPages, controller)
-			UpdateAllMenuButtonPrompts(menu, controller)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_rb"], nil, function(f19_arg0, f19_arg1, f19_arg2, f19_arg3)
+		if not CoD.CoDAccountUtility.IsLastLegalInfoEntry(f19_arg2) then
+			CoD.CoDAccountUtility.NextCurrentLegalInfoEntry(f19_arg1, self.LegalTextViewerPages, f19_arg2)
+			UpdateAllMenuButtonPrompts(f19_arg1, f19_arg2)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if not CoD.CoDAccountUtility.IsLastLegalInfoEntry(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rb"], @"menu/next_page", nil, nil)
+	end, function(f20_arg0, f20_arg1, f20_arg2)
+		if not CoD.CoDAccountUtility.IsLastLegalInfoEntry(f20_arg2) then
+			CoD.Menu.SetButtonLabel(f20_arg1, Enum.LUIButton[@"lui_key_rb"], @"menu/next_page", nil, nil)
 			return true
 		else
 			return false

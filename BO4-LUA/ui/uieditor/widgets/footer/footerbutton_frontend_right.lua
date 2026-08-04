@@ -1,6 +1,6 @@
-require("x64:561c804ce339d2b")
-require("x64:d36334c33274313")
-require("x64:29187ea00d726c3")
+require("ui/uieditor/widgets/footer/footerbuttondoubleprompts")
+require("ui/uieditor/widgets/footerbuttonprompt")
+require("ui/uieditor/widgets/pc/utility/verticallistspacer")
 CoD.FooterButton_Frontend_Right = InheritFrom(LUI.UIElement)
 CoD.FooterButton_Frontend_Right.__defaultWidth = 1920
 CoD.FooterButton_Frontend_Right.__defaultHeight = 48
@@ -26,7 +26,7 @@ CoD.FooterButton_Frontend_Right.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 			FooterButtonDoublePrompts.buttonPromptImage1:setImage(RegisterImage(f3_local0))
 		end
 	end)
-	FooterButtonDoublePrompts:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_lb"], false, function(model)
+	FooterButtonDoublePrompts:linkToElementModel(self, "" .. Enum.LUIButton[@"lui_key_lb"], false, function(model)
 		FooterButtonDoublePrompts:setModel(model, f1_arg1)
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(FooterButtonDoublePrompts, "setState", function(element, controller, f5_arg2, f5_arg3, f5_arg4)
@@ -45,7 +45,7 @@ CoD.FooterButton_Frontend_Right.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 			RTbtn.buttonPromptImage:setImage(RegisterImage(f6_local0))
 		end
 	end)
-	RTbtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_rtrig"], false, function(model)
+	RTbtn:linkToElementModel(self, "" .. Enum.LUIButton[@"lui_key_rtrig"], false, function(model)
 		RTbtn:setModel(model, f1_arg1)
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(RTbtn, "setState", function(element, controller, f8_arg2, f8_arg3, f8_arg4)
@@ -64,7 +64,7 @@ CoD.FooterButton_Frontend_Right.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 			LeftStick.buttonPromptImage:setImage(RegisterImage(f9_local0))
 		end
 	end)
-	LeftStick:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_lstick_pressed"], false, function(model)
+	LeftStick:linkToElementModel(self, "" .. Enum.LUIButton[@"lui_key_lstick_pressed"], false, function(model)
 		LeftStick:setModel(model, f1_arg1)
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(LeftStick, "setState", function(element, controller, f11_arg2, f11_arg3, f11_arg4)
@@ -83,7 +83,7 @@ CoD.FooterButton_Frontend_Right.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 			RJoystickbtn.buttonPromptImage:setImage(RegisterImage(f12_local0))
 		end
 	end)
-	RJoystickbtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_rstick_pressed"], false, function(model)
+	RJoystickbtn:linkToElementModel(self, "" .. Enum.LUIButton[@"lui_key_rstick_pressed"], false, function(model)
 		RJoystickbtn:setModel(model, f1_arg1)
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(RJoystickbtn, "setState", function(element, controller, f14_arg2, f14_arg3, f14_arg4)
@@ -102,7 +102,7 @@ CoD.FooterButton_Frontend_Right.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 			Xbtn.buttonPromptImage:setImage(RegisterImage(f15_local0))
 		end
 	end)
-	Xbtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_xbx_pssquare"], false, function(model)
+	Xbtn:linkToElementModel(self, "" .. Enum.LUIButton[@"lui_key_xbx_pssquare"], false, function(model)
 		Xbtn:setModel(model, f1_arg1)
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(Xbtn, "setState", function(element, controller, f17_arg2, f17_arg3, f17_arg4)
@@ -121,7 +121,7 @@ CoD.FooterButton_Frontend_Right.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 			Abtn.buttonPromptImage:setImage(RegisterImage(f18_local0))
 		end
 	end)
-	Abtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_xba_pscross"], false, function(model)
+	Abtn:linkToElementModel(self, "" .. Enum.LUIButton[@"lui_key_xba_pscross"], false, function(model)
 		Abtn:setModel(model, f1_arg1)
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(Abtn, "setState", function(element, controller, f20_arg2, f20_arg3, f20_arg4)
@@ -140,7 +140,7 @@ CoD.FooterButton_Frontend_Right.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 			Bbtn.buttonPromptImage:setImage(RegisterImage(f21_local0))
 		end
 	end)
-	Bbtn:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_xbb_pscircle"], false, function(model)
+	Bbtn:linkToElementModel(self, "" .. Enum.LUIButton[@"lui_key_xbb_pscircle"], false, function(model)
 		Bbtn:setModel(model, f1_arg1)
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(Bbtn, "setState", function(element, controller, f23_arg2, f23_arg3, f23_arg4)

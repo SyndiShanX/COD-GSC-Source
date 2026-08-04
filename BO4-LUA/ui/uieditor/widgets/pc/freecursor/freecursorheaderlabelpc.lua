@@ -17,7 +17,7 @@ CoD.freeCursorHeaderLabelPC.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	title:setTTF("ttmussels_regular")
 	title:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
 	title:setLetterSpacing(4)
-	title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	title:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	title:setBackingType(2)
 	title:setBackingColor(0.09, 0.09, 0.09)
 	title:setBackingAlpha(0)
@@ -62,14 +62,14 @@ CoD.freeCursorHeaderLabelPC.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	end)
 	local f1_local3 = self
 	local f1_local4 = self.subscribeToModel
-	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
-	f1_local4(f1_local3, f1_local5["ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"]], function(f7_arg0)
+	local f1_local5 = Engine.GetModelForController(f1_arg1)
+	f1_local4(f1_local3, f1_local5["ButtonBits." .. Enum.LUIButton[@"lui_key_rtrig"]], function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_arg0,
 			controller = f1_arg1,
 			modelValue = f7_arg0:get(),
-			modelName = "ButtonBits." .. Enum[@"luibutton"][@"lui_key_rtrig"],
+			modelName = "ButtonBits." .. Enum.LUIButton[@"lui_key_rtrig"],
 		})
 	end, false)
 	self:linkToElementModel(self, "detailedViewPC", true, function(model)

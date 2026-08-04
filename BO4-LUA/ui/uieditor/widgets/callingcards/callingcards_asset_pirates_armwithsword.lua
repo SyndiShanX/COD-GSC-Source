@@ -1,4 +1,4 @@
-require("x64:98643364c4fd6c1")
+require("ui/uieditor/widgets/callingcards/callingcards_asset_pirates_sword")
 CoD.CallingCards_Asset_Pirates_armwithsword = InheritFrom(LUI.UIElement)
 CoD.CallingCards_Asset_Pirates_armwithsword.__defaultWidth = 10
 CoD.CallingCards_Asset_Pirates_armwithsword.__defaultHeight = 10
@@ -12,7 +12,7 @@ CoD.CallingCards_Asset_Pirates_armwithsword.new = function(f1_arg0, f1_arg1, f1_
 	self:addElement(sword)
 	self.sword = sword
 	local armwithsword = LUI.UIImage.new(0, 0, -259, 21, 0, 0, -42, 62)
-	armwithsword:setImage(RegisterImage(@"uie_ui_icon_callingcards_pirates_arm1"))
+	armwithsword:setImage(RegisterImage("uie_ui_icon_callingcards_pirates_arm1"))
 	self:addElement(armwithsword)
 	self.armwithsword = armwithsword
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

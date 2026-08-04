@@ -1,11 +1,11 @@
-require("x64:98f7faea863c34f")
-require("x64:c1acb20bd53615e")
-require("x64:f8db2063f73b388")
-require("x64:815eb9d0f27a94e")
-require("x64:2d858628f53d460")
-require("x64:474d14efb47ebf4")
-require("x64:16db560ab511f2e")
-require("x64:c0887595cfb6bb1")
+require("ui/uieditor/widgets/hud/movieplayback/moviesubtitles")
+require("ui/uieditor/widgets/loadinganimation/loadingscreenskipprompt")
+require("ui/uieditor/widgets/notifications/xp/doublexpiconsleftaligned")
+require("ui/uieditor/widgets/startgameflow/loadingscreenheader")
+require("ui/uieditor/widgets/startgameflow/loadingscreenloadbar")
+require("ui/uieditor/widgets/startgameflow/loadingscreentalkerwidgetcpzm")
+require("ui/uieditor/widgets/startgameflow/tipwidgetlist")
+require("ui/uieditor/widgets/pc/notifications/pc_notif_container")
 CoD.Loading_MP = InheritFrom(CoD.Menu)
 LUI.createMenu.Loading_MP = function(f1_arg0, f1_arg1)
 	local self = CoD.Menu.NewForUIEditor("Loading_MP", f1_arg0)
@@ -80,7 +80,7 @@ LUI.createMenu.Loading_MP = function(f1_arg0, f1_arg1)
 	Team1PlayerList:setWidgetType(CoD.LoadingScreenTalkerWidgetCPZM)
 	Team1PlayerList:setVerticalCount(4)
 	Team1PlayerList:setSpacing(8)
-	Team1PlayerList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Team1PlayerList:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	Team1PlayerList:setDataSource("LoadingScreenPlayerListTeam1")
 	self:addElement(Team1PlayerList)
 	self.Team1PlayerList = Team1PlayerList
@@ -125,7 +125,7 @@ LUI.createMenu.Loading_MP = function(f1_arg0, f1_arg1)
 	end)
 	local PCNotifContainer = label
 	local MovieSubtitles = label.subscribeToModel
-	local f1_local14 = Engine[@"getmodelforcontroller"](f1_arg0)
+	local f1_local14 = Engine.GetModelForController(f1_arg0)
 	MovieSubtitles(PCNotifContainer, f1_local14.LastInput, function(f7_arg0)
 		f1_local1:updateElementState(label, {
 			name = "model_validation",
@@ -137,7 +137,7 @@ LUI.createMenu.Loading_MP = function(f1_arg0, f1_arg1)
 	end, false)
 	PCNotifContainer = label
 	MovieSubtitles = label.subscribeToModel
-	f1_local14 = Engine[@"getglobalmodel"]()
+	f1_local14 = Engine.GetGlobalModel()
 	MovieSubtitles(PCNotifContainer, f1_local14.cutsceneSkippable, function(f8_arg0)
 		f1_local1:updateElementState(label, {
 			name = "model_validation",
@@ -149,7 +149,7 @@ LUI.createMenu.Loading_MP = function(f1_arg0, f1_arg1)
 	end, false)
 	PCNotifContainer = label
 	MovieSubtitles = label.subscribeToModel
-	f1_local14 = Engine[@"getglobalmodel"]()
+	f1_local14 = Engine.GetGlobalModel()
 	MovieSubtitles(PCNotifContainer, f1_local14.mapLoaded, function(f9_arg0)
 		f1_local1:updateElementState(label, {
 			name = "model_validation",
@@ -161,7 +161,7 @@ LUI.createMenu.Loading_MP = function(f1_arg0, f1_arg1)
 	end, false)
 	PCNotifContainer = label
 	MovieSubtitles = label.subscribeToModel
-	f1_local14 = Engine[@"getglobalmodel"]()
+	f1_local14 = Engine.GetGlobalModel()
 	MovieSubtitles(PCNotifContainer, f1_local14.isIntroTutorialMovie, function(f10_arg0)
 		f1_local1:updateElementState(label, {
 			name = "model_validation",
@@ -197,7 +197,7 @@ LUI.createMenu.Loading_MP = function(f1_arg0, f1_arg1)
 	})
 	local f1_local15 = self
 	f1_local14 = self.subscribeToModel
-	local f1_local16 = Engine[@"getglobalmodel"]()
+	local f1_local16 = Engine.GetGlobalModel()
 	f1_local14(f1_local15, f1_local16["lobbyRoot.lobbyNav"], function(f13_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -209,7 +209,7 @@ LUI.createMenu.Loading_MP = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local15 = self
 	f1_local14 = self.subscribeToModel
-	f1_local16 = Engine[@"getglobalmodel"]()
+	f1_local16 = Engine.GetGlobalModel()
 	f1_local14(f1_local15, f1_local16["lobbyRoot.gameClient.update"], function(f14_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -221,7 +221,7 @@ LUI.createMenu.Loading_MP = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local15 = self
 	f1_local14 = self.subscribeToModel
-	f1_local16 = Engine[@"getglobalmodel"]()
+	f1_local16 = Engine.GetGlobalModel()
 	f1_local14(f1_local15, f1_local16["lobbyRoot.privateClient.update"], function(f15_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
@@ -233,74 +233,74 @@ LUI.createMenu.Loading_MP = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local15 = self
 	f1_local14 = self.subscribeToModel
-	f1_local16 = Engine[@"getglobalmodel"]()
+	f1_local16 = Engine.GetGlobalModel()
 	f1_local14(f1_local15, f1_local16.cutsceneSkippable, function(f16_arg0, f16_arg1)
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
-		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f16_arg1, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_none"])
 	end, false)
 	f1_local15 = self
 	f1_local14 = self.subscribeToModel
-	f1_local16 = Engine[@"getglobalmodel"]()
+	f1_local16 = Engine.GetGlobalModel()
 	f1_local14(f1_local15, f1_local16.mapLoaded, function(f17_arg0, f17_arg1)
-		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
-		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f17_arg1, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_none"])
 	end, false)
 	f1_local15 = self
 	f1_local14 = self.subscribeToModel
-	f1_local16 = Engine[@"getglobalmodel"]()
+	f1_local16 = Engine.GetGlobalModel()
 	f1_local14(f1_local15, f1_local16.isIntroTutorialMovie, function(f18_arg0, f18_arg1)
-		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
-		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_none"])
+		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(f18_arg1, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_none"])
 	end, false)
-	self:registerEventHandler("loading_startplay", function(self, event)
+	self:registerEventHandler("loading_startplay", function(element, event)
 		local f19_local0 = nil
-		CoD.HUDUtility.StartPlay(self, f1_arg0)
+		CoD.HUDUtility.StartPlay(element, f1_arg0)
 		if not f19_local0 then
-			f19_local0 = self:dispatchEventToChildren(event)
+			f19_local0 = element:dispatchEventToChildren(event)
 		end
 		return f19_local0
 	end)
-	self:registerEventHandler("loading_nomovie_startplay", function(self, event)
+	self:registerEventHandler("loading_nomovie_startplay", function(element, event)
 		local f20_local0 = nil
 		if IsSplitscreenAndInGame(f1_arg0) and IsWarzone() then
-			CoD.HUDUtility.StartPlay(self, f1_arg0)
+			CoD.HUDUtility.StartPlay(element, f1_arg0)
 		end
 		if not f20_local0 then
-			f20_local0 = self:dispatchEventToChildren(event)
+			f20_local0 = element:dispatchEventToChildren(event)
 		end
 		return f20_local0
 	end)
-	self:registerEventHandler("loading_displaycontinue", function(self, event)
+	self:registerEventHandler("loading_displaycontinue", function(element, event)
 		local f21_local0 = nil
 		SetGlobalModelValueTrue("mapLoaded")
 		if not f21_local0 then
-			f21_local0 = self:dispatchEventToChildren(event)
+			f21_local0 = element:dispatchEventToChildren(event)
 		end
 		return f21_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f22_arg0, f22_arg1, f22_arg2, f22_arg3)
 		if CoD.ModelUtility.IsGlobalModelValueTrue("cutsceneSkippable") and CoD.ModelUtility.IsGlobalModelValueTrue("mapLoaded") and not CoD.ModelUtility.IsGlobalModelValueTrue("isIntroTutorialMovie") then
-			CoD.HUDUtility.StartPlay(element, controller)
+			CoD.HUDUtility.StartPlay(f22_arg0, f22_arg2)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
+	end, function(f23_arg0, f23_arg1, f23_arg2)
 		if CoD.ModelUtility.IsGlobalModelValueTrue("cutsceneSkippable") and CoD.ModelUtility.IsGlobalModelValueTrue("mapLoaded") and not CoD.ModelUtility.IsGlobalModelValueTrue("isIntroTutorialMovie") then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+			CoD.Menu.SetButtonLabel(f23_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 			return false
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_none"], "ESCAPE", function(element, menu, controller, model)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_none"], "ESCAPE", function(f24_arg0, f24_arg1, f24_arg2, f24_arg3)
 		if CoD.ModelUtility.IsGlobalModelValueTrue("cutsceneSkippable") and CoD.ModelUtility.IsGlobalModelValueTrue("mapLoaded") and not CoD.ModelUtility.IsGlobalModelValueTrue("isIntroTutorialMovie") then
-			CoD.HUDUtility.StartPlay(element, controller)
+			CoD.HUDUtility.StartPlay(f24_arg0, f24_arg2)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
+	end, function(f25_arg0, f25_arg1, f25_arg2)
 		if CoD.ModelUtility.IsGlobalModelValueTrue("cutsceneSkippable") and CoD.ModelUtility.IsGlobalModelValueTrue("mapLoaded") and not CoD.ModelUtility.IsGlobalModelValueTrue("isIntroTutorialMovie") then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_none"], @"hash_0", nil, "ESCAPE")
+			CoD.Menu.SetButtonLabel(f25_arg1, Enum.LUIButton[@"lui_key_none"], 0x0, nil, "ESCAPE")
 			return false
 		else
 			return false

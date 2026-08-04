@@ -2,22 +2,22 @@ CoD.ChatClientUtility = {}
 CoD.ChatClientUtility.MaxWhisperPickerNames = 5
 CoD.ChatClientUtility.Properties = {}
 CoD.ChatClientUtility.GetChatGlobalModel = function(f1_arg0)
-	return Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f1_arg0), "ChatGlobal")
+	return Engine.GetModel(Engine.GetModelForController(f1_arg0), "ChatGlobal")
 end
 CoD.ChatClientUtility.GetChatClientGlobalModel = function()
-	return Engine[@"createmodel"](Engine[@"getglobalmodel"](), "ChatClientGlobal")
+	return Engine.CreateModel(Engine.GetGlobalModel(), "ChatClientGlobal")
 end
 CoD.ChatClientUtility.GetEventModel = function(f3_arg0)
-	return Engine[@"getmodel"](CoD.ChatClientUtility.GetChatGlobalModel(f3_arg0), "Event")
+	return Engine.GetModel(CoD.ChatClientUtility.GetChatGlobalModel(f3_arg0), "Event")
 end
 CoD.ChatClientUtility.GetChatEntriesListModel = function(f4_arg0)
-	return Engine[@"createmodel"](CoD.ChatClientUtility.GetChatGlobalModel(f4_arg0), "ChatClientEntriesList")
+	return Engine.CreateModel(CoD.ChatClientUtility.GetChatGlobalModel(f4_arg0), "ChatClientEntriesList")
 end
 CoD.ChatClientUtility.GetInputChannelModel = function(f5_arg0)
-	return Engine[@"createmodel"](CoD.ChatClientUtility.GetChatGlobalModel(f5_arg0), "InputChannel")
+	return Engine.CreateModel(CoD.ChatClientUtility.GetChatGlobalModel(f5_arg0), "InputChannel")
 end
 CoD.ChatClientUtility.GetInputTextModel = function(f6_arg0)
-	return Engine[@"createmodel"](CoD.ChatClientUtility.GetChatGlobalModel(f6_arg0), "InputText")
+	return Engine.CreateModel(CoD.ChatClientUtility.GetChatGlobalModel(f6_arg0), "InputText")
 end
 CoD.ChatClientUtility.GetCurrentChattingModel = function(f7_arg0)
 	if CoD.isFrontend then
@@ -27,13 +27,13 @@ CoD.ChatClientUtility.GetCurrentChattingModel = function(f7_arg0)
 	end
 end
 CoD.ChatClientUtility.GetInGameChattingModel = function(f8_arg0)
-	return Engine[@"createmodel"](CoD.ChatClientUtility.GetChatGlobalModel(f8_arg0), "inGameChatActive")
+	return Engine.CreateModel(CoD.ChatClientUtility.GetChatGlobalModel(f8_arg0), "inGameChatActive")
 end
 CoD.ChatClientUtility.GetMenuChatActiveModeModel = function(f9_arg0)
-	return Engine[@"createmodel"](CoD.ChatClientUtility.GetChatGlobalModel(f9_arg0), "MenuChatInActiveMode")
+	return Engine.CreateModel(CoD.ChatClientUtility.GetChatGlobalModel(f9_arg0), "MenuChatInActiveMode")
 end
 CoD.ChatClientUtility.GetStaticChatAllowedModel = function(f10_arg0)
-	return Engine[@"createmodel"](CoD.ChatClientUtility.GetChatGlobalModel(f10_arg0), "StaticChatAllowed")
+	return Engine.CreateModel(CoD.ChatClientUtility.GetChatGlobalModel(f10_arg0), "StaticChatAllowed")
 end
 CoD.ChatClientUtility.ResetMenuShow = function() end
 CoD.ChatClientUtility.ResetSettingsModels = function(f12_arg0)
@@ -49,7 +49,7 @@ CoD.ChatClientUtility.ResetAllModels = function(f13_arg0)
 	if f13_local2 then
 		f13_local3 = CoD.ChatClientUtility.ColorToString(CoD.ChatClientUtility.GetColorForChannelType(Engine[@"hash_5884871F4FF3ACA"](f13_local1)))
 	end
-	Engine[@"setmodelvalue"](CoD.ChatClientUtility.GetInputTextModel(f13_arg0), "")
+	Engine.SetModelValue(CoD.ChatClientUtility.GetInputTextModel(f13_arg0), "")
 	CoD.ChatClientUtility.ResetMenuShow()
 	CoD.ChatClientUtility.ResetSettingsModels(f13_arg0)
 	return f13_local0
@@ -58,11 +58,11 @@ CoD.ChatClientUtility.UpdateOptionsModels = function(f14_arg0)
 	Engine[@"hash_37186ADD46E1FE57"]()
 	CoD.ChatClientUtility.ResetMenuShow()
 	CoD.ChatClientUtility.ResetSettingsModels(f14_arg0)
-	Engine[@"exec"](f14_arg0, "chatClientUpdate")
+	Engine.exec(f14_arg0, "chatClientUpdate")
 end
 CoD.ChatClientUtility.SetChannelTo = function(f15_arg0, f15_arg1)
 	if Engine[@"hash_6D4866B78C88BFD1"](f15_arg1) then
-		Engine[@"setmodelvalue"](CoD.ChatClientUtility.GetInputChannelModel(f15_arg0), f15_arg1)
+		Engine.SetModelValue(CoD.ChatClientUtility.GetInputChannelModel(f15_arg0), f15_arg1)
 	end
 	return false
 end
@@ -100,7 +100,7 @@ local f0_local0 = function(f20_arg0, f20_arg1)
 			return f20_local3[1].xuid
 		end
 	end
-	for f20_local5, f20_local6 in pairs(Engine[@"getfriends"](f20_arg0)) do
+	for f20_local5, f20_local6 in pairs(Engine.GetFriends(f20_arg0)) do
 		if string.lower(CoD.PCBattlenetUtility.StripBattleTagNumber(f20_local6.gamertag)) == f20_arg1 then
 			return f20_local6.xuid
 		end
@@ -127,7 +127,7 @@ local f0_local1 = function(f21_arg0)
 			}
 		end
 	end
-	for f21_local7, f21_local4 in pairs(Engine[@"getfriends"](f21_arg0)) do
+	for f21_local7, f21_local4 in pairs(Engine.GetFriends(f21_arg0)) do
 		local f21_local5 = CoD.PCBattlenetUtility.StripBattleTagNumber(f21_local4.gamertag)
 		if f21_local0[f21_local5] == nil then
 			f21_local0[f21_local5] = {
@@ -198,13 +198,13 @@ local f0_local2 = function(f26_arg0, f26_arg1)
 	local f26_local2 = function()
 		for f28_local3, f28_local4, f28_local5 in f26_local1:forEachElement() do
 			if CoD.SafeGetModelValue(f28_local5:getModel(), "getActionFunction") then
-				f26_arg0:AddButtonCallbackFunction(f28_local5, f26_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-					local f29_local0 = element:getModel()
+				f26_arg0:AddButtonCallbackFunction(f28_local5, f26_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f29_arg0, f29_arg1, f29_arg2, f29_arg3)
+					local f29_local0 = f29_arg0:getModel()
 					if f29_local0 and f29_local0.getActionFunction then
 						local f29_local1 = f29_local0.getActionFunction:get()
-						f29_local1 = f29_local1(element, menu, controller, model)
+						f29_local1 = f29_local1(f29_arg0, f29_arg1, f29_arg2, f29_arg3)
 						if f29_local1 then
-							f29_local1(element, menu, controller, model)
+							f29_local1(f29_arg0, f29_arg1, f29_arg2, f29_arg3)
 						end
 					end
 					CoD.PCWidgetUtility.CloseContextualMenu(f26_arg0, f26_arg1)
@@ -225,7 +225,7 @@ local f0_local2 = function(f26_arg0, f26_arg1)
 	local f26_local3 = f26_arg0.ContextualMenu
 	local f26_local4 = f26_local3
 	f26_local3 = f26_local3.subscribeToModel
-	local f26_local5 = Engine[@"getmodelforcontroller"](f26_arg1)
+	local f26_local5 = Engine.GetModelForController(f26_arg1)
 	f26_local3(f26_local4, f26_local5["EditBoxGlobal.ChatWhisperName"], function(f31_arg0)
 		f26_local1:setVerticalCount(math.min(f26_local1.itemCount, CoD.ChatClientUtility.MaxWhisperPickerNames))
 		f26_local0(f26_local1, f26_arg0, f26_arg1)
@@ -241,7 +241,7 @@ local f0_local2 = function(f26_arg0, f26_arg1)
 	f26_local3 = f26_arg0.ContextualMenu
 	f26_local4 = f26_local3
 	f26_local3 = f26_local3.subscribeToModel
-	f26_local5 = Engine[@"getmodelforcontroller"](f26_arg1)
+	f26_local5 = Engine.GetModelForController(f26_arg1)
 	f26_local3(f26_local4, f26_local5["EditBoxGlobal.CurrentChatTextRealTime"], function(f32_arg0)
 		if f26_arg0.ContextualMenu.initDone then
 			if string.match(f32_arg0:get(), "(%a+) ") ~= "w" then
@@ -251,7 +251,7 @@ local f0_local2 = function(f26_arg0, f26_arg1)
 				if not f32_local1 then
 					f32_local1 = ""
 				end
-				local f32_local2 = Engine[@"getmodelforcontroller"](f26_arg1)
+				local f32_local2 = Engine.GetModelForController(f26_arg1)
 				f32_local2["EditBoxGlobal.ChatWhisperName"].set(f32_local2["EditBoxGlobal.ChatWhisperName"], f32_local1)
 			end
 		end
@@ -294,8 +294,7 @@ CoD.ChatClientUtility.StartWhisperPicker = function(f34_arg0, f34_arg1, f34_arg2
 end
 CoD.ChatClientUtility.TryFunction = function(f35_arg0)
 	local f35_local0, f35_local1, f35_local2 = CoD.ChatClientUtility.GetCommand(f35_arg0.controller, f35_arg0.currentText)
-	local f35_local3 = false
-	local f35_local4 = nil
+	local f35_local3, f35_local4 = false
 	if f35_local0 then
 		f35_local4, f35_local3, f35_local4, f35_local4 = f35_local0.fct(f35_arg0.controller, f35_local1, true)
 	end
@@ -388,8 +387,7 @@ CoD.ChatClientUtility.TrySendLine = function(f41_arg0, f41_arg1)
 	local f41_local5, f41_local6, f41_local7 = CoD.ChatClientUtility.GetCommand(f41_arg0, f41_arg1)
 	if f41_local7 then
 		f41_local1 = true
-		f41_local2 = false
-		f41_local0 = nil
+		f41_local2, f41_local0 = false
 		f41_local4 = @"hash_256696C428AB2A8B"
 	elseif f41_local5 then
 		f41_local0, f41_local1, f41_local3, f41_local4 = f41_local5.fct(f41_arg0, f41_local6)
@@ -450,12 +448,12 @@ CoD.ChatClientUtility.GetCommand = function(f42_arg0, f42_arg1)
 	end
 end
 CoD.ChatClientUtility.GetAndJoinWhisperChannelIdByXuid = function(f43_arg0, f43_arg1)
-	if Engine[@"getxuid64"](f43_arg0) == f43_arg1 then
+	if Engine.GetXUID64(f43_arg0) == f43_arg1 then
 		return nil
 	end
 	local f43_local0 = Engine[@"hash_327ED8F37B54D639"](Enum[@"hash_7F6296F5D7A38AD2"][@"hash_75E57997D82BCBD1"], f43_arg1)
 	if not f43_local0 then
-		local f43_local1 = Engine[@"getplayerinfo"](f43_arg0, f43_arg1)
+		local f43_local1 = Engine.GetPlayerInfo(f43_arg0, f43_arg1)
 		local f43_local2 = nil
 		if f43_local1 and f43_local1.info and f43_local1.info.gamertag then
 			f43_local2 = CoD.PCBattlenetUtility.StripBattleTagNumber(f43_local1.info.gamertag)

@@ -8,7 +8,7 @@ CoD.CallingCards_Asset_ghost_spin.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local ghostSpin = LUI.UIImage.new(0, 0, 0, 720, 0, 0, 0, 720)
-	ghostSpin:setImage(RegisterImage(@"uie_ui_icon_callingcards_zm_darkops_light_ghost"))
+	ghostSpin:setImage(RegisterImage("uie_ui_icon_callingcards_zm_darkops_light_ghost"))
 	self:addElement(ghostSpin)
 	self.ghostSpin = ghostSpin
 	if PostLoadFunc then

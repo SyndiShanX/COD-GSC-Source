@@ -1,6 +1,6 @@
-require("x64:a8c6f5d1845bdd6")
-require("x64:dd0e1cefc02c892")
-require("x64:2b92e102c99da61")
+require("ui/uieditor/widgets/pc/startmenu/controlsoptions/pc_startmenu_options_controls_descriptionimage")
+require("ui/uieditor/widgets/pc/startmenu/controlsoptions/pc_startmenu_options_controls_descriptiontext")
+require("ui/uieditor/widgets/pc/startmenu/pc_startmenu_options_pagination")
 CoD.PC_StartMenu_Options_Description = InheritFrom(LUI.UIElement)
 CoD.PC_StartMenu_Options_Description.__defaultWidth = 675
 CoD.PC_StartMenu_Options_Description.__defaultHeight = 600
@@ -23,7 +23,7 @@ CoD.PC_StartMenu_Options_Description.new = function(f1_arg0, f1_arg1, f1_arg2, f
 	Pagination:setWidgetType(CoD.PC_StartMenu_Options_Pagination)
 	Pagination:setHorizontalCount(5)
 	Pagination:setSpacing(15)
-	Pagination:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Pagination:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	self:addElement(Pagination)
 	self.Pagination = Pagination
 	local DescriptionImage = CoD.PC_StartMenu_Options_Controls_DescriptionImage.new(f1_arg0, f1_arg1, 0, 0, 0, 675, 0, 0, 0, 380)

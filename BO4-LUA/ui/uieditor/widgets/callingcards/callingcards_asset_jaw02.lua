@@ -8,7 +8,7 @@ CoD.CallingCards_Asset_jaw02.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local jaw02 = LUI.UIImage.new(0, 0, 0, 69, 0, 0, 0, 69)
-	jaw02:setImage(RegisterImage(@"uie_jaw_02"))
+	jaw02:setImage(RegisterImage("uie_jaw_02"))
 	self:addElement(jaw02)
 	self.jaw02 = jaw02
 	if PostLoadFunc then

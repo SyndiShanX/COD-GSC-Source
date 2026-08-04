@@ -1,4 +1,4 @@
-require("x64:5f8cf56752aa71b")
+require("ui/uieditor/widgets/commonbuttonoutline")
 CoD.DirectorButtonAdd = InheritFrom(LUI.UIElement)
 CoD.DirectorButtonAdd.__defaultWidth = 280
 CoD.DirectorButtonAdd.__defaultHeight = 214
@@ -11,7 +11,7 @@ CoD.DirectorButtonAdd.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local NoiseTiledBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	NoiseTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseTiledBacking:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	NoiseTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	NoiseTiledBacking:setupNineSliceShader(196, 88)
@@ -24,21 +24,21 @@ CoD.DirectorButtonAdd.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	self.SelectorOverlay = SelectorOverlay
 	local FrontendFrame = LUI.UIImage.new(0, 1, -1, 1, 0, 1, -1, 1)
 	FrontendFrame:setAlpha(0.2)
-	FrontendFrame:setImage(RegisterImage(@"uie_ui_menu_store_common_frame"))
-	FrontendFrame:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
+	FrontendFrame:setImage(RegisterImage("uie_ui_menu_store_common_frame"))
+	FrontendFrame:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_add"))
 	FrontendFrame:setShaderVector(0, 0, 0, 0, 0)
 	FrontendFrame:setupNineSliceShader(12, 12)
 	self:addElement(FrontendFrame)
 	self.FrontendFrame = FrontendFrame
 	local ButtonAddPlus = LUI.UIImage.new(0.5, 0.5, -22, 22, 0.5, 0.5, -22, 22)
-	ButtonAddPlus:setImage(RegisterImage(@"uie_ui_menu_cac_button_add_plus"))
+	ButtonAddPlus:setImage(RegisterImage("uie_ui_menu_cac_button_add_plus"))
 	self:addElement(ButtonAddPlus)
 	self.ButtonAddPlus = ButtonAddPlus
 	local ButtonAddPlusHighlighted = LUI.UIImage.new(0.5, 0.5, -22, 22, 0.5, 0.5, -22, 22)
 	ButtonAddPlusHighlighted:setRGB(ColorSet.T8__BIEGE.r, ColorSet.T8__BIEGE.g, ColorSet.T8__BIEGE.b)
 	ButtonAddPlusHighlighted:setAlpha(0)
-	ButtonAddPlusHighlighted:setImage(RegisterImage(@"uie_ui_menu_cac_button_add_plus_highlighted"))
-	ButtonAddPlusHighlighted:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	ButtonAddPlusHighlighted:setImage(RegisterImage("uie_ui_menu_cac_button_add_plus_highlighted"))
+	ButtonAddPlusHighlighted:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(ButtonAddPlusHighlighted)
 	self.ButtonAddPlusHighlighted = ButtonAddPlusHighlighted
 	local CommonButtonOutline = CoD.CommonButtonOutline.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)

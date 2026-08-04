@@ -1,6 +1,6 @@
-require("x64:dfd115b8bbb2cbc")
-require("x64:5efe05d5e26c932")
-require("x64:25cb3e6717e288f")
+require("ui/uieditor/widgets/pc/categoryexpendablebutton")
+require("ui/uieditor/widgets/pc/globaldropdown")
+require("ui/uieditor/widgets/pc/startmenu/accessibilityoptions/startmenu_options_pc_accessibilityoptions_suboptionsnavigation")
 CoD.StartMenu_Options_PC_Accessibility_TabContent = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Options_PC_Accessibility_TabContent.__defaultWidth = 1885
 CoD.StartMenu_Options_PC_Accessibility_TabContent.__defaultHeight = 812
@@ -36,7 +36,7 @@ CoD.StartMenu_Options_PC_Accessibility_TabContent.new = function(f1_arg0, f1_arg
 	})
 	local f1_local4 = List
 	local f1_local5 = List.subscribeToModel
-	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
+	local f1_local6 = Engine.GetModelForController(f1_arg1)
 	f1_local5(f1_local4, f1_local6["PC.CurrentCategory"], function(f4_arg0)
 		f1_arg0:updateElementState(List, {
 			name = "model_validation",
@@ -60,7 +60,7 @@ CoD.StartMenu_Options_PC_Accessibility_TabContent.new = function(f1_arg0, f1_arg
 	List:setWidgetType(CoD.CategoryExpendableButton)
 	List:setVerticalCount(8)
 	List:setSpacing(10)
-	List:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	List:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	List:setDataSource("OptionAccessibilityCategories")
 	self:addElement(List)
 	self.List = List

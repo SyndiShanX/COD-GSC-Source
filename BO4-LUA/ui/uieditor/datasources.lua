@@ -1,4 +1,3 @@
-
 require( "x64:5814753ce54450b" )
 if not DataSourceHelpers then
 	DataSourceHelpers = {}
@@ -8,9 +7,9 @@ if not DataSources then
 end
 function ListHelper_GetListHelperModel( f1_arg0, f1_arg1 )
 	if f1_arg1 then
-		return Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f1_arg0.dataSourceController ), f1_arg0.customDataSourceHelper )
+		return Engine.CreateModel( Engine.GetModelForController( f1_arg0.dataSourceController ), f1_arg0.customDataSourceHelper )
 	else
-		return Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f1_arg0.dataSourceController ), f1_arg0.customDataSourceHelper )
+		return Engine.GetModel( Engine.GetModelForController( f1_arg0.dataSourceController ), f1_arg0.customDataSourceHelper )
 	end
 end
 function ListHelper_Prepare( f2_arg0, f2_arg1, f2_arg2, f2_arg3, f2_arg4, f2_arg5 )
@@ -19,7 +18,7 @@ function ListHelper_Prepare( f2_arg0, f2_arg1, f2_arg2, f2_arg3, f2_arg4, f2_arg
 	f2_arg0.dataSourceController = f2_arg1
 	local f2_local0 = ListHelper_GetListHelperModel( f2_arg0, true )
 	for f2_local4, f2_local5 in ipairs( f2_arg3( f2_arg1, f2_arg0 ) or {} ) do
-		local f2_local6 = Engine[@"createmodel"]( f2_local0, f2_local4 )
+		local f2_local6 = Engine.CreateModel( f2_local0, f2_local4 )
 		if f2_local5.models then
 			LuaUtils.CreateModelsFromTable( f2_local6, f2_local5.models )
 		end
@@ -62,7 +61,7 @@ function ListHelper_Cleanup( f6_arg0, f6_arg1 )
 	if f6_arg0.prepared then
 		local f6_local0 = ListHelper_GetListHelperModel( f6_arg0, false )
 		if f6_local0 then
-			Engine[@"unsubscribeandfreemodel"]( f6_local0 )
+			Engine.UnsubscribeAndFreeModel( f6_local0 )
 		end
 	end
 end
@@ -126,7 +125,7 @@ function ListHelper_SetupDataSource_CustomPrepare( f11_arg0, f11_arg1, f11_arg2,
 		local f12_local0 = f11_arg1
 		local f12_local1 = f12_arg1
 		local f12_local2 = f12_arg0
-		local f12_local3 = Engine[@"getmodelforcontroller"]( f12_arg0 )
+		local f12_local3 = Engine.GetModelForController( f12_arg0 )
 		f12_local0( f12_local1, f12_local2, f12_local3:create( f11_arg0 ), f12_arg1[f11_arg0], f12_arg2 )
 	end
 	
@@ -154,7 +153,7 @@ DataSourceHelpers.GlobalDataSourceSetup = function ( f13_arg0, f13_arg1, f13_arg
 					local f15_local2 = DataSources.GlobalModel.getModel( f15_arg0 )
 					f15_local0 = f15_local0( f15_local1, f15_local2[f13_arg1] )
 				end
-				Engine[@"unsubscribeandfreemodel"]( DataSources[f13_arg0]._cachedModel )
+				Engine.UnsubscribeAndFreeModel( DataSources[f13_arg0]._cachedModel )
 			end
 			DataSources[f13_arg0]._cachedModel = nil
 		end,
@@ -192,7 +191,7 @@ DataSourceHelpers.PerControllerDataSourceSetup = function ( f17_arg0, f17_arg1, 
 					local f19_local2 = DataSources.PerController.getModel( f19_arg0 )
 					f19_local0 = f19_local0( f19_local1, f19_local2[f17_arg1] )
 				end
-				Engine[@"unsubscribeandfreemodel"]( DataSources[f17_arg0]._cachedModels[f19_arg0] )
+				Engine.UnsubscribeAndFreeModel( DataSources[f17_arg0]._cachedModels[f19_arg0] )
 			end
 			DataSources[f17_arg0]._cachedModels[f19_arg0] = nil
 		end,
@@ -248,7 +247,7 @@ function RefreshListFindSelectedXuid( f26_arg0, f26_arg1 )
 	if f26_arg1.activeWidget ~= nil then
 		local f26_local1 = f26_arg1.activeWidget:getModel( f26_arg0, "xuid" )
 		if f26_local1 ~= nil then
-			f26_local0 = Engine[@"getmodelvalue"]( f26_local1 )
+			f26_local0 = Engine.GetModelValue( f26_local1 )
 		end
 	end
 	f26_arg1:updateDataSource( true, true )
@@ -369,7 +368,7 @@ DataSources.GlobalSources = {
 }
 DataSources.GlobalModel = {
 	getModel = function ()
-		return Engine[@"getglobalmodel"]()
+		return Engine.GetGlobalModel()
 	end
 }
 DataSources.Controller = {
@@ -384,29 +383,29 @@ DataSources.VehicleController = {
 }
 DataSources.PerController = {
 	getModel = function ( f42_arg0 )
-		local f42_local0 = Engine[@"getmodelforcontroller"]( f42_arg0 )
-		local f42_local1 = Engine[@"createmodel"]( f42_local0, "identityBadge" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f42_local1, "xuid" ), Engine[@"getxuid64"]( f42_arg0 ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f42_local1, "gamertag" ), Engine[@"getselfgamertag"]( f42_arg0 ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f42_local1, "clantag" ), Engine[@"getclanname"]( f42_arg0 ) )
-		Engine[@"createmodel"]( f42_local0, "forceUpdateVehicleBindings" )
+		local f42_local0 = Engine.GetModelForController( f42_arg0 )
+		local f42_local1 = Engine.CreateModel( f42_local0, "identityBadge" )
+		Engine.SetModelValue( Engine.CreateModel( f42_local1, "xuid" ), Engine.GetXUID64( f42_arg0 ) )
+		Engine.SetModelValue( Engine.CreateModel( f42_local1, "gamertag" ), Engine.GetSelfGamertag( f42_arg0 ) )
+		Engine.SetModelValue( Engine.CreateModel( f42_local1, "clantag" ), Engine.GetClanName( f42_arg0 ) )
+		Engine.CreateModel( f42_local0, "forceUpdateVehicleBindings" )
 		return f42_local0
 	end,
 	setHintText = function ( f43_arg0, f43_arg1 )
-		local f43_local0 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f43_arg0 ), "hintText" )
+		local f43_local0 = Engine.GetModel( Engine.GetModelForController( f43_arg0 ), "hintText" )
 		if not f43_arg1 then
 			f43_arg1 = ""
 		end
 		if f43_local0 then
-			Engine[@"setmodelvalue"]( f43_local0, f43_arg1 )
+			Engine.SetModelValue( f43_local0, f43_arg1 )
 		end
 	end,
 	clearHintText = function ( f44_arg0, f44_arg1 )
 		DataSources.PerController.setHintText( f44_arg0, "" )
 	end,
 	hasHintText = function ( f45_arg0 )
-		local f45_local0 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f45_arg0 ), "hintText" )
-		if f45_local0 and Engine[@"getmodelvalue"]( f45_local0 ) ~= "" then
+		local f45_local0 = Engine.GetModel( Engine.GetModelForController( f45_arg0 ), "hintText" )
+		if f45_local0 and Engine.GetModelValue( f45_local0 ) ~= "" then
 			return true
 		else
 			return false
@@ -415,7 +414,7 @@ DataSources.PerController = {
 }
 DataSources.PerClient = {
 	getModel = function ( f46_arg0 )
-		local f46_local0 = Engine[@"getclientnum"]( f46_arg0 )
+		local f46_local0 = Engine.GetClientNum( f46_arg0 )
 		local f46_local1 = Engine[@"getmodelforclient"]( f46_local0 )
 		local f46_local2 = f46_local1:create( "clientNum" )
 		f46_local2:set( f46_local0 )
@@ -423,7 +422,7 @@ DataSources.PerClient = {
 	end
 }
 function FFALeaderSetupModels( f47_arg0 )
-	local f47_local0 = Engine[@"getglobalmodel"]()
+	local f47_local0 = Engine.GetGlobalModel()
 	f47_local0 = f47_local0:create( f47_arg0 )
 	f47_local0:create( "name" )
 	f47_local0:create( "clientNum" )
@@ -434,7 +433,7 @@ function FFALeaderSetupModels( f47_arg0 )
 	return f47_local0
 end
 function FFALeaderSetModels( f48_arg0, f48_arg1, f48_arg2, f48_arg3, f48_arg4, f48_arg5 )
-	local f48_local0 = Engine[@"getglobalmodel"]()
+	local f48_local0 = Engine.GetGlobalModel()
 	f48_local0 = f48_local0:create( f48_arg0 )
 	local f48_local1 = f48_local0:create( "name" )
 	f48_local1:set( f48_arg1 )
@@ -458,7 +457,7 @@ DataSources.FFALeader = {
 		FFALeaderSetModels( "FFALeader", f50_arg0, f50_arg1, f50_arg2, f50_arg3, f50_arg4 )
 	end,
 	setHidden = function ()
-		local f51_local0 = Engine[@"getglobalmodel"]()
+		local f51_local0 = Engine.GetGlobalModel()
 		f51_local0 = f51_local0:create( "FFALeader" )
 		local f51_local1 = f51_local0:create( "hidden" )
 		f51_local1:set( true )
@@ -472,7 +471,7 @@ DataSources.FFASecondBest = {
 		return FFALeaderSetModels( "FFASecondBest", f53_arg0, f53_arg1, f53_arg2, f53_arg3, f53_arg4 )
 	end,
 	setHidden = function ()
-		local f54_local0 = Engine[@"getglobalmodel"]()
+		local f54_local0 = Engine.GetGlobalModel()
 		f54_local0 = f54_local0:create( "FFASecondBest" )
 		local f54_local1 = f54_local0:create( "hidden" )
 		f54_local1:set( true )
@@ -486,7 +485,7 @@ DataSources.FFAThirdBest = {
 		return FFALeaderSetModels( "FFAThirdBest", f56_arg0, f56_arg1, f56_arg2, f56_arg3, f56_arg4 )
 	end,
 	setHidden = function ()
-		local f57_local0 = Engine[@"getglobalmodel"]()
+		local f57_local0 = Engine.GetGlobalModel()
 		f57_local0 = f57_local0:create( "FFAThirdBest" )
 		local f57_local1 = f57_local0:create( "hidden" )
 		f57_local1:set( true )
@@ -510,11 +509,11 @@ DataSources.Clients = {
 		local f59_local1 = Engine[@"getmodelforclient"]( f59_local0 )
 		f59_local1 = f59_local1:create( "team" )
 		f59_local1 = f59_local1:get()
-		if f59_local1 == Enum[@"team_t"][@"team_spectator"] then
+		if f59_local1 == Enum.team_t[@"team_spectator"] then
 			if CoD.ShoutcasterProfileVarBool( f59_arg0, "shoutcaster_ds_flip_scorepanel" ) then
-				f59_local1 = Enum[@"team_t"][@"team_axis"]
+				f59_local1 = Enum.team_t[@"team_axis"]
 			else
-				f59_local1 = Enum[@"team_t"][@"team_allies"]
+				f59_local1 = Enum.team_t[@"team_allies"]
 			end
 		end
 		f59_arg1.clients = {}
@@ -575,10 +574,10 @@ DataSources.Clients = {
 			end ) )
 		end
 		local f59_local5 = nil
-		local f59_local6 = Dvar[@"com_maxclients"]:get()
+		local f59_local6 = Dvar.com_maxclients:get()
 		local f59_local7 = f59_local6
-		if not Engine[@"isingame"]() then
-			f59_local6 = Engine[@"getmatchscoreboardclientcount"]()
+		if not Engine.IsInGame() then
+			f59_local6 = Engine.GetMatchScoreboardClientCount()
 			f59_local7 = Engine[@"hash_1412F5A7061AC076"]() or f59_local7
 			f59_local5 = CoD.AARUtility.GetCurrentGametype( f59_arg0 )
 		end
@@ -670,8 +669,8 @@ DataSources.Clients = {
 				}
 				local f59_local14 = f59_arg1
 				local f59_local15 = f59_arg1.subscribeToModel
-				local f59_local16 = Engine[@"getmodelforcontroller"]( f59_arg0 )
-				f59_local15( f59_local14, f59_local16["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function ( f73_arg0 )
+				local f59_local16 = Engine.GetModelForController( f59_arg0 )
+				f59_local15( f59_local14, f59_local16["UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_scoreboard_open"]], function ( f73_arg0 )
 					if f73_arg0:get() == 0 then
 						f59_arg1.selectIndexTrue.selectIndex = true
 					end
@@ -699,7 +698,7 @@ DataSources.Clients = {
 		end
 	end,
 	getCustomPropertiesForItem = function ( f76_arg0, f76_arg1 )
-		if Engine[@"getclientnum"]( f76_arg0.controller ) == f76_arg0.clients[f76_arg1] then
+		if Engine.GetClientNum( f76_arg0.controller ) == f76_arg0.clients[f76_arg1] then
 			return f76_arg0.selectIndexTrue
 		else
 			return {}
@@ -708,58 +707,58 @@ DataSources.Clients = {
 }
 DataSources.WorldSpaceIndicators = {
 	getModel = function ( f77_arg0 )
-		return Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f77_arg0 ), "WorldSpaceIndicators" )
+		return Engine.CreateModel( Engine.GetModelForController( f77_arg0 ), "WorldSpaceIndicators" )
 	end
 }
 DataSources.MessageDialog = {
 	getModel = function ( f78_arg0 )
-		return Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "messageDialog" )
+		return Engine.GetModel( Engine.GetGlobalModel(), "messageDialog" )
 	end
 }
 DataSources.AccountLinkLogin = {
 	getModel = function ( f79_arg0 )
-		local f79_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "AccountLinkLogin" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f79_local0, "email" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_2DDFC55C7F5D372" ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f79_local0, "password" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_481703FE58609B3B" ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f79_local0, "stars" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_481703FE58609B3B" ) )
+		local f79_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "AccountLinkLogin" )
+		Engine.SetModelValue( Engine.CreateModel( f79_local0, "email" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_2DDFC55C7F5D372" ) )
+		Engine.SetModelValue( Engine.CreateModel( f79_local0, "password" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_481703FE58609B3B" ) )
+		Engine.SetModelValue( Engine.CreateModel( f79_local0, "stars" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_481703FE58609B3B" ) )
 		return f79_local0
 	end
 }
 DataSources.AccountLinkRegister = {
 	getModel = function ( f80_arg0 )
-		local f80_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f80_arg0 ), "AccountLinkRegister" )
-		Engine[@"createmodel"]( f80_local0, "firstName" )
-		Engine[@"createmodel"]( f80_local0, "lastName" )
-		Engine[@"createmodel"]( f80_local0, "zipCode" )
-		Engine[@"createmodel"]( f80_local0, "region" )
-		Engine[@"createmodel"]( f80_local0, "username" )
-		Engine[@"createmodel"]( f80_local0, "email" )
-		Engine[@"createmodel"]( f80_local0, "password" )
-		Engine[@"createmodel"]( f80_local0, "stars" )
-		Engine[@"createmodel"]( f80_local0, "confirmPass" )
-		Engine[@"createmodel"]( f80_local0, "confirmStars" )
-		Engine[@"createmodel"]( f80_local0, "gender" )
-		Engine[@"createmodel"]( f80_local0, "month" )
-		Engine[@"createmodel"]( f80_local0, "monthIndex" )
-		Engine[@"createmodel"]( f80_local0, "day" )
-		Engine[@"createmodel"]( f80_local0, "year" )
+		local f80_local0 = Engine.CreateModel( Engine.GetModelForController( f80_arg0 ), "AccountLinkRegister" )
+		Engine.CreateModel( f80_local0, "firstName" )
+		Engine.CreateModel( f80_local0, "lastName" )
+		Engine.CreateModel( f80_local0, "zipCode" )
+		Engine.CreateModel( f80_local0, "region" )
+		Engine.CreateModel( f80_local0, "username" )
+		Engine.CreateModel( f80_local0, "email" )
+		Engine.CreateModel( f80_local0, "password" )
+		Engine.CreateModel( f80_local0, "stars" )
+		Engine.CreateModel( f80_local0, "confirmPass" )
+		Engine.CreateModel( f80_local0, "confirmStars" )
+		Engine.CreateModel( f80_local0, "gender" )
+		Engine.CreateModel( f80_local0, "month" )
+		Engine.CreateModel( f80_local0, "monthIndex" )
+		Engine.CreateModel( f80_local0, "day" )
+		Engine.CreateModel( f80_local0, "year" )
 		return f80_local0
 	end
 }
 DataSources.TermsOfService = {
 	getModel = function ( f81_arg0 )
-		local f81_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f81_arg0 ), "TermsOfService" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f81_local0, "message" ), Engine[@"gettermsofservice"]( f81_arg0 ) )
+		local f81_local0 = Engine.CreateModel( Engine.GetModelForController( f81_arg0 ), "TermsOfService" )
+		Engine.SetModelValue( Engine.CreateModel( f81_local0, "message" ), Engine.GetTermsOfService( f81_arg0 ) )
 		return f81_local0
 	end
 }
 DataSources.Gender = {
 	prepare = function ( f82_arg0, f82_arg1, f82_arg2 )
-		local f82_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "GenderModel" )
-		local f82_local1 = Engine[@"createmodel"]( f82_local0, "Male" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f82_local1, "gender" ), Engine[@"hash_4F9F1239CFD921FE"]( @"em/male" ) )
-		local f82_local2 = Engine[@"createmodel"]( f82_local0, "Female" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f82_local2, "gender" ), Engine[@"hash_4F9F1239CFD921FE"]( @"em/female" ) )
+		local f82_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "GenderModel" )
+		local f82_local1 = Engine.CreateModel( f82_local0, "Male" )
+		Engine.SetModelValue( Engine.CreateModel( f82_local1, "gender" ), Engine[@"hash_4F9F1239CFD921FE"]( @"em/male" ) )
+		local f82_local2 = Engine.CreateModel( f82_local0, "Female" )
+		Engine.SetModelValue( Engine.CreateModel( f82_local2, "gender" ), Engine[@"hash_4F9F1239CFD921FE"]( @"em/female" ) )
 		f82_arg1.genders = {
 			f82_local1,
 			f82_local2
@@ -774,43 +773,43 @@ DataSources.Gender = {
 }
 DataSources.Month = {
 	prepare = function ( f85_arg0, f85_arg1, f85_arg2 )
-		local f85_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "monthModel" )
-		local f85_local1 = Engine[@"createmodel"]( f85_local0, "january" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local1, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_6B34151E185EE1CE" ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local1, "monthIndex" ), 1 )
-		local f85_local2 = Engine[@"createmodel"]( f85_local0, "february" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local2, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_5DC251DDFB469A2" ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local2, "monthIndex" ), 2 )
-		local f85_local3 = Engine[@"createmodel"]( f85_local0, "march" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local3, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( @"menu/months_mar" ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local3, "monthIndex" ), 3 )
-		local f85_local4 = Engine[@"createmodel"]( f85_local0, "april" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local4, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_CFE3E1DE34F6832" ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local4, "monthIndex" ), 4 )
-		local f85_local5 = Engine[@"createmodel"]( f85_local0, "may" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local5, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( @"menu/months_may" ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local5, "monthIndex" ), 5 )
-		local f85_local6 = Engine[@"createmodel"]( f85_local0, "june" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local6, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_6AF0151E18251502" ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local6, "monthIndex" ), 6 )
-		local f85_local7 = Engine[@"createmodel"]( f85_local0, "july" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local7, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( @"menu/months_jul" ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local7, "monthIndex" ), 7 )
-		local f85_local8 = Engine[@"createmodel"]( f85_local0, "august" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local8, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_CF45B1DE34744F4" ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local8, "monthIndex" ), 8 )
-		local f85_local9 = Engine[@"createmodel"]( f85_local0, "september" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local9, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_27EA201E3AC6F62F" ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local9, "monthIndex" ), 9 )
-		local f85_local10 = Engine[@"createmodel"]( f85_local0, "october" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local10, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_3FE4341DFFD61929" ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local10, "monthIndex" ), 10 )
-		local f85_local11 = Engine[@"createmodel"]( f85_local0, "november" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local11, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_4A70691E06585924" ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local11, "monthIndex" ), 11 )
-		local f85_local12 = Engine[@"createmodel"]( f85_local0, "december" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local12, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_73AFAC1DD52B9CF3" ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f85_local12, "monthIndex" ), 12 )
+		local f85_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "monthModel" )
+		local f85_local1 = Engine.CreateModel( f85_local0, "january" )
+		Engine.SetModelValue( Engine.CreateModel( f85_local1, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( "menu/months_jan" ) )
+		Engine.SetModelValue( Engine.CreateModel( f85_local1, "monthIndex" ), 1 )
+		local f85_local2 = Engine.CreateModel( f85_local0, "february" )
+		Engine.SetModelValue( Engine.CreateModel( f85_local2, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( "menu/months_feb" ) )
+		Engine.SetModelValue( Engine.CreateModel( f85_local2, "monthIndex" ), 2 )
+		local f85_local3 = Engine.CreateModel( f85_local0, "march" )
+		Engine.SetModelValue( Engine.CreateModel( f85_local3, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( @"menu/months_mar" ) )
+		Engine.SetModelValue( Engine.CreateModel( f85_local3, "monthIndex" ), 3 )
+		local f85_local4 = Engine.CreateModel( f85_local0, "april" )
+		Engine.SetModelValue( Engine.CreateModel( f85_local4, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( "menu/months_apr" ) )
+		Engine.SetModelValue( Engine.CreateModel( f85_local4, "monthIndex" ), 4 )
+		local f85_local5 = Engine.CreateModel( f85_local0, "may" )
+		Engine.SetModelValue( Engine.CreateModel( f85_local5, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( @"menu/months_may" ) )
+		Engine.SetModelValue( Engine.CreateModel( f85_local5, "monthIndex" ), 5 )
+		local f85_local6 = Engine.CreateModel( f85_local0, "june" )
+		Engine.SetModelValue( Engine.CreateModel( f85_local6, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( "menu/months_jun" ) )
+		Engine.SetModelValue( Engine.CreateModel( f85_local6, "monthIndex" ), 6 )
+		local f85_local7 = Engine.CreateModel( f85_local0, "july" )
+		Engine.SetModelValue( Engine.CreateModel( f85_local7, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( @"menu/months_jul" ) )
+		Engine.SetModelValue( Engine.CreateModel( f85_local7, "monthIndex" ), 7 )
+		local f85_local8 = Engine.CreateModel( f85_local0, "august" )
+		Engine.SetModelValue( Engine.CreateModel( f85_local8, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( "menu/months_aug" ) )
+		Engine.SetModelValue( Engine.CreateModel( f85_local8, "monthIndex" ), 8 )
+		local f85_local9 = Engine.CreateModel( f85_local0, "september" )
+		Engine.SetModelValue( Engine.CreateModel( f85_local9, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( "menu/months_sep" ) )
+		Engine.SetModelValue( Engine.CreateModel( f85_local9, "monthIndex" ), 9 )
+		local f85_local10 = Engine.CreateModel( f85_local0, "october" )
+		Engine.SetModelValue( Engine.CreateModel( f85_local10, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( "menu/months_oct" ) )
+		Engine.SetModelValue( Engine.CreateModel( f85_local10, "monthIndex" ), 10 )
+		local f85_local11 = Engine.CreateModel( f85_local0, "november" )
+		Engine.SetModelValue( Engine.CreateModel( f85_local11, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( "menu/months_nov" ) )
+		Engine.SetModelValue( Engine.CreateModel( f85_local11, "monthIndex" ), 11 )
+		local f85_local12 = Engine.CreateModel( f85_local0, "december" )
+		Engine.SetModelValue( Engine.CreateModel( f85_local12, "month" ), Engine[@"hash_4F9F1239CFD921FE"]( "menu/months_dec" ) )
+		Engine.SetModelValue( Engine.CreateModel( f85_local12, "monthIndex" ), 12 )
 		f85_arg1.months = {
 			f85_local1,
 			f85_local2,
@@ -837,10 +836,10 @@ DataSources.Day = {
 	prepare = function ( f88_arg0, f88_arg1, f88_arg2 )
 		f88_arg1.days = {}
 		local f88_local0 = 31
-		local f88_local1 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "dayModel" )
+		local f88_local1 = Engine.CreateModel( Engine.GetGlobalModel(), "dayModel" )
 		for f88_local2 = 1, f88_local0, 1 do
-			local f88_local5 = Engine[@"createmodel"]( f88_local1, "Day " .. f88_local2 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f88_local5, "day" ), f88_local2 )
+			local f88_local5 = Engine.CreateModel( f88_local1, "Day " .. f88_local2 )
+			Engine.SetModelValue( Engine.CreateModel( f88_local5, "day" ), f88_local2 )
 			f88_arg1.days[#f88_arg1.days + 1] = f88_local5
 		end
 	end,
@@ -854,10 +853,10 @@ DataSources.Day = {
 DataSources.Year = {
 	prepare = function ( f91_arg0, f91_arg1, f91_arg2 )
 		f91_arg1.years = {}
-		local f91_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "yearModel" )
+		local f91_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "yearModel" )
 		for f91_local1 = 2015, 1900, -1 do
-			local f91_local4 = Engine[@"createmodel"]( f91_local0, "Year " .. f91_local1 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f91_local4, "year" ), f91_local1 )
+			local f91_local4 = Engine.CreateModel( f91_local0, "Year " .. f91_local1 )
+			Engine.SetModelValue( Engine.CreateModel( f91_local4, "year" ), f91_local1 )
 			f91_arg1.years[#f91_arg1.years + 1] = f91_local4
 		end
 	end,
@@ -872,7 +871,7 @@ DataSources.CACRestrictionSettingsTabs = ListHelper_SetupDataSource( "CACRestric
 	local f94_local0 = {}
 	table.insert( f94_local0, {
 		models = {
-			tabName = @"hash_2E8E97B711AC8F24",
+			tabName = "mpui/weapons_caps",
 			tabWidget = "CoD.GameSettings_WeaponRestriction",
 			tabIcon = ""
 		},
@@ -884,7 +883,7 @@ DataSources.CACRestrictionSettingsTabs = ListHelper_SetupDataSource( "CACRestric
 	} )
 	table.insert( f94_local0, {
 		models = {
-			tabName = @"hash_56E6F15BA89EEED",
+			tabName = "mpui/attachments_caps",
 			tabWidget = "CoD.GameSettings_AttachmentRestriction",
 			tabIcon = ""
 		},
@@ -908,7 +907,7 @@ DataSources.CACRestrictionSettingsTabs = ListHelper_SetupDataSource( "CACRestric
 	} )
 	table.insert( f94_local0, {
 		models = {
-			tabName = @"hash_15C60F77B9332E5B",
+			tabName = "menu/equipment_caps",
 			tabWidget = "CoD.GameSettings_EquipmentRestriction",
 			tabIcon = ""
 		},
@@ -920,7 +919,7 @@ DataSources.CACRestrictionSettingsTabs = ListHelper_SetupDataSource( "CACRestric
 	} )
 	table.insert( f94_local0, {
 		models = {
-			tabName = @"hash_E2669E63163D964",
+			tabName = "menu/perks_caps",
 			tabWidget = "CoD.GameSettings_PerkRestriction",
 			tabIcon = ""
 		},
@@ -950,7 +949,7 @@ DataSources.GameSettingsTabs = ListHelper_SetupDataSource( "GameSettingsTabs", f
 	local f95_local2 = f95_local1.nameRefCaps
 	local f95_local3 = LobbyData.GetCurrentMenuTarget()
 	local f95_local4 = f95_local3[@"mainmode"]
-	if f95_local4 == Enum[@"lobbymainmode"][@"lobby_mainmode_mp"] or f95_local4 == Enum[@"lobbymainmode"][@"lobby_mainmode_wz"] then
+	if f95_local4 == Enum.LobbyMainMode[@"lobby_mainmode_mp"] or f95_local4 == Enum.LobbyMainMode[@"lobby_mainmode_wz"] then
 		table.insert( f95_local0, {
 			models = {
 				tabName = f95_local2,
@@ -976,7 +975,7 @@ DataSources.GameSettingsTabs = ListHelper_SetupDataSource( "GameSettingsTabs", f
 		if IsBooleanDvarSet( "ui_enableRestrictionsCustomGameSettings" ) then
 			table.insert( f95_local0, {
 				models = {
-					tabName = 0x8B13CD4A57F560,
+					tabName = "mpui/restrictions_caps",
 					tabWidget = "CoD.GameSettings_Restriction",
 					tabIcon = ""
 				},
@@ -987,7 +986,7 @@ DataSources.GameSettingsTabs = ListHelper_SetupDataSource( "GameSettingsTabs", f
 				}
 			} )
 		end
-	elseif f95_local4 == Enum[@"lobbymainmode"][@"lobby_mainmode_cp"] then
+	elseif f95_local4 == Enum.LobbyMainMode[@"lobby_mainmode_cp"] then
 		table.insert( f95_local0, {
 			models = {
 				tabName = f95_local2,
@@ -998,10 +997,10 @@ DataSources.GameSettingsTabs = ListHelper_SetupDataSource( "GameSettingsTabs", f
 				tabId = "game_mode_rules"
 			}
 		} )
-	elseif f95_local4 == Enum[@"lobbymainmode"][@"lobby_mainmode_zm"] then
+	elseif f95_local4 == Enum.LobbyMainMode[@"lobby_mainmode_zm"] then
 		table.insert( f95_local0, {
 			models = {
-				tabName = @"hash_1EDC7C8B1FD8453F",
+				tabName = "menu/general_caps",
 				tabWidget = "CoD.GameSettings_ZMGeneral",
 				tabIcon = ""
 			},
@@ -1011,7 +1010,7 @@ DataSources.GameSettingsTabs = ListHelper_SetupDataSource( "GameSettingsTabs", f
 		} )
 		table.insert( f95_local0, {
 			models = {
-				tabName = @"hash_5D1BDFA5F7482249",
+				tabName = "menu/systems_caps",
 				tabWidget = "CoD.GameSettings_ZMSystems",
 				tabIcon = ""
 			},
@@ -1021,7 +1020,7 @@ DataSources.GameSettingsTabs = ListHelper_SetupDataSource( "GameSettingsTabs", f
 		} )
 		table.insert( f95_local0, {
 			models = {
-				tabName = @"hash_65F975C212125124",
+				tabName = "menu/weapons_caps",
 				tabWidget = "CoD.GameSettings_ZMWeapons",
 				tabIcon = ""
 			},
@@ -1031,7 +1030,7 @@ DataSources.GameSettingsTabs = ListHelper_SetupDataSource( "GameSettingsTabs", f
 		} )
 		table.insert( f95_local0, {
 			models = {
-				tabName = @"hash_1A4C0D40C8DBA6EB",
+				tabName = "menu/enemies_caps",
 				tabWidget = "CoD.GameSettings_ZMEnemies",
 				tabIcon = ""
 			},
@@ -1041,7 +1040,7 @@ DataSources.GameSettingsTabs = ListHelper_SetupDataSource( "GameSettingsTabs", f
 		} )
 		table.insert( f95_local0, {
 			models = {
-				tabName = @"hash_389CF1420A8398FE",
+				tabName = "menu/player_caps",
 				tabWidget = "CoD.GameSettings_ZMPlayer",
 				tabIcon = ""
 			},
@@ -1054,10 +1053,10 @@ DataSources.GameSettingsTabs = ListHelper_SetupDataSource( "GameSettingsTabs", f
 end, true )
 DataSources.CPGamePlayBundleData = {
 	getModel = function ( f96_arg0 )
-		local f96_local0 = Engine[@"getmodelforcontroller"]( f96_arg0 )
+		local f96_local0 = Engine.GetModelForController( f96_arg0 )
 		f96_local0 = f96_local0.GamePlayBundle
 		if not f96_local0 then
-			local f96_local1 = Engine[@"getmodelforcontroller"]( f96_arg0 )
+			local f96_local1 = Engine.GetModelForController( f96_arg0 )
 			f96_local0 = f96_local1:create( "GamePlayBundle" )
 			f96_local1 = f96_local0:create( "briefcaseClient" )
 			f96_local1:set( -1 )
@@ -1077,19 +1076,19 @@ DataSources.GameSettingsOptions = ListHelper_SetupDataSource( "GameSettingsOptio
 	table.insert( f97_local0, {
 		models = {
 			displayText = @"menu/revert_changes",
-			description = @"hash_76E3D19E4771D96A",
+			description = "menu/revert_changes_description",
 			action = ResetGameSettings,
 			icon = "t7_icon_menu_simple_revertchanges",
 			disabled = false
 		}
 	} )
-	local f97_local1 = Engine[@"getmodelvalue"]( Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "GametypeSettings.selectedSetting" ) )
+	local f97_local1 = Engine.GetModelValue( Engine.CreateModel( Engine.GetGlobalModel(), "GametypeSettings.selectedSetting" ) )
 	local f97_local2 = CoD.perController[f97_arg0].selectedGameSettingElement
 	if f97_local2 and f97_local2.revert then
 		table.insert( f97_local0, {
 			models = {
 				displayText = @"menu/revert_setting",
-				description = @"hash_7C0AB819D989C0C2",
+				description = "menu/revert_settings_description",
 				action = ResetSelectedGameSetting,
 				icon = "t7_icon_menu_simple_revertsetting",
 				disabled = false
@@ -1102,33 +1101,33 @@ DataSources.CodCasterQuickSettingsButtonList = ListHelper_SetupDataSource( "CodC
 	local f98_local0 = {}
 	for f98_local4, f98_local5 in ipairs( {
 		{
-			displayText = @"codcaster/qs_xray",
-			hintText = @"hash_19C1E2D268DAB861",
+			displayText = "codcaster/qs_xray",
+			hintText = "codcaster/qs_xray_hint",
 			profileVar = "shoutcaster_qs_xray"
 		},
 		{
-			displayText = @"hash_1FD52C74A290B6E6",
-			hintText = @"hash_628B895879F50DBA",
+			displayText = "codcaster/qs_listen_in",
+			hintText = "codcaster/qs_listen_in_hint",
 			profileVar = "shoutcaster_qs_listen_in"
 		},
 		{
-			displayText = @"hash_6158B41E46D3C8B3",
-			hintText = @"hash_53ECA69C5B4AC7BD",
+			displayText = "codcaster/qs_player_list",
+			hintText = "codcaster/qs_player_list_hint",
 			profileVar = "shoutcaster_qs_playerlist"
 		},
 		{
-			displayText = @"codcaster/qs_loadout",
+			displayText = "codcaster/qs_loadout",
 			hintText = @"hash_6589105A0F2208F7",
 			profileVar = "shoutcaster_qs_loadout"
 		},
 		{
-			displayText = @"hash_21A4D8254476D8DD",
-			hintText = @"hash_36BA589C96CE7BD3",
+			displayText = "codcaster/qs_player_card",
+			hintText = "codcaster/qs_player_card_hint",
 			profileVar = "shoutcaster_qs_playercard"
 		},
 		{
-			displayText = @"hash_6DC6694F70008580",
-			hintText = 0x6834D0B07E2DB0,
+			displayText = "codcaster/qs_player_hud",
+			hintText = "codcaster/qs_player_hud_hint",
 			profileVar = "shoutcaster_qs_playerhud"
 		}
 	} ) do
@@ -1148,7 +1147,7 @@ end )
 DataSources.CodCasterDisplaySettingsButtonList = ListHelper_SetupDataSource( "CodCasterDisplaySettingsButtonList", function ( f99_arg0 )
 	local f99_local0 = {}
 	local f99_local1 = function ( f100_arg0, f100_arg1, f100_arg2, f100_arg3 )
-		if not Engine[@"isingame"]() then
+		if not Engine.IsInGame() then
 			return 
 		else
 			ToggleControllerModelValueNumber( f100_arg1, "CodCaster.profileSettingsUpdated" )
@@ -1157,122 +1156,122 @@ DataSources.CodCasterDisplaySettingsButtonList = ListHelper_SetupDataSource( "Co
 	
 	local f99_local2 = {}
 	table.insert( f99_local2, {
-		name = @"menu/off",
+		name = "menu/off",
 		value = 0
 	} )
 	table.insert( f99_local2, {
-		name = @"menu/on",
+		name = "menu/on",
 		value = 1
 	} )
 	local f99_local3 = {}
 	table.insert( f99_local3, {
-		name = @"menu/off",
-		value = Enum[@"shoutcastersettingminimapmode"][@"shoutcaster_setting_minimap_mode_off"]
+		name = "menu/off",
+		value = Enum.ShoutcasterSettingMinimapMode[@"shoutcaster_setting_minimap_mode_off"]
 	} )
 	table.insert( f99_local3, {
-		name = @"hash_4115218EA657D7E7",
-		value = Enum[@"shoutcastersettingminimapmode"][@"shoutcaster_setting_minimap_mode_standard"]
+		name = "codcaster/minimap_standard",
+		value = Enum.ShoutcasterSettingMinimapMode[@"shoutcaster_setting_minimap_mode_standard"]
 	} )
 	table.insert( f99_local3, {
-		name = @"hash_74933938EE8FA2C1",
-		value = Enum[@"shoutcastersettingminimapmode"][@"shoutcaster_setting_minimap_mode_full"]
+		name = "codcaster/minimap_full_view",
+		value = Enum.ShoutcasterSettingMinimapMode[@"shoutcaster_setting_minimap_mode_full"]
 	} )
 	for f99_local7, f99_local8 in ipairs( {
 		{
 			name = "TeamIdentity",
-			displayText = @"hash_64E051F15AE3B3B8",
-			hintText = @"hash_77162EF92AABD1E0",
+			displayText = "codcaster/ds_team_identity",
+			hintText = "codcaster/ds_team_identity_desc",
 			profileVar = "shoutcaster_ds_team_identity",
 			options = f99_local2
 		},
 		{
 			name = "Toolbar",
-			displayText = @"codcaster/ds_toolbar",
-			hintText = @"hash_44A677D947DAA8DD",
+			displayText = "codcaster/ds_toolbar",
+			hintText = "codcaster/ds_toolbar_desc",
 			profileVar = "shoutcaster_ds_toolbar",
 			options = f99_local2
 		},
 		{
 			name = "Minimap",
-			displayText = @"codcaster/ds_minimap",
-			hintText = @"hash_2E10A2436A7F7271",
+			displayText = "codcaster/ds_minimap",
+			hintText = "codcaster/ds_minimap_desc",
 			profileVar = "shoutcaster_ds_minimap",
 			options = f99_local3
 		},
 		{
 			name = "TeamScore",
-			displayText = @"hash_7BC59621C600E8A8",
-			hintText = @"hash_635F8D848A5BBAF0",
+			displayText = "codcaster/ds_team_score",
+			hintText = "codcaster/ds_team_score_desc",
 			profileVar = "shoutcaster_ds_teamscore",
 			options = f99_local2
 		},
 		{
 			name = "Inventory",
-			displayText = @"codcaster/ds_inventory",
-			hintText = @"hash_181BE89B8915175C",
+			displayText = "codcaster/ds_inventory",
+			hintText = "codcaster/ds_inventory_desc",
 			profileVar = "shoutcaster_ds_inventory",
 			options = f99_local2
 		},
 		{
 			name = "Scorestreaks",
-			displayText = @"codcaster/ds_scorestreaks",
-			hintText = @"hash_12750070E33A06DB",
+			displayText = "codcaster/ds_scorestreaks",
+			hintText = "codcaster/ds_scorestreaks_desc",
 			profileVar = "shoutcaster_ds_scorestreaks",
 			options = f99_local2
 		},
 		{
 			name = "ScorestreakNotifications",
-			displayText = @"hash_33B3DF2EDB5CD01F",
-			hintText = @"hash_C27D2DDE8805CB1",
+			displayText = "codcaster/ds_scorestreak_notifications",
+			hintText = "codcaster/ds_scorestreak_notifications_desc",
 			profileVar = "shoutcaster_ds_scorestreaks_notification",
 			options = f99_local2
 		},
 		{
 			name = "SpecialistNotifications",
-			displayText = @"hash_766056F46351AD2E",
-			hintText = @"hash_4F03A054594EF21E",
+			displayText = "codcaster/ds_specialist_notifications",
+			hintText = "codcaster/ds_specialist_notifications_desc",
 			profileVar = "shoutcaster_ds_specialist_notification",
 			options = f99_local2
 		},
 		{
 			name = "ObjectiveStatus",
-			displayText = @"hash_437D1364A3C611DE",
-			hintText = @"hash_34FA4BBC279DC2EE",
+			displayText = "codcaster/ds_objective_status",
+			hintText = "codcaster/ds_objective_status_desc",
 			profileVar = "shoutcaster_ds_objective_status",
 			options = f99_local2
 		},
 		{
 			name = "WaypointMarkers",
-			displayText = @"hash_6A6ED171ECA1CA83",
-			hintText = @"hash_3497F3F256360615",
+			displayText = "codcaster/ds_waypoint_markers",
+			hintText = "codcaster/ds_waypoint_markers_desc",
 			profileVar = "shoutcaster_ds_waypoint_markers",
 			options = f99_local2
 		},
 		{
 			name = "KillFeed",
-			displayText = @"codcaster/ds_killfeed",
-			hintText = @"hash_44568A3C9BC35BB4",
+			displayText = "codcaster/ds_killfeed",
+			hintText = "codcaster/ds_killfeed_desc",
 			profileVar = "shoutcaster_ds_killfeed",
 			options = f99_local2
 		},
 		{
 			name = "CalloutCards",
-			displayText = @"hash_2839353C3F7C0920",
-			hintText = @"hash_173E132A6781ABE8",
+			displayText = "codcaster/ds_callout_cards",
+			hintText = "codcaster/ds_callout_cards_desc",
 			profileVar = "shoutcaster_ds_calloutcards",
 			options = f99_local2
 		},
 		{
 			name = "PlayerNotifications",
-			displayText = 0x2DBB62222E4A02,
-			hintText = @"hash_6AA680F464E9B692",
+			displayText = "codcaster/ds_player_notifications",
+			hintText = "codcaster/ds_player_notifications_desc",
 			profileVar = "shoutcaster_ds_playernotifications",
 			options = f99_local2
 		},
 		{
 			name = "VoipDock",
-			displayText = @"hash_8E58ED90B20C3E4",
-			hintText = @"hash_7CEDB7FD7243874C",
+			displayText = "codcaster/ds_voip_dock",
+			hintText = "codcaster/ds_voip_dock_desc",
 			profileVar = "shoutcaster_ds_voip_dock",
 			options = f99_local2
 		},
@@ -1305,7 +1304,7 @@ end )
 DataSources.CodCasterLoadoutSettingsButtonList = ListHelper_SetupDataSource( "CodCasterLoadoutSettingsButtonList", function ( f101_arg0 )
 	local f101_local0 = {}
 	local f101_local1 = function ( f102_arg0, f102_arg1, f102_arg2, f102_arg3 )
-		if not Engine[@"isingame"]() then
+		if not Engine.IsInGame() then
 			return 
 		else
 			ToggleControllerModelValueNumber( f102_arg1, "CodCaster.profileSettingsUpdated" )
@@ -1314,24 +1313,24 @@ DataSources.CodCasterLoadoutSettingsButtonList = ListHelper_SetupDataSource( "Co
 	
 	local f101_local2 = {}
 	table.insert( f101_local2, {
-		name = @"menu/off",
+		name = "menu/off",
 		value = 0
 	} )
 	table.insert( f101_local2, {
-		name = @"menu/on",
+		name = "menu/on",
 		value = 1
 	} )
 	for f101_local6, f101_local7 in ipairs( {
 		{
 			name = "Equipment",
-			displayText = @"codcaster/ls_equipment",
-			hintText = @"hash_A6232DDBCBCD0D8",
+			displayText = "codcaster/ls_equipment",
+			hintText = "codcaster/ls_equipment_desc",
 			profileVar = "shoutcaster_ls_equipment"
 		},
 		{
 			name = "Perks",
-			displayText = @"codcaster/ls_perks",
-			hintText = @"hash_18F97306C2EF71F7",
+			displayText = "codcaster/ls_perks",
+			hintText = "codcaster/ls_perks_desc",
 			profileVar = "shoutcaster_ls_perks"
 		}
 	} ) do
@@ -1356,21 +1355,21 @@ end )
 DataSources.TeamIdentity = {
 	getModel = function ( f103_arg0 )
 		if not f103_arg0 then
-			f103_arg0 = Engine[@"getprimarycontroller"]()
+			f103_arg0 = Engine.GetPrimaryController()
 		end
-		return Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f103_arg0 ), "TeamIdentity" )
+		return Engine.CreateModel( Engine.GetModelForController( f103_arg0 ), "TeamIdentity" )
 	end
 }
 DataSources.TeamIdentityInformation = {
 	getModel = function ( f104_arg0, f104_arg1 )
 		if not f104_arg0 then
-			f104_arg0 = Engine[@"getprimarycontroller"]()
+			f104_arg0 = Engine.GetPrimaryController()
 		end
-		local f104_local0 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f104_arg0 ), "TeamIdentity" )
+		local f104_local0 = Engine.GetModel( Engine.GetModelForController( f104_arg0 ), "TeamIdentity" )
 		if not f104_arg1 then
-			f104_arg1 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f104_local0, "team" ) )
+			f104_arg1 = Engine.GetModelValue( Engine.GetModel( f104_local0, "team" ) )
 		end
-		return Engine[@"createmodel"]( f104_local0, f104_arg1 )
+		return Engine.CreateModel( f104_local0, f104_arg1 )
 	end
 }
 DataSources.TeamIdentityColorList = ListHelper_SetupDataSource( "TeamIdentityColorList", function ( f105_arg0 )
@@ -1382,9 +1381,9 @@ DataSources.TeamIdentityColorList = ListHelper_SetupDataSource( "TeamIdentityCol
 		CoD.CodCaster_TeamIdentity.ColorList = CoD.CodCasterUtility.GetCodCasterTeamColorList( f105_arg0 )
 	end
 	local f105_local1 = CoD.CodCaster_TeamIdentity.ColorList
-	local f105_local2 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f105_arg0 ), "TeamIdentity" )
+	local f105_local2 = Engine.GetModel( Engine.GetModelForController( f105_arg0 ), "TeamIdentity" )
 	if f105_local2 then
-		local f105_local3 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f105_local2, "team" ) )
+		local f105_local3 = Engine.GetModelValue( Engine.GetModel( f105_local2, "team" ) )
 		local f105_local4 = CoD.ShoutcasterProfileVarValue( f105_arg0, "shoutcaster_fe_" .. f105_local3 .. "_color" )
 		local f105_local5 = -1
 		if f105_local3 == "team1" then
@@ -1407,8 +1406,8 @@ DataSources.TeamIdentityColorList = ListHelper_SetupDataSource( "TeamIdentityCol
 			if f105_local11 == false then
 				table.insert( f105_local0, {
 					models = {
-						id = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f105_local9, "id" ) ),
-						color = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f105_local9, "color" ) ),
+						id = Engine.GetModelValue( Engine.GetModel( f105_local9, "id" ) ),
+						color = Engine.GetModelValue( Engine.GetModel( f105_local9, "color" ) ),
 						disabled = f105_local11,
 						selected = f105_local12
 					},
@@ -1428,9 +1427,9 @@ DataSources.TeamIdentityLogoList = ListHelper_SetupDataSource( "TeamIdentityLogo
 		CoD.CodCaster_TeamIdentity.LogoList = CoD.CodCasterUtility.GetCodCasterTeamLogoList( f106_arg0 )
 	end
 	local f106_local1 = CoD.CodCaster_TeamIdentity.LogoList
-	local f106_local2 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f106_arg0 ), "TeamIdentity" )
+	local f106_local2 = Engine.GetModel( Engine.GetModelForController( f106_arg0 ), "TeamIdentity" )
 	if f106_local2 then
-		local f106_local3 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f106_local2, "team" ) )
+		local f106_local3 = Engine.GetModelValue( Engine.GetModel( f106_local2, "team" ) )
 		local f106_local4 = CoD.ShoutcasterProfileVarValue( f106_arg0, "shoutcaster_fe_" .. f106_local3 .. "_icon" )
 		local f106_local5 = -1
 		if f106_local3 == "team1" then
@@ -1450,9 +1449,9 @@ DataSources.TeamIdentityLogoList = ListHelper_SetupDataSource( "TeamIdentityLogo
 			end
 			table.insert( f106_local0, {
 				models = {
-					id = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f106_local9, "id" ) ),
-					name = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f106_local9, "name" ) ),
-					ref = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f106_local9, "ref" ) ),
+					id = Engine.GetModelValue( Engine.GetModel( f106_local9, "id" ) ),
+					name = Engine.GetModelValue( Engine.GetModel( f106_local9, "name" ) ),
+					ref = Engine.GetModelValue( Engine.GetModel( f106_local9, "ref" ) ),
 					disabled = f106_local11
 				},
 				properties = {
@@ -1476,7 +1475,7 @@ DataSources.MyShowcaseTabs = ListHelper_SetupDataSource( "MyShowcaseTabs", funct
 	} )
 	table.insert( f107_local0, {
 		models = {
-			tabName = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_716B11F770C43455" ),
+			tabName = Engine[@"hash_4F9F1239CFD921FE"]( "menu/categories_caps" ),
 			tabWidget = "CoD.MyShowcase_CategorySelector",
 			tabIcon = ""
 		},
@@ -1500,16 +1499,16 @@ DataSources.MyShowcasePaintjobsTabs = ListHelper_SetupDataSource( "MyShowcasePai
 end )
 DataSources.GametypeSettings = {
 	getModel = function ( f109_arg0 )
-		local f109_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "GametypeSettings" )
-		Engine[@"createmodel"]( f109_local0, "title" )
-		Engine[@"createmodel"]( f109_local0, "description" )
-		Engine[@"createmodel"]( f109_local0, "image" )
-		Engine[@"createmodel"]( f109_local0, "tabId" )
-		Engine[@"createmodel"]( f109_local0, "settingsSubCategory" )
-		local f109_local1 = Engine[@"createmodel"]( f109_local0, "gametype" )
+		local f109_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "GametypeSettings" )
+		Engine.CreateModel( f109_local0, "title" )
+		Engine.CreateModel( f109_local0, "description" )
+		Engine.CreateModel( f109_local0, "image" )
+		Engine.CreateModel( f109_local0, "tabId" )
+		Engine.CreateModel( f109_local0, "settingsSubCategory" )
+		local f109_local1 = Engine.CreateModel( f109_local0, "gametype" )
 		local f109_local2 = Engine[@"getgametypeinfo"]( Engine[@"lobbygetgametype"]() )
 		local f109_local3 = f109_local2.nameRefCaps
-		local f109_local4 = Engine[@"setmodelvalue"]
+		local f109_local4 = Engine.SetModelValue
 		local f109_local5 = f109_local1
 		local f109_local6
 		if f109_local3 then
@@ -1526,33 +1525,33 @@ DataSources.GametypeSettings = {
 }
 DataSources.GunsmithSnapshot = {
 	getModel = function ( f110_arg0 )
-		local f110_local0 = Engine[@"currentsessionmode"]()
-		if f110_local0 ~= Enum[@"emodes"][@"mode_campaign"] then
-			f110_local0 = Enum[@"emodes"][@"mode_multiplayer"]
+		local f110_local0 = Engine.CurrentSessionMode()
+		if f110_local0 ~= Enum.eModes.mode_campaign then
+			f110_local0 = Enum.eModes.mode_multiplayer
 		end
-		local f110_local1 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "GunsmithSnapshot" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f110_local1, "Stats" ), 1 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f110_local1, "WeaponLevel" ), 1 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f110_local1, "PlayerID" ), 1 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f110_local1, "WeaponName" ), 1 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f110_local1, "AttachmentIcons" ), 1 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f110_local1, "BO3Logo" ), 1 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f110_local1, "ShowControls" ), 1 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f110_local1, "SessionMode" ), f110_local0 )
+		local f110_local1 = Engine.CreateModel( Engine.GetGlobalModel(), "GunsmithSnapshot" )
+		Engine.SetModelValue( Engine.CreateModel( f110_local1, "Stats" ), 1 )
+		Engine.SetModelValue( Engine.CreateModel( f110_local1, "WeaponLevel" ), 1 )
+		Engine.SetModelValue( Engine.CreateModel( f110_local1, "PlayerID" ), 1 )
+		Engine.SetModelValue( Engine.CreateModel( f110_local1, "WeaponName" ), 1 )
+		Engine.SetModelValue( Engine.CreateModel( f110_local1, "AttachmentIcons" ), 1 )
+		Engine.SetModelValue( Engine.CreateModel( f110_local1, "BO3Logo" ), 1 )
+		Engine.SetModelValue( Engine.CreateModel( f110_local1, "ShowControls" ), 1 )
+		Engine.SetModelValue( Engine.CreateModel( f110_local1, "SessionMode" ), f110_local0 )
 		return f110_local1
 	end
 }
 DataSources.GunsmithSnapshotStatsList = ListHelper_SetupDataSource( "GunsmithSnapshotStatsList", function ( f111_arg0 )
 	local f111_local0 = CoD.perController[f111_arg0].gunsmithVariantModel
-	local f111_local1 = Engine[@"getmodel"]( f111_local0, "variantIndex" )
+	local f111_local1 = Engine.GetModel( f111_local0, "variantIndex" )
 	local f111_local2 = nil
 	if f111_local1 then
-		f111_local2 = Engine[@"getmodelvalue"]( f111_local1 )
+		f111_local2 = Engine.GetModelValue( f111_local1 )
 	end
-	local f111_local3 = Engine[@"getmodel"]( f111_local0, "weaponIndex" )
+	local f111_local3 = Engine.GetModel( f111_local0, "weaponIndex" )
 	local f111_local4 = nil
 	if f111_local3 then
-		f111_local4 = Engine[@"getmodelvalue"]( f111_local3 )
+		f111_local4 = Engine.GetModelValue( f111_local3 )
 	end
 	local f111_local5 = {
 		"statName",
@@ -1600,8 +1599,8 @@ DataSources.GunsmithSnapshotStatsList = ListHelper_SetupDataSource( "GunsmithSna
 end )
 DataSources.CreateAClassEditSettingsName = {
 	getModel = function ( f114_arg0 )
-		local f114_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "CreateAClassEditSettingsName" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f114_local0, "name" ), @"hash_76F75B5A55737FFC" )
+		local f114_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "CreateAClassEditSettingsName" )
+		Engine.SetModelValue( Engine.CreateModel( f114_local0, "name" ), "menu/create_a_class_settings" )
 		return f114_local0
 	end
 }
@@ -1615,7 +1614,7 @@ DataSources.StartMenuGameOptions = ListHelper_SetupDataSource( "StartMenuGameOpt
 		if not IsDemoRestrictedBasicMode() then
 			table.insert( f115_local0, {
 				models = {
-					displayText = Engine[@"toupper"]( Engine[@"hash_4F9F1239CFD921FE"]( @"menu/upload_clip", f115_local2 ) ),
+					displayText = Engine.ToUpper( Engine[@"hash_4F9F1239CFD921FE"]( @"menu/upload_clip", f115_local2 ) ),
 					action = CoD.DemoUtility.StartMenuUploadClip,
 					disabledFunction = IsUploadClipButtonDisabled
 				},
@@ -1628,7 +1627,7 @@ DataSources.StartMenuGameOptions = ListHelper_SetupDataSource( "StartMenuGameOpt
 		if f115_local3 then
 			table.insert( f115_local0, {
 				models = {
-					displayText = Engine[@"toupper"]( Engine[@"hash_4F9F1239CFD921FE"]( @"hash_47AA390A01EFA66C" ) ),
+					displayText = Engine.ToUpper( Engine[@"hash_4F9F1239CFD921FE"]( "menu/demo_customize_highlight_reel" ) ),
 					action = CoD.DemoUtility.StartMenuOpenCustomizeHighlightReel,
 					disabledFunction = IsCustomizeHighlightReelButtonDisabled
 				}
@@ -1636,20 +1635,20 @@ DataSources.StartMenuGameOptions = ListHelper_SetupDataSource( "StartMenuGameOpt
 		end
 		table.insert( f115_local0, {
 			models = {
-				displayText = Engine[@"toupper"]( Engine[@"toupper"]( Engine[@"hash_4F9F1239CFD921FE"]( 0xF890A9A81B1DE ) ) ),
+				displayText = Engine.ToUpper( Engine.ToUpper( Engine[@"hash_4F9F1239CFD921FE"]( "menu/jump_to_start" ) ) ),
 				action = CoD.DemoUtility.StartMenuJumpToStart,
 				disabledFunction = IsJumpToStartButtonDisabled
 			}
 		} )
 		local f115_local5 = nil
 		if f115_local4 then
-			f115_local5 = Engine[@"toupper"]( Engine[@"hash_4F9F1239CFD921FE"]( @"menu/end_clip" ) )
+			f115_local5 = Engine.ToUpper( Engine[@"hash_4F9F1239CFD921FE"]( @"menu/end_clip" ) )
 		else
-			f115_local5 = Engine[@"toupper"]( Engine[@"hash_4F9F1239CFD921FE"]( @"hash_6CCA8D5464EED5F7" ) )
+			f115_local5 = Engine.ToUpper( Engine[@"hash_4F9F1239CFD921FE"]( "menu/end_film" ) )
 		end
 		table.insert( f115_local0, {
 			models = {
-				displayText = Engine[@"toupper"]( f115_local5 ),
+				displayText = Engine.ToUpper( f115_local5 ),
 				action = CoD.DemoUtility.StartMenuEndDemo
 			}
 		} )
@@ -1660,39 +1659,39 @@ DataSources.StartMenuGameOptions = ListHelper_SetupDataSource( "StartMenuGameOpt
 		if not f115_arg1.subscribedToModels then
 			local f115_local7 = f115_arg1
 			local f115_local8 = f115_arg1.subscribeToModel
-			local f115_local9 = Engine[@"getglobalmodel"]()
+			local f115_local9 = Engine.GetGlobalModel()
 			f115_local8( f115_local7, f115_local9.demo.segmentCount, f115_local6, false )
 			f115_local7 = f115_arg1
 			f115_local8 = f115_arg1.subscribeToModel
-			f115_local9 = Engine[@"getglobalmodel"]()
+			f115_local9 = Engine.GetGlobalModel()
 			f115_local8( f115_local7, f115_local9.demo.keyframeForJumpBack, f115_local6, false )
 			f115_arg1.subscribedToModels = true
 		end
 	elseif CoD.isCampaign then
 		table.insert( f115_local0, {
 			models = {
-				displayText = @"hash_721A0365016C8C6E",
+				displayText = "menu/resumegame_caps",
 				action = StartMenuGoBack_ListElement
 			}
 		} )
-		local f115_local2 = CoD.SafeGetModelValue( Engine[@"getmodelforcontroller"]( f115_arg0 ), "safehouse.inTrainingSim" ) or 0
-		if f115_arg0 == Engine[@"getprimarycontroller"]() then
+		local f115_local2 = CoD.SafeGetModelValue( Engine.GetModelForController( f115_arg0 ), "safehouse.inTrainingSim" ) or 0
+		if f115_arg0 == Engine.GetPrimaryController() then
 			table.insert( f115_local0, {
 				models = {
-					displayText = @"hash_D06CC23B526BABD",
+					displayText = "menu/restart_mission_caps",
 					action = RestartMission
 				},
 				properties = {
-					disabled = not Engine[@"islobbyhost"]( f115_local1[@"lobbytype"] )
+					disabled = not Engine[@"islobbyhost"]( f115_local1.LobbyType )
 				}
 			} )
 		end
-		if Engine[@"islobbyhost"]( f115_local1[@"lobbytype"] ) then
-			if f115_arg0 == Engine[@"getprimarycontroller"]() then
+		if Engine[@"islobbyhost"]( f115_local1.LobbyType ) then
+			if f115_arg0 == Engine.GetPrimaryController() then
 				if Engine[@"getdvarbool"]( "ui_blocksaves" ) then
 					table.insert( f115_local0, {
 						models = {
-							displayText = @"hash_288CEB3B9AE00AD1",
+							displayText = "menu/exit_caps",
 							action = SaveAndQuitGame
 						}
 					} )
@@ -1708,7 +1707,7 @@ DataSources.StartMenuGameOptions = ListHelper_SetupDataSource( "StartMenuGameOpt
 		else
 			table.insert( f115_local0, {
 				models = {
-					displayText = @"hash_5FB403BB3121C53C",
+					displayText = "menu/leave_party_and_exit_caps",
 					action = QuitGame
 				}
 			} )
@@ -1725,17 +1724,17 @@ DataSources.StartMenuGameOptions = ListHelper_SetupDataSource( "StartMenuGameOpt
 			} )
 		end
 	elseif CoD.isMultiplayer then
-		if Engine[@"team"]( f115_arg0, "name" ) ~= "TEAM_SPECTATOR" and Engine[@"getgametypesetting"]( @"disableclassselection" ) ~= 1 and (not IsIntDvarNonZero( "mp_prototype" ) or IsIntDvarNonZero( "mp_prototype_debug" )) then
+		if Engine.team( f115_arg0, "name" ) ~= "TEAM_SPECTATOR" and Engine.GetGametypeSetting( "disableclassselection" ) ~= 1 and (not IsIntDvarNonZero( "mp_prototype" ) or IsIntDvarNonZero( "mp_prototype_debug" )) then
 			table.insert( f115_local0, {
 				models = {
-					displayText = @"hash_C9A66F495BF3652",
+					displayText = "mpui/choose_class_button_caps",
 					action = ChooseClass
 				}
 			} )
 		end
-		local f115_local3 = 0x9F0C639D44F009
+		local f115_local3 = "menu/quit_game_caps"
 		if Engine[@"islobbyhost"]( f115_local1.lobbyType ) and not CoD.isOnlineGame() then
-			f115_local3 = @"hash_61915D1BD9B1F8E5"
+			f115_local3 = "menu/end_game_caps"
 		end
 		table.insert( f115_local0, {
 			models = {
@@ -1746,20 +1745,20 @@ DataSources.StartMenuGameOptions = ListHelper_SetupDataSource( "StartMenuGameOpt
 	elseif CoD.isZombie and not CoD.isPC then
 		table.insert( f115_local0, {
 			models = {
-				displayText = @"hash_721A0365016C8C6E",
+				displayText = "menu/resumegame_caps",
 				action = StartMenuGoBack_ListElement
 			}
 		} )
-		local f115_local2 = f115_local1[@"id"] == LobbyData.GetLobbyMenuIDByName( LuaEnum.UI.DIRECTOR_ONLINE_ZM_PUBLIC )
-		local f115_local3 = f115_local1[@"lobbytype"]
+		local f115_local2 = f115_local1.id == LobbyData.GetLobbyMenuIDByName( LuaEnum.UI.DIRECTOR_ONLINE_ZM_PUBLIC )
+		local f115_local3 = f115_local1.LobbyType
 		if not Engine[@"isshipbuild"]() then
-			f115_local3 = Engine[@"lobbygetcontrollinglobbysession"]( Enum[@"lobbymodule"][@"lobby_module_client"] )
+			f115_local3 = Engine[@"lobbygetcontrollinglobbysession"]( Enum.LobbyModule[@"lobby_module_client"] )
 		end
-		local f115_local4 = 0x9F0C639D44F009
+		local f115_local4 = "menu/quit_game_caps"
 		if f115_local2 then
 			f115_local4 = @"hash_41B605F57D89FA6"
 		elseif Engine[@"islobbyhost"]( f115_local3 ) then
-			f115_local4 = @"hash_61915D1BD9B1F8E5"
+			f115_local4 = "menu/end_game_caps"
 		end
 		table.insert( f115_local0, {
 			models = {
@@ -1772,14 +1771,14 @@ DataSources.StartMenuGameOptions = ListHelper_SetupDataSource( "StartMenuGameOpt
 end, true )
 DataSources.PlatformControllerImage = {
 	getModel = function ( f118_arg0 )
-		local f118_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "PlatformControllerImage" )
-		local f118_local1 = Engine[@"createmodel"]( f118_local0, "image" )
+		local f118_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "PlatformControllerImage" )
+		local f118_local1 = Engine.CreateModel( f118_local0, "image" )
 		if CoD.isPC then
-			Engine[@"setmodelvalue"]( f118_local1, "t7_menu_startmenu_option_pc" )
+			Engine.SetModelValue( f118_local1, "t7_menu_startmenu_option_pc" )
 		elseif CoD.isDurango then
-			Engine[@"setmodelvalue"]( f118_local1, "ui_icon_startmenu_option_icon_xbone" )
+			Engine.SetModelValue( f118_local1, "ui_icon_startmenu_option_icon_xbone" )
 		else
-			Engine[@"setmodelvalue"]( f118_local1, "ui_icon_startmenu_option_icon_ps4" )
+			Engine.SetModelValue( f118_local1, "ui_icon_startmenu_option_icon_ps4" )
 		end
 		return f118_local0
 	end
@@ -1787,7 +1786,7 @@ DataSources.PlatformControllerImage = {
 DataSources.MissionObjectives = ListHelper_SetupDataSource( "MissionObjectives", function ( f119_arg0 )
 	local f119_local0 = {}
 	local f119_local1 = 20
-	local f119_local2 = Engine[@"getplayerobjectives"]( f119_arg0 )
+	local f119_local2 = Engine.GetPlayerObjectives( f119_arg0 )
 	if f119_local2 == nil then
 		return 
 	end
@@ -1852,7 +1851,7 @@ DataSources.MissionObjectives = ListHelper_SetupDataSource( "MissionObjectives",
 	
 	f119_local7 = function ( f122_arg0 )
 		return f119_local6( {
-			desc = @"hash_5BFA2EE8686D672D"
+			desc = "cpui/awaiting_update"
 		}, f122_arg0, true, f119_local1 )
 	end
 	
@@ -1882,23 +1881,23 @@ end, true, nil, nil, function ( f123_arg0, f123_arg1, f123_arg2 )
 end )
 DataSources.PartyLobbyMembers = {
 	prepare = function ( f124_arg0, f124_arg1, f124_arg2 )
-		f124_arg1.partyLobbyModel = f124_arg1:getModel( Engine[@"getprimarycontroller"](), "partyLobby" )
-		f124_arg1.partyLobbyMemberCountModel = Engine[@"getmodel"]( f124_arg1.partyLobbyModel, "memberCount" )
+		f124_arg1.partyLobbyModel = f124_arg1:getModel( Engine.GetPrimaryController(), "partyLobby" )
+		f124_arg1.partyLobbyMemberCountModel = Engine.GetModel( f124_arg1.partyLobbyModel, "memberCount" )
 		f124_arg1:unsubscribeFromAllModels()
 		f124_arg1:subscribeToModel( f124_arg1.partyLobbyMemberCountModel, function ()
 			f124_arg1:updateDataSource()
 		end )
 	end,
 	getCount = function ( f126_arg0 )
-		return Engine[@"getmodelvalue"]( f126_arg0.partyLobbyMemberCountModel )
+		return Engine.GetModelValue( f126_arg0.partyLobbyMemberCountModel )
 	end,
 	getItem = function ( f127_arg0, f127_arg1, f127_arg2 )
-		return Engine[@"getmodel"]( f127_arg1.partyLobbyModel, "member" .. f127_arg2 - 1 )
+		return Engine.GetModel( f127_arg1.partyLobbyModel, "member" .. f127_arg2 - 1 )
 	end
 }
 DataSources.StorageGlobal = {
 	getModel = function ( f128_arg0 )
-		return Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "storageGlobalRoot" )
+		return Engine.GetModel( Engine.GetGlobalModel(), "storageGlobalRoot" )
 	end
 }
 DataSourceHelpers.GlobalDataSourceSetup( "LobbyRoot", "lobbyRoot", function ( f129_arg0 )
@@ -1916,7 +1915,7 @@ DataSourceHelpers.GlobalDataSourceSetup( "LobbyRoot", "lobbyRoot", function ( f1
 	f129_local0 = f129_arg0:create( "selectedXuid" )
 	f129_local0:set( LuaDefine.INVALID_XUID_X64 )
 	f129_local0 = f129_arg0:create( "selectedXuidTeam" )
-	f129_local0:set( Enum[@"team_t"][@"team_free"] )
+	f129_local0:set( Enum.team_t[@"team_free"] )
 	f129_local0 = f129_arg0:create( "hostGamertag" )
 	f129_local0:set( "" )
 	f129_arg0:create( "lobbyButtonUpdate" )
@@ -1932,19 +1931,19 @@ DataSourceHelpers.GlobalDataSourceSetup( "LobbyRoot", "lobbyRoot", function ( f1
 end, false )
 DataSources.LobbyPromptTitle = {
 	getModel = function ( f130_arg0 )
-		local f130_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "lobbyPromptModel" )
-		local f130_local1 = Engine[@"createmodel"]( f130_local0, "lobbyPromptTitle" )
-		local f130_local2 = Engine[@"createmodel"]( f130_local0, "lobbyPromptDescription" )
-		Engine[@"setmodelvalue"]( f130_local1, CoD.LobbyUtility.Prompt.Title )
-		Engine[@"setmodelvalue"]( f130_local2, CoD.LobbyUtility.Prompt.Description )
+		local f130_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "lobbyPromptModel" )
+		local f130_local1 = Engine.CreateModel( f130_local0, "lobbyPromptTitle" )
+		local f130_local2 = Engine.CreateModel( f130_local0, "lobbyPromptDescription" )
+		Engine.SetModelValue( f130_local1, CoD.LobbyUtility.Prompt.Title )
+		Engine.SetModelValue( f130_local2, CoD.LobbyUtility.Prompt.Description )
 		return f130_local0
 	end
 }
 DataSources.LobbyPlaylistName = {
 	getModel = function ( f131_arg0 )
-		local f131_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "lobbyPlaylist" )
-		local f131_local1 = Engine[@"createmodel"]( f131_local0, "name" )
-		local f131_local2 = Engine[@"createmodel"]( f131_local0, "kickerText" )
+		local f131_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "lobbyPlaylist" )
+		local f131_local1 = Engine.CreateModel( f131_local0, "name" )
+		local f131_local2 = Engine.CreateModel( f131_local0, "kickerText" )
 		return f131_local0
 	end
 }
@@ -1952,14 +1951,14 @@ DataSources.LobbyPromptSelectionList = {
 	prepare = function ( f132_arg0, f132_arg1, f132_arg2 )
 		f132_arg1.options = {}
 		local f132_local0 = CoD.LobbyUtility.Prompt.Options
-		local f132_local1 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "LobbyPromptSelectionListModel" )
+		local f132_local1 = Engine.CreateModel( Engine.GetGlobalModel(), "LobbyPromptSelectionListModel" )
 		for f132_local5, f132_local6 in ipairs( f132_local0 ) do
-			local f132_local7 = Engine[@"createmodel"]( f132_local1, "buttonModel_" .. f132_local5 )
+			local f132_local7 = Engine.CreateModel( f132_local1, "buttonModel_" .. f132_local5 )
 			f132_arg1.options[f132_local5] = f132_local7
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f132_local7, "displayText" ), Engine[@"localize"]( f132_local6.optionDisplay ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f132_local7, "action" ), f132_local6.action )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f132_local7, "param" ), f132_local6.param )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f132_local7, "customId" ), f132_local6.customId )
+			Engine.SetModelValue( Engine.CreateModel( f132_local7, "displayText" ), Engine.Localize( f132_local6.optionDisplay ) )
+			Engine.SetModelValue( Engine.CreateModel( f132_local7, "action" ), f132_local6.action )
+			Engine.SetModelValue( Engine.CreateModel( f132_local7, "param" ), f132_local6.param )
+			Engine.SetModelValue( Engine.CreateModel( f132_local7, "customId" ), f132_local6.customId )
 		end
 	end,
 	getCount = function ( f133_arg0 )
@@ -1974,7 +1973,7 @@ DataSources.PrototypeLobbyTabs = ListHelper_SetupDataSource( "PrototypeLobbyTabs
 	table.insert( f135_local0, {
 		models = {
 			lobbyNav = LobbyData.GetLobbyMenuIDByName( LuaEnum.UI.DIRECTOR_LAN_CP ),
-			tabName = @"hash_17B974030A04AD93"
+			tabName = "cpui/career"
 		},
 		properties = {
 			m_mouseDisabled = true
@@ -1983,7 +1982,7 @@ DataSources.PrototypeLobbyTabs = ListHelper_SetupDataSource( "PrototypeLobbyTabs
 	table.insert( f135_local0, {
 		models = {
 			lobbyNav = LobbyData.GetLobbyMenuIDByName( LuaEnum.UI.DIRECTOR_LAN_MP ),
-			tabName = @"menu/multiplayer"
+			tabName = "menu/multiplayer"
 		},
 		properties = {
 			m_mouseDisabled = true
@@ -1995,57 +1994,57 @@ DataSources.PartyPrivacy = {
 	getModel = function ( f136_arg0 )
 		Dvar[@"partyprivacyenabled"]:set( true )
 		local f136_local0 = Engine[@"getpartyprivacy"]()
-		local f136_local1 = Engine[@"getlobbymaxclients"]( Enum[@"lobbymodule"][@"lobby_module_client"], Engine[@"lobbygetcontrollinglobbysession"]( Enum[@"lobbymodule"][@"lobby_module_client"] ) )
-		local f136_local2 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "PartyPrivacy" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f136_local2, "privacy" ), f136_local0 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f136_local2, "privacyStatus" ), PartyPrivacy( f136_local0 ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f136_local2, "maxPlayers" ), f136_local1 )
+		local f136_local1 = Engine[@"getlobbymaxclients"]( Enum.LobbyModule[@"lobby_module_client"], Engine[@"lobbygetcontrollinglobbysession"]( Enum.LobbyModule[@"lobby_module_client"] ) )
+		local f136_local2 = Engine.CreateModel( Engine.GetGlobalModel(), "PartyPrivacy" )
+		Engine.SetModelValue( Engine.CreateModel( f136_local2, "privacy" ), f136_local0 )
+		Engine.SetModelValue( Engine.CreateModel( f136_local2, "privacyStatus" ), PartyPrivacy( f136_local0 ) )
+		Engine.SetModelValue( Engine.CreateModel( f136_local2, "maxPlayers" ), f136_local1 )
 		return f136_local2
 	end
 }
 DataSources.MapVote = {
 	getModel = function ( f137_arg0 )
-		return Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "MapVote" )
+		return Engine.GetModel( Engine.GetGlobalModel(), "MapVote" )
 	end
 }
 DataSources.PregameGlobal = {
 	getModel = function ( f138_arg0 )
-		local f138_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "lobbyRoot.Pregame" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f138_local0, "timeleft" ), "" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f138_local0, "status" ), "" )
+		local f138_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "lobbyRoot.Pregame" )
+		Engine.SetModelValue( Engine.CreateModel( f138_local0, "timeleft" ), "" )
+		Engine.SetModelValue( Engine.CreateModel( f138_local0, "status" ), "" )
 		return f138_local0
 	end
 }
 DataSources.FeaturedCardsRoot = {
 	getModel = function ( f139_arg0 )
-		return Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "FeaturedCardsRoot" )
+		return Engine.GetModel( Engine.GetGlobalModel(), "FeaturedCardsRoot" )
 	end
 }
 DataSources.NetworkImage = {
 	getModel = function ( f140_arg0 )
-		return Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "NetworkImage" )
+		return Engine.GetModel( Engine.GetGlobalModel(), "NetworkImage" )
 	end
 }
 DataSources.MarketingRoot = {
 	getModel = function ( f141_arg0 )
-		return Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "MarketingRoot" )
+		return Engine.GetModel( Engine.GetGlobalModel(), "MarketingRoot" )
 	end
 }
 DataSources.NetworkInfo = {
 	getModel = function ( f142_arg0 )
-		local f142_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "NetworkInfo" )
-		local f142_local1 = Engine[@"createmodel"]( f142_local0, "natType" )
-		local f142_local2 = Engine[@"createmodel"]( f142_local0, "bandwidth" )
-		local f142_local3 = Engine[@"createmodel"]( f142_local0, "connectionType" )
-		local f142_local4 = Engine[@"createmodel"]( f142_local0, "externalIP" )
-		local f142_local5 = Engine[@"createmodel"]( f142_local0, "internalIP" )
-		local f142_local6 = Engine[@"createmodel"]( f142_local0, "region" )
-		local f142_local7 = Engine[@"createmodel"]( f142_local0, "version" )
-		local f142_local8 = Engine[@"createmodel"]( f142_local0, "connectivityInfo" )
-		local f142_local9 = Engine[@"createmodel"]( f142_local0, "supportURL" )
+		local f142_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "NetworkInfo" )
+		local f142_local1 = Engine.CreateModel( f142_local0, "natType" )
+		local f142_local2 = Engine.CreateModel( f142_local0, "bandwidth" )
+		local f142_local3 = Engine.CreateModel( f142_local0, "connectionType" )
+		local f142_local4 = Engine.CreateModel( f142_local0, "externalIP" )
+		local f142_local5 = Engine.CreateModel( f142_local0, "internalIP" )
+		local f142_local6 = Engine.CreateModel( f142_local0, "region" )
+		local f142_local7 = Engine.CreateModel( f142_local0, "version" )
+		local f142_local8 = Engine.CreateModel( f142_local0, "connectivityInfo" )
+		local f142_local9 = Engine.CreateModel( f142_local0, "supportURL" )
 		local f142_local10 = function ( f143_arg0, f143_arg1 )
-			local f143_local0, f143_local1 = Engine[@"getsysteminfo"]( f142_arg0, f143_arg1 )
-			Engine[@"setmodelvalue"]( f143_arg0, f143_local0 )
+			local f143_local0, f143_local1 = Engine.GetSystemInfo( f142_arg0, f143_arg1 )
+			Engine.SetModelValue( f143_arg0, f143_local0 )
 		end
 		
 		f142_local10( f142_local1, CoD.SYSINFO_NAT_TYPE )
@@ -2056,15 +2055,15 @@ DataSources.NetworkInfo = {
 		f142_local10( f142_local6, CoD.SYSINFO_GEOGRAPHICAL_REGION )
 		f142_local10( f142_local7, CoD.SYSINFO_VERSION_NUMBER )
 		f142_local10( f142_local8, CoD.SYSINFO_CONNECTIVITY_INFO )
-		Engine[@"setmodelvalue"]( f142_local9, Engine[@"hash_4F9F1239CFD921FE"]( @"hash_2EC643DC2290F6B8" ) )
+		Engine.SetModelValue( f142_local9, Engine[@"hash_4F9F1239CFD921FE"]( @"hash_2EC643DC2290F6B8" ) )
 		return f142_local0
 	end
 }
 DataSources.PlayGoDownloadProgress = {
 	getModel = function ( f144_arg0 )
-		local f144_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "PlayGoDownloadProgress" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f144_local0, "progress" ), 0 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f144_local0, "chunk" ), "" )
+		local f144_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "PlayGoDownloadProgress" )
+		Engine.SetModelValue( Engine.CreateModel( f144_local0, "progress" ), 0 )
+		Engine.SetModelValue( Engine.CreateModel( f144_local0, "chunk" ), "" )
 		return f144_local0
 	end
 }
@@ -2081,15 +2080,15 @@ DataSources.NetStatsInfo = {
 }
 DataSources.PCTelemetry = {
 	getModel = function ( f146_arg0 )
-		local f146_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "PCTelemetry" )
-		local f146_local1 = Engine[@"profileint"]( f146_arg0, @"com_show_fps" ) or 0
-		local f146_local2 = Engine[@"profileint"]( f146_arg0, @"com_show_ping" ) or 0
-		local f146_local3 = Engine[@"profileint"]( f146_arg0, @"com_show_gpu_temperature" ) or 0
-		local f146_local4 = Engine[@"profileint"]( f146_arg0, @"com_show_gpu_time" ) or 0
-		local f146_local5 = Engine[@"profileint"]( f146_arg0, @"hash_2DE6AC57F5398D81" ) or 0
-		local f146_local6 = Engine[@"profileint"]( f146_arg0, @"com_show_cpu_render_time" ) or 0
-		local f146_local7 = Engine[@"profileint"]( f146_arg0, @"com_show_vram" ) or 0
-		local f146_local8 = Engine[@"profileint"]( f146_arg0, @"snd_mute_master_volume" ) or 0
+		local f146_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "PCTelemetry" )
+		local f146_local1 = Engine.ProfileInt( f146_arg0, "com_show_fps" ) or 0
+		local f146_local2 = Engine.ProfileInt( f146_arg0, "com_show_ping" ) or 0
+		local f146_local3 = Engine.ProfileInt( f146_arg0, "com_show_gpu_temperature" ) or 0
+		local f146_local4 = Engine.ProfileInt( f146_arg0, "com_show_gpu_time" ) or 0
+		local f146_local5 = Engine.ProfileInt( f146_arg0, @"hash_2DE6AC57F5398D81" ) or 0
+		local f146_local6 = Engine.ProfileInt( f146_arg0, "com_show_cpu_render_time" ) or 0
+		local f146_local7 = Engine.ProfileInt( f146_arg0, "com_show_vram" ) or 0
+		local f146_local8 = Engine.ProfileInt( f146_arg0, "snd_mute_master_volume" ) or 0
 		local f146_local9 = 0
 		if Dvar[@"voice_suspend"]:get() then
 			f146_local9 = 1
@@ -2117,14 +2116,14 @@ DataSources.PCTelemetry = {
 }
 DataSources.GameplayFeedbackSettings = {
 	getModel = function ( f147_arg0 )
-		local f147_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f147_arg0 ), "GameplayFeedbackSettings" )
-		local f147_local1 = tonumber( Engine[@"getprofilevarint"]( f147_arg0, "healthbar_show_enemy" ) ) or 0
-		local f147_local2 = tonumber( Engine[@"getprofilevarint"]( f147_arg0, "healthbar_show_ally" ) ) or 0
+		local f147_local0 = Engine.CreateModel( Engine.GetModelForController( f147_arg0 ), "GameplayFeedbackSettings" )
+		local f147_local1 = tonumber( Engine.GetProfileVarInt( f147_arg0, "healthbar_show_enemy" ) ) or 0
+		local f147_local2 = tonumber( Engine.GetProfileVarInt( f147_arg0, "healthbar_show_ally" ) ) or 0
 		local f147_local3 = f147_local0:create( "healthBarEnemyAlpha" )
 		f147_local3:set( f147_local1 )
 		f147_local3 = f147_local0:create( "healthBarAllyAlpha" )
 		f147_local3:set( f147_local2 )
-		f147_local3 = Engine[@"getprofilevarint"]( f147_arg0, "radiation_toggle" ) == 1
+		f147_local3 = Engine.GetProfileVarInt( f147_arg0, "radiation_toggle" ) == 1
 		local f147_local4 = f147_local0:create( "hideRadiationHold" )
 		f147_local4:set( f147_local3 )
 		return f147_local0
@@ -2132,82 +2131,82 @@ DataSources.GameplayFeedbackSettings = {
 }
 DataSources.MOTD = {
 	getModel = function ( f148_arg0 )
-		local f148_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "motd" )
-		local f148_local1 = Engine[@"createmodel"]( f148_local0, "isValid" )
-		local f148_local2 = Engine[@"createmodel"]( f148_local0, "singleView" )
-		local f148_local3 = Engine[@"createmodel"]( f148_local0, "motdVersion" )
-		local f148_local4 = Engine[@"createmodel"]( f148_local0, "title" )
-		local f148_local5 = Engine[@"createmodel"]( f148_local0, "message" )
-		local f148_local6 = Engine[@"createmodel"]( f148_local0, "image" )
-		local f148_local7 = Engine[@"createmodel"]( f148_local0, "action" )
-		local f148_local8 = Engine[@"createmodel"]( f148_local0, "actionContext" )
-		local f148_local9 = Engine[@"createmodel"]( f148_local0, "actionString" )
-		local f148_local10 = Engine[@"createmodel"]( f148_local0, "bannerTitle" )
-		local f148_local11 = Engine[@"createmodel"]( f148_local0, "bannerMessage" )
-		local f148_local12 = Engine[@"createmodel"]( f148_local0, "bannerImage" )
-		local f148_local13 = Engine[@"createmodel"]( f148_local0, "bannerAction" )
-		local f148_local14 = Engine[@"createmodel"]( f148_local0, "bannerActionContext" )
-		local f148_local15 = Engine[@"createmodel"]( f148_local0, "bannerActionString" )
-		local f148_local16 = Engine[@"getmotd"]()
-		Engine[@"setmodelvalue"]( f148_local1, f148_local16.isValid )
+		local f148_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "motd" )
+		local f148_local1 = Engine.CreateModel( f148_local0, "isValid" )
+		local f148_local2 = Engine.CreateModel( f148_local0, "singleView" )
+		local f148_local3 = Engine.CreateModel( f148_local0, "motdVersion" )
+		local f148_local4 = Engine.CreateModel( f148_local0, "title" )
+		local f148_local5 = Engine.CreateModel( f148_local0, "message" )
+		local f148_local6 = Engine.CreateModel( f148_local0, "image" )
+		local f148_local7 = Engine.CreateModel( f148_local0, "action" )
+		local f148_local8 = Engine.CreateModel( f148_local0, "actionContext" )
+		local f148_local9 = Engine.CreateModel( f148_local0, "actionString" )
+		local f148_local10 = Engine.CreateModel( f148_local0, "bannerTitle" )
+		local f148_local11 = Engine.CreateModel( f148_local0, "bannerMessage" )
+		local f148_local12 = Engine.CreateModel( f148_local0, "bannerImage" )
+		local f148_local13 = Engine.CreateModel( f148_local0, "bannerAction" )
+		local f148_local14 = Engine.CreateModel( f148_local0, "bannerActionContext" )
+		local f148_local15 = Engine.CreateModel( f148_local0, "bannerActionString" )
+		local f148_local16 = Engine.GetMOTD()
+		Engine.SetModelValue( f148_local1, f148_local16.isValid )
 		if f148_local16.isValid then
-			Engine[@"setmodelvalue"]( f148_local2, f148_local16.singleView )
-			Engine[@"setmodelvalue"]( f148_local3, f148_local16.motdVersion )
-			Engine[@"setmodelvalue"]( f148_local4, f148_local16.title )
-			Engine[@"setmodelvalue"]( f148_local5, f148_local16.message )
-			Engine[@"setmodelvalue"]( f148_local6, f148_local16.image )
-			Engine[@"setmodelvalue"]( f148_local7, f148_local16.action )
-			Engine[@"setmodelvalue"]( f148_local8, f148_local16.actionContext )
-			Engine[@"setmodelvalue"]( f148_local9, f148_local16.actionString )
-			Engine[@"setmodelvalue"]( f148_local10, f148_local16.bannerTitle )
-			Engine[@"setmodelvalue"]( f148_local11, f148_local16.bannerMessage )
-			Engine[@"setmodelvalue"]( f148_local12, f148_local16.bannerImage )
-			Engine[@"setmodelvalue"]( f148_local13, f148_local16.bannerAction )
-			Engine[@"setmodelvalue"]( f148_local14, f148_local16.bannerActionContext )
-			Engine[@"setmodelvalue"]( f148_local15, f148_local16.bannerActionString )
+			Engine.SetModelValue( f148_local2, f148_local16.singleView )
+			Engine.SetModelValue( f148_local3, f148_local16.motdVersion )
+			Engine.SetModelValue( f148_local4, f148_local16.title )
+			Engine.SetModelValue( f148_local5, f148_local16.message )
+			Engine.SetModelValue( f148_local6, f148_local16.image )
+			Engine.SetModelValue( f148_local7, f148_local16.action )
+			Engine.SetModelValue( f148_local8, f148_local16.actionContext )
+			Engine.SetModelValue( f148_local9, f148_local16.actionString )
+			Engine.SetModelValue( f148_local10, f148_local16.bannerTitle )
+			Engine.SetModelValue( f148_local11, f148_local16.bannerMessage )
+			Engine.SetModelValue( f148_local12, f148_local16.bannerImage )
+			Engine.SetModelValue( f148_local13, f148_local16.bannerAction )
+			Engine.SetModelValue( f148_local14, f148_local16.bannerActionContext )
+			Engine.SetModelValue( f148_local15, f148_local16.bannerActionString )
 		end
 		return f148_local0
 	end
 }
 DataSources.MtxCommsMOTD = {
 	getModel = function ( f149_arg0 )
-		local f149_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "mtxCommsMOTD" )
+		local f149_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "mtxCommsMOTD" )
 		local f149_local1 = CoD.MOTDUtility.MOTD_GetFirstMOTDTab( f149_arg0 )
 		if f149_local1 ~= nil then
 			for f149_local5, f149_local6 in next, f149_local1, nil do
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f149_local0, f149_local5 ), f149_local6 )
+				Engine.SetModelValue( Engine.CreateModel( f149_local0, f149_local5 ), f149_local6 )
 			end
 			if not f149_local1.messageID then
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f149_local0, "messageID" ), 0 )
+				Engine.SetModelValue( Engine.CreateModel( f149_local0, "messageID" ), 0 )
 			end
-			Engine[@"execnow"]( f149_arg0, "setupThumbnailForMarketing mtxcommsmotd " .. tostring( f149_local1.locationID ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f149_local0, "imageFileID" ), f149_local1.locationID )
+			Engine.ExecNow( f149_arg0, "setupThumbnailForMarketing mtxcommsmotd " .. tostring( f149_local1.locationID ) )
+			Engine.SetModelValue( Engine.CreateModel( f149_local0, "imageFileID" ), f149_local1.locationID )
 		end
 		if not f149_local1 or not f149_local1.type then
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f149_local0, "type" ), "" )
+			Engine.SetModelValue( Engine.CreateModel( f149_local0, "type" ), "" )
 		end
 		return f149_local0
 	end
 }
 DataSources.MtxCommsRegistration = {
 	getModel = function ( f150_arg0 )
-		local f150_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "mtxCommsRegistration" )
-		local f150_local1 = Engine[@"getmarketingmessage"]( f150_arg0, "registration" )
+		local f150_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "mtxCommsRegistration" )
+		local f150_local1 = Engine.GetMarketingMessage( f150_arg0, "registration" )
 		if f150_local1 ~= nil and not f150_local1.messageViewReported then
 			for f150_local5, f150_local6 in next, f150_local1, nil do
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f150_local0, f150_local5 ), f150_local6 )
+				Engine.SetModelValue( Engine.CreateModel( f150_local0, f150_local5 ), f150_local6 )
 			end
 			if f150_local1.action ~= "opt-in" and f150_local1.action ~= "registration" and f150_local1.content_long ~= "" then
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f150_local0, "action_title" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_1BE1BF50C45C10B0" ) )
+				Engine.SetModelValue( Engine.CreateModel( f150_local0, "action_title" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_1BE1BF50C45C10B0" ) )
 			end
 		else
 			local f150_local2 = Engine[@"hash_15451F941503DA5A"]( f150_arg0, CoD.MOTDUtility.MOTD_GetMOTDChannel() )
 			if f150_local2 ~= nil and f150_local2.hasBanner then
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f150_local0, "content_short" ), f150_local2.bannerTitle )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f150_local0, "action_title" ), Engine[@"localize"]( f150_local2.bannerActionString ) )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f150_local0, "action" ), f150_local2.bannerAction )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f150_local0, "image" ), f150_local2.bannerImage )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f150_local0, "locationID" ), 1 )
+				Engine.SetModelValue( Engine.CreateModel( f150_local0, "content_short" ), f150_local2.bannerTitle )
+				Engine.SetModelValue( Engine.CreateModel( f150_local0, "action_title" ), Engine.Localize( f150_local2.bannerActionString ) )
+				Engine.SetModelValue( Engine.CreateModel( f150_local0, "action" ), f150_local2.bannerAction )
+				Engine.SetModelValue( Engine.CreateModel( f150_local0, "image" ), f150_local2.bannerImage )
+				Engine.SetModelValue( Engine.CreateModel( f150_local0, "locationID" ), 1 )
 			end
 		end
 		return f150_local0
@@ -2215,26 +2214,26 @@ DataSources.MtxCommsRegistration = {
 }
 DataSources.CRMPopup = {
 	getModel = function ( f151_arg0 )
-		local f151_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "CRMPopup" )
-		local f151_local1 = Engine[@"getmodel"]( f151_local0, "location" )
+		local f151_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "CRMPopup" )
+		local f151_local1 = Engine.GetModel( f151_local0, "location" )
 		local f151_local2 = nil
 		if f151_local1 ~= nil then
-			local f151_local3 = Engine[@"getmodelvalue"]( f151_local1 )
+			local f151_local3 = Engine.GetModelValue( f151_local1 )
 			if f151_local3 == "crm_featured" then
-				f151_local2 = Engine[@"getmarketingmessage"]( f151_arg0, f151_local3, Engine[@"getmodelvalue"]( Engine[@"getmodel"]( Engine[@"getmodel"]( Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f151_arg0 ), "FeaturedCards" ), Engine[@"getmodelvalue"]( Engine[@"getmodel"]( Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "FeaturedCardsRoot" ), "CardSequence" ) ) + 1 ), "index" ) ) )
+				f151_local2 = Engine.GetMarketingMessage( f151_arg0, f151_local3, Engine.GetModelValue( Engine.GetModel( Engine.GetModel( Engine.GetModel( Engine.GetModelForController( f151_arg0 ), "FeaturedCards" ), Engine.GetModelValue( Engine.GetModel( Engine.GetModel( Engine.GetGlobalModel(), "FeaturedCardsRoot" ), "CardSequence" ) ) + 1 ), "index" ) ) )
 			else
-				f151_local2 = Engine[@"getmarketingmessage"]( f151_arg0, f151_local3 )
+				f151_local2 = Engine.GetMarketingMessage( f151_arg0, f151_local3 )
 			end
 		else
-			f151_local2 = Engine[@"getmarketingmessage"]( f151_arg0, "crm_featured" )
+			f151_local2 = Engine.GetMarketingMessage( f151_arg0, "crm_featured" )
 		end
 		if f151_local2 ~= nil then
 			for f151_local6, f151_local7 in pairs( f151_local2 ) do
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f151_local0, f151_local6 ), f151_local7 )
+				Engine.SetModelValue( Engine.CreateModel( f151_local0, f151_local6 ), f151_local7 )
 			end
 		end
 		if not f151_local2 or not f151_local2.action then
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f151_local0, "action" ), "" )
+			Engine.SetModelValue( Engine.CreateModel( f151_local0, "action" ), "" )
 		end
 		return f151_local0
 	end
@@ -2264,7 +2263,7 @@ DataSources.WeaponGroups = ListHelper_SetupDataSource( "WeaponGroups", function 
 	end
 	local f153_local2 = CoD.BaseUtility.GetMenuModel( f153_arg1.menu )
 	local f153_local3 = CoD.BaseUtility.GetMenuSessionMode( f153_arg1.menu )
-	local f153_local4 = Engine[@"getitemgroup"]( CoD.CACUtility.GetItemIndexEquippedInSlot( f153_local1, f153_arg0, f153_local2 ), Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f153_local3 )
+	local f153_local4 = Engine.GetItemGroup( CoD.CACUtility.GetItemIndexEquippedInSlot( f153_local1, f153_arg0, f153_local2 ), Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f153_local3 )
 	local f153_local5 = DataSources.LoadoutBreadcrumbs.getModel( f153_arg0 )
 	local f153_local6 = function ( f154_arg0, f154_arg1 )
 		for f154_local4, f154_local5 in ipairs( f154_arg0 ) do
@@ -2293,8 +2292,8 @@ DataSources.WeaponGroups = ListHelper_SetupDataSource( "WeaponGroups", function 
 	end
 	
 	local f153_local7 = CoD.BaseUtility.GetMenuLoadoutSlot( f153_arg1.menu )
-	local f153_local8 = CoD.BonuscardUtility.IsBonuscardEquipped( f153_local2, @"bonuscard_overkill", f153_local3 )
-	local f153_local9 = CoD.BonuscardUtility.IsBonuscardEquipped( f153_local2, @"bonuscard_underkill", f153_local3 )
+	local f153_local8 = CoD.BonuscardUtility.IsBonuscardEquipped( f153_local2, "bonuscard_overkill", f153_local3 )
+	local f153_local9 = CoD.BonuscardUtility.IsBonuscardEquipped( f153_local2, "bonuscard_underkill", f153_local3 )
 	if not (f153_local7 ~= "primary" or f153_local9) or f153_local8 then
 		f153_local6( CoD.CACUtility.GetWeaponGroupsNames( "primary" ), f153_local7 )
 	elseif not (f153_local7 ~= "secondary" or f153_local8) or f153_local9 then
@@ -2304,7 +2303,7 @@ DataSources.WeaponGroups = ListHelper_SetupDataSource( "WeaponGroups", function 
 end, true )
 DataSources.PaintshopWeaponGroups = ListHelper_SetupDataSource( "PaintshopWeaponGroups", function ( f155_arg0, f155_arg1 )
 	local f155_local0 = {}
-	local f155_local1 = Enum[@"emodes"][@"mode_multiplayer"]
+	local f155_local1 = Enum.eModes.mode_multiplayer
 	local f155_local2 = function ( f156_arg0, f156_arg1, f156_arg2 )
 		for f156_local3, f156_local4 in ipairs( f156_arg0 ) do
 			if #CoD.CACUtility.GetUnlockableItemsForItemGroup( f155_arg0, f155_local1, f156_local4.weapon_category, true ) > 0 then
@@ -2333,7 +2332,7 @@ DataSources.PaintshopWeaponList = ListHelper_SetupDataSource( "PaintshopWeaponLi
 	local f157_local0 = {}
 	local f157_local1 = f157_arg1.menu.__itemGroup
 	if f157_local1 then
-		for f157_local6, f157_local7 in ipairs( CoD.CACUtility.GetUnlockableItemsForItemGroup( f157_arg0, Enum[@"emodes"][@"mode_multiplayer"], f157_local1 ) ) do
+		for f157_local6, f157_local7 in ipairs( CoD.CACUtility.GetUnlockableItemsForItemGroup( f157_arg0, Enum.eModes.mode_multiplayer, f157_local1 ) ) do
 			if f157_local7.allocation ~= -1 then
 				local f157_local5 = CoD.CACUtility.BuildItemModelDataFromUnlockableItem( f157_arg1.menu, f157_arg0, f157_local7, nil, nil, nil, nil )
 				f157_local5.properties._forPaintshop = true
@@ -2363,14 +2362,14 @@ end, true, {
 } )
 DataSources.EquippedBubbleGumPack = {
 	getModel = function ( f160_arg0 )
-		local f160_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f160_arg0 ), "EquippedBubbleGumPack" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f160_local0, "bgbPackIndex" ), Engine[@"getequippedbubblegumpack"]( f160_arg0 ) )
+		local f160_local0 = Engine.CreateModel( Engine.GetModelForController( f160_arg0 ), "EquippedBubbleGumPack" )
+		Engine.SetModelValue( Engine.CreateModel( f160_local0, "bgbPackIndex" ), Engine.GetEquippedBubbleGumPack( f160_arg0 ) )
 		return f160_local0
 	end
 }
 DataSources.BubbleGumBuffs = {
 	prepare = function ( f161_arg0, f161_arg1, f161_arg2 )
-		DataSources.BubbleGumBuffs.setupBubbleGumBuffsModel( f161_arg0, Engine[@"getmodelforcontroller"]( f161_arg0 ), Engine[@"getequippedbubblegumpack"]( f161_arg0 ) )
+		DataSources.BubbleGumBuffs.setupBubbleGumBuffsModel( f161_arg0, Engine.GetModelForController( f161_arg0 ), Engine.GetEquippedBubbleGumPack( f161_arg0 ) )
 	end,
 	getCount = function ( f162_arg0 )
 		return CoD.BGBUtility.NumBuffsPerPack
@@ -2380,33 +2379,33 @@ DataSources.BubbleGumBuffs = {
 			local f163_local0 = f163_arg1:getParent()
 			return f163_local0:getModel( f163_arg0, "BubbleGumBuffs." .. f163_arg2 )
 		else
-			return Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f163_arg0 ), "BubbleGumBuffs." .. f163_arg2 )
+			return Engine.CreateModel( Engine.GetModelForController( f163_arg0 ), "BubbleGumBuffs." .. f163_arg2 )
 		end
 	end,
 	setupBubbleGumBuffsModel = function ( f164_arg0, f164_arg1, f164_arg2 )
-		local f164_local0 = Engine[@"createmodel"]( f164_arg1, "BubbleGumBuffs" )
+		local f164_local0 = Engine.CreateModel( f164_arg1, "BubbleGumBuffs" )
 		for f164_local1 = 0, CoD.BGBUtility.NumBuffsPerPack - 1, 1 do
-			local f164_local4 = Engine[@"createmodel"]( f164_local0, f164_local1 + 1 )
-			local f164_local5 = Engine[@"getbubblegumbuff"]( f164_arg0, f164_arg2, f164_local1 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f164_local4, "bgbIndex" ), f164_local1 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f164_local4, "itemIndex" ), f164_local5 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f164_local4, "name" ), Engine[@"getitemname"]( f164_local5, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"] ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f164_local4, "image" ), Engine[@"getitemimage"]( f164_local5, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"] ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f164_local4, "desc" ), Engine[@"getitemdesc"]( f164_local5, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"] ) )
+			local f164_local4 = Engine.CreateModel( f164_local0, f164_local1 + 1 )
+			local f164_local5 = Engine.GetBubbleGumBuff( f164_arg0, f164_arg2, f164_local1 )
+			Engine.SetModelValue( Engine.CreateModel( f164_local4, "bgbIndex" ), f164_local1 )
+			Engine.SetModelValue( Engine.CreateModel( f164_local4, "itemIndex" ), f164_local5 )
+			Engine.SetModelValue( Engine.CreateModel( f164_local4, "name" ), Engine.GetItemName( f164_local5, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"] ) )
+			Engine.SetModelValue( Engine.CreateModel( f164_local4, "image" ), Engine.GetItemImage( f164_local5, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"] ) )
+			Engine.SetModelValue( Engine.CreateModel( f164_local4, "desc" ), Engine.GetItemDesc( f164_local5, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"] ) )
 		end
 	end
 }
 DataSources.BubbleGumPacks = {
 	prepare = function ( f165_arg0, f165_arg1, f165_arg2 )
 		f165_arg1.bubbleGumPacks = {}
-		local f165_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f165_arg0 ), "BubbleGumPacks" )
+		local f165_local0 = Engine.CreateModel( Engine.GetModelForController( f165_arg0 ), "BubbleGumPacks" )
 		for f165_local1 = 0, CoD.BGBUtility.NumPacks - 1, 1 do
-			local f165_local4 = Engine[@"createmodel"]( f165_local0, f165_local1 )
-			local f165_local5 = Engine[@"getbubblegumpackname"]( f165_arg0, f165_local1 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f165_local4, "bgbPackIndex" ), f165_local1 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f165_local4, "bubbleGumPackName" ), f165_local5 )
+			local f165_local4 = Engine.CreateModel( f165_local0, f165_local1 )
+			local f165_local5 = Engine.GetBubbleGumPackName( f165_arg0, f165_local1 )
+			Engine.SetModelValue( Engine.CreateModel( f165_local4, "bgbPackIndex" ), f165_local1 )
+			Engine.SetModelValue( Engine.CreateModel( f165_local4, "bubbleGumPackName" ), f165_local5 )
 			DataSources.BubbleGumBuffs.setupBubbleGumBuffsModel( f165_arg0, f165_local4, f165_local1 )
-			local f165_local6 = Engine[@"getmodelvalue"]( Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f165_arg0 ), "EquippedBubbleGumPack.bgbPackIndex" ) )
+			local f165_local6 = Engine.GetModelValue( Engine.CreateModel( Engine.GetModelForController( f165_arg0 ), "EquippedBubbleGumPack.bgbPackIndex" ) )
 			if f165_local6 and f165_local6 + 1 == f165_local1 then
 				f165_arg1.selectIndex = f165_local1
 			end
@@ -2434,13 +2433,13 @@ DataSourceHelpers.PerControllerDataSourceSetup( "MegaChewTokens", "MegaChewToken
 end, false )
 DataSources.MegaChewMachines = {
 	getModel = function ( f170_arg0 )
-		local f170_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f170_arg0 ), "MegaChewMachines" )
+		local f170_local0 = Engine.CreateModel( Engine.GetModelForController( f170_arg0 ), "MegaChewMachines" )
 		for f170_local1 = 0, 2, 1 do
-			local f170_local4 = Engine[@"createmodel"]( f170_local0, "machine" .. f170_local1 )
+			local f170_local4 = Engine.CreateModel( f170_local0, "machine" .. f170_local1 )
 			local f170_local5 = f170_local1
 			local f170_local6 = f170_local1 + 1
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f170_local4, "index" ), f170_local5 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f170_local4, "price" ), f170_local6 )
+			Engine.SetModelValue( Engine.CreateModel( f170_local4, "index" ), f170_local5 )
+			Engine.SetModelValue( Engine.CreateModel( f170_local4, "price" ), f170_local6 )
 		end
 		return f170_local0
 	end
@@ -2448,16 +2447,16 @@ DataSources.MegaChewMachines = {
 DataSources.Demo = {
 	getModel = function ( f171_arg0 )
 		if not f171_arg0 then
-			f171_arg0 = Engine[@"getprimarycontroller"]()
+			f171_arg0 = Engine.GetPrimaryController()
 		end
-		return Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "demo" )
+		return Engine.CreateModel( Engine.GetGlobalModel(), "demo" )
 	end
 }
 DataSources.DemoControlsButtons = {
 	prepare = function ( f172_arg0, f172_arg1, f172_arg2 )
 		f172_arg1.buttons = {}
 		local f172_local0 = {}
-		local f172_local1 = Engine[@"getglobalmodel"]()
+		local f172_local1 = Engine.GetGlobalModel()
 		f172_local1 = f172_local1.demo
 		local f172_local2 = f172_local1.isPaused
 		local f172_local3 = f172_local2:get()
@@ -2502,32 +2501,32 @@ DataSources.DemoControlsButtons = {
 		local f172_local42 = CoD.DemoUtility.IsFastForwardingDisabled()
 		local f172_local43 = function ( f173_arg0 )
 			if f173_arg0 <= 0.33 then
-				return @"theater_slow_3"
+				return "theater_slow_3"
 			elseif f173_arg0 <= 0.66 then
-				return @"theater_slow_2"
+				return "theater_slow_2"
 			elseif f173_arg0 <= 0.99 then
-				return @"theater_slow_1"
+				return "theater_slow_1"
 			else
-				return @"theater_slow"
+				return "theater_slow"
 			end
 		end
 		
 		local f172_local44 = function ( f174_arg0 )
 			if 6 <= f174_arg0 then
-				return @"theater_fastforward_3"
+				return "theater_fastforward_3"
 			elseif f174_arg0 >= 4 then
-				return @"theater_fastforward_2"
+				return "theater_fastforward_2"
 			elseif f174_arg0 >= 2 then
-				return @"theater_fastforward_1"
+				return "theater_fastforward_1"
 			else
-				return @"theater_fastforward"
+				return "theater_fastforward"
 			end
 		end
 		
 		local f172_local45 = function ( f175_arg0 )
-			if f175_arg0 == Enum[@"demodollycameratimescalemode"][@"demo_dollycam_timescale_mode_fixed"] then
+			if f175_arg0 == Enum.demoDollyCameraTimeScaleMode[@"demo_dollycam_timescale_mode_fixed"] then
 				return @"hash_38836A8306560A2A"
-			elseif f175_arg0 == Enum[@"demodollycameratimescalemode"][@"demo_dollycam_timescale_mode_linear"] then
+			elseif f175_arg0 == Enum.demoDollyCameraTimeScaleMode[@"demo_dollycam_timescale_mode_linear"] then
 				return @"hash_76008960BCA65979"
 			else
 				return @"hash_167235575E0A08AE"
@@ -2535,17 +2534,17 @@ DataSources.DemoControlsButtons = {
 		end
 		
 		local f172_local46 = function ( f176_arg0 )
-			if f176_arg0 == Enum[@"demodollycameratimescalemode"][@"demo_dollycam_timescale_mode_fixed"] then
-				return @"hash_4E6D3A97D9422664"
-			elseif f176_arg0 == Enum[@"demodollycameratimescalemode"][@"demo_dollycam_timescale_mode_linear"] then
-				return @"hash_629DDC8D528DC4D5"
+			if f176_arg0 == Enum.demoDollyCameraTimeScaleMode[@"demo_dollycam_timescale_mode_fixed"] then
+				return "demo/dolly_camera_speed_mode_fixed_hint"
+			elseif f176_arg0 == Enum.demoDollyCameraTimeScaleMode[@"demo_dollycam_timescale_mode_linear"] then
+				return "demo/dolly_camera_speed_mode_linear_hint"
 			else
-				return @"hash_58F6F3A49A1E1E4C"
+				return "demo/dolly_camera_speed_mode_manual_hint"
 			end
 		end
 		
 		local f172_local47 = function ( f177_arg0 )
-			if f177_arg0 == Enum[@"demolightmanlightmode"][@"demo_lightman_light_mode_omni"] then
+			if f177_arg0 == Enum.demoLightmanLightMode[@"demo_lightman_light_mode_omni"] then
 				return @"hash_1D53E0099155FE86"
 			else
 				return @"hash_CD69BEABBCE5047"
@@ -2553,18 +2552,18 @@ DataSources.DemoControlsButtons = {
 		end
 		
 		local f172_local48 = function ( f178_arg0 )
-			if f178_arg0 == Enum[@"demolightmanlightmode"][@"demo_lightman_light_mode_omni"] then
-				return @"hash_4C0D07B68C6F1C16"
+			if f178_arg0 == Enum.demoLightmanLightMode[@"demo_lightman_light_mode_omni"] then
+				return "demo/lightman_light_mode_omni_hint"
 			else
-				return @"hash_16C95E5751A62195"
+				return "demo/lightman_light_mode_spot_hint"
 			end
 		end
 		
 		local f172_local49 = function ()
 			if Engine[@"isdemocameraeditmode"]() then
-				return @"hash_7395B5E247A74E06"
+				return "demo/record_and_play_dolly_camera_hint"
 			else
-				return @"hash_37F409186CCF9EAE"
+				return "demo/record_hint"
 			end
 		end
 		
@@ -2572,7 +2571,7 @@ DataSources.DemoControlsButtons = {
 			table.insert( f172_local0, {
 				btnId = "dummy",
 				icon = @"hash_477DC565FE0848BE",
-				hintText = @"hash_0",
+				hintText = 0x0,
 				disabled = true
 			} )
 		elseif f172_local17 then
@@ -2580,7 +2579,7 @@ DataSources.DemoControlsButtons = {
 				table.insert( f172_local0, {
 					btnId = "dollycammovecancel",
 					icon = @"hash_1D61F8B4F69737B8",
-					hintText = @"hash_5C1DB4098ABE577F",
+					hintText = "demo/move_dolly_camera_hint",
 					buttonPromptImageModel = DataSources.Controller.Model.secondary_button_image,
 					action = CoD.DemoUtility.DemoCancelPlaceDollyCameraMarker
 				} )
@@ -2588,10 +2587,10 @@ DataSources.DemoControlsButtons = {
 				table.insert( f172_local0, {
 					btnId = "movedollycameramarker",
 					icon = @"hash_3A294B63BC865A91",
-					hintText = @"hash_5C1DB4098ABE577F",
+					hintText = "demo/move_dolly_camera_hint",
 					buttonPromptImageModel = DataSources.Controller.Model.alt2_button_image,
 					action = CoD.DemoUtility.RepositionDollyCamMarker,
-					param = tostring( Engine[@"gethighlightedcameramarker"]() )
+					param = tostring( Engine.GetHighlightedCameraMarker() )
 				} )
 			end
 			table.insert( f172_local0, {
@@ -2609,12 +2608,12 @@ DataSources.DemoControlsButtons = {
 				local f172_local52 = {
 					btnId = "dollycameratimescale",
 					icon = @"hash_1DCA9DCD4D6F634",
-					hintText = @"hash_652E206754A20807",
+					hintText = "demo/dolly_camera_speed_hint",
 					buttonPromptImageModel = DataSources.Controller.Model.dpad_down_button_image,
 					showTimescale = f172_local21 < 1
 				}
 				local f172_local53
-				if f172_local19 ~= Enum[@"demodollycameratimescalemode"][@"demo_dollycam_timescale_mode_manual"] and f172_local23 ~= true then
+				if f172_local19 ~= Enum.demoDollyCameraTimeScaleMode[@"demo_dollycam_timescale_mode_manual"] and f172_local23 ~= true then
 					f172_local53 = false
 				else
 					f172_local53 = true
@@ -2628,11 +2627,11 @@ DataSources.DemoControlsButtons = {
 				f172_local52 = {
 					btnId = "dollycameratimescale",
 					icon = @"hash_2868395925CB26A7",
-					hintText = @"hash_652E206754A20807",
+					hintText = "demo/dolly_camera_speed_hint",
 					buttonPromptImageModel = DataSources.Controller.Model.dpad_up_button_image,
 					showTimescale = f172_local21 > 1
 				}
-				if f172_local19 ~= Enum[@"demodollycameratimescalemode"][@"demo_dollycam_timescale_mode_manual"] and f172_local23 ~= true then
+				if f172_local19 ~= Enum.demoDollyCameraTimeScaleMode[@"demo_dollycam_timescale_mode_manual"] and f172_local23 ~= true then
 					f172_local53 = false
 				else
 					f172_local53 = true
@@ -2647,12 +2646,12 @@ DataSources.DemoControlsButtons = {
 				local f172_local52 = {
 					btnId = "dollycameratimescale",
 					icon = @"hash_8FA91637A4E25F4",
-					hintText = @"hash_652E206754A20807",
+					hintText = "demo/dolly_camera_speed_hint",
 					buttonPromptImageModel = DataSources.Controller.Model.dpad_ud_button_image,
 					showTimescale = true
 				}
 				local f172_local53
-				if f172_local19 ~= Enum[@"demodollycameratimescalemode"][@"demo_dollycam_timescale_mode_manual"] and f172_local23 ~= true then
+				if f172_local19 ~= Enum.demoDollyCameraTimeScaleMode[@"demo_dollycam_timescale_mode_manual"] and f172_local23 ~= true then
 					f172_local53 = false
 				else
 					f172_local53 = true
@@ -2663,7 +2662,7 @@ DataSources.DemoControlsButtons = {
 			table.insert( f172_local0, {
 				btnId = "deletedollycameramarker",
 				icon = @"hash_14BD1D0C96ED384F",
-				hintText = @"hash_5589B138C057101F",
+				hintText = "demo/dolly_camera_delete_hint",
 				buttonPromptImageModel = DataSources.Controller.Model.primary_button_image,
 				disabled = f172_local23 == true,
 				action = CoD.DemoUtility.RemoveCurrentDollyCamMarker
@@ -2671,9 +2670,9 @@ DataSources.DemoControlsButtons = {
 			table.insert( f172_local0, {
 				btnId = "deletealldollycameramarkers",
 				icon = @"hash_45E49A6A4F3F8223",
-				hintText = @"hash_246A2800EE9206CF",
+				hintText = "demo/dolly_camera_delete_all_hint",
 				buttonPromptImageModel = DataSources.Controller.Model.primary_button_image,
-				buttonPromptStateModel = f172_arg1.menu.buttonModel[Enum[@"luibutton"][@"lui_key_xba_pscross"]],
+				buttonPromptStateModel = f172_arg1.menu.buttonModel[Enum.LUIButton[@"lui_key_xba_pscross"]],
 				disabled = f172_local23 == true,
 				spacerWidth = 10,
 				action = CoD.DemoUtility.OpenDemoOverlay,
@@ -2683,7 +2682,7 @@ DataSources.DemoControlsButtons = {
 				table.insert( f172_local0, {
 					btnId = "dollycammoveexit",
 					icon = @"hash_3CD6F4F47F250135",
-					hintText = @"hash_0",
+					hintText = 0x0,
 					buttonPromptImageModel = DataSources.Controller.Model.right_stick_button_image,
 					action = CoD.DemoUtility.DemoPlaceDollyCameraMarker
 				} )
@@ -2691,7 +2690,7 @@ DataSources.DemoControlsButtons = {
 				table.insert( f172_local0, {
 					btnId = "dollycameditexit",
 					icon = @"hash_11C22491FE84A86D",
-					hintText = @"hash_0",
+					hintText = 0x0,
 					buttonPromptImageModel = DataSources.Controller.Model.right_stick_button_image,
 					action = CoD.DemoUtility.DemoExitEditDollyCameraMarker
 				} )
@@ -2701,7 +2700,7 @@ DataSources.DemoControlsButtons = {
 				table.insert( f172_local0, {
 					btnId = "lightmanmovecancel",
 					icon = @"hash_3FC7E24A95DA300D",
-					hintText = @"hash_7FA6D7A0AAC00197",
+					hintText = "demo/move_light_hint",
 					buttonPromptImageModel = DataSources.Controller.Model.secondary_button_image,
 					action = CoD.DemoUtility.DemoCancelPlaceLightmanMarker
 				} )
@@ -2709,10 +2708,10 @@ DataSources.DemoControlsButtons = {
 				table.insert( f172_local0, {
 					btnId = "movelightmanmarker",
 					icon = 0xD24E1B46822A76,
-					hintText = @"hash_7FA6D7A0AAC00197",
+					hintText = "demo/move_light_hint",
 					buttonPromptImageModel = DataSources.Controller.Model.alt2_button_image,
 					action = CoD.DemoUtility.RepositionLightmanMarker,
-					param = tostring( Engine[@"gethighlightedcameramarker"]() )
+					param = tostring( Engine.GetHighlightedCameraMarker() )
 				} )
 			end
 			table.insert( f172_local0, {
@@ -2730,7 +2729,7 @@ DataSources.DemoControlsButtons = {
 					btnId = "lightmanlightintensityminus",
 					icon = @"hash_1E685DB08682E616",
 					text = CoD.DemoUtility.GetRoundedLightFloatParam( f172_local50 ),
-					hintText = @"hash_542C6CF278B1F1D9",
+					hintText = "demo/light_intensity_hint",
 					buttonPromptImageModel = DataSources.Controller.Model.dpad_left_button_image,
 					disabled = f172_local31 == true,
 					showTimescale = f172_local50 < 5,
@@ -2741,7 +2740,7 @@ DataSources.DemoControlsButtons = {
 					btnId = "lightmanlightintensityplus",
 					icon = 0x3A71BD6F73F4AB,
 					text = CoD.DemoUtility.GetRoundedLightFloatParam( f172_local50 ),
-					hintText = @"hash_542C6CF278B1F1D9",
+					hintText = "demo/light_intensity_hint",
 					buttonPromptImageModel = DataSources.Controller.Model.dpad_right_button_image,
 					disabled = f172_local31 == true,
 					showTimescale = f172_local50 > 5,
@@ -2753,7 +2752,7 @@ DataSources.DemoControlsButtons = {
 					btnId = "lightmanlightrangeminus",
 					icon = @"hash_1DCA9DCD4D6F634",
 					text = CoD.DemoUtility.GetRoundedLightFloatParam( f172_local51 ),
-					hintText = @"hash_68A89BB505765B35",
+					hintText = "demo/light_range_hint",
 					buttonPromptImageModel = DataSources.Controller.Model.dpad_down_button_image,
 					disabled = f172_local31 == true,
 					showTimescale = f172_local51 < 5,
@@ -2764,7 +2763,7 @@ DataSources.DemoControlsButtons = {
 					btnId = "lightmanlightrangeplus",
 					icon = @"hash_2868395925CB26A7",
 					text = CoD.DemoUtility.GetRoundedLightFloatParam( f172_local51 ),
-					hintText = @"hash_68A89BB505765B35",
+					hintText = "demo/light_range_hint",
 					buttonPromptImageModel = DataSources.Controller.Model.dpad_up_button_image,
 					disabled = f172_local31 == true,
 					showTimescale = f172_local51 > 5,
@@ -2776,7 +2775,7 @@ DataSources.DemoControlsButtons = {
 					btnId = "lightmanlightintensity",
 					icon = @"hash_64229B8898CA8E1C",
 					text = CoD.DemoUtility.GetRoundedLightFloatParam( f172_local32:get() ),
-					hintText = @"hash_542C6CF278B1F1D9",
+					hintText = "demo/light_intensity_hint",
 					buttonPromptImageModel = DataSources.Controller.Model.dpad_lr_button_image,
 					disabled = f172_local31 == true,
 					showTimescale = true
@@ -2785,7 +2784,7 @@ DataSources.DemoControlsButtons = {
 					btnId = "lightmanlightrange",
 					icon = @"hash_8FA91637A4E25F4",
 					text = CoD.DemoUtility.GetRoundedLightFloatParam( f172_local33:get() ),
-					hintText = @"hash_68A89BB505765B35",
+					hintText = "demo/light_range_hint",
 					buttonPromptImageModel = DataSources.Controller.Model.dpad_ud_button_image,
 					disabled = f172_local31 == true,
 					showTimescale = true
@@ -2794,7 +2793,7 @@ DataSources.DemoControlsButtons = {
 			table.insert( f172_local0, {
 				btnId = "lightmanlightcolor",
 				icon = @"hash_578FD2238CC0C5EE",
-				hintText = @"hash_6BA83F8B4DDEC747",
+				hintText = "demo/light_color_hint",
 				buttonPromptImageModel = DataSources.Controller.Model.secondary_button_image,
 				disabled = f172_local31 == true,
 				action = CoD.DemoUtility.UpdateLightmanLightColor
@@ -2802,7 +2801,7 @@ DataSources.DemoControlsButtons = {
 			table.insert( f172_local0, {
 				btnId = "deletelightmanmarker",
 				icon = @"hash_21746039F43DB75C",
-				hintText = @"hash_3123840A03175D5F",
+				hintText = "demo/light_delete_hint",
 				buttonPromptImageModel = DataSources.Controller.Model.primary_button_image,
 				disabled = f172_local31 == true,
 				action = CoD.DemoUtility.RemoveCurrentLightmanMarker
@@ -2810,9 +2809,9 @@ DataSources.DemoControlsButtons = {
 			table.insert( f172_local0, {
 				btnId = "deletealllightmanmarkers",
 				icon = @"hash_3203B98C5FF05760",
-				hintText = @"hash_68C841FB514E5B0F",
+				hintText = "demo/light_delete_all_hint",
 				buttonPromptImageModel = DataSources.Controller.Model.primary_button_image,
-				buttonPromptStateModel = f172_arg1.menu.buttonModel[Enum[@"luibutton"][@"lui_key_xba_pscross"]],
+				buttonPromptStateModel = f172_arg1.menu.buttonModel[Enum.LUIButton[@"lui_key_xba_pscross"]],
 				disabled = f172_local31 == true,
 				action = CoD.DemoUtility.OpenDemoOverlay,
 				param = "DemoDeleteAllLightmanMarkers"
@@ -2821,7 +2820,7 @@ DataSources.DemoControlsButtons = {
 				table.insert( f172_local0, {
 					btnId = "lightmanmoveexit",
 					icon = @"hash_1EB22994B30A0082",
-					hintText = @"hash_0",
+					hintText = 0x0,
 					buttonPromptImageModel = DataSources.Controller.Model.right_stick_button_image,
 					action = CoD.DemoUtility.DemoPlaceLightmanMarker
 				} )
@@ -2829,7 +2828,7 @@ DataSources.DemoControlsButtons = {
 				table.insert( f172_local0, {
 					btnId = "lightmaneditexit",
 					icon = @"hash_5C9C0D644E269514",
-					hintText = @"hash_0",
+					hintText = 0x0,
 					buttonPromptImageModel = DataSources.Controller.Model.right_stick_button_image,
 					action = CoD.DemoUtility.DemoExitEditLightmanMarker
 				} )
@@ -2838,8 +2837,8 @@ DataSources.DemoControlsButtons = {
 			if CoD.isPC and IsMouseOrKeyboard( f172_arg0 ) and not f172_local40 then
 				table.insert( f172_local0, {
 					btnId = "changeMode",
-					icon = @"theater_settings",
-					hintText = @"hash_266D4735F4198419",
+					icon = "theater_settings",
+					hintText = "demo/options_hint",
 					buttonPromptImageModel = DataSources.Controller.Model.secondary_button_image,
 					action = CoD.DemoUtility.OpenChooseModeSidebar,
 					spacerWidth = 16
@@ -2848,15 +2847,15 @@ DataSources.DemoControlsButtons = {
 			if not IsDemoRestrictedBasicMode() then
 				table.insert( f172_local0, {
 					btnId = "screenshot",
-					icon = @"theater_screenshot",
-					hintText = @"hash_110358F774E52931",
+					icon = "theater_screenshot",
+					hintText = "demo/screenshot_hint",
 					buttonPromptImageModel = DataSources.Controller.Model.alt1_button_image,
-					buttonPromptStateModel = f172_arg1.menu.buttonModel[Enum[@"luibutton"][@"lui_key_xbx_pssquare"]],
+					buttonPromptStateModel = f172_arg1.menu.buttonModel[Enum.LUIButton[@"lui_key_xbx_pssquare"]],
 					action = CoD.DemoUtility.TakeScreenshot
 				} )
 				table.insert( f172_local0, {
 					btnId = "record",
-					icon = @"theater_record",
+					icon = "theater_record",
 					hintText = f172_local49(),
 					buttonPromptImageModel = DataSources.Controller.Model.alt1_button_image,
 					spacerWidth = 10,
@@ -2865,8 +2864,8 @@ DataSources.DemoControlsButtons = {
 			end
 			table.insert( f172_local0, {
 				btnId = "jumpback",
-				icon = @"theater_back",
-				hintText = @"hash_43D18552D1136C4D",
+				icon = "theater_back",
+				hintText = "demo/jump_back_hint",
 				buttonPromptImageModel = DataSources.Controller.Model.dpad_left_button_image,
 				disabled = f172_local9:get() == -1,
 				action = CoD.DemoUtility.DemoTimeJump,
@@ -2878,7 +2877,7 @@ DataSources.DemoControlsButtons = {
 				local f172_local52 = {
 					btnId = "jumpbackdollycamera",
 					icon = @"hash_472AEB4C18D4662F",
-					hintText = @"hash_6B7C6C19EC2F2396",
+					hintText = "demo/jump_back_dolly_camera_hint",
 					buttonPromptImageModel = DataSources.Controller.Model.dpad_down_button_image
 				}
 				local f172_local53
@@ -2896,7 +2895,7 @@ DataSources.DemoControlsButtons = {
 				table.insert( f172_local0, {
 					btnId = "slowtimescale",
 					icon = f172_local43( CoD.DemoUtility.GetRoundedTimeScale() ),
-					hintText = @"hash_122683AE3994BD68",
+					hintText = "demo/timescale_hint",
 					buttonPromptImageModel = DataSources.Controller.Model.left_trigger_button_image,
 					showTimescale = CoD.DemoUtility.GetRoundedTimeScale() < 1,
 					action = CoD.DemoUtility.UpdateDemoTimeScaleDelta,
@@ -2906,16 +2905,16 @@ DataSources.DemoControlsButtons = {
 			if f172_local3 == true then
 				table.insert( f172_local0, {
 					btnId = "play",
-					icon = @"theater_play",
-					hintText = @"hash_2D58F6699EB87467",
+					icon = "theater_play",
+					hintText = "demo/play_hint",
 					buttonPromptImageModel = DataSources.Controller.Model.primary_button_image,
 					action = CoD.DemoUtility.RunPauseCommand
 				} )
 			else
 				table.insert( f172_local0, {
 					btnId = "pause",
-					icon = @"theater_pause",
-					hintText = @"hash_76A3016015F825DD",
+					icon = "theater_pause",
+					hintText = "demo/pause_hint",
 					buttonPromptImageModel = DataSources.Controller.Model.primary_button_image,
 					action = CoD.DemoUtility.RunPauseCommand
 				} )
@@ -2925,16 +2924,16 @@ DataSources.DemoControlsButtons = {
 					table.insert( f172_local0, {
 						btnId = "pausedollycamera",
 						icon = @"hash_22A8E2789613E50E",
-						hintText = @"hash_2EA9847364C31F46",
+						hintText = "demo/pause_dolly_camera_hint",
 						buttonPromptImageModel = DataSources.Controller.Model.primary_button_image,
-						buttonPromptStateModel = f172_arg1.menu.buttonModel[Enum[@"luibutton"][@"lui_key_xba_pscross"]],
+						buttonPromptStateModel = f172_arg1.menu.buttonModel[Enum.LUIButton[@"lui_key_xba_pscross"]],
 						action = CoD.DemoUtility.ToggleDollyCameraMode
 					} )
 				else
-					local f172_local50 = @"hash_DAFE26EF8CF7BF8"
+					local f172_local50 = "demo/play_dolly_camera_hint"
 					local f172_local51 = false
 					if f172_local13:get() <= 0 then
-						f172_local50 = @"hash_5241E0906C51DEFF"
+						f172_local50 = "demo/play_dolly_camera_nomarkers_hint"
 						f172_local51 = true
 					end
 					table.insert( f172_local0, {
@@ -2942,7 +2941,7 @@ DataSources.DemoControlsButtons = {
 						icon = @"hash_4414F4BE1E294D4E",
 						hintText = f172_local50,
 						buttonPromptImageModel = DataSources.Controller.Model.primary_button_image,
-						buttonPromptStateModel = f172_arg1.menu.buttonModel[Enum[@"luibutton"][@"lui_key_xba_pscross"]],
+						buttonPromptStateModel = f172_arg1.menu.buttonModel[Enum.LUIButton[@"lui_key_xba_pscross"]],
 						disabled = f172_local51,
 						action = CoD.DemoUtility.ToggleDollyCameraMode
 					} )
@@ -2952,7 +2951,7 @@ DataSources.DemoControlsButtons = {
 				table.insert( f172_local0, {
 					btnId = "fasttimescale",
 					icon = f172_local44( CoD.DemoUtility.GetRoundedTimeScale() ),
-					hintText = @"hash_122683AE3994BD68",
+					hintText = "demo/timescale_hint",
 					buttonPromptImageModel = DataSources.Controller.Model.right_trigger_button_image,
 					disabled = f172_local42,
 					showTimescale = CoD.DemoUtility.GetRoundedTimeScale() > 1,
@@ -2966,7 +2965,7 @@ DataSources.DemoControlsButtons = {
 				local f172_local52 = {
 					btnId = "jumpforwarddollycamera",
 					icon = @"hash_4BD020DE9BC680A9",
-					hintText = @"hash_772EC50E30114004",
+					hintText = "demo/jump_forward_dolly_camera_hint",
 					buttonPromptImageModel = DataSources.Controller.Model.dpad_up_button_image
 				}
 				local f172_local53
@@ -2984,8 +2983,8 @@ DataSources.DemoControlsButtons = {
 			local f172_local51 = f172_local0
 			local f172_local52 = {
 				btnId = "jumpforward",
-				icon = @"theater_forward",
-				hintText = @"hash_602A86786DE61CB",
+				icon = "theater_forward",
+				hintText = "demo/jump_forward_hint",
 				buttonPromptImageModel = DataSources.Controller.Model.dpad_right_button_image
 			}
 			local f172_local53
@@ -3003,8 +3002,8 @@ DataSources.DemoControlsButtons = {
 					if IsFreeCameraLockedOnEntity( f172_arg0 ) then
 						table.insert( f172_local0, {
 							btnId = "objectunlink",
-							icon = @"theater_unlink_object",
-							hintText = @"hash_0",
+							icon = "theater_unlink_object",
+							hintText = 0x0,
 							buttonPromptImageModel = DataSources.Controller.Model.right_stick_button_image,
 							disabled = false,
 							action = CoD.DemoUtility.DemoFreeCameraUnlockObject
@@ -3012,20 +3011,20 @@ DataSources.DemoControlsButtons = {
 					else
 						table.insert( f172_local0, {
 							btnId = "objectlink",
-							icon = @"theater_link_object",
-							hintText = @"hash_0",
+							icon = "theater_link_object",
+							hintText = 0x0,
 							buttonPromptImageModel = DataSources.Controller.Model.right_stick_button_image,
 							disabled = CanFreeCameraLockOnEntity( f172_arg0 ) == false,
 							action = CoD.DemoUtility.DemoFreeCameraLockOnObject
 						} )
 					end
 				elseif IsDemoContextDirectorMode() then
-					if Engine[@"profilebool"]( f172_arg0, @"demo_autodollyrecord" ) then
+					if Engine.ProfileBool( f172_arg0, "demo_autodollyrecord" ) then
 						if CoD.DemoUtility.ShouldStartAutoDollyCamera( f172_arg0 ) then
 							table.insert( f172_local0, {
 								btnId = "autodollycamstart",
 								icon = @"hash_47828B8384381EB8",
-								hintText = @"hash_0",
+								hintText = 0x0,
 								buttonPromptImageModel = DataSources.Controller.Model.right_stick_button_image,
 								action = CoD.DemoUtility.DemoStartAutoDollyCamera
 							} )
@@ -3033,7 +3032,7 @@ DataSources.DemoControlsButtons = {
 							table.insert( f172_local0, {
 								btnId = "autodollycamstop",
 								icon = @"hash_574DED9A7DC4BD1C",
-								hintText = @"hash_0",
+								hintText = 0x0,
 								buttonPromptImageModel = DataSources.Controller.Model.right_stick_button_image,
 								action = CoD.DemoUtility.DemoStopAutoDollyCamera
 							} )
@@ -3041,7 +3040,7 @@ DataSources.DemoControlsButtons = {
 							table.insert( f172_local0, {
 								btnId = "dollycamedit",
 								icon = @"hash_430999227A02F4E0",
-								hintText = @"hash_0",
+								hintText = 0x0,
 								buttonPromptImageModel = DataSources.Controller.Model.right_stick_button_image,
 								action = CoD.DemoUtility.DemoEditDollyCameraMarker
 							} )
@@ -3050,7 +3049,7 @@ DataSources.DemoControlsButtons = {
 						table.insert( f172_local0, {
 							btnId = "dollycamadd",
 							icon = @"hash_43E599F0D948E2DF",
-							hintText = @"hash_0",
+							hintText = 0x0,
 							buttonPromptImageModel = DataSources.Controller.Model.right_stick_button_image,
 							action = CoD.DemoUtility.DemoAddDollyCameraMarker
 						} )
@@ -3058,7 +3057,7 @@ DataSources.DemoControlsButtons = {
 						table.insert( f172_local0, {
 							btnId = "dollycamedit",
 							icon = @"hash_430999227A02F4E0",
-							hintText = @"hash_0",
+							hintText = 0x0,
 							buttonPromptImageModel = DataSources.Controller.Model.right_stick_button_image,
 							action = CoD.DemoUtility.DemoEditDollyCameraMarker
 						} )
@@ -3068,7 +3067,7 @@ DataSources.DemoControlsButtons = {
 						table.insert( f172_local0, {
 							btnId = "lighteradd",
 							icon = @"hash_715E6D5A56413D9A",
-							hintText = @"hash_0",
+							hintText = 0x0,
 							buttonPromptImageModel = DataSources.Controller.Model.right_stick_button_image,
 							action = CoD.DemoUtility.DemoAddLightmanMarker
 						} )
@@ -3076,7 +3075,7 @@ DataSources.DemoControlsButtons = {
 						table.insert( f172_local0, {
 							btnId = "lighteredit",
 							icon = @"hash_48E48C5C9B335333",
-							hintText = @"hash_0",
+							hintText = 0x0,
 							buttonPromptImageModel = DataSources.Controller.Model.right_stick_button_image,
 							action = CoD.DemoUtility.DemoEditLightmanMarker
 						} )
@@ -3085,8 +3084,8 @@ DataSources.DemoControlsButtons = {
 				if IsDemoContextBasicOrHighlightReelMode() and not f172_local40 then
 					table.insert( f172_local0, {
 						btnId = "cameramode",
-						icon = @"hash_35B508D5EB68DD40",
-						hintText = @"hash_5EC09E1538A6D569",
+						icon = "theater_cameratype",
+						hintText = "demo/change_camera_hint",
 						buttonPromptImageModel = DataSources.Controller.Model.alt2_button_image,
 						action = CoD.DemoUtility.UpdateDemoCameraMode,
 						param = "cycle"
@@ -3099,31 +3098,31 @@ DataSources.DemoControlsButtons = {
 				btnId = f172_local54.btnId,
 				spacerWidth = f172_local54.spacerWidth
 			}
-			local f172_local56 = Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "DemoControls" ), "buttonModel_" .. f172_local53 )
+			local f172_local56 = Engine.CreateModel( Engine.CreateModel( Engine.GetGlobalModel(), "DemoControls" ), "buttonModel_" .. f172_local53 )
 			table.insert( f172_arg1.buttons, {
 				model = f172_local56,
 				properties = f172_local55
 			} )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f172_local56, "btnId" ), f172_local54.btnId )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f172_local56, "icon" ), f172_local54.icon )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f172_local56, "text" ), f172_local54.text or "" )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f172_local56, "hintText" ), Engine[@"hash_4F9F1239CFD921FE"]( f172_local54.hintText ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f172_local56, "disabled" ), f172_local54.disabled or false )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f172_local56, "action" ), f172_local54.action )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f172_local56, "param" ), f172_local54.param )
+			Engine.SetModelValue( Engine.CreateModel( f172_local56, "btnId" ), f172_local54.btnId )
+			Engine.SetModelValue( Engine.CreateModel( f172_local56, "icon" ), f172_local54.icon )
+			Engine.SetModelValue( Engine.CreateModel( f172_local56, "text" ), f172_local54.text or "" )
+			Engine.SetModelValue( Engine.CreateModel( f172_local56, "hintText" ), Engine[@"hash_4F9F1239CFD921FE"]( f172_local54.hintText ) )
+			Engine.SetModelValue( Engine.CreateModel( f172_local56, "disabled" ), f172_local54.disabled or false )
+			Engine.SetModelValue( Engine.CreateModel( f172_local56, "action" ), f172_local54.action )
+			Engine.SetModelValue( Engine.CreateModel( f172_local56, "param" ), f172_local54.param )
 			if f172_local54.buttonPromptImageModel ~= nil then
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f172_local56, "buttonPromptImage" ), f172_local54.buttonPromptImageModel:get() )
+				Engine.SetModelValue( Engine.CreateModel( f172_local56, "buttonPromptImage" ), f172_local54.buttonPromptImageModel:get() )
 			else
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f172_local56, "buttonPromptImage" ), "$white" )
+				Engine.SetModelValue( Engine.CreateModel( f172_local56, "buttonPromptImage" ), "$white" )
 			end
 			if f172_local54.buttonPromptStateModel ~= nil then
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f172_local56, "buttonPromptState" ), f172_local54.buttonPromptImageModel )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f172_local56, "showProgressRing" ), true )
+				Engine.SetModelValue( Engine.CreateModel( f172_local56, "buttonPromptState" ), f172_local54.buttonPromptImageModel )
+				Engine.SetModelValue( Engine.CreateModel( f172_local56, "showProgressRing" ), true )
 			else
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f172_local56, "showProgressRing" ), false )
+				Engine.SetModelValue( Engine.CreateModel( f172_local56, "showProgressRing" ), false )
 			end
 			if f172_local54.showTimescale ~= nil then
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f172_local56, "showTimescale" ), f172_local54.showTimescale )
+				Engine.SetModelValue( Engine.CreateModel( f172_local56, "showTimescale" ), f172_local54.showTimescale )
 			end
 		end
 		f172_local50 = function ()
@@ -3169,7 +3168,7 @@ DataSources.DemoControlsButtons = {
 				f172_local53 = "subscribeToModel"
 				f172_local52 = f172_arg1
 				f172_local51 = f172_arg1[f172_local53]
-				f172_local53 = Engine[@"getmodelforcontroller"]( f172_arg0 )
+				f172_local53 = Engine.GetModelForController( f172_arg0 )
 				f172_local51( f172_local52, f172_local53.LastInput, f172_local50, false )
 			end
 			f172_arg1.subscribedToModels = true
@@ -3216,29 +3215,29 @@ DataSources.DemoChooseModeButtonList = ListHelper_SetupDataSource( "DemoChooseMo
 		local f187_local0 = f187_arg1.btnId
 		local f187_local1 = CoD.DemoUtility.GetDemoContextMode()
 		local f187_local2 = CoD.DemoUtility.CloseChooseModeSidebar( f187_arg4, f187_arg2 )
-		if f187_local1 == Enum[@"democontextmode"][@"demo_context_mode_basic"] then
-			CoD.perController[f187_arg2].prevDemoCameraMode = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "demo.cameraMode" ) )
+		if f187_local1 == Enum.demoContextMode[@"demo_context_mode_basic"] then
+			CoD.perController[f187_arg2].prevDemoCameraMode = Engine.GetModelValue( Engine.GetModel( Engine.GetGlobalModel(), "demo.cameraMode" ) )
 		end
 		if f187_local0 == "basic" then
 			if CoD.perController[f187_arg2].prevDemoCameraMode then
 				Engine[@"switchdemocameramode"]( CoD.perController[f187_arg2].prevDemoCameraMode )
 			else
-				Engine[@"switchdemocameramode"]( Enum[@"democameramode"][@"demo_camera_mode_none"] )
+				Engine[@"switchdemocameramode"]( Enum.demoCameraMode[@"demo_camera_mode_none"] )
 			end
-			Engine[@"switchdemofreecameramode"]( Enum[@"demofreecameramode"][@"demo_freecam_mode_freeroam"] )
-			CoD.DemoUtility.SetDemoContextMode( Enum[@"democontextmode"][@"demo_context_mode_basic"] )
+			Engine[@"switchdemofreecameramode"]( Enum.demoFreeCameraMode[@"demo_freecam_mode_freeroam"] )
+			CoD.DemoUtility.SetDemoContextMode( Enum.demoContextMode[@"demo_context_mode_basic"] )
 		elseif f187_local0 == "director" then
-			Engine[@"switchdemocameramode"]( Enum[@"democameramode"][@"demo_camera_mode_freecam"] )
-			Engine[@"switchdemofreecameramode"]( Enum[@"demofreecameramode"][@"demo_freecam_mode_edit"] )
-			CoD.DemoUtility.SetDemoContextMode( Enum[@"democontextmode"][@"demo_context_mode_director"] )
+			Engine[@"switchdemocameramode"]( Enum.demoCameraMode[@"demo_camera_mode_freecam"] )
+			Engine[@"switchdemofreecameramode"]( Enum.demoFreeCameraMode[@"demo_freecam_mode_edit"] )
+			CoD.DemoUtility.SetDemoContextMode( Enum.demoContextMode[@"demo_context_mode_director"] )
 		elseif f187_local0 == "objectlink" then
-			Engine[@"switchdemocameramode"]( Enum[@"democameramode"][@"demo_camera_mode_freecam"] )
-			Engine[@"switchdemofreecameramode"]( Enum[@"demofreecameramode"][@"demo_freecam_mode_lock_on"] )
-			CoD.DemoUtility.SetDemoContextMode( Enum[@"democontextmode"][@"demo_context_mode_object_link"] )
+			Engine[@"switchdemocameramode"]( Enum.demoCameraMode[@"demo_camera_mode_freecam"] )
+			Engine[@"switchdemofreecameramode"]( Enum.demoFreeCameraMode[@"demo_freecam_mode_lock_on"] )
+			CoD.DemoUtility.SetDemoContextMode( Enum.demoContextMode[@"demo_context_mode_object_link"] )
 		elseif f187_local0 == "lighter" then
-			Engine[@"switchdemocameramode"]( Enum[@"democameramode"][@"demo_camera_mode_freecam"] )
-			Engine[@"switchdemofreecameramode"]( Enum[@"demofreecameramode"][@"demo_freecam_mode_lightman"] )
-			CoD.DemoUtility.SetDemoContextMode( Enum[@"democontextmode"][@"demo_context_mode_lighter"] )
+			Engine[@"switchdemocameramode"]( Enum.demoCameraMode[@"demo_camera_mode_freecam"] )
+			Engine[@"switchdemofreecameramode"]( Enum.demoFreeCameraMode[@"demo_freecam_mode_lightman"] )
+			CoD.DemoUtility.SetDemoContextMode( Enum.demoContextMode[@"demo_context_mode_lighter"] )
 		elseif f187_local0 == "timeline" then
 			CoD.DemoUtility.OpenManageSegments( f187_local2, {
 				controller = f187_arg2
@@ -3251,26 +3250,26 @@ DataSources.DemoChooseModeButtonList = ListHelper_SetupDataSource( "DemoChooseMo
 		table.insert( f186_local2, {
 			btnId = "basic",
 			displayText = @"hash_2130485C18F0F01",
-			hintText = @"hash_116B02B95FDC1B57",
+			hintText = "demo/mode_basic_hint",
 			icon = "theater_play"
 		} )
 		if not CoD.DemoUtility.IsCameraCyclingDisabled() then
 			table.insert( f186_local2, {
 				btnId = "director",
 				displayText = @"hash_A92002FAFF0222D",
-				hintText = @"hash_488DDE38B76BFC03",
+				hintText = "demo/mode_director_hint",
 				icon = "theater_video"
 			} )
 			table.insert( f186_local2, {
 				btnId = "objectlink",
-				displayText = @"hash_689B6C9C8BA8A257",
-				hintText = @"hash_6CCC4DB2EEF9E901",
+				displayText = "demo/mode_object_link",
+				hintText = "demo/mode_object_link_hint",
 				icon = "theater_link"
 			} )
 			table.insert( f186_local2, {
 				btnId = "lighter",
 				displayText = @"hash_13815E64F7B24A08",
-				hintText = @"hash_3408496BB3E531C8",
+				hintText = "demo/mode_lighter_hint",
 				icon = "theater_bulb"
 			} )
 		end
@@ -3278,8 +3277,8 @@ DataSources.DemoChooseModeButtonList = ListHelper_SetupDataSource( "DemoChooseMo
 	if not IsDemoRestrictedBasicMode() then
 		table.insert( f186_local2, {
 			btnId = "timeline",
-			displayText = @"hash_2220393E7394569A",
-			hintText = @"hash_DCD7140AF745D6E",
+			displayText = "demo/mode_timeline_editor",
+			hintText = "demo/mode_timeline_editor_hint",
 			icon = "theater_timeline"
 		} )
 	end
@@ -3307,10 +3306,10 @@ DataSources.DemoFilmOptionsButtonList = ListHelper_SetupDataSource( "DemoFilmOpt
 		local f189_local0 = f189_arg1.btnId
 		local f189_local1, f189_local2 = nil
 		if f188_local2 then
-			f189_local2 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f188_local2, "segmentNumber" ) ) - 1
+			f189_local2 = Engine.GetModelValue( Engine.GetModel( f188_local2, "segmentNumber" ) ) - 1
 		end
 		if f189_local0 == "preview" then
-			Engine[@"exec"]( f189_arg2, "demo_previewsegment " .. f189_local2 )
+			Engine.exec( f189_arg2, "demo_previewsegment " .. f189_local2 )
 			GoBack( f189_arg0.occludedMenu, f189_arg2 )
 		elseif f189_local0 == "delete" then
 			CoD.OverlayUtility.CreateOverlay( f189_arg2, f189_arg0, "DemoDeleteSegment" )
@@ -3325,23 +3324,23 @@ DataSources.DemoFilmOptionsButtonList = ListHelper_SetupDataSource( "DemoFilmOpt
 		end
 	end
 	
-	if f188_local2 ~= nil and Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f188_local2, "disabled" ) ) == false then
+	if f188_local2 ~= nil and Engine.GetModelValue( Engine.GetModel( f188_local2, "disabled" ) ) == false then
 		table.insert( f188_local1, {
 			btnId = "preview",
 			displayText = @"hash_65FFB101883954E3",
-			hintText = @"hash_5594890CBCE4C18D",
+			hintText = "demo/view_shot_hint",
 			icon = "theater_view"
 		} )
 		table.insert( f188_local1, {
 			btnId = "delete",
 			displayText = 0x29CBBF38B0CE85,
-			hintText = @"hash_17BC395E2D24568B",
+			hintText = "demo/delete_shot_hint",
 			icon = "theater_delete"
 		} )
 		table.insert( f188_local1, {
 			btnId = "rename",
-			displayText = @"hash_738707720D700672",
-			hintText = @"hash_35B377C6451C1C36",
+			displayText = "demo/rename_shot",
+			hintText = "demo/rename_shot_hint",
 			icon = "theater_rename",
 			spacerHeight = 16
 		} )
@@ -3349,21 +3348,21 @@ DataSources.DemoFilmOptionsButtonList = ListHelper_SetupDataSource( "DemoFilmOpt
 	table.insert( f188_local1, {
 		btnId = "saveclip",
 		displayText = @"hash_71A66DD5B77CEF0D",
-		hintText = @"hash_2FE7D3B3C0ABF0A3",
+		hintText = "demo/save_clip_hint",
 		icon = "theater_save"
 	} )
 	if Engine[@"getdemosegmentcount"]() > 1 then
 		table.insert( f188_local1, {
 			btnId = "mergeall",
 			displayText = @"hash_6E8110C70E0A4C2B",
-			hintText = @"hash_62F29234440BB185",
+			hintText = "demo/merge_all_shots_hint",
 			icon = "theater_merge"
 		} )
 	end
 	table.insert( f188_local1, {
 		btnId = "deleteall",
 		displayText = @"hash_2A442ED9FD41A966",
-		hintText = @"hash_38161A1B264BD53A",
+		hintText = "demo/delete_all_shots_hint",
 		icon = "theater_delete_all"
 	} )
 	for f188_local7, f188_local8 in ipairs( f188_local1 ) do
@@ -3393,7 +3392,7 @@ DataSources.DemoSegments = {
 	prepare = function ( f191_arg0, f191_arg1, f191_arg2 )
 		f191_arg1.segments = {}
 		local f191_local0 = 20
-		local f191_local1 = Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "DemoSegments.refresh" )
+		local f191_local1 = Engine.GetModel( Engine.GetGlobalModel(), "DemoSegments.refresh" )
 		for f191_local2 = 1, f191_local0, 1 do
 			table.insert( f191_arg1.segments, {
 				model = CoD.DemoUtility.SetupDemoSegmentModel( f191_local2 - 1 )
@@ -3412,78 +3411,78 @@ DataSources.DemoSegments = {
 }
 DataSources.DemoHighlightReelSettingsButtonList = ListHelper_SetupDataSource( "DemoHighlightReelSettingsButtonList", function ( f195_arg0 )
 	local f195_local0 = {}
-	local f195_local1 = Engine[@"currentsessionmode"]() == Enum[@"emodes"][@"mode_zombies"]
+	local f195_local1 = Engine.CurrentSessionMode() == Enum.eModes.mode_zombies
 	local f195_local2 = function ( f196_arg0, f196_arg1, f196_arg2, f196_arg3 )
 		CoD.DemoUtility.RebuildHighlightReelTimeline( f196_arg1 )
 	end
 	
 	local f195_local3 = {}
 	table.insert( f195_local3, {
-		name = @"hash_7119205E2C0A080A",
-		value = Enum[@"demohighlightreelplayerfilter"][@"demo_highlight_reel_player_filter_only_me"]
+		name = "menu/demo_highlight_reel_player_settings_only_me",
+		value = Enum.demoHighlightReelPlayerFilter[@"demo_highlight_reel_player_filter_only_me"]
 	} )
 	table.insert( f195_local3, {
-		name = @"hash_759876AF69411576",
-		value = Enum[@"demohighlightreelplayerfilter"][@"demo_highlight_reel_player_filter_friends"]
+		name = "menu/demo_highlight_reel_player_settings_friends",
+		value = Enum.demoHighlightReelPlayerFilter[@"demo_highlight_reel_player_filter_friends"]
 	} )
 	table.insert( f195_local3, {
-		name = @"hash_17C0C34E60B91DFB",
-		value = Enum[@"demohighlightreelplayerfilter"][@"demo_highlight_reel_player_filter_me_and_friends"]
+		name = "menu/demo_highlight_reel_player_settings_self_and_friends",
+		value = Enum.demoHighlightReelPlayerFilter[@"demo_highlight_reel_player_filter_me_and_friends"]
 	} )
 	table.insert( f195_local3, {
-		name = @"hash_6B9859B2937B216E",
-		value = Enum[@"demohighlightreelplayerfilter"][@"demo_highlight_reel_player_filter_only_friendly_team"]
+		name = "menu/demo_highlight_reel_player_settings_friendly_team",
+		value = Enum.demoHighlightReelPlayerFilter[@"demo_highlight_reel_player_filter_only_friendly_team"]
 	} )
 	table.insert( f195_local3, {
-		name = @"hash_6CC98269FD3ECAC1",
-		value = Enum[@"demohighlightreelplayerfilter"][@"demo_highlight_reel_player_filter_only_enemy_team"]
+		name = "menu/demo_highlight_reel_player_settings_enemy_team",
+		value = Enum.demoHighlightReelPlayerFilter[@"demo_highlight_reel_player_filter_only_enemy_team"]
 	} )
 	table.insert( f195_local3, {
-		name = @"hash_52FA566B15738C2C",
-		value = Enum[@"demohighlightreelplayerfilter"][@"demo_highlight_reel_player_filter_everyone"]
+		name = "menu/demo_highlight_reel_player_settings_everyone",
+		value = Enum.demoHighlightReelPlayerFilter[@"demo_highlight_reel_player_filter_everyone"]
 	} )
 	local f195_local4 = {}
 	table.insert( f195_local4, {
-		name = @"hash_1585D6B8777361CF",
-		value = Enum[@"demohighlightreelstylesfilter"][@"demo_highlight_reel_styles_filter_best_moments"]
+		name = "menu/demo_highlight_reel_style_settings_best_moments",
+		value = Enum.demoHighlightReelStylesFilter[@"demo_highlight_reel_styles_filter_best_moments"]
 	} )
 	if f195_local1 then
 		table.insert( f195_local4, {
-			name = @"hash_1A55380E6DB02240",
-			value = Enum[@"demohighlightreelstylesfilter"][@"demo_highlight_reel_styles_filter_zm_rampager"]
+			name = "menu/demo_highlight_reel_style_settings_zm_rampager",
+			value = Enum.demoHighlightReelStylesFilter[@"demo_highlight_reel_styles_filter_zm_rampager"]
 		} )
 		table.insert( f195_local4, {
-			name = @"hash_27A4A378AFF8A0AD",
-			value = Enum[@"demohighlightreelstylesfilter"][@"demo_highlight_reel_styles_filter_zm_savior_and_sinner"]
+			name = "menu/demo_highlight_reel_style_settings_zm_savior_and_sinner",
+			value = Enum.demoHighlightReelStylesFilter[@"demo_highlight_reel_styles_filter_zm_savior_and_sinner"]
 		} )
 		table.insert( f195_local4, {
-			name = @"hash_71E8BD1FC273F5AE",
-			value = Enum[@"demohighlightreelstylesfilter"][@"demo_highlight_reel_styles_filter_zm_team_player"]
+			name = "menu/demo_highlight_reel_style_settings_zm_team_player",
+			value = Enum.demoHighlightReelStylesFilter[@"demo_highlight_reel_styles_filter_zm_team_player"]
 		} )
 		table.insert( f195_local4, {
-			name = @"hash_2BED05907094C433",
-			value = Enum[@"demohighlightreelstylesfilter"][@"demo_highlight_reel_styles_filter_zm_big_spender"]
+			name = "menu/demo_highlight_reel_style_settings_zm_big_spender",
+			value = Enum.demoHighlightReelStylesFilter[@"demo_highlight_reel_styles_filter_zm_big_spender"]
 		} )
 		table.insert( f195_local4, {
-			name = @"hash_31A242272D58A3AB",
-			value = Enum[@"demohighlightreelstylesfilter"][@"demo_highlight_reel_styles_filter_zm_handyman"]
+			name = "menu/demo_highlight_reel_style_settings_zm_handyman",
+			value = Enum.demoHighlightReelStylesFilter[@"demo_highlight_reel_styles_filter_zm_handyman"]
 		} )
 	else
 		table.insert( f195_local4, {
-			name = @"hash_2240607484142C6E",
-			value = Enum[@"demohighlightreelstylesfilter"][@"demo_highlight_reel_styles_filter_explosive_and_projectile_kills"]
+			name = "menu/demo_highlight_reel_style_settings_explosive_and_projectile",
+			value = Enum.demoHighlightReelStylesFilter[@"demo_highlight_reel_styles_filter_explosive_and_projectile_kills"]
 		} )
 		table.insert( f195_local4, {
-			name = @"hash_4676CDC2A4001E5D",
-			value = Enum[@"demohighlightreelstylesfilter"][@"demo_highlight_reel_styles_filter_vehicle_kills"]
+			name = "menu/demo_highlight_reel_style_settings_vehicle",
+			value = Enum.demoHighlightReelStylesFilter[@"demo_highlight_reel_styles_filter_vehicle_kills"]
 		} )
 		table.insert( f195_local4, {
-			name = @"hash_7EDC1F6E5FFF52C8",
-			value = Enum[@"demohighlightreelstylesfilter"][@"demo_highlight_reel_styles_filter_gun_kills_only"]
+			name = "menu/demo_highlight_reel_style_settings_gun_kills_only",
+			value = Enum.demoHighlightReelStylesFilter[@"demo_highlight_reel_styles_filter_gun_kills_only"]
 		} )
 		table.insert( f195_local4, {
-			name = @"hash_6E66F8F3FDE2DA5A",
-			value = Enum[@"demohighlightreelstylesfilter"][@"demo_highlight_reel_styles_filter_gun_kills_and_events"]
+			name = "menu/demo_highlight_reel_style_settings_gun_kill_and_events",
+			value = Enum.demoHighlightReelStylesFilter[@"demo_highlight_reel_styles_filter_gun_kills_and_events"]
 		} )
 	end
 	local f195_local5 = {}
@@ -3501,71 +3500,71 @@ DataSources.DemoHighlightReelSettingsButtonList = ListHelper_SetupDataSource( "D
 	} )
 	local f195_local6 = {}
 	table.insert( f195_local6, {
-		name = @"hash_3E8EA9A816217BFD",
+		name = "menu/demo_highlight_reel_stars_one",
 		value = 1
 	} )
 	table.insert( f195_local6, {
-		name = @"hash_25F9F2A898833997",
+		name = "menu/demo_highlight_reel_stars_two",
 		value = 2
 	} )
 	table.insert( f195_local6, {
-		name = @"hash_367982D823EC480D",
+		name = "menu/demo_highlight_reel_stars_three",
 		value = 3
 	} )
 	table.insert( f195_local6, {
-		name = @"hash_4DFF8E5C94ADC0B",
+		name = "menu/demo_highlight_reel_stars_four",
 		value = 4
 	} )
 	table.insert( f195_local6, {
-		name = @"hash_72A9A7E5BEB9FECF",
+		name = "menu/demo_highlight_reel_stars_five",
 		value = 5
 	} )
 	local f195_local7 = {}
 	table.insert( f195_local7, {
-		name = @"hash_1779F68ADAFA62B9",
-		value = Enum[@"demohighlightreeltransitionfilter"][@"demo_highlight_reel_transition_filter_none"]
+		name = "menu/demo_transition_cut",
+		value = Enum.demoHighlightReelTransitionFilter[@"demo_highlight_reel_transition_filter_none"]
 	} )
 	table.insert( f195_local7, {
-		name = @"hash_52EA061BF5AD8DD5",
-		value = Enum[@"demohighlightreeltransitionfilter"][@"demo_highlight_reel_transition_filter_fade"]
+		name = "menu/demo_transition_fade",
+		value = Enum.demoHighlightReelTransitionFilter[@"demo_highlight_reel_transition_filter_fade"]
 	} )
 	table.insert( f195_local7, {
-		name = @"menu/random",
-		value = Enum[@"demohighlightreeltransitionfilter"][@"demo_highlight_reel_transition_filter_random"]
+		name = "menu/random",
+		value = Enum.demoHighlightReelTransitionFilter[@"demo_highlight_reel_transition_filter_random"]
 	} )
 	local f195_local8 = {
 		{
 			name = "PlayerFilter",
-			displayText = @"hash_2A5A2F2B49E3A85C",
-			hintText = @"hash_4F30DD5DE314B7A4",
+			displayText = "menu/demo_highlight_reel_player_settings",
+			hintText = "menu/demo_highlight_reel_player_settings_desc",
 			dvarName = "demo_highlightReelPlayerFilter",
 			options = f195_local3
 		},
 		{
 			name = "StylesFilter",
-			displayText = @"hash_37188671D544C852",
-			hintText = @"hash_6F6BB65B3B9C5082",
+			displayText = "menu/demo_highlight_reel_style_settings",
+			hintText = "menu/demo_highlight_reel_style_settings_desc",
 			dvarName = "demo_highlightReelStylesFilter",
 			options = f195_local4
 		},
 		{
 			name = "NumberOfSegmentsFilter",
-			displayText = @"hash_57CDCF7F83A1A77B",
-			hintText = @"hash_4877D920E8BF786D",
+			displayText = "menu/demo_highlight_reel_number_of_segments",
+			hintText = "menu/demo_highlight_reel_number_of_segments_desc",
 			dvarName = "demo_highlightReelNumberOfSegments",
 			options = f195_local5
 		},
 		{
 			name = "StarsFilter",
-			displayText = @"hash_1609B36D23311B0A",
-			hintText = @"hash_457A95F7E07B00BA",
+			displayText = "menu/demo_highlight_reel_stars",
+			hintText = "menu/demo_highlight_reel_stars_desc",
 			dvarName = "demo_highlightReelMinimumStarsFilter",
 			options = f195_local6
 		},
 		{
 			name = "TransitionFilter",
-			displayText = 0x7BB8BE89004ECE,
-			hintText = 0xE153A73DD9987E,
+			displayText = "menu/demo_highlight_reel_transition_settings",
+			hintText = "menu/demo_highlight_reel_transition_settings_desc",
 			dvarName = "demo_highlightReelTransitionFilter",
 			options = f195_local7
 		}
@@ -3574,24 +3573,24 @@ DataSources.DemoHighlightReelSettingsButtonList = ListHelper_SetupDataSource( "D
 		local f195_local9 = {}
 		table.insert( f195_local9, {
 			name = @"menu/no",
-			value = Enum[@"demohighlightreelgameresultfilter"][@"demo_highlight_reel_game_result_filter_off"]
+			value = Enum.demoHighlightReelGameResultFilter[@"demo_highlight_reel_game_result_filter_off"]
 		} )
 		table.insert( f195_local9, {
-			name = @"hash_43111505861D2052",
-			value = Enum[@"demohighlightreelgameresultfilter"][@"demo_highlight_reel_game_result_filter_final_result"]
+			name = "menu/demo_highlight_reel_game_result_final",
+			value = Enum.demoHighlightReelGameResultFilter[@"demo_highlight_reel_game_result_filter_final_result"]
 		} )
 		table.insert( f195_local9, {
-			name = @"hash_466DFFF51A90A7D2",
-			value = Enum[@"demohighlightreelgameresultfilter"][@"demo_highlight_reel_game_result_filter_with_events"]
+			name = "menu/demo_highlight_reel_game_result_with_events",
+			value = Enum.demoHighlightReelGameResultFilter[@"demo_highlight_reel_game_result_filter_with_events"]
 		} )
 		table.insert( f195_local9, {
-			name = @"hash_190752610A96D2F5",
-			value = Enum[@"demohighlightreelgameresultfilter"][@"demo_highlight_reel_game_result_filter_all_results"]
+			name = "menu/demo_highlight_reel_game_result_all",
+			value = Enum.demoHighlightReelGameResultFilter[@"demo_highlight_reel_game_result_filter_all_results"]
 		} )
 		table.insert( f195_local8, {
 			name = "GameResultFilter",
-			displayText = @"hash_7C6314219984FA23",
-			hintText = @"hash_54F4F626F6530BF5",
+			displayText = "menu/demo_highlight_reel_game_result_settings",
+			hintText = "menu/demo_highlight_reel_game_result_settings_desc",
 			dvarName = "demo_highlightReelGameResultFilter",
 			options = f195_local9
 		} )
@@ -3684,15 +3683,15 @@ DataSourceHelpers.PerControllerDataSourceSetup( "Ball", "ballGametype", nil, fal
 DataSourceHelpers.PerControllerDataSourceSetup( "Escort", "escortGametype", nil, false )
 DataSources.NetStats = {
 	getModel = function ( f200_arg0 )
-		return Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "netstats" )
+		return Engine.CreateModel( Engine.GetGlobalModel(), "netstats" )
 	end
 }
 DataSources.Groups = {
 	getModel = function ( f201_arg0 )
 		if not f201_arg0 then
-			f201_arg0 = Engine[@"getprimarycontroller"]()
+			f201_arg0 = Engine.GetPrimaryController()
 		end
-		return Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f201_arg0 ), "groups" )
+		return Engine.CreateModel( Engine.GetModelForController( f201_arg0 ), "groups" )
 	end
 }
 DataSources.GroupsMainTabList = ListHelper_SetupDataSource( "GroupsMainTabModel", function ( f202_arg0 )
@@ -3716,7 +3715,7 @@ DataSources.GroupsMainTabList = ListHelper_SetupDataSource( "GroupsMainTabModel"
 	} )
 	table.insert( f202_local0, {
 		models = {
-			tabName = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_4442807A62F1FB7A" ),
+			tabName = Engine[@"hash_4F9F1239CFD921FE"]( "groups/find_groups_caps" ),
 			tabWidget = "CoD.FindGroupsTab"
 		},
 		properties = {
@@ -3773,24 +3772,24 @@ DataSources.GroupsEmblemTabList = ListHelper_SetupDataSource( "GroupsEmblemTabMo
 end, true )
 DataSources.GroupsInvitesList = {
 	prepare = function ( f204_arg0, f204_arg1, f204_arg2 )
-		local f204_local0 = Engine[@"getgroupinviteslist"]( f204_arg0 )
-		local f204_local1 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f204_arg0 ), "groups" )
-		local f204_local2 = Engine[@"createmodel"]( f204_local1, "eventUpdate" )
-		local f204_local3 = Engine[@"createmodel"]( f204_local1, "invites" )
+		local f204_local0 = Engine.GetGroupInvitesList( f204_arg0 )
+		local f204_local1 = Engine.CreateModel( Engine.GetModelForController( f204_arg0 ), "groups" )
+		local f204_local2 = Engine.CreateModel( f204_local1, "eventUpdate" )
+		local f204_local3 = Engine.CreateModel( f204_local1, "invites" )
 		f204_arg1.inviteModels = {}
 		if f204_arg1.refreshSubscription then
 			f204_arg1:removeSubscription( f204_arg1.refreshSubscription )
 		end
 		f204_arg1.refreshSubscription = f204_arg1:subscribeToModel( f204_local2, function ()
-			if Engine[@"getmodelvalue"]( Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f204_arg0 ), "groups.eventName" ) ) == "refreshInvites" then
+			if Engine.GetModelValue( Engine.GetModel( Engine.GetModelForController( f204_arg0 ), "groups.eventName" ) ) == "refreshInvites" then
 				f204_arg1:updateDataSource()
 			end
 		end, false )
 		for f204_local10, f204_local11 in ipairs( f204_local0 ) do
-			local f204_local12 = Engine[@"createmodel"]( f204_local3, "invite_" .. f204_local10 )
+			local f204_local12 = Engine.CreateModel( f204_local3, "invite_" .. f204_local10 )
 			table.insert( f204_arg1.inviteModels, f204_local12 )
 			for f204_local7, f204_local8 in pairs( f204_local11 ) do
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f204_local12, f204_local7 ), f204_local8 )
+				Engine.SetModelValue( Engine.CreateModel( f204_local12, f204_local7 ), f204_local8 )
 			end
 		end
 	end,
@@ -3803,24 +3802,24 @@ DataSources.GroupsInvitesList = {
 }
 DataSources.GroupsMemberDetailsButtons = ListHelper_SetupDataSource( "GroupsMemberDetailsButtons", function ( f208_arg0 )
 	local f208_local0 = {}
-	local f208_local1 = Engine[@"getmodelforcontroller"]( f208_arg0 )
-	local f208_local2 = Engine[@"getmodelvalue"]( Engine[@"createmodel"]( f208_local1, "Social.selectedFriendXUID" ) )
-	local f208_local3 = Engine[@"getmodelvalue"]( Engine[@"createmodel"]( f208_local1, "Social.selectedFriendGamertag" ) )
-	local f208_local4 = f208_local2 == Engine[@"getxuid64"]( f208_arg0 )
-	local f208_local5 = Engine[@"getmodelvalue"]( Engine[@"createmodel"]( f208_local1, "Social.selectedFriendInTitle" ) )
+	local f208_local1 = Engine.GetModelForController( f208_arg0 )
+	local f208_local2 = Engine.GetModelValue( Engine.CreateModel( f208_local1, "Social.selectedFriendXUID" ) )
+	local f208_local3 = Engine.GetModelValue( Engine.CreateModel( f208_local1, "Social.selectedFriendGamertag" ) )
+	local f208_local4 = f208_local2 == Engine.GetXUID64( f208_arg0 )
+	local f208_local5 = Engine.GetModelValue( Engine.CreateModel( f208_local1, "Social.selectedFriendInTitle" ) )
 	if f208_local2 == nil then
 		return f208_local0
 	end
 	local f208_local6 = false
-	local f208_local7 = Engine[@"getplayerinfo"]( f208_arg0, f208_local2 )
+	local f208_local7 = Engine.GetPlayerInfo( f208_arg0, f208_local2 )
 	if f208_local4 ~= false then
 		
 	else
 		
 	end
-	local f208_local8 = Engine[@"hash_686E64DD1C270046"]( Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_private"], f208_local2 )
-	local f208_local9 = Engine[@"hash_686E64DD1C270046"]( Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_game"], f208_local2 )
-	local f208_local10 = Engine[@"isplayermuted"]( f208_arg0, Enum[@"lobbytype"][@"lobby_type_private"], f208_local2 )
+	local f208_local8 = Engine[@"hash_686E64DD1C270046"]( Enum.LobbyModule[@"lobby_module_client"], Enum.LobbyType[@"lobby_type_private"], f208_local2 )
+	local f208_local9 = Engine[@"hash_686E64DD1C270046"]( Enum.LobbyModule[@"lobby_module_client"], Enum.LobbyType[@"lobby_type_game"], f208_local2 )
+	local f208_local10 = Engine[@"isplayermuted"]( f208_arg0, Enum.LobbyType[@"lobby_type_private"], f208_local2 )
 	table.insert( f208_local0, {
 		text = @"hash_43F235AEEBA38F96",
 		id = "combatRecord",
@@ -3844,9 +3843,9 @@ DataSources.GroupsMemberDetailsButtons = ListHelper_SetupDataSource( "GroupsMemb
 		},
 		lastInGroup = true
 	} )
-	if not Engine[@"isfriendfromxuid"]( f208_arg0, f208_local2 ) then
+	if not Engine.IsFriendFromXUID( f208_arg0, f208_local2 ) then
 		table.insert( f208_local0, {
-			text = @"hash_52D0220686D5B099",
+			text = "groups/send_friend_request_caps",
 			id = "sendFriendRequest",
 			disabled = false,
 			action = OpenPlatformProfile,
@@ -3869,7 +3868,7 @@ DataSources.GroupsMemberDetailsButtons = ListHelper_SetupDataSource( "GroupsMemb
 	if f208_local8 or f208_local9 then
 		if f208_local10 then
 			table.insert( f208_local0, {
-				text = @"hash_5C56E10272191AAC",
+				text = "groups/unmute_player_caps",
 				id = "unmutePlayer",
 				disabled = false,
 				action = UnMutePlayer,
@@ -3921,9 +3920,9 @@ end )
 DataSources.GroupsShowcaseButtons = ListHelper_SetupDataSource( "GroupsShowcaseButtons", function ( f211_arg0 )
 	local f211_local0 = {}
 	table.insert( f211_local0, {
-		text = @"hash_6984C3C46DADAA7B",
+		text = "groups/favorites",
 		displayImage = "t7_mp_icon_group_action_favorite",
-		hintText = @"hash_52EF935E2DD3C9BA",
+		hintText = "menu/groups_showcase_favorite_desc",
 		id = "favorites",
 		tabWidget = "CoD.FileshareCategoryContentList",
 		disabled = false,
@@ -3934,9 +3933,9 @@ DataSources.GroupsShowcaseButtons = ListHelper_SetupDataSource( "GroupsShowcaseB
 		lastInGroup = false
 	} )
 	table.insert( f211_local0, {
-		text = 0x3C3BC29534539D,
+		text = "groups/recent",
 		displayImage = "uie_t7_icon_menu_simple_media_recent",
-		hintText = @"hash_36CFFBB0564F9E87",
+		hintText = "menu/groups_showcase_recent_desc",
 		id = "recent",
 		tabWidget = "CoD.FileshareCategoryContentList",
 		disabled = false,
@@ -3947,9 +3946,9 @@ DataSources.GroupsShowcaseButtons = ListHelper_SetupDataSource( "GroupsShowcaseB
 		lastInGroup = true
 	} )
 	table.insert( f211_local0, {
-		text = @"hash_24C36E7D6C85B39F",
+		text = "groups/paint_jobs",
 		displayImage = "uie_t7_mp_icon_header_paintshop",
-		hintText = @"hash_155080F3675C136A",
+		hintText = "menu/groups_showcase_paintjobs_desc",
 		id = "paintjob",
 		tabWidget = "CoD.FileshareCategoryContentList",
 		disabled = false,
@@ -3960,9 +3959,9 @@ DataSources.GroupsShowcaseButtons = ListHelper_SetupDataSource( "GroupsShowcaseB
 		lastInGroup = false
 	} )
 	table.insert( f211_local0, {
-		text = @"hash_319BBA66C65BA511",
+		text = "groups/emblems",
 		displayImage = "uie_t7_mp_icon_header_emblem",
-		hintText = @"hash_6FFBC446FFA6FD8B",
+		hintText = "menu/groups_showcase_emblems_desc",
 		id = "emblem",
 		tabWidget = "CoD.FileshareCategoryContentList",
 		disabled = false,
@@ -3973,9 +3972,9 @@ DataSources.GroupsShowcaseButtons = ListHelper_SetupDataSource( "GroupsShowcaseB
 		lastInGroup = false
 	} )
 	table.insert( f211_local0, {
-		text = @"hash_47C109083D5EFF73",
+		text = "groups/screenshots",
 		displayImage = "uie_t7_mp_icon_header_screenshot",
-		hintText = @"hash_6A91D22F65B9D745",
+		hintText = "menu/groups_showcase_screenshots_desc",
 		id = "screenshot",
 		tabWidget = "CoD.FileshareScreenshotsContentList",
 		disabled = false,
@@ -3986,9 +3985,9 @@ DataSources.GroupsShowcaseButtons = ListHelper_SetupDataSource( "GroupsShowcaseB
 		lastInGroup = false
 	} )
 	table.insert( f211_local0, {
-		text = @"hash_21276C54A7FBE679",
+		text = "groups/clips",
 		displayImage = "t7_icon_menu_simple_clips",
-		hintText = @"hash_4437321E6A4E7033",
+		hintText = "menu/groups_showcase_clips_desc",
 		id = "clip",
 		tabWidget = "CoD.FileshareCategoryContentList",
 		disabled = false,
@@ -3999,9 +3998,9 @@ DataSources.GroupsShowcaseButtons = ListHelper_SetupDataSource( "GroupsShowcaseB
 		lastInGroup = false
 	} )
 	table.insert( f211_local0, {
-		text = @"hash_51BE757701ED026D",
+		text = "groups/custom_games",
 		displayImage = "uie_t7_mp_icon_header_customgames",
-		hintText = @"hash_83220FC71548C1C",
+		hintText = "menu/groups_showcase_customgames_desc",
 		id = "customgame",
 		tabWidget = "CoD.FileshareCategoryContentList",
 		disabled = false,
@@ -4044,7 +4043,7 @@ DataSources.GroupsInviteButtonList = {
 	prepare = function ( f214_arg0, f214_arg1, f214_arg2 )
 		f214_arg1.buttons = {}
 		local f214_local0 = {}
-		f214_arg1.groups = Engine[@"getgrouplist"]( f214_arg0, Enum[@"groupbuffertype"][@"group_buffer_type_self"], Engine[@"getmodelvalue"]( Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f214_arg0 ), "Social.selectedFriendXUID" ) ) )
+		f214_arg1.groups = Engine.GetGroupList( f214_arg0, Enum.GroupBufferType[@"group_buffer_type_self"], Engine.GetModelValue( Engine.GetModel( Engine.GetModelForController( f214_arg0 ), "Social.selectedFriendXUID" ) ) )
 		for f214_local1 = 1, #f214_arg1.groups, 1 do
 			local f214_local4 = f214_arg1.groups[f214_local1]
 			table.insert( f214_local0, {
@@ -4074,48 +4073,48 @@ DataSources.GroupsInviteButtonList = {
 				lbInitialized = f214_local4.lbInitialized
 			} )
 		end
-		local f214_local3 = Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f214_arg0 ), "groups" ), "mainButtons" )
+		local f214_local3 = Engine.CreateModel( Engine.CreateModel( Engine.GetModelForController( f214_arg0 ), "groups" ), "mainButtons" )
 		for f214_local8, f214_local9 in ipairs( f214_local0 ) do
-			local f214_local10 = Engine[@"createmodel"]( f214_local3, "buttonModel_" .. f214_local8 )
+			local f214_local10 = Engine.CreateModel( f214_local3, "buttonModel_" .. f214_local8 )
 			table.insert( f214_arg1.buttons, {
 				model = f214_local10,
 				type = f214_local9.btnType,
 				groupId = f214_local9.groupId,
 				groupBufferType = f214_local9.groupBufferType
 			} )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "displayText" ), Engine[@"localize"]( f214_local9.displayText ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "action" ), f214_local9.action )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "type" ), f214_local9.btnType )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "groupId" ), f214_local9.groupId )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "groupBufferType" ), f214_local9.groupBufferType )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "name" ), f214_local9.name )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "clanTag" ), f214_local9.clanTag )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "description" ), f214_local9.description )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "message" ), f214_local9.message )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "privacy" ), f214_local9.privacy )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "creationTimestamp" ), f214_local9.creationTimestamp )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "owner" ), f214_local9.owner )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "ownerXuid" ), f214_local9.ownerXuid )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "memberStatus" ), f214_local9.memberStatus )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "memberStatusText" ), f214_local9.memberStatusText )
-			local f214_local11 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f214_arg0 ), "Social.selectedFriendXUID" )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "displayText" ), Engine.Localize( f214_local9.displayText ) )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "action" ), f214_local9.action )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "type" ), f214_local9.btnType )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "groupId" ), f214_local9.groupId )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "groupBufferType" ), f214_local9.groupBufferType )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "name" ), f214_local9.name )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "clanTag" ), f214_local9.clanTag )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "description" ), f214_local9.description )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "message" ), f214_local9.message )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "privacy" ), f214_local9.privacy )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "creationTimestamp" ), f214_local9.creationTimestamp )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "owner" ), f214_local9.owner )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "ownerXuid" ), f214_local9.ownerXuid )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "memberStatus" ), f214_local9.memberStatus )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "memberStatusText" ), f214_local9.memberStatusText )
+			local f214_local11 = Engine.GetModel( Engine.GetModelForController( f214_arg0 ), "Social.selectedFriendXUID" )
 			local f214_local7 = false
 			if f214_local11 then
-				f214_local7 = Engine[@"hasgroupinvitebeensent"]( f214_arg0, f214_local9.groupId, Engine[@"getmodelvalue"]( f214_local11 ) )
+				f214_local7 = Engine.HasGroupInviteBeenSent( f214_arg0, f214_local9.groupId, Engine.GetModelValue( f214_local11 ) )
 			end
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "inviteSent" ), f214_local7 )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "inviteSent" ), f214_local7 )
 			f214_local9.inviteSent = f214_local7
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "memberCount" ), f214_local9.memberCount )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "onlineCount" ), f214_local9.onlineCount )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "inTitleCount" ), f214_local9.inTitleCount )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "lbIndex" ), f214_local9.lbIndex )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "lbSortColumn" ), f214_local9.lbSortColumn )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "lbTimeFrame" ), f214_local9.lbTimeFrame )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "lbHardcore" ), f214_local9.lbHardcore )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f214_local10, "lbInitialized" ), f214_local9.lbInitialized )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "memberCount" ), f214_local9.memberCount )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "onlineCount" ), f214_local9.onlineCount )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "inTitleCount" ), f214_local9.inTitleCount )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "lbIndex" ), f214_local9.lbIndex )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "lbSortColumn" ), f214_local9.lbSortColumn )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "lbTimeFrame" ), f214_local9.lbTimeFrame )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "lbHardcore" ), f214_local9.lbHardcore )
+			Engine.SetModelValue( Engine.CreateModel( f214_local10, "lbInitialized" ), f214_local9.lbInitialized )
 		end
-		f214_arg1:subscribeToModel( Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f214_arg0 ), "groups.eventUpdate" ), function ()
-			if Engine[@"getmodelvalue"]( Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f214_arg0 ), "groups.eventName" ) ) == "refreshOutgoingInvites" then
+		f214_arg1:subscribeToModel( Engine.GetModel( Engine.GetModelForController( f214_arg0 ), "groups.eventUpdate" ), function ()
+			if Engine.GetModelValue( Engine.GetModel( Engine.GetModelForController( f214_arg0 ), "groups.eventName" ) ) == "refreshOutgoingInvites" then
 				f214_arg1:updateDataSource()
 			end
 		end, false )
@@ -4134,7 +4133,7 @@ DataSources.GroupsMainButtonList = {
 	prepare = function ( f219_arg0, f219_arg1, f219_arg2 )
 		f219_arg1.buttons = {}
 		local f219_local0 = {}
-		f219_arg1.groups = Engine[@"getgrouplist"]( f219_arg0, Enum[@"groupbuffertype"][@"group_buffer_type_self"] )
+		f219_arg1.groups = Engine.GetGroupList( f219_arg0, Enum.GroupBufferType[@"group_buffer_type_self"] )
 		for f219_local1 = 1, #f219_arg1.groups, 1 do
 			local f219_local4 = f219_arg1.groups[f219_local1]
 			table.insert( f219_local0, {
@@ -4163,45 +4162,45 @@ DataSources.GroupsMainButtonList = {
 				lbInitialized = f219_local4.lbInitialized
 			} )
 		end
-		local f219_local2 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f219_arg0 ), "groups" )
-		f219_arg1.groupCountModel = Engine[@"createmodel"]( f219_local2, "groupCount_self" )
-		local f219_local3 = Engine[@"createmodel"]( f219_local2, "mainButtons" )
+		local f219_local2 = Engine.CreateModel( Engine.GetModelForController( f219_arg0 ), "groups" )
+		f219_arg1.groupCountModel = Engine.CreateModel( f219_local2, "groupCount_self" )
+		local f219_local3 = Engine.CreateModel( f219_local2, "mainButtons" )
 		for f219_local8, f219_local9 in ipairs( f219_local0 ) do
-			local f219_local10 = Engine[@"createmodel"]( f219_local3, "buttonModel_" .. f219_local8 )
+			local f219_local10 = Engine.CreateModel( f219_local3, "buttonModel_" .. f219_local8 )
 			table.insert( f219_arg1.buttons, {
 				model = f219_local10,
 				type = f219_local9.btnType,
 				groupId = f219_local9.groupId,
 				groupBufferType = f219_local9.groupBufferType
 			} )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "displayText" ), Engine[@"localize"]( f219_local9.displayText ) )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "displayText" ), Engine.Localize( f219_local9.displayText ) )
 			local f219_local7 = OpenGroupHeadquarters
-			if Engine[@"getmodelvalue"]( Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f219_arg0 ), "groups.frameType" ) ) == "main" then
+			if Engine.GetModelValue( Engine.CreateModel( Engine.GetModelForController( f219_arg0 ), "groups.frameType" ) ) == "main" then
 				f219_local7 = SetGroupSocialMenuFrameToMembers
 			end
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "action" ), f219_local7 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "type" ), f219_local9.btnType )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "groupId" ), f219_local9.groupId )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "groupBufferType" ), f219_local9.groupBufferType )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "name" ), f219_local9.name )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "clanTag" ), f219_local9.clanTag )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "description" ), f219_local9.description )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "message" ), f219_local9.message )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "privacy" ), f219_local9.privacy )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "creationTimestamp" ), f219_local9.creationTimestamp )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "owner" ), f219_local9.owner )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "ownerXuid" ), f219_local9.ownerXuid )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "memberStatus" ), f219_local9.memberStatus )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "memberStatusText" ), f219_local9.memberStatusText )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "joinApprovalType" ), f219_local9.joinApprovalType )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "memberCount" ), f219_local9.memberCount )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "onlineCount" ), f219_local9.onlineCount )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "inTitleCount" ), f219_local9.inTitleCount )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "lbIndex" ), f219_local9.lbIndex )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "lbSortColumn" ), f219_local9.lbSortColumn )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "lbTimeFrame" ), f219_local9.lbTimeFrame )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "lbHardcore" ), f219_local9.lbHardcore )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f219_local10, "lbInitialized" ), f219_local9.lbInitialized )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "action" ), f219_local7 )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "type" ), f219_local9.btnType )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "groupId" ), f219_local9.groupId )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "groupBufferType" ), f219_local9.groupBufferType )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "name" ), f219_local9.name )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "clanTag" ), f219_local9.clanTag )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "description" ), f219_local9.description )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "message" ), f219_local9.message )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "privacy" ), f219_local9.privacy )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "creationTimestamp" ), f219_local9.creationTimestamp )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "owner" ), f219_local9.owner )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "ownerXuid" ), f219_local9.ownerXuid )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "memberStatus" ), f219_local9.memberStatus )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "memberStatusText" ), f219_local9.memberStatusText )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "joinApprovalType" ), f219_local9.joinApprovalType )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "memberCount" ), f219_local9.memberCount )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "onlineCount" ), f219_local9.onlineCount )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "inTitleCount" ), f219_local9.inTitleCount )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "lbIndex" ), f219_local9.lbIndex )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "lbSortColumn" ), f219_local9.lbSortColumn )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "lbTimeFrame" ), f219_local9.lbTimeFrame )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "lbHardcore" ), f219_local9.lbHardcore )
+			Engine.SetModelValue( Engine.CreateModel( f219_local10, "lbInitialized" ), f219_local9.lbInitialized )
 		end
 		f219_arg1:subscribeToModel( f219_arg1.groupCountModel, function ()
 			f219_arg1:updateDataSource()
@@ -4222,7 +4221,7 @@ DataSources.FindGroupsCategoryList = ListHelper_SetupDataSource( "FindGroupsCate
 	table.insert( f224_local0, {
 		models = {
 			image = "t7_mp_icon_groups_friends",
-			displayText = @"hash_69DC8A50F97C2EEC"
+			displayText = "groups/friends_groups"
 		},
 		properties = {
 			category = "friends"
@@ -4243,14 +4242,14 @@ DataSources.FindGroupsButtonList = {
 	prepare = function ( f225_arg0, f225_arg1, f225_arg2 )
 		f225_arg1.buttons = {}
 		local f225_local0 = {}
-		local f225_local1 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f225_arg0 ), "groups.findGroupsCategory" )
-		local f225_local2 = Engine[@"getmodelvalue"]( f225_local1 )
-		local f225_local3 = Enum[@"groupbuffertype"][@"hash_1B376A6D12750A6A"]
+		local f225_local1 = Engine.CreateModel( Engine.GetModelForController( f225_arg0 ), "groups.findGroupsCategory" )
+		local f225_local2 = Engine.GetModelValue( f225_local1 )
+		local f225_local3 = Enum.GroupBufferType[@"hash_1B376A6D12750A6A"]
 		if f225_local2 == "popular" then
-			f225_local3 = Enum[@"groupbuffertype"][@"hash_73FCFEF6BA079D2E"]
+			f225_local3 = Enum.GroupBufferType[@"hash_73FCFEF6BA079D2E"]
 		end
-		local f225_local4 = Engine[@"getgrouplist"]( f225_arg0, f225_local3 )
-		local f225_local5 = Engine[@"getgrouplist"]( f225_arg0, Enum[@"groupbuffertype"][@"group_buffer_type_self"] )
+		local f225_local4 = Engine.GetGroupList( f225_arg0, f225_local3 )
+		local f225_local5 = Engine.GetGroupList( f225_arg0, Enum.GroupBufferType[@"group_buffer_type_self"] )
 		for f225_local6 = 1, #f225_local4, 1 do
 			local f225_local9 = false
 			for f225_local10 = 1, #f225_local5, 1 do
@@ -4288,38 +4287,38 @@ DataSources.FindGroupsButtonList = {
 				} )
 			end
 		end
-		local f225_local8 = Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f225_arg0 ), "groups" ), "findGroupsButtons" )
+		local f225_local8 = Engine.CreateModel( Engine.CreateModel( Engine.GetModelForController( f225_arg0 ), "groups" ), "findGroupsButtons" )
 		for f225_local11, f225_local12 in ipairs( f225_local0 ) do
-			local f225_local14 = Engine[@"createmodel"]( f225_local8, "buttonModel_" .. f225_local11 )
+			local f225_local14 = Engine.CreateModel( f225_local8, "buttonModel_" .. f225_local11 )
 			table.insert( f225_arg1.buttons, {
 				model = f225_local14,
 				type = f225_local12.btnType,
 				groupId = f225_local12.groupId,
 				groupBufferType = f225_local12.groupBufferType
 			} )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "displayText" ), Engine[@"localize"]( f225_local12.displayText ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "action" ), f225_local12.action )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "type" ), f225_local12.btnType )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "groupId" ), f225_local12.groupId )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "groupBufferType" ), f225_local12.groupBufferType )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "name" ), f225_local12.name )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "clanTag" ), f225_local12.clanTag )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "description" ), f225_local12.description )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "message" ), f225_local12.message )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "privacy" ), f225_local12.privacy )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "creationTimestamp" ), f225_local12.creationTimestamp )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "owner" ), f225_local12.owner )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "ownerXuid" ), f225_local12.ownerXuid )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "memberStatus" ), f225_local12.memberStatus )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "memberStatusText" ), f225_local12.memberStatusText )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "memberCount" ), f225_local12.memberCount )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "onlineCount" ), f225_local12.onlineCount )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "inTitleCount" ), f225_local12.inTitleCount )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "lbIndex" ), f225_local12.lbIndex )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "lbSortColumn" ), f225_local12.lbSortColumn )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "lbTimeFrame" ), f225_local12.lbTimeFrame )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "lbHardcore" ), f225_local12.lbHardcore )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f225_local14, "lbInitialized" ), f225_local12.lbInitialized )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "displayText" ), Engine.Localize( f225_local12.displayText ) )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "action" ), f225_local12.action )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "type" ), f225_local12.btnType )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "groupId" ), f225_local12.groupId )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "groupBufferType" ), f225_local12.groupBufferType )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "name" ), f225_local12.name )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "clanTag" ), f225_local12.clanTag )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "description" ), f225_local12.description )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "message" ), f225_local12.message )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "privacy" ), f225_local12.privacy )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "creationTimestamp" ), f225_local12.creationTimestamp )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "owner" ), f225_local12.owner )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "ownerXuid" ), f225_local12.ownerXuid )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "memberStatus" ), f225_local12.memberStatus )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "memberStatusText" ), f225_local12.memberStatusText )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "memberCount" ), f225_local12.memberCount )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "onlineCount" ), f225_local12.onlineCount )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "inTitleCount" ), f225_local12.inTitleCount )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "lbIndex" ), f225_local12.lbIndex )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "lbSortColumn" ), f225_local12.lbSortColumn )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "lbTimeFrame" ), f225_local12.lbTimeFrame )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "lbHardcore" ), f225_local12.lbHardcore )
+			Engine.SetModelValue( Engine.CreateModel( f225_local14, "lbInitialized" ), f225_local12.lbInitialized )
 		end
 		f225_arg1:subscribeToModel( f225_local1, function ()
 			f225_arg1:updateDataSource()
@@ -4376,7 +4375,7 @@ DataSources.GroupsHeadquartersTabList = ListHelper_SetupDataSource( "GroupsHeadq
 	if f230_local1 then
 		table.insert( f230_local0, {
 			models = {
-				tabName = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_28F7AFB1CDB2451F" ),
+				tabName = Engine[@"hash_4F9F1239CFD921FE"]( "groups/admin_caps" ),
 				tabWidget = "CoD.AdminTab"
 			},
 			properties = {
@@ -4434,11 +4433,11 @@ DataSources.GroupHeadquartersOverviewButtonList = ListHelper_SetupDataSource( "G
 end )
 DataSources.GroupHeadquartersAdminOptionsList = ListHelper_SetupDataSource( "GroupHeadquartersAdminOptionsListModel", function ( f233_arg0 )
 	local f233_local0 = {}
-	local f233_local1 = Engine[@"getmodelforcontroller"]( f233_arg0 )
-	local f233_local2 = Engine[@"getmodelvalue"]( Engine[@"createmodel"]( f233_local1, "Social.selectedFriendXUID" ) )
-	local f233_local3 = Engine[@"getmodelvalue"]( Engine[@"createmodel"]( f233_local1, "Social.selectedFriendGamertag" ) )
-	local f233_local4 = f233_local2 == Engine[@"getxuid64"]( f233_arg0 )
-	local f233_local5 = Engine[@"getmodelvalue"]( Engine[@"createmodel"]( f233_local1, "Social.selectedFriendInTitle" ) )
+	local f233_local1 = Engine.GetModelForController( f233_arg0 )
+	local f233_local2 = Engine.GetModelValue( Engine.CreateModel( f233_local1, "Social.selectedFriendXUID" ) )
+	local f233_local3 = Engine.GetModelValue( Engine.CreateModel( f233_local1, "Social.selectedFriendGamertag" ) )
+	local f233_local4 = f233_local2 == Engine.GetXUID64( f233_arg0 )
+	local f233_local5 = Engine.GetModelValue( Engine.CreateModel( f233_local1, "Social.selectedFriendInTitle" ) )
 	if f233_local2 == nil then
 		return f233_local0
 	end
@@ -4466,9 +4465,9 @@ DataSources.GroupHeadquartersAdminOptionsList = ListHelper_SetupDataSource( "Gro
 	} )
 	table.insert( f233_local0, {
 		models = {
-			displayText = @"hash_44DDB2195F163F68",
+			displayText = "groups/ban_from_group_caps",
 			icon = "t7_mp_icon_groups_ban",
-			hintText = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_356E55EFB91DC550" )
+			hintText = Engine[@"hash_4F9F1239CFD921FE"]( "groups/ban_from_group_desc" )
 		},
 		properties = {
 			action = BanFromGroup,
@@ -4485,7 +4484,7 @@ DataSources.GroupHeadquartersAdminButtonList = ListHelper_SetupDataSource( "Grou
 	local f234_local0 = {}
 	table.insert( f234_local0, {
 		models = {
-			displayText = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_5583C1F10CF384A1" ),
+			displayText = Engine[@"hash_4F9F1239CFD921FE"]( "groups/join_requests" ),
 			action = CoD.NullFunction,
 			frameWidget = "CoD.AdminTabGroupApplicationsFrame"
 		}
@@ -4499,14 +4498,14 @@ DataSources.GroupHeadquartersAdminButtonList = ListHelper_SetupDataSource( "Grou
 	} )
 	table.insert( f234_local0, {
 		models = {
-			displayText = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_2BA1B2E49E0699EB" ),
+			displayText = Engine[@"hash_4F9F1239CFD921FE"]( "groups/change_group_type" ),
 			action = CoD.NullFunction,
 			frameWidget = "CoD.AdminTabGroupPrivacyFrame"
 		}
 	} )
 	table.insert( f234_local0, {
 		models = {
-			displayText = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_19F65536D8B2DC00" ),
+			displayText = Engine[@"hash_4F9F1239CFD921FE"]( "groups/edit_group_name" ),
 			action = EditSelectedGroupName,
 			frameWidget = "CoD.AdminTabGroupNameFrame"
 		}
@@ -4523,7 +4522,7 @@ end )
 DataSources.SelectedGroup = {
 	getModel = function ( f235_arg0 )
 		if not f235_arg0 then
-			f235_arg0 = Engine[@"getprimarycontroller"]()
+			f235_arg0 = Engine.GetPrimaryController()
 		end
 		return CoD.perController[f235_arg0].selectedGroup
 	end
@@ -4531,26 +4530,26 @@ DataSources.SelectedGroup = {
 DataSources.CreateGroup = {
 	getModel = function ( f236_arg0 )
 		if not f236_arg0 then
-			f236_arg0 = Engine[@"getprimarycontroller"]()
+			f236_arg0 = Engine.GetPrimaryController()
 		end
-		return Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f236_arg0 ), "groups" ), "createGroup" )
+		return Engine.CreateModel( Engine.CreateModel( Engine.GetModelForController( f236_arg0 ), "groups" ), "createGroup" )
 	end
 }
 DataSources.GroupPrivacyModes = ListHelper_SetupDataSource( "GroupPrivacyModes", function ( f237_arg0 )
 	local f237_local0 = {
 		{
 			name = @"hash_1E31EFBC4D080D9E",
-			value = Enum[@"groupprivacy"][@"group_privacy_public"]
+			value = Enum.GroupPrivacy[@"group_privacy_public"]
 		},
 		{
 			name = @"hash_3F8E5B415DFE61DE",
-			value = Enum[@"groupprivacy"][@"group_privacy_private"]
+			value = Enum.GroupPrivacy[@"group_privacy_private"]
 		}
 	}
 	local f237_local1 = {}
-	local f237_local2 = Enum[@"groupprivacy"][@"group_privacy_public"]
-	if CoD.perController[f237_arg0].selectedGroup and Engine[@"getmodel"]( CoD.perController[f237_arg0].selectedGroup, "privacy" ) then
-		f237_local2 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( CoD.perController[f237_arg0].selectedGroup, "privacy" ) )
+	local f237_local2 = Enum.GroupPrivacy[@"group_privacy_public"]
+	if CoD.perController[f237_arg0].selectedGroup and Engine.GetModel( CoD.perController[f237_arg0].selectedGroup, "privacy" ) then
+		f237_local2 = Engine.GetModelValue( Engine.GetModel( CoD.perController[f237_arg0].selectedGroup, "privacy" ) )
 	end
 	for f237_local6, f237_local7 in ipairs( f237_local0 ) do
 		table.insert( f237_local1, {
@@ -4572,12 +4571,12 @@ end, nil, nil, nil )
 DataSources.GroupJoinApprovalTypes = ListHelper_SetupDataSource( "GroupJoinApprovalTypes", function ( f238_arg0 )
 	local f238_local0 = {
 		{
-			name = @"hash_554CC86CF19F10B6",
-			value = Enum[@"groupjoinapprovaltype"][@"group_join_approval_off"]
+			name = "groups/join_approval_off",
+			value = Enum.GroupJoinApprovalType[@"group_join_approval_off"]
 		},
 		{
-			name = @"hash_4F53261A250AE77C",
-			value = Enum[@"groupjoinapprovaltype"][@"group_join_approval_on"]
+			name = "groups/join_approval_on",
+			value = Enum.GroupJoinApprovalType[@"group_join_approval_on"]
 		}
 	}
 	local f238_local1 = {}
@@ -4602,9 +4601,9 @@ end, nil, nil, nil )
 DataSources.TeamOperationSystem = {
 	getModel = function ( f239_arg0 )
 		if not f239_arg0 then
-			f239_arg0 = Engine[@"getprimarycontroller"]()
+			f239_arg0 = Engine.GetPrimaryController()
 		end
-		return Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f239_arg0 ), "teamOperationSystem" )
+		return Engine.CreateModel( Engine.GetModelForController( f239_arg0 ), "teamOperationSystem" )
 	end
 }
 DataSources.Friends = {
@@ -4641,16 +4640,16 @@ DataSources.Friends = {
 			f241_local0.rankIcon = "rank_prestige02"
 			f241_local0.rank = 50
 		end
-		local f241_local1 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f241_arg0 ), "Friendz." .. f241_arg2 )
+		local f241_local1 = Engine.CreateModel( Engine.GetModelForController( f241_arg0 ), "Friendz." .. f241_arg2 )
 		for f241_local5, f241_local6 in pairs( f241_local0 ) do
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f241_local1, f241_local5 ), f241_local6 )
+			Engine.SetModelValue( Engine.CreateModel( f241_local1, f241_local5 ), f241_local6 )
 		end
 		return f241_local1
 	end
 }
 DataSources.LobbyFriends = {
 	prepare = function ( f242_arg0, f242_arg1, f242_arg2 )
-		local f242_local0 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f242_arg0 ), "friends" ), "tab" ) )
+		local f242_local0 = Engine.GetModelValue( Engine.GetModel( Engine.GetModel( Engine.GetModelForController( f242_arg0 ), "friends" ), "tab" ) )
 		local f242_local1 = nil
 		if f242_local0 == "friends" then
 			f242_local1 = "unifiedListRoot"
@@ -4665,30 +4664,30 @@ DataSources.LobbyFriends = {
 		else
 			f242_local1 = "unifiedListRoot"
 		end
-		f242_arg1.unifiedFriendModel = Engine[@"getmodel"]( Engine[@"getglobalmodel"](), f242_local1 )
-		f242_arg1.unifiedFriendCount = Engine[@"getmodel"]( f242_arg1.unifiedFriendModel, "count" )
+		f242_arg1.unifiedFriendModel = Engine.GetModel( Engine.GetGlobalModel(), f242_local1 )
+		f242_arg1.unifiedFriendCount = Engine.GetModel( f242_arg1.unifiedFriendModel, "count" )
 		f242_arg1:unsubscribeFromAllModels()
 		f242_arg1.countSubscription = f242_arg1:subscribeToModel( f242_arg1.unifiedFriendCount, function ( model )
 			f242_arg1:updateDataSource()
 		end, false )
 	end,
 	getCount = function ( f244_arg0 )
-		return Engine[@"getmodelvalue"]( f244_arg0.unifiedFriendCount )
+		return Engine.GetModelValue( f244_arg0.unifiedFriendCount )
 	end,
 	getItem = function ( f245_arg0, f245_arg1, f245_arg2 )
-		return Engine[@"getmodel"]( f245_arg1.unifiedFriendModel, "member" .. f245_arg2 - 1 )
+		return Engine.GetModel( f245_arg1.unifiedFriendModel, "member" .. f245_arg2 - 1 )
 	end
 }
 DataSources.GameScore = {
 	getModel = function ( f246_arg0 )
 		if not f246_arg0 then
-			f246_arg0 = Engine[@"getprimarycontroller"]()
+			f246_arg0 = Engine.GetPrimaryController()
 		end
-		local f246_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f246_arg0 ), "gameScore" )
-		if not Engine[@"isingame"]() then
-			local f246_local1 = Engine[@"getscoreboarddata"]( f246_arg0 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f246_local0, "alliesScore" ), f246_local1.scores.TEAM_ALLIES )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f246_local0, "axisScore" ), f246_local1.scores.TEAM_AXIS )
+		local f246_local0 = Engine.CreateModel( Engine.GetModelForController( f246_arg0 ), "gameScore" )
+		if not Engine.IsInGame() then
+			local f246_local1 = Engine.GetScoreboardData( f246_arg0 )
+			Engine.SetModelValue( Engine.CreateModel( f246_local0, "alliesScore" ), f246_local1.scores.TEAM_ALLIES )
+			Engine.SetModelValue( Engine.CreateModel( f246_local0, "axisScore" ), f246_local1.scores.TEAM_AXIS )
 		end
 		return f246_local0
 	end
@@ -4696,33 +4695,33 @@ DataSources.GameScore = {
 DataSources.Equipment = {
 	getModel = function ( f247_arg0 )
 		if not f247_arg0 then
-			f247_arg0 = Engine[@"getprimarycontroller"]()
+			f247_arg0 = Engine.GetPrimaryController()
 		end
-		return Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f247_arg0 ), "Equipment" )
+		return Engine.CreateModel( Engine.GetModelForController( f247_arg0 ), "Equipment" )
 	end
 }
 DataSources.ClientscriptDebugMenu = {
 	prepare = function ( f248_arg0, f248_arg1, f248_arg2 )
-		f248_arg1.cscDebugMenuModel = f248_arg1:getModel( Engine[@"getprimarycontroller"](), "cscDebugMenu" )
-		f248_arg1.cscDebugMenuCountModel = Engine[@"getmodel"]( f248_arg1.cscDebugMenuModel, "cscDebugMenuCount" )
+		f248_arg1.cscDebugMenuModel = f248_arg1:getModel( Engine.GetPrimaryController(), "cscDebugMenu" )
+		f248_arg1.cscDebugMenuCountModel = Engine.GetModel( f248_arg1.cscDebugMenuModel, "cscDebugMenuCount" )
 		f248_arg1:unsubscribeFromAllModels()
 		f248_arg1:subscribeToModel( f248_arg1.cscDebugMenuCountModel, function ()
 			f248_arg1:updateDataSource()
 		end, false )
 	end,
 	getCount = function ( f250_arg0 )
-		return Engine[@"getmodelvalue"]( f250_arg0.cscDebugMenuCountModel )
+		return Engine.GetModelValue( f250_arg0.cscDebugMenuCountModel )
 	end,
 	getItem = function ( f251_arg0, f251_arg1, f251_arg2 )
-		return Engine[@"getmodel"]( f251_arg1.cscDebugMenuModel, "listItem" .. f251_arg2 - 1 )
+		return Engine.GetModel( f251_arg1.cscDebugMenuModel, "listItem" .. f251_arg2 - 1 )
 	end
 }
 function ClientHasCollectible( f252_arg0, f252_arg1, f252_arg2, f252_arg3 )
-	if f252_arg3 or CoD.SafeGetModelValue( Engine[@"getglobalmodel"](), "inBarracks" ) == true then
-		local f252_local0 = Engine[@"storagegetbuffer"]( f252_arg0, Enum[@"storagefiletype"][@"storage_cp_stats_online"] )
+	if f252_arg3 or CoD.SafeGetModelValue( Engine.GetGlobalModel(), "inBarracks" ) == true then
+		local f252_local0 = Engine.StorageGetBuffer( f252_arg0, Enum.StorageFileType[@"storage_cp_stats_online"] )
 		return f252_local0.PlayerStatsByMap[f252_arg1].collectibles[f252_arg2]:get() == 1
 	else
-		return Engine[@"clienthascollectible"]( f252_arg0, f252_arg1, f252_arg2, Enum[@"emodes"][@"mode_campaign"] )
+		return Engine.ClientHasCollectible( f252_arg0, f252_arg1, f252_arg2, Enum.eModes.mode_campaign )
 	end
 end
 function GetCollectiblesXOfY( f253_arg0, f253_arg1, f253_arg2 )
@@ -4750,9 +4749,9 @@ function GetAccoladesXOfY( f254_arg0, f254_arg1, f254_arg2 )
 		local f254_local3 = Engine[@"hash_7A7E3CD65E63086F"]( Engine[@"converttoxhash"]( f254_local0.accoladelist ) )
 		if f254_local3 ~= nil then
 			f254_local2 = #f254_local3
-			local f254_local4 = Engine[@"getplayerstats"]( f254_arg0, CoD.STATS_LOCATION_NORMAL, Enum[@"emodes"][@"mode_campaign"] )
-			if f254_arg2 or CoD.SafeGetModelValue( Engine[@"getglobalmodel"](), "inBarracks" ) == true then
-				f254_local4 = Engine[@"storagegetbuffer"]( f254_arg0, Enum[@"storagefiletype"][@"storage_cp_stats_online"] )
+			local f254_local4 = Engine.GetPlayerStats( f254_arg0, CoD.STATS_LOCATION_NORMAL, Enum.eModes.mode_campaign )
+			if f254_arg2 or CoD.SafeGetModelValue( Engine.GetGlobalModel(), "inBarracks" ) == true then
+				f254_local4 = Engine.StorageGetBuffer( f254_arg0, Enum.StorageFileType[@"storage_cp_stats_online"] )
 			end
 			for f254_local5 = 0, 18, 1 do
 				if f254_local4.PlayerStatsByMap[f254_local0.rootMapName].accolades[f254_local5].state:get() ~= 0 then
@@ -4778,7 +4777,7 @@ DataSources.ZMMapsList = ListHelper_SetupDataSource( "ZMMapsList", function ( f2
 	if CoD.perController[f256_arg0].choosingZMPlaylist then
 		local f256_local1 = nil
 		local f256_local2 = CoD.PlaylistCategoryFilter or ""
-		local f256_local3 = Engine[@"profileint"]( f256_arg0, "playlist_" .. f256_local2 )
+		local f256_local3 = Engine.ProfileInt( f256_arg0, "playlist_" .. f256_local2 )
 		local f256_local4 = FindPlaylistCategory( f256_local1, f256_local3 )
 		local f256_local5 = 0
 		for f256_local9, f256_local10 in ipairs( f256_local1 ) do
@@ -4791,12 +4790,12 @@ DataSources.ZMMapsList = ListHelper_SetupDataSource( "ZMMapsList", function ( f2
 			for f257_local5, f257_local6 in ipairs( f257_arg0.playlists ) do
 				local f257_local4 = ""
 				if Dvar[@"groupcountsvisible"]:get() == true then
-					f257_local4 = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_3E0DD690CF0466BD", CoD.separateNumberWithCommas( f257_local6.playerCount ), CoD.separateNumberWithCommas( f256_local5 ) )
+					f257_local4 = Engine[@"hash_4F9F1239CFD921FE"]( "menu/playlist_user_count", CoD.separateNumberWithCommas( f257_local6.playerCount ), CoD.separateNumberWithCommas( f256_local5 ) )
 				else
 					if f256_local5 <= 0 then
 						f256_local5 = 1
 					end
-					f257_local4 = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_328C8DE8C3BB8977", math.floor( f257_local6.playerCount / f256_local5 * 100 + 0.5 ) )
+					f257_local4 = Engine[@"hash_4F9F1239CFD921FE"]( "menu/playlist_user_percent", math.floor( f257_local6.playerCount / f256_local5 * 100 + 0.5 ) )
 				end
 				table.insert( f256_local0, {
 					models = {
@@ -4827,7 +4826,7 @@ DataSources.ZMMapsList = ListHelper_SetupDataSource( "ZMMapsList", function ( f2
 		for f256_local5, f256_local6 in LUI.IterateTableBySortedKeys( CoD.MapUtility.MapsTable, function ( f258_arg0, f258_arg1 )
 			return CoD.MapUtility.MapsTable[f258_arg0].uniqueID < CoD.MapUtility.MapsTable[f258_arg1].uniqueID
 		end, nil ) do
-			if f256_local6.session_mode == Enum[@"emodes"][@"mode_zombies"] and f256_local6.dlc_pack ~= -1 and (ShowPurchasableMap( f256_arg0, f256_local5 ) or Engine[@"ismapvalid"]( f256_local5 ) and f256_local6.mapName ~= nil) then
+			if f256_local6.session_mode == Enum.eModes.mode_zombies and f256_local6.dlc_pack ~= -1 and (ShowPurchasableMap( f256_arg0, f256_local5 ) or Engine.IsMapValid( f256_local5 ) and f256_local6.mapName ~= nil) then
 				local f256_local7 = ""
 				table.insert( f256_local0, {
 					models = {
@@ -4836,11 +4835,11 @@ DataSources.ZMMapsList = ListHelper_SetupDataSource( "ZMMapsList", function ( f2
 						mapName = f256_local6.mapName,
 						mapLocation = f256_local6.mapLocation,
 						mapDescription = CoD.StoreUtility.AddUpsellToDescriptionIfNeeded( f256_arg0, f256_local5, f256_local6.mapDescription ),
-						playingCount = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_444F626397695677", CoD.separateNumberWithCommas( 0 ), CoD.separateNumberWithCommas( 0 ) )
+						playingCount = Engine[@"hash_4F9F1239CFD921FE"]( "menu/category_user_count", CoD.separateNumberWithCommas( 0 ), CoD.separateNumberWithCommas( 0 ) )
 					},
 					properties = {
 						mapId = f256_local5,
-						purchasable = not Engine[@"ismapvalid"]( f256_local5 )
+						purchasable = not Engine.IsMapValid( f256_local5 )
 					}
 				} )
 			end
@@ -4854,8 +4853,8 @@ DataSources.CPVideoPlayerList = ListHelper_SetupDataSource( "CPVideoPlayerList",
 	for f259_local5, f259_local6 in LUI.IterateTableBySortedKeys( CoD.MapUtility.MapsTable, function ( f260_arg0, f260_arg1 )
 		return CoD.MapUtility.MapsTable[f260_arg0].uniqueID < CoD.MapUtility.MapsTable[f260_arg1].uniqueID
 	end, nil ) do
-		if f259_local6.session_mode == Enum[@"emodes"][@"mode_campaign"] and f259_local6.isSafeHouse == false and f259_local6.dlc_pack ~= -1 and f259_local6.campaign_mode == Enum[@"campaignmode"][0xBC3515387CDAB7] then
-			local f259_local4 = Engine[@"getplayerstats"]( f259_arg0 )
+		if f259_local6.session_mode == Enum.eModes.mode_campaign and f259_local6.isSafeHouse == false and f259_local6.dlc_pack ~= -1 and f259_local6.campaign_mode == Enum.CampaignMode[0xBC3515387CDAB7] then
+			local f259_local4 = Engine.GetPlayerStats( f259_arg0 )
 			if f259_local4 ~= nil and (f259_local4.PlayerStatsByMap[f259_local5].hasBeenCompleted == 1 or false ~= Dvar[@"allcollectiblesunlocked"]:get()) then
 				table.insert( f259_local0, {
 					models = {
@@ -4869,7 +4868,7 @@ DataSources.CPVideoPlayerList = ListHelper_SetupDataSource( "CPVideoPlayerList",
 	end
 	table.insert( f259_local0, {
 		models = {
-			displayText = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_664B00CAD4E64E4" ),
+			displayText = Engine[@"hash_4F9F1239CFD921FE"]( "zmui/zod_caps" ),
 			video = "zm_zod_load_zodloadingmovie"
 		},
 		properties = {}
@@ -4878,46 +4877,46 @@ DataSources.CPVideoPlayerList = ListHelper_SetupDataSource( "CPVideoPlayerList",
 end )
 DataSources.CampaignSettings = {
 	getModel = function ( f261_arg0 )
-		local f261_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "CampaignSettings" )
+		local f261_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "CampaignSettings" )
 		local f261_local1 = 1
-		if Engine[@"islobbyhost"]( Enum[@"lobbytype"][@"lobby_type_game"] ) and f261_arg0 == Engine[@"getprimarycontroller"]() then
-			f261_local1 = Engine[@"getprofilevarint"]( f261_arg0, "g_gameskill" )
+		if Engine[@"islobbyhost"]( Enum.LobbyType[@"lobby_type_game"] ) and f261_arg0 == Engine.GetPrimaryController() then
+			f261_local1 = Engine.GetProfileVarInt( f261_arg0, "g_gameskill" )
 		else
-			local f261_local2 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f261_arg0 ), "serverDifficulty" )
-			f261_local1 = f261_local2 and Engine[@"getmodelvalue"]( f261_local2 )
+			local f261_local2 = Engine.GetModel( Engine.GetModelForController( f261_arg0 ), "serverDifficulty" )
+			f261_local1 = f261_local2 and Engine.GetModelValue( f261_local2 )
 		end
 		if f261_local1 == nil then
 			f261_local1 = 1
 		end
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f261_local0, "difficulty" ), Engine[@"hash_4F9F1239CFD921FE"]( CoD.CPUtility.DIFFICULTY[f261_local1] ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f261_local0, "difficultyIcon" ), CoD.CPUtility.DIFFICULTY_ICON[f261_local1] )
-		if Engine[@"getmodelvalue"]( Engine[@"createmodel"]( f261_local0, "selectedMap" ) ) == nil then
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f261_local0, "selectedMap" ), Engine[@"lobbygetmap"]() )
+		Engine.SetModelValue( Engine.CreateModel( f261_local0, "difficulty" ), Engine[@"hash_4F9F1239CFD921FE"]( CoD.CPUtility.DIFFICULTY[f261_local1] ) )
+		Engine.SetModelValue( Engine.CreateModel( f261_local0, "difficultyIcon" ), CoD.CPUtility.DIFFICULTY_ICON[f261_local1] )
+		if Engine.GetModelValue( Engine.CreateModel( f261_local0, "selectedMap" ) ) == nil then
+			Engine.SetModelValue( Engine.CreateModel( f261_local0, "selectedMap" ), Engine[@"lobbygetmap"]() )
 		end
 		return f261_local0
 	end
 }
 DataSources.ZMSettings = {
 	getModel = function ( f262_arg0 )
-		return Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "ZMSettings" )
+		return Engine.CreateModel( Engine.GetGlobalModel(), "ZMSettings" )
 	end
 }
 DataSources.CampaignMissionList = {
 	prepare = function ( f263_arg0, f263_arg1, f263_arg2 )
 		f263_arg1.missionList = {}
-		local f263_local0 = Engine[@"tablelookup"]( CoD.protoMapsTable, 1, 0, "mapCount" )
-		local f263_local1 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "MissionLevels" )
+		local f263_local0 = Engine.TableLookup( CoD.protoMapsTable, 1, 0, "mapCount" )
+		local f263_local1 = Engine.CreateModel( Engine.GetGlobalModel(), "MissionLevels" )
 		for f263_local2 = 1, f263_local0, 1 do
 			local f263_local5 = f263_local2 - 1 .. ""
-			local f263_local6 = Engine[@"tablelookup"]( CoD.protoMapsTable, 0, 3, f263_local5 )
-			local f263_local7 = Engine[@"tablelookup"]( CoD.protoMapsTable, 1, 3, f263_local5 )
-			local f263_local8 = Engine[@"tablelookup"]( CoD.protoMapsTable, 2, 3, f263_local5 )
-			local f263_local9 = Engine[@"tablelookup"]( CoD.protoMapsTable, 4, 3, f263_local5 )
-			local f263_local10 = Engine[@"createmodel"]( f263_local1, f263_local5 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f263_local10, "devName" ), f263_local6 .. "" )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f263_local10, "locName" ), f263_local7 .. "" )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f263_local10, "imagename" ), f263_local8 .. "" )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f263_local10, "desc" ), f263_local9 .. "" )
+			local f263_local6 = Engine.TableLookup( CoD.protoMapsTable, 0, 3, f263_local5 )
+			local f263_local7 = Engine.TableLookup( CoD.protoMapsTable, 1, 3, f263_local5 )
+			local f263_local8 = Engine.TableLookup( CoD.protoMapsTable, 2, 3, f263_local5 )
+			local f263_local9 = Engine.TableLookup( CoD.protoMapsTable, 4, 3, f263_local5 )
+			local f263_local10 = Engine.CreateModel( f263_local1, f263_local5 )
+			Engine.SetModelValue( Engine.CreateModel( f263_local10, "devName" ), f263_local6 .. "" )
+			Engine.SetModelValue( Engine.CreateModel( f263_local10, "locName" ), f263_local7 .. "" )
+			Engine.SetModelValue( Engine.CreateModel( f263_local10, "imagename" ), f263_local8 .. "" )
+			Engine.SetModelValue( Engine.CreateModel( f263_local10, "desc" ), f263_local9 .. "" )
 			table.insert( f263_arg1.missionList, f263_local10 )
 		end
 	end,
@@ -4930,8 +4929,8 @@ DataSources.CampaignMissionList = {
 }
 DataSources.LocalServer = {
 	prepare = function ( f266_arg0, f266_arg1, f266_arg2 )
-		f266_arg1.baseModel = Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "serverListRoot" )
-		f266_arg1.countModel = Engine[@"getmodel"]( f266_arg1.baseModel, "count" )
+		f266_arg1.baseModel = Engine.GetModel( Engine.GetGlobalModel(), "serverListRoot" )
+		f266_arg1.countModel = Engine.GetModel( f266_arg1.baseModel, "count" )
 		if f266_arg1.countSubscription then
 			f266_arg1:removeSubscription( f266_arg1.countSubscription )
 		end
@@ -4943,10 +4942,10 @@ DataSources.LocalServer = {
 		end, false )
 	end,
 	getCount = function ( f268_arg0 )
-		return Engine[@"getmodelvalue"]( f268_arg0.countModel )
+		return Engine.GetModelValue( f268_arg0.countModel )
 	end,
 	getItem = function ( f269_arg0, f269_arg1, f269_arg2 )
-		return Engine[@"getmodel"]( f269_arg1.baseModel, "server" .. f269_arg2 - 1 )
+		return Engine.GetModel( f269_arg1.baseModel, "server" .. f269_arg2 - 1 )
 	end,
 	cleanup = function ( f270_arg0, f270_arg1 )
 		Engine[@"lobbyserverlistclearserverlist"]()
@@ -4955,18 +4954,18 @@ DataSources.LocalServer = {
 DataSources.LocalServerPlayer = {
 	prepare = function ( f271_arg0, f271_arg1, f271_arg2 )
 		f271_arg1.playerList = {}
-		local f271_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "serverPlayerListRoot" )
-		f271_arg1.selectedServerModel = Engine[@"createmodel"]( f271_local0, "selectedServer" )
-		local f271_local1 = Engine[@"getmodelvalue"]( f271_arg1.selectedServerModel )
+		local f271_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "serverPlayerListRoot" )
+		f271_arg1.selectedServerModel = Engine.CreateModel( f271_local0, "selectedServer" )
+		local f271_local1 = Engine.GetModelValue( f271_arg1.selectedServerModel )
 		if f271_local1 ~= nil then
 			f271_arg1.playerList = Engine[@"lobbyserverlistgetclientlist"]( f271_local1 )
 			if f271_arg1.playerList ~= nil then
 				for f271_local5, f271_local6 in pairs( f271_arg1.playerList ) do
-					local f271_local7 = Engine[@"createmodel"]( f271_local0, "playerModel_" .. f271_local5 )
+					local f271_local7 = Engine.CreateModel( f271_local0, "playerModel_" .. f271_local5 )
 					f271_arg1.playerList[f271_local5].model = f271_local7
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f271_local7, "xuid" ), f271_local6.xuid )
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f271_local7, "gamertag" ), f271_local6.gamertag )
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f271_local7, "isLeader" ), f271_local6.isLeader )
+					Engine.SetModelValue( Engine.CreateModel( f271_local7, "xuid" ), f271_local6.xuid )
+					Engine.SetModelValue( Engine.CreateModel( f271_local7, "gamertag" ), f271_local6.gamertag )
+					Engine.SetModelValue( Engine.CreateModel( f271_local7, "isLeader" ), f271_local6.isLeader )
 				end
 			else
 				f271_arg1.playerList = {}
@@ -4986,7 +4985,7 @@ DataSources.LocalServerPlayer = {
 DataSources.XPProgressionBar = {
 	getModel = function ( f275_arg0 )
 		if not f275_arg0 then
-			f275_arg0 = Engine[@"getprimarycontroller"]()
+			f275_arg0 = Engine.GetPrimaryController()
 		end
 		local f275_local0 = false
 		local f275_local1 = 0
@@ -5006,18 +5005,18 @@ DataSources.XPProgressionBar = {
 		if not IsLobbyNetworkModeLAN() then
 			f275_local5.currentStats = CoD.GetPlayerStats( f275_arg0 )
 			f275_local5.currPrestige = IsInParagonCapableGameMode() and f275_local5.currentStats.PlayerStatsList.PLEVEL.StatValue:get() or nil
-			local f275_local6 = Engine[@"currentsessionmode"]()
+			local f275_local6 = Engine.CurrentSessionMode()
 			f275_local0 = IsInParagonCapableGameMode() and f275_local5.currPrestige == CoD.PrestigeUtility.GetPrestigeCap()
 			if f275_local0 then
 				f275_local5.currentRank = f275_local5.currentStats.PlayerStatsList.PARAGON_RANK.StatValue:get()
-				f275_local5.displayLevelForCurrRank = Engine[@"getparagonrankdisplaylevel"]( f275_local5.currentRank )
+				f275_local5.displayLevelForCurrRank = Engine.GetParagonRankDisplayLevel( f275_local5.currentRank )
 				f275_local5.currRankIconMaterialName = Engine[@"hash_B1AE00E1863FFE1"]( f275_local5.currentRank )
 				f275_local5.nextRank = f275_local5.currentRank + 1
 				f275_local5.displayLevelForNextRank = tonumber( f275_local5.displayLevelForCurrRank ) + 1
 				f275_local5.nextRankIconMaterialName = Engine[@"hash_B1AE00E1863FFE1"]( f275_local5.nextRank )
 				f275_local5.paragonIconId = f275_local5.currentStats.PlayerStatsList.PARAGON_ICON_ID.StatValue:get()
 				if f275_local5.paragonIconId ~= CoD.PrestigeUtility.INVALID_PARAGON_ICON_ID and IsGameModeParagonCapable() then
-					f275_local5.currRankIconMaterialName = Engine[@"getparagoniconbyid"]( f275_local5.paragonIconId )
+					f275_local5.currRankIconMaterialName = Engine.GetParagonIconById( f275_local5.paragonIconId )
 					f275_local5.nextRankIconMaterialName = f275_local5.currRankIconMaterialName
 				end
 				f275_local5.currRankXP = f275_local5.currentStats.PlayerStatsList.RANKXP and f275_local5.currentStats.PlayerStatsList.RANKXP.StatValue:get() or 0
@@ -5026,11 +5025,11 @@ DataSources.XPProgressionBar = {
 				f275_local5.maxXPForCurrRank = Engine[@"hash_5E7C7AB06A7E4905"]( tonumber( f275_local5.currentRank ), f275_local6 )
 			else
 				f275_local5.currentRank = f275_local5.currentStats.PlayerStatsList.RANK and f275_local5.currentStats.PlayerStatsList.RANK.StatValue:get() or 0
-				f275_local5.displayLevelForCurrRank = Engine[@"getrankdisplaylevel"]( f275_local5.currentRank )
-				f275_local5.currRankIconMaterialName = f275_local5.currPrestige and Engine[@"getrankicon"]( f275_local5.currentRank, f275_local5.currPrestige, f275_local6 ) or Engine[@"hash_D4A9B159BE44163"]( f275_local5.currentRank )
+				f275_local5.displayLevelForCurrRank = Engine.GetRankDisplayLevel( f275_local5.currentRank )
+				f275_local5.currRankIconMaterialName = f275_local5.currPrestige and Engine.GetRankIcon( f275_local5.currentRank, f275_local5.currPrestige, f275_local6 ) or Engine[@"hash_D4A9B159BE44163"]( f275_local5.currentRank )
 				f275_local5.nextRank = f275_local5.currentRank + 1
-				f275_local5.displayLevelForNextRank = Engine[@"getrankdisplaylevel"]( f275_local5.nextRank )
-				f275_local5.nextRankIconMaterialName = f275_local5.currPrestige and Engine[@"getrankicon"]( f275_local5.nextRank, f275_local5.currPrestige, f275_local6 ) or Engine[@"hash_D4A9B159BE44163"]( f275_local5.nextRank )
+				f275_local5.displayLevelForNextRank = Engine.GetRankDisplayLevel( f275_local5.nextRank )
+				f275_local5.nextRankIconMaterialName = f275_local5.currPrestige and Engine.GetRankIcon( f275_local5.nextRank, f275_local5.currPrestige, f275_local6 ) or Engine[@"hash_D4A9B159BE44163"]( f275_local5.nextRank )
 				f275_local5.currRankXP = f275_local5.currentStats.PlayerStatsList.RANKXP and f275_local5.currentStats.PlayerStatsList.RANKXP.StatValue:get() or 0
 				f275_local5.minXPForCurrRank = Engine[@"getrankminxp"]( tonumber( f275_local5.currentRank ) )
 				f275_local5.maxXPForCurrRank = Engine[@"getrankmaxxp"]( tonumber( f275_local5.currentRank ) )
@@ -5040,24 +5039,24 @@ DataSources.XPProgressionBar = {
 			f275_local5.relativeRankXP = f275_local5.currRankXP - f275_local5.minXPForCurrRank
 			f275_local5.progressPct = f275_local5.relativeRankXP / (f275_local5.maxXPForCurrRank - f275_local5.minXPForCurrRank)
 		end
-		local f275_local7 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f275_arg0 ), "XPProgressionBar" )
+		local f275_local7 = Engine.CreateModel( Engine.GetModelForController( f275_arg0 ), "XPProgressionBar" )
 		local f275_local8 = ""
 		if not (f275_local0 or f275_local5.nextRank <= CoD.RankUtility.GetRankCap()) or f275_local0 and f275_local5.nextRank >= CoD.RankUtility.GetParagonRankCap() then
 			f275_local8 = Engine[@"hash_4F9F1239CFD921FE"]( @"menu/max_level" )
-			f275_local5.nextRankIconMaterialName = @"blacktransparent"
+			f275_local5.nextRankIconMaterialName = "blacktransparent"
 		elseif f275_local5.displayLevelForNextRank > 0 then
-			f275_local8 = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_2BC1D826D76D607F", f275_local5.displayLevelForNextRank )
+			f275_local8 = Engine[@"hash_4F9F1239CFD921FE"]( "aar/level_n", f275_local5.displayLevelForNextRank )
 		end
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f275_local7, "currentRank" ), f275_local5.displayLevelForCurrRank )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f275_local7, "currentRankIcon" ), f275_local5.currRankIconMaterialName )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f275_local7, "rankLabel" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_2BC1D826D76D607F", f275_local5.displayLevelForCurrRank ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f275_local7, "rankIcon" ), f275_local5.currRankIconMaterialName )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f275_local7, "nextRank" ), f275_local5.displayLevelForNextRank )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f275_local7, "nextRankLabel" ), f275_local8 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f275_local7, "nextRankIcon" ), f275_local5.nextRankIconMaterialName )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f275_local7, "currentXP" ), f275_local5.currRankXP )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f275_local7, "xpToNextRank" ), f275_local5.xpToNextRank )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f275_local7, "progress" ), f275_local5.progressPct )
+		Engine.SetModelValue( Engine.CreateModel( f275_local7, "currentRank" ), f275_local5.displayLevelForCurrRank )
+		Engine.SetModelValue( Engine.CreateModel( f275_local7, "currentRankIcon" ), f275_local5.currRankIconMaterialName )
+		Engine.SetModelValue( Engine.CreateModel( f275_local7, "rankLabel" ), Engine[@"hash_4F9F1239CFD921FE"]( "aar/level_n", f275_local5.displayLevelForCurrRank ) )
+		Engine.SetModelValue( Engine.CreateModel( f275_local7, "rankIcon" ), f275_local5.currRankIconMaterialName )
+		Engine.SetModelValue( Engine.CreateModel( f275_local7, "nextRank" ), f275_local5.displayLevelForNextRank )
+		Engine.SetModelValue( Engine.CreateModel( f275_local7, "nextRankLabel" ), f275_local8 )
+		Engine.SetModelValue( Engine.CreateModel( f275_local7, "nextRankIcon" ), f275_local5.nextRankIconMaterialName )
+		Engine.SetModelValue( Engine.CreateModel( f275_local7, "currentXP" ), f275_local5.currRankXP )
+		Engine.SetModelValue( Engine.CreateModel( f275_local7, "xpToNextRank" ), f275_local5.xpToNextRank )
+		Engine.SetModelValue( Engine.CreateModel( f275_local7, "progress" ), f275_local5.progressPct )
 		return f275_local7
 	end
 }
@@ -5067,16 +5066,16 @@ DataSources.GadgetModList = {
 	end,
 	getCount = function ( f277_arg0 )
 		if f277_arg0.baseModel then
-			local f277_local0 = Engine[@"getmodel"]( f277_arg0.baseModel, "gadgetAttachments.count" )
+			local f277_local0 = Engine.GetModel( f277_arg0.baseModel, "gadgetAttachments.count" )
 			if f277_local0 then
-				return Engine[@"getmodelvalue"]( f277_local0 )
+				return Engine.GetModelValue( f277_local0 )
 			end
 		end
 		return 0
 	end,
 	getItem = function ( f278_arg0, f278_arg1, f278_arg2 )
 		if f278_arg1.baseModel then
-			local f278_local0 = Engine[@"getmodel"]( f278_arg1.baseModel, "gadgetAttachments." .. f278_arg2 )
+			local f278_local0 = Engine.GetModel( f278_arg1.baseModel, "gadgetAttachments." .. f278_arg2 )
 			if f278_local0 then
 				return f278_local0
 			end
@@ -5087,16 +5086,16 @@ DataSources.GadgetModList = {
 DataSources.AARStats = {
 	prepare = function ( f279_arg0, f279_arg1, f279_arg2 )
 		f279_arg1.AARStatsList = {}
-		local f279_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f279_arg0 ), "AARStats" )
+		local f279_local0 = Engine.CreateModel( Engine.GetModelForController( f279_arg0 ), "AARStats" )
 		local f279_local1 = CoD.GetPlayerStats( f279_arg0 )
 		f279_local1 = f279_local1.AfterActionReportStats
 		local f279_local2 = {}
-		for f279_local3 = 0, Dvar[@"com_maxclients"]:get() - 1, 1 do
+		for f279_local3 = 0, Dvar.com_maxclients:get() - 1, 1 do
 			if f279_local1.playerStats[f279_local3].isActive:get() == 1 then
 				f279_local2[f279_local3] = {}
 				f279_local2[f279_local3].name = f279_local1.playerStats[f279_local3].name:get()
 				f279_local2[f279_local3].rank = f279_local1.playerStats[f279_local3].curRank:get() + 1
-				f279_local2[f279_local3].rankIcon = Engine[@"getrankicon"]( f279_local1.playerStats[f279_local3].curRank:get() )
+				f279_local2[f279_local3].rankIcon = Engine.GetRankIcon( f279_local1.playerStats[f279_local3].curRank:get() )
 				f279_local2[f279_local3].kills = f279_local1.playerStats[f279_local3].kills:get()
 				f279_local2[f279_local3].assists = f279_local1.playerStats[f279_local3].assists:get()
 				f279_local2[f279_local3].medalName1 = ""
@@ -5131,18 +5130,18 @@ DataSources.AARStats = {
 			local f279_local16 = f279_local7.medalImage2 .. ""
 			local f279_local17 = f279_local7.medalName3 .. ""
 			local f279_local18 = f279_local7.medalImage3 .. ""
-			local f279_local19 = Engine[@"createmodel"]( f279_local0, f279_local6 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f279_local19, "playerName" ), f279_local8 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f279_local19, "playerRank" ), f279_local9 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f279_local19, "playerRankIcon" ), f279_local10 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f279_local19, "playerKills" ), f279_local11 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f279_local19, "playerAssists" ), f279_local12 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f279_local19, "medalName1" ), f279_local13 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f279_local19, "medalImage1" ), f279_local14 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f279_local19, "medalName2" ), f279_local15 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f279_local19, "medalImage2" ), f279_local16 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f279_local19, "medalName3" ), f279_local17 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f279_local19, "medalImage3" ), f279_local18 )
+			local f279_local19 = Engine.CreateModel( f279_local0, f279_local6 )
+			Engine.SetModelValue( Engine.CreateModel( f279_local19, "playerName" ), f279_local8 )
+			Engine.SetModelValue( Engine.CreateModel( f279_local19, "playerRank" ), f279_local9 )
+			Engine.SetModelValue( Engine.CreateModel( f279_local19, "playerRankIcon" ), f279_local10 )
+			Engine.SetModelValue( Engine.CreateModel( f279_local19, "playerKills" ), f279_local11 )
+			Engine.SetModelValue( Engine.CreateModel( f279_local19, "playerAssists" ), f279_local12 )
+			Engine.SetModelValue( Engine.CreateModel( f279_local19, "medalName1" ), f279_local13 )
+			Engine.SetModelValue( Engine.CreateModel( f279_local19, "medalImage1" ), f279_local14 )
+			Engine.SetModelValue( Engine.CreateModel( f279_local19, "medalName2" ), f279_local15 )
+			Engine.SetModelValue( Engine.CreateModel( f279_local19, "medalImage2" ), f279_local16 )
+			Engine.SetModelValue( Engine.CreateModel( f279_local19, "medalName3" ), f279_local17 )
+			Engine.SetModelValue( Engine.CreateModel( f279_local19, "medalImage3" ), f279_local18 )
 			table.insert( f279_arg1.AARStatsList, f279_local19 )
 		end
 	end,
@@ -5155,12 +5154,12 @@ DataSources.AARStats = {
 }
 DataSources.CombatRecordBestScoreMap = {
 	getModel = function ( f282_arg0 )
-		local f282_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f282_arg0 ), "CombatRecordBestScoreMap" )
+		local f282_local0 = Engine.CreateModel( Engine.GetModelForController( f282_arg0 ), "CombatRecordBestScoreMap" )
 		local f282_local1 = CoD.GetCombatRecordStats( f282_arg0 )
 		local f282_local2 = 0
 		local f282_local3 = ""
 		for f282_local8, f282_local9 in pairs( CoD.MapUtility.MapsTable ) do
-			if f282_local9.session_mode == Enum[@"emodes"][@"mode_campaign"] and f282_local9.campaign_mode == Enum[@"campaignmode"][0xBC3515387CDAB7] and f282_local9.dlc_pack ~= -1 and f282_local9.isSubLevel == false then
+			if f282_local9.session_mode == Enum.eModes.mode_campaign and f282_local9.campaign_mode == Enum.CampaignMode[0xBC3515387CDAB7] and f282_local9.dlc_pack ~= -1 and f282_local9.isSubLevel == false then
 				local f282_local7 = f282_local1.PlayerStatsByMap[f282_local8].highestStats.SCORE:get()
 				if f282_local2 < f282_local7 then
 					f282_local2 = f282_local7
@@ -5170,118 +5169,118 @@ DataSources.CombatRecordBestScoreMap = {
 		end
 		if f282_local2 == 0 then
 			f282_local2 = "--"
-			f282_local3 = Engine[@"hash_4F9F1239CFD921FE"]( @"menu/none" )
+			f282_local3 = Engine[@"hash_4F9F1239CFD921FE"]( "menu/none" )
 		end
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f282_local0, "highestScore" ), f282_local2 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f282_local0, "mapName" ), f282_local3 )
+		Engine.SetModelValue( Engine.CreateModel( f282_local0, "highestScore" ), f282_local2 )
+		Engine.SetModelValue( Engine.CreateModel( f282_local0, "mapName" ), f282_local3 )
 		return f282_local0
 	end
 }
 DataSources.CombatRecordDeadliestEquipment = {
 	getModel = function ( f283_arg0 )
-		local f283_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f283_arg0 ), "CombatRecordDeadliestEquipment" )
+		local f283_local0 = Engine.CreateModel( Engine.GetModelForController( f283_arg0 ), "CombatRecordDeadliestEquipment" )
 		local f283_local1 = CoD.GetCombatRecordStats( f283_arg0 )
 		local f283_local2 = 0
 		local f283_local3 = 0
-		local f283_local4 = @"menu/none"
+		local f283_local4 = "menu/none"
 		for f283_local5 = 0, 255, 1 do
-			if Engine[@"getitemallocationcost"]( f283_local5, CoD.GetCombatRecordMode() ) >= 0 then
+			if Engine.GetItemAllocationCost( f283_local5, CoD.GetCombatRecordMode() ) >= 0 then
 				local f283_local8 = nil
-				local f283_local9 = Engine[@"getloadoutslotforitem"]( f283_local5, CoD.GetCombatRecordMode() )
+				local f283_local9 = Engine.GetLoadoutSlotForItem( f283_local5, CoD.GetCombatRecordMode() )
 				if f283_local8 and f283_local2 < f283_local8 then
 					f283_local2 = f283_local8
 					f283_local3 = f283_local5
-					f283_local4 = Engine[@"getitemname"]( f283_local5, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], CoD.GetCombatRecordMode() )
+					f283_local4 = Engine.GetItemName( f283_local5, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], CoD.GetCombatRecordMode() )
 				end
 			end
 		end
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f283_local0, "itemIndex" ), f283_local3 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f283_local0, "numKills" ), f283_local2 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f283_local0, "itemName" ), f283_local4 )
+		Engine.SetModelValue( Engine.CreateModel( f283_local0, "itemIndex" ), f283_local3 )
+		Engine.SetModelValue( Engine.CreateModel( f283_local0, "numKills" ), f283_local2 )
+		Engine.SetModelValue( Engine.CreateModel( f283_local0, "itemName" ), f283_local4 )
 		return f283_local0
 	end
 }
 DataSources.CombatRecordDeadliestScorestreak = {
 	getModel = function ( f284_arg0 )
-		local f284_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f284_arg0 ), "CombatRecordDeadliestScorestreak" )
+		local f284_local0 = Engine.CreateModel( Engine.GetModelForController( f284_arg0 ), "CombatRecordDeadliestScorestreak" )
 		local f284_local1 = CoD.GetCombatRecordStats( f284_arg0 )
 		local f284_local2 = 0
 		local f284_local3 = 0
-		local f284_local4 = @"menu/none"
+		local f284_local4 = "menu/none"
 		for f284_local5 = 0, 255, 1 do
-			if Engine[@"getitemallocationcost"]( f284_local5, CoD.GetCombatRecordMode() ) >= 0 and Engine[@"getitemgroup"]( f284_local5, Enum[@"statindexoffset"][@"hash_13057ABF96AF8289"], CoD.GetCombatRecordMode() ) == "killstreak" then
+			if Engine.GetItemAllocationCost( f284_local5, CoD.GetCombatRecordMode() ) >= 0 and Engine.GetItemGroup( f284_local5, Enum[@"statindexoffset"][@"hash_13057ABF96AF8289"], CoD.GetCombatRecordMode() ) == "killstreak" then
 				local f284_local8 = CoD.GetCombatRecordStatForPath( f284_local1, "ItemStats." .. f284_local5 .. ".stats.kills" )
 				if f284_local2 < f284_local8 then
 					f284_local2 = f284_local8
 					f284_local3 = f284_local5
-					f284_local4 = Engine[@"getitemname"]( f284_local5, Enum[@"statindexoffset"][@"hash_13057ABF96AF8289"], CoD.GetCombatRecordMode() )
+					f284_local4 = Engine.GetItemName( f284_local5, Enum[@"statindexoffset"][@"hash_13057ABF96AF8289"], CoD.GetCombatRecordMode() )
 				end
 			end
 		end
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f284_local0, "itemIndex" ), f284_local3 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f284_local0, "numKills" ), f284_local2 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f284_local0, "itemName" ), f284_local4 )
+		Engine.SetModelValue( Engine.CreateModel( f284_local0, "itemIndex" ), f284_local3 )
+		Engine.SetModelValue( Engine.CreateModel( f284_local0, "numKills" ), f284_local2 )
+		Engine.SetModelValue( Engine.CreateModel( f284_local0, "itemName" ), f284_local4 )
 		return f284_local0
 	end
 }
 DataSources.CombatRecordDeadliestWeapon = {
 	getModel = function ( f285_arg0 )
-		local f285_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f285_arg0 ), "CombatRecordDeadliestWeapon" )
+		local f285_local0 = Engine.CreateModel( Engine.GetModelForController( f285_arg0 ), "CombatRecordDeadliestWeapon" )
 		local f285_local1 = CoD.GetCombatRecordStats( f285_arg0 )
 		local f285_local2 = 0
 		local f285_local3 = 0
-		local f285_local4 = @"menu/none"
+		local f285_local4 = "menu/none"
 		for f285_local5 = 0, 255, 1 do
-			local f285_local8 = Engine[@"getitemallocationcost"]( f285_local5, CoD.GetCombatRecordMode() )
+			local f285_local8 = Engine.GetItemAllocationCost( f285_local5, CoD.GetCombatRecordMode() )
 			if f285_local8 < -1 or f285_local8 >= 0 then
-				local f285_local9 = Engine[@"getloadoutslotforitem"]( f285_local5, CoD.GetCombatRecordMode() )
+				local f285_local9 = Engine.GetLoadoutSlotForItem( f285_local5, CoD.GetCombatRecordMode() )
 				if f285_local9 == "primary" or f285_local9 == "secondary" then
 					local f285_local10 = CoD.GetCombatRecordStatForPath( f285_local1, "ItemStats." .. f285_local5 .. ".stats.kills" )
 					if f285_local2 < f285_local10 then
 						f285_local2 = f285_local10
 						f285_local3 = f285_local5
-						f285_local4 = Engine[@"getitemname"]( f285_local5, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], CoD.GetCombatRecordMode() )
+						f285_local4 = Engine.GetItemName( f285_local5, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], CoD.GetCombatRecordMode() )
 					end
 				end
 			end
 		end
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f285_local0, "itemIndex" ), f285_local3 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f285_local0, "numKills" ), f285_local2 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f285_local0, "itemName" ), f285_local4 )
+		Engine.SetModelValue( Engine.CreateModel( f285_local0, "itemIndex" ), f285_local3 )
+		Engine.SetModelValue( Engine.CreateModel( f285_local0, "numKills" ), f285_local2 )
+		Engine.SetModelValue( Engine.CreateModel( f285_local0, "itemName" ), f285_local4 )
 		return f285_local0
 	end
 }
 DataSources.CombatRecordMostUsedBubblegumBuff = {
 	getModel = function ( f286_arg0 )
-		local f286_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f286_arg0 ), "CombatRecordMostUsedBubblegumBuff" )
+		local f286_local0 = Engine.CreateModel( Engine.GetModelForController( f286_arg0 ), "CombatRecordMostUsedBubblegumBuff" )
 		local f286_local1 = CoD.GetCombatRecordStats( f286_arg0 )
 		local f286_local2 = 0
 		local f286_local3 = 0
-		local f286_local4 = @"menu/none"
+		local f286_local4 = "menu/none"
 		for f286_local5 = 0, 255, 1 do
-			if Engine[@"getloadoutslotforitem"]( f286_local5, CoD.GetCombatRecordMode() ) == "equippedbubblegumpack" then
+			if Engine.GetLoadoutSlotForItem( f286_local5, CoD.GetCombatRecordMode() ) == "equippedbubblegumpack" then
 				local f286_local8 = CoD.GetCombatRecordStatForPath( f286_local1, "ItemStats." .. f286_local5 .. ".stats.used" )
 				if f286_local2 < f286_local8 then
 					f286_local2 = f286_local8
 					f286_local3 = f286_local5
-					f286_local4 = Engine[@"getitemname"]( f286_local5, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], CoD.GetCombatRecordMode() )
+					f286_local4 = Engine.GetItemName( f286_local5, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], CoD.GetCombatRecordMode() )
 				end
 			end
 		end
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f286_local0, "itemIndex" ), f286_local3 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f286_local0, "itemName" ), f286_local4 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f286_local0, "numUsed" ), f286_local2 )
+		Engine.SetModelValue( Engine.CreateModel( f286_local0, "itemIndex" ), f286_local3 )
+		Engine.SetModelValue( Engine.CreateModel( f286_local0, "itemName" ), f286_local4 )
+		Engine.SetModelValue( Engine.CreateModel( f286_local0, "numUsed" ), f286_local2 )
 		return f286_local0
 	end
 }
 DataSources.CombatRecordZMHighestRound = {
 	getModel = function ( f287_arg0 )
-		local f287_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f287_arg0 ), "CombatRecordZMHighestRound" )
+		local f287_local0 = Engine.CreateModel( Engine.GetModelForController( f287_arg0 ), "CombatRecordZMHighestRound" )
 		local f287_local1 = CoD.GetCombatRecordStats( f287_arg0 )
 		local f287_local2 = 0
-		local f287_local3 = Engine[@"hash_4F9F1239CFD921FE"]( @"menu/none" )
+		local f287_local3 = Engine[@"hash_4F9F1239CFD921FE"]( "menu/none" )
 		for f287_local8, f287_local9 in pairs( CoD.MapUtility.MapsTable ) do
-			if f287_local9.session_mode == Enum[@"emodes"][@"mode_zombies"] and f287_local1.PlayerStatsByMap and f287_local1.PlayerStatsByMap[f287_local8] then
+			if f287_local9.session_mode == Enum.eModes.mode_zombies and f287_local1.PlayerStatsByMap and f287_local1.PlayerStatsByMap[f287_local8] then
 				local f287_local7 = f287_local1.PlayerStatsByMap[f287_local8].stats.HIGHEST_ROUND_REACHED.statValue:get()
 				if f287_local2 < f287_local7 then
 					f287_local2 = f287_local7
@@ -5289,42 +5288,42 @@ DataSources.CombatRecordZMHighestRound = {
 				end
 			end
 		end
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f287_local0, "highestRound" ), f287_local2 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f287_local0, "mapName" ), f287_local3 )
+		Engine.SetModelValue( Engine.CreateModel( f287_local0, "highestRound" ), f287_local2 )
+		Engine.SetModelValue( Engine.CreateModel( f287_local0, "mapName" ), f287_local3 )
 		return f287_local0
 	end
 }
 DataSources.CombatRecordTotalAccoladesCompleted = {
 	getModel = function ( f288_arg0 )
-		local f288_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f288_arg0 ), "CombatRecordTotalAccoladesCompleted" )
+		local f288_local0 = Engine.CreateModel( Engine.GetModelForController( f288_arg0 ), "CombatRecordTotalAccoladesCompleted" )
 		local f288_local1 = CoD.GetCombatRecordStats( f288_arg0 )
 		local f288_local2 = 0
 		for f288_local8, f288_local9 in LUI.IterateTableBySortedKeys( CoD.MapUtility.MapsTable, function ( f289_arg0, f289_arg1 )
 			return CoD.MapUtility.MapsTable[f289_arg0].uniqueID < CoD.MapUtility.MapsTable[f289_arg1].uniqueID
 		end, nil ) do
-			if f288_local9.session_mode == Enum[@"emodes"][@"mode_campaign"] and f288_local9.campaign_mode == Enum[@"campaignmode"][0xBC3515387CDAB7] and f288_local9.dlc_pack ~= -1 and f288_local9.isSubLevel == false then
+			if f288_local9.session_mode == Enum.eModes.mode_campaign and f288_local9.campaign_mode == Enum.CampaignMode[0xBC3515387CDAB7] and f288_local9.dlc_pack ~= -1 and f288_local9.isSubLevel == false then
 				local f288_local6, f288_local7 = GetAccoladesXOfY( f288_arg0, f288_local8, true )
 				f288_local2 = f288_local2 + f288_local6
 			end
 		end
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f288_local0, "accoladesCompleted" ), f288_local2 )
+		Engine.SetModelValue( Engine.CreateModel( f288_local0, "accoladesCompleted" ), f288_local2 )
 		return f288_local0
 	end
 }
 DataSources.CombatRecordTotalCollectiblesFound = {
 	getModel = function ( f290_arg0 )
-		local f290_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f290_arg0 ), "CombatRecordTotalCollectiblesFound" )
+		local f290_local0 = Engine.CreateModel( Engine.GetModelForController( f290_arg0 ), "CombatRecordTotalCollectiblesFound" )
 		local f290_local1 = CoD.GetCombatRecordStats( f290_arg0 )
 		local f290_local2 = 0
 		for f290_local8, f290_local9 in LUI.IterateTableBySortedKeys( CoD.MapUtility.MapsTable, function ( f291_arg0, f291_arg1 )
 			return CoD.MapUtility.MapsTable[f291_arg0].uniqueID < CoD.MapUtility.MapsTable[f291_arg1].uniqueID
 		end, nil ) do
-			if f290_local9.session_mode == Enum[@"emodes"][@"mode_campaign"] and f290_local9.campaign_mode == Enum[@"campaignmode"][0xBC3515387CDAB7] and f290_local9.dlc_pack ~= -1 and f290_local9.isSubLevel == false then
+			if f290_local9.session_mode == Enum.eModes.mode_campaign and f290_local9.campaign_mode == Enum.CampaignMode[0xBC3515387CDAB7] and f290_local9.dlc_pack ~= -1 and f290_local9.isSubLevel == false then
 				local f290_local6, f290_local7 = GetCollectiblesXOfY( f290_arg0, f290_local8, true )
 				f290_local2 = f290_local2 + f290_local6
 			end
 		end
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f290_local0, "collectiblesFound" ), f290_local2 )
+		Engine.SetModelValue( Engine.CreateModel( f290_local0, "collectiblesFound" ), f290_local2 )
 		return f290_local0
 	end
 }
@@ -5333,23 +5332,23 @@ DataSources.CombatRecordCollectiblesList = {
 		f292_arg1.items = {}
 		local f292_local0 = 0
 		local f292_local1 = 0
-		local f292_local2 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f292_arg0 ), "CombatRecordCollectiblesList" )
+		local f292_local2 = Engine.CreateModel( Engine.GetModelForController( f292_arg0 ), "CombatRecordCollectiblesList" )
 		for f292_local10, f292_local11 in LUI.IterateTableBySortedKeys( CoD.MapUtility.MapsTable, function ( f293_arg0, f293_arg1 )
 			return CoD.MapUtility.MapsTable[f293_arg0].uniqueID < CoD.MapUtility.MapsTable[f293_arg1].uniqueID
 		end, nil ) do
-			if f292_local11.session_mode == Enum[@"emodes"][@"mode_campaign"] and f292_local11.campaign_mode == Enum[@"campaignmode"][0xBC3515387CDAB7] and f292_local11.dlc_pack ~= -1 and f292_local11.isSubLevel == false then
+			if f292_local11.session_mode == Enum.eModes.mode_campaign and f292_local11.campaign_mode == Enum.CampaignMode[0xBC3515387CDAB7] and f292_local11.dlc_pack ~= -1 and f292_local11.isSubLevel == false then
 				f292_local0 = f292_local0 + 1
 				local f292_local6, f292_local7 = GetCollectiblesXOfY( f292_arg0, f292_local10, true )
-				local f292_local8 = Engine[@"createmodel"]( f292_local2, f292_local0 )
+				local f292_local8 = Engine.CreateModel( f292_local2, f292_local0 )
 				local f292_local9 = CoD.GetCombatRecordStats( f292_arg0 )
 				if f292_local9.PlayerStatsByMap[f292_local10].hasBeenCompleted:get() == 1 or f292_local6 > 0 then
 					f292_local1 = f292_local1 + f292_local6
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f292_local8, "name" ), f292_local11.mapName )
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f292_local8, "stat" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_15D04C10230CB059", f292_local6, f292_local7 ) )
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f292_local8, "id" ), f292_local10 )
+					Engine.SetModelValue( Engine.CreateModel( f292_local8, "name" ), f292_local11.mapName )
+					Engine.SetModelValue( Engine.CreateModel( f292_local8, "stat" ), Engine[@"hash_4F9F1239CFD921FE"]( "menu/listbox_pos", f292_local6, f292_local7 ) )
+					Engine.SetModelValue( Engine.CreateModel( f292_local8, "id" ), f292_local10 )
 				else
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f292_local8, "name" ), f292_local11.mapName )
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f292_local8, "stat" ), "--" )
+					Engine.SetModelValue( Engine.CreateModel( f292_local8, "name" ), f292_local11.mapName )
+					Engine.SetModelValue( Engine.CreateModel( f292_local8, "stat" ), "--" )
 				end
 				table.insert( f292_arg1.items, f292_local8 )
 			end
@@ -5365,14 +5364,14 @@ DataSources.CombatRecordCollectiblesList = {
 DataSources.CombatRecordEquipmentList = {
 	prepare = function ( f296_arg0, f296_arg1, f296_arg2 )
 		f296_arg1.items = {}
-		local f296_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f296_arg0 ), "CombatRecordEquipmentList" )
+		local f296_local0 = Engine.CreateModel( Engine.GetModelForController( f296_arg0 ), "CombatRecordEquipmentList" )
 		local f296_local1 = CoD.GetCombatRecordStats( f296_arg0 )
 		local f296_local2 = CoD.GetCombatRecordComparisonStats( f296_arg0 )
 		table.sort( f296_arg1.items, function ( f297_arg0, f297_arg1 )
-			local f297_local0 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f297_arg0, "stat" ) )
-			local f297_local1 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f297_arg1, "stat" ) )
+			local f297_local0 = Engine.GetModelValue( Engine.GetModel( f297_arg0, "stat" ) )
+			local f297_local1 = Engine.GetModelValue( Engine.GetModel( f297_arg1, "stat" ) )
 			if f297_local0 == f297_local1 then
-				return Engine[@"localize"]( Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f297_arg0, "name" ) ) ) < Engine[@"localize"]( Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f297_arg1, "name" ) ) )
+				return Engine.Localize( Engine.GetModelValue( Engine.GetModel( f297_arg0, "name" ) ) ) < Engine.Localize( Engine.GetModelValue( Engine.GetModel( f297_arg1, "name" ) ) )
 			else
 				return f297_local1 < f297_local0
 			end
@@ -5388,42 +5387,42 @@ DataSources.CombatRecordEquipmentList = {
 DataSources.CombatRecordGameModeList = {
 	prepare = function ( f300_arg0, f300_arg1, f300_arg2 )
 		f300_arg1.items = {}
-		local f300_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f300_arg0 ), "CombatRecordGameModeList" )
+		local f300_local0 = Engine.CreateModel( Engine.GetModelForController( f300_arg0 ), "CombatRecordGameModeList" )
 		local f300_local1 = CoD.GetCombatRecordStats( f300_arg0 )
 		local f300_local2 = CoD.GetCombatRecordComparisonStats( f300_arg0 )
-		for f300_local33, f300_local34 in pairs( Engine[@"getgametypesbase"]( CoD.GetCombatRecordMode() ) ) do
+		for f300_local33, f300_local34 in pairs( Engine.GetGametypesBase( CoD.GetCombatRecordMode() ) ) do
 			if f300_local34.category == "standard" then
-				local f300_local6 = Engine[@"createmodel"]( f300_local0, f300_local33 )
+				local f300_local6 = Engine.CreateModel( f300_local0, f300_local33 )
 				local f300_local7 = Engine[@"getgametypeinfo"]( f300_local34.gametype )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f300_local6, "name" ), f300_local7.nameRef )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f300_local6, "image" ), f300_local7.image )
+				Engine.SetModelValue( Engine.CreateModel( f300_local6, "name" ), f300_local7.nameRef )
+				Engine.SetModelValue( Engine.CreateModel( f300_local6, "image" ), f300_local7.image )
 				local f300_local8 = "PlayerStatsByGameType." .. f300_local34.gametype .. ".LOSSES"
 				local f300_local9 = CoD.GetCombatRecordStatForPathOrZero( f300_local1, f300_local8 )
 				local f300_local10 = 0
 				if f300_local2 then
 					f300_local10 = CoD.GetCombatRecordStatForPathOrZero( f300_local2, f300_local8 )
 				end
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f300_local6, "losses" ), f300_local9 )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f300_local6, "lossesComparison" ), f300_local10 )
+				Engine.SetModelValue( Engine.CreateModel( f300_local6, "losses" ), f300_local9 )
+				Engine.SetModelValue( Engine.CreateModel( f300_local6, "lossesComparison" ), f300_local10 )
 				local f300_local11 = "PlayerStatsByGameType." .. f300_local34.gametype .. ".WINS"
 				local f300_local12 = CoD.GetCombatRecordStatForPathOrZero( f300_local1, f300_local11 )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f300_local6, "stat" ), f300_local12 )
+				Engine.SetModelValue( Engine.CreateModel( f300_local6, "stat" ), f300_local12 )
 				local f300_local13 = 0
 				if f300_local2 then
 					f300_local13 = CoD.GetCombatRecordStatForPathOrZero( f300_local2, f300_local11 )
 				end
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f300_local6, "statComparison" ), f300_local13 )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f300_local6, "wlRatio" ), CoD.GetDisplayRatioFromTwoStats( f300_local12, f300_local9 ) )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f300_local6, "wlRatioComparison" ), CoD.GetDisplayRatioFromTwoStats( f300_local13, f300_local10 ) )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f300_local6, "lossRingFrac" ), f300_local9 / math.max( 1, f300_local9 + f300_local12 ) )
+				Engine.SetModelValue( Engine.CreateModel( f300_local6, "statComparison" ), f300_local13 )
+				Engine.SetModelValue( Engine.CreateModel( f300_local6, "wlRatio" ), CoD.GetDisplayRatioFromTwoStats( f300_local12, f300_local9 ) )
+				Engine.SetModelValue( Engine.CreateModel( f300_local6, "wlRatioComparison" ), CoD.GetDisplayRatioFromTwoStats( f300_local13, f300_local10 ) )
+				Engine.SetModelValue( Engine.CreateModel( f300_local6, "lossRingFrac" ), f300_local9 / math.max( 1, f300_local9 + f300_local12 ) )
 				local f300_local14 = "PlayerStatsByGameType." .. f300_local34.gametype .. ".WIN_STREAK"
 				local f300_local15 = CoD.GetCombatRecordStatForPathOrZero( f300_local1, f300_local14 )
 				local f300_local16 = 0
 				if f300_local2 then
 					f300_local16 = CoD.GetCombatRecordStatForPathOrZero( f300_local2, f300_local14 )
 				end
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f300_local6, "streak" ), f300_local15 )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f300_local6, "streakComparison" ), f300_local16 )
+				Engine.SetModelValue( Engine.CreateModel( f300_local6, "streak" ), f300_local15 )
+				Engine.SetModelValue( Engine.CreateModel( f300_local6, "streakComparison" ), f300_local16 )
 				local f300_local17 = "PlayerStatsByGameType." .. f300_local34.gametype .. ".KILLS"
 				local f300_local18 = CoD.GetCombatRecordStatForPathOrZero( f300_local1, f300_local17 )
 				local f300_local19 = 0
@@ -5436,8 +5435,8 @@ DataSources.CombatRecordGameModeList = {
 				if f300_local2 then
 					f300_local22 = CoD.GetCombatRecordStatForPathOrZero( f300_local2, f300_local20 )
 				end
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f300_local6, "kdRatio" ), CoD.GetDisplayRatioFromTwoStats( f300_local18, f300_local21 ) )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f300_local6, "kdRatioComparison" ), CoD.GetDisplayRatioFromTwoStats( f300_local19, f300_local22 ) )
+				Engine.SetModelValue( Engine.CreateModel( f300_local6, "kdRatio" ), CoD.GetDisplayRatioFromTwoStats( f300_local18, f300_local21 ) )
+				Engine.SetModelValue( Engine.CreateModel( f300_local6, "kdRatioComparison" ), CoD.GetDisplayRatioFromTwoStats( f300_local19, f300_local22 ) )
 				local f300_local23 = "PlayerStatsByGameType." .. f300_local34.gametype .. ".SCORE"
 				local f300_local24 = CoD.GetCombatRecordStatForPathOrZero( f300_local1, f300_local23 )
 				local f300_local25 = 0
@@ -5454,16 +5453,16 @@ DataSources.CombatRecordGameModeList = {
 				local f300_local30 = math.max( 1, f300_local28 / 60 )
 				local f300_local31 = math.floor( f300_local24 / f300_local29 + 0.5 )
 				local f300_local32 = math.floor( f300_local25 / f300_local30 + 0.5 )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f300_local6, "spm" ), f300_local31 )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f300_local6, "spmComparison" ), f300_local32 )
+				Engine.SetModelValue( Engine.CreateModel( f300_local6, "spm" ), f300_local31 )
+				Engine.SetModelValue( Engine.CreateModel( f300_local6, "spmComparison" ), f300_local32 )
 				table.insert( f300_arg1.items, f300_local6 )
 			end
 		end
 		table.sort( f300_arg1.items, function ( f301_arg0, f301_arg1 )
-			local f301_local0 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f301_arg0, "stat" ) )
-			local f301_local1 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f301_arg1, "stat" ) )
+			local f301_local0 = Engine.GetModelValue( Engine.GetModel( f301_arg0, "stat" ) )
+			local f301_local1 = Engine.GetModelValue( Engine.GetModel( f301_arg1, "stat" ) )
 			if f301_local0 == f301_local1 then
-				return Engine[@"localize"]( Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f301_arg0, "name" ) ) ) < Engine[@"localize"]( Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f301_arg1, "name" ) ) )
+				return Engine.Localize( Engine.GetModelValue( Engine.GetModel( f301_arg0, "name" ) ) ) < Engine.Localize( Engine.GetModelValue( Engine.GetModel( f301_arg1, "name" ) ) )
 			else
 				return f301_local1 < f301_local0
 			end
@@ -5478,10 +5477,10 @@ DataSources.CombatRecordGameModeList = {
 }
 DataSources.CombatRecordMostWonGameMode = {
 	getModel = function ( f304_arg0 )
-		local f304_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f304_arg0 ), "CombatRecordMostWonGameMode" )
+		local f304_local0 = Engine.CreateModel( Engine.GetModelForController( f304_arg0 ), "CombatRecordMostWonGameMode" )
 		local f304_local1, f304_local2, f304_local3 = nil
 		local f304_local4 = CoD.GetCombatRecordStats( f304_arg0 )
-		for f304_local10, f304_local11 in pairs( Engine[@"getgametypesbase"]( CoD.GetCombatRecordMode() ) ) do
+		for f304_local10, f304_local11 in pairs( Engine.GetGametypesBase( CoD.GetCombatRecordMode() ) ) do
 			if f304_local11.category == "standard" then
 				local f304_local8 = CoD.GetCombatRecordStatForPath( f304_local4, "PlayerStatsByGameType." .. f304_local11.gametype .. ".WINS" )
 				if not f304_local1 or f304_local1 < f304_local8 then
@@ -5492,46 +5491,46 @@ DataSources.CombatRecordMostWonGameMode = {
 				end
 			end
 		end
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f304_local0, "image" ), f304_local2 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f304_local0, "name" ), f304_local3 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f304_local0, "wins" ), f304_local1 )
+		Engine.SetModelValue( Engine.CreateModel( f304_local0, "image" ), f304_local2 )
+		Engine.SetModelValue( Engine.CreateModel( f304_local0, "name" ), f304_local3 )
+		Engine.SetModelValue( Engine.CreateModel( f304_local0, "wins" ), f304_local1 )
 		return f304_local0
 	end
 }
 DataSources.CombatRecordMPMedal1 = {
 	getModel = function ( f305_arg0 )
-		local f305_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f305_arg0 ), "CombatRecordMedal1" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f305_local0, "medalRef" ), @"medal/headshot" )
-		local f305_local1 = Engine[@"storagegetbuffer"]( f305_arg0, Enum[@"storagefiletype"][@"storage_mp_stats_online"] )
+		local f305_local0 = Engine.CreateModel( Engine.GetModelForController( f305_arg0 ), "CombatRecordMedal1" )
+		Engine.SetModelValue( Engine.CreateModel( f305_local0, "medalRef" ), "medal/headshot" )
+		local f305_local1 = Engine.StorageGetBuffer( f305_arg0, Enum.StorageFileType[@"storage_mp_stats_online"] )
 		local f305_local2 = f305_local1.playerstatslist.medal_headshot.statvalue:get()
 		if f305_local2 > 0 then
-			local f305_local3 = Engine[@"hash_2E00B2F29271C60B"]( Engine[@"tablelookup"]( CoD.scoreInfoTableMP, 3, 2, @"medal/headshot" ) )
+			local f305_local3 = Engine[@"hash_2E00B2F29271C60B"]( Engine.TableLookup( CoD.scoreInfoTableMP, 3, 2, "medal/headshot" ) )
 			if f305_local3 then
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f305_local0, "backingLarge" ), f305_local3.backingLarge )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f305_local0, "iconLarge" ), f305_local3.iconLarge )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f305_local0, "value" ), f305_local2 )
+				Engine.SetModelValue( Engine.CreateModel( f305_local0, "backingLarge" ), f305_local3.backingLarge )
+				Engine.SetModelValue( Engine.CreateModel( f305_local0, "iconLarge" ), f305_local3.iconLarge )
+				Engine.SetModelValue( Engine.CreateModel( f305_local0, "value" ), f305_local2 )
 			end
 		else
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f305_local0, "backingLarge" ), "t7_hud_medal_backing_badassery_outline" )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f305_local0, "iconLarge" ), "$blank" )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f305_local0, "value" ), "--" )
+			Engine.SetModelValue( Engine.CreateModel( f305_local0, "backingLarge" ), "t7_hud_medal_backing_badassery_outline" )
+			Engine.SetModelValue( Engine.CreateModel( f305_local0, "iconLarge" ), "$blank" )
+			Engine.SetModelValue( Engine.CreateModel( f305_local0, "value" ), "--" )
 		end
 		return f305_local0
 	end
 }
 DataSources.CombatRecordMPMedal2 = {
 	getModel = function ( f306_arg0 )
-		local f306_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f306_arg0 ), "CombatRecordMedal2" )
+		local f306_local0 = Engine.CreateModel( Engine.GetModelForController( f306_arg0 ), "CombatRecordMedal2" )
 		local f306_local1 = {
-			@"hash_4239595BA030E555",
-			@"medal/killstreak_30",
-			@"medal/killstreak_25",
-			@"medal/killstreak_20",
-			@"medal/killstreak_15",
-			@"medal/killstreak_10",
-			@"medal/killstreak_5"
+			"medal/killstreak_more_than_30",
+			"medal/killstreak_30",
+			"medal/killstreak_25",
+			"medal/killstreak_20",
+			"medal/killstreak_15",
+			"medal/killstreak_10",
+			"medal/killstreak_5"
 		}
-		local f306_local2 = Engine[@"storagegetbuffer"]( f306_arg0, Enum[@"storagefiletype"][@"storage_mp_stats_online"] )
+		local f306_local2 = Engine.StorageGetBuffer( f306_arg0, Enum.StorageFileType[@"storage_mp_stats_online"] )
 		local f306_local3, f306_local4, f306_local5, f306_local6 = nil
 		for f306_local10, f306_local11 in ipairs( f306_local1 ) do
 			local f306_local12 = f306_local2.playerstatslist[f306_local11].statvalue:get()
@@ -5542,36 +5541,36 @@ DataSources.CombatRecordMPMedal2 = {
 			end
 		end
 		if f306_local3 then
-			f306_local8 = Engine[@"hash_2E00B2F29271C60B"]( Engine[@"tablelookup"]( CoD.scoreInfoTableMP, 3, 2, f306_local3 ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f306_local0, "medalRef" ), f306_local3 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f306_local0, "value" ), f306_local4 )
+			f306_local8 = Engine[@"hash_2E00B2F29271C60B"]( Engine.TableLookup( CoD.scoreInfoTableMP, 3, 2, f306_local3 ) )
+			Engine.SetModelValue( Engine.CreateModel( f306_local0, "medalRef" ), f306_local3 )
+			Engine.SetModelValue( Engine.CreateModel( f306_local0, "value" ), f306_local4 )
 			if f306_local8 then
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f306_local0, "backingLarge" ), f306_local8.backingLarge )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f306_local0, "iconLarge" ), f306_local8.iconLarge )
+				Engine.SetModelValue( Engine.CreateModel( f306_local0, "backingLarge" ), f306_local8.backingLarge )
+				Engine.SetModelValue( Engine.CreateModel( f306_local0, "iconLarge" ), f306_local8.iconLarge )
 			end
 		else
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f306_local0, "medalRef" ), @"hash_33903A8AAF5DBA53" )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f306_local0, "value" ), "--" )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f306_local0, "backingLarge" ), "uie_t7_hud_medal_backing_killstreak_outline" )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f306_local0, "iconLarge" ), "$blank" )
+			Engine.SetModelValue( Engine.CreateModel( f306_local0, "medalRef" ), "menu/kill_streaks" )
+			Engine.SetModelValue( Engine.CreateModel( f306_local0, "value" ), "--" )
+			Engine.SetModelValue( Engine.CreateModel( f306_local0, "backingLarge" ), "uie_t7_hud_medal_backing_killstreak_outline" )
+			Engine.SetModelValue( Engine.CreateModel( f306_local0, "iconLarge" ), "$blank" )
 		end
 		return f306_local0
 	end
 }
 DataSources.CombatRecordMPMedal3 = {
 	getModel = function ( f307_arg0 )
-		local f307_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f307_arg0 ), "CombatRecordMedal3" )
+		local f307_local0 = Engine.CreateModel( Engine.GetModelForController( f307_arg0 ), "CombatRecordMedal3" )
 		local f307_local1 = {
-			@"hash_469C9B1E2C17AF47",
-			@"hash_1A099193BA2C714D",
-			@"medal/multikill_7",
-			@"medal/multikill_6",
-			@"medal/multikill_5",
-			@"medal/multikill_4",
-			@"medal/multikill_3",
-			@"medal/multikill_2"
+			"medal/multikill_more_than_8",
+			"medal/multikill_8",
+			"medal/multikill_7",
+			"medal/multikill_6",
+			"medal/multikill_5",
+			"medal/multikill_4",
+			"medal/multikill_3",
+			"medal/multikill_2"
 		}
-		local f307_local2 = Engine[@"storagegetbuffer"]( f307_arg0, Enum[@"storagefiletype"][@"storage_mp_stats_online"] )
+		local f307_local2 = Engine.StorageGetBuffer( f307_arg0, Enum.StorageFileType[@"storage_mp_stats_online"] )
 		local f307_local3, f307_local4, f307_local5, f307_local6 = nil
 		for f307_local10, f307_local11 in ipairs( f307_local1 ) do
 			local f307_local12 = f307_local2.playerstatslist[f307_local11].statvalue:get()
@@ -5582,37 +5581,37 @@ DataSources.CombatRecordMPMedal3 = {
 			end
 		end
 		if f307_local3 then
-			f307_local8 = Engine[@"hash_2E00B2F29271C60B"]( Engine[@"tablelookup"]( CoD.scoreInfoTableMP, 3, 2, f307_local3 ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f307_local0, "medalRef" ), f307_local3 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f307_local0, "value" ), f307_local4 )
+			f307_local8 = Engine[@"hash_2E00B2F29271C60B"]( Engine.TableLookup( CoD.scoreInfoTableMP, 3, 2, f307_local3 ) )
+			Engine.SetModelValue( Engine.CreateModel( f307_local0, "medalRef" ), f307_local3 )
+			Engine.SetModelValue( Engine.CreateModel( f307_local0, "value" ), f307_local4 )
 			if f307_local8 then
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f307_local0, "backingLarge" ), f307_local8.backingLarge )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f307_local0, "iconLarge" ), f307_local8.iconLarge )
+				Engine.SetModelValue( Engine.CreateModel( f307_local0, "backingLarge" ), f307_local8.backingLarge )
+				Engine.SetModelValue( Engine.CreateModel( f307_local0, "iconLarge" ), f307_local8.iconLarge )
 			end
 		else
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f307_local0, "medalRef" ), @"menu/multi_kills" )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f307_local0, "value" ), "--" )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f307_local0, "backingLarge" ), "uie_t7_hud_medal_backing_multikill_outline" )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f307_local0, "iconLarge" ), "$blank" )
+			Engine.SetModelValue( Engine.CreateModel( f307_local0, "medalRef" ), @"menu/multi_kills" )
+			Engine.SetModelValue( Engine.CreateModel( f307_local0, "value" ), "--" )
+			Engine.SetModelValue( Engine.CreateModel( f307_local0, "backingLarge" ), "uie_t7_hud_medal_backing_multikill_outline" )
+			Engine.SetModelValue( Engine.CreateModel( f307_local0, "iconLarge" ), "$blank" )
 		end
 		return f307_local0
 	end
 }
 DataSources.CombatRecordMPMedal4 = {
 	getModel = function ( f308_arg0 )
-		local f308_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f308_arg0 ), "CombatRecordMedal4" )
+		local f308_local0 = Engine.CreateModel( Engine.GetModelForController( f308_arg0 ), "CombatRecordMedal4" )
 		local f308_local1 = {
-			@"hash_4D59FE23D6E96AFA",
-			@"hash_947050E1A845310",
-			@"hash_D98B33575011259",
-			@"hash_7738A6BCB924C165",
-			@"hash_438BA6835F80D489",
+			"medal/annihilator_multikill",
+			"medal/armblades_multikill",
+			"medal/bowlauncher_multikill",
+			"medal/flamethrower_multikill",
+			"medal/gelgun_multikill",
 			@"hash_198E95D5B879B8C4",
-			@"hash_8F9898F2C7D8D8B",
-			@"hash_434F3CC6EC87FA2",
-			@"hash_F6C6B0815D2CD9F"
+			"medal/lightninggun_multikill",
+			"medal/minigun_multikill",
+			"medal/pineapple_multikill"
 		}
-		local f308_local2 = Engine[@"storagegetbuffer"]( f308_arg0, Enum[@"storagefiletype"][@"storage_mp_stats_online"] )
+		local f308_local2 = Engine.StorageGetBuffer( f308_arg0, Enum.StorageFileType[@"storage_mp_stats_online"] )
 		local f308_local3 = nil
 		local f308_local4 = 0
 		local f308_local5, f308_local6 = nil
@@ -5624,39 +5623,39 @@ DataSources.CombatRecordMPMedal4 = {
 			end
 		end
 		if f308_local3 then
-			f308_local8 = Engine[@"hash_2E00B2F29271C60B"]( Engine[@"tablelookup"]( CoD.scoreInfoTableMP, 3, 2, f308_local3 ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f308_local0, "medalRef" ), f308_local3 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f308_local0, "value" ), f308_local4 )
+			f308_local8 = Engine[@"hash_2E00B2F29271C60B"]( Engine.TableLookup( CoD.scoreInfoTableMP, 3, 2, f308_local3 ) )
+			Engine.SetModelValue( Engine.CreateModel( f308_local0, "medalRef" ), f308_local3 )
+			Engine.SetModelValue( Engine.CreateModel( f308_local0, "value" ), f308_local4 )
 			if f308_local8 then
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f308_local0, "backingLarge" ), f308_local8.backingLarge )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f308_local0, "iconLarge" ), f308_local8.iconLarge )
+				Engine.SetModelValue( Engine.CreateModel( f308_local0, "backingLarge" ), f308_local8.backingLarge )
+				Engine.SetModelValue( Engine.CreateModel( f308_local0, "iconLarge" ), f308_local8.iconLarge )
 			end
 		else
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f308_local0, "medalRef" ), @"menu/specialist_weapon" )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f308_local0, "value" ), "--" )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f308_local0, "backingLarge" ), "uie_t7_hud_medal_backing_specialist_outline" )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f308_local0, "iconLarge" ), "$blank" )
+			Engine.SetModelValue( Engine.CreateModel( f308_local0, "medalRef" ), @"menu/specialist_weapon" )
+			Engine.SetModelValue( Engine.CreateModel( f308_local0, "value" ), "--" )
+			Engine.SetModelValue( Engine.CreateModel( f308_local0, "backingLarge" ), "uie_t7_hud_medal_backing_specialist_outline" )
+			Engine.SetModelValue( Engine.CreateModel( f308_local0, "iconLarge" ), "$blank" )
 		end
 		return f308_local0
 	end
 }
 DataSources.CombatRecordMPMedal5 = {
 	getModel = function ( f309_arg0 )
-		local f309_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f309_arg0 ), "CombatRecordMedal5" )
+		local f309_local0 = Engine.CreateModel( Engine.GetModelForController( f309_arg0 ), "CombatRecordMedal5" )
 		local f309_local1 = {
 			@"hash_39C37154A6593727",
-			@"hash_49B8CB21838CA370",
-			@"hash_39E7BD82D6C0D95D",
-			@"hash_6B38CF0C4CD611B3",
-			@"hash_37E3DB533331A9A5",
-			@"hash_5687A5EC84083FAB",
-			@"hash_3825EF109D54B85E",
-			@"hash_3E463A2AE1F8B84C",
+			"medal/focus_earn_multiscorestreak",
+			"medal/focus_earn_scorestreak",
+			"medal/heatwave_kill",
+			"medal/kill_enemy_while_using_psychosis",
+			"medal/power_armor_kill",
+			"medal/optic_camo_capture_objective",
+			"medal/optic_camo_kill",
 			@"hash_77C5EA085D8A5A7",
-			@"hash_6E61853AFD407D62",
-			@"hash_4B7E7BB92BBD6DB0"
+			"medal/speed_burst_kill",
+			"medal/vision_pulse_kill"
 		}
-		local f309_local2 = Engine[@"storagegetbuffer"]( f309_arg0, Enum[@"storagefiletype"][@"storage_mp_stats_online"] )
+		local f309_local2 = Engine.StorageGetBuffer( f309_arg0, Enum.StorageFileType[@"storage_mp_stats_online"] )
 		local f309_local3 = nil
 		local f309_local4 = 0
 		local f309_local5, f309_local6 = nil
@@ -5668,18 +5667,18 @@ DataSources.CombatRecordMPMedal5 = {
 			end
 		end
 		if f309_local3 then
-			f309_local8 = Engine[@"hash_2E00B2F29271C60B"]( Engine[@"tablelookup"]( CoD.scoreInfoTableMP, 3, 2, f309_local3 ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f309_local0, "medalRef" ), f309_local3 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f309_local0, "value" ), f309_local4 )
+			f309_local8 = Engine[@"hash_2E00B2F29271C60B"]( Engine.TableLookup( CoD.scoreInfoTableMP, 3, 2, f309_local3 ) )
+			Engine.SetModelValue( Engine.CreateModel( f309_local0, "medalRef" ), f309_local3 )
+			Engine.SetModelValue( Engine.CreateModel( f309_local0, "value" ), f309_local4 )
 			if f309_local8 then
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f309_local0, "backingLarge" ), f309_local8.backingLarge )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f309_local0, "iconLarge" ), f309_local8.iconLarge )
+				Engine.SetModelValue( Engine.CreateModel( f309_local0, "backingLarge" ), f309_local8.backingLarge )
+				Engine.SetModelValue( Engine.CreateModel( f309_local0, "iconLarge" ), f309_local8.iconLarge )
 			end
 		else
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f309_local0, "medalRef" ), @"menu/specialist_ability" )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f309_local0, "value" ), "--" )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f309_local0, "backingLarge" ), "uie_t7_hud_medal_backing_specialist_outline" )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f309_local0, "iconLarge" ), "$blank" )
+			Engine.SetModelValue( Engine.CreateModel( f309_local0, "medalRef" ), @"menu/specialist_ability" )
+			Engine.SetModelValue( Engine.CreateModel( f309_local0, "value" ), "--" )
+			Engine.SetModelValue( Engine.CreateModel( f309_local0, "backingLarge" ), "uie_t7_hud_medal_backing_specialist_outline" )
+			Engine.SetModelValue( Engine.CreateModel( f309_local0, "iconLarge" ), "$blank" )
 		end
 		return f309_local0
 	end
@@ -5687,10 +5686,10 @@ DataSources.CombatRecordMPMedal5 = {
 DataSources.CombatRecordMPMedals = {
 	prepare = function ( f310_arg0, f310_arg1, f310_arg2 )
 		f310_arg1.items = {}
-		local f310_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f310_arg0 ), "CombatRecordMPMedals" )
-		local f310_local1 = Engine[@"storagegetbuffer"]( f310_arg0, Enum[@"storagefiletype"][@"storage_mp_stats_online"] )
+		local f310_local0 = Engine.CreateModel( Engine.GetModelForController( f310_arg0 ), "CombatRecordMPMedals" )
+		local f310_local1 = Engine.StorageGetBuffer( f310_arg0, Enum.StorageFileType[@"storage_mp_stats_online"] )
 		f310_local1 = f310_local1.PlayerStatsList
-		local f310_local2 = Engine[@"gettablerowcount"]( CoD.scoreInfoTableMP )
+		local f310_local2 = Engine.GetTableRowCount( CoD.scoreInfoTableMP )
 		local f310_local3 = 2
 		local f310_local4 = 3
 		local f310_local5 = 12
@@ -5709,25 +5708,25 @@ DataSources.CombatRecordMPMedals = {
 					end
 					local f310_local14 = Engine[@"hash_2E00B2F29271C60B"]( f310_local12 )
 					if timesEarned > 0 then
-						local f310_local15 = Engine[@"createmodel"]( f310_local0, f310_local8 )
+						local f310_local15 = Engine.CreateModel( f310_local0, f310_local8 )
 						if not f310_local7[f310_local11] then
 							f310_local7[f310_local11] = f310_local8
-							Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f310_local15, "name" ), f310_local11 )
-							Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f310_local15, "timesEarned" ), timesEarned )
-							Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f310_local15, "iconLarge" ), f310_local14.iconLarge )
-							Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f310_local15, "backingLarge" ), f310_local14.backingLarge )
-							Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f310_local15, "sortKey" ), f310_local13 )
+							Engine.SetModelValue( Engine.CreateModel( f310_local15, "name" ), f310_local11 )
+							Engine.SetModelValue( Engine.CreateModel( f310_local15, "timesEarned" ), timesEarned )
+							Engine.SetModelValue( Engine.CreateModel( f310_local15, "iconLarge" ), f310_local14.iconLarge )
+							Engine.SetModelValue( Engine.CreateModel( f310_local15, "backingLarge" ), f310_local14.backingLarge )
+							Engine.SetModelValue( Engine.CreateModel( f310_local15, "sortKey" ), f310_local13 )
 							table.insert( f310_arg1.items, f310_local15 )
 						else
-							local f310_local16 = Engine[@"getmodel"]( Engine[@"getmodel"]( f310_local0, f310_local7[f310_local11] ), "timesEarned" )
-							Engine[@"setmodelvalue"]( f310_local16, Engine[@"getmodelvalue"]( f310_local16 ) + timesEarned )
+							local f310_local16 = Engine.GetModel( Engine.GetModel( f310_local0, f310_local7[f310_local11] ), "timesEarned" )
+							Engine.SetModelValue( f310_local16, Engine.GetModelValue( f310_local16 ) + timesEarned )
 						end
 					end
 				end
 			end
 		end
 		table.sort( f310_arg1.items, function ( f311_arg0, f311_arg1 )
-			return Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f311_arg0, "sortKey" ) ) < Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f311_arg1, "sortKey" ) )
+			return Engine.GetModelValue( Engine.GetModel( f311_arg0, "sortKey" ) ) < Engine.GetModelValue( Engine.GetModel( f311_arg1, "sortKey" ) )
 		end )
 		return f310_local0
 	end,
@@ -5750,7 +5749,7 @@ DataSources.CombatRecordMPMedalTabs = ListHelper_SetupDataSource( "CombatRecordM
 	} )
 	table.insert( f314_local0, {
 		models = {
-			tabName = @"hash_211443FB63782639",
+			tabName = "menu/combat_caps",
 			tabIcon = ""
 		},
 		properties = {
@@ -5759,7 +5758,7 @@ DataSources.CombatRecordMPMedalTabs = ListHelper_SetupDataSource( "CombatRecordM
 	} )
 	table.insert( f314_local0, {
 		models = {
-			tabName = @"hash_18B0D8B4A861BBC5",
+			tabName = "menu/specialists_caps",
 			tabIcon = ""
 		},
 		properties = {
@@ -5768,7 +5767,7 @@ DataSources.CombatRecordMPMedalTabs = ListHelper_SetupDataSource( "CombatRecordM
 	} )
 	table.insert( f314_local0, {
 		models = {
-			tabName = @"hash_2EB1D30BFD69C119",
+			tabName = "menu/antispecialists_caps",
 			tabIcon = ""
 		},
 		properties = {
@@ -5777,7 +5776,7 @@ DataSources.CombatRecordMPMedalTabs = ListHelper_SetupDataSource( "CombatRecordM
 	} )
 	table.insert( f314_local0, {
 		models = {
-			tabName = @"hash_2D17CC7D16033AEA",
+			tabName = "menu/scorestreaks_caps",
 			tabIcon = ""
 		},
 		properties = {
@@ -5786,7 +5785,7 @@ DataSources.CombatRecordMPMedalTabs = ListHelper_SetupDataSource( "CombatRecordM
 	} )
 	table.insert( f314_local0, {
 		models = {
-			tabName = 0x79C859C8600D9E,
+			tabName = "menu/antiscorestreaks_caps",
 			tabIcon = ""
 		},
 		properties = {
@@ -5795,7 +5794,7 @@ DataSources.CombatRecordMPMedalTabs = ListHelper_SetupDataSource( "CombatRecordM
 	} )
 	table.insert( f314_local0, {
 		models = {
-			tabName = @"hash_5ED2FACC41C9E672",
+			tabName = "mpui/gamemode_caps",
 			tabIcon = ""
 		},
 		properties = {
@@ -5824,7 +5823,7 @@ DataSources.CombatRecordMPTabs = ListHelper_SetupDataSource( "CombatRecordMPTabs
 	} )
 	table.insert( f315_local0, {
 		models = {
-			tabName = @"hash_37BAA05710CE37D3",
+			tabName = "mpui/summary_caps",
 			tabWidget = "CoD.CombatRecordSummaryPanel",
 			tabIcon = ""
 		},
@@ -5834,7 +5833,7 @@ DataSources.CombatRecordMPTabs = ListHelper_SetupDataSource( "CombatRecordMPTabs
 	} )
 	table.insert( f315_local0, {
 		models = {
-			tabName = @"hash_48159ECA1876AE99",
+			tabName = "menu/combat_record_tab_public_caps",
 			tabWidget = "CoD.CombatRecordPublicMatchPanel",
 			tabIcon = ""
 		},
@@ -5844,7 +5843,7 @@ DataSources.CombatRecordMPTabs = ListHelper_SetupDataSource( "CombatRecordMPTabs
 	} )
 	table.insert( f315_local0, {
 		models = {
-			tabName = @"hash_44B08B09636ECD9E",
+			tabName = "menu/arena_caps",
 			tabWidget = "CoD.CombatRecordArenaPanel",
 			tabIcon = ""
 		},
@@ -5865,36 +5864,36 @@ end )
 DataSources.CombatRecordScorestreakList = {
 	prepare = function ( f316_arg0, f316_arg1, f316_arg2 )
 		f316_arg1.items = {}
-		local f316_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f316_arg0 ), "CombatRecordScorestreakList" )
+		local f316_local0 = Engine.CreateModel( Engine.GetModelForController( f316_arg0 ), "CombatRecordScorestreakList" )
 		local f316_local1 = CoD.GetCombatRecordStats( f316_arg0 )
 		local f316_local2 = CoD.GetCombatRecordComparisonStats( f316_arg0 )
 		for f316_local3 = 0, 255, 1 do
-			if Engine[@"getitemallocationcost"]( f316_local3, CoD.GetCombatRecordMode() ) >= 0 and Engine[@"getitemgroup"]( f316_local3, Enum[@"statindexoffset"][@"hash_13057ABF96AF8289"], CoD.GetCombatRecordMode() ) == "killstreak" then
-				local f316_local6 = Engine[@"createmodel"]( f316_local0, f316_local3 )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f316_local6, "name" ), Engine[@"getitemname"]( f316_local3, Enum[@"statindexoffset"][@"hash_13057ABF96AF8289"], CoD.GetCombatRecordMode() ) )
+			if Engine.GetItemAllocationCost( f316_local3, CoD.GetCombatRecordMode() ) >= 0 and Engine.GetItemGroup( f316_local3, Enum[@"statindexoffset"][@"hash_13057ABF96AF8289"], CoD.GetCombatRecordMode() ) == "killstreak" then
+				local f316_local6 = Engine.CreateModel( f316_local0, f316_local3 )
+				Engine.SetModelValue( Engine.CreateModel( f316_local6, "name" ), Engine.GetItemName( f316_local3, Enum[@"statindexoffset"][@"hash_13057ABF96AF8289"], CoD.GetCombatRecordMode() ) )
 				local f316_local7 = "kills"
-				if Engine[@"isitempassive"]( f316_local3, CoD.GetCombatRecordMode() ) then
+				if Engine.IsItemPassive( f316_local3, CoD.GetCombatRecordMode() ) then
 					f316_local7 = "assists"
 				end
 				local f316_local8 = "ItemStats." .. f316_local3 .. ".stats." .. f316_local7
 				local f316_local9 = CoD.GetCombatRecordStatForPath( f316_local1, f316_local8 )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f316_local6, "itemIndex" ), f316_local3 )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f316_local6, "stat" ), f316_local9 )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f316_local6, "statName" ), Engine[@"hash_4F9F1239CFD921FE"]( @"menu/" .. f316_local7 .. "_CAPS" ) )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f316_local6, "statPerUseString" ), Engine[@"hash_4F9F1239CFD921FE"]( @"menu/" .. f316_local7 .. "_PER_USE_CAPS" ) )
+				Engine.SetModelValue( Engine.CreateModel( f316_local6, "itemIndex" ), f316_local3 )
+				Engine.SetModelValue( Engine.CreateModel( f316_local6, "stat" ), f316_local9 )
+				Engine.SetModelValue( Engine.CreateModel( f316_local6, "statName" ), Engine[@"hash_4F9F1239CFD921FE"]( @"menu/" .. f316_local7 .. "_CAPS" ) )
+				Engine.SetModelValue( Engine.CreateModel( f316_local6, "statPerUseString" ), Engine[@"hash_4F9F1239CFD921FE"]( @"menu/" .. f316_local7 .. "_PER_USE_CAPS" ) )
 				local f316_local10 = 0
 				if f316_local2 then
 					f316_local10 = CoD.GetCombatRecordStatForPath( f316_local2, f316_local8 )
 				end
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f316_local6, "statComparison" ), f316_local10 )
+				Engine.SetModelValue( Engine.CreateModel( f316_local6, "statComparison" ), f316_local10 )
 				table.insert( f316_arg1.items, f316_local6 )
 			end
 		end
 		table.sort( f316_arg1.items, function ( f317_arg0, f317_arg1 )
-			local f317_local0 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f317_arg0, "stat" ) )
-			local f317_local1 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f317_arg1, "stat" ) )
+			local f317_local0 = Engine.GetModelValue( Engine.GetModel( f317_arg0, "stat" ) )
+			local f317_local1 = Engine.GetModelValue( Engine.GetModel( f317_arg1, "stat" ) )
 			if f317_local0 == f317_local1 then
-				return Engine[@"localize"]( Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f317_arg0, "name" ) ) ) < Engine[@"localize"]( Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f317_arg1, "name" ) ) )
+				return Engine.Localize( Engine.GetModelValue( Engine.GetModel( f317_arg0, "name" ) ) ) < Engine.Localize( Engine.GetModelValue( Engine.GetModel( f317_arg1, "name" ) ) )
 			else
 				return f317_local1 < f317_local0
 			end
@@ -5921,45 +5920,45 @@ DataSources.CombatRecordSpecialistList = {
 DataSources.CombatRecordWeaponsList = {
 	prepare = function ( f323_arg0, f323_arg1, f323_arg2 )
 		f323_arg1.weapons = {}
-		local f323_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f323_arg0 ), "CombatRecordWeaponsList" )
+		local f323_local0 = Engine.CreateModel( Engine.GetModelForController( f323_arg0 ), "CombatRecordWeaponsList" )
 		local f323_local1 = CoD.GetCombatRecordStats( f323_arg0 )
 		local f323_local2 = CoD.GetCombatRecordComparisonStats( f323_arg0 )
 		for f323_local3 = 0, 255, 1 do
-			local f323_local6 = Engine[@"getitemallocationcost"]( f323_local3, CoD.GetCombatRecordMode() )
+			local f323_local6 = Engine.GetItemAllocationCost( f323_local3, CoD.GetCombatRecordMode() )
 			if f323_local6 < -1 or f323_local6 >= 0 then
-				local f323_local7 = Engine[@"getloadoutslotforitem"]( f323_local3, CoD.GetCombatRecordMode() )
+				local f323_local7 = Engine.GetLoadoutSlotForItem( f323_local3, CoD.GetCombatRecordMode() )
 				if f323_local7 == "primary" or f323_local7 == "secondary" then
-					local f323_local8 = Engine[@"createmodel"]( f323_local0, f323_local3 )
+					local f323_local8 = Engine.CreateModel( f323_local0, f323_local3 )
 					local f323_local9 = "ItemStats." .. f323_local3 .. ".stats.kills"
 					local f323_local10 = "ItemStats." .. f323_local3 .. ".stats.destroyed"
 					local f323_local11 = CoD.GetCombatRecordStatForPath( f323_local1, f323_local9 )
 					local f323_local12 = CoD.GetCombatRecordStatForPath( f323_local1, f323_local10 )
 					local f323_local13 = "kills"
 					local f323_local14 = f323_local11
-					if Engine[@"getitemgroup"]( f323_local3, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], CoD.GetCombatRecordMode() ) == "weapon_launcher" then
+					if Engine.GetItemGroup( f323_local3, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], CoD.GetCombatRecordMode() ) == "weapon_launcher" then
 						f323_local13 = "kills_destroys"
 						f323_local14 = f323_local11 + f323_local12
 					end
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f323_local8, "itemIndex" ), f323_local3 )
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f323_local8, "stat" ), f323_local14 )
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f323_local8, "statName" ), Engine[@"hash_4F9F1239CFD921FE"]( @"menu/" .. f323_local13 .. "_CAPS" ) )
+					Engine.SetModelValue( Engine.CreateModel( f323_local8, "itemIndex" ), f323_local3 )
+					Engine.SetModelValue( Engine.CreateModel( f323_local8, "stat" ), f323_local14 )
+					Engine.SetModelValue( Engine.CreateModel( f323_local8, "statName" ), Engine[@"hash_4F9F1239CFD921FE"]( @"menu/" .. f323_local13 .. "_CAPS" ) )
 					local f323_local15 = false
-					local f323_local16 = Engine[@"getitemname"]( f323_local3, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], CoD.GetCombatRecordMode() )
-					local f323_local17 = Engine[@"getitemref"]( f323_local3, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], CoD.GetCombatRecordMode() )
+					local f323_local16 = Engine.GetItemName( f323_local3, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], CoD.GetCombatRecordMode() )
+					local f323_local17 = Engine.GetItemRef( f323_local3, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], CoD.GetCombatRecordMode() )
 					local f323_local18 = 1
 					if CoD.BlackMarketUtility.IsBlackMarketItem( f323_local17 ) and CoD.BlackMarketUtility.IsItemLocked( f323_arg0, f323_local17 ) then
 						f323_local16 = CoD.BlackMarketUtility.ClassifiedName( false )
 						f323_local15 = true
 						f323_local18 = 0
 					end
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f323_local8, "name" ), f323_local16 )
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f323_local8, "isBMClassified" ), f323_local15 )
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f323_local8, "statsAlpha" ), f323_local18 )
+					Engine.SetModelValue( Engine.CreateModel( f323_local8, "name" ), f323_local16 )
+					Engine.SetModelValue( Engine.CreateModel( f323_local8, "isBMClassified" ), f323_local15 )
+					Engine.SetModelValue( Engine.CreateModel( f323_local8, "statsAlpha" ), f323_local18 )
 					local f323_local19 = 0
 					if f323_local2 then
 						f323_local19 = CoD.GetCombatRecordStatForPath( f323_local2, f323_local9 )
 					end
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f323_local8, "statComparison" ), f323_local19 )
+					Engine.SetModelValue( Engine.CreateModel( f323_local8, "statComparison" ), f323_local19 )
 					if not CoD.BlackMarketUtility.IsUnreleasedBlackMarketItem( f323_local17 ) then
 						table.insert( f323_arg1.weapons, f323_local8 )
 					end
@@ -5974,10 +5973,10 @@ DataSources.CombatRecordWeaponsList = {
 			elseif not f324_local0 and f324_local1 then
 				return true
 			else
-				local f324_local2 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f324_arg0, "stat" ) )
-				local f324_local3 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f324_arg1, "stat" ) )
+				local f324_local2 = Engine.GetModelValue( Engine.GetModel( f324_arg0, "stat" ) )
+				local f324_local3 = Engine.GetModelValue( Engine.GetModel( f324_arg1, "stat" ) )
 				if f324_local2 == f324_local3 then
-					return Engine[@"localize"]( Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f324_arg0, "name" ) ) ) < Engine[@"localize"]( Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f324_arg1, "name" ) ) )
+					return Engine.Localize( Engine.GetModelValue( Engine.GetModel( f324_arg0, "name" ) ) ) < Engine.Localize( Engine.GetModelValue( Engine.GetModel( f324_arg1, "name" ) ) )
 				else
 					return f324_local3 < f324_local2
 				end
@@ -5994,29 +5993,29 @@ DataSources.CombatRecordWeaponsList = {
 DataSources.CombatRecordBGBList = {
 	prepare = function ( f327_arg0, f327_arg1, f327_arg2 )
 		f327_arg1.bubbleGumBuffs = {}
-		local f327_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f327_arg0 ), "combatRecordBGBListModel" )
+		local f327_local0 = Engine.CreateModel( Engine.GetModelForController( f327_arg0 ), "combatRecordBGBListModel" )
 		local f327_local1 = CoD.GetCombatRecordStats( f327_arg0 )
 		local f327_local2 = CoD.GetCombatRecordComparisonStats( f327_arg0 )
 		for f327_local3 = 0, 255, 1 do
-			if Engine[@"getloadoutslotforitem"]( f327_local3, CoD.GetCombatRecordMode() ) == "equippedbubblegumpack" and not CoD.BaseUtility.IsHiddenDLC( CoD.ProductBitFromId[Engine[@"getdlcnameforitem"]( f327_local3, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], Enum[@"emodes"][@"mode_zombies"] )] ) then
-				local f327_local6 = Engine[@"createmodel"]( f327_local0, f327_local3 )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f327_local6, "name" ), Engine[@"getitemname"]( f327_local3, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], CoD.GetCombatRecordMode() ) )
+			if Engine.GetLoadoutSlotForItem( f327_local3, CoD.GetCombatRecordMode() ) == "equippedbubblegumpack" and not CoD.BaseUtility.IsHiddenDLC( CoD.ProductBitFromId[Engine.GetDLCNameForItem( f327_local3, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], Enum.eModes.mode_zombies )] ) then
+				local f327_local6 = Engine.CreateModel( f327_local0, f327_local3 )
+				Engine.SetModelValue( Engine.CreateModel( f327_local6, "name" ), Engine.GetItemName( f327_local3, Enum[@"statindexoffset"][@"hash_648CD0338EE0B3AE"], CoD.GetCombatRecordMode() ) )
 				local f327_local7 = CoD.GetCombatRecordStatForPath( f327_local1, "ItemStats." .. f327_local3 .. ".stats.used" )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f327_local6, "itemIndex" ), f327_local3 )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f327_local6, "stat" ), f327_local7 )
+				Engine.SetModelValue( Engine.CreateModel( f327_local6, "itemIndex" ), f327_local3 )
+				Engine.SetModelValue( Engine.CreateModel( f327_local6, "stat" ), f327_local7 )
 				local f327_local8 = 0
 				if f327_local2 then
 					f327_local8 = CoD.GetCombatRecordStatForPath( f327_local2, "ItemStats." .. f327_local3 .. ".stats.used" )
 				end
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f327_local6, "statComparison" ), f327_local8 )
+				Engine.SetModelValue( Engine.CreateModel( f327_local6, "statComparison" ), f327_local8 )
 				table.insert( f327_arg1.bubbleGumBuffs, f327_local6 )
 			end
 		end
 		table.sort( f327_arg1.bubbleGumBuffs, function ( f328_arg0, f328_arg1 )
-			local f328_local0 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f328_arg0, "stat" ) )
-			local f328_local1 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f328_arg1, "stat" ) )
+			local f328_local0 = Engine.GetModelValue( Engine.GetModel( f328_arg0, "stat" ) )
+			local f328_local1 = Engine.GetModelValue( Engine.GetModel( f328_arg1, "stat" ) )
 			if f328_local0 == f328_local1 then
-				return Engine[@"localize"]( Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f328_arg0, "name" ) ) ) < Engine[@"localize"]( Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f328_arg1, "name" ) ) )
+				return Engine.Localize( Engine.GetModelValue( Engine.GetModel( f328_arg0, "name" ) ) ) < Engine.Localize( Engine.GetModelValue( Engine.GetModel( f328_arg1, "name" ) ) )
 			else
 				return f328_local1 < f328_local0
 			end
@@ -6032,12 +6031,12 @@ DataSources.CombatRecordBGBList = {
 DataSources.CombatRecordZMMapsList = {
 	prepare = function ( f331_arg0, f331_arg1, f331_arg2 )
 		f331_arg1.maps = {}
-		local f331_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f331_arg0 ), "CombatRecordZMMapsList" )
+		local f331_local0 = Engine.CreateModel( Engine.GetModelForController( f331_arg0 ), "CombatRecordZMMapsList" )
 		local f331_local1 = CoD.GetCombatRecordStats( f331_arg0 )
 		for f331_local11, f331_local12 in pairs( CoD.MapUtility.MapsTable ) do
-			if f331_local12.session_mode == Enum[@"emodes"][@"mode_zombies"] and not CoD.BaseUtility.IsHiddenDLC( Engine[@"getdlcbitformapname"]( f331_local11 ) ) and f331_local1.PlayerStatsByMap and f331_local1.PlayerStatsByMap[f331_local11] then
+			if f331_local12.session_mode == Enum.eModes.mode_zombies and not CoD.BaseUtility.IsHiddenDLC( Engine[@"getdlcbitformapname"]( f331_local11 ) ) and f331_local1.PlayerStatsByMap and f331_local1.PlayerStatsByMap[f331_local11] then
 				local f331_local5 = f331_local1.PlayerStatsByMap[f331_local11]
-				local f331_local6 = Engine[@"createmodel"]( f331_local0, f331_local11 )
+				local f331_local6 = Engine.CreateModel( f331_local0, f331_local11 )
 				local f331_local7 = 0
 				local f331_local8 = 0
 				local f331_local9 = 0
@@ -6046,17 +6045,17 @@ DataSources.CombatRecordZMMapsList = {
 				f331_local8 = f331_local5.stats.TOTAL_ROUNDS_SURVIVED.statValue:get()
 				f331_local9 = f331_local5.stats.TOTAL_GAMES_PLAYED.statValue:get()
 				f331_local10 = f331_local5.stats.TOTAL_DOWNS.statValue:get()
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f331_local6, "name" ), MapNameToLocalizedMapName( f331_local11 ) )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f331_local6, "highestRound" ), f331_local7 )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f331_local6, "avgDowns" ), math.floor( f331_local10 / math.max( 1, f331_local9 ) + 0.5 ) )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f331_local6, "avgRounds" ), math.floor( f331_local8 / math.max( 1, f331_local9 ) + 0.5 ) )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f331_local6, "stat" ), f331_local7 )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f331_local6, "previewImage" ), f331_local12.previewImage )
+				Engine.SetModelValue( Engine.CreateModel( f331_local6, "name" ), MapNameToLocalizedMapName( f331_local11 ) )
+				Engine.SetModelValue( Engine.CreateModel( f331_local6, "highestRound" ), f331_local7 )
+				Engine.SetModelValue( Engine.CreateModel( f331_local6, "avgDowns" ), math.floor( f331_local10 / math.max( 1, f331_local9 ) + 0.5 ) )
+				Engine.SetModelValue( Engine.CreateModel( f331_local6, "avgRounds" ), math.floor( f331_local8 / math.max( 1, f331_local9 ) + 0.5 ) )
+				Engine.SetModelValue( Engine.CreateModel( f331_local6, "stat" ), f331_local7 )
+				Engine.SetModelValue( Engine.CreateModel( f331_local6, "previewImage" ), f331_local12.previewImage )
 				table.insert( f331_arg1.maps, f331_local6 )
 			end
 		end
 		table.sort( f331_arg1.maps, function ( f332_arg0, f332_arg1 )
-			return Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f332_arg1, "stat" ) ) < Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f332_arg0, "stat" ) )
+			return Engine.GetModelValue( Engine.GetModel( f332_arg1, "stat" ) ) < Engine.GetModelValue( Engine.GetModel( f332_arg0, "stat" ) )
 		end )
 	end,
 	getCount = function ( f333_arg0 )
@@ -6073,13 +6072,13 @@ DataSources.CombatRecordCPPercentComplete = {
 }
 DataSources.CombatRecordTotalWeaponAccuracy = {
 	getModel = function ( f336_arg0 )
-		local f336_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f336_arg0 ), "CombatRecordTotalWeaponAccuracy" )
+		local f336_local0 = Engine.CreateModel( Engine.GetModelForController( f336_arg0 ), "CombatRecordTotalWeaponAccuracy" )
 		local f336_local1 = 0
 		local f336_local2 = 0
 		local f336_local3 = CoD.GetCombatRecordStats( f336_arg0 )
 		for f336_local4 = 0, 255, 1 do
-			if Engine[@"getitemallocationcost"]( f336_local4, CoD.GetCombatRecordMode() ) >= 0 then
-				local f336_local7 = Engine[@"getloadoutslotforitem"]( f336_local4, CoD.GetCombatRecordMode() )
+			if Engine.GetItemAllocationCost( f336_local4, CoD.GetCombatRecordMode() ) >= 0 then
+				local f336_local7 = Engine.GetLoadoutSlotForItem( f336_local4, CoD.GetCombatRecordMode() )
 				if f336_local7 == "primary" or f336_local7 == "secondary" or f336_local7 == "heroweapon" then
 					f336_local1 = f336_local1 + CoD.GetCombatRecordStatForPath( f336_local3, "ItemStats." .. f336_local4 .. ".stats.shots" )
 					f336_local2 = f336_local2 + CoD.GetCombatRecordStatForPath( f336_local3, "ItemStats." .. f336_local4 .. ".stats.hits" ) + 0.5 * CoD.GetCombatRecordStatForPath( f336_local3, "ItemStats." .. f336_local4 .. ".stats.headshots" )
@@ -6094,18 +6093,18 @@ DataSources.CombatRecordTotalWeaponAccuracy = {
 			f336_local4 = LUI.clamp( f336_local2 / f336_local1 * 100, 0, 100 )
 		end
 		if f336_local4 ~= f336_local4 then
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f336_local0, "percent" ), "-" )
+			Engine.SetModelValue( Engine.CreateModel( f336_local0, "percent" ), "-" )
 		else
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f336_local0, "percent" ), string.format( "%.1f%%", f336_local4 ) )
+			Engine.SetModelValue( Engine.CreateModel( f336_local0, "percent" ), string.format( "%.1f%%", f336_local4 ) )
 		end
 		return f336_local0
 	end
 }
 DataSources.FavoriteSpecialist = {
 	getModel = function ( f337_arg0 )
-		local f337_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f337_arg0 ), "FavoriteSpecialist" )
+		local f337_local0 = Engine.CreateModel( Engine.GetModelForController( f337_arg0 ), "FavoriteSpecialist" )
 		local f337_local1 = CoD.GetCombatRecordStats( f337_arg0 )
-		local f337_local2 = CoD.PlayerRoleUtility.GetHeroList( Enum[@"emodes"][@"mode_multiplayer"] )
+		local f337_local2 = CoD.PlayerRoleUtility.GetHeroList( Enum.eModes.mode_multiplayer )
 		local f337_local3 = 1
 		local f337_local4 = 0
 		local f337_local5 = @"hash_4727CC00961724C1"
@@ -6121,69 +6120,69 @@ DataSources.FavoriteSpecialist = {
 		else
 			f337_local9 = string.format( "%.2f", math.floor( f337_local7 / f337_local8 * 100 + 0.5 ) / 100 )
 		end
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f337_local0, "displayString" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_31DD58AA20274399", Engine[@"localize"]( f337_local6 ), Engine[@"hash_4F9F1239CFD921FE"]( Engine[@"getitemname"]( f337_local4 ) ) ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f337_local0, "heroIndex" ), f337_local3 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f337_local0, "heroImage" ), f337_local5 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f337_local0, "heroName" ), Engine[@"hash_4F9F1239CFD921FE"]( f337_local6 ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f337_local0, "itemIndex" ), f337_local4 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f337_local0, "killsPerUse" ), f337_local9 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f337_local0, "numKills" ), f337_local7 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f337_local0, "numUses" ), f337_local8 )
+		Engine.SetModelValue( Engine.CreateModel( f337_local0, "displayString" ), Engine[@"hash_4F9F1239CFD921FE"]( "menu/favorite_specialist_stats", Engine.Localize( f337_local6 ), Engine[@"hash_4F9F1239CFD921FE"]( Engine.GetItemName( f337_local4 ) ) ) )
+		Engine.SetModelValue( Engine.CreateModel( f337_local0, "heroIndex" ), f337_local3 )
+		Engine.SetModelValue( Engine.CreateModel( f337_local0, "heroImage" ), f337_local5 )
+		Engine.SetModelValue( Engine.CreateModel( f337_local0, "heroName" ), Engine[@"hash_4F9F1239CFD921FE"]( f337_local6 ) )
+		Engine.SetModelValue( Engine.CreateModel( f337_local0, "itemIndex" ), f337_local4 )
+		Engine.SetModelValue( Engine.CreateModel( f337_local0, "killsPerUse" ), f337_local9 )
+		Engine.SetModelValue( Engine.CreateModel( f337_local0, "numKills" ), f337_local7 )
+		Engine.SetModelValue( Engine.CreateModel( f337_local0, "numUses" ), f337_local8 )
 		return f337_local0
 	end
 }
 DataSources.DeadOpsArcadeGlobal = {
 	getModel = function ( f338_arg0 )
-		local f338_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "DeadOpsArcadeGlobal" )
-		Engine[@"createmodel"]( f338_local0, "redins" )
-		Engine[@"createmodel"]( f338_local0, "countdown" )
-		Engine[@"createmodel"]( f338_local0, "gbanner" )
-		Engine[@"createmodel"]( f338_local0, "grgb1" )
-		Engine[@"createmodel"]( f338_local0, "grgb2" )
-		Engine[@"createmodel"]( f338_local0, "grgb3" )
-		Engine[@"createmodel"]( f338_local0, "gtxt0" )
-		Engine[@"createmodel"]( f338_local0, "gpr0" )
-		Engine[@"createmodel"]( f338_local0, "gpr1" )
-		Engine[@"createmodel"]( f338_local0, "gpr2" )
-		Engine[@"createmodel"]( f338_local0, "gpr3" )
-		Engine[@"createmodel"]( f338_local0, "level" )
+		local f338_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "DeadOpsArcadeGlobal" )
+		Engine.CreateModel( f338_local0, "redins" )
+		Engine.CreateModel( f338_local0, "countdown" )
+		Engine.CreateModel( f338_local0, "gbanner" )
+		Engine.CreateModel( f338_local0, "grgb1" )
+		Engine.CreateModel( f338_local0, "grgb2" )
+		Engine.CreateModel( f338_local0, "grgb3" )
+		Engine.CreateModel( f338_local0, "gtxt0" )
+		Engine.CreateModel( f338_local0, "gpr0" )
+		Engine.CreateModel( f338_local0, "gpr1" )
+		Engine.CreateModel( f338_local0, "gpr2" )
+		Engine.CreateModel( f338_local0, "gpr3" )
+		Engine.CreateModel( f338_local0, "level" )
 		return f338_local0
 	end
 }
 DataSources.DeadOpsArcadePlayers = {
 	updateModelsForClient = function ( f339_arg0, f339_arg1 )
-		local f339_local0 = Engine[@"getmodel"]( Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "DeadOpsArcadePlayers" ), "player" .. f339_arg1 + 1 )
+		local f339_local0 = Engine.GetModel( Engine.CreateModel( Engine.GetGlobalModel(), "DeadOpsArcadePlayers" ), "player" .. f339_arg1 + 1 )
 		if f339_local0 ~= nil then
-			local f339_local1 = Engine[@"getplayerlistdata"]( f339_arg0, f339_arg1 )
+			local f339_local1 = Engine.GetPlayerListData( f339_arg0, f339_arg1 )
 			if f339_local1.playerName ~= nil and f339_local1.playerConnected then
-				Engine[@"setmodelvalue"]( Engine[@"getmodel"]( f339_local0, "name" ), f339_local1.playerName )
+				Engine.SetModelValue( Engine.GetModel( f339_local0, "name" ), f339_local1.playerName )
 			else
-				Engine[@"setmodelvalue"]( Engine[@"getmodel"]( f339_local0, "name" ), "" )
+				Engine.SetModelValue( Engine.GetModel( f339_local0, "name" ), "" )
 			end
 		end
 	end,
 	getModel = function ( f340_arg0 )
-		local f340_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "DeadOpsArcadePlayers" )
+		local f340_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "DeadOpsArcadePlayers" )
 		for f340_local1 = 1, 4, 1 do
-			if Engine[@"getmodel"]( f340_local0, "player" .. f340_local1 ) == nil then
-				local f340_local4 = Engine[@"createmodel"]( f340_local0, "player" .. f340_local1 )
-				Engine[@"createmodel"]( f340_local4, "name" )
-				Engine[@"createmodel"]( f340_local4, "lives" )
-				Engine[@"createmodel"]( f340_local4, "bombs" )
-				Engine[@"createmodel"]( f340_local4, "boosts" )
-				Engine[@"createmodel"]( f340_local4, "score" )
-				Engine[@"createmodel"]( f340_local4, "multiplier" )
-				Engine[@"createmodel"]( f340_local4, "xbar" )
-				Engine[@"createmodel"]( f340_local4, "bulletbar" )
-				Engine[@"createmodel"]( f340_local4, "bulletbar_rgb" )
-				Engine[@"createmodel"]( f340_local4, "ribbon" )
-				Engine[@"createmodel"]( f340_local4, "gpr_rgb" )
-				Engine[@"createmodel"]( f340_local4, "generic_txt" )
-				Engine[@"createmodel"]( f340_local4, "gpr" )
-				Engine[@"createmodel"]( f340_local4, "gpr2" )
-				Engine[@"createmodel"]( f340_local4, "weaplevel1" )
-				Engine[@"createmodel"]( f340_local4, "weaplevel2" )
-				Engine[@"createmodel"]( f340_local4, "respawn" )
+			if Engine.GetModel( f340_local0, "player" .. f340_local1 ) == nil then
+				local f340_local4 = Engine.CreateModel( f340_local0, "player" .. f340_local1 )
+				Engine.CreateModel( f340_local4, "name" )
+				Engine.CreateModel( f340_local4, "lives" )
+				Engine.CreateModel( f340_local4, "bombs" )
+				Engine.CreateModel( f340_local4, "boosts" )
+				Engine.CreateModel( f340_local4, "score" )
+				Engine.CreateModel( f340_local4, "multiplier" )
+				Engine.CreateModel( f340_local4, "xbar" )
+				Engine.CreateModel( f340_local4, "bulletbar" )
+				Engine.CreateModel( f340_local4, "bulletbar_rgb" )
+				Engine.CreateModel( f340_local4, "ribbon" )
+				Engine.CreateModel( f340_local4, "gpr_rgb" )
+				Engine.CreateModel( f340_local4, "generic_txt" )
+				Engine.CreateModel( f340_local4, "gpr" )
+				Engine.CreateModel( f340_local4, "gpr2" )
+				Engine.CreateModel( f340_local4, "weaplevel1" )
+				Engine.CreateModel( f340_local4, "weaplevel2" )
+				Engine.CreateModel( f340_local4, "respawn" )
 				DataSources.DeadOpsArcadePlayers.updateModelsForClient( f340_arg0, f340_local1 - 1 )
 			end
 		end
@@ -6205,24 +6204,24 @@ DataSources.PlayerList = {
 	prepare = function ( f341_arg0, f341_arg1, f341_arg2 )
 		f341_arg1.playerListInfoList = {}
 		f341_arg1.playerListInfoOrder = {}
-		local f341_local0 = Engine[@"getmodelforcontroller"]( f341_arg0 )
-		local f341_local1 = Engine[@"createmodel"]( f341_local0, "PlayerList" )
+		local f341_local0 = Engine.GetModelForController( f341_arg0 )
+		local f341_local1 = Engine.CreateModel( f341_local0, "PlayerList" )
 		local f341_local2 = 2
-		local f341_local3 = Engine[@"getclientnum"]( f341_arg0 )
+		local f341_local3 = Engine.GetClientNum( f341_arg0 )
 		local f341_local4 = CoD.TeamUtility.GetTeamID( f341_arg0 )
 		local f341_local5 = 0
-		for f341_local6 = 0, Dvar[@"com_maxclients"]:get() - 1, 1 do
-			local f341_local9 = Engine[@"getplayerlistdata"]( f341_arg0, f341_local6 )
+		for f341_local6 = 0, Dvar.com_maxclients:get() - 1, 1 do
+			local f341_local9 = Engine.GetPlayerListData( f341_arg0, f341_local6 )
 			if not f341_local9.isBot then
 				f341_local5 = f341_local5 + 1
 			end
-			local f341_local10 = Engine[@"createmodel"]( f341_local1, f341_local6 )
+			local f341_local10 = Engine.CreateModel( f341_local1, f341_local6 )
 			for f341_local14, f341_local15 in pairs( DataSources.PlayerList.modelLinks ) do
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f341_local10, f341_local15 ), f341_local9[f341_local14] )
+				Engine.SetModelValue( Engine.CreateModel( f341_local10, f341_local15 ), f341_local9[f341_local14] )
 			end
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f341_local10, "objectiveIcon" ), "" )
+			Engine.SetModelValue( Engine.CreateModel( f341_local10, "objectiveIcon" ), "" )
 			f341_arg1.playerListInfoList[f341_local6 + 1] = f341_local10
-			if f341_local6 == Engine[@"getclientnum"]( f341_arg0 ) then
+			if f341_local6 == Engine.GetClientNum( f341_arg0 ) then
 				f341_arg1.playerListInfoOrder[1] = f341_local6 + 1
 			else
 				f341_arg1.playerListInfoOrder[f341_local2] = f341_local6 + 1
@@ -6242,37 +6241,37 @@ DataSources.PlayerList = {
 		end
 		
 		if not f341_arg1.playerConnectedSubscription then
-			f341_arg1.playerConnectedSubscription = f341_arg1:subscribeToModel( Engine[@"getmodel"]( f341_local0, "playerConnected" ), function ( model )
-				local f343_local0 = Engine[@"getmodelvalue"]( model )
-				if f343_local0 ~= nil then
-					f341_local6( f341_arg0, f343_local0 )
+			f341_arg1.playerConnectedSubscription = f341_arg1:subscribeToModel( Engine.GetModel( f341_local0, "playerConnected" ), function ( model )
+				local modelValue = Engine.GetModelValue( model )
+				if modelValue ~= nil then
+					f341_local6( f341_arg0, modelValue )
 				end
 			end, false )
 		end
 		if not f341_arg1.playerDisconnectedSubscription then
-			f341_arg1.playerDisconnectedSubscription = f341_arg1:subscribeToModel( Engine[@"getmodel"]( f341_local0, "playerDisconnected" ), function ( model )
-				local f344_local0 = Engine[@"getmodelvalue"]( model )
-				if f344_local0 ~= nil then
-					f341_local6( f341_arg0, f344_local0 )
+			f341_arg1.playerDisconnectedSubscription = f341_arg1:subscribeToModel( Engine.GetModel( f341_local0, "playerDisconnected" ), function ( model )
+				local modelValue = Engine.GetModelValue( model )
+				if modelValue ~= nil then
+					f341_local6( f341_arg0, modelValue )
 				end
 			end, false )
 		end
 		if not f341_arg1.hasScoreboardSubscriptions then
 			f341_arg1.hasScoreboardSubscriptions = true
-			for f341_local7 = 0, Dvar[@"com_maxclients"]:get() - 1, 1 do
-				f341_arg1:subscribeToModel( Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "scoreboard.team1." .. f341_local7 .. ".clientNum" ), function ( model )
-					local f345_local0 = Engine[@"getmodelvalue"]( model )
-					if f345_local0 ~= nil then
-						f341_local6( f341_arg0, f345_local0 )
+			for f341_local7 = 0, Dvar.com_maxclients:get() - 1, 1 do
+				f341_arg1:subscribeToModel( Engine.GetModel( Engine.GetGlobalModel(), "scoreboard.team1." .. f341_local7 .. ".clientNum" ), function ( model )
+					local modelValue = Engine.GetModelValue( model )
+					if modelValue ~= nil then
+						f341_local6( f341_arg0, modelValue )
 					end
 				end, false )
 			end
 		end
 		if not f341_arg1.hasBotStatusSubscription then
-			f341_arg1.hasBotStatusSubscription = f341_arg1:subscribeToModel( Engine[@"getmodel"]( f341_local0, "playerBotStatusChanged" ), function ( model )
-				local f346_local0 = Engine[@"getmodelvalue"]( model )
-				if f346_local0 ~= nil then
-					f341_local6( f341_arg0, f346_local0 )
+			f341_arg1.hasBotStatusSubscription = f341_arg1:subscribeToModel( Engine.GetModel( f341_local0, "playerBotStatusChanged" ), function ( model )
+				local modelValue = Engine.GetModelValue( model )
+				if modelValue ~= nil then
+					f341_local6( f341_arg0, modelValue )
 				end
 			end, false )
 		end
@@ -6280,11 +6279,11 @@ DataSources.PlayerList = {
 	updateModelsForClient = function ( f347_arg0, f347_arg1, f347_arg2 )
 		local f347_local0 = DataSources.PlayerList.getModelForPlayer( f347_arg0, f347_arg1, f347_arg2 )
 		if f347_local0 ~= nil then
-			local f347_local1 = Engine[@"getplayerlistdata"]( f347_arg0, f347_arg2 )
+			local f347_local1 = Engine.GetPlayerListData( f347_arg0, f347_arg2 )
 			for f347_local5, f347_local6 in pairs( DataSources.PlayerList.modelLinks ) do
-				local f347_local7 = Engine[@"getmodel"]( f347_local0, f347_local6 )
+				local f347_local7 = Engine.GetModel( f347_local0, f347_local6 )
 				if f347_local7 then
-					Engine[@"setmodelvalue"]( f347_local7, f347_local1[f347_local5] )
+					Engine.SetModelValue( f347_local7, f347_local1[f347_local5] )
 				end
 			end
 			f347_arg1:updateDataSource()
@@ -6296,12 +6295,12 @@ DataSources.PlayerList = {
 			return f348_local0
 		end
 		for f348_local6, f348_local7 in pairs( f348_arg0.playerListInfoList ) do
-			local f348_local8 = Engine[@"getmodel"]( f348_local7, "playerConnected" )
-			if f348_local8 and Engine[@"getmodelvalue"]( f348_local8 ) ~= 0 then
+			local f348_local8 = Engine.GetModel( f348_local7, "playerConnected" )
+			if f348_local8 and Engine.GetModelValue( f348_local8 ) ~= 0 then
 				if CoD.isCampaign then
-					local f348_local4 = Engine[@"getmodel"]( f348_local7, "isBot" )
-					local f348_local5 = Engine[@"getmodel"]( f348_local7, "team" )
-					if f348_local4 and f348_local5 and Engine[@"getmodelvalue"]( f348_local4 ) == false and Engine[@"getmodelvalue"]( f348_local5 ) == f348_arg0.ourTeam then
+					local f348_local4 = Engine.GetModel( f348_local7, "isBot" )
+					local f348_local5 = Engine.GetModel( f348_local7, "team" )
+					if f348_local4 and f348_local5 and Engine.GetModelValue( f348_local4 ) == false and Engine.GetModelValue( f348_local5 ) == f348_arg0.ourTeam then
 						f348_local0 = f348_local0 + 1
 					end
 				end
@@ -6315,14 +6314,14 @@ DataSources.PlayerList = {
 	end,
 	getItem = function ( f349_arg0, f349_arg1, f349_arg2 )
 		local f349_local0 = 0
-		for f349_local1 = 1, Dvar[@"com_maxclients"]:get(), 1 do
+		for f349_local1 = 1, Dvar.com_maxclients:get(), 1 do
 			local f349_local4 = f349_arg1.playerListInfoList[f349_arg1.playerListInfoOrder[f349_local1]]
-			local f349_local5 = Engine[@"getmodel"]( f349_local4, "playerConnected" )
-			if f349_local5 and Engine[@"getmodelvalue"]( f349_local5 ) ~= 0 then
+			local f349_local5 = Engine.GetModel( f349_local4, "playerConnected" )
+			if f349_local5 and Engine.GetModelValue( f349_local5 ) ~= 0 then
 				if CoD.isCampaign then
-					local f349_local6 = Engine[@"getmodel"]( f349_local4, "isBot" )
-					local f349_local7 = Engine[@"getmodel"]( f349_local4, "team" )
-					if f349_local6 and f349_local7 and Engine[@"getmodelvalue"]( f349_local6 ) == false and Engine[@"getmodelvalue"]( f349_local7 ) == f349_arg1.ourTeam then
+					local f349_local6 = Engine.GetModel( f349_local4, "isBot" )
+					local f349_local7 = Engine.GetModel( f349_local4, "team" )
+					if f349_local6 and f349_local7 and Engine.GetModelValue( f349_local6 ) == false and Engine.GetModelValue( f349_local7 ) == f349_arg1.ourTeam then
 						f349_local0 = f349_local0 + 1
 					end
 				else
@@ -6376,75 +6375,75 @@ DataSources.PlayerListZM = {
 		end
 		DataSources.PlayerListZM.subscriptions[f352_arg0]:unsubscribeFromAllModels()
 		DataSources.PlayerListZM.preparedForController[f352_arg0] = true
-		local f352_local0 = Engine[@"getmodelforcontroller"]( f352_arg0 )
-		local f352_local1 = Engine[@"createmodel"]( f352_local0, "PlayerList" )
-		local f352_local2 = Engine[@"getclientnum"]( f352_arg0 )
-		for f352_local3 = 0, Dvar[@"com_maxclients"]:get() - 1, 1 do
+		local f352_local0 = Engine.GetModelForController( f352_arg0 )
+		local f352_local1 = Engine.CreateModel( f352_local0, "PlayerList" )
+		local f352_local2 = Engine.GetClientNum( f352_arg0 )
+		for f352_local3 = 0, Dvar.com_maxclients:get() - 1, 1 do
 			local f352_local6 = DataSources.PlayerListZM.clientNumToArrayIndex( f352_local3, f352_local2 )
-			local f352_local7 = Engine[@"getplayerlistdata"]( f352_arg0, f352_local3 )
+			local f352_local7 = Engine.GetPlayerListData( f352_arg0, f352_local3 )
 			local f352_local8 = f352_local1:create( f352_local6 )
 			for f352_local12, f352_local13 in pairs( DataSources.PlayerListZM.modelLinks ) do
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f352_local8, f352_local13 ), f352_local7[f352_local12] )
+				Engine.SetModelValue( Engine.CreateModel( f352_local8, f352_local13 ), f352_local7[f352_local12] )
 			end
 			if CoD.ZombieUtility.InventoryIcon ~= nil then
 				DataSources.PlayerListZM.subscriptions[f352_arg0]:subscribeToModel( f352_local0["zmInventory.player" .. f352_local3 .. "hasItem"], function ( model )
-					if Engine[@"getmodelvalue"]( model ) == 1 then
-						Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f352_local8, "zombieInventoryIcon" ), CoD.ZombieUtility.InventoryIcon )
+					if Engine.GetModelValue( model ) == 1 then
+						Engine.SetModelValue( Engine.CreateModel( f352_local8, "zombieInventoryIcon" ), CoD.ZombieUtility.InventoryIcon )
 					else
-						Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f352_local8, "zombieInventoryIcon" ), "blacktransparent" )
+						Engine.SetModelValue( Engine.CreateModel( f352_local8, "zombieInventoryIcon" ), "blacktransparent" )
 					end
 				end )
 			else
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f352_local8, "zombieInventoryIcon" ), "blacktransparent" )
+				Engine.SetModelValue( Engine.CreateModel( f352_local8, "zombieInventoryIcon" ), "blacktransparent" )
 			end
-			DataSources.PlayerListZM.subscriptions[f352_arg0]:subscribeToModel( Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "Clients." .. f352_local3 .. ".playerName" ), function ( model )
-				local f354_local0 = Engine[@"getmodelvalue"]( model )
-				if f354_local0 ~= nil then
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f352_local8, "playerName" ), f354_local0 )
+			DataSources.PlayerListZM.subscriptions[f352_arg0]:subscribeToModel( Engine.GetModel( Engine.GetGlobalModel(), "Clients." .. f352_local3 .. ".playerName" ), function ( model )
+				local modelValue = Engine.GetModelValue( model )
+				if modelValue ~= nil then
+					Engine.SetModelValue( Engine.CreateModel( f352_local8, "playerName" ), modelValue )
 				else
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f352_local8, "playerName" ), "" )
+					Engine.SetModelValue( Engine.CreateModel( f352_local8, "playerName" ), "" )
 				end
 			end )
-			f352_local9 = Engine[@"createmodel"]( f352_local8, "clientModel" )
-			f352_local9:set( Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "Clients." .. f352_local3 ) )
+			f352_local9 = Engine.CreateModel( f352_local8, "clientModel" )
+			f352_local9:set( Engine.GetModel( Engine.GetGlobalModel(), "Clients." .. f352_local3 ) )
 		end
 		local f352_local3 = function ( f355_arg0, f355_arg1 )
 			DataSources.PlayerListZM.updateModelsForClient( f355_arg0, f355_arg1 )
 		end
 		
 		DataSources.PlayerListZM.subscriptions[f352_arg0]:subscribeToModel( f352_local0.playerConnected, function ( model )
-			local f356_local0 = Engine[@"getmodelvalue"]( model )
-			if f356_local0 ~= nil then
-				f352_local3( f352_arg0, f356_local0 )
+			local modelValue = Engine.GetModelValue( model )
+			if modelValue ~= nil then
+				f352_local3( f352_arg0, modelValue )
 			end
 		end, false )
 		DataSources.PlayerListZM.subscriptions[f352_arg0]:subscribeToModel( f352_local0.playerDisconnected, function ( model )
-			local f357_local0 = Engine[@"getmodelvalue"]( model )
-			if f357_local0 ~= nil then
-				f352_local3( f352_arg0, f357_local0 )
+			local modelValue = Engine.GetModelValue( model )
+			if modelValue ~= nil then
+				f352_local3( f352_arg0, modelValue )
 			end
 		end, false )
 	end,
 	updateModelsForClient = function ( f358_arg0, f358_arg1 )
 		local f358_local0 = DataSources.PlayerListZM.getModelForPlayer( f358_arg0, f358_arg1 )
 		if f358_local0 ~= nil then
-			local f358_local1 = Engine[@"getplayerlistdata"]( f358_arg0, f358_arg1 )
+			local f358_local1 = Engine.GetPlayerListData( f358_arg0, f358_arg1 )
 			for f358_local5, f358_local6 in pairs( DataSources.PlayerListZM.modelLinks ) do
-				local f358_local7 = Engine[@"getmodel"]( f358_local0, f358_local6 )
+				local f358_local7 = Engine.GetModel( f358_local0, f358_local6 )
 				if f358_local7 then
-					Engine[@"setmodelvalue"]( f358_local7, f358_local1[f358_local5] )
+					Engine.SetModelValue( f358_local7, f358_local1[f358_local5] )
 				end
 			end
 		end
 	end,
 	getModelForPlayer = function ( f359_arg0, f359_arg1 )
-		local f359_local0 = Engine[@"getclientnum"]( f359_arg0 )
+		local f359_local0 = Engine.GetClientNum( f359_arg0 )
 		if f359_arg1 == f359_local0 then
-			local f359_local1 = Engine[@"getmodelforcontroller"]( f359_arg0 )
+			local f359_local1 = Engine.GetModelForController( f359_arg0 )
 			return f359_local1.PlayerList.playerSelf
 		else
 			local f359_local1 = DataSources.PlayerListZM.clientNumToArrayIndex( f359_arg1, f359_local0 )
-			local f359_local2 = Engine[@"getmodelforcontroller"]( f359_arg0 )
+			local f359_local2 = Engine.GetModelForController( f359_arg0 )
 			return f359_local2.PlayerList["player" .. f359_local1]
 		end
 	end,
@@ -6452,7 +6451,7 @@ DataSources.PlayerListZM = {
 		if not DataSources.PlayerListZM.preparedForController or not DataSources.PlayerListZM.preparedForController[f360_arg0] then
 			DataSources.PlayerListZM.prepare( f360_arg0 )
 		end
-		local f360_local0 = Engine[@"getmodelforcontroller"]( f360_arg0 )
+		local f360_local0 = Engine.GetModelForController( f360_arg0 )
 		return f360_local0:create( "PlayerList" )
 	end
 }
@@ -6462,14 +6461,14 @@ DataSources.EmblemLayerList = {
 		local f361_local1 = f361_arg1
 		if CoD.isPC then
 			for f361_local2 = f361_arg1, 0, -1 do
-				local f361_local5 = Engine[@"getselectedlayerdata"]( f361_arg0, f361_local2, f361_arg4 )
+				local f361_local5 = Engine.GetSelectedLayerData( f361_arg0, f361_local2, f361_arg4 )
 				if f361_local5.groupIndex == f361_arg2 then
 					f361_local0 = f361_local2
 				end
 			end
 		else
 			for f361_local2 = f361_arg1, f361_arg3 - 1, 1 do
-				local f361_local5 = Engine[@"getselectedlayerdata"]( f361_arg0, f361_local2, f361_arg4 )
+				local f361_local5 = Engine.GetSelectedLayerData( f361_arg0, f361_local2, f361_arg4 )
 				if f361_local5.groupIndex == f361_arg2 then
 					f361_local1 = f361_local2
 				end
@@ -6492,9 +6491,9 @@ DataSources.EmblemLayerList = {
 		if CoD.isPC then
 			CoD.CraftUtility.EmblemEditor_PrepareEmblemListPC( f363_arg0, f363_arg1, f363_arg2 )
 		else
-			f363_arg1.emblemLayerListModel = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f363_arg0 ), "Emblem.EmblemLayerList" )
+			f363_arg1.emblemLayerListModel = Engine.CreateModel( Engine.GetModelForController( f363_arg0 ), "Emblem.EmblemLayerList" )
 			local f363_local0 = CoD.GetCustomization( f363_arg0, "type" )
-			f363_arg1.totalLayers = math.min( Engine[@"getusedlayercount"]( f363_arg0, f363_local0, CoD.perController[f363_arg0].totalLayers ) + 1, CoD.perController[f363_arg0].totalLayers )
+			f363_arg1.totalLayers = math.min( Engine.GetUsedLayerCount( f363_arg0, f363_local0, CoD.perController[f363_arg0].totalLayers ) + 1, CoD.perController[f363_arg0].totalLayers )
 			f363_arg1.itemInfo = {}
 			f363_arg1.selectIndex = 1
 			if CoD.perController[f363_arg0].selectedLayerIndex == nil then
@@ -6503,7 +6502,7 @@ DataSources.EmblemLayerList = {
 			local f363_local1 = 1
 			local f363_local2 = 0
 			while f363_local2 < f363_arg1.totalLayers do
-				local f363_local3 = Engine[@"getselectedlayerdata"]( f363_arg0, f363_local2, f363_local0 )
+				local f363_local3 = Engine.GetSelectedLayerData( f363_arg0, f363_local2, f363_local0 )
 				if f363_local3.isGrouped == true then
 					local f363_local4 = DataSources.EmblemLayerList.createGroup( f363_arg0, f363_local2, f363_local3.groupIndex, f363_arg1.totalLayers, f363_local0 )
 					table.insert( f363_arg1.itemInfo, f363_local4 )
@@ -6538,22 +6537,22 @@ DataSources.EmblemLayerList = {
 		else
 			f365_local0 = tostring( f365_local1 + 1 )
 		end
-		local f365_local3 = Engine[@"createmodel"]( f365_arg1.emblemLayerListModel, "layer_" .. f365_local1 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f365_local3, "layerIndex" ), f365_local1 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f365_local3, "layerNumberString" ), f365_local0 )
-		local f365_local4 = Engine[@"getselectedlayerdata"]( f365_arg0, f365_local1, CoD.GetCustomization( f365_arg0, "type" ) )
+		local f365_local3 = Engine.CreateModel( f365_arg1.emblemLayerListModel, "layer_" .. f365_local1 )
+		Engine.SetModelValue( Engine.CreateModel( f365_local3, "layerIndex" ), f365_local1 )
+		Engine.SetModelValue( Engine.CreateModel( f365_local3, "layerNumberString" ), f365_local0 )
+		local f365_local4 = Engine.GetSelectedLayerData( f365_arg0, f365_local1, CoD.GetCustomization( f365_arg0, "type" ) )
 		if f365_local4.iconID == CoD.CraftUtility.EMBLEM_INVALID_ID then
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f365_local3, "layerName" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_3584A78FB1E14B17" ) )
+			Engine.SetModelValue( Engine.CreateModel( f365_local3, "layerName" ), Engine[@"hash_4F9F1239CFD921FE"]( "menu/emblem_add_decal" ) )
 		else
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f365_local3, "layerName" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_6FFF4AB78EF36559", f365_local1 + 1 ) )
+			Engine.SetModelValue( Engine.CreateModel( f365_local3, "layerName" ), Engine[@"hash_4F9F1239CFD921FE"]( "menu/emblem_layer_number", f365_local1 + 1 ) )
 		end
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f365_local3, "iconID" ), f365_local4.iconID )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f365_local3, "isLinked" ), f365_local4.isLinked )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f365_local3, "isGrouped" ), f365_local4.isGrouped )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f365_local3, "groupIndex" ), f365_local4.groupIndex )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f365_local3, "layerAndGroupIndex" ), f365_local1 .. " " .. f365_local4.groupIndex )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f365_local3, "groupLayerCount" ), f365_local2 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f365_local3, "topBottomText" ), "" )
+		Engine.SetModelValue( Engine.CreateModel( f365_local3, "iconID" ), f365_local4.iconID )
+		Engine.SetModelValue( Engine.CreateModel( f365_local3, "isLinked" ), f365_local4.isLinked )
+		Engine.SetModelValue( Engine.CreateModel( f365_local3, "isGrouped" ), f365_local4.isGrouped )
+		Engine.SetModelValue( Engine.CreateModel( f365_local3, "groupIndex" ), f365_local4.groupIndex )
+		Engine.SetModelValue( Engine.CreateModel( f365_local3, "layerAndGroupIndex" ), f365_local1 .. " " .. f365_local4.groupIndex )
+		Engine.SetModelValue( Engine.CreateModel( f365_local3, "groupLayerCount" ), f365_local2 )
+		Engine.SetModelValue( Engine.CreateModel( f365_local3, "topBottomText" ), "" )
 		local f365_local5 = function ( f366_arg0, f366_arg1 )
 			return CoD.isPC and f366_arg0 == #f366_arg1.itemInfo
 		end
@@ -6577,13 +6576,13 @@ DataSources.EmblemLayerList = {
 		
 		local f365_local7 = CoD.CraftUtility.GetEmblemEditorProperties( f365_arg0, "layersUsed" )
 		if f365_local5( f365_arg2, f365_arg1 ) or not CoD.isPC and f365_arg2 == 1 then
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f365_local3, "topBottomText" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_266714F64BE6ADB" ) )
+			Engine.SetModelValue( Engine.CreateModel( f365_local3, "topBottomText" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_266714F64BE6ADB" ) )
 		elseif f365_local6( f365_arg2, f365_local7 ) or not CoD.isPC and f365_arg2 == #f365_arg1.itemInfo and f365_local7 == CoD.perController[f365_arg0].totalLayers then
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f365_local3, "topBottomText" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_391B0972BC971363" ) )
+			Engine.SetModelValue( Engine.CreateModel( f365_local3, "topBottomText" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_391B0972BC971363" ) )
 		elseif f365_local6( f365_arg2, f365_local7 ) or not CoD.isPC and f365_arg2 == #f365_arg1.itemInfo - 1 and f365_local7 ~= CoD.perController[f365_arg0].totalLayers then
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f365_local3, "topBottomText" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_391B0972BC971363" ) )
+			Engine.SetModelValue( Engine.CreateModel( f365_local3, "topBottomText" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_391B0972BC971363" ) )
 		else
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f365_local3, "topBottomText" ), "" )
+			Engine.SetModelValue( Engine.CreateModel( f365_local3, "topBottomText" ), "" )
 		end
 		return f365_local3
 	end,
@@ -6624,19 +6623,19 @@ DataSources.EmblemMaterialList = {
 			local f370_local4 = CoD.CraftUtility.EmblemMaterialCategory[f370_local1]
 			local f370_local5 = f370_local4.category
 			if f370_local4.type ~= "camo" or Dvar[@"enable_camo_materials_tab"]:get() then
-				local f370_local6 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f370_arg0 ), "Emblem.EmblemMaterialList" )
-				local f370_local7 = Engine[@"getemblemmaterialfiltercount"]( f370_arg0, f370_local5 )
+				local f370_local6 = Engine.CreateModel( Engine.GetModelForController( f370_arg0 ), "Emblem.EmblemMaterialList" )
+				local f370_local7 = Engine.GetEmblemMaterialFilterCount( f370_arg0, f370_local5 )
 				for f370_local8 = 0, f370_local7 - 1, 1 do
-					local f370_local11 = Engine[@"createmodel"]( f370_local6, "emblemMaterial_" .. f370_local0 )
-					local f370_local12 = Engine[@"getemblemmaterialidbyindex"]( f370_arg0, f370_local5, f370_local8 )
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f370_local11, "materialID" ), f370_local12 )
-					local f370_local13 = Engine[@"getemblemmaterialname"]( f370_local12 )
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f370_local11, "materialName" ), f370_local13 )
+					local f370_local11 = Engine.CreateModel( f370_local6, "emblemMaterial_" .. f370_local0 )
+					local f370_local12 = Engine.GetEmblemMaterialIDByIndex( f370_arg0, f370_local5, f370_local8 )
+					Engine.SetModelValue( Engine.CreateModel( f370_local11, "materialID" ), f370_local12 )
+					local f370_local13 = Engine.GetEmblemMaterialName( f370_local12 )
+					Engine.SetModelValue( Engine.CreateModel( f370_local11, "materialName" ), f370_local13 )
 					local f370_local14 = false
 					if f370_local5 == CoD.CraftUtility.EmblemBlackMarketEmblemCategory then
 						f370_local14 = CoD.BlackMarketUtility.IsItemLocked( f370_arg0, f370_local13 )
 					end
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f370_local11, "isBMClassified" ), f370_local14 )
+					Engine.SetModelValue( Engine.CreateModel( f370_local11, "isBMClassified" ), f370_local14 )
 					if not f370_local14 then
 						table.insert( f370_arg1.emblemMaterialList, f370_local11 )
 						f370_local0 = f370_local0 + 1
@@ -6669,23 +6668,23 @@ DataSources.EmblemColorList = {
 }
 DataSources.EmblemSelectedLayerColor = {
 	getModel = function ( f376_arg0 )
-		local f376_local0 = Engine[@"getselectedlayercolor"]( f376_arg0 )
-		local f376_local1 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f376_arg0 ), "Emblem.EmblemSelectedLayerColor" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f376_local1, "color" ), CoD.ColorUtility.ConvertColor( f376_local0.red, f376_local0.green, f376_local0.blue ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f376_local1, "red" ), f376_local0.red * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f376_local1, "green" ), f376_local0.green * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f376_local1, "blue" ), f376_local0.blue * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE )
+		local f376_local0 = Engine.GetSelectedLayerColor( f376_arg0 )
+		local f376_local1 = Engine.CreateModel( Engine.GetModelForController( f376_arg0 ), "Emblem.EmblemSelectedLayerColor" )
+		Engine.SetModelValue( Engine.CreateModel( f376_local1, "color" ), CoD.ColorUtility.ConvertColor( f376_local0.red, f376_local0.green, f376_local0.blue ) )
+		Engine.SetModelValue( Engine.CreateModel( f376_local1, "red" ), f376_local0.red * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE )
+		Engine.SetModelValue( Engine.CreateModel( f376_local1, "green" ), f376_local0.green * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE )
+		Engine.SetModelValue( Engine.CreateModel( f376_local1, "blue" ), f376_local0.blue * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE )
 		return f376_local1
 	end
 }
 DataSources.EmblemSelectedLayerColor1 = {
 	getModel = function ( f377_arg0 )
-		local f377_local0 = Engine[@"getselectedlayercolor1"]( f377_arg0 )
-		local f377_local1 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f377_arg0 ), "Emblem.EmblemSelectedLayerColor1" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f377_local1, "color" ), CoD.ColorUtility.ConvertColor( f377_local0.red, f377_local0.green, f377_local0.blue ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f377_local1, "red" ), f377_local0.red * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f377_local1, "green" ), f377_local0.green * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f377_local1, "blue" ), f377_local0.blue * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE )
+		local f377_local0 = Engine.GetSelectedLayerColor1( f377_arg0 )
+		local f377_local1 = Engine.CreateModel( Engine.GetModelForController( f377_arg0 ), "Emblem.EmblemSelectedLayerColor1" )
+		Engine.SetModelValue( Engine.CreateModel( f377_local1, "color" ), CoD.ColorUtility.ConvertColor( f377_local0.red, f377_local0.green, f377_local0.blue ) )
+		Engine.SetModelValue( Engine.CreateModel( f377_local1, "red" ), f377_local0.red * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE )
+		Engine.SetModelValue( Engine.CreateModel( f377_local1, "green" ), f377_local0.green * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE )
+		Engine.SetModelValue( Engine.CreateModel( f377_local1, "blue" ), f377_local0.blue * CoD.CraftUtility.EMBLEM_MAX_COLOR_COMPONENT_VALUE )
 		return f377_local1
 	end
 }
@@ -6693,7 +6692,7 @@ DataSources.EmblemSelectedLayerEdittingColor = {
 	getModel = function ( f378_arg0 )
 		local f378_local0 = CoD.CraftUtility.GetEmblemEditorProperties( f378_arg0, "isGradientMode" )
 		local f378_local1 = CoD.CraftUtility.GetEmblemEditorProperties( f378_arg0, "colorNum" )
-		if f378_local0 ~= nil and f378_local1 ~= nil and f378_local0 == 1 and f378_local1 == Enum[@"customizationcolornum"][@"customization_color_1"] then
+		if f378_local0 ~= nil and f378_local1 ~= nil and f378_local0 == 1 and f378_local1 == Enum.CustomizationColorNum[@"customization_color_1"] then
 			return DataSources.EmblemSelectedLayerColor1.getModel( f378_arg0 )
 		else
 			return DataSources.EmblemSelectedLayerColor.getModel( f378_arg0 )
@@ -6704,7 +6703,7 @@ DataSources.EmblemSelectedLayerNoColor = {
 	getModel = function ( f379_arg0 )
 		local f379_local0 = CoD.CraftUtility.GetEmblemEditorProperties( f379_arg0, "isGradientMode" )
 		local f379_local1 = CoD.CraftUtility.GetEmblemEditorProperties( f379_arg0, "colorNum" )
-		if f379_local0 ~= nil and f379_local1 ~= nil and f379_local0 == 1 and f379_local1 == Enum[@"customizationcolornum"][@"customization_color_1"] then
+		if f379_local0 ~= nil and f379_local1 ~= nil and f379_local0 == 1 and f379_local1 == Enum.CustomizationColorNum[@"customization_color_1"] then
 			return DataSources.EmblemSelectedLayerColor.getModel( f379_arg0 )
 		else
 			return DataSources.EmblemSelectedLayerColor1.getModel( f379_arg0 )
@@ -6713,94 +6712,94 @@ DataSources.EmblemSelectedLayerNoColor = {
 }
 DataSources.EmblemSelectedLayerProperties = {
 	getModel = function ( f380_arg0 )
-		local f380_local0 = Engine[@"getselectedemblemlayerproperties"]()
-		local f380_local1 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f380_arg0 ), "Emblem.EmblemSelectedLayerProperties" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f380_local1, "xposition" ), f380_local0.xposition )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f380_local1, "yposition" ), f380_local0.yposition )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f380_local1, "xscale" ), f380_local0.xscale )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f380_local1, "yscale" ), f380_local0.yscale )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f380_local1, "rotation" ), f380_local0.rotation )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f380_local1, "opacity0" ), f380_local0.opacity0 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f380_local1, "opacity1" ), f380_local0.opacity1 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f380_local1, "gradient_angle" ), f380_local0.gradient_angle )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f380_local1, "gradient_type" ), f380_local0.gradient_type )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f380_local1, "gradient_fill" ), f380_local0.gradient_fill )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f380_local1, "gradient_thickness" ), f380_local0.gradient_thickness )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f380_local1, "material_angle" ), f380_local0.material_angle )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f380_local1, "material_xscale" ), f380_local0.material_xscale )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f380_local1, "material_yscale" ), f380_local0.material_yscale )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f380_local1, "max_opacity" ), math.max( f380_local0.opacity0, f380_local0.opacity1 ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f380_local1, "blend" ), f380_local0.blend )
+		local f380_local0 = Engine.GetSelectedEmblemLayerProperties()
+		local f380_local1 = Engine.CreateModel( Engine.GetModelForController( f380_arg0 ), "Emblem.EmblemSelectedLayerProperties" )
+		Engine.SetModelValue( Engine.CreateModel( f380_local1, "xposition" ), f380_local0.xposition )
+		Engine.SetModelValue( Engine.CreateModel( f380_local1, "yposition" ), f380_local0.yposition )
+		Engine.SetModelValue( Engine.CreateModel( f380_local1, "xscale" ), f380_local0.xscale )
+		Engine.SetModelValue( Engine.CreateModel( f380_local1, "yscale" ), f380_local0.yscale )
+		Engine.SetModelValue( Engine.CreateModel( f380_local1, "rotation" ), f380_local0.rotation )
+		Engine.SetModelValue( Engine.CreateModel( f380_local1, "opacity0" ), f380_local0.opacity0 )
+		Engine.SetModelValue( Engine.CreateModel( f380_local1, "opacity1" ), f380_local0.opacity1 )
+		Engine.SetModelValue( Engine.CreateModel( f380_local1, "gradient_angle" ), f380_local0.gradient_angle )
+		Engine.SetModelValue( Engine.CreateModel( f380_local1, "gradient_type" ), f380_local0.gradient_type )
+		Engine.SetModelValue( Engine.CreateModel( f380_local1, "gradient_fill" ), f380_local0.gradient_fill )
+		Engine.SetModelValue( Engine.CreateModel( f380_local1, "gradient_thickness" ), f380_local0.gradient_thickness )
+		Engine.SetModelValue( Engine.CreateModel( f380_local1, "material_angle" ), f380_local0.material_angle )
+		Engine.SetModelValue( Engine.CreateModel( f380_local1, "material_xscale" ), f380_local0.material_xscale )
+		Engine.SetModelValue( Engine.CreateModel( f380_local1, "material_yscale" ), f380_local0.material_yscale )
+		Engine.SetModelValue( Engine.CreateModel( f380_local1, "max_opacity" ), math.max( f380_local0.opacity0, f380_local0.opacity1 ) )
+		Engine.SetModelValue( Engine.CreateModel( f380_local1, "blend" ), f380_local0.blend )
 		return f380_local1
 	end
 }
 DataSources.EmblemProperties = {
 	getModel = function ( f381_arg0 )
-		local f381_local0 = Enum[@"customizationcolormode"][@"customization_color_mode_none"]
-		local f381_local1 = Enum[@"customizationeditormode"][@"customization_editor_mode_none"]
-		local f381_local2 = Engine[@"getemblemscalemode"]( f381_arg0 )
-		local f381_local3 = Engine[@"getlayermaterialscalemode"]( f381_arg0 )
+		local f381_local0 = Enum.CustomizationColorMode[@"customization_color_mode_none"]
+		local f381_local1 = Enum.CustomizationEditorMode[@"customization_editor_mode_none"]
+		local f381_local2 = Engine.GetEmblemScaleMode( f381_arg0 )
+		local f381_local3 = Engine.GetLayerMaterialScaleMode( f381_arg0 )
 		local f381_local4 = CoD.perController[f381_arg0].totalLayers or 0
 		local f381_local5 = CoD.GetCustomization( f381_arg0, "type" )
-		local f381_local6 = Engine[@"getusedlayercount"]( f381_arg0, f381_local5, f381_local4 )
-		local f381_local7 = Engine[@"hash_4F9F1239CFD921FE"]( 0x8AD837A6ECA017, f381_local6, f381_local4 )
-		local f381_local8 = Engine[@"getlinkedlayercount"]( f381_arg0, f381_local5 )
+		local f381_local6 = Engine.GetUsedLayerCount( f381_arg0, f381_local5, f381_local4 )
+		local f381_local7 = Engine[@"hash_4F9F1239CFD921FE"]( "menu/emblem_layers_used_fraction", f381_local6, f381_local4 )
+		local f381_local8 = Engine.GetLinkedLayerCount( f381_arg0, f381_local5 )
 		local f381_local9 = CoD.perController[f381_arg0].totalGroups or 0
-		local f381_local10 = Engine[@"getusedgroupcount"]( f381_arg0, f381_local5 )
-		local f381_local11 = Engine[@"hash_4F9F1239CFD921FE"]( 0x8AD837A6ECA017, f381_local10, f381_local9 )
-		local f381_local12 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f381_arg0 ), "Emblem.EmblemProperties" )
+		local f381_local10 = Engine.GetUsedGroupCount( f381_arg0, f381_local5 )
+		local f381_local11 = Engine[@"hash_4F9F1239CFD921FE"]( "menu/emblem_layers_used_fraction", f381_local10, f381_local9 )
+		local f381_local12 = Engine.GetModel( Engine.GetModelForController( f381_arg0 ), "Emblem.EmblemProperties" )
 		if not f381_local12 then
-			f381_local12 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f381_arg0 ), "Emblem.EmblemProperties" )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f381_local12, "layersUsed" ), f381_local6 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f381_local12, "layersAvailable" ), f381_local4 - f381_local6 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f381_local12, "totalLayers" ), f381_local4 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f381_local12, "colorMode" ), f381_local0 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f381_local12, "editorMode" ), f381_local1 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f381_local12, "scaleMode" ), f381_local2 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f381_local12, "materialScaleMode" ), f381_local3 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f381_local12, "layersUsedFraction" ), f381_local7 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f381_local12, "groupsUsed" ), f381_local10 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f381_local12, "groupsAvailable" ), f381_local9 - f381_local10 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f381_local12, "totalGroups" ), f381_local9 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f381_local12, "groupsUsedFraction" ), f381_local11 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f381_local12, "isClipboardEmpty" ), CoD.CraftUtility.EMBLEM_CLIPBOARDSTATE.EMPTY )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f381_local12, "addDecalMode" ), CoD.CraftUtility.EMBLEM_ADDDECAL.REPLACE )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f381_local12, "isGradientMode" ), 0 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f381_local12, "colorNum" ), Enum[@"customizationcolornum"][@"customization_color_none"] )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f381_local12, "isColor0NoColor" ), 0 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f381_local12, "isColor1NoColor" ), 0 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f381_local12, "linkedLayerCount" ), f381_local8 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f381_local12, "selectedDecalID" ), 0 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f381_local12, "colorContainerState" ), CoD.CraftUtility.COLOR_CONTAINER_STATE.COLOR_SWATCH )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f381_local12, "selectedLayerIndex" ), 0 )
+			f381_local12 = Engine.CreateModel( Engine.GetModelForController( f381_arg0 ), "Emblem.EmblemProperties" )
+			Engine.SetModelValue( Engine.CreateModel( f381_local12, "layersUsed" ), f381_local6 )
+			Engine.SetModelValue( Engine.CreateModel( f381_local12, "layersAvailable" ), f381_local4 - f381_local6 )
+			Engine.SetModelValue( Engine.CreateModel( f381_local12, "totalLayers" ), f381_local4 )
+			Engine.SetModelValue( Engine.CreateModel( f381_local12, "colorMode" ), f381_local0 )
+			Engine.SetModelValue( Engine.CreateModel( f381_local12, "editorMode" ), f381_local1 )
+			Engine.SetModelValue( Engine.CreateModel( f381_local12, "scaleMode" ), f381_local2 )
+			Engine.SetModelValue( Engine.CreateModel( f381_local12, "materialScaleMode" ), f381_local3 )
+			Engine.SetModelValue( Engine.CreateModel( f381_local12, "layersUsedFraction" ), f381_local7 )
+			Engine.SetModelValue( Engine.CreateModel( f381_local12, "groupsUsed" ), f381_local10 )
+			Engine.SetModelValue( Engine.CreateModel( f381_local12, "groupsAvailable" ), f381_local9 - f381_local10 )
+			Engine.SetModelValue( Engine.CreateModel( f381_local12, "totalGroups" ), f381_local9 )
+			Engine.SetModelValue( Engine.CreateModel( f381_local12, "groupsUsedFraction" ), f381_local11 )
+			Engine.SetModelValue( Engine.CreateModel( f381_local12, "isClipboardEmpty" ), CoD.CraftUtility.EMBLEM_CLIPBOARDSTATE.EMPTY )
+			Engine.SetModelValue( Engine.CreateModel( f381_local12, "addDecalMode" ), CoD.CraftUtility.EMBLEM_ADDDECAL.REPLACE )
+			Engine.SetModelValue( Engine.CreateModel( f381_local12, "isGradientMode" ), 0 )
+			Engine.SetModelValue( Engine.CreateModel( f381_local12, "colorNum" ), Enum.CustomizationColorNum[@"customization_color_none"] )
+			Engine.SetModelValue( Engine.CreateModel( f381_local12, "isColor0NoColor" ), 0 )
+			Engine.SetModelValue( Engine.CreateModel( f381_local12, "isColor1NoColor" ), 0 )
+			Engine.SetModelValue( Engine.CreateModel( f381_local12, "linkedLayerCount" ), f381_local8 )
+			Engine.SetModelValue( Engine.CreateModel( f381_local12, "selectedDecalID" ), 0 )
+			Engine.SetModelValue( Engine.CreateModel( f381_local12, "colorContainerState" ), CoD.CraftUtility.COLOR_CONTAINER_STATE.COLOR_SWATCH )
+			Engine.SetModelValue( Engine.CreateModel( f381_local12, "selectedLayerIndex" ), 0 )
 		end
 		return f381_local12
 	end
 }
 DataSources.SlotCustomization = {
 	getModel = function ( f382_arg0 )
-		local f382_local0 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f382_arg0 ), "SlotCustomization" )
+		local f382_local0 = Engine.GetModel( Engine.GetModelForController( f382_arg0 ), "SlotCustomization" )
 		if not f382_local0 then
-			f382_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f382_arg0 ), "SlotCustomization" )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f382_local0, "type" ), Enum[@"customizationtype"][@"customization_type_emblem"] )
+			f382_local0 = Engine.CreateModel( Engine.GetModelForController( f382_arg0 ), "SlotCustomization" )
+			Engine.SetModelValue( Engine.CreateModel( f382_local0, "type" ), Enum.CustomizationType[@"customization_type_emblem"] )
 		end
 		return f382_local0
 	end
 }
 DataSources.Customization = {
 	getModel = function ( f383_arg0 )
-		local f383_local0 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f383_arg0 ), "Customization" )
+		local f383_local0 = Engine.GetModel( Engine.GetModelForController( f383_arg0 ), "Customization" )
 		if not f383_local0 then
-			f383_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f383_arg0 ), "Customization" )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f383_local0, "weapon_index" ), 20 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f383_local0, "type" ), Enum[@"customizationtype"][@"customization_type_emblem"] )
+			f383_local0 = Engine.CreateModel( Engine.GetModelForController( f383_arg0 ), "Customization" )
+			Engine.SetModelValue( Engine.CreateModel( f383_local0, "weapon_index" ), 20 )
+			Engine.SetModelValue( Engine.CreateModel( f383_local0, "type" ), Enum.CustomizationType[@"customization_type_emblem"] )
 		end
 		return f383_local0
 	end
 }
 DataSources.StoreCategoryList = ListHelper_SetupDataSource( "Store.CategoryList", function ( f384_arg0 )
 	local f384_local0 = {}
-	local f384_local1 = Engine[@"getstorecategories"]()
+	local f384_local1 = Engine.GetStoreCategories()
 	if IsCommerceEnabledOnPC() then
 		local f384_local2 = Engine[@"hash_3E78C83C300F9368"]()
 		for f384_local3 = 1, #f384_local1, 1 do
@@ -6835,7 +6834,7 @@ DataSources.StoreProductList = ListHelper_SetupDataSource( "Store.ProductList", 
 	local f385_local0 = {}
 	local f385_local1 = CoD.perController[f385_arg0].selectedStoreCategory
 	if f385_local1 then
-		local f385_local2 = Engine[@"getstoreproductsbycategory"]( f385_arg0, f385_local1 )
+		local f385_local2 = Engine.GetStoreProductsByCategory( f385_arg0, f385_local1 )
 		local f385_local3 = 6
 		if f385_local3 < #f385_local2 and #f385_local2 ~= 0 then
 			f385_local3 = #f385_local2
@@ -6853,8 +6852,8 @@ DataSources.StoreProductList = ListHelper_SetupDataSource( "Store.ProductList", 
 					onOverDesc = "",
 					productID = "",
 					skuID = "",
-					previewImage = @"hash_0",
-					productImage = @"hash_0",
+					previewImage = 0x0,
+					productImage = 0x0,
 					purchasestatus = 0,
 					availability = Enum[@"hash_7E8E23A7B8B67FF6"][@"hash_31D42433730A860E"],
 					serviceLabel = 0
@@ -6862,10 +6861,10 @@ DataSources.StoreProductList = ListHelper_SetupDataSource( "Store.ProductList", 
 			end
 			f385_local6 = f385_local6 + 1
 			local f385_local8 = true
-			if f385_local7.productNameHash == @"hash_2A93E67FF169D892" and IsDurango() and (not Engine[@"islanguagesupportedinsku"]( Enum[@"language_t"][@"language_english"] ) or not Engine[@"islanguagesupportedinsku"]( Enum[@"language_t"][@"language_french"] )) then
+			if f385_local7.productNameHash == @"hash_2A93E67FF169D892" and IsDurango() and (not Engine.IsLanguageSupportedInSKU( Enum[@"language_t"][@"language_english"] ) or not Engine.IsLanguageSupportedInSKU( Enum[@"language_t"][@"language_french"] )) then
 				f385_local8 = false
 			end
-			if f385_local7.productNameHash == @"blackopspass" and f385_local7.purchasestatus == Enum[@"storeproductpurchasestatus"][@"store_product_purchased"] then
+			if f385_local7.productNameHash == @"blackopspass" and f385_local7.purchasestatus == Enum.StoreProductPurchaseStatus[@"store_product_purchased"] then
 				f385_local8 = false
 			end
 			if f385_local8 and f385_local7.blackMarketName ~= @"hash_C78328FF7303B63" then
@@ -6902,7 +6901,7 @@ DataSources.StoreProductList = ListHelper_SetupDataSource( "Store.ProductList", 
 end )
 DataSources.CoDPointStoreList = ListHelper_SetupDataSource( "CoDPointStoreList", function ( f386_arg0 )
 	local f386_local0 = {}
-	local f386_local1 = Engine[@"getstoreproductsbycategory"]( f386_arg0, "codpoints" )
+	local f386_local1 = Engine.GetStoreProductsByCategory( f386_arg0, "codpoints" )
 	if #f386_local1 == 0 then
 		return f386_local0
 	end
@@ -6944,7 +6943,7 @@ DataSources.StoreFeaturedProductList = ListHelper_SetupDataSource( "Store.Featur
 	local f387_local0 = {}
 	local f387_local1 = CoD.perController[f387_arg0].selectedStoreCategory
 	if f387_local1 then
-		local f387_local2 = Engine[@"getstoreproductsbycategory"]( f387_arg0, f387_local1 )
+		local f387_local2 = Engine.GetStoreProductsByCategory( f387_arg0, f387_local1 )
 		if CoD.isPC then
 			if Engine[@"hash_45405A6484A88367"]() then
 				local f387_local3 = 3
@@ -6991,18 +6990,18 @@ DataSources.StoreFeaturedProductList = ListHelper_SetupDataSource( "Store.Featur
 					onOverDesc = "",
 					productID = "",
 					skuID = "",
-					previewImage = @"hash_0",
-					productImage = @"hash_0",
+					previewImage = 0x0,
+					productImage = 0x0,
 					purchasestatus = 0,
 					availability = Enum[@"hash_7E8E23A7B8B67FF6"][@"hash_31D42433730A860E"],
 					serviceLabel = 0
 				}
 			end
 			local f387_local12 = true
-			if f387_local11.productNameHash == @"hash_2A93E67FF169D892" and IsDurango() and (not Engine[@"islanguagesupportedinsku"]( Enum[@"language_t"][@"language_english"] ) or not Engine[@"islanguagesupportedinsku"]( Enum[@"language_t"][@"language_french"] )) then
+			if f387_local11.productNameHash == @"hash_2A93E67FF169D892" and IsDurango() and (not Engine.IsLanguageSupportedInSKU( Enum[@"language_t"][@"language_english"] ) or not Engine.IsLanguageSupportedInSKU( Enum[@"language_t"][@"language_french"] )) then
 				f387_local12 = false
 			end
-			if f387_local11.productNameHash == @"blackopspass" and f387_local11.purchasestatus == Enum[@"storeproductpurchasestatus"][@"store_product_purchased"] then
+			if f387_local11.productNameHash == @"blackopspass" and f387_local11.purchasestatus == Enum.StoreProductPurchaseStatus[@"store_product_purchased"] then
 				f387_local12 = false
 			end
 			if f387_local11.availability == Enum[@"hash_7E8E23A7B8B67FF6"][@"hash_486D7E458864E50"] then
@@ -7079,11 +7078,11 @@ end, false )
 DataSources.ChooseClassClients = ListHelper_SetupDataSource( "ChooseClassClients", function ( f390_arg0 )
 	local f390_local0 = {}
 	local f390_local1 = 1
-	local f390_local2 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f390_arg0 ), "ChooseClassCPClientMenu" )
+	local f390_local2 = Engine.GetModel( Engine.GetModelForController( f390_arg0 ), "ChooseClassCPClientMenu" )
 	if f390_local2 then
-		local f390_local3 = Engine[@"getmodel"]( f390_local2, "numActiveClients" )
+		local f390_local3 = Engine.GetModel( f390_local2, "numActiveClients" )
 		if f390_local3 then
-			f390_local1 = Engine[@"getmodelvalue"]( f390_local3 )
+			f390_local1 = Engine.GetModelValue( f390_local3 )
 		end
 	end
 	for f390_local3 = 1, f390_local1, 1 do
@@ -7099,11 +7098,11 @@ DataSources.ChooseClassList = {
 	prepare = function ( f391_arg0, f391_arg1, f391_arg2 )
 		f391_arg1.customClassList = {}
 		local f391_local0 = CoD.CACUtility.GetCustomClassCount( f391_arg0 )
-		local f391_local1 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f391_arg0 ), "CustomClassList" )
+		local f391_local1 = Engine.CreateModel( Engine.GetModelForController( f391_arg0 ), "CustomClassList" )
 		f391_local1:create( "equippedItemsChanged" )
 		local f391_local2 = f391_local1:create( "weaponPersonalizationUpdated" )
 		f391_local2:set( false )
-		f391_local2 = Engine[@"currentsessionmode"]()
+		f391_local2 = Engine.CurrentSessionMode()
 		if f391_arg1.menu and CoD.BaseUtility.GetMenuSessionMode( f391_arg1.menu ) then
 			f391_local2 = CoD.BaseUtility.GetMenuSessionMode( f391_arg1.menu )
 		end
@@ -7123,7 +7122,7 @@ DataSources.ChooseClassList = {
 		for f391_local5 = 1, f391_local0, 1 do
 			local f391_local8 = f391_local5 - 1
 			local f391_local9 = CoD.CACUtility.GetClassesUnlockableItemUnlockInfo( f391_local8, "featureItemIndex" )
-			if not f391_arg1.menu._excludeLockedClasses or not f391_local9 or not CoD.CACUtility.IsProgressionEnabled( f391_local2 ) or not Engine[@"isitemlocked"]( f391_arg0, f391_local9, f391_local2 ) then
+			if not f391_arg1.menu._excludeLockedClasses or not f391_local9 or not CoD.CACUtility.IsProgressionEnabled( f391_local2 ) or not Engine.IsItemLocked( f391_arg0, f391_local9, f391_local2 ) then
 				table.insert( f391_arg1.customClassList, f391_local4( f391_local5, f391_local8 ) )
 			end
 		end
@@ -7142,13 +7141,13 @@ DataSources.ChooseClass_TinyLoadout = {
 	prepareModelForIndex = function ( f396_arg0, f396_arg1, f396_arg2, f396_arg3, f396_arg4 )
 		local f396_local0 = nil
 		if CanUseSharedLoadouts( f396_arg3 ) then
-			local f396_local1 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f396_arg3 ), "ChooseClassCPClientMenu" )
+			local f396_local1 = Engine.GetModel( Engine.GetModelForController( f396_arg3 ), "ChooseClassCPClientMenu" )
 			if f396_local1 then
-				local f396_local2 = Engine[@"getmodel"]( f396_local1, "selectedClientIndex" )
+				local f396_local2 = Engine.GetModel( f396_local1, "selectedClientIndex" )
 				if f396_local2 then
-					local f396_local3 = Engine[@"getmodel"]( f396_local1, "client" .. Engine[@"getmodelvalue"]( f396_local2 ) )
+					local f396_local3 = Engine.GetModel( f396_local1, "client" .. Engine.GetModelValue( f396_local2 ) )
 					if f396_local3 then
-						f396_local0 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f396_local3, "xuid" ) )
+						f396_local0 = Engine.GetModelValue( Engine.GetModel( f396_local3, "xuid" ) )
 					end
 				end
 			end
@@ -7160,12 +7159,12 @@ DataSources.ChooseClass_TinyLoadout = {
 		return f396_local1
 	end,
 	prepare = function ( f397_arg0, f397_arg1, f397_arg2 )
-		local f397_local0 = Engine[@"currentsessionmode"]()
+		local f397_local0 = Engine.CurrentSessionMode()
 		if f397_arg1.menu and CoD.BaseUtility.GetMenuSessionMode( f397_arg1.menu ) then
 			f397_local0 = CoD.BaseUtility.GetMenuSessionMode( f397_arg1.menu )
 		end
 		local f397_local1 = CoD.TeamUtility.GetTeamID( f397_arg0 )
-		local f397_local2 = Engine[@"getmodelforcontroller"]( f397_arg0 )
+		local f397_local2 = Engine.GetModelForController( f397_arg0 )
 		local f397_local3 = f397_local2:create( "CustomClassListTinyLoadout" )
 		f397_local3:create( "equippedItemsChanged" )
 		local f397_local4 = f397_local3.prepared
@@ -7193,9 +7192,9 @@ DataSources.ChooseClass_TinyLoadout = {
 			else
 				local f397_local9 = math.min( math.max( Enum[@"loadoutclass_t"][@"custom_class_count"] - f397_arg1.customClassCount, 0 ), f397_local8 )
 				local f397_local10 = CoD.CACUtility.GetFeatureCACItemIndex()
-				local f397_local11 = f397_local10 and Engine[@"isitemlocked"]( f397_arg0, f397_local10, f397_local0 )
+				local f397_local11 = f397_local10 and Engine.IsItemLocked( f397_arg0, f397_local10, f397_local0 )
 				if f397_local4:get() ~= f397_local1 or f397_local5 then
-					Engine[@"setmodelvalue"]( f397_local4, f397_local1 )
+					Engine.SetModelValue( f397_local4, f397_local1 )
 					if not CoD.CACUtility.tinyClassModels then
 						CoD.CACUtility.tinyClassModels = {}
 					end
@@ -7205,7 +7204,7 @@ DataSources.ChooseClass_TinyLoadout = {
 					if CustomClassesEnabled() and (not f397_local5 or f397_local5 and f397_local6 == CoD.PrestigeUtility.ChooseClassSets.Custom) then
 						local f397_local13 = nil
 						if IsCampaign() then
-							f397_local13 = CoD.CACUtility.GetSelectedCustomClass( f397_arg0, Enum[@"emodes"][@"mode_campaign"] )
+							f397_local13 = CoD.CACUtility.GetSelectedCustomClass( f397_arg0, Enum.eModes.mode_campaign )
 						end
 						if not CoD.CACUtility.IsProgressionEnabled( f397_local0 ) or not f397_local11 then
 							for f397_local14 = 1, f397_arg1.customClassCount, 1 do
@@ -7255,13 +7254,13 @@ DataSources.ChooseClass_InGame = {
 	prepareModelForIndex = function ( f402_arg0, f402_arg1, f402_arg2, f402_arg3, f402_arg4 )
 		local f402_local0 = nil
 		if CanUseSharedLoadouts( f402_arg3 ) then
-			local f402_local1 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f402_arg3 ), "ChooseClassCPClientMenu" )
+			local f402_local1 = Engine.GetModel( Engine.GetModelForController( f402_arg3 ), "ChooseClassCPClientMenu" )
 			if f402_local1 then
-				local f402_local2 = Engine[@"getmodel"]( f402_local1, "selectedClientIndex" )
+				local f402_local2 = Engine.GetModel( f402_local1, "selectedClientIndex" )
 				if f402_local2 then
-					local f402_local3 = Engine[@"getmodel"]( f402_local1, "client" .. Engine[@"getmodelvalue"]( f402_local2 ) )
+					local f402_local3 = Engine.GetModel( f402_local1, "client" .. Engine.GetModelValue( f402_local2 ) )
 					if f402_local3 then
-						f402_local0 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f402_local3, "xuid" ) )
+						f402_local0 = Engine.GetModelValue( Engine.GetModel( f402_local3, "xuid" ) )
 					end
 				end
 			end
@@ -7277,12 +7276,12 @@ DataSources.ChooseClass_InGame = {
 		return f402_local1
 	end,
 	prepare = function ( f403_arg0, f403_arg1, f403_arg2 )
-		local f403_local0 = Engine[@"currentsessionmode"]()
+		local f403_local0 = Engine.CurrentSessionMode()
 		if f403_arg1.menu and CoD.BaseUtility.GetMenuSessionMode( f403_arg1.menu ) then
 			f403_local0 = CoD.BaseUtility.GetMenuSessionMode( f403_arg1.menu )
 		end
 		local f403_local1 = CoD.TeamUtility.GetTeamID( f403_arg0 )
-		local f403_local2 = Engine[@"getmodelforcontroller"]( f403_arg0 )
+		local f403_local2 = Engine.GetModelForController( f403_arg0 )
 		local f403_local3 = f403_local2:create( "CustomClassList" )
 		f403_local3:create( "equippedItemsChanged" )
 		local f403_local4 = f403_local3.prepared
@@ -7311,16 +7310,16 @@ DataSources.ChooseClass_InGame = {
 			else
 				local f403_local10 = f403_local9
 				local f403_local11 = CoD.CACUtility.GetFeatureCACItemIndex()
-				local f403_local12 = f403_local11 and Engine[@"isitemlocked"]( f403_arg0, f403_local11, f403_local0 )
+				local f403_local12 = f403_local11 and Engine.IsItemLocked( f403_arg0, f403_local11, f403_local0 )
 				if f403_local4:get() ~= f403_local1 or f403_local5 then
-					Engine[@"setmodelvalue"]( f403_local4, f403_local1 )
+					Engine.SetModelValue( f403_local4, f403_local1 )
 					CoD.CACUtility.classModels[f403_arg0] = {}
 					local f403_local13 = f403_local2:create( "CustomClassList" )
 					f403_arg1.classModels = {}
 					if CustomClassesEnabled() and (not f403_local5 or f403_local5 and f403_local6 == CoD.PrestigeUtility.ChooseClassSets.Custom) then
 						local f403_local14 = nil
 						if IsCampaign() then
-							f403_local14 = CoD.CACUtility.GetSelectedCustomClass( f403_arg0, Enum[@"emodes"][@"mode_campaign"] )
+							f403_local14 = CoD.CACUtility.GetSelectedCustomClass( f403_arg0, Enum.eModes.mode_campaign )
 						end
 						if not CoD.CACUtility.IsProgressionEnabled( f403_local0 ) or not f403_local12 then
 							for f403_local15 = 1, f403_arg1.customClassCount, 1 do
@@ -7333,7 +7332,7 @@ DataSources.ChooseClass_InGame = {
 							end
 						end
 					end
-					if f403_local8 and f403_local0 == Enum[@"emodes"][@"mode_multiplayer"] then
+					if f403_local8 and f403_local0 == Enum.eModes.mode_multiplayer then
 						local f403_local14 = Enum[@"loadoutclass_t"][@"default_class_first"] + 1
 						if not f403_local5 then
 							for f403_local15 = f403_local14, f403_local14 + f403_local10 - 1, 1 do
@@ -7363,11 +7362,11 @@ DataSources.ChooseClass_InGame = {
 				local f403_local13 = CoD.perController[f403_arg0].initSetClass
 				if f403_local13 == nil or not f403_local13 then
 					CoD.perController[f403_arg0].initSetClass = true
-					if f403_local0 ~= Enum[@"emodes"][@"mode_invalid"] then
+					if f403_local0 ~= Enum.eModes.mode_invalid then
 						local f403_local14 = CoD.CACUtility.GetSelectedCustomClass( f403_arg0, f403_local0 )
 						if CoD.CACUtility.IsProgressionEnabled( f403_local0 ) then
 							local f403_local15 = CoD.CACUtility.GetClassesUnlockableItemUnlockInfo( f403_local14, "featureItemIndex" )
-							local f403_local16 = f403_local15 and Engine[@"isitemlocked"]( f403_arg0, f403_local15, f403_local0 )
+							local f403_local16 = f403_local15 and Engine.IsItemLocked( f403_arg0, f403_local15, f403_local0 )
 							if f403_local12 and not f403_local16 and (f403_local14 < Enum[@"loadoutclass_t"][@"default_class_first"] or f403_local14 > Enum[@"loadoutclass_t"][@"default_class_assault"]) then
 								f403_local14 = Enum[@"loadoutclass_t"][@"default_class_first"]
 								CoD.CACUtility.SetSelectedCustomClass( f403_arg0, f403_local0, f403_local14 )
@@ -7422,8 +7421,8 @@ DataSources.ResetDefaultClass = {
 	prepare = function ( f409_arg0, f409_arg1, f409_arg2 )
 		f409_arg1.resetDefaultClassList = {}
 		local f409_local0 = CoD.CACUtility.GetCustomClassCount( f409_arg0 )
-		local f409_local1 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f409_arg0 ), "ResetDefaultClassList" )
-		local f409_local2 = Engine[@"currentsessionmode"]()
+		local f409_local1 = Engine.CreateModel( Engine.GetModelForController( f409_arg0 ), "ResetDefaultClassList" )
+		local f409_local2 = Engine.CurrentSessionMode()
 		if f409_arg1.menu and CoD.BaseUtility.GetMenuSessionMode( f409_arg1.menu ) then
 			f409_local2 = CoD.BaseUtility.GetMenuSessionMode( f409_arg1.menu )
 		end
@@ -7441,7 +7440,7 @@ DataSources.ResetDefaultClass = {
 		
 		for f409_local4 = 1, Enum[@"loadoutclass_t"][@"basic_custom_class_count"], 1 do
 			local f409_local7 = CoD.CACUtility.GetClassesUnlockableItemUnlockInfo( f409_local4 - 1, "featureItemIndex" )
-			if not f409_local7 or not CoD.CACUtility.IsProgressionEnabled( f409_local2 ) or not Engine[@"isitemlocked"]( f409_arg0, f409_local7, f409_local2 ) then
+			if not f409_local7 or not CoD.CACUtility.IsProgressionEnabled( f409_local2 ) or not Engine.IsItemLocked( f409_arg0, f409_local7, f409_local2 ) then
 				table.insert( f409_arg1.resetDefaultClassList, f409_local3( f409_local4 ) )
 			end
 		end
@@ -7466,7 +7465,7 @@ DataSources.PaintshopWeaponTabType = ListHelper_SetupDataSource( "Paintshop.Pain
 	for f413_local4, f413_local5 in ipairs( CoD.CraftUtility.WeaponGroupNames ) do
 		table.insert( f413_local0, {
 			models = {
-				tabName = Engine[@"localize"]( f413_local5.name )
+				tabName = Engine.Localize( f413_local5.name )
 			},
 			properties = {
 				filter = f413_local5.weapon_category
@@ -7488,7 +7487,7 @@ DataSources.EmblemMaterialTabType = ListHelper_SetupDataSource( "Emblem.EmblemMa
 	local f414_local1 = function ( f415_arg0 )
 		if f415_arg0 ~= CoD.CraftUtility.EMBLEM_INVALID_ID then
 			for f415_local3, f415_local4 in ipairs( CoD.CraftUtility.EmblemMaterialCategory ) do
-				if Engine[@"getselectedlayermaterialindex"]( f414_arg0, f415_local4.category, f415_arg0 ) ~= CoD.CraftUtility.EMBLEM_INVALID_ID then
+				if Engine.GetSelectedLayerMaterialIndex( f414_arg0, f415_local4.category, f415_arg0 ) ~= CoD.CraftUtility.EMBLEM_INVALID_ID then
 					return f415_local4.category
 				end
 			end
@@ -7505,12 +7504,12 @@ DataSources.EmblemMaterialTabType = ListHelper_SetupDataSource( "Emblem.EmblemMa
 	for f414_local13, f414_local14 in ipairs( CoD.CraftUtility.EmblemMaterialCategory ) do
 		if f414_local14.type ~= "camo" or IsBooleanDvarSet( "enable_camo_materials_tab" ) then
 			local f414_local6 = 0
-			local f414_local7 = Engine[@"getemblemmaterialfiltercount"]( f414_arg0, f414_local14.category )
+			local f414_local7 = Engine.GetEmblemMaterialFilterCount( f414_arg0, f414_local14.category )
 			for f414_local8 = 0, f414_local7 - 1, 1 do
-				local f414_local11 = Engine[@"getemblemmaterialidbyindex"]( f414_arg0, f414_local14.category, f414_local8 )
+				local f414_local11 = Engine.GetEmblemMaterialIDByIndex( f414_arg0, f414_local14.category, f414_local8 )
 				local f414_local12 = false
 				if f414_local14.category == CoD.CraftUtility.EmblemBlackMarketEmblemCategory then
-					f414_local12 = CoD.BlackMarketUtility.IsItemLocked( f414_arg0, Engine[@"getemblemmaterialname"]( f414_local11 ) )
+					f414_local12 = CoD.BlackMarketUtility.IsItemLocked( f414_arg0, Engine.GetEmblemMaterialName( f414_local11 ) )
 				end
 				if not f414_local12 and CoD.CraftUtility.Emblems.IsMaterialNew( f414_arg0, f414_local11 ) then
 					f414_local6 = f414_local6 + 1
@@ -7521,7 +7520,7 @@ DataSources.EmblemMaterialTabType = ListHelper_SetupDataSource( "Emblem.EmblemMa
 			end
 			table.insert( f414_local0, {
 				models = {
-					tabName = Engine[@"localize"]( f414_local14.name ),
+					tabName = Engine.Localize( f414_local14.name ),
 					breadcrumbCount = f414_local6
 				},
 				properties = {
@@ -7539,7 +7538,7 @@ DataSources.CACCustomizationTabs = DataSourceHelpers.ListSetup( "CACCustomizatio
 	if f416_local1 then
 		f416_local1 = not CoD.perController[f416_arg0].editingWeaponBuildKits
 	end
-	local f416_local2 = Engine[@"currentsessionmode"]()
+	local f416_local2 = Engine.CurrentSessionMode()
 	local f416_local3 = CoD.CACUtility.EmptyItemIndex
 	if CoD.perController[f416_arg0].gunsmithCamoIndexModel or CoD.perController[f416_arg0].gunsmithReticleIndexModel or CoD.perController[f416_arg0].editingWeaponBuildKits then
 		f416_local3 = CoD.GetCustomization( f416_arg0, "weapon_index" )
@@ -7547,14 +7546,14 @@ DataSources.CACCustomizationTabs = DataSourceHelpers.ListSetup( "CACCustomizatio
 		f416_local3 = CoD.CACUtility.GetItemEquippedInSlot( CoD.perController[f416_arg0].weaponCategory, f416_arg0, CoD.perController[f416_arg0].classModel )
 	end
 	local f416_local4 = ""
-	if f416_local2 < Enum[@"emodes"][@"mode_count"] then
-		f416_local4 = Engine[@"getitemref"]( f416_local3, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f416_local2 )
+	if f416_local2 < Enum.eModes[@"mode_count"] then
+		f416_local4 = Engine.GetItemRef( f416_local3, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], f416_local2 )
 	else
-		f416_local4 = Engine[@"getitemref"]( f416_local3, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], Enum[@"emodes"][@"mode_multiplayer"] )
+		f416_local4 = Engine.GetItemRef( f416_local3, Enum[@"statindexoffset"][@"hash_6569E84652131CD7"], Enum.eModes.mode_multiplayer )
 	end
 	local f416_local5 = function ( f417_arg0, f417_arg1 )
 		local f417_local0 = false
-		if f417_arg1 < Enum[@"weaponoptionfilter"][@"weaponoption_filter_mode_count"] then
+		if f417_arg1 < Enum.WeaponOptionFilter[@"weaponoption_filter_mode_count"] then
 			if f417_arg1 == f416_local2 then
 				f417_local0 = not f416_local1
 			else
@@ -7583,24 +7582,24 @@ DataSources.CACCustomizationTabs = DataSourceHelpers.ListSetup( "CACCustomizatio
 			m_mouseDisabled = true
 		}
 	} )
-	if CoD.perController[f416_arg0].customizationType == Enum[@"eweaponoptiongroup"][@"weaponoption_group_reticle"] then
-		f416_local5( @"menu/multiplayer", Enum[@"weaponoptionfilter"][@"weaponoption_filter_mp"] )
-		f416_local5( @"menu/zombies", Enum[@"weaponoptionfilter"][@"weaponoption_filter_zm"] )
+	if CoD.perController[f416_arg0].customizationType == Enum.eWeaponOptionGroup[@"weaponoption_group_reticle"] then
+		f416_local5( "menu/multiplayer", Enum.WeaponOptionFilter[@"weaponoption_filter_mp"] )
+		f416_local5( "menu/zombies", Enum.WeaponOptionFilter[@"weaponoption_filter_zm"] )
 		if IsLive() then
-			f416_local5( @"menu/black_market", Enum[@"weaponoptionfilter"][@"weaponoption_filter_bm"] )
+			f416_local5( @"menu/black_market", Enum.WeaponOptionFilter[@"weaponoption_filter_bm"] )
 		end
 	else
 		if not IsLive() or CoD.CACUtility.WeaponsWithNoMPCamos[f416_local4] == nil then
-			f416_local5( @"menu/multiplayer", Enum[@"weaponoptionfilter"][@"weaponoption_filter_mp"] )
+			f416_local5( "menu/multiplayer", Enum.WeaponOptionFilter[@"weaponoption_filter_mp"] )
 		end
 		if not IsLive() or CoD.CACUtility.WeaponsWithNoZMCamos[f416_local4] == nil then
-			f416_local5( @"menu/zombies", Enum[@"weaponoptionfilter"][@"weaponoption_filter_zm"] )
+			f416_local5( "menu/zombies", Enum.WeaponOptionFilter[@"weaponoption_filter_zm"] )
 		end
 		if IsLive() and CoD.BlackMarketUtility.WeaponsWithNoBMCamos[f416_local4] == nil then
-			f416_local5( @"menu/black_market", Enum[@"weaponoptionfilter"][@"weaponoption_filter_bm"] )
+			f416_local5( @"menu/black_market", Enum.WeaponOptionFilter[@"weaponoption_filter_bm"] )
 		end
 	end
-	f416_local5( @"hash_7843D640BA217F60", Enum[@"weaponoptionfilter"][@"weaponoption_filter_extras"] )
+	f416_local5( "menu/extras_caps", Enum.WeaponOptionFilter[@"weaponoption_filter_extras"] )
 	table.insert( f416_local0, {
 		models = {
 			tabIcon = CoD.buttonStrings.shoulderr
@@ -7613,7 +7612,7 @@ DataSources.CACCustomizationTabs = DataSourceHelpers.ListSetup( "CACCustomizatio
 end, false )
 DataSources.FileshareRoot = {
 	getModel = function ( f418_arg0 )
-		return Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "fileshareRoot" )
+		return Engine.GetModel( Engine.GetGlobalModel(), "fileshareRoot" )
 	end
 }
 DataSources.FileshareSelectedItem = {
@@ -7677,7 +7676,7 @@ DataSources.FilesharePublishedPaintjobTabs = ListHelper_SetupDataSource( "Filesh
 	for f421_local4, f421_local5 in ipairs( CoD.FileshareUtility.PublishedPaintjobsTabs ) do
 		table.insert( f421_local0, {
 			models = {
-				tabName = Engine[@"localize"]( f421_local5.name )
+				tabName = Engine.Localize( f421_local5.name )
 			},
 			properties = {
 				filter = f421_local5.weapon_category,
@@ -7704,7 +7703,7 @@ DataSources.EmblemIconList = {
 	prepare = function ( f422_arg0, f422_arg1, f422_arg2 )
 		f422_arg1.emblemIconList = {}
 		local f422_local0 = CoD.perController[f422_arg0].selectedDecalCategory
-		local f422_local1 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f422_arg0 ), "Emblems.DecalList" )
+		local f422_local1 = Engine.CreateModel( Engine.GetModelForController( f422_arg0 ), "Emblems.DecalList" )
 		if f422_local0 == CoD.CraftUtility.EmblemStickerCategory then
 			CoD.CraftUtility.Emblems.AddStickersToDecalList( f422_arg0, f422_local1, f422_arg1.emblemIconList, CoD.CraftUtility.EmblemDefaultStickerCategory, false )
 			CoD.CraftUtility.Emblems.AddStickersToDecalList( f422_arg0, f422_local1, f422_arg1.emblemIconList, f422_local0, true )
@@ -7741,9 +7740,9 @@ DataSources.EmblemDecalTabs = ListHelper_SetupDataSource( "EmblemDecalTabs", fun
 	local f426_local3 = CoD.CraftUtility.Groups.GetTotalUsed( f426_arg0 )
 	local f426_local4 = DataSources.EmblemCallingCardBreadcrumbs.getModel( f426_arg0 )
 	for f426_local12, f426_local13 in ipairs( CoD.CraftUtility.EMBLEM_DECALTABS ) do
-		local f426_local14 = Engine[@"emblemfiltercount"]( f426_arg0, 0, f426_local13.category )
+		local f426_local14 = Engine.EmblemFilterCount( f426_arg0, 0, f426_local13.category )
 		for f426_local10 = 0, f426_local14 - 1, 1 do
-			local f426_local8 = Engine[@"emblemfiltericonid"]( f426_arg0, 0, f426_local13.category, f426_local10 )
+			local f426_local8 = Engine.EmblemFilterIconID( f426_arg0, 0, f426_local13.category, f426_local10 )
 			local f426_local9 = false
 			if f426_local13.type == "BLACKMARKET" then
 				f426_local9 = CoD.BlackMarketUtility.IsItemLocked( f426_arg0, CoD.BlackMarketUtility.GetLootDecalName( f426_arg0, f426_local8 ) )
@@ -7764,7 +7763,7 @@ DataSources.EmblemDecalTabs = ListHelper_SetupDataSource( "EmblemDecalTabs", fun
 			end
 			table.insert( f426_local0, {
 				models = {
-					tabName = Engine[@"localize"]( f426_local13.displayName ),
+					tabName = Engine.Localize( f426_local13.displayName ),
 					breadcrumb = f426_local11,
 					frameWidget = f426_local10
 				},
@@ -7846,7 +7845,7 @@ DataSources.EmblemCategoryTabs = ListHelper_SetupDataSource( "EmblemCategoryTabs
 		local f429_local14 = CoD.CraftUtility.Emblems.GetTotalUsedEmblems( f429_arg0, f429_local13.storageType, f429_local13.stickerCategory )
 		for f429_local7 = 0, f429_local14 - 1, 1 do
 			local f429_local6 = false
-			if f429_local13.storageType == Enum[@"storagefiletype"][@"storage_emblems_loot"] then
+			if f429_local13.storageType == Enum.StorageFileType[@"storage_emblems_loot"] then
 				f429_local6 = CoD.BlackMarketUtility.IsItemLocked( f429_arg0, CoD.BlackMarketUtility.GetLootEmblemIDName( f429_local7 ) )
 			end
 		end
@@ -7900,14 +7899,14 @@ DataSources.CustomGamesOptionsButtonList = ListHelper_SetupDataSource( "CustomGa
 	table.insert( f430_local0, {
 		displayText = @"menu/publish",
 		displayImage = "t7_icon_menu_simple_publish",
-		displayDesc = @"hash_D5297656D74DCDD",
+		displayDesc = "menu/customgames_publish_desc",
 		action = OpenCustomGamePublishPrompt,
 		disabled = false
 	} )
 	table.insert( f430_local0, {
 		displayText = @"menu/delete",
 		displayImage = "t7_icon_menu_simple_delete",
-		displayDesc = @"hash_23ECA7AE1E1EFD4D",
+		displayDesc = "menu/customgames_delete_desc",
 		action = DeleteCustomGame,
 		disabled = false
 	} )
@@ -7915,7 +7914,7 @@ DataSources.CustomGamesOptionsButtonList = ListHelper_SetupDataSource( "CustomGa
 	for f430_local5, f430_local6 in ipairs( f430_local0 ) do
 		table.insert( f430_local1, {
 			models = {
-				displayText = Engine[@"localize"]( f430_local6.displayText ),
+				displayText = Engine.Localize( f430_local6.displayText ),
 				icon = f430_local6.displayImage,
 				hintText = f430_local6.displayDesc
 			},
@@ -7933,15 +7932,15 @@ DataSources.ScreenshotsOptionsButtonList = ListHelper_SetupDataSource( "Screensh
 		table.insert( f431_local0, {
 			displayText = @"menu/publish",
 			displayImage = "t7_icon_menu_simple_publish",
-			displayDesc = @"hash_4A415DD31B407628",
+			displayDesc = "menu/screenshots_publish_desc",
 			action = OpenLocalScreenshotsPublishPrompt,
 			disabled = false
 		} )
 	end
 	if FileshareCanDeleteItem( f431_arg0 ) then
-		local f431_local1 = @"hash_E0F1CAE8E5DDA06"
+		local f431_local1 = "menu/fileshare_delete_desc"
 		if FileshareIsLocalCategory( f431_arg0 ) then
-			f431_local1 = @"hash_7D46527DE8E0E0EA"
+			f431_local1 = "menu/fileshare_delete_local_desc"
 		end
 		table.insert( f431_local0, {
 			displayText = @"menu/delete",
@@ -7954,7 +7953,7 @@ DataSources.ScreenshotsOptionsButtonList = ListHelper_SetupDataSource( "Screensh
 	for f431_local5, f431_local6 in ipairs( f431_local0 ) do
 		table.insert( f431_local1, {
 			models = {
-				displayText = Engine[@"localize"]( f431_local6.displayText ),
+				displayText = Engine.Localize( f431_local6.displayText ),
 				icon = f431_local6.displayImage,
 				hintText = f431_local6.displayDesc
 			},
@@ -7972,7 +7971,7 @@ DataSources.CustomGamesOptionsDeleteButtonList = {
 			{
 				displayText = @"menu/delete",
 				displayImage = "",
-				displayDesc = @"hash_23ECA7AE1E1EFD4D",
+				displayDesc = "menu/customgames_delete_desc",
 				action = DeleteCustomGameYes
 			},
 			{
@@ -7982,14 +7981,14 @@ DataSources.CustomGamesOptionsDeleteButtonList = {
 				action = DeleteCustomGameNo
 			}
 		}
-		local f432_local1 = Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "CustomGamesOptionsDeleteButtonList" ), "list" )
+		local f432_local1 = Engine.CreateModel( Engine.CreateModel( Engine.GetGlobalModel(), "CustomGamesOptionsDeleteButtonList" ), "list" )
 		f432_arg1.optionModels = {}
 		for f432_local5, f432_local6 in ipairs( f432_local0 ) do
-			f432_arg1.optionModels[f432_local5] = Engine[@"createmodel"]( f432_local1, "buttonModel_" .. f432_local5 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f432_arg1.optionModels[f432_local5], "displayText" ), Engine[@"localize"]( f432_local6.displayText ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f432_arg1.optionModels[f432_local5], "displayImage" ), f432_local6.displayImage )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f432_arg1.optionModels[f432_local5], "hintText" ), Engine[@"localize"]( f432_local6.displayDesc ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f432_arg1.optionModels[f432_local5], "action" ), f432_local6.action )
+			f432_arg1.optionModels[f432_local5] = Engine.CreateModel( f432_local1, "buttonModel_" .. f432_local5 )
+			Engine.SetModelValue( Engine.CreateModel( f432_arg1.optionModels[f432_local5], "displayText" ), Engine.Localize( f432_local6.displayText ) )
+			Engine.SetModelValue( Engine.CreateModel( f432_arg1.optionModels[f432_local5], "displayImage" ), f432_local6.displayImage )
+			Engine.SetModelValue( Engine.CreateModel( f432_arg1.optionModels[f432_local5], "hintText" ), Engine.Localize( f432_local6.displayDesc ) )
+			Engine.SetModelValue( Engine.CreateModel( f432_arg1.optionModels[f432_local5], "action" ), f432_local6.action )
 		end
 	end,
 	getCount = function ( f433_arg0 )
@@ -8006,23 +8005,23 @@ DataSources.CustomGamesLoadOptionsButtonList = {
 			{
 				displayText = @"menu/yes",
 				displayImage = "",
-				displayDesc = @"hash_0",
+				displayDesc = 0x0,
 				action = LoadFileshareCustomGame
 			},
 			{
 				displayText = @"menu/no",
 				displayImage = "",
-				displayDesc = @"hash_0",
+				displayDesc = 0x0,
 				action = GoBack
 			}
 		}
-		local f435_local1 = Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "CustomGamesLoadOptionsButtonList" ), "list" )
+		local f435_local1 = Engine.CreateModel( Engine.CreateModel( Engine.GetGlobalModel(), "CustomGamesLoadOptionsButtonList" ), "list" )
 		for f435_local5, f435_local6 in ipairs( f435_local0 ) do
-			f435_arg1.optionModels[f435_local5] = Engine[@"createmodel"]( f435_local1, "buttonModel_" .. f435_local5 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f435_arg1.optionModels[f435_local5], "displayText" ), Engine[@"localize"]( f435_local6.displayText ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f435_arg1.optionModels[f435_local5], "displayImage" ), f435_local6.displayImage )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f435_arg1.optionModels[f435_local5], "hintText" ), Engine[@"localize"]( f435_local6.displayDesc ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f435_arg1.optionModels[f435_local5], "action" ), f435_local6.action )
+			f435_arg1.optionModels[f435_local5] = Engine.CreateModel( f435_local1, "buttonModel_" .. f435_local5 )
+			Engine.SetModelValue( Engine.CreateModel( f435_arg1.optionModels[f435_local5], "displayText" ), Engine.Localize( f435_local6.displayText ) )
+			Engine.SetModelValue( Engine.CreateModel( f435_arg1.optionModels[f435_local5], "displayImage" ), f435_local6.displayImage )
+			Engine.SetModelValue( Engine.CreateModel( f435_arg1.optionModels[f435_local5], "hintText" ), Engine.Localize( f435_local6.displayDesc ) )
+			Engine.SetModelValue( Engine.CreateModel( f435_arg1.optionModels[f435_local5], "action" ), f435_local6.action )
 		end
 	end,
 	getCount = function ( f436_arg0 )
@@ -8034,7 +8033,7 @@ DataSources.CustomGamesLoadOptionsButtonList = {
 }
 DataSources.CustomGamesRoot = {
 	getModel = function ( f438_arg0 )
-		return Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "CustomGamesRoot" )
+		return Engine.GetModel( Engine.GetGlobalModel(), "CustomGamesRoot" )
 	end
 }
 DataSourceHelpers.GlobalDataSourceSetup( "DirectTelemetry", "CustomGamesRoot.dtel", function ( f439_arg0 )
@@ -8046,24 +8045,24 @@ DataSources.ChangeGameModeNav = {
 			{
 				text = @"menu/community",
 				image = "uie_t7_mp_icon_header_customgames_large",
-				description = @"hash_8B650C1DBC3BABD",
+				description = "menu/fileshare_publish_description",
 				community = true
 			},
 			{
 				text = @"menu/showcase",
 				image = "uie_t7_mp_icon_header_customgames_large",
-				description = @"hash_8B650C1DBC3BABD",
+				description = "menu/fileshare_publish_description",
 				community = false
 			}
 		}
-		local f440_local1 = Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "ChangeGameModeNav" ), "list" )
+		local f440_local1 = Engine.CreateModel( Engine.CreateModel( Engine.GetGlobalModel(), "ChangeGameModeNav" ), "list" )
 		f440_arg1.buttonModels = {}
 		for f440_local5, f440_local6 in ipairs( f440_local0 ) do
-			f440_arg1.buttonModels[f440_local5] = Engine[@"createmodel"]( f440_local1, "ChangeGameModeNavButton_" .. f440_local5 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f440_arg1.buttonModels[f440_local5], "text" ), Engine[@"localize"]( f440_local6.text ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f440_arg1.buttonModels[f440_local5], "image" ), f440_local6.image )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f440_arg1.buttonModels[f440_local5], "description" ), Engine[@"localize"]( f440_local6.description ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f440_arg1.buttonModels[f440_local5], "community" ), f440_local6.community )
+			f440_arg1.buttonModels[f440_local5] = Engine.CreateModel( f440_local1, "ChangeGameModeNavButton_" .. f440_local5 )
+			Engine.SetModelValue( Engine.CreateModel( f440_arg1.buttonModels[f440_local5], "text" ), Engine.Localize( f440_local6.text ) )
+			Engine.SetModelValue( Engine.CreateModel( f440_arg1.buttonModels[f440_local5], "image" ), f440_local6.image )
+			Engine.SetModelValue( Engine.CreateModel( f440_arg1.buttonModels[f440_local5], "description" ), Engine.Localize( f440_local6.description ) )
+			Engine.SetModelValue( Engine.CreateModel( f440_arg1.buttonModels[f440_local5], "community" ), f440_local6.community )
 		end
 	end,
 	getCount = function ( f441_arg0 )
@@ -8079,30 +8078,30 @@ DataSources.ChangeGameModeNavSecondary = {
 			{
 				text = @"menu/popular",
 				image = "uie_t7_menu_startmenu_media_recent",
-				description = @"hash_0",
+				description = 0x0,
 				action = nil
 			},
 			{
-				text = @"hash_1705BD8CAF36BAE2",
+				text = "menu/trending",
 				image = "uie_t7_menu_startmenu_media_popular",
-				description = @"hash_0",
+				description = 0x0,
 				action = nil
 			},
 			{
 				text = @"menu/recent",
 				image = "uie_t7_menu_startmenu_media_trending",
-				description = @"hash_0",
+				description = 0x0,
 				action = nil
 			}
 		}
-		local f443_local1 = Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "ChangeGameModeNavSecondary" ), "list" )
+		local f443_local1 = Engine.CreateModel( Engine.CreateModel( Engine.GetGlobalModel(), "ChangeGameModeNavSecondary" ), "list" )
 		f443_arg1.buttonModels = {}
 		for f443_local5, f443_local6 in ipairs( f443_local0 ) do
-			f443_arg1.buttonModels[f443_local5] = Engine[@"createmodel"]( f443_local1, "ChangeGameModeNavSecondaryButton_" .. f443_local5 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f443_arg1.buttonModels[f443_local5], "text" ), Engine[@"localize"]( f443_local6.text ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f443_arg1.buttonModels[f443_local5], "image" ), f443_local6.image )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f443_arg1.buttonModels[f443_local5], "description" ), Engine[@"localize"]( f443_local6.description ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f443_arg1.buttonModels[f443_local5], "action" ), f443_local6.action )
+			f443_arg1.buttonModels[f443_local5] = Engine.CreateModel( f443_local1, "ChangeGameModeNavSecondaryButton_" .. f443_local5 )
+			Engine.SetModelValue( Engine.CreateModel( f443_arg1.buttonModels[f443_local5], "text" ), Engine.Localize( f443_local6.text ) )
+			Engine.SetModelValue( Engine.CreateModel( f443_arg1.buttonModels[f443_local5], "image" ), f443_local6.image )
+			Engine.SetModelValue( Engine.CreateModel( f443_arg1.buttonModels[f443_local5], "description" ), Engine.Localize( f443_local6.description ) )
+			Engine.SetModelValue( Engine.CreateModel( f443_arg1.buttonModels[f443_local5], "action" ), f443_local6.action )
 		end
 	end,
 	getCount = function ( f444_arg0 )
@@ -8116,32 +8115,32 @@ DataSources.CustomGamesList = {
 	prepare = function ( f446_arg0, f446_arg1, f446_arg2 )
 		f446_arg1.showDefault = true
 		f446_arg1.controller = f446_arg0
-		f446_arg1.rootModel = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "CustomGamesRoot" )
+		f446_arg1.rootModel = Engine.CreateModel( Engine.GetGlobalModel(), "CustomGamesRoot" )
 		f446_arg1.communityOptions = {
 			{
 				text = Engine[@"hash_4F9F1239CFD921FE"]( @"menu/popular" ),
 				image = "img_t7_menu_startmenu_media_recent",
-				description = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_8B650C1DBC3BABD" ),
+				description = Engine[@"hash_4F9F1239CFD921FE"]( "menu/fileshare_publish_description" ),
 				action = OpenPopularCustomGames
 			},
 			{
-				text = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_1705BD8CAF36BAE2" ),
+				text = Engine[@"hash_4F9F1239CFD921FE"]( "menu/trending" ),
 				image = "img_t7_menu_startmenu_media_popular",
-				description = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_8B650C1DBC3BABD" ),
+				description = Engine[@"hash_4F9F1239CFD921FE"]( "menu/fileshare_publish_description" ),
 				action = OpenTrendingCustomGames
 			},
 			{
 				text = Engine[@"hash_4F9F1239CFD921FE"]( @"menu/recent" ),
 				image = "img_t7_menu_startmenu_media_trending",
-				description = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_8B650C1DBC3BABD" ),
+				description = Engine[@"hash_4F9F1239CFD921FE"]( "menu/fileshare_publish_description" ),
 				action = OpenrRecentCustomGames
 			}
 		}
 		local f446_local0 = GetCurrentUIGameType( f446_arg0 )
 		if f446_local0 == "" then
-			local f446_local1 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "CustomGamesRoot" )
-			local f446_local2 = Engine[@"getmodelvalue"]( Engine[@"createmodel"]( f446_local1, "communityOption" ) )
-			local f446_local3 = Engine[@"getmodelvalue"]( Engine[@"createmodel"]( f446_local1, "showcaseOption" ) )
+			local f446_local1 = Engine.CreateModel( Engine.GetGlobalModel(), "CustomGamesRoot" )
+			local f446_local2 = Engine.GetModelValue( Engine.CreateModel( f446_local1, "communityOption" ) )
+			local f446_local3 = Engine.GetModelValue( Engine.CreateModel( f446_local1, "showcaseOption" ) )
 			if f446_local2 then
 				f446_arg1.numFiles = 3
 				f446_arg1.communityOption = true
@@ -8149,8 +8148,8 @@ DataSources.CustomGamesList = {
 				f446_arg1.numFiles = 0
 			end
 		else
-			f446_arg1.officialGameCount = Engine[@"getcustomgamescount"]( f446_arg0, Enum[@"storagefiletype"][@"storage_official_custom_games"], f446_local0 )
-			f446_arg1.customGameCount = Engine[@"getcustomgamescount"]( f446_arg0, Engine[@"hash_FFDD58B353B5C0B"](), f446_local0 )
+			f446_arg1.officialGameCount = Engine.GetCustomGamesCount( f446_arg0, Enum.StorageFileType[@"storage_official_custom_games"], f446_local0 )
+			f446_arg1.customGameCount = Engine.GetCustomGamesCount( f446_arg0, Engine[@"hash_FFDD58B353B5C0B"](), f446_local0 )
 			f446_arg1.communityOption = false
 			f446_arg1.numFiles = f446_arg1.officialGameCount + f446_arg1.customGameCount
 			if f446_arg1.showDefault == true then
@@ -8162,35 +8161,35 @@ DataSources.CustomGamesList = {
 		return f447_arg0.numFiles
 	end,
 	getItem = function ( f448_arg0, f448_arg1, f448_arg2 )
-		local f448_local0 = Engine[@"createmodel"]( f448_arg1.rootModel, "CustomGames_" .. f448_arg2 )
+		local f448_local0 = Engine.CreateModel( f448_arg1.rootModel, "CustomGames_" .. f448_arg2 )
 		local f448_local1 = GetCurrentUIGameType( f448_arg0 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "uiIndex" ), f448_arg2 )
+		Engine.SetModelValue( Engine.CreateModel( f448_local0, "uiIndex" ), f448_arg2 )
 		if f448_arg1.communityOption == true then
 			local f448_local2 = f448_arg1.communityOptions[f448_arg2]
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "text" ), f448_local2.text )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "buttonText" ), f448_local2.text )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "image" ), f448_local2.image )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "description" ), f448_local2.description )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "action" ), f448_local2.action )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "isOfficial" ), false )
+			Engine.SetModelValue( Engine.CreateModel( f448_local0, "text" ), f448_local2.text )
+			Engine.SetModelValue( Engine.CreateModel( f448_local0, "buttonText" ), f448_local2.text )
+			Engine.SetModelValue( Engine.CreateModel( f448_local0, "image" ), f448_local2.image )
+			Engine.SetModelValue( Engine.CreateModel( f448_local0, "description" ), f448_local2.description )
+			Engine.SetModelValue( Engine.CreateModel( f448_local0, "action" ), f448_local2.action )
+			Engine.SetModelValue( Engine.CreateModel( f448_local0, "isOfficial" ), false )
 			return f448_local0
 		elseif f448_arg1.showDefault == true and f448_arg2 == 1 then
-			local f448_local2 = Engine[@"getgametypesbase"]()
+			local f448_local2 = Engine.GetGametypesBase()
 			local f448_local3 = GetCurrentUIGameType( f448_arg0 )
 			local f448_local4 = ""
 			for f448_local8, f448_local9 in pairs( f448_local2 ) do
 				if f448_local9.category == "standard" and f448_local9.gametype == f448_local3 then
-					f448_local4 = "^BBUTTON_CUSTOMGAME_ICON^ " .. Engine[@"localize"]( f448_local9.name )
+					f448_local4 = "^BBUTTON_CUSTOMGAME_ICON^ " .. Engine.Localize( f448_local9.name )
 					break
 				end
 			end
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "text" ), f448_local4 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "buttonText" ), f448_local4 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "inUse" ), true )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "isOfficial" ), true )
+			Engine.SetModelValue( Engine.CreateModel( f448_local0, "text" ), f448_local4 )
+			Engine.SetModelValue( Engine.CreateModel( f448_local0, "buttonText" ), f448_local4 )
+			Engine.SetModelValue( Engine.CreateModel( f448_local0, "inUse" ), true )
+			Engine.SetModelValue( Engine.CreateModel( f448_local0, "isOfficial" ), true )
 			if f448_local1 then
 				f448_local5 = Engine[@"getgametypeinfo"]( f448_local1 )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "description" ), Engine[@"hash_4F9F1239CFD921FE"]( f448_local5.descriptionRef ) )
+				Engine.SetModelValue( Engine.CreateModel( f448_local0, "description" ), Engine[@"hash_4F9F1239CFD921FE"]( f448_local5.descriptionRef ) )
 			end
 		else
 			local f448_local2 = 1
@@ -8207,11 +8206,11 @@ DataSources.CustomGamesList = {
 			local f448_local5 = nil
 			local f448_local6 = 0
 			if f448_local4 == true then
-				local f448_local7 = Engine[@"getstoragefileinfo"]( Enum[@"storagefiletype"][@"storage_official_custom_games"] )
+				local f448_local7 = Engine[@"getstoragefileinfo"]( Enum.StorageFileType[@"storage_official_custom_games"] )
 				f448_local7 = f448_local7.slots
 				local f448_local8 = 0
 				for f448_local9 = 0, f448_local7 - 1, 1 do
-					f448_local5 = Engine[@"getcustomgamedata"]( f448_arg0, Enum[@"storagefiletype"][@"storage_official_custom_games"], f448_local9, f448_local1 )
+					f448_local5 = Engine.GetCustomGameData( f448_arg0, Enum.StorageFileType[@"storage_official_custom_games"], f448_local9, f448_local1 )
 					if f448_local5.gameType:get() == f448_local1 then
 						if f448_local8 == f448_local3 then
 							f448_local6 = f448_local9
@@ -8225,7 +8224,7 @@ DataSources.CustomGamesList = {
 				f448_local8 = f448_local8.slots
 				local f448_local9 = 0
 				for f448_local10 = 0, f448_local8 - 1, 1 do
-					f448_local5 = Engine[@"getcustomgamedata"]( f448_arg0, f448_local7, f448_local10, f448_local1 )
+					f448_local5 = Engine.GetCustomGameData( f448_arg0, f448_local7, f448_local10, f448_local1 )
 					if f448_local5.gameType:get() == f448_local1 then
 						if f448_local9 == f448_local3 then
 							f448_local6 = f448_local10
@@ -8235,34 +8234,34 @@ DataSources.CustomGamesList = {
 					end
 				end
 			end
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "slot" ), f448_local6 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "index" ), f448_local6 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "gameName" ), f448_local5.gameName:get() )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "inUse" ), f448_local5.inUse:get() )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "isOfficial" ), f448_local4 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "createTime" ), f448_local5.createTime:get() )
+			Engine.SetModelValue( Engine.CreateModel( f448_local0, "slot" ), f448_local6 )
+			Engine.SetModelValue( Engine.CreateModel( f448_local0, "index" ), f448_local6 )
+			Engine.SetModelValue( Engine.CreateModel( f448_local0, "gameName" ), f448_local5.gameName:get() )
+			Engine.SetModelValue( Engine.CreateModel( f448_local0, "inUse" ), f448_local5.inUse:get() )
+			Engine.SetModelValue( Engine.CreateModel( f448_local0, "isOfficial" ), f448_local4 )
+			Engine.SetModelValue( Engine.CreateModel( f448_local0, "createTime" ), f448_local5.createTime:get() )
 			if f448_local4 == true then
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "text" ), "^BBUTTON_CUSTOMGAME_ICON^ " .. Engine[@"hash_4F9F1239CFD921FE"]( @"mpui/" .. f448_local5.gameName:get() .. "_CAPS" ) )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "buttonText" ), "^BBUTTON_CUSTOMGAME_ICON^ " .. Engine[@"hash_4F9F1239CFD921FE"]( @"mpui/" .. f448_local5.gameName:get() .. "_CAPS" ) )
+				Engine.SetModelValue( Engine.CreateModel( f448_local0, "text" ), "^BBUTTON_CUSTOMGAME_ICON^ " .. Engine[@"hash_4F9F1239CFD921FE"]( @"mpui/" .. f448_local5.gameName:get() .. "_CAPS" ) )
+				Engine.SetModelValue( Engine.CreateModel( f448_local0, "buttonText" ), "^BBUTTON_CUSTOMGAME_ICON^ " .. Engine[@"hash_4F9F1239CFD921FE"]( @"mpui/" .. f448_local5.gameName:get() .. "_CAPS" ) )
 			else
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "text" ), f448_local5.gameName:get() )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "buttonText" ), f448_local5.gameName:get() )
+				Engine.SetModelValue( Engine.CreateModel( f448_local0, "text" ), f448_local5.gameName:get() )
+				Engine.SetModelValue( Engine.CreateModel( f448_local0, "buttonText" ), f448_local5.gameName:get() )
 			end
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "gameTypeString" ), f448_local5.gameType:get() )
+			Engine.SetModelValue( Engine.CreateModel( f448_local0, "gameTypeString" ), f448_local5.gameType:get() )
 			if f448_local1 then
 				if f448_local4 == true then
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "description" ), Engine[@"hash_4F9F1239CFD921FE"]( @"mpui/" .. f448_local5.gameDescription:get() .. "_DESC" ) )
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "gameDescription" ), Engine[@"hash_4F9F1239CFD921FE"]( @"mpui/" .. f448_local5.gameDescription:get() .. "_DESC" ) )
+					Engine.SetModelValue( Engine.CreateModel( f448_local0, "description" ), Engine[@"hash_4F9F1239CFD921FE"]( @"mpui/" .. f448_local5.gameDescription:get() .. "_DESC" ) )
+					Engine.SetModelValue( Engine.CreateModel( f448_local0, "gameDescription" ), Engine[@"hash_4F9F1239CFD921FE"]( @"mpui/" .. f448_local5.gameDescription:get() .. "_DESC" ) )
 				else
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "description" ), f448_local5.gameDescription:get() )
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "gameDescription" ), f448_local5.gameDescription:get() )
+					Engine.SetModelValue( Engine.CreateModel( f448_local0, "description" ), f448_local5.gameDescription:get() )
+					Engine.SetModelValue( Engine.CreateModel( f448_local0, "gameDescription" ), f448_local5.gameDescription:get() )
 				end
 			end
 		end
 		if f448_local1 then
 			local f448_local2 = Engine[@"getgametypeinfo"]( f448_local1 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "gametype" ), f448_local1 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f448_local0, "image" ), f448_local2.image )
+			Engine.SetModelValue( Engine.CreateModel( f448_local0, "gametype" ), f448_local1 )
+			Engine.SetModelValue( Engine.CreateModel( f448_local0, "image" ), f448_local2.image )
 		end
 		return f448_local0
 	end
@@ -8270,16 +8269,16 @@ DataSources.CustomGamesList = {
 DataSources.MediaManagerQuotaList = {
 	prepare = function ( f449_arg0, f449_arg1, f449_arg2 )
 		f449_arg1.controller = f449_arg0
-		f449_arg1.rootModel = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f449_arg0 ), "MediaManagerQuota" )
+		f449_arg1.rootModel = Engine.CreateModel( Engine.GetModelForController( f449_arg0 ), "MediaManagerQuota" )
 		f449_arg1.numFileshareCategories = GetMediaManagerCategoryCount()
 	end,
 	getCount = function ( f450_arg0 )
 		return f450_arg0.numFileshareCategories
 	end,
 	getItem = function ( f451_arg0, f451_arg1, f451_arg2 )
-		local f451_local0 = Engine[@"createmodel"]( f451_arg1.rootModel, "fileshareCategory_" .. f451_arg2 )
+		local f451_local0 = Engine.CreateModel( f451_arg1.rootModel, "fileshareCategory_" .. f451_arg2 )
 		local f451_local1 = Engine[@"hash_4C6F8EC444864600"]( CoD.fileShareTable, f451_arg2 - 1, 1 )
-		local f451_local2 = Engine[@"mediamanagergetquota"]( f451_arg1.controller, f451_local1 )
+		local f451_local2 = Engine.MediaManagerGetQuota( f451_arg1.controller, f451_local1 )
 		local f451_local3 = 0
 		local f451_local4 = 0
 		if f451_local2.categoryQuota > 0 then
@@ -8294,18 +8293,18 @@ DataSources.MediaManagerQuotaList = {
 			f451_local4 = 1
 		end
 		local f451_local5 = CoD.FileshareUtility.CategoryLocStrings[f451_local1].locString or 0x0
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f451_local0, "category" ), f451_local2.category )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f451_local0, "locName" ), f451_local5 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f451_local0, "quota" ), f451_local2.categoryQuota )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f451_local0, "slotsUsed" ), f451_local2.categorySlotsUsed )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f451_local0, "fraction" ), f451_local3 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f451_local0, "image" ), CoD.FileshareUtility.GetCategoryImage( f451_local1 ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f451_local0, "barColor" ), CoD.FileshareUtility.GetCategoryColor( f451_local1 ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f451_local0, "slotsFull" ), f451_local4 )
+		Engine.SetModelValue( Engine.CreateModel( f451_local0, "category" ), f451_local2.category )
+		Engine.SetModelValue( Engine.CreateModel( f451_local0, "locName" ), f451_local5 )
+		Engine.SetModelValue( Engine.CreateModel( f451_local0, "quota" ), f451_local2.categoryQuota )
+		Engine.SetModelValue( Engine.CreateModel( f451_local0, "slotsUsed" ), f451_local2.categorySlotsUsed )
+		Engine.SetModelValue( Engine.CreateModel( f451_local0, "fraction" ), f451_local3 )
+		Engine.SetModelValue( Engine.CreateModel( f451_local0, "image" ), CoD.FileshareUtility.GetCategoryImage( f451_local1 ) )
+		Engine.SetModelValue( Engine.CreateModel( f451_local0, "barColor" ), CoD.FileshareUtility.GetCategoryColor( f451_local1 ) )
+		Engine.SetModelValue( Engine.CreateModel( f451_local0, "slotsFull" ), f451_local4 )
 		if f451_local2.category == CoD.FileshareUtility.GetCurrentCategory() then
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f451_local0, "isDim" ), false )
+			Engine.SetModelValue( Engine.CreateModel( f451_local0, "isDim" ), false )
 		else
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f451_local0, "isDim" ), true )
+			Engine.SetModelValue( Engine.CreateModel( f451_local0, "isDim" ), true )
 		end
 		return f451_local0
 	end
@@ -8313,16 +8312,16 @@ DataSources.MediaManagerQuotaList = {
 DataSources.FileshareQuotaList = {
 	prepare = function ( f452_arg0, f452_arg1, f452_arg2 )
 		f452_arg1.controller = f452_arg0
-		f452_arg1.rootModel = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f452_arg0 ), "FileshareQuota" )
+		f452_arg1.rootModel = Engine.CreateModel( Engine.GetModelForController( f452_arg0 ), "FileshareQuota" )
 		f452_arg1.numFileshareCategories = GetMediaManagerCategoryCount()
 	end,
 	getCount = function ( f453_arg0 )
 		return f453_arg0.numFileshareCategories
 	end,
 	getItem = function ( f454_arg0, f454_arg1, f454_arg2 )
-		local f454_local0 = Engine[@"createmodel"]( f454_arg1.rootModel, "fileshareCategory_" .. f454_arg2 )
+		local f454_local0 = Engine.CreateModel( f454_arg1.rootModel, "fileshareCategory_" .. f454_arg2 )
 		local f454_local1 = Engine[@"hash_4C6F8EC444864600"]( CoD.fileShareTable, f454_arg2 - 1, 1 )
-		local f454_local2 = Engine[@"filesharegetquota"]( f454_arg1.controller, f454_local1 )
+		local f454_local2 = Engine.FileshareGetQuota( f454_arg1.controller, f454_local1 )
 		local f454_local3 = 0
 		local f454_local4 = 0
 		if f454_local2.categoryQuota > 0 then
@@ -8337,18 +8336,18 @@ DataSources.FileshareQuotaList = {
 			f454_local4 = 1
 		end
 		local f454_local5 = CoD.FileshareUtility.CategoryLocStrings[f454_local1].locString or 0x0
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f454_local0, "category" ), f454_local2.category )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f454_local0, "locName" ), f454_local5 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f454_local0, "quota" ), f454_local2.categoryQuota )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f454_local0, "slotsUsed" ), f454_local2.categorySlotsUsed )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f454_local0, "fraction" ), f454_local3 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f454_local0, "image" ), CoD.FileshareUtility.GetCategoryImage( f454_local1 ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f454_local0, "barColor" ), CoD.FileshareUtility.GetCategoryColor( f454_local1 ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f454_local0, "slotsFull" ), f454_local4 )
+		Engine.SetModelValue( Engine.CreateModel( f454_local0, "category" ), f454_local2.category )
+		Engine.SetModelValue( Engine.CreateModel( f454_local0, "locName" ), f454_local5 )
+		Engine.SetModelValue( Engine.CreateModel( f454_local0, "quota" ), f454_local2.categoryQuota )
+		Engine.SetModelValue( Engine.CreateModel( f454_local0, "slotsUsed" ), f454_local2.categorySlotsUsed )
+		Engine.SetModelValue( Engine.CreateModel( f454_local0, "fraction" ), f454_local3 )
+		Engine.SetModelValue( Engine.CreateModel( f454_local0, "image" ), CoD.FileshareUtility.GetCategoryImage( f454_local1 ) )
+		Engine.SetModelValue( Engine.CreateModel( f454_local0, "barColor" ), CoD.FileshareUtility.GetCategoryColor( f454_local1 ) )
+		Engine.SetModelValue( Engine.CreateModel( f454_local0, "slotsFull" ), f454_local4 )
 		if f454_local2.category == CoD.FileshareUtility.GetCurrentCategory() then
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f454_local0, "isDim" ), false )
+			Engine.SetModelValue( Engine.CreateModel( f454_local0, "isDim" ), false )
 		else
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f454_local0, "isDim" ), true )
+			Engine.SetModelValue( Engine.CreateModel( f454_local0, "isDim" ), true )
 		end
 		return f454_local0
 	end
@@ -8358,7 +8357,7 @@ DataSources.FilesharePublishedList = {
 		f455_arg1.controller = f455_arg0
 		f455_arg1.numElements = f455_arg1.vCount * f455_arg1.hCount
 		f455_arg1.hasCreateButton = CoD.FileshareUtility.GetShowCreateButton()
-		f455_arg1.fileshareRootModel = Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "fileshareRoot" )
+		f455_arg1.fileshareRootModel = Engine.GetModel( Engine.GetGlobalModel(), "fileshareRoot" )
 		local f455_local0 = "fileshareData_"
 		if f455_arg1.filterKey ~= nil and f455_arg1.filterVal ~= nil then
 			f455_local0 = "filtered" .. f455_local0
@@ -8366,13 +8365,13 @@ DataSources.FilesharePublishedList = {
 		f455_arg1.fileshareData = {}
 		for f455_local1 = 1, f455_arg1.numElements, 1 do
 			f455_arg1.fileshareData[f455_local1] = {}
-			f455_arg1.fileshareData[f455_local1].elementModel = Engine[@"createmodel"]( f455_arg1.fileshareRootModel, f455_local0 .. f455_local1 )
+			f455_arg1.fileshareData[f455_local1].elementModel = Engine.CreateModel( f455_arg1.fileshareRootModel, f455_local0 .. f455_local1 )
 			for f455_local7, f455_local8 in ipairs( CoD.FileshareUtility.FileProperties ) do
-				Engine[@"createmodel"]( f455_arg1.fileshareData[f455_local1].elementModel, f455_local8 )
+				Engine.CreateModel( f455_arg1.fileshareData[f455_local1].elementModel, f455_local8 )
 			end
 			CoD.FileshareUtility.ResetFileshareSummary( f455_arg1.fileshareData[f455_local1].elementModel )
 		end
-		Engine[@"filesharestartup"]( f455_arg1.controller )
+		Engine.FileshareStartup( f455_arg1.controller )
 		CoD.FileshareUtility.SetShowFileDetails( false )
 	end,
 	getCount = function ( f456_arg0 )
@@ -8389,10 +8388,10 @@ DataSources.FilesharePublishedList = {
 				f456_local0 = false
 			end
 		end
-		if f456_local0 and not Engine[@"fileshareisready"]( f456_arg0.controller ) then
+		if f456_local0 and not Engine.FileshareIsReady( f456_arg0.controller ) then
 			if not f456_arg0.refreshElement then
 				f456_arg0.refreshElement = LUI.UITimer.newElementTimer( 500, false, function ()
-					if Engine[@"fileshareisready"]( f456_arg0.controller ) then
+					if Engine.FileshareIsReady( f456_arg0.controller ) then
 						f456_arg0:updateDataSource()
 						f456_arg0.refreshElement:close()
 						f456_arg0.refreshElement = nil
@@ -8417,12 +8416,12 @@ DataSources.FilesharePublishedList = {
 		local f456_local6 = 0
 		if f456_local3 or CoD.FileshareUtility.GetIsGroupsMode( f456_arg0.controller ) or f456_local2 == "film" then
 			if f456_local2 == "film" then
-				f456_local6 = Engine[@"filesharegettotalusedcommunityslotcount"]( f456_arg0.controller, "film", f456_local4, f456_local5 )
+				f456_local6 = Engine.FileshareGetTotalUsedCommunitySlotCount( f456_arg0.controller, "film", f456_local4, f456_local5 )
 			else
-				f456_local6 = Engine[@"filesharegettotalusedcommunityslotcount"]( f456_arg0.controller, f456_local2, f456_local4, f456_local5 )
+				f456_local6 = Engine.FileshareGetTotalUsedCommunitySlotCount( f456_arg0.controller, f456_local2, f456_local4, f456_local5 )
 			end
 		else
-			f456_local6 = Engine[@"filesharegetslotcount"]( f456_arg0.controller, f456_local2, f456_local4, f456_local5 )
+			f456_local6 = Engine.FileshareGetSlotCount( f456_arg0.controller, f456_local2, f456_local4, f456_local5 )
 		end
 		CoD.FileshareUtility.SetItemsCount( f456_arg0.controller, f456_local6 )
 		if f456_arg0.hasCreateButton == true then
@@ -8438,47 +8437,47 @@ DataSources.FilesharePublishedList = {
 		if f458_arg1.hasCreateButton == true then
 			f458_local0 = f458_local0 - 1
 		end
-		local f458_local3 = Engine[@"getmodel"]( f458_arg1.fileshareData[f458_local1].elementModel, "isPublishNew" )
-		local f458_local4 = Engine[@"getmodel"]( f458_arg1.fileshareData[f458_local1].elementModel, "showPlusImage" )
-		local f458_local5 = Engine[@"getmodel"]( f458_arg1.fileshareData[f458_local1].elementModel, "showFileImage" )
-		local f458_local6 = Engine[@"getmodel"]( f458_arg1.fileshareData[f458_local1].elementModel, "plusImageSrc" )
-		local f458_local7 = Engine[@"getmodel"]( f458_arg1.fileshareData[f458_local1].elementModel, "fileImage" )
-		local f458_local8 = Engine[@"getmodel"]( f458_arg1.fileshareData[f458_local1].elementModel, "fileId" )
-		local f458_local9 = Engine[@"getmodel"]( f458_arg1.fileshareData[f458_local1].elementModel, "renderFileId" )
-		local f458_local10 = Engine[@"getmodel"]( f458_arg1.fileshareData[f458_local1].elementModel, "gameType" )
-		local f458_local11 = Engine[@"getmodel"]( f458_arg1.fileshareData[f458_local1].elementModel, "gameTypeImage" )
-		local f458_local12 = Engine[@"getmodel"]( f458_arg1.fileshareData[f458_local1].elementModel, "showGameTypeImage" )
-		local f458_local13 = Engine[@"getmodel"]( f458_arg1.fileshareData[f458_local1].elementModel, "slot" )
-		local f458_local14 = Engine[@"getmodel"]( f458_arg1.fileshareData[f458_local1].elementModel, "index" )
-		local f458_local15 = Engine[@"getmodel"]( f458_arg1.fileshareData[f458_local1].elementModel, "mapName" )
-		local f458_local16 = Engine[@"getmodel"]( f458_arg1.fileshareData[f458_local1].elementModel, "duration" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f458_arg1.fileshareData[f458_local1].elementModel, "uiModelIndex" ), f458_local1 )
-		Engine[@"setmodelvalue"]( Engine[@"getmodel"]( f458_arg1.fileshareData[f458_local1].elementModel, "codeIndex" ), f458_local0 )
-		Engine[@"setmodelvalue"]( Engine[@"getmodel"]( f458_arg1.fileshareData[f458_local1].elementModel, "totalItems" ), f458_arg1.itemsCount )
-		Engine[@"setmodelvalue"]( Engine[@"getmodel"]( f458_arg1.fileshareData[f458_local1].elementModel, "showDetailsViewSpinner" ), 0 )
-		Engine[@"setmodelvalue"]( f458_local8, nil )
+		local f458_local3 = Engine.GetModel( f458_arg1.fileshareData[f458_local1].elementModel, "isPublishNew" )
+		local f458_local4 = Engine.GetModel( f458_arg1.fileshareData[f458_local1].elementModel, "showPlusImage" )
+		local f458_local5 = Engine.GetModel( f458_arg1.fileshareData[f458_local1].elementModel, "showFileImage" )
+		local f458_local6 = Engine.GetModel( f458_arg1.fileshareData[f458_local1].elementModel, "plusImageSrc" )
+		local f458_local7 = Engine.GetModel( f458_arg1.fileshareData[f458_local1].elementModel, "fileImage" )
+		local f458_local8 = Engine.GetModel( f458_arg1.fileshareData[f458_local1].elementModel, "fileId" )
+		local f458_local9 = Engine.GetModel( f458_arg1.fileshareData[f458_local1].elementModel, "renderFileId" )
+		local f458_local10 = Engine.GetModel( f458_arg1.fileshareData[f458_local1].elementModel, "gameType" )
+		local f458_local11 = Engine.GetModel( f458_arg1.fileshareData[f458_local1].elementModel, "gameTypeImage" )
+		local f458_local12 = Engine.GetModel( f458_arg1.fileshareData[f458_local1].elementModel, "showGameTypeImage" )
+		local f458_local13 = Engine.GetModel( f458_arg1.fileshareData[f458_local1].elementModel, "slot" )
+		local f458_local14 = Engine.GetModel( f458_arg1.fileshareData[f458_local1].elementModel, "index" )
+		local f458_local15 = Engine.GetModel( f458_arg1.fileshareData[f458_local1].elementModel, "mapName" )
+		local f458_local16 = Engine.GetModel( f458_arg1.fileshareData[f458_local1].elementModel, "duration" )
+		Engine.SetModelValue( Engine.CreateModel( f458_arg1.fileshareData[f458_local1].elementModel, "uiModelIndex" ), f458_local1 )
+		Engine.SetModelValue( Engine.GetModel( f458_arg1.fileshareData[f458_local1].elementModel, "codeIndex" ), f458_local0 )
+		Engine.SetModelValue( Engine.GetModel( f458_arg1.fileshareData[f458_local1].elementModel, "totalItems" ), f458_arg1.itemsCount )
+		Engine.SetModelValue( Engine.GetModel( f458_arg1.fileshareData[f458_local1].elementModel, "showDetailsViewSpinner" ), 0 )
+		Engine.SetModelValue( f458_local8, nil )
 		if f458_arg1.hasCreateButton == true and f458_arg2 == 1 then
-			Engine[@"setmodelvalue"]( f458_local3, true )
-			Engine[@"setmodelvalue"]( f458_local4, 1 )
-			Engine[@"setmodelvalue"]( f458_local7, "" )
-			Engine[@"setmodelvalue"]( f458_local5, 0 )
-			Engine[@"setmodelvalue"]( f458_local9, 0 )
-			Engine[@"setmodelvalue"]( f458_local6, "uie_t7_icon_codpoints" )
-			Engine[@"setmodelvalue"]( f458_local16, 0 )
-			Engine[@"setmodelvalue"]( f458_local15, "" )
-			Engine[@"setmodelvalue"]( f458_local12, 0 )
-			Engine[@"setmodelvalue"]( f458_local11, "" )
+			Engine.SetModelValue( f458_local3, true )
+			Engine.SetModelValue( f458_local4, 1 )
+			Engine.SetModelValue( f458_local7, "" )
+			Engine.SetModelValue( f458_local5, 0 )
+			Engine.SetModelValue( f458_local9, 0 )
+			Engine.SetModelValue( f458_local6, "uie_t7_icon_codpoints" )
+			Engine.SetModelValue( f458_local16, 0 )
+			Engine.SetModelValue( f458_local15, "" )
+			Engine.SetModelValue( f458_local12, 0 )
+			Engine.SetModelValue( f458_local11, "" )
 			local f458_local17 = CoD.FileshareUtility.GetInShowcaseManager( f458_arg0 )
-			local f458_local18 = Engine[@"getmodel"]( f458_arg1.fileshareData[f458_local1].elementModel, "fileName" )
+			local f458_local18 = Engine.GetModel( f458_arg1.fileshareData[f458_local1].elementModel, "fileName" )
 			if f458_local17 and f458_local17 == true then
-				Engine[@"setmodelvalue"]( f458_local18, @"hash_7E16CE893CADAD65" )
+				Engine.SetModelValue( f458_local18, "menu/fileshare_buy_slots" )
 			else
-				Engine[@"setmodelvalue"]( f458_local18, Engine[@"hash_4F9F1239CFD921FE"]( @"hash_268D49B69383695" ) )
+				Engine.SetModelValue( f458_local18, Engine[@"hash_4F9F1239CFD921FE"]( "menu/fileshare_publish_new" ) )
 			end
 		else
-			Engine[@"setmodelvalue"]( f458_local3, false )
-			Engine[@"setmodelvalue"]( f458_local7, "" )
-			Engine[@"setmodelvalue"]( f458_local4, 0 )
+			Engine.SetModelValue( f458_local3, false )
+			Engine.SetModelValue( f458_local7, "" )
+			Engine.SetModelValue( f458_local4, 0 )
 			local f458_local17 = CoD.FileshareUtility.GetCurrentCategory()
 			local f458_local18 = CoD.FileshareUtility.GetIsCommunityMode( f458_arg1.controller )
 			local f458_local19, f458_local20 = CoD.FileshareUtility.GetCurrentFilter()
@@ -8487,50 +8486,50 @@ DataSources.FilesharePublishedList = {
 				f458_local20 = f458_arg1.filterVal
 			end
 			if f458_local17 == "recentgames" or f458_local17 == "film" or f458_local17 == "customgame" then
-				Engine[@"setmodelvalue"]( f458_local12, 1 )
+				Engine.SetModelValue( f458_local12, 1 )
 			else
-				Engine[@"setmodelvalue"]( f458_local12, 0 )
+				Engine.SetModelValue( f458_local12, 0 )
 			end
 			if f458_local17 == "clip" or f458_local17 == "clip_private" or f458_local17 == "recentgames" or f458_local17 == "film" or f458_local17 == "customgame" then
-				Engine[@"setmodelvalue"]( f458_local5, 0 )
+				Engine.SetModelValue( f458_local5, 0 )
 			else
-				Engine[@"setmodelvalue"]( f458_local5, 1 )
+				Engine.SetModelValue( f458_local5, 1 )
 			end
 			local f458_local21 = nil
 			if f458_local18 or CoD.FileshareUtility.GetIsGroupsMode( f458_arg1.controller ) or f458_local17 == "recentgames" or f458_local17 == "film" then
 				if f458_local17 == "recentgames" or f458_local17 == "film" then
-					f458_local21 = Engine[@"filesharegetcommunityslotdata"]( f458_arg1.controller, "film", f458_local19, f458_local20, f458_local0 )
+					f458_local21 = Engine.FileshareGetCommunitySlotData( f458_arg1.controller, "film", f458_local19, f458_local20, f458_local0 )
 				else
-					f458_local21 = Engine[@"filesharegetcommunityslotdata"]( f458_arg1.controller, f458_local17, f458_local19, f458_local20, f458_local0 )
+					f458_local21 = Engine.FileshareGetCommunitySlotData( f458_arg1.controller, f458_local17, f458_local19, f458_local20, f458_local0 )
 				end
 			else
-				f458_local21 = Engine[@"filesharegetslotdata"]( f458_arg1.controller, f458_local17, f458_local19, f458_local20, f458_local0 )
+				f458_local21 = Engine.FileshareGetSlotData( f458_arg1.controller, f458_local17, f458_local19, f458_local20, f458_local0 )
 			end
 			for f458_local25, f458_local26 in ipairs( CoD.FileshareUtility.FileProperties ) do
 				if f458_local21[f458_local26] ~= nil then
-					Engine[@"setmodelvalue"]( Engine[@"getmodel"]( f458_arg1.fileshareData[f458_local1].elementModel, f458_local26 ), f458_local21[f458_local26] )
+					Engine.SetModelValue( Engine.GetModel( f458_arg1.fileshareData[f458_local1].elementModel, f458_local26 ), f458_local21[f458_local26] )
 				end
 			end
-			f458_local22 = Engine[@"getfileshareweaponindex"]( f458_arg0, f458_local21.fileId )
+			f458_local22 = Engine.GetFileshareWeaponIndex( f458_arg0, f458_local21.fileId )
 			f458_local23 = ""
 			if f458_local21.weaponIndex ~= nil and f458_local21.weaponIndex ~= 0 then
-				Engine[@"setmodelvalue"]( Engine[@"getmodel"]( f458_arg1.fileshareData[f458_local1].elementModel, "weaponName" ), Engine[@"toupper"]( Engine[@"hash_4F9F1239CFD921FE"]( Engine[@"getitemname"]( f458_local21.weaponIndex ) ) ) )
+				Engine.SetModelValue( Engine.GetModel( f458_arg1.fileshareData[f458_local1].elementModel, "weaponName" ), Engine.ToUpper( Engine[@"hash_4F9F1239CFD921FE"]( Engine.GetItemName( f458_local21.weaponIndex ) ) ) )
 			end
 			CoD.FileshareUtility.SetupDefaultNameAndDescription( f458_arg1.fileshareData[f458_local1].elementModel )
 			CoD.FileshareUtility.SetCategoryCurrentPage( f458_arg0, f458_local17, f458_local0 )
 			if f458_local17 == "screenshot_private" or f458_local17 == "screenshot" or f458_local17 == "clip_private" or f458_local17 == "clip" then
-				Engine[@"addthumbnail"]( f458_arg0, Enum[@"screenshotviewtype"][@"ui_screenshot_type_thumbnail"], f458_local21.fileId, f458_local21.fileSummarySize )
+				Engine.AddThumbnail( f458_arg0, Enum.ScreenshotViewType[@"ui_screenshot_type_thumbnail"], f458_local21.fileId, f458_local21.fileSummarySize )
 			end
 			if f458_local21.isValid == false then
-				Engine[@"setmodelvalue"]( f458_local12, 0 )
+				Engine.SetModelValue( f458_local12, 0 )
 			end
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f458_arg1.fileshareData[f458_local1].elementModel, "action" ), function ( f459_arg0, f459_arg1, f459_arg2, f459_arg3, f459_arg4 )
+			Engine.SetModelValue( Engine.CreateModel( f458_arg1.fileshareData[f458_local1].elementModel, "action" ), function ( f459_arg0, f459_arg1, f459_arg2, f459_arg3, f459_arg4 )
 				if Engine[@"isdemoplaying"]() then
 					CoD.FileshareUtility.Delete( f459_arg0, f459_arg1, f459_arg2, f459_arg3, f459_arg4 )
 				elseif CoD.FileshareUtility.IsCategoryFilm( f459_arg2, f459_arg1 ) or CoD.FileshareUtility.IsCategoryClip( f459_arg2, f459_arg1 ) then
 					if not IsInTheaterMode() then
-						LuaUtils.UI_ShowErrorMessageDialog( f459_arg2, @"hash_75BF9B60809C0BC6" )
-						Engine[@"sendclientscriptnotify"]( f459_arg2, "menu_change" .. Engine[@"getlocalclientnum"]( f459_arg2 ), {
+						LuaUtils.UI_ShowErrorMessageDialog( f459_arg2, "menu/fileshare_play_only_in_theater" )
+						Engine.SendClientScriptNotify( f459_arg2, "menu_change" .. Engine.GetLocalClientNum( f459_arg2 ), {
 							menu = "Main",
 							status = "closeToMenu"
 						} )
@@ -8542,7 +8541,7 @@ DataSources.FilesharePublishedList = {
 					if IsCustomMPLobby() then
 						OpenOverlay( f459_arg0, "CustomGamesLoadFileshareItem", f459_arg2 )
 					else
-						LuaUtils.UI_ShowErrorMessageDialog( f459_arg2, @"hash_28284F190C0BE1BB" )
+						LuaUtils.UI_ShowErrorMessageDialog( f459_arg2, "menu/customgames_cannot_view_desc" )
 					end
 				else
 					FileshareSetSelectedItem( f459_arg0, f459_arg1, f459_arg2, "true" )
@@ -8560,18 +8559,18 @@ DataSources.FileshareCommunityList = {
 		f460_arg1.controller = f460_arg0
 		f460_arg1.hasCreateButton = false
 		f460_arg1.numElements = f460_arg1.vCount * f460_arg1.hCount
-		f460_arg1.fileshareRootModel = Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "fileshareRoot" )
+		f460_arg1.fileshareRootModel = Engine.GetModel( Engine.GetGlobalModel(), "fileshareRoot" )
 		f460_arg1.fileshareData = {}
 		for f460_local0 = 1, f460_arg1.numElements, 1 do
 			f460_arg1.fileshareData[f460_local0] = {}
-			f460_arg1.fileshareData[f460_local0].elementModel = Engine[@"createmodel"]( f460_arg1.fileshareRootModel, "fileshareData_community_" .. f460_local0 )
+			f460_arg1.fileshareData[f460_local0].elementModel = Engine.CreateModel( f460_arg1.fileshareRootModel, "fileshareData_community_" .. f460_local0 )
 			for f460_local6, f460_local7 in ipairs( CoD.FileshareUtility.FileProperties ) do
-				Engine[@"createmodel"]( f460_arg1.fileshareData[f460_local0].elementModel, f460_local7 )
+				Engine.CreateModel( f460_arg1.fileshareData[f460_local0].elementModel, f460_local7 )
 			end
 			CoD.FileshareUtility.ResetFileshareSummary( f460_arg1.fileshareData[f460_local0].elementModel )
 		end
 		CoD.FileshareUtility.SetItemsCount( f460_arg1.controller, f460_arg1.numElements )
-		Engine[@"filesharestartup"]( f460_arg1.controller )
+		Engine.FileshareStartup( f460_arg1.controller )
 		CoD.FileshareUtility.SetShowFileDetails( false )
 		CoD.FileshareUtility.SetShowPublishNewDetails( false )
 	end,
@@ -8585,7 +8584,7 @@ DataSources.FileshareCommunityList = {
 				f461_local0 = false
 			end
 		end
-		if f461_local0 and not Engine[@"fileshareisready"]( f461_arg0.controller ) then
+		if f461_local0 and not Engine.FileshareIsReady( f461_arg0.controller ) then
 			CoD.FileshareUtility.SetItemsCount( f461_arg0.controller, 0 )
 			return 0
 		else
@@ -8594,7 +8593,7 @@ DataSources.FileshareCommunityList = {
 				CoD.FileshareUtility.SetItemsCount( f461_arg0.controller, 0 )
 				return 0
 			else
-				local f461_local4 = Engine[@"filesharegettotalusedcommunityslotcount"]( f461_arg0.controller, f461_local1, f461_local2, f461_local3 )
+				local f461_local4 = Engine.FileshareGetTotalUsedCommunitySlotCount( f461_arg0.controller, f461_local1, f461_local2, f461_local3 )
 				CoD.FileshareUtility.SetItemsCount( f461_arg0.controller, f461_local4 )
 				f461_arg0.itemsCount = f461_local4
 				return f461_local4
@@ -8605,57 +8604,57 @@ DataSources.FileshareCommunityList = {
 		local f462_local0 = f462_arg2 - 1
 		local f462_local1 = f462_local0 % f462_arg1.numElements + 1
 		local f462_local2 = f462_arg2 % f462_arg1.numElements
-		local f462_local3 = Engine[@"getmodel"]( f462_arg1.fileshareData[f462_local1].elementModel, "isPublishNew" )
-		local f462_local4 = Engine[@"getmodel"]( f462_arg1.fileshareData[f462_local1].elementModel, "showPlusImage" )
-		local f462_local5 = Engine[@"getmodel"]( f462_arg1.fileshareData[f462_local1].elementModel, "showFileImage" )
-		local f462_local6 = Engine[@"getmodel"]( f462_arg1.fileshareData[f462_local1].elementModel, "fileImage" )
-		local f462_local7 = Engine[@"getmodel"]( f462_arg1.fileshareData[f462_local1].elementModel, "fileId" )
-		local f462_local8 = Engine[@"getmodel"]( f462_arg1.fileshareData[f462_local1].elementModel, "renderFileId" )
-		local f462_local9 = Engine[@"getmodel"]( f462_arg1.fileshareData[f462_local1].elementModel, "showGameTypeImage" )
-		Engine[@"setmodelvalue"]( Engine[@"getmodel"]( f462_arg1.fileshareData[f462_local1].elementModel, "codeIndex" ), f462_local0 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f462_arg1.fileshareData[f462_local1].elementModel, "uiModelIndex" ), f462_local1 )
-		Engine[@"setmodelvalue"]( Engine[@"getmodel"]( f462_arg1.fileshareData[f462_local1].elementModel, "totalItems" ), f462_arg1.itemsCount )
-		Engine[@"setmodelvalue"]( Engine[@"getmodel"]( f462_arg1.fileshareData[f462_local1].elementModel, "showDetailsViewSpinner" ), 0 )
-		Engine[@"setmodelvalue"]( f462_local3, false )
-		Engine[@"setmodelvalue"]( f462_local6, "" )
-		Engine[@"setmodelvalue"]( f462_local4, 0 )
-		Engine[@"setmodelvalue"]( f462_local8, 0 )
+		local f462_local3 = Engine.GetModel( f462_arg1.fileshareData[f462_local1].elementModel, "isPublishNew" )
+		local f462_local4 = Engine.GetModel( f462_arg1.fileshareData[f462_local1].elementModel, "showPlusImage" )
+		local f462_local5 = Engine.GetModel( f462_arg1.fileshareData[f462_local1].elementModel, "showFileImage" )
+		local f462_local6 = Engine.GetModel( f462_arg1.fileshareData[f462_local1].elementModel, "fileImage" )
+		local f462_local7 = Engine.GetModel( f462_arg1.fileshareData[f462_local1].elementModel, "fileId" )
+		local f462_local8 = Engine.GetModel( f462_arg1.fileshareData[f462_local1].elementModel, "renderFileId" )
+		local f462_local9 = Engine.GetModel( f462_arg1.fileshareData[f462_local1].elementModel, "showGameTypeImage" )
+		Engine.SetModelValue( Engine.GetModel( f462_arg1.fileshareData[f462_local1].elementModel, "codeIndex" ), f462_local0 )
+		Engine.SetModelValue( Engine.CreateModel( f462_arg1.fileshareData[f462_local1].elementModel, "uiModelIndex" ), f462_local1 )
+		Engine.SetModelValue( Engine.GetModel( f462_arg1.fileshareData[f462_local1].elementModel, "totalItems" ), f462_arg1.itemsCount )
+		Engine.SetModelValue( Engine.GetModel( f462_arg1.fileshareData[f462_local1].elementModel, "showDetailsViewSpinner" ), 0 )
+		Engine.SetModelValue( f462_local3, false )
+		Engine.SetModelValue( f462_local6, "" )
+		Engine.SetModelValue( f462_local4, 0 )
+		Engine.SetModelValue( f462_local8, 0 )
 		local f462_local10 = CoD.FileshareUtility.GetCurrentCategory()
 		local f462_local11, f462_local12 = CoD.FileshareUtility.GetCurrentFilter()
 		if f462_local10 == "clip" or f462_local10 == "clip_private" or f462_local10 == "recentgames" or f462_local10 == "film" or f462_local10 == "customgame" then
-			Engine[@"setmodelvalue"]( f462_local5, 0 )
+			Engine.SetModelValue( f462_local5, 0 )
 		else
-			Engine[@"setmodelvalue"]( f462_local5, 1 )
+			Engine.SetModelValue( f462_local5, 1 )
 		end
-		local f462_local13 = Engine[@"filesharegetcommunityslotdata"]( f462_arg1.controller, f462_local10, f462_local11, f462_local12, f462_local0 )
+		local f462_local13 = Engine.FileshareGetCommunitySlotData( f462_arg1.controller, f462_local10, f462_local11, f462_local12, f462_local0 )
 		for f462_local17, f462_local18 in ipairs( CoD.FileshareUtility.FileProperties ) do
 			if f462_local13[f462_local18] ~= nil then
-				Engine[@"setmodelvalue"]( Engine[@"getmodel"]( f462_arg1.fileshareData[f462_local1].elementModel, f462_local18 ), f462_local13[f462_local18] )
+				Engine.SetModelValue( Engine.GetModel( f462_arg1.fileshareData[f462_local1].elementModel, f462_local18 ), f462_local13[f462_local18] )
 			end
 		end
 		if f462_local10 == "customgame" then
-			Engine[@"setmodelvalue"]( f462_local9, 1 )
+			Engine.SetModelValue( f462_local9, 1 )
 		else
-			Engine[@"setmodelvalue"]( f462_local9, 0 )
+			Engine.SetModelValue( f462_local9, 0 )
 		end
 		f462_local14 = ""
 		if f462_local13.weaponIndex ~= nil and f462_local13.weaponIndex ~= 0 then
-			Engine[@"setmodelvalue"]( Engine[@"getmodel"]( f462_arg1.fileshareData[f462_local1].elementModel, "weaponName" ), Engine[@"toupper"]( Engine[@"hash_4F9F1239CFD921FE"]( Engine[@"getitemname"]( f462_local13.weaponIndex ) ) ) )
+			Engine.SetModelValue( Engine.GetModel( f462_arg1.fileshareData[f462_local1].elementModel, "weaponName" ), Engine.ToUpper( Engine[@"hash_4F9F1239CFD921FE"]( Engine.GetItemName( f462_local13.weaponIndex ) ) ) )
 		end
 		CoD.FileshareUtility.SetupDefaultNameAndDescription( f462_arg1.fileshareData[f462_local1].elementModel )
 		CoD.FileshareUtility.SetCategoryCurrentPage( f462_arg0, f462_local10, f462_local0 )
 		f462_local15 = function ( f463_arg0, f463_arg1, f463_arg2, f463_arg3, f463_arg4 )
 			if CoD.FileshareUtility.IsCategoryFilm( f463_arg2, f463_arg1 ) or CoD.FileshareUtility.IsCategoryClip( f463_arg2, f463_arg1 ) then
 				if not IsInTheaterMode() then
-					LuaUtils.UI_ShowErrorMessageDialog( f463_arg2, @"hash_75BF9B60809C0BC6" )
+					LuaUtils.UI_ShowErrorMessageDialog( f463_arg2, "menu/fileshare_play_only_in_theater" )
 				else
-					local f463_local0 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f463_arg1:getModel(), "mainMode" ) )
-					if f463_local0 ~= Engine[@"currentsessionmode"]() then
+					local f463_local0 = Engine.GetModelValue( Engine.GetModel( f463_arg1:getModel(), "mainMode" ) )
+					if f463_local0 ~= Engine.CurrentSessionMode() then
 						local f463_local1 = ""
-						if f463_local0 == Enum[@"emodes"][@"mode_zombies"] then
-							f463_local1 = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_658DA4C1486566B5", @"menu/zombie" )
+						if f463_local0 == Enum.eModes.mode_zombies then
+							f463_local1 = Engine[@"hash_4F9F1239CFD921FE"]( "menu/fileshare_play_only_in_specific_mode", "menu/zombie" )
 						else
-							f463_local1 = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_658DA4C1486566B5", @"menu/multiplayer" )
+							f463_local1 = Engine[@"hash_4F9F1239CFD921FE"]( "menu/fileshare_play_only_in_specific_mode", "menu/multiplayer" )
 						end
 						LuaUtils.UI_ShowErrorMessageDialog( f463_arg2, f463_local1 )
 					else
@@ -8667,7 +8666,7 @@ DataSources.FileshareCommunityList = {
 				if IsCustomMPLobby() then
 					OpenOverlay( f463_arg0, "CustomGamesLoadFileshareItem", f463_arg2 )
 				else
-					LuaUtils.UI_ShowErrorMessageDialog( f463_arg2, @"hash_28284F190C0BE1BB" )
+					LuaUtils.UI_ShowErrorMessageDialog( f463_arg2, "menu/customgames_cannot_view_desc" )
 				end
 			else
 				FileshareSetSelectedItem( f463_arg0, f463_arg1, f463_arg2, "true" )
@@ -8678,9 +8677,9 @@ DataSources.FileshareCommunityList = {
 		end
 		
 		if f462_local10 == "screenshot_private" or f462_local10 == "screenshot" or f462_local10 == "clip_private" or f462_local10 == "clip" then
-			Engine[@"addthumbnail"]( f462_arg0, Enum[@"screenshotviewtype"][@"ui_screenshot_type_thumbnail"], f462_local13.fileId, f462_local13.fileSummarySize )
+			Engine.AddThumbnail( f462_arg0, Enum.ScreenshotViewType[@"ui_screenshot_type_thumbnail"], f462_local13.fileId, f462_local13.fileSummarySize )
 		end
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f462_arg1.fileshareData[f462_local1].elementModel, "action" ), f462_local15 )
+		Engine.SetModelValue( Engine.CreateModel( f462_arg1.fileshareData[f462_local1].elementModel, "action" ), f462_local15 )
 		return f462_arg1.fileshareData[f462_local1].elementModel
 	end
 }
@@ -8689,8 +8688,8 @@ DataSources.ShowcasePaintjobList = {
 		f464_arg1.controller = f464_arg0
 		local f464_local0 = CoD.FileshareUtility.GetCurrentCategory()
 		local f464_local1, f464_local2 = CoD.FileshareUtility.GetCurrentFilter()
-		CoD.CraftUtility.Paintjobs.ParseDDL( f464_arg0, Enum[@"storagefiletype"][@"storage_paintjobs"] )
-		f464_arg1.paintjobListModel = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f464_arg0 ), "Paintshop.PaintjobList" )
+		CoD.CraftUtility.Paintjobs.ParseDDL( f464_arg0, Enum.StorageFileType[@"storage_paintjobs"] )
+		f464_arg1.paintjobListModel = Engine.CreateModel( Engine.GetModelForController( f464_arg0 ), "Paintshop.PaintjobList" )
 		local f464_local3 = CoD.CraftUtility.Paintjobs.GetTotalUsedPaintjobs()
 		if f464_local2 ~= "" then
 			f464_local3 = CoD.CraftUtility.Paintjobs.GetTotalWeaponPaintjobsByWeaponGroup( f464_local2 )
@@ -8703,22 +8702,22 @@ DataSources.ShowcasePaintjobList = {
 		return f465_arg0.totalPaintjobs
 	end,
 	getItem = function ( f466_arg0, f466_arg1, f466_arg2 )
-		local f466_local0 = Engine[@"createmodel"]( f466_arg1.paintjobListModel, "paintjob_" .. f466_arg2 )
+		local f466_local0 = Engine.CreateModel( f466_arg1.paintjobListModel, "paintjob_" .. f466_arg2 )
 		local f466_local1 = f466_arg1.paintjobList[f466_arg2]
 		if f466_local1 then
 			if CoD.CraftUtility.Paintjobs.IsPaintjobIndexOccupied( f466_local1.paintjobSlot ) then
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f466_local0, "paintjobName" ), f466_local1.paintjobName )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f466_local0, "paintjobTextEntry" ), f466_local1.paintjobName )
+				Engine.SetModelValue( Engine.CreateModel( f466_local0, "paintjobName" ), f466_local1.paintjobName )
+				Engine.SetModelValue( Engine.CreateModel( f466_local0, "paintjobTextEntry" ), f466_local1.paintjobName )
 			else
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f466_local0, "paintjobTextEntry" ), Engine[@"hash_4F9F1239CFD921FE"]( "MENU/PAINTJOB" ) )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f466_local0, "paintjobName" ), "" )
+				Engine.SetModelValue( Engine.CreateModel( f466_local0, "paintjobTextEntry" ), Engine[@"hash_4F9F1239CFD921FE"]( "MENU/PAINTJOB" ) )
+				Engine.SetModelValue( Engine.CreateModel( f466_local0, "paintjobName" ), "" )
 			end
 			if f466_local1.readOnly ~= nil then
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f466_local0, "readOnly" ), f466_local1.readOnly )
+				Engine.SetModelValue( Engine.CreateModel( f466_local0, "readOnly" ), f466_local1.readOnly )
 			end
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f466_local0, "sortIndex" ), f466_local1.sortIndex )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f466_local0, "paintjobSlot" ), f466_local1.paintjobSlot )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f466_local0, "weaponIndex" ), f466_local1.weaponIndex )
+			Engine.SetModelValue( Engine.CreateModel( f466_local0, "sortIndex" ), f466_local1.sortIndex )
+			Engine.SetModelValue( Engine.CreateModel( f466_local0, "paintjobSlot" ), f466_local1.paintjobSlot )
+			Engine.SetModelValue( Engine.CreateModel( f466_local0, "weaponIndex" ), f466_local1.weaponIndex )
 			return f466_local0
 		else
 			
@@ -8729,27 +8728,27 @@ DataSources.FileshareCategoriesList = {
 	prepare = function ( f467_arg0, f467_arg1, f467_arg2 )
 		local f467_local0 = {
 			{
-				displayText = @"hash_74335B0D906D9B56",
+				displayText = "menu/emblems_caps",
 				displayImage = "uie_t7_mp_icon_header_emblem",
-				hintText = @"hash_7D19B1C150547BBC",
+				hintText = "menu/fileshare_showcase_emblems_desc",
 				category = "emblem",
-				communityDataType = Enum[@"filesharecommunitydatatype"][@"fileshare_community_data_invalid"],
+				communityDataType = Enum.FileshareCommunityDataType[@"fileshare_community_data_invalid"],
 				disabled = false,
 				tabWidget = "CoD.FileshareCategoryContentList"
 			}
 		}
-		local f467_local1 = Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "FileshareCategoriesList" ), "list" )
+		local f467_local1 = Engine.CreateModel( Engine.CreateModel( Engine.GetGlobalModel(), "FileshareCategoriesList" ), "list" )
 		f467_arg1.optionModels = {}
 		for f467_local5, f467_local6 in ipairs( f467_local0 ) do
-			f467_arg1.optionModels[f467_local5] = Engine[@"createmodel"]( f467_local1, "buttonModel_" .. f467_local5 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f467_arg1.optionModels[f467_local5], "displayText" ), Engine[@"localize"]( f467_local6.displayText ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f467_arg1.optionModels[f467_local5], "displayImage" ), f467_local6.displayImage )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f467_arg1.optionModels[f467_local5], "hintText" ), Engine[@"localize"]( f467_local6.hintText ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f467_arg1.optionModels[f467_local5], "category" ), f467_local6.category )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f467_arg1.optionModels[f467_local5], "disabled" ), f467_local6.disabled )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f467_arg1.optionModels[f467_local5], "tabWidget" ), f467_local6.tabWidget )
+			f467_arg1.optionModels[f467_local5] = Engine.CreateModel( f467_local1, "buttonModel_" .. f467_local5 )
+			Engine.SetModelValue( Engine.CreateModel( f467_arg1.optionModels[f467_local5], "displayText" ), Engine.Localize( f467_local6.displayText ) )
+			Engine.SetModelValue( Engine.CreateModel( f467_arg1.optionModels[f467_local5], "displayImage" ), f467_local6.displayImage )
+			Engine.SetModelValue( Engine.CreateModel( f467_arg1.optionModels[f467_local5], "hintText" ), Engine.Localize( f467_local6.hintText ) )
+			Engine.SetModelValue( Engine.CreateModel( f467_arg1.optionModels[f467_local5], "category" ), f467_local6.category )
+			Engine.SetModelValue( Engine.CreateModel( f467_arg1.optionModels[f467_local5], "disabled" ), f467_local6.disabled )
+			Engine.SetModelValue( Engine.CreateModel( f467_arg1.optionModels[f467_local5], "tabWidget" ), f467_local6.tabWidget )
 			if f467_local6.communityDataType then
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f467_arg1.optionModels[f467_local5], "communityDataType" ), f467_local6.communityDataType )
+				Engine.SetModelValue( Engine.CreateModel( f467_arg1.optionModels[f467_local5], "communityDataType" ), f467_local6.communityDataType )
 			end
 		end
 	end,
@@ -8764,55 +8763,55 @@ DataSources.FileshareCommunityCategoriesList = {
 	prepare = function ( f470_arg0, f470_arg1, f470_arg2 )
 		local f470_local0 = {}
 		table.insert( f470_local0, {
-			displayText = @"hash_37903AA4008142BA",
+			displayText = "groups/paintjobs_caps",
 			displayImage = "uie_t7_mp_icon_header_paintshop",
-			hintText = @"hash_16694DFB46379867",
+			hintText = "menu/fileshare_community_paintjobs_desc",
 			category = "paintjob",
 			disabled = false,
 			tabWidget = "CoD.FileshareCategoryContentList"
 		} )
 		table.insert( f470_local0, {
-			displayText = @"hash_74335B0D906D9B56",
+			displayText = "menu/emblems_caps",
 			displayImage = "uie_t7_mp_icon_header_emblem",
-			hintText = 0x9F304C059B0C2E,
+			hintText = "menu/fileshare_community_emblems_desc",
 			category = "emblem",
 			disabled = false,
 			tabWidget = "CoD.FileshareCategoryContentList"
 		} )
 		table.insert( f470_local0, {
-			displayText = @"hash_27307830087A401",
+			displayText = "menu/customgames_caps",
 			displayImage = "uie_t7_mp_icon_header_customgames",
-			hintText = @"hash_3C3782510A36AEC9",
+			hintText = "menu/fileshare_community_customgames_desc",
 			category = "customgame",
 			disabled = false,
 			tabWidget = "CoD.FileshareCategoryContentList"
 		} )
 		table.insert( f470_local0, {
-			displayText = @"hash_4E501541C48F6BD0",
+			displayText = "menu/screenshots",
 			displayImage = "uie_t7_mp_icon_header_screenshot",
-			hintText = @"hash_323B8169836845F0",
+			hintText = "menu/fileshare_community_screenshots_desc",
 			category = "screenshot",
 			disabled = false,
 			tabWidget = "CoD.FileshareScreenshotsContentList"
 		} )
 		table.insert( f470_local0, {
-			displayText = @"hash_2CE48A1B4F61DEB4",
+			displayText = "menu/fileshare_clips_caps",
 			displayImage = "t7_icon_menu_simple_clips",
-			hintText = @"hash_3F365EE6FA4B6666",
+			hintText = "menu/fileshare_community_clips_desc",
 			category = "clip",
 			disabled = false,
 			tabWidget = "CoD.FileshareCategoryContentList"
 		} )
-		local f470_local1 = Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "FileshareCategoriesList" ), "list" )
+		local f470_local1 = Engine.CreateModel( Engine.CreateModel( Engine.GetGlobalModel(), "FileshareCategoriesList" ), "list" )
 		f470_arg1.optionModels = {}
 		for f470_local5, f470_local6 in ipairs( f470_local0 ) do
-			f470_arg1.optionModels[f470_local5] = Engine[@"createmodel"]( f470_local1, "community_buttonModel_" .. f470_local5 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f470_arg1.optionModels[f470_local5], "displayText" ), Engine[@"localize"]( f470_local6.displayText ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f470_arg1.optionModels[f470_local5], "displayImage" ), f470_local6.displayImage )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f470_arg1.optionModels[f470_local5], "hintText" ), Engine[@"localize"]( f470_local6.hintText ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f470_arg1.optionModels[f470_local5], "category" ), f470_local6.category )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f470_arg1.optionModels[f470_local5], "disabled" ), f470_local6.disabled )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f470_arg1.optionModels[f470_local5], "tabWidget" ), f470_local6.tabWidget )
+			f470_arg1.optionModels[f470_local5] = Engine.CreateModel( f470_local1, "community_buttonModel_" .. f470_local5 )
+			Engine.SetModelValue( Engine.CreateModel( f470_arg1.optionModels[f470_local5], "displayText" ), Engine.Localize( f470_local6.displayText ) )
+			Engine.SetModelValue( Engine.CreateModel( f470_arg1.optionModels[f470_local5], "displayImage" ), f470_local6.displayImage )
+			Engine.SetModelValue( Engine.CreateModel( f470_arg1.optionModels[f470_local5], "hintText" ), Engine.Localize( f470_local6.hintText ) )
+			Engine.SetModelValue( Engine.CreateModel( f470_arg1.optionModels[f470_local5], "category" ), f470_local6.category )
+			Engine.SetModelValue( Engine.CreateModel( f470_arg1.optionModels[f470_local5], "disabled" ), f470_local6.disabled )
+			Engine.SetModelValue( Engine.CreateModel( f470_arg1.optionModels[f470_local5], "tabWidget" ), f470_local6.tabWidget )
 		end
 	end,
 	getCount = function ( f471_arg0 )
@@ -8827,11 +8826,11 @@ DataSources.FileshareMyTheaterCategoriesList = ListHelper_SetupDataSource( "File
 	if not IsDemoRestrictedBasicMode() then
 		table.insert( f473_local0, {
 			models = {
-				name = @"hash_4E501541C48F6BD0",
+				name = "menu/screenshots",
 				displayImage = "uie_t7_mp_icon_header_screenshot",
-				hintText = @"hash_5A8A763436006C4C",
+				hintText = "menu/fileshare_clips_desc",
 				category = "screenshot_private",
-				communityDataType = Enum[@"filesharecommunitydatatype"][@"fileshare_community_data_invalid"],
+				communityDataType = Enum.FileshareCommunityDataType[@"fileshare_community_data_invalid"],
 				tabWidget = "CoD.FileshareCategoryContentList"
 			},
 			properties = {
@@ -8842,11 +8841,11 @@ DataSources.FileshareMyTheaterCategoriesList = ListHelper_SetupDataSource( "File
 	end
 	table.insert( f473_local0, {
 		models = {
-			name = @"hash_136B228B7F38867B",
+			name = "menu/fileshare_recentgames_caps",
 			displayImage = "uie_t7_icon_menu_simple_media_recent",
-			hintText = @"hash_674CB6B54BB7F54B",
+			hintText = "menu/fileshare_recentgames_desc",
 			category = "recentgames",
-			communityDataType = Enum[@"filesharecommunitydatatype"][@"fileshare_community_data_recent_games"],
+			communityDataType = Enum.FileshareCommunityDataType[@"fileshare_community_data_recent_games"],
 			tabWidget = "CoD.FileshareCategoryContentList"
 		},
 		properties = {
@@ -8857,11 +8856,11 @@ DataSources.FileshareMyTheaterCategoriesList = ListHelper_SetupDataSource( "File
 	if not IsDemoRestrictedBasicMode() then
 		table.insert( f473_local0, {
 			models = {
-				name = @"hash_2CE48A1B4F61DEB4",
+				name = "menu/fileshare_clips_caps",
 				displayImage = "t7_icon_menu_simple_clips",
-				hintText = @"hash_5A8A763436006C4C",
+				hintText = "menu/fileshare_clips_desc",
 				category = "clip_private",
-				communityDataType = Enum[@"filesharecommunitydatatype"][@"fileshare_community_data_invalid"],
+				communityDataType = Enum.FileshareCommunityDataType[@"fileshare_community_data_invalid"],
 				tabWidget = "CoD.FileshareCategoryContentList"
 			},
 			properties = {
@@ -8872,11 +8871,11 @@ DataSources.FileshareMyTheaterCategoriesList = ListHelper_SetupDataSource( "File
 	end
 	table.insert( f473_local0, {
 		models = {
-			name = @"hash_1770599226B0553A",
+			name = "menu/bookmarked_games",
 			displayImage = "uie_t7_icon_menu_simple_media_recent",
-			hintText = @"hash_674CB6B54BB7F54B",
+			hintText = "menu/fileshare_recentgames_desc",
 			category = "recentgames",
-			communityDataType = Enum[@"filesharecommunitydatatype"][@"fileshare_community_data_recent_games"],
+			communityDataType = Enum.FileshareCommunityDataType[@"fileshare_community_data_recent_games"],
 			tabWidget = "CoD.FileshareCategoryContentList"
 		},
 		properties = {
@@ -8893,13 +8892,13 @@ DataSources.FileshareOptionsButtonList = ListHelper_SetupDataSource( "FileshareO
 		table.insert( f474_local0, {
 			displayText = @"menu/fileshare_like",
 			displayImage = "uie_t7_icon_menu_options_like",
-			displayDesc = @"hash_762ACAE767815CA2",
+			displayDesc = "menu/fileshare_like_desc",
 			action = CoD.FileshareUtility.ReportLike
 		} )
 		table.insert( f474_local0, {
-			displayText = @"hash_5445C36EB6A8A7B0",
+			displayText = "menu/fileshare_dislike",
 			displayImage = "uie_t7_icon_menu_options_dislike",
-			displayDesc = @"hash_DF418B4E06D9918",
+			displayDesc = "menu/fileshare_dislike_desc",
 			action = CoD.FileshareUtility.ReportDislike
 		} )
 	end
@@ -8907,14 +8906,14 @@ DataSources.FileshareOptionsButtonList = ListHelper_SetupDataSource( "FileshareO
 		table.insert( f474_local0, {
 			displayText = @"menu/fileshare_download",
 			displayImage = "t7_icon_menu_options_download",
-			displayDesc = @"hash_38E4CB51F0AB9B7",
+			displayDesc = "menu/fileshare_download_desc",
 			action = CoD.FileshareUtility.DownloadAction
 		} )
 	end
 	if FileshareCanDeleteItem( f474_arg0 ) then
-		local f474_local2 = @"hash_E0F1CAE8E5DDA06"
+		local f474_local2 = "menu/fileshare_delete_desc"
 		if f474_local1 then
-			f474_local2 = @"hash_7D46527DE8E0E0EA"
+			f474_local2 = "menu/fileshare_delete_local_desc"
 		end
 		table.insert( f474_local0, {
 			displayText = @"menu/delete",
@@ -8927,18 +8926,18 @@ DataSources.FileshareOptionsButtonList = ListHelper_SetupDataSource( "FileshareO
 		table.insert( f474_local0, {
 			displayText = @"hash_1E0254269ED8FFD3",
 			displayImage = "t7_icon_menu_simple_media_manager",
-			displayDesc = @"hash_D6D626F56CEC68B",
+			displayDesc = "menu/fileshare_player_details_desc",
 			action = ShowcaseOpenPlayerDetails
 		} )
 	end
 	local f474_local2 = CoD.FileshareUtility.GetSelectedItemProperty( "fileAuthorName" )
 	local f474_local3 = CoD.FileshareUtility.GetSelectedItemProperty( "fileAuthorXuid" )
-	if not f474_local1 and f474_local3 ~= Engine[@"getxuid64"]( f474_arg0 ) then
-		local f474_local4 = Engine[@"getplayerinfo"]( f474_arg0, f474_local3 )
+	if not f474_local1 and f474_local3 ~= Engine.GetXUID64( f474_arg0 ) then
+		local f474_local4 = Engine.GetPlayerInfo( f474_arg0, f474_local3 )
 		table.insert( f474_local0, {
 			displayText = @"menu/report_player",
 			displayImage = "uie_t7_icon_error_overlays",
-			displayDesc = @"hash_6804C18CC814A475",
+			displayDesc = "menu/report_player_desc",
 			action = ShowReportPlayerDialog,
 			params = {
 				controller = f474_arg0,
@@ -8952,9 +8951,9 @@ DataSources.FileshareOptionsButtonList = ListHelper_SetupDataSource( "FileshareO
 		
 	elseif FileshareCanShowShowcaseManager( f474_arg0 ) then
 		table.insert( f474_local0, {
-			displayText = @"hash_33DD2FCA578D3DC0",
+			displayText = "menu/fileshare_showcase_manager",
 			displayImage = "t7_icon_menu_simple_media_manager",
-			displayDesc = @"hash_454FAB5C62153CE1",
+			displayDesc = "menu/fileshare_media_manager_desc",
 			action = CoD.FileshareUtility.OpenShowcaseManager
 		} )
 	end
@@ -8962,7 +8961,7 @@ DataSources.FileshareOptionsButtonList = ListHelper_SetupDataSource( "FileshareO
 	for f474_local8, f474_local9 in ipairs( f474_local0 ) do
 		table.insert( f474_local4, {
 			models = {
-				displayText = Engine[@"localize"]( f474_local9.displayText ),
+				displayText = Engine.Localize( f474_local9.displayText ),
 				icon = f474_local9.displayImage,
 				hintText = f474_local9.displayDesc
 			},
@@ -8980,24 +8979,24 @@ DataSources.FileshareOptionsDeleteButtonList = {
 			{
 				displayText = @"menu/delete",
 				displayImage = "",
-				displayDesc = @"hash_127D9AE8D6AE0E23",
+				displayDesc = "menu/allow_download_desc",
 				action = CoD.FileshareUtility.DeleteYes
 			},
 			{
 				displayText = @"menu/cancel",
 				displayImage = "",
-				displayDesc = @"hash_38E4CB51F0AB9B7",
+				displayDesc = "menu/fileshare_download_desc",
 				action = CoD.FileshareUtility.DeleteNo
 			}
 		}
-		local f475_local1 = Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "FileshareOptionsDeleteButtonList" ), "list" )
+		local f475_local1 = Engine.CreateModel( Engine.CreateModel( Engine.GetGlobalModel(), "FileshareOptionsDeleteButtonList" ), "list" )
 		f475_arg1.optionModels = {}
 		for f475_local5, f475_local6 in ipairs( f475_local0 ) do
-			f475_arg1.optionModels[f475_local5] = Engine[@"createmodel"]( f475_local1, "buttonModel_" .. f475_local5 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f475_arg1.optionModels[f475_local5], "displayText" ), Engine[@"localize"]( f475_local6.displayText ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f475_arg1.optionModels[f475_local5], "displayImage" ), f475_local6.displayImage )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f475_arg1.optionModels[f475_local5], "hintText" ), Engine[@"localize"]( f475_local6.displayDesc ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f475_arg1.optionModels[f475_local5], "action" ), f475_local6.action )
+			f475_arg1.optionModels[f475_local5] = Engine.CreateModel( f475_local1, "buttonModel_" .. f475_local5 )
+			Engine.SetModelValue( Engine.CreateModel( f475_arg1.optionModels[f475_local5], "displayText" ), Engine.Localize( f475_local6.displayText ) )
+			Engine.SetModelValue( Engine.CreateModel( f475_arg1.optionModels[f475_local5], "displayImage" ), f475_local6.displayImage )
+			Engine.SetModelValue( Engine.CreateModel( f475_arg1.optionModels[f475_local5], "hintText" ), Engine.Localize( f475_local6.displayDesc ) )
+			Engine.SetModelValue( Engine.CreateModel( f475_arg1.optionModels[f475_local5], "action" ), f475_local6.action )
 		end
 	end,
 	getCount = function ( f476_arg0 )
@@ -9015,29 +9014,29 @@ DataSources.FileshareSlotsFullButtonList = {
 				
 			else
 				table.insert( f478_local0, {
-					displayText = @"hash_84B4D57F67E6320",
+					displayText = "menu/fileshare_showcase_manager_caps",
 					displayImage = "",
-					displayDesc = @"hash_127D9AE8D6AE0E23",
+					displayDesc = "menu/allow_download_desc",
 					action = CoD.FileshareUtility.OpenShowcaseManager
 				} )
 			end
 			if FileshareCanBuyMoreSlots( f478_arg0 ) == true then
 				table.insert( f478_local0, {
-					displayText = @"hash_7E16CE893CADAD65",
+					displayText = "menu/fileshare_buy_slots",
 					displayImage = "",
-					displayDesc = @"hash_38E4CB51F0AB9B7",
+					displayDesc = "menu/fileshare_download_desc",
 					action = CoD.FileshareUtility.OpenBuySlots
 				} )
 			end
 		end
-		local f478_local1 = Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "FileshareSlotsFullButtonList" ), "list" )
+		local f478_local1 = Engine.CreateModel( Engine.CreateModel( Engine.GetGlobalModel(), "FileshareSlotsFullButtonList" ), "list" )
 		f478_arg1.optionModels = {}
 		for f478_local5, f478_local6 in ipairs( f478_local0 ) do
-			f478_arg1.optionModels[f478_local5] = Engine[@"createmodel"]( f478_local1, "buttonModel_" .. f478_local5 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f478_arg1.optionModels[f478_local5], "displayText" ), Engine[@"localize"]( f478_local6.displayText ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f478_arg1.optionModels[f478_local5], "displayImage" ), f478_local6.displayImage )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f478_arg1.optionModels[f478_local5], "hintText" ), Engine[@"localize"]( f478_local6.displayDesc ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f478_arg1.optionModels[f478_local5], "action" ), f478_local6.action )
+			f478_arg1.optionModels[f478_local5] = Engine.CreateModel( f478_local1, "buttonModel_" .. f478_local5 )
+			Engine.SetModelValue( Engine.CreateModel( f478_arg1.optionModels[f478_local5], "displayText" ), Engine.Localize( f478_local6.displayText ) )
+			Engine.SetModelValue( Engine.CreateModel( f478_arg1.optionModels[f478_local5], "displayImage" ), f478_local6.displayImage )
+			Engine.SetModelValue( Engine.CreateModel( f478_arg1.optionModels[f478_local5], "hintText" ), Engine.Localize( f478_local6.displayDesc ) )
+			Engine.SetModelValue( Engine.CreateModel( f478_arg1.optionModels[f478_local5], "action" ), f478_local6.action )
 		end
 	end,
 	getCount = function ( f479_arg0 )
@@ -9049,9 +9048,9 @@ DataSources.FileshareSlotsFullButtonList = {
 }
 DataSources.SelectedStorageFileType = {
 	getModel = function ( f481_arg0 )
-		local f481_local0 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f481_arg0 ), "Craft.SelectedStorageFileType" )
+		local f481_local0 = Engine.GetModel( Engine.GetModelForController( f481_arg0 ), "Craft.SelectedStorageFileType" )
 		if not f481_local0 then
-			f481_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f481_arg0 ), "Craft.SelectedStorageFileType" )
+			f481_local0 = Engine.CreateModel( Engine.GetModelForController( f481_arg0 ), "Craft.SelectedStorageFileType" )
 			local f481_local1 = f481_local0:create( "storageFileType" )
 			f481_local1:set( CoD.perController[f481_arg0].selectedEmblemTabStorageType )
 		end
@@ -9060,7 +9059,7 @@ DataSources.SelectedStorageFileType = {
 }
 DataSources.CraftSlots = {
 	getModel = function ( f482_arg0 )
-		local f482_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f482_arg0 ), "Craft.CraftSlots" )
+		local f482_local0 = Engine.CreateModel( Engine.GetModelForController( f482_arg0 ), "Craft.CraftSlots" )
 		local f482_local1 = DataSources.SlotCustomization.getModel( f482_arg0 )
 		local f482_local2 = CoD.CraftUtility.GetStorageFileTypeFromCustomiztionType( f482_arg0, f482_local1.type:get() )
 		local f482_local3 = CoD.CraftUtility.GetUsedSlotsByFileType( f482_arg0, f482_local2 )
@@ -9081,8 +9080,8 @@ DataSources.EmblemEditing = {
 }
 DataSources.CraftClipboard = {
 	getModel = function ( f484_arg0 )
-		local f484_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f484_arg0 ), "Craft.Clipboard" )
-		local f484_local1 = Engine[@"getusedlayercount"]( f484_arg0, Enum[@"customizationtype"].CUSTOMIZATION_TYPE_CLIPBOARD, CoD.perController[f484_arg0].totalLayers )
+		local f484_local0 = Engine.CreateModel( Engine.GetModelForController( f484_arg0 ), "Craft.Clipboard" )
+		local f484_local1 = Engine.GetUsedLayerCount( f484_arg0, Enum.CustomizationType.CUSTOMIZATION_TYPE_CLIPBOARD, CoD.perController[f484_arg0].totalLayers )
 		local f484_local2 = f484_local0:create( "layerCount" )
 		f484_local2:set( f484_local1 )
 		return f484_local0
@@ -9090,9 +9089,9 @@ DataSources.CraftClipboard = {
 }
 DataSources.EmblemEditorOptionsList = ListHelper_SetupDataSource( "EmblemEditorOptionsList", function ( f485_arg0 )
 	local f485_local0 = {}
-	local f485_local1 = CraftSlotsFullByStorageType( f485_arg0, Enum[@"storagefiletype"][@"storage_emblems"] )
+	local f485_local1 = CraftSlotsFullByStorageType( f485_arg0, Enum.StorageFileType[@"storage_emblems"] )
 	local f485_local2 = CoD.perController[f485_arg0].selectedEmblemModel
-	local f485_local3 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f485_local2, "isUsed" ) ) == 1
+	local f485_local3 = Engine.GetModelValue( Engine.GetModel( f485_local2, "isUsed" ) ) == 1
 	if not IsPreBuiltEmblemTab( f485_arg0 ) then
 		local f485_local4 = @"hash_15C0A6F0BCEAC8DF"
 		local f485_local5 = @"hash_15C0A6F0BCEAC8DF"
@@ -9117,8 +9116,8 @@ DataSources.EmblemEditorOptionsList = ListHelper_SetupDataSource( "EmblemEditorO
 	end
 	if f485_local3 then
 		table.insert( f485_local0, {
-			displayText = @"hash_2CDD21EE3622D1D1",
-			displayDesc = @"hash_2CDD21EE3622D1D1",
+			displayText = "menu/emblem_save_as_new",
+			displayDesc = "menu/emblem_save_as_new",
 			action = function ( f487_arg0, f487_arg1, f487_arg2, f487_arg3, f487_arg4 )
 				local f487_local0 = IsPreBuiltEmblemTab( f487_arg2 ) or f485_local3
 				CoD.CraftUtility.EmblemEditor_SaveEmblemAndEdit( f487_arg4, f487_arg1, f487_arg2, f485_local2, f487_local0 )
@@ -9132,8 +9131,8 @@ DataSources.EmblemEditorOptionsList = ListHelper_SetupDataSource( "EmblemEditorO
 		} )
 		if not IsPreBuiltEmblemTab( f485_arg0 ) then
 			table.insert( f485_local0, {
-				displayText = @"hash_430BBCC54CF2C2AE",
-				displayDesc = @"hash_430BBCC54CF2C2AE",
+				displayText = "menu/craft_rename",
+				displayDesc = "menu/craft_rename",
 				action = function ( f488_arg0, f488_arg1, f488_arg2, f488_arg3, f488_arg4 )
 					ShowKeyboard( f488_arg0, f488_arg1, f488_arg2, "KEYBOARD_TYPE_EMBLEMS" )
 				end,
@@ -9175,12 +9174,12 @@ DataSources.EmblemOptionsButtonList = ListHelper_SetupDataSource( "EmblemOptions
 	local f490_local1 = false
 	local f490_local2 = false
 	local f490_local3 = false
-	local f490_local4 = CraftSlotsFullByStorageType( f490_arg0, Enum[@"storagefiletype"][@"storage_emblems"] )
+	local f490_local4 = CraftSlotsFullByStorageType( f490_arg0, Enum.StorageFileType[@"storage_emblems"] )
 	local f490_local5 = CoD.perController[f490_arg0].selectedEmblemModel
 	if f490_local5 then
-		local f490_local6 = Engine[@"getmodel"]( f490_local5, "readOnly" )
+		local f490_local6 = Engine.GetModel( f490_local5, "readOnly" )
 		if f490_local6 then
-			local f490_local7 = Engine[@"getmodelvalue"]( f490_local6 )
+			local f490_local7 = Engine.GetModelValue( f490_local6 )
 			if f490_local7 and f490_local7 == 1 then
 				f490_local3 = true
 			end
@@ -9189,17 +9188,17 @@ DataSources.EmblemOptionsButtonList = ListHelper_SetupDataSource( "EmblemOptions
 	if f490_local4 == true or f490_local3 == true then
 		f490_local1 = true
 	end
-	local f490_local6 = 0x19523BBDFAA26A
+	local f490_local6 = "menu/emblems_publish_desc"
 	if f490_local3 == true then
 		f490_local2 = true
-		f490_local6 = @"hash_4DF51E7C509B4814"
+		f490_local6 = "menu/cannot_publish_downloaded_desc"
 	else
 		
 	end
 	table.insert( f490_local0, {
 		displayText = @"menu/delete",
 		displayImage = "t7_icon_menu_simple_delete",
-		displayDesc = @"hash_69BE1658124CBFFF",
+		displayDesc = "menu/emblem_delete_desc",
 		action = function ( f491_arg0, f491_arg1, f491_arg2, f491_arg3, f491_arg4 )
 			CoD.CraftUtility.EmblemClear( f491_arg0, f491_arg1, f491_arg2, f491_arg3, f491_arg4 )
 			GoBack( f491_arg0, f491_arg2 )
@@ -9209,7 +9208,7 @@ DataSources.EmblemOptionsButtonList = ListHelper_SetupDataSource( "EmblemOptions
 	table.insert( f490_local0, {
 		displayText = @"menu/copy",
 		displayImage = "t7_icon_menu_simple_copy",
-		displayDesc = @"hash_3B71D881428A80C9",
+		displayDesc = "menu/emblem_copy_desc",
 		action = function ( f492_arg0, f492_arg1, f492_arg2, f492_arg3, f492_arg4 )
 			CoD.CraftUtility.EmblemSelect_CopyEmblem( f492_arg0, f492_arg1, f492_arg2, f492_arg4 )
 			GoBack( f492_arg0, f492_arg2 )
@@ -9220,16 +9219,16 @@ DataSources.EmblemOptionsButtonList = ListHelper_SetupDataSource( "EmblemOptions
 		table.insert( f490_local0, {
 			displayText = @"menu/rename",
 			displayImage = "t7_icon_menu_simple_rename",
-			displayDesc = @"hash_60F60FD8E452A1C",
+			displayDesc = "menu/emblem_rename_desc",
 			action = CoD.CraftUtility.EmblemRename,
 			disabled = false
 		} )
 	end
 	if CanShowMediaManager() then
 		table.insert( f490_local0, {
-			displayText = @"hash_24C3EEA8A4B1E631",
+			displayText = "menu/media_manager",
 			displayImage = "t7_icon_menu_simple_media_manager",
-			displayDesc = @"hash_79BEC0DFABD8888B",
+			displayDesc = "menu/media_manager_desc",
 			action = GoBackAndOpenMediaManagerOnParent,
 			param = "emblem",
 			disabled = false
@@ -9303,12 +9302,12 @@ DataSources.PaintjobOptionsButtonList = ListHelper_SetupDataSource( "PaintjobOpt
 	local f498_local1 = false
 	local f498_local2 = false
 	local f498_local3 = false
-	local f498_local4 = CraftSlotsFullByStorageType( f498_arg0, Enum[@"storagefiletype"][@"storage_paintjobs"] )
+	local f498_local4 = CraftSlotsFullByStorageType( f498_arg0, Enum.StorageFileType[@"storage_paintjobs"] )
 	local f498_local5 = CoD.perController[f498_arg0].selectedPaintjobModel
 	if f498_local5 then
-		local f498_local6 = Engine[@"getmodel"]( f498_local5, "readOnly" )
+		local f498_local6 = Engine.GetModel( f498_local5, "readOnly" )
 		if f498_local6 then
-			local f498_local7 = Engine[@"getmodelvalue"]( f498_local6 )
+			local f498_local7 = Engine.GetModelValue( f498_local6 )
 			if f498_local7 and f498_local7 == 1 then
 				f498_local3 = true
 			end
@@ -9317,15 +9316,15 @@ DataSources.PaintjobOptionsButtonList = ListHelper_SetupDataSource( "PaintjobOpt
 	if f498_local4 == true or f498_local3 == true then
 		f498_local1 = true
 	end
-	local f498_local6 = @"hash_1DD563C0A8BF1694"
+	local f498_local6 = "menu/paintjob_publish_desc"
 	if f498_local3 == true then
 		f498_local2 = true
-		f498_local6 = @"hash_4DF51E7C509B4814"
+		f498_local6 = "menu/cannot_publish_downloaded_desc"
 	end
 	table.insert( f498_local0, {
 		displayText = @"menu/delete",
 		displayImage = "t7_icon_menu_simple_delete",
-		displayDesc = @"hash_5499B64FA62DD766",
+		displayDesc = "menu/paintjob_delete_desc",
 		action = function ( f499_arg0, f499_arg1, f499_arg2, f499_arg3, f499_arg4 )
 			CoD.CraftUtility.PaintjobClear( f499_arg0, f499_arg1, f499_arg2, f499_arg3, f499_arg4 )
 			GoBack( f499_arg0, f499_arg2 )
@@ -9335,7 +9334,7 @@ DataSources.PaintjobOptionsButtonList = ListHelper_SetupDataSource( "PaintjobOpt
 	table.insert( f498_local0, {
 		displayText = @"menu/copy",
 		displayImage = "t7_icon_menu_simple_copy",
-		displayDesc = @"hash_325139323E2D80F0",
+		displayDesc = "menu/paintjob_copy_desc",
 		action = function ( f500_arg0, f500_arg1, f500_arg2, f500_arg3, f500_arg4 )
 			PaintjobSelector_CopyPaintjob( f500_arg0, f500_arg1, f500_arg2, f500_arg3, f500_arg4 )
 			GoBack( f500_arg0, f500_arg2 )
@@ -9346,22 +9345,22 @@ DataSources.PaintjobOptionsButtonList = ListHelper_SetupDataSource( "PaintjobOpt
 		table.insert( f498_local0, {
 			displayText = @"menu/rename",
 			displayImage = "t7_icon_menu_simple_rename",
-			displayDesc = @"hash_289183EFAA3E7211",
+			displayDesc = "menu/paintjob_rename_desc",
 			action = CoD.CraftUtility.PaintjobRename,
 			disabled = false
 		} )
 	end
 	if CanShowMediaManager() then
 		table.insert( f498_local0, {
-			displayText = @"hash_24C3EEA8A4B1E631",
+			displayText = "menu/media_manager",
 			displayImage = "t7_icon_menu_simple_media_manager",
-			displayDesc = @"hash_79BEC0DFABD8888B",
+			displayDesc = "menu/media_manager_desc",
 			action = GoBackAndOpenMediaManagerOnParent,
 			param = "paintjob",
 			disabled = false
 		} )
 	end
-	if Engine[@"issteamworkshopenabled"]() then
+	if Engine.IsSteamWorkshopEnabled() then
 		table.insert( f498_local0, {
 			displayText = "PLATFORM_STEAM_PUBLISH",
 			displayImage = "",
@@ -9389,8 +9388,8 @@ end )
 DataSources.PaintjobEditorOptionsList = ListHelper_SetupDataSource( "PaintjobEditorOptionsList", function ( f501_arg0 )
 	local f501_local0 = {}
 	local f501_local1 = CoD.perController[f501_arg0].selectedPaintjobModel
-	local f501_local2 = CraftSlotsFullByStorageType( f501_arg0, Enum[@"storagefiletype"][@"storage_paintjobs"] )
-	local f501_local3 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f501_local1, "weaponIndex" ) ) ~= CoD.CraftUtility.Paintjobs.EMPTY_PAINTJOB_SLOT_WEAPON_INDEX
+	local f501_local2 = CraftSlotsFullByStorageType( f501_arg0, Enum.StorageFileType[@"storage_paintjobs"] )
+	local f501_local3 = Engine.GetModelValue( Engine.GetModel( f501_local1, "weaponIndex" ) ) ~= CoD.CraftUtility.Paintjobs.EMPTY_PAINTJOB_SLOT_WEAPON_INDEX
 	local f501_local4 = @"hash_15C0A6F0BCEAC8DF"
 	local f501_local5 = @"hash_15C0A6F0BCEAC8DF"
 	if not f501_local3 then
@@ -9413,8 +9412,8 @@ DataSources.PaintjobEditorOptionsList = ListHelper_SetupDataSource( "PaintjobEdi
 	} )
 	if f501_local3 then
 		table.insert( f501_local0, {
-			displayText = @"hash_2CDD21EE3622D1D1",
-			displayDesc = @"hash_2CDD21EE3622D1D1",
+			displayText = "menu/emblem_save_as_new",
+			displayDesc = "menu/emblem_save_as_new",
 			action = function ( f503_arg0, f503_arg1, f503_arg2, f503_arg3, f503_arg4 )
 				local f503_local0 = f501_local3
 				CoD.CraftUtility.PaintjobEditor_SavePaintjobAndEdit( f503_arg4, f503_arg1, f503_arg2, f501_local1, f503_local0 )
@@ -9427,8 +9426,8 @@ DataSources.PaintjobEditorOptionsList = ListHelper_SetupDataSource( "PaintjobEdi
 			disabled = f501_local2
 		} )
 		table.insert( f501_local0, {
-			displayText = @"hash_430BBCC54CF2C2AE",
-			displayDesc = @"hash_430BBCC54CF2C2AE",
+			displayText = "menu/craft_rename",
+			displayDesc = "menu/craft_rename",
 			action = function ( f504_arg0, f504_arg1, f504_arg2, f504_arg3, f504_arg4 )
 				ShowKeyboard( f504_arg0, f504_arg1, f504_arg2, "KEYBOARD_TYPE_PAINTJOB" )
 			end,
@@ -9466,11 +9465,11 @@ DataSources.PaintjobEditorOptionsList = ListHelper_SetupDataSource( "PaintjobEdi
 end )
 DataSources.PaintjobLayerOptionsButtonList = ListHelper_SetupDataSource( "PaintjobLayerOptionsButtonList", function ( f506_arg0 )
 	local f506_local0 = IsGridOn( f506_arg0, CoD.CraftUtility.GetGridTypeName( f506_arg0 ) )
-	local f506_local1 = @"hash_61B1EADD23B558DA"
-	local f506_local2 = @"hash_763AD3EE1BC352AE"
+	local f506_local1 = "menu/emblem_turn_grid_on"
+	local f506_local2 = "menu/emblem_turn_grid_on_hint"
 	if f506_local0 then
-		f506_local1 = @"hash_368FA1C3AD0EAE2C"
-		f506_local2 = @"hash_3B323885B5AC6F1C"
+		f506_local1 = "menu/emblem_turn_grid_off"
+		f506_local2 = "menu/emblem_turn_grid_off_hint"
 	end
 	local f506_local3 = {
 		{
@@ -9500,44 +9499,44 @@ end )
 DataSources.GunsmithSnapshotModeButtonList = ListHelper_SetupDataSource( "GunsmithSnapshotModeButtonList", function ( f507_arg0 )
 	local f507_local0 = {}
 	table.insert( f507_local0, {
-		displayText = @"hash_0",
+		displayText = 0x0,
 		displayImage = "t7_menu_gunsmith_statssingle",
-		displayDesc = @"hash_282A1B6744C1A6DF",
+		displayDesc = "menu/gunsmith_snapshot_stats",
 		action = Gunsmith_SnapshotToggleDisplayProperty,
 		visibilityModelName = "GunsmithSnapshot.Stats"
 	} )
 	table.insert( f507_local0, {
-		displayText = @"hash_0",
+		displayText = 0x0,
 		displayImage = "t7_menu_gunsmith_weaponlevel",
-		displayDesc = 0x79B38B37C4A31D,
+		displayDesc = "menu/gunsmith_snapshot_weapon_level",
 		action = Gunsmith_SnapshotToggleDisplayProperty,
 		visibilityModelName = "GunsmithSnapshot.WeaponLevel"
 	} )
 	table.insert( f507_local0, {
-		displayText = @"hash_0",
+		displayText = 0x0,
 		displayImage = "t7_menu_gunsmith_player",
-		displayDesc = @"hash_B27BE165F75034C",
+		displayDesc = "menu/gunsmith_snapshot_playerid",
 		action = Gunsmith_SnapshotToggleDisplayProperty,
 		visibilityModelName = "GunsmithSnapshot.PlayerID"
 	} )
 	table.insert( f507_local0, {
-		displayText = @"hash_0",
+		displayText = 0x0,
 		displayImage = "t7_menu_gunsmith_weaponname",
-		displayDesc = @"hash_227FF8B6BB77DF06",
+		displayDesc = "menu/gunsmith_snapshot_weapon_name",
 		action = Gunsmith_SnapshotToggleDisplayProperty,
 		visibilityModelName = "GunsmithSnapshot.WeaponName"
 	} )
 	table.insert( f507_local0, {
-		displayText = @"hash_0",
+		displayText = 0x0,
 		displayImage = "t7_menu_gunsmith_opticattach",
-		displayDesc = @"hash_1B5AFE0311749176",
+		displayDesc = "menu/gunsmith_snapshot_attachments",
 		action = Gunsmith_SnapshotToggleDisplayProperty,
 		visibilityModelName = "GunsmithSnapshot.AttachmentIcons"
 	} )
 	table.insert( f507_local0, {
-		displayText = @"hash_0",
+		displayText = 0x0,
 		displayImage = "t7_menu_gunsmith_bo3logo",
-		displayDesc = @"hash_5638D4FFF7BEFE93",
+		displayDesc = "menu/gunsmith_snapshot_bo3logo",
 		action = Gunsmith_SnapshotToggleDisplayProperty,
 		visibilityModelName = "GunsmithSnapshot.BO3Logo"
 	} )
@@ -9561,7 +9560,7 @@ end )
 DataSources.MediaManagerPaintjobList = {
 	prepare = function ( f508_arg0, f508_arg1, f508_arg2 )
 		f508_arg1.controller = f508_arg0
-		f508_arg1.paintjobListModel = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f508_arg0 ), "MediaManager.PaintjobList" )
+		f508_arg1.paintjobListModel = Engine.CreateModel( Engine.GetModelForController( f508_arg0 ), "MediaManager.PaintjobList" )
 		f508_arg1.totalPaintjobs = 0
 		f508_arg1.paintjobList = {}
 		local f508_local0 = {
@@ -9585,33 +9584,33 @@ DataSources.MediaManagerPaintjobList = {
 		return f509_arg0.totalPaintjobs
 	end,
 	getItem = function ( f510_arg0, f510_arg1, f510_arg2 )
-		local f510_local0 = Engine[@"createmodel"]( f510_arg1.paintjobListModel, "mm_paintjob_" .. f510_arg2 )
+		local f510_local0 = Engine.CreateModel( f510_arg1.paintjobListModel, "mm_paintjob_" .. f510_arg2 )
 		local f510_local1 = f510_arg1.paintjobList[f510_arg2]
 		if f510_local1 then
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f510_local0, "showBuyImage" ), 0 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f510_local0, "isBuyMore" ), false )
+			Engine.SetModelValue( Engine.CreateModel( f510_local0, "showBuyImage" ), 0 )
+			Engine.SetModelValue( Engine.CreateModel( f510_local0, "isBuyMore" ), false )
 			if f510_local1.isBuyMore ~= nil and f510_local1.isBuyMore == true then
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f510_local0, "isBuyMore" ), true )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f510_local0, "showBuyImage" ), 1 )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f510_local0, "sortIndex" ), 1 )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f510_local0, "paintjobName" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_7E16CE893CADAD65" ) )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f510_local0, "plusImageSrc" ), "uie_t7_icon_codpoints" )
+				Engine.SetModelValue( Engine.CreateModel( f510_local0, "isBuyMore" ), true )
+				Engine.SetModelValue( Engine.CreateModel( f510_local0, "showBuyImage" ), 1 )
+				Engine.SetModelValue( Engine.CreateModel( f510_local0, "sortIndex" ), 1 )
+				Engine.SetModelValue( Engine.CreateModel( f510_local0, "paintjobName" ), Engine[@"hash_4F9F1239CFD921FE"]( "menu/fileshare_buy_slots" ) )
+				Engine.SetModelValue( Engine.CreateModel( f510_local0, "plusImageSrc" ), "uie_t7_icon_codpoints" )
 			end
 			if CoD.CraftUtility.Paintjobs.IsPaintjobIndexOccupied( f510_local1.paintjobSlot ) then
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f510_local0, "paintjobName" ), f510_local1.paintjobName )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f510_local0, "paintjobTextEntry" ), f510_local1.paintjobName )
+				Engine.SetModelValue( Engine.CreateModel( f510_local0, "paintjobName" ), f510_local1.paintjobName )
+				Engine.SetModelValue( Engine.CreateModel( f510_local0, "paintjobTextEntry" ), f510_local1.paintjobName )
 			end
 			CoD.SetCustomization( f510_arg0, f510_local1.weaponIndex, "weapon_index" )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f510_local0, "sortIndex" ), f510_local1.sortIndex )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f510_local0, "weaponIndex" ), f510_local1.weaponIndex )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f510_local0, "paintjobSlot" ), f510_local1.paintjobSlot )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f510_local0, "authorName" ), Engine[@"getselfgamertag"]( f510_arg0 ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f510_local0, "createTime" ), f510_local1.createTime )
+			Engine.SetModelValue( Engine.CreateModel( f510_local0, "sortIndex" ), f510_local1.sortIndex )
+			Engine.SetModelValue( Engine.CreateModel( f510_local0, "weaponIndex" ), f510_local1.weaponIndex )
+			Engine.SetModelValue( Engine.CreateModel( f510_local0, "paintjobSlot" ), f510_local1.paintjobSlot )
+			Engine.SetModelValue( Engine.CreateModel( f510_local0, "authorName" ), Engine.GetSelfGamertag( f510_arg0 ) )
+			Engine.SetModelValue( Engine.CreateModel( f510_local0, "createTime" ), f510_local1.createTime )
 			local f510_local2 = ""
 			if f510_local1.weaponIndex ~= nil then
-				f510_local2 = Engine[@"toupper"]( Engine[@"hash_4F9F1239CFD921FE"]( Engine[@"getitemname"]( f510_local1.weaponIndex ) ) )
+				f510_local2 = Engine.ToUpper( Engine[@"hash_4F9F1239CFD921FE"]( Engine.GetItemName( f510_local1.weaponIndex ) ) )
 			end
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f510_local0, "weaponName" ), f510_local2 )
+			Engine.SetModelValue( Engine.CreateModel( f510_local0, "weaponName" ), f510_local2 )
 			return f510_local0
 		else
 			
@@ -9621,7 +9620,7 @@ DataSources.MediaManagerPaintjobList = {
 DataSources.ShowcaseEmblemList = {
 	prepare = function ( f511_arg0, f511_arg1, f511_arg2 )
 		f511_arg1.controller = f511_arg0
-		f511_arg1.emblemListModel = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f511_arg0 ), "MediaManager.ShowcaseEmblemList" )
+		f511_arg1.emblemListModel = Engine.CreateModel( Engine.GetModelForController( f511_arg0 ), "MediaManager.ShowcaseEmblemList" )
 		f511_arg1.totalEmblems = 0
 		f511_arg1.emblemList = {}
 		for f511_local3, f511_local4 in pairs( CoD.CraftUtility.Emblems.GetSortedEmblemsList( f511_arg0, CoD.perController[f511_arg0].selectedEmblemTabStorageType, false ) ) do
@@ -9635,32 +9634,32 @@ DataSources.ShowcaseEmblemList = {
 		return f512_arg0.totalEmblems
 	end,
 	getItem = function ( f513_arg0, f513_arg1, f513_arg2 )
-		local f513_local0 = Engine[@"createmodel"]( f513_arg1.emblemListModel, "mm_emblem_" .. f513_arg2 )
+		local f513_local0 = Engine.CreateModel( f513_arg1.emblemListModel, "mm_emblem_" .. f513_arg2 )
 		local f513_local1 = f513_arg1.emblemList[f513_arg2]
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f513_local0, "isBuyMore" ), false )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f513_local0, "showBuyImage" ), 0 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f513_local0, "emblemTitle" ), f513_local1.emblemTitle )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f513_local0, "name" ), f513_local1.emblemName )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f513_local0, "emblemIndex" ), f513_local1.emblemIndex )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f513_local0, "emblemTextEntry" ), f513_local1.emblemTextEntry )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f513_local0, "subTitle" ), f513_local1.subTitle )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f513_local0, "storageFileType" ), CoD.perController[f513_arg0].selectedEmblemTabStorageType )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f513_local0, "isUsed" ), f513_local1.isUsed )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f513_local0, "showBuyImage" ), 0 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f513_local0, "readOnly" ), f513_local1.readOnly )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f513_local0, "isBMClassified" ), false )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f513_local0, "sortIndex" ), f513_local1.sortIndex )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f513_local0, "hintText" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_46D0E4674E87A8C9" ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f513_local0, "authorName" ), Engine[@"getselfgamertag"]( f513_arg0 ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f513_local0, "createTime" ), f513_local1.createTime )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f513_local0, "plusImageSrc" ), "uie_t7_icon_codpoints" )
+		Engine.SetModelValue( Engine.CreateModel( f513_local0, "isBuyMore" ), false )
+		Engine.SetModelValue( Engine.CreateModel( f513_local0, "showBuyImage" ), 0 )
+		Engine.SetModelValue( Engine.CreateModel( f513_local0, "emblemTitle" ), f513_local1.emblemTitle )
+		Engine.SetModelValue( Engine.CreateModel( f513_local0, "name" ), f513_local1.emblemName )
+		Engine.SetModelValue( Engine.CreateModel( f513_local0, "emblemIndex" ), f513_local1.emblemIndex )
+		Engine.SetModelValue( Engine.CreateModel( f513_local0, "emblemTextEntry" ), f513_local1.emblemTextEntry )
+		Engine.SetModelValue( Engine.CreateModel( f513_local0, "subTitle" ), f513_local1.subTitle )
+		Engine.SetModelValue( Engine.CreateModel( f513_local0, "storageFileType" ), CoD.perController[f513_arg0].selectedEmblemTabStorageType )
+		Engine.SetModelValue( Engine.CreateModel( f513_local0, "isUsed" ), f513_local1.isUsed )
+		Engine.SetModelValue( Engine.CreateModel( f513_local0, "showBuyImage" ), 0 )
+		Engine.SetModelValue( Engine.CreateModel( f513_local0, "readOnly" ), f513_local1.readOnly )
+		Engine.SetModelValue( Engine.CreateModel( f513_local0, "isBMClassified" ), false )
+		Engine.SetModelValue( Engine.CreateModel( f513_local0, "sortIndex" ), f513_local1.sortIndex )
+		Engine.SetModelValue( Engine.CreateModel( f513_local0, "hintText" ), Engine[@"hash_4F9F1239CFD921FE"]( "menu/button_emblem_set" ) )
+		Engine.SetModelValue( Engine.CreateModel( f513_local0, "authorName" ), Engine.GetSelfGamertag( f513_arg0 ) )
+		Engine.SetModelValue( Engine.CreateModel( f513_local0, "createTime" ), f513_local1.createTime )
+		Engine.SetModelValue( Engine.CreateModel( f513_local0, "plusImageSrc" ), "uie_t7_icon_codpoints" )
 		return f513_local0
 	end
 }
 DataSources.MediaManagerEmblemList = {
 	prepare = function ( f514_arg0, f514_arg1, f514_arg2 )
 		f514_arg1.controller = f514_arg0
-		f514_arg1.emblemListModel = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f514_arg0 ), "MediaManager.EmblemList" )
+		f514_arg1.emblemListModel = Engine.CreateModel( Engine.GetModelForController( f514_arg0 ), "MediaManager.EmblemList" )
 		f514_arg1.totalEmblems = 0
 		f514_arg1.emblemList = {}
 		local f514_local0 = {
@@ -9684,34 +9683,34 @@ DataSources.MediaManagerEmblemList = {
 		return f515_arg0.totalEmblems
 	end,
 	getItem = function ( f516_arg0, f516_arg1, f516_arg2 )
-		local f516_local0 = Engine[@"createmodel"]( f516_arg1.emblemListModel, "mm_emblem_" .. f516_arg2 )
+		local f516_local0 = Engine.CreateModel( f516_arg1.emblemListModel, "mm_emblem_" .. f516_arg2 )
 		local f516_local1 = f516_arg1.emblemList[f516_arg2]
 		if f516_local1.isBuyMore and f516_local1.isBuyMore == true then
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "isBuyMore" ), true )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "showBuyImage" ), 1 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "sortIndex" ), 1 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "name" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_7E16CE893CADAD65" ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "emblemTitle" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_7E16CE893CADAD65" ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "isUsed" ), false )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "plusImageSrc" ), "uie_t7_icon_codpoints" )
+			Engine.SetModelValue( Engine.CreateModel( f516_local0, "isBuyMore" ), true )
+			Engine.SetModelValue( Engine.CreateModel( f516_local0, "showBuyImage" ), 1 )
+			Engine.SetModelValue( Engine.CreateModel( f516_local0, "sortIndex" ), 1 )
+			Engine.SetModelValue( Engine.CreateModel( f516_local0, "name" ), Engine[@"hash_4F9F1239CFD921FE"]( "menu/fileshare_buy_slots" ) )
+			Engine.SetModelValue( Engine.CreateModel( f516_local0, "emblemTitle" ), Engine[@"hash_4F9F1239CFD921FE"]( "menu/fileshare_buy_slots" ) )
+			Engine.SetModelValue( Engine.CreateModel( f516_local0, "isUsed" ), false )
+			Engine.SetModelValue( Engine.CreateModel( f516_local0, "plusImageSrc" ), "uie_t7_icon_codpoints" )
 		else
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "isBuyMore" ), false )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "showBuyImage" ), 0 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "emblemTitle" ), f516_local1.emblemTitle )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "name" ), f516_local1.emblemName )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "emblemIndex" ), f516_local1.emblemIndex )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "emblemTextEntry" ), f516_local1.emblemTextEntry )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "subTitle" ), f516_local1.subTitle )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "storageFileType" ), CoD.perController[f516_arg0].selectedEmblemTabStorageType )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "isUsed" ), f516_local1.isUsed )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "showBuyImage" ), 0 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "readOnly" ), f516_local1.readOnly )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "isBMClassified" ), false )
+			Engine.SetModelValue( Engine.CreateModel( f516_local0, "isBuyMore" ), false )
+			Engine.SetModelValue( Engine.CreateModel( f516_local0, "showBuyImage" ), 0 )
+			Engine.SetModelValue( Engine.CreateModel( f516_local0, "emblemTitle" ), f516_local1.emblemTitle )
+			Engine.SetModelValue( Engine.CreateModel( f516_local0, "name" ), f516_local1.emblemName )
+			Engine.SetModelValue( Engine.CreateModel( f516_local0, "emblemIndex" ), f516_local1.emblemIndex )
+			Engine.SetModelValue( Engine.CreateModel( f516_local0, "emblemTextEntry" ), f516_local1.emblemTextEntry )
+			Engine.SetModelValue( Engine.CreateModel( f516_local0, "subTitle" ), f516_local1.subTitle )
+			Engine.SetModelValue( Engine.CreateModel( f516_local0, "storageFileType" ), CoD.perController[f516_arg0].selectedEmblemTabStorageType )
+			Engine.SetModelValue( Engine.CreateModel( f516_local0, "isUsed" ), f516_local1.isUsed )
+			Engine.SetModelValue( Engine.CreateModel( f516_local0, "showBuyImage" ), 0 )
+			Engine.SetModelValue( Engine.CreateModel( f516_local0, "readOnly" ), f516_local1.readOnly )
+			Engine.SetModelValue( Engine.CreateModel( f516_local0, "isBMClassified" ), false )
 		end
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "sortIndex" ), f516_local1.sortIndex )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "hintText" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_46D0E4674E87A8C9" ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "authorName" ), Engine[@"getselfgamertag"]( f516_arg0 ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f516_local0, "createTime" ), f516_local1.createTime )
+		Engine.SetModelValue( Engine.CreateModel( f516_local0, "sortIndex" ), f516_local1.sortIndex )
+		Engine.SetModelValue( Engine.CreateModel( f516_local0, "hintText" ), Engine[@"hash_4F9F1239CFD921FE"]( "menu/button_emblem_set" ) )
+		Engine.SetModelValue( Engine.CreateModel( f516_local0, "authorName" ), Engine.GetSelfGamertag( f516_arg0 ) )
+		Engine.SetModelValue( Engine.CreateModel( f516_local0, "createTime" ), f516_local1.createTime )
 		return f516_local0
 	end
 }
@@ -9719,8 +9718,8 @@ DataSources.MediaManagerCustomGamesList = {
 	prepare = function ( f517_arg0, f517_arg1, f517_arg2 )
 		f517_arg1.showDefault = false
 		f517_arg1.controller = f517_arg0
-		f517_arg1.rootModel = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "CustomGamesRoot" )
-		f517_arg1.numFiles = Engine[@"getcustomgamescount"]( f517_arg0, Engine[@"hash_FFDD58B353B5C0B"](), "" )
+		f517_arg1.rootModel = Engine.CreateModel( Engine.GetGlobalModel(), "CustomGamesRoot" )
+		f517_arg1.numFiles = Engine.GetCustomGamesCount( f517_arg0, Engine[@"hash_FFDD58B353B5C0B"](), "" )
 		f517_arg1.communityOption = false
 		if f517_arg1.showDefault == true then
 			f517_arg1.numFiles = f517_arg1.numFiles + 1
@@ -9731,69 +9730,69 @@ DataSources.MediaManagerCustomGamesList = {
 		return f518_arg0.numFiles
 	end,
 	getItem = function ( f519_arg0, f519_arg1, f519_arg2 )
-		local f519_local0 = Engine[@"createmodel"]( f519_arg1.rootModel, "mm_customgames_" .. f519_arg2 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f519_local0, "uiIndex" ), f519_arg2 )
+		local f519_local0 = Engine.CreateModel( f519_arg1.rootModel, "mm_customgames_" .. f519_arg2 )
+		Engine.SetModelValue( Engine.CreateModel( f519_local0, "uiIndex" ), f519_arg2 )
 		if f519_arg1.showDefault == true and f519_arg2 == 1 then
-			local f519_local1 = Engine[@"getgametypesbase"]()
+			local f519_local1 = Engine.GetGametypesBase()
 			local f519_local2 = GetCurrentUIGameType( f519_arg0 )
 			local f519_local3 = ""
 			for f519_local7, f519_local8 in pairs( f519_local1 ) do
 				if f519_local8.category == "standard" and f519_local8.gametype == f519_local2 then
-					f519_local3 = Engine[@"localize"]( f519_local8.name )
+					f519_local3 = Engine.Localize( f519_local8.name )
 					break
 				end
 			end
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f519_local0, "text" ), f519_local3 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f519_local0, "inUse" ), true )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f519_local0, "isOfficial" ), true )
+			Engine.SetModelValue( Engine.CreateModel( f519_local0, "text" ), f519_local3 )
+			Engine.SetModelValue( Engine.CreateModel( f519_local0, "inUse" ), true )
+			Engine.SetModelValue( Engine.CreateModel( f519_local0, "isOfficial" ), true )
 		else
 			local f519_local1 = 1
 			if f519_arg1.showDefault == true then
 				f519_local1 = 2
 			end
 			local f519_local2 = f519_arg2 - f519_local1
-			local f519_local3 = Engine[@"getcustomgamedata"]( f519_arg0, Engine[@"hash_FFDD58B353B5C0B"](), f519_local2 )
+			local f519_local3 = Engine.GetCustomGameData( f519_arg0, Engine[@"hash_FFDD58B353B5C0B"](), f519_local2 )
 			local f519_local4 = Engine[@"getgametypeinfo"]( f519_local3.gameType:get() )
 			local f519_local5 = f519_local3.gameName:get()
 			local f519_local6 = f519_local3.gameDescription:get()
-			if Engine[@"getmodelvalue"]( f519_local0, "isOfficial" ) then
+			if Engine.GetModelValue( f519_local0, "isOfficial" ) then
 				f519_local5 = Engine[@"hash_4F9F1239CFD921FE"]( @"mpui/" .. f519_local3.gameName .. "_CAPS" )
 				f519_local6 = Engine[@"hash_4F9F1239CFD921FE"]( @"mpui/" .. f519_local3.gameName .. "_DESC" )
 			end
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f519_local0, "name" ), f519_local5 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f519_local0, "gameName" ), f519_local5 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f519_local0, "text" ), f519_local5 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f519_local0, "gameDescription" ), f519_local6 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f519_local0, "slot" ), f519_local2 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f519_local0, "inUse" ), f519_local3.inUse )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f519_local0, "isOfficial" ), f519_local3.isOfficial )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f519_local0, "createTime" ), f519_local3.createTime )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f519_local0, "gameType" ), f519_local3.gameType )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f519_local0, "gameTypeString" ), f519_local3.gameTypeString )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f519_local0, "image" ), f519_local4.image )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f519_local0, "description" ), f519_local4.descriptionRef )
+			Engine.SetModelValue( Engine.CreateModel( f519_local0, "name" ), f519_local5 )
+			Engine.SetModelValue( Engine.CreateModel( f519_local0, "gameName" ), f519_local5 )
+			Engine.SetModelValue( Engine.CreateModel( f519_local0, "text" ), f519_local5 )
+			Engine.SetModelValue( Engine.CreateModel( f519_local0, "gameDescription" ), f519_local6 )
+			Engine.SetModelValue( Engine.CreateModel( f519_local0, "slot" ), f519_local2 )
+			Engine.SetModelValue( Engine.CreateModel( f519_local0, "inUse" ), f519_local3.inUse )
+			Engine.SetModelValue( Engine.CreateModel( f519_local0, "isOfficial" ), f519_local3.isOfficial )
+			Engine.SetModelValue( Engine.CreateModel( f519_local0, "createTime" ), f519_local3.createTime )
+			Engine.SetModelValue( Engine.CreateModel( f519_local0, "gameType" ), f519_local3.gameType )
+			Engine.SetModelValue( Engine.CreateModel( f519_local0, "gameTypeString" ), f519_local3.gameTypeString )
+			Engine.SetModelValue( Engine.CreateModel( f519_local0, "image" ), f519_local4.image )
+			Engine.SetModelValue( Engine.CreateModel( f519_local0, "description" ), f519_local4.descriptionRef )
 		end
 		return f519_local0
 	end
 }
 DataSources.MediaManager = {
 	getModel = function ( f520_arg0 )
-		return Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "MediaManager" )
+		return Engine.CreateModel( Engine.GetGlobalModel(), "MediaManager" )
 	end
 }
 DataSources.MediaManagerSelectedPaintjob = {
 	getModel = function ( f521_arg0 )
-		return Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f521_arg0 ), "MediaManagerSelectedPaintjob" )
+		return Engine.CreateModel( Engine.GetModelForController( f521_arg0 ), "MediaManagerSelectedPaintjob" )
 	end
 }
 DataSources.MediaManagerSelectedVariant = {
 	getModel = function ( f522_arg0 )
-		return Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f522_arg0 ), "MediaManagerSelectedVariant" )
+		return Engine.CreateModel( Engine.GetModelForController( f522_arg0 ), "MediaManagerSelectedVariant" )
 	end
 }
 DataSources.MediaManagerSelectedEmblem = {
 	getModel = function ( f523_arg0 )
-		return Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f523_arg0 ), "MediaManagerSelectedEmblem" )
+		return Engine.CreateModel( Engine.GetModelForController( f523_arg0 ), "MediaManagerSelectedEmblem" )
 	end
 }
 DataSources.MediaManagerSlotsFullButtonList = {
@@ -9802,15 +9801,15 @@ DataSources.MediaManagerSlotsFullButtonList = {
 		if MediaManagerSlotsAvailable( f524_arg0, CoD.FileshareUtility.GetCurrentCategory() ) == false then
 			if CanShowMediaManager() then
 				table.insert( f524_local0, {
-					displayText = @"hash_24C3EEA8A4B1E631",
+					displayText = "menu/media_manager",
 					displayImage = "",
-					displayDesc = @"hash_127D9AE8D6AE0E23",
+					displayDesc = "menu/allow_download_desc",
 					action = GoBackAndOpenMediaManagerOnParent
 				} )
 			end
 			if FileshareCanBuyMoreSlots( f524_arg0 ) == true then
 				table.insert( f524_local0, {
-					displayText = @"hash_7E16CE893CADAD65",
+					displayText = "menu/fileshare_buy_slots",
 					displayImage = "",
 					displayDesc = "MENU_FILESHARE_DOWNLOAD_DESC",
 					action = OpenBuyExtraSlotsPackDialog,
@@ -9818,15 +9817,15 @@ DataSources.MediaManagerSlotsFullButtonList = {
 				} )
 			end
 		end
-		local f524_local1 = Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "FileshareSlotsFullButtonList" ), "list" )
+		local f524_local1 = Engine.CreateModel( Engine.CreateModel( Engine.GetGlobalModel(), "FileshareSlotsFullButtonList" ), "list" )
 		f524_arg1.optionModels = {}
 		for f524_local5, f524_local6 in ipairs( f524_local0 ) do
-			f524_arg1.optionModels[f524_local5] = Engine[@"createmodel"]( f524_local1, "mm_buttonModel_" .. f524_local5 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f524_arg1.optionModels[f524_local5], "displayText" ), Engine[@"toupper"]( Engine[@"localize"]( f524_local6.displayText ) ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f524_arg1.optionModels[f524_local5], "displayImage" ), f524_local6.displayImage )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f524_arg1.optionModels[f524_local5], "hintText" ), Engine[@"localize"]( f524_local6.displayDesc ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f524_arg1.optionModels[f524_local5], "action" ), f524_local6.action )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f524_arg1.optionModels[f524_local5], "param" ), f524_local6.param )
+			f524_arg1.optionModels[f524_local5] = Engine.CreateModel( f524_local1, "mm_buttonModel_" .. f524_local5 )
+			Engine.SetModelValue( Engine.CreateModel( f524_arg1.optionModels[f524_local5], "displayText" ), Engine.ToUpper( Engine.Localize( f524_local6.displayText ) ) )
+			Engine.SetModelValue( Engine.CreateModel( f524_arg1.optionModels[f524_local5], "displayImage" ), f524_local6.displayImage )
+			Engine.SetModelValue( Engine.CreateModel( f524_arg1.optionModels[f524_local5], "hintText" ), Engine.Localize( f524_local6.displayDesc ) )
+			Engine.SetModelValue( Engine.CreateModel( f524_arg1.optionModels[f524_local5], "action" ), f524_local6.action )
+			Engine.SetModelValue( Engine.CreateModel( f524_arg1.optionModels[f524_local5], "param" ), f524_local6.param )
 		end
 	end,
 	getCount = function ( f525_arg0 )
@@ -9839,7 +9838,7 @@ DataSources.MediaManagerSlotsFullButtonList = {
 DataSources.PaintjobList = {
 	prepare = function ( f527_arg0, f527_arg1, f527_arg2 )
 		f527_arg1.controller = f527_arg0
-		f527_arg1.paintjobListModel = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f527_arg0 ), "Paintshop.PaintjobList" )
+		f527_arg1.paintjobListModel = Engine.CreateModel( Engine.GetModelForController( f527_arg0 ), "Paintshop.PaintjobList" )
 		local f527_local0 = CoD.CraftUtility.Paintjobs.GetTotalUsedPaintjobs()
 		local f527_local1 = CoD.CraftUtility.Paintjobs.GetTotalAllowedPaintjobs( f527_arg0 )
 		f527_arg1.paintjobList = {}
@@ -9850,24 +9849,24 @@ DataSources.PaintjobList = {
 		return f528_arg0.totalPaintjobs
 	end,
 	getItem = function ( f529_arg0, f529_arg1, f529_arg2 )
-		local f529_local0 = Engine[@"createmodel"]( f529_arg1.paintjobListModel, "paintjob_" .. f529_arg2 )
+		local f529_local0 = Engine.CreateModel( f529_arg1.paintjobListModel, "paintjob_" .. f529_arg2 )
 		local f529_local1 = f529_arg1.paintjobList[f529_arg2]
 		if f529_local1 then
 			if CoD.CraftUtility.Paintjobs.IsPaintjobIndexOccupied( f529_local1.paintjobSlot ) then
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f529_local0, "paintjobName" ), f529_local1.paintjobName )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f529_local0, "paintjobTextEntry" ), f529_local1.paintjobName )
+				Engine.SetModelValue( Engine.CreateModel( f529_local0, "paintjobName" ), f529_local1.paintjobName )
+				Engine.SetModelValue( Engine.CreateModel( f529_local0, "paintjobTextEntry" ), f529_local1.paintjobName )
 			else
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f529_local0, "paintjobTextEntry" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_3F833A565D9677C9", CoD.CraftUtility.Paintjobs.GetTotalUsedPaintjobs() + 1 ) )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f529_local0, "paintjobName" ), "" )
+				Engine.SetModelValue( Engine.CreateModel( f529_local0, "paintjobTextEntry" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_3F833A565D9677C9", CoD.CraftUtility.Paintjobs.GetTotalUsedPaintjobs() + 1 ) )
+				Engine.SetModelValue( Engine.CreateModel( f529_local0, "paintjobName" ), "" )
 			end
 			if f529_local1.readOnly ~= nil then
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f529_local0, "readOnly" ), f529_local1.readOnly )
+				Engine.SetModelValue( Engine.CreateModel( f529_local0, "readOnly" ), f529_local1.readOnly )
 			end
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f529_local0, "sortIndex" ), f529_local1.sortIndex )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f529_local0, "paintjobSlot" ), f529_local1.paintjobSlot )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f529_local0, "weaponIndex" ), f529_local1.weaponIndex )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f529_local0, "createTime" ), f529_local1.createTime )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f529_local0, "xuid" ), f529_local1.xuid )
+			Engine.SetModelValue( Engine.CreateModel( f529_local0, "sortIndex" ), f529_local1.sortIndex )
+			Engine.SetModelValue( Engine.CreateModel( f529_local0, "paintjobSlot" ), f529_local1.paintjobSlot )
+			Engine.SetModelValue( Engine.CreateModel( f529_local0, "weaponIndex" ), f529_local1.weaponIndex )
+			Engine.SetModelValue( Engine.CreateModel( f529_local0, "createTime" ), f529_local1.createTime )
+			Engine.SetModelValue( Engine.CreateModel( f529_local0, "xuid" ), f529_local1.xuid )
 			return f529_local0
 		else
 			
@@ -9878,7 +9877,7 @@ DataSources.DecalGroupsList = {
 	prepare = function ( f530_arg0, f530_arg1, f530_arg2 )
 		f530_arg1.controller = f530_arg0
 		f530_arg1.decalGroupsList = {}
-		f530_arg1.decalGroupListModel = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f530_arg0 ), "Emblems.DecalGroupsList" )
+		f530_arg1.decalGroupListModel = Engine.CreateModel( Engine.GetModelForController( f530_arg0 ), "Emblems.DecalGroupsList" )
 		local f530_local0 = CoD.CraftUtility.Groups.GetTotalUsed( f530_arg0 )
 		local f530_local1 = CoD.CraftUtility.Groups.GetTotalAllowed( f530_arg0 )
 		f530_arg1.totalCraftGroups = f530_local0
@@ -9891,7 +9890,7 @@ DataSources.DecalGroupsList = {
 		return f531_arg0.totalCraftGroups
 	end,
 	getItem = function ( f532_arg0, f532_arg1, f532_arg2 )
-		local f532_local0 = Engine[@"createmodel"]( f532_arg1.decalGroupListModel, "decalGroup_" .. f532_arg2 )
+		local f532_local0 = Engine.CreateModel( f532_arg1.decalGroupListModel, "decalGroup_" .. f532_arg2 )
 		local f532_local1 = function ( f533_arg0 )
 			f533_arg0.emblemTextEntry = f533_arg0.emblemName
 			f533_arg0.emblemTitle = f533_arg0.emblemName
@@ -9900,21 +9899,21 @@ DataSources.DecalGroupsList = {
 		
 		local f532_local2 = f532_arg1.decalGroupsList[f532_arg2]
 		f532_local1( f532_local2 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f532_local0, "isNonClickableEmblem" ), 0 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f532_local0, "emblemTitle" ), f532_local2.emblemTitle )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f532_local0, "name" ), f532_local2.emblemName )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f532_local0, "emblemTextEntry" ), f532_local2.emblemTextEntry )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f532_local0, "subTitle" ), f532_local2.subTitle )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f532_local0, "sortIndex" ), f532_local2.sortIndex )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f532_local0, "emblemIndex" ), f532_local2.emblemIndex )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f532_local0, "isUsed" ), f532_local2.isUsed )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f532_local0, "hintText" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_46D0E4674E87A8C9" ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f532_local0, "storageFileType" ), CoD.CraftUtility.Groups.GetSelectedStorageFileType( f532_arg0 ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f532_local0, "layerCount" ), f532_local2.layerCount )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f532_local0, "xuid" ), f532_local2.xuid )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f532_local0, "indexAndFileType" ), tostring( f532_local2.emblemIndex ) .. " " .. tostring( CoD.CraftUtility.Groups.GetSelectedStorageFileType( f532_arg0 ) ) )
+		Engine.SetModelValue( Engine.CreateModel( f532_local0, "isNonClickableEmblem" ), 0 )
+		Engine.SetModelValue( Engine.CreateModel( f532_local0, "emblemTitle" ), f532_local2.emblemTitle )
+		Engine.SetModelValue( Engine.CreateModel( f532_local0, "name" ), f532_local2.emblemName )
+		Engine.SetModelValue( Engine.CreateModel( f532_local0, "emblemTextEntry" ), f532_local2.emblemTextEntry )
+		Engine.SetModelValue( Engine.CreateModel( f532_local0, "subTitle" ), f532_local2.subTitle )
+		Engine.SetModelValue( Engine.CreateModel( f532_local0, "sortIndex" ), f532_local2.sortIndex )
+		Engine.SetModelValue( Engine.CreateModel( f532_local0, "emblemIndex" ), f532_local2.emblemIndex )
+		Engine.SetModelValue( Engine.CreateModel( f532_local0, "isUsed" ), f532_local2.isUsed )
+		Engine.SetModelValue( Engine.CreateModel( f532_local0, "hintText" ), Engine[@"hash_4F9F1239CFD921FE"]( "menu/button_emblem_set" ) )
+		Engine.SetModelValue( Engine.CreateModel( f532_local0, "storageFileType" ), CoD.CraftUtility.Groups.GetSelectedStorageFileType( f532_arg0 ) )
+		Engine.SetModelValue( Engine.CreateModel( f532_local0, "layerCount" ), f532_local2.layerCount )
+		Engine.SetModelValue( Engine.CreateModel( f532_local0, "xuid" ), f532_local2.xuid )
+		Engine.SetModelValue( Engine.CreateModel( f532_local0, "indexAndFileType" ), tostring( f532_local2.emblemIndex ) .. " " .. tostring( CoD.CraftUtility.Groups.GetSelectedStorageFileType( f532_arg0 ) ) )
 		if f532_local2.readOnly ~= nil then
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f532_local0, "readOnly" ), f532_local2.readOnly )
+			Engine.SetModelValue( Engine.CreateModel( f532_local0, "readOnly" ), f532_local2.readOnly )
 		end
 		return f532_local0
 	end
@@ -9924,7 +9923,7 @@ DataSources.StickersList = {
 		f534_arg1.controller = f534_arg0
 		local f534_local0 = f534_arg1.totalStickers or 0
 		f534_arg1.stickerList = {}
-		f534_arg1.stickerListModel = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f534_arg0 ), "Stickers.StickersList" )
+		f534_arg1.stickerListModel = Engine.CreateModel( Engine.GetModelForController( f534_arg0 ), "Stickers.StickersList" )
 		f534_arg1.totalStickers = 0
 		if f534_local0 ~= f534_arg1.totalEmblems and f534_arg1._onDataSourceListCountChanged then
 			f534_arg1:_onDataSourceListCountChanged()
@@ -9934,7 +9933,7 @@ DataSources.StickersList = {
 		return f535_arg0.totalStickers
 	end,
 	getItem = function ( f536_arg0, f536_arg1, f536_arg2 )
-		return Engine[@"createmodel"]( f536_arg1.emblemListModel, "sticker_" .. f536_arg2 )
+		return Engine.CreateModel( f536_arg1.emblemListModel, "sticker_" .. f536_arg2 )
 	end,
 	getCustomPropertiesForItem = function ( f537_arg0, f537_arg1 )
 		
@@ -9945,8 +9944,8 @@ DataSources.StickerSetList = {
 		f538_arg1.controller = f538_arg0
 		local f538_local0 = f538_arg1.totalEmblems or 0
 		f538_arg1.emblemList = {}
-		f538_arg1.emblemListModel = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f538_arg0 ), "Emblem.StickerSetList" )
-		f538_arg1.emblemList = CoD.CraftUtility.Emblems.GetSortedStickersList( f538_arg0, Enum[@"storagefiletype"][@"hash_36A0A3D1062F156F"], CoD.CraftUtility.Emblems.IsEditor( f538_arg1.menu ) )
+		f538_arg1.emblemListModel = Engine.CreateModel( Engine.GetModelForController( f538_arg0 ), "Emblem.StickerSetList" )
+		f538_arg1.emblemList = CoD.CraftUtility.Emblems.GetSortedStickersList( f538_arg0, Enum.StorageFileType[@"hash_36A0A3D1062F156F"], CoD.CraftUtility.Emblems.IsEditor( f538_arg1.menu ) )
 		f538_arg1.totalEmblems = #f538_arg1.emblemList
 		if f538_local0 ~= f538_arg1.totalEmblems and f538_arg1._onDataSourceListCountChanged then
 			f538_arg1:_onDataSourceListCountChanged()
@@ -9956,7 +9955,7 @@ DataSources.StickerSetList = {
 		return f539_arg0.totalEmblems
 	end,
 	getItem = function ( f540_arg0, f540_arg1, f540_arg2 )
-		local f540_local0 = Engine[@"createmodel"]( f540_arg1.emblemListModel, "emblem_" .. f540_arg2 )
+		local f540_local0 = Engine.CreateModel( f540_arg1.emblemListModel, "emblem_" .. f540_arg2 )
 		local f540_local1 = function ( f541_arg0 )
 			f541_arg0.emblemTextEntry = f541_arg0.emblemName
 			f541_arg0.emblemTitle = f541_arg0.emblemName
@@ -9965,28 +9964,28 @@ DataSources.StickerSetList = {
 		
 		local f540_local2 = f540_arg1.emblemList[f540_arg2]
 		f540_local1( f540_local2 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f540_local0, "isNonClickableEmblem" ), 0 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f540_local0, "emblemTitle" ), f540_local2.emblemTitle )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f540_local0, "displayName" ), f540_local2.emblemName )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f540_local0, "emblemTextEntry" ), f540_local2.emblemTextEntry )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f540_local0, "subTitle" ), f540_local2.subTitle )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f540_local0, "createTime" ), f540_local2.createTime )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f540_local0, "sortIndex" ), f540_local2.sortIndex )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f540_local0, "emblemIndex" ), f540_local2.emblemIndex )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f540_local0, "isUsed" ), f540_local2.isUsed )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f540_local0, "xuid" ), f540_local2.xuid )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f540_local0, "storageFileType" ), Enum[@"storagefiletype"][@"hash_36A0A3D1062F156F"] )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f540_local0, "isSetNameItem" ), f540_local2.isSetNameItem )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f540_local0, "isBonusItem" ), f540_local2.isBonusItem )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f540_local0, "setName" ), f540_local2.setName )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f540_local0, "setPieceIndex" ), f540_local2.setPieceIndex )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f540_local0, "iconID" ), f540_local2.emblemIndex )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f540_local0, "sortKey" ), f540_local2.sortIndex )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f540_local0, "category" ), @"hash_684446BBFA84177E" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f540_local0, "setInfo" ), f540_local2.setInfo or "" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f540_local0, "trialLocked" ), f540_local2.isTrialLocked or false )
+		Engine.SetModelValue( Engine.CreateModel( f540_local0, "isNonClickableEmblem" ), 0 )
+		Engine.SetModelValue( Engine.CreateModel( f540_local0, "emblemTitle" ), f540_local2.emblemTitle )
+		Engine.SetModelValue( Engine.CreateModel( f540_local0, "displayName" ), f540_local2.emblemName )
+		Engine.SetModelValue( Engine.CreateModel( f540_local0, "emblemTextEntry" ), f540_local2.emblemTextEntry )
+		Engine.SetModelValue( Engine.CreateModel( f540_local0, "subTitle" ), f540_local2.subTitle )
+		Engine.SetModelValue( Engine.CreateModel( f540_local0, "createTime" ), f540_local2.createTime )
+		Engine.SetModelValue( Engine.CreateModel( f540_local0, "sortIndex" ), f540_local2.sortIndex )
+		Engine.SetModelValue( Engine.CreateModel( f540_local0, "emblemIndex" ), f540_local2.emblemIndex )
+		Engine.SetModelValue( Engine.CreateModel( f540_local0, "isUsed" ), f540_local2.isUsed )
+		Engine.SetModelValue( Engine.CreateModel( f540_local0, "xuid" ), f540_local2.xuid )
+		Engine.SetModelValue( Engine.CreateModel( f540_local0, "storageFileType" ), Enum.StorageFileType[@"hash_36A0A3D1062F156F"] )
+		Engine.SetModelValue( Engine.CreateModel( f540_local0, "isSetNameItem" ), f540_local2.isSetNameItem )
+		Engine.SetModelValue( Engine.CreateModel( f540_local0, "isBonusItem" ), f540_local2.isBonusItem )
+		Engine.SetModelValue( Engine.CreateModel( f540_local0, "setName" ), f540_local2.setName )
+		Engine.SetModelValue( Engine.CreateModel( f540_local0, "setPieceIndex" ), f540_local2.setPieceIndex )
+		Engine.SetModelValue( Engine.CreateModel( f540_local0, "iconID" ), f540_local2.emblemIndex )
+		Engine.SetModelValue( Engine.CreateModel( f540_local0, "sortKey" ), f540_local2.sortIndex )
+		Engine.SetModelValue( Engine.CreateModel( f540_local0, "category" ), @"hash_684446BBFA84177E" )
+		Engine.SetModelValue( Engine.CreateModel( f540_local0, "setInfo" ), f540_local2.setInfo or "" )
+		Engine.SetModelValue( Engine.CreateModel( f540_local0, "trialLocked" ), f540_local2.isTrialLocked or false )
 		if f540_local2.readOnly ~= nil then
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f540_local0, "readOnly" ), f540_local2.readOnly )
+			Engine.SetModelValue( Engine.CreateModel( f540_local0, "readOnly" ), f540_local2.readOnly )
 		end
 		CoD.CraftUtility.Emblems.CopyLootModels( f540_local0, f540_local2.lootInfo )
 		return f540_local0
@@ -10023,10 +10022,10 @@ DataSources.EmblemsList = {
 		f543_arg1.emblemList = {}
 		local f543_local1 = CoD.perController[f543_arg0].selectedEmblemTabStorageType
 		local f543_local2 = CoD.perController[f543_arg0].selectedEmblemTabStickerCategory
-		f543_arg1.emblemListModel = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f543_arg0 ), "Emblem.EmblemList" )
+		f543_arg1.emblemListModel = Engine.CreateModel( Engine.GetModelForController( f543_arg0 ), "Emblem.EmblemList" )
 		local f543_local3 = CoD.CraftUtility.Emblems.GetTotalUsedEmblems( f543_arg0, f543_local1, f543_local2 )
 		local f543_local4 = CoD.CraftUtility.Emblems.GetTotalAllowedEmblems( f543_arg0, f543_local1, f543_local2 )
-		if not f543_local1 or f543_local1 == Enum[@"storagefiletype"][@"storage_default_emblems"] or f543_local1 == Enum[@"storagefiletype"][@"storage_emblems_loot"] or SelectingGroupEmblem( f543_arg0 ) then
+		if not f543_local1 or f543_local1 == Enum.StorageFileType[@"storage_default_emblems"] or f543_local1 == Enum.StorageFileType[@"storage_emblems_loot"] or SelectingGroupEmblem( f543_arg0 ) then
 			f543_arg1.totalEmblems = f543_local3
 		else
 			f543_arg1.totalEmblems = f543_local3 + 1
@@ -10041,7 +10040,7 @@ DataSources.EmblemsList = {
 		return f544_arg0.totalEmblems
 	end,
 	getItem = function ( f545_arg0, f545_arg1, f545_arg2 )
-		local f545_local0 = Engine[@"createmodel"]( f545_arg1.emblemListModel, "emblem_" .. f545_arg2 )
+		local f545_local0 = Engine.CreateModel( f545_arg1.emblemListModel, "emblem_" .. f545_arg2 )
 		if CoD.perController[f545_arg0].selectedEmblemModel == f545_local0 then
 			f545_arg1.selectIndex = f545_arg2
 		end
@@ -10049,16 +10048,16 @@ DataSources.EmblemsList = {
 		local f545_local2 = function ( f546_arg0 )
 			if CoD.CraftUtility.Emblems.IsEmblemIndexOccupied( f546_arg0.emblemIndex, f546_arg0.fileType ) then
 				f546_arg0.emblemTextEntry = f546_arg0.emblemName
-				if CoD.perController[f545_arg0].selectedEmblemTabStorageType ~= Enum[@"storagefiletype"][@"storage_emblems"] then
-					f546_arg0.emblemTextEntry = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_75D39DC4A7060698", CoD.CraftUtility.Emblems.GetTotalUsedEmblems( f545_arg0, Enum[@"storagefiletype"][@"storage_emblems"], nil ) + 1 )
+				if CoD.perController[f545_arg0].selectedEmblemTabStorageType ~= Enum.StorageFileType[@"storage_emblems"] then
+					f546_arg0.emblemTextEntry = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_75D39DC4A7060698", CoD.CraftUtility.Emblems.GetTotalUsedEmblems( f545_arg0, Enum.StorageFileType[@"storage_emblems"], nil ) + 1 )
 				end
 				f546_arg0.emblemTitle = f546_arg0.emblemName
 				f546_arg0.subTitle = ""
 			else
-				f546_arg0.emblemName = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_3C4863A6FBA65F63" )
+				f546_arg0.emblemName = Engine[@"hash_4F9F1239CFD921FE"]( "menu/emblem_create_new" )
 				f546_arg0.emblemTitle = Engine[@"hash_4F9F1239CFD921FE"]( @"menu/new" )
-				f546_arg0.emblemTextEntry = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_75D39DC4A7060698", CoD.CraftUtility.Emblems.GetTotalUsedEmblems( f545_arg0, Enum[@"storagefiletype"][@"storage_emblems"], nil ) + 1 )
-				f546_arg0.subTitle = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_9073B1D7922BADD" )
+				f546_arg0.emblemTextEntry = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_75D39DC4A7060698", CoD.CraftUtility.Emblems.GetTotalUsedEmblems( f545_arg0, Enum.StorageFileType[@"storage_emblems"], nil ) + 1 )
+				f546_arg0.subTitle = Engine[@"hash_4F9F1239CFD921FE"]( "menu/emblem_new_subtitle" )
 			end
 		end
 		
@@ -10070,11 +10069,11 @@ DataSources.EmblemsList = {
 			f545_local4 = f545_local0:create( "isNonClickableEmblem" )
 			f545_local4:set( 1 )
 			f545_local3.emblemTitle = Engine[@"hash_4F9F1239CFD921FE"]( @"menu/new" )
-			f545_local3.emblemName = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_3C4863A6FBA65F63" )
+			f545_local3.emblemName = Engine[@"hash_4F9F1239CFD921FE"]( "menu/emblem_create_new" )
 			f545_local3.emblemTextEntry = "Emblem"
-			f545_local3.subTitle = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_11B943DE5127FAE0" )
+			f545_local3.subTitle = Engine[@"hash_4F9F1239CFD921FE"]( "menu/emblem_full_subtitle" )
 		end
-		if CoD.perController[f545_arg0].selectedEmblemTabStorageType == Enum[@"storagefiletype"][@"storage_emblems_loot"] then
+		if CoD.perController[f545_arg0].selectedEmblemTabStorageType == Enum.StorageFileType[@"storage_emblems_loot"] then
 			local f545_local5 = CoD.BlackMarketUtility.IsItemLocked( f545_arg0, CoD.BlackMarketUtility.GetLootEmblemIDName( f545_local3.emblemIndex ) )
 			local f545_local6 = f545_local0:create( "isBMClassified" )
 			f545_local6:set( f545_local5 )
@@ -10083,22 +10082,22 @@ DataSources.EmblemsList = {
 				f545_local3.emblemName = CoD.BlackMarketUtility.ClassifiedName( true )
 				f545_local3.emblemTitle = CoD.BlackMarketUtility.ClassifiedName( true )
 			end
-		elseif CoD.perController[f545_arg0].selectedEmblemTabStorageType == Enum[@"storagefiletype"][@"hash_36A0A3D1062F156F"] then
+		elseif CoD.perController[f545_arg0].selectedEmblemTabStorageType == Enum.StorageFileType[@"hash_36A0A3D1062F156F"] then
 			if f545_local3.unlocked ~= nil then
 				f545_local4 = f545_local0:create( "isBMClassified" )
 				f545_local4:set( not f545_local3.unlocked )
 				if not f545_local3.unlocked then
-					f545_local3.subTitle = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_546AFD686962D8D2", @"hash_49F480787C9809F5" )
+					f545_local3.subTitle = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_546AFD686962D8D2", "menu/stickers_caps" )
 					f545_local3.emblemName = CoD.BlackMarketUtility.ClassifiedName( true )
 					f545_local3.emblemTitle = CoD.BlackMarketUtility.ClassifiedName( true )
 				end
 			end
 		else
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f545_local0, "isBMClassified" ), false )
+			Engine.SetModelValue( Engine.CreateModel( f545_local0, "isBMClassified" ), false )
 		end
 		f545_local4 = @"hash_684446BBFA84177E"
 		local f545_local5 = false
-		if f545_local3.fileType == Enum[@"storagefiletype"][@"storage_default_emblems"] or f545_local3.fileType == Enum[@"storagefiletype"][@"storage_emblems"] or f545_local3.fileType == Enum[@"storagefiletype"][@"storage_emblems_loot"] then
+		if f545_local3.fileType == Enum.StorageFileType[@"storage_default_emblems"] or f545_local3.fileType == Enum.StorageFileType[@"storage_emblems"] or f545_local3.fileType == Enum.StorageFileType[@"storage_emblems_loot"] then
 			f545_local4 = @"menu/emblem"
 			f545_local5 = true
 		end
@@ -10121,7 +10120,7 @@ DataSources.EmblemsList = {
 		f545_local6 = f545_local0:create( "xuid" )
 		f545_local6:set( f545_local3.xuid )
 		f545_local6 = f545_local0:create( "hintText" )
-		f545_local6:set( Engine[@"hash_4F9F1239CFD921FE"]( @"hash_46D0E4674E87A8C9" ) )
+		f545_local6:set( Engine[@"hash_4F9F1239CFD921FE"]( "menu/button_emblem_set" ) )
 		f545_local6 = f545_local0:create( "category" )
 		f545_local6:set( f545_local4 )
 		f545_local6 = f545_local0:create( "storageFileType" )
@@ -10164,10 +10163,10 @@ DataSources.SpecialContractsList = DataSourceHelpers.ListSetup( "SpecialContract
 	table.insert( f548_local0, {
 		models = {
 			index = 0,
-			name = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_3679AF4EE863D159" ),
-			description = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_344FF6A347AC380F", Dvar[@"weapon_contract_target_value"]:get() ),
+			name = Engine[@"hash_4F9F1239CFD921FE"]( "mpui/contracts_special_title_caps" ),
+			description = Engine[@"hash_4F9F1239CFD921FE"]( "mpui/bm_contract_special_desc", Dvar.weapon_contract_target_value:get() ),
 			cost = 0,
-			targetValue = Dvar[@"weapon_contract_target_value"]:get(),
+			targetValue = Dvar.weapon_contract_target_value:get(),
 			isComplete = HasEarnedWeaponContract( f548_arg0 ),
 			category = "default",
 			rewardDescription1 = rewardDescription1,
@@ -10185,8 +10184,8 @@ DataSources.SpecialContractsList = DataSourceHelpers.ListSetup( "SpecialContract
 	local f548_local6 = 6
 	local f548_local7 = 7
 	local f548_local8 = 8
-	local f548_local9 = CoD.getStatsMilestoneTable( 6, Enum[@"emodes"][@"mode_multiplayer"] )
-	local f548_local10 = Engine[@"tablefindrows"]( CoD.contractTable_mp, f548_local5, @"special_contract" )
+	local f548_local9 = CoD.getStatsMilestoneTable( 6, Enum.eModes.mode_multiplayer )
+	local f548_local10 = Engine.TableFindRows( CoD.contractTable_mp, f548_local5, @"special_contract" )
 	if f548_local10 then
 		for f548_local22, f548_local23 in ipairs( f548_local10 ) do
 			local f548_local24 = Engine[@"hash_4C6F8EC444864600"]( CoD.contractTable_mp, f548_local23, f548_local1 )
@@ -10211,16 +10210,16 @@ DataSources.SpecialContractsList = DataSourceHelpers.ListSetup( "SpecialContract
 			local f548_local21 = 0
 			if f548_local28 ~= "" then
 				f548_local16 = "calling_card"
-				f548_local18 = Engine[@"tablelookup"]( nil, f548_local9, 4, f548_local28, 12 )
-				f548_local21 = tonumber( Engine[@"tablelookup"]( nil, CoD.backgroundsTable, 4, f548_local18, 1 ) )
+				f548_local18 = Engine.TableLookup( nil, f548_local9, 4, f548_local28, 12 )
+				f548_local21 = tonumber( Engine.TableLookup( nil, CoD.backgroundsTable, 4, f548_local18, 1 ) )
 			elseif f548_local29 ~= "" then
 				f548_local16 = "camo"
-				f548_local18 = "MPUI_" .. Engine[@"tablelookup"]( nil, f548_local9, 4, f548_local28, 9 )
+				f548_local18 = "MPUI_" .. Engine.TableLookup( nil, f548_local9, 4, f548_local28, 9 )
 			end
 			table.insert( f548_local0, {
 				models = {
 					index = f548_local24,
-					name = Engine[@"localize"]( f548_local14 ),
+					name = Engine.Localize( f548_local14 ),
 					description = Engine[@"hash_4F9F1239CFD921FE"]( @"contract/" .. f548_local26 .. "_DESC", f548_local25 ),
 					cost = tonumber( f548_local15 ),
 					targetValue = f548_local25,
@@ -10239,7 +10238,7 @@ DataSources.SpecialContractsList = DataSourceHelpers.ListSetup( "SpecialContract
 end, true )
 DataSources.CurrentSpecialContract = {
 	getModel = function ( f549_arg0 )
-		local f549_local0 = Engine[@"storagegetbuffer"]( f549_arg0, Enum[@"storagefiletype"][@"storage_mp_stats_online"] )
+		local f549_local0 = Engine.StorageGetBuffer( f549_arg0, Enum.StorageFileType[@"storage_mp_stats_online"] )
 		local f549_local1 = f549_local0.contracts[LuaUtils.BMContracts.specialContractIndex]
 		local f549_local2 = 2
 		local f549_local3 = 3
@@ -10254,17 +10253,17 @@ DataSources.CurrentSpecialContract = {
 		local f549_local12 = ""
 		local f549_local13 = f549_local1.index:get()
 		if f549_local13 == 0 then
-			f549_local6 = @"hash_3679AF4EE863D159"
-			f549_local7 = @"hash_344FF6A347AC380F"
+			f549_local6 = "mpui/contracts_special_title_caps"
+			f549_local7 = "mpui/bm_contract_special_desc"
 			f549_local9 = f549_local0.weaponContractData.currentValue:get()
-			f549_local10 = Dvar[@"weapon_contract_target_value"]:get()
+			f549_local10 = Dvar.weapon_contract_target_value:get()
 			f549_local11 = HasEarnedWeaponContract( f549_arg0 )
 		else
 			f549_local9 = f549_local1.progress:get()
-			f549_local10 = tonumber( Engine[@"tablelookup"]( nil, CoD.contractTable_mp, 0, f549_local13, f549_local2 ) )
-			local f549_local14 = Engine[@"tablelookup"]( nil, CoD.contractTable_mp, 0, f549_local13, f549_local3 )
-			local f549_local15 = Engine[@"tablelookup"]( nil, CoD.contractTable_mp, 0, f549_local13, f549_local4 )
-			f549_local8 = Engine[@"tablelookup"]( nil, CoD.contractTable_mp, 0, f549_local13, f549_local5 )
+			f549_local10 = tonumber( Engine.TableLookup( nil, CoD.contractTable_mp, 0, f549_local13, f549_local2 ) )
+			local f549_local14 = Engine.TableLookup( nil, CoD.contractTable_mp, 0, f549_local13, f549_local3 )
+			local f549_local15 = Engine.TableLookup( nil, CoD.contractTable_mp, 0, f549_local13, f549_local4 )
+			f549_local8 = Engine.TableLookup( nil, CoD.contractTable_mp, 0, f549_local13, f549_local5 )
 			f549_local11 = f549_local10 <= f549_local9
 			f549_local7 = "CONTRACT_" .. f549_local14 .. "_DESC"
 			f549_local6 = "CONTRACT_" .. f549_local14
@@ -10279,44 +10278,44 @@ DataSources.CurrentSpecialContract = {
 		if f549_local10 > 0 then
 			f549_local14 = f549_local9 / f549_local10
 		end
-		local f549_local15 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f549_arg0 ), "CurrentSpecialContract" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f549_local15, "index" ), f549_local13 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f549_local15, "name" ), Engine[@"localize"]( f549_local6 ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f549_local15, "description" ), Engine[@"localize"]( f549_local7, f549_local10 ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f549_local15, "percentComplete" ), f549_local14 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f549_local15, "fractionText" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_631CF0F51CCA3A27", f549_local9, f549_local10 ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f549_local15, "cost" ), tonumber( f549_local8 ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f549_local15, "isComplete" ), f549_local11 )
+		local f549_local15 = Engine.CreateModel( Engine.GetModelForController( f549_arg0 ), "CurrentSpecialContract" )
+		Engine.SetModelValue( Engine.CreateModel( f549_local15, "index" ), f549_local13 )
+		Engine.SetModelValue( Engine.CreateModel( f549_local15, "name" ), Engine.Localize( f549_local6 ) )
+		Engine.SetModelValue( Engine.CreateModel( f549_local15, "description" ), Engine.Localize( f549_local7, f549_local10 ) )
+		Engine.SetModelValue( Engine.CreateModel( f549_local15, "percentComplete" ), f549_local14 )
+		Engine.SetModelValue( Engine.CreateModel( f549_local15, "fractionText" ), Engine[@"hash_4F9F1239CFD921FE"]( @"hash_631CF0F51CCA3A27", f549_local9, f549_local10 ) )
+		Engine.SetModelValue( Engine.CreateModel( f549_local15, "cost" ), tonumber( f549_local8 ) )
+		Engine.SetModelValue( Engine.CreateModel( f549_local15, "isComplete" ), f549_local11 )
 		return f549_local15
 	end
 }
 DataSources.PrestigeStats = {
 	getModel = function ( f550_arg0 )
-		local f550_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f550_arg0 ), "PrestigeStats" )
+		local f550_local0 = Engine.CreateModel( Engine.GetModelForController( f550_arg0 ), "PrestigeStats" )
 		local f550_local1 = CoD.PrestigeUtility.GetPrestigeGameMode()
 		local f550_local2 = CoD.PrestigeUtility.GetCurrentPLevel( f550_arg0 )
 		local f550_local3 = ""
 		local f550_local4 = 0
 		if IsMaxPrestigeLevel( f550_arg0 ) and IsGameModeParagonCapable( f550_local1 ) then
-			local f550_local5 = Engine[@"getplayerstats"]( f550_arg0, CoD.STATS_LOCATION_NORMAL, f550_local1 )
+			local f550_local5 = Engine.GetPlayerStats( f550_arg0, CoD.STATS_LOCATION_NORMAL, f550_local1 )
 			f550_local4 = f550_local5.PlayerStatsList.PARAGON_ICON_ID.StatValue:get()
 		end
 		if f550_local4 == 0 then
-			f550_local3 = Engine[@"getrankicon"]( 0, f550_local2, f550_local1 )
+			f550_local3 = Engine.GetRankIcon( 0, f550_local2, f550_local1 )
 		else
-			f550_local3 = Engine[@"getparagoniconbyid"]( f550_local4, f550_local1 )
+			f550_local3 = Engine.GetParagonIconById( f550_local4, f550_local1 )
 		end
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f550_local0, "icon" ), f550_local3 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f550_local0, "backgroundId" ), CoD.PrestigeUtility.GetBackgroundIdByPLevel( f550_arg0, f550_local2 ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f550_local0, "plevel" ), f550_local2 )
+		Engine.SetModelValue( Engine.CreateModel( f550_local0, "icon" ), f550_local3 )
+		Engine.SetModelValue( Engine.CreateModel( f550_local0, "backgroundId" ), CoD.PrestigeUtility.GetBackgroundIdByPLevel( f550_arg0, f550_local2 ) )
+		Engine.SetModelValue( Engine.CreateModel( f550_local0, "plevel" ), f550_local2 )
 		return f550_local0
 	end
 }
 DataSources.PrestigeButtonInfopane = {
 	getModel = function ( f551_arg0 )
-		local f551_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "PrestigeButtonInfopane" )
-		Engine[@"createmodel"]( f551_local0, "title" )
-		Engine[@"createmodel"]( f551_local0, "description" )
+		local f551_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "PrestigeButtonInfopane" )
+		Engine.CreateModel( f551_local0, "title" )
+		Engine.CreateModel( f551_local0, "description" )
 		return f551_local0
 	end
 }
@@ -10334,35 +10333,35 @@ DataSources.BookmarksList = ListHelper_SetupDataSource( "BookmarksList", functio
 	table.insert( f552_local0, {
 		models = {
 			bookmarkURL = "CIA-HomePage.htm",
-			bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_E97BD750D2D8AC" )
+			bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( "menu/codex_bookmark_ciahome" )
 		},
 		propteries = {}
 	} )
 	table.insert( f552_local0, {
 		models = {
 			bookmarkURL = "WinslowAccord-MainMenu.htm",
-			bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_46815B2347867C62" )
+			bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( "menu/codex_bookmark_winslowmain" )
 		},
 		propteries = {}
 	} )
 	table.insert( f552_local0, {
 		models = {
 			bookmarkURL = "Omnipedia-WinslowAccord.htm",
-			bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_78C7AE39F51871DC" )
+			bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( "menu/codex_bookmark_omniwinslow" )
 		},
 		propteries = {}
 	} )
 	table.insert( f552_local0, {
 		models = {
 			bookmarkURL = "Omnipedia-CDP.htm",
-			bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_339F0115E53252CE" )
+			bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( "menu/codex_bookmark_omnicdp" )
 		},
 		propteries = {}
 	} )
 	table.insert( f552_local0, {
 		models = {
 			bookmarkURL = "Omnipedia-CIA.htm",
-			bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_33790E15E51199A8" )
+			bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( "menu/codex_bookmark_omnicia" )
 		},
 		propteries = {}
 	} )
@@ -10370,7 +10369,7 @@ DataSources.BookmarksList = ListHelper_SetupDataSource( "BookmarksList", functio
 		table.insert( f552_local0, {
 			models = {
 				bookmarkURL = "CEA-EgyptianForcesMoveAgainstNRC.htm",
-				bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_5B72557F7FA2503E" )
+				bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( "menu/codex_bookmark_newsegypt" )
 			},
 			propteries = {}
 		} )
@@ -10379,7 +10378,7 @@ DataSources.BookmarksList = ListHelper_SetupDataSource( "BookmarksList", functio
 		table.insert( f552_local0, {
 			models = {
 				bookmarkURL = "CEA-GangViolenceSpillsIntoSingapore.htm",
-				bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_51E24E5F589DF0FC" )
+				bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( "menu/codex_bookmark_newsgang" )
 			},
 			propteries = {}
 		} )
@@ -10388,7 +10387,7 @@ DataSources.BookmarksList = ListHelper_SetupDataSource( "BookmarksList", functio
 		table.insert( f552_local0, {
 			models = {
 				bookmarkURL = "CEA-VictoryisWithinOurGrasp.htm",
-				bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_76161D775AC11E2F" )
+				bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( "menu/codex_bookmark_newsvictory" )
 			},
 			propteries = {}
 		} )
@@ -10397,14 +10396,14 @@ DataSources.BookmarksList = ListHelper_SetupDataSource( "BookmarksList", functio
 		table.insert( f552_local0, {
 			models = {
 				bookmarkURL = "CIA-Krueger-FileEntryPoint.htm",
-				bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_39788DD4D2B56A66" )
+				bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( "menu/codex_bookmark_ciakrueger" )
 			},
 			propteries = {}
 		} )
 		table.insert( f552_local0, {
 			models = {
 				bookmarkURL = "CIA-COALESCENCE-AudioLandingPage.htm",
-				bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_7840CD0131A34186" )
+				bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( "menu/codex_bookmark_ciasgen" )
 			},
 			propteries = {}
 		} )
@@ -10413,7 +10412,7 @@ DataSources.BookmarksList = ListHelper_SetupDataSource( "BookmarksList", functio
 		table.insert( f552_local0, {
 			models = {
 				bookmarkURL = "CIA-Infection-AudioLandingPage.htm",
-				bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_4131B1A3CEE17F8" )
+				bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( "menu/codex_bookmark_ciainfection" )
 			},
 			propteries = {}
 		} )
@@ -10422,14 +10421,14 @@ DataSources.BookmarksList = ListHelper_SetupDataSource( "BookmarksList", functio
 		table.insert( f552_local0, {
 			models = {
 				bookmarkURL = "CIA-Zurich-AudioLandingPage.htm",
-				bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_23B62C33C7BB2BD4" )
+				bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( "menu/codex_bookmark_ciazurich" )
 			},
 			propteries = {}
 		} )
 		table.insert( f552_local0, {
 			models = {
 				bookmarkURL = "WinslowAccord-TeamPhiAutopsy.htm",
-				bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_4F76352E93A0FB71" )
+				bookmarkDesc = Engine[@"hash_4F9F1239CFD921FE"]( "menu/codex_bookmark_winslowteamphi" )
 			},
 			propteries = {}
 		} )
@@ -10437,11 +10436,11 @@ DataSources.BookmarksList = ListHelper_SetupDataSource( "BookmarksList", functio
 	for f552_local9, f552_local10 in pairs( CoD.MapUtility.MapsTable ) do
 		if f552_local10.collectibles and f552_local10.collectibles ~= "" and (not CoD.perController[f552_arg0].inspectingMap or CoD.perController[f552_arg0].inspectingMap == f552_local9) then
 			for f552_local7, f552_local8 in ipairs( Engine[@"hash_7A7E3CD65E63086F"]( Engine[@"converttoxhash"]( f552_local10.collectibles ) ) ) do
-				if Engine[@"clienthascollectible"]( f552_arg0, f552_local9, f552_local7 - 1 ) then
+				if Engine.ClientHasCollectible( f552_arg0, f552_local9, f552_local7 - 1 ) then
 					table.insert( f552_local0, {
 						models = {
 							bookmarkURL = f552_local8[@"hash_31D4BFB62442D31D"],
-							bookmarkDesc = Engine[@"localize"]( f552_local8[@"hash_651ADD75F1CE9118"] )
+							bookmarkDesc = Engine.Localize( f552_local8[@"hash_651ADD75F1CE9118"] )
 						},
 						properties = {}
 					} )
@@ -10465,7 +10464,7 @@ DataSources.StartMenuCollectables = ListHelper_SetupDataSource( "StartMenuCollec
 						image = f553_local9[@"uimaterial"]
 					},
 					properties = {
-						unlocked = Engine[@"clienthascollectible"]( f553_arg0, f553_local1, f553_local8 - 1 )
+						unlocked = Engine.ClientHasCollectible( f553_arg0, f553_local1, f553_local8 - 1 )
 					}
 				} )
 			end
@@ -10475,14 +10474,14 @@ DataSources.StartMenuCollectables = ListHelper_SetupDataSource( "StartMenuCollec
 end )
 DataSources.StartMenu = {
 	getModel = function ( f554_arg0 )
-		local f554_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f554_arg0 ), "StartMenu" )
-		local f554_local1 = Engine[@"createmodel"]( f554_local0, "score" )
-		local f554_local2 = Engine[@"getplayerlistdata"]( f554_arg0, Engine[@"getclientnum"]( f554_arg0 ) )
+		local f554_local0 = Engine.CreateModel( Engine.GetModelForController( f554_arg0 ), "StartMenu" )
+		local f554_local1 = Engine.CreateModel( f554_local0, "score" )
+		local f554_local2 = Engine.GetPlayerListData( f554_arg0, Engine.GetClientNum( f554_arg0 ) )
 		local f554_local3 = 0
 		if f554_local2.score ~= nil then
 			f554_local3 = f554_local2.score
 		end
-		Engine[@"setmodelvalue"]( f554_local1, f554_local3 )
+		Engine.SetModelValue( f554_local1, f554_local3 )
 		return f554_local0
 	end
 }
@@ -10499,16 +10498,15 @@ DataSources.CollectiblesLayout = {
 			"BUNK_COLLECTIBLE_MEDIUM_2",
 			"BUNK_COLLECTIBLE_LARGE_1"
 		}
-		local f555_local1 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f555_arg0 ), "collectiblesLayout" )
-		local f555_local2 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f555_arg0 ), "safehouse.inClientBunk" )
+		local f555_local1 = Engine.CreateModel( Engine.GetModelForController( f555_arg0 ), "collectiblesLayout" )
+		local f555_local2 = Engine.CreateModel( Engine.GetModelForController( f555_arg0 ), "safehouse.inClientBunk" )
 		if f555_local2 then
-			local f555_local3 = Engine[@"getcollectiblelayout"]( Engine[@"getmodelvalue"]( f555_local2 ) )
+			local f555_local3 = Engine.GetCollectibleLayout( Engine.GetModelValue( f555_local2 ) )
 			for f555_local16, f555_local17 in ipairs( f555_local0 ) do
-				local f555_local18 = Engine[@"createmodel"]( f555_local1, f555_local17 )
-				local f555_local19 = Enum[@"bunkcollectibleslots_e"][Engine[@"converttoxhash"]( f555_local17 )]
+				local f555_local18 = Engine.CreateModel( f555_local1, f555_local17 )
+				local f555_local19 = Enum.bunkcollectibleslots_e[Engine[@"converttoxhash"]( f555_local17 )]
 				local f555_local9, f555_local10, f555_local11, f555_local13 = nil
-				local f555_local15 = false
-				local f555_local12, f555_local14 = nil
+				local f555_local15, f555_local12, f555_local14 = false
 				local f555_local20 = f555_local3[f555_local19]
 				if f555_local20 and f555_local20.isSet and f555_local18 then
 					local f555_local7 = CoD.MapUtility.MapsTable[f555_local20.mapName]
@@ -10518,21 +10516,21 @@ DataSources.CollectiblesLayout = {
 							f555_local9 = f555_local8[@"uimaterial"]
 							f555_local10 = f555_local8[@"hash_281FE4435309362D"]
 							f555_local11 = f555_local8[@"displaynamelong"]
-							f555_local12 = f555_local8[@"audiolog"] or ""
+							f555_local12 = f555_local8.audiolog or ""
 							f555_local13 = f555_local8[@"uimodel"]
 							f555_local14 = f555_local7.mapName
 							f555_local15 = true
 						end
 					end
 				end
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f555_local18, "image" ), f555_local9 or "" )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f555_local18, "imageLarge" ), f555_local10 or "" )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f555_local18, "name" ), f555_local11 or "" )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f555_local18, "model" ), f555_local13 or "tag_origin" )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f555_local18, "audioLog" ), f555_local12 or "" )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f555_local18, "collectibleSlot" ), f555_local19 )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f555_local18, "mapInfo" ), f555_local14 or "" )
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f555_local18, "isSet" ), f555_local15 )
+				Engine.SetModelValue( Engine.CreateModel( f555_local18, "image" ), f555_local9 or "" )
+				Engine.SetModelValue( Engine.CreateModel( f555_local18, "imageLarge" ), f555_local10 or "" )
+				Engine.SetModelValue( Engine.CreateModel( f555_local18, "name" ), f555_local11 or "" )
+				Engine.SetModelValue( Engine.CreateModel( f555_local18, "model" ), f555_local13 or "tag_origin" )
+				Engine.SetModelValue( Engine.CreateModel( f555_local18, "audioLog" ), f555_local12 or "" )
+				Engine.SetModelValue( Engine.CreateModel( f555_local18, "collectibleSlot" ), f555_local19 )
+				Engine.SetModelValue( Engine.CreateModel( f555_local18, "mapInfo" ), f555_local14 or "" )
+				Engine.SetModelValue( Engine.CreateModel( f555_local18, "isSet" ), f555_local15 )
 			end
 		end
 		return f555_local1
@@ -10582,13 +10580,13 @@ DataSources.GunsmithWeaponOptions = {
 }
 DataSources.ArenaRank = {
 	getModel = function ( f563_arg0 )
-		return Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f563_arg0 ), "ArenaRank" )
+		return Engine.CreateModel( Engine.GetModelForController( f563_arg0 ), "ArenaRank" )
 	end
 }
 DataSources.ArenaInspectionStars = ListHelper_SetupDataSource( "ArenaInspectionStars", function ( f564_arg0 )
-	local f564_local0 = Engine[@"getmodelvalue"]( Engine[@"createmodel"]( DataSources.Arena.getModel(), "selectedPlayerPoints" ) )
-	local f564_local1 = CoD.ArenaRankedPlayUtility.GetRankVisibleStars( f564_local0 )
-	local f564_local2 = CoD.ArenaRankedPlayUtility.GetStarCount( f564_local0 )
+	local modelValue = Engine.GetModelValue( Engine.CreateModel( DataSources.Arena.getModel(), "selectedPlayerPoints" ) )
+	local f564_local1 = CoD.ArenaRankedPlayUtility.GetRankVisibleStars( modelValue )
+	local f564_local2 = CoD.ArenaRankedPlayUtility.GetStarCount( modelValue )
 	local f564_local3 = {}
 	for f564_local4 = 0, f564_local1 - 1, 1 do
 		table.insert( f564_local3, {
@@ -10599,7 +10597,7 @@ DataSources.ArenaInspectionStars = ListHelper_SetupDataSource( "ArenaInspectionS
 	end
 	return f564_local3
 end, nil, nil, function ( f565_arg0, f565_arg1, f565_arg2 )
-	local f565_local0 = Engine[@"createmodel"]( DataSources.Arena.getModel(), "selectedPlayerPoints" )
+	local f565_local0 = Engine.CreateModel( DataSources.Arena.getModel(), "selectedPlayerPoints" )
 	if f565_arg1.updateSubscription then
 		f565_arg1:removeSubscription( f565_arg1.updateSubscription )
 	end
@@ -10614,20 +10612,20 @@ DataSources.ArenaActiveRules = ListHelper_SetupDataSource( "ArenaActiveRules", f
 	elseif PregameItemVoteEnabled() then
 		table.insert( f567_local0, {
 			models = {
-				text = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_3F1144ACD7D633B9" )
+				text = Engine[@"hash_4F9F1239CFD921FE"]( "menu/ban_protect_active_caps" )
 			}
 		} )
 	end
 	if CharacterDraftEnabled() then
 		table.insert( f567_local0, {
 			models = {
-				text = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_3E14111F51E8144B" )
+				text = Engine[@"hash_4F9F1239CFD921FE"]( "menu/draft_active_caps" )
 			}
 		} )
 	end
 	return f567_local0
 end, nil, nil, function ( f568_arg0, f568_arg1, f568_arg2 )
-	local f568_local0 = Engine[@"getmodel"]( Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "lobbyRoot" ), "lobbyNav" )
+	local f568_local0 = Engine.GetModel( Engine.GetModel( Engine.GetGlobalModel(), "lobbyRoot" ), "lobbyNav" )
 	if f568_arg1.lobbyNavSubscription then
 		f568_arg1:removeSubscription( f568_arg1.lobbyNavSubscription )
 	end
@@ -10643,9 +10641,9 @@ DataSources.FrontendVoip = {
 		return LuaDefine.MAX_CLIENTS
 	end,
 	getItem = function ( f572_arg0, f572_arg1, f572_arg2 )
-		local f572_local0 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f572_arg0 ), "hudItems.voipInfo" )
+		local f572_local0 = Engine.GetModel( Engine.GetModelForController( f572_arg0 ), "hudItems.voipInfo" )
 		if f572_local0 then
-			return Engine[@"getmodel"]( f572_local0, "voip" .. tostring( f572_arg2 ) )
+			return Engine.GetModel( f572_local0, "voip" .. tostring( f572_arg2 ) )
 		else
 			
 		end
@@ -10653,7 +10651,7 @@ DataSources.FrontendVoip = {
 }
 DataSources.ContextualMenu = {
 	getModel = function ( f573_arg0 )
-		local f573_local0 = Engine[@"getmodelforcontroller"]( f573_arg0 )
+		local f573_local0 = Engine.GetModelForController( f573_arg0 )
 		local f573_local1 = f573_local0.ContextualMenuModel
 		if not f573_local1 then
 			f573_local1 = f573_local0:create( "ContextualMenu" )
@@ -10679,7 +10677,7 @@ DataSources.ContextualMenu = {
 				if f573_local4 then
 					f573_local4 = CoD.PCWidgetUtility.ContextualMenuXuidModel:get()
 				end
-				if f573_local4 and Engine[@"getprofilevarint"]( f573_arg0, @"show_real_names" ) ~= 0 and (Engine[@"getxuid64"]( f573_arg0 ) == f573_local4 or Engine[@"isfriendfromxuid"]( f573_arg0, f573_local4 )) then
+				if f573_local4 and Engine.GetProfileVarInt( f573_arg0, "show_real_names" ) ~= 0 and (Engine.GetXUID64( f573_arg0 ) == f573_local4 or Engine.IsFriendFromXUID( f573_arg0, f573_local4 )) then
 					f573_local5 = f573_local1:create( "titleNonLocalized" )
 					f573_local5:set( f573_local2 )
 				else
@@ -10707,7 +10705,7 @@ DataSources.ClanTagPromptList = DataSourceHelpers.ListSetup( "ClanTagPromptList"
 	return {
 		{
 			models = {
-				displayText = Engine[@"toupper"]( Engine[@"hash_4F9F1239CFD921FE"]( @"menu/ok" ) )
+				displayText = Engine.ToUpper( Engine[@"hash_4F9F1239CFD921FE"]( @"menu/ok" ) )
 			},
 			properties = {
 				action = function ( f576_arg0, f576_arg1, f576_arg2, f576_arg3, f576_arg4 )
@@ -10719,7 +10717,7 @@ DataSources.ClanTagPromptList = DataSourceHelpers.ListSetup( "ClanTagPromptList"
 		},
 		{
 			models = {
-				displayText = Engine[@"toupper"]( Engine[@"hash_4F9F1239CFD921FE"]( @"menu/cancel" ) )
+				displayText = Engine.ToUpper( Engine[@"hash_4F9F1239CFD921FE"]( @"menu/cancel" ) )
 			},
 			properties = {
 				action = function ( f577_arg0, f577_arg1, f577_arg2, f577_arg3, f577_arg4 )
@@ -10733,7 +10731,7 @@ DataSources.ClanTagPromptList = DataSourceHelpers.ListSetup( "ClanTagPromptList"
 end, true, nil )
 DataSources.PlayerContextualMenuOptions = {
 	getModel = function ( f578_arg0 )
-		local f578_local0 = Engine[@"getmodelforcontroller"]( f578_arg0 )
+		local f578_local0 = Engine.GetModelForController( f578_arg0 )
 		local f578_local1 = f578_local0.ContextualOptionsModel
 		if not f578_local1 then
 			f578_local1 = f578_local0:create( "ContextualOptionsModel" )
@@ -10781,7 +10779,7 @@ DataSources.ChatClientFiltersOptionsList = DataSourceHelpers.ListSetup( "PC.Chat
 end, true )
 DataSources.LoadingScreenPlayerListTeam1 = {
 	prepare = function ( f581_arg0, f581_arg1, f581_arg2 )
-		local f581_local0 = Engine[@"getglobalmodel"]()
+		local f581_local0 = Engine.GetGlobalModel()
 		f581_local0 = f581_local0:create( "lobbyRoot", true )
 		f581_local0 = f581_local0:create( "gameClient", true )
 		f581_local0 = f581_local0:create( "update", true )
@@ -10791,12 +10789,12 @@ DataSources.LoadingScreenPlayerListTeam1 = {
 		f581_arg1.teamCountSubscription = f581_arg1:subscribeToModel( f581_local0, function ()
 			f581_arg1:updateDataSource()
 		end, false )
-		local f581_local1 = Engine[@"hash_3E8F4C54B8961311"]( Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_game"] )
+		local f581_local1 = Engine[@"hash_3E8F4C54B8961311"]( Enum.LobbyModule[@"lobby_module_client"], Enum.LobbyType[@"lobby_type_game"] )
 		local f581_local2 = {
+			teamInfo = {},
+			teamInfo = {},
 			teamInfo = {}
 		}
-		f581_local2.teamInfo[1] = {}
-		f581_local2.teamInfo[2] = {}
 		local f581_local3 = 0
 		local f581_local4 = 2
 		local f581_local5 = 12
@@ -10814,39 +10812,39 @@ DataSources.LoadingScreenPlayerListTeam1 = {
 					xuid = f581_local12,
 					team = f581_local11
 				} )
-				if Engine[@"getxuid64"]( f581_arg0 ) == f581_local12 then
+				if Engine.GetXUID64( f581_arg0 ) == f581_local12 then
 					f581_local6 = f581_local11
 				end
 			end
-			local f581_local9 = Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "LoadingScreenInfo" ), "LoadingScreenPlayerList" )
-			local f581_local13 = Engine[@"createmodel"]( f581_local9, "team1" )
-			local f581_local10 = Engine[@"createmodel"]( f581_local13, "count" )
-			local f581_local11 = Engine[@"createmodel"]( f581_local9, "team2" )
-			local f581_local12 = Engine[@"createmodel"]( f581_local11, "count" )
+			local f581_local9 = Engine.CreateModel( Engine.CreateModel( Engine.GetGlobalModel(), "LoadingScreenInfo" ), "LoadingScreenPlayerList" )
+			local f581_local13 = Engine.CreateModel( f581_local9, "team1" )
+			local f581_local10 = Engine.CreateModel( f581_local13, "count" )
+			local f581_local11 = Engine.CreateModel( f581_local9, "team2" )
+			local f581_local12 = Engine.CreateModel( f581_local11, "count" )
 			f581_arg1.team1CountModel = f581_local10
 			f581_arg1.team1BaseModel = f581_local13
 			f581_arg1.team2CountModel = f581_local12
 			f581_arg1.team2BaseModel = f581_local11
 			f581_local2.teamInfo[1].teamModel = f581_local13
 			f581_local2.teamInfo[2].teamModel = f581_local11
-			Engine[@"setmodelvalue"]( f581_local10, #f581_local2.teamInfo[1] )
-			Engine[@"setmodelvalue"]( f581_local12, #f581_local2.teamInfo[2] )
+			Engine.SetModelValue( f581_local10, #f581_local2.teamInfo[1] )
+			Engine.SetModelValue( f581_local12, #f581_local2.teamInfo[2] )
 			for f581_local14 = 1, f581_local4, 1 do
 				for f581_local17 = 1, f581_local5, 1 do
-					local f581_local20 = Engine[@"createmodel"]( f581_local2.teamInfo[f581_local14].teamModel, "member" .. f581_local17 )
+					local f581_local20 = Engine.CreateModel( f581_local2.teamInfo[f581_local14].teamModel, "member" .. f581_local17 )
 					if f581_local2.teamInfo[f581_local14][f581_local17] then
-						Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f581_local20, "playerxuid" ), f581_local2.teamInfo[f581_local14][f581_local17].xuid )
-						Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f581_local20, "playerName" ), f581_local2.teamInfo[f581_local14][f581_local17].name )
-						local f581_local21 = Engine[@"createmodel"]( f581_local20, "isSelfPlayerName" )
+						Engine.SetModelValue( Engine.CreateModel( f581_local20, "playerxuid" ), f581_local2.teamInfo[f581_local14][f581_local17].xuid )
+						Engine.SetModelValue( Engine.CreateModel( f581_local20, "playerName" ), f581_local2.teamInfo[f581_local14][f581_local17].name )
+						local f581_local21 = Engine.CreateModel( f581_local20, "isSelfPlayerName" )
 						local f581_local22 = false
-						for f581_local23 = 0, Engine[@"getmaxcontrollercount"]() - 1, 1 do
-							f581_local22 = Engine[@"getxuid64"]( f581_local23 ) == f581_local2.teamInfo[f581_local14][f581_local17].xuid
+						for f581_local23 = 0, Engine.GetMaxControllerCount() - 1, 1 do
+							f581_local22 = Engine.GetXUID64( f581_local23 ) == f581_local2.teamInfo[f581_local14][f581_local17].xuid
 							if f581_local22 then
 								break
 							end
 						end
-						Engine[@"setmodelvalue"]( f581_local21, f581_local22 )
-						Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f581_local20, "team" ), f581_local2.teamInfo[f581_local14][f581_local17].team )
+						Engine.SetModelValue( f581_local21, f581_local22 )
+						Engine.SetModelValue( Engine.CreateModel( f581_local20, "team" ), f581_local2.teamInfo[f581_local14][f581_local17].team )
 					end
 				end
 			end
@@ -10855,10 +10853,10 @@ DataSources.LoadingScreenPlayerListTeam1 = {
 		end
 	end,
 	getCount = function ( f583_arg0 )
-		return Engine[@"getmodelvalue"]( f583_arg0.team1CountModel )
+		return Engine.GetModelValue( f583_arg0.team1CountModel )
 	end,
 	getItem = function ( f584_arg0, f584_arg1, f584_arg2 )
-		return Engine[@"getmodel"]( f584_arg1.team1BaseModel, "member" .. f584_arg2 )
+		return Engine.GetModel( f584_arg1.team1BaseModel, "member" .. f584_arg2 )
 	end
 }
 DataSources.LoadingScreenPlayerListTeam2 = {
@@ -10866,70 +10864,70 @@ DataSources.LoadingScreenPlayerListTeam2 = {
 		DataSources.LoadingScreenPlayerListTeam1.prepare( f585_arg0, f585_arg1, f585_arg2 )
 	end,
 	getCount = function ( f586_arg0 )
-		local f586_local0 = Engine[@"getmodelvalue"]( f586_arg0.team1CountModel )
-		local f586_local1 = Engine[@"getmodelvalue"]( f586_arg0.team2CountModel )
+		local modelValue = Engine.GetModelValue( f586_arg0.team1CountModel )
+		local f586_local1 = Engine.GetModelValue( f586_arg0.team2CountModel )
 		local f586_local2 = f586_arg0.maxMembersToShowOnEachTeam
-		if f586_local0 <= f586_local2 and f586_local1 <= f586_local2 then
+		if modelValue <= f586_local2 and f586_local1 <= f586_local2 then
 			return f586_local1
 		else
 			return 0
 		end
 	end,
 	getItem = function ( f587_arg0, f587_arg1, f587_arg2 )
-		return Engine[@"getmodel"]( f587_arg1.team2BaseModel, "member" .. f587_arg2 )
+		return Engine.GetModel( f587_arg1.team2BaseModel, "member" .. f587_arg2 )
 	end
 }
 DataSources.MapInfo = {
 	getModel = function ( f588_arg0 )
-		local f588_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "MapInfo" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f588_local0, "gameTypeIcon" ), CoD.GetLoadingScreenGameTypeIconName() )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f588_local0, "gameType" ), Engine[@"getcurrentgametypename"]( f588_arg0 ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f588_local0, "mapName" ), MapNameToLocalizedMapName( Engine[@"getcurrentmap"]() ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f588_local0, "mapImage" ), MapNameToMapLoadingImage( f588_arg0, Engine[@"lobbygetmap"]() ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f588_local0, "dateTime" ), CoD.BaseUtility.GetMapValue( Engine[@"getcurrentmapname"](), "mapDateTime", 0x0 ) )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f588_local0, "location" ), CoD.BaseUtility.GetMapValue( Engine[@"getcurrentmapname"](), "mapLocation", 0x0 ) )
+		local f588_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "MapInfo" )
+		Engine.SetModelValue( Engine.CreateModel( f588_local0, "gameTypeIcon" ), CoD.GetLoadingScreenGameTypeIconName() )
+		Engine.SetModelValue( Engine.CreateModel( f588_local0, "gameType" ), Engine.GetCurrentGametypeName( f588_arg0 ) )
+		Engine.SetModelValue( Engine.CreateModel( f588_local0, "mapName" ), MapNameToLocalizedMapName( Engine.GetCurrentMap() ) )
+		Engine.SetModelValue( Engine.CreateModel( f588_local0, "mapImage" ), MapNameToMapLoadingImage( f588_arg0, Engine[@"lobbygetmap"]() ) )
+		Engine.SetModelValue( Engine.CreateModel( f588_local0, "dateTime" ), CoD.BaseUtility.GetMapValue( Engine.GetCurrentMapName(), "mapDateTime", 0x0 ) )
+		Engine.SetModelValue( Engine.CreateModel( f588_local0, "location" ), CoD.BaseUtility.GetMapValue( Engine.GetCurrentMapName(), "mapLocation", 0x0 ) )
 		return f588_local0
 	end
 }
 DataSources.LoadingScreenTeamInfo = {
 	getModel = function ( f589_arg0 )
-		local f589_local0 = Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f589_arg0 ), "LoadingScreenInfo" ), "LoadingScreenTeamInfo" )
-		local f589_local1 = Engine[@"createmodel"]( f589_local0, "team1FactionName" )
-		local f589_local2 = Engine[@"createmodel"]( f589_local0, "team2FactionName" )
-		local f589_local3 = Engine[@"createmodel"]( f589_local0, "team1FactionIcon" )
-		local f589_local4 = Engine[@"createmodel"]( f589_local0, "team2FactionIcon" )
-		local f589_local5 = Engine[@"createmodel"]( f589_local0, "team1FactionColor" )
-		local f589_local6 = Engine[@"createmodel"]( f589_local0, "team2FactionColor" )
-		local f589_local7 = Engine[@"createmodel"]( f589_local0, "gameTypeIcon" )
-		local f589_local8 = Engine[@"createmodel"]( f589_local0, "gameType" )
-		local f589_local9 = Engine[@"createmodel"]( f589_local0, "mapName" )
-		local f589_local10 = Engine[@"createmodel"]( f589_local0, "location" )
-		local f589_local11 = Engine[@"createmodel"]( f589_local0, "tip" )
-		local f589_local12 = Engine[@"createmodel"]( f589_local0, "statusText" )
+		local f589_local0 = Engine.CreateModel( Engine.CreateModel( Engine.GetModelForController( f589_arg0 ), "LoadingScreenInfo" ), "LoadingScreenTeamInfo" )
+		local f589_local1 = Engine.CreateModel( f589_local0, "team1FactionName" )
+		local f589_local2 = Engine.CreateModel( f589_local0, "team2FactionName" )
+		local f589_local3 = Engine.CreateModel( f589_local0, "team1FactionIcon" )
+		local f589_local4 = Engine.CreateModel( f589_local0, "team2FactionIcon" )
+		local f589_local5 = Engine.CreateModel( f589_local0, "team1FactionColor" )
+		local f589_local6 = Engine.CreateModel( f589_local0, "team2FactionColor" )
+		local f589_local7 = Engine.CreateModel( f589_local0, "gameTypeIcon" )
+		local f589_local8 = Engine.CreateModel( f589_local0, "gameType" )
+		local f589_local9 = Engine.CreateModel( f589_local0, "mapName" )
+		local f589_local10 = Engine.CreateModel( f589_local0, "location" )
+		local f589_local11 = Engine.CreateModel( f589_local0, "tip" )
+		local f589_local12 = Engine.CreateModel( f589_local0, "statusText" )
 		local f589_local13 = f589_local0:create( "loadedFraction" )
 		f589_local13:set( f589_local0.loadedFraction:get() or 0 )
 		f589_local13 = f589_local0:create( "wzLoadedFraction" )
 		f589_local13:set( f589_local0.wzLoadedFraction:get() or 0 )
-		f589_local13 = Engine[@"createmodel"]( f589_local0, "statsValid" )
-		local f589_local14 = Engine[@"createmodel"]( f589_local0, "stat1" )
-		local f589_local15 = Engine[@"createmodel"]( f589_local0, "stat2" )
-		local f589_local16 = Engine[@"createmodel"]( f589_local0, "stat3" )
-		local f589_local17 = Engine[@"createmodel"]( f589_local0, "stat1Label" )
-		local f589_local18 = Engine[@"createmodel"]( f589_local0, "stat2Label" )
-		local f589_local19 = Engine[@"createmodel"]( f589_local0, "stat3Label" )
+		f589_local13 = Engine.CreateModel( f589_local0, "statsValid" )
+		local f589_local14 = Engine.CreateModel( f589_local0, "stat1" )
+		local f589_local15 = Engine.CreateModel( f589_local0, "stat2" )
+		local f589_local16 = Engine.CreateModel( f589_local0, "stat3" )
+		local f589_local17 = Engine.CreateModel( f589_local0, "stat1Label" )
+		local f589_local18 = Engine.CreateModel( f589_local0, "stat2Label" )
+		local f589_local19 = Engine.CreateModel( f589_local0, "stat3Label" )
 		local f589_local20, f589_local21 = nil
 		local f589_local22 = CoD.TeamUtility.GetTeamID( f589_arg0 )
 		local f589_local23 = {
-			name = CoD.TeamUtility.GetTeamNameCaps( Enum[@"team_t"][@"team_allies"] ),
-			icon = CoD.TeamUtility.GetTeamFactionIcon( Enum[@"team_t"][@"team_allies"] ),
-			color = CoD.TeamUtility.GetTeamFactionColor( Enum[@"team_t"][@"team_allies"] )
+			name = CoD.TeamUtility.GetTeamNameCaps( Enum.team_t[@"team_allies"] ),
+			icon = CoD.TeamUtility.GetTeamFactionIcon( Enum.team_t[@"team_allies"] ),
+			color = CoD.TeamUtility.GetTeamFactionColor( Enum.team_t[@"team_allies"] )
 		}
 		local f589_local24 = {
-			name = CoD.TeamUtility.GetTeamNameCaps( Enum[@"team_t"][@"team_axis"] ),
-			icon = CoD.TeamUtility.GetTeamFactionIcon( Enum[@"team_t"][@"team_axis"] ),
-			color = CoD.TeamUtility.GetTeamFactionColor( Enum[@"team_t"][@"team_axis"] )
+			name = CoD.TeamUtility.GetTeamNameCaps( Enum.team_t[@"team_axis"] ),
+			icon = CoD.TeamUtility.GetTeamFactionIcon( Enum.team_t[@"team_axis"] ),
+			color = CoD.TeamUtility.GetTeamFactionColor( Enum.team_t[@"team_axis"] )
 		}
-		if f589_local22 == Enum[@"team_t"][@"team_spectator"] then
+		if f589_local22 == Enum.team_t[@"team_spectator"] then
 			if CoD.ShoutcasterProfileVarBool( f589_arg0, "shoutcaster_ds_flip_scorepanel" ) then
 				f589_local20 = f589_local24
 				f589_local21 = f589_local23
@@ -10937,7 +10935,7 @@ DataSources.LoadingScreenTeamInfo = {
 				f589_local20 = f589_local23
 				f589_local21 = f589_local24
 			end
-		elseif f589_local22 == Enum[@"team_t"][@"team_allies"] then
+		elseif f589_local22 == Enum.team_t[@"team_allies"] then
 			f589_local20 = f589_local23
 			f589_local21 = f589_local24
 		else
@@ -10946,13 +10944,13 @@ DataSources.LoadingScreenTeamInfo = {
 		end
 		local f589_local25 = CoD.GetCurrentPlayerStats( f589_arg0 )
 		local f589_local26 = false
-		if f589_local25 and CoD.BaseUtility.IsCurrentSessionModeEqualTo( Enum[@"emodes"][@"mode_multiplayer"] ) and CoDShared.IsRankedGame() then
-			local f589_local27 = Engine[@"getcurrentmap"]()
+		if f589_local25 and CoD.BaseUtility.IsCurrentSessionModeEqualTo( Enum.eModes.mode_multiplayer ) and CoDShared.IsRankedGame() then
+			local f589_local27 = Engine.GetCurrentMap()
 			local f589_local28 = IsArenaMode() and f589_local25.mapStatsArena[f589_local27] or f589_local25.mapStats[f589_local27]
 			if f589_local28 ~= nil then
 				local f589_local29 = Engine[@"lobbygetgametype"]()
 				if f589_local29 == "" then
-					f589_local29 = Dvar[@"g_gametype"]:get()
+					f589_local29 = Dvar.g_gametype:get()
 				end
 				local f589_local30 = Engine[@"converttoxhash"]( f589_local29 )
 				local f589_local31 = f589_local28.perMode[Engine[@"hash_7D492E0385F6D3E4"]( f589_local30 )]
@@ -10979,37 +10977,37 @@ DataSources.LoadingScreenTeamInfo = {
 					end
 					
 					local f589_local40 = {
-						@"control",
-						@"control_hc",
-						@"control_cwl",
-						@"dom",
-						@"dom_hc",
-						@"dom_bb",
-						@"dom_bb_hc",
-						@"escort",
-						@"sd",
-						@"sd_hc",
-						@"sd_cwl",
-						@"bounty",
-						@"clean",
-						@"prop",
-						@"ctf"
+						"control",
+						"control_hc",
+						"control_cwl",
+						"dom",
+						"dom_hc",
+						"dom_bb",
+						"dom_bb_hc",
+						"escort",
+						"sd",
+						"sd_hc",
+						"sd_cwl",
+						"bounty",
+						"clean",
+						"prop",
+						"ctf"
 					}
 					local f589_local41 = {
-						@"koth",
-						@"koth_cwl"
+						"koth",
+						"koth_cwl"
 					}
 					local f589_local42 = {
-						@"tdm",
-						@"tdm_hc",
-						@"tdm_bb",
-						@"tdm_bb_hc",
-						@"conf",
-						@"conf_hc",
-						@"oic",
-						@"infect",
-						@"sas",
-						@"svz"
+						"tdm",
+						"tdm_hc",
+						"tdm_bb",
+						"tdm_bb_hc",
+						"conf",
+						"conf_hc",
+						"oic",
+						"infect",
+						"sas",
+						"svz"
 					}
 					if f589_local39( f589_local30, f589_local40 ) then
 						local f589_local43 = f589_local31.stat1:get()
@@ -11045,46 +11043,46 @@ DataSources.LoadingScreenTeamInfo = {
 						f589_local36 = 0x0
 					end
 					local f589_local45 = f589_local38( f589_local31.win:get(), f589_local31.loss:get() )
-					Engine[@"setmodelvalue"]( f589_local13, f589_local37 )
-					Engine[@"setmodelvalue"]( f589_local14, f589_local33 )
-					Engine[@"setmodelvalue"]( f589_local15, f589_local34 )
-					Engine[@"setmodelvalue"]( f589_local16, f589_local45 )
-					Engine[@"setmodelvalue"]( f589_local17, f589_local35 )
-					Engine[@"setmodelvalue"]( f589_local18, f589_local36 )
-					Engine[@"setmodelvalue"]( f589_local19, @"hash_39F34F3A8BD173F7" )
+					Engine.SetModelValue( f589_local13, f589_local37 )
+					Engine.SetModelValue( f589_local14, f589_local33 )
+					Engine.SetModelValue( f589_local15, f589_local34 )
+					Engine.SetModelValue( f589_local16, f589_local45 )
+					Engine.SetModelValue( f589_local17, f589_local35 )
+					Engine.SetModelValue( f589_local18, f589_local36 )
+					Engine.SetModelValue( f589_local19, "aar/wl_ratio" )
 					f589_local26 = true
 				end
 			end
 		end
 		if f589_local26 == false then
-			Engine[@"setmodelvalue"]( f589_local13, false )
-			Engine[@"setmodelvalue"]( f589_local14, 0 )
-			Engine[@"setmodelvalue"]( f589_local15, 0 )
-			Engine[@"setmodelvalue"]( f589_local16, 0 )
-			Engine[@"setmodelvalue"]( f589_local17, 0x0 )
-			Engine[@"setmodelvalue"]( f589_local18, 0x0 )
-			Engine[@"setmodelvalue"]( f589_local19, 0x0 )
+			Engine.SetModelValue( f589_local13, false )
+			Engine.SetModelValue( f589_local14, 0 )
+			Engine.SetModelValue( f589_local15, 0 )
+			Engine.SetModelValue( f589_local16, 0 )
+			Engine.SetModelValue( f589_local17, 0x0 )
+			Engine.SetModelValue( f589_local18, 0x0 )
+			Engine.SetModelValue( f589_local19, 0x0 )
 		end
-		Engine[@"setmodelvalue"]( f589_local1, f589_local20.name )
-		Engine[@"setmodelvalue"]( f589_local3, f589_local20.icon )
-		Engine[@"setmodelvalue"]( f589_local5, f589_local20.color )
-		Engine[@"setmodelvalue"]( f589_local2, f589_local21.name )
-		Engine[@"setmodelvalue"]( f589_local4, f589_local21.icon )
-		Engine[@"setmodelvalue"]( f589_local6, f589_local21.color )
-		Engine[@"setmodelvalue"]( f589_local7, CoD.GetLoadingScreenGameTypeIconName() )
+		Engine.SetModelValue( f589_local1, f589_local20.name )
+		Engine.SetModelValue( f589_local3, f589_local20.icon )
+		Engine.SetModelValue( f589_local5, f589_local20.color )
+		Engine.SetModelValue( f589_local2, f589_local21.name )
+		Engine.SetModelValue( f589_local4, f589_local21.icon )
+		Engine.SetModelValue( f589_local6, f589_local21.color )
+		Engine.SetModelValue( f589_local7, CoD.GetLoadingScreenGameTypeIconName() )
 		local f589_local27 = Engine[@"lobbygetgametype"]()
 		if f589_local27 == "" then
-			f589_local27 = Dvar[@"g_gametype"]:get()
+			f589_local27 = Dvar.g_gametype:get()
 		end
-		if Engine[@"converttoxhash"]( f589_local27 ) == @"ztrials" then
-			Engine[@"setmodelvalue"]( f589_local9, CoD.MapUtility.GetLocalizedMapValue( CoD.MapUtility.ConvertMapNameToXHash( Engine[@"getcurrentmap"]() ), CoD.ZombieUtility.GetTrialMapNameFieldName( Engine[@"getgametypesetting"]( @"zmtrialsvariant" ) ), "" ) )
+		if Engine[@"converttoxhash"]( f589_local27 ) == "ztrials" then
+			Engine.SetModelValue( f589_local9, CoD.MapUtility.GetLocalizedMapValue( CoD.MapUtility.ConvertMapNameToXHash( Engine.GetCurrentMap() ), CoD.ZombieUtility.GetTrialMapNameFieldName( Engine.GetGametypeSetting( "zmtrialsvariant" ) ), "" ) )
 		else
-			Engine[@"setmodelvalue"]( f589_local9, CoD.MapUtility.MapNameToLocalizedName( CoD.MapUtility.ConvertMapNameToXHash( Engine[@"getcurrentmap"]() ) ) )
+			Engine.SetModelValue( f589_local9, CoD.MapUtility.MapNameToLocalizedName( CoD.MapUtility.ConvertMapNameToXHash( Engine.GetCurrentMap() ) ) )
 		end
-		Engine[@"setmodelvalue"]( f589_local8, CoD.GameTypeUtility.GetLocalizedGameTypeValue( f589_local27, "nameRef", "" ) )
-		Engine[@"setmodelvalue"]( f589_local10, 0x0 )
-		Engine[@"setmodelvalue"]( f589_local11, CoD.HUDUtility.GetDidYouKnowString( f589_arg0 ) )
-		Engine[@"setmodelvalue"]( f589_local12, "" )
+		Engine.SetModelValue( f589_local8, CoD.GameTypeUtility.GetLocalizedGameTypeValue( f589_local27, "nameRef", "" ) )
+		Engine.SetModelValue( f589_local10, 0x0 )
+		Engine.SetModelValue( f589_local11, CoD.HUDUtility.GetDidYouKnowString( f589_arg0 ) )
+		Engine.SetModelValue( f589_local12, "" )
 		return f589_local0
 	end
 }
@@ -11093,66 +11091,66 @@ DataSources.SwitchCameraWheel = {
 		local f592_local0 = {
 			{
 				disabled = false,
-				cameraMode = Enum[@"democameramode"][@"demo_camera_mode_none"],
+				cameraMode = Enum.demoCameraMode[@"demo_camera_mode_none"],
 				image = "t7_hud_ks_drone_hunter_drop",
-				displayName = @"hash_62B9D4957E0190CA"
+				displayName = "menu/demo_dvr_first_person"
 			},
 			{
 				disabled = false,
-				cameraMode = Enum[@"democameramode"][@"demo_camera_mode_thirdperson"],
+				cameraMode = Enum.demoCameraMode[@"demo_camera_mode_thirdperson"],
 				image = "t7_hud_ks_drone_amws_drop",
-				displayName = @"hash_49DB4CA58C2742FB"
+				displayName = "menu/demo_dvr_third_person"
 			},
 			{
 				disabled = false,
-				cameraMode = Enum[@"democameramode"][@"demo_camera_mode_freecam"],
-				freeCameraMode = Enum[@"demofreecameramode"][@"demo_freecam_mode_freeroam"],
+				cameraMode = Enum.demoCameraMode[@"demo_camera_mode_freecam"],
+				freeCameraMode = Enum.demoFreeCameraMode[@"demo_freecam_mode_freeroam"],
 				image = "t7_hud_ks_auto_sentry_drop",
-				displayName = @"hash_1D2F1FA0F042A708"
+				displayName = "menu/demo_dvr_free_camera"
 			},
 			{
 				disabled = false,
-				cameraMode = Enum[@"democameramode"][@"demo_camera_mode_freecam"],
-				freeCameraMode = Enum[@"demofreecameramode"][@"demo_freecam_mode_lightman"],
+				cameraMode = Enum.demoCameraMode[@"demo_camera_mode_freecam"],
+				freeCameraMode = Enum.demoFreeCameraMode[@"demo_freecam_mode_lightman"],
 				image = "t7_hud_ks_drone_attack_drop",
-				displayName = @"hash_3A671C5A2ED556D4"
+				displayName = "menu/demo_dvr_lightman"
 			},
 			{
 				disabled = false,
-				cameraMode = Enum[@"democameramode"][@"demo_camera_mode_freecam"],
-				freeCameraMode = Enum[@"demofreecameramode"][@"demo_freecam_mode_lock_on"],
+				cameraMode = Enum.demoCameraMode[@"demo_camera_mode_freecam"],
+				freeCameraMode = Enum.demoFreeCameraMode[@"demo_freecam_mode_lock_on"],
 				image = "t7_hud_ks_drone_dart_drop",
-				displayName = @"hash_3795B409EEE5D1A5"
+				displayName = "menu/demo_dvr_lock_on_camera"
 			},
 			{
 				disabled = Engine[@"isdemocliprecording"](),
-				cameraMode = Enum[@"democameramode"][@"demo_camera_mode_freecam"],
-				freeCameraMode = Enum[@"demofreecameramode"][@"demo_freecam_mode_edit"],
+				cameraMode = Enum.demoCameraMode[@"demo_camera_mode_freecam"],
+				freeCameraMode = Enum.demoFreeCameraMode[@"demo_freecam_mode_edit"],
 				image = "t7_hud_ks_drone_cuav_drop",
-				displayName = @"hash_D1DF32EE56FD27F"
+				displayName = "menu/demo_dvr_edit_dolly_camera"
 			},
 			{
 				disabled = false,
-				cameraMode = Enum[@"democameramode"][@"demo_camera_mode_freecam"],
-				freeCameraMode = Enum[@"demofreecameramode"][@"demo_freecam_mode_dolly"],
+				cameraMode = Enum.demoCameraMode[@"demo_camera_mode_freecam"],
+				freeCameraMode = Enum.demoFreeCameraMode[@"demo_freecam_mode_dolly"],
 				image = "t7_hud_ks_emp_core_drop",
-				displayName = @"hash_29AF38899054A0AA"
+				displayName = "menu/demo_dvr_dolly_camera"
 			}
 		}
-		local f592_local1 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f592_arg0 ), "SwitchCameraWheel" )
-		Engine[@"createmodel"]( f592_local1, "selectedCameraDisplayName" )
-		Engine[@"createmodel"]( f592_local1, "selectedCameraDisplayDesc" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f592_local1, "name" ), Engine[@"toupper"]( Engine[@"hash_4F9F1239CFD921FE"]( @"hash_578D5687ECA65F0E" ) ) )
+		local f592_local1 = Engine.CreateModel( Engine.GetModelForController( f592_arg0 ), "SwitchCameraWheel" )
+		Engine.CreateModel( f592_local1, "selectedCameraDisplayName" )
+		Engine.CreateModel( f592_local1, "selectedCameraDisplayDesc" )
+		Engine.SetModelValue( Engine.CreateModel( f592_local1, "name" ), Engine.ToUpper( Engine[@"hash_4F9F1239CFD921FE"]( "menu/demo_controls_switch_camera" ) ) )
 		for f592_local2 = 1, #f592_local0, 1 do
 			local f592_local5 = f592_local0[f592_local2]
-			local f592_local6 = Engine[@"createmodel"]( f592_local1, "Camera" .. f592_local2 )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f592_local6, "displayName" ), Engine[@"localize"]( f592_local5.displayName ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f592_local6, "description" ), Engine[@"localize"]( f592_local5.displayName .. "_DESC" ) )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f592_local6, "image" ), f592_local5.image )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f592_local6, "disabled" ), f592_local5.disabled )
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f592_local6, "cameraMode" ), f592_local5.cameraMode )
+			local f592_local6 = Engine.CreateModel( f592_local1, "Camera" .. f592_local2 )
+			Engine.SetModelValue( Engine.CreateModel( f592_local6, "displayName" ), Engine.Localize( f592_local5.displayName ) )
+			Engine.SetModelValue( Engine.CreateModel( f592_local6, "description" ), Engine.Localize( f592_local5.displayName .. "_DESC" ) )
+			Engine.SetModelValue( Engine.CreateModel( f592_local6, "image" ), f592_local5.image )
+			Engine.SetModelValue( Engine.CreateModel( f592_local6, "disabled" ), f592_local5.disabled )
+			Engine.SetModelValue( Engine.CreateModel( f592_local6, "cameraMode" ), f592_local5.cameraMode )
 			if f592_local5.freeCameraMode ~= nil then
-				Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f592_local6, "freeCameraMode" ), f592_local5.freeCameraMode )
+				Engine.SetModelValue( Engine.CreateModel( f592_local6, "freeCameraMode" ), f592_local5.freeCameraMode )
 			end
 		end
 		return f592_local1
@@ -11185,7 +11183,7 @@ DataSourceHelpers.PerControllerDataSourceSetup( "CommsWidget", "CommsWidget", fu
 end, false )
 DataSources.Attacker = {
 	getModel = function ( f595_arg0 )
-		local f595_local0 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f595_arg0 ), "Attacker" )
+		local f595_local0 = Engine.GetModel( Engine.GetModelForController( f595_arg0 ), "Attacker" )
 		local f595_local1 = Engine[@"getmodelforclient"]( f595_local0.clientNum:get() )
 		local f595_local2 = f595_local0:create( "clientModel" )
 		f595_local2:set( f595_local1 )
@@ -11194,7 +11192,7 @@ DataSources.Attacker = {
 }
 DataSources.Victim = {
 	getModel = function ( f596_arg0 )
-		local f596_local0 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f596_arg0 ), "Victim" )
+		local f596_local0 = Engine.GetModel( Engine.GetModelForController( f596_arg0 ), "Victim" )
 		local f596_local1 = Engine[@"getmodelforclient"]( f596_local0.clientNum:get() )
 		local f596_local2 = f596_local0:create( "clientModel" )
 		f596_local2:set( f596_local1 )
@@ -11203,59 +11201,59 @@ DataSources.Victim = {
 }
 DataSources.Player = {
 	getModel = function ( f597_arg0 )
-		local f597_local0 = Engine[@"getmodelforcontroller"]( f597_arg0 )
+		local f597_local0 = Engine.GetModelForController( f597_arg0 )
 		local f597_local1 = f597_local0:get( "Player" )
 		if f597_local1 == nil then
 			f597_local1 = f597_local0:create( "Player" )
 			local f597_local2 = f597_local1:create( "clientNum" )
-			f597_local2:set( Engine[@"getclientnum"]( f597_arg0 ) )
+			f597_local2:set( Engine.GetClientNum( f597_arg0 ) )
 		end
 		return f597_local1
 	end
 }
 DataSources.TopScorerMenuData = {
 	getModel = function ( f598_arg0 )
-		return Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f598_arg0 ), "topPlayerInfo" )
+		return Engine.GetModel( Engine.GetModelForController( f598_arg0 ), "topPlayerInfo" )
 	end
 }
 DataSources.TopPlayerInfoData1 = {
 	getModel = function ( f599_arg0 )
-		return Engine[@"getmodel"]( DataSources.TopScorerMenuData.getModel( f599_arg0 ), "1" )
+		return Engine.GetModel( DataSources.TopScorerMenuData.getModel( f599_arg0 ), "1" )
 	end
 }
 DataSources.TopPlayerInfoData2 = {
 	getModel = function ( f600_arg0 )
-		return Engine[@"getmodel"]( DataSources.TopScorerMenuData.getModel( f600_arg0 ), "2" )
+		return Engine.GetModel( DataSources.TopScorerMenuData.getModel( f600_arg0 ), "2" )
 	end
 }
 DataSources.TopPlayerInfoData3 = {
 	getModel = function ( f601_arg0 )
-		return Engine[@"getmodel"]( DataSources.TopScorerMenuData.getModel( f601_arg0 ), "3" )
+		return Engine.GetModel( DataSources.TopScorerMenuData.getModel( f601_arg0 ), "3" )
 	end
 }
 DataSources.SelfPlayerInfoData = {
 	getModel = function ( f602_arg0 )
-		return Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f602_arg0 ), "selfPlayerInfo" )
+		return Engine.GetModel( Engine.GetModelForController( f602_arg0 ), "selfPlayerInfo" )
 	end
 }
 DataSources.AARPerformanceTabStats = {
 	getModel = function ( f603_arg0 )
-		return Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f603_arg0 ), "aarStats.performanceTabStats" )
+		return Engine.CreateModel( Engine.GetModelForController( f603_arg0 ), "aarStats.performanceTabStats" )
 	end
 }
 DataSources.AARSPMGraph = {
 	getModel = function ( f604_arg0 )
-		return Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f604_arg0 ), "aarStats.performanceTabStats.spmGraph" )
+		return Engine.CreateModel( Engine.GetModelForController( f604_arg0 ), "aarStats.performanceTabStats.spmGraph" )
 	end
 }
 DataSources.AARKDRGraph = {
 	getModel = function ( f605_arg0 )
-		return Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f605_arg0 ), "aarStats.performanceTabStats.kdrGraph" )
+		return Engine.CreateModel( Engine.GetModelForController( f605_arg0 ), "aarStats.performanceTabStats.kdrGraph" )
 	end
 }
 DataSources.Scoreboard = {
 	getModel = function ( f606_arg0 )
-		return Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f606_arg0 ), "scoreboardInfo" )
+		return Engine.CreateModel( Engine.GetModelForController( f606_arg0 ), "scoreboardInfo" )
 	end
 }
 DataSources.ScoreboardTeam1ListCP = ListHelper_SetupDataSource( "scoreboardTeam1ListCP", function ( f607_arg0 )
@@ -11263,120 +11261,120 @@ DataSources.ScoreboardTeam1ListCP = ListHelper_SetupDataSource( "scoreboardTeam1
 end )
 DataSources.ScoreboardTeam1List = {
 	prepare = function ( f608_arg0, f608_arg1, f608_arg2 )
-		local f608_local0 = Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f608_arg0 ), "CodCaster" ), "showCodCasterScoreboard" )
-		if Engine[@"getmodelvalue"]( f608_local0 ) == true then
-			f608_arg1.scoreboardInfoModel = Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "scoreboard.team3" )
+		local f608_local0 = Engine.CreateModel( Engine.CreateModel( Engine.GetModelForController( f608_arg0 ), "CodCaster" ), "showCodCasterScoreboard" )
+		if Engine.GetModelValue( f608_local0 ) == true then
+			f608_arg1.scoreboardInfoModel = Engine.GetModel( Engine.GetGlobalModel(), "scoreboard.team3" )
 		else
-			f608_arg1.scoreboardInfoModel = Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "scoreboard.team1" )
+			f608_arg1.scoreboardInfoModel = Engine.GetModel( Engine.GetGlobalModel(), "scoreboard.team1" )
 		end
 		if f608_arg1.teamCountSubscription then
 			f608_arg1:removeSubscription( f608_arg1.teamCountSubscription )
 		end
-		f608_arg1.teamCountSubscription = f608_arg1:subscribeToModel( Engine[@"getmodel"]( f608_arg1.scoreboardInfoModel, "count" ), function ()
+		f608_arg1.teamCountSubscription = f608_arg1:subscribeToModel( Engine.GetModel( f608_arg1.scoreboardInfoModel, "count" ), function ()
 			f608_arg1:updateDataSource( nil, true, true )
-			Engine[@"forcenotifymodelsubscriptions"]( Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f608_arg0 ), "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"] ) )
+			Engine.ForceNotifyModelSubscriptions( Engine.GetModel( Engine.GetModelForController( f608_arg0 ), "UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_scoreboard_open"] ) )
 		end, false )
 		if f608_arg1.showCasterScoreboardSubscription then
 			f608_arg1:removeSubscription( f608_arg1.showCasterScoreboardSubscription )
 		end
 		f608_arg1.showCasterScoreboardSubscription = f608_arg1:subscribeToModel( f608_local0, function ()
 			f608_arg1:updateDataSource( nil, true, false )
-			Engine[@"forcenotifymodelsubscriptions"]( Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f608_arg0 ), "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"] ) )
+			Engine.ForceNotifyModelSubscriptions( Engine.GetModel( Engine.GetModelForController( f608_arg0 ), "UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_scoreboard_open"] ) )
 		end, false )
 	end,
 	getCount = function ( f611_arg0 )
 		local f611_local0 = CoD.ScoreboardUtility.MinRowsToShowOnEachTeam
-		if Engine[@"getcurrentteamcount"]() < 2 and not Engine[@"iszombiesgame"]() and not Engine[@"iscampaigngame"]() then
+		if Engine.GetCurrentTeamCount() < 2 and not Engine.IsZombiesGame() and not Engine.IsCampaignGame() then
 			f611_local0 = CoD.ScoreboardUtility.MinRowsToShowOnEachTeamForFFA
 		end
-		return math.max( Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f611_arg0.scoreboardInfoModel, "count" ) ), f611_local0 )
+		return math.max( Engine.GetModelValue( Engine.GetModel( f611_arg0.scoreboardInfoModel, "count" ) ), f611_local0 )
 	end,
 	getItem = function ( f612_arg0, f612_arg1, f612_arg2 )
-		return Engine[@"getmodel"]( f612_arg1.scoreboardInfoModel, f612_arg2 - 1 )
+		return Engine.GetModel( f612_arg1.scoreboardInfoModel, f612_arg2 - 1 )
 	end
 }
 DataSources.ScoreboardTeam2List = {
 	prepare = function ( f613_arg0, f613_arg1, f613_arg2 )
 		f613_arg1.activeController = f613_arg0
-		f613_arg1.scoreboardInfoModel = Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "scoreboard.team2" )
+		f613_arg1.scoreboardInfoModel = Engine.GetModel( Engine.GetGlobalModel(), "scoreboard.team2" )
 		if f613_arg1.teamCountSubscription then
 			f613_arg1:removeSubscription( f613_arg1.teamCountSubscription )
 		end
-		f613_arg1.teamCountSubscription = f613_arg1:subscribeToModel( Engine[@"getmodel"]( f613_arg1.scoreboardInfoModel, "count" ), function ()
+		f613_arg1.teamCountSubscription = f613_arg1:subscribeToModel( Engine.GetModel( f613_arg1.scoreboardInfoModel, "count" ), function ()
 			f613_arg1:updateDataSource( nil, true, true )
-			Engine[@"forcenotifymodelsubscriptions"]( Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f613_arg0 ), "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"] ) )
+			Engine.ForceNotifyModelSubscriptions( Engine.GetModel( Engine.GetModelForController( f613_arg0 ), "UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_scoreboard_open"] ) )
 		end, false )
 		if f613_arg1.showCasterScoreboardSubscription then
 			f613_arg1:removeSubscription( f613_arg1.showCasterScoreboardSubscription )
 		end
-		f613_arg1.showCasterScoreboardSubscription = f613_arg1:subscribeToModel( Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f613_arg0 ), "CodCaster" ), "showCodCasterScoreboard" ), function ()
+		f613_arg1.showCasterScoreboardSubscription = f613_arg1:subscribeToModel( Engine.CreateModel( Engine.CreateModel( Engine.GetModelForController( f613_arg0 ), "CodCaster" ), "showCodCasterScoreboard" ), function ()
 			f613_arg1:updateDataSource( nil, true, true )
-			Engine[@"forcenotifymodelsubscriptions"]( Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f613_arg0 ), "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"] ) )
+			Engine.ForceNotifyModelSubscriptions( Engine.GetModel( Engine.GetModelForController( f613_arg0 ), "UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_scoreboard_open"] ) )
 		end, false )
 	end,
 	getCount = function ( f616_arg0 )
 		local f616_local0 = false
-		if Engine[@"isingame"]() then
-			f616_local0 = Engine[@"getmodelvalue"]( Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f616_arg0.activeController ), "CodCaster" ), "showCodCasterScoreboard" ) )
+		if Engine.IsInGame() then
+			f616_local0 = Engine.GetModelValue( Engine.CreateModel( Engine.CreateModel( Engine.GetModelForController( f616_arg0.activeController ), "CodCaster" ), "showCodCasterScoreboard" ) )
 		end
 		if IsGameTypeDOA() then
 			return 0
 		elseif f616_local0 == true then
 			return 0
 		else
-			return math.max( Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f616_arg0.scoreboardInfoModel, "count" ) ), CoD.ScoreboardUtility.MinRowsToShowOnEachTeam )
+			return math.max( Engine.GetModelValue( Engine.GetModel( f616_arg0.scoreboardInfoModel, "count" ) ), CoD.ScoreboardUtility.MinRowsToShowOnEachTeam )
 		end
 	end,
 	getItem = function ( f617_arg0, f617_arg1, f617_arg2 )
-		return Engine[@"getmodel"]( f617_arg1.scoreboardInfoModel, f617_arg2 - 1 )
+		return Engine.GetModel( f617_arg1.scoreboardInfoModel, f617_arg2 - 1 )
 	end
 }
 DataSources.CodCasterScoreboardTeam1List = {
 	prepare = function ( f618_arg0, f618_arg1, f618_arg2 )
-		f618_arg1.scoreboardInfoModel = Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "scoreboard.team1" )
+		f618_arg1.scoreboardInfoModel = Engine.GetModel( Engine.GetGlobalModel(), "scoreboard.team1" )
 		if f618_arg1.teamCountSubscription then
 			f618_arg1:removeSubscription( f618_arg1.teamCountSubscription )
 		end
-		f618_arg1.teamCountSubscription = f618_arg1:subscribeToModel( Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f618_arg0 ), "updateScoreboard" ), function ()
+		f618_arg1.teamCountSubscription = f618_arg1:subscribeToModel( Engine.CreateModel( Engine.GetModelForController( f618_arg0 ), "updateScoreboard" ), function ()
 			f618_arg1:updateDataSource()
 		end, false )
 	end,
 	getCount = function ( f620_arg0 )
-		return CoD.CodCasterUtility.GetTeamPlayerCount( f620_arg0.controller, Enum[@"team_t"][@"team_allies"] )
+		return CoD.CodCasterUtility.GetTeamPlayerCount( f620_arg0.controller, Enum.team_t[@"team_allies"] )
 	end,
 	getItem = function ( f621_arg0, f621_arg1, f621_arg2 )
-		return Engine[@"getmodel"]( f621_arg1.scoreboardInfoModel, f621_arg2 - 1 )
+		return Engine.GetModel( f621_arg1.scoreboardInfoModel, f621_arg2 - 1 )
 	end
 }
 DataSources.CodCasterScoreboardTeam2List = {
 	prepare = function ( f622_arg0, f622_arg1, f622_arg2 )
-		f622_arg1.scoreboardInfoModel = Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "scoreboard.team2" )
+		f622_arg1.scoreboardInfoModel = Engine.GetModel( Engine.GetGlobalModel(), "scoreboard.team2" )
 		if f622_arg1.teamCountSubscription then
 			f622_arg1:removeSubscription( f622_arg1.teamCountSubscription )
 		end
-		f622_arg1.teamCountSubscription = f622_arg1:subscribeToModel( Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f622_arg0 ), "updateScoreboard" ), function ()
+		f622_arg1.teamCountSubscription = f622_arg1:subscribeToModel( Engine.CreateModel( Engine.GetModelForController( f622_arg0 ), "updateScoreboard" ), function ()
 			f622_arg1:updateDataSource()
 		end, false )
 	end,
 	getCount = function ( f624_arg0 )
-		return CoD.CodCasterUtility.GetTeamPlayerCount( f624_arg0.controller, Enum[@"team_t"][@"team_axis"] )
+		return CoD.CodCasterUtility.GetTeamPlayerCount( f624_arg0.controller, Enum.team_t[@"team_axis"] )
 	end,
 	getItem = function ( f625_arg0, f625_arg1, f625_arg2 )
-		return Engine[@"getmodel"]( f625_arg1.scoreboardInfoModel, f625_arg2 - 1 )
+		return Engine.GetModel( f625_arg1.scoreboardInfoModel, f625_arg2 - 1 )
 	end
 }
 DataSources.DropdownListTest = {
 	prepare = function ( f626_arg0, f626_arg1, f626_arg2 )
 		local f626_local0 = 25
 		for f626_local1 = 1, f626_local0, 1 do
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f626_arg0 ), "DropdownTest.dropdownListTestModel" .. f626_local1 ), "itemName" ), "Random Value " .. f626_local1 )
+			Engine.SetModelValue( Engine.CreateModel( Engine.CreateModel( Engine.GetModelForController( f626_arg0 ), "DropdownTest.dropdownListTestModel" .. f626_local1 ), "itemName" ), "Random Value " .. f626_local1 )
 		end
 	end,
 	getCount = function ( f627_arg0 )
 		return 25
 	end,
 	getItem = function ( f628_arg0, f628_arg1, f628_arg2 )
-		return Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f628_arg0 ), "DropdownTest.dropdownListTestModel" .. f628_arg2 )
+		return Engine.CreateModel( Engine.GetModelForController( f628_arg0 ), "DropdownTest.dropdownListTestModel" .. f628_arg2 )
 	end
 }
 DataSourceHelpers.PerControllerDataSourceSetup( "DeadSpectate", "deadSpectator", function ( f629_arg0, f629_arg1 )
@@ -11388,7 +11386,7 @@ DataSources.DebugSessionSearchQoSJoin = ListHelper_SetupDataSource( "DebugSessio
 		return {}
 	end
 	local f630_local0 = function ( f631_arg0, f631_arg1 )
-		return Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f631_arg0, f631_arg1 ) )
+		return Engine.GetModelValue( Engine.GetModel( f631_arg0, f631_arg1 ) )
 	end
 	
 	local f630_local1 = function ( f632_arg0 )
@@ -11406,21 +11404,21 @@ DataSources.DebugSessionSearchQoSJoin = ListHelper_SetupDataSource( "DebugSessio
 	Engine[@"lobbyevent"]( "OnSessionSQJRefreshInfo", {
 		controller = f630_arg0
 	} )
-	local f630_local3 = Engine[@"getmodel"]( Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "debug" ), "sessionSQJ" )
+	local f630_local3 = Engine.GetModel( Engine.GetModel( Engine.GetGlobalModel(), "debug" ), "sessionSQJ" )
 	local f630_local4 = f630_local0( f630_local3, "searchStage" )
-	local f630_local5 = Engine[@"getmodel"]( f630_local3, "results" )
+	local f630_local5 = Engine.GetModel( f630_local3, "results" )
 	if Dvar[@"hash_44BADE8473F0165F"]:exists() and Dvar[@"hash_44BADE8473F0165F"]:get() then
 		local f630_local6 = f630_local1( 0 )
-		local f630_local7 = Engine[@"getmodel"]( f630_local5, "1" )
+		local f630_local7 = Engine.GetModel( f630_local5, "1" )
 		local f630_local8 = f630_local0( f630_local7, "numResults" )
-		local f630_local9 = Engine[@"getmodel"]( f630_local7, "data" )
+		local f630_local9 = Engine.GetModel( f630_local7, "data" )
 		if f630_local8 == nil then
 			return {}
 		end
 		for f630_local10 = 1, f630_local8, 1 do
 			table.insert( f630_local2, {
 				models = {
-					asyncMatchmakingString = f630_local0( Engine[@"getmodel"]( f630_local9, tostring( f630_local10 ) ), "asyncMatchmakingString" ),
+					asyncMatchmakingString = f630_local0( Engine.GetModel( f630_local9, tostring( f630_local10 ) ), "asyncMatchmakingString" ),
 					noResults = "",
 					xuid = "",
 					gamertag = "",
@@ -11439,7 +11437,7 @@ DataSources.DebugSessionSearchQoSJoin = ListHelper_SetupDataSource( "DebugSessio
 	else
 		for f630_local6 = 1, f630_local4, 1 do
 			local f630_local10 = f630_local1( f630_local6 )
-			local f630_local11 = Engine[@"getmodel"]( f630_local5, tostring( f630_local6 ) )
+			local f630_local11 = Engine.GetModel( f630_local5, tostring( f630_local6 ) )
 			local f630_local12 = f630_local0( f630_local11, "numResults" )
 			if f630_local12 == 0 then
 				table.insert( f630_local2, {
@@ -11460,9 +11458,9 @@ DataSources.DebugSessionSearchQoSJoin = ListHelper_SetupDataSource( "DebugSessio
 					}
 				} )
 			end
-			local f630_local13 = Engine[@"getmodel"]( f630_local11, "data" )
+			local f630_local13 = Engine.GetModel( f630_local11, "data" )
 			for f630_local14 = 1, f630_local12, 1 do
-				local f630_local17 = Engine[@"getmodel"]( f630_local13, tostring( f630_local14 ) )
+				local f630_local17 = Engine.GetModel( f630_local13, tostring( f630_local14 ) )
 				local f630_local18 = f630_local0( f630_local17, "xuidstr" ) or "0"
 				local f630_local19 = f630_local0( f630_local17, "gamertag" ) or ""
 				local f630_local20 = f630_local0( f630_local17, "publicIPAddress" )
@@ -11507,8 +11505,8 @@ DataSources.DebugSessionSearchQoSJoin = ListHelper_SetupDataSource( "DebugSessio
 	end
 	return f630_local2
 end, nil, nil, function ( f633_arg0, f633_arg1, f633_arg2 )
-	f633_arg1.updateModel = Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "debug" ), "sessionSQJ" ), "update" )
-	Engine[@"setmodelvalue"]( f633_arg1.updateModel, 0 )
+	f633_arg1.updateModel = Engine.CreateModel( Engine.CreateModel( Engine.CreateModel( Engine.GetGlobalModel(), "debug" ), "sessionSQJ" ), "update" )
+	Engine.SetModelValue( f633_arg1.updateModel, 0 )
 	if f633_arg1.updateSubscription then
 		f633_arg1:removeSubscription( f633_arg1.updateSubscription )
 	end
@@ -11518,30 +11516,30 @@ end, nil, nil, function ( f633_arg0, f633_arg1, f633_arg2 )
 end )
 DataSources.LobbyProcessQueueInfo = ListHelper_SetupDataSource( "LobbyProcessQueueInfo", function ( f635_arg0 )
 	local f635_local0 = {}
-	local f635_local1 = Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "lobbyDebug" ), "processQueue" )
-	local f635_local2 = Engine[@"createmodel"]( f635_local1, "data" )
-	local f635_local3 = Engine[@"getmodelvalue"]( Engine[@"createmodel"]( f635_local1, "count" ) )
+	local f635_local1 = Engine.CreateModel( Engine.CreateModel( Engine.GetGlobalModel(), "lobbyDebug" ), "processQueue" )
+	local f635_local2 = Engine.CreateModel( f635_local1, "data" )
+	local f635_local3 = Engine.GetModelValue( Engine.CreateModel( f635_local1, "count" ) )
 	if f635_local3 then
 		for f635_local4 = 1, f635_local3, 1 do
-			local f635_local7 = Engine[@"getmodel"]( f635_local2, tostring( f635_local4 ) )
+			local f635_local7 = Engine.GetModel( f635_local2, tostring( f635_local4 ) )
 			if f635_local7 then
 				table.insert( f635_local0, {
 					models = {
-						processName = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f635_local7, "processName" ) ),
-						processCancellable = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f635_local7, "processCancellable" ) ),
-						type = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f635_local7, "type" ) )
+						processName = Engine.GetModelValue( Engine.GetModel( f635_local7, "processName" ) ),
+						processCancellable = Engine.GetModelValue( Engine.GetModel( f635_local7, "processCancellable" ) ),
+						type = Engine.GetModelValue( Engine.GetModel( f635_local7, "type" ) )
 					}
 				} )
-				local f635_local8 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f635_local7, "actionCount" ) )
+				local f635_local8 = Engine.GetModelValue( Engine.GetModel( f635_local7, "actionCount" ) )
 				if f635_local8 > 0 then
-					local f635_local9 = Engine[@"getmodel"]( f635_local7, "actions" )
+					local f635_local9 = Engine.GetModel( f635_local7, "actions" )
 					for f635_local10 = 1, f635_local8, 1 do
-						local f635_local13 = Engine[@"getmodel"]( f635_local9, tostring( f635_local10 ) )
+						local f635_local13 = Engine.GetModel( f635_local9, tostring( f635_local10 ) )
 						table.insert( f635_local0, {
 							models = {
-								processName = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f635_local13, "processName" ) ),
-								processState = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f635_local13, "processState" ) ),
-								type = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f635_local13, "type" ) )
+								processName = Engine.GetModelValue( Engine.GetModel( f635_local13, "processName" ) ),
+								processState = Engine.GetModelValue( Engine.GetModel( f635_local13, "processState" ) ),
+								type = Engine.GetModelValue( Engine.GetModel( f635_local13, "type" ) )
 							}
 						} )
 					end
@@ -11551,7 +11549,7 @@ DataSources.LobbyProcessQueueInfo = ListHelper_SetupDataSource( "LobbyProcessQue
 	end
 	return f635_local0
 end, nil, nil, function ( f636_arg0, f636_arg1, f636_arg2 )
-	local f636_local0 = Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "lobbyDebug" ), "processQueue" ), "update" )
+	local f636_local0 = Engine.CreateModel( Engine.CreateModel( Engine.CreateModel( Engine.GetGlobalModel(), "lobbyDebug" ), "processQueue" ), "update" )
 	if f636_arg1.updateSubscription then
 		f636_arg1:removeSubscription( f636_arg1.updateSubscription )
 	end
@@ -11561,23 +11559,23 @@ end, nil, nil, function ( f636_arg0, f636_arg1, f636_arg2 )
 end )
 DataSources.LeaveLobbyPopup = {
 	getModel = function ( f638_arg0 )
-		local f638_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "LeaveLobbyPopup" )
-		Engine[@"createmodel"]( f638_local0, "popupType" )
-		Engine[@"createmodel"]( f638_local0, "title" )
-		Engine[@"createmodel"]( f638_local0, "hint" )
+		local f638_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "LeaveLobbyPopup" )
+		Engine.CreateModel( f638_local0, "popupType" )
+		Engine.CreateModel( f638_local0, "title" )
+		Engine.CreateModel( f638_local0, "hint" )
 		return f638_local0
 	end
 }
 DataSources.Blackhat = {
 	getModel = function ( f639_arg0 )
-		return Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f639_arg0 ), "hudItems.blackhat" )
+		return Engine.GetModel( Engine.GetModelForController( f639_arg0 ), "hudItems.blackhat" )
 	end
 }
 local f0_local1 = function ( f640_arg0 )
 	local f640_local0 = {}
 	local f640_local1 = 8
 	local f640_local2 = 29
-	local f640_local3 = Engine[@"profilefloat"]( f640_arg0, "r_sceneBrightness" )
+	local f640_local3 = Engine.ProfileFloat( f640_arg0, "r_sceneBrightness" )
 	local f640_local4 = 1 / f640_local1 * 2
 	for f640_local5 = 1, 2 * f640_local1 + 1, 1 do
 		local f640_local8 = math.min( 1, math.max( -1, (f640_local5 - f640_local1 + 1) / f640_local1 ) )
@@ -11586,12 +11584,12 @@ local f0_local1 = function ( f640_arg0 )
 			value = f640_local8
 		} )
 	end
-	local f640_local5 = Engine[@"getmodelforcontroller"]( f640_arg0 )
+	local f640_local5 = Engine.GetModelForController( f640_arg0 )
 	f640_local5 = f640_local5:create( "profile.brightnessPreviewColor" )
 	f640_local5:set( "0 0 0" )
 	return {
 		models = {
-			name = @"menu/brightness",
+			name = "menu/brightness",
 			optionsDatasource = CoD.OptionsUtility.CreateCustomOptionDataSource( f640_arg0, "BrightnessOptions_Brightness", f640_local0, "r_sceneBrightness", function ( f641_arg0 )
 				local f641_local0 = 2 * f641_arg0 * f640_local1 + f640_local2
 				f640_local5:set( f641_local0 .. " " .. f641_local0 .. " " .. f641_local0 )
@@ -11610,22 +11608,22 @@ DataSources.BrightnessSelector = DataSourceHelpers.ListSetup( "BrightnessSelecto
 end, true )
 DataSources.BattlenetGlobal = {
 	prepare = function ( f643_arg0 )
-		local f643_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f643_arg0 ), "PC.BattlenetGlobal" )
-		local f643_local1 = Engine[@"createmodel"]( f643_local0, "BattlenetMenuVisibility" )
+		local f643_local0 = Engine.CreateModel( Engine.GetModelForController( f643_arg0 ), "PC.BattlenetGlobal" )
+		local f643_local1 = Engine.CreateModel( f643_local0, "BattlenetMenuVisibility" )
 		f643_local1:set( false )
-		f643_local1 = Engine[@"createmodel"]( f643_local0, "BattlenetAddFriendMenuVisibility" )
+		f643_local1 = Engine.CreateModel( f643_local0, "BattlenetAddFriendMenuVisibility" )
 		f643_local1:set( false )
-		f643_local1 = Engine[@"createmodel"]( f643_local0, "BattlenetButtonInFooterVisibility" )
+		f643_local1 = Engine.CreateModel( f643_local0, "BattlenetButtonInFooterVisibility" )
 		f643_local1:set( false )
-		Engine[@"createmodel"]( f643_local0, "PresenceStatus" )
-		f643_local1 = Engine[@"createmodel"]( f643_local0, "AFK" )
+		Engine.CreateModel( f643_local0, "PresenceStatus" )
+		f643_local1 = Engine.CreateModel( f643_local0, "AFK" )
 		f643_local1:set( false )
-		Engine[@"createmodel"]( f643_local0, "FriendUpdateEvent" )
-		Engine[@"createmodel"]( f643_local0, "CurrentSort" )
+		Engine.CreateModel( f643_local0, "FriendUpdateEvent" )
+		Engine.CreateModel( f643_local0, "CurrentSort" )
 		return f643_local0
 	end,
 	getModel = function ( f644_arg0 )
-		local f644_local0 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f644_arg0 ), "PC.BattlenetGlobal" )
+		local f644_local0 = Engine.GetModel( Engine.GetModelForController( f644_arg0 ), "PC.BattlenetGlobal" )
 		if f644_local0 == nil then
 			return DataSources.BattlenetGlobal.prepare( f644_arg0 )
 		else
@@ -11635,17 +11633,17 @@ DataSources.BattlenetGlobal = {
 }
 DataSources.PCConnectionQueue = {
 	prepare = function ( f645_arg0 )
-		local f645_local0 = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f645_arg0 ), "PCConnectionQueue" )
-		local f645_local1 = Engine[@"createmodel"]( f645_local0, "IsInConnectionQueue" )
+		local f645_local0 = Engine.CreateModel( Engine.GetModelForController( f645_arg0 ), "PCConnectionQueue" )
+		local f645_local1 = Engine.CreateModel( f645_local0, "IsInConnectionQueue" )
 		f645_local1:set( false )
-		f645_local1 = Engine[@"createmodel"]( f645_local0, "ConnectionQueuePosition" )
+		f645_local1 = Engine.CreateModel( f645_local0, "ConnectionQueuePosition" )
 		f645_local1:set( 0 )
-		f645_local1 = Engine[@"createmodel"]( f645_local0, "ConnectionQueueRemainingtime" )
+		f645_local1 = Engine.CreateModel( f645_local0, "ConnectionQueueRemainingtime" )
 		f645_local1:set( 0 )
 		return f645_local0
 	end,
 	getModel = function ( f646_arg0 )
-		local f646_local0 = Engine[@"getmodel"]( Engine[@"getmodelforcontroller"]( f646_arg0 ), "PCConnectionQueue" )
+		local f646_local0 = Engine.GetModel( Engine.GetModelForController( f646_arg0 ), "PCConnectionQueue" )
 		if f646_local0 == nil or f646_local0.IsInConnectionQueue == nil then
 			return DataSources.PCConnectionQueue.prepare( f646_arg0 )
 		else
@@ -11663,7 +11661,7 @@ DataSources.ChatGlobal = {
 DataSources.ChatClientEntriesList = {
 	prepare = function ( f648_arg0, f648_arg1, f648_arg2 )
 		f648_arg1.controller = f648_arg0
-		local f648_local0 = Engine[@"getxuid64"]( f648_arg0 )
+		local f648_local0 = Engine.GetXUID64( f648_arg0 )
 		local f648_local1 = CoD.ChatClientUtility.GetChatEntriesListModel( f648_arg0 )
 		f648_arg1.chatClientEntriesModel = f648_local1
 		f648_arg1.GetList = Engine[@"hash_3244BA82C570F260"]
@@ -11688,11 +11686,11 @@ DataSources.ChatClientEntriesList = {
 		f648_arg1.chatEntries = {}
 		for f648_local3 = 1, f648_arg1.CountEntries, 1 do
 			f648_arg1.chatEntries[f648_local3] = {}
-			f648_arg1.chatEntries[f648_local3].root = Engine[@"createmodel"]( f648_local1, "entry_" .. f648_local3 )
-			f648_arg1.chatEntries[f648_local3].model = Engine[@"createmodel"]( f648_arg1.chatEntries[f648_local3].root, "model" )
+			f648_arg1.chatEntries[f648_local3].root = Engine.CreateModel( f648_local1, "entry_" .. f648_local3 )
+			f648_arg1.chatEntries[f648_local3].model = Engine.CreateModel( f648_arg1.chatEntries[f648_local3].root, "model" )
 			f648_arg1.chatEntries[f648_local3].properties = {}
 			for f648_local9, f648_local10 in pairs( f648_local2 ) do
-				local f648_local11 = Engine[@"createmodel"]( f648_arg1.chatEntries[f648_local3].model, f648_local9 )
+				local f648_local11 = Engine.CreateModel( f648_arg1.chatEntries[f648_local3].model, f648_local9 )
 			end
 		end
 		local f648_local3 = {}
@@ -11703,7 +11701,7 @@ DataSources.ChatClientEntriesList = {
 				local f648_local8 = f648_local4
 				for f648_local14, f648_local15 in pairs( f648_local7 ) do
 					if f648_local14 ~= "isNew" then
-						local f648_local13 = Engine[@"getmodel"]( f648_arg1.chatEntries[f648_local8].model, f648_local14 )
+						local f648_local13 = Engine.GetModel( f648_arg1.chatEntries[f648_local8].model, f648_local14 )
 						if f648_local13 ~= nil then
 							f648_local13:set( f648_local15 )
 						end
@@ -11727,7 +11725,7 @@ DataSources.ChatClientEntriesList = {
 					if f648_local10 == nil then
 						f648_local10 = CoD.ChatClientUtility.ColorToString( CoD.ChatClientUtility.GetColorForChannelType( f648_local9 ) )
 					end
-					f648_local11 = Engine[@"getmodel"]( f648_arg1.chatEntries[f648_local8].model, "chColor" )
+					f648_local11 = Engine.GetModel( f648_arg1.chatEntries[f648_local8].model, "chColor" )
 					if f648_local11 ~= nil then
 						f648_local11:set( f648_local10 )
 					end
@@ -11735,7 +11733,7 @@ DataSources.ChatClientEntriesList = {
 				end
 				f648_local10 = CoD.PCBattlenetUtility.StripBattleTagNumber( f648_arg1.chatEntries[f648_local8].properties.fullname )
 				f648_local11 = f648_local10
-				if f648_local10 ~= "" and Engine[@"getprofilevarint"]( f648_arg0, @"show_real_names" ) ~= 0 and (f648_local0 ~= f648_arg1.chatEntries[f648_local8].properties.xuid or f648_local9 == Enum[@"hash_7F6296F5D7A38AD2"][@"hash_75E57997D82BCBD1"]) then
+				if f648_local10 ~= "" and Engine.GetProfileVarInt( f648_arg0, "show_real_names" ) ~= 0 and (f648_local0 ~= f648_arg1.chatEntries[f648_local8].properties.xuid or f648_local9 == Enum[@"hash_7F6296F5D7A38AD2"][@"hash_75E57997D82BCBD1"]) then
 					f648_local15 = f648_arg1.chatEntries[f648_local8].properties.realname
 					if f648_local15 and f648_local15 ~= "" then
 						f648_local10 = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_52482C16CD79B0E8", f648_local10, f648_local15 )
@@ -11754,22 +11752,22 @@ DataSources.ChatClientEntriesList = {
 					end
 				end
 				if f648_local9 == Enum[@"hash_7F6296F5D7A38AD2"][@"hash_75E57997D82BCBD1"] and f648_local0 == f648_arg1.chatEntries[f648_local8].properties.xuid then
-					f648_local10 = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_2434C934E77B37E9", f648_local10 )
+					f648_local10 = Engine[@"hash_4F9F1239CFD921FE"]( "menu/whisper_to", f648_local10 )
 					f648_arg1.chatEntries[f648_local8].model.xuid:set( f648_local7.whisperTargetxuid )
 				end
-				local f648_local13 = Engine[@"getmodel"]( f648_arg1.chatEntries[f648_local8].model, "displayName" )
+				local f648_local13 = Engine.GetModel( f648_arg1.chatEntries[f648_local8].model, "displayName" )
 				if f648_local13 ~= nil then
-					Engine[@"setmodelvalue"]( f648_local13, f648_local11 )
+					Engine.SetModelValue( f648_local13, f648_local11 )
 				end
-				local f648_local16 = Engine[@"getmodel"]( f648_arg1.chatEntries[f648_local8].model, "fullLineOfText" )
+				local f648_local16 = Engine.GetModel( f648_arg1.chatEntries[f648_local8].model, "fullLineOfText" )
 				if f648_local10 and f648_local10 ~= "" then
 					f648_local16:set( f648_local10 .. ": " .. f648_arg1.chatEntries[f648_local8].properties.text )
 				else
 					f648_local16:set( f648_arg1.chatEntries[f648_local8].properties.text )
 				end
-				local f648_local17 = Engine[@"getmodel"]( f648_arg1.chatEntries[f648_local8].model, "timeMs" )
+				local f648_local17 = Engine.GetModel( f648_arg1.chatEntries[f648_local8].model, "timeMs" )
 				if f648_arg1.lastTimeStamp < f648_local17:get() then
-					local f648_local18 = Engine[@"getmodel"]( f648_arg1.chatEntries[f648_local8].model, "isNew" )
+					local f648_local18 = Engine.GetModel( f648_arg1.chatEntries[f648_local8].model, "isNew" )
 					f648_local18:set( true )
 				end
 			end
@@ -11781,7 +11779,7 @@ DataSources.ChatClientEntriesList = {
 							f648_local14 = LuaDefine.INVALID_XUID_X64
 						end
 						if f648_local11 ~= "isNew" then
-							local f648_local15 = Engine[@"getmodel"]( f648_arg1.chatEntries[f648_local7].model, f648_local11 )
+							local f648_local15 = Engine.GetModel( f648_arg1.chatEntries[f648_local7].model, f648_local11 )
 							if f648_local15 ~= nil then
 								f648_local15:set( f648_local14 )
 							end
@@ -11865,25 +11863,25 @@ DataSources.FirstTimeLanguageSelection = ListHelper_SetupDataSource( "FirstTimeL
 end )
 DataSources.ZMQuestItemHolders = {
 	getModel = function ( f653_arg0 )
-		return Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f653_arg0 ), "zmInventory" )
+		return Engine.CreateModel( Engine.GetModelForController( f653_arg0 ), "zmInventory" )
 	end
 }
 DataSources.ReticleBindings = {
 	getModel = function ( f654_arg0 )
-		return Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f654_arg0 ), "reticleBindings" )
+		return Engine.CreateModel( Engine.GetModelForController( f654_arg0 ), "reticleBindings" )
 	end,
 	createModelsForActions = function ( f655_arg0, f655_arg1 )
-		Engine[@"unsubscribeandfreemodel"]( DataSources.ReticleBindings.getModel( f655_arg0 ) )
+		Engine.UnsubscribeAndFreeModel( DataSources.ReticleBindings.getModel( f655_arg0 ) )
 		local f655_local0 = DataSources.ReticleBindings.getModel( f655_arg0 )
 		for f655_local6, f655_local7 in ipairs( f655_arg1 ) do
-			local f655_local8 = Engine[@"createmodel"]( f655_local0, f655_local7 )
-			local f655_local9, f655_local10 = Engine[@"getbindingbuttonstring"]( f655_arg0, "+" .. f655_local7 )
+			local f655_local8 = Engine.CreateModel( f655_local0, f655_local7 )
+			local f655_local9, f655_local10 = Engine.GetBindingButtonString( f655_arg0, "+" .. f655_local7 )
 			if f655_local9 then
 				local f655_local4 = CoD.ButtonMappings[f655_local9]
 				if f655_local4 then
-					local f655_local5 = Engine[@"getmodel"]( DataSources.Controller.Model, f655_local4 )
+					local f655_local5 = Engine.GetModel( DataSources.Controller.Model, f655_local4 )
 					if f655_local5 then
-						Engine[@"setmodelvalue"]( f655_local8, Engine[@"getmodelvalue"]( f655_local5 ) )
+						Engine.SetModelValue( f655_local8, Engine.GetModelValue( f655_local5 ) )
 					end
 				end
 			end
@@ -11892,16 +11890,16 @@ DataSources.ReticleBindings = {
 }
 DataSources.OtherPlayerStats = {
 	getModel = function ( f656_arg0 )
-		return Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "OtherPlayerStats" )
+		return Engine.CreateModel( Engine.GetGlobalModel(), "OtherPlayerStats" )
 	end
 }
-DataSources.GlobalSources.Model = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "DataSources.GlobalSources" )
-DataSources.Controller.Model = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "DataSources.Controller" )
-DataSources.VehicleController.Model = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "DataSources.VehicleController" )
+DataSources.GlobalSources.Model = Engine.CreateModel( Engine.GetGlobalModel(), "DataSources.GlobalSources" )
+DataSources.Controller.Model = Engine.CreateModel( Engine.GetGlobalModel(), "DataSources.Controller" )
+DataSources.VehicleController.Model = Engine.CreateModel( Engine.GetGlobalModel(), "DataSources.VehicleController" )
 DataSources.WarHeadings = {
 	prepare = function ( f657_arg0, f657_arg1, f657_arg2 )
-		f657_arg1.model = Engine[@"createmodel"]( Engine[@"getmodelforcontroller"]( f657_arg0 ), "DataSources.WarHeadings" )
-		local f657_local0 = Engine[@"hash_2E00B2F29271C60B"]( @"warscoring" )
+		f657_arg1.model = Engine.CreateModel( Engine.GetModelForController( f657_arg0 ), "DataSources.WarHeadings" )
+		local f657_local0 = Engine[@"hash_2E00B2F29271C60B"]( "warscoring" )
 		local f657_local1 = 0
 		f657_arg1.models = {}
 		while f657_local0[@"zone" .. f657_local1 + 1 .. "TimeLimit1"] ~= nil do
@@ -11940,7 +11938,7 @@ DataSources.CPObjectiveUIData = {
 		if not DataSources.CPObjectiveUIData.subscriptionElement[f662_arg0] then
 			DataSources.CPObjectiveUIData.subscriptionElement[f662_arg0] = LUI.UIElement.new()
 		end
-		local f662_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "hudItems.cpObjectiveUiData" )
+		local f662_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "hudItems.cpObjectiveUiData" )
 		for f662_local5, f662_local6 in pairs( {
 			currentZone = 1,
 			enemyObjectiveCount = 0,
@@ -11954,8 +11952,8 @@ DataSources.CPObjectiveUIData = {
 			end
 		end
 		f662_local1 = CoD.TeamUtility.GetTeamID( f662_arg0 )
-		if f662_local1 == Enum[@"team_t"][@"team_allies"] or f662_local1 == Enum[@"team_t"][@"team_axis"] then
-			f662_local2 = Engine[@"getfactionforteam"]( f662_local1 )
+		if f662_local1 == Enum.team_t[@"team_allies"] or f662_local1 == Enum.team_t[@"team_axis"] then
+			f662_local2 = Engine.GetFactionForTeam( f662_local1 )
 			f662_local3 = Engine[@"hash_31892558CD0D2E26"]()
 			f662_local5 = CoD.BaseUtility.GetMapValue( f662_local3, 0x0 .. f662_local2 .. "NumObjZones", 0 )
 			f662_local6 = CoD.BaseUtility.GetMapValue( f662_local3, 0x0 .. f662_local2 .. "NumEnemyObj", 0 )
@@ -11995,7 +11993,7 @@ DataSources.CPObjectiveUIData = {
 		return f662_local0
 	end,
 	getModel = function ( f664_arg0 )
-		local f664_local0 = Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "hudItems.cpObjectiveUiData" )
+		local f664_local0 = Engine.GetModel( Engine.GetGlobalModel(), "hudItems.cpObjectiveUiData" )
 		if not f664_local0 then
 			f664_local0 = DataSources.CPObjectiveUIData.Initialize( f664_arg0 )
 		end
@@ -12010,7 +12008,7 @@ DataSources.ConvoyAirAssaultData = {
 		if not DataSources.ConvoyAirAssaultData.subscriptionElement[f665_arg0] then
 			DataSources.ConvoyAirAssaultData.subscriptionElement[f665_arg0] = LUI.UIElement.new()
 		end
-		local f665_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "hudItems.convoyAirAssaultData" )
+		local f665_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "hudItems.convoyAirAssaultData" )
 		for f665_local5, f665_local6 in pairs( {
 			closestTruckProgress = 0,
 			truckDestroyed1 = 0,
@@ -12027,7 +12025,7 @@ DataSources.ConvoyAirAssaultData = {
 	end,
 	getModel = function ( f666_arg0 )
 		DataSources.ConvoyAirAssaultData.Initialize( f666_arg0 )
-		return Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "hudItems.convoyAirAssaultData" )
+		return Engine.GetModel( Engine.GetGlobalModel(), "hudItems.convoyAirAssaultData" )
 	end
 }
 DataSources.DataControlData = {
@@ -12043,7 +12041,7 @@ DataSources.DataControlData = {
 		if f667_local0 then
 			return 
 		end
-		local f667_local1 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "hudItems.dataControlData" )
+		local f667_local1 = Engine.CreateModel( Engine.GetGlobalModel(), "hudItems.dataControlData" )
 		for f667_local6, f667_local7 in pairs( {
 			chargeState1 = 0,
 			chargeState2 = 0,
@@ -12057,14 +12055,14 @@ DataSources.DataControlData = {
 				f667_local5:set( f667_local7 )
 			end
 		end
-		f667_local2 = Engine[@"getglobalmodel"]()
+		f667_local2 = Engine.GetGlobalModel()
 		f667_local2 = f667_local2.hudItems:create( "cpObjectiveUiData" )
 		f667_local3 = 0
 		f667_local4 = CoD.TeamUtility.GetTeamID( f667_arg0 )
-		if f667_local4 == Enum[@"team_t"][@"team_allies"] then
-			f667_local3 = CoD.BaseUtility.GetMapValue( Engine[@"getcurrentmap"](), 0x7D09B4506A0228, nil )
-		elseif f667_local4 == Enum[@"team_t"][@"team_axis"] then
-			f667_local3 = CoD.BaseUtility.GetMapValue( Engine[@"getcurrentmap"](), @"hash_18000C12D08DE02D", nil )
+		if f667_local4 == Enum.team_t[@"team_allies"] then
+			f667_local3 = CoD.BaseUtility.GetMapValue( Engine.GetCurrentMap(), "alliesnumenemyobj", nil )
+		elseif f667_local4 == Enum.team_t[@"team_axis"] then
+			f667_local3 = CoD.BaseUtility.GetMapValue( Engine.GetCurrentMap(), "axisnumenemyobj", nil )
 		end
 		f667_local6 = f667_local3 == 2
 		f667_local7 = function ()
@@ -12116,12 +12114,12 @@ DataSources.DataControlData = {
 	end,
 	getModel = function ( f673_arg0 )
 		DataSources.DataControlData.Initialize( f673_arg0 )
-		return Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "hudItems.dataControlData" )
+		return Engine.GetModel( Engine.GetGlobalModel(), "hudItems.dataControlData" )
 	end
 }
 DataSources.StageResults = {
 	Initialize = function ()
-		local f674_local0 = Engine[@"getglobalmodel"]()
+		local f674_local0 = Engine.GetGlobalModel()
 		f674_local0 = f674_local0:create( "StageResults" )
 		f674_local0:create( "potmClient" )
 	end,
@@ -12129,7 +12127,7 @@ DataSources.StageResults = {
 		if not DataSources.StageResults.IsInitialized then
 			DataSources.StageResults.Initialize()
 		end
-		local f675_local0 = Engine[@"getglobalmodel"]()
+		local f675_local0 = Engine.GetGlobalModel()
 		return f675_local0.StageResults
 	end
 }
@@ -12141,7 +12139,7 @@ DataSources.DataEscapeData = {
 		if not DataSources.DataEscapeData.subscriptionElement[f676_arg0] then
 			DataSources.DataEscapeData.subscriptionElement[f676_arg0] = LUI.UIElement.new()
 		end
-		local f676_local0 = Engine[@"createmodel"]( Engine[@"getglobalmodel"](), "hudItems.dataEscapeData" )
+		local f676_local0 = Engine.CreateModel( Engine.GetGlobalModel(), "hudItems.dataEscapeData" )
 		for f676_local5, f676_local6 in pairs( {
 			escapeTeamProgress = 0,
 			escapeTeamDistance = 0,
@@ -12158,10 +12156,10 @@ DataSources.DataEscapeData = {
 				f676_local4:set( f676_local6 )
 			end
 		end
-		f676_local1 = Engine[@"getglobalmodel"]()
+		f676_local1 = Engine.GetGlobalModel()
 		f676_local1 = f676_local1.hudItems:create( "cpObjectiveUiData" )
-		f676_local2 = CoD.BaseUtility.GetMapValue( Engine[@"getcurrentmap"](), @"missiontype", nil )
-		if (f676_local2 ~= "de" or CoD.TeamUtility.GetTeamID( f676_arg0 ) ~= Enum[@"team_t"][@"team_axis"]) and (f676_local2 ~= "sng" or CoD.TeamUtility.GetTeamID( f676_arg0 ) ~= Enum[@"team_t"][@"team_allies"]) then
+		f676_local2 = CoD.BaseUtility.GetMapValue( Engine.GetCurrentMap(), @"missiontype", nil )
+		if (f676_local2 ~= "de" or CoD.TeamUtility.GetTeamID( f676_arg0 ) ~= Enum.team_t[@"team_axis"]) and (f676_local2 ~= "sng" or CoD.TeamUtility.GetTeamID( f676_arg0 ) ~= Enum.team_t[@"team_allies"]) then
 			f676_local3 = false
 		else
 			f676_local3 = true
@@ -12207,7 +12205,7 @@ DataSources.DataEscapeData = {
 	end,
 	getModel = function ( f681_arg0 )
 		DataSources.DataEscapeData.Initialize( f681_arg0 )
-		return Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "hudItems.dataEscapeData" )
+		return Engine.GetModel( Engine.GetGlobalModel(), "hudItems.dataEscapeData" )
 	end
 }
 DataSourceHelpers.PerControllerDataSourceSetup( "LeftStick", "LeftStick", function ( f682_arg0 )
@@ -12227,8 +12225,8 @@ DataSourceHelpers.PerControllerDataSourceSetup( "RightStick", "RightStick", func
 	f683_local0:set( false )
 end )
 function createControllerBindings( f684_arg0, f684_arg1, f684_arg2, f684_arg3, f684_arg4 )
-	Engine[@"setmodelvalue"]( Engine[@"createmodel"]( DataSources.Controller.Model, f684_arg2 ), f684_arg3 )
-	Engine[@"setmodelvalue"]( Engine[@"createmodel"]( DataSources.VehicleController.Model, f684_arg2 ), f684_arg4 or f684_arg3 )
+	Engine.SetModelValue( Engine.CreateModel( DataSources.Controller.Model, f684_arg2 ), f684_arg3 )
+	Engine.SetModelValue( Engine.CreateModel( DataSources.VehicleController.Model, f684_arg2 ), f684_arg4 or f684_arg3 )
 	if f684_arg1 then
 		CoD.ButtonMappings[f684_arg1] = f684_arg2
 	end
@@ -12236,7 +12234,7 @@ end
 function UpdateControllerBindings( f685_arg0, f685_arg1 )
 	if f685_arg0 ~= 0 then
 		return 
-	elseif f685_arg1 == Enum[@"gamepadtype_e"][@"gamepad_type_durango"] then
+	elseif f685_arg1 == Enum.gamepadType_e[@"gamepad_type_durango"] then
 		createControllerBindings( f685_arg0, "BUTTON_A", "primary_button_image", "xenonbutton_a" )
 		createControllerBindings( f685_arg0, "BUTTON_B", "secondary_button_image", "xenonbutton_b" )
 		createControllerBindings( f685_arg0, "BUTTON_X", "alt1_button_image", "xenonbutton_x" )
@@ -12315,7 +12313,7 @@ function UpdateControllerBindings( f685_arg0, f685_arg1 )
 			end
 		end
 		f685_local5 = "xenonbutton_lb"
-	elseif f685_arg1 == Enum[@"gamepadtype_e"][@"gamepad_type_orbis"] then
+	elseif f685_arg1 == Enum.gamepadType_e[@"gamepad_type_orbis"] then
 		createControllerBindings( f685_arg0, "BUTTON_A", Engine[@"shouldswapcontrollercircleandcross"]() and "secondary_button_image" or "primary_button_image", "ps3button_x", Engine[@"shouldswapcontrollercircleandcross"]() and "ps3button_circle" or "ps3button_x" )
 		createControllerBindings( f685_arg0, "BUTTON_B", Engine[@"shouldswapcontrollercircleandcross"]() and "primary_button_image" or "secondary_button_image", "ps3button_circle", Engine[@"shouldswapcontrollercircleandcross"]() and "ps3button_x" or "ps3button_circle" )
 		createControllerBindings( f685_arg0, "BUTTON_X", "alt1_button_image", "ps3button_square" )
@@ -12475,31 +12473,31 @@ function UpdateControllerBindings( f685_arg0, f685_arg1 )
 		f685_local5 = "ps3button_l1"
 	end
 	if CoD.isPC then
-		createControllerBindings( f685_arg0, @"hash_7179662091387B23", "mouse_left_button_image", "mousebuttonleft" )
-		createControllerBindings( f685_arg0, @"hash_7179672091387CD6", "mouse_right_button_image", "mousebuttonright" )
-		createControllerBindings( f685_arg0, @"hash_7179682091387E89", "mouse_middle_button_image", "mousebuttonmiddle" )
+		createControllerBindings( f685_arg0, "key/mouse1", "mouse_left_button_image", "mousebuttonleft" )
+		createControllerBindings( f685_arg0, "key/mouse2", "mouse_right_button_image", "mousebuttonright" )
+		createControllerBindings( f685_arg0, "key/mouse3", "mouse_middle_button_image", "mousebuttonmiddle" )
 		createControllerBindings( f685_arg0, "MWHEELUP", "mouse_wheelup_button_image", "mouseWheelUp" )
 		createControllerBindings( f685_arg0, "MWHEELDOWN", "mouse_wheeldown_button_image", "mouseWheelDown" )
 		createControllerBindings( f685_arg0, nil, "mouse_button_image", "mouse" )
 	end
 end
 DataSources.InitControllerModelsAndSubscriptions = function ()
-	UpdateControllerBindings( 0, Engine[@"gamepadtype"]( 0 ) )
-	for f686_local0 = 0, Engine[@"getmaxcontrollercount"]() - 1, 1 do
+	UpdateControllerBindings( 0, Engine.GamepadType( 0 ) )
+	for f686_local0 = 0, Engine.GetMaxControllerCount() - 1, 1 do
 		local f686_local3 = f686_local0
-		local f686_local4 = Engine[@"getmodelforcontroller"]( f686_local3 )
+		local f686_local4 = Engine.GetModelForController( f686_local3 )
 		local f686_local5 = f686_local4:create( "hintText" )
 		f686_local5:set( "" )
 		f686_local5 = f686_local4:create( "MPHintText" )
 		f686_local5:set( "" )
 		f686_local4:create( "activeKeys", true )
-		if Engine[@"iszombiesgame"]() then
+		if Engine.IsZombiesGame() then
 			f686_local5 = f686_local4:create( "ZMHintText" )
 			f686_local5:set( "" )
 		end
 		f686_local5 = f686_local4:create( "locationText" )
 		f686_local5:set( "" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f686_local4, "clanTag" ), "" )
+		Engine.SetModelValue( Engine.CreateModel( f686_local4, "clanTag" ), "" )
 		if CoD.isPC and CoD.useController then
 			if DataSourceHelpers.ControllerTypeSubscription == nil then
 				DataSourceHelpers.ControllerTypeSubscription = {}
@@ -12508,21 +12506,21 @@ DataSources.InitControllerModelsAndSubscriptions = function ()
 				DataSourceHelpers.ControllerTypeSubscription[f686_local3] = LUI.UIElement.new()
 			end
 			DataSourceHelpers.ControllerTypeSubscription[f686_local3]:unsubscribeFromAllModels()
-			DataSourceHelpers.ControllerTypeSubscription[f686_local3]:subscribeToModel( Engine[@"createmodel"]( f686_local4, "ControllerType" ), function ( model )
-				UpdateControllerBindings( f686_local3, Engine[@"gamepadtype"]( f686_local3 ) )
+			DataSourceHelpers.ControllerTypeSubscription[f686_local3]:subscribeToModel( Engine.CreateModel( f686_local4, "ControllerType" ), function ( model )
+				UpdateControllerBindings( f686_local3, Engine.GamepadType( f686_local3 ) )
 			end, false )
 		end
-		Engine[@"createmodel"]( f686_local4, "WorldSpaceIndicators" )
-		Engine[@"createmodel"]( f686_local4, "engineLoadoutSelect" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( Engine[@"createmodel"]( f686_local4, "scriptNotify" ), "numArgs" ), 0 )
-		Engine[@"createmodel"]( f686_local4, "playerConnected" )
-		Engine[@"createmodel"]( f686_local4, "playerDisconnected" )
+		Engine.CreateModel( f686_local4, "WorldSpaceIndicators" )
+		Engine.CreateModel( f686_local4, "engineLoadoutSelect" )
+		Engine.SetModelValue( Engine.CreateModel( Engine.CreateModel( f686_local4, "scriptNotify" ), "numArgs" ), 0 )
+		Engine.CreateModel( f686_local4, "playerConnected" )
+		Engine.CreateModel( f686_local4, "playerDisconnected" )
 		local f686_local6 = f686_local4:create( "predictedClientModel" )
-		f686_local6:set( Engine[@"getmodelforclient"]( Engine[@"getpredictedclientnum"]( f686_local3 ) ) )
+		f686_local6:set( Engine[@"getmodelforclient"]( Engine.GetPredictedClientNum( f686_local3 ) ) )
 		f686_local6 = f686_local4:create( "clientModel" )
-		f686_local6:set( Engine[@"getmodelforclient"]( Engine[@"getclientnum"]( f686_local3 ) ) )
-		f686_local6 = Engine[@"createmodel"]( f686_local4, "hudItems" )
-		Engine[@"createmodel"]( f686_local6, "playerSpawned" )
+		f686_local6:set( Engine[@"getmodelforclient"]( Engine.GetClientNum( f686_local3 ) ) )
+		f686_local6 = Engine.CreateModel( f686_local4, "hudItems" )
+		Engine.CreateModel( f686_local6, "playerSpawned" )
 		local f686_local7 = f686_local6:create( "deathZones" )
 		local f686_local8 = f686_local7:create( "towerIndex" )
 		f686_local8:set( 0 )
@@ -12536,7 +12534,7 @@ DataSources.InitControllerModelsAndSubscriptions = function ()
 			f686_local8 = function ( f688_arg0 )
 				local f688_local0 = f688_arg0:get()
 				if f688_local0 == -1 then
-					f688_local0 = Engine[@"getpredictedclientnum"]( f686_local3 )
+					f688_local0 = Engine.GetPredictedClientNum( f686_local3 )
 				end
 				f686_local4.predictedClientModel:set( Engine[@"getmodelforclient"]( f688_local0 ) )
 			end
@@ -12585,11 +12583,11 @@ DataSources.InitControllerModelsAndSubscriptions = function ()
 		f686_local6:create( "health.inLastStand" )
 		f686_local6:create( "health.beingRevived" )
 		for f686_local8 = 0, CoD.HUDUtility.MAX_WOUNDS - 1, 1 do
-			local f686_local11 = Engine[@"createmodel"]( f686_local6, "health.wound" .. f686_local8 )
-			Engine[@"createmodel"]( f686_local11, "isActive" )
-			Engine[@"createmodel"]( f686_local11, "endTime" )
-			Engine[@"createmodel"]( f686_local11, "decayProgress" )
-			Engine[@"createmodel"]( f686_local11, "icon" )
+			local f686_local11 = Engine.CreateModel( f686_local6, "health.wound" .. f686_local8 )
+			Engine.CreateModel( f686_local11, "isActive" )
+			Engine.CreateModel( f686_local11, "endTime" )
+			Engine.CreateModel( f686_local11, "decayProgress" )
+			Engine.CreateModel( f686_local11, "icon" )
 		end
 		f686_local6:create( "infiltrationVehicle" )
 		f686_local6:create( "insertionVehicleProgress" )
@@ -12627,88 +12625,88 @@ DataSources.InitControllerModelsAndSubscriptions = function ()
 		f686_local9:set( 0 )
 		f686_local9 = f686_local6:create( "wheelPointerDegrees" )
 		f686_local9:set( 0 )
-		f686_local9 = Engine[@"createmodel"]( f686_local4, "CTF" )
-		Engine[@"createmodel"]( f686_local9, "friendlyFlagCarrier" )
-		Engine[@"createmodel"]( f686_local9, "friendlyFlagAway" )
-		Engine[@"createmodel"]( f686_local9, "enemyFlagCarrier" )
-		Engine[@"createmodel"]( f686_local9, "enemyFlagAway" )
+		f686_local9 = Engine.CreateModel( f686_local4, "CTF" )
+		Engine.CreateModel( f686_local9, "friendlyFlagCarrier" )
+		Engine.CreateModel( f686_local9, "friendlyFlagAway" )
+		Engine.CreateModel( f686_local9, "enemyFlagCarrier" )
+		Engine.CreateModel( f686_local9, "enemyFlagAway" )
 		local f686_local10 = 7
-		local f686_local12 = Engine[@"createmodel"]( f686_local6, "console" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f686_local12, "currentIndex" ), 0 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f686_local12, "numEntries" ), f686_local10 )
+		local f686_local12 = Engine.CreateModel( f686_local6, "console" )
+		Engine.SetModelValue( Engine.CreateModel( f686_local12, "currentIndex" ), 0 )
+		Engine.SetModelValue( Engine.CreateModel( f686_local12, "numEntries" ), f686_local10 )
 		for f686_local11 = 0, f686_local10 - 1, 1 do
-			local f686_local15 = Engine[@"createmodel"]( f686_local12, "line" .. f686_local11 )
-			Engine[@"createmodel"]( f686_local15, "text0" )
-			Engine[@"createmodel"]( f686_local15, "text0color" )
-			Engine[@"createmodel"]( f686_local15, "icon0" )
-			Engine[@"createmodel"]( f686_local15, "text1" )
-			Engine[@"createmodel"]( f686_local15, "text1color" )
-			Engine[@"createmodel"]( f686_local15, "icon1" )
-			Engine[@"createmodel"]( f686_local15, "text2" )
-			Engine[@"createmodel"]( f686_local15, "text2color" )
-			Engine[@"createmodel"]( f686_local15, "iconWidth" )
+			local f686_local15 = Engine.CreateModel( f686_local12, "line" .. f686_local11 )
+			Engine.CreateModel( f686_local15, "text0" )
+			Engine.CreateModel( f686_local15, "text0color" )
+			Engine.CreateModel( f686_local15, "icon0" )
+			Engine.CreateModel( f686_local15, "text1" )
+			Engine.CreateModel( f686_local15, "text1color" )
+			Engine.CreateModel( f686_local15, "icon1" )
+			Engine.CreateModel( f686_local15, "text2" )
+			Engine.CreateModel( f686_local15, "text2color" )
+			Engine.CreateModel( f686_local15, "iconWidth" )
 		end
-		f686_local12 = Engine[@"createmodel"]( f686_local6, "centerConsole" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f686_local12, "currentIndex" ), 0 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f686_local12, "numEntries" ), f686_local10 )
+		f686_local12 = Engine.CreateModel( f686_local6, "centerConsole" )
+		Engine.SetModelValue( Engine.CreateModel( f686_local12, "currentIndex" ), 0 )
+		Engine.SetModelValue( Engine.CreateModel( f686_local12, "numEntries" ), f686_local10 )
 		for f686_local11 = 0, f686_local10 - 1, 1 do
-			local f686_local15 = Engine[@"createmodel"]( f686_local12, "line" .. f686_local11 )
-			Engine[@"createmodel"]( f686_local15, "text0" )
-			Engine[@"createmodel"]( f686_local15, "text0color" )
-			Engine[@"createmodel"]( f686_local15, "icon0" )
-			Engine[@"createmodel"]( f686_local15, "text1" )
-			Engine[@"createmodel"]( f686_local15, "text1color" )
-			Engine[@"createmodel"]( f686_local15, "icon1" )
-			Engine[@"createmodel"]( f686_local15, "iconWidth" )
+			local f686_local15 = Engine.CreateModel( f686_local12, "line" .. f686_local11 )
+			Engine.CreateModel( f686_local15, "text0" )
+			Engine.CreateModel( f686_local15, "text0color" )
+			Engine.CreateModel( f686_local15, "icon0" )
+			Engine.CreateModel( f686_local15, "text1" )
+			Engine.CreateModel( f686_local15, "text1color" )
+			Engine.CreateModel( f686_local15, "icon1" )
+			Engine.CreateModel( f686_local15, "iconWidth" )
 		end
-		local f686_local11 = Engine[@"createmodel"]( f686_local6, "obituary" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f686_local11, "currentIndex" ), 0 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f686_local11, "numEntries" ), f686_local10 )
+		local f686_local11 = Engine.CreateModel( f686_local6, "obituary" )
+		Engine.SetModelValue( Engine.CreateModel( f686_local11, "currentIndex" ), 0 )
+		Engine.SetModelValue( Engine.CreateModel( f686_local11, "numEntries" ), f686_local10 )
 		for f686_local13 = 0, f686_local10 - 1, 1 do
-			local f686_local17 = Engine[@"createmodel"]( f686_local11, "line" .. f686_local13 )
-			Engine[@"createmodel"]( f686_local17, "attacker" )
-			Engine[@"createmodel"]( f686_local17, "attackerColor" )
-			Engine[@"createmodel"]( f686_local17, "attackerClientNum" )
-			Engine[@"createmodel"]( f686_local17, "icon" )
-			Engine[@"createmodel"]( f686_local17, "victim" )
-			Engine[@"createmodel"]( f686_local17, "victimColor" )
-			Engine[@"createmodel"]( f686_local17, "victimClientNum" )
+			local f686_local17 = Engine.CreateModel( f686_local11, "line" .. f686_local13 )
+			Engine.CreateModel( f686_local17, "attacker" )
+			Engine.CreateModel( f686_local17, "attackerColor" )
+			Engine.CreateModel( f686_local17, "attackerClientNum" )
+			Engine.CreateModel( f686_local17, "icon" )
+			Engine.CreateModel( f686_local17, "victim" )
+			Engine.CreateModel( f686_local17, "victimColor" )
+			Engine.CreateModel( f686_local17, "victimClientNum" )
 		end
-		local f686_local13 = Engine[@"createmodel"]( f686_local4, "obituaryCallout" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f686_local13, "clientNum" ), 0 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f686_local13, "mod" ), 0 )
-		local f686_local14 = Engine[@"createmodel"]( f686_local6, "killcamWeapon" )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f686_local14, "weaponName" ), 0x0 )
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f686_local14, "weaponIcon" ), "" )
-		Engine[@"setmodelvalue"]( f686_local14, 0 )
+		local f686_local13 = Engine.CreateModel( f686_local4, "obituaryCallout" )
+		Engine.SetModelValue( Engine.CreateModel( f686_local13, "clientNum" ), 0 )
+		Engine.SetModelValue( Engine.CreateModel( f686_local13, "mod" ), 0 )
+		local f686_local14 = Engine.CreateModel( f686_local6, "killcamWeapon" )
+		Engine.SetModelValue( Engine.CreateModel( f686_local14, "weaponName" ), 0x0 )
+		Engine.SetModelValue( Engine.CreateModel( f686_local14, "weaponIcon" ), "" )
+		Engine.SetModelValue( f686_local14, 0 )
 		for f686_local16 = 0, 6, 1 do
-			Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f686_local14, "attachment" .. f686_local16 ), 0x0 )
+			Engine.SetModelValue( Engine.CreateModel( f686_local14, "attachment" .. f686_local16 ), 0x0 )
 		end
-		Engine[@"createmodel"]( f686_local14, "killfeedicon" )
-		Engine[@"createmodel"]( f686_local14, "flip" )
+		Engine.CreateModel( f686_local14, "killfeedicon" )
+		Engine.CreateModel( f686_local14, "flip" )
 		if CoD.isPC then
 			CoD.PCUtility.ResetLockUIShortcutModelForController( f686_local3 )
 		end
-		if Engine[@"isprofilesignedin"]( f686_local3 ) then
-			local f686_local16 = Engine[@"createmodel"]( f686_local4, "profile" )
+		if Engine.IsProfileSignedIn( f686_local3 ) then
+			local f686_local16 = Engine.CreateModel( f686_local4, "profile" )
 			if f686_local16 then
 				local f686_local15 = function ( f690_arg0 )
-					local f690_local0 = Engine[@"createmodel"]( f686_local16, f690_arg0 )
+					local f690_local0 = Engine.CreateModel( f686_local16, f690_arg0 )
 					if f690_local0 then
-						Engine[@"setmodelvalue"]( f690_local0, CoD.ExeProfileVarBool( f686_local3, f690_arg0 ) )
+						Engine.SetModelValue( f690_local0, CoD.ExeProfileVarBool( f686_local3, f690_arg0 ) )
 					end
 				end
 				
 				f686_local16:create( "brightnessPreviewColor" )
 				local f686_local17 = function ( f691_arg0 )
-					local f691_local0 = Engine[@"createmodel"]( f686_local16, f691_arg0 )
+					local f691_local0 = Engine.CreateModel( f686_local16, f691_arg0 )
 					if f691_local0 then
 						local f691_local1 = 0
-						local f691_local2 = Engine[@"getplayercommongamerprofile"]( f686_local3 )
+						local f691_local2 = Engine.GetPlayerCommonGamerProfile( f686_local3 )
 						if f691_local2 ~= nil and f691_local2[profileVarName] ~= nil then
 							f691_local1 = f691_local2[profileVarName]:get()
 						end
-						Engine[@"setmodelvalue"]( f691_local0, f691_local1 )
+						Engine.SetModelValue( f691_local0, f691_local1 )
 					end
 				end
 				
@@ -12716,10 +12714,10 @@ DataSources.InitControllerModelsAndSubscriptions = function ()
 			end
 		end
 		f686_local4:create( "selectedCustomClass" )
-		Engine[@"createmodel"]( Engine[@"createmodel"]( f686_local4, "CACMenu" ), "numItemsToRemove" )
-		Engine[@"createmodel"]( f686_local4, "unlockTokensCount" )
-		Engine[@"createmodel"]( f686_local4, "permanentUnlockTokensCount" )
-		Engine[@"createmodel"]( Engine[@"createmodel"]( f686_local4, "factions" ), "isCoDCaster" )
+		Engine.CreateModel( Engine.CreateModel( f686_local4, "CACMenu" ), "numItemsToRemove" )
+		Engine.CreateModel( f686_local4, "unlockTokensCount" )
+		Engine.CreateModel( f686_local4, "permanentUnlockTokensCount" )
+		Engine.CreateModel( Engine.CreateModel( f686_local4, "factions" ), "isCoDCaster" )
 		f686_local4:create( "MenuMusic" )
 		f686_local17 = f686_local4.MenuMusic:create( "musicStateName" )
 		f686_local17:set( "" )
@@ -12728,32 +12726,32 @@ DataSources.InitControllerModelsAndSubscriptions = function ()
 		f686_local4:create( "LootStreamProgress.codPoints", true )
 	end
 	DataSources.PartyPrivacy.getModel()
-	local f686_local0 = Engine[@"getglobalmodel"]()
-	Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f686_local0, "ButtonStates.ReevaluateDisabledStates" ), false )
-	Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f686_local0, "lobbyRoot.spinnerActive", true ), false )
-	Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f686_local0, "lobbyRoot.hideMenusForGameStart" ), 0 )
-	if not Engine[@"getmodel"]( f686_local0, "hideWorldForStreamer" ) then
-		Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f686_local0, "hideWorldForStreamer" ), 0 )
+	local f686_local0 = Engine.GetGlobalModel()
+	Engine.SetModelValue( Engine.CreateModel( f686_local0, "ButtonStates.ReevaluateDisabledStates" ), false )
+	Engine.SetModelValue( Engine.CreateModel( f686_local0, "lobbyRoot.spinnerActive", true ), false )
+	Engine.SetModelValue( Engine.CreateModel( f686_local0, "lobbyRoot.hideMenusForGameStart" ), 0 )
+	if not Engine.GetModel( f686_local0, "hideWorldForStreamer" ) then
+		Engine.SetModelValue( Engine.CreateModel( f686_local0, "hideWorldForStreamer" ), 0 )
 	end
-	Engine[@"createmodel"]( f686_local0, "hudItems.missions.captureMultiplierStatus" )
-	local f686_local1 = Engine[@"createmodel"]( f686_local0, "hudItems.war" )
-	Engine[@"createmodel"]( f686_local1, "attackingTeam" )
-	Engine[@"createmodel"]( f686_local1, "batteryState1" )
-	Engine[@"createmodel"]( f686_local1, "batteryState2" )
-	Engine[@"createmodel"]( f686_local0, "lobbyRoot.Pregame.Update" )
-	Engine[@"createmodel"]( f686_local0, "lobbyRoot.Pregame.state" )
-	Engine[@"createmodel"]( f686_local0, "pubstorageFilesChanged", true )
-	Engine[@"createmodel"]( f686_local0, "lobbyRoot.platformUpdate" )
-	Engine[@"createmodel"]( f686_local0, "lobbyRoot.beginPlay" )
-	Engine[@"createmodel"]( f686_local0, "lobbyRoot.failedDemonwareConnection" )
-	Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f686_local0, "lobbyRoot.lobbyLockedIn" ), false )
+	Engine.CreateModel( f686_local0, "hudItems.missions.captureMultiplierStatus" )
+	local f686_local1 = Engine.CreateModel( f686_local0, "hudItems.war" )
+	Engine.CreateModel( f686_local1, "attackingTeam" )
+	Engine.CreateModel( f686_local1, "batteryState1" )
+	Engine.CreateModel( f686_local1, "batteryState2" )
+	Engine.CreateModel( f686_local0, "lobbyRoot.Pregame.Update" )
+	Engine.CreateModel( f686_local0, "lobbyRoot.Pregame.state" )
+	Engine.CreateModel( f686_local0, "pubstorageFilesChanged", true )
+	Engine.CreateModel( f686_local0, "lobbyRoot.platformUpdate" )
+	Engine.CreateModel( f686_local0, "lobbyRoot.beginPlay" )
+	Engine.CreateModel( f686_local0, "lobbyRoot.failedDemonwareConnection" )
+	Engine.SetModelValue( Engine.CreateModel( f686_local0, "lobbyRoot.lobbyLockedIn" ), false )
 	if CoD.isZombie == true then
-		local f686_local2 = Engine[@"createmodel"]( f686_local0, "hudItems.ztut" )
-		Engine[@"createmodel"]( f686_local2, "showLocation", false )
-		Engine[@"createmodel"]( f686_local2, "showPerks", false )
-		Engine[@"createmodel"]( f686_local2, "showEquipment", false )
-		Engine[@"createmodel"]( f686_local2, "showShield", false )
-		Engine[@"createmodel"]( f686_local2, "showSpecial", false )
-		Engine[@"createmodel"]( f686_local2, "showElixirs", false )
+		local f686_local2 = Engine.CreateModel( f686_local0, "hudItems.ztut" )
+		Engine.CreateModel( f686_local2, "showLocation", false )
+		Engine.CreateModel( f686_local2, "showPerks", false )
+		Engine.CreateModel( f686_local2, "showEquipment", false )
+		Engine.CreateModel( f686_local2, "showShield", false )
+		Engine.CreateModel( f686_local2, "showSpecial", false )
+		Engine.CreateModel( f686_local2, "showElixirs", false )
 	end
 end

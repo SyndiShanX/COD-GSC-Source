@@ -1,5 +1,5 @@
-require("x64:eeb1847d838c6b1")
-require("x64:dbb04b55fa27ac6")
+require("ui/uieditor/widgets/cac/cactabbuttoninternal")
+require("ui/uieditor/widgets/cac/newbreadcrumbcount")
 CoD.CommonTabButton = InheritFrom(LUI.UIElement)
 CoD.CommonTabButton.__defaultWidth = 234
 CoD.CommonTabButton.__defaultHeight = 35
@@ -21,7 +21,7 @@ CoD.CommonTabButton.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	})
 	local f1_local2 = internal
 	local newIcon = internal.subscribeToModel
-	local f1_local4 = Engine[@"getglobalmodel"]()
+	local f1_local4 = Engine.GetGlobalModel()
 	newIcon(f1_local2, f1_local4["lobbyRoot.lobbyNav"], function(f3_arg0)
 		f1_arg0:updateElementState(internal, {
 			name = "model_validation",

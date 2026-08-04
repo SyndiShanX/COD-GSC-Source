@@ -1,5 +1,5 @@
-require("x64:379001ae517dfa6")
-require("x64:ff71d7766b2ab80")
+require("ui/uieditor/widgets/pc/seperationline")
+require("ui/uieditor/widgets/pc/startmenu/pc_startmenu_options_ftedescbacking")
 CoD.PC_StartMenu_Options_FTEDesc = InheritFrom(LUI.UIElement)
 CoD.PC_StartMenu_Options_FTEDesc.__defaultWidth = 1920
 CoD.PC_StartMenu_Options_FTEDesc.__defaultHeight = 438
@@ -26,8 +26,8 @@ CoD.PC_StartMenu_Options_FTEDesc.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	ScreenDesc:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	ScreenDesc:setTTF("ttmussels_regular")
 	ScreenDesc:setLetterSpacing(3)
-	ScreenDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	ScreenDesc:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
+	ScreenDesc:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	ScreenDesc:setAlignment(Enum.LUIAlignment[@"lui_alignment_middle"])
 	ScreenDesc:setBackingType(1)
 	ScreenDesc:setBackingWidget(CoD.PC_StartMenu_Options_FTEDescBacking, f1_arg0, f1_arg1)
 	ScreenDesc:setBackingXPadding(80)

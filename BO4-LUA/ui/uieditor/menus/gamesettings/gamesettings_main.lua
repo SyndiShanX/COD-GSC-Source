@@ -1,5 +1,5 @@
-require("x64:20a59255e4b7506")
-require("x64:8ca32636a90f3ee")
+require("ui/uieditor/widgets/customgames/customgames_catgeorytabs")
+require("ui/uieditor/widgets/gamesettings/gamesettings_background")
 local PostLoadFunc = function(f1_arg0, f1_arg1)
 	f1_arg0.originalOcclusionChange = f1_arg0.m_eventHandlers.occlusion_change
 	f1_arg0:registerEventHandler("occlusion_change", function(element, event)
@@ -13,10 +13,10 @@ local PostLoadFunc = function(f1_arg0, f1_arg1)
 		element:originalOcclusionChange(event)
 	end)
 	LUI.OverrideFunction_CallOriginalFirst(f1_arg0, "close", function()
-		local f3_local0 = Engine[@"getprimarycontroller"]()
+		local f3_local0 = Engine.GetPrimaryController()
 		CoD.perController[f3_local0].gamesettingsUpdated = true
 		ForceLobbyButtonUpdate(f3_local0)
-		Engine[@"forcenotifymodelsubscriptions"](Engine[@"getmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.gameClient.update"))
+		Engine.ForceNotifyModelSubscriptions(Engine.GetModel(Engine.GetGlobalModel(), "lobbyRoot.gameClient.update"))
 	end)
 end
 CoD.GameSettings_Main = InheritFrom(CoD.Menu)
@@ -88,84 +88,84 @@ LUI.createMenu.GameSettings_Main = function(f4_arg0, f4_arg1)
 	end)
 	self:appendEventHandler("input_source_changed", function(f9_arg0, f9_arg1)
 		f9_arg1.menu = f9_arg1.menu or f4_local1
-		CoD.Menu.UpdateButtonShownState(f9_arg0, f4_local1, f4_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
-		CoD.Menu.UpdateButtonShownState(f9_arg0, f4_local1, f4_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
-		CoD.Menu.UpdateButtonShownState(f9_arg0, f4_local1, f4_arg0, Enum[@"luibutton"][@"hash_64D2505E19049444"])
-		CoD.Menu.UpdateButtonShownState(f9_arg0, f4_local1, f4_arg0, Enum[@"luibutton"][@"lui_key_rtrig"])
+		CoD.Menu.UpdateButtonShownState(f9_arg0, f4_local1, f4_arg0, Enum.LUIButton[@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f9_arg0, f4_local1, f4_arg0, Enum.LUIButton[@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f9_arg0, f4_local1, f4_arg0, Enum.LUIButton[@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f9_arg0, f4_local1, f4_arg0, Enum.LUIButton[@"lui_key_rtrig"])
 	end)
 	local f4_local7 = self
 	local f4_local8 = self.subscribeToModel
-	local f4_local9 = Engine[@"getmodelforcontroller"](f4_arg0)
+	local f4_local9 = Engine.GetModelForController(f4_arg0)
 	f4_local8(f4_local7, f4_local9.LastInput, function(f10_arg0, f10_arg1)
-		CoD.Menu.UpdateButtonShownState(f10_arg1, f4_local1, f4_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"])
-		CoD.Menu.UpdateButtonShownState(f10_arg1, f4_local1, f4_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"])
-		CoD.Menu.UpdateButtonShownState(f10_arg1, f4_local1, f4_arg0, Enum[@"luibutton"][@"hash_64D2505E19049444"])
-		CoD.Menu.UpdateButtonShownState(f10_arg1, f4_local1, f4_arg0, Enum[@"luibutton"][@"lui_key_rtrig"])
+		CoD.Menu.UpdateButtonShownState(f10_arg1, f4_local1, f4_arg0, Enum.LUIButton[@"lui_key_xbb_pscircle"])
+		CoD.Menu.UpdateButtonShownState(f10_arg1, f4_local1, f4_arg0, Enum.LUIButton[@"lui_key_xbx_pssquare"])
+		CoD.Menu.UpdateButtonShownState(f10_arg1, f4_local1, f4_arg0, Enum.LUIButton[@"hash_64D2505E19049444"])
+		CoD.Menu.UpdateButtonShownState(f10_arg1, f4_local1, f4_arg0, Enum.LUIButton[@"lui_key_rtrig"])
 	end, false)
-	f4_local1:AddButtonCallbackFunction(self, f4_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
-		if IsGamepad(controller) and CoD.OptionsUtility.AreSpecialistOptionsValid(controller) then
-			OpenSystemOverlay(self, menu, controller, "SaveCustomGameOptions", nil)
+	f4_local1:AddButtonCallbackFunction(self, f4_arg0, Enum.LUIButton[@"lui_key_xbb_pscircle"], nil, function(f11_arg0, f11_arg1, f11_arg2, f11_arg3)
+		if IsGamepad(f11_arg2) and CoD.OptionsUtility.AreSpecialistOptionsValid(f11_arg2) then
+			OpenSystemOverlay(self, f11_arg1, f11_arg2, "SaveCustomGameOptions", nil)
 			return true
-		elseif IsGamepad(controller) then
-			CoD.OptionsUtility.ShowInvalidSpecialistOptionsDialog(controller)
+		elseif IsGamepad(f11_arg2) then
+			CoD.OptionsUtility.ShowInvalidSpecialistOptionsDialog(f11_arg2)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if IsGamepad(controller) and CoD.OptionsUtility.AreSpecialistOptionsValid(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
+	end, function(f12_arg0, f12_arg1, f12_arg2)
+		if IsGamepad(f12_arg2) and CoD.OptionsUtility.AreSpecialistOptionsValid(f12_arg2) then
+			CoD.Menu.SetButtonLabel(f12_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
 			return true
-		elseif IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_0", nil, nil)
+		elseif IsGamepad(f12_arg2) then
+			CoD.Menu.SetButtonLabel(f12_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], 0x0, nil, nil)
 			return false
 		else
 			return false
 		end
 	end, false)
-	f4_local1:AddButtonCallbackFunction(self, f4_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
-		if IsGamepad(controller) then
+	f4_local1:AddButtonCallbackFunction(self, f4_arg0, Enum.LUIButton[@"lui_key_xbx_pssquare"], nil, function(f13_arg0, f13_arg1, f13_arg2, f13_arg3)
+		if IsGamepad(f13_arg2) then
 			ResetGameSettings()
 			PlaySoundAlias("uin_party_ease_slide")
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if IsGamepad(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_5FA987631536BD44", Enum[@"luibuttonpromptflags"][@"hash_72919C98A7A845F0"] | 1500 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
+	end, function(f14_arg0, f14_arg1, f14_arg2)
+		if IsGamepad(f14_arg2) then
+			CoD.Menu.SetButtonLabel(f14_arg1, Enum.LUIButton[@"lui_key_xbx_pssquare"], "menu/reset_to_default", Enum[@"luibuttonpromptflags"][@"hash_72919C98A7A845F0"] | 1500 << Enum[@"luibuttonpromptflags"][@"hash_176ADD225D738C93"], nil)
 			return true
 		else
 			return false
 		end
 	end, false)
-	f4_local1:AddButtonCallbackFunction(self, f4_arg0, Enum[@"luibutton"][@"hash_64D2505E19049444"], "ESCAPE", function(element, menu, controller, model)
-		if IsMouseOrKeyboard(controller) and CoD.OptionsUtility.AreSpecialistOptionsValid(controller) then
-			GoBack(self, controller)
+	f4_local1:AddButtonCallbackFunction(self, f4_arg0, Enum.LUIButton[@"hash_64D2505E19049444"], "ESCAPE", function(f15_arg0, f15_arg1, f15_arg2, f15_arg3)
+		if IsMouseOrKeyboard(f15_arg2) and CoD.OptionsUtility.AreSpecialistOptionsValid(f15_arg2) then
+			GoBack(self, f15_arg2)
 			return true
-		elseif IsMouseOrKeyboard(controller) then
-			CoD.OptionsUtility.ShowInvalidSpecialistOptionsDialog(controller)
+		elseif IsMouseOrKeyboard(f15_arg2) then
+			CoD.OptionsUtility.ShowInvalidSpecialistOptionsDialog(f15_arg2)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if IsMouseOrKeyboard(controller) and CoD.OptionsUtility.AreSpecialistOptionsValid(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/back", nil, "ESCAPE")
+	end, function(f16_arg0, f16_arg1, f16_arg2)
+		if IsMouseOrKeyboard(f16_arg2) and CoD.OptionsUtility.AreSpecialistOptionsValid(f16_arg2) then
+			CoD.Menu.SetButtonLabel(f16_arg1, Enum.LUIButton[@"hash_64D2505E19049444"], @"menu/back", nil, "ESCAPE")
 			return true
-		elseif IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"hash_64D2505E19049444"], @"menu/back", nil, "ESCAPE")
+		elseif IsMouseOrKeyboard(f16_arg2) then
+			CoD.Menu.SetButtonLabel(f16_arg1, Enum.LUIButton[@"hash_64D2505E19049444"], @"menu/back", nil, "ESCAPE")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f4_local1:AddButtonCallbackFunction(self, f4_arg0, Enum[@"luibutton"][@"lui_key_rtrig"], "ui_contextual_2", function(element, menu, controller, model)
-		if IsMouseOrKeyboard(controller) then
-			OpenResetGameSettingsPopup(self, element, controller, "", menu)
+	f4_local1:AddButtonCallbackFunction(self, f4_arg0, Enum.LUIButton[@"lui_key_rtrig"], "ui_contextual_2", function(f17_arg0, f17_arg1, f17_arg2, f17_arg3)
+		if IsMouseOrKeyboard(f17_arg2) then
+			OpenResetGameSettingsPopup(self, f17_arg0, f17_arg2, "", f17_arg1)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if IsMouseOrKeyboard(controller) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_rtrig"], @"hash_5FA987631536BD44", nil, "ui_contextual_2")
+	end, function(f18_arg0, f18_arg1, f18_arg2)
+		if IsMouseOrKeyboard(f18_arg2) then
+			CoD.Menu.SetButtonLabel(f18_arg1, Enum.LUIButton[@"lui_key_rtrig"], "menu/reset_to_default", nil, "ui_contextual_2")
 			return true
 		else
 			return false

@@ -1,5 +1,5 @@
-require("x64:de41b5dda8306fc")
-require("x64:5bf5dd18266b70b")
+require("ui/uieditor/widgets/callingcards/callingcards_asset_pirates_armwithgun")
+require("ui/uieditor/widgets/callingcards/callingcards_asset_pirates_armwithsword")
 CoD.CallingCards_Asset_Pirates_Pirate = InheritFrom(LUI.UIElement)
 CoD.CallingCards_Asset_Pirates_Pirate.__defaultWidth = 918
 CoD.CallingCards_Asset_Pirates_Pirate.__defaultHeight = 280
@@ -19,7 +19,7 @@ CoD.CallingCards_Asset_Pirates_Pirate.new = function(f1_arg0, f1_arg1, f1_arg2, 
 	self:addElement(armwithgun)
 	self.armwithgun = armwithgun
 	local piratebody = LUI.UIImage.new(0, 0, 517.5, 750.5, 0, 0, 0, 280)
-	piratebody:setImage(RegisterImage(@"uie_ui_icon_callingcards_pirates_body"))
+	piratebody:setImage(RegisterImage("uie_ui_icon_callingcards_pirates_body"))
 	self:addElement(piratebody)
 	self.piratebody = piratebody
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

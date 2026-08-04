@@ -1,4 +1,4 @@
-require("x64:1f846296f1a1b81")
+require("ui/uieditor/widgets/director/directorselectbuttonminiinternal")
 CoD.StartMenu_Options_PrivacySettingsButton = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Options_PrivacySettingsButton.__defaultWidth = 514
 CoD.StartMenu_Options_PrivacySettingsButton.__defaultHeight = 69
@@ -29,8 +29,8 @@ CoD.StartMenu_Options_PrivacySettingsButton.new = function(f1_arg0, f1_arg1, f1_
 	DirectorCustomStartButton.Tint:setRGB(0.05, 0.08, 0.11)
 	DirectorCustomStartButton.Tint:setAlpha(0.25)
 	DirectorCustomStartButton.LeaderActivityText:setText("")
-	DirectorCustomStartButton.MiddleText:setText(LocalizeToUpperString(@"hash_65EB6FED86163697"))
-	DirectorCustomStartButton.MiddleTextFocus:setText(LocalizeToUpperString(@"hash_65EB6FED86163697"))
+	DirectorCustomStartButton.MiddleText:setText(LocalizeToUpperString("menu/privacy_settings"))
+	DirectorCustomStartButton.MiddleTextFocus:setText(LocalizeToUpperString("menu/privacy_settings"))
 	self:addElement(DirectorCustomStartButton)
 	self.DirectorCustomStartButton = DirectorCustomStartButton
 	self:mergeStateConditions({

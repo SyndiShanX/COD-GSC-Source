@@ -1,4 +1,4 @@
-require("x64:785e3fb024ffd43")
+require("ui/uieditor/widgets/playercontextualmenu_item")
 CoD.PlayerContextualMenu = InheritFrom(LUI.UIElement)
 CoD.PlayerContextualMenu.__defaultWidth = 300
 CoD.PlayerContextualMenu.__defaultHeight = 200
@@ -21,7 +21,7 @@ CoD.PlayerContextualMenu.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_a
 	ActionsList:setAutoScaleContent(true)
 	ActionsList:setWidgetType(CoD.PlayerContextualMenu_Item)
 	ActionsList:setVerticalCount(7)
-	ActionsList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ActionsList:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	ActionsList:setDataSource("PlayerContextualMenuOptionsList")
 	self:addElement(ActionsList)
 	self.ActionsList = ActionsList

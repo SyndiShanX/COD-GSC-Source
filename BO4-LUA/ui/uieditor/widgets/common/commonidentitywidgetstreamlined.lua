@@ -1,4 +1,4 @@
-require("x64:899841f5c56728a")
+require("ui/uieditor/widgets/common/commonidentitywidgetstreamlinedinternal")
 CoD.CommonIdentityWidgetStreamlined = InheritFrom(LUI.UIElement)
 CoD.CommonIdentityWidgetStreamlined.__defaultWidth = 530
 CoD.CommonIdentityWidgetStreamlined.__defaultHeight = 40

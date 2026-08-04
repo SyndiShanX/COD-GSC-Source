@@ -16,7 +16,7 @@ CoD.ModelUtility.GetSelfModelPath = function(f1_arg0, f1_arg1)
 end
 CoD.ModelUtility.GetSelfModelPathValue = function(f2_arg0, f2_arg1)
 	local f2_local0 = CoD.ModelUtility.GetSelfModelPath(f2_arg0, f2_arg1)
-	return f2_local0 and Engine[@"getmodelvalue"](f2_local0)
+	return f2_local0 and Engine.GetModelValue(f2_local0)
 end
 CoD.ModelUtility.IsParamModelEqualTo = function(f3_arg0, f3_arg1)
 	return f3_arg0 and f3_arg0:get() == f3_arg1
@@ -38,8 +38,8 @@ CoD.ModelUtility.IsScriptNotifyDataArgEqualTo = function(f8_arg0, f8_arg1, f8_ar
 	return f8_local0 and f8_local0[f8_arg1] == f8_arg2
 end
 CoD.ModelUtility.IsModelValueNonEmptyString = function(f9_arg0, f9_arg1)
-	local f9_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f9_arg0), f9_arg1)
-	local f9_local1 = f9_local0 and Engine[@"getmodelvalue"](f9_local0)
+	local f9_local0 = Engine.GetModel(Engine.GetModelForController(f9_arg0), f9_arg1)
+	local f9_local1 = f9_local0 and Engine.GetModelValue(f9_local0)
 	local f9_local2
 	if f9_local1 == nil or f9_local1 == "" or f9_local1 == 0x0 then
 		f9_local2 = false
@@ -49,8 +49,8 @@ CoD.ModelUtility.IsModelValueNonEmptyString = function(f9_arg0, f9_arg1)
 	return f9_local2
 end
 CoD.ModelUtility.IsModelValueTrue = function(f10_arg0, f10_arg1)
-	local f10_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f10_arg0), f10_arg1)
-	local f10_local1 = f10_local0 and Engine[@"getmodelvalue"](f10_local0)
+	local f10_local0 = Engine.GetModel(Engine.GetModelForController(f10_arg0), f10_arg1)
+	local f10_local1 = f10_local0 and Engine.GetModelValue(f10_local0)
 	local f10_local2
 	if f10_local1 == nil or f10_local1 ~= true then
 		f10_local2 = false
@@ -60,8 +60,8 @@ CoD.ModelUtility.IsModelValueTrue = function(f10_arg0, f10_arg1)
 	return f10_local2
 end
 CoD.ModelUtility.IsModelValueGreaterThan = function(f11_arg0, f11_arg1, f11_arg2)
-	local f11_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f11_arg0), f11_arg1)
-	local f11_local1 = f11_local0 and Engine[@"getmodelvalue"](f11_local0)
+	local f11_local0 = Engine.GetModel(Engine.GetModelForController(f11_arg0), f11_arg1)
+	local f11_local1 = f11_local0 and Engine.GetModelValue(f11_local0)
 	local f11_local2
 	if f11_local1 == nil or f11_arg2 >= f11_local1 then
 		f11_local2 = false
@@ -71,8 +71,8 @@ CoD.ModelUtility.IsModelValueGreaterThan = function(f11_arg0, f11_arg1, f11_arg2
 	return f11_local2
 end
 CoD.ModelUtility.IsModelValueLessThan = function(f12_arg0, f12_arg1, f12_arg2)
-	local f12_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f12_arg0), f12_arg1)
-	local f12_local1 = f12_local0 and Engine[@"getmodelvalue"](f12_local0)
+	local f12_local0 = Engine.GetModel(Engine.GetModelForController(f12_arg0), f12_arg1)
+	local f12_local1 = f12_local0 and Engine.GetModelValue(f12_local0)
 	local f12_local2
 	if f12_local1 == nil or f12_local1 >= f12_arg2 then
 		f12_local2 = false
@@ -82,8 +82,8 @@ CoD.ModelUtility.IsModelValueLessThan = function(f12_arg0, f12_arg1, f12_arg2)
 	return f12_local2
 end
 CoD.ModelUtility.IsModelValueGreaterThanOrEqualTo = function(f13_arg0, f13_arg1, f13_arg2)
-	local f13_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f13_arg0), f13_arg1)
-	local f13_local1 = f13_local0 and Engine[@"getmodelvalue"](f13_local0)
+	local f13_local0 = Engine.GetModel(Engine.GetModelForController(f13_arg0), f13_arg1)
+	local f13_local1 = f13_local0 and Engine.GetModelValue(f13_local0)
 	local f13_local2
 	if f13_local1 == nil or f13_arg2 > f13_local1 then
 		f13_local2 = false
@@ -93,8 +93,8 @@ CoD.ModelUtility.IsModelValueGreaterThanOrEqualTo = function(f13_arg0, f13_arg1,
 	return f13_local2
 end
 CoD.ModelUtility.IsModelValueLessThanOrEqualTo = function(f14_arg0, f14_arg1, f14_arg2)
-	local f14_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f14_arg0), f14_arg1)
-	local f14_local1 = f14_local0 and Engine[@"getmodelvalue"](f14_local0)
+	local f14_local0 = Engine.GetModel(Engine.GetModelForController(f14_arg0), f14_arg1)
+	local f14_local1 = f14_local0 and Engine.GetModelValue(f14_local0)
 	local f14_local2
 	if f14_local1 == nil or f14_local1 > f14_arg2 then
 		f14_local2 = false
@@ -104,8 +104,8 @@ CoD.ModelUtility.IsModelValueLessThanOrEqualTo = function(f14_arg0, f14_arg1, f1
 	return f14_local2
 end
 CoD.ModelUtility.IsModelValueEqualTo = function(f15_arg0, f15_arg1, f15_arg2)
-	local f15_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f15_arg0), f15_arg1)
-	local f15_local1 = f15_local0 and Engine[@"getmodelvalue"](f15_local0)
+	local f15_local0 = Engine.GetModel(Engine.GetModelForController(f15_arg0), f15_arg1)
+	local f15_local1 = f15_local0 and Engine.GetModelValue(f15_local0)
 	local f15_local2
 	if f15_local1 == nil or tostring(f15_local1) ~= tostring(f15_arg2) then
 		f15_local2 = false
@@ -115,8 +115,8 @@ CoD.ModelUtility.IsModelValueEqualTo = function(f15_arg0, f15_arg1, f15_arg2)
 	return f15_local2
 end
 CoD.ModelUtility.IsModelValueEqualToEitherValue = function(f16_arg0, f16_arg1, f16_arg2, f16_arg3)
-	local f16_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f16_arg0), f16_arg1)
-	local f16_local1 = f16_local0 and Engine[@"getmodelvalue"](f16_local0)
+	local f16_local0 = Engine.GetModel(Engine.GetModelForController(f16_arg0), f16_arg1)
+	local f16_local1 = f16_local0 and Engine.GetModelValue(f16_local0)
 	local f16_local2
 	if f16_local1 == nil or f16_local1 ~= f16_arg2 and f16_local1 ~= f16_arg3 then
 		f16_local2 = false
@@ -126,8 +126,8 @@ CoD.ModelUtility.IsModelValueEqualToEitherValue = function(f16_arg0, f16_arg1, f
 	return f16_local2
 end
 CoD.ModelUtility.IsModelValueEqualToEnum = function(f17_arg0, f17_arg1, f17_arg2)
-	local f17_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f17_arg0), f17_arg1)
-	local f17_local1 = f17_local0 and Engine[@"getmodelvalue"](f17_local0)
+	local f17_local0 = Engine.GetModel(Engine.GetModelForController(f17_arg0), f17_arg1)
+	local f17_local1 = f17_local0 and Engine.GetModelValue(f17_local0)
 	local f17_local2
 	if f17_local1 == nil or f17_local1 ~= f17_arg2 then
 		f17_local2 = false
@@ -137,8 +137,8 @@ CoD.ModelUtility.IsModelValueEqualToEnum = function(f17_arg0, f17_arg1, f17_arg2
 	return f17_local2
 end
 CoD.ModelUtility.IsModelValueEqualToEitherEnum = function(f18_arg0, f18_arg1, f18_arg2, f18_arg3)
-	local f18_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f18_arg0), f18_arg1)
-	local f18_local1 = f18_local0 and Engine[@"getmodelvalue"](f18_local0)
+	local f18_local0 = Engine.GetModel(Engine.GetModelForController(f18_arg0), f18_arg1)
+	local f18_local1 = f18_local0 and Engine.GetModelValue(f18_local0)
 	local f18_local2
 	if f18_local1 == nil or f18_local1 ~= f18_arg2 and f18_local1 ~= f18_arg3 then
 		f18_local2 = false
@@ -148,8 +148,8 @@ CoD.ModelUtility.IsModelValueEqualToEitherEnum = function(f18_arg0, f18_arg1, f1
 	return f18_local2
 end
 CoD.ModelUtility.IsModelValueEnumBitSet = function(f19_arg0, f19_arg1, f19_arg2)
-	local f19_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f19_arg0), f19_arg1)
-	local f19_local1 = f19_local0 and Engine[@"getmodelvalue"](f19_local0)
+	local f19_local0 = Engine.GetModel(Engine.GetModelForController(f19_arg0), f19_arg1)
+	local f19_local1 = f19_local0 and Engine.GetModelValue(f19_local0)
 	local f19_local2
 	if f19_local1 ~= nil then
 		f19_local2 = CoD.BitUtility.IsBitSet(f19_local1, f19_arg2)
@@ -159,8 +159,8 @@ CoD.ModelUtility.IsModelValueEnumBitSet = function(f19_arg0, f19_arg1, f19_arg2)
 	return f19_local2
 end
 CoD.ModelUtility.IsButtonModelValueEqualTo = function(f20_arg0, f20_arg1, f20_arg2)
-	local f20_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f20_arg0), "ButtonBits." .. f20_arg1)
-	local f20_local1 = f20_local0 and Engine[@"getmodelvalue"](f20_local0)
+	local f20_local0 = Engine.GetModel(Engine.GetModelForController(f20_arg0), "ButtonBits." .. f20_arg1)
+	local f20_local1 = f20_local0 and Engine.GetModelValue(f20_local0)
 	local f20_local2
 	if f20_local1 == nil or f20_local1 ~= f20_arg2 then
 		f20_local2 = false
@@ -170,8 +170,8 @@ CoD.ModelUtility.IsButtonModelValueEqualTo = function(f20_arg0, f20_arg1, f20_ar
 	return f20_local2
 end
 CoD.ModelUtility.AreButtonModelValueBitsSet = function(f21_arg0, f21_arg1, f21_arg2)
-	local f21_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f21_arg0), "ButtonBits." .. f21_arg1)
-	local f21_local1 = f21_local0 and Engine[@"getmodelvalue"](f21_local0)
+	local f21_local0 = Engine.GetModel(Engine.GetModelForController(f21_arg0), "ButtonBits." .. f21_arg1)
+	local f21_local1 = f21_local0 and Engine.GetModelValue(f21_local0)
 	local f21_local2
 	if f21_local1 == nil or f21_local1 & f21_arg2 ~= f21_arg2 then
 		f21_local2 = false
@@ -181,8 +181,8 @@ CoD.ModelUtility.AreButtonModelValueBitsSet = function(f21_arg0, f21_arg1, f21_a
 	return f21_local2
 end
 CoD.ModelUtility.AreKeyModelValueBitsSet = function(f22_arg0, f22_arg1, f22_arg2)
-	local f22_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f22_arg0), "KeyPressBits." .. f22_arg1)
-	local f22_local1 = f22_local0 and Engine[@"getmodelvalue"](f22_local0)
+	local f22_local0 = Engine.GetModel(Engine.GetModelForController(f22_arg0), "KeyPressBits." .. f22_arg1)
+	local f22_local1 = f22_local0 and Engine.GetModelValue(f22_local0)
 	local f22_local2
 	if f22_local1 == nil or f22_local1 & f22_arg2 ~= f22_arg2 then
 		f22_local2 = false
@@ -192,8 +192,8 @@ CoD.ModelUtility.AreKeyModelValueBitsSet = function(f22_arg0, f22_arg1, f22_arg2
 	return f22_local2
 end
 CoD.ModelUtility.ModelValueStartsWith = function(f23_arg0, f23_arg1, f23_arg2)
-	local f23_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f23_arg0), f23_arg1)
-	local f23_local1 = f23_local0 and Engine[@"getmodelvalue"](f23_local0)
+	local f23_local0 = Engine.GetModel(Engine.GetModelForController(f23_arg0), f23_arg1)
+	local f23_local1 = f23_local0 and Engine.GetModelValue(f23_local0)
 	local f23_local2
 	if f23_local1 ~= nil then
 		f23_local2 = LUI.startswith(f23_local1, f23_arg2)
@@ -206,27 +206,27 @@ CoD.ModelUtility.IsControllerModelValueEqualToSelfModelValue = function(f24_arg0
 	if not f24_arg0:getModel() then
 		return false
 	else
-		local f24_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f24_arg1), f24_arg2)
+		local f24_local0 = Engine.GetModel(Engine.GetModelForController(f24_arg1), f24_arg2)
 		if not f24_local0 then
 			return false
 		else
-			local f24_local1 = Engine[@"getmodel"](f24_arg0:getModel(), f24_arg3)
+			local f24_local1 = Engine.GetModel(f24_arg0:getModel(), f24_arg3)
 			if not f24_local1 then
 				return false
 			else
-				return Engine[@"getmodelvalue"](f24_local0) == Engine[@"getmodelvalue"](f24_local1)
+				return Engine.GetModelValue(f24_local0) == Engine.GetModelValue(f24_local1)
 			end
 		end
 	end
 end
 local f0_local0 = nil
 local f0_local1 = function(f25_arg0, f25_arg1, f25_arg2)
-	local f25_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f25_arg1), f25_arg2)
+	local f25_local0 = Engine.GetModel(Engine.GetModelForController(f25_arg1), f25_arg2)
 	if not f25_local0 then
 		return false
 	end
 	local f25_local1 = tonumber(string.match(f25_arg0.id, "(%d+)"))
-	local f25_local2 = Engine[@"getmodelvalue"](f25_local0)
+	local f25_local2 = Engine.GetModelValue(f25_local0)
 	if not f0_local0 then
 		f0_local0 = {}
 		local f25_local3 = 3
@@ -264,25 +264,25 @@ CoD.ModelUtility.IsControllerModelValueGreaterThanOrEqualToSelfModelValue = func
 	if not f29_arg0:getModel() then
 		return false
 	else
-		local f29_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f29_arg1), f29_arg2)
+		local f29_local0 = Engine.GetModel(Engine.GetModelForController(f29_arg1), f29_arg2)
 		if not f29_local0 then
 			return false
 		else
-			local f29_local1 = Engine[@"getmodel"](f29_arg0:getModel(), f29_arg3)
+			local f29_local1 = Engine.GetModel(f29_arg0:getModel(), f29_arg3)
 			if not f29_local1 then
 				return false
 			else
-				return Engine[@"getmodelvalue"](f29_local1) <= Engine[@"getmodelvalue"](f29_local0)
+				return Engine.GetModelValue(f29_local1) <= Engine.GetModelValue(f29_local0)
 			end
 		end
 	end
 end
 CoD.ModelUtility.IsControllerModelValueNonEmptyString = function(f30_arg0, f30_arg1)
-	local f30_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f30_arg0), f30_arg1)
+	local f30_local0 = Engine.GetModel(Engine.GetModelForController(f30_arg0), f30_arg1)
 	if not f30_local0 then
 		return false
 	end
-	local f30_local1 = Engine[@"getmodelvalue"](f30_local0)
+	local f30_local1 = Engine.GetModelValue(f30_local0)
 	local f30_local2
 	if f30_local1 == nil or f30_local1 == "" or f30_local1 == 0x0 then
 		f30_local2 = false
@@ -292,11 +292,11 @@ CoD.ModelUtility.IsControllerModelValueNonEmptyString = function(f30_arg0, f30_a
 	return f30_local2
 end
 CoD.ModelUtility.IsControllerModelValueTrue = function(f31_arg0, f31_arg1)
-	local f31_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f31_arg0), f31_arg1)
+	local f31_local0 = Engine.GetModel(Engine.GetModelForController(f31_arg0), f31_arg1)
 	if not f31_local0 then
 		return false
 	end
-	local f31_local1 = Engine[@"getmodelvalue"](f31_local0)
+	local f31_local1 = Engine.GetModelValue(f31_local0)
 	local f31_local2
 	if f31_local1 == nil or f31_local1 ~= true then
 		f31_local2 = false
@@ -306,8 +306,8 @@ CoD.ModelUtility.IsControllerModelValueTrue = function(f31_arg0, f31_arg1)
 	return f31_local2
 end
 CoD.ModelUtility.IsClientModelValueNonEmptyString = function(f32_arg0, f32_arg1)
-	local f32_local0 = Engine[@"getmodel"](Engine[@"getmodelforclient"](Engine[@"getclientnum"](f32_arg0)), f32_arg1)
-	local f32_local1 = f32_local0 and Engine[@"getmodelvalue"](f32_local0)
+	local f32_local0 = Engine.GetModel(Engine[@"getmodelforclient"](Engine.GetClientNum(f32_arg0)), f32_arg1)
+	local f32_local1 = f32_local0 and Engine.GetModelValue(f32_local0)
 	local f32_local2
 	if f32_local1 == nil or f32_local1 == "" or f32_local1 == 0x0 then
 		f32_local2 = false
@@ -317,8 +317,8 @@ CoD.ModelUtility.IsClientModelValueNonEmptyString = function(f32_arg0, f32_arg1)
 	return f32_local2
 end
 CoD.ModelUtility.IsClientModelValueTrue = function(f33_arg0, f33_arg1)
-	local f33_local0 = Engine[@"getmodel"](Engine[@"getmodelforclient"](Engine[@"getclientnum"](f33_arg0)), f33_arg1)
-	local f33_local1 = f33_local0 and Engine[@"getmodelvalue"](f33_local0)
+	local f33_local0 = Engine.GetModel(Engine[@"getmodelforclient"](Engine.GetClientNum(f33_arg0)), f33_arg1)
+	local f33_local1 = f33_local0 and Engine.GetModelValue(f33_local0)
 	local f33_local2
 	if f33_local1 == nil or f33_local1 ~= true then
 		f33_local2 = false
@@ -328,8 +328,8 @@ CoD.ModelUtility.IsClientModelValueTrue = function(f33_arg0, f33_arg1)
 	return f33_local2
 end
 CoD.ModelUtility.IsClientModelValueGreaterThan = function(f34_arg0, f34_arg1, f34_arg2)
-	local f34_local0 = Engine[@"getmodel"](Engine[@"getmodelforclient"](Engine[@"getclientnum"](f34_arg0)), f34_arg1)
-	local f34_local1 = f34_local0 and Engine[@"getmodelvalue"](f34_local0)
+	local f34_local0 = Engine.GetModel(Engine[@"getmodelforclient"](Engine.GetClientNum(f34_arg0)), f34_arg1)
+	local f34_local1 = f34_local0 and Engine.GetModelValue(f34_local0)
 	local f34_local2
 	if f34_local1 == nil or f34_arg2 >= f34_local1 then
 		f34_local2 = false
@@ -339,8 +339,8 @@ CoD.ModelUtility.IsClientModelValueGreaterThan = function(f34_arg0, f34_arg1, f3
 	return f34_local2
 end
 CoD.ModelUtility.IsClientModelValueLessThan = function(f35_arg0, f35_arg1, f35_arg2)
-	local f35_local0 = Engine[@"getmodel"](Engine[@"getmodelforclient"](Engine[@"getclientnum"](f35_arg0)), f35_arg1)
-	local f35_local1 = f35_local0 and Engine[@"getmodelvalue"](f35_local0)
+	local f35_local0 = Engine.GetModel(Engine[@"getmodelforclient"](Engine.GetClientNum(f35_arg0)), f35_arg1)
+	local f35_local1 = f35_local0 and Engine.GetModelValue(f35_local0)
 	local f35_local2
 	if f35_local1 == nil or f35_local1 >= f35_arg2 then
 		f35_local2 = false
@@ -350,8 +350,8 @@ CoD.ModelUtility.IsClientModelValueLessThan = function(f35_arg0, f35_arg1, f35_a
 	return f35_local2
 end
 CoD.ModelUtility.IsClientModelValueGreaterThanOrEqualTo = function(f36_arg0, f36_arg1, f36_arg2)
-	local f36_local0 = Engine[@"getmodel"](Engine[@"getmodelforclient"](Engine[@"getclientnum"](f36_arg0)), f36_arg1)
-	local f36_local1 = f36_local0 and Engine[@"getmodelvalue"](f36_local0)
+	local f36_local0 = Engine.GetModel(Engine[@"getmodelforclient"](Engine.GetClientNum(f36_arg0)), f36_arg1)
+	local f36_local1 = f36_local0 and Engine.GetModelValue(f36_local0)
 	local f36_local2
 	if f36_local1 == nil or f36_arg2 > f36_local1 then
 		f36_local2 = false
@@ -361,8 +361,8 @@ CoD.ModelUtility.IsClientModelValueGreaterThanOrEqualTo = function(f36_arg0, f36
 	return f36_local2
 end
 CoD.ModelUtility.IsClientModelValueLessThanOrEqualTo = function(f37_arg0, f37_arg1, f37_arg2)
-	local f37_local0 = Engine[@"getmodel"](Engine[@"getmodelforclient"](Engine[@"getclientnum"](f37_arg0)), f37_arg1)
-	local f37_local1 = f37_local0 and Engine[@"getmodelvalue"](f37_local0)
+	local f37_local0 = Engine.GetModel(Engine[@"getmodelforclient"](Engine.GetClientNum(f37_arg0)), f37_arg1)
+	local f37_local1 = f37_local0 and Engine.GetModelValue(f37_local0)
 	local f37_local2
 	if f37_local1 == nil or f37_local1 > f37_arg2 then
 		f37_local2 = false
@@ -372,8 +372,8 @@ CoD.ModelUtility.IsClientModelValueLessThanOrEqualTo = function(f37_arg0, f37_ar
 	return f37_local2
 end
 CoD.ModelUtility.IsClientModelValueEqualTo = function(f38_arg0, f38_arg1, f38_arg2)
-	local f38_local0 = Engine[@"getmodel"](Engine[@"getmodelforclient"](Engine[@"getclientnum"](f38_arg0)), f38_arg1)
-	local f38_local1 = f38_local0 and Engine[@"getmodelvalue"](f38_local0)
+	local f38_local0 = Engine.GetModel(Engine[@"getmodelforclient"](Engine.GetClientNum(f38_arg0)), f38_arg1)
+	local f38_local1 = f38_local0 and Engine.GetModelValue(f38_local0)
 	local f38_local2
 	if f38_local1 == nil or f38_local1 ~= f38_arg2 then
 		f38_local2 = false
@@ -383,8 +383,8 @@ CoD.ModelUtility.IsClientModelValueEqualTo = function(f38_arg0, f38_arg1, f38_ar
 	return f38_local2
 end
 CoD.ModelUtility.IsClientModelValueEqualToEitherValue = function(f39_arg0, f39_arg1, f39_arg2, f39_arg3)
-	local f39_local0 = Engine[@"getmodel"](Engine[@"getmodelforclient"](Engine[@"getclientnum"](f39_arg0)), f39_arg1)
-	local f39_local1 = f39_local0 and Engine[@"getmodelvalue"](f39_local0)
+	local f39_local0 = Engine.GetModel(Engine[@"getmodelforclient"](Engine.GetClientNum(f39_arg0)), f39_arg1)
+	local f39_local1 = f39_local0 and Engine.GetModelValue(f39_local0)
 	local f39_local2
 	if f39_local1 == nil or f39_local1 ~= f39_arg2 and f39_local1 ~= f39_arg3 then
 		f39_local2 = false
@@ -399,7 +399,7 @@ CoD.ModelUtility.IsSelfModelValueEqualToClientModelValue = function(f40_arg0, f4
 	if f40_local0 then
 		f40_local0 = f40_local0:get()
 	end
-	local f40_local1 = Engine[@"getmodelforclient"](Engine[@"getclientnum"](f40_arg0))
+	local f40_local1 = Engine[@"getmodelforclient"](Engine.GetClientNum(f40_arg0))
 	f40_local1 = f40_local1[f40_arg3]
 	if f40_local1 then
 		f40_local1 = f40_local1:get()
@@ -418,7 +418,7 @@ CoD.ModelUtility.IsSelfModelValueEqualToClientModelValuePlusValue = function(f41
 	if f41_local0 then
 		f41_local0 = f41_local0:get()
 	end
-	local f41_local1 = Engine[@"getmodelforclient"](Engine[@"getclientnum"](f41_arg0))
+	local f41_local1 = Engine[@"getmodelforclient"](Engine.GetClientNum(f41_arg0))
 	f41_local1 = f41_local1[f41_arg3]
 	if f41_local1 then
 		f41_local1 = f41_local1:get()
@@ -437,7 +437,7 @@ CoD.ModelUtility.IsSelfModelValueLessThanClientModelValuePlusValue = function(f4
 	if f42_local0 then
 		f42_local0 = f42_local0:get()
 	end
-	local f42_local1 = Engine[@"getmodelforclient"](Engine[@"getclientnum"](f42_arg0))
+	local f42_local1 = Engine[@"getmodelforclient"](Engine.GetClientNum(f42_arg0))
 	f42_local1 = f42_local1[f42_arg3]
 	if f42_local1 then
 		f42_local1 = f42_local1:get()
@@ -454,15 +454,15 @@ CoD.ModelUtility.IsGlobalModelValueEqualToSelfModelValue = function(f43_arg0, f4
 	if not f43_arg0:getModel() then
 		return false
 	else
-		local f43_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), f43_arg1)
+		local f43_local0 = Engine.GetModel(Engine.GetGlobalModel(), f43_arg1)
 		if not f43_local0 then
 			return false
 		else
-			local f43_local1 = Engine[@"getmodel"](f43_arg0:getModel(), f43_arg2)
+			local f43_local1 = Engine.GetModel(f43_arg0:getModel(), f43_arg2)
 			if not f43_local1 then
 				return false
 			else
-				return Engine[@"getmodelvalue"](f43_local0) == Engine[@"getmodelvalue"](f43_local1)
+				return Engine.GetModelValue(f43_local0) == Engine.GetModelValue(f43_local1)
 			end
 		end
 	end
@@ -479,15 +479,15 @@ CoD.ModelUtility.IsGlobalModelValueLessThanSelfModelValue = function(f45_arg0, f
 	if not f45_arg0:getModel() then
 		return false
 	else
-		local f45_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), f45_arg1)
+		local f45_local0 = Engine.GetModel(Engine.GetGlobalModel(), f45_arg1)
 		if not f45_local0 then
 			return false
 		else
-			local f45_local1 = Engine[@"getmodel"](f45_arg0:getModel(), f45_arg2)
+			local f45_local1 = Engine.GetModel(f45_arg0:getModel(), f45_arg2)
 			if not f45_local1 then
 				return false
 			else
-				return Engine[@"getmodelvalue"](f45_local0) < Engine[@"getmodelvalue"](f45_local1)
+				return Engine.GetModelValue(f45_local0) < Engine.GetModelValue(f45_local1)
 			end
 		end
 	end
@@ -496,26 +496,26 @@ CoD.ModelUtility.IsGlobalModelValueGreaterThanSelfModelValue = function(f46_arg0
 	if not f46_arg0:getModel() then
 		return false
 	else
-		local f46_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), f46_arg1)
+		local f46_local0 = Engine.GetModel(Engine.GetGlobalModel(), f46_arg1)
 		if not f46_local0 then
 			return false
 		else
-			local f46_local1 = Engine[@"getmodel"](f46_arg0:getModel(), f46_arg2)
+			local f46_local1 = Engine.GetModel(f46_arg0:getModel(), f46_arg2)
 			if not f46_local1 then
 				return false
 			else
-				return Engine[@"getmodelvalue"](f46_local1) < Engine[@"getmodelvalue"](f46_local0)
+				return Engine.GetModelValue(f46_local1) < Engine.GetModelValue(f46_local0)
 			end
 		end
 	end
 end
 CoD.ModelUtility.IsGlobalModelValueEqualToSelfTeam = function(f47_arg0, f47_arg1)
 	local f47_local0 = CoD.TeamUtility.GetTeamID(f47_arg0)
-	if f47_local0 == Enum[@"team_t"][@"team_spectator"] then
+	if f47_local0 == Enum.team_t[@"team_spectator"] then
 		if CoD.ShoutcasterProfileVarBool(f47_arg0, "shoutcaster_ds_flip_scorepanel") then
-			f47_local0 = Enum[@"team_t"][@"team_axis"]
+			f47_local0 = Enum.team_t[@"team_axis"]
 		else
-			f47_local0 = Enum[@"team_t"][@"team_allies"]
+			f47_local0 = Enum.team_t[@"team_allies"]
 		end
 	end
 	return CoD.ModelUtility.IsGlobalModelValueEqualTo(f47_arg1, f47_local0)
@@ -535,14 +535,14 @@ end
 CoD.ModelUtility.IsSelfModelPathNil = function(f50_arg0, f50_arg1, f50_arg2)
 	local f50_local0 = f50_arg0:getModel()
 	if f50_arg2 ~= "" and f50_local0 then
-		f50_local0 = Engine[@"getmodel"](f50_local0, f50_arg2)
+		f50_local0 = Engine.GetModel(f50_local0, f50_arg2)
 	end
 	return f50_local0 == nil
 end
 CoD.ModelUtility.IsSelfModelValueNil = function(f51_arg0, f51_arg1, f51_arg2)
 	local f51_local0 = f51_arg0:getModel()
 	if f51_arg2 ~= "" and f51_local0 then
-		f51_local0 = Engine[@"getmodel"](f51_local0, f51_arg2)
+		f51_local0 = Engine.GetModel(f51_local0, f51_arg2)
 	end
 	local f51_local1
 	if f51_local0 ~= nil and f51_local0:get() ~= nil then
@@ -555,9 +555,9 @@ end
 CoD.ModelUtility.IsSelfModelValueNilOrZero = function(f52_arg0, f52_arg1, f52_arg2)
 	local f52_local0 = f52_arg0:getModel()
 	if f52_arg2 ~= "" and f52_local0 then
-		f52_local0 = Engine[@"getmodel"](f52_local0, f52_arg2)
+		f52_local0 = Engine.GetModel(f52_local0, f52_arg2)
 	end
-	local f52_local1 = f52_local0 and Engine[@"getmodelvalue"](f52_local0)
+	local f52_local1 = f52_local0 and Engine.GetModelValue(f52_local0)
 	local f52_local2
 	if f52_local0 ~= nil and f52_local1 ~= nil and f52_local1 ~= 0 then
 		f52_local2 = false
@@ -569,9 +569,9 @@ end
 CoD.ModelUtility.IsSelfModelValueNilOrTrue = function(f53_arg0, f53_arg1, f53_arg2)
 	local f53_local0 = f53_arg0:getModel()
 	if f53_arg2 ~= "" and f53_local0 then
-		f53_local0 = Engine[@"getmodel"](f53_local0, f53_arg2)
+		f53_local0 = Engine.GetModel(f53_local0, f53_arg2)
 	end
-	local f53_local1 = f53_local0 and Engine[@"getmodelvalue"](f53_local0)
+	local f53_local1 = f53_local0 and Engine.GetModelValue(f53_local0)
 	local f53_local2
 	if f53_local0 ~= nil and f53_local1 ~= nil and f53_local1 ~= true then
 		f53_local2 = false
@@ -583,9 +583,9 @@ end
 CoD.ModelUtility.IsSelfModelValueNonEmptyString = function(f54_arg0, f54_arg1, f54_arg2)
 	local f54_local0 = f54_arg0:getModel()
 	if f54_arg2 ~= "" and f54_local0 then
-		f54_local0 = Engine[@"getmodel"](f54_local0, f54_arg2)
+		f54_local0 = Engine.GetModel(f54_local0, f54_arg2)
 	end
-	local f54_local1 = f54_local0 and Engine[@"getmodelvalue"](f54_local0)
+	local f54_local1 = f54_local0 and Engine.GetModelValue(f54_local0)
 	local f54_local2
 	if f54_local1 == nil or f54_local1 == "" or f54_local1 == 0x0 then
 		f54_local2 = false
@@ -597,9 +597,9 @@ end
 CoD.ModelUtility.IsSelfModelValueTrue = function(f55_arg0, f55_arg1, f55_arg2)
 	local f55_local0 = f55_arg0:getModel()
 	if f55_arg2 ~= "" and f55_local0 then
-		f55_local0 = Engine[@"getmodel"](f55_local0, f55_arg2)
+		f55_local0 = Engine.GetModel(f55_local0, f55_arg2)
 	end
-	local f55_local1 = f55_local0 and Engine[@"getmodelvalue"](f55_local0)
+	local f55_local1 = f55_local0 and Engine.GetModelValue(f55_local0)
 	local f55_local2
 	if f55_local1 == nil or f55_local1 ~= true then
 		f55_local2 = false
@@ -611,9 +611,9 @@ end
 CoD.ModelUtility.IsSelfEnumModelValueTrue = function(f56_arg0, f56_arg1, f56_arg2)
 	local f56_local0 = f56_arg0:getModel()
 	if f56_arg2 ~= "" and f56_local0 then
-		f56_local0 = Engine[@"getmodel"](f56_local0, f56_arg2)
+		f56_local0 = Engine.GetModel(f56_local0, f56_arg2)
 	end
-	local f56_local1 = f56_local0 and Engine[@"getmodelvalue"](f56_local0)
+	local f56_local1 = f56_local0 and Engine.GetModelValue(f56_local0)
 	local f56_local2
 	if f56_local1 == nil or f56_local1 ~= true then
 		f56_local2 = false
@@ -625,9 +625,9 @@ end
 CoD.ModelUtility.IsSelfEnumModelValueEqualTo = function(f57_arg0, f57_arg1, f57_arg2, f57_arg3)
 	local f57_local0 = f57_arg0:getModel()
 	if f57_arg2 ~= "" and f57_local0 then
-		f57_local0 = Engine[@"getmodel"](f57_local0, f57_arg2)
+		f57_local0 = Engine.GetModel(f57_local0, f57_arg2)
 	end
-	local f57_local1 = f57_local0 and Engine[@"getmodelvalue"](f57_local0)
+	local f57_local1 = f57_local0 and Engine.GetModelValue(f57_local0)
 	local f57_local2
 	if f57_local1 == nil or f57_local1 ~= f57_arg3 then
 		f57_local2 = false
@@ -639,9 +639,9 @@ end
 CoD.ModelUtility.IsSelfModelValueGreaterThan = function(f58_arg0, f58_arg1, f58_arg2, f58_arg3)
 	local f58_local0 = f58_arg0:getModel()
 	if f58_arg2 ~= "" and f58_local0 then
-		f58_local0 = Engine[@"getmodel"](f58_local0, f58_arg2)
+		f58_local0 = Engine.GetModel(f58_local0, f58_arg2)
 	end
-	local f58_local1 = f58_local0 and Engine[@"getmodelvalue"](f58_local0)
+	local f58_local1 = f58_local0 and Engine.GetModelValue(f58_local0)
 	local f58_local2
 	if f58_local1 == nil or f58_arg3 >= f58_local1 then
 		f58_local2 = false
@@ -663,9 +663,9 @@ end
 CoD.ModelUtility.IsSelfModelValueLessThan = function(f60_arg0, f60_arg1, f60_arg2, f60_arg3)
 	local f60_local0 = f60_arg0:getModel()
 	if f60_arg2 ~= "" and f60_local0 then
-		f60_local0 = Engine[@"getmodel"](f60_local0, f60_arg2)
+		f60_local0 = Engine.GetModel(f60_local0, f60_arg2)
 	end
-	local f60_local1 = f60_local0 and Engine[@"getmodelvalue"](f60_local0)
+	local f60_local1 = f60_local0 and Engine.GetModelValue(f60_local0)
 	local f60_local2
 	if f60_local1 == nil or f60_local1 >= f60_arg3 then
 		f60_local2 = false
@@ -690,9 +690,9 @@ end
 CoD.ModelUtility.IsSelfModelValueGreaterThanOrEqualTo = function(f63_arg0, f63_arg1, f63_arg2, f63_arg3)
 	local f63_local0 = f63_arg0:getModel()
 	if f63_arg2 ~= "" and f63_local0 then
-		f63_local0 = Engine[@"getmodel"](f63_local0, f63_arg2)
+		f63_local0 = Engine.GetModel(f63_local0, f63_arg2)
 	end
-	local f63_local1 = f63_local0 and Engine[@"getmodelvalue"](f63_local0)
+	local f63_local1 = f63_local0 and Engine.GetModelValue(f63_local0)
 	local f63_local2
 	if f63_local1 == nil or f63_arg3 > f63_local1 then
 		f63_local2 = false
@@ -704,9 +704,9 @@ end
 CoD.ModelUtility.IsSelfModelValueLessThanOrEqualTo = function(f64_arg0, f64_arg1, f64_arg2, f64_arg3)
 	local f64_local0 = f64_arg0:getModel()
 	if f64_arg2 ~= "" and f64_local0 then
-		f64_local0 = Engine[@"getmodel"](f64_local0, f64_arg2)
+		f64_local0 = Engine.GetModel(f64_local0, f64_arg2)
 	end
-	local f64_local1 = f64_local0 and Engine[@"getmodelvalue"](f64_local0)
+	local f64_local1 = f64_local0 and Engine.GetModelValue(f64_local0)
 	local f64_local2
 	if f64_local1 == nil or f64_local1 > f64_arg3 then
 		f64_local2 = false
@@ -718,9 +718,9 @@ end
 CoD.ModelUtility.IsSelfModelValueEqualTo = function(f65_arg0, f65_arg1, f65_arg2, f65_arg3)
 	local f65_local0 = f65_arg0:getModel()
 	if f65_arg2 ~= "" and f65_local0 then
-		f65_local0 = Engine[@"getmodel"](f65_local0, f65_arg2)
+		f65_local0 = Engine.GetModel(f65_local0, f65_arg2)
 	end
-	local f65_local1 = f65_local0 and Engine[@"getmodelvalue"](f65_local0)
+	local f65_local1 = f65_local0 and Engine.GetModelValue(f65_local0)
 	local f65_local2
 	if f65_local1 == nil or f65_local1 ~= f65_arg3 then
 		f65_local2 = false
@@ -732,9 +732,9 @@ end
 CoD.ModelUtility.IsSelfModelValueInRange = function(f66_arg0, f66_arg1, f66_arg2, f66_arg3, f66_arg4)
 	local f66_local0 = f66_arg0:getModel()
 	if f66_arg2 ~= "" and f66_local0 then
-		f66_local0 = Engine[@"getmodel"](f66_local0, f66_arg2)
+		f66_local0 = Engine.GetModel(f66_local0, f66_arg2)
 	end
-	local f66_local1 = f66_local0 and Engine[@"getmodelvalue"](f66_local0)
+	local f66_local1 = f66_local0 and Engine.GetModelValue(f66_local0)
 	local f66_local2
 	if f66_local1 == nil or tonumber(f66_arg3) > f66_local1 or f66_local1 > tonumber(f66_arg4) then
 		f66_local2 = false
@@ -746,9 +746,9 @@ end
 CoD.ModelUtility.IsSelfModelValueBetween = function(f67_arg0, f67_arg1, f67_arg2, f67_arg3, f67_arg4)
 	local f67_local0 = f67_arg0:getModel()
 	if f67_arg2 ~= "" and f67_local0 then
-		f67_local0 = Engine[@"getmodel"](f67_local0, f67_arg2)
+		f67_local0 = Engine.GetModel(f67_local0, f67_arg2)
 	end
-	local f67_local1 = f67_local0 and Engine[@"getmodelvalue"](f67_local0)
+	local f67_local1 = f67_local0 and Engine.GetModelValue(f67_local0)
 	local f67_local2
 	if f67_local1 == nil or tonumber(f67_arg3) >= f67_local1 or f67_local1 >= tonumber(f67_arg4) then
 		f67_local2 = false
@@ -760,9 +760,9 @@ end
 CoD.ModelUtility.IsSelfModelValueEqualToEitherValue = function(f68_arg0, f68_arg1, f68_arg2, f68_arg3, f68_arg4)
 	local f68_local0 = f68_arg0:getModel()
 	if f68_arg2 ~= "" and f68_local0 then
-		f68_local0 = Engine[@"getmodel"](f68_local0, f68_arg2)
+		f68_local0 = Engine.GetModel(f68_local0, f68_arg2)
 	end
-	local f68_local1 = f68_local0 and Engine[@"getmodelvalue"](f68_local0)
+	local f68_local1 = f68_local0 and Engine.GetModelValue(f68_local0)
 	local f68_local2
 	if f68_local1 == nil or f68_local1 ~= f68_arg3 and f68_local1 ~= f68_arg4 then
 		f68_local2 = false
@@ -774,9 +774,9 @@ end
 CoD.ModelUtility.IsSelfModelValueEqualToAnyValue = function(f69_arg0, f69_arg1, f69_arg2, f69_arg3, f69_arg4, f69_arg5)
 	local f69_local0 = f69_arg0:getModel()
 	if f69_arg2 ~= "" and f69_local0 then
-		f69_local0 = Engine[@"getmodel"](f69_local0, f69_arg2)
+		f69_local0 = Engine.GetModel(f69_local0, f69_arg2)
 	end
-	local f69_local1 = f69_local0 and Engine[@"getmodelvalue"](f69_local0)
+	local f69_local1 = f69_local0 and Engine.GetModelValue(f69_local0)
 	local f69_local2
 	if f69_local1 == nil or f69_local1 ~= f69_arg3 and f69_local1 ~= f69_arg4 and f69_local1 ~= f69_arg5 then
 		f69_local2 = false
@@ -788,9 +788,9 @@ end
 CoD.ModelUtility.IsSelfModelValueEqualToAnyValue4 = function(f70_arg0, f70_arg1, f70_arg2, f70_arg3, f70_arg4, f70_arg5, f70_arg6)
 	local f70_local0 = f70_arg0:getModel()
 	if f70_arg2 ~= "" and f70_local0 then
-		f70_local0 = Engine[@"getmodel"](f70_local0, f70_arg2)
+		f70_local0 = Engine.GetModel(f70_local0, f70_arg2)
 	end
-	local f70_local1 = f70_local0 and Engine[@"getmodelvalue"](f70_local0)
+	local f70_local1 = f70_local0 and Engine.GetModelValue(f70_local0)
 	local f70_local2
 	if f70_local1 == nil or f70_local1 ~= f70_arg3 and f70_local1 ~= f70_arg4 and f70_local1 ~= f70_arg5 and f70_local1 ~= f70_arg6 then
 		f70_local2 = false
@@ -802,9 +802,9 @@ end
 CoD.ModelUtility.IsSelfModelValueEqualToAnyValue5 = function(f71_arg0, f71_arg1, f71_arg2, f71_arg3, f71_arg4, f71_arg5, f71_arg6, f71_arg7)
 	local f71_local0 = f71_arg0:getModel()
 	if f71_arg2 ~= "" and f71_local0 then
-		f71_local0 = Engine[@"getmodel"](f71_local0, f71_arg2)
+		f71_local0 = Engine.GetModel(f71_local0, f71_arg2)
 	end
-	local f71_local1 = f71_local0 and Engine[@"getmodelvalue"](f71_local0)
+	local f71_local1 = f71_local0 and Engine.GetModelValue(f71_local0)
 	local f71_local2
 	if f71_local1 == nil or f71_local1 ~= f71_arg3 and f71_local1 ~= f71_arg4 and f71_local1 ~= f71_arg5 and f71_local1 ~= f71_arg6 and f71_local1 ~= f71_arg7 then
 		f71_local2 = false
@@ -816,9 +816,9 @@ end
 CoD.ModelUtility.IsSelfModelValueEqualToEnum = function(f72_arg0, f72_arg1, f72_arg2, f72_arg3)
 	local f72_local0 = f72_arg0:getModel()
 	if f72_arg2 ~= "" and f72_local0 then
-		f72_local0 = Engine[@"getmodel"](f72_local0, f72_arg2)
+		f72_local0 = Engine.GetModel(f72_local0, f72_arg2)
 	end
-	local f72_local1 = f72_local0 and Engine[@"getmodelvalue"](f72_local0)
+	local f72_local1 = f72_local0 and Engine.GetModelValue(f72_local0)
 	local f72_local2
 	if f72_local1 == nil or f72_local1 ~= f72_arg3 then
 		f72_local2 = false
@@ -830,9 +830,9 @@ end
 CoD.ModelUtility.IsSelfModelValueEqualToEnumEitherValue = function(f73_arg0, f73_arg1, f73_arg2, f73_arg3, f73_arg4)
 	local f73_local0 = f73_arg0:getModel()
 	if f73_arg2 ~= "" and f73_local0 then
-		f73_local0 = Engine[@"getmodel"](f73_local0, f73_arg2)
+		f73_local0 = Engine.GetModel(f73_local0, f73_arg2)
 	end
-	local f73_local1 = f73_local0 and Engine[@"getmodelvalue"](f73_local0)
+	local f73_local1 = f73_local0 and Engine.GetModelValue(f73_local0)
 	local f73_local2
 	if f73_local1 == nil or f73_local1 ~= f73_arg3 and f73_local1 ~= f73_arg4 then
 		f73_local2 = false
@@ -844,9 +844,9 @@ end
 CoD.ModelUtility.IsSelfModelValueEqualToEnumAnyValue = function(f74_arg0, f74_arg1, f74_arg2, f74_arg3, f74_arg4, f74_arg5)
 	local f74_local0 = f74_arg0:getModel()
 	if f74_arg2 ~= "" and f74_local0 then
-		f74_local0 = Engine[@"getmodel"](f74_local0, f74_arg2)
+		f74_local0 = Engine.GetModel(f74_local0, f74_arg2)
 	end
-	local f74_local1 = f74_local0 and Engine[@"getmodelvalue"](f74_local0)
+	local f74_local1 = f74_local0 and Engine.GetModelValue(f74_local0)
 	local f74_local2
 	if f74_local1 == nil or f74_local1 ~= f74_arg3 and f74_local1 ~= f74_arg4 and f74_local1 ~= f74_arg5 then
 		f74_local2 = false
@@ -865,9 +865,9 @@ end
 CoD.ModelUtility.IsSelfModelValueEqualToPropertyValue = function(f76_arg0, f76_arg1, f76_arg2, f76_arg3)
 	local f76_local0 = f76_arg0:getModel()
 	if f76_arg2 ~= "" and f76_local0 then
-		f76_local0 = Engine[@"getmodel"](f76_local0, f76_arg2)
+		f76_local0 = Engine.GetModel(f76_local0, f76_arg2)
 	end
-	local f76_local1 = f76_local0 and Engine[@"getmodelvalue"](f76_local0)
+	local f76_local1 = f76_local0 and Engine.GetModelValue(f76_local0)
 	local f76_local2
 	if f76_local1 == nil or f76_local1 ~= f76_arg0[f76_arg3] then
 		f76_local2 = false
@@ -883,11 +883,11 @@ CoD.ModelUtility.IsSelfModelValueEqualToSelfTeam = function(f77_arg0, f77_arg1, 
 	if f77_local1 then
 		f77_local0 = f77_local1
 	end
-	if f77_local0 == Enum[@"team_t"][@"team_spectator"] then
+	if f77_local0 == Enum.team_t[@"team_spectator"] then
 		if CoD.ShoutcasterProfileVarBool(f77_arg1, "shoutcaster_ds_flip_scorepanel") then
-			f77_local0 = Enum[@"team_t"][@"team_axis"]
+			f77_local0 = Enum.team_t[@"team_axis"]
 		else
-			f77_local0 = Enum[@"team_t"][@"team_allies"]
+			f77_local0 = Enum.team_t[@"team_allies"]
 		end
 	end
 	return CoD.ModelUtility.IsSelfModelValueEqualTo(f77_arg0, f77_arg1, f77_arg2, f77_local0)
@@ -901,7 +901,7 @@ CoD.ModelUtility.IsGlobalDataSourceModelValueNonEmptyString = function(f78_arg0,
 		end
 	end
 	local f78_local1 = f78_local0 and f78_local0[f78_arg2]
-	local f78_local2 = f78_local1 and Engine[@"getmodelvalue"](f78_local1)
+	local f78_local2 = f78_local1 and Engine.GetModelValue(f78_local1)
 	local f78_local3
 	if f78_local2 == nil or f78_local2 == "" or f78_local2 == 0x0 then
 		f78_local3 = false
@@ -919,7 +919,7 @@ CoD.ModelUtility.IsGlobalDataSourceModelValueTrue = function(f79_arg0, f79_arg1,
 		end
 	end
 	local f79_local1 = f79_local0 and f79_local0[f79_arg2]
-	local f79_local2 = f79_local1 and Engine[@"getmodelvalue"](f79_local1)
+	local f79_local2 = f79_local1 and Engine.GetModelValue(f79_local1)
 	local f79_local3
 	if f79_local2 == nil or f79_local2 ~= true then
 		f79_local3 = false
@@ -937,7 +937,7 @@ CoD.ModelUtility.IsGlobalDataSourceModelValueEqualTo = function(f80_arg0, f80_ar
 		end
 	end
 	local f80_local1 = f80_local0 and f80_local0[f80_arg2]
-	local f80_local2 = f80_local1 and Engine[@"getmodelvalue"](f80_local1)
+	local f80_local2 = f80_local1 and Engine.GetModelValue(f80_local1)
 	local f80_local3
 	if f80_local2 == nil or f80_local2 ~= f80_arg3 then
 		f80_local3 = false
@@ -955,7 +955,7 @@ CoD.ModelUtility.IsGlobalDataSourceModelValueEqualToEnum = function(f81_arg0, f8
 		end
 	end
 	local f81_local1 = f81_local0 and f81_local0[f81_arg2]
-	local f81_local2 = f81_local1 and Engine[@"getmodelvalue"](f81_local1)
+	local f81_local2 = f81_local1 and Engine.GetModelValue(f81_local1)
 	local f81_local3
 	if f81_local2 == nil or f81_local2 ~= f81_arg3 then
 		f81_local3 = false
@@ -973,7 +973,7 @@ CoD.ModelUtility.IsGlobalDataSourceModelValueGreaterThan = function(f82_arg0, f8
 		end
 	end
 	local f82_local1 = f82_local0 and f82_local0[f82_arg2]
-	local f82_local2 = f82_local1 and Engine[@"getmodelvalue"](f82_local1)
+	local f82_local2 = f82_local1 and Engine.GetModelValue(f82_local1)
 	local f82_local3
 	if f82_local2 == nil or f82_arg3 >= tonumber(f82_local2) then
 		f82_local3 = false
@@ -991,7 +991,7 @@ CoD.ModelUtility.IsGlobalDataSourceModelValueGreaterThanOrEqualTo = function(f83
 		end
 	end
 	local f83_local1 = f83_local0 and f83_local0[f83_arg2]
-	local f83_local2 = f83_local1 and Engine[@"getmodelvalue"](f83_local1)
+	local f83_local2 = f83_local1 and Engine.GetModelValue(f83_local1)
 	local f83_local3
 	if f83_local2 == nil or f83_arg3 > tonumber(f83_local2) then
 		f83_local3 = false
@@ -1009,7 +1009,7 @@ CoD.ModelUtility.IsGlobalDataSourceModelValueLessThan = function(f84_arg0, f84_a
 		end
 	end
 	local f84_local1 = f84_local0 and f84_local0[f84_arg2]
-	local f84_local2 = f84_local1 and Engine[@"getmodelvalue"](f84_local1)
+	local f84_local2 = f84_local1 and Engine.GetModelValue(f84_local1)
 	local f84_local3
 	if f84_local2 == nil or tonumber(f84_local2) >= f84_arg3 then
 		f84_local3 = false
@@ -1109,7 +1109,7 @@ CoD.ModelUtility.IsGlobalDataSourceModelValueNil = function(f90_arg0, f90_arg1, 
 	end
 	local f90_local1 = f90_local0 and f90_local0[f90_arg2]
 	local f90_local2
-	if f90_local1 ~= nil and (f90_local1 and Engine[@"getmodelvalue"](f90_local1)) ~= nil then
+	if f90_local1 ~= nil and (f90_local1 and Engine.GetModelValue(f90_local1)) ~= nil then
 		f90_local2 = false
 	else
 		f90_local2 = true
@@ -1117,8 +1117,8 @@ CoD.ModelUtility.IsGlobalDataSourceModelValueNil = function(f90_arg0, f90_arg1, 
 	return f90_local2
 end
 CoD.ModelUtility.IsGlobalModelValueNonEmptyString = function(f91_arg0)
-	local f91_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), f91_arg0)
-	local f91_local1 = f91_local0 and Engine[@"getmodelvalue"](f91_local0)
+	local f91_local0 = Engine.GetModel(Engine.GetGlobalModel(), f91_arg0)
+	local f91_local1 = f91_local0 and Engine.GetModelValue(f91_local0)
 	local f91_local2
 	if f91_local1 == nil or f91_local1 == "" or f91_local1 == 0x0 then
 		f91_local2 = false
@@ -1128,8 +1128,8 @@ CoD.ModelUtility.IsGlobalModelValueNonEmptyString = function(f91_arg0)
 	return f91_local2
 end
 CoD.ModelUtility.IsGlobalModelValueTrue = function(f92_arg0)
-	local f92_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), f92_arg0)
-	local f92_local1 = f92_local0 and Engine[@"getmodelvalue"](f92_local0)
+	local f92_local0 = Engine.GetModel(Engine.GetGlobalModel(), f92_arg0)
+	local f92_local1 = f92_local0 and Engine.GetModelValue(f92_local0)
 	local f92_local2
 	if f92_local1 == nil or f92_local1 ~= true then
 		f92_local2 = false
@@ -1139,8 +1139,8 @@ CoD.ModelUtility.IsGlobalModelValueTrue = function(f92_arg0)
 	return f92_local2
 end
 CoD.ModelUtility.IsGlobalModelValueEqualTo = function(f93_arg0, f93_arg1)
-	local f93_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), f93_arg0)
-	local f93_local1 = f93_local0 and Engine[@"getmodelvalue"](f93_local0)
+	local f93_local0 = Engine.GetModel(Engine.GetGlobalModel(), f93_arg0)
+	local f93_local1 = f93_local0 and Engine.GetModelValue(f93_local0)
 	local f93_local2
 	if f93_local1 == nil or f93_local1 ~= f93_arg1 then
 		f93_local2 = false
@@ -1150,8 +1150,8 @@ CoD.ModelUtility.IsGlobalModelValueEqualTo = function(f93_arg0, f93_arg1)
 	return f93_local2
 end
 CoD.ModelUtility.IsGlobalModelValueEqualToEnum = function(f94_arg0, f94_arg1)
-	local f94_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), f94_arg0)
-	local f94_local1 = f94_local0 and Engine[@"getmodelvalue"](f94_local0)
+	local f94_local0 = Engine.GetModel(Engine.GetGlobalModel(), f94_arg0)
+	local f94_local1 = f94_local0 and Engine.GetModelValue(f94_local0)
 	local f94_local2
 	if f94_local1 == nil or f94_local1 ~= f94_arg1 then
 		f94_local2 = false
@@ -1161,8 +1161,8 @@ CoD.ModelUtility.IsGlobalModelValueEqualToEnum = function(f94_arg0, f94_arg1)
 	return f94_local2
 end
 CoD.ModelUtility.IsGlobalModelValueLessThanOrEqualToEnum = function(f95_arg0, f95_arg1, f95_arg2)
-	local f95_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), f95_arg1)
-	local f95_local1 = f95_local0 and Engine[@"getmodelvalue"](f95_local0)
+	local f95_local0 = Engine.GetModel(Engine.GetGlobalModel(), f95_arg1)
+	local f95_local1 = f95_local0 and Engine.GetModelValue(f95_local0)
 	local f95_local2
 	if f95_local1 == nil or f95_local1 > f95_arg2 then
 		f95_local2 = false
@@ -1172,8 +1172,8 @@ CoD.ModelUtility.IsGlobalModelValueLessThanOrEqualToEnum = function(f95_arg0, f9
 	return f95_local2
 end
 CoD.ModelUtility.IsGlobalModelValueGreaterThanEnum = function(f96_arg0, f96_arg1, f96_arg2)
-	local f96_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), f96_arg1)
-	local f96_local1 = f96_local0 and Engine[@"getmodelvalue"](f96_local0)
+	local f96_local0 = Engine.GetModel(Engine.GetGlobalModel(), f96_arg1)
+	local f96_local1 = f96_local0 and Engine.GetModelValue(f96_local0)
 	local f96_local2
 	if f96_local1 == nil or f96_arg2 >= f96_local1 then
 		f96_local2 = false
@@ -1183,8 +1183,8 @@ CoD.ModelUtility.IsGlobalModelValueGreaterThanEnum = function(f96_arg0, f96_arg1
 	return f96_local2
 end
 CoD.ModelUtility.IsGlobalModelValueGreaterThan = function(f97_arg0, f97_arg1)
-	local f97_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), f97_arg0)
-	local f97_local1 = f97_local0 and Engine[@"getmodelvalue"](f97_local0)
+	local f97_local0 = Engine.GetModel(Engine.GetGlobalModel(), f97_arg0)
+	local f97_local1 = f97_local0 and Engine.GetModelValue(f97_local0)
 	local f97_local2
 	if f97_local1 == nil or f97_arg1 >= tonumber(f97_local1) then
 		f97_local2 = false
@@ -1194,8 +1194,8 @@ CoD.ModelUtility.IsGlobalModelValueGreaterThan = function(f97_arg0, f97_arg1)
 	return f97_local2
 end
 CoD.ModelUtility.IsGlobalModelValueLessThan = function(f98_arg0, f98_arg1)
-	local f98_local0 = Engine[@"getmodel"](Engine[@"getglobalmodel"](), f98_arg0)
-	local f98_local1 = f98_local0 and Engine[@"getmodelvalue"](f98_local0)
+	local f98_local0 = Engine.GetModel(Engine.GetGlobalModel(), f98_arg0)
+	local f98_local1 = f98_local0 and Engine.GetModelValue(f98_local0)
 	local f98_local2
 	if f98_local1 == nil or tonumber(f98_local1) >= f98_arg1 then
 		f98_local2 = false
@@ -1207,9 +1207,9 @@ end
 CoD.ModelUtility.IsSelfModelValueBitSet = function(f99_arg0, f99_arg1, f99_arg2, f99_arg3)
 	local f99_local0 = f99_arg0:getModel()
 	if f99_arg2 ~= "" and f99_local0 then
-		f99_local0 = Engine[@"getmodel"](f99_local0, f99_arg2)
+		f99_local0 = Engine.GetModel(f99_local0, f99_arg2)
 	end
-	local f99_local1 = f99_local0 and Engine[@"getmodelvalue"](f99_local0)
+	local f99_local1 = f99_local0 and Engine.GetModelValue(f99_local0)
 	local f99_local2
 	if f99_local1 ~= nil then
 		f99_local2 = CoD.BitUtility.IsBitSet(f99_local1, f99_arg3)
@@ -1221,9 +1221,9 @@ end
 CoD.ModelUtility.IsSelfModelValueEnumBitSet = function(f100_arg0, f100_arg1, f100_arg2, f100_arg3)
 	local f100_local0 = f100_arg0:getModel()
 	if f100_arg2 ~= "" and f100_local0 then
-		f100_local0 = Engine[@"getmodel"](f100_local0, f100_arg2)
+		f100_local0 = Engine.GetModel(f100_local0, f100_arg2)
 	end
-	local f100_local1 = f100_local0 and Engine[@"getmodelvalue"](f100_local0)
+	local f100_local1 = f100_local0 and Engine.GetModelValue(f100_local0)
 	local f100_local2
 	if f100_local1 ~= nil then
 		f100_local2 = CoD.BitUtility.IsBitSet(f100_local1, f100_arg3)
@@ -1235,9 +1235,9 @@ end
 CoD.ModelUtility.IsSelfModelValueEnumFlagSet = function(f101_arg0, f101_arg1, f101_arg2, f101_arg3)
 	local f101_local0 = f101_arg0:getModel()
 	if f101_arg2 ~= "" and f101_local0 then
-		f101_local0 = Engine[@"getmodel"](f101_local0, f101_arg2)
+		f101_local0 = Engine.GetModel(f101_local0, f101_arg2)
 	end
-	local f101_local1 = f101_local0 and Engine[@"getmodelvalue"](f101_local0)
+	local f101_local1 = f101_local0 and Engine.GetModelValue(f101_local0)
 	local f101_local2
 	if f101_local1 == nil or f101_local1 & f101_arg3 == 0 then
 		f101_local2 = false
@@ -1249,11 +1249,11 @@ end
 CoD.ModelUtility.IsSelfModelValueMyXuid = function(f102_arg0, f102_arg1, f102_arg2)
 	local f102_local0 = f102_arg0:getModel()
 	if f102_local0 then
-		f102_local0 = Engine[@"getmodel"](f102_local0, f102_arg2)
+		f102_local0 = Engine.GetModel(f102_local0, f102_arg2)
 	end
-	local f102_local1 = f102_local0 and Engine[@"getmodelvalue"](f102_local0)
+	local f102_local1 = f102_local0 and Engine.GetModelValue(f102_local0)
 	local f102_local2
-	if f102_local1 == nil or f102_local1 ~= Engine[@"getxuid64"](f102_arg1) then
+	if f102_local1 == nil or f102_local1 ~= Engine.GetXUID64(f102_arg1) then
 		f102_local2 = false
 	else
 		f102_local2 = true
@@ -1264,12 +1264,12 @@ CoD.ModelUtility.IsSelfModelValueMyXuidOrAnyLocalPlayerOnGameOver = function(f10
 	local f103_local0 = CoD.SafeGetModelValue(f103_arg0:getModel(), f103_arg2)
 	local f103_local1 = f103_arg1
 	local f103_local2 = f103_arg1
-	if IsInGame() and Engine[@"isvisibilitybitset"](f103_arg1, Enum[@"uivisibilitybit"][@"bit_game_ended"]) then
+	if IsInGame() and Engine.IsVisibilityBitSet(f103_arg1, Enum.UIVisibilityBit[@"bit_game_ended"]) then
 		f103_local1 = 0
-		f103_local2 = Engine[@"getmaxcontrollercount"]() - 1
+		f103_local2 = Engine.GetMaxControllerCount() - 1
 	end
 	for f103_local3 = f103_local1, f103_local2, 1 do
-		if Engine[@"iscontrollerbeingused"](f103_local3) and f103_local0 == Engine[@"getxuid64"](f103_local3) then
+		if Engine.IsControllerBeingUsed(f103_local3) and f103_local0 == Engine.GetXUID64(f103_local3) then
 			return true
 		end
 	end
@@ -1288,7 +1288,7 @@ CoD.ModelUtility.SetTextIfNotNilAndNotEmptyString = function(f105_arg0, f105_arg
 	end
 end
 CoD.ModelUtility.SetControllerModelValueToEnum = function(f106_arg0, f106_arg1, f106_arg2)
-	local f106_local0 = Engine[@"getmodelforcontroller"](f106_arg0)
+	local f106_local0 = Engine.GetModelForController(f106_arg0)
 	f106_local0 = f106_local0:create(f106_arg1)
 	f106_local0:set(f106_arg2)
 end

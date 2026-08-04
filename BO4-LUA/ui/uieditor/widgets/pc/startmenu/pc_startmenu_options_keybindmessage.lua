@@ -1,5 +1,5 @@
-require("x64:19bb7ce476cd0cb")
-require("x64:745bad70f1903a0")
+require("ui/uieditor/widgets/pc/startmenu/pc_startmenu_options_keybindmessage_background")
+require("ui/uieditor/widgets/pc/startmenu/pc_startmenu_options_keybindmessage_text")
 CoD.PC_StartMenu_Options_KeybindMessage = InheritFrom(LUI.UIElement)
 CoD.PC_StartMenu_Options_KeybindMessage.__defaultWidth = 1920
 CoD.PC_StartMenu_Options_KeybindMessage.__defaultHeight = 86
@@ -93,7 +93,7 @@ CoD.PC_StartMenu_Options_KeybindMessage.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	f1_local2 = Background
 	KeybindMessage = Background.subscribeToModel
-	f1_local4 = Engine[@"getglobalmodel"]()
+	f1_local4 = Engine.GetGlobalModel()
 	KeybindMessage(f1_local2, f1_local4["SpeakingEnergy.isRecording"], function(f11_arg0)
 		f1_arg0:updateElementState(Background, {
 			name = "model_validation",
@@ -188,7 +188,7 @@ CoD.PC_StartMenu_Options_KeybindMessage.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	f1_local4 = KeybindMessage
 	f1_local2 = KeybindMessage.subscribeToModel
-	f1_local5 = Engine[@"getglobalmodel"]()
+	f1_local5 = Engine.GetGlobalModel()
 	f1_local2(f1_local4, f1_local5["SpeakingEnergy.isRecording"], function(f21_arg0)
 		f1_arg0:updateElementState(KeybindMessage, {
 			name = "model_validation",
@@ -282,7 +282,7 @@ CoD.PC_StartMenu_Options_KeybindMessage.new = function(f1_arg0, f1_arg1, f1_arg2
 	end, false)
 	f1_local4 = self
 	f1_local2 = self.subscribeToModel
-	f1_local5 = Engine[@"getglobalmodel"]()
+	f1_local5 = Engine.GetGlobalModel()
 	f1_local2(f1_local4, f1_local5["SpeakingEnergy.isRecording"], function(f31_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

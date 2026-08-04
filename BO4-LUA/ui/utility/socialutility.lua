@@ -1,21 +1,20 @@
-
 CoD.SocialUtility = {}
 CoD.SocialUtility.PartyPrivacyOptions = {
 	{
-		name = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_1D7568CAE1BE3F6B" ),
-		value = Enum[@"partyprivacy"][@"party_privacy_open"]
+		name = Engine[@"hash_4F9F1239CFD921FE"]( "menu/party_privacy_open" ),
+		value = Enum.PartyPrivacy[@"party_privacy_open"]
 	},
 	{
-		name = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_D5B11C63C41C427" ),
-		value = Enum[@"partyprivacy"][@"party_privacy_friends_only"]
+		name = Engine[@"hash_4F9F1239CFD921FE"]( "menu/party_privacy_friends_only" ),
+		value = Enum.PartyPrivacy[@"party_privacy_friends_only"]
 	},
 	{
-		name = Engine[@"hash_4F9F1239CFD921FE"]( 0x4D4EA9B2703EF9 ),
-		value = Enum[@"partyprivacy"][@"party_privacy_invite_only"]
+		name = Engine[@"hash_4F9F1239CFD921FE"]( "menu/party_privacy_invite_only" ),
+		value = Enum.PartyPrivacy[@"party_privacy_invite_only"]
 	},
 	{
-		name = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_4980DDEA2FD1615B" ),
-		value = Enum[@"partyprivacy"][@"party_privacy_closed"]
+		name = Engine[@"hash_4F9F1239CFD921FE"]( "menu/party_privacy_closed" ),
+		value = Enum.PartyPrivacy[@"party_privacy_closed"]
 	}
 }
 CoD.SocialUtility.VoiceChatChannelOptions = {}
@@ -34,26 +33,26 @@ CoD.SocialUtility.GetRankIcons = function ( f1_arg0, f1_arg1, f1_arg2, f1_arg3 )
 		return "t7_icon_rank_" .. f1_arg0 .. "_ghost_level_01"
 	elseif f1_arg0 == "mp" then
 		if f1_arg3 > 0 then
-			return Engine[@"hash_6E21763E1EB756F8"]( f1_arg3, Enum[@"emodes"][@"mode_multiplayer"] )
+			return Engine[@"hash_6E21763E1EB756F8"]( f1_arg3, Enum.eModes.mode_multiplayer )
 		else
-			return Engine[@"hash_D4A9B159BE44163"]( f1_arg2, Enum[@"emodes"][@"mode_multiplayer"] )
+			return Engine[@"hash_D4A9B159BE44163"]( f1_arg2, Enum.eModes.mode_multiplayer )
 		end
 	elseif f1_arg0 == "zm" then
 		if f1_arg3 > 0 then
-			return Engine[@"hash_6E21763E1EB756F8"]( f1_arg3, Enum[@"emodes"][@"mode_zombies"] )
+			return Engine[@"hash_6E21763E1EB756F8"]( f1_arg3, Enum.eModes.mode_zombies )
 		else
-			return Engine[@"hash_D4A9B159BE44163"]( f1_arg2, Enum[@"emodes"][@"mode_zombies"] )
+			return Engine[@"hash_D4A9B159BE44163"]( f1_arg2, Enum.eModes.mode_zombies )
 		end
 	elseif f1_arg0 == "wz" then
 		if f1_arg3 > 0 then
-			return Engine[@"hash_6E21763E1EB756F8"]( f1_arg3, Enum[@"emodes"][@"mode_warzone"] )
+			return Engine[@"hash_6E21763E1EB756F8"]( f1_arg3, Enum.eModes.mode_warzone )
 		else
-			return Engine[@"hash_D4A9B159BE44163"]( f1_arg2, Enum[@"emodes"][@"mode_warzone"] )
+			return Engine[@"hash_D4A9B159BE44163"]( f1_arg2, Enum.eModes.mode_warzone )
 		end
 	elseif f1_arg0 == "cp" then
-		return @"blacktransparent"
+		return "blacktransparent"
 	else
-		return Engine[@"hash_D4A9B159BE44163"]( f1_arg2, Enum[@"emodes"][@"mode_multiplayer"] )
+		return Engine[@"hash_D4A9B159BE44163"]( f1_arg2, Enum.eModes.mode_multiplayer )
 	end
 end
 CoD.SocialUtility.freerunGametypeId = nil
@@ -66,7 +65,7 @@ CoD.SocialUtility.GetFreerunGametypeId = function ()
 end
 CoD.SocialUtility.GetRecentPlayersCount = function ( f3_arg0 )
 	if Engine[@"getdvarbool"]( "recentPlayerListEnabled" ) then
-		local f3_local0 = Engine[@"storagegetbuffer"]( f3_arg0, Enum[@"storagefiletype"][@"hash_22C45CE6FD0D4539"] )
+		local f3_local0 = Engine.StorageGetBuffer( f3_arg0, Enum.StorageFileType[@"hash_22C45CE6FD0D4539"] )
 		if f3_local0 then
 			return f3_local0.count:get()
 		end
@@ -74,10 +73,10 @@ CoD.SocialUtility.GetRecentPlayersCount = function ( f3_arg0 )
 	return 0
 end
 CoD.SocialUtility.GetRecentPlayersParty = function ( f4_arg0, f4_arg1 )
-	local f4_local0 = Engine[@"storagegetbuffer"]( f4_arg0, Enum[@"storagefiletype"][@"hash_22C45CE6FD0D4539"] )
+	local f4_local0 = Engine.StorageGetBuffer( f4_arg0, Enum.StorageFileType[@"hash_22C45CE6FD0D4539"] )
 	if f4_local0 and f4_arg1 < f4_local0.count:get() then
 		local f4_local1 = Engine[@"hash_690B6BCE69A8E08B"]( f4_local0.playersMet[f4_arg1].xuid:get() )
-		return Engine[@"getgetrecentplayerparty"]( f4_local1, Engine[@"hash_61FB3481C8114A9A"]( f4_local1 ) )
+		return Engine.GetGetRecentPlayerParty( f4_local1, Engine[@"hash_61FB3481C8114A9A"]( f4_local1 ) )
 	else
 		return nil
 	end
@@ -113,20 +112,20 @@ CoD.SocialUtility.GetRecentPlayerInfoNoUpdate = function ( f6_arg0, f6_arg1, f6_
 end
 CoD.SocialUtility.GetPartyPlayersList = function ()
 	local f7_local0 = LobbyData.GetLobbyMenuByID( Engine[@"getlobbyuiscreen"]() )
-	local f7_local1 = Engine[@"islobbyactive"]( Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_game"] )
+	local f7_local1 = Engine[@"islobbyactive"]( Enum.LobbyModule[@"lobby_module_client"], Enum.LobbyType[@"lobby_type_game"] )
 	local f7_local2 = nil
-	if f7_local1 and f7_local0[@"lobbymode"] == Enum[@"lobbymode"][@"lobby_mode_custom"] then
-		f7_local2 = Engine[@"lobbygetsessionclients"]( Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_game"] )
+	if f7_local1 and f7_local0.LobbyMode == Enum.LobbyMode[@"lobby_mode_custom"] then
+		f7_local2 = Engine[@"lobbygetsessionclients"]( Enum.LobbyModule[@"lobby_module_client"], Enum.LobbyType[@"lobby_type_game"] )
 	else
-		f7_local2 = Engine[@"lobbygetsessionclients"]( Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_private"] )
+		f7_local2 = Engine[@"lobbygetsessionclients"]( Enum.LobbyModule[@"lobby_module_client"], Enum.LobbyType[@"lobby_type_private"] )
 	end
 	return f7_local2.sessionClients
 end
 CoD.SocialUtility.GetRecentPlayersList = function ( f8_arg0, f8_arg1, f8_arg2, f8_arg3 )
 	local f8_local0 = {}
-	f8_arg3 = Enum[@"presencefilter"][@"presence_filter_all"]
+	f8_arg3 = Enum.PresenceFilter[@"presence_filter_all"]
 	if Engine[@"getdvarbool"]( "recentPlayerListEnabled" ) then
-		local f8_local1 = Engine[@"storagegetbuffer"]( f8_arg0, Enum[@"storagefiletype"][@"hash_22C45CE6FD0D4539"] )
+		local f8_local1 = Engine.StorageGetBuffer( f8_arg0, Enum.StorageFileType[@"hash_22C45CE6FD0D4539"] )
 		if f8_local1 then
 			if f8_local1.isSorted:get() ~= 0 then
 				local f8_local2 = math.min( f8_arg1 + f8_arg2, f8_local1.count:get() ) - 1
@@ -141,7 +140,7 @@ CoD.SocialUtility.GetRecentPlayersList = function ( f8_arg0, f8_arg1, f8_arg2, f
 				for f8_local3 = 0, f8_local1.count:get() - 1, 1 do
 					local f8_local6 = nil
 					local f8_local7 = CoD.SocialUtility.GetRecentPlayerInfo
-					if f8_arg3 == Enum[@"presencefilter"][@"presence_filter_all"] then
+					if f8_arg3 == Enum.PresenceFilter[@"presence_filter_all"] then
 						f8_local7 = CoD.SocialUtility.GetRecentPlayerInfoNoUpdate
 					end
 					local f8_local8 = f8_local7( f8_arg0, f8_local1, f8_local3, f8_arg3 )
@@ -159,7 +158,7 @@ CoD.SocialUtility.GetRecentPlayersList = function ( f8_arg0, f8_arg1, f8_arg2, f
 						return f9_arg1.time < f9_arg0.time
 					end
 				end )
-				if f8_arg3 == Enum[@"presencefilter"][@"presence_filter_all"] then
+				if f8_arg3 == Enum.PresenceFilter[@"presence_filter_all"] then
 					for f8_local4 = 1, #f8_local2, 1 do
 						local f8_local7 = f8_local4 - 1
 						f8_local1.playersMet[f8_local7].time:set( f8_local2[f8_local4].time )
@@ -184,11 +183,11 @@ CoD.SocialUtility.GetRecentPlayersList = function ( f8_arg0, f8_arg1, f8_arg2, f
 end
 CoD.SocialUtility.OnPartyEventUpdate = function ( f10_arg0, f10_arg1 )
 	local f10_local0 = {}
-	local f10_local1 = Engine[@"getglobalmodel"]()
+	local f10_local1 = Engine.GetGlobalModel()
 	f10_local1 = f10_local1.PartyPrivacy.maxPlayers
-	local f10_local2 = Engine[@"getglobalmodel"]()
+	local f10_local2 = Engine.GetGlobalModel()
 	f10_local2 = f10_local2.PartyPrivacy.privacy
-	local f10_local3 = Engine[@"getglobalmodel"]()
+	local f10_local3 = Engine.GetGlobalModel()
 	f10_local3 = f10_local3.lobbyRoot.privateClient.update
 	f10_local0[1] = f10_local1
 	f10_local0[2] = f10_local2
@@ -223,36 +222,36 @@ end
 CoD.SocialUtility.PresenceToIcon = function ( f16_arg0 )
 	local f16_local0 = tonumber( f16_arg0 )
 	if f16_local0 == Enum[@"presencetitle"][@"hash_51CF21FD793411B9"] then
-		return @"ui_icon_gamemode_logo_orange"
+		return "ui_icon_gamemode_logo_orange"
 	elseif f16_local0 == Enum[@"presencetitle"][@"hash_7A2184EBB293AF2D"] then
-		return @"ui_icon_gamemode_logo_orange"
+		return "ui_icon_gamemode_logo_orange"
 	elseif f16_local0 == Enum[@"presencetitle"][@"hash_6C14960E60DA36B7"] then
-		return @"ui_icon_gamemode_logo_orange"
+		return "ui_icon_gamemode_logo_orange"
 	elseif f16_local0 >= Enum[@"presencetitle"][@"hash_669F9F19327AE3B3"] and f16_local0 <= Enum[@"presencetitle"][@"hash_659DAD56E9325476"] then
-		return @"ui_icon_gamemode_logo_orange"
+		return "ui_icon_gamemode_logo_orange"
 	elseif f16_local0 >= Enum[@"presencetitle"][@"hash_21DB40BC5D7A26F2"] and f16_local0 <= Enum[@"presencetitle"][@"hash_5DD9D1D4A601036C"] then
-		return LuaUtils.GetPresenceImageForEMode( Enum[@"emodes"][@"mode_zombies"] )
+		return LuaUtils.GetPresenceImageForEMode( Enum.eModes.mode_zombies )
 	elseif f16_local0 >= Enum[@"presencetitle"][@"hash_41632587246C118A"] and f16_local0 <= Enum[@"presencetitle"][0xEDDB0D016B3F54] then
-		return LuaUtils.GetPresenceImageForEMode( Enum[@"emodes"][@"mode_multiplayer"] )
+		return LuaUtils.GetPresenceImageForEMode( Enum.eModes.mode_multiplayer )
 	elseif f16_local0 >= Enum[@"presencetitle"][@"hash_361619C03C7E6934"] and f16_local0 <= Enum[@"presencetitle"][@"hash_886E7F57ED1ED3A"] then
-		return LuaUtils.GetPresenceImageForEMode( Enum[@"emodes"][@"mode_campaign"] )
+		return LuaUtils.GetPresenceImageForEMode( Enum.eModes.mode_campaign )
 	elseif f16_local0 >= Enum[@"presencetitle"][@"hash_179F90DEF3681532"] and f16_local0 <= Enum[@"presencetitle"][@"hash_435923F6DC7C09AC"] then
-		return LuaUtils.GetPresenceImageForEMode( Enum[@"emodes"][@"mode_warzone"] )
+		return LuaUtils.GetPresenceImageForEMode( Enum.eModes.mode_warzone )
 	elseif f16_local0 >= Enum[@"presencetitle"][@"hash_65EEADE3AFEF0F50"] and f16_local0 <= Enum[@"presencetitle"][@"hash_4AE1F1FC5A87498E"] then
-		return LuaUtils.GetPresenceImageForEMode( Enum[@"emodes"][@"mode_multiplayer"] )
+		return LuaUtils.GetPresenceImageForEMode( Enum.eModes.mode_multiplayer )
 	else
-		return @"blacktransparent"
+		return "blacktransparent"
 	end
 end
 CoD.SocialUtility.PrimaryPresenceToLocalizedString = function ( f17_arg0 )
 	local f17_local0 = tonumber( f17_arg0 )
-	if f17_local0 == Enum[@"presenceprimary"][@"presence_primary_offline"] then
+	if f17_local0 == Enum.PresencePrimary[@"presence_primary_offline"] then
 		return @"menu/offline"
-	elseif f17_local0 == Enum[@"presenceprimary"][@"presence_primary_online"] then
+	elseif f17_local0 == Enum.PresencePrimary[@"presence_primary_online"] then
 		return @"menu/online"
-	elseif f17_local0 == Enum[@"presenceprimary"][@"presence_primary_local"] then
+	elseif f17_local0 == Enum.PresencePrimary[@"presence_primary_local"] then
 		return @"menu/online"
-	elseif f17_local0 == Enum[@"presenceprimary"][@"presence_primary_title"] then
+	elseif f17_local0 == Enum.PresencePrimary[@"presence_primary_title"] then
 		return @"menu/online"
 	else
 		return @"menu/offline"
@@ -266,16 +265,16 @@ CoD.SocialUtility.PrimaryPresenceToLocalizedStringDependingOnPlatform = function
 	end
 end
 CoD.SocialUtility.PushCurrentSocialTab = function ( f19_arg0 )
-	local f19_local0 = Engine[@"getglobalmodel"]()
+	local f19_local0 = Engine.GetGlobalModel()
 	f19_arg0._currentTab = f19_local0.socialRoot.tab:get()
 end
 CoD.SocialUtility.PopCurrentSocialTab = function ( f20_arg0 )
-	local f20_local0 = Engine[@"getglobalmodel"]()
+	local f20_local0 = Engine.GetGlobalModel()
 	f20_local0.socialRoot.tab:set( f20_arg0._currentTab )
 end
 CoD.SocialUtility.CheckedInvitees = {}
 CoD.SocialUtility.UpdateSelectedCount = function ()
-	local f21_local0 = Engine[@"getglobalmodel"]()
+	local f21_local0 = Engine.GetGlobalModel()
 	f21_local0.socialRoot.selectedCount:set( LUI.CountFields( CoD.SocialUtility.CheckedInvitees ) )
 end
 CoD.SocialUtility.ClearCheckedInvitees = function ()
@@ -284,7 +283,7 @@ CoD.SocialUtility.ClearCheckedInvitees = function ()
 	CoD.SocialUtility.UpdateSelectedCount()
 end
 CoD.SocialUtility.UpdateCheckedInvitees = function ( f23_arg0 )
-	local f23_local0 = Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "socialRoot.leaderboardsPlayerListActive" )
+	local f23_local0 = Engine.GetModel( Engine.GetGlobalModel(), "socialRoot.leaderboardsPlayerListActive" )
 	if f23_local0 and f23_local0:get() == true then
 		return 
 	end
@@ -296,7 +295,7 @@ CoD.SocialUtility.UpdateCheckedInvitees = function ( f23_arg0 )
 			f23_local2 = f23_local2 + 1
 		end
 	end
-	f23_local3 = Engine[@"getglobalmodel"]()
+	f23_local3 = Engine.GetGlobalModel()
 	f23_local3.socialRoot.selectedCount:set( f23_local2 )
 	CoD.SocialUtility.CheckedInvitees = f23_local1
 end
@@ -324,7 +323,7 @@ CoD.SocialUtility.SendInvites = function ( f26_arg0, f26_arg1 )
 		inviteCount = 0
 	}
 	if CoD.isPC and not CoD.canSendInvites( f26_arg1 ) then
-		LuaUtils.UI_ShowErrorMessageDialog( f26_arg1, @"hash_61B3BB99254ECCCC", @"hash_127999393F1681" )
+		LuaUtils.UI_ShowErrorMessageDialog( f26_arg1, @"hash_61B3BB99254ECCCC", "menu/error_caps" )
 		return 
 	elseif f26_arg0.inviteType then
 		for f26_local4, f26_local5 in pairs( CoD.SocialUtility.CheckedInvitees ) do
@@ -368,10 +367,10 @@ CoD.SocialUtility.ToggleAddCheckbox = function ( f27_arg0, f27_arg1 )
 	if not f27_local0 or not f27_local0.checked then
 		return 
 	end
-	local f27_local1 = Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "socialRoot" )
+	local f27_local1 = Engine.GetModel( Engine.GetGlobalModel(), "socialRoot" )
 	local f27_local2 = f27_local1.leaderboardsPlayerListActive:get()
 	local f27_local3 = f27_local1.showPlayersList:get()
-	local f27_local4 = Engine[@"createmodel"]( f27_local1, "playersListFull" )
+	local f27_local4 = Engine.CreateModel( f27_local1, "playersListFull" )
 	local f27_local5 = Engine[@"xuidtostring"]( f27_local0.xuid:get() )
 	if f27_local0.checked:get() then
 		CoD.SocialUtility.CheckedInvitees[f27_local5] = nil
@@ -408,7 +407,7 @@ CoD.SocialUtility.RemovePlayers = function ( f29_arg0 )
 		end
 	end
 	if f29_local0 then
-		f29_local2 = Engine[@"createmodel"]( Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "socialRoot" ), "playersListFull" )
+		f29_local2 = Engine.CreateModel( Engine.GetModel( Engine.GetGlobalModel(), "socialRoot" ), "playersListFull" )
 		f29_local2:set( false )
 	end
 	Engine[@"hash_536CB393696695AC"]( f29_arg0 )
@@ -416,8 +415,8 @@ end
 CoD.SocialUtility.BootPlayer = function ( f30_arg0, f30_arg1 )
 	local f30_local0 = f30_arg1:getModel()
 	f30_local0 = f30_local0.xuid:get()
-	if Engine[@"isleader"]( f30_arg0, Enum[@"lobbytype"][@"lobby_type_private"] ) and Engine[@"getxuid64"]( f30_arg0 ) ~= f30_local0 then
-		Engine[@"disconnectclientfromlobby"]( f30_arg0, Enum[@"lobbytype"][@"lobby_type_private"], f30_local0, Enum[@"lobbydisconnectclient"][@"lobby_disconnect_client_kick"] )
+	if Engine[@"isleader"]( f30_arg0, Enum.LobbyType[@"lobby_type_private"] ) and Engine.GetXUID64( f30_arg0 ) ~= f30_local0 then
+		Engine[@"disconnectclientfromlobby"]( f30_arg0, Enum.LobbyType[@"lobby_type_private"], f30_local0, Enum.LobbyDisconnectClient[@"lobby_disconnect_client_kick"] )
 		if CoD.isPC then
 			CoD.PCUtility.ShowPlayerKickGameEvent( f30_local0 )
 		end
@@ -466,11 +465,11 @@ CoD.SocialUtility.GetPartyModel = function ( f31_arg0, f31_arg1, f31_arg2, f31_a
 	return f31_local0
 end
 CoD.SocialUtility.AddRankData = function ( f32_arg0 )
-	f32_arg0.mpRankIcon = 0x214ECBA8C04D44C
-	f32_arg0.zmRankIcon = 0x214ECBA8C04D44C
-	f32_arg0.wzRankIcon = 0x214ECBA8C04D44C
-	f32_arg0.cpRankIcon = 0x214ECBA8C04D44C
-	f32_arg0.arenaRankIcon = 0x214ECBA8C04D44C
+	f32_arg0.mpRankIcon = "$blacktransparent"
+	f32_arg0.zmRankIcon = "$blacktransparent"
+	f32_arg0.wzRankIcon = "$blacktransparent"
+	f32_arg0.cpRankIcon = "$blacktransparent"
+	f32_arg0.arenaRankIcon = "$blacktransparent"
 	f32_arg0.mpRank = f32_arg0.mpRank or 0
 	f32_arg0.zmRank = f32_arg0.zmRank or 0
 	f32_arg0.wzRank = f32_arg0.wzRank or 0
@@ -480,61 +479,61 @@ CoD.SocialUtility.AddRankData = function ( f32_arg0 )
 	f32_arg0.wzPrestige = f32_arg0.wzPrestige or 0
 	f32_arg0.mpParagon = false
 	if LuaUtils.MultiplayerModeAvailable() then
-		if f32_arg0.mpPrestige == CoD.PrestigeUtility.GetPrestigeCap( Enum[@"emodes"][@"mode_multiplayer"] ) and IsGameModeParagonCapable( Enum[@"emodes"][@"mode_multiplayer"] ) then
+		if f32_arg0.mpPrestige == CoD.PrestigeUtility.GetPrestigeCap( Enum.eModes.mode_multiplayer ) and IsGameModeParagonCapable( Enum.eModes.mode_multiplayer ) then
 			f32_arg0.mpRankIcon = CoD.SocialUtility.GetRankIcons( "mp", true, f32_arg0.mpParagonRank, f32_arg0.mpPrestige )
-			f32_arg0.mpRank = Engine[@"getparagonrankdisplaylevel"]( f32_arg0.mpParagonRank, Enum[@"emodes"][@"mode_multiplayer"] )
+			f32_arg0.mpRank = Engine.GetParagonRankDisplayLevel( f32_arg0.mpParagonRank, Enum.eModes.mode_multiplayer )
 			if f32_arg0.mpParagonIconId and f32_arg0.mpParagonIconId ~= CoD.PrestigeUtility.INVALID_PARAGON_ICON_ID then
-				f32_arg0.mpRankIcon = Engine[@"getparagoniconbyid"]( f32_arg0.mpParagonIconId, Enum[@"emodes"][@"mode_multiplayer"] )
+				f32_arg0.mpRankIcon = Engine.GetParagonIconById( f32_arg0.mpParagonIconId, Enum.eModes.mode_multiplayer )
 			end
 		else
 			f32_arg0.mpRankIcon = CoD.SocialUtility.GetRankIcons( "mp", true, f32_arg0.mpRank, f32_arg0.mpPrestige )
-			f32_arg0.mpRank = Engine[@"getrankdisplaylevel"]( f32_arg0.mpRank, Enum[@"emodes"][@"mode_multiplayer"] )
+			f32_arg0.mpRank = Engine.GetRankDisplayLevel( f32_arg0.mpRank, Enum.eModes.mode_multiplayer )
 		end
 		local f32_local0
-		if f32_arg0.mpPrestige == nil or f32_arg0.mpPrestige ~= CoD.PrestigeUtility.GetPrestigeCap( Enum[@"emodes"][@"mode_multiplayer"] ) then
+		if f32_arg0.mpPrestige == nil or f32_arg0.mpPrestige ~= CoD.PrestigeUtility.GetPrestigeCap( Enum.eModes.mode_multiplayer ) then
 			f32_local0 = false
 		else
 			f32_local0 = true
 		end
 		f32_arg0.mpParagon = f32_local0
 		if f32_arg0.mpParagon and f32_arg0.mpParagonIconId ~= nil and f32_arg0.mpParagonIconId ~= CoD.PrestigeUtility.INVALID_PARAGON_ICON_ID then
-			f32_arg0.mpRankIcon = Engine[@"getparagoniconbyid"]( f32_arg0.mpParagonIconId, Enum[@"emodes"][@"mode_multiplayer"] )
+			f32_arg0.mpRankIcon = Engine.GetParagonIconById( f32_arg0.mpParagonIconId, Enum.eModes.mode_multiplayer )
 		end
 	end
 	f32_arg0.zmParagon = false
 	if LuaUtils.ZombiesModeAvailable() then
 		f32_arg0.zmRankIcon = CoD.SocialUtility.GetRankIcons( "zm", true, f32_arg0.zmRank, f32_arg0.zmPrestige )
-		if f32_arg0.zmPrestige == CoD.PrestigeUtility.GetPrestigeCap( Enum[@"emodes"][@"mode_zombies"] ) then
-			if IsGameModeParagonCapable( Enum[@"emodes"][@"mode_zombies"] ) then
-				f32_arg0.zmRank = Engine[@"getparagonrankdisplaylevel"]( f32_arg0.zmParagonRank, Enum[@"emodes"][@"mode_zombies"] )
+		if f32_arg0.zmPrestige == CoD.PrestigeUtility.GetPrestigeCap( Enum.eModes.mode_zombies ) then
+			if IsGameModeParagonCapable( Enum.eModes.mode_zombies ) then
+				f32_arg0.zmRank = Engine.GetParagonRankDisplayLevel( f32_arg0.zmParagonRank, Enum.eModes.mode_zombies )
 			end
 		else
-			f32_arg0.zmRank = Engine[@"getrankdisplaylevel"]( f32_arg0.zmRank, Enum[@"emodes"][@"mode_zombies"] )
+			f32_arg0.zmRank = Engine.GetRankDisplayLevel( f32_arg0.zmRank, Enum.eModes.mode_zombies )
 		end
 		local f32_local0
-		if f32_arg0.zmPrestige == nil or f32_arg0.zmPrestige ~= CoD.PrestigeUtility.GetPrestigeCap( Enum[@"emodes"][@"mode_zombies"] ) then
+		if f32_arg0.zmPrestige == nil or f32_arg0.zmPrestige ~= CoD.PrestigeUtility.GetPrestigeCap( Enum.eModes.mode_zombies ) then
 			f32_local0 = false
 		else
 			f32_local0 = true
 		end
 		f32_arg0.zmParagon = f32_local0
 		if f32_arg0.zmParagon and f32_arg0.zmParagonIconId ~= nil and f32_arg0.zmParagonIconId ~= CoD.PrestigeUtility.INVALID_PARAGON_ICON_ID then
-			f32_arg0.zmRankIcon = Engine[@"getparagoniconbyid"]( f32_arg0.zmParagonIconId, Enum[@"emodes"][@"mode_zombies"] )
+			f32_arg0.zmRankIcon = Engine.GetParagonIconById( f32_arg0.zmParagonIconId, Enum.eModes.mode_zombies )
 		end
 	end
 	f32_arg0.wzParagon = false
 	if LuaUtils.WarzoneModeAvailable() then
 		f32_arg0.wzRankString = CoD.WZUtility.GetDecoratedStringForRank( f32_arg0.wzRank, f32_arg0.wzParagonRank, f32_arg0.wzPrestige )
-		if f32_arg0.wzPrestige == CoD.PrestigeUtility.GetPrestigeCap( Enum[@"emodes"][@"mode_warzone"] ) and IsGameModeParagonCapable( Enum[@"emodes"][@"mode_warzone"] ) then
+		if f32_arg0.wzPrestige == CoD.PrestigeUtility.GetPrestigeCap( Enum.eModes.mode_warzone ) and IsGameModeParagonCapable( Enum.eModes.mode_warzone ) then
 			f32_arg0.wzRankIcon = CoD.SocialUtility.GetRankIcons( "wz", true, f32_arg0.wzParagonRank, f32_arg0.wzPrestige )
 		else
 			f32_arg0.wzRankIcon = CoD.SocialUtility.GetRankIcons( "wz", true, f32_arg0.wzRank, f32_arg0.wzPrestige )
 		end
-		f32_arg0.wzRank = Engine[@"getrankdisplaylevel"]( f32_arg0.wzRank, Enum[@"emodes"][@"mode_warzone"] )
-		f32_arg0.wzRankName = CoD.GetRankName( f32_arg0.wzRank, 0, Enum[@"emodes"][@"mode_warzone"] )
-		if f32_arg0.wzPrestige ~= nil and f32_arg0.wzPrestige == CoD.PrestigeUtility.GetPrestigeCap( Enum[@"emodes"][@"mode_warzone"] ) and f32_arg0.wzParagonIconId ~= nil and f32_arg0.wzParagonIconId ~= CoD.PrestigeUtility.INVALID_PARAGON_ICON_ID then
+		f32_arg0.wzRank = Engine.GetRankDisplayLevel( f32_arg0.wzRank, Enum.eModes.mode_warzone )
+		f32_arg0.wzRankName = CoD.GetRankName( f32_arg0.wzRank, 0, Enum.eModes.mode_warzone )
+		if f32_arg0.wzPrestige ~= nil and f32_arg0.wzPrestige == CoD.PrestigeUtility.GetPrestigeCap( Enum.eModes.mode_warzone ) and f32_arg0.wzParagonIconId ~= nil and f32_arg0.wzParagonIconId ~= CoD.PrestigeUtility.INVALID_PARAGON_ICON_ID then
 			f32_arg0.wzParagon = true
-			f32_arg0.wzRankIcon = Engine[@"getparagoniconbyid"]( f32_arg0.wzParagonIconId, Enum[@"emodes"][@"mode_warzone"] )
+			f32_arg0.wzRankIcon = Engine.GetParagonIconById( f32_arg0.wzParagonIconId, Enum.eModes.mode_warzone )
 		end
 	end
 	if LuaUtils.ArenaModeAvailable() then
@@ -556,13 +555,13 @@ CoD.SocialUtility.AddRankData = function ( f32_arg0 )
 end
 CoD.SocialUtility.AddRankNamesIfAvailable = function ( f33_arg0 )
 	if f33_arg0.mpRank ~= nil and f33_arg0.mpPrestige ~= nil then
-		f33_arg0.mpRankName = CoD.GetRankName( f33_arg0.mpRank - 1, f33_arg0.mpPrestige, Enum[@"emodes"][@"mode_multiplayer"] )
+		f33_arg0.mpRankName = CoD.GetRankName( f33_arg0.mpRank - 1, f33_arg0.mpPrestige, Enum.eModes.mode_multiplayer )
 	end
 	if f33_arg0.wzRank ~= nil then
-		f33_arg0.wzRankName = CoD.GetRankName( f33_arg0.wzRank - 1, 0, Enum[@"emodes"][@"mode_warzone"] )
+		f33_arg0.wzRankName = CoD.GetRankName( f33_arg0.wzRank - 1, 0, Enum.eModes.mode_warzone )
 	end
 	if f33_arg0.zmRank ~= nil and f33_arg0.zmPrestige ~= nil then
-		f33_arg0.zmRankName = CoD.GetRankName( f33_arg0.zmRank - 1, f33_arg0.zmPrestige, Enum[@"emodes"][@"mode_zombies"] )
+		f33_arg0.zmRankName = CoD.GetRankName( f33_arg0.zmRank - 1, f33_arg0.zmPrestige, Enum.eModes.mode_zombies )
 	end
 	if f33_arg0.arenaRank ~= nil then
 		local f33_local0, f33_local1 = CoD.ArenaLeaguePlayUtility.GetBanner( f33_arg0.arenaLeaguePlayPoints, f33_arg0.arenaLeaguePlayBestSubdivisionRank, f33_arg0.arenaLeaguePlayFirstSubdivisionRankTotal )
@@ -572,7 +571,7 @@ CoD.SocialUtility.AddRankNamesIfAvailable = function ( f33_arg0 )
 end
 DataSources.SocialRoot = {
 	getModel = function ( f34_arg0 )
-		local f34_local0 = Engine[@"getglobalmodel"]()
+		local f34_local0 = Engine.GetGlobalModel()
 		f34_local0 = f34_local0:create( "socialRoot" )
 		if not f34_local0.selectedCount then
 			local f34_local1 = f34_local0:create( "selectedCount" )
@@ -604,7 +603,7 @@ DataSources.SocialRoot = {
 }
 DataSources.SocialPlayerInfo = {
 	getModel = function ( f35_arg0 )
-		local f35_local0 = Engine[@"getmodelforcontroller"]( f35_arg0 )
+		local f35_local0 = Engine.GetModelForController( f35_arg0 )
 		local f35_local1 = f35_local0:create( "socialPlayerInfo" )
 		local f35_local2 = f35_local1:create( "identityBadge" )
 		local f35_local3 = f35_local0:create( "Social.selectedFriendXUID" )
@@ -615,12 +614,12 @@ DataSources.SocialPlayerInfo = {
 			local f35_local7 = {
 				Rank = 0,
 				ParagonRank = 0,
-				RankIcon = @"blacktransparent",
+				RankIcon = "blacktransparent",
 				Prestige = 0,
 				Played = false,
 				Paragon = false
 			}
-			local f35_local8 = Engine[@"getplayerinfo"]( f35_arg0, f35_local4 )
+			local f35_local8 = Engine.GetPlayerInfo( f35_arg0, f35_local4 )
 			if f35_local8 ~= nil then
 				local f35_local9 = LUI.ShallowCopy( f35_local7 )
 				local f35_local10 = LUI.ShallowCopy( f35_local7 )
@@ -629,29 +628,29 @@ DataSources.SocialPlayerInfo = {
 				local f35_local13 = LUI.ShallowCopy( f35_local7 )
 				if LuaUtils.MultiplayerModeAvailable() then
 					f35_local9.Played = true
-					f35_local9.Rank = Engine[@"getrankdisplaylevel"]( f35_local8.info.mp.rank, Enum[@"emodes"][@"mode_multiplayer"] )
-					f35_local9.RankName = CoD.GetRankName( f35_local8.info.mp.rank, f35_local8.info.mp.prestige, Enum[@"emodes"][@"mode_multiplayer"] )
+					f35_local9.Rank = Engine.GetRankDisplayLevel( f35_local8.info.mp.rank, Enum.eModes.mode_multiplayer )
+					f35_local9.RankName = CoD.GetRankName( f35_local8.info.mp.rank, f35_local8.info.mp.prestige, Enum.eModes.mode_multiplayer )
 					f35_local9.RankIcon = CoD.SocialUtility.GetRankIcons( "mp", f35_local9.Played, f35_local8.info.mp.rank, f35_local8.info.mp.prestige )
 					f35_local9.Prestige = f35_local8.info.mp.prestige
-					if f35_local9.Prestige == CoD.PrestigeUtility.GetPrestigeCap( Enum[@"emodes"][@"mode_multiplayer"] ) and IsGameModeParagonCapable( Enum[@"emodes"][@"mode_multiplayer"] ) then
+					if f35_local9.Prestige == CoD.PrestigeUtility.GetPrestigeCap( Enum.eModes.mode_multiplayer ) and IsGameModeParagonCapable( Enum.eModes.mode_multiplayer ) then
 						f35_local9.Paragon = true
-						f35_local9.Rank = Engine[@"getparagonrankdisplaylevel"]( f35_local8.info.mp.rank, Enum[@"emodes"][@"mode_multiplayer"] )
+						f35_local9.Rank = Engine.GetParagonRankDisplayLevel( f35_local8.info.mp.rank, Enum.eModes.mode_multiplayer )
 						if f35_local8.info.mp.paragonIconId ~= CoD.PrestigeUtility.INVALID_PARAGON_ICON_ID then
-							f35_local9.RankIcon = Engine[@"getparagoniconbyid"]( f35_local8.info.mp.paragonIconId, Enum[@"emodes"][@"mode_multiplayer"] )
+							f35_local9.RankIcon = Engine.GetParagonIconById( f35_local8.info.mp.paragonIconId, Enum.eModes.mode_multiplayer )
 						end
 					end
 				end
 				if LuaUtils.ZombiesModeAvailable() then
 					f35_local10.Played = true
-					f35_local10.Rank = Engine[@"getrankdisplaylevel"]( f35_local8.info.zm.rank, Enum[@"emodes"][@"mode_zombies"] )
-					f35_local10.RankName = CoD.GetRankName( f35_local8.info.zm.rank, f35_local8.info.zm.prestige, Enum[@"emodes"][@"mode_zombies"] )
+					f35_local10.Rank = Engine.GetRankDisplayLevel( f35_local8.info.zm.rank, Enum.eModes.mode_zombies )
+					f35_local10.RankName = CoD.GetRankName( f35_local8.info.zm.rank, f35_local8.info.zm.prestige, Enum.eModes.mode_zombies )
 					f35_local10.RankIcon = CoD.SocialUtility.GetRankIcons( "zm", f35_local10.Played, f35_local8.info.zm.rank, f35_local8.info.zm.prestige )
 					f35_local10.Prestige = f35_local8.info.zm.prestige
-					if IsGameModeParagonCapable( Enum[@"emodes"][@"mode_zombies"] ) and f35_local8.info.zm.prestige == CoD.PrestigeUtility.GetPrestigeCap( Enum[@"emodes"][@"mode_zombies"] ) then
+					if IsGameModeParagonCapable( Enum.eModes.mode_zombies ) and f35_local8.info.zm.prestige == CoD.PrestigeUtility.GetPrestigeCap( Enum.eModes.mode_zombies ) then
 						f35_local10.Paragon = true
-						f35_local10.Rank = Engine[@"getparagonrankdisplaylevel"]( f35_local8.info.zm.rank, Enum[@"emodes"][@"mode_zombies"] )
+						f35_local10.Rank = Engine.GetParagonRankDisplayLevel( f35_local8.info.zm.rank, Enum.eModes.mode_zombies )
 						if f35_local8.info.zm.paragonIconId ~= CoD.PrestigeUtility.INVALID_PARAGON_ICON_ID then
-							f35_local10.RankIcon = Engine[@"getparagoniconbyid"]( f35_local8.info.zm.paragonIconId, Enum[@"emodes"][@"mode_zombies"] )
+							f35_local10.RankIcon = Engine.GetParagonIconById( f35_local8.info.zm.paragonIconId, Enum.eModes.mode_zombies )
 						end
 					end
 				end
@@ -659,13 +658,13 @@ DataSources.SocialPlayerInfo = {
 					f35_local11.Played = true
 					f35_local11.ParagonRank = f35_local8.info.wz.paragonRank
 					f35_local11.Rank = CoD.WZUtility.GetDecoratedStringForRank( f35_local8.info.wz.rank, f35_local8.info.wz.paragonRank, f35_local8.info.wz.prestige )
-					f35_local11.RankName = CoD.GetRankName( f35_local8.info.wz.rank, 0, Enum[@"emodes"][@"mode_warzone"] )
+					f35_local11.RankName = CoD.GetRankName( f35_local8.info.wz.rank, 0, Enum.eModes.mode_warzone )
 					f35_local11.RankIcon = CoD.SocialUtility.GetRankIcons( "wz", f35_local11.Played, f35_local8.info.wz.rank, f35_local8.info.wz.prestige )
 					f35_local11.Prestige = f35_local8.info.wz.prestige
-					if IsGameModeParagonCapable( Enum[@"emodes"][@"mode_warzone"] ) and f35_local8.info.wz.prestige == CoD.PrestigeUtility.GetPrestigeCap( Enum[@"emodes"][@"mode_warzone"] ) then
+					if IsGameModeParagonCapable( Enum.eModes.mode_warzone ) and f35_local8.info.wz.prestige == CoD.PrestigeUtility.GetPrestigeCap( Enum.eModes.mode_warzone ) then
 						f35_local11.Paragon = true
 						if f35_local8.info.wz.paragonIconId ~= CoD.PrestigeUtility.INVALID_PARAGON_ICON_ID then
-							f35_local11.RankIcon = Engine[@"getparagoniconbyid"]( f35_local8.info.wz.paragonIconId, Enum[@"emodes"][@"mode_warzone"] )
+							f35_local11.RankIcon = Engine.GetParagonIconById( f35_local8.info.wz.paragonIconId, Enum.eModes.mode_warzone )
 						end
 					end
 				end
@@ -753,8 +752,8 @@ DataSources.SocialPlayerInfo = {
 }
 CoD.SocialUtility.GetFriendsButtonOptions = function ( f36_arg0, f36_arg1, f36_arg2, f36_arg3, f36_arg4, f36_arg5, f36_arg6 )
 	local f36_local0 = {}
-	local f36_local1 = Engine[@"getmodelforcontroller"]( f36_arg0 )
-	local f36_local2 = f36_arg2 == Engine[@"getxuid64"]( f36_arg0 )
+	local f36_local1 = Engine.GetModelForController( f36_arg0 )
+	local f36_local2 = f36_arg2 == Engine.GetXUID64( f36_arg0 )
 	if f36_arg2 == nil then
 		return f36_local0
 	end
@@ -765,15 +764,15 @@ CoD.SocialUtility.GetFriendsButtonOptions = function ( f36_arg0, f36_arg1, f36_a
 		end
 	end
 	
-	local f36_local5 = Engine[@"getplayerinfo"]( f36_arg0, f36_arg2 )
-	local f36_local6 = Engine[@"hash_686E64DD1C270046"]( Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_private"], f36_arg2 )
-	local f36_local7 = Engine[@"hash_686E64DD1C270046"]( Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_game"], f36_arg2 )
+	local f36_local5 = Engine.GetPlayerInfo( f36_arg0, f36_arg2 )
+	local f36_local6 = Engine[@"hash_686E64DD1C270046"]( Enum.LobbyModule[@"lobby_module_client"], Enum.LobbyType[@"lobby_type_private"], f36_arg2 )
+	local f36_local7 = Engine[@"hash_686E64DD1C270046"]( Enum.LobbyModule[@"lobby_module_client"], Enum.LobbyType[@"lobby_type_game"], f36_arg2 )
 	if f36_local2 == false and IsInFileshare( f36_arg0 ) == false then
-		if Engine[@"hash_686E64DD1C270046"]( Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_private"], f36_arg2 ) then
-			if Engine[@"isleader"]( f36_arg0, Enum[@"lobbytype"][@"lobby_type_private"] ) then
+		if Engine[@"hash_686E64DD1C270046"]( Enum.LobbyModule[@"lobby_module_client"], Enum.LobbyType[@"lobby_type_private"], f36_arg2 ) then
+			if Engine[@"isleader"]( f36_arg0, Enum.LobbyType[@"lobby_type_private"] ) then
 				if ShouldShowPromotePlayer( f36_arg0 ) and not f36_local3 then
 					table.insert( f36_local0, {
-						text = @"hash_5431AAED2A65A9AC",
+						text = "menu/promote_to_party_leader",
 						id = "promoteToLeader",
 						disabled = CoD.DirectorUtility.DisableForCurrentMilestone(),
 						action = PromoteToLeader,
@@ -785,7 +784,7 @@ CoD.SocialUtility.GetFriendsButtonOptions = function ( f36_arg0, f36_arg1, f36_a
 				end
 				if Engine[@"islocalclient"]( f36_arg2 ) == false then
 					table.insert( f36_local0, {
-						text = @"hash_3FEF051FC818F01B",
+						text = "menu/remove_from_party",
 						id = "removeFromParty",
 						disabled = false,
 						action = DisconnectClient,
@@ -798,8 +797,8 @@ CoD.SocialUtility.GetFriendsButtonOptions = function ( f36_arg0, f36_arg1, f36_a
 			end
 		else
 			if f36_arg4 == true then
-				local f36_local8 = Engine[@"isfriendfromxuid"]( f36_arg0, f36_arg2 )
-				if f36_local5.info.joinable == Enum[@"lobbyjoinable"][@"lobby_joinable_yes"] or f36_local8 and f36_local5.info.joinable == Enum[@"lobbyjoinable"][@"lobby_joinable_yes_friends_only"] then
+				local f36_local8 = Engine.IsFriendFromXUID( f36_arg0, f36_arg2 )
+				if f36_local5.info.joinable == Enum.LobbyJoinable[@"lobby_joinable_yes"] or f36_local8 and f36_local5.info.joinable == Enum.LobbyJoinable[@"lobby_joinable_yes_friends_only"] then
 					local f36_local9 = true
 					if f36_local5.info.mapid then
 						local f36_local10 = f36_local5.info.mapid
@@ -807,8 +806,8 @@ CoD.SocialUtility.GetFriendsButtonOptions = function ( f36_arg0, f36_arg1, f36_a
 							f36_local10 = CoD.BaseUtility.GetMapDataFromMapID( f36_local5.info.mapid )
 						end
 						local f36_local11 = f36_local10 and f36_local10.session_mode
-						if f36_local11 and f36_local11 == Enum[@"emodes"][@"mode_multiplayer"] then
-							local f36_local12 = Engine[@"ownseasonpass"]( f36_arg0 )
+						if f36_local11 and f36_local11 == Enum.eModes.mode_multiplayer then
+							local f36_local12 = Engine.OwnSeasonPass( f36_arg0 )
 						end
 						f36_local9 = f36_local12 or CoD.MapUtility.LobbyHasMap( f36_local5.info.mapid )
 					end
@@ -822,7 +821,7 @@ CoD.SocialUtility.GetFriendsButtonOptions = function ( f36_arg0, f36_arg1, f36_a
 								params = {
 									controller = f36_arg0,
 									xuid = f36_arg2,
-									joinType = Enum[@"jointype"][@"join_type_friend"],
+									joinType = Enum.jointype.join_type_friend,
 									goBack = true
 								}
 							} )
@@ -835,7 +834,7 @@ CoD.SocialUtility.GetFriendsButtonOptions = function ( f36_arg0, f36_arg1, f36_a
 								params = {
 									controller = f36_arg0,
 									xuid = f36_arg2,
-									joinType = Enum[@"jointype"][@"join_type_normal"],
+									joinType = Enum.jointype.join_type_normal,
 									goBack = true
 								}
 							} )
@@ -845,7 +844,7 @@ CoD.SocialUtility.GetFriendsButtonOptions = function ( f36_arg0, f36_arg1, f36_a
 			end
 			if (not CoD.isPC or f36_arg4) and CoD.canInviteToGame( f36_arg0, f36_arg2, true ) and not f36_local6 and not f36_local7 then
 				table.insert( f36_local0, {
-					text = @"hash_42EA47C1D2988981",
+					text = "menu/invite_to_party",
 					id = "inviteToParty",
 					disabled = false,
 					action = LobbyInviteFriendGoBack,
@@ -861,7 +860,7 @@ CoD.SocialUtility.GetFriendsButtonOptions = function ( f36_arg0, f36_arg1, f36_a
 	f36_local4()
 	if f36_local5.info.hasEverPlayed == true and not f36_local3 and (not (not f36_arg1 or not f36_arg1.menu or f36_arg1.menu.disableInspection or IsInGame()) or IsPC() and not IsInGame() and f36_arg5 and f36_arg6 ~= "SinglePlayerInspection" and f36_arg6 ~= "LobbyInspection") then
 		table.insert( f36_local0, {
-			text = @"hash_FF0DBCF80106E7B",
+			text = "menu/inspect_player",
 			id = "inspectPlayer",
 			disabled = false,
 			action = function ( f38_arg0, f38_arg1, f38_arg2, f38_arg3, f38_arg4 )
@@ -873,7 +872,7 @@ CoD.SocialUtility.GetFriendsButtonOptions = function ( f36_arg0, f36_arg1, f36_a
 	end
 	if not IsPC() and not f36_local3 then
 		table.insert( f36_local0, {
-			text = @"hash_1250EFC225EDF7D0",
+			text = "xboxlive/view_profile",
 			id = "platformProfile",
 			disabled = false,
 			action = OpenPlatformProfile,
@@ -886,16 +885,16 @@ CoD.SocialUtility.GetFriendsButtonOptions = function ( f36_arg0, f36_arg1, f36_a
 	end
 	f36_local4()
 	if f36_local2 == false and not f36_local3 then
-		local f36_local8 = Engine[@"isplayermuted"]( f36_arg0, Enum[@"lobbytype"][@"lobby_type_private"], f36_arg2 )
-		if Engine[@"islobbyactive"]( Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_game"] ) then
-			f36_local8 = Engine[@"isplayermuted"]( f36_arg0, Enum[@"lobbytype"][@"lobby_type_game"], f36_arg2 )
+		local f36_local8 = Engine[@"isplayermuted"]( f36_arg0, Enum.LobbyType[@"lobby_type_private"], f36_arg2 )
+		if Engine[@"islobbyactive"]( Enum.LobbyModule[@"lobby_module_client"], Enum.LobbyType[@"lobby_type_game"] ) then
+			f36_local8 = Engine[@"isplayermuted"]( f36_arg0, Enum.LobbyType[@"lobby_type_game"], f36_arg2 )
 		end
 		if IsGroupsEnabled( f36_arg0 ) then
 			
 		else
 			
 		end
-		if not Engine[@"isfriendfromxuid"]( f36_arg0, f36_arg2 ) then
+		if not Engine.IsFriendFromXUID( f36_arg0, f36_arg2 ) then
 			if IsDurango() then
 				table.insert( f36_local0, {
 					text = @"menu/follow_player",
@@ -910,7 +909,7 @@ CoD.SocialUtility.GetFriendsButtonOptions = function ( f36_arg0, f36_arg1, f36_a
 				} )
 			elseif not CoD.isPC or not CoD.PCBattlenetUtility.HasSentFriendInvite( f36_arg3 ) then
 				table.insert( f36_local0, {
-					text = @"hash_371470E8042D087C",
+					text = "menu/send_friend_request",
 					id = "sendFriendRequest",
 					disabled = false,
 					action = OpenPlatformFriendRequest,
@@ -923,7 +922,7 @@ CoD.SocialUtility.GetFriendsButtonOptions = function ( f36_arg0, f36_arg1, f36_a
 			end
 		end
 		f36_local4()
-		local f36_local9 = Engine[@"isfriendfromxuid"]( f36_arg0, f36_arg2 )
+		local f36_local9 = Engine.IsFriendFromXUID( f36_arg0, f36_arg2 )
 		if not f36_local9 or f36_local5.info.hasEverBootedGame and f36_local9 then
 			table.insert( f36_local0, {
 				text = @"menu/report_player",
@@ -940,7 +939,7 @@ CoD.SocialUtility.GetFriendsButtonOptions = function ( f36_arg0, f36_arg1, f36_a
 		if f36_local6 or f36_local7 then
 			if f36_local8 then
 				table.insert( f36_local0, {
-					text = @"hash_39685D9366015DB",
+					text = "menu/unmute_player",
 					id = "unmutePlayer",
 					disabled = false,
 					action = UnMutePlayer,
@@ -969,12 +968,12 @@ CoD.SocialUtility.GetFriendsButtonOptions = function ( f36_arg0, f36_arg1, f36_a
 	return f36_local0
 end
 DataSources.SocialPlayerDetailsButtons = ListHelper_SetupDataSource( "SocialPlayerDetailsButtons", function ( f39_arg0, f39_arg1 )
-	local f39_local0 = Engine[@"getmodelforcontroller"]( f39_arg0 )
+	local f39_local0 = Engine.GetModelForController( f39_arg0 )
 	local f39_local1 = f39_local0:create( "Social.selectedFriendXUID" )
 	f39_local1 = f39_local1:get()
 	local f39_local2 = f39_local0:create( "Social.selectedFriendGamertag" )
 	f39_local2 = f39_local2:get()
-	local f39_local3 = Engine[@"createmodel"]( f39_local0, "Social.selectedFriendInTitle" )
+	local f39_local3 = Engine.CreateModel( f39_local0, "Social.selectedFriendInTitle" )
 	f39_local3 = f39_local3:get()
 	local f39_local4 = {}
 	f39_local4 = CoD.SocialUtility.GetFriendsButtonOptions( f39_arg0, f39_arg1, f39_local1, f39_local2, f39_local3, false, "" )
@@ -1045,7 +1044,7 @@ end, function ( f41_arg0, f41_arg1, f41_arg2 )
 	end
 end )
 DataSources.SocialTabs = ListHelper_SetupDataSource( "SocialTabs", function ( f42_arg0 )
-	local f42_local0 = Engine[@"getglobalmodel"]()
+	local f42_local0 = Engine.GetGlobalModel()
 	f42_local0 = f42_local0:create( "socialRoot" )
 	local f42_local1 = f42_local0:create( "tab" )
 	local f42_local2 = nil
@@ -1055,10 +1054,10 @@ DataSources.SocialTabs = ListHelper_SetupDataSource( "SocialTabs", function ( f4
 		f42_local2 = f42_local1:get() or "friends"
 	end
 	local f42_local3 = {}
-	if Engine[@"isingame"]() == false then
+	if Engine.IsInGame() == false then
 		table.insert( f42_local3, {
 			models = {
-				tabName = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_17AE9A3B9A819A37" ),
+				tabName = Engine[@"hash_4F9F1239CFD921FE"]( "menu/tab_party_caps" ),
 				tabWidget = "CoD.Social_Party",
 				showInQuickInvite = false
 			},
@@ -1071,7 +1070,7 @@ DataSources.SocialTabs = ListHelper_SetupDataSource( "SocialTabs", function ( f4
 	end
 	table.insert( f42_local3, {
 		models = {
-			tabName = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_2D851B47994EA820" ),
+			tabName = Engine[@"hash_4F9F1239CFD921FE"]( "menu/friends_caps" ),
 			tabWidget = "CoD.Social_Friends",
 			showInQuickInvite = true
 		},
@@ -1097,7 +1096,7 @@ DataSources.SocialTabs = ListHelper_SetupDataSource( "SocialTabs", function ( f4
 	if IsGroupsEnabled( f42_arg0 ) then
 		table.insert( f42_local3, {
 			models = {
-				tabName = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_7170F22DBA800B37" ),
+				tabName = Engine[@"hash_4F9F1239CFD921FE"]( "groups/caps" ),
 				tabWidget = "CoD.Social_Groups",
 				showInQuickInvite = true
 			},
@@ -1110,7 +1109,7 @@ DataSources.SocialTabs = ListHelper_SetupDataSource( "SocialTabs", function ( f4
 	end
 	table.insert( f42_local3, {
 		models = {
-			tabName = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_6BBFF142690C3D4D" ),
+			tabName = Engine[@"hash_4F9F1239CFD921FE"]( "menu/tab_players_caps" ),
 			tabWidget = "CoD.Social_RecentPlayers",
 			showInQuickInvite = true
 		},
@@ -1123,7 +1122,7 @@ DataSources.SocialTabs = ListHelper_SetupDataSource( "SocialTabs", function ( f4
 	if Dvar.live_clansEnabled:get() == true then
 		table.insert( f42_local3, {
 			models = {
-				tabName = LocalizeToUpperString( @"hash_391511506A6D8036" ),
+				tabName = LocalizeToUpperString( "clan/inbox" ),
 				tabWidget = "CoD.Social_Inbox",
 				showInQuickInvite = false
 			},
@@ -1146,7 +1145,7 @@ DataSources.SocialTabs = ListHelper_SetupDataSource( "SocialTabs", function ( f4
 	return f42_local3
 end, true )
 DataSources.PlayersListTabs = ListHelper_SetupDataSource( "PlayersListTabs", function ( f43_arg0 )
-	local f43_local0 = Engine[@"getglobalmodel"]()
+	local f43_local0 = Engine.GetGlobalModel()
 	f43_local0 = f43_local0:create( "socialRoot" )
 	local f43_local1 = f43_local0:create( "tab" )
 	local f43_local2 = f43_local1:get()
@@ -1156,7 +1155,7 @@ DataSources.PlayersListTabs = ListHelper_SetupDataSource( "PlayersListTabs", fun
 	local f43_local3 = {}
 	table.insert( f43_local3, {
 		models = {
-			tabName = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_2D851B47994EA820" ),
+			tabName = Engine[@"hash_4F9F1239CFD921FE"]( "menu/friends_caps" ),
 			tabWidget = "CoD.Social_Friends",
 			showInQuickInvite = false
 		},
@@ -1168,7 +1167,7 @@ DataSources.PlayersListTabs = ListHelper_SetupDataSource( "PlayersListTabs", fun
 	if IsGroupsEnabled( f43_arg0 ) then
 		table.insert( f43_local3, {
 			models = {
-				tabName = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_7170F22DBA800B37" ),
+				tabName = Engine[@"hash_4F9F1239CFD921FE"]( "groups/caps" ),
 				tabWidget = "CoD.Social_Groups",
 				showInQuickInvite = false
 			},
@@ -1181,7 +1180,7 @@ DataSources.PlayersListTabs = ListHelper_SetupDataSource( "PlayersListTabs", fun
 	end
 	table.insert( f43_local3, {
 		models = {
-			tabName = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_6BBFF142690C3D4D" ),
+			tabName = Engine[@"hash_4F9F1239CFD921FE"]( "menu/tab_players_caps" ),
 			tabWidget = "CoD.Social_RecentPlayers",
 			showInQuickInvite = false
 		},
@@ -1205,17 +1204,17 @@ end, true )
 CoD.SocialUtility.PartyBarType = LuaEnum.createEnum( "FIRST", "MIDDLE", "LAST", "NONE" )
 DataSources.SocialOnlinePlayersList = ListHelper_SetupDataSource( "SocialOnlinePlayersList", function ( f44_arg0 )
 	local f44_local0 = {}
-	local f44_local1 = Enum[@"presenceactivity"][@"presence_activity_online_not_in_title"] | Enum[@"presenceactivity"][@"presence_activity_menu_inlobby"]
+	local f44_local1 = Enum.PresenceActivity[@"presence_activity_online_not_in_title"] | Enum.PresenceActivity[@"presence_activity_menu_inlobby"]
 	local f44_local2 = {}
 	local f44_local3 = false
 	local f44_local4 = false
-	local f44_local5 = Engine[@"getglobalmodel"]()
+	local f44_local5 = Engine.GetGlobalModel()
 	f44_local5 = f44_local5:create( "socialRoot" )
 	local f44_local6 = f44_local5.tab:get()
 	if f44_local6 == "friends" then
 		f44_local3 = false
 		f44_local4 = false
-		f44_local2 = Engine[@"getonlinefriendslist"]( f44_arg0, 0, 7, f44_local1 )
+		f44_local2 = Engine.GetOnlineFriendsList( f44_arg0, 0, 7, f44_local1 )
 	elseif f44_local6 == "recent" then
 		f44_local3 = true
 		f44_local4 = true
@@ -1224,7 +1223,7 @@ DataSources.SocialOnlinePlayersList = ListHelper_SetupDataSource( "SocialOnlineP
 		f44_local3 = false
 		f44_local4 = false
 		local f44_local7 = CoD.SocialUtility.GetPartyPlayersList()
-		local f44_local8 = Engine[@"gettitledata"]( Engine[@"getprimarycontroller"]() )
+		local f44_local8 = Engine.GetTitleData( Engine.GetPrimaryController() )
 		for f44_local18, f44_local19 in ipairs( f44_local7 ) do
 			f44_local2[f44_local18] = {}
 			local f44_local20 = f44_local2[f44_local18]
@@ -1236,7 +1235,7 @@ DataSources.SocialOnlinePlayersList = ListHelper_SetupDataSource( "SocialOnlineP
 			f44_local20.presence = f44_local8.presence
 			f44_local20.activity = f44_local8.activity
 			f44_local20.context = f44_local8.context
-			f44_local20.joinable = Enum[@"lobbyjoinable"][@"hash_78FCE6A0B08CD559"]
+			f44_local20.joinable = Enum.LobbyJoinable[@"hash_78FCE6A0B08CD559"]
 			f44_local20.gametype = f44_local8.gametype
 			f44_local20.mapid = f44_local8.mapid
 			f44_local20.modeparam = f44_local8.modeparam
@@ -1247,13 +1246,13 @@ DataSources.SocialOnlinePlayersList = ListHelper_SetupDataSource( "SocialOnlineP
 			f44_local20.lobbyDLCBits = f44_local19.lobbyDLCBits
 			f44_local20.mpParagon = false
 			if f44_local19.mpRank ~= nil then
-				if CoD.PrestigeUtility.GetPrestigeCap( Enum[@"emodes"][@"mode_multiplayer"] ) <= f44_local19.mpPrestige then
-					f44_local20.mpRank = Engine[@"getparagonrankdisplaylevel"]( f44_local19.mpRank, Enum[@"emodes"][@"mode_multiplayer"] )
+				if CoD.PrestigeUtility.GetPrestigeCap( Enum.eModes.mode_multiplayer ) <= f44_local19.mpPrestige then
+					f44_local20.mpRank = Engine.GetParagonRankDisplayLevel( f44_local19.mpRank, Enum.eModes.mode_multiplayer )
 					f44_local20.mpParagon = true
 				else
-					f44_local20.mpRank = Engine[@"getrankdisplaylevel"]( f44_local19.mpRank, Enum[@"emodes"][@"mode_multiplayer"] )
+					f44_local20.mpRank = Engine.GetRankDisplayLevel( f44_local19.mpRank, Enum.eModes.mode_multiplayer )
 				end
-				f44_local20.mpRankName = CoD.GetRankName( f44_local19.mpRank, f44_local19.mpPrestige, Enum[@"emodes"][@"mode_multiplayer"] )
+				f44_local20.mpRankName = CoD.GetRankName( f44_local19.mpRank, f44_local19.mpPrestige, Enum.eModes.mode_multiplayer )
 				f44_local20.mpRankIcon = IsMultiplayer() and f44_local19.rankIcon or f44_local19.mpRankIcon
 			end
 			f44_local20.wzParagon = false
@@ -1261,24 +1260,24 @@ DataSources.SocialOnlinePlayersList = ListHelper_SetupDataSource( "SocialOnlineP
 				f44_local20.wzRankString = CoD.WZUtility.GetDecoratedStringForRank( f44_local19.wzRank, f44_local19.wzParagonRank, f44_local19.wzPrestige )
 				f44_local20.wzPrestige = f44_local19.wzPrestige
 				f44_local20.wzRank = f44_local19.wzRank
-				f44_local20.wzRankName = CoD.GetRankName( f44_local19.wzRank, 0, Enum[@"emodes"][@"mode_warzone"] )
+				f44_local20.wzRankName = CoD.GetRankName( f44_local19.wzRank, 0, Enum.eModes.mode_warzone )
 				f44_local20.wzRankIcon = f44_local19.wzRankIcon
 				f44_local20.wzParagonRank = f44_local19.wzParagonRank
-				local f44_local12 = IsGameModeParagonCapable( Enum[@"emodes"][@"mode_warzone"] )
+				local f44_local12 = IsGameModeParagonCapable( Enum.eModes.mode_warzone )
 				if f44_local12 then
-					f44_local12 = Engine[@"getprestigecap"]( Enum[@"emodes"][@"mode_warzone"] ) <= f44_local19.wzPrestige
+					f44_local12 = Engine.GetPrestigeCap( Enum.eModes.mode_warzone ) <= f44_local19.wzPrestige
 				end
 				f44_local20.wzParagon = f44_local12
 			end
 			f44_local20.zmParagon = false
 			if f44_local19.zmRank ~= nil then
-				if CoD.PrestigeUtility.GetPrestigeCap( Enum[@"emodes"][@"mode_zombies"] ) <= f44_local19.zmPrestige then
+				if CoD.PrestigeUtility.GetPrestigeCap( Enum.eModes.mode_zombies ) <= f44_local19.zmPrestige then
 					f44_local20.zmParagon = true
-					f44_local20.zmRank = Engine[@"getparagonrankdisplaylevel"]( f44_local19.zmRank, Enum[@"emodes"][@"mode_zombies"] )
+					f44_local20.zmRank = Engine.GetParagonRankDisplayLevel( f44_local19.zmRank, Enum.eModes.mode_zombies )
 				else
-					f44_local20.zmRank = Engine[@"getrankdisplaylevel"]( f44_local19.zmRank, Enum[@"emodes"][@"mode_zombies"] )
+					f44_local20.zmRank = Engine.GetRankDisplayLevel( f44_local19.zmRank, Enum.eModes.mode_zombies )
 				end
-				f44_local20.zmRankName = CoD.GetRankName( f44_local19.zmRank, f44_local19.zmPrestige, Enum[@"emodes"][@"mode_zombies"] )
+				f44_local20.zmRankName = CoD.GetRankName( f44_local19.zmRank, f44_local19.zmPrestige, Enum.eModes.mode_zombies )
 				f44_local20.zmRankIcon = IsZombies() and f44_local19.rankIcon or f44_local19.zmRankIcon
 			end
 			if f44_local19.arenaLeaguePlayPoints ~= nil then
@@ -1293,7 +1292,7 @@ DataSources.SocialOnlinePlayersList = ListHelper_SetupDataSource( "SocialOnlineP
 			end
 		end
 	else
-		f44_local2 = Engine[@"getonlinefriendslist"]( f44_arg0, 0, 7, f44_local1 )
+		f44_local2 = Engine.GetOnlineFriendsList( f44_arg0, 0, 7, f44_local1 )
 	end
 	for f44_local7 = 1, #f44_local2, 1 do
 		local f44_local11 = f44_local2[f44_local7]
@@ -1316,7 +1315,7 @@ DataSources.SocialOnlinePlayersList = ListHelper_SetupDataSource( "SocialOnlineP
 		end
 		local f44_local17 = f44_local11.mpRankIcon
 		if not f44_local17 then
-			f44_local17 = @"blacktransparent"
+			f44_local17 = "blacktransparent"
 		end
 		local f44_local21 = f44_local11.mpRankName
 		if not f44_local21 then
@@ -1328,7 +1327,7 @@ DataSources.SocialOnlinePlayersList = ListHelper_SetupDataSource( "SocialOnlineP
 		f44_local16 = f44_local11.wzRankString
 		f44_local17 = f44_local11.wzRankIcon
 		if not f44_local17 then
-			f44_local17 = @"blacktransparent"
+			f44_local17 = "blacktransparent"
 		end
 		f44_local21 = f44_local11.wzRankName
 		if not f44_local21 then
@@ -1343,7 +1342,7 @@ DataSources.SocialOnlinePlayersList = ListHelper_SetupDataSource( "SocialOnlineP
 		end
 		f44_local17 = f44_local11.zmRankIcon
 		if not f44_local17 then
-			f44_local17 = @"blacktransparent"
+			f44_local17 = "blacktransparent"
 		end
 		f44_local21 = f44_local11.zmRankName
 		if not f44_local21 then
@@ -1363,7 +1362,7 @@ DataSources.SocialOnlinePlayersList = ListHelper_SetupDataSource( "SocialOnlineP
 		end
 		local f44_local22 = f44_local11.arenaRankIcon
 		if not f44_local22 then
-			f44_local22 = @"blacktransparent"
+			f44_local22 = "blacktransparent"
 		end
 		local f44_local23 = f44_local11.arenaRankName
 		if not f44_local23 then
@@ -1428,8 +1427,8 @@ DataSources.SocialOnlinePlayersList = ListHelper_SetupDataSource( "SocialOnlineP
 		f44_local16( f44_local17, f44_local21 )
 	end
 	if #f44_local2 < CoD.LobbyUtility.GetMaxClientCount() then
-		local f44_local7 = Engine[@"getglobalmodel"]()
-		if f44_local7.PartyPrivacy.privacy:get() ~= Enum[@"partyprivacy"][@"party_privacy_closed"] then
+		local f44_local7 = Engine.GetGlobalModel()
+		if f44_local7.PartyPrivacy.privacy:get() ~= Enum.PartyPrivacy[@"party_privacy_closed"] then
 			table.insert( f44_local0, {
 				models = {
 					empty = true,
@@ -1455,7 +1454,7 @@ DataSources.SocialOnlinePlayersList = ListHelper_SetupDataSource( "SocialOnlineP
 	end
 	return f44_local0
 end, nil, nil, function ( f45_arg0, f45_arg1, f45_arg2 )
-	local f45_local0 = Engine[@"getglobalmodel"]()
+	local f45_local0 = Engine.GetGlobalModel()
 	f45_local0 = f45_local0.socialRoot
 	local f45_local1 = f45_local0.tab:get()
 	local f45_local2 = f45_local0.friends
@@ -1471,7 +1470,7 @@ end, nil, nil, function ( f45_arg0, f45_arg1, f45_arg2 )
 	local f45_local4 = f45_arg0
 	local f45_local5 = f45_arg1
 	local f45_local6 = {}
-	local f45_local7 = Engine[@"getglobalmodel"]()
+	local f45_local7 = Engine.GetGlobalModel()
 	f45_local7 = f45_local7.lobbyRoot.rankMode
 	local f45_local8 = f45_local2.update
 	f45_local6[1] = f45_local7
@@ -1481,7 +1480,7 @@ end, nil, nil, function ( f45_arg0, f45_arg1, f45_arg2 )
 end )
 DataSources.SocialMainMenu = {
 	getModel = function ( f46_arg0 )
-		local f46_local0 = Engine[@"getglobalmodel"]()
+		local f46_local0 = Engine.GetGlobalModel()
 		return f46_local0.SocialMainMenu
 	end
 }
@@ -1491,23 +1490,23 @@ DataSources.SocialPlayersList = {
 		f47_arg1.controller = f47_arg0
 		local f47_local0 = f47_arg1._presenceFilter
 		if not f47_local0 then
-			f47_local0 = Enum[@"presencefilter"][@"presence_filter_all"]
+			f47_local0 = Enum.PresenceFilter[@"presence_filter_all"]
 		end
 		f47_arg1._presenceFilter = f47_local0
 		f47_local0 = DataSources.SocialRoot.getModel( f47_arg0 )
 		local f47_local1 = f47_local0.tab:get()
 		local f47_local2 = f47_arg1.playerCount
-		local f47_local3 = Engine[@"createmodel"]( f47_local0, "showPlayersList" )
+		local f47_local3 = Engine.CreateModel( f47_local0, "showPlayersList" )
 		f47_local3 = f47_local3:get()
-		local f47_local4 = Engine[@"createmodel"]( f47_local0, "leaderboardsPlayerListActive" )
+		local f47_local4 = Engine.CreateModel( f47_local0, "leaderboardsPlayerListActive" )
 		local f47_local5 = false
 		f47_arg1.GetFilteredList = nil
 		if f47_local1 == "friends" then
 			f47_arg1.showyourfriend = false
 			f47_arg1.showlastmet = false
-			f47_arg1.GetList = Engine[@"getfriends"]
+			f47_arg1.GetList = Engine.GetFriends
 			f47_arg1.GetParty = Engine[@"hash_E940BDCC0375A9D"]
-			f47_arg1.playerCount = Engine[@"getfriendscount"]( f47_arg0, f47_arg1._presenceFilter )
+			f47_arg1.playerCount = Engine.GetFriendsCount( f47_arg0, f47_arg1._presenceFilter )
 			f47_arg1.socialSubModel = f47_local0.friends
 		elseif f47_local1 == "recent" then
 			f47_arg1.showyourfriend = true
@@ -1520,15 +1519,15 @@ DataSources.SocialPlayersList = {
 			f47_arg1.showyourfriend = true
 			f47_arg1.showlastmet = false
 			f47_arg1.showGroupMemberStatus = true
-			f47_arg1.GetList = Engine[@"getselectedgroupmemberslist"]
-			f47_arg1.GetParty = Engine[@"getselectedgroupmembersparty"]
-			f47_arg1.playerCount = Engine[@"getselectedgroupmemberscount"]( f47_arg0, f47_arg1._presenceFilter )
+			f47_arg1.GetList = Engine.GetSelectedGroupMembersList
+			f47_arg1.GetParty = Engine.GetSelectedGroupMembersParty
+			f47_arg1.playerCount = Engine.GetSelectedGroupMembersCount( f47_arg0, f47_arg1._presenceFilter )
 			f47_arg1.socialSubModel = f47_local0.groupMembers
 		elseif f47_local1 == "groupApplications" then
 			f47_arg1.showyourfriend = true
 			f47_arg1.showlastmet = false
-			f47_arg1.GetList = Engine[@"getselectedgroupapplicationslist"]
-			f47_arg1.playerCount = Engine[@"getselectedgroupapplicationscount"]( f47_arg0, f47_arg1._presenceFilter )
+			f47_arg1.GetList = Engine.GetSelectedGroupApplicationsList
+			f47_arg1.playerCount = Engine.GetSelectedGroupApplicationsCount( f47_arg0, f47_arg1._presenceFilter )
 			f47_arg1.socialSubModel = f47_local0.groupApplications
 		elseif f47_local1 == "clan" or f47_local1 == "clan_Members" then
 			f47_arg1.showyourfriend = true
@@ -1538,7 +1537,7 @@ DataSources.SocialPlayersList = {
 			f47_arg1.GetParty = CoD.ClanUtility.GetPlayersParty
 			f47_arg1.playerCount = CoD.ClanUtility.GetClanMembersCount( f47_arg0, f47_local1 )
 			local f47_local6 = CoDShared.GetXUID64StringForController( f47_arg0 )
-			local f47_local7 = Engine[@"getglobalmodel"]()
+			local f47_local7 = Engine.GetGlobalModel()
 			f47_arg1.socialSubModel = f47_local7.LobbyClients[f47_local6].clan.members
 		elseif f47_local1 == "clan_Squad" then
 			f47_arg1.showyourfriend = true
@@ -1548,7 +1547,7 @@ DataSources.SocialPlayersList = {
 			f47_arg1.GetParty = CoD.ClanUtility.GetPlayersParty
 			f47_arg1.playerCount = CoD.ClanUtility.GetClanMembersCount( f47_arg0, f47_local1 )
 			local f47_local6 = CoDShared.GetXUID64StringForController( f47_arg0 )
-			local f47_local7 = Engine[@"getglobalmodel"]()
+			local f47_local7 = Engine.GetGlobalModel()
 			f47_arg1.socialSubModel = f47_local7.LobbyClients[f47_local6].clan.members
 		elseif f47_local1 == "clan_Team" then
 			f47_arg1.showyourfriend = true
@@ -1558,14 +1557,14 @@ DataSources.SocialPlayersList = {
 			f47_arg1.GetParty = CoD.ClanUtility.GetPlayersParty
 			f47_arg1.playerCount = CoD.ClanUtility.GetClanMembersCount( f47_arg0, f47_local1 )
 			local f47_local6 = CoDShared.GetXUID64StringForController( f47_arg0 )
-			local f47_local7 = Engine[@"getglobalmodel"]()
+			local f47_local7 = Engine.GetGlobalModel()
 			f47_arg1.socialSubModel = f47_local7.LobbyClients[f47_local6].clan.members
 		elseif f47_local3 ~= nil and f47_local3 == true then
 			f47_arg1.showyourfriend = true
 			f47_arg1.showlastmet = false
 			f47_arg1.GetList = Engine[@"hash_44D6DD81541D4853"]
 			f47_arg1.playerCount = Engine[@"hash_5469E79D58A190B2"]( f47_arg0 )
-			f47_arg1.socialSubModel = Engine[@"createmodel"]( f47_local0, "playersList.update" )
+			f47_arg1.socialSubModel = Engine.CreateModel( f47_local0, "playersList.update" )
 			f47_arg1.GetParty = nil
 			f47_local5 = true
 		elseif f47_local1 == "friendsPlayersList" then
@@ -1587,13 +1586,13 @@ DataSources.SocialPlayersList = {
 		else
 			f47_arg1.showyourfriend = false
 			f47_arg1.showlastmet = false
-			f47_arg1.GetList = Engine[@"getfriends"]
+			f47_arg1.GetList = Engine.GetFriends
 			f47_arg1.GetParty = Engine[@"hash_E940BDCC0375A9D"]
-			f47_arg1.playerCount = Engine[@"getfriendscount"]( f47_arg0, f47_arg1._presenceFilter )
+			f47_arg1.playerCount = Engine.GetFriendsCount( f47_arg0, f47_arg1._presenceFilter )
 			f47_arg1.socialSubModel = f47_local0.friends
 		end
 		f47_local4:set( f47_local5 )
-		local f47_local6 = Engine[@"createmodel"]( f47_local0, "playersListFull" )
+		local f47_local6 = Engine.CreateModel( f47_local0, "playersListFull" )
 		if f47_local5 and not f47_local3 then
 			local f47_local7 = f47_local0.selectedCount
 			local f47_local8 = 0
@@ -1609,7 +1608,7 @@ DataSources.SocialPlayersList = {
 			f47_arg1.filteredList = f47_arg1.GetFilteredList( f47_arg0 )
 		end
 		f47_local0.visibleCount:set( f47_arg1.playerCount )
-		local f47_local7 = Engine[@"stringtoxuiddecimal"]( "0" )
+		local f47_local7 = Engine.StringToXUIDDecimal( "0" )
 		f47_arg1.players = {}
 		local f47_local8 = {
 			["identityBadge.xuid"] = 0,
@@ -1632,7 +1631,7 @@ DataSources.SocialPlayersList = {
 			friend = 0,
 			trial = false,
 			blackopsPass = false,
-			primaryPresence = Enum[@"presenceprimary"][@"presence_primary_offline"],
+			primaryPresence = Enum.PresencePrimary[@"presence_primary_offline"],
 			titlePresence = "",
 			platformPresence = "",
 			rankInfo = CoD.RankUtility.GetClientRankInfoModel( LuaDefine.INVALID_XUID_X64 ),
@@ -1692,13 +1691,13 @@ DataSources.SocialPlayersList = {
 			local f48_local4 = f48_local2.showPlayersList:get()
 			local f48_local5 = 0
 			if f48_local3 == "friends" then
-				f48_local5 = Engine[@"getfriendscount"]( f48_arg0, f48_arg1._presenceFilter )
+				f48_local5 = Engine.GetFriendsCount( f48_arg0, f48_arg1._presenceFilter )
 			elseif f48_local3 == "recent" then
 				f48_local5 = CoD.SocialUtility.GetRecentPlayersCount( f48_arg0 )
 			elseif f48_local3 == "groupMembers" then
-				f48_local5 = Engine[@"getselectedgroupmemberscount"]( f48_arg0, f48_arg1._presenceFilter )
+				f48_local5 = Engine.GetSelectedGroupMembersCount( f48_arg0, f48_arg1._presenceFilter )
 			elseif f48_local3 == "groupApplications" then
-				f48_local5 = Engine[@"getselectedgroupapplicationscount"]( f48_arg0, f48_arg1._presenceFilter )
+				f48_local5 = Engine.GetSelectedGroupApplicationsCount( f48_arg0, f48_arg1._presenceFilter )
 			elseif f48_local3 == "clan" or f48_local3 == "clan_Members" or f48_local3 == "clan_Squad" or f48_local3 == "clan_Team" then
 				f48_local5 = CoD.ClanUtility.GetClanMembersCount( f48_arg0, f48_local3 )
 			elseif f48_local4 ~= nil and f48_local4 == true then
@@ -1708,7 +1707,7 @@ DataSources.SocialPlayersList = {
 			elseif f48_local3 == "recentPlayersList" then
 				f48_local5 = CoD.LeaderboardUtility.GetRecentPlayersCount( f48_arg0 )
 			else
-				f48_local5 = Engine[@"getfriendscount"]( f48_arg0, f48_arg1._presenceFilter )
+				f48_local5 = Engine.GetFriendsCount( f48_arg0, f48_arg1._presenceFilter )
 			end
 			if f48_local5 ~= f48_arg1.playerCount then
 				f48_arg1.playerCount = f48_local5
@@ -1730,11 +1729,11 @@ DataSources.SocialPlayersList = {
 					f48_local9.titlePresence = ""
 				end
 				if f48_arg1.showGroupMemberStatus then
-					f48_local9.groupMemberStatus = Engine[@"getselectedgroupmemberstatus"]( f48_local9.xuid )
+					f48_local9.groupMemberStatus = Engine.GetSelectedGroupMemberStatus( f48_local9.xuid )
 				end
 				f48_local9 = CoD.SocialUtility.AddRankData( f48_local9 )
 				f48_local9.rankInfo = CoD.RankUtility.GetClientRankInfoModel( f48_local9.xuid )
-				f48_local9.selected = Engine[@"isfriendininitialgroupinviteslist"]( f48_local9.xuid )
+				f48_local9.selected = Engine.IsFriendInInitialGroupInvitesList( f48_local9.xuid )
 				f48_local9.playerCount = f48_arg1.playerCount
 				if f48_local9.mapid then
 					local f48_local11 = f48_local9.mapid
@@ -1743,8 +1742,8 @@ DataSources.SocialPlayersList = {
 					end
 					local f48_local12 = f48_local11 and f48_local11.session_mode
 					local f48_local13
-					if f48_local12 and f48_local12 == Enum[@"emodes"][@"mode_multiplayer"] then
-						f48_local13 = Engine[@"ownseasonpass"]( f48_arg0 )
+					if f48_local12 and f48_local12 == Enum.eModes.mode_multiplayer then
+						f48_local13 = Engine.OwnSeasonPass( f48_arg0 )
 						if not f48_local13 then
 						
 						else
@@ -1763,11 +1762,11 @@ DataSources.SocialPlayersList = {
 					f48_local13 = CoD.MapUtility.LobbyHasMap( f48_local9.mapid )
 				end
 				if f48_local9.joinable and CoD.LobbyUtility.IsPlayerInMyParty( f48_local9.xuid ) then
-					f48_local9.joinable = Enum[@"lobbyjoinable"][@"hash_78FCE6A0B08CD559"]
+					f48_local9.joinable = Enum.LobbyJoinable[@"hash_78FCE6A0B08CD559"]
 				end
-				local f48_local11 = Engine[@"createmodel"]( f48_local2, "leaderboardsPlayerListActive" )
+				local f48_local11 = Engine.CreateModel( f48_local2, "leaderboardsPlayerListActive" )
 				if f48_local11:get() then
-					f48_local9.joinable = Enum[@"lobbyjoinable"][@"lobby_joinable_no_not_in_lobby"]
+					f48_local9.joinable = Enum.LobbyJoinable[@"lobby_joinable_no_not_in_lobby"]
 				end
 				f48_local9 = CoD.SocialUtility.AddRankNamesIfAvailable( f48_local9 )
 				for f48_local15, f48_local16 in pairs( f48_local9 ) do
@@ -1855,10 +1854,10 @@ DataSources.SocialPlayersList = {
 		local f47_local11 = f47_arg0
 		local f47_local12 = f47_arg1
 		local f47_local19 = {}
-		local f47_local13 = Engine[@"getglobalmodel"]()
+		local f47_local13 = Engine.GetGlobalModel()
 		f47_local13 = f47_local13.lobbyRoot.rankMode
 		local f47_local14 = f47_arg1.socialSubModel.update
-		local f47_local15 = Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "socialRoot.showPlayersList" )
+		local f47_local15 = Engine.GetModel( Engine.GetGlobalModel(), "socialRoot.showPlayersList" )
 		f47_local10( f47_local11, f47_local12, f47_local13, "socialUpdateSubscription" )
 	end,
 	getCount = function ( f50_arg0 )
@@ -1878,13 +1877,13 @@ DataSources.SocialPlayerPartyList = {
 	prepare = function ( f53_arg0, f53_arg1, f53_arg2 )
 		f53_arg1.numElementsInList = f53_arg1.vCount
 		f53_arg1.controller = f53_arg0
-		local f53_local0 = Engine[@"getglobalmodel"]()
+		local f53_local0 = Engine.GetGlobalModel()
 		f53_local0 = f53_local0.socialRoot
 		local f53_local1 = f53_local0:create( "cache" )
 		f53_arg1.xuidModel = f53_local1:create( "xuid" )
 		local f53_local2 = f53_local0.party
 		f53_arg1.partyUpdate = f53_local2:create( "update" )
-		local f53_local3 = Engine[@"stringtoxuiddecimal"]( "0" )
+		local f53_local3 = Engine.StringToXUIDDecimal( "0" )
 		local f53_local4 = f53_local2:create( "available" )
 		local f53_local5 = f53_local2:create( "total" )
 		local f53_local6 = f53_local2:create( "leader" )
@@ -1896,7 +1895,7 @@ DataSources.SocialPlayerPartyList = {
 		f53_arg1.leader = f53_local6:get()
 		f53_arg1.partyMembers = {}
 		for f53_local8 = 1, 18, 1 do
-			f53_arg1.partyMembers[f53_local8] = Engine[@"getmodel"]( f53_local2, "pm_" .. f53_local8 )
+			f53_arg1.partyMembers[f53_local8] = Engine.GetModel( f53_local2, "pm_" .. f53_local8 )
 		end
 		if f53_arg1.selectedPlayerSubscription then
 			f53_arg1:removeSubscription( f53_arg1.selectedPlayerSubscription )
@@ -1906,7 +1905,7 @@ DataSources.SocialPlayerPartyList = {
 		end, false )
 	end,
 	getCount = function ( f55_arg0 )
-		return CoD.SafeGetModelValue( Engine[@"getglobalmodel"](), "socialRoot.party.available" ) or 0
+		return CoD.SafeGetModelValue( Engine.GetGlobalModel(), "socialRoot.party.available" ) or 0
 	end,
 	getItem = function ( f56_arg0, f56_arg1, f56_arg2 )
 		return f56_arg1.partyMembers[f56_arg2]
@@ -1914,7 +1913,7 @@ DataSources.SocialPlayerPartyList = {
 }
 local f0_local0 = function ( f57_arg0, f57_arg1, f57_arg2, f57_arg3, f57_arg4, f57_arg5 )
 	local f57_local0 = CoD.OptionsUtility.GetProfileSelection( f57_arg2, f57_arg1.options, f57_arg3 )
-	local f57_local1, f57_local2 = f57_arg0.Slider:getRowAndColumnForIndex( Engine[@"getmodelvalue"]( f57_arg0:getModel( f57_arg2, "currentSelection" ) ) - 1 )
+	local f57_local1, f57_local2 = f57_arg0.Slider:getRowAndColumnForIndex( Engine.GetModelValue( f57_arg0:getModel( f57_arg2, "currentSelection" ) ) - 1 )
 	f57_arg0.Slider:setActiveIndex( f57_local1, f57_local2, 0 )
 end
 local f0_local1 = function ( f58_arg0 )
@@ -1922,11 +1921,11 @@ local f0_local1 = function ( f58_arg0 )
 	return {
 		models = {
 			name = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_18713D707716544B" ),
-			desc = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_39A27D679EC11266" ),
+			desc = Engine[@"hash_4F9F1239CFD921FE"]( "menu/voice_chat_channel_desc" ),
 			optionsDatasource = CoD.OptionsUtility.CreateCustomOptionDataSource( f58_arg0, "PartyOptions_VoiceChatChannel", CoD.SocialUtility.VoiceChatChannelOptions, f58_local0, function ( f59_arg0 )
-				Engine[@"setprofilevar"]( f58_arg0, "voice_favored_channel", f59_arg0 )
+				Engine.SetProfileVar( f58_arg0, "voice_favored_channel", f59_arg0 )
 				if CoD.isPC then
-					CoD.PCOptionsUtility.SyncOptionModel( f58_arg0, @"voice_favored_channel" )
+					CoD.PCOptionsUtility.SyncOptionModel( f58_arg0, "voice_favored_channel" )
 				end
 			end
 			, nil, f0_local0 ),
@@ -1943,7 +1942,7 @@ DataSources.PartyControlsList = DataSourceHelpers.ListSetup( "PartyControlsList"
 	if not f60_arg1._partySizeSubscription then
 		local f60_local0 = f60_arg1
 		local f60_local1 = f60_arg1.subscribeToModel
-		local f60_local2 = Engine[@"getglobalmodel"]()
+		local f60_local2 = Engine.GetGlobalModel()
 		f60_arg1._partySizeSubscription = f60_local1( f60_local0, f60_local2.lobbyRoot.privateClient.count, function ()
 			f60_arg1:clearLayout()
 			f60_arg1:updateDataSource()
@@ -1953,15 +1952,15 @@ DataSources.PartyControlsList = DataSourceHelpers.ListSetup( "PartyControlsList"
 		local f62_local0 = "party_privacyStatus"
 		return {
 			models = {
-				name = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_7C66ADDE88E8D222" ),
-				desc = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_21E6C0A18FB50FF2" ),
+				name = Engine[@"hash_4F9F1239CFD921FE"]( "menu/party_privacy" ),
+				desc = Engine[@"hash_4F9F1239CFD921FE"]( "menu/party_privacy_desc" ),
 				optionsDatasource = CoD.OptionsUtility.CreateCustomOptionDataSource( f62_arg0, "PartyOptions_PartyPrivacy", CoD.SocialUtility.PartyPrivacyOptions, f62_local0, function ( f63_arg0 )
 					if Engine[@"setsessionpartyprivacy"] then
-						Engine[@"setsessionpartyprivacy"]( Enum[@"lobbytype"][@"lobby_type_private"], f63_arg0 )
+						Engine[@"setsessionpartyprivacy"]( Enum.LobbyType[@"lobby_type_private"], f63_arg0 )
 					end
-					local f63_local0 = Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "PartyPrivacy" )
-					Engine[@"setmodelvalue"]( Engine[@"getmodel"]( f63_local0, "privacy" ), f63_arg0 )
-					Engine[@"setmodelvalue"]( Engine[@"createmodel"]( f63_local0, "privacyStatus" ), PartyPrivacy( f63_arg0 ) )
+					local f63_local0 = Engine.GetModel( Engine.GetGlobalModel(), "PartyPrivacy" )
+					Engine.SetModelValue( Engine.GetModel( f63_local0, "privacy" ), f63_arg0 )
+					Engine.SetModelValue( Engine.CreateModel( f63_local0, "privacyStatus" ), PartyPrivacy( f63_arg0 ) )
 				end
 				, nil, f0_local0 ),
 				currentSelection = CoD.OptionsUtility.GetProfileSelection( f62_arg0, CoD.SocialUtility.PartyPrivacyOptions, f62_local0 ),
@@ -1976,8 +1975,8 @@ DataSources.PartyControlsList = DataSourceHelpers.ListSetup( "PartyControlsList"
 	
 	local f60_local0 = function ( f64_arg0 )
 		local f64_local0 = LobbyData.GetLobbyMenuByID( Engine[@"getlobbyuiscreen"]() )
-		local f64_local1 = f64_local0[@"maxclients"]
-		local f64_local2 = Engine[@"getlobbyclientcount"]( Enum[@"lobbymodule"][@"lobby_module_host"], Enum[@"lobbytype"][@"lobby_type_private"], Enum[@"lobbyclientfiltertype"][@"lobby_client_filter_type_all"] )
+		local f64_local1 = f64_local0.maxclients
+		local f64_local2 = Engine[@"getlobbyclientcount"]( Enum.LobbyModule[@"lobby_module_host"], Enum.LobbyType[@"lobby_type_private"], Enum[@"lobbyclientfiltertype"][@"lobby_client_filter_type_all"] )
 		local f64_local3 = {}
 		for f64_local4 = f64_local2, f64_local1, 1 do
 			table.insert( f64_local3, {
@@ -1988,13 +1987,13 @@ DataSources.PartyControlsList = DataSourceHelpers.ListSetup( "PartyControlsList"
 		local f64_local4 = function ( f65_arg0, f65_arg1, f65_arg2, f65_arg3, f65_arg4 )
 			local f65_local0 = Engine[@"getdvarint"]( f65_arg3 )
 			local f65_local1 = f65_arg1.value
-			if Engine[@"islobbyhost"]( Enum[@"lobbytype"][@"lobby_type_private"] ) then
-				local f65_local2 = Engine[@"getlobbyclientcount"]( Enum[@"lobbymodule"][@"lobby_module_host"], Enum[@"lobbytype"][@"lobby_type_private"], Enum[@"lobbyclientfiltertype"][@"lobby_client_filter_type_all"] )
+			if Engine[@"islobbyhost"]( Enum.LobbyType[@"lobby_type_private"] ) then
+				local f65_local2 = Engine[@"getlobbyclientcount"]( Enum.LobbyModule[@"lobby_module_host"], Enum.LobbyType[@"lobby_type_private"], Enum[@"lobbyclientfiltertype"][@"lobby_client_filter_type_all"] )
 				if f65_local1 < f65_local2 then
 					return f65_local2
 				end
 				Dvar[@"hash_4FF45B41C6046F8"]:set( f65_local1 )
-				Engine[@"setmodelvalue"]( Engine[@"getmodel"]( Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "PartyPrivacy" ), "maxPlayers" ), f65_local1 )
+				Engine.SetModelValue( Engine.GetModel( Engine.GetModel( Engine.GetGlobalModel(), "PartyPrivacy" ), "maxPlayers" ), f65_local1 )
 			end
 		end
 		
@@ -2004,7 +2003,7 @@ DataSources.PartyControlsList = DataSourceHelpers.ListSetup( "PartyControlsList"
 		return {
 			models = {
 				name = Engine[@"hash_4F9F1239CFD921FE"]( @"menu/player_limit" ),
-				desc = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_6A7923E2180D5E4E" ),
+				desc = Engine[@"hash_4F9F1239CFD921FE"]( "menu/player_limit_desc" ),
 				optionsDatasource = CoD.OptionsUtility.CreateDvarSettingsDataSourceCustom( f64_arg0, "PartyOptions_PartyMaxSize", f64_local3, "lobbyPrivateLobbyMax", false, f64_local4 ),
 				buttonOnly = false
 			},
@@ -2019,7 +2018,7 @@ DataSources.PartyControlsList = DataSourceHelpers.ListSetup( "PartyControlsList"
 		return {
 			models = {
 				name = Engine[@"hash_4F9F1239CFD921FE"]( f66_arg1 ),
-				desc = @"hash_0",
+				desc = 0x0,
 				image = f66_arg2,
 				buttonOnly = true,
 				selected = false,
@@ -2041,7 +2040,7 @@ DataSources.PartyControlsList = DataSourceHelpers.ListSetup( "PartyControlsList"
 		table.insert( f60_local3, f0_local1( f60_arg0 ) )
 	end
 	if (CoD.isPC or not CoD.DirectorUtility.DisableForCurrentMilestone( f60_arg0 )) and ShouldShowLeaveParty( f60_arg0 ) then
-		table.insert( f60_local3, f60_local2( f60_arg0, @"hash_BC2011402700EA4", "uie_t7_menu_social_leave_party", @"menu/leave", function ( f67_arg0, f67_arg1, f67_arg2, f67_arg3, f67_arg4 )
+		table.insert( f60_local3, f60_local2( f60_arg0, "menu/manage_party_leave_button", "uie_t7_menu_social_leave_party", @"menu/leave", function ( f67_arg0, f67_arg1, f67_arg2, f67_arg3, f67_arg4 )
 			if not CoD.isPC then
 				CoD.OverlayUtility.CreateOverlay( f67_arg2, f67_arg4, "LobbyLeavePopup", LuaEnum.LEAVE_LOBBY_POPUP.MANAGE_PARTY_LEAVE )
 			else
@@ -2055,7 +2054,7 @@ DataSources.PartyVoiceChatControl = DataSourceHelpers.ListSetup( "PartyVoiceChat
 	if not f68_arg1._partySizeSubscription then
 		local f68_local0 = f68_arg1
 		local f68_local1 = f68_arg1.subscribeToModel
-		local f68_local2 = Engine[@"getglobalmodel"]()
+		local f68_local2 = Engine.GetGlobalModel()
 		f68_arg1._partySizeSubscription = f68_local1( f68_local0, f68_local2.lobbyRoot.privateClient.count, function ()
 			f68_arg1:clearLayout()
 			f68_arg1:updateDataSource()
@@ -2080,7 +2079,7 @@ CoD.SocialUtility.CleanGamerTag = function ( f70_arg0 )
 end
 CoD.SocialUtility.GetCurrentPlayerLimitString = function ( f71_arg0 )
 	local f71_local0 = LobbyData.GetLobbyMenuByID( Engine[@"getlobbyuiscreen"]() )
-	local f71_local1 = f71_local0[@"maxclients"]
+	local f71_local1 = f71_local0.maxclients
 	return Engine[@"hash_4F9F1239CFD921FE"]( f71_arg0, tostring( Dvar[@"hash_4FF45B41C6046F8"]:get() ) )
 end
 CoD.SocialUtility.GetCurrentPartySettingString = function ( f72_arg0, f72_arg1, f72_arg2 )
@@ -2106,7 +2105,7 @@ CoD.SocialUtility.UpdateIdentityClanTag = function ( f74_arg0 )
 	if DataSources.PerController then
 		local f74_local0 = LUI.getTableFromPath( "identityBadge.clantag", DataSources.PerController.getModel( f74_arg0 ) )
 		if f74_local0 then
-			f74_local0:set( Engine[@"getclanname"]( f74_arg0 ) )
+			f74_local0:set( Engine.GetClanName( f74_arg0 ) )
 		end
 	end
 end
@@ -2141,8 +2140,8 @@ CoD.SocialUtility.IsUserMissingRequiredDLCForSelectedPlaylist = function ( f77_a
 		if f77_local1 and f77_local2 then
 			local f77_local3
 			if f77_local1.requiredDLCMask & f77_local2 ~= f77_local1.requiredDLCMask then
-				if f77_local1.mainMode == Enum[@"lobbymainmode"][@"lobby_mainmode_mp"] then
-					f77_local3 = not Engine[@"ownseasonpass"]( f77_arg0 )
+				if f77_local1.mainMode == Enum.LobbyMainMode[@"lobby_mainmode_mp"] then
+					f77_local3 = not Engine.OwnSeasonPass( f77_arg0 )
 				else
 					f77_local3 = true
 				end
@@ -2172,8 +2171,8 @@ CoD.SocialUtility.IsSelfMissingRequiredDLCForSelectedPlaylist = function ( f78_a
 		local f78_local3 = f78_local2
 		local f78_local4
 		if f78_local2.requiredDLCMask & f78_local1 ~= f78_local2.requiredDLCMask then
-			if f78_local2.mainMode == Enum[@"lobbymainmode"][@"lobby_mainmode_mp"] then
-				f78_local4 = not Engine[@"ownseasonpass"]( f78_arg0 )
+			if f78_local2.mainMode == Enum.LobbyMainMode[@"lobby_mainmode_mp"] then
+				f78_local4 = not Engine.OwnSeasonPass( f78_arg0 )
 			else
 				f78_local4 = f78_local3 and true
 			end
@@ -2194,8 +2193,8 @@ CoD.SocialUtility.IsSelfMissingRequiredDLCForElementPlaylist = function ( f79_ar
 		local f79_local4 = f79_local3
 		local f79_local5
 		if f79_local3.requiredDLCMask & f79_local2 ~= f79_local3.requiredDLCMask then
-			if f79_local3.mainMode == Enum[@"lobbymainmode"][@"lobby_mainmode_mp"] then
-				f79_local5 = not Engine[@"ownseasonpass"]( f79_arg0 )
+			if f79_local3.mainMode == Enum.LobbyMainMode[@"lobby_mainmode_mp"] then
+				f79_local5 = not Engine.OwnSeasonPass( f79_arg0 )
 			else
 				f79_local5 = f79_local4 and true
 			end
@@ -2238,8 +2237,8 @@ CoD.SocialUtility.IsUserMissingUsedDLCForSelectedPlaylist = function ( f82_arg0,
 		if f82_local1 and f82_local2 then
 			local f82_local3
 			if f82_local1.usedDLCMask & f82_local2 ~= f82_local1.usedDLCMask then
-				if f82_local1.mainMode == Enum[@"lobbymainmode"][@"lobby_mainmode_mp"] then
-					f82_local3 = not Engine[@"ownseasonpass"]( f82_arg0 )
+				if f82_local1.mainMode == Enum.LobbyMainMode[@"lobby_mainmode_mp"] then
+					f82_local3 = not Engine.OwnSeasonPass( f82_arg0 )
 				else
 					f82_local3 = true
 				end
@@ -2251,7 +2250,7 @@ CoD.SocialUtility.IsUserMissingUsedDLCForSelectedPlaylist = function ( f82_arg0,
 		local f82_local3 = CoD.SafeGetModelValue( f82_arg1 and f82_arg1:getModel(), "blackopsPass" )
 		if f82_local3 ~= nil then
 			local f82_local4
-			if f82_local1.usedDLCMask ~= Enum[@"contentflagbits"][@"content_originalmaps"] then
+			if f82_local1.usedDLCMask ~= Enum.ContentFlagBits[@"content_originalmaps"] then
 				f82_local4 = not f82_local3
 			else
 				f82_local4 = false
@@ -2269,8 +2268,8 @@ CoD.SocialUtility.IsSelfMissingUsedDLCForSelectedPlaylist = function ( f83_arg0,
 		local f83_local3 = f83_local2
 		local f83_local4
 		if f83_local2.usedDLCMask & f83_local1 ~= f83_local2.usedDLCMask then
-			if f83_local2.mainMode == Enum[@"lobbymainmode"][@"lobby_mainmode_mp"] then
-				f83_local4 = not Engine[@"ownseasonpass"]( f83_arg0 )
+			if f83_local2.mainMode == Enum.LobbyMainMode[@"lobby_mainmode_mp"] then
+				f83_local4 = not Engine.OwnSeasonPass( f83_arg0 )
 			else
 				f83_local4 = f83_local3 and true
 			end
@@ -2291,8 +2290,8 @@ CoD.SocialUtility.IsSelfMissingUsedDLCForElementPlaylist = function ( f84_arg0, 
 		local f84_local4 = f84_local3
 		local f84_local5
 		if f84_local3.usedDLCMask & f84_local2 ~= f84_local3.usedDLCMask then
-			if f84_local3.mainMode == Enum[@"lobbymainmode"][@"lobby_mainmode_mp"] then
-				f84_local5 = not Engine[@"ownseasonpass"]( f84_arg0 )
+			if f84_local3.mainMode == Enum.LobbyMainMode[@"lobby_mainmode_mp"] then
+				f84_local5 = not Engine.OwnSeasonPass( f84_arg0 )
 			else
 				f84_local5 = f84_local4 and true
 			end
@@ -2306,7 +2305,7 @@ CoD.SocialUtility.IsSelfMissingUsedDLCForElementPlaylist = function ( f84_arg0, 
 end
 CoD.SocialUtility.IsMissingDLCForPlaylist = function ( f85_arg0, f85_arg1 )
 	local f85_local0 = Engine[@"getplaylistinfobyid"]( f85_arg0 )
-	if f85_local0 and (f85_arg1 or CoDShared.GetLobbyDLCBits( Engine[@"getlobbymainmode"](), Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_private"] )) & f85_local0.usedDLCMask ~= f85_local0.usedDLCMask then
+	if f85_local0 and (f85_arg1 or CoDShared.GetLobbyDLCBits( Engine[@"getlobbymainmode"](), Enum.LobbyModule[@"lobby_module_client"], Enum.LobbyType[@"lobby_type_private"] )) & f85_local0.usedDLCMask ~= f85_local0.usedDLCMask then
 		return true
 	else
 		return false
@@ -2321,7 +2320,7 @@ CoD.SocialUtility.IsPartyMissingDLCFriendUsing = function ( f86_arg0, f86_arg1 )
 		local f86_local2 = CoD.SafeGetModelValue( f86_arg1 and f86_arg1:getModel(), "mapId" )
 		local f86_local3 = f86_local2 and CoD.BaseUtility.GetMapDataFromMapID( f86_local2 )
 		local f86_local4 = f86_local3 and f86_local3.session_mode
-		if f86_local4 and f86_local4 == Enum[@"emodes"][@"mode_multiplayer"] and Engine[@"ownseasonpass"]( f86_arg0 ) then
+		if f86_local4 and f86_local4 == Enum.eModes.mode_multiplayer and Engine.OwnSeasonPass( f86_arg0 ) then
 			return false
 		else
 			return not CoD.MapUtility.LobbyHasMap( f86_local2, f86_local0 )
@@ -2333,14 +2332,14 @@ CoD.SocialUtility.IsPartyMissingDLCFriendRequires = function ( f87_arg0, f87_arg
 	local f87_local1 = CoD.SafeGetModelValue( f87_arg1 and f87_arg1:getModel(), "playlist" )
 	if f87_local1 then
 		local f87_local2 = Engine[@"getplaylistinfobyid"]( f87_local1 )
-		if f87_local2 and (f87_local0 or CoDShared.GetLobbyDLCBits( Engine[@"getlobbymainmode"](), Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_private"] )) & f87_local2.requiredDLCMask ~= f87_local2.requiredDLCMask then
+		if f87_local2 and (f87_local0 or CoDShared.GetLobbyDLCBits( Engine[@"getlobbymainmode"](), Enum.LobbyModule[@"lobby_module_client"], Enum.LobbyType[@"lobby_type_private"] )) & f87_local2.requiredDLCMask ~= f87_local2.requiredDLCMask then
 			return true
 		end
 	end
 	local f87_local2 = CoD.SafeGetModelValue( f87_arg1 and f87_arg1:getModel(), "mapId" )
 	local f87_local3 = f87_local2 and CoD.BaseUtility.GetMapDataFromMapID( f87_local2 )
 	local f87_local4 = f87_local3 and f87_local3.session_mode
-	if f87_local4 and f87_local4 == Enum[@"emodes"][@"mode_multiplayer"] and Engine[@"ownseasonpass"]( f87_arg0 ) then
+	if f87_local4 and f87_local4 == Enum.eModes.mode_multiplayer and Engine.OwnSeasonPass( f87_arg0 ) then
 		return false
 	end
 	return not CoD.MapUtility.LobbyHasMap( f87_local2, f87_local0 )
@@ -2365,33 +2364,33 @@ end
 CoD.SocialUtility.DirectorLobbyMemberIsTrial = function ( f90_arg0, f90_arg1 )
 	local f90_local0 = f90_arg0:getModel( f90_arg1, "trial" )
 	if f90_local0 then
-		return Engine[@"getmodelvalue"]( f90_local0 )
+		return Engine.GetModelValue( f90_local0 )
 	else
 		return false
 	end
 end
 CoD.SocialUtility.SocialPlayersListPreLoad = function ( f91_arg0, f91_arg1 )
-	f91_arg0.socialRootModel = Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "socialRoot" )
-	f91_arg0.cacheRootModel = Engine[@"createmodel"]( f91_arg0.socialRootModel, "cache" )
-	f91_arg0.cacheXuid = Engine[@"createmodel"]( f91_arg0.cacheRootModel, "xuid" )
-	f91_arg0.cacheGametype = Engine[@"createmodel"]( f91_arg0.cacheRootModel, "gametype" )
-	f91_arg0.cacheMapid = Engine[@"createmodel"]( f91_arg0.cacheRootModel, "mapId" )
-	f91_arg0.cacheModeparam = Engine[@"createmodel"]( f91_arg0.cacheRootModel, "modeparam" )
-	f91_arg0.cacheDifficulty = Engine[@"createmodel"]( f91_arg0.cacheRootModel, "difficulty" )
-	f91_arg0.cachePlaylist = Engine[@"createmodel"]( f91_arg0.cacheRootModel, "playlist" )
-	f91_arg0.cacheParty = Engine[@"createmodel"]( f91_arg0.socialRootModel, "party" )
-	f91_arg0.cachePartyUpdate = Engine[@"createmodel"]( f91_arg0.cacheParty, "update" )
-	f91_arg0.cachePartyTotal = Engine[@"createmodel"]( f91_arg0.cacheParty, "total" )
-	f91_arg0.cachePartyAvailable = Engine[@"createmodel"]( f91_arg0.cacheParty, "available" )
-	f91_arg0.cachePartyLeader = Engine[@"createmodel"]( f91_arg0.cacheParty, "leader" )
+	f91_arg0.socialRootModel = Engine.GetModel( Engine.GetGlobalModel(), "socialRoot" )
+	f91_arg0.cacheRootModel = Engine.CreateModel( f91_arg0.socialRootModel, "cache" )
+	f91_arg0.cacheXuid = Engine.CreateModel( f91_arg0.cacheRootModel, "xuid" )
+	f91_arg0.cacheGametype = Engine.CreateModel( f91_arg0.cacheRootModel, "gametype" )
+	f91_arg0.cacheMapid = Engine.CreateModel( f91_arg0.cacheRootModel, "mapId" )
+	f91_arg0.cacheModeparam = Engine.CreateModel( f91_arg0.cacheRootModel, "modeparam" )
+	f91_arg0.cacheDifficulty = Engine.CreateModel( f91_arg0.cacheRootModel, "difficulty" )
+	f91_arg0.cachePlaylist = Engine.CreateModel( f91_arg0.cacheRootModel, "playlist" )
+	f91_arg0.cacheParty = Engine.CreateModel( f91_arg0.socialRootModel, "party" )
+	f91_arg0.cachePartyUpdate = Engine.CreateModel( f91_arg0.cacheParty, "update" )
+	f91_arg0.cachePartyTotal = Engine.CreateModel( f91_arg0.cacheParty, "total" )
+	f91_arg0.cachePartyAvailable = Engine.CreateModel( f91_arg0.cacheParty, "available" )
+	f91_arg0.cachePartyLeader = Engine.CreateModel( f91_arg0.cacheParty, "leader" )
 	f91_arg0.cachePartyGamertags = {}
 	for f91_local0 = 1, 18, 1 do
-		f91_arg0.cachePartyGamertags[f91_local0] = Engine[@"createmodel"]( Engine[@"createmodel"]( f91_arg0.cacheParty, "pm_" .. f91_local0 ), "gamertag" )
-		Engine[@"setmodelvalue"]( f91_arg0.cachePartyGamertags[f91_local0], "" )
+		f91_arg0.cachePartyGamertags[f91_local0] = Engine.CreateModel( Engine.CreateModel( f91_arg0.cacheParty, "pm_" .. f91_local0 ), "gamertag" )
+		Engine.SetModelValue( f91_arg0.cachePartyGamertags[f91_local0], "" )
 	end
-	Engine[@"setmodelvalue"]( f91_arg0.cacheXuid, Engine[@"stringtoxuiddecimal"]( "0" ) )
-	Engine[@"setmodelvalue"]( f91_arg0.cachePartyUpdate, 0 )
-	Engine[@"setmodelvalue"]( f91_arg0.cachePartyTotal, 0 )
-	Engine[@"setmodelvalue"]( f91_arg0.cachePartyAvailable, 0 )
-	Engine[@"setmodelvalue"]( f91_arg0.cachePartyLeader, "" )
+	Engine.SetModelValue( f91_arg0.cacheXuid, Engine.StringToXUIDDecimal( "0" ) )
+	Engine.SetModelValue( f91_arg0.cachePartyUpdate, 0 )
+	Engine.SetModelValue( f91_arg0.cachePartyTotal, 0 )
+	Engine.SetModelValue( f91_arg0.cachePartyAvailable, 0 )
+	Engine.SetModelValue( f91_arg0.cachePartyLeader, "" )
 end

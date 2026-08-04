@@ -1,6 +1,6 @@
-require("x64:780c1e32038fe94")
-require("x64:4397d3e9a579e9c")
-require("x64:5a80a5001fdb28e")
+require("ui/uieditor/widgets/callingcards/loot3/ui_icon_callingcards_dystopian_armmove")
+require("ui/uieditor/widgets/callingcards/loot3/ui_icon_callingcards_dystopian_bodyglow")
+require("ui/uieditor/widgets/callingcards/loot3/ui_icon_callingcards_dystopian_headglow")
 CoD.ui_icon_callingcards_dystopian_character = InheritFrom(LUI.UIElement)
 CoD.ui_icon_callingcards_dystopian_character.__defaultWidth = 272
 CoD.ui_icon_callingcards_dystopian_character.__defaultHeight = 261

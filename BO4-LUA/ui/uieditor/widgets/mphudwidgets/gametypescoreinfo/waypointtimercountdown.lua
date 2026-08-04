@@ -1,0 +1,238 @@
+CoD.WaypointTimerCountdown = InheritFrom(LUI.UIElement)
+CoD.WaypointTimerCountdown.__defaultWidth = 22
+CoD.WaypointTimerCountdown.__defaultHeight = 22
+CoD.WaypointTimerCountdown.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+	self:setClass(CoD.WaypointTimerCountdown)
+	self.id = "WaypointTimerCountdown"
+	self.soundSet = "default"
+	f1_arg0:addElementToPendingUpdateStateList(self)
+	local CountdownNum5 = LUI.UIText.new(0, 1, 0, 0, 0, 1, 0, 0)
+	CountdownNum5:setAlpha(0)
+	CountdownNum5:setText(5)
+	CountdownNum5:setTTF("ttmussels_demibold")
+	CountdownNum5:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	CountdownNum5:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
+	self:addElement(CountdownNum5)
+	self.CountdownNum5 = CountdownNum5
+	local CountdownNum4 = LUI.UIText.new(0, 1, 0, 0, 0, 1, 0, 0)
+	CountdownNum4:setAlpha(0)
+	CountdownNum4:setText(4)
+	CountdownNum4:setTTF("ttmussels_demibold")
+	CountdownNum4:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	CountdownNum4:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
+	self:addElement(CountdownNum4)
+	self.CountdownNum4 = CountdownNum4
+	local CountdownNum3 = LUI.UIText.new(0, 1, 0, 0, 0, 1, 0, 0)
+	CountdownNum3:setAlpha(0)
+	CountdownNum3:setText(3)
+	CountdownNum3:setTTF("ttmussels_demibold")
+	CountdownNum3:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	CountdownNum3:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
+	self:addElement(CountdownNum3)
+	self.CountdownNum3 = CountdownNum3
+	local CountdownNum2 = LUI.UIText.new(0, 1, 0, 0, 0, 1, 0, 0)
+	CountdownNum2:setAlpha(0)
+	CountdownNum2:setText(2)
+	CountdownNum2:setTTF("ttmussels_demibold")
+	CountdownNum2:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	CountdownNum2:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
+	self:addElement(CountdownNum2)
+	self.CountdownNum2 = CountdownNum2
+	local CountdownNum1 = LUI.UIText.new(0, 1, 0, 0, 0, 1, 0, 0)
+	CountdownNum1:setAlpha(0)
+	CountdownNum1:setText(1)
+	CountdownNum1:setTTF("ttmussels_demibold")
+	CountdownNum1:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	CountdownNum1:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
+	self:addElement(CountdownNum1)
+	self.CountdownNum1 = CountdownNum1
+	self:mergeStateConditions({
+		{
+			stateName = "LastFive",
+			condition = function(menu, element, event)
+				return CoD.ModelUtility.IsSelfModelValueTrue(element, f1_arg1, "lastSecondsStarted")
+			end,
+		},
+	})
+	self:linkToElementModel(self, "lastSecondsStarted", true, function(model)
+		f1_arg0:updateElementState(self, {
+			name = "model_validation",
+			menu = f1_arg0,
+			controller = f1_arg1,
+			modelValue = model:get(),
+			modelName = "lastSecondsStarted",
+		})
+	end)
+	if PostLoadFunc then
+		PostLoadFunc(self, f1_arg1, f1_arg0)
+	end
+	return self
+end
+CoD.WaypointTimerCountdown.__resetProperties = function(f4_arg0)
+	f4_arg0.CountdownNum5:completeAnimation()
+	f4_arg0.CountdownNum4:completeAnimation()
+	f4_arg0.CountdownNum3:completeAnimation()
+	f4_arg0.CountdownNum2:completeAnimation()
+	f4_arg0.CountdownNum1:completeAnimation()
+	f4_arg0.CountdownNum5:setLeftRight(0, 1, 0, 0)
+	f4_arg0.CountdownNum5:setTopBottom(0, 1, 0, 0)
+	f4_arg0.CountdownNum5:setAlpha(0)
+	f4_arg0.CountdownNum5:setScale(1, 1)
+	f4_arg0.CountdownNum4:setLeftRight(0, 1, 0, 0)
+	f4_arg0.CountdownNum4:setTopBottom(0, 1, 0, 0)
+	f4_arg0.CountdownNum4:setAlpha(0)
+	f4_arg0.CountdownNum4:setScale(1, 1)
+	f4_arg0.CountdownNum3:setLeftRight(0, 1, 0, 0)
+	f4_arg0.CountdownNum3:setTopBottom(0, 1, 0, 0)
+	f4_arg0.CountdownNum3:setAlpha(0)
+	f4_arg0.CountdownNum3:setScale(1, 1)
+	f4_arg0.CountdownNum2:setLeftRight(0, 1, 0, 0)
+	f4_arg0.CountdownNum2:setTopBottom(0, 1, 0, 0)
+	f4_arg0.CountdownNum2:setAlpha(0)
+	f4_arg0.CountdownNum2:setScale(1, 1)
+	f4_arg0.CountdownNum1:setLeftRight(0, 1, 0, 0)
+	f4_arg0.CountdownNum1:setTopBottom(0, 1, 0, 0)
+	f4_arg0.CountdownNum1:setAlpha(0)
+	f4_arg0.CountdownNum1:setScale(1, 1)
+end
+CoD.WaypointTimerCountdown.__clipsPerState = {
+	DefaultState = {
+		DefaultClip = function(f5_arg0, f5_arg1)
+			f5_arg0:__resetProperties()
+			f5_arg0:setupElementClipCounter(5)
+			f5_arg0.CountdownNum5:completeAnimation()
+			f5_arg0.CountdownNum5:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.CountdownNum5)
+			f5_arg0.CountdownNum4:completeAnimation()
+			f5_arg0.CountdownNum4:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.CountdownNum4)
+			f5_arg0.CountdownNum3:completeAnimation()
+			f5_arg0.CountdownNum3:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.CountdownNum3)
+			f5_arg0.CountdownNum2:completeAnimation()
+			f5_arg0.CountdownNum2:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.CountdownNum2)
+			f5_arg0.CountdownNum1:completeAnimation()
+			f5_arg0.CountdownNum1:setAlpha(0)
+			f5_arg0.clipFinished(f5_arg0.CountdownNum1)
+		end,
+	},
+	LastFive = {
+		DefaultClip = function(f6_arg0, f6_arg1)
+			f6_arg0:__resetProperties()
+			f6_arg0:setupElementClipCounter(5)
+			local f6_local0 = function(f7_arg0)
+				f6_arg0.CountdownNum5:beginAnimation(1200)
+				f6_arg0.CountdownNum5:setLeftRight(0, 1, 41, 41)
+				f6_arg0.CountdownNum5:setTopBottom(0, 1, -21, -21)
+				f6_arg0.CountdownNum5:setAlpha(0)
+				f6_arg0.CountdownNum5:setScale(2, 2)
+				f6_arg0.CountdownNum5:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
+				f6_arg0.CountdownNum5:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
+			end
+			f6_arg0.CountdownNum5:completeAnimation()
+			f6_arg0.CountdownNum5:setLeftRight(0, 1, 0, 0)
+			f6_arg0.CountdownNum5:setTopBottom(0, 1, 0, 0)
+			f6_arg0.CountdownNum5:setAlpha(1)
+			f6_arg0.CountdownNum5:setScale(1, 1)
+			f6_local0(f6_arg0.CountdownNum5)
+			local f6_local1 = function(f8_arg0)
+				local f8_local0 = function(f9_arg0)
+					local f9_local0 = function(f10_arg0)
+						f10_arg0:beginAnimation(1200)
+						f10_arg0:setLeftRight(0, 1, 41, 41)
+						f10_arg0:setTopBottom(0, 1, -21, -21)
+						f10_arg0:setAlpha(0)
+						f10_arg0:setScale(2, 2)
+						f10_arg0:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
+					end
+					f9_arg0:beginAnimation(9)
+					f9_arg0:setAlpha(1)
+					f9_arg0:registerEventHandler("transition_complete_keyframe", f9_local0)
+				end
+				f6_arg0.CountdownNum4:beginAnimation(990)
+				f6_arg0.CountdownNum4:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
+				f6_arg0.CountdownNum4:registerEventHandler("transition_complete_keyframe", f8_local0)
+			end
+			f6_arg0.CountdownNum4:completeAnimation()
+			f6_arg0.CountdownNum4:setLeftRight(0, 1, 0, 0)
+			f6_arg0.CountdownNum4:setTopBottom(0, 1, 0, 0)
+			f6_arg0.CountdownNum4:setAlpha(0)
+			f6_arg0.CountdownNum4:setScale(1, 1)
+			f6_local1(f6_arg0.CountdownNum4)
+			local f6_local2 = function(f11_arg0)
+				local f11_local0 = function(f12_arg0)
+					local f12_local0 = function(f13_arg0)
+						f13_arg0:beginAnimation(1200)
+						f13_arg0:setLeftRight(0, 1, 41, 41)
+						f13_arg0:setTopBottom(0, 1, -21, -21)
+						f13_arg0:setAlpha(0)
+						f13_arg0:setScale(2, 2)
+						f13_arg0:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
+					end
+					f12_arg0:beginAnimation(9)
+					f12_arg0:setAlpha(1)
+					f12_arg0:registerEventHandler("transition_complete_keyframe", f12_local0)
+				end
+				f6_arg0.CountdownNum3:beginAnimation(1990)
+				f6_arg0.CountdownNum3:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
+				f6_arg0.CountdownNum3:registerEventHandler("transition_complete_keyframe", f11_local0)
+			end
+			f6_arg0.CountdownNum3:completeAnimation()
+			f6_arg0.CountdownNum3:setLeftRight(0, 1, 0, 0)
+			f6_arg0.CountdownNum3:setTopBottom(0, 1, 0, 0)
+			f6_arg0.CountdownNum3:setAlpha(0)
+			f6_arg0.CountdownNum3:setScale(1, 1)
+			f6_local2(f6_arg0.CountdownNum3)
+			local f6_local3 = function(f14_arg0)
+				local f14_local0 = function(f15_arg0)
+					local f15_local0 = function(f16_arg0)
+						f16_arg0:beginAnimation(1199)
+						f16_arg0:setLeftRight(0, 1, 41, 41)
+						f16_arg0:setTopBottom(0, 1, -21, -21)
+						f16_arg0:setAlpha(0)
+						f16_arg0:setScale(2, 2)
+						f16_arg0:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
+					end
+					f15_arg0:beginAnimation(9)
+					f15_arg0:setAlpha(1)
+					f15_arg0:registerEventHandler("transition_complete_keyframe", f15_local0)
+				end
+				f6_arg0.CountdownNum2:beginAnimation(2990)
+				f6_arg0.CountdownNum2:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
+				f6_arg0.CountdownNum2:registerEventHandler("transition_complete_keyframe", f14_local0)
+			end
+			f6_arg0.CountdownNum2:completeAnimation()
+			f6_arg0.CountdownNum2:setLeftRight(0, 1, 0, 0)
+			f6_arg0.CountdownNum2:setTopBottom(0, 1, 0, 0)
+			f6_arg0.CountdownNum2:setAlpha(0)
+			f6_arg0.CountdownNum2:setScale(1, 1)
+			f6_local3(f6_arg0.CountdownNum2)
+			local f6_local4 = function(f17_arg0)
+				local f17_local0 = function(f18_arg0)
+					local f18_local0 = function(f19_arg0)
+						f19_arg0:beginAnimation(1199)
+						f19_arg0:setLeftRight(0, 1, 41, 41)
+						f19_arg0:setTopBottom(0, 1, -21, -21)
+						f19_arg0:setAlpha(0)
+						f19_arg0:setScale(2, 2)
+						f19_arg0:registerEventHandler("transition_complete_keyframe", f6_arg0.clipFinished)
+					end
+					f18_arg0:beginAnimation(9)
+					f18_arg0:setAlpha(1)
+					f18_arg0:registerEventHandler("transition_complete_keyframe", f18_local0)
+				end
+				f6_arg0.CountdownNum1:beginAnimation(3990)
+				f6_arg0.CountdownNum1:registerEventHandler("interrupted_keyframe", f6_arg0.clipInterrupted)
+				f6_arg0.CountdownNum1:registerEventHandler("transition_complete_keyframe", f17_local0)
+			end
+			f6_arg0.CountdownNum1:completeAnimation()
+			f6_arg0.CountdownNum1:setLeftRight(0, 1, 0, 0)
+			f6_arg0.CountdownNum1:setTopBottom(0, 1, 0, 0)
+			f6_arg0.CountdownNum1:setAlpha(0)
+			f6_arg0.CountdownNum1:setScale(1, 1)
+			f6_local4(f6_arg0.CountdownNum1)
+		end,
+	},
+}

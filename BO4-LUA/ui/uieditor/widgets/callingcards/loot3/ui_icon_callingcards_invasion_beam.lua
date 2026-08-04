@@ -9,8 +9,8 @@ CoD.ui_icon_callingcards_invasion_beam.new = function(f1_arg0, f1_arg1, f1_arg2,
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local beam = LUI.UIImage.new(0, 0, 0, 80, 0, 0, 0, 144)
 	beam:setZRot(-6)
-	beam:setImage(RegisterImage(@"uie_ui_menu_callingcards_invasion_beam"))
-	beam:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	beam:setImage(RegisterImage("uie_ui_menu_callingcards_invasion_beam"))
+	beam:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(beam)
 	self.beam = beam
 	if PostLoadFunc then

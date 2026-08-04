@@ -1,4 +1,4 @@
-require("x64:acbf06924421e35")
+require("ui/uieditor/widgets/common/commoncornerpips01")
 CoD.TipWidgetBacking = InheritFrom(LUI.UIElement)
 CoD.TipWidgetBacking.__defaultWidth = 683
 CoD.TipWidgetBacking.__defaultHeight = 48
@@ -9,7 +9,7 @@ CoD.TipWidgetBacking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	self.soundSet = "default"
 	local BackingNoise = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	BackingNoise:setAlpha(0.9)
-	BackingNoise:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	BackingNoise:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	BackingNoise:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	BackingNoise:setShaderVector(0, 0, 0, 0, 0)
 	BackingNoise:setupNineSliceShader(196, 88)
@@ -23,8 +23,8 @@ CoD.TipWidgetBacking.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	Tip:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	Tip:setTTF("dinnext_regular")
 	Tip:setLetterSpacing(0.5)
-	Tip:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_left"]))
-	Tip:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum[@"luialignment"][@"lui_alignment_middle"]))
+	Tip:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum.LUIAlignment[@"lui_alignment_left"]))
+	Tip:setAlignment(Engine[@"hash_67F8853DC3581AA4"](Enum.LUIAlignment[@"lui_alignment_middle"]))
 	Tip:setBackingType(1)
 	Tip:setBackingColor(0, 0, 0)
 	Tip:setBackingXPadding(5)

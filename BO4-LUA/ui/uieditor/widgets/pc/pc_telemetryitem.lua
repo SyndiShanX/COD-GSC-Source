@@ -1,4 +1,4 @@
-require("x64:9cb1900193778bc")
+require("ui/uieditor/widgets/pc/hud/keypromptbacking")
 CoD.PC_TelemetryItem = InheritFrom(LUI.UIElement)
 CoD.PC_TelemetryItem.__defaultWidth = 93
 CoD.PC_TelemetryItem.__defaultHeight = 15
@@ -14,7 +14,7 @@ CoD.PC_TelemetryItem.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	Label:setRGB(ColorSet.T8__BUTTON_UNSELECTED_MAIN.r, ColorSet.T8__BUTTON_UNSELECTED_MAIN.g, ColorSet.T8__BUTTON_UNSELECTED_MAIN.b)
 	Label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	Label:setTTF("ttmussels_regular")
-	Label:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Label:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	LUI.OverrideFunction_CallOriginalFirst(Label, "setText", function(element, controller)
 		if not HasProperty(element, "initialWidthSet") then
 			SetElementProperty(element, "initialWidthSet", true)

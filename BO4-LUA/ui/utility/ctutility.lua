@@ -29,7 +29,7 @@ end
 DataSourceHelpers.PerControllerDataSourceSetup("SpecialistDossier", "SpecialistDossier", function(f6_arg0, f6_arg1)
 	local f6_local0 = DataSources.SpecialistHeadquarters.getModel(f6_arg1)
 	local f6_local1 = f6_local0.ChosenSpecialistID:get()
-	local f6_local2 = CoD.PlayerRoleUtility.GetCachedHeroInfo(Enum[@"emodes"][@"mode_multiplayer"], f6_local1)
+	local f6_local2 = CoD.PlayerRoleUtility.GetCachedHeroInfo(Enum.eModes.mode_multiplayer, f6_local1)
 	if not f6_local2 then
 		return
 	end
@@ -115,7 +115,7 @@ CoD.CTUtility.UpdateChosenSpecialistStars = function(f8_arg0, f8_arg1, f8_arg2, 
 			else
 				f8_arg0:create("recruitStars")
 				local f8_local2 = f8_arg0.recruitStars:create("starImage")
-				f8_local2:set(f8_local1 or @"blacktransparent")
+				f8_local2:set(f8_local1 or "blacktransparent")
 				f8_local2 = f8_arg0.recruitStars:create("header")
 				f8_local2:set(f8_local0[@"hash_4EE9D30C4FF6408B"] or 0x0)
 				if not f8_arg4 then
@@ -124,7 +124,7 @@ CoD.CTUtility.UpdateChosenSpecialistStars = function(f8_arg0, f8_arg1, f8_arg2, 
 					else
 						f8_arg0:create("regularStars")
 						local f8_local3 = f8_arg0.regularStars:create("starImage")
-						f8_local3:set(f8_local2 or @"blacktransparent")
+						f8_local3:set(f8_local2 or "blacktransparent")
 						f8_local3 = f8_arg0.regularStars:create("header")
 						f8_local3:set(f8_local0[@"hash_6B9793AA447A56D6"] or 0x0)
 						if not f8_arg5 then
@@ -133,7 +133,7 @@ CoD.CTUtility.UpdateChosenSpecialistStars = function(f8_arg0, f8_arg1, f8_arg2, 
 							else
 								f8_arg0:create("veteranStars")
 								local f8_local4 = f8_arg0.veteranStars:create("starImage")
-								f8_local4:set(f8_local3 or @"blacktransparent")
+								f8_local4:set(f8_local3 or "blacktransparent")
 								f8_local4 = f8_arg0.veteranStars:create("header")
 								f8_local4:set(f8_local0[@"hash_57B08A6C17B1A530"] or 0x0)
 							end
@@ -213,11 +213,11 @@ CoD.CTUtility.SetPlayButtonInfoText = function(f13_arg0)
 	if f13_local6 then
 		f13_local8 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_48283C331D648B5A", CoD.CTUtility.PlayerRoleIndexToName(f13_local1), f13_local7[@"hash_57B08A6C17B1A530"] or 0x0)
 	elseif f13_local5 then
-		f13_local8 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_A7B89E2AEC76923", CoD.CTUtility.PlayerRoleIndexToName(f13_local1), f13_local7[@"hash_57B08A6C17B1A530"] or @"hash_0", @"hash_5F2055D8B8959CC7")
+		f13_local8 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_A7B89E2AEC76923", CoD.CTUtility.PlayerRoleIndexToName(f13_local1), f13_local7[@"hash_57B08A6C17B1A530"] or 0x0, @"hash_5F2055D8B8959CC7")
 	elseif f13_local4 then
-		f13_local8 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_A7B89E2AEC76923", CoD.CTUtility.PlayerRoleIndexToName(f13_local1), f13_local7[@"hash_6B9793AA447A56D6"] or @"hash_0", @"hash_53D62410EFA3F83D")
+		f13_local8 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_A7B89E2AEC76923", CoD.CTUtility.PlayerRoleIndexToName(f13_local1), f13_local7[@"hash_6B9793AA447A56D6"] or 0x0, @"hash_53D62410EFA3F83D")
 	elseif f13_local3 then
-		f13_local8 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_A7B89E2AEC76923", CoD.CTUtility.PlayerRoleIndexToName(f13_local1), f13_local7[@"hash_4EE9D30C4FF6408B"] or @"hash_0", @"hash_6BEE80133950C1BE")
+		f13_local8 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_A7B89E2AEC76923", CoD.CTUtility.PlayerRoleIndexToName(f13_local1), f13_local7[@"hash_4EE9D30C4FF6408B"] or 0x0, @"hash_6BEE80133950C1BE")
 	else
 		f13_local8 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_6EDA885F0BB2915A", CoD.CTUtility.PlayerRoleIndexToName(f13_local1))
 	end
@@ -269,7 +269,7 @@ end
 CoD.CTUtility.SetReplayTutorial = function(f20_arg0)
 	local f20_local0 = DataSources.SpecialistHeadquarters.getModel(f20_arg0)
 	local f20_local1 = f20_local0.ChosenSpecialistID:get()
-	local f20_local2, f20_local3, f20_local4 = CoD.CTUtility.GetTutorialGameTypeMapDifficulty(f20_local1, Engine[@"currentsessionmode"]())
+	local f20_local2, f20_local3, f20_local4 = CoD.CTUtility.GetTutorialGameTypeMapDifficulty(f20_local1, Engine.CurrentSessionMode())
 	if f20_local1 and f20_local2 and f20_local3 and f20_local4 then
 		CoD.CTUtility.SetChosenSpecialistParams(f20_arg0, f20_local1, true, f20_local2, f20_local3, f20_local4)
 	end
@@ -283,7 +283,7 @@ CoD.CTUtility.SetChosenSpecialistParams = function(f21_arg0, f21_arg1, f21_arg2,
 	end
 	SetGameType(f21_arg0, f21_arg3)
 	SetMap(f21_arg0, Engine[@"converttoxhash"](f21_arg4))
-	Engine[@"setdvar"]("overrideDifficulty", f21_arg5)
+	Engine.SetDvar("overrideDifficulty", f21_arg5)
 	CoD.CTUtility.SetBotDifficulty(f21_arg5)
 	if f21_arg5 == "tutorial" then
 		CoD.CTUtility.SetNavMethodTutorial(f21_arg0)
@@ -319,16 +319,16 @@ CoD.CTUtility.GetChosenSpecialistIDLocString = function(f23_arg0, f23_arg1)
 	end
 end
 CoD.CTUtility.PlayerRoleIndexToName = function(f24_arg0)
-	return CoD.PlayerRoleUtility.GetCharacterDisplayNameByIndex(f24_arg0, Enum[@"emodes"][@"mode_multiplayer"])
+	return CoD.PlayerRoleUtility.GetCharacterDisplayNameByIndex(f24_arg0, Enum.eModes.mode_multiplayer)
 end
 CoD.CTUtility.PlayerRoleIndexToJobTitle = function(f25_arg0)
-	return CoD.PlayerRoleUtility.GetCharacterTraitTitle(Enum[@"emodes"][@"mode_multiplayer"], f25_arg0)
+	return CoD.PlayerRoleUtility.GetCharacterTraitTitle(Enum.eModes.mode_multiplayer, f25_arg0)
 end
 CoD.CTUtility.PlayerRoleIndexToBioHeaderImage = function(f26_arg0)
 	if f26_arg0 == nil then
 		return "$blacktransparent"
 	else
-		local f26_local0 = CoD.PlayerRoleUtility.GetCachedHeroInfo(Enum[@"emodes"][@"mode_multiplayer"], f26_arg0)
+		local f26_local0 = CoD.PlayerRoleUtility.GetCachedHeroInfo(Enum.eModes.mode_multiplayer, f26_arg0)
 		if f26_local0 == nil or f26_local0[@"hash_215AC9DAAD709DE1"] == nil then
 			return "$blacktransparent"
 		else
@@ -386,7 +386,7 @@ CoD.CTUtility.GetBaseGameTypeMapDifficulty = function(f31_arg0, f31_arg1, f31_ar
 end
 DataSources.SpecialistHeadquartersLoadoutList = ListHelper_SetupDataSource("SpecialistHeadquartersLoadoutList", function(f32_arg0, f32_arg1)
 	local f32_local0 = {}
-	local f32_local1 = Engine[@"currentsessionmode"]()
+	local f32_local1 = Engine.CurrentSessionMode()
 	if f32_arg1.menu and CoD.BaseUtility.GetMenuSessionMode(f32_arg1.menu) then
 		f32_local1 = CoD.BaseUtility.GetMenuSessionMode(f32_arg1.menu)
 	end
@@ -402,7 +402,7 @@ DataSources.SpecialistHeadquartersLoadoutList = ListHelper_SetupDataSource("Spec
 	return CoD.PlayerRoleUtility.GetPlayerRolesListHelper(f32_arg1, f32_arg0, f32_local1, function(f33_arg0, f33_arg1, f33_arg2, f33_arg3, f33_arg4)
 		local f33_local0 = f33_arg4.models.characterIndex
 		local f33_local1 = f33_arg4.properties.character
-		if f33_local1[@"hash_3DB969B978E2ABA8"] == 0 then
+		if f33_local1.iscombattrainingenabled == 0 then
 			return false
 		end
 		local f33_local2 = CoD.PlayerRoleUtility.GetPositionRoleDefaultInfo(f33_arg2, f33_local0)
@@ -411,8 +411,8 @@ DataSources.SpecialistHeadquartersLoadoutList = ListHelper_SetupDataSource("Spec
 		f33_arg4.properties.selectIndex = f32_local2 == f33_local0
 		f33_arg4.models.bio = f33_local1[@"bio"] or 0x0
 		f33_arg4.models.bioHeader = f33_local1[@"bioheader"] or 0x0
-		f33_arg4.models.bioHeaderImage = f33_local1[@"hash_215AC9DAAD709DE1"] or @"blacktransparent"
-		f33_arg4.models.brandingImage = f33_local1[@"hash_5B2781A0B1BF2B7A"] or @"blacktransparent"
+		f33_arg4.models.bioHeaderImage = f33_local1[@"hash_215AC9DAAD709DE1"] or "blacktransparent"
+		f33_arg4.models.brandingImage = f33_local1.branding or "blacktransparent"
 		f33_arg4.models.equipment = f33_local2.equipment
 		f33_arg4.models.ability = f33_local2.ability
 		local f33_local3, f33_local4, f33_local5, f33_local6, f33_local7 = CoD.CTUtility.GetSpecialistProgress(f33_arg1, f33_local0)
@@ -424,8 +424,8 @@ DataSources.SpecialistHeadquartersLoadoutList = ListHelper_SetupDataSource("Spec
 			if not f33_local8 then
 			else
 				f33_arg4.models.recruitStars = {
-					starImage = f33_local8 or @"blacktransparent",
-					header = f32_local3[@"hash_4EE9D30C4FF6408B"] or @"hash_0",
+					starImage = f33_local8 or "blacktransparent",
+					header = f32_local3[@"hash_4EE9D30C4FF6408B"] or 0x0,
 				}
 				local f33_local9
 				if not f33_local6 then
@@ -433,8 +433,8 @@ DataSources.SpecialistHeadquartersLoadoutList = ListHelper_SetupDataSource("Spec
 					if not f33_local9 then
 					else
 						f33_arg4.models.regularStars = {
-							starImage = f33_local9 or @"blacktransparent",
-							header = f32_local3[@"hash_6B9793AA447A56D6"] or @"hash_0",
+							starImage = f33_local9 or "blacktransparent",
+							header = f32_local3[@"hash_6B9793AA447A56D6"] or 0x0,
 						}
 						local f33_local10
 						if not f33_local7 then
@@ -442,8 +442,8 @@ DataSources.SpecialistHeadquartersLoadoutList = ListHelper_SetupDataSource("Spec
 							if not f33_local10 then
 							else
 								f33_arg4.models.veteranStars = {
-									starImage = f33_local10 or @"blacktransparent",
-									header = f32_local3[@"hash_57B08A6C17B1A530"] or @"hash_0",
+									starImage = f33_local10 or "blacktransparent",
+									header = f32_local3[@"hash_57B08A6C17B1A530"] or 0x0,
 								}
 								local f33_local11 = f33_arg4.models
 								local f33_local12 = f33_arg4.models
@@ -467,7 +467,7 @@ DataSources.SpecialistHeadquartersLoadoutList = ListHelper_SetupDataSource("Spec
 end, false)
 CoD.CTUtility.GetArchivesBundle = function()
 	if not CoD.CTUtility.ArchivesBundle then
-		CoD.CTUtility.ArchivesBundle = Engine[@"hash_2E00B2F29271C60B"](@"t8_specialist_archives")
+		CoD.CTUtility.ArchivesBundle = Engine[@"hash_2E00B2F29271C60B"]("t8_specialist_archives")
 	end
 	return CoD.CTUtility.ArchivesBundle
 end
@@ -511,7 +511,7 @@ CoD.CTUtility.GetClassifiedVideo = function(f37_arg0)
 			unlocked = false,
 			matureContent = false,
 			video = {
-				stillPreview = f37_local0[@"hash_154631DA7703202C"],
+				stillPreview = f37_local0.classifiedstillpreview,
 				lowResVideo = {
 					movieName = "",
 					isStreamed = false,
@@ -569,7 +569,7 @@ DataSources.ArchivesVideoList = ListHelper_SetupDataSource("ArchivesVideoList", 
 				title = f38_local1[0x1686694219F5A8],
 				desc = f38_local1[@"hash_31E6F480EBA7B1EF"],
 				unlocked = f38_local3,
-				matureContent = f38_local1[@"hash_3E2A12AA0C693432"] ~= 0,
+				matureContent = f38_local1.isintrotutorialmoviematurecontent ~= 0,
 				video = {
 					stillPreview = f38_local1[@"hash_DC263F4717B5D99"],
 					lowResVideo = {
@@ -578,8 +578,8 @@ DataSources.ArchivesVideoList = ListHelper_SetupDataSource("ArchivesVideoList", 
 						isLooping = false,
 					},
 					hiResVideo = {
-						movieName = f38_local1[@"hash_5B7DD66DDC6EC9A9"],
-						isStreamed = f38_local1[@"hash_584E2724CCE4B658"] ~= 0,
+						movieName = f38_local1.introtutorialmovie,
+						isStreamed = f38_local1.isintrotutorialmoviestreamed ~= 0,
 						isLooping = false,
 					},
 				},
@@ -627,7 +627,7 @@ DataSources.ArchivesVideoList = ListHelper_SetupDataSource("ArchivesVideoList", 
 		end
 	end
 	local f38_local4, f38_local5, f38_local6 = CoD.CTUtility.GetOverallSpecialistProgress(f38_arg0)
-	local f38_local9 = CoD.CTUtility.HasSeenMovie(f38_arg0, @"story_outro")
+	local f38_local9 = CoD.CTUtility.HasSeenMovie(f38_arg0, "story_outro")
 	if not f38_local9 then
 		f38_local9 = f38_local5 or CoD.CTUtility.AllCTUnlocked()
 	end
@@ -659,7 +659,7 @@ DataSources.ArchivesVideoList = ListHelper_SetupDataSource("ArchivesVideoList", 
 	else
 		table.insert(f38_local0, CoD.CTUtility.GetClassifiedVideo(f38_local1[@"hash_4832787480D8552"]))
 	end
-	local f38_local7 = CoD.CTUtility.HasSeenMovie(f38_arg0, @"woods_outro")
+	local f38_local7 = CoD.CTUtility.HasSeenMovie(f38_arg0, "woods_outro")
 	if not f38_local7 then
 		f38_local7 = CoD.CTUtility.AllCTUnlocked()
 	end
@@ -678,7 +678,7 @@ DataSources.ArchivesVideoList = ListHelper_SetupDataSource("ArchivesVideoList", 
 						isLooping = false,
 					},
 					hiResVideo = {
-						movieName = f38_local1[0x6F3C4D03C30332],
+						movieName = f38_local1.outrotutorialmovie,
 						isStreamed = f38_local1[@"hash_734B4156EBE6988B"] ~= 0,
 						isLooping = false,
 					},
@@ -702,7 +702,7 @@ DataSources.ArchivesExtraList = ListHelper_SetupDataSource("ArchivesExtraList", 
 			table.insert(f39_local0, {
 				models = {
 					title = f39_local5[@"videotitle"],
-					desc = f39_local5[@"hash_1E7843CB3928558D"] or @"hash_0",
+					desc = f39_local5[@"hash_1E7843CB3928558D"] or 0x0,
 					unlocked = true,
 					matureContent = f39_local5[@"hash_7F86C2144EEF36A8"] ~= 0,
 					video = {
@@ -734,10 +734,10 @@ DataSources.ArchivesAudioList = ListHelper_SetupDataSource("ArchivesAudioList", 
 	if f40_local1.intellist and #f40_local1.intellist > 0 then
 		for f40_local2 = 1, #f40_local1.intellist, 1 do
 			local f40_local5 = f40_local1.intellist[f40_local2]
-			local f40_local6 = f40_local5[@"hash_4C98796B474D4D5B"]
+			local f40_local6 = f40_local5.audiochallengedesc
 			local f40_local7 = CoD.CTUtility.IsCTCallingCardUnlocked(f40_arg0, f40_local6)
 			local f40_local8 = f40_local5[@"hash_3F98B530FF7CFBE4"]
-			local f40_local9 = f40_local5[@"audio"]
+			local f40_local9 = f40_local5.audio
 			local f40_local10 = CoD.CTUtility.GetCallingCardID(f40_local6)
 			if not f40_local7 then
 				f40_local8 = f40_local6
@@ -769,11 +769,11 @@ end
 CoD.CTUtility.CTDifficultyToDesc = function(f42_arg0)
 	local f42_local0 = CoD.CTUtility.GetArchivesBundle()
 	if f42_arg0 == "tutorial" or f42_arg0 == "easy" then
-		return f42_local0[@"hash_3FD8A140B4B74739"] or 0x0
+		return f42_local0.easydiffdesc or 0x0
 	elseif f42_arg0 == "medium" then
-		return f42_local0[@"hash_4D32D556F8F0B4B0"] or 0x0
+		return f42_local0.mediumdiffdesc or 0x0
 	elseif f42_arg0 == "hard" then
-		return f42_local0[@"hash_75FA20BF63243BA6"] or 0x0
+		return f42_local0.harddiffdesc or 0x0
 	else
 		return 0x0
 	end
@@ -796,10 +796,10 @@ CoD.CTUtility.SubscribeForDefaultSpecialistSelection = function(f44_arg0, f44_ar
 	end
 	if not f44_arg0._hasLobbyNavSubscription then
 		f44_arg0._hasLobbyNavSubscription = true
-		f44_arg0:subscribeToModel(Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.lobbyNav"), f44_local0, false)
+		f44_arg0:subscribeToModel(Engine.CreateModel(Engine.GetGlobalModel(), "lobbyRoot.lobbyNav"), f44_local0, false)
 		local f44_local1 = f44_arg0
 		local f44_local2 = f44_arg0.subscribeToModel
-		local f44_local3 = Engine[@"getglobalmodel"]()
+		local f44_local3 = Engine.GetGlobalModel()
 		f44_local2(f44_local1, f44_local3["lobbyRoot.privateClient.update"], f44_local0, false)
 	end
 end
@@ -807,8 +807,8 @@ CoD.CTUtility.CharacterIndexValid = function(f46_arg0)
 	if f46_arg0 == nil then
 		return false
 	end
-	for f46_local3, f46_local4 in ipairs(CoD.PlayerRoleUtility.GetHeroList(Enum[@"emodes"][@"mode_multiplayer"])) do
-		if f46_arg0 == f46_local4.bodyIndex and f46_local4[@"hash_3DB969B978E2ABA8"] ~= 0 then
+	for f46_local3, f46_local4 in ipairs(CoD.PlayerRoleUtility.GetHeroList(Enum.eModes.mode_multiplayer)) do
+		if f46_arg0 == f46_local4.bodyIndex and f46_local4.iscombattrainingenabled ~= 0 then
 			return true
 		end
 	end
@@ -817,16 +817,15 @@ end
 CoD.CTUtility.SetDefaultSpecialist = function(f47_arg0, f47_arg1)
 	local f47_local0 = DataSources.SpecialistHeadquarters.getModel(f47_arg1)
 	local f47_local1 = LobbyData.GetCurrentMenuTarget()
-	if f47_local1[@"id"] == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_TRAINING) then
+	if f47_local1.id == LobbyData.GetLobbyMenuIDByName(LuaEnum.UI.DIRECTOR_ONLINE_MP_TRAINING) then
 		CoD.CTUtility.UpdateStarCount(f47_arg1)
 		if f47_local0.HasSetDefaultSpecialist:get() then
 			return
 		end
-		local f47_local2 = Engine[@"getglobalmodel"]()
+		local f47_local2 = Engine.GetGlobalModel()
 		f47_local2 = f47_local2:create("CTNavMethod", true)
 		f47_local2 = f47_local2:get()
-		local f47_local3 = false
-		local f47_local4 = nil
+		local f47_local3, f47_local4 = false
 		if f47_local0.HasChosenSpecialist:get() then
 			f47_local3 = false
 			f47_local4 = f47_local0.ChosenSpecialistID:get()
@@ -856,7 +855,7 @@ CoD.CTUtility.SetDefaultSpecialist = function(f47_arg0, f47_arg1)
 			f47_local4 = 1
 		end
 		if f47_local4 then
-			CoD.CTUtility.SetChosenSpecialistParams(f47_arg1, f47_local4, false, CoD.CTUtility.GetBaseGameTypeMapDifficulty(f47_local4, Enum[@"emodes"][@"mode_multiplayer"], CoD.CTUtility.GetSpecialistProgress(f47_arg1, f47_local4)))
+			CoD.CTUtility.SetChosenSpecialistParams(f47_arg1, f47_local4, false, CoD.CTUtility.GetBaseGameTypeMapDifficulty(f47_local4, Enum.eModes.mode_multiplayer, CoD.CTUtility.GetSpecialistProgress(f47_arg1, f47_local4)))
 			f47_local0.HasSetDefaultSpecialist:set(true)
 			if f47_local3 then
 				f47_local0.HasChosenSpecialist:set(true)
@@ -872,20 +871,20 @@ CoD.CTUtility.SetDefaultSpecialist = function(f47_arg0, f47_arg1)
 		f47_local0.StartFullscreenBlack:set(false)
 		MenuUnhideFreeCursor(f47_arg0, f47_arg1)
 		CoD.CTUtility.HideShownSpecialist(f47_arg1)
-		Engine[@"setdvar"]("bot_difficulty", 1)
+		Engine.SetDvar("bot_difficulty", 1)
 	end
 end
 CoD.CTUtility.ShouldPlayIntroStoryMovie = function(f48_arg0)
-	if not CoD.CTUtility.HasSeenMovie(f48_arg0, @"story_intro") then
+	if not CoD.CTUtility.HasSeenMovie(f48_arg0, "story_intro") then
 		return true
 	else
 		return false
 	end
 end
 CoD.CTUtility.ShouldPlayIntroTutorialMovie = function(f49_arg0)
-	local f49_local0 = CoD.CTUtility.HasSeenMovie(f49_arg0, @"woods_intro")
+	local f49_local0 = CoD.CTUtility.HasSeenMovie(f49_arg0, "woods_intro")
 	local f49_local1 = CoD.CTUtility.GetArchivesBundle()
-	if not f49_local0 and f49_local1[@"hash_5B7DD66DDC6EC9A9"] ~= nil and f49_local1[@"hash_5B7DD66DDC6EC9A9"] ~= "" and CoD.CTUtility.CanPlayVideo(f49_arg0, f49_local1[@"hash_3E2A12AA0C693432"]) then
+	if not f49_local0 and f49_local1.introtutorialmovie ~= nil and f49_local1.introtutorialmovie ~= "" and CoD.CTUtility.CanPlayVideo(f49_arg0, f49_local1.isintrotutorialmoviematurecontent) then
 		return true
 	else
 		return false
@@ -917,13 +916,13 @@ CoD.CTUtility.GetSpecialistProgress = function(f52_arg0, f52_arg1)
 		f52_local5 = true
 	end
 	local f52_local6
-	if f52_local2 ~= @"skirmish_completed" then
+	if f52_local2 ~= "skirmish_completed" then
 		f52_local6 = f52_local5
 	else
 		f52_local6 = true
 	end
 	local f52_local7
-	if f52_local2 ~= @"tutorial_completed" then
+	if f52_local2 ~= "tutorial_completed" then
 		f52_local7 = f52_local6
 	else
 		f52_local7 = true
@@ -931,13 +930,13 @@ CoD.CTUtility.GetSpecialistProgress = function(f52_arg0, f52_arg1)
 	return f52_local7, f52_local6, f52_local5, f52_local4, f52_local3
 end
 CoD.CTUtility.GetOverallSpecialistProgress = function(f53_arg0)
-	local f53_local0 = CoD.PlayerRoleUtility.GetHeroList(Enum[@"emodes"][@"mode_multiplayer"])
+	local f53_local0 = CoD.PlayerRoleUtility.GetHeroList(Enum.eModes.mode_multiplayer)
 	local f53_local1 = false
 	local f53_local2 = true
 	local f53_local3 = true
 	for f53_local12, f53_local13 in ipairs(f53_local0) do
 		local f53_local14 = f53_local13.bodyIndex
-		if f53_local13[@"hash_3DB969B978E2ABA8"] ~= 0 then
+		if f53_local13.iscombattrainingenabled ~= 0 then
 			local f53_local7, f53_local8, f53_local9, f53_local10, f53_local11 = CoD.CTUtility.GetSpecialistProgress(f53_arg0, f53_local14)
 			if f53_local2 then
 				f53_local2 = f53_local8
@@ -953,9 +952,9 @@ CoD.CTUtility.GetOverallSpecialistProgress = function(f53_arg0)
 	return f53_local1, f53_local2, f53_local3
 end
 CoD.CTUtility.GetNewSpecialist = function(f54_arg0)
-	for f54_local8, f54_local9 in ipairs(CoD.PlayerRoleUtility.GetHeroList(Enum[@"emodes"][@"mode_multiplayer"])) do
+	for f54_local8, f54_local9 in ipairs(CoD.PlayerRoleUtility.GetHeroList(Enum.eModes.mode_multiplayer)) do
 		local f54_local10 = f54_local9.bodyIndex
-		if f54_local9[@"hash_3DB969B978E2ABA8"] ~= 0 then
+		if f54_local9.iscombattrainingenabled ~= 0 then
 			local f54_local3, f54_local4, f54_local5, f54_local6, f54_local7 = CoD.CTUtility.GetSpecialistProgress(f54_arg0, f54_local10)
 			if not f54_local4 then
 				return f54_local10
@@ -1004,17 +1003,17 @@ DataSources.SpecialistNarrativeTabs = ListHelper_SetupDataSource("SpecialistNarr
 	return f55_local0
 end)
 CoD.CTUtility.SetNavMethodFrontend = function(f56_arg0)
-	local f56_local0 = Engine[@"getglobalmodel"]()
+	local f56_local0 = Engine.GetGlobalModel()
 	f56_local0 = f56_local0:create("CTNavMethod", true)
 	f56_local0:set(CoD.CTUtility.SpecialistHeadquartersNavigationMethod.FROM_FRONTEND)
 end
 CoD.CTUtility.SetNavMethodTutorial = function(f57_arg0)
-	local f57_local0 = Engine[@"getglobalmodel"]()
+	local f57_local0 = Engine.GetGlobalModel()
 	f57_local0 = f57_local0:create("CTNavMethod", true)
 	f57_local0:set(CoD.CTUtility.SpecialistHeadquartersNavigationMethod.FROM_TUTORIAL_SKIRMISH)
 end
 CoD.CTUtility.SetNavMethodCT = function(f58_arg0)
-	local f58_local0 = Engine[@"getglobalmodel"]()
+	local f58_local0 = Engine.GetGlobalModel()
 	f58_local0 = f58_local0:create("CTNavMethod", true)
 	f58_local0:set(CoD.CTUtility.SpecialistHeadquartersNavigationMethod.FROM_COMBAT_TRAINING)
 end
@@ -1061,7 +1060,7 @@ CoD.CTUtility.GetLoadingMovie = function(f66_arg0, f66_arg1, f66_arg2)
 	local f66_local3 = CoD.PlayerRoleUtility.GetHeroList(f66_arg2)
 	for f66_local4 = 1, #f66_local3, 1 do
 		local f66_local7 = f66_local3[f66_local4]
-		if f66_local7[@"hash_3DB969B978E2ABA8"] ~= 0 and f66_local7[@"ctgametype"] == f66_arg1 then
+		if f66_local7.iscombattrainingenabled ~= 0 and f66_local7[@"ctgametype"] == f66_arg1 then
 			f66_local0 = f66_local7[@"intromovie"]
 			f66_local2 = true
 			break
@@ -1069,7 +1068,7 @@ CoD.CTUtility.GetLoadingMovie = function(f66_arg0, f66_arg1, f66_arg2)
 	end
 	if f66_local2 and CoD.CTUtility.ShouldPlayIntroTutorialMovie(f66_arg0) and (not CoD.isPC or not CoD.PCKoreaUtility.ShowKorea15Plus()) then
 		f66_local4 = CoD.CTUtility.GetArchivesBundle()
-		f66_local0 = f66_local4[@"hash_5B7DD66DDC6EC9A9"]
+		f66_local0 = f66_local4.introtutorialmovie
 		f66_local1 = true
 	else
 		local f66_local4 = Engine[@"getgametypeinfo"](f66_arg1)
@@ -1084,10 +1083,10 @@ CoD.CTUtility.GetLoadingMovie = function(f66_arg0, f66_arg1, f66_arg2)
 	return f66_local0, f66_local1
 end
 CoD.CTUtility.GetCTStatsBuffer = function(f67_arg0)
-	return Engine[@"storagegetbuffer"](f67_arg0, Enum[@"storagefiletype"][@"hash_77FA8C2EEB2B6F7A"])
+	return Engine.StorageGetBuffer(f67_arg0, Enum.StorageFileType[@"hash_77FA8C2EEB2B6F7A"])
 end
 CoD.CTUtility.UpdateCTStats = function(f68_arg0)
-	Engine[@"storagewrite"](f68_arg0, Enum[@"storagefiletype"][@"hash_77FA8C2EEB2B6F7A"])
+	Engine.StorageWrite(f68_arg0, Enum.StorageFileType[@"hash_77FA8C2EEB2B6F7A"])
 end
 CoD.CTUtility.HasSeenMovie = function(f69_arg0, f69_arg1)
 	local f69_local0 = CoD.CTUtility.GetCTStatsBuffer(f69_arg0)
@@ -1132,9 +1131,9 @@ CoD.CTUtility.HasSeenInterstitial = function(f73_arg0, f73_arg1)
 	end
 	local f73_local1 = function()
 		local f74_local0 = 0
-		for f74_local9, f74_local10 in ipairs(CoD.PlayerRoleUtility.GetHeroList(Enum[@"emodes"][@"mode_multiplayer"])) do
+		for f74_local9, f74_local10 in ipairs(CoD.PlayerRoleUtility.GetHeroList(Enum.eModes.mode_multiplayer)) do
 			local f74_local11 = f74_local10.bodyIndex
-			if f74_local10[@"hash_3DB969B978E2ABA8"] ~= 0 then
+			if f74_local10.iscombattrainingenabled ~= 0 then
 				local f74_local4, f74_local5, f74_local6, f74_local7, f74_local8 = CoD.CTUtility.GetSpecialistProgress(f73_arg0, f74_local11)
 				if f74_local5 then
 					f74_local0 = f74_local0 + 1
@@ -1155,20 +1154,20 @@ CoD.CTUtility.PlayArchivesAudio = function(f75_arg0, f75_arg1, f75_arg2)
 	CoD.CTUtility.StopArchivesAudio(f75_arg0, f75_arg1, f75_arg2)
 	local f75_local0 = CoD.SafeGetModelValue(f75_arg2:getModel(), "alias")
 	if f75_local0 and f75_local0 ~= "" then
-		Engine[@"playsound"](f75_local0)
+		Engine.playsound(f75_local0)
 		f75_arg0._ArchivesAudioAlias = f75_local0
 	end
 end
 CoD.CTUtility.StopArchivesAudio = function(f76_arg0, f76_arg1, f76_arg2)
 	if f76_arg0._ArchivesAudioAlias then
-		Engine[@"stopsound"](f76_arg0._ArchivesAudioAlias)
+		Engine.stopsound(f76_arg0._ArchivesAudioAlias)
 		f76_arg0._ArchivesAudioAlias = nil
 	end
 end
 CoD.CTUtility.GetCTChallengeRows = function()
 	local f77_local0 = function(f78_arg0)
 		local f78_local0 = 4
-		local f78_local1 = Engine[@"gettablerowcount"](CoD.CTUtility.CTChallengeTable)
+		local f78_local1 = Engine.GetTableRowCount(CoD.CTUtility.CTChallengeTable)
 		for f78_local2 = 0, f78_local1 - 1, 1 do
 			if Engine[@"hash_4C6F8EC444864600"](CoD.CTUtility.CTChallengeTable, f78_local2, f78_local0) == f78_arg0 then
 				return true
@@ -1179,7 +1178,7 @@ CoD.CTUtility.GetCTChallengeRows = function()
 	if CoD.CTUtility.CTChallengeRows == nil then
 		CoD.CTUtility.CTChallengeRows = {}
 		local f77_local1 = 4
-		local f77_local2 = Engine[@"gettablerowcount"](CoD.backgroundsTable)
+		local f77_local2 = Engine.GetTableRowCount(CoD.backgroundsTable)
 		for f77_local3 = 0, f77_local2 - 1, 1 do
 			if f77_local0(Engine[@"hash_4C6F8EC444864600"](CoD.backgroundsTable, f77_local3, f77_local1)) then
 				table.insert(CoD.CTUtility.CTChallengeRows, f77_local3)
@@ -1207,19 +1206,19 @@ CoD.CTUtility.GetCTChallenge = function(f80_arg0, f80_arg1)
 	local f80_local3 = 3
 	local f80_local4 = 4
 	local f80_local5 = 5
-	local f80_local6 = Engine[@"tablefindrows"](CoD.CTUtility.CTChallengeTable, f80_local0, f80_arg1)
+	local f80_local6 = Engine.TableFindRows(CoD.CTUtility.CTChallengeTable, f80_local0, f80_arg1)
 	f80_local6 = f80_local6[1]
 	local f80_local7 = Engine[@"hash_4C6F8EC444864600"](CoD.CTUtility.CTChallengeTable, f80_local6, f80_local2)
 	local f80_local8 = nil
 	local f80_local9 = Engine[@"hash_4C6F8EC444864600"](CoD.CTUtility.CTChallengeTable, f80_local6, f80_local1)
 	local f80_local10 = CoD.CTUtility.GetCTStatsBuffer(f80_arg0)
 	if f80_local10 then
-		if f80_local7 == @"weapon_class_" then
+		if f80_local7 == "weapon_class_" then
 			local f80_local11 = {
 				@"hash_683D7DFC8782D6B9",
-				@"hash_3CAEAE083FB50CEB",
-				@"hash_68046B0858420412",
-				@"hash_1AEE13F64EFB2EF2",
+				"weapon_class_kills_lmg",
+				"weapon_class_kills_smg",
+				"weapon_class_kills_sniper",
 				@"hash_4D4A62396C1EC8",
 			}
 			f80_local8 = 0
@@ -1258,7 +1257,7 @@ CoD.CTUtility.IsCTCallingCardUnlocked = function(f82_arg0, f82_arg1)
 	end
 	local f82_local0 = 0
 	local f82_local1 = 4
-	local f82_local2 = Engine[@"gettablerowcount"](CoD.CTUtility.CTChallengeTable)
+	local f82_local2 = Engine.GetTableRowCount(CoD.CTUtility.CTChallengeTable)
 	for f82_local3 = 0, f82_local2 - 1, 1 do
 		if Engine[@"hash_4C6F8EC444864600"](CoD.CTUtility.CTChallengeTable, f82_local3, f82_local1) == f82_arg1 then
 			local f82_local6 = Engine[@"hash_4C6F8EC444864600"](CoD.CTUtility.CTChallengeTable, f82_local3, f82_local0)
@@ -1275,7 +1274,7 @@ end
 CoD.CTUtility.GetCTCallingCardName = function(f83_arg0)
 	local f83_local0 = 3
 	local f83_local1 = 4
-	local f83_local2 = Engine[@"gettablerowcount"](CoD.CTUtility.CTChallengeTable)
+	local f83_local2 = Engine.GetTableRowCount(CoD.CTUtility.CTChallengeTable)
 	for f83_local3 = 0, f83_local2 - 1, 1 do
 		if Engine[@"hash_4C6F8EC444864600"](CoD.CTUtility.CTChallengeTable, f83_local3, f83_local1) == f83_arg0 then
 			return Engine[@"hash_4C6F8EC444864600"](CoD.CTUtility.CTChallengeTable, f83_local3, f83_local0)
@@ -1286,9 +1285,9 @@ end
 CoD.CTUtility.UpdateStarCount = function(f84_arg0)
 	local f84_local0 = DataSources.SpecialistHeadquarters.getModel(f84_arg0)
 	local f84_local1 = 0
-	for f84_local10, f84_local11 in ipairs(CoD.PlayerRoleUtility.GetHeroList(Enum[@"emodes"][@"mode_multiplayer"])) do
+	for f84_local10, f84_local11 in ipairs(CoD.PlayerRoleUtility.GetHeroList(Enum.eModes.mode_multiplayer)) do
 		local f84_local12 = f84_local11.bodyIndex
-		if f84_local11[@"hash_3DB969B978E2ABA8"] ~= 0 then
+		if f84_local11.iscombattrainingenabled ~= 0 then
 			local f84_local5, f84_local6, f84_local7, f84_local8, f84_local9 = CoD.CTUtility.GetSpecialistProgress(f84_arg0, f84_local12)
 			if f84_local7 then
 				f84_local1 = f84_local1 + 1
@@ -1305,11 +1304,11 @@ CoD.CTUtility.UpdateStarCount = function(f84_arg0)
 end
 CoD.CTUtility.SetBotDifficulty = function(f85_arg0)
 	if f85_arg0 == "tutorial" or f85_arg0 == "easy" then
-		Engine[@"setdvar"]("bot_difficulty", 0)
+		Engine.SetDvar("bot_difficulty", 0)
 	elseif f85_arg0 == "medium" then
-		Engine[@"setdvar"]("bot_difficulty", 1)
+		Engine.SetDvar("bot_difficulty", 1)
 	elseif f85_arg0 == "hard" then
-		Engine[@"setdvar"]("bot_difficulty", 2)
+		Engine.SetDvar("bot_difficulty", 2)
 	end
 end
 CoD.CTUtility.UpdatedChosenSpecialistListModel = function(f86_arg0, f86_arg1)
@@ -1328,7 +1327,7 @@ CoD.CTUtility.SetShowChosenSpecialistListModel = function(f87_arg0, f87_arg1)
 	f87_local0.ShowChosenSpecialistList:set(f87_arg1)
 end
 CoD.CTUtility.StartSkipTimer = function(f88_arg0, f88_arg1)
-	local f88_local0 = Engine[@"getglobalmodel"]()
+	local f88_local0 = Engine.GetGlobalModel()
 	f88_local0 = f88_local0:create("cutsceneSkippable")
 	f88_local0:set(false)
 	f88_arg0:addElement(LUI.UITimer.newElementTimer(f88_arg1, true, function()
@@ -1338,5 +1337,5 @@ end
 CoD.CTUtility.RefreshChosenSpecialistParams = function(f90_arg0)
 	local f90_local0 = DataSources.SpecialistHeadquarters.getModel(f90_arg0)
 	local f90_local1 = f90_local0.ChosenSpecialistID:get()
-	CoD.CTUtility.SetChosenSpecialistParams(f90_arg0, f90_local1, false, CoD.CTUtility.GetBaseGameTypeMapDifficulty(f90_local1, Enum[@"emodes"][@"mode_multiplayer"], CoD.CTUtility.GetSpecialistProgress(f90_arg0, f90_local1)))
+	CoD.CTUtility.SetChosenSpecialistParams(f90_arg0, f90_local1, false, CoD.CTUtility.GetBaseGameTypeMapDifficulty(f90_local1, Enum.eModes.mode_multiplayer, CoD.CTUtility.GetSpecialistProgress(f90_arg0, f90_local1)))
 end

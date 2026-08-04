@@ -1,24 +1,24 @@
-require("x64:a8ca738c8ede92")
-CoD[@"hash_6AF83B16AB3EE2AE"] = InheritFrom(LUI.UIElement)
-CoD[@"hash_6AF83B16AB3EE2AE"].__defaultWidth = 960
-CoD[@"hash_6AF83B16AB3EE2AE"].__defaultHeight = 240
-CoD[@"hash_6AF83B16AB3EE2AE"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+require("ui/uieditor/widgets/callingcards/callingcards_asset_zombies_astronaut")
+CoD.callingcards_zombies = InheritFrom(LUI.UIElement)
+CoD.callingcards_zombies.__defaultWidth = 960
+CoD.callingcards_zombies.__defaultHeight = 240
+CoD.callingcards_zombies.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[@"hash_6AF83B16AB3EE2AE"])
+	self:setClass(CoD.callingcards_zombies)
 	self.id = "CallingCards_zombies"
 	self.soundSet = "none"
 	self.anyChildUsesUpdateState = true
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_bg"))
+	bg:setImage(RegisterImage("uie_ui_icon_callingcard_zombie_bg"))
 	self:addElement(bg)
 	self.bg = bg
 	local astronaut = CoD.CallingCards_Asset_zombies_astronaut.new(f1_arg0, f1_arg1, 0, 0, 53.5, 445.5, 0, 0, 0, 240)
 	self:addElement(astronaut)
 	self.astronaut = astronaut
 	local smoke = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	smoke:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_smoke"))
-	smoke:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	smoke:setImage(RegisterImage("uie_ui_icon_callingcard_zombie_smoke"))
+	smoke:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(smoke)
 	self.smoke = smoke
 	local bun2 = LUI.UIImage.new(0, 0, 664, 960, 0, 0, 80, 248)
@@ -30,15 +30,15 @@ CoD[@"hash_6AF83B16AB3EE2AE"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self:addElement(lettus)
 	self.lettus = lettus
 	local cheese = LUI.UIImage.new(0, 0, 664, 960, 0, 0, 32, 240)
-	cheese:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_cheese"))
+	cheese:setImage(RegisterImage("uie_ui_icon_callingcard_zombie_cheese"))
 	self:addElement(cheese)
 	self.cheese = cheese
 	local tomato = LUI.UIImage.new(0, 0, 656.5, 888.5, 0, 0, 48, 192)
-	tomato:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_tomato"))
+	tomato:setImage(RegisterImage("uie_ui_icon_callingcard_zombie_tomato"))
 	self:addElement(tomato)
 	self.tomato = tomato
 	local burger = LUI.UIImage.new(0, 0, 690.5, 922.5, 0, 0, 6, 126)
-	burger:setImage(RegisterImage(@"uie_ui_icon_callingcard_zombie_burger"))
+	burger:setImage(RegisterImage("uie_ui_icon_callingcard_zombie_burger"))
 	self:addElement(burger)
 	self.burger = burger
 	local bun1 = LUI.UIImage.new(0, 0, 656.5, 888.5, 0, 0, 0, 80)
@@ -51,7 +51,7 @@ CoD[@"hash_6AF83B16AB3EE2AE"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end
 	return self
 end
-CoD[@"hash_6AF83B16AB3EE2AE"].__resetProperties = function(f2_arg0)
+CoD.callingcards_zombies.__resetProperties = function(f2_arg0)
 	f2_arg0.astronaut:completeAnimation()
 	f2_arg0.bun1:completeAnimation()
 	f2_arg0.burger:completeAnimation()
@@ -67,7 +67,7 @@ CoD[@"hash_6AF83B16AB3EE2AE"].__resetProperties = function(f2_arg0)
 	f2_arg0.lettus:setTopBottom(0, 0, 52, 260)
 	f2_arg0.bun2:setTopBottom(0, 0, 80, 248)
 end
-CoD[@"hash_6AF83B16AB3EE2AE"].__clipsPerState = {
+CoD.callingcards_zombies.__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -178,6 +178,6 @@ CoD[@"hash_6AF83B16AB3EE2AE"].__clipsPerState = {
 		end,
 	},
 }
-CoD[@"hash_6AF83B16AB3EE2AE"].__onClose = function(f19_arg0)
+CoD.callingcards_zombies.__onClose = function(f19_arg0)
 	f19_arg0.astronaut:close()
 end

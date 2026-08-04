@@ -1,4 +1,4 @@
-require("x64:7e88de2d7c76449")
+require("ui/uieditor/widgets/commonlistbuttongenericinternal")
 CoD.CommonListButtonGenericShort = InheritFrom(LUI.UIElement)
 CoD.CommonListButtonGenericShort.__defaultWidth = 205
 CoD.CommonListButtonGenericShort.__defaultHeight = 43

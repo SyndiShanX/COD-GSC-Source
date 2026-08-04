@@ -9,8 +9,8 @@ CoD.StartMenu_Options_SettingGroupHeader.new = function(f1_arg0, f1_arg1, f1_arg
 	local Title = LUI.UIText.new(0.5, 0.5, -340, 340, 1, 1, -18, 0)
 	Title:setRGB(0.6, 0.6, 0.6)
 	Title:setTTF("ttmussels_regular")
-	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	Title:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
+	Title:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	Title:setAlignment(Enum.LUIAlignment[@"lui_alignment_bottom"])
 	Title:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

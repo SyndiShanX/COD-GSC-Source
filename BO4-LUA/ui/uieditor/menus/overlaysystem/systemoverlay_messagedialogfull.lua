@@ -1,6 +1,6 @@
-require("x64:2675595fa323085")
-require("x64:37c17dc9dd913d9")
-require("x64:ba72b08fda6493")
+require("ui/uieditor/widgets/emptyfocusable")
+require("ui/uieditor/widgets/systemoverlays/systemoverlay_full_layout")
+require("ui/uieditor/widgets/pc/pc_smallclosebutton")
 CoD.SystemOverlay_MessageDialogFull = InheritFrom(CoD.Menu)
 LUI.createMenu.SystemOverlay_MessageDialogFull = function(f1_arg0, f1_arg1)
 	local self = CoD.Menu.NewForUIEditor("SystemOverlay_MessageDialogFull", f1_arg0)
@@ -30,69 +30,69 @@ LUI.createMenu.SystemOverlay_MessageDialogFull = function(f1_arg0, f1_arg1)
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_local1, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(BTNQuit, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		PerformOverlayBack(menu, controller)
+	f1_local1:AddButtonCallbackFunction(BTNQuit, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f4_arg0, f4_arg1, f4_arg2, f4_arg3)
+		PerformOverlayBack(f4_arg1, f4_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+	end, function(f5_arg0, f5_arg1, f5_arg2)
+		CoD.Menu.SetButtonLabel(f5_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(BTNQuit)
 	self.BTNQuit = BTNQuit
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		if CoD.OverlayUtility.HasOverlayACrossAction(menu) then
-			CoD.OverlayUtility.PerformOverlayACrossAction(menu, controller)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f6_arg0, f6_arg1, f6_arg2, f6_arg3)
+		if CoD.OverlayUtility.HasOverlayACrossAction(f6_arg1) then
+			CoD.OverlayUtility.PerformOverlayACrossAction(f6_arg1, f6_arg2)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if CoD.OverlayUtility.HasOverlayACrossAction(menu) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_128080D5840E11B2", nil, "ui_confirm")
-			return true
-		else
-			return false
-		end
-	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
-		if CoD.OverlayUtility.HasOverlayBCircleAction(menu) then
-			CoD.OverlayUtility.PerformOverlayBCircleAction(menu, controller)
-			return true
-		else
-		end
-	end, function(element, menu, controller)
-		if CoD.OverlayUtility.HasOverlayBCircleAction(menu) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_128080D5840E11B2", nil, "ESCAPE")
+	end, function(f7_arg0, f7_arg1, f7_arg2)
+		if CoD.OverlayUtility.HasOverlayACrossAction(f7_arg1) then
+			CoD.Menu.SetButtonLabel(f7_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], @"hash_128080D5840E11B2", nil, "ui_confirm")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], "A", function(element, menu, controller, model)
-		if CoD.OverlayUtility.HasOverlayXSquareAction(menu) then
-			CoD.OverlayUtility.PerformOverlayXSquareAction(menu, controller)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xbb_pscircle"], "ESCAPE", function(f8_arg0, f8_arg1, f8_arg2, f8_arg3)
+		if CoD.OverlayUtility.HasOverlayBCircleAction(f8_arg1) then
+			CoD.OverlayUtility.PerformOverlayBCircleAction(f8_arg1, f8_arg2)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if CoD.OverlayUtility.HasOverlayXSquareAction(menu) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_128080D5840E11B2", nil, "A")
+	end, function(f9_arg0, f9_arg1, f9_arg2)
+		if CoD.OverlayUtility.HasOverlayBCircleAction(f9_arg1) then
+			CoD.Menu.SetButtonLabel(f9_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], @"hash_128080D5840E11B2", nil, "ESCAPE")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], "S", function(element, menu, controller, model)
-		if CoD.OverlayUtility.HasOverlayYTriangleAction(menu) then
-			CoD.OverlayUtility.PerformOverlayYTriangleAction(menu, controller)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xbx_pssquare"], "A", function(f10_arg0, f10_arg1, f10_arg2, f10_arg3)
+		if CoD.OverlayUtility.HasOverlayXSquareAction(f10_arg1) then
+			CoD.OverlayUtility.PerformOverlayXSquareAction(f10_arg1, f10_arg2)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if CoD.OverlayUtility.HasOverlayYTriangleAction(menu) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_128080D5840E11B2", nil, "S")
+	end, function(f11_arg0, f11_arg1, f11_arg2)
+		if CoD.OverlayUtility.HasOverlayXSquareAction(f11_arg1) then
+			CoD.Menu.SetButtonLabel(f11_arg1, Enum.LUIButton[@"lui_key_xbx_pssquare"], @"hash_128080D5840E11B2", nil, "A")
+			return true
+		else
+			return false
+		end
+	end, false)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xby_pstriangle"], "S", function(f12_arg0, f12_arg1, f12_arg2, f12_arg3)
+		if CoD.OverlayUtility.HasOverlayYTriangleAction(f12_arg1) then
+			CoD.OverlayUtility.PerformOverlayYTriangleAction(f12_arg1, f12_arg2)
+			return true
+		else
+		end
+	end, function(f13_arg0, f13_arg1, f13_arg2)
+		if CoD.OverlayUtility.HasOverlayYTriangleAction(f13_arg1) then
+			CoD.Menu.SetButtonLabel(f13_arg1, Enum.LUIButton[@"lui_key_xby_pstriangle"], @"hash_128080D5840E11B2", nil, "S")
 			return true
 		else
 			return false

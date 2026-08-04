@@ -8,22 +8,22 @@ CoD[@"hash_6A9B99FD1C2A5E41"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(@"uie_ui_menu_callingcards_postapocalyptic_bg"))
+	bg:setImage(RegisterImage("uie_ui_menu_callingcards_postapocalyptic_bg"))
 	self:addElement(bg)
 	self.bg = bg
 	local light = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	light:setImage(RegisterImage(@"uie_ui_menu_callingcards_postapocalyptic_light"))
+	light:setImage(RegisterImage("uie_ui_menu_callingcards_postapocalyptic_light"))
 	self:addElement(light)
 	self.light = light
 	local smoke = LUI.UIImage.new(0, 0, 150, 1110, 0, 0, 0, 240)
-	smoke:setImage(RegisterImage(@"uie_ui_menu_callingcards_postapocalyptic_smoke"))
-	smoke:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	smoke:setImage(RegisterImage("uie_ui_menu_callingcards_postapocalyptic_smoke"))
+	smoke:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(smoke)
 	self.smoke = smoke
 	local smoke2 = LUI.UIImage.new(0, 0, -50, 910, 0, 0, 90, 240)
 	smoke2:setScale(-1, 1)
-	smoke2:setImage(RegisterImage(@"uie_ui_menu_callingcards_postapocalyptic_smoke"))
-	smoke2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	smoke2:setImage(RegisterImage("uie_ui_menu_callingcards_postapocalyptic_smoke"))
+	smoke2:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(smoke2)
 	self.smoke2 = smoke2
 	if PostLoadFunc then

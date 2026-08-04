@@ -8,11 +8,11 @@ CoD.ui_icon_callingcards_stpatricks_speedlines.new = function(f1_arg0, f1_arg1, 
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local speedlines = LUI.UIImage.new(0, 0, 0, 1230, 0, 0, 0, 728)
-	speedlines:setImage(RegisterImage(@"uie_ui_menu_callingcards_stpatricks_f1_speedlines1"))
+	speedlines:setImage(RegisterImage("uie_ui_menu_callingcards_stpatricks_f1_speedlines1"))
 	self:addElement(speedlines)
 	self.speedlines = speedlines
 	local speedlines2 = LUI.UIImage.new(0, 0, 0, 1230, 0, 0, 0, 728)
-	speedlines2:setImage(RegisterImage(@"uie_ui_menu_callingcards_stpatricks_f1_speedlines2"))
+	speedlines2:setImage(RegisterImage("uie_ui_menu_callingcards_stpatricks_f1_speedlines2"))
 	self:addElement(speedlines2)
 	self.speedlines2 = speedlines2
 	if PostLoadFunc then

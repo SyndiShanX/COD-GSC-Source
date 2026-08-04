@@ -161,7 +161,7 @@ CoD.CoDAccountUtility = {
 	},
 	MINIMUM_DOB_YEAR = 1900,
 }
-require("x64:f3c5259f470592d")
+require("ui/utility/overlayutility")
 CoD.CoDAccountUtility.LegalInfo = {}
 CoD.CoDAccountUtility.LegalInfo.PrivacyPolicyPages = {
 	@"hash_A6E8C6E6E9C365C",
@@ -234,7 +234,7 @@ CoD.CoDAccountUtility.LegalInfo.TermsOfUsePages = {
 }
 CoD.CoDAccountUtility.LegalInfo.LegalInfoAdditionalInfo = {
 	PrivacyPolicyPages = {
-		title = @"hash_531DD2217B304F92",
+		title = "eula/privacy_policy",
 	},
 	TermsOfUsePages = {
 		title = @"hash_1122F19BFE1C1698",
@@ -263,7 +263,7 @@ CoD.CoDAccountUtility.GetDaysInCurrentMonth = function(f3_arg0)
 	return CoD.CoDAccountUtility.GetDaysInMonth(f3_local2.dobMonth:get(), f3_local1)
 end
 CoD.CoDAccountUtility.SetupEditBoxControlRegistration = function(f4_arg0, f4_arg1, f4_arg2, f4_arg3, f4_arg4, f4_arg5)
-	local f4_local0 = Engine[@"getmodel"](DataSources.CODAccountRegistrationForm.getModel(f4_arg2), f4_arg4)
+	local f4_local0 = Engine.GetModel(DataSources.CODAccountRegistrationForm.getModel(f4_arg2), f4_arg4)
 	if not f4_local0:get() then
 		f4_local0:set("")
 	end
@@ -273,7 +273,7 @@ CoD.CoDAccountUtility.SetupEditBoxControlRegistration = function(f4_arg0, f4_arg
 	end
 end
 CoD.CoDAccountUtility.SetupEditBoxControlSignIn = function(f5_arg0, f5_arg1, f5_arg2, f5_arg3, f5_arg4, f5_arg5)
-	local f5_local0 = Engine[@"getmodel"](DataSources.CODAccountSignInForm.getModel(f5_arg2), f5_arg4)
+	local f5_local0 = Engine.GetModel(DataSources.CODAccountSignInForm.getModel(f5_arg2), f5_arg4)
 	if not f5_local0:get() then
 		f5_local0:set("")
 	end
@@ -291,68 +291,68 @@ CoD.CoDAccountUtility.IsSignInRequired = function(f6_arg0)
 end
 DataSources.CODAccountSignInForm = {
 	getModel = function(f7_arg0)
-		local f7_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f7_arg0), "CODAccountSignInForm")
+		local f7_local0 = Engine.GetModel(Engine.GetModelForController(f7_arg0), "CODAccountSignInForm")
 		if f7_local0 == nil then
-			f7_local0 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f7_arg0), "CODAccountSignInForm")
-			Engine[@"createmodel"](f7_local0, "emailAddress")
-			Engine[@"createmodel"](f7_local0, "password")
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f7_local0, "confirmSpam"), false)
-			Engine[@"createmodel"](f7_local0, "hintText")
+			f7_local0 = Engine.CreateModel(Engine.GetModelForController(f7_arg0), "CODAccountSignInForm")
+			Engine.CreateModel(f7_local0, "emailAddress")
+			Engine.CreateModel(f7_local0, "password")
+			Engine.SetModelValue(Engine.CreateModel(f7_local0, "confirmSpam"), false)
+			Engine.CreateModel(f7_local0, "hintText")
 		end
 		return f7_local0
 	end,
 }
 DataSources.CODAccountRegistrationForm = {
 	getModel = function(f8_arg0)
-		local f8_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f8_arg0), "CODAccountRegistrationForm")
+		local f8_local0 = Engine.GetModel(Engine.GetModelForController(f8_arg0), "CODAccountRegistrationForm")
 		if f8_local0 == nil then
-			f8_local0 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f8_arg0), "CODAccountRegistrationForm")
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f8_local0, "regionIndex"), 1)
-			Engine[@"createmodel"](f8_local0, "emailAddress")
-			Engine[@"createmodel"](f8_local0, "password")
-			Engine[@"createmodel"](f8_local0, "confPassword")
+			f8_local0 = Engine.CreateModel(Engine.GetModelForController(f8_arg0), "CODAccountRegistrationForm")
+			Engine.SetModelValue(Engine.CreateModel(f8_local0, "regionIndex"), 1)
+			Engine.CreateModel(f8_local0, "emailAddress")
+			Engine.CreateModel(f8_local0, "password")
+			Engine.CreateModel(f8_local0, "confPassword")
 			local f8_local1 = Engine[@"hash_56BA9980BA648FB3"](f8_arg0)
 			local f8_local2 = f8_local1.Year or 2000
 			local f8_local3 = f8_local1.Month or 1
 			local f8_local4 = f8_local1.Day or 1
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f8_local0, "dobYear"), f8_local2)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f8_local0, "dobMonth"), f8_local3)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f8_local0, "dobDay"), f8_local4)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f8_local0, "confirmTOU"), false)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f8_local0, "confirmSpam"), false)
-			Engine[@"createmodel"](f8_local0, "hintText")
+			Engine.SetModelValue(Engine.CreateModel(f8_local0, "dobYear"), f8_local2)
+			Engine.SetModelValue(Engine.CreateModel(f8_local0, "dobMonth"), f8_local3)
+			Engine.SetModelValue(Engine.CreateModel(f8_local0, "dobDay"), f8_local4)
+			Engine.SetModelValue(Engine.CreateModel(f8_local0, "confirmTOU"), false)
+			Engine.SetModelValue(Engine.CreateModel(f8_local0, "confirmSpam"), false)
+			Engine.CreateModel(f8_local0, "hintText")
 		end
 		return f8_local0
 	end,
 }
 DataSources.UNOAccountInfo = {
 	getModel = function(f9_arg0)
-		local f9_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f9_arg0), "UNOAccountInfo")
+		local f9_local0 = Engine.GetModel(Engine.GetModelForController(f9_arg0), "UNOAccountInfo")
 		if f9_local0 == nil then
-			f9_local0 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f9_arg0), "UNOAccountInfo", true)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f9_local0, "bOptedIn"), false)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f9_local0, "bCheckedSubscriptions"), false)
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f9_local0, "bSignedIn"), false)
-			Engine[@"createmodel"](f9_local0, "iBusyStatus")
-			Engine[@"createmodel"](f9_local0, "iTransactionResult")
+			f9_local0 = Engine.CreateModel(Engine.GetModelForController(f9_arg0), "UNOAccountInfo", true)
+			Engine.SetModelValue(Engine.CreateModel(f9_local0, "bOptedIn"), false)
+			Engine.SetModelValue(Engine.CreateModel(f9_local0, "bCheckedSubscriptions"), false)
+			Engine.SetModelValue(Engine.CreateModel(f9_local0, "bSignedIn"), false)
+			Engine.CreateModel(f9_local0, "iBusyStatus")
+			Engine.CreateModel(f9_local0, "iTransactionResult")
 		end
 		return f9_local0
 	end,
 }
 DataSources.CODAccountManagementForm = {
 	getModel = function(f10_arg0)
-		local f10_local0 = Engine[@"getmodel"](Engine[@"getmodelforcontroller"](f10_arg0), "CODAccountManagementForm")
+		local f10_local0 = Engine.GetModel(Engine.GetModelForController(f10_arg0), "CODAccountManagementForm")
 		if f10_local0 == nil then
-			f10_local0 = Engine[@"createmodel"](Engine[@"getmodelforcontroller"](f10_arg0), "CODAccountManagementForm")
-			Engine[@"setmodelvalue"](Engine[@"createmodel"](f10_local0, "optInStatus"), Engine[@"hash_3655C38BC12A1FCB"](f10_arg0))
-			Engine[@"createmodel"](f10_local0, "hintText")
+			f10_local0 = Engine.CreateModel(Engine.GetModelForController(f10_arg0), "CODAccountManagementForm")
+			Engine.SetModelValue(Engine.CreateModel(f10_local0, "optInStatus"), Engine[@"hash_3655C38BC12A1FCB"](f10_arg0))
+			Engine.CreateModel(f10_local0, "hintText")
 		end
 		return f10_local0
 	end,
 }
 DataSources.CODAccountLegalInfo = {
 	getModel = function(f11_arg0)
-		local f11_local0 = Engine[@"getmodelforcontroller"](f11_arg0)
+		local f11_local0 = Engine.GetModelForController(f11_arg0)
 		f11_local0 = f11_local0:create("CODAccountLegalInfo")
 		f11_local0:create("currentLegalInfoIndex")
 		f11_local0:create("currentLegalInfoText")
@@ -472,9 +472,9 @@ DataSources.CODAccountRegisterInfoBasic = ListHelper_SetupDataSource("CODAccount
 	local f21_local3 = function(f24_arg0, f24_arg1, f24_arg2, f24_arg3, f24_arg4)
 		ShowKeyboard(f24_arg0, f24_arg1, f24_arg2, "KEYBOARD_TYPE_CONFIRM_PASSWORD")
 	end
-	table.insert(f21_local0, CoD.CoDAccountUtility.packageOptionsButtonData(@"hash_61770F1CA89E2DE5", @"hash_38D108F675E74EF", "", f21_local1))
-	table.insert(f21_local0, CoD.CoDAccountUtility.packageOptionsButtonData(@"hash_4A50C91C923FBBF6", @"hash_191EDCCE05D39D06", "", f21_local2))
-	table.insert(f21_local0, CoD.CoDAccountUtility.packageOptionsButtonData(@"hash_7C77EF01F8EFB323", @"hash_21086AB2243296F5", "", f21_local3))
+	table.insert(f21_local0, CoD.CoDAccountUtility.packageOptionsButtonData(@"hash_61770F1CA89E2DE5", "menu/codaccount_register_email_desc", "", f21_local1))
+	table.insert(f21_local0, CoD.CoDAccountUtility.packageOptionsButtonData(@"hash_4A50C91C923FBBF6", "menu/codaccount_register_pw_desc", "", f21_local2))
+	table.insert(f21_local0, CoD.CoDAccountUtility.packageOptionsButtonData("menu/codaccount_register_conf_pw", @"hash_21086AB2243296F5", "", f21_local3))
 	return f21_local0
 end, true)
 DataSources.CODAccountRegisterInfoDob = ListHelper_SetupDataSource("CODAccountRegisterInfoDob", function(f25_arg0)
@@ -741,21 +741,21 @@ DataSources.CODAccountSignInConfirmation = ListHelper_SetupDataSource("CODAccoun
 			local f47_local2 = f47_local0.password:get()
 			local f47_local3 = f47_local0.confirmSpam:get()
 			if not f47_local1 or string.len(f47_local1) == 0 then
-				LuaUtils.UI_ShowErrorMessageDialog(f47_arg2, @"hash_6809D4D95F9054A5", @"hash_431E422BC40B2429")
+				LuaUtils.UI_ShowErrorMessageDialog(f47_arg2, @"hash_6809D4D95F9054A5", "menu/notice_caps")
 				return
 			elseif not f47_local2 or string.len(f47_local2) == 0 then
-				LuaUtils.UI_ShowErrorMessageDialog(f47_arg2, @"hash_41F70C8645FEA8BC", @"hash_431E422BC40B2429")
+				LuaUtils.UI_ShowErrorMessageDialog(f47_arg2, @"hash_41F70C8645FEA8BC", "menu/notice_caps")
 				return
 			end
 			f47_local0.emailAddress:set("")
 			f47_local0.password:set("")
 			f47_local0.confirmSpam:set(false)
 			CoD.CoDAccountUtility.IsSignInActive = true
-			if Engine[@"accountlinklogin"](f47_arg2, f47_local1, f47_local2, f47_local3) == true then
-				Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.spinnerActive"), true)
+			if Engine.AccountLinkLogin(f47_arg2, f47_local1, f47_local2, f47_local3) == true then
+				Engine.SetModelValue(Engine.CreateModel(Engine.GetGlobalModel(), "lobbyRoot.spinnerActive"), true)
 			else
 				GoBack(f47_arg0, f47_arg2)
-				LuaUtils.UI_ShowErrorMessageDialog(f47_arg2, 0xA1F937DB15A3B0, @"hash_127999393F1681")
+				LuaUtils.UI_ShowErrorMessageDialog(f47_arg2, 0xA1F937DB15A3B0, "menu/error_caps")
 			end
 		end)
 	)
@@ -793,25 +793,25 @@ DataSources.CODAccountRegisterConfirmation = ListHelper_SetupDataSource("CODAcco
 			local f50_local9 = f50_local0.confirmTOU:get()
 			local f50_local10 = f50_local0.confirmSpam:get()
 			if not f50_local3 or string.len(f50_local3) == 0 then
-				LuaUtils.UI_ShowErrorMessageDialog(f50_arg2, @"hash_6809D4D95F9054A5", @"hash_431E422BC40B2429")
+				LuaUtils.UI_ShowErrorMessageDialog(f50_arg2, @"hash_6809D4D95F9054A5", "menu/notice_caps")
 				return
 			elseif not f50_local4 or f50_local4 == f50_local3 or string.len(f50_local4) < 8 or string.len(f50_local4) > 20 then
-				LuaUtils.UI_ShowErrorMessageDialog(f50_arg2, @"hash_43518D037A98D238", @"hash_431E422BC40B2429")
+				LuaUtils.UI_ShowErrorMessageDialog(f50_arg2, @"hash_43518D037A98D238", "menu/notice_caps")
 				return
 			elseif not f50_local5 or f50_local4 ~= f50_local5 then
-				LuaUtils.UI_ShowErrorMessageDialog(f50_arg2, @"hash_7112336C91F4212E", @"hash_431E422BC40B2429")
+				LuaUtils.UI_ShowErrorMessageDialog(f50_arg2, @"hash_7112336C91F4212E", "menu/notice_caps")
 				return
 			elseif not f50_local9 then
-				LuaUtils.UI_ShowErrorMessageDialog(f50_arg2, @"hash_7DA059810DB91BA6", @"hash_431E422BC40B2429")
+				LuaUtils.UI_ShowErrorMessageDialog(f50_arg2, @"hash_7DA059810DB91BA6", "menu/notice_caps")
 				return
 			elseif not f48_local1(f50_local8, f50_local6, f50_local7, f50_local1) then
 				Engine[@"hash_3CAF37D90D5016BE"](f50_arg2)
-				LuaUtils.UI_ShowErrorMessageDialog(f50_arg2, @"hash_12192A0F74BF5791", @"hash_431E422BC40B2429")
+				LuaUtils.UI_ShowErrorMessageDialog(f50_arg2, @"hash_12192A0F74BF5791", "menu/notice_caps")
 				GoBack(f50_arg0, f50_arg2)
 				return
 			end
 			CoD.CoDAccountUtility.IsSignInActive = false
-			if Engine[@"accountlinkregister"](f50_arg2, {
+			if Engine.AccountLinkRegister(f50_arg2, {
 				region = f50_local2,
 				email = f50_local3,
 				password = f50_local4,
@@ -820,10 +820,10 @@ DataSources.CODAccountRegisterConfirmation = ListHelper_SetupDataSource("CODAcco
 				year = f50_local7,
 				optIn = f50_local10,
 			}) == true then
-				Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.spinnerActive"), true)
+				Engine.SetModelValue(Engine.CreateModel(Engine.GetGlobalModel(), "lobbyRoot.spinnerActive"), true)
 			else
 				GoBack(f50_arg0, f50_arg2)
-				LuaUtils.UI_ShowErrorMessageDialog(f50_arg2, 0xA1F937DB15A3B0, @"hash_127999393F1681")
+				LuaUtils.UI_ShowErrorMessageDialog(f50_arg2, 0xA1F937DB15A3B0, "menu/error_caps")
 			end
 		end)
 	)
@@ -839,7 +839,7 @@ DataSources.CODAccountManagementConfirmation = ListHelper_SetupDataSource("CODAc
 			end
 			local f52_local0 = DataSources.CODAccountManagementForm.getModel(f52_arg2)
 			if f52_local0.optInStatus:get() then
-				Engine[@"optintoemailmarketing"](f52_arg2)
+				Engine.OptInToEmailMarketing(f52_arg2)
 			else
 				Engine[@"hash_53F46726BBD2817"](f52_arg2)
 			end
@@ -853,13 +853,13 @@ CoD.CoDAccountUtility.CodAccountHandleKeyboardComplete = function(f53_arg0, f53_
 	local f53_local0 = f53_arg2.input
 	local f53_local1 = f53_arg3.registrationFormStrings
 	local f53_local2 = DataSources.CODAccountRegistrationForm.getModel(f53_arg1)
-	if f53_arg2.type == Enum[@"keyboardtype"][@"keyboard_type_register_email"] then
+	if f53_arg2.type == Enum.KeyboardType[@"keyboard_type_register_email"] then
 		if f53_local0 ~= nil then
 			f53_local2.emailAddress:set(f53_local0)
 			local f53_local3 = DataSources.CODAccountRegisterInfoBasic.getItem(f53_arg1, f53_local1, 1)
 			f53_local3.currentText:set(f53_local0)
 		end
-	elseif f53_arg2.type == Enum[@"keyboardtype"][@"keyboard_type_register_password"] then
+	elseif f53_arg2.type == Enum.KeyboardType[@"keyboard_type_register_password"] then
 		if f53_local0 ~= nil then
 			local f53_local3 = string.len(f53_local0)
 			if f53_local3 >= 8 and f53_local3 <= 20 then
@@ -868,16 +868,16 @@ CoD.CoDAccountUtility.CodAccountHandleKeyboardComplete = function(f53_arg0, f53_
 				f53_local4.currentText:set(string.gsub(f53_local0, ".", "*"))
 				f53_local2.confPassword:set("")
 			else
-				LuaUtils.UI_ShowErrorMessageDialog(f53_arg1, @"hash_43518D037A98D238", @"hash_431E422BC40B2429")
+				LuaUtils.UI_ShowErrorMessageDialog(f53_arg1, @"hash_43518D037A98D238", "menu/notice_caps")
 			end
 		end
-	elseif f53_arg2.type == Enum[@"keyboardtype"][@"keyboard_type_confirm_password"] and f53_local0 ~= nil then
+	elseif f53_arg2.type == Enum.KeyboardType[@"keyboard_type_confirm_password"] and f53_local0 ~= nil then
 		if f53_local0 == f53_local2.password:get() then
 			f53_local2.confPassword:set(f53_local0)
 			local f53_local3 = DataSources.CODAccountRegisterInfoBasic.getItem(f53_arg1, f53_local1, 3)
 			f53_local3.currentText:set(string.gsub(f53_local0, ".", "*"))
 		else
-			LuaUtils.UI_ShowErrorMessageDialog(f53_arg1, @"hash_7112336C91F4212E", @"hash_431E422BC40B2429")
+			LuaUtils.UI_ShowErrorMessageDialog(f53_arg1, @"hash_7112336C91F4212E", "menu/notice_caps")
 		end
 	end
 end
@@ -885,13 +885,13 @@ CoD.CoDAccountUtility.CodAccountHandleSignInKeyboardComplete = function(f54_arg0
 	local f54_local0 = f54_arg2.input
 	local f54_local1 = f54_arg3.registrationFormStrings
 	local f54_local2 = DataSources.CODAccountSignInForm.getModel(f54_arg1)
-	if f54_arg2.type == Enum[@"keyboardtype"][@"keyboard_type_email"] then
+	if f54_arg2.type == Enum.KeyboardType[@"keyboard_type_email"] then
 		if f54_local0 ~= nil then
 			f54_local2.emailAddress:set(f54_local0)
 			local f54_local3 = DataSources.CODAccountSignInInfoBasic.getItem(f54_arg1, f54_local1, 1)
 			f54_local3.currentText:set(f54_local0)
 		end
-	elseif f54_arg2.type == Enum[@"keyboardtype"][@"keyboard_type_password"] and f54_local0 ~= nil then
+	elseif f54_arg2.type == Enum.KeyboardType[@"keyboard_type_password"] and f54_local0 ~= nil then
 		f54_local2.password:set(f54_local0)
 		local f54_local3 = DataSources.CODAccountSignInInfoBasic.getItem(f54_arg1, f54_local1, 2)
 		f54_local3.currentText:set(string.gsub(f54_local0, ".", "*"))
@@ -899,23 +899,23 @@ CoD.CoDAccountUtility.CodAccountHandleSignInKeyboardComplete = function(f54_arg0
 end
 CoD.CoDAccountUtility.CodAccountAddRightStickSingleItemControl = function(f55_arg0, f55_arg1, f55_arg2)
 	local f55_local0 = f55_arg1
-	f55_arg0:AddButtonCallbackFunction(f55_local0, f55_arg2, Enum[@"luibutton"][@"lui_key_left"], nil, function(element, menu, controller, model)
-		local f56_local0 = element:getParent()
+	f55_arg0:AddButtonCallbackFunction(f55_local0, f55_arg2, Enum.LUIButton[@"lui_key_left"], nil, function(f56_arg0, f56_arg1, f56_arg2, f56_arg3)
+		local f56_local0 = f56_arg0:getParent()
 		local f56_local1 = f56_local0.minusFn
-		if not IsDpadButton(model) then
-			local f56_local2 = f56_local1 and f56_local1(f56_local0, f56_local0.gridInfoTable.parentGrid, controller)
-			if ScoreboardVisible(controller) then
-				BlockGameFromKeyEvent(controller)
+		if not IsDpadButton(f56_arg3) then
+			local f56_local2 = f56_local1 and f56_local1(f56_local0, f56_local0.gridInfoTable.parentGrid, f56_arg2)
+			if ScoreboardVisible(f56_arg2) then
+				BlockGameFromKeyEvent(f56_arg2)
 			end
 		end
 	end, AlwaysFalse, false)
-	f55_arg0:AddButtonCallbackFunction(f55_local0, f55_arg2, Enum[@"luibutton"][@"lui_key_right"], nil, function(element, menu, controller, model)
-		local f57_local0 = element:getParent()
+	f55_arg0:AddButtonCallbackFunction(f55_local0, f55_arg2, Enum.LUIButton[@"lui_key_right"], nil, function(f57_arg0, f57_arg1, f57_arg2, f57_arg3)
+		local f57_local0 = f57_arg0:getParent()
 		local f57_local1 = f57_local0.plusFn
-		if not IsDpadButton(model) then
-			local f57_local2 = f57_local1 and f57_local1(f57_local0, f57_local0.gridInfoTable.parentGrid, controller)
-			if ScoreboardVisible(controller) then
-				BlockGameFromKeyEvent(controller)
+		if not IsDpadButton(f57_arg3) then
+			local f57_local2 = f57_local1 and f57_local1(f57_local0, f57_local0.gridInfoTable.parentGrid, f57_arg2)
+			if ScoreboardVisible(f57_arg2) then
+				BlockGameFromKeyEvent(f57_arg2)
 			end
 		end
 	end, AlwaysFalse, false)
@@ -935,7 +935,7 @@ CoD.CoDAccountUtility.CodAccountOnTransactionResultUpdated = function(f59_arg0, 
 	local f59_local2 = f59_arg2:get()
 	local f59_local3 = DataSources.UNOAccountInfo.getModel(f59_arg1)
 	local f59_local4 = f59_local3.bSignedIn:get()
-	if f59_local2 ~= nil and f59_local1 == Enum[@"hash_1BD1E0D9720D416F"][@"hash_144F7EE04FC86C81"] and Engine[@"getmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.spinnerActive")) == true then
+	if f59_local2 ~= nil and f59_local1 == Enum[@"hash_1BD1E0D9720D416F"][@"hash_144F7EE04FC86C81"] and Engine.GetModelValue(Engine.CreateModel(Engine.GetGlobalModel(), "lobbyRoot.spinnerActive")) == true then
 		if f59_local2 == Enum[@"hash_17DEA32672263479"][@"hash_19785994B830E5D0"] and f59_local4 then
 			if CoD.CoDAccountUtility.IsSignInRequired(f59_arg0) then
 				CoD.LobbyUtility.OpenFTUEGameIntroductionOverlay(f59_arg1)
@@ -954,7 +954,7 @@ CoD.CoDAccountUtility.CodAccountOnTransactionResultUpdated = function(f59_arg0, 
 				f59_local6 = @"hash_4BC4BCDA21842070"
 				CoD.CoDAccountUtility.IsSignInActive = false
 			end
-			LuaUtils.ShowMessageDialog(f59_arg1, Enum[@"messagedialogtype"][@"message_dialog_type_info"], f59_local6, f59_local5)
+			LuaUtils.ShowMessageDialog(f59_arg1, Enum.MessageDialogType[@"message_dialog_type_info"], f59_local6, f59_local5)
 		else
 			local f59_local5 = CoD.CoDAccountUtility.error_codes[f59_local2]
 			if f59_local5 == nil then
@@ -963,9 +963,9 @@ CoD.CoDAccountUtility.CodAccountOnTransactionResultUpdated = function(f59_arg0, 
 			if f0_local0(f59_local2) then
 				GoBack(f59_arg0, f59_arg1)
 			end
-			LuaUtils.UI_ShowErrorMessageDialog(f59_arg1, f59_local5, @"hash_127999393F1681")
+			LuaUtils.UI_ShowErrorMessageDialog(f59_arg1, f59_local5, "menu/error_caps")
 		end
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "lobbyRoot.spinnerActive"), false)
+		Engine.SetModelValue(Engine.CreateModel(Engine.GetGlobalModel(), "lobbyRoot.spinnerActive"), false)
 	end
 end
 CoD.CoDAccountUtility.UpdateOnCTAOccludedChange = function(f60_arg0, f60_arg1, f60_arg2)
@@ -1006,7 +1006,7 @@ CoD.CoDAccountUtility.IsAccountFeatureEnabled = function(f64_arg0)
 			end
 			f64_local0 = CoDShared.IsERegEnabled(f64_arg0)
 			if f64_local0 then
-				f64_local0 = Engine[@"issignedintodemonware"](f64_arg0)
+				f64_local0 = Engine.IsSignedInToDemonware(f64_arg0)
 			end
 		else
 			f64_local0 = false
@@ -1116,7 +1116,7 @@ CoD.OverlayUtility.AddAutoDetectOverlay("CancelTrialSignIn", {
 			},
 			{
 				action = function()
-					Engine[@"exec"](Engine[@"getprimarycontroller"](), "quit")
+					Engine.exec(Engine.GetPrimaryController(), "quit")
 				end,
 				text = @"menu/quit",
 			},

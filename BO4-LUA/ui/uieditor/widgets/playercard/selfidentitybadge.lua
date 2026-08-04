@@ -1,5 +1,5 @@
-require("x64:228a7baa572b047")
-require("x64:88882bece551bf0")
+require("ui/uieditor/widgets/callingcards/callingcards_framewidget")
+require("ui/uieditor/widgets/director/directorlobbymembername")
 CoD.SelfIdentityBadge = InheritFrom(LUI.UIElement)
 CoD.SelfIdentityBadge.__defaultWidth = 328
 CoD.SelfIdentityBadge.__defaultHeight = 65
@@ -33,8 +33,8 @@ CoD.SelfIdentityBadge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	end
 	clantag.__Color()
 	clantag:setTTF("notosans_regular")
-	clantag:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	clantag:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	clantag:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	clantag:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	clantag:setBackingType(2)
 	clantag:setBackingColor(0, 0, 0)
 	clantag:setBackingAlpha(0.9)

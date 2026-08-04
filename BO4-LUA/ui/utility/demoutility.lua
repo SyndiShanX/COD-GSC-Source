@@ -1,8 +1,7 @@
-
 CoD.DemoUtility = {}
 CoD.DemoUtility.GetRoundedTimeScale = function ( f1_arg0, f1_arg1 )
 	if not f1_arg0 then
-		local f1_local0 = Engine[@"getglobalmodel"]()
+		local f1_local0 = Engine.GetGlobalModel()
 		f1_arg0 = f1_local0.demo.timescale:get()
 	end
 	if not f1_arg1 then
@@ -21,91 +20,91 @@ CoD.DemoUtility.GetRoundedLightFloatParam = function ( f3_arg0 )
 	return string.format( "%.1f", f3_arg0 )
 end
 CoD.DemoUtility.GetDemoContextMode = function ()
-	local f4_local0 = Engine[@"getglobalmodel"]()
+	local f4_local0 = Engine.GetGlobalModel()
 	return f4_local0.demo.contextMode:get()
 end
 CoD.DemoUtility.SetDemoContextMode = function ( f5_arg0 )
-	local f5_local0 = Engine[@"getglobalmodel"]()
+	local f5_local0 = Engine.GetGlobalModel()
 	f5_local0.demo.contextMode:set( f5_arg0 )
 end
 CoD.DemoUtility.GetEditingDollyCameraMarker = function ()
-	local f6_local0 = Engine[@"getglobalmodel"]()
+	local f6_local0 = Engine.GetGlobalModel()
 	return f6_local0.demo.editingDollyCameraMarker:get()
 end
 CoD.DemoUtility.SetEditingDollyCameraMarker = function ( f7_arg0, f7_arg1, f7_arg2, f7_arg3, f7_arg4 )
 	if f7_arg3 == true then
-		Engine[@"exec"]( f7_arg2, "demo_editdollycammarker 1" )
+		Engine.exec( f7_arg2, "demo_editdollycammarker 1" )
 	else
-		Engine[@"exec"]( f7_arg2, "demo_editdollycammarker 0" )
+		Engine.exec( f7_arg2, "demo_editdollycammarker 0" )
 	end
 end
 CoD.DemoUtility.SwitchToDollyCamMarker = function ( f8_arg0, f8_arg1 )
-	Engine[@"exec"]( f8_arg0, "demo_switchdollycammarker " .. f8_arg1 )
+	Engine.exec( f8_arg0, "demo_switchdollycammarker " .. f8_arg1 )
 end
 CoD.DemoUtility.RemoveDollyCamMarker = function ( f9_arg0, f9_arg1, f9_arg2, f9_arg3, f9_arg4 )
-	Engine[@"exec"]( f9_arg2, "demo_removedollycammarker " .. f9_arg3 )
+	Engine.exec( f9_arg2, "demo_removedollycammarker " .. f9_arg3 )
 end
 CoD.DemoUtility.RepositionDollyCamMarker = function ( f10_arg0, f10_arg1, f10_arg2, f10_arg3, f10_arg4 )
-	Engine[@"exec"]( f10_arg2, "demo_repositiondollycammarker " .. f10_arg3 )
+	Engine.exec( f10_arg2, "demo_repositiondollycammarker " .. f10_arg3 )
 end
 CoD.DemoUtility.RemoveCurrentDollyCamMarker = function ( f11_arg0, f11_arg1, f11_arg2, f11_arg3, f11_arg4 )
-	CoD.DemoUtility.RemoveDollyCamMarker( f11_arg0, f11_arg1, f11_arg2, Engine[@"gethighlightedcameramarker"](), f11_arg4 )
+	CoD.DemoUtility.RemoveDollyCamMarker( f11_arg0, f11_arg1, f11_arg2, Engine.GetHighlightedCameraMarker(), f11_arg4 )
 	CoD.DemoUtility.SetEditingDollyCameraMarker( f11_arg0, f11_arg1, f11_arg2, false, f11_arg4 )
 end
 CoD.DemoUtility.GetEditingLightmanMarker = function ()
-	local f12_local0 = Engine[@"getglobalmodel"]()
+	local f12_local0 = Engine.GetGlobalModel()
 	return f12_local0.demo.editingLightmanMarker:get()
 end
 CoD.DemoUtility.SetEditingLightmanMarker = function ( f13_arg0, f13_arg1, f13_arg2, f13_arg3, f13_arg4 )
 	if f13_arg3 == true then
-		Engine[@"exec"]( f13_arg2, "demo_editlightmanmarker 1" )
+		Engine.exec( f13_arg2, "demo_editlightmanmarker 1" )
 	else
-		Engine[@"exec"]( f13_arg2, "demo_editlightmanmarker 0" )
+		Engine.exec( f13_arg2, "demo_editlightmanmarker 0" )
 	end
 end
 CoD.DemoUtility.SwitchToLightmanMarker = function ( f14_arg0, f14_arg1, f14_arg2, f14_arg3, f14_arg4 )
-	Engine[@"exec"]( f14_arg2, "demo_switchlightmanmarker " .. f14_arg3 )
+	Engine.exec( f14_arg2, "demo_switchlightmanmarker " .. f14_arg3 )
 end
 CoD.DemoUtility.CycleLightmanMarker = function ( f15_arg0, f15_arg1, f15_arg2, f15_arg3, f15_arg4 )
 	local f15_local0 = -1
 	if f15_arg3 == "forward" then
-		f15_local0 = Engine[@"gethighlightedcameramarker"]() + 1
+		f15_local0 = Engine.GetHighlightedCameraMarker() + 1
 	elseif f15_arg3 == "back" then
-		f15_local0 = Engine[@"gethighlightedcameramarker"]() - 1
+		f15_local0 = Engine.GetHighlightedCameraMarker() - 1
 	end
 	if f15_local0 >= 0 then
-		local f15_local1 = Engine[@"getglobalmodel"]()
+		local f15_local1 = Engine.GetGlobalModel()
 		if f15_local0 < f15_local1.demo.lightmanMarkerCount:get() then
 			CoD.DemoUtility.SwitchToLightmanMarker( f15_arg0, f15_arg1, f15_arg2, f15_local0, f15_arg4 )
 		end
 	end
 end
 CoD.DemoUtility.RemoveLightmanMarker = function ( f16_arg0, f16_arg1, f16_arg2, f16_arg3, f16_arg4 )
-	Engine[@"exec"]( f16_arg2, "demo_removelightmanmarker " .. f16_arg3 )
+	Engine.exec( f16_arg2, "demo_removelightmanmarker " .. f16_arg3 )
 end
 CoD.DemoUtility.RepositionLightmanMarker = function ( f17_arg0, f17_arg1, f17_arg2, f17_arg3, f17_arg4 )
-	Engine[@"exec"]( f17_arg2, "demo_repositionlightmanmarker " .. f17_arg3 )
+	Engine.exec( f17_arg2, "demo_repositionlightmanmarker " .. f17_arg3 )
 end
 CoD.DemoUtility.RemoveCurrentLightmanMarker = function ( f18_arg0, f18_arg1, f18_arg2, f18_arg3, f18_arg4 )
-	CoD.DemoUtility.RemoveLightmanMarker( f18_arg0, f18_arg1, f18_arg2, Engine[@"gethighlightedcameramarker"](), f18_arg4 )
+	CoD.DemoUtility.RemoveLightmanMarker( f18_arg0, f18_arg1, f18_arg2, Engine.GetHighlightedCameraMarker(), f18_arg4 )
 	CoD.DemoUtility.SetEditingLightmanMarker( f18_arg0, f18_arg1, f18_arg2, false, f18_arg4 )
 end
 CoD.DemoUtility.SetCurrentLightmanColor = function ( f19_arg0, f19_arg1 )
 	local f19_local0 = CoD.ColorUtility.GetColorFromFormattedColorString( f19_arg1 )
-	local f19_local1 = Engine[@"getglobalmodel"]()
+	local f19_local1 = Engine.GetGlobalModel()
 	f19_local1.demo.currentLightmanMarkerLightColorR:set( f19_local0.r )
-	f19_local1 = Engine[@"getglobalmodel"]()
+	f19_local1 = Engine.GetGlobalModel()
 	f19_local1.demo.currentLightmanMarkerLightColorG:set( f19_local0.g )
-	f19_local1 = Engine[@"getglobalmodel"]()
+	f19_local1 = Engine.GetGlobalModel()
 	f19_local1.demo.currentLightmanMarkerLightColorB:set( f19_local0.b )
-	Engine[@"exec"]( f19_arg0, "demo_updatelightmanmarkerparameters " .. Engine[@"gethighlightedcameramarker"]() )
+	Engine.exec( f19_arg0, "demo_updatelightmanmarkerparameters " .. Engine.GetHighlightedCameraMarker() )
 end
 CoD.DemoUtility.RunPauseCommand = function ( f20_arg0 )
 	CoD.DemoUtility.TogglePlayerPauseModelValue()
-	Engine[@"execnow"]( f20_arg0, "demo_pause" )
+	Engine.ExecNow( f20_arg0, "demo_pause" )
 end
 CoD.DemoUtility.UnpauseIfPaused = function ( f21_arg0 )
-	local f21_local0 = Engine[@"getglobalmodel"]()
+	local f21_local0 = Engine.GetGlobalModel()
 	if f21_local0.demo.isPaused:get() then
 		CoD.DemoUtility.RunPauseCommand( f21_arg0 )
 	end
@@ -118,7 +117,7 @@ CoD.DemoUtility.IsRestrictedBasicMode = function ()
 	end
 end
 CoD.DemoUtility.IsCameraCyclingDisabled = function ()
-	local f23_local0 = Engine[@"getglobalmodel"]()
+	local f23_local0 = Engine.GetGlobalModel()
 	f23_local0 = f23_local0.demo.isCameraCyclingDisabled
 	if f23_local0 then
 		return f23_local0:get()
@@ -127,7 +126,7 @@ CoD.DemoUtility.IsCameraCyclingDisabled = function ()
 	end
 end
 CoD.DemoUtility.IsFastForwardingDisabled = function ()
-	local f24_local0 = Engine[@"getglobalmodel"]()
+	local f24_local0 = Engine.GetGlobalModel()
 	f24_local0 = f24_local0.demo.isFastForwardingDisabled
 	if f24_local0 then
 		return f24_local0:get()
@@ -136,37 +135,37 @@ CoD.DemoUtility.IsFastForwardingDisabled = function ()
 	end
 end
 CoD.DemoUtility.TakeScreenshot = function ( f25_arg0, f25_arg1, f25_arg2, f25_arg3, f25_arg4 )
-	Engine[@"exec"]( f25_arg2, "demo_screenshot" )
+	Engine.exec( f25_arg2, "demo_screenshot" )
 end
 CoD.DemoUtility.DemoSwitchPlayer = function ( f26_arg0, f26_arg1, f26_arg2, f26_arg3, f26_arg4 )
 	if f26_arg3 == "forward" then
-		Engine[@"exec"]( f26_arg2, "demo_switchplayer 0" )
+		Engine.exec( f26_arg2, "demo_switchplayer 0" )
 	elseif f26_arg3 == "back" then
-		Engine[@"exec"]( f26_arg2, "demo_switchplayer 1" )
+		Engine.exec( f26_arg2, "demo_switchplayer 1" )
 	end
 end
 CoD.DemoUtility.UpdateDemoCameraMode = function ( f27_arg0, f27_arg1, f27_arg2, f27_arg3, f27_arg4 )
 	if f27_arg3 == nil or f27_arg3 == "" then
 		return 
 	end
-	local f27_local0 = Engine[@"getglobalmodel"]()
+	local f27_local0 = Engine.GetGlobalModel()
 	f27_local0 = f27_local0.demo.cameraMode:get()
 	local f27_local1 = nil
 	if f27_arg3 == "next" or f27_arg3 == "cycle" then
-		if f27_local0 == Enum[@"democameramode"][@"demo_camera_mode_none"] then
-			f27_local1 = Enum[@"democameramode"][@"demo_camera_mode_thirdperson"]
-		elseif f27_local0 == Enum[@"democameramode"][@"demo_camera_mode_thirdperson"] then
-			f27_local1 = Enum[@"democameramode"][@"demo_camera_mode_freecam"]
+		if f27_local0 == Enum.demoCameraMode[@"demo_camera_mode_none"] then
+			f27_local1 = Enum.demoCameraMode[@"demo_camera_mode_thirdperson"]
+		elseif f27_local0 == Enum.demoCameraMode[@"demo_camera_mode_thirdperson"] then
+			f27_local1 = Enum.demoCameraMode[@"demo_camera_mode_freecam"]
 		elseif f27_arg3 == "cycle" then
-			f27_local1 = Enum[@"democameramode"][@"demo_camera_mode_none"]
+			f27_local1 = Enum.demoCameraMode[@"demo_camera_mode_none"]
 		else
 			return 
 		end
 	elseif f27_arg3 == "prev" then
-		if f27_local0 == Enum[@"democameramode"][@"demo_camera_mode_thirdperson"] then
-			f27_local1 = Enum[@"democameramode"][@"demo_camera_mode_none"]
-		elseif f27_local0 == Enum[@"democameramode"][@"demo_camera_mode_freecam"] then
-			f27_local1 = Enum[@"democameramode"][@"demo_camera_mode_thirdperson"]
+		if f27_local0 == Enum.demoCameraMode[@"demo_camera_mode_thirdperson"] then
+			f27_local1 = Enum.demoCameraMode[@"demo_camera_mode_none"]
+		elseif f27_local0 == Enum.demoCameraMode[@"demo_camera_mode_freecam"] then
+			f27_local1 = Enum.demoCameraMode[@"demo_camera_mode_thirdperson"]
 		else
 			return 
 		end
@@ -187,8 +186,8 @@ CoD.DemoUtility.UpdateDemoFastForward = function ( f28_arg0 )
 	else
 		f28_local1 = 1
 	end
-	Engine[@"execnow"]( f28_arg0, "demo_timescale " .. f28_local1 )
-	local f28_local2 = Engine[@"getglobalmodel"]()
+	Engine.ExecNow( f28_arg0, "demo_timescale " .. f28_local1 )
+	local f28_local2 = Engine.GetGlobalModel()
 	f28_local2 = f28_local2.demo.timeScale
 	if f28_local2 then
 		f28_local2:set( f28_local1 )
@@ -201,9 +200,9 @@ CoD.DemoUtility.UpdateDemoTimeScaleDelta = function ( f29_arg0, f29_arg1, f29_ar
 	local f29_local2 = tonumber( f29_arg3 )
 	local f29_local3 = f29_local1 + f29_arg3
 	if not (f29_local0 > f29_local1 or f29_local3 > Dvar[@"demo_maxtimescale"]:get() or f29_local2 <= 0) or f29_local1 <= f29_local0 and f29_local3 >= 0.1 and f29_local2 < 0 then
-		Engine[@"exec"]( f29_arg2, "demo_timescale " .. f29_local3 )
+		Engine.exec( f29_arg2, "demo_timescale " .. f29_local3 )
 	else
-		Engine[@"exec"]( f29_arg2, "demo_timescale " .. f29_local0 )
+		Engine.exec( f29_arg2, "demo_timescale " .. f29_local0 )
 	end
 end
 CoD.DemoUtility.UpdateDemoTimeScaleForTrigger = function ( f30_arg0, f30_arg1, f30_arg2, f30_arg3 )
@@ -216,8 +215,8 @@ CoD.DemoUtility.UpdateDemoTimeScaleForTrigger = function ( f30_arg0, f30_arg1, f
 		return 
 	end
 	local f30_local2 = CoD.DemoUtility.GetRoundedTimeScale( f30_arg2 + f30_local0 * f30_local1 )
-	Engine[@"execnow"]( f30_arg0, "demo_timescale " .. f30_local2 )
-	local f30_local3 = Engine[@"getglobalmodel"]()
+	Engine.ExecNow( f30_arg0, "demo_timescale " .. f30_local2 )
+	local f30_local3 = Engine.GetGlobalModel()
 	f30_local3 = f30_local3.demo.timeScale
 	if f30_local3 then
 		f30_local3:set( f30_local2 )
@@ -229,57 +228,57 @@ CoD.DemoUtility.DemoTimeJump = function ( f31_arg0, f31_arg1, f31_arg2, f31_arg3
 		if CoD.GameEndScoreUtility.IsInTransition( f31_arg2 ) then
 			CoD.GameEndScoreUtility.ClearTransitionModels( f31_arg2 )
 		end
-		Engine[@"exec"]( f31_arg2, "demo_forward" )
+		Engine.exec( f31_arg2, "demo_forward" )
 	elseif f31_arg3 == "back" then
 		if CoD.GameEndScoreUtility.IsInTransition( f31_arg2 ) then
 			CoD.GameEndScoreUtility.ClearTransitionModels( f31_arg2 )
 		end
-		Engine[@"exec"]( f31_arg2, "demo_back" )
+		Engine.exec( f31_arg2, "demo_back" )
 	end
 end
 CoD.DemoUtility.DemoToggleGameHud = function ( f32_arg0 )
-	Engine[@"exec"]( f32_arg0, "demo_togglegamehud" )
+	Engine.exec( f32_arg0, "demo_togglegamehud" )
 end
 CoD.DemoUtility.DemoToggleDemoHud = function ( f33_arg0, f33_arg1, f33_arg2, f33_arg3, f33_arg4 )
-	Engine[@"exec"]( f33_arg2, "demo_toggledemohud" )
+	Engine.exec( f33_arg2, "demo_toggledemohud" )
 	if CoD.isPC then
 		f33_arg0.demoShowMouse = not f33_arg0.demoShowMouse
 	end
 end
 CoD.DemoUtility.DemoCancelPreview = function ( f34_arg0, f34_arg1, f34_arg2, f34_arg3, f34_arg4 )
-	Engine[@"exec"]( f34_arg2, "demo_cancelpreview" )
+	Engine.exec( f34_arg2, "demo_cancelpreview" )
 end
 CoD.DemoUtility.DemoStartAutoDollyCamera = function ( f35_arg0, f35_arg1, f35_arg2, f35_arg3, f35_arg4 )
 	CoD.DemoUtility.UnpauseIfPaused( f35_arg2 )
-	Engine[@"exec"]( f35_arg2, "demo_startautodollycam" )
+	Engine.exec( f35_arg2, "demo_startautodollycam" )
 end
 CoD.DemoUtility.DemoStopAutoDollyCamera = function ( f36_arg0, f36_arg1, f36_arg2, f36_arg3, f36_arg4 )
-	Engine[@"exec"]( f36_arg2, "demo_stopautodollycam" )
+	Engine.exec( f36_arg2, "demo_stopautodollycam" )
 end
 CoD.DemoUtility.DemoAddDollyCameraMarker = function ( f37_arg0, f37_arg1, f37_arg2, f37_arg3, f37_arg4 )
-	Engine[@"exec"]( f37_arg2, "demo_adddollycammarker" )
+	Engine.exec( f37_arg2, "demo_adddollycammarker" )
 end
 CoD.DemoUtility.StartStopRecordClip = function ( f38_arg0, f38_arg1, f38_arg2, f38_arg3, f38_arg4 )
 	if Engine[@"isdemocliprecording"]() then
-		Engine[@"exec"]( f38_arg2, "demo_pausecliprecord" )
+		Engine.exec( f38_arg2, "demo_pausecliprecord" )
 	else
 		if Engine[@"isdemocameraeditmode"]() then
 			CoD.DemoUtility.UnpauseIfPaused( f38_arg2 )
-			Engine[@"switchdemofreecameramode"]( Enum[@"demofreecameramode"][@"demo_freecam_mode_dolly"] )
+			Engine[@"switchdemofreecameramode"]( Enum.demoFreeCameraMode[@"demo_freecam_mode_dolly"] )
 		end
-		if Engine[@"profilebool"]( f38_arg2, @"demo_recordwithautoplay" ) then
+		if Engine.ProfileBool( f38_arg2, "demo_recordwithautoplay" ) then
 			CoD.DemoUtility.UnpauseIfPaused( f38_arg2 )
 		end
-		Engine[@"exec"]( f38_arg2, "demo_startcliprecord" )
+		Engine.exec( f38_arg2, "demo_startcliprecord" )
 	end
 end
 CoD.DemoUtility.DemoTimeJumpDollyCameraMarker = function ( f39_arg0, f39_arg1, f39_arg2, f39_arg3, f39_arg4 )
 	local f39_local0 = -1
 	if f39_arg3 == "forward" then
-		local f39_local1 = Engine[@"getglobalmodel"]()
+		local f39_local1 = Engine.GetGlobalModel()
 		f39_local0 = f39_local1.demo.dollyCamMarkerForJumpForward:get()
 	elseif f39_arg3 == "back" then
-		local f39_local1 = Engine[@"getglobalmodel"]()
+		local f39_local1 = Engine.GetGlobalModel()
 		f39_local0 = f39_local1.demo.dollyCamMarkerForJumpBack:get() - 1
 	end
 	if f39_local0 ~= -1 then
@@ -291,38 +290,38 @@ CoD.DemoUtility.DemoEditDollyCameraMarker = function ( f40_arg0, f40_arg1, f40_a
 	CoD.DemoUtility.SetEditingDollyCameraMarker( f40_arg0, f40_arg1, f40_arg2, true, f40_arg4 )
 end
 CoD.DemoUtility.DemoExitEditDollyCameraMarker = function ( f41_arg0, f41_arg1, f41_arg2, f41_arg3, f41_arg4 )
-	Engine[@"exec"]( f41_arg2, "demo_updatedollycammarkerparameters " .. Engine[@"gethighlightedcameramarker"]() )
+	Engine.exec( f41_arg2, "demo_updatedollycammarkerparameters " .. Engine.GetHighlightedCameraMarker() )
 	CoD.DemoUtility.SetEditingDollyCameraMarker( f41_arg0, f41_arg1, f41_arg2, false, f41_arg4 )
 end
 CoD.DemoUtility.DemoPlaceDollyCameraMarker = function ( f42_arg0, f42_arg1, f42_arg2, f42_arg3, f42_arg4 )
-	Engine[@"exec"]( f42_arg2, "demo_applynewdollycammarkerposition 0" )
+	Engine.exec( f42_arg2, "demo_applynewdollycammarkerposition 0" )
 end
 CoD.DemoUtility.DemoCancelPlaceDollyCameraMarker = function ( f43_arg0, f43_arg1, f43_arg2, f43_arg3, f43_arg4 )
-	Engine[@"exec"]( f43_arg2, "demo_applynewdollycammarkerposition 1" )
+	Engine.exec( f43_arg2, "demo_applynewdollycammarkerposition 1" )
 end
 CoD.DemoUtility.UpdateDollyCameraTimeScaleMode = function ( f44_arg0, f44_arg1, f44_arg2, f44_arg3, f44_arg4 )
 	if f44_arg3 == nil or f44_arg3 == "" then
 		return 
 	end
-	local f44_local0 = Engine[@"getglobalmodel"]()
+	local f44_local0 = Engine.GetGlobalModel()
 	f44_local0 = f44_local0.demo.currentDollyCamMarkerTimeScaleMode
 	local f44_local1 = f44_local0:get()
 	local f44_local2 = nil
 	if f44_arg3 == "next" or f44_arg3 == "cycle" then
-		if f44_local1 == Enum[@"demodollycameratimescalemode"][@"demo_dollycam_timescale_mode_manual"] then
-			f44_local2 = Enum[@"demodollycameratimescalemode"][@"demo_dollycam_timescale_mode_linear"]
-		elseif f44_local1 == Enum[@"demodollycameratimescalemode"][@"demo_dollycam_timescale_mode_linear"] then
-			f44_local2 = Enum[@"demodollycameratimescalemode"][@"demo_dollycam_timescale_mode_fixed"]
+		if f44_local1 == Enum.demoDollyCameraTimeScaleMode[@"demo_dollycam_timescale_mode_manual"] then
+			f44_local2 = Enum.demoDollyCameraTimeScaleMode[@"demo_dollycam_timescale_mode_linear"]
+		elseif f44_local1 == Enum.demoDollyCameraTimeScaleMode[@"demo_dollycam_timescale_mode_linear"] then
+			f44_local2 = Enum.demoDollyCameraTimeScaleMode[@"demo_dollycam_timescale_mode_fixed"]
 		elseif f44_arg3 == "cycle" then
-			f44_local2 = Enum[@"demodollycameratimescalemode"][@"demo_dollycam_timescale_mode_manual"]
+			f44_local2 = Enum.demoDollyCameraTimeScaleMode[@"demo_dollycam_timescale_mode_manual"]
 		else
 			return 
 		end
 	elseif f44_arg3 == "prev" then
-		if f44_local1 == Enum[@"demodollycameratimescalemode"][@"demo_dollycam_timescale_mode_linear"] then
-			f44_local2 = Enum[@"demodollycameratimescalemode"][@"demo_dollycam_timescale_mode_manual"]
-		elseif f44_local1 == Enum[@"demodollycameratimescalemode"][@"demo_dollycam_timescale_mode_fixed"] then
-			f44_local2 = Enum[@"demodollycameratimescalemode"][@"demo_dollycam_timescale_mode_linear"]
+		if f44_local1 == Enum.demoDollyCameraTimeScaleMode[@"demo_dollycam_timescale_mode_linear"] then
+			f44_local2 = Enum.demoDollyCameraTimeScaleMode[@"demo_dollycam_timescale_mode_manual"]
+		elseif f44_local1 == Enum.demoDollyCameraTimeScaleMode[@"demo_dollycam_timescale_mode_fixed"] then
+			f44_local2 = Enum.demoDollyCameraTimeScaleMode[@"demo_dollycam_timescale_mode_linear"]
 		else
 			return 
 		end
@@ -330,7 +329,7 @@ CoD.DemoUtility.UpdateDollyCameraTimeScaleMode = function ( f44_arg0, f44_arg1, 
 	f44_local0:set( f44_local2 )
 end
 CoD.DemoUtility.UpdateDollyCameraTimeScale = function ( f45_arg0, f45_arg1, f45_arg2, f45_arg3, f45_arg4 )
-	local f45_local0 = Engine[@"getglobalmodel"]()
+	local f45_local0 = Engine.GetGlobalModel()
 	f45_local0 = f45_local0.demo.currentDollyCamMarkerTimeScaleValue
 	if not f45_local0 then
 		return 
@@ -344,60 +343,60 @@ CoD.DemoUtility.UpdateDollyCameraTimeScale = function ( f45_arg0, f45_arg1, f45_
 end
 CoD.DemoUtility.ToggleDollyCameraMode = function ( f46_arg0, f46_arg1, f46_arg2, f46_arg3, f46_arg4 )
 	if Engine[@"isdemodollycamera"]() then
-		Engine[@"switchdemofreecameramode"]( Enum[@"demofreecameramode"][@"demo_freecam_mode_edit"] )
+		Engine[@"switchdemofreecameramode"]( Enum.demoFreeCameraMode[@"demo_freecam_mode_edit"] )
 	else
 		CoD.DemoUtility.UnpauseIfPaused( f46_arg2 )
-		Engine[@"switchdemofreecameramode"]( Enum[@"demofreecameramode"][@"demo_freecam_mode_dolly"] )
+		Engine[@"switchdemofreecameramode"]( Enum.demoFreeCameraMode[@"demo_freecam_mode_dolly"] )
 	end
 end
 CoD.DemoUtility.DemoFreeCameraLockOnObject = function ( f47_arg0, f47_arg1, f47_arg2, f47_arg3, f47_arg4 )
-	Engine[@"exec"]( f47_arg2, "demo_activatefreecameralockon" )
+	Engine.exec( f47_arg2, "demo_activatefreecameralockon" )
 end
 CoD.DemoUtility.DemoFreeCameraUnlockObject = function ( f48_arg0, f48_arg1, f48_arg2, f48_arg3, f48_arg4 )
-	Engine[@"exec"]( f48_arg2, "demo_deactivatefreecameralockon" )
+	Engine.exec( f48_arg2, "demo_deactivatefreecameralockon" )
 end
 CoD.DemoUtility.DemoAddLightmanMarker = function ( f49_arg0, f49_arg1, f49_arg2, f49_arg3, f49_arg4 )
-	Engine[@"exec"]( f49_arg2, "demo_addlightmanmarker" )
+	Engine.exec( f49_arg2, "demo_addlightmanmarker" )
 end
 CoD.DemoUtility.DemoEditLightmanMarker = function ( f50_arg0, f50_arg1, f50_arg2, f50_arg3, f50_arg4 )
 	CoD.DemoUtility.SwitchToLightmanMarker( f50_arg0, f50_arg1, f50_arg2, -1, f50_arg4 )
 	CoD.DemoUtility.SetEditingLightmanMarker( f50_arg0, f50_arg1, f50_arg2, true, f50_arg4 )
 end
 CoD.DemoUtility.DemoExitEditLightmanMarker = function ( f51_arg0, f51_arg1, f51_arg2, f51_arg3, f51_arg4 )
-	Engine[@"exec"]( f51_arg2, "demo_updatelightmanmarkerparameters " .. Engine[@"gethighlightedcameramarker"]() )
+	Engine.exec( f51_arg2, "demo_updatelightmanmarkerparameters " .. Engine.GetHighlightedCameraMarker() )
 	CoD.DemoUtility.SetEditingLightmanMarker( f51_arg0, f51_arg1, f51_arg2, false, f51_arg4 )
 end
 CoD.DemoUtility.DemoPlaceLightmanMarker = function ( f52_arg0, f52_arg1, f52_arg2, f52_arg3, f52_arg4 )
-	Engine[@"exec"]( f52_arg2, "demo_applynewlightmanmarkerposition 0" )
+	Engine.exec( f52_arg2, "demo_applynewlightmanmarkerposition 0" )
 end
 CoD.DemoUtility.DemoCancelPlaceLightmanMarker = function ( f53_arg0, f53_arg1, f53_arg2, f53_arg3, f53_arg4 )
-	Engine[@"exec"]( f53_arg2, "demo_applynewlightmanmarkerposition 1" )
+	Engine.exec( f53_arg2, "demo_applynewlightmanmarkerposition 1" )
 end
 CoD.DemoUtility.UpdateLightmanLightMode = function ( f54_arg0, f54_arg1, f54_arg2, f54_arg3, f54_arg4 )
 	if f54_arg3 == nil or f54_arg3 == "" then
 		return 
 	end
-	local f54_local0 = Engine[@"getglobalmodel"]()
+	local f54_local0 = Engine.GetGlobalModel()
 	f54_local0 = f54_local0.demo.currentLightmanMarkerLightMode
 	local f54_local1 = f54_local0:get()
 	local f54_local2 = nil
 	if f54_arg3 == "next" or f54_arg3 == "cycle" then
-		if f54_local1 == Enum[@"demolightmanlightmode"][@"demo_lightman_light_mode_omni"] then
-			f54_local2 = Enum[@"demolightmanlightmode"][@"demo_lightman_light_mode_spot"]
+		if f54_local1 == Enum.demoLightmanLightMode[@"demo_lightman_light_mode_omni"] then
+			f54_local2 = Enum.demoLightmanLightMode[@"demo_lightman_light_mode_spot"]
 		elseif f54_arg3 == "cycle" then
-			f54_local2 = Enum[@"demolightmanlightmode"][@"demo_lightman_light_mode_omni"]
+			f54_local2 = Enum.demoLightmanLightMode[@"demo_lightman_light_mode_omni"]
 		else
 			return 
 		end
 	elseif f54_arg3 == "prev" then
-		if f54_local1 == Enum[@"demolightmanlightmode"][@"demo_lightman_light_mode_spot"] then
-			f54_local2 = Enum[@"demolightmanlightmode"][@"demo_lightman_light_mode_omni"]
+		if f54_local1 == Enum.demoLightmanLightMode[@"demo_lightman_light_mode_spot"] then
+			f54_local2 = Enum.demoLightmanLightMode[@"demo_lightman_light_mode_omni"]
 		else
 			return 
 		end
 	end
 	f54_local0:set( f54_local2 )
-	Engine[@"exec"]( f54_arg2, "demo_updatelightmanmarkerparameters " .. Engine[@"gethighlightedcameramarker"]() )
+	Engine.exec( f54_arg2, "demo_updatelightmanmarkerparameters " .. Engine.GetHighlightedCameraMarker() )
 end
 CoD.DemoUtility.UpdateLightmanFloatParam = function ( f55_arg0, f55_arg1, f55_arg2 )
 	local f55_local0 = 0 < f55_arg2
@@ -409,32 +408,32 @@ CoD.DemoUtility.UpdateLightmanFloatParam = function ( f55_arg0, f55_arg1, f55_ar
 	local f55_local3 = f55_arg1:get() + f55_arg2
 	if not (not f55_local0 or f55_local3 > f55_local2) or not f55_local0 and f55_local1 <= f55_local3 then
 		f55_arg1:set( f55_local3 )
-		Engine[@"exec"]( f55_arg0, "demo_updatelightmanmarkerparameters " .. Engine[@"gethighlightedcameramarker"]() )
+		Engine.exec( f55_arg0, "demo_updatelightmanmarkerparameters " .. Engine.GetHighlightedCameraMarker() )
 	end
 end
 CoD.DemoUtility.UpdateLightmanIntensity = function ( f56_arg0, f56_arg1, f56_arg2, f56_arg3, f56_arg4 )
 	local f56_local0 = CoD.DemoUtility.UpdateLightmanFloatParam
 	local f56_local1 = f56_arg2
-	local f56_local2 = Engine[@"getglobalmodel"]()
+	local f56_local2 = Engine.GetGlobalModel()
 	f56_local0( f56_local1, f56_local2.demo.currentLightmanMarkerLightIntensity, tonumber( f56_arg3 ) )
 end
 CoD.DemoUtility.UpdateLightmanRange = function ( f57_arg0, f57_arg1, f57_arg2, f57_arg3, f57_arg4 )
 	local f57_local0 = CoD.DemoUtility.UpdateLightmanFloatParam
 	local f57_local1 = f57_arg2
-	local f57_local2 = Engine[@"getglobalmodel"]()
+	local f57_local2 = Engine.GetGlobalModel()
 	f57_local0( f57_local1, f57_local2.demo.currentLightmanMarkerLightRange, tonumber( f57_arg3 ) )
 end
 CoD.DemoUtility.UpdateLightmanLightColor = function ( f58_arg0, f58_arg1, f58_arg2, f58_arg3, f58_arg4 )
 	OpenPopup( f58_arg4:getParent(), "LightmanColorPicker", f58_arg2 )
-	local f58_local0 = Engine[@"getglobalmodel"]()
+	local f58_local0 = Engine.GetGlobalModel()
 	f58_local0.demo.showLightmanColorPicker:set( true )
 end
 CoD.DemoUtility.StoreCurrentLightmanColor = function ( f59_arg0, f59_arg1, f59_arg2, f59_arg3 )
-	local f59_local0 = Engine[@"getglobalmodel"]()
+	local f59_local0 = Engine.GetGlobalModel()
 	f59_local0 = f59_local0.demo.currentLightmanMarkerLightColorR:get()
-	local f59_local1 = Engine[@"getglobalmodel"]()
+	local f59_local1 = Engine.GetGlobalModel()
 	f59_local1 = f59_local1.demo.currentLightmanMarkerLightColorG:get()
-	local f59_local2 = Engine[@"getglobalmodel"]()
+	local f59_local2 = Engine.GetGlobalModel()
 	CoD.DemoUtility.CurrentLightmanColor = string.format( "%d %d %d", f59_local0 * 255, f59_local1 * 255, f59_local2.demo.currentLightmanMarkerLightColorB:get() * 255 )
 end
 CoD.DemoUtility.SelectLightmanColor = function ( f60_arg0, f60_arg1, f60_arg2, f60_arg3 )
@@ -458,21 +457,21 @@ CoD.DemoUtility.CloseChooseModeSidebar = function ( f62_arg0, f62_arg1 )
 end
 CoD.DemoUtility.HandleDemoKeyboardComplete = function ( f63_arg0, f63_arg1 )
 	if f63_arg0.keyboardName ~= nil then
-		local f63_local0 = Engine[@"getglobalmodel"]()
+		local f63_local0 = Engine.GetGlobalModel()
 		if f63_local0.demo.keyboardModeName:get() == f63_arg0.keyboardName then
 			f63_local0 = f63_arg0.Text
 			local f63_local1 = f63_local0
 			f63_local0 = f63_local0.setText
-			local f63_local2 = Engine[@"getglobalmodel"]()
+			local f63_local2 = Engine.GetGlobalModel()
 			f63_local0( f63_local1, f63_local2.demo.keyboardText:get() )
 		end
 	end
 end
 CoD.DemoUtility.OpenDemoKeyboard = function ( f64_arg0, f64_arg1, f64_arg2, f64_arg3, f64_arg4 )
 	if f64_arg4 and f64_arg4 ~= "" then
-		Engine[@"exec"]( f64_arg2, "demo_keyboard " .. f64_arg3 .. " " .. f64_arg4 )
+		Engine.exec( f64_arg2, "demo_keyboard " .. f64_arg3 .. " " .. f64_arg4 )
 	else
-		Engine[@"exec"]( f64_arg2, "demo_keyboard " .. f64_arg3 )
+		Engine.exec( f64_arg2, "demo_keyboard " .. f64_arg3 )
 	end
 	f64_arg1.keyboardName = f64_arg3
 end
@@ -506,7 +505,7 @@ CoD.DemoUtility.UploadClip_GoBack = function ( f67_arg0, f67_arg1, f67_arg2, f67
 	local f67_local0 = GoBack( f67_arg0, f67_arg2 )
 	ClearMenuSavedState( f67_arg0 )
 	if f67_local0.menuName == "TimelineEditor" then
-		Engine[@"exec"]( f67_arg2, "setupThumbnailsForManageSegments" )
+		Engine.exec( f67_arg2, "setupThumbnailsForManageSegments" )
 	else
 		ResetThumbnailViewer( f67_arg2 )
 	end
@@ -518,7 +517,7 @@ CoD.DemoUtility.UpdateNumHighlightReelMomentsElementColor = function ( f68_arg0,
 	local f68_local0 = CoD.DemoUtility.GetNumHighlightReelMomentsModel()
 	local f68_local1 = 0
 	if f68_local0 then
-		f68_local1 = Engine[@"getmodelvalue"]( f68_local0 )
+		f68_local1 = Engine.GetModelValue( f68_local0 )
 	end
 	if f68_local1 <= 0 then
 		f68_arg0:setRGB( ColorSet.InsufficientFunds.r, ColorSet.InsufficientFunds.g, ColorSet.InsufficientFunds.b )
@@ -527,7 +526,7 @@ CoD.DemoUtility.UpdateNumHighlightReelMomentsElementColor = function ( f68_arg0,
 	end
 end
 CoD.DemoUtility.DemoCancelHighlightReelCreation = function ( f69_arg0, f69_arg1, f69_arg2, f69_arg3, f69_arg4 )
-	Engine[@"exec"]( f69_arg2, "demo_cancelhighlightreelcreation" )
+	Engine.exec( f69_arg2, "demo_cancelhighlightreelcreation" )
 end
 CoD.DemoUtility.OpenChooseModeSidebar = function ( f70_arg0, f70_arg1, f70_arg2, f70_arg3, f70_arg4 )
 	SetGlobalModelValueTrue( "demo.showChooseModeSidebar" )
@@ -539,7 +538,7 @@ end
 CoD.DemoUtility.ShouldStartAutoDollyCamera = function ( f72_arg0 )
 	if not IsDemoContextDirectorMode() then
 		return false
-	elseif not Engine[@"profilebool"]( f72_arg0, @"demo_autodollyrecord" ) then
+	elseif not Engine.ProfileBool( f72_arg0, "demo_autodollyrecord" ) then
 		return false
 	elseif CoD.ModelUtility.IsGlobalModelValueGreaterThan( "demo.highlightedDollyCamMarker", -1 ) then
 		return false
@@ -552,7 +551,7 @@ end
 CoD.DemoUtility.ShouldStopAutoDollyCamera = function ( f73_arg0 )
 	if not IsDemoContextDirectorMode() then
 		return false
-	elseif not Engine[@"profilebool"]( f73_arg0, @"demo_autodollyrecord" ) then
+	elseif not Engine.ProfileBool( f73_arg0, "demo_autodollyrecord" ) then
 		return false
 	elseif not CoD.ModelUtility.IsGlobalModelValueTrue( "demo.isRecordingDollyCameraPath" ) then
 		return false
@@ -562,24 +561,24 @@ CoD.DemoUtility.ShouldStopAutoDollyCamera = function ( f73_arg0 )
 end
 CoD.DemoUtility.RunPauseCommandIfNotPlayerPause = function ( f74_arg0 )
 	if not CoD.DemoUtility.GetPlayerPauseModelValue() then
-		Engine[@"execnow"]( f74_arg0, "demo_pause" )
+		Engine.ExecNow( f74_arg0, "demo_pause" )
 	end
 end
 CoD.DemoUtility.InitPlayerPauseModel = function ()
-	local f75_local0 = Engine[@"setmodelvalue"]
-	local f75_local1 = Engine[@"createmodel"]
-	local f75_local2 = Engine[@"getglobalmodel"]()
+	local f75_local0 = Engine.SetModelValue
+	local f75_local1 = Engine.CreateModel
+	local f75_local2 = Engine.GetGlobalModel()
 	f75_local0( f75_local1( f75_local2.demo, "isPlayerPause" ), false )
 end
 CoD.DemoUtility.SetPlayerPauseModelValue = function ( f76_arg0 )
-	local f76_local0 = Engine[@"createmodel"]
-	local f76_local1 = Engine[@"getglobalmodel"]()
+	local f76_local0 = Engine.CreateModel
+	local f76_local1 = Engine.GetGlobalModel()
 	f76_local0 = f76_local0( f76_local1.demo, "isPlayerPause" )
 	f76_local0:set( f76_arg0 )
 end
 CoD.DemoUtility.GetPlayerPauseModelValue = function ()
-	local f77_local0 = Engine[@"createmodel"]
-	local f77_local1 = Engine[@"getglobalmodel"]()
+	local f77_local0 = Engine.CreateModel
+	local f77_local1 = Engine.GetGlobalModel()
 	f77_local0 = f77_local0( f77_local1.demo, "isPlayerPause" )
 	return f77_local0:get()
 end
@@ -602,8 +601,8 @@ end
 CoD.DemoUtility.SubscribeDemoToScoreboardVisibility = function ( f80_arg0, f80_arg1, f80_arg2, f80_arg3 )
 	local f80_local0 = f80_arg0
 	local f80_local1 = f80_arg0.subscribeToModel
-	local f80_local2 = Engine[@"getmodelforcontroller"]( f80_arg3 )
-	f80_local1( f80_local0, f80_local2["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_scoreboard_open"]], function ( f81_arg0 )
+	local f80_local2 = Engine.GetModelForController( f80_arg3 )
+	f80_local1( f80_local0, f80_local2["UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_scoreboard_open"]], function ( f81_arg0 )
 		if f81_arg0:get() == 0 then
 			SetFocusToElement( f80_arg0, f80_arg1.id, f80_arg3 )
 		end
@@ -616,9 +615,9 @@ CoD.DemoUtility.TriangleButtonAction = function ( f82_arg0, f82_arg1, f82_arg2, 
 	if IsDemoContextBasicOrHighlightReelMode() and not f82_local0 and not f82_local1 and not f82_local2 then
 		CoD.DemoUtility.UpdateDemoCameraMode( f82_arg0, f82_arg1, f82_arg2, "cycle", f82_arg3 )
 	elseif not f82_local0 and not f82_local1 and not f82_local2 and IsDemoContextDirectorMode() and IsEditingDollyCameraMarker( f82_arg2 ) and not IsRepositioningDollyCameraMarker( f82_arg2 ) then
-		CoD.DemoUtility.RepositionDollyCamMarker( f82_arg0, f82_arg1, f82_arg2, Engine[@"gethighlightedcameramarker"](), f82_arg3 )
+		CoD.DemoUtility.RepositionDollyCamMarker( f82_arg0, f82_arg1, f82_arg2, Engine.GetHighlightedCameraMarker(), f82_arg3 )
 	elseif not f82_local0 and not f82_local1 and not f82_local2 and IsDemoContextLighterMode() and IsEditingLightmanMarker( f82_arg2 ) and not IsRepositioningLightmanMarker( f82_arg2 ) then
-		CoD.DemoUtility.RepositionLightmanMarker( f82_arg0, f82_arg1, f82_arg2, Engine[@"gethighlightedcameramarker"](), f82_arg3 )
+		CoD.DemoUtility.RepositionLightmanMarker( f82_arg0, f82_arg1, f82_arg2, Engine.GetHighlightedCameraMarker(), f82_arg3 )
 	end
 end
 CoD.DemoUtility.CircleButtonAction = function ( f83_arg0, f83_arg1, f83_arg2, f83_arg3 )
@@ -704,7 +703,7 @@ CoD.DemoUtility.LeftBumperAction = function ( f88_arg0, f88_arg1, f88_arg2, f88_
 	local f88_local0 = IsDemoCreatingHighlightReel()
 	local f88_local1 = IsDemoCapturingScreenshot()
 	local f88_local2 = IsDemoClipPreviewRunning()
-	if not IsDemoClipPlaying() and not CoD.ModelUtility.IsGlobalModelValueEqualToEnum( "demo.cameraMode", Enum[@"democameramode"][@"demo_camera_mode_freecam"] ) and IsDemoContextBasicOrHighlightReelMode() and not f88_local0 and not f88_local1 then
+	if not IsDemoClipPlaying() and not CoD.ModelUtility.IsGlobalModelValueEqualToEnum( "demo.cameraMode", Enum.demoCameraMode[@"demo_camera_mode_freecam"] ) and IsDemoContextBasicOrHighlightReelMode() and not f88_local0 and not f88_local1 then
 		CoD.DemoUtility.DemoSwitchPlayer( f88_arg0, f88_arg1, f88_arg2, "back", f88_arg3 )
 	elseif not f88_local2 and not f88_local0 and not f88_local1 and IsDemoContextDirectorMode() and IsEditingDollyCameraMarker( f88_arg2 ) and not IsRepositioningDollyCameraMarker( f88_arg2 ) then
 		CoD.DemoUtility.DemoTimeJumpDollyCameraMarker( f88_arg0, f88_arg1, f88_arg2, "back", f88_arg3 )
@@ -715,7 +714,7 @@ end
 CoD.DemoUtility.RightBumperAction = function ( f89_arg0, f89_arg1, f89_arg2, f89_arg3 )
 	local f89_local0 = IsDemoCreatingHighlightReel()
 	local f89_local1 = IsDemoCapturingScreenshot()
-	if not IsDemoClipPlaying() and not CoD.ModelUtility.IsGlobalModelValueEqualToEnum( "demo.cameraMode", Enum[@"democameramode"][@"demo_camera_mode_freecam"] ) and IsDemoContextBasicOrHighlightReelMode() and not f89_local0 and not f89_local1 then
+	if not IsDemoClipPlaying() and not CoD.ModelUtility.IsGlobalModelValueEqualToEnum( "demo.cameraMode", Enum.demoCameraMode[@"demo_camera_mode_freecam"] ) and IsDemoContextBasicOrHighlightReelMode() and not f89_local0 and not f89_local1 then
 		CoD.DemoUtility.DemoSwitchPlayer( f89_arg0, f89_arg1, f89_arg2, "forward", f89_arg3 )
 	elseif not IsDemoClipPreviewRunning() and not f89_local0 and not f89_local1 and IsDemoContextDirectorMode() and IsEditingDollyCameraMarker( f89_arg2 ) and not IsRepositioningDollyCameraMarker( f89_arg2 ) then
 		CoD.DemoUtility.DemoTimeJumpDollyCameraMarker( f89_arg0, f89_arg1, f89_arg2, "forward", f89_arg3 )
@@ -727,7 +726,7 @@ CoD.DemoUtility.LastLeftTriggerAmount = -1
 CoD.DemoUtility.LastRightTriggerAmount = -1
 CoD.DemoUtility.LeftTriggerAction = function ( f90_arg0, f90_arg1, f90_arg2, f90_arg3 )
 	if not IsDemoClipPreviewRunning() and not IsDemoCreatingHighlightReel() and not CoD.ModelUtility.IsGlobalModelValueTrue( "demo.isCompleted" ) and not IsDemoCapturingScreenshot() then
-		local f90_local0 = Engine[@"getmodelforcontroller"]( f90_arg2 )
+		local f90_local0 = Engine.GetModelForController( f90_arg2 )
 		f90_local0 = f90_local0.LeftTrigger
 		CoD.DemoUtility.UpdateDemoTimeScaleForTrigger( f90_arg2, f90_local0, 1, 0.1 )
 		if CoD.DemoUtility.LastLeftTriggerAmount < 0 and CoD.DemoUtility.LastRightTriggerAmount < 0 then
@@ -742,7 +741,7 @@ CoD.DemoUtility.LeftTriggerAction = function ( f90_arg0, f90_arg1, f90_arg2, f90
 end
 CoD.DemoUtility.RightTriggerAction = function ( f91_arg0, f91_arg1, f91_arg2, f91_arg3 )
 	if not IsDemoClipPreviewRunning() and not IsDemoCreatingHighlightReel() and not CoD.ModelUtility.IsGlobalModelValueTrue( "demo.isCompleted" ) and not IsDemoCapturingScreenshot() then
-		local f91_local0 = Engine[@"getmodelforcontroller"]( f91_arg2 )
+		local f91_local0 = Engine.GetModelForController( f91_arg2 )
 		f91_local0 = f91_local0.RightTrigger
 		CoD.DemoUtility.UpdateDemoTimeScaleForTrigger( f91_arg2, f91_local0, 1, 6 )
 		if CoD.DemoUtility.LastLeftTriggerAmount < 0 and CoD.DemoUtility.LastRightTriggerAmount < 0 then
@@ -825,8 +824,8 @@ CoD.DemoUtility.DPadUpAction = function ( f96_arg0, f96_arg1, f96_arg2, f96_arg3
 		CoD.DemoUtility.DemoTimeJumpDollyCameraMarker( f96_arg0, f96_arg1, f96_arg2, "forward", f96_arg3 )
 	else
 		if not f96_local0 and not f96_local1 and not f96_local2 and f96_local3 and f96_local4 and not IsRepositioningDollyCameraMarker( f96_arg2 ) then
-			local f96_local5 = Engine[@"getglobalmodel"]()
-			if f96_local5.demo.currentDollyCamMarkerTimeScaleMode:get() ~= Enum[@"demodollycameratimescalemode"][@"demo_dollycam_timescale_mode_manual"] then
+			local f96_local5 = Engine.GetGlobalModel()
+			if f96_local5.demo.currentDollyCamMarkerTimeScaleMode:get() ~= Enum.demoDollyCameraTimeScaleMode[@"demo_dollycam_timescale_mode_manual"] then
 				CoD.DemoUtility.UpdateDollyCameraTimeScale( f96_arg0, f96_arg1, f96_arg2, "0.1", f96_arg3 )
 			elseif not f96_local0 and not f96_local1 and not f96_local2 and IsDemoContextLighterMode() and IsEditingLightmanMarker( f96_arg2 ) and not IsRepositioningLightmanMarker( f96_arg2 ) then
 				CoD.DemoUtility.UpdateLightmanRange( f96_arg0, f96_arg1, f96_arg2, "0.5", f96_arg3 )
@@ -842,8 +841,8 @@ CoD.DemoUtility.DPadDownAction = function ( f97_arg0, f97_arg1, f97_arg2, f97_ar
 	local f97_local2 = IsDemoCapturingScreenshot()
 	local f97_local3 = IsDemoContextDirectorMode()
 	local f97_local4 = IsEditingDollyCameraMarker( f97_arg2 )
-	local f97_local5 = Engine[@"getglobalmodel"]()
-	f97_local5 = f97_local5.demo.currentDollyCamMarkerTimeScaleMode:get() == Enum[@"demodollycameratimescalemode"][@"demo_dollycam_timescale_mode_manual"]
+	local f97_local5 = Engine.GetGlobalModel()
+	f97_local5 = f97_local5.demo.currentDollyCamMarkerTimeScaleMode:get() == Enum.demoDollyCameraTimeScaleMode[@"demo_dollycam_timescale_mode_manual"]
 	if not f97_local0 and not f97_local1 and not f97_local2 and f97_local3 and not f97_local4 then
 		CoD.DemoUtility.DemoTimeJumpDollyCameraMarker( f97_arg0, f97_arg1, f97_arg2, "back", f97_arg3 )
 	elseif not f97_local0 and not f97_local1 and not f97_local2 and f97_local3 and f97_local4 and not IsRepositioningDollyCameraMarker( f97_arg2 ) and not f97_local5 then
@@ -863,7 +862,7 @@ CoD.DemoUtility.OpenSavePopup = function ( f98_arg0, f98_arg1 )
 			f98_local0 = CoD.OverlayUtility.CreateOverlay( f98_local2, f98_arg0, "DemoSaveClipPopup" )
 		end
 	else
-		Engine[@"execnow"]( f98_local2, "setupThumbnailForFileshareSave screenshot" )
+		Engine.ExecNow( f98_local2, "setupThumbnailForFileshareSave screenshot" )
 		CoD.FileshareUtility.OpenPrivateUploadPopup( f98_arg0, f98_local2, "screenshot_private", function ( f99_arg0 )
 			Engine[@"savescreenshot"]( f99_arg0, false, 0 )
 		end )
@@ -880,11 +879,11 @@ end
 CoD.DemoUtility.StartMenuUploadClip = function ( f102_arg0, f102_arg1, f102_arg2, f102_arg3, f102_arg4 )
 	local f102_local0 = Engine[@"getdemostreameddownloadprogress"]()
 	if f102_local0 < 100 then
-		LuaUtils.ShowMessageDialog( f102_arg2, Enum[@"messagedialogtype"][@"message_dialog_type_error"], Engine[@"hash_4F9F1239CFD921FE"]( @"hash_3166EE50B1458BCD", math.floor( f102_local0 ) ), Engine[@"hash_4F9F1239CFD921FE"]( @"menu/notice" ) )
+		LuaUtils.ShowMessageDialog( f102_arg2, Enum.MessageDialogType[@"message_dialog_type_error"], Engine[@"hash_4F9F1239CFD921FE"]( "mpui/demo_download_in_progress", math.floor( f102_local0 ) ), Engine[@"hash_4F9F1239CFD921FE"]( @"menu/notice" ) )
 		return 
 	else
-		Engine[@"execnow"]( f102_arg2, "demo_updatesavepopupuimodels clip" )
-		Engine[@"execnow"]( f102_arg2, "setupThumbnailForFileshareSave clip" )
+		Engine.ExecNow( f102_arg2, "demo_updatesavepopupuimodels clip" )
+		Engine.ExecNow( f102_arg2, "setupThumbnailForFileshareSave clip" )
 		CoD.FileshareUtility.OpenPrivateUploadPopup( f102_arg0, f102_arg2, "clip_private", function ( f103_arg0 )
 			Engine[@"saveanduploadclip"]( f103_arg0, 0 )
 		end )
@@ -897,7 +896,7 @@ CoD.DemoUtility.StartMenuJumpToStart = function ( f105_arg0, f105_arg1, f105_arg
 	if CoD.GameEndScoreUtility.IsInTransition( f105_arg2 ) then
 		CoD.GameEndScoreUtility.ClearTransitionModels( f105_arg2 )
 	end
-	Engine[@"exec"]( f105_arg2, "demo_jumptostart" )
+	Engine.exec( f105_arg2, "demo_jumptostart" )
 	StartMenuGoBack( f105_arg4, f105_arg2 )
 end
 CoD.DemoUtility.StartMenuEndDemo = function ( f106_arg0, f106_arg1, f106_arg2, f106_arg3, f106_arg4 )
@@ -912,19 +911,19 @@ CoD.DemoUtility.StartMenuEndDemo = function ( f106_arg0, f106_arg1, f106_arg2, f
 	end
 end
 CoD.DemoUtility.ProcessSettingsChange = function ( f107_arg0 )
-	if Engine[@"profilebool"]( f107_arg0, @"demo_togglegamehud" ) then
-		Engine[@"execnow"]( f107_arg0, "demo_hidegamehud 0" )
+	if Engine.ProfileBool( f107_arg0, "demo_togglegamehud" ) then
+		Engine.ExecNow( f107_arg0, "demo_hidegamehud 0" )
 	else
-		Engine[@"execnow"]( f107_arg0, "demo_hidegamehud 1" )
+		Engine.ExecNow( f107_arg0, "demo_hidegamehud 1" )
 	end
 end
 CoD.DemoUtility.EndDemo = function ( f108_arg0 )
-	if not Engine[@"islobbyhost"]( Enum[@"lobbytype"][@"lobby_type_private"] ) then
-		Engine[@"gamemoderesetmodes"]()
-		Engine[@"sessionmoderesetmodes"]()
-		Engine[@"exec"]( f108_arg0, "disconnect" )
+	if not Engine[@"islobbyhost"]( Enum.LobbyType[@"lobby_type_private"] ) then
+		Engine.GameModeResetModes()
+		Engine.SessionModeResetModes()
+		Engine.exec( f108_arg0, "disconnect" )
 	else
-		Engine[@"exec"]( f108_arg0, "xpartystopdemo" )
+		Engine.exec( f108_arg0, "xpartystopdemo" )
 	end
 end
 CoD.DemoUtility.LastActivatedInformationScreen = 0
@@ -940,25 +939,25 @@ CoD.DemoUtility.ActivateInformationScreen = function ( f110_arg0, f110_arg1 )
 		return 
 	end
 	local f110_local0 = f110_arg1.targetAlpha or 0
-	if f110_arg1.informationScreenType == Enum[@"demoinformationscreentypes"][@"demo_information_screen_none"] then
+	if f110_arg1.informationScreenType == Enum.demoInformationScreenTypes[@"demo_information_screen_none"] then
 		return 
-	elseif f110_arg1.informationScreenType == Enum[@"demoinformationscreentypes"][@"demo_information_screen_film_start_screen_fade_in"] or f110_arg1.informationScreenType == Enum[@"demoinformationscreentypes"][@"demo_information_screen_film_start_screen_fade_out"] then
+	elseif f110_arg1.informationScreenType == Enum.demoInformationScreenTypes[@"demo_information_screen_film_start_screen_fade_in"] or f110_arg1.informationScreenType == Enum.demoInformationScreenTypes[@"demo_information_screen_film_start_screen_fade_out"] then
 		CoD.DemoUtility.AnimateToAlpha( LUI.roots.UIRootFull.demoInformationScreenBlackBackground, f110_arg1.animationTime, f110_local0 )
-		LUI.roots.UIRootFull.demoInformationScreenInformationText:setText( Engine[@"hash_4F9F1239CFD921FE"]( @"hash_5BBD6582279C398D" ) )
+		LUI.roots.UIRootFull.demoInformationScreenInformationText:setText( Engine[@"hash_4F9F1239CFD921FE"]( "menu/preparing" ) )
 		CoD.DemoUtility.AnimateToAlpha( LUI.roots.UIRootFull.demoInformationScreenInformationText, f110_arg1.animationTime * 0.8, f110_local0 )
 		CoD.DemoUtility.AnimateToAlpha( LUI.roots.UIRootFull.demoInformationScreenSpinner, f110_arg1.animationTime * 0.8, f110_local0 )
 	end
-	if f110_arg1.informationScreenType == Enum[@"demoinformationscreentypes"][@"demo_information_screen_transition"] then
+	if f110_arg1.informationScreenType == Enum.demoInformationScreenTypes[@"demo_information_screen_transition"] then
 		LUI.roots.UIRootFull.demoInformationScreenInformationText:setText( "" )
 		LUI.roots.UIRootFull.demoInformationScreenInformationText:setAlpha( 0 )
 		LUI.roots.UIRootFull.demoInformationScreenSpinner:setAlpha( 0 )
 		LUI.roots.UIRootFull.demoInformationScreenBlackBackground:setAlpha( 1 )
 		CoD.DemoUtility.AnimateToAlpha( LUI.roots.UIRootFull.demoInformationScreenBlackBackground, f110_arg1.animationTime, f110_local0 )
 	end
-	if f110_arg1.informationScreenType == Enum[@"demoinformationscreentypes"][@"demo_information_screen_waiting_for_download"] then
+	if f110_arg1.informationScreenType == Enum.demoInformationScreenTypes[@"demo_information_screen_waiting_for_download"] then
 		CoD.DemoUtility.AnimateToAlpha( LUI.roots.UIRootFull.demoInformationScreenBlackBackground, f110_arg1.animationTime, 0 )
 		CoD.DemoUtility.AnimateToAlpha( LUI.roots.UIRootFull.demoInformationScreenInformationText, f110_arg1.animationTime, f110_local0 )
-		LUI.roots.UIRootFull.demoInformationScreenInformationText:setText( Engine[@"hash_4F9F1239CFD921FE"]( @"hash_4D8B5675C766DBBB" ) )
+		LUI.roots.UIRootFull.demoInformationScreenInformationText:setText( Engine[@"hash_4F9F1239CFD921FE"]( "menu/buffering" ) )
 		CoD.DemoUtility.AnimateToAlpha( LUI.roots.UIRootFull.demoInformationScreenSpinner, f110_arg1.animationTime, f110_local0 )
 	end
 end
@@ -982,7 +981,7 @@ CoD.DemoUtility.AddInformationScreen = function ( f111_arg0 )
 		local f111_local3 = 60
 		local f111_local4 = LUI.UIImage.new( 0.5, 0.5, -f111_local3 / 2, f111_local3 / 2, 0.5, 0.5, CoD.textSize.Condensed, CoD.textSize.Condensed + f111_local3 )
 		f111_local4:setAlpha( 0 )
-		f111_local4:setMaterial( RegisterMaterial( @"lui_loader" ) )
+		f111_local4:setMaterial( RegisterMaterial( "lui_loader" ) )
 		f111_local4:setShaderVector( 0, 0, 0, 0, 0 )
 		LUI.roots.UIRootFull.demoInformationScreenSpinner = f111_local4
 		self:addElement( f111_local4 )
@@ -991,7 +990,7 @@ CoD.DemoUtility.AddInformationScreen = function ( f111_arg0 )
 	end
 end
 CoD.DemoUtility.SetupUIModels = function ( f112_arg0 )
-	local f112_local0 = Engine[@"getglobalmodel"]()
+	local f112_local0 = Engine.GetGlobalModel()
 	f112_local0 = f112_local0:create( "demo" )
 	local f112_local1 = f112_local0:create( "showChooseModeSidebar" )
 	f112_local1:set( false )
@@ -1006,18 +1005,18 @@ CoD.DemoUtility.SetupUIModels = function ( f112_arg0 )
 	f112_local1 = f112_local0:create( "isDefaultCameraMode" )
 	f112_local1:set( false )
 	f112_local1 = f112_local0:create( "cameraMode" )
-	f112_local1:set( Enum[@"democameramode"][@"demo_camera_mode_none"] )
+	f112_local1:set( Enum.demoCameraMode[@"demo_camera_mode_none"] )
 	if Engine[@"isdemoclipplaying"]() then
 		f112_local1 = f112_local0:create( "contextMode" )
-		f112_local1:set( Enum[@"democontextmode"][@"demo_context_mode_playback"] )
+		f112_local1:set( Enum.demoContextMode[@"demo_context_mode_playback"] )
 	elseif Engine[@"isdemohighlightreelmode"]() then
 		f112_local1 = f112_local0:create( "contextMode" )
-		f112_local1:set( Enum[@"democontextmode"][@"demo_context_mode_highlight_reel"] )
+		f112_local1:set( Enum.demoContextMode[@"demo_context_mode_highlight_reel"] )
 	else
 		f112_local1 = f112_local0:create( "contextMode" )
-		f112_local1:set( Enum[@"democontextmode"][@"demo_context_mode_basic"] )
+		f112_local1:set( Enum.demoContextMode[@"demo_context_mode_basic"] )
 	end
-	f112_local1 = Engine[@"getglobalmodel"]()
+	f112_local1 = Engine.GetGlobalModel()
 	f112_local1 = f112_local1:create( "DemoSegments" )
 	local f112_local2 = f112_local1:create( "refresh" )
 	f112_local2:set( 0 )
@@ -1030,7 +1029,7 @@ CoD.DemoUtility.RegisterEventHandlers = function ( f113_arg0, f113_arg1 )
 	f113_arg0:registerEventHandler( "open_demo_manage_segments", CoD.DemoUtility.OpenManageSegments )
 	f113_arg0:registerEventHandler( "activate_demo_information_screen", CoD.DemoUtility.ActivateInformationScreen )
 	CoD.DemoUtility.SetupUIModels( f113_arg1 )
-	local f113_local0 = Engine[@"getxuid64"]( f113_arg1 )
+	local f113_local0 = Engine.GetXUID64( f113_arg1 )
 	local f113_local1 = CoD.FileshareUtility.IsFileshareReady( f113_arg1 )
 	if f113_local1 == 0 or f113_local1 == false or f113_local0 ~= CoD.FileshareUtility.GetCurrentUser() then
 		CoD.FileshareUtility.FetchContentForUser( f113_arg1, f113_local0 )
@@ -1063,10 +1062,10 @@ CoD.DemoUtility.AddHUDWidgets = function ( f114_arg0, f114_arg1 )
 		end
 		CoD.DemoUtility.AddInformationScreen( f114_arg0 )
 		if f114_arg1.activateDemoStartScreen then
-			if CoD.DemoUtility.LastActivatedInformationScreen ~= Enum[@"demoinformationscreentypes"][@"demo_information_screen_film_start_screen_fade_out"] then
+			if CoD.DemoUtility.LastActivatedInformationScreen ~= Enum.demoInformationScreenTypes[@"demo_information_screen_film_start_screen_fade_out"] then
 				CoD.DemoUtility.ActivateInformationScreen( f114_arg0, {
 					controller = f114_local1,
-					informationScreenType = Enum[@"demoinformationscreentypes"][@"demo_information_screen_film_start_screen_fade_in"],
+					informationScreenType = Enum.demoInformationScreenTypes[@"demo_information_screen_film_start_screen_fade_in"],
 					animationTime = 0,
 					targetAlpha = 1
 				} )
@@ -1074,9 +1073,9 @@ CoD.DemoUtility.AddHUDWidgets = function ( f114_arg0, f114_arg1 )
 		elseif f114_arg1.openHighlightStartScreen then
 			CoD.DemoUtility.RebuildHighlightReelTimeline( f114_local1 )
 			if Engine[@"getnumberofhighlightreelmoments"]() > 0 then
-				Engine[@"exec"]( f114_local1, "demo_regeneratehighlightreel" )
+				Engine.exec( f114_local1, "demo_regeneratehighlightreel" )
 			else
-				LuaUtils.ShowMessageDialog( f114_local1, Enum[@"messagedialogtype"][@"message_dialog_type_error"], Engine[@"hash_4F9F1239CFD921FE"]( 0x4F1B56A7BD9CDF ), Engine[@"hash_4F9F1239CFD921FE"]( @"menu/notice" ) )
+				LuaUtils.ShowMessageDialog( f114_local1, Enum.MessageDialogType[@"message_dialog_type_error"], Engine[@"hash_4F9F1239CFD921FE"]( 0x4F1B56A7BD9CDF ), Engine[@"hash_4F9F1239CFD921FE"]( @"menu/notice" ) )
 				Dvar[@"demo_pause"]:set( true )
 			end
 		end
@@ -1096,7 +1095,7 @@ CoD.DemoUtility.SetupDemoSegmentModel = function ( f116_arg0 )
 	local f116_local4 = 0
 	local f116_local5 = true
 	local f116_local6 = Engine[@"getdemosegmentcount"]()
-	local f116_local7 = Engine[@"getglobalmodel"]()
+	local f116_local7 = Engine.GetGlobalModel()
 	local f116_local8 = f116_local7.DemoSegments:create( f116_arg0 )
 	local f116_local9 = f116_local8:create( "segmentNumber" )
 	f116_local9:set( f116_arg0 + 1 )
@@ -1133,11 +1132,11 @@ CoD.DemoUtility.Timeline_SetSelectedSegmentModel = function ( f117_arg0 )
 end
 CoD.DemoUtility.Timeline_GetSelectedSegmentModel = function ()
 	local f118_local0 = Engine[@"getdemosegmentcount"]()
-	local f118_local1 = Engine[@"getglobalmodel"]()
+	local f118_local1 = Engine.GetGlobalModel()
 	f118_local1 = f118_local1.DemoSegments
 	if f118_local1 then
 		for f118_local2 = 1, f118_local0, 1 do
-			local f118_local5 = Engine[@"getmodel"]( f118_local1, f118_local2 - 1 )
+			local f118_local5 = Engine.GetModel( f118_local1, f118_local2 - 1 )
 			if f118_local5 then
 				local f118_local6 = f118_local5.selected
 				if f118_local6 and f118_local6:get() == true then
@@ -1150,11 +1149,11 @@ CoD.DemoUtility.Timeline_GetSelectedSegmentModel = function ()
 end
 CoD.DemoUtility.Timeline_GetHighlightedSegmentModel = function ()
 	local f119_local0 = Engine[@"getdemosegmentcount"]()
-	local f119_local1 = Engine[@"getglobalmodel"]()
+	local f119_local1 = Engine.GetGlobalModel()
 	f119_local1 = f119_local1.DemoSegments
 	if f119_local1 then
 		for f119_local2 = 1, f119_local0, 1 do
-			local f119_local5 = Engine[@"getmodel"]( f119_local1, f119_local2 - 1 )
+			local f119_local5 = Engine.GetModel( f119_local1, f119_local2 - 1 )
 			if f119_local5 then
 				local f119_local6 = f119_local5.highlighted
 				if f119_local6 and f119_local6:get() == true then
@@ -1166,11 +1165,11 @@ CoD.DemoUtility.Timeline_GetHighlightedSegmentModel = function ()
 	return nil
 end
 CoD.DemoUtility.PreviewSegment = function ( f120_arg0, f120_arg1 )
-	Engine[@"exec"]( f120_arg1, "demo_previewsegment" )
+	Engine.exec( f120_arg1, "demo_previewsegment" )
 	GoBack( f120_arg0, f120_arg1 )
 end
 CoD.DemoUtility.SaveSegment = function ( f121_arg0, f121_arg1 )
-	Engine[@"exec"]( f121_arg1, "demo_savesegment 0" )
+	Engine.exec( f121_arg1, "demo_savesegment 0" )
 	GoBack( f121_arg0, f121_arg1 )
 end
 CoD.DemoUtility.previewWindowXpos = 0.67
@@ -1201,7 +1200,7 @@ end
 CoD.DemoUtility.RestoreNormalViewport = function ( f125_arg0, f125_arg1 )
 	CoD.DemoUtility.DestroyAnimTimer( f125_arg0 )
 	CoD.perController[f125_arg1].modifiedViewport = nil
-	Engine[@"setviewport"]( f125_arg1 )
+	Engine.SetViewport( f125_arg1 )
 end
 CoD.DemoUtility.TrySetViewport = function ( f126_arg0, f126_arg1, f126_arg2, f126_arg3 )
 	CoD.perController[f126_arg0].modifiedViewport = {
@@ -1294,8 +1293,8 @@ CoD.DemoUtility.Timeline_RefreshState = function ( f130_arg0, f130_arg1, f130_ar
 		return 
 	end
 	local f130_local0 = CoD.DemoUtility.Timeline_GetSelectedSegmentModel()
-	local f130_local1 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f130_arg1, "disabled" ) )
-	local f130_local2 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f130_arg1, "segmentNumber" ) )
+	local f130_local1 = Engine.GetModelValue( Engine.GetModel( f130_arg1, "disabled" ) )
+	local f130_local2 = Engine.GetModelValue( Engine.GetModel( f130_arg1, "segmentNumber" ) )
 	if not f130_arg2 then
 		if f130_arg1 == f130_local0 then
 			f130_arg0.timelineContainer.timeline[f130_local2]:setState( 0, "SelectedState" )
@@ -1324,8 +1323,8 @@ CoD.DemoUtility.Timeline_RefreshStateAfterMove = function ( f132_arg0, f132_arg1
 		CoD.DemoUtility.Timeline_RefreshState( f132_arg0, f132_arg2, false )
 		CoD.DemoUtility.Timeline_RefreshState( f132_arg0, f132_arg1, true )
 	else
-		local f132_local0 = Engine[@"getmodelvalue"]
-		local f132_local1 = Engine[@"getmodel"]
+		local f132_local0 = Engine.GetModelValue
+		local f132_local1 = Engine.GetModel
 		local f132_local2 = f132_arg2
 		CoD.DemoUtility.Timeline_RefreshState( f132_arg0, f132_arg2, f132_arg0.timelineContainer.timeline[f132_local0( f132_local1( f132_arg2, "segmentNumber" ) )].focussed )
 	end
@@ -1350,9 +1349,9 @@ CoD.DemoUtility.TimelineEditorPostLoad = function ( f133_arg0, f133_arg1 )
 	end
 	
 	CoD.DemoUtility.TimelineEditor_AddTimeline( f133_arg0 )
-	Engine[@"exec"]( f133_arg1, "setupThumbnailsForManageSegments" )
+	Engine.exec( f133_arg1, "setupThumbnailsForManageSegments" )
 	f133_local0( f133_arg0, f133_arg1 )
-	f133_arg0:subscribeToModel( Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "DemoSegments.refresh" ), function ( model )
+	f133_arg0:subscribeToModel( Engine.GetModel( Engine.GetGlobalModel(), "DemoSegments.refresh" ), function ( model )
 		UpdateElementDataSource( f133_arg0, "SegmentButtonList" )
 		CoD.DemoUtility.TimelineEditor_ReAddTimeline( f133_arg0 )
 		f133_local0( f133_arg0, f133_arg1 )
@@ -1360,19 +1359,19 @@ CoD.DemoUtility.TimelineEditorPostLoad = function ( f133_arg0, f133_arg1 )
 end
 CoD.DemoUtility.TimelineEditorPlaceSegment = function ( f136_arg0, f136_arg1, f136_arg2, f136_arg3, f136_arg4 )
 	local f136_local0 = CoD.DemoUtility.Timeline_GetSelectedSegmentModel()
-	local f136_local1 = Engine[@"getmodelvalue"]( Engine[@"getmodel"]( f136_local0, "segmentNumber" ) )
+	local f136_local1 = Engine.GetModelValue( Engine.GetModel( f136_local0, "segmentNumber" ) )
 	if f136_arg3 == true then
-		local f136_local2 = Engine[@"getmodelvalue"]( f136_arg1:getModel( f136_arg2, "segmentNumber" ) )
+		local f136_local2 = Engine.GetModelValue( f136_arg1:getModel( f136_arg2, "segmentNumber" ) )
 		local f136_local3 = f136_local1 - 1
 		local f136_local4 = f136_local2 - 1
 		if f136_local3 ~= f136_local4 then
-			Engine[@"execnow"]( f136_arg4:getOwner(), "demo_movesegment " .. f136_local3 .. " " .. f136_local4 )
+			Engine.ExecNow( f136_arg4:getOwner(), "demo_movesegment " .. f136_local3 .. " " .. f136_local4 )
 			for f136_local5 = 1, Engine[@"getdemosegmentcount"](), 1 do
 				CoD.DemoUtility.SetupDemoSegmentModel( f136_local5 - 1 )
 			end
 		end
 	end
-	Engine[@"setmodelvalue"]( Engine[@"getmodel"]( f136_local0, "selected" ), false )
+	Engine.SetModelValue( Engine.GetModel( f136_local0, "selected" ), false )
 	CoD.DemoUtility.Timeline_RefreshStateAfterMove( f136_arg4, f136_arg1:getModel(), f136_local0, f136_arg3 )
 end
 CoD.DemoUtility.TimelineEditorSetupMoveSegment = function ( f137_arg0, f137_arg1, f137_arg2, f137_arg3 )
@@ -1390,27 +1389,27 @@ CoD.DemoUtility.TimelineEditorUpdateTimeline = function ( f138_arg0, f138_arg1, 
 	CoD.DemoUtility.Timeline_RefreshState( f138_arg4, f138_arg1:getModel(), f138_local0 )
 end
 CoD.DemoUtility.SetNumHighlightReelMomentsModel = function ( f139_arg0 )
-	Engine[@"setmodelvalue"]( Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "demo.numHighlightReelMoments" ), f139_arg0 )
+	Engine.SetModelValue( Engine.GetModel( Engine.GetGlobalModel(), "demo.numHighlightReelMoments" ), f139_arg0 )
 end
 CoD.DemoUtility.GetNumHighlightReelMomentsModel = function ()
-	return Engine[@"getmodel"]( Engine[@"getglobalmodel"](), "demo.numHighlightReelMoments" )
+	return Engine.GetModel( Engine.GetGlobalModel(), "demo.numHighlightReelMoments" )
 end
 CoD.DemoUtility.RebuildHighlightReelTimeline = function ( f141_arg0 )
-	Engine[@"execnow"]( f141_arg0, "demo_rebuildhighlightreeltimeline" )
+	Engine.ExecNow( f141_arg0, "demo_rebuildhighlightreeltimeline" )
 	CoD.DemoUtility.SetNumHighlightReelMomentsModel( Engine[@"getnumberofhighlightreelmoments"]() )
 end
 CoD.DemoUtility.Options_ItemSelected = function ( f142_arg0, f142_arg1, f142_arg2, f142_arg3, f142_arg4 )
 	if Dvar[f142_arg3]:get() == f142_arg1.value then
 		return 
 	end
-	Engine[@"setdvar"]( f142_arg3, f142_arg1.value )
+	Engine.SetDvar( f142_arg3, f142_arg1.value )
 	if f142_arg1.valueChangedCallback then
 		f142_arg1.valueChangedCallback( f142_arg4, f142_arg2, f142_arg3, f142_arg1.value )
 	end
 end
 CoD.DemoUtility.Options_RevertItemSelected = function ( f143_arg0, f143_arg1, f143_arg2, f143_arg3, f143_arg4, f143_arg5 )
 	local f143_local0 = CoD.OptionsUtility.GetCustomProfileSelection( f143_arg2, f143_arg1.options, Dvar[f143_arg3]:get() )
-	local f143_local1, f143_local2 = f143_arg0.Slider:getRowAndColumnForIndex( Engine[@"getmodelvalue"]( f143_arg0:getModel( f143_arg2, "currentSelection" ) ) - 1 )
+	local f143_local1, f143_local2 = f143_arg0.Slider:getRowAndColumnForIndex( Engine.GetModelValue( f143_arg0:getModel( f143_arg2, "currentSelection" ) ) - 1 )
 	f143_arg0.Slider:setActiveIndex( f143_local1, f143_local2, 0 )
 end
 CoD.DemoUtility.Options_GetProfileSelection = function ( f144_arg0, f144_arg1, f144_arg2 )
@@ -1440,24 +1439,24 @@ CoD.DemoUtility.AddSubscriptionsToUpdatePlayerNameTextfield = function ( f145_ar
 	end )
 end
 CoD.DemoUtility.UpdatePlayerNameTextField = function ( f153_arg0, f153_arg1 )
-	local f153_local0 = Engine[@"getglobalmodel"]()
+	local f153_local0 = Engine.GetGlobalModel()
 	f153_local0 = f153_local0.demo.cameraMode:get()
 	local f153_local1 = ""
 	local f153_local2 = false
-	if f153_local0 ~= Enum[@"democameramode"][@"demo_camera_mode_freecam"] then
-		local f153_local3 = Engine[@"getglobalmodel"]()
+	if f153_local0 ~= Enum.demoCameraMode[@"demo_camera_mode_freecam"] then
+		local f153_local3 = Engine.GetGlobalModel()
 		f153_local1 = GetClientNameAndClanTag( f153_arg1, f153_local3.demo.clientNum:get() )
 	elseif IsDemoContextObjectLinkMode() and IsFreeCameraLockedOnEntity( f153_arg1 ) then
-		f153_local1 = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_28903AE364895CE8" )
+		f153_local1 = Engine[@"hash_4F9F1239CFD921FE"]( "demo/linked_to_object" )
 	elseif IsDemoContextDirectorMode() and IsEditingDollyCameraMarker( f153_arg1 ) then
 		local f153_local3 = Engine[@"hash_4F9F1239CFD921FE"]
 		local f153_local4 = @"hash_4A4EB256F6CA0980"
-		local f153_local5 = Engine[@"getglobalmodel"]()
+		local f153_local5 = Engine.GetGlobalModel()
 		f153_local1 = f153_local3( f153_local4, f153_local5.demo.highlightedDollycamMarker:get() + 1 )
 	elseif IsDemoContextLighterMode() and IsEditingLightmanMarker( f153_arg1 ) then
 		local f153_local3 = Engine[@"hash_4F9F1239CFD921FE"]
 		local f153_local4 = @"hash_267D7781E9B61375"
-		local f153_local5 = Engine[@"getglobalmodel"]()
+		local f153_local5 = Engine.GetGlobalModel()
 		f153_local1 = f153_local3( f153_local4, f153_local5.demo.highlightedLightmanMarker:get() + 1 )
 	else
 		f153_local1 = Engine[@"hash_4F9F1239CFD921FE"]( @"hash_68CA5FCB835FB9" )
@@ -1469,7 +1468,7 @@ end
 CoD.DemoUtility.BasicDemoShortcutsKBM = {
 	{
 		models = {
-			text = @"menu/move_forward",
+			text = "menu/move_forward",
 			keyprompt = LocalizeToUpperString( @"hash_549B065E66E9596C" )
 		}
 	},
@@ -1487,7 +1486,7 @@ CoD.DemoUtility.BasicDemoShortcutsKBM = {
 	},
 	{
 		models = {
-			text = @"menu/move_back",
+			text = "menu/move_back",
 			keyprompt = LocalizeToUpperString( @"hash_63AA7B7405E74BC" )
 		}
 	},
@@ -1511,13 +1510,13 @@ CoD.DemoUtility.BasicDemoShortcutsKBM = {
 	},
 	{
 		models = {
-			text = @"hash_134BCA0ADE1DF991",
+			text = "demo/jump_backward",
 			keyprompt = "1"
 		}
 	},
 	{
 		models = {
-			text = @"hash_587488246EAE3C5",
+			text = "demo/jump_forward",
 			keyprompt = "2"
 		}
 	},
@@ -1597,7 +1596,7 @@ CoD.DemoUtility.DirectorDemoShortcutsKBM = {
 	},
 	{
 		models = {
-			text = @"hash_5C1DB4098ABE577F",
+			text = "demo/move_dolly_camera_hint",
 			keyprompt = "X"
 		}
 	},
@@ -1679,7 +1678,7 @@ CoD.DemoUtility.ObjectLinkDemoShortcutsKBM = {
 	},
 	{
 		models = {
-			text = @"hash_41AF6628A5C863B9",
+			text = "demo/link_to_object",
 			keyprompt = "F"
 		}
 	},

@@ -1,4 +1,4 @@
-require("x64:e95c1a1a693ac70")
+require("ui/uieditor/widgets/cac/cac_itemtitleglow")
 CoD.TitleTextWidget = InheritFrom(LUI.UIElement)
 CoD.TitleTextWidget.__defaultWidth = 600
 CoD.TitleTextWidget.__defaultHeight = 51
@@ -20,7 +20,7 @@ CoD.TitleTextWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	itemName:setShaderVector(1, 0.02, 0, 0, 0)
 	itemName:setShaderVector(2, 1, 0, 0, 0)
 	itemName:setLetterSpacing(0.6)
-	itemName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	itemName:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	LUI.OverrideFunction_CallOriginalFirst(itemName, "setText", function(element, controller)
 		ScaleWidgetToLabel(self, element, 5)
 	end)
@@ -28,8 +28,8 @@ CoD.TitleTextWidget.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, 
 	self.itemName = itemName
 	local Glow = LUI.UIImage.new(0, 1, -80, 74, 0.5, 0.5, -45, 65)
 	Glow:setAlpha(0.14)
-	Glow:setImage(RegisterImage(@"uie_t7_menu_cac_glow"))
-	Glow:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	Glow:setImage(RegisterImage("uie_t7_menu_cac_glow"))
+	Glow:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(Glow)
 	self.Glow = Glow
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

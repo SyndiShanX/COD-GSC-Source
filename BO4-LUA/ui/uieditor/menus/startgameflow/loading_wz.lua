@@ -1,11 +1,11 @@
-require("x64:f8db2063f73b388")
-require("x64:6c6bd604aaeea32")
-require("x64:76511006ba8d45c")
-require("x64:474d14efb47ebf4")
-require("x64:5a873e109fe152")
+require("ui/uieditor/widgets/notifications/xp/doublexpiconsleftaligned")
+require("ui/uieditor/widgets/startgameflow/loadingscreenheader_wz")
+require("ui/uieditor/widgets/startgameflow/loadingscreenloadbar_wz")
+require("ui/uieditor/widgets/startgameflow/loadingscreentalkerwidgetcpzm")
+require("ui/uieditor/widgets/startgameflow/tipwidgetlist_wz")
 require("x64:bd860e6848b37d7")
-require("x64:6ee653ade3452f5")
-require("x64:c0887595cfb6bb1")
+require("ui/uieditor/widgets/pc/hud/scorestreak_aspectratiofix")
+require("ui/uieditor/widgets/pc/notifications/pc_notif_container")
 CoD.Loading_WZ = InheritFrom(CoD.Menu)
 LUI.createMenu.Loading_WZ = function(f1_arg0, f1_arg1)
 	local self = CoD.Menu.NewForUIEditor("Loading_WZ", f1_arg0)
@@ -57,7 +57,7 @@ LUI.createMenu.Loading_WZ = function(f1_arg0, f1_arg1)
 	Team1PlayerList:setWidgetType(CoD.LoadingScreenTalkerWidgetCPZM)
 	Team1PlayerList:setVerticalCount(4)
 	Team1PlayerList:setSpacing(8)
-	Team1PlayerList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	Team1PlayerList:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	Team1PlayerList:setDataSource("LoadingScreenPlayerListTeam1")
 	self:addElement(Team1PlayerList)
 	self.Team1PlayerList = Team1PlayerList
@@ -81,27 +81,27 @@ LUI.createMenu.Loading_WZ = function(f1_arg0, f1_arg1)
 	end)
 	self:addElement(GamemodeIcon)
 	self.GamemodeIcon = GamemodeIcon
-	self:registerEventHandler("loading_startplay", function(self, event)
+	self:registerEventHandler("loading_startplay", function(element, event)
 		local f4_local0 = nil
 		if IsSplitscreenAndInGame(f1_arg0) and IsWarzone() then
-			CoD.HUDUtility.StartPlay(self, f1_arg0)
-			HideWidget(self)
+			CoD.HUDUtility.StartPlay(element, f1_arg0)
+			HideWidget(element)
 		else
-			CoD.HUDUtility.StartPlay(self, f1_arg0)
+			CoD.HUDUtility.StartPlay(element, f1_arg0)
 		end
 		if not f4_local0 then
-			f4_local0 = self:dispatchEventToChildren(event)
+			f4_local0 = element:dispatchEventToChildren(event)
 		end
 		return f4_local0
 	end)
-	self:registerEventHandler("loading_nomovie_startplay", function(self, event)
+	self:registerEventHandler("loading_nomovie_startplay", function(element, event)
 		local f5_local0 = nil
 		if IsSplitscreenAndInGame(f1_arg0) and IsWarzone() then
-			CoD.HUDUtility.StartPlay(self, f1_arg0)
-			HideWidget(self)
+			CoD.HUDUtility.StartPlay(element, f1_arg0)
+			HideWidget(element)
 		end
 		if not f5_local0 then
-			f5_local0 = self:dispatchEventToChildren(event)
+			f5_local0 = element:dispatchEventToChildren(event)
 		end
 		return f5_local0
 	end)

@@ -1,4 +1,4 @@
-require("x64:91c98ecbe0f3484")
+require("ui/uieditor/widgets/pc/freecursor/freecursordetaileddescriptionpc")
 CoD.freeCursorDetailedDescriptionContainer = InheritFrom(LUI.UIElement)
 CoD.freeCursorDetailedDescriptionContainer.__defaultWidth = 405
 CoD.freeCursorDetailedDescriptionContainer.__defaultHeight = 200

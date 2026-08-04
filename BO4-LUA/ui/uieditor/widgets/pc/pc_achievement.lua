@@ -1,4 +1,4 @@
-require("x64:c272fc87cab0c0d")
+require("ui/uieditor/widgets/pc/pc_achievement_container")
 CoD.PC_Achievement = InheritFrom(LUI.UIElement)
 CoD.PC_Achievement.__defaultWidth = 960
 CoD.PC_Achievement.__defaultHeight = 120

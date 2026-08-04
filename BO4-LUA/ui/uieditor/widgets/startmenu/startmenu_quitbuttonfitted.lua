@@ -1,5 +1,5 @@
-require("x64:e6df4068375d284")
-require("x64:37ed89902d7e13c")
+require("ui/uieditor/widgets/director/directorgenericbutton")
+require("ui/uieditor/widgets/startmenu/startmenu_quitbuttonfill")
 CoD.StartMenu_QuitButtonFitted = InheritFrom(LUI.UIElement)
 CoD.StartMenu_QuitButtonFitted.__defaultWidth = 240
 CoD.StartMenu_QuitButtonFitted.__defaultHeight = 75
@@ -58,7 +58,7 @@ CoD.StartMenu_QuitButtonFitted.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 		f1_arg0:updateElementState(HoldButtonFill, f5_arg1)
 	end)
 	HoldButtonFill:setAlpha(0)
-	HoldButtonFill:linkToElementModel(self, "" .. Enum[@"luibutton"][@"lui_key_xba_pscross"], false, function(model)
+	HoldButtonFill:linkToElementModel(self, "" .. Enum.LUIButton[@"lui_key_xba_pscross"], false, function(model)
 		HoldButtonFill:setModel(model, f1_arg1)
 	end)
 	self:addElement(HoldButtonFill)
@@ -72,8 +72,8 @@ CoD.StartMenu_QuitButtonFitted.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	TextBox:setShaderVector(1, 0, 0, 0, 0)
 	TextBox:setShaderVector(2, 1, 0, 0, 0)
 	TextBox:setLetterSpacing(3)
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_middle"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_middle"])
 	self:addElement(TextBox)
 	self.TextBox = TextBox
 	self:mergeStateConditions({
@@ -106,7 +106,7 @@ CoD.StartMenu_QuitButtonFitted.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end)
 	local f1_local4 = self
 	local f1_local5 = self.subscribeToModel
-	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg1)
+	local f1_local6 = Engine.GetModelForController(f1_arg1)
 	f1_local5(f1_local4, f1_local6.LastInput, function(f11_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

@@ -1,5 +1,5 @@
-require("x64:44f87e4db7598a1")
-require("x64:f1b99dd1e91ec2")
+require("ui/uieditor/widgets/pc/socialmenu/pcsocialmenu_playerlistitem_empty")
+require("ui/uieditor/widgets/pc/socialmenu/pcsocialmenu_playerlistitem_playerinfos")
 CoD.PCSocialMenu_PlayerListItem = InheritFrom(LUI.UIElement)
 CoD.PCSocialMenu_PlayerListItem.__defaultWidth = 622
 CoD.PCSocialMenu_PlayerListItem.__defaultHeight = 85

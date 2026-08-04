@@ -10,8 +10,8 @@ CoD.horizontalScrollingTextBox_30pt.new = function(f1_arg0, f1_arg1, f1_arg2, f1
 	textBox:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	textBox:setTTF("default")
 	textBox:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
-	textBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	textBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	textBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	textBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(textBox)
 	self.textBox = textBox
 	if PostLoadFunc then

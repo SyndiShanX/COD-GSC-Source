@@ -1,5 +1,5 @@
-require("x64:975a64de269f415")
-require("x64:2675595fa323085")
+require("ui/uieditor/widgets/chat/chatautocompleteaction")
+require("ui/uieditor/widgets/emptyfocusable")
 CoD.ChatAutoComplete = InheritFrom(LUI.UIElement)
 CoD.ChatAutoComplete.__defaultWidth = 233
 CoD.ChatAutoComplete.__defaultHeight = 253
@@ -21,7 +21,7 @@ CoD.ChatAutoComplete.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local NoiseBackground = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	NoiseBackground:setRGB(0.92, 0.92, 0.92)
 	NoiseBackground:setAlpha(0.7)
-	NoiseBackground:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	NoiseBackground:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	NoiseBackground:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	NoiseBackground:setShaderVector(0, 0, 0, 0, 0)
 	NoiseBackground:setupNineSliceShader(64, 64)
@@ -30,8 +30,8 @@ CoD.ChatAutoComplete.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	local Border = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Border:setRGB(0.42, 0.42, 0.42)
 	Border:setAlpha(0.3)
-	Border:setImage(RegisterImage(@"uie_highlight_border_line"))
-	Border:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
+	Border:setImage(RegisterImage("uie_highlight_border_line"))
+	Border:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_normal"))
 	Border:setShaderVector(0, 0, 0, 0, 0)
 	Border:setupNineSliceShader(4, 4)
 	self:addElement(Border)
@@ -43,7 +43,7 @@ CoD.ChatAutoComplete.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	ActionList:setWidgetType(CoD.ChatAutoCompleteAction)
 	ActionList:setVerticalCount(7)
 	ActionList:setSpacing(0)
-	ActionList:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	ActionList:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	ActionList:setDataSource("ContextualMenuActionsList")
 	self:addElement(ActionList)
 	self.ActionList = ActionList
@@ -57,7 +57,7 @@ CoD.ChatAutoComplete.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4,
 	EmptyListTitle:setAlpha(0)
 	EmptyListTitle:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_4DB82C5BB5F4D8BC"))
 	EmptyListTitle:setTTF("default")
-	EmptyListTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	EmptyListTitle:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	self:addElement(EmptyListTitle)
 	self.EmptyListTitle = EmptyListTitle
 	self:mergeStateConditions({

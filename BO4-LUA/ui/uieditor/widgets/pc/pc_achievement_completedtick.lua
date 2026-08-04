@@ -17,7 +17,7 @@ CoD.PC_Achievement_CompletedTick.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local TabBackingGlow = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	TabBackingGlow:setZRot(90)
 	TabBackingGlow:setScale(3, 4)
-	TabBackingGlow:setImage(RegisterImage(@"uie_ui_menu_common_tab_glow"))
+	TabBackingGlow:setImage(RegisterImage("uie_ui_menu_common_tab_glow"))
 	TabBackingGlow:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	TabBackingGlow:setShaderVector(0, 1.36, 0, 0, 0)
 	self:addElement(TabBackingGlow)
@@ -25,14 +25,14 @@ CoD.PC_Achievement_CompletedTick.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local TabBacking = LUI.UIImage.new(-0.25, 1.25, 0, 0, -0.75, 1.75, 0, 0)
 	TabBacking:setAlpha(0.7)
 	TabBacking:setYRot(9)
-	TabBacking:setImage(RegisterImage(@"uie_ui_menu_common_tab_backing"))
+	TabBacking:setImage(RegisterImage("uie_ui_menu_common_tab_backing"))
 	TabBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_31CC85D0A86303B0"))
 	TabBacking:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(TabBacking)
 	self.TabBacking = TabBacking
 	local CheckmarkIcon = LUI.UIImage.new(0.5, 0.5, -13, 13, 0.5, 0.5, -13, 13)
 	CheckmarkIcon:setRGB(0, 0, 0)
-	CheckmarkIcon:setImage(RegisterImage(@"uie_success_icon"))
+	CheckmarkIcon:setImage(RegisterImage("uie_success_icon"))
 	self:addElement(CheckmarkIcon)
 	self.CheckmarkIcon = CheckmarkIcon
 	if PostLoadFunc then

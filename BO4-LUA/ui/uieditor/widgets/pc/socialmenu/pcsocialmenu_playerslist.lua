@@ -1,9 +1,9 @@
-require("x64:7d739c130670411")
-require("x64:8b4af6c828d40f")
-require("x64:44ea25d6020174d")
-require("x64:2999c27eea852ba")
-require("x64:d93d55bb6418607")
-require("x64:49de12b828b3a4")
+require("ui/uieditor/widgets/genericsimplebutton")
+require("ui/uieditor/widgets/pc/socialmenu/pcsocialmenu_playerlistitem")
+require("ui/uieditor/widgets/pc/socialmenu/pcsocialmenu_playersearchbox")
+require("ui/uieditor/widgets/pc/socialmenu/pcsocialmenu_playersfiltertab")
+require("ui/uieditor/widgets/pc_vscrolllist")
+require("ui/uieditor/widgets/social/pc_socialmenu_addfriendtextbox")
 CoD.PCSocialMenu_PlayersList = InheritFrom(LUI.UIElement)
 CoD.PCSocialMenu_PlayersList.__defaultWidth = 626
 CoD.PCSocialMenu_PlayersList.__defaultHeight = 720
@@ -36,14 +36,14 @@ CoD.PCSocialMenu_PlayersList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 		elseif element.super.gainFocus then
 			f2_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f2_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(BTN_AddFriend, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		CoD.PCUtility.SocialAddFriend(self, controller, "social_screen_editbox_add_friend")
+	f1_arg0:AddButtonCallbackFunction(BTN_AddFriend, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f3_arg0, f3_arg1, f3_arg2, f3_arg3)
+		CoD.PCUtility.SocialAddFriend(self, f3_arg2, "social_screen_editbox_add_friend")
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+	end, function(f4_arg0, f4_arg1, f4_arg2)
+		CoD.Menu.SetButtonLabel(f4_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(BTN_AddFriend)
@@ -55,7 +55,7 @@ CoD.PCSocialMenu_PlayersList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	GRID_FiltersTabs:setWidgetType(CoD.PCSocialMenu_PlayersFilterTab)
 	GRID_FiltersTabs:setHorizontalCount(3)
 	GRID_FiltersTabs:setSpacing(0)
-	GRID_FiltersTabs:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	GRID_FiltersTabs:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	self:addElement(GRID_FiltersTabs)
 	self.GRID_FiltersTabs = GRID_FiltersTabs
 	local PlayerSearchBox = CoD.PCSocialMenu_PlayerSearchBox.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 0, 62, 108)
@@ -69,7 +69,7 @@ CoD.PCSocialMenu_PlayersList.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	local ArrowR = LUI.UIImage.new(0, 0, -68, 22, 0, 0, 278.5, 368.5)
 	ArrowR:setAlpha(0.4)
 	ArrowR:setYRot(180)
-	ArrowR:setImage(RegisterImage(@"uie_t7_icon_menu_options_arrow"))
+	ArrowR:setImage(RegisterImage("uie_t7_icon_menu_options_arrow"))
 	self:addElement(ArrowR)
 	self.ArrowR = ArrowR
 	local PCSocialMenuAddFriendTextBox = CoD.PC_SocialMenu_AddFriendTextBox.new(f1_arg0, f1_arg1, 0.02, 0.02, 0, 445, 0.92, 0.92, 0, 41)

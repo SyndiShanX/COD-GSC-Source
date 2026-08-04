@@ -1,4 +1,4 @@
-require("x64:240f945b3b804af")
+require("ui/uieditor/widgets/freecursor/freecursorinfopanel")
 CoD.freeCursorInfoPanelContainer = InheritFrom(LUI.UIElement)
 CoD.freeCursorInfoPanelContainer.__defaultWidth = 405
 CoD.freeCursorInfoPanelContainer.__defaultHeight = 963
@@ -51,7 +51,7 @@ CoD.freeCursorInfoPanelContainer.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	end)
 	local f1_local2 = self
 	local f1_local3 = self.subscribeToModel
-	local f1_local4 = Engine[@"getmodelforcontroller"](f1_arg1)
+	local f1_local4 = Engine.GetModelForController(f1_arg1)
 	f1_local3(f1_local2, f1_local4.LastInput, function(f7_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

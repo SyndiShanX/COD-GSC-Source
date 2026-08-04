@@ -21,15 +21,15 @@ LUI = {
 		false,
 	},
 }
-if Enum[@"luialignment"] then
+if Enum.LUIAlignment then
 	LUI.Alignment = {
-		None = Enum[@"luialignment"][@"lui_alignment_none"],
-		Left = Enum[@"luialignment"][@"lui_alignment_left"],
-		Center = Enum[@"luialignment"][@"lui_alignment_center"],
-		Right = Enum[@"luialignment"][@"lui_alignment_right"],
-		Top = Enum[@"luialignment"][@"lui_alignment_top"],
-		Middle = Enum[@"luialignment"][@"lui_alignment_middle"],
-		Bottom = Enum[@"luialignment"][@"lui_alignment_bottom"],
+		None = Enum.LUIAlignment[@"lui_alignment_none"],
+		Left = Enum.LUIAlignment[@"lui_alignment_left"],
+		Center = Enum.LUIAlignment[@"lui_alignment_center"],
+		Right = Enum.LUIAlignment[@"lui_alignment_right"],
+		Top = Enum.LUIAlignment[@"lui_alignment_top"],
+		Middle = Enum.LUIAlignment[@"lui_alignment_middle"],
+		Bottom = Enum.LUIAlignment[@"lui_alignment_bottom"],
 	}
 end
 if hpairs ~= nil then
@@ -160,9 +160,9 @@ LUI.CreateModelsAndInitialize = function(f16_arg0, f16_arg1)
 	end
 end
 LUI.CreateModelAndInitialize = function(f17_arg0, f17_arg1, f17_arg2)
-	local f17_local0 = Engine[@"createmodel"](f17_arg0, f17_arg1)
+	local f17_local0 = Engine.CreateModel(f17_arg0, f17_arg1)
 	if f17_local0 and f17_arg2 ~= nil then
-		Engine[@"setmodelvalue"](f17_local0, f17_arg2)
+		Engine.SetModelValue(f17_local0, f17_arg2)
 	end
 	return f17_local0
 end
@@ -190,18 +190,18 @@ LUI.OverrideFunction_Remove = function(f22_arg0, f22_arg1, f22_arg2)
 	local f22_local0 = LUI.OverrideFunction_GetFunctionTable(f22_arg0, f22_arg1)
 	table.remove(f22_local0, LuaUtils.FindItemInArray(f22_local0, f22_arg2))
 end
-require("x64:7d42cfae6e90891")
-require("x64:4c3a3ee87cd66f3")
-require("x64:b279b6d2fe04364")
-require("x64:1a55ff918c73cd4")
-require("x64:b7dd1806fb18b7")
-require("x64:2cf17e1911faf98")
-require("x64:4083528baeb2f3d")
-require("x64:c3156467692bf47")
-require("x64:8e9b767aaa6fd74")
-require("x64:fc4b916e71c9ca9")
-require("x64:1845c3416695820")
-require("x64:280ec61da7bd5a7")
+require("ui/lui/luielement")
+require("ui/lui/luiroot")
+require("ui/lui/luitimer")
+require("ui/lui/luiimage")
+require("ui/lui/luilist")
+require("ui/lui/luitext")
+require("ui/lui/luiverticallist")
+require("ui/lui/luihorizontallist")
+require("ui/lui/luiframe")
+require("ui/lui/luigridlayout")
+require("ui/lui/luiwheellayout")
+require("ui/lui/luifixedaspectratioimage")
 if not debug then
 	debug = {}
 end

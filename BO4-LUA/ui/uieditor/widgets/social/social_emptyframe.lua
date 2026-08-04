@@ -1,4 +1,4 @@
-require("x64:a9255c570c68aa8")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmainframe")
 CoD.Social_EmptyFrame = InheritFrom(LUI.UIElement)
 CoD.Social_EmptyFrame.__defaultWidth = 1920
 CoD.Social_EmptyFrame.__defaultHeight = 1080
@@ -11,7 +11,7 @@ CoD.Social_EmptyFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	infoBracketBot2:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	infoBracketBot2:setZRot(180)
 	infoBracketBot2:setImage(RegisterImage(@"hash_4C325BED3F226657"))
-	infoBracketBot2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
+	infoBracketBot2:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_add"))
 	infoBracketBot2:setShaderVector(0, 0, 0, 0, 0)
 	infoBracketBot2:setupNineSliceShader(16, 4)
 	self:addElement(infoBracketBot2)
@@ -20,7 +20,7 @@ CoD.Social_EmptyFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	infoBracketBot:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	infoBracketBot:setZRot(180)
 	infoBracketBot:setImage(RegisterImage(@"hash_4C325BED3F226657"))
-	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
+	infoBracketBot:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_add"))
 	infoBracketBot:setShaderVector(0, 0, 0, 0, 0)
 	infoBracketBot:setupNineSliceShader(16, 4)
 	self:addElement(infoBracketBot)
@@ -29,7 +29,7 @@ CoD.Social_EmptyFrame.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4
 	infoBracketBot3:setRGB(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
 	infoBracketBot3:setZRot(180)
 	infoBracketBot3:setImage(RegisterImage(@"hash_4C325BED3F226657"))
-	infoBracketBot3:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_add"))
+	infoBracketBot3:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_add"))
 	infoBracketBot3:setShaderVector(0, 0, 0, 0, 0)
 	infoBracketBot3:setupNineSliceShader(16, 4)
 	self:addElement(infoBracketBot3)

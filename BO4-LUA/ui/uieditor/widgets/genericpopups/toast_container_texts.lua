@@ -10,8 +10,8 @@ CoD.Toast_Container_Texts.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	local NotifText = LUI.UIText.new(0, 1, 1, 1, 0, 0, 0, 21)
 	NotifText:setRGB(ColorSet.T8__OFF__GRAY.r, ColorSet.T8__OFF__GRAY.g, ColorSet.T8__OFF__GRAY.b)
 	NotifText:setTTF("ttmussels_regular")
-	NotifText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	NotifText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	NotifText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	NotifText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	NotifText:linkToElementModel(self, "description", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -23,7 +23,7 @@ CoD.Toast_Container_Texts.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_
 	local NotifTextMain = LUI.UIText.new(0, 1, 0, 0, 1, 1, -27, 0)
 	NotifTextMain:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	NotifTextMain:setTTF("ttmussels_regular")
-	NotifTextMain:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	NotifTextMain:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	self:addElement(NotifTextMain)
 	self.NotifTextMain = NotifTextMain
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", self.__onClose)

@@ -1,5 +1,5 @@
-require("x64:922d9c15cdcf75a")
-require("x64:b79410dc8d1ea84")
+require("ui/uieditor/widgets/pc/sliderbar_barhandle")
+require("ui/uieditor/widgets/pc/startmenu/pc_highlightborder")
 CoD.SliderBar_Slider = InheritFrom(LUI.UIElement)
 CoD.SliderBar_Slider.__defaultWidth = 281
 CoD.SliderBar_Slider.__defaultHeight = 65

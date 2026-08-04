@@ -1,8 +1,8 @@
-require("x64:c45396f7013b2c4")
-require("x64:6d513f0593e71df")
-require("x64:4e00e02e26a9da7")
-require("x64:a9b9965f6f12714")
-require("x64:73c1bd047bb93f1")
+require("ui/uieditor/widgets/arena/arenaprogressionrubies")
+require("ui/uieditor/widgets/common/commonrankiconandrankvertical")
+require("ui/uieditor/widgets/social/social_infopane_party")
+require("ui/uieditor/widgets/social/social_infopane_presence")
+require("ui/uieditor/widgets/social/social_playercard")
 CoD.Social_InvitePlayersHeader = InheritFrom(LUI.UIElement)
 CoD.Social_InvitePlayersHeader.__defaultWidth = 687
 CoD.Social_InvitePlayersHeader.__defaultHeight = 169
@@ -100,7 +100,7 @@ CoD.Social_InvitePlayersHeader.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	end, false)
 	f1_local6 = self
 	f1_local7 = self.subscribeToModel
-	f1_local8 = Engine[@"getglobalmodel"]()
+	f1_local8 = Engine.GetGlobalModel()
 	f1_local7(f1_local6, f1_local8["lobbyRoot.lobbyNav"], function(f15_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

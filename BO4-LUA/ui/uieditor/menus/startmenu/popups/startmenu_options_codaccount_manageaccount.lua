@@ -1,8 +1,8 @@
-require("x64:71d4e66447f837e")
-require("x64:d6ecdf7755aeddc")
-require("x64:e41af73729601d6")
-require("x64:d5b03c451ceb6e8")
-require("x64:7889ce1e3e2e8a")
+require("ui/uieditor/widgets/backgroundframes/menuframeingame")
+require("ui/uieditor/widgets/common/commonheader")
+require("ui/uieditor/widgets/header/header_container_frontend")
+require("ui/uieditor/widgets/startmenu/options/startmenu_options_accountmanagementform")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsbackground")
 CoD.StartMenu_Options_CoDAccount_ManageAccount = InheritFrom(CoD.Menu)
 LUI.createMenu.StartMenu_Options_CoDAccount_ManageAccount = function(f1_arg0, f1_arg1)
 	local self = CoD.Menu.NewForUIEditor("StartMenu_Options_CoDAccount_ManageAccount", f1_arg0)
@@ -38,16 +38,16 @@ LUI.createMenu.StartMenu_Options_CoDAccount_ManageAccount = function(f1_arg0, f1
 	local headercontainerfrontend = CoD.header_container_frontend.new(f1_local1, f1_arg0, 0, 1, 0, 0, 0, 0, 0, 42)
 	self:addElement(headercontainerfrontend)
 	self.headercontainerfrontend = headercontainerfrontend
-	self:registerEventHandler("list_item_gain_focus", function(self, event)
+	self:registerEventHandler("list_item_gain_focus", function(element, event)
 		local f3_local0 = nil
-		CoD.CoDAccountUtility.OnAccountManagementItemFocusChange(f1_local1, f1_arg0, self)
+		CoD.CoDAccountUtility.OnAccountManagementItemFocusChange(f1_local1, f1_arg0, element)
 		return f3_local0
 	end)
-	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
-		GoBack(self, controller)
+	f1_local1:AddButtonCallbackFunction(self, f1_arg0, Enum.LUIButton[@"lui_key_xbb_pscircle"], nil, function(f4_arg0, f4_arg1, f4_arg2, f4_arg3)
+		GoBack(self, f4_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"hash_778D439E1B360368", nil, nil)
+	end, function(f5_arg0, f5_arg1, f5_arg2)
+		CoD.Menu.SetButtonLabel(f5_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], "menu/back_caps", nil, nil)
 		return true
 	end, false)
 	MenuFrameIngame:setModel(self.buttonModel, f1_arg0)

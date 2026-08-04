@@ -1,4 +1,4 @@
-require("x64:c45396f7013b2c4")
+require("ui/uieditor/widgets/arena/arenaprogressionrubies")
 CoD.CommonRankIconAndRankLarge = InheritFrom(LUI.UIElement)
 CoD.CommonRankIconAndRankLarge.__defaultWidth = 349
 CoD.CommonRankIconAndRankLarge.__defaultHeight = 135
@@ -37,7 +37,7 @@ CoD.CommonRankIconAndRankLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	self.arenaRubiesUnlocked = arenaRubiesUnlocked
 	local arenaFlameStreak = LUI.UIImage.new(0, 0, -54, 186, 0, 0, -52.5, 187.5)
 	arenaFlameStreak:setAlpha(0)
-	arenaFlameStreak:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
+	arenaFlameStreak:setMaterial(LUI.UIImage.GetCachedMaterial("uie_flipbook_add"))
 	arenaFlameStreak:setShaderVector(0, 4, 4, 0, 0)
 	arenaFlameStreak:setShaderVector(1, 8, 0, 0, 0)
 	arenaFlameStreak.__Image = function(f7_arg0)
@@ -75,7 +75,7 @@ CoD.CommonRankIconAndRankLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	rankText:setShaderVector(1, 0, 0, 0, 0)
 	rankText:setShaderVector(2, 0.3, 0.3, 0.2, 0.2)
 	rankText:setLetterSpacing(2)
-	rankText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	rankText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	rankText:linkToElementModel(self, "isParagon", true, function(model)
 		local f10_local0 = model:get()
 		if f10_local0 ~= nil then
@@ -100,8 +100,8 @@ CoD.CommonRankIconAndRankLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	rankName:setShaderVector(2, 0, 0, 0, 0.5)
 	rankName:setLetterSpacing(1)
 	rankName:setLineSpacing(1)
-	rankName:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	rankName:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
+	rankName:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	rankName:setAlignment(Enum.LUIAlignment[@"lui_alignment_bottom"])
 	rankName:linkToElementModel(self, "rankTitle", true, function(model)
 		local f12_local0 = model:get()
 		if f12_local0 ~= nil then
@@ -121,8 +121,8 @@ CoD.CommonRankIconAndRankLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	rank:setShaderVector(2, 0, 0, 0, 0.5)
 	rank:setLetterSpacing(1)
 	rank:setLineSpacing(1)
-	rank:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	rank:setAlignment(Enum[@"luialignment"][@"lui_alignment_bottom"])
+	rank:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	rank:setAlignment(Enum.LUIAlignment[@"lui_alignment_bottom"])
 	self:addElement(rank)
 	self.rank = rank
 	local rankIcon = LUI.UIImage.new(0, 0, 2, 130, 0, 0, 3.5, 131.5)
@@ -151,7 +151,7 @@ CoD.CommonRankIconAndRankLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3
 	})
 	local f1_local8 = self
 	local f1_local9 = self.subscribeToModel
-	local f1_local10 = Engine[@"getglobalmodel"]()
+	local f1_local10 = Engine.GetGlobalModel()
 	f1_local9(f1_local8, f1_local10["lobbyRoot.rankMode"], function(f16_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

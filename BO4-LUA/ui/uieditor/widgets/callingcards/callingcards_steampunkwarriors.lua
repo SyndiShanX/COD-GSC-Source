@@ -1,11 +1,11 @@
-require("x64:694c561e07c3d3b")
-require("x64:f2a39fa4fd0066b")
-CoD[@"hash_7B3EF12304073586"] = InheritFrom(LUI.UIElement)
-CoD[@"hash_7B3EF12304073586"].__defaultWidth = 960
-CoD[@"hash_7B3EF12304073586"].__defaultHeight = 240
-CoD[@"hash_7B3EF12304073586"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+require("ui/uieditor/widgets/callingcards/callingcards_asset_steampunkwarriors_gunarm")
+require("ui/uieditor/widgets/callingcards/callingcards_asset_steampunkwarriors_shoulder")
+CoD.callingcards_steampunkwarriors = InheritFrom(LUI.UIElement)
+CoD.callingcards_steampunkwarriors.__defaultWidth = 960
+CoD.callingcards_steampunkwarriors.__defaultHeight = 240
+CoD.callingcards_steampunkwarriors.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[@"hash_7B3EF12304073586"])
+	self:setClass(CoD.callingcards_steampunkwarriors)
 	self.id = "CallingCards_steampunkwarriors"
 	self.soundSet = "none"
 	self.anyChildUsesUpdateState = true
@@ -31,7 +31,7 @@ CoD[@"hash_7B3EF12304073586"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.shoulder = shoulder
 	local light2 = LUI.UIImage.new(0, 0, 466.5, 539.5, 0, 0, 90, 163)
 	light2:setImage(RegisterImage(@"hash_7ADBF2ABD5CCB0FC"))
-	light2:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	light2:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(light2)
 	self.light2 = light2
 	local smoke = LUI.UIImage.new(0, 0, -200, 960, 0, 0, 28, 338)
@@ -49,7 +49,7 @@ CoD[@"hash_7B3EF12304073586"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end
 	return self
 end
-CoD[@"hash_7B3EF12304073586"].__resetProperties = function(f2_arg0)
+CoD.callingcards_steampunkwarriors.__resetProperties = function(f2_arg0)
 	f2_arg0.arm:completeAnimation()
 	f2_arg0.shoulder:completeAnimation()
 	f2_arg0.body:completeAnimation()
@@ -71,9 +71,9 @@ CoD[@"hash_7B3EF12304073586"].__resetProperties = function(f2_arg0)
 	f2_arg0.smoke:setLeftRight(0, 0, -200, 960)
 	f2_arg0.smoke:setAlpha(0)
 	f2_arg0.whitebox:setAlpha(1)
-	f2_arg0.whitebox:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_normal"))
+	f2_arg0.whitebox:setMaterial(LUI.UIImage.GetCachedMaterial("ui_normal"))
 end
-CoD[@"hash_7B3EF12304073586"].__clipsPerState = {
+CoD.callingcards_steampunkwarriors.__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -307,13 +307,13 @@ CoD[@"hash_7B3EF12304073586"].__clipsPerState = {
 			end
 			f3_arg0.whitebox:completeAnimation()
 			f3_arg0.whitebox:setAlpha(0)
-			f3_arg0.whitebox:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+			f3_arg0.whitebox:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 			f3_local6(f3_arg0.whitebox)
 			f3_arg0.nextClip = "DefaultClip"
 		end,
 	},
 }
-CoD[@"hash_7B3EF12304073586"].__onClose = function(f42_arg0)
+CoD.callingcards_steampunkwarriors.__onClose = function(f42_arg0)
 	f42_arg0.arm:close()
 	f42_arg0.shoulder:close()
 end

@@ -1,4 +1,4 @@
-require("x64:9fc49de026d9299")
+require("ui/uieditor/widgets/callingcards/callingcards_goldframe")
 CoD[@"hash_5AEBB28681A82F4D"] = InheritFrom(LUI.UIElement)
 CoD[@"hash_5AEBB28681A82F4D"].__defaultWidth = 720
 CoD[@"hash_5AEBB28681A82F4D"].__defaultHeight = 180
@@ -9,8 +9,8 @@ CoD[@"hash_5AEBB28681A82F4D"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.soundSet = "default"
 	self.anyChildUsesUpdateState = true
 	local CardIcon = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	CardIcon:setImage(RegisterImage(@"uie_t7_icon_callingcard_temp2_lrg"))
-	CardIcon:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
+	CardIcon:setImage(RegisterImage("uie_t7_icon_callingcard_temp2_lrg"))
+	CardIcon:setMaterial(LUI.UIImage.GetCachedMaterial("uie_feather_blend"))
 	self:addElement(CardIcon)
 	self.CardIcon = CardIcon
 	local CallingCardsGoldFrame = CoD.CallingCards_GoldFrame.new(f1_arg0, f1_arg1, 0, 1, 0, 0, 0, 1, 0, 0)

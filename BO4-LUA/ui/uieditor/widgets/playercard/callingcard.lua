@@ -1,6 +1,6 @@
-require("x64:228a7baa572b047")
-require("x64:19935c010d8af88")
-require("x64:38218f608ba27da")
+require("ui/uieditor/widgets/callingcards/callingcards_framewidget")
+require("ui/uieditor/widgets/social/social_callingcardsubtitle")
+require("ui/uieditor/widgets/social/social_callingcardtitle")
 CoD.CallingCard = InheritFrom(LUI.UIElement)
 CoD.CallingCard.__defaultWidth = 366
 CoD.CallingCard.__defaultHeight = 90

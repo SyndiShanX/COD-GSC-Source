@@ -10,7 +10,7 @@ CoD.CallingCards_Asset_graphic_burstspin.new = function(f1_arg0, f1_arg1, f1_arg
 	local rays = LUI.UIImage.new(0, 0, 0, 1024, 0, 0, 0, 1024)
 	rays:setAlpha(0.6)
 	rays:setScale(1.1, 1.1)
-	rays:setImage(RegisterImage(@"uie_ui_icon_callingcards_operations_humiliation_unforgiving_rays"))
+	rays:setImage(RegisterImage("uie_ui_icon_callingcards_operations_humiliation_unforgiving_rays"))
 	self:addElement(rays)
 	self.rays = rays
 	if PostLoadFunc then

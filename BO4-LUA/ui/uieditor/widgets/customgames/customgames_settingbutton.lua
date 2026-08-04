@@ -1,4 +1,4 @@
-require("x64:3cbd518f629a732")
+require("ui/uieditor/widgets/customgames/customgames_settingbutton_internal")
 CoD.CustomGames_SettingButton = InheritFrom(LUI.UIElement)
 CoD.CustomGames_SettingButton.__defaultWidth = 500
 CoD.CustomGames_SettingButton.__defaultHeight = 60

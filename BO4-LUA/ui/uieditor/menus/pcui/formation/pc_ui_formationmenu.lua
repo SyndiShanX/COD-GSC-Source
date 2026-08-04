@@ -84,14 +84,14 @@ LUI.createMenu.PC_UI_FormationMenu = function(f2_arg0, f2_arg1)
 	self:playSound("menu_open", f2_arg0)
 	self.ignoreCursor = true
 	local Background = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
-	Background:setImage(RegisterImage(@"uie_fe_cp_background"))
+	Background:setImage(RegisterImage("uie_fe_cp_background"))
 	self:addElement(Background)
 	self.Background = Background
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], "ESCAPE", function(element, menu, controller, model)
-		SendMenuResponse(self, "PC_UI_FormationMenu", "success", controller)
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum.LUIButton[@"lui_key_xbb_pscircle"], "ESCAPE", function(f3_arg0, f3_arg1, f3_arg2, f3_arg3)
+		SendMenuResponse(self, "PC_UI_FormationMenu", "success", f3_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/quit", nil, "ESCAPE")
+	end, function(f4_arg0, f4_arg1, f4_arg2)
+		CoD.Menu.SetButtonLabel(f4_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], @"menu/quit", nil, "ESCAPE")
 		return true
 	end, false)
 	self:processEvent({

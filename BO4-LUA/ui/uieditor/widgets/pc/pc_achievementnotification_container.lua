@@ -1,4 +1,4 @@
-require("x64:8aaacae484841f6")
+require("ui/uieditor/widgets/pc/pc_achievementnotification")
 CoD.PC_AchievementNotification_Container = InheritFrom(LUI.UIElement)
 CoD.PC_AchievementNotification_Container.__defaultWidth = 430
 CoD.PC_AchievementNotification_Container.__defaultHeight = 80

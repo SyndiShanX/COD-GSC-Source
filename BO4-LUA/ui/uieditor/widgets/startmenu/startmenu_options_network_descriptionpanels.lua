@@ -1,6 +1,6 @@
-require("x64:cf5b4cc5bf2971b")
-require("x64:e201e7e41431aa7")
-require("x64:63355d9a3377f1d")
+require("ui/uieditor/widgets/cac/cac_buttonboxlrginactivestroke")
+require("ui/uieditor/widgets/lobby/common/fe_buttonpanel")
+require("ui/uieditor/widgets/verticalscrollingtextbox")
 CoD.StartMenu_Options_Network_DescriptionPanels = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Options_Network_DescriptionPanels.__defaultWidth = 880
 CoD.StartMenu_Options_Network_DescriptionPanels.__defaultHeight = 775
@@ -22,8 +22,8 @@ CoD.StartMenu_Options_Network_DescriptionPanels.new = function(f1_arg0, f1_arg1,
 	local aboutTitle = LUI.UIText.new(0.5, 0.5, -360.5, 360.5, 0, 0, 26.5, 56.5)
 	aboutTitle:setRGB(0.63, 0.57, 0.2)
 	aboutTitle:setTTF("ttmussels_regular")
-	aboutTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	aboutTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	aboutTitle:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	aboutTitle:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	aboutTitle:linkToElementModel(self, "aboutTitle", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -56,7 +56,7 @@ CoD.StartMenu_Options_Network_DescriptionPanels.new = function(f1_arg0, f1_arg1,
 	description:appendEventHandler("input_source_changed", description.textBox.text.__String_Reference_FullPath)
 	local f1_local5 = description
 	local f1_local6 = description.subscribeToModel
-	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	local f1_local7 = Engine.GetModelForController(f1_arg1)
 	f1_local6(f1_local5, f1_local7.LastInput, description.textBox.text.__String_Reference_FullPath)
 	description:linkToElementModel(self, "desc", true, description.textBox.text.__String_Reference_FullPath)
 	description:linkToElementModel(self, "descKBM", true, description.textBox.text.__String_Reference_FullPath)

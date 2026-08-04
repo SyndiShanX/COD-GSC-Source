@@ -1,6 +1,6 @@
-require("x64:55aca670e9903a3")
-require("x64:a9255c570c68aa8")
-require("x64:a1e2d7b19f5deb0")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmaincorners")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmainframe")
+require("ui/uieditor/widgets/startmenu/startmenu_frame_nobg")
 CoD.StartMenu_Options_ButtonOption = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Options_ButtonOption.__defaultWidth = 760
 CoD.StartMenu_Options_ButtonOption.__defaultHeight = 60
@@ -26,8 +26,8 @@ CoD.StartMenu_Options_ButtonOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1_
 	local actionText = LUI.UIText.new(0, 0, 12, 352, 0, 0, 19.5, 40.5)
 	actionText:setRGB(0.78, 0.74, 0.67)
 	actionText:setTTF("ttmussels_regular")
-	actionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	actionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	actionText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	actionText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	actionText:linkToElementModel(self, "displayText", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then

@@ -1,4 +1,4 @@
-require("x64:8293fdfde8af5f3")
+require("ui/uieditor/widgets/hud/obituary/obituaryblurbacking")
 require("x64:76cc25e6b842a01")
 CoD.revive_hud = InheritFrom(CoD.Menu)
 LUI.createMenu.revive_hud = function(f1_arg0, f1_arg1)
@@ -16,8 +16,8 @@ LUI.createMenu.revive_hud = function(f1_arg0, f1_arg1)
 	local TextBox = LUI.UIText.new(0.5, 0.5, -960, 960, 1, 1, -284, -248)
 	TextBox:setTTF("notosans_regular")
 	TextBox:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_171E049B161CD00A"))
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	TextBox:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	TextBox:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	TextBox:setBackingType(1)
 	TextBox:setBackingWidget(CoD.ObituaryBlurBacking, f1_local1, f1_arg0)
 	TextBox:setBackingColor(ColorSet.T8__OFF__WHITE.r, ColorSet.T8__OFF__WHITE.g, ColorSet.T8__OFF__WHITE.b)
@@ -40,7 +40,7 @@ LUI.createMenu.revive_hud = function(f1_arg0, f1_arg1)
 				if f3_local0 then
 					f3_local0 = CoD.ModelUtility.IsModelValueEqualToEnum(f1_arg0, "playerAbilities.playerGadget1.state", Enum[@"weapongadgetstates"][@"player_ability_state_inuse"])
 					if f3_local0 then
-						if not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_player_dead"]) then
+						if not Engine.IsVisibilityBitSet(f1_arg0, Enum.UIVisibilityBit[@"bit_player_dead"]) then
 							f3_local0 = not IsZombies()
 						else
 							f3_local0 = false
@@ -78,7 +78,7 @@ LUI.createMenu.revive_hud = function(f1_arg0, f1_arg1)
 	})
 	local f1_local4 = UseTimer
 	local f1_local5 = UseTimer.subscribeToModel
-	local f1_local6 = Engine[@"getmodelforcontroller"](f1_arg0)
+	local f1_local6 = Engine.GetModelForController(f1_arg0)
 	f1_local5(f1_local4, f1_local6["playerAbilities.PlayerGadget1.powerRatio"], function(f7_arg0)
 		f1_local1:updateElementState(UseTimer, {
 			name = "model_validation",
@@ -90,7 +90,7 @@ LUI.createMenu.revive_hud = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local4 = UseTimer
 	f1_local5 = UseTimer.subscribeToModel
-	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local6 = Engine.GetModelForController(f1_arg0)
 	f1_local5(f1_local4, f1_local6["playerAbilities.playerGadget1.state"], function(f8_arg0)
 		f1_local1:updateElementState(UseTimer, {
 			name = "model_validation",
@@ -102,19 +102,19 @@ LUI.createMenu.revive_hud = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local4 = UseTimer
 	f1_local5 = UseTimer.subscribeToModel
-	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg0)
-	f1_local5(f1_local4, f1_local6["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"]], function(f9_arg0)
+	f1_local6 = Engine.GetModelForController(f1_arg0)
+	f1_local5(f1_local4, f1_local6["UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_player_dead"]], function(f9_arg0)
 		f1_local1:updateElementState(UseTimer, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f9_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_player_dead"],
+			modelName = "UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_player_dead"],
 		})
 	end, false)
 	f1_local4 = UseTimer
 	f1_local5 = UseTimer.subscribeToModel
-	f1_local6 = Engine[@"getglobalmodel"]()
+	f1_local6 = Engine.GetGlobalModel()
 	f1_local5(f1_local4, f1_local6["lobbyRoot.lobbyNav"], function(f10_arg0)
 		f1_local1:updateElementState(UseTimer, {
 			name = "model_validation",
@@ -126,7 +126,7 @@ LUI.createMenu.revive_hud = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local4 = UseTimer
 	f1_local5 = UseTimer.subscribeToModel
-	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local6 = Engine.GetModelForController(f1_arg0)
 	f1_local5(f1_local4, f1_local6["hudItems.laststand.reviveProgress"], function(f11_arg0)
 		f1_local1:updateElementState(UseTimer, {
 			name = "model_validation",
@@ -138,7 +138,7 @@ LUI.createMenu.revive_hud = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local4 = UseTimer
 	f1_local5 = UseTimer.subscribeToModel
-	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local6 = Engine.GetModelForController(f1_arg0)
 	f1_local5(f1_local4, f1_local6["hudItems.laststand.beingRevived"], function(f12_arg0)
 		f1_local1:updateElementState(UseTimer, {
 			name = "model_validation",
@@ -150,7 +150,7 @@ LUI.createMenu.revive_hud = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local4 = UseTimer
 	f1_local5 = UseTimer.subscribeToModel
-	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local6 = Engine.GetModelForController(f1_arg0)
 	f1_local5(f1_local4, f1_local6["hudItems.lastStand.progress"], function(f13_arg0)
 		f1_local1:updateElementState(UseTimer, {
 			name = "model_validation",
@@ -162,7 +162,7 @@ LUI.createMenu.revive_hud = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local4 = UseTimer
 	f1_local5 = UseTimer.subscribeToModel
-	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local6 = Engine.GetModelForController(f1_arg0)
 	f1_local5(f1_local4, f1_local6["hudItems.lastStand.beingRevived"], function(f14_arg0)
 		f1_local1:updateElementState(UseTimer, {
 			name = "model_validation",
@@ -174,19 +174,19 @@ LUI.createMenu.revive_hud = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local4 = UseTimer
 	f1_local5 = UseTimer.subscribeToModel
-	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg0)
-	f1_local5(f1_local4, f1_local6["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"]], function(f15_arg0)
+	f1_local6 = Engine.GetModelForController(f1_arg0)
+	f1_local5(f1_local4, f1_local6["UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_game_ended"]], function(f15_arg0)
 		f1_local1:updateElementState(UseTimer, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f15_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_game_ended"],
+			modelName = "UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_game_ended"],
 		})
 	end, false)
 	f1_local4 = UseTimer
 	f1_local5 = UseTimer.subscribeToModel
-	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local6 = Engine.GetModelForController(f1_arg0)
 	f1_local5(f1_local4, f1_local6["hudItems.beingFinished"], function(f16_arg0)
 		f1_local1:updateElementState(UseTimer, {
 			name = "model_validation",
@@ -198,7 +198,7 @@ LUI.createMenu.revive_hud = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local4 = UseTimer
 	f1_local5 = UseTimer.subscribeToModel
-	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local6 = Engine.GetModelForController(f1_arg0)
 	f1_local5(f1_local4, f1_local6["hudItems.dynEntUseHoldProgress"], function(f17_arg0)
 		f1_local1:updateElementState(UseTimer, {
 			name = "model_validation",
@@ -210,7 +210,7 @@ LUI.createMenu.revive_hud = function(f1_arg0, f1_arg1)
 	end, false)
 	f1_local4 = UseTimer
 	f1_local5 = UseTimer.subscribeToModel
-	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg0)
+	f1_local6 = Engine.GetModelForController(f1_arg0)
 	f1_local5(f1_local4, f1_local6["hudItems.depositing"], function(f18_arg0)
 		f1_local1:updateElementState(UseTimer, {
 			name = "model_validation",
@@ -226,20 +226,20 @@ LUI.createMenu.revive_hud = function(f1_arg0, f1_arg1)
 		{
 			stateName = "Visible",
 			condition = function(menu, element, event)
-				return not Engine[@"isvisibilitybitset"](f1_arg0, Enum[@"uivisibilitybit"][@"bit_spectating_client"])
+				return not Engine.IsVisibilityBitSet(f1_arg0, Enum.UIVisibilityBit[@"bit_spectating_client"])
 			end,
 		},
 	})
 	f1_local4 = self
 	f1_local5 = self.subscribeToModel
-	f1_local6 = Engine[@"getmodelforcontroller"](f1_arg0)
-	f1_local5(f1_local4, f1_local6["UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"]], function(f20_arg0)
+	f1_local6 = Engine.GetModelForController(f1_arg0)
+	f1_local5(f1_local4, f1_local6["UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_spectating_client"]], function(f20_arg0)
 		f1_local1:updateElementState(self, {
 			name = "model_validation",
 			menu = f1_local1,
 			controller = f1_arg0,
 			modelValue = f20_arg0:get(),
-			modelName = "UIVisibilityBit." .. Enum[@"uivisibilitybit"][@"bit_spectating_client"],
+			modelName = "UIVisibilityBit." .. Enum.UIVisibilityBit[@"bit_spectating_client"],
 		})
 	end, false)
 	self:processEvent({

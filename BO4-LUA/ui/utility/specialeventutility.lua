@@ -10,12 +10,12 @@ CoD.SpecialEventUtility.SpecialEvent_XPCol = 6
 CoD.SpecialEventUtility.SpecialEvent_RewardCol = 7
 CoD.SpecialEventUtility.SpecialEvents = {}
 CoD.SpecialEventUtility.GetCurrentSpecialEventInfo = function()
-	return CoD.SpecialEventUtility.GetSpecialEventInfo(Engine[@"getdvarint"](@"zm_active_event_calling"))
+	return CoD.SpecialEventUtility.GetSpecialEventInfo(Engine[@"getdvarint"]("zm_active_event_calling"))
 end
 CoD.SpecialEventUtility.GetSpecialEventInfo = function(f2_arg0)
 	if f2_arg0 and 0 < f2_arg0 and not CoD.SpecialEventUtility.SpecialEvents[f2_arg0] then
 		local f2_local0 = {}
-		local f2_local1 = Engine[@"gettablerowcount"](CoD.SpecialEventUtility.SpecialEventTable)
+		local f2_local1 = Engine.GetTableRowCount(CoD.SpecialEventUtility.SpecialEventTable)
 		local f2_local2 = 0x0
 		local f2_local3 = 0
 		for f2_local4 = 0, f2_local1 - 1, 1 do
@@ -67,8 +67,8 @@ CoD.SpecialEventUtility.GetCurrentSpecialEventTierInfo = function(f4_arg0, f4_ar
 		if f4_arg1 then
 			local f4_local1 = f4_arg1.event_calling_stats[f4_local0.statHash]
 			if f4_local1 then
-				local f4_local2 = f4_local1[@"tiercompleted"]:get()
-				local f4_local3 = f4_local1[@"progress"]:get()
+				local f4_local2 = f4_local1.tiercompleted:get()
+				local f4_local3 = f4_local1.progress:get()
 				local f4_local4 = f4_local0[f4_local2 + 1]
 				if f4_local4 then
 					f4_local4.progress = f4_local3
@@ -81,7 +81,7 @@ CoD.SpecialEventUtility.GetCurrentSpecialEventTierInfo = function(f4_arg0, f4_ar
 end
 DataSources.SpecialEventCurrentStepInfo = {
 	getModel = function(f5_arg0)
-		local f5_local0 = Engine[@"getmodelforcontroller"](f5_arg0)
+		local f5_local0 = Engine.GetModelForController(f5_arg0)
 		local f5_local1 = f5_local0:create("specialEventCurrentStepInfo")
 		local f5_local2 = f5_local1:create("currentStepNumber")
 		local f5_local3 = f5_local1:create("totalStepNumber")
@@ -110,7 +110,7 @@ DataSources.SpecialEventCurrentStepInfo = {
 				local f5_local22 = f5_local19.name
 				local f5_local23 = CoD.ZombiesCallingsUtility.GetCallingTaskInfo(f5_local22)
 				local f5_local24 = f5_local23[@"descsimple"]
-				local f5_local25 = f5_local23[@"image"]
+				local f5_local25 = f5_local23.image
 				local f5_local26 = f5_local19.progress
 				local f5_local27 = f5_local19.target
 				local f5_local28 = 0
@@ -120,9 +120,9 @@ DataSources.SpecialEventCurrentStepInfo = {
 				local f5_local29 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_631CF0F51CCA3A27", f5_local26, f5_local27)
 				local f5_local30 = CoD.ZombiesCallingsUtility.GetEventInfo(f5_local17.statHash)
 				local f5_local31 = f5_local30.rewards[f5_local19.reward]
-				local f5_local32 = f5_local31[@"image"]
-				local f5_local33 = f5_local31[@"desc"]
-				local f5_local34 = f5_local30.event[@"eventname"]
+				local f5_local32 = f5_local31.image
+				local f5_local33 = f5_local31.desc
+				local f5_local34 = f5_local30.event.eventname
 				f5_local2:set(f5_local20)
 				f5_local3:set(f5_local18)
 				f5_local4:set(f5_local21)
@@ -150,14 +150,14 @@ DataSources.SpecialEventCurrentStepInfo = {
 }
 DataSources.SpecialEventRewards = DataSourceHelpers.ListSetup("SpecialEventRewards", function(f6_arg0, f6_arg1)
 	local f6_local0 = {}
-	local f6_local1 = Engine[@"getglobalmodel"]()
+	local f6_local1 = Engine.GetGlobalModel()
 	f6_local1 = f6_local1:create("AutoEvents")
 	f6_local1 = f6_local1:create("cycled")
 	local f6_local2 = CoD.SpecialEventUtility.GetCurrentSpecialEventTierInfo(f6_arg0)
 	if f6_local2 then
 		table.insert(f6_local0, {
 			models = {
-				rewardImage = @"t7_hud_mp_notifications_xp_blue",
+				rewardImage = "t7_hud_mp_notifications_xp_blue",
 				rewardText = Engine[@"hash_4F9F1239CFD921FE"](@"rank/xp", f6_local2.xp),
 			},
 		})
@@ -171,7 +171,7 @@ DataSources.SpecialEventRewards = DataSourceHelpers.ListSetup("SpecialEventRewar
 end, true)
 DataSources.SpecialEventSteps = DataSourceHelpers.ListSetup("SpecialEventSteps", function(f8_arg0, f8_arg1)
 	local f8_local0 = {}
-	local f8_local1 = Engine[@"getglobalmodel"]()
+	local f8_local1 = Engine.GetGlobalModel()
 	f8_local1 = f8_local1:create("AutoEvents")
 	f8_local1 = f8_local1:create("cycled")
 	local f8_local2 = CoD.SpecialEventUtility.GetCurrentSpecialEventInfo()
@@ -204,12 +204,12 @@ DataSources.SpecialEventSteps = DataSourceHelpers.ListSetup("SpecialEventSteps",
 end, true)
 CoD.SpecialEventUtility.GetSpecialEventRewardModels = function(f10_arg0, f10_arg1, f10_arg2)
 	local f10_local0 = {}
-	local f10_local1 = f10_arg2[@"hash_1C539A1B16B48B16"]:get()
+	local f10_local1 = f10_arg2.current_event_calling:get()
 	local f10_local2 = CoD.SpecialEventUtility.GetCurrentSpecialEventTierInfo(f10_arg0, f10_arg1, f10_local1)
 	local f10_local3 = CoD.SpecialEventUtility.GetCurrentSpecialEventTierInfo(f10_arg0, f10_arg2, f10_local1)
 	local f10_local4 = CoD.SpecialEventUtility.GetSpecialEventInfo(f10_local1)
 	if CoD.BaseUtility.IsDvarEnabled("ui_specialEventAAROverride") then
-		f10_local1 = Engine[@"getdvarint"](@"zm_active_event_calling")
+		f10_local1 = Engine[@"getdvarint"]("zm_active_event_calling")
 		f10_local4 = CoD.SpecialEventUtility.GetCurrentSpecialEventInfo()
 		f10_local2 = {
 			tier = 1,
@@ -231,13 +231,13 @@ CoD.SpecialEventUtility.GetSpecialEventRewardModels = function(f10_arg0, f10_arg
 			local f10_local13 = CoD.SpecialEventUtility.GetSpecialEventTierInfo(f10_arg0, f10_local1, f10_local9)
 			if f10_local13 then
 				local f10_local14 = CoD.ZombiesCallingsUtility.GetCallingTaskInfo(f10_local13.name)
-				f10_local12.mainTitle = f10_local8.event[@"eventname"]
+				f10_local12.mainTitle = f10_local8.event.eventname
 				f10_local12.levelText = Engine[@"hash_4F9F1239CFD921FE"](@"hash_E7E238DA43A9CC9", Engine[@"hash_4F9F1239CFD921FE"](f10_local14[@"taskname"]))
-				f10_local12.mainIcon = f10_local14[@"image"]
+				f10_local12.mainIcon = f10_local14.image
 				f10_local12.rewardType = CoD.AARUtility.AARRewardType.SPECIAL_EVENT
 				local f10_local15 = f10_local8.rewards[f10_local13.reward]
-				f10_local12.reward1Title = f10_local15[@"desc"]
-				f10_local12.reward1Icon = f10_local15[@"image"]
+				f10_local12.reward1Title = f10_local15.desc
+				f10_local12.reward1Icon = f10_local15.image
 			end
 			f10_local12.tierProgress = f10_local9 + 1
 			f10_local12.tierMax = f10_local6

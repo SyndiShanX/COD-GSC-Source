@@ -1,4 +1,4 @@
-require("x64:87edb7802d72c0e")
+require("ui/uieditor/widgets/systemoverlays/systemoverlay_alertstatusbar")
 CoD.CommonRightSlideInPopup = InheritFrom(LUI.UIElement)
 CoD.CommonRightSlideInPopup.__defaultWidth = 1920
 CoD.CommonRightSlideInPopup.__defaultHeight = 1080
@@ -21,7 +21,7 @@ CoD.CommonRightSlideInPopup.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f
 	self.RightBackground = RightBackground
 	local RightTiledBacking = LUI.UIImage.new(1, 1, -550, 248, 0, 1, 0, 0)
 	RightTiledBacking:setAlpha(0.25)
-	RightTiledBacking:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	RightTiledBacking:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	RightTiledBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	RightTiledBacking:setShaderVector(0, 0, 0, 0, 0)
 	RightTiledBacking:setupNineSliceShader(196, 88)

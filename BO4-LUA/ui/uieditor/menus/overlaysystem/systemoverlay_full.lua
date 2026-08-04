@@ -1,5 +1,5 @@
-require("x64:37c17dc9dd913d9")
-require("x64:ba72b08fda6493")
+require("ui/uieditor/widgets/systemoverlays/systemoverlay_full_layout")
+require("ui/uieditor/widgets/pc/pc_smallclosebutton")
 local PostLoadFunc = function(f1_arg0)
 	f1_arg0.disablePopupOpenCloseAnim = true
 	f1_arg0.disableBlur = true
@@ -30,56 +30,56 @@ LUI.createMenu.SystemOverlay_Full = function(f2_arg0, f2_arg1)
 		elseif element.super.gainFocus then
 			f4_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f2_local1, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f2_local1, f2_arg0, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f4_local0
 	end)
-	f2_local1:AddButtonCallbackFunction(BTNQuit, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		PerformOverlayBack(menu, controller)
+	f2_local1:AddButtonCallbackFunction(BTNQuit, f2_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f5_arg0, f5_arg1, f5_arg2, f5_arg3)
+		PerformOverlayBack(f5_arg1, f5_arg2)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "ui_confirm")
+	end, function(f6_arg0, f6_arg1, f6_arg2)
+		CoD.Menu.SetButtonLabel(f6_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "ui_confirm")
 		return false
 	end, false)
 	self:addElement(BTNQuit)
 	self.BTNQuit = BTNQuit
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_xba_pscross"], "ui_confirm", function(element, menu, controller, model)
-		if HasOverlayContinueAction(menu) then
-			PerformOverlayContinue(menu, controller)
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum.LUIButton[@"lui_key_xba_pscross"], "ui_confirm", function(f7_arg0, f7_arg1, f7_arg2, f7_arg3)
+		if HasOverlayContinueAction(f7_arg1) then
+			PerformOverlayContinue(f7_arg1, f7_arg2)
 			return true
 		else
 		end
-	end, function(element, menu, controller)
-		if HasOverlayContinueAction(menu) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/continue", nil, "ui_confirm")
-			return true
-		else
-			return false
-		end
-	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], nil, function(element, menu, controller, model)
-		if HasOverlayBackAction(menu) then
-			PerformOverlayBack(menu, controller)
-			return true
-		else
-		end
-	end, function(element, menu, controller)
-		if HasOverlayBackAction(menu) then
-			CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
+	end, function(f8_arg0, f8_arg1, f8_arg2)
+		if HasOverlayContinueAction(f8_arg1) then
+			CoD.Menu.SetButtonLabel(f8_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], @"menu/continue", nil, "ui_confirm")
 			return true
 		else
 			return false
 		end
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], nil, function(element, menu, controller, model)
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum.LUIButton[@"lui_key_xbb_pscircle"], nil, function(f9_arg0, f9_arg1, f9_arg2, f9_arg3)
+		if HasOverlayBackAction(f9_arg1) then
+			PerformOverlayBack(f9_arg1, f9_arg2)
+			return true
+		else
+		end
+	end, function(f10_arg0, f10_arg1, f10_arg2)
+		if HasOverlayBackAction(f10_arg1) then
+			CoD.Menu.SetButtonLabel(f10_arg1, Enum.LUIButton[@"lui_key_xbb_pscircle"], @"menu/back", nil, nil)
+			return true
+		else
+			return false
+		end
+	end, false)
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum.LUIButton[@"lui_key_xbx_pssquare"], nil, function(f11_arg0, f11_arg1, f11_arg2, f11_arg3)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xbx_pssquare"], @"hash_0", nil, nil)
+	end, function(f12_arg0, f12_arg1, f12_arg2)
+		CoD.Menu.SetButtonLabel(f12_arg1, Enum.LUIButton[@"lui_key_xbx_pssquare"], 0x0, nil, nil)
 		return false
 	end, false)
-	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], nil, function(element, menu, controller, model)
+	f2_local1:AddButtonCallbackFunction(self, f2_arg0, Enum.LUIButton[@"lui_key_xby_pstriangle"], nil, function(f13_arg0, f13_arg1, f13_arg2, f13_arg3)
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xby_pstriangle"], @"hash_0", nil, nil)
+	end, function(f14_arg0, f14_arg1, f14_arg2)
+		CoD.Menu.SetButtonLabel(f14_arg1, Enum.LUIButton[@"lui_key_xby_pstriangle"], 0x0, nil, nil)
 		return false
 	end, false)
 	layout.buttons:setModel(self.buttonModel, f2_arg0)

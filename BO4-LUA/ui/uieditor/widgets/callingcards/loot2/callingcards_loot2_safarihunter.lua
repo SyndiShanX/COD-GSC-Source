@@ -8,45 +8,45 @@ CoD[@"hash_683DDFC8553ACB78"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.soundSet = "none"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local background = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	background:setImage(RegisterImage(@"uie_ui_menu_callingcards_safarihunter_bg"))
+	background:setImage(RegisterImage("uie_ui_menu_callingcards_safarihunter_bg"))
 	self:addElement(background)
 	self.background = background
 	local lion03 = LUI.UIImage.new(0, 0, 333, 533, 0, 0, 90, 218)
-	lion03:setImage(RegisterImage(@"uie_ui_menu_callingcards_safarihunter_lion3"))
+	lion03:setImage(RegisterImage("uie_ui_menu_callingcards_safarihunter_lion3"))
 	self:addElement(lion03)
 	self.lion03 = lion03
 	local lion02 = LUI.UIImage.new(0, 0, 160, 368, 0, 0, 64, 192)
-	lion02:setImage(RegisterImage(@"uie_ui_menu_callingcards_safarihunter_lion2"))
+	lion02:setImage(RegisterImage("uie_ui_menu_callingcards_safarihunter_lion2"))
 	self:addElement(lion02)
 	self.lion02 = lion02
 	local lion01 = LUI.UIImage.new(0, 0, 94, 286, 0, 0, 75, 203)
-	lion01:setImage(RegisterImage(@"uie_ui_menu_callingcards_safarihunter_lion1"))
+	lion01:setImage(RegisterImage("uie_ui_menu_callingcards_safarihunter_lion1"))
 	self:addElement(lion01)
 	self.lion01 = lion01
 	local lionfront = LUI.UIImage.new(0, 0, 168, 488, 0, 0, 62, 246)
-	lionfront:setImage(RegisterImage(@"uie_ui_menu_callingcards_safarihunter_lionfront"))
+	lionfront:setImage(RegisterImage("uie_ui_menu_callingcards_safarihunter_lionfront"))
 	self:addElement(lionfront)
 	self.lionfront = lionfront
 	local splash03 = LUI.UIImage.new(0, 0, 272, 960, 0, 0, 48, 240)
-	splash03:setImage(RegisterImage(@"uie_ui_menu_callingcards_safarihunter_splash2"))
-	splash03:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	splash03:setImage(RegisterImage("uie_ui_menu_callingcards_safarihunter_splash2"))
+	splash03:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(splash03)
 	self.splash03 = splash03
 	local splash01 = LUI.UIImage.new(0, 0, 57, 561, 0, 0, 112, 240)
-	splash01:setImage(RegisterImage(@"uie_ui_menu_callingcards_safarihunter_splash1"))
+	splash01:setImage(RegisterImage("uie_ui_menu_callingcards_safarihunter_splash1"))
 	self:addElement(splash01)
 	self.splash01 = splash01
 	local bull = LUI.UIImage.new(0, 0, 522, 986, 0, 0, 0, 240)
-	bull:setImage(RegisterImage(@"uie_ui_menu_callingcards_safarihunter_bull"))
+	bull:setImage(RegisterImage("uie_ui_menu_callingcards_safarihunter_bull"))
 	self:addElement(bull)
 	self.bull = bull
 	local splash02 = LUI.UIImage.new(0, 0, 272, 960, 0, 0, 48, 240)
-	splash02:setImage(RegisterImage(@"uie_ui_menu_callingcards_safarihunter_splash2"))
-	splash02:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	splash02:setImage(RegisterImage("uie_ui_menu_callingcards_safarihunter_splash2"))
+	splash02:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(splash02)
 	self.splash02 = splash02
 	local grass = LUI.UIImage.new(0, 0, 0, 400, 0, 0, 0, 240)
-	grass:setImage(RegisterImage(@"uie_ui_menu_callingcards_safarihunter_grass"))
+	grass:setImage(RegisterImage("uie_ui_menu_callingcards_safarihunter_grass"))
 	self:addElement(grass)
 	self.grass = grass
 	if PostLoadFunc then

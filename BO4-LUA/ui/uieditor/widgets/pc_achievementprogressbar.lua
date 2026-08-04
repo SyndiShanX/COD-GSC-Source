@@ -14,7 +14,7 @@ CoD.PC_AchievementProgressBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local ProgressBarBacking = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	ProgressBarBacking:setRGB(0.13, 0.13, 0.52)
 	ProgressBarBacking:setAlpha(0)
-	ProgressBarBacking:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
+	ProgressBarBacking:setMaterial(LUI.UIImage.GetCachedMaterial("uie_wipe_normal"))
 	ProgressBarBacking:setShaderVector(0, 1, 0, 0, 0)
 	ProgressBarBacking:setShaderVector(1, 0, 0, 0, 0)
 	ProgressBarBacking:setShaderVector(2, 1, 0, 0, 0)
@@ -25,7 +25,7 @@ CoD.PC_AchievementProgressBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	local ProgressBarFiller = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	ProgressBarFiller:setRGB(0.43, 0.41, 0.39)
 	ProgressBarFiller:setAlpha(0.8)
-	ProgressBarFiller:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_wipe_normal"))
+	ProgressBarFiller:setMaterial(LUI.UIImage.GetCachedMaterial("uie_wipe_normal"))
 	ProgressBarFiller:setShaderVector(0, 1, 0, 0, 0)
 	ProgressBarFiller:setShaderVector(1, 0, 0, 0, 0)
 	ProgressBarFiller:setShaderVector(2, 1, 0, 0, 0)
@@ -35,7 +35,7 @@ CoD.PC_AchievementProgressBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	self.ProgressBarFiller = ProgressBarFiller
 	local Texture = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Texture:setAlpha(0.65)
-	Texture:setImage(RegisterImage(@"uie_ui_menu_specialist_hub_repeat_bg"))
+	Texture:setImage(RegisterImage("uie_ui_menu_specialist_hub_repeat_bg"))
 	Texture:setMaterial(LUI.UIImage.GetCachedMaterial(@"hash_16CBE95C250C6D15"))
 	Texture:setShaderVector(0, 0, 0, 0, 0)
 	Texture:setupNineSliceShader(196, 88)
@@ -47,8 +47,8 @@ CoD.PC_AchievementProgressBar.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	CompletedText:setText(LocalizeToUpperString(@"menu/completed"))
 	CompletedText:setTTF("ttmussels_demibold")
 	CompletedText:setLetterSpacing(4)
-	CompletedText:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
-	CompletedText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	CompletedText:setAlignment(Enum.LUIAlignment[@"lui_alignment_right"])
+	CompletedText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(CompletedText)
 	self.CompletedText = CompletedText
 	if PostLoadFunc then

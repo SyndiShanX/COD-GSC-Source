@@ -8,7 +8,7 @@ CoD.CallingCards_Asset_steampunkwarriors_gunshoteffect.new = function(f1_arg0, f
 	self.soundSet = "default"
 	local gunshot = LUI.UIImage.new(0, 0, -207, 97, 0, 0, -81, 95)
 	gunshot:setImage(RegisterImage(@"hash_25B081EF25253C37"))
-	gunshot:setMaterial(LUI.UIImage.GetCachedMaterial(@"ui_add"))
+	gunshot:setMaterial(LUI.UIImage.GetCachedMaterial("ui_add"))
 	self:addElement(gunshot)
 	self.gunshot = gunshot
 	if PostLoadFunc then

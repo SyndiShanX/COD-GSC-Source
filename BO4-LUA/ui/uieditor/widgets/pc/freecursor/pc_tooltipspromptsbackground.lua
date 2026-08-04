@@ -10,8 +10,8 @@ CoD.PC_TooltipsPromptsBackground.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	local DropShadow = LUI.UIImage.new(0, 1, -10, 30, 0, 1, -12, 28)
 	DropShadow:setRGB(0, 0, 0)
 	DropShadow:setAlpha(0.6)
-	DropShadow:setImage(RegisterImage(@"uie_dropshadow_9s"))
-	DropShadow:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
+	DropShadow:setImage(RegisterImage("uie_dropshadow_9s"))
+	DropShadow:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_normal"))
 	DropShadow:setShaderVector(0, 0, 0, 0, 0)
 	DropShadow:setupNineSliceShader(60, 60)
 	self:addElement(DropShadow)
@@ -29,8 +29,8 @@ CoD.PC_TooltipsPromptsBackground.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	self.BG2 = BG2
 	local Outline = LUI.UIImage.new(0, 1, 0, 0, 0, 1, 0, 0)
 	Outline:setAlpha(0.05)
-	Outline:setImage(RegisterImage(@"uie_highlight_border_line"))
-	Outline:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_nineslice_normal"))
+	Outline:setImage(RegisterImage("uie_highlight_border_line"))
+	Outline:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_normal"))
 	Outline:setShaderVector(0, 0, 0, 0, 0)
 	Outline:setupNineSliceShader(6, 6)
 	self:addElement(Outline)
@@ -45,7 +45,7 @@ CoD.PC_TooltipsPromptsBackground.new = function(f1_arg0, f1_arg1, f1_arg2, f1_ar
 	})
 	local f1_local5 = self
 	local f1_local6 = self.subscribeToModel
-	local f1_local7 = Engine[@"getmodelforcontroller"](f1_arg1)
+	local f1_local7 = Engine.GetModelForController(f1_arg1)
 	f1_local6(f1_local5, f1_local7["FreeCursor.contextualInfo.hasContextualPrompts"], function(f3_arg0)
 		f1_arg0:updateElementState(self, {
 			name = "model_validation",

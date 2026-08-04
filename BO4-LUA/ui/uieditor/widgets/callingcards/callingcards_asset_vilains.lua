@@ -1,11 +1,11 @@
-require("x64:c8f44477e40f994")
-require("x64:cbc3f2d1c9436dd")
-CoD[@"hash_4BD13AC1448D9700"] = InheritFrom(LUI.UIElement)
-CoD[@"hash_4BD13AC1448D9700"].__defaultWidth = 960
-CoD[@"hash_4BD13AC1448D9700"].__defaultHeight = 240
-CoD[@"hash_4BD13AC1448D9700"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+require("ui/uieditor/widgets/callingcards/callingcards_asset_vilains_fire")
+require("ui/uieditor/widgets/callingcards/callingcards_asset_vilains_sky")
+CoD.callingcards_asset_vilains = InheritFrom(LUI.UIElement)
+CoD.callingcards_asset_vilains.__defaultWidth = 960
+CoD.callingcards_asset_vilains.__defaultHeight = 240
+CoD.callingcards_asset_vilains.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[@"hash_4BD13AC1448D9700"])
+	self:setClass(CoD.callingcards_asset_vilains)
 	self.id = "CallingCards_Asset_vilains"
 	self.soundSet = "none"
 	self.anyChildUsesUpdateState = true
@@ -38,7 +38,7 @@ CoD[@"hash_4BD13AC1448D9700"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3,
 	end
 	return self
 end
-CoD[@"hash_4BD13AC1448D9700"].__resetProperties = function(f2_arg0)
+CoD.callingcards_asset_vilains.__resetProperties = function(f2_arg0)
 	f2_arg0.flames:completeAnimation()
 	f2_arg0.bg:completeAnimation()
 	f2_arg0.bgplanes:completeAnimation()
@@ -52,7 +52,7 @@ CoD[@"hash_4BD13AC1448D9700"].__resetProperties = function(f2_arg0)
 	f2_arg0.vilain:setLeftRight(0, 0, 513, 969)
 	f2_arg0.vilain:setTopBottom(0, 0, -8, 272)
 end
-CoD[@"hash_4BD13AC1448D9700"].__clipsPerState = {
+CoD.callingcards_asset_vilains.__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()
@@ -124,7 +124,7 @@ CoD[@"hash_4BD13AC1448D9700"].__clipsPerState = {
 		end,
 	},
 }
-CoD[@"hash_4BD13AC1448D9700"].__onClose = function(f11_arg0)
+CoD.callingcards_asset_vilains.__onClose = function(f11_arg0)
 	f11_arg0.bg:close()
 	f11_arg0.flames:close()
 end

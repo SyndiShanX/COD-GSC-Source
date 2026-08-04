@@ -53,12 +53,12 @@ CoD.ArenaInvitationalUtility.GetRoundSeriesAndGameCount = function(f3_arg0, f3_a
 		return
 	end
 	local f3_local6 = f3_local0[@"bestof"]
-	local f3_local1 = f3_local0[@"objective"]
+	local f3_local1 = f3_local0.objective
 	local f3_local2 = Engine[@"hash_2E00B2F29271C60B"](f3_local0[@"hash_65BADF6732342CB6"])
 	local f3_local3 = f3_local2.serieslist
 	local f3_local4 = {}
 	for f3_local9, f3_local10 in ipairs(f3_local3) do
-		table.insert(f3_local4, f3_local10[@"gametype"])
+		table.insert(f3_local4, f3_local10.gametype)
 	end
 	return f3_local4, f3_local6, f3_local1
 end
@@ -196,7 +196,7 @@ CoD.ArenaInvitationalUtility.PopulateRound = function(f12_arg0, f12_arg1, f12_ar
 end
 DataSources.InvitationalDetails = {
 	PopulateWidget = function(f15_arg0, f15_arg1, f15_arg2, f15_arg3)
-		local f15_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "InvitationalDetails")
+		local f15_local0 = Engine.CreateModel(Engine.GetGlobalModel(), "InvitationalDetails")
 		DataSources.InvitationalRounds = ListHelper_SetupDataSource("InvitationalRounds", function(f16_arg0)
 			local f16_local0 = {}
 			for f16_local1 = 1, #f15_arg3.roundlist, 1 do
@@ -229,7 +229,7 @@ DataSources.InvitationalDetails = {
 		DataSources.InvitationalChallenger.prepare(f15_arg1, f15_arg0, f15_arg0.filter)
 	end,
 	getModel = function(f18_arg0)
-		local f18_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "InvitationalDetails")
+		local f18_local0 = Engine.CreateModel(Engine.GetGlobalModel(), "InvitationalDetails")
 		local f18_local1 = f18_local0:create("rounds")
 		f18_local1:set("InvitationalRounds")
 		f18_local1 = f18_local0:create("challenger")
@@ -271,13 +271,13 @@ DataSources.InvitationalStats = {
 					})
 					return f20_local0
 				end, true)
-				local f19_local1 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "InvitationalStats")
+				local f19_local1 = Engine.CreateModel(Engine.GetGlobalModel(), "InvitationalStats")
 				DataSources.InvitationalStatsRound.prepare(f19_arg1, f19_arg0, f19_arg0.filter)
 			end
 		end
 	end,
 	getModel = function(f21_arg0)
-		local f21_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "InvitationalStats")
+		local f21_local0 = Engine.CreateModel(Engine.GetGlobalModel(), "InvitationalStats")
 		local f21_local1 = f21_local0:create("round")
 		f21_local1:set("InvitationalStatsRound")
 		return f21_local0

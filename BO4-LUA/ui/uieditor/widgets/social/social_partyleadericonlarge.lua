@@ -10,8 +10,8 @@ CoD.Social_PartyLeaderIconLarge.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local Leader = LUI.UIImage.new(0, 0, -1.5, 29.5, 0, 1, -4, 4)
 	Leader:setRGB(0.29, 0.38, 0.68)
 	Leader:setAlpha(0)
-	Leader:setImage(RegisterImage(@"uie_t7_menu_frontend_iconpartyleaderlarge"))
-	Leader:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_feather_blend"))
+	Leader:setImage(RegisterImage("uie_t7_menu_frontend_iconpartyleaderlarge"))
+	Leader:setMaterial(LUI.UIImage.GetCachedMaterial("uie_feather_blend"))
 	self:addElement(Leader)
 	self.Leader = Leader
 	if PostLoadFunc then

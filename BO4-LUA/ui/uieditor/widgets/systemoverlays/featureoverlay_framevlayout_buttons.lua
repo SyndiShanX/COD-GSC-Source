@@ -1,4 +1,4 @@
-require("x64:d7ba7c36104672")
+require("ui/uieditor/widgets/footer/fe_leftcontainer_notlobby")
 CoD.featureOverlay_frameVLayout_Buttons = InheritFrom(LUI.UIElement)
 CoD.featureOverlay_frameVLayout_Buttons.__defaultWidth = 1920
 CoD.featureOverlay_frameVLayout_Buttons.__defaultHeight = 54

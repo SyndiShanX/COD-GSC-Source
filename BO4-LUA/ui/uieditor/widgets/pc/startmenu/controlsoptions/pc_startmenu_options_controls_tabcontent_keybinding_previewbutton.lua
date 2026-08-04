@@ -1,5 +1,5 @@
-require("x64:2675595fa323085")
-require("x64:b79410dc8d1ea84")
+require("ui/uieditor/widgets/emptyfocusable")
+require("ui/uieditor/widgets/pc/startmenu/pc_highlightborder")
 CoD.PC_StartMenu_Options_Controls_TabContent_KeyBinding_PreviewButton = InheritFrom(LUI.UIElement)
 CoD.PC_StartMenu_Options_Controls_TabContent_KeyBinding_PreviewButton.__defaultWidth = 200
 CoD.PC_StartMenu_Options_Controls_TabContent_KeyBinding_PreviewButton.__defaultHeight = 65
@@ -20,8 +20,8 @@ CoD.PC_StartMenu_Options_Controls_TabContent_KeyBinding_PreviewButton.new = func
 	BtnText:setRGB(0.76, 0.76, 0.76)
 	BtnText:setText(Engine[@"hash_4F9F1239CFD921FE"](@"hash_3A1720478353F60"))
 	BtnText:setTTF("ttmussels_regular")
-	BtnText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	BtnText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	BtnText:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	BtnText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(BtnText)
 	self.BtnText = BtnText
 	local emptyFocusable = CoD.emptyFocusable.new(f1_arg0, f1_arg1, 0, 0, 0.5, 199.5, 0, 0, 1, 59)

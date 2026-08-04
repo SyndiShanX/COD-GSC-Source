@@ -1,57 +1,57 @@
-CoD[@"hash_A90B69ECEBAE127"] = InheritFrom(LUI.UIElement)
-CoD[@"hash_A90B69ECEBAE127"].__defaultWidth = 960
-CoD[@"hash_A90B69ECEBAE127"].__defaultHeight = 240
-CoD[@"hash_A90B69ECEBAE127"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
+CoD.callingcards_wz_heroics_master = InheritFrom(LUI.UIElement)
+CoD.callingcards_wz_heroics_master.__defaultWidth = 960
+CoD.callingcards_wz_heroics_master.__defaultHeight = 240
+CoD.callingcards_wz_heroics_master.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
 	local self = LUI.UIElement.new(f1_arg2, f1_arg3, f1_arg4, f1_arg5, f1_arg6, f1_arg7, f1_arg8, f1_arg9)
-	self:setClass(CoD[@"hash_A90B69ECEBAE127"])
+	self:setClass(CoD.callingcards_wz_heroics_master)
 	self.id = "CallingCards_wz_Heroics_Master"
 	self.soundSet = "default"
 	f1_arg0:addElementToPendingUpdateStateList(self)
 	local bg = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	bg:setImage(RegisterImage(@"uie_callingcards_heroics_master_background"))
+	bg:setImage(RegisterImage("uie_callingcards_heroics_master_background"))
 	self:addElement(bg)
 	self.bg = bg
 	local ParticlesBack = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	ParticlesBack:setImage(RegisterImage(@"uie_callingcards_heroics_master_particles_back"))
-	ParticlesBack:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
+	ParticlesBack:setImage(RegisterImage("uie_callingcards_heroics_master_particles_back"))
+	ParticlesBack:setMaterial(LUI.UIImage.GetCachedMaterial("uie_tile_scroll_normal"))
 	ParticlesBack:setShaderVector(0, 1, 1, 0, 0)
 	ParticlesBack:setShaderVector(1, 0, -0.1, 0, 0)
 	self:addElement(ParticlesBack)
 	self.ParticlesBack = ParticlesBack
 	local ParticlesFront = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	ParticlesFront:setImage(RegisterImage(@"uie_callingcards_heroics_master_particles_front"))
-	ParticlesFront:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_tile_scroll_normal"))
+	ParticlesFront:setImage(RegisterImage("uie_callingcards_heroics_master_particles_front"))
+	ParticlesFront:setMaterial(LUI.UIImage.GetCachedMaterial("uie_tile_scroll_normal"))
 	ParticlesFront:setShaderVector(0, 1, 1, 0, 0)
 	ParticlesFront:setShaderVector(1, 0, -0.25, 0, 0)
 	self:addElement(ParticlesFront)
 	self.ParticlesFront = ParticlesFront
 	local BlackSmoke = LUI.UIImage.new(0, 0, 0, 960, 0, 0, 0, 240)
-	BlackSmoke:setImage(RegisterImage(@"uie_callingcards_heroics_master_black_smoke"))
-	BlackSmoke:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook"))
+	BlackSmoke:setImage(RegisterImage("uie_callingcards_heroics_master_black_smoke"))
+	BlackSmoke:setMaterial(LUI.UIImage.GetCachedMaterial("uie_flipbook"))
 	BlackSmoke:setShaderVector(0, 0, 5, 0, 0)
 	BlackSmoke:setShaderVector(1, 5, 0, 0, 0)
 	self:addElement(BlackSmoke)
 	self.BlackSmoke = BlackSmoke
 	local BlackSmoke2 = LUI.UIImage.new(0, 0, -265, 695, 0, 0, 33, 273)
 	BlackSmoke2:setScale(1.38, 0.8)
-	BlackSmoke2:setImage(RegisterImage(@"uie_callingcards_heroics_master_black_smoke"))
-	BlackSmoke2:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook"))
+	BlackSmoke2:setImage(RegisterImage("uie_callingcards_heroics_master_black_smoke"))
+	BlackSmoke2:setMaterial(LUI.UIImage.GetCachedMaterial("uie_flipbook"))
 	BlackSmoke2:setShaderVector(0, 0, 5, 0, 0)
 	BlackSmoke2:setShaderVector(1, 5, 0, 0, 0)
 	self:addElement(BlackSmoke2)
 	self.BlackSmoke2 = BlackSmoke2
 	local soldier1 = LUI.UIImage.new(0, 0, 480, 856, 0, 0, 0, 240)
-	soldier1:setImage(RegisterImage(@"uie_callingcards_heroics_master_soldier1"))
+	soldier1:setImage(RegisterImage("uie_callingcards_heroics_master_soldier1"))
 	self:addElement(soldier1)
 	self.soldier1 = soldier1
 	local soldier2 = LUI.UIImage.new(0, 0, 480, 856, 0, 0, 0, 240)
-	soldier2:setImage(RegisterImage(@"uie_callingcards_heroics_master_soldier2"))
+	soldier2:setImage(RegisterImage("uie_callingcards_heroics_master_soldier2"))
 	self:addElement(soldier2)
 	self.soldier2 = soldier2
 	local glows = LUI.UIImage.new(0, 0, -17, 943, 0, 0, 0, 240)
 	glows:setAlpha(0.4)
-	glows:setImage(RegisterImage(@"uie_callingcards_heroics_master_glow_shoot"))
-	glows:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
+	glows:setImage(RegisterImage("uie_callingcards_heroics_master_glow_shoot"))
+	glows:setMaterial(LUI.UIImage.GetCachedMaterial("uie_flipbook_add"))
 	glows:setShaderVector(0, 0, 3, 0, 0)
 	glows:setShaderVector(1, 9, 0, 0, 0)
 	self:addElement(glows)
@@ -59,15 +59,15 @@ CoD[@"hash_A90B69ECEBAE127"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	local bullets = LUI.UIImage.new(0, 0, 330, 562, 0, 0, 91, 165)
 	bullets:setZRot(7)
 	bullets:setScale(0.8, 1)
-	bullets:setImage(RegisterImage(@"uie_grunt_bullet_shot"))
-	bullets:setMaterial(LUI.UIImage.GetCachedMaterial(@"uie_flipbook_add"))
+	bullets:setImage(RegisterImage("uie_grunt_bullet_shot"))
+	bullets:setMaterial(LUI.UIImage.GetCachedMaterial("uie_flipbook_add"))
 	bullets:setShaderVector(0, 0, 6, 0, 0)
 	bullets:setShaderVector(1, 15, 0, 0, 0)
 	self:addElement(bullets)
 	self.bullets = bullets
 	local cropper = LUI.UIImage.new(0, 0, -32, 992, 0, 0, -392, 632)
 	cropper:setAlpha(0)
-	cropper:setImage(RegisterImage(@"uie_stage_crop_prop"))
+	cropper:setImage(RegisterImage("uie_stage_crop_prop"))
 	self:addElement(cropper)
 	self.cropper = cropper
 	if PostLoadFunc then
@@ -75,7 +75,7 @@ CoD[@"hash_A90B69ECEBAE127"].new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg3, 
 	end
 	return self
 end
-CoD[@"hash_A90B69ECEBAE127"].__resetProperties = function(f2_arg0)
+CoD.callingcards_wz_heroics_master.__resetProperties = function(f2_arg0)
 	f2_arg0.soldier1:completeAnimation()
 	f2_arg0.soldier2:completeAnimation()
 	f2_arg0.glows:completeAnimation()
@@ -85,7 +85,7 @@ CoD[@"hash_A90B69ECEBAE127"].__resetProperties = function(f2_arg0)
 	f2_arg0.glows:setAlpha(0.4)
 	f2_arg0.bullets:setAlpha(1)
 end
-CoD[@"hash_A90B69ECEBAE127"].__clipsPerState = {
+CoD.callingcards_wz_heroics_master.__clipsPerState = {
 	DefaultState = {
 		DefaultClip = function(f3_arg0, f3_arg1)
 			f3_arg0:__resetProperties()

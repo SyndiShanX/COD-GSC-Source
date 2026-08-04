@@ -1,6 +1,6 @@
-require("x64:b5d5f7ffe97a9a7")
-require("x64:be06f4309b61a6f")
-require("x64:f3c5259f470592d")
+require("lua/shared/luaenum")
+require("ui/utility/directorutility")
+require("ui/utility/overlayutility")
 CoD.SafeArea = {}
 CoD.SafeArea.DefaultWidthHeightRatioPC = CoD.isPC and Dvar[@"hash_75CD540599443549"]:get() or nil
 CoD.SafeArea.MinimumWidthHeightRatioPC = CoD.isPC and Dvar[@"hash_127DBAC5B98A0234"]:get() or nil
@@ -26,12 +26,12 @@ CoD.OptionsUtility.SENSITIVITY_11 = 2.5
 CoD.OptionsUtility.SENSITIVITY_12 = 3
 CoD.OptionsUtility.SENSITIVITY_13 = 3.5
 CoD.OptionsUtility.SENSITIVITY_14 = 4
-CoD.OptionsUtility.ButtonLayoutListAssetName = @"hash_4389ADF5BAE5D049"
+CoD.OptionsUtility.ButtonLayoutListAssetName = "gpadbuttonlayoutlist"
 CoD.OptionsUtility.DemoButtonLayoutListAssetName = @"hash_7863A4B07CDC6A22"
-CoD.OptionsUtility.StickLayoutListAssetName = @"hash_7B603FFBDE556AD3"
+CoD.OptionsUtility.StickLayoutListAssetName = "gpadsticklayoutlist"
 CoD.OptionsUtility.EnabledDisabledLabels = {
-	@"menu/disabled",
-	@"menu/enabled",
+	"menu/disabled",
+	"menu/enabled",
 }
 CoD.OptionsUtility.EnabledDisabledValues = {
 	0,
@@ -87,7 +87,7 @@ CoD.OptionsUtility.PlayerOptionsTabsInfo = {
 		widget = "CoD.StartMenu_Options_Frame_Controls",
 	},
 	[CoD.OptionsUtility.PlayerOptionsTabIndex.OPTION_TAB_GRAPHICS] = {
-		name = @"hash_1E2B4B3485831A1A",
+		name = "menu/graphics",
 		widget = "CoD.StartMenu_Options_Frame_Graphics",
 		condition = ShouldOpenGraphicsAndSoundOptions,
 		conditionResult = true,
@@ -99,7 +99,7 @@ CoD.OptionsUtility.PlayerOptionsTabsInfo = {
 		conditionResult = true,
 	},
 	[CoD.OptionsUtility.PlayerOptionsTabIndex.OPTION_TAB_WARZONE] = {
-		name = @"menu/warzone",
+		name = "menu/warzone",
 		widget = "CoD.StartMenu_Options_Frame_Warzone",
 		condition = CoD.OptionsUtility.IsWarzoneOrInvalidMode,
 		conditionResult = true,
@@ -146,21 +146,21 @@ CoD.OptionsUtility.GetGameSettingsInfoFromTable = function(f7_arg0)
 			return nil
 		end
 		local f7_local0 = {
-			name = f7_arg0[@"displayname"],
+			name = f7_arg0.displayname,
 			setting = f7_arg0[@"setting"],
-			image = f7_arg0[@"descriptionimage"] or @"blacktransparent",
-			useLongSlider = f7_arg0[@"hash_4DD5060AA2F3FF5F"] == 1,
-			addUnlimitedButton = f7_arg0[@"hash_3D268F562204A4FB"] == 1,
+			image = f7_arg0[@"descriptionimage"] or "blacktransparent",
+			useLongSlider = f7_arg0.uselongslider == 1,
+			addUnlimitedButton = f7_arg0.addunlimitedbutton == 1,
 		}
 		local f7_local1 = {}
 		local f7_local2 = {}
 		local f7_local3 = {}
 		local f7_local4 = f7_arg0[@"hinttext"] or 0x0
-		local f7_local5 = f7_arg0[@"label"] or 0x0
+		local f7_local5 = f7_arg0.label or 0x0
 		local f7_local6 = f7_arg0[@"hash_5147773D1453B614"] or 2
 		for f7_local7 = 1, f7_local6, 1 do
-			table.insert(f7_local2, f7_arg0[@"label" .. f7_local7] or f7_local5)
-			table.insert(f7_local3, tonumber(f7_arg0[@"value" .. f7_local7]) or 0)
+			table.insert(f7_local2, f7_arg0["label" .. f7_local7] or f7_local5)
+			table.insert(f7_local3, tonumber(f7_arg0["value" .. f7_local7]) or 0)
 			table.insert(f7_local1, f7_arg0[@"hinttext" .. f7_local7] or f7_local4)
 		end
 		if f7_arg0[@"hash_715A0D9812F3D286"] == 1 then
@@ -229,7 +229,7 @@ CoD.OptionsUtility.GlobalTopLevelGametypeSettings = {
 }
 CoD.OptionsUtility.GetGametypeWinConditionsTable = function(f8_arg0)
 	local f8_local0 = {}
-	local f8_local1 = Engine[@"hash_2E00B2F29271C60B"](@"mp_game_type_options")
+	local f8_local1 = Engine[@"hash_2E00B2F29271C60B"]("mp_game_type_options")
 	local f8_local2 = f8_local1 and f8_local1[f8_arg0 .. "_winconditionslist"]
 	if f8_local2 then
 		for f8_local6, f8_local7 in ipairs(f8_local2) do
@@ -240,7 +240,7 @@ CoD.OptionsUtility.GetGametypeWinConditionsTable = function(f8_arg0)
 end
 CoD.OptionsUtility.GetGametypeAdvancedOptionsTable = function(f9_arg0)
 	local f9_local0 = {}
-	local f9_local1 = Engine[@"hash_2E00B2F29271C60B"](@"mp_game_type_options")
+	local f9_local1 = Engine[@"hash_2E00B2F29271C60B"]("mp_game_type_options")
 	local f9_local2 = f9_local1 and f9_local1[f9_arg0 .. "_advancedoptionslist"]
 	if f9_local2 then
 		for f9_local6, f9_local7 in ipairs(f9_local2) do
@@ -257,7 +257,7 @@ end
 CoD.OptionsUtility.PlayerSettings = {}
 CoD.OptionsUtility.PlayerSettings.ControllerSettings = {
 	{
-		groupName = @"hash_0",
+		groupName = 0x0,
 		options = {
 			"look_inversion",
 			"look_sensitivity_horizontal",
@@ -267,7 +267,7 @@ CoD.OptionsUtility.PlayerSettings.ControllerSettings = {
 		},
 	},
 	{
-		groupName = @"hash_0",
+		groupName = 0x0,
 		options = {
 			"target_assist",
 			"aim_assist",
@@ -280,7 +280,7 @@ CoD.OptionsUtility.PlayerSettings.ControllerSettings = {
 }
 if true ~= Engine[@"isdemoplaying"]() then
 	table.insert(CoD.OptionsUtility.PlayerSettings.ControllerSettings, {
-		groupName = @"hash_0",
+		groupName = 0x0,
 		options = {
 			"stick_layout",
 		},
@@ -289,7 +289,7 @@ if true ~= Engine[@"isdemoplaying"]() then
 		},
 	})
 	table.insert(CoD.OptionsUtility.PlayerSettings.ControllerSettings, {
-		groupName = @"hash_0",
+		groupName = 0x0,
 		options = {
 			"button_layout",
 			"trigger_config",
@@ -312,7 +312,7 @@ CoD.OptionsUtility.PlayerSettings.GraphicsSettings = {
 	{
 		groupName = @"menu/safe_area",
 		additionalProperties = {
-			name = Engine[@"hash_4F9F1239CFD921FE"](@"hash_520EBAA5BAFF1E1C"),
+			name = Engine[@"hash_4F9F1239CFD921FE"]("platform/safe_area_open_type"),
 			action = CoD.OptionsUtility.PlayerSettingsOpenOverlayAction,
 			actionParam = {
 				menuName = "StartMenu_Options_Graphics_SafeArea",
@@ -332,7 +332,7 @@ CoD.OptionsUtility.PlayerSettings.AudioSettings = {
 		},
 	},
 	{
-		groupName = @"hash_C9EBE411155B7FC",
+		groupName = "menu/advanced_volume",
 		options = {
 			"voice_volume",
 			"music_volume",
@@ -391,7 +391,7 @@ CoD.OptionsUtility.PlayerSettings.VoiceSettings = {
 }
 CoD.OptionsUtility.PlayerSettings.WarzoneSettings = {
 	{
-		groupName = @"hash_0",
+		groupName = 0x0,
 		options = {
 			"warzone_compass",
 			"warzone_instant_pickups",
@@ -411,14 +411,14 @@ CoD.OptionsUtility.PlayerSettings.WarzoneSettings = {
 }
 CoD.OptionsUtility.PlayerSettings.TheaterSettings = {
 	{
-		groupName = 0x150299A3BCE594,
+		groupName = "demo/general_options",
 		options = {
 			"demo_recordwithautoplay",
 			"demo_togglegamehud",
 		},
 	},
 	{
-		groupName = @"hash_B850A750B6DE292",
+		groupName = "demo/director_mode_options",
 		options = {
 			"demo_autodollyrecord",
 			"demo_autodollykeyframeinterval",
@@ -429,22 +429,22 @@ DataSourceHelpers.PerControllerDataSourceSetup("ButtonLayoutLabels", "ButtonLayo
 	local f11_local0, f11_local1 = nil
 	local f11_local2 = CoD.OptionsUtility.ButtonLayoutListAssetName
 	local f11_local3 = Engine[@"isdemoplaying"]()
-	local f11_local4 = Engine[@"profileint"](f11_arg1, "gpad_buttonsConfig")
-	local f11_local5 = Engine[@"profileint"](f11_arg1, "flipped_control_config") == 1
-	local f11_local6 = Enum[@"gpadbuttonconfigs"][@"buttons_default"]
+	local f11_local4 = Engine.ProfileInt(f11_arg1, "gpad_buttonsConfig")
+	local f11_local5 = Engine.ProfileInt(f11_arg1, "flipped_control_config") == 1
+	local f11_local6 = Enum.GPadButtonConfigs[@"buttons_default"]
 	if f11_local3 then
 		f11_local6 = 1
 		f11_local4 = 1
 		f11_local5 = false
 		f11_local2 = CoD.OptionsUtility.DemoButtonLayoutListAssetName
 	end
-	local f11_local7 = Engine[@"getmodelforcontroller"](f11_arg1)
+	local f11_local7 = Engine.GetModelForController(f11_arg1)
 	f11_local7 = f11_local7.buttonLayoutPreview
 	local f11_local8 = f11_local7 and f11_local7:get()
 	if f11_local8 then
 		f11_local4 = f11_local8
 	end
-	local f11_local9 = Engine[@"getmodelforcontroller"](f11_arg1)
+	local f11_local9 = Engine.GetModelForController(f11_arg1)
 	f11_local9 = f11_local9.buttonFlippedPreview
 	local f11_local10 = f11_local9 and f11_local9:get()
 	if f11_local10 then
@@ -471,7 +471,7 @@ DataSourceHelpers.PerControllerDataSourceSetup("ButtonLayoutLabels", "ButtonLayo
 	local f11_local13 = CoD.BaseUtility.GetCurrentSessionModeString()
 	if f11_local13 ~= "" then
 		f11_local12 = "_" .. f11_local13 .. f11_local12
-	elseif not CoD.DirectorUtility.IsSessionModeAvailable(f11_arg1, Enum[@"emodes"][@"mode_zombies"]) then
+	elseif not CoD.DirectorUtility.IsSessionModeAvailable(f11_arg1, Enum.eModes.mode_zombies) then
 		f11_local12 = "_mp" .. f11_local12
 	end
 	local f11_local14 = function(f12_arg0, f12_arg1)
@@ -493,7 +493,7 @@ DataSourceHelpers.PerControllerDataSourceSetup("ButtonLayoutLabels", "ButtonLayo
 		f12_local3 = f12_local1:create("isDefault")
 		f12_local3:set(f12_local0)
 	end
-	f11_local14("xbA_psCross", @"button_a")
+	f11_local14("xbA_psCross", "button_a")
 	f11_local14("xbB_psCircle", @"button_b")
 	f11_local14("xbX_psSquare", @"button_x")
 	f11_local14("xbY_psTriangle", @"button_y")
@@ -519,8 +519,8 @@ DataSourceHelpers.PerControllerDataSourceSetup("ButtonLayoutLabels", "ButtonLayo
 end, true)
 DataSourceHelpers.PerControllerDataSourceSetup("StickLayoutLabels", "StickLayoutLabels", function(f13_arg0, f13_arg1)
 	local f13_local0, f13_local1 = nil
-	local f13_local2 = Engine[@"profileint"](f13_arg1, "gpad_sticksConfig")
-	local f13_local3 = Engine[@"getmodelforcontroller"](f13_arg1)
+	local f13_local2 = Engine.ProfileInt(f13_arg1, "gpad_sticksConfig")
+	local f13_local3 = Engine.GetModelForController(f13_arg1)
 	f13_local3 = f13_local3.stickLayoutPreview
 	local f13_local4 = f13_local3 and f13_local3:get()
 	if f13_local4 then
@@ -532,7 +532,7 @@ DataSourceHelpers.PerControllerDataSourceSetup("StickLayoutLabels", "StickLayout
 			if f13_local10[@"hash_52ACD017CCBEFB33"] == f13_local2 then
 				f13_local0 = f13_local10
 			end
-			if f13_local10[@"hash_52ACD017CCBEFB33"] == Enum[@"gpadstickconfigs"][@"thumbstick_default"] then
+			if f13_local10[@"hash_52ACD017CCBEFB33"] == Enum.GPadStickConfigs[@"thumbstick_default"] then
 				f13_local1 = f13_local10
 			end
 			if f13_local0 and f13_local1 then
@@ -561,9 +561,9 @@ DataSourceHelpers.PerControllerDataSourceSetup("StickLayoutLabels", "StickLayout
 		f13_local6("rightStickDown", "rstick_down")
 		f13_local6("rightStickLeftRight", "rstick_lr")
 		local f13_local7 = f13_arg0:create("leftStickImg")
-		f13_local7:set(f13_local0[@"hash_38AC8AA260B7F6E3"])
+		f13_local7:set(f13_local0.lstick_image)
 		f13_local7 = f13_arg0:create("rightStickImg")
-		f13_local7:set(f13_local0[@"hash_4593B62D1EEFC885"])
+		f13_local7:set(f13_local0.rstick_image)
 	end
 end, true)
 CoD.OptionsUtility.GetPlayerSettingDefaultValue = function(f15_arg0, f15_arg1)
@@ -573,16 +573,16 @@ CoD.OptionsUtility.GetPlayerSettingDefaultValueFromOptionInfo = function(f16_arg
 	local f16_local0 = nil
 	if f16_arg1 then
 		if f16_arg1[@"hash_715A0D9812F3D286"] == 1 then
-			if f16_arg1[@"hash_160DFED5B3CCF56B"] == 1 then
+			if f16_arg1.isdefaultenabled == 1 then
 				local f16_local1 = 1
 			end
 			f16_local0 = f16_local1 or 0
 		elseif f16_arg1[@"hash_4C97F4CCEE4EFEB7"] == 1 then
-			f16_local0 = f16_arg1[@"hash_777326D80ECDE714"]
+			f16_local0 = f16_arg1.rangedefaultvalue
 		elseif f16_arg1.options then
-			local f16_local2 = f16_arg1.options[(f16_arg1[@"hash_2A5CFFC76A4879"] or 0) + 1]
+			local f16_local2 = f16_arg1.options[(f16_arg1.defaultoptionindex or 0) + 1]
 			if f16_local2 then
-				f16_local0 = tonumber(f16_local2[@"value"])
+				f16_local0 = tonumber(f16_local2.value)
 			end
 		end
 	end
@@ -595,7 +595,7 @@ CoD.OptionsUtility.IsPlayerSettingDefault = function(f17_arg0, f17_arg1)
 		if CoD.OptionsUtility.IsOptionAssetInList(f17_arg1, CoD.CodCasterUtility.CodCasterProfileSettings) then
 			f17_local1 = CoD.ShoutcasterProfileVarValue(f17_arg0, f17_local0[@"statname"])
 		else
-			f17_local1 = tonumber(Engine[@"profilevalueasstring"](f17_arg0, f17_local0[@"statname"]))
+			f17_local1 = tonumber(Engine.ProfileValueAsString(f17_arg0, f17_local0[@"statname"]))
 		end
 		return f17_local1 == CoD.OptionsUtility.GetPlayerSettingDefaultValue(f17_arg0, f17_arg1)
 	else
@@ -609,37 +609,37 @@ CoD.OptionsUtility.ExcludeOption = function(f18_arg0, f18_arg1)
 		return true
 	elseif f18_arg1[@"hash_1FEFFCAEBB169320"] == 1 and IsPC() then
 		return true
-	elseif CoD.DirectorUtility.DisableForCurrentMilestone(f18_arg0) and (f18_arg1[@"name"] == "splitscreen_orientation" or f18_arg1[@"name"] == "audio_presets") then
+	elseif CoD.DirectorUtility.DisableForCurrentMilestone(f18_arg0) and (f18_arg1.name == "splitscreen_orientation" or f18_arg1.name == "audio_presets") then
 		return true
 	elseif f18_arg1[@"hash_742D405AEF2DCA10"] == 1 and IsInGame() then
 		return true
-	elseif f18_arg1[@"hash_6D2DFEEE6B42B17E"] == 1 and f18_arg0 ~= Engine[@"getprimarycontroller"]() then
+	elseif f18_arg1[@"hash_6D2DFEEE6B42B17E"] == 1 and f18_arg0 ~= Engine.GetPrimaryController() then
 		return true
 	elseif f18_arg1[@"hash_38E712B176AC0EF1"] == 1 and not CoD.OptionsUtility.IsWarzoneOrInvalidMode() then
 		return true
-	elseif CoD.OptionsUtility.IsLanguageSetting(f18_arg1[@"name"]) then
-		if f18_arg1[@"name"] == CoD.OptionsUtility.LanguageArabicSetting and not IsArabicSku() then
+	elseif CoD.OptionsUtility.IsLanguageSetting(f18_arg1.name) then
+		if f18_arg1.name == CoD.OptionsUtility.LanguageArabicSetting and not IsArabicSku() then
 			return true
-		elseif f18_arg1[@"name"] == CoD.OptionsUtility.LanguageJapaneseSetting and not IsJapaneseSku() then
+		elseif f18_arg1.name == CoD.OptionsUtility.LanguageJapaneseSetting and not IsJapaneseSku() then
 			return true
-		elseif f18_arg1[@"name"] == CoD.OptionsUtility.LanguageRussianSetting and not IsRussianSku() then
+		elseif f18_arg1.name == CoD.OptionsUtility.LanguageRussianSetting and not IsRussianSku() then
 			return true
-		elseif f18_arg1[@"name"] == CoD.OptionsUtility.LanguagePolishSetting and not IsPolishSku() then
+		elseif f18_arg1.name == CoD.OptionsUtility.LanguagePolishSetting and not IsPolishSku() then
 			return true
 		end
 	end
-	if f18_arg1[@"name"] == "user_generated_content" and Engine[@"isdevicerestrictingcontent"](f18_arg0) then
+	if f18_arg1.name == "user_generated_content" and Engine.IsDeviceRestrictingContent(f18_arg0) then
 		return true
-	elseif f18_arg1[@"hash_58847657D5DB441C"] == 1 and Engine[@"getusertier"](f18_arg0) == Enum[@"eusertier"][@"user_tier_none"] then
+	elseif f18_arg1[@"hash_58847657D5DB441C"] == 1 and Engine.GetUserTier(f18_arg0) == Enum[@"eusertier"][@"user_tier_none"] then
 		return true
 	end
 	return false
 end
 CoD.OptionsUtility.NotifyPlayerSettingsUpdate = function(f19_arg0, f19_arg1)
-	local f19_local0 = Engine[@"getmodelforcontroller"](f19_arg0)
+	local f19_local0 = Engine.GetModelForController(f19_arg0)
 	f19_local0 = f19_local0.PlayerSettingsUpdate
 	if f19_local0 and not f19_local0:set(f19_arg1) then
-		Engine[@"forcenotifymodelsubscriptions"](f19_local0)
+		Engine.ForceNotifyModelSubscriptions(f19_local0)
 	end
 end
 CoD.OptionsUtility.PlayerSettingsItemSelected = function(f20_arg0, f20_arg1, f20_arg2, f20_arg3, f20_arg4)
@@ -677,7 +677,7 @@ end
 CoD.OptionsUtility.PlayerSettingsItemSelectedLanguage = function(f25_arg0, f25_arg1, f25_arg2, f25_arg3, f25_arg4)
 	if not f25_arg0.changingLanguage and f25_arg1.index ~= CoD.OptionsUtility.GetCurrentLanguageSelection() then
 		f25_arg0.changingLanguage = true
-		local f25_local0 = Engine[@"getlanguage"]()
+		local f25_local0 = Engine.GetLanguage()
 		local f25_local1 = f25_local0
 		if CoD.OptionsUtility.EnglishFromLocalized[f25_local0] then
 			f25_local1 = CoD.OptionsUtility.EnglishFromLocalized[f25_local0]
@@ -691,16 +691,16 @@ CoD.OptionsUtility.GetDefaultOptionIndex = function(f26_arg0)
 	if not f26_arg0 then
 		return 1
 	elseif f26_arg0[@"hash_715A0D9812F3D286"] == 1 then
-		if f26_arg0[@"hash_160DFED5B3CCF56B"] == 1 then
+		if f26_arg0.isdefaultenabled == 1 then
 			return 1
 		else
 			return 2
 		end
 	elseif f26_arg0[@"hash_4C97F4CCEE4EFEB7"] == 1 then
 		local f26_local0 = f26_arg0[@"rangestartvalue"] or 0
-		local f26_local1 = f26_arg0[@"hash_6546C97C01207014"] or 0
+		local f26_local1 = f26_arg0.rangeendvalue or 0
 		local f26_local2 = f26_arg0[@"hash_3D0592BDDB5DA4E1"] or 0
-		local f26_local3 = f26_arg0[@"hash_777326D80ECDE714"] or f26_local0
+		local f26_local3 = f26_arg0.rangedefaultvalue or f26_local0
 		local f26_local4 = 0
 		if f26_local0 < f26_local1 and f26_local2 > 0 then
 			for f26_local5 = f26_local0, f26_local1, f26_local2 do
@@ -710,13 +710,13 @@ CoD.OptionsUtility.GetDefaultOptionIndex = function(f26_arg0)
 				end
 			end
 		end
-	elseif f26_arg0[@"options"] then
-		return (f26_arg0[@"hash_2A5CFFC76A4879"] or 0) + 1
+	elseif f26_arg0.options then
+		return (f26_arg0.defaultoptionindex or 0) + 1
 	end
 	return 1
 end
 CoD.OptionsUtility.GetCurrentLanguageSelection = function()
-	local f27_local0 = Engine[@"getlanguage"]()
+	local f27_local0 = Engine.GetLanguage()
 	if CoD.OptionsUtility.EnglishFromLocalized[f27_local0] ~= nil then
 		return 2
 	elseif CoD.OptionsUtility.LocalizedFromEnglish[f27_local0] ~= nil then
@@ -733,20 +733,20 @@ CoD.OptionsUtility.CreatePlayerSettingsDatasource = function(f28_arg0, f28_arg1,
 		if f28_local0[@"hash_715A0D9812F3D286"] == 1 then
 			f28_local2 = {
 				{
-					name = Engine[@"hash_4F9F1239CFD921FE"](@"menu/on"),
+					name = Engine[@"hash_4F9F1239CFD921FE"]("menu/on"),
 					value = 1,
 				},
 				{
-					name = Engine[@"hash_4F9F1239CFD921FE"](@"menu/off"),
+					name = Engine[@"hash_4F9F1239CFD921FE"]("menu/off"),
 					value = 0,
 				},
 			}
 		elseif f28_local0[@"hash_4C97F4CCEE4EFEB7"] == 1 then
 			local f28_local3 = f28_local0[@"rangestartvalue"] or 0
-			local f28_local4 = f28_local0[@"hash_6546C97C01207014"] or 0
+			local f28_local4 = f28_local0.rangeendvalue or 0
 			local f28_local5 = f28_local0[@"hash_3D0592BDDB5DA4E1"] or 0
 			local f28_local6 = f28_local0[@"hash_3B04DDD806C34DE8"] or 1
-			local f28_local7 = f28_local0[@"hash_777326D80ECDE714"] or f28_local3
+			local f28_local7 = f28_local0.rangedefaultvalue or f28_local3
 			if f28_local3 < f28_local4 and f28_local5 > 0 then
 				for f28_local8 = f28_local3, f28_local4, f28_local5 do
 					table.insert(f28_local2, {
@@ -758,8 +758,8 @@ CoD.OptionsUtility.CreatePlayerSettingsDatasource = function(f28_arg0, f28_arg1,
 		elseif f28_local0.options then
 			for f28_local6, f28_local7 in ipairs(f28_local0.options) do
 				table.insert(f28_local2, {
-					name = Engine[@"hash_4F9F1239CFD921FE"](f28_local7[@"label"] or f28_local1),
-					value = tonumber(f28_local7[@"value"]) or 0,
+					name = Engine[@"hash_4F9F1239CFD921FE"](f28_local7.label or f28_local1),
+					value = tonumber(f28_local7.value) or 0,
 				})
 			end
 		end
@@ -796,8 +796,8 @@ CoD.OptionsUtility.CreatePlayerSettingsDatasource = function(f28_arg0, f28_arg1,
 		end
 		f28_local8 = {
 			models = {
-				name = Engine[@"hash_4F9F1239CFD921FE"](f28_local0[@"displayname"] or 0x0),
-				hintText = Engine[@"hash_4F9F1239CFD921FE"](f28_local0[@"description"] or 0x0),
+				name = Engine[@"hash_4F9F1239CFD921FE"](f28_local0.displayname or 0x0),
+				hintText = Engine[@"hash_4F9F1239CFD921FE"](f28_local0.description or 0x0),
 				optionAssetName = f28_arg1,
 				optionsDatasource = CoD.OptionsUtility.CreateOptionDataSource(f28_arg0, f28_local5, f28_local2, f28_local0[@"statname"], f28_local4, f28_local7, f28_arg1),
 				currentSelection = f28_local6,
@@ -840,7 +840,7 @@ CoD.OptionsUtility.PlayerSettingsGroupListPrepare = function(f31_arg0, f31_arg1)
 		local f31_local12 = f31_local11.groupName
 		local f31_local13 = nil
 		local f31_local14 = {}
-		if f31_local11.options and not (f31_local12 == @"menu/brightness" and f31_arg0 ~= Engine[@"getprimarycontroller"]() and IsInGame()) then
+		if f31_local11.options and not (f31_local12 == "menu/brightness" and f31_arg0 ~= Engine.GetPrimaryController() and IsInGame()) then
 			for f31_local8, f31_local9 in ipairs(f31_local11.options) do
 				if f31_local9 == CoD.OptionsUtility.PlayTestAudioSetting then
 					table.insert(f31_local14, f31_local9)
@@ -936,63 +936,63 @@ CoD.OptionsUtility.PlayerSettingsNetworkListPrepare = function(f40_arg0)
 			showOverviewPanel = true,
 		},
 	})
-	local f40_local1, f40_local2 = Engine[@"getsysteminfovalueandstring"](f40_arg0, CoD.SYSINFO_NAT_TYPE)
+	local f40_local1, f40_local2 = Engine.GetSystemInfoValueAndString(f40_arg0, CoD.SYSINFO_NAT_TYPE)
 	local f40_local3 = 0x0
-	local f40_local4 = Engine[@"getconnectionport"]()
-	if f40_local1 == Enum[@"xonline_nat_type"][@"xonline_nat_open"] then
-		f40_local3 = @"hash_6AA445309112CF99"
-	elseif f40_local1 == Enum[@"xonline_nat_type"][@"xonline_nat_moderate"] then
-		f40_local3 = @"hash_614209B554672F30"
-	elseif f40_local1 == Enum[@"xonline_nat_type"][@"xonline_nat_strict"] then
-		f40_local3 = @"hash_5C305B096E1E2E84"
+	local f40_local4 = Engine.GetConnectionPort()
+	if f40_local1 == Enum.XONLINE_NAT_TYPE.xonline_nat_open then
+		f40_local3 = "platform/options_network_about_nat_open"
+	elseif f40_local1 == Enum.XONLINE_NAT_TYPE.xonline_nat_moderate then
+		f40_local3 = "platform/options_network_about_nat_moderate"
+	elseif f40_local1 == Enum.XONLINE_NAT_TYPE.xonline_nat_strict then
+		f40_local3 = "platform/options_network_about_nat_strict"
 	end
-	table.insert(f40_local0, CoD.OptionsUtility.CreatePlayerSettingsButtonDatasource(Engine[@"hash_4F9F1239CFD921FE"](0xB1478806C990BB), Engine[@"hash_4F9F1239CFD921FE"](f40_local3, f40_local4), f40_local2))
-	local f40_local5 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_586EBF1A2FAA0274")
-	local f40_local6 = Engine[@"hash_4F9F1239CFD921FE"](@"hash_2D1ACE135B0A0DAE")
-	local f40_local7, f40_local8 = Engine[@"getsysteminfo"](f40_arg0, CoD.SYSINFO_BANDWIDTH)
+	table.insert(f40_local0, CoD.OptionsUtility.CreatePlayerSettingsButtonDatasource(Engine[@"hash_4F9F1239CFD921FE"]("menu/options_network_nat_type"), Engine[@"hash_4F9F1239CFD921FE"](f40_local3, f40_local4), f40_local2))
+	local f40_local5 = Engine[@"hash_4F9F1239CFD921FE"]("menu/options_network_bandwidth")
+	local f40_local6 = Engine[@"hash_4F9F1239CFD921FE"]("menu/options_network_about_bandwidth_desc")
+	local f40_local7, f40_local8 = Engine.GetSystemInfo(f40_arg0, CoD.SYSINFO_BANDWIDTH)
 	table.insert(f40_local0, CoD.OptionsUtility.CreatePlayerSettingsButtonDatasource(f40_local5, f40_local6, f40_local7))
-	local f40_local9, f40_local10 = Engine[@"getsysteminfovalueandstring"](f40_arg0, CoD.SYSINFO_CONNECTION_TYPE)
+	local f40_local9, f40_local10 = Engine.GetSystemInfoValueAndString(f40_arg0, CoD.SYSINFO_CONNECTION_TYPE)
 	local f40_local11 = ""
-	if f40_local9 == Enum[@"connectiontype_e"][@"connection_type_wired"] then
-		f40_local11 = @"hash_687FDEFB84AAAE2E"
-	elseif f40_local9 == Enum[@"connectiontype_e"][@"connection_type_wireless"] then
-		f40_local11 = @"hash_626CFE1DF00BD287"
+	if f40_local9 == Enum.connectionType_e[@"connection_type_wired"] then
+		f40_local11 = "menu/options_network_about_connection_type_wired"
+	elseif f40_local9 == Enum.connectionType_e[@"connection_type_wireless"] then
+		f40_local11 = "menu/options_network_about_connection_type_wireless"
 	end
-	table.insert(f40_local0, CoD.OptionsUtility.CreatePlayerSettingsButtonDatasource(Engine[@"hash_4F9F1239CFD921FE"](@"hash_67B6345471085D98"), Engine[@"hash_4F9F1239CFD921FE"](f40_local11), f40_local10))
+	table.insert(f40_local0, CoD.OptionsUtility.CreatePlayerSettingsButtonDatasource(Engine[@"hash_4F9F1239CFD921FE"]("menu/options_network_connection_type"), Engine[@"hash_4F9F1239CFD921FE"](f40_local11), f40_local10))
 	local f40_local12 = Engine[@"hash_4F9F1239CFD921FE"](@"menu/hidden")
-	local f40_local13, f40_local14 = Engine[@"getsysteminfo"](f40_arg0, CoD.SYSINFO_GEOGRAPHICAL_REGION)
+	local f40_local13, f40_local14 = Engine.GetSystemInfo(f40_arg0, CoD.SYSINFO_GEOGRAPHICAL_REGION)
 	table.insert(
 		f40_local0,
-		CoD.OptionsUtility.CreatePlayerSettingsButtonDatasource(Engine[@"hash_4F9F1239CFD921FE"](@"hash_728B24D7EC3259D6"), Engine[@"hash_4F9F1239CFD921FE"](@"hash_1BE0FD8782640557"), f40_local12, {
+		CoD.OptionsUtility.CreatePlayerSettingsButtonDatasource(Engine[@"hash_4F9F1239CFD921FE"]("menu/options_network_geographical_region"), Engine[@"hash_4F9F1239CFD921FE"]("platform/options_network_about_geographic_region_desc_off"), f40_local12, {
 			action = CoD.OptionsUtility.ShowHideNetworkSettingInfo,
 			hiddenLabel = Engine[@"hash_4F9F1239CFD921FE"](@"menu/hidden"),
 			showingLabel = f40_local13,
-			hiddenDesc = Engine[@"hash_4F9F1239CFD921FE"](@"hash_1BE0FD8782640557"),
-			showingDesc = Engine[@"hash_4F9F1239CFD921FE"](@"hash_4FA6535477C42613"),
+			hiddenDesc = Engine[@"hash_4F9F1239CFD921FE"]("platform/options_network_about_geographic_region_desc_off"),
+			showingDesc = Engine[@"hash_4F9F1239CFD921FE"]("platform/options_network_about_geographic_region_desc_on"),
 			isHidden = true,
 		})
 	)
-	local f40_local15, f40_local16 = Engine[@"getsysteminfo"](f40_arg0, CoD.SYSINFO_EXTERNAL_IP_ADDRESS)
+	local f40_local15, f40_local16 = Engine.GetSystemInfo(f40_arg0, CoD.SYSINFO_EXTERNAL_IP_ADDRESS)
 	table.insert(
 		f40_local0,
-		CoD.OptionsUtility.CreatePlayerSettingsButtonDatasource(Engine[@"hash_4F9F1239CFD921FE"](@"hash_17367624D2662070"), Engine[@"hash_4F9F1239CFD921FE"](@"hash_2D75251DBDF92FD4"), f40_local12, {
+		CoD.OptionsUtility.CreatePlayerSettingsButtonDatasource(Engine[@"hash_4F9F1239CFD921FE"]("menu/options_network_external_ip"), Engine[@"hash_4F9F1239CFD921FE"]("platform/options_network_about_external_ip_desc_off"), f40_local12, {
 			action = CoD.OptionsUtility.ShowHideNetworkSettingInfo,
 			hiddenLabel = Engine[@"hash_4F9F1239CFD921FE"](@"menu/hidden"),
 			showingLabel = f40_local15,
-			hiddenDesc = Engine[@"hash_4F9F1239CFD921FE"](@"hash_2D75251DBDF92FD4"),
-			showingDesc = Engine[@"hash_4F9F1239CFD921FE"](@"hash_122E830E31485122"),
+			hiddenDesc = Engine[@"hash_4F9F1239CFD921FE"]("platform/options_network_about_external_ip_desc_off"),
+			showingDesc = Engine[@"hash_4F9F1239CFD921FE"]("platform/options_network_about_external_ip_desc_on"),
 			isHidden = true,
 		})
 	)
-	local f40_local17, f40_local18 = Engine[@"getsysteminfo"](f40_arg0, CoD.SYSINFO_INTERNAL_IP_ADDRESS)
+	local f40_local17, f40_local18 = Engine.GetSystemInfo(f40_arg0, CoD.SYSINFO_INTERNAL_IP_ADDRESS)
 	table.insert(
 		f40_local0,
-		CoD.OptionsUtility.CreatePlayerSettingsButtonDatasource(Engine[@"hash_4F9F1239CFD921FE"](@"hash_532CA1559CDF918A"), Engine[@"hash_4F9F1239CFD921FE"](@"hash_87FC2843A65DDAA"), f40_local12, {
+		CoD.OptionsUtility.CreatePlayerSettingsButtonDatasource(Engine[@"hash_4F9F1239CFD921FE"]("menu/options_network_internal_ip"), Engine[@"hash_4F9F1239CFD921FE"]("platform/options_network_about_internal_ip_desc_off"), f40_local12, {
 			action = CoD.OptionsUtility.ShowHideNetworkSettingInfo,
 			hiddenLabel = Engine[@"hash_4F9F1239CFD921FE"](@"menu/hidden"),
 			showingLabel = f40_local17,
-			hiddenDesc = Engine[@"hash_4F9F1239CFD921FE"](@"hash_87FC2843A65DDAA"),
-			showingDesc = Engine[@"hash_4F9F1239CFD921FE"](@"hash_1C1498B590516530"),
+			hiddenDesc = Engine[@"hash_4F9F1239CFD921FE"]("platform/options_network_about_internal_ip_desc_off"),
+			showingDesc = Engine[@"hash_4F9F1239CFD921FE"]("platform/options_network_about_internal_ip_desc_on"),
 			isHidden = true,
 		})
 	)
@@ -1013,7 +1013,7 @@ DataSources.PlayerSettingsTheaterList = DataSourceHelpers.ListSetup("PlayerSetti
 DataSources.PlayerSettingsFirstTimeContentList = DataSourceHelpers.ListSetup("PlayerSettingsFirstTimeContentList", CoD.OptionsUtility.PlayerSettingsFirstTimeContentListPrepare, true)
 DataSources.PlayerOptionsTabs = DataSourceHelpers.ListSetup("PlayerOptionsTabs", function(f41_arg0)
 	local f41_local0 = {}
-	local f41_local1 = Engine[@"getmodelforcontroller"](f41_arg0)
+	local f41_local1 = Engine.GetModelForController(f41_arg0)
 	f41_local1 = f41_local1.selectedPlayerOptionsTab
 	local f41_local2 = f41_local1 and f41_local1:get()
 	for f41_local7, f41_local8 in ipairs(CoD.OptionsUtility.PlayerOptionsTabsInfo) do
@@ -1041,7 +1041,7 @@ DataSources.PlayerOptionsTabs = DataSourceHelpers.ListSetup("PlayerOptionsTabs",
 end, true)
 DataSources.AboutPingBars = DataSourceHelpers.ListSetup("AboutPingBars", function(f42_arg0)
 	local f42_local0 = {}
-	for f42_local1 = Engine[@"getpingimagecount"](), 1, -1 do
+	for f42_local1 = Engine.GetPingImageCount(), 1, -1 do
 		table.insert(f42_local0, {
 			models = {
 				pingIndex = f42_local1,
@@ -1102,14 +1102,14 @@ CoD.OptionsUtility.ResetPlayerSettingToDefaultByOptionAssetName = function(f47_a
 		if CoD.OptionsUtility.IsOptionAssetInList(f47_arg1, CoD.CodCasterUtility.CodCasterProfileSettings) then
 			f47_local1 = CoD.ShoutcasterProfileVarValue(f47_arg0, f47_local0[@"statname"])
 		else
-			f47_local1 = tonumber(Engine[@"profilevalueasstring"](f47_arg0, f47_local0[@"statname"]))
+			f47_local1 = tonumber(Engine.ProfileValueAsString(f47_arg0, f47_local0[@"statname"]))
 		end
 		local f47_local2 = CoD.OptionsUtility.GetPlayerSettingDefaultValue(f47_arg0, f47_arg1)
 		if f47_local1 ~= f47_local2 then
 			if CoD.OptionsUtility.IsOptionAssetInList(f47_arg1, CoD.CodCasterUtility.CodCasterProfileSettings) then
 				CoD.SetShoutcasterProfileVarValue(f47_arg0, f47_local0[@"statname"], f47_local2)
 			else
-				Engine[@"setprofilevar"](f47_arg0, f47_local0[@"statname"], f47_local2)
+				Engine.SetProfileVar(f47_arg0, f47_local0[@"statname"], f47_local2)
 			end
 			return true
 		end
@@ -1163,7 +1163,7 @@ end
 CoD.OptionsUtility.SetPlayerSettingsModel = function(f51_arg0, f51_arg1, f51_arg2)
 	local f51_local0 = CoD.OptionsUtility.CreatePlayerSettingsDatasource(f51_arg1, f51_arg2)
 	if f51_local0 and f51_local0.models then
-		local f51_local1 = Engine[@"getmodelforcontroller"](f51_arg1)
+		local f51_local1 = Engine.GetModelForController(f51_arg1)
 		f51_local1 = f51_local1:create("PlayerSetting_" .. f51_arg2)
 		LuaUtils.CreateModelsFromTable(f51_local1, f51_local0.models)
 		f51_arg0:setModel(f51_local1, f51_arg1)
@@ -1188,15 +1188,15 @@ CoD.OptionsUtility.SetOptionHintText = function(f52_arg0, f52_arg1, f52_arg2)
 	end
 end
 CoD.OptionsUtility.UpdateBrightnessPreviewColor = function(f53_arg0)
-	local f53_local0 = 16 * Engine[@"profilefloat"](f53_arg0, "r_sceneBrightness") + 29
-	local f53_local1 = Engine[@"getmodelforcontroller"](f53_arg0)
+	local f53_local0 = 16 * Engine.ProfileFloat(f53_arg0, "r_sceneBrightness") + 29
+	local f53_local1 = Engine.GetModelForController(f53_arg0)
 	f53_local1 = f53_local1:create("profile.brightnessPreviewColor")
 	f53_local1:set(f53_local0 .. " " .. f53_local0 .. " " .. f53_local0)
 end
 CoD.OptionsUtility.SetButtonLayoutPreview = function(f54_arg0, f54_arg1)
-	local f54_local0 = Engine[@"getmodelforcontroller"](f54_arg1)
+	local f54_local0 = Engine.GetModelForController(f54_arg1)
 	f54_local0 = f54_local0:create("buttonLayoutPreview")
-	local f54_local1 = Engine[@"getmodelforcontroller"](f54_arg1)
+	local f54_local1 = Engine.GetModelForController(f54_arg1)
 	f54_local1 = f54_local1:create("buttonFlippedPreview")
 	local f54_local2 = false
 	local f54_local3 = false
@@ -1212,23 +1212,23 @@ CoD.OptionsUtility.SetButtonLayoutPreview = function(f54_arg0, f54_arg1)
 	end
 end
 CoD.OptionsUtility.ClearButtonLayoutPreview = function(f55_arg0)
-	local f55_local0 = Engine[@"getmodelforcontroller"](f55_arg0)
+	local f55_local0 = Engine.GetModelForController(f55_arg0)
 	f55_local0 = f55_local0:create("buttonLayoutPreview")
-	local f55_local1 = Engine[@"getmodelforcontroller"](f55_arg0)
+	local f55_local1 = Engine.GetModelForController(f55_arg0)
 	f55_local1 = f55_local1:create("buttonFlippedPreview")
 	if f55_local0:set(false) or f55_local1:set(false) then
 		DataSourceHelperRecreate(f55_arg0, "ButtonLayoutLabels")
 	end
 end
 CoD.OptionsUtility.SetStickLayoutPreview = function(f56_arg0, f56_arg1)
-	local f56_local0 = Engine[@"getmodelforcontroller"](f56_arg1)
+	local f56_local0 = Engine.GetModelForController(f56_arg1)
 	f56_local0 = f56_local0:create("stickLayoutPreview")
 	if f56_arg0.value and f56_local0:set(f56_arg0.value) then
 		DataSourceHelperRecreate(f56_arg1, "StickLayoutLabels")
 	end
 end
 CoD.OptionsUtility.ClearStickLayoutPreview = function(f57_arg0)
-	local f57_local0 = Engine[@"getmodelforcontroller"](f57_arg0)
+	local f57_local0 = Engine.GetModelForController(f57_arg0)
 	f57_local0 = f57_local0:create("stickLayoutPreview")
 	if f57_local0:set(false) then
 		DataSourceHelperRecreate(f57_arg0, "StickLayoutLabels")
@@ -1320,7 +1320,7 @@ CoD.OptionsUtility.AreCreditsAvailable = function(f64_arg0)
 	return f64_local0
 end
 CoD.OptionsUtility.UserGeneratedContentSettingChanged = function(f65_arg0)
-	local f65_local0 = Engine[@"getmodelforcontroller"](f65_arg0)
+	local f65_local0 = Engine.GetModelForController(f65_arg0)
 	f65_local0 = f65_local0.PlayerSettingsUpdate
 	return f65_local0 and f65_local0:get() == "user_generated_content"
 end
@@ -1328,19 +1328,19 @@ CoD.OptionsUtility.GetCurrentPreviewSettingLabel = function(f66_arg0, f66_arg1)
 	local f66_local0 = ""
 	local f66_local1 = Engine[@"hash_2E00B2F29271C60B"](Engine[@"converttoxhash"](f66_arg1))
 	if f66_local1 then
-		local f66_local2 = tonumber(Engine[@"profilevalueasstring"](f66_arg0, f66_local1[@"statname"]))
+		local f66_local2 = tonumber(Engine.ProfileValueAsString(f66_arg0, f66_local1[@"statname"]))
 		if f66_local1[@"hash_715A0D9812F3D286"] == 1 then
 			if f66_local2 == 1 then
-				f66_local0 = Engine[@"hash_4F9F1239CFD921FE"](@"menu/on")
+				f66_local0 = Engine[@"hash_4F9F1239CFD921FE"]("menu/on")
 			else
-				f66_local0 = Engine[@"hash_4F9F1239CFD921FE"](@"menu/off")
+				f66_local0 = Engine[@"hash_4F9F1239CFD921FE"]("menu/off")
 			end
 		elseif f66_local1[@"hash_4C97F4CCEE4EFEB7"] == 1 then
 			f66_local0 = string.format("%g", f66_local2 * f66_local1[@"hash_3B04DDD806C34DE8"])
 		elseif f66_local1.options then
 			for f66_local6, f66_local7 in ipairs(f66_local1.options) do
-				if tonumber(f66_local7[@"value"]) == f66_local2 then
-					f66_local0 = Engine[@"hash_4F9F1239CFD921FE"](f66_local7[@"label"])
+				if tonumber(f66_local7.value) == f66_local2 then
+					f66_local0 = Engine[@"hash_4F9F1239CFD921FE"](f66_local7.label)
 					break
 				end
 			end
@@ -1363,7 +1363,7 @@ CoD.OptionsUtility.GetSettingSliderCurrentOptionPip = function(f67_arg0, f67_arg
 	end
 end
 CoD.OptionsUtility.GetMaxBotsCount = function()
-	if Engine[@"getlobbyclientcount"](Enum[@"lobbymodule"][@"lobby_module_client"], Enum[@"lobbytype"][@"lobby_type_private"], Enum[@"lobbyclientfiltertype"][@"lobby_client_filter_type_local"]) > 1 then
+	if Engine[@"getlobbyclientcount"](Enum.LobbyModule[@"lobby_module_client"], Enum.LobbyType[@"lobby_type_private"], Enum[@"lobbyclientfiltertype"][@"lobby_client_filter_type_local"]) > 1 then
 		return CoD.OptionsUtility.MaxSplitscreenBots
 	else
 		return LuaDefine.MAX_CLIENTS
@@ -1371,38 +1371,38 @@ CoD.OptionsUtility.GetMaxBotsCount = function()
 end
 CoD.OptionsUtility.DvarShownCustomGameOptions = {
 	[@"hash_49EF5478510B5AF3"] = {
-		@"zmperkszombshell",
+		"zmperkszombshell",
 	},
 	[@"hash_37C3EBC11793A175"] = {
-		@"zmelixirdividendyield",
-		@"zmelixirsuitup",
-		@"zmelixirtalkinboutregeneration",
-		@"zmelixirbulletboost",
-		@"zmelixirquacknarok",
+		"zmelixirdividendyield",
+		"zmelixirsuitup",
+		"zmelixirtalkinboutregeneration",
+		"zmelixirbulletboost",
+		"zmelixirquacknarok",
 	},
 	[@"hash_4686ED971E896201"] = {
-		@"zmtalismanpermanentheroweaparmor",
-		@"zmtalismanextraselfrevive",
+		"zmtalismanpermanentheroweaparmor",
+		"zmtalismanextraselfrevive",
 	},
 	[@"hash_1E30B8B2F3629DA3"] = {
-		@"zmelixirperkaholic",
-		@"zmelixirneardeathexperience",
-		@"zmelixirshoppingfree",
-		@"zmelixirreigndrops",
+		"zmelixirperkaholic",
+		"zmelixirneardeathexperience",
+		"zmelixirshoppingfree",
+		"zmelixirreigndrops",
 	},
 	[@"hash_5BFA5BDA576BE7C4"] = {
-		@"zmelixirheaddrama",
-		@"zmelixirphoenixup",
+		"zmelixirheaddrama",
+		"zmelixirphoenixup",
 	},
 	[@"hash_21232038A2928EDD"] = {
-		@"zmelixirpowervacuum",
-		@"zmelixirsecretshopper",
+		"zmelixirpowervacuum",
+		"zmelixirsecretshopper",
 	},
 	[@"hash_4E1190045EF3588B"] = {
-		@"zmperkswolfprotector",
+		"zmperkswolfprotector",
 	},
 	[@"hash_1C1A8ED8D0BF271C"] = {
-		@"zmperksdeathdash",
+		"zmperksdeathdash",
 	},
 }
 CoD.OptionsUtility.CustomGameOptionsShownByDvar = {}
@@ -1440,7 +1440,7 @@ CoD.OptionsUtility.CreateCustomGameOptionsDatasourceTable = function(f71_arg0, f
 	return f71_local0
 end
 CoD.OptionsUtility.CustomGameOptionsSettingsUpdate = function(f72_arg0, f72_arg1, f72_arg2)
-	local f72_local0 = Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "GametypeSettings"), "Update")
+	local f72_local0 = Engine.CreateModel(Engine.CreateModel(Engine.GetGlobalModel(), "GametypeSettings"), "Update")
 	if f72_arg1.updateSubscription then
 		f72_arg1:removeSubscription(f72_arg1.updateSubscription)
 	end
@@ -1469,7 +1469,7 @@ CoD.OptionsUtility.AreWinConditionOptionsDefault = function()
 	if f75_local0 then
 		for f75_local4, f75_local5 in ipairs(f75_local0) do
 			local f75_local6 = CoD.OptionsUtility.GetGameSettingsInfo(f75_local5)
-			if f75_local6 and not Engine[@"isgametypesettingdefault"](f75_local6.setting) then
+			if f75_local6 and not Engine.IsGametypeSettingDefault(f75_local6.setting) then
 				return false
 			end
 		end
@@ -1497,7 +1497,7 @@ CoD.OptionsUtility.AreAdvancedGametypeOptionsDefault = function()
 	if f77_local0 then
 		for f77_local4, f77_local5 in ipairs(f77_local0) do
 			local f77_local6 = CoD.OptionsUtility.GetGameSettingsInfo(f77_local5)
-			if f77_local6 and not Engine[@"isgametypesettingdefault"](f77_local6.setting) then
+			if f77_local6 and not Engine.IsGametypeSettingDefault(f77_local6.setting) then
 				return false
 			end
 		end
@@ -1507,15 +1507,15 @@ end
 CoD.OptionsUtility.PrepareRosterOptions = function(f78_arg0, f78_arg1)
 	local f78_local0 = {}
 	local f78_local1 = 6
-	local f78_local2 = Engine[@"getgametypesettings"]()
-	local f78_local3 = Engine[@"getgametypesettings"](true)
+	local f78_local2 = Engine.GetGametypeSettings()
+	local f78_local3 = Engine.GetGametypeSettings(true)
 	local f78_local4 = function(f79_arg0, f79_arg1, f79_arg2)
 		local f79_local0 = f79_arg1:get()
 		local f79_local1 = f79_arg0:get()
 		local f79_local2 = function(f80_arg0, f80_arg1, f80_arg2, f80_arg3, f80_arg4)
 			if f79_arg1:get() ~= f80_arg3 then
 				f79_arg1:set(f80_arg3)
-				local f80_local0 = Engine[@"getglobalmodel"]()
+				local f80_local0 = Engine.GetGlobalModel()
 				f80_local0 = f80_local0:create("GametypeSettings.Update")
 				f80_local0:forceNotifySubscriptions()
 			end
@@ -1529,9 +1529,9 @@ CoD.OptionsUtility.PrepareRosterOptions = function(f78_arg0, f78_arg1)
 						text = f81_local1,
 					},
 					properties = {
-						title = @"hash_0",
-						desc = @"hash_0",
-						image = @"blacktransparent",
+						title = 0x0,
+						desc = 0x0,
+						image = "blacktransparent",
 						value = f81_local1,
 						selectIndex = f81_local1 == f79_local0,
 						loopEdges = true,
@@ -1549,12 +1549,12 @@ CoD.OptionsUtility.PrepareRosterOptions = function(f78_arg0, f78_arg1)
 		end, nil, nil, nil)
 		return f79_local3
 	end
-	local f78_local5 = CoD.PlayerRoleUtility.GetHeroList(Engine[@"currentsessionmode"]())
+	local f78_local5 = CoD.PlayerRoleUtility.GetHeroList(Engine.CurrentSessionMode())
 	if f78_local5 then
 		for f78_local9, f78_local10 in ipairs(f78_local5) do
 			local f78_local11 = f78_local10.bodyIndex
-			local f78_local12 = f78_local3[@"maxuniquerolesperteam"][f78_local11]
-			local f78_local13 = f78_local2[@"maxuniquerolesperteam"][f78_local11]
+			local f78_local12 = f78_local3.maxuniquerolesperteam[f78_local11]
+			local f78_local13 = f78_local2.maxuniquerolesperteam[f78_local11]
 			table.insert(f78_local0, {
 				models = {
 					name = Engine[@"hash_4F9F1239CFD921FE"](f78_local10.displayName),
@@ -1576,13 +1576,13 @@ CoD.OptionsUtility.PrepareRosterOptions = function(f78_arg0, f78_arg1)
 	return f78_local0
 end
 CoD.OptionsUtility.AreRosterOptionsDefault = function()
-	local f84_local0 = CoD.PlayerRoleUtility.GetHeroList(Engine[@"currentsessionmode"]())
+	local f84_local0 = CoD.PlayerRoleUtility.GetHeroList(Engine.CurrentSessionMode())
 	if f84_local0 then
 		for f84_local4, f84_local5 in ipairs(f84_local0) do
 			local f84_local6 = f84_local5.bodyIndex
-			local f84_local7 = Engine[@"getgametypesettings"]()
-			local f84_local8 = Engine[@"getgametypesettings"](true)
-			if f84_local7[@"maxuniquerolesperteam"][f84_local6]:get() ~= f84_local8[@"maxuniquerolesperteam"][f84_local6]:get() then
+			local f84_local7 = Engine.GetGametypeSettings()
+			local f84_local8 = Engine.GetGametypeSettings(true)
+			if f84_local7.maxuniquerolesperteam[f84_local6]:get() ~= f84_local8.maxuniquerolesperteam[f84_local6]:get() then
 				return false
 			end
 		end
@@ -1592,13 +1592,13 @@ end
 CoD.OptionsUtility.CACRestrictionCategories = {
 	{
 		id = "Weapons",
-		name = @"hash_2E8E97B711AC8F24",
+		name = "mpui/weapons_caps",
 		tabIndex = 1,
 		image = @"hash_1A26DB0CA8E3CAE0",
 	},
 	{
 		id = "Attachments",
-		name = @"hash_56E6F15BA89EEED",
+		name = "mpui/attachments_caps",
 		tabIndex = 2,
 		image = @"hash_C0BC7A99737BD47",
 	},
@@ -1610,13 +1610,13 @@ CoD.OptionsUtility.CACRestrictionCategories = {
 	},
 	{
 		id = "Equipment",
-		name = @"hash_15C60F77B9332E5B",
+		name = "menu/equipment_caps",
 		tabIndex = 4,
 		image = @"hash_78C0672200A742AD",
 	},
 	{
 		id = "Perks",
-		name = @"hash_E2669E63163D964",
+		name = "menu/perks_caps",
 		tabIndex = 5,
 		image = @"hash_5F307FB3B72049A8",
 	},
@@ -1631,7 +1631,7 @@ CoD.OptionsUtility.PrepareCACRestrictionGameOptions = function(f85_arg0)
 	local f85_local0 = {}
 	local f85_local1 = function(f86_arg0, f86_arg1, f86_arg2)
 		if f86_arg1.gridInfoTable.parentGrid.openRestriction then
-			local f86_local0 = Engine[@"getglobalmodel"]()
+			local f86_local0 = Engine.GetGlobalModel()
 			local f86_local1 = f86_local0.GametypeSettings.CACRestrictionTabIndex
 			if f86_local1 and f86_arg1.tabIndex then
 				f86_local1:set(f86_arg1.tabIndex)
@@ -1660,7 +1660,7 @@ CoD.OptionsUtility.PrepareAttachmentRestrictionGameOptions = function(f87_arg0)
 	local f87_local0 = {}
 	local f87_local1 = function(f88_arg0, f88_arg1, f88_arg2)
 		if f88_arg1.gridInfoTable.parentGrid.openWeaponAttachment then
-			local f88_local0 = Engine[@"getglobalmodel"]()
+			local f88_local0 = Engine.GetGlobalModel()
 			local f88_local1 = f88_local0.GametypeSettings.ActiveAttachmentCategoryIndex
 			if f88_local1 and f88_arg1.listIndex then
 				f88_local1:set(f88_arg1.listIndex)
@@ -1690,7 +1690,7 @@ CoD.OptionsUtility.PrepareScopeRestrictionGameOptions = function(f89_arg0)
 	local f89_local0 = {}
 	local f89_local1 = function(f90_arg0, f90_arg1, f90_arg2)
 		if f90_arg1.gridInfoTable.parentGrid.openWeaponAttachment then
-			local f90_local0 = Engine[@"getglobalmodel"]()
+			local f90_local0 = Engine.GetGlobalModel()
 			local f90_local1 = f90_local0.GametypeSettings.ActiveScopeCategoryIndex
 			if f90_local1 and f90_arg1.listIndex then
 				f90_local1:set(f90_arg1.listIndex)
@@ -1717,27 +1717,27 @@ CoD.OptionsUtility.PrepareScopeRestrictionGameOptions = function(f89_arg0)
 	return f89_local0
 end
 CoD.OptionsUtility.InitCurrentActiveRestrictionCategoryIndex = function()
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "ActiveRestrictionCategoryIndex"), 1)
+	Engine.SetModelValue(Engine.CreateModel(Engine.GetGlobalModel(), "ActiveRestrictionCategoryIndex"), 1)
 end
 CoD.OptionsUtility.InitCurrentAttachmentCategoryIndex = function()
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "CurrentAttachmentCategoryIndex"), 1)
+	Engine.SetModelValue(Engine.CreateModel(Engine.GetGlobalModel(), "CurrentAttachmentCategoryIndex"), 1)
 end
 CoD.OptionsUtility.SetCurrentActiveRestrictionCategoryIndex = function(f93_arg0)
-	local f93_local0 = Engine[@"getglobalmodel"]()
+	local f93_local0 = Engine.GetGlobalModel()
 	f93_local0 = f93_local0.ActiveRestrictionCategoryIndex
 	if f93_local0 then
 		f93_local0:set(f93_arg0.index)
 	end
 end
 CoD.OptionsUtility.SetCurrentAttachmentCategoryIndex = function(f94_arg0)
-	local f94_local0 = Engine[@"getglobalmodel"]()
+	local f94_local0 = Engine.GetGlobalModel()
 	f94_local0 = f94_local0.CurrentAttachmentCategoryIndex
 	if f94_local0 then
 		f94_local0:set(f94_arg0.index)
 	end
 end
 CoD.OptionsUtility.IsCACCategoryActive = function(f95_arg0)
-	local f95_local0 = Engine[@"getglobalmodel"]()
+	local f95_local0 = Engine.GetGlobalModel()
 	f95_local0 = f95_local0.ActiveRestrictionCategoryIndex
 	if f95_local0 then
 		return f95_local0:get() == f95_arg0.CACCategoryIndex
@@ -1746,7 +1746,7 @@ CoD.OptionsUtility.IsCACCategoryActive = function(f95_arg0)
 	end
 end
 CoD.OptionsUtility.IsOperatorModCategoryActive = function(f96_arg0)
-	local f96_local0 = Engine[@"getglobalmodel"]()
+	local f96_local0 = Engine.GetGlobalModel()
 	f96_local0 = f96_local0.CurrentAttachmentCategoryIndex
 	if f96_local0 then
 		return f96_local0:get() == f96_arg0.operatorModCategoryIndex
@@ -1788,7 +1788,7 @@ CoD.OptionsUtility.AreCustomGameOptionsDefault = function(f99_arg0)
 	if f99_arg0 then
 		for f99_local3, f99_local4 in ipairs(Engine[@"hash_7A7E3CD65E63086F"](f99_arg0)) do
 			local f99_local5 = CoD.OptionsUtility.GetGameSettingsInfoFromTable(f99_local4)
-			if not Engine[@"isgametypesettingdefault"](f99_local5.setting) then
+			if not Engine.IsGametypeSettingDefault(f99_local5.setting) then
 				return false
 			end
 		end
@@ -1813,21 +1813,21 @@ CoD.OptionsUtility.CustomGameOptions = {}
 CoD.OptionsUtility.CustomGameOptions.GametypeOptionCategories = {
 	{
 		ref = "winConditions",
-		groupName = @"hash_28834B78A436357A",
+		groupName = "menu/win_conditions_caps",
 		datasourceNameHeader = "WinConditionOptionsList",
 		datasourceFunc = CoD.OptionsUtility.PrepareWinConditionOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreWinConditionOptionsDefault,
 	},
 	{
 		ref = "advanced",
-		groupName = @"hash_728390D13CBB27BB",
+		groupName = "menu/advanced_caps",
 		datasourceNameHeader = "AdvancedGametypeOptionsList",
 		datasourceFunc = CoD.OptionsUtility.PerpareAdvancedGametypeOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreAdvancedGametypeOptionsDefault,
 	},
 	{
 		ref = "spawn",
-		groupName = @"hash_431964F4B1361B2A",
+		groupName = "menu/spawn_caps",
 		datasourceNameHeader = "SpawnOptionsList",
 		gameSettingListName = @"hash_1E2B8D2D3AB47434",
 	},
@@ -1854,19 +1854,19 @@ CoD.OptionsUtility.CustomGameOptions.SpecialistOptionCategories = {
 	},
 	{
 		ref = "health",
-		groupName = @"hash_FC1BF5051FD9C7F",
+		groupName = "menu/health_and_damage_caps",
 		datasourceNameHeader = "HealthOptionsList",
 		gameSettingListName = 0x157C260765CC9B,
 	},
 	{
 		ref = "cooldowns",
-		groupName = @"hash_3A1C82945949497D",
+		groupName = "menu/cooldowns_caps",
 		datasourceNameHeader = "CooldownsOptionList",
 		gameSettingListName = @"hash_7AF9C28E1BF6D7C5",
 	},
 	{
 		ref = "cac",
-		groupName = @"hash_3941C9E6F436E2A4",
+		groupName = "menu/create_a_class_caps",
 		datasourceNameHeader = "CACOptionsList",
 		gameSettingListName = @"hash_736329A7175CEDFA",
 	},
@@ -1874,7 +1874,7 @@ CoD.OptionsUtility.CustomGameOptions.SpecialistOptionCategories = {
 CoD.OptionsUtility.CustomGameOptions.RestrictionOptionCategories = {
 	{
 		ref = "cac",
-		groupName = @"hash_3941C9E6F436E2A4",
+		groupName = "menu/create_a_class_caps",
 		datasourceNameHeader = "cac",
 		datasourceFunc = CoD.OptionsUtility.PrepareCACRestrictionGameOptions,
 		isDefaultCondition = AlwaysTrue,
@@ -1882,7 +1882,7 @@ CoD.OptionsUtility.CustomGameOptions.RestrictionOptionCategories = {
 	},
 	{
 		ref = "scorestreak",
-		groupName = @"hash_2D17CC7D16033AEA",
+		groupName = "menu/scorestreaks_caps",
 		datasourceNameHeader = "scorestreak",
 		gameSettingListName = @"hash_7F49631BB8925FD9",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
@@ -1891,7 +1891,7 @@ CoD.OptionsUtility.CustomGameOptions.RestrictionOptionCategories = {
 	},
 	{
 		ref = "specialistitem",
-		groupName = @"hash_4DB4B25D82BDB7E5",
+		groupName = "heroes/hero_weapon_caps",
 		datasourceNameHeader = "specialistitem",
 		gameSettingListName = @"hash_696B18E6F5FC6C9",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
@@ -1902,7 +1902,7 @@ CoD.OptionsUtility.CustomGameOptions.RestrictionOptionCategories = {
 CoD.OptionsUtility.CustomGameOptions.WeaponRestrictionOptionCategories = {
 	{
 		ref = "assaultrifle",
-		groupName = @"hash_7FE1B0B2003A6CC1",
+		groupName = "mpui/weapon_assault_caps",
 		datasourceNameHeader = "AR",
 		gameSettingListName = @"hash_76FB5372632DFE7",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
@@ -1910,7 +1910,7 @@ CoD.OptionsUtility.CustomGameOptions.WeaponRestrictionOptionCategories = {
 	},
 	{
 		ref = "smg",
-		groupName = @"hash_35A1E94F52AC6DAB",
+		groupName = "mpui/weapon_smg_caps",
 		datasourceNameHeader = "SMG",
 		gameSettingListName = @"hash_34B3EFE87A75373",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
@@ -1926,7 +1926,7 @@ CoD.OptionsUtility.CustomGameOptions.WeaponRestrictionOptionCategories = {
 	},
 	{
 		ref = "lmg",
-		groupName = @"hash_6DB6F169E46CD4E4",
+		groupName = "mpui/weapon_lmg_caps",
 		datasourceNameHeader = "LMG",
 		gameSettingListName = @"hash_67BDF1F25CF7E7C2",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
@@ -1934,7 +1934,7 @@ CoD.OptionsUtility.CustomGameOptions.WeaponRestrictionOptionCategories = {
 	},
 	{
 		ref = "sniper",
-		groupName = @"hash_2EF865AD574F5FAD",
+		groupName = "mpui/weapon_sniper_caps",
 		datasourceNameHeader = "SR",
 		gameSettingListName = @"hash_5AB63B0156A0BFD3",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
@@ -1942,7 +1942,7 @@ CoD.OptionsUtility.CustomGameOptions.WeaponRestrictionOptionCategories = {
 	},
 	{
 		ref = "secondaries",
-		groupName = @"hash_5B00F60446232842",
+		groupName = "mpui/weapon_secondaries",
 		datasourceNameHeader = "second",
 		gameSettingListName = @"hash_7AF06F4782B7EAEC",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
@@ -1960,7 +1960,7 @@ CoD.OptionsUtility.CustomGameOptions.AttachmentRestrictionOptionCategories = {
 	},
 	{
 		ref = "scopes",
-		groupName = @"hash_2BB87386985BA15F",
+		groupName = "mpui/optics_caps",
 		datasourceNameHeader = "scope",
 		datasourceFunc = CoD.OptionsUtility.PrepareScopeRestrictionGameOptions,
 		isDefaultCondition = AlwaysTrue,
@@ -2007,7 +2007,7 @@ CoD.OptionsUtility.CustomGameOptions.EquipmentRestrictionOptionCategories = {
 CoD.OptionsUtility.CustomGameOptions.PerkRestrictionOptionCategories = {
 	{
 		ref = "Perk1",
-		groupName = @"mpui/perk1",
+		groupName = "mpui/perk1",
 		datasourceNameHeader = "perk1",
 		gameSettingListName = @"hash_5D35EC3B2B4D4FCD",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
@@ -2015,7 +2015,7 @@ CoD.OptionsUtility.CustomGameOptions.PerkRestrictionOptionCategories = {
 	},
 	{
 		ref = "Perk2",
-		groupName = @"mpui/perk2",
+		groupName = "mpui/perk2",
 		datasourceNameHeader = "perk2",
 		gameSettingListName = @"hash_11932698FEBB43EC",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
@@ -2023,7 +2023,7 @@ CoD.OptionsUtility.CustomGameOptions.PerkRestrictionOptionCategories = {
 	},
 	{
 		ref = "Perk3",
-		groupName = @"mpui/perk3",
+		groupName = "mpui/perk3",
 		datasourceNameHeader = "perk3",
 		gameSettingListName = @"hash_3DF45CFA77E25457",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
@@ -2033,7 +2033,7 @@ CoD.OptionsUtility.CustomGameOptions.PerkRestrictionOptionCategories = {
 CoD.OptionsUtility.CustomGameOptions.WildcardRestrictionOptionCategories = {
 	{
 		ref = "Primary",
-		groupName = @"hash_415A61D25BFBC0C5",
+		groupName = "mpui/itemgroup_bonuscard",
 		datasourceNameHeader = "wc_bonus",
 		gameSettingListName = @"hash_361DD84FB29836E3",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
@@ -2059,192 +2059,192 @@ CoD.OptionsUtility.CustomGameOptions.WildcardRestrictionOptionCategories = {
 CoD.OptionsUtility.CustomGameOptions.WeaponAttachmentRestrictionOptionCategories = {
 	{
 		ref = "clantag",
-		name = @"hash_87AD82563AAAC53",
+		name = "menu/clan_name",
 		datasourceNameHeader = "clantag",
 		gameSettingListName = @"hash_330934E4914D5786",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"cac_mods_clan_tag",
+		image = "cac_mods_clan_tag",
 	},
 	{
 		ref = "damage",
-		name = @"mpui/damage",
+		name = "mpui/damage",
 		datasourceNameHeader = "dmg",
 		gameSettingListName = @"hash_3853570F56380CA9",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_highcaliber",
+		image = "ui_icon_attachment_highcaliber",
 	},
 	{
 		ref = "damage2",
-		name = @"mpui/damage2",
+		name = "mpui/damage2",
 		datasourceNameHeader = "dmg_2",
 		gameSettingListName = @"hash_5F0092F951C5776B",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_highcaliber2",
+		image = "ui_icon_attachment_highcaliber2",
 	},
 	{
 		ref = "extbarrel",
-		name = @"mpui/extbarrel",
+		name = "mpui/extbarrel",
 		datasourceNameHeader = "extb",
 		gameSettingListName = @"hash_6985098E8CA52329",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_longbarrel",
+		image = "ui_icon_attachment_longbarrel",
 	},
 	{
 		ref = "extbarrel2",
-		name = @"mpui/extbarrel2",
+		name = "mpui/extbarrel2",
 		datasourceNameHeader = "extb_2",
 		gameSettingListName = @"hash_63896122CD22B2EB",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_longbarrel2",
+		image = "ui_icon_attachment_longbarrel2",
 	},
 	{
 		ref = "extclip",
-		name = @"mpui/extclip",
+		name = "mpui/extclip",
 		datasourceNameHeader = "extc",
 		gameSettingListName = @"hash_4673BA0BE6C8221F",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_extendedmags",
+		image = "ui_icon_attachment_extendedmags",
 	},
 	{
 		ref = "extclip2",
-		name = @"mpui/extclip2",
+		name = "mpui/extclip2",
 		datasourceNameHeader = "extc_2",
 		gameSettingListName = @"hash_7CA7D90A41C4A251",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_extendedmags2",
+		image = "ui_icon_attachment_extendedmags2",
 	},
 	{
 		ref = "extpellets",
-		name = @"hash_549D76181177939A",
+		name = "mpui/extrapellets",
 		datasourceNameHeader = "extp",
 		gameSettingListName = @"hash_68BAC5F74D6985F9",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_shotgun_semiauto_pellets",
+		image = "ui_icon_attachment_shotgun_semiauto_pellets",
 	},
 	{
 		ref = "fastreload",
-		name = @"mpui/fastreload",
+		name = "mpui/fastreload",
 		datasourceNameHeader = "fastr",
 		gameSettingListName = @"hash_1C4CC07C0BB00F43",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_fastmags",
+		image = "ui_icon_attachment_fastmags",
 	},
 	{
 		ref = "fastreload2",
-		name = @"mpui/fastreload2",
+		name = "mpui/fastreload2",
 		datasourceNameHeader = "fastr_2",
 		gameSettingListName = @"hash_752765527DA9A64D",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_fastmags2",
+		image = "ui_icon_attachment_fastmags2",
 	},
 	{
 		ref = "fmj",
-		name = @"mpui/fmj",
+		name = "mpui/fmj",
 		datasourceNameHeader = "fmj",
 		gameSettingListName = @"hash_4F106A80B35F16F7",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_fmj",
+		image = "ui_icon_attachment_fmj",
 	},
 	{
 		ref = "fmj2",
-		name = @"mpui/fmj2",
+		name = "mpui/fmj2",
 		datasourceNameHeader = "fmj_2",
 		gameSettingListName = @"hash_1CED9A4C7E99F619",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_fmj2",
+		image = "ui_icon_attachment_fmj2",
 	},
 	{
 		ref = "grip",
-		name = @"mpui/grip",
+		name = "mpui/grip",
 		datasourceNameHeader = "grip",
 		gameSettingListName = @"hash_74A28A895C252DD4",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_grip",
+		image = "ui_icon_attachment_grip",
 	},
 	{
 		ref = "grip2",
-		name = @"mpui/grip2",
+		name = "mpui/grip2",
 		datasourceNameHeader = "grip_2",
 		gameSettingListName = @"hash_14F88EA6BB5E695C",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_grip2",
+		image = "ui_icon_attachment_grip2",
 	},
 	{
 		ref = "hipgrip",
-		name = @"mpui/hipgrip",
+		name = "mpui/hipgrip",
 		datasourceNameHeader = "hipg",
 		gameSettingListName = @"hash_5F60C6E3A4BBA05F",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_grip",
+		image = "ui_icon_attachment_grip",
 	},
 	{
 		ref = "killcounter",
-		name = @"mpui/killcounter",
+		name = "mpui/killcounter",
 		datasourceNameHeader = "killc",
 		gameSettingListName = @"hash_6353E9985991D45A",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"cac_mods_kill_counter",
+		image = "cac_mods_kill_counter",
 	},
 	{
 		ref = "mixclip",
-		name = @"mpui/mixclip",
+		name = "mpui/mixclip",
 		datasourceNameHeader = "mixc",
 		gameSettingListName = @"hash_2652994B4B63E58A",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_advancedmags",
+		image = "ui_icon_attachment_advancedmags",
 	},
 	{
 		ref = "quickdraw",
-		name = @"mpui/quickdraw",
+		name = "mpui/quickdraw",
 		datasourceNameHeader = "quickd",
 		gameSettingListName = @"hash_1B1EE51F35879D2B",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_quickdraw",
+		image = "ui_icon_attachment_quickdraw",
 	},
 	{
 		ref = "quickdraw2",
-		name = @"mpui/quickdraw2",
+		name = "mpui/quickdraw2",
 		datasourceNameHeader = "quickd_2",
 		gameSettingListName = @"hash_363D932124346125",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_quickdraw2",
+		image = "ui_icon_attachment_quickdraw2",
 	},
 	{
 		ref = "rf",
-		name = @"mpui/rf",
+		name = "mpui/rf",
 		datasourceNameHeader = "rf",
 		gameSettingListName = @"hash_28F26A8657EE4A50",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_rapidfire",
+		image = "ui_icon_attachment_rapidfire",
 	},
 	{
 		ref = "speedreloader",
-		name = @"hash_7A4289CDE4DF7D84",
+		name = "mpui/speedreloader",
 		datasourceNameHeader = "speedr",
 		gameSettingListName = @"hash_564EDD76C83F0A7B",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_speedloader",
+		image = "ui_icon_attachment_speedloader",
 	},
 	{
 		ref = "stabilizer",
@@ -2253,166 +2253,166 @@ CoD.OptionsUtility.CustomGameOptions.WeaponAttachmentRestrictionOptionCategories
 		gameSettingListName = @"hash_732EFFD14F3041B5",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_stablizer",
+		image = "ui_icon_attachment_stablizer",
 	},
 	{
 		ref = "stabilizer2",
-		name = @"hash_2C454EB3FEC22798",
+		name = "mpui/holdbreath",
 		datasourceNameHeader = "stabi_2",
 		gameSettingListName = @"hash_532B47D0292D5C2F",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_stablizer",
+		image = "ui_icon_attachment_stablizer",
 	},
 	{
 		ref = "stalker",
-		name = @"mpui/stalker",
+		name = "mpui/stalker",
 		datasourceNameHeader = "stalk",
 		gameSettingListName = @"hash_2CC1175D26B7BD0E",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_stock",
+		image = "ui_icon_attachment_stock",
 	},
 	{
 		ref = "stalker2",
-		name = @"mpui/stalker2",
+		name = "mpui/stalker2",
 		datasourceNameHeader = "stalk_2",
 		gameSettingListName = @"hash_7BCBDF381C292696",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_stock2",
+		image = "ui_icon_attachment_stock2",
 	},
 	{
 		ref = "steadyaim",
-		name = @"mpui/steadyaim",
+		name = "mpui/steadyaim",
 		datasourceNameHeader = "stead",
 		gameSettingListName = @"hash_7A64984669450221",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_laser",
+		image = "ui_icon_attachment_laser",
 	},
 	{
 		ref = "steadyaim2",
-		name = @"mpui/steadyaim2",
+		name = "mpui/steadyaim2",
 		datasourceNameHeader = "stead_2",
 		gameSettingListName = @"hash_4D8830ABBBD692D3",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_laser2",
+		image = "ui_icon_attachment_laser2",
 	},
 	{
 		ref = "supply",
-		name = @"mpui/supply",
+		name = "mpui/supply",
 		datasourceNameHeader = "supply",
 		gameSettingListName = @"hash_2D879E820CC6A11B",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_bandolier",
+		image = "ui_icon_attachment_bandolier",
 	},
 	{
 		ref = "suppressed",
-		name = @"mpui/suppressed",
+		name = "mpui/suppressed",
 		datasourceNameHeader = "suppress",
 		gameSettingListName = @"hash_4EC41F9038E2A0DA",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_supressor",
+		image = "ui_icon_attachment_supressor",
 	},
 }
 CoD.OptionsUtility.CustomGameOptions.WeaponScopeRestrictionOptionCategories = {
 	{
 		ref = "acog",
-		name = @"mpui/acog",
+		name = "mpui/acog",
 		datasourceNameHeader = "acog",
 		gameSettingListName = @"hash_46A1896E5289E6E6",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_recon",
+		image = "ui_icon_attachment_recon",
 	},
 	{
 		ref = "dualop",
-		name = @"mpui/dualoptic",
+		name = "mpui/dualoptic",
 		datasourceNameHeader = "dualop",
 		gameSettingListName = @"hash_3B9D2BC62F846E9D",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_dualoptic",
+		image = "ui_icon_attachment_dualoptic",
 	},
 	{
 		ref = "elo",
-		name = @"mpui/elo",
+		name = "mpui/elo",
 		datasourceNameHeader = "elo",
 		gameSettingListName = @"hash_673D46D3E61C81E0",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_float_dot",
+		image = "ui_icon_attachment_float_dot",
 	},
 	{
 		ref = "fastlock",
-		name = 0xDD44E49656068F,
+		name = "mpui/fastlockon",
 		datasourceNameHeader = "fastlock",
 		gameSettingListName = @"hash_1DE319E8BAE738A0",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_laser",
+		image = "ui_icon_attachment_laser",
 	},
 	{
 		ref = "holo",
-		name = @"mpui/holo",
+		name = "mpui/holo",
 		datasourceNameHeader = "holo",
 		gameSettingListName = 0x37960375278EF0,
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_holo",
+		image = "ui_icon_attachment_holo",
 	},
 	{
 		ref = "ir",
-		name = @"mpui/ir",
+		name = "mpui/ir",
 		datasourceNameHeader = "ir",
 		gameSettingListName = @"hash_1FDAE74C8857A22F",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_thermal",
+		image = "ui_icon_attachment_thermal",
 	},
 	{
 		ref = "is",
-		name = @"mpui/is",
+		name = "mpui/is",
 		datasourceNameHeader = "is",
 		gameSettingListName = @"hash_4370B20C0081D744",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_iron_sights",
+		image = "ui_icon_attachment_iron_sights",
 	},
 	{
 		ref = "mms",
-		name = @"mpui/mms",
+		name = "mpui/mms",
 		datasourceNameHeader = "mms",
 		gameSettingListName = @"hash_784D0BA58FC2AFF5",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_mms",
+		image = "ui_icon_attachment_mms",
 	},
 	{
 		ref = "pscope",
-		name = @"mpui/pistolscope",
+		name = "mpui/pistolscope",
 		datasourceNameHeader = "pscope",
 		gameSettingListName = @"hash_7D70F9460A59270F",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_pistolscope",
+		image = "ui_icon_attachment_pistolscope",
 	},
 	{
 		ref = "reflect",
-		name = @"mpui/reflect",
+		name = "mpui/reflect",
 		datasourceNameHeader = "reflect",
 		gameSettingListName = @"hash_5872CAA86A2CBB62",
 		datasourceFunc = CoD.OptionsUtility.PrepareRestrictionGameOptions,
 		isDefaultCondition = CoD.OptionsUtility.AreRestrictionOpionsDefault,
-		image = @"ui_icon_attachment_reflex",
+		image = "ui_icon_attachment_reflex",
 	},
 }
 CoD.OptionsUtility.SetCurrentCACCategoryTab = function(f101_arg0)
-	local f101_local0 = Engine[@"getglobalmodel"]()
+	local f101_local0 = Engine.GetGlobalModel()
 	f101_local0 = f101_local0.GametypeSettings.CACRestrictionTabIndex
 	local f101_local1 = CoD.isPC and f101_arg0.CategoryTabs.categoryTabsListPC or f101_arg0.CategoryTabs.categoryTabsList
 	if f101_local0 and f101_local1 then
@@ -2420,7 +2420,7 @@ CoD.OptionsUtility.SetCurrentCACCategoryTab = function(f101_arg0)
 	end
 end
 CoD.OptionsUtility.SetCurrentActiveWeaponAttachmentCategory = function(f102_arg0)
-	local f102_local0 = Engine[@"getglobalmodel"]()
+	local f102_local0 = Engine.GetGlobalModel()
 	f102_local0 = f102_local0.GametypeSettings.ActiveAttachmentCategoryIndex
 	local f102_local1 = CoD.isPC and f102_arg0.OptionCategoryGrid or f102_arg0.OptionCategoryList
 	local f102_local2 = f102_arg0.GameSettingsBackground.MenuFrame.CommonHeader.subtitle.StageTitle
@@ -2435,7 +2435,7 @@ CoD.OptionsUtility.SetCurrentActiveWeaponAttachmentCategory = function(f102_arg0
 	end
 end
 CoD.OptionsUtility.SetCurrentActiveWeaponScopeCategory = function(f103_arg0)
-	local f103_local0 = Engine[@"getglobalmodel"]()
+	local f103_local0 = Engine.GetGlobalModel()
 	f103_local0 = f103_local0.GametypeSettings.ActiveScopeCategoryIndex
 	local f103_local1 = CoD.isPC and f103_arg0.OptionCategoryGrid or f103_arg0.OptionCategoryList
 	local f103_local2 = f103_arg0.GameSettingsBackground.MenuFrame.CommonHeader.subtitle.StageTitle
@@ -2516,37 +2516,37 @@ CoD.OptionsUtility.SetupCategoryList = function(f107_arg0, f107_arg1, f107_arg2,
 	if f107_local0 then
 		for f107_local4, f107_local5 in ipairs(f107_local0) do
 			table.insert(f107_arg0, {
-				ref = f107_local5[@"name"],
-				groupName = f107_local5[@"hash_548D88758C193892"],
-				datasourceNameHeader = f107_local5[@"name"],
-				gameSettingListName = Engine[@"converttoxhash"](f107_local5[@"hash_1AC203D32950D429"]),
+				ref = f107_local5.name,
+				groupName = f107_local5.gamesettingcategoryname,
+				datasourceNameHeader = f107_local5.name,
+				gameSettingListName = Engine[@"converttoxhash"](f107_local5.gamesettinglist),
 			})
 		end
 	end
 end
 CoD.OptionsUtility.PrepareCustomGameOptionCategoriesZMGeneral = function(f108_arg0)
 	CoD.OptionsUtility.CustomGameOptions.ZMGeneralOptionCategories = {}
-	CoD.OptionsUtility.SetupCategoryList(CoD.OptionsUtility.CustomGameOptions.ZMGeneralOptionCategories, 0x46A5A0343DC92A)
+	CoD.OptionsUtility.SetupCategoryList(CoD.OptionsUtility.CustomGameOptions.ZMGeneralOptionCategories, "gsocl_zm_general")
 	return CoD.OptionsUtility.PrepareCustomGameOptionCategories(f108_arg0, CoD.OptionsUtility.CustomGameOptions.ZMGeneralOptionCategories, "ZMGeneralOptionCategories_")
 end
 CoD.OptionsUtility.PrepareCustomGameOptionCategoriesZMSystems = function(f109_arg0)
 	CoD.OptionsUtility.CustomGameOptions.ZMSystemsOptionCategories = {}
-	CoD.OptionsUtility.SetupCategoryList(CoD.OptionsUtility.CustomGameOptions.ZMSystemsOptionCategories, @"hash_2E88CD8CB0504108")
+	CoD.OptionsUtility.SetupCategoryList(CoD.OptionsUtility.CustomGameOptions.ZMSystemsOptionCategories, "gsocl_zm_systems")
 	return CoD.OptionsUtility.PrepareCustomGameOptionCategories(f109_arg0, CoD.OptionsUtility.CustomGameOptions.ZMSystemsOptionCategories, "ZMSystemsOptionCategories_")
 end
 CoD.OptionsUtility.PrepareCustomGameOptionCategoriesZMWeapons = function(f110_arg0)
 	CoD.OptionsUtility.CustomGameOptions.ZMWeaponsOptionCategories = {}
-	CoD.OptionsUtility.SetupCategoryList(CoD.OptionsUtility.CustomGameOptions.ZMWeaponsOptionCategories, @"hash_548AE780261A4DC3")
+	CoD.OptionsUtility.SetupCategoryList(CoD.OptionsUtility.CustomGameOptions.ZMWeaponsOptionCategories, "gsocl_zm_weapons")
 	return CoD.OptionsUtility.PrepareCustomGameOptionCategories(f110_arg0, CoD.OptionsUtility.CustomGameOptions.ZMWeaponsOptionCategories, "ZMWeaponsOptionCategories_")
 end
 CoD.OptionsUtility.PrepareCustomGameOptionCategoriesZMEnemies = function(f111_arg0)
 	CoD.OptionsUtility.CustomGameOptions.ZMEnemiesOptionCategories = {}
-	CoD.OptionsUtility.SetupCategoryList(CoD.OptionsUtility.CustomGameOptions.ZMEnemiesOptionCategories, 0x97BE4943B698B6)
+	CoD.OptionsUtility.SetupCategoryList(CoD.OptionsUtility.CustomGameOptions.ZMEnemiesOptionCategories, "gsocl_zm_enemies")
 	return CoD.OptionsUtility.PrepareCustomGameOptionCategories(f111_arg0, CoD.OptionsUtility.CustomGameOptions.ZMEnemiesOptionCategories, "ZMEnemiesOptionCategories_")
 end
 CoD.OptionsUtility.PrepareCustomGameOptionCategoriesZMPlayer = function(f112_arg0)
 	CoD.OptionsUtility.CustomGameOptions.ZMPlayerOptionCategories = {}
-	CoD.OptionsUtility.SetupCategoryList(CoD.OptionsUtility.CustomGameOptions.ZMPlayerOptionCategories, @"hash_4EBDF9662AC3257B")
+	CoD.OptionsUtility.SetupCategoryList(CoD.OptionsUtility.CustomGameOptions.ZMPlayerOptionCategories, "gsocl_zm_player")
 	return CoD.OptionsUtility.PrepareCustomGameOptionCategories(f112_arg0, CoD.OptionsUtility.CustomGameOptions.ZMPlayerOptionCategories, "ZMPlayerOptionCategories_")
 end
 CoD.OptionsUtility.PrepareCustomGameOptionCategoriesGametype = function(f113_arg0)
@@ -2607,11 +2607,11 @@ DataSources.ZMEnemiesOptionCategories = DataSourceHelpers.ListSetup("ZMEnemiesOp
 DataSources.ZMPlayerOptionCategories = DataSourceHelpers.ListSetup("ZMPlayerOptionCategories", CoD.OptionsUtility.PrepareCustomGameOptionCategoriesZMPlayer, nil, nil, CoD.OptionsUtility.CustomGameOptionsSettingsUpdate)
 DataSources.GlobalLobbyOptionList = DataSourceHelpers.ListSetup("GlobalLobbyOptionList", CoD.OptionsUtility.PrepareGlobalLobbyOptionList, true)
 CoD.OptionsUtility.AreSpecialistOptionsValid = function(f125_arg0)
-	local f125_local0 = Engine[@"getgametypesettings"]()
-	local f125_local1 = CoD.PlayerRoleUtility.GetHeroList(Engine[@"currentsessionmode"]())
+	local f125_local0 = Engine.GetGametypeSettings()
+	local f125_local1 = CoD.PlayerRoleUtility.GetHeroList(Engine.CurrentSessionMode())
 	if f125_local1 then
 		for f125_local5, f125_local6 in ipairs(f125_local1) do
-			if f125_local0[@"maxuniquerolesperteam"][f125_local6.bodyIndex]:get() > 0 then
+			if f125_local0.maxuniquerolesperteam[f125_local6.bodyIndex]:get() > 0 then
 				return true
 			end
 		end
@@ -2644,8 +2644,8 @@ CoD.OptionsUtility.IsCustomGameSettingDefault = function(f127_arg0, f127_arg1)
 						f127_local4 = CoD.OptionsUtility.GetGameTypeSettingFromPath(f127_local3, true)
 						f127_local5 = CoD.OptionsUtility.GetGameTypeSettingFromPath(f127_local3, false)
 					else
-						f127_local4 = Engine[@"getgametypesetting"](f127_local3, true)
-						f127_local5 = Engine[@"getgametypesetting"](f127_local3)
+						f127_local4 = Engine.GetGametypeSetting(f127_local3, true)
+						f127_local5 = Engine.GetGametypeSetting(f127_local3)
 					end
 					return f127_local5 == f127_local4
 				else
@@ -2801,7 +2801,7 @@ CoD.OptionsUtility.OnBotSettingsChange = function(f137_arg0, f137_arg1, f137_arg
 	if f137_local2 == f137_local1 then
 		return
 	else
-		Engine[@"setdvar"](f137_local0, f137_local2)
+		Engine.SetDvar(f137_local0, f137_local2)
 	end
 end
 DataSources.BotSettings = DataSourceHelpers.ListSetup(
@@ -2810,22 +2810,22 @@ DataSources.BotSettings = DataSourceHelpers.ListSetup(
 		local f138_local0 = {}
 		table.insert(
 			f138_local0,
-			CoD.OptionsUtility.CreateDvarSettings(f138_arg0, 0xA95F72AAF581A9, @"menu/bot_difficulty", "BotOptions_Difficulty", "bot_difficulty", {
+			CoD.OptionsUtility.CreateDvarSettings(f138_arg0, "menu/basictraining_difficulty_caps", @"menu/bot_difficulty", "BotOptions_Difficulty", "bot_difficulty", {
 				{
-					option = Engine[@"hash_4F9F1239CFD921FE"](@"hash_2C59B321D25B5BDC"),
+					option = Engine[@"hash_4F9F1239CFD921FE"]("menu/basictraining_easy_caps"),
 					value = 0,
 				},
 				{
-					option = Engine[@"hash_4F9F1239CFD921FE"](@"hash_248B9B4B38EF1C6B"),
+					option = Engine[@"hash_4F9F1239CFD921FE"]("menu/basictraining_normal_caps"),
 					value = 1,
 					default = true,
 				},
 				{
-					option = Engine[@"hash_4F9F1239CFD921FE"](@"hash_7849A68439C5A3AD"),
+					option = Engine[@"hash_4F9F1239CFD921FE"]("menu/basictraining_hard_caps"),
 					value = 2,
 				},
 				{
-					option = Engine[@"hash_4F9F1239CFD921FE"](@"hash_28CB70A94994D5BD"),
+					option = Engine[@"hash_4F9F1239CFD921FE"]("menu/basictraining_fu_caps"),
 					value = 3,
 				},
 			}, nil, CoD.OptionsUtility.OnBotSettingsChange)
@@ -2835,7 +2835,7 @@ DataSources.BotSettings = DataSourceHelpers.ListSetup(
 	nil,
 	nil,
 	function(f139_arg0, f139_arg1, f139_arg2)
-		local f139_local0 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "GametypeSettings.Update")
+		local f139_local0 = Engine.CreateModel(Engine.GetGlobalModel(), "GametypeSettings.Update")
 		if f139_arg1.updateSubscription then
 			f139_arg1:removeSubscription(f139_arg1.updateSubscription)
 		end
@@ -2846,7 +2846,7 @@ DataSources.BotSettings = DataSourceHelpers.ListSetup(
 )
 CoD.OptionsUtility.ItemSelectedFunction = function(f141_arg0, f141_arg1, f141_arg2, f141_arg3, f141_arg4)
 	if f141_arg3 then
-		Engine[@"setprofilevar"](f141_arg2, f141_arg3, f141_arg1.value)
+		Engine.SetProfileVar(f141_arg2, f141_arg3, f141_arg1.value)
 	end
 end
 CoD.OptionsUtility.GetCustomProfileSelection = function(f142_arg0, f142_arg1, f142_arg2)
@@ -2861,7 +2861,7 @@ CoD.OptionsUtility.GetProfileSelection = function(f143_arg0, f143_arg1, f143_arg
 	if f143_arg3 and CoD.OptionsUtility.IsOptionAssetInList(f143_arg3, CoD.CodCasterUtility.CodCasterProfileSettings) then
 		f143_local0 = CoD.ShoutcasterProfileVarValue(f143_arg0, f143_arg2)
 	else
-		f143_local0 = tonumber(Engine[@"profilevalueasstring"](f143_arg0, f143_arg2))
+		f143_local0 = tonumber(Engine.ProfileValueAsString(f143_arg0, f143_arg2))
 	end
 	return CoD.OptionsUtility.GetCustomProfileSelection(f143_arg0, f143_arg1, f143_local0)
 end
@@ -2914,7 +2914,7 @@ CoD.OptionsUtility.CreateOptionDataSource = function(f144_arg0, f144_arg1, f144_
 	return f144_arg1
 end
 CoD.OptionsUtility.GetPlayerStat = function(f147_arg0, f147_arg1)
-	local f147_local0 = Engine[@"getplayerstats"](f147_arg0)
+	local f147_local0 = Engine.GetPlayerStats(f147_arg0)
 	for f147_local4, f147_local5 in ipairs(f147_arg1) do
 		if not f147_local0 then
 			break
@@ -2986,7 +2986,7 @@ CoD.OptionsUtility.CustomItemSelectedFunction = function(f152_arg0, f152_arg1, f
 		f152_local0 = f152_local1
 	end
 	if f152_arg3 then
-		Engine[@"setprofilevar"](f152_arg2, f152_arg3, f152_local0)
+		Engine.SetProfileVar(f152_arg2, f152_arg3, f152_local0)
 	end
 end
 CoD.OptionsUtility.CreateCustomOptionDataSource = function(f153_arg0, f153_arg1, f153_arg2, f153_arg3, f153_arg4, f153_arg5, f153_arg6)
@@ -3031,7 +3031,7 @@ CoD.OptionsUtility.RefetchRegulations = function(f155_arg0, f155_arg1)
 	f155_local0 = f155_local0.updateProgressState
 	local f155_local1 = f155_arg1
 	local f155_local2 = f155_arg1.subscribeToModel
-	local f155_local3 = Engine[@"getmodelforcontroller"](f155_arg0)
+	local f155_local3 = Engine.GetModelForController(f155_arg0)
 	f155_arg1._refetchRegulationsModelSubscription = f155_local2(f155_local1, f155_local3.Regulation.getRegulationTaskState, function(f156_arg0)
 		local f156_local0 = f156_arg0:get()
 		if f156_local0 ~= Enum[@"hash_3F55D2209BB384C0"][0xD2F6C862853BF9] and f156_local0 ~= Enum[@"hash_3F55D2209BB384C0"][@"hash_5A9FE23E308C562E"] then
@@ -3057,7 +3057,7 @@ CoD.OptionsUtility.RefetchUserRegulationPreferences = function(f157_arg0, f157_a
 	f157_local0 = f157_local0.updateProgressState
 	local f157_local1 = f157_arg1
 	local f157_local2 = f157_arg1.subscribeToModel
-	local f157_local3 = Engine[@"getmodelforcontroller"](f157_arg0)
+	local f157_local3 = Engine.GetModelForController(f157_arg0)
 	f157_arg1._refetchRegulationPreferencesModelSubscription = f157_local2(f157_local1, f157_local3.Regulation.getRegulationUserPreferenceTaskState, function(f158_arg0)
 		local f158_local0 = f158_arg0:get()
 		if f158_local0 ~= Enum[@"hash_1310FB3777A7C3CF"][@"hash_2F379E60B34CEDA0"] and f158_local0 ~= Enum[@"hash_1310FB3777A7C3CF"][@"hash_326E57777CD6130D"] then
@@ -3092,7 +3092,7 @@ CoD.OptionsUtility.SetNextUserRegulationPreference = function(f161_arg0, f161_ar
 	else
 		local f161_local1 = f161_arg1
 		local f161_local2 = f161_arg1.subscribeToModel
-		local f161_local3 = Engine[@"getmodelforcontroller"](f161_arg0)
+		local f161_local3 = Engine.GetModelForController(f161_arg0)
 		f161_arg1._setRegulationPreferenceModelSubscription = f161_local2(f161_local1, f161_local3.Regulation.updateRegulationTaskState, function(f162_arg0)
 			local f162_local0 = f162_arg0:get()
 			if f162_local0 ~= Enum[@"hash_65887EAAB38F9F8"][@"hash_464A086C0CC2A87"] and f162_local0 ~= Enum[@"hash_65887EAAB38F9F8"][@"hash_1B9DF5339B289B88"] then
@@ -3109,14 +3109,17 @@ CoD.OptionsUtility.SetNextUserRegulationPreference = function(f161_arg0, f161_ar
 			end
 		end, false)
 		f161_local2 = f161_arg1._regulationPreferencesToSet[f161_arg1._regultionIndex]
-		Engine[@"exec"](f161_arg0, "setUserRegulationPreference " .. f161_local2.regulationName .. " " .. f161_local2.versionNumber .. " " .. (f161_local2.currentValue and "1" or "0"))
+		Engine.exec(f161_arg0, "setUserRegulationPreference " .. f161_local2.regulationName .. " " .. f161_local2.versionNumber .. " " .. (f161_local2.currentValue and "1" or "0"))
 	end
 end
 CoD.OptionsUtility.ApplyPrivacySettingUpdates = function(f163_arg0, f163_arg1, f163_arg2)
-	local f163_local0 = Engine[@"getmodelforcontroller"](f163_arg1)
+	local f163_local0 = Engine.GetModelForController(f163_arg1)
 	f163_local0 = f163_local0.Regulation
 	local f163_local1 = DataSources.PrivacySettingManagementForm.getModel(f163_arg1)
 	f163_local1.updateProgressState:set(Enum[@"hash_65887EAAB38F9F8"][@"hash_1B9DF5339B289B88"])
+	if CoD.isPC then
+		f163_arg2 = OpenPopup(f163_arg2, "StartMenu_Options_PrivacySettings_PCUpdatePopup", f163_arg1)
+	end
 	f163_arg2._regultionIndex = 1
 	f163_arg2._regulationPreferencesToSet = {}
 	for f163_local6, f163_local7, f163_local8 in f163_arg0:forEachElement() do
@@ -3199,7 +3202,7 @@ DataSources.PrivacySettingOptionList = DataSourceHelpers.ListSetup("PrivacySetti
 			f165_local1[f165_local10.name] = f165_local10
 		end
 	end
-	f165_local6 = Engine[@"hash_2E00B2F29271C60B"](@"privacysettingslist")
+	f165_local6 = Engine[@"hash_2E00B2F29271C60B"]("privacysettingslist")
 	if f165_local6 and f165_local6.privacySettingsList then
 		for f165_local10, f165_local24 in ipairs(f165_local6.privacySettingsList) do
 			local f165_local25 = f165_local1[f165_local24[@"hash_3ADCC08CA48ED01A"]]
@@ -3215,7 +3218,7 @@ DataSources.PrivacySettingOptionList = DataSourceHelpers.ListSetup("PrivacySetti
 					f165_local15 = #f165_local24.versionList - 1
 					if not f165_local15 then
 					else
-						local f165_local16 = f165_local11[@"hash_5571C2BDC5EE62D7"] == 1
+						local f165_local16 = f165_local11.inverseoptin == 1
 						local f165_local17 = f165_local25.optin
 						if f165_local17 == nil then
 							f165_local17 = f165_local11[@"hash_516EC83454242826"] == 1
@@ -3237,8 +3240,8 @@ DataSources.PrivacySettingOptionList = DataSourceHelpers.ListSetup("PrivacySetti
 			end
 		end
 	end
-	f165_local4(@"hash_7F40F3FDF1A1A500", false, {
-		@"hash_38842B720D88FF53",
+	f165_local4("menu/privacy_settings_update_prompt", false, {
+		"menu/privacy_settings_update_desc",
 	}, nil, 1000, true)
 	table.sort(f165_local0, function(f169_arg0, f169_arg1)
 		return f169_arg0.properties.sortIndex < f169_arg1.properties.sortIndex
@@ -3247,10 +3250,10 @@ DataSources.PrivacySettingOptionList = DataSourceHelpers.ListSetup("PrivacySetti
 end)
 DataSources.PrivacySettingManagementForm = {
 	getModel = function(f170_arg0)
-		local f170_local0 = Engine[@"getmodelforcontroller"](f170_arg0)
+		local f170_local0 = Engine.GetModelForController(f170_arg0)
 		f170_local0 = f170_local0.PrivacySettingManagementForm
 		if f170_local0 == nil then
-			local f170_local1 = Engine[@"getmodelforcontroller"](f170_arg0)
+			local f170_local1 = Engine.GetModelForController(f170_arg0)
 			f170_local0 = f170_local1:create("PrivacySettingManagementForm")
 			f170_local1 = f170_local0:create("descText")
 			f170_local1:set(0x0)
@@ -3264,13 +3267,15 @@ DataSources.PrivacySettingManagementForm = {
 		return f170_local0
 	end,
 }
-CoD.OptionsUtility.OnPrivacySettingItemFocusChange = function(f171_arg0, f171_arg1)
+CoD.OptionsUtility.OnPrivacySettingItemFocusChange = function(f171_arg0, f171_arg1, f171_arg2)
 	local f171_local0 = DataSources.PrivacySettingManagementForm.getModel(f171_arg0)
 	if f171_arg1.descTextList then
+		f171_arg2._currentPrivacySettingDescTextList = f171_arg1.descTextList
 		f171_local0.descText:set(f171_arg1.descTextList[1] or 0x0)
 		f171_local0.currentPage:set(1)
 		f171_local0.lastPage:set(#f171_arg1.descTextList)
 	else
+		f171_arg2._currentPrivacySettingDescTextList = {}
 		f171_local0.descText:set(0x0)
 		f171_local0.currentPage:set(1)
 		f171_local0.lastPage:set(1)
@@ -3279,13 +3284,13 @@ end
 CoD.OptionsUtility.ChangePrivacySettingDescPage = function(f172_arg0, f172_arg1, f172_arg2)
 	local f172_local0 = DataSources.PrivacySettingManagementForm.getModel(f172_arg0)
 	local f172_local1 = f172_local0.currentPage:get() + (tonumber(f172_arg2) or 0)
-	if f172_arg1.descTextList and f172_arg1.descTextList[f172_local1] then
-		f172_local0.descText:set(f172_arg1.descTextList[f172_local1])
+	if f172_arg1._currentPrivacySettingDescTextList and f172_arg1._currentPrivacySettingDescTextList[f172_local1] then
+		f172_local0.descText:set(f172_arg1._currentPrivacySettingDescTextList[f172_local1])
 		f172_local0.currentPage:set(f172_local1)
 	end
 end
 CoD.OptionsUtility.ShowPrivacySettingsButton = function(f173_arg0)
-	if IsBooleanDvarSet(@"hash_6B5EBB309618BBC7") and not IsInGame() and Engine[@"sessionmodeismode"](Enum[@"enetworkmodes"][@"mode_network_online"]) then
+	if IsBooleanDvarSet(@"hash_6B5EBB309618BBC7") and not Engine.IsUserGuest(f173_arg0) and not IsInGame() and Engine.SessionModeIsMode(Enum[@"enetworkmodes"][@"mode_network_online"]) then
 		if #Engine[@"hash_6F1DC07D6D6FCCB1"](f173_arg0) > 0 then
 			return true
 		elseif #Engine[@"hash_71D4F3ACFC7A260"](f173_arg0) > 0 then
@@ -3312,13 +3317,13 @@ CoD.OptionsUtility.GametypeSettingsItemSelectedFunction = function(f175_arg0, f1
 	if f175_arg1.isRestriction then
 		f175_local1 = CoD.OptionsUtility.GetGameTypeSettingFromPath(f175_local0, false)
 	else
-		f175_local1 = Engine[@"getgametypesetting"](f175_local0, false)
+		f175_local1 = Engine.GetGametypeSetting(f175_local0, false)
 	end
 	CoD.OptionsUtility.UpdateInfoModels(f175_arg1)
 	if f175_arg1.value == f175_local1 then
 		return
 	elseif CoD.OptionsUtility.GameSettingValidateFunctions[f175_local0] and not CoD.OptionsUtility.GameSettingValidateFunctions[f175_local0](f175_arg1.value) then
-		local f175_local2 = Engine[@"getgametypesetting"](f175_arg1.value)
+		local f175_local2 = Engine.GetGametypeSetting(f175_arg1.value)
 		local f175_local3 = f175_arg1:getParent()
 		f175_local3 = f175_local3:getParent()
 		if f175_local3 and f175_local3.lastActiveWidget then
@@ -3330,10 +3335,10 @@ CoD.OptionsUtility.GametypeSettingsItemSelectedFunction = function(f175_arg0, f1
 	if f175_arg1.isRestriction then
 		CoD.OptionsUtility.SetGameTypeSettingFromPath(f175_local0, f175_arg1.value)
 	else
-		Engine[@"setgametypesetting"](f175_arg3, f175_arg1.value)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "GametypeSettings"), f175_arg3), f175_arg1.value)
+		Engine.SetGametypeSetting(f175_arg3, f175_arg1.value)
+		Engine.SetModelValue(Engine.CreateModel(Engine.CreateModel(Engine.GetGlobalModel(), "GametypeSettings"), f175_arg3), f175_arg1.value)
 	end
-	Engine[@"lobbyhostsessionsetdirty"](Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_host"]), Enum[@"sessiondirty"][@"session_dirty_ui"])
+	Engine[@"lobbyhostsessionsetdirty"](Engine[@"lobbygetcontrollinglobbysession"](Enum.LobbyModule[@"lobby_module_host"]), Enum.SessionDirty[@"session_dirty_ui"])
 end
 CoD.OptionsUtility.GetGameTypeSettingSplitPath = function(f176_arg0)
 	local f176_local0 = {}
@@ -3372,7 +3377,7 @@ CoD.OptionsUtility.CreateGametypeSettingsDataSource = function(f179_arg0, f179_a
 			if f179_arg5 then
 				f180_local0 = CoD.OptionsUtility.GetGameTypeSettingFromPath(f179_arg3, false)
 			else
-				f180_local0 = tonumber(Engine[@"getgametypesetting"](f179_arg3))
+				f180_local0 = tonumber(Engine.GetGametypeSetting(f179_arg3))
 			end
 			if f180_local0 == nil then
 				f180_local0 = 0
@@ -3401,7 +3406,7 @@ CoD.OptionsUtility.CreateGametypeSettingsDataSource = function(f179_arg0, f179_a
 							if f179_arg5 then
 								CoD.OptionsUtility.SetGameTypeSettingFromPath(f179_arg3, CoD.OptionsUtility.GetGameTypeSettingFromPath(f179_arg3, true))
 							else
-								Engine[@"setgametypesetting"](f179_arg3, Engine[@"getgametypesetting"](f179_arg3, true))
+								Engine.SetGametypeSetting(f179_arg3, Engine.GetGametypeSetting(f179_arg3, true))
 							end
 						end,
 					},
@@ -3415,7 +3420,7 @@ CoD.OptionsUtility.CreateGametypeSettingsDataSource = function(f179_arg0, f179_a
 		nil,
 		function(f182_arg0, f182_arg1, f182_arg2)
 			if f179_local0 then
-				local f182_local0 = Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "GametypeSettings"), "Reset")
+				local f182_local0 = Engine.CreateModel(Engine.CreateModel(Engine.GetGlobalModel(), "GametypeSettings"), "Reset")
 				if f182_arg1.resetSubscription then
 					f182_arg1:removeSubscription(f182_arg1.resetSubscription)
 				end
@@ -3431,13 +3436,13 @@ end
 CoD.OptionsUtility.CreateEnabledDisabledProfileVar = function(f184_arg0, f184_arg1, f184_arg2, f184_arg3, f184_arg4)
 	local f184_local0 = {
 		{
-			name = Engine[@"hash_4F9F1239CFD921FE"](@"menu/enabled"),
+			name = Engine[@"hash_4F9F1239CFD921FE"]("menu/enabled"),
 			value = 1,
 			title = f184_arg1,
 			desc = f184_arg2,
 		},
 		{
-			name = Engine[@"hash_4F9F1239CFD921FE"](@"menu/disabled"),
+			name = Engine[@"hash_4F9F1239CFD921FE"]("menu/disabled"),
 			value = 0,
 			title = f184_arg1,
 			desc = f184_arg2,
@@ -3462,13 +3467,13 @@ CoD.OptionsUtility.CreateEnabledDisabledOptions = function(f185_arg0, f185_arg1,
 			image = "blacktransparent",
 			optionsDatasource = CoD.OptionsUtility.CreateGametypeSettingsDataSource(f185_arg0, f185_arg4, {
 				{
-					name = Engine[@"hash_4F9F1239CFD921FE"](@"menu/enabled"),
+					name = Engine[@"hash_4F9F1239CFD921FE"]("menu/enabled"),
 					value = 1,
 					title = f185_arg1,
 					desc = f185_arg2,
 				},
 				{
-					name = Engine[@"hash_4F9F1239CFD921FE"](@"menu/disabled"),
+					name = Engine[@"hash_4F9F1239CFD921FE"]("menu/disabled"),
 					value = 0,
 					title = f185_arg1,
 					desc = f185_arg2,
@@ -3478,7 +3483,7 @@ CoD.OptionsUtility.CreateEnabledDisabledOptions = function(f185_arg0, f185_arg1,
 		},
 		properties = {
 			revert = function(f186_arg0)
-				Engine[@"setgametypesetting"](f185_arg3, Engine[@"getgametypesetting"](f185_arg3, true))
+				Engine.SetGametypeSetting(f185_arg3, Engine.GetGametypeSetting(f185_arg3, true))
 			end,
 		},
 	}
@@ -3495,7 +3500,7 @@ CoD.OptionsUtility.CreateRestrictionListOptions = function(f187_arg0, f187_arg1,
 			desc = f187_arg4.hintText[1],
 			optionsDatasource = CoD.OptionsUtility.CreateGametypeSettingsDataSource(f187_arg0, f187_arg5, {
 				{
-					name = Engine[@"hash_4F9F1239CFD921FE"](@"menu/enabled"),
+					name = Engine[@"hash_4F9F1239CFD921FE"]("menu/enabled"),
 					value = f187_local3,
 					title = f187_arg1,
 					desc = f187_arg2[1],
@@ -3504,7 +3509,7 @@ CoD.OptionsUtility.CreateRestrictionListOptions = function(f187_arg0, f187_arg1,
 					image = f187_arg4.image,
 				},
 				{
-					name = Engine[@"hash_4F9F1239CFD921FE"](@"menu/disabled"),
+					name = Engine[@"hash_4F9F1239CFD921FE"]("menu/disabled"),
 					value = f187_local4,
 					title = f187_arg1,
 					desc = f187_arg2[2],
@@ -3521,7 +3526,7 @@ CoD.OptionsUtility.CreateRestrictionListOptions = function(f187_arg0, f187_arg1,
 			isDefaultCondition = false,
 			isRestriction = true,
 			revert = function(f188_arg0)
-				Engine[@"setgametypesetting"](f187_local0, Engine[@"getgametypesetting"](f187_local0, true))
+				Engine.SetGametypeSetting(f187_local0, Engine.GetGametypeSetting(f187_local0, true))
 			end,
 		},
 	}
@@ -3529,8 +3534,8 @@ end
 CoD.OptionsUtility.CreateListOptions = function(f189_arg0, f189_arg1, f189_arg2, f189_arg3, f189_arg4, f189_arg5)
 	local f189_local0 = f189_arg4.setting or f189_arg3
 	local f189_local1 = {}
-	local f189_local2 = Engine[@"getdecimaldelimiter"]()
-	local f189_local3 = Engine[@"getgametypesetting"](f189_local0, true)
+	local f189_local2 = Engine.GetDecimalDelimiter()
+	local f189_local3 = Engine.GetGametypeSetting(f189_local0, true)
 	for f189_local10, f189_local11 in ipairs(f189_arg4.values) do
 		if not CoD.OptionsUtility.GameSettingValidateFunctions[f189_local0] or CoD.OptionsUtility.GameSettingValidateFunctions[f189_local0](f189_local11) then
 			local f189_local7 = f189_local11
@@ -3554,7 +3559,7 @@ CoD.OptionsUtility.CreateListOptions = function(f189_arg0, f189_arg1, f189_arg2,
 				end
 			end
 			f189_local1[#f189_local1 + 1] = {
-				name = Engine[@"localize"](f189_local8, f189_local7),
+				name = Engine.Localize(f189_local8, f189_local7),
 				value = f189_local11,
 				title = f189_arg1,
 				desc = f189_local9,
@@ -3575,7 +3580,7 @@ CoD.OptionsUtility.CreateListOptions = function(f189_arg0, f189_arg1, f189_arg2,
 		properties = {
 			isDefaultCondition = false,
 			revert = function(f190_arg0)
-				Engine[@"setgametypesetting"](f189_local0, Engine[@"getgametypesetting"](f189_local0, true))
+				Engine.SetGametypeSetting(f189_local0, Engine.GetGametypeSetting(f189_local0, true))
 			end,
 		},
 	}
@@ -3675,7 +3680,7 @@ CoD.OptionsUtility.CreateDvarSettings = function(f197_arg0, f197_arg1, f197_arg2
 		},
 		properties = {
 			revert = function(f198_arg0)
-				Engine[@"setdvar"](f197_arg4, f197_local1)
+				Engine.SetDvar(f197_arg4, f197_local1)
 			end,
 		},
 	}
@@ -3700,7 +3705,7 @@ CoD.OptionsUtility.CreateNamedSettings = function(f199_arg0, f199_arg1, f199_arg
 		},
 		properties = {
 			revert = function(f200_arg0)
-				Engine[@"setgametypesetting"](f199_arg4, Engine[@"getgametypesetting"](f199_arg4, true))
+				Engine.SetGametypeSetting(f199_arg4, Engine.GetGametypeSetting(f199_arg4, true))
 			end,
 		},
 	}
@@ -3710,10 +3715,10 @@ CoD.OptionsUtility.UpdateInfoModels = function(f201_arg0)
 		local f201_local0 = f201_arg0.title
 		local f201_local1 = f201_arg0.desc
 		local f201_local2 = f201_arg0.image
-		local f201_local3 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "GametypeSettings")
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f201_local3, "title"), f201_local0)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f201_local3, "description"), f201_local1)
-		Engine[@"setmodelvalue"](Engine[@"createmodel"](f201_local3, "image"), f201_local2)
+		local f201_local3 = Engine.CreateModel(Engine.GetGlobalModel(), "GametypeSettings")
+		Engine.SetModelValue(Engine.CreateModel(f201_local3, "title"), f201_local0)
+		Engine.SetModelValue(Engine.CreateModel(f201_local3, "description"), f201_local1)
+		Engine.SetModelValue(Engine.CreateModel(f201_local3, "image"), f201_local2)
 	end
 end
 CoD.OptionsUtility.GametypeSettingsSetItemRestrictionState = function(f202_arg0, f202_arg1, f202_arg2, f202_arg3, f202_arg4)
@@ -3731,7 +3736,7 @@ CoD.OptionsUtility.GametypeSettingsSetItemRestrictionState = function(f202_arg0,
 			controller = f202_arg2,
 			forceDispatch = true,
 		})
-		Engine[@"lobbyhostsessionsetdirty"](Engine[@"lobbygetcontrollinglobbysession"](Enum[@"lobbymodule"][@"lobby_module_host"]), Enum[@"sessiondirty"][@"session_dirty_ui"])
+		Engine[@"lobbyhostsessionsetdirty"](Engine[@"lobbygetcontrollinglobbysession"](Enum.LobbyModule[@"lobby_module_host"]), Enum.SessionDirty[@"session_dirty_ui"])
 	end
 end
 CoD.OptionsUtility.GametypeSettingsSetAttachmentRestrictionState = function(f203_arg0, f203_arg1, f203_arg2, f203_arg3, f203_arg4)
@@ -3762,7 +3767,7 @@ CoD.OptionsUtility.GametypeSettingsSetAttachmentRestrictionStateForGroup = funct
 			print("Setting Weapon Attachment Restriction: Attachment: " .. f204_local0 .. " Weapon: " .. f204_local8 .. " State: " .. f204_local2)
 		end
 	end
-	Engine[@"forcenotifymodelsubscriptions"](Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "GametypeSettings"), "updateWeaponList"))
+	Engine.ForceNotifyModelSubscriptions(Engine.CreateModel(Engine.CreateModel(Engine.GetGlobalModel(), "GametypeSettings"), "updateWeaponList"))
 	f204_local7 = f204_arg1:getParent()
 	if f204_local7 then
 		f204_local7 = f204_local7:getParent()
@@ -3785,7 +3790,7 @@ CoD.OptionsUtility.GametypeSettingsSetAttachmentRestrictionStateForWeapon = func
 	local f205_local2 = f205_arg1.value
 	CoD.OptionsUtility.UpdateInfoModels(f205_arg1)
 	print("Setting Weapon Attachment Restriction: Attachment: " .. f205_local0 .. " Weapon: " .. f205_local1 .. " State: " .. f205_local2)
-	Engine[@"forcenotifymodelsubscriptions"](Engine[@"createmodel"](Engine[@"createmodel"](Engine[@"getglobalmodel"](), "GametypeSettings"), "updateWeaponGroup"))
+	Engine.ForceNotifyModelSubscriptions(Engine.CreateModel(Engine.CreateModel(Engine.GetGlobalModel(), "GametypeSettings"), "updateWeaponGroup"))
 	local f205_local3 = f205_arg1:getParent()
 	f205_local3 = f205_local3:getParent()
 	f205_local3 = f205_local3:getParent()
@@ -3866,7 +3871,7 @@ CoD.OptionsUtility.SetGameSettingValidateFunction = function(f211_arg0, f211_arg
 	CoD.OptionsUtility.GameSettingValidateFunctions[f211_arg0] = f211_arg1
 end
 CoD.OptionsUtility.IsProfileIntValue = function(f212_arg0, f212_arg1, f212_arg2)
-	return Engine[@"getprofilevarint"](f212_arg0, f212_arg1) == f212_arg2
+	return Engine.GetProfileVarInt(f212_arg0, f212_arg1) == f212_arg2
 end
 CoD.OptionsUtility.GameOptionsPopupSettings = {}
 DataSources.SliderOptions = DataSourceHelpers.ListSetup("SliderOptions", function(f213_arg0)
@@ -3904,15 +3909,15 @@ CoD.OptionsUtility.SetFocusToGrid = function(f220_arg0)
 	end
 end
 CoD.OptionsUtility.IsButtonUseEquipment = function(f221_arg0, f221_arg1)
-	local f221_local0 = Engine[@"profileint"](f221_arg0, "gpad_buttonsConfig")
-	local f221_local1 = Engine[@"profileint"](f221_arg0, "flipped_control_config") == 1
-	if f221_arg1 == Enum[@"luibutton"][@"lui_key_lb"] then
+	local f221_local0 = Engine.ProfileInt(f221_arg0, "gpad_buttonsConfig")
+	local f221_local1 = Engine.ProfileInt(f221_arg0, "flipped_control_config") == 1
+	if f221_arg1 == Enum.LUIButton[@"lui_key_lb"] then
 		if not f221_local1 then
 			return f221_local0 == 2
 		else
 			return f221_local0 == 4
 		end
-	elseif f221_arg1 == Enum[@"luibutton"][@"lui_key_rb"] then
+	elseif f221_arg1 == Enum.LUIButton[@"lui_key_rb"] then
 		if not f221_local1 then
 			local f221_local2
 			if f221_local0 ~= 0 and f221_local0 ~= 1 and f221_local0 ~= 3 and f221_local0 ~= 6 and f221_local0 ~= 7 and f221_local0 ~= 8 then
@@ -3924,13 +3929,13 @@ CoD.OptionsUtility.IsButtonUseEquipment = function(f221_arg0, f221_arg1)
 		else
 			return f221_local0 == 5
 		end
-	elseif f221_arg1 == Enum[@"luibutton"][@"lui_key_ltrig"] then
+	elseif f221_arg1 == Enum.LUIButton[@"lui_key_ltrig"] then
 		if not f221_local1 then
 			return f221_local0 == 4
 		else
 			return f221_local0 == 2
 		end
-	elseif f221_arg1 == Enum[@"luibutton"][@"lui_key_rtrig"] then
+	elseif f221_arg1 == Enum.LUIButton[@"lui_key_rtrig"] then
 		if not f221_local1 then
 			return f221_local0 == 5
 		else
@@ -3947,9 +3952,9 @@ CoD.OptionsUtility.IsButtonUseEquipment = function(f221_arg0, f221_arg1)
 	end
 end
 CoD.OptionsUtility.IsButtonHeal = function(f222_arg0, f222_arg1)
-	local f222_local0 = Engine[@"profileint"](f222_arg0, "gpad_buttonsConfig")
-	local f222_local1 = Engine[@"profileint"](f222_arg0, "flipped_control_config") == 1
-	if f222_arg1 == Enum[@"luibutton"][@"lui_key_lb"] then
+	local f222_local0 = Engine.ProfileInt(f222_arg0, "gpad_buttonsConfig")
+	local f222_local1 = Engine.ProfileInt(f222_arg0, "flipped_control_config") == 1
+	if f222_arg1 == Enum.LUIButton[@"lui_key_lb"] then
 		if not f222_local1 then
 			local f222_local2
 			if f222_local0 ~= 0 and f222_local0 ~= 1 and f222_local0 ~= 3 and f222_local0 ~= 4 and f222_local0 ~= 8 then
@@ -3959,7 +3964,7 @@ CoD.OptionsUtility.IsButtonHeal = function(f222_arg0, f222_arg1)
 			end
 			return f222_local2
 		end
-	elseif f222_arg1 == Enum[@"luibutton"][@"lui_key_rb"] then
+	elseif f222_arg1 == Enum.LUIButton[@"lui_key_rb"] then
 		if not f222_local1 then
 			local f222_local2
 			if f222_local0 ~= 2 and f222_local0 ~= 5 then
@@ -3969,7 +3974,7 @@ CoD.OptionsUtility.IsButtonHeal = function(f222_arg0, f222_arg1)
 			end
 			return f222_local2
 		end
-	elseif f222_arg1 == Enum[@"luibutton"][@"lui_key_ltrig"] then
+	elseif f222_arg1 == Enum.LUIButton[@"lui_key_ltrig"] then
 		if f222_local1 then
 			local f222_local2
 			if f222_local0 ~= 0 and f222_local0 ~= 1 and f222_local0 ~= 3 and f222_local0 ~= 4 and f222_local0 ~= 8 then
@@ -3979,7 +3984,7 @@ CoD.OptionsUtility.IsButtonHeal = function(f222_arg0, f222_arg1)
 			end
 			return f222_local2
 		end
-	elseif f222_arg1 == Enum[@"luibutton"][@"lui_key_rtrig"] then
+	elseif f222_arg1 == Enum.LUIButton[@"lui_key_rtrig"] then
 		if f222_local1 then
 			local f222_local2
 			if f222_local0 ~= 2 and f222_local0 ~= 5 then
@@ -3989,7 +3994,7 @@ CoD.OptionsUtility.IsButtonHeal = function(f222_arg0, f222_arg1)
 			end
 			return f222_local2
 		end
-	elseif f222_arg1 == Enum[@"luibutton"][@"lui_key_xba_pscross"] then
+	elseif f222_arg1 == Enum.LUIButton[@"lui_key_xba_pscross"] then
 		local f222_local2
 		if f222_local0 ~= 6 and f222_local0 ~= 7 then
 			f222_local2 = false
@@ -4003,27 +4008,27 @@ end
 CoD.OptionsUtility.ZMGameSettingsMainCategories = {
 	{
 		id = "zm_general",
-		displayName = @"hash_1EDC7C8B1FD8453F",
+		displayName = "menu/general_caps",
 		optionsList = "gsocl_zm_general",
 	},
 	{
 		id = "zm_systems",
-		displayName = @"hash_5D1BDFA5F7482249",
+		displayName = "menu/systems_caps",
 		optionsList = "gsocl_zm_systems",
 	},
 	{
 		id = "zm_weapons",
-		displayName = @"hash_65F975C212125124",
+		displayName = "menu/weapons_caps",
 		optionsList = "gsocl_zm_weapons",
 	},
 	{
 		id = "zm_enemies",
-		displayName = @"hash_1A4C0D40C8DBA6EB",
+		displayName = "menu/enemies_caps",
 		optionsList = "gsocl_zm_enemies",
 	},
 	{
 		id = "zm_player",
-		displayName = @"hash_389CF1420A8398FE",
+		displayName = "menu/player_caps",
 		optionsList = "gsocl_zm_player",
 	},
 }
@@ -4038,16 +4043,16 @@ DataSources.ZMGameSettingsCategories = ListHelper_SetupDataSource("ZMGameSetting
 			for f225_local4, f225_local5 in ipairs(f225_local0) do
 				table.insert(f224_local0, {
 					models = {
-						displayText = Engine[@"hash_4F9F1239CFD921FE"](f225_local5[@"hash_548D88758C193892"]),
+						displayText = Engine[@"hash_4F9F1239CFD921FE"](f225_local5.gamesettingcategoryname),
 					},
 					properties = {
-						title = f225_local5[@"hash_548D88758C193892"],
+						title = f225_local5.gamesettingcategoryname,
 						desc = f225_local5[@"hash_48907AA9F3779B44"],
 						action = CoD.OptionsUtility.ZombieOpenGameSettingsSubMenu,
 						actionParam = {
 							"GameSettings_GenericSubmenu",
 						},
-						settingsListName = f225_local5[@"hash_1AC203D32950D429"],
+						settingsListName = f225_local5.gamesettinglist,
 					},
 				})
 			end
@@ -4070,7 +4075,7 @@ DataSources.ZMGameSettingsSubmenuSettings = ListHelper_SetupDataSource("ZMGameSe
 	if f226_local2 then
 		for f226_local6, f226_local7 in ipairs(Engine[@"hash_7A7E3CD65E63086F"](Engine[@"converttoxhash"](f226_local2))) do
 			local f226_local8 = CoD.OptionsUtility.GetGameSettingsInfoFromTable(f226_local7)
-			table.insert(f226_local0, CoD.OptionsUtility.CreateListOptions(f226_arg0, f226_local8.name, f226_local8.hintText, f226_local8.setting, f226_local8, "gsol_zm_general_" .. f226_local7[@"name"]))
+			table.insert(f226_local0, CoD.OptionsUtility.CreateListOptions(f226_arg0, f226_local8.name, f226_local8.hintText, f226_local8.setting, f226_local8, "gsol_zm_general_" .. f226_local7.name))
 		end
 	end
 	return f226_local0
@@ -4093,7 +4098,7 @@ CoD.OptionsUtility.ZombieGameSettingsTabChanged = function(f230_arg0, f230_arg1,
 	f230_arg0.Options.Buttions:updateDataSource()
 end
 CoD.OptionsUtility.GetGameSettingsModel = function(f231_arg0)
-	local f231_local0 = Engine[@"getglobalmodel"]()
+	local f231_local0 = Engine.GetGlobalModel()
 	local f231_local1 = f231_local0:create("GametypeSettings")
 	if f231_arg0 then
 		return f231_local1:create(f231_arg0)
@@ -4114,21 +4119,21 @@ end
 CoD.OptionsUtility.UpdateImagePreviewModels = function(f234_arg0)
 	local f234_local0 = f234_arg0.showSmallPreview or false
 	local f234_local1 = f234_arg0.showLargePreview or false
-	local f234_local2 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "GametypeSettings")
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](f234_local2, "showSmallPreview"), f234_local0)
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](f234_local2, "showLargePreview"), f234_local1)
+	local f234_local2 = Engine.CreateModel(Engine.GetGlobalModel(), "GametypeSettings")
+	Engine.SetModelValue(Engine.CreateModel(f234_local2, "showSmallPreview"), f234_local0)
+	Engine.SetModelValue(Engine.CreateModel(f234_local2, "showLargePreview"), f234_local1)
 end
 CoD.OptionsUtility.ClearInfoModels = function()
 	local f235_local0 = 0x0
 	local f235_local1 = 0x0
-	local f235_local2 = @"blacktransparent"
-	local f235_local3 = Engine[@"createmodel"](Engine[@"getglobalmodel"](), "GametypeSettings")
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](f235_local3, "title"), f235_local0)
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](f235_local3, "description"), f235_local1)
-	Engine[@"setmodelvalue"](Engine[@"createmodel"](f235_local3, "image"), f235_local2)
+	local f235_local2 = "blacktransparent"
+	local f235_local3 = Engine.CreateModel(Engine.GetGlobalModel(), "GametypeSettings")
+	Engine.SetModelValue(Engine.CreateModel(f235_local3, "title"), f235_local0)
+	Engine.SetModelValue(Engine.CreateModel(f235_local3, "description"), f235_local1)
+	Engine.SetModelValue(Engine.CreateModel(f235_local3, "image"), f235_local2)
 end
 CoD.OptionsUtility.SetFocusToRestrictionOptionsList = function(f236_arg0, f236_arg1)
-	local f236_local0 = Engine[@"getglobalmodel"]()
+	local f236_local0 = Engine.GetGlobalModel()
 	f236_local0 = f236_local0.ActiveRestrictionCategoryIndex
 	local f236_local1 = f236_arg0.CACCategoryIndex
 	local f236_local2 = CoD.isPC and f236_arg0.SlidersPC or f236_arg0.Sliders
@@ -4141,7 +4146,7 @@ CoD.OptionsUtility.SetFocusToRestrictionOptionsList = function(f236_arg0, f236_a
 	end
 end
 CoD.OptionsUtility.SetFocusToAttachmentOptionsList = function(f237_arg0, f237_arg1)
-	local f237_local0 = Engine[@"getglobalmodel"]()
+	local f237_local0 = Engine.GetGlobalModel()
 	f237_local0 = f237_local0.CurrentAttachmentCategoryIndex
 	local f237_local1 = f237_arg0.operatorModCategoryIndex
 	local f237_local2 = CoD.isPC and f237_arg0.SlidersPC or f237_arg0.Sliders

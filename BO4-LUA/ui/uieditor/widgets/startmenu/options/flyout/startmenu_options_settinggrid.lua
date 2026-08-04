@@ -1,4 +1,4 @@
-require("x64:447b94b1bc3bd97")
+require("ui/uieditor/widgets/startmenu/options/flyout/startmenu_options_settinggriditem")
 CoD.StartMenu_Options_SettingGrid = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Options_SettingGrid.__defaultWidth = 600
 CoD.StartMenu_Options_SettingGrid.__defaultHeight = 410
@@ -13,7 +13,7 @@ CoD.StartMenu_Options_SettingGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	local SettingTitle = LUI.UIText.new(0, 0, 0, 200, 0, 0, 0, 21)
 	SettingTitle:setAlpha(0.25)
 	SettingTitle:setTTF("ttmussels_regular")
-	SettingTitle:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	SettingTitle:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	SettingTitle:linkToElementModel(self, "name", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -33,7 +33,7 @@ CoD.StartMenu_Options_SettingGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	})
 	local f1_local3 = SettingsGrid
 	local f1_local4 = SettingsGrid.subscribeToModel
-	local f1_local5 = Engine[@"getmodelforcontroller"](f1_arg1)
+	local f1_local5 = Engine.GetModelForController(f1_arg1)
 	f1_local4(f1_local3, f1_local5.PlayerSettingsUpdate, function(f4_arg0)
 		f1_arg0:updateElementState(SettingsGrid, {
 			name = "model_validation",
@@ -58,7 +58,7 @@ CoD.StartMenu_Options_SettingGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 	SettingsGrid:setHorizontalCount(2)
 	SettingsGrid:setVerticalCount(6)
 	SettingsGrid:setSpacing(3)
-	SettingsGrid:setAlignment(Enum[@"luialignment"][@"lui_alignment_right"])
+	SettingsGrid:setAlignment(Enum.LUIAlignment[@"lui_alignment_right"])
 	SettingsGrid:linkToElementModel(self, "optionsDatasource", true, function(model)
 		local f6_local0 = model:get()
 		if f6_local0 ~= nil then
@@ -72,15 +72,15 @@ CoD.StartMenu_Options_SettingGrid.new = function(f1_arg0, f1_arg1, f1_arg2, f1_a
 		elseif element.super.gainFocus then
 			f7_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f7_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(SettingsGrid, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], nil, function(element, menu, controller, model)
-		ProcessListAction(self, element, controller, menu)
+	f1_arg0:AddButtonCallbackFunction(SettingsGrid, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], nil, function(f8_arg0, f8_arg1, f8_arg2, f8_arg3)
+		ProcessListAction(self, f8_arg0, f8_arg2, f8_arg1)
 		PlaySoundAlias("uin_paint_decal_nav")
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"menu/select", nil, nil)
+	end, function(f9_arg0, f9_arg1, f9_arg2)
+		CoD.Menu.SetButtonLabel(f9_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], @"menu/select", nil, nil)
 		return true
 	end, false)
 	LUI.OverrideFunction_CallOriginalFirst(SettingsGrid, "setHeight", function(element, controller)

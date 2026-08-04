@@ -1,7 +1,7 @@
-require("x64:3625a0d08a5c80d")
-require("x64:a2c4a319ea5353")
-require("x64:a1e2d7b19f5deb0")
-require("x64:59857b73a9a23ab")
+require("ui/uieditor/widgets/lobby/common/fe_focusbarcontainer")
+require("ui/uieditor/widgets/lobby/common/fe_titlenumbrdr")
+require("ui/uieditor/widgets/startmenu/startmenu_frame_nobg")
+require("ui/uieditor/widgets/startmenu/startmenu_options_sliderbar_bar")
 local f0_local0 = function(f1_arg0, f1_arg1)
 	local f1_local0, f1_local1, f1_local2, f1_local3 = f1_arg0.FilledPartBg:getRect()
 	local f1_local4 = f1_local2 - f1_local0
@@ -69,7 +69,7 @@ local PostLoadFunc = function(self, controller, menu)
 	end)
 	self.m_timer = LUI.UITimer.new(1, "update_bar", false)
 	self.m_heartbeat = LUI.UITimer.new(100, "check_pulse", false)
-	CoD.Menu.AddButtonCallbackFunction(menu, self, controller, Enum[@"luibutton"][@"lui_key_left"], "ui_navleft", function(element, menu, controller, f10_arg3)
+	CoD.Menu.AddButtonCallbackFunction(menu, self, controller, Enum.LUIButton[@"lui_key_left"], "ui_navleft", function(f10_arg0, f10_arg1, f10_arg2, f10_arg3)
 		if not self.m_disableNavigation then
 			if not self.m_beat then
 				self:updateSlideDirection(-1)
@@ -84,7 +84,7 @@ local PostLoadFunc = function(self, controller, menu)
 			end
 		end
 	end)
-	CoD.Menu.AddButtonCallbackFunction(menu, self, controller, Enum[@"luibutton"][@"lui_key_right"], "ui_navright", function(element, menu, controller, f11_arg3)
+	CoD.Menu.AddButtonCallbackFunction(menu, self, controller, Enum.LUIButton[@"lui_key_right"], "ui_navright", function(f11_arg0, f11_arg1, f11_arg2, f11_arg3)
 		if not self.m_disableNavigation then
 			if not self.m_beat then
 				self:updateSlideDirection(1)
@@ -122,14 +122,14 @@ CoD.StartMenu_Options_SliderBar.new = function(f12_arg0, f12_arg1, f12_arg2, f12
 	local label = LUI.UIText.new(0, 0, 12, 352, 0, 0, 8, 46)
 	label:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	label:setTTF("default")
-	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	label:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	label:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	label:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	self:addElement(label)
 	self.label = label
 	local numeric = LUI.UIText.new(0, 0, 679, 741, 0, 0, 8, 46)
 	numeric:setText(Engine[@"hash_4F9F1239CFD921FE"](@"menu/new"))
 	numeric:setTTF("default")
-	numeric:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
+	numeric:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
 	self:addElement(numeric)
 	self.numeric = numeric
 	local FilledPartBg = LUI.UIImage.new(0, 0, 382, 652, 0.5, 0.5, -1, 1)

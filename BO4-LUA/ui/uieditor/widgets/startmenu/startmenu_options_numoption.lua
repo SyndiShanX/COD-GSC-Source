@@ -1,7 +1,7 @@
-require("x64:2675595fa323085")
-require("x64:2b3a36f75bb6e0e")
-require("x64:a9255c570c68aa8")
-require("x64:a1e2d7b19f5deb0")
+require("ui/uieditor/widgets/emptyfocusable")
+require("ui/uieditor/widgets/startmenu/options/flyout/startmenu_options_settingsliderarrow")
+require("ui/uieditor/widgets/startmenu/options/startmenuoptionsmainframe")
+require("ui/uieditor/widgets/startmenu/startmenu_frame_nobg")
 CoD.StartMenu_Options_NumOption = InheritFrom(LUI.UIElement)
 CoD.StartMenu_Options_NumOption.__defaultWidth = 750
 CoD.StartMenu_Options_NumOption.__defaultHeight = 60
@@ -29,8 +29,8 @@ CoD.StartMenu_Options_NumOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local ActionText = LUI.UIText.new(0, 0, 12, 352, 0.5, 0.5, -10.5, 10.5)
 	ActionText:setRGB(0.78, 0.74, 0.67)
 	ActionText:setTTF("ttmussels_regular")
-	ActionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_left"])
-	ActionText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	ActionText:setAlignment(Enum.LUIAlignment[@"lui_alignment_left"])
+	ActionText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	ActionText:linkToElementModel(self, "displayText", true, function(model)
 		local f2_local0 = model:get()
 		if f2_local0 ~= nil then
@@ -51,14 +51,14 @@ CoD.StartMenu_Options_NumOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		elseif element.super.gainFocus then
 			f3_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f3_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(leftArrow, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
-		SendButtonPressToMenuEx(menu, controller, Enum[@"luibutton"][@"lui_key_left"])
+	f1_arg0:AddButtonCallbackFunction(leftArrow, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "MOUSE1", function(f4_arg0, f4_arg1, f4_arg2, f4_arg3)
+		SendButtonPressToMenuEx(f4_arg1, f4_arg2, Enum.LUIButton[@"lui_key_left"])
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "MOUSE1")
+	end, function(f5_arg0, f5_arg1, f5_arg2)
+		CoD.Menu.SetButtonLabel(f5_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "MOUSE1")
 		return false
 	end, false)
 	self:addElement(leftArrow)
@@ -72,14 +72,14 @@ CoD.StartMenu_Options_NumOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 		elseif element.super.gainFocus then
 			f6_local0 = element.super:gainFocus(event)
 		end
-		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"])
+		CoD.Menu.UpdateButtonShownState(element, f1_arg0, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"])
 		return f6_local0
 	end)
-	f1_arg0:AddButtonCallbackFunction(rightArrow, f1_arg1, Enum[@"luibutton"][@"lui_key_xba_pscross"], "MOUSE1", function(element, menu, controller, model)
-		SendButtonPressToMenuEx(menu, controller, Enum[@"luibutton"][@"lui_key_right"])
+	f1_arg0:AddButtonCallbackFunction(rightArrow, f1_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], "MOUSE1", function(f7_arg0, f7_arg1, f7_arg2, f7_arg3)
+		SendButtonPressToMenuEx(f7_arg1, f7_arg2, Enum.LUIButton[@"lui_key_right"])
 		return true
-	end, function(element, menu, controller)
-		CoD.Menu.SetButtonLabel(menu, Enum[@"luibutton"][@"lui_key_xba_pscross"], @"hash_0", nil, "MOUSE1")
+	end, function(f8_arg0, f8_arg1, f8_arg2)
+		CoD.Menu.SetButtonLabel(f8_arg1, Enum.LUIButton[@"lui_key_xba_pscross"], 0x0, nil, "MOUSE1")
 		return false
 	end, false)
 	self:addElement(rightArrow)
@@ -87,8 +87,8 @@ CoD.StartMenu_Options_NumOption.new = function(f1_arg0, f1_arg1, f1_arg2, f1_arg
 	local currentText = LUI.UIText.new(0, 0, 370, 625, 0, 0, 19.5, 40.5)
 	currentText:setRGB(0.78, 0.74, 0.67)
 	currentText:setTTF("ttmussels_regular")
-	currentText:setAlignment(Enum[@"luialignment"][@"lui_alignment_center"])
-	currentText:setAlignment(Enum[@"luialignment"][@"lui_alignment_top"])
+	currentText:setAlignment(Enum.LUIAlignment[@"lui_alignment_center"])
+	currentText:setAlignment(Enum.LUIAlignment[@"lui_alignment_top"])
 	currentText:linkToElementModel(self, "currentNum", true, function(model)
 		local f9_local0 = model:get()
 		if f9_local0 ~= nil then

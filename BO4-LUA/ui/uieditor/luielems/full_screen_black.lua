@@ -4,32 +4,32 @@ local f0_local0 = function(f1_arg0)
 	end
 end
 local PostLoadFunc = function(f2_arg0)
-	local f2_local0 = f2_arg0:getModel(Engine[@"getprimarycontroller"](), "red")
-	local f2_local1 = f2_arg0:getModel(Engine[@"getprimarycontroller"](), "green")
-	local f2_local2 = f2_arg0:getModel(Engine[@"getprimarycontroller"](), "blue")
+	local f2_local0 = f2_arg0:getModel(Engine.GetPrimaryController(), "red")
+	local f2_local1 = f2_arg0:getModel(Engine.GetPrimaryController(), "green")
+	local f2_local2 = f2_arg0:getModel(Engine.GetPrimaryController(), "blue")
 	if f2_local0 then
 		f2_arg0:subscribeToModel(f2_local0, function(model)
-			local f3_local0 = Engine[@"getmodelvalue"](model)
-			if f3_local0 then
-				f2_arg0.red = f3_local0
+			local modelValue = Engine.GetModelValue(model)
+			if modelValue then
+				f2_arg0.red = modelValue
 				f0_local0(f2_arg0)
 			end
 		end)
 	end
 	if f2_local1 then
 		f2_arg0:subscribeToModel(f2_local1, function(model)
-			local f4_local0 = Engine[@"getmodelvalue"](model)
-			if f4_local0 then
-				f2_arg0.green = f4_local0
+			local modelValue = Engine.GetModelValue(model)
+			if modelValue then
+				f2_arg0.green = modelValue
 				f0_local0(f2_arg0)
 			end
 		end)
 	end
 	if f2_local2 then
 		f2_arg0:subscribeToModel(f2_local2, function(model)
-			local f5_local0 = Engine[@"getmodelvalue"](model)
-			if f5_local0 then
-				f2_arg0.blue = f5_local0
+			local modelValue = Engine.GetModelValue(model)
+			if modelValue then
+				f2_arg0.blue = modelValue
 				f0_local0(f2_arg0)
 			end
 		end)
