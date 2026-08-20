@@ -755,10 +755,10 @@ sndfunctions() {
 
   level.var_45b0f2f3 = &function_45b0f2f3;
   level flag::wait_till("power_on2");
-  playSoundAtPosition(#"hash_6d80127a29f6f4e0", (0, 0, 0));
+  playSoundAtPosition(#"zmb_power_on_1", (0, 0, 0));
   util::clientnotify("amb_power_on");
   level flag::wait_till("power_on1");
-  playSoundAtPosition(#"hash_6d80157a29f6f9f9", (0, 0, 0));
+  playSoundAtPosition(#"zmb_power_on_2", (0, 0, 0));
   util::clientnotify("amb_power_on_2");
 }
 
@@ -766,7 +766,7 @@ function_217196d7() {
   level waittill(#"end_game");
 
   if(!isDefined(level.var_b1312d49) || level.var_b1312d49 == "players_lose") {
-    playSoundAtPosition(#"hash_670bdb4d23be75bf", (0, 0, 0));
+    playSoundAtPosition(#"vox_m_quest_game_over_ward_0", (0, 0, 0));
   }
 }
 

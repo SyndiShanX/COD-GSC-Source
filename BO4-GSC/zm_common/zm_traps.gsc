@@ -617,7 +617,7 @@ player_elec_damage(trigger) {
 
     self shellshock(str_elec_shellshock, shocktime);
     self playRumbleOnEntity("damage_heavy");
-    self playSound(#"hash_5af2a9d11f007b9");
+    self playSound(#"zmb_player_electrocuted_oneshot");
 
     if(zm_utility::is_standard()) {
       self dodamage(50, self.origin, undefined, trigger);

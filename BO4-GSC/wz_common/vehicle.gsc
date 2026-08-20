@@ -1359,7 +1359,7 @@ function_1592c29e(player, eventstruct) {
   }
 
   if(validateorigin(eventstruct.vehicle.origin)) {
-    playSoundAtPosition(#"hash_7a0942da55ff521d", eventstruct.vehicle.origin);
+    playSoundAtPosition(#"fly_suv_door_window", eventstruct.vehicle.origin);
   }
 
   eventstruct.vehicle vehicle::toggle_control_bone_group(1, 1);
@@ -1382,7 +1382,7 @@ function_67e1a636(player, eventstruct) {
 
   if(!isDefined(occupants) || occupants.size == 0) {
     if(validateorigin(eventstruct.vehicle.origin)) {
-      playSoundAtPosition(#"hash_7a0942da55ff521d", eventstruct.vehicle.origin);
+      playSoundAtPosition(#"fly_suv_door_window", eventstruct.vehicle.origin);
     }
 
     eventstruct.vehicle vehicle::toggle_control_bone_group(1, 0);

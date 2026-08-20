@@ -814,7 +814,7 @@ destroy_gravity_trap_spikes_in_ground() {
   self.var_6d772cb = undefined;
 
   if(isDefined(mdl_spike_source)) {
-    mdl_spike_source playSound(#"hash_5d0917b44402f070");
+    mdl_spike_source playSound(#"wpn_dg4_plant_end");
     mdl_spike_source clientfield::set("gravity_trap_location", 0);
     mdl_spike_source delete();
   }

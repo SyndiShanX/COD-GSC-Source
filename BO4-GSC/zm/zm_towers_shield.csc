@@ -347,7 +347,7 @@ function_103be84b(localclientnum, str_piece, s_start) {
   }
 
   if(isDefined(self)) {
-    self playSound(localclientnum, #"hash_230737b2535a3374");
+    self playSound(localclientnum, #"zmb_crafting_pickup_generic");
   }
 
   mdl_piece delete();

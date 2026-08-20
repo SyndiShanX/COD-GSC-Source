@@ -378,7 +378,7 @@ function_a8024c77() {
 }
 
 function_c2237c03() {
-  self setModel(#"hash_233df8109c680010");
+  self setModel(#"p8_fxanim_zm_esc_shockbox_on_mod");
   self thread scene::play(#"p8_fxanim_zm_esc_shockbox_bundle", "Activated", self);
 }
 

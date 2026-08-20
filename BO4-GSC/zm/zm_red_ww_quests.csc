@@ -275,7 +275,7 @@ function_b50a9153(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_d152d13c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    if(self.model === #"hash_31a411dafa5678e2") {
+    if(self.model === #"p8_zm_red_rune_circle_hemera") {
       self.var_97486d35 = playFX(localclientnum, level._effect[#"hash_1ba95bf40a5e2422"], self.origin);
     } else if(self.model === #"p8_zm_red_rune_circle_ouranos") {
       self.var_97486d35 = playFX(localclientnum, level._effect[#"hash_4e4c7f6982d8ed31"], self.origin);

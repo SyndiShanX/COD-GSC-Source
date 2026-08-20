@@ -374,7 +374,7 @@ magicbox_unitrigger_think() {
 }
 
 play_crazi_sound() {
-  self playlocalsound(#"hash_7d764f09cd3dea92");
+  self playlocalsound(#"zmb_magicbox_leave_2d");
 }
 
 function_2db086bf() {
@@ -2181,12 +2181,12 @@ magic_box_do_weapon_rise(var_f91a62a4) {
   self setzbarrierpiecestate(4, "opening", var_f91a62a4);
 
   if(var_f91a62a4 != 1) {
-    self playSound(#"hash_59a4ec7cb3de7d13");
+    self playSound(#"zmb_box_weapon_spin_short");
     self waittill(#"randomization_done");
     self setzbarrierpiecestate(3, "open");
     self setzbarrierpiecestate(4, "open");
   } else {
-    self playSound(#"hash_1530a7e6184b9b2e");
+    self playSound(#"zmb_box_weapon_spin");
 
     while(self getzbarrierpiecestate(3) != "open") {
       wait 0.5;

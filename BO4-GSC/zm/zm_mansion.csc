@@ -498,7 +498,7 @@ function_be42dd6a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   self stoprenderoverridebundle(#"hash_4192ceb1c828492f");
-  self playSound(localclientnum, #"hash_5de064f33e9e49b8");
+  self playSound(localclientnum, #"zmb_sentinel_artifact_explode");
 }
 
 function_9e061782(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

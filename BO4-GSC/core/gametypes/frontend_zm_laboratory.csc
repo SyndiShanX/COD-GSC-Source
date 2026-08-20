@@ -76,7 +76,7 @@ function_250232f4(localclientnum) {
   scene::add_scene_func(#"p8_fxanim_core_frontend_zm_lab_bottle_fluids_bundle", &function_24222bb4, "skip_to_idle");
 
   level.var_49f26c00.a_str_bottles = array(#"p8_zm_elixir_aftertaste_ui", #"p8_zm_elixir_alchemical_antithesis_ui", #"p8_zm_elixir_always_done_swiftly_ui", #"p8_zm_elixir_anti_entrapment_ui", #"p8_zm_elixir_anywhere_but_here_ui", #"p8_zm_elixir_arsenal_accelerator_ui", #"p8_zm_elixir_blood_debt_ui", #"hash_1a7c490a566d667", #"p8_zm_elixir_burned_out_ui", #"p8_zm_elixir_cache_back_ui", #"hash_58b3b4e50c5ad8b5", #"p8_zm_elixir_ctrl_z_ui", #"hash_5e08e862c962617a", #"p8_zm_elixir_dead_of_nuclear_winter_ui", #"p8_zm_elixir_equip_mint_ui", #"p8_zm_elixir_extra_credit_ui", #"p8_zm_elixir_free_fire_ui", #"p8_zm_elixir_head_scan_ui", #"p8_zm_elixir_immolation_liquidation_ui", #"p8_zm_elixir_in_plain_sight_ui", #"p8_zm_elixir_join_the_party_ui", #"p8_zm_elixir_kill_joy_ui", #"p8_zm_elixir_licensed_contractor_ui", #"p8_zm_elixir_newtonian_negation_ui", #"p8_zm_elixir_now_you_see_me_ui", #"p8_zm_elixir_nowhere_but_there_ui", #"p8_zm_elixir_phantom_reload_ui", #"p8_zm_elixir_point_drops_ui", #"p8_zm_elixir_pop_shocks_ui", #"p8_zm_elixir_power_keg_ui", #"hash_7b8c2e9a197a1cbb", #"p8_zm_elixir_shields_up_ui", #"p8_zm_elixir_stock_option_ui", #"p8_zm_elixir_sword_flay_ui", #"p8_zm_elixir_temporal_gift_ui", #"p8_zm_elixir_undead_man_walking_ui", #"p8_zm_elixir_wall_power_ui", #"p8_zm_elixir_wall_to_wall_savings_ui", #"p8_zm_elixir_whos_keeping_score_ui");
-  level.var_49f26c00.a_str_talismans = array(#"p8_zm_talisman_box_guarantee_box_only", #"p8_zm_talisman_box_guarantee_lmg", #"hash_199da03ac6e12953", #"p8_zm_talisman_coagulant", #"p8_zm_talisman_extra_claymore", #"p8_zm_talisman_extra_frag", #"p8_zm_talisman_extra_mini_turret", #"p8_zm_talisman_extra_molotov", #"p8_zm_talisman_extra_semtex", #"p8_zm_talisman_hero_weapon_lvl3", #"p8_zm_talisman_impatient", #"p8_zm_talisman_pap_cost", #"p8_zm_talisman_perk_mod_single", #"hash_27dae06ec588c817", #"hash_27dae16ec588c9ca", #"hash_27dae26ec588cb7d", #"hash_27dadb6ec588bf98", #"p8_zm_talisman_perk_vapor_permanent_1", #"p8_zm_talisman_perk_vapor_permanent_2", #"p8_zm_talisman_perk_vapor_permanent_3", #"p8_zm_talisman_perk_vapor_permanent_4", #"hash_22e20f33489f2582", #"hash_22e20e33489f23cf", #"hash_22e20d33489f221c", #"hash_22e20c33489f2069", #"p8_zm_talisman_shield_durability_legendary", #"p8_zm_talisman_shield_durability_rare", #"p8_zm_talisman_shield_price", #"p8_zm_talisman_spec_weapon_duration", #"p8_zm_talisman_spec_weapon_lvl2", #"hash_14e3ae5974c15925", #"p8_zm_talisman_start_weapon_ar", #"p8_zm_talisman_start_weapon_lmg", #"p8_zm_talisman_start_weapon_monkey", #"p8_zm_talisman_start_weapon_smg");
+  level.var_49f26c00.a_str_talismans = array(#"p8_zm_talisman_box_guarantee_box_only", #"p8_zm_talisman_box_guarantee_lmg", #"hash_199da03ac6e12953", #"p8_zm_talisman_coagulant", #"p8_zm_talisman_extra_claymore", #"p8_zm_talisman_extra_frag", #"p8_zm_talisman_extra_mini_turret", #"p8_zm_talisman_extra_molotov", #"p8_zm_talisman_extra_semtex", #"p8_zm_talisman_hero_weapon_lvl3", #"p8_zm_talisman_impatient", #"p8_zm_talisman_pap_cost", #"p8_zm_talisman_perk_mod_single", #"p8_zm_talisman_perk_vapor_cost_1", #"p8_zm_talisman_perk_vapor_cost_2", #"p8_zm_talisman_perk_vapor_cost_3", #"p8_zm_talisman_perk_vapor_cost_4", #"p8_zm_talisman_perk_vapor_permanent_1", #"p8_zm_talisman_perk_vapor_permanent_2", #"p8_zm_talisman_perk_vapor_permanent_3", #"p8_zm_talisman_perk_vapor_permanent_4", #"p8_zm_talisman_perk_vapor_start_1", #"p8_zm_talisman_perk_vapor_start_2", #"p8_zm_talisman_perk_vapor_start_3", #"p8_zm_talisman_perk_vapor_start_4", #"p8_zm_talisman_shield_durability_legendary", #"p8_zm_talisman_shield_durability_rare", #"p8_zm_talisman_shield_price", #"p8_zm_talisman_spec_weapon_duration", #"p8_zm_talisman_spec_weapon_lvl2", #"p8_zm_talisman_spec_weapon_xp", #"p8_zm_talisman_start_weapon_ar", #"p8_zm_talisman_start_weapon_lmg", #"p8_zm_talisman_start_weapon_monkey", #"p8_zm_talisman_start_weapon_smg");
 
   scene::add_scene_func(#"p8_fxanim_core_frontend_zm_lab_talisman_press_bundle", &function_f8d486f8, "init");
   scene::add_scene_func(#"p8_fxanim_core_frontend_zm_lab_talisman_press_bundle", &function_d4f9b895, "press_tease");
@@ -962,7 +962,7 @@ function_6198ffc(n_tube_index = 1, b_reverse = 0) {
       break;
     case 2:
       if(b_reverse) {
-        level.var_49f26c00.var_c6761aa2 setModel(#"hash_1d6b60d588392994");
+        level.var_49f26c00.var_c6761aa2 setModel(#"p8_zm_lab_tube_02_script_reverse");
       } else {
         level.var_49f26c00.var_c6761aa2 setModel(#"p8_zm_lab_tube_02_script");
       }
@@ -970,7 +970,7 @@ function_6198ffc(n_tube_index = 1, b_reverse = 0) {
       break;
     case 3:
       if(b_reverse) {
-        level.var_49f26c00.var_dcbe4732 setModel(#"hash_7d73f1bee7a7209");
+        level.var_49f26c00.var_dcbe4732 setModel(#"p8_zm_lab_tube_03_script_reverse");
       } else {
         level.var_49f26c00.var_dcbe4732 setModel(#"p8_zm_lab_tube_03_script");
       }
@@ -978,7 +978,7 @@ function_6198ffc(n_tube_index = 1, b_reverse = 0) {
       break;
     case 4:
       if(b_reverse) {
-        level.var_49f26c00.var_f48ac46 setModel(#"hash_17fe752ca47c080a");
+        level.var_49f26c00.var_f48ac46 setModel(#"p8_zm_lab_tube_04_script_reverse");
       } else {
         level.var_49f26c00.var_f48ac46 setModel(#"p8_zm_lab_tube_04_script");
       }
@@ -1014,24 +1014,24 @@ function_49dde74(b_stream = 1, var_dd5c339d = 0) {
     forcestreamxmodel(#"p8_zm_lab_tube_01_liquid_01");
     forcestreamxmodel(#"p8_zm_lab_tube_01_liquid_01_reverse");
     forcestreamxmodel(#"p8_zm_lab_tube_02_script");
-    forcestreamxmodel(#"hash_1d6b60d588392994");
+    forcestreamxmodel(#"p8_zm_lab_tube_02_script_reverse");
     forcestreamxmodel(#"p8_zm_lab_tube_03_script");
-    forcestreamxmodel(#"hash_7d73f1bee7a7209");
+    forcestreamxmodel(#"p8_zm_lab_tube_03_script_reverse");
     forcestreamxmodel(#"p8_zm_lab_tube_04_script");
-    forcestreamxmodel(#"hash_17fe752ca47c080a");
-    forcestreamxmodel(#"hash_4d36008189f01e3e");
-    forcestreamxmodel(#"hash_4cbeb6f9fd0e1277");
+    forcestreamxmodel(#"p8_zm_lab_tube_04_script_reverse");
+    forcestreamxmodel(#"p8_zm_lab_tube_05_script");
+    forcestreamxmodel(#"p8_zm_lab_tube_05_script_reverse");
     forcestreamxmodel(#"p8_zm_lab_talisman_press_mould_base");
     forcestreamxmodel(#"p8_zm_lab_talisman_press_mould_lid_common");
     forcestreamxmodel(#"p8_zm_lab_talisman_press_mould_lid_rare");
     forcestreamxmodel(#"p8_zm_lab_talisman_press_mould_lid_legendary");
     forcestreamxmodel(#"p8_zm_lab_talisman_press_mould_lid_epic");
-    forcestreamxmodel(#"hash_21facc9d2f29d94c");
+    forcestreamxmodel(#"p8_zm_lab_talisman_press_mould_lid_ultra");
     forcestreamxmodel(#"p8_zm_lab_talisman_press_mould_lid_common_empty");
     forcestreamxmodel(#"p8_zm_lab_talisman_press_mould_lid_rare_empty");
     forcestreamxmodel(#"p8_zm_lab_talisman_press_mould_lid_legendary_empty");
     forcestreamxmodel(#"p8_zm_lab_talisman_press_mould_lid_epic_empty");
-    forcestreamxmodel(#"hash_150da5db728463e2");
+    forcestreamxmodel(#"p8_zm_lab_talisman_press_mould_lid_ultra_empty");
 
     if(var_dd5c339d) {}
 
@@ -1046,24 +1046,24 @@ function_49dde74(b_stream = 1, var_dd5c339d = 0) {
   stopforcestreamingxmodel(#"p8_zm_lab_tube_01_liquid_01");
   stopforcestreamingxmodel(#"p8_zm_lab_tube_01_liquid_01_reverse");
   stopforcestreamingxmodel(#"p8_zm_lab_tube_02_script");
-  stopforcestreamingxmodel(#"hash_1d6b60d588392994");
+  stopforcestreamingxmodel(#"p8_zm_lab_tube_02_script_reverse");
   stopforcestreamingxmodel(#"p8_zm_lab_tube_03_script");
-  stopforcestreamingxmodel(#"hash_7d73f1bee7a7209");
+  stopforcestreamingxmodel(#"p8_zm_lab_tube_03_script_reverse");
   stopforcestreamingxmodel(#"p8_zm_lab_tube_04_script");
-  stopforcestreamingxmodel(#"hash_17fe752ca47c080a");
-  stopforcestreamingxmodel(#"hash_4d36008189f01e3e");
-  stopforcestreamingxmodel(#"hash_4cbeb6f9fd0e1277");
+  stopforcestreamingxmodel(#"p8_zm_lab_tube_04_script_reverse");
+  stopforcestreamingxmodel(#"p8_zm_lab_tube_05_script");
+  stopforcestreamingxmodel(#"p8_zm_lab_tube_05_script_reverse");
   stopforcestreamingxmodel(#"p8_zm_lab_talisman_press_mould_base");
   stopforcestreamingxmodel(#"p8_zm_lab_talisman_press_mould_lid_common");
   stopforcestreamingxmodel(#"p8_zm_lab_talisman_press_mould_lid_rare");
   stopforcestreamingxmodel(#"p8_zm_lab_talisman_press_mould_lid_legendary");
   stopforcestreamingxmodel(#"p8_zm_lab_talisman_press_mould_lid_epic");
-  stopforcestreamingxmodel(#"hash_21facc9d2f29d94c");
+  stopforcestreamingxmodel(#"p8_zm_lab_talisman_press_mould_lid_ultra");
   stopforcestreamingxmodel(#"p8_zm_lab_talisman_press_mould_lid_common_empty");
   stopforcestreamingxmodel(#"p8_zm_lab_talisman_press_mould_lid_rare_empty");
   stopforcestreamingxmodel(#"p8_zm_lab_talisman_press_mould_lid_legendary_empty");
   stopforcestreamingxmodel(#"p8_zm_lab_talisman_press_mould_lid_epic_empty");
-  stopforcestreamingxmodel(#"hash_150da5db728463e2");
+  stopforcestreamingxmodel(#"p8_zm_lab_talisman_press_mould_lid_ultra_empty");
 }
 
 function_a8188266(var_540e83c = 1, var_6b7f299d = 0.5) {
@@ -1592,8 +1592,8 @@ function_d4f9b895(localclientnum, a_ents) {
         var_177f9b93 = #"p8_zm_lab_talisman_press_mould_lid_epic_empty";
         break;
       case 4:
-        var_bdf17b70 = #"hash_21facc9d2f29d94c";
-        var_177f9b93 = #"hash_150da5db728463e2";
+        var_bdf17b70 = #"p8_zm_lab_talisman_press_mould_lid_ultra";
+        var_177f9b93 = #"p8_zm_lab_talisman_press_mould_lid_ultra_empty";
         break;
       default:
         var_bdf17b70 = #"p8_zm_lab_talisman_press_mould_lid_common";

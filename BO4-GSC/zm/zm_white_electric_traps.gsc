@@ -227,8 +227,8 @@ function_193dbfbb() {
   n_check_time = 0.1;
   n_sequence = 1;
   var_34e4f6b8 = spawn("script_origin", self.origin);
-  var_34e4f6b8 playSound(#"hash_1fb395621513432f");
-  var_34e4f6b8 playLoopSound(#"hash_177d7a6df8ed0d7b");
+  var_34e4f6b8 playSound(#"wpn_electric_trap_start");
+  var_34e4f6b8 playLoopSound(#"wpn_electric_trap_loop");
 
   foreach(var_131f4c21 in self.var_5aecd907) {
     var_131f4c21.mdl_laser = util::spawn_model("tag_origin", var_131f4c21.origin, var_131f4c21.angles);
@@ -253,7 +253,7 @@ function_193dbfbb() {
   }
 
   if(isDefined(var_34e4f6b8)) {
-    playSoundAtPosition(#"hash_3819c6cd06a27f15", var_34e4f6b8.origin);
+    playSoundAtPosition(#"wpn_electric_trap_stop", var_34e4f6b8.origin);
     var_34e4f6b8 delete();
   }
 
@@ -376,7 +376,7 @@ electrocute_zombie(e_activator, e_volume) {
     refs[5] = "no_legs";
     refs[6] = "head";
     self.a.gib_ref = refs[randomint(refs.size)];
-    playSoundAtPosition(#"hash_5183b687ad8d715a", self.origin);
+    playSoundAtPosition(#"wpn_electric_trap_hit", self.origin);
 
     if(randomint(100) > 50) {
       self thread zm_traps::electroctute_death_fx();
@@ -386,7 +386,7 @@ electrocute_zombie(e_activator, e_volume) {
     self notify(#"bhtn_action_notify", {
       #action: "electrocute"});
     wait randomfloat(1.25);
-    self playSound(#"hash_5183b687ad8d715a");
+    self playSound(#"wpn_electric_trap_hit");
   }
 
   self dodamage(self.health + 666, self.origin, e_activator, e_volume);

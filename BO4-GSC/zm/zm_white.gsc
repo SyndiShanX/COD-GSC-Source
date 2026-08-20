@@ -302,7 +302,7 @@ function_ba054e47() {
     exploder::stop_exploder("fxexp_toxic_gas_pap_tube");
     e_pap_door playSound(#"hash_1ca46207f2ed8876");
     e_pap_door rotateYaw(180, 1.5);
-    e_pap_door playSound(#"hash_41e4c1b28052a5f3");
+    e_pap_door playSound(#"evt_pap_door_end");
     wait 1.5;
     var_c72d9a7c hide();
     var_c72d9a7c notsolid();
@@ -311,7 +311,7 @@ function_ba054e47() {
     var_c72d9a7c solid();
     e_pap_door playSound(#"hash_1ca46207f2ed8876");
     e_pap_door rotateYaw(-180, 1.5);
-    e_pap_door playSound(#"hash_41e4c1b28052a5f3");
+    e_pap_door playSound(#"evt_pap_door_end");
     exploder::exploder("fxexp_toxic_gas_pap_tube");
   }
 }
@@ -321,7 +321,7 @@ function_fb29042d() {
   var_c72d9a7c = getEnt("pap_door_blocker", "targetname");
   e_pap_door playSound(#"hash_1ca46207f2ed8876");
   e_pap_door rotateYaw(180, 1.5);
-  e_pap_door playSound(#"hash_41e4c1b28052a5f3");
+  e_pap_door playSound(#"evt_pap_door_end");
   wait 1.5;
   var_c72d9a7c hide();
   var_c72d9a7c notsolid();

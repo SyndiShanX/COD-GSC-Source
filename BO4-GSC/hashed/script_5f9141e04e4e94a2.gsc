@@ -381,7 +381,7 @@ function_a66f0de2() {
   zm_white_defend_soul_capture::end(#"sc_mk2y");
   s_unitrigger = level.var_23674b8f.var_fead3ae9 zm_item_pickup::create_item_pickup(&function_b9a31cb, &function_f6048ee, &function_5b4f9f76);
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger);
-  level.var_23674b8f.var_fead3ae9 setModel(#"hash_7b9a3cdf5dd8b4d7");
+  level.var_23674b8f.var_fead3ae9 setModel(#"p8_zm_whi_fuse_pickup_fluid_orange");
   level.var_23674b8f.var_fead3ae9 clientfield::set("" + #"hash_70251001fe8c4abe", 1);
 }
 

@@ -509,7 +509,7 @@ function_b570d455(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(!isDefined(self.var_3415a5d7)) {
-    self.var_3415a5d7 = self playLoopSound(#"hash_4c803bdbf30dd7fc");
+    self.var_3415a5d7 = self playLoopSound(#"wpn_spectral_key_lasso");
   }
 
   level thread function_3dec76cb(localclientnum, self, e_attacker, 1);

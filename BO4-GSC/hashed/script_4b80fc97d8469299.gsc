@@ -124,7 +124,7 @@ function_816c3132(var_5ea5c94d) {
     }
 
     level.var_b2b15659 = 1;
-    zm_orange_util::function_fd24e47f(#"hash_56bc0447e6f4c9bf", -1, 1, 1);
+    zm_orange_util::function_fd24e47f(#"vox_travel_pap_island", -1, 1, 1);
     level waittill(#"hash_5266a594b96823e2");
   }
 }
@@ -301,7 +301,7 @@ function_dc380897() {
   player = waitresult.e_who;
 
   if(level.var_d7374603 == 0) {
-    player thread zm_orange_util::function_51b752a9(#"hash_abba1937c744399", -1, 0, 1);
+    player thread zm_orange_util::function_51b752a9(#"vox_device_pap_give", -1, 0, 1);
   } else if(level.var_d7374603 == 3) {
     player thread zm_orange_util::function_51b752a9(#"hash_549030026224cbce", -1, 0, 1);
   } else if(level.var_d7374603 == 4) {
@@ -314,8 +314,8 @@ function_dc380897() {
   self.vessel playSound("zmb_vessel_drop");
   self.vessel clientfield::set("" + #"hash_1b72c208f2964e24", level.var_ed1e7d4d);
   self.vessel.return_loc = self.vessel.origin;
-  self.vessel playSound(#"hash_8655fa14e357e9a");
-  self.vessel playLoopSound(#"hash_3c00e3a927df9b2e");
+  self.vessel playSound(#"zmb_pap_charge_start");
+  self.vessel playLoopSound(#"zmb_pap_charge_lp");
   var_deb6871b = struct::get(self.vessel.target, "targetname");
   self.vessel moveTo(var_deb6871b.origin, 1.5);
   self.vessel waittill(#"movedone");
@@ -354,7 +354,7 @@ function_dc380897() {
   self.e_fire setModel("tag_origin");
   self.e_fire clientfield::set("" + #"mq_pap_fire", 1);
   self.vessel clientfield::set("" + #"mq_pap_explosion", 1);
-  self.e_fire playSound(#"hash_49156c17a247721c");
+  self.e_fire playSound(#"zmb_pap_charge_explo");
   arrayremovevalue(level.var_4d8e32c8, self);
 
   if(!level flag::get(#"golden_pap_active")) {
@@ -362,14 +362,14 @@ function_dc380897() {
     level notify(#"hash_39b6629ce957cce9");
     self.vessel clientfield::set("" + #"hash_1b72c208f2964e24", level.var_ed1e7d4d);
     self.vessel moveTo(self.vessel.return_loc, 0.5);
-    self.vessel playSound(#"hash_1ae6116ea0aa080f");
+    self.vessel playSound(#"zmb_pap_charge_end");
     self.vessel stoploopsound();
     wait 0.5;
     self.vessel zm_unitrigger::function_fac87205(zm_utility::function_d6046228(#"hash_3be823a04b5cca2d", #"hash_25cb84d1af883c53"), 64);
     self.vessel playSound(#"zmb_vessel_pickup");
 
     if(level.var_d7374603 == 1) {
-      player thread zm_orange_util::function_51b752a9(#"hash_4de6e4f76ebb0c43", -1, 0, 1);
+      player thread zm_orange_util::function_51b752a9(#"vox_device_pap_take", -1, 0, 1);
     } else if(level.var_d7374603 == 4) {
       player thread zm_orange_util::function_51b752a9(#"hash_2fbc5c784ba782b6", -1, 0, 1);
     }

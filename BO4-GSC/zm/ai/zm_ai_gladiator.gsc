@@ -1052,7 +1052,7 @@ function_75f32da6(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
 
         if(isDefined(level.var_36fff581) && !var_a7d0fdac) {
           self[[level.var_36fff581]](attacker);
-          playSoundAtPosition(#"hash_10711c56d7aa52d5", self.origin + (0, 0, 30));
+          playSoundAtPosition(#"zmb_ai_gladiator_damage_armor", self.origin + (0, 0, 30));
         }
 
         if(var_dd54fdb1.hitloc == "helmet") {

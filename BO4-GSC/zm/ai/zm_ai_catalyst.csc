@@ -108,8 +108,8 @@ function_72d9d9e7(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fie
     self.var_5fe1f99b = util::playFXOnTag(localclientnum, level._effect[#"fx8_cata_water_purify"], self, "tag_eye");
 
     if(!isDefined(self.var_983b7af9)) {
-      self playSound(localclientnum, #"hash_56157e961854c964");
-      self.var_983b7af9 = self playLoopSound(#"hash_4d16df16d08f6404");
+      self playSound(localclientnum, #"zmb_ai_catalyst_water_buff_start");
+      self.var_983b7af9 = self playLoopSound(#"zmb_ai_catalyst_water_buff_lp");
     }
 
     return;
@@ -121,7 +121,7 @@ function_72d9d9e7(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fie
   }
 
   if(isDefined(self.var_983b7af9)) {
-    self playSound(localclientnum, #"hash_58e6fac48dd8515d");
+    self playSound(localclientnum, #"zmb_ai_catalyst_water_buff_end");
     self stoploopsound(self.var_983b7af9);
     self.var_983b7af9 = undefined;
   }

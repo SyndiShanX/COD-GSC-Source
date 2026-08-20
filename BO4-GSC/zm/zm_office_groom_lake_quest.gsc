@@ -820,7 +820,7 @@ function_8039854f() {
 
   if(a_players.size > 0) {
     e_player = array::random(a_players);
-    e_player thread zm_vo::function_a2bd5a0c(#"hash_52de71efb1e8de2b", undefined, 1);
+    e_player thread zm_vo::function_a2bd5a0c(#"vox_groom_lake_arrive", undefined, 1);
   }
 
   self function_55ca39d8();
@@ -837,7 +837,7 @@ function_55ca39d8() {
     wait 3;
   }
 
-  playSoundAtPosition(#"hash_4bddd546f43487cf", self.origin);
+  playSoundAtPosition(#"zmb_blocker_debris_purchase", self.origin);
   var_19400951 stoploopsound(0.5);
   var_19400951 delete();
   array::run_all(self.a_e_clip, &delete);

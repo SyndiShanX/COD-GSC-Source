@@ -48,7 +48,7 @@ open_door(a_str_door_names, var_47eb646a = 0, var_91ccb2d7, b_play_audio = 0) {
   }
 
   if(b_play_audio) {
-    util::playsoundonplayers(#"hash_5eca7fc11b300dd1");
+    util::playsoundonplayers(#"zmb_key_spawn_2d");
   }
 
   var_6e4ed9cd = 0;
@@ -438,7 +438,7 @@ drop_key(v_start_pos, var_b545186e = 0) {
   level.var_eaaa1d75[level.var_eaaa1d75.size] = e_key;
 
   if(!var_b545186e) {
-    e_key playSound(#"hash_5eca7fc11b300dd1");
+    e_key playSound(#"zmb_key_spawn_2d");
     e_key.var_428d1cb1 = 1;
   }
 
@@ -1028,7 +1028,7 @@ function_766eff6(var_31721422, a_str_zones, var_de0f1997, var_f7c3c527) {
   if(self zm_zonemgr::is_player_in_zone(a_str_zones)) {
     self function_ba39d198(level.var_35da2d77, 0);
     self.var_fd3dfced = 1;
-    self playsoundtoplayer(#"hash_519872be58d1c467", self);
+    self playsoundtoplayer(#"zmb_rush_defend_enter", self);
     self thread zm_equipment::show_hint_text(#"hash_215c2a48351115a1");
   } else {
     self function_ba39d198(level.var_35da2d77, 1);
@@ -1076,7 +1076,7 @@ function_7042bcf9(a_str_zones) {
     if(!self.var_fd3dfced && self zm_zonemgr::is_player_in_zone(a_str_zones)) {
       self function_ba39d198(level.var_35da2d77, 0);
       self.var_fd3dfced = 1;
-      self playsoundtoplayer(#"hash_519872be58d1c467", self);
+      self playsoundtoplayer(#"zmb_rush_defend_enter", self);
       self clientfield::set_to_player("zm_zone_out_of_bounds", 0);
       self thread zm_equipment::show_hint_text(#"hash_215c2a48351115a1", 1);
 

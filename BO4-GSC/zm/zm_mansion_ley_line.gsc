@@ -105,7 +105,7 @@ function_30fcf7ae() {
   e_player_random = array::random(a_players);
 
   if(isalive(e_player_random)) {
-    e_player_random thread zm_vo::function_a2bd5a0c(#"hash_22f0e4f17e4e1994", 0, 1);
+    e_player_random thread zm_vo::function_a2bd5a0c(#"vox_light_beam_react_first", 0, 1);
   }
 
   level.e_blue clientfield::set("" + #"blue_ray", 1);
@@ -251,7 +251,7 @@ init_step_4(var_a276c861) {
     e_player_random = array::random(a_players);
 
     if(isalive(e_player_random)) {
-      e_player_random thread zm_vo::function_a2bd5a0c(#"hash_5927981205a122fc", 0, 1);
+      e_player_random thread zm_vo::function_a2bd5a0c(#"vox_observatory_defend_comp", 0, 1);
     }
 
     level flag::wait_till(#"greenhouse_open");
@@ -1662,7 +1662,7 @@ function_d89f5961() {
 
   foreach(e_player in a_e_players) {
     if(isalive(e_player)) {
-      e_player zm_vo::function_a2bd5a0c(#"hash_5da859125becfdfa", 0, 1);
+      e_player zm_vo::function_a2bd5a0c(#"vox_observatory_defend", 0, 1);
       break;
     }
   }

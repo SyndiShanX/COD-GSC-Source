@@ -81,7 +81,7 @@ function_3383b382(player, poster_trigger) {
   if(var_bd332bd5) {
     hidemiscmodels("poster_pristine");
     showmiscmodels("poster_damaged");
-    playSoundAtPosition(#"hash_102a20c25b442146", poster_trigger.origin);
+    playSoundAtPosition(#"zmb_poster_reveal", poster_trigger.origin);
 
     if(isDefined(var_b721e8a9)) {
       poster_trigger function_79c8b708(var_b721e8a9);

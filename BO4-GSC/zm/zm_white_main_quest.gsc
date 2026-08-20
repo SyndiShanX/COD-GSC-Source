@@ -2637,7 +2637,7 @@ function_c9d90b42() {
     level flag::set("pap_power_ready");
   }
 
-  playSoundAtPosition(#"hash_15f3b938e2fc15af", (0, 0, 0));
+  playSoundAtPosition(#"evt_power_restored", (0, 0, 0));
   level exploder::exploder("fxexp_script_pap_lgt");
   var_c718a93c = level zm_white_portals::function_688df525();
 
@@ -2743,7 +2743,7 @@ function_12ea5b51() {
   exploder::stop_exploder("fxexp_script_power_on_lgt_house_yellow");
   waitframe(1);
   zm_white::function_4f60590c();
-  playSoundAtPosition(#"hash_4ef404ee4aeb16bf", (0, 0, 0));
+  playSoundAtPosition(#"evt_power_out", (0, 0, 0));
   zm_white_special_rounds::function_217e3c0f();
   level exploder::stop_exploder("fxexp_power_on");
   level notify(#"end_computer");
@@ -3493,7 +3493,7 @@ function_d29ece92() {
 
     iprintlnbold("<dev string:x1a1>");
 
-    s_activation.e_who playsoundtoplayer(#"hash_7492b9f38f371981", s_activation.e_who);
+    s_activation.e_who playsoundtoplayer(#"evt_server_pickup", s_activation.e_who);
     s_destination = struct::get("moss_home", "targetname");
     s_destination zm_unitrigger::create("", 64);
     s_destination thread function_f4f033c2();
@@ -3551,7 +3551,7 @@ function_f4f033c2() {
     if(s_activation.e_who.var_85039d98 === 1) {
       s_activation.e_who notify(#"hash_6b0b66cf2ec07802");
       s_activation.e_who clientfield::set_to_player("server_carry_audio_feedback", 0);
-      s_activation.e_who playsoundtoplayer(#"hash_7492b9f38f371981", s_activation.e_who);
+      s_activation.e_who playsoundtoplayer(#"evt_server_pickup", s_activation.e_who);
 
       if(isDefined(var_9260818d.var_43428f)) {
         var_9260818d.var_43428f delete();
@@ -3617,7 +3617,7 @@ server_carry_fail(e_player) {
   if(isDefined(e_player)) {
     e_player clientfield::increment_to_player("server_carry_fail_feedback", 1);
     e_player clientfield::set_to_player("server_carry_audio_feedback", 0);
-    e_player playsoundtoplayer(#"hash_97b813d405003aa", e_player);
+    e_player playsoundtoplayer(#"evt_server_explode", e_player);
   }
 
   level thread function_66b43b46();
@@ -3771,7 +3771,7 @@ function_7c3786a6(painting) {
   if(isDefined(painting.dyn) && !isDefined(self.var_6a824c3e)) {
     self.var_6a824c3e = 1;
     createdynentandlaunch(painting.dyn, painting.origin, painting.angles, painting.origin, v_force);
-    playSoundAtPosition(#"hash_1ff16e6eb6a9dfed", painting.origin);
+    playSoundAtPosition(#"evt_painting_fall", painting.origin);
     arrayremovevalue(level.a_e_paintings, painting, 0);
     level.var_dee92db3 += 1;
     level thread function_10e36c24();
@@ -3838,7 +3838,7 @@ mannequin_step() {
       e_platform = getEnt(e_hatch.target, "targetname");
       var_3ba2cb8d = struct::get(e_platform.target, "targetname");
       e_hatch moveTo(s_hatch_open.origin, 2, 0.25, 0.5);
-      playSoundAtPosition(#"hash_1edbb15a3958792d", var_3ba2cb8d.origin);
+      playSoundAtPosition(#"evt_mann_platform", var_3ba2cb8d.origin);
       wait 1.75;
       level thread function_bf75d5a6(sc);
       e_platform moveTo(var_3ba2cb8d.origin, 3, 0.25, 0.5);
@@ -4019,7 +4019,7 @@ mannequin_activate(n_difficulty) {
     e_body clientfield::set("fx8_quest_mannequin_initial_sparks", 1);
     e_head = getEnt(self.script_string + "_head", "script_noteworthy");
     e_head unlink();
-    e_head playSound(#"hash_55bcb314f29d9b");
+    e_head playSound(#"zmb_step_mannequin_swt");
 
     str_zone = zm_zonemgr::get_zone_from_position(e_head.origin, 1);
     waitframe(1);
@@ -4034,7 +4034,7 @@ mannequin_activate(n_difficulty) {
     e_body clientfield::set("fx8_quest_mannequin_initial_sparks", 0);
     self zm_unitrigger::unregister_unitrigger(self.s_unitrigger);
     e_head rotateroll(-20, 0.1);
-    playSoundAtPosition(#"hash_55bcb314f29d9b", e_head.origin);
+    playSoundAtPosition(#"zmb_step_mannequin_swt", e_head.origin);
     wait 1;
 
     if(level.var_46829c80 === 0) {

@@ -222,7 +222,7 @@ function_47a88a0c(n_to_spawn = 1, func_on_spawned, b_force_spawn = 0, var_eb3a87
         ai thread[[func_on_spawned]]();
       }
 
-      ai playSound(#"hash_63299a75a97f9678");
+      ai playSound(#"zmb_ai_stoker_spawn");
       bhtnactionstartevent(ai, "spawn");
     }
 

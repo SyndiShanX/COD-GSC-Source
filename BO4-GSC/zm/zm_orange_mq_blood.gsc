@@ -271,8 +271,8 @@ blood_event() {
 
 function_7535dc08() {
   level endon(#"end_game");
-  zm_orange_util::function_fd24e47f(#"hash_17d537f3403651e2");
-  level.var_60b08c24 zm_hms_util::function_6a0d675d(#"hash_17d537f3403651e2");
+  zm_orange_util::function_fd24e47f(#"vox_artifact_defend");
+  level.var_60b08c24 zm_hms_util::function_6a0d675d(#"vox_artifact_defend");
 }
 
 function_df1ea27() {

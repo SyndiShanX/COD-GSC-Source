@@ -504,13 +504,13 @@ function_7d9e84f9(str_color = "red") {
   }
 
   exploder::exploder(self.str_exploder);
-  self playSound(#"hash_370460eab1a33ee6");
+  self playSound(#"wpn_fire_trap_start");
 }
 
 function_5627d722() {
   if(isDefined(self.str_exploder)) {
     exploder::stop_exploder(self.str_exploder);
-    self playSound(#"hash_5d8ec72f0838594e");
+    self playSound(#"wpn_fire_trap_stop");
     self.str_exploder = undefined;
   }
 }

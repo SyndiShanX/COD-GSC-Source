@@ -430,19 +430,19 @@ function_4802a272() {
   switch (n_player_index) {
     case 10:
       var_5e246f88 = #"hash_56bcb3a8b0feb0ac";
-      var_bfe15d00 = #"hash_4b8b51645e23b3d3";
+      var_bfe15d00 = #"vox_stone_drink_ghost_react_plr_10_0";
       break;
     case 12:
       var_5e246f88 = #"hash_1da4031734c7836f";
-      var_bfe15d00 = #"hash_5cb53f6467d09e7d";
+      var_bfe15d00 = #"vox_stone_drink_ghost_react_plr_12_0";
       break;
     case 11:
       var_5e246f88 = #"hash_65f76254230c2099";
-      var_bfe15d00 = #"hash_52da086461e4f9c8";
+      var_bfe15d00 = #"vox_stone_drink_ghost_react_plr_11_0";
       break;
     case 9:
       var_5e246f88 = #"hash_5ddb037cae2d16db";
-      var_bfe15d00 = #"hash_472fcbf532d22583";
+      var_bfe15d00 = #"vox_stone_drink_ghost_react_plr_9_0";
       break;
     default:
 
@@ -1017,7 +1017,7 @@ function_d23a6d02() {
 
     if(zm_utility::can_use(e_player, 1) && level flag::get(#"hash_864c8ec1475abdc")) {
       e_player zm_weapons::weapon_give(level.w_crossbow);
-      e_player thread zm_vo::function_a2bd5a0c(#"hash_5b257b4bd8a2c6ec", 1);
+      e_player thread zm_vo::function_a2bd5a0c(#"vox_crossbow_pickup", 1);
       e_player thread function_a9bfed2d();
       level flag::set(#"hash_61263135b6fb6340");
     }

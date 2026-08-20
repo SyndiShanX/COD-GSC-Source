@@ -42,15 +42,15 @@ function_c5d0e538() {
     health = getdynentarray("world_dynent_stash_health");
 
     foreach(dynent in chests) {
-      add_helico(dynent, #"hash_3c5c121f85e8e2c3");
+      add_helico(dynent, #"p8_fxanim_wz_win_supply_stash_01_mod");
     }
 
     foreach(dynent in ammo) {
-      add_helico(dynent, #"hash_71bac2c0dc309b0e");
+      add_helico(dynent, #"p8_fxanim_wz_win_supply_stash_ammo_mod");
     }
 
     foreach(dynent in health) {
-      add_helico(dynent, #"hash_1700812272470732");
+      add_helico(dynent, #"p8_fxanim_wz_win_supply_stash_health_mod");
     }
 
     var_76c1a919 = getdynent(#"hospital_stash");

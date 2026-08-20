@@ -133,7 +133,7 @@ function_777b7961(user) {
   flag::clear(#"hash_38f45c699c5d5d63");
   level play_pentagon_announcer_vox(#"hash_450f3dd9fe21becd", 5);
   level play_pentagon_announcer_vox("vox_pentagon_teleport_establish_pann_0");
-  user thread zm_vo::function_a2bd5a0c(#"hash_2a834e891cc8667a");
+  user thread zm_vo::function_a2bd5a0c(#"vox_groom_lake_teleport_active");
 }
 
 play_pentagon_announcer_vox(alias, defcon_level) {

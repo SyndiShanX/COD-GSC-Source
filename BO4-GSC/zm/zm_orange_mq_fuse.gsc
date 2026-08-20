@@ -115,7 +115,7 @@ function_95dff91b() {
 
 function_afa2f621() {
   s_activation = self waittill(#"trigger_activated");
-  playSoundAtPosition(#"hash_fdb4c0b271c6e36", self.origin);
+  playSoundAtPosition(#"evt_fuse_place", self.origin);
 }
 
 setup_door_interact() {
@@ -154,7 +154,7 @@ function_16386d70() {
 
 shard_think() {
   s_activation = self waittill(#"trigger_activated");
-  playSoundAtPosition(#"hash_2e9ec816b70bb70e", self.origin);
+  playSoundAtPosition(#"evt_shard_pickup", self.origin);
   self delete();
   level shard_vo(s_activation.e_who);
 }

@@ -69,7 +69,7 @@ function_f0e07568(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(newval) {
     self.var_477a641f show();
-    playSound(0, #"hash_52b00c7836adfd1e", var_1eaed254.origin);
+    playSound(0, #"zmb_rock_drop", var_1eaed254.origin);
     return;
   }
 
@@ -84,7 +84,7 @@ function_7353e021(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(newval) {
     self.var_a86cb7e0 show();
-    playSound(0, #"hash_52b00c7836adfd1e", var_1eaed254.origin);
+    playSound(0, #"zmb_rock_drop", var_1eaed254.origin);
     return;
   }
 
@@ -99,7 +99,7 @@ place_blue_rock(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
 
   if(newval) {
     self.var_40bb11af show();
-    playSound(0, #"hash_52b00c7836adfd1e", var_1eaed254.origin);
+    playSound(0, #"zmb_rock_drop", var_1eaed254.origin);
     return;
   }
 
@@ -109,19 +109,19 @@ place_blue_rock(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
 function_46b21d8a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   var_1eaed254 = struct::get("s_spin_trap_place_loc");
   self.var_73fb3946 = playFX(localclientnum, level._effect[#"hash_1aa1c7790dc67d1e"], var_1eaed254.origin - (0, 0, 3));
-  playSound(0, #"hash_3375efdd38e50fb8", var_1eaed254.origin);
+  playSound(0, #"zmb_rock_explode", var_1eaed254.origin);
 }
 
 function_73ca75df(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   var_1eaed254 = struct::get("s_acid_trap_place_loc");
   self.var_9c0a6f6d = playFX(localclientnum, level._effect[#"hash_7cdfc8f4819bab2e"], var_1eaed254.origin);
-  playSound(0, #"hash_3375efdd38e50fb8", var_1eaed254.origin);
+  playSound(0, #"zmb_rock_explode", var_1eaed254.origin);
 }
 
 function_fa6bb35e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   var_1eaed254 = struct::get("s_fan_trap_place_loc");
   self.var_c61d3d80 = playFX(localclientnum, level._effect[#"explode_blue_rock"], var_1eaed254.origin - (0, 0, 3));
-  playSound(0, #"hash_3375efdd38e50fb8", var_1eaed254.origin);
+  playSound(0, #"zmb_rock_explode", var_1eaed254.origin);
 }
 
 totem_fall(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

@@ -79,7 +79,7 @@ chakram_throw_trail_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fi
     self.fx_trail = util::playFXOnTag(localclientnum, level._effect[#"chakram_throw_trail"], self, "tag_fx");
 
     if(!isDefined(self.snd_looper)) {
-      self.snd_looper = self playLoopSound(#"hash_3cd6bae1469848f1", 1);
+      self.snd_looper = self playLoopSound(#"wpn_chakram_projectile_lp", 1);
     }
 
     return;
@@ -98,14 +98,14 @@ chakram_throw_trail_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 chakram_throw_impact_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     playFX(localclientnum, level._effect[#"chakram_throw_impact"], self.origin, anglesToForward(self.angles));
-    playSound(localclientnum, #"hash_72a17706cb2656cd", self.origin);
+    playSound(localclientnum, #"wpn_chakram_projectile_bounce", self.origin);
   }
 }
 
 chakram_throw_special_impact_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     util::playFXOnTag(localclientnum, level._effect[#"chakram_throw_impact"], self, "j_spine4");
-    playSound(localclientnum, #"hash_72a17706cb2656cd", self.origin);
+    playSound(localclientnum, #"wpn_chakram_projectile_bounce", self.origin);
   }
 }
 

@@ -122,7 +122,7 @@ function_3da8da85(params) {
 }
 
 function_e217ba73(v_pos, v_velocity) {
-  var_26420508 = util::spawn_model(#"hash_6f97a0d9c769da03", v_pos);
+  var_26420508 = util::spawn_model(#"c_t8_zmb_dlc1_nosferatu_chaos_drop", v_pos);
   util::wait_network_frame();
   var_26420508 setscale(2);
   var_26420508 clientfield::set("" + #"hash_c0e8acbde8dbc06", 1);
@@ -489,7 +489,7 @@ function_44a776ee() {
   }
 
   level.var_5f2726dc = groundtrace(level.var_5f2726dc + (0, 0, 8), level.var_5f2726dc + (0, 0, -100000), 0, undefined)[#"position"];
-  var_b434e769 = util::spawn_model(#"hash_6f97a0d9c769da03", level.var_5f2726dc);
+  var_b434e769 = util::spawn_model(#"c_t8_zmb_dlc1_nosferatu_chaos_drop", level.var_5f2726dc);
   util::wait_network_frame();
   s_loc = spawnStruct();
   s_loc.origin = level.var_5f2726dc + (0, 0, 8);

@@ -623,7 +623,7 @@ function_35ab22f4() {
 
   foreach(var_2cbc52e0 in var_6f868336) {
     if(!(isDefined(var_2cbc52e0.var_14466805) && var_2cbc52e0.var_14466805) && zm_utility::is_player_valid(var_2cbc52e0)) {
-      var_2cbc52e0 thread zm_vo::function_a2bd5a0c(#"hash_528e304a3656551c", 1);
+      var_2cbc52e0 thread zm_vo::function_a2bd5a0c(#"vox_shoot_pool_interact", 1);
       var_2cbc52e0.var_14466805 = 1;
       return;
     }

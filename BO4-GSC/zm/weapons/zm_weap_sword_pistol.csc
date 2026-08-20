@@ -77,7 +77,7 @@ viper_bite_projectile(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 
 viper_bite_projectile_impact(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   util::playFXOnTag(localclientnum, level._effect[#"viper_bite_projectile_impact"], self, self zm_utility::function_467efa7b());
-  self playSound(0, #"hash_3098cba1f74bb5d1");
+  self playSound(0, #"wpn_viper_bite_impact");
 }
 
 viper_bite_bitten_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -85,8 +85,8 @@ viper_bite_bitten_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
     self.var_cc9c5baa = util::playFXOnTag(localclientnum, level._effect[#"viper_bite_attack"], self, "j_spine4");
 
     if(!isDefined(self.var_6450813b)) {
-      self playSound(localclientnum, #"hash_76feff9b8f93c3d9");
-      self.var_6450813b = self playLoopSound(#"hash_117558f0dda6471f");
+      self playSound(localclientnum, #"wpn_viper_bite_start");
+      self.var_6450813b = self playLoopSound(#"wpn_viper_bite_lp");
     }
 
     return;
@@ -97,7 +97,7 @@ viper_bite_bitten_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
   }
 
   if(isDefined(self.var_6450813b)) {
-    self playSound(localclientnum, #"hash_ae4b548c1d4a748");
+    self playSound(localclientnum, #"wpn_viper_bite_end");
     self stoploopsound(self.var_6450813b);
     self.var_6450813b = undefined;
   }

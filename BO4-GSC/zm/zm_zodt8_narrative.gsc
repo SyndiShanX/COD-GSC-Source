@@ -173,7 +173,7 @@ function_c3a5f1fe(a_ents) {
   }
 
   mdl_book = getEnt("pages_of_words", "targetname");
-  mdl_book setModel(#"hash_6a0ad79cfc79892d");
+  mdl_book setModel(#"p8_zm_zod_cipher_book_once_you");
   e_raven delete();
 }
 

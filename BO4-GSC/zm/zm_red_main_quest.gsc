@@ -520,7 +520,7 @@ function_f0f982b() {
 
   foreach(e_player in a_e_players) {
     if(zm_utility::is_player_valid(e_player)) {
-      e_player thread zm_vo::function_a2bd5a0c(#"hash_7c2fc0e6e835e8df");
+      e_player thread zm_vo::function_a2bd5a0c(#"vox_apollo_light_react");
       break;
     }
   }
@@ -583,14 +583,14 @@ function_a9bde51() {
   level waittill(#"hash_6a78cf8b84796501");
 
   if(zm_utility::is_player_valid(s_result.e_player)) {
-    s_result.e_player zm_vo::function_a2bd5a0c(#"hash_5b6e60c5280dcb1c");
+    s_result.e_player zm_vo::function_a2bd5a0c(#"vox_mirror_rise_react");
   } else {
     a_e_players = util::get_active_players();
     a_e_players = array::randomize(a_e_players);
 
     foreach(e_player in a_e_players) {
       if(zm_utility::is_player_valid(e_player)) {
-        e_player zm_vo::function_a2bd5a0c(#"hash_5b6e60c5280dcb1c");
+        e_player zm_vo::function_a2bd5a0c(#"vox_mirror_rise_react");
         break;
       }
     }
@@ -607,7 +607,7 @@ function_e64c55ea() {
   while(!level flag::get(#"spartan_monuments_done")) {
     if(zm_utility::is_player_valid(self) && !(isDefined(level.var_4ea7b88f) && level.var_4ea7b88f) && self istouching(var_c29a1099)) {
       level.var_4ea7b88f = 1;
-      self thread zm_vo::function_a2bd5a0c(#"hash_1aa9fc5f46a728d0");
+      self thread zm_vo::function_a2bd5a0c(#"vox_war_sounds_react");
     }
 
     waitframe(1);
@@ -641,7 +641,7 @@ function_8142733f() {
       if(!(isDefined(level.var_97a5d82f) && level.var_97a5d82f)) {
         level.var_97a5d82f = 1;
         level notify(#"vision_mode_vo");
-        self thread zm_vo::function_a2bd5a0c(#"hash_4c8a4f38397df93a");
+        self thread zm_vo::function_a2bd5a0c(#"vox_vision_mode_enter");
       }
 
       level flag::wait_till(#"monument_changed");
@@ -1478,14 +1478,14 @@ split_cleanup(b_skipped, var_19e802fa) {
   e_player = level.var_720c7171;
 
   if(zm_utility::is_player_valid(e_player)) {
-    e_player thread zm_vo::function_a2bd5a0c(#"hash_74d703743c928320");
+    e_player thread zm_vo::function_a2bd5a0c(#"vox_prism_rise_react");
   } else {
     a_e_players = util::get_active_players();
     a_e_players = array::randomize(a_e_players);
 
     foreach(e_player in a_e_players) {
       if(zm_utility::is_player_valid(e_player)) {
-        e_player thread zm_vo::function_a2bd5a0c(#"hash_74d703743c928320");
+        e_player thread zm_vo::function_a2bd5a0c(#"vox_prism_rise_react");
         break;
       }
     }
@@ -1868,7 +1868,7 @@ take_spear_setup(b_skipped) {
   s_prophecy.mdl_spear playSound(#"hash_5dd75be565f9cc2");
   e_player = s_prophecy.mdl_spear zm_unitrigger::function_fac87205(&function_8ddf09ff, 96);
   s_prophecy.var_8257a25e = e_player;
-  e_player playSound(#"hash_230737b2535a3374");
+  e_player playSound(#"zmb_crafting_pickup_generic");
 }
 
 take_spear_cleanup(b_skipped, var_19e802fa) {
@@ -1894,7 +1894,7 @@ take_spear_cleanup(b_skipped, var_19e802fa) {
     e_player = s_prophecy.var_8257a25e;
 
     if(zm_utility::is_player_valid(e_player)) {
-      e_player thread zm_vo::function_a2bd5a0c(#"hash_3cfe15f9edeeb79c");
+      e_player thread zm_vo::function_a2bd5a0c(#"vox_gold_spear_pickup");
     }
   }
 }
@@ -2189,13 +2189,13 @@ function_590ba57a(e_player) {
   e_player endon(#"disconnect");
 
   if(zm_utility::is_player_valid(e_player)) {
-    e_player zm_vo::function_a2bd5a0c(#"hash_3f73cd79382c519");
+    e_player zm_vo::function_a2bd5a0c(#"vox_terrace_mirror_rise_react");
   }
 
   wait 2;
 
   if(zm_utility::is_player_valid(e_player)) {
-    e_player thread zm_vo::function_a2bd5a0c(#"hash_11241cd3fee87d8c");
+    e_player thread zm_vo::function_a2bd5a0c(#"vox_terrace_mirror_stop_react");
   }
 }
 
@@ -2389,7 +2389,7 @@ function_8e8da19a() {
           mdl_spear = e_player;
         }
 
-        e_player playSound(#"hash_5af2a9d11f007b9");
+        e_player playSound(#"zmb_player_electrocuted_oneshot");
         e_player thread status_effect::status_effect_apply(blind_status_effect, undefined, mdl_spear);
         e_player thread zm_audio::create_and_play_dialog(#"generic", #"response_negative");
       }
@@ -6718,7 +6718,7 @@ function_c54d30d5() {
   e_player = s_cleanse.var_fabe5be7;
 
   if(zm_utility::is_player_valid(e_player)) {
-    e_player zm_vo::function_a2bd5a0c(#"hash_3280eb0abc8ec3ed");
+    e_player zm_vo::function_a2bd5a0c(#"vox_ballista_shoot_react");
   }
 
   level zm_audio::sndvoxoverride(0);

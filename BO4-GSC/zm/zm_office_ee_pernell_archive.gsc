@@ -120,7 +120,7 @@ pernell_archive_step1_setup(var_5ea5c94d) {
     s_server_part_pickup zm_unitrigger::create(#"", 64, &function_8703c1fe);
     level flag::wait_till(#"server_part_pickup_acquired");
     var_185199a1 = getEnt(s_server_part_pickup.target, "targetname");
-    var_185199a1 playSound(#"hash_18f957b8000dd0c6");
+    var_185199a1 playSound(#"evt_ee_item_pickup");
     var_185199a1 delete();
     zm_unitrigger::unregister_unitrigger(s_server_part_pickup.s_unitrigger);
     s_server_part_pickup struct::delete();
@@ -216,7 +216,7 @@ function_e8d6a81b(e_item) {
   self thread zm_vo::function_a2bd5a0c(#"vox_pickup_generic");
 
   if(isDefined(e_item)) {
-    e_item playSound(#"hash_18f957b8000dd0c6");
+    e_item playSound(#"evt_ee_item_pickup");
   }
 
   function_2f5993d6();

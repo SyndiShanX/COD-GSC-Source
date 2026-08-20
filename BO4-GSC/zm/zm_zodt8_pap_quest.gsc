@@ -389,7 +389,7 @@ function_ef3c219a() {
   function_e19c174f();
   level.var_a8626e72 = 1;
   playrumbleonposition("zm_castle_pap_tp", level.pap_machine.origin);
-  playSoundAtPosition(#"hash_5944b4f78bf382e8", level.pap_machine.origin);
+  playSoundAtPosition(#"zmb_pap_leave", level.pap_machine.origin);
   var_88aa74e = level.s_pap_quest.var_88aa74e;
 
   if(!isDefined(var_88aa74e)) {

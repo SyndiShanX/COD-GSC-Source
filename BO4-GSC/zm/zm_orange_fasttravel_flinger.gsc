@@ -634,7 +634,7 @@ function_57806638(v_flinger) {
   }
 
   e_planks = getEnt(v_flinger.var_48abac67.target, "targetname");
-  e_planks playSound(#"hash_157ec960f5af0676");
+  e_planks playSound(#"zmb_wood_planks_break");
   e_planks clientfield::set("flinger_impact_wood", 1);
 
   if(v_flinger.var_ad63608b >= var_61cb960b) {
@@ -860,11 +860,11 @@ function_c0df509(index) {
 }
 
 function_ac9a3646() {
-  playSoundAtPosition(#"hash_5474570f37d75aa7", self.origin);
+  playSoundAtPosition(#"evt_flinger_start", self.origin);
   e_snd = spawn("script_origin", self.origin);
   e_snd playSound(#"hash_5913634c5007a95");
   self waittill(#"launcher_activated", #"hash_1a5c6352ea49c8ff");
-  playSoundAtPosition(#"hash_3db70e71d59b6393", self.origin);
+  playSoundAtPosition(#"evt_flinger_cancel", self.origin);
   e_snd stopsounds();
   waitframe(1);
   e_snd delete();

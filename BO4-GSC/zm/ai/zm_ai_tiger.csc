@@ -39,7 +39,7 @@ function_76110e92(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self postfx::playpostfxbundle("pstfx_tiger_slash_r_to_l");
   }
 
-  self playSound(localclientnum, #"hash_53d906ab01cb30a1");
+  self playSound(localclientnum, #"evt_player_clawed");
 }
 
 function_3be6531a(localclientnum, turned) {
@@ -66,6 +66,6 @@ on_entity_shutdown(localclientnum) {
     }
 
     playFX(localclientnum, "zm_ai/fx8_zombie_tiger_death_exp", origin, anglesToForward(angles));
-    playSound(0, #"hash_5f574d847a1ca1f0", self.origin);
+    playSound(0, #"zmb_tiger_explode", self.origin);
   }
 }

@@ -218,7 +218,7 @@ function_29a3aca4() {
     playSoundAtPosition("zmb_sk_stones_dest_correct", s_waitresult.mdl_rune.origin);
   }
 
-  s_waitresult.attacker thread zm_vo::function_a2bd5a0c(#"hash_307199a2e20f6edc", 1);
+  s_waitresult.attacker thread zm_vo::function_a2bd5a0c(#"vox_stone_symbol_destroy", 1);
   return true;
 }
 
@@ -365,7 +365,7 @@ function_c4542a0c(t_trig) {
   e_player = waitresult.activator;
   e_player playSound("zmb_sk_tree_pickup");
   level flag::set(#"a_skeet_fink_chunk_picked_up");
-  e_player thread zm_vo::function_a2bd5a0c(#"hash_191dec8da1ad1b1f", 1);
+  e_player thread zm_vo::function_a2bd5a0c(#"vox_wood_piece_react", 1);
 
   if(isDefined(t_trig.mdl_stake)) {
     t_trig.mdl_stake delete();
@@ -542,6 +542,6 @@ function_7aa50bb7(e_player) {
 }
 
 function_db526700() {
-  self thread zm_vo::function_a2bd5a0c(#"hash_445d4e233806a7cf", 1);
+  self thread zm_vo::function_a2bd5a0c(#"vox_stake_bowie_pickup", 1);
   self zm_melee_weapon::award_melee_weapon(#"stake_knife");
 }

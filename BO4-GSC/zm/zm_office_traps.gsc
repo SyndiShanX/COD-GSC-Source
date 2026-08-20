@@ -25,7 +25,7 @@ init_flags() {
 }
 
 function_a28f0b21(e_holder, w_item) {
-  self playSound(#"hash_230737b2535a3374");
+  self playSound(#"zmb_crafting_pickup_generic");
   level.var_e2103f01 += 1;
 
   if(function_8b1a219a()) {
@@ -40,7 +40,7 @@ function_a28f0b21(e_holder, w_item) {
 }
 
 function_af5c24bb(e_holder, w_item) {
-  self playSound(#"hash_230737b2535a3374");
+  self playSound(#"zmb_crafting_pickup_generic");
   level.var_e2103f01 += 1;
 
   if(function_8b1a219a()) {

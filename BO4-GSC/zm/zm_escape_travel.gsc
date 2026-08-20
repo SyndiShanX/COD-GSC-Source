@@ -310,7 +310,7 @@ gondola_doors_move(str_side, n_state) {
   }
 
   if(n_state == 1) {
-    mdl_door_left playSound(#"hash_717283b43ea8d0a4");
+    mdl_door_left playSound(#"zmb_gondola_gate_open");
     gondola_gate_moves(n_state, n_side_modifier, var_d134f0d1, var_b82242be, var_8bd1eeb0, var_b0f06f50);
     gondola_gate_and_door_moves(n_state, n_side_modifier, var_d134f0d1, mdl_door_left, var_b82242be, mdl_door_right, var_8bd1eeb0, var_b3c73561, var_b0f06f50, var_1c80ffe2);
 
@@ -342,7 +342,7 @@ gondola_doors_move(str_side, n_state) {
       }
     }
 
-    mdl_door_left playSound(#"hash_ac1fa6f62462ed8");
+    mdl_door_left playSound(#"zmb_gondola_gate_close");
     gondola_gate_and_door_moves(n_state, n_side_modifier, var_d134f0d1, mdl_door_left, var_b82242be, mdl_door_right, var_8bd1eeb0, var_b3c73561, var_b0f06f50, var_1c80ffe2);
     gondola_gate_moves(n_state, n_side_modifier, var_d134f0d1, var_b82242be, var_8bd1eeb0, var_b0f06f50);
   }
@@ -591,7 +591,7 @@ move_gondola(b_suppress_doors_close = 0) {
   }
 
   e_gondola thread create_gondola_poi();
-  playSoundAtPosition(#"hash_7039f3801f51d75e", (878, 5659, 327));
+  playSoundAtPosition(#"zmb_gondola_motor_start", (878, 5659, 327));
   level util::clientnotify("gondola_cable_wheels");
   e_gondola playSound(#"zmb_gondola_start");
   e_gondola playLoopSound(#"zmb_gondola_lp", 1);
@@ -625,7 +625,7 @@ move_gondola(b_suppress_doors_close = 0) {
   level util::clientnotify("gondola_cable_wheels");
   e_gondola thread function_d8e07db3();
   e_gondola playSound(#"zmb_gondola_stop");
-  playSoundAtPosition(#"hash_46431e99e4f9f9e6", (878, 5659, 327));
+  playSoundAtPosition(#"zmb_gondola_motor_stop", (878, 5659, 327));
   player_escaped_gondola_failsafe();
   a_players = getPlayers();
 
@@ -808,7 +808,7 @@ function_d8e07db3() {
   wait 10;
   wait 2;
   self stoploopsound(0.5);
-  self playSound(#"hash_5ecb872a9078d4bf");
+  self playSound(#"zmb_gondola_recharged");
 }
 
 player_escaped_gondola_failsafe() {

@@ -942,7 +942,7 @@ function_2d164b86() {
     level thread debris_scene("debris_cemetery_scene", "connect_cemetery_entrance_to_cemetery_graveyard", "Shot 1", "Shot 2");
   }
 
-  mdl_artifact playSound(#"hash_75b9c9ad6ebe8af2");
+  mdl_artifact playSound(#"zmb_sentinel_artifact_activate");
 
   if(isalive(var_d11a4648)) {
     var_d11a4648 val::set("artifact_pickup", "takedamage", 0);
@@ -953,7 +953,7 @@ function_2d164b86() {
   var_3f772556 clientfield::set("" + #"activate_mansion_artifact_card", 0);
   wait 3;
   var_3f772556 delete();
-  mdl_artifact setModel(#"hash_57d5802b9383f9c7");
+  mdl_artifact setModel(#"p8_zm_man_artifact_sentinel_combined_fire");
   mdl_artifact clientfield::set("" + #"activate_mansion_artifact", 3);
   var_8a281f69 = getvehiclenode("power_on_projectile_path_1", "targetname");
   v_pos = var_8a281f69.origin + (0, 0, -16);

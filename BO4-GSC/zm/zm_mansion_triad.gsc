@@ -1801,7 +1801,7 @@ trigger_forest_entrance() {
   player = array::random(zm_vo::get_valid_players());
 
   if(isDefined(player)) {
-    player thread zm_vo::function_a2bd5a0c(#"hash_7cedb4ec0f14ff50", 1);
+    player thread zm_vo::function_a2bd5a0c(#"vox_forest_door_unlock", 1);
   }
 
   level thread function_a112ed5e();

@@ -115,21 +115,21 @@ function_3fcb1e5e() {
         s_nixie_tube.var_825e7054 = var_8171dd3a;
         s_nixie_tube.str_hint_string = #"";
         var_f6cdf98c = "n_c_w_p_01";
-        var_49d93843 = #"hash_30683ab79a855d68";
+        var_49d93843 = #"p8_zm_esc_nixie_paper_01";
         str_clientfield_name = "p_w_o_num_01";
         break;
       case #"nixie_tube_trigger_2":
         s_nixie_tube.var_825e7054 = var_8dfff656;
         s_nixie_tube.str_hint_string = #"";
         var_f6cdf98c = "n_c_w_p_02";
-        var_49d93843 = #"hash_30683db79a856281";
+        var_49d93843 = #"p8_zm_esc_nixie_paper_02";
         str_clientfield_name = "p_w_o_num_02";
         break;
       case #"nixie_tube_trigger_3":
         s_nixie_tube.var_825e7054 = var_44e1e41b;
         s_nixie_tube.str_hint_string = #"";
         var_f6cdf98c = "n_c_w_p_03";
-        var_49d93843 = #"hash_30683cb79a8560ce";
+        var_49d93843 = #"p8_zm_esc_nixie_paper_03";
         str_clientfield_name = "p_w_o_num_03";
         break;
     }

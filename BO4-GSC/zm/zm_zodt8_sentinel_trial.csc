@@ -680,7 +680,7 @@ function_9f92e675(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(newval == 1) {
     util::playFXOnTag(localclientnum, level._effect[#"tree_activate"], self, "tag_origin");
-    self playSound(localclientnum, #"hash_35bdc93fbbad3294");
+    self playSound(localclientnum, #"zmb_step8_artifact_explode");
     self.var_3765ceb0 = self playLoopSound(#"hash_453bd80432d8f383");
     wait 0.25;
 

@@ -148,7 +148,7 @@ function_bda82828() {
   level.zones[#"zone_amphitheater_house"].a_loc_types[#"zombie_location"] = [];
   mdl_sentinel_artifact = getEnt("mdl_sentinel_artifact", "targetname");
   mdl_sentinel_artifact clientfield::set("" + #"artifact_glow", 1);
-  mdl_sentinel_artifact playLoopSound(#"hash_5c7e9911ac98f633");
+  mdl_sentinel_artifact playLoopSound(#"zmb_sentinel_artifact_lp");
   s_loc = struct::get(#"hash_3dbe0b62fa014608");
   s_loc zm_unitrigger::create(&function_969cb6b2);
   s_loc thread function_b3d827f();
@@ -378,7 +378,7 @@ function_e059d0e1() {
 
   if(isDefined(mdl_sentinel_artifact)) {
     mdl_sentinel_artifact clientfield::set("" + #"hash_2a586a321116326c", 1);
-    mdl_sentinel_artifact playLoopSound(#"hash_e2c71c7dece38ee");
+    mdl_sentinel_artifact playLoopSound(#"zmb_sentinel_artifact_charged_lp");
   }
 
   var_a6c6bf68 = getEntArray("event_collision_move", "targetname");
@@ -455,7 +455,7 @@ function_e059d0e1() {
   if(isDefined(s_move) && isDefined(mdl_sentinel_artifact)) {
     mdl_sentinel_artifact moveTo(s_move.origin, 3);
     mdl_sentinel_artifact rotateTo(s_move.angles, 3);
-    mdl_sentinel_artifact playSound(#"hash_75b9c9ad6ebe8af2");
+    mdl_sentinel_artifact playSound(#"zmb_sentinel_artifact_activate");
   }
 
   wait 2;
@@ -468,7 +468,7 @@ function_e059d0e1() {
     mdl_sentinel_artifact clientfield::set("" + #"hash_3ec0452110ea5621", 0);
     mdl_sentinel_artifact clientfield::increment("" + #"hash_5da65e20d966c63f");
     wait 1;
-    mdl_sentinel_artifact playSound(#"hash_5de064f33e9e49b8");
+    mdl_sentinel_artifact playSound(#"zmb_sentinel_artifact_explode");
     v_origin = mdl_sentinel_artifact.origin;
     level thread function_ae259e17(v_origin);
 
@@ -787,7 +787,7 @@ function_b3d827f() {
     mdl_sentinel_artifact playSound(#"hash_331b62b49768f70");
 
     if(e_player zm_audio::can_speak()) {
-      e_player thread zm_vo::function_a2bd5a0c(#"hash_497fcbdaee283347", 0.5, 1, 10000, 0);
+      e_player thread zm_vo::function_a2bd5a0c(#"vox_sent_artifact_stuck", 0.5, 1, 10000, 0);
     }
   }
 
@@ -962,7 +962,7 @@ function_a5b8e88f(var_ddab7294 = 0) {
     }
   }
 
-  function_350204ca(#"hash_4f27038870dd43b0");
+  function_350204ca(#"vox_zombies_awaken");
   wait 6;
   level.var_ac6d10d4 = undefined;
   zm_trial::function_ae725d63();
@@ -1028,7 +1028,7 @@ pegasus_intro() {
   level flag::set(#"pegasus_entry");
   level.musicsystemoverride = 0;
   level thread zm_audio::sndmusicsystem_playstate("poweron_event_complete", zm_utility::is_trials());
-  level thread function_350204ca(#"hash_62be5a478a16c968");
+  level thread function_350204ca(#"vox_pegasus_react_first");
   playSoundAtPosition(#"zmb_vocals_pegasus_intro", mdl_pegasus.origin);
   mdl_pegasus clientfield::increment("" + #"register_pegasus");
   mdl_pegasus clientfield::set("" + #"pegasus_teleport", 1);
@@ -1506,7 +1506,7 @@ function_d8db57f6() {
   }
 
   wait 3;
-  function_350204ca(#"hash_6e38772014019f10");
+  function_350204ca(#"vox_spartoi_react_first");
   level flag::wait_till(#"spartoi_resurrect");
   var_1679e8e = get_players_in_amphitheater();
 

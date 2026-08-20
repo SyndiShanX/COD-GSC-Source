@@ -197,7 +197,7 @@ function_561d9cff() {
   e_who = s_result.e_who;
 
   if(level.var_96eedc2a === 2) {
-    e_who thread zm_orange_util::function_51b752a9(#"hash_6f774fe92d5d01b6", -1, 1, 0);
+    e_who thread zm_orange_util::function_51b752a9(#"vox_device_pickup", -1, 1, 0);
   }
 
   self.vessel hide();

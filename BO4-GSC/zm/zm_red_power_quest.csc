@@ -113,7 +113,7 @@ pegasus_teleport_fx(localclientnum, oldval, newval, bnewent, binitialsnap, field
 
 zombie_breakout_func(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   util::playFXOnTag(localclientnum, level._effect[#"chaos_breakout"], self, "tag_origin");
-  playSound(localclientnum, #"hash_496f85c0590828ba", self.origin + (0, 0, 25));
+  playSound(localclientnum, #"zmb_chaos_break_glass", self.origin + (0, 0, 25));
 }
 
 pegasus_beam_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

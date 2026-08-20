@@ -97,11 +97,11 @@ function_39c9e020() {
 
   if(a_e_players.size > 0) {
     e_player = array::random(a_e_players);
-    e_player thread zm_orange_util::function_51b752a9(#"hash_ebd07fabb769017");
+    e_player thread zm_orange_util::function_51b752a9(#"vox_device_transport");
     return;
   }
 
-  level thread zm_orange_util::function_fd24e47f(#"hash_ebd07fabb769017");
+  level thread zm_orange_util::function_fd24e47f(#"vox_device_transport");
 }
 
 sun_deck_watcher() {
@@ -127,7 +127,7 @@ function_d096f18f() {
   exploder::exploder("fxexp_portal_115_start");
   wait 5;
   level.var_ab11c23d rotateTo((-90, level.var_ab11c23d.angles[1], 0), 0.2);
-  level zm_orange_util::function_fd24e47f(#"hash_1003004a8ca44bb3", -1, 1);
+  level zm_orange_util::function_fd24e47f(#"vox_sky_portal_react", -1, 1);
   var_6df66af8 = float(soundgetplaybacktime(#"hash_2e5e53739622d4e5")) / 1000;
   s_start = struct::get("pablo_rise_start");
   level.npc_pablo setblackboardattribute("_stance", "swim");
@@ -137,7 +137,7 @@ function_d096f18f() {
   e_orb linkTo(e_mover);
   level.npc_pablo linkTo(e_mover);
   e_mover moveTo(s_start.origin, 1);
-  level thread zm_orange_pablo::function_e44c7c0c(#"hash_1a974fe7a0edddab");
+  level thread zm_orange_pablo::function_e44c7c0c(#"vox_pablo_departs");
   wait 1;
   zm_ui_inventory::function_7df6bb60(#"zm_orange_objective_progress", 12);
   e_mover moveTo(e_mover.origin + (0, 0, 4000), var_6df66af8 - 1);
@@ -149,7 +149,7 @@ function_d096f18f() {
   e_orb delete();
   e_mover delete();
   level thread function_bf106bdf();
-  level zm_orange_util::function_fd24e47f(#"hash_1a974fe7a0edddab");
+  level zm_orange_util::function_fd24e47f(#"vox_pablo_departs");
   wait 1;
   level.var_1c53964e thread zm_hms_util::function_6a0d675d(#"hash_635ca3634ea94ee9");
 }
@@ -178,7 +178,7 @@ function_39d9b290() {
   }
 
   e_player = array::random(a_e_players);
-  e_player thread zm_orange_util::function_51b752a9(#"hash_8f686e289c54c01");
+  e_player thread zm_orange_util::function_51b752a9(#"vox_lighthouse_crazy");
 }
 
 function_bf106bdf() {

@@ -634,7 +634,7 @@ function_a9311397() {
         e_attacker.var_12c9426e[e_attacker.var_12c9426e.size] = self;
       }
 
-      e_attacker playsoundtoplayer(#"hash_64323339bdb3dfdf", e_attacker);
+      e_attacker playsoundtoplayer(#"zmb_bull_hit_marker", e_attacker);
       self playSound("zmb_bull_hit_ping");
       mdl_bull = getEnt(self.target, "targetname");
       mdl_bull clientfield::set("" + #"hash_333e3741e6552db3", 1);

@@ -138,8 +138,8 @@ function_94cd396e(powerup_override, powerup_team, powerup_location, powerup_play
 
   if(!(isDefined(var_b9dc5e9) && var_b9dc5e9)) {
     if((str_powerup == "bonus_points_player" || str_powerup == "bonus_points_player_shared") && zm_utility::is_standard()) {
-      self playSound(#"hash_1229e9d60b3181ef");
-      self playLoopSound(#"hash_46b9bf1ae523021c");
+      self playSound(#"zmb_pts_powerup_spawn");
+      self playLoopSound(#"zmb_pts_powerup_lp");
     } else {
       self playSound(#"zmb_spawn_powerup");
       self playLoopSound(#"zmb_spawn_powerup_loop");

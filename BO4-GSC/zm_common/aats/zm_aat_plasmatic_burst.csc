@@ -35,7 +35,7 @@ zm_aat_plasmatic_burst_explosion(localclientnum, oldval, newval, bnewent, biniti
       str_fx_tag = "tag_origin";
     }
 
-    self playSound(localclientnum, #"hash_6990e5a39e894c04");
+    self playSound(localclientnum, #"zmb_aat_plasmatic_explode");
     util::playFXOnTag(localclientnum, level._effect[#"zm_aat_plasmatic_burst"], self, str_fx_tag);
   }
 }
@@ -77,7 +77,7 @@ function_c36aebed(localclientnum, tag) {
   self.var_4a87444e = util::playFXOnTag(localclientnum, "zm_weapons/fx8_aat_plasmatic_burst_head", self, "j_head");
 
   if(!isDefined(self.var_fa3f8eb7)) {
-    self.var_fa3f8eb7 = self playLoopSound(#"hash_645b60f29309dc9b");
+    self.var_fa3f8eb7 = self playLoopSound(#"zmb_aat_plasmatic_burn_lp");
   }
 }
 

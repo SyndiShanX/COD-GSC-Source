@@ -1041,7 +1041,7 @@ zapper_light_red() {
   for(i = 0; i < self.var_cd6ebde4.size; i++) {
     self.var_cd6ebde4[i] setModel(#"p7_zm_mob_trap_control_base_red");
     self.var_cd6ebde4[i] playSound(#"zmb_switch_flip_trap");
-    self.var_cd6ebde4[i] playSound(#"hash_6c4cdf83585f2851");
+    self.var_cd6ebde4[i] playSound(#"zmb_switch_flip_trap_alarm");
   }
 
   level flag::wait_till("start_zombie_round_logic");
@@ -1065,8 +1065,8 @@ zapper_light_red() {
 zapper_light_green() {
   for(i = 0; i < self.var_cd6ebde4.size; i++) {
     self.var_cd6ebde4[i] setModel(#"p7_zm_mob_trap_control_base");
-    self.var_cd6ebde4[i] playSound(#"hash_27343b1084481dcb");
-    self.var_cd6ebde4[i] playSound(#"hash_57154349da449cd");
+    self.var_cd6ebde4[i] playSound(#"zmb_switch_flip_trap_reset");
+    self.var_cd6ebde4[i] playSound(#"zmb_switch_flip_trap_alarm_reset");
   }
 
   switch (self.script_noteworthy) {

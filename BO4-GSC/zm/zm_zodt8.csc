@@ -69,7 +69,7 @@ event_handler[level_init] main(eventstruct) {
   level._effect[#"pap_projectile_end"] = #"hash_6c0eb029adb5f6c6";
   level.var_24cb6ae8 = findvolumedecalindexarray("cargo_hold_water_puddles");
   level.var_ec4c3b67 = findvolumedecalindexarray("engine_room_water_puddles");
-  level.var_59d3631c = #"hash_129339f4a4da8ea2";
+  level.var_59d3631c = #"p8_fxanim_zm_pap_mod";
   level.var_d0ab70a2 = #"gamedata/weapons/zm/zm_zodt8_weapons.csv";
   zodt8_pap_quest::init();
   zodt8_sentinel::init();
@@ -495,7 +495,7 @@ sentinel_artifact_activated(localclientnum, oldval, newval, bnewent, binitialsna
       self stoploopsound(self.sfx_id);
     }
 
-    self playSound(localclientnum, #"hash_75b9c9ad6ebe8af2");
+    self playSound(localclientnum, #"zmb_sentinel_artifact_activate");
     self stoprenderoverridebundle(#"hash_1589a47f2fdc6c67");
 
     if(isDefined(self.fx)) {
@@ -520,7 +520,7 @@ sentinel_artifact_activated(localclientnum, oldval, newval, bnewent, binitialsna
     self.fx = undefined;
   }
 
-  self playSound(localclientnum, #"hash_5de064f33e9e49b8");
+  self playSound(localclientnum, #"zmb_sentinel_artifact_explode");
   self playSound(localclientnum, #"hash_3d8fef5997663b17");
 }
 

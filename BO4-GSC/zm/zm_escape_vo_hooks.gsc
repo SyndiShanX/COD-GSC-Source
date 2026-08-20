@@ -81,7 +81,7 @@ function_29543c() {
   b_say = e_player zm_audio::create_and_play_dialog(#"zone_dock", #"react_0", undefined, 1);
 
   if(isDefined(b_say) && b_say && e_player zm_characters::is_character(array(#"prt_zm_dempsey", #"prt_zm_dempsey_ofc"))) {
-    wait soundgetplaybacktime(#"hash_6598db6cd61c4aad") / 1000;
+    wait soundgetplaybacktime(#"vox_docks_react_0_plr_6_0") / 1000;
     e_nikolai = undefined;
 
     foreach(var_a7cf1037 in level.players) {
@@ -93,7 +93,7 @@ function_29543c() {
 
     if(isalive(e_nikolai) && isalive(e_player)) {
       if(distancesquared(e_nikolai.origin, e_player.origin) < 589824) {
-        var_9a0250b7 = #"hash_465a6e7feb94a61d";
+        var_9a0250b7 = #"vox_docks_react_1_plr_7_0";
         e_nikolai zm_vo::vo_say(var_9a0250b7, 0, 0, 9999);
       }
     }

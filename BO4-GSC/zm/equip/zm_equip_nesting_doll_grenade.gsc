@@ -71,7 +71,7 @@ function_a1b7b263(e_player) {
   while(var_51dacd00 < 6) {
     var_5543f2a9 = array::random(level.var_e027f904);
     e_player magicgrenadetype(var_5543f2a9, self getcentroid(), get_launch_velocity(var_4da5977e), 1);
-    self playSound(#"hash_23ebdfd906eaff00");
+    self playSound(#"wpn_matroyshka_eject");
     var_4da5977e += (0, randomfloatrange(60, 180), 0);
     var_51dacd00++;
     wait 0.4;

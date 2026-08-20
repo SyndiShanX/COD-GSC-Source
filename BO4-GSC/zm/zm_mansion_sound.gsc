@@ -273,7 +273,7 @@ function_a3a23636() {
       }
 
       if(b_play_vo && !(isDefined(level.var_d2867f97) && level.var_d2867f97)) {
-        level.var_d2867f97 = e_player zm_vo::function_a2bd5a0c(#"hash_4a084873bbb64d39", 0, 0, 9999);
+        level.var_d2867f97 = e_player zm_vo::function_a2bd5a0c(#"vox_knight_trap_react_first", 0, 0, 9999);
       }
     }
 
@@ -355,23 +355,23 @@ function_e432aeb6(str_category, var_39acfdda) {
 function_2d4ce142(n_voice) {
   switch (n_voice) {
     case 0:
-      zm_audio::play_vo_internal(#"hash_56d727e4dde061ef");
+      zm_audio::play_vo_internal(#"vox_pap_wait_0_plr_12_0");
       zm_audio::play_vo_internal(#"hash_73722f29ea1fa41", self);
       break;
     case 1:
-      zm_audio::play_vo_internal(#"hash_46c0fcd4eac3143a");
+      zm_audio::play_vo_internal(#"vox_pap_wait_1_plr_12_0");
       zm_audio::play_vo_internal(#"hash_2fd88698209e1998", self);
       break;
     case 2:
       zm_audio::play_vo_internal(#"hash_6a18c9d5cea653d4", self);
-      zm_audio::play_vo_internal(#"hash_21bcbc16a4e2812a");
+      zm_audio::play_vo_internal(#"vox_pap_wait_2_plr_12_1");
       break;
     case 3:
-      zm_audio::play_vo_internal(#"hash_19c3a28739527fc8");
+      zm_audio::play_vo_internal(#"vox_pap_wait_3_plr_12_0");
       zm_audio::play_vo_internal(#"hash_c3c497c80eba90e", self);
       break;
     case 4:
-      zm_audio::play_vo_internal(#"hash_5f99dba5a34a200b");
+      zm_audio::play_vo_internal(#"vox_pap_wait_4_plr_12_0");
       zm_audio::play_vo_internal(#"hash_50bc3e7a02399bd5", self);
       break;
   }
@@ -385,32 +385,32 @@ function_c8d42aba(str_category, var_39acfdda) {
 
     switch (n_voice) {
       case 0:
-        zm_audio::play_vo_internal(#"hash_39ad75c662ff40da");
+        zm_audio::play_vo_internal(#"vox_revive_down_0_plr_12_0");
         zm_audio::play_vo_internal(#"hash_25d195bb73a47af8", self);
-        zm_audio::play_vo_internal(#"hash_39ad73c662ff3d74");
+        zm_audio::play_vo_internal(#"vox_revive_down_0_plr_12_2");
         zm_audio::play_vo_internal(#"hash_25d197bb73a47e5e", self);
         break;
       case 1:
         zm_audio::play_vo_internal(#"hash_2c15b9198408b36e", self);
-        zm_audio::play_vo_internal(#"hash_559c2e4e451d15dc");
+        zm_audio::play_vo_internal(#"vox_revive_down_1_plr_12_1");
         zm_audio::play_vo_internal(#"hash_2c15b7198408b008", self);
         break;
       case 2:
-        zm_audio::play_vo_internal(#"hash_7024e5a861250e68");
+        zm_audio::play_vo_internal(#"vox_revive_down_2_plr_12_0");
         zm_audio::play_vo_internal(#"hash_2d116afa2223e9ee", self);
-        zm_audio::play_vo_internal(#"hash_7024e7a8612511ce");
+        zm_audio::play_vo_internal(#"vox_revive_down_2_plr_12_2");
         zm_audio::play_vo_internal(#"hash_2d1168fa2223e688", self);
         break;
       case 3:
         zm_audio::play_vo_internal(#"hash_3682a6259c85c134", self);
-        zm_audio::play_vo_internal(#"hash_6dc330df77b075ca");
+        zm_audio::play_vo_internal(#"vox_revive_down_3_plr_12_1");
         zm_audio::play_vo_internal(#"hash_3682a8259c85c49a", self);
-        zm_audio::play_vo_internal(#"hash_6dc32edf77b07264");
+        zm_audio::play_vo_internal(#"vox_revive_down_3_plr_12_3");
         break;
       case 4:
-        zm_audio::play_vo_internal(#"hash_1f01c37f559d0216");
+        zm_audio::play_vo_internal(#"vox_revive_down_4_plr_12_0");
         zm_audio::play_vo_internal(#"hash_663346a99e3bdffc", self);
-        zm_audio::play_vo_internal(#"hash_1f01c17f559cfeb0");
+        zm_audio::play_vo_internal(#"vox_revive_down_4_plr_12_2");
         zm_audio::play_vo_internal(#"hash_663348a99e3be362", self);
         break;
     }
@@ -433,7 +433,7 @@ function_4928382a(str_category, var_39acfdda) {
 
 function_658ce256(str_category, var_39acfdda) {
   if(math::cointoss(16)) {
-    zm_audio::play_vo_internal(#"hash_781c84d22590fba6");
+    zm_audio::play_vo_internal(#"vox_viper_dragon_activate_0_plr_12_0");
     zm_audio::play_vo_internal(#"hash_6a2a0c62daaff8ac", self);
     return true;
   }
@@ -475,7 +475,7 @@ function_edae33b5(str_category, var_39acfdda) {
 
 function_fe8cce7a(str_category, var_39acfdda) {
   if(math::cointoss(16)) {
-    zm_audio::play_vo_internal(#"hash_5356fdb821d6dedd");
+    zm_audio::play_vo_internal(#"vox_hammer_level_3_0_plr_12_0");
     zm_audio::play_vo_internal(#"hash_10335b450c3f5187", self);
     return true;
   }
@@ -485,7 +485,7 @@ function_fe8cce7a(str_category, var_39acfdda) {
 
 function_bb1888fe(str_category, var_39acfdda) {
   if(math::cointoss(25)) {
-    zm_audio::play_vo_internal(#"hash_f5f0d56fe254796");
+    zm_audio::play_vo_internal(#"vox_scepter_ready_0_plr_12_0");
     zm_audio::play_vo_internal(#"hash_48710f792a0c297c", self);
     return true;
   }
@@ -495,7 +495,7 @@ function_bb1888fe(str_category, var_39acfdda) {
 
 function_f26d178f(str_category, var_39acfdda) {
   if(math::cointoss(16)) {
-    zm_audio::play_vo_internal(#"hash_23048fd6c52dd964");
+    zm_audio::play_vo_internal(#"vox_scepter_activate_0_plr_12_0");
     zm_audio::play_vo_internal(#"hash_5d5ef2b48b533f2", self);
     return true;
   }
@@ -509,7 +509,7 @@ function_1f4ab5ec(str_category, var_39acfdda) {
   if(n_chance == 3 || n_chance == 4) {
     switch (n_chance) {
       case 3:
-        zm_audio::play_vo_internal(#"hash_2b910762865b2884");
+        zm_audio::play_vo_internal(#"vox_perk_generic_0_plr_12_0");
         zm_audio::play_vo_internal(#"hash_d705a0e5a2a79d2", self);
         break;
       case 4:

@@ -371,12 +371,12 @@ function_4707df22(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     stopfx(localclientnum, self.var_85dab00b);
     self.var_85dab00b = undefined;
     playFX(localclientnum, level._effect[#"bg_quest_despawn"], self.origin);
-    playSound(localclientnum, #"hash_c9e5d07bd26090d", self.origin);
+    playSound(localclientnum, #"zmb_blundergat_fire_stop", self.origin);
   }
 
   if(newval == 1) {
     self.var_85dab00b = util::playFXOnTag(localclientnum, level._effect[#"bg_quest_spawn"], self, "tag_origin");
-    playSound(localclientnum, #"hash_4cd38326868832c7", self.origin);
+    playSound(localclientnum, #"zmb_blundergat_fire_start", self.origin);
   }
 }
 
@@ -410,7 +410,7 @@ function_bbfe3432(localclientnum) {
 
 magma_urn_triggered_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   util::playFXOnTag(localclientnum, level._effect[#"magma_urn_triggered"], self, "tag_origin");
-  playSound(localclientnum, #"hash_4cd38326868832c7", self.origin);
+  playSound(localclientnum, #"zmb_blundergat_fire_start", self.origin);
 }
 
 acid_gat_lock_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

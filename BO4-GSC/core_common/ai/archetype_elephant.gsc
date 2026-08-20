@@ -231,7 +231,7 @@ function_78f4a0d1() {
 
 function_106b6b29() {
   wait 4.5;
-  playSoundAtPosition(#"hash_4cf49c7c9533b539", (0, 0, 0));
+  playSoundAtPosition(#"zmb_ai_hellephant_death_stinger", (0, 0, 0));
 }
 
 function_8d7ad318(launchpos, trajectory, targetpos) {

@@ -232,7 +232,7 @@ function_1493a309(e_player) {
   e_player zm_score::player_reduce_points("take_specified", 250);
 
   if(self.powerup_name === "dung") {
-    e_player playSound(#"hash_66a500811a472fac");
+    e_player playSound(#"zmb_dung_pickup");
     e_player clientfield::set_to_player("" + #"pickup_dung", 1);
     e_player util::delay(5, "disconnect", &clientfield::set_to_player, "" + #"pickup_dung", 0);
     level notify(#"picked_up_dung", {
@@ -578,7 +578,7 @@ crowd_throw_item(var_2bd26cff) {
     playSoundAtPosition(#"hash_339b376fb02738f5", var_4d611aa2.origin);
 
     if(str_powerup === "rock") {
-      e_item = util::spawn_model(#"hash_5a78e7591a2e5e39", var_4d611aa2.origin, var_4d611aa2.angles);
+      e_item = util::spawn_model(#"p8_fxp_debris_rock_02", var_4d611aa2.origin, var_4d611aa2.angles);
       e_item fx::play(#"hash_4c4f96aa02c32a2a", e_item.origin, e_item.angles, "crowd_item_fly_fx_stop", 1);
       e_item setscale(8);
       n_time = e_item zm_utility::fake_physicslaunch(self getEye(), 5000);

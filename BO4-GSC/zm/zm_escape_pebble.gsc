@@ -713,7 +713,7 @@ function_cbc49ed2(s_params) {
 
     if(s_params.eattacker.var_65f165e1 >= 30) {
       s_params.eattacker flag::set(#"hash_18c7b52cebad7171");
-      s_params.eattacker playsoundtoplayer(#"hash_6e048d37333004da", s_params.eattacker);
+      s_params.eattacker playsoundtoplayer(#"zmb_wolfhead_start", s_params.eattacker);
       s_params.eattacker thread function_dab3dcc3();
       s_params.eattacker.var_67ea42af = undefined;
 
@@ -854,7 +854,7 @@ function_1f75f759(e_grenade, n_grenade_charge_power) {
         self thread zm_audio::create_and_play_dialog(#"ax", #"lost", undefined, 1);
       }
 
-      self playsoundtoplayer(#"hash_6e048d37333004da", self);
+      self playsoundtoplayer(#"zmb_wolfhead_start", self);
       self flag::set(#"hash_120fbb364796cd32");
       return true;
     }
@@ -1103,7 +1103,7 @@ function_ef5a3a9d() {
       mdl_tomahawk setvisibletoplayer(e_attacker);
       var_e041507a = e_attacker getentitynumber() + 1;
       mdl_tomahawk clientfield::set("" + #"hash_51657261e835ac7c", var_e041507a);
-      e_attacker playsoundtoplayer(#"hash_6e048d37333004da", e_attacker);
+      e_attacker playsoundtoplayer(#"zmb_wolfhead_start", e_attacker);
       e_attacker thread zm_audio::create_and_play_dialog(#"success_resp", #"generic");
       self ghost();
       self setCanDamage(1);
@@ -1404,7 +1404,7 @@ function_beab34f9(v_origin) {
   }
 
   if(isDefined(level.var_a3781eb3) && level.var_a3781eb3 >= 20) {
-    playSoundAtPosition(#"hash_21967fb66e85ac4e", var_628578b4.origin);
+    playSoundAtPosition(#"zmb_sq_souls_complete", var_628578b4.origin);
     level flag::set(#"monkey_bomb_quest_step_1_complete");
   }
 }
@@ -1417,7 +1417,7 @@ function_63afa952(var_a276c861) {
   level.var_bdd8273d clientfield::set("" + #"hash_59623b8b4fc694c8", 1);
   level.var_bdd8273d thread function_a852bfdc();
   s_result = level waittill(#"monkey_bomb_quest_step_2_complete");
-  level.var_bdd8273d playSound(#"hash_1588095b858588d");
+  level.var_bdd8273d playSound(#"zmb_vocals_brutus_laugh");
   wait 0.5;
   level.var_bdd8273d clientfield::set("" + #"hash_59623b8b4fc694c8", 2);
   level.var_bdd8273d movez(60, 1, 0.25, 0.25);

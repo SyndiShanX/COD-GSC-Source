@@ -143,7 +143,7 @@ unlockfrontendmusic(unlockname, allplayers = 1) {}
 
 function_30d4f8c4(attacker, smeansofdeath, weapon) {
   if(sessionmodeiswarzonegame()) {
-    self playsoundtoplayer(#"hash_686fcf059a57de6f", self);
+    self playsoundtoplayer(#"mpl_death_by_wz_default", self);
     return;
   }
 
@@ -151,7 +151,7 @@ function_30d4f8c4(attacker, smeansofdeath, weapon) {
     return;
   }
 
-  str_alias = #"hash_6d746e7e1822ad79";
+  str_alias = #"mpl_death_by_default";
 
   switch (weapon.rootweapon.name) {
     case #"hero_annihilator":
@@ -161,7 +161,7 @@ function_30d4f8c4(attacker, smeansofdeath, weapon) {
       str_alias = #"hash_191ff361b2a52032";
       break;
     case #"molotov_fire":
-      str_alias = #"hash_40a5f428bba291a8";
+      str_alias = #"mpl_death_by_fire";
       break;
     case #"gadget_radiation_field":
       str_alias = #"hash_16cc324cc4a290fc";
@@ -170,7 +170,7 @@ function_30d4f8c4(attacker, smeansofdeath, weapon) {
       str_alias = #"hash_1732b1323f11b7bf";
       break;
     case #"sig_lmg":
-      str_alias = #"hash_7b92159573aee640";
+      str_alias = #"mpl_death_by_scythe";
       break;
     case #"sniper_powersemi_t8":
     case #"sniper_powerbolt_t8":
@@ -215,17 +215,17 @@ function_30d4f8c4(attacker, smeansofdeath, weapon) {
 
   switch (smeansofdeath) {
     case #"mod_trigger_hurt":
-      str_alias = #"hash_3f3f94dcb425d73b";
+      str_alias = #"mpl_death_by_falling";
       break;
     case #"mod_melee_weapon_butt":
     case #"mod_melee_assassinate":
     case #"mod_melee":
       if(function_641cec60(weapon)) {
-        str_alias = #"hash_5cd2899685b79029";
+        str_alias = #"mpl_death_by_melee_blade";
       } else if(weapon.rootweapon.name == "sig_blade") {
-        str_alias = #"hash_6494570483effef0";
+        str_alias = #"mpl_death_by_ninja";
       } else {
-        str_alias = #"hash_3fa09e466fc19e30";
+        str_alias = #"mpl_death_by_melee";
       }
 
       break;
@@ -235,7 +235,7 @@ function_30d4f8c4(attacker, smeansofdeath, weapon) {
       break;
     case #"mod_dot":
       if(weapon.doesfiredamage) {
-        str_alias = #"hash_40a5f428bba291a8";
+        str_alias = #"mpl_death_by_fire";
         break;
       }
 

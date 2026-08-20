@@ -273,7 +273,7 @@ function_9257b202(e_player) {
   zm_office_vo_hooks::play_pentagon_announcer_vox(#"hash_d846ade61fd0c15");
 
   if(zm_vo::is_player_valid(e_player)) {
-    e_player zm_vo::function_a2bd5a0c(#"hash_7fe91aa83c27c4b8", undefined, 1);
+    e_player zm_vo::function_a2bd5a0c(#"vox_code_sequence_complete", undefined, 1);
   }
 }
 
@@ -462,7 +462,7 @@ function_3410748f() {
   level.var_3bf3d61e[21].fx moveTo(level.var_3bf3d61e[21].fx.origin + (-3.5, 13, 0), 0.3);
   level.var_3bf3d61e[22].fx moveTo(level.var_3bf3d61e[22].fx.origin + (-3.5, 13, 0), 0.3);
   level.var_3bf3d61e[23].fx moveTo(level.var_3bf3d61e[23].fx.origin + (-3.5, 13, 0), 0.3);
-  playSoundAtPosition(#"hash_7c109876c748f07c", level.s_code_drawer.e_drawer.origin);
+  playSoundAtPosition(#"evt_ee_drawer_open", level.s_code_drawer.e_drawer.origin);
   waitresult.activator clientfield::set_to_player("" + #"drawer_rumble_feedback", 1);
   zm_unitrigger::unregister_unitrigger(self.stub);
 }
@@ -537,7 +537,7 @@ function_85bd10() {
   wait 1;
   level.s_code4 notify(#"code_revealed");
   level.s_code4.var_354f5b9b = 0;
-  level thread function_f25bac74("t_code4_photo", #"hash_799f9af88bb20656");
+  level thread function_f25bac74("t_code4_photo", #"vox_photo_kino_pickup");
 }
 
 function_90489a6() {

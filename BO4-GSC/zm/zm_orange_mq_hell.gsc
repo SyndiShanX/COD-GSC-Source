@@ -315,8 +315,8 @@ function_a340f5a2() {
 
 function_4c647a2() {
   level endon(#"end_game");
-  zm_orange_util::function_fd24e47f(#"hash_519ab3eee65867f8");
-  level.var_1c53964e thread zm_hms_util::function_6a0d675d(#"hash_519ab3eee65867f8");
+  zm_orange_util::function_fd24e47f(#"vox_hell_on_earth_start");
+  level.var_1c53964e thread zm_hms_util::function_6a0d675d(#"vox_hell_on_earth_start");
 }
 
 function_5c135d54(n_radius) {
@@ -346,13 +346,13 @@ function_25c6ed8d() {
 
   zm_hms_util::pause_zombies(0);
   self waittill(#"defend");
-  self playSound(#"hash_1af3a3933941d01a");
+  self playSound(#"evt_lantern_stop");
   level function_9be0a8a6("sc_lantern_1");
   self waittill(#"defend");
-  self playSound(#"hash_1af3a3933941d01a");
+  self playSound(#"evt_lantern_stop");
   level function_9be0a8a6("sc_lantern_2");
   self waittill(#"defend");
-  self playSound(#"hash_1af3a3933941d01a");
+  self playSound(#"evt_lantern_stop");
   level function_9be0a8a6("sc_lantern_4");
   self waittill(#"zip");
   self setspeed(7);
@@ -495,7 +495,7 @@ function_a4210fd2(n_time) {
 function_9be0a8a6(str_id) {
   level.var_5d5b7e8e.var_a41818b5 setspeedimmediate(0);
   level.var_5d5b7e8e.var_a41818b5 clientfield::set("" + #"lantern_fx", 2);
-  level thread zm_orange_util::function_fd24e47f(#"hash_6f4de6a856d64c98");
+  level thread zm_orange_util::function_fd24e47f(#"vox_hell_on_earth_defend");
   function_95557832();
   s_sc = struct::get(str_id, "script_noteworthy");
   s_sc.var_7944be4a = 0;
@@ -519,7 +519,7 @@ function_3c3bee91() {
   level.var_5d5b7e8e.var_a41818b5 setspeedimmediate(0);
   function_95557832();
   zm_sq_modules::function_3f808d3d(#"sc_lantern_end");
-  level thread zm_orange_util::function_fd24e47f(#"hash_6f4de6a856d64c98");
+  level thread zm_orange_util::function_fd24e47f(#"vox_hell_on_earth_defend");
 
   iprintlnbold("<dev string:xad>");
 
@@ -528,7 +528,7 @@ function_3c3bee91() {
   level.var_5d5b7e8e.var_a41818b5.e_ring function_d12badc3(200);
   thread function_199360fe();
   wait 15;
-  zm_orange_util::function_fd24e47f(#"hash_5aba3394c65e8f8c");
+  zm_orange_util::function_fd24e47f(#"vox_hell_on_earth_final");
   wait 5;
   zm_sq_modules::function_2a94055d(#"sc_lantern_end");
   zm_hms_util::pause_zombies(1);
@@ -547,7 +547,7 @@ function_3c3bee91() {
   level.var_5d5b7e8e.var_a41818b5 setspeed(2);
   level.var_857878e6 = undefined;
   wait 1;
-  level zm_orange_util::function_fd24e47f(#"hash_66817621c4ce4596");
+  level zm_orange_util::function_fd24e47f(#"vox_hell_on_earth_survive");
   wait 1;
   level thread function_737be926();
 }
@@ -607,7 +607,7 @@ function_8a1356b6() {
   self endon(#"death");
   self waittill(#"trigger");
   self.e_rock moveTo(self.e_rock.var_3a161b40, 0.5);
-  self.e_rock playSound(#"hash_7d258d025446af9");
+  self.e_rock playSound(#"evt_lava_platform");
   self delete();
 }
 

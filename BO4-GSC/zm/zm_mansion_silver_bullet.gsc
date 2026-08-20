@@ -292,7 +292,7 @@ function_dad1960c() {
     }
 
     if(!level.var_c9fce264) {
-      player thread zm_vo::function_a2bd5a0c(#"hash_400e358c3529b05f", 1);
+      player thread zm_vo::function_a2bd5a0c(#"vox_silver_bullets_build", 1);
       level.var_c9fce264 = 1;
     }
 

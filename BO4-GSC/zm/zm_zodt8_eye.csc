@@ -455,7 +455,7 @@ function_8c5b87a7(localclientnum) {
     level beam::kill(self.var_ca2681ca, "tag_origin", level.var_90bda347, "tag_origin", "beam8_zm_be_a_t_a");
     level beam::kill(self.var_ca2681ca, "tag_origin", level.var_90bda347, "tag_origin", "beam8_zm_be_a_t_b");
     var_62b51ea6 = spawn(localclientnum, self.origin, "script_origin");
-    var_62b51ea6 playSound(localclientnum, #"hash_15ca81cba1081bc2");
+    var_62b51ea6 playSound(localclientnum, #"zmb_eyeball_laser_stop");
     var_62b51ea6 thread function_e8a1c9e1();
     self.var_ca2681ca delete();
     self.var_ca2681ca = undefined;
@@ -515,7 +515,7 @@ function_e8071e64(localclientnum) {
     level beam::function_cfb2f62a(localclientnum, self.var_ca2681ca, "tag_origin", level.var_90bda347, "tag_origin", "beam8_zm_be_a");
   }
 
-  self playSound(localclientnum, #"hash_65dbdd02d1dccf42");
+  self playSound(localclientnum, #"zmb_eyeball_laser_start");
   self thread function_ff52ba5a(localclientnum);
 }
 
@@ -554,7 +554,7 @@ function_ff52ba5a(localclientnum) {
 
   if(!(isDefined(self.var_4f7e3c84) && self.var_4f7e3c84)) {
     self.var_4f7e3c84 = 1;
-    soundlineemitter(#"hash_3d5a33369bbe2308", self.var_da4fd8df, self.var_608d2b77);
+    soundlineemitter(#"zmb_eyeball_laser_loop", self.var_da4fd8df, self.var_608d2b77);
     self thread function_1c341163(localclientnum);
     self thread function_2585c107();
   }
@@ -572,7 +572,7 @@ function_2585c107() {
       var_37b53ba7 = self.var_608d2b77;
       self.var_da4fd8df = self.var_ca2681ca gettagorigin("tag_origin");
       self.var_608d2b77 = var_79fd35f9;
-      soundupdatelineemitter(#"hash_3d5a33369bbe2308", var_f370dc28, var_37b53ba7, self.var_da4fd8df, self.var_608d2b77);
+      soundupdatelineemitter(#"zmb_eyeball_laser_loop", var_f370dc28, var_37b53ba7, self.var_da4fd8df, self.var_608d2b77);
     }
 
     wait 0.1;
@@ -582,7 +582,7 @@ function_2585c107() {
 function_1c341163(localclientnum) {
   level endon(#"intermission");
   self waittill(#"boss_attack_beam_end");
-  soundstoplineemitter(#"hash_3d5a33369bbe2308", self.var_da4fd8df, self.var_608d2b77);
+  soundstoplineemitter(#"zmb_eyeball_laser_loop", self.var_da4fd8df, self.var_608d2b77);
 
   if(isDefined(self)) {
     self.var_4f7e3c84 = 0;

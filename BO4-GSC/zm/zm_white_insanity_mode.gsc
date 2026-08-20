@@ -364,7 +364,7 @@ function_1541f1c9() {
   level.var_3c9cfd6f = 1;
   level.var_d555ff19 = 1;
   function_52a6a332(0);
-  playSoundAtPosition(#"hash_83b85ca3e963765", (0, 0, 0));
+  playSoundAtPosition(#"zmb_insanity_start", (0, 0, 0));
   level thread lui::screen_flash(1, 2, 1, 1, "white");
   array::run_all(getaiarray(), &namespace_9ff9f642::freeze);
   wait 1;

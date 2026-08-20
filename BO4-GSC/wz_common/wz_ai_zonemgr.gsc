@@ -103,7 +103,7 @@ __init__() {
 
   level.var_bd19c3a8 = &function_bd19c3a8;
   level.var_a7f72ea1 = #"hash_1dcbe8021fb16344";
-  level.var_f2bbd457 = #"hash_2719f9bf8294979f";
+  level.var_f2bbd457 = #"p8_wz_magic_box_chain";
   level.var_b6e3500b = #"p8_wz_teddybear";
   level.var_96bd78dd = #"hash_1cd5ad7d3323d02c";
   level.var_591aff35 = #"hash_5afb37e5e38fa248";
@@ -619,7 +619,7 @@ function_bbad9099(ai_zone, var_c0d8ceca) {
 
   if(isDefined(ai_zone.var_18bccc89)) {
     ai_zone.var_18bccc89 hide();
-    ai_zone.var_18bccc89 playSound(#"hash_1530a7e6184b9b2e");
+    ai_zone.var_18bccc89 playSound(#"zmb_box_weapon_spin");
   }
 
   wait 7.5;

@@ -158,13 +158,13 @@ fire_trap_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
       self.var_91180673 delete();
     }
 
-    playSound(localclientnum, #"hash_370460eab1a33ee6", self.origin);
+    playSound(localclientnum, #"wpn_fire_trap_start", self.origin);
     audio::playloopat("wpn_fire_trap_loop", self.origin);
     self.var_91180673 = util::playFXOnTag(localclientnum, level._effect[#"fire_trap_blue"], self, "tag_origin");
     return;
   }
 
-  playSound(localclientnum, #"hash_5d8ec72f0838594e", self.origin);
+  playSound(localclientnum, #"wpn_fire_trap_stop", self.origin);
   audio::stoploopat("wpn_fire_trap_loop", self.origin);
 
   if(isDefined(self.var_91180673)) {

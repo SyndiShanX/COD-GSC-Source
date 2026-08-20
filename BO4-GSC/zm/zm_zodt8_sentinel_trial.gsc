@@ -1476,7 +1476,7 @@ function_ad0eee44(str_element) {
   mdl_artifact = util::spawn_model(#"hash_12eedcc89df28c41", s_artifact.origin, s_artifact.angles);
   mdl_artifact notsolid();
   mdl_artifact setscale(1.25);
-  mdl_artifact playLoopSound(#"hash_5c7e9911ac98f633");
+  mdl_artifact playLoopSound(#"zmb_sentinel_artifact_lp");
 
   if(isDefined(s_moveto)) {
     wait 4;
@@ -1527,10 +1527,10 @@ function_ad0eee44(str_element) {
     player = s_artifact zm_unitrigger::function_fac87205(#"hash_14754dac7b0290c6");
 
     if(str_element == #"fire") {
-      mdl_artifact playSound(#"hash_58d1c989a1ea4137");
-      level thread function_53802e89(#"hash_74cb038c7565ddc9", mdl_artifact.origin, array(1, 3, 2, 4));
+      mdl_artifact playSound(#"zmb_sentinel_artifact_pickup");
+      level thread function_53802e89(#"vox_m_quest_cat_sentinel", mdl_artifact.origin, array(1, 3, 2, 4));
     } else {
-      mdl_artifact playSound(#"hash_5de064f33e9e49b8");
+      mdl_artifact playSound(#"zmb_sentinel_artifact_explode");
     }
   }
 
@@ -1905,14 +1905,14 @@ function_22651585() {
   v_spawn = level.pap_machine.origin + (0, -32, 40);
   mdl_artifact = util::spawn_model(#"hash_2b14d34cb1bc161a", v_spawn, (0, -90, 0));
   mdl_artifact notsolid();
-  mdl_artifact playSound(#"hash_2d125a0883ae10c4");
+  mdl_artifact playSound(#"zmb_sentinel_artifact_pap");
   mdl_artifact playLoopSound(#"hash_66df9cab2c64f968");
   mdl_artifact thread function_8d4d655d();
   mdl_artifact moveTo(level.pap_machine.origin + (0, 2, 48), 3);
   mdl_artifact waittill(#"movedone");
   mdl_artifact setModel(#"hash_3cdbd25e43a09930");
   wait 2.5;
-  mdl_artifact playLoopSound(#"hash_e2c71c7dece38ee");
+  mdl_artifact playLoopSound(#"zmb_sentinel_artifact_charged_lp");
   mdl_artifact clientfield::set("" + #"sentinel_shader", 1);
   mdl_artifact moveTo(v_spawn, 3);
   mdl_artifact playSound(#"zmb_perks_packa_ready");
@@ -1921,8 +1921,8 @@ function_22651585() {
   s_pickup = spawnStruct();
   s_pickup.origin = v_spawn;
   e_player = s_pickup zm_unitrigger::function_fac87205(#"hash_14754dac7b0290c6");
-  level thread function_53802e89(#"hash_2e8d8d922535b1db", mdl_artifact.origin, array(3, 4, 1, 2));
-  mdl_artifact playSound(#"hash_58d1c989a1ea4137");
+  level thread function_53802e89(#"vox_m_quest_sentinel_artifact", mdl_artifact.origin, array(3, 4, 1, 2));
+  mdl_artifact playSound(#"zmb_sentinel_artifact_pickup");
   s_pickup struct::delete();
   mdl_artifact clientfield::set("" + #"sentinel_shader", 0);
   mdl_artifact delete();
@@ -2914,7 +2914,7 @@ function_8ec70b18(var_5ea5c94d) {
     function_1cfbff5e();
     level thread function_365aa198();
     level thread function_cfd304b3();
-    util::delay(3.5, undefined, &function_53802e89, #"hash_4ba720f616544675", struct::get(#"sun_coyote").origin, array(4, 3, 2, 1));
+    util::delay(3.5, undefined, &function_53802e89, #"vox_m_quest_ambient_change", struct::get(#"sun_coyote").origin, array(4, 3, 2, 1));
     level flag::wait_till(#"hash_349bc60cedc7491e");
     streamermodelhint(#"p8_zm_zod_teleport_symbol", 10);
     streamermodelhint(#"p8_zm_zod_teleport_symbol_dimmed", 10);
@@ -3592,7 +3592,7 @@ function_7b4cd474() {
 
     level thread clean_up_ai();
     var_18090dd1 = spawn("script_origin", s_tree.origin);
-    var_18090dd1 playLoopSound(#"hash_73e107b21dfb7f37");
+    var_18090dd1 playLoopSound(#"zmb_step8_artifact_lp");
     s_tree function_6099877a(128);
     var_18090dd1 delete();
     function_28228fa2(s_tree);
@@ -3668,8 +3668,8 @@ function_50128c10(var_79727c11, a_icebergs, var_c53a4cdc) {
 function_28228fa2(s_tree) {
   mdl_artifact = util::spawn_model(#"hash_3cdbd25e43a09930", s_tree.origin + (-48, 0, 0), s_tree.angles + (0, 180, 0));
   mdl_artifact notsolid();
-  mdl_artifact playLoopSound(#"hash_e2c71c7dece38ee");
-  mdl_artifact playSound(#"hash_7e9d06805545fcfe");
+  mdl_artifact playLoopSound(#"zmb_sentinel_artifact_charged_lp");
+  mdl_artifact playSound(#"zmb_step8_artifact_activate");
   v_offset = (-4, 0, 16);
   mdl_artifact moveTo(s_tree.origin + v_offset, 4);
   var_da9e0035 = struct::get_array(#"hash_78dd4413a014e785");

@@ -271,7 +271,7 @@ function_ca3759b1() {
   }
 
   level thread lui::screen_flash(0.1, 0.6, 1.5, 0.8, "white");
-  playSoundAtPosition(#"hash_782025025ec70d68", (0, 0, 0));
+  playSoundAtPosition(#"evt_nuke_hit", (0, 0, 0));
   exploder::exploder("fxexp_nuke_event");
   wait 2;
   zm_hms_util::function_3c173d37();
@@ -759,7 +759,7 @@ function_297251d8() {
     foreach(player in getPlayers()) {
       if(player istouching(self)) {
         player playRumbleOnEntity("damage_heavy");
-        player playSound(#"hash_5af2a9d11f007b9");
+        player playSound(#"zmb_player_electrocuted_oneshot");
         player status_effect::status_effect_apply(shock_status_effect, undefined, self, 1);
       }
     }
@@ -780,7 +780,7 @@ player_elec_damage(n_damage) {
   if(!(isDefined(self.is_burning) && self.is_burning) && zm_utility::is_player_valid(self)) {
     self.is_burning = 1;
     self playRumbleOnEntity("damage_heavy");
-    self playSound(#"hash_5af2a9d11f007b9");
+    self playSound(#"zmb_player_electrocuted_oneshot");
     self dodamage(n_damage, self.origin, undefined);
     wait 1;
     self.is_burning = undefined;
@@ -957,7 +957,7 @@ function_8149ceff() {
 
         if(e_player zm_audio::can_speak()) {
           zm_hms_util::function_3c173d37();
-          e_player zm_hms_util::function_51b752a9(#"hash_79b9be92b942990d", -1, 0, 1);
+          e_player zm_hms_util::function_51b752a9(#"vox_boss_electric_warn", -1, 0, 1);
           b_spoke = 1;
         }
       }

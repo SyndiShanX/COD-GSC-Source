@@ -47,7 +47,7 @@ init() {
   elevator1.active = 0;
   elevator1.var_5a3b55a3 = getvehiclenode("elev1_level3_start", "targetname");
   elevator1.var_7237c31e = getvehiclenode("elev1_level2_start", "targetname");
-  elevator1.var_243802fa = #"hash_7041e0919c53eb4e";
+  elevator1.var_243802fa = #"evt_elevator_freight_call";
   elevator1.takedamage = 0;
   elevator1 setmovingplatformenabled(1);
   elevator2.cost = 500;
@@ -56,7 +56,7 @@ init() {
   elevator2.active = 0;
   elevator2.var_5a3b55a3 = getvehiclenode("elev2_level2_start", "targetname");
   elevator2.var_7237c31e = getvehiclenode("elev2_level1_start", "targetname");
-  elevator2.var_243802fa = #"hash_5a26031141f5cc33";
+  elevator2.var_243802fa = #"evt_elevator_office_call";
   elevator2.takedamage = 0;
   elevator2 setmovingplatformenabled(1);
   elevator1 init_elevator1_doors();
@@ -941,7 +941,7 @@ elevator1_3d_audio() {
     self waittill(#"reached_end_node");
     ent delete();
     playSoundAtPosition(#"evt_elevator_freight_stop", self.origin);
-    playSoundAtPosition(#"hash_5bbffe8bd9e541a7", self.origin + (0, 0, 120));
+    playSoundAtPosition(#"evt_elevator_freight_bell", self.origin + (0, 0, 120));
   }
 }
 
@@ -954,7 +954,7 @@ elevator2_3d_audio() {
     ent playLoopSound(#"evt_elevator_office_run_3d");
     self waittill(#"reached_end_node");
     ent delete();
-    playSoundAtPosition(#"hash_b696d1d50b35e32", self.origin + (0, 0, 120));
+    playSoundAtPosition(#"evt_elevator_office_bell", self.origin + (0, 0, 120));
   }
 }
 

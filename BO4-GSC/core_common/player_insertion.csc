@@ -156,7 +156,7 @@ function_ded53cc6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_ea3cc318(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(self function_da43934d()) {
     if(newval == 1 && oldval != newval) {
-      self playSound(0, #"hash_783bdfd900c11eed");
+      self playSound(0, #"uin_final_jump");
     }
   }
 }

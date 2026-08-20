@@ -113,7 +113,7 @@ function_d997ba18() {
       self setCanDamage(0);
       self movez(self.script_int, 0.5);
       self waittill(#"movedone");
-      self playSound(#"hash_ad51236cdb547c4");
+      self playSound(#"evt_icicle_fall");
       level flag::set(#"hash_72853b82b3faf149");
       self zm_unitrigger::create(&function_575a8040, 64);
       self thread function_a28a5c21();
@@ -133,8 +133,8 @@ function_a28a5c21() {
   self endon(#"death");
   s_result = self waittill(#"trigger_activated");
   e_who = s_result.e_who;
-  self playSound(#"hash_345f1d31b52a4589");
-  e_who thread zm_orange_util::function_51b752a9(#"hash_3b257ebd55a83e3d");
+  self playSound(#"evt_icicle_pickup");
+  e_who thread zm_orange_util::function_51b752a9(#"vox_icicle_pickup");
   level zm_ui_inventory::function_7df6bb60("zm_orange_ww_quest", 1);
   self zm_unitrigger::unregister_unitrigger(self.s_unitrigger);
   level flag::set(#"hash_550c8dc4c89d7873");
@@ -377,7 +377,7 @@ function_2187358d() {
   level endon(#"end_game", #"hash_45b20bfeff570913");
   s_result = self waittill(#"trigger_activated");
   e_who = s_result.e_who;
-  playSoundAtPosition(#"hash_565a70d2b5a64e2", self.origin);
+  playSoundAtPosition(#"evt_device_pickup", self.origin);
   level thread function_53bfbec4(e_who);
   level flag::set(#"hash_45b20bfeff570913");
 }

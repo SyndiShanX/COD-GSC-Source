@@ -42,10 +42,10 @@ __init__() {
   level.var_9cddbf4e[#"p8_fxanim_wz_death_stash_mod"] = {
     #open_sound: #"evt_death_stash_open", #var_b9492c6: #"hash_70fb2ee1b706a28a"};
   level.var_9cddbf4e[#"hash_1dcbe8021fb16344"] = {
-    #open_sound: #"hash_56b5b65c141f4629", #var_b9492c6: #"hash_6fcb29cae6678d93"};
+    #open_sound: #"evt_magic_box_open", #var_b9492c6: #"hash_6fcb29cae6678d93"};
   level.var_9cddbf4e[#"p8_fxanim_wz_supply_stash_ammo_mod"] = {
     #open_sound: #"hash_f743d336f8b7764", #var_b9492c6: #"hash_3e62bcbd6460ff44"};
-  level.var_9cddbf4e[#"hash_574076754776e003"] = {
+  level.var_9cddbf4e[#"p8_fxanim_wz_supply_stash_health_mod"] = {
     #open_sound: #"hash_36e23ce3e5f7e4c0", #var_b9492c6: #"hash_22f426a8593609e8"};
   level.var_9cddbf4e[#"wpn_t7_drop_box_wz"] = {
     #open_sound: #"evt_supply_drop_open", #var_b9492c6: #"hash_2b751d50426093db"};

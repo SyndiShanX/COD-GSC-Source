@@ -359,7 +359,7 @@ function_735c3a67(player, unitrigger) {
   if(isDefined(player)) {
     unitrigger.locked = 1;
     unitrigger.blueprint.locked = 1;
-    player playSound(#"hash_1fff2aa71bff91fa");
+    player playSound(#"zmb_crafting_start");
   }
 }
 
@@ -688,7 +688,7 @@ function_86531922(e_holder, w_item) {
     self thread zm_audio::create_and_play_dialog(#"shield_piece", #"pickup");
   }
 
-  self playSound(#"hash_230737b2535a3374");
+  self playSound(#"zmb_crafting_pickup_generic");
 
   if(w_item.var_f56ac2bd !== "") {
     level zm_ui_inventory::function_7df6bb60(hash(w_item.var_f56ac2bd), 1);
@@ -703,7 +703,7 @@ function_d56724a6(e_holder, w_item) {
   if(isDefined(w_item.var_25bb96cc)) {
     self playSound(w_item.var_25bb96cc);
   } else {
-    self playSound(#"hash_230737b2535a3374");
+    self playSound(#"zmb_crafting_pickup_generic");
   }
 
   if(isDefined(w_item.gadgetreadysoundplayer)) {
@@ -1347,7 +1347,7 @@ function_df8ce6e2(player) {
   if(!(isDefined(var_d97673ff) && var_d97673ff)) {
     player zm_weapons::weapon_give(self.stub.blueprint.w_result);
   } else {
-    player playSound(#"hash_230737b2535a3374");
+    player playSound(#"zmb_crafting_pickup_generic");
   }
 
   player notify(#"hash_77d44943fb143b18", {

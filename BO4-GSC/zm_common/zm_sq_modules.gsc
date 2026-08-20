@@ -53,7 +53,7 @@ function_2a94055d(id) {
     return;
   }
 
-  playSoundAtPosition(#"hash_21967fb66e85ac4e", var_1d81ef2d.origin);
+  playSoundAtPosition(#"zmb_sq_souls_complete", var_1d81ef2d.origin);
   var_1d81ef2d.active = 0;
 }
 

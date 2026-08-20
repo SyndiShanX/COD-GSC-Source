@@ -115,7 +115,7 @@ trap_damage(t_trap) {
 
     if(isDefined(level.var_bae901ce) && level.var_bae901ce) {
       if(isDefined(t_trap) && isPlayer(t_trap.activated_by_player)) {
-        t_trap.activated_by_player thread zm_vo::function_a2bd5a0c(#"hash_150ed78f0557df5f", 0.5, 1, 0, 1);
+        t_trap.activated_by_player thread zm_vo::function_a2bd5a0c(#"vox_bath_trap_active", 0.5, 1, 0, 1);
         level.var_bae901ce = undefined;
       }
     }

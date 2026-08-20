@@ -347,7 +347,7 @@ function_cd7e0989(n_code) {
     iprintlnbold("<dev string:x19e>");
 
     playSoundAtPosition("zmb_comp_keypad_action_fail", self.origin);
-    level thread zm_white_util::function_ec34b5ee(#"hash_74933b1a2d246442");
+    level thread zm_white_util::function_ec34b5ee(#"vox_code_incorrect_rush_0");
     return;
   }
 
@@ -355,7 +355,7 @@ function_cd7e0989(n_code) {
     iprintlnbold("<dev string:x1b2>");
 
     playSoundAtPosition("zmb_comp_keypad_action_fail", self.origin);
-    level thread zm_white_util::function_ec34b5ee(#"hash_74933b1a2d246442");
+    level thread zm_white_util::function_ec34b5ee(#"vox_code_incorrect_rush_0");
     return;
   }
 
@@ -363,7 +363,7 @@ function_cd7e0989(n_code) {
     iprintlnbold("<dev string:x1de>");
 
     playSoundAtPosition("zmb_comp_keypad_action_fail", self.origin);
-    level thread zm_white_util::function_ec34b5ee(#"hash_74933b1a2d246442");
+    level thread zm_white_util::function_ec34b5ee(#"vox_code_incorrect_rush_0");
     return;
   }
 
@@ -505,7 +505,7 @@ function_9e9664bd() {
 }
 
 function_ac121b1c() {
-  level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
+  level thread zm_white_util::function_ec34b5ee(#"vox_code_correct_rush_0");
   level thread zm_white_audio_interactables::function_a0b040d4();
 }
 

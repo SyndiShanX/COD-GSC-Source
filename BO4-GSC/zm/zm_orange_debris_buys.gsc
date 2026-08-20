@@ -53,7 +53,7 @@ function_31a1d10f() {
     self waittill(#"kill_debris_prompt_thread");
 
     foreach(e_zbarrier in self.a_e_zbarriers) {
-      e_zbarrier playSound(#"hash_717ab767ebc92682");
+      e_zbarrier playSound(#"zmb_fire_blocker");
       e_zbarrier clientfield::set("" + #"hash_7e15d8abc4d6c79a", 1);
     }
   }

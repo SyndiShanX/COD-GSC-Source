@@ -70,7 +70,7 @@ hammer_storm(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
     self.n_beacon_fx = util::playFXOnTag(localclientnum, level._effect[#"hammer_storm"], self, "tag_origin");
 
     if(!isDefined(self.var_49f8e089)) {
-      self.var_49f8e089 = self playLoopSound(#"hash_1fc7648098c65e92");
+      self.var_49f8e089 = self playLoopSound(#"wpn_hammer_storm_lp");
       self thread function_9f78a957(localclientnum);
     }
 
@@ -82,7 +82,7 @@ hammer_storm(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
     self.n_beacon_fx = undefined;
   }
 
-  self playSound(0, #"hash_15633b83c64a3ebb");
+  self playSound(0, #"wpn_hammer_storm_end");
 
   if(isDefined(self.var_49f8e089)) {
     self notify(#"hash_5384bc96a8e66d91");
@@ -109,7 +109,7 @@ lightning_impact_play_fx(localclientnum, oldval, newval, bnewent, binitialsnap, 
 
   if(newval == 1) {
     self.var_89d8285 = util::playFXOnTag(localclientnum, level._effect[#"lightning_impact"], self, self zm_utility::function_467efa7b());
-    self playSound(localclientnum, #"hash_63d588d1f28ecdc1");
+    self playSound(localclientnum, #"wpn_hammer_electrocution_impact");
   }
 }
 
@@ -203,7 +203,7 @@ function_cd968d6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
       self.var_89d8285 = util::playFXOnTag(localclientnum, level._effect[#"lightning_impact"], self, self zm_utility::function_467efa7b());
     }
 
-    self playSound(localclientnum, #"hash_63d588d1f28ecdc1");
+    self playSound(localclientnum, #"wpn_hammer_electrocution_impact");
     return;
   }
 

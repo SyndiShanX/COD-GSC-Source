@@ -45,7 +45,7 @@ on_entity_shutdown(localclientnum) {
 crit_spot_reveal(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newvalue) {
     self mapshaderconstant(localclientnum, 0, "scriptVector" + newvalue, 0, 1, 0, 0);
-    self playSound(0, #"hash_9cde96bded002d5");
+    self playSound(0, #"zmb_vocals_stoker_pain");
   }
 }
 
@@ -70,28 +70,28 @@ stoker_fx_start(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, field
     case 3:
       if(!isDefined(self.currentfx[3])) {
         self.currentfx[3] = util::playFXOnTag(localclientnum, "zm_ai/fx8_stoker_dmg_weak_point", self, "j_clavicle_le");
-        self playSound(localclientnum, #"hash_2dc7f5a5e2c5af20");
+        self playSound(localclientnum, #"zmb_ai_stoker_damage");
       }
 
       break;
     case 4:
       if(!isDefined(self.currentfx[4])) {
         self.currentfx[4] = util::playFXOnTag(localclientnum, "zm_ai/fx8_stoker_dmg_weak_point", self, "j_clavicle_ri");
-        self playSound(localclientnum, #"hash_2dc7f5a5e2c5af20");
+        self playSound(localclientnum, #"zmb_ai_stoker_damage");
       }
 
       break;
     case 5:
       if(!isDefined(self.currentfx[5])) {
         self.currentfx[4] = util::playFXOnTag(localclientnum, "zm_ai/fx8_stoker_dmg_weak_point", self, "j_head");
-        self playSound(localclientnum, #"hash_2dc7f5a5e2c5af20");
+        self playSound(localclientnum, #"zmb_ai_stoker_damage");
       }
 
       break;
     case 6:
       if(!isDefined(self.currentfx[6])) {
         self.currentfx[6] = util::playFXOnTag(localclientnum, "zm_ai/fx8_stoker_dmg_weak_point", self, "j_wrist_le");
-        self playSound(localclientnum, #"hash_2dc7f5a5e2c5af20");
+        self playSound(localclientnum, #"zmb_ai_stoker_damage");
       }
 
       break;

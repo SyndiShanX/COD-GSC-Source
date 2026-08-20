@@ -205,8 +205,8 @@ function private function_c7bd0aa8(point, startpoint) {
 function_13339b58(istank) {
   self endon(#"death");
   open_anim = #"p8_fxanim_wz_parachute_supplydrop_open_anim";
-  idle_anim = #"hash_39265b4ed372175a";
-  var_e1c31bea = #"hash_32ad963f25f115d2";
+  idle_anim = #"p8_fxanim_wz_parachute_supplydrop_open_idle_anim";
+  var_e1c31bea = #"p8_fxanim_wz_parachute_supplydrop_drop_anim";
 
   if(isDefined(istank) && istank) {
     open_anim = #"hash_77322c90462ba8c";

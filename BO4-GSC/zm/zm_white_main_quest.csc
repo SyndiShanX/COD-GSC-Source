@@ -100,7 +100,7 @@ server_carry_fail_feedback(localclientnum, oldval, newval, bnewent, binitialsnap
 
 server_carry_audio_feedback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    self.var_c0f636f9 = self playLoopSound(#"hash_54b2fc41dcb6bc56");
+    self.var_c0f636f9 = self playLoopSound(#"evt_server_alarm");
     return;
   }
 

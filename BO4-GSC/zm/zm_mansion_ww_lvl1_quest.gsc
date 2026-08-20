@@ -202,7 +202,7 @@ function_7e7626b5() {
     player = s_waitresult.activator;
 
     if(zombie_utility::is_player_valid(player)) {
-      player thread zm_vo::function_a2bd5a0c(#"hash_28aa1fc068bb2e3b", 1);
+      player thread zm_vo::function_a2bd5a0c(#"vox_folly_pistol_interact_first", 1);
       self delete();
     }
 
@@ -232,7 +232,7 @@ function_f4f7650b() {
 
     if(zm_utility::can_use(e_player, 1)) {
       e_player zm_weapons::weapon_give(level.var_f086136b);
-      e_player thread zm_vo::function_a2bd5a0c(#"hash_74ba2bf90063e6c6", 1);
+      e_player thread zm_vo::function_a2bd5a0c(#"vox_wonder_interact_first", 1);
       level flag::set("ww_obtained");
     }
   }

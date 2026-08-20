@@ -95,5 +95,5 @@ function_b9c917cc(localclientnum, str_bundle) {
 
 zm_aat_brain_decay_explosion(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   util::playFXOnTag(localclientnum, "zm_weapons/fx8_aat_brain_decay_head", self, "j_head");
-  self playSound(0, #"hash_422ccb7ddff9b3f4");
+  self playSound(0, #"zmb_aat_braindecay_explode");
 }

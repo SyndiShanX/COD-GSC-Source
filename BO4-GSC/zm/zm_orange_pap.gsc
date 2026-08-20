@@ -428,7 +428,7 @@ apc_restart_retreat() {
   wait 4;
   level.musicsystemoverride = 1;
   music::setmusicstate("golden_pap_defend");
-  level thread zm_orange_util::function_fd24e47f(#"hash_84fa084a2617bf4", -1, 0, 1);
+  level thread zm_orange_util::function_fd24e47f(#"vox_golden_pap_react", -1, 0, 1);
 }
 
 function_2401694f() {
@@ -537,7 +537,7 @@ function_feee6e66() {
   self playSound(#"hash_5c0903506e9a705a");
 
   if(level flag::get(#"hash_641f14d0b2fd57d7")) {
-    s_results.e_who thread zm_orange_util::function_51b752a9(#"hash_1558be2f4ebc39b5");
+    s_results.e_who thread zm_orange_util::function_51b752a9(#"vox_blue_rock_have_met");
   } else {
     s_results.e_who thread zm_orange_util::function_51b752a9(#"vox_pickup_generic");
   }

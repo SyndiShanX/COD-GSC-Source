@@ -113,30 +113,30 @@ function_d3fc7131() {
     case #"beach":
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(1, 13, 25, #"hash_1eff75043dd3a914", &function_f0f0f5f3, &function_20f477f2, "bonus_points_team", #"hash_78a6b67ab7d98b2f");
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(2, 15, 30, #"hash_1eff78043dd3ae2d", &function_b1c46dce, &function_b0d19ce9, "insta_kill", #"hash_697d3cc07f8424da");
-      self.a_s_challenges[self.a_s_challenges.size] = init_challenge(3, 3, 3, #"hash_1eff77043dd3ac7a", &function_e960fbf3, &function_35f6e838, "break_freeze_faster", #"hash_4394f0fdb2267af1");
+      self.a_s_challenges[self.a_s_challenges.size] = init_challenge(3, 3, 3, #"hash_1eff77043dd3ac7a", &function_e960fbf3, &function_35f6e838, "break_freeze_faster", #"vox_challenge_five");
       self function_33f591cf();
       break;
     case #"forecastle":
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(4, 25, 50, #"hash_4e74f8eb1bd5b367", &function_63ed3839, &function_d9dffba1, "carpenter", #"hash_78a6b67ab7d98b2f");
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(5, 10, 20, #"hash_4e74f9eb1bd5b51a", &function_6d225067, &function_6d50f216, "fire_sale", #"hash_697d3cc07f8424da");
-      self.a_s_challenges[self.a_s_challenges.size] = init_challenge(6, 3, 3, #"hash_4e74faeb1bd5b6cd", &function_2ae162bf, &function_1de4dc2b, "armor", #"hash_3192e2687f3a2667");
+      self.a_s_challenges[self.a_s_challenges.size] = init_challenge(6, 3, 3, #"hash_4e74faeb1bd5b6cd", &function_2ae162bf, &function_1de4dc2b, "armor", #"vox_challenge_three");
       self function_be80cd37();
       break;
     case #"frozen_crevasse":
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(7, 20, 40, #"hash_d9f2cedb84b8d66", &function_658f9053, &function_5ba49bb9, "bonus_points_team", #"hash_78a6b67ab7d98b2f");
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(8, 6, 12, #"hash_d9f2bedb84b8bb3", &function_8885885d, &function_b0848cf7, "full_ammo", #"hash_697d3cc07f8424da");
-      self.a_s_challenges[self.a_s_challenges.size] = init_challenge(9, 5, 5, #"hash_d9f2aedb84b8a00", &function_39ca7654, &function_a0ebbf07, "extra_snowballs", #"hash_607ea24c3576c5b2");
+      self.a_s_challenges[self.a_s_challenges.size] = init_challenge(9, 5, 5, #"hash_d9f2aedb84b8a00", &function_39ca7654, &function_a0ebbf07, "extra_snowballs", #"vox_challenge_sing");
       self init_bells();
       break;
     case #"lighthouse_station":
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(10, 25, 50, #"hash_3f452857bdecf44e", &function_6384ebfd, &function_fd31e27b, "carpenter", #"hash_78a6b67ab7d98b2f");
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(11, 20, 40, #"hash_3f452757bdecf29b", &function_6639d547, &function_50961fa5, "hero_weapon_power", #"hash_697d3cc07f8424da");
-      self.a_s_challenges[self.a_s_challenges.size] = init_challenge(12, 3, 5, #"hash_3f452657bdecf0e8", &function_bb6ca008, &function_a9598dd1, "self_revives", #"hash_72d97680741c869d");
+      self.a_s_challenges[self.a_s_challenges.size] = init_challenge(12, 3, 5, #"hash_3f452657bdecf0e8", &function_bb6ca008, &function_a9598dd1, "self_revives", #"vox_challenge_pee");
       break;
     case #"specimen_storage":
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(13, 15, 25, #"hash_6ded98ee1bc95925", &function_b40fed60, &function_a4b66a2b, "insta_kill", #"hash_78a6b67ab7d98b2f");
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(14, 10, 15, #"hash_6ded95ee1bc9540c", &registersplicestarttraverse, &function_7d030c3d, "hero_weapon_power", #"hash_697d3cc07f8424da");
-      self.a_s_challenges[self.a_s_challenges.size] = init_challenge(15, 3, 3, #"hash_6ded96ee1bc955bf", &function_a36ace8b, &function_6884e5b8, "half_price_traps", #"hash_1374108085ffeb9d");
+      self.a_s_challenges[self.a_s_challenges.size] = init_challenge(15, 3, 3, #"hash_6ded96ee1bc955bf", &function_a36ace8b, &function_6884e5b8, "half_price_traps", #"vox_challenge_two");
       break;
   }
 }
@@ -278,7 +278,7 @@ start_next_challenge() {
     self.var_d6578e1f = array::pop_front(self.a_s_challenges);
 
     if(n_size == 3 && level flag::get(#"hash_2a1215d8a3e31013")) {
-      self.e_vo zm_hms_util::function_6a0d675d(#"hash_3a42fc5b4bbe08c5");
+      self.e_vo zm_hms_util::function_6a0d675d(#"vox_challenge_intro");
       level flag::clear(#"hash_2a1215d8a3e31013");
     }
 
@@ -431,7 +431,7 @@ start_challenge() {
   }
 
   self function_bce7e59b(var_d6578e1f.n_index, var_d6578e1f.n_current_progress, var_d6578e1f.n_goal);
-  playSoundAtPosition(#"hash_405121518503e4be", self.origin);
+  playSoundAtPosition(#"zmb_challenges_start", self.origin);
   self thread[[var_d6578e1f.func_setup]]();
   var_d6578e1f waittill(var_d6578e1f.str_notify);
   self[[var_d6578e1f.func_cleanup]]();
@@ -1204,7 +1204,7 @@ function_c607ac40(var_d6578e1f) {
     e_who = s_waitresult.e_who;
 
     if(!isDefined(e_who.var_77d7715a) || !e_who.var_77d7715a) {
-      e_who playSound(#"hash_2814441619ec7760");
+      e_who playSound(#"zmb_pee_pickup");
 
       if(!self.var_5637fcf9) {
         self.var_5637fcf9 = 1;
@@ -1238,7 +1238,7 @@ function_3fbb4390(var_d6578e1f) {
     e_who = s_waitresult.e_who;
 
     if(isDefined(e_who.var_77d7715a) && e_who.var_77d7715a && e_who zm_zonemgr::get_player_zone() === "beach" && isDefined(e_who.b_in_water) && e_who.b_in_water) {
-      e_who playSound(#"hash_2ad99bf60d7fe42a");
+      e_who playSound(#"zmb_pee_pour");
       e_who notify(#"hash_1ae87f50e75564f3");
       e_who.var_77d7715a = 0;
 
@@ -1375,7 +1375,7 @@ function_472fa2ca(s_challenge) {
     switch (self.script_int) {
       case 0:
         var_66bb9366 = #"hash_b2dd9a0b97705ad";
-        playSoundAtPosition(#"hash_23c7abbf9d34bf4a", self.origin);
+        playSoundAtPosition(#"zmb_bell_a", self.origin);
         break;
       case 1:
         var_66bb9366 = #"hash_53f014fab33492d8";
@@ -1383,7 +1383,7 @@ function_472fa2ca(s_challenge) {
         break;
       case 2:
         var_66bb9366 = #"hash_594894375473c7b";
-        playSoundAtPosition(#"hash_23c7a7bf9d34b87e", self.origin);
+        playSoundAtPosition(#"zmb_bell_e", self.origin);
         break;
       case 3:
         var_66bb9366 = #"hash_33ce9da949624fae";

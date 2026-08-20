@@ -368,7 +368,7 @@ function_c0ee8171() {
     level.var_27f2245a = 1;
   }
 
-  playSoundAtPosition(#"hash_16a225866d646305", level.var_3af3c634.origin);
+  playSoundAtPosition(#"evt_spleen_pickup", level.var_3af3c634.origin);
   level.var_3af3c634 hide();
   level.var_733d6b98 = e_who;
   level zm_ui_inventory::function_7df6bb60("zm_orange_spleen", 1, level.var_733d6b98);

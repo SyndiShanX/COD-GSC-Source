@@ -43,7 +43,7 @@ aat_frostbite_trail(localclientnum, oldval, newval, bnewent, binitialsnap, field
     }
 
     if(!isDefined(self.var_dacf22f6)) {
-      self.var_dacf22f6 = self playLoopSound(#"hash_f5d043ac36e0244");
+      self.var_dacf22f6 = self playLoopSound(#"zmb_aat_frostbite_frozen_lp");
     }
 
     self thread function_d84b013b(localclientnum, 1);
@@ -117,6 +117,6 @@ aat_frostbite_explosion(localclientnum, oldval, newval, bnewent, binitialsnap, f
     }
 
     playFX(localclientnum, level._effect[#"aat_frostbite_explosion"], v_fx_origin);
-    self playSound(localclientnum, #"hash_7de1026336539baa");
+    self playSound(localclientnum, #"zmb_aat_frostbite_explode");
   }
 }

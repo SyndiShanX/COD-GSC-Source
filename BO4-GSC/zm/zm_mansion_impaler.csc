@@ -45,7 +45,7 @@ function_7b2555da(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(isDefined(self.var_55e883de)) {
     killfx(localclientnum, self.var_55e883de);
     playFX(localclientnum, level._effect[#"candle_extinguish"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
-    playSound(localclientnum, #"hash_50692f39387dddd", self.origin);
+    playSound(localclientnum, #"zmb_candle_out", self.origin);
     self.var_55e883de = undefined;
   }
 }
@@ -69,8 +69,8 @@ function_46354b9d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval) {
     if(!isDefined(self.var_c3a33b28)) {
       self.var_c3a33b28 = util::playFXOnTag(localclientnum, level._effect[#"soul_possess"], self, "j_spine4");
-      self playSound(localclientnum, #"hash_4826261b01f96036");
-      zmb_soul = self playLoopSound(#"hash_298631572be3dd79");
+      self playSound(localclientnum, #"zmb_ghost_appear");
+      zmb_soul = self playLoopSound(#"zmb_ghost_loop");
     }
 
     return;
@@ -84,8 +84,8 @@ function_46354b9d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_7fb1dad8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   util::playFXOnTag(localclientnum, level._effect[#"soul_possess_orb"], self, "tag_origin");
-  self playSound(localclientnum, #"hash_72a28324d62874cc");
-  var_3e97d494 = self playLoopSound(#"hash_298631572be3dd79");
+  self playSound(localclientnum, #"zmb_ghost_disappear");
+  var_3e97d494 = self playLoopSound(#"zmb_ghost_loop");
 }
 
 function_5790d8f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

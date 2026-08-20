@@ -276,7 +276,7 @@ spawn_single(b_force_spawn = 0, var_eb3a8721, var_bc66d64b) {
       ai thread[[level.var_18645b05]](s_spawn_loc);
     }
 
-    ai playSound(#"hash_63299a75a97f9678");
+    ai playSound(#"zmb_ai_stoker_spawn");
     bhtnactionstartevent(ai, "spawn");
     self util::delay(3, "death", &zm_audio::function_bca32e49, "stoker", "cue_react");
   }

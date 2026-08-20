@@ -48,7 +48,7 @@ init_clientfields() {
 fall() {
   iprintlnbold("<dev string:x38>");
 
-  level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
+  level thread zm_white_util::function_ec34b5ee(#"vox_code_correct_rush_0");
   n_end_time = gettime() + 300000;
 
   while(gettime() < n_end_time) {
@@ -68,7 +68,7 @@ fall() {
 grav() {
   iprintlnbold("<dev string:x74>");
 
-  level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
+  level thread zm_white_util::function_ec34b5ee(#"vox_code_correct_rush_0");
   zm_bgb_newtonian_negation::function_8622e664(1);
   wait 60;
   zm_bgb_newtonian_negation::function_8622e664(0);
@@ -78,7 +78,7 @@ grav() {
 
 guns() {
   self endon(#"fake_death");
-  level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
+  level thread zm_white_util::function_ec34b5ee(#"vox_code_correct_rush_0");
 
   if(isDefined(level.pack_a_punch) && level flag::get("pap_power_ready")) {
     iprintlnbold("<dev string:xba>");
@@ -223,7 +223,7 @@ function_a9e83aa6() {
 time() {
   iprintlnbold("<dev string:x15f>");
 
-  level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
+  level thread zm_white_util::function_ec34b5ee(#"vox_code_correct_rush_0");
   a_e_players = getPlayers();
   a_e_zombies = getaiteamarray(level.zombie_team);
 
@@ -251,7 +251,7 @@ time() {
 brew() {
   iprintlnbold("<dev string:x198>");
 
-  level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
+  level thread zm_white_util::function_ec34b5ee(#"vox_code_correct_rush_0");
   level.var_1f3f3e7b = &function_28e2ddd5;
   level.var_1b64d570 = 0;
   level waittill(#"end_of_round");
@@ -262,7 +262,7 @@ brew() {
 cola() {
   iprintlnbold("<dev string:x1be>");
 
-  level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
+  level thread zm_white_util::function_ec34b5ee(#"vox_code_correct_rush_0");
   level.var_1f3f3e7b = &function_28e2ddd5;
   level.var_1b64d570 = 1;
   level waittill(#"end_of_round");
@@ -273,7 +273,7 @@ cola() {
 soda() {
   iprintlnbold("<dev string:x1e4>");
 
-  level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
+  level thread zm_white_util::function_ec34b5ee(#"vox_code_correct_rush_0");
   level.var_1f3f3e7b = &function_28e2ddd5;
   level.var_1b64d570 = 2;
   level waittill(#"end_of_round");
@@ -294,7 +294,7 @@ function_28e2ddd5(n_perk_cost, var_c6ce6ade) {
 noob() {
   iprintlnbold("<dev string:x269>");
 
-  level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
+  level thread zm_white_util::function_ec34b5ee(#"vox_code_correct_rush_0");
   level thread function_a3bdad03();
 
   while(isDefined(level.var_debefb5b) && level.var_debefb5b) {
@@ -327,7 +327,7 @@ function_a3bdad03() {
 bank() {
   iprintlnbold("<dev string:x295>");
 
-  level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
+  level thread zm_white_util::function_ec34b5ee(#"vox_code_correct_rush_0");
   wait 2;
   a_e_players = getPlayers();
 
@@ -339,7 +339,7 @@ bank() {
 door() {
   iprintlnbold("<dev string:x2b9>");
 
-  level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
+  level thread zm_white_util::function_ec34b5ee(#"vox_code_correct_rush_0");
   a_e_zombie_doors = getEntArray("zombie_door", "targetname");
   a_e_zombie_debris = getEntArray("zombie_debris", "targetname");
   a_script_flags = [];
@@ -402,7 +402,7 @@ door() {
 warp() {
   iprintlnbold("<dev string:x2df>");
 
-  level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
+  level thread zm_white_util::function_ec34b5ee(#"vox_code_correct_rush_0");
   wait 1;
   a_e_players = getPlayers();
 
@@ -432,7 +432,7 @@ warp_player() {
 }
 
 shed() {
-  level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
+  level thread zm_white_util::function_ec34b5ee(#"vox_code_correct_rush_0");
 
   if(flag::get(#"magic_door_power_up_grabbed")) {
     level flag::clear("magic_door_power_up_grabbed");
@@ -471,7 +471,7 @@ shed() {
 nuke() {
   iprintlnbold("<dev string:x391>");
 
-  level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
+  level thread zm_white_util::function_ec34b5ee(#"vox_code_correct_rush_0");
   var_68b709a = struct::get("computer_system_powerup_drop");
 
   if(isDefined(var_68b709a)) {
@@ -492,7 +492,7 @@ hero() {
 puke() {
   iprintlnbold("<dev string:x3d8>");
 
-  level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
+  level thread zm_white_util::function_ec34b5ee(#"vox_code_correct_rush_0");
   callback::on_ai_damage(&function_80d5023d);
   wait 300;
   callback::remove_on_ai_damage(&function_80d5023d);
@@ -528,7 +528,7 @@ function_82457e35(params) {
 club() {
   iprintlnbold("<dev string:x432>");
 
-  level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
+  level thread zm_white_util::function_ec34b5ee(#"vox_code_correct_rush_0");
   exploder::exploder("fxexp_disco_lgt");
   playSoundAtPosition(#"hash_c8d3a1557c42ab7", (1, 1145, -350));
   wait 253;
@@ -540,7 +540,7 @@ club() {
 duck() {
   iprintlnbold("<dev string:x4b0>");
 
-  level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
+  level thread zm_white_util::function_ec34b5ee(#"vox_code_correct_rush_0");
   callback::on_ai_damage(&function_369efa3e);
   wait 300;
   callback::remove_callback(#"on_ai_damage", &function_369efa3e);
@@ -559,7 +559,7 @@ function_369efa3e(params) {
 }
 
 song() {
-  level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
+  level thread zm_white_util::function_ec34b5ee(#"vox_code_correct_rush_0");
   wait 1;
 
   if(level.musicsystem.currentplaytype < 4) {
@@ -634,7 +634,7 @@ life() {
 }
 
 boom() {
-  level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
+  level thread zm_white_util::function_ec34b5ee(#"vox_code_correct_rush_0");
   s_spawn_loc = struct::get("computer_system_powerup_drop");
   s_keypad = struct::get("keypad");
   e_player = level.var_f13364b4.var_12633dc5;
@@ -647,7 +647,7 @@ boom() {
 }
 
 pack() {
-  level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
+  level thread zm_white_util::function_ec34b5ee(#"vox_code_correct_rush_0");
   var_68b709a = struct::get("computer_system_powerup_drop");
 
   if(isDefined(var_68b709a)) {

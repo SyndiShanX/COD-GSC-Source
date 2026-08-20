@@ -64,12 +64,12 @@ function_a346a156(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(newval == 1) {
     self playrenderoverridebundle(#"hash_c5c4890c94eb1c7");
-    playSound(localclientnum, #"hash_8fc267f3e184882", self.origin);
+    playSound(localclientnum, #"zmb_hallion_teleport_in", self.origin);
     return;
   }
 
   self stoprenderoverridebundle(#"hash_c5c4890c94eb1c7");
-  playSound(localclientnum, #"hash_f5264369f84b89b", self.origin);
+  playSound(localclientnum, #"zmb_hallion_teleport_out", self.origin);
 }
 
 function_72efa790(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

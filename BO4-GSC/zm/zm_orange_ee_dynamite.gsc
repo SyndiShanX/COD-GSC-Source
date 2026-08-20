@@ -219,7 +219,7 @@ function_8427e524() {
         gibserverutils::annihilate(self);
         self clientfield::increment("" + #"dynamite_zombie_explosion_fx", 1);
         level function_d8f300c3(self.origin);
-        playSoundAtPosition(#"hash_7b838586b7ef0d9d", self.origin);
+        playSoundAtPosition(#"evt_dynamite_explode_zombie", self.origin);
       } else {
         level flag::set(#"debug_dynamite_zombie");
       }
@@ -280,7 +280,7 @@ function_8f6cb08() {
   b_spawned = level function_e93a8e82(self.origin, self.angles);
 
   if(level.var_b4fe6eed && b_spawned && isDefined(self.e_killer)) {
-    self.e_killer thread zm_orange_util::function_51b752a9(#"hash_4c18ae1377d349ed");
+    self.e_killer thread zm_orange_util::function_51b752a9(#"vox_dynamite_zombie_drop");
     level.var_b4fe6eed = 0;
   }
 
@@ -353,7 +353,7 @@ function_170afe2c(b_main_quest = 0) {
 function_2e1427a3() {
   level endon(#"end_game");
   e_bomb = util::spawn_model("p8_zm_ora_dynamite_bundle", self.origin, self.angles);
-  playSoundAtPosition(#"hash_34d44148875755b0", e_bomb.origin);
+  playSoundAtPosition(#"evt_dynamite_place", e_bomb.origin);
   e_bomb playLoopSound(#"hash_3e8cb0a639b5a355");
 
   iprintln("<dev string:x53>");
@@ -369,7 +369,7 @@ function_2e1427a3() {
   wait 1;
   e_bomb clientfield::increment("" + #"dynamite_explosion_fx", 1);
   level function_d8f300c3(self.origin);
-  playSoundAtPosition(#"hash_2b694b905abf1892", e_bomb.origin);
+  playSoundAtPosition(#"evt_dynamite_explode", e_bomb.origin);
   e_bomb playRumbleOnEntity("zm_orange_dynamite_bomb_explosion");
   wait 0.1;
   e_bomb hide();

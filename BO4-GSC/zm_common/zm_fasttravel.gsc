@@ -764,11 +764,11 @@ function_62686dda(var_6c365dbf) {
     self function_2aed1d83(var_f0bbde5);
   }
 
-  playSoundAtPosition(#"hash_3388d9809bf60b12", var_a16f5b07);
+  playSoundAtPosition(#"zmb_fasttravel_teleport_start_npc", var_a16f5b07);
   wait 0.5;
   self clientfield::set_to_player("player_stargate_fx", 0);
   self clientfield::set_to_player("fasttravel_teleport_sfx", 0);
-  self playSound(#"hash_52aaa9a4a2e71c73");
+  self playSound(#"zmb_fasttravel_teleport_end_npc");
   self notify(#"fasttravel_over");
 }
 
@@ -939,7 +939,7 @@ function_a78584c0(var_6c365dbf) {
   self setOrigin(s_teleport_room.origin);
   self setplayerangles(s_teleport_room.angles);
   self clientfield::set_to_player("fasttravel_teleport_sfx", 1);
-  playSoundAtPosition(#"hash_3388d9809bf60b12", var_a16f5b07);
+  playSoundAtPosition(#"zmb_fasttravel_teleport_start_npc", var_a16f5b07);
   println("<dev string:x25f>" + self getplayercamerapos());
   self.var_805b8325 = spawn("script_origin", self.origin);
   self.var_805b8325.angles = self.angles;
@@ -964,7 +964,7 @@ function_a78584c0(var_6c365dbf) {
   }
 
   self clientfield::set_to_player("fasttravel_teleport_sfx", 0);
-  self playSound(#"hash_52aaa9a4a2e71c73");
+  self playSound(#"zmb_fasttravel_teleport_end_npc");
   self allowcrouch(1);
   self allowprone(1);
   self notify(#"fasttravel_over", {

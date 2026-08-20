@@ -100,7 +100,7 @@ tomahawk_trail_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(!isDefined(self.var_5681eeb0)) {
-    self.var_5681eeb0 = self playLoopSound(#"hash_5e3cfa1a476b30c4");
+    self.var_5681eeb0 = self playLoopSound(#"wpn_tomahawk_projectile_lp");
   }
 
   if(newval == 1) {

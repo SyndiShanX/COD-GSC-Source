@@ -87,7 +87,7 @@ function_c0862b9e() {
       continue;
     }
 
-    waitresult.attacker playsoundtoplayer(#"hash_3ffdc84cf43cae2b", waitresult.attacker);
+    waitresult.attacker playsoundtoplayer(#"zmb_sq_medallion_player", waitresult.attacker);
     level notify(#"hash_71162ec98b670d92");
     break;
   }

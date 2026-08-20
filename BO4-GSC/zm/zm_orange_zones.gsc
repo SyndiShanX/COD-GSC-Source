@@ -580,7 +580,7 @@ function_cbb8e588() {
         wait 1;
 
         if(player cansee(blood) && player zm_audio::can_speak() && !level flag::get(#"hell_on_earth")) {
-          player zm_orange_util::function_51b752a9(#"hash_21c0a11438981749");
+          player zm_orange_util::function_51b752a9(#"vox_artifact_react");
           return;
         }
       }

@@ -152,7 +152,7 @@ function_6cfb44f0() {
   level endon(#"end_game");
   self zm_unitrigger::function_fac87205(&function_77df7138);
   level flag::set(self.model + "_picked_up");
-  self playSound(#"hash_3b838b7d3c19fd0a");
+  self playSound(#"zmb_ee_item_pickup");
   self delete();
 }
 
@@ -171,7 +171,7 @@ function_3a6ce932() {
   zm_unitrigger::function_fac87205(&function_135e7d64);
   e_target = getEnt(self.target, "targetname");
   e_target show();
-  e_target playSound(#"hash_27013ebd10f7b8c3");
+  e_target playSound(#"zmb_ee_item_drop");
   level flag::set(e_target.model + "_placed");
   level.s_side_quests.var_a1d1197d++;
 }

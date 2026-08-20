@@ -59,7 +59,7 @@ function_272aa016(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.fx_id = util::playFXOnTag(localclientnum, level._effect[#"storm_radius"], self, "tag_origin");
 
     if(!isDefined(self.sfx_id)) {
-      self.sfx_id = self playLoopSound(#"hash_5760b615b9b749d2");
+      self.sfx_id = self playLoopSound(#"wpn_pegasus_storm_lp");
     }
 
     return;
@@ -101,7 +101,7 @@ function_ed1d0231(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(newval == 1) {
     self.var_89d8285 = util::playFXOnTag(localclientnum, level._effect[#"lightning_impact"], self, str_fx_tag);
-    self playSound(localclientnum, #"hash_63d588d1f28ecdc1");
+    self playSound(localclientnum, #"wpn_hammer_electrocution_impact");
   }
 }
 
@@ -175,8 +175,8 @@ function_5091797(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
     self.var_cc9c5baa = util::playFXOnTag(localclientnum, level._effect[#"viper_bite_attack"], self, str_fx_tag);
 
     if(!isDefined(self.var_6450813b)) {
-      self playSound(localclientnum, #"hash_76feff9b8f93c3d9");
-      self.var_6450813b = self playLoopSound(#"hash_117558f0dda6471f");
+      self playSound(localclientnum, #"wpn_viper_bite_start");
+      self.var_6450813b = self playLoopSound(#"wpn_viper_bite_lp");
     }
 
     return;
@@ -187,7 +187,7 @@ function_5091797(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   }
 
   if(isDefined(self.var_6450813b)) {
-    self playSound(localclientnum, #"hash_ae4b548c1d4a748");
+    self playSound(localclientnum, #"wpn_viper_bite_end");
     self stoploopsound(self.var_6450813b);
     self.var_6450813b = undefined;
   }
@@ -198,5 +198,5 @@ function_5091797(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 function_e2680ff3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   str_fx_tag = isDefined(self gettagorigin("j_mainroot")) ? "j_mainroot" : "tag_driver";
   util::playFXOnTag(localclientnum, level._effect[#"viper_bite_projectile_impact"], self, str_fx_tag);
-  self playSound(0, #"hash_3098cba1f74bb5d1");
+  self playSound(0, #"wpn_viper_bite_impact");
 }

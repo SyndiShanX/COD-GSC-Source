@@ -528,7 +528,7 @@ mannequin_falling(var_e5031929) {
   self notify(#"landed");
   self unlink();
   var_e5031929 delete();
-  animation::play(#"hash_4c2aa742b1aeb780", self.origin, self.angles, 1, 0.4, 0.2, 0, 0, 0, 0);
+  animation::play(#"ai_nuketown_ee_landing", self.origin, self.angles, 1, 0.4, 0.2, 0, 0, 0, 0);
 }
 
 function_6bc3bcb8(notifyhash) {
@@ -541,7 +541,7 @@ function_4eca5590() {
   self endon(#"death", #"landed");
 
   while(true) {
-    animation::play(#"hash_1f02283eb11fce2a", self.origin, self.angles, 1, 0.2, 0.2, 0, 0, 0, 0);
+    animation::play(#"ai_nuketown_ee_flail_loop", self.origin, self.angles, 1, 0.2, 0.2, 0, 0, 0, 0);
   }
 }
 

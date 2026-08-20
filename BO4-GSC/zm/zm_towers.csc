@@ -942,13 +942,13 @@ snd_crowd_react(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
 
   switch (newval) {
     case 0:
-      str_alias = #"hash_90cda71914ccf25";
+      str_alias = #"amb_crowd_oneshot_negative_max";
       break;
     case 1:
-      str_alias = #"hash_2a3c75c57c227b04";
+      str_alias = #"amb_crowd_oneshot_negative";
       break;
     case 2:
-      str_alias = #"hash_2a3c75c57c227b04";
+      str_alias = #"amb_crowd_oneshot_negative";
       break;
     case 3:
       str_alias = #"amb_crowd_oneshot_positive";
@@ -957,7 +957,7 @@ snd_crowd_react(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
       str_alias = #"amb_crowd_oneshot_positive";
       break;
     case 6:
-      str_alias = #"hash_2a3c75c57c227b04";
+      str_alias = #"amb_crowd_oneshot_negative";
       break;
     case 7:
       str_alias = #"amb_crowd_oneshot_positive";

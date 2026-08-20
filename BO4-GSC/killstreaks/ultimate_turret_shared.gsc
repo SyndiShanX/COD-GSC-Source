@@ -1236,6 +1236,6 @@ on_player_killed() {
   }
 
   foreach(player in var_f60ab10f) {
-    player playsoundtoplayer(#"hash_37ffaa04e3f898fa", player);
+    player playsoundtoplayer(#"mpl_turret_kill_assist", player);
   }
 }

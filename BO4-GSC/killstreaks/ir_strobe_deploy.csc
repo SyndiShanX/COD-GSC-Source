@@ -14,8 +14,8 @@ init_shared() {
     level.var_9c4cdb79 = [];
   }
 
-  forcestreamxmodel(#"hash_5f05548d8aa53dc1");
-  forcestreamxmodel(#"hash_5770a33506bee5a4");
+  forcestreamxmodel(#"wpn_t8_eqp_smoke_grenade_world_yellow");
+  forcestreamxmodel(#"wpn_t8_eqp_smoke_grenade_world_red");
 }
 
 updatemarkerthread(localclientnum) {
@@ -123,7 +123,7 @@ update_previs(localclientnum, invalid) {
 
 function_3e8d9b27(validlocation, localclientnum) {
   if(validlocation) {
-    level.var_9c4cdb79[localclientnum] setModel(#"hash_5f05548d8aa53dc1");
+    level.var_9c4cdb79[localclientnum] setModel(#"wpn_t8_eqp_smoke_grenade_world_yellow");
 
     if(isDefined(level.var_5af693e8)) {
       stopfx(localclientnum, level.var_5af693e8);
@@ -131,7 +131,7 @@ function_3e8d9b27(validlocation, localclientnum) {
 
     level.var_5af693e8 = function_239993de(localclientnum, "killstreaks/fx8_tankrobot_previs_valid", level.var_9c4cdb79[localclientnum], "tag_fx");
   } else {
-    level.var_9c4cdb79[localclientnum] setModel(#"hash_5770a33506bee5a4");
+    level.var_9c4cdb79[localclientnum] setModel(#"wpn_t8_eqp_smoke_grenade_world_red");
 
     if(isDefined(level.var_5af693e8)) {
       stopfx(localclientnum, level.var_5af693e8);

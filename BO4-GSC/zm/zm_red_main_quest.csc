@@ -1046,7 +1046,7 @@ function_985f4598(str_ww) {
       var_cfc545ad = #"p8_zm_red_rune_circle_ouranos";
       break;
     case #"light":
-      var_cfc545ad = #"hash_31a411dafa5678e2";
+      var_cfc545ad = #"p8_zm_red_rune_circle_hemera";
       break;
   }
 

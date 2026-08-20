@@ -526,7 +526,7 @@ function_e7c9f15b(a_ents) {
   var_4bdae8cd = struct::get("p8_fxanim_zm_esc_recreationyard_rocks_a_bundle", "scriptbundlename");
   var_4bdae8cd thread scene::play("Main&Idle Loop Out");
   e_brutus = a_ents[#"brutus"];
-  playSoundAtPosition(#"hash_66ef8de59c96e8d1", e_brutus gettagorigin("tag_eye"));
+  playSoundAtPosition(#"vox_catwalk_warden_0_ward_0", e_brutus gettagorigin("tag_eye"));
   e_brutus waittill(#"start_teleport");
   level thread function_21ccdb36();
   e_brutus waittill(#"teleport");

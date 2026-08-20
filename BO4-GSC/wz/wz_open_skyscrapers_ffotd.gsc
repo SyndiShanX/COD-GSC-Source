@@ -16,7 +16,7 @@ __main__() {
   rock = spawn("script_model", (-25996.2, -47315.5, 2366.06));
 
   if(isDefined(rock)) {
-    rock setModel(#"hash_283f153de0d2b7ac");
+    rock setModel(#"p8_wz_rock_large_02");
     rock.angles = (0, 240, 27);
     rock setscale(2);
   }
@@ -25,21 +25,21 @@ __main__() {
   rock = spawn("script_model", (14653.5, -18402.3, 1475.66));
 
   if(isDefined(rock)) {
-    rock setModel(#"hash_5d5c82725edc89c8");
+    rock setModel(#"p8_wz_med_rock_01");
     rock.angles = (357, 353, -4);
   }
 
   rock = spawn("script_model", (-6948.21, -24164.6, 1068.76));
 
   if(isDefined(rock)) {
-    rock setModel(#"hash_5d5c82725edc89c8");
+    rock setModel(#"p8_wz_med_rock_01");
     rock.angles = (348, 343, -7);
   }
 
   rock = spawn("script_model", (-10016.2, -25676.7, 1039.73));
 
   if(isDefined(rock)) {
-    rock setModel(#"hash_5d5c82725edc89c8");
+    rock setModel(#"p8_wz_med_rock_01");
     rock.angles = (1, 328, -17);
   }
 }

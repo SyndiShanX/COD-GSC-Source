@@ -1094,7 +1094,7 @@ function function_b00fd241() {
 }
 
 function_6fe98729(e_holder, w_item) {
-  self playSound(#"hash_230737b2535a3374");
+  self playSound(#"zmb_crafting_pickup_generic");
 }
 
 function_48c915fa() {

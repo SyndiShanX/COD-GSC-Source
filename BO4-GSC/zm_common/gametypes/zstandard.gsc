@@ -999,7 +999,7 @@ function_bfa1bab7() {
   self showzbarrierpiece(4);
   self setzbarrierpiecestate(3, "opening", 0.25);
   self setzbarrierpiecestate(4, "opening", 0.25);
-  self playSound(#"hash_59a4ec7cb3de7d13");
+  self playSound(#"zmb_box_weapon_spin_short");
   self waittill(#"randomization_done");
   self setzbarrierpiecestate(3, "open");
   self setzbarrierpiecestate(4, "open");

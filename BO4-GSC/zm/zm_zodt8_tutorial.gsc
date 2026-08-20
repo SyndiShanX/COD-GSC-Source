@@ -297,7 +297,7 @@ open_door(str_door_name) {
     });
 
     if(str_door_name == "library_boat_deck_door") {
-      zombie_door playSound(#"hash_4bddd546f43487cf");
+      zombie_door playSound(#"zmb_blocker_debris_purchase");
     }
   }
 }

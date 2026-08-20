@@ -28,7 +28,7 @@ init() {
 trap_activate() {
   level exploder::exploder("fxexp_trap_venom_switch");
   self thread zm_traps::trap_damage();
-  playSoundAtPosition(#"hash_1a3423b6a6b71330", level.var_a19e2d89.origin);
+  playSoundAtPosition(#"zmb_venom_activate", level.var_a19e2d89.origin);
   level exploder::exploder("fxexp_trap_poison");
   level.var_a19e2d89 playLoopSound(#"zmb_venom_spray");
   level.var_7012847c = 1;
@@ -39,7 +39,7 @@ trap_activate() {
   level.var_a19e2d89 stoploopsound(0.5);
   self notify(#"trap_done");
   self thread trap_cooldown();
-  playSoundAtPosition(#"hash_a9fa517453baef3", level.var_a19e2d89.origin);
+  playSoundAtPosition(#"zmb_venom_deactivate", level.var_a19e2d89.origin);
 }
 
 trap_cooldown() {
@@ -145,7 +145,7 @@ trap_damage(t_trap) {
 
     if(isDefined(level.var_7012847c) && level.var_7012847c) {
       if(isDefined(t_trap) && isPlayer(t_trap.activated_by_player)) {
-        t_trap.activated_by_player thread zm_vo::function_a2bd5a0c(#"hash_37d475cd42f208a1", 0.5, 1, 0, 1);
+        t_trap.activated_by_player thread zm_vo::function_a2bd5a0c(#"vox_venom_trap_active", 0.5, 1, 0, 1);
         level.var_7012847c = undefined;
       }
     }

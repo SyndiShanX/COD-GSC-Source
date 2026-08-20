@@ -966,8 +966,8 @@ powerup_setup(powerup_override, powerup_team, powerup_location, powerup_player, 
 
   if(!(isDefined(var_b9dc5e9) && var_b9dc5e9)) {
     if((powerup == "bonus_points_player" || powerup == "bonus_points_player_shared") && zm_utility::is_standard()) {
-      self playSound(#"hash_1229e9d60b3181ef");
-      self playLoopSound(#"hash_46b9bf1ae523021c");
+      self playSound(#"zmb_pts_powerup_spawn");
+      self playLoopSound(#"zmb_pts_powerup_lp");
     } else {
       self playSound(#"zmb_spawn_powerup");
       self playLoopSound(#"zmb_spawn_powerup_loop");
@@ -1180,7 +1180,7 @@ powerup_grab(powerup_team) {
         }
 
         if((self.powerup_name == "bonus_points_player" || self.powerup_name == "bonus_points_player_shared") && zm_utility::is_standard()) {
-          player playSound(#"hash_6c0682a7e4e26b09");
+          player playSound(#"zmb_pts_powerup_grabbed");
         } else {
           b_ignore = 0;
 

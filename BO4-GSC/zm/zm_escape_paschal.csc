@@ -130,7 +130,7 @@ function_e5437696(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_4e35f286 = util::playFXOnTag(localclientnum, level._effect[#"kr_glow"], self, "tag_cover");
 
     if(!isDefined(self.var_a863bc25)) {
-      self.var_a863bc25 = self playLoopSound(#"hash_59f1ff45d390f7f1");
+      self.var_a863bc25 = self playLoopSound(#"zmb_kronorium_glow");
     }
   }
 }

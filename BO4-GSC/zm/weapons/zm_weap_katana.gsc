@@ -177,10 +177,10 @@ function_af221ee1(s_params) {
             if(s_params.shitloc === "head" || s_params.shitloc === "helmet") {
               self thread function_1475944a();
               gibserverutils::gibhead(self);
-              self playSound(#"hash_762b44e67bc3761f");
+              self playSound(#"wpn_katana_melee_impact");
             } else if(isDefined(s_params.vpoint)) {
               self zombie_utility::derive_damage_refs(s_params.vpoint);
-              self playSound(#"hash_762b44e67bc3761f");
+              self playSound(#"wpn_katana_melee_impact");
             }
           }
         }
@@ -209,7 +209,7 @@ function_af221ee1(s_params) {
 
             if(isalive(self)) {
               self dodamage(1, self.origin, s_params.eattacker, s_params.eattacker, s_params.shitloc, s_params.smeansofdeath, 0, undefined);
-              self playSound(#"hash_762b44e67bc3761f");
+              self playSound(#"wpn_katana_melee_impact");
             }
           }
         }
@@ -299,7 +299,7 @@ function_bbe55589(e_player, w_katana, str_hitloc) {
     self.var_48a548c1 = 1;
     [[level.var_3594d33a]] - > waitinqueue(self);
     self dodamage(self.health + 100, e_player.origin, e_player, e_player, str_hitloc, "MOD_MELEE", 0, w_katana);
-    self playSound(#"hash_762b44e67bc3761f");
+    self playSound(#"wpn_katana_melee_impact");
     return;
   }
 
@@ -319,7 +319,7 @@ function_bbe55589(e_player, w_katana, str_hitloc) {
   [[level.var_3594d33a]] - > waitinqueue(self);
   n_damage = 750 < n_base_damage ? n_base_damage : 750;
   self dodamage(n_damage, e_player.origin, e_player, e_player, str_hitloc, "MOD_MELEE", 0, w_katana);
-  self playSound(#"hash_762b44e67bc3761f");
+  self playSound(#"wpn_katana_melee_impact");
   self.var_48a548c1 = undefined;
 }
 

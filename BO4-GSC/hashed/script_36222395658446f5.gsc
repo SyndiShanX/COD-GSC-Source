@@ -220,7 +220,7 @@ function_7d6c1805(e_player) {
       level.var_3e7cd669 setvisibletoplayer(e_player);
       e_player.var_b3076a2d = undefined;
       e_player flag::set(#"hash_d41f651bb868608");
-      e_player playsoundtoplayer(#"hash_197a1f4b39686315", e_player);
+      e_player playsoundtoplayer(#"zmb_step_success", e_player);
     }
   }
 }
@@ -329,7 +329,7 @@ function_6c5fdbbf(e_player) {
 function_f23ddf20(e_player) {
   e_player endoncallback(&function_905f55bb, #"disconnect");
   level notify(#"hash_421aca00fd70d9ea");
-  playSoundAtPosition(#"hash_5077c643bb3c5f9e", level.var_4024aaf6.origin);
+  playSoundAtPosition(#"zmb_spknifeork_pickup", level.var_4024aaf6.origin);
   w_current = e_player.currentweapon;
   e_player thread zm_melee_weapon::award_melee_weapon(#"spknifeork");
 
@@ -522,7 +522,7 @@ acid_trap_think() {
   self clientfield::set_to_player("" + #"hash_7cdfc8f4819bab2e", 1);
   self clientfield::set_to_player("" + #"hash_5d9808a62579e894", 0);
   level.var_288dc330 setvisibletoplayer(self);
-  level.var_288dc330 playLoopSound(#"hash_3129e04ec52b7ef2");
+  level.var_288dc330 playLoopSound(#"zmb_gems_loop");
   self thread zm_audio::create_and_play_dialog(#"success_resp", #"generic");
 }
 
@@ -548,7 +548,7 @@ function_352a977a() {
     } else if(e_player flag::get(#"hash_2218e030b30c77e2") && !e_player flag::get(#"hash_1c96d8540b5d8c50")) {
       level.var_288dc330 setinvisibletoplayer(e_player);
       e_player flag::set(#"hash_1c96d8540b5d8c50");
-      playSoundAtPosition(#"hash_7cfaf85826852b1f", level.var_288dc330.origin);
+      playSoundAtPosition(#"zmb_gem_pickup", level.var_288dc330.origin);
       level.var_288dc330 stoploopsound();
       return;
     }
@@ -571,7 +571,7 @@ function_5a8a4082() {
   self clientfield::set_to_player("" + #"hash_1aa1c7790dc67d1e", 1);
   self clientfield::set_to_player("" + #"hash_4ec2b359458774e4", 0);
   level.var_57808c93 setvisibletoplayer(self);
-  level.var_57808c93 playLoopSound(#"hash_3129e04ec52b7ef2");
+  level.var_57808c93 playLoopSound(#"zmb_gems_loop");
   self thread zm_audio::create_and_play_dialog(#"success_resp", #"generic");
 }
 
@@ -597,7 +597,7 @@ function_139dd88c() {
     } else if(e_player flag::get(#"hash_12000c871284e0b5") && !e_player flag::get(#"hash_59f3be0494c4801f")) {
       level.var_57808c93 setinvisibletoplayer(e_player);
       e_player flag::set(#"hash_59f3be0494c4801f");
-      playSoundAtPosition(#"hash_7cfaf85826852b1f", level.var_57808c93.origin);
+      playSoundAtPosition(#"zmb_gem_pickup", level.var_57808c93.origin);
       level.var_57808c93 stoploopsound();
       return;
     }
@@ -620,7 +620,7 @@ fan_trap_think() {
   self clientfield::set_to_player("" + #"explode_blue_rock", 1);
   self clientfield::set_to_player("" + #"place_blue_rock", 0);
   level.var_dc120ff3 setvisibletoplayer(self);
-  level.var_dc120ff3 playLoopSound(#"hash_3129e04ec52b7ef2");
+  level.var_dc120ff3 playLoopSound(#"zmb_gems_loop");
   self thread zm_audio::create_and_play_dialog(#"success_resp", #"generic");
 }
 
@@ -646,7 +646,7 @@ function_34759490(e_player) {
     } else if(e_player flag::get(#"hash_7e372a60b99a89e0") && !e_player flag::get(#"hash_29001ce64677a5cf")) {
       level.var_dc120ff3 setinvisibletoplayer(e_player);
       e_player flag::set(#"hash_29001ce64677a5cf");
-      playSoundAtPosition(#"hash_7cfaf85826852b1f", level.var_dc120ff3.origin);
+      playSoundAtPosition(#"zmb_gem_pickup", level.var_dc120ff3.origin);
       level.var_dc120ff3 stoploopsound();
       return;
     }
@@ -754,7 +754,7 @@ function_ca9bfe21(a_ents, e_player) {
   self waittill(#"scene_done");
   e_nugget.s_unitrigger_stub = e_nugget zm_unitrigger::function_fac87205(&function_45c5ebfb, 64);
   e_player flag::set(#"hash_21827937692e2aba");
-  playSoundAtPosition(#"hash_7cfaf85826852b1f", e_nugget.origin);
+  playSoundAtPosition(#"zmb_gem_pickup", e_nugget.origin);
   e_nugget delete();
 }
 
@@ -801,7 +801,7 @@ function_858b2d2f() {
         mdl_piece setvisibletoplayer(e_player);
       }
 
-      playSoundAtPosition(#"hash_35c5e590e88c66e9", e_player.origin);
+      playSoundAtPosition(#"zmb_gems_drop", e_player.origin);
 
       if(e_player hasweapon(getweapon(#"spork_alcatraz"))) {
         e_player takeweapon(getweapon(#"spork_alcatraz"));
@@ -825,11 +825,11 @@ function_858b2d2f() {
 
       level waittill(#"smelter_show");
       level.var_8e667d9c setvisibletoplayer(e_player);
-      playSoundAtPosition(#"hash_7e581306db035797", level.var_8e667d9c.origin);
+      playSoundAtPosition(#"zmb_spknifeork_appear", level.var_8e667d9c.origin);
       e_player flag::set(#"hash_3043d41614094af2");
     } else if(!e_player flag::get(#"hash_f3f31bee1b786f2") && e_player flag::get(#"hash_3043d41614094af2")) {
       level.var_8e667d9c setinvisibletoplayer(e_player);
-      playSoundAtPosition(#"hash_5077c643bb3c5f9e", level.var_8e667d9c.origin);
+      playSoundAtPosition(#"zmb_spknifeork_pickup", level.var_8e667d9c.origin);
 
       if(isDefined(e_player.var_1c4683c4) && e_player hasweapon(e_player.var_1c4683c4)) {
         e_player thread zm_audio::create_and_play_dialog(#"component_pickup", #"generic");

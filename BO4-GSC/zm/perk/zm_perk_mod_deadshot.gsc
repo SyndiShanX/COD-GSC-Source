@@ -51,7 +51,7 @@ on_ai_killed(params) {
         e_attacker zm_perks::function_f2ff97a6(3, n_counter, #"perk_dead_shot");
 
         if(e_attacker.var_957a1762 == 5) {
-          e_attacker playsoundtoplayer(#"hash_6f931d032000253a", e_attacker);
+          e_attacker playsoundtoplayer(#"uin_perk4_buff_gain", e_attacker);
         }
 
         return;

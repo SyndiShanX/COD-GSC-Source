@@ -23,7 +23,7 @@ init() {
   level.var_45b0f2f3 = &function_e43bea18;
   level.var_210f9911 = &function_e162fac3;
   level.var_8c164439 = [];
-  level.var_8c164439[#"hash_1242b7914448ebc7"] = #"hash_3708586aed65f7b7";
+  level.var_8c164439[#"vox_5_banter_marl_stuh_plr_17_1"] = #"hash_3708586aed65f7b7";
   level.var_1c53964e = spawn("script_origin", (0, 0, 0));
   level.var_1c53964e.name = "plr_7";
   level.var_1c53964e.isspeaking = 0;
@@ -68,7 +68,7 @@ function_583cad13(var_2753f06a) {
     b_played = e_player zm_vo::function_a2bd5a0c(str_suffix, 0, 1);
 
     if(var_2753f06a == 0 && var_5316ea7d == "stuh" && !(isDefined(level.var_3c9cfd6f) && level.var_3c9cfd6f)) {
-      e_player zm_audio::do_player_or_npc_playvox(#"hash_55a4b3824ac230a1", 1);
+      e_player zm_audio::do_player_or_npc_playvox(#"vox_solo_game_start_stuh_plr_5_0", 1);
     }
   } else {
     arrayremovevalue(a_players, level.host);
@@ -144,7 +144,7 @@ function_2e565334() {
   self endon(#"disconnect");
 
   while(true) {
-    if(zm_vo::is_player_speaking(self) && self.str_vo_being_spoken === #"hash_1242b7914448ebc7") {
+    if(zm_vo::is_player_speaking(self) && self.str_vo_being_spoken === #"vox_5_banter_marl_stuh_plr_17_1") {
       while(!isDefined(self.var_4377124)) {
         wait 0.1;
       }
@@ -152,7 +152,7 @@ function_2e565334() {
       wait 1;
 
       if(!(isDefined(level.var_3c9cfd6f) && level.var_3c9cfd6f)) {
-        self zm_audio::do_player_or_npc_playvox(#"hash_3708596aed65f96a", 1);
+        self zm_audio::do_player_or_npc_playvox(#"vox_5_banter_marl_stuh_plr_5_1", 1);
       }
 
       continue;
