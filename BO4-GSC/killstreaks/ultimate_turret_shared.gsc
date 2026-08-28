@@ -430,7 +430,7 @@ onplaceturret(turret) {
   }
 
   player deployable::function_6ec9ee30(turret.vehicle, getweapon("ultimate_turret"));
-  turret.vehicle playLoopSound(#"hash_69240c6db92da5bf", 0.25);
+  turret.vehicle playLoopSound(#"mpl_turret_amb_loop", 0.25);
 
   foreach(player in level.players) {
     turret.vehicle respectnottargetedbysentryperk(player);
@@ -909,7 +909,7 @@ turretscanning() {
   veh.do_not_clear_targets_during_think = 1;
   wait 0.8;
   veh playSound(#"mpl_turret_startup");
-  veh playLoopSound(#"hash_69240c6db92da5bf");
+  veh playLoopSound(#"mpl_turret_amb_loop");
   bundle = get_killstreak_bundle();
   min_burst_time = bundle.ksburstfiremintime;
   max_burst_time = bundle.ksburstfiremaxtime;

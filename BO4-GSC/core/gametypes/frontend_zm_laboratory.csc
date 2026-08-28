@@ -43,7 +43,7 @@ function_250232f4(localclientnum) {
   level.var_49f26c00.var_8a28a9a = array::random(level.var_49f26c00.var_ece3d654);
   level.var_49f26c00.var_66baa9e8 = array(-1, -1, 0, 1, 3, 2);
   level.var_49f26c00.var_9af0d684 = 1;
-  level.var_49f26c00.var_f538d7d4 = array(#"hash_a87603ded4882b1", #"hash_2c6105fec300cac", #"hash_165b9b0cd81e08af", #"hash_4f161447e88af8b9", #"hash_712426d0934a5cd4");
+  level.var_49f26c00.var_f538d7d4 = array(#"p8_fxanim_core_frontend_zm_lab_elixir_bottle_fluid_common_mod", #"hash_2c6105fec300cac", #"hash_165b9b0cd81e08af", #"p8_fxanim_core_frontend_zm_lab_elixir_bottle_fluid_epic_mod", #"hash_712426d0934a5cd4");
   level.var_49f26c00.var_7a5c68f2 = array(#"fx_bottle_common", #"hash_38d4f59cb78344b9", #"hash_78f0379f9bdc006", #"fx_bottle_epic", #"hash_256e8ac9ea9c8ad9");
   level.var_49f26c00.var_b273f2b6 = getEnt(localclientnum, "tube_liquid_01", "targetname");
   level.var_49f26c00.var_c6761aa2 = getEnt(localclientnum, "tube_liquid_02", "targetname");
@@ -75,8 +75,8 @@ function_250232f4(localclientnum) {
   scene::add_scene_func(#"p8_fxanim_core_frontend_zm_lab_bottles_bundle", &function_24222bb4, "skip_to_idle");
   scene::add_scene_func(#"p8_fxanim_core_frontend_zm_lab_bottle_fluids_bundle", &function_24222bb4, "skip_to_idle");
 
-  level.var_49f26c00.a_str_bottles = array(#"p8_zm_elixir_aftertaste_ui", #"p8_zm_elixir_alchemical_antithesis_ui", #"p8_zm_elixir_always_done_swiftly_ui", #"p8_zm_elixir_anti_entrapment_ui", #"p8_zm_elixir_anywhere_but_here_ui", #"p8_zm_elixir_arsenal_accelerator_ui", #"p8_zm_elixir_blood_debt_ui", #"hash_1a7c490a566d667", #"p8_zm_elixir_burned_out_ui", #"p8_zm_elixir_cache_back_ui", #"hash_58b3b4e50c5ad8b5", #"p8_zm_elixir_ctrl_z_ui", #"hash_5e08e862c962617a", #"p8_zm_elixir_dead_of_nuclear_winter_ui", #"p8_zm_elixir_equip_mint_ui", #"p8_zm_elixir_extra_credit_ui", #"p8_zm_elixir_free_fire_ui", #"p8_zm_elixir_head_scan_ui", #"p8_zm_elixir_immolation_liquidation_ui", #"p8_zm_elixir_in_plain_sight_ui", #"p8_zm_elixir_join_the_party_ui", #"p8_zm_elixir_kill_joy_ui", #"p8_zm_elixir_licensed_contractor_ui", #"p8_zm_elixir_newtonian_negation_ui", #"p8_zm_elixir_now_you_see_me_ui", #"p8_zm_elixir_nowhere_but_there_ui", #"p8_zm_elixir_phantom_reload_ui", #"p8_zm_elixir_point_drops_ui", #"p8_zm_elixir_pop_shocks_ui", #"p8_zm_elixir_power_keg_ui", #"hash_7b8c2e9a197a1cbb", #"p8_zm_elixir_shields_up_ui", #"p8_zm_elixir_stock_option_ui", #"p8_zm_elixir_sword_flay_ui", #"p8_zm_elixir_temporal_gift_ui", #"p8_zm_elixir_undead_man_walking_ui", #"p8_zm_elixir_wall_power_ui", #"p8_zm_elixir_wall_to_wall_savings_ui", #"p8_zm_elixir_whos_keeping_score_ui");
-  level.var_49f26c00.a_str_talismans = array(#"p8_zm_talisman_box_guarantee_box_only", #"p8_zm_talisman_box_guarantee_lmg", #"hash_199da03ac6e12953", #"p8_zm_talisman_coagulant", #"p8_zm_talisman_extra_claymore", #"p8_zm_talisman_extra_frag", #"p8_zm_talisman_extra_mini_turret", #"p8_zm_talisman_extra_molotov", #"p8_zm_talisman_extra_semtex", #"p8_zm_talisman_hero_weapon_lvl3", #"p8_zm_talisman_impatient", #"p8_zm_talisman_pap_cost", #"p8_zm_talisman_perk_mod_single", #"p8_zm_talisman_perk_vapor_cost_1", #"p8_zm_talisman_perk_vapor_cost_2", #"p8_zm_talisman_perk_vapor_cost_3", #"p8_zm_talisman_perk_vapor_cost_4", #"p8_zm_talisman_perk_vapor_permanent_1", #"p8_zm_talisman_perk_vapor_permanent_2", #"p8_zm_talisman_perk_vapor_permanent_3", #"p8_zm_talisman_perk_vapor_permanent_4", #"p8_zm_talisman_perk_vapor_start_1", #"p8_zm_talisman_perk_vapor_start_2", #"p8_zm_talisman_perk_vapor_start_3", #"p8_zm_talisman_perk_vapor_start_4", #"p8_zm_talisman_shield_durability_legendary", #"p8_zm_talisman_shield_durability_rare", #"p8_zm_talisman_shield_price", #"p8_zm_talisman_spec_weapon_duration", #"p8_zm_talisman_spec_weapon_lvl2", #"p8_zm_talisman_spec_weapon_xp", #"p8_zm_talisman_start_weapon_ar", #"p8_zm_talisman_start_weapon_lmg", #"p8_zm_talisman_start_weapon_monkey", #"p8_zm_talisman_start_weapon_smg");
+  level.var_49f26c00.a_str_bottles = array(#"p8_zm_elixir_aftertaste_ui", #"p8_zm_elixir_alchemical_antithesis_ui", #"p8_zm_elixir_always_done_swiftly_ui", #"p8_zm_elixir_anti_entrapment_ui", #"p8_zm_elixir_anywhere_but_here_ui", #"p8_zm_elixir_arsenal_accelerator_ui", #"p8_zm_elixir_blood_debt_ui", #"p8_zm_elixir_board_games_ui", #"p8_zm_elixir_burned_out_ui", #"p8_zm_elixir_cache_back_ui", #"p8_zm_elixir_crawl_space_ui", #"p8_zm_elixir_ctrl_z_ui", #"p8_zm_elixir_danger_closest_ui", #"p8_zm_elixir_dead_of_nuclear_winter_ui", #"p8_zm_elixir_equip_mint_ui", #"p8_zm_elixir_extra_credit_ui", #"p8_zm_elixir_free_fire_ui", #"p8_zm_elixir_head_scan_ui", #"p8_zm_elixir_immolation_liquidation_ui", #"p8_zm_elixir_in_plain_sight_ui", #"p8_zm_elixir_join_the_party_ui", #"p8_zm_elixir_kill_joy_ui", #"p8_zm_elixir_licensed_contractor_ui", #"p8_zm_elixir_newtonian_negation_ui", #"p8_zm_elixir_now_you_see_me_ui", #"p8_zm_elixir_nowhere_but_there_ui", #"p8_zm_elixir_phantom_reload_ui", #"p8_zm_elixir_point_drops_ui", #"p8_zm_elixir_pop_shocks_ui", #"p8_zm_elixir_power_keg_ui", #"p8_zm_elixir_respin_cycle_ui", #"p8_zm_elixir_shields_up_ui", #"p8_zm_elixir_stock_option_ui", #"p8_zm_elixir_sword_flay_ui", #"p8_zm_elixir_temporal_gift_ui", #"p8_zm_elixir_undead_man_walking_ui", #"p8_zm_elixir_wall_power_ui", #"p8_zm_elixir_wall_to_wall_savings_ui", #"p8_zm_elixir_whos_keeping_score_ui");
+  level.var_49f26c00.a_str_talismans = array(#"p8_zm_talisman_box_guarantee_box_only", #"p8_zm_talisman_box_guarantee_lmg", #"p8_zm_talisman_box_guarantee_wonder_weapon", #"p8_zm_talisman_coagulant", #"p8_zm_talisman_extra_claymore", #"p8_zm_talisman_extra_frag", #"p8_zm_talisman_extra_mini_turret", #"p8_zm_talisman_extra_molotov", #"p8_zm_talisman_extra_semtex", #"p8_zm_talisman_hero_weapon_lvl3", #"p8_zm_talisman_impatient", #"p8_zm_talisman_pap_cost", #"p8_zm_talisman_perk_mod_single", #"p8_zm_talisman_perk_vapor_cost_1", #"p8_zm_talisman_perk_vapor_cost_2", #"p8_zm_talisman_perk_vapor_cost_3", #"p8_zm_talisman_perk_vapor_cost_4", #"p8_zm_talisman_perk_vapor_permanent_1", #"p8_zm_talisman_perk_vapor_permanent_2", #"p8_zm_talisman_perk_vapor_permanent_3", #"p8_zm_talisman_perk_vapor_permanent_4", #"p8_zm_talisman_perk_vapor_start_1", #"p8_zm_talisman_perk_vapor_start_2", #"p8_zm_talisman_perk_vapor_start_3", #"p8_zm_talisman_perk_vapor_start_4", #"p8_zm_talisman_shield_durability_legendary", #"p8_zm_talisman_shield_durability_rare", #"p8_zm_talisman_shield_price", #"p8_zm_talisman_spec_weapon_duration", #"p8_zm_talisman_spec_weapon_lvl2", #"p8_zm_talisman_spec_weapon_xp", #"p8_zm_talisman_start_weapon_ar", #"p8_zm_talisman_start_weapon_lmg", #"p8_zm_talisman_start_weapon_monkey", #"p8_zm_talisman_start_weapon_smg");
 
   scene::add_scene_func(#"p8_fxanim_core_frontend_zm_lab_talisman_press_bundle", &function_f8d486f8, "init");
   scene::add_scene_func(#"p8_fxanim_core_frontend_zm_lab_talisman_press_bundle", &function_d4f9b895, "press_tease");
@@ -374,19 +374,19 @@ talisman_show_label(localclientnum) {
 
   switch (var_4deff3fa) {
     case 0:
-      playSound(localclientnum, #"hash_49d438d1a1ba28b9", v_origin);
+      playSound(localclientnum, #"evt_show_talisman_cmn", v_origin);
       break;
     case 1:
-      playSound(localclientnum, #"hash_7d9e04c47d70ca1d", v_origin);
+      playSound(localclientnum, #"evt_show_talisman_rare", v_origin);
       break;
     case 2:
-      playSound(localclientnum, #"hash_2ff41d0510d442c8", v_origin);
+      playSound(localclientnum, #"evt_show_talisman_epic", v_origin);
       break;
     case 3:
-      playSound(localclientnum, #"hash_2c8d10ab46ff7e64", v_origin);
+      playSound(localclientnum, #"evt_show_talisman_legend", v_origin);
       break;
     case 4:
-      playSound(localclientnum, #"hash_2409a80bfb7d6955", v_origin);
+      playSound(localclientnum, #"evt_show_talisman_ultra", v_origin);
       break;
   }
 }

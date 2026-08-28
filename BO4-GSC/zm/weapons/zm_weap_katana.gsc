@@ -337,7 +337,7 @@ function_fcc26273(w_katana) {
 
 function_bed1fd9f() {
   self endon(#"disconnect");
-  self playSound(#"hash_58397a948dd38b37");
+  self playSound(#"wpn_katana_rush_toggle");
 
   if(isDefined(self.var_4e6b62c3) && self.var_4e6b62c3) {
     self notify(#"hero_katana_rush_toggle");
@@ -351,7 +351,7 @@ function_bed1fd9f() {
   waitresult = self waittill(#"hero_katana_expired", #"hero_katana_rush_toggle");
 
   if(waitresult._notify == #"hero_katana_expired") {
-    self playSound(#"hash_58397a948dd38b37");
+    self playSound(#"wpn_katana_rush_toggle");
   }
 
   self clientfield::set("" + #"katana_rush_sfx", 0);

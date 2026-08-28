@@ -120,7 +120,7 @@ function_40c7a8fd() {
   wait 2;
   setslowmotion(1, 1.25);
   level.var_79514f31 = spawn("script_origin", (0, 0, 0));
-  level.var_79514f31 playLoopSound(#"hash_1eafdf46ffbf2308");
+  level.var_79514f31 playLoopSound(#"zmb_trials_round_silent_movie");
 }
 
 function_69fa75f8() {

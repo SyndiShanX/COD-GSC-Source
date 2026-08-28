@@ -242,7 +242,7 @@ spawn_shockwave() {
 
   foreach(ai in a_aoe_ai) {
     if(isactor(ai)) {
-      ai playSound(#"hash_22ff6701cf652785");
+      ai playSound(#"zmb_bgb_abh_zombie_explode");
       ai.marked_for_recycle = 1;
       ai.has_been_damaged_by_player = 0;
       ai dodamage(ai.health + 1000, self.origin, self);

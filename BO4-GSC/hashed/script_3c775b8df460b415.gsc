@@ -55,12 +55,12 @@ movement_watcher() {
     if(isalive(self) && !self laststand::player_is_in_laststand() && n_speed > 0 && !self zm_utility::is_jumping() && var_f77522bb != (0, 0, 0)) {
       if(isDefined(self.armor) && self.armor > 0) {
         if(!zm_trial_defend_area::is_active() || zm_trial_defend_area::is_active() && isDefined(self.var_ccee13fc) && self.var_ccee13fc) {
-          self playsoundtoplayer(#"hash_6df374d848ba6a60", self);
+          self playsoundtoplayer(#"zmb_player_health_drain", self);
           self dodamage(11, self.origin);
           var_89276ce9 = 1;
         }
       } else if(!zm_trial_defend_area::is_active() || zm_trial_defend_area::is_active() && isDefined(self.var_ccee13fc) && self.var_ccee13fc) {
-        self playsoundtoplayer(#"hash_6df374d848ba6a60", self);
+        self playsoundtoplayer(#"zmb_player_health_drain", self);
         self dodamage(6, self.origin);
         var_89276ce9 = 1;
       }

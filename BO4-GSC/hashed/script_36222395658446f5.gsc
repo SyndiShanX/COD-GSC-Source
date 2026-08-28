@@ -373,7 +373,7 @@ function_905f55bb(str_notify) {
 function_455ede41(e_player) {
   level.var_4024aaf6 clientfield::set("" + #"hash_2a7ceb22f84e5aa9", 1);
   level.var_4024aaf6 movez(level.var_4024aaf6.var_bab19cbf, 1);
-  playSoundAtPosition(#"hash_157cd287d6504d0e", level.var_4024aaf6.origin);
+  playSoundAtPosition(#"zmb_skeleton_spoon_hand", level.var_4024aaf6.origin);
   level.var_4024aaf6 waittill(#"movedone");
 }
 

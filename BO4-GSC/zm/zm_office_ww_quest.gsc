@@ -250,7 +250,7 @@ function_1e50cd08(var_63eb3fcd) {
   }
 
   self.var_f8a3f316[var_63eb3fcd] show();
-  playSoundAtPosition(#"hash_1ab40245f7cae5d3", (-670, 1700, -451));
+  playSoundAtPosition(#"evt_ee_screen_switch", (-670, 1700, -451));
 
   if(isDefined(self.var_bec5b6d)) {
     self.var_f8a3f316[self.var_bec5b6d] hide();

@@ -483,7 +483,7 @@ function_735037d4() {
 
   wait 0.5;
   self.e_lid rotatepitch(-90, 2, 0, 0.666667);
-  self.e_lid playSound(#"hash_1cfa90c531f36b92");
+  self.e_lid playSound(#"zmb_tundra_gun_crate");
   self.e_lid waittill(#"rotatedone");
   self.e_weapon movez(24, 2);
 

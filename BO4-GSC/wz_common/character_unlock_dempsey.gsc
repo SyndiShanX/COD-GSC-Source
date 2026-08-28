@@ -70,5 +70,5 @@ on_player_killed() {
 }
 
 function_895b40e4() {
-  self playsoundtoplayer(#"hash_40bb133320e319b6", self);
+  self playsoundtoplayer(#"vox_pdem_unlock", self);
 }

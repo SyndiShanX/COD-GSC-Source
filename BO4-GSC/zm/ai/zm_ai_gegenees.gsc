@@ -799,7 +799,7 @@ function_ca5688e3(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
         playFX("impacts/fx8_bul_impact_metal_sm", point, dir * -1);
 
         if(isDefined(point)) {
-          playSoundAtPosition(#"hash_72db6f3f0e602a33", point);
+          playSoundAtPosition(#"zmb_ai_gegenees_hit_shield", point);
         }
       }
 

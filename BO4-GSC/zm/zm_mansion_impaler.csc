@@ -113,10 +113,10 @@ function_4e782d34(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval) {
     if(!isDefined(self.var_dd761cc9)) {
       self.var_dd761cc9 = util::playFXOnTag(localclientnum, level._effect[#"jewelry_dropped"], self, "tag_origin");
-      playSound(localclientnum, #"hash_6dda9e544bcd6f0d", self.origin);
+      playSound(localclientnum, #"zmb_jewelry_drop", self.origin);
 
       if(self.model == #"p8_zm_man_watch_pocket_gold") {
-        var_a0cc5b31 = self playLoopSound(#"hash_5354467970ab7b00");
+        var_a0cc5b31 = self playLoopSound(#"zmb_gold_watch_loop");
       }
 
       if(self.model == #"p8_zm_man_jewelry_ring") {
@@ -128,7 +128,7 @@ function_4e782d34(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       }
 
       if(self.model == #"p8_zm_man_jewelry_bracelet") {
-        var_a0cc5b31 = self playLoopSound(#"hash_35715829aad8de55");
+        var_a0cc5b31 = self playLoopSound(#"zmb_gold_bracelet_loop");
       }
     }
 

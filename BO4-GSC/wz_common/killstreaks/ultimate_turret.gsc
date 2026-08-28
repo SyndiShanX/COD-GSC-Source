@@ -366,7 +366,7 @@ turretscanning() {
   turretvehicle.do_not_clear_targets_during_think = 1;
   wait 0.8;
   turretvehicle playSound(#"mpl_turret_startup");
-  turretvehicle playLoopSound(#"hash_69240c6db92da5bf");
+  turretvehicle playLoopSound(#"mpl_turret_amb_loop");
   bundle = get_killstreak_bundle();
   min_burst_time = bundle.ksburstfiremintime;
   max_burst_time = bundle.ksburstfiremaxtime;

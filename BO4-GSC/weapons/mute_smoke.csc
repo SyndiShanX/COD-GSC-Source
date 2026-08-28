@@ -29,7 +29,7 @@ function_3e8d9b27(previs_weapon) {
   if(isDefined(previs_weapon.var_4bcd08b0)) {
     previs_model setModel(previs_weapon.var_4bcd08b0);
   } else {
-    previs_model setModel(#"hash_7a80bed4a96537e6");
+    previs_model setModel(#"wpn_t8_eqp_alarm_world_yellow");
   }
 
   previs_model notsolid();

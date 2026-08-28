@@ -80,7 +80,7 @@ function_9e6319c8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     angles = self.angles;
     forward = anglesToForward(angles);
     up = anglestoup(angles);
-    playSound(localclientnum, #"hash_72db6f3f0e602a33", point);
+    playSound(localclientnum, #"zmb_ai_gegenees_hit_shield", point);
     playFX(localclientnum, "impacts/fx8_bul_impact_metal_sm", point, forward, up);
   }
 }

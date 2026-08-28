@@ -647,13 +647,13 @@ function_66bf3a98(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_251065bc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     switch (self.model) {
-      case #"hash_17ff8b184015c0d0":
+      case #"p8_zm_red_gaia_bush_01_chaos_01":
         str_tag = "tag_center_01";
         break;
-      case #"hash_17ff8e184015c5e9":
+      case #"p8_zm_red_gaia_bush_01_chaos_02":
         str_tag = "tag_center_02";
         break;
-      case #"hash_17ff8d184015c436":
+      case #"p8_zm_red_gaia_bush_01_chaos_03":
         str_tag = "tag_center_03";
         break;
     }
@@ -677,13 +677,13 @@ function_251065bc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 gaia_chaos_destroy(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     switch (self.model) {
-      case #"hash_17ff8b184015c0d0":
+      case #"p8_zm_red_gaia_bush_01_chaos_01":
         str_tag = "tag_center_01";
         break;
-      case #"hash_17ff8e184015c5e9":
+      case #"p8_zm_red_gaia_bush_01_chaos_02":
         str_tag = "tag_center_02";
         break;
-      case #"hash_17ff8d184015c436":
+      case #"p8_zm_red_gaia_bush_01_chaos_03":
         str_tag = "tag_center_03";
         break;
     }

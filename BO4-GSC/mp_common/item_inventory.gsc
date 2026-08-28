@@ -303,7 +303,7 @@ event_handler[grenade_fire] function_4776caf4(eventstruct) {
       if(isDefined(eventstruct.projectile)) {
         camoindex = getcamoindex(self getweaponoptions(eventstruct.weapon));
         var_f94ce554 = array(111, 112, 113, 114, 115, 116);
-        var_af7d7388 = array(#"hash_7306b72d120049f8", #"hash_27ae7cb403d5365b", #"hash_6add258ae958d31c", #"hash_6eb8f7ceb4627d9f", #"hash_228bf15c70137b61", #"hash_10c0ee53a36783e9");
+        var_af7d7388 = array(#"wpn_t8_wz_water_balloon_red_world", #"wpn_t8_wz_water_balloon_blue_world", #"wpn_t8_wz_water_balloon_green_world", #"wpn_t8_wz_water_balloon_yellow_world", #"wpn_t8_wz_water_balloon_orange_world", #"wpn_t8_wz_water_balloon_purple_world");
         assert(var_f94ce554.size == var_af7d7388.size);
 
         for(index = 0; index < var_f94ce554.size && index < var_af7d7388.size; index++) {

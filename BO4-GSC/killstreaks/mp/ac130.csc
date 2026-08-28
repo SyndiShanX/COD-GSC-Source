@@ -79,13 +79,13 @@ function_db40057d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   switch (newval) {
     case 1:
-      playSound(0, #"hash_731251c4b03b5b09", (0, 0, 0));
+      playSound(0, #"wpn_ac130_switch_weapon", (0, 0, 0));
       break;
     case 2:
-      playSound(0, #"hash_731251c4b03b5b09", (0, 0, 0));
+      playSound(0, #"wpn_ac130_switch_weapon", (0, 0, 0));
       break;
     case 3:
-      playSound(0, #"hash_731251c4b03b5b09", (0, 0, 0));
+      playSound(0, #"wpn_ac130_switch_weapon", (0, 0, 0));
       break;
   }
 }

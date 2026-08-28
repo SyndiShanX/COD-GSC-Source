@@ -501,7 +501,7 @@ do_monkey_sound(info) {
     self playSound(#"zmb_monkeybomb_song");
   }
 
-  self playLoopSound(#"hash_4ac1d6c76c698e02");
+  self playLoopSound(#"zmb_monkeybomb_cymbal_lp");
 
   if(!self.monk_scream_vox) {
     self thread play_delayed_explode_vox();

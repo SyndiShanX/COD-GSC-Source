@@ -366,7 +366,7 @@ function_f624b4a4() {
     level.var_bf847351 = undefined;
     s_loc = struct::get("s_vase_loc", "targetname");
     physicsexplosionsphere(s_loc.origin, 192, 100, 32);
-    playSoundAtPosition(#"hash_3b38c48f1faa172b", (0, -1588, 60));
+    playSoundAtPosition(#"evt_vase_destroy", (0, -1588, 60));
     level.var_96358ab6 = 1;
     e_player = ct_utils::get_player();
 

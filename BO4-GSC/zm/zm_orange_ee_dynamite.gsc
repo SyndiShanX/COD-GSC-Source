@@ -201,7 +201,7 @@ function_8427e524() {
   self clientfield::set("" + #"hash_6adfdd12c9656e1c", 1);
   self function_4baeb885();
   self.ignoremelee = 1;
-  self playLoopSound(#"hash_494dd6f60ab1e3a8");
+  self playLoopSound(#"evt_dynamite_fuse_zombie_lp");
   self thread function_e58f823f();
 
   iprintln("<dev string:x38>");
@@ -354,7 +354,7 @@ function_2e1427a3() {
   level endon(#"end_game");
   e_bomb = util::spawn_model("p8_zm_ora_dynamite_bundle", self.origin, self.angles);
   playSoundAtPosition(#"evt_dynamite_place", e_bomb.origin);
-  e_bomb playLoopSound(#"hash_3e8cb0a639b5a355");
+  e_bomb playLoopSound(#"evt_dynamite_fuse_lp");
 
   iprintln("<dev string:x53>");
 

@@ -247,7 +247,7 @@ function_b9549a9() {
 
   if(!isDefined(self.activated)) {
     self playSound(#"hash_58a0696fb1726978");
-    self playLoopSound(#"hash_3e09d676ac6291c1", 0.25);
+    self playLoopSound(#"wpn_tripwire_active_loop", 0.25);
     self.activated = 1;
   }
 
@@ -296,7 +296,7 @@ function_55c50f15() {
 
         if(!isDefined(self.activated)) {
           self playSound(#"hash_58a0696fb1726978");
-          self playLoopSound(#"hash_3e09d676ac6291c1", 0.25);
+          self playLoopSound(#"wpn_tripwire_active_loop", 0.25);
           self.activated = 1;
         }
       }
@@ -546,7 +546,7 @@ function_9e546fb3(attacker, weapon, target, var_2f6adbe3, tripper) {
 
     self thread function_9b3a657f(weapon);
   } else {
-    self playSound(#"hash_1f0de5f27d29d3aa");
+    self playSound(#"wpn_tripwire_alert");
     self.detonating = 1;
 
     if(isDefined(var_2f6adbe3)) {

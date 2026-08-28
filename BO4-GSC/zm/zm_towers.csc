@@ -893,7 +893,7 @@ snd_crowd_react(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
       level thread function_cbe2ea1(localclientnum, 0);
     }
 
-    playSound(0, #"hash_4e3cdd42739b4a0b", (0, 0, 0));
+    playSound(0, #"amb_desolate_wind_oneshot", (0, 0, 0));
     a_structs = struct::get_array("mus_crowd_bossbattle", "targetname");
 
     foreach(struct in a_structs) {
@@ -1210,9 +1210,9 @@ function_94675baf(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_bdc63758(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self playSound(localclientnum, #"hash_539eb529963d7db4");
+    self playSound(localclientnum, #"zmb_challenges_head_appear");
     self.fx = util::playFXOnTag(localclientnum, level._effect[#"head_fire_blue"], self, "j_neck");
-    self.sfx = self playLoopSound(#"hash_38c39a7f0966480e");
+    self.sfx = self playLoopSound(#"zmb_challenges_head_fire_lp");
     return;
   }
 
@@ -1229,9 +1229,9 @@ function_bdc63758(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_c41817fc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self playSound(localclientnum, #"hash_539eb529963d7db4");
+    self playSound(localclientnum, #"zmb_challenges_head_appear");
     self.fx = util::playFXOnTag(localclientnum, level._effect[#"head_fire_green"], self, "j_neck");
-    self.sfx = self playLoopSound(#"hash_38c39a7f0966480e");
+    self.sfx = self playLoopSound(#"zmb_challenges_head_fire_lp");
     return;
   }
 
@@ -1248,9 +1248,9 @@ function_c41817fc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_27a7a3be(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self playSound(localclientnum, #"hash_539eb529963d7db4");
+    self playSound(localclientnum, #"zmb_challenges_head_appear");
     self.fx = util::playFXOnTag(localclientnum, level._effect[#"head_fire_purple"], self, "j_neck");
-    self.sfx = self playLoopSound(#"hash_38c39a7f0966480e");
+    self.sfx = self playLoopSound(#"zmb_challenges_head_fire_lp");
     return;
   }
 
@@ -1267,9 +1267,9 @@ function_27a7a3be(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_d056a230(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self playSound(localclientnum, #"hash_539eb529963d7db4");
+    self playSound(localclientnum, #"zmb_challenges_head_appear");
     self.fx = util::playFXOnTag(localclientnum, level._effect[#"head_fire_red"], self, "j_neck");
-    self.sfx = self playLoopSound(#"hash_38c39a7f0966480e");
+    self.sfx = self playLoopSound(#"zmb_challenges_head_fire_lp");
     return;
   }
 
@@ -1508,7 +1508,7 @@ function_25ebc4f7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_b07a8611 = util::playFXOnTag(localclientnum, level._effect[#"trap_switch_smoke"], self, "p8_zm_gla_trap_switch_01_handle_jnt");
 
     if(!isDefined(self.var_7696023a)) {
-      self.var_7696023a = self playLoopSound(#"hash_228d379ca7c13b55");
+      self.var_7696023a = self playLoopSound(#"zmb_traps_switch_smoke_lp");
     }
 
     return;

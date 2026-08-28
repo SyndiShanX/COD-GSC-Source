@@ -1090,7 +1090,7 @@ microwaveentity(entity) {
     time = gettime();
 
     if(isPlayer(entity) && isDefined(entity.clientid)) {
-      entity playsoundtoplayer(#"hash_5eecc78116b1fc85", entity);
+      entity playsoundtoplayer(#"mpl_microwave_hits", entity);
 
       if(!entity isremotecontrolling() && time - (isDefined(entity.microwaveshellshockandviewkicktime) ? entity.microwaveshellshockandviewkicktime : 0) > 950) {
         if(entity.microwaveeffect % 2 == 1) {

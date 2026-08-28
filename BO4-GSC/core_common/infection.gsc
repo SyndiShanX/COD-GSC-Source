@@ -128,7 +128,7 @@ reset_character() {
 
 give_body() {
   if(self hasdobj() && self haspart("j_spine4")) {
-    self playsoundontag(#"hash_3407b7c42e8075c9", "j_spine4");
+    self playsoundontag(#"mpl_infection_trans_vox", "j_spine4");
   }
 
   self thread ambient_sound();
@@ -156,7 +156,7 @@ ambient_sound() {
     n_wait_max = 5;
 
     if(self issprinting()) {
-      str_alias = #"hash_64441bbb83e130e9";
+      str_alias = #"mpl_infection_sprint_vox";
       n_wait_min = 4;
       n_wait_max = 7;
     }

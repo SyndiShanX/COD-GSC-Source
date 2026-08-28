@@ -271,13 +271,13 @@ do_vision_world_pulse_lerp_helper(currenttime, elapsedtime, localclientnum, dura
 
   if(pulseradius > 0 && self.var_168d7f5c == 0) {
     self.var_168d7f5c = 1;
-    playSound(localclientnum, #"hash_151b724086b2955b");
+    playSound(localclientnum, #"gdt_vision_pulse_pulse");
   }
 
   if(pulseradius > pulsemaxradius) {
     if(self.var_168d7f5c * pulsemaxradius < pulseradius) {
       self.var_168d7f5c++;
-      playSound(localclientnum, #"hash_151b724086b2955b");
+      playSound(localclientnum, #"gdt_vision_pulse_pulse");
     }
 
     pulseradius = int(pulseradius) % pulsemaxradius;

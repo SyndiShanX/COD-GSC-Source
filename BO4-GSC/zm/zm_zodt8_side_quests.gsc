@@ -812,7 +812,7 @@ function_bf250d60() {
       s_landing.origin += (0, 0, 32);
       e_who = s_landing zm_unitrigger::function_fac87205();
       e_who zm_audio::create_and_play_dialog(#"component_pickup", #"generic");
-      playSoundAtPosition(#"hash_47aa0fa4a084903b", self.origin);
+      playSoundAtPosition(#"zmb_statue_piece_pickup", self.origin);
       s_loc = struct::get(self.targetname + "_final");
 
       if(!isDefined(level.var_f02a5fea)) {
@@ -903,7 +903,7 @@ function_c0174de(var_f02fb354, gadget_lgt_exp_train_canals_debug) {
   self moveTo(gadget_lgt_exp_train_canals_debug.origin, n_move_time, n_move_time);
   self rotateTo(gadget_lgt_exp_train_canals_debug.angles, n_move_time);
   self waittill(#"movedone");
-  self playSound(#"hash_6df06ef021cd1a4");
+  self playSound(#"zmb_cracker_drop");
   self thread scene::init(#"p8_fxanim_zm_zod_safe_cracker_ee_bundle", self);
   s_unitrigger = self zm_unitrigger::create();
   zm_unitrigger::function_47625e58(s_unitrigger, s_unitrigger.origin + (0, 0, 32), s_unitrigger.angles);
@@ -915,7 +915,7 @@ function_c0174de(var_f02fb354, gadget_lgt_exp_train_canals_debug) {
 
   self zm_unitrigger::unregister_unitrigger(self.s_unitrigger);
   self hide();
-  self playSound(#"hash_54d18476ea0d7d0d");
+  self playSound(#"zmb_cracker_pickup");
   level.var_534a0586 = 1;
 }
 
@@ -1118,11 +1118,11 @@ function_ae4e9016() {
         level.var_8237e7d3.origin = self.origin;
         level.var_8237e7d3.angles = self.angles;
         level.var_8237e7d3 show();
-        playSoundAtPosition(#"hash_674add1cacda8f0a", level.var_8237e7d3.origin);
-        level.var_8237e7d3 playLoopSound(#"hash_648b3ad720f4123", 0.1);
+        playSoundAtPosition(#"zmb_cracker_plant", level.var_8237e7d3.origin);
+        level.var_8237e7d3 playLoopSound(#"zmb_cracker_loop", 0.1);
         level.var_8237e7d3 thread scene::play(#"p8_fxanim_zm_zod_safe_cracker_ee_bundle", "combo_" + self.var_83fad8a9, level.var_8237e7d3);
         wait 4;
-        playSoundAtPosition(#"hash_d47a6b375de9091", level.var_8237e7d3.origin);
+        playSoundAtPosition(#"zmb_cracker_open", level.var_8237e7d3.origin);
         level.var_8237e7d3 stoploopsound(0.05);
         wait 1;
         level.var_8237e7d3 scene::stop(#"p8_fxanim_zm_zod_safe_cracker_ee_bundle");
@@ -1246,7 +1246,7 @@ function_7f18a333() {
   v_angles = mdl_car.angles;
   mdl_car endon(#"death");
   e_block show();
-  e_block playLoopSound(#"hash_6ab30aa83cfad114", 0.1);
+  e_block playLoopSound(#"zmb_skeleton_car_sink_loop", 0.1);
   exploder::exploder("exp_bubbles_sink");
   e_block moveTo(e_block.origin + (0, 0, 12), 1);
   e_block waittill(#"movedone");
@@ -1269,8 +1269,8 @@ function_7f18a333() {
     e_player util::delay(2, "death", &zm_audio::create_and_play_dialog, #"skeleton_car", #"interact");
     exploder::exploder("exp_bubbles_sink");
     mdl_car moveTo(mdl_car.origin + (0, 0, -100), 9);
-    mdl_car playSound(#"hash_3749463f3dab5c50");
-    mdl_car playLoopSound(#"hash_6ab30aa83cfad114", 0.1);
+    mdl_car playSound(#"zmb_skeleton_car_interact");
+    mdl_car playLoopSound(#"zmb_skeleton_car_sink_loop", 0.1);
     mdl_car waittill(#"movedone");
     mdl_car stoploopsound(1);
     mdl_car.angles = (0, 0, 0);
@@ -1285,7 +1285,7 @@ function_7f18a333() {
       mdl_car.angles = v_angles;
       mdl_car thread scene::init(#"aib_vign_zm_zod_base_drvr_01");
       exploder::exploder("exp_bubbles_sink");
-      mdl_car playLoopSound(#"hash_6ab30aa83cfad114", 0.1);
+      mdl_car playLoopSound(#"zmb_skeleton_car_sink_loop", 0.1);
       mdl_car moveTo(mdl_car.origin + (0, 0, -100 * -1), 9);
       mdl_car waittill(#"movedone");
       mdl_car stoploopsound(1);
@@ -1312,11 +1312,11 @@ function_75bdcb53(mdl_car) {
       println("<dev string:xb1>");
     }
 
-    mdl_car playSound(#"hash_785ac4e15d8585c4");
+    mdl_car playSound(#"zmb_skeleton_car_spawn_stinger");
     mdl_car.var_e7bd7062 = 1;
     mdl_car thread function_f48b1de4();
     mdl_car thread function_cd85b198();
-    mdl_car playLoopSound(#"hash_58eb809a42974bb0", 0.1);
+    mdl_car playLoopSound(#"zmb_skeleton_car_flying_loop", 0.1);
     veh_car vehicle::get_on_and_go_path(nd_start);
     mdl_car stoploopsound(0.1);
     mdl_car notify(#"reached_end_node");
@@ -1361,9 +1361,9 @@ function_f48b1de4() {
   while(true) {
     level waittill(#"klaxon_notify");
     wait randomfloatrange(0.1, 1);
-    self playSound(#"hash_5ae1f398279d453");
+    self playSound(#"zmb_skeleton_car_horn");
     wait randomintrange(4, 7);
-    self playSound(#"hash_2d1b8ed1a16ecfb1");
+    self playSound(#"zmb_skeleton_car_backfire");
   }
 }
 
@@ -1445,7 +1445,7 @@ function_127efb37(var_a276c861, var_19e802fa) {
 function_98689e80() {
   level waittill(#"hash_4c84b8326097daf6");
   wait 4;
-  playSoundAtPosition(#"hash_5515ce05a0767859", (0, 0, 0));
+  playSoundAtPosition(#"zmb_skeleton_car_crash", (0, 0, 0));
 }
 
 function_23c7360a() {
@@ -1454,7 +1454,7 @@ function_23c7360a() {
 
   if(isDefined(mdl_car) && isDefined(mdl_car.var_e7bd7062) && mdl_car.var_e7bd7062) {
     mdl_car waittill(#"reached_end_node");
-    mdl_car playSound(#"hash_7beb8c1c8eed903d");
+    mdl_car playSound(#"zmb_iceberg_explo");
   }
 
   level clientfield::set("" + #"crash_fx", 1);
@@ -1481,7 +1481,7 @@ function_73bdaf30() {
 
   if(isDefined(mdl_shield)) {
     mdl_shield playSound(#"zmb_shield_land");
-    mdl_shield setModel(#"hash_7f061176170234d9");
+    mdl_shield setModel(#"wpn_t8_zm_battle_shield_frost_buckler_world");
     mdl_shield clientfield::set("" + #"shield_frost_fx", 1);
     earthquake(0.5, 1.25, mdl_shield.origin, 512);
 
@@ -1622,10 +1622,10 @@ function_a68ce358() {
 init_flare(v_origin, v_angles, str_color) {
   switch (str_color) {
     case #"green":
-      str_model = #"hash_182d806f8f8bd7bf";
+      str_model = #"p8_fxanim_zm_zod_pneumatic_tube_flare_green_mod";
       break;
     case #"blue":
-      str_model = #"hash_4f89af3e6c667d42";
+      str_model = #"p8_fxanim_zm_zod_pneumatic_tube_flare_blue_mod";
       break;
     default:
       str_model = #"p8_fxanim_zm_zod_pneumatic_tube_flare_mod";

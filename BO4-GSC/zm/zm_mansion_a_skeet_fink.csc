@@ -257,9 +257,9 @@ function_6736abbe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_36123d34(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newval) {
-    forcestreamxmodel(#"hash_1a8e66a7966f8086");
+    forcestreamxmodel(#"p8_zm_man_tree_branch");
     return;
   }
 
-  stopforcestreamingxmodel(#"hash_1a8e66a7966f8086");
+  stopforcestreamingxmodel(#"p8_zm_man_tree_branch");
 }

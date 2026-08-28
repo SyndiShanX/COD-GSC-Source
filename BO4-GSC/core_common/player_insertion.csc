@@ -149,7 +149,7 @@ function_ba7d9848(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_ded53cc6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1 && oldval != newval) {
-    self playSound(0, #"hash_7ba1b4b83540b238");
+    self playSound(0, #"uin_clear_to_jump");
   }
 }
 

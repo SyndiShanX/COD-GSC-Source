@@ -967,7 +967,7 @@ function_766eff6(var_31721422, a_str_zones, var_de0f1997, var_f7c3c527) {
 
   while(n_time >= 0) {
     if(n_time <= 30 && n_time % 5 == 0 || n_time <= 10) {
-      self playsoundtoplayer(#"hash_531658e82d2845f7", self);
+      self playsoundtoplayer(#"zmb_rush_timer_countdown", self);
     }
 
     var_cb24ec97 = 1;

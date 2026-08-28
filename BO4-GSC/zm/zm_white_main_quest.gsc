@@ -778,7 +778,7 @@ function_2193794() {
           }
 
           if(var_abbc737b) {
-            playSoundAtPosition(#"hash_1f1d2aad111ff462", self.s_unitrigger.origin);
+            playSoundAtPosition(#"evt_clock_correct", self.s_unitrigger.origin);
             level flag::set(#"hash_ef15c4b3a1dfd31" + self.s_unitrigger.n_position);
 
             if(!level flag::get(#"enable_countermeasure_" + self.s_unitrigger.var_92ac68d0)) {
@@ -1414,7 +1414,7 @@ zm_white_main_quest_step1_setup(var_5ea5c94d) {
     level zm_hms_util::pause_zombies(1, 0);
 
     if(isDefined(level.var_18f1ca6e)) {
-      level.var_18f1ca6e playSound(#"hash_656964552426f55");
+      level.var_18f1ca6e playSound(#"evt_computer_boot_up");
       level.var_18f1ca6e playLoopSound(#"amb_rushmore");
     }
 
@@ -3647,7 +3647,7 @@ function_d6012fb8() {
   level exploder::exploder("fxexp_brainrot_painting_green");
 
   for(i = 0; i < level.a_e_paintings.size; i++) {
-    level.a_e_paintings[i] playLoopSound(#"hash_102a4d2346125954");
+    level.a_e_paintings[i] playLoopSound(#"zmb_ee_painting_gas");
   }
 }
 

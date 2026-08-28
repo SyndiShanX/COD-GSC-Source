@@ -1282,7 +1282,7 @@ event_handler[event_9673dc9a] function_f9b68fd7(eventstruct) {
     var_91d1913b = distance2d(dynent.origin, level.players[0].origin);
 
     if(level.players[0] util::is_player_looking_at(dynent.origin, 0.8, 0) && var_91d1913b <= 6000) {
-      if(isDefined(dynent.var_15d44120) && dynent.var_15d44120 !== #"hash_1dcbe8021fb16344") {
+      if(isDefined(dynent.var_15d44120) && dynent.var_15d44120 !== #"p8_fxanim_wz_supply_stash_magic_box_mod") {
         function_a476d876(dynent.origin, dynent.angles, (1, 0.5, 0), 10);
 
         if(var_91d1913b <= 768) {

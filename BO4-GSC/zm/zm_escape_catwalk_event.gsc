@@ -107,7 +107,7 @@ function_84f1c310() {
 
     var_40762d8a setHintString(#"");
     t_catwalk_door notify(#"power_on");
-    playSoundAtPosition(#"hash_97aff7905795396", (8223, 10111, 817));
+    playSoundAtPosition(#"zmb_catwalk_alarm_bell", (8223, 10111, 817));
     level.musicsystemoverride = 1;
     music::setmusicstate("escape_catwalk");
     s_sparks = struct::get("catwalk_door_spark");
@@ -469,7 +469,7 @@ function_7ab912f2(s_loc) {
   wait 1.5;
   playSoundAtPosition(#"zmb_hellhound_bolt", s_loc.origin);
   earthquake(0.5, 0.75, s_loc.origin, 1000);
-  playSoundAtPosition(#"hash_42894a8e6bfacf66", (5085, 10424, 1102));
+  playSoundAtPosition(#"evt_magma_splash", (5085, 10424, 1102));
   playSoundAtPosition(#"zmb_hellhound_spawn", s_loc.origin);
   assert(isDefined(self), "<dev string:x38>");
   assert(isalive(self), "<dev string:x53>");

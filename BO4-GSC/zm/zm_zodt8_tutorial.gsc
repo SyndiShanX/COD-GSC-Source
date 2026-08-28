@@ -565,7 +565,7 @@ tutorial() {
   self thread lui::screen_fade_out(3);
   clientfield::set_world_uimodel("hudItems.ztut.showLocation", 0);
   wait 1;
-  function_cc60408f(array(#"hash_48af8239068e44f2", #"hash_53d43a46bc0ebcd8"), "end_game");
+  function_cc60408f(array(#"hash_48af8239068e44f2", #"vox_advance_end_narr_0"), "end_game");
   music::setmusicstate("zodt8_death");
   level.tutorial_complete = 1;
   level notify(#"end_game");
@@ -671,12 +671,12 @@ function_2517cb55() {
   level flag::set("tutorial_intro_screen_over");
   level flag::wait_till("gameplay_started");
   function_6e9fe428(&function_1dab7ef1);
-  function_68da8e33(#"hash_71b1fd8d67ee8e9d");
+  function_68da8e33(#"vox_beginner_start_narr_0");
   self function_fac53b63(array("tutorial_zm_spawner_shoot_zombie"), 1);
   level.var_a4ad706d[0] thread function_16c8867e(self);
   self function_e326c0a();
   wait 0.5;
-  level thread function_68da8e33(#"hash_71b1fc8d67ee8cea");
+  level thread function_68da8e33(#"vox_beginner_start_narr_1");
   self thread function_3e1e39f8(#"hash_49df76352370f4a6", "shoot_zombie_completed", &function_3d825fe, 9999);
   self thread function_261ed63c(#"hash_66a9e9a056f5aa26", 6, "shoot_zombie_completed");
   level waittill(#"zombie_shot");
@@ -815,7 +815,7 @@ function_ec7139ac() {
 
   s_objective = struct::get("objective_pos_repair", "targetname");
   s_objective function_384bed55();
-  self thread function_261ed63c(#"hash_3eac3c3c341e4070", 8, "boarding_window");
+  self thread function_261ed63c(#"vox_beginner_carp_nag_narr_0", 8, "boarding_window");
 
   for(var_d01c9ca2 = 0; var_d01c9ca2 < 6; var_d01c9ca2++) {
     self waittill(#"boarding_window");
@@ -1384,7 +1384,7 @@ special_weapons() {
   level.var_102b1301 = "sprint";
   function_fac53b63(array("tutorial_zm_spawner_specialweapons_1", "tutorial_zm_spawner_specialweapons_2", "tutorial_zm_spawner_specialweapons_3", "tutorial_zm_spawner_specialweapons_4", "tutorial_zm_spawner_specialweapons_5", "tutorial_zm_spawner_specialweapons_6", "tutorial_zm_spawner_specialweapons_7", "tutorial_zm_spawner_specialweapons_8", "tutorial_zm_spawner_specialweapons_9", "tutorial_zm_spawner_specialweapons_10"));
   level flag::wait_till("special_weapon_activated");
-  level thread function_68da8e33(#"hash_64de3477d85cad95");
+  level thread function_68da8e33(#"vox_advance_hammer_narr_0");
   hammer = getweapon("hero_hammer_lv1");
 
   while(self getcurrentweapon() == hammer && level.var_a4ad706d.size > 0) {

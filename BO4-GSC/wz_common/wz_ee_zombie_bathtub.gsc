@@ -106,7 +106,7 @@ function_613448ed(player, bathtub) {
     golden_spork.angles = (0, -50, -90);
     var_45f173ec = (golden_spork.origin[0], golden_spork.origin[1], golden_spork.origin[2] + 24);
     zombie_arm show();
-    zombie_arm playSound(#"hash_2b9e3e8f3a11bcdb");
+    zombie_arm playSound(#"evt_spk_reveal");
     level clientfield::increment("zombie_arm_blood_splash", 1);
     level thread function_ca44f5a5(zombie_arm, var_4805bfaa);
     level thread function_b413daad(golden_spork, var_45f173ec);

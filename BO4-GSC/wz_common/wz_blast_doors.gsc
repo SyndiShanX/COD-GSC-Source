@@ -118,7 +118,7 @@ function_ed401dbd(activator, laststate, state) {
     if(function_cd4de84f(var_fe1d375b)) {
       currentstate = function_ffdbe8c2(self);
       waitframe(1);
-      playSoundAtPosition(#"hash_3559ba9c4c9b08f", self.origin);
+      playSoundAtPosition(#"evt_garage_button_press", self.origin);
       setdynentstate(self, currentstate);
       return;
     }

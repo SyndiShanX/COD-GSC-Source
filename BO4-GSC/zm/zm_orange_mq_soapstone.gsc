@@ -202,7 +202,7 @@ function_476d4cb5() {
   }
 
   self.e_stone show();
-  self.e_stone playSound(#"hash_16631d7fd4c4e599");
+  self.e_stone playSound(#"evt_soapstone_place");
 
   if(level.s_soapstone.var_b6e5b65f == 2) {
     self.var_28f1732d show();
@@ -293,7 +293,7 @@ function_2b438f6f() {
   }
 
   self.e_stone show();
-  self.e_stone playSound(#"hash_16631d7fd4c4e599");
+  self.e_stone playSound(#"evt_soapstone_place");
 
   if(level.s_soapstone.var_b6e5b65f == 2) {
     self.var_28f1732d show();

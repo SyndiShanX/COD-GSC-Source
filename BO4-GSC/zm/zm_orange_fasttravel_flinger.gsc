@@ -164,7 +164,7 @@ function_5d984ff3() {
   while(true) {
     s_activation = self waittill(#"trigger_activated");
     e_who = s_activation.e_who;
-    self playSound(#"hash_4941036cc35e4751");
+    self playSound(#"zmb_heatpack_pickup");
 
     if(!isDefined(e_who.var_2e6aa97d)) {
       e_who.var_2e6aa97d = 1;
@@ -491,7 +491,7 @@ fling_player(v_flinger) {
 
   self.var_3456a2d2 = spawn("script_origin", self.origin);
   self.var_3456a2d2 linkTo(self);
-  self.var_3456a2d2 playLoopSound(#"hash_7870648fa8bc7f");
+  self.var_3456a2d2 playLoopSound(#"fly_flinger_wind");
   self clientfield::set_to_player("blur_post_fx", 1);
 
   if(v_flinger.str_location === "island_return") {
@@ -862,7 +862,7 @@ function_c0df509(index) {
 function_ac9a3646() {
   playSoundAtPosition(#"evt_flinger_start", self.origin);
   e_snd = spawn("script_origin", self.origin);
-  e_snd playSound(#"hash_5913634c5007a95");
+  e_snd playSound(#"evt_flinger_tension");
   self waittill(#"launcher_activated", #"hash_1a5c6352ea49c8ff");
   playSoundAtPosition(#"evt_flinger_cancel", self.origin);
   e_snd stopsounds();

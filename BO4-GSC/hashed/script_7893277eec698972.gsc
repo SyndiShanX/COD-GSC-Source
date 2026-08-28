@@ -65,9 +65,9 @@ init() {
       w_blueprint.component01.var_62a98b13 = #"onion_swan";
       w_blueprint.component02.var_62a98b13 = #"condenser_coil";
       w_blueprint.component03.var_62a98b13 = #"retort_pot";
-      w_blueprint.component01.var_25bb96cc = #"hash_604432f9a80a26e3";
-      w_blueprint.component02.var_25bb96cc = #"hash_604432f9a80a26e3";
-      w_blueprint.component03.var_25bb96cc = #"hash_604432f9a80a26e3";
+      w_blueprint.component01.var_25bb96cc = #"zmb_distill_pickup";
+      w_blueprint.component02.var_25bb96cc = #"zmb_distill_pickup";
+      w_blueprint.component03.var_25bb96cc = #"zmb_distill_pickup";
     }
 
     util::delay("all_players_spawned", undefined, &function_d159d50e);
@@ -139,8 +139,8 @@ function_f7b0a02a() {
     if(waitresult._notify == #"hash_4651621237a54fc7") {
       if(!isDefined(level.var_86d6efbf)) {
         level.var_86d6efbf = util::spawn_model(#"p8_zm_kraken_chest_key", self.origin + (0, 0, 32), self.angles);
-        level.var_86d6efbf playSound(#"hash_1390af6222266716");
-        level.var_86d6efbf playLoopSound(#"hash_1f450c20e20a55c5", 2);
+        level.var_86d6efbf playSound(#"zmb_triquest_key_drop");
+        level.var_86d6efbf playLoopSound(#"zmb_triquest_key_loop", 2);
         level.var_85a8dbba = spawn("trigger_radius_use", level.var_86d6efbf.origin, 0, 72, 72);
         level.var_85a8dbba setCursorHint("HINT_NOICON");
 
@@ -165,7 +165,7 @@ function_a20e6e5d() {
   player = waitresult.activator;
 
   if(isDefined(player)) {
-    player playSound(#"hash_1560d47a810c72df");
+    player playSound(#"zmb_triquest_key_pickup");
     player util::delay(0.5, "death", &zm_audio::create_and_play_dialog, #"stoker_key", #"pick_up");
   }
 
@@ -207,8 +207,8 @@ step_2_cleanup(var_a276c861, var_19e802fa) {
   }
 
   level.var_f9f50915.mdl_chest thread scene::play(#"p8_fxanim_zm_zod_kraken_chest_bundle", "open", level.var_f9f50915.mdl_chest);
-  level.var_f9f50915.mdl_chest playSound(#"hash_6fa6fc673cdcf645");
-  level.var_f9f50915.mdl_chest playLoopSound(#"hash_326fef81e2be51bb", 2);
+  level.var_f9f50915.mdl_chest playSound(#"zmb_triquest_chest_unlock");
+  level.var_f9f50915.mdl_chest playLoopSound(#"zmb_triquest_chest_loop", 2);
   level flag::set(#"hash_635fa9d7a8be6607");
 }
 
@@ -236,8 +236,8 @@ step_3_setup(var_a276c861) {
         level.var_f9f50915 = level.a_s_chests[level.var_e083ecbd];
         level.var_f9f50915 show_chest();
         level.var_f9f50915.mdl_chest thread scene::play(#"p8_fxanim_zm_zod_kraken_chest_bundle", "open", level.var_f9f50915.mdl_chest);
-        level.var_f9f50915.mdl_chest playSound(#"hash_6fa6fc673cdcf645");
-        level.var_f9f50915.mdl_chest playLoopSound(#"hash_326fef81e2be51bb", 2);
+        level.var_f9f50915.mdl_chest playSound(#"zmb_triquest_chest_unlock");
+        level.var_f9f50915.mdl_chest playLoopSound(#"zmb_triquest_chest_loop", 2);
 
         iprintlnbold("<dev string:x38>");
       }

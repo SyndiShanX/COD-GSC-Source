@@ -642,25 +642,25 @@ function_c3778d8a(n_boon, n_delay = undefined) {
 
   switch (n_boon) {
     case 0:
-      var_8b7ccae4 = #"hash_6a1a8af71c401279";
+      var_8b7ccae4 = #"vox_oracle_help_orac_3";
       break;
     case 1:
-      var_8b7ccae4 = #"hash_6a1a88f71c400f13";
+      var_8b7ccae4 = #"vox_oracle_help_orac_1";
       break;
     case 2:
-      var_8b7ccae4 = #"hash_6a1a8bf71c40142c";
+      var_8b7ccae4 = #"vox_oracle_help_orac_4";
       break;
     case 3:
-      var_8b7ccae4 = #"hash_6a1a87f71c400d60";
+      var_8b7ccae4 = #"vox_oracle_help_orac_0";
       break;
     case 4:
-      var_8b7ccae4 = #"hash_6a1a90f71c401cab";
+      var_8b7ccae4 = #"vox_oracle_help_orac_9";
       break;
     case 5:
-      var_8b7ccae4 = #"hash_6a1a8ef71c401945";
+      var_8b7ccae4 = #"vox_oracle_help_orac_7";
       break;
     case 6:
-      var_8b7ccae4 = #"hash_6a1a8ff71c401af8";
+      var_8b7ccae4 = #"vox_oracle_help_orac_8";
       break;
     default:
       var_8b7ccae4 = #"hash_11dfeee664d456ef";

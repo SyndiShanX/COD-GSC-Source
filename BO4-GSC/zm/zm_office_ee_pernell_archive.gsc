@@ -193,7 +193,7 @@ function_a546fd97() {
 
         iprintlnbold("<dev string:x7d>");
 
-        self playSound(#"hash_4f1f1f9762add0a3");
+        self playSound(#"evt_ee_server_repair");
         s_notify.attacker thread zm_audio::create_and_play_dialog(#"generic", #"response_positive");
       }
     }

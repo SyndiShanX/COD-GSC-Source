@@ -185,10 +185,10 @@ function_8a2b203b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
       if(!isDefined(self.var_dc255e3b)) {
         if(oldval != 0) {
-          self playSound(localclientnum, #"hash_54365a8985bf4da9");
+          self playSound(localclientnum, #"wpn_zhield_melee_ignite");
         }
 
-        self.var_dc255e3b = self playLoopSound(#"hash_5452ecceeecdc217");
+        self.var_dc255e3b = self playLoopSound(#"wpn_zhield_melee_burn_lp");
       }
 
       break;

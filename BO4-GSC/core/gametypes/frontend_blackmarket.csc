@@ -192,10 +192,10 @@ function_f559e439(localclientnum, menu_data, state) {
 
     if(isDefined(var_f56984dc) && var_f56984dc == "crate") {
       if(isDefined(level.s_blackmarket.var_760cf00) && level.s_blackmarket.var_760cf00) {
-        playSound(localclientnum, #"hash_33e04aad46568336");
+        playSound(localclientnum, #"vox_blac_crate_open");
       }
 
-      playSound(localclientnum, #"hash_548f0d33e630e71a");
+      playSound(localclientnum, #"uin_mtx_camera_whoosh");
     }
   } else {
     level.s_blackmarket.var_6b569619 = undefined;

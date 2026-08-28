@@ -44,7 +44,7 @@ function_1633056a(var_16e6b8ea = 10) {
 
   while(true) {
     if(isalive(self) && !self laststand::player_is_in_laststand() && self function_c81cdba2()) {
-      self playsoundtoplayer(#"hash_6df374d848ba6a60", self);
+      self playsoundtoplayer(#"zmb_player_health_drain", self);
       self dodamage(var_16e6b8ea, self.origin);
       wait 1;
     }

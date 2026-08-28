@@ -88,7 +88,7 @@ function_6b107487() {
   mdl_elevator thread function_5ae9d41e();
   level thread zm_escape_vo_hooks::function_c179111e();
   self thread scene::play("Shot 2");
-  wait getanimlength(#"hash_591fb71679a08ed8");
+  wait getanimlength(#"p8_fxanim_zm_esc_elevator_falling_fall_anim");
   level flag::set(#"hash_dd62a8822ea4a38");
 }
 

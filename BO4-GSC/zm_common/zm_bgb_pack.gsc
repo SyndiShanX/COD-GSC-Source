@@ -280,7 +280,7 @@ function_23b7cdd8(n_index) {
 
   if(!(isDefined(self.var_7148f2c) && self.var_7148f2c)) {
     self.var_7148f2c = 1;
-    self playlocalsound(#"hash_678b4eee9797e94f");
+    self playlocalsound(#"zmb_elixir_common_deny");
 
     switch (n_index) {
       case 0:
@@ -749,9 +749,9 @@ function_a1f97e79(var_707fd977, n_index, var_10b7b97a) {
 
 function_f2173c97(var_607319eb) {
   if(var_607319eb) {
-    self playsoundtoplayer(#"hash_54adb87d474be3d2", self);
+    self playsoundtoplayer(#"zmb_elixir_common_lockdown", self);
   } else {
-    self playsoundtoplayer(#"hash_686b41e25622cb04", self);
+    self playsoundtoplayer(#"zmb_elixir_common_lockdown_end", self);
   }
 
   for(x = 0; x < 4; x++) {

@@ -797,7 +797,7 @@ function_3c1f242b() {
       }
 
       if(isDefined(mdl_drop)) {
-        playSoundAtPosition(#"hash_6b3b011b2d22c586", mdl_drop.origin);
+        playSoundAtPosition(#"zmb_gold_watch_pickup", mdl_drop.origin);
       }
 
       e_player thread zm_audio::create_and_play_dialog(#"component_pickup", #"generic");

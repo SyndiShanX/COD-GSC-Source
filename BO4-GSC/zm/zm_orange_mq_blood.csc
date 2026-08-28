@@ -60,8 +60,8 @@ function_aae8819(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
     self.fx = util::playFXOnTag(localclientnum, level._effect[#"hash_748a2e401bbe345c"], self, "tag_origin");
 
     if(!isDefined(self.sfx)) {
-      self playSound(0, #"hash_7867b5508ce25848");
-      self.sfx = self playLoopSound(#"hash_2c5ad3d4cdc507c");
+      self playSound(0, #"zmb_wisp_appear");
+      self.sfx = self playLoopSound(#"zmb_wisp_close_lp");
     }
 
     return;
@@ -71,15 +71,15 @@ function_aae8819(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
     self.fx = util::playFXOnTag(localclientnum, level._effect[#"hash_2717a5ed66a93a2d"], self, "tag_origin");
 
     if(!isDefined(self.sfx)) {
-      self playSound(0, #"hash_7867b5508ce25848");
-      self.sfx = self playLoopSound(#"hash_2c5ad3d4cdc507c");
+      self playSound(0, #"zmb_wisp_appear");
+      self.sfx = self playLoopSound(#"zmb_wisp_close_lp");
     }
 
     return;
   }
 
   if(isDefined(self.sfx)) {
-    self playSound(0, #"hash_6e263590089ef88e");
+    self playSound(0, #"zmb_wisp_disappear");
     self stoploopsound(self.sfx);
     self.sfx = undefined;
   }

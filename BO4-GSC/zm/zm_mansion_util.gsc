@@ -654,7 +654,7 @@ function_f15c4657() {
 
   if(self zm_characters::is_character(array(#"prt_zm_butler")) && level.sam_clue_dig_traversal == 3) {
     self zm_vo::function_a2bd5a0c(#"hash_4c470787fc7738eb");
-    self playsoundtoplayer(#"hash_663346a99e3bdffc", self);
+    self playsoundtoplayer(#"vox_revive_down_4_butd_1", self);
     return;
   }
 

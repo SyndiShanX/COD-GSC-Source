@@ -156,10 +156,10 @@ lock_rotate() {
   self endon(#"death", #"destroyed");
   self.var_86dbb82b = 1;
   self rotateroll(-90, 0.5);
-  self playSound(#"hash_1902d49433a38eba");
+  self playSound(#"zmb_combo_case_turn");
   self notify(#"rotate_lock");
   self waittill(#"rotatedone");
-  self playSound(#"hash_41879bbde78fcc85");
+  self playSound(#"zmb_combo_case_stop");
   self.var_86dbb82b = 0;
 }
 

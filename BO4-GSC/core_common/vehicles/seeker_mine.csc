@@ -55,7 +55,7 @@ fxhandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, 
 play_seeker_mine_fx(localclientnum) {
   self endon(#"death");
   playSound(0, #"mpl_seeker_mine_fire", self.origin);
-  sound = self playLoopSound(#"hash_40039ac740a9f96e");
+  sound = self playLoopSound(#"mpl_seekermine_charge");
   self.fxloop = util::playFXOnTag(localclientnum, #"weapon/fx8_equip_seeker_active", self, "tag_body_animate");
   level thread function_cece47d2(localclientnum, self, self.fxloop);
 }

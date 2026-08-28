@@ -194,7 +194,7 @@ function_46006d68() {
       break;
     case 2:
       self.e_tv function_8ebc8dcf(level.var_276bd207[level.var_f36ca012]);
-      self.e_tv playLoopSound(#"hash_6edda7357adf8cd9");
+      self.e_tv playLoopSound(#"amb_ww_tv_post_charge");
       self.var_53d39cb3 = 3;
       self thread function_6e0328a9();
       break;
@@ -319,7 +319,7 @@ function_256cc56e() {
 
   wait 1;
   level.var_d9d721fd scene::play("open");
-  playSoundAtPosition(#"hash_7afd5b8ae2a40c53", level.var_cb94d41d.origin);
+  playSoundAtPosition(#"evt_ww_reveal", level.var_cb94d41d.origin);
   s_unitrigger = level.var_cb94d41d zm_unitrigger::create(&function_c3076788, 64);
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger);
   zm_unitrigger::function_c9e3607c(s_unitrigger, "HINT_WEAPON", level.a_w_ray_guns[2]);

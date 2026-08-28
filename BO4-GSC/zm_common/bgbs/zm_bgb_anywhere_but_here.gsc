@@ -126,7 +126,7 @@ activation(var_fad9ed02 = 1) {
         playFX(level._effect[#"teleport_aoe_kill"], ai.origin);
       }
 
-      ai playSound(#"hash_22ff6701cf652785");
+      ai playSound(#"zmb_bgb_abh_zombie_explode");
       ai.marked_for_recycle = 1;
       ai.has_been_damaged_by_player = 0;
       ai dodamage(ai.health + 1000, self.origin, self);

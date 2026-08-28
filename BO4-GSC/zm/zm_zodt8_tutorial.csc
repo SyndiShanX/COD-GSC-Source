@@ -120,13 +120,13 @@ symbol_blocker_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval) {
     v_forward = anglesToForward(self.angles);
     self.blocker_fx = playFX(localclientnum, level._effect[#"symbol_blocker_fx"], self.origin, v_forward);
-    audio::playloopat(#"hash_7c4e89429c24b4bd", self.origin);
+    audio::playloopat(#"zmb_tutorial_red_barrier", self.origin);
     return;
   }
 
   if(isDefined(self.blocker_fx)) {
     stopfx(localclientnum, self.blocker_fx);
-    audio::stoploopat(#"hash_7c4e89429c24b4bd", self.origin);
-    playSound(0, #"hash_2f2d6d08b47e6395", self.origin);
+    audio::stoploopat(#"zmb_tutorial_red_barrier", self.origin);
+    playSound(0, #"zmb_tutorial_red_barrier_dissolve", self.origin);
   }
 }

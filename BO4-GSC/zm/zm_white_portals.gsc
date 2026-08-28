@@ -339,7 +339,7 @@ cooldown_portal_timer(e_user) {
   wait 20;
   arrayremovevalue(self.a_e_users, e_user);
   self function_cb7c6fc7(e_user, 1);
-  playSoundAtPosition(#"hash_1c870a3a31a2dcf9", self.origin);
+  playSoundAtPosition(#"evt_mmtd_cooldown_end", self.origin);
 }
 
 function_cb7c6fc7(e_user, b_show = 1) {

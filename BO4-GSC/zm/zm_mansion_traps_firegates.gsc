@@ -172,7 +172,7 @@ function_aa539d7b() {
   }
 
   self flag::wait_till(#"enabled");
-  playSoundAtPosition(#"hash_277a6124c088ba6d", self.origin);
+  playSoundAtPosition(#"zmb_energy_core_insert", self.origin);
   sound_ent = spawn("script_origin", self.origin);
   sound_ent playLoopSound(#"hash_39e79a32dcbea912");
   level flag::set(self.script_flag_wait);
@@ -342,7 +342,7 @@ function_b1bd4115() {
       level thread function_7b170638(level.var_adc872f3, 1);
       e_player thread zm_audio::create_and_play_dialog(#"component_pickup", #"generic");
       arrayremovevalue(level.var_4f17d729, self, 0);
-      playSoundAtPosition(#"hash_7512ff4121bb5604", e_player.origin);
+      playSoundAtPosition(#"zmb_energy_core_pickup", e_player.origin);
 
       if(isDefined(self.stub.mdl)) {
         self.stub.mdl delete();
@@ -378,7 +378,7 @@ function_7b170638(var_8163cc4, b_found) {
 
 pickup_spin() {
   self endon(#"death");
-  self playLoopSound(#"hash_3b9597774dea00d6");
+  self playLoopSound(#"zmb_energy_core_loop");
 
   while(true) {
     self rotateYaw(180, 1);

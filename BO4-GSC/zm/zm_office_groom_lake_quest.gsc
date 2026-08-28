@@ -537,7 +537,7 @@ function_73e06b11() {
 
 pickup_modifier() {
   level notify(#"modifier_acquired");
-  self playSound(#"hash_104670ec9247d6c");
+  self playSound(#"evt_ee_receiver_pickup");
   level.var_279a11a3.related_parent setinvisibletoall();
   zm_unitrigger::unregister_unitrigger(level.var_279a11a3);
 }
@@ -572,7 +572,7 @@ function_7f4bdad3() {
   s_org = struct::get("telporter_modifier_model_org", "targetname");
   e_modifier = spawn("script_model", s_org.origin);
   e_modifier setModel("p8_zm_off_teleporter_together");
-  playSoundAtPosition(#"hash_4490540f4d90c6dd", e_modifier.origin);
+  playSoundAtPosition(#"evt_ee_receiver_drop", e_modifier.origin);
 }
 
 enable_groom_lake() {

@@ -87,7 +87,7 @@ function_fb90d490() {
   var_5be26843 = struct::get_array("array_emergency_broadcast", "targetname");
 
   foreach(struct in var_5be26843) {
-    playSound(0, #"hash_6086b2f61672a07e", struct.origin);
+    playSound(0, #"vox_numb_unlock", struct.origin);
   }
 }
 
@@ -96,14 +96,14 @@ broadcast_off() {
   var_5be26843 = struct::get_array("array_emergency_broadcast", "targetname");
 
   foreach(struct in var_5be26843) {
-    audio::stoploopat(#"hash_39c8dfc4efa25b26", struct.origin);
+    audio::stoploopat(#"amb_emergency_broadcast_tone", struct.origin);
   }
 
   exploder::kill_exploder("fxexp_radar_activation");
 
   foreach(struct in var_5be26843) {
     struct notify(#"broadcast_off");
-    audio::stoploopat(#"hash_39c8dfc4efa25b26", struct.origin);
+    audio::stoploopat(#"amb_emergency_broadcast_tone", struct.origin);
 
     if(isDefined(struct.var_7a993bec)) {
       stopsound(struct.var_7a993bec);
@@ -116,7 +116,7 @@ function_44e1ce2e(var_ffe2b6da = 0) {
 
   foreach(struct in var_5be26843) {
     if(var_ffe2b6da == 0) {
-      audio::playloopat(#"hash_39c8dfc4efa25b26", struct.origin);
+      audio::playloopat(#"amb_emergency_broadcast_tone", struct.origin);
     }
   }
 
@@ -125,7 +125,7 @@ function_44e1ce2e(var_ffe2b6da = 0) {
   var_5be26843 = struct::get_array("array_emergency_broadcast", "targetname");
 
   foreach(struct in var_5be26843) {
-    audio::playloopat(#"hash_39c8dfc4efa25b26", struct.origin);
+    audio::playloopat(#"amb_emergency_broadcast_tone", struct.origin);
   }
 
   wait 3;
@@ -134,7 +134,7 @@ function_44e1ce2e(var_ffe2b6da = 0) {
     while(var_ffe2b6da < 8) {
       foreach(struct in var_5be26843) {
         if(var_ffe2b6da == 0) {
-          struct.var_7a993bec = playSound(0, #"hash_6ee08a10b9c18ba7", struct.origin);
+          struct.var_7a993bec = playSound(0, #"amb_emergency_broadcast_squelch", struct.origin);
           continue;
         }
 
@@ -164,13 +164,13 @@ function_44e1ce2e(var_ffe2b6da = 0) {
 
       wait 1;
       var_ffe2b6da++;
-      struct.var_7a993bec = playSound(0, #"hash_6ee08a10b9c18ba7", struct.origin);
+      struct.var_7a993bec = playSound(0, #"amb_emergency_broadcast_squelch", struct.origin);
     }
   } else {
     while(var_ffe2b6da < 5) {
       foreach(struct in var_5be26843) {
         if(var_ffe2b6da == 0) {
-          struct.var_7a993bec = playSound(0, #"hash_6ee08a10b9c18ba7", struct.origin);
+          struct.var_7a993bec = playSound(0, #"amb_emergency_broadcast_squelch", struct.origin);
           continue;
         }
 
@@ -200,14 +200,14 @@ function_44e1ce2e(var_ffe2b6da = 0) {
 
       wait 1;
       var_ffe2b6da++;
-      struct.var_7a993bec = playSound(0, #"hash_6ee08a10b9c18ba7", struct.origin);
+      struct.var_7a993bec = playSound(0, #"amb_emergency_broadcast_squelch", struct.origin);
     }
   }
 
   wait 10;
 
   foreach(struct in var_5be26843) {
-    audio::stoploopat(#"hash_39c8dfc4efa25b26", struct.origin);
+    audio::stoploopat(#"amb_emergency_broadcast_tone", struct.origin);
   }
 
   level.var_c055f451 = 2;
@@ -216,7 +216,7 @@ function_44e1ce2e(var_ffe2b6da = 0) {
 function_72e8e600() {
   for(loopcount = 0; loopcount < 10; loopcount++) {
     wait randomintrange(1, 2);
-    playSound(0, #"hash_7e2183e61d5335a8", self.origin);
+    playSound(0, #"evt_local_alarm", self.origin);
     wait 3;
   }
 }

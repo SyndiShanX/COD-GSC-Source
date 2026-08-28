@@ -691,7 +691,7 @@ function_25a79bc1() {
 function_3ce20299() {
   self endon(#"death");
   self zm_vo::vo_say(#"vox_plr_death_react_0_plr_12_0", 1.5, 1, 9999, 1, 1, 1);
-  self zm_vo::vo_say(#"hash_7f6178afe0059ebf", 0, 1, 9999, 1, 1, 1);
+  self zm_vo::vo_say(#"vox_plr_death_react_0_butd_1", 0, 1, 9999, 1, 1, 1);
   level notify(#"hash_132b5b79b9aeaf9e");
 }
 

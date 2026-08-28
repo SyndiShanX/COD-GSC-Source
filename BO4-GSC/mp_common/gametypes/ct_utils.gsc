@@ -2559,10 +2559,10 @@ player_collisionbox(var_96065dae, var_8d3fbac4 = undefined, n_size = 0) {
   level.var_33bd6a8 solid();
   triggerfx(level.var_87f7bbf);
   e_player = getPlayers()[0];
-  e_player playsoundtoplayer(#"hash_4cc6bcab475eb688", e_player);
+  e_player playsoundtoplayer(#"mpl_red_barrier_on", e_player);
   level waittill(#"hash_4c9c5fbc89779e64");
   e_player = getPlayers()[0];
-  e_player playsoundtoplayer(#"hash_544d950a45d876e2", e_player);
+  e_player playsoundtoplayer(#"mpl_red_barrier_off", e_player);
 
   if(isDefined(level.var_33bd6a8)) {
     level.var_33bd6a8 delete();

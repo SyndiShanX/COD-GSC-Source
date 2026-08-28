@@ -25,7 +25,7 @@
 #namespace ct_recon_tutorial;
 
 init() {
-  level.var_ae120f18 = array(#"hash_63c5e2c0cbf46688");
+  level.var_ae120f18 = array(#"vox_tvoi_tutor_reco_start_0");
   level.var_6cd64bc3 = 0;
   level.var_2a0adaaa = 1;
   level flag::init("ct_player_success");
@@ -224,14 +224,14 @@ function_86c058b() {
   level notify(#"start_opening_collision_exit");
   level notify(#"start_opening_temp_collision");
   ct_vo::function_3ca1b77d();
-  level thread ct_vo::function_831e0584(array(#"hash_63c5e3c0cbf4683b"));
+  level thread ct_vo::function_831e0584(array(#"vox_tvoi_tutor_reco_start_1"));
   e_player = getPlayers()[0];
   a_str_vo = array(#"vox_tvoi_tutor_reco_start");
   e_player thread ct_utils::function_61c3d59c(#"hash_75a61367f89fc81a", a_str_vo);
   s_loc = struct::get("s_recon_vision_pulse_obj", "targetname");
   waypoint = ct_utils::create_waypoint(#"hash_1f1deaa6bff12db8", s_loc.origin, s_loc.angles, #"any", undefined, 40, undefined);
   level.var_e72728b8 = array(#"eq_sensor", #"gadget_vision_pulse");
-  level thread ct_vo::function_14b08e49(array(#"hash_46c4843e8f5d2451"), "stop_nag");
+  level thread ct_vo::function_14b08e49(array(#"vox_tvoi_tutor_reco_move_nag"), "stop_nag");
   ct_utils::function_d25bd3c9(s_loc.origin, 80, 0);
   level notify(#"stop_nag");
   waypoint ct_utils::function_f9ed304d();
@@ -295,7 +295,7 @@ function_5598747a() {
   level endon(#"combattraining_logic_finished");
   ct_utils::function_e9ab1003(undefined);
   level notify(#"start_church_dart_collision");
-  level thread ct_vo::function_14b08e49(array(#"hash_46c4843e8f5d2451"), "stop_nag");
+  level thread ct_vo::function_14b08e49(array(#"vox_tvoi_tutor_reco_move_nag"), "stop_nag");
   ct_utils::function_93c86846(undefined, "s_church_sensor_dart_1", array(#"eq_sensor", #"gadget_vision_pulse"), 0, undefined, 50);
   level notify(#"stop_nag");
   ct_utils::function_e9ab1003("s_church_sensor_dart_1");
@@ -304,7 +304,7 @@ function_5598747a() {
   level thread function_a71a97eb(undefined, 0.1, undefined, "s_bot_approach_church_loc");
   a_str_vo = array("vox_tvoi_tutor_reco_sensor_dart_0", "vox_tvoi_tutor_reco_sensor_dart_1");
   ct_vo::function_831e0584(a_str_vo, 1);
-  level thread ct_vo::function_831e0584(array(#"hash_a8bcd8c98df0294"), 1);
+  level thread ct_vo::function_831e0584(array(#"vox_tvoi_tutor_reco_sensor_dart_2"), 1);
   wait 1.5;
   level.var_e72728b8 = array(#"gadget_vision_pulse");
   e_player = getPlayers()[0];
@@ -326,7 +326,7 @@ function_5598747a() {
   level.var_9f073b4 = 0;
   level thread ct_bots::activate_bots(level.var_66b3c127.size, #"axis");
   level thread function_a71a97eb(undefined, 0.1, undefined, "s_bot_approach_tank_loc");
-  level thread ct_vo::function_14b08e49(array(#"hash_46c4843e8f5d2451"), "stop_nag");
+  level thread ct_vo::function_14b08e49(array(#"vox_tvoi_tutor_reco_move_nag"), "stop_nag");
   level.var_3e67eeea = #"hash_2a38a07c2fc52c1f";
   ct_utils::function_93c86846(array(#"hash_36d8331fa342d02a"), "s_sensor_dart_crum_4", array(#"gadget_vision_pulse"), 0, undefined, 50);
   level notify(#"stop_nag");
@@ -476,7 +476,7 @@ function_6728bf85() {
   level.var_2a5b7055 = undefined;
   level thread function_a71a97eb(undefined, undefined, "s_approach_enemy_dart", "s_bot_enemy_dart_loc");
   waitframe(1);
-  level thread ct_vo::function_14b08e49(array(#"hash_46c4843e8f5d2451"), "stop_nag");
+  level thread ct_vo::function_14b08e49(array(#"vox_tvoi_tutor_reco_move_nag"), "stop_nag");
   ct_utils::function_93c86846(undefined, "s_enemy_sensor_dart_crum_2", array(#"eq_sensor"), 0, undefined, 35);
   level notify(#"stop_nag");
   level notify(#"start_inside_church_exit_collision");
@@ -529,7 +529,7 @@ function_1f031934() {
   ct_utils::function_e9ab1003(undefined);
   level notify(#"stop_flanking_collision");
   level thread function_a71a97eb(undefined, 3, undefined, "s_bot_flanking_loc1");
-  level thread ct_vo::function_14b08e49(array(#"hash_46c4843e8f5d2451"), "stop_nag");
+  level thread ct_vo::function_14b08e49(array(#"vox_tvoi_tutor_reco_move_nag"), "stop_nag");
   ct_utils::function_93c86846(undefined, "s_recon_flanking_goto_2", array(#"eq_sensor", #"gadget_vision_pulse"), undefined, undefined, 35);
   level notify(#"stop_nag");
   ct_utils::function_e9ab1003("s_recon_flanking_goto_2");
@@ -635,7 +635,7 @@ function_c962d077() {
   level notify(#"start_wine_cellar_collision");
   level notify(#"start_wine_cellar_exit_collision");
   playSoundAtPosition(#"hash_4ea3c849271fa11", (-621, -1024, 828));
-  level thread ct_vo::function_14b08e49(array(#"hash_46c4843e8f5d2451"), "stop_nag");
+  level thread ct_vo::function_14b08e49(array(#"vox_tvoi_tutor_reco_move_nag"), "stop_nag");
   ct_utils::function_93c86846(undefined, "s_dead_bodies_obj", undefined, undefined, undefined, 35);
   level notify(#"stop_nag");
   ct_utils::function_e9ab1003("s_dead_bodies_obj");
@@ -654,7 +654,7 @@ function_f6c6baf3() {
   level endon(#"combattraining_logic_finished");
   level notify(#"stop_wine_cellar_exit_collision");
   level notify(#"start_courtyard_cellar_collision");
-  level thread ct_vo::function_14b08e49(array(#"hash_46c4843e8f5d2451"), "stop_nag");
+  level thread ct_vo::function_14b08e49(array(#"vox_tvoi_tutor_reco_move_nag"), "stop_nag");
   ct_utils::function_93c86846(undefined, "s_zomibe_obj_crumb1", array(#"eq_sensor"), undefined, undefined, 35);
   level notify(#"stop_nag");
   ct_utils::function_9aca2fa0("ct_wzf");
@@ -674,7 +674,7 @@ function_f6c6baf3() {
   level notify(#"stop_enemy_dart_collision");
   level notify(#"stop_enemy_dart_enter_collision");
   level notify(#"stop_enemy_dart_exit_collision");
-  level thread ct_vo::function_14b08e49(array(#"hash_46c4843e8f5d2451"), "stop_nag");
+  level thread ct_vo::function_14b08e49(array(#"vox_tvoi_tutor_reco_move_nag"), "stop_nag");
   ct_utils::function_93c86846(array(#"hash_71c198093aa3460a"), "s_zomibe_obj_crumb2", array(#"eq_sensor"), undefined, undefined, 35);
   level notify(#"stop_nag");
   ct_utils::function_e9ab1003("s_zomibe_obj_crumb2");
@@ -768,7 +768,7 @@ function_39f9d433() {
   level.var_e72728b8 = array(#"gadget_vision_pulse");
   e_player = getPlayers()[0];
   e_player ct_utils::function_6ad0c151();
-  level thread ct_vo::function_14b08e49(array(#"hash_46c4843e8f5d2451"), "stop_nag");
+  level thread ct_vo::function_14b08e49(array(#"vox_tvoi_tutor_reco_move_nag"), "stop_nag");
   ct_utils::function_93c86846(undefined, "s_zomibe_objective", array(#"eq_sensor"), undefined, undefined, 35);
   level notify(#"stop_nag");
   level notify(#"start_enter_church_collision");
@@ -1056,10 +1056,10 @@ function_79d4c106() {
   level notify(#"stop_zombies");
   ct_utils::function_9aca2fa0("ct_endgame");
   ct_utils::function_c2a10fc();
-  ct_vo::function_831e0584(array(#"hash_398e7ff7d4d056d5"), 1);
+  ct_vo::function_831e0584(array(#"vox_tvoi_tutor_reco_end_0"), 1);
   waitframe(1);
   level.var_77e9434e = 0;
-  level thread ct_vo::function_831e0584(array(#"hash_398e7ef7d4d05522"), 1);
+  level thread ct_vo::function_831e0584(array(#"vox_tvoi_tutor_reco_end_1"), 1);
   wait 0.1;
   ct_vo::function_3ca1b77d();
 }

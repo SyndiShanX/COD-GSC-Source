@@ -296,7 +296,7 @@ freezegun_death(params) {
   self.skip_death_notetracks = 1;
   self.nodeathragdoll = 1;
   self.var_606a4641 = params;
-  self playSound(#"hash_2039f8c77ff89659");
+  self playSound(#"prj_winters_howl_freeze");
 }
 
 mp_dom_flag_d_captured_byinterfaceattributes() {

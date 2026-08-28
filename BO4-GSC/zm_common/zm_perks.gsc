@@ -2213,7 +2213,7 @@ function_f5da744e() {
     playSoundAtPosition(#"hash_489cdfeed1ac55bd", self.origin);
 
     if(level.var_c3e5c4cd == 1 && !self.var_3cfb2018) {
-      playSoundAtPosition(#"hash_1e20f59360c2377e", self.origin);
+      playSoundAtPosition(#"mus_perk_machine_stinger", self.origin);
     }
 
     player zm_score::minus_to_player_score(current_cost);

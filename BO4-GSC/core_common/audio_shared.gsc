@@ -155,19 +155,19 @@ function_30d4f8c4(attacker, smeansofdeath, weapon) {
 
   switch (weapon.rootweapon.name) {
     case #"hero_annihilator":
-      str_alias = #"hash_5e5050d7f9042fac";
+      str_alias = #"mpl_death_by_hero_annihilator";
       break;
     case #"eq_gravityslam":
-      str_alias = #"hash_191ff361b2a52032";
+      str_alias = #"mpl_death_by_hero_gravslam";
       break;
     case #"molotov_fire":
       str_alias = #"mpl_death_by_fire";
       break;
     case #"gadget_radiation_field":
-      str_alias = #"hash_16cc324cc4a290fc";
+      str_alias = #"mpl_death_by_hero_radiation";
       break;
     case #"sig_bow_quickshot5":
-      str_alias = #"hash_1732b1323f11b7bf";
+      str_alias = #"mpl_death_by_hero_bow";
       break;
     case #"sig_lmg":
       str_alias = #"mpl_death_by_scythe";
@@ -176,7 +176,7 @@ function_30d4f8c4(attacker, smeansofdeath, weapon) {
     case #"sniper_powerbolt_t8":
     case #"sniper_fastrechamber_t8":
     case #"sniper_quickscope_t8":
-      str_alias = #"hash_9b40eefa77d6446";
+      str_alias = #"mpl_death_by_weapon_sniper";
       break;
     case #"ar_damage_t8":
     case #"ar_accurate_t8":
@@ -194,7 +194,7 @@ function_30d4f8c4(attacker, smeansofdeath, weapon) {
     case #"smg_fastfire_t8":
     case #"lmg_standard_t8":
     case #"smg_handling_t8":
-      str_alias = #"hash_669a22b65807ee3b";
+      str_alias = #"mpl_death_by_weapon_fullauto";
       break;
     case #"pistol_revolver_t8":
     case #"tr_powersemi_t8":
@@ -203,7 +203,7 @@ function_30d4f8c4(attacker, smeansofdeath, weapon) {
       break;
     case #"shotgun_pump_t8":
     case #"shotgun_semiauto_t8":
-      str_alias = #"hash_10ba93a0930567c5";
+      str_alias = #"mpl_death_by_weapon_shotgun";
       break;
     case #"eq_sticky_grenade":
       str_alias = #"hash_5330d1fc9ae03536";

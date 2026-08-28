@@ -93,7 +93,7 @@ init() {
   vol_apd_console = getEnt("vol_apd_console", "targetname");
   vol_apd_console hide();
   level.e_shard = getEnt("nugget", "targetname");
-  level.e_shard playLoopSound(#"hash_52058ae478647502");
+  level.e_shard playLoopSound(#"zmb_elemental_shard_loop");
   level.e_shard hide();
 
   if(!isDefined(level.a_e_canister)) {
@@ -250,7 +250,7 @@ function_ca3759b1() {
     }
   }
 
-  playSoundAtPosition(#"hash_274493fd61d94d73", (0, 0, 0));
+  playSoundAtPosition(#"mus_boss_battle_countdown", (0, 0, 0));
   playSoundAtPosition(#"hash_1fc67d7ad7445bbf", (-521, -1972, -82));
   playSoundAtPosition(#"hash_1fc67c7ad7445a0c", (-1146, -1956, -92));
   level zm_white_util::function_ec34b5ee("vox_boss_nuke_count_ncom_0");
@@ -797,7 +797,7 @@ spawn_boss() {
   level.e_avogadro.name = "avog";
   level.e_avogadro.isspeaking = 0;
   level.e_avogadro.var_5b6ebfd0 = 0;
-  level.e_avogadro playLoopSound(#"hash_43d41833f5950a8d");
+  level.e_avogadro playLoopSound(#"zmb_avogadro_base_lp");
   a_str_vol = array("vol_soul_beds", "vol_soul_diner", "vol_soul_lounge", "vol_soul_storage");
   var_54037511 = [];
 

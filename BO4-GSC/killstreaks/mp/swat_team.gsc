@@ -1754,30 +1754,30 @@ registerrein_amb(type) {
 
   if(!isDefined(level.var_bf13c7cf)) {
     level.var_bf13c7cf = [];
-    array::add(level.var_bf13c7cf, #"hash_2416186b2c2fd1a8");
-    array::add(level.var_bf13c7cf, #"hash_5ed736ce5677e90");
-    array::add(level.var_bf13c7cf, #"hash_6ac3aef794ea4b07");
+    array::add(level.var_bf13c7cf, #"vox_swa1_ult_swat_mant_heavy");
+    array::add(level.var_bf13c7cf, #"vox_swa1_ult_swat_pain");
+    array::add(level.var_bf13c7cf, #"vox_swa1_ult_swat_mant_light");
   }
 
   if(!isDefined(level.var_afebcc7e)) {
     level.var_afebcc7e = [];
-    array::add(level.var_afebcc7e, #"hash_310164c2facacc31");
-    array::add(level.var_afebcc7e, #"hash_c3ec7c69991c32d");
-    array::add(level.var_afebcc7e, #"hash_44db3e21d3c99dd6");
+    array::add(level.var_afebcc7e, #"vox_swa2_ult_swat_mant_heavy");
+    array::add(level.var_afebcc7e, #"vox_swa2_ult_swat_pain");
+    array::add(level.var_afebcc7e, #"vox_swa2_ult_swat_mant_light");
   }
 
   if(!isDefined(level.var_6254ffb6)) {
     level.var_6254ffb6 = [];
-    array::add(level.var_6254ffb6, #"hash_656973028d759c26");
-    array::add(level.var_6254ffb6, #"hash_1239ec12044b3fd6");
-    array::add(level.var_6254ffb6, #"hash_590e7ce5d23bd0f5");
+    array::add(level.var_6254ffb6, #"vox_swa3_ult_swat_mant_heavy");
+    array::add(level.var_6254ffb6, #"vox_swa3_ult_swat_pain");
+    array::add(level.var_6254ffb6, #"vox_swa3_ult_swat_mant_light");
   }
 
   if(!isDefined(level.var_383a6948)) {
     level.var_383a6948 = [];
-    array::add(level.var_383a6948, #"hash_44e29c9d2df27e17");
-    array::add(level.var_383a6948, #"hash_25c2538c4892d193");
-    array::add(level.var_383a6948, #"hash_1af511ba5412916c");
+    array::add(level.var_383a6948, #"vox_swa4_ult_swat_mant_heavy");
+    array::add(level.var_383a6948, #"vox_swa4_ult_swat_pain");
+    array::add(level.var_383a6948, #"vox_swa4_ult_swat_mant_light");
   }
 
   if(!isDefined(self.voxid)) {

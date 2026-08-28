@@ -197,7 +197,7 @@ function_3f8e4156(params) {
     return;
   }
 
-  attacker playsoundtoplayer(#"hash_619bf069e410b863", attacker);
+  attacker playsoundtoplayer(#"evt_wz_bounty_success_spectre", attacker);
   attacker luinotifyevent(#"game_update_notification", 1, 11);
   item_supply_drop::drop_supply_drop(attacker.origin);
 }

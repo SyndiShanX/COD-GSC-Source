@@ -691,7 +691,7 @@ function_7bd8cfde(e_activator, s_trap) {
     self clientfield::set("spinning_trap_blood_fx", 1);
   }
 
-  self playSound(#"hash_42c6cc2204b7fbbd");
+  self playSound(#"evt_spin_trap_hit");
   v_hook = s_trap.e_trap.scene_ents[#"prop 1"] gettagorigin("tag_fan_blade_A_2");
   n_dist = distance2d(self.origin, v_hook);
 
@@ -739,7 +739,7 @@ function_bcfd9acb(s_trap) {
   self setteam(util::get_enemy_team(self.team));
   self zombie_utility::makezombiecrawler(1);
   var_e72c9959 thread scene::init(#"aib_vign_zm_mob_hook_trap_zombie", self);
-  playSoundAtPosition(#"hash_42c6cc2204b7fbbd", self.origin);
+  playSoundAtPosition(#"evt_spin_trap_hit", self.origin);
   s_trap waittill(#"spinning_trap_complete");
   var_44342e79 = var_e72c9959 scene::function_8582657c(#"p8_fxanim_zm_esc_trap_fan_play", "Shot 2");
   var_e72c9959 scene::play(#"aib_vign_zm_mob_hook_trap_zombie", self);

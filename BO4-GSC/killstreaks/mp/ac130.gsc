@@ -390,7 +390,7 @@ function_d4896942(bundle) {
 
   while(true) {
     ac130 waittill(#"flare_deployed");
-    ac130 playSound(#"hash_713a3ce01967434e");
+    ac130 playSound(#"wpn_ac130_chaff");
     ac130.var_7132bbb7 = 1;
     self killstreaks::play_pilot_dialog_on_owner("damageEvaded", "ac130", self.killstreak_id);
     wait isDefined(bundle.var_2eeb71d2) ? bundle.var_2eeb71d2 : 5;
@@ -766,7 +766,7 @@ function_dea7ec6a(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
 
   if(handleasrocketdamage) {
     ac130 function_c4aa4bb2();
-    ac130 playSound(#"hash_ddcd9d25e056016");
+    ac130 playSound(#"uin_ac130_alarm_damage");
   }
 
   var_902cbab5 = self.health - idamage;
@@ -872,7 +872,7 @@ playlockonsoundsthread(player, heli) {
 
     while(true) {
       if(enemyislocking(heli)) {
-        heli.locksounds playsoundtoplayer(#"hash_fa62d8cec85b1a0", player);
+        heli.locksounds playsoundtoplayer(#"uin_ac130_e_targeting", player);
         wait 0.125;
       }
 

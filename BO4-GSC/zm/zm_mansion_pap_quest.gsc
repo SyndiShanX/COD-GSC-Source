@@ -1312,7 +1312,7 @@ function_16288b92(str_type, s_loc, mdl_key, vol_transform) {
       if(s_trophy.targetname == "monkey_loc") {
         mdl_lid = getEnt("monkey_lid", "targetname");
         mdl_lid rotateroll(-27, 0.5);
-        mdl_lid playSound(#"hash_56315c5fd55c0092");
+        mdl_lid playSound(#"zmb_will_box_open");
       }
 
       level flag::wait_till(var_47323b73.str_flag);
@@ -1323,7 +1323,7 @@ function_16288b92(str_type, s_loc, mdl_key, vol_transform) {
       if(s_trophy.targetname == "monkey_loc") {
         mdl_lid = getEnt("monkey_lid", "targetname");
         mdl_lid rotateroll(27, 0.5);
-        mdl_lid playSound(#"hash_3d156fc836a3f16");
+        mdl_lid playSound(#"zmb_will_box_close");
       }
 
       e_fx delete();

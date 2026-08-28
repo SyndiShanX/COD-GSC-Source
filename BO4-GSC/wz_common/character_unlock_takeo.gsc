@@ -162,5 +162,5 @@ function_c816ea5b() {
 }
 
 function_895b40e4() {
-  self playsoundtoplayer(#"hash_1c5c27cafefddb2f", self);
+  self playsoundtoplayer(#"vox_ptak_unlock_0", self);
 }

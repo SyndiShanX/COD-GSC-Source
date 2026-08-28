@@ -266,7 +266,7 @@ playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shit
   self thread auto_revive_on_notify();
 
   if(self function_1a2fa922()) {
-    self playSound(#"hash_19b37c3454f86a4a");
+    self playSound(#"zmb_player_down_alert");
   }
 }
 

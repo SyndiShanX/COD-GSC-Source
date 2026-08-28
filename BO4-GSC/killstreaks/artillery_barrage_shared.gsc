@@ -459,7 +459,7 @@ function function_598dc586(plane, position, yaw, team, killstreak_id, fly_height
       var_7575c35 = vectortoangles(var_6bd2a8a7 - var_8cdd6f66);
       self thread function_5a0d2864(var_71d1c0cb, var_d8497bd7, var_5bbbb605, var_a1c7fa61, self.team, killstreak_id);
       self thread function_5a0d2864(var_8cdd6f66, var_6bd2a8a7, var_3fddb9e8, var_7575c35, self.team, killstreak_id);
-      plane playSound(#"hash_3e7e330ab5fcdcd");
+      plane playSound(#"veh_gunship_fire_rocket");
       wait bundle.var_768e166a;
     }
 

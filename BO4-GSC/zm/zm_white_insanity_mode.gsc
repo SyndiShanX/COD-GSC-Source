@@ -199,7 +199,7 @@ function_461006d1() {
   nd_start = getvehiclenode("insanity_mode_wisp_path_start", "targetname");
   vh_wisp = level.var_d416f0ff.vh_wisp;
   vh_wisp thread function_7cfef7a8();
-  vh_wisp playSound(#"hash_591341e81a7abb0");
+  vh_wisp playSound(#"zmb_wisp_move");
   vh_wisp vehicle::get_on_path(nd_start);
   vh_wisp vehicle::resume_path();
   vh_wisp thread vehicle::get_on_and_go_path(nd_start);
@@ -228,7 +228,7 @@ function_dba32984() {
       }
     }
 
-    self playSound(#"hash_4f86aa0523c734ed");
+    self playSound(#"zmb_wisp_move_stop");
 
     iprintlnbold("<dev string:x8c>");
 

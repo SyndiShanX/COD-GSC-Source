@@ -160,7 +160,7 @@ function_af85a094(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
       if(isDefined(var_786d7e06.var_84ed9a13.var_641ce20e) && var_786d7e06.var_84ed9a13.var_641ce20e) {
         namespace_81245006::function_6742b846(self, var_786d7e06.var_84ed9a13);
         self.var_992c3917 = 1;
-        self playsoundontag(#"hash_7241c61ae34b51a1", "j_head");
+        self playsoundontag(#"zmb_spartoi_helmet_hit", "j_head");
       }
 
       if(boneindex == 0 && isDefined(var_786d7e06.var_84ed9a13.hittags) && var_786d7e06.var_84ed9a13.hittags.size > 0) {

@@ -141,7 +141,7 @@ function_fe170e7() {
     }
 
     playFXOnTag("player/fx8_plyr_infect_change_flash_3p", self, "j_spine4");
-    self playsoundontag(#"hash_757c35cbad846c27", "j_spine4");
+    self playsoundontag(#"mpl_infection_start_vox", "j_spine4");
     wait 0.5;
 
     if(!isDefined(self)) {

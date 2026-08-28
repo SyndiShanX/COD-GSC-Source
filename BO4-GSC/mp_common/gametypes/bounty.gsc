@@ -1064,7 +1064,7 @@ function_554b5692(helicopter) {
   helicopter.rope = spawn("script_model", helicopter.origin);
   assert(isDefined(helicopter.rope));
   helicopter.rope useanimtree("generic");
-  helicopter.rope setModel(#"hash_142fee14ea7bdb9b");
+  helicopter.rope setModel(#"p8_fxanim_gp_vehicle_lb_heist_rope_mod");
   helicopter.rope linkTo(helicopter, "tag_origin_animate");
   helicopter.rope hide();
 }
@@ -1074,7 +1074,7 @@ function_f9a7a3d8(helicopter) {
   helicopter endon(#"death", #"hash_69d2c68fdf86b6d7", #"hash_3478587618f28c8");
   helicopter.rope endon(#"death");
   helicopter.rope show();
-  helicopter.rope animation::play(#"hash_751de00c6e9e0862", helicopter, "tag_origin_animate", 1, 0.2, 0.1, undefined, undefined, undefined, 0);
+  helicopter.rope animation::play(#"p8_fxanim_gp_vehicle_lb_heist_rope_deploy_anim", helicopter, "tag_origin_animate", 1, 0.2, 0.1, undefined, undefined, undefined, 0);
   childthread function_5db7fc11(helicopter);
 }
 
@@ -1082,7 +1082,7 @@ function_5db7fc11(helicopter) {
   assert(isDefined(helicopter.rope));
 
   while(true) {
-    helicopter.rope animation::play(#"hash_217d8ba9d8489561", helicopter, "tag_origin_animate", 1, 0.1, 0.1, undefined, undefined, undefined, 0);
+    helicopter.rope animation::play(#"p8_fxanim_gp_vehicle_lb_heist_rope_idle_anim", helicopter, "tag_origin_animate", 1, 0.1, 0.1, undefined, undefined, undefined, 0);
   }
 }
 

@@ -46,7 +46,7 @@ function_e4a48a64(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self playSound(localclientnum, #"zmb_wolfhead_start");
 
     if(!isDefined(self.var_dd081ca4)) {
-      self.var_dd081ca4 = self playLoopSound(#"hash_f80ff339436a985");
+      self.var_dd081ca4 = self playLoopSound(#"zmb_wolfhead_active_lp");
     }
 
     return;

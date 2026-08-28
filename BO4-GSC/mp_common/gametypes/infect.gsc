@@ -778,7 +778,7 @@ setfirstinfected() {
   self disableoffhandspecial();
   self thread function_57f1203();
   playFXOnTag("player/fx8_plyr_infect_change_flash_3p", self, "j_spine4");
-  self playsoundontag(#"hash_757c35cbad846c27", "j_spine4");
+  self playsoundontag(#"mpl_infection_start_vox", "j_spine4");
   loadout::give_loadout(self.team, self.curclass);
   self infection::give_body();
   var_63f8204e = function_4d9c9e8e(game.defenders);

@@ -2814,7 +2814,7 @@ function_acc65da4(mdl_planet) {
       if(level flag::exists(str_planet_name + "_pickup")) {
         level flag::set(str_planet_name + "_pickup");
         mdl_planet stoploopsound();
-        mdl_planet playSound(#"hash_134115584a37eb8a");
+        mdl_planet playSound(#"zmb_planet_pickup");
       } else {
         level flag::set(#"planet_out_of_order");
         zm_unitrigger::unregister_unitrigger(s_landing.s_unitrigger);
@@ -2870,7 +2870,7 @@ function_647da52c(str_planet_name) {
     n_interval = max(1, n_interval * 0.666);
 
     if(level.var_e830f656 === str_planet_name) {
-      playSoundAtPosition(#"hash_1e42da88156af69f", (0, 0, 0));
+      playSoundAtPosition(#"zmb_planet_timer", (0, 0, 0));
 
       if(getdvarint(#"zm_debug_ee_system", 0)) {
         iprintlnbold("<dev string:x237>");

@@ -152,7 +152,7 @@ event_handler[grenade_fire] function_4776caf4(eventstruct) {
         level.var_2da60c10[level.var_2da60c10.size] = homunculus;
         homunculus.despawn_time = gettime() + int(120 * 1000);
         playFX(#"zm_weapons/fx8_equip_homunc_spawn", homunculus.origin);
-        homunculus playSound(#"hash_21206f1b7fb27f81");
+        homunculus playSound(#"wpn_homunculus_spawn_explo");
         var_255a121f = 0;
 
         if(math::cointoss() && math::cointoss() && !var_66ae7054) {
@@ -312,7 +312,7 @@ function_c8f642f6(enemy, n_time) {
         self playSound(#"hash_ba5815eb0dc4d97");
       }
 
-      enemy playSound(#"hash_3a99f739009a77fa");
+      enemy playSound(#"wpn_homunculus_melee_imp");
       enemy dodamage(enemy.health + 666, enemy.origin, self.player, undefined, undefined, "MOD_UNKNOWN", 0, getweapon(#"homunculus"));
       gibserverutils::gibhead(enemy);
     }

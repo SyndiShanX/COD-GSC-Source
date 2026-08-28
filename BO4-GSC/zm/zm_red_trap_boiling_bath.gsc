@@ -29,7 +29,7 @@ trap_activate() {
   level notify(#"boil_trap_activated");
   level exploder::exploder("fxexp_trap_bath_switch");
   playSoundAtPosition("zmb_water_activate", level.var_d6ef5bfd.origin);
-  level.var_d6ef5bfd playLoopSound(#"hash_7aab9873087e7a2d");
+  level.var_d6ef5bfd playLoopSound(#"zmb_water_boil");
   level.var_c33299e2 = 0;
   level.var_bae901ce = 1;
   level function_922c05f();

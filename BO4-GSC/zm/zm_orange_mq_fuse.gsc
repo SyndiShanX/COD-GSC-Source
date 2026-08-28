@@ -75,7 +75,7 @@ function_6bd2a719() {
 
   level.a_s_generators = a_s_generators;
   e_shard = getEnt("chicken_nugget", "targetname");
-  e_shard playLoopSound(#"hash_52058ae478647502");
+  e_shard playLoopSound(#"zmb_elemental_shard_loop");
   e_shard setscale(0.5);
   e_shard clientfield::set("elemental_shard_glow", 1);
 }
@@ -174,7 +174,7 @@ function_d6a4619a() {
         exploder::exploder("fxexp_electric_arcs_fx_to_lighthouse_right");
       }
 
-      self playSound(#"hash_47433d730d8027ed");
+      self playSound(#"evt_trans_exp_far");
       e_target = getEnt(self.target, "targetname");
       level.var_d02bca0 -= 1;
       e_target hide();
@@ -261,7 +261,7 @@ function_a66f0de2() {
   }
 
   zm_sq_modules::function_2a94055d(self.var_b9989e12);
-  playSoundAtPosition(#"hash_7cef2cb8d950a50", self.origin);
+  playSoundAtPosition(#"evt_trans_exp_close", self.origin);
   level.var_6b43507a -= 1;
   self notify(#"soul_capture_complete");
 }

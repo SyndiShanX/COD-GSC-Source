@@ -51,7 +51,7 @@ function_6831ee4b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 dragon_roar_impact(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   util::playFXOnTag(localclientnum, level._effect[#"dragon_roar_impact"], self, self zm_utility::function_467efa7b());
-  self playSound(0, #"hash_7272d200a14dfe79");
+  self playSound(0, #"wpn_dragon_npc_impact");
 }
 
 dragon_roar_explosion(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

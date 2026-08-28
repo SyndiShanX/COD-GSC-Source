@@ -138,9 +138,9 @@ hit_alert_sfx_mp(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shi
             hitalias = #"mpl_hit_alert_burn";
           } else if(isDefined(fatal) && fatal) {
             if(weapons::isheadshot(shitloc, mod)) {
-              hitalias = #"hash_616dd8ea01d089ac";
+              hitalias = #"mpl_hit_head_fatal";
             } else {
-              hitalias = #"hash_31e38d8520839566";
+              hitalias = #"mpl_hit_body_fatal";
             }
           } else if(weapons::isheadshot(shitloc, mod)) {
             hitalias = #"hash_29ca1afa9209bfc6";
@@ -192,7 +192,7 @@ hit_alert_sfx_mp(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shi
     }
   } else if(mod === "MOD_MELEE_WEAPON_BUTT") {
     if(fatal === 1) {
-      hitalias = #"hash_27781beb722b7488";
+      hitalias = #"mpl_hit_melee_fatal";
     }
   } else if(isDefined(inflictor) && isDefined(inflictor.owner) && isDefined(inflictor.owner.soundmod)) {
     if(inflictor.owner.soundmod == #"player" && isDefined(idflags) && idflags & 2048 && isDefined(victim)) {

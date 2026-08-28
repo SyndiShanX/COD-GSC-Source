@@ -411,7 +411,7 @@ function_7c333a0f(mdl_pegasus, var_5d7b4163, n_player_index) {
 
   while(isalive(self)) {
     self function_97429d68(n_player_index);
-    self playSound(#"hash_3a99f739009a77fa");
+    self playSound(#"wpn_homunculus_melee_imp");
     self dodamage(var_5d7b4163, self.origin, e_player, e_player, "none", "MOD_UNKNOWN", 0, level.w_thunderstorm);
     wait 0.5;
   }

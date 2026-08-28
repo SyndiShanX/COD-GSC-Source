@@ -383,7 +383,7 @@ function_2c022ba8(e_player, e_grenade) {
     case #"popcorn":
     case #"basic":
     case #"enhanced":
-      self playSound(#"hash_3a99f739009a77fa");
+      self playSound(#"wpn_homunculus_melee_imp");
 
       if(math::cointoss() && math::cointoss()) {
         e_grenade thread function_4d71ac38(#"hash_ba5815eb0dc4d97");
@@ -398,7 +398,7 @@ function_2c022ba8(e_player, e_grenade) {
       break;
     case #"heavy":
     case #"miniboss":
-      self playSound(#"hash_3a99f739009a77fa");
+      self playSound(#"wpn_homunculus_melee_imp");
       self dodamage(var_5d7b4163, self.origin, e_player, undefined, undefined, "MOD_UNKNOWN", 0, level.w_homunculus);
       self ai::stun(1.5);
       break;

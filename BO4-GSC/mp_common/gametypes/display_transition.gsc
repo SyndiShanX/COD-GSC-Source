@@ -216,7 +216,7 @@ function_3f65d5d3() {
 
 function_3cfb29e1() {
   if(!util::waslastround()) {
-    self playlocalsound(#"hash_7353399f9153966f");
+    self playlocalsound(#"uin_round_end_stinger");
     self thread globallogic_audio::set_music_on_player("none");
 
     if(isDefined(self.pers[#"music"].spawn)) {

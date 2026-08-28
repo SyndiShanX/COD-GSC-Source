@@ -2216,10 +2216,10 @@ function_c2746c7c() {
   mdl_door_2 movex(39 * -1, 1);
   mdl_door_3 movex(39, 1);
   mdl_door_4 movex(39, 1);
-  playSoundAtPosition(#"hash_2903807228236fbc", mdl_door_1.origin);
-  playSoundAtPosition(#"hash_2903807228236fbc", mdl_door_2.origin);
-  playSoundAtPosition(#"hash_2903807228236fbc", mdl_door_3.origin);
-  playSoundAtPosition(#"hash_2903807228236fbc", mdl_door_4.origin);
+  playSoundAtPosition(#"zmb_escape_cell_door_slide", mdl_door_1.origin);
+  playSoundAtPosition(#"zmb_escape_cell_door_slide", mdl_door_2.origin);
+  playSoundAtPosition(#"zmb_escape_cell_door_slide", mdl_door_3.origin);
+  playSoundAtPosition(#"zmb_escape_cell_door_slide", mdl_door_4.origin);
 
   foreach(e_player in util::get_active_players()) {
     e_player enableweapons();
@@ -4415,7 +4415,7 @@ function_9c59bce1(a_ents) {
 
   if(isDefined(a_ents[#"boss"])) {
     a_ents[#"boss"] clientfield::increment("" + #"hash_29d283d7f747d358");
-    a_ents[#"boss"] playSound(#"hash_6fd86d58e7f64963");
+    a_ents[#"boss"] playSound(#"evt_brutus_teleport_out");
   }
 }
 

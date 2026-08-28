@@ -20,7 +20,7 @@ function_b9962a73() {
     chests = getdynentarray("world_ammo_stash_blackjack");
 
     foreach(dynent in chests) {
-      add_helico(dynent, #"hash_6a582b37e8f152b4");
+      add_helico(dynent, #"p8_fxanim_wz_spc_supply_stash_ammo_mod");
     }
   }
 }

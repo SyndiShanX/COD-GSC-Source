@@ -183,7 +183,7 @@ stoker_death_explosion(localclientnum, oldvalue, newvalue, bnewent, binitialsnap
 
       physicsexplosionsphere(localclientnum, v_origin, 400, 0, 3);
       self thread function_d58cd2d5(localclientnum);
-      playSound(localclientnum, #"hash_5c4876ace1c2aa10", self gettagorigin("j_shoulder_le"));
+      playSound(localclientnum, #"zmb_ai_stoker_death_explo", self gettagorigin("j_shoulder_le"));
       break;
   }
 }

@@ -174,7 +174,7 @@ hintobjectivehint_updat(weapon) {
     scoreevents::processscoreevent(#"golden_ammo_assist", self.var_bfeea3dd, undefined, level.var_934fb97.weapon);
   }
 
-  self playlocalsound(#"hash_6c2a2fee191330a0");
+  self playlocalsound(#"uin_goldenammo_kill");
 }
 
 function_92856c6(attacker, victim, weapon, attackerweapon, meansofdeath) {
@@ -191,7 +191,7 @@ function_92856c6(attacker, victim, weapon, attackerweapon, meansofdeath) {
       scoreevents::processscoreevent(#"golden_ammo_assist", attacker.var_bfeea3dd, undefined, level.var_934fb97.weapon);
     }
 
-    attacker playlocalsound(#"hash_6c2a2fee191330a0");
+    attacker playlocalsound(#"uin_goldenammo_kill");
     return true;
   }
 

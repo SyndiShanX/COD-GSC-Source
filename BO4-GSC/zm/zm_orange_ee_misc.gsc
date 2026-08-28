@@ -397,7 +397,7 @@ function_301c7dca(player) {
 function_a2993671() {
   s_notify = self waittill(#"trigger_activated");
   player = s_notify.e_who;
-  playSoundAtPosition(#"hash_20807cb66d31146e", self.origin);
+  playSoundAtPosition(#"evt_gearbox_pickup", self.origin);
   flinger = struct::get(self.target, "targetname");
   flinger zm_orange_fasttravel_flinger::function_60325438(0);
 

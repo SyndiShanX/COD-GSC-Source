@@ -591,7 +591,7 @@ function_60211cf4(sequence) {
   starttimescale = 1;
 
   if(sequence.isintro) {
-    playSoundAtPosition(#"hash_3fb775afd7e025dc", (0, 0, 0));
+    playSoundAtPosition(#"evt_potm_intro", (0, 0, 0));
     music::setmusicstate("none");
   }
 

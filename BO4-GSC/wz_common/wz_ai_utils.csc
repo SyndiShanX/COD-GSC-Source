@@ -26,8 +26,8 @@ __init__() {
   level._effect[#"t8_leave_fx"] = #"hash_5f376e9395e16666";
   level._effect[#"hash_4fbab83578c5a7e7"] = #"hash_5c4ef04b0752716a";
   level._effect[#"hash_538c528b09706dc8"] = #"hash_286e0d228779181";
-  level.var_96add4a1 = #"hash_210be93b3bfae433";
-  level.var_86e1b0cc = #"hash_1807f48a5193ce49";
+  level.var_96add4a1 = #"zmb_magicbox_leave";
+  level.var_86e1b0cc = #"zmb_box_unlock";
 }
 
 function_46c950(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -67,7 +67,7 @@ function_5c69ac3b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self.var_26a0bda1 = playFX(localclientnum, level._effect[#"hash_7fe086085cbbacac"], self.origin);
     }
 
-    self playSound(localclientnum, #"hash_7d0432d3e280bce1", self.origin);
+    self playSound(localclientnum, #"mus_roundstart_3d", self.origin);
     return;
   }
 

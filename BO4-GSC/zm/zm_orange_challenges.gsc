@@ -400,7 +400,7 @@ function_735037d4() {
 
   wait 0.5;
   self.e_lid rotatepitch(-95, 2, 0, 0.666667);
-  self.e_lid playSound(#"hash_1cfa90c531f36b92");
+  self.e_lid playSound(#"zmb_tundra_gun_crate");
   self.e_lid waittill(#"rotatedone");
   self.e_weapon movez(24, 2);
   self.e_weapon waittill(#"movedone");
@@ -1292,7 +1292,7 @@ function_f6ccb39(s_challenge) {
 
   while(true) {
     if(self zm_utility::is_jumping() || self issliding() || self issprinting() || isDefined(self.laststand) && self.laststand) {
-      self playSound(#"hash_2fe344cda8a89a7a");
+      self playSound(#"zmb_pee_spill");
 
       if(math::cointoss(50)) {
         self thread zm_orange_util::function_51b752a9(#"vox_generic_responses_negative");

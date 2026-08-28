@@ -1507,7 +1507,7 @@ cleanse_portal(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
       s_fx.var_8928e499 = playFX(localclientnum, level._effect[#"cleanse_portal"], s_fx.origin, anglesToForward(s_fx.angles), anglestoup(s_fx.angles));
     }
 
-    audio::playloopat(#"hash_6ebedb6190c4ee87", s_fx.origin);
+    audio::playloopat(#"evt_egg_portal", s_fx.origin);
     return;
   }
 
@@ -1516,7 +1516,7 @@ cleanse_portal(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
     s_fx.var_8928e499 = undefined;
   }
 
-  audio::stoploopat(#"hash_6ebedb6190c4ee87", s_fx.origin);
+  audio::stoploopat(#"evt_egg_portal", s_fx.origin);
 }
 
 narrative_room(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

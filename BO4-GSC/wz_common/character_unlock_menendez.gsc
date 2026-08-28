@@ -70,7 +70,7 @@ on_player_killed() {
 }
 
 function_15d026c0() {
-  self playsoundtoplayer(#"hash_3e5c00ae62aa9c91", self);
+  self playsoundtoplayer(#"vox_mene_unlock", self);
 }
 
 function_b00fd65d() {

@@ -277,7 +277,7 @@ function_6ad60943(var_a276c861, var_19e802fa) {
 
 function_80794c22(var_a276c861) {
   if(!var_a276c861) {
-    level.var_292feb3b playSound(#"hash_455262d440576e2c");
+    level.var_292feb3b playSound(#"evt_vessel_crack");
     level.var_292feb3b setCanDamage(1);
     level.var_292feb3b val::set("yellow_snowball_quest", "allowDeath", 0);
     level.var_292feb3b thread function_7c1a1d9a();
@@ -318,7 +318,7 @@ function_7c1a1d9a() {
 
     if(isPlayer(s_result.attacker) && !isbot(s_result.attacker)) {
       self setModel("p8_zm_ora_specimen_container_lrg_dmg");
-      self playSound(#"hash_4284a1b7bc4ce7df");
+      self playSound(#"evt_vessel_shatter");
       level exploder::kill_exploder("fxexp_spleen_idle");
       level exploder::exploder("fxexp_inf_tank_water_gush_fx_yllw_snow_quest");
       level exploder::exploder("fxexp_containment_exp");
@@ -472,7 +472,7 @@ function_17567d83() {
 
   while(true) {
     if(isDefined(level.var_733d6b98)) {
-      level.var_733d6b98 playsoundtoplayer(#"hash_2c0513350d4300f3", level.var_733d6b98);
+      level.var_733d6b98 playsoundtoplayer(#"evt_spleen_clock_tick", level.var_733d6b98);
     }
 
     if(level.var_74f3565a >= 22.5) {

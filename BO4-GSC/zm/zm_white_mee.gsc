@@ -434,7 +434,7 @@ function_edcadf04() {
 function_f05235a0() {
   self endon(#"death");
   self clientfield::set("" + #"hash_5e1264789183cde1", 1);
-  playSoundAtPosition(#"hash_452b9f142d5f6352", self.origin);
+  playSoundAtPosition(#"fly_mannequin_head_hit", self.origin);
   wait 1;
   self delete();
 }
@@ -971,7 +971,7 @@ function_3117c10() {
     unitrigger_stub.hint_parm1 = undefined;
     unitrigger_stub.hint_parm2 = undefined;
     unitrigger_stub.e_model = var_7da32058;
-    unitrigger_stub.e_model playLoopSound(#"hash_1fd4928ce5489175");
+    unitrigger_stub.e_model playLoopSound(#"zmb_mann_head_lp");
     zm_unitrigger::register_static_unitrigger(unitrigger_stub, &function_15534b78);
     var_7da32058.unitrigger_stub = unitrigger_stub;
   }
@@ -984,7 +984,7 @@ function_15534b78() {
   waitresult = self waittill(#"trigger");
   player = waitresult.activator;
   self.stub.e_model stoploopsound();
-  self.stub.e_model playSound(#"hash_20284b79e543698c");
+  self.stub.e_model playSound(#"zmb_mann_head_activate");
   level.meteor_counter++;
 
   if(level.meteor_counter == 3) {

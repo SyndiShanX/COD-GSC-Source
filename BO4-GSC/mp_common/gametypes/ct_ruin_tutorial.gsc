@@ -603,25 +603,25 @@ function_d08e9d7f() {
   ct_utils::function_e9ab1003();
   level notify(#"start_grapple_high_ledge_collision");
   level.var_e72728b8 = array(#"eq_gravityslam");
-  level thread ct_vo::function_14b08e49(array(#"hash_2774943be9e5dbd9"), "stop_nag");
+  level thread ct_vo::function_14b08e49(array(#"vox_tvoi_tutor_ruin_slide_4_nag"), "stop_nag");
   ct_utils::function_93c86846(array(#"s_grapple_hook_chasm_start_1_obj"), "s_grapple_hook_chasm_start_1_obj", array(#"eq_gravityslam"), 0, undefined, 35);
   level notify(#"stop_nag");
   level thread ct_vo::function_41e59aeb(array(#"hash_da9be97f42c4c85"), 1);
   ct_utils::function_e9ab1003("s_grapple_hook_chasm_start_1_obj");
-  level thread ct_vo::function_14b08e49(array(#"hash_2774943be9e5dbd9"), "stop_nag");
+  level thread ct_vo::function_14b08e49(array(#"vox_tvoi_tutor_ruin_slide_4_nag"), "stop_nag");
   ct_utils::function_93c86846(undefined, "s_grapple_hook_chasm_start_2_obj", array(#"eq_gravityslam"), 0, undefined, 25);
   level notify(#"stop_nag");
   level notify(#"stop_grapple_fail_complete_collision");
   level notify(#"start_grapple_high_ledge2_collision");
   ct_utils::function_e9ab1003("s_grapple_hook_chasm_start_2_obj");
   level thread ct_vo::function_41e59aeb(array(#"hash_da9bd97f42c4ad2"), 1);
-  level thread ct_vo::function_5172b052(#"hash_6f4e6b000c475a08", "stop_nag");
+  level thread ct_vo::function_5172b052(#"vox_tvoi_tutor_ruin_death_fall", "stop_nag");
 
   while(true) {
     e_player = getPlayers()[0];
     e_player thread ct_utils::function_61c3d59c(#"hash_1a96b4c95e637091", undefined);
     level thread function_c4629797();
-    level thread ct_vo::function_14b08e49(array(#"hash_2774943be9e5dbd9"), "stop_nag");
+    level thread ct_vo::function_14b08e49(array(#"vox_tvoi_tutor_ruin_slide_4_nag"), "stop_nag");
     s_loc = struct::get("s_grapple_hook_chasm_end_obj", "targetname");
     b_success = ct_utils::function_15e01238(s_loc, 150, 50, undefined, 1);
 
@@ -676,7 +676,7 @@ function_fecd2528() {
   ct_utils::function_e9ab1003("s_grapple_hook_chasm_end_obj");
   ct_vo::function_831e0584(array(#"hash_2559f228a22744de"), 1);
   level notify(#"stop_grapple_fail_door_collision");
-  level thread ct_vo::function_14b08e49(array(#"hash_2774943be9e5dbd9"), "stop_nag");
+  level thread ct_vo::function_14b08e49(array(#"vox_tvoi_tutor_ruin_slide_4_nag"), "stop_nag");
   ct_utils::function_e0d36a2c(undefined, "s_grav_slam_start", array(#"eq_gravityslam"), 1, undefined, 40);
   level notify(#"stop_nag");
   ct_utils::function_e9ab1003("s_grav_slam_start");
@@ -737,7 +737,7 @@ function_baae9a51() {
   level.var_e72728b8 = undefined;
   ct_utils::function_9aca2fa0("ct_action2");
   e_player ct_bots::function_fd2d220e();
-  level thread ct_vo::function_14b08e49(array(#"hash_3c9d4e83f2a8c9cd"), "stop_nag");
+  level thread ct_vo::function_14b08e49(array(#"vox_tvoi_tutor_ruin_slide_8_nag"), "stop_nag");
   level thread function_96e7c232();
   var_24593a52 = 0;
 
@@ -878,7 +878,7 @@ function_8678055f() {
     level.var_7cab580 = var_9e9cfef1;
 
     if(!(isDefined(b_restart) && b_restart)) {
-      level thread ct_vo::function_14b08e49(array(#"hash_2774943be9e5dbd9"), "stop_nag");
+      level thread ct_vo::function_14b08e49(array(#"vox_tvoi_tutor_ruin_slide_4_nag"), "stop_nag");
       a_str_vo = array(#"hash_145cde2b6c792844");
       ct_utils::function_93c86846(a_str_vo, "s_grav_slam_ajax_obj", array(#"eq_gravityslam"), undefined, undefined, 50);
       level notify(#"start_ajax_area_door_collision");
@@ -1002,7 +1002,7 @@ function_8678055f() {
 
     ct_utils::function_c2a10fc();
     ct_utils::function_654280be();
-    ct_vo::function_41e59aeb(array(#"hash_4e33f0298dd7ed69"), 1);
+    ct_vo::function_41e59aeb(array(#"vox_tvoi_tutor_ruin_final_1_start"), 1);
     level.var_eb5015e6 = undefined;
   }
 
@@ -1109,7 +1109,7 @@ function_e340db61() {
   ct_utils::function_e9ab1003();
   level.var_e72728b8 = undefined;
   level.fx_warlord_igc_ = 0;
-  level thread ct_vo::function_14b08e49(array(#"hash_2774943be9e5dbd9"), "stop_nag");
+  level thread ct_vo::function_14b08e49(array(#"vox_tvoi_tutor_ruin_slide_4_nag"), "stop_nag");
   e_player = ct_utils::get_player();
   e_player thread ct_utils::player_collisionbox("s_hellstorm_start_obj", undefined, 2);
   ct_utils::function_e0d36a2c(undefined, "s_hellstorm_start_obj", undefined, 0, undefined, 40);
