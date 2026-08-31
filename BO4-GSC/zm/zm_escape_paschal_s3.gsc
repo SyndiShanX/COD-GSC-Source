@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_668c4fbb94671fb4.gsc
+ * Script: zm\zm_escape_paschal_s3.gsc
 ***********************************************/
 
 #include script_46cea9e5d4ef9e21;

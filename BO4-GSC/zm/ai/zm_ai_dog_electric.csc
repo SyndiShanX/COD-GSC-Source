@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_4c8acdc77aa5d7a9.csc
+ * Script: zm\ai\zm_ai_dog_electric.csc
 ***********************************************/
 
 #include scripts\core_common\ai_shared;

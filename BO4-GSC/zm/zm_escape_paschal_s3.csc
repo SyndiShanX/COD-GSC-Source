@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_711bbbba637da80.csc
+ * Script: zm\zm_escape_paschal.csc
 ***********************************************/
 
 #include scripts\core_common\audio_shared;

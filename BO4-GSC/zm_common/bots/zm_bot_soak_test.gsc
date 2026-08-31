@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_7adbb9939d1dd9bd.gsc
+ * Script: zm_common\bots\zm_bot_soak_test.gsc
 ***********************************************/
 
 #include scripts\core_common\clientfield_shared;

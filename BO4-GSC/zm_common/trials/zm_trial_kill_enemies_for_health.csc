@@ -1,7 +1,7 @@
-/***********************************************
+/****************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_5afd8ff8f8304cc4.csc
-***********************************************/
+ * Script: zm_common\trials\zm_trial_kill_enemies_for_health.csc
+*****************************************************************/
 
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_trial;

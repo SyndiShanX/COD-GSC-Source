@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_4da75c87643c8b07.csc
+ * Script: wz_common\wz_blast_door_light.csc
 ***********************************************/
 
 #include scripts\core_common\array_shared;

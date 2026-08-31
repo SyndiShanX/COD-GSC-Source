@@ -1,7 +1,7 @@
-/***********************************************
+/****************************************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_1d1e3c193b0a51d.gsc
-***********************************************/
+ * Script: zm_common\trials\zm_trial_damage_during_movement.gsc
+****************************************************************/
 
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\array_shared;

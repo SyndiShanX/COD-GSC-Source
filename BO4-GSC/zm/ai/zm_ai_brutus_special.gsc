@@ -1,6 +1,6 @@
 /***********************************************
  * Decompiled by ATE47 and Edited by SyndiShanX
- * Script: hashed\script_40556c4400b0a478.gsc
+ * Script: zm\ai\zm_ai_brutus_special.gsc
 ***********************************************/
 
 #include scripts\core_common\spawner_shared;
